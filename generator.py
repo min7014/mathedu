@@ -127,7 +127,8 @@ function sendProgress(){{
   }});
   var current = done.length;
   if (current === 0) return;
-  fetch('/api/progress', {{
+  var url = window._sheetsApiUrl || '/api/progress';
+  fetch(url, {{
     method: 'POST',
     headers: {{'Content-Type': 'application/json'}},
     body: JSON.stringify({{
@@ -164,7 +165,7 @@ def _level_html(lvl):
     qs = "".join(_question_html(q) for q in lvl.get("questions", []))
     return f'<h2>{_esc(lvl.get("title",""))}</h2>{know}{qs}'
 
-def _tracking_html(quiz_slug):
+def _tracking_html(quiz_slug, sheets_api_url=''):
     """학생이 이름 입력 → 문제 풀면서 실시간 진행 전송 + 최종 제출."""
     slug_js = quiz_slug.replace("'", "\\'")
     return f"""<div id="trackSubmit" style="text-align:center;margin:20px 0">
@@ -177,6 +178,7 @@ def _tracking_html(quiz_slug):
 </div>
 <script>
 window._studentName='';
+window._sheetsApiUrl='{sheets_api_url}';
 (document.querySelectorAll('.q')).forEach(function(q){{
   q.addEventListener('click', function(){{ sendProgress(); }});
 }});
@@ -215,7 +217,16 @@ def generate_html(data):
     try: final_ans = f.get("options", [])[int(f.get("answer", 1)) - 1]
     except Exception: final_ans = ""
     # ★ 학습 현황 추적 블록
-    tracking_block = _tracking_html(data.get("slug", ""))
+    _sheets_url = data.get("sheets_api_url", "")
+    if not _sheets_url:
+        try:
+            _url_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "progress-api-url.txt")
+            if os.path.exists(_url_path):
+                with open(_url_path, "r", encoding="utf-8") as _f:
+                    _sheets_url = _f.read().strip()
+        except Exception:
+            pass
+    tracking_block = _tracking_html(data.get("slug", ""), _sheets_url)
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),
         symbols_block=symbols_block, levels_block=levels_block,
