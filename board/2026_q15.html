@@ -125,54 +125,225 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
   <div class="stem">$\displaystyle f'(3)=0$ 일 때, $\displaystyle x=3$ 에서 그래프의 기울기는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 3$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 0$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 1$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle -3$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 9$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="도함수가 음수이면 함수는 그 구간에서 감소합니다.">
   <div class="lvl">L2</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 도함수 부호와 증감]** $\displaystyle f'(x)\gt 0$ 구간에서는 $\displaystyle f(x)$ 가 증가, $\displaystyle f'(x)\lt 0$ 구간에서는 감소합니다. 문제에서 $\displaystyle f'$ 가 $\displaystyle x=-1,1$ 에서 $\displaystyle 0$ 이므로 이 지점들에서 증감이 바뀝니다.</div>
   <div class="stem">$\displaystyle f'(x)\lt 0$ 인 구간에서 $\displaystyle f(x)$ 는 어떻게 변하는가?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 증가</div><div class="opt"><span class="n">2</span> ② 감소</div><div class="opt"><span class="n">3</span> ③ 일정</div><div class="opt"><span class="n">4</span> ④ 진동</div><div class="opt"><span class="n">5</span> ⑤ 정의되지 않음</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="근이 -1, 1이므로 인수는 $\displaystyle (x+1)(x-1)$ 입니다.">
   <div class="lvl">L3</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 이차 도함수의 근과 부호]** $\displaystyle f(x)$ 가 삼차함수면 $\displaystyle f'(x)$ 는 이차함수. $\displaystyle f'(-1)=f'(1)=0$ 이므로 $\displaystyle f'(x)$ 는 $\displaystyle x=-1,1$ 을 근으로 갖는다. 즉 $\displaystyle f'(x)=A(x+1)(x-1)=A(x^2-1)$ 꼴.</div>
   <div class="stem">$\displaystyle f'(-1)=f'(1)=0$ 이고 $\displaystyle f$ 가 삼차함수라면, $\displaystyle f'(x)$ 는 어떤 인수를 반드시 갖는가?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle (x+1)(x-1)$</div><div class="opt"><span class="n">2</span> ② $\displaystyle (x+2)(x-2)$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle x(x-1)$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle x^2+1$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle (x+1)^2$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle f'(0)=A(0-1)=-A=6$ 이므로 $\displaystyle A=-6$.">
   <div class="lvl">L4</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 계수 결정]** $\displaystyle f'(x)=A(x^2-1)$ 꼴이고 $\displaystyle f'(0)=6$ 이다. $\displaystyle f'(0)=A(0-1)=-A=6$ 이므로 $\displaystyle A=-6$. 따라서 $\displaystyle f'(x)=-6(x^2-1)=6(1-x^2)$.</div>
   <div class="stem">$\displaystyle f'(x)=A(x^2-1)$ 이고 $\displaystyle f'(0)=6$ 일 때 $\displaystyle A$ 는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 6$</div><div class="opt"><span class="n">2</span> ② $\displaystyle -6$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 0$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 1$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle -1$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle \int(6-6x^2)dx=6x-2x^3+C$.">
   <div class="lvl">L5</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 부정적분]** $\displaystyle f'(x)=6(1-x^2)=6-6x^2$ 를 적분하면 $\displaystyle f(x)=6x-2x^3+C$ ($\displaystyle C$ 는 적분상수). $\displaystyle f(1)=6-2+C=4+C$ 이다.</div>
   <div class="stem">$\displaystyle f'(x)=6-6x^2$ 를 부정적분한 결과(적분상수 $\displaystyle C$)는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 6x-2x^3+C$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 6x^2-2x^3+C$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle -2x^3+C$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 6-6x^2+C$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 3x^2-2x^3+C$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="우측에서 접근하므로 우측 극한이 함숫값과 같아야 극한이 유한해집니다(우연속).">
   <div class="lvl">L6</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 우미분계수와 우연속]** 우미분계수 $\displaystyle g'_+(a)=\lim_{x	o a^+}\dfrac{g(x)-g(a)}{x-a}$ 가 **유한한 값으로 존재**하려면, $\displaystyle g$ 가 $\displaystyle a$ 에서 우연속이어야 한다(우측 극한 = 함숫값). 문제의 (가)는 이 극한이 $\displaystyle 0$ 이하로 존재한다고 하므로, $\displaystyle x=1$ 에서 우연속이 강제된다.</div>
   <div class="stem">우미분계수가 유한하게 존재하기 위해 필요한 조건은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 좌연속</div><div class="opt"><span class="n">2</span> ② 우연속</div><div class="opt"><span class="n">3</span> ③ 미분가능</div><div class="opt"><span class="n">4</span> ④ 적분가능</div><div class="opt"><span class="n">5</span> ⑤ 연속도 불필요</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle g(1)=-f(1)$, $\displaystyle \lim_{x	o1^+}g(x)=f(1)+k$, 둘이 같으면 $\displaystyle k=-2f(1)$.">
   <div class="lvl">L7</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] x=1 에서의 우연속 조건]** $\displaystyle g(1)$ 은 $\displaystyle |x|\le1$ 구간 정의로 $\displaystyle -f(1)$. 우측 극한은 $\displaystyle x\gt 1$ 이므로 $\displaystyle f(1)+k$. 우연속이면 둘이 같다: $\displaystyle -f(1)=f(1)+k\Rightarrow k=-2f(1)$.</div>
   <div class="stem">$\displaystyle x=1$ 에서 우연속이라면 $\displaystyle k$ 와 $\displaystyle f(1)$ 의 관계는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle k=f(1)$</div><div class="opt"><span class="n">2</span> ② $\displaystyle k=-2f(1)$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle k=2f(1)$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle k=-f(1)$</div><div class="opt"><span class="n">5</span> ⑤ 관계 없음</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle 4-(-9)=13$. (나) 조건의 2근 최댓값과 일치.">
   <div class="lvl">L8</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 상수 결정]** $\displaystyle f(1)=4+C$ 이므로 $\displaystyle k=-2(4+C)=-8-2C$. 이제 $\displaystyle g$ 의 두 가지(branch) 치역을 구한다. 왼쪽 가지 $\displaystyle x\lt -1$: 범위 $\displaystyle (-12-C,\infty)$. 오른쪽 가지 $\displaystyle x\ge-1$: $\displaystyle x=-1$ 에서 $\displaystyle 4-C$ 시작해 $\displaystyle -\infty$ 까지 연속 감소.</div>
   <div class="stem">$\displaystyle C=-9$ 일 때 오른쪽 가지의 시작값 $\displaystyle 4-C$ 는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 13$</div><div class="opt"><span class="n">2</span> ② $\displaystyle -5$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 4$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle -13$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 9$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle C=-9$, $\displaystyle k=10$, $\displaystyle f(1/2)=-25/4$ 이므로 $\displaystyle 10-25/4=15/4$. 정답 ①.">
   <div class="lvl">L9</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 최종 계산]** 2근인 $\displaystyle t$ 의 범위는 $\displaystyle -12-C\lt t\le4-C$ 이므로 최댓값 $\displaystyle 4-C=13\Rightarrow C=-9$. $\displaystyle f(x)=-2x^3+6x-9$, $\displaystyle k=10$, $\displaystyle f(1/2)=-1/4+3-9=-25/4$. $\displaystyle k+f(1/2)=10-25/4=15/4$.</div>
   <div class="stem">위 조건을 모두 만족할 때 $\displaystyle k+f\left(\dfrac12\right)$ 의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle \dfrac{15}{4}$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac{13}{4}$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac{17}{4}$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 4$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \dfrac{11}{4}$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div>
 
   <h2>최종 문제 + 도식화 상세 풀이</h2>

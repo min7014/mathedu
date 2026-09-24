@@ -125,60 +125,250 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
   <div class="stem">$\displaystyle \sin x$ 가 가질 수 없는 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 0</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac12$</div><div class="opt"><span class="n">3</span> ③ 1</div><div class="opt"><span class="n">4</span> ④ -1</div><div class="opt"><span class="n">5</span> ⑤ 2</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="30° 사인은 1/2.">
   <div class="lvl">L2</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 특수각의 사인]** 자주 쓰는 각도의 사인값을 외워둡니다. $\displaystyle \sin0^\circ=0$, $\displaystyle \sin30^\circ=\dfrac12$, $\displaystyle \sin45^\circ=\dfrac{\sqrt2}{2}$, $\displaystyle \sin60^\circ=\dfrac{\sqrt3}{2}$, $\displaystyle \sin90^\circ=1$.</div>
   <div class="stem">$\displaystyle \sin30^\circ$ 는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 0</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac12$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac{\sqrt2}{2}$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle \dfrac{\sqrt3}{2}$</div><div class="opt"><span class="n">5</span> ⑤ 1</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="60° 사인은 √3/2.">
   <div class="lvl">L3</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 더 큰 특수각]** $\displaystyle \sin45^\circ$ 와 $\displaystyle \sin60^\circ$ 도 자주 씁니다. 45°는 $\displaystyle \dfrac{\sqrt2}{2}$, 60°는 $\displaystyle \dfrac{\sqrt3}{2}$ 입니다. $\displaystyle \dfrac{\sqrt3}{2}\approx0.866$ 으로 1보다 작습니다.</div>
   <div class="stem">$\displaystyle \sin60^\circ$ 는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle \dfrac12$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac{\sqrt2}{2}$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac{\sqrt3}{2}$</div><div class="opt"><span class="n">4</span> ④ 1</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \sqrt3$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="90° 사인은 1 (최댓값).">
   <div class="lvl">L4</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 사인의 가장 큰 값]** $\displaystyle \sin90^\circ$ 는 1입니다. 이보다 큰 사인값은 없습니다. 즉 사인의 최댓값은 1입니다.</div>
   <div class="stem">$\displaystyle \sin90^\circ$ 는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 0</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac12$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac{\sqrt2}{2}$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle \dfrac{\sqrt3}{2}$</div><div class="opt"><span class="n">5</span> ⑤ 1</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="사인 범위는 -1에서 1.">
   <div class="lvl">L5</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 사인의 가장 작은 값]** 반대로 $\displaystyle \sin270^\circ=-1$ 입니다. 사인의 범위는 정확히 $\displaystyle -1\le\sin x\le1$ 입니다.</div>
   <div class="stem">사인함수가 가질 수 있는 값의 범위로 알맞은 것은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 0\le\sin x\le1$</div><div class="opt"><span class="n">2</span> ② $\displaystyle -1\le\sin x\le1$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle -2\le\sin x\le2$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle \sin x\ge0$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \sin x\le1$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="사인은 360°마다 반복.">
   <div class="lvl">L6</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 주기란?]** 기호로 사인함수는 $\displaystyle 360^\circ$ (또는 $\displaystyle 2\pi$ 라디안)마다 같은 모양을 반복합니다. 이를 '주기'라고 합니다. 한 주기란 $\displaystyle 0^\circ$ 부터 $\displaystyle 360^\circ$ 까지의 구간을 말합니다.</div>
   <div class="stem">$\displaystyle y=\sin x$ 의 주기는 얼마인가? (도 단위)</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 90^\circ$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 180^\circ$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 270^\circ$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 360^\circ$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 720^\circ$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="90°에서 사인=1로 최대.">
   <div class="lvl">L7</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 한 주기 안의 움직임]** 한 주기($\displaystyle 0^\circ\sim360^\circ$)에서 사인은 0에서 시작해 90°에서 1(최대), 180°에서 0, 270°에서 -1(최소), 360°에서 다시 0이 됩니다.</div>
   <div class="stem">$\displaystyle 0^\circ\le x\le360^\circ$ 에서 사인이 최대가 되는 각도는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 0^\circ$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 90^\circ$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 180^\circ$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 270^\circ$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 360^\circ$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="π/2 = 90°에서 사인=1.">
   <div class="lvl">L8</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 라디안 각도]** 높은 수학에서는 각도를 '라디안'으로 씁니다. $\displaystyle 90^\circ$ 는 $\displaystyle \dfrac{\pi}{2}$, $\displaystyle 180^\circ$ 는 $\displaystyle \pi$, $\displaystyle 360^\circ$ 는 $\displaystyle 2\pi$ 입니다. 사인의 최댓값 1은 $\displaystyle x=\dfrac{\pi}{2}$ 에서입니다.</div>
   <div class="stem">라디안에서 사인이 1이 되는 $\displaystyle x$ 는? (한 주기 내)</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 0$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac{\pi}{4}$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac{\pi}{2}$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle \pi$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \dfrac{3\pi}{2}$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="3π/2 = 270°에서 사인=-1.">
   <div class="lvl">L9</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 최솟값 위치]** 한 주기에서 사인의 최솟값 -1은 $\displaystyle x=270^\circ=\dfrac{3\pi}{2}$ 에서입니다. 최댓값과 대칭입니다.</div>
   <div class="stem">$\displaystyle 0\le x\le2\pi$ 에서 사인이 -1이 되는 $\displaystyle x$ 는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle \dfrac{\pi}{2}$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \pi$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac{3\pi}{2}$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 2\pi$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 0$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="사인 최댓값은 1.">
   <div class="lvl">L10</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 한 주기 내 최댓값 확인]** 한 주기 안에서 사인은 1보다 커질 수 없고, 실제로 $\displaystyle x=90^\circ$ (또는 $\displaystyle \dfrac{\pi}{2}$)에서 1에 도달합니다. 따라서 최댓값은 1입니다.</div>
   <div class="stem">$\displaystyle y=\sin x$ 의 한 주기($\displaystyle 0^\circ\sim360^\circ$) 안에서 최댓값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① -1</div><div class="opt"><span class="n">2</span> ② 0</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac12$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle \dfrac{\sqrt3}{2}$</div><div class="opt"><span class="n">5</span> ⑤ 1</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div>
 
   <h2>🎯 최종 문제 + 도식화 상세 풀이</h2>

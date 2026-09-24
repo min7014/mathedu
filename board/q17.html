@@ -125,48 +125,200 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
   <div class="stem">$\displaystyle 3^2$ 의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 6$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 8$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 9$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 12$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 3$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle x=0$ 에서 $\displaystyle y=0$ 이 가장 작음.">
   <div class="lvl">L2</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 2차함수의 가장 작은 값]** $\displaystyle y=x^2$ 그래프는 U자 모양이고, $\displaystyle x=0$ 일 때 $\displaystyle y=0$ 이 가장 작습니다.</div>
   <div class="stem">$\displaystyle y=x^2$ 의 최솟값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle -1$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 0$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 1$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 2$</div><div class="opt"><span class="n">5</span> ⑤ 없음</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle a=2\gt 0$ 이므로 U자 모양.">
   <div class="lvl">L3</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 그래프 모양]** $\displaystyle a\gt 0$ 인 2차함수 $\displaystyle y=ax^2+\cdots$ 는 아래로 볼록한 U자 모양입니다.</div>
   <div class="stem">$\displaystyle y=2x^2$ 의 그래프 모양은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 역U자(위로 볼록)</div><div class="opt"><span class="n">2</span> ② U자(아래로 볼록)</div><div class="opt"><span class="n">3</span> ③ 직선</div><div class="opt"><span class="n">4</span> ④ 직각삼각형</div><div class="opt"><span class="n">5</span> ⑤ 원</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="표준 공식입니다.">
   <div class="lvl">L4</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 꼭지점 x좌표 공식]** 2차함수 $\displaystyle ax^2+bx+c$ 의 가장 낮은 점(꼭지점)을 지나는 세로선의 x좌표는 $\displaystyle x=-\frac{b}{2a}$ 입니다.</div>
   <div class="stem">2차함수 꼭지점의 x좌표 공식은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle -\frac{b}{a}$</div><div class="opt"><span class="n">2</span> ② $\displaystyle -\frac{b}{2a}$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \frac{b}{2a}$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle -\frac{2b}{a}$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \frac{c}{a}$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle ax^2+bx+c$ 이므로 $\displaystyle a=1, b=-4$.">
   <div class="lvl">L5</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 계수 확인]** $\displaystyle f(x)=x^2-4x+3$ 에서 $\displaystyle x^2$ 앞 숫자 $\displaystyle a=1$, $\displaystyle x$ 앞 숫자 $\displaystyle b=-4$ 입니다.</div>
   <div class="stem">$\displaystyle f(x)=x^2-4x+3$ 에서 $\displaystyle a,b$ 값(순서대로)은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle (1,4)$</div><div class="opt"><span class="n">2</span> ② $\displaystyle (1,-4)$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle (-1,4)$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle (1,3)$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle (0,-4)$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle -\frac{-4}{2}=2$.">
   <div class="lvl">L6</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 꼭지점 x좌표 계산]** $\displaystyle x=-\frac{b}{2a}=-\frac{-4}{2\times1}=2$.</div>
   <div class="stem">$\displaystyle f(x)=x^2-4x+3$ 의 꼭지점 x좌표는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 1$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 2$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 3$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 4$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle -2$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="$\displaystyle 4-8+3=-1$.">
   <div class="lvl">L7</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 꼭지점에서의 함숫값]** $\displaystyle x=2$ 를 함수에 넣어 계산: $\displaystyle f(2)=2^2-4\times2+3$.</div>
   <div class="stem">$\displaystyle f(2)=2^2-4\times2+3$ 을 계산하면?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle -1$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 0$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 1$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 3$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle -5$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="꼭지점 $\displaystyle (2,-1)$ 의 높이 $\displaystyle -1$. 최종 정답 ②.">
   <div class="lvl">L8</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>**[지식] 최종: 극솟값]** 가장 낮은 점의 높이가 극솟값입니다.</div>
   <div class="stem">$\displaystyle f(x)=x^2-4x+3$ 의 극솟값을 구하시오.</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle -3$</div><div class="opt"><span class="n">2</span> ② $\displaystyle -1$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 0$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 1$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 3$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div>
 
   <h2>🎯 최종 문제 + 도식화 상세 풀이</h2>

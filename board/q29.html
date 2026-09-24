@@ -125,60 +125,250 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
   <div class="stem">10과 20의 평균은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 10</div><div class="opt"><span class="n">2</span> ② 15</div><div class="opt"><span class="n">3</span> ③ 20</div><div class="opt"><span class="n">4</span> ④ 30</div><div class="opt"><span class="n">5</span> ⑤ 5</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="2,4,6로 3개입니다.">
   <div class="lvl">L2</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 데이터 개수 데이터 2,4,6은 모두 3개입니다.</div>
   <div class="stem">데이터 2, 4, 6의 개수는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 1</div><div class="opt"><span class="n">2</span> ② 2</div><div class="opt"><span class="n">3</span> ③ 3</div><div class="opt"><span class="n">4</span> ④ 4</div><div class="opt"><span class="n">5</span> ⑤ 5</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="2+4=6입니다.">
   <div class="lvl">L3</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 합 구하기 2+4+6을 차례대로 더합니다.</div>
   <div class="stem">2+4의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 5</div><div class="opt"><span class="n">2</span> ② 6</div><div class="opt"><span class="n">3</span> ③ 7</div><div class="opt"><span class="n">4</span> ④ 8</div><div class="opt"><span class="n">5</span> ⑤ 9</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="2+4+6=12입니다.">
   <div class="lvl">L4</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 전체 합 6+6=12.</div>
   <div class="stem">2+4+6의 전체 합은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 10</div><div class="opt"><span class="n">2</span> ② 11</div><div class="opt"><span class="n">3</span> ③ 12</div><div class="opt"><span class="n">4</span> ④ 13</div><div class="opt"><span class="n">5</span> ⑤ 14</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="12÷3=4입니다.">
   <div class="lvl">L5</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 나눗셈 합 12를 개수 3으로 나눕니다. 12÷3.</div>
   <div class="stem">12를 3으로 나눈 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 2</div><div class="opt"><span class="n">2</span> ② 3</div><div class="opt"><span class="n">3</span> ③ 4</div><div class="opt"><span class="n">4</span> ④ 6</div><div class="opt"><span class="n">5</span> ⑤ 9</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="합을 개수로 나눕니다.">
   <div class="lvl">L6</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 평균 식 평균 = (2+4+6)/3 입니다.</div>
   <div class="stem">데이터 2,4,6의 평균을 나타내는 식은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① (2+4+6)×3</div><div class="opt"><span class="n">2</span> ② (2+4+6)/3</div><div class="opt"><span class="n">3</span> ③ 2+4+6/3</div><div class="opt"><span class="n">4</span> ④ (2×4×6)/3</div><div class="opt"><span class="n">5</span> ⑤ 2+4+6</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="2+4+6=12입니다.">
   <div class="lvl">L7</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 분자 계산 (2+4+6)=12.</div>
   <div class="stem">(2+4+6)의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 10</div><div class="opt"><span class="n">2</span> ② 11</div><div class="opt"><span class="n">3</span> ③ 12</div><div class="opt"><span class="n">4</span> ④ 13</div><div class="opt"><span class="n">5</span> ⑤ 14</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="4를 중심으로 2와 6이 대칭입니다.">
   <div class="lvl">L8</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 평균 의미 다시 평균은 데이터를 고르게 펼친 값입니다. 2,4,6은 4를 중심으로 대칭입니다.</div>
   <div class="stem">2, 4, 6이 균형을 이루는 중심값으로 알맞은 것은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 2</div><div class="opt"><span class="n">2</span> ② 3</div><div class="opt"><span class="n">3</span> ③ 4</div><div class="opt"><span class="n">4</span> ④ 5</div><div class="opt"><span class="n">5</span> ⑤ 6</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="12/3=4입니다.">
   <div class="lvl">L9</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 최종 계산 12÷3=4.</div>
   <div class="stem">(2+4+6)/3 의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 3</div><div class="opt"><span class="n">2</span> ② 3.5</div><div class="opt"><span class="n">3</span> ③ 4</div><div class="opt"><span class="n">4</span> ④ 4.5</div><div class="opt"><span class="n">5</span> ⑤ 5</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="(2+4+6)/3=4입니다. ②는 2,4만 본 오답입니다.">
   <div class="lvl">L10</div>
   <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 최종 문제 평균 = 합÷개수. (2+4+6)/3=12/3=4.</div>
   <div class="stem">데이터 2, 4, 6의 평균을 구하시오.</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 3</div><div class="opt"><span class="n">2</span> ② 3.5</div><div class="opt"><span class="n">3</span> ③ 4</div><div class="opt"><span class="n">4</span> ④ 4.5</div><div class="opt"><span class="n">5</span> ⑤ 5</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div>
 
   <h2>🎯 최종 문제 + 도식화 상세 풀이</h2>

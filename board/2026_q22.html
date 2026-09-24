@@ -125,48 +125,200 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
   <div class="stem">서로 다른 2개의 공을 일렬로 나열하는 방법 수는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 1</div><div class="opt"><span class="n">2</span> ② 2</div><div class="opt"><span class="n">3</span> ③ 3</div><div class="opt"><span class="n">4</span> ④ 4</div><div class="opt"><span class="n">5</span> ⑤ 6</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="ABC, ACB 두 가지 (뒤의 B,C만 바뀜).">
   <div class="lvl">L2</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 3개 직접 세기]** 공을 A, B, C라 하면 나열은 ABC, ACB, BAC, BCA, CAB, CBA 입니다. 하나씩 세어 모두 6가지임을 확인합니다.</div>
   <div class="stem">A, B, C 세 공을 나열할 때, 'A가 맨 앞'인 배열은 몇 가지인가?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 1</div><div class="opt"><span class="n">2</span> ② 2</div><div class="opt"><span class="n">3</span> ③ 3</div><div class="opt"><span class="n">4</span> ④ 4</div><div class="opt"><span class="n">5</span> ⑤ 6</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="각 자리 후보를 곱함.">
   <div class="lvl">L3</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 곱셈으로 세기]** 맨 앞 자리에 올 공은 3가지(A/B/C), 그다음 자리는 남은 2가지, 마지막은 1가지입니다. 모두 곱하면 $\displaystyle 3\times2\times1=6$ 입니다.</div>
   <div class="stem">3개 자리를 채울 때 '첫째×둘째×셋째' 가짓수는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 3+2+1$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 3\times2\times1$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 3^2$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 3^3$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 3+3$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="2×1=2.">
   <div class="lvl">L4</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 계승(!) 기호]** $\displaystyle n!=n\times(n-1)\times\cdots\times1$ 로 나타내고 'n 계승'이라 읽습니다. $\displaystyle 1!=1$, $\displaystyle 2!=2\times1=2$, $\displaystyle 3!=3\times2\times1=6$ 입니다.</div>
   <div class="stem">$\displaystyle 2!$ 의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 1</div><div class="opt"><span class="n">2</span> ② 2</div><div class="opt"><span class="n">3</span> ③ 3</div><div class="opt"><span class="n">4</span> ④ 4</div><div class="opt"><span class="n">5</span> ⑤ 6</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="3×2×1=6.">
   <div class="lvl">L5</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 3! 계산]** $\displaystyle 3!=3\times2\times1$ 을 계산하면 6입니다. 이는 곧 3개를 일렬로 나열하는 방법 수입니다.</div>
   <div class="stem">$\displaystyle 3!$ 의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 3</div><div class="opt"><span class="n">2</span> ② 4</div><div class="opt"><span class="n">3</span> ③ 6</div><div class="opt"><span class="n">4</span> ④ 9</div><div class="opt"><span class="n">5</span> ⑤ 12</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="n개 배열수=n!.">
   <div class="lvl">L6</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 일렬배열 공식]** 서로 다른 $\displaystyle n$ 개를 일렬로 나열하는 방법 수는 항상 $\displaystyle n!$ 입니다. 3개면 $\displaystyle 3!$, 4개면 $\displaystyle 4!=24$ 입니다.</div>
   <div class="stem">서로 다른 4개 물건의 일렬배열 수는? (공식만)</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 4$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 4\times3$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 4!$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 4^2$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 4+3+2+1$</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="4×3×2×1=24.">
   <div class="lvl">L7</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 4! 값 확인]** $\displaystyle 4!=4\times3\times2\times1=24$ 입니다. 배열 수가 빠르게 늘어남을 느낍니다.</div>
   <div class="stem">$\displaystyle 4!$ 를 계산하면?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 12</div><div class="opt"><span class="n">2</span> ② 16</div><div class="opt"><span class="n">3</span> ③ 20</div><div class="opt"><span class="n">4</span> ④ 24</div><div class="opt"><span class="n">5</span> ⑤ 48</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div><div class="q" data-exp="3!=6. ④는 3^2 혼동.">
   <div class="lvl">L8</div>
   <div class="know"><h3>먼저 알아야 할 지식</h3>**[지식] 3개 공 적용]** 문제의 3개 공은 서로 다르므로 일렬배열 수는 $\displaystyle 3!=6$ 입니다. L2에서 직접 센 6가지와 일치합니다.</div>
   <div class="stem">서로 다른 3개의 공을 일렬로 나열하는 방법의 수는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 3</div><div class="opt"><span class="n">2</span> ② 4</div><div class="opt"><span class="n">3</span> ③ 6</div><div class="opt"><span class="n">4</span> ④ 9</div><div class="opt"><span class="n">5</span> ⑤ 12</div></div>
   <div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script>
 </div>
 
   <h2>최종 문제 + 도식화 상세 풀이</h2>
