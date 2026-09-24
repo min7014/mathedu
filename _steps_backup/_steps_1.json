@@ -1,0 +1,137 @@
+{
+  "1": {
+    "subject": "수학I",
+    "final_q": "$\\left(\\dfrac{2}{3}\\right)^{-3}\\div\\left(\\dfrac{3}{2}\\right)^2$ 의 값을 구하시오.",
+    "final_answer": "④ $\\dfrac32$",
+    "diagram": "<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120' viewBox='0 0 300 120'><rect width='300' height='120' fill='#fff'/><text x='150' y='24' text-anchor='middle' font-size='13' fill='#222'>지수법칙: 밑을 뒤집고 부호를 바꿈</text><text x='30' y='70' font-size='15' fill='#c00'>(2/3)^-3</text><text x='110' y='70' font-size='15' fill='#222'>=</text><text x='130' y='70' font-size='15' fill='#06c'>(3/2)^3</text><text x='30' y='100' font-size='13' fill='#444'>= 27/8  과  (3/2)^2 = 9/4</text></svg>",
+    "full_solution": "## 풀이\n**지식**: 음의 지수 $a^{-n}=\\dfrac{1}{a^n}$, 분수 밑 $\\left(\\dfrac{b}{c}\\right)^{-n}=\\left(\\dfrac{c}{b}\\right)^n$.\n1. $\\left(\\frac23\\right)^{-3}=\\left(\\frac32\\right)^3=\\dfrac{27}{8}$ (밑을 역수로, 지수 부호 반전)\n2. $\\left(\\frac32\\right)^2=\\dfrac94$\n3. 나눗셈: $\\dfrac{27}{8}\\div\\dfrac94=\\dfrac{27}{8}\\times\\dfrac49=\\dfrac{108}{72}=\\dfrac32$\n**정답 ④ $\\dfrac32$**",
+    "steps": [
+      {
+        "level": "L1",
+        "knowledge": "[지식] 거듭제곱이란? $a^n$ 은 $a$ 를 $n$ 번 곱한 것입니다. $a$ 를 '밑', $n$ 을 '지수'라 부릅니다. 예: $3^2=3 \\times 3=9$.",
+        "q": "$3^2$ 의 값은?",
+        "choices": [
+          "① 5",
+          "② 6",
+          "③ 9",
+          "④ 12",
+          "⑤ 15"
+        ],
+        "answer": "③ 9",
+        "why": "$3^2=3 \\times 3=9$. ①은 3+2, ②는 3\\times2 오답."
+      },
+      {
+        "level": "L2",
+        "knowledge": "[지식] 분수의 거듭제곱 $\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}$ 입니다. 분자와 분모를 각각 $n$ 제곱합니다.",
+        "q": "$\\left(\\frac{2}{3}\\right)^2$ 의 값은?",
+        "choices": [
+          "① $\\frac{2}{3}$",
+          "② $\\frac{4}{9}$",
+          "③ $\\frac{4}{3}$",
+          "④ $\\frac{8}{3}$",
+          "⑤ $\\frac{9}{4}$"
+        ],
+        "answer": "② $\\frac{4}{9}$",
+        "why": "$\\frac{2^2}{3^2}=\\frac{4}{9}$. ⑤는 분모분자 뒤집은 오답."
+      },
+      {
+        "level": "L3",
+        "knowledge": "[지식] 음의 지수 $a^{-1}=\\frac{1}{a}$ 입니다. 지수가 -1이면 그 수의 '역수'가 됩니다. 분수의 역수는 분자와 분모를 뒤집습니다. 예를 들어 $\\frac{2}{3}$ 의 역수는 $\\frac{3}{2}$ 입니다.",
+        "q": "$\\left(\\frac{2}{3}\\right)^{-1}$ 의 값은?",
+        "choices": [
+          "① $\\frac{2}{3}$",
+          "② $\\frac{3}{2}$",
+          "③ $\\frac{4}{9}$",
+          "④ $\\frac{9}{4}$",
+          "⑤ $\\frac{1}{3}$"
+        ],
+        "answer": "② $\\frac{3}{2}$",
+        "why": "음의 지수 -1은 역수를 뜻하므로 $\\frac{2}{3}$ 의 역수는 $\\frac{3}{2}$."
+      },
+      {
+        "level": "L4",
+        "knowledge": "[지식] 분수 밑의 음의 지수 법칙 $\\left(\\frac{b}{c}\\right)^{-n}=\\left(\\frac{c}{b}\\right)^n$ 입니다. 밑을 뒤집고 지수의 부호를 반전시킵니다.",
+        "q": "$\\left(\\frac{2}{3}\\right)^{-2}$ 의 값은?",
+        "choices": [
+          "① $\\frac{4}{9}$",
+          "② $\\frac{9}{4}$",
+          "③ $\\frac{2}{3}$",
+          "④ $\\frac{3}{2}$",
+          "⑤ $\\frac{8}{27}$"
+        ],
+        "answer": "② $\\frac{9}{4}$",
+        "why": "$\\left(\\frac{3}{2}\\right)^2 = \\frac{9}{4}$."
+      },
+      {
+        "level": "L5",
+        "knowledge": "[지식] 위 법칙을 계속 씁니다. $\\left(\\frac{2}{3}\\right)^{-3}=\\left(\\frac{3}{2}\\right)^3$ 입니다.",
+        "q": "$\\left(\\frac{2}{3}\\right)^{-3}$ 의 값은?",
+        "choices": [
+          "① $\\frac{8}{27}$",
+          "② $\\frac{27}{8}$",
+          "③ $\\frac{9}{4}$",
+          "④ $\\frac{3}{2}$",
+          "⑤ $\\frac{6}{9}$"
+        ],
+        "answer": "② $\\frac{27}{8}$",
+        "why": "$\\left(\\frac{3}{2}\\right)^3 = \\frac{27}{8}$."
+      },
+      {
+        "level": "L6",
+        "knowledge": "[지식] 분수의 거듭제곱. $\\left(\\frac{3}{2}\\right)^2 = \\frac{3^2}{2^2} = \\frac{9}{4}$ 입니다.",
+        "q": "$\\left(\\frac{3}{2}\\right)^2$ 의 값은?",
+        "choices": [
+          "① $\\frac{3}{2}$",
+          "② $\\frac{9}{4}$",
+          "③ $\\frac{6}{4}$",
+          "④ $\\frac{3}{4}$",
+          "⑤ $\\frac{9}{2}$"
+        ],
+        "answer": "② $\\frac{9}{4}$",
+        "why": "분자 $3^2=9$, 분모 $2^2=4$ 이므로 $\\frac{9}{4}$."
+      },
+      {
+        "level": "L7",
+        "knowledge": "[지식] 나눗셈을 곱셈으로 바꾸기. $\\frac{A}{\\} \\div \\frac{C}{D} = \\frac{A}{\\} \\times \\frac{D}{C}$ 입니다. 뒤의 분수를 뒤집어 곱합니다.",
+        "q": "$\\frac{27}{8} \\div \\frac{9}{4}$ 를 곱셈으로 바꾸면?",
+        "choices": [
+          "① $\\frac{27}{8} \\times \\frac{9}{4}$",
+          "② $\\frac{27}{8} \\times \\frac{4}{9}$",
+          "③ $\\frac{8}{27} \\times \\frac{4}{9}$",
+          "④ $\\frac{27}{8} \\div \\frac{9}{4}$",
+          "⑤ $\\frac{8}{27} \\times \\frac{9}{4}$"
+        ],
+        "answer": "② $\\frac{27}{8} \\times \\frac{4}{9}$",
+        "why": "뒤의 분수 $\\frac{9}{4}$ 를 뒤집어 $\\frac{4}{9}$ 로 곱합니다."
+      },
+      {
+        "level": "L8",
+        "knowledge": "[지식] 분수 곱셈과 약분. $\\frac{27}{8} \\times \\frac{4}{9} = \\frac{27 \\times 4}{8 \\times 9} = \\frac{108}{72} = \\frac{3}{2}$ 입니다. 분자와 분모를 같은 수로 나누어 약분합니다.",
+        "q": "$\\frac{27}{8} \\times \\frac{4}{9}$ 를 약분하여 간단히 하면?",
+        "choices": [
+          "① $\\frac{9}{4}$",
+          "② $\\frac{27}{8}$",
+          "③ $\\frac{3}{2}$",
+          "④ $\\frac{4}{3}$",
+          "⑤ $\\frac{1}{2}$"
+        ],
+        "answer": "③ $\\frac{3}{2}$",
+        "why": "$\\frac{108}{72}$ 를 36으로 약분하면 $\\frac{3}{2}$."
+      },
+      {
+        "level": "L9",
+        "knowledge": "[지식] 종합. 음의 지수 법칙과 나눗셈을 모두 사용합니다. $\\left(\\frac{2}{3}\\right)^{-3} \\div \\left(\\frac{3}{2}\\right)^2 = \\left(\\frac{3}{2}\\right)^3 \\div \\left(\\frac{3}{2}\\right)^2 = \\left(\\frac{3}{2}\\right)^1 = \\frac32$.",
+        "q": "$\\left(\\frac{2}{3}\\right)^{-3} \\div \\left(\\frac{3}{2}\\right)^2$ 의 값은?",
+        "choices": [
+          "① $\\frac{2}{3}$",
+          "② $\\frac{3}{4}$",
+          "③ $1$",
+          "④ $\\dfrac32$",
+          "⑤ $\\frac{27}{8}$"
+        ],
+        "answer": "④ $\\dfrac32$",
+        "why": "$\\left(\\frac{3}{2}\\right)^{3-2}=\\frac32$. 또는 $\\frac{27}{8} \\times \\frac{4}{9}=\\frac32$."
+      }
+    ]
+  }
+}

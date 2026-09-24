@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수학I 4번 · 기초→심화 퀴즈</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\(','\)']], displayMath:[['$$','$$'],['\[','\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script id="mj" async src="/board/mathjax/tex-mml-chtml.js"></script>
+<style>
+:root{{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
+--txt:#eef2ff;--sub:#aab4d4;--accent:#7cc4ff;--accent2:#a78bfa;--good:#5eead4;--bad:#fb7185;--gold:#fde68a;
+--glass-blur:22px;--glass-shadow:0 8px 32px rgba(0,0,0,.40);--radius:16px}}
+*{{box-sizing:border-box}}
+body{{margin:0;color:var(--txt);line-height:1.7;
+font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+background:
+ radial-gradient(circle at 12% 8%, rgba(124,196,255,.35), transparent 42%),
+ radial-gradient(circle at 88% 12%, rgba(167,139,250,.32), transparent 40%),
+ radial-gradient(circle at 50% 55%, rgba(94,234,212,.18), transparent 45%),
+ radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
+ linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);
+background-attachment:fixed;min-height:100vh}}
+.wrap{{max-width:820px;margin:0 auto;padding:24px 18px 80px}}
+h1{{font-size:1.55rem;margin:0 0 4px;
+background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}}
+h2{{font-size:1.2rem;margin:34px 0 10px;color:var(--accent);
+border-left:4px solid transparent;border-image:linear-gradient(var(--accent),var(--accent2)) 1;padding-left:10px}}
+.lead{{color:var(--sub);font-size:.95rem;margin:0 0 8px}}
+.sym{{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}}
+.sym div{{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:8px 10px;
+font-size:.9rem;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.sym b{{color:var(--gold)}}
+.q{{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:var(--glass-shadow);transition:.2s}}
+.q:hover{{border-color:rgba(124,196,255,.4)}}
+.q .lvl{{font-size:.75rem;color:var(--sub)}}
+.q .stem{{font-size:1.02rem;margin:6px 0 12px;font-weight:600}}
+.opts{{display:grid;gap:8px}}
+.opt{{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--line);
+border-radius:12px;padding:10px 12px;cursor:pointer;transition:.15s;font-size:.95rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.opt:hover{{border-color:var(--accent);transform:translateY(-1px)}}
+.opt .n{{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:rgba(124,196,255,.25);
+display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--accent)}}
+.opt.correct{{background:rgba(94,234,212,.16);border-color:var(--good)}}
+.opt.wrong{{background:rgba(251,113,133,.16);border-color:var(--bad)}}
+.opt.locked{{cursor:default}}
+.exp{{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(124,196,255,.1);
+border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.exp.show{{display:block}}
+.exp b{{color:var(--gold)}}
+.score{{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
+display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.score b{{color:var(--gold)}}
+.bar{{height:8px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden;flex:1;margin:0 12px}}
+.bar > i{{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:.3s}}
+.know{{background:var(--card);border:1px dashed var(--accent);border-radius:14px;padding:14px;margin:12px 0;font-size:.92rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.know h3{{margin:0 0 6px;color:var(--accent);font-size:1rem}}
+.cards{{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}}
+.card{{width:64px;height:92px;border-radius:10px;display:flex;flex-direction:column;
+align-items:center;justify-content:center;font-weight:700;border:2px solid rgba(255,255,255,.25)}}
+.card .num{{font-size:1.3rem}}
+.card .face{{font-size:.7rem;margin-top:4px;opacity:.85}}
+.card.front{{background:rgba(244,247,255,.85);color:#1b2436;border-color:#cfd8ee;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.card.back{{background:rgba(57,67,95,.85);color:#fff;border-color:#56638c;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.sol{{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));box-shadow:var(--glass-shadow)}}
+.diagram{{background:rgba(255,255,255,.92);color:#1b2436;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
+.diagram svg,.diagram img{{max-width:100%;height:auto}}
+.btn{{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;
+padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.3);transition:.15s}}
+.btn:hover{{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,196,255,.45)}}
+.final{{text-align:center;margin:30px 0;font-size:1.05rem}}
+.final .ans{{font-size:1.6rem;color:var(--good);font-weight:800;margin:8px 0}}
+code{{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:var(--gold)}}
+.topbar{{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}}
+.tbtn{{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
+padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}}
+.tbtn:hover{{border-color:var(--accent);color:var(--accent)}}
+</style>
+</head>
+<body>
+<div class="navbar">
+  <a class="brand" href="/board/6wol_mopyung.html">📘 mathedu</a>
+  <a class="navbtn primary" href="/board/6wol_mopyung.html">🏠 홈</a>
+  <a class="navbtn" href="/">📝 퀴즈 생성 게시판</a>
+</div>
+<div class="wrap">
+  <div class="score">
+    <span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+    <span class="bar"><i id="bar"></i></span>
+    <span id="pct">0%</span>
+  </div>
+  <h1>📘 수학I 4번 — 기초→심화 퀴즈</h1>
+  <p class="lead">2024학년도 6월 고3 모의평가. 처음부터 차근차근, 모든 문항은 <b>5지 선다·독립 문항</b>입니다.<br>
+  정답을 고르면 바로 채점되고, <b>왜</b> 그 답인지 해설이 열려요.</p>
+
+  <h2>🔰 제0단계 · 쓰이는 수학 기호 · 먼저 알아야 할 지식</h2>
+  <div class="sym">
+    <div><b>달러기호 `$`</b>로 감싼 것은 수식입니다 (예: <code>$x^2$</code> → x²).</div>
+    <div><b>≤</b> — 작거나 같다(이하) · <b>≥</b> — 크거나 같다(이상)</div>
+    <div><b>$P(A)$</b> — 사건 A의 확률 = (일어난 경우)/(전체 경우)</div>
+    <div><b>$E(X)$</b> — 확률변수 X의 기댓값(평균)</div>
+    <div><b>$\int$</b> — 적분(넓이·누적) · <b>$\sum$</b> — 합</div>
+    <div><b>$i$</b> — 허수단위($i^2=-1$) · <b>$\log$</b> — 로그 · <b>$f'(x)$</b> — 도함수</div>
+  </div>
+  <div class="know"><h3>📖 이 문제를 풀기 위해 차례대로 알아야 할 지식 (요약)</h3>
+    <b>L1:</b> [지식] 같은 문자끼리 곱하면 지수로 나타냅니다. $\displaystyle x \cdot x = x^2$. 그리고 $\displaystyle 2x$ 는 $\displaystyle 2 \times x$ 입니다(더하기가 아님).<br><b>L2:</b> [지식] 같은 항을 더하면 계수가 더해집니다. $\displaystyle x+x = 2x$ 입니다. $\displaystyle 2x$ 는 $\displaystyle 2 \times x$ 와 같습니다.<br><b>L3:</b> [지식] 6을 두 자연수의 곱으로 나타내면 $\displaystyle 1 \times 6$, $\displaystyle 2 \times 3$ 이 있습니다. 이 중에서 두 수의 합이 5가 되는 쌍을 찾습니다.<br><b>L4:</b> [지식] 원식 $\displaystyle x^2-5x+6$ 에서 곱은 6, 합은 -5 입니다. 두 수가 모두 음수여야 합니다. $\displaystyle (-2) \times (-3) = 6$, $\displaystyle (-2)+(-3) = -5$.<br><b>L5:</b> [지식] 인수분해에 쓰는 역공식. $\displaystyle (x+a)(x+b) = x^2 + (a+b)x + ab$ 입니다.<br><b>L6:</b> [지식] $\displaystyle (x-2)(x-3)$ 을 직접 곱해봅니다. $\displaystyle x \cdot x -3x -2x + (-2)(-3) = x^2 -5x + 6$ 입니다.<br><b>L7:</b> [지식] 인수분해란 다항식을 두 개 이상의 식을 곱한 형태로 나타내는 것입니다. 예를 들어 $\displaystyle x^2-5x+6$ 을 $\displaystyle (x-2)(x-3)$ 처럼 씁니다.<br><b>L8:</b> [지식] 인수 $\displaystyle (x-2)$ 가 맞는지 확인합니다. $\displaystyle x=2$ 를 대입하면 $\displaystyle 2^2 - 5 \times 2 + 6 = 4 - 10 + 6 = 0$ 입니다. 값이 0이 되면 $\displaystyle (x-2)$ 가 인수입니다.<br><b>L9:</b> [지식] 종합. 곱 6, 합 -5 인 두 수 -2, -3 을 찾아 $\displaystyle x^2-5x+6 = (x-2)(x-3)$ 로 인수분해합니다.
+  </div>
+
+  <h2>🟢 단계별 학습</h2>
+  <div class="know"><h3>먼저 알아야 할 지식</h3>
+    각 단계마다 필요한 수학적 지식을 먼저 제시합니다. 아래 단계를 차례대로 풀어보세요.
+  </div>
+  <div class="q" data-ans="3" data-exp="같은 문자 곱은 제곱으로 나타냅니다.">
+  <div class="lvl">L1</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 같은 문자끼리 곱하면 지수로 나타냅니다. $\displaystyle x \cdot x = x^2$. 그리고 $\displaystyle 2x$ 는 $\displaystyle 2 \times x$ 입니다(더하기가 아님).</div>
+  <div class="stem">$\displaystyle x \cdot x$ 는?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle x$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 2x$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle x^2$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle x+2$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 2x^2$</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="같은 항 두 개를 더하면 계수가 2가 됩니다.">
+  <div class="lvl">L2</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 같은 항을 더하면 계수가 더해집니다. $\displaystyle x+x = 2x$ 입니다. $\displaystyle 2x$ 는 $\displaystyle 2 \times x$ 와 같습니다.</div>
+  <div class="stem">$\displaystyle x+x$ 는?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle x^2$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 2x$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle x$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 2+x$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 2$</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="$\displaystyle 2 \times 3 = 6$ 이고 $\displaystyle 2+3=5$. ①은 합이 7.">
+  <div class="lvl">L3</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 6을 두 자연수의 곱으로 나타내면 $\displaystyle 1 \times 6$, $\displaystyle 2 \times 3$ 이 있습니다. 이 중에서 두 수의 합이 5가 되는 쌍을 찾습니다.</div>
+  <div class="stem">곱하여 6이 되고 더하여 5가 되는 두 자연수는?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① 1, 6</div><div class="opt"><span class="n">2</span> ② 2, 3</div><div class="opt"><span class="n">3</span> ③ 2, 4</div><div class="opt"><span class="n">4</span> ④ 1, 5</div><div class="opt"><span class="n">5</span> ⑤ 3, 3</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="$\displaystyle (-2) \times (-3)=6$, $\displaystyle (-2)+(-3)=-5$.">
+  <div class="lvl">L4</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 원식 $\displaystyle x^2-5x+6$ 에서 곱은 6, 합은 -5 입니다. 두 수가 모두 음수여야 합니다. $\displaystyle (-2) \times (-3) = 6$, $\displaystyle (-2)+(-3) = -5$.</div>
+  <div class="stem">곱하여 6이 되고 더하여 -5가 되는 두 수는?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① 2, 3</div><div class="opt"><span class="n">2</span> ② -2, -3</div><div class="opt"><span class="n">3</span> ③ -2, 3</div><div class="opt"><span class="n">4</span> ④ 2, -3</div><div class="opt"><span class="n">5</span> ⑤ -1, -6</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="곱셈공식을 전개하면 $\displaystyle x^2+(a+b)x+ab$.">
+  <div class="lvl">L5</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 인수분해에 쓰는 역공식. $\displaystyle (x+a)(x+b) = x^2 + (a+b)x + ab$ 입니다.</div>
+  <div class="stem">$\displaystyle (x+a)(x+b)$ 를 전개한 일반식은?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle x^2+abx+a+b$</div><div class="opt"><span class="n">2</span> ② $\displaystyle x^2+(a+b)x+ab$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle x^2+ax+b$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle x^2+a+b$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle (x+ab)^2$</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="$\displaystyle x^2-3x-2x+6 = x^2-5x+6$.">
+  <div class="lvl">L6</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] $\displaystyle (x-2)(x-3)$ 을 직접 곱해봅니다. $\displaystyle x \cdot x -3x -2x + (-2)(-3) = x^2 -5x + 6$ 입니다.</div>
+  <div class="stem">$\displaystyle (x-2)(x-3)$ 을 전개하면?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle x^2+5x+6$</div><div class="opt"><span class="n">2</span> ② $\displaystyle x^2-5x+6$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle x^2-5x-6$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle x^2+5x-6$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle x^2-6x+5$</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="인수분해는 곱셈 형태로 나타내는 것입니다.">
+  <div class="lvl">L7</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 인수분해란 다항식을 두 개 이상의 식을 곱한 형태로 나타내는 것입니다. 예를 들어 $\displaystyle x^2-5x+6$ 을 $\displaystyle (x-2)(x-3)$ 처럼 씁니다.</div>
+  <div class="stem">'인수분해'란 무엇인가?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① 항을 더하는 것</div><div class="opt"><span class="n">2</span> ② 곱한 형태로 나타내는 것</div><div class="opt"><span class="n">3</span> ③ 나눗셈을 하는 것</div><div class="opt"><span class="n">4</span> ④ 지수를 계산하는 것</div><div class="opt"><span class="n">5</span> ⑤ 분수를 약분하는 것</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="$\displaystyle 4-10+6 = 0$ 이므로 $\displaystyle (x-2)$ 가 인수입니다.">
+  <div class="lvl">L8</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 인수 $\displaystyle (x-2)$ 가 맞는지 확인합니다. $\displaystyle x=2$ 를 대입하면 $\displaystyle 2^2 - 5 \times 2 + 6 = 4 - 10 + 6 = 0$ 입니다. 값이 0이 되면 $\displaystyle (x-2)$ 가 인수입니다.</div>
+  <div class="stem">$\displaystyle x=2$ 를 $\displaystyle x^2-5x+6$ 에 대입한 값은?</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① 6</div><div class="opt"><span class="n">2</span> ② 0</div><div class="opt"><span class="n">3</span> ③ -6</div><div class="opt"><span class="n">4</span> ④ 4</div><div class="opt"><span class="n">5</span> ⑤ 2</div></div>
+  <div class="exp"></div>
+</div><div class="q" data-ans="2" data-exp="합 -5, 곱 6 인 수는 -2, -3 이므로 $\displaystyle (x-2)(x-3)$.">
+  <div class="lvl">L9</div>
+  <div class="know"><h3>📖 먼저 알아야 할 지식</h3>[지식] 종합. 곱 6, 합 -5 인 두 수 -2, -3 을 찾아 $\displaystyle x^2-5x+6 = (x-2)(x-3)$ 로 인수분해합니다.</div>
+  <div class="stem">$\displaystyle x^2-5x+6$ 을 인수분해 하시오.</div>
+  <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle (x+2)(x+3)$</div><div class="opt"><span class="n">2</span> ② $\displaystyle (x-2)(x-3)$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle (x+1)(x-6)$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle (x-1)(x-6)$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle (x-6)(x+1)$</div></div>
+  <div class="exp"></div>
+</div>
+
+  <h2>🎯 최종 문제 + 도식화 상세 풀이</h2>
+  <div class="sol">
+    <h3 style="color:var(--accent);margin-top:0">원본 문항</h3>
+    <p>$\displaystyle x^2-5x+6$ 을 인수분해 하시오.</p>
+    
+    <h3 style="color:var(--accent)">상세 풀이</h3>
+    <p>## 풀이
+**지식**: $\displaystyle x^2+(a+b)x+ab=(x+a)(x+b)$. 두 수의 합이 -5, 곱이 6인 수는 -2, -3.
+$\displaystyle x^2-5x+6=x^2+(-2-3)x+(-2)(-3)=(x-2)(x-3)$
+**정답 ② $\displaystyle (x-2)(x-3)$**</p>
+  </div>
+
+  <div class="final">
+    <p>🎉 수고하셨어요, M님! 기초부터 심화까지 끝냈습니다.</p>
+    <div class="ans" id="finalAns">정답 ② $\displaystyle (x-2)(x-3)$</div>
+    <button class="btn" onclick="location.reload()">처음부터 다시 풀기</button>
+  </div>
+</div>
+<script>
+  const qs = document.querySelectorAll('.q');
+  let pts = 0;
+  document.getElementById('tot').textContent = qs.length;
+  qs.forEach(q=>{
+    const ans = q.dataset.ans;
+    const exp = q.querySelector('.exp');
+    exp.textContent = q.dataset.exp;
+    const opts = q.querySelectorAll('.opt');
+    opts.forEach((o,i)=>{
+      o.addEventListener('click',()=>{
+        if(q.classList.contains('done')) return;
+        q.classList.add('done');
+        opts.forEach((oo,j)=>{
+          oo.classList.add('locked');
+          if(j+1 == ans) oo.classList.add('correct');
+        });
+        if(i+1 == ans){ o.classList.add('correct'); pts++; }
+        else { o.classList.add('wrong'); }
+        exp.classList.add('show');
+        const pct = Math.round(pts/qs.length*100);
+        document.getElementById('pts').textContent = pts;
+        document.getElementById('bar').style.width = pct+'%';
+        document.getElementById('pct').textContent = pct+'%';
+      });
+    });
+  });
+</script>
+</body></html>

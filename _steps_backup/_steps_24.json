@@ -1,0 +1,137 @@
+{
+  "24": {
+    "subject": "확률과통계",
+    "final_q": "서로 배반인 두 사건 $A,\\,B$ 에 대하여 $P(A\\cup B)=\\dfrac34$, $P(A^C)=\\dfrac56$ 일 때, $P(B^C)$ 의 값을 구하시오.",
+    "final_answer": "② $\\dfrac{5}{12}$",
+    "diagram": "<svg xmlns='http://www.w3.org/2000/svg' width='320' height='160' viewBox='0 0 320 160'><rect width='320' height='160' fill='#fff'/><text x='160' y='16' text-anchor='middle' font-size='12' fill='#222'>전체 표본공간 (확률의 합 = 1)</text><circle cx='100' cy='90' r='45' fill='#cfe3ff' stroke='#3a6' stroke-width='2'/><circle cx='220' cy='90' r='45' fill='#ffd9cf' stroke='#c66' stroke-width='2'/><text x='100' y='95' text-anchor='middle' font-size='16' fill='#222'>A</text><text x='220' y='95' text-anchor='middle' font-size='16' fill='#222'>B</text><text x='100' y='150' text-anchor='middle' font-size='11' fill='#444'>A가 일어날 확률 $P(A)$</text><text x='220' y='150' text-anchor='middle' font-size='11' fill='#444'>B가 일어날 확률 $P(B)$</text></svg>",
+    "full_solution": "## 최종 문제 상세 풀이\n\n**1단계: 알고 있는 것 정리**\n- $A,\\,B$ 가 서로 **배반(서로 겹치지 않음)** 이라는 것은 두 사건이 동시에 일어날 수 없다는 뜻입니다.\n- $P(A\\cup B)=\\dfrac34$ : $A$ 또는 $B$ 가 일어날 확률(합사건)이 $\\dfrac34$ 입니다.\n- $P(A^C)=\\dfrac56$ : $A$ 가 **일어나지 않을** 확률(여사건)이 $\\dfrac56$ 입니다.\n\n**2단계: $P(A)$ 구하기**\n$$P(A)=1-P(A^C)=1-\\dfrac56=\\dfrac16$$\n\n**3단계: $P(B)$ 구하기**\n$$P(A\\cup B)=P(A)+P(B) \\quad\\Rightarrow\\quad P(B)=\\dfrac34-\\dfrac16=\\dfrac{7}{12}$$\n\n**4단계: $P(B^C)$ 구하기**\n$$P(B^C)=1-P(B)=1-\\dfrac{7}{12}=\\dfrac{5}{12}$$\n\n**정답: ② $\\dfrac{5}{12}$**",
+    "steps": [
+      {
+        "level": "L1",
+        "knowledge": "**[지식] 확률의 전체합]** 어떤 사건이 일어날 확률과 일어나지 않을 확률을 더하면 항상 1(전체)이 됩니다. 예: 주사위 '6' 확률 $\\dfrac16$, '6 아닌 것' 확률 $\\dfrac56$, 합하면 1.",
+        "q": "주사위 '6이 나온다'와 '6이 나오지 않는다'의 확률을 더하면?",
+        "choices": [
+          "① $\\dfrac16$",
+          "② $\\dfrac12$",
+          "③ $\\dfrac56$",
+          "④ $1$",
+          "⑤ $2$"
+        ],
+        "answer": "④ $1$",
+        "why": "일어날 확률+안 일어날 확률=1."
+      },
+      {
+        "level": "L2",
+        "knowledge": "**[지식] 합사건 기호 ∪]** 기호 $\\cup$ (유니온)는 'A 또는 B가 일어나는 사건'입니다. $P(A\\cup B)$ 는 'A 또는 B가 일어날 확률'입니다. 예: 주사위 '짝수∪홀수'는 무조건 일어나므로 확률 1.",
+        "q": "주사위에서 '짝수'(확률 1/2) 또는 '홀수'(확률 1/2)가 나올 확률 $P(\\text{짝수}\\cup\\text{홀수})$ 는?",
+        "choices": [
+          "① $\\dfrac14$",
+          "② $\\dfrac13$",
+          "③ $\\dfrac12$",
+          "④ $\\dfrac23$",
+          "⑤ $1$"
+        ],
+        "answer": "⑤ $1$",
+        "why": "홀짝은 모두 커버하므로 확률 1."
+      },
+      {
+        "level": "L3",
+        "knowledge": "**[지식] 여사건 기호 $A^C$]** 기호 $A^C$ (A의 여사건)는 'A가 **일어나지 않는** 사건'입니다. $P(A)+P(A^C)=1$ 이므로 $P(A)=1-P(A^C)$ 입니다.",
+        "q": "$P(A)=\\dfrac16$ 일 때 $P(A^C)$ 는?",
+        "choices": [
+          "① $\\dfrac16$",
+          "② $\\dfrac13$",
+          "③ $\\dfrac12$",
+          "④ $\\dfrac56$",
+          "⑤ $1$"
+        ],
+        "answer": "④ $\\dfrac56$",
+        "why": "1-1/6=5/6."
+      },
+      {
+        "level": "L4",
+        "knowledge": "**[지식] 배반(서로 겹치지 않음)]** 두 사건이 '배반'이면 동시에 일어날 수 없습니다(겹치는 부분이 없음). 예: 주사위 '짝수'와 '홀수'는 배반입니다. 배반일 때 합확률은 그냥 더합니다: $P(A\\cup B)=P(A)+P(B)$.",
+        "q": "배반인 두 사건의 'A 또는 B' 확률은?",
+        "choices": [
+          "① $P(A)\\times P(B)$",
+          "② $P(A)+P(B)$",
+          "③ $P(A)-P(B)$",
+          "④ $P(A)/P(B)$",
+          "⑤ $1-P(A)$"
+        ],
+        "answer": "② $P(A)+P(B)$",
+        "why": "배반이면 겹침이 없어 단순 덧셈."
+      },
+      {
+        "level": "L5",
+        "knowledge": "**[지식] 주어진 값 정리]** 문제에서 $P(A^C)=\\dfrac56$ 이므로 $P(A)=1-\\dfrac56=\\dfrac16$ 입니다. 이를 먼저 구해 둡니다.",
+        "q": "$P(A^C)=\\dfrac56$ 일 때 $P(A)$ 는?",
+        "choices": [
+          "① $\\dfrac16$",
+          "② $\\dfrac13$",
+          "③ $\\dfrac12$",
+          "④ $\\dfrac56$",
+          "⑤ $1$"
+        ],
+        "answer": "① $\\dfrac16$",
+        "why": "1-5/6=1/6."
+      },
+      {
+        "level": "L6",
+        "knowledge": "**[지식] P(B) 구하기]** 배반이므로 $P(A\\cup B)=P(A)+P(B)$ 입니다. $P(A\\cup B)=\\dfrac34$, $P(A)=\\dfrac16$ 이므로 $P(B)=\\dfrac34-\\dfrac16$ 입니다. 통분: $\\dfrac34=\\dfrac{9}{12}$, $\\dfrac16=\\dfrac{2}{12}$.",
+        "q": "$\\dfrac34-\\dfrac16$ 을 통분하여 계산하면?",
+        "choices": [
+          "① $\\dfrac{5}{12}$",
+          "② $\\dfrac12$",
+          "③ $\\dfrac{7}{12}$",
+          "④ $\\dfrac23$",
+          "⑤ $\\dfrac34$"
+        ],
+        "answer": "③ $\\dfrac{7}{12}$",
+        "why": "9/12-2/12=7/12."
+      },
+      {
+        "level": "L7",
+        "knowledge": "**[지식] B의 여사건]** 구하려는 것은 $P(B^C)$ 이므로, $P(B^C)=1-P(B)$ 입니다. 아까 $P(B)=\\dfrac{7}{12}$ 를 구했습니다.",
+        "q": "$P(B)=\\dfrac{7}{12}$ 일 때 $P(B^C)$ 는?",
+        "choices": [
+          "① $\\dfrac{5}{12}$",
+          "② $\\dfrac12$",
+          "③ $\\dfrac{7}{12}$",
+          "④ $\\dfrac{5}{6}$",
+          "⑤ $1$"
+        ],
+        "answer": "① $\\dfrac{5}{12}$",
+        "why": "1-7/12=5/12."
+      },
+      {
+        "level": "L8",
+        "knowledge": "**[지식] 전체 흐름 점검]** ① $P(A)=1-P(A^C)=\\dfrac16$ → ② 배반이므로 $P(B)=P(A\\cup B)-P(A)=\\dfrac34-\\dfrac16=\\dfrac{7}{12}$ → ③ $P(B^C)=1-P(B)=\\dfrac{5}{12}$. 각 단계가 연결됨을 확인합니다.",
+        "q": "위 흐름에서 중간에 구한 $P(B)$ 값은?",
+        "choices": [
+          "① $\\dfrac{5}{12}$",
+          "② $\\dfrac12$",
+          "③ $\\dfrac{7}{12}$",
+          "④ $\\dfrac23$",
+          "⑤ $\\dfrac34$"
+        ],
+        "answer": "③ $\\dfrac{7}{12}$",
+        "why": "P(B)=7/12 (P(B^C)가 아니라)."
+      },
+      {
+        "level": "L9",
+        "knowledge": "**[지식] 최종 문제 풀이]** 모든 준비가 끝났습니다. 주어진 $P(A\\cup B)=\\dfrac34$, $P(A^C)=\\dfrac56$ 에서 배반조건을 써서 $P(B^C)$ 를 구합니다.",
+        "q": "서로 배반인 $A,B$ 에 대하여 $P(A\\cup B)=\\dfrac34$, $P(A^C)=\\dfrac56$ 일 때 $P(B^C)$ 는?",
+        "choices": [
+          "① $\\dfrac13$",
+          "② $\\dfrac{5}{12}$",
+          "③ $\\dfrac12$",
+          "④ $\\dfrac{7}{12}$",
+          "⑤ $\\dfrac23$"
+        ],
+        "answer": "② $\\dfrac{5}{12}$",
+        "why": "P(A)=1/6, P(B)=7/12, P(B^C)=5/12. ④는 P(B)를, ①·③·⑤는 중간계산 오답."
+      }
+    ]
+  }
+}

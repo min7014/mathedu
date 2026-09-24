@@ -1,0 +1,151 @@
+{
+  "10": {
+    "subject": "수학II",
+    "final_q": "$\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B$ 를 이용해 $\\sin75^\\circ$ 를 구하시오.",
+    "final_answer": "④ $\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+    "diagram": "<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120' viewBox='0 0 300 120'><rect width='300' height='120' fill='#fff'/><text x='150' y='30' text-anchor='middle' font-size='13' fill='#222'>75°=45°+30°</text><text x='150' y='70' font-size='14' fill='#06c'>sin45cos30+cos45sin30</text><text x='150' y='105' text-anchor='middle' font-size='14' fill='#0a0'>= (√6+√2)/4</text></svg>",
+    "full_solution": "## 풀이\\n**지식**: $\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B$. $75^\\circ=45^\\circ+30^\\circ$.\\n$\\sin75=\\sin45\\cos30+\\cos45\\sin30=\\frac{\\sqrt2}{2}\\cdot\\frac{\\sqrt3}{2}+\\frac{\\sqrt2}{2}\\cdot\\frac12=\\frac{\\sqrt6+\\sqrt2}{4}$\\n**정답 ④ $\\frac{\\sqrt6+\\sqrt2}{4}$**",
+    "steps": [
+      {
+        "level": "L1",
+        "knowledge": "**[지식] 각의 덧셈]** $45^\\circ+30^\\circ=75^\\circ$. (°는 '도'라는 각의 단위)",
+        "q": "$45^\\circ+30^\\circ$ 의 값은?",
+        "choices": [
+          "① $60^\\circ$",
+          "② $65^\\circ$",
+          "③ $70^\\circ$",
+          "④ $75^\\circ$",
+          "⑤ $80^\\circ$"
+        ],
+        "answer": "④ $75^\\circ$",
+        "why": "45+30=75."
+      },
+      {
+        "level": "L2",
+        "knowledge": "**[지식] 특수각 삼각비]** $\\sin30^\\circ=\\dfrac12$. (sin은 '사인', 한 각의 삼각비)",
+        "q": "$\\sin30^\\circ$ 의 값은?",
+        "choices": [
+          "① $\\dfrac12$",
+          "② $\\dfrac{\\sqrt2}{2}$",
+          "③ $\\dfrac{\\sqrt3}{2}$",
+          "④ $1$",
+          "⑤ $\\dfrac{\\sqrt3}{3}$"
+        ],
+        "answer": "① $\\dfrac12$",
+        "why": "30° 사인은 1/2."
+      },
+      {
+        "level": "L3",
+        "knowledge": "**[지식] sin45, cos45]** $\\sin45^\\circ=\\cos45^\\circ=\\dfrac{\\sqrt2}{2}$. ($\\sqrt2\\approx1.414$)",
+        "q": "$\\sin45^\\circ$ 의 값은?",
+        "choices": [
+          "① $\\dfrac12$",
+          "② $\\dfrac{\\sqrt2}{2}$",
+          "③ $\\dfrac{\\sqrt3}{2}$",
+          "④ $1$",
+          "⑤ $\\dfrac{2}{\\sqrt2}$"
+        ],
+        "answer": "② $\\dfrac{\\sqrt2}{2}$",
+        "why": "45° 사인은 √2/2."
+      },
+      {
+        "level": "L4",
+        "knowledge": "**[지식] cos30]** $\\cos30^\\circ=\\dfrac{\\sqrt3}{2}$. (cos는 '코사인')",
+        "q": "$\\cos30^\\circ$ 의 값은?",
+        "choices": [
+          "① $\\dfrac12$",
+          "② $\\dfrac{\\sqrt2}{2}$",
+          "③ $\\dfrac{\\sqrt3}{2}$",
+          "④ $1$",
+          "⑤ $\\sqrt3$"
+        ],
+        "answer": "③ $\\dfrac{\\sqrt3}{2}$",
+        "why": "30° 코사인은 √3/2."
+      },
+      {
+        "level": "L5",
+        "knowledge": "**[지식] cos45]** $\\cos45^\\circ=\\dfrac{\\sqrt2}{2}$.",
+        "q": "$\\cos45^\\circ$ 의 값은?",
+        "choices": [
+          "① $\\dfrac12$",
+          "② $\\dfrac{\\sqrt2}{2}$",
+          "③ $\\dfrac{\\sqrt3}{2}$",
+          "④ $1$",
+          "⑤ $\\dfrac{\\sqrt3}{2}$"
+        ],
+        "answer": "② $\\dfrac{\\sqrt2}{2}$",
+        "why": "45° 코사인은 √2/2."
+      },
+      {
+        "level": "L6",
+        "knowledge": "**[지식] sin의 합공식]** $\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B$. (두 각의 합 사인은 사인·코사인 곱의 합)",
+        "q": "$\\sin(45^\\circ+30^\\circ)$ 를 합공식으로 펼치면?",
+        "choices": [
+          "① $\\sin45^\\circ+\\sin30^\\circ$",
+          "② $\\sin45^\\circ\\cos30^\\circ+\\cos45^\\circ\\sin30^\\circ$",
+          "③ $\\sin45^\\circ\\cos45^\\circ+\\cos30^\\circ\\sin30^\\circ$",
+          "④ $\\cos45^\\circ\\sin30^\\circ$",
+          "⑤ $\\sin75^\\circ$"
+        ],
+        "answer": "② $\\sin45^\\circ\\cos30^\\circ+\\cos45^\\circ\\sin30^\\circ$",
+        "why": "합공식 그대로."
+      },
+      {
+        "level": "L7",
+        "knowledge": "**[지식] 첫 항 계산]** $\\sin45^\\circ\\cos30^\\circ=\\dfrac{\\sqrt2}{2}\\cdot\\dfrac{\\sqrt3}{2}=\\dfrac{\\sqrt6}{4}$. ($\\sqrt2\\cdot\\sqrt3=\\sqrt6$)",
+        "q": "$\\sin45^\\circ\\cdot\\cos30^\\circ$ 의 값은?",
+        "choices": [
+          "① $\\dfrac{\\sqrt6}{4}$",
+          "② $\\dfrac{\\sqrt2}{4}$",
+          "③ $\\dfrac{\\sqrt3}{4}$",
+          "④ $\\dfrac{\\sqrt6}{2}$",
+          "⑤ $\\dfrac12$"
+        ],
+        "answer": "① $\\dfrac{\\sqrt6}{4}$",
+        "why": "(√2/2)(√3/2)=√6/4."
+      },
+      {
+        "level": "L8",
+        "knowledge": "**[지식] 둘째 항 계산]** $\\cos45^\\circ\\sin30^\\circ=\\dfrac{\\sqrt2}{2}\\cdot\\dfrac12=\\dfrac{\\sqrt2}{4}$.",
+        "q": "$\\cos45^\\circ\\cdot\\sin30^\\circ$ 의 값은?",
+        "choices": [
+          "① $\\dfrac{\\sqrt2}{4}$",
+          "② $\\dfrac{\\sqrt6}{4}$",
+          "③ $\\dfrac14$",
+          "④ $\\dfrac{\\sqrt2}{2}$",
+          "⑤ $\\dfrac{\\sqrt3}{4}$"
+        ],
+        "answer": "① $\\dfrac{\\sqrt2}{4}$",
+        "why": "(√2/2)(1/2)=√2/4."
+      },
+      {
+        "level": "L9",
+        "knowledge": "**[지식] 분수 덧셈]** 분모가 같은 분수는 분자끼리 더함. $\\dfrac{\\sqrt6}{4}+\\dfrac{\\sqrt2}{4}=\\dfrac{\\sqrt6+\\sqrt2}{4}$.",
+        "q": "$\\dfrac{\\sqrt6}{4}+\\dfrac{\\sqrt2}{4}$ 의 값은?",
+        "choices": [
+          "① $\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+          "② $\\dfrac{\\sqrt6-\\sqrt2}{4}$",
+          "③ $\\dfrac{\\sqrt6}{4}$",
+          "④ $\\dfrac{\\sqrt2}{4}$",
+          "⑤ $\\dfrac{\\sqrt6+\\sqrt2}{2}$"
+        ],
+        "answer": "① $\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+        "why": "분모 4 통일, 분자 합."
+      },
+      {
+        "level": "L10",
+        "knowledge": "**[지식] 최종]** $75^\\circ=45^\\circ+30^\\circ$, 합공식 적용.",
+        "q": "$\\sin75^\\circ$ 의 값을 구하시오.",
+        "choices": [
+          "① $\\dfrac{\\sqrt6-\\sqrt2}{4}$",
+          "② $\\dfrac{\\sqrt3}{2}$",
+          "③ $\\dfrac{\\sqrt2}{2}$",
+          "④ $\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+          "⑤ $\\dfrac{\\sqrt6}{4}$"
+        ],
+        "answer": "④ $\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+        "why": "합공식 결과. ①은 sin15°(차) 값."
+      }
+    ]
+  }
+}

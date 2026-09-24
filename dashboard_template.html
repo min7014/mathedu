@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mathedu · 학습 현황 대시보드</title>
+<style>
+body{font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#0f1320;color:#e8ecf5;
+margin:0;padding:24px} h1{color:#6ea8fe} h2{color:#6ea8fe;font-size:1.1rem;margin:24px 0 10px}
+.box{background:#1a2030;border:1px solid #2e3850;border-radius:14px;padding:16px;margin:12px 0}
+a{color:#6ea8fe;text-decoration:none} a:hover{text-decoration:underline}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin:8px 0}
+th,td{padding:8px 10px;border-bottom:1px solid #2e3850;text-align:left}
+th{color:#9aa6c0;font-weight:600}
+tr:hover td{background:rgba(110,168,254,.06)}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.78rem;font-weight:700}
+.pill-high{background:rgba(62,220,151,.15);color:#3ddc97}
+.pill-mid{background:rgba(255,209,102,.15);color:#ffd166}
+.pill-low{background:rgba(255,107,107,.15);color:#ff6b6b}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:10px 0}
+.stat-card{background:#1a2030;border:1px solid #2e3850;border-radius:12px;padding:14px}
+.stat-card .num{font-size:1.6rem;font-weight:800;color:#6ea8fe}
+.stat-card .lbl{font-size:.8rem;color:#9aa6c0;margin-top:4px}
+.filter-bar{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.filter-bar select,.filter-bar input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:8px 12px;font-size:.9rem}
+.btn{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer}
+</style></head><body>
+<h1>📊 mathedu · 학습 현황 대시보드</h1>
+<p><a href="/">← 게시판으로 돌아가기</a></p>
+{% if quiz_filter %}<p style="color:#9aa6c0">필터: <b>{{quiz_filter}}</b> <a href="/dashboard" style="font-size:.85rem">[해제]</a></p>{% endif %}
+<div class="box">
+<h2 style="margin-top:0">퀴즈별 통계</h2>
+<div class="stats-grid">
+{% for s in stats %}
+<div class="stat-card">
+<div class="num">{{s.avg_pct}}%</div>
+<div class="lbl">평균 정답률</div>
+<div style="font-size:.8rem;color:#9aa6c0;margin-top:4px">{{s.quiz_slug}} · {{s.n}}명 응시</div>
+<div style="font-size:.78rem;color:#9aa6c0">최고 {{s.best}}% / 최저 {{s.worst}}%</div>
+</div>
+{% endfor %}
+{% if not stats %}<p style="color:#9aa6c0">아직 결과가 없습니다.</p>{% endif %}
+</div>
+</div>
+<div class="box">
+<h2 style="margin-top:0">학생 응시 기록</h2>
+<div class="filter-bar">
+<form method="get" action="/dashboard" style="display:flex;gap:8px">
+<select name="quiz">
+<option value="">전체 퀴즈</option>
+{% for s in stats %}
+<option value="{{s.quiz_slug}}" {% if s.quiz_slug == quiz_filter %}selected{% endif %}>{{s.quiz_slug}}</option>
+{% endfor %}
+</select>
+<button class="btn" type="submit">필터</button>
+</form>
+</div>
+<table>
+<tr><th>#</th><th>학생</th><th>퀴즈</th><th>점수</th><th>정답률</th><th>제출 시각</th></tr>
+{% for r in rows %}
+<tr>
+<td>{{r.id}}</td>
+<td>{{r.student_name}}</td>
+<td><a href="/board/{{r.quiz_slug}}">{{r.quiz_slug}}</a></td>
+<td>{{r.score}} / {{r.total}}</td>
+<td>{% if r.pct >= 80 %}<span class="pill pill-high">{{r.pct}}%</span>{% elif r.pct >= 50 %}<span class="pill pill-mid">{{r.pct}}%</span>{% else %}<span class="pill pill-low">{{r.pct}}%</span>{% endif %}</td>
+<td>{{r.created_at}}</td>
+</tr>
+{% endfor %}
+{% if not rows %}<tr><td colspan="6" style="color:#9aa6c0;text-align:center">아직 결과가 없습니다.</td></tr>{% endif %}
+</table>
+</div>
+</body></html>
