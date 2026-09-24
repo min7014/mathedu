@@ -139,4 +139,47 @@ document.getElementById('pct').textContent=pct+'%';});});});
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
-</script></body></html>
+</script>
+<div id="trackSubmit" style="text-align:center;margin:20px 0;padding:20px;background:rgba(110,168,254,.08);border:1px solid rgba(110,168,254,.3);border-radius:14px">
+<h3 style="color:#6ea8fe;margin:0 0 10px">&#x1f4dd; 먼저 이름을 입력하세요</h3>
+<p style="color:#9aa6c0;font-size:.88rem;margin:0 0 12px">이름을 입력해야 학습 기록이 저장됩니다.</p>
+<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+<input type="text" id="studentName" placeholder="이름 입력" onchange="window._studentName=this.value.trim()" style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px">
+<button class="btn" onclick="window._studentName=document.getElementById('studentName').value.trim();alert('이름 등록 완료! 문제를 풀어주세요.')">이름 등록</button>
+</div>
+</div>
+<script>
+window._studentName='';
+window._sheetsApiUrl='https://script.google.com/macros/s/AKfycbypyb4LXL-Jx6PhKhLSklRsBAvKQBcMxIOhkukH4gMV-yKmOt0KtPrpLS9XxBy8FHXXZg/exec';
+function sendProgress(){
+  var name = (window._studentName || '').trim();
+  if (!name) return;
+  var qs = document.querySelectorAll('.q');
+  var total = qs.length;
+  var done = document.querySelectorAll('.q.done');
+  var correct = 0;
+  document.querySelectorAll('.q.done').forEach(function(q){
+    var c = q.querySelector('.opt.correct');
+    if (c) correct++;
+  });
+  var current = done.length;
+  if (current === 0) return;
+  fetch(window._sheetsApiUrl, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      quiz_slug: window.location.pathname.split('/').pop().replace('.html',''),
+      student_name: name,
+      current_step: current,
+      total_steps: total,
+      correct: correct
+    })
+  }).catch(()=>{});
+}
+if (typeof qs !== 'undefined') {
+  qs.forEach(function(q){
+    q.addEventListener('click', function(){ sendProgress(); });
+  });
+}
+</script>
+</body></html>
