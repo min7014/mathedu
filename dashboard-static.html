@@ -44,7 +44,7 @@ tr:hover td{background:rgba(110,168,254,.06)}
 .pill-low{background:rgba(255,107,107,.15);color:#ff6b6b}
 .pill-live{background:rgba(110,168,254,.20);color:#6ea8fe;animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
-.topbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.topbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
 .tbtn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
 padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
@@ -53,6 +53,11 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 .spin{width:40px;height:40px;border:4px solid #2e3850;border-top-color:var(--accent);
 border-radius:50%;animation:sp 1s linear infinite;margin-bottom:12px}
 @keyframes sp{to{transform:rotate(360deg)}}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(62,220,151,.12);color:#3ddc97;
+border:1px solid rgba(62,220,151,.3);border-radius:20px;padding:4px 12px;font-size:.75rem;font-weight:700}
+.live-dot{width:8px;height:8px;background:#3ddc97;border-radius:50%;animation:blink 1.5s infinite}
+.new-row{animation:flash 2s ease-out}
+@keyframes flash{0%{background:rgba(110,168,254,.25)}100%{background:transparent}}
 </style>
 </head>
 <body>
@@ -60,6 +65,7 @@ border-radius:50%;animation:sp 1s linear infinite;margin-bottom:12px}
 <div class="topbar">
 <a class="tbtn" href="/mathedu/">← 게시판으로 돌아가기</a>
 <button class="btn" onclick="refreshData()">🔄 새로고침</button>
+<span class="live-badge"><span class="live-dot"></span> 실시간 자동 갱신</span>
 </div>
 <h1>📊 mathedu · 학습 현황 대시보드</h1>
 <p class="lead">학생별 · 퀴즈별 학습 진행 실황</p>
@@ -168,18 +174,41 @@ function applyFilter() {
 
 function refreshData() { loadData(); }
 
+let prevRowCount = 0;
+
 async function loadData() {
   try {
     allData = await fetchData();
     document.getElementById('loading').style.display = 'none';
     document.getElementById('progressTable').style.display = '';
     updateStats(allData);
+    
+    // 새 행 감지 → 깜빡임 애니메이션
+    const newCount = allData.length - prevRowCount;
+    prevRowCount = allData.length;
+    
     populateQuizFilter(allData);
     applyFilter();
+    
+    // 새 데이터가 있으면 하이라이트
+    if (newCount > 0) {
+      highlightNewRows(newCount);
+    }
   } catch (e) {
     document.getElementById('loading').innerHTML = `<p style="color:var(--bad)">⚠️ 데이터를 불러올 수 없습니다.<br><small>${e.message}</small></p>`;
   }
 }
+
+function highlightNewRows(count) {
+  const rows = document.querySelectorAll('#progressBody tr');
+  for (let i = 0; i < Math.min(count, rows.length); i++) {
+    rows[i].classList.add('new-row');
+    setTimeout(() => rows[i].classList.remove('new-row'), 2000);
+  }
+}
+
+// ★ 10초마다 자동 새로고침
+setInterval(loadData, 10000);
 
 loadData();
 </script>
