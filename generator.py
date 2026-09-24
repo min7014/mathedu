@@ -172,15 +172,60 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
 <h3>📝 먼저 이름을 입력하세요</h3>
 <p style="color:#9aa6c0;font-size:.88rem">이름을 입력해야 학습 기록이 저장됩니다.</p>
 <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0">
-<input type="text" id="studentName" placeholder="이름 입력" onchange="window._studentName=this.value.trim()">
-<button class="btn" onclick="window._studentName=document.getElementById('studentName').value.trim();alert('이름 등록 완료! 문제를 풀어주세요.')">이름 등록</button>
+<input type="text" id="studentName" placeholder="이름 입력" onkeydown="if(event.key==='Enter)this.blur()" onchange="window._studentName=this.value.trim()">
+<button class="btn" id="btnRegister" onclick="registerName()">이름 등록</button>
 </div>
 </div>
 <script>
 window._studentName='';
 window._sheetsApiUrl='{sheets_api_url}';
-(document.querySelectorAll('.q')).forEach(function(q){{
-  q.addEventListener('click', function(){{ sendProgress(); }});
+window._nameLocked=false;
+function registerName(){{
+  var inp=document.getElementById('studentName');
+  var name=inp.value.trim();
+  if(!name){{alert('이름을 입력하세요');inp.focus();return;}}
+  window._studentName=name;
+  window._nameLocked=true;
+  document.getElementById('trackSubmit').innerHTML='<p style="color:#3ddc97;font-weight:700">✅ '+name+'님, 학습을 시작하세요!</p>';
+  // reveal questions
+  document.querySelectorAll('.q').forEach(function(q){{
+    q.style.display='';
+    q.addEventListener('click', function(){{ sendProgress(); }});
+  }});
+  sendProgress();
+  if(window.MathJax&&MathJax.typesetPromise){{MathJax.typesetPromise();}}
+}}
+function sendProgress(){{
+  var name=(window._studentName||'').trim();
+  if(!name)return;
+  var qs=document.querySelectorAll('.q:not([style*="display: none"])');
+  var total=qs.length;
+  var done=document.querySelectorAll('.q.done:not([style*="display: none"])');
+  var correct=0;
+  document.querySelectorAll('.q.done:not([style*="display: none"])').forEach(function(q){{
+    var c=q.querySelector('.opt.correct');
+    if(c)correct++;
+  }});
+  var current=done.length;
+  if(current===0&&window._nameLocked===false)return;
+  var url=window._sheetsApiUrl||'/api/progress';
+  fetch(url,{{
+    method:'POST',
+    headers:{{'Content-Type':'application/json'}},
+    body:JSON.stringify({{
+      quiz_slug:'{slug_js}',
+      student_name:name,
+      current_step:current,
+      total_steps:total,
+      correct:correct
+    }})
+  }}).catch(()=>{{}});
+}}
+// Initially hide all questions until name is registered
+document.addEventListener('DOMContentLoaded',function(){{
+  if(!window._nameLocked){{
+    document.querySelectorAll('.q').forEach(function(q){{q.style.display='none';}});
+  }}
 }});
 </script>"""
 
