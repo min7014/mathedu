@@ -96,6 +96,7 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 {title}</h1>
+{original_block}
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
 {symbols_block}
 {levels_block}
@@ -211,12 +212,26 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
 
 
 def generate_html(data):
+    f = data.get("final", {})
+    # ★ 원본 문제 블록 (맨 앞)
+    original_block = ""
+    if f.get("stem"):
+        orig_opts = "".join(
+            f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
+            for i, o in enumerate(f.get("options", [])))
+        orig_diagram = f'<div class="diagram">{f["diagram"]}</div>' if f.get("diagram") else ""
+        orig_figure = f'<div class="figure"><img src="{_esc(f["figure"])}" alt="문제 그림" style="max-width:100%;border-radius:10px"></div>' if f.get("figure") else ""
+        original_block = (
+            f'<h2>📋 원본 문제</h2>'
+            f'{orig_diagram}'
+            f'{orig_figure}'
+            f'<div class="sol" style="font-size:1.05rem;font-weight:600;margin:14px 0">{_esc(f.get("stem",""))}</div>'
+            f'<div class="opts">{orig_opts}</div>')
     sym = "".join(
         f'<div><b>{_esc(s.get("sym","") )}</b> — {_esc(s.get("desc",""))}</div>'
         for s in data.get("symbols", []))
     symbols_block = (f'<h2>🔰 제0단계 · 수학 기호</h2><div class="sym">{sym}</div>' if sym else "")
     levels_block = "".join(_level_html(l) for l in data.get("levels", []))
-    f = data.get("final", {})
     fopts = "".join(
         f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
         for i, o in enumerate(f.get("options", [])))
@@ -255,6 +270,7 @@ def generate_html(data):
     tracking_block = _tracking_html(data.get("slug", ""), _sheets_url)
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),
+        original_block=original_block,
         symbols_block=symbols_block, levels_block=levels_block,
         solution_block=solution_block, final_ans=_esc(final_ans),
         tracking_block=tracking_block)
