@@ -90,7 +90,7 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
-<a class="tbtn" href="/">← 게시판</a>
+<a class="tbtn" href="/mathedu/">← 게시판</a>
 <button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</a>
 </div>
 <div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
@@ -167,8 +167,47 @@ def _level_html(lvl):
 
 def _tracking_html(quiz_slug, sheets_api_url=''):
     """Full-screen name gate."""
-    slug_js = quiz_slug.replace("'", "\\\\'")
-    return f"""<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">&#x1f4d8; mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">&#x1f4dd; 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName='';window._sheetsApiUrl='{sheets_api_url}';function registerName(){var n=document.getElementById('studentName').value.trim();if(!n){alert('이름을 입력하세요');return;}window._studentName=n;document.getElementById('trackFull').remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||'').trim();if(!name)return;var qs=document.querySelectorAll('.q');var total=qs.length;var done=document.querySelectorAll('.q.done');var correct=0;done.forEach(function(q){if(q.querySelector('.opt.correct'))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({quiz_slug:'{slug_js}',student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll('.q').forEach(function(q){q.addEventListener('click',function(){sendProgress();});});document.getElementById('studentName').addEventListener('keydown',function(e){if(e.key==='Enter')registerName();});</script>"""
+    slug_js = quiz_slug.replace("'", "\\'")
+    html = '<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center">'
+    html += '<h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2>'
+    html += '<h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3>'
+    html += '<p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p>'
+    html += '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
+    html += '<input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center">'
+    html += '<button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button>'
+    html += '</div></div>'
+    html += '<script>'
+    html += 'window._studentName="";'
+    html += 'window._sheetsApiUrl="' + sheets_api_url + '";'
+    html += 'function registerName(){'
+    html += 'var n=document.getElementById("studentName").value.trim();'
+    html += 'if(!n){alert("이름을 입력하세요");return;}'
+    html += 'window._studentName=n;'
+    html += 'document.getElementById("trackFull").remove();'
+    html += 'sendProgress();'
+    html += 'if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}'
+    html += '}'
+    html += 'function sendProgress(){'
+    html += 'var name=(window._studentName||"").trim();'
+    html += 'if(!name)return;'
+    html += 'var qs=document.querySelectorAll(".q");'
+    html += 'var total=qs.length;'
+    html += 'var done=document.querySelectorAll(".q.done");'
+    html += 'var correct=0;'
+    html += 'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
+    html += 'if(total===0)return;'
+    html += 'fetch(window._sheetsApiUrl,{'
+    html += 'method:"POST",headers:{"Content-Type":"application/json"},'
+    html += 'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
+    html += '}).catch(function(){});'
+    html += '}'
+    html += 'document.querySelectorAll(".q").forEach(function(q){'
+    html += 'q.addEventListener("click",function(){sendProgress();});'
+    html += '});'
+    html += 'document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});'
+    html += '</script>'
+    return html
+
 
 
 def generate_html(data):
