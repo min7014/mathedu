@@ -87,7 +87,7 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackResult{{display:none;padding:10px;border-radius:10px;font-weight:700}}
 </style>
 <script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\(','\\)']]}}}};</script>
-<script async src="/mathjax/tex-chtml-full.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn" href="/">← 게시판</a>

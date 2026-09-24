@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mathedu · 퀴즈 게시판</title>
+<style>
+:root {
+  --bg: #0d1020;
+  --card: rgba(255,255,255,.10);
+  --card2: rgba(255,255,255,.14);
+  --line: rgba(255,255,255,.20);
+  --txt: #eef2ff;
+  --sub: #aab4d4;
+  --accent: #7cc4ff;
+  --accent2: #a78bfa;
+  --gold: #fde68a;
+  --glass-blur: 22px;
+  --glass-shadow: 0 8px 32px rgba(0,0,0,.40);
+  --radius: 16px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  color: var(--txt);
+  line-height: 1.7;
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(124,196,255,.35), transparent 42%),
+    radial-gradient(circle at 88% 12%, rgba(167,139,250,.32), transparent 40%),
+    radial-gradient(circle at 50% 55%, rgba(94,234,212,.18), transparent 45%),
+    radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
+    linear-gradient(160deg, #0a0d1a 0%, #141833 50%, #0a0d1a 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 18px 80px;
+}
+header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+header h1 {
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+header p {
+  color: var(--sub);
+  font-size: .95rem;
+  margin: 0;
+}
+.count-badge {
+  display: inline-block;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: .85rem;
+  color: var(--accent);
+  margin-top: 10px;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+.list {
+  display: grid;
+  gap: 12px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
+  transition: .25s;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover {
+  border-color: rgba(124,196,255,.50);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.50);
+}
+.card .icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(124,196,255,.25), rgba(167,139,250,.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border: 1px solid var(--line);
+}
+.card .body { flex: 1; min-width: 0; }
+.card .title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--txt);
+  word-break: keep-all;
+}
+.card .meta {
+  font-size: .82rem;
+  color: var(--sub);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card .meta .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--sub);
+  opacity: .6;
+}
+.card .arrow {
+  color: var(--accent);
+  font-size: 1.1rem;
+  flex: 0 0 auto;
+  align-self: center;
+  opacity: .7;
+  transition: .2s;
+}
+.card:hover .arrow { opacity: 1; transform: translateX(3px); }
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--sub);
+}
+.loading .spin {
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(255,255,255,.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.error {
+  text-align: center;
+  padding: 40px 20px;
+  color: #fb7185;
+  font-size: .95rem;
+}
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--sub);
+}
+@media (max-width: 480px) {
+  header h1 { font-size: 1.45rem; }
+  .card { padding: 14px 16px; }
+  .card .title { font-size: .98rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>mathedu · 퀴즈 게시판</h1>
+    <p>수학 문제를 단계별로 풀어보세요</p>
+    <div class="count-badge" id="countBadge">불러오는 중…</div>
+  </header>
+  <div class="list" id="list">
+    <div class="loading">
+      <div class="spin"></div>
+      <div>게시판을 불러오는 중…</div>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  var listEl = document.getElementById('list');
+  var countBadge = document.getElementById('countBadge');
+
+  fetch('board/index.json')
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function(items) {
+      if (!Array.isArray(items) || items.length === 0) {
+        listEl.innerHTML = '<div class="empty">아직 등록된 퀴즈가 없습니다.</div>';
+        countBadge.textContent = '0개';
+        return;
+      }
+      countBadge.textContent = items.length + '개 퀴즈';
+      var html = '';
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var title = escapeHtml(item.title || item.slug);
+        var time = escapeHtml(item.time || '');
+        var slug = escapeHtml(item.slug);
+        html += '<a class="card" href="board/' + slug + '.html">';
+        html += '<div class="icon">📄</div>';
+        html += '<div class="body">';
+        html += '<div class="title">' + title + '</div>';
+        html += '<div class="meta">';
+        if (time) html += '<span>' + time + '</span>';
+        html += '</div></div>';
+        html += '<div class="arrow">›</div>';
+        html += '</a>';
+      }
+      listEl.innerHTML = html;
+    })
+    .catch(function(err) {
+      listEl.innerHTML = '<div class="error">게시판을 불러올 수 없습니다.<br><small>' + escapeHtml(err.message) + '</small></div>';
+      countBadge.textContent = '오류';
+    });
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+})();
+</script>
+</body>
+</html>
