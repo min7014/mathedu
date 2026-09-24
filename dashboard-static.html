@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mathedu · 학습 현황 대시보드</title>
+<style>
+:root{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
+--txt:#eef2ff;--sub:#aab4d4;--accent:#7cc4ff;--accent2:#a78bfa;--good:#5eead4;--bad:#fb7185;--gold:#fde68a;
+--glass-blur:22px;--glass-shadow:0 8px 32px rgba(0,0,0,.40);--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;color:var(--txt);line-height:1.7;
+font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+background:
+ radial-gradient(circle at 12% 8%, rgba(124,196,255,.35), transparent 42%),
+ radial-gradient(circle at 88% 12%, rgba(167,139,250,.32), transparent 40%),
+ radial-gradient(circle at 50% 55%, rgba(94,234,212,.18), transparent 45%),
+ radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
+ linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);
+background-attachment:fixed;min-height:100vh}
+.wrap{max-width:960px;margin:0 auto;padding:24px 18px 80px}
+h1{font-size:1.55rem;margin:0 0 4px;
+background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:1.2rem;margin:34px 0 10px;color:var(--accent);
+border-left:4px solid transparent;border-image:linear-gradient(var(--accent),var(--accent2)) 1;padding-left:10px}
+.lead{color:var(--sub);font-size:.95rem;margin:0 0 20px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:10px 0}
+.stat-card{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.stat-card .num{font-size:1.6rem;font-weight:800;color:var(--accent)}
+.stat-card .lbl{font-size:.8rem;color:#9aa6c0;margin-top:4px}
+.filter-bar{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;align-items:center}
+.filter-bar select,.filter-bar input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:8px 12px;font-size:.9rem}
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;
+padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.3);transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,196,255,.45)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin:8px 0}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+th{color:#9aa6c0;font-weight:600}
+tr:hover td{background:rgba(110,168,254,.06)}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.78rem;font-weight:700}
+.pill-high{background:rgba(62,220,151,.15);color:#3ddc97}
+.pill-mid{background:rgba(255,209,102,.15);color:#ffd166}
+.pill-low{background:rgba(255,107,107,.15);color:#ff6b6b}
+.pill-live{background:rgba(110,168,254,.20);color:#6ea8fe;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.topbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tbtn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
+padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+#loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;color:var(--sub)}
+.spin{width:40px;height:40px;border:4px solid #2e3850;border-top-color:var(--accent);
+border-radius:50%;animation:sp 1s linear infinite;margin-bottom:12px}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="topbar">
+<a class="tbtn" href="/mathedu/">← 게시판으로 돌아가기</a>
+<button class="btn" onclick="refreshData()">🔄 새로고침</button>
+</div>
+<h1>📊 mathedu · 학습 현황 대시보드</h1>
+<p class="lead">학생별 · 퀴즈별 학습 진행 실황</p>
+
+<div class="stats-grid">
+  <div class="stat-card"><div class="num" id="totalStudents">-</div><div class="lbl">👥 학습 학생 수</div></div>
+  <div class="stat-card"><div class="num" id="totalAttempts">-</div><div class="lbl">📝 학습 시도 횟수</div></div>
+  <div class="stat-card"><div class="num" id="avgPct">-</div><div class="lbl">📈 평균 정답률</div></div>
+  <div class="stat-card"><div class="num" id="activeToday">-</div><div class="lbl">🟢 오늘 활동</div></div>
+</div>
+
+<div class="filter-bar">
+  <select id="quizFilter" onchange="applyFilter()"><option value="">전체 퀴즈</option></select>
+  <input type="text" id="nameFilter" placeholder="학생 이름 검색..." oninput="applyFilter()">
+</div>
+
+<div id="loading"><div class="spin"></div><p>데이터를 불러오는 중...</p></div>
+<table id="progressTable" style="display:none">
+  <thead><tr><th>학생</th><th>퀴즈</th><th>진행</th><th>정답</th><th>정답률</th><th>마지막 활동</th></tr></thead>
+  <tbody id="progressBody"></tbody>
+</table>
+</div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbypyb4LXL-Jx6PhKhLSklRsBAvKQBcMxIOhkukH4gMV-yKmOt0KtPrpLS9XxBy8FHXXZg/exec';
+
+let allData = [];
+
+async function fetchData() {
+  const res = await fetch(API_URL);
+  const json = await res.json();
+  return json.items || [];
+}
+
+function fmtDate(d) {
+  if (!d) return '-';
+  const dt = new Date(d);
+  if (isNaN(dt)) return d;
+  return dt.toLocaleString('ko-KR');
+}
+
+function isToday(d) {
+  if (!d) return false;
+  const dt = new Date(d);
+  const now = new Date();
+  return dt.getFullYear() === now.getFullYear() && dt.getMonth() === now.getMonth() && dt.getDate() === now.getDate();
+}
+
+function pctClass(pct) {
+  if (pct >= 70) return 'pill pill-high';
+  if (pct >= 40) return 'pill pill-mid';
+  return 'pill pill-low';
+}
+
+function updateStats(data) {
+  const students = new Set(data.map(r => r.student_name));
+  const today = data.filter(r => isToday(r.updated_at));
+  const totalCorrect = data.reduce((s, r) => s + (r.correct || 0), 0);
+  const totalSteps = data.reduce((s, r) => s + (r.total_steps || 0), 0);
+  const avgPct = totalSteps > 0 ? Math.round(totalCorrect / totalSteps * 100) : 0;
+
+  document.getElementById('totalStudents').textContent = students.size;
+  document.getElementById('totalAttempts').textContent = data.length;
+  document.getElementById('avgPct').textContent = avgPct + '%';
+  document.getElementById('activeToday').textContent = today.length;
+}
+
+function populateQuizFilter(data) {
+  const select = document.getElementById('quizFilter');
+  const quizzes = [...new Set(data.map(r => r.quiz_slug))].sort();
+  quizzes.forEach(q => {
+    const opt = document.createElement('option');
+    opt.value = q;
+    opt.textContent = q.length > 20 ? q.slice(0, 20) + '…' : q;
+    select.appendChild(opt);
+  });
+}
+
+function renderTable(data) {
+  const body = document.getElementById('progressBody');
+  body.innerHTML = '';
+
+  data.forEach(r => {
+    const tr = document.createElement('tr');
+    const pct = r.total_steps > 0 ? Math.round(r.correct / r.total_steps * 100) : 0;
+    const pctClass = pct >= 70 ? 'pill pill-high' : pct >= 40 ? 'pill pill-mid' : 'pill pill-low';
+    tr.innerHTML = `
+      <td>${r.student_name || '-'}</td>
+      <td>${(r.quiz_slug || '-').length > 20 ? r.quiz_slug.slice(0, 20) + '…' : (r.quiz_slug || '-')}</td>
+      <td>${r.current_step || 0} / ${r.total_steps || 0}</td>
+      <td>${r.correct || 0}개</td>
+      <td><span class="${pctClass}">${pct}%</span></td>
+      <td>${fmtDate(r.updated_at)}</td>`;
+    body.appendChild(tr);
+  });
+}
+
+function applyFilter() {
+  const quiz = document.getElementById('quizFilter').value;
+  const name = document.getElementById('nameFilter').value.trim().toLowerCase();
+  let filtered = allData;
+  if (quiz) filtered = filtered.filter(r => r.quiz_slug === quiz);
+  if (name) filtered = filtered.filter(r => (r.student_name || '').toLowerCase().includes(name));
+  renderTable(filtered);
+}
+
+function refreshData() { loadData(); }
+
+async function loadData() {
+  try {
+    allData = await fetchData();
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('progressTable').style.display = '';
+    updateStats(allData);
+    populateQuizFilter(allData);
+    applyFilter();
+  } catch (e) {
+    document.getElementById('loading').innerHTML = `<p style="color:var(--bad)">⚠️ 데이터를 불러올 수 없습니다.<br><small>${e.message}</small></p>`;
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>
