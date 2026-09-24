@@ -93,8 +93,65 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <div class="opts"></div>
 <p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>≤</b> — 작거나 같다(이하)</div><div><b>≥</b> — 크거나 같다(이상)</div><div><b>P(A)</b> — 사건 A의 확률 = 성공/전체</div></div>
-<h2>제1단계 · 주사위 기초</h2><div class="know"><h3>먼저 알아야 할 지식</h3>주사위는 1~6까지 6가지 눈이 나온다.</div><div class="q" data-exp="1,2,3,4,5,6으로 모두 6가지."><div class="lvl">문항</div><div class="stem">주사위를 한 번 굴릴 때 나올 수 있는 눈은?</div><div class="opts"><div class="opt"><span class="n">1</span>1가지</div><div class="opt"><span class="n">2</span>3가지</div><div class="opt"><span class="n">3</span>4가지</div><div class="opt"><span class="n">4</span>5가지</div><div class="opt"><span class="n">5</span>6가지</div></div><div class="exp"></div></div><h2>제2단계 · 패리티</h2><div class="know"><h3>먼저 알아야 할 지식</h3>뒤집기 2번은 원래대로(패리티 원리).</div><div class="q" data-exp="2번=짝수 번이므로 원래 상태 유지."><div class="lvl">문항</div><div class="stem">앞면 카드를 두 번 뒤집하면?</div><div class="opts"><div class="opt"><span class="n">1</span>원래와 같다</div><div class="opt"><span class="n">2</span>뒷면</div><div class="opt"><span class="n">3</span>사라진다</div><div class="opt"><span class="n">4</span>두 장</div><div class="opt"><span class="n">5</span>모름</div></div><div class="exp"></div></div>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><b>상세 풀이(예시)</b>: 초기 1·6 뒷면, 2~5 앞면. 목표는 모두 앞면이므로 1·6은 홀수 번, 2~5는 짝수 번 뒤집혀야 함. 전수조사로 160/1296 = <b>10/81</b>.</p></div><div class="q" data-exp="전수조사 160/1296 = 10/81"><div class="lvl">최종 본문항</div><div class="stem">실험 4번 후 6장 모두 앞면일 확률은? (예시 폴백)</div><div class="opts"><div class="opt"><span class="n">1</span>19/162</div><div class="opt"><span class="n">2</span>13/108</div><div class="opt"><span class="n">3</span>10/81</div><div class="opt"><span class="n">4</span>41/324</div><div class="opt"><span class="n">5</span>7/54</div></div><div class="exp"></div></div>
+<h2>제1단계 · 주사위 기초</h2><div class="know"><h3>먼저 알아야 할 지식</h3>주사위는 1~6까지 6가지 눈이 나온다.</div><div class="q" data-exp="1,2,3,4,5,6으로 모두 6가지."><div class="lvl">문항</div><div class="stem">주사위를 한 번 굴릴 때 나올 수 있는 눈은?</div><div class="opts"><div class="opt"><span class="n">1</span>1가지</div><div class="opt"><span class="n">2</span>3가지</div><div class="opt"><span class="n">3</span>4가지</div><div class="opt"><span class="n">4</span>5가지</div><div class="opt"><span class="n">5</span>6가지</div></div><div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script></div><h2>제2단계 · 패리티</h2><div class="know"><h3>먼저 알아야 할 지식</h3>뒤집기 2번은 원래대로(패리티 원리).</div><div class="q" data-exp="2번=짝수 번이므로 원래 상태 유지."><div class="lvl">문항</div><div class="stem">앞면 카드를 두 번 뒤집하면?</div><div class="opts"><div class="opt"><span class="n">1</span>원래와 같다</div><div class="opt"><span class="n">2</span>뒷면</div><div class="opt"><span class="n">3</span>사라진다</div><div class="opt"><span class="n">4</span>두 장</div><div class="opt"><span class="n">5</span>모름</div></div><div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script></div>
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><b>상세 풀이(예시)</b>: 초기 1·6 뒷면, 2~5 앞면. 목표는 모두 앞면이므로 1·6은 홀수 번, 2~5는 짝수 번 뒤집혀야 함. 전수조사로 160/1296 = <b>10/81</b>.</p></div><div class="q" data-exp="전수조사 160/1296 = 10/81"><div class="lvl">최종 본문항</div><div class="stem">실험 4번 후 6장 모두 앞면일 확률은? (예시 폴백)</div><div class="opts"><div class="opt"><span class="n">1</span>19/162</div><div class="opt"><span class="n">2</span>13/108</div><div class="opt"><span class="n">3</span>10/81</div><div class="opt"><span class="n">4</span>41/324</div><div class="opt"><span class="n">5</span>7/54</div></div><div class="exp"></div>
+<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
+<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+<script>
+function reportIssue(btn){{
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=btn.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var url=window._sheetsApiUrl;
+  if(url){{
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
+  }}
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='block';
+  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
+}}
+</script></div>
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 10/81</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>

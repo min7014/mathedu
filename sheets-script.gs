@@ -17,7 +17,6 @@ function doPost(e) {
       return jsonOutput({ ok: false, error: '필수 필드 누락' });
     }
     
-    // 기존 행 찾기
     var existingRow = findRow(sheet, quizSlug, studentName);
     var now = new Date();
     var timeStr = now.toISOString().replace('T', ' ').substring(0, 19);
@@ -35,6 +34,11 @@ function doPost(e) {
 }
 
 function doGet(e) {
+  // Handle report action
+  if (e && e.parameter && e.parameter.action === 'report') {
+    return handleReport(e.parameter);
+  }
+  
   try {
     var sheet = getOrCreateSheet();
     var quizFilter = ((e && e.parameter && e.parameter.quiz) || '').trim();
@@ -59,6 +63,30 @@ function doGet(e) {
     
     items.sort(function(a, b) { return (b.updated_at || '').localeCompare(a.updated_at || ''); });
     return jsonOutput({ items: items.slice(0, 200) });
+  } catch (err) {
+    return jsonOutput({ ok: false, error: err.toString() });
+  }
+}
+
+function handleReport(params) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName('reports');
+    if (!sheet) {
+      sheet = ss.insertSheet('reports');
+      sheet.appendRow(['timestamp', 'quiz_slug', 'question_num', 'reporter']);
+      sheet.getRange(1, 1, 1, 4).setFontWeight('bold');
+    }
+    
+    var now = new Date();
+    sheet.appendRow([
+      now.toISOString().replace('T', ' ').substring(0, 19),
+      (params.quiz || '').toString(),
+      (params.q || '').toString(),
+      (params.name || '익명').toString()
+    ]);
+    
+    return jsonOutput({ ok: true });
   } catch (err) {
     return jsonOutput({ ok: false, error: err.toString() });
   }
