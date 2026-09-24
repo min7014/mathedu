@@ -166,68 +166,10 @@ def _level_html(lvl):
     return f'<h2>{_esc(lvl.get("title",""))}</h2>{know}{qs}'
 
 def _tracking_html(quiz_slug, sheets_api_url=''):
-    """학생이 이름 입력 → 문제 풀면서 실시간 진행 전송 + 최종 제출."""
-    slug_js = quiz_slug.replace("'", "\\'")
-    return f"""<div id="trackSubmit" style="text-align:center;margin:20px 0">
-<h3>📝 먼저 이름을 입력하세요</h3>
-<p style="color:#9aa6c0;font-size:.88rem">이름을 입력해야 학습 기록이 저장됩니다.</p>
-<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0">
-<input type="text" id="studentName" placeholder="이름 입력" onkeydown="if(event.key==='Enter)this.blur()" onchange="window._studentName=this.value.trim()">
-<button class="btn" id="btnRegister" onclick="registerName()">이름 등록</button>
-</div>
-</div>
-<script>
-window._studentName='';
-window._sheetsApiUrl='{sheets_api_url}';
-window._nameLocked=false;
-function registerName(){{
-  var inp=document.getElementById('studentName');
-  var name=inp.value.trim();
-  if(!name){{alert('이름을 입력하세요');inp.focus();return;}}
-  window._studentName=name;
-  window._nameLocked=true;
-  document.getElementById('trackSubmit').innerHTML='<p style="color:#3ddc97;font-weight:700">✅ '+name+'님, 학습을 시작하세요!</p>';
-  // reveal questions
-  document.querySelectorAll('.q').forEach(function(q){{
-    q.style.display='';
-    q.addEventListener('click', function(){{ sendProgress(); }});
-  }});
-  sendProgress();
-  if(window.MathJax&&MathJax.typesetPromise){{MathJax.typesetPromise();}}
-}}
-function sendProgress(){{
-  var name=(window._studentName||'').trim();
-  if(!name)return;
-  var qs=document.querySelectorAll('.q:not([style*="display: none"])');
-  var total=qs.length;
-  var done=document.querySelectorAll('.q.done:not([style*="display: none"])');
-  var correct=0;
-  document.querySelectorAll('.q.done:not([style*="display: none"])').forEach(function(q){{
-    var c=q.querySelector('.opt.correct');
-    if(c)correct++;
-  }});
-  var current=done.length;
-  if(current===0&&window._nameLocked===false)return;
-  var url=window._sheetsApiUrl||'/api/progress';
-  fetch(url,{{
-    method:'POST',
-    headers:{{'Content-Type':'application/json'}},
-    body:JSON.stringify({{
-      quiz_slug:'{slug_js}',
-      student_name:name,
-      current_step:current,
-      total_steps:total,
-      correct:correct
-    }})
-  }}).catch(()=>{{}});
-}}
-// Initially hide all questions until name is registered
-document.addEventListener('DOMContentLoaded',function(){{
-  if(!window._nameLocked){{
-    document.querySelectorAll('.q').forEach(function(q){{q.style.display='none';}});
-  }}
-}});
-</script>"""
+    """Full-screen name gate."""
+    slug_js = quiz_slug.replace("'", "\\\\'")
+    return f"""<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">&#x1f4d8; mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">&#x1f4dd; 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName='';window._sheetsApiUrl='{sheets_api_url}';function registerName(){var n=document.getElementById('studentName').value.trim();if(!n){alert('이름을 입력하세요');return;}window._studentName=n;document.getElementById('trackFull').remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||'').trim();if(!name)return;var qs=document.querySelectorAll('.q');var total=qs.length;var done=document.querySelectorAll('.q.done');var correct=0;done.forEach(function(q){if(q.querySelector('.opt.correct'))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({quiz_slug:'{slug_js}',student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll('.q').forEach(function(q){q.addEventListener('click',function(){sendProgress();});});document.getElementById('studentName').addEventListener('keydown',function(e){if(e.key==='Enter')registerName();});</script>"""
+
 
 def generate_html(data):
     sym = "".join(
