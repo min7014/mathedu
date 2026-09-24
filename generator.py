@@ -199,7 +199,7 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
     html += 'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
     html += 'if(total===0)return;'
     html += 'fetch(window._sheetsApiUrl,{'
-    html += 'method:"POST",headers:{"Content-Type":"application/json"},'
+    html += 'method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},'
     html += 'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
     html += '}).catch(function(){});'
     html += '}'
