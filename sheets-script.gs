@@ -74,8 +74,8 @@ function handleReport(params) {
     var sheet = ss.getSheetByName('reports');
     if (!sheet) {
       sheet = ss.insertSheet('reports');
-      sheet.appendRow(['timestamp', 'quiz_slug', 'question_num', 'reporter']);
-      sheet.getRange(1, 1, 1, 4).setFontWeight('bold');
+      sheet.appendRow(['timestamp', 'quiz_slug', 'question_num', 'reporter', 'text']);
+      sheet.getRange(1, 1, 1, 5).setFontWeight('bold');
     }
     
     var now = new Date();
@@ -83,7 +83,8 @@ function handleReport(params) {
       now.toISOString().replace('T', ' ').substring(0, 19),
       (params.quiz || '').toString(),
       (params.q || '').toString(),
-      (params.name || '익명').toString()
+      (params.name || '익명').toString(),
+      (params.text || '').toString()
     ]);
     
     return jsonOutput({ ok: true });
