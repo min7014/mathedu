@@ -107,8 +107,9 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
-qs.forEach(q=>{{const ans=+q.dataset.ans;const exp=q.querySelector('.exp');
-exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
+qs.forEach(q=>{{const idx=Array.from(qs).indexOf(q);const ans=+window._answers[idx]||1;
+const exp=q.querySelector('.exp');exp.innerHTML=q.dataset.exp||'';
+const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{{o.addEventListener('click',()=>{{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');}});
 if(i+1==ans){{o.classList.add('correct');pts++;}}else{{o.classList.add('wrong');}}
@@ -133,7 +134,7 @@ function sendProgress(){{
     method: 'POST',
     headers: {{'Content-Type': 'application/json'}},
     body: JSON.stringify({{
-      quiz_slug: '{slug_js}',
+      quiz_slug: '{quiz_slug_val}',
       student_name: name,
       current_step: current,
       total_steps: total,
@@ -153,7 +154,7 @@ def _question_html(q):
         f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
         for i, o in enumerate(q.get("options", [])))
     exp = _esc(q.get("exp", "")).replace("\n", "<br>")
-    return (f'<div class="q" data-ans="{q.get("answer",1)}" data-exp="{exp}">'
+    return (f'<div class="q" answer",1)}" data-exp="{exp}">'
             f'<div class="lvl">문항</div>'
             f'<div class="stem">{_esc(q.get("stem","") )}</div>'
             f'<div class="opts">{opts}</div>'
@@ -249,7 +250,7 @@ def generate_html(data):
         f'{diagram_html}'
         f'{figure_html}'
         f'<div class="sol">{fsol}</div>'
-        f'<div class="q" data-ans="{f.get("answer",1)}" data-exp="{fexp}">'
+        f'<div class="q" answer",1)}" data-exp="{fexp}">'
         f'<div class="lvl">최종 본문항</div>'
         f'<div class="stem">{_esc(f.get("stem","") )}</div>'
         f'<div class="opts">{fopts}</div>'
@@ -268,12 +269,14 @@ def generate_html(data):
         except Exception:
             pass
     tracking_block = _tracking_html(data.get("slug", ""), _sheets_url)
+    slug_js = data.get("slug", "").replace("'", "\\'")
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),
         original_block=original_block,
         symbols_block=symbols_block, levels_block=levels_block,
         solution_block=solution_block, final_ans=_esc(final_ans),
-        tracking_block=tracking_block)
+        tracking_block=tracking_block,
+        quiz_slug_val=data.get("slug", "").replace("'", "\\'"))
     # ★ 안전장치: 원본 캡처 이미지(img_xxx.png 등)가 게시물에 그대로 박이는 것 차단
     html = re.sub(r'<img[^>]*src=["\']?[^\"\']*img_[0-9a-f]+\.[a-z]+["\']?[^>]*>', '', html, flags=re.I)
     return html
