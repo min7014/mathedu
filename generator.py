@@ -99,10 +99,10 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
 {symbols_block}
 {levels_block}
+{tracking_block}
 {solution_block}
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 {final_ans}</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
-{tracking_block}
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
