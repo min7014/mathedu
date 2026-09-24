@@ -125,24 +125,44 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
   <div class="stem">100점 1개, 50점 1개의 평균은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 50</div><div class="opt"><span class="n">2</span> ② 60</div><div class="opt"><span class="n">3</span> ③ 70</div><div class="opt"><span class="n">4</span> ④ 75</div><div class="opt"><span class="n">5</span> ⑤ 100</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="100×1/2=50입니다.">
   <div class="lvl">L2</div>
@@ -150,24 +170,44 @@ function reportIssue(btn){{
   <div class="stem">100점과 50점이 각각 절반(1/2)씩일 때, 100의 기여분은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 25</div><div class="opt"><span class="n">2</span> ② 50</div><div class="opt"><span class="n">3</span> ③ 75</div><div class="opt"><span class="n">4</span> ④ 100</div><div class="opt"><span class="n">5</span> ⑤ 12.5</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="문제에서 P(X=1), P(X=2)로 주어졌습니다.">
   <div class="lvl">L3</div>
@@ -175,24 +215,44 @@ function reportIssue(btn){{
   <div class="stem">이 문제에서 X가 가질 수 있는 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 0과 1</div><div class="opt"><span class="n">2</span> ② 1과 2</div><div class="opt"><span class="n">3</span> ③ 2와 3</div><div class="opt"><span class="n">4</span> ④ 1과 3</div><div class="opt"><span class="n">5</span> ⑤ 0과 2</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="1/2+1/2=1입니다.">
   <div class="lvl">L4</div>
@@ -200,24 +260,44 @@ function reportIssue(btn){{
   <div class="stem">P(X=1)=1/2, P(X=2)=1/2 일 때 두 확률의 합은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle \dfrac14$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac12$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac34$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 1$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 2$</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="1×1/2=1/2입니다.">
   <div class="lvl">L5</div>
@@ -225,24 +305,44 @@ function reportIssue(btn){{
   <div class="stem">X=1 이고 P(X=1)=1/2 일 때의 기여분은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle \dfrac14$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac12$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 1$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle \dfrac32$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 2$</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="2×1/2=1입니다.">
   <div class="lvl">L6</div>
@@ -250,24 +350,44 @@ function reportIssue(btn){{
   <div class="stem">X=2 이고 P(X=2)=1/2 일 때의 기여분은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle \dfrac14$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac12$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle 1$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle \dfrac32$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle 2$</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="E는 expectation(기댓값)을 뜻합니다.">
   <div class="lvl">L7</div>
@@ -275,24 +395,44 @@ function reportIssue(btn){{
   <div class="stem">$\displaystyle E(X)$ 가 뜻하는 것은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① 최빈값</div><div class="opt"><span class="n">2</span> ② 기댓값(평균)</div><div class="opt"><span class="n">3</span> ③ 중앙값</div><div class="opt"><span class="n">4</span> ④ 분산</div><div class="opt"><span class="n">5</span> ⑤ 범위</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="1/2+1=3/2(=1.5)입니다.">
   <div class="lvl">L8</div>
@@ -300,24 +440,44 @@ function reportIssue(btn){{
   <div class="stem">$\displaystyle \dfrac12 + 1$ 의 값은?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle \dfrac12$</div><div class="opt"><span class="n">2</span> ② $\displaystyle 1$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac32$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 2$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \dfrac52$</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="1/2+1=3/2입니다.">
   <div class="lvl">L9</div>
@@ -325,24 +485,44 @@ function reportIssue(btn){{
   <div class="stem">$\displaystyle E(X)=1\cdot\frac12+2\cdot\frac12$ 의 계산 결과는?</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 1$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac54$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac32$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 2$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \dfrac52$</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div><div class="q" data-exp="1·1/2+2·1/2=3/2입니다.">
   <div class="lvl">L10</div>
@@ -350,24 +530,44 @@ function reportIssue(btn){{
   <div class="stem">확률변수 $\displaystyle X$ 가 $\displaystyle P(X=1)=\dfrac12,\;P(X=2)=\dfrac12$ 일 때, 기댓값 $\displaystyle E(X)$ 를 구하시오.</div>
   <div class="opts"><div class="opt"><span class="n">1</span> ① $\displaystyle 1$</div><div class="opt"><span class="n">2</span> ② $\displaystyle \dfrac54$</div><div class="opt"><span class="n">3</span> ③ $\displaystyle \dfrac32$</div><div class="opt"><span class="n">4</span> ④ $\displaystyle 2$</div><div class="opt"><span class="n">5</span> ⑤ $\displaystyle \dfrac52$</div></div>
   <div class="exp"></div>
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this.previousElementSibling.previousElementSibling.previousElementSibling)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 <script>
-function reportIssue(btn){{
+function toggleReport(btn){
+  var form=btn.nextElementSibling;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
   var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
+  var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
+  if(url){
+    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
+}
 </script>
 </div>
 
