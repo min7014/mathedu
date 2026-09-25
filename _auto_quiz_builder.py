@@ -69,16 +69,21 @@ def make_smart_fallback_title(content):
 def parse_request_text(text):
     """
     [문제 생성 요청]
+    슬러그: {slug}
     제목: {title}
     내용: {content}
     정답/힌트: {hint}
     이메일: {email}
     """
+    slug = ""
     title = ""
     content = ""
     hint = ""
     email = ""
     
+    slug_m = re.search(r'슬러그:\s*([a-f0-9]{8})', text, re.I)
+    if slug_m: slug = slug_m.group(1).strip()
+
     title_m = re.search(r'제목:\s*(.*?)(?=\n내용:|\n정답|\n이메일|\Z)', text, re.S)
     if title_m: title = title_m.group(1).strip()
     
@@ -94,7 +99,7 @@ def parse_request_text(text):
     if not title and not content:
         content = text
         
-    return title, content or text, hint, email
+    return title, content or text, hint, email, slug
 
 HERMES_BIN = r'C:\Users\min\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe'
 if not os.path.exists(HERMES_BIN):
@@ -249,12 +254,12 @@ Rules:
         }
     }
 
-def create_and_publish_quiz(title, content, hint, reporter, email=""):
+def create_and_publish_quiz(title, content, hint, reporter, email="", requested_slug=""):
     """
     퀴즈를 생성하고 board/{slug}.html 저장, index.json 등록 및 Git 푸시까지 완료합니다.
     제목이 없을 경우 문제 내용을 분석해 고품질 수학 제목을 자동 생성합니다.
     """
-    print(f"\n[AI_BUILDER] 신규 퀴즈 생성 시작 (신청자: {reporter}, 입력 제목: '{title or '(없음 - 자동생성)'}', 이메일: '{email or '(없음)'}')")
+    print(f"\n[AI_BUILDER] 신규 퀴즈 생성 시작 (신청자: {reporter}, 입력 제목: '{title or '(없음 - 자동생성)'}', 슬러그: '{requested_slug or '(자동발급)'}')")
     
     # 1. 퀴즈 구조 생성 (AI가 지문/수식을 분석하여 문제 제목 자동 도출)
     quiz_data = build_quiz_with_ai(title, content, hint)
@@ -273,8 +278,12 @@ def create_and_publish_quiz(title, content, hint, reporter, email=""):
     quiz_data["title"] = final_title
     print(f"  ↳ 확정된 퀴즈 제목: '{final_title}'")
     
-    # 3. 고유 slug 생성 (8자리 hex)
-    slug = hashlib.md5((final_title + str(time.time())).encode('utf-8')).hexdigest()[:8]
+    # 3. 고유 slug 생성 (사전 발급된 requested_slug 우선 채택)
+    if requested_slug and re.match(r'^[a-f0-9]{8}$', requested_slug.strip().lower()):
+        slug = requested_slug.strip().lower()
+        print(f"  ↳ 사전 발급된 고유 슬러그 채택: {slug}")
+    else:
+        slug = hashlib.md5((final_title + str(time.time())).encode('utf-8')).hexdigest()[:8]
     quiz_data["slug"] = slug
     quiz_data["original_content"] = content
     
