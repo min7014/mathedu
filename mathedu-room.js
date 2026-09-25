@@ -1,13 +1,12 @@
 /**
- * mathedu-room.js — 무가입 교사-학생 실시간 수업 연동 모듈
+ * mathedu-room.js — 무가입 교사-학생 실시간 수업 연동 모듈 (v2.0)
  * 
- * 1. 학생: ?room=ROOM_ID 링크로 접속 시 자동으로 수업 방에 참여,
- *    이름 입력 및 실시간 풀이 진행 시 [ROOM_ID] 태그와 room_id를 함께 전송.
- * 2. 교사: 상단 [🚀 수업 열기] 버튼 클릭 시 3초 만에 고유 수업 코드, 
- *    학생용 링크, 빔프로젝터용 대형 QR코드, 실시간 대시보드 링크를 즉시 발급.
+ * 1. 학생: ?room=ROOM_ID 링크 접속 시 자동 수업 참여,
+ *    이름 입력 및 실시간 풀이 진행 시 [ROOM_ID] 태그 및 room_id 동시 전송.
+ * 2. 교사: 각 문제 화면 어디서나(시작 모달, 문제 상단 배너, 플로팅 버튼, 상단바)
+ *    클릭 한 번으로 3초 만에 수업 코드, 학생용 링크, 칠판 빔프로젝터용 대형 QR 발급.
  */
 (function() {
-  // 1. 방 ID 파싱
   var urlParams = new URLSearchParams(window.location.search);
   var roomId = (urlParams.get('room') || '').trim();
   window._roomId = roomId;
@@ -15,22 +14,29 @@
   // 퀴즈 slug 추출
   var currentSlug = window.location.pathname.split('/').pop().replace('.html', '') || 'quiz';
 
-  // 2. DOMContentLoaded 시 UI 장식 및 연동
   function initRoom() {
-    // 2-1. 학생이 특정 방에 참여 중인 경우 UI 표시
+    // 1. 학생이 특정 방에 참여 중인 경우 UI 표시
     if (roomId) {
       applyStudentRoomUI(roomId);
     }
 
-    // 2-2. 상단바에 [수업 열기 / QR] 교사용 버튼 추가
-    injectTeacherButton();
+    // 2. 시작 모달(#trackFull)에 선생님 전용 빠른 액션 추가
+    enhanceTrackFullModal();
 
-    // 2-3. sendProgress 가로채기 (room_id 및 [ROOM_ID] 태그 주입)
+    // 3. 문제 페이지 상단에 눈에 띄는 [이 문제로 수업 개설] 배너 삽입
+    injectProblemPageBanner();
+
+    // 4. 스크롤 중에도 언제든 누를 수 있는 플로팅 [🚀 이 문제로 수업 열기] 버튼
+    injectFloatingClassButton();
+
+    // 5. 상단바 tbtn에 버튼 추가
+    injectTeacherTopbarButton();
+
+    // 6. sendProgress 가로채기 (room_id 및 [ROOM_ID] 태그 주입)
     patchSendProgress();
   }
 
   function applyStudentRoomUI(rId) {
-    // trackFull 모달에 방 배너 주입
     var trackFull = document.getElementById('trackFull');
     if (trackFull) {
       var h3 = trackFull.querySelector('h3');
@@ -50,7 +56,6 @@
       }
     }
 
-    // 상단바에 수업 뱃지 추가
     var topbar = document.querySelector('.topbar');
     if (topbar) {
       var activeRoomBadge = document.createElement('div');
@@ -60,20 +65,99 @@
     }
   }
 
-  function injectTeacherButton() {
+  function enhanceTrackFullModal() {
+    var trackFull = document.getElementById('trackFull');
+    if (!trackFull) return;
+
+    var teacherRow = document.createElement('div');
+    teacherRow.style.cssText = 'margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center';
+
+    teacherRow.innerHTML = 
+      '<button type="button" id="btnTeacherOpenInModal" style="background:rgba(124,196,255,.18);color:#7cc4ff;border:1px solid rgba(124,196,255,.45);border-radius:10px;padding:9px 18px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+        '👩‍🏫 선생님이신가요? 3초 만에 수업 개설 (QR)' +
+      '</button>' +
+      '<button type="button" id="btnTeacherPreviewInModal" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:10px;padding:9px 16px;font-size:0.86rem;cursor:pointer;transition:.15s">' +
+        '👀 문제 먼저 둘러보기' +
+      '</button>';
+
+    var formDiv = trackFull.querySelector('div');
+    if (formDiv) {
+      formDiv.parentNode.insertBefore(teacherRow, formDiv.nextSibling);
+    } else {
+      trackFull.appendChild(teacherRow);
+    }
+
+    document.getElementById('btnTeacherOpenInModal').onclick = function() {
+      trackFull.remove();
+      openClassCreatorModal(currentSlug);
+    };
+
+    document.getElementById('btnTeacherPreviewInModal').onclick = function() {
+      trackFull.remove();
+      window._studentName = '선생님(미리보기)';
+    };
+  }
+
+  function injectProblemPageBanner() {
+    var wrap = document.querySelector('.wrap');
+    if (!wrap) return;
+
+    var banner = document.createElement('div');
+    banner.className = 'teacher-class-banner';
+    banner.style.cssText = 'background:linear-gradient(90deg, rgba(124,196,255,.14), rgba(167,139,250,.14));border:1px solid rgba(124,196,255,.35);border-radius:14px;padding:14px 18px;margin:16px 0 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)';
+
+    banner.innerHTML = 
+      '<div>' +
+        '<div style="font-weight:800;font-size:1rem;color:#7cc4ff;display:flex;align-items:center;gap:6px">' +
+          '👩‍🏫 이 문제로 학급 수업을 시작할 수 있습니다' +
+        '</div>' +
+        '<div style="font-size:0.83rem;color:#aab4d4;margin-top:3px">' +
+          '회원가입 없이 3초 만에 수업 코드를 만들고, 교실 칠판에 학생용 대형 QR코드를 띄워보세요.' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" onclick="openClassCreatorModal(\'' + currentSlug + '\')" style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:10px;padding:10px 20px;font-size:0.9rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.35);transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+        '🚀 이 문제로 수업 열기 (QR / 대시보드)' +
+      '</button>';
+
+    // h1 다음 또는 score 다음 삽입
+    var h1 = wrap.querySelector('h1');
+    if (h1 && h1.nextSibling) {
+      wrap.insertBefore(banner, h1.nextSibling);
+    } else {
+      var topbar = wrap.querySelector('.topbar');
+      if (topbar && topbar.nextSibling) {
+        wrap.insertBefore(banner, topbar.nextSibling);
+      }
+    }
+  }
+
+  function injectFloatingClassButton() {
+    var floatBtn = document.createElement('button');
+    floatBtn.id = 'floatClassBtn';
+    floatBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:30px;padding:12px 22px;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 20px rgba(124,196,255,.45);display:flex;align-items:center;gap:8px;transition:.2s';
+    floatBtn.innerHTML = '🚀 이 문제로 수업 열기';
+    floatBtn.title = '3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급';
+
+    floatBtn.onmouseover = function() { floatBtn.style.transform = 'translateY(-2px) scale(1.03)'; };
+    floatBtn.onmouseout = function() { floatBtn.style.transform = 'translateY(0) scale(1)'; };
+    floatBtn.onclick = function() { openClassCreatorModal(currentSlug); };
+
+    document.body.appendChild(floatBtn);
+  }
+
+  function injectTeacherTopbarButton() {
     var topbar = document.querySelector('.topbar');
     if (!topbar) return;
 
     var teacherBtn = document.createElement('button');
     teacherBtn.className = 'tbtn';
     teacherBtn.style.cssText = 'background:linear-gradient(90deg,rgba(124,196,255,.2),rgba(167,139,250,.2));border-color:rgba(124,196,255,.4);color:#eef2ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;';
-    teacherBtn.innerHTML = '🚀 수업 열기 (QR/대시보드)';
+    teacherBtn.innerHTML = '🚀 수업 열기 (QR)';
     teacherBtn.title = '선생님을 위한 3초 수업 생성 및 QR 발급';
     teacherBtn.onclick = function() {
       openClassCreatorModal(currentSlug);
     };
 
-    // 링크 복사 버튼 옆에 삽입
     var copyBtn = document.getElementById('copyBtn');
     if (copyBtn && copyBtn.nextSibling) {
       topbar.insertBefore(teacherBtn, copyBtn.nextSibling);
@@ -83,7 +167,6 @@
   }
 
   function patchSendProgress() {
-    // 기존 sendProgress를 래핑하여 room_id 주입
     var originalSendProgress = window.sendProgress;
     window.sendProgress = function() {
       var name = (window._studentName || '').trim();
@@ -98,7 +181,6 @@
       });
       if (total === 0) return;
 
-      // 방 코드가 있으면 이름 뒤에 [ROOM_ID] 태깅 및 room_id 필드 추가
       var rId = window._roomId || '';
       var studentNameWithRoom = rId ? (name + ' [' + rId + ']') : name;
 
@@ -125,12 +207,11 @@
     };
   }
 
-  // 3. 교사용 수업 생성기 모달 (3초 룸 생성 + QR + 대시보드 링크)
+  // 교사용 수업 생성기 모달 (3초 룸 생성 + QR + 대시보드 링크)
   window.openClassCreatorModal = function(slug) {
     var existing = document.getElementById('classCreatorModal');
     if (existing) existing.remove();
 
-    // 6자리 난수 방 코드 생성 (예: A8F2K9)
     var defaultRoom = 'MATH-' + Math.random().toString(36).substring(2, 6).toUpperCase();
 
     var origin = window.location.origin;
@@ -149,10 +230,10 @@
         '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="position:absolute;top:16px;right:18px;background:none;border:none;color:#9aa6c0;font-size:1.5rem;cursor:pointer">✕</button>' +
         '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(124,196,255,.15);color:#7cc4ff;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-bottom:10px">👩‍🏫 교사용 · 가입/로그인 불필요</div>' +
         '<h2 style="margin:0 0 6px;font-size:1.4rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">🚀 3초 만에 수업 개설하기</h2>' +
-        '<p style="margin:0 0 20px;color:#9aa6c0;font-size:.88rem">학생들에게 배포할 수업 코드가 생성되었습니다. 학생들은 가입 없이 링크나 QR로 즉시 참여합니다.</p>' +
+        '<p style="margin:0 0 20px;color:#9aa6c0;font-size:.88rem">선택하신 문제(<b>' + escapeHtml(slug) + '</b>)로 학생들에게 배포할 수업 코드가 생성되었습니다.</p>' +
 
         '<div style="background:#0d1020;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;margin-bottom:18px">' +
-          '<label style="display:block;font-size:.8rem;color:#7cc4ff;font-weight:700;margin-bottom:6px">수업 코드 / 방 이름</label>' +
+          '<label style="display:block;font-size:.8rem;color:#7cc4ff;font-weight:700;margin-bottom:6px">수업 코드 / 방 이름 (원하는 이름으로 수정 가능)</label>' +
           '<div style="display:flex;gap:8px">' +
             '<input type="text" id="customRoomInput" value="' + defaultRoom + '" style="flex:1;background:#1a2038;border:1px solid #2e3850;border-radius:10px;padding:10px 14px;color:#fff;font-size:1.05rem;font-weight:700;text-transform:uppercase">' +
             '<button id="btnRegenRoom" style="background:#222a3d;border:1px solid #2e3850;color:#9aa6c0;border-radius:10px;padding:0 14px;cursor:pointer;font-size:.85rem">🔄 재발급</button>' +
@@ -191,7 +272,6 @@
       document.getElementById('modalStudentUrlText').textContent = studentUrl;
       document.getElementById('modalQrImg').src = qrApiUrl;
 
-      // 로컬스토리지에 선생님의 개설 수업으로 자동 기록
       saveTeacherRoom(r, slug);
 
       document.getElementById('btnCopyStudentUrl').onclick = function() {
@@ -221,7 +301,6 @@
     updateUrls();
   };
 
-  // 4. 칠판 빔프로젝터용 대형 QR 화면
   function openProjectorScreen(url, rId) {
     var pModal = document.createElement('div');
     pModal.id = 'projectorScreenModal';
@@ -246,7 +325,6 @@
     try {
       var key = 'mathedu_teacher_rooms';
       var rooms = JSON.parse(localStorage.getItem(key) || '[]');
-      // 중복 제거 후 최신 수업을 맨 앞에 추가
       rooms = rooms.filter(function(item) { return item.room !== rId; });
       rooms.unshift({ room: rId, slug: slug, time: new Date().toISOString() });
       if (rooms.length > 20) rooms = rooms.slice(0, 20);
@@ -255,12 +333,11 @@
   }
 
   function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, function(c) {
+    return String(s || '').replace(/[&<>"']/g, function(c) {
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
 
-  // 초기화 실행
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRoom);
   } else {
