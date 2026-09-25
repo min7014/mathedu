@@ -72,24 +72,29 @@ def parse_request_text(text):
     제목: {title}
     내용: {content}
     정답/힌트: {hint}
+    이메일: {email}
     """
     title = ""
     content = ""
     hint = ""
+    email = ""
     
-    title_m = re.search(r'제목:\s*(.*?)(?=\n내용:|\n정답|\Z)', text, re.S)
+    title_m = re.search(r'제목:\s*(.*?)(?=\n내용:|\n정답|\n이메일|\Z)', text, re.S)
     if title_m: title = title_m.group(1).strip()
     
-    content_m = re.search(r'내용:\s*(.*?)(?=\n정답/힌트:|\n정답:|\Z)', text, re.S)
+    content_m = re.search(r'내용:\s*(.*?)(?=\n정답/힌트:|\n정답:|\n이메일:|\Z)', text, re.S)
     if content_m: content = content_m.group(1).strip()
     
-    hint_m = re.search(r'정답(?:/힌트)?:\s*(.*?)$', text, re.S)
+    hint_m = re.search(r'정답(?:/힌트)?:\s*(.*?)(?=\n이메일:|\n\[이미지|\Z)', text, re.S)
     if hint_m: hint = hint_m.group(1).strip()
+    
+    email_m = re.search(r'이메일:\s*([^\s\n\r]+@[^\s\n\r]+)', text)
+    if email_m: email = email_m.group(1).strip()
     
     if not title and not content:
         content = text
         
-    return title, content or text, hint
+    return title, content or text, hint, email
 
 HERMES_BIN = r'C:\Users\min\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe'
 if not os.path.exists(HERMES_BIN):
@@ -244,12 +249,12 @@ Rules:
         }
     }
 
-def create_and_publish_quiz(title, content, hint, reporter):
+def create_and_publish_quiz(title, content, hint, reporter, email=""):
     """
     퀴즈를 생성하고 board/{slug}.html 저장, index.json 등록 및 Git 푸시까지 완료합니다.
     제목이 없을 경우 문제 내용을 분석해 고품질 수학 제목을 자동 생성합니다.
     """
-    print(f"\n[AI_BUILDER] 신규 퀴즈 생성 시작 (신청자: {reporter}, 입력 제목: '{title or '(없음 - 자동생성)'}')")
+    print(f"\n[AI_BUILDER] 신규 퀴즈 생성 시작 (신청자: {reporter}, 입력 제목: '{title or '(없음 - 자동생성)'}', 이메일: '{email or '(없음)'}')")
     
     # 1. 퀴즈 구조 생성 (AI가 지문/수식을 분석하여 문제 제목 자동 도출)
     quiz_data = build_quiz_with_ai(title, content, hint)
@@ -320,10 +325,12 @@ def create_and_publish_quiz(title, content, hint, reporter):
 
     # 9. 텔레그램 알림 발송
     quiz_url = f"https://min7014.github.io/mathedu/board/{slug}.html"
+    email_line = f"• <b>완료 알림 이메일</b>: {email}\n" if email else ""
     telegram_msg = (
         f"🎉 <b>[mathedu 신규 퀴즈 자동 생성 & 배포 완료]</b>\n\n"
         f"• <b>제목</b>: {final_title}\n"
         f"• <b>출제자</b>: {reporter}\n"
+        f"{email_line}"
         f"• <b>퀴즈 링크</b>: <a href='{quiz_url}'>{quiz_url}</a>\n"
         f"• <b>배포 상태</b>: {'✅ 배포 완료' if deploy_ok else '⚠️ 로컬 생성 완료 (푸시 확인 필요)'}\n"
         f"• <b>생성 시각</b>: {now_str}"

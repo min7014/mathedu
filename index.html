@@ -347,6 +347,57 @@ header p {
   margin: 0 auto 16px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* 실시간 문제 접수 및 제작 현황 섹션 */
+.requests-board-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+.req-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: #14182e;
+  border: 1px solid #283250;
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: .15s;
+}
+.req-item-card:hover {
+  border-color: var(--accent);
+  background: #181d38;
+}
+.req-status-badge {
+  font-size: .75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.badge-pending {
+  background: rgba(245,158,11,.15);
+  border: 1px solid rgba(245,158,11,.4);
+  color: #fbbf24;
+}
+.badge-done {
+  background: rgba(34,197,94,.15);
+  border: 1px solid rgba(34,197,94,.4);
+  color: #4ade80;
+}
+.req-title {
+  font-size: .96rem;
+  font-weight: 700;
+  color: var(--txt);
+  margin-bottom: 4px;
+  word-break: break-all;
+}
 </style>
 </head>
 <body>
@@ -407,6 +458,22 @@ header p {
     <a href="dashboard-static.html" style="margin-left:auto;color:var(--accent);text-decoration:none;font-weight:700">전체 대시보드 ➔</a>
   </div>
 
+  <!-- 실시간 문제 출제 & AI 제작 현황 섹션 -->
+  <div class="requests-board-box" id="requestsBoardBox" style="display:none;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+      <div style="font-size:1.1rem;font-weight:700;color:var(--txt);display:flex;align-items:center;gap:8px;">
+        <span>📢 실시간 문제 출제 & 제작 현황</span>
+        <span class="count-badge" id="requestsCountBadge" style="background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);color:#fbbf24;">확인 중...</span>
+      </div>
+      <a href="create.html" style="font-size:.82rem;color:var(--good);text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:4px;">
+        ✨ 나도 새 문제 출제하기 ➔
+      </a>
+    </div>
+    <div id="requestsList" style="display:grid;gap:10px;">
+      <!-- 접수된 문제 목록 동적 렌더링 -->
+    </div>
+  </div>
+
   <!-- 퀴즈 목록 섹션 -->
   <div class="list-header">
     <div class="list-title">
@@ -456,6 +523,7 @@ header p {
   var activeTopic = '';
 
   renderRecentRooms();
+  loadQuizRequests();
 
   fetch('board/index.json')
     .then(function(res) {
@@ -578,6 +646,120 @@ header p {
     var fallbackSlug = (allItems && allItems.length > 0) ? allItems[0].slug : '48d0d98f';
     window.location.href = 'board/' + encodeURIComponent(fallbackSlug) + '.html?room=' + encodeURIComponent(code);
   };
+
+  function loadQuizRequests() {
+    var API_URL = 'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+    var box = document.getElementById('requestsBoardBox');
+    var list = document.getElementById('requestsList');
+    var badge = document.getElementById('requestsCountBadge');
+    if (!box || !list) return;
+
+    fetch(API_URL + '?action=reports&_t=' + Date.now())
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var reports = (data && data.reports) || [];
+        var requests = reports.filter(function(r) {
+          return r.quiz_slug === '_request_new';
+        });
+
+        if (requests.length === 0) {
+          box.style.display = 'none';
+          return;
+        }
+
+        // 최신순 정렬 (역순)
+        requests.reverse();
+        var pendingCount = requests.filter(function(r) { return !r.fix_timestamp; }).length;
+        if (badge) {
+          badge.textContent = pendingCount > 0 ? (pendingCount + '건 AI 제작 중') : '전체 제작 완료 (' + requests.length + '건)';
+          badge.className = 'count-badge ' + (pendingCount > 0 ? 'badge-pending' : 'badge-done');
+        }
+
+        // 최근 6개 표시
+        var displayItems = requests.slice(0, 6);
+        var html = '';
+
+        displayItems.forEach(function(r) {
+          var isDone = !!r.fix_timestamp;
+          var text = r.text || '';
+          
+          // 제목 추출
+          var titleMatch = text.match(/제목:\s*(.*?)(?=\n내용:|\n정답|\n이메일|\Z)/);
+          var title = titleMatch ? titleMatch[1].trim() : '';
+          if (!title) {
+            var firstLine = text.replace(/\[문제 생성 요청\]/g, '').trim().split('\n')[0];
+            title = firstLine || '새 수학 문제 요청';
+          }
+          if (title.length > 50) title = title.substring(0, 50) + '…';
+
+          // 신청자 및 시간
+          var reporter = r.reporter || '선생님';
+          var timeStr = formatRelativeTime(r.timestamp);
+
+          // 완료 링크 추출
+          var doneUrl = '';
+          if (isDone && r.fix_result) {
+            var urlMatch = r.fix_result.match(/https?:\/\/[^\s]+/);
+            if (urlMatch) {
+              doneUrl = urlMatch[0];
+            }
+          }
+
+          html += '<div class="req-item-card">';
+          html += '  <div style="flex:1;min-width:0;">';
+          html += '    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">';
+          if (isDone) {
+            html += '      <span class="req-status-badge badge-done">✅ 제작 완료</span>';
+          } else {
+            html += '      <span class="req-status-badge badge-pending">⏳ AI 제작 중</span>';
+          }
+          html += '      <span style="font-size:.8rem;color:var(--sub)">신청: <b>' + escapeHtml(reporter) + '</b></span>';
+          if (timeStr) {
+            html += '      <span style="font-size:.78rem;color:var(--sub)">· ' + escapeHtml(timeStr) + '</span>';
+          }
+          html += '    </div>';
+          html += '    <div class="req-title">' + escapeHtml(title) + '</div>';
+          html += '  </div>';
+
+          html += '  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">';
+          if (isDone && doneUrl) {
+            html += '    <a href="' + escapeHtml(doneUrl) + '" class="btn-solve" style="color:var(--good);border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.12)">문제 풀기 ➔</a>';
+          } else {
+            html += '    <span style="font-size:.82rem;color:var(--sub);font-weight:600;display:inline-flex;align-items:center;gap:4px">🤖 AI 자동 분석 중</span>';
+          }
+          html += '  </div>';
+          html += '</div>';
+        });
+
+        list.innerHTML = html;
+        box.style.display = 'block';
+
+        if (window.MathJax && MathJax.typesetPromise) {
+          MathJax.typesetPromise([list]).catch(function(){});
+        }
+      })
+      .catch(function(err) {
+        console.error('요청 현황 로드 실패:', err);
+      });
+  }
+
+  function formatRelativeTime(tsStr) {
+    if (!tsStr) return '';
+    try {
+      var d = new Date(tsStr);
+      if (isNaN(d.getTime())) return tsStr;
+      var diffSec = Math.floor((Date.now() - d.getTime()) / 1000);
+      if (diffSec < 60) return '방금 전';
+      var diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return diffMin + '분 전';
+      var diffHour = Math.floor(diffMin / 60);
+      if (diffHour < 24) return diffHour + '시간 전';
+      var diffDay = Math.floor(diffHour / 24);
+      return diffDay + '일 전';
+    } catch(e) {
+      return tsStr;
+    }
+  }
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, function(c) {

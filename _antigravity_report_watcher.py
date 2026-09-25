@@ -40,16 +40,24 @@ def save_processed(data):
     with open(PROCESSED_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def post_fix_report(timestamp, quiz_slug, question_num, result):
+def post_fix_report(timestamp, quiz_slug, question_num, result, email=None, quiz_url=None, title=None):
     sheets_url = get_sheets_url()
     try:
-        fix_data = json.dumps({
+        payload = {
             'action': 'fix_report',
             'timestamp': timestamp,
             'quiz_slug': quiz_slug,
             'question_num': str(question_num),
             'result': result
-        }).encode('utf-8')
+        }
+        if email:
+            payload['email'] = email
+        if quiz_url:
+            payload['quiz_url'] = quiz_url
+        if title:
+            payload['title'] = title
+            
+        fix_data = json.dumps(payload).encode('utf-8')
         req = urllib.request.Request(
             sheets_url, data=fix_data,
             headers={'Content-Type': 'application/json'},
@@ -102,12 +110,12 @@ def handle_new_quiz_request(r):
     print(f"\n✨ [AI_BUILDER] 신규 퀴즈 생성 요청 처리 시작 (신청자: {reporter})", flush=True)
     try:
         from _auto_quiz_builder import parse_request_text, create_and_publish_quiz
-        title, content, hint = parse_request_text(text)
-        res = create_and_publish_quiz(title, content, hint, reporter)
-        slug, quiz_url = res[0], res[1]
+        title, content, hint, email = parse_request_text(text)
+        res = create_and_publish_quiz(title, content, hint, reporter, email=email)
+        slug, quiz_url, final_title = res[0], res[1], res[2]
         
-        # 구글 시트에 처리 완료 기록
-        post_fix_report(ts, '_request_new', qn, f'✅ 생성완료: {quiz_url}')
+        # 구글 시트에 처리 완료 기록 및 이메일 자동 발송
+        post_fix_report(ts, '_request_new', qn, f'✅ 생성완료: {quiz_url}', email=email, quiz_url=quiz_url, title=final_title)
         
         proc = load_processed()
         proc['processed'].append({
@@ -115,10 +123,11 @@ def handle_new_quiz_request(r):
             'quiz_slug': '_request_new',
             'question_num': qn,
             'status': 'fixed',
-            'fix': f"신규 퀴즈 자동 생성 ({title}) → {quiz_url}"
+            'fix': f"신규 퀴즈 자동 생성 ({final_title}) → {quiz_url}",
+            'email': email
         })
         save_processed(proc)
-        print(f"✨ [AI_BUILDER] 신규 퀴즈 배포 완료: {quiz_url}\n", flush=True)
+        print(f"✨ [AI_BUILDER] 신규 퀴즈 배포 및 완료 알림 등록: {quiz_url} (알림 메일: {email or '없음'})\n", flush=True)
         return True
     except Exception as e:
         print(f"⚠️ [AI_BUILDER] 퀴즈 생성 중 오류 발생: {e}", flush=True)

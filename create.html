@@ -293,6 +293,12 @@ window.MathJax = {
         <input type="text" id="requesterName" placeholder="예: 3학년 수학 김선생님">
       </div>
 
+      <div class="form-group">
+        <label for="requesterEmail">📧 완료 알림 받을 이메일 (선택 사항)</label>
+        <div class="sub-label">이메일을 적어주시면, AI 퀴즈 제작 및 배포가 완료되는 즉시 <b>문제 링크</b>를 메일로 보내드립니다.</div>
+        <input type="email" id="requesterEmail" placeholder="예: teacher@school.kr 또는 user@gmail.com">
+      </div>
+
       <button type="submit" class="submit-btn" id="btnSubmit">
         🚀 단계별 퀴즈 생성 요청하기
       </button>
@@ -536,6 +542,7 @@ async function submitQuizRequest(e) {
   const contentInput = document.getElementById('quizContent').value.trim();
   const answer = document.getElementById('quizAnswer').value.trim();
   const name = document.getElementById('requesterName').value.trim() || '선생님';
+  const email = (document.getElementById('requesterEmail')?.value || '').trim();
 
   if (!contentInput && !attachedBlob) {
     alert('문제 내용이나 이미지를 입력해주세요.');
@@ -549,7 +556,7 @@ async function submitQuizRequest(e) {
   btn.disabled = true;
   btn.innerHTML = '⏳ 안티그래비티 시스템에 전달 중...';
 
-  const payloadText = `[문제 생성 요청]\n제목: ${title}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
+  const payloadText = `[문제 생성 요청]\n제목: ${title}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${email ? '\n이메일: ' + email : ''}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
 
   // Google Sheets에 비콘/요청 전송
   const targetUrl = `${API_URL}?action=report&quiz=_request_new&q=0&name=${encodeURIComponent(name)}&text=${encodeURIComponent(payloadText)}&_t=${Date.now()}`;
@@ -560,9 +567,15 @@ async function submitQuizRequest(e) {
   setTimeout(() => {
     document.getElementById('formBox').style.display = 'none';
     document.getElementById('summaryTitle').textContent = title ? `• 제목: ${title}` : '• 제목: 🤖 안티그래비티 AI가 문제 내용을 정밀 분석하여 자동 생성';
-    document.getElementById('summaryReq').textContent = `• 출제 신청자: ${name}`;
+    document.getElementById('summaryReq').innerHTML = `• 출제 신청자: ${escapeHtml(name)}${email ? '<br>• 📧 완료 알림 이메일: <b>' + escapeHtml(email) + '</b> (완료 시 링크 발송)' : ''}`;
     document.getElementById('successBox').style.display = 'block';
   }, 1000);
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, function(c) {
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
 }
 </script>
 </body>
