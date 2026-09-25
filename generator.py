@@ -143,9 +143,56 @@ function sendProgress(){{
 function copyLink(){{const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);}})
 .catch(()=>{{prompt('아래 링크를 복사하세요',location.href);}}}}
+function toggleReport(el){{
+  if(!el) return;
+  var wrap=el.closest ? el.closest('.report-wrap') : el.parentElement;
+  if(!wrap) return;
+  var btn=wrap.querySelector('.report-btn');
+  var form=wrap.querySelector('.report-form');
+  if(!btn||!form) return;
+  if(form.style.display==='none'){{
+    form.style.display='block';
+    btn.style.display='none';
+  }} else {{
+    form.style.display='none';
+    btn.style.display='block';
+  }}
+}}
+function submitReport(btn){{
+  var wrap=btn.closest('.report-wrap');
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=wrap.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  if(url){{
+    var img=new Image();
+    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  }}
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){{
+    wrap.querySelector('.report-msg').style.display='none';
+    wrap.querySelector('.report-btn').style.display='block';
+  }},4000);
+}}
 </script></body></html>"""
 
 def _esc(s): return html.escape(str(s))
+
+REPORT_WRAP_HTML = '''<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>'''
 
 def _question_html(q):
     opts = "".join(
@@ -156,7 +203,8 @@ def _question_html(q):
             f'<div class="lvl">문항</div>'
             f'<div class="stem">{_esc(q.get("stem","") )}</div>'
             f'<div class="opts">{opts}</div>'
-            f'<div class="exp"></div></div>')
+            f'<div class="exp"></div>'
+            f'{REPORT_WRAP_HTML}</div>')
 
 def _level_html(lvl):
     know = ""
@@ -242,7 +290,8 @@ def generate_html(data):
         f'<div class="lvl">최종 본문항</div>'
         f'<div class="stem">{_esc(f.get("stem","") )}</div>'
         f'<div class="opts">{fopts}</div>'
-        f'<div class="exp"></div></div>')
+        f'<div class="exp"></div>'
+        f'{REPORT_WRAP_HTML}</div>')
     final_ans = ""
     try: final_ans = f.get("options", [])[int(f.get("answer", 1)) - 1]
     except Exception: final_ans = ""

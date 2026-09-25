@@ -95,9 +95,81 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <h1>📘 이차함수 접선과 삼각형 넓이</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>y&#x27;</b> — 함수 y의 도함수(변화율)</div><div><b>\ell</b> — 접선(tangent line)</div><div><b>S</b> — 도형의 넓이(면적)</div><div><b>O</b> — 원점(origin)</div></div>
-<h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>도함수의 기본 공식: 거듭제곱 함수 $y = x^n$의 도함수는 $\frac{d}{dx}x^n = nx^{n-1}$. 특히 $y = x^2$의 도함수는 $y&#x27; = 2x$이다. 도함수는 특정 점에서의 접선의 기울기를 나타낸다.</div><div class="q" data-ans="2" data-exp="거듭제곱 미분 법칙에 따라 $\frac{d}{dx}x^n = nx^{n-1}$. 여기서 $n=2$이므로 $y&#x27; = 2x$."><div class="lvl">문항</div><div class="stem">$y = x^2$의 도함수 $y&#x27;$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$x$</div><div class="opt"><span class="n">2</span>$2x$</div><div class="opt"><span class="n">3</span>$x^2$</div><div class="opt"><span class="n">4</span>$2x^2$</div><div class="opt"><span class="n">5</span>$\frac{x^3}{3}$</div></div><div class="exp"></div></div><h2>🔰 제1단계 · 접선의 방정식 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>점 $(a, f(a))$에서의 접선 방정식은 $y - f(a) = f&#x27;(a)(x - a)$이다. 기울기 $f&#x27;(a)$와 점 $(a, f(a))$를 알면 접선의 방정식을 유일하게 결정할 수 있다.</div><div class="q" data-ans="2" data-exp="$f&#x27;(x) = 2x$이므로 $f&#x27;(2) = 4$ (기울기). 접선: $y - 4 = 4(x - 2)$ → $y = 4x - 4$."><div class="lvl">문항</div><div class="stem">$y = x^2$ 위의 점 $(2,\, 4)$에서의 접선 $\ell$의 방정식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$y = 2x - 4$</div><div class="opt"><span class="n">2</span>$y = 4x - 4$</div><div class="opt"><span class="n">3</span>$y = 2x + 4$</div><div class="opt"><span class="n">4</span>$y = 4x + 4$</div><div class="opt"><span class="n">5</span>$y = x + 2$</div></div><div class="exp"></div></div><h2>🔰 제2단계 · 접선과 좌표축의 교점</h2><div class="know"><h3>먼저 알아야 할 지식</h3>직선 $y = mx + b$가 $x$축과 만나는 점은 $y = 0$으로 놓고 $x = -\frac{b}{m}$으로 구할 수 있다. 접선이 $x$축과 만나는 점은 접점과의 관계를 이해하는 데 핵심이다.</div><div class="q" data-ans="3" data-exp="$y = 0$으로 놓으면 $4x - 4 = 0$, 즉 $x = 1$. 따라서 교점은 $(1,\, 0)$."><div class="lvl">문항</div><div class="stem">직선 $y = 4x - 4$가 $x$축과 만나는 점의 $x$좌표는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-1$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="exp"></div></div><h2>🔰 제3단계 · 좌표평면에서 삼각형의 넓이</h2><div class="know"><h3>먼저 알아야 할 지식</h3>세 점 $O(0,0)$, $P(x_1, y_1)$, $Q(x_2, 0)$으로 이루어진 삼각형의 넓이는 $S = \frac{1}{2} \cdot |x_2| \cdot |y_1|$로 계산할 수 있다. 밑변을 $x$축 위의 선분으로 잡고, 높이는 세 번째 점의 $y$좌표의 절댓값이다.</div><div class="q" data-ans="2" data-exp="밑변 $OQ = 1$, 높이 = $P$의 $y$좌표 $= 4$. 따라서 $S = \frac{1}{2} \times 1 \times 4 = 2$."><div class="lvl">문항</div><div class="stem">세 점 $O(0,0)$, $P(2,\,4)$, $Q(1,\,0)$으로 이루어진 삼각형 $OPQ$의 넓이는?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$4$</div><div class="opt"><span class="n">4</span>$6$</div><div class="opt"><span class="n">5</span>$8$</div></div><div class="exp"></div></div><h2>🔰 제4단계 · 일반화와 방정식 풀이</h2><div class="know"><h3>먼저 알아야 할 지식</h3>일반화: 포물선 $y = x^2$ 위의 점 $P(t, t^2)$ ($t &gt; 0$)에서의 접선 방정식은 $y = 2tx - t^2$. 접선과 $x$축의 교점은 $Q(\frac{t}{2}, 0)$. 삼각형 $OPQ$의 넓이는 $S = \frac{1}{2} \cdot \frac{t}{2} \cdot t^2 = \frac{t^3}{4}$. 이 식을 이용하여 넓이가 주어졌을 때 $t$를 구할 수 있다.</div><div class="q" data-ans="2" data-exp="접선: $y = 4x - 4$, $Q(1, 0)$. 넓이 $S = \frac{1}{2} \times 1 \times 4 = 2$. 또는 넓이 공식 $S = \frac{t^3}{4} = \frac{8}{4} = 2$."><div class="lvl">문항</div><div class="stem">$y = x^2$ 위의 점 $P(t, t^2)$ ($t &gt; 0$)에서의 접선이 $x$축과 만나는 점을 $Q$라 할 때, $t = 2$이면 삼각형 $OPQ$의 넓이는?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$4$</div><div class="opt"><span class="n">4</span>$8$</div><div class="opt"><span class="n">5</span>$16$</div></div><div class="exp"></div></div>
+<h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>도함수의 기본 공식: 거듭제곱 함수 $y = x^n$의 도함수는 $\frac{d}{dx}x^n = nx^{n-1}$. 특히 $y = x^2$의 도함수는 $y&#x27; = 2x$이다. 도함수는 특정 점에서의 접선의 기울기를 나타낸다.</div><div class="q" data-ans="2" data-exp="거듭제곱 미분 법칙에 따라 $\frac{d}{dx}x^n = nx^{n-1}$. 여기서 $n=2$이므로 $y&#x27; = 2x$."><div class="lvl">문항</div><div class="stem">$y = x^2$의 도함수 $y&#x27;$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$x$</div><div class="opt"><span class="n">2</span>$2x$</div><div class="opt"><span class="n">3</span>$x^2$</div><div class="opt"><span class="n">4</span>$2x^2$</div><div class="opt"><span class="n">5</span>$\frac{x^3}{3}$</div></div><div class="exp"></div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🔰 제1단계 · 접선의 방정식 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>점 $(a, f(a))$에서의 접선 방정식은 $y - f(a) = f&#x27;(a)(x - a)$이다. 기울기 $f&#x27;(a)$와 점 $(a, f(a))$를 알면 접선의 방정식을 유일하게 결정할 수 있다.</div><div class="q" data-ans="2" data-exp="$f&#x27;(x) = 2x$이므로 $f&#x27;(2) = 4$ (기울기). 접선: $y - 4 = 4(x - 2)$ → $y = 4x - 4$."><div class="lvl">문항</div><div class="stem">$y = x^2$ 위의 점 $(2,\, 4)$에서의 접선 $\ell$의 방정식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$y = 2x - 4$</div><div class="opt"><span class="n">2</span>$y = 4x - 4$</div><div class="opt"><span class="n">3</span>$y = 2x + 4$</div><div class="opt"><span class="n">4</span>$y = 4x + 4$</div><div class="opt"><span class="n">5</span>$y = x + 2$</div></div><div class="exp"></div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🔰 제2단계 · 접선과 좌표축의 교점</h2><div class="know"><h3>먼저 알아야 할 지식</h3>직선 $y = mx + b$가 $x$축과 만나는 점은 $y = 0$으로 놓고 $x = -\frac{b}{m}$으로 구할 수 있다. 접선이 $x$축과 만나는 점은 접점과의 관계를 이해하는 데 핵심이다.</div><div class="q" data-ans="3" data-exp="$y = 0$으로 놓으면 $4x - 4 = 0$, 즉 $x = 1$. 따라서 교점은 $(1,\, 0)$."><div class="lvl">문항</div><div class="stem">직선 $y = 4x - 4$가 $x$축과 만나는 점의 $x$좌표는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-1$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="exp"></div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🔰 제3단계 · 좌표평면에서 삼각형의 넓이</h2><div class="know"><h3>먼저 알아야 할 지식</h3>세 점 $O(0,0)$, $P(x_1, y_1)$, $Q(x_2, 0)$으로 이루어진 삼각형의 넓이는 $S = \frac{1}{2} \cdot |x_2| \cdot |y_1|$로 계산할 수 있다. 밑변을 $x$축 위의 선분으로 잡고, 높이는 세 번째 점의 $y$좌표의 절댓값이다.</div><div class="q" data-ans="2" data-exp="밑변 $OQ = 1$, 높이 = $P$의 $y$좌표 $= 4$. 따라서 $S = \frac{1}{2} \times 1 \times 4 = 2$."><div class="lvl">문항</div><div class="stem">세 점 $O(0,0)$, $P(2,\,4)$, $Q(1,\,0)$으로 이루어진 삼각형 $OPQ$의 넓이는?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$4$</div><div class="opt"><span class="n">4</span>$6$</div><div class="opt"><span class="n">5</span>$8$</div></div><div class="exp"></div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🔰 제4단계 · 일반화와 방정식 풀이</h2><div class="know"><h3>먼저 알아야 할 지식</h3>일반화: 포물선 $y = x^2$ 위의 점 $P(t, t^2)$ ($t &gt; 0$)에서의 접선 방정식은 $y = 2tx - t^2$. 접선과 $x$축의 교점은 $Q(\frac{t}{2}, 0)$. 삼각형 $OPQ$의 넓이는 $S = \frac{1}{2} \cdot \frac{t}{2} \cdot t^2 = \frac{t^3}{4}$. 이 식을 이용하여 넓이가 주어졌을 때 $t$를 구할 수 있다.</div><div class="q" data-ans="2" data-exp="접선: $y = 4x - 4$, $Q(1, 0)$. 넓이 $S = \frac{1}{2} \times 1 \times 4 = 2$. 또는 넓이 공식 $S = \frac{t^3}{4} = \frac{8}{4} = 2$."><div class="lvl">문항</div><div class="stem">$y = x^2$ 위의 점 $P(t, t^2)$ ($t &gt; 0$)에서의 접선이 $x$축과 만나는 점을 $Q$라 할 때, $t = 2$이면 삼각형 $OPQ$의 넓이는?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$4$</div><div class="opt"><span class="n">4</span>$8$</div><div class="opt"><span class="n">5</span>$16$</div></div><div class="exp"></div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"4d8fe9d0",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><strong>풀이 과정:</strong></p><p>① $y = x^2$의 도함수는 $y' = 2x$. 점 $P(t, t^2)$에서의 접선 기울기는 $2t$.</p><p>② 접선 $\ell$의 방정식: $y - t^2 = 2t(x - t)$, 즉 $y = 2tx - t^2$.</p><p>③ $\ell$과 $x$축의 교점: $y = 0$이면 $x = \frac{t}{2}$. 따라서 $Q(\frac{t}{2}, 0)$.</p><p>④ 삼각형 $OPQ$: 밑변 $OQ = \frac{t}{2}$, 높이 = $P$의 $y$좌표 $= t^2$.</p><p>⑤ 넓이 $S = \frac{1}{2} \cdot \frac{t}{2} \cdot t^2 = \frac{t^3}{4}$.</p><p>⑥ $\frac{t^3}{4} = 16$ → $t^3 = 64$ → $t = 4$.</p><p>⑦ 점 $P$의 $x$좌표는 $\boxed{4}$.</p></div><div class="q" data-ans="2" data-exp="접선의 기울기는 $2t$, 접선 방정식은 $y = 2tx - t^2$. $x$축과의 교점 $Q(\frac{t}{2}, 0)$. 삼각형 $OPQ$의 넓이: $S = \frac{1}{2} \cdot \frac{t}{2} \cdot t^2 = \frac{t^3}{4}$. $\frac{t^3}{4} = 16$이므로 $t^3 = 64$, $t = 4$. 점 $P$의 $x$좌표는 $4$."><div class="lvl">최종 본문항</div><div class="stem">포물선 $y = x^2$ 위의 점 $P$에서 접선 $\ell$을 그었을 때, $\ell$이 $x$축과 만나는 점을 $Q$라 하자. 원점을 $O$라 하고, 삼각형 $OPQ$의 넓이가 $16$일 때, 점 $P$의 $x$좌표를 구하시오. (단, $t &gt; 0$)</div><div class="opts"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$4$</div><div class="opt"><span class="n">3</span>$8$</div><div class="opt"><span class="n">4</span>$16$</div><div class="opt"><span class="n">5</span>$32$</div></div><div class="exp"></div></div>
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><strong>풀이 과정:</strong></p><p>① $y = x^2$의 도함수는 $y' = 2x$. 점 $P(t, t^2)$에서의 접선 기울기는 $2t$.</p><p>② 접선 $\ell$의 방정식: $y - t^2 = 2t(x - t)$, 즉 $y = 2tx - t^2$.</p><p>③ $\ell$과 $x$축의 교점: $y = 0$이면 $x = \frac{t}{2}$. 따라서 $Q(\frac{t}{2}, 0)$.</p><p>④ 삼각형 $OPQ$: 밑변 $OQ = \frac{t}{2}$, 높이 = $P$의 $y$좌표 $= t^2$.</p><p>⑤ 넓이 $S = \frac{1}{2} \cdot \frac{t}{2} \cdot t^2 = \frac{t^3}{4}$.</p><p>⑥ $\frac{t^3}{4} = 16$ → $t^3 = 64$ → $t = 4$.</p><p>⑦ 점 $P$의 $x$좌표는 $\boxed{4}$.</p></div><div class="q" data-ans="2" data-exp="접선의 기울기는 $2t$, 접선 방정식은 $y = 2tx - t^2$. $x$축과의 교점 $Q(\frac{t}{2}, 0)$. 삼각형 $OPQ$의 넓이: $S = \frac{1}{2} \cdot \frac{t}{2} \cdot t^2 = \frac{t^3}{4}$. $\frac{t^3}{4} = 16$이므로 $t^3 = 64$, $t = 4$. 점 $P$의 $x$좌표는 $4$."><div class="lvl">최종 본문항</div><div class="stem">포물선 $y = x^2$ 위의 점 $P$에서 접선 $\ell$을 그었을 때, $\ell$이 $x$축과 만나는 점을 $Q$라 하자. 원점을 $O$라 하고, 삼각형 $OPQ$의 넓이가 $16$일 때, 점 $P$의 $x$좌표를 구하시오. (단, $t &gt; 0$)</div><div class="opts"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$4$</div><div class="opt"><span class="n">3</span>$8$</div><div class="opt"><span class="n">4</span>$16$</div><div class="opt"><span class="n">5</span>$32$</div></div><div class="exp"></div>
+<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div>
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $4$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>
@@ -141,4 +213,40 @@ function copyLink(){const b=document.getElementById('copyBtn');const t=b.textCon
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);}}
 </script><script src="../mathedu-room.js"></script>
+<script>
+function toggleReport(el){
+  if(!el) return;
+  var wrap=el.closest ? el.closest('.report-wrap') : el.parentElement;
+  if(!wrap) return;
+  var btn=wrap.querySelector('.report-btn');
+  var form=wrap.querySelector('.report-form');
+  if(!btn||!form) return;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
+  var name=(window._studentName||'익명').trim();
+  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var qEl=wrap.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var text=wrap.querySelector('.report-text').value.trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  if(url){
+    var img=new Image();
+    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  }
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+  setTimeout(function(){
+    wrap.querySelector('.report-msg').style.display='none';
+    wrap.querySelector('.report-btn').style.display='block';
+  },4000);
+}
+</script>
 </body></html>

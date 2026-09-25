@@ -103,7 +103,8 @@ def handle_new_quiz_request(r):
     try:
         from _auto_quiz_builder import parse_request_text, create_and_publish_quiz
         title, content, hint = parse_request_text(text)
-        slug, quiz_url = create_and_publish_quiz(title, content, hint, reporter)
+        res = create_and_publish_quiz(title, content, hint, reporter)
+        slug, quiz_url = res[0], res[1]
         
         # 구글 시트에 처리 완료 기록
         post_fix_report(ts, '_request_new', qn, f'✅ 생성완료: {quiz_url}')
