@@ -214,6 +214,7 @@ window.MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -241,25 +242,37 @@ window.MathJax = {
     <form id="quizForm" onsubmit="submitQuizRequest(event)">
       <div class="form-group">
         <label for="quizTitle">📌 문제 제목</label>
-        <div class="sub-label">예: 2024년 고3 6월 모의평가 28번, 지수함수와 직선의 교점 심화</div>
-        <input type="text" id="quizTitle" placeholder="문제 제목을 입력하세요" required>
+        <div class="sub-label">비워두시면 문제 내용이나 이미지를 분석하여 자동으로 제목이 붙습니다.</div>
+        <input type="text" id="quizTitle" placeholder="예: 2026 6월 모의평가 확통 28번 (미입력 시 자동 생성)">
       </div>
 
       <div class="form-group">
-        <label for="quizContent">📝 원본 문제 내용 (지문 및 수식 / 이미지)</label>
-        <div class="sub-label">텍스트나 수식을 자유롭게 적어주세요. 수식은 <code>$x^2 + 2x$</code> 형태로 적으면 실시간 렌더링됩니다.</div>
+        <label for="quizContent">📝 원본 문제 내용 (텍스트/수식 또는 이미지)</label>
+        <div class="sub-label">텍스트를 직접 적거나, 문제 캡처 이미지를 <b>Ctrl+V</b>로 바로 붙여넣으세요.</div>
+
+        <!-- 이미지 업로드 버튼 툴바 -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <button type="button" class="tbtn" onclick="pasteFromClipboard()">📋 클립보드에서 이미지 가져오기</button>
+          <button type="button" class="tbtn" onclick="pickImage(false)">🖼️ 갤러리에서 선택</button>
+          <button type="button" class="tbtn" onclick="pickImage(true)">📷 카메라로 촬영</button>
+        </div>
 
         <!-- 이미지 붙여넣기 및 파일 드래그 드롭 존 -->
-        <div id="pastezone" tabindex="0" style="border:2px dashed rgba(124,196,255,.3);border-radius:12px;padding:12px 16px;text-align:center;color:var(--sub);font-size:.85rem;margin-bottom:10px;cursor:pointer;background:rgba(255,255,255,.02);transition:.15s" onclick="document.getElementById('imgPicker').click()">
-          📷 문제 캡처 이미지는 <b>Ctrl+V</b>로 붙여넣거나, <u>여기를 클릭하여 파일 선택</u>
+        <div id="pastezone" tabindex="0" style="border:2px dashed rgba(124,196,255,.35);border-radius:12px;padding:14px 16px;text-align:center;color:var(--sub);font-size:.88rem;margin-bottom:10px;cursor:pointer;background:rgba(255,255,255,.02);transition:.15s">
+          이미지는 <b>Ctrl+V</b> · <b>📋 버튼</b> · <b>여기로 파일 드래그</b> 중 편한 걸로 넣으세요
         </div>
-        <input type="file" id="imgPicker" accept="image/*" style="display:none" onchange="handleFilePick(this)">
-        <div id="imgPreviewBox" style="display:none;margin-bottom:12px;text-align:center">
-          <img id="imgPreview" style="max-width:100%;max-height:220px;border-radius:10px;border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.4)">
-          <div style="font-size:.8rem;color:var(--good);margin-top:4px">✅ 이미지가 첨부되었습니다. 지문 주요 텍스트나 핵심 조건을 아래에 함께 적어주세요.</div>
+        <input type="file" id="image" accept="image/*" style="display:none">
+
+        <!-- 이미지 미리보기 및 OCR 상태 -->
+        <div id="imgPreviewBox" style="display:none;margin-bottom:12px;text-align:center;background:rgba(0,0,0,.25);padding:14px;border-radius:12px;border:1px solid var(--line)">
+          <img id="prev" alt="선택한 이미지 미리보기" style="max-width:100%;max-height:280px;border-radius:10px;border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.4)">
+          <div style="margin-top:10px;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap">
+            <span id="ocrStatus" style="font-size:.85rem;color:var(--good);font-weight:700">✅ 이미지가 첨부되었습니다.</span>
+            <button type="button" class="tbtn" style="padding:3px 10px;font-size:.78rem;color:#fb7185;border-color:rgba(251,113,133,.4)" onclick="clearImage()">🗑️ 이미지 취소</button>
+          </div>
         </div>
 
-        <textarea id="quizContent" placeholder="예: 이차함수 $y = x^2 - 4x + 3$의 그래프와 직선 $y = 2x - k$가 서로 다른 두 점에서 만날 때, 실수 $k$의 값의 범위를 구하시오." oninput="updateMathPreview()" required></textarea>
+        <textarea id="quizContent" rows="6" placeholder="문제를 붙여넣으세요... (이미지만 붙여넣어도 접수 가능합니다)" oninput="updateMathPreview()"></textarea>
         
         <!-- 실시간 수식 미리보기 -->
         <div class="preview-box">
@@ -351,55 +364,198 @@ function fillPreset(id) {
   updateMathPreview();
 }
 
-// 클립보드 이미지 붙여넣기 (Ctrl+V)
+const fileInput = document.getElementById('image');
+const prev = document.getElementById('prev');
+const pz = document.getElementById('pastezone');
+let attachedBlob = null;
+
+// 이미지 클립보드 → file input 주입 + 미리보기 (공통)
+function applyImage(blob) {
+  if (!blob) return false;
+  attachedBlob = blob;
+  const file = new File([blob], 'pasted_' + Date.now() + '.png', { type: blob.type || 'image/png' });
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  try { fileInput.files = dt.files; } catch(err) {}
+
+  const url = URL.createObjectURL(blob);
+  prev.src = url;
+  document.getElementById('imgPreviewBox').style.display = 'block';
+
+  pz.innerHTML = '✅ <b>이미지가 붙여넣어졌어요.</b> 그대로 생성하면 됩니다. (클릭하여 변경)';
+  pz.style.borderColor = 'var(--good)';
+  pz.style.color = 'var(--good)';
+
+  // 제목 비어있으면 자동 생성
+  const titleEl = document.getElementById('quizTitle');
+  if (!titleEl.value.trim()) {
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    titleEl.value = '수학 문제 · 이미지 문제 (' + hh + ':' + mm + ')';
+  }
+
+  // Tesseract OCR 자동 추출 실행
+  runOcr(blob);
+  return true;
+}
+
+// 🗑️ 이미지 취소
+function clearImage() {
+  attachedBlob = null;
+  fileInput.value = '';
+  prev.src = '';
+  document.getElementById('imgPreviewBox').style.display = 'none';
+  pz.innerHTML = '이미지는 <b>Ctrl+V</b> · <b>📋 버튼</b> · <b>여기로 파일 드래그</b> 중 편한 걸로 넣으세요';
+  pz.style.borderColor = 'rgba(124,196,255,.35)';
+  pz.style.color = 'var(--sub)';
+}
+
+// 경로 1: Ctrl+V (문서 전체 또는 텍스트영역 어디서든 이미지 붙여넣기 감지)
 document.addEventListener('paste', function(e) {
   const cd = (e.clipboardData || window.clipboardData);
-  if (!cd || !cd.items) return;
-  for (let i = 0; i < cd.items.length; i++) {
-    const item = cd.items[i];
-    if (item.type && item.type.startsWith('image/')) {
-      const blob = item.getAsFile();
-      if (blob) {
-        showImagePreview(blob);
+  if (!cd) return;
+  let blob = null;
+  if (cd.items) {
+    for (let i = 0; i < cd.items.length; i++) {
+      const it = cd.items[i];
+      if (it.type && it.type.indexOf('image') === 0) {
+        blob = it.getAsFile();
+        if (blob) break;
+      }
+    }
+  }
+  if (!blob && cd.files && cd.files.length) {
+    for (let i = 0; i < cd.files.length; i++) {
+      const f = cd.files[i];
+      if (f.type && f.type.indexOf('image') === 0) {
+        blob = f;
         break;
       }
     }
   }
+  if (blob) {
+    e.preventDefault();
+    applyImage(blob);
+  }
 });
 
-function handleFilePick(input) {
-  if (input.files && input.files[0]) {
-    showImagePreview(input.files[0]);
+// 경로 2: 📋 버튼 → 공식 Clipboard API (권한 허용 시 가장 확실)
+async function pasteFromClipboard() {
+  if (!navigator.clipboard || !navigator.clipboard.read) {
+    pz.textContent = '이 브라우저는 클립보드 읽기를 지원하지 않아요. 대신 🖼️ 갤러리 선택을 쓰세요.';
+    pz.style.color = '#fb7185';
+    return;
+  }
+  try {
+    const items = await navigator.clipboard.read();
+    for (const item of items) {
+      const type = item.types.find(t => t.startsWith('image/'));
+      if (type) {
+        const blob = await item.getType(type);
+        applyImage(blob);
+        return;
+      }
+    }
+    pz.textContent = '클립보드에 이미지가 없어요. 캡처 후 다시 눌러주세요.';
+    pz.style.color = '#fde68a';
+  } catch(err) {
+    pz.textContent = '클립보드 접근이 차단됐어요. 브라우저가 권한을 물으면 "허용"을 누르세요. (또는 🖼️ 갤러리 선택)';
+    pz.style.color = '#fb7185';
   }
 }
 
-function showImagePreview(file) {
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const box = document.getElementById('imgPreviewBox');
-    const img = document.getElementById('imgPreview');
-    img.src = e.target.result;
-    box.style.display = 'block';
-    const pz = document.getElementById('pastezone');
-    pz.innerHTML = '✅ <b>이미지 준비 완료!</b> (클릭하여 다른 이미지로 변경 가능)';
-    pz.style.borderColor = 'var(--good)';
-    pz.style.color = 'var(--good)';
-  };
-  reader.readAsDataURL(file);
+// 기존 파일 선택 시에도 미리보기
+fileInput.addEventListener('change', function() {
+  if (fileInput.files && fileInput.files[0]) {
+    applyImage(fileInput.files[0]);
+  }
+});
+
+// 경로 3: 드래그앤드롭 (파일을 직접 끌어다 놓기)
+['dragover', 'dragenter'].forEach(ev => pz.addEventListener(ev, e => {
+  e.preventDefault();
+  pz.style.borderColor = 'var(--good)';
+}));
+['dragleave', 'drop'].forEach(ev => pz.addEventListener(ev, e => {
+  e.preventDefault();
+  if (!attachedBlob) pz.style.borderColor = 'rgba(124,196,255,.35)';
+}));
+pz.addEventListener('drop', e => {
+  const dt = e.dataTransfer;
+  if (!dt || !dt.files || !dt.files.length) return;
+  for (const f of dt.files) {
+    if (f.type.indexOf('image') === 0) {
+      applyImage(f);
+      return;
+    }
+  }
+});
+
+// 📱 갤러리 / 카메라 선택 버튼
+function pickImage(useCamera) {
+  if (useCamera) {
+    fileInput.setAttribute('capture', 'environment');
+  } else {
+    fileInput.removeAttribute('capture');
+  }
+  fileInput.value = '';  // 같은 파일 재선택 허용
+  fileInput.click();
+}
+
+// 🔍 Tesseract OCR 백그라운드 텍스트 인식
+function runOcr(blob) {
+  if (typeof Tesseract === 'undefined') return;
+  const ocrEl = document.getElementById('ocrStatus');
+  ocrEl.textContent = '🔍 이미지에서 문제 텍스트를 자동 인식하고 있습니다...';
+  ocrEl.style.color = '#fde68a';
+
+  Tesseract.recognize(blob, 'kor+eng')
+    .then(result => {
+      const txt = (result && result.data && result.data.text || '').trim();
+      if (txt) {
+        ocrEl.textContent = '✅ 이미지 텍스트 자동 인식 완료! (필요시 아래 내용 수정 가능)';
+        ocrEl.style.color = 'var(--good)';
+        const ta = document.getElementById('quizContent');
+        if (!ta.value.trim()) {
+          ta.value = txt;
+          updateMathPreview();
+        }
+      } else {
+        ocrEl.textContent = '✅ 이미지 첨부 완료 (추가 수식 입력 가능)';
+        ocrEl.style.color = 'var(--good)';
+      }
+    })
+    .catch(() => {
+      ocrEl.textContent = '✅ 이미지가 정상 첨부되었습니다.';
+      ocrEl.style.color = 'var(--good)';
+    });
 }
 
 async function submitQuizRequest(e) {
   e.preventDefault();
+
+  const titleInput = document.getElementById('quizTitle').value.trim();
+  const contentInput = document.getElementById('quizContent').value.trim();
+  const answer = document.getElementById('quizAnswer').value.trim();
+  const name = document.getElementById('requesterName').value.trim() || '선생님';
+
+  if (!contentInput && !attachedBlob) {
+    alert('문제 내용이나 이미지를 입력해주세요.');
+    return;
+  }
+
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, '0');
+  const mm = String(now.getMinutes()).padStart(2, '0');
+  const title = titleInput || (attachedBlob ? `수학 문제 · 이미지 문제 (${hh}:${mm})` : '수학 퀴즈');
+  const content = contentInput || '이미지 기반 문제 출제 (첨부된 이미지 핵심 조건을 기반으로 5단계 단계별 개념 빌드업 퀴즈 생성)';
+
   const btn = document.getElementById('btnSubmit');
   btn.disabled = true;
   btn.innerHTML = '⏳ 안티그래비티 시스템에 전달 중...';
 
-  const title = document.getElementById('quizTitle').value.trim();
-  const content = document.getElementById('quizContent').value.trim();
-  const answer = document.getElementById('quizAnswer').value.trim();
-  const name = document.getElementById('requesterName').value.trim() || '선생님';
-
-  const payloadText = `[문제 생성 요청]\n제목: ${title}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}`;
+  const payloadText = `[문제 생성 요청]\n제목: ${title}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
 
   // Google Sheets에 비콘/요청 전송
   const targetUrl = `${API_URL}?action=report&quiz=_request_new&q=0&name=${encodeURIComponent(name)}&text=${encodeURIComponent(payloadText)}&_t=${Date.now()}`;
