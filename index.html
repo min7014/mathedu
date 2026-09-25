@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>mathedu · 가입 없는 수학 퀴즈 & 실시간 수업 플랫폼</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
 <style>
 :root {
   --bg: #0d1020;
@@ -21,6 +30,19 @@
   --radius: 16px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+.topic-chip {
+  background: var(--card2);
+  border: 1px solid var(--line);
+  color: var(--sub);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: .8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s;
+}
+.topic-chip:hover { border-color: var(--accent); color: var(--accent); }
+.topic-chip.active { background: rgba(124,196,255,.22); border-color: var(--accent); color: #7cc4ff; }
 body {
   color: var(--txt);
   line-height: 1.6;
@@ -344,7 +366,7 @@ header p {
         <p class="hero-desc">회원가입 없이 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 실시간 모니터링 대시보드를 발급받으세요.</p>
       </div>
       <div>
-        <button class="btn-primary" onclick="openClassCreatorModal('48d0d98f')" style="width:100%">
+        <button class="btn-primary" onclick="openDefaultTeacherClass()" style="width:100%">
           🚀 3초 수업 개설 (QR)
         </button>
       </div>
@@ -397,6 +419,23 @@ header p {
     </div>
   </div>
 
+  <!-- 실시간 검색 및 빠른 주제 필터 바 -->
+  <div style="margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;">
+    <div style="position:relative;margin-bottom:12px">
+      <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 검색..." style="width:100%;background:#141833;border:1px solid #2e3850;border-radius:10px;padding:11px 16px;color:#fff;font-size:.92rem;outline:none;transition:.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2e3850'">
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center" id="topicChips">
+      <span style="font-size:.78rem;color:var(--sub);font-weight:700;margin-right:4px">주제별:</span>
+      <button type="button" class="topic-chip active" data-topic="">전체보기</button>
+      <button type="button" class="topic-chip" data-topic="이차함수|포물선">이차함수·포물선</button>
+      <button type="button" class="topic-chip" data-topic="수열|점화식">수열</button>
+      <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합">확률·통계</button>
+      <button type="button" class="topic-chip" data-topic="지수|로그">지수·로그</button>
+      <button type="button" class="topic-chip" data-topic="삼각함수">삼각함수</button>
+      <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이">미적분</button>
+    </div>
+  </div>
+
   <div class="list" id="list">
     <div class="loading">
       <div class="spin"></div>
@@ -412,8 +451,10 @@ header p {
 (function() {
   var listEl = document.getElementById('list');
   var countBadge = document.getElementById('countBadge');
+  var searchInput = document.getElementById('quizSearchInput');
+  var allItems = [];
+  var activeTopic = '';
 
-  // 최근 개설 수업 표시
   renderRecentRooms();
 
   fetch('board/index.json')
@@ -427,34 +468,72 @@ header p {
         countBadge.textContent = '0개';
         return;
       }
-      countBadge.textContent = items.length + '개 퀴즈';
-      var html = '';
-      for (var i = 0; i < items.length; i++) {
-        var item = items[i];
-        var title = escapeHtml(item.title || item.slug);
-        var time = escapeHtml(item.time || '');
-        var slug = escapeHtml(item.slug);
-
-        html += '<div class="card">';
-        html += '<div class="icon">📘</div>';
-        html += '<div class="body">';
-        html += '<a class="title" href="board/' + slug + '.html">' + title + '</a>';
-        html += '<div class="meta">';
-        if (time) html += '<span>' + time + '</span>';
-        html += '<span style="color:var(--sub)">· 슬러그: <code>' + slug + '</code></span>';
-        html += '</div></div>';
-        html += '<div class="card-actions">';
-        html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">🚀 수업 열기</button>';
-        html += '<a class="btn-solve" href="board/' + slug + '.html">풀기 ➔</a>';
-        html += '</div>';
-        html += '</div>';
-      }
-      listEl.innerHTML = html;
+      allItems = items;
+      renderList();
     })
     .catch(function(err) {
       listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">게시판을 불러올 수 없습니다.<br><small>' + escapeHtml(err.message) + '</small></div>';
       countBadge.textContent = '오류';
     });
+
+  function renderList() {
+    var query = (searchInput.value || '').trim().toLowerCase();
+    var filtered = allItems.filter(function(it) {
+      var title = (it.title || '').toLowerCase();
+      var slug = (it.slug || '').toLowerCase();
+      var matchesQuery = !query || title.includes(query) || slug.includes(query);
+      var matchesTopic = !activeTopic || new RegExp(activeTopic, 'i').test(title);
+      return matchesQuery && matchesTopic;
+    });
+
+    countBadge.textContent = filtered.length + '개' + (filtered.length !== allItems.length ? ' (전체 ' + allItems.length + '개)' : '');
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:var(--sub)">검색 조건에 일치하는 퀴즈가 없습니다.</div>';
+      return;
+    }
+
+    var html = '';
+    for (var i = 0; i < filtered.length; i++) {
+      var item = filtered[i];
+      var title = escapeHtml(item.title || item.slug);
+      var time = escapeHtml(item.time || '');
+      var slug = escapeHtml(item.slug);
+
+      html += '<div class="card">';
+      html += '<div class="icon">📘</div>';
+      html += '<div class="body">';
+      html += '<a class="title" href="board/' + slug + '.html">' + title + '</a>';
+      html += '<div class="meta">';
+      if (time) html += '<span>' + time + '</span>';
+      html += '<span style="color:var(--sub)">· 슬러그: <code>' + slug + '</code></span>';
+      html += '</div></div>';
+      html += '<div class="card-actions">';
+      html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">🚀 수업 열기</button>';
+      html += '<a class="btn-solve" href="board/' + slug + '.html">풀기 ➔</a>';
+      html += '</div>';
+      html += '</div>';
+    }
+    listEl.innerHTML = html;
+
+    // 수식 렌더링
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([listEl]).catch(function(){});
+    }
+  }
+
+  // 실시간 검색 이벤트
+  searchInput.addEventListener('input', renderList);
+
+  // 주제 태그 필터 클릭 이벤트
+  document.getElementById('topicChips').addEventListener('click', function(e) {
+    var chip = e.target.closest('.topic-chip');
+    if (!chip) return;
+    document.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
+    chip.classList.add('active');
+    activeTopic = chip.getAttribute('data-topic') || '';
+    renderList();
+  });
 
   function renderRecentRooms() {
     try {
@@ -472,14 +551,32 @@ header p {
     } catch(e) {}
   }
 
+  window.openDefaultTeacherClass = function() {
+    var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : '48d0d98f';
+    if (typeof openClassCreatorModal === 'function') {
+      openClassCreatorModal(defaultSlug);
+    }
+  };
+
   window.joinClassroom = function() {
     var code = (document.getElementById('inputRoomCode').value || '').trim();
     if (!code) {
       alert('선생님께 전달받은 수업 코드를 입력하세요.');
       return;
     }
-    // 기본 추천 퀴즈로 해당 방 입장
-    window.location.href = 'board/48d0d98f.html?room=' + encodeURIComponent(code);
+    // 1. 로컬스토리지에서 최근 개설된 해당 방의 슬러그 확인
+    try {
+      var rooms = JSON.parse(localStorage.getItem('mathedu_teacher_rooms') || '[]');
+      var match = rooms.find(function(it) { return (it.room || '').toUpperCase() === code.toUpperCase(); });
+      if (match && match.slug) {
+        window.location.href = 'board/' + encodeURIComponent(match.slug) + '.html?room=' + encodeURIComponent(code);
+        return;
+      }
+    } catch(e) {}
+
+    // 2. 기본 fallback: 최신 퀴즈로 입장
+    var fallbackSlug = (allItems && allItems.length > 0) ? allItems[0].slug : '48d0d98f';
+    window.location.href = 'board/' + encodeURIComponent(fallbackSlug) + '.html?room=' + encodeURIComponent(code);
   };
 
   function escapeHtml(s) {

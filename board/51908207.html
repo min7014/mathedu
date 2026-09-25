@@ -379,7 +379,7 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug='51908207' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
+  var slug='' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
   var textEl=wrap.querySelector('.report-text');
@@ -396,4 +396,5 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></body></html>
+</script><script src="../mathedu-room.js"></script>
+</body></html>

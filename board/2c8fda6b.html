@@ -77,6 +77,17 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:va
 padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
 .tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 </head><body><div class="wrap">
@@ -93,6 +104,14 @@ S = { a | 함수 |f(x)-t|가 x=a에서 미분가능하지 않다 } 라 하고, �
 함수 g(t)가 t=3과 t=19에서만 불연속일 때, f(-2)의 값을 구하시오.</div>
 <div class="opts"></div>
 <p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+<div class="orig-media"><img src="/board/fig_test_auto_0001.png" alt="원본 문제 이미지"></div>
+<div class="orig-stem">최고차항의 계수가 1이고 f(0)=3, f&#x27;(3)&lt;0인 사차함수 f(x)가 있다. 실수 t에 대하여 집합 S를
+S = { a | 함수 |f(x)-t|가 x=a에서 미분가능하지 않다 } 라 하고, 집합 S의 원소의 개수를 g(t)라 하자.
+함수 g(t)가 t=3과 t=19에서만 불연속일 때, f(-2)의 값을 구하시오.</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>사차함수</b> — 최고차항이 4차인 다항식 함수. 그래프는 일반적으로 W자 또는 U자 모양</div><div><b>미분가능성</b> — 어떤 점에서 좌우 미분계수가 같고, 그 점에서 접선의 기울기가 유일하게 정해지는 성질</div><div><b>절댓값 함수 |h(x)|</b> — h(x)가 음수인 구간을 뒤집어 양수로 만든 함수. h(x)=0인 점에서 미분 불가능할 수 있음</div><div><b>임계점</b> — f&#x27;(x)=0이 되는 점. 극값(극대·극소)이 생기는 후보 지점</div><div><b>원소 개수 함수 g(t)</b> — 집합 S의 원소 개수를 t에 따라 세는 함수. t가 변할 때 불연속점이 생길 수 있음</div></div>
 <h2>제1단계 · 기초: 절댓값 함수와 미분가능성</h2><div class="know"><h3>먼저 알아야 할 지식</h3>절댓값 함수 |h(x)|는 h(x)가 0을 지나는 점에서 꺾입니다. 꺾인 점에서는 미분계수가 유일하지 않아 미분 불가능할 수 있어요.</div><div class="q" data-ans="2" data-exp="|x|는 x=0에서 꺾이는 점(첨점)이 있어 미분 불가능합니다. 왼쪽 기울기 -1, 오른쪽 기울기 +1로 다릅니다."><div class="lvl">문항</div><div class="stem">함수 |x|는 x=0에서 미분 가능한가요?</div><div class="opts"><div class="opt"><span class="n">1</span>예, 미분 가능하다</div><div class="opt"><span class="n">2</span>아니요, 미분 불가능하다</div><div class="opt"><span class="n">3</span>x=0에서만 미분 가능하다</div><div class="opt"><span class="n">4</span>x&gt;0일 때만 미분 가능하다</div><div class="opt"><span class="n">5</span>항상 미분 가능하다</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

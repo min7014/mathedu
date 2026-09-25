@@ -77,6 +77,17 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:va
 padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
 .tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -92,6 +103,12 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <div class="sol" style="font-size:1.05rem;font-weight:600;margin:14px 0">주사위를 두 번 굴릴 때, 두 눈의 합이 7이 될 확률을 구하시오.</div>
 <div class="opts"></div>
 <p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+
+<div class="orig-stem">주사위를 두 번 굴릴 때, 두 눈의 합이 7이 될 확률을 구하시오.</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$6\times 6$</b> — 주사위 두 번 전체 경우의 수 = 36</div><div><b>$P(A)$</b> — 성공 경우 / 전체 경우</div></div>
 <h2>제1단계 · 전체 경우</h2><div class="know"><h3>먼저 알아야 할 지식</h3>주사위 두 번 = 순서쌍 (첫 눈, 둘째 눈). 각 6가지.</div><div class="q" data-ans="3" data-exp="$6\times 6 = 36$가지."><div class="lvl">문항</div><div class="stem">주사위를 두 번 굴릴 때 전체 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$6$</div><div class="opt"><span class="n">2</span>$12$</div><div class="opt"><span class="n">3</span>$36$</div><div class="opt"><span class="n">4</span>$21$</div><div class="opt"><span class="n">5</span>$30$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

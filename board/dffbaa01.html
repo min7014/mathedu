@@ -82,6 +82,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -94,6 +105,12 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 이차함수의 꼭짓점과 직선 조건을 이용한 값 결정</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+
+<div class="orig-stem">이차함수 $f(x) = x^2 - 2ax + a^2 - 1$의 꼭짓점이 직선 $y = 2x + 3$ 위에 있을 때, 이 함수의 그래프와 x축으로 둘러싸인 삼각형의 넓이를 구하시오.</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f(x) = ax^2 + bx + c$</b> — 이차함수의 일반형</div><div><b>$f(x) = a(x-h)^2 + k$</b> — 이차함수의 꼭짓점형 (완전제곱꼴), $(h,k)$가 꼭짓점</div><div><b>$(h, k)$</b> — 포물선의 꼭짓점 좌표</div><div><b>$y = mx + n$</b> — 직선의 방정식</div></div>
 <h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>이차함수 $f(x) = ax^2 + bx + c$를 완전제곱꼴 $f(x) = a(x-h)^2 + k$로 변형하면, 꼭짓점 좌표가 $(h, k)$임을 알 수 있다. 이는 그래프의 가장 중요한 특징 중 하나다. 예를 들어 $f(x) = x^2 - 6x + 5$를 변형하면: $f(x) = (x-3)^2 - 4$이므로 꼭짓점은 $(3, -4)$이다.</div><div class="q" data-ans="4" data-exp="$f(x) = x^2 + 4x + 3 = (x^2 + 4x + 4) - 4 + 3 = (x+2)^2 - 1$. 따라서 꼭짓점은 $(-2, -1)$이다. 완전제곱꼴 $f(x) = (x-h)^2 + k$에서 $h = -2$, $k = -1$."><div class="lvl">문항</div><div class="stem">이차함수 $f(x) = x^2 + 4x + 3$을 완전제곱꼴로 변형했을 때, 꼭짓점 좌소은?</div><div class="opts"><div class="opt"><span class="n">1</span>$(2, 1)$</div><div class="opt"><span class="n">2</span>$(2, -1)$</div><div class="opt"><span class="n">3</span>$(-2, 1)$</div><div class="opt"><span class="n">4</span>$(-2, -1)$</div><div class="opt"><span class="n">5</span>$(4, -1)$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

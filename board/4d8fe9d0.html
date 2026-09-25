@@ -82,6 +82,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -94,6 +105,12 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 이차함수 접선과 삼각형 넓이</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+
+<div class="orig-stem">포물선 $y = x^2$ 위의 점 $P$에서 접선 $\ell$을 그었을 때, $\ell$이 $x$축과 만나는 점을 $Q$라 하자. 원점을 $O$라 하고, 삼각형 $OPQ$의 넓이가 $16$일 때, 점 $P$의 $x$좌표를 구하시오. (단, $t &gt; 0$)</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>y&#x27;</b> — 함수 y의 도함수(변화율)</div><div><b>\ell</b> — 접선(tangent line)</div><div><b>S</b> — 도형의 넓이(면적)</div><div><b>O</b> — 원점(origin)</div></div>
 <h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>도함수의 기본 공식: 거듭제곱 함수 $y = x^n$의 도함수는 $\frac{d}{dx}x^n = nx^{n-1}$. 특히 $y = x^2$의 도함수는 $y&#x27; = 2x$이다. 도함수는 특정 점에서의 접선의 기울기를 나타낸다.</div><div class="q" data-ans="2" data-exp="거듭제곱 미분 법칙에 따라 $\frac{d}{dx}x^n = nx^{n-1}$. 여기서 $n=2$이므로 $y&#x27; = 2x$."><div class="lvl">문항</div><div class="stem">$y = x^2$의 도함수 $y&#x27;$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$x$</div><div class="opt"><span class="n">2</span>$2x$</div><div class="opt"><span class="n">3</span>$x^2$</div><div class="opt"><span class="n">4</span>$2x^2$</div><div class="opt"><span class="n">5</span>$\frac{x^3}{3}$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

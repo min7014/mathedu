@@ -82,6 +82,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -94,6 +105,12 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 포물선과 직선으로 둘러싸인 영역의 넓이</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+
+<div class="orig-stem">포물선 $y = x^2 - 2x - 3$과 직선 $y = x + 1$으로 둘러싸인 폐쇄 영역의 넓이를 구하시오.</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$y = ax^2 + bx + c$</b> — 이차함수(포물선)의 일반형</div><div><b>$y = mx + n$</b> — 일차함수(직선)의 일반형</div><div><b>$\int_a^b f(x)\,dx$</b> — 정적분: 곡선 $y=f(x)$와 $x$축 사이의 유부호 넓이</div><div><b>$f(x) \geq g(x)$</b> — 구간에서 $f$가 $g$보다 크다는 의미</div></div>
 <h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>정적분의 기하학적 의미를 이해하자. $f(x) \geq 0$일 때, $\int_a^b f(x)\,dx$는 곡선 $y=f(x)$와 $x$축, 그리고 직선 $x=a$, $x=b$로 둘러싸인 영역의 넓이를 나타낸다. 이는 &#x27;면적의 정의&#x27;로 시작하는 개념이다.</div><div class="q" data-ans="2" data-exp="정적분 $\int_a^b f(x)\,dx$ ($f(x) \geq 0$)는 곡선 $y=f(x)$, $x$축, 그리고 수직선 $x=a$, $x=b$ 사이의 유부호 넓이(directed area)를 의미한다. 이것이 면적 계산의 근본 원리이다."><div class="lvl">문항</div><div class="stem">$f(x) \geq 0$인 연속함수 $f$에 대하여, $\int_a^b f(x)\,dx$의 기하학적 의미는 무엇인가?</div><div class="opts"><div class="opt"><span class="n">1</span>$f(x)$의 $[a,b]$에서의 최댓값</div><div class="opt"><span class="n">2</span>곡선 $y=f(x)$와 $x$축, $x=a$, $x=b$로 둘러싸인 영역의 넓이</div><div class="opt"><span class="n">3</span>$f(a)$와 $f(b)$의 평균값</div><div class="opt"><span class="n">4</span>$a$에서 $b$까지 $f(x)$가 증가하는 정도</div><div class="opt"><span class="n">5</span>구간 $[a,b]$에서 $f(x)$의 최솟값</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

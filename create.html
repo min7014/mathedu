@@ -549,7 +549,7 @@ async function submitQuizRequest(e) {
   btn.disabled = true;
   btn.innerHTML = '⏳ 안티그래비티 시스템에 전달 중...';
 
-  const payloadText = `[문제 생성 요청]\n제목: ${title || '(문제 분석 후 AI 자동 생성)'}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
+  const payloadText = `[문제 생성 요청]\n제목: ${title}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
 
   // Google Sheets에 비콘/요청 전송
   const targetUrl = `${API_URL}?action=report&quiz=_request_new&q=0&name=${encodeURIComponent(name)}&text=${encodeURIComponent(payloadText)}&_t=${Date.now()}`;

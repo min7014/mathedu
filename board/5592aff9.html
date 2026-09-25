@@ -82,6 +82,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -94,6 +105,12 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 이차함수와 직선의 교점 테스트</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+
+<div class="orig-stem">이차함수 $y = x^2 - 4x + 3$과 직선 $y = 2x - k$가 서로 다른 두 점에서 만날 때, 실수 $k$의 범위를 구하시오.</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>y = x^2 - 4x + 3</b> — 이차함수(포물선)의 식</div><div><b>y = 2x - k</b> — 직선의 식 (k는 실수 상수)</div><div><b>D = b^2 - 4ac</b> — 이차방정식의 판별식</div><div><b>D &gt; 0</b> — 서로 다른 두 실근을 가진 조건</div></div>
 <h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>두 그래프가 만나는 점은 두 식의 y값이 같은 점입니다. 이차함수 $y = ax^2 + bx + c$와 직선 $y = mx + n$의 교점을 구하려면 두 식을 연립하여 $ax^2 + bx + c = mx + n$으로 정리한 뒤, 이 이차방정식의 해의 개수를 판별식 $D = b^2 - 4ac$로 판별합니다. $D &gt; 0$이면 서로 다른 두 점에서 만나고, $D = 0$이면 한 점에서 만나며(접선), $D &lt; 0$이면 만나지 않습니다.</div><div class="q" data-ans="3" data-exp="서로 다른 두 점에서 만난다는 것은 이차방정식이 서로 다른 두 실근을 가진다는 뜻입니다. 따라서 판별식의 조건은 $D &gt; 0$입니다. $D = 0$이면 한 점에서만 만나고(접선), $D &lt; 0$이면 만나지 않습니다."><div class="lvl">문항</div><div class="stem">이차함수 $y = x^2 - 4x + 3$과 직선 $y = 2x - k$가 서로 다른 두 점에서 만나려면, 두 식을 연립하여 정리한 이차방정식의 판별식 D에 대해 만들어야 할 조건은 무엇인가?</div><div class="opts"><div class="opt"><span class="n">1</span>$D = 0$</div><div class="opt"><span class="n">2</span>$D &lt; 0$</div><div class="opt"><span class="n">3</span>$D &gt; 0$</div><div class="opt"><span class="n">4</span>$D \geq 0$</div><div class="opt"><span class="n">5</span>$D \leq 0$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

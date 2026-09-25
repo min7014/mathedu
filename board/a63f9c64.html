@@ -77,6 +77,17 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:va
 padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
 .tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -97,6 +108,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 • c &lt; d²</div>
 <div class="opts"></div>
 <p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+
+<div class="orig-stem">자연수 a, b, c, d가 다음 조건을 모두 만족할 때, 순서쌍 (a, b, c, d)의 개수를 구하시오.
+
+[조건]
+• a + b + c + d = 14
+• 10a ≥ d
+• c &lt; d²</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>자연수</b> — 1, 2, 3, ... (양의 정수)</div><div><b>순서쌍 (a,b,c,d)</b> — 네 수의 묶음, 순서가 다르면 다른 쌍</div></div>
 <h2>제1단계 · 문제 이해하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>자연수 조건과 합이 14라는 기본 조건을 확인해 봅시다.</div><div class="q" data-ans="1" data-exp="a,b,c가 각각 1 이상이므로 a+b+c ≥ 3, 따라서 d = 14-(a+b+c) ≤ 11입니다. 또한 c &lt; d²에서 c≥1이므로 d²&gt;1 → d≥2입니다. 그러므로 d는 2부터 11까지 가능합니다."><div class="lvl">문항</div><div class="stem">자연수 a, b, c, d가 a+b+c+d=14를 만족할 때, d가 될 수 있는 값은 무엇일까요? (단, a,b,c는 모두 1 이상)</div><div class="opts"><div class="opt"><span class="n">1</span>2부터 11까지</div><div class="opt"><span class="n">2</span>1부터 14까지</div><div class="opt"><span class="n">3</span>1부터 11까지</div><div class="opt"><span class="n">4</span>2부터 14까지</div><div class="opt"><span class="n">5</span>1부터 10까지</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

@@ -82,6 +82,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -94,6 +105,12 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 포물선의 꼭짓점과 교점을 이용한 최솟값 문제</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+
+<div class="orig-stem">그림에서 포물선의 꼭짓점이 (1, -4)이고, 점 (3, 0)을 지나는 포물선의 방정식, x축과의 두 교점, 그리고 -1 ≤ x ≤ 4에서의 최솟값을 구하시오.</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>y = a(x-p)^2 + q</b> — 포물선의 꼭짓점 형태 (vertex form), 꼭짓점은 $(p, q)$</div><div><b>y = ax^2 + bx + c</b> — 포물선의 일반형 (standard form)</div><div><b>D = b^2 - 4ac</b> — 판별식 (discriminant), x축과의 교점 개수 결정</div><div><b>x = -b/(2a)</b> — 포물선의 대칭축 (axis of symmetry)</div></div>
 <h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>이차함수 y = ax^2 + bx + c (a ≠ 0)의 그래프는 포물선이다. a &gt; 0이면 위로 열리고, a &lt; 0이면 아래로 열린다. 꼭짓점은 (-b/(2a), f(-b/(2a)))이고, x축과의 교점은 판별식 D = b^2 - 4ac로 결정된다.</div><div class="q" data-ans="2" data-exp="x = -(-4)/(2*2) = 1, y = 2(1)^2 - 4(1) + 1 = -1. 따라서 꼭짓점은 (1, -1)."><div class="lvl">문항</div><div class="stem">이차함수 y = 2x^2 - 4x + 1의 꼭짓점 좌표를 구하시오.</div><div class="opts"><div class="opt"><span class="n">1</span>(2, -1)</div><div class="opt"><span class="n">2</span>(1, -1)</div><div class="opt"><span class="n">3</span>(1, 1)</div><div class="opt"><span class="n">4</span>(-1, -1)</div><div class="opt"><span class="n">5</span>(-2, 1)</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

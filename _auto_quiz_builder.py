@@ -101,7 +101,7 @@ def build_quiz_with_ai(title, content, hint):
     제목이 비어있거나 'TEST', '수학 퀴즈' 등 임의 입력인 경우
     지문과 수식을 정밀 분석하여 전문적인 고품질 한글 수학 제목을 자동 생성합니다.
     """
-    generic_titles = ["수학 퀴즈", "TEST", "test", "수학 문제", "자동 생성", "새 퀴즈", "제목 없음", ""]
+    generic_titles = ["수학 퀴즈", "TEST", "test", "수학 문제", "자동 생성", "새 퀴즈", "제목 없음", "(문제 분석 후 AI 자동 생성)", "(문제 분석 후 AI 자동생성)", ""]
     is_title_empty = not title or title.strip() in generic_titles
 
     title_instruction = (
@@ -256,7 +256,7 @@ def create_and_publish_quiz(title, content, hint, reporter):
     
     # 2. 최종 제목 확정 (AI 분석 제목 우선 채택)
     ai_title = (quiz_data.get("title") or "").strip()
-    generic_titles = ["수학 퀴즈", "TEST", "test", "수학 문제", "자동 생성", "새 퀴즈", "제목 없음", ""]
+    generic_titles = ["수학 퀴즈", "TEST", "test", "수학 문제", "자동 생성", "새 퀴즈", "제목 없음", "(문제 분석 후 AI 자동 생성)", "(문제 분석 후 AI 자동생성)", ""]
     
     if ai_title and ai_title not in generic_titles:
         final_title = ai_title
