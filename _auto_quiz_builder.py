@@ -35,6 +35,37 @@ def send_telegram(text):
     except Exception:
         pass
 
+def make_smart_fallback_title(content):
+    """
+    제목이 비어있을 때 문제 지문과 수식을 분석하여 최적의 단원/주제 제목을 도출합니다.
+    """
+    clean = re.sub(r'\[문제 생성 요청\]|내용:|정답/힌트:.*|\[이미지:.*\]', '', content or '', flags=re.S).strip()
+    
+    topic_map = [
+        ("수열과 점화식", ["수열", "점화식", "등차수열", "등비수열", "일반항", "시그마", "a_{n+1}", "a_n"]),
+        ("조건부확률과 통계", ["조건부확률", "이항분포", "정규분포", "표본평균", "신뢰구간", "확률변수", "독립시행"]),
+        ("경우의 수와 순열·조합", ["경우의 수", "순열", "조합", "중복조합", "원순열", "최단 거리", "최단거리", "주사위", "카드"]),
+        ("미분과 접선의 방정식", ["도함수", "미분계수", "접선의 방정식", "접선", "극댓값", "극솟값", "변곡점", "미분"]),
+        ("정적분과 넓이", ["정적분", "부정적분", "구간", "넓이", "역도함수", "적분"]),
+        ("지수함수와 로그함수", ["지수함수", "로그함수", "지수방정식", "로그방정식", "지수부등식", "상용로그", "2^x", "log_"]),
+        ("삼각함수와 그래프", ["삼각함수", "사인", "코사인", "탄젠트", "sin", "cos", "tan", "주기"]),
+        ("이차함수와 직선의 위치 관계", ["이차함수", "포물선", "판별식", "서로 다른 두 점", "접선", "x^2"]),
+        ("이차방정식과 근과 계수", ["이차방정식", "근과 계수의 관계", "실근", "허근", "중근"]),
+        ("기하와 벡터", ["벡터", "공간도형", "타원", "쌍곡선", "포물선", "정사영", "내적"]),
+    ]
+    
+    for name, kws in topic_map:
+        if any(k in clean for k in kws):
+            return name
+            
+    first_line = clean.splitlines()[0] if clean else ""
+    first_line = re.sub(r'[\$\[\]\{\}\(\)\=\+\-\*\/]', ' ', first_line)
+    first_line = ' '.join(first_line.split())
+    if first_line:
+        s = first_line if len(first_line) <= 20 else first_line[:20] + "…"
+        return f"수학 퀴즈 · {s}"
+    return f"수학 퀴즈 · 단계별 핵심 개념 ({datetime.now(KST).strftime('%H:%M')})"
+
 def parse_request_text(text):
     """
     [문제 생성 요청]
@@ -56,10 +87,9 @@ def parse_request_text(text):
     if hint_m: hint = hint_m.group(1).strip()
     
     if not title and not content:
-        title = text.splitlines()[0][:40] if text else "수학 퀴즈"
         content = text
         
-    return title or "수학 퀴즈", content or text, hint
+    return title, content or text, hint
 
 HERMES_BIN = r'C:\Users\min\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe'
 if not os.path.exists(HERMES_BIN):
@@ -68,19 +98,31 @@ if not os.path.exists(HERMES_BIN):
 def build_quiz_with_ai(title, content, hint):
     """
     AI 에이전트를 호출하여 단계별 퀴즈 JSON을 생성합니다.
+    제목이 비어있거나 'TEST', '수학 퀴즈' 등 임의 입력인 경우
+    지문과 수식을 정밀 분석하여 전문적인 고품질 한글 수학 제목을 자동 생성합니다.
     """
-    prompt = f"""You are an elite mathematics educator creating an interactive step-by-step quiz for Korean students.
-Problem Title: {title}
-Original Problem Statement:
-{content}
-Hint/Answer: {hint}
+    generic_titles = ["수학 퀴즈", "TEST", "test", "수학 문제", "자동 생성", "새 퀴즈", "제목 없음", ""]
+    is_title_empty = not title or title.strip() in generic_titles
 
-Your task:
-Break this problem down into a progressive pedagogical quiz (at least 3 building-block levels + 1 final target problem level) so that even younger students can learn the principles step by step.
+    title_instruction = (
+        "Analyze the mathematical concepts, formulas, and question requirements in the Problem Statement deeply. DEDUCE and GENERATE a concise, professional Korean pedagogical title (e.g. '이차함수와 직선의 위치 관계 및 판별식', '지수함수와 로그함수의 역함수 대칭', '수열의 귀납적 정의와 일반항', '조건부확률과 독립시행'). Put this deduced title into the 'title' field of the JSON."
+        if is_title_empty else
+        f"Use '{title}' as the problem title (or polish it slightly for clarity in Korean)."
+    )
+
+    prompt = f"""You are an elite mathematics educator creating an interactive step-by-step quiz for Korean students.
+Problem Statement:
+{content}
+Provided Hint/Answer: {hint}
+Input Title: {title if not is_title_empty else '(None provided - please analyze the problem and generate a professional pedagogical title)'}
+
+Your tasks:
+1. Title Analysis: {title_instruction}
+2. Progressive Breakdown: Break this problem down into a progressive pedagogical quiz (at least 3 building-block levels + 1 final target problem level) so that even younger students can learn the principles step by step.
 
 Return ONLY a strictly valid JSON object (no markdown code blocks, no backticks, just raw JSON) matching this exact schema:
 {{
-  "title": "{title}",
+  "title": "분석된 핵심 수학 단원/주제 제목 (한글 25자 이내, 예: 지수함수와 로그함수의 교점)",
   "symbols": [
     {{"sym": "수학 기호 1", "desc": "기호의 의미"}}
   ],
@@ -134,29 +176,45 @@ Rules:
         )
         out = (res.stdout or '').strip()
         # JSON 추출
+        quiz_data = None
+        ai_extracted_title = ""
         if "{" in out and "}" in out:
             start = out.find("{")
             end = out.rfind("}") + 1
             json_str = out[start:end]
             try:
-                return json.loads(json_str, strict=False)
+                quiz_data = json.loads(json_str, strict=False)
             except Exception:
                 try:
-                    fixed = re.sub(r'\\(?![/"\\bfnrtu])', r'\\\\', json_str)
-                    return json.loads(fixed, strict=False)
+                    fixed = re.sub(r'\\(?![\\"])', r'\\\\', json_str)
+                    quiz_data = json.loads(fixed, strict=False)
                 except Exception as inner_e:
                     print(f"JSON 파싱 상세 오류: {inner_e}")
+
+            # 혹시 JSON 파싱이 실패했더라도 정규식으로 AI가 작성한 title 필드 직접 추출
+            if quiz_data and quiz_data.get("title"):
+                ai_extracted_title = quiz_data.get("title").strip()
+            else:
+                tm = re.search(r'"title"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"', json_str)
+                if tm:
+                    ai_extracted_title = tm.group(1).strip()
+
+        if quiz_data:
+            if ai_extracted_title:
+                quiz_data["title"] = ai_extracted_title
+            return quiz_data
     except Exception as e:
         print(f"AI 호출 실패: {e}")
 
     # Fallback 기본 템플릿
+    fallback_title = ai_extracted_title or (title if not is_title_empty else make_smart_fallback_title(content))
     return {
-        "title": title,
+        "title": fallback_title,
         "symbols": [{"sym": "$x$", "desc": "미지수"}],
         "levels": [
             {
                 "title": "🔰 제1단계 · 기본 개념 확인",
-                "knowledge": f"{title}을(를) 풀기 위한 기본 개념을 점검합니다.",
+                "knowledge": f"{fallback_title}을(를) 풀기 위한 기본 개념을 점검합니다.",
                 "questions": [
                     {
                         "stem": "다음 중 문제의 조건을 만족하는 기본 성질은 무엇인가요?",
@@ -179,33 +237,48 @@ Rules:
 def create_and_publish_quiz(title, content, hint, reporter):
     """
     퀴즈를 생성하고 board/{slug}.html 저장, index.json 등록 및 Git 푸시까지 완료합니다.
+    제목이 없을 경우 문제 내용을 분석해 고품질 수학 제목을 자동 생성합니다.
     """
-    print(f"\n[AI_BUILDER] 신규 퀴즈 생성 시작: '{title}' (신청자: {reporter})")
+    print(f"\n[AI_BUILDER] 신규 퀴즈 생성 시작 (신청자: {reporter}, 입력 제목: '{title or '(없음 - 자동생성)'}')")
     
-    # 1. 퀴즈 구조 생성
+    # 1. 퀴즈 구조 생성 (AI가 지문/수식을 분석하여 문제 제목 자동 도출)
     quiz_data = build_quiz_with_ai(title, content, hint)
     
-    # 2. 고유 slug 생성 (8자리 hex)
-    slug = hashlib.md5((title + str(time.time())).encode('utf-8')).hexdigest()[:8]
+    # 2. 최종 제목 확정 (AI 분석 제목 우선 채택)
+    ai_title = (quiz_data.get("title") or "").strip()
+    generic_titles = ["수학 퀴즈", "TEST", "test", "수학 문제", "자동 생성", "새 퀴즈", "제목 없음", ""]
+    
+    if ai_title and ai_title not in generic_titles:
+        final_title = ai_title
+    elif title and title.strip() not in generic_titles:
+        final_title = title.strip()
+    else:
+        final_title = make_smart_fallback_title(content)
+        
+    quiz_data["title"] = final_title
+    print(f"  ↳ 확정된 퀴즈 제목: '{final_title}'")
+    
+    # 3. 고유 slug 생성 (8자리 hex)
+    slug = hashlib.md5((final_title + str(time.time())).encode('utf-8')).hexdigest()[:8]
     quiz_data["slug"] = slug
     
-    # 3. HTML 생성
+    # 4. HTML 생성
     html_content = generator.generate_html(quiz_data)
     
-    # 4. mathedu-room.js 및 수업 연동 스크립트 주입
+    # 5. mathedu-room.js 및 수업 연동 스크립트 주입
     if "mathedu-room.js" not in html_content:
         if "</body>" in html_content:
             html_content = html_content.replace("</body>", '<script src="../mathedu-room.js"></script>\n</body>')
         else:
             html_content += '\n<script src="../mathedu-room.js"></script>'
             
-    # 5. 파일 저장
+    # 6. 파일 저장
     html_path = os.path.join(BOARD_DIR, f"{slug}.html")
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html_content)
     print(f"  ↳ HTML 저장 완료: board/{slug}.html")
 
-    # 6. board/index.json에 새 퀴즈 최상단 추가
+    # 7. board/index.json에 새 퀴즈 최상단 추가
     now_str = datetime.now(KST).strftime('%Y-%m-%d %H:%M')
     try:
         with open(INDEX_FILE, "r", encoding="utf-8") as f:
@@ -214,19 +287,19 @@ def create_and_publish_quiz(title, content, hint, reporter):
         idx = []
         
     idx.insert(0, {
-        "title": title,
+        "title": final_title,
         "slug": slug,
         "time": now_str
     })
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
         json.dump(idx, f, ensure_ascii=False, indent=2)
-    print(f"  ↳ board/index.json 메타데이터 등록 완료")
+    print(f"  ↳ board/index.json 메타데이터 등록 완료: '{final_title}'")
 
-    # 7. Git commit & push
+    # 8. Git commit & push
     deploy_ok = False
     try:
         subprocess.run(["git", "add", f"board/{slug}.html", "board/index.json"], cwd=REPO_DIR, check=True)
-        commit_msg = f"feat(quiz): auto-generate new quiz '{title}' ({slug})"
+        commit_msg = f"feat(quiz): auto-generate new quiz '{final_title}' ({slug})"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=REPO_DIR, check=True)
         subprocess.run(["git", "push", "origin", "main"], cwd=REPO_DIR, check=True)
         deploy_ok = True
@@ -234,11 +307,11 @@ def create_and_publish_quiz(title, content, hint, reporter):
     except Exception as e:
         print(f"  ↳ ⚠️ Git 배포 오류: {e}")
 
-    # 8. 텔레그램 알림 발송
+    # 9. 텔레그램 알림 발송
     quiz_url = f"https://min7014.github.io/mathedu/board/{slug}.html"
     telegram_msg = (
         f"🎉 <b>[mathedu 신규 퀴즈 자동 생성 & 배포 완료]</b>\n\n"
-        f"• <b>제목</b>: {title}\n"
+        f"• <b>제목</b>: {final_title}\n"
         f"• <b>출제자</b>: {reporter}\n"
         f"• <b>퀴즈 링크</b>: <a href='{quiz_url}'>{quiz_url}</a>\n"
         f"• <b>배포 상태</b>: {'✅ 배포 완료' if deploy_ok else '⚠️ 로컬 생성 완료 (푸시 확인 필요)'}\n"
@@ -246,7 +319,7 @@ def create_and_publish_quiz(title, content, hint, reporter):
     )
     send_telegram(telegram_msg)
     
-    return slug, quiz_url
+    return slug, quiz_url, final_title
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:

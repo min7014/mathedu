@@ -386,13 +386,10 @@ function applyImage(blob) {
   pz.style.borderColor = 'var(--good)';
   pz.style.color = 'var(--good)';
 
-  // 제목 비어있으면 자동 생성
+  // 제목이 비어있으면 AI가 분석하여 자동 생성하도록 플레이스홀더 안내
   const titleEl = document.getElementById('quizTitle');
   if (!titleEl.value.trim()) {
-    const now = new Date();
-    const hh = String(now.getHours()).padStart(2, '0');
-    const mm = String(now.getMinutes()).padStart(2, '0');
-    titleEl.value = '수학 문제 · 이미지 문제 (' + hh + ':' + mm + ')';
+    titleEl.placeholder = 'AI가 문제 이미지를 정밀 분석하여 핵심 단원 제목을 자동 작명합니다';
   }
 
   // Tesseract OCR 자동 추출 실행
@@ -545,17 +542,14 @@ async function submitQuizRequest(e) {
     return;
   }
 
-  const now = new Date();
-  const hh = String(now.getHours()).padStart(2, '0');
-  const mm = String(now.getMinutes()).padStart(2, '0');
-  const title = titleInput || (attachedBlob ? `수학 문제 · 이미지 문제 (${hh}:${mm})` : '수학 퀴즈');
+  const title = titleInput;
   const content = contentInput || '이미지 기반 문제 출제 (첨부된 이미지 핵심 조건을 기반으로 5단계 단계별 개념 빌드업 퀴즈 생성)';
 
   const btn = document.getElementById('btnSubmit');
   btn.disabled = true;
   btn.innerHTML = '⏳ 안티그래비티 시스템에 전달 중...';
 
-  const payloadText = `[문제 생성 요청]\n제목: ${title}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
+  const payloadText = `[문제 생성 요청]\n제목: ${title || '(문제 분석 후 AI 자동 생성)'}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
 
   // Google Sheets에 비콘/요청 전송
   const targetUrl = `${API_URL}?action=report&quiz=_request_new&q=0&name=${encodeURIComponent(name)}&text=${encodeURIComponent(payloadText)}&_t=${Date.now()}`;
@@ -565,7 +559,7 @@ async function submitQuizRequest(e) {
 
   setTimeout(() => {
     document.getElementById('formBox').style.display = 'none';
-    document.getElementById('summaryTitle').textContent = `• 제목: ${title}`;
+    document.getElementById('summaryTitle').textContent = title ? `• 제목: ${title}` : '• 제목: 🤖 안티그래비티 AI가 문제 내용을 정밀 분석하여 자동 생성';
     document.getElementById('summaryReq').textContent = `• 출제 신청자: ${name}`;
     document.getElementById('successBox').style.display = 'block';
   }, 1000);
