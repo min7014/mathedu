@@ -3,8 +3,14 @@
 
 function doPost(e) {
   try {
-    var sheet = getOrCreateSheet();
     var data = JSON.parse(e.postData.contents);
+    
+    // Handle fix_report action
+    if (data.action === 'fix_report') {
+      return updateReportFix(data);
+    }
+    
+    var sheet = getOrCreateSheet();
     
     var quizSlug = (data.quiz_slug || '').toString();
     var studentName = (data.student_name || '').toString();
@@ -33,10 +39,46 @@ function doPost(e) {
   }
 }
 
+function updateReportFix(data) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName('reports');
+    if (!sheet) {
+      return jsonOutput({ ok: false, error: 'reports sheet not found' });
+    }
+    
+    var sheetData = sheet.getDataRange().getValues();
+    var now = new Date();
+    var fixTimeStr = now.toISOString().replace('T', ' ').substring(0, 19);
+    
+    // Find the report by timestamp + quiz_slug + question_num
+    for (var i = 1; i < sheetData.length; i++) {
+      var rowTs = sheetData[i][0] ? sheetData[i][0].toString() : '';
+      var rowQuiz = sheetData[i][1] ? sheetData[i][1].toString() : '';
+      var rowQ = sheetData[i][2] ? sheetData[i][2].toString() : '';
+      
+      if (rowTs === (data.timestamp || '') && rowQuiz === (data.quiz_slug || '') && rowQ === (data.question_num || '')) {
+        // Update columns 6 (fix_timestamp) and 7 (fix_result)
+        sheet.getRange(i + 1, 6, 1, 2).setValues([[fixTimeStr, (data.result || '').toString()]]);
+        return jsonOutput({ ok: true, row: i + 1 });
+      }
+    }
+    
+    return jsonOutput({ ok: false, error: 'report not found' });
+  } catch (err) {
+    return jsonOutput({ ok: false, error: err.toString() });
+  }
+}
+
 function doGet(e) {
   // Handle report action
   if (e && e.parameter && e.parameter.action === 'report') {
     return handleReport(e.parameter);
+  }
+  
+  // Handle list reports action
+  if (e && e.parameter && e.parameter.action === 'reports') {
+    return listReports();
   }
   
   try {
@@ -71,12 +113,7 @@ function doGet(e) {
 function handleReport(params) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = ss.getSheetByName('reports');
-    if (!sheet) {
-      sheet = ss.insertSheet('reports');
-      sheet.appendRow(['timestamp', 'quiz_slug', 'question_num', 'reporter', 'text']);
-      sheet.getRange(1, 1, 1, 5).setFontWeight('bold');
-    }
+    var sheet = getOrCreateReportSheet();
     
     var now = new Date();
     sheet.appendRow([
@@ -84,7 +121,9 @@ function handleReport(params) {
       (params.quiz || '').toString(),
       (params.q || '').toString(),
       (params.name || '익명').toString(),
-      (params.text || '').toString()
+      (params.text || '').toString(),
+      '',  // fix_timestamp
+      ''   // fix_result
     ]);
     
     // Return 1x1 transparent GIF (for Image beacon)
@@ -93,6 +132,32 @@ function handleReport(params) {
   } catch (err) {
     return ContentService.createTextOutput('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
       .setMimeType(ContentService.MimeType.GIF);
+  }
+}
+
+function listReports() {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName('reports');
+    if (!sheet) {
+      return jsonOutput({ reports: [] });
+    }
+    var data = sheet.getDataRange().getValues();
+    var reports = [];
+    for (var i = 1; i < data.length; i++) {
+      reports.push({
+        timestamp: data[i][0] || '',
+        quiz_slug: data[i][1] || '',
+        question_num: data[i][2] || '',
+        reporter: data[i][3] || '',
+        text: data[i][4] || '',
+        fix_timestamp: data[i][5] || '',
+        fix_result: data[i][6] || ''
+      });
+    }
+    return jsonOutput({ reports: reports });
+  } catch (err) {
+    return jsonOutput({ ok: false, error: err.toString() });
   }
 }
 
@@ -107,6 +172,23 @@ function getOrCreateSheet() {
   if (!sheet) {
     sheet = ss.insertSheet('progress');
     sheet.appendRow(['quiz_slug', 'student_name', 'current_step', 'total_steps', 'correct', 'pct', 'updated_at']);
+    sheet.getRange(1, 1, 1, 7).setFontWeight('bold');
+  }
+  return sheet;
+}
+
+function getOrCreateReportSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('reports');
+  if (!sheet) {
+    sheet = ss.insertSheet('reports');
+    sheet.appendRow(['timestamp', 'quiz_slug', 'question_num', 'reporter', 'text', 'fix_timestamp', 'fix_result']);
+    sheet.getRange(1, 1, 1, 7).setFontWeight('bold');
+  }
+  // Ensure headers include fix columns (for existing sheets)
+  var headers = sheet.getRange(1, 1, 1, 7).getValues()[0];
+  if (headers[5] !== 'fix_timestamp' || headers[6] !== 'fix_result') {
+    sheet.getRange(1, 6, 1, 2).setValues([['fix_timestamp', 'fix_result']]);
     sheet.getRange(1, 1, 1, 7).setFontWeight('bold');
   }
   return sheet;
