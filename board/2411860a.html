@@ -126,7 +126,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -165,7 +171,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -204,7 +216,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -244,7 +262,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -283,7 +307,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -322,7 +352,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -362,7 +398,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -401,7 +443,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -440,7 +488,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -480,7 +534,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -519,7 +579,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -558,7 +624,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -598,7 +670,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -637,7 +715,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -676,7 +760,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
@@ -716,7 +806,13 @@ function submitReport(btn){
   var text=wrap.querySelector('.report-text').value.trim();
   var url=window._sheetsApiUrl;
   if(url){
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음'),{method:'GET'}).catch(function(){});
+    var data=new URLSearchParams();
+    data.append('action','report');
+    data.append('quiz',slug);
+    data.append('q',qNum);
+    data.append('name',name);
+    data.append('text',text||'사유 없음');
+    navigator.sendBeacon(url+'?'+data.toString());
   }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
