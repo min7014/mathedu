@@ -230,6 +230,14 @@ window.MathJax = {
 
   <!-- 신청 폼 -->
   <div class="form-box" id="formBox">
+    <!-- 빠른 예시 버튼들 -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center">
+      <span style="font-size:.82rem;color:var(--sub);font-weight:700">⚡ 1초 예시 채우기:</span>
+      <button type="button" class="tbtn" style="padding:4px 10px;font-size:.8rem" onclick="fillPreset(1)">📐 이차함수와 직선</button>
+      <button type="button" class="tbtn" style="padding:4px 10px;font-size:.8rem" onclick="fillPreset(2)">📈 지수·로그함수 교점</button>
+      <button type="button" class="tbtn" style="padding:4px 10px;font-size:.8rem" onclick="fillPreset(3)">🎲 확률과 경우의 수</button>
+    </div>
+
     <form id="quizForm" onsubmit="submitQuizRequest(event)">
       <div class="form-group">
         <label for="quizTitle">📌 문제 제목</label>
@@ -238,8 +246,19 @@ window.MathJax = {
       </div>
 
       <div class="form-group">
-        <label for="quizContent">📝 원본 문제 내용 (지문 및 수식)</label>
+        <label for="quizContent">📝 원본 문제 내용 (지문 및 수식 / 이미지)</label>
         <div class="sub-label">텍스트나 수식을 자유롭게 적어주세요. 수식은 <code>$x^2 + 2x$</code> 형태로 적으면 실시간 렌더링됩니다.</div>
+
+        <!-- 이미지 붙여넣기 및 파일 드래그 드롭 존 -->
+        <div id="pastezone" tabindex="0" style="border:2px dashed rgba(124,196,255,.3);border-radius:12px;padding:12px 16px;text-align:center;color:var(--sub);font-size:.85rem;margin-bottom:10px;cursor:pointer;background:rgba(255,255,255,.02);transition:.15s" onclick="document.getElementById('imgPicker').click()">
+          📷 문제 캡처 이미지는 <b>Ctrl+V</b>로 붙여넣거나, <u>여기를 클릭하여 파일 선택</u>
+        </div>
+        <input type="file" id="imgPicker" accept="image/*" style="display:none" onchange="handleFilePick(this)">
+        <div id="imgPreviewBox" style="display:none;margin-bottom:12px;text-align:center">
+          <img id="imgPreview" style="max-width:100%;max-height:220px;border-radius:10px;border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.4)">
+          <div style="font-size:.8rem;color:var(--good);margin-top:4px">✅ 이미지가 첨부되었습니다. 지문 주요 텍스트나 핵심 조건을 아래에 함께 적어주세요.</div>
+        </div>
+
         <textarea id="quizContent" placeholder="예: 이차함수 $y = x^2 - 4x + 3$의 그래프와 직선 $y = 2x - k$가 서로 다른 두 점에서 만날 때, 실수 $k$의 값의 범위를 구하시오." oninput="updateMathPreview()" required></textarea>
         
         <!-- 실시간 수식 미리보기 -->
@@ -309,6 +328,64 @@ function updateMathPreview() {
       MathJax.typesetPromise([previewEl]).catch(() => {});
     }
   }, 300);
+}
+
+// 빠른 예시 프리셋 채우기
+function fillPreset(id) {
+  const t = document.getElementById('quizTitle');
+  const c = document.getElementById('quizContent');
+  const a = document.getElementById('quizAnswer');
+  if (id === 1) {
+    t.value = '이차함수와 직선의 위치 관계 및 교점';
+    c.value = '이차함수 $y = x^2 - 4x + 3$의 그래프와 직선 $y = 2x - k$가 서로 다른 두 점에서 만날 때, 실수 $k$의 범위를 구하시오.';
+    a.value = '정답: $k < 6$ (판별식 $D > 0$)';
+  } else if (id === 2) {
+    t.value = '지수함수와 로그함수의 역함수 관계 및 교점';
+    c.value = '두 함수 $y = 2^x$와 $y = \\log_2 x$의 그래프와 직선 $y = -x + 4$가 만나는 점을 각각 $A(x_1, y_1)$, $B(x_2, y_2)$라 할 때, 선분 $AB$의 길이를 구하시오.';
+    a.value = '정답: $2\\sqrt{2}$ (직선 $y=x$ 대칭)';
+  } else if (id === 3) {
+    t.value = '같은 것이 있는 순열과 최단 경로의 수';
+    c.value = '가로 4칸, 세로 3칸의 직사각형 모양 도로망에서 $A$ 지점에서 $B$ 지점까지 최단 거리로 이동하는 경우의 수를 구하시오.';
+    a.value = '정답: $\\frac{7!}{4!3!} = 35$';
+  }
+  updateMathPreview();
+}
+
+// 클립보드 이미지 붙여넣기 (Ctrl+V)
+document.addEventListener('paste', function(e) {
+  const cd = (e.clipboardData || window.clipboardData);
+  if (!cd || !cd.items) return;
+  for (let i = 0; i < cd.items.length; i++) {
+    const item = cd.items[i];
+    if (item.type && item.type.startsWith('image/')) {
+      const blob = item.getAsFile();
+      if (blob) {
+        showImagePreview(blob);
+        break;
+      }
+    }
+  }
+});
+
+function handleFilePick(input) {
+  if (input.files && input.files[0]) {
+    showImagePreview(input.files[0]);
+  }
+}
+
+function showImagePreview(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const box = document.getElementById('imgPreviewBox');
+    const img = document.getElementById('imgPreview');
+    img.src = e.target.result;
+    box.style.display = 'block';
+    const pz = document.getElementById('pastezone');
+    pz.innerHTML = '✅ <b>이미지 준비 완료!</b> (클릭하여 다른 이미지로 변경 가능)';
+    pz.style.borderColor = 'var(--good)';
+    pz.style.color = 'var(--good)';
+  };
+  reader.readAsDataURL(file);
 }
 
 async function submitQuizRequest(e) {

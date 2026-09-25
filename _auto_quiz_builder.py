@@ -61,6 +61,10 @@ def parse_request_text(text):
         
     return title or "수학 퀴즈", content or text, hint
 
+HERMES_BIN = r'C:\Users\min\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe'
+if not os.path.exists(HERMES_BIN):
+    HERMES_BIN = 'hermes'
+
 def build_quiz_with_ai(title, content, hint):
     """
     AI 에이전트를 호출하여 단계별 퀴즈 JSON을 생성합니다.
@@ -122,19 +126,26 @@ Rules:
 """
     try:
         res = subprocess.run(
-            ["hermes", "-z", prompt],
+            [HERMES_BIN, "-z", prompt],
             capture_output=True,
-            text=True,
-            timeout=120,
-            shell=True
+            encoding='utf-8',
+            errors='replace',
+            timeout=120
         )
-        out = res.stdout.strip()
+        out = (res.stdout or '').strip()
         # JSON 추출
         if "{" in out and "}" in out:
             start = out.find("{")
             end = out.rfind("}") + 1
             json_str = out[start:end]
-            return json.loads(json_str)
+            try:
+                return json.loads(json_str, strict=False)
+            except Exception:
+                try:
+                    fixed = re.sub(r'\\(?![/"\\bfnrtu])', r'\\\\', json_str)
+                    return json.loads(fixed, strict=False)
+                except Exception as inner_e:
+                    print(f"JSON 파싱 상세 오류: {inner_e}")
     except Exception as e:
         print(f"AI 호출 실패: {e}")
 

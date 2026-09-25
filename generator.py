@@ -197,7 +197,7 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
     html += 'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
     html += 'if(total===0)return;'
     html += 'fetch(window._sheetsApiUrl,{'
-    html += 'method:"POST",headers:{"Content-Type":"application/json"}',
+    html += 'method:"POST",headers:{"Content-Type":"application/json"},'
     html += 'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
     html += '}).catch(function(){});'
     html += '}'
@@ -257,11 +257,13 @@ def generate_html(data):
         except Exception:
             pass
     tracking_block = _tracking_html(data.get("slug", ""), _sheets_url)
+    slug_js = data.get("slug", "").replace("'", "\\'")
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),
         symbols_block=symbols_block, levels_block=levels_block,
         solution_block=solution_block, final_ans=_esc(final_ans),
-        tracking_block=tracking_block)
+        tracking_block=tracking_block,
+        slug_js=slug_js)
     # ★ 안전장치: 원본 캡처 이미지(img_xxx.png 등)가 게시물에 그대로 박이는 것 차단
     html = re.sub(r'<img[^>]*src=["\']?[^\"\']*img_[0-9a-f]+\.[a-z]+["\']?[^>]*>', '', html, flags=re.I)
     return html
