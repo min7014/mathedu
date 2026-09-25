@@ -96,7 +96,6 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 {title}</h1>
-{original_block}
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
 {symbols_block}
 {levels_block}
@@ -107,9 +106,8 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
-qs.forEach(q=>{{const idx=Array.from(qs).indexOf(q);const ans=+window._answers[idx]||1;
-const exp=q.querySelector('.exp');exp.innerHTML=q.dataset.exp||'';
-const opts=q.querySelectorAll('.opt');
+qs.forEach(q=>{{const ans=+q.dataset.ans;const exp=q.querySelector('.exp');
+exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{{o.addEventListener('click',()=>{{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');}});
 if(i+1==ans){{o.classList.add('correct');pts++;}}else{{o.classList.add('wrong');}}
@@ -134,7 +132,7 @@ function sendProgress(){{
     method: 'POST',
     headers: {{'Content-Type': 'application/json'}},
     body: JSON.stringify({{
-      quiz_slug: '{quiz_slug_val}',
+      quiz_slug: '{slug_js}',
       student_name: name,
       current_step: current,
       total_steps: total,
@@ -154,7 +152,7 @@ def _question_html(q):
         f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
         for i, o in enumerate(q.get("options", [])))
     exp = _esc(q.get("exp", "")).replace("\n", "<br>")
-    return (f'<div class="q" answer",1)}" data-exp="{exp}">'
+    return (f'<div class="q" data-ans="{q.get("answer",1)}" data-exp="{exp}">'
             f'<div class="lvl">문항</div>'
             f'<div class="stem">{_esc(q.get("stem","") )}</div>'
             f'<div class="opts">{opts}</div>'
@@ -187,26 +185,7 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
     html += 'window._studentName=n;'
     html += 'document.getElementById("trackFull").remove();'
     html += 'sendProgress();'
-    html += 'if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}
-<div class="report-box" style="margin-top:10px;padding:8px;border-top:1px solid rgba(255,255,255,.1);text-align:right">
-<button class="report-btn" onclick="reportIssue(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">\u{1F6A8} 이 문제에 이상이 있어요</button>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:4px">\u2705 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div>
-<script>
-function reportIssue(btn){{
-  var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
-  var qEl=btn.closest('.q');
-  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var url=window._sheetsApiUrl;
-  if(url){{
-    fetch(url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum&name='+encodeURIComponent(name),{{method:'GET'}}).catch(function(){{}});
-  }}
-  btn.style.display='none';
-  btn.nextElementSibling.style.display='block';
-  setTimeout(function(){{btn.style.display='';btn.nextElementSibling.style.display='none';}},3000);
-}}
-</script>'
+    html += 'if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}'
     html += '}'
     html += 'function sendProgress(){'
     html += 'var name=(window._studentName||"").trim();'
@@ -218,7 +197,7 @@ function reportIssue(btn){{
     html += 'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
     html += 'if(total===0)return;'
     html += 'fetch(window._sheetsApiUrl,{'
-    html += 'method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},'
+    html += 'method:"POST",headers:{"Content-Type":"application/json"},'
     html += 'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
     html += '}).catch(function(){});'
     html += '}'
@@ -232,26 +211,12 @@ function reportIssue(btn){{
 
 
 def generate_html(data):
-    f = data.get("final", {})
-    # ★ 원본 문제 블록 (맨 앞)
-    original_block = ""
-    if f.get("stem"):
-        orig_opts = "".join(
-            f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
-            for i, o in enumerate(f.get("options", [])))
-        orig_diagram = f'<div class="diagram">{f["diagram"]}</div>' if f.get("diagram") else ""
-        orig_figure = f'<div class="figure"><img src="{_esc(f["figure"])}" alt="문제 그림" style="max-width:100%;border-radius:10px"></div>' if f.get("figure") else ""
-        original_block = (
-            f'<h2>📋 원본 문제</h2>'
-            f'{orig_diagram}'
-            f'{orig_figure}'
-            f'<div class="sol" style="font-size:1.05rem;font-weight:600;margin:14px 0">{_esc(f.get("stem",""))}</div>'
-            f'<div class="opts">{orig_opts}</div>')
     sym = "".join(
         f'<div><b>{_esc(s.get("sym","") )}</b> — {_esc(s.get("desc",""))}</div>'
         for s in data.get("symbols", []))
     symbols_block = (f'<h2>🔰 제0단계 · 수학 기호</h2><div class="sym">{sym}</div>' if sym else "")
     levels_block = "".join(_level_html(l) for l in data.get("levels", []))
+    f = data.get("final", {})
     fopts = "".join(
         f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
         for i, o in enumerate(f.get("options", [])))
@@ -269,7 +234,7 @@ def generate_html(data):
         f'{diagram_html}'
         f'{figure_html}'
         f'<div class="sol">{fsol}</div>'
-        f'<div class="q" answer",1)}" data-exp="{fexp}">'
+        f'<div class="q" data-ans="{f.get("answer",1)}" data-exp="{fexp}">'
         f'<div class="lvl">최종 본문항</div>'
         f'<div class="stem">{_esc(f.get("stem","") )}</div>'
         f'<div class="opts">{fopts}</div>'
@@ -288,14 +253,11 @@ def generate_html(data):
         except Exception:
             pass
     tracking_block = _tracking_html(data.get("slug", ""), _sheets_url)
-    slug_js = data.get("slug", "").replace("'", "\\'")
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),
-        original_block=original_block,
         symbols_block=symbols_block, levels_block=levels_block,
         solution_block=solution_block, final_ans=_esc(final_ans),
-        tracking_block=tracking_block,
-        quiz_slug_val=data.get("slug", "").replace("'", "\\'"))
+        tracking_block=tracking_block)
     # ★ 안전장치: 원본 캡처 이미지(img_xxx.png 등)가 게시물에 그대로 박이는 것 차단
     html = re.sub(r'<img[^>]*src=["\']?[^\"\']*img_[0-9a-f]+\.[a-z]+["\']?[^>]*>', '', html, flags=re.I)
     return html
