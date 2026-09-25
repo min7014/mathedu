@@ -338,9 +338,14 @@ header p {
         <div class="hero-title">3초 만에 수업 개설하기</div>
         <p class="hero-desc">회원가입 없이 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 실시간 모니터링 대시보드를 발급받으세요.</p>
       </div>
-      <button class="btn-primary" onclick="openClassCreatorModal('48d0d98f')">
-        🚀 수업 개설 & QR 발급하기
-      </button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-primary" onclick="openClassCreatorModal('48d0d98f')">
+          🚀 3초 수업 개설 (QR)
+        </button>
+        <a href="create.html" class="btn-primary" style="background:var(--card2);border:1px solid rgba(124,196,255,.4);color:#7cc4ff;box-shadow:none">
+          ✨ 새 문제 출제
+        </a>
+      </div>
     </div>
 
     <!-- 학생용 카드 -->
@@ -370,7 +375,10 @@ header p {
       <span>📚 전체 퀴즈 목록</span>
       <span class="count-badge" id="countBadge">불러오는 중…</span>
     </div>
-    <a href="dashboard-static.html" style="font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700">📊 전체 실시간 현황판</a>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="create.html" style="font-size:.85rem;color:var(--good);text-decoration:none;font-weight:700">✨ 새 퀴즈 출제하기</a>
+      <a href="dashboard-static.html" style="font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700">📊 전체 실시간 현황판</a>
+    </div>
   </div>
 
   <div class="list" id="list">
