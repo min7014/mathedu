@@ -136,10 +136,14 @@ def main():
                         # 신규 퀴즈 자동 생성
                         handle_new_quiz_request(r)
                     else:
-                        # 기존 퀴즈 수리 요청 트리거
+                        # 기존 퀴즈 수리 요청 트리거 및 자동 치유
                         print(f"\n🚨 [ANTIGRAVITY_TRIGGER] 신규 신고 감지!", flush=True)
                         print(json.dumps(r, ensure_ascii=False), flush=True)
-                        print("\n안티그래비티 에이전트님, 위 신고 건을 직접 심층 분석하여 board/{quiz_slug}.html 수식 수정 및 배포를 진행하세요!\n", flush=True)
+                        try:
+                            import _cron_report_fix
+                            _cron_report_fix.main()
+                        except Exception as fix_err:
+                            print(f"⚠️ [ANTIGRAVITY_AUTOFIX] 신고 자동 수리 중 오류: {fix_err}", flush=True)
         except Exception:
             pass
         time.sleep(15)
