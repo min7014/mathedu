@@ -124,10 +124,39 @@ def handle_new_quiz_request(r):
         print(f"⚠️ [AI_BUILDER] 퀴즈 생성 중 오류 발생: {e}", flush=True)
         return False
 
+INQUIRIES_FILE = os.path.join(REPO_DIR, '_jarvis_inquiries.json')
+last_inquiry_time = None
+
+def check_inquiries():
+    global last_inquiry_time
+    if not os.path.exists(INQUIRIES_FILE):
+        return
+    try:
+        with open(INQUIRIES_FILE, 'r', encoding='utf-8') as f:
+            records = json.load(f)
+        if not records:
+            return
+        latest = records[0]
+        l_time = latest.get('time')
+        if last_inquiry_time is None:
+            last_inquiry_time = l_time
+            return
+        if l_time != last_inquiry_time:
+            last_inquiry_time = l_time
+            print(f"\n💬 [JARVIS_INQUIRY_REPORT] @jarvis7014_bot 질의응답 감지!", flush=True)
+            print(f"• 질문자: {latest.get('user', 'M님')} ({latest.get('time')})", flush=True)
+            print(f"• 질문: {latest.get('query')}", flush=True)
+            ans = latest.get('answer', '')
+            preview = (ans[:150] + '...') if len(ans) > 150 else ans
+            print(f"• 안티그래비티 답변: {preview}\n", flush=True)
+    except Exception:
+        pass
+
 def main():
-    print("[ANTIGRAVITY_WATCHER_ONLINE] 안티그래비티 실시간 감시 데몬 (신고 수리 + 신규 퀴즈 자동 생성) 가동 중 (15초 주기)", flush=True)
+    print("[ANTIGRAVITY_WATCHER_ONLINE] 안티그래비티 실시간 감시 데몬 (신고 수리 + 신규 퀴즈 자동 생성 + 텔레그램 질의응답) 가동 중 (15초 주기)", flush=True)
     while True:
         try:
+            check_inquiries()
             new_reports = check_reports()
             if new_reports:
                 for r in new_reports:
