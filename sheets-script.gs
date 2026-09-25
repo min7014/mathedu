@@ -147,6 +147,7 @@ function updateReportFix(data) {
 
             MailApp.sendEmail({
               to: email,
+              name: 'mathedu 수학 퀴즈봇',
               subject: subject,
               htmlBody: htmlBody
             });
