@@ -45,6 +45,8 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 .exp{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(124,196,255,.1);
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
+.confirm-msg{color:var(--good);font-size:1.1rem;font-weight:800;margin-top:12px;text-align:center;display:none;animation:popIn .25s ease}
+@keyframes popIn{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 .exp b{color:var(--gold)}
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
@@ -1548,14 +1550,44 @@ navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사
 <script>
 window._answers=[2,3,4,3,2,3,4,3,2,3,4,3,3,2,4,3,1,2,3,4,1,3,3,4];
 (function(){
-  var qs=document.querySelectorAll(".q");
-  qs.forEach(function(q,i){var a=window._answers[i];var exp=q.querySelector(".exp");exp.innerHTML=q.dataset.exp;var opts=q.querySelectorAll(".opt");
-  opts.forEach(function(o,ii){o.addEventListener("click",function(){if(q.classList.contains("done"))return;
-  q.classList.add("done");opts.forEach(function(oo,jj){oo.classList.add("locked");if(jj+1===a)oo.classList.add("correct");});
-  if(ii+1===a){o.classList.add("correct");window._pts=(window._pts||0)+1;}else{o.classList.add("wrong");}
-  exp.classList.add("show");document.getElementById("pts").textContent=window._pts||0;
-  var pct=Math.round((window._pts||0)/qs.length*100);document.getElementById("bar").style.width=pct+"%";
-  document.getElementById("pct").textContent=pct+"%";if(window.sendProgress)sendProgress();});});});
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q,i){
+    var a=window._answers[i];
+    var exp=q.querySelector('.exp');
+    exp.innerHTML=q.dataset.exp;
+    var opts=q.querySelectorAll('.opt');
+    // Add confirm-msg after exp if not exists
+    var cm=q.querySelector('.confirm-msg');
+    if(!cm){
+      cm=document.createElement('div');
+      cm.className='confirm-msg';
+      cm.textContent='✅ 정답입니다!';
+      exp.parentNode.insertBefore(cm, exp.nextSibling);
+    }
+    opts.forEach(function(o,ii){
+      o.addEventListener('click',function(){
+        if(q.classList.contains('done'))return;
+        q.classList.add('done');
+        opts.forEach(function(oo,jj){
+          oo.classList.add('locked');
+          if(jj+1===a)oo.classList.add('correct');
+        });
+        if(ii+1===a){
+          o.classList.add('correct');
+          window._pts=(window._pts||0)+1;
+          cm.style.display='block';
+        }else{
+          o.classList.add('wrong');
+        }
+        exp.classList.add('show');
+        document.getElementById('pts').textContent=window._pts||0;
+        var pct=Math.round((window._pts||0)/qs.length*100);
+        document.getElementById('bar').style.width=pct+'%';
+        document.getElementById('pct').textContent=pct+'%';
+        if(window.sendProgress)sendProgress();
+      });
+    });
+  });
 })();
 </script>
 </body></html>
