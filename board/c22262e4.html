@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이차함수의 최대·최소</title>
+<style>
+:root{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
+--txt:#eef2ff;--sub:#aab4d4;--accent:#7cc4ff;--accent2:#a78bfa;--good:#5eead4;--bad:#fb7185;--gold:#fde68a;
+--glass-blur:22px;--glass-shadow:0 8px 32px rgba(0,0,0,.40);--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;color:var(--txt);line-height:1.7;
+font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+background:
+ radial-gradient(circle at 12% 8%, rgba(124,196,255,.35), transparent 42%),
+ radial-gradient(circle at 88% 12%, rgba(167,139,250,.32), transparent 40%),
+ radial-gradient(circle at 50% 55%, rgba(94,234,212,.18), transparent 45%),
+ radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
+ linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);
+background-attachment:fixed;min-height:100vh}
+.wrap{max-width:820px;margin:0 auto;padding:24px 18px 80px}
+h1{font-size:1.55rem;margin:0 0 4px;
+background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:1.2rem;margin:34px 0 10px;color:var(--accent);
+border-left:4px solid transparent;border-image:linear-gradient(var(--accent),var(--accent2)) 1;padding-left:10px}
+.lead{color:var(--sub);font-size:.95rem;margin:0 0 8px}
+.sym{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.sym div{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:8px 10px;
+font-size:.9rem;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.sym b{color:var(--gold)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:var(--glass-shadow);transition:.2s}
+.q:hover{border-color:rgba(124,196,255,.4)}
+.q .lvl{font-size:.75rem;color:var(--sub)}
+.q .stem{font-size:1.02rem;margin:6px 0 12px;font-weight:600}
+.opts{display:grid;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--line);
+border-radius:12px;padding:10px 12px;cursor:pointer;transition:.15s;font-size:.95rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt .n{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:rgba(124,196,255,.25);
+display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--accent)}
+.opt.correct{background:rgba(94,234,212,.16);border-color:var(--good)}
+.opt.wrong{background:rgba(251,113,133,.16);border-color:var(--bad)}
+.opt.locked{cursor:default}
+.exp{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(124,196,255,.1);
+border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.exp.show{display:block}
+.exp b{color:var(--gold)}
+.score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
+display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.score b{color:var(--gold)}
+.bar{height:8px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden;flex:1;margin:0 12px}
+.bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:.3s}
+.know{background:var(--card);border:1px dashed var(--accent);border-radius:14px;padding:14px;margin:12px 0;font-size:.92rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.know h3{margin:0 0 6px;color:var(--accent);font-size:1rem}
+.cards{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.card{width:64px;height:92px;border-radius:10px;display:flex;flex-direction:column;
+align-items:center;justify-content:center;font-weight:700;border:2px solid rgba(255,255,255,.25)}
+.card .num{font-size:1.3rem}
+.card .face{font-size:.7rem;margin-top:4px;opacity:.85}
+.card.front{background:rgba(244,247,255,.85);color:#1b2436;border-color:#cfd8ee;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.card.back{background:rgba(57,67,95,.85);color:#fff;border-color:#56638c;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.sol{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));box-shadow:var(--glass-shadow)}
+.diagram{background:rgba(255,255,255,.92);color:#1b2436;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.diagram svg,.diagram img{max-width:100%;height:auto}
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;
+padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.3);transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,196,255,.45)}
+.final{text-align:center;margin:30px 0;font-size:1.05rem}
+.final .ans{font-size:1.6rem;color:var(--good);font-weight:800;margin:8px 0}
+code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:var(--gold)}
+.topbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tbtn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
+padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+#trackSubmit{max-width:820px;margin:30px auto;padding:20px;background:rgba(110,168,254,.08);border:1px solid rgba(110,168,254,.3);border-radius:14px;text-align:center}
+#trackSubmit h3{color:#6ea8fe;margin:0 0 10px}
+#trackSubmit p{color:#9aa6c0;font-size:.88rem;margin:0 0 12px}
+#trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
+#trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
+#trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+</style>
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head><body><div class="wrap">
+<div class="topbar">
+<a class="tbtn" href="/mathedu/">← 게시판</a>
+<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</a>
+</div>
+<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+<span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
+<h1>📘 이차함수의 최대·최소</h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>f(x) = ax² + bx + c</b> — 이차함수의 일반형태</div><div><b>y = a(x - h)² + k</b> — 이차함수의 꼭짓점형태 (a ≠ 0)</div><div><b>h = -\frac{b}{2a}</b> — 꼭짓점의 x좌표 (대칭축)</div><div><b>k = \frac{4ac - b²}{4a}</b> — 꼭짓점의 y좌표 (최대/최소값)</div><div><b>a &gt; 0</b> — 위로 볼록 → 최소값 존재</div><div><b>a &lt; 0</b> — 아래로 볼록 → 최대값 존재</div></div>
+<h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>이차함수 $y = ax^2 + bx + c$ ($a \neq 0$)의 그래프는 포물선이다. $a &gt; 0$이면 아래로 볼록하여 최소값을, $a &lt; 0$이면 위로 볼록하여 최대값을 갖는다. 꼭짓점은 $x = -\frac{b}{2a}$에서 구할 수 있다.</div><div class="q" data-ans="2" data-exp="이차항의 계수 $a = 3 &gt; 0$이므로 포물선은 아래로 볼록(∪ 모양)이다. 아래로 볼록인 포물선은 꼭짓점에서 **최소값**을 갖는다. 따라서 정답은 2번이다."><div class="lvl">문항</div><div class="stem">이차함수 $y = 3x^2 - 6x + 1$의 그래프는 어떤 형태인가?</div><div class="opts"><div class="opt"><span class="n">1</span>위로 볼록하며, 최대값을 갖는다</div><div class="opt"><span class="n">2</span>아래로 볼록하며, 최소값을 갖는다</div><div class="opt"><span class="n">3</span>위로 볼록하며, 최소값을 갖는다</div><div class="opt"><span class="n">4</span>아래로 볼록하며, 최대값을 갖는다</div><div class="opt"><span class="n">5</span>직선이며, 최대최소가 없다</div></div><div class="exp"></div></div><h2>🔰 제1단계 · 꼭짓점 형태로 변형하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>완전제곱식(완전제곱꼴)을 이용하여 $y = ax^2 + bx + c$를 $y = a(x - h)^2 + k$ 형태로 변환하면, 꼭짓점 $(h, k)$를 직접 읽을 수 있다. 변환 과정: $y = a\left(x^2 + \frac{b}{a}x\right) + c = a\left(x + \frac{b}{2a}\right)^2 - \frac{b^2}{4a} + c$.</div><div class="q" data-ans="1" data-exp="완전제곱꼴로 변환하면: $y = 2(x^2 - 4x) + 5 = 2(x^2 - 4x + 4 - 4) + 5 = 2(x - 2)^2 - 8 + 5 = 2(x - 2)^2 - 3$. 따라서 $h = 2$, $k = -3$이고, $h + k = 2 + (-3) = -1$. 정답은 1번이다."><div class="lvl">문항</div><div class="stem">이차함수 $y = 2x^2 - 8x + 5$를 꼭짓점 형태 $y = a(x - h)^2 + k$로 바꾸면, $h + k$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-1$</div><div class="opt"><span class="n">2</span>$1$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$5$</div><div class="opt"><span class="n">5</span>$7$</div></div><div class="exp"></div></div><h2>🔰 제2단계 · 최대·최소값 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a &lt; 0$인 이차함수 $y = a(x - h)^2 + k$에서, $(x - h)^2 \geq 0$이므로 $a(x - h)^2 \leq 0$이다. 따라서 $y \leq k$이며, $x = h$일 때 **최대값** $k$를 갖는다. 반대로 $a &gt; 0$이면 $x = h$에서 **최소값** $k$를 갖는다.</div><div class="q" data-ans="4" data-exp="이차항의 계수 $a = -1 &lt; 0$이므로 포물선은 위로 볼록(∩ 모양)이다. $(x - 3)^2 \geq 0$이므로 $-(x - 3)^2 \leq 0$이고, 따라서 $y = -(x - 3)^2 + 7 \leq 7$이다. $x = 3$일 때 등호가 성립하므로 최대값은 $\boxed{7}$이다. 정답은 4번이다."><div class="lvl">문항</div><div class="stem">이차함수 $y = -(x - 3)^2 + 7$의 최대값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-3$</div><div class="opt"><span class="n">2</span>$3$</div><div class="opt"><span class="n">3</span>$-7$</div><div class="opt"><span class="n">4</span>$7$</div><div class="opt"><span class="n">5</span>$10$</div></div><div class="exp"></div></div>
+<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c22262e4",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">풀이과정: (1) 이차항의 계수를 꺼내어 $f(x) = -2(x^2 - 4x) - 3$으로 정리한다. (2) 완전제곱꼴을 만든다: $x^2 - 4x = (x - 2)^2 - 4$. (3) 대입하면 $f(x) = -2\{(x - 2)^2 - 4\} - 3 = -2(x - 2)^2 + 8 - 3 = -2(x - 2)^2 + 5$. (4) $-2(x - 2)^2 \leq 0$이므로 $f(x)$의 최대값은 $x = 2$일 때 $5$이다. 핵심 원리: $a < 0$인 이차함수는 꼭짓점에서 최대값을 가지며, 꼭짓점의 y좌표가 바로 그 최대값이다.</div><div class="q" data-ans="2" data-exp="$f(x) = -2x^2 + 8x - 3$에서 완전제곱꼴로 변환하면: $f(x) = -2(x^2 - 4x) - 3 = -2(x^2 - 4x + 4 - 4) - 3 = -2(x - 2)^2 + 8 - 3 = -2(x - 2)^2 + 5$. 이차항의 계수 $a = -2 &lt; 0$이므로 포물선은 위로 볼록하며, $(x - 2)^2 \geq 0$이므로 $-2(x - 2)^2 \leq 0$이다. 따라서 $f(x) \leq 5$이고, $x = 2$일 때 최대값 $\boxed{5}$을 갖는다. 정답은 1번이다."><div class="lvl">최종 본문항</div><div class="stem">이차함수 $f(x) = -2x^2 + 8x - 3$의 최대값을 구하시오.</div><div class="opts"><div class="opt"><span class="n">1</span>$5$</div><div class="opt"><span class="n">2</span>$7$</div><div class="opt"><span class="n">3</span>$9$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="exp"></div></div>
+<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $7$</div>
+<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+</div><script>
+const qs=document.querySelectorAll('.q');let pts=0;
+document.getElementById('tot').textContent=qs.length;
+qs.forEach(q=>{const ans=+q.dataset.ans;const exp=q.querySelector('.exp');
+exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
+opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
+q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
+if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
+exp.classList.add('show');document.getElementById('pts').textContent=pts;
+const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
+document.getElementById('pct').textContent=pct+'%';});});});
+function sendProgress(){
+  var name = (window._studentName || '').trim();
+  if (!name) return;
+  var qs = document.querySelectorAll('.q');
+  var total = qs.length;
+  var done = document.querySelectorAll('.q.done');
+  var correct = 0;
+  document.querySelectorAll('.q.done').forEach(function(q){
+    var c = q.querySelector('.opt.correct');
+    if (c) correct++;
+  });
+  var current = done.length;
+  if (current === 0) return;
+  var url = window._sheetsApiUrl || '/api/progress';
+  fetch(url, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      quiz_slug: 'c22262e4',
+      student_name: name,
+      current_step: current,
+      total_steps: total,
+      correct: correct
+    })
+  }).catch(()=>{});
+}
+function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
+navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
+.catch(()=>{prompt('아래 링크를 복사하세요',location.href);}}
+</script><script src="../mathedu-room.js"></script>
+</body></html>
