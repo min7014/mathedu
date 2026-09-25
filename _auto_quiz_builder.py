@@ -162,9 +162,10 @@ Return ONLY a strictly valid JSON object (no markdown code blocks, no backticks,
 }}
 Rules:
 1. All mathematical formulas must use valid LaTeX like $x^2$ or $\\frac{{a}}{{b}}$.
-2. Use valid Korean for all explanations and titles.
-3. Every question must have exactly 5 options and answer between 1 and 5.
-4. Output ONLY the JSON.
+2. Use standard pedagogical Korean for all explanations and titles. NEVER use Chinese characters or artifacts like '的一般형'.
+3. Every question must have exactly 5 options, and the 'answer' field (1-based index 1~5) MUST STRICTLY match the correct option at options[answer - 1].
+4. Mathematical Soundness: Ensure all definitions, concavity/convexity (a > 0 is 아래로 볼록/convex down, a < 0 is 위로 볼록/convex up), intervals, bounds, and step-by-step arithmetic are 100% rigorous and verified with NO hallucinations or unsolvable conditions.
+5. Output ONLY the valid JSON object.
 """
     try:
         res = subprocess.run(
@@ -202,6 +203,15 @@ Rules:
         if quiz_data:
             if ai_extracted_title:
                 quiz_data["title"] = ai_extracted_title
+            # 자동 교정: 중국어 잔재 및 볼록성 반대 표기 정제
+            try:
+                raw_s = json.dumps(quiz_data, ensure_ascii=False)
+                raw_s = raw_s.replace("的一般형", "의 일반형")
+                raw_s = re.sub(r'a\s*(&gt;|>)\s*0\s*—\s*위로\s*볼록', r'a \1 0 — 아래로 볼록', raw_s)
+                raw_s = re.sub(r'a\s*(&lt;|<)\s*0\s*—\s*아래로\s*볼록', r'a \1 0 — 위로 볼록', raw_s)
+                quiz_data = json.loads(raw_s)
+            except Exception:
+                pass
             return quiz_data
     except Exception as e:
         print(f"AI 호출 실패: {e}")

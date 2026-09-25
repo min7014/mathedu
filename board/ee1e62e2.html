@@ -94,9 +94,41 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 삼각함수의 최댓값과 최솟값</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$x$</b> — 미지수</div></div>
-<h2>🔰 제1단계 · 기본 개념 확인</h2><div class="know"><h3>먼저 알아야 할 지식</h3>삼각함수의 최댓값과 최솟값을(를) 풀기 위한 기본 개념을 점검합니다.</div><div class="q" data-ans="1" data-exp="문제의 기본 성질에 의해 1번이 타당합니다."><div class="lvl">문항</div><div class="stem">다음 중 문제의 조건을 만족하는 기본 성질은 무엇인가요?</div><div class="opts"><div class="opt"><span class="n">1</span>조건 A 성립</div><div class="opt"><span class="n">2</span>조건 B 성립</div><div class="opt"><span class="n">3</span>조건 C 성립</div><div class="opt"><span class="n">4</span>조건 D 성립</div><div class="opt"><span class="n">5</span>조건 E 성립</div></div><div class="exp"></div>
-<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b> = a\sin(bx) + c$</b> — 삼각함수의 일반형 (a &gt; 0)</div><div><b>$-1 \le \sin\theta \le 1$</b> — 사인함수의 기본 치역 범위</div><div><b> = a + c$</b> — 함수의 최댓값</div><div><b> = -a + c$</b> — 함수의 최솟값</div></div>
+<h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>실수 전체에서 정의된 삼각함수  = \sin\theta 값의 범위는 항상 $-1 \le \sin\theta \le 1. 따라서  &gt; 0 때 함수  = a\sin(bx) + c 최댓값은  = a + c$, 최솟값은  = -a + c 됩니다.</div><div class="q" data-ans="1" data-exp="각  값에 관계없이 $-1 \le \sin(3x) \le 1 최댓값은 1입니다. (정답 1번)"><div class="lvl">문항</div><div class="stem">함수  = \sin(3x) 최댓값은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>-1</div><div class="opt"><span class="n">5</span>0</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><div class="q" data-ans="1" data-exp="$-1 \le \sin x \le 1 양변에 3을 곱하면 $-3 \le 3\sin x \le 3 최솟값은 -3입니다. (정답 1번)"><div class="lvl">문항</div><div class="stem">함수  = 3\sin x 최솟값은?</div><div class="opts"><div class="opt"><span class="n">1</span>-3</div><div class="opt"><span class="n">2</span>-1</div><div class="opt"><span class="n">3</span>0</div><div class="opt"><span class="n">4</span>1</div><div class="opt"><span class="n">5</span>3</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🔰 제1단계 · 평행이동과 치역</h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수 (x) = 2\sin(2x) + 1 $-1 \le \sin(2x) \le 1, 2를 곱하고 1을 더하여 치역 범위를 결정합니다: $-2 + 1 \le 2\sin(2x) + 1 \le 2 + 1 \iff -1 \le f(x) \le 3$.</div><div class="q" data-ans="3" data-exp="$\sin(2x) = 1 때 (x) = 2(1) + 1 = 3. 따라서 최댓값  = 3. (정답 3번)"><div class="lvl">문항</div><div class="stem">함수 (x) = 2\sin(2x) + 1 최댓값 </div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><div class="q" data-ans="3" data-exp="$\sin(2x) = -1 때 (x) = 2(-1) + 1 = -1. 따라서 최솟값  = -1. (정답 3번)"><div class="lvl">문항</div><div class="stem">함수 (x) = 2\sin(2x) + 1 최솟값 </div><div class="opts"><div class="opt"><span class="n">1</span>-3</div><div class="opt"><span class="n">2</span>-2</div><div class="opt"><span class="n">3</span>-1</div><div class="opt"><span class="n">4</span>0</div><div class="opt"><span class="n">5</span>1</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -109,9 +141,7 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"ee1e62e2",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">문제 원본: 삼각함수 f(x) = 2 sin(2x) + 1 의 최댓값 M과 최솟값 m의 곱을 구하시오.
-해설: </div><div class="q" data-ans="3" data-exp="풀이 해설: 단계별 풀이를 통해 정답을 도출합니다."><div class="lvl">최종 본문항</div><div class="stem">삼각함수 f(x) = 2 sin(2x) + 1 의 최댓값 M과 최솟값 m의 곱을 구하시오.</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="exp"></div>
-<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">[상세 풀이 과정]\n1. 사인함수의 치역 성질:\n   모든 실수  대하여 $-1 \le \sin(2x) \le 1.\n\n2. 최댓값과 최솟값 도출:\n   - 양변에 2를 곱하면: $-2 \le 2\sin(2x) \le 2$\n   - 양변에 1을 더하면: $-1 \le 2\sin(2x) + 1 \le 3$\n   따라서 최댓값  = 3$, 최솟값  = -1.\n\n3. 곱 계산:\n    \times m = 3 \times (-1) = -3$\n\n정답: -3 (보기 2번)</div><div class="q" data-ans="2" data-exp="최댓값  = 2(1) + 1 = 3$, 최솟값  = 2(-1) + 1 = -1. 따라서  \times m = 3 \times (-1) = -3. (정답 2번)"><div class="lvl">최종 본문항</div><div class="stem">삼각함수 (x) = 2\sin(2x) + 1 최댓값  최솟값  대하여  \times m 값을 구하시오.</div><div class="opts"><div class="opt"><span class="n">1</span>$-5$</div><div class="opt"><span class="n">2</span>$-3$</div><div class="opt"><span class="n">3</span>$-1$</div><div class="opt"><span class="n">4</span>$</div><div class="opt"><span class="n">5</span>$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -123,7 +153,7 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 3</div>
+<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $-3$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
@@ -165,8 +195,6 @@ function sendProgress(){
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);}}
-</script><script src="../mathedu-room.js"></script>
-<script>
 function toggleReport(el){
   if(!el) return;
   var wrap=el.closest ? el.closest('.report-wrap') : el.parentElement;
@@ -201,5 +229,4 @@ function submitReport(btn){
     wrap.querySelector('.report-btn').style.display='block';
   },4000);
 }
-</script>
-</body></html>
+</script></body></html>
