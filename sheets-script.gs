@@ -39,6 +39,38 @@ function doPost(e) {
   }
 }
 
+// Normalize timestamp to "YYYY-MM-DD HH:MM:SS" format
+// Handles ISO strings and Date objects. Uses LOCAL time consistently.
+function normalizeTs(ts) {
+  if (!ts) return '';
+  // If ts is a Date object (from Google Sheets getValues), format it as local time
+  if (ts instanceof Date) {
+    return formatLocalTs(ts);
+  }
+  ts = ts.toString();
+  // ISO format "2026-09-24T15:12:09.000Z" — convert to local time representation
+  if (ts.indexOf('T') >= 0) {
+    // Parse the ISO string and format as local time
+    var d = new Date(ts);
+    if (!isNaN(d.getTime())) {
+      return formatLocalTs(d);
+    }
+  }
+  // Already a local string, just truncate
+  return ts.substring(0, 19);
+}
+
+// Format a Date object as "YYYY-MM-DD HH:MM:SS" in local time
+function formatLocalTs(date) {
+  var y = date.getFullYear();
+  var m = ('0' + (date.getMonth() + 1)).slice(-2);
+  var d = ('0' + date.getDate()).slice(-2);
+  var h = ('0' + date.getHours()).slice(-2);
+  var mi = ('0' + date.getMinutes()).slice(-2);
+  var s = ('0' + date.getSeconds()).slice(-2);
+  return y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
+}
+
 function updateReportFix(data) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -49,15 +81,20 @@ function updateReportFix(data) {
     
     var sheetData = sheet.getDataRange().getValues();
     var now = new Date();
-    var fixTimeStr = now.toISOString().replace('T', ' ').substring(0, 19);
+    // Use local time (not UTC via toISOString) to match how the sheet stores timestamps
+    var fixTimeStr = formatLocalTs(now);
+    
+    var targetTs = normalizeTs(data.timestamp || '');
+    var targetQuiz = (data.quiz_slug || '').toString();
+    var targetQ = (data.question_num || '').toString();
     
     // Find the report by timestamp + quiz_slug + question_num
     for (var i = 1; i < sheetData.length; i++) {
-      var rowTs = sheetData[i][0] ? sheetData[i][0].toString() : '';
+      var rowTs = normalizeTs(sheetData[i][0]);
       var rowQuiz = sheetData[i][1] ? sheetData[i][1].toString() : '';
       var rowQ = sheetData[i][2] ? sheetData[i][2].toString() : '';
       
-      if (rowTs === (data.timestamp || '') && rowQuiz === (data.quiz_slug || '') && rowQ === (data.question_num || '')) {
+      if (rowTs === targetTs && rowQuiz === targetQuiz && (rowQ === targetQ || targetQ === '')) {
         // Update columns 6 (fix_timestamp) and 7 (fix_result)
         sheet.getRange(i + 1, 6, 1, 2).setValues([[fixTimeStr, (data.result || '').toString()]]);
         return jsonOutput({ ok: true, row: i + 1 });
@@ -117,7 +154,7 @@ function handleReport(params) {
     
     var now = new Date();
     sheet.appendRow([
-      now.toISOString().replace('T', ' ').substring(0, 19),
+      formatLocalTs(now),
       (params.quiz || '').toString(),
       (params.q || '').toString(),
       (params.name || '익명').toString(),
@@ -202,4 +239,10 @@ function findRow(sheet, quizSlug, studentName) {
     }
   }
   return 0;
+}
+
+
+function doOptions() {
+  return ContentService.createTextOutput('')
+    .setMimeType(ContentService.MimeType.JSON);
 }

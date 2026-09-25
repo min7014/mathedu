@@ -197,12 +197,16 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
     html += 'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
     html += 'if(total===0)return;'
     html += 'fetch(window._sheetsApiUrl,{'
-    html += 'method:"POST",headers:{"Content-Type":"application/json"},'
+    html += 'method:"POST",headers:{"Content-Type":"application/json"}',
     html += 'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
     html += '}).catch(function(){});'
     html += '}'
+    # Answer selection triggers sendProgress after done is set
     html += 'document.querySelectorAll(".q").forEach(function(q){'
-    html += 'q.addEventListener("click",function(){sendProgress();});'
+    html += 'q.addEventListener("click",function(e){'
+    html += 'var opt=e.target.closest(".opt");'
+    html += 'if(opt){setTimeout(sendProgress,50);}'
+    html += '});'
     html += '});'
     html += 'document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});'
     html += '</script>'

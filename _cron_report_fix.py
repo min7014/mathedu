@@ -6,7 +6,7 @@ stdout에 결과를 출력하면 크론잡이 자동으로 배포합니다.
 import json, os, re, sys, urllib.request
 from datetime import datetime, timezone
 
-SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyKFvMp5odSgfBYd3eDjd-ueGnvcudXifd6aePX6D_cZ3IW7QrEa2qFKMBAUurphDQ9Mw/exec'
+SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx5v7nRQWiC19HcYW6SNJ1nogUwSPPnN24NNMJZmrm_KIjX8TQHzNEikLCjoB_vSiL1FQ/exec'
 BOARD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'board')
 PROCESSED_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_processed_reports.json')
 
