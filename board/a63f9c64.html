@@ -130,18 +130,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="자연수 해의 개수는 4H14가 아니라, 각 변수가 1 이상이므로 (14-1)C(4-1) = 13C3 = 286개입니다."><div class="lvl">문항</div><div class="stem">a+b+c+d=14를 만족하는 자연수 순서쌍 (a,b,c,d)는 총 몇 개일까요? (조건 없이)</div><div class="opts"><div class="opt"><span class="n">1</span>286개</div><div class="opt"><span class="n">2</span>210개</div><div class="opt"><span class="n">3</span>165개</div><div class="opt"><span class="n">4</span>120개</div><div class="opt"><span class="n">5</span>91개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -175,18 +179,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="2" data-exp="10a ≥ 11 이므로 a ≥ 11/10 = 1.1, 자연수이므로 a ≥ 2입니다."><div class="lvl">문항</div><div class="stem">조건 10a ≥ d에서 d=11일 때 a는 최소 얼마여야 할까요?</div><div class="opts"><div class="opt"><span class="n">1</span>a≥1</div><div class="opt"><span class="n">2</span>a≥2</div><div class="opt"><span class="n">3</span>a≥3</div><div class="opt"><span class="n">4</span>a≥4</div><div class="opt"><span class="n">5</span>a≥5</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -220,18 +228,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제2단계 · d값별 경우 나누기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>d를 고정하면 a+b+c = 14-d로 정해져서 셀 수 있어요.</div><div class="q" data-ans="1" data-exp="c=1일 때 a+b=11, b≥1이므로 a는 1부터 10까지 가능 → 10개입니다."><div class="lvl">문항</div><div class="stem">d=2일 때, a+b+c=12이고 a≥1, c&lt;4(c≤3), b≥1입니다. c=1일 때 가능한 a의 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span>10개</div><div class="opt"><span class="n">2</span>9개</div><div class="opt"><span class="n">3</span>8개</div><div class="opt"><span class="n">4</span>11개</div><div class="opt"><span class="n">5</span>7개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -265,18 +277,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="c=1일 때 a는 1~7(7개), c=2일 때 a는 1~6(6개), ..., c=7일 때 a는 1~1(1개). 합 = 7+6+5+4+3+2+1 = 28개입니다."><div class="lvl">문항</div><div class="stem">d=5일 때, a+b+c=9이고 c&lt;25(c≤7), a≥1입니다. 가능한 (a,c) 순서쌍의 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span>28개</div><div class="opt"><span class="n">2</span>21개</div><div class="opt"><span class="n">3</span>36개</div><div class="opt"><span class="n">4</span>15개</div><div class="opt"><span class="n">5</span>45개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -310,18 +326,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="c=1일 때 a는 1~4(4개), c=2일 때 a는 1~3(3개), c=3일 때 2개, c=4일 때 1개. 합 = 4+3+2+1 = 10개입니다."><div class="lvl">문항</div><div class="stem">d=8일 때, a+b+c=6이고 c&lt;64(c≤4), a≥1입니다. 가능한 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>10개</div><div class="opt"><span class="n">2</span>6개</div><div class="opt"><span class="n">3</span>15개</div><div class="opt"><span class="n">4</span>4개</div><div class="opt"><span class="n">5</span>20개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -355,18 +375,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제3단계 · 조건 위반 경우 세기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>전체 경우에서 조건을 위반하는 경우를 빼는 방법도 있어요.</div><div class="q" data-ans="1" data-exp="10a &lt; d이려면 a≥1이므로 d≥11. d=11일 때 a=1만 가능하고, b+c=2 → b=1,c=1로 (1,1,1,11) 1개입니다. d=12는 b+c=1이 되어 불가능."><div class="lvl">문항</div><div class="stem">전체 286가지 중에서 10a &lt; d를 위반하는 경우는 몇 개일까요?</div><div class="opts"><div class="opt"><span class="n">1</span>1개</div><div class="opt"><span class="n">2</span>2개</div><div class="opt"><span class="n">3</span>3개</div><div class="opt"><span class="n">4</span>0개</div><div class="opt"><span class="n">5</span>4개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -400,18 +424,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="d=1일 때 c≥1이므로 c=1~b=11(a=1)부터 c=11~b=1(a=1)까지. c=1: a+b=12 → 11개, c=2: 10개, ..., c=11: 1개. 합 = 11+10+...+1 = 66개입니다."><div class="lvl">문항</div><div class="stem">c ≥ d²를 위반하는 경우를 d=1일 때 세어보면? (a+b=13-c, c≥1)</div><div class="opts"><div class="opt"><span class="n">1</span>66개</div><div class="opt"><span class="n">2</span>55개</div><div class="opt"><span class="n">3</span>45개</div><div class="opt"><span class="n">4</span>77개</div><div class="opt"><span class="n">5</span>36개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -445,18 +473,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="c=4일 때 a+b=8 → 7개, c=5: 6개, ..., c=10: 1개. 합 = 7+6+5+4+3+2+1 = 28개입니다."><div class="lvl">문항</div><div class="stem">c ≥ d²를 위반하는 경우 중 d=2일 때는 몇 개일까요? (c≥4, a+b=12-c)</div><div class="opts"><div class="opt"><span class="n">1</span>28개</div><div class="opt"><span class="n">2</span>21개</div><div class="opt"><span class="n">3</span>36개</div><div class="opt"><span class="n">4</span>15개</div><div class="opt"><span class="n">5</span>45개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -490,18 +522,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제4단계 · 종합 계산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>전체 경우에서 위반 경우를 빼서 답을 구해봅시다.</div><div class="q" data-ans="1" data-exp="1 + 66 + 28 + 1 = 96개입니다. 이 경우들은 서로 겹치지 않습니다(d=11과 d=1,2,3은 disjoint)."><div class="lvl">문항</div><div class="stem">전체 286개에서 제외할 경우의 총합은? (10a&lt;d 위반 1개 + c≥d² 위반: d=1 66개, d=2 28개, d=3 1개)</div><div class="opts"><div class="opt"><span class="n">1</span>96개</div><div class="opt"><span class="n">2</span>86개</div><div class="opt"><span class="n">3</span>98개</div><div class="opt"><span class="n">4</span>90개</div><div class="opt"><span class="n">5</span>100개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -535,18 +571,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="286 - 96 = 190개입니다. 따라서 조건을 모두 만족하는 순서쌍 (a,b,c,d)는 190개입니다."><div class="lvl">문항</div><div class="stem">286 - 96 = ? 조건에 맞는 순서쌍의 최종 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span>190개</div><div class="opt"><span class="n">2</span>180개</div><div class="opt"><span class="n">3</span>200개</div><div class="opt"><span class="n">4</span>170개</div><div class="opt"><span class="n">5</span>195개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -580,18 +620,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="d=11일 때 a≥2이고 a+b+c=3. a=2면 b+c=1인데 b,c≥1이라 불가능. a≥3이면 더 불가능. 따라서 해가 없습니다."><div class="lvl">문항</div><div class="stem">d=11일 때 왜 해가 없을까요?</div><div class="opts"><div class="opt"><span class="n">1</span>a≥2이고 a+b+c=3이므로 불가능</div><div class="opt"><span class="n">2</span>c&lt;121 조건이 너무 강해서</div><div class="opt"><span class="n">3</span>b가 음수가 되어야 해서</div><div class="opt"><span class="n">4</span>a+b+c+d=14를 못 맞춰서</div><div class="opt"><span class="n">5</span>d가 너무 커서</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -625,18 +669,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제5단계 · 다른 풀이법 도전</h2><div class="know"><h3>먼저 알아야 할 지식</h3>직접 세는 방법과 포함-배제의 원리를 비교해 봅시다.</div><div class="q" data-ans="1" data-exp="c=1: a는 1~9(9개), c=2: 8개, ..., c=8: 2개. 합 = 9+8+7+6+5+4+3+2 = 44개입니다."><div class="lvl">문항</div><div class="stem">d=3일 때 직접 세기로 경우의 수를 구하면? (a+b+c=11, c&lt;9, a≥1)</div><div class="opts"><div class="opt"><span class="n">1</span>44개</div><div class="opt"><span class="n">2</span>36개</div><div class="opt"><span class="n">3</span>55개</div><div class="opt"><span class="n">4</span>28개</div><div class="opt"><span class="n">5</span>48개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -670,18 +718,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="c &lt; d² = 16이므로 c≤15, 그리고 a+b+c=10에서 a,b≥1이므로 c≤8. 따라서 c의 최댓값은 min(15,8)=8입니다."><div class="lvl">문항</div><div class="stem">d=4일 때 c의 최댓값은? (c&lt;16이고 c≤12-d=8)</div><div class="opts"><div class="opt"><span class="n">1</span>8</div><div class="opt"><span class="n">2</span>15</div><div class="opt"><span class="n">3</span>12</div><div class="opt"><span class="n">4</span>7</div><div class="opt"><span class="n">5</span>9</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -715,18 +767,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><div class="q" data-ans="1" data-exp="c=1: a는 1~2(2개), c=2: a는 1~1(1개). c=3이면 a+b=1 불가능. 합 = 2+1 = 3개입니다."><div class="lvl">문항</div><div class="stem">d=10일 때 가능한 경우의 수는? (a+b+c=4, c&lt;100, a≥1)</div><div class="opts"><div class="opt"><span class="n">1</span>3개</div><div class="opt"><span class="n">2</span>6개</div><div class="opt"><span class="n">3</span>10개</div><div class="opt"><span class="n">4</span>1개</div><div class="opt"><span class="n">5</span>4개</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -760,18 +816,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div>
 <h2>🎯 최종 문제 + 상세 풀이</h2><div class="diagram"><img src="/board/problem_original.png" alt="원본 문제 이미지"></div><div class="sol"><p><b>문제 분석</b></p><p>a, b, c, d는 자연수(≥1)이고 a+b+c+d=14입니다.</p><p>조건 (가): 10a ≥ d → a ≥ ⌈d/10⌉</p><p>조건 (나): c < d² → c ≤ d²-1</p><p>d의 범위: c≥1이므로 d²>1 → d≥2. a,b,c≥1이므로 d≤11. 따라서 d ∈ {2,3,...,11}.</p><br/><p><b>방법 1: d별로 직접 세기</b></p><p>d를 고정하면 a+b+c = 14-d = S. 각 c에 대해 가능한 a의 개수를 셉니다.</p><table style="border-collapse:collapse;margin:10px auto"><tr style="background:#33405e"><th style="border:1px solid #56638c;padding:6px 10px">d</th><th style="border:1px solid #56638c;padding:6px 10px">S</th><th style="border:1px solid #56638c;padding:6px 10px">cmax</th><th style="border:1px solid #56638c;padding:6px 10px">경우의 수</th></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">2</td><td style="border:1px solid #56638c;padding:6px 10px">12</td><td style="border:1px solid #56638c;padding:6px 10px">3</td><td style="border:1px solid #56638c;padding:6px 10px">10+9+8=27</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">3</td><td style="border:1px solid #56638c;padding:6px 10px">11</td><td style="border:1px solid #56638c;padding:6px 10px">8</td><td style="border:1px solid #56638c;padding:6px 10px">9+8+7+6+5+4+3+2=44</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">4</td><td style="border:1px solid #56638c;padding:6px 10px">10</td><td style="border:1px solid #56638c;padding:6px 10px">8</td><td style="border:1px solid #56638c;padding:6px 10px">8+7+6+5+4+3+2+1=36</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">5</td><td style="border:1px solid #56638c;padding:6px 10px">9</td><td style="border:1px solid #56638c;padding:6px 10px">7</td><td style="border:1px solid #56638c;padding:6px 10px">7+6+5+4+3+2+1=28</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">6</td><td style="border:1px solid #56638c;padding:6px 10px">8</td><td style="border:1px solid #56638c;padding:6px 10px">6</td><td style="border:1px solid #56638c;padding:6px 10px">6+5+4+3+2+1=21</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">7</td><td style="border:1px solid #56638c;padding:6px 10px">7</td><td style="border:1px solid #56638c;padding:6px 10px">5</td><td style="border:1px solid #56638c;padding:6px 10px">5+4+3+2+1=15</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">8</td><td style="border:1px solid #56638c;padding:6px 10px">6</td><td style="border:1px solid #56638c;padding:6px 10px">4</td><td style="border:1px solid #56638c;padding:6px 10px">4+3+2+1=10</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">9</td><td style="border:1px solid #56638c;padding:6px 10px">5</td><td style="border:1px solid #56638c;padding:6px 10px">3</td><td style="border:1px solid #56638c;padding:6px 10px">3+2+1=6</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">10</td><td style="border:1px solid #56638c;padding:6px 10px">4</td><td style="border:1px solid #56638c;padding:6px 10px">2</td><td style="border:1px solid #56638c;padding:6px 10px">2+1=3</td></tr><tr><td style="border:1px solid #56638c;padding:6px 10px">11</td><td style="border:1px solid #56638c;padding:6px 10px">3</td><td style="border:1px solid #56638c;padding:6px 10px">0</td><td style="border:1px solid #56638c;padding:6px 10px">0</td></tr></table><p>합계: 27+44+36+28+21+15+10+6+3+0 = <b>190</b></p><br/><p><b>방법 2: 포함-배제 원리</b></p><p>전체 자연수 해: 13C3 = 286개</p><p>위반 1 (10a &lt; d): d=11, a=1, b=c=1 → 1개</p><p>위반 2 (c ≥ d²):</p><p>d=1: c≥1, a+b=13-c → 11+10+...+1 = 66개</p><p>d=2: c≥4, a+b=12-c → 7+6+...+1 = 28개</p><p>d=3: c≥9, a+b=11-c → c=9만 가능 → 1개</p><p>총 제외: 1+66+28+1 = 96개 (중복 없음)</p><p>286 - 96 = <b>190</b></p><br/><p><b>정답: 190개 ✓</b></p></div><div class="q" data-ans="3" data-exp="전체 자연수 해의 수 286개에서 조건 위반 경우를 빼서 190개를 구합니다."><div class="lvl">문항</div><div class="stem">자연수 a, b, c, d가 다음 조건을 모두 만족할 때, 순서쌍 (a, b, c, d)의 개수를 구하시오.
@@ -811,18 +871,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='a63f9c64' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div>
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 190개</div>

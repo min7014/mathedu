@@ -156,18 +156,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="3" data-exp="둘 중 하나이므로 1/2입니다.">
@@ -207,18 +211,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="3" data-exp="둘 중 하나이므로 1/2입니다.">
@@ -258,18 +266,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="3" data-exp="앞앞, 앞뒤, 뒤앞, 뒷뒤 4가지입니다.">
@@ -309,18 +321,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="(앞,앞) 하나뿐입니다.">
@@ -360,18 +376,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="영향을 주지 않으면 독립사건입니다.">
@@ -411,18 +431,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="독립은 곱합니다.">
@@ -462,18 +486,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="(1×1)/(2×2)=1/4입니다.">
@@ -513,18 +541,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="1÷4=1/4입니다.">
@@ -564,18 +596,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="1/2×1/2=1/4입니다. ④는 한 번만 앞면일 확률입니다.">
@@ -615,18 +651,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q27' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div>

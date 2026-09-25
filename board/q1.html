@@ -156,18 +156,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="$\displaystyle \frac{2^2}{3^2}=\frac{4}{9}$. ⑤는 분모분자 뒤집은 오답.">
@@ -207,18 +211,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="음의 지수 -1은 역수를 뜻하므로 $\displaystyle \frac{2}{3}$ 의 역수는 $\displaystyle \frac{3}{2}$.">
@@ -258,18 +266,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="$\displaystyle \left(\frac{3}{2}\right)^2 = \frac{9}{4}$.">
@@ -309,18 +321,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="$\displaystyle \left(\frac{3}{2}\right)^3 = \frac{27}{8}$.">
@@ -360,18 +376,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="분자 $\displaystyle 3^2=9$, 분모 $\displaystyle 2^2=4$ 이므로 $\displaystyle \frac{9}{4}$.">
@@ -411,18 +431,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="2" data-exp="뒤의 분수 $\displaystyle \frac{9}{4}$ 를 뒤집어 $\displaystyle \frac{4}{9}$ 로 곱합니다.">
@@ -462,18 +486,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="3" data-exp="$\displaystyle \frac{108}{72}$ 를 36으로 약분하면 $\displaystyle \frac{3}{2}$.">
@@ -513,18 +541,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div><div class="q" data-ans="4" data-exp="$\displaystyle \left(\frac{3}{2}\right)^{3-2}=\frac32$. 또는 $\displaystyle \frac{27}{8} \times \frac{4}{9}=\frac32$.">
@@ -564,18 +596,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='q1' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script>
 </div>

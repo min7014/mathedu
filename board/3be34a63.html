@@ -125,18 +125,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='3be34a63' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제2단계 · $d=7$일 때 $\tan\theta$</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\tan\theta_1=\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.</div><div class="q" data-ans="1" data-exp="$\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-h/49}=\dfrac{7(h+1)}{49-h}$."><div class="lvl">문항</div><div class="stem">$d=7$일 때 $\tan\theta_1$은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{7(h+1)}{49-h}$</div><div class="opt"><span class="n">2</span>$\dfrac{h+1}{7}$</div><div class="opt"><span class="n">3</span>$\dfrac{7h}{49-h}$</div><div class="opt"><span class="n">4</span>$\dfrac{h+1}{49-h}$</div><div class="opt"><span class="n">5</span>$\dfrac{7}{49-h}$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -170,18 +174,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='3be34a63' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제3단계 · $d=2$일 때 $\tan\theta$</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.</div><div class="q" data-ans="1" data-exp="$\dfrac{h/2+1/2}{1-h/4}=\dfrac{2(h+1)}{4-h}$."><div class="lvl">문항</div><div class="stem">$d=2$일 때 $\tan\theta_2$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{2(h+1)}{4-h}$</div><div class="opt"><span class="n">2</span>$\dfrac{h+1}{2}$</div><div class="opt"><span class="n">3</span>$\dfrac{2h}{4-h}$</div><div class="opt"><span class="n">4</span>$\dfrac{h+1}{4-h}$</div><div class="opt"><span class="n">5</span>$\dfrac{2}{4-h}$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -215,18 +223,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='3be34a63' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제4단계 · 각 차이 $\pi/4$ 활용</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\theta_2-\theta_1=\pi/4$ 이므로 $\tan(\theta_2-\theta_1)=1$. $\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}$. $u=h+1=H$로 두면 전개 후 $u^2-12u+25=0$.</div><div class="q" data-ans="1" data-exp="$\tan(\pi/4)=1$."><div class="lvl">문항</div><div class="stem">$\theta_2-\theta_1=\pi/4$일 때 $\tan(\theta_2-\theta_1)$은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$\sqrt{2}$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$\infty$</div><div class="opt"><span class="n">5</span>$1/2$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -260,18 +272,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='3be34a63' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div><h2>제5단계 · $H$ 두 값과 합</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$u^2-12u+25=0$의 해 $u=6\pm\sqrt{11}=H$. 두 높이 $a,b$의 합 $a+b=(6+\sqrt{11})+(6-\sqrt{11})=12$.</div><div class="q" data-ans="1" data-exp="$u=6\pm\sqrt{11}$, 합 $=12$."><div class="lvl">문항</div><div class="stem">나무 높이 두 가능값의 합 $a+b$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -305,18 +321,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='3be34a63' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div>
 <h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><b>① 변수 설정.</b> 나무 실제 높이 $H$, 눈높이 위 남은 높이 $h=H-1$. 수평거리 $d$에 대해 꼭대기 고각 $\alpha$($\tan\alpha=h/d$), 지면 저각 $\beta$($\tan\beta=1/d$). 주어진 각 $\theta=\alpha+\beta$.</p><p><b>② $d=7$일 때.</b> $\tan\theta_1=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.</p><p><b>③ $d=2$일 때.</b> $\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.</p><p><b>④ 각 차이 활용.</b> $\theta_2-\theta_1=\pi/4$이므로 $\tan(\theta_2-\theta_1)=1$.</p><p>$\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}=1$에 대입. $u=h+1=H$로 두면 전개 후 <b>$u^2-12u+25=0$</b>.</p><p><b>⑤ 해.</b> $u=\dfrac{12\pm\sqrt{144-100}}{2}=6\pm\sqrt{11}=H$.</p><p>나무 높이 두 가능값 $a,b$의 합: $a+b=(6+\sqrt{11})+(6-\sqrt{11})=\boxed{12}$.</p><p>※ 참고: '지면 닿는 지점'은 수평선이 아니라 눈높이에서 내려다보는 저각 $\beta$임을 놓치면 해가 없어짐.</p></div><div class="q" data-ans="1" data-exp="$u=H$에 대해 $u^2-12u+25=0$, 해 $6\pm\sqrt{11}$, 합 $12$."><div class="lvl">문항</div><div class="stem">눈높이가 $1\mathrm{m}$인 어린이가 나무로부터 $7\mathrm{m}$ 떨어진 지점에서 나무의 꼭대기를 바라본 선과 나무가 지면에 닿는 지점을 바라본 선이 이루는 각이 $\theta$이었다. 나무로부터 $2\mathrm{m}$ 떨어진 지점에서 나무를 바라보았더니 그 각이 $\theta+\dfrac{\pi}{4}$가 되었다. 나무의 높이는 $a(\mathrm{m})$ 또는 $b(\mathrm{m})$이다. $a+b$의 값은? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</div><div class="opts"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="exp"></div>
@@ -351,18 +371,22 @@ function toggleReport(el){
 function submitReport(btn){
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window.location.pathname.split('/').pop().replace('.html','');
+  var slug='3be34a63' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var text=wrap.querySelector('.report-text').value.trim();
-  var url=window._sheetsApiUrl;
-  if(url){
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
     var img=new Image();
-    img.src=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  }
+    img.src=reportUrl;
+  } catch(e){}
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
-  setTimeout(function(){wrap.querySelector('.report-msg').style.display='none';wrap.querySelector('.report-btn').style.display='block';},4000);
 }
 </script></div>
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $12$</div>
