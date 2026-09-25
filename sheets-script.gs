@@ -87,9 +87,12 @@ function handleReport(params) {
       (params.text || '').toString()
     ]);
     
-    return jsonOutput({ ok: true });
+    // Return 1x1 transparent GIF (for Image beacon)
+    return ContentService.createTextOutput('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
+      .setMimeType(ContentService.MimeType.GIF);
   } catch (err) {
-    return jsonOutput({ ok: false, error: err.toString() });
+    return ContentService.createTextOutput('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
+      .setMimeType(ContentService.MimeType.GIF);
   }
 }
 
