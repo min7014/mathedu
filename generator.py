@@ -85,6 +85,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit input{{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}}
 #trackSubmit button{{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}}
 #trackResult{{display:none;padding:10px;border-radius:10px;font-weight:700}}
+.orig-card{{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}}
+.orig-tag{{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}}
+.orig-stem{{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}}
+.orig-media{{text-align:center;margin:14px 0}}
+.orig-media img{{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}}
+.orig-tip{{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}}
 </style>
 <script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\(','\\)']]}}}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -97,6 +108,7 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 {title}</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+{original_block}
 {symbols_block}
 {levels_block}
 {tracking_block}
@@ -305,16 +317,39 @@ def generate_html(data):
                     _sheets_url = _f.read().strip()
         except Exception:
             pass
+    # ★ 원본 문제 상단 표시 블록 (이미지 또는 텍스트)
+    orig_text = data.get("original_content") or data.get("original_text") or f.get("stem") or data.get("content") or ""
+    orig_img = data.get("original_image") or data.get("image") or data.get("figure") or f.get("figure") or ""
+    
+    orig_media_html = ""
+    if orig_img:
+        orig_media_html = f'<div class="orig-media"><img src="{_esc(orig_img)}" alt="원본 문제 이미지"></div>'
+        
+    orig_text_html = ""
+    if orig_text:
+        clean_text = _esc(str(orig_text)).replace("\n", "<br>")
+        orig_text_html = f'<div class="orig-stem">{clean_text}</div>'
+        
+    original_block = ""
+    if orig_text_html or orig_media_html:
+        original_block = (
+            f'<div class="orig-card">'
+            f'<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>'
+            f'{orig_media_html}'
+            f'{orig_text_html}'
+            f'<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>'
+            f'</div>'
+        )
+
     tracking_block = _tracking_html(data.get("slug", ""), _sheets_url)
     slug_js = data.get("slug", "").replace("'", "\\'")
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),
+        original_block=original_block,
         symbols_block=symbols_block, levels_block=levels_block,
         solution_block=solution_block, final_ans=_esc(final_ans),
         tracking_block=tracking_block,
         slug_js=slug_js)
-    # ★ 안전장치: 원본 캡처 이미지(img_xxx.png 등)가 게시물에 그대로 박이는 것 차단
-    html = re.sub(r'<img[^>]*src=["\']?[^\"\']*img_[0-9a-f]+\.[a-z]+["\']?[^>]*>', '', html, flags=re.I)
     return html
 
 def save(data, board_dir="board"):

@@ -82,6 +82,17 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
+.orig-media{text-align:center;margin:14px 0}
+.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -94,6 +105,11 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 이차함수의 최대·최소</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+<div class="orig-stem">이차함수 $f(x) = -2x^2 + 8x - 3$의 최대값을 구하시오.</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>f(x) = ax² + bx + c</b> — 이차함수의 일반형태</div><div><b>y = a(x - h)² + k</b> — 이차함수의 꼭짓점형태 (a ≠ 0)</div><div><b>h = -\frac{b}{2a}</b> — 꼭짓점의 x좌표 (대칭축)</div><div><b>k = \frac{4ac - b²}{4a}</b> — 꼭짓점의 y좌표 (최대/최소값)</div><div><b>a &gt; 0</b> — 아래로 볼록 → 최소값 존재</div><div><b>a &lt; 0</b> — 위로 볼록 → 최대값 존재</div></div>
 <h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>이차함수 $y = ax^2 + bx + c$ ($a \neq 0$)의 그래프는 포물선이다. $a &gt; 0$이면 아래로 볼록하여 최소값을, $a &lt; 0$이면 위로 볼록하여 최대값을 갖는다. 꼭짓점은 $x = -\frac{b}{2a}$에서 구할 수 있다.</div><div class="q" data-ans="2" data-exp="이차항의 계수 $a = 3 &gt; 0$이므로 포물선은 아래로 볼록(∪ 모양)이다. 아래로 볼록인 포물선은 꼭짓점에서 **최소값**을 갖는다. 따라서 정답은 2번이다."><div class="lvl">문항</div><div class="stem">이차함수 $y = 3x^2 - 6x + 1$의 그래프는 어떤 형태인가?</div><div class="opts"><div class="opt"><span class="n">1</span>위로 볼록하며, 최대값을 갖는다</div><div class="opt"><span class="n">2</span>아래로 볼록하며, 최소값을 갖는다</div><div class="opt"><span class="n">3</span>위로 볼록하며, 최소값을 갖는다</div><div class="opt"><span class="n">4</span>아래로 볼록하며, 최대값을 갖는다</div><div class="opt"><span class="n">5</span>직선이며, 최대최소가 없다</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

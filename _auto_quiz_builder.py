@@ -271,6 +271,7 @@ def create_and_publish_quiz(title, content, hint, reporter):
     # 3. 고유 slug 생성 (8자리 hex)
     slug = hashlib.md5((final_title + str(time.time())).encode('utf-8')).hexdigest()[:8]
     quiz_data["slug"] = slug
+    quiz_data["original_content"] = content
     
     # 4. HTML 생성
     html_content = generator.generate_html(quiz_data)
