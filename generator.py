@@ -3,7 +3,8 @@ import json, html, os, hashlib, time, re
 
 TEMPLATE = r"""<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title}</title>
+<title>{title} · min7014 mathedu</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <style>
 :root{{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
 --txt:#eef2ff;--sub:#aab4d4;--accent:#7cc4ff;--accent2:#a78bfa;--good:#5eead4;--bad:#fb7185;--gold:#fde68a;
@@ -101,8 +102,11 @@ letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}}
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
-<a class="tbtn" href="/mathedu/">← 게시판</a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</a>
+<a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
+<img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
+<span>min7014 <b>mathedu</b></span>
+</a>
+<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
 </div>
 <div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
