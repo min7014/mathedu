@@ -106,16 +106,17 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-header-title{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:#fff}
 .min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
 .min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
-.min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55}
-.min-list{display:flex;flex-direction:column;gap:10px}
-.min-item{background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;transition:.15s}
-.min-item:hover{background:rgba(22,28,54,.7);border-color:var(--accent);transform:translateX(2px)}
-.min-item-main{flex:1;min-width:240px}
-.min-item-title{color:#eef2ff;font-size:.92rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;line-height:1.45}
+.min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
+.min-list{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item-main{width:100%;min-width:0;box-sizing:border-box}
+.min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
 .min-item-title:hover{color:var(--accent)}
-.min-bullet{font-size:.85rem}
-.min-item-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.min-btn{font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.min-item-sub{display:block;font-size:.8rem;font-weight:400;color:var(--sub);margin-top:4px;line-height:1.4;word-break:break-word}
+.min-bullet{font-size:.85rem;margin-right:4px}
+.min-item-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.min-btn{font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}
 .min-btn-ggb{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.45);color:#38bdf8}
 .min-btn-ggb:hover{background:#38bdf8;color:#0b1020}
 .min-btn-pdf{background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.45);color:#f87171}
@@ -749,7 +750,8 @@ function submitReport(btn){
         <div class="min-item">
           <div class="min-item-main">
             <a href="https://min7014.github.io/math20230530001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 확률분포(Probability Distribution)
+              <span class="min-bullet">📌</span> 확률분포
+              <span class="min-item-sub">Probability Distribution</span>
             </a>
           </div>
           <div class="min-item-actions">
@@ -761,7 +763,8 @@ function submitReport(btn){
         <div class="min-item">
           <div class="min-item-main">
             <a href="https://min7014.github.io/math20230515001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 시행과 사건(Experiment and Event)
+              <span class="min-bullet">📌</span> 시행과 사건
+              <span class="min-item-sub">Experiment and Event</span>
             </a>
           </div>
           <div class="min-item-actions">
@@ -773,7 +776,8 @@ function submitReport(btn){
         <div class="min-item">
           <div class="min-item-main">
             <a href="https://min7014.github.io/math20250201001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 정칠각형 매듭(Regular Heptagonal Knot)
+              <span class="min-bullet">📌</span> 정칠각형 매듭
+              <span class="min-item-sub">Regular Heptagonal Knot</span>
             </a>
           </div>
           <div class="min-item-actions">
@@ -785,7 +789,8 @@ function submitReport(btn){
         <div class="min-item">
           <div class="min-item-main">
             <a href="https://min7014.github.io/math20250129001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 정칠각형 매듭의 반사(Reflection of the Regular Heptagonal Knot)
+              <span class="min-bullet">📌</span> 정칠각형 매듭의 반사
+              <span class="min-item-sub">Reflection of the Regular Heptagonal Knot</span>
             </a>
           </div>
           <div class="min-item-actions">
@@ -806,7 +811,8 @@ function submitReport(btn){
         <div class="min-item">
           <div class="min-item-main">
             <a href="https://min7014.github.io/math20220507001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 초점이 점 $\mathrm{F_1}$, 점 $\mathrm{F_2}$인 타원에서 타원상의 점 $\mathrm{P}$에서 $\mathrm{P}$의 접선과 직선 $\mathrm{PF_1}$이 이루는 각과 $\mathrm{P}$의 접선과 직선 $\mathrm{PF_2}$가 이루는 각의 크기는 같다. (The angle formed by the tangent line of $\mathrm{P}$ and the straight line $\mathrm{PF_1}$ at the point $\mathrm{P}$ on the ellipse with the focus $\mathrm{F_1}$ and $\mathrm{F_2}$ and the angle formed by the tangent line of $\mathrm{P}$ and the straight line $\mathrm{PF_2}$ are the same.)
+              <span class="min-bullet">📌</span> 초점이 점 $\mathrm{F_1}$, 점 $\mathrm{F_2}$인 타원에서 타원상의 점 $\mathrm{P}$에서 $\mathrm{P}$의 접선과 직선 $\mathrm{PF_1}$이 이루는 각과 $\mathrm{P}$의 접선과 직선 $\mathrm{PF_2}$가 이루는 각의 크기는 같다.
+              <span class="min-item-sub">The angle formed by the tangent line of $\mathrm{P}$ and the straight line $\mathrm{PF_1}$ at the point $\mathrm{P}$ on the ellipse with the focus $\mathrm{F_1}$ and $\mathrm{F_2}$ and the angle formed by the tangent line of $\mathrm{P}$ and the straight line $\mathrm{PF_2}$ are the same.</span>
             </a>
           </div>
           <div class="min-item-actions">
@@ -818,7 +824,8 @@ function submitReport(btn){
         <div class="min-item">
           <div class="min-item-main">
             <a href="https://min7014.github.io/math20191218001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 원 밖의 한 점을 지나는 직선이 원과 두 점에서 만날때 두 교점의 중점은 그 원 밖의 한 점과 원의 중심을 지름의 양 끝점으로 하는 원 위에 있다.(When a straight line passing through a point outside the circle meets at the circle and at two points, the midpoint of the two intersections is on the circle with both ends of the diameter as the center of the circle and the point outside the circle.)
+              <span class="min-bullet">📌</span> 원 밖의 한 점을 지나는 직선이 원과 두 점에서 만날때 두 교점의 중점은 그 원 밖의 한 점과 원의 중심을 지름의 양 끝점으로 하는 원 위에 있다.
+              <span class="min-item-sub">When a straight line passing through a point outside the circle meets at the circle and at two points, the midpoint of the two intersections is on the circle with both ends of the diameter as the center of the circle and the point outside the circle.</span>
             </a>
           </div>
           <div class="min-item-actions">

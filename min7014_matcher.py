@@ -102,7 +102,16 @@ def generate_addon_card_html(materials, problem_title=""):
 
     items_html = ""
     for it in materials:
-        title = html.escape(it.get("title", ""))
+        raw_title = it.get("title", "")
+        # 영문 부제가 괄호/대괄호로 붙은 경우 분리 (내부 수식/괄호 포함 지원)
+        m = re.match(r'^(.*?)\s*[\(\[]([A-Za-z][^가-힣]*?)[\)\]]\s*$', raw_title)
+        if m:
+            ko_part = m.group(1).strip()
+            en_part = m.group(2).strip()
+        else:
+            ko_part = raw_title
+            en_part = ""
+            
         url = html.escape(it.get("url", "https://min7014.github.io/"))
         pdf = it.get("pdf", "")
         yt = it.get("youtube", "")
@@ -117,12 +126,14 @@ def generate_addon_card_html(materials, problem_title=""):
             actions.append(f'<a href="{html.escape(yt)}" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>')
             
         actions_str = " ".join(actions)
+        sub_html = f'<span class="min-item-sub">{html.escape(en_part)}</span>' if en_part else ""
         
         items_html += f"""
         <div class="min-item">
           <div class="min-item-main">
             <a href="{url}" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> {title}
+              <span class="min-bullet">📌</span> {html.escape(ko_part)}
+              {sub_html}
             </a>
           </div>
           <div class="min-item-actions">

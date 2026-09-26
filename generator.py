@@ -109,16 +109,17 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-header-title{{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:#fff}}
 .min-logo{{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}}
 .min-tag{{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}}
-.min-lead{{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55}}
-.min-list{{display:flex;flex-direction:column;gap:10px}}
-.min-item{{background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;transition:.15s}}
-.min-item:hover{{background:rgba(22,28,54,.7);border-color:var(--accent);transform:translateX(2px)}}
-.min-item-main{{flex:1;min-width:240px}}
-.min-item-title{{color:#eef2ff;font-size:.92rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;line-height:1.45}}
+.min-lead{{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}}
+.min-list{{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}}
+.min-item{{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}}
+.min-item:hover{{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}}
+.min-item-main{{width:100%;min-width:0;box-sizing:border-box}}
+.min-item-title{{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}}
 .min-item-title:hover{{color:var(--accent)}}
-.min-bullet{{font-size:.85rem}}
-.min-item-actions{{display:flex;gap:6px;flex-wrap:wrap;align-items:center}}
-.min-btn{{font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}}
+.min-item-sub{{display:block;font-size:.8rem;font-weight:400;color:var(--sub);margin-top:4px;line-height:1.4;word-break:break-word}}
+.min-bullet{{font-size:.85rem;margin-right:4px}}
+.min-item-actions{{display:flex;gap:8px;flex-wrap:wrap;align-items:center}}
+.min-btn{{font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}}
 .min-btn-ggb{{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.45);color:#38bdf8}}
 .min-btn-ggb:hover{{background:#38bdf8;color:#0b1020}}
 .min-btn-pdf{{background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.45);color:#f87171}}
