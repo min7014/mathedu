@@ -318,21 +318,25 @@ def generate_html(data):
                     _sheets_url = _f.read().strip()
         except Exception:
             pass
-    # ★ 원본 문제 상단 표시 블록 (이미지 또는 텍스트)
-    orig_text = data.get("original_content") or data.get("original_text") or f.get("stem") or data.get("content") or ""
+    # ★ 원본 문제 상단 표시 블록: 원본 그림이 있으면 그림으로 표시!
     orig_img = data.get("original_image") or data.get("image") or data.get("figure") or f.get("figure") or ""
+    orig_text = data.get("original_content") or data.get("original_text") or f.get("stem") or data.get("content") or ""
     
     orig_media_html = ""
-    if orig_img:
-        orig_media_html = f'<div class="orig-media"><img src="{_esc(orig_img)}" alt="원본 문제 이미지"></div>'
-        
     orig_text_html = ""
-    if orig_text:
+    if orig_img:
+        # 원본 그림이 있으면 그림으로 표시
+        img_src = str(orig_img).strip()
+        if not img_src.startswith('http') and not img_src.startswith('/') and not img_src.startswith('.'):
+            img_src = f"/board/{img_src}"
+        orig_media_html = f'<div class="orig-media"><img src="{_esc(img_src)}" alt="원본 문제 이미지"></div>'
+    elif orig_text:
+        # 원본 그림이 없을 때만 텍스트로 표시
         clean_text = _esc(str(orig_text)).replace("\n", "<br>")
         orig_text_html = f'<div class="orig-stem">{clean_text}</div>'
         
     original_block = ""
-    if orig_text_html or orig_media_html:
+    if orig_media_html or orig_text_html:
         original_block = (
             f'<div class="orig-card">'
             f'<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>'

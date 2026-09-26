@@ -110,8 +110,8 @@ def handle_new_quiz_request(r):
     print(f"\n✨ [AI_BUILDER] 신규 퀴즈 생성 요청 처리 시작 (신청자: {reporter})", flush=True)
     try:
         from _auto_quiz_builder import parse_request_text, create_and_publish_quiz
-        title, content, hint, email, requested_slug = parse_request_text(text)
-        res = create_and_publish_quiz(title, content, hint, reporter, email=email, requested_slug=requested_slug)
+        title, content, hint, email, requested_slug, image_b64, image_ext = parse_request_text(text)
+        res = create_and_publish_quiz(title, content, hint, reporter, email=email, requested_slug=requested_slug, image_b64=image_b64, image_ext=image_ext)
         slug, quiz_url, final_title = res[0], res[1], res[2]
         
         # 구글 시트에 처리 완료 기록 및 이메일 자동 발송

@@ -5,7 +5,7 @@ mathedu AI 자동 퀴즈 빌더 (_auto_quiz_builder.py)
 초등·중학생도 이해할 수 있는 5~8단계 인터랙티브 수학 퀴즈 HTML을 자동 제작하고
 board/index.json 등록 및 GitHub Pages에 실시간 배포합니다.
 """
-import os, sys, json, re, time, hashlib, subprocess, urllib.request
+import os, sys, json, re, time, hashlib, subprocess, urllib.request, base64
 from datetime import datetime, timezone, timedelta
 import generator
 
@@ -80,6 +80,8 @@ def parse_request_text(text):
     content = ""
     hint = ""
     email = ""
+    image_b64 = ""
+    image_ext = "png"
     
     slug_m = re.search(r'슬러그:\s*([a-f0-9]{8})', text, re.I)
     if slug_m: slug = slug_m.group(1).strip()
@@ -96,10 +98,21 @@ def parse_request_text(text):
     email_m = re.search(r'이메일:\s*([^\s\n\r]+@[^\s\n\r]+)', text)
     if email_m: email = email_m.group(1).strip()
     
+    # 이미지 Base64 데이터 추출
+    img_b64_m = re.search(r'\[이미지데이터:\s*data:image\/([a-zA-Z0-9]+);base64,([a-zA-Z0-9\+\/=]+)\]', text)
+    if img_b64_m:
+        image_ext = img_b64_m.group(1).lower()
+        image_b64 = img_b64_m.group(2).strip()
+    else:
+        raw_b64_m = re.search(r'data:image\/([a-zA-Z0-9]+);base64,([a-zA-Z0-9\+\/=]+)', text)
+        if raw_b64_m:
+            image_ext = raw_b64_m.group(1).lower()
+            image_b64 = raw_b64_m.group(2).strip()
+    
     if not title and not content:
         content = text
         
-    return title, content or text, hint, email, slug
+    return title, content or text, hint, email, slug, image_b64, image_ext
 
 HERMES_BIN = r'C:\Users\min\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe'
 if not os.path.exists(HERMES_BIN):
@@ -254,7 +267,7 @@ Rules:
         }
     }
 
-def create_and_publish_quiz(title, content, hint, reporter, email="", requested_slug=""):
+def create_and_publish_quiz(title, content, hint, reporter, email="", requested_slug="", image_b64="", image_ext="png"):
     """
     퀴즈를 생성하고 board/{slug}.html 저장, index.json 등록 및 Git 푸시까지 완료합니다.
     제목이 없을 경우 문제 내용을 분석해 고품질 수학 제목을 자동 생성합니다.
@@ -286,6 +299,20 @@ def create_and_publish_quiz(title, content, hint, reporter, email="", requested_
         slug = hashlib.md5((final_title + str(time.time())).encode('utf-8')).hexdigest()[:8]
     quiz_data["slug"] = slug
     quiz_data["original_content"] = content
+
+    # 3-1. 원본 문제 이미지가 첨부되어 있으면 디코딩하여 board/img_{slug}.ext 파일로 저장
+    orig_img_filename = None
+    if image_b64:
+        try:
+            ext = 'jpg' if image_ext in ['jpg', 'jpeg'] else 'png'
+            orig_img_filename = f"img_{slug}.{ext}"
+            img_path = os.path.join(BOARD_DIR, orig_img_filename)
+            with open(img_path, 'wb') as img_fh:
+                img_fh.write(base64.b64decode(image_b64))
+            quiz_data["original_image"] = f"/board/{orig_img_filename}"
+            print(f"  ↳ 🖼️ 원본 문제 이미지 디코딩 저장 완료: board/{orig_img_filename}")
+        except Exception as e:
+            print(f"  ↳ ⚠️ 원본 이미지 디코딩 실패: {e}")
     
     # 4. HTML 생성
     html_content = generator.generate_html(quiz_data)
@@ -323,7 +350,10 @@ def create_and_publish_quiz(title, content, hint, reporter, email="", requested_
     # 8. Git commit & push
     deploy_ok = False
     try:
-        subprocess.run(["git", "add", f"board/{slug}.html", "board/index.json"], cwd=REPO_DIR, check=True)
+        git_add_files = [f"board/{slug}.html", "board/index.json"]
+        if orig_img_filename and os.path.exists(os.path.join(BOARD_DIR, orig_img_filename)):
+            git_add_files.append(f"board/{orig_img_filename}")
+        subprocess.run(["git", "add"] + git_add_files, cwd=REPO_DIR, check=True)
         commit_msg = f"feat(quiz): auto-generate new quiz '{final_title}' ({slug})"
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=REPO_DIR, check=True)
         subprocess.run(["git", "push", "origin", "main"], cwd=REPO_DIR, check=True)

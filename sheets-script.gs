@@ -10,6 +10,11 @@ function doPost(e) {
       return updateReportFix(data);
     }
     
+    // Handle report / quiz creation request action
+    if (data.action === 'report') {
+      return handleReportPost(data);
+    }
+    
     var sheet = getOrCreateSheet();
     
     var quizSlug = (data.quiz_slug || '').toString();
@@ -227,6 +232,30 @@ function handleReport(params) {
   } catch (err) {
     return ContentService.createTextOutput('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
       .setMimeType(ContentService.MimeType.GIF);
+  }
+}
+
+function handleReportPost(data) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = getOrCreateReportSheet();
+    var now = new Date();
+    var payloadText = (data.text || '').toString();
+    if (data.image_b64) {
+      payloadText += '\n[이미지데이터: ' + data.image_b64 + ']';
+    }
+    sheet.appendRow([
+      formatLocalTs(now),
+      (data.quiz || data.quiz_slug || '_request_new').toString(),
+      (data.q || data.question_num || '0').toString(),
+      (data.name || '선생님').toString(),
+      payloadText,
+      '',
+      ''
+    ]);
+    return jsonOutput({ ok: true });
+  } catch (err) {
+    return jsonOutput({ ok: false, error: err.toString() });
   }
 }
 
