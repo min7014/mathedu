@@ -391,7 +391,7 @@ def generate_html(data):
     search_corpus = f"{data.get('title', '')} {data.get('original_content', '')} {data.get('content', '')} {f.get('stem', '')}"
     min7014_materials_block = ""
     try:
-        matched_items = min7014_matcher.match_materials(search_corpus, limit=3)
+        matched_items = min7014_matcher.match_materials(search_corpus, limit=4)
         min7014_materials_block = min7014_matcher.generate_addon_card_html(matched_items, data.get("title", ""))
     except Exception as e:
         min7014_materials_block = ""

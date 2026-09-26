@@ -1074,6 +1074,8 @@ function toggleMathStory() {
       html += '<div class="meta">';
       if (time) html += '<span>' + time + '</span>';
       html += '<span style="color:var(--sub)">· 슬러그: <code>' + slug + '</code></span>';
+      html += '<span style="display:inline-flex;align-items:center;gap:3px;background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.38);color:#38bdf8;padding:2px 7px;border-radius:8px;font-size:.72rem;font-weight:700">📐 GeoGebra 연계</span>';
+      html += '<span style="display:inline-flex;align-items:center;gap:3px;background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.38);color:#f87171;padding:2px 7px;border-radius:8px;font-size:.72rem;font-weight:700">📄 개념증명 PDF</span>';
       html += '</div></div>';
       html += '<div class="card-actions">';
       html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">🚀 수업 열기</button>';

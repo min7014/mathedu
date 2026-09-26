@@ -188,7 +188,8 @@ Rules:
 2. Use standard pedagogical Korean for all explanations and titles. NEVER use Chinese characters or artifacts like '的一般형'.
 3. Every question must have exactly 5 options, and the 'answer' field (1-based index 1~5) MUST STRICTLY match the correct option at options[answer - 1].
 4. Mathematical Soundness: Ensure all definitions, concavity/convexity (a > 0 is 아래로 볼록/convex down, a < 0 is 위로 볼록/convex up), intervals, bounds, and step-by-step arithmetic are 100% rigorous and verified with NO hallucinations or unsolvable conditions.
-5. Output ONLY the valid JSON object.
+5. Visual Geometric Intuition: Emphasize visual principles and geometrical intuition (following Teacher Min Eun Gi's min7014.github.io philosophy: dynamic graphs, symmetries, loci, and Dandelin conic properties) in the step-by-step knowledge and explanations so students understand the underlying 'why' rather than just memorizing formulas.
+6. Output ONLY the valid JSON object.
 """
     try:
         res = subprocess.run(

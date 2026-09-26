@@ -184,12 +184,12 @@ def load_conversation_history(max_entries=10):
             return ""
         with open(INQUIRIES_LOG, 'r', encoding='utf-8') as f:
             records = json.load(f)
-        # 가장 최근 max_entries개만 사용
+        # 가장 최근 max_entries개를 시간 순서(과거 -> 최신)로 배치
         recent = records[:max_entries]
         if not recent:
             return ""
         lines = []
-        for r in recent:
+        for r in reversed(recent):
             q = r.get('query', '')
             a = r.get('answer', '')[:500]  # 답변은 길이 제한
             if q and a:
