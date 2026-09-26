@@ -113,19 +113,6 @@ def generate_addon_card_html(materials, problem_title=""):
             en_part = ""
             
         url = html.escape(it.get("url", "https://min7014.github.io/"))
-        pdf = it.get("pdf", "")
-        yt = it.get("youtube", "")
-        ggb = it.get("geogebra", "")
-        
-        actions = []
-        if ggb:
-            actions.append(f'<a href="{html.escape(ggb)}" target="_blank" rel="noopener" class="min-btn min-btn-ggb" title="GeoGebra 인터랙티브 탐구">📐 GeoGebra 조작</a>')
-        if pdf:
-            actions.append(f'<a href="{html.escape(pdf)}" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="원리 증명 및 정리 PDF">📄 PDF 정리</a>')
-        if yt:
-            actions.append(f'<a href="{html.escape(yt)}" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>')
-            
-        actions_str = " ".join(actions)
         sub_html = f'<span class="min-item-sub">{html.escape(en_part)}</span>' if en_part else ""
         
         items_html += f"""
@@ -137,7 +124,6 @@ def generate_addon_card_html(materials, problem_title=""):
             </a>
           </div>
           <div class="min-item-actions">
-            {actions_str}
             <a href="{url}" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
           </div>
         </div>

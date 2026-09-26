@@ -126,7 +126,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-btn-pdf:hover{{background:#f87171;color:#0b1020}}
 .min-btn-yt{{background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.45);color:#fca5a5}}
 .min-btn-yt:hover{{background:#ef4444;color:#fff}}
-.min-btn-detail{{background:var(--card2);border:1px solid var(--line);color:var(--sub)}}
+.min-btn-detail{{background:rgba(124,196,255,.14);border:1px solid rgba(124,196,255,.4);color:var(--accent)}}
 .min-btn-detail:hover{{background:var(--accent);color:#0b1020;border-color:var(--accent)}}
 .min-footer{{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}}
 .min-footer-link{{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}}
