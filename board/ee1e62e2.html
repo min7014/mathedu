@@ -93,6 +93,39 @@ letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
 .orig-media{text-align:center;margin:14px 0}
 .orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
 .orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+
+/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+.min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
+border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:.2s}
+.min7014-addon-card:hover{border-color:rgba(124,196,255,.55)}
+.min-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.min-header-title{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:#fff}
+.min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
+.min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
+.min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55}
+.min-list{display:flex;flex-direction:column;gap:10px}
+.min-item{background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;transition:.15s}
+.min-item:hover{background:rgba(22,28,54,.7);border-color:var(--accent);transform:translateX(2px)}
+.min-item-main{flex:1;min-width:240px}
+.min-item-title{color:#eef2ff;font-size:.92rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;line-height:1.45}
+.min-item-title:hover{color:var(--accent)}
+.min-bullet{font-size:.85rem}
+.min-item-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.min-btn{font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.min-btn-ggb{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.45);color:#38bdf8}
+.min-btn-ggb:hover{background:#38bdf8;color:#0b1020}
+.min-btn-pdf{background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.45);color:#f87171}
+.min-btn-pdf:hover{background:#f87171;color:#0b1020}
+.min-btn-yt{background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.45);color:#fca5a5}
+.min-btn-yt:hover{background:#ef4444;color:#fff}
+.min-btn-detail{background:var(--card2);border:1px solid var(--line);color:var(--sub)}
+.min-btn-detail:hover{background:var(--accent);color:#0b1020;border-color:var(--accent)}
+.min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
+.min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
+.min-footer-link:hover{text-decoration:underline;color:#fff}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -168,6 +201,65 @@ letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
+
+<!-- 📚 min7014 수학자료실 공식 연계 심층 탐구 자료 카드 -->
+<div class="min7014-addon-card">
+  <div class="min-header">
+    <div class="min-header-title">
+      <img src="../assets/favicon.png" alt="min7014" class="min-logo">
+      <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
+    </div>
+    <span class="min-tag">GeoGebra & 개념 증명</span>
+  </div>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  
+  <div class="min-list">
+    
+        <div class="min-item">
+          <div class="min-item-main">
+            <a href="https://min7014.github.io/math20200226001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 주어진 원의 중심과 원 밖의 한 점을 지름의 양 끝점으로 하는 원에 대하여 원 밖의 한 점과 새로 만들어진 원과 주어진 원과의 교점을 연결한 직선은 주어진 원의 접선이 된다.(For a circle with the center of a given circle and a point outside the circle as both ends of the diameter, the straight line connecting the newly created circle with the intersection of the given circle and the point outside the circle becomes the tangent of the given circle.)
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://min7014.github.io/2020/2012093003.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="원리 증명 및 정리 PDF">📄 PDF 정리</a> <a href="https://youtu.be/3BHk-7StHcw" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>
+            <a href="https://min7014.github.io/math20200226001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+          </div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <a href="https://min7014.github.io/math20191218001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 원 밖의 한 점을 지나는 직선이 원과 두 점에서 만날때 두 교점의 중점은 그 원 밖의 한 점과 원의 중심을 지름의 양 끝점으로 하는 원 위에 있다.(When a straight line passing through a point outside the circle meets at the circle and at two points, the midpoint of the two intersections is on the circle with both ends of the diameter as the center of the circle and the point outside the circle.)
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://min7014.github.io/2019/2019121803.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="원리 증명 및 정리 PDF">📄 PDF 정리</a> <a href="https://youtu.be/K_eWkwwTw7M" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>
+            <a href="https://min7014.github.io/math20191218001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+          </div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <a href="https://min7014.github.io/math20230127001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 점 $\mathrm{P}$가 평면 $\alpha$ 밖의 점이고 직선 $a$가 평면 $\alpha$위에 있을 때 점 $\mathrm{P}$에서 직선 $a$에 내린 수선의 발을 $\mathrm{N}$이라하고 평면 $\alpha$위에서 $\mathrm{N}$을 지나고 직선 $a$에 수직인 직선을 $b$라고하면 $\mathrm{P}$에서 $b$에그은 수선 $\mathrm{PM}$은 평면 $\alpha$에 수직이다.(If the point $\mathrm{P}$ is outside the plane $\alpha$ and the straight line $a$ is on the plane $\alpha$, let $\mathrm{N}$ be the foot of the perpendicular from point $\mathrm{P}$ to the straight line $a$, and $b$ be the straight line passing through $\mathrm{N}$ on the plane alpha and perpendicular to the straight line $a$. $\mathrm{PM}$ is perpendicular to the plane $\alpha$.)
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://www.geogebra.org/m/xvvuhmee" target="_blank" rel="noopener" class="min-btn min-btn-ggb" title="GeoGebra 인터랙티브 탐구">📐 GeoGebra 조작</a> <a href="https://min7014.github.io/2023/2023012701.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="원리 증명 및 정리 PDF">📄 PDF 정리</a> <a href="https://youtu.be/WGyU7k9s55I" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>
+            <a href="https://min7014.github.io/math20230127001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+          </div>
+        </div>
+        
+  </div>
+
+  <div class="min-footer">
+    <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra & PDF) ➔
+    </a>
+  </div>
+</div>
+
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $-3$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>

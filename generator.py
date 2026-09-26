@@ -1,5 +1,6 @@
 """퀴즈 dict → 단일 HTML 파일 생성. 저장: board/<slug>.html"""
 import json, html, os, hashlib, time, re
+import min7014_matcher
 
 TEMPLATE = r"""<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,6 +98,38 @@ letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}}
 .orig-media{{text-align:center;margin:14px 0}}
 .orig-media img{{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}}
 .orig-tip{{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}}
+
+/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+.min7014-addon-card{{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
+border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:.2s}}
+.min7014-addon-card:hover{{border-color:rgba(124,196,255,.55)}}
+.min-header{{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}}
+.min-header-title{{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:#fff}}
+.min-logo{{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}}
+.min-tag{{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}}
+.min-lead{{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55}}
+.min-list{{display:flex;flex-direction:column;gap:10px}}
+.min-item{{background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;transition:.15s}}
+.min-item:hover{{background:rgba(22,28,54,.7);border-color:var(--accent);transform:translateX(2px)}}
+.min-item-main{{flex:1;min-width:240px}}
+.min-item-title{{color:#eef2ff;font-size:.92rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;line-height:1.45}}
+.min-item-title:hover{{color:var(--accent)}}
+.min-bullet{{font-size:.85rem}}
+.min-item-actions{{display:flex;gap:6px;flex-wrap:wrap;align-items:center}}
+.min-btn{{font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}}
+.min-btn-ggb{{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.45);color:#38bdf8}}
+.min-btn-ggb:hover{{background:#38bdf8;color:#0b1020}}
+.min-btn-pdf{{background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.45);color:#f87171}}
+.min-btn-pdf:hover{{background:#f87171;color:#0b1020}}
+.min-btn-yt{{background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.45);color:#fca5a5}}
+.min-btn-yt:hover{{background:#ef4444;color:#fff}}
+.min-btn-detail{{background:var(--card2);border:1px solid var(--line);color:var(--sub)}}
+.min-btn-detail:hover{{background:var(--accent);color:#0b1020;border-color:var(--accent)}}
+.min-footer{{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}}
+.min-footer-link{{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}}
+.min-footer-link:hover{{text-decoration:underline;color:#fff}}
 </style>
 <script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\(','\\)']]}}}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -117,6 +150,7 @@ letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}}
 {levels_block}
 {tracking_block}
 {solution_block}
+{min7014_materials_block}
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 {final_ans}</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>
@@ -352,12 +386,23 @@ def generate_html(data):
 
     tracking_block = _tracking_html(data.get("slug", ""), _sheets_url)
     slug_js = data.get("slug", "").replace("'", "\\'")
+    
+    # ★ min7014 수학자료실 공식 연계 심층 학습 자료 매칭
+    search_corpus = f"{data.get('title', '')} {data.get('original_content', '')} {data.get('content', '')} {f.get('stem', '')}"
+    min7014_materials_block = ""
+    try:
+        matched_items = min7014_matcher.match_materials(search_corpus, limit=3)
+        min7014_materials_block = min7014_matcher.generate_addon_card_html(matched_items, data.get("title", ""))
+    except Exception as e:
+        min7014_materials_block = ""
+
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),
         original_block=original_block,
         symbols_block=symbols_block, levels_block=levels_block,
         solution_block=solution_block, final_ans=_esc(final_ans),
         tracking_block=tracking_block,
+        min7014_materials_block=min7014_materials_block,
         slug_js=slug_js)
     return html
 

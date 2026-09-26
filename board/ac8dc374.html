@@ -75,6 +75,38 @@ letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
 .orig-media{text-align:center;margin:14px 0}
 .orig-media img{max-width:100%;max-height:420px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
 .orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+
+/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+.min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
+border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:.2s}
+.min7014-addon-card:hover{border-color:rgba(124,196,255,.55)}
+.min-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.min-header-title{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:#fff}
+.min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
+.min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
+.min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55}
+.min-list{display:flex;flex-direction:column;gap:10px}
+.min-item{background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;transition:.15s}
+.min-item:hover{background:rgba(22,28,54,.7);border-color:var(--accent);transform:translateX(2px)}
+.min-item-main{flex:1;min-width:240px}
+.min-item-title{color:#eef2ff;font-size:.92rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;line-height:1.45}
+.min-item-title:hover{color:var(--accent)}
+.min-bullet{font-size:.85rem}
+.min-item-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.min-btn{font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.min-btn-ggb{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.45);color:#38bdf8}
+.min-btn-ggb:hover{background:#38bdf8;color:#0b1020}
+.min-btn-pdf{background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.45);color:#f87171}
+.min-btn-pdf:hover{background:#f87171;color:#0b1020}
+.min-btn-yt{background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.45);color:#fca5a5}
+.min-btn-yt:hover{background:#ef4444;color:#fff}
+.min-btn-detail{background:var(--card2);border:1px solid var(--line);color:var(--sub)}
+.min-btn-detail:hover{background:var(--accent);color:#0b1020;border-color:var(--accent)}
+.min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
+.min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
+.min-footer-link:hover{text-decoration:underline;color:#fff}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -254,6 +286,78 @@ $P(x) = (x - 1)(x - a)(x - 4 + a)$가 단 하나의 첨점만 가지려면 중�
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
+
+<!-- 📚 min7014 수학자료실 공식 연계 심층 탐구 자료 카드 -->
+<div class="min7014-addon-card">
+  <div class="min-header">
+    <div class="min-header-title">
+      <img src="../assets/favicon.png" alt="min7014" class="min-logo">
+      <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
+    </div>
+    <span class="min-tag">GeoGebra & 개념 증명</span>
+  </div>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  
+  <div class="min-list">
+    <div class="min-item">
+      <div class="min-item-main">
+        <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-item-title">
+          <span class="min-bullet">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선(Tangents and Normals at a Point on the Differential Function)
+        </a>
+      </div>
+      <div class="min-item-actions">
+        <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="원리 증명 및 정리 PDF">📄 PDF 정리</a>
+        <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>
+        <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+      </div>
+    </div>
+    
+    <div class="min-item">
+      <div class="min-item-main">
+        <a href="https://min7014.github.io/math20240407001.html" target="_blank" rel="noopener" class="min-item-title">
+          <span class="min-bullet">📌</span> 매개변수 곡선의 미분(Differential of the parameter curve)
+        </a>
+      </div>
+      <div class="min-item-actions">
+        <a href="https://www.geogebra.org/m/hkrsqkq4" target="_blank" rel="noopener" class="min-btn min-btn-ggb" title="GeoGebra 인터랙티브 탐구">📐 GeoGebra 조작</a>
+        <a href="https://min7014.github.io/2024/2024040701.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="원리 증명 및 정리 PDF">📄 PDF 정리</a>
+        <a href="https://youtu.be/Wtj6rVTnve0" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>
+        <a href="https://min7014.github.io/math20240407001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+      </div>
+    </div>
+    
+    <div class="min-item">
+      <div class="min-item-main">
+        <a href="https://min7014.github.io/math20190810008.html" target="_blank" rel="noopener" class="min-item-title">
+          <span class="min-bullet">📌</span> 이심률에 의한 원뿔곡선(Conics by eccentricity)
+        </a>
+      </div>
+      <div class="min-item-actions">
+        <a href="https://youtu.be/4XCYShsm_vE" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>
+        <a href="https://min7014.github.io/math20190810008.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+      </div>
+    </div>
+    
+    <div class="min-item">
+      <div class="min-item-main">
+        <a href="https://min7014.github.io/math20240120001.html" target="_blank" rel="noopener" class="min-item-title">
+          <span class="min-bullet">📌</span> $a$ 에서 함수 $f$의 미분(The derivative of a function $f$ at a number $a$)
+        </a>
+      </div>
+      <div class="min-item-actions">
+        <a href="https://min7014.github.io/2024/2024011201.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="원리 증명 및 정리 PDF">📄 PDF 정리</a>
+        <a href="https://youtu.be/9PQ9OqQ_seU" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="시각적 애니메이션 해설 영상">▶️ 영상 해설</a>
+        <a href="https://min7014.github.io/math20240120001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="min-footer">
+    <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra &amp; PDF) ➔
+    </a>
+  </div>
 </div>
 </div>
 
