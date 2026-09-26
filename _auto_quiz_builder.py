@@ -309,7 +309,7 @@ def create_and_publish_quiz(title, content, hint, reporter, email="", requested_
             img_path = os.path.join(BOARD_DIR, orig_img_filename)
             with open(img_path, 'wb') as img_fh:
                 img_fh.write(base64.b64decode(image_b64))
-            quiz_data["original_image"] = f"/board/{orig_img_filename}"
+            quiz_data["original_image"] = orig_img_filename
             print(f"  ↳ 🖼️ 원본 문제 이미지 디코딩 저장 완료: board/{orig_img_filename}")
         except Exception as e:
             print(f"  ↳ ⚠️ 원본 이미지 디코딩 실패: {e}")

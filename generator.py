@@ -327,8 +327,8 @@ def generate_html(data):
     if orig_img:
         # 원본 그림이 있으면 그림으로 표시
         img_src = str(orig_img).strip()
-        if not img_src.startswith('http') and not img_src.startswith('/') and not img_src.startswith('.'):
-            img_src = f"/board/{img_src}"
+        if img_src.startswith('/board/'):
+            img_src = img_src[7:]
         orig_media_html = f'<div class="orig-media"><img src="{_esc(img_src)}" alt="원본 문제 이미지"></div>'
     elif orig_text:
         # 원본 그림이 없을 때만 텍스트로 표시
