@@ -408,6 +408,14 @@
       return list;
     },
 
+    // 별칭 지원 (내가 푼 문제 목록 & 정식 회원 업그레이드)
+    getMySolvedProblems: function() {
+      return MatheduAuth.getSolvedProblems();
+    },
+    upgradeGuestToMember: function() {
+      return MatheduAuth.showUpgradeModal();
+    },
+
     // 3-1. 회원이 개설한 수업 방 기록 및 소유권 확인
     recordCreatedRoom: function(roomId, slug) {
       if (!roomId) return;
