@@ -14,7 +14,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # 정리: 불필요한 파일 제거
+      - name: Clean deployment artifacts
+        run: |
+          rm -rf .git .github __pycache__ *.pyc scan_result.txt
+          find . -name ".DS_Store" -delete
+          find . -name "._*" -delete
+
+      # Pages 아티팩트 업로드 (필요 파일만)
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
+      # Pages 배포
       - uses: actions/deploy-pages@v4
