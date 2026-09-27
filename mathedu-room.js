@@ -758,12 +758,22 @@
             '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.25);border:1px solid #38bdf8;color:#38bdf8;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">' +
               '📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)' +
             '</div>' +
-            '<span style="font-size:0.78rem;color:#94a3b8">min7014 mathedu</span>' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit">🔄 최신 버전 확인</button>' +
+              '<span style="font-size:0.78rem;color:#94a3b8">min7014 mathedu</span>' +
+            '</div>' +
           '</div>' +
           '<div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">' + escapeHtml(quizTitle) + '</div>' +
-          '<div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:14px">' +
+          '<div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px">' +
             '이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>' +
             '보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.' +
+          '</div>' +
+          '<div id="matheduUpdateAlertSlot" style="display:none;margin-bottom:12px;padding:12px 16px;background:rgba(253,230,138,.14);border:1.5px solid #fde68a;border-radius:12px;color:#fde68a;font-size:0.88rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<span style="font-size:1.1rem">🔔</span>' +
+              '<span><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>' +
+            '</div>' +
+            '<button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">업데이트 보기 ➔</button>' +
           '</div>' +
           '<div style="background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">' +
             '<div style="font-size:0.85rem;color:#e2e8f0;word-break:break-all">' +
@@ -778,6 +788,85 @@
 
         var wrapEl = docClone.querySelector('.wrap') || docClone.querySelector('body');
         if (wrapEl) wrapEl.insertBefore(bannerDiv, wrapEl.firstChild);
+      }
+
+      var nowIso = new Date().toISOString();
+      var updaterHtml = 
+        '<div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">' +
+          '<div class="mathedu-update-card">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">' +
+              '<div class="mathedu-update-badge">🔔 최신 업데이트 감지</div>' +
+              '<button class="mathedu-update-close-btn" onclick="closeUpdateModal()">✕</button>' +
+            '</div>' +
+            '<h2 style="margin:0 0 8px;font-size:1.35rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">✨ 이 문제의 최신 버전이 있습니다!</h2>' +
+            '<p style="margin:0 0 16px;color:#cbd5e1;font-size:0.9rem;line-height:1.55">선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.</p>' +
+            '<div class="mathedu-ver-box">' +
+              '<div class="mathedu-ver-item cur"><span class="mathedu-ver-lbl">현재 내 오프라인 버전</span><b id="lblCurrentVer">-</b></div>' +
+              '<div style="color:#7cc4ff;font-size:1.2rem;font-weight:800">➔</div>' +
+              '<div class="mathedu-ver-item new"><span class="mathedu-ver-lbl">🚀 온라인 최신 버전</span><b id="lblLatestVer">-</b></div>' +
+            '</div>' +
+            '<div class="mathedu-update-btn-row">' +
+              '<button id="btnDownloadUpdate" class="mathedu-btn-primary" onclick="downloadLatestOfflineVersion()">📥 새 버전 내려받아서 풀기 (저장)</button>' +
+              '<button class="mathedu-btn-sec" onclick="continueCurrentVersion()">📝 그냥 현재 버전으로 풀기</button>' +
+              '<a id="btnOpenOnlineLatest" href="' + originalOnlineUrl + '" target="_blank" rel="noopener" class="mathedu-btn-link">🌐 온라인 최신판 웹으로 바로 열기 ➔</a>' +
+            '</div>' +
+            '<div id="updateDownloadSuccess" style="display:none;margin-top:16px;background:rgba(94,234,212,.15);border:1px solid #5eead4;border-radius:12px;padding:14px;text-align:left">' +
+              '<div style="font-weight:800;color:#5eead4;margin-bottom:4px">🎉 최신 버전 다운로드 완료!</div>' +
+              '<div style="font-size:0.86rem;color:#e2e8f0;line-height:1.5">다운로드 폴더에 최신 문제 파일이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.</div>' +
+              '<div style="margin-top:12px;display:flex;gap:8px">' +
+                '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">🌐 온라인 최신판 열기</a>' +
+                '<button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">✕ 닫고 현재 화면 풀기</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<style>' +
+          '.mathedu-update-modal{position:fixed;inset:0;z-index:999999;background:rgba(10,13,26,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:16px}' +
+          '.mathedu-update-card{background:#141833;border:1.5px solid rgba(124,196,255,.4);border-radius:20px;max-width:520px;width:100%;padding:26px;box-shadow:0 20px 60px rgba(0,0,0,.65);color:#eef2ff;font-family:system-ui,sans-serif;position:relative;line-height:1.6}' +
+          '.mathedu-update-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(253,230,138,.15);border:1px solid #fde68a;color:#fde68a;border-radius:20px;padding:4px 12px;font-size:.8rem;font-weight:800}' +
+          '.mathedu-update-close-btn{background:transparent;border:none;color:#94a3b8;font-size:1.4rem;cursor:pointer;padding:0 4px}' +
+          '.mathedu-ver-box{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;background:rgba(13,16,32,.7);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;margin:16px 0;text-align:center}' +
+          '.mathedu-ver-item{font-size:.8rem;color:#94a3b8}.mathedu-ver-item b{display:block;font-size:.95rem;margin-top:2px}' +
+          '.mathedu-ver-item.cur b{color:#cbd5e1}.mathedu-ver-item.new b{color:#5eead4}' +
+          '.mathedu-update-btn-row{display:flex;flex-direction:column;gap:8px;margin-top:18px}' +
+          '.mathedu-btn-primary{background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;border:none;border-radius:10px;padding:12px 18px;font-size:.96rem;font-weight:800;cursor:pointer;text-align:center}' +
+          '.mathedu-btn-sec{background:rgba(255,255,255,.1);color:#eef2ff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:11px 18px;font-size:.92rem;font-weight:700;cursor:pointer;text-align:center}' +
+          '.mathedu-btn-link{background:transparent;color:#7cc4ff;border:none;padding:6px;font-size:.85rem;cursor:pointer;text-decoration:underline;text-align:center}' +
+        '</style>' +
+        '<script>' +
+          'window._isOfflineFile=true;' +
+          'window._offlineQuizSlug="' + slug + '";' +
+          'window._offlineBuildTime="' + nowIso + '";' +
+          'window._originalUrl="' + originalOnlineUrl + '";' +
+          '(function(){' +
+            'var s="' + slug + '",bt="' + nowIso + '",ou="' + originalOnlineUrl + '";' +
+            'var du="https://min7014.github.io/mathedu/offline/"+s+".html";' +
+            'var vu="https://min7014.github.io/mathedu/offline/versions.json";' +
+            'window._serverUpdateInfo=null;' +
+            'function fmt(t){if(!t)return "-";try{var d=new Date(t);return d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate()+" "+(d.getHours()<10?"0":"")+d.getHours()+":"+(d.getMinutes()<10?"0":"")+d.getMinutes();}catch(e){return t;}}' +
+            'window.openUpdateModal=function(){var m=document.getElementById("matheduUpdateModal");if(!m)return;var c=document.getElementById("lblCurrentVer"),n=document.getElementById("lblLatestVer");if(c)c.textContent=fmt(bt);if(n)n.textContent=fmt(window._serverUpdateInfo?window._serverUpdateInfo.updated_at:new Date().toISOString());m.style.display="flex";};' +
+            'window.closeUpdateModal=function(){var m=document.getElementById("matheduUpdateModal");if(m)m.style.display="none";};' +
+            'window.continueCurrentVersion=function(){closeUpdateModal();try{sessionStorage.setItem("mathedu_update_dismissed_"+s,"true");}catch(e){}};' +
+            'window.downloadLatestOfflineVersion=async function(){var b=document.getElementById("btnDownloadUpdate");if(b){b.innerHTML="⏳ 최신 버전 다운로드 중...";b.style.pointerEvents="none";}' +
+            'try{var r=await fetch(du+"?_t="+Date.now());if(!r.ok)throw new Error("HTTP "+r.status);var bl=await r.blob();var u=URL.createObjectURL(bl);var a=document.createElement("a");a.href=u;a.download="mathedu_"+s+"_offline_latest.html";document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},500);if(b)b.innerHTML="✅ 새 버전 저장 완료!";var bx=document.getElementById("updateDownloadSuccess");if(bx)bx.style.display="block";}' +
+            'catch(e){alert("다운로드 실패: "+e.message);window.open(ou,"_blank");if(b){b.innerHTML="📥 다시 시도";b.style.pointerEvents="";}}};' +
+            'window.checkUpdateManual=function(){var b=document.getElementById("btnManualCheckUpdate");if(b)b.innerHTML="⏳ 확인 중...";chk(true);};' +
+            'function showUp(inf){window._serverUpdateInfo=inf;var sl=document.getElementById("matheduUpdateAlertSlot");if(sl)sl.style.display="flex";var bm=document.getElementById("btnManualCheckUpdate");if(bm){bm.innerHTML="✨ 새 버전 있음!";bm.style.background="rgba(253,230,138,.25)";bm.style.color="#fde68a";bm.style.borderColor="#fde68a";}' +
+            'var dis=false;try{dis=sessionStorage.getItem("mathedu_update_dismissed_"+s)==="true";}catch(e){}if(!dis)openUpdateModal();}' +
+            'function chk(man){if(!navigator.onLine){if(man)alert("현재 오프라인 상태입니다.");var b=document.getElementById("btnManualCheckUpdate");if(b)b.innerHTML="📡 오프라인";return;}' +
+            'fetch(vu+"?_t="+Date.now(),{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){' +
+            'var it=d&&d.quizzes&&d.quizzes[s];if(it&&it.updated_at&&(new Date(it.updated_at).getTime()-new Date(bt).getTime()>60000)){showUp(it);}else{hUp(man);}}).catch(function(){' +
+            'fetch(du+"?_t="+Date.now(),{method:"HEAD",cache:"no-cache"}).then(function(r){var lm=r.headers.get("Last-Modified");if(lm&&(new Date(lm).getTime()-new Date(bt).getTime()>120000)){showUp({updated_at:new Date(lm).toISOString()});}else{hUp(man);}}).catch(function(){hUp(man);});});}' +
+            'function hUp(man){var b=document.getElementById("btnManualCheckUpdate");if(b){b.innerHTML="✅ 최신 버전";b.style.color="#5eead4";b.style.borderColor="rgba(94,234,212,.4)";}if(man)alert("현재 문제 파일이 최신 버전입니다.");}' +
+            'setTimeout(function(){chk(false);},1000);' +
+            'window.addEventListener("online",function(){chk(false);});' +
+          '})();' +
+        '</script>';
+
+      var dummy = document.createElement('div');
+      dummy.innerHTML = updaterHtml;
+      while (dummy.firstChild) {
+        docClone.body.appendChild(dummy.firstChild);
       }
 
       var fullHtml = '<!DOCTYPE html>\n<html lang="ko">\n' + docClone.innerHTML + '\n</html>';
