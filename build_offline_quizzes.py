@@ -529,14 +529,42 @@ def process_file(html_path, build_timestamp, build_version):
     }
 
 def main():
+    # 수능 및 모의평가 전용 공개 원칙에 따라 board/index.json의 공개 문항만 빌드
+    index_json_path = os.path.join(BOARD_DIR, 'index.json')
+    public_slugs = set()
+    if os.path.exists(index_json_path):
+        with open(index_json_path, 'r', encoding='utf-8') as f:
+            public_items = json.load(f)
+            public_slugs = set(it['slug'] for it in public_items if it.get('is_public') is not False)
+
     files = sorted(glob.glob(os.path.join(BOARD_DIR, '*.html')))
-    quiz_files = [f for f in files if not os.path.basename(f).startswith('index')]
+    quiz_files = [
+        f for f in files 
+        if not os.path.basename(f).startswith('index') 
+        and (not public_slugs or os.path.splitext(os.path.basename(f))[0] in public_slugs)
+    ]
+
+    # 비공개 문항 오프라인 파일은 offline/private/ 로 격리 보관
+    offline_private_dir = os.path.join(OFFLINE_DIR, 'private')
+    os.makedirs(offline_private_dir, exist_ok=True)
+    existing_offline_files = glob.glob(os.path.join(OFFLINE_DIR, '*.html'))
+    for off_f in existing_offline_files:
+        base_name = os.path.basename(off_f)
+        if base_name in ['index.html']:
+            continue
+        slug_name = os.path.splitext(base_name)[0]
+        if public_slugs and slug_name not in public_slugs:
+            # Move to offline/private/
+            target_path = os.path.join(offline_private_dir, base_name)
+            if os.path.exists(target_path):
+                os.remove(target_path)
+            os.rename(off_f, target_path)
 
     build_timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     build_date_str = datetime.datetime.now().strftime("%Y.%m.%d")
     build_version = f"v{build_date_str}"
 
-    print(f"총 {len(quiz_files)}개 퀴즈 파일을 오프라인 패키지로 변환 시작... (빌드 시각: {build_timestamp})")
+    print(f"공개 대상(수능·모의평가) 총 {len(quiz_files)}개 퀴즈 파일을 오프라인 패키지로 변환 시작... (빌드 시각: {build_timestamp})")
     results = []
     for f in quiz_files:
         res = process_file(f, build_timestamp, build_version)

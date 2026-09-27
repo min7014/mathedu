@@ -977,6 +977,12 @@ header p {
       </button>
     </div>
 
+    <!-- ⚖️ 공개 범위 정책 안내 -->
+    <div style="background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);border-radius:10px;padding:8px 14px;margin-bottom:14px;font-size:0.83rem;color:#cbd5e1;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:1.1rem;">⚖️</span>
+      <span><b>공개 원칙:</b> 본 게시판은 저작권이 투명한 <b>대학수학능력시험(대수능) 및 한국교육과정평가원·시도교육청 모의평가(전국연합학력평가) 기출문제만 선별 공개</b>합니다. (기타 사설·경시·일반 문제는 비공개 전환)</span>
+    </div>
+
     <!-- 5대 정밀 선택 드롭다운 그리드 -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;">
       <div>
@@ -1203,6 +1209,7 @@ function toggleMathStory() {
     var hasActiveExamFilter = Boolean(ef.year || ef.grade || ef.month || ef.subject || ef.num);
 
     var filtered = allItems.filter(function(it) {
+      if (it.is_public === false) return false;
       var title = (it.title || '').toLowerCase();
       var slug = (it.slug || '').toLowerCase();
       var matchesQuery = !query || title.includes(query) || slug.includes(query);
