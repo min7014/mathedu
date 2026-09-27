@@ -32,7 +32,7 @@ build_log = load_json(BUILD_LOG)
 regen_files = sorted(BASE.glob("_regen_*.py"))
 print(f"[cron] 현재 스크립트: {len(regen_files)}개")
 
-EXCLUDED_SLUGS = {"cron_check", "data", "cron_runner"}
+EXCLUDED_SLUGS = {"cron_check", "data", "cron_runner", "check_state"}
 
 new_or_changed = []
 touched = set()
