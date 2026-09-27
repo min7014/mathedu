@@ -438,6 +438,16 @@ tr:hover td { background: rgba(124,196,255,.06); }
   border-color: #38bdf8;
   color: #fff;
 }
+.badge-my-class {
+  background: rgba(62,220,151,.2);
+  border: 1px solid rgba(62,220,151,.45);
+  color: #3ddc97;
+  padding: 1px 7px;
+  border-radius: 6px;
+  font-size: .72rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
 </style>
 </head>
 <body>
@@ -467,6 +477,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
     <span style="font-weight:700;color:var(--accent);font-size:.9rem">수업 배포 도구:</span>
     <button class="btn" id="btnProjector">🖥️ 칠판 빔프로젝터 QR 띄우기</button>
     <button class="btn btn-sec" id="btnCopyStudentLink">📋 학생 참여 링크 복사</button>
+    <button class="btn btn-sec" id="btnActionProjectorAnon" onclick="toggleAnonymous()">🖥️ 칠판 프로젝터 모드 (stu1~ 전환)</button>
     <button class="btn btn-sec" onclick="location.href='dashboard.html'">🌐 전체 수업 모아보기</button>
   </div>
 
@@ -491,7 +502,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
   </div>
 
   <!-- 🔒 실시간 학생 개인정보 보호 배너 & 실명 모드 전환 경고 바 -->
-  <div class="privacy-shield-banner">
+  <div id="privacyShieldBanner" class="privacy-shield-banner">
     <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--good)">
       <span>🔒 학생 개인정보 보호 모드 가동</span>
       <span class="privacy-badge">stu1, stu2... 자동 순차 부여</span>
@@ -560,10 +571,38 @@ tr:hover td { background: rgba(124,196,255,.06); }
 const API_URL = 'https://script.google.com/macros/s/AKfycbypyb4LXL-Jx6PhKhLSklRsBAvKQBcMxIOhkukH4gMV-yKmOt0KtPrpLS9XxBy8FHXXZg/exec';
 
 let rawData = [];
-let isAnonymous = true; // 🔒 기본값: 항상 stu1, stu2... 익명 모드로 시작하여 실제 학생 이름 노출 차단
+let isAnonymous = true; // 🔒 타인 수업/공개 대시보드 기본값: stu1, stu2... 익명 보호
+let isProjectorMode = false; // 🖥️ 교사가 칠판/빔프로젝터 송출 시 강제 익명(stu1~) 모드
 let currentView = 'card';
 let urlParams = new URLSearchParams(window.location.search);
 let targetRoom = (urlParams.get('room') || '').trim();
+
+// 내가 개설한 수업인지 확인 (회원 로그인 계정 또는 로컬 기기 생성 기록 대조)
+function isMyRoom(roomId) {
+  if (!roomId) return false;
+  const rClean = String(roomId).trim().toLowerCase();
+  if (window.MatheduAuth && typeof window.MatheduAuth.isMyCreatedRoom === 'function') {
+    if (window.MatheduAuth.isMyCreatedRoom(rClean)) return true;
+  }
+  try {
+    const list = JSON.parse(localStorage.getItem('mathedu_teacher_rooms') || '[]');
+    if (list.some(item => {
+      const r = typeof item === 'string' ? item : (item && item.room ? item.room : '');
+      return r.trim().toLowerCase() === rClean;
+    })) {
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+// 특정 학생 항목의 실명 표시 여부 결정
+function shouldShowRealName(it) {
+  if (isProjectorMode) return false; // 칠판 프로젝터 모드 가동 시 예외 없이 stu1 익명 강제
+  if (it && it.parsed_room && isMyRoom(it.parsed_room)) return true; // 회원의 자기 수업: 실명 기본 표시!
+  if (!isAnonymous) return true; // 교사가 전체 실명 확인 모드를 활성화한 경우
+  return false; // 그 외: stu1, stu2... 익명 보호
+}
 
 // === 학생 익명 식별자(stu1, stu2...) 순차 부여 모듈 ===
 function assignStudentIds(items) {
@@ -615,17 +654,42 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(fetchData, 3500);
 });
 
+// 회원 로그인 상태 변경 시 UI 자동 갱신
+window.addEventListener('mathedu:auth-changed', () => {
+  setupRoomHeader();
+  updateAnonUI();
+  render();
+});
+
 function setupRoomHeader() {
   const bannerContainer = document.getElementById('roomBadgeContainer');
   const actionBar = document.getElementById('roomActionBar');
   const title = document.getElementById('dashboardTitle');
   const sub = document.getElementById('dashboardSubtitle');
 
+  const isMine = targetRoom ? isMyRoom(targetRoom) : false;
+
   if (targetRoom) {
-    bannerContainer.innerHTML = `<div class="room-banner">🏫 수업 코드: <b>${escapeHtml(targetRoom)}</b></div>`;
-    title.innerHTML = `📊 [${escapeHtml(targetRoom)}] 실시간 수업 관제 센터`;
-    sub.textContent = `현재 '${targetRoom}' 수업에 참여 중인 학생들의 학습 실황입니다.`;
+    const mineBadge = isMine ? ' <span class="badge-my-class">👑 내가 개설한 수업 (실명 표시 중)</span>' : '';
+    bannerContainer.innerHTML = `<div class="room-banner">🏫 수업 코드: <b>${escapeHtml(targetRoom)}</b>${mineBadge}</div>`;
+    title.innerHTML = isMine 
+      ? `📊 [${escapeHtml(targetRoom)}] 실시간 수업 관제 센터 <span style="font-size:1.1rem;color:var(--accent2);font-weight:700">(내 수업)</span>`
+      : `📊 [${escapeHtml(targetRoom)}] 실시간 수업 관제 센터`;
+    sub.textContent = isMine
+      ? `선생님께서 개설하신 '${targetRoom}' 수업입니다. 학생들의 실명과 진도가 실시간 집계됩니다.`
+      : `현재 '${targetRoom}' 수업에 참여 중인 학생들의 학습 실황입니다.`;
     actionBar.style.display = 'flex';
+
+    if (isMine) {
+      // 내 수업인 경우: 학생 실명을 기본으로 표시
+      isAnonymous = false;
+      isProjectorMode = false;
+    }
+
+    const btnProjAnon = document.getElementById('btnActionProjectorAnon');
+    if (btnProjAnon) {
+      btnProjAnon.style.display = isMine ? 'inline-block' : 'none';
+    }
 
     document.getElementById('btnProjector').onclick = () => {
       if (window.MatheduAuth) {
@@ -646,6 +710,56 @@ function setupRoomHeader() {
     title.textContent = '📊 전체 학습 현황 모니터링';
     sub.textContent = '개설된 모든 수업 및 자율 학습 학생들의 실황입니다.';
     actionBar.style.display = 'none';
+  }
+
+  updatePrivacyBanner(isMine);
+}
+
+function updatePrivacyBanner(isMine) {
+  const banner = document.getElementById('privacyShieldBanner');
+  if (!banner) return;
+
+  if (isMine) {
+    if (isProjectorMode) {
+      banner.className = 'privacy-shield-banner';
+      banner.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+      banner.style.background = 'rgba(56, 189, 248, 0.08)';
+      banner.innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:#7cc4ff">
+          <span>🖥️ 칠판 빔프로젝터 모드 가동 중</span>
+          <span class="privacy-badge">전체 학생 stu1, stu2... 익명 송출</span>
+        </div>
+        <div style="font-size:0.86rem;color:#cbd5e1">
+          현재 교실 빔프로젝터 화면에 맞춰 학생들의 이름이 <b>익명 식별자(stu1~)</b>로 송출되고 있습니다. 실명으로 다시 확인하시려면 상단 <b>[👀 실명 모드로 복귀]</b> 버튼을 누르세요.
+        </div>
+      `;
+    } else {
+      banner.className = 'privacy-shield-banner';
+      banner.style.borderColor = 'rgba(167, 139, 250, 0.4)';
+      banner.style.background = 'rgba(167, 139, 250, 0.1)';
+      banner.innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--accent2)">
+          <span>👑 회원 전용 자기수업 관제 모드</span>
+          <span class="badge-my-class">실제 학생 이름 표시 중</span>
+        </div>
+        <div style="font-size:0.86rem;color:#cbd5e1">
+          선생님께서 직접 개설하신 수업(<b>${escapeHtml(targetRoom)}</b>)이므로 학생들의 <b>실제 이름</b>이 표시됩니다. 교실 빔프로젝터나 화면 공유 시에는 상단의 <b>[🖥️ 칠판 프로젝터 모드]</b>를 누르면 즉시 <code>stu1, stu2...</code> 로 익명 전환됩니다.
+        </div>
+      `;
+    }
+  } else {
+    banner.className = 'privacy-shield-banner';
+    banner.style.borderColor = 'rgba(94, 234, 212, 0.3)';
+    banner.style.background = 'rgba(94, 234, 212, 0.08)';
+    banner.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--good)">
+        <span>🔒 학생 개인정보 보호 모드 가동</span>
+        <span class="privacy-badge">stu1, stu2... 자동 순차 부여</span>
+      </div>
+      <div style="font-size:0.86rem;color:#cbd5e1">
+        실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다. (회원이 개설한 자기 수업은 실명으로 표시됩니다)
+      </div>
+    `;
   }
 }
 
@@ -766,15 +880,25 @@ function renderCards(items) {
   let html = '';
 
   items.forEach((it) => {
-    const displayName = isAnonymous 
-      ? `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>` 
-      : `<span style="font-weight:700">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
+    const showReal = shouldShowRealName(it);
+    const isMine = it.parsed_room && isMyRoom(it.parsed_room);
+
+    let displayName = '';
+    if (showReal) {
+      displayName = `<span style="font-weight:700;color:#fff">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
+      if (isMine) {
+        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">👑 내 학생</span>`;
+      }
+    } else {
+      displayName = `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>`;
+    }
+
     const statusClass = it.is_done ? 'status-done' : (isRecent(it.updated_date) ? 'status-active' : 'status-wait');
     const statusText = it.is_done ? '🎉 풀이 완료' : (isRecent(it.updated_date) ? '🟢 풀이 중' : '⏳ 대기');
     const timeAgo = formatTimeAgo(it.updated_date);
 
     html += `
-      <div class="student-card">
+      <div class="student-card" ${isMine ? 'style="border-color:rgba(167,139,250,.4)"' : ''}>
         <div class="s-top">
           <div class="s-name">${displayName}</div>
           <span class="s-status ${statusClass}">${statusText}</span>
@@ -803,19 +927,37 @@ function renderCards(items) {
 function renderTable(items) {
   const tbody = document.getElementById('tableBody');
   const thStudentCol = document.getElementById('thStudentCol');
+  const isCurrentRoomMine = targetRoom ? isMyRoom(targetRoom) : false;
+
   if (thStudentCol) {
-    thStudentCol.textContent = isAnonymous ? '학생 ID (익명 stu)' : '학생명 (실명)';
+    if (isCurrentRoomMine && !isProjectorMode) {
+      thStudentCol.textContent = '학생 실명 (식별 ID)';
+    } else if (!isAnonymous && !isProjectorMode) {
+      thStudentCol.textContent = '학생명 (실명 / stu)';
+    } else {
+      thStudentCol.textContent = '학생 ID (익명 stu)';
+    }
   }
   let html = '';
 
   items.forEach((it) => {
-    const displayName = isAnonymous 
-      ? `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>` 
-      : `<span style="font-weight:700">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
+    const showReal = shouldShowRealName(it);
+    const isMine = it.parsed_room && isMyRoom(it.parsed_room);
+
+    let displayName = '';
+    if (showReal) {
+      displayName = `<span style="font-weight:700">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
+      if (isMine) {
+        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">👑 내 학생</span>`;
+      }
+    } else {
+      displayName = `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>`;
+    }
+
     const pillClass = it.pct >= 80 ? 'pill-high' : (it.pct >= 50 ? 'pill-mid' : 'pill-low');
 
     html += `
-      <tr>
+      <tr ${isMine ? 'style="background:rgba(167,139,250,.06)"' : ''}>
         <td>${displayName}</td>
         <td>${it.parsed_room ? `<span class="pill pill-high">${escapeHtml(it.parsed_room)}</span>` : '<span style="color:var(--sub)">자율학습</span>'}</td>
         <td><code>${escapeHtml(it.quiz_slug)}</code></td>
@@ -882,6 +1024,20 @@ function switchView(v) {
 }
 
 function toggleAnonymous(forceAnon) {
+  const isMine = targetRoom ? isMyRoom(targetRoom) : false;
+
+  if (isMine) {
+    if (forceAnon === true) {
+      isProjectorMode = true;
+    } else {
+      isProjectorMode = !isProjectorMode;
+    }
+    updateAnonUI();
+    render();
+    return;
+  }
+
+  // 일반/타인 수업/전체 보기인 경우
   if (forceAnon === true) {
     isAnonymous = true;
     updateAnonUI();
@@ -908,24 +1064,79 @@ function toggleAnonymous(forceAnon) {
 }
 
 function updateAnonUI() {
+  const isMine = targetRoom ? isMyRoom(targetRoom) : false;
   const btn = document.getElementById('btnToggleAnon');
+  const btnAction = document.getElementById('btnActionProjectorAnon');
   const warn = document.getElementById('realnameWarningBar');
+
   if (btn) {
-    if (isAnonymous) {
-      btn.innerHTML = '🔒 학생 익명 보호(stu1~): ON';
-      btn.style.borderColor = '#38bdf8';
-      btn.style.color = '#7cc4ff';
-      btn.style.background = 'rgba(56,189,248,.18)';
+    if (isMine) {
+      if (isProjectorMode) {
+        btn.innerHTML = '👀 실명 모드로 복귀 (내 수업)';
+        btn.style.borderColor = '#a78bfa';
+        btn.style.color = '#c4b5fd';
+        btn.style.background = 'rgba(167,139,250,.2)';
+      } else {
+        btn.innerHTML = '🖥️ 칠판 프로젝터 모드 (stu1~ 익명)';
+        btn.style.borderColor = '#38bdf8';
+        btn.style.color = '#7cc4ff';
+        btn.style.background = 'rgba(56,189,248,.18)';
+      }
     } else {
-      btn.innerHTML = '⚠️ 실명 모드: ON';
-      btn.style.borderColor = '#ef4444';
-      btn.style.color = '#fca5a5';
-      btn.style.background = 'rgba(239,68,68,.2)';
+      if (isAnonymous) {
+        btn.innerHTML = '🔒 학생 익명 보호(stu1~): ON';
+        btn.style.borderColor = '#38bdf8';
+        btn.style.color = '#7cc4ff';
+        btn.style.background = 'rgba(56,189,248,.18)';
+      } else {
+        btn.innerHTML = '⚠️ 실명 모드: ON';
+        btn.style.borderColor = '#ef4444';
+        btn.style.color = '#fca5a5';
+        btn.style.background = 'rgba(239,68,68,.2)';
+      }
     }
   }
-  if (warn) {
-    warn.style.display = isAnonymous ? 'none' : 'flex';
+
+  if (btnAction) {
+    if (isMine) {
+      btnAction.style.display = 'inline-block';
+      if (isProjectorMode) {
+        btnAction.innerHTML = '👀 실명 모드로 복귀';
+        btnAction.style.borderColor = '#a78bfa';
+        btnAction.style.color = '#c4b5fd';
+        btnAction.style.background = 'rgba(167,139,250,.25)';
+      } else {
+        btnAction.innerHTML = '🖥️ 칠판 프로젝터 모드 (stu1~ 전환)';
+        btnAction.style.borderColor = '#38bdf8';
+        btnAction.style.color = '#7cc4ff';
+        btnAction.style.background = 'rgba(56,189,248,.18)';
+      }
+    } else {
+      btnAction.style.display = 'none';
+    }
   }
+
+  if (warn) {
+    if (isMine) {
+      if (!isProjectorMode) {
+        warn.style.display = 'flex';
+        warn.innerHTML = `
+          <div>👑 <b>[${escapeHtml(targetRoom)}]</b> 교사 실명 관제 모드입니다. 칠판/빔프로젝터 화면 송출 시 아래 버튼으로 익명 전환하세요.</div>
+          <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#38bdf8;color:#0b1020;border:none;font-weight:700">🖥️ 칠판 프로젝터 익명(stu1~) 전환</button>
+        `;
+      } else {
+        warn.style.display = 'none';
+      }
+    } else {
+      warn.style.display = isAnonymous ? 'none' : 'flex';
+      warn.innerHTML = `
+        <div>⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!</div>
+        <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#ef4444;color:#fff;border:none">🔒 즉시 stu1 익명 모드로 전환</button>
+      `;
+    }
+  }
+
+  updatePrivacyBanner(isMine);
 }
 
 function exportCsv() {
@@ -938,22 +1149,30 @@ function exportCsv() {
     return;
   }
 
+  const isCurrentRoomMine = targetRoom ? isMyRoom(targetRoom) : false;
+  const hasAnyMine = filtered.some(it => isMyRoom(it.parsed_room));
+  const allowReal = !isProjectorMode && (isCurrentRoomMine || hasAnyMine || !isAnonymous);
+
   // UTF-8 BOM(\uFEFF) 추가하여 엑셀 한글 깨짐 방지
-  let csv = isAnonymous
-    ? '\uFEFF학생ID(익명),수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n'
-    : '\uFEFF학생실명,학생ID,수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n';
+  let csv = allowReal
+    ? '\uFEFF학생실명,학생식별ID,수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간,내수업구분\n'
+    : '\uFEFF학생ID(익명),수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n';
 
   filtered.forEach(it => {
-    const namePart = isAnonymous
-      ? `"${it.stu_id}"`
-      : `"${it.parsed_name}","${it.stu_id}"`;
-    csv += `${namePart},"${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${it.is_done ? '완료' : '진행중'}","${it.updated_at}"\n`;
+    const showReal = shouldShowRealName(it);
+    const isMine = it.parsed_room && isMyRoom(it.parsed_room);
+    if (allowReal) {
+      const sReal = showReal ? it.parsed_name : it.stu_id;
+      csv += `"${sReal}","${it.stu_id}","${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${it.is_done ? '완료' : '진행중'}","${it.updated_at}","${isMine ? '내수업' : '일반'}"\n`;
+    } else {
+      csv += `"${it.stu_id}","${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${it.is_done ? '완료' : '진행중'}","${it.updated_at}"\n`;
+    }
   });
 
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const filename = `${targetRoom ? targetRoom + '_' : ''}mathedu_성적표_${isAnonymous ? '익명_stu_' : '실명_'}${new Date().toISOString().slice(0,10)}.csv`;
+  const filename = `${targetRoom ? targetRoom + '_' : ''}mathedu_성적표_${allowReal ? '실명_' : '익명_stu_'}${new Date().toISOString().slice(0,10)}.csv`;
   a.href = url;
   a.download = filename;
   document.body.appendChild(a);

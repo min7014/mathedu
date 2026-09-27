@@ -408,6 +408,80 @@
       return list;
     },
 
+    // 3-1. 회원이 개설한 수업 방 기록 및 소유권 확인
+    recordCreatedRoom: function(roomId, slug) {
+      if (!roomId) return;
+      roomId = roomId.trim();
+      
+      // 1) localStorage 저장
+      try {
+        var key = 'mathedu_teacher_rooms';
+        var rooms = JSON.parse(localStorage.getItem(key) || '[]');
+        rooms = rooms.filter(function(item) { return item.room !== roomId; });
+        rooms.unshift({ room: roomId, slug: slug || '', time: new Date().toISOString() });
+        if (rooms.length > 30) rooms = rooms.slice(0, 30);
+        localStorage.setItem(key, JSON.stringify(rooms));
+      } catch(e) {}
+
+      // 2) 회원 계정에 저장
+      var user = getSession();
+      if (user) {
+        if (!user.createdRooms) user.createdRooms = [];
+        if (!user.createdRooms.includes(roomId)) {
+          user.createdRooms.unshift(roomId);
+        }
+        var users = getUsers();
+        var uIdx = users.findIndex(function(u) {
+          return (user.googleSub && u.googleSub === user.googleSub) || (u.username === user.username) || (u.email === user.email);
+        });
+        if (uIdx !== -1) {
+          users[uIdx].createdRooms = user.createdRooms;
+          saveUsers(users);
+        }
+        setSession(user, true);
+      }
+    },
+
+    // 현재 사용자가 개설한 자기 수업인지 확인
+    isMyCreatedRoom: function(roomId) {
+      if (!roomId) return false;
+      var cleanRoom = roomId.trim().toLowerCase();
+
+      // 1) 회원 계정의 createdRooms 확인
+      var user = getSession();
+      if (user && user.createdRooms && Array.isArray(user.createdRooms)) {
+        if (user.createdRooms.some(function(r) { return r && r.toLowerCase() === cleanRoom; })) {
+          return true;
+        }
+      }
+
+      // 2) 로컬 기기의 mathedu_teacher_rooms 확인 (로그인된 상태인 경우)
+      if (user) {
+        try {
+          var rooms = JSON.parse(localStorage.getItem('mathedu_teacher_rooms') || '[]');
+          if (rooms.some(function(item) { return item.room && item.room.toLowerCase() === cleanRoom; })) {
+            return true;
+          }
+        } catch(e) {}
+      }
+
+      return false;
+    },
+
+    // 내가 개설한 모든 수업 방 목록 반환
+    getMyCreatedRooms: function() {
+      var set = new Set();
+      var user = getSession();
+      if (user && user.createdRooms && Array.isArray(user.createdRooms)) {
+        user.createdRooms.forEach(function(r) { if (r) set.add(r.trim()); });
+      }
+      try {
+        var rooms = JSON.parse(localStorage.getItem('mathedu_teacher_rooms') || '[]');
+        rooms.forEach(function(item) { if (item.room) set.add(item.room.trim()); });
+      } catch(e) {}
+      return Array.from(set);
+    },
+
     // 4. 구글 공식 인증 기반 정식 회원가입 및 로그인
     loginWithGoogle: async function(googleProfile, additionalInfo) {
       if (!googleProfile || !googleProfile.email) {

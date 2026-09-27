@@ -643,6 +643,10 @@
       rooms.unshift({ room: rId, slug: slug, time: new Date().toISOString() });
       if (rooms.length > 20) rooms = rooms.slice(0, 20);
       localStorage.setItem(key, JSON.stringify(rooms));
+
+      if (window.MatheduAuth && window.MatheduAuth.recordCreatedRoom) {
+        window.MatheduAuth.recordCreatedRoom(rId, slug);
+      }
     } catch(e) {}
   }
 
