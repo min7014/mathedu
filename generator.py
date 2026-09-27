@@ -357,8 +357,17 @@ def generate_html(data):
                     _sheets_url = _f.read().strip()
         except Exception:
             pass
-    # ★ 원본 문제 상단 표시 블록: 원본 그림이 있으면 그림으로 표시!
+    # ★ 원본 문제 상단 표시 블록: ac8dc374.html 표준 규격 적용
+    slug_val = str(data.get("slug", "")).strip()
     orig_img = data.get("original_image") or data.get("image") or data.get("figure") or f.get("figure") or ""
+    
+    # 디스크에 img_{slug}.png가 존재하면 자동으로 원본 이미지로 지정
+    if not orig_img and slug_val:
+        candidate_img = f"img_{slug_val}.png"
+        board_dir_check = os.path.join(os.path.dirname(os.path.abspath(__file__)), "board", candidate_img)
+        if os.path.exists(board_dir_check) or os.path.exists(os.path.join("board", candidate_img)):
+            orig_img = candidate_img
+
     orig_text = data.get("original_content") or data.get("original_text") or f.get("stem") or data.get("content") or ""
     
     orig_media_html = ""
@@ -368,20 +377,34 @@ def generate_html(data):
         img_src = str(orig_img).strip()
         if img_src.startswith('/board/'):
             img_src = img_src[7:]
-        orig_media_html = f'<div class="orig-media"><img src="{_esc(img_src)}" alt="원본 문제 이미지"></div>'
+        orig_media_html = f'<div class="orig-media"><img src="{_esc(img_src)}" alt="{_esc(data.get("title", "수학"))} 원본 문제"></div>'
     elif orig_text:
-        # 원본 그림이 없을 때만 텍스트로 표시
+        # 원본 그림이 없을 때도 실제 시험지(Exam Paper)처럼 정갈하게 렌더링
         clean_text = _esc(str(orig_text)).replace("\n", "<br>")
-        orig_text_html = f'<div class="orig-stem">{clean_text}</div>'
+        options = f.get("options", [])
+        opts_html = ""
+        if options:
+            circle_nums = ["①", "②", "③", "④", "⑤"]
+            opts_items = "".join(f'<div style="flex:1;min-width:110px"><b>{circle_nums[i] if i < 5 else f"({i+1})"}</b> {_esc(opt)}</div>' for i, opt in enumerate(options))
+            opts_html = f'<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px dashed #94a3b8;font-size:0.95rem;color:#0f172a;">{opts_items}</div>'
+
+        orig_text_html = (
+            f'<div class="orig-media" style="margin:12px 0;">'
+            f'<div class="exam-paper-sheet" style="background:#ffffff;color:#0f172a;border-radius:12px;padding:22px 26px;border:1.5px solid #334155;box-shadow:0 8px 24px rgba(0,0,0,0.35);text-align:left;line-height:1.8;font-family:\'Apple SD Gothic Neo\',\'Malgun Gothic\',sans-serif;">'
+            f'<div style="font-weight:700;font-size:1.05rem;color:#0f172a;margin-bottom:6px;">{clean_text}</div>'
+            f'{opts_html}'
+            f'</div></div>'
+        )
         
     original_block = ""
     if orig_media_html or orig_text_html:
         original_block = (
-            f'<div class="orig-card">'
-            f'<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>'
-            f'{orig_media_html}'
-            f'{orig_text_html}'
-            f'<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>'
+            f'<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->\n'
+            f'<div class="orig-card">\n'
+            f'<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>\n'
+            f'{orig_media_html}\n'
+            f'{orig_text_html}\n'
+            f'<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>\n'
             f'</div>'
         )
 
