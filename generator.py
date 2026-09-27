@@ -315,9 +315,15 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
 
 
 def generate_html(data):
-    sym = "".join(
-        f'<div><b>{_esc(s.get("sym","") )}</b> — {_esc(s.get("desc",""))}</div>'
-        for s in data.get("symbols", []))
+    sym_items = []
+    for s in data.get("symbols", []):
+        stxt = str(s.get("sym", "")).strip()
+        if stxt and not (stxt.startswith("$") and stxt.endswith("$")):
+            stxt = f"${stxt}$"
+        stxt = re.sub(r'(?<![a-zA-Z\\])\\frac(?=\{)', r'\\dfrac', stxt)
+        desc_txt = _esc(s.get("desc", ""))
+        sym_items.append(f'<div><b>{stxt}</b> — {desc_txt}</div>')
+    sym = "".join(sym_items)
     symbols_block = (f'<h2>🔰 제0단계 · 수학 기호</h2><div class="sym">{sym}</div>' if sym else "")
     levels_block = "".join(_level_html(l) for l in data.get("levels", []))
     f = data.get("final", {})

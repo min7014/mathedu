@@ -135,8 +135,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270911.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270911">
-<meta name="mathedu-offline-build-time" content="2026-09-27T22:04:03.343260+00:00">
-<meta name="mathedu-offline-hash" content="f3d74e11">
+<meta name="mathedu-offline-build-time" content="2026-09-27T22:31:08.790084+00:00">
+<meta name="mathedu-offline-hash" content="0b464cc8">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -203,7 +203,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>\int_a^a f(t)dt = 0</b> — 아랫끝과 윗끝이 같을 때 정적분의 값은 0</div><div><b>\frac{d}{dx}\int_a^x f(t)dt = f(x)</b> — 정적분으로 정의된 함수의 미분 기본성질</div><div><b>(xf(x))&#x27; = f(x) + xf&#x27;(x)</b> — 곱의 미분법 공식</div><div><b>f(x) = 3x^2 + 6x + 8</b> — 부정적분으로 구한 원함수</div></div>
+<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\int_a^a f(t)dt = 0$</b> — 아랫끝과 윗끝이 같을 때 정적분의 값은 0</div><div><b>$\dfrac{d}{dx}\int_a^x f(t)dt = f(x)$</b> — 정적분으로 정의된 함수의 미분 기본성질</div><div><b>$(xf(x))' = f(x) + xf'(x)$</b> — 곱의 미분법 공식</div><div><b>$f(x) = 3x^2 + 6x + 8$</b> — 부정적분으로 구한 원함수</div></div>
 <h2>🔰 1단계 · [초등 연계] 구간의 길이가 0일 때의 넓이 직관</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 선의 가로 폭이 전혀 없으면(0이면) 아무리 높이가 있어도 면적이 0이 된다는 것을 배웁니다. 정적분에서도 시작점과 끝점이 똑같으면 쌓인 넓이가 없으므로 $\int_a^a f(t)dt = 0$이 됩니다. 따라서 식의 양변에 $x = -1$을 대입하면 좌변 전체가 0이 되어 $f(-1)$의 값을 바로 알아낼 수 있습니다.</div><div class="q" data-ans="2" data-exp="아랫끝과 윗끝이 $-1$로 같으므로 적분 구간의 폭이 0이 되어 정적분 값은 항상 0입니다."><div class="lvl">문항</div><div class="stem">$\int_{-1}^{-1} f(t)dt$ 의 값은 무엇일까요?</div><div class="opts"><div class="opt"><span class="n">1</span>$-1$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$f(-1)$</div><div class="opt"><span class="n">5</span>알 수 없다</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
@@ -226,7 +226,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [고등 미분 연계] 양변을 미분하여 $f&#x27;(x)$ 찾기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>양변을 $x$에 대해 미분합니다: $f(x) = f(x) + xf&#x27;(x) - 6x^2 - 6x$. 양변에서 $f(x)$를 지우면 $xf&#x27;(x) = 6x^2 + 6x$ 가 되고, $x$로 나누면 $f&#x27;(x) = 6x + 6$ 입니다.</div><div class="q" data-ans="2" data-exp="$6x^2 + 6x = x(6x+6)$ 이므로 $f&#x27;(x) = 6x + 6$ 입니다."><div class="lvl">문항</div><div class="stem">$xf&#x27;(x) = 6x^2 + 6x$ 에서 도함수 $f&#x27;(x)$는 무엇인가요?</div><div class="opts"><div class="opt"><span class="n">1</span>$6x$</div><div class="opt"><span class="n">2</span>$6x + 6$</div><div class="opt"><span class="n">3</span>$3x^2 + 6x$</div><div class="opt"><span class="n">4</span>$12x + 6$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [고등 미분 연계] 양변을 미분하여 $f'(x)$ 찾기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>양변을 $x$에 대해 미분합니다: $f(x) = f(x) + xf'(x) - 6x^2 - 6x$. 양변에서 $f(x)$를 지우면 $xf'(x) = 6x^2 + 6x$ 가 되고, $x$로 나누면 $f'(x) = 6x + 6$ 입니다.</div><div class="q" data-ans="2" data-exp="$6x^2 + 6x = x(6x+6)$ 이므로 $f'(x) = 6x + 6$ 입니다."><div class="lvl">문항</div><div class="stem">$xf'(x) = 6x^2 + 6x$ 에서 도함수 $f'(x)$는 무엇인가요?</div><div class="opts"><div class="opt"><span class="n">1</span>$6x$</div><div class="opt"><span class="n">2</span>$6x + 6$</div><div class="opt"><span class="n">3</span>$3x^2 + 6x$</div><div class="opt"><span class="n">4</span>$12x + 6$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -512,8 +512,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270911';
-window._offlineBuildTime = '2026-09-27T22:04:03.343260+00:00';
-window._offlineHash = 'f3d74e11';
+window._offlineBuildTime = '2026-09-27T22:31:08.790084+00:00';
+window._offlineHash = '0b464cc8';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270911.html';
 
@@ -538,8 +538,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270911';
-  var localBuildTime = window._offlineBuildTime || '2026-09-27T22:04:03.343260+00:00';
-  var localHash = window._offlineHash || 'f3d74e11';
+  var localBuildTime = window._offlineBuildTime || '2026-09-27T22:31:08.790084+00:00';
+  var localHash = window._offlineHash || '0b464cc8';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270911.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

@@ -137,6 +137,38 @@ def fix_with_tier1_rules(html, text, q_num):
             html = new_html
             fixes.append("모든 분수 수식을 \\dfrac(\\displaystyle)으로 일괄 고화질 확대 적용")
 
+    # 2-1. 0단계 기호 및 수식 깨짐/달러/LaTeX 자동 복원
+    if re.search(r'수식|깨져|깨짐|기호|latex|라텍스|달러|0단계|표시', clean_text, re.I):
+        def fix_sym_and_latex(html_in):
+            h = re.sub(r'\t\s*imes', r'\\times', html_in)
+            def fix_primes(m):
+                inner = m.group(1).replace('&#x27;', "'").replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
+                return f"${inner}$"
+            h = re.sub(r'\$([^\$]+)\$', fix_primes, h)
+            pattern = re.compile(r'(<div class="sym">)(.*?)(</div>\s*<h2)', re.DOTALL)
+            m = pattern.search(h)
+            if m:
+                header, sym_body, trailer = m.group(1), m.group(2), m.group(3)
+                def fix_item(im):
+                    b_open, b_text, b_close, rest = im.group(1), im.group(2), im.group(3), im.group(4)
+                    clean_b = b_text.strip()
+                    clean_b = re.sub(r'\t\s*imes', r'\\times', clean_b)
+                    clean_b = clean_b.replace('&#x27;', "'").replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
+                    if not (clean_b.startswith('$') and clean_b.endswith('$')):
+                        clean_b = f"${clean_b}$"
+                    clean_b = re.sub(r'(?<![a-zA-Z\\])\\frac(?=\{)', r'\\dfrac', clean_b)
+                    rest = rest.replace('&#x27;', "'")
+                    return f"{b_open}{clean_b}{b_close}{rest}"
+                item_pat = re.compile(r'(<div><b>)(.*?)(</b>)(.*?</div>)', re.DOTALL)
+                new_sym_body = item_pat.sub(fix_item, sym_body)
+                h = h[:m.start()] + header + new_sym_body + trailer + h[m.end():]
+            return h
+
+        new_sym_html = fix_sym_and_latex(html)
+        if new_sym_html != html:
+            html = new_sym_html
+            fixes.append("0단계 수학 기호 LaTeX 구분자($) 및 수식 구문 정상 복원")
+
     # 3. 정답 선택 피드백 ('✅ 정답입니다!') 확인 및 리스너 보강
     if re.search(r'정답입니다|정답.*표시|선택.*안|답이.*선택|반응|안눌|체크', clean_text, re.I):
         if '✅ 정답입니다!' not in html or '.confirm-msg' not in html:

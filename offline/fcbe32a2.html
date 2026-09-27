@@ -135,8 +135,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/fcbe32a2.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="fcbe32a2">
-<meta name="mathedu-offline-build-time" content="2026-09-27T22:04:03.343260+00:00">
-<meta name="mathedu-offline-hash" content="cd220ebf">
+<meta name="mathedu-offline-build-time" content="2026-09-27T22:31:08.790084+00:00">
+<meta name="mathedu-offline-hash" content="40032a84">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -199,10 +199,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="orig-card">
 <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
 
-<div class="orig-stem">$y = a^x$와 $y = \log_a x$ ($a &gt; 1$)의 그래프가 정확히 한 점에서 만나는 $a$의 값을 구하시오.</div>
+<div class="orig-stem">$y = a^x$와 $y = \log_a x$ ($a > 1$)의 그래프가 정확히 한 점에서 만나는 $a$의 값을 구하시오.</div>
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>y = a^x</b> — 지수함수 (a &gt; 0, a ≠ 1)</div><div><b>y = \log_a x</b> — 로그함수 (지수함수의 역함수)</div><div><b>y = x</b> — 대칭축 직선</div><div><b>e</b> — 자연상수 (≈ 2.71828)</div></div>
+<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$y = a^x$</b> — 지수함수 (a &gt; 0, a ≠ 1)</div><div><b>$y = \log_a x$</b> — 로그함수 (지수함수의 역함수)</div><div><b>$y = x$</b> — 대칭축 직선</div><div><b>$e$</b> — 자연상수 (≈ 2.71828)</div></div>
 <h2>🔰 제0단계 · 핵심 개념 익히기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>지수함수 $y = a^x$와 로그함수 $y = \log_a x$는 서로 역함수이다. 두 함수의 그래프는 직선 $y = x$에 대해 대칭이다. 즉, 점 $(p, q)$가 $y = a^x$ 위에 있으면 점 $(q, p)$는 $y = \log_a x$ 위에 있다.</div><div class="q" data-ans="2" data-exp="지수함수 $y = a^x$의 역함수는 $y = \log_a x$이다. $y = 2^x$에서 $x$와 $y$를 교환하면 $x = 2^y$이므로 $y = \log_2 x$이다."><div class="lvl">문항</div><div class="stem">함수 $y = 2^x$의 역함수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$y = 2^{-x}$</div><div class="opt"><span class="n">2</span>$y = \log_2 x$</div><div class="opt"><span class="n">3</span>$y = \frac{1}{2^x}$</div><div class="opt"><span class="n">4</span>$y = -\log_2 x$</div><div class="opt"><span class="n">5</span>$y = x^2$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -251,7 +251,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🔰 제2단계 · 접선 조건과 미분 활용</h2><div class="know"><h3>먼저 알아야 할 지식</h3>두 곡선이 접하려면 교점에서 접선의 기울기가 같아야 한다. $f(x) = a^x$의 도함수는 $f&#x27;(x) = a^x \ln a$이고, $g(x) = \log_a x$의 도함수는 $g&#x27;(x) = \frac{1}{x \ln a}$이다. 접점에서 $f&#x27;(t) = g&#x27;(t)$인 조건을 세우면 접선 조건을 얻는다.</div><div class="q" data-ans="2" data-exp="지수함수의 미분 공식: $\frac{d}{dx}a^x = a^x \ln a$. 이는 $\frac{d}{dx}e^{x\ln a} = e^{x\ln a} \cdot \ln a = a^x \ln a$로부터 유도된다."><div class="lvl">문항</div><div class="stem">$f(x) = a^x$의 도함수 $f&#x27;(x)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$x \cdot a^{x-1}$</div><div class="opt"><span class="n">2</span>$a^x \ln a$</div><div class="opt"><span class="n">3</span>$\frac{a^x}{\ln a}$</div><div class="opt"><span class="n">4</span>$a^x$</div><div class="opt"><span class="n">5</span>$e^{ax}$</div></div><div class="exp"></div>
+</div></div><h2>🔰 제2단계 · 접선 조건과 미분 활용</h2><div class="know"><h3>먼저 알아야 할 지식</h3>두 곡선이 접하려면 교점에서 접선의 기울기가 같아야 한다. $f(x) = a^x$의 도함수는 $f'(x) = a^x \ln a$이고, $g(x) = \log_a x$의 도함수는 $g'(x) = \frac{1}{x \ln a}$이다. 접점에서 $f'(t) = g'(t)$인 조건을 세우면 접선 조건을 얻는다.</div><div class="q" data-ans="2" data-exp="지수함수의 미분 공식: $\frac{d}{dx}a^x = a^x \ln a$. 이는 $\frac{d}{dx}e^{x\ln a} = e^{x\ln a} \cdot \ln a = a^x \ln a$로부터 유도된다."><div class="lvl">문항</div><div class="stem">$f(x) = a^x$의 도함수 $f'(x)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$x \cdot a^{x-1}$</div><div class="opt"><span class="n">2</span>$a^x \ln a$</div><div class="opt"><span class="n">3</span>$\frac{a^x}{\ln a}$</div><div class="opt"><span class="n">4</span>$a^x$</div><div class="opt"><span class="n">5</span>$e^{ax}$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
@@ -277,7 +277,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"fcbe32a2",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">전체 풀이 과정:\n\n1단계: $y = a^x$와 $y = \log_a x$는 서로 역함수이므로, 두 곡선의 교점은 직선 $y = x$ 위에 있거나 대칭쌍으로 존재한다.\n\n2단계: 정확히 한 점에서 만나려면 두 곡선이 직선 $y = x$에 접해야 한다.\n\n3단계: 접점을 $(t, t)$라 하면 교점 조건 $a^t = t$와 접선 조건 $\frac{d}{dx}a^x\big|_{x=t} = a^t \ln a = 1$을 연립한다.\n\n4단계: $a^t = t$를 $a^t \ln a = 1$에 대입하면 $t \ln a = 1$, 따라서 $t = \frac{1}{\ln a}$.\n\n5단계: $t = \frac{1}{\ln a}$를 $a^t = t$에 대입하면 $a^{1/\ln a} = \frac{1}{\ln a}$.\n\n6단계: $a^{1/\ln a} = e^{\ln a \cdot (1/\ln a)} = e^1 = e$이므로 $e = \frac{1}{\ln a}$, 즉 $\ln a = \frac{1}{e}$.\n\n7단계: 최종 답 $a = e^{1/e}$.\n\n검증: $a = e^{1/e}$일 때, $t = \frac{1}{\ln(e^{1/e})} = \frac{1}{1/e} = e$이고, $a^t = (e^{1/e})^e = e^{e/e} = e = t$ ✓</div><div class="q" data-ans="3" data-exp="두 곡선이 정확히 한 점에서 만나는 것은 직선 $y = x$에 접할 때이다. 접점을 $(t, t)$라 하면:\n① 교점 조건: $a^t = t$\n② 접선 조건: $a^t \ln a = 1$ (직선 $y=x$의 기울기 1과 같아야 함)\n①에서 $t = a^t$를 ②에 대입하면 $t \ln a = 1$, 즉 $t = \frac{1}{\ln a}$\n이를 ①에 대입: $a^{1/\ln a} = \frac{1}{\ln a}$. 왼쪽은 $a^{1/\ln a} = e^{\ln a / \ln a} = e$이므로 $e = \frac{1}{\ln a}$, $\ln a = \frac{1}{e}$, 따라서 $a = e^{1/e}$."><div class="lvl">최종 본문항</div><div class="stem">$y = a^x$와 $y = \log_a x$ ($a &gt; 1$)의 그래프가 정확히 한 점에서 만나는 $a$의 값을 구하시오.</div><div class="opts"><div class="opt"><span class="n">1</span>$a = e^e$</div><div class="opt"><span class="n">2</span>$a = \sqrt{e}$</div><div class="opt"><span class="n">3</span>$a = e^{1/e}$</div><div class="opt"><span class="n">4</span>$a = \frac{1}{e}$</div><div class="opt"><span class="n">5</span>$a = e^{e-1}$</div></div><div class="exp"></div>
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">전체 풀이 과정:\n\n1단계: $y = a^x$와 $y = \log_a x$는 서로 역함수이므로, 두 곡선의 교점은 직선 $y = x$ 위에 있거나 대칭쌍으로 존재한다.\n\n2단계: 정확히 한 점에서 만나려면 두 곡선이 직선 $y = x$에 접해야 한다.\n\n3단계: 접점을 $(t, t)$라 하면 교점 조건 $a^t = t$와 접선 조건 $\frac{d}{dx}a^x\big|_{x=t} = a^t \ln a = 1$을 연립한다.\n\n4단계: $a^t = t$를 $a^t \ln a = 1$에 대입하면 $t \ln a = 1$, 따라서 $t = \frac{1}{\ln a}$.\n\n5단계: $t = \frac{1}{\ln a}$를 $a^t = t$에 대입하면 $a^{1/\ln a} = \frac{1}{\ln a}$.\n\n6단계: $a^{1/\ln a} = e^{\ln a \cdot (1/\ln a)} = e^1 = e$이므로 $e = \frac{1}{\ln a}$, 즉 $\ln a = \frac{1}{e}$.\n\n7단계: 최종 답 $a = e^{1/e}$.\n\n검증: $a = e^{1/e}$일 때, $t = \frac{1}{\ln(e^{1/e})} = \frac{1}{1/e} = e$이고, $a^t = (e^{1/e})^e = e^{e/e} = e = t$ ✓</div><div class="q" data-ans="3" data-exp="두 곡선이 정확히 한 점에서 만나는 것은 직선 $y = x$에 접할 때이다. 접점을 $(t, t)$라 하면:\n① 교점 조건: $a^t = t$\n② 접선 조건: $a^t \ln a = 1$ (직선 $y=x$의 기울기 1과 같아야 함)\n①에서 $t = a^t$를 ②에 대입하면 $t \ln a = 1$, 즉 $t = \frac{1}{\ln a}$\n이를 ①에 대입: $a^{1/\ln a} = \frac{1}{\ln a}$. 왼쪽은 $a^{1/\ln a} = e^{\ln a / \ln a} = e$이므로 $e = \frac{1}{\ln a}$, $\ln a = \frac{1}{e}$, 따라서 $a = e^{1/e}$."><div class="lvl">최종 본문항</div><div class="stem">$y = a^x$와 $y = \log_a x$ ($a > 1$)의 그래프가 정확히 한 점에서 만나는 $a$의 값을 구하시오.</div><div class="opts"><div class="opt"><span class="n">1</span>$a = e^e$</div><div class="opt"><span class="n">2</span>$a = \sqrt{e}$</div><div class="opt"><span class="n">3</span>$a = e^{1/e}$</div><div class="opt"><span class="n">4</span>$a = \frac{1}{e}$</div><div class="opt"><span class="n">5</span>$a = e^{e-1}$</div></div><div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
@@ -306,8 +306,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
         <div class="min-item">
           <div class="min-item-main">
             <a href="https://min7014.github.io/math20200422001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 두 초점 $\mathrm{F}(c,0)$ 이고 $\mathrm{F&#x27;}(-c,0)$ 으로부터 거리의 합이 $2a$인 타원의 방정식을 구하여라.
-              <span class="min-item-sub">Find the equation of the ellipse where the sum of the distances from $\mathrm {F}(-c,0)$ and $\mathrm{F&#x27;}(-c,0)$ is $2a$.</span>
+              <span class="min-bullet">📌</span> 두 초점 $\mathrm{F}(c,0)$ 이고 $\mathrm{F'}(-c,0)$ 으로부터 거리의 합이 $2a$인 타원의 방정식을 구하여라.
+              <span class="min-item-sub">Find the equation of the ellipse where the sum of the distances from $\mathrm {F}(-c,0)$ and $\mathrm{F'}(-c,0)$ is $2a$.</span>
             </a>
           </div>
           <div class="min-item-actions">
@@ -587,8 +587,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'fcbe32a2';
-window._offlineBuildTime = '2026-09-27T22:04:03.343260+00:00';
-window._offlineHash = 'cd220ebf';
+window._offlineBuildTime = '2026-09-27T22:31:08.790084+00:00';
+window._offlineHash = '40032a84';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/fcbe32a2.html';
 
@@ -613,8 +613,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'fcbe32a2';
-  var localBuildTime = window._offlineBuildTime || '2026-09-27T22:04:03.343260+00:00';
-  var localHash = window._offlineHash || 'cd220ebf';
+  var localBuildTime = window._offlineBuildTime || '2026-09-27T22:31:08.790084+00:00';
+  var localHash = window._offlineHash || '40032a84';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/fcbe32a2.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
