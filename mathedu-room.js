@@ -1,12 +1,20 @@
 /**
- * mathedu-room.js — 무가입 교사-학생 실시간 수업 연동 모듈 (v2.0)
+ * mathedu-room.js — 수학 mathedu 교사-학생 수업 연동 & 비회원 식별·학습 기록 모듈 (v3.0)
  * 
- * 1. 학생: ?room=ROOM_ID 링크 접속 시 자동 수업 참여,
- *    이름 입력 및 실시간 풀이 진행 시 [ROOM_ID] 태그 및 room_id 동시 전송.
- * 2. 교사: 각 문제 화면 어디서나(시작 모달, 문제 상단 배너, 플로팅 버튼, 상단바)
- *    클릭 한 번으로 3초 만에 수업 코드, 학생용 링크, 칠판 빔프로젝터용 대형 QR 발급.
+ * 1. 학생/비회원:
+ *    - ?room=ROOM_ID 링크 접속 시 자동 학급 수업 참여.
+ *    - 고유한 [이름]과 [간편 비밀번호(4자리)] 입력 시 동일 학습자로 자동 인식.
+ *    - 나중에 같은 문제에 다시 오더라도 이전 풀이 단계(진행률/정답수)를 완벽 복원하여 이어서 풀기 지원.
+ *    - [📂 내가 푼 문제 모아보기]를 통해 풀었던 모든 문항을 한곳에서 모아보고 복습.
+ *    - [✨ 정식 회원 전환]으로 비회원 풀이 기록 100% 승계하며 즉시 업그레이드.
+ * 2. 교사/회원:
+ *    - 각 문제 화면(시작 모달, 상단 배너, 플로팅 버튼, 상단바)에서
+ *      클릭 한 번으로 3초 만에 수업 코드, 학생용 링크, 칠판 빔프로젝터용 대형 QR 발급.
+ *    - 문제 출제 및 수업 개설은 인증된 회원만 가능하도록 권한 보호.
  */
 (function() {
+  'use strict';
+
   var urlParams = new URLSearchParams(window.location.search);
   var roomId = (urlParams.get('room') || '').trim();
   window._roomId = roomId;
@@ -14,26 +22,48 @@
   // 퀴즈 slug 추출
   var currentSlug = window.location.pathname.split('/').pop().replace('.html', '') || 'quiz';
 
-  function initRoom() {
-    // 1. 학생이 특정 방에 참여 중인 경우 UI 표시
-    if (roomId) {
-      applyStudentRoomUI(roomId);
+  function ensureAuthLoaded(callback) {
+    if (window.MatheduAuth) {
+      if (typeof callback === 'function') callback();
+      return;
     }
+    var script = document.createElement('script');
+    var isBoard = window.location.pathname.indexOf('/board/') !== -1;
+    script.src = isBoard ? '../mathedu-auth.js' : './mathedu-auth.js';
+    script.onload = function() {
+      if (typeof callback === 'function') callback();
+    };
+    script.onerror = function() {
+      if (typeof callback === 'function') callback();
+    };
+    document.head.appendChild(script);
+  }
 
-    // 2. 시작 모달(#trackFull)에 선생님 전용 빠른 액션 추가
-    enhanceTrackFullModal();
+  function initRoom() {
+    ensureAuthLoaded(function() {
+      // 1. 학생이 특정 방에 참여 중인 경우 UI 표시
+      if (roomId) {
+        applyStudentRoomUI(roomId);
+      }
 
-    // 3. 문제 페이지 상단에 눈에 띄는 [이 문제로 수업 개설] 배너 삽입
-    injectProblemPageBanner();
+      // 2. 시작 모달(#trackFull)에 비회원 간편 식별 및 이전 풀이 복원 기능 추가
+      enhanceTrackFullModal();
 
-    // 4. 스크롤 중에도 언제든 누를 수 있는 플로팅 [🚀 이 문제로 수업 열기] 버튼
-    injectFloatingClassButton();
+      // 3. 문제 페이지 상단에 [이 문제로 수업 개설] 배너 삽입
+      injectProblemPageBanner();
 
-    // 5. 상단바 tbtn에 버튼 추가
-    injectTeacherTopbarButton();
+      // 4. 스크롤 중에도 언제든 누를 수 있는 플로팅 [🚀 이 문제로 수업 열기] 버튼
+      injectFloatingClassButton();
 
-    // 6. sendProgress 가로채기 (room_id 및 [ROOM_ID] 태그 주입)
-    patchSendProgress();
+      // 5. 상단바 tbtn에 버튼 추가 (내가 푼 문제 + 수업 열기)
+      injectTopbarButtons();
+
+      // 6. sendProgress 가로채기 (Google Sheets 전송 + MatheduAuth 풀이 기록 영구 저장)
+      patchSendProgress();
+
+      // 7. 이전에 풀었던 문제라면 페이지 상단에 진행 안내 바 표시
+      checkAndShowResumeBanner();
+    });
   }
 
   function applyStudentRoomUI(rId) {
@@ -56,7 +86,7 @@
       }
     }
 
-    var topbar = document.querySelector('.topbar');
+    var topbar = document.querySelector('.topbar') || document.querySelector('.navbar');
     if (topbar) {
       var activeRoomBadge = document.createElement('div');
       activeRoomBadge.style.cssText = 'margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:rgba(62,220,151,.15);border:1px solid rgba(62,220,151,.35);color:#3ddc97;border-radius:10px;padding:6px 14px;font-size:0.85rem;font-weight:700;';
@@ -69,33 +99,231 @@
     var trackFull = document.getElementById('trackFull');
     if (!trackFull) return;
 
-    var teacherRow = document.createElement('div');
-    teacherRow.style.cssText = 'margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center';
+    var currentUser = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
+    var currentGuest = window.MatheduAuth ? window.MatheduAuth.getCurrentGuest() : null;
+    var solvedList = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems() : [];
+    var prevProblem = solvedList.find(function(p) { return p.slug === currentSlug; });
 
-    teacherRow.innerHTML = 
-      '<button type="button" id="btnTeacherOpenInModal" style="background:rgba(124,196,255,.18);color:#7cc4ff;border:1px solid rgba(124,196,255,.45);border-radius:10px;padding:9px 18px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
-        '👩‍🏫 선생님이신가요? 3초 만에 수업 개설 (QR)' +
-      '</button>' +
-      '<button type="button" id="btnTeacherPreviewInModal" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:10px;padding:9px 16px;font-size:0.86rem;cursor:pointer;transition:.15s">' +
-        '👀 문제 먼저 둘러보기' +
-      '</button>';
-
+    var studentNameInput = document.getElementById('studentName');
     var formDiv = trackFull.querySelector('div');
-    if (formDiv) {
-      formDiv.parentNode.insertBefore(teacherRow, formDiv.nextSibling);
+
+    // 1. 이미 정회원 또는 비회원으로 식별된 경우 자동 채움 및 이전 기록 안내
+    if (currentUser) {
+      if (studentNameInput) studentNameInput.value = currentUser.name;
+      var h3 = trackFull.querySelector('h3');
+      if (h3) {
+        h3.innerHTML = '👤 <b>' + escapeHtml(currentUser.name) + '</b>님 (' + escapeHtml(currentUser.roleLabel || '회원') + ')';
+      }
+      var p = trackFull.querySelector('p');
+      if (p) {
+        if (prevProblem) {
+          p.innerHTML = '📌 이전에 <b>' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '단계</b>까지 풀이하셨습니다 (정답 <b>' + prevProblem.correct + '개</b>). 이어서 학습을 진행합니다.';
+        } else {
+          p.textContent = '인증된 회원 계정으로 풀이 기록이 안전하게 저장됩니다.';
+        }
+      }
+    } else if (currentGuest) {
+      if (studentNameInput) studentNameInput.value = currentGuest.name;
+      var h3 = trackFull.querySelector('h3');
+      if (h3) {
+        h3.innerHTML = '🧑‍🎓 <b>' + escapeHtml(currentGuest.name) + '</b>님 (비회원 학습자)';
+      }
+      var p = trackFull.querySelector('p');
+      if (p) {
+        if (prevProblem) {
+          p.innerHTML = '📌 이전에 <b>' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '단계</b>까지 풀이하셨습니다 (정답 <b>' + prevProblem.correct + '개</b>). 이어서 계속 풀어보세요!';
+        } else {
+          p.textContent = '인식된 비회원 학습자 [' + currentGuest.name + ']님으로 풀이 기록이 저장됩니다.';
+        }
+      }
     } else {
-      trackFull.appendChild(teacherRow);
+      // 익명 상태인 경우: 간편 비밀번호(PIN) 입력 필드 추가
+      if (formDiv && !document.getElementById('studentPin')) {
+        var pinInput = document.createElement('input');
+        pinInput.type = 'password';
+        pinInput.id = 'studentPin';
+        pinInput.placeholder = '간편비번 4자리 (선택)';
+        pinInput.maxLength = 12;
+        pinInput.style.cssText = 'background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 14px;font-size:1.05rem;max-width:170px;text-align:center;outline:none;';
+        pinInput.autocomplete = 'current-password';
+
+        // 시작하기 버튼 앞에 삽입
+        var startBtn = formDiv.querySelector('button');
+        if (startBtn) {
+          formDiv.insertBefore(pinInput, startBtn);
+        } else {
+          formDiv.appendChild(pinInput);
+        }
+
+        pinInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') window.registerName();
+        });
+
+        var tipDiv = document.createElement('div');
+        tipDiv.style.cssText = 'font-size:0.83rem;color:#7cc4ff;margin-top:12px;line-height:1.5;max-width:460px;text-align:center;word-break:keep-all';
+        tipDiv.innerHTML = '💡 <b>비회원 안내:</b> [이름]과 [간편 비밀번호]를 넣으시면 나중에 같은 문제에 오더라도 <b>동일 학습자로 자동 인식</b>되어 이전 풀이를 복원하고 <b>[내가 푼 문제]</b>를 모아볼 수 있습니다. (비번 미입력 시 익명 풀이)';
+        formDiv.parentNode.insertBefore(tipDiv, formDiv.nextSibling);
+      }
     }
+
+    // 2. 하단 액션 버튼 행 (내가 푼 문제 모아보기 + 회원 전환 + 교사 수업 개설)
+    var actionRow = document.createElement('div');
+    actionRow.style.cssText = 'margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:540px;';
+
+    var solvedCount = solvedList.length;
+    var guestOrMember = currentUser || currentGuest;
+
+    actionRow.innerHTML = 
+      '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center">' +
+        '<button type="button" id="btnMyProblemsInModal" style="background:rgba(94,234,212,.15);border:1px solid rgba(94,234,212,.35);color:#5eead4;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+          '📂 내가 푼 문제 모아보기' + (solvedCount > 0 ? ' (' + solvedCount + ')' : '') +
+        '</button>' +
+        (!currentUser ? 
+          '<button type="button" id="btnUpgradeInModal" style="background:linear-gradient(90deg,rgba(124,196,255,.18),rgba(167,139,250,.18));border:1px solid rgba(124,196,255,.4);color:#c4b5fd;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+            '✨ 정식 회원 전환 / 가입' +
+          '</button>' : '') +
+        '<button type="button" id="btnTeacherPreviewInModal" style="background:rgba(255,255,255,.06);color:#cbd5e1;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:9px 16px;font-size:0.86rem;cursor:pointer;transition:.15s;font-weight:600">' +
+          '👀 가입 없이 문제 열람 & 자유 풀기' +
+        '</button>' +
+      '</div>' +
+      '<div style="margin-top:4px">' +
+        '<button type="button" id="btnTeacherOpenInModal" style="background:rgba(124,196,255,.16);color:#7cc4ff;border:1px solid rgba(124,196,255,.4);border-radius:10px;padding:8px 18px;font-size:0.84rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+          '👩‍🏫 선생님 전용: 3초 수업 개설 (QR)' +
+        '</button>' +
+      '</div>';
+
+    trackFull.appendChild(actionRow);
+
+    document.getElementById('btnMyProblemsInModal').onclick = function() {
+      if (window.MatheduAuth) {
+        window.MatheduAuth.showMyProblemsModal();
+      }
+    };
+
+    var btnUpgrade = document.getElementById('btnUpgradeInModal');
+    if (btnUpgrade) {
+      btnUpgrade.onclick = function() {
+        if (window.MatheduAuth) {
+          window.MatheduAuth.showUpgradeModal();
+        }
+      };
+    }
+
+    document.getElementById('btnTeacherPreviewInModal').onclick = function() {
+      trackFull.remove();
+      window._studentName = '자유 학습자';
+      if (window.sendProgress) window.sendProgress();
+    };
 
     document.getElementById('btnTeacherOpenInModal').onclick = function() {
       trackFull.remove();
       openClassCreatorModal(currentSlug);
     };
 
-    document.getElementById('btnTeacherPreviewInModal').onclick = function() {
-      trackFull.remove();
-      window._studentName = '선생님(미리보기)';
+    // 3. window.registerName 가로채기 (이름 + 간편비밀번호 SHA-256 검증 및 자동 연동)
+    window.registerName = async function() {
+      var nameInput = document.getElementById('studentName');
+      var pinInput = document.getElementById('studentPin');
+      var n = nameInput ? nameInput.value.trim() : '';
+      var p = pinInput ? pinInput.value.trim() : '';
+
+      if (!n) {
+        alert('이름 또는 출석번호를 입력하세요.');
+        if (nameInput) nameInput.focus();
+        return;
+      }
+
+      // 정회원인 경우
+      if (window.MatheduAuth && window.MatheduAuth.getCurrentUser()) {
+        window._studentName = n;
+        finishRegister();
+        return;
+      }
+
+      // 간편 비밀번호가 입력된 경우 -> 비회원 식별/등록
+      if (p && window.MatheduAuth && window.MatheduAuth.loginGuest) {
+        var res = await window.MatheduAuth.loginGuest(n, p);
+        if (!res.success) {
+          alert('⚠️ ' + res.message);
+          if (pinInput) pinInput.focus();
+          return;
+        }
+        window._studentName = n;
+        finishRegister();
+        return;
+      }
+
+      // 비번 미입력 상태이지만 기존 게스트 세션이 있는 경우
+      var curG = window.MatheduAuth ? window.MatheduAuth.getCurrentGuest() : null;
+      if (curG && curG.name.toLowerCase() === n.toLowerCase()) {
+        window._studentName = n;
+        finishRegister();
+        return;
+      }
+
+      // 비번 없이 이름만 넣고 자유 풀이 시작
+      window._studentName = n;
+      finishRegister();
+
+      function finishRegister() {
+        var tf = document.getElementById('trackFull');
+        if (tf) tf.remove();
+        if (window.sendProgress) window.sendProgress();
+        if (window.MathJax && MathJax.typesetPromise) {
+          MathJax.typesetPromise();
+        }
+
+        // 이전 풀이 기록이 있을 경우 해당 단계로 부드럽게 스크롤 안내
+        if (prevProblem && prevProblem.stepDone > 0) {
+          setTimeout(function() {
+            var qs = document.querySelectorAll('.q');
+            var targetIdx = Math.min(prevProblem.stepDone, qs.length - 1);
+            if (qs[targetIdx]) {
+              qs[targetIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 350);
+        }
+      }
     };
+  }
+
+  function checkAndShowResumeBanner() {
+    if (!window.MatheduAuth || !window.MatheduAuth.getSolvedProblems) return;
+    var solvedList = window.MatheduAuth.getSolvedProblems();
+    var prev = solvedList.find(function(p) { return p.slug === currentSlug; });
+    if (!prev || prev.stepDone <= 0) return;
+
+    // 이미 배너가 있다면 생략
+    if (document.getElementById('problemResumeBanner')) return;
+
+    var wrap = document.querySelector('.wrap');
+    if (!wrap) return;
+
+    var banner = document.createElement('div');
+    banner.id = 'problemResumeBanner';
+    banner.style.cssText = 'background:linear-gradient(90deg, rgba(62,220,151,.15), rgba(56,189,248,.15));border:1px solid rgba(62,220,151,.4);border-radius:12px;padding:12px 18px;margin:14px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;animation:fadeIn .3s ease;';
+
+    var pct = prev.totalSteps > 0 ? Math.round((prev.stepDone / prev.totalSteps) * 100) : 100;
+    var statusText = prev.completed 
+      ? '🏆 <b>완주 완료!</b> (' + prev.stepDone + '/' + prev.totalSteps + '단계 모두 해결)'
+      : '⚡ 이전에 <b>' + prev.stepDone + '/' + prev.totalSteps + '단계 (' + pct + '%)</b>까지 풀이하셨습니다.';
+
+    banner.innerHTML = 
+      '<div style="font-size:0.88rem;color:#eef2ff;display:flex;align-items:center;gap:8px">' +
+        '<span>📌</span>' +
+        '<div>' + statusText + ' (정답: <b>' + prev.correct + '</b>문항)</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px">' +
+        '<button type="button" onclick="MatheduAuth.showMyProblemsModal()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;border-radius:8px;padding:5px 12px;font-size:0.8rem;cursor:pointer;font-weight:700">📂 내 서재</button>' +
+        '<button type="button" onclick="document.getElementById(\'problemResumeBanner\').remove()" style="background:transparent;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer">✕</button>' +
+      '</div>';
+
+    var score = wrap.querySelector('.score') || wrap.querySelector('h1');
+    if (score && score.nextSibling) {
+      wrap.insertBefore(banner, score.nextSibling);
+    } else {
+      wrap.insertBefore(banner, wrap.firstChild);
+    }
   }
 
   function injectProblemPageBanner() {
@@ -112,19 +340,18 @@
           '👩‍🏫 이 문제로 학급 수업을 시작할 수 있습니다' +
         '</div>' +
         '<div style="font-size:0.83rem;color:#aab4d4;margin-top:3px">' +
-          '회원가입 없이 3초 만에 수업 코드를 만들고, 교실 칠판에 학생용 대형 QR코드를 띄워보세요.' +
+          '회원 로그인 후 3초 만에 수업 코드를 만들고, 교실 칠판에 학생용 대형 QR코드를 띄워보세요.' +
         '</div>' +
       '</div>' +
       '<button type="button" onclick="openClassCreatorModal(\'' + currentSlug + '\')" style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:10px;padding:10px 20px;font-size:0.9rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.35);transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
         '🚀 이 문제로 수업 열기 (QR / 대시보드)' +
       '</button>';
 
-    // h1 다음 또는 score 다음 삽입
     var h1 = wrap.querySelector('h1');
     if (h1 && h1.nextSibling) {
       wrap.insertBefore(banner, h1.nextSibling);
     } else {
-      var topbar = wrap.querySelector('.topbar');
+      var topbar = wrap.querySelector('.topbar') || wrap.querySelector('.navbar');
       if (topbar && topbar.nextSibling) {
         wrap.insertBefore(banner, topbar.nextSibling);
       }
@@ -132,11 +359,12 @@
   }
 
   function injectFloatingClassButton() {
+    if (document.getElementById('floatClassBtn')) return;
     var floatBtn = document.createElement('button');
     floatBtn.id = 'floatClassBtn';
     floatBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:30px;padding:12px 22px;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 20px rgba(124,196,255,.45);display:flex;align-items:center;gap:8px;transition:.2s';
     floatBtn.innerHTML = '🚀 이 문제로 수업 열기';
-    floatBtn.title = '3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급';
+    floatBtn.title = '3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급 (회원 전용)';
 
     floatBtn.onmouseover = function() { floatBtn.style.transform = 'translateY(-2px) scale(1.03)'; };
     floatBtn.onmouseout = function() { floatBtn.style.transform = 'translateY(0) scale(1)'; };
@@ -145,23 +373,43 @@
     document.body.appendChild(floatBtn);
   }
 
-  function injectTeacherTopbarButton() {
-    var topbar = document.querySelector('.topbar');
+  function injectTopbarButtons() {
+    var topbar = document.querySelector('.topbar') || document.querySelector('.navbar');
     if (!topbar) return;
 
-    var teacherBtn = document.createElement('button');
-    teacherBtn.className = 'tbtn';
-    teacherBtn.style.cssText = 'background:linear-gradient(90deg,rgba(124,196,255,.2),rgba(167,139,250,.2));border-color:rgba(124,196,255,.4);color:#eef2ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;';
-    teacherBtn.innerHTML = '🚀 수업 열기 (QR)';
-    teacherBtn.title = '선생님을 위한 3초 수업 생성 및 QR 발급';
-    teacherBtn.onclick = function() {
-      openClassCreatorModal(currentSlug);
-    };
+    // 1. [📂 내가 푼 문제] 학습 서재 버튼
+    if (!document.getElementById('btnMyLibraryTopbar')) {
+      var libBtn = document.createElement('button');
+      libBtn.id = 'btnMyLibraryTopbar';
+      libBtn.className = 'tbtn navbtn';
+      libBtn.style.cssText = 'background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#eef2ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;text-decoration:none;';
+      
+      function updateLibBtnText() {
+        var count = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems().length : 0;
+        libBtn.innerHTML = '📂 내가 푼 문제' + (count > 0 ? ' <span style="background:rgba(124,196,255,.25);color:#7cc4ff;padding:1px 6px;border-radius:10px;font-size:0.75rem">' + count + '</span>' : '');
+      }
+      updateLibBtnText();
+      libBtn.onclick = function() {
+        if (window.MatheduAuth) window.MatheduAuth.showMyProblemsModal();
+      };
 
-    var copyBtn = document.getElementById('copyBtn');
-    if (copyBtn && copyBtn.nextSibling) {
-      topbar.insertBefore(teacherBtn, copyBtn.nextSibling);
-    } else {
+      topbar.appendChild(libBtn);
+      window.addEventListener('mathedu:solved-updated', updateLibBtnText);
+      window.addEventListener('mathedu:auth-changed', updateLibBtnText);
+    }
+
+    // 2. [🚀 수업 열기 (QR)] 버튼
+    if (!document.getElementById('btnTeacherTopbar')) {
+      var teacherBtn = document.createElement('button');
+      teacherBtn.id = 'btnTeacherTopbar';
+      teacherBtn.className = 'tbtn navbtn';
+      teacherBtn.style.cssText = 'background:linear-gradient(90deg,rgba(124,196,255,.2),rgba(167,139,250,.2));border:1px solid rgba(124,196,255,.4);color:#eef2ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      teacherBtn.innerHTML = '🚀 수업 열기 (QR)';
+      teacherBtn.title = '선생님을 위한 3초 수업 생성 및 QR 발급 (회원 전용)';
+      teacherBtn.onclick = function() {
+        openClassCreatorModal(currentSlug);
+      };
+
       topbar.appendChild(teacherBtn);
     }
   }
@@ -194,6 +442,21 @@
         correct: correct
       };
 
+      // === MatheduAuth 푼 문제 기록 저장 (기기 캐시 + 비회원 게스트 DB + 정회원 DB) ===
+      if (window.MatheduAuth && window.MatheduAuth.recordSolvedProblem) {
+        var h1 = document.querySelector('h1');
+        var pageTitle = h1 ? h1.textContent.trim() : (document.title || currentSlug);
+        pageTitle = pageTitle.replace(/^📘\s*/, '').trim();
+
+        window.MatheduAuth.recordSolvedProblem(currentSlug, {
+          title: pageTitle,
+          stepDone: done.length,
+          totalSteps: total,
+          correct: correct,
+          completed: (total > 0 && done.length >= total)
+        });
+      }
+
       if (window._sheetsApiUrl) {
         fetch(window._sheetsApiUrl, {
           method: 'POST',
@@ -207,8 +470,28 @@
     };
   }
 
-  // 교사용 수업 생성기 모달 (3초 룸 생성 + QR + 대시보드 링크)
+  function ensureAuth(actionName, callback) {
+    if (window.MatheduAuth) {
+      window.MatheduAuth.requireAuth(actionName, callback);
+      return;
+    }
+    ensureAuthLoaded(function() {
+      if (window.MatheduAuth) {
+        window.MatheduAuth.requireAuth(actionName, callback);
+      } else {
+        callback({ name: '선생님', roleLabel: '교사' });
+      }
+    });
+  }
+
+  // 교사용 수업 생성기 모달 (회원 전용)
   window.openClassCreatorModal = function(slug) {
+    ensureAuth('수업 개설 및 배포', function(currentUser) {
+      _openClassCreatorModal(slug, currentUser);
+    });
+  };
+
+  function _openClassCreatorModal(slug, currentUser) {
     var existing = document.getElementById('classCreatorModal');
     if (existing) existing.remove();
 
@@ -225,10 +508,12 @@
     modal.id = 'classCreatorModal';
     modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(10,13,26,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease';
 
+    var teacherLabel = (currentUser && currentUser.name) ? (currentUser.name + ' (' + (currentUser.roleLabel || '회원') + ')') : '인증된 교사 회원';
+
     modal.innerHTML = 
       '<div style="background:#141833;border:1px solid rgba(124,196,255,.3);border-radius:20px;max-width:540px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.6);color:#eef2ff;font-family:system-ui,sans-serif;position:relative">' +
         '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="position:absolute;top:16px;right:18px;background:none;border:none;color:#9aa6c0;font-size:1.5rem;cursor:pointer">✕</button>' +
-        '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(124,196,255,.15);color:#7cc4ff;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-bottom:10px">👩‍🏫 교사용 · 가입/로그인 불필요</div>' +
+        '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(62,220,151,.15);color:#3ddc97;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-bottom:10px">✅ ' + escapeHtml(teacherLabel) + '</div>' +
         '<h2 style="margin:0 0 6px;font-size:1.4rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">🚀 3초 만에 수업 개설하기</h2>' +
         '<p style="margin:0 0 20px;color:#9aa6c0;font-size:.88rem">선택하신 문제(<b>' + escapeHtml(slug) + '</b>)로 학생들에게 배포할 수업 코드가 생성되었습니다.</p>' +
 
@@ -299,7 +584,7 @@
     };
 
     updateUrls();
-  };
+  }
 
   function openProjectorScreen(url, rId) {
     var pModal = document.createElement('div');

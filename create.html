@@ -6,6 +6,7 @@
 <title>새 문제 출제 & 퀴즈 생성 · min7014 mathedu</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<script src="mathedu-auth.js"></script>
 <style>
 :root {
   --bg: #0d1020;
@@ -234,6 +235,9 @@ window.MathJax = {
     <h1>✨ 새 문제 출제 & 단계별 퀴즈 생성</h1>
     <p class="lead">어려운 고난도 문제를 올리면, 초등·중학생도 풀 수 있는 <b>5~8단계 인터랙티브 빌드업 퀴즈</b>로 자동 제작되어 게시판에 배포됩니다.</p>
   </header>
+
+  <!-- 회원 전용 안내 박스 -->
+  <div id="memberNoticeBox" style="margin-bottom: 20px;"></div>
 
   <!-- 신청 폼 -->
   <div class="form-box" id="formBox">
@@ -623,11 +627,27 @@ function resizeImageToBase64(blob, maxWidth = 720, quality = 0.8) {
 async function submitQuizRequest(e) {
   e.preventDefault();
 
+  // 🔒 회원 전용 권한 검증: 비회원은 문제 만들기 불가
+  if (window.MatheduAuth && !window.MatheduAuth.isLoggedIn()) {
+    window.MatheduAuth.requireAuth('문제 출제', function(user) {
+      renderMemberNotice();
+      if (document.getElementById('requesterName') && !document.getElementById('requesterName').value) {
+        document.getElementById('requesterName').value = user.name;
+      }
+      if (document.getElementById('requesterEmail') && user.email && !document.getElementById('requesterEmail').value) {
+        document.getElementById('requesterEmail').value = user.email;
+      }
+      submitQuizRequest(e);
+    });
+    return;
+  }
+
+  const currentUser = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
   const titleInput = document.getElementById('quizTitle').value.trim();
   const contentInput = document.getElementById('quizContent').value.trim();
   const answer = document.getElementById('quizAnswer').value.trim();
-  const name = document.getElementById('requesterName').value.trim() || '선생님';
-  const email = (document.getElementById('requesterEmail')?.value || '').trim();
+  const name = document.getElementById('requesterName').value.trim() || (currentUser ? currentUser.name : '선생님');
+  const email = (document.getElementById('requesterEmail')?.value || (currentUser ? currentUser.email : '') || '').trim();
 
   if (!contentInput && !attachedBlob) {
     alert('문제 내용이나 이미지를 입력해주세요.');
@@ -694,6 +714,63 @@ function escapeHtml(s) {
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
   });
 }
+
+function renderMemberNotice() {
+  const box = document.getElementById('memberNoticeBox');
+  if (!box) return;
+  const user = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
+  const btnSubmit = document.getElementById('btnSubmit');
+
+  if (user) {
+    box.innerHTML = `
+      <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.4rem;">✅</span>
+          <div>
+            <div style="font-weight: 700; color: #10b981; font-size: 0.95rem;">회원 인증 완료: <b>${escapeHtml(user.name)}</b> (${escapeHtml(user.roleLabel || '회원')} · ${escapeHtml(user.org || '수학교육')})</div>
+            <div style="font-size: 0.8rem; color: #aab4d4;">문제 출제 및 5~8단계 인터랙티브 퀴즈 자동 제작 권한이 활성화되었습니다.</div>
+          </div>
+        </div>
+        <button type="button" class="tbtn" style="padding: 4px 12px; font-size: 0.8rem;" onclick="MatheduAuth.logOut()">🚪 로그아웃</button>
+      </div>
+    `;
+    if (btnSubmit) {
+      btnSubmit.innerHTML = '🚀 단계별 퀴즈 생성 요청하기';
+    }
+    if (document.getElementById('requesterName') && !document.getElementById('requesterName').value) {
+      document.getElementById('requesterName').value = user.name;
+    }
+    if (document.getElementById('requesterEmail') && !document.getElementById('requesterEmail').value && user.email) {
+      document.getElementById('requesterEmail').value = user.email;
+    }
+  } else {
+    box.innerHTML = `
+      <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(129, 140, 248, 0.12)); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.8rem;">🔒</span>
+          <div>
+            <div style="font-weight: 800; color: #38bdf8; font-size: 1.02rem; margin-bottom: 3px;">문제 출제(만들기)는 mathedu 회원 전용입니다</div>
+            <div style="font-size: 0.83rem; color: #cbd5e1; line-height: 1.4;">
+              어려운 문제를 5~8단계 빌드업 퀴즈로 자동 제작하고 깃에 배포하려면 로그인이 필요합니다.<br>
+              선생님과 연구자분들을 위해 <b>10초 무료 회원가입</b>을 지원합니다.
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="tbtn" style="background: linear-gradient(135deg, #38bdf8, #818cf8); color: #0b1020; font-weight: 800; border: none; padding: 8px 18px; border-radius: 10px;" onclick="MatheduAuth.showAuthModal({ defaultTab: 'login' })">🔑 로그인</button>
+          <button type="button" class="tbtn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: #fff; padding: 8px 14px; border-radius: 10px;" onclick="MatheduAuth.showAuthModal({ defaultTab: 'signup' })">✨ 회원가입</button>
+        </div>
+      </div>
+    `;
+    if (btnSubmit) {
+      btnSubmit.innerHTML = '🔒 회원 로그인 후 문제 출제 가능';
+    }
+  }
+}
+
+window.addEventListener('mathedu:auth-changed', renderMemberNotice);
+document.addEventListener('DOMContentLoaded', renderMemberNotice);
+renderMemberNotice();
 </script>
 </body>
 </html>

@@ -20,6 +20,7 @@ window.MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
+<script src="mathedu-auth.js"></script>
 <style>
 :root {
   --bg: #0d1020;
@@ -784,7 +785,7 @@ header p {
     </a>
     <div class="nav-menu">
       <a href="#quizFilterBar" class="nav-link">📚 퀴즈 모음</a>
-      <a href="create.html" class="nav-link nav-link-cta">✨ 문제 출제</a>
+      <a href="create.html" class="nav-link nav-link-cta">✨ 문제 출제 <span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:2px">회원전용</span></a>
       <a href="dashboard.html" class="nav-link">📊 수업 대시보드</a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-link">🌐 min7014 홈</a>
     </div>
@@ -813,9 +814,10 @@ header p {
       </p>
 
       <div class="brand-pills-row">
-        <span class="pill-item">⚡ 무가입 5초 즉시 학습</span>
+        <span class="pill-item">⚡ 학생: 무가입 5초 즉시 학습</span>
         <span class="pill-item">🎯 0~5단계 개념 빌드업</span>
         <span class="pill-item">📊 실시간 교실 현황 분석</span>
+        <span class="pill-item" style="background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4);color:#38bdf8">🔐 회원 전용 출제 & 배포</span>
       </div>
 
       <div>
@@ -841,9 +843,9 @@ header p {
     <!-- 교사용 카드 -->
     <div class="hero-card teacher-card">
       <div>
-        <span class="hero-tag tag-teacher">👩‍🏫 선생님용 · 가입 불필요</span>
+        <span class="hero-tag tag-teacher">👩‍🏫 교사 회원 전용 · 수업 배포</span>
         <div class="hero-title">3초 만에 수업 개설하기</div>
-        <p class="hero-desc">회원가입 없이 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 실시간 모니터링 대시보드를 발급받으세요.</p>
+        <p class="hero-desc">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</p>
       </div>
       <div>
         <button class="btn-primary" onclick="openDefaultTeacherClass()" style="width:100%">
@@ -855,27 +857,35 @@ header p {
     <!-- 문제 생성 게시판 카드 -->
     <div class="hero-card create-card">
       <div>
-        <span class="hero-tag tag-create">🤖 AI 문제 생성 · 자동 깃 배포</span>
+        <span class="hero-tag tag-create">🤖 회원 전용 · AI 문제 출제</span>
         <div class="hero-title">✨ 문제 생성 게시판</div>
-        <p class="hero-desc">어려운 고난도 문제를 올리면, <b>안티그래비티 AI</b>가 초·중학생도 풀 수 있는 <b>5~8단계 인터랙티브 퀴즈</b>를 자동 작성하여 깃에 즉시 배포합니다.</p>
+        <p class="hero-desc">어려운 고난도 문제를 올리면, <b>안티그래비티 AI</b>가 초·중학생도 풀 수 있는 <b>5~8단계 인터랙티브 퀴즈</b>를 자동 작성하여 깃에 배포합니다. (회원 전용)</p>
       </div>
       <div>
         <a href="create.html" class="btn-primary" style="width:100%;background:linear-gradient(90deg,var(--accent2),var(--accent))">
-          ✨ 새 퀴즈 만들기 ➔
+          ✨ 새 퀴즈 만들기 (회원 전용) ➔
         </a>
       </div>
     </div>
 
-    <!-- 학생용 카드 -->
+    <!-- 학생 / 비회원용 카드 -->
     <div class="hero-card student-card">
       <div>
-        <span class="hero-tag tag-student">🧑‍🎓 학생용 · 즉시 참여</span>
-        <div class="hero-title">수업 코드로 입장하기</div>
-        <p class="hero-desc">선생님이 공유해주신 6자리 수업 코드(방 번호)를 입력하고 로그인 없이 단계별 문제 풀이를 시작하세요.</p>
+        <span class="hero-tag tag-student">🧑‍🎓 비회원·학생 · 100% 자유 풀이</span>
+        <div class="hero-title">수업 코드로 입장하기 (또는 자유 풀이)</div>
+        <p class="hero-desc">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다. 고유 이름과 비밀번호를 등록하면 언제든 내 기록을 모아볼 수 있습니다.</p>
       </div>
       <div class="student-join-form">
         <input type="text" id="inputRoomCode" placeholder="예: MATH-A8F2" maxlength="12">
         <button onclick="joinClassroom()">입장 ➔</button>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(94,234,212,.3);display:flex;gap:8px;flex-wrap:wrap;align-items:center" id="studentLibraryQuickBar">
+        <button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:7px 14px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()">
+          📂 내가 푼 문제 모아보기
+        </button>
+        <button type="button" class="btn-primary" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;font-size:0.84rem;padding:7px 14px;border-radius:10px;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showGuestLoginModal()">
+          👤 비회원 이름·비번 연동
+        </button>
       </div>
     </div>
   </div>
@@ -904,7 +914,7 @@ header p {
   <!-- 퀴즈 목록 섹션 -->
   <div class="list-header">
     <div class="list-title">
-      <span>📚 전체 퀴즈 목록</span>
+      <span>📚 전체 퀴즈 목록 (비회원 누구나 100% 무료 열람 & 즉시 풀이)</span>
       <span class="count-badge" id="countBadge">불러오는 중…</span>
     </div>
     <div style="display:flex;gap:12px;align-items:center">
@@ -1054,6 +1064,10 @@ function toggleMathStory() {
       return;
     }
 
+    var solvedList = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems() : [];
+    var solvedMap = {};
+    solvedList.forEach(function(s) { solvedMap[s.slug] = s; });
+
     var html = '';
     for (var i = 0; i < filtered.length; i++) {
       var item = filtered[i];
@@ -1061,17 +1075,36 @@ function toggleMathStory() {
       var time = escapeHtml(item.time || '');
       var slug = escapeHtml(item.slug);
 
+      var solved = solvedMap[slug];
+      var solveBadge = '';
+      var solveBtnText = '풀기 ➔';
+      var solveBtnStyle = '';
+
+      if (solved) {
+        if (solved.completed) {
+          solveBadge = '<span style="background:rgba(62,220,151,.18);border:1px solid rgba(62,220,151,.35);color:#3ddc97;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:700">🏆 완주</span>';
+          solveBtnText = '🔄 다시 풀기 ➔';
+          solveBtnStyle = 'border-color:rgba(62,220,151,.5);color:#3ddc97;';
+        } else {
+          var pct = solved.totalSteps > 0 ? Math.round((solved.stepDone / solved.totalSteps) * 100) : 0;
+          solveBadge = '<span style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.35);color:#38bdf8;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:700">⚡ ' + solved.stepDone + '/' + solved.totalSteps + ' (' + pct + '%)</span>';
+          solveBtnText = '🚀 이어서 풀기 ➔';
+          solveBtnStyle = 'border-color:rgba(56,189,248,.5);color:#38bdf8;font-weight:800;background:rgba(56,189,248,.1);';
+        }
+      }
+
       html += '<div class="card">';
       html += '<div class="icon">📘</div>';
       html += '<div class="body">';
       html += '<a class="title" href="board/' + slug + '.html">' + title + '</a>';
       html += '<div class="meta">';
+      if (solveBadge) html += solveBadge + ' ';
       if (time) html += '<span>' + time + '</span>';
       html += '<span style="color:var(--sub)">· 슬러그: <code>' + slug + '</code></span>';
       html += '</div></div>';
       html += '<div class="card-actions">';
       html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">🚀 수업 열기</button>';
-      html += '<a class="btn-solve" href="board/' + slug + '.html">풀기 ➔</a>';
+      html += '<a class="btn-solve" style="' + solveBtnStyle + '" href="board/' + slug + '.html">' + solveBtnText + '</a>';
       html += '</div>';
       html += '</div>';
     }
@@ -1082,6 +1115,41 @@ function toggleMathStory() {
       MathJax.typesetPromise([listEl]).catch(function(){});
     }
   }
+
+  function updateStudentQuickBar() {
+    var bar = document.getElementById('studentLibraryQuickBar');
+    if (!bar) return;
+    var guest = window.MatheduAuth ? window.MatheduAuth.getCurrentGuest() : null;
+    var user = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
+    var count = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems().length : 0;
+    
+    if (user) {
+      bar.innerHTML = 
+        '<span style="font-size:0.83rem;color:#3ddc97;font-weight:700">👤 <b>' + escapeHtml(user.name) + '</b>님 (' + escapeHtml(user.roleLabel) + ')</span>' +
+        '<button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:6px 12px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()">' +
+          '📂 내 서재 (' + count + '개 문항)' +
+        '</button>';
+    } else if (guest) {
+      bar.innerHTML = 
+        '<span style="font-size:0.83rem;color:#7cc4ff;font-weight:700">🧑‍🎓 <b>' + escapeHtml(guest.name) + '</b>님</span>' +
+        '<button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:6px 12px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()">' +
+          '📂 푼 문제 (' + count + '개)' +
+        '</button>' +
+        '<button type="button" class="btn-primary" style="background:linear-gradient(90deg,rgba(124,196,255,.2),rgba(167,139,250,.2));border:1px solid rgba(124,196,255,.4);color:#c4b5fd;font-size:0.84rem;padding:6px 12px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showUpgradeModal()">' +
+          '✨ 정회원 전환' +
+        '</button>';
+    }
+  }
+
+  window.addEventListener('mathedu:solved-updated', function() {
+    renderList();
+    updateStudentQuickBar();
+  });
+  window.addEventListener('mathedu:auth-changed', function() {
+    renderList();
+    updateStudentQuickBar();
+  });
+  updateStudentQuickBar();
 
   // 실시간 검색 이벤트
   searchInput.addEventListener('input', renderList);
@@ -1114,7 +1182,13 @@ function toggleMathStory() {
 
   window.openDefaultTeacherClass = function() {
     var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : '48d0d98f';
-    if (typeof openClassCreatorModal === 'function') {
+    if (window.MatheduAuth) {
+      window.MatheduAuth.requireAuth('문제 배포', function() {
+        if (typeof openClassCreatorModal === 'function') {
+          openClassCreatorModal(defaultSlug);
+        }
+      });
+    } else if (typeof openClassCreatorModal === 'function') {
       openClassCreatorModal(defaultSlug);
     }
   };

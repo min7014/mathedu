@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>mathedu · 실시간 수업 모니터링 대시보드</title>
+<script src="mathedu-auth.js"></script>
 <style>
 :root {
   --bg: #0d1020;
@@ -484,8 +485,20 @@ function setupRoomHeader() {
     sub.textContent = `현재 '${targetRoom}' 수업에 참여 중인 학생들의 학습 실황입니다.`;
     actionBar.style.display = 'flex';
 
-    document.getElementById('btnProjector').onclick = () => openProjectorModal(targetRoom);
-    document.getElementById('btnCopyStudentLink').onclick = copyCurrentStudentLink;
+    document.getElementById('btnProjector').onclick = () => {
+      if (window.MatheduAuth) {
+        window.MatheduAuth.requireAuth('수업 배포', () => openProjectorModal(targetRoom));
+      } else {
+        openProjectorModal(targetRoom);
+      }
+    };
+    document.getElementById('btnCopyStudentLink').onclick = () => {
+      if (window.MatheduAuth) {
+        window.MatheduAuth.requireAuth('수업 배포', copyCurrentStudentLink);
+      } else {
+        copyCurrentStudentLink();
+      }
+    };
   } else {
     bannerContainer.innerHTML = '';
     title.textContent = '📊 전체 학습 현황 모니터링';
