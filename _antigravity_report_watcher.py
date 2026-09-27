@@ -193,7 +193,8 @@ def main():
                         print(f"\n🚨 [ANTIGRAVITY_TRIGGER] 신규 신고 감지!", flush=True)
                         print(json.dumps(r, ensure_ascii=False), flush=True)
                         try:
-                            import _cron_report_fix
+                            import importlib, _cron_report_fix
+                            importlib.reload(_cron_report_fix)
                             _cron_report_fix.main()
                         except Exception as fix_err:
                             print(f"⚠️ [ANTIGRAVITY_AUTOFIX] 신고 자동 수리 중 오류: {fix_err}", flush=True)

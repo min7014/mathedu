@@ -325,10 +325,14 @@ def main():
             # 4. Git Commit & Push
             try:
                 subprocess.run(['git', 'add', f'board/{qs}.html'], cwd=REPO_DIR, check=True)
-                commit_msg = f"auto-fix({qs}): {fix_desc[:60]}"
-                subprocess.run(['git', 'commit', '-m', commit_msg], cwd=REPO_DIR, check=True)
-                subprocess.run(['git', 'push', 'origin', 'main'], cwd=REPO_DIR, check=True)
-                deploy_status = "✅ GitHub Pages 배포 완료"
+                status_res = subprocess.run(['git', 'status', '--porcelain', f'board/{qs}.html'], cwd=REPO_DIR, capture_output=True, text=True)
+                if status_res.stdout.strip():
+                    commit_msg = f"auto-fix({qs}): {fix_desc[:60]}"
+                    subprocess.run(['git', 'commit', '-m', commit_msg], cwd=REPO_DIR, check=True)
+                    subprocess.run(['git', 'push', 'origin', 'main'], cwd=REPO_DIR, check=True)
+                    deploy_status = "✅ GitHub Pages 배포 완료"
+                else:
+                    deploy_status = "ℹ️ 파일 내용 변경 없음 (이미 최신 상태)"
             except Exception as e:
                 deploy_status = f"⚠️ 배포 중 오류 발생: {e}"
         else:
