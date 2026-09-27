@@ -810,9 +810,12 @@
                   '<div class="solved-progress-fill" style="width:' + pct + '%"></div>' +
                 '</div>' +
               '</div>' +
-              '<a href="' + boardPrefix + cleanSlug + '.html" class="solved-item-btn">' +
-                (item.completed ? '🔄 다시 풀기' : '🚀 이어서 풀기') +
-              '</a>' +
+              '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
+                '<a href="' + (basePath ? basePath : '') + '/offline/' + cleanSlug + '.html" download class="solved-item-btn" style="background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.4);color:#38bdf8" title="인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일 저장">📥 오프라인</a>' +
+                '<a href="' + boardPrefix + cleanSlug + '.html" class="solved-item-btn">' +
+                  (item.completed ? '🔄 다시 풀기' : '🚀 이어서 풀기') +
+                '</a>' +
+              '</div>' +
             '</div>';
         }).join('');
       }
@@ -827,7 +830,7 @@
               identityHtml +
             '</div>' +
             '<h2 class="mathedu-auth-title" style="font-size:1.45rem">📂 내가 푼 문제 모아보기</h2>' +
-            '<p class="mathedu-auth-desc">회원/비회원 구분 없이 내가 해결한 단계별 수학 문제들을 언제든 복습하고 이어서 풀 수 있습니다.</p>' +
+            '<p class="mathedu-auth-desc">회원/비회원 구분 없이 내가 해결한 단계별 수학 문제들을 언제든 복습하고 오프라인 파일로 보관할 수 있습니다.</p>' +
           '</div>' +
 
           '<div class="library-stats-row">' +
@@ -843,6 +846,10 @@
               '<div class="num" style="color:#38bdf8">' + avgRate + '<span>%</span></div>' +
               '<div class="lbl">📈 평균 정답률</div>' +
             '</div>' +
+            '<a href="' + (basePath ? basePath : '') + '/offline/index.html" class="library-stat-card" style="text-decoration:none;border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.08);transition:.15s" title="인터넷 없이 풀 수 있는 전체 80개 문제 모음">' +
+              '<div class="num" style="color:#7cc4ff">80<span>개</span></div>' +
+              '<div class="lbl" style="color:#7cc4ff">📦 오프라인 보관함 ➔</div>' +
+            '</a>' +
           '</div>' +
 
           upgradeBannerHtml +
@@ -852,9 +859,15 @@
           '</div>' +
 
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;gap:10px">' +
-            '<a href="' + (basePath ? basePath : '.') + '/privacy.html" target="_blank" rel="noopener" style="font-size:0.78rem;color:#94a3b8;text-decoration:none;display:inline-flex;align-items:center;gap:4px">' +
-              '🔒 개인정보처리방침' +
-            '</a>' +
+            '<div style="display:flex;gap:12px;align-items:center">' +
+              '<a href="' + (basePath ? basePath : '') + '/offline/index.html" style="font-size:0.78rem;color:#7cc4ff;text-decoration:none;display:inline-flex;align-items:center;gap:4px">' +
+                '📦 오프라인 전체 문제 보관함' +
+              '</a>' +
+              '<span style="color:rgba(255,255,255,.2)">·</span>' +
+              '<a href="' + (basePath ? basePath : '.') + '/privacy.html" target="_blank" rel="noopener" style="font-size:0.78rem;color:#94a3b8;text-decoration:none;display:inline-flex;align-items:center;gap:4px">' +
+                '🔒 개인정보처리방침' +
+              '</a>' +
+            '</div>' +
             '<button type="button" onclick="MatheduAuth.clearAllMyData()" style="background:transparent;border:1px solid rgba(244,63,94,.4);color:#fda4af;padding:4px 10px;border-radius:8px;font-size:0.75rem;cursor:pointer">' +
               '🗑️ 내 학습 기록 전체 삭제' +
             '</button>' +

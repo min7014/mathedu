@@ -339,6 +339,27 @@ header p {
   white-space: nowrap;
 }
 .btn-solve:hover { border-color: var(--good); color: var(--good); }
+.btn-offline {
+  background: rgba(56,189,248,.12);
+  border: 1px solid rgba(56,189,248,.35);
+  color: #7cc4ff;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: .82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: .15s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-offline:hover {
+  background: rgba(56,189,248,.25);
+  border-color: #38bdf8;
+  color: #fff;
+  transform: translateY(-1px);
+}
 
 .loading {
   text-align: center;
@@ -785,6 +806,7 @@ header p {
     </a>
     <div class="nav-menu">
       <a href="#quizFilterBar" class="nav-link">📚 퀴즈 모음</a>
+      <a href="offline/index.html" class="nav-link" style="color:#7cc4ff;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.1)" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함">📦 오프라인 보관함</a>
       <a href="create.html" class="nav-link nav-link-cta">✨ 문제 출제 <span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:2px">회원전용</span></a>
       <a href="dashboard.html" class="nav-link">📊 수업 대시보드</a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-link">🌐 min7014 홈</a>
@@ -817,7 +839,8 @@ header p {
         <span class="pill-item">⚡ 학생: 무가입 5초 즉시 학습</span>
         <span class="pill-item">🎯 0~5단계 개념 빌드업</span>
         <span class="pill-item">📊 실시간 교실 현황 분석</span>
-        <span class="pill-item" style="background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4);color:#38bdf8">🔐 회원 전용 출제 & 배포</span>
+        <a href="offline/index.html" class="pill-item" style="background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4);color:#38bdf8;text-decoration:none">📦 100% 오프라인 다운로드</a>
+        <span class="pill-item" style="background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd">🔐 회원 전용 출제 & 배포</span>
       </div>
 
       <div>
@@ -1105,6 +1128,7 @@ function toggleMathStory() {
       html += '</div></div>';
       html += '<div class="card-actions">';
       html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">🚀 수업 열기</button>';
+      html += '<a class="btn-offline" href="offline/' + slug + '.html" download title="인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일 다운로드">📥 오프라인</a>';
       html += '<a class="btn-solve" style="' + solveBtnStyle + '" href="board/' + slug + '.html">' + solveBtnText + '</a>';
       html += '</div>';
       html += '</div>';

@@ -182,6 +182,9 @@
           '<button type="button" id="btnUpgradeInModal" style="background:linear-gradient(90deg,rgba(124,196,255,.18),rgba(167,139,250,.18));border:1px solid rgba(124,196,255,.4);color:#c4b5fd;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
             '✨ 정식 회원 전환 / 가입' +
           '</button>' : '') +
+        '<button type="button" id="btnDownloadOfflineInModal" style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.45);color:#38bdf8;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px" title="인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장">' +
+          '📥 오프라인 저장' +
+        '</button>' +
         '<button type="button" id="btnTeacherPreviewInModal" style="background:rgba(255,255,255,.06);color:#cbd5e1;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:9px 16px;font-size:0.86rem;cursor:pointer;transition:.15s;font-weight:600">' +
           '👀 가입 없이 문제 열람 & 자유 풀기' +
         '</button>' +
@@ -205,6 +208,15 @@
       btnUpgrade.onclick = function() {
         if (window.MatheduAuth) {
           window.MatheduAuth.showUpgradeModal();
+        }
+      };
+    }
+
+    var btnDownloadOffline = document.getElementById('btnDownloadOfflineInModal');
+    if (btnDownloadOffline) {
+      btnDownloadOffline.onclick = function() {
+        if (window.downloadOfflineQuiz) {
+          window.downloadOfflineQuiz(currentSlug);
         }
       };
     }
@@ -411,6 +423,23 @@
       };
 
       topbar.appendChild(teacherBtn);
+    }
+
+    // 3. [📥 오프라인 저장] 버튼
+    if (!document.getElementById('btnOfflineTopbar')) {
+      var offlineBtn = document.createElement('button');
+      offlineBtn.id = 'btnOfflineTopbar';
+      offlineBtn.className = 'tbtn navbtn';
+      offlineBtn.style.cssText = 'background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.4);color:#7cc4ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      offlineBtn.innerHTML = '📥 오프라인 저장';
+      offlineBtn.title = '인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일로 다운로드';
+      offlineBtn.onclick = function(e) {
+        if (window.downloadOfflineQuiz) {
+          window.downloadOfflineQuiz(currentSlug);
+        }
+      };
+
+      topbar.appendChild(offlineBtn);
     }
   }
 
@@ -622,6 +651,147 @@
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
+
+  // === 오프라인 단독 실행 HTML 다운로드 모듈 ===
+  function triggerBlobDownload(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() {
+      if (a.parentNode) a.parentNode.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 400);
+  }
+
+  window.downloadOfflineQuiz = async function(targetSlug) {
+    var slug = (targetSlug || currentSlug || '').replace(/\.html$/, '');
+    if (!slug) return;
+
+    var btn = (window.event && window.event.target) ? window.event.target.closest('button, a') : null;
+    var origText = btn ? btn.innerHTML : '';
+    if (btn) {
+      btn.innerHTML = '⏳ 오프라인 다운로드 중...';
+      btn.style.pointerEvents = 'none';
+    }
+
+    try {
+      // 1. 사전 빌드된 offline/{slug}.html 가져오기 시도
+      var isBoard = window.location.pathname.indexOf('/board/') !== -1;
+      var candidateUrls = [
+        isBoard ? ('../offline/' + slug + '.html') : ('offline/' + slug + '.html'),
+        'https://min7014.github.io/mathedu/offline/' + slug + '.html'
+      ];
+
+      var fetchedBlob = null;
+      for (var i = 0; i < candidateUrls.length; i++) {
+        try {
+          var resp = await fetch(candidateUrls[i]);
+          if (resp.ok) {
+            fetchedBlob = await resp.blob();
+            break;
+          }
+        } catch (fetchErr) {}
+      }
+
+      if (fetchedBlob && fetchedBlob.size > 1000) {
+        triggerBlobDownload(fetchedBlob, 'mathedu_' + slug + '_offline.html');
+        if (btn) {
+          btn.innerHTML = '✅ 다운로드 완료!';
+          setTimeout(function() { btn.innerHTML = origText; btn.style.pointerEvents = ''; }, 2500);
+        }
+        return;
+      }
+    } catch (e) {
+      console.warn('Prebuilt offline quiz fetch fallback:', e);
+    }
+
+    // 2. Fallback: 현재 DOM 기반 실시간 오프라인 패키징 (Base64 인라인 + 배너 삽입)
+    try {
+      var docClone = document.documentElement.cloneNode(true);
+
+      // 시작 모달 제거 (오프라인에서 바로 풀 수 있게)
+      var tf = docClone.querySelector('#trackFull');
+      if (tf) tf.remove();
+
+      // 플로팅 개설 버튼 제거
+      var floatBtn = docClone.querySelector('#floatClassBtn');
+      if (floatBtn) floatBtn.remove();
+
+      var originalOnlineUrl = 'https://min7014.github.io/mathedu/board/' + slug + '.html';
+      var h1El = docClone.querySelector('h1');
+      var quizTitle = h1El ? h1El.textContent.replace(/^[📘📙📕📝]\s*/, '').trim() : slug;
+
+      // 이미지 base64 변환
+      var imgs = docClone.querySelectorAll('img');
+      for (var j = 0; j < imgs.length; j++) {
+        var img = imgs[j];
+        if (img.src && !img.src.startsWith('data:')) {
+          try {
+            var canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width || 400;
+            canvas.height = img.naturalHeight || img.height || 300;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            var dataUrl = canvas.toDataURL('image/png');
+            if (dataUrl && dataUrl.length > 50) {
+              img.src = dataUrl;
+            }
+          } catch(cvsErr) {}
+        }
+      }
+
+      // 오프라인 배너 및 원본 주소 안내 삽입
+      var bannerExisting = docClone.querySelector('.mathedu-offline-banner');
+      if (!bannerExisting) {
+        var bannerDiv = document.createElement('div');
+        bannerDiv.className = 'mathedu-offline-banner';
+        bannerDiv.style.cssText = 'background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(129,140,248,.18));border:2px solid #38bdf8;border-radius:16px;padding:18px 22px;margin:16px 0 24px;box-shadow:0 8px 30px rgba(0,0,0,.45);color:#fff;font-family:system-ui,sans-serif';
+        bannerDiv.innerHTML = 
+          '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px">' +
+            '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.25);border:1px solid #38bdf8;color:#38bdf8;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">' +
+              '📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)' +
+            '</div>' +
+            '<span style="font-size:0.78rem;color:#94a3b8">min7014 mathedu</span>' +
+          '</div>' +
+          '<div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">' + escapeHtml(quizTitle) + '</div>' +
+          '<div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:14px">' +
+            '이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>' +
+            '보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.' +
+          '</div>' +
+          '<div style="background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">' +
+            '<div style="font-size:0.85rem;color:#e2e8f0;word-break:break-all">' +
+              '<span style="color:#7cc4ff;font-weight:700">🌐 온라인 원본 문제 주소:</span><br>' +
+              '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700;text-decoration:underline;font-family:monospace">' + originalOnlineUrl + '</a>' +
+            '</div>' +
+            '<div style="display:flex;gap:8px">' +
+              '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none">🌐 온라인 원본 열기 ➔</a>' +
+              '<a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">🏛️ min7014 자료실</a>' +
+            '</div>' +
+          '</div>';
+
+        var wrapEl = docClone.querySelector('.wrap') || docClone.querySelector('body');
+        if (wrapEl) wrapEl.insertBefore(bannerDiv, wrapEl.firstChild);
+      }
+
+      var fullHtml = '<!DOCTYPE html>\n<html lang="ko">\n' + docClone.innerHTML + '\n</html>';
+      var blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+      triggerBlobDownload(blob, 'mathedu_' + slug + '_offline.html');
+
+      if (btn) {
+        btn.innerHTML = '✅ 다운로드 완료!';
+        setTimeout(function() { btn.innerHTML = origText; btn.style.pointerEvents = ''; }, 2500);
+      }
+    } catch(err) {
+      alert('오프라인 파일 다운로드 생성 중 오류: ' + err.message);
+      if (btn) {
+        btn.innerHTML = origText;
+        btn.style.pointerEvents = '';
+      }
+    }
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRoom);
