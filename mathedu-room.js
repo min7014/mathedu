@@ -580,7 +580,7 @@
     function updateUrls() {
       var r = (document.getElementById('customRoomInput').value || '').trim() || defaultRoom;
       var studentUrl = origin + basePath + '/board/' + slug + '.html?room=' + encodeURIComponent(r);
-      var dashboardUrl = origin + basePath + '/dashboard-static.html?room=' + encodeURIComponent(r);
+      var dashboardUrl = origin + basePath + '/dashboard.html?room=' + encodeURIComponent(r);
       var qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(studentUrl);
 
       document.getElementById('modalStudentUrlText').textContent = studentUrl;

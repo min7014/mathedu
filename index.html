@@ -838,7 +838,7 @@ header p {
       <div class="brand-pills-row">
         <span class="pill-item">⚡ 학생: 무가입 5초 즉시 학습</span>
         <span class="pill-item">🎯 0~5단계 개념 빌드업</span>
-        <span class="pill-item">📊 실시간 교실 현황 분석</span>
+        <a href="dashboard.html" class="pill-item" style="color:var(--txt);text-decoration:none">📊 실시간 교실 현황 분석 (stu1~ 익명 보호)</a>
         <a href="offline/index.html" class="pill-item" style="background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4);color:#38bdf8;text-decoration:none">📦 100% 오프라인 다운로드</a>
         <span class="pill-item" style="background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd">🔐 회원 전용 출제 & 배포</span>
       </div>
@@ -917,7 +917,7 @@ header p {
   <div class="recent-rooms-box" id="recentRoomsBox" style="display:none">
     <span class="lbl">📂 최근 개설한 내 수업:</span>
     <div id="recentRoomsList" style="display:flex;gap:8px;flex-wrap:wrap"></div>
-    <a href="dashboard-static.html" style="margin-left:auto;color:var(--accent);text-decoration:none;font-weight:700">전체 대시보드 ➔</a>
+    <a href="dashboard.html" style="margin-left:auto;color:var(--accent);text-decoration:none;font-weight:700">전체 대시보드 ➔</a>
   </div>
 
   <!-- 실시간 문제 출제 & AI 제작 현황 섹션 -->
@@ -942,7 +942,7 @@ header p {
     </div>
     <div style="display:flex;gap:12px;align-items:center">
       <a href="create.html" style="font-size:.85rem;color:var(--good);text-decoration:none;font-weight:700">✨ 새 퀴즈 출제하기</a>
-      <a href="dashboard-static.html" style="font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700">📊 전체 실시간 현황판</a>
+      <a href="dashboard.html" style="font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700">📊 전체 실시간 현황판</a>
     </div>
   </div>
 
@@ -1197,7 +1197,7 @@ function toggleMathStory() {
         var list = document.getElementById('recentRoomsList');
         var h = '';
         rooms.slice(0, 5).forEach(function(item) {
-          h += '<a class="room-chip" href="dashboard-static.html?room=' + encodeURIComponent(item.room) + '">🏫 ' + escapeHtml(item.room) + ' 대시보드</a>';
+          h += '<a class="room-chip" href="dashboard.html?room=' + encodeURIComponent(item.room) + '">🏫 ' + escapeHtml(item.room) + ' 대시보드</a>';
         });
         list.innerHTML = h;
         box.style.display = 'flex';

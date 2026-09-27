@@ -357,8 +357,86 @@ tr:hover td { background: rgba(124,196,255,.06); }
   align-items: center;
   justify-content: center;
   padding: 24px;
-  text-align: center;
-  animation: fadeIn .2s ease;
+/* stu1, stu2 익명 학생 뱃지 스타일 */
+.stu-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(56,189,248,.18), rgba(129,140,248,.18));
+  border: 1.5px solid rgba(56,189,248,.45);
+  color: #7cc4ff;
+  border-radius: 8px;
+  padding: 3px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: .5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.stu-sub-badge {
+  font-size: .75rem;
+  background: rgba(124,196,255,.15);
+  color: var(--accent);
+  border: 1px solid rgba(124,196,255,.3);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  vertical-align: middle;
+}
+.privacy-shield-banner {
+  background: linear-gradient(135deg, rgba(56,189,248,.12), rgba(94,234,212,.12));
+  border: 1px solid rgba(56,189,248,.35);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.privacy-badge {
+  background: rgba(94,234,212,.2);
+  border: 1px solid rgba(94,234,212,.4);
+  color: #5eead4;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: .76rem;
+  font-weight: 700;
+}
+.warning-realname-bar {
+  background: rgba(239,68,68,.15);
+  border: 1px solid rgba(239,68,68,.4);
+  color: #fca5a5;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .86rem;
+  font-weight: 700;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn-privacy-toggle {
+  background: rgba(56,189,248,.15);
+  border: 1px solid rgba(56,189,248,.4);
+  color: #7cc4ff;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: .84rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: .15s;
+}
+.btn-privacy-toggle:hover {
+  background: rgba(56,189,248,.25);
+  border-color: #38bdf8;
+  color: #fff;
 }
 </style>
 </head>
@@ -372,7 +450,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
     </a>
     <a class="tbtn" href="./">← 메인 홈</a>
     <button class="tbtn" onclick="fetchData()">🔄 새로고침</button>
-    <button class="tbtn" id="btnToggleAnon" onclick="toggleAnonymous()">🙈 익명 모드: OFF</button>
+    <button class="tbtn btn-active" id="btnToggleAnon" onclick="toggleAnonymous()" style="background:rgba(56,189,248,.18);border-color:#38bdf8;color:#7cc4ff">🔒 학생 익명 보호(stu1~): ON</button>
     <button class="tbtn" onclick="exportCsv()">📥 성적표 엑셀(CSV) 저장</button>
     <div class="live-badge"><span class="live-dot"></span> 3초 실시간 갱신 중</div>
   </div>
@@ -389,7 +467,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
     <span style="font-weight:700;color:var(--accent);font-size:.9rem">수업 배포 도구:</span>
     <button class="btn" id="btnProjector">🖥️ 칠판 빔프로젝터 QR 띄우기</button>
     <button class="btn btn-sec" id="btnCopyStudentLink">📋 학생 참여 링크 복사</button>
-    <button class="btn btn-sec" onclick="location.href='dashboard-static.html'">🌐 전체 수업 모아보기</button>
+    <button class="btn btn-sec" onclick="location.href='dashboard.html'">🌐 전체 수업 모아보기</button>
   </div>
 
   <!-- 핵심 통계 카드 -->
@@ -412,6 +490,22 @@ tr:hover td { background: rgba(124,196,255,.06); }
     </div>
   </div>
 
+  <!-- 🔒 실시간 학생 개인정보 보호 배너 & 실명 모드 전환 경고 바 -->
+  <div class="privacy-shield-banner">
+    <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--good)">
+      <span>🔒 학생 개인정보 보호 모드 가동</span>
+      <span class="privacy-badge">stu1, stu2... 자동 순차 부여</span>
+    </div>
+    <div style="font-size:0.86rem;color:#cbd5e1">
+      실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다.
+    </div>
+  </div>
+
+  <div id="realnameWarningBar" class="warning-realname-bar" style="display:none">
+    <div>⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!</div>
+    <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#ef4444;color:#fff;border:none">🔒 즉시 stu1 익명 모드로 전환</button>
+  </div>
+
   <!-- 필터 & 뷰 전환 -->
   <div class="filter-row">
     <select id="roomFilterSelect" onchange="onRoomSelectChange(this.value)">
@@ -420,7 +514,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
     <select id="quizFilterSelect" onchange="applyFilters()">
       <option value="">모든 퀴즈</option>
     </select>
-    <input type="text" id="nameFilterInput" placeholder="학생 이름 검색..." oninput="applyFilters()">
+    <input type="text" id="nameFilterInput" placeholder="학생 ID (stu1, stu2...) 또는 이름 검색..." oninput="applyFilters()">
     <div class="tab-switch">
       <button class="tab-btn active" id="btnTabCard" onclick="switchView('card')">📇 카드 뷰</button>
       <button class="tab-btn" id="btnTabTable" onclick="switchView('table')">📋 테이블 뷰</button>
@@ -447,7 +541,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
     <table>
       <thead>
         <tr>
-          <th>학생명</th>
+          <th id="thStudentCol">학생 ID (익명 stu)</th>
           <th>수업(방)</th>
           <th>퀴즈</th>
           <th>진행 단계</th>
@@ -466,14 +560,56 @@ tr:hover td { background: rgba(124,196,255,.06); }
 const API_URL = 'https://script.google.com/macros/s/AKfycbypyb4LXL-Jx6PhKhLSklRsBAvKQBcMxIOhkukH4gMV-yKmOt0KtPrpLS9XxBy8FHXXZg/exec';
 
 let rawData = [];
-let isAnonymous = false;
+let isAnonymous = true; // 🔒 기본값: 항상 stu1, stu2... 익명 모드로 시작하여 실제 학생 이름 노출 차단
 let currentView = 'card';
 let urlParams = new URLSearchParams(window.location.search);
 let targetRoom = (urlParams.get('room') || '').trim();
 
+// === 학생 익명 식별자(stu1, stu2...) 순차 부여 모듈 ===
+function assignStudentIds(items) {
+  // 방 단위로 묶어서 stu1부터 순차 부여
+  const byRoom = {};
+
+  // 참여/활동 시간(최초 등장 순서) 기준 오름차순 정렬하여 순번 고정
+  const sorted = [...items].sort((a, b) => a.updated_date.getTime() - b.updated_date.getTime());
+
+  sorted.forEach(it => {
+    const roomKey = (it.parsed_room || '자율학습').trim();
+    if (!byRoom[roomKey]) byRoom[roomKey] = [];
+    byRoom[roomKey].push(it);
+  });
+
+  for (const r in byRoom) {
+    const roomItems = byRoom[r];
+    const roomMapKey = 'mathedu_stu_map_' + encodeURIComponent(r);
+    let rMap = new Map();
+    try {
+      const saved = localStorage.getItem(roomMapKey);
+      if (saved) rMap = new Map(Object.entries(JSON.parse(saved)));
+    } catch(e) {}
+
+    roomItems.forEach(it => {
+      const sName = it.parsed_name;
+      if (!rMap.has(sName)) {
+        const nextNum = rMap.size + 1;
+        rMap.set(sName, `stu${nextNum}`);
+      }
+    });
+
+    try {
+      localStorage.setItem(roomMapKey, JSON.stringify(Object.fromEntries(rMap)));
+    } catch(e) {}
+
+    roomItems.forEach(it => {
+      it.stu_id = rMap.get(it.parsed_name) || 'stu?';
+    });
+  }
+}
+
 // 초기화
 document.addEventListener('DOMContentLoaded', () => {
   setupRoomHeader();
+  updateAnonUI();
   fetchData();
   // 3초 자동 폴링
   setInterval(fetchData, 3500);
@@ -561,6 +697,7 @@ function parseItems(items) {
 function render() {
   document.getElementById('loading').style.display = 'none';
   const parsed = parseItems(rawData);
+  assignStudentIds(parsed);
 
   // 방 목록 & 퀴즈 목록 셀렉트 채우기
   updateSelectOptions(parsed);
@@ -598,7 +735,11 @@ function filterData(items) {
   return items.filter(it => {
     if (roomFilter && it.parsed_room.toLowerCase() !== roomFilter.toLowerCase()) return false;
     if (quizFilter && it.quiz_slug !== quizFilter) return false;
-    if (nameQuery && !it.parsed_name.toLowerCase().includes(nameQuery)) return false;
+    if (nameQuery) {
+      const matchStu = (it.stu_id || '').toLowerCase().includes(nameQuery);
+      const matchReal = (it.parsed_name || '').toLowerCase().includes(nameQuery);
+      if (!matchStu && !matchReal) return false;
+    }
     return true;
   });
 }
@@ -624,8 +765,10 @@ function renderCards(items) {
   const container = document.getElementById('cardContainer');
   let html = '';
 
-  items.forEach((it, idx) => {
-    const displayName = isAnonymous ? `학생 ${idx + 1}` : escapeHtml(it.parsed_name);
+  items.forEach((it) => {
+    const displayName = isAnonymous 
+      ? `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>` 
+      : `<span style="font-weight:700">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
     const statusClass = it.is_done ? 'status-done' : (isRecent(it.updated_date) ? 'status-active' : 'status-wait');
     const statusText = it.is_done ? '🎉 풀이 완료' : (isRecent(it.updated_date) ? '🟢 풀이 중' : '⏳ 대기');
     const timeAgo = formatTimeAgo(it.updated_date);
@@ -659,15 +802,21 @@ function renderCards(items) {
 
 function renderTable(items) {
   const tbody = document.getElementById('tableBody');
+  const thStudentCol = document.getElementById('thStudentCol');
+  if (thStudentCol) {
+    thStudentCol.textContent = isAnonymous ? '학생 ID (익명 stu)' : '학생명 (실명)';
+  }
   let html = '';
 
-  items.forEach((it, idx) => {
-    const displayName = isAnonymous ? `학생 ${idx + 1}` : escapeHtml(it.parsed_name);
+  items.forEach((it) => {
+    const displayName = isAnonymous 
+      ? `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>` 
+      : `<span style="font-weight:700">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
     const pillClass = it.pct >= 80 ? 'pill-high' : (it.pct >= 50 ? 'pill-mid' : 'pill-low');
 
     html += `
       <tr>
-        <td style="font-weight:700">${displayName}</td>
+        <td>${displayName}</td>
         <td>${it.parsed_room ? `<span class="pill pill-high">${escapeHtml(it.parsed_room)}</span>` : '<span style="color:var(--sub)">자율학습</span>'}</td>
         <td><code>${escapeHtml(it.quiz_slug)}</code></td>
         <td><b>${it.current_step}</b> / ${it.total_steps}</td>
@@ -732,16 +881,56 @@ function switchView(v) {
   render();
 }
 
-function toggleAnonymous() {
-  isAnonymous = !isAnonymous;
-  const btn = document.getElementById('btnToggleAnon');
-  btn.textContent = isAnonymous ? '🙈 익명 모드: ON' : '🙈 익명 모드: OFF';
-  btn.classList.toggle('btn-active', isAnonymous);
+function toggleAnonymous(forceAnon) {
+  if (forceAnon === true) {
+    isAnonymous = true;
+    updateAnonUI();
+    render();
+    return;
+  }
+
+  if (isAnonymous) {
+    // 실명 확인 모드 전환 전 경고
+    const ok = confirm(
+      '⚠️ 학생 개인정보 보호 알림\n\n' +
+      '현재 교실 빔프로젝터나 화면 공유 중이신가요?\n' +
+      '실명 모드로 전환하면 화면에 실제 학생 이름이 표시됩니다.\n\n' +
+      '정말로 실제 학생 이름을 확인하시겠습니까?'
+    );
+    if (!ok) return;
+    isAnonymous = false;
+  } else {
+    isAnonymous = true;
+  }
+
+  updateAnonUI();
   render();
+}
+
+function updateAnonUI() {
+  const btn = document.getElementById('btnToggleAnon');
+  const warn = document.getElementById('realnameWarningBar');
+  if (btn) {
+    if (isAnonymous) {
+      btn.innerHTML = '🔒 학생 익명 보호(stu1~): ON';
+      btn.style.borderColor = '#38bdf8';
+      btn.style.color = '#7cc4ff';
+      btn.style.background = 'rgba(56,189,248,.18)';
+    } else {
+      btn.innerHTML = '⚠️ 실명 모드: ON';
+      btn.style.borderColor = '#ef4444';
+      btn.style.color = '#fca5a5';
+      btn.style.background = 'rgba(239,68,68,.2)';
+    }
+  }
+  if (warn) {
+    warn.style.display = isAnonymous ? 'none' : 'flex';
+  }
 }
 
 function exportCsv() {
   const parsed = parseItems(rawData);
+  assignStudentIds(parsed);
   const filtered = filterData(parsed);
 
   if (filtered.length === 0) {
@@ -750,24 +939,32 @@ function exportCsv() {
   }
 
   // UTF-8 BOM(\uFEFF) 추가하여 엑셀 한글 깨짐 방지
-  let csv = '\uFEFF학생이름,수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n';
+  let csv = isAnonymous
+    ? '\uFEFF학생ID(익명),수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n'
+    : '\uFEFF학생실명,학생ID,수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n';
+
   filtered.forEach(it => {
-    csv += `"${it.parsed_name}","${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${it.is_done ? '완료' : '진행중'}","${it.updated_at}"\n`;
+    const namePart = isAnonymous
+      ? `"${it.stu_id}"`
+      : `"${it.parsed_name}","${it.stu_id}"`;
+    csv += `${namePart},"${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${it.is_done ? '완료' : '진행중'}","${it.updated_at}"\n`;
   });
 
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const filename = `${targetRoom ? targetRoom + '_' : ''}mathedu_성적표_${new Date().toISOString().slice(0,10)}.csv`;
+  const filename = `${targetRoom ? targetRoom + '_' : ''}mathedu_성적표_${isAnonymous ? '익명_stu_' : '실명_'}${new Date().toISOString().slice(0,10)}.csv`;
   a.href = url;
   a.download = filename;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
 function copyCurrentStudentLink() {
   const slug = rawData.find(it => it.room_id === targetRoom || (it.student_name || '').includes(`[${targetRoom}]`))?.quiz_slug || '48d0d98f';
-  const url = `${window.location.origin}${window.location.pathname.replace('dashboard-static.html', '')}board/${slug}.html?room=${encodeURIComponent(targetRoom)}`;
+  const url = `${window.location.origin}${window.location.pathname.replace('dashboard-static.html', '').replace('dashboard.html', '')}board/${slug}.html?room=${encodeURIComponent(targetRoom)}`;
   navigator.clipboard.writeText(url).then(() => {
     const btn = document.getElementById('btnCopyStudentLink');
     const prev = btn.textContent;
