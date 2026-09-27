@@ -130,6 +130,21 @@ def handle_new_quiz_request(r):
         print(f"✨ [AI_BUILDER] 신규 퀴즈 배포 및 완료 알림 등록: {quiz_url} (알림 메일: {email or '없음'})\n", flush=True)
         return True
     except Exception as e:
+        err_msg = str(e)
+        if "1일 1문제" in err_msg:
+            print(f"⚠️ [AI_BUILDER] {err_msg}", flush=True)
+            post_fix_report(ts, '_request_new', qn, f'⚠️ 1일 1문제 출제 한도 완료: 내일 자정(00:00 KST)에 다시 출제 가능합니다.', email=email, title=title or '수학 퀴즈')
+            proc = load_processed()
+            proc['processed'].append({
+                'timestamp': ts,
+                'quiz_slug': '_request_new',
+                'question_num': qn,
+                'status': 'skipped',
+                'reason': err_msg,
+                'email': email
+            })
+            save_processed(proc)
+            return False
         print(f"⚠️ [AI_BUILDER] 퀴즈 생성 중 오류 발생: {e}", flush=True)
         return False
 

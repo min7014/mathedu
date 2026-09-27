@@ -35,6 +35,65 @@ def send_telegram(text):
     except Exception:
         pass
 
+# 🔒 정회원 1일 1문제 생성 제한 (추후 문제 난이도·수준별 확장 구조)
+DEFAULT_DAILY_LIMIT = 1
+DAILY_CREATION_LOG_FILE = os.path.join(REPO_DIR, '_daily_creation_log.json')
+
+def load_daily_log():
+    if os.path.exists(DAILY_CREATION_LOG_FILE):
+        try:
+            with open(DAILY_CREATION_LOG_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+def save_daily_log(log_data):
+    try:
+        with open(DAILY_CREATION_LOG_FILE, 'w', encoding='utf-8') as f:
+            json.dump(log_data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"⚠️ 일일 생성 로그 저장 실패: {e}")
+
+def get_daily_creation_quota(identifier, limit=DEFAULT_DAILY_LIMIT):
+    """
+    KST 기준 오늘 생성한 문제 수를 조회합니다.
+    추후 문제 수준(난이도)에 따른 가변 한도를 지원합니다.
+    """
+    if not identifier:
+        identifier = 'anonymous'
+    key = identifier.strip().lower()
+    today_kst = datetime.now(KST).strftime('%Y-%m-%d')
+    log_data = load_daily_log()
+    today_records = log_data.get(today_kst, {}).get(key, [])
+    count = len(today_records)
+    return {
+        "allowed": count < limit,
+        "count": count,
+        "limit": limit,
+        "remaining": max(0, limit - count),
+        "records": today_records
+    }
+
+def record_daily_creation(identifier, slug, title):
+    """오늘 날짜로 신규 생성된 문제 메타데이터를 일일 로그에 기록합니다."""
+    if not identifier:
+        identifier = 'anonymous'
+    key = identifier.strip().lower()
+    today_kst = datetime.now(KST).strftime('%Y-%m-%d')
+    log_data = load_daily_log()
+    if today_kst not in log_data:
+        log_data[today_kst] = {}
+    if key not in log_data[today_kst]:
+        log_data[today_kst][key] = []
+        
+    log_data[today_kst][key].append({
+        "slug": slug,
+        "title": title,
+        "time": datetime.now(KST).strftime('%Y-%m-%d %H:%M:%S')
+    })
+    save_daily_log(log_data)
+
 def make_smart_fallback_title(content):
     """
     제목이 비어있을 때 문제 지문과 수식을 분석하여 최적의 단원/주제 제목을 도출합니다.
@@ -268,11 +327,19 @@ Rules:
         }
     }
 
-def create_and_publish_quiz(title, content, hint, reporter, email="", requested_slug="", image_b64="", image_ext="png"):
+def create_and_publish_quiz(title, content, hint, reporter, email="", requested_slug="", image_b64="", image_ext="png", bypass_daily_limit=False):
     """
     퀴즈를 생성하고 board/{slug}.html 저장, index.json 등록 및 Git 푸시까지 완료합니다.
     제목이 없을 경우 문제 내용을 분석해 고품질 수학 제목을 자동 생성합니다.
     """
+    identifier = email.strip() if email else (reporter.strip() if reporter else 'member')
+    if not bypass_daily_limit:
+        quota = get_daily_creation_quota(identifier)
+        if not quota["allowed"]:
+            msg = f"1일 1문제 생성 한도 완료: '{identifier}'님은 오늘 이미 {quota['count']}/{quota['limit']}문제를 출제하셨습니다. (내일 00:00 KST 리셋)"
+            print(f"  ↳ ⚠️ {msg}")
+            raise RuntimeError(msg)
+
     print(f"\n[AI_BUILDER] 신규 퀴즈 생성 시작 (신청자: {reporter}, 입력 제목: '{title or '(없음 - 자동생성)'}', 슬러그: '{requested_slug or '(자동발급)'}')")
     
     # 1. 퀴즈 구조 생성 (AI가 지문/수식을 분석하여 문제 제목 자동 도출)
@@ -348,10 +415,19 @@ def create_and_publish_quiz(title, content, hint, reporter, email="", requested_
         json.dump(idx, f, ensure_ascii=False, indent=2)
     print(f"  ↳ board/index.json 메타데이터 등록 완료: '{final_title}'")
 
+    # 7-1. 일일 문제 생성 로그 기록 (1일 1문제 제한 관리)
+    try:
+        record_daily_creation(identifier, slug, final_title)
+        print(f"  ↳ 🔒 일일 문제 생성 기록 완료: {identifier} ({slug})")
+    except Exception as log_err:
+        print(f"  ↳ ⚠️ 일일 생성 로그 기록 오류: {log_err}")
+
     # 8. Git commit & push
     deploy_ok = False
     try:
         git_add_files = [f"board/{slug}.html", "board/index.json"]
+        if os.path.exists(DAILY_CREATION_LOG_FILE):
+            git_add_files.append("_daily_creation_log.json")
         if orig_img_filename and os.path.exists(os.path.join(BOARD_DIR, orig_img_filename)):
             git_add_files.append(f"board/{orig_img_filename}")
         subprocess.run(["git", "add"] + git_add_files, cwd=REPO_DIR, check=True)

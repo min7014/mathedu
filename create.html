@@ -643,6 +643,14 @@ async function submitQuizRequest(e) {
   }
 
   const currentUser = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
+
+  // 🔒 1일 1문제 생성 한도 검증 (추후 문제 난이도·수준별 한도 상향 확장 가능)
+  const quota = window.MatheduAuth ? window.MatheduAuth.getCreationQuota(currentUser) : { allowed: true, limit: 1 };
+  if (!quota.allowed) {
+    alert(`오늘의 문제 생성 한도(1일 ${quota.limit}문제)를 이미 사용하셨습니다.\n\n고품질 5~8단계 인터랙티브 퀴즈 제작 및 GeoGebra 시각화 연동 품질 유지를 위해 내일 자정(00:00 KST)에 다시 출제하실 수 있습니다.`);
+    return;
+  }
+
   const titleInput = document.getElementById('quizTitle').value.trim();
   const contentInput = document.getElementById('quizContent').value.trim();
   const answer = document.getElementById('quizAnswer').value.trim();
@@ -698,6 +706,11 @@ async function submitQuizRequest(e) {
   const img = new Image();
   img.src = targetUrl;
 
+  // 3. 사용자 1일 1문제 생성 쿼터 기록
+  if (window.MatheduAuth && window.MatheduAuth.recordCreatedQuiz) {
+    window.MatheduAuth.recordCreatedQuiz(slug, title || '수학 퀴즈', currentUser);
+  }
+
   setTimeout(() => {
     document.getElementById('formBox').style.display = 'none';
     document.getElementById('issuedQuizUrl').value = quizUrl;
@@ -715,6 +728,19 @@ function escapeHtml(s) {
   });
 }
 
+function setFormFieldsDisabled(disabled) {
+  const fields = ['quizTitle', 'quizContent', 'quizAnswer', 'requesterName', 'requesterEmail', 'imgInput'];
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = disabled;
+  });
+  const dropzone = document.getElementById('dropzone');
+  if (dropzone) {
+    dropzone.style.pointerEvents = disabled ? 'none' : 'auto';
+    dropzone.style.opacity = disabled ? '0.45' : '1';
+  }
+}
+
 function renderMemberNotice() {
   const box = document.getElementById('memberNoticeBox');
   if (!box) return;
@@ -722,21 +748,93 @@ function renderMemberNotice() {
   const btnSubmit = document.getElementById('btnSubmit');
 
   if (user) {
-    box.innerHTML = `
-      <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.4rem;">✅</span>
-          <div>
-            <div style="font-weight: 700; color: #10b981; font-size: 0.95rem;">회원 인증 완료: <b>${escapeHtml(user.name)}</b> (${escapeHtml(user.roleLabel || '회원')} · ${escapeHtml(user.org || '수학교육')})</div>
-            <div style="font-size: 0.8rem; color: #aab4d4;">문제 출제 및 5~8단계 인터랙티브 퀴즈 자동 제작 권한이 활성화되었습니다.</div>
+    const quota = window.MatheduAuth ? window.MatheduAuth.getCreationQuota(user) : { allowed: true, limit: 1, remaining: 1, countToday: 0, createdToday: [] };
+
+    if (quota.allowed) {
+      // 1일 1문제 생성 가능 상태
+      box.innerHTML = `
+        <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">✅</span>
+            <div>
+              <div style="font-weight: 700; color: #10b981; font-size: 0.95rem;">회원 인증 완료: <b>${escapeHtml(user.name)}</b> (${escapeHtml(user.roleLabel || '회원')} · ${escapeHtml(user.org || '수학교육')})</div>
+              <div style="font-size: 0.8rem; color: #aab4d4;">5~8단계 인터랙티브 퀴즈 자동 제작 권한이 활성화되었습니다.</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.45); color: #34d399; font-weight: 700; font-size: 0.82rem; padding: 4px 11px; border-radius: 20px;">
+              ✨ 오늘 남은 출제: <b>${quota.remaining}/${quota.limit}문제</b>
+            </span>
+            <button type="button" class="tbtn" style="padding: 4px 12px; font-size: 0.8rem;" onclick="MatheduAuth.logOut()">🚪 로그아웃</button>
           </div>
         </div>
-        <button type="button" class="tbtn" style="padding: 4px 12px; font-size: 0.8rem;" onclick="MatheduAuth.logOut()">🚪 로그아웃</button>
-      </div>
-    `;
-    if (btnSubmit) {
-      btnSubmit.innerHTML = '🚀 단계별 퀴즈 생성 요청하기';
+        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 10px 14px; font-size: 0.82rem; color: #bae6fd; display: flex; align-items: center; gap: 8px;">
+          <span>ℹ️</span>
+          <div><b>정회원 출제 정책 안내:</b> 문제의 깊이와 5~8단계 인터랙티브 시각화 품질을 보장하기 위해 현재 <b>1일 1문제 생성</b>으로 운영됩니다. (추후 문제 난이도·수준별 확장 예정, 자정 00:00 KST 리셋)</div>
+        </div>
+      `;
+      setFormFieldsDisabled(false);
+      if (btnSubmit) {
+        btnSubmit.disabled = false;
+        btnSubmit.style.opacity = '1';
+        btnSubmit.style.cursor = 'pointer';
+        btnSubmit.innerHTML = `🚀 단계별 퀴즈 생성 요청하기 (오늘 ${quota.remaining}회 가능)`;
+      }
+    } else {
+      // 1일 1문제 생성 한도 완료 상태
+      let createdLinksHtml = '';
+      if (quota.createdToday && quota.createdToday.length > 0) {
+        createdLinksHtml = `
+          <div style="margin-top: 12px; padding: 10px 14px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 6px; font-weight: 600;">📌 오늘 생성 완료된 나의 퀴즈:</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              ${quota.createdToday.map(q => `
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+                  <span style="font-weight: 600; color: #f1f5f9; font-size: 0.88rem;">• ${escapeHtml(q.title || '수학 퀴즈')}</span>
+                  <a href="board/${escapeHtml(q.slug)}.html" class="tbtn" style="padding: 3px 10px; font-size: 0.78rem; text-decoration: none;" target="_blank">
+                    퀴즈 열기 ➔
+                  </a>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      box.innerHTML = `
+        <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.45); border-radius: 14px; padding: 16px 20px; box-shadow: 0 4px 18px rgba(0,0,0,0.25);">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="font-size: 1.8rem; line-height: 1;">🔒</span>
+              <div>
+                <div style="font-weight: 800; color: #fbbf24; font-size: 1rem; margin-bottom: 4px;">
+                  오늘의 문제 생성 한도(1일 ${quota.limit}문제)를 모두 완료하셨습니다.
+                </div>
+                <div style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.5;">
+                  회원 <b>${escapeHtml(user.name)}</b>님, 정성스러운 5~8단계 인터랙티브 퀴즈 제작 및 GeoGebra/AlgeoMath 시각화 연동 품질을 유지하기 위해 <b>1일 1문제 생성 제한</b>이 적용 중입니다.<br>
+                  추후 문제 수준과 난이도에 따라 한도 상향이 이루어질 예정이며, 다음 문제는 <b>내일 자정(00:00 KST)</b>에 새로 생성하실 수 있습니다.
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.5); color: #fcd34d; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; white-space: nowrap;">
+                오늘 완료: ${quota.countToday}/${quota.limit}문제
+              </span>
+              <button type="button" class="tbtn" style="padding: 4px 12px; font-size: 0.8rem;" onclick="MatheduAuth.logOut()">🚪 로그아웃</button>
+            </div>
+          </div>
+          ${createdLinksHtml}
+        </div>
+      `;
+      setFormFieldsDisabled(true);
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.style.opacity = '0.5';
+        btnSubmit.style.cursor = 'not-allowed';
+        btnSubmit.innerHTML = '🔒 오늘의 출제 한도 완료 (내일 00:00 리셋)';
+      }
     }
+
     if (document.getElementById('requesterName') && !document.getElementById('requesterName').value) {
       document.getElementById('requesterName').value = user.name;
     }
@@ -744,6 +842,7 @@ function renderMemberNotice() {
       document.getElementById('requesterEmail').value = user.email;
     }
   } else {
+    setFormFieldsDisabled(false);
     box.innerHTML = `
       <div style="background: linear-gradient(135deg, rgba(66, 133, 244, 0.14), rgba(129, 140, 248, 0.14)); border: 1px solid rgba(66, 133, 244, 0.45); border-radius: 14px; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
         <div style="display: flex; align-items: center; gap: 14px;">
@@ -765,12 +864,15 @@ function renderMemberNotice() {
       </div>
     `;
     if (btnSubmit) {
+      btnSubmit.disabled = true;
+      btnSubmit.style.opacity = '0.7';
       btnSubmit.innerHTML = '🔒 Google 로그인 후 문제 출제 가능';
     }
   }
 }
 
 window.addEventListener('mathedu:auth-changed', renderMemberNotice);
+window.addEventListener('mathedu:quota-changed', renderMemberNotice);
 document.addEventListener('DOMContentLoaded', renderMemberNotice);
 renderMemberNotice();
 </script>
