@@ -51,6 +51,22 @@ window.MathJax = {
 }
 .topic-chip:hover { border-color: var(--accent); color: var(--accent); }
 .topic-chip.active { background: rgba(124,196,255,.22); border-color: var(--accent); color: #7cc4ff; }
+.exam-select {
+  width: 100%;
+  background: #0b0f20;
+  border: 1px solid #2e3850;
+  border-radius: 8px;
+  color: #eef2ff;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.exam-select:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
 body {
   color: var(--txt);
   line-height: 1.6;
@@ -946,12 +962,83 @@ header p {
     </div>
   </div>
 
-  <!-- 실시간 검색 및 빠른 주제 필터 바 -->
-  <div style="margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;">
-    <div style="position:relative;margin-bottom:12px">
-      <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 검색..." style="width:100%;background:#141833;border:1px solid #2e3850;border-radius:10px;padding:11px 16px;color:#fff;font-size:.92rem;outline:none;transition:.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2e3850'">
+  <!-- 🎯 수능·모의평가 기출 정밀 5대 탐색기 (Exam Problem Finder) -->
+  <div style="margin-bottom:20px;background:linear-gradient(135deg,rgba(15,23,42,0.85) 0%,rgba(20,24,51,0.85) 100%);border:1.5px solid rgba(124,196,255,0.32);border-radius:16px;padding:16px 20px;box-shadow:0 8px 30px rgba(0,0,0,0.35);">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:1.25rem;">🎯</span>
+        <div>
+          <span style="font-size:0.96rem;font-weight:800;color:#7cc4ff;">수능·모의평가 기출 정밀 탐색기</span>
+          <span style="font-size:0.8rem;color:#94a3b8;margin-left:8px;">(학년도 · 학년 · 시행월 · 선택과목 · 번호 선택 시 해당 문제만 즉시 추출)</span>
+        </div>
+      </div>
+      <button type="button" onclick="resetExamFilters()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;border-color:rgba(124,196,255,0.3);color:#cbd5e1;cursor:pointer;">
+        🔄 필터 전체 초기화
+      </button>
     </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center" id="topicChips">
+
+    <!-- 5대 정밀 선택 드롭다운 그리드 -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;">
+      <div>
+        <label for="filterYear" style="font-size:0.75rem;font-weight:700;color:#7cc4ff;display:block;margin-bottom:4px;">📅 학년도</label>
+        <select id="filterYear" class="exam-select" onchange="renderList()">
+          <option value="">전체 학년도</option>
+          <option value="2027">2027학년도</option>
+          <option value="2026">2026학년도</option>
+          <option value="2025">2025학년도</option>
+          <option value="2024">2024학년도</option>
+          <option value="2023">2023학년도</option>
+          <option value="2022">2022학년도</option>
+          <option value="2021">2021학년도</option>
+          <option value="2020">2020학년도 이전</option>
+        </select>
+      </div>
+      <div>
+        <label for="filterGrade" style="font-size:0.75rem;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;">🎓 대상 학년</label>
+        <select id="filterGrade" class="exam-select" onchange="renderList()">
+          <option value="">전체 학년</option>
+          <option value="고3">고3 · N수</option>
+          <option value="고2">고2</option>
+          <option value="고1">고1</option>
+        </select>
+      </div>
+      <div>
+        <label for="filterMonth" style="font-size:0.75rem;font-weight:700;color:#5eead4;display:block;margin-bottom:4px;">🗓️ 시행월 (시험명)</label>
+        <select id="filterMonth" class="exam-select" onchange="renderList()">
+          <option value="">전체 시행월</option>
+          <option value="11월">11월 수능 (대수능)</option>
+          <option value="9월">9월 모의평가 (평가원)</option>
+          <option value="6월">6월 모의평가 (평가원)</option>
+          <option value="10월">10월 학력평가</option>
+          <option value="7월">7월 학력평가</option>
+          <option value="4월">4월 학력평가</option>
+          <option value="3월">3월 학력평가</option>
+        </select>
+      </div>
+      <div>
+        <label for="filterSubject" style="font-size:0.75rem;font-weight:700;color:#fde68a;display:block;margin-bottom:4px;">📐 선택과목</label>
+        <select id="filterSubject" class="exam-select" onchange="renderList()">
+          <option value="">전체 과목</option>
+          <option value="공통(수학I·II)">공통 (수학I·II)</option>
+          <option value="미적분">미적분</option>
+          <option value="기하">기하</option>
+          <option value="확률과 통계">확률과 통계</option>
+          <option value="공통수학">공통수학 (고1)</option>
+        </select>
+      </div>
+      <div>
+        <label for="filterNum" style="font-size:0.75rem;font-weight:700;color:#f472b6;display:block;margin-bottom:4px;">🔢 문항 번호</label>
+        <select id="filterNum" class="exam-select" onchange="renderList()">
+          <option value="">전체 번호 (1~30)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 검색창 & 빠른 주제 칩 -->
+    <div style="position:relative;margin-top:12px;margin-bottom:10px;">
+      <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 직접 검색..." style="width:100%;background:#0d1124;border:1px solid #2e3850;border-radius:10px;padding:9px 14px;color:#fff;font-size:0.88rem;outline:none;transition:.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2e3850'">
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;" id="topicChips">
       <span style="font-size:.78rem;color:var(--sub);font-weight:700;margin-right:4px">주제별:</span>
       <button type="button" class="topic-chip active" data-topic="">전체보기</button>
       <button type="button" class="topic-chip" data-topic="이차함수|포물선">이차함수·포물선</button>
@@ -1071,20 +1158,116 @@ function toggleMathStory() {
       countBadge.textContent = '오류';
     });
 
+  // 1~30번 문항 옵션 초기화
+  var filterNum = document.getElementById('filterNum');
+  if (filterNum && filterNum.options.length <= 1) {
+    for (var n = 1; n <= 30; n++) {
+      var opt = document.createElement('option');
+      opt.value = String(n);
+      opt.textContent = n + '번 문항';
+      filterNum.appendChild(opt);
+    }
+  }
+
+  function getExamFilters() {
+    return {
+      year: (document.getElementById('filterYear')?.value || '').trim(),
+      grade: (document.getElementById('filterGrade')?.value || '').trim(),
+      month: (document.getElementById('filterMonth')?.value || '').trim(),
+      subject: (document.getElementById('filterSubject')?.value || '').trim(),
+      num: (document.getElementById('filterNum')?.value || '').trim()
+    };
+  }
+
+  window.resetExamFilters = function() {
+    ['filterYear', 'filterGrade', 'filterMonth', 'filterSubject', 'filterNum'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    if (searchInput) searchInput.value = '';
+    activeTopic = '';
+    document.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
+    var allChip = document.querySelector('.topic-chip[data-topic=""]');
+    if (allChip) allChip.classList.add('active');
+    renderList();
+  };
+
+  ['filterYear', 'filterGrade', 'filterMonth', 'filterSubject', 'filterNum'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', renderList);
+  });
+
   function renderList() {
     var query = (searchInput.value || '').trim().toLowerCase();
+    var ef = getExamFilters();
+    var hasActiveExamFilter = Boolean(ef.year || ef.grade || ef.month || ef.subject || ef.num);
+
     var filtered = allItems.filter(function(it) {
       var title = (it.title || '').toLowerCase();
       var slug = (it.slug || '').toLowerCase();
       var matchesQuery = !query || title.includes(query) || slug.includes(query);
       var matchesTopic = !activeTopic || new RegExp(activeTopic, 'i').test(title);
-      return matchesQuery && matchesTopic;
+      if (!matchesQuery || !matchesTopic) return false;
+
+      // 1. 학년도 매칭
+      if (ef.year) {
+        var mYear = (it.examYear === ef.year) || title.includes(ef.year);
+        if (!mYear) return false;
+      }
+      // 2. 대상 학년 매칭
+      if (ef.grade) {
+        var mGrade = (it.grade === ef.grade) ||
+                     (ef.grade === '고3' && (title.includes('고3') || title.includes('3학년') || title.includes('수능') || title.includes('모평'))) ||
+                     title.includes(ef.grade);
+        if (!mGrade) return false;
+      }
+      // 3. 시행월 매칭
+      if (ef.month) {
+        var mMonth = (it.month === ef.month) ||
+                     (ef.month === '11월' && (title.includes('수능') || title.includes('대수능') || title.includes('11월'))) ||
+                     title.includes(ef.month);
+        if (!mMonth) return false;
+      }
+      // 4. 선택과목 매칭
+      if (ef.subject) {
+        var mSubject = (it.subject === ef.subject) || title.includes(ef.subject.toLowerCase());
+        if (!mSubject) return false;
+      }
+      // 5. 문항 번호 매칭
+      if (ef.num) {
+        var mNum = (String(it.qNum) === String(ef.num)) ||
+                   new RegExp('(?:문항|문제|번)\\s*' + ef.num + '(?![0-9])|' + ef.num + '\\s*번(?![0-9])|수학\\s*' + ef.num + '(?![0-9])').test(title);
+        if (!mNum) return false;
+      }
+
+      return true;
     });
 
     countBadge.textContent = filtered.length + '개' + (filtered.length !== allItems.length ? ' (전체 ' + allItems.length + '개)' : '');
 
     if (filtered.length === 0) {
-      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:var(--sub)">검색 조건에 일치하는 퀴즈가 없습니다.</div>';
+      if (hasActiveExamFilter) {
+        var criteriaDesc = [ef.year ? ef.year + '학년도' : '', ef.month, ef.grade, ef.subject, ef.num ? ef.num + '번' : ''].filter(Boolean).join(' ');
+        var reqUrl = 'create.html?year=' + encodeURIComponent(ef.year) + '&grade=' + encodeURIComponent(ef.grade) + '&month=' + encodeURIComponent(ef.month) + '&subject=' + encodeURIComponent(ef.subject) + '&num=' + encodeURIComponent(ef.num);
+        listEl.innerHTML = 
+          '<div style="background:rgba(30,41,59,0.7);border:1.5px dashed rgba(124,196,255,0.45);border-radius:16px;padding:34px 20px;text-align:center;margin:12px 0;">' +
+            '<div style="font-size:2.2rem;margin-bottom:8px;">🔍</div>' +
+            '<div style="font-size:1.05rem;font-weight:800;color:#f1f5f9;margin-bottom:6px;">선택하신 조건의 기출문항이 아직 등록되지 않았습니다</div>' +
+            '<div style="font-size:0.88rem;color:#cbd5e1;max-width:540px;margin:0 auto 16px;line-height:1.5;">' +
+              '<span style="color:#7cc4ff;font-weight:700">[' + escapeHtml(criteriaDesc) + ']</span> 문항을 지금 바로 출제 요청하시면,<br>안티그래비티 AI가 5~8단계 인터랙티브 빌드업 퀴즈와 GeoGebra 시각화로 자동 제작해 드립니다.' +
+            '</div>' +
+            '<div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">' +
+              '<a href="' + reqUrl + '" class="btn-primary" style="padding:10px 22px;font-weight:800;font-size:0.92rem;text-decoration:none;border-radius:10px;">' +
+                '✨ 이 기출문제 지금 출제 요청하기 ➔' +
+              '</a>' +
+              '<button type="button" class="tbtn" onclick="resetExamFilters()" style="padding:10px 16px;font-size:0.88rem;cursor:pointer;">' +
+                '🔄 필터 전체 초기화' +
+              '</button>' +
+            '</div>' +
+          '</div>';
+      } else {
+        listEl.innerHTML = '<div style="text-align:center;padding:40px;color:var(--sub)">검색 조건에 일치하는 퀴즈가 없습니다.</div>';
+      }
       return;
     }
 
@@ -1093,6 +1276,27 @@ function toggleMathStory() {
     solvedList.forEach(function(s) { solvedMap[s.slug] = s; });
 
     var html = '';
+
+    // 단일 문항 정확 매칭 시 상단 정밀 타겟 히어로 카드 표출
+    if (filtered.length === 1 && hasActiveExamFilter) {
+      var exactItem = filtered[0];
+      var exactTitle = escapeHtml(exactItem.title || exactItem.slug);
+      var exactDesc = [exactItem.examYear ? exactItem.examYear + '학년도' : '', exactItem.month, exactItem.grade, exactItem.subject, exactItem.qNum ? exactItem.qNum + '번' : ''].filter(Boolean).join(' ');
+      html += 
+        '<div style="background:linear-gradient(135deg,rgba(56,189,248,0.18) 0%,rgba(99,102,241,0.22) 100%);border:1.5px solid #38bdf8;border-radius:16px;padding:16px 20px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 6px 24px rgba(56,189,248,0.25);">' +
+          '<div style="display:flex;align-items:center;gap:12px;">' +
+            '<span style="font-size:1.8rem;line-height:1">🎯</span>' +
+            '<div>' +
+              '<div style="font-size:0.98rem;font-weight:800;color:#38bdf8;">선택하신 기출문항을 정확히 찾았습니다!</div>' +
+              '<div style="font-size:0.86rem;color:#e2e8f0;margin-top:2px;font-weight:600;"><span style="color:#7cc4ff">[' + escapeHtml(exactDesc) + ']</span> ' + exactTitle + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="display:flex;gap:8px;">' +
+            '<a href="board/' + exactItem.slug + '.html" style="padding:10px 20px;font-size:0.92rem;font-weight:800;background:linear-gradient(90deg,#38bdf8,#818cf8);color:#080d1a;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 15px rgba(56,189,248,0.35);">🚀 1초 바로 풀기 ➔</a>' +
+          '</div>' +
+        '</div>';
+    }
+
     for (var i = 0; i < filtered.length; i++) {
       var item = filtered[i];
       var title = escapeHtml(item.title || item.slug);
@@ -1117,11 +1321,25 @@ function toggleMathStory() {
         }
       }
 
+      // 기출 문항 정밀 메타데이터 태그 칩
+      var metaTag = '';
+      var metaParts = [
+        item.examYear ? item.examYear + '학년도' : '',
+        item.month || '',
+        item.grade || '',
+        item.subject || '',
+        item.qNum ? item.qNum + '번' : ''
+      ].filter(Boolean);
+      if (metaParts.length > 0) {
+        metaTag = '<span style="background:rgba(124,196,255,0.15);border:1px solid rgba(124,196,255,0.35);color:#7cc4ff;padding:2px 8px;border-radius:12px;font-size:0.74rem;font-weight:700;display:inline-block;margin-right:6px;">' + escapeHtml(metaParts.join(' ')) + '</span>';
+      }
+
       html += '<div class="card">';
       html += '<div class="icon">📘</div>';
       html += '<div class="body">';
       html += '<a class="title" href="board/' + slug + '.html">' + title + '</a>';
       html += '<div class="meta">';
+      if (metaTag) html += metaTag;
       if (solveBadge) html += solveBadge + ' ';
       if (time) html += '<span>' + time + '</span>';
       html += '<span style="color:var(--sub)">· 슬러그: <code>' + slug + '</code></span>';

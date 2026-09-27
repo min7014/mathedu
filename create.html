@@ -262,9 +262,70 @@ window.MathJax = {
     </div>
 
     <form id="quizForm" onsubmit="submitQuizRequest(event)">
+      <!-- 기출문항 5대 정밀 분류 셀렉터 -->
+      <div style="background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(124, 196, 255, 0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 18px;">
+        <div style="font-size: 0.85rem; font-weight: 800; color: #7cc4ff; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <span>🎯 기출문항 정밀 분류 선택 (선택 시 제목 및 게시판 분류 자동 연동)</span>
+          <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">학년도 · 학년 · 시행월 · 과목 · 번호</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+          <div>
+            <label for="selYear" style="font-size: 0.74rem; color: #7cc4ff; font-weight: 700; display: block; margin-bottom: 4px;">📅 학년도</label>
+            <select id="selYear" onchange="autoUpdateTitle()" style="width: 100%; background: #0b0f20; border: 1px solid #2e3850; border-radius: 8px; color: #eef2ff; padding: 8px 10px; font-size: 0.85rem;">
+              <option value="">직접 입력/선택</option>
+              <option value="2027">2027학년도</option>
+              <option value="2026">2026학년도</option>
+              <option value="2025" selected>2025학년도</option>
+              <option value="2024">2024학년도</option>
+              <option value="2023">2023학년도</option>
+              <option value="2022">2022학년도</option>
+              <option value="2021">2021학년도</option>
+              <option value="2020">2020학년도 이전</option>
+            </select>
+          </div>
+          <div>
+            <label for="selGrade" style="font-size: 0.74rem; color: #a78bfa; font-weight: 700; display: block; margin-bottom: 4px;">🎓 대상 학년</label>
+            <select id="selGrade" onchange="autoUpdateTitle()" style="width: 100%; background: #0b0f20; border: 1px solid #2e3850; border-radius: 8px; color: #eef2ff; padding: 8px 10px; font-size: 0.85rem;">
+              <option value="고3" selected>고3 · N수</option>
+              <option value="고2">고2</option>
+              <option value="고1">고1</option>
+            </select>
+          </div>
+          <div>
+            <label for="selMonth" style="font-size: 0.74rem; color: #5eead4; font-weight: 700; display: block; margin-bottom: 4px;">🗓️ 시행월 (시험명)</label>
+            <select id="selMonth" onchange="autoUpdateTitle()" style="width: 100%; background: #0b0f20; border: 1px solid #2e3850; border-radius: 8px; color: #eef2ff; padding: 8px 10px; font-size: 0.85rem;">
+              <option value="">선택 안 함</option>
+              <option value="11월">11월 수능 (대수능)</option>
+              <option value="9월">9월 모의평가 (평가원)</option>
+              <option value="6월">6월 모의평가 (평가원)</option>
+              <option value="10월">10월 전국연합학력평가</option>
+              <option value="7월">7월 전국연합학력평가</option>
+              <option value="4월">4월 전국연합학력평가</option>
+              <option value="3월">3월 전국연합학력평가</option>
+            </select>
+          </div>
+          <div>
+            <label for="selSubject" style="font-size: 0.74rem; color: #fde68a; font-weight: 700; display: block; margin-bottom: 4px;">📐 선택과목</label>
+            <select id="selSubject" onchange="autoUpdateTitle()" style="width: 100%; background: #0b0f20; border: 1px solid #2e3850; border-radius: 8px; color: #eef2ff; padding: 8px 10px; font-size: 0.85rem;">
+              <option value="공통(수학I·II)">공통 (수학I·II)</option>
+              <option value="미적분">미적분</option>
+              <option value="기하">기하</option>
+              <option value="확률과 통계">확률과 통계</option>
+              <option value="공통수학">공통수학 (고1)</option>
+            </select>
+          </div>
+          <div>
+            <label for="selNum" style="font-size: 0.74rem; color: #f472b6; font-weight: 700; display: block; margin-bottom: 4px;">🔢 문항 번호</label>
+            <select id="selNum" onchange="autoUpdateTitle()" style="width: 100%; background: #0b0f20; border: 1px solid #2e3850; border-radius: 8px; color: #eef2ff; padding: 8px 10px; font-size: 0.85rem;">
+              <option value="">선택 안 함</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="quizTitle">📌 수능·모의평가 출처 및 제목</label>
-        <div class="sub-label">기출 출처와 핵심 단원을 입력하세요. (비워둘 시 AI가 이미지/수식을 분석하여 기출 형식으로 자동 작명)</div>
+        <div class="sub-label">기출 출처와 핵심 단원을 입력하세요. (비워둘 시 위 선택값 및 문제 이미지를 분석하여 기출 형식으로 자동 작명)</div>
         <input type="text" id="quizTitle" placeholder="예: [2025 수능 22번] 미분계수와 삼차함수의 그래프">
       </div>
 
@@ -395,21 +456,98 @@ function updateMathPreview() {
   }, 300);
 }
 
+// 기출 5대 분류 셀렉터 초기화 및 URL Query 연동
+function initExamSelectors() {
+  const selNum = document.getElementById('selNum');
+  if (selNum && selNum.options.length <= 1) {
+    for (let i = 1; i <= 30; i++) {
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = `${i}번 문항`;
+      selNum.appendChild(opt);
+    }
+  }
+
+  // URL Query Parameters 파싱 (?year=2025&grade=고3&month=9월&subject=미적분&num=21)
+  const params = new URLSearchParams(window.location.search);
+  const qYear = params.get('year');
+  const qGrade = params.get('grade');
+  const qMonth = params.get('month');
+  const qSubject = params.get('subject');
+  const qNum = params.get('num');
+
+  if (qYear && document.getElementById('selYear')) document.getElementById('selYear').value = qYear;
+  if (qGrade && document.getElementById('selGrade')) document.getElementById('selGrade').value = qGrade;
+  if (qMonth && document.getElementById('selMonth')) document.getElementById('selMonth').value = qMonth;
+  if (qSubject && document.getElementById('selSubject')) document.getElementById('selSubject').value = qSubject;
+  if (qNum && document.getElementById('selNum')) document.getElementById('selNum').value = qNum;
+
+  autoUpdateTitle(false);
+}
+
+function autoUpdateTitle(force = false) {
+  const y = document.getElementById('selYear')?.value || '';
+  const g = document.getElementById('selGrade')?.value || '';
+  const m = document.getElementById('selMonth')?.value || '';
+  const s = document.getElementById('selSubject')?.value || '';
+  const n = document.getElementById('selNum')?.value || '';
+
+  const tagParts = [];
+  if (y) tagParts.push(`${y}학년도`);
+  if (m) tagParts.push(m);
+  if (g) tagParts.push(g);
+  if (s) tagParts.push(s);
+  if (n) tagParts.push(`${n}번`);
+
+  const tag = tagParts.length > 0 ? `[${tagParts.join(' ')}]` : '';
+  const titleEl = document.getElementById('quizTitle');
+  if (!titleEl) return;
+
+  if (tag) {
+    titleEl.placeholder = `예: ${tag} 핵심 조건 분석 및 개념 빌드업`;
+    if (force || !titleEl.value.trim() || titleEl.value.startsWith('[')) {
+      const currentText = titleEl.value.replace(/^\[[^\]]*\]\s*/, '').trim();
+      titleEl.value = currentText ? `${tag} ${currentText}` : `${tag} 기출 변형 퀴즈`;
+    }
+  }
+}
+
 // 빠른 예시 프리셋 채우기
 function fillPreset(id) {
   const t = document.getElementById('quizTitle');
   const c = document.getElementById('quizContent');
   const a = document.getElementById('quizAnswer');
+  const y = document.getElementById('selYear');
+  const g = document.getElementById('selGrade');
+  const m = document.getElementById('selMonth');
+  const s = document.getElementById('selSubject');
+  const n = document.getElementById('selNum');
+
   if (id === 1) {
-    t.value = '[2024 수능 기출] 이차함수와 직선의 위치 관계 및 판별식';
-    c.value = '[2024학년도 대학수학능력시험 수학 영역]\n이차함수 $y = x^2 - 4x + 3$의 그래프와 직선 $y = 2x - k$가 서로 다른 두 점에서 만날 때, 실수 $k$의 범위를 구하시오.';
+    if (y) y.value = '2024';
+    if (g) g.value = '고1';
+    if (m) m.value = '11월';
+    if (s) s.value = '공통수학';
+    if (n) n.value = '18';
+    t.value = '[2024학년도 11월 고1 공통수학 18번] 이차함수와 직선의 위치 관계 및 판별식';
+    c.value = '[2024학년도 전국연합학력평가 11월 고1 수학 영역]\n이차함수 $y = x^2 - 4x + 3$의 그래프와 직선 $y = 2x - k$가 서로 다른 두 점에서 만날 때, 실수 $k$의 범위를 구하시오.';
     a.value = '정답: $k < 6$ (판별식 $D > 0$)';
   } else if (id === 2) {
-    t.value = '[2024 6월 모평] 지수함수와 로그함수의 역함수 대칭 및 선분의 길이';
+    if (y) y.value = '2024';
+    if (g) g.value = '고3';
+    if (m) m.value = '6월';
+    if (s) s.value = '공통(수학I·II)';
+    if (n) n.value = '12';
+    t.value = '[2024학년도 6월 고3 공통(수학I·II) 12번] 지수함수와 로그함수의 역함수 대칭 및 선분의 길이';
     c.value = '[2024학년도 한국교육과정평가원 6월 모의평가 수학 영역]\n두 함수 $y = 2^x$와 $y = \\log_2 x$의 그래프와 직선 $y = -x + 4$가 만나는 점을 각각 $A(x_1, y_1)$, $B(x_2, y_2)$라 할 때, 선분 $AB$의 길이를 구하시오.';
     a.value = '정답: $2\\sqrt{2}$ (직선 $y=x$ 대칭)';
   } else if (id === 3) {
-    t.value = '[2024 9월 모평] 같은 것이 있는 순열과 직사각형 도로망 최단 경로';
+    if (y) y.value = '2024';
+    if (g) g.value = '고3';
+    if (m) m.value = '9월';
+    if (s) s.value = '확률과 통계';
+    if (n) n.value = '28';
+    t.value = '[2024학년도 9월 고3 확률과 통계 28번] 같은 것이 있는 순열과 직사각형 도로망 최단 경로';
     c.value = '[2024학년도 한국교육과정평가원 9월 모의평가 수학 영역]\n가로 4칸, 세로 3칸의 직사각형 모양 도로망에서 $A$ 지점에서 $B$ 지점까지 최단 거리로 이동하는 경우의 수를 구하시오.';
     a.value = '정답: $\\frac{7!}{4!3!} = 35$';
   }
@@ -669,12 +807,27 @@ async function submitQuizRequest(e) {
   const name = document.getElementById('requesterName').value.trim() || (currentUser ? currentUser.name : '선생님');
   const email = (document.getElementById('requesterEmail')?.value || (currentUser ? currentUser.email : '') || '').trim();
 
-  if (!contentInput && !attachedBlob) {
-    alert('문제 내용이나 이미지를 입력해주세요.');
-    return;
+  const selYear = document.getElementById('selYear')?.value || '';
+  const selGrade = document.getElementById('selGrade')?.value || '';
+  const selMonth = document.getElementById('selMonth')?.value || '';
+  const selSubject = document.getElementById('selSubject')?.value || '';
+  const selNum = document.getElementById('selNum')?.value || '';
+
+  const tagParts = [];
+  if (selYear) tagParts.push(`${selYear}학년도`);
+  if (selMonth) tagParts.push(selMonth);
+  if (selGrade) tagParts.push(selGrade);
+  if (selSubject) tagParts.push(selSubject);
+  if (selNum) tagParts.push(`${selNum}번`);
+  const examTag = tagParts.length > 0 ? `[${tagParts.join(' ')}]` : '';
+
+  let title = titleInput;
+  if (!title) {
+    title = examTag ? `${examTag} 기출 분석 및 5단계 빌드업 퀴즈` : '수능·모의평가 기출 변형 퀴즈';
+  } else if (examTag && !title.includes(examTag)) {
+    title = `${examTag} ${title.replace(/^\[[^\]]*\]\s*/, '')}`;
   }
 
-  const title = titleInput;
   const content = contentInput || '이미지 기반 문제 출제 (첨부된 이미지 핵심 조건을 기반으로 5단계 단계별 개념 빌드업 퀴즈 생성)';
 
   const slug = generateSlug();
@@ -693,7 +846,15 @@ async function submitQuizRequest(e) {
     } catch(err) {}
   }
 
-  const payloadText = `[문제 생성 요청]\n슬러그: ${slug}\n제목: ${title}\n내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${email ? '\n이메일: ' + email : ''}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
+  const metaLines = [
+    selYear ? `학년도: ${selYear}` : '',
+    selGrade ? `학년: ${selGrade}` : '',
+    selMonth ? `시행월: ${selMonth}` : '',
+    selSubject ? `선택과목: ${selSubject}` : '',
+    selNum ? `문항번호: ${selNum}` : ''
+  ].filter(Boolean).join('\n');
+
+  const payloadText = `[문제 생성 요청]\n슬러그: ${slug}\n제목: ${title}\n${metaLines ? metaLines + '\n' : ''}내용: ${content}\n정답/힌트: ${answer || 'AI가 직접 도출'}${email ? '\n이메일: ' + email : ''}${attachedBlob ? '\n[이미지: 캡처 첨부됨]' : ''}`;
 
   // 1. Google Sheets POST 전송 (이미지 포함)
   try {
@@ -741,7 +902,7 @@ function escapeHtml(s) {
 }
 
 function setFormFieldsDisabled(disabled) {
-  const fields = ['quizTitle', 'quizContent', 'quizAnswer', 'requesterName', 'requesterEmail', 'imgInput'];
+  const fields = ['selYear', 'selGrade', 'selMonth', 'selSubject', 'selNum', 'quizTitle', 'quizContent', 'quizAnswer', 'requesterName', 'requesterEmail', 'imgInput'];
   fields.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.disabled = disabled;
@@ -885,7 +1046,11 @@ function renderMemberNotice() {
 
 window.addEventListener('mathedu:auth-changed', renderMemberNotice);
 window.addEventListener('mathedu:quota-changed', renderMemberNotice);
-document.addEventListener('DOMContentLoaded', renderMemberNotice);
+document.addEventListener('DOMContentLoaded', function() {
+  initExamSelectors();
+  renderMemberNotice();
+});
+initExamSelectors();
 renderMemberNotice();
 </script>
 </body>

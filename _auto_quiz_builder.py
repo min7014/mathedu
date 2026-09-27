@@ -404,7 +404,82 @@ def create_and_publish_quiz(title, content, hint, reporter, email="", requested_
         f.write(html_content)
     print(f"  ↳ HTML 저장 완료: board/{slug}.html")
 
-    # 7. board/index.json에 새 퀴즈 최상단 추가
+    # 7. board/index.json에 새 퀴즈 최상단 추가 (학년도, 학년, 월, 과목, 문항번호 정밀 메타데이터 저장)
+    combined_meta_text = final_title + " " + (content or "")
+
+    # 7-1. 명시적 키워드 우선 감지 (create.html 폼 발송 시 포함되는 키)
+    m_exp_y = re.search(r'학년도[:\s]+(\d{4})', combined_meta_text)
+    m_exp_g = re.search(r'학년[:\s]+(고[123]|고등[123]학년|[123]학년)', combined_meta_text)
+    m_exp_m = re.search(r'시행월[:\s]+(\d{1,2}월)', combined_meta_text)
+    m_exp_s = re.search(r'선택과목[:\s]+([^\n\r]+)', combined_meta_text)
+    m_exp_n = re.search(r'문항번호[:\s]+(\d{1,2})', combined_meta_text)
+
+    # 학년도
+    if m_exp_y:
+        item_year = m_exp_y.group(1)
+    else:
+        ym = re.search(r'(20[12]\d)', combined_meta_text)
+        item_year = ym.group(1) if ym else datetime.now(KST).strftime('%Y')
+
+    # 학년
+    if m_exp_g:
+        g = m_exp_g.group(1)
+        item_grade = '고3' if ('3' in g or '고3' in g) else ('고2' if ('2' in g or '고2' in g) else '고1')
+    else:
+        gm = re.search(r'(고[123]|고등[123]학년|[123]학년)', combined_meta_text)
+        if gm:
+            g = gm.group(1)
+            item_grade = '고3' if ('3' in g or '고3' in g) else ('고2' if ('2' in g or '고2' in g) else '고1')
+        elif any(k in combined_meta_text for k in ['수능', '모의평가', '모평', '대수능']):
+            item_grade = '고3'
+        elif any(k in combined_meta_text for k in ['이차함수', '이차방정식', '인수분해']):
+            item_grade = '고1'
+        else:
+            item_grade = '고3'
+
+    # 시행월
+    if m_exp_m:
+        item_month = m_exp_m.group(1)
+    elif re.search(r'수능|대학수학능력시험|11월', combined_meta_text):
+        item_month = '11월'
+    elif re.search(r'9월|9평', combined_meta_text):
+        item_month = '9월'
+    elif re.search(r'6월|6평', combined_meta_text):
+        item_month = '6월'
+    elif re.search(r'10월', combined_meta_text):
+        item_month = '10월'
+    elif re.search(r'7월', combined_meta_text):
+        item_month = '7월'
+    elif re.search(r'4월', combined_meta_text):
+        item_month = '4월'
+    elif re.search(r'3월', combined_meta_text):
+        item_month = '3월'
+    else:
+        item_month = '9월'
+
+    # 선택과목
+    if m_exp_s:
+        item_subject = m_exp_s.group(1).strip()
+    elif re.search(r'확률과\s*통계|확통|경우의\s*수|순열|조합|정규분포|이항분포|확률', combined_meta_text):
+        item_subject = '확률과 통계'
+    elif re.search(r'벡터|쌍곡선|타원|포물선|공간도형|정사영', combined_meta_text):
+        item_subject = '기하'
+    elif re.search(r'초월함수|지수함수.*미분|로그함수.*미분|치환적분|부분적분', combined_meta_text):
+        item_subject = '미적분'
+    elif re.search(r'미적분|도함수|접선의\s*방정식|극값|극대|극소|정적분|변곡점|미분가능성', combined_meta_text):
+        item_subject = '공통(수학I·II)'
+    elif re.search(r'수열|점화식|지수|로그|삼각함수', combined_meta_text):
+        item_subject = '공통(수학I·II)'
+    else:
+        item_subject = '공통수학' if item_grade == '고1' else '공통(수학I·II)'
+
+    # 문항번호
+    if m_exp_n:
+        item_num = str(int(m_exp_n.group(1)))
+    else:
+        nm = re.search(r'(?:문항|문제|번)\s*(\d{1,2})|(\d{1,2})\s*번', combined_meta_text)
+        item_num = str(int(nm.group(1) or nm.group(2))) if nm else ''
+
     now_str = datetime.now(KST).strftime('%Y-%m-%d %H:%M')
     try:
         with open(INDEX_FILE, "r", encoding="utf-8") as f:
@@ -415,11 +490,16 @@ def create_and_publish_quiz(title, content, hint, reporter, email="", requested_
     idx.insert(0, {
         "title": final_title,
         "slug": slug,
-        "time": now_str
+        "time": now_str,
+        "examYear": item_year,
+        "grade": item_grade,
+        "month": item_month,
+        "subject": item_subject,
+        "qNum": item_num
     })
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
         json.dump(idx, f, ensure_ascii=False, indent=2)
-    print(f"  ↳ board/index.json 메타데이터 등록 완료: '{final_title}'")
+    print(f"  ↳ board/index.json 메타데이터 등록 완료: '{final_title}' [Y:{item_year} G:{item_grade} M:{item_month} S:{item_subject} N:{item_num}]")
 
     # 7-1. 일일 문제 생성 로그 기록 (1일 1문제 제한 관리)
     try:
