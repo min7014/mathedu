@@ -850,6 +850,15 @@
           '<div class="solved-list-wrap">' +
             listHtml +
           '</div>' +
+
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;gap:10px">' +
+            '<a href="' + (basePath ? basePath : '.') + '/privacy.html" target="_blank" rel="noopener" style="font-size:0.78rem;color:#94a3b8;text-decoration:none;display:inline-flex;align-items:center;gap:4px">' +
+              '🔒 개인정보처리방침' +
+            '</a>' +
+            '<button type="button" onclick="MatheduAuth.clearAllMyData()" style="background:transparent;border:1px solid rgba(244,63,94,.4);color:#fda4af;padding:4px 10px;border-radius:8px;font-size:0.75rem;cursor:pointer">' +
+              '🗑️ 내 학습 기록 전체 삭제' +
+            '</button>' +
+          '</div>' +
         '</div>';
 
       document.body.appendChild(modal);
@@ -858,6 +867,25 @@
     closeProblemsModal: function() {
       var modal = document.getElementById('matheduProblemsModal');
       if (modal) modal.remove();
+    },
+
+    clearAllMyData: function() {
+      if (!confirm('정말로 브라우저에 저장된 모든 학습 기록과 풀이 캐시를 완전히 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.')) {
+        return;
+      }
+      localStorage.removeItem(DEVICE_SOLVED_KEY);
+      localStorage.removeItem(CURRENT_GUEST_KEY);
+      sessionStorage.removeItem(CURRENT_GUEST_KEY);
+      var currentG = getCurrentGuest();
+      if (currentG) {
+        var guests = getGuests();
+        delete guests[currentG.name.toLowerCase()];
+        saveGuests(guests);
+      }
+      showToast('모든 학습 데이터가 영구 파기되었습니다.', '🗑️');
+      MatheduAuth.closeProblemsModal();
+      window.dispatchEvent(new CustomEvent('mathedu:solved-updated', { detail: null }));
+      updateNavAuthUI();
     },
 
     // 8. 비회원 식별 팝업 모달 (이름 + 간편 비번 입력)
@@ -993,6 +1021,12 @@
       var title = options.title || '🔐 mathedu 정식 회원 서비스';
       var desc = options.desc || '선생님과 연구자를 위한 문제 출제 및 학급 수업 배포 전용 회원 공간입니다.<br><b>정식 회원가입은 구글 인증을 사용합니다.</b>';
 
+      var pathname = window.location.pathname;
+      var basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+      if (basePath.endsWith('/board')) {
+        basePath = basePath.substring(0, basePath.lastIndexOf('/board'));
+      }
+
       modal.innerHTML = 
         '<div class="mathedu-auth-card">' +
           '<button type="button" class="mathedu-auth-close" onclick="MatheduAuth.closeAuthModal()">✕</button>' +
@@ -1038,6 +1072,9 @@
               '🔑 로그인하기' +
             '</button>' +
           '</form>' +
+          '<div style="margin-top:16px;text-align:center;font-size:0.75rem;color:#64748b">' +
+            'Google 인증 시 mathedu <a href="' + (basePath ? basePath : '.') + '/privacy.html" target="_blank" rel="noopener" style="color:#7cc4ff;text-decoration:underline">개인정보처리방침</a>에 동의한 것으로 처리됩니다.' +
+          '</div>' +
         '</div>';
 
       document.body.appendChild(modal);
