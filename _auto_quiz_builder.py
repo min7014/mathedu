@@ -113,17 +113,23 @@ def make_smart_fallback_title(content):
         ("기하와 벡터", ["벡터", "공간도형", "타원", "쌍곡선", "포물선", "정사영", "내적"]),
     ]
     
+    topic_found = ""
     for name, kws in topic_map:
         if any(k in clean for k in kws):
-            return name
+            topic_found = name
+            break
             
-    first_line = clean.splitlines()[0] if clean else ""
-    first_line = re.sub(r'[\$\[\]\{\}\(\)\=\+\-\*\/]', ' ', first_line)
-    first_line = ' '.join(first_line.split())
-    if first_line:
-        s = first_line if len(first_line) <= 20 else first_line[:20] + "…"
-        return f"수학 퀴즈 · {s}"
-    return f"수학 퀴즈 · 단계별 핵심 개념 ({datetime.now(KST).strftime('%H:%M')})"
+    if not topic_found:
+        first_line = clean.splitlines()[0] if clean else ""
+        first_line = re.sub(r'[\$\[\]\{\}\(\)\=\+\-\*\/]', ' ', first_line)
+        first_line = ' '.join(first_line.split())
+        topic_found = (first_line if len(first_line) <= 20 else first_line[:20] + "…") if first_line else f"단계별 핵심 개념 ({datetime.now(KST).strftime('%H:%M')})"
+
+    exam_m = re.search(r'(20\d\d\s*(?:학년도|년)?\s*(?:수능|대학수학능력시험|6월\s*모평|9월\s*모평|모의평가|학력평가)(?:\s*(?:수학|가형|나형|미적분|기하|확통)?)?(?:\s*\d+번)?)', clean)
+    if exam_m:
+        exam_tag = exam_m.group(1).strip()
+        return f"[{exam_tag}] {topic_found}"
+    return f"[수능·모평 기출] {topic_found}"
 
 def parse_request_text(text):
     """
