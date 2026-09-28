@@ -46,6 +46,15 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.input-wrap{margin-top:12px}
+.input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-badge{font-size:.8rem;font-weight:800;color:var(--accent);background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);padding:4px 10px;border-radius:8px}
+.num-input{background:var(--card2);border:1.5px solid var(--line);border-radius:12px;color:var(--txt);font-size:1.1rem;font-weight:700;padding:8px 14px;width:140px;text-align:center;outline:none;transition:.15s;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.num-input:focus{border-color:var(--accent);box-shadow:0 0 14px rgba(124,196,255,.35)}
+.check-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;padding:9px 18px;font-weight:800;font-size:.92rem;cursor:pointer;box-shadow:0 4px 12px rgba(124,196,255,.3);transition:.15s}
+.check-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(124,196,255,.45)}
+.check-btn:disabled,.num-input:disabled{opacity:.55;cursor:default;transform:none}
+.feedback-msg{margin-top:8px;font-size:.92rem;line-height:1.5;min-height:22px}
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -135,8 +144,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270930.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270930">
-<meta name="mathedu-offline-build-time" content="2026-09-27T22:42:03.907279+00:00">
-<meta name="mathedu-offline-hash" content="c4ad7983">
+<meta name="mathedu-offline-build-time" content="2026-09-28T04:10:59.391960+00:00">
+<meta name="mathedu-offline-hash" content="889c4467">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -203,19 +212,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$x = f(t) \iff g(x) = t$</b> — 역함수 치환적분의 핵심 원리</div><div><b>$dx = f'(t)dt$</b> — 미분요소의 치환</div><div><b>$\dfrac{q\sqrt{2}}{p} = \dfrac{47\sqrt{2}}{2} \implies p+q = 49$</b> — 정적분의 결과</div></div>
-<h2>🔰 1단계 · [초등~고등 연계] 역함수의 그래프와 $x, y$ 역할 바꾸기 직관</h2><div class="know"><h3>먼저 알아야 할 지식</h3>역함수는 $x$축과 $y$축의 역할을 맞바꾼 것입니다. 역함수의 정적분 $\int_{f(a)}^{f(b)} g(x)dx$는 원래 함수 $f(t)$ 관점에서는 $y$축 방향으로 넓이를 적분하는 것과 같으며, 치환적분 $x = f(t), dx = f'(t)dt$를 쓰면 원래 함수 $f(t)$의 적분으로 완전히 전환됩니다.</div><div class="q" data-ans="1" data-exp="$g(x) = g(f(t)) = t$ 로 바뀝니다."><div class="lvl">문항</div><div class="stem">$x = f(t)$로 치환할 때, $g(x)$는 무엇으로 바뀌나요?</div><div class="opts"><div class="opt"><span class="n">1</span>$t$</div><div class="opt"><span class="n">2</span>$f(t)$</div><div class="opt"><span class="n">3</span>$f'(t)$</div><div class="opt"><span class="n">4</span>$\frac{1}{t}$</div><div class="opt"><span class="n">5</span>$t^2$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
-<div class="report-form" style="display:none;margin-top:10px;text-align:left">
-<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
-<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
-<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
-</div>
-</div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [고등 치환적분] 적분식 $t$에 관한 식으로 통일하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>두 번째 항 $\int_{f(0)}^{f(2)} \frac{24g(x)g'(x)}{x}dx$ 에서 $g(x) = t, g'(x)dx = dt, x = f(t)$로 치환하면 $t$에 관한 적분식이 되어 첫 번째 적분항과 아름답게 상쇄 및 단순화가 이루어집니다.</div><div class="q" data-ans="1" data-exp="상쇄 후 $\frac{1}{4}(3f(3) - f(1)) = \frac{1}{4}(3 \times 2^{11/2} - 2^{3/2}) = \frac{47\sqrt{2}}{2}$ 가 됩니다."><div class="lvl">문항</div><div class="stem">치환적분 후 두 적분을 결합하면 최종적으로 $\frac{1}{4}(3f(3) - f(1))$ 꼴로 정리되나요?</div><div class="opts"><div class="opt"><span class="n">1</span>그렇다 (참)</div><div class="opt"><span class="n">2</span>아니다 (거짓)</div><div class="opt"><span class="n">3</span>지수함수 전체를 직접 적분해야 한다</div><div class="opt"><span class="n">4</span>역함수를 직접 구해야 한다</div><div class="opt"><span class="n">5</span>0이 된다</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$x = f(t) \iff g(x) = t$</b> — 역함수 치환적분 변수 변환</div><div><b>$dx = f'(t)dt$</b> — 미분요소 변환</div><div><b>$\dfrac{q\sqrt{2}}{p} = \dfrac{47\sqrt{2}}{2}$</b> — 최종 적분 계산 결과</div><div><b>$p + q = 2 + 47 = 49$</b> — 최종 단답형 정답</div></div>
+<h2>🔰 1단계 · [초등~고등 연계] 역함수의 그래프와 역할 바꾸기 직관</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 거울에 비친 모습을 보듯, 역함수는 $x$축과 $y$축의 역할을 맞바꾼 거울 대칭입니다. $g(x)$를 적분할 때 $x = f(t)$로 치환하면 원래 함수 $f(t)$에 대한 편리한 적분으로 바꿀 수 있습니다.</div><div class="q" data-ans="49" data-exp="$2 + 47 = 49$ 입니다."><div class="lvl">초등 직관 디딤돌 1</div><div class="stem">서로소인 두 자연수 $p=2, q=47$의 합 $p+q = 2 + 47$을 초등학교 덧셈으로 계산하여 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -228,7 +226,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270930",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">계산 결과 $\frac{47\sqrt{2}}{2}$ 이므로 $p = 2, q = 47$. 따라서 $p + q = 2 + 47 = 49$ 입니다.</div><div class="q" data-ans="3" data-exp="$p = 2, q = 47$ 이므로 $p+q = 49$ 입니다."><div class="lvl">최종 본문항</div><div class="stem">$p+q$의 값을 구하시오.</div><div class="opts"><div class="opt"><span class="n">1</span>$45$</div><div class="opt"><span class="n">2</span>$47$</div><div class="opt"><span class="n">3</span>$49$</div><div class="opt"><span class="n">4</span>$51$</div><div class="opt"><span class="n">5</span>$53$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">치환적분과 부분적분을 결합하여 정리하면 $\frac{47\sqrt{2}}{2}$ 가 도출되어 서로소인 자연수 $p=2, q=47 \implies p+q=49$.</div><div class="q" data-ans="49" data-exp="계산 결과 $\frac{47\sqrt{2}}{2}$ 이므로 $p = 2, q = 47$. 따라서 $p + q = 2 + 47 = 49$ 입니다."><div class="lvl">최종 본문항</div><div class="stem">$p+q$의 값을 구하시오.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -291,13 +289,13 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20200106004.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 분모($\sqrt{a}-\sqrt{b}$, $\sqrt{a}+\sqrt{b}$)의 유리화
-              <span class="min-item-sub">Rationalization of Denominator ($\sqrt{a}-\sqrt{b}$, $\sqrt{a}+\sqrt{b}$)</span>
+            <a href="https://min7014.github.io/math20230728001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 원의 넓이
+              <span class="min-item-sub">The Area of The Circle</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20200106004.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/math20230728001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
           </div>
         </div>
         
@@ -310,30 +308,104 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
   </div>
 </div>
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $49$</div>
+<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 49</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
-qs.forEach(q=>{const ans=+q.dataset.ans;const exp=q.querySelector('.exp');
-exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
-opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
-q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
-if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
-const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
-document.getElementById('pct').textContent=pct+'%';});});});
+
+function checkNumAnswer(el){
+  var q = el.closest ? el.closest('.q') : el.parentElement;
+  while(q && !q.classList.contains('q')) { q = q.parentElement; }
+  if(!q || q.classList.contains('done')) return;
+  var input = q.querySelector('.num-input');
+  if(!input) return;
+  var valStr = input.value.trim();
+  var feedback = q.querySelector('.feedback-msg');
+  var exp = q.querySelector('.exp');
+  if(!valStr){
+    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 정수를 입력해주세요!</span>';
+    input.focus();
+    return;
+  }
+  var val = parseInt(valStr, 10);
+  var ans = parseInt(q.dataset.ans, 10);
+  if(isNaN(val)){
+    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 0부터 999 사이의 정수를 입력해주세요!</span>';
+    input.focus();
+    return;
+  }
+  if(val === ans){
+    q.classList.add('done', 'correct-q');
+    input.disabled = true;
+    input.style.borderColor = 'var(--good)';
+    input.style.boxShadow = '0 0 14px rgba(94,234,212,.4)';
+    var btn = q.querySelector('.check-btn');
+    if(btn) btn.disabled = true;
+    if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다! (' + val + ')</span>';
+    var opts = q.querySelectorAll('.opt');
+    opts.forEach(function(o, idx){
+      o.classList.add('locked');
+      if(idx + 1 === ans) o.classList.add('correct');
+    });
+    pts++;
+    document.getElementById('pts').textContent = pts;
+    var total = document.querySelectorAll('.q').length;
+    var pct = Math.round(pts / total * 100);
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('pct').textContent = pct + '%';
+    if(exp) exp.classList.add('show');
+    if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+  } else {
+    if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ ' + val + '은(는) 정답이 아닙니다. 다시 계산해보세요! 💡</span>';
+    input.select();
+  }
+}
+
+qs.forEach(q=>{
+  const ans=+q.dataset.ans;
+  const exp=q.querySelector('.exp');
+  if(exp) exp.innerHTML=q.dataset.exp;
+  const opts=q.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{
+    o.addEventListener('click',()=>{
+      if(q.classList.contains('done'))return;
+      var input = q.querySelector('.num-input');
+      if(input) { input.value = i + 1; input.disabled = true; }
+      var btn = q.querySelector('.check-btn');
+      if(btn) btn.disabled = true;
+      var feedback = q.querySelector('.feedback-msg');
+      q.classList.add('done');
+      opts.forEach((oo,j)=>{
+        oo.classList.add('locked');
+        if(j+1==ans) oo.classList.add('correct');
+      });
+      if(i+1==ans){
+        o.classList.add('correct');
+        q.classList.add('correct-q');
+        pts++;
+        if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다!</span>';
+      } else {
+        o.classList.add('wrong');
+        if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ 정답은 ' + ans + '번입니다.</span>';
+      }
+      if(exp) exp.classList.add('show');
+      document.getElementById('pts').textContent=pts;
+      var total = document.querySelectorAll('.q').length;
+      const pct=Math.round(pts/total*100);
+      document.getElementById('bar').style.width=pct+'%';
+      document.getElementById('pct').textContent=pct+'%';
+      if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+    });
+  });
+});
 function sendProgress(){
   var name = (window._studentName || '').trim();
   if (!name) return;
   var qs = document.querySelectorAll('.q');
   var total = qs.length;
   var done = document.querySelectorAll('.q.done');
-  var correct = 0;
-  document.querySelectorAll('.q.done').forEach(function(q){
-    var c = q.querySelector('.opt.correct');
-    if (c) correct++;
-  });
+  var correct = pts;
   var current = done.length;
   if (current === 0) return;
   var url = window._sheetsApiUrl || '/api/progress';
@@ -501,8 +573,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270930';
-window._offlineBuildTime = '2026-09-27T22:42:03.907279+00:00';
-window._offlineHash = 'c4ad7983';
+window._offlineBuildTime = '2026-09-28T04:10:59.391960+00:00';
+window._offlineHash = '889c4467';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270930.html';
 
@@ -527,8 +599,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270930';
-  var localBuildTime = window._offlineBuildTime || '2026-09-27T22:42:03.907279+00:00';
-  var localHash = window._offlineHash || 'c4ad7983';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T04:10:59.391960+00:00';
+  var localHash = window._offlineHash || '889c4467';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270930.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

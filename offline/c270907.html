@@ -46,6 +46,15 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.input-wrap{margin-top:12px}
+.input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-badge{font-size:.8rem;font-weight:800;color:var(--accent);background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);padding:4px 10px;border-radius:8px}
+.num-input{background:var(--card2);border:1.5px solid var(--line);border-radius:12px;color:var(--txt);font-size:1.1rem;font-weight:700;padding:8px 14px;width:140px;text-align:center;outline:none;transition:.15s;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.num-input:focus{border-color:var(--accent);box-shadow:0 0 14px rgba(124,196,255,.35)}
+.check-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;padding:9px 18px;font-weight:800;font-size:.92rem;cursor:pointer;box-shadow:0 4px 12px rgba(124,196,255,.3);transition:.15s}
+.check-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(124,196,255,.45)}
+.check-btn:disabled,.num-input:disabled{opacity:.55;cursor:default;transform:none}
+.feedback-msg{margin-top:8px;font-size:.92rem;line-height:1.5;min-height:22px}
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -135,8 +144,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270907.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270907">
-<meta name="mathedu-offline-build-time" content="2026-09-27T22:42:03.907279+00:00">
-<meta name="mathedu-offline-hash" content="3d487b58">
+<meta name="mathedu-offline-build-time" content="2026-09-28T04:10:59.391960+00:00">
+<meta name="mathedu-offline-hash" content="bc2faa0e">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -203,8 +212,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f'(1) = 0$</b> — x=1에서 극값을 가지므로 접선의 기울기는 0</div><div><b>$f'(x) = 6x^2 + 2ax - 4a$</b> — f(x)의 도함수</div><div><b>$f(-2) = 20$</b> — x=-2에서 도함수의 부호가 양에서 음으로 바뀌어 생기는 극댓값</div></div>
-<h2>🔰 1단계 · [초등 연계] 산꼭대기(극대)와 골짜기(극소)의 접선 기울기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>산길을 오르다가 꼭대기(극대)에 서면 순간적으로 평평해지고, 반대로 골짜기 바닥(극소)에 도달해도 순간적으로 평평해집니다. 이 평평한 순간의 접선 기울기가 바로 0입니다. 문제에서 $x=1$에서 극소라고 했으므로 $x=1$에서의 도함수 값은 정확히 0이 되어야 합니다: $f'(1) = 0$.</div><div class="q" data-ans="2" data-exp="극대나 극소 지점에서는 접선의 기울기인 도함수 값이 0이 됩니다."><div class="lvl">문항</div><div class="stem">미분가능한 함수 $f(x)$가 $x=1$에서 극소이면 $f'(1)$의 값은 얼마일까요?</div><div class="opts"><div class="opt"><span class="n">1</span>$-1$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>알 수 없다</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f'(x) = -3x^2 + 6x = -3x(x-2)$</b> — 도함수 인수분해를 통한 증가·감소 조사</div><div><b>$f'(x) = 0 \implies x = 0 \text{ or } 2$</b> — 극값이 발생할 수 있는 후보 지점</div><div><b>$x = 2 \text{에서 극대}$</b> — 기울기가 양에서 음으로 바뀌는 극대 지점</div><div><b>$f(2) = -(8) + 3(4) + 16 = 20$</b> — x=2를 대입하여 계산한 극댓값</div></div>
+<h2>🔰 1단계 · [중등 인수분해 연계] 도함수가 0이 되는 지점 찾기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수가 가장 높이 올라가는 극대 지점에서는 접선의 기울기가 0이 됩니다. $f&#x27;(x) = -3x^2 + 6x = -3x(x - 2)$ 입니다. 이 식이 0이 되려면 $x = 0$ 이거나 $x = 2$ 여야 합니다.</div><div class="q" data-ans="2" data-exp="$x = 0$ 또는 $x = 2$ 이므로 양수 근은 $2$ 입니다."><div class="lvl">중등 인수분해 디딤돌 1</div><div class="stem">방정식 $-3x(x - 2) = 0$ 의 양수 근 $x$의 값을 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -215,7 +224,9 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [중등 연계] 도함수 $f'(x)$를 구하고 $a$ 결정하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(x) = 2x^3 + ax^2 - 4ax$를 미분하면 $f'(x) = 6x^2 + 2ax - 4a$ 입니다. $x=1$을 대입하면 $f'(1) = 6(1) + 2a(1) - 4a = 6 - 2a = 0$ 이므로 $2a = 6 \implies a = 3$ 입니다.</div><div class="q" data-ans="3" data-exp="$2a = 6 \implies a = 3$ 입니다."><div class="lvl">문항</div><div class="stem">$6 - 2a = 0$ 일 때, 상수 $a$의 값은 얼마인가요?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [초등 연산 연계] $x=2$에서의 거듭제곱 계산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>극댓값을 구하기 위해 원함수 $f(x) = -x^3 + 3x^2 + 16$에 $x=2$를 대입합니다.
+$x^3 = 2^3 = 8$
+$3x^2 = 3 \times 4 = 12$</div><div class="q" data-ans="12" data-exp="$3 \times 4 = 12$ 입니다."><div class="lvl">초등 연산 디딤돌 2</div><div class="stem">$3 \times (2^2) = 3 \times 4$의 계산 결과를 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -226,7 +237,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [중등 인수분해 연계] 극대점이 되는 $x$ 좌표 찾기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a=3$을 도함수에 넣으면 $f'(x) = 6x^2 + 6x - 12 = 6(x^2 + x - 2) = 6(x+2)(x-1)$ 입니다. $f'(x) = 0$이 되는 곳은 $x = -2$와 $x = 1$입니다. $x=1$이 극소이므로, 산꼭대기인 극대는 $x = -2$에서 발생합니다.</div><div class="q" data-ans="1" data-exp="$x+2 = 0 \implies x = -2$ 입니다."><div class="lvl">문항</div><div class="stem">방정식 $6(x+2)(x-1) = 0$ 에서 $x=1$을 제외한 다른 근은 무엇일까요?</div><div class="opts"><div class="opt"><span class="n">1</span>$-2$</div><div class="opt"><span class="n">2</span>$-1$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$3$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [초등 사칙연산 연계] 극댓값 $f(2)$ 완성하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>이제 원함수에 대입하여 종합합니다: $f(2) = -8 + 12 + 16$. 초등학교 사칙연산: $-8 + 12 = 4$, $4 + 16 = 20$ 입니다.</div><div class="q" data-ans="20" data-exp="$-8 + 12 = 4$ 이고 $4 + 16 = 20$ 입니다."><div class="lvl">초등 사칙연산 디딤돌 3</div><div class="stem">$-8 + 12 + 16$의 계산 결과를 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -239,7 +250,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270907",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">극댓값은 $x=-2$를 원래 함수 $f(x) = 2x^3 + 3x^2 - 12x$에 대입한 값입니다: $f(-2) = 2(-8) + 3(4) - 12(-2) = -16 + 12 + 24 = 20$.</div><div class="q" data-ans="2" data-exp="$f(-2) = -16 + 12 + 24 = 20$ 이므로 정답은 ②입니다."><div class="lvl">최종 본문항</div><div class="stem">함수 $f(x)$의 극댓값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$18$</div><div class="opt"><span class="n">2</span>$20$</div><div class="opt"><span class="n">3</span>$22$</div><div class="opt"><span class="n">4</span>$24$</div><div class="opt"><span class="n">5</span>$26$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">$f'(x) = -3x^2 + 6x = -3x(x-2)$ 이므로 $x=2$에서 극댓값을 갖습니다. $f(2) = -(2)^3 + 3(2)^2 + 16 = -8 + 12 + 16 = 20$.</div><div class="q" data-ans="2" data-exp="$f&#x27;(x) = -3x(x-2) = 0$에서 $x=2$일 때 극대입니다. $f(2) = -8 + 12 + 16 = 20$ 입니다. 정답은 ②입니다."><div class="lvl">최종 본문항</div><div class="stem">함수 $f(x)$의 극댓값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$18$</div><div class="opt"><span class="n">2</span>$20$</div><div class="opt"><span class="n">3</span>$22$</div><div class="opt"><span class="n">4</span>$24$</div><div class="opt"><span class="n">5</span>$26$</div></div><div class="input-wrap" style="margin-top:10px"><div class="input-row"><span class="input-badge">정답 번호 입력</span><input type="number" class="num-input" min="1" max="999" placeholder="1~5 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -290,25 +301,25 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20210822001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $y=ax+b(a\neq 0)$의 $x$ 절편($x$-intercept of $y=ax+b
-              <span class="min-item-sub">a\neq 0)$</span>
+            <a href="https://min7014.github.io/math20250207001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 소수카드와 합성수 카드를 활용한 게임
+              <span class="min-item-sub">A game using prime and composite cards</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20210822001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/math20250207001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
           </div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20210823001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $y=ax+b(a\neq 0)$의 $y$ 절편($y$-intercept of $y=ax+b
-              <span class="min-item-sub">a\neq 0)$</span>
+            <a href="https://min7014.github.io/math20210522001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 그래프를 활용한 이차부등식 풀기
+              <span class="min-item-sub">Solving Quadratic Inequalities by Graphing</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20210823001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/math20210522001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
           </div>
         </div>
         
@@ -326,25 +337,99 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
-qs.forEach(q=>{const ans=+q.dataset.ans;const exp=q.querySelector('.exp');
-exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
-opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
-q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
-if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
-const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
-document.getElementById('pct').textContent=pct+'%';});});});
+
+function checkNumAnswer(el){
+  var q = el.closest ? el.closest('.q') : el.parentElement;
+  while(q && !q.classList.contains('q')) { q = q.parentElement; }
+  if(!q || q.classList.contains('done')) return;
+  var input = q.querySelector('.num-input');
+  if(!input) return;
+  var valStr = input.value.trim();
+  var feedback = q.querySelector('.feedback-msg');
+  var exp = q.querySelector('.exp');
+  if(!valStr){
+    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 정수를 입력해주세요!</span>';
+    input.focus();
+    return;
+  }
+  var val = parseInt(valStr, 10);
+  var ans = parseInt(q.dataset.ans, 10);
+  if(isNaN(val)){
+    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 0부터 999 사이의 정수를 입력해주세요!</span>';
+    input.focus();
+    return;
+  }
+  if(val === ans){
+    q.classList.add('done', 'correct-q');
+    input.disabled = true;
+    input.style.borderColor = 'var(--good)';
+    input.style.boxShadow = '0 0 14px rgba(94,234,212,.4)';
+    var btn = q.querySelector('.check-btn');
+    if(btn) btn.disabled = true;
+    if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다! (' + val + ')</span>';
+    var opts = q.querySelectorAll('.opt');
+    opts.forEach(function(o, idx){
+      o.classList.add('locked');
+      if(idx + 1 === ans) o.classList.add('correct');
+    });
+    pts++;
+    document.getElementById('pts').textContent = pts;
+    var total = document.querySelectorAll('.q').length;
+    var pct = Math.round(pts / total * 100);
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('pct').textContent = pct + '%';
+    if(exp) exp.classList.add('show');
+    if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+  } else {
+    if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ ' + val + '은(는) 정답이 아닙니다. 다시 계산해보세요! 💡</span>';
+    input.select();
+  }
+}
+
+qs.forEach(q=>{
+  const ans=+q.dataset.ans;
+  const exp=q.querySelector('.exp');
+  if(exp) exp.innerHTML=q.dataset.exp;
+  const opts=q.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{
+    o.addEventListener('click',()=>{
+      if(q.classList.contains('done'))return;
+      var input = q.querySelector('.num-input');
+      if(input) { input.value = i + 1; input.disabled = true; }
+      var btn = q.querySelector('.check-btn');
+      if(btn) btn.disabled = true;
+      var feedback = q.querySelector('.feedback-msg');
+      q.classList.add('done');
+      opts.forEach((oo,j)=>{
+        oo.classList.add('locked');
+        if(j+1==ans) oo.classList.add('correct');
+      });
+      if(i+1==ans){
+        o.classList.add('correct');
+        q.classList.add('correct-q');
+        pts++;
+        if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다!</span>';
+      } else {
+        o.classList.add('wrong');
+        if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ 정답은 ' + ans + '번입니다.</span>';
+      }
+      if(exp) exp.classList.add('show');
+      document.getElementById('pts').textContent=pts;
+      var total = document.querySelectorAll('.q').length;
+      const pct=Math.round(pts/total*100);
+      document.getElementById('bar').style.width=pct+'%';
+      document.getElementById('pct').textContent=pct+'%';
+      if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+    });
+  });
+});
 function sendProgress(){
   var name = (window._studentName || '').trim();
   if (!name) return;
   var qs = document.querySelectorAll('.q');
   var total = qs.length;
   var done = document.querySelectorAll('.q.done');
-  var correct = 0;
-  document.querySelectorAll('.q.done').forEach(function(q){
-    var c = q.querySelector('.opt.correct');
-    if (c) correct++;
-  });
+  var correct = pts;
   var current = done.length;
   if (current === 0) return;
   var url = window._sheetsApiUrl || '/api/progress';
@@ -512,8 +597,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270907';
-window._offlineBuildTime = '2026-09-27T22:42:03.907279+00:00';
-window._offlineHash = '3d487b58';
+window._offlineBuildTime = '2026-09-28T04:10:59.391960+00:00';
+window._offlineHash = 'bc2faa0e';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270907.html';
 
@@ -538,8 +623,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270907';
-  var localBuildTime = window._offlineBuildTime || '2026-09-27T22:42:03.907279+00:00';
-  var localHash = window._offlineHash || '3d487b58';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T04:10:59.391960+00:00';
+  var localHash = window._offlineHash || 'bc2faa0e';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270907.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
