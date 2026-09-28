@@ -146,8 +146,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270901.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270901">
-<meta name="mathedu-offline-build-time" content="2026-09-28T17:39:27.530335+00:00">
-<meta name="mathedu-offline-hash" content="1bea8250">
+<meta name="mathedu-offline-build-time" content="2026-09-28T18:10:18.788875+00:00">
+<meta name="mathedu-offline-hash" content="9b7d9c27">
 <meta name="mathedu-version-label" content="v2026.09.29">
 
 </head><body><div class="wrap">
@@ -216,7 +216,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$a^m \times a^n = a^{m+n}$</b> — 밑이 같을 때 지수끼리 더하는 곱셈 법칙</div><div><b>$(a^m)^n = a^{mn}$</b> — 거듭제곱의 거듭제곱(지수의 곱셈)</div><div><b>$4 = 2^2$</b> — 밑을 2로 통일하기 위한 기초 수 변환</div><div><b>$a^{-n} = \dfrac{1}{a^n}$</b> — 음수 지수의 역수 표현</div></div>
-<h2>🔰 1단계 · [초등 연계] 거듭제곱의 직관적 의미와 밑 통일하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 같은 수를 여러 번 곱하는 것을 배웁니다. 예를 들어 2를 2번 곱하면 $2 \times 2 = 4$이므로 $2^2$으로 쓸 수 있습니다. 지수 문제를 풀 때는 먼저 큰 숫자 4를 가장 작은 수인 2의 거듭제곱으로 나타내는 것이 기본 출발점입니다.</div><div class="q" data-ans="2" data-exp="$4 = 2 \times 2 = 2^2$ 입니다. 따라서 지수 $n = 2$ 입니다."><div class="lvl">초등 디딤돌 1</div><div class="stem">숫자 4는 2를 몇 번 곱한 것일까요? ($2 \times 2 = 2^n$에서 지수 $n$의 값)</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 1단계 · [지수법칙의 기초] 밑의 통일과 소인수분해</h2><div class="know"><h3>먼저 알아야 할 지식</h3>지수 연산을 수행할 때는 밑을 동일한 소수의 거듭제곱으로 변환하는 것이 기본입니다. $4 = 2^2$ 이므로 밑을 $2$로 통일하여 식을 정리할 수 있습니다.</div><div class="q" data-ans="2" data-exp="$4 = 2^2$ 이므로 밑 $2$의 거듭제곱으로 나타낼 때 지수는 $2$입니다."><div class="lvl">지수 디딤돌 1</div><div class="stem">밑을 통일하기 위해 $4$를 $2$의 거듭제곱으로 변환할 때, $4 = 2^k$를 만족하는 지수 $k$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -227,7 +227,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [초등~중등 연계] 분수와 음수 지수의 곱셈</h2><div class="know"><h3>먼저 알아야 할 지식</h3>거듭제곱의 거듭제곱 $(a^m)^n = a^{m \times n}$ 은 지수끼리 곱해줍니다. 초등학교에서 배운 분수 곱셈 $2 \times \frac{1}{2} = 1$에 마이너스 부호가 붙으면 지수는 $-1$이 됩니다.</div><div class="q" data-ans="3" data-exp="$2 \times \left(-\frac{1}{2}\right) = -\frac{2}{2} = -1$ 입니다. 따라서 $4^{-\frac{1}{2}} = 2^{-1}$ 로 깔끔하게 바뀝니다."><div class="lvl">초등~중등 디딤돌 2</div><div class="stem">초등학교 분수 곱셈: $2 \times \frac{1}{2} = 1$ 입니다. 여기에 마이너스 부호 $-$를 붙인 수 $-1$은 보기 중 몇 번일까요?</div><div class="opts"><div class="opt"><span class="n">1</span>$-3$</div><div class="opt"><span class="n">2</span>$-2$</div><div class="opt"><span class="n">3</span>$-1$</div><div class="opt"><span class="n">4</span>$0$</div><div class="opt"><span class="n">5</span>$1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [지수법칙의 확장] 거듭제곱의 거듭제곱과 음수 지수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>지수법칙 $(a^m)^n = a^{m \times n}$에 의해 거듭제곱의 거듭제곱은 지수끼리 곱합니다. 따라서 $(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$ 이 성립합니다.</div><div class="q" data-ans="3" data-exp="$(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$ 입니다."><div class="lvl">지수 곱셈 디딤돌 2</div><div class="stem">지수법칙 $(a^m)^n = a^{mn}$에 따라 $4^{-\frac{1}{2}} = (2^2)^{-\frac{1}{2}}$ 에서 지수끼리의 곱 $2 \times \left(-\frac{1}{2}\right)$ 의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-3$</div><div class="opt"><span class="n">2</span>$-2$</div><div class="opt"><span class="n">3</span>$-1$</div><div class="opt"><span class="n">4</span>$0$</div><div class="opt"><span class="n">5</span>$1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -238,7 +238,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [초등 분수 연계] 밑이 같은 지수의 덧셈과 분수 뺄셈</h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑이 2로 같으므로 지수끼리 더합니다: $\frac{3}{2} + (-1) = \frac{3}{2} - 1$. 초등학교 5학년 분수 뺄셈: 1은 $\frac{2}{2}$이므로 $\frac{3}{2} - \frac{2}{2} = \frac{1}{2}$ 입니다.</div><div class="q" data-ans="3" data-exp="$\frac{3}{2} - 1 = \frac{3}{2} - \frac{2}{2} = \frac{1}{2}$ 입니다. 분자 1과 분모 2의 합은 $1+2=3$ 입니다."><div class="lvl">초등 분수 디딤돌 3</div><div class="stem">초등학교 분수의 뺄셈 $\frac{3}{2} - 1 = \frac{1}{2}$ 에서 분자 1과 분모 2의 합 $1 + 2$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [지수 덧셈 법칙] 밑이 같은 거듭제곱의 곱셈</h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑이 같은 두 거듭제곱의 곱은 지수끼리 더합니다: $a^p \times a^q = a^{p+q}$. 따라서 $2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2} + (-1)} = 2^{\frac{1}{2}}$ 입니다.</div><div class="q" data-ans="3" data-exp="밑이 같으므로 지수끼리 더하면 $\frac{3}{2} + (-1) = \frac{3}{2} - \frac{2}{2} = \frac{1}{2}$ 입니다."><div class="lvl">지수 덧셈 디딤돌 3</div><div class="stem">지수법칙 $a^p \times a^q = a^{p+q}$를 적용할 때, $2^{\frac{3}{2}} \times 2^{-1}$의 최종 지수 덧셈 $\frac{3}{2} + (-1)$의 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\frac{3}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -599,8 +599,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270901';
-window._offlineBuildTime = '2026-09-28T17:39:27.530335+00:00';
-window._offlineHash = '1bea8250';
+window._offlineBuildTime = '2026-09-28T18:10:18.788875+00:00';
+window._offlineHash = '9b7d9c27';
 window._offlineVersion = 'v2026.09.29';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270901.html';
 
@@ -625,8 +625,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270901';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T17:39:27.530335+00:00';
-  var localHash = window._offlineHash || '1bea8250';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T18:10:18.788875+00:00';
+  var localHash = window._offlineHash || '9b7d9c27';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270901.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

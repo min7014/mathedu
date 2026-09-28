@@ -146,8 +146,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270908.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270908">
-<meta name="mathedu-offline-build-time" content="2026-09-28T17:39:27.530335+00:00">
-<meta name="mathedu-offline-hash" content="46a8a59a">
+<meta name="mathedu-offline-build-time" content="2026-09-28T18:10:18.788875+00:00">
+<meta name="mathedu-offline-hash" content="a2d67dee">
 <meta name="mathedu-version-label" content="v2026.09.29">
 
 </head><body><div class="wrap">
@@ -216,7 +216,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$a_{n+1} = 2a_n$</b> — 다음 항으로 갈 때마다 2배씩 곱해지는 등비수열</div><div><b>$\dfrac{a_8}{a_6} = r^{8-6} = r^2$</b> — 항의 나눗셈은 공비의 거듭제곱</div><div><b>$r = 4$</b> — 조건에서 도출된 공비</div><div><b>$r^2 = 16$</b> — 구하는 값 a_8 / a_6의 결과</div></div>
-<h2>🔰 1단계 · [초등 연계] 2배씩 늘어나는 규칙 직관</h2><div class="know"><h3>먼저 알아야 할 지식</h3>수열이 매번 $r$씩 곱해집니다. 제6번째 수에서 제8번째 수까지 가려면 $r$을 몇 번 곱해야 할까요? $8 - 6 = 2$번 곱해야 합니다.</div><div class="q" data-ans="2" data-exp="$8 - 6 = 2$ 이므로 $\frac{a_8}{a_6} = r^2$ 입니다."><div class="lvl">초등 규칙 디딤돌 1</div><div class="stem">초등학교 뺄셈: 6번째에서 8번째까지 가기 위해 곱해야 하는 횟수 $8 - 6$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 1단계 · [등비수열의 구조] 일반항과 항의 비례 성질</h2><div class="know"><h3>먼저 알아야 할 지식</h3>등비수열의 일반항은 $a_n = a_1 r^{n-1}$이므로, 임의의 두 항의 비는 공비 $r$의 거듭제곱으로 나타납니다: $\frac{a_m}{a_k} = r^{m-k}$. 따라서 $\frac{a_8}{a_6} = r^{8-6} = r^2$ 입니다.</div><div class="q" data-ans="2" data-exp="$\frac{a_8}{a_6} = \frac{a_1 r^7}{a_1 r^5} = r^{8-6} = r^2$ 입니다."><div class="lvl">등비 비례 디딤돌 1</div><div class="stem">등비수열의 두 항의 비 $\frac{a_8}{a_6}$를 공비 $r$로 올바르게 표현한 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>$r$</div><div class="opt"><span class="n">2</span>$r^2$</div><div class="opt"><span class="n">3</span>$r^3$</div><div class="opt"><span class="n">4</span>$r^4$</div><div class="opt"><span class="n">5</span>$r^8$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -227,7 +227,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [초등~중등 연계] 공비 $r$의 값 파악하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>조건식 $a_{n+1} = 4a_n$ 은 다음 수로 갈 때마다 항상 4배가 된다는 뜻입니다. 따라서 한 걸음 갈 때 곱해지는 수(공비 $r$)는 4입니다.</div><div class="q" data-ans="4" data-exp="공비는 $r = 4$ 입니다."><div class="lvl">중등 디딤돌 2</div><div class="stem">다음 수로 갈 때마다 4배씩 늘어날 때, 곱해지는 숫자 $r$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [점화식의 해석] 연속한 두 항의 비와 공비</h2><div class="know"><h3>먼저 알아야 할 지식</h3>조건식 $a_{n+1} = 4a_n$ 은 이전 항에 4를 곱하면 다음 항이 된다는 뜻이므로, 공비는 $r = \frac{a_{n+1}}{a_n} = 4$ 입니다.</div><div class="q" data-ans="4" data-exp="점화식 $a_{n+1} = 4a_n$ 에서 공비는 $r = 4$ 입니다."><div class="lvl">공비 결정 디딤돌 2</div><div class="stem">모든 자연수 $n$에 대하여 $a_{n+1} = 4a_n$을 만족할 때, 이 등비수열의 공비 $r$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -238,7 +238,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [초등 구구단 연계] $r^2$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>공비가 4이므로 두 번 곱하면 $4 \times 4 = 16$ 입니다.</div><div class="q" data-ans="3" data-exp="$4 \times 4 = 16$ 입니다."><div class="lvl">초등 구구단 디딤돌 3</div><div class="stem">초등학교 구구단 4단: $4 \times 4$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$14$</div><div class="opt"><span class="n">2</span>$15$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$17$</div><div class="opt"><span class="n">5</span>$18$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [두 항의 비 계산] 거듭제곱의 연산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>1단계에서 도출한 $\frac{a_8}{a_6} = r^2$에 2단계에서 구한 공비 $r = 4$를 대입하면 $4^2 = 16$을 얻습니다.</div><div class="q" data-ans="3" data-exp="$r = 4$ 이므로 $r^2 = 4^2 = 16$ 입니다."><div class="lvl">비율 완성 디딤돌 3</div><div class="stem">공비가 $r = 4$일 때, $\frac{a_8}{a_6} = r^2$의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$14$</div><div class="opt"><span class="n">2</span>$15$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$17$</div><div class="opt"><span class="n">5</span>$18$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -599,8 +599,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270908';
-window._offlineBuildTime = '2026-09-28T17:39:27.530335+00:00';
-window._offlineHash = '46a8a59a';
+window._offlineBuildTime = '2026-09-28T18:10:18.788875+00:00';
+window._offlineHash = 'a2d67dee';
 window._offlineVersion = 'v2026.09.29';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270908.html';
 
@@ -625,8 +625,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270908';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T17:39:27.530335+00:00';
-  var localHash = window._offlineHash || '46a8a59a';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T18:10:18.788875+00:00';
+  var localHash = window._offlineHash || 'a2d67dee';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270908.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

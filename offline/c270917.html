@@ -146,8 +146,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270917.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270917">
-<meta name="mathedu-offline-build-time" content="2026-09-28T17:39:27.530335+00:00">
-<meta name="mathedu-offline-hash" content="f4f1f00f">
+<meta name="mathedu-offline-build-time" content="2026-09-28T18:10:18.788875+00:00">
+<meta name="mathedu-offline-hash" content="df11fe1b">
 <meta name="mathedu-version-label" content="v2026.09.29">
 
 </head><body><div class="wrap">
@@ -216,7 +216,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f'(x) = 6x^2 - 2x$</b> — 주어진 도함수</div><div><b>$f(x) = 2x^3 - x^2 + C$</b> — 부정적분을 통해 구한 다항함수</div><div><b>$f(0) = 10 \implies C = 10$</b> — 초기조건으로 적분상수 결정</div><div><b>$f(1) = 2(1) - 1 + 10 = 11$</b> — x=1 대입 계산 결과</div></div>
-<h2>🔰 1단계 · [초등~중등 연계] 미분의 거꾸로 계산(부정적분)</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$2x^3$을 미분할 때 지수 3이 앞으로 내려와 곱해집니다: $2 \times 3 = 6$.</div><div class="q" data-ans="3" data-exp="$(2x^3)&#x27; = 2 \times 3x^2 = 6x^2$ 입니다."><div class="lvl">초등~중등 디딤돌 1</div><div class="stem">초등학교 구구단 2단: $2 \times 3$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$4$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$6$</div><div class="opt"><span class="n">4</span>$7$</div><div class="opt"><span class="n">5</span>$8$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 1단계 · [부정적분 공식] 거듭제곱의 역도함수 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>부정적분 공식 $\int x^n\,dx = \frac{1}{n+1}x^{n+1} + C$에 의해, $\int (6x^2 - 2x)\,dx = 6 \left(\frac{1}{3}x^3\right) - 2\left(\frac{1}{2}x^2\right) + C = 2x^3 - x^2 + C$ 입니다.</div><div class="q" data-ans="3" data-exp="$\int 6x^2\,dx = 2x^3$ 이므로 삼차항의 계수는 $2$ 입니다."><div class="lvl">부정적분 디딤돌 1</div><div class="stem">도함수 $f'(x) = 6x^2 - 2x$를 부정적분하여 얻은 다항식 $f(x)$의 최고차항($x^3$)의 계수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$0$</div><div class="opt"><span class="n">2</span>$1$</div><div class="opt"><span class="n">3</span>$2$</div><div class="opt"><span class="n">4</span>$3$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -227,7 +227,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [초등 사칙연산 연계] $f(0)=10$으로 적분상수 $C$ 결정하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>식 $2x^3 - x^2 + C$에 $x=0$을 넣으면 $0 - 0 + C = C$ 입니다. 문제에서 $f(0) = 10$이므로 $C = 10$ 입니다.</div><div class="q" data-ans="3" data-exp="$f(0) = 2(0) - (0) + C = C = 10$ 입니다."><div class="lvl">초등 대입 디딤돌 2</div><div class="stem">$f(0) = 10$ 일 때, 그대로 남는 상수 $C$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$8$</div><div class="opt"><span class="n">2</span>$9$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [적분상수의 결정] 초기조건 $f(0)$의 대입</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(x) = 2x^3 - x^2 + C$에 $x=0$을 대입하면 $f(0) = 0 - 0 + C = C$ 입니다. 문제에서 $f(0) = 10$이라 주어졌으므로 적분상수 $C = 10$으로 확정됩니다.</div><div class="q" data-ans="3" data-exp="$f(0) = C = 10$ 이므로 적분상수는 $10$ 입니다."><div class="lvl">적분상수 디딤돌 2</div><div class="stem">함수 $f(x) = 2x^3 - x^2 + C$에서 초기조건 $f(0) = 10$을 만족하는 적분상수 $C$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$8$</div><div class="opt"><span class="n">2</span>$9$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -238,7 +238,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [초등 덧셈뺄셈 연계] $f(1)$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(1) = 2 - 1 + 10$. $2 - 1 = 1$, $1 + 10 = 11$ 입니다.</div><div class="q" data-ans="3" data-exp="$2 - 1 = 1$, $1 + 10 = 11$ 입니다."><div class="lvl">초등 덧셈뺄셈 디딤돌 3</div><div class="stem">초등학교 덧셈과 뺄셈: $2 - 1 + 10$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [함숫값 산출] 완성된 원함수에 $x=1$ 대입</h2><div class="know"><h3>먼저 알아야 할 지식</h3>완성된 함수 $f(x) = 2x^3 - x^2 + 10$에 $x=1$을 대입하면 $f(1) = 2(1)^3 - (1)^2 + 10 = 2 - 1 + 10 = 11$을 얻습니다.</div><div class="q" data-ans="3" data-exp="$f(1) = 2(1)^3 - 1^2 + 10 = 2 - 1 + 10 = 11$ 입니다."><div class="lvl">함숫값 계산 완성 디딤돌 3</div><div class="stem">완성된 함수 $f(x) = 2x^3 - x^2 + 10$에 $x=1$을 대입한 $f(1)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -601,8 +601,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270917';
-window._offlineBuildTime = '2026-09-28T17:39:27.530335+00:00';
-window._offlineHash = 'f4f1f00f';
+window._offlineBuildTime = '2026-09-28T18:10:18.788875+00:00';
+window._offlineHash = 'df11fe1b';
 window._offlineVersion = 'v2026.09.29';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270917.html';
 
@@ -627,8 +627,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270917';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T17:39:27.530335+00:00';
-  var localHash = window._offlineHash || 'f4f1f00f';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T18:10:18.788875+00:00';
+  var localHash = window._offlineHash || 'df11fe1b';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270917.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

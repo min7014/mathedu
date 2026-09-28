@@ -146,8 +146,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270902.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270902">
-<meta name="mathedu-offline-build-time" content="2026-09-28T17:39:27.530335+00:00">
-<meta name="mathedu-offline-hash" content="121aa86f">
+<meta name="mathedu-offline-build-time" content="2026-09-28T18:10:18.788875+00:00">
+<meta name="mathedu-offline-hash" content="e16f78de">
 <meta name="mathedu-version-label" content="v2026.09.29">
 
 </head><body><div class="wrap">
@@ -216,7 +216,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>• <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>• <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>• <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>• <b>[수학적 의미]</b> 미분은 형식적인 수식 연산이 아니라, 두 점 사이의 할선이 한 점에서의 접선으로 녹아드는 기하학적 수렴 과정임을 하단 자료로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\lim_{x \to a} \dfrac{f(x)-f(a)}{x-a} = f'(a)$</b> — x=a에서의 순간변화율(미분계수)의 정의</div><div><b>$(x^n)' = n x^{n-1}$</b> — 거듭제곱 함수의 기본 미분 공식</div><div><b>$f'(x) = 6x^2 - 1$</b> — 함수 f(x)를 미분한 도함수</div><div><b>$f'(2) = 6(4) - 1 = 23$</b> — x=2에서의 미분계수 계산 결과</div></div>
-<h2>🔰 1단계 · [초등 연계] 거듭제곱의 계산과 식의 값 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 같은 수를 곱하는 거듭제곱을 배웁니다. $x = 2$일 때 $2^3 = 2 \times 2 \times 2 = 8$ 입니다. 여기에 2를 한 번 더 곱하면 $2 \times 8 = 16$이 됩니다.</div><div class="q" data-ans="3" data-exp="$2 \times (2^3) = 2 \times 8 = 16$ 입니다."><div class="lvl">초등 디딤돌 1</div><div class="stem">$x = 2$일 때, $2 \times (2 \times 2 \times 2)$ 의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$14$</div><div class="opt"><span class="n">2</span>$15$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$17$</div><div class="opt"><span class="n">5</span>$18$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 1단계 · [미분계수의 정의] 순간변화율과 접선의 기울기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>평균변화율 $\frac{f(x)-f(a)}{x-a}$의 극한 $\lim_{x \to a}\frac{f(x)-f(a)}{x-a}$는 곡선 $y=f(x)$ 위의 점 $(a, f(a))$에서의 접선의 기울기를 뜻하며, 기호로 $f'(a)$로 나타냅니다.</div><div class="q" data-ans="3" data-exp="$\lim_{x \to 2}\frac{f(x)-f(2)}{x-2}$는 $x=2$에서의 미분계수 $f'(2)$의 정의입니다."><div class="lvl">미분 정의 디딤돌 1</div><div class="stem">극한식 $\lim_{x \to 2} \frac{f(x)-f(2)}{x-2}$가 나타내는 수학적 개념은 함수 $f(x)$의 어느 지점에서의 미분계수인가요?</div><div class="opts"><div class="opt"><span class="n">1</span>$f'(0)$</div><div class="opt"><span class="n">2</span>$f'(1)$</div><div class="opt"><span class="n">3</span>$f'(2)$</div><div class="opt"><span class="n">4</span>$f'(3)$</div><div class="opt"><span class="n">5</span>$f'(4)$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -227,7 +227,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [중등~고등 연계] 다항함수의 도함수 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>도함수 $f&#x27;(x) = 6x^2 - 1$에 $x = 1$을 넣으면 $6 \times (1 \times 1) - 1 = 6 - 1 = 5$ 입니다.</div><div class="q" data-ans="5" data-exp="$f&#x27;(1) = 6(1^2) - 1 = 6 - 1 = 5$ 입니다."><div class="lvl">중등~고등 디딤돌 2</div><div class="stem">초등학교 뺄셈: $6 - 1$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [도함수 공식] 거듭제곱의 미분법</h2><div class="know"><h3>먼저 알아야 할 지식</h3>자연수 $n$에 대하여 $(x^n)' = n x^{n-1}$이 성립합니다. 따라서 삼차함수 $f(x) = 2x^3 - x - 4$의 도함수는 $f'(x) = 2 \times (3x^2) - 1 = 6x^2 - 1$ 입니다.</div><div class="q" data-ans="5" data-exp="$(2x^3)' = 2 \times 3x^2 = 6x^2$ 이므로 이차항의 계수는 $6$ 입니다."><div class="lvl">도함수 계산 디딤돌 2</div><div class="stem">함수 $f(x) = 2x^3 - x - 4$의 도함수 $f'(x) = a x^2 + b$에서 이차항의 계수 $a$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$3$</div><div class="opt"><span class="n">3</span>$4$</div><div class="opt"><span class="n">4</span>$5$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -238,7 +238,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [고등 연계] 미분계수 정의 적용과 최종 계산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>도함수에 $x = 2$를 대입합니다: $6 \times (2^2) - 1 = 6 \times 4 - 1$. 구구단 6단: $6 \times 4 = 24$, 여기서 1을 빼면 23입니다.</div><div class="q" data-ans="3" data-exp="$6 \times 4 - 1 = 24 - 1 = 23$ 입니다."><div class="lvl">고등 디딤돌 3</div><div class="stem">구구단 6단과 뺄셈: $6 \times 4 - 1$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$21$</div><div class="opt"><span class="n">2</span>$22$</div><div class="opt"><span class="n">3</span>$23$</div><div class="opt"><span class="n">4</span>$24$</div><div class="opt"><span class="n">5</span>$25$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [미분계수 계산] $x=2$ 대입과 접선 기울기 산출</h2><div class="know"><h3>먼저 알아야 할 지식</h3>도함수 $f'(x) = 6x^2 - 1$에 $x=2$를 대입하면 $f'(2) = 6 \times (2)^2 - 1 = 6 \times 4 - 1 = 23$을 얻습니다.</div><div class="q" data-ans="3" data-exp="$f'(2) = 6 \times 2^2 - 1 = 24 - 1 = 23$ 입니다."><div class="lvl">접선 기울기 완성 디딤돌 3</div><div class="stem">도함수 $f'(x) = 6x^2 - 1$에 $x=2$를 대입하여 얻는 미분계수 $f'(2) = 6 \times 2^2 - 1$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$21$</div><div class="opt"><span class="n">2</span>$22$</div><div class="opt"><span class="n">3</span>$23$</div><div class="opt"><span class="n">4</span>$24$</div><div class="opt"><span class="n">5</span>$25$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -599,8 +599,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270902';
-window._offlineBuildTime = '2026-09-28T17:39:27.530335+00:00';
-window._offlineHash = '121aa86f';
+window._offlineBuildTime = '2026-09-28T18:10:18.788875+00:00';
+window._offlineHash = 'e16f78de';
 window._offlineVersion = 'v2026.09.29';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270902.html';
 
@@ -625,8 +625,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270902';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T17:39:27.530335+00:00';
-  var localHash = window._offlineHash || '121aa86f';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T18:10:18.788875+00:00';
+  var localHash = window._offlineHash || 'e16f78de';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270902.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
