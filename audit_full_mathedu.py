@@ -170,8 +170,8 @@ hub_files = [f for f in board_quizzes if os.path.basename(f) in HUB_PAGES]
 for bpath in step_quizzes:
     with open(bpath, "r", encoding="utf-8") as f:
         txt = f.read()
-    qs = re.findall(r'<div[^>]*class=["\'][^"\']*?\bq\b[^"\']*?["\']', txt)
-    opts = re.findall(r'<div[^>]*class=["\'][^"\']*?\bopt\b[^"\']*?["\']', txt)
+    qs = re.findall(r'<div[^>]*class=["\'](?:[^"\']*\s)?q(?:\s[^"\']*)?["\']', txt)
+    opts = re.findall(r'<div[^>]*class=["\'](?:[^"\']*\s)?opt(?:\s[^"\']*)?["\']', txt)
     ans_list = re.findall(r'data-ans=["\'](\d+)["\']', txt)
     exp_list = re.findall(r'data-exp=["\']', txt)
     
@@ -196,7 +196,7 @@ log_result(section, f"총 {len(step_quizzes)}개 인터랙티브 퀴즈 문항 �
 log_result(section, f"총 {len(hub_files)}개 모의평가 허브 목차 페이지 검사", "PASS",
            f"2026_hub.html, 6wol_mopyung.html 종합 허브 링크 정상")
 
-log_result(section, "min7014 수학자료실 공식 연계율", "PASS" if min7014_link_count >= 78 else "WARN",
+log_result(section, "min7014 수학자료실 공식 연계율", "PASS" if min7014_link_count >= len(board_quizzes) else "WARN",
            f"{min7014_link_count}/{len(board_quizzes)}개 전체 페이지에 min7014 자료실·GeoGebra 증명 연계 완료 ({round(min7014_link_count/len(board_quizzes)*100)}%)")
 
 # ----------------------------------------------------
