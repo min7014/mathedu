@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>실시간 수업 대시보드 · min7014 mathedu</title>
@@ -27,14 +29,18 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   color: var(--txt);
-  line-height: 1.6;
-  font-family: "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  line-height: 1.65;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background:
-    radial-gradient(circle at 12% 8%, rgba(124,196,255,.35), transparent 42%),
-    radial-gradient(circle at 88% 12%, rgba(167,139,250,.32), transparent 40%),
-    radial-gradient(circle at 50% 55%, rgba(94,234,212,.18), transparent 45%),
-    radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
-    linear-gradient(160deg, #0a0d1a 0%, #141833 50%, #0a0d1a 100%);
+    radial-gradient(circle at 14% 12%, rgba(56, 189, 248, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 86% 16%, rgba(129, 140, 248, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.10) 0%, transparent 50%),
+    radial-gradient(circle at 25% 85%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(175deg, #050811 0%, #0b1022 45%, #060914 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 30px 30px, 100% 100%;
   background-attachment: fixed;
   min-height: 100vh;
 }
