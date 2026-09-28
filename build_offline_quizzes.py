@@ -657,16 +657,38 @@ h1 {{
 .btn:hover {{
   transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,.6);
 }}
+.lang-switcher {{
+  display: inline-flex; align-items: center; background: rgba(15,23,42,0.75);
+  border: 1px solid rgba(124,196,255,0.35); border-radius: 20px; padding: 2px 4px; gap: 3px;
+}}
+.lang-btn {{
+  background: transparent; border: none; color: var(--sub); font-family: inherit;
+  font-size: 0.78rem; font-weight: 800; padding: 4px 9px; border-radius: 14px; cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+}}
+.lang-btn:hover {{ color: #ffffff; background: rgba(255,255,255,0.08); }}
+.lang-btn.active {{
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
+  box-shadow: 0 2px 10px rgba(56,189,248,0.45);
+}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>📦 min7014 mathedu 오프라인 전체 문제 보관함</h1>
-  <p class="lead">인터넷 접속 없이 언제 어디서나 풀이할 수 있는 오프라인 독립 실행형 수학 퀴즈 모음입니다.</p>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <a href="../index.html" style="color:var(--accent);text-decoration:none;font-weight:700;font-size:0.9rem;display:inline-flex;align-items:center;gap:6px">⬅️ <span id="txtBackLink">mathedu 메인으로</span></a>
+    <div class="lang-switcher" id="langSwitcher" title="Language">
+      <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setOfflineLang('ko')">🇰🇷 KO</button>
+      <button type="button" class="lang-btn" data-lang-btn="en" onclick="setOfflineLang('en')">🌐 EN</button>
+    </div>
+  </div>
+
+  <h1 id="txtTitle">📦 min7014 mathedu 오프라인 전체 문제 보관함</h1>
+  <p class="lead" id="txtLead">인터넷 접속 없이 언제 어디서나 풀이할 수 있는 오프라인 독립 실행형 수학 퀴즈 모음입니다.</p>
 
   <div class="banner">
-    <div style="font-weight:700;color:var(--good);margin-bottom:4px">💡 오프라인 단독 파일 안내</div>
-    <div style="font-size:0.88rem;color:#cbd5e1">
+    <div style="font-weight:700;color:var(--good);margin-bottom:4px" id="txtBannerTitle">💡 오프라인 단독 파일 안내</div>
+    <div style="font-size:0.88rem;color:#cbd5e1" id="txtBannerBody">
       • 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>
       • 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 민은기 선생님 수학자료실 링크가 포함되어 있습니다.<br>
       • 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>
@@ -681,18 +703,58 @@ h1 {{
       <div>
         <a href="{r['filename']}" class="card-title">📘 {r['title']}</a>
         <div class="card-meta">
-          <span>고유 슬러그: <code>{r['slug']}</code></span> · 
-          <a href="{r['original_online_url']}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">온라인 원본 링크 ➔</a>
+          <span><span class="txt-slug-prefix">고유 슬러그: </span><code>{r['slug']}</code></span> · 
+          <a href="{r['original_online_url']}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
         </div>
       </div>
       <div>
-        <a href="{r['filename']}" class="btn" download>📥 다운로드</a>
-        <a href="{r['filename']}" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px">풀기 ➔</a>
+        <a href="{r['filename']}" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
+        <a href="{r['filename']}" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
 """
-    index_html += """  </div>
+    index_html += f"""  </div>
 </div>
+<script>
+function setOfflineLang(lang) {{
+  try {{ localStorage.setItem('mathedu_lang', lang); }} catch(e){{}}
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {{
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  }});
+  var isEn = (lang === 'en');
+  var elTitle = document.getElementById('txtTitle');
+  var elLead = document.getElementById('txtLead');
+  var elBannerTitle = document.getElementById('txtBannerTitle');
+  var elBannerBody = document.getElementById('txtBannerBody');
+  var elBack = document.getElementById('txtBackLink');
+  if (elTitle) elTitle.textContent = isEn ? '📦 min7014 mathedu Standalone Offline Problem Archive' : '📦 min7014 mathedu 오프라인 전체 문제 보관함';
+  if (elLead) elLead.textContent = isEn ? 'Collection of standalone, self-contained interactive math quizzes that run completely offline without internet.' : '인터넷 접속 없이 언제 어디서나 풀이할 수 있는 오프라인 독립 실행형 수학 퀴즈 모음입니다.';
+  if (elBannerTitle) elBannerTitle.textContent = isEn ? '💡 About Offline Standalone Quizzes' : '💡 오프라인 단독 파일 안내';
+  if (elBack) elBack.textContent = isEn ? 'Back to mathedu Main' : 'mathedu 메인으로';
+  if (elBannerBody) {{
+    elBannerBody.innerHTML = isEn ?
+      '• Each problem is a <b>self-contained single-file HTML</b> bundle with embedded images and interactive step-by-step scoring.<br>' +
+      '• Every quiz links back to its official online URL and Teacher Min Eun-gi’s mathematical research lab.<br>' +
+      '• When connected to the internet, it <b>automatically detects online updates</b> with options to download the newest version or continue offline.<br>' +
+      '• Total <b>{len(results)}</b> verified offline quizzes available.' :
+      '• 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>' +
+      '• 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 민은기 선생님 수학자료실 링크가 포함되어 있습니다.<br>' +
+      '• 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>' +
+      '• 총 <b>{len(results)}개</b>의 문제 파일이 준비되어 있습니다.';
+  }}
+  document.querySelectorAll('.btn-download-text').forEach(function(el) {{ el.textContent = isEn ? '📥 Download' : '📥 다운로드'; }});
+  document.querySelectorAll('.btn-solve-text').forEach(function(el) {{ el.textContent = isEn ? 'Solve ➔' : '풀기 ➔'; }});
+  document.querySelectorAll('.link-online-text').forEach(function(el) {{ el.textContent = isEn ? 'Online Original ➔' : '온라인 원본 링크 ➔'; }});
+  document.querySelectorAll('.txt-slug-prefix').forEach(function(el) {{ el.textContent = isEn ? 'Slug: ' : '고유 슬러그: '; }});
+}}
+var curLang = 'ko';
+try {{ curLang = localStorage.getItem('mathedu_lang') || 'ko'; }} catch(e){{}}
+var p = new URLSearchParams(window.location.search);
+if (p.get('lang') === 'en' || p.get('lang') === 'ko') curLang = p.get('lang');
+setOfflineLang(curLang);
+</script>
 </body>
 </html>
 """

@@ -24,6 +24,7 @@ window.MathJax = {
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
 <script src="mathedu-auth.js"></script>
 <script src="mathedu-gamification.js"></script>
+<script src="mathedu-i18n.js"></script>
 <style>
 /* ══════════════════════════════════════════════════════════════
    💎 min7014 mathedu · LUXURY CELESTIAL DESIGN SYSTEM (2026)
@@ -175,6 +176,44 @@ body {
   color: #050811;
   border-color: transparent;
   box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+}
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(124, 196, 255, 0.35);
+  border-radius: 20px;
+  padding: 2px 4px;
+  gap: 3px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin-left: 6px;
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--sub);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 9px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: -0.01em;
+}
+.lang-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.lang-btn.active {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  color: #050811;
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.45);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1092,13 +1131,19 @@ body {
       </div>
     </a>
     <div class="nav-menu">
-      <a href="#quizFilterBar" class="nav-link">📚 퀴즈 모음</a>
-      <a href="offline/index.html" class="nav-link" style="color:#7cc4ff;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.1)" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함">📦 오프라인 보관함</a>
-      <button type="button" class="nav-link" onclick="openMin7014ExplorerModal()" style="background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);color:#7cc4ff;cursor:pointer;font-family:inherit">🌐 min7014 기하 탐색관</button>
-      <button type="button" class="nav-link" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" style="background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.35);color:#fde68a;cursor:pointer;font-family:inherit">🏆 나의 업적</button>
-      <a href="create.html" class="nav-link nav-link-cta">✨ 문제 출제 <span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:2px">회원전용</span></a>
-      <a href="dashboard.html" class="nav-link">📊 수업 대시보드</a>
-      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-link">🌐 min7014 홈</a>
+      <a href="#quizFilterBar" class="nav-link" data-i18n="nav.allQuizzes">📚 퀴즈 모음</a>
+      <a href="offline/index.html" class="nav-link" style="color:#7cc4ff;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.1)" data-i18n-title="nav.offlineVaultTitle" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함" data-i18n="nav.offlineVault">📦 오프라인 보관함</a>
+      <button type="button" class="nav-link" onclick="openMin7014ExplorerModal()" style="background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);color:#7cc4ff;cursor:pointer;font-family:inherit" data-i18n="nav.minExplorer">🌐 min7014 기하 탐색관</button>
+      <button type="button" class="nav-link" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" style="background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.35);color:#fde68a;cursor:pointer;font-family:inherit" data-i18n="nav.myBadges">🏆 나의 업적</button>
+      <a href="create.html" class="nav-link nav-link-cta"><span data-i18n="nav.createQuiz">✨ 문제 출제</span> <span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:2px" data-i18n="nav.membersOnly">회원전용</span></a>
+      <a href="dashboard.html" class="nav-link" data-i18n="nav.dashboard">📊 수업 대시보드</a>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-link" data-i18n="nav.minHome">🌐 min7014 홈</a>
+      
+      <!-- 🌐 글로벌 언어 전환기 (KO / EN) -->
+      <div class="lang-switcher" id="langSwitcher" title="언어 선택 / Language">
+        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">🇰🇷 KO</button>
+        <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">🌐 EN</button>
+      </div>
     </div>
   </nav>
 
@@ -1106,45 +1151,44 @@ body {
   <header class="brand-hero-card">
     <div class="brand-hero-glow"></div>
     <div class="brand-emblem-wrap">
-      <div class="brand-emblem-frame" onclick="toggleMathStory()" title="클릭하여 단델린 구의 기하학적 원리 보기">
+      <div class="brand-emblem-frame" onclick="toggleMathStory()" data-i18n-title="hero.emblemTitle" title="클릭하여 단델린 구의 기하학적 원리 보기">
         <img src="assets/logo_cropped.png" alt="min7014 단델린 구 시그니처 엠블럼">
         <div class="brand-emblem-caption">
-          <span class="brand-emblem-pill">📐 공식 엠블럼</span>
-          <span>Dandelin Spheres</span>
+          <span class="brand-emblem-pill" data-i18n="hero.emblemCaption">📐 공식 엠블럼</span>
+          <span data-i18n="hero.emblemSub">Dandelin Spheres</span>
         </div>
       </div>
     </div>
 
     <div class="brand-hero-text">
-      <div class="brand-badge-pill">✨ 기하와 대수의 시각화 · 수학 연구소 플랫폼</div>
+      <div class="brand-badge-pill" data-i18n="hero.badgePill">✨ 기하와 대수의 시각화 · 수학 연구소 플랫폼</div>
       <h1 class="brand-main-title">
-        <span class="math-lab">min7014</span><span class="math-sep">·</span><span class="math-hub">mathedu</span>
+        <span class="math-lab" data-i18n="hero.mainTitleLab">min7014</span><span class="math-sep">·</span><span class="math-hub" data-i18n="hero.mainTitleHub">mathedu</span>
       </h1>
-      <p class="brand-lead-desc">
+      <p class="brand-lead-desc" data-i18n-html="hero.leadDesc">
         단델린 구와 원뿔곡선의 기하학적 통찰을 담은 <b>가입 없는 인터랙티브 수학 플랫폼</b>
       </p>
 
       <div class="brand-pills-row">
-        <span class="pill-item">⚡ 학생: 무가입 5초 즉시 학습</span>
-        <span class="pill-item">🎯 0~5단계 개념 빌드업</span>
-        <a href="dashboard.html" class="pill-item" style="color:var(--txt);text-decoration:none">📊 실시간 교실 현황 분석 (stu1~ 익명 보호)</a>
-        <a href="offline/index.html" class="pill-item" style="background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4);color:#38bdf8;text-decoration:none">📦 100% 오프라인 다운로드</a>
-        <span class="pill-item" style="background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd">🔐 회원 전용 출제 & 배포</span>
+        <span class="pill-item" data-i18n="hero.pill1">⚡ 학생: 무가입 5초 즉시 학습</span>
+        <span class="pill-item" data-i18n="hero.pill2">🎯 0~5단계 개념 빌드업</span>
+        <a href="dashboard.html" class="pill-item" style="color:var(--txt);text-decoration:none" data-i18n="hero.pill3">📊 실시간 교실 현황 분석 (stu1~ 익명 보호)</a>
+        <a href="offline/index.html" class="pill-item" style="background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4);color:#38bdf8;text-decoration:none" data-i18n="hero.pill4">📦 100% 오프라인 다운로드</a>
+        <span class="pill-item" style="background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd" data-i18n="hero.pill5">🔐 회원 전용 출제 & 배포</span>
       </div>
 
       <div>
         <button class="story-btn" onclick="toggleMathStory()">
-          <span>💡</span> 엠블럼의 수학적 원리 (단델린의 구와 원뿔곡선) <span id="storyArrow">▼</span>
+          <span>💡</span> <span data-i18n="hero.storyBtn">엠블럼의 수학적 원리 (단델린의 구와 원뿔곡선)</span> <span id="storyArrow">▼</span>
         </button>
       </div>
 
       <div id="mathStoryDrawer" class="story-drawer" style="display:none;">
-        <h4>🔬 단델린의 구(Dandelin Spheres)와 원뿔곡선의 기하학적 증명</h4>
+        <h4 data-i18n="hero.storyDrawerTitle">🔬 단델린의 구(Dandelin Spheres)와 원뿔곡선의 기하학적 증명</h4>
         <p>
-          원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <b>단델린의 구</b>라고 합니다.<br>
-          구가 평면과 접하는 점($F_1, F_2$)이 바로 원뿔곡선의 <b>초점(Focus)</b>이 되며, 
-          곡선 위의 점에서 두 초점까지의 거리의 차(또는 합)가 일정함을 입체 기하학으로 우아하게 밝혀냅니다.<br>
-          <span style="color:var(--gold);font-weight:700;">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"</span> — <b>min7014 수학 교육</b>의 지향점입니다.
+          <span data-i18n-html="hero.storyDrawerP1">원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <b>단델린의 구</b>라고 합니다.</span><br>
+          <span data-i18n-html="hero.storyDrawerP2">구가 평면과 접하는 점($F_1, F_2$)이 바로 원뿔곡선의 <b>초점(Focus)</b>이 되며, 곡선 위의 점에서 두 초점까지의 거리의 차(또는 합)가 일정함을 입체 기하학으로 우아하게 밝혀냅니다.</span><br>
+          <span style="color:var(--gold);font-weight:700;" data-i18n="hero.storyDrawerQuote">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"</span> — <b data-i18n="hero.storyDrawerAuthor">min7014 수학 교육의 지향점입니다.</b>
         </p>
       </div>
 
@@ -1152,19 +1196,19 @@ body {
       <div class="brand-stats-grid">
         <div class="stat-cell">
           <div class="stat-num">3,400+</div>
-          <div class="stat-lbl">🏛️ 평생 수학 주제</div>
+          <div class="stat-lbl" data-i18n="hero.statTopics">🏛️ 평생 수학 주제</div>
         </div>
         <div class="stat-cell">
           <div class="stat-num">1,087+</div>
-          <div class="stat-lbl">📐 GeoGebra &amp; PDF 증명</div>
+          <div class="stat-lbl" data-i18n="hero.statAssets">📐 GeoGebra &amp; PDF 증명</div>
         </div>
         <div class="stat-cell">
           <div class="stat-num">65개</div>
-          <div class="stat-lbl">🎯 수능·모평 디딤돌 퀴즈</div>
+          <div class="stat-lbl" data-i18n="hero.statQuizzes">🎯 수능·모평 디딤돌 퀴즈</div>
         </div>
         <div class="stat-cell">
           <div class="stat-num">100%</div>
-          <div class="stat-lbl">⚡ 무결성 오프라인 &amp; 관제</div>
+          <div class="stat-lbl" data-i18n="hero.statRigor">⚡ 무결성 오프라인 &amp; 관제</div>
         </div>
       </div>
     </div>
@@ -1207,18 +1251,18 @@ body {
         <img src="assets/favicon.png" alt="min7014" style="width:100%;height:100%;object-fit:contain">
       </div>
       <div>
-        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.2);border:1px solid rgba(56,189,248,.4);color:#38bdf8;padding:2px 10px;border-radius:12px;font-size:0.74rem;font-weight:800;margin-bottom:4px">
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.2);border:1px solid rgba(56,189,248,.4);color:#38bdf8;padding:2px 10px;border-radius:12px;font-size:0.74rem;font-weight:800;margin-bottom:4px" data-i18n="todayGgb.tag">
           💡 오늘의 추천 동적 기하 (min7014 수학자료실)
         </div>
-        <div class="today-ggb-title" id="todayGgbTitle">타원에서의 빛 반사 (Reflection of Light on an Ellipse)</div>
-        <div class="today-ggb-desc" id="todayGgbDesc">한 초점에서 나온 빛은 타원에 반사되어 다른 초점을 반드시 통과합니다. GeoGebra 앱렛으로 초점을 직접 끌어보며 기하학적 궤적을 확인하세요.</div>
+        <div class="today-ggb-title" id="todayGgbTitle" data-i18n="todayGgb.title">타원에서의 빛 반사 (Reflection of Light on an Ellipse)</div>
+        <div class="today-ggb-desc" id="todayGgbDesc" data-i18n="todayGgb.desc">한 초점에서 나온 빛은 타원에 반사되어 다른 초점을 반드시 통과합니다. GeoGebra 앱렛으로 초점을 직접 끌어보며 기하학적 궤적을 확인하세요.</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-      <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="btn-primary" style="padding:10px 18px;font-size:0.86rem;background:linear-gradient(90deg,#38bdf8,#818cf8)">
+      <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="btn-primary" style="padding:10px 18px;font-size:0.86rem;background:linear-gradient(90deg,#38bdf8,#818cf8)" data-i18n="todayGgb.btnApplet">
         🎮 GeoGebra로 조작하기 ➔
       </a>
-      <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="tbtn" style="padding:9px 14px;font-size:0.84rem">
+      <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="tbtn" style="padding:9px 14px;font-size:0.84rem" data-i18n="todayGgb.btnPdf">
         📄 원리 증명 PDF
       </a>
     </div>
@@ -1229,12 +1273,12 @@ body {
     <!-- 교사용 카드 -->
     <div class="hero-card teacher-card">
       <div>
-        <span class="hero-tag tag-teacher">👩‍🏫 교사 회원 전용 · 수업 배포</span>
-        <div class="hero-title">3초 만에 수업 개설하기</div>
-        <p class="hero-desc">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</p>
+        <span class="hero-tag tag-teacher" data-i18n="heroCards.teacherTag">👩‍🏫 교사 회원 전용 · 수업 배포</span>
+        <div class="hero-title" data-i18n="heroCards.teacherTitle">3초 만에 수업 개설하기</div>
+        <p class="hero-desc" data-i18n="heroCards.teacherDesc">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</p>
       </div>
       <div>
-        <button class="btn-primary" onclick="openDefaultTeacherClass()" style="width:100%">
+        <button class="btn-primary" onclick="openDefaultTeacherClass()" style="width:100%" data-i18n="heroCards.teacherBtn">
           🚀 3초 수업 개설 (QR)
         </button>
       </div>
@@ -1243,12 +1287,12 @@ body {
     <!-- 문제 생성 게시판 카드 -->
     <div class="hero-card create-card">
       <div>
-        <span class="hero-tag tag-create">🤖 수능·모평 기출 전용 · 1일 1문제</span>
-        <div class="hero-title">✨ 수능·모의평가 기출 출제</div>
-        <p class="hero-desc">공개된 <b>수능 및 모의평가(평가원/교육청) 기출문제</b>를 올리면, <b>안티그래비티 AI</b>가 초·중학생도 풀 수 있는 <b>5~8단계 인터랙티브 빌드업 퀴즈</b>로 자동 제작하여 깃에 배포합니다. (정회원 1일 1문제)</p>
+        <span class="hero-tag tag-create" data-i18n="heroCards.createTag">🤖 수능·모평 기출 전용 · 1일 1문제</span>
+        <div class="hero-title" data-i18n="heroCards.createTitle">✨ 수능·모의평가 기출 출제</div>
+        <p class="hero-desc" data-i18n-html="heroCards.createDesc">공개된 <b>수능 및 모의평가(평가원/교육청) 기출문제</b>를 올리면, <b>안티그래비티 AI</b>가 초·중학생도 풀 수 있는 <b>5~8단계 인터랙티브 빌드업 퀴즈</b>로 자동 제작하여 깃에 배포합니다. (정회원 1일 1문제)</p>
       </div>
       <div>
-        <a href="create.html" class="btn-primary" style="width:100%;background:linear-gradient(90deg,var(--accent2),var(--accent))">
+        <a href="create.html" class="btn-primary" style="width:100%;background:linear-gradient(90deg,var(--accent2),var(--accent))" data-i18n="heroCards.createBtn">
           ✨ 수능·모평 퀴즈 만들기 (회원 전용) ➔
         </a>
       </div>
@@ -1257,19 +1301,19 @@ body {
     <!-- 학생 / 비회원용 카드 -->
     <div class="hero-card student-card">
       <div>
-        <span class="hero-tag tag-student">🧑‍🎓 비회원·학생 · 100% 자유 풀이</span>
-        <div class="hero-title">수업 코드로 입장하기 (또는 자유 풀이)</div>
-        <p class="hero-desc">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다. 고유 이름과 비밀번호를 등록하면 언제든 내 기록을 모아볼 수 있습니다.</p>
+        <span class="hero-tag tag-student" data-i18n="heroCards.studentTag">🧑‍🎓 비회원·학생 · 100% 자유 풀이</span>
+        <div class="hero-title" data-i18n="heroCards.studentTitle">수업 코드로 입장하기 (또는 자유 풀이)</div>
+        <p class="hero-desc" data-i18n="heroCards.studentDesc">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다. 고유 이름과 비밀번호를 등록하면 언제든 내 기록을 모아볼 수 있습니다.</p>
       </div>
       <div class="student-join-form">
-        <input type="text" id="inputRoomCode" placeholder="예: MATH-A8F2" maxlength="12">
-        <button onclick="joinClassroom()">입장 ➔</button>
+        <input type="text" id="inputRoomCode" placeholder="예: MATH-A8F2" data-i18n-placeholder="heroCards.studentPlaceholder" maxlength="12">
+        <button onclick="joinClassroom()" data-i18n="heroCards.studentJoinBtn">입장 ➔</button>
       </div>
       <div style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(94,234,212,.3);display:flex;gap:8px;flex-wrap:wrap;align-items:center" id="studentLibraryQuickBar">
-        <button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:7px 14px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()">
+        <button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:7px 14px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()" data-i18n="heroCards.studentMySolved">
           📂 내가 푼 문제 모아보기
         </button>
-        <button type="button" class="btn-primary" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;font-size:0.84rem;padding:7px 14px;border-radius:10px;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showGuestLoginModal()">
+        <button type="button" class="btn-primary" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;font-size:0.84rem;padding:7px 14px;border-radius:10px;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showGuestLoginModal()" data-i18n="heroCards.studentGuestSync">
           👤 비회원 이름·비번 연동
         </button>
       </div>
@@ -1302,28 +1346,28 @@ body {
   <!-- 🧭 학습 모드 & 교사용 도구 탭 바 -->
   <div class="filter-tab-bar" id="filterModeTabBar" style="margin-bottom:18px;">
     <button type="button" class="filter-tab-btn active" data-mode="all" onclick="switchFilterMode('all')">
-      📚 전체 퀴즈 (<span id="tabAllCount">-</span>)
+      <span data-i18n="filterTabs.allQuizzes">📚 전체 퀴즈</span> (<span id="tabAllCount">-</span>)
     </button>
     <button type="button" class="filter-tab-btn" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">
-      🔴 나의 오답노트 (<span id="tabWrongCount">0</span>)
+      <span data-i18n="filterTabs.wrongVault">🔴 나의 오답노트</span> (<span id="tabWrongCount">0</span>)
     </button>
     <button type="button" class="filter-tab-btn" data-mode="bookmarks" onclick="switchFilterMode('bookmarks')" id="tabBtnBookmarks">
-      ⭐ 즐겨찾기 (<span id="tabBookmarkCount">0</span>)
+      <span data-i18n="filterTabs.bookmarks">⭐ 즐겨찾기</span> (<span id="tabBookmarkCount">0</span>)
     </button>
     <button type="button" class="filter-tab-btn" data-mode="pack" onclick="toggleLessonPackMode()" id="tabBtnLessonPack" style="margin-left:auto;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#c4b5fd;">
-      🎒 교사용 수업 팩 묶기
+      <span data-i18n="filterTabs.lessonPack">🎒 교사용 수업 팩 묶기</span>
     </button>
   </div>
 
   <!-- 퀴즈 목록 섹션 -->
   <div class="list-header">
     <div class="list-title">
-      <span>📚 수능·모의평가 기출 인터랙티브 퀴즈 목록 (비회원 누구나 100% 무료 열람 & 즉시 풀이)</span>
+      <span data-i18n="listHeader.title">📚 수능·모의평가 기출 인터랙티브 퀴즈 목록 (비회원 누구나 100% 무료 열람 & 즉시 풀이)</span>
       <span class="count-badge" id="countBadge">불러오는 중…</span>
     </div>
     <div style="display:flex;gap:12px;align-items:center">
-      <a href="create.html" style="font-size:.85rem;color:var(--good);text-decoration:none;font-weight:700">✨ 새 퀴즈 출제하기</a>
-      <a href="dashboard.html" style="font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700">📊 전체 실시간 현황판</a>
+      <a href="create.html" style="font-size:.85rem;color:var(--good);text-decoration:none;font-weight:700" data-i18n="listHeader.newQuiz">✨ 새 퀴즈 출제하기</a>
+      <a href="dashboard.html" style="font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700" data-i18n="listHeader.liveDashboard">📊 전체 실시간 현황판</a>
     </div>
   </div>
 
@@ -1333,11 +1377,11 @@ body {
       <div style="display:flex;align-items:center;gap:8px;">
         <span style="font-size:1.25rem;">🎯</span>
         <div>
-          <span style="font-size:0.96rem;font-weight:800;color:#7cc4ff;">수능·모의평가 기출 정밀 탐색기</span>
-          <span style="font-size:0.8rem;color:#94a3b8;margin-left:8px;">(학년도 · 학년 · 시행월 · 선택과목 · 번호 선택 시 해당 문제만 즉시 추출)</span>
+          <span style="font-size:0.96rem;font-weight:800;color:#7cc4ff;" data-i18n="examFinder.title">수능·모의평가 기출 정밀 탐색기</span>
+          <span style="font-size:0.8rem;color:#94a3b8;margin-left:8px;" data-i18n="examFinder.subtitle">(학년도 · 학년 · 시행월 · 선택과목 · 번호 선택 시 해당 문제만 즉시 추출)</span>
         </div>
       </div>
-      <button type="button" onclick="resetExamFilters()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;border-color:rgba(124,196,255,0.3);color:#cbd5e1;cursor:pointer;">
+      <button type="button" onclick="resetExamFilters()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;border-color:rgba(124,196,255,0.3);color:#cbd5e1;cursor:pointer;" data-i18n="examFinder.resetBtn">
         🔄 필터 전체 초기화
       </button>
     </div>
@@ -1345,13 +1389,13 @@ body {
     <!-- ⚖️ 공개 범위 정책 안내 -->
     <div style="background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);border-radius:10px;padding:8px 14px;margin-bottom:14px;font-size:0.83rem;color:#cbd5e1;display:flex;align-items:center;gap:8px;">
       <span style="font-size:1.1rem;">⚖️</span>
-      <span><b>공개 원칙:</b> 본 게시판은 저작권이 투명한 <b>대학수학능력시험(대수능) 및 한국교육과정평가원·시도교육청 모의평가(전국연합학력평가) 기출문제만 선별 공개</b>합니다. (기타 사설·경시·일반 문제는 비공개 전환)</span>
+      <span data-i18n-html="examFinder.policyText"><b>공개 원칙:</b> 본 게시판은 저작권이 투명한 <b>대학수학능력시험(대수능) 및 한국교육과정평가원·시도교육청 모의평가(전국연합학력평가) 기출문제만 선별 공개</b>합니다. (기타 사설·경시·일반 문제는 비공개 전환)</span>
     </div>
 
     <!-- 5대 정밀 선택 드롭다운 그리드 -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;">
       <div>
-        <label for="filterYear" style="font-size:0.75rem;font-weight:700;color:#7cc4ff;display:block;margin-bottom:4px;">📅 학년도</label>
+        <label for="filterYear" id="lblFilterYear" style="font-size:0.75rem;font-weight:700;color:#7cc4ff;display:block;margin-bottom:4px;" data-i18n="examFinder.labelYear">📅 학년도</label>
         <select id="filterYear" class="exam-select" onchange="renderList()">
           <option value="">전체 학년도</option>
           <option value="2027">2027학년도</option>
@@ -1365,7 +1409,7 @@ body {
         </select>
       </div>
       <div>
-        <label for="filterGrade" style="font-size:0.75rem;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;">🎓 대상 학년</label>
+        <label for="filterGrade" id="lblFilterGrade" style="font-size:0.75rem;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;" data-i18n="examFinder.labelGrade">🎓 대상 학년</label>
         <select id="filterGrade" class="exam-select" onchange="renderList()">
           <option value="">전체 학년</option>
           <option value="고3">고3 · N수</option>
@@ -1374,7 +1418,7 @@ body {
         </select>
       </div>
       <div>
-        <label for="filterMonth" style="font-size:0.75rem;font-weight:700;color:#5eead4;display:block;margin-bottom:4px;">🗓️ 시행월 (시험명)</label>
+        <label for="filterMonth" id="lblFilterMonth" style="font-size:0.75rem;font-weight:700;color:#5eead4;display:block;margin-bottom:4px;" data-i18n="examFinder.labelMonth">🗓️ 시행월 (시험명)</label>
         <select id="filterMonth" class="exam-select" onchange="renderList()">
           <option value="">전체 시행월</option>
           <option value="11월">11월 수능 (대수능)</option>
@@ -1387,7 +1431,7 @@ body {
         </select>
       </div>
       <div>
-        <label for="filterSubject" style="font-size:0.75rem;font-weight:700;color:#fde68a;display:block;margin-bottom:4px;">📐 선택과목</label>
+        <label for="filterSubject" id="lblFilterSubject" style="font-size:0.75rem;font-weight:700;color:#fde68a;display:block;margin-bottom:4px;" data-i18n="examFinder.labelSubject">📐 선택과목</label>
         <select id="filterSubject" class="exam-select" onchange="renderList()">
           <option value="">전체 과목</option>
           <option value="공통(수학I·II)">공통 (수학I·II)</option>
@@ -1398,7 +1442,7 @@ body {
         </select>
       </div>
       <div>
-        <label for="filterNum" style="font-size:0.75rem;font-weight:700;color:#f472b6;display:block;margin-bottom:4px;">🔢 문항 번호</label>
+        <label for="filterNum" id="lblFilterNum" style="font-size:0.75rem;font-weight:700;color:#f472b6;display:block;margin-bottom:4px;" data-i18n="examFinder.labelNum">🔢 문항 번호</label>
         <select id="filterNum" class="exam-select" onchange="renderList()">
           <option value="">전체 번호 (1~30)</option>
         </select>
@@ -1407,17 +1451,17 @@ body {
 
     <!-- 검색창 & 빠른 주제 칩 -->
     <div style="position:relative;margin-top:12px;margin-bottom:10px;">
-      <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 직접 검색..." style="width:100%;background:#0d1124;border:1px solid #2e3850;border-radius:10px;padding:9px 14px;color:#fff;font-size:0.88rem;outline:none;transition:.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2e3850'">
+      <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 직접 검색..." data-i18n-placeholder="examFinder.searchPlaceholder" style="width:100%;background:#0d1124;border:1px solid #2e3850;border-radius:10px;padding:9px 14px;color:#fff;font-size:0.88rem;outline:none;transition:.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2e3850'">
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;" id="topicChips">
-      <span style="font-size:.78rem;color:var(--sub);font-weight:700;margin-right:4px">주제별:</span>
-      <button type="button" class="topic-chip active" data-topic="">전체보기</button>
-      <button type="button" class="topic-chip" data-topic="이차함수|포물선">이차함수·포물선</button>
-      <button type="button" class="topic-chip" data-topic="수열|점화식">수열</button>
-      <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합">확률·통계</button>
-      <button type="button" class="topic-chip" data-topic="지수|로그">지수·로그</button>
-      <button type="button" class="topic-chip" data-topic="삼각함수">삼각함수</button>
-      <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이">미적분</button>
+      <span style="font-size:.78rem;color:var(--sub);font-weight:700;margin-right:4px" data-i18n="examFinder.topicPrefix">주제별:</span>
+      <button type="button" class="topic-chip active" data-topic="" data-i18n="examFinder.topicAll">전체보기</button>
+      <button type="button" class="topic-chip" data-topic="이차함수|포물선" data-i18n="examFinder.topicQuad">이차함수·포물선</button>
+      <button type="button" class="topic-chip" data-topic="수열|점화식" data-i18n="examFinder.topicSeq">수열</button>
+      <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합" data-i18n="examFinder.topicProb">확률·통계</button>
+      <button type="button" class="topic-chip" data-topic="지수|로그" data-i18n="examFinder.topicExp">지수·로그</button>
+      <button type="button" class="topic-chip" data-topic="삼각함수" data-i18n="examFinder.topicTrig">삼각함수</button>
+      <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이" data-i18n="examFinder.topicCalc">미적분</button>
     </div>
   </div>
 
@@ -1529,15 +1573,15 @@ body {
       <div class="footer-brand">
         <img src="assets/brand_emblem.png" alt="min7014 시그니처 엠블럼" class="footer-logo">
         <div>
-          <div class="footer-title">min7014 수학 교육 연구소 · mathedu</div>
-          <div class="footer-desc">기하학적 통찰과 대수적 엄밀함의 조화 · 단델린의 구(Dandelin Spheres)</div>
+          <div class="footer-title" data-i18n="footer.brandDesc">min7014 수학 교육 연구소 · mathedu</div>
+          <div class="footer-desc" data-i18n="footer.collabDesc">기하학적 통찰과 대수적 엄밀함의 조화 · 단델린의 구(Dandelin Spheres)</div>
         </div>
       </div>
       <div class="footer-links">
-        <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="footer-link">🌐 min7014 메인 사이트</a>
-        <a href="create.html" class="footer-link">✨ 문제 만들기</a>
-        <a href="dashboard.html" class="footer-link">📊 교실 대시보드</a>
-        <a href="privacy.html" class="footer-link">🔒 개인정보처리방침</a>
+        <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="footer-link" data-i18n="footer.home">🌐 min7014 메인 사이트</a>
+        <a href="create.html" class="footer-link" data-i18n="nav.createQuiz">✨ 문제 만들기</a>
+        <a href="dashboard.html" class="footer-link" data-i18n="nav.dashboard">📊 교실 대시보드</a>
+        <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">🔒 개인정보처리방침</a>
       </div>
     </div>
     <div class="footer-copy">© min7014 Math Education Laboratory. Visual proof powered by Dandelin Conic Geometry.</div>
@@ -1593,16 +1637,93 @@ function toggleMathStory() {
       countBadge.textContent = '오류';
     });
 
-  // 1~30번 문항 옵션 초기화
-  var filterNum = document.getElementById('filterNum');
-  if (filterNum && filterNum.options.length <= 1) {
-    for (var n = 1; n <= 30; n++) {
-      var opt = document.createElement('option');
-      opt.value = String(n);
-      opt.textContent = n + '번 문항';
-      filterNum.appendChild(opt);
+  // 시험 검색 드롭다운 다국어 옵션 텍스트 동적 업데이트
+  function updateExamSelectOptions(lang) {
+    var isEn = (lang === 'en');
+    
+    // 1. Year options
+    var fy = document.getElementById('filterYear');
+    if (fy) {
+      for (var i = 0; i < fy.options.length; i++) {
+        var opt = fy.options[i];
+        if (!opt.value) {
+          opt.textContent = isEn ? 'All Exam Years' : '전체 학년도';
+        } else if (opt.value === '2020') {
+          opt.textContent = isEn ? 'Before Year 2020' : '2020학년도 이전';
+        } else {
+          opt.textContent = isEn ? ('Academic Year ' + opt.value) : (opt.value + '학년도');
+        }
+      }
+    }
+
+    // 2. Grade options
+    var fg = document.getElementById('filterGrade');
+    if (fg) {
+      for (var i = 0; i < fg.options.length; i++) {
+        var opt = fg.options[i];
+        if (!opt.value) opt.textContent = isEn ? 'All Grades' : '전체 학년';
+        else if (opt.value === '고3') opt.textContent = isEn ? 'Grade 12 (College Bound)' : '고3 · N수';
+        else if (opt.value === '고2') opt.textContent = isEn ? 'Grade 11' : '고2';
+        else if (opt.value === '고1') opt.textContent = isEn ? 'Grade 10' : '고1';
+      }
+    }
+
+    // 3. Month options
+    var fm = document.getElementById('filterMonth');
+    if (fm) {
+      for (var i = 0; i < fm.options.length; i++) {
+        var opt = fm.options[i];
+        if (!opt.value) opt.textContent = isEn ? 'All Exam Months' : '전체 시행월';
+        else if (opt.value === '11월') opt.textContent = isEn ? 'Nov Official CSAT' : '11월 수능 (대수능)';
+        else if (opt.value === '9월') opt.textContent = isEn ? 'Sep Official Mock' : '9월 모의평가 (평가원)';
+        else if (opt.value === '6월') opt.textContent = isEn ? 'Jun Official Mock' : '6월 모의평가 (평가원)';
+        else if (opt.value === '10월') opt.textContent = isEn ? 'Oct Academic Exam' : '10월 학력평가';
+        else if (opt.value === '7월') opt.textContent = isEn ? 'Jul Academic Exam' : '7월 학력평가';
+        else if (opt.value === '4월') opt.textContent = isEn ? 'Apr Academic Exam' : '4월 학력평가';
+        else if (opt.value === '3월') opt.textContent = isEn ? 'Mar Academic Exam' : '3월 학력평가';
+      }
+    }
+
+    // 4. Subject options
+    var fs = document.getElementById('filterSubject');
+    if (fs) {
+      for (var i = 0; i < fs.options.length; i++) {
+        var opt = fs.options[i];
+        if (!opt.value) opt.textContent = isEn ? 'All Subjects' : '전체 과목';
+        else if (opt.value === '공통(수학I·II)') opt.textContent = isEn ? 'Common (Math I·II)' : '공통 (수학I·II)';
+        else if (opt.value === '미적분') opt.textContent = isEn ? 'Calculus' : '미적분';
+        else if (opt.value === '기하') opt.textContent = isEn ? 'Geometry' : '기하';
+        else if (opt.value === '확률과 통계') opt.textContent = isEn ? 'Probability & Statistics' : '확률과 통계';
+        else if (opt.value === '공통수학') opt.textContent = isEn ? 'Common Math (Grade 10)' : '공통수학 (고1)';
+      }
+    }
+
+    // 5. Number options
+    var fn = document.getElementById('filterNum');
+    if (fn) {
+      if (fn.options.length <= 1) {
+        fn.innerHTML = '';
+        var optAll = document.createElement('option');
+        optAll.value = '';
+        optAll.textContent = isEn ? 'All Numbers (1~30)' : '전체 번호 (1~30)';
+        fn.appendChild(optAll);
+        for (var n = 1; n <= 30; n++) {
+          var o = document.createElement('option');
+          o.value = String(n);
+          o.textContent = isEn ? ('Question #' + n) : (n + '번 문항');
+          fn.appendChild(o);
+        }
+      } else {
+        fn.options[0].textContent = isEn ? 'All Numbers (1~30)' : '전체 번호 (1~30)';
+        for (var i = 1; i < fn.options.length; i++) {
+          fn.options[i].textContent = isEn ? ('Question #' + fn.options[i].value) : (fn.options[i].value + '번 문항');
+        }
+      }
     }
   }
+
+  // 초기 실행 시 현재 언어에 맞춰 드롭다운 옵션 텍스트 세팅
+  updateExamSelectOptions(window.MatheduI18n ? window.MatheduI18n.getLanguage() : 'ko');
 
   function getExamFilters() {
     return {
@@ -1642,21 +1763,43 @@ function toggleMathStory() {
     var lv = window.MatheduGame.getLevelInfo();
     var wrongs = window.MatheduGame.getWrongAnswers();
     var bookmarks = window.MatheduGame.getBookmarks();
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
 
     var sTitle = document.getElementById('streakTitle');
     var sSub = document.getElementById('streakSub');
     if (sTitle) {
-      sTitle.textContent = streak.count > 0 ? ('연속 출석 ' + streak.count + '일차 🔥') : '연속 출석 1일차 시작';
+      if (isEn) {
+        sTitle.textContent = streak.count > 0 ? ('Day ' + streak.count + ' Streak 🔥') : 'Start Day 1 Streak';
+      } else {
+        sTitle.textContent = streak.count > 0 ? ('연속 출석 ' + streak.count + '일차 🔥') : '연속 출석 1일차 시작';
+      }
     }
     if (sSub) {
-      sSub.textContent = streak.activeToday ? '✅ 오늘 수학 퀘스트 완료!' : '오늘 1문제 풀면 불꽃 유지!';
+      if (isEn) {
+        sSub.textContent = streak.activeToday ? '✅ Math Quest Completed Today!' : 'Solve 1 problem to keep the flame!';
+      } else {
+        sSub.textContent = streak.activeToday ? '✅ 오늘 수학 퀘스트 완료!' : '오늘 1문제 풀면 불꽃 유지!';
+      }
     }
 
     var lvTitle = document.getElementById('gameLevelTitle');
     var xpText = document.getElementById('gameXpText');
     var barFill = document.getElementById('gameXpBarFill');
-    if (lvTitle) lvTitle.textContent = lv.title;
-    if (xpText) xpText.textContent = lv.currentXP + ' / ' + (lv.nextXP ? (lv.nextXP + ' XP') : '최고 등급');
+    if (lvTitle) {
+      if (isEn) {
+        var levelNamesEn = ['Scaffolding Novice', 'Concept Explorer', 'Geometric Prover', 'Conic Section Master', 'Grand Mathematician'];
+        lvTitle.textContent = '🔰 Lv.' + lv.level + ' ' + (levelNamesEn[lv.level - 1] || 'Master');
+      } else {
+        lvTitle.textContent = lv.title;
+      }
+    }
+    if (xpText) {
+      if (isEn) {
+        xpText.textContent = lv.currentXP + ' / ' + (lv.nextXP ? (lv.nextXP + ' XP') : 'Max Level');
+      } else {
+        xpText.textContent = lv.currentXP + ' / ' + (lv.nextXP ? (lv.nextXP + ' XP') : '최고 등급');
+      }
+    }
     if (barFill) barFill.style.width = lv.progressPct + '%';
 
     var qwCount = document.getElementById('quickWrongCount');
@@ -1987,16 +2130,17 @@ function toggleMathStory() {
       return true;
     });
 
-    countBadge.textContent = filtered.length + '개' + (filtered.length !== allItems.length ? ' (전체 ' + allItems.length + '개)' : '');
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    countBadge.textContent = filtered.length + (isEn ? ' quizzes' : '개') + (filtered.length !== allItems.length ? (isEn ? ' (of ' + allItems.length + ' total)' : ' (전체 ' + allItems.length + '개)') : '');
 
     if (filtered.length === 0) {
       if (activeFilterMode === 'wrong') {
         listEl.innerHTML = 
           '<div style="text-align:center;padding:50px 20px;background:rgba(251,113,133,.08);border:1px dashed rgba(251,113,133,.35);border-radius:18px;margin:12px 0">' +
             '<div style="font-size:2.4rem;margin-bottom:8px">🎉</div>' +
-            '<div style="font-size:1.15rem;font-weight:800;color:#5eead4;margin-bottom:6px">오답노트가 깨끗하게 비어 있습니다!</div>' +
-            '<div style="font-size:0.88rem;color:#cbd5e1;margin-bottom:16px">틀린 문제가 없거나 모든 오답을 성공적으로 복습하셨습니다. 완벽합니다!</div>' +
-            '<button type="button" class="btn-primary" onclick="switchFilterMode(\'all\')">전체 문제 둘러보기 ➔</button>' +
+            '<div style="font-size:1.15rem;font-weight:800;color:#5eead4;margin-bottom:6px">' + (isEn ? 'Your Review Vault is completely clean!' : '오답노트가 깨끗하게 비어 있습니다!') + '</div>' +
+            '<div style="font-size:0.88rem;color:#cbd5e1;margin-bottom:16px">' + (isEn ? 'You have no unsolved mistakes or have successfully mastered all review questions. Outstanding!' : '틀린 문제가 없거나 모든 오답을 성공적으로 복습하셨습니다. 완벽합니다!') + '</div>' +
+            '<button type="button" class="btn-primary" onclick="switchFilterMode(\'all\')">' + (isEn ? 'Browse All Quizzes ➔' : '전체 문제 둘러보기 ➔') + '</button>' +
           '</div>';
         return;
       }
@@ -2004,33 +2148,33 @@ function toggleMathStory() {
         listEl.innerHTML = 
           '<div style="text-align:center;padding:50px 20px;background:rgba(253,230,138,.08);border:1px dashed rgba(253,230,138,.35);border-radius:18px;margin:12px 0">' +
             '<div style="font-size:2.4rem;margin-bottom:8px">⭐</div>' +
-            '<div style="font-size:1.15rem;font-weight:800;color:#fde68a;margin-bottom:6px">즐겨찾기한 문제가 아직 없습니다</div>' +
-            '<div style="font-size:0.88rem;color:#cbd5e1;margin-bottom:16px">문제 카드 오른쪽의 별표(☆)를 누르면 나만의 핵심 유형으로 보관할 수 있습니다.</div>' +
-            '<button type="button" class="btn-primary" onclick="switchFilterMode(\'all\')">전체 문제 둘러보기 ➔</button>' +
+            '<div style="font-size:1.15rem;font-weight:800;color:#fde68a;margin-bottom:6px">' + (isEn ? 'No bookmarked questions yet' : '즐겨찾기한 문제가 아직 없습니다') + '</div>' +
+            '<div style="font-size:0.88rem;color:#cbd5e1;margin-bottom:16px">' + (isEn ? 'Click the star icon (☆) on any problem card to save it as your core reference collection.' : '문제 카드 오른쪽의 별표(☆)를 누르면 나만의 핵심 유형으로 보관할 수 있습니다.') + '</div>' +
+            '<button type="button" class="btn-primary" onclick="switchFilterMode(\'all\')">' + (isEn ? 'Browse All Quizzes ➔' : '전체 문제 둘러보기 ➔') + '</button>' +
           '</div>';
         return;
       }
       if (hasActiveExamFilter) {
-        var criteriaDesc = [ef.year ? ef.year + '학년도' : '', ef.month, ef.grade, ef.subject, ef.num ? ef.num + '번' : ''].filter(Boolean).join(' ');
+        var criteriaDesc = [ef.year ? (isEn ? ef.year + ' AY' : ef.year + '학년도') : '', ef.month, ef.grade, ef.subject, ef.num ? (isEn ? '#' + ef.num : ef.num + '번') : ''].filter(Boolean).join(' ');
         var reqUrl = 'create.html?year=' + encodeURIComponent(ef.year) + '&grade=' + encodeURIComponent(ef.grade) + '&month=' + encodeURIComponent(ef.month) + '&subject=' + encodeURIComponent(ef.subject) + '&num=' + encodeURIComponent(ef.num);
         listEl.innerHTML = 
           '<div style="background:rgba(30,41,59,0.7);border:1.5px dashed rgba(124,196,255,0.45);border-radius:16px;padding:34px 20px;text-align:center;margin:12px 0;">' +
             '<div style="font-size:2.2rem;margin-bottom:8px;">🔍</div>' +
-            '<div style="font-size:1.05rem;font-weight:800;color:#f1f5f9;margin-bottom:6px;">선택하신 조건의 기출문항이 아직 등록되지 않았습니다</div>' +
+            '<div style="font-size:1.05rem;font-weight:800;color:#f1f5f9;margin-bottom:6px;">' + (isEn ? 'No exam problem found matching these exact criteria yet' : '선택하신 조건의 기출문항이 아직 등록되지 않았습니다') + '</div>' +
             '<div style="font-size:0.88rem;color:#cbd5e1;max-width:540px;margin:0 auto 16px;line-height:1.5;">' +
-              '<span style="color:#7cc4ff;font-weight:700">[' + escapeHtml(criteriaDesc) + ']</span> 문항을 지금 바로 출제 요청하시면,<br>안티그래비티 AI가 5~8단계 인터랙티브 빌드업 퀴즈와 GeoGebra 시각화로 자동 제작해 드립니다.' +
+              '<span style="color:#7cc4ff;font-weight:700">[' + escapeHtml(criteriaDesc) + ']</span> ' + (isEn ? 'Request this question now, and Antigravity AI will craft a 3~8 step interactive scaffolding quiz with GeoGebra visual proofs.' : '문항을 지금 바로 출제 요청하시면,<br>안티그래비티 AI가 5~8단계 인터랙티브 빌드업 퀴즈와 GeoGebra 시각화로 자동 제작해 드립니다.') +
             '</div>' +
             '<div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">' +
               '<a href="' + reqUrl + '" class="btn-primary" style="padding:10px 22px;font-weight:800;font-size:0.92rem;text-decoration:none;border-radius:10px;">' +
-                '✨ 이 기출문제 지금 출제 요청하기 ➔' +
+                (isEn ? '✨ Request this Exam Problem Now ➔' : '✨ 이 기출문제 지금 출제 요청하기 ➔') +
               '</a>' +
               '<button type="button" class="tbtn" onclick="resetExamFilters()" style="padding:10px 16px;font-size:0.88rem;cursor:pointer;">' +
-                '🔄 필터 전체 초기화' +
+                (isEn ? '🔄 Reset All Filters' : '🔄 필터 전체 초기화') +
               '</button>' +
             '</div>' +
           '</div>';
       } else {
-        listEl.innerHTML = '<div style="text-align:center;padding:40px;color:var(--sub)">검색 조건에 일치하는 퀴즈가 없습니다.</div>';
+        listEl.innerHTML = '<div style="text-align:center;padding:40px;color:var(--sub)">' + (isEn ? 'No quizzes match your current search criteria.' : '검색 조건에 일치하는 퀴즈가 없습니다.') + '</div>';
       }
       return;
     }
@@ -2045,21 +2189,30 @@ function toggleMathStory() {
     if (filtered.length === 1 && hasActiveExamFilter) {
       var exactItem = filtered[0];
       var exactTitle = escapeHtml(exactItem.title || exactItem.slug);
-      var exactDesc = [exactItem.examYear ? exactItem.examYear + '학년도' : '', exactItem.month, exactItem.grade, exactItem.subject, exactItem.qNum ? exactItem.qNum + '번' : ''].filter(Boolean).join(' ');
+      var exactDesc = window.MatheduI18n ? window.MatheduI18n.formatProblemMeta(exactItem) : [exactItem.examYear ? exactItem.examYear + '학년도' : '', exactItem.month, exactItem.grade, exactItem.subject, exactItem.qNum ? exactItem.qNum + '번' : ''].filter(Boolean).join(' ');
       html += 
         '<div style="background:linear-gradient(135deg,rgba(56,189,248,0.18) 0%,rgba(99,102,241,0.22) 100%);border:1.5px solid #38bdf8;border-radius:16px;padding:16px 20px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 6px 24px rgba(56,189,248,0.25);">' +
           '<div style="display:flex;align-items:center;gap:12px;">' +
             '<span style="font-size:1.8rem;line-height:1">🎯</span>' +
             '<div>' +
-              '<div style="font-size:0.98rem;font-weight:800;color:#38bdf8;">선택하신 기출문항을 정확히 찾았습니다!</div>' +
+              '<div style="font-size:0.98rem;font-weight:800;color:#38bdf8;">' + (isEn ? 'Found the exact matching exam problem!' : '선택하신 기출문항을 정확히 찾았습니다!') + '</div>' +
               '<div style="font-size:0.86rem;color:#e2e8f0;margin-top:2px;font-weight:600;"><span style="color:#7cc4ff">[' + escapeHtml(exactDesc) + ']</span> ' + exactTitle + '</div>' +
             '</div>' +
           '</div>' +
           '<div style="display:flex;gap:8px;">' +
-            '<a href="board/' + exactItem.slug + '.html" style="padding:10px 20px;font-size:0.92rem;font-weight:800;background:linear-gradient(90deg,#38bdf8,#818cf8);color:#080d1a;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 15px rgba(56,189,248,0.35);">🚀 1초 바로 풀기 ➔</a>' +
+            '<a href="board/' + exactItem.slug + '.html" style="padding:10px 20px;font-size:0.92rem;font-weight:800;background:linear-gradient(90deg,#38bdf8,#818cf8);color:#080d1a;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 15px rgba(56,189,248,0.35);">' + (isEn ? '🚀 Instant Solve ➔' : '🚀 1초 바로 풀기 ➔') + '</a>' +
           '</div>' +
         '</div>';
     }
+
+    var tBtnLaunch = isEn ? '🚀 Launch Class' : '🚀 수업 열기';
+    var tBtnOffline = isEn ? '📥 Offline' : '📥 오프라인';
+    var tBtnOfflineTitle = isEn ? 'Download standalone offline HTML quiz' : '인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일 다운로드';
+    var tBtnSolve = isEn ? 'Solve ➔' : '풀기 ➔';
+    var tBtnResume = isEn ? '🚀 Resume ➔' : '🚀 이어서 풀기 ➔';
+    var tBtnReSolve = isEn ? '🔄 Re-solve ➔' : '🔄 다시 풀기 ➔';
+    var tBadgeMastered = isEn ? '🏆 Mastered' : '🏆 완주';
+    var tSlugLabel = isEn ? '· Slug: ' : '· 슬러그: ';
 
     for (var i = 0; i < filtered.length; i++) {
       var item = filtered[i];
@@ -2069,36 +2222,31 @@ function toggleMathStory() {
 
       var solved = solvedMap[slug];
       var solveBadge = '';
-      var solveBtnText = '풀기 ➔';
+      var solveBtnText = tBtnSolve;
       var solveBtnStyle = '';
 
       if (solved) {
         if (solved.completed) {
-          solveBadge = '<span style="background:rgba(62,220,151,.18);border:1px solid rgba(62,220,151,.35);color:#3ddc97;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:700">🏆 완주</span>';
-          solveBtnText = '🔄 다시 풀기 ➔';
+          solveBadge = '<span style="background:rgba(62,220,151,.18);border:1px solid rgba(62,220,151,.35);color:#3ddc97;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:700">' + tBadgeMastered + '</span>';
+          solveBtnText = tBtnReSolve;
           solveBtnStyle = 'border-color:rgba(62,220,151,.5);color:#3ddc97;';
         } else {
           var pct = solved.totalSteps > 0 ? Math.round((solved.stepDone / solved.totalSteps) * 100) : 0;
           solveBadge = '<span style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.35);color:#38bdf8;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:700">⚡ ' + solved.stepDone + '/' + solved.totalSteps + ' (' + pct + '%)</span>';
-          solveBtnText = '🚀 이어서 풀기 ➔';
+          solveBtnText = tBtnResume;
           solveBtnStyle = 'border-color:rgba(56,189,248,.5);color:#38bdf8;font-weight:800;background:rgba(56,189,248,.1);';
         }
       }
 
-      // 기출 문항 정밀 메타데이터 태그 칩
+      // 기출 문항 정밀 메타데이터 태그 칩 (언어별 자동 서식화)
       var metaTag = '';
-      var metaParts = [
-        item.examYear ? item.examYear + '학년도' : '',
-        item.month || '',
-        item.grade || '',
-        item.subject || '',
-        item.qNum ? item.qNum + '번' : ''
-      ].filter(Boolean);
-      if (metaParts.length > 0) {
-        metaTag = '<span style="background:rgba(124,196,255,0.15);border:1px solid rgba(124,196,255,0.35);color:#7cc4ff;padding:2px 8px;border-radius:12px;font-size:0.74rem;font-weight:700;display:inline-block;margin-right:6px;">' + escapeHtml(metaParts.join(' ')) + '</span>';
+      var metaFormatted = window.MatheduI18n ? window.MatheduI18n.formatProblemMeta(item) : '';
+      if (metaFormatted) {
+        metaTag = '<span style="background:rgba(124,196,255,0.15);border:1px solid rgba(124,196,255,0.35);color:#7cc4ff;padding:2px 8px;border-radius:12px;font-size:0.74rem;font-weight:700;display:inline-block;margin-right:6px;">' + escapeHtml(metaFormatted) + '</span>';
       }
 
       var isBm = window.MatheduGame && window.MatheduGame.isBookmarked ? window.MatheduGame.isBookmarked(slug) : false;
+      var bmTitle = isBm ? (isEn ? 'Remove from Bookmarks' : '즐겨찾기 해제') : (isEn ? 'Add to Bookmarks' : '즐겨찾기 추가');
 
       html += '<div class="card" data-slug="' + slug + '">';
       
@@ -2108,7 +2256,7 @@ function toggleMathStory() {
         var isChecked = selectedPackSlugs.indexOf(slug) !== -1;
         html += '<input type="checkbox" class="card-pack-checkbox" onchange="togglePackSelect(\'' + slug + '\', this.checked)" ' + (isChecked ? 'checked' : '') + '>';
       }
-      html += '<button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + (isBm ? '즐겨찾기 해제' : '즐겨찾기 추가') + '">' + (isBm ? '★' : '☆') + '</button>';
+      html += '<button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';
       html += '</div>';
 
       html += '<div class="icon">📘</div>';
@@ -2118,11 +2266,11 @@ function toggleMathStory() {
       if (metaTag) html += metaTag;
       if (solveBadge) html += solveBadge + ' ';
       if (time) html += '<span>' + time + '</span>';
-      html += '<span style="color:var(--sub)">· 슬러그: <code>' + slug + '</code></span>';
+      html += '<span style="color:var(--sub)">' + tSlugLabel + '<code>' + slug + '</code></span>';
       html += '</div></div>';
       html += '<div class="card-actions">';
-      html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">🚀 수업 열기</button>';
-      html += '<a class="btn-offline" href="offline/' + slug + '.html" download title="인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일 다운로드">📥 오프라인</a>';
+      html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">' + tBtnLaunch + '</button>';
+      html += '<a class="btn-offline" href="offline/' + slug + '.html" download title="' + tBtnOfflineTitle + '">' + tBtnOffline + '</a>';
       html += '<a class="btn-solve" style="' + solveBtnStyle + '" href="board/' + slug + '.html">' + solveBtnText + '</a>';
       html += '</div>';
       html += '</div>';
@@ -2140,27 +2288,41 @@ function toggleMathStory() {
   function updateStudentQuickBar() {
     var bar = document.getElementById('studentLibraryQuickBar');
     if (!bar) return;
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
     var guest = window.MatheduAuth ? window.MatheduAuth.getCurrentGuest() : null;
     var user = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
     var count = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems().length : 0;
     
     if (user) {
+      var userLabel = isEn ? ('👤 <b>' + escapeHtml(user.name) + '</b> (' + escapeHtml(user.roleLabel) + ')') : ('👤 <b>' + escapeHtml(user.name) + '</b>님 (' + escapeHtml(user.roleLabel) + ')');
+      var libBtn = isEn ? ('📂 My Library (' + count + ' quizzes)') : ('📂 내 서재 (' + count + '개 문항)');
       bar.innerHTML = 
-        '<span style="font-size:0.83rem;color:#3ddc97;font-weight:700">👤 <b>' + escapeHtml(user.name) + '</b>님 (' + escapeHtml(user.roleLabel) + ')</span>' +
+        '<span style="font-size:0.83rem;color:#3ddc97;font-weight:700">' + userLabel + '</span>' +
         '<button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:6px 12px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()">' +
-          '📂 내 서재 (' + count + '개 문항)' +
+          libBtn +
         '</button>';
     } else if (guest) {
+      var guestLabel = isEn ? ('🧑‍🎓 <b>' + escapeHtml(guest.name) + '</b>') : ('🧑‍🎓 <b>' + escapeHtml(guest.name) + '</b>님');
+      var solvedBtn = isEn ? ('📂 Solved (' + count + ')') : ('📂 푼 문제 (' + count + '개)');
+      var upgradeBtn = isEn ? '✨ Upgrade to Member' : '✨ 정회원 전환';
       bar.innerHTML = 
-        '<span style="font-size:0.83rem;color:#7cc4ff;font-weight:700">🧑‍🎓 <b>' + escapeHtml(guest.name) + '</b>님</span>' +
+        '<span style="font-size:0.83rem;color:#7cc4ff;font-weight:700">' + guestLabel + '</span>' +
         '<button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:6px 12px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()">' +
-          '📂 푼 문제 (' + count + '개)' +
+          solvedBtn +
         '</button>' +
         '<button type="button" class="btn-primary" style="background:linear-gradient(90deg,rgba(124,196,255,.2),rgba(167,139,250,.2));border:1px solid rgba(124,196,255,.4);color:#c4b5fd;font-size:0.84rem;padding:6px 12px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showUpgradeModal()">' +
-          '✨ 정회원 전환' +
+          upgradeBtn +
         '</button>';
     }
   }
+
+  // 언어 변경 시 UI 자동 재렌더링 콜백 등록
+  window.onMatheduLanguageChange = function(lang) {
+    updateExamSelectOptions(lang);
+    updateGamificationUI();
+    updateStudentQuickBar();
+    renderList();
+  };
 
   window.addEventListener('mathedu:solved-updated', function() {
     renderList();
