@@ -21,6 +21,7 @@ window.MathJax = {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
 <script src="mathedu-auth.js"></script>
+<script src="mathedu-gamification.js"></script>
 <style>
 :root {
   --bg: #0d1020;
@@ -804,6 +805,172 @@ header p {
   .footer-links {
     justify-content: center;
   }
+/* ══════════════════════════════════════════════════════════════
+   🌟 학생 게이미피케이션 & 연속 학습 스트릭 & 교사용 수업 팩 스타일
+   ══════════════════════════════════════════════════════════════ */
+.gamification-hub-strip {
+  background: linear-gradient(135deg, rgba(124, 196, 255, 0.12) 0%, rgba(167, 139, 250, 0.12) 100%);
+  border: 1px solid rgba(124, 196, 255, 0.35);
+  border-radius: 18px;
+  padding: 16px 22px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.streak-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.streak-flame {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
+  animation: flamePulse 1.8s infinite ease-in-out;
+}
+@keyframes flamePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.streak-text-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fde68a;
+}
+.streak-text-sub {
+  font-size: 0.78rem;
+  color: var(--sub);
+}
+.xp-level-box {
+  flex: 1;
+  min-width: 200px;
+  max-width: 380px;
+}
+.xp-level-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+}
+.xp-bar-bg {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.xp-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #5eead4, #7cc4ff);
+  transition: width 0.4s ease;
+}
+.game-actions-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* 오늘의 추천 동적 기하 카드 */
+.today-geogebra-card {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(30, 41, 59, 0.7) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 18px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.today-ggb-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.today-ggb-desc {
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+/* 문제 목록 필터 탭 바 */
+.filter-tab-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.filter-tab-btn {
+  background: var(--card2);
+  border: 1px solid var(--line);
+  color: var(--sub);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s;
+}
+.filter-tab-btn:hover {
+  color: #fff;
+  border-color: var(--accent);
+}
+.filter-tab-btn.active {
+  background: rgba(124, 196, 255, 0.22);
+  border-color: var(--accent);
+  color: #7cc4ff;
+  box-shadow: 0 0 16px rgba(124, 196, 255, 0.25);
+}
+.card-bookmark-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: transform .15s ease;
+  color: rgba(255, 255, 255, 0.3);
+}
+.card-bookmark-btn:hover {
+  transform: scale(1.2);
+}
+.card-bookmark-btn.active {
+  color: #fde68a;
+  filter: drop-shadow(0 0 6px rgba(253, 230, 138, 0.6));
+}
+.card-pack-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #a78bfa;
+}
+.lesson-pack-float-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: #141833;
+  border: 1.5px solid #a78bfa;
+  border-radius: 20px;
+  padding: 14px 24px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  animation: matheduPopUp .3s ease;
+}
 }
 </style>
 </head>
@@ -823,6 +990,8 @@ header p {
     <div class="nav-menu">
       <a href="#quizFilterBar" class="nav-link">📚 퀴즈 모음</a>
       <a href="offline/index.html" class="nav-link" style="color:#7cc4ff;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.1)" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함">📦 오프라인 보관함</a>
+      <button type="button" class="nav-link" onclick="openMin7014ExplorerModal()" style="background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);color:#7cc4ff;cursor:pointer;font-family:inherit">🌐 min7014 기하 탐색관</button>
+      <button type="button" class="nav-link" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" style="background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.35);color:#fde68a;cursor:pointer;font-family:inherit">🏆 나의 업적</button>
       <a href="create.html" class="nav-link nav-link-cta">✨ 문제 출제 <span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:2px">회원전용</span></a>
       <a href="dashboard.html" class="nav-link">📊 수업 대시보드</a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-link">🌐 min7014 홈</a>
@@ -876,6 +1045,60 @@ header p {
       </div>
     </div>
   </header>
+
+  <!-- 🌟 학생 게이미피케이션 허브: 연속 학습 스트릭 & 레벨 XP -->
+  <div class="gamification-hub-strip" id="gamificationHubStrip">
+    <div class="streak-box">
+      <div class="streak-flame" id="streakFlameIcon">🔥</div>
+      <div>
+        <div class="streak-text-title" id="streakTitle">연속 출석 1일차</div>
+        <div class="streak-text-sub" id="streakSub">오늘 수학 문제 풀면 불꽃 유지!</div>
+      </div>
+    </div>
+
+    <div class="xp-level-box">
+      <div class="xp-level-header">
+        <span style="font-weight:800;color:#7cc4ff;" id="gameLevelTitle">🔰 Lv.1 디딤돌 입문자</span>
+        <span style="color:#cbd5e1;font-size:0.78rem;" id="gameXpText">0 / 100 XP</span>
+      </div>
+      <div class="xp-bar-bg">
+        <div class="xp-bar-fill" id="gameXpBarFill" style="width:0%;"></div>
+      </div>
+    </div>
+
+    <div class="game-actions-group">
+      <button type="button" class="btn-primary" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" style="padding:8px 16px;font-size:0.84rem;background:linear-gradient(90deg,#fde68a,#fbbf24);color:#0b1020;border-radius:10px;font-weight:800;box-shadow:none;cursor:pointer">
+        🏆 나의 뱃지
+      </button>
+      <button type="button" class="btn-primary" onclick="switchFilterMode('wrong')" style="padding:8px 14px;font-size:0.84rem;background:rgba(251,113,133,.18);border:1px solid rgba(251,113,133,.4);color:#fb7185;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" id="btnQuickWrongVault">
+        🔴 오답노트 (<span id="quickWrongCount">0</span>)
+      </button>
+    </div>
+  </div>
+
+  <!-- 🎲 오늘의 추천 동적 기하: 눈으로 원리를 보는 수학 (min7014 연계) -->
+  <div class="today-geogebra-card" id="todayGeogebraCard">
+    <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:280px">
+      <div style="width:48px;height:48px;border-radius:14px;background:#fff;padding:3px;flex:0 0 48px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(56,189,248,.35)">
+        <img src="assets/favicon.png" alt="min7014" style="width:100%;height:100%;object-fit:contain">
+      </div>
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.2);border:1px solid rgba(56,189,248,.4);color:#38bdf8;padding:2px 10px;border-radius:12px;font-size:0.74rem;font-weight:800;margin-bottom:4px">
+          💡 오늘의 추천 동적 기하 (min7014 수학자료실)
+        </div>
+        <div class="today-ggb-title" id="todayGgbTitle">타원에서의 빛 반사 (Reflection of Light on an Ellipse)</div>
+        <div class="today-ggb-desc" id="todayGgbDesc">한 초점에서 나온 빛은 타원에 반사되어 다른 초점을 반드시 통과합니다. GeoGebra 앱렛으로 초점을 직접 끌어보며 기하학적 궤적을 확인하세요.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="btn-primary" style="padding:10px 18px;font-size:0.86rem;background:linear-gradient(90deg,#38bdf8,#818cf8)">
+        🎮 GeoGebra로 조작하기 ➔
+      </a>
+      <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="tbtn" style="padding:9px 14px;font-size:0.84rem">
+        📄 원리 증명 PDF
+      </a>
+    </div>
+  </div>
 
   <!-- 교사 / 문제생성 / 학생 빠른 액션 히어로 -->
   <div class="hero-box">
@@ -950,6 +1173,22 @@ header p {
     <div id="requestsList" style="display:grid;gap:10px;">
       <!-- 접수된 문제 목록 동적 렌더링 -->
     </div>
+  </div>
+
+  <!-- 🧭 학습 모드 & 교사용 도구 탭 바 -->
+  <div class="filter-tab-bar" id="filterModeTabBar" style="margin-bottom:18px;">
+    <button type="button" class="filter-tab-btn active" data-mode="all" onclick="switchFilterMode('all')">
+      📚 전체 퀴즈 (<span id="tabAllCount">-</span>)
+    </button>
+    <button type="button" class="filter-tab-btn" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">
+      🔴 나의 오답노트 (<span id="tabWrongCount">0</span>)
+    </button>
+    <button type="button" class="filter-tab-btn" data-mode="bookmarks" onclick="switchFilterMode('bookmarks')" id="tabBtnBookmarks">
+      ⭐ 즐겨찾기 (<span id="tabBookmarkCount">0</span>)
+    </button>
+    <button type="button" class="filter-tab-btn" data-mode="pack" onclick="toggleLessonPackMode()" id="tabBtnLessonPack" style="margin-left:auto;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#c4b5fd;">
+      🎒 교사용 수업 팩 묶기
+    </button>
   </div>
 
   <!-- 퀴즈 목록 섹션 -->
@@ -1062,6 +1301,70 @@ header p {
     <div class="loading">
       <div class="spin"></div>
       <div>게시판을 불러오는 중…</div>
+    </div>
+  </div>
+
+  <!-- 🎒 교사용 수업 팩 생성 플로팅 바 -->
+  <div id="lessonPackFloatingBar" class="lesson-pack-float-bar" style="display:none">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:1.6rem">🎒</span>
+      <div>
+        <div style="font-weight:800;color:#c4b5fd;font-size:1rem">선택한 <b id="packSelectedCount" style="color:#5eead4">0</b>개 문제로 수업 팩 만들기</div>
+        <div style="font-size:0.78rem;color:#cbd5e1">학생들에게 링크 1개로 오늘 수업할 문항들을 순서대로 제공합니다.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;margin-left:auto;flex-wrap:wrap">
+      <button type="button" onclick="createLessonPackAction('copy')" class="btn-primary" style="padding:10px 16px;font-size:0.86rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa)">
+        📋 학생 배포 링크 복사
+      </button>
+      <button type="button" onclick="createLessonPackAction('qr')" class="btn-primary" style="padding:10px 16px;font-size:0.86rem;background:#222a3d;color:#fff;border:1px solid #2e3850">
+        🖥️ 칠판 대형 QR
+      </button>
+      <button type="button" onclick="createLessonPackAction('start')" class="btn-primary" style="padding:10px 18px;font-size:0.86rem;background:linear-gradient(90deg,#5eead4,#38bdf8);color:#0b1020">
+        ▶️ 1번 바로 풀기
+      </button>
+      <button type="button" onclick="toggleLessonPackMode(false)" style="background:transparent;border:none;color:#94a3b8;font-size:1.4rem;cursor:pointer;padding:0 6px">✕</button>
+    </div>
+  </div>
+
+  <!-- 🌐 min7014 3,400+ 동적 기하 스마트 탐색관 모달 -->
+  <div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(10,13,26,.88);backdrop-filter:blur(18px);align-items:center;justify-content:center;padding:16px;">
+    <div style="background:#141833;border:1.5px solid rgba(124,196,255,.4);border-radius:24px;max-width:760px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.7);color:#fff;font-family:system-ui,sans-serif;position:relative;overflow:hidden">
+      <div style="padding:22px 26px 16px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:36px;height:36px;border-radius:10px;background:#fff;padding:2px;display:flex;align-items:center;justify-content:center">
+            <img src="assets/favicon.png" alt="min7014" style="width:100%;height:100%;object-fit:contain">
+          </div>
+          <div>
+            <h2 style="font-size:1.25rem;margin:0;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">
+              민은기 선생님의 수학자료실 (min7014) 동적 기하 탐색관
+            </h2>
+            <div style="font-size:0.8rem;color:#94a3b8;margin-top:2px">3,400+ GeoGebra 인터랙티브 앱렛, 개념 증명 PDF &amp; 영상 1초 검색</div>
+          </div>
+        </div>
+        <button onclick="closeMin7014ExplorerModal()" style="background:none;border:none;color:#94a3b8;font-size:1.6rem;cursor:pointer">✕</button>
+      </div>
+      
+      <div style="padding:16px 26px;border-bottom:1px solid rgba(255,255,255,.08)">
+        <input type="text" id="min7014SearchInput" placeholder="🔍 개념 검색 (예: 타원, 포물선, 단델린, 피타고라스, 삼각함수, 매듭, AlgeoMath 등)..." style="width:100%;background:#0d1124;border:1px solid rgba(124,196,255,.35);border-radius:12px;padding:12px 16px;color:#fff;font-size:0.95rem;outline:none" oninput="filterMin7014Materials()">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px" id="min7014ModalChips">
+          <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체</button>
+          <button type="button" class="topic-chip" onclick="setMin7014Chip('타원|쌍곡선|포물선|원뿔곡선', this)">원뿔곡선</button>
+          <button type="button" class="topic-chip" onclick="setMin7014Chip('피타고라스', this)">피타고라스</button>
+          <button type="button" class="topic-chip" onclick="setMin7014Chip('삼각함수', this)">삼각함수</button>
+          <button type="button" class="topic-chip" onclick="setMin7014Chip('매듭', this)">매듭 기하</button>
+          <button type="button" class="topic-chip" onclick="setMin7014Chip('미분|적분', this)">미적분</button>
+        </div>
+      </div>
+
+      <div id="min7014ResultsList" style="flex:1;overflow-y:auto;padding:18px 26px;display:flex;flex-direction:column;gap:12px">
+        <div style="text-align:center;padding:40px;color:#94a3b8">자료를 불러오는 중...</div>
+      </div>
+
+      <div style="padding:12px 26px;background:rgba(13,16,32,.7);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;color:#94a3b8">
+        <div>총 <b id="min7014ResultsCount" style="color:#7cc4ff">0</b>개 자료 검색됨</div>
+        <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:700">🌐 min7014 공식 웹사이트 전체 방문 ➔</a>
+      </div>
     </div>
   </div>
 
@@ -1205,15 +1508,323 @@ function toggleMathStory() {
     if (el) el.addEventListener('change', renderList);
   });
 
+  var activeFilterMode = 'all'; // 'all', 'wrong', 'bookmarks', 'pack'
+  var selectedPackSlugs = [];
+
+  // 게이미피케이션 상태 업데이트
+  function updateGamificationUI() {
+    if (!window.MatheduGame) return;
+    var streak = window.MatheduGame.getStreak();
+    var lv = window.MatheduGame.getLevelInfo();
+    var wrongs = window.MatheduGame.getWrongAnswers();
+    var bookmarks = window.MatheduGame.getBookmarks();
+
+    var sTitle = document.getElementById('streakTitle');
+    var sSub = document.getElementById('streakSub');
+    if (sTitle) {
+      sTitle.textContent = streak.count > 0 ? ('연속 출석 ' + streak.count + '일차 🔥') : '연속 출석 1일차 시작';
+    }
+    if (sSub) {
+      sSub.textContent = streak.activeToday ? '✅ 오늘 수학 퀘스트 완료!' : '오늘 1문제 풀면 불꽃 유지!';
+    }
+
+    var lvTitle = document.getElementById('gameLevelTitle');
+    var xpText = document.getElementById('gameXpText');
+    var barFill = document.getElementById('gameXpBarFill');
+    if (lvTitle) lvTitle.textContent = lv.title;
+    if (xpText) xpText.textContent = lv.currentXP + ' / ' + (lv.nextXP ? (lv.nextXP + ' XP') : '최고 등급');
+    if (barFill) barFill.style.width = lv.progressPct + '%';
+
+    var qwCount = document.getElementById('quickWrongCount');
+    if (qwCount) qwCount.textContent = wrongs.length;
+    var tabWCount = document.getElementById('tabWrongCount');
+    if (tabWCount) tabWCount.textContent = wrongs.length;
+    var tabBCount = document.getElementById('tabBookmarkCount');
+    if (tabBCount) tabBCount.textContent = bookmarks.length;
+  }
+
+  // 오늘의 추천 동적 기하 (min7014) 초기화
+  function initTodayGeoGebra() {
+    var picks = [
+      {
+        title: "타원에서의 빛 반사 (Reflection of Light on an Ellipse)",
+        desc: "한 초점에서 나온 빛은 타원에 반사되어 다른 초점을 반드시 통과합니다. GeoGebra 앱렛으로 타원의 장축과 초점을 직접 끌어보며 아름다운 광학적 원리를 체험하세요.",
+        applet: "https://www.geogebra.org/m/jggpufc4",
+        pdf: "https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0"
+      },
+      {
+        title: "피타고라스 나무 (Pythagoras Tree)",
+        desc: "직각삼각형의 세 변 위에 정사각형을 무한히 반복하여 자라나는 수학적 프랙탈 트리입니다. 민은기 선생님의 동적 조작으로 가지의 각도와 면적 보존을 관찰하세요.",
+        applet: "https://www.geogebra.org/m/xK2WwJtQ",
+        pdf: "https://min7014.github.io/2025/2025013001.pdf#toolbar=0&view=Fit&scrollbar=0"
+      },
+      {
+        title: "포물선 상의 점에서 접선의 방정식 (Tangent Line on a Parabola)",
+        desc: "포물선 위의 임의의 점에서의 접선과 준선, 초점이 이루는 이등변삼각형의 기하학적 성질을 GeoGebra 슬라이더로 직접 움직이며 확인해보세요.",
+        applet: "https://www.geogebra.org/m/egpbt5m2",
+        pdf: "https://min7014.github.io/2022/2022051001.pdf#toolbar=0&view=Fit&scrollbar=0"
+      },
+      {
+        title: "단델린의 구(Dandelin Spheres)와 원뿔곡선의 초점 증명",
+        desc: "원뿔을 평면으로 자를 때 생기는 원뿔곡선에 내접하는 두 구가 평면과 만나는 점이 왜 초점이 되는지 3차원 입체 기하학으로 증명합니다.",
+        applet: "https://www.geogebra.org/u/min7014",
+        pdf: "https://min7014.github.io/2019080802.html"
+      }
+    ];
+    var todayIndex = new Date().getDate() % picks.length;
+    var p = picks[todayIndex];
+    var tEl = document.getElementById('todayGgbTitle');
+    var dEl = document.getElementById('todayGgbDesc');
+    var aBtn = document.getElementById('btnTodayGgbApplet');
+    var pBtn = document.getElementById('btnTodayGgbPdf');
+    if (tEl) tEl.textContent = p.title;
+    if (dEl) dEl.textContent = p.desc;
+    if (aBtn) aBtn.href = p.applet;
+    if (pBtn) pBtn.href = p.pdf;
+  }
+  initTodayGeoGebra();
+
+  // 필터 모드 전환 (전체, 오답노트, 즐겨찾기)
+  window.switchFilterMode = function(mode) {
+    activeFilterMode = mode;
+    document.querySelectorAll('.filter-tab-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    var activeBtn = document.querySelector('.filter-tab-btn[data-mode="' + mode + '"]');
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // 수업 팩 모드가 아니면 플로팅 바 숨김
+    var floatBar = document.getElementById('lessonPackFloatingBar');
+    if (mode !== 'pack' && floatBar) {
+      floatBar.style.display = 'none';
+    }
+
+    renderList();
+  };
+
+  // 즐겨찾기 토글
+  window.toggleBookmarkCard = function(slug, btn) {
+    if (!window.MatheduGame || !window.MatheduGame.toggleBookmark) return;
+    var isNowBookmarked = window.MatheduGame.toggleBookmark(slug);
+    if (btn) {
+      btn.textContent = isNowBookmarked ? '★' : '☆';
+      btn.className = 'card-bookmark-btn' + (isNowBookmarked ? ' active' : '');
+      btn.title = isNowBookmarked ? '즐겨찾기 해제' : '즐겨찾기 추가';
+    }
+    updateGamificationUI();
+    if (activeFilterMode === 'bookmarks') {
+      renderList();
+    }
+  };
+
+  // 교사용 수업 팩 묶기 토글
+  window.toggleLessonPackMode = function(forceState) {
+    if (typeof forceState === 'boolean') {
+      activeFilterMode = forceState ? 'pack' : 'all';
+    } else {
+      activeFilterMode = (activeFilterMode === 'pack') ? 'all' : 'pack';
+    }
+
+    var packBtn = document.getElementById('tabBtnLessonPack');
+    var floatBar = document.getElementById('lessonPackFloatingBar');
+
+    if (activeFilterMode === 'pack') {
+      document.querySelectorAll('.filter-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      if (packBtn) {
+        packBtn.classList.add('active');
+        packBtn.innerHTML = '🎒 수업 팩 묶기 모드 (체크 중)';
+      }
+      if (floatBar) floatBar.style.display = 'flex';
+      updatePackCounter();
+    } else {
+      if (packBtn) {
+        packBtn.classList.remove('active');
+        packBtn.innerHTML = '🎒 교사용 수업 팩 묶기';
+      }
+      if (floatBar) floatBar.style.display = 'none';
+      var allBtn = document.querySelector('.filter-tab-btn[data-mode="all"]');
+      if (allBtn) allBtn.classList.add('active');
+    }
+
+    renderList();
+  };
+
+  // 수업 팩 체크박스 선택/해제
+  window.togglePackSelect = function(slug, checked) {
+    var idx = selectedPackSlugs.indexOf(slug);
+    if (checked && idx === -1) {
+      selectedPackSlugs.push(slug);
+    } else if (!checked && idx !== -1) {
+      selectedPackSlugs.splice(idx, 1);
+    }
+    updatePackCounter();
+  };
+
+  function updatePackCounter() {
+    var el = document.getElementById('packSelectedCount');
+    if (el) el.textContent = selectedPackSlugs.length;
+  }
+
+  // 수업 팩 생성 액션 (복사, QR, 즉시 시작)
+  window.createLessonPackAction = function(action) {
+    if (selectedPackSlugs.length === 0) {
+      alert('오늘 수업에서 다룰 문제를 목록에서 최소 1개 이상 체크해주세요!');
+      return;
+    }
+
+    var firstSlug = selectedPackSlugs[0];
+    var packParam = selectedPackSlugs.join(',');
+    var origin = window.location.origin;
+    var pathname = window.location.pathname;
+    var basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+    var defaultRoom = 'CLASS-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+
+    var studentUrl = origin + basePath + '/board/' + firstSlug + '.html?pack=' + encodeURIComponent(packParam) + '&room=' + encodeURIComponent(defaultRoom);
+
+    if (action === 'copy') {
+      navigator.clipboard.writeText(studentUrl).then(function() {
+        alert('🎉 학생 배포용 수업 팩 링크가 복사되었습니다!\n\n총 ' + selectedPackSlugs.length + '개 문제가 순서대로 진행됩니다.\n수업 코드: ' + defaultRoom);
+      }).catch(function() {
+        prompt('아래 링크를 복사하여 학생들에게 공유하세요:', studentUrl);
+      });
+    } else if (action === 'qr') {
+      if (typeof openProjectorScreen === 'function') {
+        openProjectorScreen(studentUrl, defaultRoom + ' (수업 팩 ' + selectedPackSlugs.length + '문항)');
+      } else {
+        window.open('https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=' + encodeURIComponent(studentUrl), '_blank');
+      }
+    } else if (action === 'start') {
+      window.location.href = 'board/' + firstSlug + '.html?pack=' + encodeURIComponent(packParam) + '&room=' + encodeURIComponent(defaultRoom);
+    }
+  };
+
+  // min7014 동적 기하 스마트 탐색관 모달 제어
+  var _min7014Materials = null;
+  var _min7014ActiveTag = '';
+
+  window.openMin7014ExplorerModal = function() {
+    var modal = document.getElementById('min7014ExplorerModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+
+    if (!_min7014Materials) {
+      var listEl = document.getElementById('min7014ResultsList');
+      if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#7cc4ff">⏳ 민은기 선생님의 3,400+ 동적 기하 자료실을 불러오는 중...</div>';
+
+      fetch('assets/min7014_materials.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          _min7014Materials = data || [];
+          filterMin7014Materials();
+        })
+        .catch(function(e) {
+          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" style="color:#7cc4ff">공식 웹사이트 바로가기</a></div>';
+        });
+    } else {
+      filterMin7014Materials();
+    }
+  };
+
+  window.closeMin7014ExplorerModal = function() {
+    var modal = document.getElementById('min7014ExplorerModal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  window.setMin7014Chip = function(tag, btn) {
+    _min7014ActiveTag = tag;
+    var container = document.getElementById('min7014ModalChips');
+    if (container) {
+      container.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
+    }
+    if (btn) btn.classList.add('active');
+    filterMin7014Materials();
+  };
+
+  window.filterMin7014Materials = function() {
+    if (!_min7014Materials) return;
+    var q = (document.getElementById('min7014SearchInput')?.value || '').trim().toLowerCase();
+    var listEl = document.getElementById('min7014ResultsList');
+    var countEl = document.getElementById('min7014ResultsCount');
+    if (!listEl) return;
+
+    var matched = _min7014Materials.filter(function(item) {
+      var title = (item.title || '').toLowerCase();
+      var tagStr = (item.tags || []).join(' ').toLowerCase();
+      var matchesQ = !q || title.includes(q) || tagStr.includes(q);
+      var matchesTag = !_min7014ActiveTag || new RegExp(_min7014ActiveTag, 'i').test(title) || new RegExp(_min7014ActiveTag, 'i').test(tagStr);
+      return matchesQ && matchesTag;
+    });
+
+    if (countEl) countEl.textContent = matched.length;
+
+    if (matched.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">검색어에 일치하는 기하 자료가 없습니다. 다른 검색어를 입력해보세요.</div>';
+      return;
+    }
+
+    var displayList = matched.slice(0, 40);
+    var h = '';
+    displayList.forEach(function(m) {
+      var title = escapeHtml(m.title || '제목 없음');
+      var ggbUrl = m.geogebra || '';
+      var pdfUrl = m.pdf || '';
+      var ytUrl = m.youtube || '';
+      var mainUrl = m.url || 'https://min7014.github.io/';
+
+      h += '<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;transition:.15s">';
+      h += '  <div style="flex:1;min-width:240px">';
+      h += '    <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" style="color:#eef2ff;font-size:0.95rem;font-weight:700;text-decoration:none;display:block;line-height:1.5">' + title + '</a>';
+      if (m.tags && m.tags.length > 0) {
+        h += '  <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">';
+        m.tags.forEach(function(t) {
+          h += '    <span style="background:rgba(124,196,255,.15);color:#7cc4ff;padding:1px 8px;border-radius:10px;font-size:0.72rem;font-weight:600">#' + escapeHtml(t) + '</span>';
+        });
+        h += '  </div>';
+      }
+      h += '  </div>';
+
+      h += '  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">';
+      if (ggbUrl) {
+        h += '    <a href="' + escapeHtml(ggbUrl) + '" target="_blank" rel="noopener" style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.45);color:#38bdf8;padding:5px 12px;border-radius:8px;font-size:0.8rem;font-weight:700;text-decoration:none">🎮 GeoGebra</a>';
+      }
+      if (pdfUrl) {
+        h += '    <a href="' + escapeHtml(pdfUrl) + '" target="_blank" rel="noopener" style="background:rgba(248,113,113,.18);border:1px solid rgba(248,113,113,.45);color:#f87171;padding:5px 12px;border-radius:8px;font-size:0.8rem;font-weight:700;text-decoration:none">📄 증명 PDF</a>';
+      }
+      if (ytUrl) {
+        h += '    <a href="' + escapeHtml(ytUrl) + '" target="_blank" rel="noopener" style="background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.45);color:#fca5a5;padding:5px 12px;border-radius:8px;font-size:0.8rem;font-weight:700;text-decoration:none">▶️ 유튜브</a>';
+      }
+      h += '    <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:5px 10px;border-radius:8px;font-size:0.8rem;text-decoration:none">상세 ➔</a>';
+      h += '  </div>';
+      h += '</div>';
+    });
+
+    listEl.innerHTML = h;
+  };
+
   function renderList() {
     var query = (searchInput.value || '').trim().toLowerCase();
     var ef = getExamFilters();
     var hasActiveExamFilter = Boolean(ef.year || ef.grade || ef.month || ef.subject || ef.num);
 
+    var wrongSlugs = new Set((window.MatheduGame ? window.MatheduGame.getWrongAnswers() : []).map(function(w) { return w.slug; }));
+    var bookmarkSlugs = new Set(window.MatheduGame ? window.MatheduGame.getBookmarks() : []);
+
+    var tabAll = document.getElementById('tabAllCount');
+    if (tabAll) tabAll.textContent = allItems.length;
+
     var filtered = allItems.filter(function(it) {
       if (it.is_public === false) return false;
       var title = (it.title || '').toLowerCase();
       var slug = (it.slug || '').toLowerCase();
+
+      // 모드별 필터링
+      if (activeFilterMode === 'wrong' && !wrongSlugs.has(it.slug)) {
+        return false;
+      }
+      if (activeFilterMode === 'bookmarks' && !bookmarkSlugs.has(it.slug)) {
+        return false;
+      }
+
       var matchesQuery = !query || title.includes(query) || slug.includes(query);
       var matchesTopic = !activeTopic || new RegExp(activeTopic, 'i').test(title);
       if (!matchesQuery || !matchesTopic) return false;
@@ -1255,6 +1866,26 @@ function toggleMathStory() {
     countBadge.textContent = filtered.length + '개' + (filtered.length !== allItems.length ? ' (전체 ' + allItems.length + '개)' : '');
 
     if (filtered.length === 0) {
+      if (activeFilterMode === 'wrong') {
+        listEl.innerHTML = 
+          '<div style="text-align:center;padding:50px 20px;background:rgba(251,113,133,.08);border:1px dashed rgba(251,113,133,.35);border-radius:18px;margin:12px 0">' +
+            '<div style="font-size:2.4rem;margin-bottom:8px">🎉</div>' +
+            '<div style="font-size:1.15rem;font-weight:800;color:#5eead4;margin-bottom:6px">오답노트가 깨끗하게 비어 있습니다!</div>' +
+            '<div style="font-size:0.88rem;color:#cbd5e1;margin-bottom:16px">틀린 문제가 없거나 모든 오답을 성공적으로 복습하셨습니다. 완벽합니다!</div>' +
+            '<button type="button" class="btn-primary" onclick="switchFilterMode(\'all\')">전체 문제 둘러보기 ➔</button>' +
+          '</div>';
+        return;
+      }
+      if (activeFilterMode === 'bookmarks') {
+        listEl.innerHTML = 
+          '<div style="text-align:center;padding:50px 20px;background:rgba(253,230,138,.08);border:1px dashed rgba(253,230,138,.35);border-radius:18px;margin:12px 0">' +
+            '<div style="font-size:2.4rem;margin-bottom:8px">⭐</div>' +
+            '<div style="font-size:1.15rem;font-weight:800;color:#fde68a;margin-bottom:6px">즐겨찾기한 문제가 아직 없습니다</div>' +
+            '<div style="font-size:0.88rem;color:#cbd5e1;margin-bottom:16px">문제 카드 오른쪽의 별표(☆)를 누르면 나만의 핵심 유형으로 보관할 수 있습니다.</div>' +
+            '<button type="button" class="btn-primary" onclick="switchFilterMode(\'all\')">전체 문제 둘러보기 ➔</button>' +
+          '</div>';
+        return;
+      }
       if (hasActiveExamFilter) {
         var criteriaDesc = [ef.year ? ef.year + '학년도' : '', ef.month, ef.grade, ef.subject, ef.num ? ef.num + '번' : ''].filter(Boolean).join(' ');
         var reqUrl = 'create.html?year=' + encodeURIComponent(ef.year) + '&grade=' + encodeURIComponent(ef.grade) + '&month=' + encodeURIComponent(ef.month) + '&subject=' + encodeURIComponent(ef.subject) + '&num=' + encodeURIComponent(ef.num);
@@ -1343,7 +1974,19 @@ function toggleMathStory() {
         metaTag = '<span style="background:rgba(124,196,255,0.15);border:1px solid rgba(124,196,255,0.35);color:#7cc4ff;padding:2px 8px;border-radius:12px;font-size:0.74rem;font-weight:700;display:inline-block;margin-right:6px;">' + escapeHtml(metaParts.join(' ')) + '</span>';
       }
 
-      html += '<div class="card">';
+      var isBm = window.MatheduGame && window.MatheduGame.isBookmarked ? window.MatheduGame.isBookmarked(slug) : false;
+
+      html += '<div class="card" data-slug="' + slug + '">';
+      
+      // 수업 팩 체크박스 & 즐겨찾기 별표
+      html += '<div style="display:flex;align-items:center;gap:6px">';
+      if (activeFilterMode === 'pack') {
+        var isChecked = selectedPackSlugs.indexOf(slug) !== -1;
+        html += '<input type="checkbox" class="card-pack-checkbox" onchange="togglePackSelect(\'' + slug + '\', this.checked)" ' + (isChecked ? 'checked' : '') + '>';
+      }
+      html += '<button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + (isBm ? '즐겨찾기 해제' : '즐겨찾기 추가') + '">' + (isBm ? '★' : '☆') + '</button>';
+      html += '</div>';
+
       html += '<div class="icon">📘</div>';
       html += '<div class="body">';
       html += '<a class="title" href="board/' + slug + '.html">' + title + '</a>';
@@ -1366,6 +2009,8 @@ function toggleMathStory() {
     if (window.MathJax && MathJax.typesetPromise) {
       MathJax.typesetPromise([listEl]).catch(function(){});
     }
+
+    updateGamificationUI();
   }
 
   function updateStudentQuickBar() {
@@ -1401,7 +2046,20 @@ function toggleMathStory() {
     renderList();
     updateStudentQuickBar();
   });
+  window.addEventListener('mathedu:streak-updated', updateGamificationUI);
+  window.addEventListener('mathedu:xp-updated', updateGamificationUI);
+  window.addEventListener('mathedu:badge-unlocked', updateGamificationUI);
+  window.addEventListener('mathedu:wrong-updated', function() {
+    updateGamificationUI();
+    if (activeFilterMode === 'wrong') renderList();
+  });
+  window.addEventListener('mathedu:bookmarks-updated', function() {
+    updateGamificationUI();
+    if (activeFilterMode === 'bookmarks') renderList();
+  });
+
   updateStudentQuickBar();
+  updateGamificationUI();
 
   // 실시간 검색 이벤트
   searchInput.addEventListener('input', renderList);

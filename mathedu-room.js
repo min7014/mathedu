@@ -23,24 +23,35 @@
   var currentSlug = window.location.pathname.split('/').pop().replace('.html', '') || 'quiz';
 
   function ensureAuthLoaded(callback) {
-    if (window.MatheduAuth) {
+    var isBoard = window.location.pathname.indexOf('/board/') !== -1;
+    var toLoad = [];
+    if (!window.MatheduAuth) toLoad.push(isBoard ? '../mathedu-auth.js' : './mathedu-auth.js');
+    if (!window.MatheduGame) toLoad.push(isBoard ? '../mathedu-gamification.js' : './mathedu-gamification.js');
+
+    if (toLoad.length === 0) {
       if (typeof callback === 'function') callback();
       return;
     }
-    var script = document.createElement('script');
-    var isBoard = window.location.pathname.indexOf('/board/') !== -1;
-    script.src = isBoard ? '../mathedu-auth.js' : './mathedu-auth.js';
-    script.onload = function() {
-      if (typeof callback === 'function') callback();
-    };
-    script.onerror = function() {
-      if (typeof callback === 'function') callback();
-    };
-    document.head.appendChild(script);
+
+    var loaded = 0;
+    toLoad.forEach(function(src) {
+      var script = document.createElement('script');
+      script.src = src;
+      script.onload = script.onerror = function() {
+        loaded++;
+        if (loaded >= toLoad.length && typeof callback === 'function') {
+          callback();
+        }
+      };
+      document.head.appendChild(script);
+    });
   }
 
   function initRoom() {
     ensureAuthLoaded(function() {
+      // 0. 선생님의 오늘의 수업 팩(?pack=slug1,slug2,...) 네비게이션 안내
+      injectLessonPackBanner();
+
       // 1. 학생이 특정 방에 참여 중인 경우 UI 표시
       if (roomId) {
         applyStudentRoomUI(roomId);
@@ -55,14 +66,17 @@
       // 4. 스크롤 중에도 언제든 누를 수 있는 플로팅 [🚀 이 문제로 수업 열기] 버튼
       injectFloatingClassButton();
 
-      // 5. 상단바 tbtn에 버튼 추가 (내가 푼 문제 + 수업 열기)
+      // 5. 상단바 tbtn에 버튼 추가 (내가 푼 문제 + 수업 열기 + 즐겨찾기 + A4 인쇄 + 칠판모드)
       injectTopbarButtons();
 
-      // 6. sendProgress 가로채기 (Google Sheets 전송 + MatheduAuth 풀이 기록 영구 저장)
+      // 6. sendProgress 가로채기 (Google Sheets 전송 + MatheduAuth 풀이 기록 + 게이미피케이션 XP/Confetti)
       patchSendProgress();
 
       // 7. 이전에 풀었던 문제라면 페이지 상단에 진행 안내 바 표시
       checkAndShowResumeBanner();
+
+      // 8. 오답 선택 감지기 (학생 오답노트 자동 적립)
+      attachWrongAnswerTracker();
     });
   }
 
@@ -441,7 +455,140 @@
 
       topbar.appendChild(offlineBtn);
     }
+    // 4. [⭐ 즐겨찾기] 버튼
+    if (!document.getElementById('btnBookmarkTopbar')) {
+      var bmBtn = document.createElement('button');
+      bmBtn.id = 'btnBookmarkTopbar';
+      bmBtn.className = 'tbtn navbtn';
+      bmBtn.style.cssText = 'background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.35);color:#fde68a;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      
+      function updateBmBtn() {
+        var isBm = (window.MatheduGame && window.MatheduGame.isBookmarked) ? window.MatheduGame.isBookmarked(currentSlug) : false;
+        bmBtn.innerHTML = isBm ? '★ 즐겨찾기됨' : '☆ 즐겨찾기';
+        bmBtn.style.background = isBm ? 'rgba(253,230,138,.28)' : 'rgba(253,230,138,.12)';
+        bmBtn.style.color = isBm ? '#fff' : '#fde68a';
+      }
+      updateBmBtn();
+      bmBtn.onclick = function() {
+        if (window.MatheduGame && window.MatheduGame.toggleBookmark) {
+          window.MatheduGame.toggleBookmark(currentSlug);
+          updateBmBtn();
+        }
+      };
+      topbar.appendChild(bmBtn);
+      window.addEventListener('mathedu:bookmarks-updated', updateBmBtn);
+    }
+
+    // 5. [🖨️ A4 학습지 인쇄] 버튼 (교사용/학생 출력용)
+    if (!document.getElementById('btnPrintWorksheetTopbar')) {
+      var printBtn = document.createElement('button');
+      printBtn.id = 'btnPrintWorksheetTopbar';
+      printBtn.className = 'tbtn navbtn';
+      printBtn.style.cssText = 'background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      printBtn.innerHTML = '🖨️ A4 학습지 인쇄';
+      printBtn.title = '교실 유인물 및 학생 필기 공간이 포함된 규격 A4 시험지 인쇄/PDF 저장';
+      printBtn.onclick = function() {
+        if (window.MatheduGame && window.MatheduGame.printWorksheet) {
+          window.MatheduGame.printWorksheet();
+        } else {
+          window.print();
+        }
+      };
+      topbar.appendChild(printBtn);
+    }
+
+    // 6. [🖥️ 칠판 모드] 버튼 (교실 빔프로젝터/전자칠판 판서용 고대비 뷰)
+    if (!document.getElementById('btnChalkboardModeTopbar')) {
+      var chalkBtn = document.createElement('button');
+      chalkBtn.id = 'btnChalkboardModeTopbar';
+      chalkBtn.className = 'tbtn navbtn';
+      chalkBtn.style.cssText = 'background:rgba(94,234,212,.12);border:1px solid rgba(94,234,212,.35);color:#5eead4;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      chalkBtn.innerHTML = '🖥️ 칠판 모드';
+      chalkBtn.title = '교실 칠판 판서 및 빔프로젝터 투사를 위한 초대형 폰트 & 고대비 뷰';
+      chalkBtn.onclick = function() {
+        if (window.MatheduGame && window.MatheduGame.toggleChalkboardMode) {
+          window.MatheduGame.toggleChalkboardMode();
+        }
+      };
+      topbar.appendChild(chalkBtn);
+    }
   }
+
+  // === 오늘의 수업 팩(?pack=slug1,slug2,...) 가이드 바 ===
+  function injectLessonPackBanner() {
+    var packParam = (urlParams.get('pack') || '').trim();
+    if (!packParam) return;
+
+    var slugs = packParam.split(',').map(function(s) { return s.trim().replace(/\.html$/, ''); }).filter(Boolean);
+    if (slugs.length <= 1) return;
+
+    var curIdx = slugs.indexOf(currentSlug);
+    if (curIdx === -1) return;
+
+    var wrap = document.querySelector('.wrap');
+    if (!wrap) return;
+
+    var packBar = document.createElement('div');
+    packBar.className = 'lesson-pack-nav-bar';
+    packBar.style.cssText = 'background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(124,196,255,.2));border:1.5px solid rgba(167,139,250,.45);border-radius:14px;padding:12px 18px;margin:12px 0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,.3);backdrop-filter:blur(16px);animation:matheduFadeIn .3s ease';
+
+    var prevSlug = curIdx > 0 ? slugs[curIdx - 1] : null;
+    var nextSlug = curIdx < slugs.length - 1 ? slugs[curIdx + 1] : null;
+    var rParam = roomId ? ('&room=' + encodeURIComponent(roomId)) : '';
+
+    var dotsHtml = slugs.map(function(s, idx) {
+      var isCurrent = (idx === curIdx);
+      var linkUrl = s + '.html?pack=' + encodeURIComponent(packParam) + rParam;
+      return (
+        '<a href="' + linkUrl + '" style="display:inline-block;width:' + (isCurrent ? '24px' : '10px') + ';height:10px;border-radius:5px;background:' + (isCurrent ? '#a78bfa' : 'rgba(255,255,255,.25)') + ';transition:.2s;text-decoration:none" title="' + (idx + 1) + '번 문제">' +
+        '</a>'
+      );
+    }).join('');
+
+    packBar.innerHTML = 
+      '<div style="display:flex;align-items:center;gap:10px">' +
+        '<span style="font-size:1.2rem">🎒</span>' +
+        '<div>' +
+          '<div style="font-size:0.92rem;font-weight:800;color:#c4b5fd">오늘의 수업 팩 진행 중 (문제 ' + (curIdx + 1) + ' / ' + slugs.length + ')</div>' +
+          '<div style="display:flex;gap:4px;align-items:center;margin-top:4px">' + dotsHtml + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;align-items:center">' +
+        (prevSlug ? ('<a href="' + prevSlug + '.html?pack=' + encodeURIComponent(packParam) + rParam + '" class="tbtn" style="padding:5px 12px;font-size:0.8rem">◀ 이전 문제</a>') : '') +
+        (nextSlug ? ('<a href="' + nextSlug + '.html?pack=' + encodeURIComponent(packParam) + rParam + '" class="tbtn" style="background:linear-gradient(90deg,#a78bfa,#7cc4ff);color:#0b1020;border:none;padding:6px 14px;font-size:0.82rem;font-weight:800">다음 문제 ▶</a>') : '<span style="font-size:0.8rem;color:#5eead4;font-weight:700">🏁 마지막 문항</span>') +
+      '</div>';
+
+    var topbar = wrap.querySelector('.topbar') || wrap.querySelector('.navbar');
+    if (topbar && topbar.nextSibling) {
+      wrap.insertBefore(packBar, topbar.nextSibling);
+    } else {
+      wrap.insertBefore(packBar, wrap.firstChild);
+    }
+  }
+
+  // === 학생 오답 감지기 (오답 선택 시 오답노트에 자동 수집) ===
+  function attachWrongAnswerTracker() {
+    document.addEventListener('click', function(e) {
+      var opt = e.target.closest ? e.target.closest('.opt') : null;
+      if (!opt) return;
+
+      setTimeout(function() {
+        if (opt.classList.contains('wrong')) {
+          var qEl = opt.closest('.q');
+          var qIdx = qEl ? Array.from(document.querySelectorAll('.q')).indexOf(qEl) + 1 : 1;
+          var h1 = document.querySelector('h1');
+          var pageTitle = h1 ? h1.textContent.trim().replace(/^📘\s*/, '') : currentSlug;
+
+          if (window.MatheduGame && window.MatheduGame.recordWrongAnswer) {
+            window.MatheduGame.recordWrongAnswer(currentSlug, qIdx, pageTitle);
+          }
+        }
+      }, 100);
+    });
+  }
+
+  var _lastDoneSteps = 0;
+  var _hasTriggeredCompletion = false;
 
   function patchSendProgress() {
     var originalSendProgress = window.sendProgress;
@@ -472,11 +619,11 @@
       };
 
       // === MatheduAuth 푼 문제 기록 저장 (기기 캐시 + 비회원 게스트 DB + 정회원 DB) ===
-      if (window.MatheduAuth && window.MatheduAuth.recordSolvedProblem) {
-        var h1 = document.querySelector('h1');
-        var pageTitle = h1 ? h1.textContent.trim() : (document.title || currentSlug);
-        pageTitle = pageTitle.replace(/^📘\s*/, '').trim();
+      var h1 = document.querySelector('h1');
+      var pageTitle = h1 ? h1.textContent.trim() : (document.title || currentSlug);
+      pageTitle = pageTitle.replace(/^📘\s*/, '').trim();
 
+      if (window.MatheduAuth && window.MatheduAuth.recordSolvedProblem) {
         window.MatheduAuth.recordSolvedProblem(currentSlug, {
           title: pageTitle,
           stepDone: done.length,
@@ -484,6 +631,53 @@
           correct: correct,
           completed: (total > 0 && done.length >= total)
         });
+      }
+
+      // === 게이미피케이션 XP 및 축하 연출 ===
+      if (window.MatheduGame) {
+        if (done.length > _lastDoneSteps) {
+          var stepDiff = done.length - _lastDoneSteps;
+          _lastDoneSteps = done.length;
+          window.MatheduGame.addXP(stepDiff * 10, '디딤돌 통과');
+          window.MatheduGame.unlockBadge('first_step');
+        }
+
+        // 전체 완료 시 축하 폭죽(Confetti) & 출석 스트릭 & 대형 보너스
+        if (done.length >= total && !_hasTriggeredCompletion) {
+          _hasTriggeredCompletion = true;
+          window.MatheduGame.addXP(50, '🎉 문제 완주 축하 보너스');
+          window.MatheduGame.recordActivity();
+          window.MatheduGame.unlockBadge('full_clear');
+          if (correct === total) {
+            window.MatheduGame.unlockBadge('perfect_run');
+          }
+          window.MatheduGame.clearWrongAnswer(currentSlug);
+          window.MatheduGame.triggerConfetti(4000);
+
+          // 수업 팩 연계 안내
+          var packParam = (urlParams.get('pack') || '').trim();
+          if (packParam) {
+            var slugs = packParam.split(',').map(function(s) { return s.trim(); });
+            var curIdx = slugs.indexOf(currentSlug);
+            if (curIdx !== -1 && curIdx < slugs.length - 1) {
+              var nextSlug = slugs[curIdx + 1];
+              var rParam = roomId ? ('&room=' + encodeURIComponent(roomId)) : '';
+              var nextUrl = nextSlug + '.html?pack=' + encodeURIComponent(packParam) + rParam;
+              setTimeout(function() {
+                var fin = document.querySelector('.final');
+                if (fin && !document.getElementById('btnNextPackQuestion')) {
+                  var nextBtn = document.createElement('a');
+                  nextBtn.id = 'btnNextPackQuestion';
+                  nextBtn.href = nextUrl;
+                  nextBtn.className = 'btn';
+                  nextBtn.style.cssText = 'display:inline-block;margin-top:14px;background:linear-gradient(90deg,#5eead4,#38bdf8);color:#0b1020;padding:12px 28px;font-size:1.05rem;font-weight:800;text-decoration:none;border-radius:12px;box-shadow:0 8px 24px rgba(94,234,212,.4);animation:matheduPopUp .3s ease';
+                  nextBtn.innerHTML = '🚀 다음 ' + (curIdx + 2) + '번 문제로 계속하기 ➔';
+                  fin.appendChild(nextBtn);
+                }
+              }, 600);
+            }
+          }
+        }
       }
 
       if (window._sheetsApiUrl) {
