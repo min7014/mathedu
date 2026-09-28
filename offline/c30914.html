@@ -144,8 +144,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30914.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30914">
-<meta name="mathedu-offline-build-time" content="2026-09-28T05:38:28.181030+00:00">
-<meta name="mathedu-offline-hash" content="caa8cff1">
+<meta name="mathedu-offline-build-time" content="2026-09-28T05:48:51.903056+00:00">
+<meta name="mathedu-offline-hash" content="4126c7a0">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -212,7 +212,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 대수 팁</b>: 지수가 정수에서 유리수, 실수로 확장됨에 따라 나타나는 지수함수의 지수적 폭발과 거듭제곱근의 기하학적 성질을 하단의 <b>min7014 개념 정리 자료</b>를 통해 깊이 있게 탐구해 보세요.</div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$A_n(a_n, 2^{a_n}), B_n(b_n, 2^{b_n})$</b> — 지수함수 y=2^x 위의 두 점</div><div><b>$\text{기울기 } = \dfrac{2^{b_n}-2^{a_n}}{b_n-a_n} = 3$</b> — 직선의 기울기 조건</div><div><b>$\overline{A_n B_n} = n\sqrt{10}$</b> — 두 점 사이의 거리 조건</div><div><b>$y = x \text{ 대칭}$</b> — 지수함수와 로그함수의 역함수 관계</div></div>
 <h2>제1단계 · 기울기와 거리 조건으로 $b_n - a_n$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>직선의 기울기가 $3$이므로 $\Delta y = 3\Delta x$ 입니다. 피타고라스 정리에 의해 $(\Delta x)^2 + (3\Delta x)^2 = 10(\Delta x)^2 = (n\sqrt{10})^2 = 10n^2 \implies \Delta x = n$. 즉 $b_n - a_n = n$ 입니다.</div><div class="q" data-ans="1" data-exp="$(\Delta x)^2 + 9(\Delta x)^2 = 10n^2 \implies \Delta x = n$입니다."><div class="lvl">문항</div><div class="stem">기울기가 3이고 선분의 길이가 $n\sqrt{10}$일 때 $b_n - a_n$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$n$</div><div class="opt"><span class="n">2</span>$2n$</div><div class="opt"><span class="n">3</span>$3n$</div><div class="opt"><span class="n">4</span>$\sqrt{10}n$</div><div class="opt"><span class="n">5</span>$10n$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -292,10 +292,14 @@ $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7}
       <img src="data:image/png;base64,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" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
-    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
+    <span class="min-tag">GeoGebra · AlgeoMath · 단계별 증명 PDF</span>
   </div>
   <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
+  <div class="min-guide-banner" style="background:rgba(124,196,255,.08);border:1px solid rgba(124,196,255,.25);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;line-height:1.6;color:#c7d2fe">
+    🎬 <b>선생님의 자료를 깊이 있게 감상하는 법</b>: 민은기 선생님의 PDF는 책장을 넘기듯 페이지를 넘겨갈 때마다 <b>도형의 점이 이동하고 보조선이 더해지며 수식이 스스로 완성되는 '단계별 플립북 애니메이션 증명'</b>입니다. 상단 미리보기나 새 창에서 키보드 방향키나 마우스 휠로 페이지를 넘기며, <b>각 프레임마다 변하는 요소와 보존되는 원리의 의미</b>를 곱씹어 보세요.
+  </div>
+
   <div class="min-list">
     
         <div class="min-item">
@@ -307,7 +311,7 @@ $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7}
             </a>
           </div>
           <div class="min-item-actions">
-            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/b5rypfj7')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/b5rypfj7" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2024/2024032305.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/w9pvemmU5XU" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20240325001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/b5rypfj7')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/b5rypfj7" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2024/2024032305.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/w9pvemmU5XU" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20240325001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -321,7 +325,7 @@ $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7}
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/2020/2020030101.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/D1oE3dToU2M" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030101.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/D1oE3dToU2M" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -335,7 +339,7 @@ $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7}
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/2020/2020030103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/I8Ou1OmnkJs" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/I8Ou1OmnkJs" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -349,7 +353,7 @@ $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7}
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/2020/2020030503.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/Gxx_ChdXo74" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200305003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030503.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/Gxx_ChdXo74" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200305003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -385,6 +389,7 @@ if (!window.toggleMinGgb) {
   };
 }
 </script>
+
 
 
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $\frac{170}{7}$</div>
@@ -578,8 +583,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30914';
-window._offlineBuildTime = '2026-09-28T05:38:28.181030+00:00';
-window._offlineHash = 'caa8cff1';
+window._offlineBuildTime = '2026-09-28T05:48:51.903056+00:00';
+window._offlineHash = '4126c7a0';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30914.html';
 
@@ -604,8 +609,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30914';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T05:38:28.181030+00:00';
-  var localHash = window._offlineHash || 'caa8cff1';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T05:48:51.903056+00:00';
+  var localHash = window._offlineHash || '4126c7a0';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30914.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

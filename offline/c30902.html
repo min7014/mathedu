@@ -144,8 +144,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30902.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30902">
-<meta name="mathedu-offline-build-time" content="2026-09-28T05:38:28.181030+00:00">
-<meta name="mathedu-offline-hash" content="94dc6ab2">
+<meta name="mathedu-offline-build-time" content="2026-09-28T05:48:51.903056+00:00">
+<meta name="mathedu-offline-hash" content="29fd69ca">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -212,7 +212,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 미적분 팁</b>: 곡선 위의 한 고정점과 움직이는 점을 잇는 할선이 두 점 사이의 거리가 0에 가까워질 때 접선에 수렴하는 '미분계수의 기하학적 극한 과정'을 하단의 <b>min7014 GeoGebra 모델</b>을 통해 직접 관찰해 보세요.</div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>• <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>• <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>• <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>• <b>[수학적 의미]</b> 미분은 형식적인 수식 연산이 아니라, 두 점 사이의 할선이 한 점에서의 접선으로 녹아드는 기하학적 수렴 과정임을 하단 자료로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f'(a) = \lim_{h \to 0}\dfrac{f(a+h)-f(a)}{h}$</b> — x=a에서의 미분계수의 정의</div><div><b>$(x^n)' = n x^{n-1}$</b> — 거듭제곱 함수의 미분 공식</div><div><b>$(c)' = 0$</b> — 상수함수의 도함수는 0</div></div>
 <h2>제1단계 · 극한식과 미분계수의 관계 이해하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>미분계수의 정의에 의해 $\lim_{h \to 0}\frac{f(1+h)-f(1)}{h}$ 은 함수 $f(x)$의 $x=1$에서의 미분계수 $f'(1)$과 같습니다.</div><div class="q" data-ans="3" data-exp="미분계수의 정의에 의해 $x=1$에서의 미분계수 $f'(1)$입니다."><div class="lvl">문항</div><div class="stem">함수 $f(x)$에 대하여 $\lim_{h \to 0}\frac{f(1+h)-f(1)}{h}$ 가 뜻하는 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>$f(1)$</div><div class="opt"><span class="n">2</span>$f(0)$</div><div class="opt"><span class="n">3</span>$f'(1)$</div><div class="opt"><span class="n">4</span>$f'(0)$</div><div class="opt"><span class="n">5</span>$f''(1)$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -276,10 +276,14 @@ $$f'(1) = 3 \times 1^2 + 6 \times 1 = 3 + 6 = 9$$<br>
       <img src="data:image/png;base64,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" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
-    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
+    <span class="min-tag">GeoGebra · AlgeoMath · 단계별 증명 PDF</span>
   </div>
   <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
+  <div class="min-guide-banner" style="background:rgba(124,196,255,.08);border:1px solid rgba(124,196,255,.25);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;line-height:1.6;color:#c7d2fe">
+    🎬 <b>선생님의 자료를 깊이 있게 감상하는 법</b>: 민은기 선생님의 PDF는 책장을 넘기듯 페이지를 넘겨갈 때마다 <b>도형의 점이 이동하고 보조선이 더해지며 수식이 스스로 완성되는 '단계별 플립북 애니메이션 증명'</b>입니다. 상단 미리보기나 새 창에서 키보드 방향키나 마우스 휠로 페이지를 넘기며, <b>각 프레임마다 변하는 요소와 보존되는 원리의 의미</b>를 곱씹어 보세요.
+  </div>
+
   <div class="min-list">
     
         <div class="min-item">
@@ -291,7 +295,7 @@ $$f'(1) = 3 \times 1^2 + 6 \times 1 = 3 + 6 = 9$$<br>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=54ce0d3afd8911e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019110302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/XbPZgnUE_uc" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=54ce0d3afd8911e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019110302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/XbPZgnUE_uc" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -305,7 +309,7 @@ $$f'(1) = 3 \times 1^2 + 6 \times 1 = 3 + 6 = 9$$<br>
             </a>
           </div>
           <div class="min-item-actions">
-            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -319,7 +323,7 @@ $$f'(1) = 3 \times 1^2 + 6 \times 1 = 3 + 6 = 9$$<br>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/2020/2020110301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/MArY06ZB4Z4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20201103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020110301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/MArY06ZB4Z4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20201103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -333,7 +337,7 @@ $$f'(1) = 3 \times 1^2 + 6 \times 1 = 3 + 6 = 9$$<br>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -369,6 +373,7 @@ if (!window.toggleMinGgb) {
   };
 }
 </script>
+
 
 
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 9</div>
@@ -562,8 +567,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30902';
-window._offlineBuildTime = '2026-09-28T05:38:28.181030+00:00';
-window._offlineHash = '94dc6ab2';
+window._offlineBuildTime = '2026-09-28T05:48:51.903056+00:00';
+window._offlineHash = '29fd69ca';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30902.html';
 
@@ -588,8 +593,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30902';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T05:38:28.181030+00:00';
-  var localHash = window._offlineHash || '94dc6ab2';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T05:48:51.903056+00:00';
+  var localHash = window._offlineHash || '29fd69ca';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30902.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
