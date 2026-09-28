@@ -22,10 +22,10 @@
         minHome: "🌐 min7014 홈"
       },
       hero: {
-        badgePill: "✨ 기하와 대수의 시각화 · 수학 연구소 플랫폼",
+        badgePill: "🏛️ 대한민국의 수학교사 민은기 · 세계적인 수학교사의 평생 연구실",
         mainTitleLab: "min7014",
         mainTitleHub: "mathedu",
-        leadDesc: "단델린 구와 원뿔곡선의 기하학적 통찰을 담은 <b>가입 없는 인터랙티브 수학 플랫폼</b>",
+        leadDesc: "대한민국의 수학교사 민은기 선생님의 3,400+ 평생 시각적 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학 플랫폼</b>",
         emblemCaption: "📐 공식 엠블럼",
         emblemSub: "Dandelin Spheres",
         emblemTitle: "클릭하여 단델린 구의 기하학적 원리 보기",
@@ -39,7 +39,7 @@
         storyDrawerP1: "원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <b>단델린의 구</b>라고 합니다.",
         storyDrawerP2: "구가 평면과 접하는 점($F_1, F_2$)이 바로 원뿔곡선의 <b>초점(Focus)</b>이 되며, 곡선 위의 점에서 두 초점까지의 거리의 차(또는 합)가 일정함을 입체 기하학으로 우아하게 밝혀냅니다.",
         storyDrawerQuote: '"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"',
-        storyDrawerAuthor: "min7014 수학 교육의 지향점입니다.",
+        storyDrawerAuthor: "대한민국의 수학교사 민은기 선생님의 평생 수학 교육 철학입니다.",
         statTopics: "🏛️ 평생 수학 주제",
         statAssets: "📐 GeoGebra & PDF 증명",
         statQuizzes: "🎯 수능·모평 디딤돌 퀴즈",
@@ -212,10 +212,10 @@
         minHome: "🌐 min7014 Home"
       },
       hero: {
-        badgePill: "✨ Visualizing Geometry & Algebra · Math Research Lab",
+        badgePill: "🏛️ Min Eun-gi — Korea's Master Mathematics Educator · Global Visual Geometry Lab",
         mainTitleLab: "min7014",
         mainTitleHub: "mathedu",
-        leadDesc: "Interactive Step-by-Step Math Platform Visualizing <b>Dandelin Spheres & Conic Sections</b> (No Signup Required)",
+        leadDesc: "Lifelong Mathematical Legacy of Master Educator Min Eun-gi: Over 3,400 Dynamic Visual Proofs & Scaffolding Quizzes, <b>100% Freely Open Worldwide</b>",
         emblemCaption: "📐 Official Emblem",
         emblemSub: "Dandelin Spheres",
         emblemTitle: "Click to explore the geometric principle of Dandelin Spheres",
@@ -229,7 +229,7 @@
         storyDrawerP1: "When an oblique cutting plane intersects a double cone, the two spheres inscribed in the cone and tangent to the plane are known as <b>Dandelin Spheres</b>.",
         storyDrawerP2: "The points of tangency where the spheres touch the plane ($F_1, F_2$) are precisely the <b>foci</b> of the conic section (ellipse, parabola, or hyperbola). This solid geometry construction elegantly proves that the sum or difference of distances from any point on the curve to the two foci is constant.",
         storyDrawerQuote: '"Math that frees you from blind calculation to see the deep visual principle."',
-        storyDrawerAuthor: "The pedagogical vision of min7014 Mathematics Education.",
+        storyDrawerAuthor: "The lifelong pedagogical philosophy of Master Educator Min Eun-gi.",
         statTopics: "🏛️ Lifelong Math Topics",
         statAssets: "📐 GeoGebra & Visual Proofs",
         statQuizzes: "🎯 College Entrance Quizzes",
