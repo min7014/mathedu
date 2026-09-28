@@ -50,15 +50,8 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
 .exp.show{{display:block}}
 .exp b{{color:var(--gold)}}
-.input-wrap{{margin-top:12px}}
-.input-row{{display:flex;gap:10px;align-items:center;flex-wrap:wrap}}
-.input-badge{{font-size:.8rem;font-weight:800;color:var(--accent);background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);padding:4px 10px;border-radius:8px}}
-.num-input{{background:var(--card2);border:1.5px solid var(--line);border-radius:12px;color:var(--txt);font-size:1.1rem;font-weight:700;padding:8px 14px;width:140px;text-align:center;outline:none;transition:.15s;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.num-input:focus{{border-color:var(--accent);box-shadow:0 0 14px rgba(124,196,255,.35)}}
-.check-btn{{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;padding:9px 18px;font-weight:800;font-size:.92rem;cursor:pointer;box-shadow:0 4px 12px rgba(124,196,255,.3);transition:.15s}}
-.check-btn:hover{{transform:translateY(-1px);box-shadow:0 6px 18px rgba(124,196,255,.45)}}
-.check-btn:disabled,.num-input:disabled{{opacity:.55;cursor:default;transform:none}}
-.feedback-msg{{margin-top:8px;font-size:.92rem;line-height:1.5;min-height:22px}}
+.exp-toggle-btn{{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}}
+.exp-toggle-btn:hover{{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}}
 .score{{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
@@ -167,51 +160,18 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
 
-function checkNumAnswer(el){{
-  var q = el.closest ? el.closest('.q') : el.parentElement;
+function toggleExp(btn){{
+  var q = btn.closest ? btn.closest('.q') : btn.parentElement;
   while(q && !q.classList.contains('q')) {{ q = q.parentElement; }}
-  if(!q || q.classList.contains('done')) return;
-  var input = q.querySelector('.num-input');
-  if(!input) return;
-  var valStr = input.value.trim();
-  var feedback = q.querySelector('.feedback-msg');
+  if(!q) return;
   var exp = q.querySelector('.exp');
-  if(!valStr){{
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 정수를 입력해주세요!</span>';
-    input.focus();
-    return;
-  }}
-  var val = parseInt(valStr, 10);
-  var ans = parseInt(q.dataset.ans, 10);
-  if(isNaN(val)){{
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 0부터 999 사이의 정수를 입력해주세요!</span>';
-    input.focus();
-    return;
-  }}
-  if(val === ans){{
-    q.classList.add('done', 'correct-q');
-    input.disabled = true;
-    input.style.borderColor = 'var(--good)';
-    input.style.boxShadow = '0 0 14px rgba(94,234,212,.4)';
-    var btn = q.querySelector('.check-btn');
-    if(btn) btn.disabled = true;
-    if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다! (' + val + ')</span>';
-    var opts = q.querySelectorAll('.opt');
-    opts.forEach(function(o, idx){{
-      o.classList.add('locked');
-      if(idx + 1 === ans) o.classList.add('correct');
-    }});
-    pts++;
-    document.getElementById('pts').textContent = pts;
-    var total = document.querySelectorAll('.q').length;
-    var pct = Math.round(pts / total * 100);
-    document.getElementById('bar').style.width = pct + '%';
-    document.getElementById('pct').textContent = pct + '%';
-    if(exp) exp.classList.add('show');
-    if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+  if(!exp) return;
+  if(exp.classList.contains('show')){{
+    exp.classList.remove('show');
+    btn.textContent = '💡 해설 보기';
   }} else {{
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ ' + val + '은(는) 정답이 아닙니다. 다시 계산해보세요! 💡</span>';
-    input.select();
+    exp.classList.add('show');
+    btn.textContent = '💡 해설 닫기';
   }}
 }}
 
@@ -222,12 +182,7 @@ qs.forEach(q=>{{
   const opts=q.querySelectorAll('.opt');
   opts.forEach((o,i)=>{{
     o.addEventListener('click',()=>{{
-      if(q.classList.contains('done'))return;
-      var input = q.querySelector('.num-input');
-      if(input) {{ input.value = i + 1; input.disabled = true; }}
-      var btn = q.querySelector('.check-btn');
-      if(btn) btn.disabled = true;
-      var feedback = q.querySelector('.feedback-msg');
+      if(q.classList.contains('done')) return;
       q.classList.add('done');
       opts.forEach((oo,j)=>{{
         oo.classList.add('locked');
@@ -237,12 +192,12 @@ qs.forEach(q=>{{
         o.classList.add('correct');
         q.classList.add('correct-q');
         pts++;
-        if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다!</span>';
       }} else {{
         o.classList.add('wrong');
-        if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ 정답은 ' + ans + '번입니다.</span>';
       }}
       if(exp) exp.classList.add('show');
+      var toggleBtn = q.querySelector('.exp-toggle-btn');
+      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
       const pct=Math.round(pts/total*100);
@@ -329,43 +284,49 @@ REPORT_WRAP_HTML = '''<div class="report-wrap" style="margin-top:10px;border-top
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div>'''
 
+def _resolve_options_and_ans(opts_list, ans):
+    if opts_list and len(opts_list) == 5:
+        try:
+            ans_idx = int(ans)
+        except Exception:
+            ans_idx = 1
+        return opts_list, ans_idx
+    
+    try:
+        val = int(ans)
+    except Exception:
+        val = 1
+    
+    if 1 <= val <= 5:
+        options = ["$1$", "$2$", "$3$", "$4$", "$5$"]
+        return options, val
+    elif val > 5:
+        start = max(1, val - 2)
+        options = [f"${start + i}$" for i in range(5)]
+        ans_idx = (val - start) + 1
+        return options, ans_idx
+    else:
+        start = val - 2
+        options = [f"${start + i}$" for i in range(5)]
+        return options, 3
+
 def _question_html(q):
-    opts_list = q.get("options", [])
-    q_type = q.get("type", "input" if not opts_list else "choice")
+    opts_list, ans_idx = _resolve_options_and_ans(q.get("options", []), q.get("answer", 1))
     exp = _esc(q.get("exp", "")).replace("\n", "<br>")
-    ans = q.get("answer", 1)
     lvl_label = _esc(q.get("level_label") or "문항")
     
-    if q_type == "input" or not opts_list:
-        body = (
-            f'<div class="input-wrap">'
-            f'<div class="input-row">'
-            f'<span class="input-badge">정수 입력</span>'
-            f'<input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key===\'Enter\')checkNumAnswer(this)">'
-            f'<button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button>'
-            f'</div>'
-            f'<div class="feedback-msg"></div>'
-            f'</div>'
-        )
-    else:
-        opts = "".join(
-            f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
-            for i, o in enumerate(opts_list))
-        body = (
-            f'<div class="opts">{opts}</div>'
-            f'<div class="input-wrap" style="margin-top:10px">'
-            f'<div class="input-row">'
-            f'<span class="input-badge">정답 번호 입력</span>'
-            f'<input type="number" class="num-input" min="1" max="999" placeholder="1~5 입력" autocomplete="off" onkeydown="if(event.key===\'Enter\')checkNumAnswer(this)">'
-            f'<button type="button" class="check-btn" onclick="checkNumAnswer(this)">확인</button>'
-            f'</div>'
-            f'<div class="feedback-msg"></div>'
-            f'</div>'
-        )
-    return (f'<div class="q" data-ans="{ans}" data-exp="{exp}">'
+    opts = "".join(
+        f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
+        for i, o in enumerate(opts_list))
+    body = f'<div class="opts">{opts}</div>'
+    
+    return (f'<div class="q" data-ans="{ans_idx}" data-exp="{exp}">'
             f'<div class="lvl">{lvl_label}</div>'
             f'<div class="stem">{_esc(q.get("stem","") )}</div>'
             f'{body}'
+            f'<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">'
+            f'<button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>'
+            f'</div>'
             f'<div class="exp"></div>'
             f'{REPORT_WRAP_HTML}</div>')
 
@@ -438,10 +399,8 @@ def generate_html(data):
     symbols_block = (f'<h2>🔰 제0단계 · 수학 기호</h2><div class="sym">{sym}</div>' if sym else "")
     levels_block = "".join(_level_html(l) for l in data.get("levels", []))
     f = data.get("final", {})
-    fopts_list = f.get("options", [])
-    f_type = f.get("type", "input" if not fopts_list else "choice")
+    fopts_list, fans_idx = _resolve_options_and_ans(f.get("options", []), f.get("answer", 1))
     fexp = _esc(f.get("exp", "")).replace("\n", "<br>")
-    fans = f.get("answer", 1)
     fsol = f.get("solution", "")
     if not isinstance(fsol, str): fsol = str(fsol)
     diagram_html = ""
@@ -451,45 +410,27 @@ def generate_html(data):
     if f.get("figure"):
         figure_html = f'<div class="figure"><img src="{_esc(f["figure"])}" alt="문제 그림" style="max-width:100%;border-radius:10px"></div>'
     
-    if f_type == "input" or not fopts_list:
-        fbody = (
-            f'<div class="input-wrap">'
-            f'<div class="input-row">'
-            f'<span class="input-badge">정수 입력</span>'
-            f'<input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key===\'Enter\')checkNumAnswer(this)">'
-            f'<button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button>'
-            f'</div>'
-            f'<div class="feedback-msg"></div>'
-            f'</div>'
-        )
-        final_ans = str(fans)
-    else:
-        fopts = "".join(
-            f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
-            for i, o in enumerate(fopts_list))
-        fbody = (
-            f'<div class="opts">{fopts}</div>'
-            f'<div class="input-wrap" style="margin-top:10px">'
-            f'<div class="input-row">'
-            f'<span class="input-badge">정답 번호 입력</span>'
-            f'<input type="number" class="num-input" min="1" max="999" placeholder="1~5 입력" autocomplete="off" onkeydown="if(event.key===\'Enter\')checkNumAnswer(this)">'
-            f'<button type="button" class="check-btn" onclick="checkNumAnswer(this)">확인</button>'
-            f'</div>'
-            f'<div class="feedback-msg"></div>'
-            f'</div>'
-        )
-        try: final_ans = fopts_list[int(fans) - 1]
-        except Exception: final_ans = str(fans)
+    fopts = "".join(
+        f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
+        for i, o in enumerate(fopts_list))
+    fbody = f'<div class="opts">{fopts}</div>'
+    try:
+        final_ans = fopts_list[int(fans_idx) - 1]
+    except Exception:
+        final_ans = str(f.get("answer", 1))
 
     solution_block = (
         f'<h2>🎯 최종 문제 + 상세 풀이</h2>'
         f'{diagram_html}'
         f'{figure_html}'
         f'<div class="sol">{fsol}</div>'
-        f'<div class="q" data-ans="{fans}" data-exp="{fexp}">'
+        f'<div class="q" data-ans="{fans_idx}" data-exp="{fexp}">'
         f'<div class="lvl">최종 본문항</div>'
         f'<div class="stem">{_esc(f.get("stem","") )}</div>'
         f'{fbody}'
+        f'<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">'
+        f'<button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>'
+        f'</div>'
         f'<div class="exp"></div>'
         f'{REPORT_WRAP_HTML}</div>')
     # ★ 학습 현황 추적 블록

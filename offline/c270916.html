@@ -46,15 +46,8 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
-.input-wrap{margin-top:12px}
-.input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.input-badge{font-size:.8rem;font-weight:800;color:var(--accent);background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);padding:4px 10px;border-radius:8px}
-.num-input{background:var(--card2);border:1.5px solid var(--line);border-radius:12px;color:var(--txt);font-size:1.1rem;font-weight:700;padding:8px 14px;width:140px;text-align:center;outline:none;transition:.15s;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
-.num-input:focus{border-color:var(--accent);box-shadow:0 0 14px rgba(124,196,255,.35)}
-.check-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;padding:9px 18px;font-weight:800;font-size:.92rem;cursor:pointer;box-shadow:0 4px 12px rgba(124,196,255,.3);transition:.15s}
-.check-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(124,196,255,.45)}
-.check-btn:disabled,.num-input:disabled{opacity:.55;cursor:default;transform:none}
-.feedback-msg{margin-top:8px;font-size:.92rem;line-height:1.5;min-height:22px}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -144,8 +137,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270916.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270916">
-<meta name="mathedu-offline-build-time" content="2026-09-28T04:10:59.391960+00:00">
-<meta name="mathedu-offline-hash" content="0be05202">
+<meta name="mathedu-offline-build-time" content="2026-09-28T04:22:15.754208+00:00">
+<meta name="mathedu-offline-hash" content="02253768">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -213,7 +206,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\log_3(x-3) = \log_9(x-3)^2$</b> — 밑과 진수를 동시에 제곱하여 밑을 9로 통일</div><div><b>$x - 3 > 0 \implies x > 3$</b> — 로그가 정의되기 위한 필수 진수 조건</div><div><b>$(x-3)^2 = 2x - 3$</b> — 밑이 같을 때 진수끼리 같다는 2차방정식</div><div><b>$x^2 - 8x + 12 = (x-2)(x-6) = 0$</b> — 인수분해 및 해 구하기</div><div><b>$x = 6$</b> — 진수 조건 x&gt;3을 만족하는 유일한 정수해</div></div>
-<h2>🔰 1단계 · [초등~중등 연계] 양수만 들어갈 수 있는 진수 조건</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 양수와 음수를 배울 때, 로그 기호 $\log_a b$의 진수 $b$ 자리에는 항상 0보다 큰 양수만 들어갈 수 있습니다. $\log_3(x-3)$에서 진수 $x-3 &gt; 0$ 이어야 하므로 $x$는 3보다 커야 합니다($x &gt; 3$).</div><div class="q" data-ans="3" data-exp="$x - 3 &gt; 0 \implies x &gt; 3$ 입니다. 따라서 기준 정수는 $3$ 입니다."><div class="lvl">초등~중등 디딤돌 1</div><div class="stem">진수 $x - 3 &gt; 0$ 을 만족하기 위해 $x$가 넘어야 하는 기준 정수(경계값)를 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 1단계 · [초등~중등 연계] 양수만 들어갈 수 있는 진수 조건</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 양수와 음수를 배울 때, 로그 기호 $\log_a b$의 진수 $b$ 자리에는 항상 0보다 큰 양수만 들어갈 수 있습니다. $\log_3(x-3)$에서 진수 $x-3 &gt; 0$ 이어야 하므로 $x$는 3보다 커야 합니다($x &gt; 3$).</div><div class="q" data-ans="3" data-exp="$x - 3 &gt; 0 \implies x &gt; 3$ 입니다. 따라서 기준 정수는 $3$ 입니다."><div class="lvl">초등~중등 디딤돌 1</div><div class="stem">진수 $x - 3 &gt; 0$ 을 만족하기 위해 $x$가 넘어야 하는 기준 정수(경계값)는?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -224,7 +217,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [중등 곱셈공식 연계] 진수 방정식 정리하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑을 9로 통일하면 $(x-3)^2 = 2x-3$ 입니다. 좌변을 전개합니다: $(x-3)^2 = x^2 - 6x + 9$. 우변의 $2x - 3$을 좌변으로 이항하여 정리하면 $x^2 - 8x + 12 = 0$ 이 됩니다.</div><div class="q" data-ans="12" data-exp="$x^2 - 6x + 9 - 2x + 3 = x^2 - 8x + 12 = 0$ 이므로 상수항은 $12$ 입니다."><div class="lvl">중등 방정식 디딤돌 2</div><div class="stem">이차방정식 $x^2 - 8x + 12 = 0$ 의 상수항 숫자를 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [중등 곱셈공식 연계] 진수 방정식 정리하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑을 9로 통일하면 $(x-3)^2 = 2x-3$ 입니다. 좌변을 전개합니다: $(x-3)^2 = x^2 - 6x + 9$. 우변의 $2x - 3$을 좌변으로 이항하여 정리하면 $x^2 - 8x + 12 = 0$ 이 됩니다.</div><div class="q" data-ans="3" data-exp="$x^2 - 6x + 9 - 2x + 3 = x^2 - 8x + 12 = 0$ 이므로 상수항은 $12$ 입니다."><div class="lvl">중등 방정식 디딤돌 2</div><div class="stem">이차방정식 $x^2 - 8x + 12 = 0$ 의 상수항 숫자는?</div><div class="opts"><div class="opt"><span class="n">1</span>$10$</div><div class="opt"><span class="n">2</span>$11$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$13$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -235,7 +228,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [중등 인수분해 연계] 진수 조건에 맞는 근 선택하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>곱해서 12가 되고 더해서 -8이 되는 두 수는 -2와 -6입니다: $(x-2)(x-6) = 0$. 따라서 근은 $x = 2$ 또는 $x = 6$ 입니다. 1단계에서 구한 진수 조건 $x &gt; 3$에 의해 $x = 2$는 탈락하고 $x = 6$만 정답이 됩니다.</div><div class="q" data-ans="6" data-exp="$x = 2$는 $x &gt; 3$을 만족하지 못해 진수가 음수가 되므로 제외되고, $x = 6$만 가능합니다."><div class="lvl">중등 인수분해 디딤돌 3</div><div class="stem">$(x-2)(x-6) = 0$ 의 두 근 중 $x &gt; 3$ 을 만족하는 실수 $x$의 값을 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [중등 인수분해 연계] 진수 조건에 맞는 근 선택하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>곱해서 12가 되고 더해서 -8이 되는 두 수는 -2와 -6입니다: $(x-2)(x-6) = 0$. 따라서 근은 $x = 2$ 또는 $x = 6$ 입니다. 1단계에서 구한 진수 조건 $x &gt; 3$에 의해 $x = 2$는 탈락하고 $x = 6$만 정답이 됩니다.</div><div class="q" data-ans="3" data-exp="$x = 2$는 $x &gt; 3$을 만족하지 못해 진수가 음수가 되므로 제외되고, $x = 6$만 가능합니다."><div class="lvl">중등 인수분해 디딤돌 3</div><div class="stem">$(x-2)(x-6) = 0$ 의 두 근 중 $x &gt; 3$ 을 만족하는 실수 $x$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$4$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$6$</div><div class="opt"><span class="n">4</span>$7$</div><div class="opt"><span class="n">5</span>$8$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -251,7 +244,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">1. 진수 조건: $x-3 > 0, 2x-3 > 0 \implies x > 3$.
 2. 밑 변환: $\log_3(x-3) = \log_9(x-3)^2$.
 3. 방정식 풀이: $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$.
-4. 진수 조건 $x > 3$에 의해 $x = 6$.</div><div class="q" data-ans="6" data-exp="진수 조건 $x &gt; 3$이고 $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$. 따라서 $x = 6$ 입니다."><div class="lvl">최종 본문항</div><div class="stem">방정식 $\log_3(x-3)=\log_9(2x-3)$을 만족시키는 실수 $x$의 값을 구하시오.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+4. 진수 조건 $x > 3$에 의해 $x = 6$.</div><div class="q" data-ans="3" data-exp="진수 조건 $x &gt; 3$이고 $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$. 따라서 $x = 6$ 입니다."><div class="lvl">최종 본문항</div><div class="stem">방정식 $\log_3(x-3)=\log_9(2x-3)$을 만족시키는 실수 $x$의 값으로 알맞은 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>$4$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$6$</div><div class="opt"><span class="n">4</span>$7$</div><div class="opt"><span class="n">5</span>$8$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -333,57 +326,24 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
   </div>
 </div>
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 6</div>
+<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $6$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
 
-function checkNumAnswer(el){
-  var q = el.closest ? el.closest('.q') : el.parentElement;
+function toggleExp(btn){
+  var q = btn.closest ? btn.closest('.q') : btn.parentElement;
   while(q && !q.classList.contains('q')) { q = q.parentElement; }
-  if(!q || q.classList.contains('done')) return;
-  var input = q.querySelector('.num-input');
-  if(!input) return;
-  var valStr = input.value.trim();
-  var feedback = q.querySelector('.feedback-msg');
+  if(!q) return;
   var exp = q.querySelector('.exp');
-  if(!valStr){
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 정수를 입력해주세요!</span>';
-    input.focus();
-    return;
-  }
-  var val = parseInt(valStr, 10);
-  var ans = parseInt(q.dataset.ans, 10);
-  if(isNaN(val)){
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 0부터 999 사이의 정수를 입력해주세요!</span>';
-    input.focus();
-    return;
-  }
-  if(val === ans){
-    q.classList.add('done', 'correct-q');
-    input.disabled = true;
-    input.style.borderColor = 'var(--good)';
-    input.style.boxShadow = '0 0 14px rgba(94,234,212,.4)';
-    var btn = q.querySelector('.check-btn');
-    if(btn) btn.disabled = true;
-    if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다! (' + val + ')</span>';
-    var opts = q.querySelectorAll('.opt');
-    opts.forEach(function(o, idx){
-      o.classList.add('locked');
-      if(idx + 1 === ans) o.classList.add('correct');
-    });
-    pts++;
-    document.getElementById('pts').textContent = pts;
-    var total = document.querySelectorAll('.q').length;
-    var pct = Math.round(pts / total * 100);
-    document.getElementById('bar').style.width = pct + '%';
-    document.getElementById('pct').textContent = pct + '%';
-    if(exp) exp.classList.add('show');
-    if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent = '💡 해설 보기';
   } else {
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ ' + val + '은(는) 정답이 아닙니다. 다시 계산해보세요! 💡</span>';
-    input.select();
+    exp.classList.add('show');
+    btn.textContent = '💡 해설 닫기';
   }
 }
 
@@ -394,12 +354,7 @@ qs.forEach(q=>{
   const opts=q.querySelectorAll('.opt');
   opts.forEach((o,i)=>{
     o.addEventListener('click',()=>{
-      if(q.classList.contains('done'))return;
-      var input = q.querySelector('.num-input');
-      if(input) { input.value = i + 1; input.disabled = true; }
-      var btn = q.querySelector('.check-btn');
-      if(btn) btn.disabled = true;
-      var feedback = q.querySelector('.feedback-msg');
+      if(q.classList.contains('done')) return;
       q.classList.add('done');
       opts.forEach((oo,j)=>{
         oo.classList.add('locked');
@@ -409,12 +364,12 @@ qs.forEach(q=>{
         o.classList.add('correct');
         q.classList.add('correct-q');
         pts++;
-        if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다!</span>';
       } else {
         o.classList.add('wrong');
-        if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ 정답은 ' + ans + '번입니다.</span>';
       }
       if(exp) exp.classList.add('show');
+      var toggleBtn = q.querySelector('.exp-toggle-btn');
+      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
       const pct=Math.round(pts/total*100);
@@ -598,8 +553,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270916';
-window._offlineBuildTime = '2026-09-28T04:10:59.391960+00:00';
-window._offlineHash = '0be05202';
+window._offlineBuildTime = '2026-09-28T04:22:15.754208+00:00';
+window._offlineHash = '02253768';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270916.html';
 
@@ -624,8 +579,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270916';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T04:10:59.391960+00:00';
-  var localHash = window._offlineHash || '0be05202';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T04:22:15.754208+00:00';
+  var localHash = window._offlineHash || '02253768';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270916.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

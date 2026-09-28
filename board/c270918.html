@@ -46,15 +46,8 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
-.input-wrap{margin-top:12px}
-.input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.input-badge{font-size:.8rem;font-weight:800;color:var(--accent);background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);padding:4px 10px;border-radius:8px}
-.num-input{background:var(--card2);border:1.5px solid var(--line);border-radius:12px;color:var(--txt);font-size:1.1rem;font-weight:700;padding:8px 14px;width:140px;text-align:center;outline:none;transition:.15s;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
-.num-input:focus{border-color:var(--accent);box-shadow:0 0 14px rgba(124,196,255,.35)}
-.check-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;padding:9px 18px;font-weight:800;font-size:.92rem;cursor:pointer;box-shadow:0 4px 12px rgba(124,196,255,.3);transition:.15s}
-.check-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(124,196,255,.45)}
-.check-btn:disabled,.num-input:disabled{opacity:.55;cursor:default;transform:none}
-.feedback-msg{margin-top:8px;font-size:.92rem;line-height:1.5;min-height:22px}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -159,7 +152,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$a_1 = 28$</b> — 첫째항 (짝수)</div><div><b>$a_{n+1} = \dfrac{1}{2}a_n \text{ (짝수)}$</b> — 짝수일 때 절반으로 나누는 규칙</div><div><b>$a_{n+1} = 2a_n + 12 \text{ (홀수)}$</b> — 홀수일 때 2배하고 12를 더하는 규칙</div><div><b>$a_6 = 38$</b> — 제6항 계산 결과</div></div>
-<h2>🔰 1단계 · [초등 연계] 짝수일 때 반으로 나누기 ($a_1 \to a_2 \to a_3$)</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 2로 나누어떨어지는 짝수를 배웁니다. $a_1 = 28$은 짝수이므로 반으로 나눕니다: $a_2 = 28 \div 2 = 14$. 14도 짝수이므로 다시 반으로 나눕니다: $a_3 = 14 \div 2 = 7$.</div><div class="q" data-ans="7" data-exp="$14 \div 2 = 7$ 입니다. $a_3 = 7$ (홀수)이 됩니다."><div class="lvl">초등 나눗셈 디딤돌 1</div><div class="stem">$a_3 = 14 \div 2$의 계산 결과를 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 1단계 · [초등 연계] 짝수일 때 반으로 나누기 ($a_1 \to a_2 \to a_3$)</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 2로 나누어떨어지는 짝수를 배웁니다. $a_1 = 28$은 짝수이므로 반으로 나눕니다: $a_2 = 28 \div 2 = 14$. 14도 짝수이므로 다시 반으로 나눕니다: $a_3 = 14 \div 2 = 7$.</div><div class="q" data-ans="3" data-exp="$14 \div 2 = 7$ 입니다. $a_3 = 7$ (홀수)이 됩니다."><div class="lvl">초등 나눗셈 디딤돌 1</div><div class="stem">$a_3 = 14 \div 2$의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$5$</div><div class="opt"><span class="n">2</span>$6$</div><div class="opt"><span class="n">3</span>$7$</div><div class="opt"><span class="n">4</span>$8$</div><div class="opt"><span class="n">5</span>$9$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -170,7 +163,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [초등 연계] 홀수 규칙으로 $a_4$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a_3 = 7$은 홀수이므로 두 번째 규칙을 씁니다: $a_4 = 2 \times a_3 + 12 = 2 \times 7 + 12$. 초등학교 사칙연산: $2 \times 7 = 14$, $14 + 12 = 26$ 입니다.</div><div class="q" data-ans="26" data-exp="$14 + 12 = 26$ 입니다. $a_4 = 26$ (짝수)이 됩니다."><div class="lvl">초등 곱셈덧셈 디딤돌 2</div><div class="stem">$2 \times 7 + 12$의 계산 결과를 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [초등 연계] 홀수 규칙으로 $a_4$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a_3 = 7$은 홀수이므로 두 번째 규칙을 씁니다: $a_4 = 2 \times a_3 + 12 = 2 \times 7 + 12$. 초등학교 사칙연산: $2 \times 7 = 14$, $14 + 12 = 26$ 입니다.</div><div class="q" data-ans="3" data-exp="$14 + 12 = 26$ 입니다. $a_4 = 26$ (짝수)이 됩니다."><div class="lvl">초등 곱셈덧셈 디딤돌 2</div><div class="stem">$2 \times 7 + 12$의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$22$</div><div class="opt"><span class="n">2</span>$24$</div><div class="opt"><span class="n">3</span>$26$</div><div class="opt"><span class="n">4</span>$28$</div><div class="opt"><span class="n">5</span>$30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -181,7 +174,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [초등 연계] $a_5$와 $a_6$까지 전진하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a_4 = 26$은 짝수이므로 반으로 나눕니다: $a_5 = 26 \div 2 = 13$ (홀수). 이제 13에 홀수 규칙을 적용합니다: $a_6 = 2 \times 13 + 12$. $2 \times 13 = 26$, $26 + 12 = 38$ 입니다.</div><div class="q" data-ans="38" data-exp="$26 + 12 = 38$ 입니다."><div class="lvl">초등 완성 디딤돌 3</div><div class="stem">$a_6 = 2 \times 13 + 12$의 계산 결과를 정수로 입력하세요.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [초등 연계] $a_5$와 $a_6$까지 전진하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a_4 = 26$은 짝수이므로 반으로 나눕니다: $a_5 = 26 \div 2 = 13$ (홀수). 이제 13에 홀수 규칙을 적용합니다: $a_6 = 2 \times 13 + 12$. $2 \times 13 = 26$, $26 + 12 = 38$ 입니다.</div><div class="q" data-ans="3" data-exp="$26 + 12 = 38$ 입니다."><div class="lvl">초등 완성 디딤돌 3</div><div class="stem">$a_6 = 2 \times 13 + 12$의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$34$</div><div class="opt"><span class="n">2</span>$36$</div><div class="opt"><span class="n">3</span>$38$</div><div class="opt"><span class="n">4</span>$40$</div><div class="opt"><span class="n">5</span>$42$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -198,7 +191,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 2. $a_2 = 14$ (짝수) $\implies a_3 = 7$
 3. $a_3 = 7$ (홀수) $\implies a_4 = 2(7) + 12 = 26$
 4. $a_4 = 26$ (짝수) $\implies a_5 = 13$
-5. $a_5 = 13$ (홀수) $\implies a_6 = 2(13) + 12 = 38$.</div><div class="q" data-ans="38" data-exp="$a_1=28, a_2=14, a_3=7, a_4=26, a_5=13, a_6=38$ 입니다."><div class="lvl">최종 본문항</div><div class="stem">$a_6$의 값을 구하시오.</div><div class="input-wrap"><div class="input-row"><span class="input-badge">정수 입력</span><input type="number" class="num-input" min="0" max="999" placeholder="0~999 입력" autocomplete="off" onkeydown="if(event.key==='Enter')checkNumAnswer(this)"><button type="button" class="check-btn" onclick="checkNumAnswer(this)">정답 확인</button></div><div class="feedback-msg"></div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+5. $a_5 = 13$ (홀수) $\implies a_6 = 2(13) + 12 = 38$.</div><div class="q" data-ans="3" data-exp="$a_1=28, a_2=14, a_3=7, a_4=26, a_5=13, a_6=38$ 입니다."><div class="lvl">최종 본문항</div><div class="stem">$a_6$의 값으로 알맞은 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>$34$</div><div class="opt"><span class="n">2</span>$36$</div><div class="opt"><span class="n">3</span>$38$</div><div class="opt"><span class="n">4</span>$40$</div><div class="opt"><span class="n">5</span>$42$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -280,57 +273,24 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
   </div>
 </div>
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 38</div>
+<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $38$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
 
-function checkNumAnswer(el){
-  var q = el.closest ? el.closest('.q') : el.parentElement;
+function toggleExp(btn){
+  var q = btn.closest ? btn.closest('.q') : btn.parentElement;
   while(q && !q.classList.contains('q')) { q = q.parentElement; }
-  if(!q || q.classList.contains('done')) return;
-  var input = q.querySelector('.num-input');
-  if(!input) return;
-  var valStr = input.value.trim();
-  var feedback = q.querySelector('.feedback-msg');
+  if(!q) return;
   var exp = q.querySelector('.exp');
-  if(!valStr){
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 정수를 입력해주세요!</span>';
-    input.focus();
-    return;
-  }
-  var val = parseInt(valStr, 10);
-  var ans = parseInt(q.dataset.ans, 10);
-  if(isNaN(val)){
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad)">⚠️ 0부터 999 사이의 정수를 입력해주세요!</span>';
-    input.focus();
-    return;
-  }
-  if(val === ans){
-    q.classList.add('done', 'correct-q');
-    input.disabled = true;
-    input.style.borderColor = 'var(--good)';
-    input.style.boxShadow = '0 0 14px rgba(94,234,212,.4)';
-    var btn = q.querySelector('.check-btn');
-    if(btn) btn.disabled = true;
-    if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다! (' + val + ')</span>';
-    var opts = q.querySelectorAll('.opt');
-    opts.forEach(function(o, idx){
-      o.classList.add('locked');
-      if(idx + 1 === ans) o.classList.add('correct');
-    });
-    pts++;
-    document.getElementById('pts').textContent = pts;
-    var total = document.querySelectorAll('.q').length;
-    var pct = Math.round(pts / total * 100);
-    document.getElementById('bar').style.width = pct + '%';
-    document.getElementById('pct').textContent = pct + '%';
-    if(exp) exp.classList.add('show');
-    if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent = '💡 해설 보기';
   } else {
-    if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ ' + val + '은(는) 정답이 아닙니다. 다시 계산해보세요! 💡</span>';
-    input.select();
+    exp.classList.add('show');
+    btn.textContent = '💡 해설 닫기';
   }
 }
 
@@ -341,12 +301,7 @@ qs.forEach(q=>{
   const opts=q.querySelectorAll('.opt');
   opts.forEach((o,i)=>{
     o.addEventListener('click',()=>{
-      if(q.classList.contains('done'))return;
-      var input = q.querySelector('.num-input');
-      if(input) { input.value = i + 1; input.disabled = true; }
-      var btn = q.querySelector('.check-btn');
-      if(btn) btn.disabled = true;
-      var feedback = q.querySelector('.feedback-msg');
+      if(q.classList.contains('done')) return;
       q.classList.add('done');
       opts.forEach((oo,j)=>{
         oo.classList.add('locked');
@@ -356,12 +311,12 @@ qs.forEach(q=>{
         o.classList.add('correct');
         q.classList.add('correct-q');
         pts++;
-        if(feedback) feedback.innerHTML = '<span style="color:var(--good);font-weight:700">🎉 정답입니다!</span>';
       } else {
         o.classList.add('wrong');
-        if(feedback) feedback.innerHTML = '<span style="color:var(--bad);font-weight:700">❌ 정답은 ' + ans + '번입니다.</span>';
       }
       if(exp) exp.classList.add('show');
+      var toggleBtn = q.querySelector('.exp-toggle-btn');
+      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
       const pct=Math.round(pts/total*100);
