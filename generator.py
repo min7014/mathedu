@@ -130,6 +130,13 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-btn-yt:hover{{background:#ef4444;color:#fff}}
 .min-btn-detail{{background:rgba(124,196,255,.14);border:1px solid rgba(124,196,255,.4);color:var(--accent)}}
 .min-btn-detail:hover{{background:var(--accent);color:#0b1020;border-color:var(--accent)}}
+.min-btn-algeo{{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}}
+.min-btn-algeo:hover{{background:#a855f7;color:#fff}}
+.min-cat-badge{{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}}
+.min-visual-tip{{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}}
+.min-visual-tip b{{color:#67e8f9}}
+.min-ggb-frame-wrap{{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}}
+.min-ggb-frame-wrap.active{{display:block}}
 .min-footer{{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}}
 .min-footer-link{{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}}
 .min-footer-link:hover{{text-decoration:underline;color:#fff}}
@@ -500,11 +507,19 @@ def generate_html(data):
     # ★ min7014 수학자료실 공식 연계 심층 학습 자료 매칭
     search_corpus = f"{data.get('title', '')} {data.get('original_content', '')} {data.get('content', '')} {f.get('stem', '')}"
     min7014_materials_block = ""
+    visual_tip_html = ""
     try:
         matched_items = min7014_matcher.match_materials(search_corpus, limit=4)
         min7014_materials_block = min7014_matcher.generate_addon_card_html(matched_items, data.get("title", ""))
+        v_tip = min7014_matcher.get_visual_tip(search_corpus, matched_items)
+        if v_tip:
+            visual_tip_html = f'<div class="min-visual-tip">{v_tip}</div>\n'
     except Exception as e:
         min7014_materials_block = ""
+        visual_tip_html = ""
+
+    if visual_tip_html and original_block:
+        original_block = original_block + "\n" + visual_tip_html
 
     html = TEMPLATE.format(
         title=_esc(data.get("title", "퀴즈")),

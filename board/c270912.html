@@ -129,6 +129,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
+
+.min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
+.min-btn-algeo:hover{background:#a855f7;color:#fff}
+.min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip b{color:#67e8f9}
+.min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
+.min-ggb-frame-wrap.active{display:block}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -151,6 +160,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 기하 팁</b>: 각도가 예각에서 직각($90^\circ$), 둔각으로 변함에 따라 피타고라스 정리가 어떻게 코사인법칙($c^2=a^2+b^2-2ab\cos C$)으로 자연스럽게 일반화되는지, 하단의 <b>min7014 동적 기하 앱렛</b>에서 삼각형 꼭짓점을 직접 드래그하며 시각적으로 체험해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\dfrac{a}{\sin A} = 2R$</b> — 외접원의 지름과 변, 각 사이의 사인법칙</div><div><b>$c^2 = a^2 + b^2 - 2ab\cos C$</b> — 두 변과 끼인각을 알 때 마주보는 변을 구하는 코사인법칙</div><div><b>$\text{BD} = 4\sqrt{2}$</b> — 피타고라스와 코사인법칙으로 도출된 선분의 길이</div></div>
 <h2>🔰 1단계 · [초등~중등 연계] 삼각형 세 각의 합과 특수각</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 4학년 각도 단원에서 배웁니다: 어떤 삼각형이든 세 내각의 크기를 모두 더하면 항상 $180^\circ$가 됩니다.</div><div class="q" data-ans="3" data-exp="삼각형의 세 내각의 크기의 합은 항상 $180^\circ$ 입니다."><div class="lvl">초등 직관 디딤돌 1</div><div class="stem">초등학교에서 배우는 삼각형의 세 내각의 크기의 합은 몇 도($^\circ$)일까요?</div><div class="opts"><div class="opt"><span class="n">1</span>$90^\circ$</div><div class="opt"><span class="n">2</span>$120^\circ$</div><div class="opt"><span class="n">3</span>$180^\circ$</div><div class="opt"><span class="n">4</span>$270^\circ$</div><div class="opt"><span class="n">5</span>$360^\circ$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -207,67 +217,100 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <img src="../assets/favicon.png" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
   </div>
-  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
   <div class="min-list">
     
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20201201001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 둔각에 대한 코사인 법칙
-              <span class="min-item-sub">The Law of Cosines for Obtuse Angle</span>
-            </a>
-          </div>
-          <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20201201001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-          </div>
-        </div>
-        
-        <div class="min-item">
-          <div class="min-item-main">
-            <a href="https://min7014.github.io/math20201119001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 예각에 대한 코사인법칙
-              <span class="min-item-sub">The Law of Cosines for Acute Angle</span>
-            </a>
-          </div>
-          <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20201119001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-          </div>
-        </div>
-        
-        <div class="min-item">
-          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
             <a href="https://min7014.github.io/math20201123001.html" target="_blank" rel="noopener" class="min-item-title">
               <span class="min-bullet">📌</span> 직각에 대한 코사인법칙
               <span class="min-item-sub">The Law of Cosines for Right Angle</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20201123001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=b9e3ea6c2d2e11ebaa4bd20d1935fd69#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2020/2020112301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/bGMkCIpczLI" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20201123001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20201110001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 예각에 대한 사인법칙
-              <span class="min-item-sub">The Law of Sines for Acute Angle</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20201201001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 둔각에 대한 코사인 법칙
+              <span class="min-item-sub">The Law of Cosines for Obtuse Angle</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20201110001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=d571b7fd339311ebb9bed20df29ee6ce#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2020/2020120101.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/LEXC1ohL_AI" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20201201001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            
+            <a href="https://min7014.github.io/math20201119001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 예각에 대한 코사인법칙
+              <span class="min-item-sub">The Law of Cosines for Acute Angle</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="http://me2.do/FWm2WyGJ#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2020/2020111901.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/PGmJhaHJseE" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20201119001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20201202002.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 코사인 법칙(The Law of Cosines)[고유주소]
+              
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://min7014.github.io/math20201202002.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
   </div>
 
   <div class="min-footer">
     <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
-      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra & PDF) ➔
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
     </a>
   </div>
 </div>
+
+<script>
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
+}
+</script>
+
 
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $4\sqrt{2}$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>

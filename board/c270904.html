@@ -129,6 +129,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
+
+.min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
+.min-btn-algeo:hover{background:#a855f7;color:#fff}
+.min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip b{color:#67e8f9}
+.min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
+.min-ggb-frame-wrap.active{display:block}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -151,6 +160,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 수학 팁</b>: 복잡한 수식과 기호 뒤에 숨겨진 직관적인 기하학적 원리와 시각적 모델을 하단의 <b>민은기 선생님 수학자료실(min7014)</b>의 GeoGebra 조작 및 개념 증명 자료를 통해 깊이 있게 탐구해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = f(2)$</b> — x=2에서 끊어지지 않고 이어지는 연속 조건</div><div><b>$14 + a$</b> — x=2의 왼쪽 식 7x+a에 x=2를 대입한 높이</div><div><b>$4 + 2a$</b> — x=2의 오른쪽 식 x^2+ax에 x=2를 대입한 높이</div><div><b>$a = 10$</b> — 14+a = 4+2a를 풀어 결정된 상수 a</div></div>
 <h2>🔰 1단계 · [초등 연계] 끊어지지 않는 연필선 직관</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 선을 그릴 때 연필을 떼지 않고 한 번에 그리면 선이 이어집니다. 수학에서 &#x27;함수가 연속이다&#x27;라는 것은 두 선이 한 지점에서 높이가 딱 맞는다는 뜻입니다. 왼쪽 식 $7x + a$에 경계 $x=2$를 넣으면 $7 \times 2 + a = 14 + a$ 입니다.</div><div class="q" data-ans="3" data-exp="$7 \times 2 = 14$ 이므로 왼쪽 식의 높이는 $14 + a$ 입니다."><div class="lvl">초등 직관 디딤돌 1</div><div class="stem">초등학교 구구단 7단: $7 \times 2$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$13$</div><div class="opt"><span class="n">3</span>$14$</div><div class="opt"><span class="n">4</span>$15$</div><div class="opt"><span class="n">5</span>$16$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -207,67 +217,100 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <img src="../assets/favicon.png" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
   </div>
-  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
   <div class="min-list">
     
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20191022001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $f(x)=x+1$의 $x=1$에서의 연속
-              <span class="min-item-sub">Continuity for $f(x)=x+1$ at $x=1$</span>
-            </a>
-          </div>
-          <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20191022001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-          </div>
-        </div>
-        
-        <div class="min-item">
-          <div class="min-item-main">
-            <a href="https://min7014.github.io/math20191023003.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $y=f(x)$의 $(a,b)$ 그리고 $[a,b]$에서의 연속
-              <span class="min-item-sub">Continuity for $y=f(x)$ on $(a,b)$ and $[a,b]$</span>
-            </a>
-          </div>
-          <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20191023003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-          </div>
-        </div>
-        
-        <div class="min-item">
-          <div class="min-item-main">
-            <a href="https://min7014.github.io/math20191023004.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 함수의 연속에 관한 문제
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $m(a+b)=ma+mb$
               
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20191023004.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ckyaqb3y')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/ckyaqb3y" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=9a5ad111c22d11e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2017040301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/5xB3nP5zGr8" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20191022002.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $g(x)=\displaystyle\frac{x^2-1}{x-1}$의 $x=1$에서의 불연속
-              <span class="min-item-sub">Discontinuity for $g(x)=\displaystyle\frac{x^2-1}{x-1}$ at $x=1$</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190820001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a+b)(c+d)=ab+ac+bc+bd$
+              
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20191022002.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/kft6tzya')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/kft6tzya" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=8ef19d05c2fc11e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082002.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/ZD6GrL_fKT4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190820001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190821001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a+b)^2=a^2+2ab+b^2$
+              
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/bc3bfxgz')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/bc3bfxgz" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=afc8bf06c3b411e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/K4M6KQKCJm0" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190821001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190823001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a-b)^2=a^2-2ab+b^2$
+              
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/hffwmj7v')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/hffwmj7v" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=23c2fb16c54511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/pVtFvVUEOnk" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190823001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
   </div>
 
   <div class="min-footer">
     <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
-      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra & PDF) ➔
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
     </a>
   </div>
 </div>
+
+<script>
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
+}
+</script>
+
 
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $10$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>

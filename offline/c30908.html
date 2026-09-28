@@ -127,6 +127,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
+
+.min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
+.min-btn-algeo:hover{background:#a855f7;color:#fff}
+.min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip b{color:#67e8f9}
+.min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
+.min-ggb-frame-wrap.active{display:block}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -135,8 +144,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30908.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30908">
-<meta name="mathedu-offline-build-time" content="2026-09-28T05:24:19.185810+00:00">
-<meta name="mathedu-offline-hash" content="d885641f">
+<meta name="mathedu-offline-build-time" content="2026-09-28T05:38:28.181030+00:00">
+<meta name="mathedu-offline-hash" content="094211de">
 <meta name="mathedu-version-label" content="v2026.09.28">
 
 </head><body><div class="wrap">
@@ -203,6 +212,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 대수 팁</b>: 지수가 정수에서 유리수, 실수로 확장됨에 따라 나타나는 지수함수의 지수적 폭발과 거듭제곱근의 기하학적 성질을 하단의 <b>min7014 개념 정리 자료</b>를 통해 깊이 있게 탐구해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\log_a 8 = \log_a 2^3 = 3\log_a 2 = \dfrac{3}{\log_2 a}$</b> — 로그의 성질과 밑변환 공식</div><div><b>$X = \log_2 a$</b> — 로그식의 치환 ($a>2 \implies X>1$)</div><div><b>$k = \log_2 a \times \log_a 8$</b> — 밑변환에 의해 항상 상수 3</div></div>
 <h2>제1단계 · $\log_a 8$을 밑이 2인 로그로 표현하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log_a 8 = \log_a 2^3 = 3\log_a 2 = \frac{3}{\log_2 a}$ 입니다.</div><div class="q" data-ans="2" data-exp="$\log_a 8 = 3\log_a 2 = \frac{3}{\log_2 a}$입니다."><div class="lvl">문항</div><div class="stem">$\log_a 8$을 $\log_2 a$를 이용하여 나타낸 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{1}{\log_2 a}$</div><div class="opt"><span class="n">2</span>$\frac{3}{\log_2 a}$</div><div class="opt"><span class="n">3</span>$3\log_2 a$</div><div class="opt"><span class="n">4</span>$(\log_2 a)^3$</div><div class="opt"><span class="n">5</span>$\frac{\log_2 a}{3}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -272,67 +282,100 @@ $$a + k = 8 + 3 = 11$$<br>
       <img src="data:image/png;base64,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" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
   </div>
-  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
   <div class="min-list">
     
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20221024001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 두 벡터의 시점과 종점을 각각 연결한 선분을 주어진 비율로 나누는 점을 각각 시점과 종점으로 하는 위치 벡터
-              <span class="min-item-sub">The vector which has the initial point and end point that are made by dividing the segments joining the initial points and the end points of the two given vectors internally in the given ratio respectively.</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20240325001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 자연수일때 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a natural number</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20221024001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/b5rypfj7')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/b5rypfj7" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2024/2024032305.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/w9pvemmU5XU" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20240325001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20210824001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $y=ax+b$ 꼴의 직선의 방정식
-              <span class="min-item-sub">The slope-intercept ($y = ax + b$) form of the equation of a straight line</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20200301001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 정수일때의 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a integer</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20210824001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030101.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/D1oE3dToU2M" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20210829001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 주어진 직선에 수직인 직선의 방정식 구하기
-              <span class="min-item-sub">Finding the equation of a straight line perpendicular to a given line</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20200301003.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 유리수일때의 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a rational number</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20210829001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/I8Ou1OmnkJs" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20210831001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 좌표평면에서 두 점의 좌표가 주어졌을 때의 직선의 방정식
-              <span class="min-item-sub">The equation of a straight line when the coordinates of two points are given in the coordinate plane</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20200305003.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 실수일때의 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a real number</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20210831001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030503.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/Gxx_ChdXo74" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200305003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
   </div>
 
   <div class="min-footer">
     <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
-      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra & PDF) ➔
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
     </a>
   </div>
 </div>
+
+<script>
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
+}
+</script>
+
 
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 11</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>
@@ -525,8 +568,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30908';
-window._offlineBuildTime = '2026-09-28T05:24:19.185810+00:00';
-window._offlineHash = 'd885641f';
+window._offlineBuildTime = '2026-09-28T05:38:28.181030+00:00';
+window._offlineHash = '094211de';
 window._offlineVersion = 'v2026.09.28';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30908.html';
 
@@ -551,8 +594,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30908';
-  var localBuildTime = window._offlineBuildTime || '2026-09-28T05:24:19.185810+00:00';
-  var localHash = window._offlineHash || 'd885641f';
+  var localBuildTime = window._offlineBuildTime || '2026-09-28T05:38:28.181030+00:00';
+  var localHash = window._offlineHash || '094211de';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30908.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

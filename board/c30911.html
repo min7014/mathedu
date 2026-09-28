@@ -127,6 +127,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
+
+.min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
+.min-btn-algeo:hover{background:#a855f7;color:#fff}
+.min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip b{color:#67e8f9}
+.min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
+.min-ggb-frame-wrap.active{display:block}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -149,6 +158,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 수학 팁</b>: 복잡한 수식과 기호 뒤에 숨겨진 직관적인 기하학적 원리와 시각적 모델을 하단의 <b>민은기 선생님 수학자료실(min7014)</b>의 GeoGebra 조작 및 개념 증명 자료를 통해 깊이 있게 탐구해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$x_1 = t^2+t-6, x_2 = -t^3+7t^2$</b> — 두 점 P, Q의 시각 t에서의 위치</div><div><b>$v(t) = x'(t)$</b> — 위치의 시간에 대한 미분 (속도)</div><div><b>$a(t) = v'(t) = x''(t)$</b> — 속도의 시간에 대한 미분 (가속도)</div></div>
 <h2>제1단계 · 두 점의 위치가 같아지는 시각 $t$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>두 점 $P, Q$의 위치가 같으므로 $x_1 = x_2$, 즉 $t^2+t-6 = -t^3+7t^2$ 입니다. 이를 이항하면 $t^3 - 6t^2 + t - 6 = 0$ 이고, 인수분해하면 $t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$ 입니다. $t \ge 0$이므로 $t=6$ 입니다.</div><div class="q" data-ans="4" data-exp="$(t-6)(t^2+1) = 0$이고 $t^2+1 > 0$이므로 $t=6$입니다."><div class="lvl">문항</div><div class="stem">방정식 $t^3 - 6t^2 + t - 6 = 0$의 $t \ge 0$인 실근은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>7</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -218,67 +228,100 @@ $$p - q = 2 - (-22) = 24$$<br>
       <img src="../assets/favicon.png" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
   </div>
-  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
   <div class="min-list">
     
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20230127001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 점 $\mathrm{P}$가 평면 $\alpha$ 밖의 점이고 직선 $a$가 평면 $\alpha$위에 있을 때 점 $\mathrm{P}$에서 직선 $a$에 내린 수선의 발을 $\mathrm{N}$이라하고 평면 $\alpha$위에서 $\mathrm{N}$을 지나고 직선 $a$에 수직인 직선을 $b$라고하면 $\mathrm{P}$에서 $b$에그은 수선 $\mathrm{PM}$은 평면 $\alpha$에 수직이다.
-              <span class="min-item-sub">If the point $\mathrm{P}$ is outside the plane $\alpha$ and the straight line $a$ is on the plane $\alpha$, let $\mathrm{N}$ be the foot of the perpendicular from point $\mathrm{P}$ to the straight line $a$, and $b$ be the straight line passing through $\mathrm{N}$ on the plane alpha and perpendicular to the straight line $a$. $\mathrm{PM}$ is perpendicular to the plane $\alpha$.</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $m(a+b)=ma+mb$
+              
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20230127001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ckyaqb3y')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/ckyaqb3y" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=9a5ad111c22d11e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2017040301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/5xB3nP5zGr8" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20220423001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 점 $\mathrm{F}$, 직선 $l$과 직선 $m$이 주어져 있을 때, 점 $\mathrm{F}$와 직선 $l$에 같은 거리만큼 떨어져 있는 직선 $m$ 위에 있는 점을 작도하여라.
-              <span class="min-item-sub">If there are a point $\mathrm{F}$ and a straight line $l$ and a straight line $m$, draw a point on the line $m$ separated by the same distance as the point $\mathrm{F}$ and the straight line $l$.</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190820001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a+b)(c+d)=ab+ac+bc+bd$
+              
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20220423001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/kft6tzya')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/kft6tzya" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=8ef19d05c2fc11e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082002.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/ZD6GrL_fKT4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190820001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20230114001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $\mathrm{P}$가 평면 $\alpha$밖의 점이고 직선 $a$가 평면 $\alpha$ 위에 있을 때 $\mathrm{P}$에서 평면 $\alpha$에 내린 수선의 발을 $\mathrm{M}$ 이라 하고 $\mathrm{M}$에서 직선 $a$에 내린 수선의 발을 $\mathrm{N}$이라고 하면 선분 $\mathrm{PN}$과 $a$는 수직이다.
-              <span class="min-item-sub">When $\mathrm{P}$ is a point outside the plane $\alpha$ and the straight line $a$ is on the plane $\alpha$, the foot of the perpendicular drawn from $\mathrm{P}$ to the plane $\alpha$ is Suppose that $\mathrm{ M}$ is $\mathrm{N}$ and that the foot of the perpendicular drawn from $\mathrm{M}$ to straight line $a$ is $\mathrm{N}$, then the line segments $\mathrm{PN}$ and $a$ are perpendicular.</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190821001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a+b)^2=a^2+2ab+b^2$
+              
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20230114001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/bc3bfxgz')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/bc3bfxgz" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=afc8bf06c3b411e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/K4M6KQKCJm0" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190821001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20230126001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $\mathrm{P}$가 평면 $\alpha$밖의 점이고 직선 $a$가 평면 $\alpha$ 위에 있을 때 $\mathrm{P}$에서 평면 $\alpha$와 직선 $a$에 내린 수선의 발을 각각 $\mathrm{M}$, $\mathrm{N}$이라고 하면 선분 $\mathrm{MN}$과 $a$는 수직이다.
-              <span class="min-item-sub">If $\mathrm{P}$ is a point outside the plane $\alpha$ and the straight line $a$ is on the plane $\alpha$, then the perpendicular from $\mathrm{P}$ to the plane $\alpha$ and the straight line $a$ If the feet are $\mathrm{M}$ and $\mathrm{N}$ respectively, the lines $\mathrm{MN}$ and $a$ are perpendicular.</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190823001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a-b)^2=a^2-2ab+b^2$
+              
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20230126001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/hffwmj7v')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/hffwmj7v" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=23c2fb16c54511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/pVtFvVUEOnk" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190823001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
   </div>
 
   <div class="min-footer">
     <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
-      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra & PDF) ➔
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
     </a>
   </div>
 </div>
+
+<script>
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
+}
+</script>
+
 
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 24</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>

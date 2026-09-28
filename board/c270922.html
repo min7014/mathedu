@@ -129,6 +129,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
+
+.min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
+.min-btn-algeo:hover{background:#a855f7;color:#fff}
+.min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip b{color:#67e8f9}
+.min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
+.min-ggb-frame-wrap.active{display:block}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -151,6 +160,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
 </div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 대수 팁</b>: 지수가 정수에서 유리수, 실수로 확장됨에 따라 나타나는 지수함수의 지수적 폭발과 거듭제곱근의 기하학적 성질을 하단의 <b>min7014 개념 정리 자료</b>를 통해 깊이 있게 탐구해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$a^3 = \dfrac{72}{25}$</b> — 직사각형 좌표 연립으로 구한 a^3의 값</div><div><b>$p = 25, q = 72$</b> — 서로소인 분모 p와 분자 q</div><div><b>$p + q = 25 + 72 = 97$</b> — 최종 단답형 정답</div></div>
 <h2>🔰 1단계 · [초등 도형 연계] 정사각형의 넓이 계산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 5학년 다각형 넓이: 가로가 5이고 세로가 5인 정사각형의 넓이는 $5 \times 5 = 25$ 입니다.</div><div class="q" data-ans="3" data-exp="$5 \times 5 = 25$ 입니다."><div class="lvl">초등 도형 디딤돌 1</div><div class="stem">가로가 5cm, 세로가 5cm인 정사각형의 넓이($5 \times 5$)는 몇 $\text{cm}^2$일까요?</div><div class="opts"><div class="opt"><span class="n">1</span>$23$</div><div class="opt"><span class="n">2</span>$24$</div><div class="opt"><span class="n">3</span>$25$</div><div class="opt"><span class="n">4</span>$26$</div><div class="opt"><span class="n">5</span>$27$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -207,67 +217,100 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <img src="../assets/favicon.png" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
   </div>
-  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
   <div class="min-list">
     
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20200424001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $\displaystyle\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$ 타원 그리기($a&gt;b&gt;0$)($\displaystyle\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$ ellipse drawing($a&gt;b&gt;0$))
-              
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20240325001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 자연수일때 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a natural number</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20200424001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/b5rypfj7')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/b5rypfj7" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2024/2024032305.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/w9pvemmU5XU" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20240325001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20200427001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $\displaystyle\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$ 타원 그리기($b&gt;a&gt;0$)($\displaystyle\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$ ellipse drawing($b&gt;a&gt;0$))
-              
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20200301001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 정수일때의 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a integer</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20200427001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030101.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/D1oE3dToU2M" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20220510001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$ 상의 점 $(x_1,y_1)$ 에서의 접선의 방정식을 구하여라.
-              <span class="min-item-sub">Find the equation for the tangent line to $\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$ at a given point $(x_1,y_1)$.</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20200301003.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 유리수일때의 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a rational number</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20220510001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/I8Ou1OmnkJs" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200301003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <a href="https://min7014.github.io/math20220511001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> $\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$ 의 기울기가 $m$인 접선의 방정식을 구하여라.
-              <span class="min-item-sub">Find the equation for the tangent line having slope $m$ to $\frac{x^2}{a^2} + \frac{y^2}{b^2} =1$.</span>
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20200305003.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 지수가 실수일때의 지수법칙
+              <span class="min-item-sub">Exponential law when the exponent is a real number</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://min7014.github.io/math20220511001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
+            <a href="https://min7014.github.io/2020/2020030503.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/Gxx_ChdXo74" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200305003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
           </div>
+          <div class="min-ggb-frame-wrap"></div>
         </div>
         
   </div>
 
   <div class="min-footer">
     <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
-      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra & PDF) ➔
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
     </a>
   </div>
 </div>
+
+<script>
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
+}
+</script>
+
 
 <div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $97$</div>
 <button class="btn" onclick="location.reload()">다시 풀기</button></div>

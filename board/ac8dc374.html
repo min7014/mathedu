@@ -108,6 +108,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
+
+.min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
+.min-btn-algeo:hover{background:#a855f7;color:#fff}
+.min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip b{color:#67e8f9}
+.min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
+.min-ggb-frame-wrap.active{display:block}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -132,6 +141,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
 <div class="orig-media"><img src="img_ac8dc374.png" alt="2027학년도 9월 모의평가 수학 21번 원본 문제"></div>
 <div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+<div class="min-visual-tip">💡 <b>민은기 선생님의 시각적 미적분 팁</b>: 곡선 위의 한 고정점과 움직이는 점을 잇는 할선이 두 점 사이의 거리가 0에 가까워질 때 접선에 수렴하는 '미분계수의 기하학적 극한 과정'을 하단의 <b>min7014 GeoGebra 모델</b>을 통해 직접 관찰해 보세요.</div>
 </div>
 
 <h2>🔰 제0단계 · 수학 기호 및 기본 정의</h2>
@@ -296,191 +306,104 @@ $P(x) = (x - 1)(x - a)(x - 4 + a)$가 단 하나의 첨점만 가지려면 중�
       <img src="../assets/favicon.png" alt="min7014" class="min-logo">
       <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
     </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 증명 PDF</span>
   </div>
-  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 GeoGebra 조작 및 정리 자료와 함께 더 깊이 탐구해보세요.</p>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
   <div class="min-list">
-    <div class="min-item">
-      <div class="min-item-main">
-        <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-item-title">
-          <span class="min-bullet">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선
-          <span class="min-item-sub">Tangents and Normals at a Point on the Differential Function</span>
-        </a>
-      </div>
-      <div class="min-item-actions">
-        <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-      </div>
-    </div>
     
-    <div class="min-item">
-      <div class="min-item-main">
-        <a href="https://min7014.github.io/math20240407001.html" target="_blank" rel="noopener" class="min-item-title">
-          <span class="min-bullet">📌</span> 매개변수 곡선의 미분
-          <span class="min-item-sub">Differential of the parameter curve</span>
-        </a>
-      </div>
-      <div class="min-item-actions">
-        <a href="https://min7014.github.io/math20240407001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-      </div>
-    </div>
-    
-    <div class="min-item">
-      <div class="min-item-main">
-        <a href="https://min7014.github.io/math20190810008.html" target="_blank" rel="noopener" class="min-item-title">
-          <span class="min-bullet">📌</span> 이심률에 의한 원뿔곡선
-          <span class="min-item-sub">Conics by eccentricity · 단델린의 구와 초점</span>
-        </a>
-      </div>
-      <div class="min-item-actions">
-        <a href="https://min7014.github.io/math20190810008.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-      </div>
-    </div>
-    
-    <div class="min-item">
-      <div class="min-item-main">
-        <a href="https://min7014.github.io/math20240120001.html" target="_blank" rel="noopener" class="min-item-title">
-          <span class="min-bullet">📌</span> $a$ 에서 함수 $f$의 미분과 접선의 기울기
-          <span class="min-item-sub">The derivative of a function $f$ at a number $a$</span>
-        </a>
-      </div>
-      <div class="min-item-actions">
-        <a href="https://min7014.github.io/math20240120001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">상세 탐구 ➔</a>
-      </div>
-    </div>
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선
+              <span class="min-item-sub">Tangents and Normals at a Point on the Differential Function</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 도함수의 의미를 이용하여 함수의 도함수 그래프 그리기
+              <span class="min-item-sub">Draw derivative graph of a function using the meaning of the derivative</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=54ce0d3afd8911e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019110302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/XbPZgnUE_uc" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 접선에 접근하는 할선들
+              <span class="min-item-sub">Secant lines approaching the tangent line</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20201103001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 도함수
+              <span class="min-item-sub">Derivative Function</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://min7014.github.io/2020/2020110301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="민은기 선생님의 시각적 증명 및 개념 정리 PDF">📄 PDF 증명</a> <a href="https://youtu.be/MArY06ZB4Z4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="민은기 선생님의 유튜브 개념 해설 강의">🎥 해설 강의</a> <a href="https://min7014.github.io/math20201103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
   </div>
 
   <div class="min-footer">
     <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
-      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,000+ GeoGebra &amp; PDF) ➔
+      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
     </a>
   </div>
 </div>
-</div>
-
-<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center">
-<h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2>
-<h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3>
-<p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p>
-<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-<input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center">
-<button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button>
-</div>
-</div>
 
 <script>
-window._studentName="";
-window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";
-function registerName(){
-  var n=document.getElementById("studentName").value.trim();
-  if(!n){alert("이름을 입력하세요");return;}
-  window._studentName=n;
-  document.getElementById("trackFull").remove();
-  sendProgress();
-  if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}
-}
-function sendProgress(){
-  var name=(window._studentName||"").trim();
-  if(!name)return;
-  var qs=document.querySelectorAll(".q");
-  var total=qs.length;
-  var done=document.querySelectorAll(".q.done");
-  var correct=0;
-  done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});
-  if(total===0)return;
-  fetch(window._sheetsApiUrl,{
-    method:"POST",headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({quiz_slug:"ac8dc374",student_name:name,current_step:done.length,total_steps:total,correct:correct})
-  }).catch(function(){});
-}
-document.querySelectorAll(".q").forEach(function(q){
-  q.addEventListener("click",function(e){
-    var opt=e.target.closest(".opt");
-    if(opt){setTimeout(sendProgress,50);}
-  });
-});
-document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});
-
-function copyLink(){
-  const b=document.getElementById('copyBtn');
-  const t=b.textContent;
-  navigator.clipboard.writeText(location.href).then(()=>{
-    b.textContent='✅ 복사됨';
-    setTimeout(()=>b.textContent=t,1500);
-  }).catch(()=>{
-    prompt('아래 링크를 복사하세요',location.href);
-  });
-}
-
-function toggleReport(el){
-  if(!el) return;
-  var wrap=el.closest ? el.closest('.report-wrap') : el.parentElement;
-  if(!wrap) return;
-  var btn=wrap.querySelector('.report-btn');
-  var form=wrap.querySelector('.report-form');
-  if(!btn||!form) return;
-  if(form.style.display==='none'){
-    form.style.display='block';
-    btn.style.display='none';
-  } else {
-    form.style.display='none';
-    btn.style.display='block';
-  }
-}
-
-function submitReport(btn){
-  var wrap=btn.closest('.report-wrap');
-  var name=(window._studentName||'익명').trim();
-  var slug='ac8dc374';
-  var qEl=wrap.closest('.q');
-  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
-  var textEl=wrap.querySelector('.report-text');
-  var text=(textEl ? textEl.value : '').trim();
-  var url=window._sheetsApiUrl;
-  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
-  try { fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){}); } catch(e){}
-  try { var img=new Image(); img.src=reportUrl; } catch(e){}
-  wrap.querySelector('.report-form').style.display='none';
-  wrap.querySelector('.report-msg').style.display='block';
-}
-
-document.querySelectorAll('.opt').forEach(opt => {
-  opt.addEventListener('click', function() {
-    const q = this.closest('.q');
-    if (q.classList.contains('done')) return;
-    q.classList.add('done');
-    const ans = parseInt(q.dataset.ans);
-    const idx = Array.from(q.querySelectorAll('.opt')).indexOf(this) + 1;
-    const exp = q.querySelector('.exp');
-    if (idx === ans) {
-      this.classList.add('correct');
-      if (exp) { exp.innerHTML = '<b>정답입니다!</b><br>' + q.dataset.exp; exp.classList.add('show'); }
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
     } else {
-      this.classList.add('wrong');
-      q.querySelectorAll('.opt')[ans - 1].classList.add('correct');
-      if (exp) { exp.innerHTML = '<b>오답입니다.</b><br>' + q.dataset.exp; exp.classList.add('show'); }
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
     }
-    q.querySelectorAll('.opt').forEach(o => o.classList.add('locked'));
-    updateScore();
-  });
-});
-
-function updateScore() {
-  const qs = document.querySelectorAll('.q');
-  let score = 0;
-  let done = 0;
-  qs.forEach(q => {
-    if (q.classList.contains('done')) {
-      done++;
-      if (q.querySelector('.opt.correct:not(.wrong)')) score++;
-    }
-  });
-  document.getElementById('pts').textContent = score;
-  document.getElementById('tot').textContent = qs.length;
-  const pct = Math.round((done / qs.length) * 100);
-  document.getElementById('pct').textContent = pct + '%';
-  document.getElementById('bar').style.width = pct + '%';
+  };
 }
 </script>
+
+
+
+
+
 <script src="../mathedu-room.js"></script>
 </body>
 </html>
