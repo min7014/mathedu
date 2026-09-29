@@ -138,9 +138,105 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
 
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 6px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.55;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 10px;
+  font-weight: 400;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 3px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
@@ -148,21 +244,25 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <span>min7014 <b>mathedu</b></span>
 </a>
 <button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
+</div>
 </div>
 <div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 [2027학년도 9월 고3 4번] 함수의 연속 조건과 미정계수 결정</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h1>📘 [2027학년도 9월 고3 4번] 함수의 연속 조건과 미정계수 결정<span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #4] Continuity Conditions of Functions & Determination of Indeterminate Coefficients</span></h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
 <div class="orig-media"><img src="img_c270904.png" alt="[2027학년도 9월 고3 4번] 함수의 연속 조건과 미정계수 결정 원본 문제"></div>
 
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!<span class="bilingual-en">💡 By working through the Step 0 foundations below, you will completely conquer this official exam problem!</span></div>
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 단순 결과가 아닌 <b>처음부터 끝까지 생각의 모든 과정이 투명하게 드러나는 단계별 시각적 증명</b>입니다.<br>하단의 <b>민은기 선생님 수학자료실(min7014)</b> PDF 문서를 키보드 방향키나 마우스 휠로 넘겨가며, 각 페이지마다 변하는 요소와 보존되는 불변량의 수학적 의미를 깊이 있게 음미해 보세요.</div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = f(2)$</b> — x=2에서 끊어지지 않고 이어지는 연속 조건</div><div><b>$14 + a$</b> — x=2의 왼쪽 식 7x+a에 x=2를 대입한 높이</div><div><b>$4 + 2a$</b> — x=2의 오른쪽 식 x^2+ax에 x=2를 대입한 높이</div><div><b>$a = 10$</b> — 14+a = 4+2a를 풀어 결정된 상수 a</div></div>
-<h2>🔰 1단계 · [좌극한의 계산] 경계점 왼쪽에서의 접근</h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수 $f(x)$가 $x=2$에서 연속이려면 좌극한, 우극한, 함숫값이 모두 같아야 합니다. $x \le 2$ 영역의 함수식 $7x + a$에서 $x \to 2^-$일 때의 좌극한은 $7(2) + a = 14 + a$ 입니다.</div><div class="q" data-ans="3" data-exp="$\lim_{x \to 2^-} (7x + a) = 7 \times 2 + a = 14 + a$ 입니다."><div class="lvl">좌극한 디딤돌 1</div><div class="stem">경계 $x=2$의 왼쪽 식 $7x + a$에 대하여 좌극한 $\lim_{x \to 2^-} f(x)$를 구한 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$7 + a$</div><div class="opt"><span class="n">2</span>$12 + a$</div><div class="opt"><span class="n">3</span>$14 + a$</div><div class="opt"><span class="n">4</span>$14 + 2a$</div><div class="opt"><span class="n">5</span>$28 + a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols</span></h2><div class="sym"><div><b>$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = f(2)$</b> — x=2에서 끊어지지 않고 이어지는 연속 조건<div class="bilingual-en">Continuity condition: unbroken connection at $x=2$ where left limit, right limit, and function value coincide.</div></div><div><b>$14 + a$</b> — x=2의 왼쪽 식 7x+a에 x=2를 대입한 높이<div class="bilingual-en">Left limit value obtained by substituting $x=2$ into $7x+a$.</div></div><div><b>$4 + 2a$</b> — x=2의 오른쪽 식 x^2+ax에 x=2를 대입한 높이<div class="bilingual-en">Right limit value obtained by substituting $x=2$ into $x^2+ax$.</div></div><div><b>$a = 10$</b> — 14+a = 4+2a를 풀어 결정된 상수 a<div class="bilingual-en">Constant $a$ determined by equating left and right limits: $14+a = 4+2a \implies a=10$.</div></div></div>
+<h2>🔰 1단계 · [좌극한의 계산] 경계점 왼쪽에서의 접근<span class="bilingual-en">🔰 Step 1 · [Left-Hand Limit] Approaching Boundary $x=2$ from the Left</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수 $f(x)$가 $x=2$에서 연속이려면 좌극한, 우극한, 함숫값이 모두 같아야 합니다. $x \le 2$ 영역의 함수식 $7x + a$에서 $x \to 2^-$일 때의 좌극한은 $7(2) + a = 14 + a$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For a function $f(x)$ to be continuous at $x=2$, the left limit, right limit, and function value must be identical. In the domain $x \le 2$ defined by $7x + a$, the left-hand limit as $x \to 2^-$ is $7(2) + a = 14 + a$.</div></div><div class="q" data-ans="3" data-exp="$\lim_{x \to 2^-} (7x + a) = 7 \times 2 + a = 14 + a$ 입니다." data-exp-en="$\lim_{x \to 2^-} (7x + a) = 7 \times 2 + a = 14 + a$."><div class="lvl">좌극한 디딤돌 1</div><div class="stem">경계 $x=2$의 왼쪽 식 $7x + a$에 대하여 좌극한 $\lim_{x \to 2^-} f(x)$를 구한 식은?<div class="bilingual-en">For the expression $7x + a$ on the left of boundary $x=2$, what is the expression for the left-hand limit $\lim_{x \to 2^-} f(x)$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$7 + a$</div><div class="opt"><span class="n">2</span>$12 + a$</div><div class="opt"><span class="n">3</span>$14 + a$</div><div class="opt"><span class="n">4</span>$14 + 2a$</div><div class="opt"><span class="n">5</span>$28 + a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -173,7 +273,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [우극한의 계산] 경계점 오른쪽에서의 접근</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x > 2$ 영역의 함수식은 $x^2 + ax$이므로, $x \to 2^+$일 때의 우극한은 $2^2 + a(2) = 4 + 2a$ 입니다.</div><div class="q" data-ans="4" data-exp="$\lim_{x \to 2^+} (x^2 + ax) = 2^2 + 2a = 4 + 2a$ 입니다."><div class="lvl">우극한 디딤돌 2</div><div class="stem">경계 $x=2$의 오른쪽 식 $x^2 + ax$에 대하여 우극한 $\lim_{x \to 2^+} f(x)$를 구한 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$2 + a$</div><div class="opt"><span class="n">2</span>$4 + a$</div><div class="opt"><span class="n">3</span>$2 + 2a$</div><div class="opt"><span class="n">4</span>$4 + 2a$</div><div class="opt"><span class="n">5</span>$4 + 4a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [우극한의 계산] 경계점 오른쪽에서의 접근<span class="bilingual-en">🌿 Step 2 · [Right-Hand Limit] Approaching Boundary $x=2$ from the Right</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x > 2$ 영역의 함수식은 $x^2 + ax$이므로, $x \to 2^+$일 때의 우극한은 $2^2 + a(2) = 4 + 2a$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the domain $x > 2$, the function is defined by $x^2 + ax$. Hence, the right-hand limit as $x \to 2^+$ is $2^2 + a(2) = 4 + 2a$.</div></div><div class="q" data-ans="4" data-exp="$\lim_{x \to 2^+} (x^2 + ax) = 2^2 + 2a = 4 + 2a$ 입니다." data-exp-en="$\lim_{x \to 2^+} (x^2 + ax) = 2^2 + 2a = 4 + 2a$."><div class="lvl">우극한 디딤돌 2</div><div class="stem">경계 $x=2$의 오른쪽 식 $x^2 + ax$에 대하여 우극한 $\lim_{x \to 2^+} f(x)$를 구한 식은?<div class="bilingual-en">For the expression $x^2 + ax$ on the right of boundary $x=2$, what is the expression for the right-hand limit $\lim_{x \to 2^+} f(x)$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$2 + a$</div><div class="opt"><span class="n">2</span>$4 + a$</div><div class="opt"><span class="n">3</span>$2 + 2a$</div><div class="opt"><span class="n">4</span>$4 + 2a$</div><div class="opt"><span class="n">5</span>$4 + 4a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -184,7 +284,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [연속 조건의 적용] 좌우극한 일치 방정식 해결</h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수가 실수 전체에서 연속이려면 경계 $x=2$에서 좌극한과 우극한이 일치해야 합니다: $14 + a = 4 + 2a$. 이 일차방정식을 이항하여 풀면 $2a - a = 14 - 4 \implies a = 10$ 입니다.</div><div class="q" data-ans="3" data-exp="$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$ 입니다."><div class="lvl">미정계수 결정 디딤돌 3</div><div class="stem">좌우극한 일치 조건 $14 + a = 4 + 2a$를 만족하는 상수 $a$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$8$</div><div class="opt"><span class="n">2</span>$9$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [연속 조건의 적용] 좌우극한 일치 방정식 해결<span class="bilingual-en">💡 Step 3 · [Applying Continuity] Equating Left and Right Limits to Solve for $a$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수가 실수 전체에서 연속이려면 경계 $x=2$에서 좌극한과 우극한이 일치해야 합니다: $14 + a = 4 + 2a$. 이 일차방정식을 이항하여 풀면 $2a - a = 14 - 4 \implies a = 10$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For the function to be continuous everywhere, the left and right limits at boundary $x=2$ must match: $14 + a = 4 + 2a$. Transposing terms yields $2a - a = 14 - 4 \implies a = 10$.</div></div><div class="q" data-ans="3" data-exp="$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$ 입니다." data-exp-en="$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$."><div class="lvl">미정계수 결정 디딤돌 3</div><div class="stem">좌우극한 일치 조건 $14 + a = 4 + 2a$를 만족하는 상수 $a$의 값은?<div class="bilingual-en">What is the value of constant $a$ satisfying the continuity condition $14 + a = 4 + 2a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$8$</div><div class="opt"><span class="n">2</span>$9$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -197,7 +297,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270904",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">함수 $f(x)$가 $x=2$에서 연속이어야 하므로 $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x)$ 에서 $14 + a = 4 + 2a \implies a = 10$.</div><div class="q" data-ans="2" data-exp="$14 + a = 4 + 2a \implies a = 10$ 이므로 정답은 ②입니다."><div class="lvl">최종 본문항</div><div class="stem">함수 $f(x)$가 실수 전체에서 연속일 때, 상수 $a$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2><div class="sol">함수 $f(x)$가 $x=2$에서 연속이어야 하므로 $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x)$ 에서 $14 + a = 4 + 2a \implies a = 10$.<div class="bilingual-en">Since $f(x)$ must be continuous at $x=2$, we have $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x)$, giving $14 + a = 4 + 2a \implies a = 10$.</div></div><div class="q" data-ans="2" data-exp="$14 + a = 4 + 2a \implies a = 10$ 이므로 정답은 ②입니다." data-exp-en="Since $14 + a = 4 + 2a \implies a = 10$, the correct answer is ②."><div class="lvl">최종 본문항</div><div class="stem">함수 $f(x)$가 실수 전체에서 연속일 때, 상수 $a$의 값은?<div class="bilingual-en">Given that function $f(x)$ is continuous for all real numbers, what is the value of constant $a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -342,7 +442,15 @@ function toggleExp(btn){
 qs.forEach(q=>{
   const ans=+q.dataset.ans;
   const exp=q.querySelector('.exp');
-  if(exp) exp.innerHTML=q.dataset.exp;
+  if(exp) {
+    var koExp = q.dataset.exp || '';
+    var enExp = q.dataset.expEn || '';
+    if(enExp) {
+      exp.innerHTML = koExp + '<div class="bilingual-en"><b>English Explanation:</b> ' + enExp + '</div>';
+    } else {
+      exp.innerHTML = koExp;
+    }
+  }
   const opts=q.querySelectorAll('.opt');
   opts.forEach((o,i)=>{
     o.addEventListener('click',()=>{

@@ -138,9 +138,105 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
 
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 6px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.55;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 10px;
+  font-weight: 400;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 3px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
@@ -148,21 +244,25 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <span>min7014 <b>mathedu</b></span>
 </a>
 <button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
+</div>
 </div>
 <div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 [2027학년도 9월 고3 1번] 거듭제곱과 지수법칙 계산</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h1>📘 [2027학년도 9월 고3 1번] 거듭제곱과 지수법칙 계산<span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #1] Exponent Rules & Powers Calculation</span></h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
 <div class="orig-media"><img src="img_c270901.png" alt="[2027학년도 9월 고3 1번] 거듭제곱과 지수법칙 계산 원본 문제"></div>
 
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!<span class="bilingual-en">💡 By working through the Step 0 foundations below, you will completely conquer this official exam problem!</span></div>
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.</div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$a^m \times a^n = a^{m+n}$</b> — 밑이 같을 때 지수끼리 더하는 곱셈 법칙</div><div><b>$(a^m)^n = a^{mn}$</b> — 거듭제곱의 거듭제곱(지수의 곱셈)</div><div><b>$4 = 2^2$</b> — 밑을 2로 통일하기 위한 기초 수 변환</div><div><b>$a^{-n} = \dfrac{1}{a^n}$</b> — 음수 지수의 역수 표현</div></div>
-<h2>🔰 1단계 · [지수법칙의 기초] 밑의 통일과 소인수분해</h2><div class="know"><h3>먼저 알아야 할 지식</h3>지수 연산을 수행할 때는 밑을 동일한 소수의 거듭제곱으로 변환하는 것이 기본입니다. $4 = 2^2$ 이므로 밑을 $2$로 통일하여 식을 정리할 수 있습니다.</div><div class="q" data-ans="2" data-exp="$4 = 2^2$ 이므로 밑 $2$의 거듭제곱으로 나타낼 때 지수는 $2$입니다."><div class="lvl">지수 디딤돌 1</div><div class="stem">밑을 통일하기 위해 $4$를 $2$의 거듭제곱으로 변환할 때, $4 = 2^k$를 만족하는 지수 $k$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols</span></h2><div class="sym"><div><b>$a^m \times a^n = a^{m+n}$</b> — 밑이 같을 때 지수끼리 더하는 곱셈 법칙<div class="bilingual-en">Product rule: add exponents when bases are identical.</div></div><div><b>$(a^m)^n = a^{mn}$</b> — 거듭제곱의 거듭제곱(지수의 곱셈)<div class="bilingual-en">Power of a power rule: multiply exponents.</div></div><div><b>$4 = 2^2$</b> — 밑을 2로 통일하기 위한 기초 수 변환<div class="bilingual-en">Base transformation: express 4 as power of 2 ($2^2$).</div></div><div><b>$a^{-n} = \dfrac{1}{a^n}$</b> — 음수 지수의 역수 표현<div class="bilingual-en">Negative exponent rule: reciprocal representation.</div></div></div>
+<h2>🔰 1단계 · [지수법칙의 기초] 밑의 통일과 소인수분해<span class="bilingual-en">🔰 Step 1 · [Foundations of Exponents] Unifying Bases & Prime Factorization</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>지수 연산을 수행할 때는 밑을 동일한 소수의 거듭제곱으로 변환하는 것이 기본입니다. $4 = 2^2$ 이므로 밑을 $2$로 통일하여 식을 정리할 수 있습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When simplifying exponential expressions, unifying the bases to powers of the same prime base is fundamental. Since $4 = 2^2$, we can unify the base to $2$.</div></div><div class="q" data-ans="2" data-exp="$4 = 2^2$ 이므로 밑 $2$의 거듭제곱으로 나타낼 때 지수는 $2$입니다." data-exp-en="Since $4 = 2^2$, the exponent is $2$."><div class="lvl">지수 디딤돌 1</div><div class="stem">밑을 통일하기 위해 $4$를 $2$의 거듭제곱으로 변환할 때, $4 = 2^k$를 만족하는 지수 $k$의 값은?<div class="bilingual-en">When transforming $4$ into a power of base $2$ as $4 = 2^k$, what is the exponent $k$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -173,7 +273,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [지수법칙의 확장] 거듭제곱의 거듭제곱과 음수 지수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>지수법칙 $(a^m)^n = a^{m \times n}$에 의해 거듭제곱의 거듭제곱은 지수끼리 곱합니다. 따라서 $(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$ 이 성립합니다.</div><div class="q" data-ans="3" data-exp="$(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$ 입니다."><div class="lvl">지수 곱셈 디딤돌 2</div><div class="stem">지수법칙 $(a^m)^n = a^{mn}$에 따라 $4^{-\frac{1}{2}} = (2^2)^{-\frac{1}{2}}$ 에서 지수끼리의 곱 $2 \times \left(-\frac{1}{2}\right)$ 의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-3$</div><div class="opt"><span class="n">2</span>$-2$</div><div class="opt"><span class="n">3</span>$-1$</div><div class="opt"><span class="n">4</span>$0$</div><div class="opt"><span class="n">5</span>$1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>🌿 2단계 · [지수법칙의 확장] 거듭제곱의 거듭제곱과 음수 지수<span class="bilingual-en">🌿 Step 2 · [Extending Exponents] Power of a Power & Negative Exponent</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>지수법칙 $(a^m)^n = a^{m \times n}$에 의해 거듭제곱의 거듭제곱은 지수끼리 곱합니다. 따라서 $(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$ 이 성립합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> By the power of a power rule $(a^m)^n = a^{m \times n}$, multiply exponents together: $(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$.</div></div><div class="q" data-ans="3" data-exp="$(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$ 입니다." data-exp-en="$(2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$."><div class="lvl">지수 곱셈 디딤돌 2</div><div class="stem">지수법칙 $(a^m)^n = a^{mn}$에 따라 $4^{-\frac{1}{2}} = (2^2)^{-\frac{1}{2}}$ 에서 지수끼리의 곱 $2 \times \left(-\frac{1}{2}\right)$ 의 값은?<div class="bilingual-en">According to $(a^m)^n = a^{mn}$, what is the product of exponents $2 \times \left(-\frac{1}{2}\right)$ in $4^{-\frac{1}{2}} = (2^2)^{-\frac{1}{2}}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-3$</div><div class="opt"><span class="n">2</span>$-2$</div><div class="opt"><span class="n">3</span>$-1$</div><div class="opt"><span class="n">4</span>$0$</div><div class="opt"><span class="n">5</span>$1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -184,7 +284,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [지수 덧셈 법칙] 밑이 같은 거듭제곱의 곱셈</h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑이 같은 두 거듭제곱의 곱은 지수끼리 더합니다: $a^p \times a^q = a^{p+q}$. 따라서 $2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2} + (-1)} = 2^{\frac{1}{2}}$ 입니다.</div><div class="q" data-ans="3" data-exp="밑이 같으므로 지수끼리 더하면 $\frac{3}{2} + (-1) = \frac{3}{2} - \frac{2}{2} = \frac{1}{2}$ 입니다."><div class="lvl">지수 덧셈 디딤돌 3</div><div class="stem">지수법칙 $a^p \times a^q = a^{p+q}$를 적용할 때, $2^{\frac{3}{2}} \times 2^{-1}$의 최종 지수 덧셈 $\frac{3}{2} + (-1)$의 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\frac{3}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>💡 3단계 · [지수 덧셈 법칙] 밑이 같은 거듭제곱의 곱셈<span class="bilingual-en">💡 Step 3 · [Addition Rule] Multiplication of Powers with the Same Base</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑이 같은 두 거듭제곱의 곱은 지수끼리 더합니다: $a^p \times a^q = a^{p+q}$. 따라서 $2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2} + (-1)} = 2^{\frac{1}{2}}$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When multiplying powers with identical bases, add exponents: $a^p \times a^q = a^{p+q}$. Hence, $2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2} + (-1)} = 2^{\frac{1}{2}}$.</div></div><div class="q" data-ans="3" data-exp="밑이 같으므로 지수끼리 더하면 $\frac{3}{2} + (-1) = \frac{3}{2} - \frac{2}{2} = \frac{1}{2}$ 입니다." data-exp-en="Since bases are identical, adding exponents yields $\frac{3}{2} + (-1) = \frac{1}{2}$."><div class="lvl">지수 덧셈 디딤돌 3</div><div class="stem">지수법칙 $a^p \times a^q = a^{p+q}$를 적용할 때, $2^{\frac{3}{2}} \times 2^{-1}$의 최종 지수 덧셈 $\frac{3}{2} + (-1)$의 결과는?<div class="bilingual-en">Applying $a^p \times a^q = a^{p+q}$, what is the result of exponent addition $\frac{3}{2} + (-1)$ in $2^{\frac{3}{2}} \times 2^{-1}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\frac{3}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -197,7 +297,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270901",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">모든 단계를 종합하면 $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times (2^2)^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$ 입니다.</div><div class="q" data-ans="4" data-exp="$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$ 이므로 정답은 ④입니다."><div class="lvl">최종 본문항</div><div class="stem">$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}}$ 의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$2^{-1}$</div><div class="opt"><span class="n">2</span>$2^{-\frac{1}{2}}$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2^{\frac{1}{2}}$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2><div class="sol">모든 단계를 종합하면 $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times (2^2)^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$ 입니다.<div class="bilingual-en">Synthesizing all steps: $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times (2^2)^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$.</div></div><div class="q" data-ans="4" data-exp="$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$ 이므로 정답은 ④입니다." data-exp-en="$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{1}{2}}$, so the correct answer is ④."><div class="lvl">최종 본문항</div><div class="stem">$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}}$ 의 값은?<div class="bilingual-en">What is the value of $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$2^{-1}$</div><div class="opt"><span class="n">2</span>$2^{-\frac{1}{2}}$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2^{\frac{1}{2}}$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -342,7 +442,15 @@ function toggleExp(btn){
 qs.forEach(q=>{
   const ans=+q.dataset.ans;
   const exp=q.querySelector('.exp');
-  if(exp) exp.innerHTML=q.dataset.exp;
+  if(exp) {
+    var koExp = q.dataset.exp || '';
+    var enExp = q.dataset.expEn || '';
+    if(enExp) {
+      exp.innerHTML = koExp + '<div class="bilingual-en"><b>English Explanation:</b> ' + enExp + '</div>';
+    } else {
+      exp.innerHTML = koExp;
+    }
+  }
   const opts=q.querySelectorAll('.opt');
   opts.forEach((o,i)=>{
     o.addEventListener('click',()=>{
