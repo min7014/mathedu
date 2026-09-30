@@ -87,18 +87,27 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
 .orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
-border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
 box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+color:#0b1020;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:20px;
 letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
-.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
-.orig-media{text-align:center;margin:14px 0}
-.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
-.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+.orig-badge{font-size:.82rem;color:var(--gold);font-weight:700;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);padding:3px 10px;border-radius:8px}
+.orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
+.orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
+.orig-col-desc{display:flex;flex-direction:column;gap:10px}
+.orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
+.orig-text-box h4{margin:0 0 8px;color:var(--accent);font-size:.96rem;font-weight:700}
+.orig-cond-wrap{background:rgba(13,16,32,.7);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;font-size:.88rem;line-height:1.65;margin-top:8px}
+.orig-tip{font-size:.85rem;color:var(--sub);background:rgba(13,16,32,.5);border:1px dashed rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;line-height:1.6}
 
-/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+/* min7014 수학자료실 공식 연계 심층 탐구 카드: 가로 2열 그리드 배치 */
 .min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
 border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
@@ -109,9 +118,11 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
 .min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
 .min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
-.min-list{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}
-.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-list{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:14px;width:100%;box-sizing:border-box}
+@media (max-width:640px){.min-list{grid-template-columns:1fr} }
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
 .min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item:has(.min-ggb-frame-wrap.active){grid-column:1 / -1}
 .min-item-main{width:100%;min-width:0;box-sizing:border-box}
 .min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
 .min-item-title:hover{color:var(--accent)}
@@ -130,15 +141,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
-
 .min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
 .min-btn-algeo:hover{background:#a855f7;color:#fff}
 .min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
-.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:.88rem;line-height:1.65;color:#e0e7ff}
 .min-visual-tip b{color:#67e8f9}
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
-
+.opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
+@media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -154,14 +165,41 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 [2025학년도 9월 고3 13번] 대칭인 이차함수와 정적분 넓이 조건</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
-<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-<div class="orig-media"><img src="img_c30913.png" alt="[2025학년도 9월 고3 13번] 대칭인 이차함수와 정적분 넓이 조건 원본 문제"></div>
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+    <span class="orig-badge">2025학년도 9월 고3 13번</span>
+  </div>
 
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+  <div class="orig-grid">
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <img src="img_c30913.png" alt="[2025학년도 9월 고3 13번] 대칭인 이차함수와 정적분 넓이 조건 원본 문제">
+      </div>
+      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+    </div>
+
+    <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">대칭인 이차함수와 정적분 넓이 조건</p>
+        <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>대칭인 이차함수와 정적분 넓이 조건</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
+        
+      </div>
+      <div class="orig-tip">
+        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
+  <div class="min-visual-tip" style="margin-top:16px">
+    💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.
+  </div>
 </div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f(x) = \begin{cases} -x^2-2x+6 & (x < 0) \\ -x^2+2x+6 & (x \ge 0) \end{cases}$</b> — y축에 대하여 대칭인 조각적 이차함수</div><div><b>$A = 2B$</b> — 곡선과 x축 사이의 넓이와 직선 사이 넓이의 관계</div><div><b>$\int_0^k f(x)dx = 0$</b> — 넓이 관계 A=2B를 정적분으로 변환한 조건</div></div>
 <h2>제1단계 · 함수 $f(x)$의 $y$축 대칭성 확인하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \ge 0$일 때 $f(x) = -x^2+2x+6$이고, $f(-x) = -(-x)^2 + 2(-x) + 6 = -x^2-2x+6$이므로 $f(x)$는 $y$축 대칭입니다. 따라서 $x$축 위쪽 넓이 $A$는 $y$축에 의해 좌우 각각 $\frac{A}{2}$로 이등분됩니다.</div><div class="q" data-ans="2" data-exp="$y$축 대칭이므로 양수 부분의 넓이는 $\frac{A}{2}$입니다."><div class="lvl">문항</div><div class="stem">곡선 $y=f(x)$와 선분 $PQ$로 둘러싸인 넓이 $A$ 중 $x \ge 0$인 부분의 넓이는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{A}{4}$</div><div class="opt"><span class="n">2</span>$\frac{A}{2}$</div><div class="opt"><span class="n">3</span>$A$</div><div class="opt"><span class="n">4</span>$2A$</div><div class="opt"><span class="n">5</span>$\frac{2}{3}A$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
@@ -219,7 +257,7 @@ $$\left[-\frac{1}{3}x^3 + x^2 + 6x\right]_0^k = -\frac{1}{3}k^3 + k^2 + 6k = 0$$
 $$k^2 - 3k - 18 = 0 \implies (k-6)(k+3) = 0$$<br>
 $k > 4$이므로<br>
 $$k = 6$$<br>
-정답은 <b>④번</b>입니다.</div><div class="q" data-ans="4" data-exp="$y$축 대칭성에 의해 $\int_0^k (-x^2+2x+6)dx = 0 \implies -1/3 k^3 + k^2 + 6k = 0 \implies k=6$입니다."><div class="lvl">최종 본문항</div><div class="stem">함수 $f(x) = \begin{cases} -x^2-2x+6 &amp; (x &lt; 0) \\ -x^2+2x+6 &amp; (x \ge 0) \end{cases}$의 그래프가 $x$축과 만나는 서로 다른 두 점을 $P, Q$라 하고, 상수 $k(k&gt;4)$에 대하여 직선 $x=k$가 $x$축과 만나는 점을 $R$이라 하자. 곡선 $y=f(x)$와 선분 $PQ$로 둘러싸인 부분의 넓이를 $A$, 곡선 $y=f(x)$와 직선 $x=k$ 및 선분 $QR$로 둘러싸인 부분의 넓이를 $B$라 하자. $A=2B$일 때, $k$의 값은? (단, 점 $P$의 $x$좌표는 음수이다.) [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{9}{2}$</div><div class="opt"><span class="n">2</span>5</div><div class="opt"><span class="n">3</span>$\frac{11}{2}$</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>$\frac{13}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+정답은 <b>④번</b>입니다.</div><div class="q" data-ans="4" data-exp="$y$축 대칭성에 의해 $\int_0^k (-x^2+2x+6)dx = 0 \implies -1/3 k^3 + k^2 + 6k = 0 \implies k=6$입니다."><div class="lvl">최종 본문항</div><div class="stem">함수 $f(x) = \begin{cases} -x^2-2x+6 &amp; (x &lt; 0) \\ -x^2+2x+6 &amp; (x \ge 0) \end{cases}$의 그래프가 $x$축과 만나는 서로 다른 두 점을 $P, Q$라 하고, 상수 $k(k&gt;4)$에 대하여 직선 $x=k$가 $x$축과 만나는 점을 $R$이라 하자. 곡선 $y=f(x)$와 선분 $PQ$로 둘러싸인 부분의 넓이를 $A$, 곡선 $y=f(x)$와 직선 $x=k$ 및 선분 $QR$로 둘러싸인 부분의 넓이를 $B$라 하자. $A=2B$일 때, $k$의 값은? (단, 점 $P$의 $x$좌표는 음수이다.) [4점]</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{9}{2}$</div><div class="opt"><span class="n">2</span>5</div><div class="opt"><span class="n">3</span>$\frac{11}{2}$</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>$\frac{13}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

@@ -87,18 +87,27 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
 .orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
-border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
 box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+color:#0b1020;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:20px;
 letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
-.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
-.orig-media{text-align:center;margin:14px 0}
-.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
-.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+.orig-badge{font-size:.82rem;color:var(--gold);font-weight:700;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);padding:3px 10px;border-radius:8px}
+.orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
+.orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
+.orig-col-desc{display:flex;flex-direction:column;gap:10px}
+.orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
+.orig-text-box h4{margin:0 0 8px;color:var(--accent);font-size:.96rem;font-weight:700}
+.orig-cond-wrap{background:rgba(13,16,32,.7);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;font-size:.88rem;line-height:1.65;margin-top:8px}
+.orig-tip{font-size:.85rem;color:var(--sub);background:rgba(13,16,32,.5);border:1px dashed rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;line-height:1.6}
 
-/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+/* min7014 수학자료실 공식 연계 심층 탐구 카드: 가로 2열 그리드 배치 */
 .min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
 border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
@@ -109,9 +118,11 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
 .min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
 .min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
-.min-list{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}
-.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-list{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:14px;width:100%;box-sizing:border-box}
+@media (max-width:640px){.min-list{grid-template-columns:1fr} }
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
 .min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item:has(.min-ggb-frame-wrap.active){grid-column:1 / -1}
 .min-item-main{width:100%;min-width:0;box-sizing:border-box}
 .min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
 .min-item-title:hover{color:var(--accent)}
@@ -130,15 +141,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
-
 .min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
 .min-btn-algeo:hover{background:#a855f7;color:#fff}
 .min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
-.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:.88rem;line-height:1.65;color:#e0e7ff}
 .min-visual-tip b{color:#67e8f9}
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
-
+.opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
+@media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -154,14 +165,41 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 [2025학년도 9월 고3 12번] 등차수열과 부호 교대 합으로 정의된 수열</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
-<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-<div class="orig-media"><img src="img_c30912.png" alt="[2025학년도 9월 고3 12번] 등차수열과 부호 교대 합으로 정의된 수열 원본 문제"></div>
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+    <span class="orig-badge">2025학년도 9월 고3 12번</span>
+  </div>
 
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+  <div class="orig-grid">
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <img src="img_c30912.png" alt="[2025학년도 9월 고3 12번] 등차수열과 부호 교대 합으로 정의된 수열 원본 문제">
+      </div>
+      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+    </div>
+
+    <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">등차수열과 부호 교대 합으로 정의된 수열</p>
+        <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>등차수열과 부호 교대 합으로 정의된 수열</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
+        
+      </div>
+      <div class="orig-tip">
+        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
+  <div class="min-visual-tip" style="margin-top:16px">
+    💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.
+  </div>
 </div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$b_n = \sum_{k=1}^n (-1)^{k+1} a_k$</b> — 부호가 교대로 바뀌는 수열의 합</div><div><b>$b_2 = a_1 - a_2 = -d$</b> — 인접한 두 항의 차와 공차의 관계</div><div><b>$b_{2n} = -nd$</b> — 짝수 번째 항들의 규칙</div></div>
 <h2>제1단계 · $b_2 = -2$ 조건으로 공차 $d$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$b_2 = a_1 - a_2 = -d$ 입니다. $b_2 = -2$ 이므로 $-d = -2 \implies d = 2$ 입니다.</div><div class="q" data-ans="4" data-exp="$a_2 - a_1 = d$이므로 $a_1 - a_2 = -d = -2 \implies d=2$입니다."><div class="lvl">문항</div><div class="stem">등차수열 $\{a_n\}$에 대하여 $a_1 - a_2 = -2$ 일 때 공차 $d$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-2$</div><div class="opt"><span class="n">2</span>$-1$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
@@ -225,7 +263,7 @@ $$(a_1 + 4) + (a_1 + 12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$$<br>
   $b_1 = -4, b_3 = -2, b_5 = 0, b_7 = 2, b_9 = 4 \implies \sum_{n=1}^5 b_{2n-1} = 0$<br>
 따라서 제1항부터 제9항까지의 합은<br>
 $$\sum_{n=1}^9 b_n = (-20) + 0 = -20$$<br>
-정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$d=2, a_1=-4$. $b_n$의 1항부터 9항까지 합은 $-20$입니다."><div class="lvl">최종 본문항</div><div class="stem">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>$-22$</div><div class="opt"><span class="n">2</span>$-20$</div><div class="opt"><span class="n">3</span>$-18$</div><div class="opt"><span class="n">4</span>$-16$</div><div class="opt"><span class="n">5</span>$-14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$d=2, a_1=-4$. $b_n$의 1항부터 9항까지 합은 $-20$입니다."><div class="lvl">최종 본문항</div><div class="stem">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-22$</div><div class="opt"><span class="n">2</span>$-20$</div><div class="opt"><span class="n">3</span>$-18$</div><div class="opt"><span class="n">4</span>$-16$</div><div class="opt"><span class="n">5</span>$-14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

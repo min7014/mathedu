@@ -86,18 +86,27 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
 .orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
-border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
 box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+color:#0b1020;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:20px;
 letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
-.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
-.orig-media{text-align:center;margin:14px 0}
-.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
-.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+.orig-badge{font-size:.82rem;color:var(--gold);font-weight:700;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);padding:3px 10px;border-radius:8px}
+.orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
+.orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
+.orig-col-desc{display:flex;flex-direction:column;gap:10px}
+.orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
+.orig-text-box h4{margin:0 0 8px;color:var(--accent);font-size:.96rem;font-weight:700}
+.orig-cond-wrap{background:rgba(13,16,32,.7);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;font-size:.88rem;line-height:1.65;margin-top:8px}
+.orig-tip{font-size:.85rem;color:var(--sub);background:rgba(13,16,32,.5);border:1px dashed rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;line-height:1.6}
 
-/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+/* min7014 수학자료실 공식 연계 심층 탐구 카드: 가로 2열 그리드 배치 */
 .min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
 border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
@@ -108,9 +117,11 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
 .min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
 .min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
-.min-list{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}
-.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-list{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:14px;width:100%;box-sizing:border-box}
+@media (max-width:640px){.min-list{grid-template-columns:1fr} }
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
 .min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item:has(.min-ggb-frame-wrap.active){grid-column:1 / -1}
 .min-item-main{width:100%;min-width:0;box-sizing:border-box}
 .min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
 .min-item-title:hover{color:var(--accent)}
@@ -129,15 +140,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
-
 .min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
 .min-btn-algeo:hover{background:#a855f7;color:#fff}
 .min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
-.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:.88rem;line-height:1.65;color:#e0e7ff}
 .min-visual-tip b{color:#67e8f9}
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
-
+.opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
+@media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -153,14 +164,41 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 [2027학년도 9월 고3 25번] 등비수열의 수렴 조건과 정수 개수 카운팅</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
-<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-<div class="orig-media"><img src="img_c270925.png" alt="[2027학년도 9월 고3 25번] 등비수열의 수렴 조건과 정수 개수 카운팅 원본 문제"></div>
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+    <span class="orig-badge">2027학년도 9월 고3 25번</span>
+  </div>
 
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+  <div class="orig-grid">
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <img src="img_c270925.png" alt="[2027학년도 9월 고3 25번] 등비수열의 수렴 조건과 정수 개수 카운팅 원본 문제">
+      </div>
+      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+    </div>
+
+    <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">등비수열의 수렴 조건과 정수 개수 카운팅</p>
+        <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>등비수열의 수렴 조건과 정수 개수 카운팅</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
+        
+      </div>
+      <div class="orig-tip">
+        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
+  <div class="min-visual-tip" style="margin-top:16px">
+    💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.
+  </div>
 </div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$-1 < r \le 1$</b> — 등비수열 r^n이 무한대로 발산하지 않고 수렴할 조건</div><div><b>$-1 < \dfrac{k^2-20}{16} \le 1$</b> — 공비 자리에 식을 대입한 부등식</div><div><b>$4 < k^2 \le 36$</b> — 양변에 16을 곱하고 20을 더한 k^2의 범위</div><div><b>$k \in \{\pm 3, \pm 4, \pm 5, \pm 6\}$</b> — 만족하는 8개의 정수 k</div></div>
 <h2>🔰 1단계 · [초등 덧셈 연계] 부등식 양변에 20 더하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>부등식의 양변에 20을 더합니다: $16 + 20 = 36$.</div><div class="q" data-ans="3" data-exp="$16 + 20 = 36$ 입니다."><div class="lvl">초등 덧셈 디딤돌 1</div><div class="stem">초등학교 덧셈: $16 + 20$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$32$</div><div class="opt"><span class="n">2</span>$34$</div><div class="opt"><span class="n">3</span>$36$</div><div class="opt"><span class="n">4</span>$38$</div><div class="opt"><span class="n">5</span>$40$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
@@ -197,7 +235,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270925",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">등비수열 수렴 조건: $-1 < \frac{k^2-20}{16} \le 1 \implies 4 < k^2 \le 36 \implies k = \pm 3, \pm 4, \pm 5, \pm 6$ (8개).</div><div class="q" data-ans="3" data-exp="$4 &lt; k^2 \le 36$을 만족하는 정수 $k$는 $\pm 3, \pm 4, \pm 5, \pm 6$으로 총 8개입니다. 정답은 ③입니다."><div class="lvl">최종 본문항</div><div class="stem">수열 $\{a_n\}$이 수렴하도록 하는 $k$의 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$8$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol">등비수열 수렴 조건: $-1 < \frac{k^2-20}{16} \le 1 \implies 4 < k^2 \le 36 \implies k = \pm 3, \pm 4, \pm 5, \pm 6$ (8개).</div><div class="q" data-ans="3" data-exp="$4 &lt; k^2 \le 36$을 만족하는 정수 $k$는 $\pm 3, \pm 4, \pm 5, \pm 6$으로 총 8개입니다. 정답은 ③입니다."><div class="lvl">최종 본문항</div><div class="stem">수열 $\{a_n\}$이 수렴하도록 하는 $k$의 개수는?</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$8$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

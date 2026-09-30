@@ -87,18 +87,27 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
 .orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
-border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
 box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+color:#0b1020;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:20px;
 letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
-.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
-.orig-media{text-align:center;margin:14px 0}
-.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
-.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+.orig-badge{font-size:.82rem;color:var(--gold);font-weight:700;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);padding:3px 10px;border-radius:8px}
+.orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
+.orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
+.orig-col-desc{display:flex;flex-direction:column;gap:10px}
+.orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
+.orig-text-box h4{margin:0 0 8px;color:var(--accent);font-size:.96rem;font-weight:700}
+.orig-cond-wrap{background:rgba(13,16,32,.7);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;font-size:.88rem;line-height:1.65;margin-top:8px}
+.orig-tip{font-size:.85rem;color:var(--sub);background:rgba(13,16,32,.5);border:1px dashed rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;line-height:1.6}
 
-/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+/* min7014 수학자료실 공식 연계 심층 탐구 카드: 가로 2열 그리드 배치 */
 .min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
 border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
@@ -109,9 +118,11 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
 .min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
 .min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
-.min-list{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}
-.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-list{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:14px;width:100%;box-sizing:border-box}
+@media (max-width:640px){.min-list{grid-template-columns:1fr} }
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
 .min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item:has(.min-ggb-frame-wrap.active){grid-column:1 / -1}
 .min-item-main{width:100%;min-width:0;box-sizing:border-box}
 .min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
 .min-item-title:hover{color:var(--accent)}
@@ -130,15 +141,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
-
 .min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
 .min-btn-algeo:hover{background:#a855f7;color:#fff}
 .min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
-.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:.88rem;line-height:1.65;color:#e0e7ff}
 .min-visual-tip b{color:#67e8f9}
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
-
+.opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
+@media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -154,14 +165,41 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 [2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
-<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-<div class="orig-media"><img src="img_c30914.png" alt="[2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점 원본 문제"></div>
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+    <span class="orig-badge">2025학년도 9월 고3 14번</span>
+  </div>
 
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+  <div class="orig-grid">
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <img src="img_c30914.png" alt="[2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점 원본 문제">
+      </div>
+      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+    </div>
+
+    <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">지수함수·로그함수의 역함수 대칭성과 원의 교점</p>
+        <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>지수함수·로그함수의 역함수 대칭성과 원의 교점</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
+        
+      </div>
+      <div class="orig-tip">
+        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
+  <div class="min-visual-tip" style="margin-top:16px">
+    💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.
+  </div>
 </div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$A_n(a_n, 2^{a_n}), B_n(b_n, 2^{b_n})$</b> — 지수함수 y=2^x 위의 두 점</div><div><b>$\text{기울기 } = \dfrac{2^{b_n}-2^{a_n}}{b_n-a_n} = 3$</b> — 직선의 기울기 조건</div><div><b>$\overline{A_n B_n} = n\sqrt{10}$</b> — 두 점 사이의 거리 조건</div><div><b>$y = x \text{ 대칭}$</b> — 지수함수와 로그함수의 역함수 관계</div></div>
 <h2>제1단계 · 기울기와 거리 조건으로 $b_n - a_n$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>직선의 기울기가 $3$이므로 $\Delta y = 3\Delta x$ 입니다. 피타고라스 정리에 의해 $(\Delta x)^2 + (3\Delta x)^2 = 10(\Delta x)^2 = (n\sqrt{10})^2 = 10n^2 \implies \Delta x = n$. 즉 $b_n - a_n = n$ 입니다.</div><div class="q" data-ans="1" data-exp="$(\Delta x)^2 + 9(\Delta x)^2 = 10n^2 \implies \Delta x = n$입니다."><div class="lvl">문항</div><div class="stem">기울기가 3이고 선분의 길이가 $n\sqrt{10}$일 때 $b_n - a_n$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$n$</div><div class="opt"><span class="n">2</span>$2n$</div><div class="opt"><span class="n">3</span>$3n$</div><div class="opt"><span class="n">4</span>$\sqrt{10}n$</div><div class="opt"><span class="n">5</span>$10n$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
@@ -230,7 +268,7 @@ $$x_2 = \frac{3(2)(4)}{3} = 8$$<br>
 $$x_3 = \frac{3(3)(8)}{7} = \frac{72}{7}$$<br>
 따라서 구하는 합은<br>
 $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7} = \frac{170}{7}$$<br>
-정답은 <b>⑤번</b>입니다.</div><div class="q" data-ans="5" data-exp="$x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$입니다."><div class="lvl">최종 본문항</div><div class="stem">자연수 $n$에 대하여 곡선 $y=2^x$ 위의 두 점 $A_n, B_n$이 다음 조건을 만족시킨다. (가) 직선 $A_n B_n$의 기울기는 3이다. (나) $\overline{A_n B_n} = n\sqrt{10}$. 중심이 직선 $y=x$ 위에 있고 두 점 $A_n, B_n$을 지나는 원이 곡선 $y=\log_2 x$와 만나는 두 점의 $x$좌표 중 큰 값을 $x_n$이라 하자. $x_1 + x_2 + x_3$의 값은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{150}{7}$</div><div class="opt"><span class="n">2</span>$\frac{155}{7}$</div><div class="opt"><span class="n">3</span>$\frac{160}{7}$</div><div class="opt"><span class="n">4</span>$\frac{165}{7}$</div><div class="opt"><span class="n">5</span>$\frac{170}{7}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+정답은 <b>⑤번</b>입니다.</div><div class="q" data-ans="5" data-exp="$x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$입니다."><div class="lvl">최종 본문항</div><div class="stem">자연수 $n$에 대하여 곡선 $y=2^x$ 위의 두 점 $A_n, B_n$이 다음 조건을 만족시킨다. (가) 직선 $A_n B_n$의 기울기는 3이다. (나) $\overline{A_n B_n} = n\sqrt{10}$. 중심이 직선 $y=x$ 위에 있고 두 점 $A_n, B_n$을 지나는 원이 곡선 $y=\log_2 x$와 만나는 두 점의 $x$좌표 중 큰 값을 $x_n$이라 하자. $x_1 + x_2 + x_3$의 값은? [4점]</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{150}{7}$</div><div class="opt"><span class="n">2</span>$\frac{155}{7}$</div><div class="opt"><span class="n">3</span>$\frac{160}{7}$</div><div class="opt"><span class="n">4</span>$\frac{165}{7}$</div><div class="opt"><span class="n">5</span>$\frac{170}{7}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

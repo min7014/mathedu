@@ -87,18 +87,27 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 #trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
 #trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
 .orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
-border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
 box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+color:#0b1020;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:20px;
 letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
-.orig-stem{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}
-.orig-media{text-align:center;margin:14px 0}
-.orig-media img{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
-.orig-tip{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+.orig-badge{font-size:.82rem;color:var(--gold);font-weight:700;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);padding:3px 10px;border-radius:8px}
+.orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
+.orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
+.orig-col-desc{display:flex;flex-direction:column;gap:10px}
+.orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
+.orig-text-box h4{margin:0 0 8px;color:var(--accent);font-size:.96rem;font-weight:700}
+.orig-cond-wrap{background:rgba(13,16,32,.7);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;font-size:.88rem;line-height:1.65;margin-top:8px}
+.orig-tip{font-size:.85rem;color:var(--sub);background:rgba(13,16,32,.5);border:1px dashed rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;line-height:1.6}
 
-/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+/* min7014 수학자료실 공식 연계 심층 탐구 카드: 가로 2열 그리드 배치 */
 .min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
 border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
@@ -109,9 +118,11 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
 .min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
 .min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
-.min-list{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}
-.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-list{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:14px;width:100%;box-sizing:border-box}
+@media (max-width:640px){.min-list{grid-template-columns:1fr} }
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
 .min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item:has(.min-ggb-frame-wrap.active){grid-column:1 / -1}
 .min-item-main{width:100%;min-width:0;box-sizing:border-box}
 .min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
 .min-item-title:hover{color:var(--accent)}
@@ -130,15 +141,15 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
-
 .min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
 .min-btn-algeo:hover{background:#a855f7;color:#fff}
 .min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
-.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:.88rem;line-height:1.65;color:#e0e7ff}
 .min-visual-tip b{color:#67e8f9}
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
-
+.opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
+@media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
@@ -154,14 +165,41 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 [2025학년도 9월 고1 21번] 원의 방정식과 직선의 위치 관계 및 거리의 최댓값</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
-<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-<div class="orig-media"><img src="img_c1092101.png" alt="[2025학년도 9월 고1 21번] 원의 방정식과 직선의 위치 관계 및 거리의 최댓값 원본 문제"></div>
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+    <span class="orig-badge">2025학년도 9월 고1 21번</span>
+  </div>
 
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+  <div class="orig-grid">
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <img src="img_c1092101.png" alt="[2025학년도 9월 고1 21번] 원의 방정식과 직선의 위치 관계 및 거리의 최댓값 원본 문제">
+      </div>
+      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+    </div>
+
+    <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">원의 방정식과 직선의 위치 관계 및 거리의 최댓값</p>
+        <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>원의 방정식과 직선의 위치 관계 및 거리의 최댓값</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
+        
+      </div>
+      <div class="orig-tip">
+        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
+  <div class="min-visual-tip" style="margin-top:16px">
+    💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 원의 완벽한 대칭성과 <b>직선 사이의 위치 관계</b>를 기하학적 보조선으로 증명합니다.<br>• <b>[거리의 정의]</b> 중심 $(a, b)$에서 일정한 거리 $r$만큼 떨어진 점들의 자취로부터 피타고라스 정리를 통해 원의 방정식 $(x-a)^2 + (y-b)^2 = r^2$ 유도<br>• <b>[접선과 직각]</b> 원의 중심에서 접점에 내린 반지름은 접선과 언제나 수직($90^\circ$)을 이룬다는 유클리드 기하의 대원칙 확인<br>• <b>[판별식과 점과 직선 거리]</b> 대수적 판별식 $D=0$과 기하학적 점과 직선 사이 거리 $d=r$가 동일한 접선의 방정식으로 귀결되는 두 수학적 세계의 일치를 하단 자료에서 확인해 보세요.
+  </div>
 </div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 원의 완벽한 대칭성과 <b>직선 사이의 위치 관계</b>를 기하학적 보조선으로 증명합니다.<br>• <b>[거리의 정의]</b> 중심 $(a, b)$에서 일정한 거리 $r$만큼 떨어진 점들의 자취로부터 피타고라스 정리를 통해 원의 방정식 $(x-a)^2 + (y-b)^2 = r^2$ 유도<br>• <b>[접선과 직각]</b> 원의 중심에서 접점에 내린 반지름은 접선과 언제나 수직($90^\circ$)을 이룬다는 유클리드 기하의 대원칙 확인<br>• <b>[판별식과 점과 직선 거리]</b> 대수적 판별식 $D=0$과 기하학적 점과 직선 사이 거리 $d=r$가 동일한 접선의 방정식으로 귀결되는 두 수학적 세계의 일치를 하단 자료에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$(x-a)^2+(y-b)^2=r^2$</b> — 중심이 $(a,b)$이고 반지름의 길이가 $r$인 원의 표준형 방정식</div><div><b>$d = \dfrac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$</b> — 점 $(x_0, y_0)$과 직선 $ax+by+c=0$ 사이의 수직 거리 공식</div><div><b>$d + r$</b> — 원 위의 점에서 직선까지 이르는 거리의 최댓값 (중심거리 + 반지름)</div><div><b>$|k - 6| = 20$</b> — 절댓값 기호를 포함한 일차방정식 ($k - 6 = \pm 20$)</div></div>
 <h2>🔰 제1단계 · 원의 중심과 반지름 파악하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>원의 방정식이 $(x - a)^2 + (y - b)^2 = r^2$ 꼴로 주어지면, 원의 중심은 $(a, b)$이고 반지름의 길이는 $r$ ($r > 0$)입니다.
 원 위의 모든 점은 중심으로부터 정확히 거리 $r$만큼 떨어져 있습니다.</div><div class="q" data-ans="3" data-exp="원 $(x - 2)^2 + (y - 3)^2 = 3^2$ 이므로 중심은 $(2, 3)$이고 반지름 $r = \sqrt{9} = 3$입니다."><div class="lvl">문항</div><div class="stem">원 $C: (x - 2)^2 + (y - 3)^2 = 9$ 의 중심 좌표 $(a, b)$와 반지름 $r$은 무엇인가요?</div><div class="opts"><div class="opt"><span class="n">1</span>중심 $(2, 3)$, 반지름 $r = 9$</div><div class="opt"><span class="n">2</span>중심 $(-2, -3)$, 반지름 $r = 3$</div><div class="opt"><span class="n">3</span>중심 $(2, 3)$, 반지름 $r = 3$</div><div class="opt"><span class="n">4</span>중심 $(3, 2)$, 반지름 $r = 3$</div><div class="opt"><span class="n">5</span>중심 $(2, 3)$, 반지름 $r = \sqrt{3}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
@@ -225,7 +263,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c1092101",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><b>[전체 풀이 과정 종합]</b><br>1단계: 원의 방정식 $(x - 2)^2 + (y - 3)^2 = 9$ 에서 중심은 $C(2, 3)$, 반지름은 $r = 3$이다.<br>2단계: 원의 중심 $C(2, 3)$과 직선 $3x - 4y + k = 0$ 사이의 거리 $d$는 점과 직선 사이의 거리 공식에 의해<br>$$d = \frac{|3 \times 2 - 4 \times 3 + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$$<br>3단계: 원 위의 점에서 직선에 이르는 거리의 최댓값은 $d + r = 7$이므로 $d = 7 - 3 = 4$이다.<br>4단계: $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$<br>따라서 $k - 6 = 20$ 또는 $k - 6 = -20$<br>$k = 26$ 또는 $k = -14$<br>문제에서 $k > 0$인 양수라 하였으므로 $k = 26$이다.</div><div class="q" data-ans="3" data-exp="1. 원의 중심은 $(2, 3)$, 반지름 $r = 3$입니다.<br>2. 중심 $(2, 3)$에서 직선 $3x - 4y + k = 0$까지의 거리는 $d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$입니다.<br>3. 원 위의 점 $P$에서 직선까지 거리의 최댓값은 $d + r = 7$이므로 $d = 4$입니다.<br>4. $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$.<br>5. $k &gt; 0$ 이므로 $k - 6 = 20 \implies k = 26$입니다."><div class="lvl">최종 본문항</div><div class="stem">좌표평면 위의 원 $C: (x - 2)^2 + (y - 3)^2 = 9$ 와 직선 $l: 3x - 4y + k = 0$ 이 있다. 원 $C$ 위의 임의의 점 $P$ 와 직선 $l$ 사이의 거리의 최댓값이 $7$ 일 때, 양수 $k$ 의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$22$</div><div class="opt"><span class="n">2</span>$24$</div><div class="opt"><span class="n">3</span>$26$</div><div class="opt"><span class="n">4</span>$28$</div><div class="opt"><span class="n">5</span>$30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><b>[전체 풀이 과정 종합]</b><br>1단계: 원의 방정식 $(x - 2)^2 + (y - 3)^2 = 9$ 에서 중심은 $C(2, 3)$, 반지름은 $r = 3$이다.<br>2단계: 원의 중심 $C(2, 3)$과 직선 $3x - 4y + k = 0$ 사이의 거리 $d$는 점과 직선 사이의 거리 공식에 의해<br>$$d = \frac{|3 \times 2 - 4 \times 3 + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$$<br>3단계: 원 위의 점에서 직선에 이르는 거리의 최댓값은 $d + r = 7$이므로 $d = 7 - 3 = 4$이다.<br>4단계: $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$<br>따라서 $k - 6 = 20$ 또는 $k - 6 = -20$<br>$k = 26$ 또는 $k = -14$<br>문제에서 $k > 0$인 양수라 하였으므로 $k = 26$이다.</div><div class="q" data-ans="3" data-exp="1. 원의 중심은 $(2, 3)$, 반지름 $r = 3$입니다.<br>2. 중심 $(2, 3)$에서 직선 $3x - 4y + k = 0$까지의 거리는 $d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$입니다.<br>3. 원 위의 점 $P$에서 직선까지 거리의 최댓값은 $d + r = 7$이므로 $d = 4$입니다.<br>4. $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$.<br>5. $k &gt; 0$ 이므로 $k - 6 = 20 \implies k = 26$입니다."><div class="lvl">최종 본문항</div><div class="stem">좌표평면 위의 원 $C: (x - 2)^2 + (y - 3)^2 = 9$ 와 직선 $l: 3x - 4y + k = 0$ 이 있다. 원 $C$ 위의 임의의 점 $P$ 와 직선 $l$ 사이의 거리의 최댓값이 $7$ 일 때, 양수 $k$ 의 값은?</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$22$</div><div class="opt"><span class="n">2</span>$24$</div><div class="opt"><span class="n">3</span>$26$</div><div class="opt"><span class="n">4</span>$28$</div><div class="opt"><span class="n">5</span>$30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
