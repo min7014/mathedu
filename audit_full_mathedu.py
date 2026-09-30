@@ -175,8 +175,12 @@ for bpath in step_quizzes:
     ans_list = re.findall(r'data-ans=["\'](\d+)["\']', txt)
     exp_list = re.findall(r'data-exp=["\']', txt)
     
+    has_click_handler = ("addEventListener" in txt and ("opt" in txt or "classList.add" in txt))
+    styles = re.findall(r'<style>.*?</style>', txt, re.DOTALL)
+    has_style_syntax_error = any("{{" in s or "}}" in s for s in styles)
+    
     total_q_count += len(qs)
-    if len(qs) > 0 and len(opts) > 0 and len(ans_list) == len(qs):
+    if len(qs) > 0 and len(opts) > 0 and len(ans_list) == len(qs) and has_click_handler and not has_style_syntax_error:
         valid_step_quizzes += 1
     else:
         broken_data_ans += 1
@@ -190,7 +194,7 @@ for hpath in hub_files:
     if "min7014.github.io" in txt or "min7014" in txt:
         min7014_link_count += 1
 
-log_result(section, f"총 {len(step_quizzes)}개 인터랙티브 퀴즈 문항 구조 검사", "PASS" if broken_data_ans == 0 else "FAIL",
+log_result(section, f"총 {len(step_quizzes)}개 인터랙티브 퀴즈 문항 구조 및 클릭 상호작용 검사", "PASS" if broken_data_ans == 0 else "FAIL",
            f"완전 무결 퀴즈: {valid_step_quizzes}/{len(step_quizzes)}, 총 디딤돌 문항 수: {total_q_count}개")
 
 log_result(section, f"총 {len(hub_files)}개 모의평가 허브 목차 페이지 검사", "PASS",
@@ -239,14 +243,21 @@ log_result(section, "온라인 실시간 업데이트 감지 & 모달 탑재", "
 # ----------------------------------------------------
 section = "5. versions.json 매니페스트 검사"
 v_path = os.path.join(OFFLINE_DIR, "versions.json")
+index_json_p = os.path.join(BOARD_DIR, "index.json")
+expected_count = len(board_quizzes)
+if os.path.exists(index_json_p):
+    with open(index_json_p, "r", encoding="utf-8") as f:
+        p_items = json.load(f)
+        expected_count = len([it for it in p_items if it.get("is_public") is not False])
+
 if os.path.exists(v_path):
     with open(v_path, "r", encoding="utf-8") as f:
         v_data = json.load(f)
     v_quizzes = v_data.get("quizzes", {})
-    if len(v_quizzes) == len(board_quizzes):
-        log_result(section, "versions.json 동기화 상태", "PASS", f"전체 {len(v_quizzes)}개 퀴즈 매니페스트 완벽 일치 (빌드 시각: {v_data.get('generated_at')})")
+    if len(v_quizzes) == expected_count:
+        log_result(section, "versions.json 동기화 상태", "PASS", f"공개 {len(v_quizzes)}개 퀴즈 매니페스트 완벽 일치 (빌드 시각: {v_data.get('generated_at')})")
     else:
-        log_result(section, "versions.json 동기화 상태", "WARN", f"매니페스트 퀴즈 수({len(v_quizzes)}) != 원본 수({len(board_quizzes)})")
+        log_result(section, "versions.json 동기화 상태", "WARN", f"매니페스트 퀴즈 수({len(v_quizzes)}) != 공개 대상 수({expected_count})")
 else:
     log_result(section, "versions.json 동기화 상태", "FAIL", "versions.json 없음")
 

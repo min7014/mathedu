@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2027학년도 9월 모의평가 수학 21번 · 삼차함수와 절댓값 미분가능성</title>
+<title>2027학년도 9월 모의평가 수학 21번 · 삼차함수와 절댓값 미분가능성 · min7014 mathedu</title>
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <style>
 :root{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
@@ -46,12 +46,14 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .score b{color:var(--gold)}
 .bar{height:8px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden;flex:1;margin:0 12px}
-.bar > i{{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:.3s}}
+.bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:.3s}
 .know{background:var(--card);border:1px dashed var(--accent);border-radius:14px;padding:14px;margin:12px 0;font-size:.92rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .know h3{margin:0 0 6px;color:var(--accent);font-size:1rem}
@@ -60,6 +62,8 @@ backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass
 .btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;
 padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.3);transition:.15s}
 .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,196,255,.45)}
+.final{text-align:center;margin:30px 0;font-size:1.05rem}
+.final .ans{font-size:1.6rem;color:var(--good);font-weight:800;margin:8px 0}
 .topbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .tbtn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
 padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
@@ -108,7 +112,6 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
 .min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
 .min-footer-link:hover{text-decoration:underline;color:#fff}
-
 .min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
 .min-btn-algeo:hover{background:#a855f7;color:#fff}
 .min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
@@ -117,50 +120,146 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
 .min-ggb-frame-wrap.active{display:block}
 
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 6px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.55;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 10px;
+  font-weight: 400;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 3px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
-</head>
-<body>
-<div class="wrap">
+<script src="../mathedu-i18n.js"></script>
+</head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
 <img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
 <span>min7014 <b>mathedu</b></span>
 </a>
 <button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
+</div>
 </div>
 <div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-
-<h1>📘 2027학년도 9월 모의평가 수학 21번</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h1>📘 [2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성<span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #21] Cubic Function Profile & Differentiability with Absolute Value</span></h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 
 <!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
 <div class="orig-media"><img src="img_ac8dc374.png" alt="2027학년도 9월 모의평가 수학 21번 원본 문제"></div>
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!<span class="bilingual-en">💡 By working through the Step 0 foundations below, you will completely conquer this official exam problem!</span></div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>• <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>• <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>• <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>• <b>[수학적 의미]</b> 미분은 형식적인 수식 연산이 아니라, 두 점 사이의 할선이 한 점에서의 접선으로 녹아드는 기하학적 수렴 과정임을 하단 자료로 확인해 보세요.</div>
 </div>
 
-<h2>🔰 제0단계 · 수학 기호 및 기본 정의</h2>
+<h2>🔰 제0단계 · 수학 기호 및 기본 정의<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols & Definitions</span></h2>
 <div class="sym">
-<div><b>$$f(x) = 0$ 실근 2개$</b> — 삼차함수가 x축과 한 점에서 접하고(중근), 한 점을 통과</div>
-<div><b>$$g(x)$의 정의$</b> — $f(x) \ge 0$이면 $-f(x)$, $f(x) < 0$이면 $7f(x)$</div>
-<div><b>$미분가능성$</b> — 좌미분계수와 우미분계수가 일치하여 첨점(꺾인 점)이 없음</div>
-<div><b>$절댓값의 첨점 상쇄$</b> — $g(x)$의 꺾임과 $|P(x)|$의 꺾임이 만나 부드러워짐</div>
+<div><b>$f(x) = 0$ 실근 2개</b> — 삼차함수가 x축과 한 점에서 접하고(중근), 한 점을 통과<div class="bilingual-en">Two real roots: cubic function is tangent to x-axis at a double root and crosses at a simple root.</div></div>
+<div><b>$g(x)$의 정의</b> — $f(x) \ge 0$이면 $-f(x)$, $f(x) < 0$이면 $7f(x)$<div class="bilingual-en">Definition of $g(x)$: $-f(x)$ where $f(x) \ge 0$, and $7f(x)$ where $f(x) < 0$.</div></div>
+<div><b>미분가능성</b> — 좌미분계수와 우미분계수가 일치하여 첨점(꺾인 점)이 없음<div class="bilingual-en">Differentiability: left and right derivatives match, having no sharp corners.</div></div>
+<div><b>절댓값의 첨점 상쇄</b> — $g(x)$의 꺾임과 $|P(x)|$의 꺾임이 만나 부드러워짐<div class="bilingual-en">Corner cancellation: sharp jump in $g(x)$ cancels with jump in $|P(x)|$ to produce a smooth derivative.</div></div>
 </div>
 
-<h2>제1단계 · 삼차함수의 개형 파악</h2>
+<h2>제1단계 · 삼차함수의 개형 파악<span class="bilingual-en">Step 1 · Analyzing the Profile of the Cubic Function</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
 최고차항 계수가 1인 삼차함수 $f(x)$에 대해 방정식 $f(x)=0$의 서로 다른 실근의 개수가 2개라는 것은, 한 실근 $\alpha$에서 접하고 다른 실근 $\beta$에서 x축을 통과한다는 뜻입니다.
 즉, $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$) 꼴입니다.
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For a cubic function $f(x)$ with leading coefficient 1, having 2 distinct real roots means it is tangent to the x-axis at $\alpha$ (double root) and crosses at $\beta$ (simple root): $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$).</div>
 </div>
-<div class="q" data-ans="3" data-exp="실근이 2개이므로 삼차함수는 x축에 접하는 중근 α와 단순 실근 β를 가져야 합니다. 따라서 f(x) = (x - α)²(x - β) 형태입니다.">
+<div class="q" data-ans="3" data-exp="실근이 2개이므로 삼차함수는 x축에 접하는 중근 α와 단순 실근 β를 가져야 합니다. 따라서 f(x) = (x - α)²(x - β) 형태입니다." data-exp-en="Since there are 2 real roots, the cubic function must possess a tangent double root α and a crossing simple root β, giving $f(x) = (x - \alpha)^2(x - \beta)$." >
 <div class="lvl">1단계 기본 개념</div>
-<div class="stem">최고차항 계수가 1인 삼차함수 $f(x)$의 서로 다른 실근의 개수가 2개일 때, $f(x)$의 올바른 인수분해 형태는 무엇인가요? (단, $\alpha \neq \beta$)</div>
+<div class="stem">최고차항 계수가 1인 삼차함수 $f(x)$의 서로 다른 실근의 개수가 2개일 때, $f(x)$의 올바른 인수분해 형태는 무엇인가요? (단, $\alpha \neq \beta$)<div class="bilingual-en">When a cubic function $f(x)$ with leading coefficient 1 has 2 distinct real roots, what is its correct factorization? (where $\alpha \neq \beta$)</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$f(x) = (x - \alpha)(x - \beta)(x - \gamma)$</div>
 <div class="opt"><span class="n">2</span>$f(x) = (x - \alpha)^3$</div>
@@ -168,6 +267,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="opt"><span class="n">4</span>$f(x) = (x - \alpha)(x^2 + \beta x + \gamma)$ (허근 가짐)</div>
 <div class="opt"><span class="n">5</span>$f(x) = x^3 - \alpha$</div>
 </div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
@@ -183,16 +283,17 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 
-<h2>제2단계 · $g(x)$의 꺾인 점과 미분계수의 차이</h2>
+<h2>제2단계 · $g(x)$의 꺾인 점과 미분계수의 차이<span class="bilingual-en">Step 2 · Sharp Corner of $g(x)$ & Derivative Discontinuity</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
 $x = \alpha$에서는 $f'(\alpha) = 0$이므로 $g'(\alpha) = 0$으로 미분가능합니다.<br>
 하지만 $x = \beta$에서는 $f'(\beta) > 0$이고 $f(x)$의 부호가 바뀌므로, $g(x)$는 $x = \beta$에서 유일하게 미분 불가능한 점(첨점)을 갖습니다.<br>
 이때 $g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta)$가 됩니다.
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> At $x = \alpha$, $f'(\alpha) = 0$, so $g'(\alpha) = 0$ is differentiable. At $x = \beta$, $f'(\beta) > 0$ and $f(x)$ changes sign, creating the sole sharp corner. The difference in right and left derivatives is $g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta)$.</div>
 </div>
-<div class="q" data-ans="4" data-exp="x=β의 좌우에서 g(x)는 7f(x)에서 -f(x)로 바뀌므로, g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β)입니다.">
+<div class="q" data-ans="4" data-exp="x=β의 좌우에서 g(x)는 7f(x)에서 -f(x)로 바뀌므로, g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β)입니다." data-exp-en="Across $x = \beta$, $g(x)$ transitions from $7f(x)$ to $-f(x)$, yielding $g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta)$." >
 <div class="lvl">2단계 미분가능성 분석</div>
-<div class="stem">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 값은?</div>
+<div class="stem">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 값은?<div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the difference between right and left derivatives $g'(\beta^+) - g'(\beta^-)$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$0$</div>
 <div class="opt"><span class="n">2</span>$-6f'(\beta)$</div>
@@ -200,6 +301,7 @@ $x = \alpha$에서는 $f'(\alpha) = 0$이므로 $g'(\alpha) = 0$으로 미분가
 <div class="opt"><span class="n">4</span>$-8f'(\beta)$</div>
 <div class="opt"><span class="n">5</span>$8f'(\beta)$</div>
 </div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
@@ -214,17 +316,18 @@ $x = \alpha$에서는 $f'(\alpha) = 0$이므로 $g'(\alpha) = 0$으로 미분가
 </div>
 </div>
 
-<h2>제3단계 · $|P(x)|$의 첨점과 상쇄 조건</h2>
+<h2>제3단계 · $|P(x)|$의 첨점과 상쇄 조건<span class="bilingual-en">Step 3 · Corner of $|P(x)|$ & Smooth Cancellation Condition</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
 $P(x) = (x - 1)(x - a)(x - 4 + a)$의 세 근은 $1, a, 4 - a$입니다.<br>
 $h(x) = g(x) + |P(x)|$가 실수 전체에서 미분가능하려면, $|P(x)|$도 오직 하나의 첨점만 가져야 하므로 세 근 중 두 근이 같아야(중근) 합니다.<br>
 • $a = 1$ 또는 $a = 3$일 때: 중근 1, 단순근 3 $\implies$ 첨점은 $x = 3$, 도함수 차이는 $+8$<br>
 • $a = 2$일 때: 중근 2, 단순근 1 $\implies$ 첨점은 $x = 1$, 도함수 차이는 $+2$
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $P(x) = (x - 1)(x - a)(x - 4 + a)$ has roots $1, a, 4 - a$. For $h(x) = g(x) + |P(x)|$ to be differentiable on all real numbers, $|P(x)|$ must have only one corner (a double root among the three). When $a=1$ or $a=3$, the corner is at $x=3$ with derivative jump $+8$.</div>
 </div>
-<div class="q" data-ans="1" data-exp="a=1(또는 a=3)일 때 P(x)=(x-1)²(x-3)이 되어 x=3에서 유일한 첨점을 가지며, 좌우 도함수 차이는 2·P'(3) = 2·(3-1)² = 8입니다. 이것이 g(x)의 -8f'(β)와 상쇄되므로 f'(3) = 1이 됩니다.">
+<div class="q" data-ans="1" data-exp="a=1(또는 a=3)일 때 P(x)=(x-1)²(x-3)이 되어 x=3에서 유일한 첨점을 가지며, 좌우 도함수 차이는 2·P'(3) = 2·(3-1)² = 8입니다. 이것이 g(x)의 -8f'(β)와 상쇄되므로 f'(3) = 1이 됩니다." data-exp-en="When $a=1$ (or $a=3$), $P(x)=(x-1)^2(x-3)$ with a sharp corner at $x=3$ and jump $2P'(3) = 8$. This cancels with $-8f'(\beta)$ from $g(x)$, requiring $\beta = 3$ and $f'(3) = 1$." >
 <div class="lvl">3단계 첨점 상쇄</div>
-<div class="stem">$a = 1$일 때 $h(x) = g(x) + |P(x)|$가 실수 전체에서 미분가능하기 위한 $\beta$와 $f'(\beta)$의 값은?</div>
+<div class="stem">$a = 1$일 때 $h(x) = g(x) + |P(x)|$가 실수 전체에서 미분가능하기 위한 $\beta$와 $f'(\beta)$의 값은?<div class="bilingual-en">When $a = 1$, what are the values of $\beta$ and $f'(\beta)$ for $h(x) = g(x) + |P(x)|$ to be differentiable everywhere?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$\beta = 3, \;\; f'(3) = 1$</div>
 <div class="opt"><span class="n">2</span>$\beta = 1, \;\; f'(1) = 1$</div>
@@ -232,6 +335,7 @@ $h(x) = g(x) + |P(x)|$가 실수 전체에서 미분가능하려면, $|P(x)|$도
 <div class="opt"><span class="n">4</span>$\beta = 2, \;\; f'(2) = 2$</div>
 <div class="opt"><span class="n">5</span>$\beta = 4, \;\; f'(4) = 1/2$</div>
 </div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
@@ -246,7 +350,9 @@ $h(x) = g(x) + |P(x)|$가 실수 전체에서 미분가능하려면, $|P(x)|$도
 </div>
 </div>
 
-<h2>🎯 최종 문제 + 상세 풀이</h2>
+<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"ac8dc374",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
+
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2>
 <div class="sol">
 <h3>📐 2027학년도 9월 모의평가 수학 21번 전체 풀이</h3>
 <p><b>1. 삼차함수의 식 세우기:</b><br>
@@ -274,11 +380,19 @@ $P(x) = (x - 1)(x - a)(x - 4 + a)$가 단 하나의 첨점만 가지려면 중�
 가능한 $f(0)$ 값: $\{-48, -12, -9/4, -1/4\}$<br>
 최댓값 $M = -1/4$, 최솟값 $m = -48$<br>
 따라서 $M \times m = (-1/4) \times (-48) = \mathbf{12}$입니다.</p>
+<div class="bilingual-en">
+<b>English Solution:</b><br>
+1. Cubic function factorization: with 2 distinct roots, $f(x) = (x - \alpha)^2(x - \beta)$ ($lpha 
+eq \beta$).<br>
+2. $g(x)$ differentiability: at $x = lpha$, $f'(lpha) = 0$ is smooth; at $x = \beta$, $g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$ creates a sharp corner.<br>
+3. Cancellation with $|P(x)|$: $P(x) = (x - 1)(x - a)(x - 4 + a)$ must possess a double root to have only one corner. For $a=1, 3$, corner is $x=3$ with jump 8, giving $\beta=3, f'(3)=1 \implies f(0) \in \{-12, -48\}$. For $a=2$, corner is $x=1$ with jump 2, giving $\beta=1, f'(1)=1/4 \implies f(0) \in \{-1/4, -9/4\}$.<br>
+4. Maximum $M = -1/4$, Minimum $m = -48$. Their product $M \times m = (-1/4) \times (-48) = 12$.
+</div>
 </div>
 
-<div class="q" data-ans="2" data-exp="f(0)의 최댓값은 -1/4, 최솟값은 -48이므로, 두 값의 곱은 (-1/4) × (-48) = 12입니다.">
+<div class="q" data-ans="2" data-exp="f(0)의 최댓값은 -1/4, 최솟값은 -48이므로, 두 값의 곱은 (-1/4) × (-48) = 12입니다." data-exp-en="The maximum value of $f(0)$ is $-1/4$ and minimum is $-48$. Their product is $(-1/4) \times (-48) = 12$, so the answer is ②." >
 <div class="lvl">최종 본문항</div>
-<div class="stem">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값과 최솟값의 곱 $M \times m$의 값은 얼마인가요?</div>
+<div class="stem">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값과 최솟값의 곱 $M \times m$의 값은 얼마인가요?<div class="bilingual-en">What is the product $M \times m$ of the maximum and minimum values of $f(0)$ derived from the problem conditions?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$6$</div>
 <div class="opt"><span class="n">2</span>$12$</div>
@@ -286,6 +400,7 @@ $P(x) = (x - 1)(x - a)(x - 4 + a)$가 단 하나의 첨점만 가지려면 중�
 <div class="opt"><span class="n">4</span>$36$</div>
 <div class="opt"><span class="n">5</span>$48$</div>
 </div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
@@ -297,6 +412,7 @@ $P(x) = (x - 1)(x - a)(x - 4 + a)$가 단 하나의 첨점만 가지려면 중�
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div>
 </div>
 
 <!-- 📚 min7014 수학자료실 공식 연계 심층 탐구 자료 카드 -->
@@ -404,12 +520,160 @@ if (!window.toggleMinGgb) {
 }
 </script>
 
+<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $12$</div>
+<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+</div><script>
+const qs=document.querySelectorAll('.q');let pts=0;
+document.getElementById('tot').textContent=qs.length;
 
+function toggleExp(btn){
+  var q = btn.closest ? btn.closest('.q') : btn.parentElement;
+  while(q && !q.classList.contains('q')) { q = q.parentElement; }
+  if(!q) return;
+  var exp = q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent = '💡 해설 보기';
+  } else {
+    exp.classList.add('show');
+    btn.textContent = '💡 해설 닫기';
+  }
+}
 
+qs.forEach(q=>{
+  const ans=+q.dataset.ans;
+  const exp=q.querySelector('.exp');
+  if(exp) {
+    var koExp = q.dataset.exp || '';
+    var enExp = q.dataset.expEn || '';
+    if(enExp) {
+      exp.innerHTML = koExp + '<div class="bilingual-en"><b>English Explanation:</b> ' + enExp + '</div>';
+    } else {
+      exp.innerHTML = koExp;
+    }
+  }
+  const opts=q.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{
+    o.addEventListener('click',()=>{
+      if(q.classList.contains('done')) return;
+      q.classList.add('done');
+      opts.forEach((oo,j)=>{
+        oo.classList.add('locked');
+        if(j+1==ans) oo.classList.add('correct');
+      });
+      if(i+1==ans){
+        o.classList.add('correct');
+        q.classList.add('correct-q');
+        pts++;
+      } else {
+        o.classList.add('wrong');
+      }
+      if(exp) exp.classList.add('show');
+      var toggleBtn = q.querySelector('.exp-toggle-btn');
+      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
+      document.getElementById('pts').textContent=pts;
+      var total = document.querySelectorAll('.q').length;
+      const pct=Math.round(pts/total*100);
+      document.getElementById('bar').style.width=pct+'%';
+      document.getElementById('pct').textContent=pct+'%';
+      if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+    });
+  });
+});
 
+function sendProgress(){
+  var name = (window._studentName || '').trim();
+  if (!name) return;
+  var qs = document.querySelectorAll('.q');
+  var total = qs.length;
+  var done = document.querySelectorAll('.q.done');
+  var correct = pts;
+  var current = done.length;
+  if (current === 0) return;
+  var url = window._sheetsApiUrl || '/api/progress';
+  fetch(url, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      quiz_slug: 'ac8dc374',
+      student_name: name,
+      current_step: current,
+      total_steps: total,
+      correct: correct
+    })
+  }).catch(()=>{});
+}
 
+function copyLink(){
+  const b=document.getElementById('copyBtn');
+  const t=b.textContent;
+  navigator.clipboard.writeText(location.href).then(()=>{
+    b.textContent='✅ 복사됨';
+    setTimeout(()=>b.textContent=t,1500);
+  }).catch(()=>{prompt('아래 링크를 복사하세요',location.href);});
+}
 
+function toggleReport(el){
+  if(!el) return;
+  var wrap=el.closest ? el.closest('.report-wrap') : el.parentElement;
+  if(!wrap) return;
+  var btn=wrap.querySelector('.report-btn');
+  var form=wrap.querySelector('.report-form');
+  if(!btn||!form) return;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
 
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
+  var name=(window._studentName||'익명').trim();
+  var slug='ac8dc374';
+  var qEl=wrap.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
+    var img=new Image();
+    img.src=reportUrl;
+  } catch(e){}
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+}
+
+function setBoardLang(lang) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    MatheduI18n.setLanguage(lang);
+  }
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  } catch(e){}
+  if (saved === 'en') setBoardLang('en');
+})();
+</script>
 <script src="../mathedu-room.js"></script>
 </body>
 </html>
