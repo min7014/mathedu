@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 단순 결과가 아닌 <b>처음부터 끝까지 생각의 모든 과정이 투명하게 드러나는 단계별 시각적 증명</b>입니다.<br>하단의 <b>민은기 선생님 수학자료실(min7014)</b> PDF 문서를 키보드 방향키나 마우스 휠로 넘겨가며, 각 페이지마다 변하는 요소와 보존되는 불변량의 수학적 의미를 깊이 있게 음미해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$x_1 = t^2+t-6, x_2 = -t^3+7t^2$</b> — 두 점 P, Q의 시각 t에서의 위치</div><div><b>$v(t) = x'(t)$</b> — 위치의 시간에 대한 미분 (속도)</div><div><b>$a(t) = v'(t) = x''(t)$</b> — 속도의 시간에 대한 미분 (가속도)</div></div>
-<h2>제1단계 · 두 점의 위치가 같아지는 시각 $t$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>두 점 $P, Q$의 위치가 같으므로 $x_1 = x_2$, 즉 $t^2+t-6 = -t^3+7t^2$ 입니다. 이를 이항하면 $t^3 - 6t^2 + t - 6 = 0$ 이고, 인수분해하면 $t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$ 입니다. $t \ge 0$이므로 $t=6$ 입니다.</div><div class="q" data-ans="4" data-exp="$(t-6)(t^2+1) = 0$이고 $t^2+1 > 0$이므로 $t=6$입니다."><div class="lvl">문항</div><div class="stem">방정식 $t^3 - 6t^2 + t - 6 = 0$의 $t \ge 0$인 실근은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>7</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 두 점의 위치가 같아지는 시각 $t$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>두 점 $P, Q$의 위치가 같으므로 $x_1 = x_2$, 즉 $t^2+t-6 = -t^3+7t^2$ 입니다. 이를 이항하면 $t^3 - 6t^2 + t - 6 = 0$ 이고, 인수분해하면 $t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$ 입니다. $t \ge 0$이므로 $t=6$ 입니다.</div><div class="q" data-ans="4" data-exp="$(t-6)(t^2+1) = 0$이고 $t^2+1 > 0$이므로 $t=6$입니다."><div class="lvl">문항</div><div class="stem">방정식 $t^3 - 6t^2 + t - 6 = 0$의 $t \ge 0$인 실근은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>7</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 두 점의 가속도 식 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>위치 $x_1 = t^2+t-6$을 두 번 미분하면 가속도 $a_1(t) = 2$ 입니다. 위치 $x_2 = -t^3+7t^2$를 두 번 미분하면 속도 $v_2 = -3t^2+14t$, 가속도 $a_2(t) = -6t+14$ 입니다.</div><div class="q" data-ans="2" data-exp="$x_2' = -3t^2+14t$, $x_2'' = -6t+14$입니다."><div class="lvl">문항</div><div class="stem">점 $Q$의 가속도 식 $a_2(t)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-3t^2+14t$</div><div class="opt"><span class="n">2</span>$-6t+14$</div><div class="opt"><span class="n">3</span>$-6t+7$</div><div class="opt"><span class="n">4</span>$-t+14$</div><div class="opt"><span class="n">5</span>$-6t$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 두 점의 가속도 식 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>위치 $x_1 = t^2+t-6$을 두 번 미분하면 가속도 $a_1(t) = 2$ 입니다. 위치 $x_2 = -t^3+7t^2$를 두 번 미분하면 속도 $v_2 = -3t^2+14t$, 가속도 $a_2(t) = -6t+14$ 입니다.</div><div class="q" data-ans="2" data-exp="$x_2' = -3t^2+14t$, $x_2'' = -6t+14$입니다."><div class="lvl">문항</div><div class="stem">점 $Q$의 가속도 식 $a_2(t)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-3t^2+14t$</div><div class="opt"><span class="n">2</span>$-6t+14$</div><div class="opt"><span class="n">3</span>$-6t+7$</div><div class="opt"><span class="n">4</span>$-t+14$</div><div class="opt"><span class="n">5</span>$-6t$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $t=6$에서의 가속도 $p, q$ 및 $p-q$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$t=6$일 때 $p = a_1(6) = 2$, $q = a_2(6) = -6(6)+14 = -36+14 = -22$ 입니다. 따라서 $p-q = 2 - (-22) = 24$ 입니다.</div><div class="q" data-ans="3" data-exp="$2 - (-22) = 2 + 22 = 24$입니다."><div class="lvl">문항</div><div class="stem">$p=2, q=-22$ 일 때 $p-q$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>20</div><div class="opt"><span class="n">2</span>22</div><div class="opt"><span class="n">3</span>24</div><div class="opt"><span class="n">4</span>26</div><div class="opt"><span class="n">5</span>28</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $t=6$에서의 가속도 $p, q$ 및 $p-q$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$t=6$일 때 $p = a_1(6) = 2$, $q = a_2(6) = -6(6)+14 = -36+14 = -22$ 입니다. 따라서 $p-q = 2 - (-22) = 24$ 입니다.</div><div class="q" data-ans="3" data-exp="$2 - (-22) = 2 + 22 = 24$입니다."><div class="lvl">문항</div><div class="stem">$p=2, q=-22$ 일 때 $p-q$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>20</div><div class="opt"><span class="n">2</span>22</div><div class="opt"><span class="n">3</span>24</div><div class="opt"><span class="n">4</span>26</div><div class="opt"><span class="n">5</span>28</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -208,7 +220,10 @@ $$p = a_1(6) = 2$$<br>
 $$q = a_2(6) = -6(6) + 14 = -36 + 14 = -22$$<br>
 따라서 구하는 값은<br>
 $$p - q = 2 - (-22) = 24$$<br>
-정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$t=6$에서 위치가 일치하며, $p=2, q=-22$이므로 $p-q = 2 - (-22) = 24$입니다."><div class="lvl">최종 본문항</div><div class="stem">수직선 위를 움직이는 두 점 $P, Q$의 시각 $t(t \ge 0)$에서의 위치가 각각 $x_1 = t^2+t-6$, $x_2 = -t^3+7t^2$이다. 두 점 $P, Q$의 위치가 같아지는 순간 두 점 $P, Q$의 가속도를 각각 $p, q$라 할 때, $p-q$의 값은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>24</div><div class="opt"><span class="n">2</span>27</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>36</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$t=6$에서 위치가 일치하며, $p=2, q=-22$이므로 $p-q = 2 - (-22) = 24$입니다."><div class="lvl">최종 본문항</div><div class="stem">수직선 위를 움직이는 두 점 $P, Q$의 시각 $t(t \ge 0)$에서의 위치가 각각 $x_1 = t^2+t-6$, $x_2 = -t^3+7t^2$이다. 두 점 $P, Q$의 위치가 같아지는 순간 두 점 $P, Q$의 가속도를 각각 $p, q$라 할 때, $p-q$의 값은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>24</div><div class="opt"><span class="n">2</span>27</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>36</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -339,7 +354,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -368,6 +383,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}

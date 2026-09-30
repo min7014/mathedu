@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f(x) = (k-|x|)e^{-x}$</b> — 절댓값을 포함한 지수함수</div><div><b>$F'(x) = f(x), F(x) \ge f(x)$</b> — 부정적분과 부등식 조건</div><div><b>$h(x) = F(x) - f(x) \ge 0$</b> — 차함수의 최솟값 조건</div></div>
-<h2>제1단계 · $f(x)$의 부정적분 $F(x)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \ge 0$일 때 $f(x) = (k-x)e^{-x} \implies F(x) = (x-k+1)e^{-x} + C_1$. $x < 0$일 때 $f(x) = (k+x)e^{-x} \implies F(x) = (-x-k-1)e^{-x} + C_2$. $x=0$에서 연속이므로 $(-k+1)+C_1 = (-k-1)+C_2 \implies C_2 = C_1 + 2$ 입니다.</div><div class="q" data-ans="3" data-exp="$1 + C_1 = -1 + C_2 \implies C_2 = C_1 + 2$입니다."><div class="lvl">문항</div><div class="stem">$x=0$에서 $F(x)$의 연속 조건에 의해 $C_2$와 $C_1$의 관계는?</div><div class="opts"><div class="opt"><span class="n">1</span>$C_2 = C_1$</div><div class="opt"><span class="n">2</span>$C_2 = C_1 + 1$</div><div class="opt"><span class="n">3</span>$C_2 = C_1 + 2$</div><div class="opt"><span class="n">4</span>$C_2 = C_1 - 2$</div><div class="opt"><span class="n">5</span>$C_2 = 2C_1$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · $f(x)$의 부정적분 $F(x)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \ge 0$일 때 $f(x) = (k-x)e^{-x} \implies F(x) = (x-k+1)e^{-x} + C_1$. $x < 0$일 때 $f(x) = (k+x)e^{-x} \implies F(x) = (-x-k-1)e^{-x} + C_2$. $x=0$에서 연속이므로 $(-k+1)+C_1 = (-k-1)+C_2 \implies C_2 = C_1 + 2$ 입니다.</div><div class="q" data-ans="3" data-exp="$1 + C_1 = -1 + C_2 \implies C_2 = C_1 + 2$입니다."><div class="lvl">문항</div><div class="stem">$x=0$에서 $F(x)$의 연속 조건에 의해 $C_2$와 $C_1$의 관계는?</div><div class="opts"><div class="opt"><span class="n">1</span>$C_2 = C_1$</div><div class="opt"><span class="n">2</span>$C_2 = C_1 + 1$</div><div class="opt"><span class="n">3</span>$C_2 = C_1 + 2$</div><div class="opt"><span class="n">4</span>$C_2 = C_1 - 2$</div><div class="opt"><span class="n">5</span>$C_2 = 2C_1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 차함수 $h(x) = F(x)-f(x) \ge 0$의 최솟값 분석</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$h'(x) = 0$의 해는 $x = \frac{2k+1}{2} (>0)$ 및 $x = \frac{1-2k}{2}$ 입니다. $k \le 1/2$이면 최솟값은 $x=0$에서 발생하고 $C_1 \ge 0 \implies F(0) \ge -k+1$. $k > 1/2$이면 최솟값은 $x = \frac{1-2k}{2}$에서 발생하여 $F(0) \ge -k + 2e^{\frac{2k-1}{2}} - 1$ 입니다.</div><div class="q" data-ans="1" data-exp="극솟값 $h(\frac{1-2k}{2}) \ge 0$ 조건에 의해 $-k + 2e^{\frac{2k-1}{2}} - 1$입니다."><div class="lvl">문항</div><div class="stem">$k > 1/2$일 때 $F(0)$의 최솟값 $g(k)$의 형태는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-k + 2e^{\frac{2k-1}{2}} - 1$</div><div class="opt"><span class="n">2</span>$-k + 1$</div><div class="opt"><span class="n">3</span>$2e^{\frac{2k-1}{2}}$</div><div class="opt"><span class="n">4</span>$-k + e^{k} - 1$</div><div class="opt"><span class="n">5</span>$-2k + 1$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 차함수 $h(x) = F(x)-f(x) \ge 0$의 최솟값 분석</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$h'(x) = 0$의 해는 $x = \frac{2k+1}{2} (>0)$ 및 $x = \frac{1-2k}{2}$ 입니다. $k \le 1/2$이면 최솟값은 $x=0$에서 발생하고 $C_1 \ge 0 \implies F(0) \ge -k+1$. $k > 1/2$이면 최솟값은 $x = \frac{1-2k}{2}$에서 발생하여 $F(0) \ge -k + 2e^{\frac{2k-1}{2}} - 1$ 입니다.</div><div class="q" data-ans="1" data-exp="극솟값 $h(\frac{1-2k}{2}) \ge 0$ 조건에 의해 $-k + 2e^{\frac{2k-1}{2}} - 1$입니다."><div class="lvl">문항</div><div class="stem">$k > 1/2$일 때 $F(0)$의 최솟값 $g(k)$의 형태는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-k + 2e^{\frac{2k-1}{2}} - 1$</div><div class="opt"><span class="n">2</span>$-k + 1$</div><div class="opt"><span class="n">3</span>$2e^{\frac{2k-1}{2}}$</div><div class="opt"><span class="n">4</span>$-k + e^{k} - 1$</div><div class="opt"><span class="n">5</span>$-2k + 1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $g(1/4) + g(3/2)$ 및 $100(p+q)$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$k = 1/4 \le 1/2 \implies g(1/4) = -1/4 + 1 = 3/4$. $k = 3/2 > 1/2 \implies g(3/2) = -3/2 + 2e^{\frac{3-1}{2}} - 1 = 2e - 5/2$. 합: $3/4 + 2e - 5/2 = 2e - 7/4 = pe + q$. 따라서 $p=2, q=-7/4 \implies p+q = 2 - 7/4 = 1/4$. $100(p+q) = 100 \times \frac{1}{4} = 25$ 입니다.</div><div class="q" data-ans="2" data-exp="$100(2 - 7/4) = 100(1/4) = 25$입니다."><div class="lvl">문항</div><div class="stem">$p=2, q=-\frac{7}{4}$ 일 때 $100(p+q)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>20</div><div class="opt"><span class="n">2</span>25</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>35</div><div class="opt"><span class="n">5</span>40</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $g(1/4) + g(3/2)$ 및 $100(p+q)$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$k = 1/4 \le 1/2 \implies g(1/4) = -1/4 + 1 = 3/4$. $k = 3/2 > 1/2 \implies g(3/2) = -3/2 + 2e^{\frac{3-1}{2}} - 1 = 2e - 5/2$. 합: $3/4 + 2e - 5/2 = 2e - 7/4 = pe + q$. 따라서 $p=2, q=-7/4 \implies p+q = 2 - 7/4 = 1/4$. $100(p+q) = 100 \times \frac{1}{4} = 25$ 입니다.</div><div class="q" data-ans="2" data-exp="$100(2 - 7/4) = 100(1/4) = 25$입니다."><div class="lvl">문항</div><div class="stem">$p=2, q=-\frac{7}{4}$ 일 때 $100(p+q)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>20</div><div class="opt"><span class="n">2</span>25</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>35</div><div class="opt"><span class="n">5</span>40</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -223,7 +235,10 @@ $$g\left(\frac{1}{4}\right) + g\left(\frac{3}{2}\right) = \frac{3}{4} + \left(2e
 따라서 $p = 2, q = -\frac{7}{4}$ 입니다.<br>
 $$p + q = 2 - \frac{7}{4} = \frac{1}{4}$$<br>
 $$100(p + q) = 100 \times \frac{1}{4} = 25$$<br>
-정답은 <b>25</b> 입니다.</div><div class="q" data-ans="2" data-exp="$g(1/4)=3/4, g(3/2)=2e-5/2 \implies pe+q = 2e - 7/4 \implies 100(p+q) = 25$ (단답형 정답: 25)."><div class="lvl">최종 본문항</div><div class="stem">양수 $k$에 대하여 함수 $f(x)$를 $f(x)=(k-|x|)e^{-x}$이라 하자. 실수 전체의 집합에서 미분가능하고 다음 조건을 만족시키는 모든 함수 $F(x)$에 대하여 $F(0)$의 최솟값을 $g(k)$라 하자. '모든 실수 $x$에 대하여 $F&#x27;(x)=f(x)$이고 $F(x) \ge f(x)$이다.' $g(\frac{1}{4}) + g(\frac{3}{2}) = pe + q$일 때, $100(p+q)$의 값을 구하시오. (단, $\lim_{x \to \infty}xe^{-x}=0$이고, $p$와 $q$는 유리수이다.) [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>20</div><div class="opt"><span class="n">2</span>25</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>35</div><div class="opt"><span class="n">5</span>40</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>25</b> 입니다.</div><div class="q" data-ans="2" data-exp="$g(1/4)=3/4, g(3/2)=2e-5/2 \implies pe+q = 2e - 7/4 \implies 100(p+q) = 25$ (단답형 정답: 25)."><div class="lvl">최종 본문항</div><div class="stem">양수 $k$에 대하여 함수 $f(x)$를 $f(x)=(k-|x|)e^{-x}$이라 하자. 실수 전체의 집합에서 미분가능하고 다음 조건을 만족시키는 모든 함수 $F(x)$에 대하여 $F(0)$의 최솟값을 $g(k)$라 하자. '모든 실수 $x$에 대하여 $F&#x27;(x)=f(x)$이고 $F(x) \ge f(x)$이다.' $g(\frac{1}{4}) + g(\frac{3}{2}) = pe + q$일 때, $100(p+q)$의 값을 구하시오. (단, $\lim_{x \to \infty}xe^{-x}=0$이고, $p$와 $q$는 유리수이다.) [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>20</div><div class="opt"><span class="n">2</span>25</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>35</div><div class="opt"><span class="n">5</span>40</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -354,7 +369,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -383,6 +398,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}

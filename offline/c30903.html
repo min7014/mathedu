@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -144,8 +147,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30903.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30903">
-<meta name="mathedu-offline-build-time" content="2026-09-30T11:38:31.384993+00:00">
-<meta name="mathedu-offline-hash" content="e982745c">
+<meta name="mathedu-offline-build-time" content="2026-09-30T11:44:13.558203+00:00">
+<meta name="mathedu-offline-hash" content="18e536c3">
 <meta name="mathedu-version-label" content="v2026.09.30">
 
 </head><body><div class="wrap">
@@ -214,7 +217,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$a_n = a r^{n-1}$</b> — 첫째항이 a, 공비가 r인 등비수열의 일반항</div><div><b>$a_2 = ar, a_3 = ar^2$</b> — 제2항과 제3항의 표현</div><div><b>$a_4 = ar^3$</b> — 제4항의 표현</div></div>
-<h2>제1단계 · 등비수열의 일반항 표현하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>등비수열 $\{a_n\}$의 첫째항을 $a$, 공비를 $r$이라 하면 $a_2 = ar, a_3 = ar^2, a_4 = ar^3$ 입니다.</div><div class="q" data-ans="2" data-exp="$a_2 a_3 = (ar)(ar^2) = a^2 r^3$입니다."><div class="lvl">문항</div><div class="stem">$a_2 a_3$을 $a$와 $r$로 바르게 나타낸 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$a^2 r^2$</div><div class="opt"><span class="n">2</span>$a^2 r^3$</div><div class="opt"><span class="n">3</span>$a r^3$</div><div class="opt"><span class="n">4</span>$2ar^3$</div><div class="opt"><span class="n">5</span>$a^2 r^4$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 등비수열의 일반항 표현하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>등비수열 $\{a_n\}$의 첫째항을 $a$, 공비를 $r$이라 하면 $a_2 = ar, a_3 = ar^2, a_4 = ar^3$ 입니다.</div><div class="q" data-ans="2" data-exp="$a_2 a_3 = (ar)(ar^2) = a^2 r^3$입니다."><div class="lvl">문항</div><div class="stem">$a_2 a_3$을 $a$와 $r$로 바르게 나타낸 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$a^2 r^2$</div><div class="opt"><span class="n">2</span>$a^2 r^3$</div><div class="opt"><span class="n">3</span>$a r^3$</div><div class="opt"><span class="n">4</span>$2ar^3$</div><div class="opt"><span class="n">5</span>$a^2 r^4$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -225,7 +231,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 연립하여 첫째항 $a$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a^2 r^3 = 2$ 이고 $a r^3 = 4$ 이므로, 두 식을 나누면 $\frac{a^2 r^3}{a r^3} = \frac{2}{4} \implies a = \frac{1}{2}$ 입니다.</div><div class="q" data-ans="2" data-exp="$\frac{a^2 r^3}{a r^3} = a = \frac{2}{4} = \frac{1}{2}$입니다."><div class="lvl">문항</div><div class="stem">$a^2 r^3 = 2$ 와 $a r^3 = 4$ 로부터 첫째항 $a$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{1}{4}$</div><div class="opt"><span class="n">2</span>$\frac{1}{2}$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 연립하여 첫째항 $a$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a^2 r^3 = 2$ 이고 $a r^3 = 4$ 이므로, 두 식을 나누면 $\frac{a^2 r^3}{a r^3} = \frac{2}{4} \implies a = \frac{1}{2}$ 입니다.</div><div class="q" data-ans="2" data-exp="$\frac{a^2 r^3}{a r^3} = a = \frac{2}{4} = \frac{1}{2}$입니다."><div class="lvl">문항</div><div class="stem">$a^2 r^3 = 2$ 와 $a r^3 = 4$ 로부터 첫째항 $a$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{1}{4}$</div><div class="opt"><span class="n">2</span>$\frac{1}{2}$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -236,7 +245,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 공비 $r$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a = \frac{1}{2}$을 $ar^3 = 4$에 대입하면 $\frac{1}{2}r^3 = 4 \implies r^3 = 8$. 모든 항이 실수이므로 $r=2$ 입니다.</div><div class="q" data-ans="2" data-exp="$2^3 = 8$이므로 실근은 $r=2$입니다."><div class="lvl">문항</div><div class="stem">$r^3 = 8$을 만족시키는 실수 $r$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>$\sqrt{2}$</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>$\pm 2$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · 공비 $r$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a = \frac{1}{2}$을 $ar^3 = 4$에 대입하면 $\frac{1}{2}r^3 = 4 \implies r^3 = 8$. 모든 항이 실수이므로 $r=2$ 입니다.</div><div class="q" data-ans="2" data-exp="$2^3 = 8$이므로 실근은 $r=2$입니다."><div class="lvl">문항</div><div class="stem">$r^3 = 8$을 만족시키는 실수 $r$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>$\sqrt{2}$</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>$\pm 2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -260,7 +272,10 @@ $$\frac{1}{2}r^3 = 4 \implies r^3 = 8$$<br>
 모든 항이 실수이므로 $r = 2$입니다.<br>
 따라서 제6항 $a_6$은<br>
 $$a_6 = a_4 \times r^2 = 4 \times 2^2 = 4 \times 4 = 16$$<br>
-정답은 <b>④번</b>입니다.</div><div class="q" data-ans="4" data-exp="$a = 1/2, r = 2$이므로 $a_6 = a_4 r^2 = 4 \times 2^2 = 16$입니다."><div class="lvl">최종 본문항</div><div class="stem">모든 항이 실수인 등비수열 $\{a_n\}$에 대하여 $a_2 a_3 = 2, a_4 = 4$ 일 때, $a_6$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>10</div><div class="opt"><span class="n">2</span>12</div><div class="opt"><span class="n">3</span>14</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>④번</b>입니다.</div><div class="q" data-ans="4" data-exp="$a = 1/2, r = 2$이므로 $a_6 = a_4 r^2 = 4 \times 2^2 = 16$입니다."><div class="lvl">최종 본문항</div><div class="stem">모든 항이 실수인 등비수열 $\{a_n\}$에 대하여 $a_2 a_3 = 2, a_4 = 4$ 일 때, $a_6$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>10</div><div class="opt"><span class="n">2</span>12</div><div class="opt"><span class="n">3</span>14</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -391,7 +406,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -420,6 +435,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
@@ -572,8 +601,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30903';
-window._offlineBuildTime = '2026-09-30T11:38:31.384993+00:00';
-window._offlineHash = 'e982745c';
+window._offlineBuildTime = '2026-09-30T11:44:13.558203+00:00';
+window._offlineHash = '18e536c3';
 window._offlineVersion = 'v2026.09.30';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30903.html';
 
@@ -598,8 +627,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30903';
-  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:38:31.384993+00:00';
-  var localHash = window._offlineHash || 'e982745c';
+  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:44:13.558203+00:00';
+  var localHash = window._offlineHash || '18e536c3';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30903.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

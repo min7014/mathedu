@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>• <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>• <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>• <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>• <b>[수학적 의미]</b> 미분은 형식적인 수식 연산이 아니라, 두 점 사이의 할선이 한 점에서의 접선으로 녹아드는 기하학적 수렴 과정임을 하단 자료로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f'(t) = \dfrac{1+4e^{2t}}{t}$</b> — 점 (t, f(t))에서의 접선의 기울기</div><div><b>$\int \dfrac{1}{x}dx = \ln|x| + C$</b> — 1/x의 부정적분</div><div><b>$\int 4e^{2x}dx = 2e^{2x} + C$</b> — 지수함수 4e^(2x)의 부정적분</div></div>
-<h2>제1단계 · 도함수 $f'(x)$의 부정적분 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f'(x) = \frac{1}{x} + 4e^{2x}$ 입니다. 각 항을 적분하면 $\int \frac{1}{x}dx = \ln x$, $\int 4e^{2x}dx = 2e^{2x}$ 이므로 $f(x) = \ln x + 2e^{2x} + C$ 입니다.</div><div class="q" data-ans="1" data-exp="$(\ln x)' = 1/x$, $(2e^{2x})' = 4e^{2x}$이므로 $\ln x + 2e^{2x} + C$입니다."><div class="lvl">문항</div><div class="stem">$\int (\frac{1}{x} + 4e^{2x})dx$ ($x>0$)의 부정적분은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\ln x + 2e^{2x} + C$</div><div class="opt"><span class="n">2</span>$\ln x + 4e^{2x} + C$</div><div class="opt"><span class="n">3</span>$\frac{1}{x^2} + 2e^{2x} + C$</div><div class="opt"><span class="n">4</span>$\ln x + 8e^{2x} + C$</div><div class="opt"><span class="n">5</span>$x\ln x + 2e^{2x} + C$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 도함수 $f'(x)$의 부정적분 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f'(x) = \frac{1}{x} + 4e^{2x}$ 입니다. 각 항을 적분하면 $\int \frac{1}{x}dx = \ln x$, $\int 4e^{2x}dx = 2e^{2x}$ 이므로 $f(x) = \ln x + 2e^{2x} + C$ 입니다.</div><div class="q" data-ans="1" data-exp="$(\ln x)' = 1/x$, $(2e^{2x})' = 4e^{2x}$이므로 $\ln x + 2e^{2x} + C$입니다."><div class="lvl">문항</div><div class="stem">$\int (\frac{1}{x} + 4e^{2x})dx$ ($x>0$)의 부정적분은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\ln x + 2e^{2x} + C$</div><div class="opt"><span class="n">2</span>$\ln x + 4e^{2x} + C$</div><div class="opt"><span class="n">3</span>$\frac{1}{x^2} + 2e^{2x} + C$</div><div class="opt"><span class="n">4</span>$\ln x + 8e^{2x} + C$</div><div class="opt"><span class="n">5</span>$x\ln x + 2e^{2x} + C$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $f(1) = 2e^2+1$ 조건으로 적분상수 $C$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(1) = \ln 1 + 2e^2 + C = 2e^2 + C$. 이것이 $2e^2 + 1$과 같으므로 $C = 1$ 입니다. 따라서 $f(x) = \ln x + 2e^{2x} + 1$ 입니다.</div><div class="q" data-ans="2" data-exp="$C = 1$입니다."><div class="lvl">문항</div><div class="stem">$2e^2 + C = 2e^2 + 1$ 일 때 적분상수 $C$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>0</div><div class="opt"><span class="n">2</span>1</div><div class="opt"><span class="n">3</span>2</div><div class="opt"><span class="n">4</span>$e$</div><div class="opt"><span class="n">5</span>$e^2$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · $f(1) = 2e^2+1$ 조건으로 적분상수 $C$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(1) = \ln 1 + 2e^2 + C = 2e^2 + C$. 이것이 $2e^2 + 1$과 같으므로 $C = 1$ 입니다. 따라서 $f(x) = \ln x + 2e^{2x} + 1$ 입니다.</div><div class="q" data-ans="2" data-exp="$C = 1$입니다."><div class="lvl">문항</div><div class="stem">$2e^2 + C = 2e^2 + 1$ 일 때 적분상수 $C$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>0</div><div class="opt"><span class="n">2</span>1</div><div class="opt"><span class="n">3</span>2</div><div class="opt"><span class="n">4</span>$e$</div><div class="opt"><span class="n">5</span>$e^2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $f(e)$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(e) = \ln e + 2e^{2e} + 1 = 1 + 2e^{2e} + 1 = 2e^{2e} + 2$ 입니다.</div><div class="q" data-ans="4" data-exp="$\ln e = 1$이므로 $1 + 2e^{2e} + 1 = 2e^{2e} + 2$입니다."><div class="lvl">문항</div><div class="stem">$f(x) = \ln x + 2e^{2x} + 1$ 일 때 $f(e)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$2e^{2e}-1$</div><div class="opt"><span class="n">2</span>$2e^{2e}$</div><div class="opt"><span class="n">3</span>$2e^{2e}+1$</div><div class="opt"><span class="n">4</span>$2e^{2e}+2$</div><div class="opt"><span class="n">5</span>$e^{2e}+2$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $f(e)$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(e) = \ln e + 2e^{2e} + 1 = 1 + 2e^{2e} + 1 = 2e^{2e} + 2$ 입니다.</div><div class="q" data-ans="4" data-exp="$\ln e = 1$이므로 $1 + 2e^{2e} + 1 = 2e^{2e} + 2$입니다."><div class="lvl">문항</div><div class="stem">$f(x) = \ln x + 2e^{2x} + 1$ 일 때 $f(e)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$2e^{2e}-1$</div><div class="opt"><span class="n">2</span>$2e^{2e}$</div><div class="opt"><span class="n">3</span>$2e^{2e}+1$</div><div class="opt"><span class="n">4</span>$2e^{2e}+2$</div><div class="opt"><span class="n">5</span>$e^{2e}+2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -206,7 +218,10 @@ $$f(1) = \ln 1 + 2e^2 + C = 2e^2 + C = 2e^2 + 1 \implies C = 1$$<br>
 $$f(x) = \ln x + 2e^{2x} + 1$$<br>
 구하는 $f(e)$의 값은<br>
 $$f(e) = \ln e + 2e^{2e} + 1 = 1 + 2e^{2e} + 1 = 2e^{2e} + 2$$<br>
-정답은 <b>④번</b>입니다.</div><div class="q" data-ans="4" data-exp="$f(x) = \ln x + 2e^{2x} + 1 \implies f(e) = 2e^{2e}+2$입니다."><div class="lvl">최종 본문항</div><div class="stem">양의 실수 전체의 집합에서 정의된 미분가능한 함수 $f(x)$가 있다. 양수 $t$에 대하여 곡선 $y=f(x)$ 위의 점 $(t, f(t))$에서의 접선의 기울기는 $\frac{1+4e^{2t}}{t}$이다. $f(1)=2e^2+1$일 때, $f(e)$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$2e^{2e}-1$</div><div class="opt"><span class="n">2</span>$2e^{2e}$</div><div class="opt"><span class="n">3</span>$2e^{2e}+1$</div><div class="opt"><span class="n">4</span>$2e^{2e}+2$</div><div class="opt"><span class="n">5</span>$2e^{2e}+3$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>④번</b>입니다.</div><div class="q" data-ans="4" data-exp="$f(x) = \ln x + 2e^{2x} + 1 \implies f(e) = 2e^{2e}+2$입니다."><div class="lvl">최종 본문항</div><div class="stem">양의 실수 전체의 집합에서 정의된 미분가능한 함수 $f(x)$가 있다. 양수 $t$에 대하여 곡선 $y=f(x)$ 위의 점 $(t, f(t))$에서의 접선의 기울기는 $\frac{1+4e^{2t}}{t}$이다. $f(1)=2e^2+1$일 때, $f(e)$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$2e^{2e}-1$</div><div class="opt"><span class="n">2</span>$2e^{2e}$</div><div class="opt"><span class="n">3</span>$2e^{2e}+1$</div><div class="opt"><span class="n">4</span>$2e^{2e}+2$</div><div class="opt"><span class="n">5</span>$2e^{2e}+3$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -337,7 +352,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -366,6 +381,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}

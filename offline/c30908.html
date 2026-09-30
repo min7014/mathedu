@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -144,8 +147,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30908.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30908">
-<meta name="mathedu-offline-build-time" content="2026-09-30T11:38:31.384993+00:00">
-<meta name="mathedu-offline-hash" content="f99e01a1">
+<meta name="mathedu-offline-build-time" content="2026-09-30T11:44:13.558203+00:00">
+<meta name="mathedu-offline-hash" content="81a93ed8">
 <meta name="mathedu-version-label" content="v2026.09.30">
 
 </head><body><div class="wrap">
@@ -214,7 +217,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\log_a 8 = \log_a 2^3 = 3\log_a 2 = \dfrac{3}{\log_2 a}$</b> — 로그의 성질과 밑변환 공식</div><div><b>$X = \log_2 a$</b> — 로그식의 치환 ($a>2 \implies X>1$)</div><div><b>$k = \log_2 a \times \log_a 8$</b> — 밑변환에 의해 항상 상수 3</div></div>
-<h2>제1단계 · $\log_a 8$을 밑이 2인 로그로 표현하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log_a 8 = \log_a 2^3 = 3\log_a 2 = \frac{3}{\log_2 a}$ 입니다.</div><div class="q" data-ans="2" data-exp="$\log_a 8 = 3\log_a 2 = \frac{3}{\log_2 a}$입니다."><div class="lvl">문항</div><div class="stem">$\log_a 8$을 $\log_2 a$를 이용하여 나타낸 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{1}{\log_2 a}$</div><div class="opt"><span class="n">2</span>$\frac{3}{\log_2 a}$</div><div class="opt"><span class="n">3</span>$3\log_2 a$</div><div class="opt"><span class="n">4</span>$(\log_2 a)^3$</div><div class="opt"><span class="n">5</span>$\frac{\log_2 a}{3}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · $\log_a 8$을 밑이 2인 로그로 표현하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log_a 8 = \log_a 2^3 = 3\log_a 2 = \frac{3}{\log_2 a}$ 입니다.</div><div class="q" data-ans="2" data-exp="$\log_a 8 = 3\log_a 2 = \frac{3}{\log_2 a}$입니다."><div class="lvl">문항</div><div class="stem">$\log_a 8$을 $\log_2 a$를 이용하여 나타낸 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{1}{\log_2 a}$</div><div class="opt"><span class="n">2</span>$\frac{3}{\log_2 a}$</div><div class="opt"><span class="n">3</span>$3\log_2 a$</div><div class="opt"><span class="n">4</span>$(\log_2 a)^3$</div><div class="opt"><span class="n">5</span>$\frac{\log_2 a}{3}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -225,7 +231,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 두 수의 곱 $k$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log_2 a \times \log_a 8 = \log_2 a \times \frac{3}{\log_2 a} = 3$ 입니다. 따라서 $k=3$ 입니다.</div><div class="q" data-ans="3" data-exp="밑변환에 의해 $\log_2 a \times \frac{3}{\log_2 a} = 3$입니다."><div class="lvl">문항</div><div class="stem">두 수 $\log_2 a$와 $\log_a 8$의 곱 $k$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>8</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 두 수의 곱 $k$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log_2 a \times \log_a 8 = \log_2 a \times \frac{3}{\log_2 a} = 3$ 입니다. 따라서 $k=3$ 입니다.</div><div class="q" data-ans="3" data-exp="밑변환에 의해 $\log_2 a \times \frac{3}{\log_2 a} = 3$입니다."><div class="lvl">문항</div><div class="stem">두 수 $\log_2 a$와 $\log_a 8$의 곱 $k$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>8</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -236,7 +245,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 두 수의 합 조건으로 $a$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$X + \frac{3}{X} = 4 \implies X^2 - 4X + 3 = 0 \implies (X-1)(X-3)=0$. $a>2$이므로 $X = \log_2 a > 1 \implies X=3 \implies a = 2^3 = 8$.</div><div class="q" data-ans="3" data-exp="$a = 2^3 = 8$입니다."><div class="lvl">문항</div><div class="stem">$\log_2 a = 3$ 일 때 $a$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>3</div><div class="opt"><span class="n">2</span>6</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>16</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · 두 수의 합 조건으로 $a$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$X + \frac{3}{X} = 4 \implies X^2 - 4X + 3 = 0 \implies (X-1)(X-3)=0$. $a>2$이므로 $X = \log_2 a > 1 \implies X=3 \implies a = 2^3 = 8$.</div><div class="q" data-ans="3" data-exp="$a = 2^3 = 8$입니다."><div class="lvl">문항</div><div class="stem">$\log_2 a = 3$ 일 때 $a$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>3</div><div class="opt"><span class="n">2</span>6</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>16</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -262,7 +274,10 @@ $X > 1$이므로 $X = 3$입니다.<br>
 $$\log_2 a = 3 \implies a = 2^3 = 8$$<br>
 따라서<br>
 $$a + k = 8 + 3 = 11$$<br>
-정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$k = 3$, $\log_2 a = 3 \implies a = 8$. 따라서 $a+k = 8+3 = 11$입니다."><div class="lvl">최종 본문항</div><div class="stem">$a&gt;2$인 상수 $a$에 대하여 두 수 $\log_2 a, \log_a 8$의 합과 곱이 각각 $4, k$일 때, $a+k$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>12</div><div class="opt"><span class="n">3</span>13</div><div class="opt"><span class="n">4</span>14</div><div class="opt"><span class="n">5</span>15</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$k = 3$, $\log_2 a = 3 \implies a = 8$. 따라서 $a+k = 8+3 = 11$입니다."><div class="lvl">최종 본문항</div><div class="stem">$a&gt;2$인 상수 $a$에 대하여 두 수 $\log_2 a, \log_a 8$의 합과 곱이 각각 $4, k$일 때, $a+k$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>12</div><div class="opt"><span class="n">3</span>13</div><div class="opt"><span class="n">4</span>14</div><div class="opt"><span class="n">5</span>15</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -393,7 +408,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -422,6 +437,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
@@ -574,8 +603,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30908';
-window._offlineBuildTime = '2026-09-30T11:38:31.384993+00:00';
-window._offlineHash = 'f99e01a1';
+window._offlineBuildTime = '2026-09-30T11:44:13.558203+00:00';
+window._offlineHash = '81a93ed8';
 window._offlineVersion = 'v2026.09.30';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30908.html';
 
@@ -600,8 +629,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30908';
-  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:38:31.384993+00:00';
-  var localHash = window._offlineHash || 'f99e01a1';
+  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:44:13.558203+00:00';
+  var localHash = window._offlineHash || '81a93ed8';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30908.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

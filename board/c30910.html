@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 페이지를 한 장씩 넘길 때마다 <b>기하학적 사고의 전 과정이 애니메이션처럼 펼쳐집니다.</b><br>• <b>[기초 설정]</b> 삼각형 $\triangle\mathrm{ABC}$에서 대변 $a, b, c$를 지정합니다.<br>• <b>[보조선의 탄생]</b> 꼭짓점 $\mathrm{A}$에서 대변에 수선 $\mathrm{AD}$를 내려 두 직각삼각형으로 분할하고 각 삼각비를 투영합니다.<br>• <b>[각도에 따른 동적 변화]</b> <b>예각일 때</b>($a = \overline{\mathrm{BD}} + \overline{\mathrm{CD}}$)와 <b>둔각일 때</b>(수선의 발 $\mathrm{D}$가 바깥으로 나가 $a = \overline{\mathrm{BD}} - \overline{\mathrm{CD}}$)의 외견상 차이가, 보각 공식 $\cos(\pi - \mathrm{C}) = -\cos\mathrm{C}$에 의해 음수가 양수로 상쇄되며 동일한 법칙 $a = c\cos\mathrm{B} + b\cos\mathrm{C}$로 수렴합니다.<br>• <b>[수학적 의미]</b> 단순 암기가 아닌, 각이 회전함에 따라 삼각함수가 기하학적 부호를 스스로 조율하는 연속성의 아름다움을 하단 PDF와 앱렛에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\dfrac{a}{\sin A} = 2R$</b> — 외접원의 반지름 R과 삼각형 변의 관계 (사인법칙)</div><div><b>$\overline{AB} = \sqrt{2}x, \overline{AC} = x$</b> — 주어진 비를 미지수 x로 설정</div><div><b>$\sin C = \dfrac{\overline{AH}}{\overline{AC}} = \dfrac{2}{x}$</b> — 직각삼각형 AHC에서의 사인비</div></div>
-<h2>제1단계 · 외접원의 반지름 $R$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>삼각형 $ABC$의 외접원의 넓이가 $50\pi$이므로 $\pi R^2 = 50\pi \implies R^2 = 50 \implies R = 5\sqrt{2}$ 입니다.</div><div class="q" data-ans="2" data-exp="$R^2 = 50 \implies R = \sqrt{50} = 5\sqrt{2}$입니다."><div class="lvl">문항</div><div class="stem">넓이가 $50\pi$인 외접원의 반지름 $R$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$5$</div><div class="opt"><span class="n">2</span>$5\sqrt{2}$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$25$</div><div class="opt"><span class="n">5</span>$2\sqrt{5}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 외접원의 반지름 $R$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>삼각형 $ABC$의 외접원의 넓이가 $50\pi$이므로 $\pi R^2 = 50\pi \implies R^2 = 50 \implies R = 5\sqrt{2}$ 입니다.</div><div class="q" data-ans="2" data-exp="$R^2 = 50 \implies R = \sqrt{50} = 5\sqrt{2}$입니다."><div class="lvl">문항</div><div class="stem">넓이가 $50\pi$인 외접원의 반지름 $R$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$5$</div><div class="opt"><span class="n">2</span>$5\sqrt{2}$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$25$</div><div class="opt"><span class="n">5</span>$2\sqrt{5}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 직각삼각형 $AHC$에서 $\sin C$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\overline{AC} = x$라 두면, 점 $A$에서 내린 수선의 발 $H$에 의해 직각삼각형 $AHC$에서 $\sin C = \frac{\overline{AH}}{\overline{AC}} = \frac{2}{x}$ 입니다.</div><div class="q" data-ans="2" data-exp="직각삼각형에서 $\sin C = \frac{\text{대변}}{\text{빗변}} = \frac{2}{x}$입니다."><div class="lvl">문항</div><div class="stem">$\overline{AH}=2, \overline{AC}=x$ 일 때 $\sin C$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{x}{2}$</div><div class="opt"><span class="n">2</span>$\frac{2}{x}$</div><div class="opt"><span class="n">3</span>$\frac{2}{\sqrt{2}x}$</div><div class="opt"><span class="n">4</span>$\frac{x}{\sqrt{2}}$</div><div class="opt"><span class="n">5</span>$\frac{2}{\sqrt{x^2-4}}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 직각삼각형 $AHC$에서 $\sin C$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\overline{AC} = x$라 두면, 점 $A$에서 내린 수선의 발 $H$에 의해 직각삼각형 $AHC$에서 $\sin C = \frac{\overline{AH}}{\overline{AC}} = \frac{2}{x}$ 입니다.</div><div class="q" data-ans="2" data-exp="직각삼각형에서 $\sin C = \frac{\text{대변}}{\text{빗변}} = \frac{2}{x}$입니다."><div class="lvl">문항</div><div class="stem">$\overline{AH}=2, \overline{AC}=x$ 일 때 $\sin C$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{x}{2}$</div><div class="opt"><span class="n">2</span>$\frac{2}{x}$</div><div class="opt"><span class="n">3</span>$\frac{2}{\sqrt{2}x}$</div><div class="opt"><span class="n">4</span>$\frac{x}{\sqrt{2}}$</div><div class="opt"><span class="n">5</span>$\frac{2}{\sqrt{x^2-4}}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 사인법칙으로 변의 길이 $x$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>사인법칙에 의해 $\overline{AB} = 2R\sin C \implies \sqrt{2}x = 2(5\sqrt{2})\left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x} \implies x^2 = 20 \implies x = 2\sqrt{5}$. 따라서 $\overline{AB} = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$ 입니다.</div><div class="q" data-ans="3" data-exp="$x^2 = 20 \implies x = \sqrt{20} = 2\sqrt{5}$입니다."><div class="lvl">문항</div><div class="stem">$\sqrt{2}x = \frac{20\sqrt{2}}{x}$ 일 때 양수 $x$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$\sqrt{10}$</div><div class="opt"><span class="n">3</span>$2\sqrt{5}$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · 사인법칙으로 변의 길이 $x$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>사인법칙에 의해 $\overline{AB} = 2R\sin C \implies \sqrt{2}x = 2(5\sqrt{2})\left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x} \implies x^2 = 20 \implies x = 2\sqrt{5}$. 따라서 $\overline{AB} = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$ 입니다.</div><div class="q" data-ans="3" data-exp="$x^2 = 20 \implies x = \sqrt{20} = 2\sqrt{5}$입니다."><div class="lvl">문항</div><div class="stem">$\sqrt{2}x = \frac{20\sqrt{2}}{x}$ 일 때 양수 $x$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$\sqrt{10}$</div><div class="opt"><span class="n">3</span>$2\sqrt{5}$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -209,7 +221,10 @@ $$x^2 = 20 \implies x = 2\sqrt{5}$$<br>
 따라서 $\overline{AB} = \sqrt{2}x = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$입니다.<br>
 직각삼각형 $ABH$에서 피타고라스 정리에 의해<br>
 $$\overline{BH} = \sqrt{\overline{AB}^2 - \overline{AH}^2} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40 - 4} = \sqrt{36} = 6$$<br>
-정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$이므로 직각삼각형 $ABH$에서 $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$입니다."><div class="lvl">최종 본문항</div><div class="stem">$\angle A &gt; \frac{\pi}{2}$인 삼각형 $ABC$의 꼭짓점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하자. $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$이고, 삼각형 $ABC$의 외접원의 넓이가 $50\pi$일 때, 선분 $BH$의 길이는? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>$\frac{25}{4}$</div><div class="opt"><span class="n">3</span>$\frac{13}{2}$</div><div class="opt"><span class="n">4</span>$\frac{27}{4}$</div><div class="opt"><span class="n">5</span>7</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$이므로 직각삼각형 $ABH$에서 $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$입니다."><div class="lvl">최종 본문항</div><div class="stem">$\angle A &gt; \frac{\pi}{2}$인 삼각형 $ABC$의 꼭짓점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하자. $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$이고, 삼각형 $ABC$의 외접원의 넓이가 $50\pi$일 때, 선분 $BH$의 길이는? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>$\frac{25}{4}$</div><div class="opt"><span class="n">3</span>$\frac{13}{2}$</div><div class="opt"><span class="n">4</span>$\frac{27}{4}$</div><div class="opt"><span class="n">5</span>7</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -340,7 +355,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -369,6 +384,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}

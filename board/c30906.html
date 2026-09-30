@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 원운동이 파동 곡선으로 풀려나가는 <b>기하학적 전개 과정</b>을 한 프레임씩 보여줍니다.<br>• <b>[단위원의 동점]</b> 반지름 1인 원 위를 반시계 방향으로 회전하는 동점 $\mathrm{P}$의 회전각 $\theta$와 수직 투영 $y=\sin\theta$, 수평 투영 $x=\cos\theta$ 설정<br>• <b>[파동의 실시간 언래핑]</b> $\theta$가 증가함에 따라 각 좌표의 높낮이를 오른쪽 직교좌표계로 수평 이동시켜 사인·코사인 곡선의 마루와 골이 직조되는 과정<br>• <b>[주기의 필연성]</b> 한 바퀴($2\pi$) 회전하면 원점으로 귀환하는 원의 닫힌 궤적이 파동 함수의 무한 반복 주기성으로 승화되는 원리를 하단 자료에서 체득해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\cos(\pi+\theta) = -\cos\theta$</b> — 주기 및 대칭에 의한 각 변환 공식</div><div><b>$\sin^2\theta + \cos^2\theta = 1$</b> — 삼각함수의 기본 항등식</div><div><b>$\dfrac{\pi}{2} < \theta < \pi$</b> — 제2사분면의 각 (sin &gt; 0, cos &lt; 0)</div></div>
-<h2>제1단계 · $\cos(\pi+\theta)$ 변환하여 $\cos\theta$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\cos(\pi+\theta) = -\cos\theta$ 이므로 $-\cos\theta = \frac{2\sqrt{5}}{5} \implies \cos\theta = -\frac{2\sqrt{5}}{5}$ 입니다.</div><div class="q" data-ans="1" data-exp="$\cos(\pi+\theta) = -\cos\theta$이므로 $\cos\theta = -\frac{2\sqrt{5}}{5}$입니다."><div class="lvl">문항</div><div class="stem">$\cos(\pi+\theta) = \frac{2\sqrt{5}}{5}$ 일 때 $\cos\theta$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">4</span>$\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{5}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · $\cos(\pi+\theta)$ 변환하여 $\cos\theta$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\cos(\pi+\theta) = -\cos\theta$ 이므로 $-\cos\theta = \frac{2\sqrt{5}}{5} \implies \cos\theta = -\frac{2\sqrt{5}}{5}$ 입니다.</div><div class="q" data-ans="1" data-exp="$\cos(\pi+\theta) = -\cos\theta$이므로 $\cos\theta = -\frac{2\sqrt{5}}{5}$입니다."><div class="lvl">문항</div><div class="stem">$\cos(\pi+\theta) = \frac{2\sqrt{5}}{5}$ 일 때 $\cos\theta$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">4</span>$\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{5}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 제2사분면에서 $\sin\theta$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\frac{\pi}{2} < \theta < \pi$에서 $\sin\theta > 0$입니다. $\sin\theta = \sqrt{1 - \cos^2\theta} = \sqrt{1 - \frac{20}{25}} = \sqrt{\frac{5}{25}} = \frac{\sqrt{5}}{5}$ 입니다.</div><div class="q" data-ans="3" data-exp="$\sin\theta = \sqrt{1 - (-2\sqrt{5}/5)^2} = \sqrt{1 - 20/25} = \frac{\sqrt{5}}{5}$입니다."><div class="lvl">문항</div><div class="stem">$\cos\theta = -\frac{2\sqrt{5}}{5}$이고 $\theta$가 제2사분면 각일 때 $\sin\theta$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$\frac{1}{5}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">4</span>$\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$\frac{3}{5}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 제2사분면에서 $\sin\theta$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\frac{\pi}{2} < \theta < \pi$에서 $\sin\theta > 0$입니다. $\sin\theta = \sqrt{1 - \cos^2\theta} = \sqrt{1 - \frac{20}{25}} = \sqrt{\frac{5}{25}} = \frac{\sqrt{5}}{5}$ 입니다.</div><div class="q" data-ans="3" data-exp="$\sin\theta = \sqrt{1 - (-2\sqrt{5}/5)^2} = \sqrt{1 - 20/25} = \frac{\sqrt{5}}{5}$입니다."><div class="lvl">문항</div><div class="stem">$\cos\theta = -\frac{2\sqrt{5}}{5}$이고 $\theta$가 제2사분면 각일 때 $\sin\theta$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$\frac{1}{5}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">4</span>$\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$\frac{3}{5}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $\sin\theta + \cos\theta$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\sin\theta + \cos\theta = \frac{\sqrt{5}}{5} + \left(-\frac{2\sqrt{5}}{5}\right) = -\frac{\sqrt{5}}{5}$ 입니다.</div><div class="q" data-ans="2" data-exp="$\frac{1-2}{5}\sqrt{5} = -\frac{\sqrt{5}}{5}$입니다."><div class="lvl">문항</div><div class="stem">$\frac{\sqrt{5}}{5} + \left(-\frac{2\sqrt{5}}{5}\right)$ 의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$\frac{2\sqrt{5}}{5}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $\sin\theta + \cos\theta$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\sin\theta + \cos\theta = \frac{\sqrt{5}}{5} + \left(-\frac{2\sqrt{5}}{5}\right) = -\frac{\sqrt{5}}{5}$ 입니다.</div><div class="q" data-ans="2" data-exp="$\frac{1-2}{5}\sqrt{5} = -\frac{\sqrt{5}}{5}$입니다."><div class="lvl">문항</div><div class="stem">$\frac{\sqrt{5}}{5} + \left(-\frac{2\sqrt{5}}{5}\right)$ 의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$\frac{2\sqrt{5}}{5}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -202,7 +214,10 @@ $\frac{\pi}{2} < \theta < \pi$ (제2사분면)에서는 $\sin\theta > 0$이므�
 $$\sin\theta = \sqrt{1 - \cos^2\theta} = \sqrt{1 - \left(-\frac{2\sqrt{5}}{5}\right)^2} = \sqrt{1 - \frac{20}{25}} = \sqrt{\frac{5}{25}} = \frac{\sqrt{5}}{5}$$<br>
 따라서 구하는 값은<br>
 $$\sin\theta + \cos\theta = \frac{\sqrt{5}}{5} + \left(-\frac{2\sqrt{5}}{5}\right) = -\frac{\sqrt{5}}{5}$$<br>
-정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$\cos\theta = -2\sqrt{5}/5$, $\sin\theta = \sqrt{5}/5$이므로 합은 $-\sqrt{5}/5$입니다."><div class="lvl">최종 본문항</div><div class="stem">$\frac{\pi}{2} &lt; \theta &lt; \pi$인 $\theta$에 대하여 $\cos(\pi+\theta) = \frac{2\sqrt{5}}{5}$ 일 때, $\sin\theta + \cos\theta$ 의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$\frac{2\sqrt{5}}{5}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$\cos\theta = -2\sqrt{5}/5$, $\sin\theta = \sqrt{5}/5$이므로 합은 $-\sqrt{5}/5$입니다."><div class="lvl">최종 본문항</div><div class="stem">$\frac{\pi}{2} &lt; \theta &lt; \pi$인 $\theta$에 대하여 $\cos(\pi+\theta) = \frac{2\sqrt{5}}{5}$ 일 때, $\sin\theta + \cos\theta$ 의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$\frac{2\sqrt{5}}{5}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -333,7 +348,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -362,6 +377,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}

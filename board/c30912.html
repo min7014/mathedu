@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$b_n = \sum_{k=1}^n (-1)^{k+1} a_k$</b> — 부호가 교대로 바뀌는 수열의 합</div><div><b>$b_2 = a_1 - a_2 = -d$</b> — 인접한 두 항의 차와 공차의 관계</div><div><b>$b_{2n} = -nd$</b> — 짝수 번째 항들의 규칙</div></div>
-<h2>제1단계 · $b_2 = -2$ 조건으로 공차 $d$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$b_2 = a_1 - a_2 = -d$ 입니다. $b_2 = -2$ 이므로 $-d = -2 \implies d = 2$ 입니다.</div><div class="q" data-ans="4" data-exp="$a_2 - a_1 = d$이므로 $a_1 - a_2 = -d = -2 \implies d=2$입니다."><div class="lvl">문항</div><div class="stem">등차수열 $\{a_n\}$에 대하여 $a_1 - a_2 = -2$ 일 때 공차 $d$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-2$</div><div class="opt"><span class="n">2</span>$-1$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · $b_2 = -2$ 조건으로 공차 $d$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$b_2 = a_1 - a_2 = -d$ 입니다. $b_2 = -2$ 이므로 $-d = -2 \implies d = 2$ 입니다.</div><div class="q" data-ans="4" data-exp="$a_2 - a_1 = d$이므로 $a_1 - a_2 = -d = -2 \implies d=2$입니다."><div class="lvl">문항</div><div class="stem">등차수열 $\{a_n\}$에 대하여 $a_1 - a_2 = -2$ 일 때 공차 $d$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-2$</div><div class="opt"><span class="n">2</span>$-1$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $b_3 + b_7 = 0$ 조건으로 첫째항 $a_1$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$. $b_7 = -3d + a_7 = a_7 - 6$. 따라서 $b_3 + b_7 = a_3 + a_7 - 8 = (a_1+4) + (a_1+12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$ 입니다.</div><div class="q" data-ans="2" data-exp="$2a_1 = -8 \implies a_1 = -4$입니다."><div class="lvl">문항</div><div class="stem">$2a_1 + 8 = 0$ 일 때 첫째항 $a_1$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-8$</div><div class="opt"><span class="n">2</span>$-4$</div><div class="opt"><span class="n">3</span>$-2$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · $b_3 + b_7 = 0$ 조건으로 첫째항 $a_1$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$. $b_7 = -3d + a_7 = a_7 - 6$. 따라서 $b_3 + b_7 = a_3 + a_7 - 8 = (a_1+4) + (a_1+12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$ 입니다.</div><div class="q" data-ans="2" data-exp="$2a_1 = -8 \implies a_1 = -4$입니다."><div class="lvl">문항</div><div class="stem">$2a_1 + 8 = 0$ 일 때 첫째항 $a_1$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-8$</div><div class="opt"><span class="n">2</span>$-4$</div><div class="opt"><span class="n">3</span>$-2$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $b_1$부터 $b_9$까지의 값의 합 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>짝수항: $b_2=-2, b_4=-4, b_6=-6, b_8=-8$, 합 = $-20$. 홀수항: $b_1=-4, b_3=-2, b_5=0, b_7=2, b_9=4$, 합 = $0$. 총합 = $0 + (-20) = -20$ 입니다.</div><div class="q" data-ans="3" data-exp="$-20 + 0 = -20$입니다."><div class="lvl">문항</div><div class="stem">짝수항의 합 $-20$과 홀수항의 합 $0$의 총합은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-24$</div><div class="opt"><span class="n">2</span>$-22$</div><div class="opt"><span class="n">3</span>$-20$</div><div class="opt"><span class="n">4</span>$-18$</div><div class="opt"><span class="n">5</span>$-16$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $b_1$부터 $b_9$까지의 값의 합 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>짝수항: $b_2=-2, b_4=-4, b_6=-6, b_8=-8$, 합 = $-20$. 홀수항: $b_1=-4, b_3=-2, b_5=0, b_7=2, b_9=4$, 합 = $0$. 총합 = $0 + (-20) = -20$ 입니다.</div><div class="q" data-ans="3" data-exp="$-20 + 0 = -20$입니다."><div class="lvl">문항</div><div class="stem">짝수항의 합 $-20$과 홀수항의 합 $0$의 총합은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-24$</div><div class="opt"><span class="n">2</span>$-22$</div><div class="opt"><span class="n">3</span>$-20$</div><div class="opt"><span class="n">4</span>$-18$</div><div class="opt"><span class="n">5</span>$-16$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -213,7 +225,10 @@ $$(a_1 + 4) + (a_1 + 12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$$<br>
   $b_1 = -4, b_3 = -2, b_5 = 0, b_7 = 2, b_9 = 4 \implies \sum_{n=1}^5 b_{2n-1} = 0$<br>
 따라서 제1항부터 제9항까지의 합은<br>
 $$\sum_{n=1}^9 b_n = (-20) + 0 = -20$$<br>
-정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$d=2, a_1=-4$. $b_n$의 1항부터 9항까지 합은 $-20$입니다."><div class="lvl">최종 본문항</div><div class="stem">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>$-22$</div><div class="opt"><span class="n">2</span>$-20$</div><div class="opt"><span class="n">3</span>$-18$</div><div class="opt"><span class="n">4</span>$-16$</div><div class="opt"><span class="n">5</span>$-14$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$d=2, a_1=-4$. $b_n$의 1항부터 9항까지 합은 $-20$입니다."><div class="lvl">최종 본문항</div><div class="stem">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>$-22$</div><div class="opt"><span class="n">2</span>$-20$</div><div class="opt"><span class="n">3</span>$-18$</div><div class="opt"><span class="n">4</span>$-16$</div><div class="opt"><span class="n">5</span>$-14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -344,7 +359,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -373,6 +388,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}

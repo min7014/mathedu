@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -144,8 +147,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30920.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30920">
-<meta name="mathedu-offline-build-time" content="2026-09-30T11:38:31.384993+00:00">
-<meta name="mathedu-offline-hash" content="4e67fa9b">
+<meta name="mathedu-offline-build-time" content="2026-09-30T11:44:13.558203+00:00">
+<meta name="mathedu-offline-hash" content="796a37e9">
 <meta name="mathedu-version-label" content="v2026.09.30">
 
 </head><body><div class="wrap">
@@ -214,7 +217,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 원운동이 파동 곡선으로 풀려나가는 <b>기하학적 전개 과정</b>을 한 프레임씩 보여줍니다.<br>• <b>[단위원의 동점]</b> 반지름 1인 원 위를 반시계 방향으로 회전하는 동점 $\mathrm{P}$의 회전각 $\theta$와 수직 투영 $y=\sin\theta$, 수평 투영 $x=\cos\theta$ 설정<br>• <b>[파동의 실시간 언래핑]</b> $\theta$가 증가함에 따라 각 좌표의 높낮이를 오른쪽 직교좌표계로 수평 이동시켜 사인·코사인 곡선의 마루와 골이 직조되는 과정<br>• <b>[주기의 필연성]</b> 한 바퀴($2\pi$) 회전하면 원점으로 귀환하는 원의 닫힌 궤적이 파동 함수의 무한 반복 주기성으로 승화되는 원리를 하단 자료에서 체득해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f(x) = \begin{cases} \sin x - 1 & (0 \le x < \pi) \\ -\sqrt{2}\sin x - 1 & (\pi \le x \le 2\pi) \end{cases}$</b> — 구간별 정의된 삼각함수</div><div><b>$f(x) = f(t)$</b> — 상수함수 y=f(t)와의 교점 방정식</div><div><b>$\text{교점의 개수 } = 3$</b> — 방정식의 서로 다른 실근이 3개인 조건</div></div>
-<h2>제1단계 · 교점 개수가 3이 되는 $y$값 찾기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>그래프를 분석하면 $0 \le x < \pi$에서 $y=\sin x - 1$의 치역은 $[-1, 0]$이고, $\pi \le x \le 2\pi$에서 $y=-\sqrt{2}\sin x - 1$의 치역은 $[-1, \sqrt{2}-1]$입니다. 수평선 $y=c$와 만나는 점이 3개인 경우는 $c = -1$ (접선 및 양 끝점) 또는 $c = 0$ 입니다.</div><div class="q" data-ans="1" data-exp="그래프에서 3개의 교점을 갖는 수평선은 $y=-1$과 $y=0$입니다."><div class="lvl">문항</div><div class="stem">함수 $y=f(x)$와 직선 $y=f(t)$의 교점이 3개가 되는 $f(t)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$f(t) = -1$ 또는 $0$</div><div class="opt"><span class="n">2</span>$f(t) = 1$</div><div class="opt"><span class="n">3</span>$f(t) = -2$</div><div class="opt"><span class="n">4</span>$f(t) = \sqrt{2}$</div><div class="opt"><span class="n">5</span>$f(t) = 0$만 가능</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 교점 개수가 3이 되는 $y$값 찾기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>그래프를 분석하면 $0 \le x < \pi$에서 $y=\sin x - 1$의 치역은 $[-1, 0]$이고, $\pi \le x \le 2\pi$에서 $y=-\sqrt{2}\sin x - 1$의 치역은 $[-1, \sqrt{2}-1]$입니다. 수평선 $y=c$와 만나는 점이 3개인 경우는 $c = -1$ (접선 및 양 끝점) 또는 $c = 0$ 입니다.</div><div class="q" data-ans="1" data-exp="그래프에서 3개의 교점을 갖는 수평선은 $y=-1$과 $y=0$입니다."><div class="lvl">문항</div><div class="stem">함수 $y=f(x)$와 직선 $y=f(t)$의 교점이 3개가 되는 $f(t)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$f(t) = -1$ 또는 $0$</div><div class="opt"><span class="n">2</span>$f(t) = 1$</div><div class="opt"><span class="n">3</span>$f(t) = -2$</div><div class="opt"><span class="n">4</span>$f(t) = \sqrt{2}$</div><div class="opt"><span class="n">5</span>$f(t) = 0$만 가능</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -225,7 +231,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $f(t) = -1$을 만족시키는 $t$의 값 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$0 \le t < \pi$에서 $\sin t - 1 = -1 \implies \sin t = 0 \implies t = 0$. $\pi \le t \le 2\pi$에서 $-\sqrt{2}\sin t - 1 = -1 \implies \sin t = 0 \implies t = \pi, 2\pi$. 따라서 $t = 0, \pi, 2\pi$ 입니다.</div><div class="q" data-ans="3" data-exp="$\sin t = 0$이므로 $t = 0, \pi, 2\pi$입니다."><div class="lvl">문항</div><div class="stem">$[0, 2\pi]$에서 $f(t) = -1$을 만족시키는 $t$의 값들은?</div><div class="opts"><div class="opt"><span class="n">1</span>$0, \pi$</div><div class="opt"><span class="n">2</span>$\pi, 2\pi$</div><div class="opt"><span class="n">3</span>$0, \pi, 2\pi$</div><div class="opt"><span class="n">4</span>$\frac{\pi}{2}, \frac{3\pi}{2}$</div><div class="opt"><span class="n">5</span>$0, 2\pi$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · $f(t) = -1$을 만족시키는 $t$의 값 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$0 \le t < \pi$에서 $\sin t - 1 = -1 \implies \sin t = 0 \implies t = 0$. $\pi \le t \le 2\pi$에서 $-\sqrt{2}\sin t - 1 = -1 \implies \sin t = 0 \implies t = \pi, 2\pi$. 따라서 $t = 0, \pi, 2\pi$ 입니다.</div><div class="q" data-ans="3" data-exp="$\sin t = 0$이므로 $t = 0, \pi, 2\pi$입니다."><div class="lvl">문항</div><div class="stem">$[0, 2\pi]$에서 $f(t) = -1$을 만족시키는 $t$의 값들은?</div><div class="opts"><div class="opt"><span class="n">1</span>$0, \pi$</div><div class="opt"><span class="n">2</span>$\pi, 2\pi$</div><div class="opt"><span class="n">3</span>$0, \pi, 2\pi$</div><div class="opt"><span class="n">4</span>$\frac{\pi}{2}, \frac{3\pi}{2}$</div><div class="opt"><span class="n">5</span>$0, 2\pi$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -236,7 +245,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $f(t) = 0$을 만족시키는 $t$의 값 및 총합 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\sin t - 1 = 0 \implies t = \frac{\pi}{2}$. $-\sqrt{2}\sin t - 1 = 0 \implies \sin t = -\frac{\sqrt{2}}{2} \implies t = \frac{5\pi}{4}, \frac{7\pi}{4}$. 모든 $t$의 합은 $(0 + \pi + 2\pi) + (\frac{\pi}{2} + \frac{5\pi}{4} + \frac{7\pi}{4}) = 3\pi + \frac{\pi}{2} + 3\pi = \frac{13\pi}{2}$. 따라서 $p=2, q=13 \implies p+q = 15$ 입니다.</div><div class="q" data-ans="3" data-exp="$p+q = 2 + 13 = 15$입니다."><div class="lvl">문항</div><div class="stem">모든 $t$의 값의 합 $\frac{13\pi}{2}$에서 $p+q$의 값은? ($p=2, q=13$)</div><div class="opts"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>13</div><div class="opt"><span class="n">3</span>15</div><div class="opt"><span class="n">4</span>17</div><div class="opt"><span class="n">5</span>19</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $f(t) = 0$을 만족시키는 $t$의 값 및 총합 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\sin t - 1 = 0 \implies t = \frac{\pi}{2}$. $-\sqrt{2}\sin t - 1 = 0 \implies \sin t = -\frac{\sqrt{2}}{2} \implies t = \frac{5\pi}{4}, \frac{7\pi}{4}$. 모든 $t$의 합은 $(0 + \pi + 2\pi) + (\frac{\pi}{2} + \frac{5\pi}{4} + \frac{7\pi}{4}) = 3\pi + \frac{\pi}{2} + 3\pi = \frac{13\pi}{2}$. 따라서 $p=2, q=13 \implies p+q = 15$ 입니다.</div><div class="q" data-ans="3" data-exp="$p+q = 2 + 13 = 15$입니다."><div class="lvl">문항</div><div class="stem">모든 $t$의 값의 합 $\frac{13\pi}{2}$에서 $p+q$의 값은? ($p=2, q=13$)</div><div class="opts"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>13</div><div class="opt"><span class="n">3</span>15</div><div class="opt"><span class="n">4</span>17</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -265,7 +277,10 @@ $\pi \le t \le 2\pi$에서 $-\sqrt{2}\sin t - 1 = 0 \implies \sin t = -\frac{\sq
 $$0 + \pi + 2\pi + \frac{\pi}{2} + \frac{5\pi}{4} + \frac{7\pi}{4} = 3\pi + \frac{\pi}{2} + 3\pi = \frac{13\pi}{2}$$<br>
 따라서 $p = 2, q = 13$이며, 둘은 서로소입니다.<br>
 $$p + q = 2 + 13 = 15$$<br>
-정답은 <b>15</b> 입니다.</div><div class="q" data-ans="3" data-exp="합은 $13\pi/2 \implies p=2, q=13 \implies p+q = 15$ (단답형 정답: 15)."><div class="lvl">최종 본문항</div><div class="stem">닫힌구간 $[0, 2\pi]$에서 정의된 함수 $f(x) = \begin{cases} \sin x - 1 &amp; (0 \le x &lt; \pi) \\ -\sqrt{2}\sin x - 1 &amp; (\pi \le x \le 2\pi) \end{cases}$가 있다. $0 \le t \le 2\pi$인 실수 $t$에 대하여 $x$에 대한 방정식 $f(x)=f(t)$의 서로 다른 실근의 개수가 3이 되도록 하는 모든 $t$의 값의 합은 $\frac{q}{p}\pi$이다. $p+q$의 값을 구하시오. (단, $p$와 $q$는 서로소인 자연수이다.) [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>13</div><div class="opt"><span class="n">3</span>15</div><div class="opt"><span class="n">4</span>17</div><div class="opt"><span class="n">5</span>19</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>15</b> 입니다.</div><div class="q" data-ans="3" data-exp="합은 $13\pi/2 \implies p=2, q=13 \implies p+q = 15$ (단답형 정답: 15)."><div class="lvl">최종 본문항</div><div class="stem">닫힌구간 $[0, 2\pi]$에서 정의된 함수 $f(x) = \begin{cases} \sin x - 1 &amp; (0 \le x &lt; \pi) \\ -\sqrt{2}\sin x - 1 &amp; (\pi \le x \le 2\pi) \end{cases}$가 있다. $0 \le t \le 2\pi$인 실수 $t$에 대하여 $x$에 대한 방정식 $f(x)=f(t)$의 서로 다른 실근의 개수가 3이 되도록 하는 모든 $t$의 값의 합은 $\frac{q}{p}\pi$이다. $p+q$의 값을 구하시오. (단, $p$와 $q$는 서로소인 자연수이다.) [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>13</div><div class="opt"><span class="n">3</span>15</div><div class="opt"><span class="n">4</span>17</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -396,7 +411,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -425,6 +440,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
@@ -577,8 +606,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30920';
-window._offlineBuildTime = '2026-09-30T11:38:31.384993+00:00';
-window._offlineHash = '4e67fa9b';
+window._offlineBuildTime = '2026-09-30T11:44:13.558203+00:00';
+window._offlineHash = '796a37e9';
 window._offlineVersion = 'v2026.09.30';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30920.html';
 
@@ -603,8 +632,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30920';
-  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:38:31.384993+00:00';
-  var localHash = window._offlineHash || '4e67fa9b';
+  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:44:13.558203+00:00';
+  var localHash = window._offlineHash || '796a37e9';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30920.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

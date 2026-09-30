@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -144,8 +147,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30915.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30915">
-<meta name="mathedu-offline-build-time" content="2026-09-30T11:38:31.384993+00:00">
-<meta name="mathedu-offline-hash" content="d292d768">
+<meta name="mathedu-offline-build-time" content="2026-09-30T11:44:13.558203+00:00">
+<meta name="mathedu-offline-hash" content="fb4b8553">
 <meta name="mathedu-version-label" content="v2026.09.30">
 
 </head><body><div class="wrap">
@@ -214,7 +217,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\dfrac{d}{dx}\int_a^x t f(t)dt = x f(x)$</b> — 정적분의 x에 대한 미분</div><div><b>$f(x) = x g'(x)$</b> — 함수 f와 g의 도함수 관계</div><div><b>$[x g(x)]' = x g'(x) + g(x)$</b> — 곱의 미분법 역연산</div></div>
-<h2>제1단계 · 조건 (가)의 양변 미분하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$의 양변을 $x$에 대하여 미분하면 $x f(x) + x g(x) = 12x^3+24x^2-6x$ 이므로, $x$로 나누면 $f(x) + g(x) = 12x^2+24x-6$ 입니다.</div><div class="q" data-ans="1" data-exp="$(12x^3+24x^2-6x)/x = 12x^2+24x-6$입니다."><div class="lvl">문항</div><div class="stem">양변을 $x$로 나누어 얻은 $f(x)+g(x)$의 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$12x^2+24x-6$</div><div class="opt"><span class="n">2</span>$12x^3+24x^2-6x$</div><div class="opt"><span class="n">3</span>$4x^2+8x-2$</div><div class="opt"><span class="n">4</span>$6x^2+12x-3$</div><div class="opt"><span class="n">5</span>$3x^2+6x-2$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 조건 (가)의 양변 미분하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$의 양변을 $x$에 대하여 미분하면 $x f(x) + x g(x) = 12x^3+24x^2-6x$ 이므로, $x$로 나누면 $f(x) + g(x) = 12x^2+24x-6$ 입니다.</div><div class="q" data-ans="1" data-exp="$(12x^3+24x^2-6x)/x = 12x^2+24x-6$입니다."><div class="lvl">문항</div><div class="stem">양변을 $x$로 나누어 얻은 $f(x)+g(x)$의 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$12x^2+24x-6$</div><div class="opt"><span class="n">2</span>$12x^3+24x^2-6x$</div><div class="opt"><span class="n">3</span>$4x^2+8x-2$</div><div class="opt"><span class="n">4</span>$6x^2+12x-3$</div><div class="opt"><span class="n">5</span>$3x^2+6x-2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -225,7 +231,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 조건 (나)를 대입하여 $g(x)$ 결정하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(x) = x g'(x)$를 대입하면 $x g'(x) + g(x) = \{x g(x)\}' = 12x^2+24x-6$ 입니다. 부정적분하면 $x g(x) = 4x^3+12x^2-6x + C$. $g(x)$가 다항함수이므로 $C=0$이고 $g(x) = 4x^2+12x-6$ 입니다.</div><div class="q" data-ans="1" data-exp="$x g(x) = 4x^3+12x^2-6x \implies g(x) = 4x^2+12x-6$입니다."><div class="lvl">문항</div><div class="stem">$\{x g(x)\}' = 12x^2+24x-6$일 때 다항함수 $g(x)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$4x^2+12x-6$</div><div class="opt"><span class="n">2</span>$4x^3+12x^2-6x$</div><div class="opt"><span class="n">3</span>$2x^2+6x-3$</div><div class="opt"><span class="n">4</span>$12x+24$</div><div class="opt"><span class="n">5</span>$4x^2+6x-6$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 조건 (나)를 대입하여 $g(x)$ 결정하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(x) = x g'(x)$를 대입하면 $x g'(x) + g(x) = \{x g(x)\}' = 12x^2+24x-6$ 입니다. 부정적분하면 $x g(x) = 4x^3+12x^2-6x + C$. $g(x)$가 다항함수이므로 $C=0$이고 $g(x) = 4x^2+12x-6$ 입니다.</div><div class="q" data-ans="1" data-exp="$x g(x) = 4x^3+12x^2-6x \implies g(x) = 4x^2+12x-6$입니다."><div class="lvl">문항</div><div class="stem">$\{x g(x)\}' = 12x^2+24x-6$일 때 다항함수 $g(x)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$4x^2+12x-6$</div><div class="opt"><span class="n">2</span>$4x^3+12x^2-6x$</div><div class="opt"><span class="n">3</span>$2x^2+6x-3$</div><div class="opt"><span class="n">4</span>$12x+24$</div><div class="opt"><span class="n">5</span>$4x^2+6x-6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -236,7 +245,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 정적분 $\int_0^3 g(x)dx$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\int_0^3 (4x^2+12x-6)dx = \left[\frac{4}{3}x^3 + 6x^2 - 6x\right]_0^3 = \frac{4}{3}(27) + 6(9) - 6(3) = 36 + 54 - 18 = 72$ 입니다.</div><div class="q" data-ans="3" data-exp="$36 + 54 - 18 = 72$입니다."><div class="lvl">문항</div><div class="stem">$\int_0^3 (4x^2+12x-6)dx$ 의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>68</div><div class="opt"><span class="n">2</span>70</div><div class="opt"><span class="n">3</span>72</div><div class="opt"><span class="n">4</span>76</div><div class="opt"><span class="n">5</span>80</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · 정적분 $\int_0^3 g(x)dx$ 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\int_0^3 (4x^2+12x-6)dx = \left[\frac{4}{3}x^3 + 6x^2 - 6x\right]_0^3 = \frac{4}{3}(27) + 6(9) - 6(3) = 36 + 54 - 18 = 72$ 입니다.</div><div class="q" data-ans="3" data-exp="$36 + 54 - 18 = 72$입니다."><div class="lvl">문항</div><div class="stem">$\int_0^3 (4x^2+12x-6)dx$ 의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>68</div><div class="opt"><span class="n">2</span>70</div><div class="opt"><span class="n">3</span>72</div><div class="opt"><span class="n">4</span>76</div><div class="opt"><span class="n">5</span>80</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -266,7 +278,10 @@ $$g(x) = 4x^2 + 12x - 6$$<br>
 구하는 정적분을 계산하면<br>
 $$\int_0^3 g(x)dx = \int_0^3 (4x^2 + 12x - 6)dx = \left[\frac{4}{3}x^3 + 6x^2 - 6x\right]_0^3$$<br>
 $$= \frac{4}{3}(27) + 6(9) - 6(3) = 36 + 54 - 18 = 72$$<br>
-정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$g(x) = 4x^2+12x-6$이므로 $\int_0^3 g(x)dx = [4/3 x^3 + 6x^2 - 6x]_0^3 = 36 + 54 - 18 = 72$입니다."><div class="lvl">최종 본문항</div><div class="stem">두 다항함수 $f(x), g(x)$는 모든 실수 $x$에 대하여 다음 조건을 만족시킨다. (가) $\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$ (나) $f(x) = x g&#x27;(x)$. $\int_0^3 g(x)dx$의 값은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>72</div><div class="opt"><span class="n">2</span>76</div><div class="opt"><span class="n">3</span>80</div><div class="opt"><span class="n">4</span>84</div><div class="opt"><span class="n">5</span>88</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>①번</b>입니다.</div><div class="q" data-ans="1" data-exp="$g(x) = 4x^2+12x-6$이므로 $\int_0^3 g(x)dx = [4/3 x^3 + 6x^2 - 6x]_0^3 = 36 + 54 - 18 = 72$입니다."><div class="lvl">최종 본문항</div><div class="stem">두 다항함수 $f(x), g(x)$는 모든 실수 $x$에 대하여 다음 조건을 만족시킨다. (가) $\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$ (나) $f(x) = x g&#x27;(x)$. $\int_0^3 g(x)dx$의 값은? [4점]</div><div class="opts"><div class="opt"><span class="n">1</span>72</div><div class="opt"><span class="n">2</span>76</div><div class="opt"><span class="n">3</span>80</div><div class="opt"><span class="n">4</span>84</div><div class="opt"><span class="n">5</span>88</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -397,7 +412,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -426,6 +441,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
@@ -578,8 +607,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30915';
-window._offlineBuildTime = '2026-09-30T11:38:31.384993+00:00';
-window._offlineHash = 'd292d768';
+window._offlineBuildTime = '2026-09-30T11:44:13.558203+00:00';
+window._offlineHash = 'fb4b8553';
 window._offlineVersion = 'v2026.09.30';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30915.html';
 
@@ -604,8 +633,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30915';
-  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:38:31.384993+00:00';
-  var localHash = window._offlineHash || 'd292d768';
+  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:44:13.558203+00:00';
+  var localHash = window._offlineHash || 'fb4b8553';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30915.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

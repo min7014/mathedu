@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -144,8 +147,8 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30923.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30923">
-<meta name="mathedu-offline-build-time" content="2026-09-30T11:38:31.384993+00:00">
-<meta name="mathedu-offline-hash" content="c467984b">
+<meta name="mathedu-offline-build-time" content="2026-09-30T11:44:13.558203+00:00">
+<meta name="mathedu-offline-hash" content="5724b830">
 <meta name="mathedu-version-label" content="v2026.09.30">
 
 </head><body><div class="wrap">
@@ -214,7 +217,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 원운동이 파동 곡선으로 풀려나가는 <b>기하학적 전개 과정</b>을 한 프레임씩 보여줍니다.<br>• <b>[단위원의 동점]</b> 반지름 1인 원 위를 반시계 방향으로 회전하는 동점 $\mathrm{P}$의 회전각 $\theta$와 수직 투영 $y=\sin\theta$, 수평 투영 $x=\cos\theta$ 설정<br>• <b>[파동의 실시간 언래핑]</b> $\theta$가 증가함에 따라 각 좌표의 높낮이를 오른쪽 직교좌표계로 수평 이동시켜 사인·코사인 곡선의 마루와 골이 직조되는 과정<br>• <b>[주기의 필연성]</b> 한 바퀴($2\pi$) 회전하면 원점으로 귀환하는 원의 닫힌 궤적이 파동 함수의 무한 반복 주기성으로 승화되는 원리를 하단 자료에서 체득해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\lim_{x \to 0}\dfrac{\sin x}{x} = 1$</b> — 삼각함수 기본 극한 공식</div><div><b>$\lim_{x \to 0}\dfrac{\sin ax}{x} = a$</b> — 계수 배율 공식</div></div>
-<h2>제1단계 · 삼각함수 기본 극한 공식 확인하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\lim_{\Delta \to 0}\frac{\sin \Delta}{\Delta} = 1$ 입니다. $\sin 5x$의 각과 분모를 일치시키기 위해 분모와 분자에 $5$를 곱합니다.</div><div class="q" data-ans="1" data-exp="분모에 5를 넣고 바깥에 5를 곱해줍니다."><div class="lvl">문항</div><div class="stem">$\lim_{x \to 0}\frac{\sin 5x}{x}$ 를 기본 극한 형태로 변형한 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\lim_{x \to 0}\left(\frac{\sin 5x}{5x} \times 5\right)$</div><div class="opt"><span class="n">2</span>$\lim_{x \to 0}\left(\frac{\sin 5x}{5x} \div 5\right)$</div><div class="opt"><span class="n">3</span>$\lim_{x \to 0}\frac{\sin x}{x}$</div><div class="opt"><span class="n">4</span>$5\lim_{x \to 0}\frac{\sin x}{5x}$</div><div class="opt"><span class="n">5</span>$\lim_{x \to 0}\frac{5\sin x}{x}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 삼각함수 기본 극한 공식 확인하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\lim_{\Delta \to 0}\frac{\sin \Delta}{\Delta} = 1$ 입니다. $\sin 5x$의 각과 분모를 일치시키기 위해 분모와 분자에 $5$를 곱합니다.</div><div class="q" data-ans="1" data-exp="분모에 5를 넣고 바깥에 5를 곱해줍니다."><div class="lvl">문항</div><div class="stem">$\lim_{x \to 0}\frac{\sin 5x}{x}$ 를 기본 극한 형태로 변형한 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\lim_{x \to 0}\left(\frac{\sin 5x}{5x} \times 5\right)$</div><div class="opt"><span class="n">2</span>$\lim_{x \to 0}\left(\frac{\sin 5x}{5x} \div 5\right)$</div><div class="opt"><span class="n">3</span>$\lim_{x \to 0}\frac{\sin x}{x}$</div><div class="opt"><span class="n">4</span>$5\lim_{x \to 0}\frac{\sin x}{5x}$</div><div class="opt"><span class="n">5</span>$\lim_{x \to 0}\frac{5\sin x}{x}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -225,7 +231,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 극한값 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \to 0$일 때 $5x \to 0$이므로 $\lim_{x \to 0}\frac{\sin 5x}{5x} = 1$ 입니다. 따라서 $1 \times 5 = 5$ 입니다.</div><div class="q" data-ans="5" data-exp="$1 \times 5 = 5$입니다."><div class="lvl">문항</div><div class="stem">$\lim_{x \to 0}\frac{\sin 5x}{5x} \times 5$ 의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 극한값 계산하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \to 0$일 때 $5x \to 0$이므로 $\lim_{x \to 0}\frac{\sin 5x}{5x} = 1$ 입니다. 따라서 $1 \times 5 = 5$ 입니다.</div><div class="q" data-ans="5" data-exp="$1 \times 5 = 5$입니다."><div class="lvl">문항</div><div class="stem">$\lim_{x \to 0}\frac{\sin 5x}{5x} \times 5$ 의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -241,7 +250,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><b>[풀이]</b><br>
 삼각함수의 극한의 기본 성질을 이용합니다.<br>
 $$\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{x \to 0}\left(\frac{\sin 5x}{5x} \times 5\right) = 1 \times 5 = 5$$<br>
-정답은 <b>⑤번</b>입니다.</div><div class="q" data-ans="5" data-exp="$\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{x \to 0}\frac{\sin 5x}{5x} \times 5 = 5$입니다."><div class="lvl">최종 본문항</div><div class="stem">$\lim_{x \to 0}\frac{\sin 5x}{x}$의 값은? [2점]</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>⑤번</b>입니다.</div><div class="q" data-ans="5" data-exp="$\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{x \to 0}\frac{\sin 5x}{5x} \times 5 = 5$입니다."><div class="lvl">최종 본문항</div><div class="stem">$\lim_{x \to 0}\frac{\sin 5x}{x}$의 값은? [2점]</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -372,7 +384,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -401,6 +413,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
@@ -553,8 +579,8 @@ function submitReport(btn){
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30923';
-window._offlineBuildTime = '2026-09-30T11:38:31.384993+00:00';
-window._offlineHash = 'c467984b';
+window._offlineBuildTime = '2026-09-30T11:44:13.558203+00:00';
+window._offlineHash = '5724b830';
 window._offlineVersion = 'v2026.09.30';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30923.html';
 
@@ -579,8 +605,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30923';
-  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:38:31.384993+00:00';
-  var localHash = window._offlineHash || 'c467984b';
+  var localBuildTime = window._offlineBuildTime || '2026-09-30T11:44:13.558203+00:00';
+  var localHash = window._offlineHash || '5724b830';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30923.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

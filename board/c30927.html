@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$f(x) + f(\dfrac{1}{2}\sin x) = \sin x$</b> — 함수방정식 조건</div><div><b>$\{f(\dfrac{1}{2}\sin x)\}' = f'(\dfrac{1}{2}\sin x) \times \dfrac{1}{2}\cos x$</b> — 합성함수의 미분법</div><div><b>$f'(0) = \dfrac{2}{3}, f'(\pi) = -\dfrac{2}{3}$</b> — 특수각 x=0, pi 대입 결과</div></div>
-<h2>제1단계 · 양변을 합성함수 미분법으로 미분하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>주어진 등식 $f(x) + f(\frac{1}{2}\sin x) = \sin x$의 양변을 $x$에 대해 미분하면 $f'(x) + f'(\frac{1}{2}\sin x) \cdot \frac{1}{2}\cos x = \cos x$ 입니다.</div><div class="q" data-ans="1" data-exp="합성함수 미분법에 의해 속미분 $(\frac{1}{2}\sin x)' = \frac{1}{2}\cos x$를 곱합니다."><div class="lvl">문항</div><div class="stem">$f(\frac{1}{2}\sin x)$의 도함수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$f'(\frac{1}{2}\sin x) \cdot \frac{1}{2}\cos x$</div><div class="opt"><span class="n">2</span>$f'(\frac{1}{2}\sin x) \cdot \cos x$</div><div class="opt"><span class="n">3</span>$f'(\frac{1}{2}\sin x)$</div><div class="opt"><span class="n">4</span>$\frac{1}{2}f'(\cos x)$</div><div class="opt"><span class="n">5</span>$f'(\frac{1}{2}\cos x)$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 양변을 합성함수 미분법으로 미분하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>주어진 등식 $f(x) + f(\frac{1}{2}\sin x) = \sin x$의 양변을 $x$에 대해 미분하면 $f'(x) + f'(\frac{1}{2}\sin x) \cdot \frac{1}{2}\cos x = \cos x$ 입니다.</div><div class="q" data-ans="1" data-exp="합성함수 미분법에 의해 속미분 $(\frac{1}{2}\sin x)' = \frac{1}{2}\cos x$를 곱합니다."><div class="lvl">문항</div><div class="stem">$f(\frac{1}{2}\sin x)$의 도함수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$f'(\frac{1}{2}\sin x) \cdot \frac{1}{2}\cos x$</div><div class="opt"><span class="n">2</span>$f'(\frac{1}{2}\sin x) \cdot \cos x$</div><div class="opt"><span class="n">3</span>$f'(\frac{1}{2}\sin x)$</div><div class="opt"><span class="n">4</span>$\frac{1}{2}f'(\cos x)$</div><div class="opt"><span class="n">5</span>$f'(\frac{1}{2}\cos x)$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $x=0$을 대입하여 $f'(0)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x=0$을 대입하면 $\sin 0 = 0, \cos 0 = 1$이므로 $f'(0) + f'(0) \cdot \frac{1}{2} = 1 \implies \frac{3}{2}f'(0) = 1 \implies f'(0) = \frac{2}{3}$ 입니다.</div><div class="q" data-ans="3" data-exp="$\frac{3}{2}f'(0) = 1 \implies f'(0) = \frac{2}{3}$입니다."><div class="lvl">문항</div><div class="stem">$f'(0) + \frac{1}{2}f'(0) = 1$ 일 때 $f'(0)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{1}{3}$</div><div class="opt"><span class="n">2</span>$\frac{1}{2}$</div><div class="opt"><span class="n">3</span>$\frac{2}{3}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\frac{3}{2}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · $x=0$을 대입하여 $f'(0)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x=0$을 대입하면 $\sin 0 = 0, \cos 0 = 1$이므로 $f'(0) + f'(0) \cdot \frac{1}{2} = 1 \implies \frac{3}{2}f'(0) = 1 \implies f'(0) = \frac{2}{3}$ 입니다.</div><div class="q" data-ans="3" data-exp="$\frac{3}{2}f'(0) = 1 \implies f'(0) = \frac{2}{3}$입니다."><div class="lvl">문항</div><div class="stem">$f'(0) + \frac{1}{2}f'(0) = 1$ 일 때 $f'(0)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{1}{3}$</div><div class="opt"><span class="n">2</span>$\frac{1}{2}$</div><div class="opt"><span class="n">3</span>$\frac{2}{3}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\frac{3}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $x=\pi$를 대입하여 $f'(\pi)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x=\pi$를 대입하면 $\sin \pi = 0, \cos \pi = -1$이므로 $f'(\pi) + f'(0) \cdot (-\frac{1}{2}) = -1 \implies f'(\pi) - \frac{1}{2}(\frac{2}{3}) = -1 \implies f'(\pi) - \frac{1}{3} = -1 \implies f'(\pi) = -\frac{2}{3}$ 입니다.</div><div class="q" data-ans="2" data-exp="$f'(\pi) = -1 + \frac{1}{3} = -\frac{2}{3}$입니다."><div class="lvl">문항</div><div class="stem">$f'(\pi) - \frac{1}{3} = -1$ 일 때 $f'(\pi)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{5}{6}$</div><div class="opt"><span class="n">2</span>$-\frac{2}{3}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{3}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $x=\pi$를 대입하여 $f'(\pi)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x=\pi$를 대입하면 $\sin \pi = 0, \cos \pi = -1$이므로 $f'(\pi) + f'(0) \cdot (-\frac{1}{2}) = -1 \implies f'(\pi) - \frac{1}{2}(\frac{2}{3}) = -1 \implies f'(\pi) - \frac{1}{3} = -1 \implies f'(\pi) = -\frac{2}{3}$ 입니다.</div><div class="q" data-ans="2" data-exp="$f'(\pi) = -1 + \frac{1}{3} = -\frac{2}{3}$입니다."><div class="lvl">문항</div><div class="stem">$f'(\pi) - \frac{1}{3} = -1$ 일 때 $f'(\pi)$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{5}{6}$</div><div class="opt"><span class="n">2</span>$-\frac{2}{3}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{3}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -207,7 +219,10 @@ $$\frac{3}{2}f'(0) = 1 \implies f'(0) = \frac{2}{3}$$<br>
 $$f'(\pi) + f'(0) \times \left(-\frac{1}{2}\right) = -1$$<br>
 $$f'(\pi) - \frac{1}{2}\left(\frac{2}{3}\right) = -1$$<br>
 $$f'(\pi) - \frac{1}{3} = -1 \implies f'(\pi) = -1 + \frac{1}{3} = -\frac{2}{3}$$<br>
-정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$f&#x27;(0) = 2/3 \implies f&#x27;(\pi) - 1/3 = -1 \implies f&#x27;(\pi) = -2/3$입니다."><div class="lvl">최종 본문항</div><div class="stem">실수 전체의 집합에서 미분가능한 함수 $f(x)$가 모든 실수 $x$에 대하여 $f(x) + f(\frac{1}{2}\sin x) = \sin x$를 만족시킬 때, $f&#x27;(\pi)$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{5}{6}$</div><div class="opt"><span class="n">2</span>$-\frac{2}{3}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{3}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>②번</b>입니다.</div><div class="q" data-ans="2" data-exp="$f&#x27;(0) = 2/3 \implies f&#x27;(\pi) - 1/3 = -1 \implies f&#x27;(\pi) = -2/3$입니다."><div class="lvl">최종 본문항</div><div class="stem">실수 전체의 집합에서 미분가능한 함수 $f(x)$가 모든 실수 $x$에 대하여 $f(x) + f(\frac{1}{2}\sin x) = \sin x$를 만족시킬 때, $f&#x27;(\pi)$의 값은? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{5}{6}$</div><div class="opt"><span class="n">2</span>$-\frac{2}{3}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{3}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -338,7 +353,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -367,6 +382,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}

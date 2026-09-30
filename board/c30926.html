@@ -46,6 +46,9 @@ display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var
 border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
 .exp.show{display:block}
 .exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+
 .score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
 display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -160,7 +163,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 <div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.</div>
 <h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$y = 2x\sqrt{x\sin x^2}$</b> — 단면 반원의 지름</div><div><b>$S(x) = \dfrac{\pi}{8}y^2 = \dfrac{\pi}{2}x^3\sin x^2$</b> — x축에 수직인 단면(반원)의 넓이</div><div><b>$V = \int_{\sqrt{\pi/6}}^{\sqrt{\pi/2}} S(x)dx$</b> — 정적분을 이용한 입체도형의 부피</div></div>
-<h2>제1단계 · 단면인 반원의 넓이 $S(x)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>단면이 반원이고 지름이 $y$이므로 반지름은 $\frac{y}{2}$입니다. 단면적 $S(x) = \frac{1}{2}\pi \left(\frac{y}{2}\right)^2 = \frac{\pi}{8}y^2$. $y^2 = 4x^2(x\sin x^2) = 4x^3\sin x^2$ 이므로 $S(x) = \frac{\pi}{8}(4x^3\sin x^2) = \frac{\pi}{2}x^3\sin x^2$ 입니다.</div><div class="q" data-ans="1" data-exp="$S(x) = \frac{\pi}{8}(4x^3\sin x^2) = \frac{\pi}{2}x^3\sin x^2$입니다."><div class="lvl">문항</div><div class="stem">지름이 $y = 2x\sqrt{x\sin x^2}$인 반원의 넓이 $S(x)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi}{2}x^3\sin x^2$</div><div class="opt"><span class="n">2</span>$\pi x^3\sin x^2$</div><div class="opt"><span class="n">3</span>$\frac{\pi}{4}x^3\sin x^2$</div><div class="opt"><span class="n">4</span>$2\pi x^3\sin x^2$</div><div class="opt"><span class="n">5</span>$\frac{\pi}{8}x^3\sin x^2$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>제1단계 · 단면인 반원의 넓이 $S(x)$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>단면이 반원이고 지름이 $y$이므로 반지름은 $\frac{y}{2}$입니다. 단면적 $S(x) = \frac{1}{2}\pi \left(\frac{y}{2}\right)^2 = \frac{\pi}{8}y^2$. $y^2 = 4x^2(x\sin x^2) = 4x^3\sin x^2$ 이므로 $S(x) = \frac{\pi}{8}(4x^3\sin x^2) = \frac{\pi}{2}x^3\sin x^2$ 입니다.</div><div class="q" data-ans="1" data-exp="$S(x) = \frac{\pi}{8}(4x^3\sin x^2) = \frac{\pi}{2}x^3\sin x^2$입니다."><div class="lvl">문항</div><div class="stem">지름이 $y = 2x\sqrt{x\sin x^2}$인 반원의 넓이 $S(x)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi}{2}x^3\sin x^2$</div><div class="opt"><span class="n">2</span>$\pi x^3\sin x^2$</div><div class="opt"><span class="n">3</span>$\frac{\pi}{4}x^3\sin x^2$</div><div class="opt"><span class="n">4</span>$2\pi x^3\sin x^2$</div><div class="opt"><span class="n">5</span>$\frac{\pi}{8}x^3\sin x^2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -171,7 +177,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 치환적분 적용하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$t = x^2$으로 치환하면 $dt = 2x dx \implies x dx = \frac{1}{2}dt$. 적분 구간은 $x = \sqrt{\pi/6} \to t = \pi/6$, $x = \sqrt{\pi/2} \to t = \pi/2$ 입니다. 따라서 부피 $V = \int \frac{\pi}{2}x^2(x\sin x^2)dx = \frac{\pi}{4}\int_{\pi/6}^{\pi/2} t\sin t dt$ 가 됩니다.</div><div class="q" data-ans="1" data-exp="$x^3 dx = t(dt/2)$이므로 계수는 $\frac{\pi}{2} \times \frac{1}{2} = \frac{\pi}{4}$입니다."><div class="lvl">문항</div><div class="stem">$t = x^2$으로 치환한 후의 적분식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi}{4}\int_{\pi/6}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">2</span>$\frac{\pi}{2}\int_{\pi/6}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">3</span>$\pi \int_{\pi/6}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">4</span>$\frac{\pi}{4}\int_{0}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">5</span>$\frac{\pi}{8}\int_{\pi/6}^{\pi/2} t\sin t dt$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 치환적분 적용하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$t = x^2$으로 치환하면 $dt = 2x dx \implies x dx = \frac{1}{2}dt$. 적분 구간은 $x = \sqrt{\pi/6} \to t = \pi/6$, $x = \sqrt{\pi/2} \to t = \pi/2$ 입니다. 따라서 부피 $V = \int \frac{\pi}{2}x^2(x\sin x^2)dx = \frac{\pi}{4}\int_{\pi/6}^{\pi/2} t\sin t dt$ 가 됩니다.</div><div class="q" data-ans="1" data-exp="$x^3 dx = t(dt/2)$이므로 계수는 $\frac{\pi}{2} \times \frac{1}{2} = \frac{\pi}{4}$입니다."><div class="lvl">문항</div><div class="stem">$t = x^2$으로 치환한 후의 적분식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi}{4}\int_{\pi/6}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">2</span>$\frac{\pi}{2}\int_{\pi/6}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">3</span>$\pi \int_{\pi/6}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">4</span>$\frac{\pi}{4}\int_{0}^{\pi/2} t\sin t dt$</div><div class="opt"><span class="n">5</span>$\frac{\pi}{8}\int_{\pi/6}^{\pi/2} t\sin t dt$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -182,7 +191,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 부분적분으로 부피 계산 완성하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\int t\sin t dt = -t\cos t + \sin t$. 위끝 $\pi/2$를 대입하면 $0+1 = 1$, 아래끝 $\pi/6$을 대입하면 $-\frac{\pi}{6}\frac{\sqrt{3}}{2} + \frac{1}{2}$. 차이는 $1 - (-\frac{\sqrt{3}\pi}{12} + \frac{1}{2}) = \frac{1}{2} + \frac{\sqrt{3}\pi}{12} = \frac{\sqrt{3}\pi+6}{12}$. 따라서 $V = \frac{\pi}{4} \times \frac{\sqrt{3}\pi+6}{12} = \frac{\sqrt{3}\pi^2+6\pi}{48}$ 입니다.</div><div class="q" data-ans="3" data-exp="분자를 전개하면 $\sqrt{3}\pi^2+6\pi$, 분모는 $4 \times 12 = 48$입니다."><div class="lvl">문항</div><div class="stem">$\frac{\pi}{4} \times \frac{\sqrt{3}\pi+6}{12}$ 의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">2</span>$\frac{\sqrt{2}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{3}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{2}\pi^2+12\pi}{48}$</div><div class="opt"><span class="n">5</span>$\frac{\sqrt{3}\pi^2+12\pi}{48}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · 부분적분으로 부피 계산 완성하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\int t\sin t dt = -t\cos t + \sin t$. 위끝 $\pi/2$를 대입하면 $0+1 = 1$, 아래끝 $\pi/6$을 대입하면 $-\frac{\pi}{6}\frac{\sqrt{3}}{2} + \frac{1}{2}$. 차이는 $1 - (-\frac{\sqrt{3}\pi}{12} + \frac{1}{2}) = \frac{1}{2} + \frac{\sqrt{3}\pi}{12} = \frac{\sqrt{3}\pi+6}{12}$. 따라서 $V = \frac{\pi}{4} \times \frac{\sqrt{3}\pi+6}{12} = \frac{\sqrt{3}\pi^2+6\pi}{48}$ 입니다.</div><div class="q" data-ans="3" data-exp="분자를 전개하면 $\sqrt{3}\pi^2+6\pi$, 분모는 $4 \times 12 = 48$입니다."><div class="lvl">문항</div><div class="stem">$\frac{\pi}{4} \times \frac{\sqrt{3}\pi+6}{12}$ 의 계산 결과는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">2</span>$\frac{\sqrt{2}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{3}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{2}\pi^2+12\pi}{48}$</div><div class="opt"><span class="n">5</span>$\frac{\sqrt{3}\pi^2+12\pi}{48}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -210,7 +222,10 @@ $$\int t\sin t dt = -t\cos t - \int (-\cos t)dt = -t\cos t + \sin t$$<br>
 $$\left[-t\cos t + \sin t\right]_{\frac{\pi}{6}}^{\frac{\pi}{2}} = (0 + 1) - \left(-\frac{\pi}{6} \times \frac{\sqrt{3}}{2} + \frac{1}{2}\right) = \frac{1}{2} + \frac{\sqrt{3}\pi}{12} = \frac{\sqrt{3}\pi + 6}{12}$$<br>
 따라서 부피는<br>
 $$V = \frac{\pi}{4} \times \frac{\sqrt{3}\pi + 6}{12} = \frac{\sqrt{3}\pi^2 + 6\pi}{48}$$<br>
-정답은 <b>③번</b>입니다.</div><div class="q" data-ans="3" data-exp="단면적 $S(x) = \frac{\pi}{2}x^3\sin x^2$을 적분하면 $\frac{\sqrt{3}\pi^2+6\pi}{48}$입니다."><div class="lvl">최종 본문항</div><div class="stem">그림과 같이 곡선 $y=2x\sqrt{x\sin x^2}$ ($0 \le x \le \sqrt{\pi}$)와 $x$축 및 두 직선 $x=\sqrt{\frac{\pi}{6}}, x=\sqrt{\frac{\pi}{2}}$로 둘러싸인 부분을 밑면으로 하는 입체도형이 있다. 이 입체도형을 $x$축에 수직인 평면으로 자른 단면이 모두 반원일 때, 이 입체도형의 부피는? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">2</span>$\frac{\sqrt{2}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{3}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{2}\pi^2+12\pi}{48}$</div><div class="opt"><span class="n">5</span>$\frac{\sqrt{3}\pi^2+12\pi}{48}$</div></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+정답은 <b>③번</b>입니다.</div><div class="q" data-ans="3" data-exp="단면적 $S(x) = \frac{\pi}{2}x^3\sin x^2$을 적분하면 $\frac{\sqrt{3}\pi^2+6\pi}{48}$입니다."><div class="lvl">최종 본문항</div><div class="stem">그림과 같이 곡선 $y=2x\sqrt{x\sin x^2}$ ($0 \le x \le \sqrt{\pi}$)와 $x$축 및 두 직선 $x=\sqrt{\frac{\pi}{6}}, x=\sqrt{\frac{\pi}{2}}$로 둘러싸인 부분을 밑면으로 하는 입체도형이 있다. 이 입체도형을 $x$축에 수직인 평면으로 자른 단면이 모두 반원일 때, 이 입체도형의 부피는? [3점]</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">2</span>$\frac{\sqrt{2}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{3}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{2}\pi^2+12\pi}{48}$</div><div class="opt"><span class="n">5</span>$\frac{\sqrt{3}\pi^2+12\pi}{48}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
+</div>
+<div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -341,7 +356,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -370,6 +385,20 @@ function sendProgress(){
     })
   }).catch(()=>{});
 }
+function toggleExp(btn){
+  var q=btn.closest('.q');
+  if(!q) return;
+  var exp=q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent='💡 해설 보기';
+  } else {
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
+    btn.textContent='💡 해설 닫기';
+  }
+}
+
 function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
 navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
 .catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
