@@ -16,7 +16,7 @@ background:
  radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
  linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);
 background-attachment:fixed;min-height:100vh}
-.wrap{max-width:840px;margin:0 auto;padding:24px 18px 80px}
+.wrap{max-width:860px;margin:0 auto;padding:24px 18px 80px}
 h1{font-size:1.55rem;margin:0 0 6px;
 background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 h2{font-size:1.22rem;margin:36px 0 12px;color:var(--accent);
@@ -34,6 +34,8 @@ box-shadow:var(--glass-shadow);transition:.2s}
 .q .lvl{font-size:.78rem;color:var(--sub);font-weight:700;letter-spacing:.3px;margin-bottom:4px}
 .q .stem{font-size:1.04rem;margin:6px 0 14px;font-weight:600}
 .opts{display:grid;gap:8px}
+.opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
+@media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
 .opt{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--line);
 border-radius:12px;padding:10px 14px;cursor:pointer;transition:.15s;font-size:.96rem;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
@@ -79,18 +81,30 @@ padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(124,
 padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
 .tbtn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ★ 원본 문제 카드: 가로 2열 배치 (Side-by-Side Horizontal Grid) */
 .orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
-border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
 box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+color:#0b1020;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:20px;
 letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
-.orig-media{text-align:center;margin:14px 0}
-.orig-media img{max-width:100%;max-height:420px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}
-.orig-tip{font-size:.85rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}
+.orig-badge{font-size:.82rem;color:var(--gold);font-weight:700;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);padding:3px 10px;border-radius:8px}
+.orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
+.orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
+.orig-col-desc{display:flex;flex-direction:column;gap:10px}
+.orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
+.orig-text-box h4{margin:0 0 8px;color:var(--accent);font-size:.96rem;font-weight:700}
+.orig-cond-wrap{background:rgba(13,16,32,.7);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;font-size:.88rem;line-height:1.65;margin-top:8px}
+.orig-tip{font-size:.85rem;color:var(--sub);background:rgba(13,16,32,.5);border:1px dashed rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;line-height:1.6}
 
-/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
+/* min7014 수학자료실 공식 연계 심층 탐구 카드: 가로 2열 그리드 배치 */
 .min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
 border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
@@ -101,9 +115,11 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
 .min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
 .min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
-.min-list{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}
-.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-list{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:14px;width:100%;box-sizing:border-box}
+@media (max-width:640px){.min-list{grid-template-columns:1fr} }
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
 .min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item:has(.min-ggb-frame-wrap.active){grid-column:1 / -1}
 .min-item-main{width:100%;min-width:0;box-sizing:border-box}
 .min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
 .min-item-title:hover{color:var(--accent)}
@@ -245,12 +261,49 @@ html[lang="en"] .sym div .bilingual-en {
 <h1>📘 [2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 심층 분석<span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #21] In-Depth Pedagogical Analysis: Cubic Function & Absolute Value Differentiability</span></h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 
-<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
-<div class="orig-media"><img src="img_ac8dc374.png" alt="2027학년도 9월 모의평가 수학 21번 원본 문제"></div>
-<div class="orig-tip">💡 <b>문제 핵심 요약</b>: 최고차항 계수가 1인 삼차함수 $f(x)=0$의 실근이 2개이고, 구간별 정의 함수 $g(x)$와 삼차 다항식의 절댓값 $|P(x)|$의 합 $h(x) = g(x) + |(x-1)(x-a)(x-4+a)|$가 실수 전체에서 미분가능하도록 하는 $f(0)$의 최댓값 $M$과 최솟값 $m$의 곱 $M \times m$을 구합니다.<span class="bilingual-en">💡 <b>Core Problem Summary</b>: For a monic cubic $f(x)$ with 2 real roots, the piecewise function $g(x)$ plus the absolute value $|P(x)| = |(x-1)(x-a)(x-4+a)|$ form $h(x) = g(x) + |P(x)|$. Find $M \times m$, the product of the maximum and minimum values of $f(0)$ such that $h(x)$ is differentiable on $\mathbb{R}$.</span></div>
-<div class="min-visual-tip">💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>• <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>• <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>• <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>• <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점(도함수 도약 $-8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점(도함수 도약 $+2|P'(\beta)|$)</b>이 정확히 한 점에서 만나 미분계수의 좌우 불연속이 $0$으로 상쇄되는 <b>'완전한 평활화(Perfect Smoothing)'</b>에 있습니다. 하단 자료실에서 동적 기하의 수렴 과정을 확인해 보세요.</div>
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge">2027학년도 9월 모의평가 수학 21번 [4점]</span>
+  </div>
+
+  <div class="orig-grid">
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <img src="img_ac8dc374.png" alt="2027학년도 9월 모의평가 수학 21번 원본 문제">
+      </div>
+      <div class="orig-media-sub">📄 한국교육과정평가원 수능 모의평가 원본 시험지</div>
+    </div>
+
+    <!-- 우측: 원본 문항 정밀 수식 조판 & 핵심 조건 -->
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 텍스트 조판 및 조건</h4>
+        <p style="margin:0 0 10px"><b>21.</b> 최고차항의 계수가 $1$인 삼차함수 $f(x)$가 다음 조건을 만족시킬 때, $f(0)$의 최댓값과 최솟값의 곱을 구하시오. <span style="color:var(--gold);font-weight:700">[4점]</span></p>
+        <div class="orig-cond-wrap">
+          <div style="margin-bottom:6px"><b>(가)</b> 방정식 $f(x) = 0$의 서로 다른 실근의 개수는 $2$이다.</div>
+          <div><b>(나)</b> $g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$ 일 때, 어떤 실수 $a$에 대하여 함수
+          <div style="text-align:center;margin:6px 0">$$h(x) = g(x) + |(x - 1)(x - a)(x - 4 + a)|$$</div>
+          가 실수 전체의 집합에서 미분가능하다.</div>
+        </div>
+      </div>
+      <div class="orig-tip">
+        💡 <b>핵심 길잡이</b>: 삼차함수 $f(x)=(x-\alpha)^2(x-\beta)$에서 $g(x)$의 뾰족점(도약 $-8f'(\beta)$)과 $|P(x)|$의 V자 첨점(도약 $+2|P'(\beta)|$)이 완벽히 상쇄되는 조건을 좌우 가로 배치로 한눈에 대조하며 풀이할 수 있습니다.<span class="bilingual-en">💡 <b>Core Guide</b>: Monic cubic $f(x)=(x-\alpha)^2(x-\beta)$ produces a corner jump $-8f'(\beta)$ in $g(x)$, perfectly cancelled by $+2|P'(\beta)|$ of $|P(x)|$.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
+  <div class="min-visual-tip" style="margin-top:16px">
+    💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>
+    선생님의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>
+    • <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>
+    • <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>
+    • <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>
+    • <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점(도함수 도약 $-8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점(도함수 도약 $+2|P'(\beta)|$)</b>이 정확히 한 점에서 만나 미분계수의 좌우 불연속이 $0$으로 상쇄되는 <b>'완전한 평활화(Perfect Smoothing)'</b>에 있습니다. 하단 자료실에서 동적 기하의 수렴 과정을 확인해 보세요.
+  </div>
 </div>
 
 <h2>🔰 제0단계 · 수학 기호 및 기본 정리 디딤돌<span class="bilingual-en">🔰 Step 0 · Foundational Theorems & Mathematical Notation</span></h2>
@@ -308,7 +361,7 @@ $$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
 1. <b>점 $x = \alpha$에서의 미분가능성:</b><br>
 $x = \alpha$는 중근이므로 $f'(\alpha) = 0$입니다. 좌미분계수와 우미분계수가 모두 $0$으로 일치하므로 $g'(\alpha) = 0$이며, <b>$x = \alpha$에서는 전혀 꺾이지 않고 부드럽게 미분가능</b>합니다.<br>
 2. <b>점 $x = \beta$에서의 미분가능성:</b><br>
-$f'(\beta) = (\beta - \alpha)^2 > 0$이므로, $x = \beta$를 지나며 $f(x)$는 음수($<0$)에서 양수($>0$)로 x축을 통과합니다.<br>
+$f'(\beta) = (\beta - \alpha)^2 > 0$이므로, $x$가 $\beta$를 지나면서 $f(x)$는 음수($<0$)에서 양수($>0$)로 x축을 통과합니다.<br>
 • $x < \beta$ (좌측): $f(x) < 0$ 이므로 $g(x) = 7f(x) \implies g'(\beta^-) = 7f'(\beta)$<br>
 • $x > \beta$ (우측): $f(x) > 0$ 이므로 $g(x) = -f(x) \implies g'(\beta^+) = -f'(\beta)$<br>
 따라서 $x = \beta$에서 우미분계수에서 좌미분계수를 뺀 <b>도함수의 도약(Jump)</b>은 다음과 같습니다:
@@ -528,7 +581,7 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 <div class="q" data-ans="2" data-exp="f(0)의 가능한 4개 값 {-48, -12, -9/4, -1/4} 중 최댓값은 -1/4, 최솟값은 -48입니다. 따라서 M × m = (-1/4) × (-48) = 12 입니다." data-exp-en="Among the four values $\{-48, -12, -9/4, -1/4\}$, maximum $M = -1/4$ and minimum $m = -48$. Their product is $(-1/4) \times (-48) = 12$, which corresponds to Option ②." >
 <div class="lvl">최종 본문항</div>
 <div class="stem">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값 $M$과 최솟값 $m$의 곱 $M \times m$의 값은 얼마인가요?<div class="bilingual-en">What is the product $M \times m$ of the maximum $M$ and minimum $m$ of $f(0)$ derived from the problem conditions?</div></div>
-<div class="opts">
+<div class="opts opts-inline">
 <div class="opt"><span class="n">1</span>$6$</div>
 <div class="opt"><span class="n">2</span>$12$</div>
 <div class="opt"><span class="n">3</span>$24$</div>
