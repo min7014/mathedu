@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="dashboard.pageTitle">실시간 수업 대시보드 · min7014 mathedu (대한민국의 수학교사 민은기 연구실)</title>
 <meta name="author" content="민은기 (Min Eun-gi)">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+<!-- 폰트: Pretendard 웹폰트 최신 정식 CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
 <script src="mathedu-auth.js"></script>
 <script src="mathedu-i18n.js"></script>
 <style>
 :root {
-  --bg: #0d1020;
-  --card: rgba(255, 255, 255, .10);
-  --card2: rgba(255, 255, 255, .14);
-  --line: rgba(255, 255, 255, .20);
-  --txt: #eef2ff;
-  --sub: #aab4d4;
+  --bg: #050811;
+  --card: rgba(15, 23, 42, 0.68);
+  --card2: rgba(30, 41, 59, 0.75);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-glow: rgba(56, 189, 248, 0.35);
+  --txt: #f8fafc;
+  --sub: #94a3b8;
+  --dim: #64748b;
   --accent: #7cc4ff;
   --accent2: #a78bfa;
   --good: #5eead4;
   --bad: #fb7185;
   --gold: #fde68a;
-  --glass-blur: 22px;
-  --glass-shadow: 0 8px 32px rgba(0,0,0,.40);
-  --radius: 16px;
+  --glass-blur: 24px;
+  --glass-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+  --radius: 18px;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
   color: var(--txt);
   line-height: 1.65;
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   background:
     radial-gradient(circle at 14% 12%, rgba(56, 189, 248, 0.16) 0%, transparent 45%),
     radial-gradient(circle at 86% 16%, rgba(129, 140, 248, 0.16) 0%, transparent 45%),
@@ -46,65 +53,162 @@ body {
   background-attachment: fixed;
   min-height: 100vh;
 }
+
 .wrap {
-  max-width: 1100px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 24px 18px 80px;
+  padding: 24px 20px 80px;
 }
 
-/* 상단 네비게이션 */
-.topbar {
+/* ══════════════════════════════════════════════════════════════
+   💎 글로벌 탑 네비게이션 바 (Floating Glass Island)
+   ══════════════════════════════════════════════════════════════ */
+.top-nav-bar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  background: rgba(10, 14, 28, 0.78);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
 }
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #f8fafc;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  transition: transform 0.2s ease;
+}
+.nav-brand:hover { transform: translateY(-1px); }
+.nav-brand span { color: var(--accent); }
+
+.nav-logo-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+}
+.nav-logo-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
 .tbtn {
   background: var(--card2);
   color: var(--txt);
   border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 8px 16px;
+  padding: 7px 14px;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  font-size: .88rem;
+  font-size: 0.84rem;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: .15s;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.18s ease;
+  font-family: inherit;
 }
-.tbtn:hover { border-color: var(--accent); color: var(--accent); }
+.tbtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.12);
+  transform: translateY(-1px);
+}
+.tbtn svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tbtn-active {
+  background: rgba(94, 234, 212, 0.18) !important;
+  border-color: var(--good) !important;
+  color: var(--good) !important;
+}
+
+.nav-auth-slot {
+  display: inline-flex;
+  align-items: center;
+}
+
 .lang-switcher {
-  display: inline-flex; align-items: center; background: rgba(15,23,42,0.75);
-  border: 1px solid rgba(124,196,255,0.35); border-radius: 20px; padding: 2px 4px; gap: 3px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(124, 196, 255, 0.35);
+  border-radius: 20px;
+  padding: 2px 4px;
+  gap: 3px;
 }
 .lang-btn {
-  background: transparent; border: none; color: var(--sub); font-family: inherit;
-  font-size: 0.78rem; font-weight: 800; padding: 4px 9px; border-radius: 14px; cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+  background: transparent;
+  border: none;
+  color: var(--sub);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.lang-btn:hover { color: #ffffff; background: rgba(255,255,255,0.08); }
+.lang-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
 .lang-btn.active {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
-  box-shadow: 0 2px 10px rgba(56,189,248,0.45);
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  color: #050811;
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.45);
 }
 
 .live-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(62,220,151,.15);
+  background: rgba(62, 220, 151, 0.15);
   color: #3ddc97;
-  border: 1px solid rgba(62,220,151,.35);
+  border: 1px solid rgba(62, 220, 151, 0.35);
   border-radius: 20px;
-  padding: 4px 14px;
-  font-size: .78rem;
+  padding: 4px 12px;
+  font-size: 0.78rem;
   font-weight: 700;
-  margin-left: auto;
+  letter-spacing: -0.01em;
 }
 .live-dot {
   width: 8px;
@@ -113,9 +217,14 @@ body {
   border-radius: 50%;
   animation: pulse 1.5s infinite;
 }
-@keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.4; transform:scale(.8)} }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
 
-/* 헤더 & 수업 배너 */
+/* ══════════════════════════════════════════════════════════════
+   🏛️ 헤더 & 수업 배너
+   ══════════════════════════════════════════════════════════════ */
 .header-box {
   margin-bottom: 24px;
 }
@@ -123,39 +232,60 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(90deg, rgba(124,196,255,.2), rgba(167,139,250,.2));
-  border: 1px solid rgba(124,196,255,.4);
+  background: linear-gradient(90deg, rgba(124, 196, 255, 0.2), rgba(167, 139, 250, 0.2));
+  border: 1px solid rgba(124, 196, 255, 0.45);
   color: #eef2ff;
   border-radius: 30px;
   padding: 6px 18px;
-  font-size: .95rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  margin-bottom: 10px;
-  box-shadow: 0 0 20px rgba(124,196,255,.2);
+  margin-bottom: 12px;
+  box-shadow: 0 0 20px rgba(124, 196, 255, 0.25);
+}
+.dashboard-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.dashboard-title-icon {
+  font-size: 2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 8px rgba(124, 196, 255, 0.4));
 }
 h1 {
-  font-size: 1.8rem;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #7cc4ff 0%, #a78bfa 50%, #c084fc 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-bottom: 6px;
+  margin: 0;
 }
-.lead { color: var(--sub); font-size: .95rem; }
+.lead {
+  color: var(--sub);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
 
-/* 툴바 컨트롤 */
+/* 교사용 빠른 배포 액션 바 */
 .action-bar {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   margin: 16px 0 24px;
   flex-wrap: wrap;
   align-items: center;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 12px 16px;
+  padding: 12px 18px;
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 .btn {
   background: linear-gradient(90deg, var(--accent), var(--accent2));
@@ -165,74 +295,191 @@ h1 {
   padding: 8px 16px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(124,196,255,.3);
-  transition: .15s;
+  box-shadow: 0 4px 14px rgba(124, 196, 255, 0.3);
+  transition: all 0.18s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: .88rem;
+  font-size: 0.86rem;
+  font-family: inherit;
 }
-.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124,196,255,.45); }
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 196, 255, 0.45);
+}
 .btn-sec {
   background: var(--card2);
   color: var(--txt);
   border: 1px solid var(--line);
   box-shadow: none;
 }
-.btn-sec:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.btn-sec:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.12);
+  transform: translateY(-1px);
+}
 .btn-active {
-  background: rgba(94,234,212,.2);
+  background: rgba(94, 234, 212, 0.2);
   border-color: var(--good);
   color: var(--good);
 }
 
-/* 통계 카드 그리드 */
+/* ══════════════════════════════════════════════════════════════
+   📊 핵심 통계 카드 그리드
+   ══════════════════════════════════════════════════════════════ */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
   margin-bottom: 24px;
 }
 .stat-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 18px 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 108px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(124, 196, 255, 0.35);
 }
 .stat-card .num {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: var(--accent);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.stat-card .num-sub {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--sub);
+  margin-left: 4px;
 }
 .stat-card .lbl {
-  font-size: .82rem;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: var(--sub);
-  margin-top: 4px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* 필터 및 검색 */
+/* ══════════════════════════════════════════════════════════════
+   🔒 개인정보 보호 배너 & 경고 바
+   ══════════════════════════════════════════════════════════════ */
+.privacy-shield-banner {
+  border-radius: 14px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+.privacy-badge {
+  background: rgba(94, 234, 212, 0.18);
+  border: 1px solid rgba(94, 234, 212, 0.45);
+  color: var(--good);
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+.warning-realname-bar {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 18px rgba(239, 68, 68, 0.15);
+}
+.btn-privacy-toggle {
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #7cc4ff;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.84rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+  font-family: inherit;
+}
+.btn-privacy-toggle:hover {
+  background: rgba(56, 189, 248, 0.28);
+  border-color: #38bdf8;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.badge-my-class {
+  background: rgba(62, 220, 151, 0.2);
+  border: 1px solid rgba(62, 220, 151, 0.45);
+  color: #3ddc97;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   🔍 필터 및 뷰 전환 탭
+   ══════════════════════════════════════════════════════════════ */
 .filter-row {
   display: flex;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
   flex-wrap: wrap;
   align-items: center;
 }
 .filter-row select, .filter-row input {
-  background: #1a2038;
-  color: #e8ecf5;
-  border: 1px solid #2e3850;
+  background: rgba(15, 23, 42, 0.85);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  padding: 8px 14px;
-  font-size: .88rem;
+  padding: 9px 14px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.filter-row select:focus, .filter-row input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+.filter-row input {
+  flex: 1 1 240px;
+  min-width: 220px;
 }
 .tab-switch {
   display: inline-flex;
-  background: #141833;
-  border: 1px solid #2e3850;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
   padding: 3px;
   margin-left: auto;
@@ -243,37 +490,43 @@ h1 {
   color: var(--sub);
   padding: 6px 14px;
   border-radius: 8px;
-  font-size: .82rem;
+  font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 .tab-btn.active {
   background: var(--accent);
   color: #0b1020;
+  box-shadow: 0 2px 10px rgba(124, 196, 255, 0.4);
 }
 
-/* 실시간 학생 카드 그리드 */
+/* ══════════════════════════════════════════════════════════════
+   📇 실시간 학생 카드 그리드
+   ══════════════════════════════════════════════════════════════ */
 .student-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
   margin-bottom: 30px;
 }
 .student-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 16px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
-  transition: .2s;
+  background: rgba(15, 23, 42, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px 18px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 .student-card:hover {
-  border-color: rgba(124,196,255,.4);
+  border-color: rgba(124, 196, 255, 0.45);
   transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(124, 196, 255, 0.15);
 }
 .student-card .s-top {
   display: flex;
@@ -284,220 +537,216 @@ h1 {
 .student-card .s-name {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--txt);
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .student-card .s-status {
-  font-size: .75rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 3px 9px;
   border-radius: 12px;
+  letter-spacing: -0.01em;
 }
-.status-done { background: rgba(94,234,212,.18); color: var(--good); border: 1px solid rgba(94,234,212,.3); }
-.status-active { background: rgba(124,196,255,.18); color: var(--accent); border: 1px solid rgba(124,196,255,.3); }
-.status-wait { background: rgba(255,255,255,.08); color: var(--sub); }
-
-.s-bar-wrap {
-  height: 8px;
-  background: rgba(255,255,255,.1);
-  border-radius: 6px;
-  overflow: hidden;
-  margin: 10px 0 8px;
+.status-done {
+  background: rgba(94, 234, 212, 0.18);
+  color: var(--good);
+  border: 1px solid rgba(94, 234, 212, 0.35);
 }
-.s-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--good));
-  border-radius: 6px;
-  transition: width .3s ease;
+.status-active {
+  background: rgba(124, 196, 255, 0.18);
+  color: var(--accent);
+  border: 1px solid rgba(124, 196, 255, 0.35);
 }
-.s-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: .8rem;
+.status-wait {
+  background: rgba(255, 255, 255, 0.08);
   color: var(--sub);
-}
-.s-time {
-  font-size: .72rem;
-  color: #7d8aa8;
-  margin-top: 6px;
-  text-align: right;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* 테이블 뷰 */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: .88rem;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-}
-th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); }
-th { color: var(--sub); font-weight: 600; background: rgba(255,255,255,.04); }
-tr:hover td { background: rgba(124,196,255,.06); }
-
-.pill {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: .78rem;
-  font-weight: 700;
-}
-.pill-high { background: rgba(62,220,151,.15); color: #3ddc97; }
-.pill-mid { background: rgba(255,209,102,.15); color: #ffd166; }
-.pill-low { background: rgba(255,107,107,.15); color: #ff6b6b; }
-
-/* 빈 상태 */
-.empty-box {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--sub);
-}
-
-/* 로딩 스피너 */
-.spin {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #2e3850;
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: sp 1s linear infinite;
-  margin: 0 auto 12px;
-}
-@keyframes sp { to { transform: rotate(360deg); } }
-
-/* 빔프로젝터 모달 */
-.projector-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: #0a0d1a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-/* stu1, stu2 익명 학생 뱃지 스타일 */
 .stu-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, rgba(56,189,248,.18), rgba(129,140,248,.18));
-  border: 1.5px solid rgba(56,189,248,.45);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(129, 140, 248, 0.18));
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
   color: #7cc4ff;
   border-radius: 8px;
   padding: 3px 12px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 800;
-  letter-spacing: .5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 .stu-sub-badge {
-  font-size: .75rem;
-  background: rgba(124,196,255,.15);
+  font-size: 0.75rem;
+  background: rgba(124, 196, 255, 0.15);
   color: var(--accent);
-  border: 1px solid rgba(124,196,255,.3);
+  border: 1px solid rgba(124, 196, 255, 0.3);
   padding: 1px 6px;
   border-radius: 6px;
   font-family: ui-monospace, SFMono-Regular, monospace;
   vertical-align: middle;
 }
-.privacy-shield-banner {
-  background: linear-gradient(135deg, rgba(56,189,248,.12), rgba(94,234,212,.12));
-  border: 1px solid rgba(56,189,248,.35);
-  border-radius: 14px;
-  padding: 14px 18px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.privacy-badge {
-  background: rgba(94,234,212,.2);
-  border: 1px solid rgba(94,234,212,.4);
-  color: #5eead4;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: .76rem;
-  font-weight: 700;
-}
-.warning-realname-bar {
-  background: rgba(239,68,68,.15);
-  border: 1px solid rgba(239,68,68,.4);
-  color: #fca5a5;
-  border-radius: 10px;
-  padding: 10px 16px;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: .86rem;
-  font-weight: 700;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.btn-privacy-toggle {
-  background: rgba(56,189,248,.15);
-  border: 1px solid rgba(56,189,248,.4);
-  color: #7cc4ff;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: .84rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: .15s;
-}
-.btn-privacy-toggle:hover {
-  background: rgba(56,189,248,.25);
-  border-color: #38bdf8;
-  color: #fff;
-}
-.badge-my-class {
-  background: rgba(62,220,151,.2);
-  border: 1px solid rgba(62,220,151,.45);
-  color: #3ddc97;
-  padding: 1px 7px;
+
+.s-bar-wrap {
+  height: 7px;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
-  font-size: .72rem;
+  overflow: hidden;
+  margin: 12px 0 10px;
+}
+.s-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #5eead4);
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+.s-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--sub);
+  font-weight: 500;
+}
+.s-time {
+  font-size: 0.75rem;
+  color: #7d8aa8;
+  margin-top: 8px;
+  text-align: right;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   📋 테이블 뷰
+   ══════════════════════════════════════════════════════════════ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  background: rgba(15, 23, 42, 0.68);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
+}
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+th {
+  color: var(--sub);
   font-weight: 700;
-  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.84rem;
+}
+tr:hover td {
+  background: rgba(124, 196, 255, 0.06);
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.pill-high { background: rgba(62, 220, 151, 0.15); color: #3ddc97; }
+.pill-mid { background: rgba(255, 209, 102, 0.15); color: #ffd166; }
+.pill-low { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; }
+
+/* 빈 화면 안내 & 로딩 */
+.empty-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  padding: 60px 20px;
+  text-align: center;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  margin: 30px 0;
+}
+.spin {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(124, 196, 255, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 14px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 칠판 프로젝터 모달 */
+.projector-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 17, 0.94);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  padding: 24px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .top-nav-bar { flex-direction: column; align-items: stretch; }
+  .nav-right { justify-content: flex-start; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .tab-switch { margin-left: 0; width: 100%; justify-content: center; }
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <!-- 상단 네비 -->
-  <div class="topbar">
-    <a class="tbtn" href="./" style="display:inline-flex;align-items:center;gap:8px">
-      <img src="assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
-      <span>min7014 <b>mathedu</b></span>
-    </a>
-    <a class="tbtn" href="./" data-i18n="dashboard.backHome">← 메인 홈</a>
-    <button class="tbtn" onclick="fetchData()" data-i18n="dashboard.refresh">🔄 새로고침</button>
-    <button class="tbtn btn-active" id="btnToggleAnon" onclick="toggleAnonymous()" style="display:none;background:rgba(56,189,248,.18);border-color:#38bdf8;color:#7cc4ff" data-i18n="dashboard.anonOn">🔒 학생 익명 보호 (칠판 모드)</button>
-    <button class="tbtn" onclick="exportCsv()" data-i18n="dashboard.exportCsv">📥 성적표 엑셀(CSV) 저장</button>
-    <div class="live-badge"><span class="live-dot"></span> <span data-i18n="dashboard.liveSync">3초 실시간 갱신 중</span></div>
-
-    <!-- 🌐 글로벌 언어 전환기 (KO / EN) -->
-    <div class="lang-switcher" id="langSwitcher" title="Language">
-      <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">🇰🇷 KO</button>
-      <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">🌐 EN</button>
+  <!-- 💎 상단 네비게이션 바 -->
+  <header class="top-nav-bar">
+    <div class="nav-left">
+      <a class="nav-brand" href="./">
+        <div class="nav-logo-badge">
+          <img src="assets/favicon.png" alt="min7014">
+        </div>
+        <div class="nav-brand-title">min7014 <span>mathedu</span></div>
+      </a>
+      <a class="tbtn" href="./" data-i18n="dashboard.backHome">← 메인 홈</a>
     </div>
-  </div>
+
+    <div class="nav-right">
+      <button class="tbtn" onclick="fetchData()" id="btnRefresh" title="새로고침">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        <span data-i18n="dashboard.refresh">새로고침</span>
+      </button>
+      <button class="tbtn btn-active" id="btnToggleAnon" onclick="toggleAnonymous()" style="display:none" data-i18n="dashboard.anonOn">🔒 학생 익명 보호 (칠판 모드)</button>
+      <button class="tbtn" onclick="exportCsv()" id="btnExportCsv" title="성적표 저장">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="dashboard.exportCsv">성적표 저장(CSV)</span>
+      </button>
+      <div id="navAuthSlot" class="nav-auth-slot"></div>
+      <div class="live-badge"><span class="live-dot"></span> <span data-i18n="dashboard.liveSync">3초 실시간 갱신 중</span></div>
+      <div class="lang-switcher" id="langSwitcher" title="언어 선택 / Language">
+        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">🇰🇷 KO</button>
+        <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">🌐 EN</button>
+      </div>
+    </div>
+  </header>
 
   <!-- 헤더 영역 -->
   <div class="header-box">
     <div id="roomBadgeContainer"></div>
-    <h1 id="dashboardTitle" data-i18n="dashboard.title">📊 실시간 수업 모니터링 대시보드</h1>
-    <p class="lead" id="dashboardSubtitle" data-i18n="dashboard.subtitle">학생들의 실시간 퀴즈 풀이 진행 현황 및 성취도 관제</p>
+    <div class="dashboard-title-wrap">
+      <span class="dashboard-title-icon" id="dashboardTitleIcon">📊</span>
+      <h1 id="dashboardTitle" data-i18n="dashboard.titleAll">전체 학습 현황 모니터링</h1>
+    </div>
+    <p class="lead" id="dashboardSubtitle" data-i18n="dashboard.subAll">개설된 모든 수업 및 자율 학습 학생들의 실황입니다.</p>
   </div>
 
   <!-- 교사용 빠른 배포 액션 바 -->
@@ -512,19 +761,19 @@ tr:hover td { background: rgba(124,196,255,.06); }
   <!-- 핵심 통계 카드 -->
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="num" id="statTotalStudents">-</div>
+      <div class="num" id="statTotalStudents">0명</div>
       <div class="lbl" data-i18n="dashboard.statTotal">👥 총 참여 학생</div>
     </div>
     <div class="stat-card">
-      <div class="num" id="statCompleted">-</div>
+      <div class="num" id="statCompleted">0명 <span class="num-sub">(0%)</span></div>
       <div class="lbl" data-i18n="dashboard.statCompleted">🏆 완주 학생 (완주율)</div>
     </div>
     <div class="stat-card">
-      <div class="num" id="statAvgScore">-</div>
+      <div class="num" id="statAvgScore">0%</div>
       <div class="lbl" data-i18n="dashboard.statAvgScore">📈 반 평균 정답률</div>
     </div>
     <div class="stat-card">
-      <div class="num" id="statActiveNow">-</div>
+      <div class="num" id="statActiveNow">0명</div>
       <div class="lbl" data-i18n="dashboard.statActiveNow">🟢 현재 풀이 중 (최근 활동)</div>
     </div>
   </div>
@@ -663,10 +912,7 @@ function shouldShowRealName(it) {
 
 // === 학생 익명 식별자(stu1, stu2...) 순차 부여 모듈 ===
 function assignStudentIds(items) {
-  // 방 단위로 묶어서 stu1부터 순차 부여
   const byRoom = {};
-
-  // 참여/활동 시간(최초 등장 순서) 기준 오름차순 정렬하여 순번 고정
   const sorted = [...items].sort((a, b) => a.updated_date.getTime() - b.updated_date.getTime());
 
   sorted.forEach(it => {
@@ -707,7 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupRoomHeader();
   updateAnonUI();
   fetchData();
-  // 3초 자동 폴링
+  // 3.5초 자동 폴링
   setInterval(fetchData, 3500);
 });
 
@@ -733,22 +979,24 @@ function setupRoomHeader() {
   const actionBar = document.getElementById('roomActionBar');
   const title = document.getElementById('dashboardTitle');
   const sub = document.getElementById('dashboardSubtitle');
+  const icon = document.getElementById('dashboardTitleIcon');
 
   const isMine = isMyCurrentRoom();
 
   if (targetRoom) {
+    if (icon) icon.textContent = '🏫';
     const mineBadge = isMine ? ` <span class="badge-my-class">${t('dashboard.myClassBadge')}</span>` : '';
     bannerContainer.innerHTML = `<div class="room-banner">${t('dashboard.classCodeLabel')}<b>${escapeHtml(targetRoom)}</b>${mineBadge}</div>`;
-    title.innerHTML = isMine 
-      ? `${t('dashboard.titleRoom', { room: escapeHtml(targetRoom) })} <span style="font-size:1.1rem;color:var(--accent2);font-weight:700">${t('dashboard.tagMyClass')}</span>`
+    const roomTitle = isMine 
+      ? `${t('dashboard.titleRoom', { room: escapeHtml(targetRoom) })} <span style="font-size:1.05rem;color:var(--accent2);font-weight:700">${t('dashboard.tagMyClass')}</span>`
       : `${t('dashboard.titleRoom', { room: escapeHtml(targetRoom) })}`;
+    title.innerHTML = roomTitle;
     sub.textContent = isMine
       ? t('dashboard.subMyRoom', { room: targetRoom })
       : t('dashboard.subOtherRoom', { room: targetRoom });
     actionBar.style.display = 'flex';
 
     if (isMine) {
-      // 내 수업인 경우: 학생 실명을 기본으로 표시
       isAnonymous = false;
       isProjectorMode = false;
     } else {
@@ -776,6 +1024,7 @@ function setupRoomHeader() {
       }
     };
   } else {
+    if (icon) icon.textContent = '📊';
     bannerContainer.innerHTML = '';
     title.textContent = t('dashboard.titleAll');
     sub.textContent = t('dashboard.subAll');
@@ -794,7 +1043,7 @@ function updatePrivacyBanner(isMine) {
   if (isMine) {
     if (isProjectorMode) {
       banner.className = 'privacy-shield-banner';
-      banner.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+      banner.style.borderColor = 'rgba(56, 189, 248, 0.45)';
       banner.style.background = 'rgba(56, 189, 248, 0.08)';
       banner.innerHTML = `
         <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:#7cc4ff">
@@ -807,7 +1056,7 @@ function updatePrivacyBanner(isMine) {
       `;
     } else {
       banner.className = 'privacy-shield-banner';
-      banner.style.borderColor = 'rgba(167, 139, 250, 0.4)';
+      banner.style.borderColor = 'rgba(167, 139, 250, 0.45)';
       banner.style.background = 'rgba(167, 139, 250, 0.1)';
       banner.innerHTML = `
         <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--accent2)">
@@ -821,7 +1070,7 @@ function updatePrivacyBanner(isMine) {
     }
   } else {
     banner.className = 'privacy-shield-banner';
-    banner.style.borderColor = 'rgba(94, 234, 212, 0.3)';
+    banner.style.borderColor = 'rgba(94, 234, 212, 0.35)';
     banner.style.background = 'rgba(94, 234, 212, 0.08)';
     banner.innerHTML = `
       <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--good)">
@@ -846,13 +1095,27 @@ async function fetchData() {
   }
 }
 
-// 데이터 파싱: student_name에서 [ROOM_ID] 추출
+function parseDate(val) {
+  if (!val) return new Date();
+  if (val instanceof Date) return isNaN(val.getTime()) ? new Date() : val;
+  if (typeof val === 'number') return new Date(val);
+  const s = String(val).trim();
+  const cleaned = s.replace(/\s*\([^)]*\)/g, '').trim();
+  let d = new Date(cleaned);
+  if (!isNaN(d.getTime())) return d;
+  d = new Date(s);
+  if (!isNaN(d.getTime())) return d;
+  const iso = s.replace(' ', 'T');
+  d = new Date(iso);
+  if (!isNaN(d.getTime())) return d;
+  return new Date();
+}
+
 function parseItems(items) {
   return items.map(item => {
     let name = (item.student_name || t('dashboard.anonymous')).toString().trim();
     let rId = (item.room_id || '').toString().trim();
     
-    // name에 [ROOM_ID]가 포함되어 있는 경우 추출
     const match = name.match(/^(.*?)\s*\[([a-zA-Z0-9_\-\uAC00-\uD7A3]+)\]$/);
     if (match) {
       name = match[1].trim();
@@ -875,7 +1138,7 @@ function parseItems(items) {
       pct: pct,
       progressPct: progressPct,
       is_done: tot > 0 && cur >= tot,
-      updated_date: item.updated_at ? new Date(item.updated_at.replace(' ', 'T') + 'Z') : new Date()
+      updated_date: parseDate(item.updated_at)
     };
   });
 }
@@ -885,13 +1148,8 @@ function render() {
   const parsed = parseItems(rawData);
   assignStudentIds(parsed);
 
-  // 방 목록 & 퀴즈 목록 셀렉트 채우기
   updateSelectOptions(parsed);
-
-  // 필터 적용
   const filtered = filterData(parsed);
-
-  // 통계 계산
   updateStats(filtered);
 
   if (filtered.length === 0) {
@@ -934,18 +1192,16 @@ function updateStats(items) {
   const total = items.length;
   const completed = items.filter(it => it.is_done).length;
   const completePct = total > 0 ? Math.round((completed / total) * 100) : 0;
-  
   const avg = total > 0 ? Math.round(items.reduce((s, it) => s + it.pct, 0) / total) : 0;
   
-  // 최근 3분 이내 활동한 학생
   const now = Date.now();
   const activeNow = items.filter(it => (now - it.updated_date.getTime()) < 3 * 60 * 1000).length;
 
   const unit = t('dashboard.unitStudents');
-  document.getElementById('statTotalStudents').textContent = total + unit;
-  document.getElementById('statCompleted').textContent = `${completed}${unit} (${completePct}%)`;
-  document.getElementById('statAvgScore').textContent = avg + '%';
-  document.getElementById('statActiveNow').textContent = activeNow + unit;
+  document.getElementById('statTotalStudents').innerHTML = `<span>${total}</span><span style="font-size:1.1rem;font-weight:600">${unit}</span>`;
+  document.getElementById('statCompleted').innerHTML = `<span>${completed}</span><span style="font-size:1.1rem;font-weight:600">${unit}</span> <span class="num-sub">(${completePct}%)</span>`;
+  document.getElementById('statAvgScore').innerHTML = `<span>${avg}%</span>`;
+  document.getElementById('statActiveNow').innerHTML = `<span>${activeNow}</span><span style="font-size:1.1rem;font-weight:600">${unit}</span>`;
 }
 
 function renderCards(items) {
@@ -960,7 +1216,7 @@ function renderCards(items) {
     if (showReal) {
       displayName = `<span style="font-weight:700;color:#fff">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
       if (isMine) {
-        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">${t('dashboard.badgeMyStudent')}</span>`;
+        displayName += ` <span class="badge-my-class">${t('dashboard.badgeMyStudent')}</span>`;
       }
     } else {
       displayName = `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>`;
@@ -971,7 +1227,7 @@ function renderCards(items) {
     const timeAgo = formatTimeAgo(it.updated_date);
 
     html += `
-      <div class="student-card" ${isMine ? 'style="border-color:rgba(167,139,250,.4)"' : ''}>
+      <div class="student-card" ${isMine ? 'style="border-color:rgba(167,139,250,.45)"' : ''}>
         <div class="s-top">
           <div class="s-name">${displayName}</div>
           <span class="s-status ${statusClass}">${statusText}</span>
@@ -1019,7 +1275,7 @@ function renderTable(items) {
     if (showReal) {
       displayName = `<span style="font-weight:700">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
       if (isMine) {
-        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">${t('dashboard.badgeMyStudent')}</span>`;
+        displayName += ` <span class="badge-my-class">${t('dashboard.badgeMyStudent')}</span>`;
       }
     } else {
       displayName = `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>`;
@@ -1100,7 +1356,6 @@ function switchView(v) {
 function toggleAnonymous(forceAnon) {
   const isMine = isMyCurrentRoom();
 
-  // 정식회원의 자기 수업이 아니면 토글 불허: 무조건 익명 보호(stu1~) 유지
   if (!isMine) {
     isAnonymous = true;
     isProjectorMode = false;
@@ -1126,7 +1381,6 @@ function updateAnonUI() {
 
   if (btn) {
     if (isMine) {
-      // 정식회원이 자신의 수업에 대하여만 학생익명보호 버튼 노출!
       btn.style.display = 'inline-flex';
       if (isProjectorMode) {
         btn.innerHTML = t('dashboard.anonOff');
@@ -1140,7 +1394,6 @@ function updateAnonUI() {
         btn.style.background = 'rgba(56,189,248,.18)';
       }
     } else {
-      // 정식회원이 아니거나, 자신의 수업이 아닌 경우 버튼 완전 숨김!
       btn.style.display = 'none';
     }
   }
@@ -1199,7 +1452,6 @@ function exportCsv() {
   const allowReal = !isProjectorMode && isCurrentRoomMine;
   const isEn = (typeof MatheduI18n !== 'undefined' && MatheduI18n.getLanguage && MatheduI18n.getLanguage() === 'en');
 
-  // UTF-8 BOM(\uFEFF) 추가하여 엑셀 한글 깨짐 방지
   let csv = '';
   if (isEn) {
     csv = allowReal
@@ -1270,18 +1522,21 @@ function openProjectorModal(rId) {
 }
 
 function isRecent(d) {
+  if (!d || isNaN(d.getTime())) return false;
   return (Date.now() - d.getTime()) < 3 * 60 * 1000;
 }
 
 function formatTimeAgo(d) {
-  const diffSec = Math.floor((Date.now() - d.getTime()) / 1000);
+  if (!d || isNaN(d.getTime())) return t('dashboard.timeJustNow');
+  const diffSec = Math.max(0, Math.floor((Date.now() - d.getTime()) / 1000));
   if (diffSec < 15) return t('dashboard.timeJustNow');
   if (diffSec < 60) return t('dashboard.timeSecAgo', { n: diffSec });
   const diffMin = Math.floor(diffSec / 60);
   if (diffMin < 60) return t('dashboard.timeMinAgo', { n: diffMin });
   const diffHr = Math.floor(diffMin / 60);
   if (diffHr < 24) return t('dashboard.timeHourAgo', { n: diffHr });
-  return t('dashboard.timeDayAgo', { n: Math.floor(diffHr / 24) });
+  const diffDay = Math.floor(diffHr / 24);
+  return t('dashboard.timeDayAgo', { n: diffDay });
 }
 
 function escapeHtml(s) {

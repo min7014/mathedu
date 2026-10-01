@@ -1362,17 +1362,37 @@
     }
   };
 
+  function tAuth(key, params) {
+    if (window.MatheduI18n && typeof window.MatheduI18n.t === 'function') {
+      var res = window.MatheduI18n.t('auth.' + key, params);
+      if (res && res !== 'auth.' + key) return res;
+    }
+    var fallbacks = {
+      mySolved: '📂 내가 푼 문제',
+      myLibrary: '📂 서재({cnt})',
+      solvedCount: '📂 푼 문제 ({cnt})',
+      googleLogin: 'Google 로그인',
+      googleUpgrade: '✨ Google 전환',
+      logout: '로그아웃',
+      guestSuffix: '님'
+    };
+    var str = fallbacks[key] || key;
+    if (params) {
+      for (var k in params) str = str.replace(new RegExp('\\{' + k + '\\}', 'g'), params[k]);
+    }
+    return str;
+  }
+
   // 상단 네비게이션 UI 업데이트
   function updateNavAuthUI() {
     var user = MatheduAuth.getCurrentUser();
     var guest = MatheduAuth.getCurrentGuest();
     var solvedCount = MatheduAuth.getSolvedProblems().length;
 
-    var navMenu = document.querySelector('.nav-menu') || document.querySelector('.topbar') || document.querySelector('.navbar');
-    if (!navMenu) return;
-
     var existingSlot = document.getElementById('navAuthSlot');
     if (!existingSlot) {
+      var navMenu = document.querySelector('.nav-menu') || document.querySelector('.topbar') || document.querySelector('.top-nav-bar') || document.querySelector('.navbar');
+      if (!navMenu) return;
       existingSlot = document.createElement('div');
       existingSlot.id = 'navAuthSlot';
       existingSlot.className = 'nav-auth-slot';
@@ -1393,28 +1413,31 @@
         '<div class="auth-logged-pill" title="소속: ' + escapeHtml(user.org || '수학교육') + ' (' + escapeHtml(user.email || '') + ')">' +
           userAvatar +
           '<span class="auth-user-name">' + googleBadge + '<b>' + escapeHtml(user.name) + '</b> (' + escapeHtml(user.roleLabel || '회원') + ')</span>' +
-          '<button type="button" class="auth-btn-action" onclick="MatheduAuth.showMyProblemsModal()" title="내가 푼 문제 모아보기">📂 서재(' + solvedCount + ')</button>' +
-          '<button type="button" class="auth-btn-logout" onclick="MatheduAuth.logOut()" title="로그아웃">로그아웃</button>' +
+          '<button type="button" class="auth-btn-action" onclick="MatheduAuth.showMyProblemsModal()" title="' + escapeHtml(tAuth('mySolved')) + '">' + escapeHtml(tAuth('myLibrary', { cnt: solvedCount })) + '</button>' +
+          '<button type="button" class="auth-btn-logout" onclick="MatheduAuth.logOut()" title="' + escapeHtml(tAuth('logout')) + '">' + escapeHtml(tAuth('logout')) + '</button>' +
         '</div>';
     } else if (guest) {
       // 2) 비회원 간편 식별 상태
+      var gSuffix = tAuth('guestSuffix');
       existingSlot.innerHTML = 
         '<div class="auth-guest-pill">' +
           '<span class="auth-user-icon">🧑‍🎓</span>' +
-          '<span class="auth-user-name"><b>' + escapeHtml(guest.name) + '</b>님</span>' +
-          '<button type="button" class="auth-btn-action" onclick="MatheduAuth.showMyProblemsModal()" title="내가 푼 문제 모아보기">📂 푼 문제 (' + solvedCount + ')</button>' +
-          '<button type="button" class="auth-btn-upgrade" onclick="MatheduAuth.showUpgradeModal()" title="Google 계정으로 전환하여 출제/배포 권한 획득">✨ Google 전환</button>' +
-          '<button type="button" class="auth-btn-logout" onclick="MatheduAuth.logoutGuest()" title="학습자 식별 해제">✕</button>' +
+          '<span class="auth-user-name"><b>' + escapeHtml(guest.name) + '</b>' + escapeHtml(gSuffix) + '</span>' +
+          '<button type="button" class="auth-btn-action" onclick="MatheduAuth.showMyProblemsModal()" title="' + escapeHtml(tAuth('mySolved')) + '">' + escapeHtml(tAuth('solvedCount', { cnt: solvedCount })) + '</button>' +
+          '<button type="button" class="auth-btn-upgrade" onclick="MatheduAuth.showUpgradeModal()" title="Google">' + escapeHtml(tAuth('googleUpgrade')) + '</button>' +
+          '<button type="button" class="auth-btn-logout" onclick="MatheduAuth.logoutGuest()" title="✕">✕</button>' +
         '</div>';
     } else {
       // 3) 익명 방문자 상태
+      var mySolvedText = tAuth('mySolved') + (solvedCount > 0 ? ' (' + solvedCount + ')' : '');
+      var loginText = tAuth('googleLogin');
       existingSlot.innerHTML = 
         '<div style="display:inline-flex;align-items:center;gap:6px">' +
-          '<button type="button" class="auth-btn-sub" onclick="MatheduAuth.showMyProblemsModal()" title="내가 푼 문제 모아보기">' +
-            '📂 내가 푼 문제' + (solvedCount > 0 ? ' (' + solvedCount + ')' : '') +
+          '<button type="button" class="auth-btn-sub" onclick="MatheduAuth.showMyProblemsModal()" title="' + escapeHtml(tAuth('mySolved')) + '">' +
+            escapeHtml(mySolvedText) +
           '</button>' +
           '<button type="button" class="auth-btn-login" onclick="MatheduAuth.showAuthModal()">' +
-            '<svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:2px"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg> Google 로그인' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:4px"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>' + escapeHtml(loginText) +
           '</button>' +
         '</div>';
     }
@@ -1743,6 +1766,12 @@
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('mathedu:lang-changed', function() {
+      updateNavAuthUI();
+    });
   }
 
   window.MatheduAuth = MatheduAuth;
