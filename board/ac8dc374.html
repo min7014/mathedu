@@ -244,6 +244,26 @@ html[lang="en"] .sym div .bilingual-en {
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 <script src="../mathedu-i18n.js"></script>
+<script>
+window.toggleMinGgb = function(btn, ggbUrl) {
+  var item = btn.closest ? (btn.closest('.min-tip-item') || btn.closest('.min-item') || btn.closest('.min-visual-tip')) : btn.parentElement.parentElement;
+  if (!item) return;
+  var wrap = item.querySelector('.min-ggb-frame-wrap');
+  if (!wrap) return;
+  if (wrap.classList.contains('active')) {
+    wrap.classList.remove('active');
+    wrap.innerHTML = '';
+    btn.innerHTML = '📐 GeoGebra 조작 ▾';
+  } else {
+    var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+    var id = m ? m[1] : '';
+    var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+    wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+    wrap.classList.add('active');
+    btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+  }
+};
+</script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
@@ -298,11 +318,70 @@ html[lang="en"] .sym div .bilingual-en {
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>
-    선생님의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>
+    선생님의 PDF 자료(<a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="color:#67e8f9;text-decoration:underline;font-weight:700">접선에 접근하는 할선들</a> 등)는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>
     • <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>
     • <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>
     • <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>
-    • <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점(도함수 도약 $-8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점(도함수 도약 $+2|P'(\beta)|$)</b>이 정확히 한 점에서 만나 미분계수의 좌우 불연속이 $0$으로 상쇄되는 <b>'완전한 평활화(Perfect Smoothing)'</b>에 있습니다. 하단 자료실에서 동적 기하의 수렴 과정을 확인해 보세요.
+    • <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점(도함수 도약 $-8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점(도함수 도약 $+2|P'(\beta)|$)</b>이 정확히 한 점에서 만나 미분계수의 좌우 불연속이 $0$으로 상쇄되는 <b>'완전한 평활화(Perfect Smoothing)'</b>에 있습니다.
+    <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF &amp; GeoGebra Exploration)</b><br>
+    As secant line $PQ$ rotates continuously towards the limit $x \to a$, it coincides with the tangent line. The corner jumps from $g(x)$ (jump $-8f'(\beta)$) and $|P(x)|$ (jump $+2|P'(\beta)|$) perfectly cancel out, achieving smooth differentiability. Explore the interactive materials below.</div>
+
+    <!-- 🔗 위 시각적 증명 분석과 직결된 민은기 선생님의 핵심 자료 링크 -->
+    <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px">
+      <div style="font-weight:700;color:#93c5fd;font-size:.85rem;display:flex;align-items:center;gap:6px">
+        <span>🔗 위 시각적 증명과 직결된 민은기 선생님 핵심 자료:</span>
+      </div>
+
+      <!-- 자료 1: 접선에 접근하는 할선들 (초록색 할선 -> 빨간색 접선 수렴 직접 조작) -->
+      <div class="min-tip-item" style="background:rgba(15,23,42,.55);border:1px solid rgba(56,189,248,.35);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="font-weight:700;color:#38bdf8;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px">
+            <span style="font-size:1rem">📐</span> 접선에 접근하는 할선들 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Secant lines approaching the tangent line)</span>
+          </a>
+          <span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">🌟 위 설명 직결 핵심자료</span>
+        </div>
+        <div style="font-size:.8rem;color:#cbd5e1;line-height:1.5">
+          곡선 위의 고정점 $P$와 동점 $Q$를 잇는 초록색 할선이 $Q \to P$로 이동하며 빨간색 접선과 일치하는 미분계수의 기하학적 수렴 과정을 인터랙티브 앱렛과 단계별 PDF로 직접 확인할 수 있습니다.
+        </div>
+        <div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button>
+          <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a>
+          <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a>
+          <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a>
+          <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+        </div>
+        <div class="min-ggb-frame-wrap"></div>
+      </div>
+
+      <!-- 자료 2: 미분가능 함수의 한 점에서 접선과 법선 -->
+      <div class="min-tip-item" style="background:rgba(15,23,42,.55);border:1px solid rgba(168,85,247,.35);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" style="font-weight:700;color:#c084fc;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px">
+            <span style="font-size:1rem">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Tangents and Normals at a Point)</span>
+          </a>
+          <span style="font-size:.72rem;background:rgba(168,85,247,.18);color:#d8b4fe;padding:2px 8px;border-radius:6px;border:1px solid rgba(168,85,247,.35)">미분계수와 매끄러움</span>
+        </div>
+        <div style="font-size:.8rem;color:#cbd5e1;line-height:1.5">
+          미분계수의 좌우 극한이 일치하여 뾰족점(첨점) 없이 매끄러운 단일 접선이 결정되는 기하학적 조건과 원리를 AlgeoMath와 단계별 PDF로 증명합니다.
+        </div>
+        <div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath 실습</a>
+          <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a>
+          <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a>
+          <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+        </div>
+      </div>
+
+      <!-- 하단 안내 및 이동 버튼 -->
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px">
+        <a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
+          <span>👇</span> 하단 연계 심층 탐구 자료실 전체(4개 주제 &amp; 도함수 앱렛) 보기 ➔
+        </a>
+        <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
+          <span>🌐</span> 민은기 선생님의 수학자료실 메인 (3,400+ 주제) ↗
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -715,7 +794,7 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 </div>
 
 <!-- 📚 min7014 수학자료실 공식 연계 심층 탐구 자료 카드 -->
-<div class="min7014-addon-card">
+<div class="min7014-addon-card" id="min7014-addon">
   <div class="min-header">
     <div class="min-header-title">
       <img src="../assets/favicon.png" alt="min7014" class="min-logo">
@@ -799,7 +878,7 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 <script>
 if (!window.toggleMinGgb) {
   window.toggleMinGgb = function(btn, ggbUrl) {
-    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    var item = btn.closest ? (btn.closest('.min-tip-item') || btn.closest('.min-item') || btn.closest('.min-visual-tip')) : btn.parentElement.parentElement;
     if (!item) return;
     var wrap = item.querySelector('.min-ggb-frame-wrap');
     if (!wrap) return;

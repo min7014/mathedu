@@ -170,11 +170,7 @@ def match_materials(text, limit=4):
 
     return results[:limit]
 
-def get_visual_tip(problem_title, matched_items=None):
-    """문제 주제에 맞는 민은기 선생님의 '프레임별 시각적 증명' 심층 분석 디딤돌 팁"""
-    if not matched_items:
-        matched_items = match_materials(problem_title, limit=4)
-    
+def _get_visual_tip_text(problem_title):
     t = problem_title.lower()
     
     if any(k in t for k in ['사인법칙', '코사인법칙', '사인 법칙', '코사인 법칙']):
@@ -274,6 +270,59 @@ def get_visual_tip(problem_title, matched_items=None):
             "선생님의 PDF 자료는 단순 결과가 아닌 <b>처음부터 끝까지 생각의 모든 과정이 투명하게 드러나는 단계별 시각적 증명</b>입니다.<br>"
             "하단의 <b>민은기 선생님 수학자료실(min7014)</b> PDF 문서를 키보드 방향키나 마우스 휠로 넘겨가며, 각 페이지마다 변하는 요소와 보존되는 불변량의 수학적 의미를 깊이 있게 음미해 보세요."
         )
+
+def _append_visual_links(tip_html, matched_items):
+    """시각적 팁 박스 내부에 직접 조작 가능한 GeoGebra 및 PDF/영상 링크 바 결합"""
+    if not matched_items:
+        return tip_html
+    
+    links_html = '<div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;">'
+    links_html += '<div style="font-weight:700;color:#93c5fd;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 민은기 선생님 핵심 자료:</span></div>'
+    for it in matched_items[:2]:
+        t_name = it.get('title', '관련 자료')
+        sub = it.get('sub', '')
+        u = it.get('url', '')
+        pdf = it.get('pdf', '')
+        ggb = it.get('geogebra', '')
+        algeo = it.get('algeomath', '')
+        yt = it.get('youtube', '')
+        
+        links_html += '<div class="min-tip-item" style="background:rgba(15,23,42,.55);border:1px solid rgba(56,189,248,.35);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">'
+        links_html += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">'
+        sub_text = f' <span style="font-size:.76rem;color:#94a3b8;font-weight:400">({sub})</span>' if sub else ''
+        links_html += f'<a href="{u}" target="_blank" rel="noopener" style="font-weight:700;color:#38bdf8;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> {t_name}{sub_text}</a>'
+        links_html += '<span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div>'
+        
+        actions = '<div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'
+        if ggb:
+            actions += f'<button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, \'{ggb}\')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button>'
+            actions += f'<a href="{ggb}" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a>'
+        if algeo:
+            actions += f'<a href="{algeo}" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a>'
+        if pdf:
+            actions += f'<a href="{pdf}#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a>'
+        if yt:
+            actions += f'<a href="{yt}" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a>'
+        if u:
+            actions += f'<a href="{u}" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>'
+        actions += '</div>'
+        links_html += actions
+        if ggb:
+            links_html += '<div class="min-ggb-frame-wrap"></div>'
+        links_html += '</div>'
+        
+    links_html += '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px">'
+    links_html += '<a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a>'
+    links_html += '<a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 민은기 선생님의 수학자료실 메인 (3,400+ 주제) ↗</a>'
+    links_html += '</div></div>'
+    return tip_html + "\n" + links_html
+
+def get_visual_tip(problem_title, matched_items=None):
+    """문제 주제에 맞는 민은기 선생님의 '프레임별 시각적 증명' 심층 분석 디딤돌 팁 (관련 자료 바로가기 링크 포함)"""
+    if not matched_items:
+        matched_items = match_materials(problem_title, limit=4)
+    tip_text = _get_visual_tip_text(problem_title)
+    return _append_visual_links(tip_text, matched_items)
 
 def generate_addon_card_html(materials, problem_title=""):
     """퀴즈 화면에 삽입되는 min7014 추가 자료 카드 HTML 생성"""
