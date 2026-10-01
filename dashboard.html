@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>실시간 수업 대시보드 · min7014 mathedu (대한민국의 수학교사 민은기 연구실)</title>
+<title data-i18n="dashboard.pageTitle">실시간 수업 대시보드 · min7014 mathedu (대한민국의 수학교사 민은기 연구실)</title>
 <meta name="author" content="민은기 (Min Eun-gi)">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -482,7 +482,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
     </a>
     <a class="tbtn" href="./" data-i18n="dashboard.backHome">← 메인 홈</a>
     <button class="tbtn" onclick="fetchData()" data-i18n="dashboard.refresh">🔄 새로고침</button>
-    <button class="tbtn btn-active" id="btnToggleAnon" onclick="toggleAnonymous()" style="display:none;background:rgba(56,189,248,.18);border-color:#38bdf8;color:#7cc4ff">🔒 학생 익명 보호(stu1~): ON</button>
+    <button class="tbtn btn-active" id="btnToggleAnon" onclick="toggleAnonymous()" style="display:none;background:rgba(56,189,248,.18);border-color:#38bdf8;color:#7cc4ff" data-i18n="dashboard.anonOn">🔒 학생 익명 보호 (칠판 모드)</button>
     <button class="tbtn" onclick="exportCsv()" data-i18n="dashboard.exportCsv">📥 성적표 엑셀(CSV) 저장</button>
     <div class="live-badge"><span class="live-dot"></span> <span data-i18n="dashboard.liveSync">3초 실시간 갱신 중</span></div>
 
@@ -502,74 +502,74 @@ tr:hover td { background: rgba(124,196,255,.06); }
 
   <!-- 교사용 빠른 배포 액션 바 -->
   <div class="action-bar" id="roomActionBar" style="display:none">
-    <span style="font-weight:700;color:var(--accent);font-size:.9rem">수업 배포 도구:</span>
-    <button class="btn" id="btnProjector">🖥️ 칠판 빔프로젝터 QR 띄우기</button>
-    <button class="btn btn-sec" id="btnCopyStudentLink">📋 학생 참여 링크 복사</button>
-    <button class="btn btn-sec" id="btnActionProjectorAnon" onclick="toggleAnonymous()">🖥️ 칠판 프로젝터 모드 (stu1~ 전환)</button>
-    <button class="btn btn-sec" onclick="location.href='dashboard.html'">🌐 전체 수업 모아보기</button>
+    <span style="font-weight:700;color:var(--accent);font-size:.9rem" data-i18n="dashboard.toolsLabel">수업 배포 도구:</span>
+    <button class="btn" id="btnProjector" data-i18n="dashboard.btnProjector">🖥️ 칠판 빔프로젝터 QR 띄우기</button>
+    <button class="btn btn-sec" id="btnCopyStudentLink" data-i18n="dashboard.btnCopyStudentLink">📋 학생 참여 링크 복사</button>
+    <button class="btn btn-sec" id="btnActionProjectorAnon" onclick="toggleAnonymous()" data-i18n="dashboard.btnActionProjectorAnon">🖥️ 칠판 프로젝터 모드 (stu1~ 전환)</button>
+    <button class="btn btn-sec" onclick="location.href='dashboard.html'" data-i18n="dashboard.btnViewAllClasses">🌐 전체 수업 모아보기</button>
   </div>
 
   <!-- 핵심 통계 카드 -->
   <div class="stats-grid">
     <div class="stat-card">
       <div class="num" id="statTotalStudents">-</div>
-      <div class="lbl">👥 총 참여 학생</div>
+      <div class="lbl" data-i18n="dashboard.statTotal">👥 총 참여 학생</div>
     </div>
     <div class="stat-card">
       <div class="num" id="statCompleted">-</div>
-      <div class="lbl">🏆 완주 학생 (완주율)</div>
+      <div class="lbl" data-i18n="dashboard.statCompleted">🏆 완주 학생 (완주율)</div>
     </div>
     <div class="stat-card">
       <div class="num" id="statAvgScore">-</div>
-      <div class="lbl">📈 반 평균 정답률</div>
+      <div class="lbl" data-i18n="dashboard.statAvgScore">📈 반 평균 정답률</div>
     </div>
     <div class="stat-card">
       <div class="num" id="statActiveNow">-</div>
-      <div class="lbl">🟢 현재 풀이 중 (최근 활동)</div>
+      <div class="lbl" data-i18n="dashboard.statActiveNow">🟢 현재 풀이 중 (최근 활동)</div>
     </div>
   </div>
 
   <!-- 🔒 실시간 학생 개인정보 보호 배너 & 실명 모드 전환 경고 바 -->
   <div id="privacyShieldBanner" class="privacy-shield-banner">
     <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--good)">
-      <span>🔒 학생 개인정보 보호 모드 가동</span>
-      <span class="privacy-badge">stu1, stu2... 자동 순차 부여</span>
+      <span data-i18n="dashboard.shieldActiveTitle">🔒 학생 개인정보 보호 모드 가동</span>
+      <span class="privacy-badge" data-i18n="dashboard.shieldActiveBadge">stu1, stu2... 자동 순차 부여</span>
     </div>
-    <div style="font-size:0.86rem;color:#cbd5e1">
-      실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다.
+    <div style="font-size:0.86rem;color:#cbd5e1" data-i18n-html="dashboard.shieldActiveDesc">
+      실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다. (정식회원이 로그인하여 개설한 자기 수업에서만 실명 확인 및 익명 보호 전환이 가능합니다)
     </div>
   </div>
 
   <div id="realnameWarningBar" class="warning-realname-bar" style="display:none">
-    <div>⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!</div>
-    <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#ef4444;color:#fff;border:none">🔒 즉시 stu1 익명 모드로 전환</button>
+    <div id="realnameWarningText" data-i18n="dashboard.teacherWarnMsgGeneral">⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!</div>
+    <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#ef4444;color:#fff;border:none" data-i18n="dashboard.btnSwitchProjAnon">🔒 즉시 stu1 익명 모드로 전환</button>
   </div>
 
   <!-- 필터 & 뷰 전환 -->
   <div class="filter-row">
     <select id="roomFilterSelect" onchange="onRoomSelectChange(this.value)">
-      <option value="">모든 수업 (전체 보기)</option>
+      <option value="" data-i18n="dashboard.allRooms">모든 수업 (전체 보기)</option>
     </select>
     <select id="quizFilterSelect" onchange="applyFilters()">
-      <option value="">모든 퀴즈</option>
+      <option value="" data-i18n="dashboard.allQuizzes">모든 퀴즈</option>
     </select>
-    <input type="text" id="nameFilterInput" placeholder="학생 ID (stu1, stu2...) 또는 이름 검색..." oninput="applyFilters()">
+    <input type="text" id="nameFilterInput" placeholder="학생 ID (stu1, stu2...) 또는 이름 검색..." data-i18n-placeholder="dashboard.searchPlaceholder" oninput="applyFilters()">
     <div class="tab-switch">
-      <button class="tab-btn active" id="btnTabCard" onclick="switchView('card')">📇 카드 뷰</button>
-      <button class="tab-btn" id="btnTabTable" onclick="switchView('table')">📋 테이블 뷰</button>
+      <button class="tab-btn active" id="btnTabCard" onclick="switchView('card')" data-i18n="dashboard.tabCard">📇 카드 뷰</button>
+      <button class="tab-btn" id="btnTabTable" onclick="switchView('table')" data-i18n="dashboard.tabTable">📋 테이블 뷰</button>
     </div>
   </div>
 
   <!-- 데이터 컨테이너 -->
   <div id="loading" style="text-align:center;padding:50px 0">
     <div class="spin"></div>
-    <p style="color:var(--sub)">실시간 데이터를 불러오는 중...</p>
+    <p style="color:var(--sub)" data-i18n="dashboard.loadingText">실시간 데이터를 불러오는 중...</p>
   </div>
 
   <div id="emptyView" class="empty-box" style="display:none">
     <div style="font-size:2.5rem;margin-bottom:10px">📝</div>
-    <div style="font-size:1.1rem;font-weight:700;margin-bottom:6px">아직 풀이를 시작한 학생이 없습니다.</div>
-    <p style="color:var(--sub);font-size:.9rem">학생들에게 링크나 QR 코드를 공유하면 이곳에 실시간으로 나타납니다.</p>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:6px" data-i18n="dashboard.emptyTitle">아직 풀이를 시작한 학생이 없습니다.</div>
+    <p style="color:var(--sub);font-size:.9rem" data-i18n="dashboard.emptyDesc">학생들에게 링크나 QR 코드를 공유하면 이곳에 실시간으로 나타납니다.</p>
   </div>
 
   <!-- 카드 그리드 뷰 -->
@@ -580,14 +580,14 @@ tr:hover td { background: rgba(124,196,255,.06); }
     <table>
       <thead>
         <tr>
-          <th id="thStudentCol">학생 ID (익명 stu)</th>
-          <th>수업(방)</th>
-          <th>퀴즈</th>
-          <th>진행 단계</th>
-          <th>맞힌 문항</th>
-          <th>정답률</th>
-          <th>상태</th>
-          <th>마지막 활동</th>
+          <th id="thStudentCol" data-i18n="dashboard.thStudentAnon">학생 ID (익명 stu)</th>
+          <th data-i18n="dashboard.thRoom">수업(방)</th>
+          <th data-i18n="dashboard.thQuiz">퀴즈</th>
+          <th data-i18n="dashboard.thStep">진행 단계</th>
+          <th data-i18n="dashboard.thCorrect">맞힌 문항</th>
+          <th data-i18n="dashboard.thAccuracy">정답률</th>
+          <th data-i18n="dashboard.thStatus">상태</th>
+          <th data-i18n="dashboard.thLastActive">마지막 활동</th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
@@ -597,6 +597,19 @@ tr:hover td { background: rgba(124,196,255,.06); }
 
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbypyb4LXL-Jx6PhKhLSklRsBAvKQBcMxIOhkukH4gMV-yKmOt0KtPrpLS9XxBy8FHXXZg/exec';
+
+function t(key, params) {
+  if (window.MatheduI18n && typeof window.MatheduI18n.t === 'function') {
+    let str = window.MatheduI18n.t(key);
+    if (params && typeof str === 'string') {
+      for (const k in params) {
+        str = str.replace(new RegExp('\\{' + k + '\\}', 'g'), params[k]);
+      }
+    }
+    return str;
+  }
+  return key;
+}
 
 let rawData = [];
 let isAnonymous = true; // 🔒 타인 수업/공개 대시보드 기본값: stu1, stu2... 익명 보호
@@ -698,12 +711,22 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(fetchData, 3500);
 });
 
-// 회원 로그인 상태 변경 시 UI 자동 갱신
+// 회원 로그인 상태 및 언어 변경 시 UI 자동 갱신
 window.addEventListener('mathedu:auth-changed', () => {
   setupRoomHeader();
   updateAnonUI();
   render();
 });
+window.addEventListener('mathedu:lang-changed', () => {
+  setupRoomHeader();
+  updateAnonUI();
+  render();
+});
+window.onMatheduLanguageChange = () => {
+  setupRoomHeader();
+  updateAnonUI();
+  render();
+};
 
 function setupRoomHeader() {
   const bannerContainer = document.getElementById('roomBadgeContainer');
@@ -714,14 +737,14 @@ function setupRoomHeader() {
   const isMine = isMyCurrentRoom();
 
   if (targetRoom) {
-    const mineBadge = isMine ? ' <span class="badge-my-class">👑 내가 개설한 수업 (실명 표시 중)</span>' : '';
-    bannerContainer.innerHTML = `<div class="room-banner">🏫 수업 코드: <b>${escapeHtml(targetRoom)}</b>${mineBadge}</div>`;
+    const mineBadge = isMine ? ` <span class="badge-my-class">${t('dashboard.myClassBadge')}</span>` : '';
+    bannerContainer.innerHTML = `<div class="room-banner">${t('dashboard.classCodeLabel')}<b>${escapeHtml(targetRoom)}</b>${mineBadge}</div>`;
     title.innerHTML = isMine 
-      ? `📊 [${escapeHtml(targetRoom)}] 실시간 수업 관제 센터 <span style="font-size:1.1rem;color:var(--accent2);font-weight:700">(내 수업)</span>`
-      : `📊 [${escapeHtml(targetRoom)}] 실시간 수업 관제 센터`;
+      ? `${t('dashboard.titleRoom', { room: escapeHtml(targetRoom) })} <span style="font-size:1.1rem;color:var(--accent2);font-weight:700">${t('dashboard.tagMyClass')}</span>`
+      : `${t('dashboard.titleRoom', { room: escapeHtml(targetRoom) })}`;
     sub.textContent = isMine
-      ? `선생님께서 개설하신 '${targetRoom}' 수업입니다. 학생들의 실명과 진도가 실시간 집계됩니다.`
-      : `현재 '${targetRoom}' 수업에 참여 중인 학생들의 학습 실황입니다.`;
+      ? t('dashboard.subMyRoom', { room: targetRoom })
+      : t('dashboard.subOtherRoom', { room: targetRoom });
     actionBar.style.display = 'flex';
 
     if (isMine) {
@@ -740,22 +763,22 @@ function setupRoomHeader() {
 
     document.getElementById('btnProjector').onclick = () => {
       if (window.MatheduAuth) {
-        window.MatheduAuth.requireAuth('수업 배포', () => openProjectorModal(targetRoom));
+        window.MatheduAuth.requireAuth(t('dashboard.authDeployPrompt'), () => openProjectorModal(targetRoom));
       } else {
         openProjectorModal(targetRoom);
       }
     };
     document.getElementById('btnCopyStudentLink').onclick = () => {
       if (window.MatheduAuth) {
-        window.MatheduAuth.requireAuth('수업 배포', copyCurrentStudentLink);
+        window.MatheduAuth.requireAuth(t('dashboard.authDeployPrompt'), copyCurrentStudentLink);
       } else {
         copyCurrentStudentLink();
       }
     };
   } else {
     bannerContainer.innerHTML = '';
-    title.textContent = '📊 전체 학습 현황 모니터링';
-    sub.textContent = '개설된 모든 수업 및 자율 학습 학생들의 실황입니다.';
+    title.textContent = t('dashboard.titleAll');
+    sub.textContent = t('dashboard.subAll');
     actionBar.style.display = 'none';
     isAnonymous = true;
     isProjectorMode = false;
@@ -775,11 +798,11 @@ function updatePrivacyBanner(isMine) {
       banner.style.background = 'rgba(56, 189, 248, 0.08)';
       banner.innerHTML = `
         <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:#7cc4ff">
-          <span>🖥️ 칠판 빔프로젝터 모드 가동 중</span>
-          <span class="privacy-badge">전체 학생 stu1, stu2... 익명 송출</span>
+          <span>${t('dashboard.projectorModeTitle')}</span>
+          <span class="privacy-badge">${t('dashboard.projectorModeBadge')}</span>
         </div>
         <div style="font-size:0.86rem;color:#cbd5e1">
-          현재 교실 빔프로젝터 화면에 맞춰 학생들의 이름이 <b>익명 식별자(stu1~)</b>로 송출되고 있습니다. 실명으로 다시 확인하시려면 상단 <b>[👀 실명 모드로 복귀]</b> 버튼을 누르세요.
+          ${t('dashboard.projectorModeDesc')}
         </div>
       `;
     } else {
@@ -788,11 +811,11 @@ function updatePrivacyBanner(isMine) {
       banner.style.background = 'rgba(167, 139, 250, 0.1)';
       banner.innerHTML = `
         <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--accent2)">
-          <span>👑 회원 전용 자기수업 관제 모드</span>
-          <span class="badge-my-class">실제 학생 이름 표시 중</span>
+          <span>${t('dashboard.teacherModeTitle')}</span>
+          <span class="badge-my-class">${t('dashboard.teacherModeBadge')}</span>
         </div>
         <div style="font-size:0.86rem;color:#cbd5e1">
-          선생님께서 직접 개설하신 수업(<b>${escapeHtml(targetRoom)}</b>)이므로 학생들의 <b>실제 이름</b>이 표시됩니다. 교실 빔프로젝터나 화면 공유 시에는 상단의 <b>[🔒 학생 익명 보호(칠판 모드)]</b>를 누르면 즉시 <code>stu1, stu2...</code> 로 익명 전환됩니다.
+          ${t('dashboard.teacherModeDesc', { room: escapeHtml(targetRoom) })}
         </div>
       `;
     }
@@ -802,11 +825,11 @@ function updatePrivacyBanner(isMine) {
     banner.style.background = 'rgba(94, 234, 212, 0.08)';
     banner.innerHTML = `
       <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--good)">
-        <span>🔒 학생 개인정보 보호 모드 가동</span>
-        <span class="privacy-badge">stu1, stu2... 자동 순차 부여</span>
+        <span>${t('dashboard.shieldActiveTitle')}</span>
+        <span class="privacy-badge">${t('dashboard.shieldActiveBadge')}</span>
       </div>
       <div style="font-size:0.86rem;color:#cbd5e1">
-        실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다. (정식회원이 로그인하여 개설한 자기 수업에서만 실명 확인 및 익명 보호 전환이 가능합니다)
+        ${t('dashboard.shieldActiveDesc')}
       </div>
     `;
   }
@@ -826,7 +849,7 @@ async function fetchData() {
 // 데이터 파싱: student_name에서 [ROOM_ID] 추출
 function parseItems(items) {
   return items.map(item => {
-    let name = (item.student_name || '익명').toString().trim();
+    let name = (item.student_name || t('dashboard.anonymous')).toString().trim();
     let rId = (item.room_id || '').toString().trim();
     
     // name에 [ROOM_ID]가 포함되어 있는 경우 추출
@@ -918,10 +941,11 @@ function updateStats(items) {
   const now = Date.now();
   const activeNow = items.filter(it => (now - it.updated_date.getTime()) < 3 * 60 * 1000).length;
 
-  document.getElementById('statTotalStudents').textContent = total + '명';
-  document.getElementById('statCompleted').textContent = `${completed}명 (${completePct}%)`;
+  const unit = t('dashboard.unitStudents');
+  document.getElementById('statTotalStudents').textContent = total + unit;
+  document.getElementById('statCompleted').textContent = `${completed}${unit} (${completePct}%)`;
   document.getElementById('statAvgScore').textContent = avg + '%';
-  document.getElementById('statActiveNow').textContent = activeNow + '명';
+  document.getElementById('statActiveNow').textContent = activeNow + unit;
 }
 
 function renderCards(items) {
@@ -936,14 +960,14 @@ function renderCards(items) {
     if (showReal) {
       displayName = `<span style="font-weight:700;color:#fff">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
       if (isMine) {
-        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">👑 내 학생</span>`;
+        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">${t('dashboard.badgeMyStudent')}</span>`;
       }
     } else {
       displayName = `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>`;
     }
 
     const statusClass = it.is_done ? 'status-done' : (isRecent(it.updated_date) ? 'status-active' : 'status-wait');
-    const statusText = it.is_done ? '🎉 풀이 완료' : (isRecent(it.updated_date) ? '🟢 풀이 중' : '⏳ 대기');
+    const statusText = it.is_done ? t('dashboard.statusDone') : (isRecent(it.updated_date) ? t('dashboard.statusSolving') : t('dashboard.statusWait'));
     const timeAgo = formatTimeAgo(it.updated_date);
 
     html += `
@@ -953,19 +977,19 @@ function renderCards(items) {
           <span class="s-status ${statusClass}">${statusText}</span>
         </div>
         <div style="font-size:.82rem;color:var(--sub)">
-          퀴즈: <code>${escapeHtml(it.quiz_slug)}</code>
-          ${it.parsed_room ? `· 방: <b>${escapeHtml(it.parsed_room)}</b>` : ''}
+          ${t('dashboard.thQuiz')}: <code>${escapeHtml(it.quiz_slug)}</code>
+          ${it.parsed_room ? `· ${t('dashboard.thRoom')}: <b>${escapeHtml(it.parsed_room)}</b>` : ''}
         </div>
         <div class="s-bar-wrap">
           <div class="s-bar" style="width: ${it.progressPct}%"></div>
         </div>
         <div class="s-meta">
-          <span>진도: <b>${it.current_step}/${it.total_steps}</b>단계</span>
+          <span>${t('dashboard.stepLabel')}<b>${it.current_step}/${it.total_steps}</b>${t('dashboard.stepUnit')}</span>
           <span style="color:${it.pct >= 80 ? 'var(--good)' : (it.pct >= 50 ? 'var(--gold)' : 'var(--bad)')}">
-            점수: <b>${it.correct}</b> (${it.pct}%)
+            ${t('dashboard.scoreLabel')}<b>${it.correct}</b> (${it.pct}%)
           </span>
         </div>
-        <div class="s-time">활동: ${timeAgo}</div>
+        <div class="s-time">${t('dashboard.activeLabel')}${timeAgo}</div>
       </div>
     `;
   });
@@ -980,9 +1004,9 @@ function renderTable(items) {
 
   if (thStudentCol) {
     if (isCurrentRoomMine && !isProjectorMode) {
-      thStudentCol.textContent = '학생 실명 (식별 ID)';
+      thStudentCol.textContent = t('dashboard.thStudentReal');
     } else {
-      thStudentCol.textContent = '학생 ID (익명 stu)';
+      thStudentCol.textContent = t('dashboard.thStudentAnon');
     }
   }
   let html = '';
@@ -995,23 +1019,25 @@ function renderTable(items) {
     if (showReal) {
       displayName = `<span style="font-weight:700">${escapeHtml(it.parsed_name)}</span> <span class="stu-sub-badge">${escapeHtml(it.stu_id)}</span>`;
       if (isMine) {
-        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">👑 내 학생</span>`;
+        displayName += ` <span class="badge-my-class" style="font-size:0.7rem;padding:2px 7px;vertical-align:middle">${t('dashboard.badgeMyStudent')}</span>`;
       }
     } else {
       displayName = `<span class="stu-badge">${escapeHtml(it.stu_id)}</span>`;
     }
 
     const pillClass = it.pct >= 80 ? 'pill-high' : (it.pct >= 50 ? 'pill-mid' : 'pill-low');
+    const correctText = t('dashboard.correctCount', { n: it.correct });
+    const statusText = it.is_done ? `<span style="color:var(--good);font-weight:700">${t('dashboard.statusCompletedText')}</span>` : t('dashboard.statusInProgressText');
 
     html += `
       <tr ${isMine ? 'style="background:rgba(167,139,250,.06)"' : ''}>
         <td>${displayName}</td>
-        <td>${it.parsed_room ? `<span class="pill pill-high">${escapeHtml(it.parsed_room)}</span>` : '<span style="color:var(--sub)">자율학습</span>'}</td>
+        <td>${it.parsed_room ? `<span class="pill pill-high">${escapeHtml(it.parsed_room)}</span>` : `<span style="color:var(--sub)">${t('dashboard.selfStudy')}</span>`}</td>
         <td><code>${escapeHtml(it.quiz_slug)}</code></td>
         <td><b>${it.current_step}</b> / ${it.total_steps}</td>
-        <td>${it.correct}개 정답</td>
+        <td>${correctText}</td>
         <td><span class="pill ${pillClass}">${it.pct}%</span></td>
-        <td>${it.is_done ? '<span style="color:var(--good);font-weight:700">완료</span>' : '진행중'}</td>
+        <td>${statusText}</td>
         <td style="color:var(--sub);font-size:.82rem">${formatTimeAgo(it.updated_date)}</td>
       </tr>
     `;
@@ -1027,18 +1053,19 @@ function updateSelectOptions(items) {
   const rooms = Array.from(new Set(items.map(it => it.parsed_room).filter(Boolean))).sort();
   const quizzes = Array.from(new Set(items.map(it => it.quiz_slug).filter(Boolean))).sort();
 
-  const prevRoom = roomSelect.value;
+  const prevRoom = targetRoom || roomSelect.value;
   const prevQuiz = quizSelect.value;
 
-  if (roomSelect.options.length <= 1) {
-    rooms.forEach(r => {
-      const opt = document.createElement('option');
-      opt.value = r;
-      opt.textContent = `🏫 ${r} 수업`;
-      if (r === targetRoom || r === prevRoom) opt.selected = true;
-      roomSelect.appendChild(opt);
-    });
+  while (roomSelect.options.length > 1) {
+    roomSelect.remove(1);
   }
+  rooms.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r;
+    opt.textContent = `🏫 ${r}${t('dashboard.roomOptionSuffix')}`;
+    if (r === prevRoom) opt.selected = true;
+    roomSelect.appendChild(opt);
+  });
 
   if (quizSelect.options.length <= 1) {
     quizzes.forEach(q => {
@@ -1102,12 +1129,12 @@ function updateAnonUI() {
       // 정식회원이 자신의 수업에 대하여만 학생익명보호 버튼 노출!
       btn.style.display = 'inline-flex';
       if (isProjectorMode) {
-        btn.innerHTML = '👀 실명 모드로 복귀 (내 수업)';
+        btn.innerHTML = t('dashboard.anonOff');
         btn.style.borderColor = '#a78bfa';
         btn.style.color = '#c4b5fd';
         btn.style.background = 'rgba(167,139,250,.2)';
       } else {
-        btn.innerHTML = '🔒 학생 익명 보호 (칠판 모드)';
+        btn.innerHTML = t('dashboard.anonOn');
         btn.style.borderColor = '#38bdf8';
         btn.style.color = '#7cc4ff';
         btn.style.background = 'rgba(56,189,248,.18)';
@@ -1122,12 +1149,12 @@ function updateAnonUI() {
     if (isMine) {
       btnAction.style.display = 'inline-block';
       if (isProjectorMode) {
-        btnAction.innerHTML = '👀 실명 모드로 복귀';
+        btnAction.innerHTML = t('dashboard.btnActionProjectorReal');
         btnAction.style.borderColor = '#a78bfa';
         btnAction.style.color = '#c4b5fd';
         btnAction.style.background = 'rgba(167,139,250,.25)';
       } else {
-        btnAction.innerHTML = '🖥️ 칠판 프로젝터 모드 (stu1~ 전환)';
+        btnAction.innerHTML = t('dashboard.btnActionProjectorAnon');
         btnAction.style.borderColor = '#38bdf8';
         btnAction.style.color = '#7cc4ff';
         btnAction.style.background = 'rgba(56,189,248,.18)';
@@ -1141,9 +1168,11 @@ function updateAnonUI() {
     if (isMine) {
       if (!isProjectorMode) {
         warn.style.display = 'flex';
+        const warnText = t('dashboard.teacherWarnMsg', { room: escapeHtml(targetRoom) });
+        const btnText = t('dashboard.btnSwitchProjAnon');
         warn.innerHTML = `
-          <div>👑 <b>[${escapeHtml(targetRoom)}]</b> 교사 실명 관제 모드입니다. 칠판/빔프로젝터 화면 송출 시 아래 버튼으로 익명 전환하세요.</div>
-          <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#38bdf8;color:#0b1020;border:none;font-weight:700">🖥️ 칠판 프로젝터 익명(stu1~) 전환</button>
+          <div>${warnText}</div>
+          <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#38bdf8;color:#0b1020;border:none;font-weight:700">${btnText}</button>
         `;
       } else {
         warn.style.display = 'none';
@@ -1162,33 +1191,44 @@ function exportCsv() {
   const filtered = filterData(parsed);
 
   if (filtered.length === 0) {
-    alert('내보낼 데이터가 없습니다.');
+    alert(t('dashboard.alertNoData'));
     return;
   }
 
   const isCurrentRoomMine = isMyCurrentRoom();
   const allowReal = !isProjectorMode && isCurrentRoomMine;
+  const isEn = (typeof MatheduI18n !== 'undefined' && MatheduI18n.getLanguage && MatheduI18n.getLanguage() === 'en');
 
   // UTF-8 BOM(\uFEFF) 추가하여 엑셀 한글 깨짐 방지
-  let csv = allowReal
-    ? '\uFEFF학생실명,학생식별ID,수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간,내수업구분\n'
-    : '\uFEFF학생ID(익명),수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n';
+  let csv = '';
+  if (isEn) {
+    csv = allowReal
+      ? '\uFEFF"Student Name","Student ID","Class Code","Quiz Code","Current Step","Total Steps","Correct","Score (%)","Status","Last Active","Class Type"\n'
+      : '\uFEFF"Student ID (Anon)","Class Code","Quiz Code","Current Step","Total Steps","Correct","Score (%)","Status","Last Active"\n';
+  } else {
+    csv = allowReal
+      ? '\uFEFF학생실명,학생식별ID,수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간,내수업구분\n'
+      : '\uFEFF학생ID(익명),수업코드,퀴즈코드,진행단계,총단계,맞힌문항,정답률(%),완료여부,최종활동시간\n';
+  }
 
   filtered.forEach(it => {
     const showReal = shouldShowRealName(it);
     const isMine = it.parsed_room && isMyRoom(it.parsed_room);
+    const statusLabel = it.is_done ? (isEn ? 'Completed' : '완료') : (isEn ? 'In Progress' : '진행중');
+    const classTypeLabel = isMine ? (isEn ? 'My Class' : '내수업') : (isEn ? 'Standard' : '일반');
+
     if (allowReal) {
       const sReal = showReal ? it.parsed_name : it.stu_id;
-      csv += `"${sReal}","${it.stu_id}","${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${it.is_done ? '완료' : '진행중'}","${it.updated_at}","${isMine ? '내수업' : '일반'}"\n`;
+      csv += `"${sReal}","${it.stu_id}","${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${statusLabel}","${it.updated_at}","${classTypeLabel}"\n`;
     } else {
-      csv += `"${it.stu_id}","${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${it.is_done ? '완료' : '진행중'}","${it.updated_at}"\n`;
+      csv += `"${it.stu_id}","${it.parsed_room}","${it.quiz_slug}",${it.current_step},${it.total_steps},${it.correct},${it.pct},"${statusLabel}","${it.updated_at}"\n`;
     }
   });
 
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const filename = `${targetRoom ? targetRoom + '_' : ''}mathedu_성적표_${allowReal ? '실명_' : '익명_stu_'}${new Date().toISOString().slice(0,10)}.csv`;
+  const filename = `${targetRoom ? targetRoom + '_' : ''}mathedu_${isEn ? 'report' : '성적표'}_${allowReal ? (isEn ? 'realname_' : '실명_') : (isEn ? 'anon_stu_' : '익명_stu_')}${new Date().toISOString().slice(0,10)}.csv`;
   a.href = url;
   a.download = filename;
   document.body.appendChild(a);
@@ -1203,7 +1243,7 @@ function copyCurrentStudentLink() {
   navigator.clipboard.writeText(url).then(() => {
     const btn = document.getElementById('btnCopyStudentLink');
     const prev = btn.textContent;
-    btn.textContent = '✅ 복사 완료!';
+    btn.textContent = t('dashboard.btnCopied');
     setTimeout(() => { btn.textContent = prev; }, 1500);
   });
 }
@@ -1217,10 +1257,10 @@ function openProjectorModal(rId) {
   modal.className = 'projector-modal';
   modal.id = 'projectorModal';
   modal.innerHTML = `
-    <button onclick="document.getElementById('projectorModal').remove()" style="position:absolute;top:20px;right:24px;background:#222a3d;color:#fff;border:1px solid #2e3850;padding:10px 20px;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:700">✕ 칠판 뷰 닫기</button>
-    <div style="background:rgba(124,196,255,.2);color:#7cc4ff;border:1px solid rgba(124,196,255,.4);border-radius:30px;padding:8px 24px;font-size:1.2rem;font-weight:800;margin-bottom:16px">🏫 수업 코드: ${escapeHtml(rId)}</div>
-    <h1 style="font-size:2.6rem;margin-bottom:10px;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">스마트폰 카메라로 QR 코드를 스캔하세요!</h1>
-    <p style="color:#9aa6c0;font-size:1.2rem;margin-bottom:28px">회원가입 없이 즉시 참여할 수 있습니다.</p>
+    <button onclick="document.getElementById('projectorModal').remove()" style="position:absolute;top:20px;right:24px;background:#222a3d;color:#fff;border:1px solid #2e3850;padding:10px 20px;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:700">${t('dashboard.modalClose')}</button>
+    <div style="background:rgba(124,196,255,.2);color:#7cc4ff;border:1px solid rgba(124,196,255,.4);border-radius:30px;padding:8px 24px;font-size:1.2rem;font-weight:800;margin-bottom:16px">${t('dashboard.classCodeLabel')}${escapeHtml(rId)}</div>
+    <h1 style="font-size:2.6rem;margin-bottom:10px;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">${t('dashboard.modalScanQr')}</h1>
+    <p style="color:#9aa6c0;font-size:1.2rem;margin-bottom:28px">${t('dashboard.modalInstantJoin')}</p>
     <div style="background:#fff;padding:16px;border-radius:24px;box-shadow:0 0 60px rgba(124,196,255,.4);margin-bottom:24px">
       <img src="${qrBig}" style="width:340px;height:340px;display:block" alt="QR">
     </div>
@@ -1235,13 +1275,13 @@ function isRecent(d) {
 
 function formatTimeAgo(d) {
   const diffSec = Math.floor((Date.now() - d.getTime()) / 1000);
-  if (diffSec < 15) return '방금 전';
-  if (diffSec < 60) return `${diffSec}초 전`;
+  if (diffSec < 15) return t('dashboard.timeJustNow');
+  if (diffSec < 60) return t('dashboard.timeSecAgo', { n: diffSec });
   const diffMin = Math.floor(diffSec / 60);
-  if (diffMin < 60) return `${diffMin}분 전`;
+  if (diffMin < 60) return t('dashboard.timeMinAgo', { n: diffMin });
   const diffHr = Math.floor(diffMin / 60);
-  if (diffHr < 24) return `${diffHr}시간 전`;
-  return `${Math.floor(diffHr / 24)}일 전`;
+  if (diffHr < 24) return t('dashboard.timeHourAgo', { n: diffHr });
+  return t('dashboard.timeDayAgo', { n: Math.floor(diffHr / 24) });
 }
 
 function escapeHtml(s) {

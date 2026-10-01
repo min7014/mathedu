@@ -189,14 +189,88 @@
         subjectCommon1: "공통수학"
       },
       dashboard: {
-        backHome: "🏠 mathedu 홈",
+        backHome: "← 메인 홈",
         refresh: "🔄 새로고침",
-        anonOn: "🛡️ 학생 익명 보호(stu1~): ON",
-        anonOff: "👤 실명 모드: ON",
-        exportCsv: "📊 채점표(CSV) 저장",
-        liveSync: "3초 실시간 자동 동기화",
+        anonOn: "🔒 학생 익명 보호 (칠판 모드)",
+        anonOff: "👀 실명 모드로 복귀 (내 수업)",
+        exportCsv: "📥 성적표 엑셀(CSV) 저장",
+        liveSync: "3초 실시간 갱신 중",
         title: "📊 실시간 수업 모니터링 대시보드",
-        subtitle: "학생들의 실시간 디딤돌 풀이 진행 상황 및 성취도 관제"
+        subtitle: "학생들의 실시간 퀴즈 풀이 진행 현황 및 성취도 관제",
+        toolsLabel: "수업 배포 도구:",
+        btnProjector: "🖥️ 칠판 빔프로젝터 QR 띄우기",
+        btnCopyStudentLink: "📋 학생 참여 링크 복사",
+        btnCopied: "✅ 복사 완료!",
+        btnActionProjectorAnon: "🖥️ 칠판 프로젝터 모드 (stu1~ 전환)",
+        btnActionProjectorReal: "👀 실명 모드로 복귀",
+        btnViewAllClasses: "🌐 전체 수업 모아보기",
+        statTotal: "👥 총 참여 학생",
+        statCompleted: "🏆 완주 학생 (완주율)",
+        statAvgScore: "📈 반 평균 정답률",
+        statActiveNow: "🟢 현재 풀이 중 (최근 활동)",
+        unitStudents: "명",
+        shieldActiveTitle: "🔒 학생 개인정보 보호 모드 가동",
+        shieldActiveBadge: "stu1, stu2... 자동 순차 부여",
+        shieldActiveDesc: "실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다. (정식회원이 로그인하여 개설한 자기 수업에서만 실명 확인 및 익명 보호 전환이 가능합니다)",
+        teacherModeTitle: "👑 회원 전용 자기수업 관제 모드",
+        teacherModeBadge: "실제 학생 이름 표시 중",
+        teacherModeDesc: "선생님께서 직접 개설하신 수업(<b>{room}</b>)이므로 학생들의 <b>실제 이름</b>이 표시됩니다. 교실 빔프로젝터나 화면 공유 시에는 상단의 <b>[🔒 학생 익명 보호 (칠판 모드)]</b>를 누르면 즉시 <code>stu1, stu2...</code> 로 익명 전환됩니다.",
+        projectorModeTitle: "🖥️ 칠판 빔프로젝터 모드 가동 중",
+        projectorModeBadge: "전체 학생 stu1, stu2... 익명 송출",
+        projectorModeDesc: "현재 교실 빔프로젝터 화면에 맞춰 학생들의 이름이 <b>익명 식별자(stu1~)</b>로 송출되고 있습니다. 실명으로 다시 확인하시려면 상단 <b>[👀 실명 모드로 복귀]</b> 버튼을 누르세요.",
+        teacherWarnMsg: "👑 <b>[{room}]</b> 교사 실명 관제 모드입니다. 칠판/빔프로젝터 화면 송출 시 아래 버튼으로 익명 전환하세요.",
+        btnSwitchProjAnon: "🖥️ 칠판 프로젝터 익명(stu1~) 전환",
+        classCodeLabel: "🏫 수업 코드: ",
+        myClassBadge: "👑 내가 개설한 수업 (실명 표시 중)",
+        titleAll: "📊 전체 학습 현황 모니터링",
+        subAll: "개설된 모든 수업 및 자율 학습 학생들의 실황입니다.",
+        titleRoom: "📊 [{room}] 실시간 수업 관제 센터",
+        tagMyClass: "(내 수업)",
+        subMyRoom: "선생님께서 개설하신 '{room}' 수업입니다. 학생들의 실명과 진도가 실시간 집계됩니다.",
+        subOtherRoom: "현재 '{room}' 수업에 참여 중인 학생들의 학습 실황입니다.",
+        allRooms: "모든 수업 (전체 보기)",
+        allQuizzes: "모든 퀴즈",
+        roomOptionSuffix: " 수업",
+        searchPlaceholder: "학생 ID (stu1, stu2...) 또는 이름 검색...",
+        tabCard: "📇 카드 뷰",
+        tabTable: "📋 테이블 뷰",
+        loadingText: "실시간 데이터를 불러오는 중...",
+        emptyTitle: "아직 풀이를 시작한 학생이 없습니다.",
+        emptyDesc: "학생들에게 링크나 QR 코드를 공유하면 이곳에 실시간으로 나타납니다.",
+        thStudentReal: "학생 실명 (식별 ID)",
+        thStudentAnon: "학생 ID (익명 stu)",
+        thRoom: "수업(방)",
+        thQuiz: "퀴즈",
+        thStep: "진행 단계",
+        thCorrect: "맞힌 문항",
+        thAccuracy: "정답률",
+        thStatus: "상태",
+        thLastActive: "마지막 활동",
+        badgeMyStudent: "👑 내 학생",
+        statusDone: "🎉 풀이 완료",
+        statusSolving: "🟢 풀이 중",
+        statusWait: "⏳ 대기",
+        stepLabel: "진도: ",
+        stepUnit: "단계",
+        scoreLabel: "점수: ",
+        activeLabel: "활동: ",
+        selfStudy: "자율학습",
+        correctCount: "{n}개 정답",
+        statusCompletedText: "완료",
+        statusInProgressText: "진행중",
+        timeJustNow: "방금 전",
+        timeSecAgo: "{n}초 전",
+        timeMinAgo: "{n}분 전",
+        timeHourAgo: "{n}시간 전",
+        timeDayAgo: "{n}일 전",
+        modalClose: "✕ 칠판 뷰 닫기",
+        modalScanQr: "스마트폰 카메라로 QR 코드를 스캔하세요!",
+        modalInstantJoin: "회원가입 없이 즉시 참여할 수 있습니다.",
+        alertNoData: "내보낼 데이터가 없습니다.",
+        pageTitle: "실시간 수업 대시보드 · min7014 mathedu (대한민국의 수학교사 민은기 연구실)",
+        teacherWarnMsgGeneral: "⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!",
+        authDeployPrompt: "수업 배포",
+        anonymous: "익명"
       }
     },
     en: {
@@ -379,14 +453,88 @@
         subjectCommon1: "Common Math"
       },
       dashboard: {
-        backHome: "🏠 mathedu Home",
+        backHome: "← Main Home",
         refresh: "🔄 Refresh",
-        anonOn: "🛡️ Privacy Shield (stu1~): ON",
-        anonOff: "👤 Real Name Mode: ON",
-        exportCsv: "📊 Export Results (CSV)",
-        liveSync: "Live 3-sec Auto-sync",
+        anonOn: "🔒 Privacy Shield (Projector Mode)",
+        anonOff: "👀 Return to Real Names (My Class)",
+        exportCsv: "📥 Export Results (CSV)",
+        liveSync: "3s Live Auto-Sync",
         title: "📊 Real-Time Classroom Monitor Dashboard",
-        subtitle: "Monitor student scaffolding step progress and mastery in real time"
+        subtitle: "Monitor student scaffolding quiz progress and mastery in real time",
+        toolsLabel: "Class Tools:",
+        btnProjector: "🖥️ Projector Screen & QR",
+        btnCopyStudentLink: "📋 Copy Student Join Link",
+        btnCopied: "✅ Copied!",
+        btnActionProjectorAnon: "🖥️ Projector Mode (stu1~)",
+        btnActionProjectorReal: "👀 Return to Real Names",
+        btnViewAllClasses: "🌐 View All Classes",
+        statTotal: "👥 Total Students",
+        statCompleted: "🏆 Completed (Rate)",
+        statAvgScore: "📈 Class Average Accuracy",
+        statActiveNow: "🟢 Currently Solving (Active)",
+        unitStudents: " students",
+        shieldActiveTitle: "🔒 Student Privacy Shield Active",
+        shieldActiveBadge: "stu1, stu2... Pseudonyms",
+        shieldActiveDesc: "To prevent student identity exposure on shared classroom displays, pseudonyms <b>stu1, stu2, stu3...</b> are automatically assigned in join order. (Real names and privacy controls are only accessible to authenticated teachers in their own classes.)",
+        teacherModeTitle: "👑 Teacher Classroom Command Mode",
+        teacherModeBadge: "Displaying Real Student Names",
+        teacherModeDesc: "As the creator of class (<b>{room}</b>), real student names are displayed. For classroom projection or screen sharing, click <b>[🔒 Privacy Shield (Projector Mode)]</b> above to anonymize names to <code>stu1, stu2...</code> immediately.",
+        projectorModeTitle: "🖥️ Classroom Projector Mode Active",
+        projectorModeBadge: "All Students stu1, stu2... Anonymized",
+        projectorModeDesc: "Student names are displayed as anonymous identifiers (stu1~) for classroom projector display. To view real names again, click <b>[👀 Return to Real Names]</b> above.",
+        teacherWarnMsg: "👑 <b>[{room}]</b> Teacher Real Name Mode. Switch to anonymity below before projecting screen.",
+        btnSwitchProjAnon: "🖥️ Switch to Projector Privacy (stu1~)",
+        classCodeLabel: "🏫 Class Code: ",
+        myClassBadge: "👑 My Created Class (Showing Real Names)",
+        titleAll: "📊 Live Classroom Monitoring",
+        subAll: "Real-time activity across all active classes and independent learners.",
+        titleRoom: "📊 [{room}] Live Class Command Center",
+        tagMyClass: "(My Class)",
+        subMyRoom: "Class '{room}' created by you. Real names and progress are monitored in real time.",
+        subOtherRoom: "Real-time learning activity for students participating in '{room}'.",
+        allRooms: "All Classes (Show All)",
+        allQuizzes: "All Quizzes",
+        roomOptionSuffix: " Class",
+        searchPlaceholder: "Search by student ID (stu1...) or name...",
+        tabCard: "📇 Card View",
+        tabTable: "📋 Table View",
+        loadingText: "Loading real-time classroom data...",
+        emptyTitle: "No student activity yet.",
+        emptyDesc: "Share the join link or QR code with your students to see real-time progress here.",
+        thStudentReal: "Student Real Name (ID)",
+        thStudentAnon: "Student ID (Anonymous stu)",
+        thRoom: "Class Room",
+        thQuiz: "Quiz",
+        thStep: "Progress Step",
+        thCorrect: "Correct Answers",
+        thAccuracy: "Accuracy",
+        thStatus: "Status",
+        thLastActive: "Last Active",
+        badgeMyStudent: "👑 My Student",
+        statusDone: "🎉 Completed",
+        statusSolving: "🟢 Solving",
+        statusWait: "⏳ Idle",
+        stepLabel: "Step: ",
+        stepUnit: "",
+        scoreLabel: "Score: ",
+        activeLabel: "Active: ",
+        selfStudy: "Self-Study",
+        correctCount: "{n} correct",
+        statusCompletedText: "Completed",
+        statusInProgressText: "In Progress",
+        timeJustNow: "Just now",
+        timeSecAgo: "{n}s ago",
+        timeMinAgo: "{n}m ago",
+        timeHourAgo: "{n}h ago",
+        timeDayAgo: "{n}d ago",
+        modalClose: "✕ Close Projector View",
+        modalScanQr: "Scan QR Code with Smartphone Camera!",
+        modalInstantJoin: "Join instantly without signup or login.",
+        alertNoData: "No data to export.",
+        pageTitle: "Live Classroom Dashboard · min7014 mathedu",
+        teacherWarnMsgGeneral: "⚠️ Teacher Real Name Mode is active. Projecting this screen may expose student identities!",
+        authDeployPrompt: "Classroom Distribution",
+        anonymous: "Anonymous"
       }
     }
   };
@@ -469,6 +617,9 @@
     if (typeof window.onMatheduLanguageChange === 'function') {
       window.onMatheduLanguageChange(lang);
     }
+    try {
+      window.dispatchEvent(new CustomEvent('mathedu:lang-changed', { detail: { lang: lang } }));
+    } catch(e) {}
   }
 
   function applyDomTranslations() {
@@ -479,6 +630,9 @@
       var key = el.getAttribute('data-i18n');
       var val = t(key);
       if (typeof val === 'string') {
+        if (el.tagName && el.tagName.toLowerCase() === 'title') {
+          document.title = val;
+        }
         el.textContent = val;
       }
     });
@@ -513,7 +667,17 @@
       }
     });
 
-    // 5. Typeset math if needed
+    // 5. Update language switchers
+    var btns = document.querySelectorAll('[data-lang-btn]');
+    btns.forEach(function(b) {
+      if (b.getAttribute('data-lang-btn') === currentLang) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+
+    // 6. Typeset math if needed
     if (window.MathJax && MathJax.typesetPromise) {
       var mathStory = document.getElementById('mathStoryDrawer');
       if (mathStory) {
