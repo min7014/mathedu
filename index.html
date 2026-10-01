@@ -1306,20 +1306,26 @@ body {
       <div style="width:48px;height:48px;border-radius:14px;background:#fff;padding:3px;flex:0 0 48px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(56,189,248,.35)">
         <img src="assets/favicon.png" alt="min7014" style="width:100%;height:100%;object-fit:contain">
       </div>
-      <div>
+      <div style="flex:1;min-width:0">
         <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.2);border:1px solid rgba(56,189,248,.4);color:#38bdf8;padding:2px 10px;border-radius:12px;font-size:0.74rem;font-weight:800;margin-bottom:4px" data-i18n="todayGgb.tag">
           💡 오늘의 추천 동적 기하 (min7014 수학자료실)
         </div>
-        <div class="today-ggb-title" id="todayGgbTitle" data-i18n="todayGgb.title">타원에서의 빛 반사 (Reflection of Light on an Ellipse)</div>
-        <div class="today-ggb-desc" id="todayGgbDesc" data-i18n="todayGgb.desc">한 초점에서 나온 빛은 타원에 반사되어 다른 초점을 반드시 통과합니다. GeoGebra 앱렛으로 초점을 직접 끌어보며 기하학적 궤적을 확인하세요.</div>
+        <div class="today-ggb-title" id="todayGgbTitle">타원에서의 빛 반사 (광학적 성질)</div>
+        <div class="today-ggb-desc" id="todayGgbDesc">한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. GeoGebra 앱렛으로 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <button type="button" class="tbtn" id="btnNextGgb" onclick="rotateTodayGeoGebra(1)" title="다른 추천 동적 기하 탐구하기" style="padding:9px 12px;font-size:0.82rem;display:inline-flex;align-items:center;gap:4px">
+        🎲 <span data-i18n="todayGgb.btnNext">다른 추천</span>
+      </button>
       <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="btn-primary" style="padding:10px 18px;font-size:0.86rem;background:linear-gradient(90deg,#38bdf8,#818cf8)" data-i18n="todayGgb.btnApplet">
         🎮 GeoGebra로 조작하기 ➔
       </a>
       <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="tbtn" style="padding:9px 14px;font-size:0.84rem" data-i18n="todayGgb.btnPdf">
         📄 원리 증명 PDF
+      </a>
+      <a id="btnTodayGgbWeb" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener" class="tbtn" style="padding:9px 14px;font-size:0.84rem" data-i18n="todayGgb.btnWeb">
+        🌐 웹 상세 해설
       </a>
     </div>
   </div>
@@ -1866,46 +1872,152 @@ function toggleMathStory() {
     if (tabBCount) tabBCount.textContent = bookmarks.length;
   }
 
-  // 오늘의 추천 동적 기하 (min7014) 초기화
-  function initTodayGeoGebra() {
-    var picks = [
-      {
-        title: "타원에서의 빛 반사 (Reflection of Light on an Ellipse)",
-        desc: "한 초점에서 나온 빛은 타원에 반사되어 다른 초점을 반드시 통과합니다. GeoGebra 앱렛으로 타원의 장축과 초점을 직접 끌어보며 아름다운 광학적 원리를 체험하세요.",
-        applet: "https://www.geogebra.org/m/jggpufc4",
-        pdf: "https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0"
+  // ══════════════════════════════════════════════════════════════
+  // 🎲 7대 핵심 동적 기하 걸작 (min7014 100% 무결성 실시간 연계)
+  // ══════════════════════════════════════════════════════════════
+  var FEATURED_GEOGEBRA_PICKS = [
+    {
+      id: "ellipse_reflection",
+      title: {
+        ko: "타원에서의 빛 반사 (광학적 성질)",
+        en: "Reflection of Light on an Ellipse (Optical Property)"
       },
-      {
-        title: "피타고라스 나무 (Pythagoras Tree)",
-        desc: "직각삼각형의 세 변 위에 정사각형을 무한히 반복하여 자라나는 수학적 프랙탈 트리입니다. 민은기 선생님의 동적 조작으로 가지의 각도와 면적 보존을 관찰하세요.",
-        applet: "https://www.geogebra.org/m/xK2WwJtQ",
-        pdf: "https://min7014.github.io/2025/2025013001.pdf#toolbar=0&view=Fit&scrollbar=0"
+      desc: {
+        ko: "한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. GeoGebra 앱렛으로 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.",
+        en: "A ray of light emitted from one focus reflects off the ellipse and always converges at the other focus. Drag the focal points in GeoGebra to explore this optical principle interactively."
       },
-      {
-        title: "포물선 상의 점에서 접선의 방정식 (Tangent Line on a Parabola)",
-        desc: "포물선 위의 임의의 점에서의 접선과 준선, 초점이 이루는 이등변삼각형의 기하학적 성질을 GeoGebra 슬라이더로 직접 움직이며 확인해보세요.",
-        applet: "https://www.geogebra.org/m/egpbt5m2",
-        pdf: "https://min7014.github.io/2022/2022051001.pdf#toolbar=0&view=Fit&scrollbar=0"
+      applet: "https://www.geogebra.org/m/jggpufc4",
+      pdf: "https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20220515007.html",
+      yt: "https://youtu.be/AVFodL71fSk"
+    },
+    {
+      id: "pythagoras_tree",
+      title: {
+        ko: "피타고라스 나무 (프랙탈 기하와 면적 보존)",
+        en: "Pythagoras Tree (Fractal Geometry & Area Invariance)"
       },
-      {
-        title: "단델린의 구(Dandelin Spheres)와 원뿔곡선의 초점 증명",
-        desc: "원뿔을 평면으로 자를 때 생기는 원뿔곡선에 내접하는 두 구가 평면과 만나는 점이 왜 초점이 되는지 3차원 입체 기하학으로 증명합니다.",
-        applet: "https://www.geogebra.org/u/min7014",
-        pdf: "https://min7014.github.io/2019080802.html"
-      }
-    ];
-    var todayIndex = new Date().getDate() % picks.length;
-    var p = picks[todayIndex];
+      desc: {
+        ko: "직각삼각형의 세 변 위에 정사각형을 무한히 올려나가는 프랙탈 트리입니다. 민은기 선생님의 동적 조작으로 가지의 각도를 실시간 회전시키며 각 단계별 면적 보존 법칙을 관찰해 보세요.",
+        en: "A mathematical fractal tree constructed by recursively attaching squares onto a right triangle. Rotate the branch angle dynamically in GeoGebra to verify area invariance at every stage."
+      },
+      applet: "https://www.geogebra.org/m/xK2WwJtQ",
+      pdf: "https://min7014.github.io/2025/2025013001.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20250130001.html",
+      yt: "https://youtu.be/vks-ZgCfXpw"
+    },
+    {
+      id: "parabola_reflection",
+      title: {
+        ko: "포물선에서의 빛 반사 (파라볼라 안테나 원리)",
+        en: "Reflection of Light on a Parabola (Parabolic Mirror)"
+      },
+      desc: {
+        ko: "축에 평행하게 입사한 빛은 포물선에 반사되어 초점에 완벽히 집광됩니다. 접선과 준선, 초점이 이루는 기하학적 대칭성을 슬라이더로 조작하며 확인해 보세요.",
+        en: "Parallel incoming light rays reflecting off a parabola always converge precisely at the focal point. Manipulate the GeoGebra slider to explore the tangent and focal optical geometry."
+      },
+      applet: "https://www.geogebra.org/m/UTyJNKeb",
+      pdf: "https://min7014.github.io/2022/2022042501.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20220425001.html",
+      yt: "https://youtu.be/nsXEim6SuIA"
+    },
+    {
+      id: "dandelin_ellipse",
+      title: {
+        ko: "단델린 구: 원뿔로부터 타원의 정의 유도",
+        en: "Dandelin Spheres: Deriving the Ellipse from a Cone"
+      },
+      desc: {
+        ko: "원뿔을 평면으로 자를 때 내접하는 두 단델린 구가 평면과 만나는 접점이 바로 초점입니다. 3D 입체 기하학을 통해 두 초점까지 거리의 합이 일정함을 시각적으로 증명합니다.",
+        en: "When a cone is sliced by a plane, the two inscribed Dandelin spheres touch the plane at the two foci, proving that the sum of distances from any point on the ellipse is strictly constant."
+      },
+      applet: "https://www.geogebra.org/m/btgeds5j",
+      pdf: "https://min7014.github.io/2022/2022101601.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20221016001.html",
+      yt: "https://youtu.be/BCGf_f_y5-s"
+    },
+    {
+      id: "dandelin_parabola",
+      title: {
+        ko: "단델린 구: 원뿔로부터 포물선의 정의 유도",
+        en: "Dandelin Spheres: Deriving the Parabola from a Cone"
+      },
+      desc: {
+        ko: "원뿔의 모선과 평행한 평면으로 자를 때 생기는 단면이 포물선입니다. 내접 구와 평면의 접점(초점) 및 평면과 구의 접촉원(준선) 사이의 거리가 같음을 3차원 기하학으로 입증합니다.",
+        en: "Slicing a cone parallel to a generator creates a parabola. The inscribed Dandelin sphere visually proves that the distance to the focus equals the distance to the directrix."
+      },
+      applet: "https://www.geogebra.org/m/zfwgegsy",
+      pdf: "https://min7014.github.io/2022/2022101602.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20221016002.html",
+      yt: "https://youtu.be/es4FSjwcCX8"
+    },
+    {
+      id: "dandelin_hyperbola",
+      title: {
+        ko: "단델린 구: 원뿔로부터 쌍곡선의 정의 유도",
+        en: "Dandelin Spheres: Deriving the Hyperbola from a Cone"
+      },
+      desc: {
+        ko: "맞꼭지 원뿔을 자를 때 내접하는 두 단델린 구를 통해, 곡선 위의 점에서 두 초점에 이르는 거리의 차가 모선의 길이로 일정함을 공간 기하학으로 명쾌하게 증명합니다.",
+        en: "Slicing a double cone yields a hyperbola. Two Dandelin spheres prove that the absolute difference between distances to the two foci is invariant."
+      },
+      applet: "https://www.geogebra.org/m/aben7qgm",
+      pdf: "https://min7014.github.io/2022/2022101603.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20221016003.html",
+      yt: "https://youtu.be/plmFRLIG22U"
+    },
+    {
+      id: "secant_to_tangent",
+      title: {
+        ko: "접선에 접근하는 할선들 (미분계수의 시각적 극한)",
+        en: "Secant Lines Approaching Tangent (Visual Limit of Derivative)"
+      },
+      desc: {
+        ko: "곡선 위의 고정점으로 동점이 다가갈 때 두 점을 잇는 할선의 평균변화율이 순간변화율(접선)로 합일되는 미분의 핵심 극한 과정을 GeoGebra의 동적 회전으로 관찰해 보세요.",
+        en: "As a moving point approaches a fixed point along a curve, secant lines rotate continuously to unite into the tangent line, demonstrating the fundamental limit of the derivative."
+      },
+      applet: "https://www.geogebra.org/m/dn5dqdxv",
+      pdf: "https://min7014.github.io/2023/2023081301.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20230813001.html",
+      yt: "https://youtu.be/aiT4cVw99Do"
+    }
+  ];
+
+  var currentFeaturedIndex = new Date().getDate() % FEATURED_GEOGEBRA_PICKS.length;
+
+  function renderTodayGeoGebra() {
+    var p = FEATURED_GEOGEBRA_PICKS[currentFeaturedIndex];
+    if (!p) return;
+    var lang = (window.MatheduI18n && window.MatheduI18n.getLanguage) ? window.MatheduI18n.getLanguage() : 'ko';
     var tEl = document.getElementById('todayGgbTitle');
     var dEl = document.getElementById('todayGgbDesc');
     var aBtn = document.getElementById('btnTodayGgbApplet');
     var pBtn = document.getElementById('btnTodayGgbPdf');
-    if (tEl) tEl.textContent = p.title;
-    if (dEl) dEl.textContent = p.desc;
+    var wBtn = document.getElementById('btnTodayGgbWeb');
+
+    if (tEl) tEl.textContent = (p.title && p.title[lang]) || p.title.ko;
+    if (dEl) dEl.textContent = (p.desc && p.desc[lang]) || p.desc.ko;
     if (aBtn) aBtn.href = p.applet;
     if (pBtn) pBtn.href = p.pdf;
+    if (wBtn) wBtn.href = p.web;
   }
-  initTodayGeoGebra();
+
+  window.rotateTodayGeoGebra = function(delta) {
+    var n = FEATURED_GEOGEBRA_PICKS.length;
+    currentFeaturedIndex = (currentFeaturedIndex + delta + n) % n;
+    renderTodayGeoGebra();
+  };
+
+  // 언어 변경 시 실시간 제목 및 설명 동기화
+  var prevLangCallback = window.onMatheduLanguageChange;
+  window.onMatheduLanguageChange = function(lang) {
+    if (typeof prevLangCallback === 'function') {
+      try { prevLangCallback(lang); } catch(e){}
+    }
+    renderTodayGeoGebra();
+  };
+
+  renderTodayGeoGebra();
 
   // 필터 모드 전환 (전체, 오답노트, 즐겨찾기)
   window.switchFilterMode = function(mode) {

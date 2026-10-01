@@ -59,10 +59,10 @@
       },
       todayGgb: {
         tag: "💡 오늘의 추천 동적 기하 (min7014 수학자료실)",
-        title: "타원에서의 빛 반사 (Reflection of Light on an Ellipse)",
-        desc: "한 초점에서 나온 빛은 타원에 반사되어 다른 초점을 반드시 통과합니다. GeoGebra 앱렛으로 초점을 직접 끌어보며 기하학적 궤적을 확인하세요.",
+        btnNext: "다른 추천",
         btnApplet: "🎮 GeoGebra로 조작하기 ➔",
-        btnPdf: "📄 원리 증명 PDF"
+        btnPdf: "📄 원리 증명 PDF",
+        btnWeb: "🌐 웹 상세 해설"
       },
       heroCards: {
         teacherTag: "👩‍🏫 교사 회원 전용 · 수업 배포",
@@ -249,10 +249,10 @@
       },
       todayGgb: {
         tag: "💡 Today's Featured Dynamic Geometry (min7014 Lab)",
-        title: "Reflection of Light on an Ellipse (Optical Property)",
-        desc: "A ray of light emanating from one focus reflects off the ellipse and always passes through the other focus. Drag the focal points in GeoGebra to discover the locus interactively.",
+        btnNext: "Next Pick",
         btnApplet: "🎮 Explore in GeoGebra ➔",
-        btnPdf: "📄 Visual Proof PDF"
+        btnPdf: "📄 Visual Proof PDF",
+        btnWeb: "🌐 Web Details"
       },
       heroCards: {
         teacherTag: "👩‍🏫 For Teachers · Instant Classroom Distribution",
