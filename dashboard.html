@@ -482,7 +482,7 @@ tr:hover td { background: rgba(124,196,255,.06); }
     </a>
     <a class="tbtn" href="./" data-i18n="dashboard.backHome">← 메인 홈</a>
     <button class="tbtn" onclick="fetchData()" data-i18n="dashboard.refresh">🔄 새로고침</button>
-    <button class="tbtn btn-active" id="btnToggleAnon" onclick="toggleAnonymous()" style="background:rgba(56,189,248,.18);border-color:#38bdf8;color:#7cc4ff">🔒 학생 익명 보호(stu1~): ON</button>
+    <button class="tbtn btn-active" id="btnToggleAnon" onclick="toggleAnonymous()" style="display:none;background:rgba(56,189,248,.18);border-color:#38bdf8;color:#7cc4ff">🔒 학생 익명 보호(stu1~): ON</button>
     <button class="tbtn" onclick="exportCsv()" data-i18n="dashboard.exportCsv">📥 성적표 엑셀(CSV) 저장</button>
     <div class="live-badge"><span class="live-dot"></span> <span data-i18n="dashboard.liveSync">3초 실시간 갱신 중</span></div>
 
@@ -605,9 +605,25 @@ let currentView = 'card';
 let urlParams = new URLSearchParams(window.location.search);
 let targetRoom = (urlParams.get('room') || '').trim();
 
-// 내가 개설한 수업인지 확인 (회원 로그인 계정 또는 로컬 기기 생성 기록 대조)
+// 정식 회원(로그인된 교사/회원) 여부 판별 (게스트/비로그인 제외)
+function isOfficialMember() {
+  if (window.MatheduAuth && typeof window.MatheduAuth.isLoggedIn === 'function') {
+    return window.MatheduAuth.isLoggedIn() && !window.MatheduAuth.isGuest();
+  }
+  return false;
+}
+
+// 현재 모니터링 대상이 정식회원 본인이 개설한 수업인지 여부
+function isMyCurrentRoom() {
+  if (!isOfficialMember()) return false;
+  if (!targetRoom) return false;
+  return isMyRoom(targetRoom);
+}
+
+// 내가 개설한 수업인지 확인 (정식회원 로그인 계정 또는 로컬 기기 생성 기록 대조)
 function isMyRoom(roomId) {
   if (!roomId) return false;
+  if (!isOfficialMember()) return false;
   const rClean = String(roomId).trim().toLowerCase();
   if (window.MatheduAuth && typeof window.MatheduAuth.isMyCreatedRoom === 'function') {
     if (window.MatheduAuth.isMyCreatedRoom(rClean)) return true;
@@ -624,12 +640,12 @@ function isMyRoom(roomId) {
   return false;
 }
 
-// 특정 학생 항목의 실명 표시 여부 결정
+// 특정 학생 항목의 실명 표시 여부 결정 (오직 정식회원의 자기 수업만 실명 표시!)
 function shouldShowRealName(it) {
   if (isProjectorMode) return false; // 칠판 프로젝터 모드 가동 시 예외 없이 stu1 익명 강제
-  if (it && it.parsed_room && isMyRoom(it.parsed_room)) return true; // 회원의 자기 수업: 실명 기본 표시!
-  if (!isAnonymous) return true; // 교사가 전체 실명 확인 모드를 활성화한 경우
-  return false; // 그 외: stu1, stu2... 익명 보호
+  if (!isOfficialMember()) return false; // 비회원/게스트는 실명 열람 불가
+  if (it && it.parsed_room && isMyRoom(it.parsed_room)) return true; // 정식회원의 자기 수업: 실명 표시
+  return false; // 그 외(타인 수업, 전체 대시보드): stu1, stu2... 익명 보호
 }
 
 // === 학생 익명 식별자(stu1, stu2...) 순차 부여 모듈 ===
@@ -695,7 +711,7 @@ function setupRoomHeader() {
   const title = document.getElementById('dashboardTitle');
   const sub = document.getElementById('dashboardSubtitle');
 
-  const isMine = targetRoom ? isMyRoom(targetRoom) : false;
+  const isMine = isMyCurrentRoom();
 
   if (targetRoom) {
     const mineBadge = isMine ? ' <span class="badge-my-class">👑 내가 개설한 수업 (실명 표시 중)</span>' : '';
@@ -711,6 +727,9 @@ function setupRoomHeader() {
     if (isMine) {
       // 내 수업인 경우: 학생 실명을 기본으로 표시
       isAnonymous = false;
+      isProjectorMode = false;
+    } else {
+      isAnonymous = true;
       isProjectorMode = false;
     }
 
@@ -738,6 +757,8 @@ function setupRoomHeader() {
     title.textContent = '📊 전체 학습 현황 모니터링';
     sub.textContent = '개설된 모든 수업 및 자율 학습 학생들의 실황입니다.';
     actionBar.style.display = 'none';
+    isAnonymous = true;
+    isProjectorMode = false;
   }
 
   updatePrivacyBanner(isMine);
@@ -771,7 +792,7 @@ function updatePrivacyBanner(isMine) {
           <span class="badge-my-class">실제 학생 이름 표시 중</span>
         </div>
         <div style="font-size:0.86rem;color:#cbd5e1">
-          선생님께서 직접 개설하신 수업(<b>${escapeHtml(targetRoom)}</b>)이므로 학생들의 <b>실제 이름</b>이 표시됩니다. 교실 빔프로젝터나 화면 공유 시에는 상단의 <b>[🖥️ 칠판 프로젝터 모드]</b>를 누르면 즉시 <code>stu1, stu2...</code> 로 익명 전환됩니다.
+          선생님께서 직접 개설하신 수업(<b>${escapeHtml(targetRoom)}</b>)이므로 학생들의 <b>실제 이름</b>이 표시됩니다. 교실 빔프로젝터나 화면 공유 시에는 상단의 <b>[🔒 학생 익명 보호(칠판 모드)]</b>를 누르면 즉시 <code>stu1, stu2...</code> 로 익명 전환됩니다.
         </div>
       `;
     }
@@ -785,7 +806,7 @@ function updatePrivacyBanner(isMine) {
         <span class="privacy-badge">stu1, stu2... 자동 순차 부여</span>
       </div>
       <div style="font-size:0.86rem;color:#cbd5e1">
-        실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다. (회원이 개설한 자기 수업은 실명으로 표시됩니다)
+        실시간 화면 공유 및 칠판 빔프로젝터 환경에서 실제 학생 이름이 노출되지 않도록 참여 순서대로 <b>stu1, stu2, stu3...</b> 가 자동 부여되어 표시됩니다. (정식회원이 로그인하여 개설한 자기 수업에서만 실명 확인 및 익명 보호 전환이 가능합니다)
       </div>
     `;
   }
@@ -955,13 +976,11 @@ function renderCards(items) {
 function renderTable(items) {
   const tbody = document.getElementById('tableBody');
   const thStudentCol = document.getElementById('thStudentCol');
-  const isCurrentRoomMine = targetRoom ? isMyRoom(targetRoom) : false;
+  const isCurrentRoomMine = isMyCurrentRoom();
 
   if (thStudentCol) {
     if (isCurrentRoomMine && !isProjectorMode) {
       thStudentCol.textContent = '학생 실명 (식별 ID)';
-    } else if (!isAnonymous && !isProjectorMode) {
-      thStudentCol.textContent = '학생명 (실명 / stu)';
     } else {
       thStudentCol.textContent = '학생 ID (익명 stu)';
     }
@@ -1052,76 +1071,50 @@ function switchView(v) {
 }
 
 function toggleAnonymous(forceAnon) {
-  const isMine = targetRoom ? isMyRoom(targetRoom) : false;
+  const isMine = isMyCurrentRoom();
 
-  if (isMine) {
-    if (forceAnon === true) {
-      isProjectorMode = true;
-    } else {
-      isProjectorMode = !isProjectorMode;
-    }
+  // 정식회원의 자기 수업이 아니면 토글 불허: 무조건 익명 보호(stu1~) 유지
+  if (!isMine) {
+    isAnonymous = true;
+    isProjectorMode = false;
     updateAnonUI();
     render();
     return;
   }
 
-  // 일반/타인 수업/전체 보기인 경우
   if (forceAnon === true) {
-    isAnonymous = true;
-    updateAnonUI();
-    render();
-    return;
-  }
-
-  if (isAnonymous) {
-    // 실명 확인 모드 전환 전 경고
-    const ok = confirm(
-      '⚠️ 학생 개인정보 보호 알림\n\n' +
-      '현재 교실 빔프로젝터나 화면 공유 중이신가요?\n' +
-      '실명 모드로 전환하면 화면에 실제 학생 이름이 표시됩니다.\n\n' +
-      '정말로 실제 학생 이름을 확인하시겠습니까?'
-    );
-    if (!ok) return;
-    isAnonymous = false;
+    isProjectorMode = true;
   } else {
-    isAnonymous = true;
+    isProjectorMode = !isProjectorMode;
   }
-
   updateAnonUI();
   render();
 }
 
 function updateAnonUI() {
-  const isMine = targetRoom ? isMyRoom(targetRoom) : false;
+  const isMine = isMyCurrentRoom();
   const btn = document.getElementById('btnToggleAnon');
   const btnAction = document.getElementById('btnActionProjectorAnon');
   const warn = document.getElementById('realnameWarningBar');
 
   if (btn) {
     if (isMine) {
+      // 정식회원이 자신의 수업에 대하여만 학생익명보호 버튼 노출!
+      btn.style.display = 'inline-flex';
       if (isProjectorMode) {
         btn.innerHTML = '👀 실명 모드로 복귀 (내 수업)';
         btn.style.borderColor = '#a78bfa';
         btn.style.color = '#c4b5fd';
         btn.style.background = 'rgba(167,139,250,.2)';
       } else {
-        btn.innerHTML = '🖥️ 칠판 프로젝터 모드 (stu1~ 익명)';
+        btn.innerHTML = '🔒 학생 익명 보호 (칠판 모드)';
         btn.style.borderColor = '#38bdf8';
         btn.style.color = '#7cc4ff';
         btn.style.background = 'rgba(56,189,248,.18)';
       }
     } else {
-      if (isAnonymous) {
-        btn.innerHTML = '🔒 학생 익명 보호(stu1~): ON';
-        btn.style.borderColor = '#38bdf8';
-        btn.style.color = '#7cc4ff';
-        btn.style.background = 'rgba(56,189,248,.18)';
-      } else {
-        btn.innerHTML = '⚠️ 실명 모드: ON';
-        btn.style.borderColor = '#ef4444';
-        btn.style.color = '#fca5a5';
-        btn.style.background = 'rgba(239,68,68,.2)';
-      }
+      // 정식회원이 아니거나, 자신의 수업이 아닌 경우 버튼 완전 숨김!
+      btn.style.display = 'none';
     }
   }
 
@@ -1156,11 +1149,7 @@ function updateAnonUI() {
         warn.style.display = 'none';
       }
     } else {
-      warn.style.display = isAnonymous ? 'none' : 'flex';
-      warn.innerHTML = `
-        <div>⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!</div>
-        <button type="button" class="btn-privacy-toggle" onclick="toggleAnonymous(true)" style="background:#ef4444;color:#fff;border:none">🔒 즉시 stu1 익명 모드로 전환</button>
-      `;
+      warn.style.display = 'none';
     }
   }
 
@@ -1177,9 +1166,8 @@ function exportCsv() {
     return;
   }
 
-  const isCurrentRoomMine = targetRoom ? isMyRoom(targetRoom) : false;
-  const hasAnyMine = filtered.some(it => isMyRoom(it.parsed_room));
-  const allowReal = !isProjectorMode && (isCurrentRoomMine || hasAnyMine || !isAnonymous);
+  const isCurrentRoomMine = isMyCurrentRoom();
+  const allowReal = !isProjectorMode && isCurrentRoomMine;
 
   // UTF-8 BOM(\uFEFF) 추가하여 엑셀 한글 깨짐 방지
   let csv = allowReal
