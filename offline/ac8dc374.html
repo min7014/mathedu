@@ -294,8 +294,8 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/ac8dc374.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="ac8dc374">
-<meta name="mathedu-offline-build-time" content="2026-10-02T11:03:03.712423+00:00">
-<meta name="mathedu-offline-hash" content="01d4d300">
+<meta name="mathedu-offline-build-time" content="2026-10-02T11:20:37.183312+00:00">
+<meta name="mathedu-offline-hash" content="63b09984">
 <meta name="mathedu-version-label" content="v2026.10.02">
 
 </head><body><div class="wrap">
@@ -680,14 +680,15 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         • <b>연속성과 미분 불가능성</b>: 경계점 $\alpha, \beta$에서 $f=0$이므로 $g(\alpha)=g(\beta)=0$으로 끊김 없이 연속입니다. 그러나 관통점 $x = \beta$를 지나며 부호가 바뀌므로 좌우 미분계수가 급변합니다:<br>
         &nbsp;&nbsp;• $x < \beta$ (좌측): $f(x) < 0 \implies g'(\beta^-) = 7f'(\beta)$ (기울기 $+7f'$ 급상승)<br>
         &nbsp;&nbsp;• $x > \beta$ (우측): $f(x) > 0 \implies g'(\beta^+) = -f'(\beta)$ (기울기 $-f'$ 하강)<br>
-        • <b>도함수의 도약(Jump)</b>:
-        <div style="text-align:center;margin:6px 0">$$\mathbf{g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$</div>
-        $f'(\beta)>0$이므로 도약은 항상 음수이며, $g(x)$는 $x=\beta$에서 <b>위로 뾰족한 산 모양 첨점</b>을 갖습니다!
+        • <b>도함수의 '도약(Jump)'이란 무엇인가?</b>:<br>
+        원함수 $g(x)$ 자체는 $x = \beta$에서 $0$으로 끊김 없이 이어져(연속) 있지만, <b>접선의 기울기(도함수 $g'(x)$)는 $+7f'$에서 $-f'$로 순간적으로 뚝 떨어집니다.</b> 이처럼 <b>우미분계수에서 좌미분계수를 뺀 기울기의 단차(계단형 낙차)</b>를 해석학에서 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다:
+        <div style="text-align:center;margin:6px 0">$$\mathbf{\Delta g'(\beta) = g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$</div>
+        $f'(\beta)>0$이므로 도약은 항상 음수($<0$)이며, 좌우 기울기가 어긋나면서 $g(x)$는 $x=\beta$에서 <b>위로 뾰족한 산 모양 첨점(Sharp Peak)</b>을 갖게 됩니다!
       </span>
       <div class="bilingual-en">
-        • <b>Geometric Transformation</b>: When $f(x) \ge 0$, the curve is reflected across the x-axis ($-f(x)$). When $f(x) < 0$, it is vertically amplified by $7\times$ ($7f(x)$).<br>
+        • <b>Geometric Transformation</b>: When $f(x) \ge 0$, reflected across the x-axis ($-f(x)$). When $f(x) < 0$, amplified by $7\times$ ($7f(x)$).<br>
         • <b>Continuity & Non-Differentiability</b>: Continuous everywhere since $f=0$ at roots. However, across crossing root $\beta$, the left derivative is $7f'(\beta)$ and right derivative is $-f'(\beta)$.<br>
-        • <b>Derivative Jump</b>: $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$, producing a sharp upward corner at $x=\beta$.
+        • <b>What is 'Derivative Jump'?</b>: While $g(x)$ is continuous, its slope drops abruptly from $+7f'$ to $-f'$. This step discontinuity gap between right-hand and left-hand derivatives $\Delta g' = g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$ is called the **Derivative Jump**, producing a sharp upward corner at $x=\beta$.
       </div>
     </div>
   </div>
@@ -844,8 +845,8 @@ window.toggleMinGgb = function(btn, ggbUrl) {
   <!-- 직결 학습 안내 & 민은기 선생님 핵심 자료 바로가기 -->
   <div style="background:rgba(20,24,51,.6);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
     <div style="font-size:.82rem;color:#cbd5e1;line-height:1.5">
-      <span class="bilingual-ko">💡 <b>핵심 공식 직관</b>: 위 3개 패널이 보여주듯, $h(x)$가 미분가능하려면 오직 $x = \beta$에서 <b>$-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$</b>가 성립해야 합니다.</span>
-      <span class="bilingual-en">💡 <b>Core Formula Intuition</b>: As shown above, differentiability requires $-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$.</span>
+      <span class="bilingual-ko">💡 <b>'도약(Jump)'과 완전 평활화 직관</b>: '도약'이란 접선의 기울기(도함수)가 경계점에서 순간적으로 껑충 뛰거나 뚝 떨어지는 <b>단차(우미분계수 - 좌미분계수)</b>를 뜻합니다. 위 패널이 보여주듯, $g(x)$의 위로 뾰족한 음의 도약($-8f'$)과 $|P(x)|$의 아래로 뾰족한 양의 도약($+2P'$)이 합쳐져 <b>도약의 합이 $0$으로 상쇄($-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$)</b>될 때 비로소 실수 전체에서 부드럽게 미분가능해집니다!</span>
+      <span class="bilingual-en">💡 <b>'Jump' & Smoothing Intuition</b>: 'Jump' means the step gap in slope ($\text{Right Derivative} - \text{Left Derivative}$). Perfect differentiability occurs when the negative jump of $g(x)$ ($-8f'$) and positive jump of $|P(x)|$ ($+2P'$) cancel out to zero: $-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$.</span>
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.45);color:#38bdf8;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none">📐 접선 수렴 원리 PDF ↗</a>
@@ -931,20 +932,109 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
 <h2>제3단계 · [구간 함수] $g(x)$의 꺾인 점(첨점)과 도함수 도약(Jump)<span class="bilingual-en">Step 3 · [Piecewise Analysis] Sharp Corner of $g(x)$ & Derivative Discontinuity Jump</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
+
+<!-- 💡 핵심 개념 돋보기: 도약(Jump)의 수학적 의미와 시각적 비교 다이어그램 -->
+<div style="background:rgba(20,24,51,.75);border:1.5px solid rgba(124,196,255,.4);border-radius:12px;padding:14px 16px;margin-bottom:14px">
+  <div style="font-size:.95rem;font-weight:800;color:#93c5fd;display:flex;align-items:center;gap:6px;margin-bottom:8px">
+    <span>💡</span>
+    <span class="bilingual-ko">수학 개념 탐구: '도약(Jump, 跳躍)'이란 도대체 무엇인가?</span>
+    <span class="bilingual-en">Mathematical Concept: What Does 'Jump' Mean in Calculus?</span>
+  </div>
+  <div style="font-size:.88rem;line-height:1.75;color:#e0e7ff">
+    <span class="bilingual-ko">
+      • <b>일상적 의미 vs 해석학(Calculus) 정의</b>:<br>
+      일상에서 '도약'은 계단을 껑충 뛰어넘거나 단차를 뛰어오르는 것을 뜻합니다. 수학에서도 마찬가지로, 어떤 함수 $\phi(x)$에서 점 $x_0$의 좌극한과 우극한 사이에 발생하는 <b>순간적인 높낮이 차이(단차)</b>를 <b>도약 불연속(Jump Discontinuity)</b>이라고 부릅니다.<br>
+      해석학에서 <b>'도약의 크기(Jump Magnitude)'</b>는 항상 <b>우극한에서 좌극한을 뺀 값</b>으로 정의됩니다:
+      <div style="text-align:center;margin:6px 0"><b>$$\Delta \phi(x_0) = \lim_{x \to x_0^+} \phi(x) - \lim_{x \to x_0^-} \phi(x) = \phi(x_0^+) - \phi(x_0^-)$$</b></div>
+      • <b>원함수 $g(x)$는 끊김 없이 이어져 있는데, 왜 '도약'이라 부르는가?</b><br>
+      원함수 $g(x)$ 자체는 $x = \beta$에서 $g(\beta^-) = g(\beta^+) = 0$으로 끊어지지 않고 이어져 있는 <b>연속 함수</b>입니다.<br>
+      그러나 그 <b>도함수 $g'(x)$(접선의 기울기)</b>를 관찰하면 엄청난 일이 벌어집니다:<br>
+      &nbsp;&nbsp;1) $x = \beta$ 직전(좌측): 기울기가 <b>$+7f'(\beta)$</b>로 가파르게 치솟아 오름 (양수)<br>
+      &nbsp;&nbsp;2) $x = \beta$ 직후(우측): 기울기가 <b>$-f'(\beta)$</b>로 급격히 꺾여 내려감 (음수)<br>
+      도함수 $g'(x)$의 관점에서는 값이 $+7f'$에서 $-f'$로 <b>순간적으로 $-8f'(\beta)$만큼 수직으로 뚝 떨어지는 '계단형 단차'</b>가 생깁니다! 바로 이 도함수의 단차를 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다.<br>
+      • <b>도약의 부호와 첨점의 기하학적 형태</b>:<br>
+      &nbsp;&nbsp;• <b>음의 도약 ($\Delta < 0$)</b>: 기울기가 급상승($+7f'$) 후 급하강($-f'$) $\implies$ 원함수는 <b>위로 뾰족한 산봉우리 모양 첨점</b> 형성!<br>
+      &nbsp;&nbsp;• <b>양의 도약 ($\Delta > 0$)</b>: 기울기가 하강 후 상승 $\implies$ 원함수는 <b>아래로 뾰족한 V자 골짜기 첨점</b> 형성!<br>
+      &nbsp;&nbsp;• <b>도약 $= 0$ ($\Delta = 0$)</b>: 좌우 기울기 완전 일치 $\implies$ <b>미분가능 (부드러운 평활 곡선)</b>!
+    </span>
+    <div class="bilingual-en">
+      • <b>Rigorous Definition of Jump</b>: In calculus, a **Jump Discontinuity** at $x_0$ is the gap between the right-hand and left-hand limits: $\Delta \phi(x_0) = \phi(x_0^+) - \phi(x_0^-)$.<br>
+      • <b>Why Use 'Jump' When $g(x)$ is Continuous?</b>: Although the original function $g(x)$ is continuous at $\beta$ ($g(\beta)=0$), its derivative $g'(x)$ (tangent slope) undergoes a sudden drop: from $+7f'(\beta)$ on the left to $-f'(\beta)$ on the right. This step-like drop of $-8f'(\beta)$ in the derivative is called the **Derivative Jump**.<br>
+      • <b>Jump Sign & Corner Shape</b>: A negative jump ($\Delta g' < 0$) means rising then falling, creating a sharp upward peak. A positive jump ($\Delta > 0$) creates a downward V-shaped corner. Zero jump ($\Delta = 0$) means smooth differentiability!
+    </div>
+  </div>
+
+  <!-- 🎨 도약(Jump)의 직관적 시각화: 원함수 첨점 vs 도함수 계단형 단차 대조 패널 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0">
+    <!-- 패널 1: 원함수 g(x) 첨점 -->
+    <div style="background:rgba(10,13,26,.85);border:1px solid rgba(251,113,133,.4);border-radius:10px;padding:10px;text-align:center">
+      <div style="font-size:.82rem;font-weight:700;color:#fb7185;margin-bottom:4px">
+        <span class="bilingual-ko">① 원함수 $g(x)$: $x=\beta$에서 위로 뾰족한 첨점</span>
+        <span class="bilingual-en">① Function $g(x)$: Sharp Upward Corner</span>
+      </div>
+      <svg viewBox="0 0 220 110" style="width:100%;height:auto;display:block;margin:0 auto">
+        <line x1="10" y1="85" x2="210" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+        <text x="202" y="80" fill="#94a3b8" font-size="9">x</text>
+        <circle cx="110" cy="85" r="3.5" fill="#fb7185" />
+        <text x="106" y="99" fill="#fb7185" font-size="10" font-weight="bold">β</text>
+        <path d="M 40 100 L 110 40 L 180 90" fill="none" stroke="#fb7185" stroke-width="2.5" stroke-linecap="round" />
+        <line x1="85" y1="62" x2="110" y2="40" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
+        <line x1="110" y1="40" x2="135" y2="58" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
+        <text x="42" y="58" fill="#fca5a5" font-size="8.5" font-weight="bold">좌기울기 +7f'</text>
+        <text x="135" y="52" fill="#fca5a5" font-size="8.5" font-weight="bold">우기울기 -f'</text>
+      </svg>
+      <div style="font-size:.74rem;color:#cbd5e1;margin-top:2px">
+        <span class="bilingual-ko">좌우 접선이 칼날처럼 부딪혀 <b>미분불가능</b></span>
+        <span class="bilingual-en">Slopes collide $\implies$ Non-differentiable</span>
+      </div>
+    </div>
+
+    <!-- 패널 2: 도함수 g'(x) 도약 -->
+    <div style="background:rgba(10,13,26,.85);border:1px solid rgba(124,196,255,.4);border-radius:10px;padding:10px;text-align:center">
+      <div style="font-size:.82rem;font-weight:700;color:#7cc4ff;margin-bottom:4px">
+        <span class="bilingual-ko">② 도함수 $g'(x)$: 계단형 불연속 단차 = '도약(Jump)'</span>
+        <span class="bilingual-en">② Derivative $g'(x)$: Step Drop = 'Jump'</span>
+      </div>
+      <svg viewBox="0 0 220 110" style="width:100%;height:auto;display:block;margin:0 auto">
+        <line x1="10" y1="65" x2="210" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2 2" />
+        <text x="202" y="60" fill="#94a3b8" font-size="9">x</text>
+        <line x1="110" y1="15" x2="110" y2="95" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="2 2" />
+        <text x="106" y="106" fill="#94a3b8" font-size="9">β</text>
+        <!-- Left derivative level +7f' -->
+        <line x1="30" y1="30" x2="110" y2="30" stroke="#fb7185" stroke-width="2.5" />
+        <circle cx="110" cy="30" r="3" fill="#0f172a" stroke="#fb7185" stroke-width="1.5" />
+        <text x="35" y="24" fill="#fb7185" font-size="8.5" font-weight="bold">g'(β⁻) = +7f'(β)</text>
+        <!-- Right derivative level -f' -->
+        <line x1="110" y1="85" x2="190" y2="85" stroke="#38bdf8" stroke-width="2.5" />
+        <circle cx="110" cy="85" r="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+        <text x="125" y="97" fill="#38bdf8" font-size="8.5" font-weight="bold">g'(β⁺) = -f'(β)</text>
+        <!-- Downward jump arrow -->
+        <line x1="110" y1="34" x2="110" y2="80" stroke="#facc15" stroke-width="2" stroke-dasharray="2 2" />
+        <polygon points="107,77 110,83 113,77" fill="#facc15" />
+        <text x="115" y="58" fill="#facc15" font-size="9" font-weight="bold">도약: -8f'(β)</text>
+      </svg>
+      <div style="font-size:.74rem;color:#cbd5e1;margin-top:2px">
+        <span class="bilingual-ko"><b>우미분계수 - 좌미분계수</b> = 수직 낙차</span>
+        <span class="bilingual-en">Right minus Left = Vertical step drop</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 문제에서 $g(x)$는 다음과 같이 정의되어 있습니다:<br>
 $$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
 1. <b>점 $x = \alpha$에서의 연속성과 미분가능성:</b><br>
-$x = \alpha$는 접점이므로 $f(\alpha) = 0$이고 $f'(\alpha) = 0$입니다. 좌우 미분계수가 모두 $0$으로 일치하므로 $g'(\alpha) = 0$이며, <b>$x = \alpha$에서는 전혀 꺾이지 않고 부드럽게 미분가능</b>합니다.<br>
-2. <b>점 $x = \beta$에서의 도함수 급변(도약):</b><br>
+$x = \alpha$는 접점이므로 $f(\alpha) = 0$이고 $f'(\alpha) = 0$입니다. 좌우 미분계수가 모두 $0$으로 일치하므로 도약 $\Delta g'(\alpha) = 0 - 0 = 0$이며, <b>$x = \alpha$에서는 전혀 꺾이지 않고 부드럽게 미분가능</b>합니다.<br>
+2. <b>점 $x = \beta$에서의 도함수 급변(도약) 계산:</b><br>
 $f'(\beta) > 0$이므로 $x$가 $\beta$를 지나면서 $f(x)$는 음수($<0$)에서 양수($\ge 0$)로 부호가 바뀝니다:<br>
 • $x < \beta$ (좌측): $f(x) < 0 \implies g(x) = 7f(x) \implies g'(\beta^-) = 7f'(\beta)$ (기울기 $+7f'$ 급상승)<br>
 • $x > \beta$ (우측): $f(x) > 0 \implies g(x) = -f(x) \implies g'(\beta^+) = -f'(\beta)$ (기울기 $-f'$ 완만한 하강)<br>
 따라서 우미분계수에서 좌미분계수를 뺀 <b>도함수의 도약(Jump)</b>은 다음과 같습니다:<br>
-$$g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = \mathbf{-8f'(\beta)}$$
+$$\mathbf{g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$
 $f'(\beta) > 0$이므로 $-8f'(\beta) < 0$이며, <b>$g(x)$는 실수 전체에서 오직 $x = \beta$ 한 점에서만 위로 뾰족한 첨점</b>을 갖습니다!
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> At $x = \alpha$, $f'(\alpha) = 0 \implies g'(\alpha) = 0$, so $g(x)$ is perfectly smooth. At $x = \beta$, $f(x)$ crosses from negative to positive. Left derivative is $g'(\beta^-) = 7f'(\beta)$, and right derivative is $g'(\beta^+) = -f'(\beta)$. The derivative jump across $\beta$ is $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$, making $x = \beta$ the unique sharp corner of $g(x)$.</div>
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> At $x = \alpha$, $f'(\alpha) = 0 \implies g'(\alpha) = 0$, so the derivative jump is $\Delta g'(\alpha) = 0$, meaning $g(x)$ is perfectly smooth. At $x = \beta$, left derivative is $g'(\beta^-) = 7f'(\beta)$ and right derivative is $g'(\beta^+) = -f'(\beta)$. The derivative jump across $\beta$ is $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$, making $x = \beta$ the unique sharp corner of $g(x)$.</div>
 </div>
-<div class="q" data-ans="4" data-exp="x &lt; β에서 g(x) = 7f(x)이므로 좌미분계수는 7f'(β)이고, x &gt; β에서 g(x) = -f(x)이므로 우미분계수는 -f'(β)입니다. 따라서 우미분계수 - 좌미분계수 = -f'(β) - 7f'(β) = -8f'(β) 입니다." data-exp-en="Since g(x) = 7f(x) for x &lt; β and g(x) = -f(x) for x &gt; β, the derivative jump is g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β)." >
+<div class="q" data-ans="4" data-exp="'도약(Jump)'이란 도함수의 우극한에서 좌극한을 뺀 단차(차이)를 말합니다. x &lt; β에서 g'(β⁻) = 7f'(β)이고, x &gt; β에서 g'(β⁺) = -f'(β)이므로, 도함수 도약은 g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β) 입니다." data-exp-en="'Jump' refers to the step discontinuity gap between the right-hand and left-hand derivative: g'(β⁺) - g'(β⁻). Since g'(β⁻) = 7f'(β) and g'(β⁺) = -f'(β), the derivative jump is -f'(β) - 7f'(β) = -8f'(β)." >
 <div class="lvl">3단계 도함수 도약</div>
 <div class="stem"><span class="bilingual-ko">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 정확한 값은 얼마인가요?</span><div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the exact jump of the derivative $g'(\beta^+) - g'(\beta^-)$?</div></div>
 <div class="opts">
@@ -1651,8 +1741,8 @@ function setBoardLang(lang) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'ac8dc374';
-window._offlineBuildTime = '2026-10-02T11:03:03.712423+00:00';
-window._offlineHash = '01d4d300';
+window._offlineBuildTime = '2026-10-02T11:20:37.183312+00:00';
+window._offlineHash = '63b09984';
 window._offlineVersion = 'v2026.10.02';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/ac8dc374.html';
 
@@ -1677,8 +1767,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'ac8dc374';
-  var localBuildTime = window._offlineBuildTime || '2026-10-02T11:03:03.712423+00:00';
-  var localHash = window._offlineHash || '01d4d300';
+  var localBuildTime = window._offlineBuildTime || '2026-10-02T11:20:37.183312+00:00';
+  var localHash = window._offlineHash || '63b09984';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/ac8dc374.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
