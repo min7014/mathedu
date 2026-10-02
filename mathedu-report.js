@@ -40,13 +40,13 @@
     var defaults = {
       'report.fabTitle': isEn ? 'Report Issue' : '오류신고',
       'report.fabTooltip': isEn ? 'Report Issue (Click an element on screen)' : '오류 신고 (화면 요소를 클릭하여 신고)',
-      'report.bannerPrompt': isEn ? '🎯 Click on the problematic part of the screen (question, option, formula, figure, etc.).' : '🎯 오류가 있는 화면 요소(문제, 보기, 수식, 그림 등)를 클릭해 주세요.',
+      'report.bannerPrompt': isEn ? 'Click on the problematic part of the screen (question, option, formula, figure, etc.).' : '오류가 있는 화면 요소(문제, 보기, 수식, 그림 등)를 클릭해 주세요.',
       'report.bannerCancel': isEn ? '✕ Cancel (ESC)' : '✕ 취소 (ESC)',
       'report.bannerWhole': isEn ? '📄 Report Whole Page' : '📄 화면 전체 오류 신고',
       'report.modalTitle': isEn ? 'Report an Issue' : '오류 신고',
       'report.targetTitle': isEn ? 'Selected Target' : '선택된 영역',
       'report.targetWholePage': isEn ? 'Whole Page (No specific element)' : '화면 전체 (특정 영역 미지정)',
-      'report.reselectBtn': isEn ? '🎯 Reselect' : '🎯 다시 선택',
+      'report.reselectBtn': isEn ? 'Reselect' : '다시 선택',
       'report.categoryTitle': isEn ? 'Issue Category' : '오류 유형',
       'report.catMath': isEn ? '🧮 Math / Calculation Error' : '🧮 수식 / 계산 오류',
       'report.catTypo': isEn ? '✍️ Typo / Notation Error' : '✍️ 오타 / 표기 오류',
@@ -71,6 +71,11 @@
   // 🧹 사이렌 SVG 아이콘과 중복 노출되지 않도록 라벨 텍스트의 선행 이모지(🚨 등) 제거
   function stripSiren(str) {
     return String(str || '').replace(/^[🚨\s]+/, '').trim();
+  }
+
+  // 🧹 과녁 아이콘과 중복 노출되지 않도록 라벨 텍스트의 선행 이모지(🎯 등) 제거
+  function stripTarget(str) {
+    return String(str || '').replace(/^[🎯\s]+/, '').trim();
   }
 
   // 🎨 스타일 주입
@@ -588,7 +593,7 @@
     banner.innerHTML = `
       <div class="mathedu-banner-left">
         <span class="mathedu-banner-icon">🎯</span>
-        <span id="mathedu-banner-prompt-text">${t('report.bannerPrompt')}</span>
+        <span id="mathedu-banner-prompt-text">${stripTarget(t('report.bannerPrompt'))}</span>
       </div>
       <div class="mathedu-banner-right">
         <button type="button" class="mathedu-banner-btn" id="mathedu-inspect-cancel-btn">${t('report.bannerCancel')}</button>
@@ -638,8 +643,8 @@
         <!-- Target preview -->
         <div class="mathedu-target-preview">
           <div class="mathedu-target-top">
-            <span class="mathedu-target-badge" id="mathedu-target-badge">🎯 ${t('report.targetTitle')}</span>
-            <button type="button" class="mathedu-target-btn" id="mathedu-target-reselect-btn">${t('report.reselectBtn')}</button>
+            <span class="mathedu-target-badge" id="mathedu-target-badge">🎯 ${stripTarget(t('report.targetTitle'))}</span>
+            <button type="button" class="mathedu-target-btn" id="mathedu-target-reselect-btn">🎯 ${stripTarget(t('report.reselectBtn'))}</button>
           </div>
           <div class="mathedu-target-snippet" id="mathedu-target-snippet-text">-</div>
         </div>
@@ -915,9 +920,10 @@
     var snippet = document.getElementById('mathedu-target-snippet-text');
     var reselectBtn = document.getElementById('mathedu-target-reselect-btn');
 
-    if (badge) badge.textContent = '🎯 ' + meta.label;
+    if (badge) badge.textContent = '🎯 ' + stripTarget(meta.label);
     if (snippet) snippet.textContent = meta.snippet;
-    if (reselectBtn) reselectBtn.textContent = targetEl ? t('report.reselectBtn') : '🎯 특정 요소 선택';
+    var isEn = (window.MatheduI18n && window.MatheduI18n.currentLang === 'en');
+    if (reselectBtn) reselectBtn.textContent = '🎯 ' + (targetEl ? stripTarget(t('report.reselectBtn')) : (isEn ? 'Select Element' : '특정 요소 선택'));
 
     // 작성자 / 이메일 자동 채우기
     var nameInput = document.getElementById('mathedu-reporter-name');
@@ -1084,7 +1090,7 @@
     var bannerPrompt = document.getElementById('mathedu-banner-prompt-text');
     var bannerCancel = document.getElementById('mathedu-inspect-cancel-btn');
     var bannerWhole = document.getElementById('mathedu-inspect-whole-btn');
-    if (bannerPrompt) bannerPrompt.textContent = t('report.bannerPrompt');
+    if (bannerPrompt) bannerPrompt.textContent = stripTarget(t('report.bannerPrompt'));
     if (bannerCancel) bannerCancel.textContent = t('report.bannerCancel');
     if (bannerWhole) bannerWhole.textContent = t('report.bannerWhole');
 

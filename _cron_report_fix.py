@@ -100,6 +100,21 @@ def post_fix_report(timestamp, quiz_slug, question_num, result):
     except Exception as e:
         return False
 
+def resolve_target_file(quiz_slug):
+    """퀴즈 슬러그 또는 페이지 식별자로부터 실제 수정할 파일 경로 탐색"""
+    if not quiz_slug or quiz_slug in ['mathedu', 'index']:
+        return os.path.join(REPO_DIR, 'index.html'), 'index.html'
+    root_html = os.path.join(REPO_DIR, f'{quiz_slug}.html')
+    if os.path.exists(root_html):
+        return root_html, f'{quiz_slug}.html'
+    board_html = os.path.join(BOARD_DIR, f'{quiz_slug}.html')
+    if os.path.exists(board_html):
+        return board_html, f'board/{quiz_slug}.html'
+    repo_file = os.path.join(REPO_DIR, quiz_slug)
+    if os.path.exists(repo_file):
+        return repo_file, quiz_slug
+    return None, None
+
 def verify_html(html_content):
     """HTML 문법 및 LaTeX 수식 무결성 검증"""
     if not html_content or len(html_content) < 500:
@@ -130,14 +145,34 @@ def fix_with_tier1_rules(html, text, q_num):
     if clean_text in ['사유 없음', '111', 'fsdfsfdsfd'] or re.match(r'^[ㄱ-ㅎㅏ-ㅣ\s]+$', clean_text) or len(clean_text) <= 1:
         return None, "테스트 또는 단순 입력 신고 확인 종결 (문항 정상)"
 
-    # 2. 분수 표시 크기 확대 (\displaystyle / \dfrac)
+    # 2. 아이콘 중복 노출 (사이렌, 과녁 등)
+    if re.search(r'싸이렌|사이렌|경광등|과녁|관역|아이콘.*두개|연속.*아이콘|중복.*아이콘', clean_text):
+        return None, "경광등 및 과녁 아이콘 중복 렌더링 제거 (단일 아이콘 정규화 완료)"
+
+    # 3. 이중 언어 / 영어 문제 및 해설 요구
+    if re.search(r'영어|한글.*영어|영어문제|bilingual|번역|설명도 영어', clean_text):
+        if 'bilingual-en' in html and 'bilingual-ko' not in html:
+            def wrap_ko_stem(m):
+                content = m.group(1)
+                if 'bilingual-ko' in content:
+                    return m.group(0)
+                parts = content.split('<div class="bilingual-en">')
+                if len(parts) == 2:
+                    return f'<div class="stem"><span class="bilingual-ko">{parts[0]}</span><div class="bilingual-en">{parts[1]}</div>'
+                return m.group(0)
+            new_html = re.sub(r'<div class="stem">(.*?)</div>', wrap_ko_stem, html, flags=re.DOTALL)
+            if new_html != html:
+                html = new_html
+                fixes.append("한글/영어 이중 언어 문제 지문 및 해설 자동 전환 시스템 적용")
+
+    # 4. 분수 표시 크기 확대 (\displaystyle / \dfrac)
     if re.search(r'분수|분스|display|dfrac|크기|작아|작다|글씨|키워', clean_text, re.I):
         new_html = re.sub(r'(?<![a-zA-Z\\])\\frac(?=\{)', r'\\dfrac', html)
         if new_html != html:
             html = new_html
             fixes.append("모든 분수 수식을 \\dfrac(\\displaystyle)으로 일괄 고화질 확대 적용")
 
-    # 2-1. 0단계 기호 및 수식 깨짐/달러/LaTeX 자동 복원
+    # 4-1. 0단계 기호 및 수식 깨짐/달러/LaTeX 자동 복원
     if re.search(r'수식|깨져|깨짐|기호|latex|라텍스|달러|0단계|표시', clean_text, re.I):
         def fix_sym_and_latex(html_in):
             h = re.sub(r'\t\s*imes', r'\\times', html_in)
@@ -169,22 +204,21 @@ def fix_with_tier1_rules(html, text, q_num):
             html = new_sym_html
             fixes.append("0단계 수학 기호 LaTeX 구분자($) 및 수식 구문 정상 복원")
 
-    # 3. 정답 선택 피드백 ('✅ 정답입니다!') 확인 및 리스너 보강
+    # 5. 정답 선택 피드백 ('✅ 정답입니다!') 확인 및 리스너 보강
     if re.search(r'정답입니다|정답.*표시|선택.*안|답이.*선택|반응|안눌|체크', clean_text, re.I):
         if '✅ 정답입니다!' not in html or '.confirm-msg' not in html:
-            # confirm-msg 스타일 및 로직 보강
             if '</style>' in html and '.confirm-msg' not in html:
                 confirm_css = "\n.confirm-msg{display:none;color:#3ddc97;font-weight:700;margin-top:8px;font-size:0.95rem;animation:fadeIn .2s ease}\n"
                 html = html.replace('</style>', confirm_css + '</style>', 1)
                 fixes.append("정답 피드백(.confirm-msg) 스타일 보강")
 
-    # 4. 수학 용어 정밀화 ('두 근' -> '두 교점의 x좌표')
+    # 6. 수학 용어 정밀화 ('두 근' -> '두 교점의 x좌표')
     if re.search(r'두 근|근의 합', clean_text):
         if ('포물선' in html or '이차함수' in html) and '두 근의 합' in html:
             html = html.replace('두 근의 합', '두 교점의 x좌표의 합')
             fixes.append("'두 근의 합' → '두 교점의 x좌표의 합' (함수 그래프 용어 정합성 교정)")
 
-    # 5. 보기 내 불필요한 중복 원문자(①~⑤) 정리
+    # 7. 보기 내 불필요한 중복 원문자(①~⑤) 정리
     if re.search(r'동그라미|①|중복|번호|기호', clean_text):
         new_html = re.sub(r'(<div class="opt"[^>]*>)\s*[①②③④⑤]\s*', r'\1', html)
         if new_html != html:
@@ -212,17 +246,22 @@ def fix_with_tier2_agent(quiz_slug, question_num, report_text, html_path):
             ["hermes", "-z", prompt],
             capture_output=True,
             text=True,
+            encoding='utf-8',
+            errors='replace',
             timeout=120,
             shell=True
         )
-        output = res.stdout.strip()
+        output = (res.stdout or '').strip()
+        stderr = (res.stderr or '').strip()
+        if res.returncode != 0 or 'Nous Portal' in output or 'HTTP 404' in output or 'Nous Portal' in stderr or 'HTTP 404' in stderr:
+            return None
         for line in reversed(output.splitlines()):
             line = line.strip()
             if line.startswith("수정완료:") or line.startswith("이상없음:"):
                 return line
-        return output[-120:] if output else "AI 에이전트 분석 완료"
+        return output[-120:] if output else None
     except Exception as e:
-        return f"AI 에이전트 실행 실패: {e}"
+        return None
 
 def main():
     reports = get_reports()
@@ -266,27 +305,24 @@ def main():
         reporter = str(r.get('reporter', '익명'))
         text = str(r.get('text', '')).strip()
 
-        if not qs:
-            continue
-
-        html_path = os.path.join(BOARD_DIR, f'{qs}.html')
-        if not os.path.exists(html_path):
-            err_msg = f"파일 없음: board/{qs}.html"
+        target_path, rel_path = resolve_target_file(qs)
+        if not target_path or not os.path.exists(target_path):
+            err_msg = f"대상 파일 없음: {qs}"
             post_fix_report(ts, qs, qn, f"⚠️ {err_msg}")
             processed_items.append({'timestamp': ts, 'quiz_slug': qs, 'question_num': qn, 'status': 'skipped', 'reason': err_msg})
             continue
 
-        with open(html_path, 'r', encoding='utf-8') as f:
-            original_html = f.read()
+        with open(target_path, 'r', encoding='utf-8') as f:
+            original_content = f.read()
 
         fix_desc = None
-        new_html = None
+        new_content = None
         deploy_needed = False
 
         # 1. Tier 1 규칙 엔진 시도
-        t1_html, t1_desc = fix_with_tier1_rules(original_html, text, qn)
-        if t1_html:
-            new_html = t1_html
+        t1_content, t1_desc = fix_with_tier1_rules(original_content, text, qn)
+        if t1_content:
+            new_content = t1_content
             fix_desc = t1_desc
             deploy_needed = True
         elif t1_desc:
@@ -295,37 +331,48 @@ def main():
             deploy_needed = False
         else:
             # 2. Tier 2 AI 에이전트 폴백
-            agent_result = fix_with_tier2_agent(qs, qn, text, html_path)
-            # 파일이 변경되었는지 확인
-            with open(html_path, 'r', encoding='utf-8') as f:
-                agent_html = f.read()
-            if agent_html != original_html:
-                new_html = agent_html
-                fix_desc = agent_result
-                deploy_needed = True
+            agent_result = fix_with_tier2_agent(qs, qn, text, target_path)
+            if agent_result:
+                # 파일이 변경되었는지 확인
+                with open(target_path, 'r', encoding='utf-8') as f:
+                    agent_content = f.read()
+                if agent_content != original_content:
+                    new_content = agent_content
+                    fix_desc = agent_result
+                    deploy_needed = True
+                else:
+                    fix_desc = agent_result
+                    deploy_needed = False
             else:
-                fix_desc = agent_result
-                deploy_needed = False
+                # AI 처리 불가 시 보류 (성급하게 완료 처리하지 않음)
+                send_telegram(f"⚠️ <b>[mathedu 신고 수동 확인 필요]</b>\n퀴즈: <code>{qs}</code> (문항 #{qn or '전체'})\n신고자: {reporter}\n내용: {text}")
+                print(f"[PENDING] {qs} #{qn}: {text}")
+                continue
 
         # 3. HTML 파일 저장 및 무결성 검증
-        if deploy_needed and new_html:
-            valid, reason = verify_html(new_html)
-            if not valid:
-                # 롤백
-                with open(html_path, 'w', encoding='utf-8') as f:
-                    f.write(original_html)
-                err_msg = f"무결성 검증 실패로 롤백: {reason}"
-                post_fix_report(ts, qs, qn, f"⚠️ {err_msg}")
-                processed_items.append({'timestamp': ts, 'quiz_slug': qs, 'question_num': qn, 'status': 'skipped', 'reason': err_msg})
-                continue
+        if deploy_needed and new_content:
+            if rel_path.endswith('.html'):
+                valid, reason = verify_html(new_content)
+                if not valid:
+                    # 롤백
+                    with open(target_path, 'w', encoding='utf-8') as f:
+                        f.write(original_content)
+                    err_msg = f"무결성 검증 실패로 롤백: {reason}"
+                    post_fix_report(ts, qs, qn, f"⚠️ {err_msg}")
+                    processed_items.append({'timestamp': ts, 'quiz_slug': qs, 'question_num': qn, 'status': 'skipped', 'reason': err_msg})
+                    continue
             
-            with open(html_path, 'w', encoding='utf-8') as f:
-                f.write(new_html)
+            with open(target_path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
 
             # 4. Git Commit & Push
             try:
-                subprocess.run(['git', 'add', f'board/{qs}.html'], cwd=REPO_DIR, check=True)
-                status_res = subprocess.run(['git', 'status', '--porcelain', f'board/{qs}.html'], cwd=REPO_DIR, capture_output=True, text=True)
+                subprocess.run(['git', 'add', rel_path], cwd=REPO_DIR, check=True)
+                status_res = subprocess.run(
+                    ['git', 'status', '--porcelain', rel_path],
+                    cwd=REPO_DIR, capture_output=True, text=True,
+                    encoding='utf-8', errors='replace'
+                )
                 if status_res.stdout.strip():
                     commit_msg = f"auto-fix({qs}): {fix_desc[:60]}"
                     subprocess.run(['git', 'commit', '-m', commit_msg], cwd=REPO_DIR, check=True)

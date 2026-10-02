@@ -148,6 +148,9 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 
 /* Bilingual Dual-Display Engine */
 .bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
 html[lang="en"] .bilingual-en {
   display: block;
   margin-top: 8px;
@@ -157,6 +160,17 @@ html[lang="en"] .bilingual-en {
   border-left: 2px solid rgba(147, 197, 253, 0.45);
   padding-left: 12px;
   font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
 }
 html[lang="en"] h1 .bilingual-en {
   font-size: 1.05rem;
@@ -270,13 +284,13 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
 <span>min7014 <b>mathedu</b></span>
 </a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
 <div class="lang-group">
   <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
   <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 [2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 심층 분석<span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #21] In-Depth Pedagogical Analysis: Cubic Function & Absolute Value Differentiability</span></h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
@@ -285,7 +299,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <div class="orig-card">
   <div class="orig-header">
     <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
-    <span class="orig-badge">2027학년도 9월 모의평가 수학 21번 [4점]</span>
+    <span class="orig-badge"><span class="bilingual-ko">2027학년도 9월 모의평가 수학 21번 [4점]</span><span class="bilingual-en">2027 AY Sep Mock Exam Math #21 [4 pts]</span></span>
   </div>
 
   <div class="orig-grid">
@@ -294,19 +308,30 @@ window.toggleMinGgb = function(btn, ggbUrl) {
       <div class="orig-media-frame">
         <img src="img_ac8dc374.png" alt="2027학년도 9월 모의평가 수학 21번 원본 문제">
       </div>
-      <div class="orig-media-sub">📄 한국교육과정평가원 수능 모의평가 원본 시험지</div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 한국교육과정평가원 수능 모의평가 원본 시험지</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
     </div>
 
     <!-- 우측: 원본 문항 정밀 수식 조판 & 핵심 조건 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 텍스트 조판 및 조건</h4>
-        <p style="margin:0 0 10px"><b>21.</b> 최고차항의 계수가 $1$인 삼차함수 $f(x)$가 다음 조건을 만족시킬 때, $f(0)$의 최댓값과 최솟값의 곱을 구하시오. <span style="color:var(--gold);font-weight:700">[4점]</span></p>
+        <h4>📋 원본 문항 텍스트 조판 및 조건<span class="bilingual-en">📋 Official Problem Statement & Conditions</span></h4>
+        <p style="margin:0 0 10px">
+          <span class="bilingual-ko"><b>21.</b> 최고차항의 계수가 $1$인 삼차함수 $f(x)$가 다음 조건을 만족시킬 때, $f(0)$의 최댓값과 최솟값의 곱을 구하시오. <span style="color:var(--gold);font-weight:700">[4점]</span></span>
+          <span class="bilingual-en"><b>21.</b> Let $f(x)$ be a cubic polynomial with leading coefficient $1$. When $f(x)$ satisfies the following conditions, find the product of the maximum and minimum values of $f(0)$. <span style="color:var(--gold);font-weight:700">[4 pts]</span></span>
+        </p>
         <div class="orig-cond-wrap">
-          <div style="margin-bottom:6px"><b>(가)</b> 방정식 $f(x) = 0$의 서로 다른 실근의 개수는 $2$이다.</div>
-          <div><b>(나)</b> $g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$ 일 때, 어떤 실수 $a$에 대하여 함수
-          <div style="text-align:center;margin:6px 0">$$h(x) = g(x) + |(x - 1)(x - a)(x - 4 + a)|$$</div>
-          가 실수 전체의 집합에서 미분가능하다.</div>
+          <div style="margin-bottom:6px">
+            <span class="bilingual-ko"><b>(가)</b> 방정식 $f(x) = 0$의 서로 다른 실근의 개수는 $2$이다.</span>
+            <span class="bilingual-en"><b>(a)</b> The equation $f(x) = 0$ has exactly $2$ distinct real roots.</span>
+          </div>
+          <div>
+            <span class="bilingual-ko"><b>(나)</b> $g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$ 일 때, 어떤 실수 $a$에 대하여 함수
+            <div style="text-align:center;margin:6px 0">$$h(x) = g(x) + |(x - 1)(x - a)(x - 4 + a)|$$</div>
+            가 실수 전체의 집합에서 미분가능하다.</span>
+            <span class="bilingual-en"><b>(b)</b> For $g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$, there exists a real number $a$ such that the function
+            <div style="text-align:center;margin:6px 0">$$h(x) = g(x) + |(x - 1)(x - a)(x - 4 + a)|$$</div>
+            is differentiable on the set of all real numbers.</span>
+          </div>
         </div>
       </div>
       <div class="orig-tip">
@@ -404,7 +429,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 </div>
 <div class="q" data-ans="3" data-exp="실근이 서로 다른 2개라는 것은 삼차함수가 x축과 접하는 중근(α) 하나와 x축을 관통하는 단순 실근(β) 하나를 가짐을 의미합니다. 따라서 f(x) = (x - α)²(x - β) 입니다." data-exp-en="Having exactly 2 real roots means the cubic curve is tangent to the x-axis at a double root α and crosses the x-axis at a simple root β. Thus f(x) = (x - α)²(x - β)." >
 <div class="lvl">1단계 기본 개념</div>
-<div class="stem">최고차항의 계수가 1인 삼차함수 $f(x)$에 대하여 방정식 $f(x)=0$의 서로 다른 실근의 개수가 2개일 때, $f(x)$의 올바른 인수분해 형태는 무엇인가요? (단, $\alpha \neq \beta$)<div class="bilingual-en">For a monic cubic function $f(x)$, if the equation $f(x)=0$ has exactly 2 distinct real roots, what is its factorization? (where $\alpha \neq \beta$)</div></div>
+<div class="stem"><span class="bilingual-ko">최고차항의 계수가 1인 삼차함수 $f(x)$에 대하여 방정식 $f(x)=0$의 서로 다른 실근의 개수가 2개일 때, $f(x)$의 올바른 인수분해 형태는 무엇인가요? (단, $\alpha \neq \beta$)</span><div class="bilingual-en">For a monic cubic function $f(x)$, if the equation $f(x)=0$ has exactly 2 distinct real roots, what is its factorization? (where $\alpha \neq \beta$)</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$f(x) = (x - \alpha)(x - \beta)(x - \gamma)$</div>
 <div class="opt"><span class="n">2</span>$f(x) = (x - \alpha)^3$</div>
@@ -442,7 +467,7 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
 </div>
 <div class="q" data-ans="3" data-exp="f'(x) = (x - α)(3x - α - 2β)에 x = β를 대입하면 f'(β) = (β - α)(3β - α - 2β) = (β - α)² 입니다. 실수의 제곱이며 α ≠ β 이므로 항상 f'(β) &gt; 0 (엄밀한 양수)입니다." data-exp-en="Substituting x = β into f'(x) gives f'(β) = (β - α)², which is strictly positive (&gt; 0) for all α ≠ β since the square of any non-zero real number is positive." >
 <div class="lvl">2단계 미분계수 계산</div>
-<div class="stem">삼차함수 $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$)의 도함수 $f'(x)$에 대하여, 관통 실근 $\beta$에서의 미분계수 $f'(\beta)$의 값과 부호는 무엇인가요?<div class="bilingual-en">For the cubic $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$), what is the derivative value $f'(\beta)$ and its sign at the crossing root $\beta$?</div></div>
+<div class="stem"><span class="bilingual-ko">삼차함수 $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$)의 도함수 $f'(x)$에 대하여, 관통 실근 $\beta$에서의 미분계수 $f'(\beta)$의 값과 부호는 무엇인가요?</span><div class="bilingual-en">For the cubic $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$), what is the derivative value $f'(\beta)$ and its sign at the crossing root $\beta$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$f'(\beta) = 0$</div>
 <div class="opt"><span class="n">2</span>$f'(\beta) = -(\beta - \alpha)^2 &lt; 0$</div>
@@ -483,7 +508,7 @@ $f'(\beta) > 0$이므로 $-8f'(\beta) < 0$이며, <b>$g(x)$는 실수 전체에�
 </div>
 <div class="q" data-ans="4" data-exp="x &lt; β에서 g(x) = 7f(x)이므로 좌미분계수는 7f'(β)이고, x &gt; β에서 g(x) = -f(x)이므로 우미분계수는 -f'(β)입니다. 따라서 우미분계수 - 좌미분계수 = -f'(β) - 7f'(β) = -8f'(β) 입니다." data-exp-en="Since g(x) = 7f(x) for x &lt; β and g(x) = -f(x) for x &gt; β, the derivative jump is g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β)." >
 <div class="lvl">3단계 도함수 도약</div>
-<div class="stem">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 정확한 값은 얼마인가요?<div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the exact jump of the derivative $g'(\beta^+) - g'(\beta^-)$?</div></div>
+<div class="stem"><span class="bilingual-ko">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 정확한 값은 얼마인가요?</span><div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the exact jump of the derivative $g'(\beta^+) - g'(\beta^-)$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$0$ (미분가능)</div>
 <div class="opt"><span class="n">2</span>$-6f'(\beta)$</div>
@@ -525,7 +550,7 @@ $f'(\beta) > 0$이므로 $-8f'(\beta) < 0$이며, <b>$g(x)$는 실수 전체에�
 </div>
 <div class="q" data-ans="1" data-exp="세 근 1, a, 4-a 중 두 근이 일치해야 합니다. 1=a 또는 1=4-a이면 a=1 또는 a=3이며 P(x)=(x-1)²(x-3)으로 x=3이 유일한 첨점입니다. a=4-a이면 a=2이며 P(x)=(x-2)²(x-1)로 x=1이 유일한 첨점입니다." data-exp-en="Two of the roots must coincide. If 1=a or 1=4-a, then a=1 or 3, giving P(x)=(x-1)²(x-3) with unique corner at x=3. If a=4-a, then a=2, giving P(x)=(x-2)²(x-1) with unique corner at x=1." >
 <div class="lvl">4단계 첨점 제어</div>
-<div class="stem">함수 $|P(x)| = |(x - 1)(x - a)(x - 4 + a)|$가 오직 1개의 첨점만 갖도록 하는 $a$의 값들과, 각 경우의 유일한 첨점의 위치를 바르게 짝지은 것은?<div class="bilingual-en">Which choice correctly identifies the values of $a$ and the unique non-differentiable corner of $|P(x)|$?</div></div>
+<div class="stem"><span class="bilingual-ko">함수 $|P(x)| = |(x - 1)(x - a)(x - 4 + a)|$가 오직 1개의 첨점만 갖도록 하는 $a$의 값들과, 각 경우의 유일한 첨점의 위치를 바르게 짝지은 것은?</span><div class="bilingual-en">Which choice correctly identifies the values of $a$ and the unique non-differentiable corner of $|P(x)|$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$a = 1, 3$ 일 때 첨점 $x = 3$, 그리고 $a = 2$ 일 때 첨점 $x = 1$</div>
 <div class="opt"><span class="n">2</span>$a = 0, 4$ 일 때 첨점 $x = 2$, 그리고 $a = 1$ 일 때 첨점 $x = 3$</div>
@@ -566,7 +591,7 @@ $$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \mathbf{\alpha = 2 \te
 </div>
 <div class="q" data-ans="2" data-exp="첨점이 x=3이므로 β=3이어야 하고, 도함수 도약 상쇄 조건 -8f'(3) + 8 = 0에서 f'(3) = (3 - α)² = 1입니다. 따라서 3 - α = ±1이므로 α = 2 또는 α = 4입니다. f(x) = (x - α)²(x - 3)에 0을 대입하면 f(0)은 (-2)²(-3) = -12, 또는 (-4)²(-3) = -48 입니다." data-exp-en="Since the corner is at x=3, we have β=3. Smoothing requires -8f'(3) + 8 = 0 and f'(3) = (3-α)² = 1, so α is 2 or 4. Evaluating f(0) = (0-α)²(0-3) gives f(0) in {-12, -48}." >
 <div class="lvl">5단계 Case 1 계산</div>
-<div class="stem">Case 1 ($a = 1$ 또는 $a = 3$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?<div class="bilingual-en">In Case 1 ($a = 1$ or $a = 3$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
+<div class="stem"><span class="bilingual-ko">Case 1 ($a = 1$ 또는 $a = 3$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 1 ($a = 1$ or $a = 3$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$\alpha = 1, 2$ 이고 $f(0) = -3, -6$</div>
 <div class="opt"><span class="n">2</span>$\alpha = 2, 4$ 이고 $f(0) = -12, -48$</div>
@@ -607,7 +632,7 @@ $$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \m
 </div>
 <div class="q" data-ans="1" data-exp="첨점이 x=1이므로 β=1이어야 하고, 도함수 도약 상쇄 조건 -8f'(1) + 2 = 0에서 f'(1) = (1 - α)² = 1/4 입니다. 따라서 1 - α = ±1/2이므로 α = 1/2 또는 α = 3/2 입니다. f(x) = (x - α)²(x - 1)에 0을 대입하면 f(0)은 (-1/2)²(-1) = -1/4, 또는 (-3/2)²(-1) = -9/4 입니다." data-exp-en="Since the corner is at x=1, we have β=1. Smoothing requires -8f'(1) + 2 = 0 and f'(1) = (1-α)² = 1/4, so α is 1/2 or 3/2. Evaluating f(0) = (0-α)²(0-1) yields f(0) in {-1/4, -9/4}." >
 <div class="lvl">6단계 Case 2 계산</div>
-<div class="stem">Case 2 ($a = 2$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?<div class="bilingual-en">In Case 2 ($a = 2$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
+<div class="stem"><span class="bilingual-ko">Case 2 ($a = 2$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 2 ($a = 2$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$\alpha = \frac{1}{2}, \frac{3}{2}$ 이고 $f(0) = -\frac{1}{4}, -\frac{9}{4}$</div>
 <div class="opt"><span class="n">2</span>$\alpha = 1, 2$ 이고 $f(0) = -1, -4$</div>
@@ -770,7 +795,7 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 
 <div class="q" data-ans="2" data-exp="f(0)의 가능한 4개 값 {-48, -12, -9/4, -1/4} 중 최댓값은 -1/4, 최솟값은 -48입니다. 따라서 M × m = (-1/4) × (-48) = 12 입니다." data-exp-en="Among the four values $\{-48, -12, -9/4, -1/4\}$, maximum $M = -1/4$ and minimum $m = -48$. Their product is $(-1/4) \times (-48) = 12$, which corresponds to Option ②." >
 <div class="lvl">7단계 최종 본문항</div>
-<div class="stem">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값 $M$과 최솟값 $m$의 곱 $M \times m$의 값은 얼마인가요?<div class="bilingual-en">What is the product $M \times m$ of the maximum $M$ and minimum $m$ of $f(0)$ derived from the problem conditions?</div></div>
+<div class="stem"><span class="bilingual-ko">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값 $M$과 최솟값 $m$의 곱 $M \times m$의 값은 얼마인가요?</span><div class="bilingual-en">What is the product $M \times m$ of the maximum $M$ and minimum $m$ of $f(0)$ derived from the problem conditions?</div></div>
 <div class="opts opts-inline">
 <div class="opt"><span class="n">1</span>$6$</div>
 <div class="opt"><span class="n">2</span>$12$</div>
@@ -904,33 +929,49 @@ if (!window.toggleMinGgb) {
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
 
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
 function toggleExp(btn){
   var q = btn.closest ? btn.closest('.q') : btn.parentElement;
   while(q && !q.classList.contains('q')) { q = q.parentElement; }
   if(!q) return;
   var exp = q.querySelector('.exp');
   if(!exp) return;
+  var isEn = (document.documentElement.lang === 'en');
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent = '💡 해설 보기';
+    btn.textContent = isEn ? '💡 View Explanation' : '💡 해설 보기';
   } else {
     exp.classList.add('show');
-    btn.textContent = '💡 해설 닫기';
+    btn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기';
   }
 }
 
 qs.forEach(q=>{
   const ans=+q.dataset.ans;
   const exp=q.querySelector('.exp');
-  if(exp) {
-    var koExp = q.dataset.exp || '';
-    var enExp = q.dataset.expEn || '';
-    if(enExp) {
-      exp.innerHTML = koExp + '<div class="bilingual-en"><b>English Explanation:</b> ' + enExp + '</div>';
-    } else {
-      exp.innerHTML = koExp;
-    }
-  }
   const opts=q.querySelectorAll('.opt');
   opts.forEach((o,i)=>{
     o.addEventListener('click',()=>{
@@ -949,7 +990,10 @@ qs.forEach(q=>{
       }
       if(exp) exp.classList.add('show');
       var toggleBtn = q.querySelector('.exp-toggle-btn');
-      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
+      if(toggleBtn) {
+        var isEn = (document.documentElement.lang === 'en');
+        toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기';
+      }
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
       const pct=Math.round(pts/total*100);
@@ -1040,6 +1084,7 @@ function setBoardLang(lang) {
   if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
     MatheduI18n.setLanguage(lang);
   }
+  updateExplanations(lang);
 }
 
 (function(){
@@ -1049,7 +1094,7 @@ function setBoardLang(lang) {
     if (p === 'en' || p === 'ko') saved = p;
     else saved = localStorage.getItem('mathedu_lang') || 'ko';
   } catch(e){}
-  if (saved === 'en') setBoardLang('en');
+  setBoardLang(saved);
 })();
 </script>
 <script src="../mathedu-room.js"></script>
