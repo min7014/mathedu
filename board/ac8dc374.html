@@ -426,29 +426,181 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 
 <div class="sym" style="grid-template-columns:1fr 1fr;gap:16px;margin:16px 0">
   
-  <!-- 카드 1: 조건 (가) 삼차함수의 실근 2개 -->
-  <div class="sym-card">
+  <!-- 카드 1: 조건 (가) 삼차함수의 실근 2개 (심층 대수적 증명 & 시각적 기하 형태) -->
+  <div class="sym-card" style="grid-column:1 / -1">
     <div class="sym-badge">
-      <span class="bilingual-ko">📌 기본정리 1 · 인수정리와 중근</span>
-      <span class="bilingual-en">📌 Theorem 1 · Factorization & Double Root</span>
+      <span class="bilingual-ko">📌 기본정리 1 · 대수학의 기본정리와 극값 접촉 원리</span>
+      <span class="bilingual-en">📌 Theorem 1 · Fundamental Theorem of Algebra & Tangent Extrema Geometry</span>
     </div>
     <div class="sym-title">
-      <span class="bilingual-ko">1. 삼차함수 $f(x)=0$의 실근이 2개인 기하학적 형태</span>
-      <span class="bilingual-en">1. Geometry of Monic Cubic with Exactly 2 Real Roots</span>
+      <span class="bilingual-ko">1. 삼차함수 $f(x)=0$의 실근이 2개인 심층 원리와 기하학적 형태 (Type 1 vs Type 2)</span>
+      <span class="bilingual-en">1. In-Depth Theory & Geometric Classification of Monic Cubic with Exactly 2 Real Roots</span>
     </div>
     <div class="sym-formula-box">
-      <b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta)$$</b>
+      <b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta) \iff (\text{극댓값}) \times (\text{극솟값}) = 0$$</b>
     </div>
     <div class="sym-desc">
       <span class="bilingual-ko">
-        • <b>왜 접점(중근)이 생기는가?</b>: 최고차항 계수가 $1$인 삼차함수는 $x \to \pm\infty$에서 서로 다른 부호로 무한 발산하므로 $x$축과 최소 1번 만납니다. 서로 다른 실근이 정확히 2개라는 것은 삼차함수의 극댓값 또는 극솟값 중 하나가 <b>$x$축 위에 정확히 놓여 $x=\alpha$에서 접하고(중근)</b>, 다른 한 점 <b>$x=\beta$에서 $x$축을 통과(단순 실근)</b>함을 뜻합니다.<br>
-        • <b>관통점 $\beta$에서의 접선 기울기</b>: 곱의 미분법 $f'(x) = (x-\alpha)(3x - \alpha - 2\beta)$에 두 실근을 대입하면:
-        <div style="text-align:center;margin:6px 0">$$f'(\alpha) = 0, \quad \mathbf{f'(\beta) = (\beta - \alpha)^2 > 0}$$</div>
-        $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 실수의 제곱으로서 <b>항상 엄밀한 양수($> 0$)</b>입니다! 즉, $\alpha < \beta$(극대 접함)이든 $\alpha > \beta$(극소 접함)이든, 삼차함수는 관통점 $\beta$에서 <b>항상 양의 기울기로 $x$축을 상향 돌파</b>합니다.
+        <div style="margin-bottom:12px">
+          • <b>[대수학의 기본정리] 왜 반드시 (중근 1개 + 단순 실근 1개)여야 하는가?</b><br>
+          최고차항의 계수가 $1$인 삼차방정식 $f(x)=0$은 복소수 범위에서 중복도를 고려할 때 <b>정확히 3개의 근</b>을 갖습니다. 실계수 다항식의 성질에 의해 허근은 항상 <b>켤레복소수 쌍 $(p \pm qi, q \neq 0)$으로 2개씩</b> 존재하므로, 실근의 개수는 오직 <b>1개</b>(실근 1개 + 허근 2개, 또는 삼중근 1개)이거나 <b>3개</b>뿐입니다.<br>
+          따라서 <b>"서로 다른 실근이 정확히 2개"</b>가 되려면, 3개의 실근 중 <b>두 실근이 완벽히 일치하여 중근(Multiplicity 2)</b>을 이루어야만 합니다! 중근을 $\alpha$, 단순 실근을 $\beta$ ($\alpha \neq \beta$)라 하면 $f(x)$는 다음과 같이 오직 하나의 형태로 인수분해됩니다:
+          <div style="text-align:center;margin:6px 0"><b>$$f(x) = (x - \alpha)^2(x - \beta)$$</b></div>
+        </div>
+
+        <div style="margin-bottom:12px">
+          • <b>[미적분학적 원리] 왜 중근 $\alpha$는 $x$축에 '접하는 극값'인가?</b><br>
+          $f(x) = (x-\alpha)^2(x-\beta)$의 $x=\alpha$에서의 미분계수를 계산하면:
+          <div style="text-align:center;margin:6px 0">$$f'(\alpha) = \lim_{x \to \alpha} \frac{f(x) - f(\alpha)}{x - \alpha} = \lim_{x \to \alpha} (x-\alpha)(x-\beta) = 0$$</div>
+          함숫값 $f(\alpha)=0$이면서 동시에 <b>접선의 기울기 $f'(\alpha)=0$</b>이므로, 점 $(\alpha, 0)$에서의 접선은 바로 <b>$y = 0$ ($x$축 자체)</b>입니다.<br>
+          또한 인수 $(x-\alpha)^2 \ge 0$은 $\alpha$의 좌우에서 부호가 변하지 않으므로, 그래프는 $x$축을 가로지르지 못하고 <b>$x$축에 닿았다가 튕겨 나옵니다(극대 또는 극소 형성)</b>! 반면 $(x-\beta)$는 1차식이므로 $x=\beta$ 좌우에서 부호가 반전되어 <b>$x$축을 상향 관통</b>합니다.
+        </div>
+
+        <div style="margin-bottom:12px">
+          • <b>[극값 판별식] 극댓값과 극솟값의 곱으로 본 실근 2개 조건</b><br>
+          극값을 갖는 삼차함수에서 $(\text{극댓값}) \times (\text{극솟값}) < 0$이면 서로 다른 3실근, $> 0$이면 1실근(2허근)입니다.<br>
+          따라서 실근이 정확히 2개라는 것은 <b>$(\text{극댓값}) \times (\text{극솟값}) = 0$</b>, 즉 <b>극댓값이나 극솟값 중 하나가 정확히 $0$</b>이 되어 극점의 꼭짓점이 $x$축 위에 얹혀 있음을 뜻합니다!
+        </div>
       </span>
+
+      <div class="bilingual-en" style="margin-bottom:14px">
+        • <b>[Fundamental Theorem of Algebra] Why (1 Double Root + 1 Simple Root)?</b><br>
+        A cubic $f(x)=0$ has 3 roots in $\mathbb{C}$. Because coefficients are real, complex roots always appear in conjugate pairs $(p \pm qi)$. Thus, a cubic equation can only possess either 1 real root (with 2 non-real complex roots or a triple root) or 3 real roots. To possess **exactly 2 distinct real roots**, two roots must coincide into a **double root $\alpha$ (multiplicity 2)** alongside one **simple root $\beta$**, forcing $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$).<br>
+        • <b>[Calculus & Tangency] Why Does $\alpha$ Touch the x-Axis Horizontally?</b><br>
+        Evaluating the derivative at $\alpha$ gives $f'(\alpha) = 0$. Since $f(\alpha)=0$ and $f'(\alpha)=0$, the tangent at $(\alpha, 0)$ is $y=0$ (the x-axis itself). Furthermore, $(x-\alpha)^2 \ge 0$ never changes sign locally, so the curve bounces off the x-axis rather than crossing it (creating a local extremum). Conversely, the linear factor $(x-\beta)$ changes sign, cutting transversely across the x-axis.<br>
+        • <b>[Extremum Criterion]</b> $(\text{Local Max}) \times (\text{Local Min}) = 0 \iff$ one extremum touches the x-axis tangentially!
+      </div>
+
+      <!-- 🎨 두 가지 기하학적 형태 (Type 1 vs Type 2) 2-패널 비교 SVG 벡터 다이어그램 -->
+      <div style="background:rgba(10,13,26,.85);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px;margin:14px 0">
+        <div style="font-size:.92rem;font-weight:800;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:6px">
+          <span>📊</span>
+          <span class="bilingual-ko">삼차함수 실근 2개의 기하학적 2대 형태 비교 (Type 1 vs Type 2)</span>
+          <span class="bilingual-en">Geometric Classification of Monic Cubic with 2 Real Roots (Type 1 vs Type 2)</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          
+          <!-- 패널 1: Type 1 (α < β, 극대 접함) -->
+          <div style="background:rgba(15,20,38,.9);border:1px solid rgba(56,189,248,.4);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:.85rem;font-weight:700;color:#38bdf8;margin-bottom:6px">
+              <span class="bilingual-ko">Type 1: $\alpha < \beta$ · 극댓값이 $0$ (극대 접함)</span>
+              <span class="bilingual-en">Type 1: $\alpha < \beta$ · Local Max Touches x-Axis</span>
+            </div>
+            <svg viewBox="0 0 300 170" style="width:100%;height:auto;display:block;margin:0 auto">
+              <!-- x axis -->
+              <line x1="15" y1="100" x2="285" y2="100" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+              <polygon points="285,97 292,100 285,103" fill="rgba(255,255,255,0.6)" />
+              <text x="282" y="93" fill="#94a3b8" font-size="10">x</text>
+              <!-- y axis (sketch) -->
+              <line x1="40" y1="20" x2="40" y2="155" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="2 2" />
+              <!-- Cubic curve: M 35,150 ... α=90, min=195, β=245 -->
+              <path d="M 35 150 C 55 100 70 100 90 100 C 115 100 135 130 155 140 C 175 150 185 152 195 152 C 210 152 225 135 245 100 C 258 75 268 45 278 25" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+              <!-- Horizontal tangent at alpha -->
+              <line x1="60" y1="100" x2="120" y2="100" stroke="#5eead4" stroke-width="2" stroke-dasharray="3 2" />
+              <!-- Tangent slope line at beta -->
+              <line x1="228" y1="130" x2="262" y2="70" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="3 2" />
+              <!-- Points -->
+              <!-- alpha (double root) -->
+              <circle cx="90" cy="100" r="4.5" fill="#5eead4" stroke="#0f172a" stroke-width="1.5" />
+              <text x="86" y="90" fill="#5eead4" font-size="11" font-weight="bold">α</text>
+              <text x="45" y="76" fill="#a7f3d0" font-size="8.5">극대 f(α)=0</text>
+              <text x="50" y="86" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (접함)</text>
+              <!-- Local min -->
+              <circle cx="195" cy="152" r="3.5" fill="#a78bfa" />
+              <text x="175" y="165" fill="#c084fc" font-size="8.5">극솟값 m &lt; 0</text>
+              <!-- beta (simple root) -->
+              <circle cx="245" cy="100" r="4.5" fill="#fb7185" stroke="#0f172a" stroke-width="1.5" />
+              <text x="248" y="116" fill="#fb7185" font-size="11" font-weight="bold">β</text>
+              <text x="210" y="62" fill="#fca5a5" font-size="8.5" font-weight="bold">f&#39;(β) = (β-α)² &gt; 0</text>
+              <text x="235" y="130" fill="#fca5a5" font-size="8">단순실근 (상향 관통)</text>
+              <!-- 2:1 ratio annotation -->
+              <line x1="90" y1="108" x2="195" y2="108" stroke="#38bdf8" stroke-width="1" stroke-dasharray="2 2" />
+              <line x1="195" y1="108" x2="245" y2="108" stroke="#f43f5e" stroke-width="1" stroke-dasharray="2 2" />
+              <text x="135" y="118" fill="#93c5fd" font-size="8">2</text>
+              <text x="215" y="118" fill="#fca5a5" font-size="8">1</text>
+            </svg>
+            <div style="font-size:.78rem;color:#cbd5e1;margin-top:6px;line-height:1.5;text-align:left">
+              <span class="bilingual-ko">
+                • $x = \alpha$에서 <b>극댓값 $0$</b>으로 접하며 아래로 튕김 ($f'(\alpha)=0$)<br>
+                • $x = \frac{\alpha+2\beta}{3}$에서 음의 극솟값 찍고 상승<br>
+                • $x = \beta$에서 <b>양의 기울기 $f'(\beta)>0$</b>로 $x$축 상향 관통
+              </span>
+              <span class="bilingual-en">
+                • Touches x-axis at $\alpha$ ($f(\alpha)=0$, local max, $f'=0$)<br>
+                • Reaches local min $m < 0$ at $\frac{\alpha+2\beta}{3}$<br>
+                • Crosses x-axis upward at $\beta$ with $f'(\beta) > 0$
+              </span>
+            </div>
+          </div>
+
+          <!-- 패널 2: Type 2 (β < α, 극소 접함) -->
+          <div style="background:rgba(15,20,38,.9);border:1px solid rgba(167,139,250,.4);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:.85rem;font-weight:700;color:#c084fc;margin-bottom:6px">
+              <span class="bilingual-ko">Type 2: $\beta < \alpha$ · 극솟값이 $0$ (극소 접함)</span>
+              <span class="bilingual-en">Type 2: $\beta < \alpha$ · Local Min Touches x-Axis</span>
+            </div>
+            <svg viewBox="0 0 300 170" style="width:100%;height:auto;display:block;margin:0 auto">
+              <!-- x axis -->
+              <line x1="15" y1="100" x2="285" y2="100" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+              <polygon points="285,97 292,100 285,103" fill="rgba(255,255,255,0.6)" />
+              <text x="282" y="93" fill="#94a3b8" font-size="10">x</text>
+              <!-- y axis (sketch) -->
+              <line x1="40" y1="20" x2="40" y2="155" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="2 2" />
+              <!-- Cubic curve: β=75, max=130, α=215 -->
+              <path d="M 45 155 C 58 135 68 115 75 100 C 90 70 110 46 130 46 C 150 46 170 65 190 85 C 205 98 210 100 215 100 C 225 100 240 100 265 40" fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round" />
+              <!-- Tangent slope line at beta -->
+              <line x1="60" y1="130" x2="90" y2="70" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="3 2" />
+              <!-- Horizontal tangent at alpha -->
+              <line x1="185" y1="100" x2="245" y2="100" stroke="#5eead4" stroke-width="2" stroke-dasharray="3 2" />
+              <!-- Points -->
+              <!-- beta (simple root) -->
+              <circle cx="75" cy="100" r="4.5" fill="#fb7185" stroke="#0f172a" stroke-width="1.5" />
+              <text x="65" y="90" fill="#fb7185" font-size="11" font-weight="bold">β</text>
+              <text x="45" y="60" fill="#fca5a5" font-size="8.5" font-weight="bold">f&#39;(β) = (β-α)² &gt; 0</text>
+              <text x="42" y="118" fill="#fca5a5" font-size="8">단순실근 (상향 관통)</text>
+              <!-- Local max -->
+              <circle cx="130" cy="46" r="3.5" fill="#38bdf8" />
+              <text x="115" y="38" fill="#7dd3fc" font-size="8.5">극댓값 M &gt; 0</text>
+              <!-- alpha (double root) -->
+              <circle cx="215" cy="100" r="4.5" fill="#5eead4" stroke="#0f172a" stroke-width="1.5" />
+              <text x="212" y="116" fill="#5eead4" font-size="11" font-weight="bold">α</text>
+              <text x="205" y="90" fill="#a7f3d0" font-size="8.5">극소 f(α)=0</text>
+              <text x="205" y="80" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (접함)</text>
+              <!-- 1:2 ratio annotation -->
+              <line x1="75" y1="108" x2="130" y2="108" stroke="#f43f5e" stroke-width="1" stroke-dasharray="2 2" />
+              <line x1="130" y1="108" x2="215" y2="108" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 2" />
+              <text x="100" y="118" fill="#fca5a5" font-size="8">1</text>
+              <text x="170" y="118" fill="#c084fc" font-size="8">2</text>
+            </svg>
+            <div style="font-size:.78rem;color:#cbd5e1;margin-top:6px;line-height:1.5;text-align:left">
+              <span class="bilingual-ko">
+                • $x = \beta$에서 먼저 <b>양의 기울기 $f'(\beta)>0$</b>로 $x$축 상향 관통<br>
+                • $x = \frac{2\alpha+\beta}{3}$에서 양의 극댓값 찍고 하강<br>
+                • $x = \alpha$에서 <b>극솟값 $0$</b>으로 접하며 위로 튕김 ($f'(\alpha)=0$)
+              </span>
+              <span class="bilingual-en">
+                • Crosses x-axis upward at $\beta$ first with $f'(\beta) > 0$<br>
+                • Reaches local max $M > 0$ at $\frac{2\alpha+\beta}{3}$<br>
+                • Touches x-axis at $\alpha$ ($f(\alpha)=0$, local min, $f'=0$)
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <span class="bilingual-ko">
+        • <b>[핵심 불변량] 관통점 $\beta$에서의 접선 기울기 엄밀한 양수($> 0$) 증명</b>:<br>
+        곱의 미분법 $f'(x) = 2(x-\alpha)(x-\beta) + (x-\alpha)^2 = (x-\alpha)(3x - \alpha - 2\beta)$에 $x = \beta$를 대입하면:
+        <div style="text-align:center;margin:6px 0">$$\mathbf{f'(\beta) = (\beta - \alpha)(3\beta - \alpha - 2\beta) = (\beta - \alpha)^2 > 0}$$</div>
+        $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 $0$이 아닌 실수의 제곱으로서 <b>어떤 경우에도 항상 엄밀한 양수($> 0$)</b>입니다!<br>
+        따라서 [Type 1]($\alpha < \beta$)이든 [Type 2]($\beta < \alpha$)이든, 삼차함수 그래프는 관통점 $\beta$에서 <b>언제나 양의 기울기로 $x$축을 상향 돌파</b>한다는 결정적 사실이 증명됩니다!
+      </span>
+
       <div class="bilingual-en">
-        • <b>Why a Tangent Root Occurs?</b>: A monic cubic diverges to $\pm\infty$. Having exactly 2 real roots forces one local extremum to lie tangentially on the x-axis at double root $\alpha$ ($f(\alpha)=f'(\alpha)=0$), while crossing transversely at simple root $\beta$ ($f(\beta)=0, f'(\beta) \neq 0$).<br>
-        • <b>Derivative at Crossing Root $\beta$</b>: Differentiating yields $f'(x) = (x-\alpha)(3x - \alpha - 2\beta)$. At the roots: $f'(\alpha)=0$ and $f'(\beta) = (\beta - \alpha)^2 > 0$. Since $\alpha \neq \beta$, the slope at $\beta$ is strictly positive regardless of the order of $\alpha$ and $\beta$.
+        • <b>[Strict Positivity Invariant] Derivative at Simple Root $\beta$</b>:<br>
+        Substituting $x=\beta$ into $f'(x) = (x-\alpha)(3x - \alpha - 2\beta)$ yields $\mathbf{f'(\beta) = (\beta - \alpha)^2 > 0}$. Because $\alpha \neq \beta$, the square is strictly positive. Whether in Type 1 ($\alpha < \beta$) or Type 2 ($\beta < \alpha$), the cubic **always pierces the x-axis upward with a strictly positive slope**!
       </div>
     </div>
   </div>
@@ -517,7 +669,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
   </div>
 
   <!-- 카드 4: 절댓값 |P(x)|의 V자 첨점과 첨점 상쇄 -->
-  <div class="sym-card">
+  <div class="sym-card" style="grid-column:1 / -1">
     <div class="sym-badge">
       <span class="bilingual-ko">📌 기본정리 4 · 절댓값 첨점과 평활화</span>
       <span class="bilingual-en">📌 Theorem 4 · Absolute Value Jump & Perfect Smoothing</span>
@@ -651,11 +803,13 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <h2>제1단계 · [기초 개념] 삼차함수 $f(x)=0$의 실근이 2개일 때의 기하학적 형태<span class="bilingual-en">Step 1 · [Foundations] Geometry of Monic Cubic with Exactly 2 Real Roots</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
-최고차항 계수가 1인 삼차함수 $f(x)$에 대하여 방정식 $f(x)=0$의 실근이 서로 다른 2개라는 것은, 삼차함수 그래프가 $x$축과 정확히 두 점에서만 만난다는 뜻입니다.<br>
-삼차함수의 극대점 또는 극소점 중 하나가 $x$축 위에 정확히 얹혀 있어 한 실근 $\alpha$에서 $x$축에 <b>접하는 중근</b>을 갖고, 다른 한 실근 $\beta$에서 $x$축을 <b>관통하는 단순 실근</b>을 가져야만 합니다 (단, $\alpha \neq \beta$).<br>
-따라서 $f(x)$는 다음과 같이 완벽히 인수분해됩니다:<br>
-<div style="text-align:center;margin:8px 0;font-size:1.05rem"><b>$$f(x) = (x - \alpha)^2(x - \beta)$$</b></div>
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For a monic cubic $f(x)$, having exactly 2 distinct real roots means the cubic curve touches the x-axis tangentially at a double root $\alpha$ (local extremum) and crosses the x-axis at a simple root $\beta$ ($\alpha \neq \beta$). Thus $f(x)$ factors uniquely into $f(x) = (x - \alpha)^2(x - \beta)$.</div>
+최고차항 계수가 1인 삼차함수 $f(x)$에 대하여 방정식 $f(x)=0$의 서로 다른 실근이 2개라는 것은, 삼차함수 그래프가 $x$축과 정확히 두 점에서만 만남을 뜻합니다.<br>
+• <b>대수학의 기본정리와 켤레근</b>: 실계수 삼차방정식은 복소수 범위에서 근을 3개(중복도 포함) 가지며, 허근은 항상 켤레쌍(2개)으로 나타납니다. 따라서 서로 다른 실근이 정확히 2개이려면 실근 3개 중 <b>2개의 실근이 완벽히 겹치는 중근 1개($\alpha$) + 단순 실근 1개($\beta$)</b>이어야만 합니다 ($\alpha \neq \beta$).<br>
+• <b>접선과 극값 접촉 원리</b>: 중근 $x=\alpha$에서는 함숫값 $f(\alpha)=0$뿐만 아니라 <b>접선의 기울기 $f'(\alpha)=0$</b>입니다. 따라서 접선이 $y=0$ ($x$축)이 되어, 극댓값 또는 극솟값 중 하나가 $x$축에 정확히 얹혀 <b>$x$축에 매끄럽게 접하며 튕겨 나옵니다</b>.<br>
+• <b>유일한 인수분해</b>: 관통하는 단순 실근 $\beta$와 접하는 중근 $\alpha$에 의해 $f(x)$는 다음과 같이 완벽히 인수분해됩니다:
+<div style="text-align:center;margin:8px 0;font-size:1.05rem"><b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta)$$</b></div>
+• <b>기하학적 2대 형태</b>: 극댓값이 $0$인 경우($\alpha < \beta$, 극대 접함)와 극솟값이 $0$인 경우($\beta < \alpha$, 극소 접함)가 존재하며, 두 경우 모두 상단 <b>[제0단계 기본정리 1]</b>의 2-패널 비교 다이어그램에서 생생하게 확인할 수 있습니다.
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For a monic cubic $f(x)$, having exactly 2 distinct real roots forces the curve to touch the x-axis tangentially at a double root $\alpha$ ($f(\alpha)=f'(\alpha)=0$, local extremum touching the x-axis) and cross at a simple root $\beta$ ($\alpha \neq \beta$). By the Fundamental Theorem of Algebra and Conjugate Root Theorem, this 1 double root + 1 simple root configuration is unique, giving $f(x) = (x - \alpha)^2(x - \beta)$. (See Step 0 Theorem 1 for detailed Type 1 vs Type 2 vector diagrams).</div>
 </div>
 <div class="q" data-ans="3" data-exp="실근이 서로 다른 2개라는 것은 삼차함수가 x축과 접하는 중근(α) 하나와 x축을 관통하는 단순 실근(β) 하나를 가짐을 의미합니다. 따라서 f(x) = (x - α)²(x - β) 입니다." data-exp-en="Having exactly 2 real roots means the cubic curve is tangent to the x-axis at a double root α and crosses the x-axis at a simple root β. Thus f(x) = (x - α)²(x - β)." >
 <div class="lvl">1단계 기본 개념</div>
