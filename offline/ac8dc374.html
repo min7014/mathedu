@@ -23,10 +23,21 @@ h2{font-size:1.22rem;margin:36px 0 12px;color:var(--accent);
 border-left:4px solid transparent;border-image:linear-gradient(var(--accent),var(--accent2)) 1;padding-left:12px}
 h3{margin:0 0 8px;color:var(--accent);font-size:1.05rem}
 .lead{color:var(--sub);font-size:.95rem;margin:0 0 10px}
-.sym{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-.sym div{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;
-font-size:.9rem;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
-.sym b{color:var(--gold)}
+.sym{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+@media (max-width:768px){.sym{grid-template-columns:1fr}}
+.sym-card{background:var(--card2);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;
+font-size:.92rem;line-height:1.75;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+transition:.2s;box-shadow:0 6px 24px rgba(0,0,0,.25);position:relative;overflow:hidden}
+.sym-card:hover{border-color:rgba(124,196,255,.6);transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,196,255,.25)}
+.sym-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,196,255,.16);border:1px solid rgba(124,196,255,.35);color:var(--accent);font-size:.76rem;font-weight:800;padding:3px 10px;border-radius:12px;margin-bottom:8px}
+.sym-title{font-size:1.05rem;color:var(--gold);font-weight:700;margin:0 0 10px;line-height:1.45}
+.sym-formula-box{background:rgba(13,16,32,.75);border:1px solid rgba(124,196,255,.35);border-radius:10px;padding:10px 14px;margin:8px 0 12px;text-align:center;font-size:1.05rem;box-shadow:inset 0 2px 6px rgba(0,0,0,.3)}
+.sym-desc{color:var(--txt);font-size:.91rem;line-height:1.75}
+.sym-desc b{color:#93c5fd}
+.step0-visual-box{background:rgba(15,20,38,.85);border:1.5px solid rgba(124,196,255,.4);border-radius:16px;padding:20px;margin:20px 0 26px;box-shadow:0 8px 32px rgba(0,0,0,.35)}
+html[lang="en"] .sym-card .bilingual-en{display:block !important;color:#cbd5e1;font-size:.88rem;line-height:1.6;margin-top:10px;border-left:2px solid rgba(147,197,253,.45);padding-left:10px}
+html[lang="en"] .sym-badge .bilingual-en{display:inline !important;border:none !important;padding:0 !important;margin:0 !important;color:inherit !important}
+html[lang="en"] .sym-title .bilingual-en{display:block !important;color:#fde68a !important;font-size:.95rem !important;border:none !important;padding:0 !important;margin-top:4px !important}
 .q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:16px 0;
 backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
 box-shadow:var(--glass-shadow);transition:.2s}
@@ -283,8 +294,8 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/ac8dc374.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="ac8dc374">
-<meta name="mathedu-offline-build-time" content="2026-10-02T06:08:07.508896+00:00">
-<meta name="mathedu-offline-hash" content="da5aba25">
+<meta name="mathedu-offline-build-time" content="2026-10-02T10:54:59.171521+00:00">
+<meta name="mathedu-offline-hash" content="72694536">
 <meta name="mathedu-version-label" content="v2026.10.02">
 
 </head><body><div class="wrap">
@@ -464,12 +475,231 @@ window.toggleMinGgb = function(btn, ggbUrl) {
   </div>
 </div>
 
-<h2>🔰 제0단계 · 수학 기호 및 기본 정리 디딤돌<span class="bilingual-en">🔰 Step 0 · Foundational Theorems & Mathematical Notation</span></h2>
-<div class="sym">
-<div><b>$f(x) = 0$ 실근 2개</b> — 삼차함수가 x축과 한 점에서 접하고(중근 $\alpha$), 다른 한 점을 관통($\beta$)<div class="bilingual-en">Two real roots: $f(x) = (x - \alpha)^2(x - \beta)$, tangent at $\alpha$ and crossing at $\beta$.</div></div>
-<div><b>$g(x)$의 부호 분기</b> — $f(x) \ge 0$이면 $-f(x)$, $f(x) < 0$이면 $7f(x)$<div class="bilingual-en">Sign branch of $g(x)$: $-f(x)$ on $f(x) \ge 0$, and $7f(x)$ on $f(x) < 0$.</div></div>
-<div><b>접점에서의 미분가능성</b> — $f'(\alpha) = 0$이므로 $x = \alpha$에서는 $g'(\alpha) = 0$으로 매끄러움<div class="bilingual-en">Differentiability at tangent root: $f'(\alpha)=0 \implies g'(\alpha)=0$, smooth without corner.</div></div>
-<div><b>절댓값의 V자 첨점</b> — 단순근 $x = c$에서 $|P(x)|$의 우미분계수 - 좌미분계수 $= 2|P'(c)|$<div class="bilingual-en">V-shaped corner of absolute value: jump across simple root $c$ is $2|P'(c)|$.</div></div>
+<!-- 🔰 제0단계 · 수학 기호 및 기본 정리 디딤돌 (심층 상세 해설 & 시각적 기하 다이어그램) -->
+<h2>🔰 제0단계 · 수학 기호 및 기본 정리 디딤돌<span class="bilingual-en">🔰 Step 0 · In-Depth Foundational Theorems & Mathematical Notation</span></h2>
+
+<div class="sym" style="grid-template-columns:1fr 1fr;gap:16px;margin:16px 0">
+  
+  <!-- 카드 1: 조건 (가) 삼차함수의 실근 2개 -->
+  <div class="sym-card">
+    <div class="sym-badge">
+      <span class="bilingual-ko">📌 기본정리 1 · 인수정리와 중근</span>
+      <span class="bilingual-en">📌 Theorem 1 · Factorization & Double Root</span>
+    </div>
+    <div class="sym-title">
+      <span class="bilingual-ko">1. 삼차함수 $f(x)=0$의 실근이 2개인 기하학적 형태</span>
+      <span class="bilingual-en">1. Geometry of Monic Cubic with Exactly 2 Real Roots</span>
+    </div>
+    <div class="sym-formula-box">
+      <b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta)$$</b>
+    </div>
+    <div class="sym-desc">
+      <span class="bilingual-ko">
+        • <b>왜 접점(중근)이 생기는가?</b>: 최고차항 계수가 $1$인 삼차함수는 $x \to \pm\infty$에서 서로 다른 부호로 무한 발산하므로 $x$축과 최소 1번 만납니다. 서로 다른 실근이 정확히 2개라는 것은 삼차함수의 극댓값 또는 극솟값 중 하나가 <b>$x$축 위에 정확히 놓여 $x=\alpha$에서 접하고(중근)</b>, 다른 한 점 <b>$x=\beta$에서 $x$축을 통과(단순 실근)</b>함을 뜻합니다.<br>
+        • <b>관통점 $\beta$에서의 접선 기울기</b>: 곱의 미분법 $f'(x) = (x-\alpha)(3x - \alpha - 2\beta)$에 두 실근을 대입하면:
+        <div style="text-align:center;margin:6px 0">$$f'(\alpha) = 0, \quad \mathbf{f'(\beta) = (\beta - \alpha)^2 > 0}$$</div>
+        $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 실수의 제곱으로서 <b>항상 엄밀한 양수($> 0$)</b>입니다! 즉, $\alpha < \beta$(극대 접함)이든 $\alpha > \beta$(극소 접함)이든, 삼차함수는 관통점 $\beta$에서 <b>항상 양의 기울기로 $x$축을 상향 돌파</b>합니다.
+      </span>
+      <div class="bilingual-en">
+        • <b>Why a Tangent Root Occurs?</b>: A monic cubic diverges to $\pm\infty$. Having exactly 2 real roots forces one local extremum to lie tangentially on the x-axis at double root $\alpha$ ($f(\alpha)=f'(\alpha)=0$), while crossing transversely at simple root $\beta$ ($f(\beta)=0, f'(\beta) \neq 0$).<br>
+        • <b>Derivative at Crossing Root $\beta$</b>: Differentiating yields $f'(x) = (x-\alpha)(3x - \alpha - 2\beta)$. At the roots: $f'(\alpha)=0$ and $f'(\beta) = (\beta - \alpha)^2 > 0$. Since $\alpha \neq \beta$, the slope at $\beta$ is strictly positive regardless of the order of $\alpha$ and $\beta$.
+      </div>
+    </div>
+  </div>
+
+  <!-- 카드 2: 조건 (나) g(x)의 부호 분기와 도함수 도약 -->
+  <div class="sym-card">
+    <div class="sym-badge">
+      <span class="bilingual-ko">📌 기본정리 2 · 구간별 함수와 그래프 대칭</span>
+      <span class="bilingual-en">📌 Theorem 2 · Piecewise Scaling & Derivative Jump</span>
+    </div>
+    <div class="sym-title">
+      <span class="bilingual-ko">2. $g(x)$의 부호 분기와 $x=\beta$에서의 위로 뾰족한 첨점</span>
+      <span class="bilingual-en">2. Sign Branch of $g(x)$ & Upward Corner at $x=\beta$</span>
+    </div>
+    <div class="sym-formula-box">
+      <b>$$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$</b>
+    </div>
+    <div class="sym-desc">
+      <span class="bilingual-ko">
+        • <b>그래프 변환의 기하학</b>:<br>
+        &nbsp;&nbsp;1) $f(x) \ge 0$ (곡선이 $x$축 위/상에 있을 때): $-f(x)$에 의해 상하 반전($x$축 대칭)되어 음수 영역으로 내려옵니다.<br>
+        &nbsp;&nbsp;2) $f(x) < 0$ (곡선이 $x$축 아래에 있을 때): $7f(x)$에 의해 세로로 무려 $7$배나 급격히 확대(스케일링)되어 깊은 골짜기를 형성합니다.<br>
+        • <b>연속성과 미분 불가능성</b>: 경계점 $\alpha, \beta$에서 $f=0$이므로 $g(\alpha)=g(\beta)=0$으로 끊김 없이 연속입니다. 그러나 관통점 $x = \beta$를 지나며 부호가 바뀌므로 좌우 미분계수가 급변합니다:<br>
+        &nbsp;&nbsp;• $x < \beta$ (좌측): $f(x) < 0 \implies g'(\beta^-) = 7f'(\beta)$ (기울기 $+7f'$ 급상승)<br>
+        &nbsp;&nbsp;• $x > \beta$ (우측): $f(x) > 0 \implies g'(\beta^+) = -f'(\beta)$ (기울기 $-f'$ 하강)<br>
+        • <b>도함수의 도약(Jump)</b>:
+        <div style="text-align:center;margin:6px 0">$$\mathbf{g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$</div>
+        $f'(\beta)>0$이므로 도약은 항상 음수이며, $g(x)$는 $x=\beta$에서 <b>위로 뾰족한 산 모양 첨점</b>을 갖습니다!
+      </span>
+      <div class="bilingual-en">
+        • <b>Geometric Transformation</b>: When $f(x) \ge 0$, the curve is reflected across the x-axis ($-f(x)$). When $f(x) < 0$, it is vertically amplified by $7\times$ ($7f(x)$).<br>
+        • <b>Continuity & Non-Differentiability</b>: Continuous everywhere since $f=0$ at roots. However, across crossing root $\beta$, the left derivative is $7f'(\beta)$ and right derivative is $-f'(\beta)$.<br>
+        • <b>Derivative Jump</b>: $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$, producing a sharp upward corner at $x=\beta$.
+      </div>
+    </div>
+  </div>
+
+  <!-- 카드 3: 접점 α에서의 매끄러운 미분가능성 -->
+  <div class="sym-card">
+    <div class="sym-badge">
+      <span class="bilingual-ko">📌 기본정리 3 · 접점에서의 평활성</span>
+      <span class="bilingual-en">📌 Theorem 3 · Smooth Differentiability at Tangent Root</span>
+    </div>
+    <div class="sym-title">
+      <span class="bilingual-ko">3. 접점 $x = \alpha$에서 $g(x)$가 완벽히 매끄러운 이유</span>
+      <span class="bilingual-en">3. Why $g(x)$ is Perfectly Smooth at $x=\alpha$</span>
+    </div>
+    <div class="sym-formula-box">
+      <b>$$f'(\alpha) = 0 \implies g'(\alpha^-) = g'(\alpha^+) = 0$$</b>
+    </div>
+    <div class="sym-desc">
+      <span class="bilingual-ko">
+        • <b>접점의 수평 접선 성질</b>: $x = \alpha$는 $f(x)$의 중근이므로 $f(\alpha) = 0$일 뿐만 아니라 접선의 기울기 자체가 <b>$f'(\alpha) = 0$</b>으로 수평합니다.<br>
+        • <b>좌우 미분계수의 완벽한 일치</b>:
+        <div style="text-align:center;margin:6px 0">$$\lim_{x \to \alpha^-} g'(x) = 0, \quad \lim_{x \to \alpha^+} g'(x) = 0$$</div>
+        기울기가 $0$인 상태에서는 부호에 $-1$배를 곱하든 $7$배로 잡아당기든 $0 \times (-1) = 0 \times 7 = \mathbf{0}$입니다!<br>
+        • <b>결정적 결론</b>: $x = \alpha$에서는 좌우 미분계수가 모두 $0$으로 완벽히 일치하여 뾰족함 없이 수평으로 매끄럽게 연결됩니다 ($g'(\alpha) = 0$).<br>
+        따라서 <b>함수 $g(x)$가 미분 불가능한 첨점은 오직 $x = \beta$ 단 1곳뿐</b>입니다!
+      </span>
+      <div class="bilingual-en">
+        • <b>Horizontal Tangent</b>: At double root $\alpha$, $f'(\alpha) = 0$.<br>
+        • <b>Identical One-Sided Derivatives</b>: Scaling zero slope by $-1$ or $7$ yields zero identically: $g'(\alpha^-) = g'(\alpha^+) = 0$.<br>
+        • <b>Crucial Conclusion</b>: $x = \alpha$ has no corner. Thus, $g(x)$ has **exactly one non-differentiable corner in the entire real line**, which is at $x = \beta$.
+      </div>
+    </div>
+  </div>
+
+  <!-- 카드 4: 절댓값 |P(x)|의 V자 첨점과 첨점 상쇄 -->
+  <div class="sym-card">
+    <div class="sym-badge">
+      <span class="bilingual-ko">📌 기본정리 4 · 절댓값 첨점과 평활화</span>
+      <span class="bilingual-en">📌 Theorem 4 · Absolute Value Jump & Perfect Smoothing</span>
+    </div>
+    <div class="sym-title">
+      <span class="bilingual-ko">4. 절댓값 $|P(x)|$의 V자 첨점 도약과 $h(x)$의 상쇄 조건</span>
+      <span class="bilingual-en">4. Corner Jump of $|P(x)|$ & Smoothing Condition</span>
+    </div>
+    <div class="sym-formula-box">
+      <b>$$-8f'(\beta) + 2|P'(\beta)| = 0 \iff P'(\beta) = 4f'(\beta)$$</b>
+    </div>
+    <div class="sym-desc">
+      <span class="bilingual-ko">
+        • <b>절댓값의 V자 꺾임 공식</b>: 다항함수 $P(x)$에 절댓값을 취하면 단순근 $x = c$($P'(c) \neq 0$)에서 $x$축 아래가 위로 꺾여 올라가며 우미분계수와 좌미분계수의 차이는 <b>$+2|P'(c)|$</b>가 됩니다 (아래로 뾰족한 V자 첨점).<br>
+        • <b>중근 조건</b>: $P(x) = (x-1)(x-a)(x-4+a)$의 세 실근 $1, a, 4-a$ 중 <b>두 근이 일치(중근)</b>해야만 첨점이 1개만 생겨, 첨점이 1개인 $g(x)$와 첨점 위치를 일치시킬 수 있습니다.<br>
+        • <b>완전 평활화(Perfect Smoothing) 원리</b>:<br>
+        &nbsp;&nbsp;• $g(x)$의 도약: $-8f'(\beta) < 0$ (위로 뾰족)<br>
+        &nbsp;&nbsp;• $|P(x)|$의 도약: $+2P'(\beta) > 0$ (아래로 뾰족)<br>
+        &nbsp;&nbsp;• 합 함수 $h(x) = g(x) + |P(x)|$의 도약 $= -8f'(\beta) + 2P'(\beta) = 0$<br>
+        두 뾰족한 첨점이 한 점에서 만나 도함수의 불연속 도약이 $0$으로 완벽히 상쇄되어 <b>실수 전체에서 부드럽게 미분가능</b>해집니다!
+      </span>
+      <div class="bilingual-en">
+        • <b>V-Shaped Corner Jump</b>: Across a simple root $c$, $|P(x)|$ creates a positive derivative jump of $+2|P'(c)| > 0$. At double roots ($P'=0$), it is smooth.<br>
+        • <b>Double Root Requirement</b>: $P(x) = (x-1)(x-a)(x-4+a)$ must have a double root so that $|P(x)|$ has only one corner at $x=\beta$.<br>
+        • <b>Perfect Smoothing</b>: Summing the upward jump $-8f'(\beta)$ and the downward jump $+2P'(\beta)$ gives $-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$, completely smoothing the corner!
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 🎨 시각적 첨점 상쇄 메커니즘 대조 다이어그램 (SVG High-Definition Vector Panel) -->
+<div class="step0-visual-box" style="background:rgba(15,20,38,.85);border:1.5px solid rgba(124,196,255,.4);border-radius:16px;padding:20px;margin:20px 0 26px;box-shadow:0 8px 32px rgba(0,0,0,.35)">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <div style="font-size:1.05rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px">
+      <span>📐</span>
+      <span class="bilingual-ko">시각적 증명 대조: $g(x)$의 첨점과 $|P(x)|$의 V자 첨점이 만나 $h(x)$로 매끄럽게 합일되는 원리</span>
+      <span class="bilingual-en">Visual Geometric Proof: Corner Smoothing Mechanism of $g(x) + |P(x)|$</span>
+    </div>
+    <span style="font-size:.76rem;background:rgba(94,234,212,.18);color:#5eead4;border:1px solid rgba(94,234,212,.4);padding:3px 10px;border-radius:12px;font-weight:700">기하학적 완전 평활화</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:14px;margin-bottom:14px">
+    
+    <!-- 패널 1: g(x) 그래프 -->
+    <div style="background:rgba(10,13,26,.8);border:1px solid rgba(251,113,133,.4);border-radius:12px;padding:12px;text-align:center">
+      <div style="font-size:.85rem;font-weight:700;color:#fb7185;margin-bottom:6px">① $g(x)$의 위로 뾰족한 첨점</div>
+      <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
+        <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+        <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
+        <!-- alpha tangent -->
+        <circle cx="60" cy="90" r="3.5" fill="#5eead4" />
+        <text x="56" y="105" fill="#5eead4" font-size="10" font-weight="bold">α</text>
+        <text x="35" y="75" fill="#5eead4" font-size="8">g'(α)=0</text>
+        <!-- beta corner -->
+        <circle cx="170" cy="90" r="4" fill="#fb7185" />
+        <text x="166" y="105" fill="#fb7185" font-size="10" font-weight="bold">β</text>
+        <!-- g(x) curve: smooth at alpha, sharp peak at beta -->
+        <path d="M 20 120 Q 40 90 60 90 Q 90 90 120 120 L 170 90 L 210 130" fill="none" stroke="#fb7185" stroke-width="2.5" stroke-linecap="round" />
+        <!-- tangent lines near beta -->
+        <line x1="145" y1="108" x2="170" y2="90" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
+        <line x1="170" y1="90" x2="195" y2="115" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
+        <text x="140" y="70" fill="#fca5a5" font-size="9" font-weight="bold">도약: -8f'(β)</text>
+      </svg>
+      <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
+        <span class="bilingual-ko">좌기울기 $+7f'$, 우기울기 $-f'$<br>$\implies$ <b>도함수 도약 $-8f'$</b></span>
+        <span class="bilingual-en">Slope jump: $-8f'(\beta) < 0$</span>
+      </div>
+    </div>
+
+    <!-- 패널 2: |P(x)| 그래프 -->
+    <div style="background:rgba(10,13,26,.8);border:1px solid rgba(124,196,255,.4);border-radius:12px;padding:12px;text-align:center">
+      <div style="font-size:.85rem;font-weight:700;color:#7cc4ff;margin-bottom:6px">② $|P(x)|$의 아래로 뾰족한 V자</div>
+      <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
+        <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+        <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
+        <!-- double root -->
+        <circle cx="70" cy="90" r="3.5" fill="#a78bfa" />
+        <text x="55" y="105" fill="#a78bfa" font-size="10" font-weight="bold">중근</text>
+        <!-- beta simple root -->
+        <circle cx="170" cy="90" r="4" fill="#7cc4ff" />
+        <text x="166" y="105" fill="#7cc4ff" font-size="10" font-weight="bold">β</text>
+        <!-- |P(x)| curve: smooth tangent at double root, V-shape at beta -->
+        <path d="M 25 125 Q 50 90 70 90 Q 95 90 120 50 Q 145 60 170 90 L 195 50" fill="none" stroke="#7cc4ff" stroke-width="2.5" stroke-linecap="round" />
+        <line x1="145" y1="65" x2="170" y2="90" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
+        <line x1="170" y1="90" x2="195" y2="50" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
+        <text x="140" y="125" fill="#93c5fd" font-size="9" font-weight="bold">도약: +2P'(β)</text>
+      </svg>
+      <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
+        <span class="bilingual-ko">좌기울기 $-P'$, 우기울기 $+P'$<br>$\implies$ <b>도함수 도약 $+2P'$</b></span>
+        <span class="bilingual-en">Slope jump: $+2P'(\beta) > 0$</span>
+      </div>
+    </div>
+
+    <!-- 패널 3: h(x) 합성 그래프 -->
+    <div style="background:rgba(10,13,26,.8);border:1px solid rgba(94,234,212,.4);border-radius:12px;padding:12px;text-align:center">
+      <div style="font-size:.85rem;font-weight:700;color:#5eead4;margin-bottom:6px">③ $h(x) = g(x) + |P(x)|$</div>
+      <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
+        <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+        <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
+        <circle cx="60" cy="90" r="3.5" fill="#5eead4" />
+        <text x="56" y="105" fill="#5eead4" font-size="10" font-weight="bold">α</text>
+        <circle cx="170" cy="90" r="4" fill="#5eead4" />
+        <text x="166" y="105" fill="#5eead4" font-size="10" font-weight="bold">β</text>
+        <!-- h(x) smooth curve: perfectly differentiable, no corner! -->
+        <path d="M 20 130 Q 40 90 60 90 Q 95 90 120 75 Q 145 60 170 90 Q 190 115 215 95" fill="none" stroke="#5eead4" stroke-width="3" stroke-linecap="round" />
+        <path d="M 140 90 Q 170 90 200 90" stroke="#3ddc97" stroke-width="1.5" stroke-dasharray="3 3" />
+        <text x="135" y="70" fill="#a7f3d0" font-size="9" font-weight="bold">-8f' + 2P' = 0 상쇄!</text>
+      </svg>
+      <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
+        <span class="bilingual-ko"><b>도약의 합 $= 0$</b> (완전 상쇄!)<br>$\implies$ <b>실수 전체 미분가능</b></span>
+        <span class="bilingual-en">Net jump $= 0 \implies$ Differentiable!</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 직결 학습 안내 & 민은기 선생님 핵심 자료 바로가기 -->
+  <div style="background:rgba(20,24,51,.6);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <div style="font-size:.82rem;color:#cbd5e1;line-height:1.5">
+      <span class="bilingual-ko">💡 <b>핵심 공식 직관</b>: 위 3개 패널이 보여주듯, $h(x)$가 미분가능하려면 오직 $x = \beta$에서 <b>$-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$</b>가 성립해야 합니다.</span>
+      <span class="bilingual-en">💡 <b>Core Formula Intuition</b>: As shown above, differentiability requires $-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$.</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.45);color:#38bdf8;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none">📐 접선 수렴 원리 PDF ↗</a>
+      <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" style="background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.45);color:#c084fc;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none">📈 도함수 기하 탐구 ↗</a>
+    </div>
+  </div>
 </div>
 
 <h2>제1단계 · [기초 개념] 삼차함수 $f(x)=0$의 실근이 2개일 때의 기하학적 형태<span class="bilingual-en">Step 1 · [Foundations] Geometry of Monic Cubic with Exactly 2 Real Roots</span></h2>
@@ -1267,8 +1497,8 @@ function setBoardLang(lang) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'ac8dc374';
-window._offlineBuildTime = '2026-10-02T06:08:07.508896+00:00';
-window._offlineHash = 'da5aba25';
+window._offlineBuildTime = '2026-10-02T10:54:59.171521+00:00';
+window._offlineHash = '72694536';
 window._offlineVersion = 'v2026.10.02';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/ac8dc374.html';
 
@@ -1293,8 +1523,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'ac8dc374';
-  var localBuildTime = window._offlineBuildTime || '2026-10-02T06:08:07.508896+00:00';
-  var localHash = window._offlineHash || 'da5aba25';
+  var localBuildTime = window._offlineBuildTime || '2026-10-02T10:54:59.171521+00:00';
+  var localHash = window._offlineHash || '72694536';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/ac8dc374.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
