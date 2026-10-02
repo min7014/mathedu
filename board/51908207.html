@@ -149,26 +149,140 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap.active{display:block}
 .opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
 @media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
 <img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
 <span>min7014 <b>mathedu</b></span>
 </a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 확률 (기초→심화)</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h1>📘 카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 확률 (기초→심화)<span class="bilingual-en">📘 Card exchange dice game · Probability of the 3rd being 6 in the initial state after 4 rounds (Basic → Advanced)</span></h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
-    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-    <span class="orig-badge">수능·모의평가 공식 기출</span>
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge"><span class="bilingual-ko">수능·모의평가 공식 기출</span><span class="bilingual-en">Official CSAT and mock evaluation exams</span></span>
   </div>
 
   <div class="orig-grid">
@@ -177,31 +291,29 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <div class="orig-media-frame" style="padding:4px;background:#fff;">
         <div class="exam-paper-sheet" style="background:#ffffff;color:#0f172a;border-radius:12px;padding:22px 26px;border:1.5px solid #334155;box-shadow:0 8px 24px rgba(0,0,0,0.35);text-align:left;line-height:1.8;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;"><div style="font-weight:700;font-size:1.05rem;color:#0f172a;margin-bottom:6px;">문자 &#x27;A&#x27;가 적힌 카드 3장과 문자 &#x27;B&#x27;가 적힌 카드 3장을 준비하여 1번째부터 6번째 자리까지 차례로 A, A, A, B, B, B가 되도록 놓는다. 한 개의 주사위를 던져 나온 눈의 수를 $k$라 할 때, $k \le 5$ 이면 $k$번째 자리의 카드와 $(k+1)$번째 자리의 카드를 교환하고, $k = 6$ 이면 카드의 위치를 그대로 둔다. 이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, 3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오.</div><div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px dashed #94a3b8;font-size:0.95rem;color:#0f172a;"><div style="flex:1;min-width:110px"><b>①</b> $\dfrac{69}{371}$</div><div style="flex:1;min-width:110px"><b>②</b> $\dfrac{1}{6}$</div><div style="flex:1;min-width:110px"><b>③</b> $\dfrac{5}{36}$</div><div style="flex:1;min-width:110px"><b>④</b> $\dfrac{1}{4}$</div><div style="flex:1;min-width:110px"><b>⑤</b> $\dfrac{1}{3}$</div></div></div>
       </div>
-      <div class="orig-media-sub">📄 고난도 문항 원본 시험지 복원 조판</div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 고난도 문항 원본 시험지 복원 조판</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
     </div>
 
     <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
         <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 확률 (기초→심화)</p>
         <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 확률 (기초→심화)</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
         
       </div>
-      <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
-      </div>
+      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: 💡 Core guide: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
     </div>
   </div>
 
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 독립시행의 무수한 우연이 <b>필연적인 정규분포의 종 모양 곡선으로 수렴하는 과정</b>을 시각화합니다.<br>• <b>[이항계수의 삼각형]</b> 파스칼 삼각형의 조합 수열이 이항분포 $\mathrm{B}(n, p)$의 이산 확률기둥들로 쌓여가는 단계별 구축 과정<br>• <b>[중심극한정리의 출현]</b> 시행 횟수 $n$이 증가함에 따라 거친 계단 모양의 히스토그램이 매끄러운 가우스 정규분포 곡선 $N(\mu, \sigma^2)$으로 완벽하게 수렴<br>• <b>[수학적 의미]</b> 개별 사건은 불확실하지만, 전체의 통계적 집합은 수학의 가장 우아한 대칭 곡선을 따른다는 경이로움을 하단 자료에서 체득해 보세요.
-  </div>
+  <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF & GeoGebra Exploration)</b><br>Teacher Min's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
 
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$카드 교환$</b> — 인접한 두 카드의 위치를 서로 바꾸는 연산. $k$번째와 $(k+1)$번째 카드를 맞바꿈.</div><div><b>$주사위 눈 $k$$</b> — 주사위를 던져 나온 눈. $k \in \{1,2,3,4,5,6\}$. $k \le 5$ 이면 교환, $k=6$ 이면 변화 없음(항등변환).</div><div><b>$상태 $S$$</b> — 6장 카드의 배치. 초기 상태 $S_0$: A,A,A,B,B,B (자리 1~6). B의 위치로 상태를 표현하기도 함.</div><div><b>$조건부 확률 $P(A|B)$$</b> — 사건 $B$가 일어났을 때 사건 $A$가 일어날 확률. $P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{n(A \cap B)}{n(B)}$ (동등 가능성일 때).</div><div><b>$대칭성$</b> — 그래프가 무향(대칭)이면 $N(s \to t,\; m) = N(t \to s,\; m)$. 왕복 경우의 수가 같음.</div></div>
-<h2>제1단계 · 초기 상태와 교환 규칙 (가장 기초)</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초기에는 자리 1~3이 A, 자리 4~6이 B입니다. 주사위 눈 $k$에 따라 $k$번째와 $(k+1)$번째 카드를 교환합니다. $k=6$이면 아무 교환도 하지 않습니다.</div><div class="q" data-ans="1" data-exp="$k=1$은 1번과 2번 카드를 교환하는데, 둘 다 A이므로 변화 없음."><div class="lvl">문항</div><div class="stem">초기 상태(A,A,A,B,B,B, 자리 1~6)에서 $k=1$일 때 교환 후 상태는?</div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B (변화 없음)</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>B,A,A,A,B,B</div><div class="opt"><span class="n">5</span>A,A,A,B,B,B (카드 소멸)</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"></div><div><b>$주사위 눈 $k$$</b> — 주사위를 던져 나온 눈. $k \in \{1,2,3,4,5,6\}$. $k \le 5$ 이면 교환, $k=6$ 이면 변화 없음(항등변환).</div><div><b>$상태 $S$$</b> — 6장 카드의 배치. 초기 상태 $S_0$: A,A,A,B,B,B (자리 1~6). B의 위치로 상태를 표현하기도 함.</div><div><b>$조건부 확률 $P(A|B)$$</b> — 사건 $B$가 일어났을 때 사건 $A$가 일어날 확률. $P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{n(A \cap B)}{n(B)}$ (동등 가능성일 때).</div><div><b>$대칭성$</b> — 그래프가 무향(대칭)이면 $N(s \to t,\; m) = N(t \to s,\; m)$. 왕복 경우의 수가 같음.</div></div>
+<h2>제1단계 · 초기 상태와 교환 규칙 (가장 기초)<span class="bilingual-en">Step 1: Initial state and exchange rules (the most basic)</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초기에는 자리 1~3이 A, 자리 4~6이 B입니다. 주사위 눈 $k$에 따라 $k$번째와 $(k+1)$번째 카드를 교환합니다. $k=6$이면 아무 교환도 하지 않습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Initially, positions 1 to 3 are A and positions 4 to 6 are B. Exchange the $k$ th and $(k+1)$ th cards according to the dice roll $k$. If it is $k=6$, no exchange is performed.</div></div><div class="q" data-ans="1" data-exp="$k=1$은 1번과 2번 카드를 교환하는데, 둘 다 A이므로 변화 없음." data-exp-en="$k=1$ exchanges cards 1 and 2, but since both are A, there is no change."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">초기 상태(A,A,A,B,B,B, 자리 1~6)에서 $k=1$일 때 교환 후 상태는?</span><div class="bilingual-en">When the initial state (A, A, A, B, B, B, digits 1 to 6) is $k=1$, what is the state after exchange?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">A,A,A,B,B,B (변화 없음)</span><span class="bilingual-en">A,A,A,B,B,B (no change)</span></div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>B,A,A,A,B,B</div><div class="opt"><span class="n">5</span><span class="bilingual-ko">A,A,A,B,B,B (카드 소멸)</span><span class="bilingual-en">A,A,A,B,B,B (card disappears)</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -212,7 +324,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="2" data-exp="3번(A)과 4번(B)이 교환되어 A,A,B,A,B,B가 됨. 이것이 $S_1$."><div class="lvl">문항</div><div class="stem">초기 상태에서 $k=3$일 때 교환 후 상태는?</div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>B,A,A,A,B,B</div><div class="opt"><span class="n">5</span>A,A,A,B,B,A</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="2" data-exp="3번(A)과 4번(B)이 교환되어 A,A,B,A,B,B가 됨. 이것이 $S_1$." data-exp-en="Numbers 3 (A) and 4 (B) are exchanged to become A, A, B, A, B, B. This is $S_1$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">초기 상태에서 $k=3$일 때 교환 후 상태는?</span><div class="bilingual-en">When the initial state is $k=3$, what is the state after exchange?</div></div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>B,A,A,A,B,B</div><div class="opt"><span class="n">5</span>A,A,A,B,B,A</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -223,7 +335,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="1" data-exp="$k=6$이면 교환 없이 그대로. 즉 $T_6 = \text{id}$ (항등변환)."><div class="lvl">문항</div><div class="stem">초기 상태에서 $k=6$일 때 교환 후 상태는?</div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B (변화 없음)</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>A,A,A,B,B,A</div><div class="opt"><span class="n">5</span>카드가 소멸</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="1" data-exp="$k=6$이면 교환 없이 그대로. 즉 $T_6 = \text{id}$ (항등변환)." data-exp-en="If it is $k=6$, it is as is without exchange. That is, $T_6 = \text{id}$ (identity conversion)."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">초기 상태에서 $k=6$일 때 교환 후 상태는?</span><div class="bilingual-en">When the initial state is $k=6$, what is the state after exchange?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">A,A,A,B,B,B (변화 없음)</span><span class="bilingual-en">A,A,A,B,B,B (no change)</span></div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>A,A,A,B,B,A</div><div class="opt"><span class="n">5</span><span class="bilingual-ko">카드가 소멸</span><span class="bilingual-en">card disappears</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -234,7 +346,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 상태 변화 분석</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초기 상태 $S_0$(A,A,A,B,B,B)에서 $k=1,2,4,5,6$은 변화 없고(5가지), $k=3$만 상태가 변합니다(1가지). $k=3$일 때 $S_1$(A,A,B,A,B,B)이 됩니다.</div><div class="q" data-ans="2" data-exp="$k=3$일 때만 3번(A)과 4번(B)이 교환되어 상태가 변함."><div class="lvl">문항</div><div class="stem">초기 상태 $S_0$에서 상태를 바꾸는 $k$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=3$</div><div class="opt"><span class="n">3</span>$k=5$</div><div class="opt"><span class="n">4</span>$k=6$</div><div class="opt"><span class="n">5</span>$k=2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · 상태 변화 분석<span class="bilingual-en">Step 2 · Analysis of state changes</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초기 상태 $S_0$(A,A,A,B,B,B)에서 $k=1,2,4,5,6$은 변화 없고(5가지), $k=3$만 상태가 변합니다(1가지). $k=3$일 때 $S_1$(A,A,B,A,B,B)이 됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the initial state of When it is $k=3$, it becomes $S_1$ (A,A,B,A,B,B).</div></div><div class="q" data-ans="2" data-exp="$k=3$일 때만 3번(A)과 4번(B)이 교환되어 상태가 변함." data-exp-en="Only when $k=3$, numbers 3 (A) and 4 (B) are exchanged and the state changes."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">초기 상태 $S_0$에서 상태를 바꾸는 $k$는?</span><div class="bilingual-en">What is $k$ that changes the state from the initial state $S_0$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=3$</div><div class="opt"><span class="n">3</span>$k=5$</div><div class="opt"><span class="n">4</span>$k=6$</div><div class="opt"><span class="n">5</span>$k=2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -245,7 +357,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="3" data-exp="$k=3$으로 3번(A)과 4번(B) 교환 → A,A,B,A,B,B ($S_1$)."><div class="lvl">문항</div><div class="stem">$S_0$(A,A,A,B,B,B)에서 한 번 시행으로 $S_1$(A,A,B,A,B,B)이 되는 $k$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=2$</div><div class="opt"><span class="n">3</span>$k=3$</div><div class="opt"><span class="n">4</span>$k=4$</div><div class="opt"><span class="n">5</span>$k=6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="3" data-exp="$k=3$으로 3번(A)과 4번(B) 교환 → A,A,B,A,B,B ($S_1$)." data-exp-en="Exchange numbers 3 (A) and 4 (B) with $k=3$ → A,A,B,A,B,B ($S_1$)."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$S_0$(A,A,A,B,B,B)에서 한 번 시행으로 $S_1$(A,A,B,A,B,B)이 되는 $k$는?</span><div class="bilingual-en">How does $k$ change from $S_0$ (A,A,A,B,B,B) to $S_1$ (A,A,B,A,B,B) with one execution?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=2$</div><div class="opt"><span class="n">3</span>$k=3$</div><div class="opt"><span class="n">4</span>$k=4$</div><div class="opt"><span class="n">5</span>$k=6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -256,7 +368,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="3" data-exp="$k=1,2,4,5,6$의 5가지 경우 상태 유지."><div class="lvl">문항</div><div class="stem">$S_0$에서 한 번 시행으로 $S_0$에 머무는 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>3</div><div class="opt"><span class="n">3</span>5</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>2</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="3" data-exp="$k=1,2,4,5,6$의 5가지 경우 상태 유지." data-exp-en="Maintain state in 5 cases of $k=1,2,4,5,6$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$S_0$에서 한 번 시행으로 $S_0$에 머무는 경우의 수는?</span><div class="bilingual-en">How many times can you stay in $S_0$ with one attempt at $S_0$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>3</div><div class="opt"><span class="n">3</span>5</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>2</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -267,7 +379,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $S_1$에서의 상태 전이</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$S_1$(A,A,B,A,B,B)에서 $k=3$으로 다시 $S_0$로 돌아갑니다. $k=2$는 $S_2$(A,B,A,A,B,B)로, $k=4$는 $S_3$(A,A,B,B,A,B)로 갑니다. $k=1,5,6$은 $S_1$ 유지.</div><div class="q" data-ans="3" data-exp="$k=3$으로 3번(B)과 4번(A) 교환 → 다시 A,A,A,B,B,B ($S_0$)."><div class="lvl">문항</div><div class="stem">$S_1$(A,A,B,A,B,B)에서 $S_0$로 돌아가는 $k$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=2$</div><div class="opt"><span class="n">3</span>$k=3$</div><div class="opt"><span class="n">4</span>$k=4$</div><div class="opt"><span class="n">5</span>$k=6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $S_1$에서의 상태 전이<span class="bilingual-en">Step 3 · State transition in $S_1$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$S_1$(A,A,B,A,B,B)에서 $k=3$으로 다시 $S_0$로 돌아갑니다. $k=2$는 $S_2$(A,B,A,A,B,B)로, $k=4$는 $S_3$(A,A,B,B,A,B)로 갑니다. $k=1,5,6$은 $S_1$ 유지.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Go from $S_1$ (A,A,B,A,B,B) to $k=3$ and back to $S_0$. $k=2$ goes to $S_2$ (A,B,A,A,B,B), and $k=4$ goes to $S_3$ (A,A,B,B,A,B). $k=1,5,6$ remains $S_1$.</div></div><div class="q" data-ans="3" data-exp="$k=3$으로 3번(B)과 4번(A) 교환 → 다시 A,A,A,B,B,B ($S_0$)." data-exp-en="Exchange numbers 3 (B) and 4 (A) with $k=3$ → A,A,A,B,B,B again ($S_0$)."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$S_1$(A,A,B,A,B,B)에서 $S_0$로 돌아가는 $k$는?</span><div class="bilingual-en">What is $k$ that returns from $S_1$ (A,A,B,A,B,B) to $S_0$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=2$</div><div class="opt"><span class="n">3</span>$k=3$</div><div class="opt"><span class="n">4</span>$k=4$</div><div class="opt"><span class="n">5</span>$k=6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -278,7 +390,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="3" data-exp="2번(A)과 3번(B) 교환 → A,B,A,A,B,B ($S_2$)."><div class="lvl">문항</div><div class="stem">$S_1$에서 $k=2$일 때 도달하는 상태 $S_2$는?</div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>A,A,B,B,A,B</div><div class="opt"><span class="n">5</span>B,A,A,A,B,B</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="3" data-exp="2번(A)과 3번(B) 교환 → A,B,A,A,B,B ($S_2$)." data-exp-en="Exchange number 2 (A) and number 3 (B) → A,B,A,A,B,B ($S_2$)."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$S_1$에서 $k=2$일 때 도달하는 상태 $S_2$는?</span><div class="bilingual-en">What is the state reached when $S_1$ to $k=2$ becomes $S_2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>A,A,B,B,A,B</div><div class="opt"><span class="n">5</span>B,A,A,A,B,B</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -289,7 +401,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="4" data-exp="4번(A)과 5번(B) 교환 → A,A,B,B,A,B ($S_3$)."><div class="lvl">문항</div><div class="stem">$S_1$에서 $k=4$일 때 도달하는 상태 $S_3$는?</div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>A,A,B,B,A,B</div><div class="opt"><span class="n">5</span>A,A,B,B,B,A</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="4" data-exp="4번(A)과 5번(B) 교환 → A,A,B,B,A,B ($S_3$)." data-exp-en="Exchange numbers 4 (A) and 5 (B) → A,A,B,B,A,B ($S_3$)."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$S_1$에서 $k=4$일 때 도달하는 상태 $S_3$는?</span><div class="bilingual-en">What is the state reached when $S_1$ to $k=4$ becomes $S_3$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>A,A,A,B,B,B</div><div class="opt"><span class="n">2</span>A,A,B,A,B,B</div><div class="opt"><span class="n">3</span>A,B,A,A,B,B</div><div class="opt"><span class="n">4</span>A,A,B,B,A,B</div><div class="opt"><span class="n">5</span>A,A,B,B,B,A</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -300,7 +412,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제4단계 · 2회 시행 후 상태별 경우의 수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>2회 시행 후 $S_0$ 도달: $S_0 \to S_0 \to S_0$ ($5 \times 5 = 25$가지), $S_0 \to S_1 \to S_0$ ($1 \times 1 = 1$가지). 총 $M_2(S_0) = 26$가지. $S_1$ 도달: $S_0 \to S_0 \to S_1$ ($5 \times 1 = 5$), $S_0 \to S_1 \to S_1$ ($1 \times 3 = 3$). 총 $M_2(S_1) = 8$가지.</div><div class="q" data-ans="2" data-exp="$S_0 \to S_0 \to S_0$: $5 \times 5 = 25$, $S_0 \to S_1 \to S_0$: $1 \times 1 = 1$, 합계 $26$."><div class="lvl">문항</div><div class="stem">2회 시행 후 $S_0$로 돌아오는 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>25</div><div class="opt"><span class="n">2</span>26</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>36</div><div class="opt"><span class="n">5</span>1</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제4단계 · 2회 시행 후 상태별 경우의 수<span class="bilingual-en">Step 4: Number of cases by status after 2 implementations</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>2회 시행 후 $S_0$ 도달: $S_0 \to S_0 \to S_0$ ($5 \times 5 = 25$가지), $S_0 \to S_1 \to S_0$ ($1 \times 1 = 1$가지). 총 $M_2(S_0) = 26$가지. $S_1$ 도달: $S_0 \to S_0 \to S_1$ ($5 \times 1 = 5$), $S_0 \to S_1 \to S_1$ ($1 \times 3 = 3$). 총 $M_2(S_1) = 8$가지.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> After 2 trials, $S_0$ is reached: $S_0 \to S_0 \to S_0$ ($5 \times 5 = 25$ branch), $S_0 \to S_1 \to S_0$ ($1 \times 1 = 1$ branch). Total $M_2(S_0) = 26$ branches. $S_1$ reaches: $S_0 \to S_0 \to S_1$ ($5 \times 1 = 5$), $S_0 \to S_1 \to S_1$ ($1 \times 3 = 3$). Total $M_2(S_1) = 8$ branches.</div></div><div class="q" data-ans="2" data-exp="$S_0 \to S_0 \to S_0$: $5 \times 5 = 25$, $S_0 \to S_1 \to S_0$: $1 \times 1 = 1$, 합계 $26$." data-exp-en="$S_0 \to S_0 \to S_0$: $5 \times 5 = 25$, $S_0 \to S_1 \to S_0$: $1 \times 1 = 1$, total $26$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">2회 시행 후 $S_0$로 돌아오는 경우의 수는?</span><div class="bilingual-en">How many cases return to $S_0$ after two attempts?</div></div><div class="opts"><div class="opt"><span class="n">1</span>25</div><div class="opt"><span class="n">2</span>26</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>36</div><div class="opt"><span class="n">5</span>1</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -311,7 +423,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="2" data-exp="$S_0 \to S_0 \to S_1$: $5 \times 1 = 5$, $S_0 \to S_1 \to S_1$: $1 \times 3 = 3$, 합계 $8$."><div class="lvl">문항</div><div class="stem">2회 시행 후 $S_1$에 도달하는 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>5</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>1</div><div class="opt"><span class="n">4</span>26</div><div class="opt"><span class="n">5</span>0</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="2" data-exp="$S_0 \to S_0 \to S_1$: $5 \times 1 = 5$, $S_0 \to S_1 \to S_1$: $1 \times 3 = 3$, 합계 $8$." data-exp-en="$S_0 \to S_0 \to S_1$: $5 \times 1 = 5$, $S_0 \to S_1 \to S_1$: $1 \times 3 = 3$, total $8$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">2회 시행 후 $S_1$에 도달하는 경우의 수는?</span><div class="bilingual-en">What are the number of cases in which $S_1$ is reached after two trials?</div></div><div class="opts"><div class="opt"><span class="n">1</span>5</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>1</div><div class="opt"><span class="n">4</span>26</div><div class="opt"><span class="n">5</span>0</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -322,7 +434,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="1" data-exp="$S_0 \to S_1 \to S_2$: $1 \times 1 = 1$, $S_0 \to S_1 \to S_3$: $1 \times 1 = 1$."><div class="lvl">문항</div><div class="stem">2회 시행 후 $S_2$ 또는 $S_3$에 도달하는 경우의 수는 각각?</div><div class="opts"><div class="opt"><span class="n">1</span>각각 1</div><div class="opt"><span class="n">2</span>각각 2</div><div class="opt"><span class="n">3</span>각각 5</div><div class="opt"><span class="n">4</span>0</div><div class="opt"><span class="n">5</span>각각 8</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="1" data-exp="$S_0 \to S_1 \to S_2$: $1 \times 1 = 1$, $S_0 \to S_1 \to S_3$: $1 \times 1 = 1$." data-exp-en="$S_0 \to S_1 \to S_2$: $1 \times 1 = 1$, $S_0 \to S_1 \to S_3$: $1 \times 1 = 1$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">2회 시행 후 $S_2$ 또는 $S_3$에 도달하는 경우의 수는 각각?</span><div class="bilingual-en">After two trials, what is the number of ways to reach $S_2$ or $S_3$ respectively?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">각각 1</span><span class="bilingual-en">1 each</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">각각 2</span><span class="bilingual-en">2 each</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">각각 5</span><span class="bilingual-en">5 each</span></div><div class="opt"><span class="n">4</span>0</div><div class="opt"><span class="n">5</span><span class="bilingual-ko">각각 8</span><span class="bilingual-en">8 each</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -333,7 +445,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제5단계 · 4회 시행 후 $S_0$ 도달 총 경우의 수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>4회 후 $S_0$ 도달 경우의 수 = $\sum_s M_2(s) \times N(s \to S_0,\; 2)$. 그래프가 무향(대칭)이므로 $N(s \to S_0,\; 2) = M_2(s)$. 따라서 $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$.</div><div class="q" data-ans="1" data-exp="$26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$."><div class="lvl">문항</div><div class="stem">4회 시행 후 $S_0$로 돌아오는 총 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>742</div><div class="opt"><span class="n">2</span>676</div><div class="opt"><span class="n">3</span>720</div><div class="opt"><span class="n">4</span>1296</div><div class="opt"><span class="n">5</span>36</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제5단계 · 4회 시행 후 $S_0$ 도달 총 경우의 수<span class="bilingual-en">Step 5 · Total number of cases reaching $S_0$ after 4 implementations</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>4회 후 $S_0$ 도달 경우의 수 = $\sum_s M_2(s) \times N(s \to S_0,\; 2)$. 그래프가 무향(대칭)이므로 $N(s \to S_0,\; 2) = M_2(s)$. 따라서 $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Number of cases of reaching $S_0$ after 4 times = $\sum_s M_2(s) \times N(s \to S_0,\; 2)$. $N(s \to S_0,\; 2) = M_2(s)$ because the graph is undirected (symmetric). Therefore, $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$.</div></div><div class="q" data-ans="1" data-exp="$26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$." data-exp-en="$26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">4회 시행 후 $S_0$로 돌아오는 총 경우의 수는?</span><div class="bilingual-en">What is the total number of cases that return $S_0$ after 4 attempts?</div></div><div class="opts"><div class="opt"><span class="n">1</span>742</div><div class="opt"><span class="n">2</span>676</div><div class="opt"><span class="n">3</span>720</div><div class="opt"><span class="n">4</span>1296</div><div class="opt"><span class="n">5</span>36</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -344,7 +456,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="1" data-exp="$26^2 = 676$, $8^2 = 64$, 합 $740$."><div class="lvl">문항</div><div class="stem">$26^2 + 8^2$ 은?</div><div class="opts"><div class="opt"><span class="n">1</span>676 + 64 = 740</div><div class="opt"><span class="n">2</span>676 + 64 = 740</div><div class="opt"><span class="n">3</span>676 + 16 = 692</div><div class="opt"><span class="n">4</span>52 + 16 = 68</div><div class="opt"><span class="n">5</span>26 + 8 = 34</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="1" data-exp="$26^2 = 676$, $8^2 = 64$, 합 $740$." data-exp-en="$26^2 = 676$, $8^2 = 64$, sum $740$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$26^2 + 8^2$ 은?</span><div class="bilingual-en">What is $26^2 + 8^2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>676 + 64 = 740</div><div class="opt"><span class="n">2</span>676 + 64 = 740</div><div class="opt"><span class="n">3</span>676 + 16 = 692</div><div class="opt"><span class="n">4</span>52 + 16 = 68</div><div class="opt"><span class="n">5</span>26 + 8 = 34</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -355,7 +467,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="1" data-exp="인접 교환은 서로 역변환. $S_1 \to S_0$ 경로 하나마다 $S_0 \to S_1$ 경로가 대응되므로 개수가 같음."><div class="lvl">문항</div><div class="stem">대칭성에 의해 $N(S_1 \to S_0,\; 2) = M_2(S_1)$ 인 이유는?</div><div class="opts"><div class="opt"><span class="n">1</span>그래프가 무향(대칭)이므로 왕복 경우의 수가 같음</div><div class="opt"><span class="n">2</span>항상 성립함</div><div class="opt"><span class="n">3</span>$S_1$이 특별해서</div><div class="opt"><span class="n">4</span>경우의 수가 무한해서</div><div class="opt"><span class="n">5</span>모름</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="1" data-exp="인접 교환은 서로 역변환. $S_1 \to S_0$ 경로 하나마다 $S_0 \to S_1$ 경로가 대응되므로 개수가 같음." data-exp-en="Adjacent exchanges invert each other. Each $S_1 \to S_0$ path corresponds to an $S_0 \to S_1$ path, so the number is the same."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">대칭성에 의해 $N(S_1 \to S_0,\; 2) = M_2(S_1)$ 인 이유는?</span><div class="bilingual-en">Why $N(S_1 \to S_0,\; 2) = M_2(S_1)$ by symmetry?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">그래프가 무향(대칭)이므로 왕복 경우의 수가 같음</span><span class="bilingual-en">Since the graph is undirected (symmetric), the number of round trips is the same.</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">항상 성립함</span><span class="bilingual-en">always holds</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">$S_1$이 특별해서</span><span class="bilingual-en">Because $S_1$ is special</span></div><div class="opt"><span class="n">4</span><span class="bilingual-ko">경우의 수가 무한해서</span><span class="bilingual-en">The number of cases is infinite</span></div><div class="opt"><span class="n">5</span><span class="bilingual-ko">모름</span><span class="bilingual-en">Don't know</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -366,7 +478,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제6단계 · 3번째 시행이 6인 조건부 경우의 수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>3번째 시행이 $k=6$이면 $T_6 = \text{id}$ 이므로, 3회 후 상태 = 2회 후 상태 = $S_2$. 4회 만에 $S_0$가 되려면, $S_2$에서 4번째 시행으로 $S_0$에 도달해야 함. 가능한 $S_2$는 $S_0$ (4번째 $k \in \{1,2,4,5,6\}$, 5가지) 또는 $S_1$ (4번째 $k=3$, 1가지).</div><div class="q" data-ans="1" data-exp="$S_2=S_0$: $26 \times 5 = 130$, $S_2=S_1$: $8 \times 1 = 8$, 합계 $138$."><div class="lvl">문항</div><div class="stem">3번째 시행이 6이고 4회 후 $S_0$가 되는 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>138</div><div class="opt"><span class="n">2</span>26</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>130</div><div class="opt"><span class="n">5</span>742</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제6단계 · 3번째 시행이 6인 조건부 경우의 수<span class="bilingual-en">Step 6 · Number of conditional cases where the third trial is 6</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>3번째 시행이 $k=6$이면 $T_6 = \text{id}$ 이므로, 3회 후 상태 = 2회 후 상태 = $S_2$. 4회 만에 $S_0$가 되려면, $S_2$에서 4번째 시행으로 $S_0$에 도달해야 함. 가능한 $S_2$는 $S_0$ (4번째 $k \in \{1,2,4,5,6\}$, 5가지) 또는 $S_1$ (4번째 $k=3$, 1가지).<div class="bilingual-en"><b>Prerequisite Knowledge:</b> If the 3rd trial is $k=6$, then it is To reach $S_0$ in 4 attempts, you must reach $S_0$ in the 4th attempt from $S_2$. Possible $S_2$ are $S_0$ (4th $k \in \{1,2,4,5,6\}$, 5 types) or $S_1$ (4th $k=3$, 1 type).</div></div><div class="q" data-ans="1" data-exp="$S_2=S_0$: $26 \times 5 = 130$, $S_2=S_1$: $8 \times 1 = 8$, 합계 $138$." data-exp-en="$S_2=S_0$: $26 \times 5 = 130$, $S_2=S_1$: $8 \times 1 = 8$, total $138$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">3번째 시행이 6이고 4회 후 $S_0$가 되는 경우의 수는?</span><div class="bilingual-en">What are the number of ways in which the third trial will be 6 and $S_0$ after four?</div></div><div class="opts"><div class="opt"><span class="n">1</span>138</div><div class="opt"><span class="n">2</span>26</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>130</div><div class="opt"><span class="n">5</span>742</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -377,7 +489,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="3" data-exp="$k=1,2,4,5,6$의 5가지."><div class="lvl">문항</div><div class="stem">$S_2 = S_0$ 일 때, 4번째 시행으로 $S_0$ 유지하는 $k$는 몇 가지?</div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>3</div><div class="opt"><span class="n">3</span>5</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>2</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="3" data-exp="$k=1,2,4,5,6$의 5가지." data-exp-en="5 things about $k=1,2,4,5,6$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$S_2 = S_0$ 일 때, 4번째 시행으로 $S_0$ 유지하는 $k$는 몇 가지?</span><div class="bilingual-en">When $S_2 = S_0$, how many $k$ maintains $S_0$ on the 4th trial?</div></div><div class="opts"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>3</div><div class="opt"><span class="n">3</span>5</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>2</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -388,7 +500,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><div class="q" data-ans="3" data-exp="$k=3$으로 3번(B)과 4번(A) 교환 → $S_0$ 복귀. 1가지."><div class="lvl">문항</div><div class="stem">$S_2 = S_1$ 일 때, 4번째 시행으로 $S_0$가 되는 $k$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=2$</div><div class="opt"><span class="n">3</span>$k=3$</div><div class="opt"><span class="n">4</span>$k=4$</div><div class="opt"><span class="n">5</span>$k=6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><div class="q" data-ans="3" data-exp="$k=3$으로 3번(B)과 4번(A) 교환 → $S_0$ 복귀. 1가지." data-exp-en="Exchange numbers 3 (B) and 4 (A) with $k=3$ → Return to $S_0$. 1 thing."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$S_2 = S_1$ 일 때, 4번째 시행으로 $S_0$가 되는 $k$는?</span><div class="bilingual-en">When $S_2 = S_1$, what is $k$ that becomes $S_0$ on the 4th trial?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$k=1$</div><div class="opt"><span class="n">2</span>$k=2$</div><div class="opt"><span class="n">3</span>$k=3$</div><div class="opt"><span class="n">4</span>$k=4$</div><div class="opt"><span class="n">5</span>$k=6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -401,7 +513,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><b>풀이.</b></p><p><b>① 상태 정의.</b> 초기 상태 $S_0$: A,A,A,B,B,B (B의 위치: 4,5,6). $k=1,2,4,5,6$ 이면 $S_0$ 유지(5가지), $k=3$ 이면 $S_1$(A,A,B,A,B,B)로 변화(1가지).</p><p><b>② $S_1$에서의 전이.</b> $S_1$에서 $k=3$ → $S_0$ 복귀(1가지), $k=2$ → $S_2$(A,B,A,A,B,B)(1가지), $k=4$ → $S_3$(A,A,B,B,A,B)(1가지), $k=1,5,6$ → $S_1$ 유지(3가지).</p><p><b>③ 2회 후 상태별 도달 수.</b> $M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$, $M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$, $M_2(S_2) = 1 \times 1 = 1$, $M_2(S_3) = 1 \times 1 = 1$.</p><p><b>④ 4회 후 $S_0$ 총 경우의 수.</b> 대칭성으로 $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$.</p><p><b>⑤ 3번째가 6인 조건부 경우의 수.</b> 3번째 $k=6$이면 $T_6$은 항등변환. 2회 후 상태 = 3회 후 상태 = $S_2$. $S_2 = S_0$ 이면 4번째 $k \in \{1,2,4,5,6\}$(5가지): $26 \times 5 = 130$. $S_2 = S_1$ 이면 4번째 $k=3$(1가지): $8 \times 1 = 8$. 합계 $130 + 8 = 138$.</p><p><b>⑥ 확률.</b> $P = \dfrac{138}{742} = \dfrac{69}{371}$.</p><p><b>정답: $\dfrac{69}{371}$</b></p></div><div class="q" data-ans="1" data-exp="4회 후 $S_0$ 도달 총 $742$가지 중 3번째가 6인 경우 $138$가지 → $\dfrac{138}{742} = \dfrac{69}{371}$."><div class="lvl">최종 본문항</div><div class="stem">문자 &#x27;A&#x27;가 적힌 카드 3장과 문자 &#x27;B&#x27;가 적힌 카드 3장을 준비하여 1번째부터 6번째 자리까지 차례로 A, A, A, B, B, B가 되도록 놓는다. 한 개의 주사위를 던져 나온 눈의 수를 $k$라 할 때, $k \le 5$ 이면 $k$번째 자리의 카드와 $(k+1)$번째 자리의 카드를 교환하고, $k = 6$ 이면 카드의 위치를 그대로 둔다. 이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, 3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오.</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\dfrac{69}{371}$</div><div class="opt"><span class="n">2</span>$\dfrac{1}{6}$</div><div class="opt"><span class="n">3</span>$\dfrac{5}{36}$</div><div class="opt"><span class="n">4</span>$\dfrac{1}{4}$</div><div class="opt"><span class="n">5</span>$\dfrac{1}{3}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><p><b>풀이.</b></p><p><b>① 상태 정의.</b> 초기 상태 $S_0$: A,A,A,B,B,B (B의 위치: 4,5,6). $k=1,2,4,5,6$ 이면 $S_0$ 유지(5가지), $k=3$ 이면 $S_1$(A,A,B,A,B,B)로 변화(1가지).</p><p><b>② $S_1$에서의 전이.</b> $S_1$에서 $k=3$ → $S_0$ 복귀(1가지), $k=2$ → $S_2$(A,B,A,A,B,B)(1가지), $k=4$ → $S_3$(A,A,B,B,A,B)(1가지), $k=1,5,6$ → $S_1$ 유지(3가지).</p><p><b>③ 2회 후 상태별 도달 수.</b> $M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$, $M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$, $M_2(S_2) = 1 \times 1 = 1$, $M_2(S_3) = 1 \times 1 = 1$.</p><p><b>④ 4회 후 $S_0$ 총 경우의 수.</b> 대칭성으로 $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$.</p><p><b>⑤ 3번째가 6인 조건부 경우의 수.</b> 3번째 $k=6$이면 $T_6$은 항등변환. 2회 후 상태 = 3회 후 상태 = $S_2$. $S_2 = S_0$ 이면 4번째 $k \in \{1,2,4,5,6\}$(5가지): $26 \times 5 = 130$. $S_2 = S_1$ 이면 4번째 $k=3$(1가지): $8 \times 1 = 8$. 합계 $130 + 8 = 138$.</p><p><b>⑥ 확률.</b> $P = \dfrac{138}{742} = \dfrac{69}{371}$.</p><p><b>정답: $\dfrac{69}{371}$</b></p><div class="bilingual-en"><b>Complete Solution:</b> <p> <b> Solution. </b> </p> <p> <b> ① State definition. </b> Initial state $S_0$: A,A,A,B,B,B (position of B: 4,5,6). If $k=1,2,4,5,6$, keep $S_0$ (5 types), if $k=3$, change to </p> <p> <b> ② Transition from $S_1$. </b> $S_1$ to $k=3$ → $S_0$ return (1 type), $k=2$ → $k=1,5,6$ → Maintain $S_1$ (3 types). </p> <p> <b> ③ Number of states reached after 2 times. </b> $M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$, $M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$, $M_2(S_2) = 1 \times 1 = 1$, $M_2(S_3) = 1 \times 1 = 1$. </p> <p> <b> ④ Total number of $S_0$ cases after 4 times. </b> With symmetry, $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$. </p> <p> <b> ⑤ Number of conditional cases where the third is 6. If </b> is the third $k=6$, then $T_6$ is the identity transformation. Status after 2 times = Status after 3 times = $S_2$. If $S_2 = S_0$, the 4th $k \in \{1,2,4,5,6\}$ (5 types): $26 \times 5 = 130$. If $S_2 = S_1$, the 4th $k=3$ (1 type): $8 \times 1 = 8$. Total $130 + 8 = 138$. </p> <p> <b> ⑥ Probability. </b> $P = \dfrac{138}{742} = \dfrac{69}{371}$. </p> <p> <b> Correct answer: $\dfrac{69}{371}$</div></div><div class="q" data-ans="1" data-exp="4회 후 $S_0$ 도달 총 $742$가지 중 3번째가 6인 경우 $138$가지 → $\dfrac{138}{742} = \dfrac{69}{371}$." data-exp-en="$S_0$ is reached after 4 times. If the third of the total $742$ branches is 6, $138$ branches → $\dfrac{138}{742} = \dfrac{69}{371}$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">문자 &#x27;A&#x27;가 적힌 카드 3장과 문자 &#x27;B&#x27;가 적힌 카드 3장을 준비하여 1번째부터 6번째 자리까지 차례로 A, A, A, B, B, B가 되도록 놓는다. 한 개의 주사위를 던져 나온 눈의 수를 $k$라 할 때, $k \le 5$ 이면 $k$번째 자리의 카드와 $(k+1)$번째 자리의 카드를 교환하고, $k = 6$ 이면 카드의 위치를 그대로 둔다. 이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, 3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오.</span><div class="bilingual-en">Prepare three cards with the letters &#x27; A &#x27; and three cards with the letters &#x27; B If the number of eyes that come out when one die is thrown is $k$, if it is $k \le 5$, the card in the As a result of repeating this trial 4 times, when the cards are placed in the initial order of A, A, A, B, B, B, find the probability that the number of eyes in the 3rd trial is 6.</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\dfrac{69}{371}$</div><div class="opt"><span class="n">2</span>$\dfrac{1}{6}$</div><div class="opt"><span class="n">3</span>$\dfrac{5}{36}$</div><div class="opt"><span class="n">4</span>$\dfrac{1}{4}$</div><div class="opt"><span class="n">5</span>$\dfrac{1}{3}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -519,8 +631,8 @@ if (!window.toggleMinGgb) {
 }
 </script>
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $\dfrac{69}{371}$</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $\dfrac{69}{371}$</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -533,10 +645,10 @@ function toggleExp(btn){
   if(!exp) return;
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent = '💡 해설 보기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
   } else {
     exp.classList.add('show');
-    btn.textContent = '💡 해설 닫기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
   }
 }
 
@@ -562,7 +674,7 @@ qs.forEach(q=>{
       }
       if(exp) exp.classList.add('show');
       var toggleBtn = q.querySelector('.exp-toggle-btn');
-      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
+      if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
       const pct=Math.round(pts/total*100);
@@ -633,4 +745,54 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script><script src="../mathedu-room.js"></script>
-<script src="../mathedu-report.js"></script></body></html>
+<script src="../mathedu-report.js"></script><script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    MatheduI18n.setLanguage(lang);
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  } catch(e){}
+  setBoardLang(saved);
+})();
+</script>
+</body></html>

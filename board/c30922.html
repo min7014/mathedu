@@ -150,26 +150,140 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap.active{display:block}
 .opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
 @media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
 <img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
 <span>min7014 <b>mathedu</b></span>
 </a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 [2025학년도 9월 고3 22번] 수열의 귀납적 정의와 분기 추론 (단답형)</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h1>📘 [2025학년도 9월 고3 22번] 수열의 귀납적 정의와 분기 추론 (단답형)<span class="bilingual-en">📘 [2025 AY Sep Mock Exam Grade 12 #22] Inductive definition of sequence and branching inference (short answer type)</span></h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
-    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-    <span class="orig-badge">2025학년도 9월 고3 22번</span>
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge"><span class="bilingual-ko">2025학년도 9월 고3 22번</span><span class="bilingual-en">High school senior number 22 in September 2025</span></span>
   </div>
 
   <div class="orig-grid">
@@ -178,30 +292,28 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <div class="orig-media-frame">
         <img src="img_c30922.png" alt="[2025학년도 9월 고3 22번] 수열의 귀납적 정의와 분기 추론 (단답형) 원본 문제">
       </div>
-      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 한국교육과정평가원 수능·모의평가 원본 시험지</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
     </div>
 
     <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
         <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">수열의 귀납적 정의와 분기 추론 (단답형)</p>
         <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>수열의 귀납적 정의와 분기 추론 (단답형)</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
         
       </div>
-      <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
-      </div>
+      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: 💡 Core guide: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
     </div>
   </div>
 
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.
-  </div>
+  <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF & GeoGebra Exploration)</b><br>Teacher Min's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$a_{n+1} = a_n - \dfrac{2k}{3} \text{ 또는 } a_{n+1} = -k a_n$</b> — 점화식의 두 가지 분기 조건</div><div><b>$a_2 a_3 < 0$</b> — 제2항과 제3항의 부호가 다름</div><div><b>$a_5 = 0$</b> — 제5항이 0이 되는 조건</div></div>
-<h2>제1단계 · 점화식의 분기 구조 파악하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$(a_{n+1} - a_n + \frac{2k}{3})(a_{n+1} + k a_n) = 0$ 이므로 각 항은 $a_{n+1} = a_n - \frac{2k}{3}$ 또는 $a_{n+1} = -k a_n$ 중 하나를 만족합니다. $a_1 = k > 0$ 입니다.</div><div class="q" data-ans="1" data-exp="$k - \frac{2k}{3} = \frac{k}{3}$ 또는 $-k(k) = -k^2$입니다."><div class="lvl">문항</div><div class="stem">$a_1 = k$일 때 $a_2$가 될 수 있는 두 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$a_2 = \frac{k}{3}$ 또는 $-k^2$</div><div class="opt"><span class="n">2</span>$a_2 = \frac{2k}{3}$ 또는 $-k$</div><div class="opt"><span class="n">3</span>$a_2 = 0$ 또는 $-k^2$</div><div class="opt"><span class="n">4</span>$a_2 = k$ 또는 $-k$</div><div class="opt"><span class="n">5</span>$a_2 = \frac{k}{2}$ 또는 $-2k$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"></div><div><b>$a_2 a_3 < 0$</b> — 제2항과 제3항의 부호가 다름</div><div><b>$a_5 = 0$</b> — 제5항이 0이 되는 조건</div></div>
+<h2>제1단계 · 점화식의 분기 구조 파악하기<span class="bilingual-en">Step 1 · Understand the branching structure of the ignition type</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$(a_{n+1} - a_n + \frac{2k}{3})(a_{n+1} + k a_n) = 0$ 이므로 각 항은 $a_{n+1} = a_n - \frac{2k}{3}$ 또는 $a_{n+1} = -k a_n$ 중 하나를 만족합니다. $a_1 = k > 0$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Since $(a_{n+1} - a_n + \frac{2k}{3})(a_{n+1} + k a_n) = 0$, each term satisfies either $a_{n+1} = a_n - \frac{2k}{3}$ or $a_{n+1} = -k a_n$. This is $a_1 = k > 0$.</div></div><div class="q" data-ans="1" data-exp="$k - \frac{2k}{3} = \frac{k}{3}$ 또는 $-k(k) = -k^2$입니다." data-exp-en="$k - \frac{2k}{3} = \frac{k}{3}$ or $-k(k) = -k^2$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$a_1 = k$일 때 $a_2$가 될 수 있는 두 값은?</span><div class="bilingual-en">When $a_1 = k$, what two values ​​can be $a_2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">$a_2 = \frac{k}{3}$ 또는 $-k^2$</span><span class="bilingual-en">$a_2 = \frac{k}{3}$ or $-k^2$</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">$a_2 = \frac{2k}{3}$ 또는 $-k$</span><span class="bilingual-en">$a_2 = \frac{2k}{3}$ or $-k$</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">$a_2 = 0$ 또는 $-k^2$</span><span class="bilingual-en">$a_2 = 0$ or $-k^2$</span></div><div class="opt"><span class="n">4</span><span class="bilingual-ko">$a_2 = k$ 또는 $-k$</span><span class="bilingual-en">$a_2 = k$ or $-k$</span></div><div class="opt"><span class="n">5</span><span class="bilingual-ko">$a_2 = \frac{k}{2}$ 또는 $-2k$</span><span class="bilingual-en">$a_2 = \frac{k}{2}$ or $-2k$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -215,7 +327,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $a_2 a_3 < 0$ 조건을 만족하는 분기 찾기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>Case 1: $a_2 = \frac{k}{3} > 0$이면 $a_3 < 0$이어야 합니다. $a_3 = \frac{k}{3} - \frac{2k}{3} = -\frac{k}{3} < 0$ 또는 $a_3 = -k(\frac{k}{3}) = -\frac{k^2}{3} < 0$ 둘 다 음수 조건을 만족합니다. Case 2: $a_2 = -k^2 < 0$이면 $a_3 > 0$이어야 합니다.</div><div class="q" data-ans="1" data-exp="$\frac{k}{3} - \frac{2k}{3} = -\frac{k}{3}$입니다."><div class="lvl">문항</div><div class="stem">$a_2 = \frac{k}{3}$일 때 $a_3 = a_2 - \frac{2k}{3}$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{k}{3}$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$\frac{k}{3}$</div><div class="opt"><span class="n">4</span>$-\frac{2k}{3}$</div><div class="opt"><span class="n">5</span>$-k$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제2단계 · $a_2 a_3 < 0$ 조건을 만족하는 분기 찾기<span class="bilingual-en">Step 2 · Find a branch that satisfies the $a_2 a_3 < 0$ condition</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>Case 1: $a_2 = \frac{k}{3} > 0$이면 $a_3 < 0$이어야 합니다. $a_3 = \frac{k}{3} - \frac{2k}{3} = -\frac{k}{3} < 0$ 또는 $a_3 = -k(\frac{k}{3}) = -\frac{k^2}{3} < 0$ 둘 다 음수 조건을 만족합니다. Case 2: $a_2 = -k^2 < 0$이면 $a_3 > 0$이어야 합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Case 1: If it is $a_2 = \frac{k}{3} > 0$, it must be $a_3 < 0$. Either $a_3 = \frac{k}{3} - \frac{2k}{3} = -\frac{k}{3} < 0$ or $a_3 = -k(\frac{k}{3}) = -\frac{k^2}{3} < 0$ both satisfy the negative condition. Case 2: If it is $a_2 = -k^2 < 0$, it must be $a_3 > 0$.</div></div><div class="q" data-ans="1" data-exp="$\frac{k}{3} - \frac{2k}{3} = -\frac{k}{3}$입니다." data-exp-en="This is $\frac{k}{3} - \frac{2k}{3} = -\frac{k}{3}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$a_2 = \frac{k}{3}$일 때 $a_3 = a_2 - \frac{2k}{3}$의 값은?</span><div class="bilingual-en">What is the value of $a_3 = a_2 - \frac{2k}{3}$ when it is $a_2 = \frac{k}{3}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{k}{3}$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$\frac{k}{3}$</div><div class="opt"><span class="n">4</span>$-\frac{2k}{3}$</div><div class="opt"><span class="n">5</span>$-k$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -229,7 +341,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $a_5 = 0$을 만족시키는 모든 $k^2$의 합 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>각 분기를 추적하여 $a_5=0$을 풀면 가능한 양수 $k$의 값은 $2, \sqrt{2}, \frac{2}{\sqrt{3}}, \sqrt{\frac{2}{3}}$ 입니다. $k^2$의 값들은 각각 $4, 2, \frac{4}{3}, \frac{2}{3}$ 이며, 그 합은 $4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + 2 = 8$ 입니다.</div><div class="q" data-ans="3" data-exp="$6 + \frac{6}{3} = 6 + 2 = 8$입니다."><div class="lvl">문항</div><div class="stem">$4 + 2 + \frac{4}{3} + \frac{2}{3}$ 의 합은?</div><div class="opts"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제3단계 · $a_5 = 0$을 만족시키는 모든 $k^2$의 합 구하기<span class="bilingual-en">Step 3 · Find the sum of all $k^2$ that satisfies $a_5 = 0$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>각 분기를 추적하여 $a_5=0$을 풀면 가능한 양수 $k$의 값은 $2, \sqrt{2}, \frac{2}{\sqrt{3}}, \sqrt{\frac{2}{3}}$ 입니다. $k^2$의 값들은 각각 $4, 2, \frac{4}{3}, \frac{2}{3}$ 이며, 그 합은 $4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + 2 = 8$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> If we solve $a_5=0$ by tracing each branch, the possible positive value of $k$ is $2, \sqrt{2}, \frac{2}{\sqrt{3}}, \sqrt{\frac{2}{3}}$. The values ​​of $k^2$ are each $4, 2, \frac{4}{3}, \frac{2}{3}$, and their sum is $4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + 2 = 8$.</div></div><div class="q" data-ans="3" data-exp="$6 + \frac{6}{3} = 6 + 2 = 8$입니다." data-exp-en="This is $6 + \frac{6}{3} = 6 + 2 = 8$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$4 + 2 + \frac{4}{3} + \frac{2}{3}$ 의 합은?</span><div class="bilingual-en">What is the sum of $4 + 2 + \frac{4}{3} + \frac{2}{3}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -245,7 +357,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30922",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><b>[풀이]</b><br>
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
 조건 (나)에 의하여 각 항의 점화식은 다음과 같이 두 갈래로 나뉩니다.<br>
 $$a_{n+1} = a_n - \frac{2k}{3} \quad \text{또는} \quad a_{n+1} = -k a_n$$<br>
 $a_1 = k > 0$이므로<br>
@@ -261,7 +373,7 @@ $$a_2 = k - \frac{2k}{3} = \frac{k}{3} \quad \text{또는} \quad a_2 = -k(k) = -
 $$k = 2, \quad \sqrt{2}, \quad \frac{2}{\sqrt{3}}, \quad \sqrt{\frac{2}{3}}$$<br>
 구하는 $k^2$의 값의 합은<br>
 $$2^2 + (\sqrt{2})^2 + \left(\frac{2}{\sqrt{3}}\right)^2 + \left(\sqrt{\frac{2}{3}}\right)^2 = 4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + 2 = 8$$<br>
-정답은 <b>8</b> 입니다.</div><div class="q" data-ans="3" data-exp="가능한 $k^2$의 값은 $4, 2, 4/3, 2/3$이며 합은 8입니다 (단답형 정답: 8)."><div class="lvl">최종 본문항</div><div class="stem">양수 $k$에 대하여 $a_1=k$인 수열 $\{a_n\}$이 다음 조건을 만족시킨다. (가) $a_2 \times a_3 &lt; 0$ (나) 모든 자연수 $n$에 대하여 $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$이다. $a_5=0$이 되도록 하는 서로 다른 모든 양수 $k$에 대하여 $k^2$의 값의 합을 구하시오. [4점]</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+정답은 <b>8</b> 입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> According to condition (b), the ignition equation for each term is divided into two branches as follows. Since <br> $$a_{n+1} = a_n - \frac{2k}{3} \quad \text{또는} \quad a_{n+1} = -k a_n$$ <br> $a_1 = k > 0$, <br> Divide the case of <br> and track the positive number $k$ which becomes $a_5 = 0$. <br> [Case 1] When $a_2 = \frac{k}{3} > 0$ ($a_3 < 0$) When When <br> - $a_3 = -\frac{k^2}{3}$: Real root does not exist or is duplicated in $a_5 = 0$ <br> [Case 2] When $a_2 = -k^2 < 0$ ($a_3 > 0$) When <br> Therefore, the values of all different positive numbers $k$ that satisfy $a_5 = 0$ are <br> This is </b>.</div></div><div class="q" data-ans="3" data-exp="가능한 $k^2$의 값은 $4, 2, 4/3, 2/3$이며 합은 8입니다 (단답형 정답: 8)." data-exp-en="The possible values ​​of $k^2$ are $4, 2, 4/3, 2/3$ and the sum is 8 (short answer: 8)."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">양수 $k$에 대하여 $a_1=k$인 수열 $\{a_n\}$이 다음 조건을 만족시킨다. (가) $a_2 \times a_3 &lt; 0$ (나) 모든 자연수 $n$에 대하여 $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$이다. $a_5=0$이 되도록 하는 서로 다른 모든 양수 $k$에 대하여 $k^2$의 값의 합을 구하시오. [4점]</span><div class="bilingual-en">For a positive number $k$, the sequence $\{a_n\}$, which is $a_1=k$, satisfies the following conditions. (a) $a_2 \times a_3 &lt; 0$ (b) For all natural numbers $n$, it is $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$. Find the sum of the values ​​of $k^2$ for all different positive integers [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -385,8 +497,8 @@ if (!window.toggleMinGgb) {
 
 
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 8</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 8</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -395,7 +507,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -431,10 +543,10 @@ function toggleExp(btn){
   if(!exp) return;
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent='💡 해설 보기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
   } else {
-    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
-    btn.textContent='💡 해설 닫기';
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
   }
 }
 
@@ -477,4 +589,54 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script><script src="../mathedu-room.js"></script>
-<script src="../mathedu-report.js"></script></body></html>
+<script src="../mathedu-report.js"></script><script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    MatheduI18n.setLanguage(lang);
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  } catch(e){}
+  setBoardLang(saved);
+})();
+</script>
+</body></html>

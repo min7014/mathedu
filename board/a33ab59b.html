@@ -149,26 +149,140 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap.active{display:block}
 .opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
 @media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
 <img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
 <span>min7014 <b>mathedu</b></span>
 </a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 쌍곡선 PF&#x27; - PF = 2 조건의 점 P좌표와 삼각형 넓이 (기초→심화)</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h1>📘 쌍곡선 PF&#x27; - PF = 2 조건의 점 P좌표와 삼각형 넓이 (기초→심화)<span class="bilingual-en">📘 Hyperbolic PF</span></h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
-    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-    <span class="orig-badge">수능·모의평가 공식 기출</span>
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge"><span class="bilingual-ko">수능·모의평가 공식 기출</span><span class="bilingual-en">Official CSAT and mock evaluation exams</span></span>
   </div>
 
   <div class="orig-grid">
@@ -177,31 +291,29 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <div class="orig-media-frame" style="padding:4px;background:#fff;">
         <div class="exam-paper-sheet" style="background:#ffffff;color:#0f172a;border-radius:12px;padding:22px 26px;border:1.5px solid #334155;box-shadow:0 8px 24px rgba(0,0,0,0.35);text-align:left;line-height:1.8;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;"><div style="font-weight:700;font-size:1.05rem;color:#0f172a;margin-bottom:6px;">쌍곡선 $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$ 위의 점 P에 대하여 $PF&#x27;-PF=2$ 라 하자. $\triangle QFF&#x27;$ 와 $\triangle PFF&#x27;$ 가 닮음이고 $\dfrac{PF+PF&#x27;}{FF&#x27;}=\dfrac{FF&#x27;}{PF&#x27;}$ 일 때, 점 P의 x좌표와 $\triangle FPQ$ 의 넓이를 기약분수 $\dfrac{p}{q}\sqrt{581}$ ($p,q$ 서로소)로 나타냈을 때 $p+q$ 의 값을 구하시오.</div><div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px dashed #94a3b8;font-size:0.95rem;color:#0f172a;"><div style="flex:1;min-width:110px"><b>①</b> $107$</div><div style="flex:1;min-width:110px"><b>②</b> $98$</div><div style="flex:1;min-width:110px"><b>③</b> $105$</div><div style="flex:1;min-width:110px"><b>④</b> $117$</div><div style="flex:1;min-width:110px"><b>⑤</b> $9$</div></div></div>
       </div>
-      <div class="orig-media-sub">📄 고난도 문항 원본 시험지 복원 조판</div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 고난도 문항 원본 시험지 복원 조판</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
     </div>
 
     <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
         <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">쌍곡선 PF&#x27; - PF = 2 조건의 점 P좌표와 삼각형 넓이 (기초→심화)</p>
         <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>쌍곡선 PF&#x27; - PF = 2 조건의 점 P좌표와 삼각형 넓이 (기초→심화)</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
         
       </div>
-      <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
-      </div>
+      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: 💡 Core guide: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
     </div>
   </div>
 
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 곡선 아래의 불규칙한 넓이가 <b>직사각형들의 무한 분할로 채워지는 과정</b>을 단계별로 보여줍니다.<br>• <b>[균등 분할]</b> 구간 $[a, b]$를 $n$개의 미세 구간으로 나누고, 각 구간에서 세운 직사각형의 넓이 합(구분구적법)을 구성합니다.<br>• <b>[오차의 소멸]</b> $n=2, 4, 8, 16, \dots$으로 분할 수를 늘릴 때마다 곡선과 직사각형 사이의 삐져나온 톱니형 오차가 눈앞에서 사라지는 시각적 장관 관찰<br>• <b>[미적분학의 기본정리]</b> 무한히 쪼갠 직사각형의 극한합이 부정적분의 함숫값 차이 $F(b)-F(a)$와 정확히 일치하는 기적적인 연결을 하단 자료의 프레임 넘김으로 확인해 보세요.
-  </div>
+  <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF & GeoGebra Exploration)</b><br>Teacher Min's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
 
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$쌍곡선$</b> — 두 초점에서의 거리 차이가 일정한 점들의 자취. $|PF&#x27;-PF|=2a$</div><div><b>$초점거리 $2c$$</b> — 두 초점 F, F&#x27; 사이 거리. $c^2=a^2+b^2$</div><div><b>$거리 $d_1,d_2$$</b> — $d_1=PF,\ d_2=PF&#x27;$ (두 초점까지의 거리)</div><div><b>$닮음비$</b> — $\triangle QFF&#x27;\sim\triangle PFF&#x27;$일 때 대응변 비율. 여기선 $\frac{d_1+d_2}{12}=\frac{12}{d_2}$</div><div><b>$넓이(행렬식)$</b> — 꼭짓점 F를 기준으로 $\tfrac12\left|\det(\overrightarrow{FP},\overrightarrow{FQ})\right|$</div></div>
-<h2>제1단계 · 쌍곡선 정의 (가장 기초)</h2><div class="know"><h3>먼저 알아야 할 지식</h3>먼저 친숙한 개념부터. 쌍곡선은 &#x27;두 초점까지 거리의 차&#x27;가 일정한 도형이고, 거리는 늘 양수입니다. 어려운 공식은 아직 안 씁니다.</div><div class="q" data-ans="1" data-exp="쌍곡선의 정의: 두 초점까지 거리의 차 $|PF&#x27;-PF|$ 가 상수 $2a$ 입니다. 즉 $|d_2-d_1|=2a$."><div class="lvl">문항</div><div class="stem">쌍곡선에서 한 점 P의 두 초점 F, F&#x27;까지 거리를 각각 $d_1=PF,\ d_2=PF&#x27;$라 할 때, 쌍곡선의 정의로 항상 성립하는 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>$|d_2-d_1|=2a$ (거리 차가 일정)</div><div class="opt"><span class="n">2</span>$d_1+d_2=2a$ (거리 합이 일정)</div><div class="opt"><span class="n">3</span>$d_1=d_2$ (거리 같음)</div><div class="opt"><span class="n">4</span>$d_1\cdot d_2=2a$</div><div class="opt"><span class="n">5</span>$d_1/d_2=2a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"></div><div><b>$초점거리 $2c$$</b> — 두 초점 F, F&#x27; 사이 거리. $c^2=a^2+b^2$</div><div><b>$거리 $d_1,d_2$$</b> — $d_1=PF,\ d_2=PF&#x27;$ (두 초점까지의 거리)</div><div><b>$닮음비$</b> — $\triangle QFF&#x27;\sim\triangle PFF&#x27;$일 때 대응변 비율. 여기선 $\frac{d_1+d_2}{12}=\frac{12}{d_2}$</div><div><b>$넓이(행렬식)$</b> — 꼭짓점 F를 기준으로 $\tfrac12\left|\det(\overrightarrow{FP},\overrightarrow{FQ})\right|$</div></div>
+<h2>제1단계 · 쌍곡선 정의 (가장 기초)<span class="bilingual-en">Step 1 · Definition of hyperbola (the most basic)</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>먼저 친숙한 개념부터. 쌍곡선은 &#x27;두 초점까지 거리의 차&#x27;가 일정한 도형이고, 거리는 늘 양수입니다. 어려운 공식은 아직 안 씁니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> First, a familiar concept. A hyperbola is a shape where &#x27; the difference in distance between two foci is constant, and the distance is always a positive number. I don't use difficult formulas yet.</div></div><div class="q" data-ans="1" data-exp="쌍곡선의 정의: 두 초점까지 거리의 차 $|PF&#x27;-PF|$ 가 상수 $2a$ 입니다. 즉 $|d_2-d_1|=2a$." data-exp-en="Definition of a hyperbola: The difference between the distances to two foci, $|PF&#x27;-PF|$, is the constant $2a$. i.e. $|d_2-d_1|=2a$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">쌍곡선에서 한 점 P의 두 초점 F, F&#x27;까지 거리를 각각 $d_1=PF,\ d_2=PF&#x27;$라 할 때, 쌍곡선의 정의로 항상 성립하는 것은?</span><div class="bilingual-en">If the distances from a hyperbola to two foci F and F of a point P are</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">$|d_2-d_1|=2a$ (거리 차가 일정)</span><span class="bilingual-en">$|d_2-d_1|=2a$ (distance difference is constant)</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">$d_1+d_2=2a$ (거리 합이 일정)</span><span class="bilingual-en">$d_1+d_2=2a$ (distance sum is constant)</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">$d_1=d_2$ (거리 같음)</span><span class="bilingual-en">$d_1=d_2$ (same distance)</span></div><div class="opt"><span class="n">4</span>$d_1\cdot d_2=2a$</div><div class="opt"><span class="n">5</span>$d_1/d_2=2a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -212,7 +324,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $a^2$ 알아내기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>쌍곡선 표준형은 $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$ 꼴입니다. 주어진 식에서 $a^2$를 읽어냅니다.</div><div class="q" data-ans="1" data-exp="$\dfrac{x^2}{a^2}$ 의 분모가 $a^2$ 이므로 $a^2=1$."><div class="lvl">문항</div><div class="stem">방정식 $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$에서, $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$이라면 $a^2$은?</div><div class="opts"><div class="opt"><span class="n">1</span>$a^2=1$</div><div class="opt"><span class="n">2</span>$a^2=35$</div><div class="opt"><span class="n">3</span>$a^2=36$</div><div class="opt"><span class="n">4</span>$a^2=0$</div><div class="opt"><span class="n">5</span>$a^2=-1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제2단계 · $a^2$ 알아내기<span class="bilingual-en">Step 2 · Find out $a^2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>쌍곡선 표준형은 $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$ 꼴입니다. 주어진 식에서 $a^2$를 읽어냅니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The hyperbolic standard form has the form $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$. Reads $a^2$ from the given expression.</div></div><div class="q" data-ans="1" data-exp="$\dfrac{x^2}{a^2}$ 의 분모가 $a^2$ 이므로 $a^2=1$." data-exp-en="Since the denominator of $\dfrac{x^2}{a^2}$ is $a^2$, $a^2=1$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">방정식 $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$에서, $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$이라면 $a^2$은?</span><div class="bilingual-en">In the equation $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$, if $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$, what is $a^2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$a^2=1$</div><div class="opt"><span class="n">2</span>$a^2=35$</div><div class="opt"><span class="n">3</span>$a^2=36$</div><div class="opt"><span class="n">4</span>$a^2=0$</div><div class="opt"><span class="n">5</span>$a^2=-1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -223,7 +335,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $c$ 구하기 (1): $c^2$</h2><div class="know"><h3>먼저 알아야 할 지식</h3>쌍곡선에서 초점거리와 관련된 식은 $c^2=a^2+b^2$ 입니다. $a^2=1,\ b^2=35$예요.</div><div class="q" data-ans="1" data-exp="$c^2=a^2+b^2=1+35=36$."><div class="lvl">문항</div><div class="stem">$c^2=a^2+b^2$ 이고 $a^2=1,\ b^2=35$ 일 때 $c^2$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$c^2=36$</div><div class="opt"><span class="n">2</span>$c^2=1$</div><div class="opt"><span class="n">3</span>$c^2=35$</div><div class="opt"><span class="n">4</span>$c^2=6$</div><div class="opt"><span class="n">5</span>$c^2=30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제3단계 · $c$ 구하기 (1): $c^2$<span class="bilingual-en">Step 3 · Find $c$ (1): $c^2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>쌍곡선에서 초점거리와 관련된 식은 $c^2=a^2+b^2$ 입니다. $a^2=1,\ b^2=35$예요.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The equation relating the focal length to a hyperbola is $c^2=a^2+b^2$. It's $a^2=1,\ b^2=35$.</div></div><div class="q" data-ans="1" data-exp="$c^2=a^2+b^2=1+35=36$." data-exp-en="$c^2=a^2+b^2=1+35=36$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$c^2=a^2+b^2$ 이고 $a^2=1,\ b^2=35$ 일 때 $c^2$는?</span><div class="bilingual-en">When $c^2=a^2+b^2$ and $a^2=1,\ b^2=35$, what is $c^2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$c^2=36$</div><div class="opt"><span class="n">2</span>$c^2=1$</div><div class="opt"><span class="n">3</span>$c^2=35$</div><div class="opt"><span class="n">4</span>$c^2=6$</div><div class="opt"><span class="n">5</span>$c^2=30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -234,7 +346,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제4단계 · $c$ 구하기 (2): $c=6$</h2><div class="know"><h3>먼저 알아야 할 지식</h3>제3단계에서 $c^2=36$ 이므로 $c=6$ 입니다.</div><div class="q" data-ans="1" data-exp="$c^2=36$ 이므로 양수 $c=6$."><div class="lvl">문항</div><div class="stem">$c^2=36$ 일 때 $c$는? (거리는 양수)</div><div class="opts"><div class="opt"><span class="n">1</span>$c=6$</div><div class="opt"><span class="n">2</span>$c=1$</div><div class="opt"><span class="n">3</span>$c=5$</div><div class="opt"><span class="n">4</span>$c=\sqrt{35}$</div><div class="opt"><span class="n">5</span>$c=36$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제4단계 · $c$ 구하기 (2): $c=6$<span class="bilingual-en">Step 4 · Find $c$ (2): $c=6$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>제3단계에서 $c^2=36$ 이므로 $c=6$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In step 3, it is $c^2=36$, so it is $c=6$.</div></div><div class="q" data-ans="1" data-exp="$c^2=36$ 이므로 양수 $c=6$." data-exp-en="$c^2=36$ is a positive number, so $c=6$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$c^2=36$ 일 때 $c$는? (거리는 양수)</span><div class="bilingual-en">What is $c$ when it is $c^2=36$? (distance is positive)</div></div><div class="opts"><div class="opt"><span class="n">1</span>$c=6$</div><div class="opt"><span class="n">2</span>$c=1$</div><div class="opt"><span class="n">3</span>$c=5$</div><div class="opt"><span class="n">4</span>$c=\sqrt{35}$</div><div class="opt"><span class="n">5</span>$c=36$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -245,7 +357,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제5단계 · 초점 좌표</h2><div class="know"><h3>먼저 알아야 할 지식</h3>초점은 x축 위에 있고 $c=6$ 이므로 $F(6,0),\ F&#x27;(-6,0)$ 입니다. 초점거리 $2c=12$예요.</div><div class="q" data-ans="1" data-exp="x축 위 초점, $c=6$ 이므로 $F(c,0)=(6,0),\ F&#x27;(-c,0)=(-6,0)$."><div class="lvl">문항</div><div class="stem">초점이 x축 위에 있고 $c=6$ 이므로 두 초점의 좌표로 옳은 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>$F(6,0),\ F&#x27;(-6,0)$</div><div class="opt"><span class="n">2</span>$F(0,6),\ F&#x27;(0,-6)$</div><div class="opt"><span class="n">3</span>$F(1,0),\ F&#x27;(-1,0)$</div><div class="opt"><span class="n">4</span>$F(6,6),\ F&#x27;(-6,-6)$</div><div class="opt"><span class="n">5</span>$F(3,0),\ F&#x27;(-3,0)$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제5단계 · 초점 좌표<span class="bilingual-en">Step 5 · Focus coordinates</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초점은 x축 위에 있고 $c=6$ 이므로 $F(6,0),\ F&#x27;(-6,0)$ 입니다. 초점거리 $2c=12$예요.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The focus is on the x-axis and is $c=6$, so $F(6,0),\ F&#x27;(-6,0)$. The focal length is $2c=12$.</div></div><div class="q" data-ans="1" data-exp="x축 위 초점, $c=6$ 이므로 $F(c,0)=(6,0),\ F&#x27;(-c,0)=(-6,0)$." data-exp-en="Focus on the x-axis, $c=6$ so $F(c,0)=(6,0),\ F&#x27;(-c,0)=(-6,0)$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">초점이 x축 위에 있고 $c=6$ 이므로 두 초점의 좌표로 옳은 것은?</span><div class="bilingual-en">Since the focus is on the x-axis and is $c=6$, what are the correct coordinates for the two focuses?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$F(6,0),\ F&#x27;(-6,0)$</div><div class="opt"><span class="n">2</span>$F(0,6),\ F&#x27;(0,-6)$</div><div class="opt"><span class="n">3</span>$F(1,0),\ F&#x27;(-1,0)$</div><div class="opt"><span class="n">4</span>$F(6,6),\ F&#x27;(-6,-6)$</div><div class="opt"><span class="n">5</span>$F(3,0),\ F&#x27;(-3,0)$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -256,7 +368,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제6단계 · 거리차 관계</h2><div class="know"><h3>먼저 알아야 할 지식</h3>문제 조건 &#x27;$PF&#x27;-PF=2$&#x27; 이고 $2a=2$ 입니다. $d_1=PF,\ d_2=PF&#x27;$로 둡니다.</div><div class="q" data-ans="1" data-exp="$PF&#x27;=d_2,\ PF=d_1$ 이므로 $d_2-d_1=2$."><div class="lvl">문항</div><div class="stem">$2a=2$ 이고 $PF&#x27;-PF=2$ 라면, $d_2-d_1$ 의 값은? ($d_2=PF&#x27;,\ d_1=PF$)</div><div class="opts"><div class="opt"><span class="n">1</span>$d_2-d_1=2$</div><div class="opt"><span class="n">2</span>$d_2-d_1=1$</div><div class="opt"><span class="n">3</span>$d_2+d_1=2$</div><div class="opt"><span class="n">4</span>$d_2-d_1=6$</div><div class="opt"><span class="n">5</span>$d_1-d_2=2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제6단계 · 거리차 관계<span class="bilingual-en">Step 6 · Distance difference relationship</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>문제 조건 &#x27;$PF&#x27;-PF=2$&#x27; 이고 $2a=2$ 입니다. $d_1=PF,\ d_2=PF&#x27;$로 둡니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Problem conditions are &#x27; $PF&#x27;-PF=2$ &#x27; and $2a=2$. Leave it as $d_1=PF,\ d_2=PF&#x27;$.</div></div><div class="q" data-ans="1" data-exp="$PF&#x27;=d_2,\ PF=d_1$ 이므로 $d_2-d_1=2$." data-exp-en="$PF&#x27;=d_2,\ PF=d_1$ so $d_2-d_1=2$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$2a=2$ 이고 $PF&#x27;-PF=2$ 라면, $d_2-d_1$ 의 값은? ($d_2=PF&#x27;,\ d_1=PF$)</span><div class="bilingual-en">If $2a=2$ and $PF&#x27;-PF=2$, what is the value of $d_2-d_1$? ($d_2=PF&#x27;,\ d_1=PF$)</div></div><div class="opts"><div class="opt"><span class="n">1</span>$d_2-d_1=2$</div><div class="opt"><span class="n">2</span>$d_2-d_1=1$</div><div class="opt"><span class="n">3</span>$d_2+d_1=2$</div><div class="opt"><span class="n">4</span>$d_2-d_1=6$</div><div class="opt"><span class="n">5</span>$d_1-d_2=2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -267,7 +379,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제7단계 · P의 위치</h2><div class="know"><h3>먼저 알아야 할 지식</h3>제6단계 결과 $d_2-d_1=2&gt;0$ 이므로 $d_2&gt;d_1$ 입니다. 즉 P는 어느 초점에 더 가까울까요?</div><div class="q" data-ans="1" data-exp="$d_2&gt;d_1$ 이므로 P는 F&#x27; 보다 F 에 더 가깝습니다(우측 가지)."><div class="lvl">문항</div><div class="stem">$d_2&gt;d_1$ 이므로 P의 위치에 대한 설명으로 가장 적절한 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>P는 F 에 더 가까운 쪽 (우측 가지)</div><div class="opt"><span class="n">2</span>P는 F&#x27; 에 더 가까운 쪽</div><div class="opt"><span class="n">3</span>$d_1=d_2$ 인 수선의 발</div><div class="opt"><span class="n">4</span>P는 두 초점의 중점</div><div class="opt"><span class="n">5</span>P는 원점</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제7단계 · P의 위치<span class="bilingual-en">Step 7 · Location of P</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>제6단계 결과 $d_2-d_1=2&gt;0$ 이므로 $d_2&gt;d_1$ 입니다. 즉 P는 어느 초점에 더 가까울까요?<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The result of step 6 is $d_2-d_1=2&gt;0$, so it is $d_2&gt;d_1$. In other words, which focus is P closer to?</div></div><div class="q" data-ans="1" data-exp="$d_2&gt;d_1$ 이므로 P는 F&#x27; 보다 F 에 더 가깝습니다(우측 가지)." data-exp-en="Since $d_2&gt;d_1$, P is closer to F than F&#x27; (right branch)."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$d_2&gt;d_1$ 이므로 P의 위치에 대한 설명으로 가장 적절한 것은?</span><div class="bilingual-en">Since it is $d_2&gt;d_1$, what is the most appropriate explanation for the location of P?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">P는 F 에 더 가까운 쪽 (우측 가지)</span><span class="bilingual-en">P is closer to F (right branch)</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">P는 F&#x27; 에 더 가까운 쪽</span><span class="bilingual-en">P is closer to F</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">$d_1=d_2$ 인 수선의 발</span><span class="bilingual-en">$d_1=d_2$ The Feet of Repair</span></div><div class="opt"><span class="n">4</span><span class="bilingual-ko">P는 두 초점의 중점</span><span class="bilingual-en">P is the midpoint of the two foci</span></div><div class="opt"><span class="n">5</span><span class="bilingual-ko">P는 원점</span><span class="bilingual-en">P is the origin</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -278,7 +390,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제8단계 · 닮음의 공통각</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\triangle QFF&#x27;$ 와 $\triangle PFF&#x27;$ 가 닮음일 때, 두 삼각형이 공유하는 꼭짓점을 찾습니다.</div><div class="q" data-ans="1" data-exp="두 삼각형이 꼭짓점 $F&#x27;$ 을 공유하므로 $\angle QF&#x27;F = \angle PF&#x27;F$ 가 공통각입니다."><div class="lvl">문항</div><div class="stem">$\triangle QFF&#x27;$ 와 $\triangle PFF&#x27;$ 가 공유하는 꼭짓점각은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\angle QF&#x27;F = \angle PF&#x27;F$ (공통각)</div><div class="opt"><span class="n">2</span>$\angle QFF&#x27; = \angle PFF&#x27;$</div><div class="opt"><span class="n">3</span>$\angle FQF&#x27; = \angle FPF&#x27;$</div><div class="opt"><span class="n">4</span>직각</div><div class="opt"><span class="n">5</span>$60^{\circ}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제8단계 · 닮음의 공통각<span class="bilingual-en">Step 8 · Common angle of similarity</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\triangle QFF&#x27;$ 와 $\triangle PFF&#x27;$ 가 닮음일 때, 두 삼각형이 공유하는 꼭짓점을 찾습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When $\triangle QFF&#x27;$ and $\triangle PFF&#x27;$ are similar, find the vertices shared by the two triangles.</div></div><div class="q" data-ans="1" data-exp="두 삼각형이 꼭짓점 $F&#x27;$ 을 공유하므로 $\angle QF&#x27;F = \angle PF&#x27;F$ 가 공통각입니다." data-exp-en="Since the two triangles share the vertex $F&#x27;$, $\angle QF&#x27;F = \angle PF&#x27;F$ is a common angle."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$\triangle QFF&#x27;$ 와 $\triangle PFF&#x27;$ 가 공유하는 꼭짓점각은?</span><div class="bilingual-en">What vertex angles do $\triangle QFF&#x27;$ and $\triangle PFF&#x27;$ share?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">$\angle QF&#x27;F = \angle PF&#x27;F$ (공통각)</span><span class="bilingual-en">$\angle QF&#x27;F = \angle PF&#x27;F$ (common angle)</span></div><div class="opt"><span class="n">2</span>$\angle QFF&#x27; = \angle PFF&#x27;$</div><div class="opt"><span class="n">3</span>$\angle FQF&#x27; = \angle FPF&#x27;$</div><div class="opt"><span class="n">4</span><span class="bilingual-ko">직각</span><span class="bilingual-en">right angle</span></div><div class="opt"><span class="n">5</span>$60^{\circ}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -289,7 +401,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제9단계 · 닮음비 식 세우기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>닮음비는 대응변의 길이 비입니다. 한 변의 길이는 $d_1+d_2=PF+PF&#x27;$, 다른 쪽 빗변은 $FF&#x27;=12$예요.</div><div class="q" data-ans="1" data-exp="$\dfrac{d_1+d_2}{FF&#x27;}=\dfrac{FF&#x27;}{d_2}$ 에 $FF&#x27;=12$ 를 넣으면 $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$."><div class="lvl">문항</div><div class="stem">닮음비 조건 $\dfrac{PF+PF&#x27;}{FF&#x27;}=\dfrac{FF&#x27;}{PF&#x27;}$ 에서, $d_1+d_2$ 와 $FF&#x27;=12$ 를 넣으면 성립하는 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$</div><div class="opt"><span class="n">2</span>$\dfrac{d_1+d_2}{d_2}=12$</div><div class="opt"><span class="n">3</span>$\dfrac{12}{d_1+d_2}=\dfrac{d_2}{12}$</div><div class="opt"><span class="n">4</span>$\dfrac{d_1+d_2}{12}=\dfrac{d_2}{12}$</div><div class="opt"><span class="n">5</span>$\dfrac{d_1+d_2}{d_2}=\dfrac{12}{12}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제9단계 · 닮음비 식 세우기<span class="bilingual-en">Step 9 · Establish a similarity ratio formula</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>닮음비는 대응변의 길이 비입니다. 한 변의 길이는 $d_1+d_2=PF+PF&#x27;$, 다른 쪽 빗변은 $FF&#x27;=12$예요.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The similarity ratio is the ratio of the lengths of corresponding sides. The length of one side is $d_1+d_2=PF+PF&#x27;$ and the other hypotenuse is $FF&#x27;=12$.</div></div><div class="q" data-ans="1" data-exp="$\dfrac{d_1+d_2}{FF&#x27;}=\dfrac{FF&#x27;}{d_2}$ 에 $FF&#x27;=12$ 를 넣으면 $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$." data-exp-en="If you put $FF&#x27;=12$ in $\dfrac{d_1+d_2}{FF&#x27;}=\dfrac{FF&#x27;}{d_2}$, you get $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">닮음비 조건 $\dfrac{PF+PF&#x27;}{FF&#x27;}=\dfrac{FF&#x27;}{PF&#x27;}$ 에서, $d_1+d_2$ 와 $FF&#x27;=12$ 를 넣으면 성립하는 식은?</span><div class="bilingual-en">In the similarity ratio condition $\dfrac{PF+PF&#x27;}{FF&#x27;}=\dfrac{FF&#x27;}{PF&#x27;}$, what is the formula that holds if you put $d_1+d_2$ and</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$</div><div class="opt"><span class="n">2</span>$\dfrac{d_1+d_2}{d_2}=12$</div><div class="opt"><span class="n">3</span>$\dfrac{12}{d_1+d_2}=\dfrac{d_2}{12}$</div><div class="opt"><span class="n">4</span>$\dfrac{d_1+d_2}{12}=\dfrac{d_2}{12}$</div><div class="opt"><span class="n">5</span>$\dfrac{d_1+d_2}{d_2}=\dfrac{12}{12}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -300,7 +412,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제10단계 · 양변 정리</h2><div class="know"><h3>먼저 알아야 할 지식</h3>제9단계 식 $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ 의 양변에 $12d_2$ 를 곱해 정리합니다.</div><div class="q" data-ans="1" data-exp="양변에 $12d_2$ 를 곱하면 $d_2(d_1+d_2)=144$."><div class="lvl">문항</div><div class="stem">$\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ 양변에 $12d_2$를 곱해 정리한 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$d_2(d_1+d_2)=144$</div><div class="opt"><span class="n">2</span>$d_2(d_1+d_2)=12$</div><div class="opt"><span class="n">3</span>$d_1+d_2=12d_2$</div><div class="opt"><span class="n">4</span>$d_2^2=144$</div><div class="opt"><span class="n">5</span>$(d_1+d_2)d_2=12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제10단계 · 양변 정리<span class="bilingual-en">Step 10 · Cleaning up both sides</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>제9단계 식 $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ 의 양변에 $12d_2$ 를 곱해 정리합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Step 9: Multiply both sides of the equation $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ by $12d_2$.</div></div><div class="q" data-ans="1" data-exp="양변에 $12d_2$ 를 곱하면 $d_2(d_1+d_2)=144$." data-exp-en="If you multiply both sides by $12d_2$, you get $d_2(d_1+d_2)=144$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ 양변에 $12d_2$를 곱해 정리한 식은?</span><div class="bilingual-en">What is the equation obtained by multiplying both sides of $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ by $12d_2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$d_2(d_1+d_2)=144$</div><div class="opt"><span class="n">2</span>$d_2(d_1+d_2)=12$</div><div class="opt"><span class="n">3</span>$d_1+d_2=12d_2$</div><div class="opt"><span class="n">4</span>$d_2^2=144$</div><div class="opt"><span class="n">5</span>$(d_1+d_2)d_2=12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -311,7 +423,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제11단계 · $d_1$ 대입 → 이차방정식</h2><div class="know"><h3>먼저 알아야 할 지식</h3>제6단계에서 $d_1=d_2-2$ 였습니다. 이를 제10단계 식에 대입해 $d_2$ 의 이차방정식을 만듭니다.</div><div class="q" data-ans="1" data-exp="$d_2\big((d_2-2)+d_2\big)=d_2(2d_2-2)=144$ → $2d_2^2-2d_2-144=0$ → 양변 2로 나눠 $d_2^2-d_2-72=0$."><div class="lvl">문항</div><div class="stem">$d_1=d_2-2$ 를 $d_2(d_1+d_2)=144$ 에 대입해 얻는 $d_2$ 의 이차방정식은? (양변 2로 나눈 꼴)</div><div class="opts"><div class="opt"><span class="n">1</span>$d_2^2-d_2-72=0$</div><div class="opt"><span class="n">2</span>$d_2^2+d_2-72=0$</div><div class="opt"><span class="n">3</span>$d_2^2-2d_2-72=0$</div><div class="opt"><span class="n">4</span>$d_2^2-d_2+72=0$</div><div class="opt"><span class="n">5</span>$2d_2^2-d_2-72=0$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제11단계 · $d_1$ 대입 → 이차방정식<span class="bilingual-en">Step 11 · Substitution of $d_1$ → Quadratic equation</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>제6단계에서 $d_1=d_2-2$ 였습니다. 이를 제10단계 식에 대입해 $d_2$ 의 이차방정식을 만듭니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In step 6 it was $d_1=d_2-2$. Substitute this into the equation in Step 10 to create the quadratic equation of $d_2$.</div></div><div class="q" data-ans="1" data-exp="$d_2\big((d_2-2)+d_2\big)=d_2(2d_2-2)=144$ → $2d_2^2-2d_2-144=0$ → 양변 2로 나눠 $d_2^2-d_2-72=0$." data-exp-en="$d_2\big((d_2-2)+d_2\big)=d_2(2d_2-2)=144$ → $2d_2^2-2d_2-144=0$ → Divide both sides by 2 and get $d_2^2-d_2-72=0$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$d_1=d_2-2$ 를 $d_2(d_1+d_2)=144$ 에 대입해 얻는 $d_2$ 의 이차방정식은? (양변 2로 나눈 꼴)</span><div class="bilingual-en">What is the quadratic equation of $d_2$ obtained by substituting $d_1=d_2-2$ into $d_2(d_1+d_2)=144$? (both sides divided by 2)</div></div><div class="opts"><div class="opt"><span class="n">1</span>$d_2^2-d_2-72=0$</div><div class="opt"><span class="n">2</span>$d_2^2+d_2-72=0$</div><div class="opt"><span class="n">3</span>$d_2^2-2d_2-72=0$</div><div class="opt"><span class="n">4</span>$d_2^2-d_2+72=0$</div><div class="opt"><span class="n">5</span>$2d_2^2-d_2-72=0$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -322,7 +434,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제12단계 · $d_2$ 풀기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>제11단계 이차방정식을 인수분해합니다. 거리는 양수만 취해요.</div><div class="q" data-ans="1" data-exp="$(d_2-9)(d_2+8)=0$ 이므로 양의해 $d_2=9$."><div class="lvl">문항</div><div class="stem">$d_2^2-d_2-72=0$ 의 양의해 $d_2(=PF&#x27;)$ 는?</div><div class="opts"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$8$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$-8$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제12단계 · $d_2$ 풀기<span class="bilingual-en">Step 12 · Solve $d_2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>제11단계 이차방정식을 인수분해합니다. 거리는 양수만 취해요.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Step 11 Factorize the quadratic equation. Distance only takes positive numbers.</div></div><div class="q" data-ans="1" data-exp="$(d_2-9)(d_2+8)=0$ 이므로 양의해 $d_2=9$." data-exp-en="Since $(d_2-9)(d_2+8)=0$ is positive, it is $d_2=9$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$d_2^2-d_2-72=0$ 의 양의해 $d_2(=PF&#x27;)$ 는?</span><div class="bilingual-en">What is the positive solution of $d_2^2-d_2-72=0$, $d_2(=PF&#x27;)$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$8$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$-8$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -333,7 +445,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제13단계 · $d_1$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>제6단계 관계 $d_1=d_2-2$ 에 제12단계 $d_2=9$ 를 넣습니다.</div><div class="q" data-ans="1" data-exp="$d_1=9-2=7$."><div class="lvl">문항</div><div class="stem">$d_1=d_2-2$ 이고 $d_2=9$ 이므로 $d_1(=PF)$ 는?</div><div class="opts"><div class="opt"><span class="n">1</span>$7$</div><div class="opt"><span class="n">2</span>$9$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$5$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제13단계 · $d_1$ 구하기<span class="bilingual-en">Step 13 · Obtain $d_1$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>제6단계 관계 $d_1=d_2-2$ 에 제12단계 $d_2=9$ 를 넣습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Put the 12th level $d_2=9$ in the 6th level relation $d_1=d_2-2$.</div></div><div class="q" data-ans="1" data-exp="$d_1=9-2=7$." data-exp-en="$d_1=9-2=7$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$d_1=d_2-2$ 이고 $d_2=9$ 이므로 $d_1(=PF)$ 는?</span><div class="bilingual-en">Since it is $d_1=d_2-2$ and $d_2=9$, what is $d_1(=PF)$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$7$</div><div class="opt"><span class="n">2</span>$9$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$5$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -344,7 +456,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제14단계 · P의 x좌표</h2><div class="know"><h3>먼저 알아야 할 지식</h3>문제가 주는 관계 $d_2^2-d_1^2=24x$ 에 제12·13단계 값을 넣습니다.</div><div class="q" data-ans="1" data-exp="$d_2^2-d_1^2=81-49=32$ 이므로 $24x=32$ → $x=\tfrac{32}{24}=\tfrac{4}{3}$."><div class="lvl">문항</div><div class="stem">$d_2^2-d_1^2=24x$ 일 때, $d_2=9,\ d_1=7$ 을 넣어 구한 $x$ 는?</div><div class="opts"><div class="opt"><span class="n">1</span>$x=\tfrac{4}{3}$</div><div class="opt"><span class="n">2</span>$x=32$</div><div class="opt"><span class="n">3</span>$x=24$</div><div class="opt"><span class="n">4</span>$x=\tfrac{3}{4}$</div><div class="opt"><span class="n">5</span>$x=1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제14단계 · P의 x좌표<span class="bilingual-en">Step 14 · x-coordinate of P</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>문제가 주는 관계 $d_2^2-d_1^2=24x$ 에 제12·13단계 값을 넣습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Insert the values ​​of steps 12 and 13 into the relationship $d_2^2-d_1^2=24x$ given in the problem.</div></div><div class="q" data-ans="1" data-exp="$d_2^2-d_1^2=81-49=32$ 이므로 $24x=32$ → $x=\tfrac{32}{24}=\tfrac{4}{3}$." data-exp-en="Since $d_2^2-d_1^2=81-49=32$, $24x=32$ → $x=\tfrac{32}{24}=\tfrac{4}{3}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$d_2^2-d_1^2=24x$ 일 때, $d_2=9,\ d_1=7$ 을 넣어 구한 $x$ 는?</span><div class="bilingual-en">When $d_2^2-d_1^2=24x$, what is $x$ obtained by inserting $d_2=9,\ d_1=7$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$x=\tfrac{4}{3}$</div><div class="opt"><span class="n">2</span>$x=32$</div><div class="opt"><span class="n">3</span>$x=24$</div><div class="opt"><span class="n">4</span>$x=\tfrac{3}{4}$</div><div class="opt"><span class="n">5</span>$x=1$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -355,7 +467,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제15단계 · 넓이 공식</h2><div class="know"><h3>먼저 알아야 할 지식</h3>꼭짓점 F를 기준으로 한 $\triangle FPQ$ 의 넓이는 벡터 FP, FQ의 행렬식 절반입니다.</div><div class="q" data-ans="1" data-exp="원점 대신 F를 기준으로 하므로 넓이 $=\tfrac12\left|\det(\overrightarrow{FP},\overrightarrow{FQ})\right|$."><div class="lvl">문항</div><div class="stem">꼭짓점 F를 기준으로 한 $\triangle FPQ$ 의 넓이 공식으로 옳은 것은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\tfrac12\left|\det(\overrightarrow{FP},\overrightarrow{FQ})\right|$</div><div class="opt"><span class="n">2</span>$\tfrac12\,PF\cdot FQ$</div><div class="opt"><span class="n">3</span>$\tfrac12\,d_1d_2$</div><div class="opt"><span class="n">4</span>$\det(\overrightarrow{FP},\overrightarrow{FQ})$</div><div class="opt"><span class="n">5</span>$\sqrt{d_1^2+d_2^2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제15단계 · 넓이 공식<span class="bilingual-en">Step 15 Area Formula</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>꼭짓점 F를 기준으로 한 $\triangle FPQ$ 의 넓이는 벡터 FP, FQ의 행렬식 절반입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The area of ​​ $\triangle FPQ$ based on vertex F is half the determinant of vectors FP and FQ.</div></div><div class="q" data-ans="1" data-exp="원점 대신 F를 기준으로 하므로 넓이 $=\tfrac12\left|\det(\overrightarrow{FP},\overrightarrow{FQ})\right|$." data-exp-en="The area is $=\tfrac12\left|\det(\overrightarrow{FP},\overrightarrow{FQ})\right|$ because it is relative to F instead of the origin."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">꼭짓점 F를 기준으로 한 $\triangle FPQ$ 의 넓이 공식으로 옳은 것은?</span><div class="bilingual-en">What is the correct formula for the area of ​​ $\triangle FPQ$ based on vertex F?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\tfrac12\left|\det(\overrightarrow{FP},\overrightarrow{FQ})\right|$</div><div class="opt"><span class="n">2</span>$\tfrac12\,PF\cdot FQ$</div><div class="opt"><span class="n">3</span>$\tfrac12\,d_1d_2$</div><div class="opt"><span class="n">4</span>$\det(\overrightarrow{FP},\overrightarrow{FQ})$</div><div class="opt"><span class="n">5</span>$\sqrt{d_1^2+d_2^2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -366,7 +478,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제16단계 · 넓이 약분</h2><div class="know"><h3>먼저 알아야 할 지식</h3>행렬식을 풀어 얻은 넓이 $\dfrac{882\sqrt{581}}{81}$ 을 기약분수로 약분합니다.</div><div class="q" data-ans="1" data-exp="$\dfrac{882\sqrt{581}}{81}=\dfrac{882\div9}{81\div9}\sqrt{581}=\dfrac{98\sqrt{581}}{9}$."><div class="lvl">문항</div><div class="stem">넓이 $\dfrac{882\sqrt{581}}{81}$ 을 약분한 값은? ($882=9\times98,\ 81=9\times9$)</div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{98\sqrt{581}}{9}$</div><div class="opt"><span class="n">2</span>$\dfrac{882\sqrt{581}}{9}$</div><div class="opt"><span class="n">3</span>$98\sqrt{581}$</div><div class="opt"><span class="n">4</span>$\dfrac{98}{9}$</div><div class="opt"><span class="n">5</span>$\dfrac{882\sqrt{581}}{81}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제16단계 · 넓이 약분<span class="bilingual-en">Step 16 · Area approx.</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>행렬식을 풀어 얻은 넓이 $\dfrac{882\sqrt{581}}{81}$ 을 기약분수로 약분합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Reduce the area $\dfrac{882\sqrt{581}}{81}$ obtained by solving the determinant by an irreducible fraction.</div></div><div class="q" data-ans="1" data-exp="$\dfrac{882\sqrt{581}}{81}=\dfrac{882\div9}{81\div9}\sqrt{581}=\dfrac{98\sqrt{581}}{9}$." data-exp-en="$\dfrac{882\sqrt{581}}{81}=\dfrac{882\div9}{81\div9}\sqrt{581}=\dfrac{98\sqrt{581}}{9}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">넓이 $\dfrac{882\sqrt{581}}{81}$ 을 약분한 값은? ($882=9\times98,\ 81=9\times9$)</span><div class="bilingual-en">What is the reduction of the area $\dfrac{882\sqrt{581}}{81}$? ($882=9\times98,\ 81=9\times9$)</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{98\sqrt{581}}{9}$</div><div class="opt"><span class="n">2</span>$\dfrac{882\sqrt{581}}{9}$</div><div class="opt"><span class="n">3</span>$98\sqrt{581}$</div><div class="opt"><span class="n">4</span>$\dfrac{98}{9}$</div><div class="opt"><span class="n">5</span>$\dfrac{882\sqrt{581}}{81}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -377,7 +489,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제17단계 · $p+q$</h2><div class="know"><h3>먼저 알아야 할 지식</h3>넓이를 기약분수 $\dfrac{p}{q}\sqrt{581}$ ($p,q$ 서로소)로 나타냈을 때 $p,q$를 세어 더합니다.</div><div class="q" data-ans="1" data-exp="$p=98,\ q=9$ (서로소) 이므로 $p+q=107$."><div class="lvl">문항</div><div class="stem">넓이를 기약분수 $\dfrac{p}{q}\sqrt{581}$ ($p,q$ 서로소)라 할 때 $p+q$ 는?</div><div class="opts"><div class="opt"><span class="n">1</span>$107$</div><div class="opt"><span class="n">2</span>$98$</div><div class="opt"><span class="n">3</span>$9$</div><div class="opt"><span class="n">4</span>$105$</div><div class="opt"><span class="n">5</span>$117$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div></div><h2>제17단계 · $p+q$<span class="bilingual-en">Step 17 · $p+q$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>넓이를 기약분수 $\dfrac{p}{q}\sqrt{581}$ ($p,q$ 서로소)로 나타냈을 때 $p,q$를 세어 더합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When the area is expressed as an irreducible fraction</div></div><div class="q" data-ans="1" data-exp="$p=98,\ q=9$ (서로소) 이므로 $p+q=107$." data-exp-en="$p=98,\ q=9$ (co-prime) is $p+q=107$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">넓이를 기약분수 $\dfrac{p}{q}\sqrt{581}$ ($p,q$ 서로소)라 할 때 $p+q$ 는?</span><div class="bilingual-en">When the area is an irreducible fraction $\dfrac{p}{q}\sqrt{581}$ ($p,q$ is relatively prime), what is $p+q$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$107$</div><div class="opt"><span class="n">2</span>$98$</div><div class="opt"><span class="n">3</span>$9$</div><div class="opt"><span class="n">4</span>$105$</div><div class="opt"><span class="n">5</span>$117$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -390,7 +502,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><b>풀이.</b> 주어진 쌍곡선 $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$ 에서 $a^2=1,\ b^2=35$ 이므로 $c^2=a^2+b^2=36,\ c=6$. 초점은 $F(6,0),\ F'(-6,0)$.</p><p><b>1) 거리차.</b> $PF'-PF=2$ 이므로 $d_2-d_1=2$, 즉 $d_1=d_2-2$.</p><p><b>2) 관계식.</b> $\triangle QFF' \sim \triangle PFF'$ 와 주어진 비율에서 $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ → $d_2(d_1+d_2)=144$.</p><p><b>3) $d_2$ 구하기.</b> $d_1=d_2-2$ 대입: $d_2(2d_2-2)=144$ → $2d_2^2-2d_2-144=0$ → $d_2^2-d_2-72=0=(d_2-9)(d_2+8)$. 양의해 $d_2=9$, 따라서 $d_1=7$.</p><p><b>4) P의 x좌표.</b> $d_2^2-d_1^2=24x$ 에서 $81-49=32=24x$ → $x=\dfrac{4}{3}$.</p><p><b>5) 넓이.</b> 꼭짓점 F 기준 행렬식으로 $\triangle FPQ$ 넓이 $=\dfrac{882\sqrt{581}}{81}=\dfrac{98\sqrt{581}}{9}$. 기약분수 $\dfrac{p}{q}\sqrt{581}$ 에서 $p=98,\ q=9$ (서로소).</p><p><b>정답: $p+q=107$</b></p></div><div class="q" data-ans="1" data-exp="$a^2=1,\ b^2=35$ 에서 $c=6$, 초점 $F(6,0),F&#x27;(-6,0)$. $PF&#x27;-PF=2$ 이므로 $d_2-d_1=2$. 닮음에서 $d_2(d_1+d_2)=144$ → $d_2^2-d_2-72=0$ → $d_2=9,\ d_1=7$. $d_2^2-d_1^2=24x$ 에서 $x=4/3$. 넓이 $=\tfrac{98\sqrt{581}}{9}$ 이므로 $p+q=98+9=107$."><div class="lvl">최종 본문항</div><div class="stem">쌍곡선 $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$ 위의 점 P에 대하여 $PF&#x27;-PF=2$ 라 하자. $\triangle QFF&#x27;$ 와 $\triangle PFF&#x27;$ 가 닮음이고 $\dfrac{PF+PF&#x27;}{FF&#x27;}=\dfrac{FF&#x27;}{PF&#x27;}$ 일 때, 점 P의 x좌표와 $\triangle FPQ$ 의 넓이를 기약분수 $\dfrac{p}{q}\sqrt{581}$ ($p,q$ 서로소)로 나타냈을 때 $p+q$ 의 값을 구하시오.</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$107$</div><div class="opt"><span class="n">2</span>$98$</div><div class="opt"><span class="n">3</span>$105$</div><div class="opt"><span class="n">4</span>$117$</div><div class="opt"><span class="n">5</span>$9$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><p><b>풀이.</b> 주어진 쌍곡선 $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$ 에서 $a^2=1,\ b^2=35$ 이므로 $c^2=a^2+b^2=36,\ c=6$. 초점은 $F(6,0),\ F'(-6,0)$.</p><p><b>1) 거리차.</b> $PF'-PF=2$ 이므로 $d_2-d_1=2$, 즉 $d_1=d_2-2$.</p><p><b>2) 관계식.</b> $\triangle QFF' \sim \triangle PFF'$ 와 주어진 비율에서 $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ → $d_2(d_1+d_2)=144$.</p><p><b>3) $d_2$ 구하기.</b> $d_1=d_2-2$ 대입: $d_2(2d_2-2)=144$ → $2d_2^2-2d_2-144=0$ → $d_2^2-d_2-72=0=(d_2-9)(d_2+8)$. 양의해 $d_2=9$, 따라서 $d_1=7$.</p><p><b>4) P의 x좌표.</b> $d_2^2-d_1^2=24x$ 에서 $81-49=32=24x$ → $x=\dfrac{4}{3}$.</p><p><b>5) 넓이.</b> 꼭짓점 F 기준 행렬식으로 $\triangle FPQ$ 넓이 $=\dfrac{882\sqrt{581}}{81}=\dfrac{98\sqrt{581}}{9}$. 기약분수 $\dfrac{p}{q}\sqrt{581}$ 에서 $p=98,\ q=9$ (서로소).</p><p><b>정답: $p+q=107$</b></p><div class="bilingual-en"><b>Complete Solution:</b> <p> <b> Solution. </b> Given a hyperbola $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$, $a^2=1,\ b^2=35$ is $c^2=a^2+b^2=36,\ c=6$. The focus is on $F(6,0),\ F'(-6,0)$. </p> <p> <b> 1) Distance difference. </b> is $PF'-PF=2$, so $d_2-d_1=2$, that is, </p> <p> <b> 2) Relations. </b> $\triangle QFF' \sim \triangle PFF'$ and in the given ratio $\dfrac{d_1+d_2}{12}=\dfrac{12}{d_2}$ → $d_2(d_1+d_2)=144$. </p> <p> <b> 3) Find $d_2$. Assignment to </b> $d_1=d_2-2$: $d_2(2d_2-2)=144$ → $2d_2^2-2d_2-144=0$ → $d_2^2-d_2-72=0=(d_2-9)(d_2+8)$. Positively $d_2=9$, therefore $d_1=7$. </p> <p> <b> 4) x-coordinate of P. </b> $d_2^2-d_1^2=24x$ to $81-49=32=24x$ → $x=\dfrac{4}{3}$. </p> <p> <b> 5) Area. </b> $\triangle FPQ$ Area $=\dfrac{882\sqrt{581}}{81}=\dfrac{98\sqrt{581}}{9}$ as determinant of vertex F. Irreducible fractions $\dfrac{p}{q}\sqrt{581}$ to $p=98,\ q=9$ (coprime). </p> <p> <b> Correct answer: $p+q=107$</div></div><div class="q" data-ans="1" data-exp="$a^2=1,\ b^2=35$ 에서 $c=6$, 초점 $F(6,0),F&#x27;(-6,0)$. $PF&#x27;-PF=2$ 이므로 $d_2-d_1=2$. 닮음에서 $d_2(d_1+d_2)=144$ → $d_2^2-d_2-72=0$ → $d_2=9,\ d_1=7$. $d_2^2-d_1^2=24x$ 에서 $x=4/3$. 넓이 $=\tfrac{98\sqrt{581}}{9}$ 이므로 $p+q=98+9=107$." data-exp-en="$a^2=1,\ b^2=35$ to $c=6$, focus $F(6,0),F&#x27;(-6,0)$. $PF&#x27;-PF=2$ so $d_2-d_1=2$. In the similarity $d_2(d_1+d_2)=144$ → $d_2^2-d_2-72=0$ → $d_2=9,\ d_1=7$. $d_2^2-d_1^2=24x$ to $x=4/3$. The area is $=\tfrac{98\sqrt{581}}{9}$, so $p+q=98+9=107$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">쌍곡선 $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$ 위의 점 P에 대하여 $PF&#x27;-PF=2$ 라 하자. $\triangle QFF&#x27;$ 와 $\triangle PFF&#x27;$ 가 닮음이고 $\dfrac{PF+PF&#x27;}{FF&#x27;}=\dfrac{FF&#x27;}{PF&#x27;}$ 일 때, 점 P의 x좌표와 $\triangle FPQ$ 의 넓이를 기약분수 $\dfrac{p}{q}\sqrt{581}$ ($p,q$ 서로소)로 나타냈을 때 $p+q$ 의 값을 구하시오.</span><div class="bilingual-en">Let $PF&#x27;-PF=2$ be the point P on the hyperbola $\dfrac{x^2}{1}-\dfrac{y^2}{35}=1$. When $\triangle QFF&#x27;$ and $\triangle PFF&#x27;$ are similar and $\dfrac{PF+PF&#x27;}{FF&#x27;}=\dfrac{FF&#x27;}{PF&#x27;}$, find the value of $p+q$ when the x-coordinate of point P and the area of</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$107$</div><div class="opt"><span class="n">2</span>$98$</div><div class="opt"><span class="n">3</span>$105$</div><div class="opt"><span class="n">4</span>$117$</div><div class="opt"><span class="n">5</span>$9$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -508,8 +620,8 @@ if (!window.toggleMinGgb) {
 }
 </script>
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $107$</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $107$</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -522,10 +634,10 @@ function toggleExp(btn){
   if(!exp) return;
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent = '💡 해설 보기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
   } else {
     exp.classList.add('show');
-    btn.textContent = '💡 해설 닫기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
   }
 }
 
@@ -551,7 +663,7 @@ qs.forEach(q=>{
       }
       if(exp) exp.classList.add('show');
       var toggleBtn = q.querySelector('.exp-toggle-btn');
-      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
+      if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
       const pct=Math.round(pts/total*100);
@@ -622,4 +734,54 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script><script src="../mathedu-room.js"></script>
-<script src="../mathedu-report.js"></script></body></html>
+<script src="../mathedu-report.js"></script><script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    MatheduI18n.setLanguage(lang);
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  } catch(e){}
+  setBoardLang(saved);
+})();
+</script>
+</body></html>

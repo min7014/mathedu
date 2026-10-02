@@ -140,29 +140,142 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-footer{{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}}
 .min-footer-link{{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}}
 .min-footer-link:hover{{text-decoration:underline;color:#fff}}
+/* Bilingual Dual-Display Engine */
+.bilingual-en {{ display: none; }}
+.bilingual-ko {{ display: inline; }}
+div.bilingual-ko, p.bilingual-ko {{ display: block; }}
+html[lang="en"] .bilingual-ko {{ display: none !important; }}
+html[lang="en"] .bilingual-en {{
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}}
+html[lang="en"] span.bilingual-en {{
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}}
+html[lang="en"] .stem span.bilingual-en {{
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}}
+html[lang="en"] h1 .bilingual-en {{
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}}
+html[lang="en"] h2 .bilingual-en {{
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}}
+html[lang="en"] .lead .bilingual-en {{
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}}
+html[lang="en"] .stem .bilingual-en {{
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}}
+html[lang="en"] .orig-tag .bilingual-en {{
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}}
+html[lang="en"] .orig-tip .bilingual-en {{
+  color: #cbd5e1;
+  margin-top: 4px;
+}}
+html[lang="en"] .know .bilingual-en {{
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}}
+html[lang="en"] .sol .bilingual-en {{
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}}
+html[lang="en"] .exp .bilingual-en {{
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}}
+html[lang="en"] .sym div .bilingual-en {{
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}}
+.lang-group {{
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}}
+.lang-btn {{
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}}
+.lang-btn.active {{
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}}
 </style>
-<script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\(','\\)']]}}}};</script>
+<script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\\\(','\\\\)']]}}}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
 <img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
 <span>min7014 <b>mathedu</b></span>
 </a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
 <h1>📘 {title}</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 {original_block}
 {symbols_block}
 {levels_block}
 {tracking_block}
 {solution_block}
 {min7014_materials_block}
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 {final_ans}</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns"><span class="bilingual-ko">정답</span><span class="bilingual-en">Answer</span> {final_ans}</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -173,12 +286,13 @@ function toggleExp(btn){{
   if(!q) return;
   var exp = q.querySelector('.exp');
   if(!exp) return;
+  var isEn = (document.documentElement.lang === 'en');
   if(exp.classList.contains('show')){{
     exp.classList.remove('show');
-    btn.textContent = '💡 해설 보기';
+    btn.textContent = isEn ? '💡 View Explanation' : '💡 해설 보기';
   }} else {{
     exp.classList.add('show');
-    btn.textContent = '💡 해설 닫기';
+    btn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기';
   }}
 }}
 
@@ -204,7 +318,7 @@ qs.forEach(q=>{{
       }}
       if(exp) exp.classList.add('show');
       var toggleBtn = q.querySelector('.exp-toggle-btn');
-      if(toggleBtn) toggleBtn.textContent = '💡 해설 닫기';
+      if(toggleBtn) {{ var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }}
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
       const pct=Math.round(pts/total*100);
@@ -274,6 +388,55 @@ function submitReport(btn){{
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }}
+
+function updateExplanations(lang) {{
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {{
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {{
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }}
+    if (exp) {{
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {{
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      }} else {{
+        exp.innerHTML = koExp;
+      }}
+    }}
+  }});
+  if (window.MathJax && window.MathJax.typesetPromise) {{
+    try {{ window.MathJax.typesetPromise(); }} catch(e){{}}
+  }}
+}}
+
+function setBoardLang(lang) {{
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try {{ localStorage.setItem('mathedu_lang', lang); }} catch(e){{}}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {{
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  }});
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {{
+    MatheduI18n.setLanguage(lang);
+  }}
+  updateExplanations(lang);
+}}
+
+(function(){{
+  var saved = 'ko';
+  try {{
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  }} catch(e){{}}
+  setBoardLang(saved);
+}})();
 </script><script src="../mathedu-room.js"></script><script src="../mathedu-report.js"></script></body></html>"""
 
 def _esc(s): return html.escape(str(s))

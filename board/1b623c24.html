@@ -144,27 +144,141 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap.active{display:block}
 .opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
 @media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn" href="/">← 게시판</a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 카드 뒤집기 4회 반복 후 모두 앞면일 확률 (자동 폴백 아님·직접제작)</h1>
-<h2>📋 원본 문제</h2>
+<h1>📘 카드 뒤집기 4회 반복 후 모두 앞면일 확률 (자동 폴백 아님·직접제작)<span class="bilingual-en">📘 Probability of all heads after flipping the card 4 times (not automatic fallback, made manually)</span></h1>
+<h2>📋 원본 문제<span class="bilingual-en">📋 Original Issue</span></h2>
 <div class="sol" style="font-size:1.05rem;font-weight:600;margin:14px 0">실험을 4번 반복한 뒤 6장 모두 앞면일 확률은?</div>
 <div class="opts"></div>
-<p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
-    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-    <span class="orig-badge">수능·모의평가 공식 기출</span>
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge"><span class="bilingual-ko">수능·모의평가 공식 기출</span><span class="bilingual-en">Official CSAT and mock evaluation exams</span></span>
   </div>
 
   <div class="orig-grid">
@@ -173,30 +287,28 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <div class="orig-media-frame" style="background:rgba(255,255,255,0.06);">
         <div style="font-weight:700;font-size:1.05rem;line-height:1.7;color:var(--txt);padding:14px;text-align:left;">실험을 4번 반복한 뒤 6장 모두 앞면일 확률은?</div>
       </div>
-      <div class="orig-media-sub">📄 수능·모의평가 원본 문항</div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 수능·모의평가 원본 문항</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
     </div>
 
     <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
         <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">카드 뒤집기 4회 반복 후 모두 앞면일 확률 (자동 폴백 아님·직접제작)</p>
         <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>카드 뒤집기 4회 반복 후 모두 앞면일 확률 (자동 폴백 아님·직접제작)</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
         
       </div>
-      <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
-      </div>
+      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: 💡 Core guide: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
     </div>
   </div>
 
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 독립시행의 무수한 우연이 <b>필연적인 정규분포의 종 모양 곡선으로 수렴하는 과정</b>을 시각화합니다.<br>• <b>[이항계수의 삼각형]</b> 파스칼 삼각형의 조합 수열이 이항분포 $\mathrm{B}(n, p)$의 이산 확률기둥들로 쌓여가는 단계별 구축 과정<br>• <b>[중심극한정리의 출현]</b> 시행 횟수 $n$이 증가함에 따라 거친 계단 모양의 히스토그램이 매끄러운 가우스 정규분포 곡선 $N(\mu, \sigma^2)$으로 완벽하게 수렴<br>• <b>[수학적 의미]</b> 개별 사건은 불확실하지만, 전체의 통계적 집합은 수학의 가장 우아한 대칭 곡선을 따른다는 경이로움을 하단 자료에서 체득해 보세요.
-  </div>
+  <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF & GeoGebra Exploration)</b><br>Teacher Min's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$패리티$</b> — 뒤집기 2번 = 원래 상태로 되돌아옴</div><div><b>$6^4$</b> — 주사위 4회 전체 경우의 수 = 1296</div><div><b>$P(A)$</b> — 사건 A의 확률 = (성공 경우)/(전체 경우)</div></div>
-<h2>제1단계 · 기본 상태와 목표</h2><div class="know"><h3>먼저 알아야 할 지식</h3>6장의 카드. 초기: 1·6번 뒷면(B), 2~5번 앞면(F). 목표는 6장 모두 앞면(F).</div><div class="q" data-ans="1" data-exp="뒤집기 2번 = 짝수 번이므로 원래 상태 유지(패리티 원리)."><div class="lvl">문항</div><div class="stem">카드를 뒤집는 횟수를 2번 반복하면 상태는?</div><div class="opts"><div class="opt"><span class="n">1</span>원래와 같다</div><div class="opt"><span class="n">2</span>뒷면만 된다</div><div class="opt"><span class="n">3</span>사라진다</div><div class="opt"><span class="n">4</span>두 장이 된다</div><div class="opt"><span class="n">5</span>모른다</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"></div><div><b>$6^4$</b> — 주사위 4회 전체 경우의 수 = 1296</div><div><b>$P(A)$</b> — 사건 A의 확률 = (성공 경우)/(전체 경우)</div></div>
+<h2>제1단계 · 기본 상태와 목표<span class="bilingual-en">Step 1 · Basic status and goals</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>6장의 카드. 초기: 1·6번 뒷면(B), 2~5번 앞면(F). 목표는 6장 모두 앞면(F).<div class="bilingual-en"><b>Prerequisite Knowledge:</b> 6 cards. Initial: Numbers 1 and 6, back (B), Numbers 2 to 5, front (F). The goal is to turn all 6 cards face up (F).</div></div><div class="q" data-ans="1" data-exp="뒤집기 2번 = 짝수 번이므로 원래 상태 유지(패리티 원리)." data-exp-en="Flip 2 times = even number, so keep the original state (parity principle)."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">카드를 뒤집는 횟수를 2번 반복하면 상태는?</span><div class="bilingual-en">What happens if you repeat flipping the card twice?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">원래와 같다</span><span class="bilingual-en">same as original</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">뒷면만 된다</span><span class="bilingual-en">Only the back side</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">사라진다</span><span class="bilingual-en">disappears</span></div><div class="opt"><span class="n">4</span><span class="bilingual-ko">두 장이 된다</span><span class="bilingual-en">It becomes two sheets</span></div><div class="opt"><span class="n">5</span><span class="bilingual-ko">모른다</span><span class="bilingual-en">don't know</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -248,7 +360,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제2단계 · 각 카드가 뒤집히는 횟수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>i번째 카드는 주사위 눈이 i가 나온 횟수만큼 뒤집힌다. 홀수 번 뒤집히면 상태가 바뀐다.</div><div class="q" data-ans="3" data-exp="뒷면→앞면이 되려면 홀수 번 뒤집혀야 한다."><div class="lvl">문항</div><div class="stem">처음 뒷면(1·6번)인 카드가 앞면이 되려면 뒤집힌 횟수는?</div><div class="opts"><div class="opt"><span class="n">1</span>0회</div><div class="opt"><span class="n">2</span>짝수 회</div><div class="opt"><span class="n">3</span>홀수 회</div><div class="opt"><span class="n">4</span>4회</div><div class="opt"><span class="n">5</span>상관없다</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제2단계 · 각 카드가 뒤집히는 횟수<span class="bilingual-en">Step 2 · Number of times each card is turned over</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>i번째 카드는 주사위 눈이 i가 나온 횟수만큼 뒤집힌다. 홀수 번 뒤집히면 상태가 바뀐다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The ith card is flipped over the number of times the die rolls i. If it flips an odd number of times, the state changes.</div></div><div class="q" data-ans="3" data-exp="뒷면→앞면이 되려면 홀수 번 뒤집혀야 한다." data-exp-en="To get from tails to heads, it must be flipped an odd number of times."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">처음 뒷면(1·6번)인 카드가 앞면이 되려면 뒤집힌 횟수는?</span><div class="bilingual-en">How many times must a card that is initially face down (numbers 1 and 6) be flipped over to become heads?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">0회</span><span class="bilingual-en">0 times</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">짝수 회</span><span class="bilingual-en">even number of times</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">홀수 회</span><span class="bilingual-en">odd number of times</span></div><div class="opt"><span class="n">4</span><span class="bilingual-ko">4회</span><span class="bilingual-en">4 times</span></div><div class="opt"><span class="n">5</span><span class="bilingual-ko">상관없다</span><span class="bilingual-en">It doesn't matter</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -300,7 +412,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><div class="q" data-ans="2" data-exp="앞면 유지 = 짝수 번 뒤집힘."><div class="lvl">문항</div><div class="stem">처음 앞면(2~5번)인 카드가 앞면을 유지하려면 뒤집힌 횟수는?</div><div class="opts"><div class="opt"><span class="n">1</span>홀수 회</div><div class="opt"><span class="n">2</span>짝수 회</div><div class="opt"><span class="n">3</span>1회</div><div class="opt"><span class="n">4</span>3회</div><div class="opt"><span class="n">5</span>5회</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><div class="q" data-ans="2" data-exp="앞면 유지 = 짝수 번 뒤집힘." data-exp-en="Keep heads = Flip even number of times."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">처음 앞면(2~5번)인 카드가 앞면을 유지하려면 뒤집힌 횟수는?</span><div class="bilingual-en">How many times must a card that is initially face up (numbers 2 to 5) be flipped over to remain face up?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">홀수 회</span><span class="bilingual-en">odd number of times</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">짝수 회</span><span class="bilingual-en">even number of times</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">1회</span><span class="bilingual-en">1 time</span></div><div class="opt"><span class="n">4</span><span class="bilingual-ko">3회</span><span class="bilingual-en">3 times</span></div><div class="opt"><span class="n">5</span><span class="bilingual-ko">5회</span><span class="bilingual-en">5 times</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -352,7 +464,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제3단계 · 눈 조건 정리</h2><div class="know"><h3>먼저 알아야 할 지식</h3>1·6번은 눈 1이 홀수 회, 2~5번은 눈 2,3,4,5가 각각 짝수 회 나와야 한다.</div><div class="q" data-ans="2" data-exp="홀수 회 = 1회 또는 3회 → $\binom{4}{1}+\binom{4}{3}=4+4=8$."><div class="lvl">문항</div><div class="stem">눈 1이 홀수 회 나오는 경우의 수(4회 중)는?</div><div class="opts"><div class="opt"><span class="n">1</span>$2^4=16$</div><div class="opt"><span class="n">2</span>$\binom{4}{1}+\binom{4}{3}=8$</div><div class="opt"><span class="n">3</span>$\binom{4}{1}=4$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제3단계 · 눈 조건 정리<span class="bilingual-en">Step 3 · Organize snow conditions</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>1·6번은 눈 1이 홀수 회, 2~5번은 눈 2,3,4,5가 각각 짝수 회 나와야 한다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For numbers 1 and 6, eye 1 must appear an odd number of times, and for numbers 2 to 5, eyes 2, 3, 4, and 5 must appear an even number of times.</div></div><div class="q" data-ans="2" data-exp="홀수 회 = 1회 또는 3회 → $\binom{4}{1}+\binom{4}{3}=4+4=8$." data-exp-en="Odd number of times = 1 or 3 times → $\binom{4}{1}+\binom{4}{3}=4+4=8$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">눈 1이 홀수 회 나오는 경우의 수(4회 중)는?</span><div class="bilingual-en">How many times (out of 4) does eye 1 appear an odd number of times?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$2^4=16$</div><div class="opt"><span class="n">2</span>$\binom{4}{1}+\binom{4}{3}=8$</div><div class="opt"><span class="n">3</span>$\binom{4}{1}=4$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -404,7 +516,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제4단계 · 2~5번 조건</h2><div class="know"><h3>먼저 알아야 할 지식</h3>눈 2,3,4,5는 각각 짝수 회(0,2,4회) 나와야 한다.</div><div class="q" data-ans="1" data-exp="짝수+짝수+짝수+짝수 = 짝수이므로 눈 1·6 합도 짝수. 눈 1은 홀수 회여야 하므로 눈 6도 홀수 회 → 1회+3회 조합."><div class="lvl">문항</div><div class="stem">눈 2,3,4,5가 각각 짝수 회일 때, 남은 눈 1·6의 횟수 합은? (총 4회)</div><div class="opts"><div class="opt"><span class="n">1</span>항상 짝수</div><div class="opt"><span class="n">2</span>항상 홀수</div><div class="opt"><span class="n">3</span>0</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>상관없다</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제4단계 · 2~5번 조건<span class="bilingual-en">Step 4 · Conditions 2 to 5</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>눈 2,3,4,5는 각각 짝수 회(0,2,4회) 나와야 한다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Eyes 2, 3, 4, and 5 must appear an even number of times (0, 2, and 4 times) respectively.</div></div><div class="q" data-ans="1" data-exp="짝수+짝수+짝수+짝수 = 짝수이므로 눈 1·6 합도 짝수. 눈 1은 홀수 회여야 하므로 눈 6도 홀수 회 → 1회+3회 조합." data-exp-en="Since even number + even number + even + even number = even number, the sum of 1·6 is even number. Since eye 1 must be an odd number of times, eye 6 should also be an odd number of times → combination of 1 time + 3 times."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">눈 2,3,4,5가 각각 짝수 회일 때, 남은 눈 1·6의 횟수 합은? (총 4회)</span><div class="bilingual-en">If eyes 2, 3, 4, and 5 each have an even number of times, what is the sum of the remaining times for eyes 1 and 6? (Total 4 times)</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">항상 짝수</span><span class="bilingual-en">always even</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">항상 홀수</span><span class="bilingual-en">always odd</span></div><div class="opt"><span class="n">3</span>0</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span><span class="bilingual-ko">상관없다</span><span class="bilingual-en">It doesn't matter</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -456,7 +568,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제5단계 · 전수조사 계산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>조건을 만족하는 (k1,k2,k3,k4) 조합을 센다. 홀수 눈 횟수가 1회 또는 3회일 때 각각 80가지씩.</div><div class="q" data-ans="1" data-exp="눈 1 또는 6 중 하나가 1회, 나머지 짝수 눈들이 짝수 회 → 80가지."><div class="lvl">문항</div><div class="stem">홀수 눈(1 또는 6)이 정확히 1회인 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$80$</div><div class="opt"><span class="n">2</span>$40$</div><div class="opt"><span class="n">3</span>$160$</div><div class="opt"><span class="n">4</span>$20$</div><div class="opt"><span class="n">5</span>$10$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제5단계 · 전수조사 계산<span class="bilingual-en">Step 5 · Complete survey calculation</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>조건을 만족하는 (k1,k2,k3,k4) 조합을 센다. 홀수 눈 횟수가 1회 또는 3회일 때 각각 80가지씩.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Count the (k1,k2,k3,k4) combinations that satisfy the conditions. 80 each when the number of odd eyes is 1 or 3.</div></div><div class="q" data-ans="1" data-exp="눈 1 또는 6 중 하나가 1회, 나머지 짝수 눈들이 짝수 회 → 80가지." data-exp-en="One of eyes 1 or 6 once, the remaining even eyes an even number of times → 80 types."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">홀수 눈(1 또는 6)이 정확히 1회인 경우의 수는?</span><div class="bilingual-en">How many times does an odd number (1 or 6) occur exactly once?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$80$</div><div class="opt"><span class="n">2</span>$40$</div><div class="opt"><span class="n">3</span>$160$</div><div class="opt"><span class="n">4</span>$20$</div><div class="opt"><span class="n">5</span>$10$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -508,7 +620,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><div class="q" data-ans="1" data-exp="눈 1,6이 합쳐 3회(예: 1회+2회 불가, 홀수+짝수=홀수) → 80가지."><div class="lvl">문항</div><div class="stem">홀수 눈이 정확히 3회인 경우의 수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$80$</div><div class="opt"><span class="n">2</span>$40$</div><div class="opt"><span class="n">3</span>$160$</div><div class="opt"><span class="n">4</span>$20$</div><div class="opt"><span class="n">5</span>$10$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><div class="q" data-ans="1" data-exp="눈 1,6이 합쳐 3회(예: 1회+2회 불가, 홀수+짝수=홀수) → 80가지." data-exp-en="Eyes 1 and 6 combined 3 times (e.g. 1 time + 2 times not possible, odd + even = odd number) → 80 types."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">홀수 눈이 정확히 3회인 경우의 수는?</span><div class="bilingual-en">How many ways can an odd number occur exactly 3 times?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$80$</div><div class="opt"><span class="n">2</span>$40$</div><div class="opt"><span class="n">3</span>$160$</div><div class="opt"><span class="n">4</span>$20$</div><div class="opt"><span class="n">5</span>$10$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -561,7 +673,7 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script></div>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><p><b>① 도식화</b> — 초기: 1·6번 뒷면(B), 2~5번 앞면(F). 목표: 6장 모두 앞면(F).</p><p><b>② 핵심 원리(패리티)</b> 뒤집기 2번 = 원래 상태. 각 카드가 <i>홀수 번/짝수 번</i> 뒤집히는지만 따진다.</p><ul><li>1·6번(처음 뒷면) → 앞면 되려면 <b>홀수 번</b> 뒤집힘</li><li>2~5번(처음 앞면) → 앞면 유지하려면 <b>짝수 번</b> 뒤집힘</li></ul><p><b>③ 전수조사</b> 주사위 4회의 눈 $(k_1,k_2,k_3,k_4)$ 중,</p><ul><li>홀수 눈(1 또는 6)이 <b>1회</b> → 80가지</li><li>홀수 눈이 <b>3회</b> → 80가지</li></ul><p>성공 합계 = $80+80=160$. 전체 = $6^4=1296$.</p><p><b>④ 답</b> $P = \dfrac{160}{1296} = \dfrac{10}{81}$ (약 12.3%).</p></div><div class="q" data-ans="3" data-exp="성공 경우 = 80+80 = 160. 전체 = $6^4 = 1296$. $P = 160/1296 = 10/81$."><div class="lvl">문항</div><div class="stem">실험을 4번 반복한 뒤 6장 모두 앞면일 확률은?</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$19/162$</div><div class="opt"><span class="n">2</span>$13/108$</div><div class="opt"><span class="n">3</span>$10/81$</div><div class="opt"><span class="n">4</span>$41/324$</div><div class="opt"><span class="n">5</span>$7/54$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><p><b>① 도식화</b> — 초기: 1·6번 뒷면(B), 2~5번 앞면(F). 목표: 6장 모두 앞면(F).</p><p><b>② 핵심 원리(패리티)</b> 뒤집기 2번 = 원래 상태. 각 카드가 <i>홀수 번/짝수 번</i> 뒤집히는지만 따진다.</p><ul><li>1·6번(처음 뒷면) → 앞면 되려면 <b>홀수 번</b> 뒤집힘</li><li>2~5번(처음 앞면) → 앞면 유지하려면 <b>짝수 번</b> 뒤집힘</li></ul><p><b>③ 전수조사</b> 주사위 4회의 눈 $(k_1,k_2,k_3,k_4)$ 중,</p><ul><li>홀수 눈(1 또는 6)이 <b>1회</b> → 80가지</li><li>홀수 눈이 <b>3회</b> → 80가지</li></ul><p>성공 합계 = $80+80=160$. 전체 = $6^4=1296$.</p><p><b>④ 답</b> $P = \dfrac{160}{1296} = \dfrac{10}{81}$ (약 12.3%).</p><div class="bilingual-en"><b>Complete Solution:</b> <p> <b> ① Schematic drawing Objective: Get all 6 cards face up (F). </p> <p> <b> ② Core principle (parity) It only counts whether each card is flipped <i> odd/even </i> times. </p> </li> </ul> <p> <b> ③ Complete survey 80 </li> <li> Odd number of eyes <b> 3 times All = $6^4=1296$. </p> <p> <b> ④ Answer </b> $P = \dfrac{160}{1296} = \dfrac{10}{81}$ (about 12.3%). </p></div></div><div class="q" data-ans="3" data-exp="성공 경우 = 80+80 = 160. 전체 = $6^4 = 1296$. $P = 160/1296 = 10/81$." data-exp-en="If successful = 80+80 = 160. Total = $6^4 = 1296$. $P = 160/1296 = 10/81$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">실험을 4번 반복한 뒤 6장 모두 앞면일 확률은?</span><div class="bilingual-en">After repeating the experiment 4 times, what is the probability that all 6 cards are heads?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$19/162$</div><div class="opt"><span class="n">2</span>$13/108$</div><div class="opt"><span class="n">3</span>$10/81$</div><div class="opt"><span class="n">4</span>$41/324$</div><div class="opt"><span class="n">5</span>$7/54$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -725,8 +837,8 @@ if (!window.toggleMinGgb) {
 
 
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $10/81$</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $10/81$</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -735,7 +847,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function toggleExp(btn){
@@ -745,10 +857,10 @@ function toggleExp(btn){
   if(!exp) return;
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent='💡 해설 보기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
   } else {
-    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
-    btn.textContent='💡 해설 닫기';
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
   }
 }
 
@@ -764,4 +876,54 @@ navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사
 
 <script src="../mathedu-room.js"></script>
 <script src="../mathedu-report.js"></script>
+<script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    MatheduI18n.setLanguage(lang);
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  } catch(e){}
+  setBoardLang(saved);
+})();
+</script>
 </body></html>

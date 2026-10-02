@@ -150,26 +150,140 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap.active{display:block}
 .opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
 @media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
 <img src="../assets/favicon.png" alt="min7014" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
 <span>min7014 <b>mathedu</b></span>
 </a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 [2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점</h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<h1>📘 [2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점<span class="bilingual-en">📘 [September 2025, high school senior number 14] Inverse function symmetry of exponential and logarithmic functions and intersection of circles</span></h1>
+<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
-    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-    <span class="orig-badge">2025학년도 9월 고3 14번</span>
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge"><span class="bilingual-ko">2025학년도 9월 고3 14번</span><span class="bilingual-en">High school senior number 14 in September 2025</span></span>
   </div>
 
   <div class="orig-grid">
@@ -178,30 +292,28 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <div class="orig-media-frame">
         <img src="img_c30914.png" alt="[2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점 원본 문제">
       </div>
-      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 한국교육과정평가원 수능·모의평가 원본 시험지</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
     </div>
 
     <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
         <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">지수함수·로그함수의 역함수 대칭성과 원의 교점</p>
         <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>지수함수·로그함수의 역함수 대칭성과 원의 교점</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
         
       </div>
-      <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
-      </div>
+      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: 💡 Core guide: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
     </div>
   </div>
 
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.
-  </div>
+  <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF & GeoGebra Exploration)</b><br>Teacher Min's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$A_n(a_n, 2^{a_n}), B_n(b_n, 2^{b_n})$</b> — 지수함수 y=2^x 위의 두 점</div><div><b>$\text{기울기 } = \dfrac{2^{b_n}-2^{a_n}}{b_n-a_n} = 3$</b> — 직선의 기울기 조건</div><div><b>$\overline{A_n B_n} = n\sqrt{10}$</b> — 두 점 사이의 거리 조건</div><div><b>$y = x \text{ 대칭}$</b> — 지수함수와 로그함수의 역함수 관계</div></div>
-<h2>제1단계 · 기울기와 거리 조건으로 $b_n - a_n$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>직선의 기울기가 $3$이므로 $\Delta y = 3\Delta x$ 입니다. 피타고라스 정리에 의해 $(\Delta x)^2 + (3\Delta x)^2 = 10(\Delta x)^2 = (n\sqrt{10})^2 = 10n^2 \implies \Delta x = n$. 즉 $b_n - a_n = n$ 입니다.</div><div class="q" data-ans="1" data-exp="$(\Delta x)^2 + 9(\Delta x)^2 = 10n^2 \implies \Delta x = n$입니다."><div class="lvl">문항</div><div class="stem">기울기가 3이고 선분의 길이가 $n\sqrt{10}$일 때 $b_n - a_n$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$n$</div><div class="opt"><span class="n">2</span>$2n$</div><div class="opt"><span class="n">3</span>$3n$</div><div class="opt"><span class="n">4</span>$\sqrt{10}n$</div><div class="opt"><span class="n">5</span>$10n$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"></div><div><b>$\text{기울기 } = \dfrac{2^{b_n}-2^{a_n}}{b_n-a_n} = 3$</b> — 직선의 기울기 조건</div><div><b>$\overline{A_n B_n} = n\sqrt{10}$</b> — 두 점 사이의 거리 조건</div><div><b>$y = x \text{ 대칭}$</b> — 지수함수와 로그함수의 역함수 관계</div></div>
+<h2>제1단계 · 기울기와 거리 조건으로 $b_n - a_n$ 구하기<span class="bilingual-en">Step 1 · Find $b_n - a_n$ using slope and distance conditions</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>직선의 기울기가 $3$이므로 $\Delta y = 3\Delta x$ 입니다. 피타고라스 정리에 의해 $(\Delta x)^2 + (3\Delta x)^2 = 10(\Delta x)^2 = (n\sqrt{10})^2 = 10n^2 \implies \Delta x = n$. 즉 $b_n - a_n = n$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The slope of the straight line is $3$, so it is $\Delta y = 3\Delta x$. $(\Delta x)^2 + (3\Delta x)^2 = 10(\Delta x)^2 = (n\sqrt{10})^2 = 10n^2 \implies \Delta x = n$ by Pythagorean theorem. That is, $b_n - a_n = n$.</div></div><div class="q" data-ans="1" data-exp="$(\Delta x)^2 + 9(\Delta x)^2 = 10n^2 \implies \Delta x = n$입니다." data-exp-en="This is $(\Delta x)^2 + 9(\Delta x)^2 = 10n^2 \implies \Delta x = n$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">기울기가 3이고 선분의 길이가 $n\sqrt{10}$일 때 $b_n - a_n$의 값은?</span><div class="bilingual-en">If the slope is 3 and the length of the line segment is $n\sqrt{10}$, what is the value of $b_n - a_n$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$n$</div><div class="opt"><span class="n">2</span>$2n$</div><div class="opt"><span class="n">3</span>$3n$</div><div class="opt"><span class="n">4</span>$\sqrt{10}n$</div><div class="opt"><span class="n">5</span>$10n$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -215,7 +327,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $2^{b_n}$을 $n$에 대한 식으로 표현하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$2^{b_n} - 2^{a_n} = 3n$ 이고 $a_n = b_n - n$ 이므로 $2^{b_n} - 2^{b_n - n} = 2^{b_n}(1 - 2^{-n}) = 3n \implies 2^{b_n} = \frac{3n}{1 - 2^{-n}} = \frac{3n \cdot 2^n}{2^n - 1}$ 입니다.</div><div class="q" data-ans="2" data-exp="$1 - 2^{-n} = \frac{2^n-1}{2^n}$이므로 역수를 곱하면 $\frac{3n \cdot 2^n}{2^n-1}$입니다."><div class="lvl">문항</div><div class="stem">$2^{b_n}(1 - 2^{-n}) = 3n$ 일 때 $2^{b_n}$의 올바른 식은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{3n}{2^n-1}$</div><div class="opt"><span class="n">2</span>$\frac{3n \cdot 2^n}{2^n-1}$</div><div class="opt"><span class="n">3</span>$\frac{3n}{2^n}$</div><div class="opt"><span class="n">4</span>$3n(2^n-1)$</div><div class="opt"><span class="n">5</span>$\frac{2^n-1}{3n}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제2단계 · $2^{b_n}$을 $n$에 대한 식으로 표현하기<span class="bilingual-en">Step 2 Express $2^{b_n}$ as an expression for $n$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$2^{b_n} - 2^{a_n} = 3n$ 이고 $a_n = b_n - n$ 이므로 $2^{b_n} - 2^{b_n - n} = 2^{b_n}(1 - 2^{-n}) = 3n \implies 2^{b_n} = \frac{3n}{1 - 2^{-n}} = \frac{3n \cdot 2^n}{2^n - 1}$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> It's $2^{b_n} - 2^{a_n} = 3n$ and it's $a_n = b_n - n$, so it's $2^{b_n} - 2^{b_n - n} = 2^{b_n}(1 - 2^{-n}) = 3n \implies 2^{b_n} = \frac{3n}{1 - 2^{-n}} = \frac{3n \cdot 2^n}{2^n - 1}$.</div></div><div class="q" data-ans="2" data-exp="$1 - 2^{-n} = \frac{2^n-1}{2^n}$이므로 역수를 곱하면 $\frac{3n \cdot 2^n}{2^n-1}$입니다." data-exp-en="Since it is $1 - 2^{-n} = \frac{2^n-1}{2^n}$, multiplying it by the reciprocal is $\frac{3n \cdot 2^n}{2^n-1}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$2^{b_n}(1 - 2^{-n}) = 3n$ 일 때 $2^{b_n}$의 올바른 식은?</span><div class="bilingual-en">When $2^{b_n}(1 - 2^{-n}) = 3n$, what is the correct expression for $2^{b_n}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{3n}{2^n-1}$</div><div class="opt"><span class="n">2</span>$\frac{3n \cdot 2^n}{2^n-1}$</div><div class="opt"><span class="n">3</span>$\frac{3n}{2^n}$</div><div class="opt"><span class="n">4</span>$3n(2^n-1)$</div><div class="opt"><span class="n">5</span>$\frac{2^n-1}{3n}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -229,7 +341,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $y=x$ 대칭성을 이용하여 교점 $x_n$ 구하기</h2><div class="know"><h3>먼저 알아야 할 지식</h3>원의 중심이 $y=x$ 위에 있고 $y=2^x$ 위의 두 점을 지나므로, 이 원은 $y=x$ 대칭에 의해 $y=\log_2 x$ 위의 대칭점 $(2^{a_n}, a_n), (2^{b_n}, b_n)$을 지납니다. 두 점의 $x$좌표 중 큰 값은 $x_n = 2^{b_n} = \frac{3n \cdot 2^n}{2^n-1}$ 입니다.</div><div class="q" data-ans="1" data-exp="$x_1 = \frac{6}{1}=6, x_2 = \frac{24}{3}=8, x_3 = \frac{72}{7}$입니다."><div class="lvl">문항</div><div class="stem">$n=1, 2, 3$일 때 $x_n = \frac{3n \cdot 2^n}{2^n-1}$의 값들 $x_1, x_2, x_3$은?</div><div class="opts"><div class="opt"><span class="n">1</span>$x_1=6, x_2=8, x_3=\frac{72}{7}$</div><div class="opt"><span class="n">2</span>$x_1=3, x_2=6, x_3=9$</div><div class="opt"><span class="n">3</span>$x_1=6, x_2=12, x_3=18$</div><div class="opt"><span class="n">4</span>$x_1=4, x_2=8, x_3=12$</div><div class="opt"><span class="n">5</span>$x_1=6, x_2=8, x_3=10$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제3단계 · $y=x$ 대칭성을 이용하여 교점 $x_n$ 구하기<span class="bilingual-en">Step 3 · Find the intersection point $x_n$ using $y=x$ symmetry</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>원의 중심이 $y=x$ 위에 있고 $y=2^x$ 위의 두 점을 지나므로, 이 원은 $y=x$ 대칭에 의해 $y=\log_2 x$ 위의 대칭점 $(2^{a_n}, a_n), (2^{b_n}, b_n)$을 지납니다. 두 점의 $x$좌표 중 큰 값은 $x_n = 2^{b_n} = \frac{3n \cdot 2^n}{2^n-1}$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Since the center of the circle is on $y=x$ and passes through two points on $y=2^x$, the circle passes through the symmetry point The larger of the $x$ coordinates of the two points is $x_n = 2^{b_n} = \frac{3n \cdot 2^n}{2^n-1}$.</div></div><div class="q" data-ans="1" data-exp="$x_1 = \frac{6}{1}=6, x_2 = \frac{24}{3}=8, x_3 = \frac{72}{7}$입니다." data-exp-en="This is $x_1 = \frac{6}{1}=6, x_2 = \frac{24}{3}=8, x_3 = \frac{72}{7}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$n=1, 2, 3$일 때 $x_n = \frac{3n \cdot 2^n}{2^n-1}$의 값들 $x_1, x_2, x_3$은?</span><div class="bilingual-en">When $n=1, 2, 3$, what are the values ​​of $x_n = \frac{3n \cdot 2^n}{2^n-1}$ and $x_1, x_2, x_3$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$x_1=6, x_2=8, x_3=\frac{72}{7}$</div><div class="opt"><span class="n">2</span>$x_1=3, x_2=6, x_3=9$</div><div class="opt"><span class="n">3</span>$x_1=6, x_2=12, x_3=18$</div><div class="opt"><span class="n">4</span>$x_1=4, x_2=8, x_3=12$</div><div class="opt"><span class="n">5</span>$x_1=6, x_2=8, x_3=10$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -245,7 +357,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30914",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="sol"><b>[풀이]</b><br>
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
 두 점 $A_n, B_n$의 좌표를 $A_n(a_n, 2^{a_n}), B_n(b_n, 2^{b_n})$ ($a_n < b_n$)이라 합시다.<br>
 조건 (가)에 의해 기울기는 $3$이므로<br>
 $$\frac{2^{b_n} - 2^{a_n}}{b_n - a_n} = 3 \implies 2^{b_n} - 2^{a_n} = 3(b_n - a_n) \quad \cdots\cdots \text{㉠}$$<br>
@@ -268,7 +380,7 @@ $$x_2 = \frac{3(2)(4)}{3} = 8$$<br>
 $$x_3 = \frac{3(3)(8)}{7} = \frac{72}{7}$$<br>
 따라서 구하는 합은<br>
 $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7} = \frac{170}{7}$$<br>
-정답은 <b>⑤번</b>입니다.</div><div class="q" data-ans="5" data-exp="$x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$입니다."><div class="lvl">최종 본문항</div><div class="stem">자연수 $n$에 대하여 곡선 $y=2^x$ 위의 두 점 $A_n, B_n$이 다음 조건을 만족시킨다. (가) 직선 $A_n B_n$의 기울기는 3이다. (나) $\overline{A_n B_n} = n\sqrt{10}$. 중심이 직선 $y=x$ 위에 있고 두 점 $A_n, B_n$을 지나는 원이 곡선 $y=\log_2 x$와 만나는 두 점의 $x$좌표 중 큰 값을 $x_n$이라 하자. $x_1 + x_2 + x_3$의 값은? [4점]</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{150}{7}$</div><div class="opt"><span class="n">2</span>$\frac{155}{7}$</div><div class="opt"><span class="n">3</span>$\frac{160}{7}$</div><div class="opt"><span class="n">4</span>$\frac{165}{7}$</div><div class="opt"><span class="n">5</span>$\frac{170}{7}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+정답은 <b>⑤번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> Let's call the coordinates of the two points $A_n, B_n$ $A_n(a_n, 2^{a_n}), B_n(b_n, 2^{b_n})$ (<br> According to condition (a), the slope is $3$, so <br> $$(b_n - a_n)^2 + 9(b_n - a_n)^2 = 10(b_n - a_n)^2 = 10n^2 \implies b_n - a_n = n$$ <br> The exponential function $y=2^x$ and the logarithmic function <br> The larger of the $x$ coordinates of these two points is $x_n = 2^{b_n}$. <br> Therefore, if you calculate each value of <br> <br> The correct answer is <b> ⑤ </b>.</div></div><div class="q" data-ans="5" data-exp="$x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$입니다." data-exp-en="This is $x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">자연수 $n$에 대하여 곡선 $y=2^x$ 위의 두 점 $A_n, B_n$이 다음 조건을 만족시킨다. (가) 직선 $A_n B_n$의 기울기는 3이다. (나) $\overline{A_n B_n} = n\sqrt{10}$. 중심이 직선 $y=x$ 위에 있고 두 점 $A_n, B_n$을 지나는 원이 곡선 $y=\log_2 x$와 만나는 두 점의 $x$좌표 중 큰 값을 $x_n$이라 하자. $x_1 + x_2 + x_3$의 값은? [4점]</span><div class="bilingual-en">For the natural number $n$, two points $A_n, B_n$ on the curve $y=2^x$ satisfy the following conditions. (A) The slope of the straight line $A_n B_n$ is 3. (B) $\overline{A_n B_n} = n\sqrt{10}$. Let $x_n$ be the larger of the $x$ coordinates of the two points where the center lies on the straight line What is the value of $x_1 + x_2 + x_3$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{150}{7}$</div><div class="opt"><span class="n">2</span>$\frac{155}{7}$</div><div class="opt"><span class="n">3</span>$\frac{160}{7}$</div><div class="opt"><span class="n">4</span>$\frac{165}{7}$</div><div class="opt"><span class="n">5</span>$\frac{170}{7}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -392,8 +504,8 @@ if (!window.toggleMinGgb) {
 
 
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $\frac{170}{7}$</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $\frac{170}{7}$</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -402,7 +514,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function sendProgress(){
@@ -438,10 +550,10 @@ function toggleExp(btn){
   if(!exp) return;
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent='💡 해설 보기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
   } else {
-    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
-    btn.textContent='💡 해설 닫기';
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
   }
 }
 
@@ -484,4 +596,54 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script><script src="../mathedu-room.js"></script>
-<script src="../mathedu-report.js"></script></body></html>
+<script src="../mathedu-report.js"></script><script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    MatheduI18n.setLanguage(lang);
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  } catch(e){}
+  setBoardLang(saved);
+})();
+</script>
+</body></html>

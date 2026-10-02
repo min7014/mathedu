@@ -144,27 +144,141 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap.active{display:block}
 .opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
 @media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
+
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
+<script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
 <div class="topbar">
 <a class="tbtn" href="/">← 게시판</a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()">🔗 링크 복사</button>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
 </div>
-<div class="score"><span>점수 <b id="pts">0</b> / <b id="tot">0</b></span>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)</h1>
-<h2>📋 원본 문제</h2>
+<h1>📘 2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)<span class="bilingual-en">📘 June 2009 Academic Ability Assessment No. 29 · Measurement of tree height (trigonometric functions)</span></h1>
+<h2>📋 원본 문제<span class="bilingual-en">📋 Original Issue</span></h2>
 <div class="sol" style="font-size:1.05rem;font-weight:600;margin:14px 0">눈높이가 $1\mathrm{m}$인 어린이가 나무로부터 $7\mathrm{m}$ 떨어진 지점에서 나무의 꼭대기를 바라본 선과 나무가 지면에 닿는 지점을 바라본 선이 이루는 각이 $\theta$이었다. 나무로부터 $2\mathrm{m}$ 떨어진 지점에서 나무를 바라보았더니 그 각이 $\theta+\dfrac{\pi}{4}$가 되었다. 나무의 높이는 $a(\mathrm{m})$ 또는 $b(\mathrm{m})$이다. $a+b$의 값은? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</div>
 <div class="opts"></div>
-<p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</p>
+<p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
-    <div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>
-    <span class="orig-badge">수능·모의평가 공식 기출</span>
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge"><span class="bilingual-ko">수능·모의평가 공식 기출</span><span class="bilingual-en">Official CSAT and mock evaluation exams</span></span>
   </div>
 
   <div class="orig-grid">
@@ -173,30 +287,28 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
       <div class="orig-media-frame">
         <img src="fig_18013c376a2645e6b0a172b98e8d8881.png" alt="원본 문제 이미지">
       </div>
-      <div class="orig-media-sub">📄 한국교육과정평가원 수능·모의평가 원본 시험지</div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 한국교육과정평가원 수능·모의평가 원본 시험지</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
     </div>
 
     <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 핵심 요약 및 목표</h4>
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
         <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)</p>
         <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
         
       </div>
-      <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!
-      </div>
+      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: 💡 Core guide: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
     </div>
   </div>
 
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>선생님의 PDF 자료는 원운동이 파동 곡선으로 풀려나가는 <b>기하학적 전개 과정</b>을 한 프레임씩 보여줍니다.<br>• <b>[단위원의 동점]</b> 반지름 1인 원 위를 반시계 방향으로 회전하는 동점 $\mathrm{P}$의 회전각 $\theta$와 수직 투영 $y=\sin\theta$, 수평 투영 $x=\cos\theta$ 설정<br>• <b>[파동의 실시간 언래핑]</b> $\theta$가 증가함에 따라 각 좌표의 높낮이를 오른쪽 직교좌표계로 수평 이동시켜 사인·코사인 곡선의 마루와 골이 직조되는 과정<br>• <b>[주기의 필연성]</b> 한 바퀴($2\pi$) 회전하면 원점으로 귀환하는 원의 닫힌 궤적이 파동 함수의 무한 반복 주기성으로 승화되는 원리를 하단 자료에서 체득해 보세요.
-  </div>
+  <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF & GeoGebra Exploration)</b><br>Teacher Min's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
-<h2>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$\tan(A+B)$</b> — $\dfrac{\tan A+\tan B}{1-\tan A\tan B}$</div><div><b>$시준각/시렉각$</b> — 꼭대기 보는 고각 $\alpha$, 지면 보는 저각 $\beta$. $\theta=\alpha+\beta$</div><div><b>$눈높이 $1\mathrm{m}$$</b> — 나무 기둥(지면)을 내려다보는 시선이 저각 $\beta$를 만듦</div></div>
-<h2>제1단계 · 변수 설정</h2><div class="know"><h3>먼저 알아야 할 지식</h3>나무 실제 높이를 $H$, 눈높이 위로 남은 높이를 $h=H-1$이라 하자. 수평거리 $d$에 대해 꼭대기 고각 $\alpha$($\tan\alpha=h/d$), 지면 저각 $\beta$($\tan\beta=1/d$). 주어진 각 $\theta=\alpha+\beta$.</div><div class="q" data-ans="1" data-exp="수직 $1\mathrm{m}$, 수평 $d$이므로 $\tan\beta=1/d$."><div class="lvl">문항</div><div class="stem">눈높이 $1\mathrm{m}$에서 지면을 내려다보는 시선의 탄젠트는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{1}{d}$</div><div class="opt"><span class="n">2</span>$\dfrac{h}{d}$</div><div class="opt"><span class="n">3</span>$\dfrac{d}{1}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\dfrac{H}{d}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"></div><div><b>$시준각/시렉각$</b> — 꼭대기 보는 고각 $\alpha$, 지면 보는 저각 $\beta$. $\theta=\alpha+\beta$</div><div><b>$눈높이 $1\mathrm{m}$$</b> — 나무 기둥(지면)을 내려다보는 시선이 저각 $\beta$를 만듦</div></div>
+<h2>제1단계 · 변수 설정<span class="bilingual-en">Step 1 Variable setting</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>나무 실제 높이를 $H$, 눈높이 위로 남은 높이를 $h=H-1$이라 하자. 수평거리 $d$에 대해 꼭대기 고각 $\alpha$($\tan\alpha=h/d$), 지면 저각 $\beta$($\tan\beta=1/d$). 주어진 각 $\theta=\alpha+\beta$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Let's call the actual height of the tree $H$ and the remaining height above eye level $h=H-1$. Top elevation angle $\alpha$ ($\tan\alpha=h/d$) with respect to the horizontal distance For each given $\theta=\alpha+\beta$.</div></div><div class="q" data-ans="1" data-exp="수직 $1\mathrm{m}$, 수평 $d$이므로 $\tan\beta=1/d$." data-exp-en="Vertical $1\mathrm{m}$, horizontal $d$, so $\tan\beta=1/d$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">눈높이 $1\mathrm{m}$에서 지면을 내려다보는 시선의 탄젠트는?</span><div class="bilingual-en">What is the tangent of the gaze looking down at the ground at eye level $1\mathrm{m}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{1}{d}$</div><div class="opt"><span class="n">2</span>$\dfrac{h}{d}$</div><div class="opt"><span class="n">3</span>$\dfrac{d}{1}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\dfrac{H}{d}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -248,7 +360,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제2단계 · $d=7$일 때 $\tan\theta$</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\tan\theta_1=\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.</div><div class="q" data-ans="1" data-exp="$\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-h/49}=\dfrac{7(h+1)}{49-h}$."><div class="lvl">문항</div><div class="stem">$d=7$일 때 $\tan\theta_1$은?</div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{7(h+1)}{49-h}$</div><div class="opt"><span class="n">2</span>$\dfrac{h+1}{7}$</div><div class="opt"><span class="n">3</span>$\dfrac{7h}{49-h}$</div><div class="opt"><span class="n">4</span>$\dfrac{h+1}{49-h}$</div><div class="opt"><span class="n">5</span>$\dfrac{7}{49-h}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제2단계 · $d=7$일 때 $\tan\theta$<span class="bilingual-en">Step 2 · When $d=7$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\tan\theta_1=\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $\tan\theta_1=\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.</div></div><div class="q" data-ans="1" data-exp="$\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-h/49}=\dfrac{7(h+1)}{49-h}$." data-exp-en="$\tan(\alpha+\beta)=\dfrac{h/7+1/7}{1-h/49}=\dfrac{7(h+1)}{49-h}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$d=7$일 때 $\tan\theta_1$은?</span><div class="bilingual-en">What is $\tan\theta_1$ when it is $d=7$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{7(h+1)}{49-h}$</div><div class="opt"><span class="n">2</span>$\dfrac{h+1}{7}$</div><div class="opt"><span class="n">3</span>$\dfrac{7h}{49-h}$</div><div class="opt"><span class="n">4</span>$\dfrac{h+1}{49-h}$</div><div class="opt"><span class="n">5</span>$\dfrac{7}{49-h}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -300,7 +412,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제3단계 · $d=2$일 때 $\tan\theta$</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.</div><div class="q" data-ans="1" data-exp="$\dfrac{h/2+1/2}{1-h/4}=\dfrac{2(h+1)}{4-h}$."><div class="lvl">문항</div><div class="stem">$d=2$일 때 $\tan\theta_2$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{2(h+1)}{4-h}$</div><div class="opt"><span class="n">2</span>$\dfrac{h+1}{2}$</div><div class="opt"><span class="n">3</span>$\dfrac{2h}{4-h}$</div><div class="opt"><span class="n">4</span>$\dfrac{h+1}{4-h}$</div><div class="opt"><span class="n">5</span>$\dfrac{2}{4-h}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제3단계 · $d=2$일 때 $\tan\theta$<span class="bilingual-en">Step 3 · When $d=2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.</div></div><div class="q" data-ans="1" data-exp="$\dfrac{h/2+1/2}{1-h/4}=\dfrac{2(h+1)}{4-h}$." data-exp-en="$\dfrac{h/2+1/2}{1-h/4}=\dfrac{2(h+1)}{4-h}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$d=2$일 때 $\tan\theta_2$는?</span><div class="bilingual-en">What is $\tan\theta_2$ when it is $d=2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{2(h+1)}{4-h}$</div><div class="opt"><span class="n">2</span>$\dfrac{h+1}{2}$</div><div class="opt"><span class="n">3</span>$\dfrac{2h}{4-h}$</div><div class="opt"><span class="n">4</span>$\dfrac{h+1}{4-h}$</div><div class="opt"><span class="n">5</span>$\dfrac{2}{4-h}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -352,7 +464,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제4단계 · 각 차이 $\pi/4$ 활용</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\theta_2-\theta_1=\pi/4$ 이므로 $\tan(\theta_2-\theta_1)=1$. $\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}$. $u=h+1=H$로 두면 전개 후 $u^2-12u+25=0$.</div><div class="q" data-ans="1" data-exp="$\tan(\pi/4)=1$."><div class="lvl">문항</div><div class="stem">$\theta_2-\theta_1=\pi/4$일 때 $\tan(\theta_2-\theta_1)$은?</div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$\sqrt{2}$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$\infty$</div><div class="opt"><span class="n">5</span>$1/2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제4단계 · 각 차이 $\pi/4$ 활용<span class="bilingual-en">Step 4 · Utilize each difference $\pi/4$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\theta_2-\theta_1=\pi/4$ 이므로 $\tan(\theta_2-\theta_1)=1$. $\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}$. $u=h+1=H$로 두면 전개 후 $u^2-12u+25=0$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $\theta_2-\theta_1=\pi/4$ so $\tan(\theta_2-\theta_1)=1$. $\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}$. If you leave it as $u=h+1=H$, after deployment it will be $u^2-12u+25=0$.</div></div><div class="q" data-ans="1" data-exp="$\tan(\pi/4)=1$." data-exp-en="$\tan(\pi/4)=1$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">$\theta_2-\theta_1=\pi/4$일 때 $\tan(\theta_2-\theta_1)$은?</span><div class="bilingual-en">What is $\tan(\theta_2-\theta_1)$ when it is $\theta_2-\theta_1=\pi/4$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$\sqrt{2}$</div><div class="opt"><span class="n">3</span>$0$</div><div class="opt"><span class="n">4</span>$\infty$</div><div class="opt"><span class="n">5</span>$1/2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -404,7 +516,7 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script></div><h2>제5단계 · $H$ 두 값과 합</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$u^2-12u+25=0$의 해 $u=6\pm\sqrt{11}=H$. 두 높이 $a,b$의 합 $a+b=(6+\sqrt{11})+(6-\sqrt{11})=12$.</div><div class="q" data-ans="1" data-exp="$u=6\pm\sqrt{11}$, 합 $=12$."><div class="lvl">문항</div><div class="stem">나무 높이 두 가능값의 합 $a+b$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</script></div><h2>제5단계 · $H$ 두 값과 합<span class="bilingual-en">Step 5 · $H$ Sum of two values</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$u^2-12u+25=0$의 해 $u=6\pm\sqrt{11}=H$. 두 높이 $a,b$의 합 $a+b=(6+\sqrt{11})+(6-\sqrt{11})=12$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $u^2-12u+25=0$ by $u=6\pm\sqrt{11}=H$. The sum of the two heights $a,b$ $a+b=(6+\sqrt{11})+(6-\sqrt{11})=12$.</div></div><div class="q" data-ans="1" data-exp="$u=6\pm\sqrt{11}$, 합 $=12$." data-exp-en="$u=6\pm\sqrt{11}$, sum $=12$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">나무 높이 두 가능값의 합 $a+b$는?</span><div class="bilingual-en">What is the sum of the two possible tree heights, $a+b$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -457,7 +569,7 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script></div>
-<h2>🎯 최종 문제 + 상세 풀이</h2><div class="figure"><img src="fig_18013c376a2645e6b0a172b98e8d8881.png" alt="문제 그림" style="max-width:100%;border-radius:10px"></div><div class="sol"><p><b>① 변수 설정.</b> 나무 실제 높이 $H$, 눈높이 위 남은 높이 $h=H-1$. 수평거리 $d$에 대해 꼭대기 고각 $\alpha$($\tan\alpha=h/d$), 지면 저각 $\beta$($\tan\beta=1/d$). 주어진 각 $\theta=\alpha+\beta$.</p><p><b>② $d=7$일 때.</b> $\tan\theta_1=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.</p><p><b>③ $d=2$일 때.</b> $\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.</p><p><b>④ 각 차이 활용.</b> $\theta_2-\theta_1=\pi/4$이므로 $\tan(\theta_2-\theta_1)=1$.</p><p>$\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}=1$에 대입. $u=h+1=H$로 두면 전개 후 <b>$u^2-12u+25=0$</b>.</p><p><b>⑤ 해.</b> $u=\dfrac{12\pm\sqrt{144-100}}{2}=6\pm\sqrt{11}=H$.</p><p>나무 높이 두 가능값 $a,b$의 합: $a+b=(6+\sqrt{11})+(6-\sqrt{11})=\boxed{12}$.</p><p>※ 참고: '지면 닿는 지점'은 수평선이 아니라 눈높이에서 내려다보는 저각 $\beta$임을 놓치면 해가 없어짐.</p></div><div class="q" data-ans="1" data-exp="$u=H$에 대해 $u^2-12u+25=0$, 해 $6\pm\sqrt{11}$, 합 $12$."><div class="lvl">문항</div><div class="stem">눈높이가 $1\mathrm{m}$인 어린이가 나무로부터 $7\mathrm{m}$ 떨어진 지점에서 나무의 꼭대기를 바라본 선과 나무가 지면에 닿는 지점을 바라본 선이 이루는 각이 $\theta$이었다. 나무로부터 $2\mathrm{m}$ 떨어진 지점에서 나무를 바라보았더니 그 각이 $\theta+\dfrac{\pi}{4}$가 되었다. 나무의 높이는 $a(\mathrm{m})$ 또는 $b(\mathrm{m})$이다. $a+b$의 값은? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="figure"><img src="fig_18013c376a2645e6b0a172b98e8d8881.png" alt="문제 그림" style="max-width:100%;border-radius:10px"></div><div class="sol"><p><b>① 변수 설정.</b> 나무 실제 높이 $H$, 눈높이 위 남은 높이 $h=H-1$. 수평거리 $d$에 대해 꼭대기 고각 $\alpha$($\tan\alpha=h/d$), 지면 저각 $\beta$($\tan\beta=1/d$). 주어진 각 $\theta=\alpha+\beta$.</p><p><b>② $d=7$일 때.</b> $\tan\theta_1=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.</p><p><b>③ $d=2$일 때.</b> $\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.</p><p><b>④ 각 차이 활용.</b> $\theta_2-\theta_1=\pi/4$이므로 $\tan(\theta_2-\theta_1)=1$.</p><p>$\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}=1$에 대입. $u=h+1=H$로 두면 전개 후 <b>$u^2-12u+25=0$</b>.</p><p><b>⑤ 해.</b> $u=\dfrac{12\pm\sqrt{144-100}}{2}=6\pm\sqrt{11}=H$.</p><p>나무 높이 두 가능값 $a,b$의 합: $a+b=(6+\sqrt{11})+(6-\sqrt{11})=\boxed{12}$.</p><p>※ 참고: '지면 닿는 지점'은 수평선이 아니라 눈높이에서 내려다보는 저각 $\beta$임을 놓치면 해가 없어짐.</p><div class="bilingual-en"><b>Complete Solution:</b> <p> <b> ① Variable setting. </b> Actual height of tree $H$, remaining height above eye level $h=H-1$. Top elevation angle $\alpha$ ($\tan\alpha=h/d$), ground low angle $\beta$ (Given each $\theta=\alpha+\beta$. </p> <p> <b> ② When $d=7$. </b> $\tan\theta_1=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$. </p> <p> <b> ③ When $d=2$. </b> $\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$. </p> <p> <b> ④ Utilize each difference. </b> is $\theta_2-\theta_1=\pi/4$, so $\tan(\theta_2-\theta_1)=1$. Assign to </p> <p> $\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}=1$. If you leave it as $u=h+1=H$, after expansion it will be <b> </p> <p> <b> ⑤ Do it. </b> $u=\dfrac{12\pm\sqrt{144-100}}{2}=6\pm\sqrt{11}=H$. </p> <p> Tree height Sum of two possible values ​​ $a,b$: $a+b=(6+\sqrt{11})+(6-\sqrt{11})=\boxed{12}$. </p> </p></div></div><div class="q" data-ans="1" data-exp="$u=H$에 대해 $u^2-12u+25=0$, 해 $6\pm\sqrt{11}$, 합 $12$." data-exp-en="$u=H$ for $u^2-12u+25=0$, for $6\pm\sqrt{11}$, for $12$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">눈높이가 $1\mathrm{m}$인 어린이가 나무로부터 $7\mathrm{m}$ 떨어진 지점에서 나무의 꼭대기를 바라본 선과 나무가 지면에 닿는 지점을 바라본 선이 이루는 각이 $\theta$이었다. 나무로부터 $2\mathrm{m}$ 떨어진 지점에서 나무를 바라보았더니 그 각이 $\theta+\dfrac{\pi}{4}$가 되었다. 나무의 높이는 $a(\mathrm{m})$ 또는 $b(\mathrm{m})$이다. $a+b$의 값은? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</span><div class="bilingual-en">For a child whose eye height was $1\mathrm{m}$, the angle formed between the line viewed from a point When I looked at the tree from a point $2\mathrm{m}$ away from the tree, the angle became $\theta+\dfrac{\pi}{4}$. The height of the tree is $a(\mathrm{m})$ or $b(\mathrm{m})$. What is the value of $a+b$? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -619,8 +731,8 @@ if (!window.toggleMinGgb) {
 
 
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $12$</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $12$</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -629,7 +741,7 @@ exp.innerHTML=q.dataset.exp;const opts=q.querySelectorAll('.opt');
 opts.forEach((o,i)=>{o.addEventListener('click',()=>{if(q.classList.contains('done'))return;
 q.classList.add('done');opts.forEach((oo,j)=>{oo.classList.add('locked');if(j+1==ans)oo.classList.add('correct');});
 if(i+1==ans){o.classList.add('correct');pts++;}else{o.classList.add('wrong');}
-exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';document.getElementById('pts').textContent=pts;
+exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }document.getElementById('pts').textContent=pts;
 const pct=Math.round(pts/qs.length*100);document.getElementById('bar').style.width=pct+'%';
 document.getElementById('pct').textContent=pct+'%';});});});
 function toggleExp(btn){
@@ -639,10 +751,10 @@ function toggleExp(btn){
   if(!exp) return;
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent='💡 해설 보기';
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
   } else {
-    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn)toggleBtn.textContent='💡 해설 닫기';
-    btn.textContent='💡 해설 닫기';
+    exp.classList.add('show');var toggleBtn=q.querySelector('.exp-toggle-btn');if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
   }
 }
 
@@ -658,4 +770,54 @@ navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사
 
 <script src="../mathedu-room.js"></script>
 <script src="../mathedu-report.js"></script>
+<script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    MatheduI18n.setLanguage(lang);
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') saved = p;
+    else saved = localStorage.getItem('mathedu_lang') || 'ko';
+  } catch(e){}
+  setBoardLang(saved);
+})();
+</script>
 </body></html>
