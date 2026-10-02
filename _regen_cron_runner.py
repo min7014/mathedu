@@ -135,6 +135,9 @@ for item in new_or_changed:
             print(f"[cron] stderr: {result.stderr[:500]}")
         if result.stdout:
             print(f"[cron] stdout: {result.stdout[:500]}")
+        # 실패해도 마지막 빌드 시도 시각을 기록
+        entries[slug]["last_build"] = now_str
+        entries[slug]["last_build_ts"] = now
 
     state["builds"].append({
         "slug": slug,

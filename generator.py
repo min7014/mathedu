@@ -274,7 +274,7 @@ function submitReport(btn){{
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }}
-</script><script src="../mathedu-room.js"></script></body></html>"""
+</script><script src="../mathedu-room.js"></script><script src="../mathedu-report.js"></script></body></html>"""
 
 def _esc(s): return html.escape(str(s))
 

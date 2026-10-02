@@ -16,6 +16,10 @@ OUT = os.path.join("board", f"{SLUG}.html")
 
 # pending 게시물 읽기
 pending_path = os.path.join("board", "pending", f"{SLUG}.json")
+if not os.path.exists(pending_path):
+    print(f"경고: pending 파일 없음 ({pending_path}). 빌드를 건너뜁니다.")
+    import sys
+    sys.exit(0)
 with open(pending_path, "r", encoding="utf-8") as f:
     pending = json.load(f)
 
