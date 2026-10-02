@@ -282,12 +282,12 @@
         anonymous: "익명"
       },
       report: {
-        fabTitle: "🚨 오류신고",
+        fabTitle: "오류신고",
         fabTooltip: "오류 신고 (화면 요소를 클릭하여 신고)",
         bannerPrompt: "🎯 오류가 있는 화면 요소(문제, 보기, 수식, 그림 등)를 클릭해 주세요.",
         bannerCancel: "✕ 취소 (ESC)",
         bannerWhole: "📄 화면 전체 오류 신고",
-        modalTitle: "🚨 오류 신고",
+        modalTitle: "오류 신고",
         targetTitle: "선택된 영역",
         targetWholePage: "화면 전체 (특정 영역 미지정)",
         reselectBtn: "🎯 다시 선택",
@@ -304,7 +304,7 @@
         emailTitle: "알림 받을 이메일 (선택사항)",
         emailPlaceholder: "수정 완료 시 알림을 받으실 이메일 주소",
         cancelBtn: "취소",
-        submitBtn: "🚨 신고 접수",
+        submitBtn: "신고 접수",
         submitting: "신고 접수 중...",
         successToast: "✅ 오류 신고가 정상 접수되었습니다. 확인 후 신속하게 반영하겠습니다!",
         errNoDesc: "오류 내용을 입력해 주세요."
@@ -583,12 +583,12 @@
         anonymous: "Anonymous"
       },
       report: {
-        fabTitle: "🚨 Report Issue",
+        fabTitle: "Report Issue",
         fabTooltip: "Report Issue (Click an element to report)",
         bannerPrompt: "🎯 Click on the problematic part of the screen (question, option, formula, graphic, etc.).",
         bannerCancel: "✕ Cancel (ESC)",
         bannerWhole: "📄 Report Whole Page",
-        modalTitle: "🚨 Report an Issue",
+        modalTitle: "Report an Issue",
         targetTitle: "Selected Target",
         targetWholePage: "Whole Page (No specific element)",
         reselectBtn: "🎯 Reselect",
@@ -605,7 +605,7 @@
         emailTitle: "Notification Email (Optional)",
         emailPlaceholder: "Email to receive update notification when fixed",
         cancelBtn: "Cancel",
-        submitBtn: "🚨 Submit Report",
+        submitBtn: "Submit Report",
         submitting: "Submitting...",
         successToast: "✅ Issue report submitted! We will review and fix it promptly.",
         errNoDesc: "Please provide a description of the issue."

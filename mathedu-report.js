@@ -43,7 +43,7 @@
       'report.bannerPrompt': isEn ? '🎯 Click on the problematic part of the screen (question, option, formula, figure, etc.).' : '🎯 오류가 있는 화면 요소(문제, 보기, 수식, 그림 등)를 클릭해 주세요.',
       'report.bannerCancel': isEn ? '✕ Cancel (ESC)' : '✕ 취소 (ESC)',
       'report.bannerWhole': isEn ? '📄 Report Whole Page' : '📄 화면 전체 오류 신고',
-      'report.modalTitle': isEn ? '🚨 Report an Issue' : '🚨 오류 신고',
+      'report.modalTitle': isEn ? 'Report an Issue' : '오류 신고',
       'report.targetTitle': isEn ? 'Selected Target' : '선택된 영역',
       'report.targetWholePage': isEn ? 'Whole Page (No specific element)' : '화면 전체 (특정 영역 미지정)',
       'report.reselectBtn': isEn ? '🎯 Reselect' : '🎯 다시 선택',
@@ -60,12 +60,17 @@
       'report.emailTitle': isEn ? 'Notification Email (Optional)' : '알림 받을 이메일 (선택사항)',
       'report.emailPlaceholder': isEn ? 'Email to receive update notification when fixed' : '수정 완료 시 알림을 받으실 이메일 주소',
       'report.cancelBtn': isEn ? 'Cancel' : '취소',
-      'report.submitBtn': isEn ? '🚨 Submit Report' : '🚨 신고 접수',
+      'report.submitBtn': isEn ? 'Submit Report' : '신고 접수',
       'report.submitting': isEn ? 'Submitting...' : '신고 접수 중...',
       'report.successToast': isEn ? '✅ Issue report submitted! We will review and fix it promptly.' : '✅ 오류 신고가 정상 접수되었습니다. 확인 후 신속하게 반영하겠습니다!',
       'report.errNoDesc': isEn ? 'Please provide a description of the issue.' : '오류 내용을 입력해 주세요.'
     };
     return defaults[path] || fallback || '';
+  }
+
+  // 🧹 사이렌 SVG 아이콘과 중복 노출되지 않도록 라벨 텍스트의 선행 이모지(🚨 등) 제거
+  function stripSiren(str) {
+    return String(str || '').replace(/^[🚨\s]+/, '').trim();
   }
 
   // 🎨 스타일 주입
@@ -569,7 +574,7 @@
     fab.id = 'mathedu-report-fab';
     fab.type = 'button';
     fab.title = t('report.fabTooltip');
-    fab.innerHTML = getSirenSvg() + '<span id="mathedu-report-fab-label">' + t('report.fabTitle') + '</span>';
+    fab.innerHTML = getSirenSvg() + '<span id="mathedu-report-fab-label">' + stripSiren(t('report.fabTitle')) + '</span>';
     fab.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -625,7 +630,7 @@
         <div class="mathedu-modal-header">
           <h3 class="mathedu-modal-title" id="mathedu-modal-title-text">
             ${getSirenSvg()}
-            <span>${t('report.modalTitle')}</span>
+            <span>${stripSiren(t('report.modalTitle'))}</span>
           </h3>
           <button type="button" class="mathedu-modal-close" id="mathedu-modal-close-btn" title="닫기">&times;</button>
         </div>
@@ -675,7 +680,7 @@
           <button type="button" class="mathedu-btn-cancel" id="mathedu-btn-cancel">${t('report.cancelBtn')}</button>
           <button type="button" class="mathedu-btn-submit" id="mathedu-btn-submit">
             ${getSirenSvg()}
-            <span id="mathedu-submit-text">${t('report.submitBtn')}</span>
+            <span id="mathedu-submit-text">${stripSiren(t('report.submitBtn'))}</span>
           </button>
         </div>
       </div>
@@ -1073,7 +1078,7 @@
   function updateTexts() {
     var fabLabel = document.getElementById('mathedu-report-fab-label');
     var fab = document.getElementById('mathedu-report-fab');
-    if (fabLabel) fabLabel.textContent = t('report.fabTitle');
+    if (fabLabel) fabLabel.textContent = stripSiren(t('report.fabTitle'));
     if (fab) fab.title = t('report.fabTooltip');
 
     var bannerPrompt = document.getElementById('mathedu-banner-prompt-text');
@@ -1085,7 +1090,7 @@
 
     var modalTitle = document.getElementById('mathedu-modal-title-text');
     if (modalTitle) {
-      modalTitle.innerHTML = getSirenSvg() + '<span>' + t('report.modalTitle') + '</span>';
+      modalTitle.innerHTML = getSirenSvg() + '<span>' + stripSiren(t('report.modalTitle')) + '</span>';
     }
 
     var labelCat = document.getElementById('mathedu-label-cat');
@@ -1102,7 +1107,7 @@
     if (labelReporter) labelReporter.textContent = t('report.reporterTitle');
     if (labelEmail) labelEmail.textContent = t('report.emailTitle');
     if (btnCancel) btnCancel.textContent = t('report.cancelBtn');
-    if (submitText) submitText.textContent = t('report.submitBtn');
+    if (submitText) submitText.textContent = stripSiren(t('report.submitBtn'));
     if (textarea) textarea.placeholder = t('report.descPlaceholder');
     if (emailInput) emailInput.placeholder = t('report.emailPlaceholder');
 
