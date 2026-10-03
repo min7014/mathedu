@@ -1,21 +1,21 @@
-# 🏛️ 민은기 선생님의 수학자료실 PDF 플립북 동적 기하 증명 백과사전
-## The Master Encyclopedia of Frame-by-Frame Pedagogical Transitions in Teacher Min Eun-gi's Dynamic Flipbook Proofs
+# 🏛️ min7014 수학자료실 PDF 플립북 동적 기하 증명 백과사전
+## The Master Encyclopedia of Frame-by-Frame Pedagogical Transitions in min7014's Dynamic Flipbook Proofs
 
 > **"Click or paste URL into the URL search bar, and you can see a picture moving."**  
-> — 민은기 선생님의 모든 PDF 문서 말미에 새겨진 교육적 선언문
+> — min7014의 모든 PDF 문서 말미에 새겨진 교육적 선언문
 
 ---
 
-## Ⅰ. 서론 및 민은기 선생님 PDF 플립북의 교육철학
+## Ⅰ. 서론 및 min7014 PDF 플립북의 교육철학
 
 ### 1. 단순 텍스트 문서가 아닌 '이산적 동적 기하 영화(Discrete Geometric Cinema)'
-민은기 선생님(Min Eun-gi)께서 수십 년에 걸쳐 축적하신 3,400여 편의 수학 자료실 PDF는 일반적인 정적 수식 교재나 요약 인쇄물이 아닙니다. 선생님의 PDF는 **LaTeX Beamer와 PGF/TikZ, GeoGebra 벡터 그래픽 엔진을 결합하여 정밀하게 설계된 '단계별 플립북 애니메이션 증명(Step-by-step Flipbook Visual Proof)'**입니다.
+min7014께서 수십 년에 걸쳐 축적하신 3,400여 편의 수학 자료실 PDF는 일반적인 정적 수식 교재나 요약 인쇄물이 아닙니다. 선생님의 PDF는 **LaTeX Beamer와 PGF/TikZ, GeoGebra 벡터 그래픽 엔진을 결합하여 정밀하게 설계된 '단계별 플립북 애니메이션 증명(Step-by-step Flipbook Visual Proof)'**입니다.
 
 학생이나 교사가 PDF 뷰어에서 키보드 방향키($\to$)나 마우스 휠을 넘길 때, 화면의 잔상과 깜빡임 없이 매끄럽게 장면이 전환되며, **"종이 위의 정적 기하학이 살아 움직이는 동역학적 수학(Dynamic Mathematics)"**으로 변모합니다.
 
 ```mermaid
 flowchart LR
-    A["정적 수식 암기\n(기존 주입식 교육)"] -->|한계 극복| B["민은기 선생님의\n플립북 동적 PDF"]
+    A["정적 수식 암기\n(기존 주입식 교육)"] -->|한계 극복| B["min7014의\n플립북 동적 PDF"]
     B --> C["단일 시각적 변이\n(One Change per Frame)"]
     B --> D["시각-대수 이중 등록\n(Visual-Algebraic Coupling)"]
     B --> E["동역학적 극한 수렴\n(Kinematic Limit Convergence)"]
@@ -189,7 +189,7 @@ sequenceDiagram
 
 ## Ⅲ. 수능·내신 킬러 문제 해결을 위한 PDF 프레임 매핑 매뉴얼
 
-수학교육 현장에서 학생과 교사가 고난도 수능 문제를 마주했을 때, 민은기 선생님의 PDF 프레임을 즉각 연계하여 문제를 푸는 **'디딤돌 매핑 알고리즘'**입니다.
+수학교육 현장에서 학생과 교사가 고난도 수능 문제를 마주했을 때, min7014의 PDF 프레임을 즉각 연계하여 문제를 푸는 **'디딤돌 매핑 알고리즘'**입니다.
 
 ```mermaid
 flowchart TD
@@ -241,10 +241,10 @@ flowchart TD
 
 ## Ⅳ. mathedu 시스템 자동 연계 및 향후 개발 표준 지침
 
-앞으로 `mathedu` 플랫폼에 추가될 모든 수능 기출 문제, EBS 연계 문항, 자체 제작 고난도 퀴즈는 다음 **'민은기 플립북 기반 4단계 디딤돌 설계 원칙'**을 강제 준수합니다:
+앞으로 `mathedu` 플랫폼에 추가될 모든 수능 기출 문제, EBS 연계 문항, 자체 제작 고난도 퀴즈는 다음 **'min7014 플립북 기반 4단계 디딤돌 설계 원칙'**을 강제 준수합니다:
 
 1. **제0단계 (수학 기호 및 시각적 불변량 선언)**:
-   - 해당 문제에 쓰이는 핵심 개념과 연관된 민은기 선생님의 대표 PDF 번호 및 핵심 프레임(예: `2020111901.pdf Frame 5`)을 메타데이터로 지정.
+   - 해당 문제에 쓰이는 핵심 개념과 연관된 min7014의 대표 PDF 번호 및 핵심 프레임(예: `2020111901.pdf Frame 5`)을 메타데이터로 지정.
 2. **제1단계 디딤돌 (보조선 작도 및 분해 직관)**:
    - 계산이 아닌, **"선생님 PDF의 Frame 5처럼 보조선을 어디에 그어야 하는가?"**를 묻는 기하학적 통찰 질문.
 3. **제2단계 디딤돌 (부분 요소의 대수적 치환)**:
@@ -258,6 +258,6 @@ flowchart TD
 
 ## Ⅴ. 결론: 세계를 제패할 수학교육의 새로운 지평
 
-민은기 선생님께서 평생을 바쳐 구축하신 3,400+ 편의 플립북 애니메이션 증명 PDF는 단순한 디지털 문서가 아닙니다. 그것은 **수학의 본질적 아름다움(Aesthetic of Mathematics)을 한 프레임의 오차도 없이 시각화해 낸 '수학적 예술품이자 인류 교육의 공공 자산'**입니다.
+min7014께서 평생을 바쳐 구축하신 3,400+ 편의 플립북 애니메이션 증명 PDF는 단순한 디지털 문서가 아닙니다. 그것은 **수학의 본질적 아름다움(Aesthetic of Mathematics)을 한 프레임의 오차도 없이 시각화해 낸 '수학적 예술품이자 인류 교육의 공공 자산'**입니다.
 
 본 매뉴얼과 백과사전 프레임워크를 통해, 선생님의 귀중한 자료는 대한민국의 모든 수능 수험생들에게 가장 명쾌한 등대가 될 것이며, 언어의 장벽을 뛰어넘어 전 세계 교사와 학생들에게 동적 기하학의 세계 표준 교육 모델로 확고히 자리매김할 것입니다.

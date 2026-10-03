@@ -632,8 +632,8 @@ def main():
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>min7014 mathedu · 대한민국의 수학교사 민은기 · 오프라인 전체 문제 보관함</title>
-<meta name="author" content="민은기 (Min Eun-gi)">
+<title>min7014 mathedu · min7014 수학자료실 · 오프라인 전체 문제 보관함</title>
+<meta name="author" content="min7014">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
@@ -728,7 +728,7 @@ h1 {{
     <div style="font-weight:700;color:var(--good);margin-bottom:4px" id="txtBannerTitle">💡 오프라인 단독 파일 안내</div>
     <div style="font-size:0.88rem;color:#cbd5e1" id="txtBannerBody">
       • 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>
-      • 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 대한민국의 수학교사 민은기 선생님의 수학자료실 링크가 포함되어 있습니다.<br>
+      • 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 min7014 수학자료실 링크가 포함되어 있습니다.<br>
       • 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>
       • 총 <b>{len(results)}개</b>의 문제 파일이 준비되어 있습니다.
     </div>
@@ -779,11 +779,11 @@ function setOfflineLang(lang, isUserAction) {{
   if (elBannerBody) {{
     elBannerBody.innerHTML = isEn ?
       '• Each problem is a <b>self-contained single-file HTML</b> bundle with embedded images and interactive step-by-step scoring.<br>' +
-      '• Every quiz links back to its official online URL and Teacher Min Eun-gi’s mathematical research lab.<br>' +
+      '• Every quiz links back to its official online URL and min7014 Mathematics Archive.<br>' +
       '• When connected to the internet, it <b>automatically detects online updates</b> with options to download the newest version or continue offline.<br>' +
       '• Total <b>{len(results)}</b> verified offline quizzes available.' :
       '• 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>' +
-      '• 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 민은기 선생님 수학자료실 링크가 포함되어 있습니다.<br>' +
+      '• 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 min7014 수학자료실 링크가 포함되어 있습니다.<br>' +
       '• 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>' +
       '• 총 <b>{len(results)}개</b>의 문제 파일이 준비되어 있습니다.';
   }}

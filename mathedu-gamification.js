@@ -56,7 +56,7 @@
     { id: 'perfect_run', icon: '🛡️', title: '완벽주의자', titleEn: 'Perfectionist', desc: '오답 없이 한 번에 모든 단계를 클리어함', descEn: 'Cleared all steps on the first attempt with zero mistakes' },
     { id: 'streak_3', icon: '🔥', title: '열정의 불꽃', titleEn: 'Flame of Passion', desc: '3일 연속으로 수학 문제를 풀이함', descEn: 'Solved math problems 3 days in a row' },
     { id: 'streak_7', icon: '⚡', title: '수학의 달인', titleEn: 'Math Master', desc: '7일 연속 학습 스트릭을 달성함', descEn: 'Maintained a 7-day daily study streak' },
-    { id: 'min7014_explorer', icon: '📐', title: '기하의 눈', titleEn: 'Eye of Geometry', desc: '민은기 선생님의 GeoGebra 증명 자료를 3회 이상 탐구함', descEn: "Explored Teacher Min's GeoGebra proofs 3+ times" },
+    { id: 'min7014_explorer', icon: '📐', title: '기하의 눈', titleEn: 'Eye of Geometry', desc: 'min7014의 GeoGebra 증명 자료를 3회 이상 탐구함', descEn: "Explored min7014 GeoGebra proofs 3+ times" },
     { id: 'review_master', icon: '🔄', title: '복습의 제왕', titleEn: 'King of Review', desc: '오답노트에 기록된 문제를 다시 풀어 극복함', descEn: 'Conquered and solved problems from the Review Vault' }
   ];
 

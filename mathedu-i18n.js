@@ -22,10 +22,10 @@
         minHome: "🌐 min7014 홈"
       },
       hero: {
-        badgePill: "🏛️ 대한민국의 수학교사 민은기 · 세계적인 수학교사의 평생 연구실",
+        badgePill: "🏛️ 3,400+ 시각적 수학 증명과 직관 · min7014 수학자료실",
         mainTitleLab: "min7014",
         mainTitleHub: "mathedu",
-        leadDesc: "대한민국의 수학교사 민은기 선생님의 3,400+ 평생 시각적 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학 플랫폼</b>",
+        leadDesc: "3,400+ 평생의 시각적 기하 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학자료실</b>",
         emblemCaption: "📐 공식 엠블럼",
         emblemSub: "Dandelin Spheres",
         emblemTitle: "클릭하여 단델린 구의 기하학적 원리 보기",
@@ -39,7 +39,7 @@
         storyDrawerP1: "원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <b>단델린의 구</b>라고 합니다.",
         storyDrawerP2: "구가 평면과 접하는 점($F_1, F_2$)이 바로 원뿔곡선의 <b>초점(Focus)</b>이 되며, 곡선 위의 점에서 두 초점까지의 거리의 차(또는 합)가 일정함을 입체 기하학으로 우아하게 밝혀냅니다.",
         storyDrawerQuote: '"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"',
-        storyDrawerAuthor: "대한민국의 수학교사 민은기 선생님의 평생 수학 교육 철학입니다.",
+        storyDrawerAuthor: "수학의 본질과 직관을 밝히는 min7014의 교육 철학입니다.",
         statTopics: "🏛️ 평생 수학 주제",
         statAssets: "📐 GeoGebra & PDF 증명",
         statQuizzes: "🎯 수능·모평 디딤돌 퀴즈",
@@ -170,7 +170,7 @@
       },
       footer: {
         brandDesc: "min7014 mathedu · 단계별 인터랙티브 수학교육 플랫폼",
-        collabDesc: "민은기 선생님의 3,400+ 수학 자료실과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평",
+        collabDesc: "min7014의 3,400+ 수학자료실과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평",
         terms: "이용약관",
         privacy: "개인정보처리방침",
         home: "min7014 홈",
@@ -276,7 +276,7 @@
         modalScanQr: "스마트폰 카메라로 QR 코드를 스캔하세요!",
         modalInstantJoin: "회원가입 없이 즉시 참여할 수 있습니다.",
         alertNoData: "내보낼 데이터가 없습니다.",
-        pageTitle: "실시간 수업 대시보드 · min7014 mathedu (대한민국의 수학교사 민은기 연구실)",
+        pageTitle: "실시간 수업 대시보드 · min7014 mathedu (min7014 수학자료실)",
         teacherWarnMsgGeneral: "⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!",
         authDeployPrompt: "수업 배포",
         anonymous: "익명"
@@ -323,10 +323,10 @@
         minHome: "🌐 min7014 Home"
       },
       hero: {
-        badgePill: "🏛️ Min Eun-gi — Korea's Master Mathematics Educator · Global Visual Geometry Lab",
+        badgePill: "🏛️ 3,400+ Dynamic Visual Proofs & Geometric Intuition · min7014 Math Archive",
         mainTitleLab: "min7014",
         mainTitleHub: "mathedu",
-        leadDesc: "Lifelong Mathematical Legacy of Master Educator Min Eun-gi: Over 3,400 Dynamic Visual Proofs & Scaffolding Quizzes, <b>100% Freely Open Worldwide</b>",
+        leadDesc: "Lifelong Mathematical Legacy: Over 3,400 Dynamic Visual Proofs & Scaffolding Quizzes, <b>100% Freely Open Worldwide</b>",
         emblemCaption: "📐 Official Emblem",
         emblemSub: "Dandelin Spheres",
         emblemTitle: "Click to explore the geometric principle of Dandelin Spheres",
@@ -340,7 +340,7 @@
         storyDrawerP1: "When an oblique cutting plane intersects a double cone, the two spheres inscribed in the cone and tangent to the plane are known as <b>Dandelin Spheres</b>.",
         storyDrawerP2: "The points of tangency where the spheres touch the plane ($F_1, F_2$) are precisely the <b>foci</b> of the conic section (ellipse, parabola, or hyperbola). This solid geometry construction elegantly proves that the sum or difference of distances from any point on the curve to the two foci is constant.",
         storyDrawerQuote: '"Math that frees you from blind calculation to see the deep visual principle."',
-        storyDrawerAuthor: "The lifelong pedagogical philosophy of Master Educator Min Eun-gi.",
+        storyDrawerAuthor: "The lifelong pedagogical philosophy of min7014.",
         statTopics: "🏛️ Lifelong Math Topics",
         statAssets: "📐 GeoGebra & Visual Proofs",
         statQuizzes: "🎯 College Entrance Quizzes",
@@ -471,7 +471,7 @@
       },
       footer: {
         brandDesc: "min7014 mathedu · Interactive Step-by-Step Math Scaffolding Platform",
-        collabDesc: "A new horizon in mathematics education uniting Teacher Min Eun-gi's 3,400+ visual math archives with Antigravity AI.",
+        collabDesc: "A new horizon in mathematics education uniting min7014's 3,400+ visual math archives with Antigravity AI.",
         terms: "Terms of Use",
         privacy: "Privacy Policy",
         home: "min7014 Home",

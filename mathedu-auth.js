@@ -34,10 +34,10 @@
       username: 'teacher',
       passwordHash: '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', // 'math1234'
       authProvider: 'local',
-      name: '민은기 선생님',
+      name: '선생님',
       email: 'min7014@mathedu.kr',
       picture: 'assets/favicon.png',
-      org: '수학교육연구소',
+      org: '수학교육 자료실',
       role: 'teacher',
       roleLabel: '수학교사',
       createdAt: '2026-09-01T00:00:00.000Z',
@@ -762,7 +762,7 @@
       if (existing) existing.remove();
 
       var guest = getCurrentGuest();
-      var defaultName = (additionalInfo.name || (guest ? guest.name : '') || '민은기 선생님').trim();
+      var defaultName = (additionalInfo.name || (guest ? guest.name : '') || '선생님').trim();
       var defaultEmail = (additionalInfo.email || (guest ? (guest.name + '@gmail.com') : 'min7014@mathedu.kr')).trim();
       var defaultRole = additionalInfo.role || 'teacher';
 
@@ -789,7 +789,7 @@
             '</div>' +
             '<div class="mathedu-auth-fg">' +
               '<label for="gPromptName">성명 (또는 닉네임)</label>' +
-              '<input type="text" id="gPromptName" value="' + escapeHtml(defaultName) + '" required autocomplete="name" placeholder="민은기">' +
+              '<input type="text" id="gPromptName" value="' + escapeHtml(defaultName) + '" required autocomplete="name" placeholder="성명 입력">' +
             '</div>' +
             '<div class="mathedu-auth-fg">' +
               '<label for="gPromptRole">회원 구분</label>' +

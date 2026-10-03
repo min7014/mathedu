@@ -61,7 +61,7 @@ def deep_analyze():
             math_url = math_m.group(1).strip()
             raw_title = clean_text(math_m.group(2))
             
-            if not raw_title or raw_title in ['[고유주소]', '민은기 선생님의 수학자료실']:
+            if not raw_title or any(k in raw_title for k in ['[고유주소]', '수학자료실']):
                 continue
                 
             # Extract PDF
