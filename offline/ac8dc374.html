@@ -294,8 +294,8 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/ac8dc374.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="ac8dc374">
-<meta name="mathedu-offline-build-time" content="2026-10-03T00:06:28.410036+00:00">
-<meta name="mathedu-offline-hash" content="9cc8f402">
+<meta name="mathedu-offline-build-time" content="2026-10-03T00:24:06.961562+00:00">
+<meta name="mathedu-offline-hash" content="e9b4765c">
 <meta name="mathedu-version-label" content="v2026.10.03">
 
 </head><body><div class="wrap">
@@ -400,7 +400,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         </div>
       </div>
       <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 삼차함수 $f(x)=(x-\alpha)^2(x-\beta)$에서 $g(x)$의 뾰족점(도약 $-8f'(\beta)$)과 $|P(x)|$의 V자 첨점(도약 $+2|P'(\beta)|$)이 완벽히 상쇄되는 조건을 좌우 가로 배치로 한눈에 대조하며 풀이할 수 있습니다.<span class="bilingual-en">💡 <b>Core Guide</b>: Monic cubic $f(x)=(x-\alpha)^2(x-\beta)$ produces a corner jump $-8f'(\beta)$ in $g(x)$, perfectly cancelled by $+2|P'(\beta)|$ of $|P(x)|$.</span>
+        💡 <b>핵심 길잡이</b>: 삼차함수 $f(x)=(x-\alpha)^2(x-\beta)$에서 $g(x)$의 뾰족점($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$)과 $|P(x)|$의 V자 첨점이 만나는 경계점에서 <b>우미분계수와 좌미분계수가 같아지는 미분가능 조건($h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$)</b>을 좌우 가로 배치로 한눈에 대조하며 풀이할 수 있습니다.<span class="bilingual-en">💡 <b>Core Guide</b>: Monic cubic $f(x)=(x-\alpha)^2(x-\beta)$ requires matching one-sided derivatives $h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$ for differentiability.</span>
       </div>
     </div>
   </div>
@@ -412,9 +412,9 @@ window.toggleMinGgb = function(btn, ggbUrl) {
     • <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>
     • <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>
     • <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>
-    • <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점(도함수 도약 $-8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점(도함수 도약 $+2|P'(\beta)|$)</b>이 정확히 한 점에서 만나 미분계수의 좌우 불연속이 $0$으로 상쇄되는 <b>'완전한 평활화(Perfect Smoothing)'</b>에 있습니다.
+    • <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점</b>이 정확히 한 점에서 만나 <b>우미분계수와 좌미분계수가 같아지는 미분가능 조건($h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$)</b>을 만족시키는 데 있습니다.
     <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF &amp; GeoGebra Exploration)</b><br>
-    As secant line $PQ$ rotates continuously towards the limit $x \to a$, it coincides with the tangent line. The corner jumps from $g(x)$ (jump $-8f'(\beta)$) and $|P(x)|$ (jump $+2|P'(\beta)|$) perfectly cancel out, achieving smooth differentiability. Explore the interactive materials below.</div>
+    As secant line $PQ$ rotates continuously towards the limit $x \to a$, it coincides with the tangent line. The differentiability condition $h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$ ensures smooth differentiability across the corner. Explore the interactive materials below.</div>
 
     <!-- 🔗 위 시각적 증명 분석과 직결된 민은기 선생님의 핵심 자료 링크 -->
     <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px">
@@ -659,11 +659,11 @@ window.toggleMinGgb = function(btn, ggbUrl) {
     </div>
   </div>
 
-  <!-- 카드 2: 조건 (나) g(x)의 부호 분기와 도함수 도약 -->
+  <!-- 카드 2: 조건 (나) g(x)의 부호 분기와 좌우 미분계수 불일치 -->
   <div class="sym-card">
     <div class="sym-badge">
-      <span class="bilingual-ko">📌 기본정리 2 · 구간별 함수와 그래프 대칭</span>
-      <span class="bilingual-en">📌 Theorem 2 · Piecewise Scaling & Derivative Jump</span>
+      <span class="bilingual-ko">📌 기본정리 2 · 구간별 함수와 좌우 미분계수</span>
+      <span class="bilingual-en">📌 Theorem 2 · Piecewise Scaling & One-Sided Derivatives</span>
     </div>
     <div class="sym-title">
       <span class="bilingual-ko">2. $g(x)$의 부호 분기와 $x=\beta$에서의 위로 뾰족한 첨점</span>
@@ -677,19 +677,17 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         • <b>그래프 변환의 기하학</b>:<br>
         &nbsp;&nbsp;1) $f(x) \ge 0$ (곡선이 $x$축 위/상에 있을 때): $-f(x)$에 의해 상하 반전($x$축 대칭)되어 음수 영역으로 내려옵니다.<br>
         &nbsp;&nbsp;2) $f(x) < 0$ (곡선이 $x$축 아래에 있을 때): $7f(x)$에 의해 세로로 무려 $7$배나 급격히 확대(스케일링)되어 깊은 골짜기를 형성합니다.<br>
-        • <b>연속성과 미분 불가능성</b>: 경계점 $\alpha, \beta$에서 $f=0$이므로 $g(\alpha)=g(\beta)=0$으로 끊김 없이 연속입니다. 그러나 관통점 $x = \beta$를 지나며 부호가 바뀌므로 좌우 미분계수가 급변합니다:<br>
-        &nbsp;&nbsp;• $x < \beta$ (좌측): $f(x) < 0 \implies g'(\beta^-) = 7f'(\beta)$ (기울기 $+7f'$ 급상승)<br>
-        &nbsp;&nbsp;• $x > \beta$ (우측): $f(x) > 0 \implies g'(\beta^+) = -f'(\beta)$ (기울기 $-f'$ 하강)<br>
-        • <b>좌우 미분계수의 차이와 '도약(Jump)'의 교육과정적 의미</b>:<br>
-        <b>현행 고등학교 수학교육과정(수학 II, 미적분) 교과서의 공식 용어는 '우미분계수와 좌미분계수의 차이'</b>이며, 교과서에는 '도약'이라는 용어가 없습니다. 대학 미적분학(Calculus) 및 수능 심화 분석에서는 이 좌우 미분계수의 순간적인 단차(계단형 낙차)를 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다.<br>
-        원함수 $g(x)$ 자체는 $x = \beta$에서 $0$으로 끊김 없이 이어져(연속) 있지만, 접선의 기울기(도함수 $g'(x)$)는 $+7f'$에서 $-f'$로 순간적으로 뚝 떨어집니다:
-        <div style="text-align:center;margin:6px 0">$$\mathbf{\Delta g'(\beta) = g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$</div>
-        $f'(\beta)>0$이므로 차이(도약)는 항상 음수($<0$)이며, 좌우 기울기가 칼날처럼 어긋나면서 $g(x)$는 $x=\beta$에서 <b>위로 뾰족한 산 모양 첨점(Sharp Peak)</b>을 갖게 됩니다!
+        • <b>연속성과 미분 불가능성</b>: 경계점 $\alpha, \beta$에서 $f=0$이므로 $g(\alpha)=g(\beta)=0$으로 끊김 없이 연속입니다. 그러나 관통점 $x = \beta$를 지나며 부호가 바뀌므로 좌우 미분계수가 서로 달라집니다:<br>
+        &nbsp;&nbsp;• <b>좌미분계수 ($x < \beta$)</b>: $f(x) < 0 \implies g(x) = 7f(x) \implies \mathbf{g'(\beta^-) = 7f'(\beta)}$ (기울기 $+7f'$ 가파른 상승)<br>
+        &nbsp;&nbsp;• <b>우미분계수 ($x > \beta$)</b>: $f(x) > 0 \implies g(x) = -f(x) \implies \mathbf{g'(\beta^+) = -f'(\beta)}$ (기울기 $-f'$ 하강)<br>
+        • <b>좌우 미분계수의 불일치</b>:
+        <div style="text-align:center;margin:6px 0">$$\mathbf{g'(\beta^+) \neq g'(\beta^-) \quad \big(g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0\big)}$$</div>
+        $f'(\beta)>0$이므로 좌미분계수는 양수($+7f'$), 우미분계수는 음수($-f'$)로 불일치하여, $g(x)$는 $x=\beta$에서 <b>위로 뾰족한 산 모양 첨점</b>을 갖습니다!
       </span>
       <div class="bilingual-en">
         • <b>Geometric Transformation</b>: When $f(x) \ge 0$, reflected across the x-axis ($-f(x)$). When $f(x) < 0$, amplified by $7\times$ ($7f(x)$).<br>
-        • <b>Continuity & Non-Differentiability</b>: Continuous everywhere since $f=0$ at roots. However, across crossing root $\beta$, the left derivative is $7f'(\beta)$ and right derivative is $-f'(\beta)$.<br>
-        • <b>What is 'Derivative Jump'?</b>: While $g(x)$ is continuous, its slope drops abruptly from $+7f'$ to $-f'$. This step discontinuity gap between right-hand and left-hand derivatives $\Delta g' = g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$ is called the **Derivative Jump**, producing a sharp upward corner at $x=\beta$.
+        • <b>Continuity & Non-Differentiability</b>: Continuous everywhere since $f=0$ at roots. However, across crossing root $\beta$, the left derivative is $g'(\beta^-) = 7f'(\beta)$ (steep rise) and right derivative is $g'(\beta^+) = -f'(\beta)$ (fall).<br>
+        • <b>Inequality of One-Sided Derivatives</b>: $g'(\beta^+) \neq g'(\beta^-)$, producing a sharp upward corner at $x=\beta$.
       </div>
     </div>
   </div>
@@ -724,33 +722,37 @@ window.toggleMinGgb = function(btn, ggbUrl) {
     </div>
   </div>
 
-  <!-- 카드 4: 절댓값 |P(x)|의 V자 첨점과 첨점 상쇄 -->
+  <!-- 카드 4: 절댓값 |P(x)|와 h(x)의 미분가능 조건 (우미분계수 = 좌미분계수) -->
   <div class="sym-card" style="grid-column:1 / -1">
     <div class="sym-badge">
-      <span class="bilingual-ko">📌 기본정리 4 · 절댓값 첨점과 평활화</span>
-      <span class="bilingual-en">📌 Theorem 4 · Absolute Value Jump & Perfect Smoothing</span>
+      <span class="bilingual-ko">📌 기본정리 4 · 미분가능성의 정의와 일치 조건</span>
+      <span class="bilingual-en">📌 Theorem 4 · Definition of Differentiability & One-Sided Equality</span>
     </div>
     <div class="sym-title">
-      <span class="bilingual-ko">4. 절댓값 $|P(x)|$의 V자 첨점 도약과 $h(x)$의 상쇄 조건</span>
-      <span class="bilingual-en">4. Corner Jump of $|P(x)|$ & Smoothing Condition</span>
+      <span class="bilingual-ko">4. $h(x) = g(x) + |P(x)|$가 $x=\beta$에서 미분가능할 조건 (우미분계수 = 좌미분계수)</span>
+      <span class="bilingual-en">4. Differentiability of $h(x) = g(x) + |P(x)|$ at $x=\beta$ (Right Derivative = Left Derivative)</span>
     </div>
     <div class="sym-formula-box">
-      <b>$$-8f'(\beta) + 2|P'(\beta)| = 0 \iff P'(\beta) = 4f'(\beta)$$</b>
+      <b>$$h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff \mathbf{P'(\beta) = 4f'(\beta)}$$</b>
     </div>
     <div class="sym-desc">
       <span class="bilingual-ko">
-        • <b>절댓값의 V자 꺾임 공식</b>: 다항함수 $P(x)$에 절댓값을 취하면 단순근 $x = c$($P'(c) \neq 0$)에서 $x$축 아래가 위로 꺾여 올라가며 우미분계수와 좌미분계수의 차이는 <b>$+2|P'(c)|$</b>가 됩니다 (아래로 뾰족한 V자 첨점).<br>
-        • <b>중근 조건</b>: $P(x) = (x-1)(x-a)(x-4+a)$의 세 실근 $1, a, 4-a$ 중 <b>두 근이 일치(중근)</b>해야만 첨점이 1개만 생겨, 첨점이 1개인 $g(x)$와 첨점 위치를 일치시킬 수 있습니다.<br>
-        • <b>완전 평활화(Perfect Smoothing) 원리</b>:<br>
-        &nbsp;&nbsp;• $g(x)$의 도약: $-8f'(\beta) < 0$ (위로 뾰족)<br>
-        &nbsp;&nbsp;• $|P(x)|$의 도약: $+2P'(\beta) > 0$ (아래로 뾰족)<br>
-        &nbsp;&nbsp;• 합 함수 $h(x) = g(x) + |P(x)|$의 도약 $= -8f'(\beta) + 2P'(\beta) = 0$<br>
-        두 뾰족한 첨점이 한 점에서 만나 도함수의 불연속 도약이 $0$으로 완벽히 상쇄되어 <b>실수 전체에서 부드럽게 미분가능</b>해집니다!
+        • <b>현행 교육과정 미분가능성의 정의</b>: 함수 $h(x)$가 점 $x=\beta$에서 미분가능하다는 것은 오직 하나, <b>우미분계수와 좌미분계수가 완벽히 일치하는 것($h'(\beta^+) = h'(\beta^-)$)</b>을 의미합니다.<br>
+        • <b>$h(x)$의 우미분계수 계산 ($x \to \beta^+$)</b>:<br>
+        &nbsp;&nbsp;$x > \beta$에서 $g(x) = -f(x)$이고, 단순근 $x=\beta$ 우측에서 $P(x) \ge 0$이므로 $|P(x)| = P(x)$입니다.<br>
+        &nbsp;&nbsp;따라서 우미분계수는: <b>$h'(\beta^+) = g'(\beta^+) + P'(\beta) = -f'(\beta) + P'(\beta)$</b><br>
+        • <b>$h(x)$의 좌미분계수 계산 ($x \to \beta^-$)</b>:<br>
+        &nbsp;&nbsp;$x < \beta$에서 $g(x) = 7f(x)$이고, 단순근 $x=\beta$ 좌측에서 $P(x) \le 0$이므로 $|P(x)| = -P(x)$입니다.<br>
+        &nbsp;&nbsp;따라서 좌미분계수는: <b>$h'(\beta^-) = g'(\beta^-) - P'(\beta) = 7f'(\beta) - P'(\beta)$</b><br>
+        • <b>미분가능 조건 유도 ($h'(\beta^+) = h'(\beta^-)$)</b>:<br>
+        <div style="text-align:center;margin:6px 0">$$\mathbf{-f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff 2P'(\beta) = 8f'(\beta) \iff P'(\beta) = 4f'(\beta)}$$</div>
+        이처럼 교과서의 기본 정의인 <b>"우미분계수 = 좌미분계수"</b>만으로 핵심 등식이 가장 정석적이고 명쾌하게 도출됩니다!
       </span>
       <div class="bilingual-en">
-        • <b>V-Shaped Corner Jump</b>: Across a simple root $c$, $|P(x)|$ creates a positive derivative jump of $+2|P'(c)| > 0$. At double roots ($P'=0$), it is smooth.<br>
-        • <b>Double Root Requirement</b>: $P(x) = (x-1)(x-a)(x-4+a)$ must have a double root so that $|P(x)|$ has only one corner at $x=\beta$.<br>
-        • <b>Perfect Smoothing</b>: Summing the upward jump $-8f'(\beta)$ and the downward jump $+2P'(\beta)$ gives $-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$, completely smoothing the corner!
+        • <b>Definition of Differentiability</b>: $h(x)$ is differentiable at $\beta$ if and only if its right-hand and left-hand derivatives are equal: $h'(\beta^+) = h'(\beta^-)$.<br>
+        • <b>Right Derivative ($x \to \beta^+$)</b>: $h'(\beta^+) = g'(\beta^+) + P'(\beta) = -f'(\beta) + P'(\beta)$.<br>
+        • <b>Left Derivative ($x \to \beta^-$)</b>: $h'(\beta^-) = g'(\beta^-) - P'(\beta) = 7f'(\beta) - P'(\beta)$.<br>
+        • <b>Differentiability Condition</b>: Equating $-f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta)$ yields $2P'(\beta) = 8f'(\beta) \iff \mathbf{P'(\beta) = 4f'(\beta)}$.
       </div>
     </div>
   </div>
@@ -772,7 +774,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
     
     <!-- 패널 1: g(x) 그래프 -->
     <div style="background:rgba(10,13,26,.8);border:1px solid rgba(251,113,133,.4);border-radius:12px;padding:12px;text-align:center">
-      <div style="font-size:.85rem;font-weight:700;color:#fb7185;margin-bottom:6px">① $g(x)$의 위로 뾰족한 첨점</div>
+      <div style="font-size:.85rem;font-weight:700;color:#fb7185;margin-bottom:6px">① $g(x)$의 좌우 미분계수</div>
       <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
         <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
         <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
@@ -788,17 +790,17 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         <!-- tangent lines near beta -->
         <line x1="145" y1="108" x2="170" y2="90" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
         <line x1="170" y1="90" x2="195" y2="115" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
-        <text x="140" y="70" fill="#fca5a5" font-size="9" font-weight="bold">도약: -8f'(β)</text>
+        <text x="135" y="70" fill="#fca5a5" font-size="9" font-weight="bold">좌:+7f', 우:-f'</text>
       </svg>
       <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
-        <span class="bilingual-ko">좌기울기 $+7f'$, 우기울기 $-f'$<br>$\implies$ <b>도함수 도약 $-8f'$</b></span>
-        <span class="bilingual-en">Slope jump: $-8f'(\beta) < 0$</span>
+        <span class="bilingual-ko">좌미분계수 $+7f'$, 우미분계수 $-f'$<br>$\implies$ <b>좌우 불일치로 첨점</b></span>
+        <span class="bilingual-en">Left $+7f'$, Right $-f' \implies$ Corner</span>
       </div>
     </div>
 
     <!-- 패널 2: |P(x)| 그래프 -->
     <div style="background:rgba(10,13,26,.8);border:1px solid rgba(124,196,255,.4);border-radius:12px;padding:12px;text-align:center">
-      <div style="font-size:.85rem;font-weight:700;color:#7cc4ff;margin-bottom:6px">② $|P(x)|$의 아래로 뾰족한 V자</div>
+      <div style="font-size:.85rem;font-weight:700;color:#7cc4ff;margin-bottom:6px">② $|P(x)|$의 좌우 미분계수</div>
       <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
         <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
         <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
@@ -812,11 +814,11 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         <path d="M 25 125 Q 50 90 70 90 Q 95 90 120 50 Q 145 60 170 90 L 195 50" fill="none" stroke="#7cc4ff" stroke-width="2.5" stroke-linecap="round" />
         <line x1="145" y1="65" x2="170" y2="90" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
         <line x1="170" y1="90" x2="195" y2="50" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
-        <text x="140" y="125" fill="#93c5fd" font-size="9" font-weight="bold">도약: +2P'(β)</text>
+        <text x="135" y="125" fill="#93c5fd" font-size="9" font-weight="bold">좌:-P', 우:+P'</text>
       </svg>
       <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
-        <span class="bilingual-ko">좌기울기 $-P'$, 우기울기 $+P'$<br>$\implies$ <b>도함수 도약 $+2P'$</b></span>
-        <span class="bilingual-en">Slope jump: $+2P'(\beta) > 0$</span>
+        <span class="bilingual-ko">좌미분계수 $-P'$, 우미분계수 $+P'$<br>$\implies$ <b>좌우 불일치로 V자</b></span>
+        <span class="bilingual-en">Left $-P'$, Right $+P' \implies$ V-shape</span>
       </div>
     </div>
 
@@ -833,11 +835,11 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         <!-- h(x) smooth curve: perfectly differentiable, no corner! -->
         <path d="M 20 130 Q 40 90 60 90 Q 95 90 120 75 Q 145 60 170 90 Q 190 115 215 95" fill="none" stroke="#5eead4" stroke-width="3" stroke-linecap="round" />
         <path d="M 140 90 Q 170 90 200 90" stroke="#3ddc97" stroke-width="1.5" stroke-dasharray="3 3" />
-        <text x="135" y="70" fill="#a7f3d0" font-size="9" font-weight="bold">-8f' + 2P' = 0 상쇄!</text>
+        <text x="130" y="70" fill="#a7f3d0" font-size="9" font-weight="bold">h'(β⁺) = h'(β⁻) 일치!</text>
       </svg>
       <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
-        <span class="bilingual-ko"><b>도약의 합 $= 0$</b> (완전 상쇄!)<br>$\implies$ <b>실수 전체 미분가능</b></span>
-        <span class="bilingual-en">Net jump $= 0 \implies$ Differentiable!</span>
+        <span class="bilingual-ko"><b>우미분계수 = 좌미분계수</b><br>$\implies$ <b>실수 전체 미분가능</b></span>
+        <span class="bilingual-en">Right = Left Derivative $\implies$ Differentiable!</span>
       </div>
     </div>
 
@@ -846,8 +848,9 @@ window.toggleMinGgb = function(btn, ggbUrl) {
   <!-- 직결 학습 안내 & 민은기 선생님 핵심 자료 바로가기 -->
   <div style="background:rgba(20,24,51,.6);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
     <div style="font-size:.82rem;color:#cbd5e1;line-height:1.5">
-      <span class="bilingual-ko">💡 <b>'도약(Jump)'과 완전 평활화 직관</b>: '도약'이란 접선의 기울기(도함수)가 경계점에서 순간적으로 껑충 뛰거나 뚝 떨어지는 <b>단차(우미분계수 - 좌미분계수)</b>를 뜻합니다. 위 패널이 보여주듯, $g(x)$의 위로 뾰족한 음의 도약($-8f'$)과 $|P(x)|$의 아래로 뾰족한 양의 도약($+2P'$)이 합쳐져 <b>도약의 합이 $0$으로 상쇄($-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$)</b>될 때 비로소 실수 전체에서 부드럽게 미분가능해집니다!</span>
-      <span class="bilingual-en">💡 <b>'Jump' & Smoothing Intuition</b>: 'Jump' means the step gap in slope ($\text{Right Derivative} - \text{Left Derivative}$). Perfect differentiability occurs when the negative jump of $g(x)$ ($-8f'$) and positive jump of $|P(x)|$ ($+2P'$) cancel out to zero: $-8f'(\beta) + 2P'(\beta) = 0 \iff P'(\beta) = 4f'(\beta)$.</span>
+      <span class="bilingual-ko">💡 <b>교육과정 중심 직관 (우미분계수 = 좌미분계수)</b>: 위 3개 패널이 보여주듯, $h(x)$가 미분가능할 조건은 교과서의 기본 정의인 <b>우미분계수와 좌미분계수가 같아야 한다는 것($h'(\beta^+) = h'(\beta^-)$)</b>입니다:<br>
+      $$-f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff 2P'(\beta) = 8f'(\beta) \iff \mathbf{P'(\beta) = 4f'(\beta)}$$</span>
+      <span class="bilingual-en">💡 <b>Curriculum-Standard Intuition (Right = Left Derivative)</b>: Differentiability requires $h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$.</span>
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.45);color:#38bdf8;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none">📐 접선 수렴 원리 PDF ↗</a>
@@ -930,44 +933,40 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
 </div>
 </div>
 
-<h2>제3단계 · [구간 함수] $g(x)$의 꺾인 점(첨점)과 좌우 미분계수의 차이(도약)<span class="bilingual-en">Step 3 · [Piecewise Analysis] Sharp Corner of $g(x)$ & Difference of One-Sided Derivatives (Jump)</span></h2>
+<h2>제3단계 · [구간 함수] $g(x)$의 꺾인 점(첨점)과 좌우 미분계수의 차이<span class="bilingual-en">Step 3 · [Piecewise Analysis] Sharp Corner of $g(x)$ & One-Sided Derivatives</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
 
-<!-- 💡 핵심 개념 돋보기: 도약(Jump)의 수학적 의미와 시각적 비교 다이어그램 -->
+<!-- 💡 교육과정 표준 개념: 우미분계수와 좌미분계수 -->
 <div style="background:rgba(20,24,51,.75);border:1.5px solid rgba(124,196,255,.4);border-radius:12px;padding:14px 16px;margin-bottom:14px">
   <div style="font-size:.95rem;font-weight:800;color:#93c5fd;display:flex;align-items:center;gap:6px;margin-bottom:8px">
     <span>💡</span>
-    <span class="bilingual-ko">수학 개념 탐구: 현행 수학교육과정 용어와 '도약(Jump)'의 관계</span>
-    <span class="bilingual-en">Mathematical Concept: Curriculum Terminology vs. 'Derivative Jump'</span>
+    <span class="bilingual-ko">교육과정 핵심 개념: 우미분계수와 좌미분계수를 이용한 미분가능성 판정</span>
+    <span class="bilingual-en">Core Curriculum Concept: Differentiability via One-Sided Derivatives</span>
   </div>
   <div style="font-size:.88rem;line-height:1.75;color:#e0e7ff">
     <span class="bilingual-ko">
-      • <b>현행 고등학교 수학교육과정(2015·2022 개정)에는 '도약'이란 말이 있나요?</b><br>
-      <b>아닙니다! 현행 고등학교 교과서(수학 II, 미적분)에는 '도약'이라는 용어가 공식적으로 없습니다.</b><br>
-      고등학교 공교육 교과서의 공식 표준 용어는 <b>'우미분계수와 좌미분계수의 차이'</b> 또는 <b>'좌우 미분계수의 불일치'</b>입니다.<br><br>
-      • <b>그렇다면 왜 수능 심화 풀이에서 '도약(Jump)'이란 표현을 쓸까요?</b><br>
-      대학교 미적분학(Calculus) 및 해석학에서는 좌극한과 우극한의 단차를 <b>도약 불연속(Jump Discontinuity)</b>이라 부릅니다. 수능 킬러 문항에서 꺾인 점(첨점)을 가진 두 함수가 더해져 미분가능해지는 원리를 설명할 때, <b>"우미분계수에서 좌미분계수를 뺀 기울기의 단차"</b>를 직관적으로 이해하기 위해 대학 해석학의 <b>'도함수의 도약(Derivative Jump)'</b> 개념을 차용하여 널리 설명합니다:
-      <div style="text-align:center;margin:6px 0"><b>$$\Delta g'(x_0) = \lim_{x \to x_0^+} g'(x) - \lim_{x \to x_0^-} g'(x) = g'(x_0^+) - g'(x_0^-)$$</b></div>
-      • <b>원함수 $g(x)$는 끊김 없이 이어져 있는데, 왜 '도약'이라 부르는가?</b><br>
-      원함수 $g(x)$ 자체는 $x = \beta$에서 $g(\beta^-) = g(\beta^+) = 0$으로 끊어지지 않고 이어져 있는 <b>연속 함수</b>입니다.<br>
-      그러나 그 <b>도함수 $g'(x)$(접선의 기울기)</b>를 관찰하면 극적인 단차가 벌어집니다:<br>
-      &nbsp;&nbsp;1) $x = \beta$ 직전(좌측): 기울기가 <b>$+7f'(\beta)$</b>로 가파르게 치솟아 오름 (양수)<br>
-      &nbsp;&nbsp;2) $x = \beta$ 직후(우측): 기울기가 <b>$-f'(\beta)$</b>로 급격히 꺾여 내려감 (음수)<br>
-      도함수 $g'(x)$의 관점에서는 값이 $+7f'$에서 $-f'$로 <b>순간적으로 $-8f'(\beta)$만큼 수직으로 뚝 떨어지는 '계단형 단차(낙차)'</b>가 생기며, 이를 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다.<br>
-      • <b>좌우 미분계수 차이(도약)의 부호와 첨점의 형태</b>:<br>
-      &nbsp;&nbsp;• <b>음의 차이 ($\Delta < 0$)</b>: 기울기가 급상승($+7f'$) 후 급하강($-f'$) $\implies$ 원함수는 <b>위로 뾰족한 산봉우리 모양 첨점</b> 형성!<br>
-      &nbsp;&nbsp;• <b>양의 차이 ($\Delta > 0$)</b>: 기울기가 하강 후 상승 $\implies$ 원함수는 <b>아래로 뾰족한 V자 골짜기 첨점</b> 형성!<br>
-      &nbsp;&nbsp;• <b>차이 $= 0$ ($\Delta = 0$)</b>: 좌우 기울기 완전 일치 $\implies$ <b>미분가능 (부드러운 평활 곡선)</b>!
+      • <b>고등학교 수학 II 교과서의 미분가능성 정의</b>:<br>
+      함수가 어떤 점에서 미분가능하다는 것은 그 점에서의 <b>우미분계수와 좌미분계수가 존재하고 서로 같을 때</b>를 말합니다.<br>
+      반대로 우미분계수와 좌미분계수가 서로 다르면, 그래프는 양쪽 접선이 칼날처럼 부딪히는 <b>꺾인 점(첨점)</b>을 형성하며 미분 불가능해집니다.<br><br>
+      • <b>구간별 함수 $g(x)$의 좌우 미분계수 계산</b>:<br>
+      $$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
+      &nbsp;&nbsp;1) $x = \alpha$ (접점): $f'(\alpha) = 0$이므로 좌우 미분계수가 모두 $0$으로 일치 $\implies g'(\alpha^-) = g'(\alpha^+) = 0$ (완벽히 미분가능!)<br>
+      &nbsp;&nbsp;2) $x = \beta$ (관통점): $f'(\beta) > 0$이므로 $x=\beta$를 지나며 $f(x)$가 음수에서 양수로 바뀝니다.<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;• <b>좌미분계수 ($x < \beta$)</b>: $f(x) < 0 \implies g(x) = 7f(x) \implies \mathbf{g'(\beta^-) = 7f'(\beta)}$ (기울기 $+7f'$ 가파른 상승)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;• <b>우미분계수 ($x > \beta$)</b>: $f(x) > 0 \implies g(x) = -f(x) \implies \mathbf{g'(\beta^+) = -f'(\beta)}$ (기울기 $-f'$ 하강)<br>
+      따라서 우미분계수와 좌미분계수의 차이는 다음과 같습니다:
+      <div style="text-align:center;margin:6px 0">$$\mathbf{g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$</div>
+      우미분계수와 좌미분계수가 일치하지 않으므로, $g(x)$는 실수 전체에서 <b>오직 $x = \beta$ 한 점에서만 미분 불가능한 위로 뾰족한 첨점</b>을 갖습니다!
     </span>
     <div class="bilingual-en">
-      • <b>Is 'Jump' in the High School Math Curriculum?</b><br>
-      <b>No. The official Korean high school curriculum does NOT contain the word 'Jump'.</b> The official textbook terminology is strictly **"Difference between Right-hand and Left-hand Derivatives"** ($g'(\beta^+) - g'(\beta^-)$). The term **'Derivative Jump'** comes from University Calculus (**Jump Discontinuity**), used in advanced exam problem-solving as an intuitive physical model.<br>
-      • <b>Why Use 'Jump' When $g(x)$ is Continuous?</b>: Although the original curve $g(x)$ is continuous ($g(\beta)=0$), its slope drops abruptly from $+7f'(\beta)$ to $-f'(\beta)$. This step drop of $-8f'(\beta)$ in slope creates the sharp upward corner. Zero jump means smooth differentiability!
+      • <b>Curriculum Definition of Differentiability</b>: A function is differentiable at a point if and only if its right-hand derivative and left-hand derivative exist and are equal.<br>
+      • <b>One-Sided Derivatives of $g(x)$ at $\beta$</b>: Left derivative is $g'(\beta^-) = 7f'(\beta)$ and right derivative is $g'(\beta^+) = -f'(\beta)$.<br>
+      • <b>Difference</b>: $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) \neq 0$, making $x = \beta$ the unique non-differentiable sharp corner of $g(x)$.
     </div>
   </div>
 
-  <!-- 🎨 도약(Jump)의 직관적 시각화: 원함수 첨점 vs 도함수 계단형 단차 대조 패널 -->
+  <!-- 🎨 좌우 미분계수 불일치 시각화 패널 -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0">
     <!-- 패널 1: 원함수 g(x) 첨점 -->
     <div style="background:rgba(10,13,26,.85);border:1px solid rgba(251,113,133,.4);border-radius:10px;padding:10px;text-align:center">
@@ -992,11 +991,11 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
       </div>
     </div>
 
-    <!-- 패널 2: 도함수 g'(x) 도약 -->
+    <!-- 패널 2: 도함수 g'(x)의 좌우 단차 -->
     <div style="background:rgba(10,13,26,.85);border:1px solid rgba(124,196,255,.4);border-radius:10px;padding:10px;text-align:center">
       <div style="font-size:.82rem;font-weight:700;color:#7cc4ff;margin-bottom:4px">
-        <span class="bilingual-ko">② 도함수 $g'(x)$: 계단형 불연속 단차 = '도약(Jump)'</span>
-        <span class="bilingual-en">② Derivative $g'(x)$: Step Drop = 'Jump'</span>
+        <span class="bilingual-ko">② 도함수 $g'(x)$: 좌우 미분계수의 단차</span>
+        <span class="bilingual-en">② Derivative $g'(x)$: Gap in One-Sided Derivatives</span>
       </div>
       <svg viewBox="0 0 220 110" style="width:100%;height:auto;display:block;margin:0 auto">
         <line x1="10" y1="65" x2="210" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2 2" />
@@ -1011,14 +1010,14 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
         <line x1="110" y1="85" x2="190" y2="85" stroke="#38bdf8" stroke-width="2.5" />
         <circle cx="110" cy="85" r="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
         <text x="125" y="97" fill="#38bdf8" font-size="8.5" font-weight="bold">g'(β⁺) = -f'(β)</text>
-        <!-- Downward jump arrow -->
+        <!-- Downward gap arrow -->
         <line x1="110" y1="34" x2="110" y2="80" stroke="#facc15" stroke-width="2" stroke-dasharray="2 2" />
         <polygon points="107,77 110,83 113,77" fill="#facc15" />
-        <text x="115" y="58" fill="#facc15" font-size="9" font-weight="bold">도약: -8f'(β)</text>
+        <text x="115" y="58" fill="#facc15" font-size="9" font-weight="bold">단차: -8f'(β)</text>
       </svg>
       <div style="font-size:.74rem;color:#cbd5e1;margin-top:2px">
-        <span class="bilingual-ko"><b>우미분계수 - 좌미분계수</b> = 수직 낙차</span>
-        <span class="bilingual-en">Right minus Left = Vertical step drop</span>
+        <span class="bilingual-ko"><b>우미분계수 - 좌미분계수</b> = $-8f'(\beta)$</span>
+        <span class="bilingual-en">Right minus Left = $-8f'(\beta)$</span>
       </div>
     </div>
   </div>
@@ -1027,19 +1026,19 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
 문제에서 $g(x)$는 다음과 같이 정의되어 있습니다:<br>
 $$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
 1. <b>점 $x = \alpha$에서의 연속성과 미분가능성:</b><br>
-$x = \alpha$는 접점이므로 $f(\alpha) = 0$이고 $f'(\alpha) = 0$입니다. 좌우 미분계수가 모두 $0$으로 일치하므로 도약 $\Delta g'(\alpha) = 0 - 0 = 0$이며, <b>$x = \alpha$에서는 전혀 꺾이지 않고 부드럽게 미분가능</b>합니다.<br>
-2. <b>점 $x = \beta$에서의 도함수 급변(도약) 계산:</b><br>
+$x = \alpha$는 접점이므로 $f(\alpha) = 0$이고 $f'(\alpha) = 0$입니다. 좌우 미분계수가 모두 $0$으로 일치하므로 $g'(\alpha^+) - g'(\alpha^-) = 0 - 0 = 0$이며, <b>$x = \alpha$에서는 전혀 꺾이지 않고 부드럽게 미분가능</b>합니다.<br>
+2. <b>점 $x = \beta$에서의 좌우 미분계수 불일치 계산:</b><br>
 $f'(\beta) > 0$이므로 $x$가 $\beta$를 지나면서 $f(x)$는 음수($<0$)에서 양수($\ge 0$)로 부호가 바뀝니다:<br>
 • $x < \beta$ (좌측): $f(x) < 0 \implies g(x) = 7f(x) \implies g'(\beta^-) = 7f'(\beta)$ (기울기 $+7f'$ 급상승)<br>
 • $x > \beta$ (우측): $f(x) > 0 \implies g(x) = -f(x) \implies g'(\beta^+) = -f'(\beta)$ (기울기 $-f'$ 완만한 하강)<br>
-따라서 우미분계수에서 좌미분계수를 뺀 <b>도함수의 도약(Jump)</b>은 다음과 같습니다:<br>
+따라서 우미분계수에서 좌미분계수를 뺀 <b>좌우 미분계수의 차이</b>는 다음과 같습니다:<br>
 $$\mathbf{g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$
 $f'(\beta) > 0$이므로 $-8f'(\beta) < 0$이며, <b>$g(x)$는 실수 전체에서 오직 $x = \beta$ 한 점에서만 위로 뾰족한 첨점</b>을 갖습니다!
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> At $x = \alpha$, $f'(\alpha) = 0 \implies g'(\alpha) = 0$, so the derivative jump is $\Delta g'(\alpha) = 0$, meaning $g(x)$ is perfectly smooth. At $x = \beta$, left derivative is $g'(\beta^-) = 7f'(\beta)$ and right derivative is $g'(\beta^+) = -f'(\beta)$. The derivative jump across $\beta$ is $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$, making $x = \beta$ the unique sharp corner of $g(x)$.</div>
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> At $x = \alpha$, $f'(\alpha) = 0 \implies g'(\alpha) = 0$, so the difference is $g'(\alpha^+) - g'(\alpha^-) = 0$, meaning $g(x)$ is perfectly smooth. At $x = \beta$, left derivative is $g'(\beta^-) = 7f'(\beta)$ and right derivative is $g'(\beta^+) = -f'(\beta)$. The difference across $\beta$ is $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$, making $x = \beta$ the unique sharp corner of $g(x)$.</div>
 </div>
-<div class="q" data-ans="4" data-exp="'도약(Jump)'이란 도함수의 우극한에서 좌극한을 뺀 단차(차이)를 말합니다. x &lt; β에서 g'(β⁻) = 7f'(β)이고, x &gt; β에서 g'(β⁺) = -f'(β)이므로, 도함수 도약은 g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β) 입니다." data-exp-en="'Jump' refers to the step discontinuity gap between the right-hand and left-hand derivative: g'(β⁺) - g'(β⁻). Since g'(β⁻) = 7f'(β) and g'(β⁺) = -f'(β), the derivative jump is -f'(β) - 7f'(β) = -8f'(β)." >
-<div class="lvl">3단계 도함수 도약</div>
-<div class="stem"><span class="bilingual-ko">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 정확한 값은 얼마인가요?</span><div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the exact jump of the derivative $g'(\beta^+) - g'(\beta^-)$?</div></div>
+<div class="q" data-ans="4" data-exp="x &lt; β에서 g(x) = 7f(x)이므로 좌미분계수는 g'(β⁻) = 7f'(β)이고, x &gt; β에서 g(x) = -f(x)이므로 우미분계수는 g'(β⁺) = -f'(β)입니다. 따라서 우미분계수와 좌미분계수의 차이는 g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β) 입니다." data-exp-en="Since g(x) = 7f(x) for x &lt; β and g(x) = -f(x) for x &gt; β, the left derivative is 7f'(β) and right derivative is -f'(β). Thus the difference between the right and left derivatives is g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β)." >
+<div class="lvl">3단계 좌우 미분계수</div>
+<div class="stem"><span class="bilingual-ko">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 정확한 값은 얼마인가요?</span><div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the exact difference between the right-hand and left-hand derivatives $g'(\beta^+) - g'(\beta^-)$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$0$ (미분가능)</div>
 <div class="opt"><span class="n">2</span>$-6f'(\beta)$</div>
@@ -1104,23 +1103,26 @@ $f'(\beta) > 0$이므로 $-8f'(\beta) < 0$이며, <b>$g(x)$는 실수 전체에�
 </div>
 </div>
 
-<h2>제5단계 · [Case 1 분석] $a = 1, 3$일 때 첨점 상쇄와 $f(0)$의 값들<span class="bilingual-en">Step 5 · [Case 1 Solution] Corner Smoothing at $x = 3$ & Values of $f(0)$</span></h2>
+<h2>제5단계 · [Case 1 분석] $a = 1, 3$일 때 미분가능성과 $f(0)$의 값들<span class="bilingual-en">Step 5 · [Case 1 Solution] Differentiability at $x = 3$ & Values of $f(0)$</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
 Case 1 ($a = 1$ 또는 $a = 3$)에서 $P(x) = (x - 1)^2(x - 3)$의 유일한 첨점은 $x = 3$입니다.<br>
 $h(x) = g(x) + |P(x)|$가 실수 전체에서 미분가능하려면 두 함수의 첨점 위치가 반드시 일치해야 하므로 <b>$\beta = 3$</b>이어야 합니다!<br>
-• $x = 3$에서 $|P(x)|$의 좌우 도함수 도약은 다음과 같습니다:
-$$|P|'(3^+) - |P|'(3^-) = 2P'(3) = 2 \times (3 - 1)^2 = 2 \times 4 = \mathbf{+8}$$
-• $g(x)$의 도약 $-8f'(3)$과 합쳐서 $0$이 되어야 매끄럽게 연결(상쇄)되므로:
-$$-8f'(3) + 8 = 0 \implies f'(3) = 1$$
+• $h(x) = g(x) + |P(x)|$가 $x = 3$에서 미분가능하려면 <b>우미분계수와 좌미분계수가 같아야 합니다 ($h'(3^+) = h'(3^-)$)</b>:<br>
+&nbsp;&nbsp;• 우미분계수: $h'(3^+) = g'(3^+) + P'(3) = -f'(3) + P'(3)$<br>
+&nbsp;&nbsp;• 좌미분계수: $h'(3^-) = g'(3^-) - P'(3) = 7f'(3) - P'(3)$<br>
+미분가능 조건 ($h'(3^+) = h'(3^-)$):
+$$-f'(3) + P'(3) = 7f'(3) - P'(3) \iff 2P'(3) = 8f'(3) \iff P'(3) = 4f'(3)$$
+$P'(3) = (3 - 1)^2 = 4$이므로:
+$$4 = 4f'(3) \implies \mathbf{f'(3) = 1}$$
 • 그런데 2단계에서 유도한 공식에 의해 $f'(3) = (3 - \alpha)^2$이므로:
 $$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \mathbf{\alpha = 2 \text{ 또는 } \alpha = 4}$$
 이제 $f(x) = (x - \alpha)^2(x - 3)$에 $x = 0$을 대입하여 $f(0)$을 구합니다:<br>
 • $\alpha = 2$ 일 때: <b>$f(0) = (0 - 2)^2(0 - 3) = 4 \times (-3) = \mathbf{-12}$</b><br>
 • $\alpha = 4$ 일 때: <b>$f(0) = (0 - 4)^2(0 - 3) = 16 \times (-3) = \mathbf{-48}$</b>
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In Case 1, $P(x) = (x - 1)^2(x - 3)$ has its corner at $x = 3$, forcing $\beta = 3$. Smoothing requires $-8f'(3) + 2P'(3) = -8f'(3) + 8 = 0 \implies f'(3) = 1$. Since $f'(3) = (3 - \alpha)^2 = 1$, we get $\alpha \in \{2, 4\}$. Evaluating $f(0) = (0 - \alpha)^2(0 - 3)$ gives $f(0) \in \{-12, -48\}$.</div>
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In Case 1, $P(x) = (x - 1)^2(x - 3)$ has its corner at $x = 3$, forcing $\beta = 3$. Differentiability requires $h'(3^+) = h'(3^-) \iff -f'(3) + P'(3) = 7f'(3) - P'(3) \iff P'(3) = 4f'(3)$. Since $P'(3) = 4$, we get $f'(3) = 1$. Since $f'(3) = (3 - \alpha)^2 = 1$, we get $\alpha \in \{2, 4\}$. Evaluating $f(0) = (0 - \alpha)^2(0 - 3)$ gives $f(0) \in \{-12, -48\}$.</div>
 </div>
-<div class="q" data-ans="2" data-exp="첨점이 x=3이므로 β=3이어야 하고, 도함수 도약 상쇄 조건 -8f'(3) + 8 = 0에서 f'(3) = (3 - α)² = 1입니다. 따라서 3 - α = ±1이므로 α = 2 또는 α = 4입니다. f(x) = (x - α)²(x - 3)에 0을 대입하면 f(0)은 (-2)²(-3) = -12, 또는 (-4)²(-3) = -48 입니다." data-exp-en="Since the corner is at x=3, we have β=3. Smoothing requires -8f'(3) + 8 = 0 and f'(3) = (3-α)² = 1, so α is 2 or 4. Evaluating f(0) = (0-α)²(0-3) gives f(0) in {-12, -48}." >
+<div class="q" data-ans="2" data-exp="첨점이 x=3이므로 β=3이어야 하고, 미분가능 조건 h'(3⁺) = h'(3⁻)에서 -f'(3) + P'(3) = 7f'(3) - P'(3) ⇔ P'(3) = 4f'(3)입니다. P'(3)=4이므로 f'(3) = (3 - α)² = 1입니다. 따라서 3 - α = ±1이므로 α = 2 또는 α = 4입니다. f(x) = (x - α)²(x - 3)에 0을 대입하면 f(0)은 (-2)²(-3) = -12, 또는 (-4)²(-3) = -48 입니다." data-exp-en="Since the corner is at x=3, we have β=3. Differentiability h'(3⁺)=h'(3⁻) requires P'(3)=4f'(3), so 4=4f'(3) => f'(3)=1. Since f'(3)=(3-α)²=1, α is 2 or 4. Evaluating f(0) = (0-α)²(0-3) gives f(0) in {-12, -48}." >
 <div class="lvl">5단계 Case 1 계산</div>
 <div class="stem"><span class="bilingual-ko">Case 1 ($a = 1$ 또는 $a = 3$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 1 ($a = 1$ or $a = 3$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
@@ -1145,23 +1147,26 @@ $$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \mathbf{\alpha = 2 \te
 </div>
 </div>
 
-<h2>제6단계 · [Case 2 분석] $a = 2$일 때 첨점 상쇄와 $f(0)$의 값들<span class="bilingual-en">Step 6 · [Case 2 Solution] Corner Smoothing at $x = 1$ & Values of $f(0)$</span></h2>
+<h2>제6단계 · [Case 2 분석] $a = 2$일 때 미분가능성과 $f(0)$의 값들<span class="bilingual-en">Step 6 · [Case 2 Solution] Differentiability at $x = 1$ & Values of $f(0)$</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
 Case 2 ($a = 2$)에서 $P(x) = (x - 2)^2(x - 1)$의 유일한 첨점은 $x = 1$입니다.<br>
 $h(x)$가 미분가능하려면 첨점 위치가 일치해야 하므로 반드시 <b>$\beta = 1$</b>이어야 합니다!<br>
-• $x = 1$에서 $|P(x)|$의 좌우 도함수 도약은 다음과 같습니다:
-$$|P|'(1^+) - |P|'(1^-) = 2P'(1) = 2 \times (1 - 2)^2 = 2 \times 1 = \mathbf{+2}$$
-• $g(x)$의 도약 $-8f'(1)$과 상쇄되어야 하므로:
-$$-8f'(1) + 2 = 0 \implies 8f'(1) = 2 \implies f'(1) = \frac{1}{4}$$
+• $h(x) = g(x) + |P(x)|$가 $x = 1$에서 미분가능하려면 <b>우미분계수와 좌미분계수가 같아야 합니다 ($h'(1^+) = h'(1^-)$)</b>:<br>
+&nbsp;&nbsp;• 우미분계수: $h'(1^+) = g'(1^+) + P'(1) = -f'(1) + P'(1)$<br>
+&nbsp;&nbsp;• 좌미분계수: $h'(1^-) = g'(1^-) - P'(1) = 7f'(1) - P'(1)$<br>
+미분가능 조건 ($h'(1^+) = h'(1^-)$):
+$$-f'(1) + P'(1) = 7f'(1) - P'(1) \iff 2P'(1) = 8f'(1) \iff P'(1) = 4f'(1)$$
+$P'(1) = (1 - 2)^2 = 1$이므로:
+$$1 = 4f'(1) \implies \mathbf{f'(1) = \frac{1}{4}}$$
 • $f'(1) = (1 - \alpha)^2$이므로:
 $$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \mathbf{\alpha = \frac{1}{2} \text{ 또는 } \alpha = \frac{3}{2}}$$
 이제 $f(x) = (x - \alpha)^2(x - 1)$에 $x = 0$을 대입하여 $f(0)$을 구합니다:<br>
 • $\alpha = \frac{1}{2}$ 일 때: <b>$f(0) = \left(0 - \frac{1}{2}\right)^2(0 - 1) = \frac{1}{4} \times (-1) = \mathbf{-\frac{1}{4}}$</b><br>
 • $\alpha = \frac{3}{2}$ 일 때: <b>$f(0) = \left(0 - \frac{3}{2}\right)^2(0 - 1) = \frac{9}{4} \times (-1) = \mathbf{-\frac{9}{4}}$</b>
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In Case 2, $P(x) = (x - 2)^2(x - 1)$ has its corner at $x = 1$, forcing $\beta = 1$. Smoothing requires $-8f'(1) + 2P'(1) = -8f'(1) + 2 = 0 \implies f'(1) = 1/4$. Since $f'(1) = (1 - \alpha)^2 = 1/4$, we get $\alpha \in \{1/2, 3/2\}$. Evaluating $f(0) = (0 - \alpha)^2(0 - 1)$ gives $f(0) \in \{-1/4, -9/4\}$.</div>
+<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In Case 2, $P(x) = (x - 2)^2(x - 1)$ has its corner at $x = 1$, forcing $\beta = 1$. Differentiability requires $h'(1^+) = h'(1^-) \iff -f'(1) + P'(1) = 7f'(1) - P'(1) \iff P'(1) = 4f'(1)$. Since $P'(1) = 1$, we get $f'(1) = 1/4$. Since $f'(1) = (1 - \alpha)^2 = 1/4$, we get $\alpha \in \{1/2, 3/2\}$. Evaluating $f(0) = (0 - \alpha)^2(0 - 1)$ gives $f(0) \in \{-1/4, -9/4\}$.</div>
 </div>
-<div class="q" data-ans="1" data-exp="첨점이 x=1이므로 β=1이어야 하고, 도함수 도약 상쇄 조건 -8f'(1) + 2 = 0에서 f'(1) = (1 - α)² = 1/4 입니다. 따라서 1 - α = ±1/2이므로 α = 1/2 또는 α = 3/2 입니다. f(x) = (x - α)²(x - 1)에 0을 대입하면 f(0)은 (-1/2)²(-1) = -1/4, 또는 (-3/2)²(-1) = -9/4 입니다." data-exp-en="Since the corner is at x=1, we have β=1. Smoothing requires -8f'(1) + 2 = 0 and f'(1) = (1-α)² = 1/4, so α is 1/2 or 3/2. Evaluating f(0) = (0-α)²(0-1) yields f(0) in {-1/4, -9/4}." >
+<div class="q" data-ans="1" data-exp="첨점이 x=1이므로 β=1이어야 하고, 미분가능 조건 h'(1⁺) = h'(1⁻)에서 -f'(1) + P'(1) = 7f'(1) - P'(1) ⇔ P'(1) = 4f'(1)입니다. P'(1)=1이므로 f'(1) = (1 - α)² = 1/4입니다. 따라서 1 - α = ±1/2이므로 α = 1/2 또는 α = 3/2 입니다. f(x) = (x - α)²(x - 1)에 0을 대입하면 f(0)은 (-1/2)²(-1) = -1/4, 또는 (-3/2)²(-1) = -9/4 입니다." data-exp-en="Since the corner is at x=1, we have β=1. Differentiability h'(1⁺)=h'(1⁻) requires P'(1)=4f'(1), so 1=4f'(1) => f'(1)=1/4. Since f'(1)=(1-α)²=1/4, α is 1/2 or 3/2. Evaluating f(0) = (0-α)²(0-1) yields f(0) in {-1/4, -9/4}." >
 <div class="lvl">6단계 Case 2 계산</div>
 <div class="stem"><span class="bilingual-ko">Case 2 ($a = 2$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 2 ($a = 2$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
@@ -1218,12 +1223,12 @@ $$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \m
   <!-- g(x): x < β 에서 급경사 상승(+7f'), x > β 에서 완만한 하강(-f') -->
   <path d="M 120 170 C 220 160 300 120 340 70 C 370 110 440 160 520 168" fill="none" stroke="url(#gLine)" stroke-width="2.5"/>
   <circle cx="340" cy="70" r="4" fill="#38bdf8"/>
-  <text x="210" y="85" fill="#38bdf8" font-size="12" font-weight="bold">y = g(x) [도약: -8f'(β)]</text>
+  <text x="210" y="85" fill="#38bdf8" font-size="12" font-weight="bold">y = g(x) [좌우불일치: -8f'(β)]</text>
 
   <!-- |P(x)|: x=β 에서 아래로 뾰족한 V자 -->
   <path d="M 160 30 C 240 60 310 110 340 140 C 370 110 440 60 520 30" fill="none" stroke="url(#pLine)" stroke-width="2.5"/>
   <circle cx="340" cy="140" r="4" fill="#f472b6"/>
-  <text x="450" y="75" fill="#f472b6" font-size="12" font-weight="bold">y = |P(x)| [도약: +2|P'(β)|]</text>
+  <text x="450" y="75" fill="#f472b6" font-size="12" font-weight="bold">y = |P(x)| [좌우불일치: +2P'(β)]</text>
 
   <!-- h(x) = g(x) + |P(x)|: 부드럽게 연결되는 곡선 -->
   <path d="M 140 135 C 230 115 310 90 340 90 C 370 90 450 115 540 135" fill="none" stroke="url(#hLine)" stroke-width="3.5"/>
@@ -1252,7 +1257,7 @@ $$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
 • $x = \beta$ 근방에서는 $f'(\beta) > 0$이므로 $x$가 $\beta$를 지나면서 $f(x)$가 음수에서 양수로 바뀝니다:<br>
   - 좌미분계수: $g'(\beta^-) = 7f'(\beta)$<br>
   - 우미분계수: $g'(\beta^+) = -f'(\beta)$<br>
-  - 도함수 도약: <b>$g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) = -8(\beta - \alpha)^2 < 0$</b><br>
+  - 좌우 미분계수의 차이: <b>$g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) = -8(\beta - \alpha)^2 < 0$</b> (좌우 불일치)<br>
 따라서 $g(x)$는 실수 전체에서 <b>오직 $x = \beta$ 한 점에서만 미분 불가능</b>합니다.
 </p>
 
@@ -1277,10 +1282,10 @@ $P(x)$의 세 실근은 $1, \; a, \; 4-a$입니다.<br>
 <p>
 $P(x) = (x - 1)^2(x - 3)$의 유일한 첨점이 $x = 3$이므로, $g(x)$의 첨점 위치와 반드시 일치해야 합니다.<br>
 따라서 <b>$\beta = 3$</b>이어야 합니다.<br>
-$x = 3$에서 $|P(x)|$의 좌우 도함수 도약은:
-$$|P|'(3^+) - |P|'(3^-) = 2P'(3) = 2 \times (3 - 1)^2 = 2 \times 4 = 8$$
-$h(x)$가 $x = 3$에서 미분가능하려면 도함수 도약의 합이 $0$이어야 하므로:
-$$-8f'(3) + 8 = 0 \implies f'(3) = 1$$
+$h(x) = g(x) + |P(x)|$가 $x = 3$에서 미분가능하려면 우미분계수와 좌미분계수가 같아야 합니다 ($h'(3^+) = h'(3^-)$):
+$$-f'(3) + P'(3) = 7f'(3) - P'(3) \iff 2P'(3) = 8f'(3) \iff P'(3) = 4f'(3)$$
+$P'(3) = (3 - 1)^2 = 4$이므로:
+$$4 = 4f'(3) \implies f'(3) = 1$$
 그런데 $f'(3) = (3 - \alpha)^2$이므로:
 $$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \alpha = 2 \text{ 또는 } \alpha = 4$$
 이제 각 경우의 $f(0)$을 구합니다 ($f(x) = (x - \alpha)^2(x - 3)$):<br>
@@ -1292,10 +1297,10 @@ $$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \alpha = 2 \text{ 또�
 <p>
 $P(x) = (x - 2)^2(x - 1)$의 유일한 첨점이 $x = 1$이므로, $g(x)$의 첨점 위치와 일치해야 합니다.<br>
 따라서 <b>$\beta = 1$</b>이어야 합니다.<br>
-$x = 1$에서 $|P(x)|$의 좌우 도함수 도약은:
-$$|P|'(1^+) - |P|'(1^-) = 2P'(1) = 2 \times (1 - 2)^2 = 2 \times 1 = 2$$
-$h(x)$가 $x = 1$에서 미분가능하려면:
-$$-8f'(1) + 2 = 0 \implies 8f'(1) = 2 \implies f'(1) = \frac{1}{4}$$
+$h(x) = g(x) + |P(x)|$가 $x = 1$에서 미분가능하려면 우미분계수와 좌미분계수가 같아야 합니다 ($h'(1^+) = h'(1^-)$):
+$$-f'(1) + P'(1) = 7f'(1) - P'(1) \iff 2P'(1) = 8f'(1) \iff P'(1) = 4f'(1)$$
+$P'(1) = (1 - 2)^2 = 1$이므로:
+$$1 = 4f'(1) \implies f'(1) = \frac{1}{4}$$
 그런데 $f'(1) = (1 - \alpha)^2$이므로:
 $$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \alpha = \frac{1}{2} \text{ 또는 } \alpha = \frac{3}{2}$$
 이제 각 경우의 $f(0)$을 구합니다 ($f(x) = (x - \alpha)^2(x - 1)$):<br>
@@ -1318,8 +1323,8 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 <div class="bilingual-en">
 <b>Comprehensive English Proof:</b><br>
 1. <b>Factorization:</b> Having 2 distinct real roots means $f(x) = (x - \alpha)^2(x - \beta)$ with $f'(\beta) = (\beta - \alpha)^2 > 0$ strictly positive.<br>
-2. <b>Corner of $g(x)$ Jump:</b> $g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) = -8(\beta - \alpha)^2$.<br>
-3. <b>Cancellation with $|P(x)|$:</b> $P(x)=(x-1)(x-a)(x-4+a)$ must have a double root. If $a=1, 3$, the unique corner is at $x=3$ with jump $+8$, forcing $\beta=3$ and $f'(3)=1 \implies \alpha \in \{2, 4\} \implies f(0) \in \{-12, -48\}$. If $a=2$, the corner is at $x=1$ with jump $+2$, forcing $\beta=1$ and $f'(1)=1/4 \implies \alpha \in \{1/2, 3/2\} \implies f(0) \in \{-1/4, -9/4\}$.<br>
+2. <b>One-Sided Derivatives of $g(x)$:</b> $g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) = -8(\beta - \alpha)^2$.<br>
+3. <b>Differentiability of $h(x) = g(x) + |P(x)|$:</b> Equating right and left derivatives $h'(\beta^+) = h'(\beta^-)$ yields $P'(\beta) = 4f'(\beta)$. $P(x)=(x-1)(x-a)(x-4+a)$ must have a double root. If $a=1, 3$, the corner is at $x=3$ with $P'(3)=4$, forcing $\beta=3$ and $f'(3)=1 \implies \alpha \in \{2, 4\} \implies f(0) \in \{-12, -48\}$. If $a=2$, the corner is at $x=1$ with $P'(1)=1$, forcing $\beta=1$ and $f'(1)=1/4 \implies \alpha \in \{1/2, 3/2\} \implies f(0) \in \{-1/4, -9/4\}$.<br>
 4. <b>Extrema:</b> $M = -1/4$ (max), $m = -48$ (min). Product: $M \times m = (-1/4) \times (-48) = 12$. Option ② is correct.
 </div>
 </div>
@@ -1744,8 +1749,8 @@ function setBoardLang(lang) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'ac8dc374';
-window._offlineBuildTime = '2026-10-03T00:06:28.410036+00:00';
-window._offlineHash = '9cc8f402';
+window._offlineBuildTime = '2026-10-03T00:24:06.961562+00:00';
+window._offlineHash = 'e9b4765c';
 window._offlineVersion = 'v2026.10.03';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/ac8dc374.html';
 
@@ -1770,8 +1775,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'ac8dc374';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T00:06:28.410036+00:00';
-  var localHash = window._offlineHash || '9cc8f402';
+  var localBuildTime = window._offlineBuildTime || '2026-10-03T00:24:06.961562+00:00';
+  var localHash = window._offlineHash || 'e9b4765c';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/ac8dc374.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
