@@ -716,8 +716,8 @@ h1 {{
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
     <a href="../index.html" style="color:var(--accent);text-decoration:none;font-weight:700;font-size:0.9rem;display:inline-flex;align-items:center;gap:6px">⬅️ <span id="txtBackLink">mathedu 메인으로</span></a>
     <div class="lang-switcher" id="langSwitcher" title="Language">
-      <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setOfflineLang('ko')">🇰🇷 KO</button>
-      <button type="button" class="lang-btn" data-lang-btn="en" onclick="setOfflineLang('en')">🌐 EN</button>
+      <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setOfflineLang('ko', true)">🇰🇷 KO</button>
+      <button type="button" class="lang-btn" data-lang-btn="en" onclick="setOfflineLang('en', true)">🌐 EN</button>
     </div>
   </div>
 
@@ -754,8 +754,13 @@ h1 {{
     index_html += f"""  </div>
 </div>
 <script>
-function setOfflineLang(lang) {{
-  try {{ localStorage.setItem('mathedu_lang', lang); }} catch(e){{}}
+function setOfflineLang(lang, isUserAction) {{
+  if (isUserAction) {{
+    try {{
+      localStorage.setItem('mathedu_lang', lang);
+      localStorage.setItem('mathedu_lang_manual', 'true');
+    }} catch(e){{}}
+  }}
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-lang-btn]').forEach(function(b) {{
     if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
@@ -787,11 +792,40 @@ function setOfflineLang(lang) {{
   document.querySelectorAll('.link-online-text').forEach(function(el) {{ el.textContent = isEn ? 'Online Original ➔' : '온라인 원본 링크 ➔'; }});
   document.querySelectorAll('.txt-slug-prefix').forEach(function(el) {{ el.textContent = isEn ? 'Slug: ' : '고유 슬러그: '; }});
 }}
+function detectDefaultLang() {{
+  try {{
+    var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz === 'Asia/Seoul' || tz === 'ROK' || tz === 'Asia/Pyongyang') return 'ko';
+    if (tz) return 'en';
+  }} catch(e){{}}
+  try {{
+    var l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+    if (l.toLowerCase().indexOf('ko') === 0) return 'ko';
+  }} catch(e){{}}
+  return 'en';
+}}
 var curLang = 'ko';
-try {{ curLang = localStorage.getItem('mathedu_lang') || 'ko'; }} catch(e){{}}
-var p = new URLSearchParams(window.location.search);
-if (p.get('lang') === 'en' || p.get('lang') === 'ko') curLang = p.get('lang');
-setOfflineLang(curLang);
+try {{
+  var p = new URLSearchParams(window.location.search);
+  if (p.get('lang') === 'en' || p.get('lang') === 'ko') {{
+    curLang = p.get('lang');
+    try {{
+      localStorage.setItem('mathedu_lang', curLang);
+      localStorage.setItem('mathedu_lang_manual', 'true');
+    }} catch(e){{}}
+  }} else {{
+    var isManual = localStorage.getItem('mathedu_lang_manual') === 'true';
+    var saved = localStorage.getItem('mathedu_lang');
+    if (isManual && (saved === 'en' || saved === 'ko')) {{
+      curLang = saved;
+    }} else {{
+      curLang = detectDefaultLang();
+    }}
+  }}
+}} catch(e){{
+  curLang = detectDefaultLang();
+}}
+setOfflineLang(curLang, false);
 </script>
 </body>
 </html>

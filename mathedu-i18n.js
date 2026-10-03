@@ -613,22 +613,67 @@
     }
   };
 
+  var STORAGE_KEY = 'mathedu_lang';
+  var STORAGE_MANUAL_KEY = 'mathedu_lang_manual';
+
   var currentLang = 'ko';
+
+  /**
+   * Detect default language based on visitor's location:
+   * - Korea (Asia/Seoul, ROK, Asia/Pyongyang) -> 'ko'
+   * - Outside Korea (any other timezone / non-Korean locale) -> 'en'
+   */
+  function detectDefaultLanguage() {
+    // 1. Timezone detection (0ms synchronous, 100% reliable)
+    try {
+      if (typeof Intl !== 'undefined' && Intl.DateTimeFormat) {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (tz) {
+          if (tz === 'Asia/Seoul' || tz === 'ROK' || tz === 'Asia/Pyongyang') {
+            return 'ko';
+          }
+          // Any other recognized timezone means visitor is outside Korea
+          return 'en';
+        }
+      }
+    } catch(e) {}
+
+    // 2. Fallback: Browser language
+    try {
+      var langs = (typeof navigator !== 'undefined' && (navigator.languages || [navigator.language || navigator.userLanguage])) || [];
+      for (var i = 0; i < langs.length; i++) {
+        if (langs[i] && String(langs[i]).toLowerCase().indexOf('ko') === 0) {
+          return 'ko';
+        }
+      }
+    } catch(e) {}
+
+    // 3. International default
+    return 'en';
+  }
 
   function initLanguage() {
     var urlParams = (typeof window !== 'undefined' && window.location && window.location.search) ? new URLSearchParams(window.location.search) : new URLSearchParams('');
     var langParam = urlParams.get('lang');
     if (langParam === 'en' || langParam === 'ko') {
       currentLang = langParam;
-      try { localStorage.setItem(STORAGE_KEY, currentLang); } catch(e){}
+      try {
+        localStorage.setItem(STORAGE_KEY, currentLang);
+        localStorage.setItem(STORAGE_MANUAL_KEY, 'true');
+      } catch(e){}
     } else {
       var saved = null;
-      try { saved = localStorage.getItem(STORAGE_KEY); } catch(e){}
-      if (saved === 'en' || saved === 'ko') {
+      var isManual = false;
+      try {
+        saved = localStorage.getItem(STORAGE_KEY);
+        isManual = localStorage.getItem(STORAGE_MANUAL_KEY) === 'true';
+      } catch(e){}
+
+      if (isManual && (saved === 'en' || saved === 'ko')) {
         currentLang = saved;
       } else {
-        // default ko
-        currentLang = 'ko';
+        // Auto-detect based on physical location (Korea -> 'ko', Outside Korea -> 'en')
+        currentLang = detectDefaultLanguage();
       }
     }
     if (typeof document !== 'undefined' && document.documentElement) {
@@ -668,7 +713,10 @@
   function setLanguage(lang) {
     if (lang !== 'ko' && lang !== 'en') return;
     currentLang = lang;
-    try { localStorage.setItem(STORAGE_KEY, lang); } catch(e){}
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+      localStorage.setItem(STORAGE_MANUAL_KEY, 'true');
+    } catch(e){}
     if (typeof document !== 'undefined' && document.documentElement) {
       document.documentElement.lang = lang;
     }
@@ -818,6 +866,7 @@
   window.MatheduI18n = {
     getLanguage: getLanguage,
     setLanguage: setLanguage,
+    detectDefaultLanguage: detectDefaultLanguage,
     t: t,
     applyDomTranslations: applyDomTranslations,
     formatProblemMeta: formatProblemMeta

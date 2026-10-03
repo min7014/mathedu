@@ -271,8 +271,8 @@ html[lang="en"] .sym div .bilingual-en {
 </a>
 <button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
 <div class="lang-group">
-  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
-  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko', true)">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en', true)">English (Bilingual)</button>
 </div>
 </div>
 <div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
@@ -614,16 +614,23 @@ function updateExplanations(lang) {
   }
 }
 
-function setBoardLang(lang) {
+function setBoardLang(lang, isUserAction) {
   if (lang !== 'ko' && lang !== 'en') return;
   document.documentElement.lang = lang;
-  try { localStorage.setItem('mathedu_lang', lang); } catch(e){}
+  if (isUserAction) {
+    try {
+      localStorage.setItem('mathedu_lang', lang);
+      localStorage.setItem('mathedu_lang_manual', 'true');
+    } catch(e){}
+  }
   document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
     if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
     else b.classList.remove('active');
   });
   if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
-    MatheduI18n.setLanguage(lang);
+    if (isUserAction) {
+      MatheduI18n.setLanguage(lang);
+    }
   }
   updateExplanations(lang);
 }
@@ -632,10 +639,36 @@ function setBoardLang(lang) {
   var saved = 'ko';
   try {
     var p = new URLSearchParams(window.location.search).get('lang');
-    if (p === 'en' || p === 'ko') saved = p;
-    else saved = localStorage.getItem('mathedu_lang') || 'ko';
-  } catch(e){}
-  setBoardLang(saved);
+    if (p === 'en' || p === 'ko') {
+      saved = p;
+      try {
+        localStorage.setItem('mathedu_lang', p);
+        localStorage.setItem('mathedu_lang_manual', 'true');
+      } catch(e){}
+    } else {
+      var manual = localStorage.getItem('mathedu_lang_manual') === 'true';
+      var stored = localStorage.getItem('mathedu_lang');
+      if (manual && (stored === 'en' || stored === 'ko')) {
+        saved = stored;
+      } else if (window.MatheduI18n && typeof MatheduI18n.getLanguage === 'function') {
+        saved = MatheduI18n.getLanguage();
+      } else {
+        var tz = '';
+        try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
+        if (tz === 'Asia/Seoul' || tz === 'ROK' || tz === 'Asia/Pyongyang') {
+          saved = 'ko';
+        } else if (tz) {
+          saved = 'en';
+        } else {
+          var l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+          saved = (l.toLowerCase().indexOf('ko') === 0) ? 'ko' : 'en';
+        }
+      }
+    }
+  } catch(e){
+    saved = 'ko';
+  }
+  setBoardLang(saved, false);
 })();
 </script>
 </body></html>
