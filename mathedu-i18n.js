@@ -1,6 +1,6 @@
 /**
  * mathedu-i18n.js
- * min7014 mathedu · Global Internationalization (i18n) Engine
+ * mathedu · Global Internationalization (i18n) Engine
  * Supports Korean (ko) and English (en) with zero-latency instant switching.
  */
 (function(window) {
@@ -58,7 +58,7 @@
         master: "수학의 거장"
       },
       todayGgb: {
-        tag: "💡 오늘의 추천 동적 기하 (min7014 수학자료실)",
+        tag: "💡 오늘의 추천 동적 기하 (수학자료실)",
         btnNext: "다른 추천",
         btnApplet: "🎮 GeoGebra로 조작하기 ➔",
         btnPdf: "📄 원리 증명 PDF",
@@ -170,10 +170,10 @@
       },
       footer: {
         brandDesc: "mathedu · 단계별 인터랙티브 수학교육 플랫폼",
-        collabDesc: "min7014의 3,400+ 수학자료실과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평",
+        collabDesc: "3,400+ 수학자료실과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평",
         terms: "이용약관",
         privacy: "개인정보처리방침",
-        home: "min7014 홈",
+        home: "수학자료실 홈",
         github: "GitHub 저장소"
       },
       meta: {
@@ -315,7 +315,7 @@
         allQuizzes: "📚 All Quizzes",
         offlineVault: "📦 Offline Archive",
         offlineVaultTitle: "Download standalone quizzes that run without internet",
-        minExplorer: "🌐 min7014 Geometry Lab",
+        minExplorer: "🌐 Geometry Lab",
         myBadges: "🏆 My Badges",
         createQuiz: "✨ Create Quiz",
         membersOnly: "Members",
