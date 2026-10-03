@@ -1,5 +1,5 @@
 /**
- * mathedu-room.js — 수학 mathedu 교사-학생 수업 연동 & 비회원 식별·학습 기록 모듈 (v3.0)
+ * mathedu-room.js — 수학 mathedu 교사-학생 수업 연동 & 비회원 식별·학습 기록 모듈 (v3.1 Bilingual)
  * 
  * 1. 학생/비회원:
  *    - ?room=ROOM_ID 링크 접속 시 자동 학급 수업 참여.
@@ -11,6 +11,7 @@
  *    - 각 문제 화면(시작 모달, 상단 배너, 플로팅 버튼, 상단바)에서
  *      클릭 한 번으로 3초 만에 수업 코드, 학생용 링크, 칠판 빔프로젝터용 대형 QR 발급.
  *    - 문제 출제 및 수업 개설은 인증된 회원만 가능하도록 권한 보호.
+ * 3. 한국어(KO) / 영어(EN) 완전 무결 이중 언어 시스템 (Pure Bilingual Dual-Element Engine) 지원.
  */
 (function() {
   'use strict';
@@ -21,6 +22,30 @@
 
   // 퀴즈 slug 추출
   var currentSlug = window.location.pathname.split('/').pop().replace('.html', '') || 'quiz';
+
+  // 🌐 i18n 헬퍼 함수
+  function isEnMode() {
+    var l = (typeof document !== 'undefined' && document.documentElement && document.documentElement.lang) ? document.documentElement.lang : '';
+    return l.toLowerCase().startsWith('en');
+  }
+
+  function bilingual(ko, en) {
+    return '<span class="bilingual-ko">' + ko + '</span><span class="bilingual-en">' + en + '</span>';
+  }
+
+  function injectBilingualStyles() {
+    if (document.getElementById('mathedu-bilingual-engine-styles')) return;
+    var style = document.createElement('style');
+    style.id = 'mathedu-bilingual-engine-styles';
+    style.textContent = 
+      '.bilingual-en { display: none !important; }\n' +
+      'html[lang="en"] .bilingual-ko { display: none !important; }\n' +
+      'html[lang="en"] .bilingual-en { display: inline !important; color: inherit !important; font-size: inherit !important; font-weight: inherit !important; }\n' +
+      'html[lang="en"] div.bilingual-en, html[lang="en"] p.bilingual-en, html[lang="en"] section.bilingual-en, html[lang="en"] li.bilingual-en { display: block !important; }\n' +
+      'html[lang="en"] div.bilingual-en[style*="display: flex"], html[lang="en"] div.bilingual-en[style*="display:flex"] { display: flex !important; }\n';
+    (document.head || document.documentElement).appendChild(style);
+  }
+  injectBilingualStyles();
 
   function ensureAuthLoaded(callback) {
     var isBoard = window.location.pathname.indexOf('/board/') !== -1;
@@ -48,6 +73,7 @@
   }
 
   function initRoom() {
+    injectBilingualStyles();
     ensureAuthLoaded(function() {
       // 0. 선생님의 오늘의 수업 팩(?pack=slug1,slug2,...) 네비게이션 안내
       injectLessonPackBanner();
@@ -87,16 +113,18 @@
       if (h3) {
         var roomBadge = document.createElement('div');
         roomBadge.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.35);color:#7cc4ff;border-radius:20px;padding:5px 16px;font-size:0.9rem;margin-bottom:14px;font-weight:700;box-shadow:0 0 16px rgba(124,196,255,.2);animation:popIn .3s ease';
-        roomBadge.innerHTML = '🏫 <b>[' + escapeHtml(rId) + ']</b> 수업에 참여합니다';
+        roomBadge.innerHTML = bilingual('🏫 <b>[' + escapeHtml(rId) + ']</b> 수업에 참여합니다', '🏫 Joining Class <b>[' + escapeHtml(rId) + ']</b>');
         h3.parentNode.insertBefore(roomBadge, h3);
       }
       var p = trackFull.querySelector('p');
       if (p) {
-        p.textContent = '선생님과 실시간으로 연동됩니다. 이름 또는 출석번호를 입력하세요.';
+        p.innerHTML = bilingual('선생님과 실시간으로 연동됩니다. 이름 또는 출석번호를 입력하세요.', 'Connected with teacher in real time. Enter your name or student number.');
       }
       var input = document.getElementById('studentName');
       if (input) {
-        input.placeholder = '예: 15번 김철수';
+        input.setAttribute('data-ko-placeholder', '예: 15번 김철수');
+        input.setAttribute('data-en-placeholder', 'e.g. Student #15 John');
+        input.placeholder = isEnMode() ? 'e.g. Student #15 John' : '예: 15번 김철수';
       }
     }
 
@@ -104,7 +132,7 @@
     if (topbar) {
       var activeRoomBadge = document.createElement('div');
       activeRoomBadge.style.cssText = 'margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:rgba(62,220,151,.15);border:1px solid rgba(62,220,151,.35);color:#3ddc97;border-radius:10px;padding:6px 14px;font-size:0.85rem;font-weight:700;';
-      activeRoomBadge.innerHTML = '🟢 <b>' + escapeHtml(rId) + '</b> 수업 참여 중';
+      activeRoomBadge.innerHTML = bilingual('🟢 <b>' + escapeHtml(rId) + '</b> 수업 참여 중', '🟢 In Class <b>' + escapeHtml(rId) + '</b>');
       topbar.appendChild(activeRoomBadge);
     }
   }
@@ -126,28 +154,34 @@
       if (studentNameInput) studentNameInput.value = currentUser.name;
       var h3 = trackFull.querySelector('h3');
       if (h3) {
-        h3.innerHTML = '👤 <b>' + escapeHtml(currentUser.name) + '</b>님 (' + escapeHtml(currentUser.roleLabel || '회원') + ')';
+        h3.innerHTML = '👤 <b>' + escapeHtml(currentUser.name) + '</b>' + bilingual('님 (' + escapeHtml(currentUser.roleLabel || '회원') + ')', ' (' + escapeHtml(currentUser.roleLabel || 'Member') + ')');
       }
       var p = trackFull.querySelector('p');
       if (p) {
         if (prevProblem) {
-          p.innerHTML = '📌 이전에 <b>' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '단계</b>까지 풀이하셨습니다 (정답 <b>' + prevProblem.correct + '개</b>). 이어서 학습을 진행합니다.';
+          p.innerHTML = bilingual(
+            '📌 이전에 <b>' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '단계</b>까지 풀이하셨습니다 (정답 <b>' + prevProblem.correct + '개</b>). 이어서 학습을 진행합니다.',
+            '📌 Previously solved up to <b>Step ' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '</b> (<b>' + prevProblem.correct + '</b> correct). Resuming practice.'
+          );
         } else {
-          p.textContent = '인증된 회원 계정으로 풀이 기록이 안전하게 저장됩니다.';
+          p.innerHTML = bilingual('인증된 회원 계정으로 풀이 기록이 안전하게 저장됩니다.', 'Your progress is safely saved to your authenticated account.');
         }
       }
     } else if (currentGuest) {
       if (studentNameInput) studentNameInput.value = currentGuest.name;
       var h3 = trackFull.querySelector('h3');
       if (h3) {
-        h3.innerHTML = '🧑‍🎓 <b>' + escapeHtml(currentGuest.name) + '</b>님 (비회원 학습자)';
+        h3.innerHTML = '🧑‍🎓 <b>' + escapeHtml(currentGuest.name) + '</b>' + bilingual('님 (비회원 학습자)', ' (Guest Learner)');
       }
       var p = trackFull.querySelector('p');
       if (p) {
         if (prevProblem) {
-          p.innerHTML = '📌 이전에 <b>' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '단계</b>까지 풀이하셨습니다 (정답 <b>' + prevProblem.correct + '개</b>). 이어서 계속 풀어보세요!';
+          p.innerHTML = bilingual(
+            '📌 이전에 <b>' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '단계</b>까지 풀이하셨습니다 (정답 <b>' + prevProblem.correct + '개</b>). 이어서 계속 풀어보세요!',
+            '📌 Previously solved up to <b>Step ' + prevProblem.stepDone + '/' + prevProblem.totalSteps + '</b> (<b>' + prevProblem.correct + '</b> correct). Continue solving!'
+          );
         } else {
-          p.textContent = '인식된 비회원 학습자 [' + currentGuest.name + ']님으로 풀이 기록이 저장됩니다.';
+          p.innerHTML = bilingual('인식된 비회원 학습자 [' + escapeHtml(currentGuest.name) + ']님으로 풀이 기록이 저장됩니다.', 'Progress saved for recognized guest learner [' + escapeHtml(currentGuest.name) + '].');
         }
       }
     } else {
@@ -156,7 +190,9 @@
         var pinInput = document.createElement('input');
         pinInput.type = 'password';
         pinInput.id = 'studentPin';
-        pinInput.placeholder = '간편비번 4자리 (선택)';
+        pinInput.setAttribute('data-ko-placeholder', '간편비번 4자리 (선택)');
+        pinInput.setAttribute('data-en-placeholder', '4-digit PIN (optional)');
+        pinInput.placeholder = isEnMode() ? '4-digit PIN (optional)' : '간편비번 4자리 (선택)';
         pinInput.maxLength = 12;
         pinInput.style.cssText = 'background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 14px;font-size:1.05rem;max-width:170px;text-align:center;outline:none;';
         pinInput.autocomplete = 'current-password';
@@ -175,7 +211,10 @@
 
         var tipDiv = document.createElement('div');
         tipDiv.style.cssText = 'font-size:0.83rem;color:#7cc4ff;margin-top:12px;line-height:1.5;max-width:460px;text-align:center;word-break:keep-all';
-        tipDiv.innerHTML = '💡 <b>비회원 안내:</b> [이름]과 [간편 비밀번호]를 넣으시면 나중에 같은 문제에 오더라도 <b>동일 학습자로 자동 인식</b>되어 이전 풀이를 복원하고 <b>[내가 푼 문제]</b>를 모아볼 수 있습니다. (비번 미입력 시 익명 풀이)';
+        tipDiv.innerHTML = bilingual(
+          '💡 <b>비회원 안내:</b> [이름]과 [간편 비밀번호]를 넣으시면 나중에 같은 문제에 오더라도 <b>동일 학습자로 자동 인식</b>되어 이전 풀이를 복원하고 <b>[내가 푼 문제]</b>를 모아볼 수 있습니다. (비번 미입력 시 익명 풀이)',
+          '💡 <b>Guest Notice:</b> Entering [Name] and [4-digit PIN] lets the system <b>recognize you automatically</b> when returning, restoring previous steps and tracking your <b>[Solved Problems]</b>. (Anonymous if left blank)'
+        );
         formDiv.parentNode.insertBefore(tipDiv, formDiv.nextSibling);
       }
     }
@@ -185,27 +224,28 @@
     actionRow.style.cssText = 'margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:540px;';
 
     var solvedCount = solvedList.length;
-    var guestOrMember = currentUser || currentGuest;
 
     actionRow.innerHTML = 
       '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center">' +
         '<button type="button" id="btnMyProblemsInModal" style="background:rgba(94,234,212,.15);border:1px solid rgba(94,234,212,.35);color:#5eead4;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
-          '📂 내가 푼 문제 모아보기' + (solvedCount > 0 ? ' (' + solvedCount + ')' : '') +
+          bilingual('📂 내가 푼 문제 모아보기', '📂 My Solved Problems') + (solvedCount > 0 ? ' (' + solvedCount + ')' : '') +
         '</button>' +
         (!currentUser ? 
           '<button type="button" id="btnUpgradeInModal" style="background:linear-gradient(90deg,rgba(124,196,255,.18),rgba(167,139,250,.18));border:1px solid rgba(124,196,255,.4);color:#c4b5fd;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
-            '✨ 정식 회원 전환 / 가입' +
+            bilingual('✨ 정식 회원 전환 / 가입', '✨ Upgrade to Member / Sign Up') +
           '</button>' : '') +
-        '<button type="button" id="btnDownloadOfflineInModal" style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.45);color:#38bdf8;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px" title="인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장">' +
-          '📥 오프라인 저장' +
+        '<button type="button" id="btnDownloadOfflineInModal" style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.45);color:#38bdf8;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px" ' +
+          'data-ko-title="인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장" data-en-title="Download standalone HTML that runs without internet" ' +
+          'title="' + (isEnMode() ? 'Download standalone HTML that runs without internet' : '인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장') + '">' +
+          bilingual('📥 오프라인 저장', '📥 Offline Save') +
         '</button>' +
         '<button type="button" id="btnTeacherPreviewInModal" style="background:rgba(255,255,255,.06);color:#cbd5e1;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:9px 16px;font-size:0.86rem;cursor:pointer;transition:.15s;font-weight:600">' +
-          '👀 가입 없이 문제 열람 & 자유 풀기' +
+          bilingual('👀 가입 없이 문제 열람 & 자유 풀기', '👀 Free Practice (No Signup)') +
         '</button>' +
       '</div>' +
       '<div style="margin-top:4px">' +
         '<button type="button" id="btnTeacherOpenInModal" style="background:rgba(124,196,255,.16);color:#7cc4ff;border:1px solid rgba(124,196,255,.4);border-radius:10px;padding:8px 18px;font-size:0.84rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
-          '👩‍🏫 선생님 전용: 3초 수업 개설 (QR)' +
+          bilingual('👩‍🏫 선생님 전용: 3초 수업 개설 (QR)', '👩‍🏫 Teacher Only: 3-Sec Class Launch (QR)') +
         '</button>' +
       '</div>';
 
@@ -237,7 +277,7 @@
 
     document.getElementById('btnTeacherPreviewInModal').onclick = function() {
       trackFull.remove();
-      window._studentName = '자유 학습자';
+      window._studentName = isEnMode() ? 'Guest Learner' : '자유 학습자';
       if (window.sendProgress) window.sendProgress();
     };
 
@@ -254,7 +294,7 @@
       var p = pinInput ? pinInput.value.trim() : '';
 
       if (!n) {
-        alert('이름 또는 출석번호를 입력하세요.');
+        alert(isEnMode() ? 'Please enter your name or student number.' : '이름 또는 출석번호를 입력하세요.');
         if (nameInput) nameInput.focus();
         return;
       }
@@ -331,16 +371,18 @@
 
     var pct = prev.totalSteps > 0 ? Math.round((prev.stepDone / prev.totalSteps) * 100) : 100;
     var statusText = prev.completed 
-      ? '🏆 <b>완주 완료!</b> (' + prev.stepDone + '/' + prev.totalSteps + '단계 모두 해결)'
-      : '⚡ 이전에 <b>' + prev.stepDone + '/' + prev.totalSteps + '단계 (' + pct + '%)</b>까지 풀이하셨습니다.';
+      ? bilingual('🏆 <b>완주 완료!</b> (' + prev.stepDone + '/' + prev.totalSteps + '단계 모두 해결)', '🏆 <b>Completed!</b> (All ' + prev.stepDone + '/' + prev.totalSteps + ' steps solved)')
+      : bilingual('⚡ 이전에 <b>' + prev.stepDone + '/' + prev.totalSteps + '단계 (' + pct + '%)</b>까지 풀이하셨습니다.', '⚡ Previously solved up to <b>Step ' + prev.stepDone + '/' + prev.totalSteps + ' (' + pct + '%)</b>.');
 
     banner.innerHTML = 
       '<div style="font-size:0.88rem;color:#eef2ff;display:flex;align-items:center;gap:8px">' +
         '<span>📌</span>' +
-        '<div>' + statusText + ' (정답: <b>' + prev.correct + '</b>문항)</div>' +
+        '<div>' + statusText + ' ' + bilingual('(정답: <b>' + prev.correct + '</b>문항)', '(Correct: <b>' + prev.correct + '</b>)') + '</div>' +
       '</div>' +
       '<div style="display:flex;gap:8px">' +
-        '<button type="button" onclick="MatheduAuth.showMyProblemsModal()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;border-radius:8px;padding:5px 12px;font-size:0.8rem;cursor:pointer;font-weight:700">📂 내 서재</button>' +
+        '<button type="button" onclick="MatheduAuth.showMyProblemsModal()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;border-radius:8px;padding:5px 12px;font-size:0.8rem;cursor:pointer;font-weight:700">' +
+          bilingual('📂 내 서재', '📂 My Library') +
+        '</button>' +
         '<button type="button" onclick="document.getElementById(\'problemResumeBanner\').remove()" style="background:transparent;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer">✕</button>' +
       '</div>';
 
@@ -363,14 +405,14 @@
     banner.innerHTML = 
       '<div>' +
         '<div style="font-weight:800;font-size:1rem;color:#7cc4ff;display:flex;align-items:center;gap:6px">' +
-          '👩‍🏫 이 문제로 학급 수업을 시작할 수 있습니다' +
+          bilingual('👩‍🏫 이 문제로 학급 수업을 시작할 수 있습니다', '👩‍🏫 Start a Classroom Lesson with This Problem') +
         '</div>' +
         '<div style="font-size:0.83rem;color:#aab4d4;margin-top:3px">' +
-          '회원 로그인 후 3초 만에 수업 코드를 만들고, 교실 칠판에 학생용 대형 QR코드를 띄워보세요.' +
+          bilingual('회원 로그인 후 3초 만에 수업 코드를 만들고, 교실 칠판에 학생용 대형 QR코드를 띄워보세요.', 'Generate a class session code in 3 seconds and display a projector QR code on the blackboard.') +
         '</div>' +
       '</div>' +
       '<button type="button" onclick="openClassCreatorModal(\'' + currentSlug + '\')" style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:10px;padding:10px 20px;font-size:0.9rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.35);transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
-        '🚀 이 문제로 수업 열기 (QR / 대시보드)' +
+        bilingual('🚀 이 문제로 수업 열기 (QR / 대시보드)', '🚀 Open Classroom (QR / Dashboard)') +
       '</button>';
 
     var h1 = wrap.querySelector('h1');
@@ -389,8 +431,10 @@
     var floatBtn = document.createElement('button');
     floatBtn.id = 'floatClassBtn';
     floatBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:30px;padding:12px 22px;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 20px rgba(124,196,255,.45);display:flex;align-items:center;gap:8px;transition:.2s';
-    floatBtn.innerHTML = '🚀 이 문제로 수업 열기';
-    floatBtn.title = '3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급 (회원 전용)';
+    floatBtn.innerHTML = bilingual('🚀 이 문제로 수업 열기', '🚀 Open Classroom');
+    floatBtn.setAttribute('data-ko-title', '3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급 (회원 전용)');
+    floatBtn.setAttribute('data-en-title', 'Instant class code & projector QR in 3 seconds (Teachers)');
+    floatBtn.title = isEnMode() ? floatBtn.getAttribute('data-en-title') : floatBtn.getAttribute('data-ko-title');
 
     floatBtn.onmouseover = function() { floatBtn.style.transform = 'translateY(-2px) scale(1.03)'; };
     floatBtn.onmouseout = function() { floatBtn.style.transform = 'translateY(0) scale(1)'; };
@@ -412,7 +456,8 @@
       
       function updateLibBtnText() {
         var count = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems().length : 0;
-        libBtn.innerHTML = '📂 내가 푼 문제' + (count > 0 ? ' <span style="background:rgba(124,196,255,.25);color:#7cc4ff;padding:1px 6px;border-radius:10px;font-size:0.75rem">' + count + '</span>' : '');
+        var badge = count > 0 ? ' <span style="background:rgba(124,196,255,.25);color:#7cc4ff;padding:1px 6px;border-radius:10px;font-size:0.75rem">' + count + '</span>' : '';
+        libBtn.innerHTML = bilingual('📂 내가 푼 문제' + badge, '📂 Solved' + badge);
       }
       updateLibBtnText();
       libBtn.onclick = function() {
@@ -430,8 +475,10 @@
       teacherBtn.id = 'btnTeacherTopbar';
       teacherBtn.className = 'tbtn navbtn';
       teacherBtn.style.cssText = 'background:linear-gradient(90deg,rgba(124,196,255,.2),rgba(167,139,250,.2));border:1px solid rgba(124,196,255,.4);color:#eef2ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
-      teacherBtn.innerHTML = '🚀 수업 열기 (QR)';
-      teacherBtn.title = '선생님을 위한 3초 수업 생성 및 QR 발급 (회원 전용)';
+      teacherBtn.innerHTML = bilingual('🚀 수업 열기 (QR)', '🚀 Open Class (QR)');
+      teacherBtn.setAttribute('data-ko-title', '선생님을 위한 3초 수업 생성 및 QR 발급 (회원 전용)');
+      teacherBtn.setAttribute('data-en-title', '3-second class creation & QR code for teachers (Members)');
+      teacherBtn.title = isEnMode() ? teacherBtn.getAttribute('data-en-title') : teacherBtn.getAttribute('data-ko-title');
       teacherBtn.onclick = function() {
         openClassCreatorModal(currentSlug);
       };
@@ -445,8 +492,10 @@
       offlineBtn.id = 'btnOfflineTopbar';
       offlineBtn.className = 'tbtn navbtn';
       offlineBtn.style.cssText = 'background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.4);color:#7cc4ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
-      offlineBtn.innerHTML = '📥 오프라인 저장';
-      offlineBtn.title = '인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일로 다운로드';
+      offlineBtn.innerHTML = bilingual('📥 오프라인 저장', '📥 Save Offline');
+      offlineBtn.setAttribute('data-ko-title', '인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일로 다운로드');
+      offlineBtn.setAttribute('data-en-title', 'Download standalone offline HTML file that runs without internet');
+      offlineBtn.title = isEnMode() ? offlineBtn.getAttribute('data-en-title') : offlineBtn.getAttribute('data-ko-title');
       offlineBtn.onclick = function(e) {
         if (window.downloadOfflineQuiz) {
           window.downloadOfflineQuiz(currentSlug);
@@ -464,7 +513,7 @@
       
       function updateBmBtn() {
         var isBm = (window.MatheduGame && window.MatheduGame.isBookmarked) ? window.MatheduGame.isBookmarked(currentSlug) : false;
-        bmBtn.innerHTML = isBm ? '★ 즐겨찾기됨' : '☆ 즐겨찾기';
+        bmBtn.innerHTML = isBm ? bilingual('★ 즐겨찾기됨', '★ Bookmarked') : bilingual('☆ 즐겨찾기', '☆ Bookmark');
         bmBtn.style.background = isBm ? 'rgba(253,230,138,.28)' : 'rgba(253,230,138,.12)';
         bmBtn.style.color = isBm ? '#fff' : '#fde68a';
       }
@@ -485,8 +534,10 @@
       printBtn.id = 'btnPrintWorksheetTopbar';
       printBtn.className = 'tbtn navbtn';
       printBtn.style.cssText = 'background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
-      printBtn.innerHTML = '🖨️ A4 학습지 인쇄';
-      printBtn.title = '교실 유인물 및 학생 필기 공간이 포함된 규격 A4 시험지 인쇄/PDF 저장';
+      printBtn.innerHTML = bilingual('🖨️ A4 학습지 인쇄', '🖨️ Print Worksheet');
+      printBtn.setAttribute('data-ko-title', '교실 유인물 및 학생 필기 공간이 포함된 규격 A4 시험지 인쇄/PDF 저장');
+      printBtn.setAttribute('data-en-title', 'Print standard A4 worksheet with student note area / Save PDF');
+      printBtn.title = isEnMode() ? printBtn.getAttribute('data-en-title') : printBtn.getAttribute('data-ko-title');
       printBtn.onclick = function() {
         if (window.MatheduGame && window.MatheduGame.printWorksheet) {
           window.MatheduGame.printWorksheet();
@@ -503,8 +554,10 @@
       chalkBtn.id = 'btnChalkboardModeTopbar';
       chalkBtn.className = 'tbtn navbtn';
       chalkBtn.style.cssText = 'background:rgba(94,234,212,.12);border:1px solid rgba(94,234,212,.35);color:#5eead4;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
-      chalkBtn.innerHTML = '🖥️ 칠판 모드';
-      chalkBtn.title = '교실 칠판 판서 및 빔프로젝터 투사를 위한 초대형 폰트 & 고대비 뷰';
+      chalkBtn.innerHTML = bilingual('🖥️ 칠판 모드', '🖥️ Board Mode');
+      chalkBtn.setAttribute('data-ko-title', '교실 칠판 판서 및 빔프로젝터 투사를 위한 초대형 폰트 & 고대비 뷰');
+      chalkBtn.setAttribute('data-en-title', 'High-contrast large font view for classroom chalkboard / projector');
+      chalkBtn.title = isEnMode() ? chalkBtn.getAttribute('data-en-title') : chalkBtn.getAttribute('data-ko-title');
       chalkBtn.onclick = function() {
         if (window.MatheduGame && window.MatheduGame.toggleChalkboardMode) {
           window.MatheduGame.toggleChalkboardMode();
@@ -539,8 +592,9 @@
     var dotsHtml = slugs.map(function(s, idx) {
       var isCurrent = (idx === curIdx);
       var linkUrl = s + '.html?pack=' + encodeURIComponent(packParam) + rParam;
+      var dotTitle = (idx + 1) + (isEnMode() ? ' Problem' : '번 문제');
       return (
-        '<a href="' + linkUrl + '" style="display:inline-block;width:' + (isCurrent ? '24px' : '10px') + ';height:10px;border-radius:5px;background:' + (isCurrent ? '#a78bfa' : 'rgba(255,255,255,.25)') + ';transition:.2s;text-decoration:none" title="' + (idx + 1) + '번 문제">' +
+        '<a href="' + linkUrl + '" style="display:inline-block;width:' + (isCurrent ? '24px' : '10px') + ';height:10px;border-radius:5px;background:' + (isCurrent ? '#a78bfa' : 'rgba(255,255,255,.25)') + ';transition:.2s;text-decoration:none" title="' + dotTitle + '">' +
         '</a>'
       );
     }).join('');
@@ -549,13 +603,15 @@
       '<div style="display:flex;align-items:center;gap:10px">' +
         '<span style="font-size:1.2rem">🎒</span>' +
         '<div>' +
-          '<div style="font-size:0.92rem;font-weight:800;color:#c4b5fd">오늘의 수업 팩 진행 중 (문제 ' + (curIdx + 1) + ' / ' + slugs.length + ')</div>' +
+          '<div style="font-size:0.92rem;font-weight:800;color:#c4b5fd">' +
+            bilingual('오늘의 수업 팩 진행 중 (문제 ' + (curIdx + 1) + ' / ' + slugs.length + ')', 'Lesson Pack in Progress (Problem ' + (curIdx + 1) + ' / ' + slugs.length + ')') +
+          '</div>' +
           '<div style="display:flex;gap:4px;align-items:center;margin-top:4px">' + dotsHtml + '</div>' +
         '</div>' +
       '</div>' +
       '<div style="display:flex;gap:8px;align-items:center">' +
-        (prevSlug ? ('<a href="' + prevSlug + '.html?pack=' + encodeURIComponent(packParam) + rParam + '" class="tbtn" style="padding:5px 12px;font-size:0.8rem">◀ 이전 문제</a>') : '') +
-        (nextSlug ? ('<a href="' + nextSlug + '.html?pack=' + encodeURIComponent(packParam) + rParam + '" class="tbtn" style="background:linear-gradient(90deg,#a78bfa,#7cc4ff);color:#0b1020;border:none;padding:6px 14px;font-size:0.82rem;font-weight:800">다음 문제 ▶</a>') : '<span style="font-size:0.8rem;color:#5eead4;font-weight:700">🏁 마지막 문항</span>') +
+        (prevSlug ? ('<a href="' + prevSlug + '.html?pack=' + encodeURIComponent(packParam) + rParam + '" class="tbtn" style="padding:5px 12px;font-size:0.8rem">' + bilingual('◀ 이전 문제', '◀ Previous') + '</a>') : '') +
+        (nextSlug ? ('<a href="' + nextSlug + '.html?pack=' + encodeURIComponent(packParam) + rParam + '" class="tbtn" style="background:linear-gradient(90deg,#a78bfa,#7cc4ff);color:#0b1020;border:none;padding:6px 14px;font-size:0.82rem;font-weight:800">' + bilingual('다음 문제 ▶', 'Next ▶') + '</a>') : '<span style="font-size:0.8rem;color:#5eead4;font-weight:700">' + bilingual('🏁 마지막 문항', '🏁 Final Problem') + '</span>') +
       '</div>';
 
     var topbar = wrap.querySelector('.topbar') || wrap.querySelector('.navbar');
@@ -591,7 +647,6 @@
   var _hasTriggeredCompletion = false;
 
   function patchSendProgress() {
-    var originalSendProgress = window.sendProgress;
     window.sendProgress = function() {
       var name = (window._studentName || '').trim();
       if (!name) return;
@@ -638,14 +693,14 @@
         if (done.length > _lastDoneSteps) {
           var stepDiff = done.length - _lastDoneSteps;
           _lastDoneSteps = done.length;
-          window.MatheduGame.addXP(stepDiff * 10, '디딤돌 통과');
+          window.MatheduGame.addXP(stepDiff * 10, isEnMode() ? 'Step Cleared' : '디딤돌 통과');
           window.MatheduGame.unlockBadge('first_step');
         }
 
         // 전체 완료 시 축하 폭죽(Confetti) & 출석 스트릭 & 대형 보너스
         if (done.length >= total && !_hasTriggeredCompletion) {
           _hasTriggeredCompletion = true;
-          window.MatheduGame.addXP(50, '🎉 문제 완주 축하 보너스');
+          window.MatheduGame.addXP(50, isEnMode() ? '🎉 Problem Completed Bonus' : '🎉 문제 완주 축하 보너스');
           window.MatheduGame.recordActivity();
           window.MatheduGame.unlockBadge('full_clear');
           if (correct === total) {
@@ -671,7 +726,7 @@
                   nextBtn.href = nextUrl;
                   nextBtn.className = 'btn';
                   nextBtn.style.cssText = 'display:inline-block;margin-top:14px;background:linear-gradient(90deg,#5eead4,#38bdf8);color:#0b1020;padding:12px 28px;font-size:1.05rem;font-weight:800;text-decoration:none;border-radius:12px;box-shadow:0 8px 24px rgba(94,234,212,.4);animation:matheduPopUp .3s ease';
-                  nextBtn.innerHTML = '🚀 다음 ' + (curIdx + 2) + '번 문제로 계속하기 ➔';
+                  nextBtn.innerHTML = bilingual('🚀 다음 ' + (curIdx + 2) + '번 문제로 계속하기 ➔', '🚀 Continue to Problem #' + (curIdx + 2) + ' ➔');
                   fin.appendChild(nextBtn);
                 }
               }, 600);
@@ -702,14 +757,14 @@
       if (window.MatheduAuth) {
         window.MatheduAuth.requireAuth(actionName, callback);
       } else {
-        callback({ name: '선생님', roleLabel: '교사' });
+        callback({ name: isEnMode() ? 'Teacher' : '선생님', roleLabel: isEnMode() ? 'Teacher' : '교사' });
       }
     });
   }
 
   // 교사용 수업 생성기 모달 (회원 전용)
   window.openClassCreatorModal = function(slug) {
-    ensureAuth('수업 개설 및 배포', function(currentUser) {
+    ensureAuth(isEnMode() ? 'Launch Classroom' : '수업 개설 및 배포', function(currentUser) {
       _openClassCreatorModal(slug, currentUser);
     });
   };
@@ -731,41 +786,63 @@
     modal.id = 'classCreatorModal';
     modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(10,13,26,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease';
 
-    var teacherLabel = (currentUser && currentUser.name) ? (currentUser.name + ' (' + (currentUser.roleLabel || '회원') + ')') : '인증된 교사 회원';
+    var teacherLabel = (currentUser && currentUser.name) 
+      ? (currentUser.name + ' (' + (currentUser.roleLabel || (isEnMode() ? 'Member' : '회원')) + ')') 
+      : (isEnMode() ? 'Verified Teacher Member' : '인증된 교사 회원');
 
     modal.innerHTML = 
       '<div style="background:#141833;border:1px solid rgba(124,196,255,.3);border-radius:20px;max-width:540px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.6);color:#eef2ff;font-family:system-ui,sans-serif;position:relative">' +
         '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="position:absolute;top:16px;right:18px;background:none;border:none;color:#9aa6c0;font-size:1.5rem;cursor:pointer">✕</button>' +
         '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(62,220,151,.15);color:#3ddc97;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-bottom:10px">✅ ' + escapeHtml(teacherLabel) + '</div>' +
-        '<h2 style="margin:0 0 6px;font-size:1.4rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">🚀 3초 만에 수업 개설하기</h2>' +
-        '<p style="margin:0 0 20px;color:#9aa6c0;font-size:.88rem">선택하신 문제(<b>' + escapeHtml(slug) + '</b>)로 학생들에게 배포할 수업 코드가 생성되었습니다.</p>' +
+        '<h2 style="margin:0 0 6px;font-size:1.4rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">' +
+          bilingual('🚀 3초 만에 수업 개설하기', '🚀 Launch Classroom in 3 Seconds') +
+        '</h2>' +
+        '<p style="margin:0 0 20px;color:#9aa6c0;font-size:.88rem">' +
+          bilingual('선택하신 문제(<b>' + escapeHtml(slug) + '</b>)로 학생들에게 배포할 수업 코드가 생성되었습니다.', 'Class session code generated for problem <b>' + escapeHtml(slug) + '</b>.') +
+        '</p>' +
 
         '<div style="background:#0d1020;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;margin-bottom:18px">' +
-          '<label style="display:block;font-size:.8rem;color:#7cc4ff;font-weight:700;margin-bottom:6px">수업 코드 / 방 이름 (원하는 이름으로 수정 가능)</label>' +
+          '<label style="display:block;font-size:.8rem;color:#7cc4ff;font-weight:700;margin-bottom:6px">' +
+            bilingual('수업 코드 / 방 이름 (원하는 이름으로 수정 가능)', 'Class Code / Room Name (Customizable)') +
+          '</label>' +
           '<div style="display:flex;gap:8px">' +
             '<input type="text" id="customRoomInput" value="' + defaultRoom + '" style="flex:1;background:#1a2038;border:1px solid #2e3850;border-radius:10px;padding:10px 14px;color:#fff;font-size:1.05rem;font-weight:700;text-transform:uppercase">' +
-            '<button id="btnRegenRoom" style="background:#222a3d;border:1px solid #2e3850;color:#9aa6c0;border-radius:10px;padding:0 14px;cursor:pointer;font-size:.85rem">🔄 재발급</button>' +
+            '<button id="btnRegenRoom" style="background:#222a3d;border:1px solid #2e3850;color:#9aa6c0;border-radius:10px;padding:0 14px;cursor:pointer;font-size:.85rem">' +
+              bilingual('🔄 재발급', '🔄 Regenerate') +
+            '</button>' +
           '</div>' +
         '</div>' +
 
         '<div style="display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center;background:#0d1020;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;margin-bottom:20px">' +
           '<div style="text-align:center">' +
             '<img id="modalQrImg" src="" style="width:120px;height:120px;border-radius:10px;background:#fff;padding:6px;box-sizing:border-box" alt="QR Code">' +
-            '<div style="font-size:.7rem;color:#9aa6c0;margin-top:4px">학생 스마트폰 스캔용</div>' +
+            '<div style="font-size:.7rem;color:#9aa6c0;margin-top:4px">' +
+              bilingual('학생 스마트폰 스캔용', 'Scan with smartphone camera') +
+            '</div>' +
           '</div>' +
           '<div>' +
-            '<div style="font-size:.8rem;color:#9aa6c0;margin-bottom:4px">학생 접속 링크</div>' +
+            '<div style="font-size:.8rem;color:#9aa6c0;margin-bottom:4px">' +
+              bilingual('학생 접속 링크', 'Student Join Link') +
+            '</div>' +
             '<div id="modalStudentUrlText" style="font-size:.82rem;color:#7cc4ff;word-break:break-all;background:#141833;padding:8px;border-radius:8px;border:1px solid #2e3850;margin-bottom:8px"></div>' +
             '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
-              '<button id="btnCopyStudentUrl" style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">📋 학생 링크 복사</button>' +
-              '<button id="btnProjectorMode" style="background:#222a3d;color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">🖥️ 칠판 빔프로젝터 QR</button>' +
+              '<button id="btnCopyStudentUrl" style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">' +
+                bilingual('📋 학생 링크 복사', '📋 Copy Student Link') +
+              '</button>' +
+              '<button id="btnProjectorMode" style="background:#222a3d;color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">' +
+                bilingual('🖥️ 칠판 빔프로젝터 QR', '🖥️ Projector Screen QR') +
+              '</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
 
         '<div style="display:flex;gap:10px;justify-content:flex-end">' +
-          '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:10px;padding:10px 18px;font-size:.9rem;cursor:pointer">닫기</button>' +
-          '<button id="btnGoDashboard" style="background:linear-gradient(90deg,#3ddc97,#5eead4);color:#0b1020;border:none;border-radius:10px;padding:10px 22px;font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(61,220,151,.35)">📊 실시간 모니터링 열기 ➔</button>' +
+          '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:10px;padding:10px 18px;font-size:.9rem;cursor:pointer">' +
+            bilingual('닫기', 'Close') +
+          '</button>' +
+          '<button id="btnGoDashboard" style="background:linear-gradient(90deg,#3ddc97,#5eead4);color:#0b1020;border:none;border-radius:10px;padding:10px 22px;font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(61,220,151,.35)">' +
+            bilingual('📊 실시간 모니터링 열기 ➔', '📊 Open Live Dashboard ➔') +
+          '</button>' +
         '</div>' +
       '</div>';
 
@@ -785,9 +862,9 @@
       document.getElementById('btnCopyStudentUrl').onclick = function() {
         navigator.clipboard.writeText(studentUrl).then(function() {
           var b = document.getElementById('btnCopyStudentUrl');
-          var prev = b.textContent;
-          b.textContent = '✅ 복사 완료!';
-          setTimeout(function() { b.textContent = prev; }, 1500);
+          var prev = b.innerHTML;
+          b.innerHTML = bilingual('✅ 복사 완료!', '✅ Copied!');
+          setTimeout(function() { b.innerHTML = prev; }, 1500);
         });
       };
 
@@ -817,10 +894,18 @@
     var qrBig = 'https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=' + encodeURIComponent(url);
 
     pModal.innerHTML = 
-      '<button onclick="document.getElementById(\'projectorScreenModal\').remove()" style="position:absolute;top:20px;right:24px;background:#222a3d;color:#fff;border:1px solid #2e3850;padding:8px 16px;border-radius:10px;font-size:1rem;cursor:pointer">✕ 전체화면 닫기</button>' +
-      '<div style="display:inline-block;background:rgba(124,196,255,.2);color:#7cc4ff;border:1px solid rgba(124,196,255,.4);border-radius:30px;padding:6px 20px;font-size:1.1rem;font-weight:700;margin-bottom:14px">🏫 수업 코드: ' + escapeHtml(rId) + '</div>' +
-      '<h1 style="font-size:2.4rem;margin:0 0 10px;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">스마트폰 카메라로 QR 코드를 스캔하세요!</h1>' +
-      '<p style="color:#9aa6c0;font-size:1.15rem;margin:0 0 24px">별도의 앱 설치나 회원가입 없이 즉시 문제가 열립니다.</p>' +
+      '<button onclick="document.getElementById(\'projectorScreenModal\').remove()" style="position:absolute;top:20px;right:24px;background:#222a3d;color:#fff;border:1px solid #2e3850;padding:8px 16px;border-radius:10px;font-size:1rem;cursor:pointer">' +
+        bilingual('✕ 전체화면 닫기', '✕ Close Fullscreen') +
+      '</button>' +
+      '<div style="display:inline-block;background:rgba(124,196,255,.2);color:#7cc4ff;border:1px solid rgba(124,196,255,.4);border-radius:30px;padding:6px 20px;font-size:1.1rem;font-weight:700;margin-bottom:14px">' +
+        bilingual('🏫 수업 코드: ' + escapeHtml(rId), '🏫 Class Code: ' + escapeHtml(rId)) +
+      '</div>' +
+      '<h1 style="font-size:2.4rem;margin:0 0 10px;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">' +
+        bilingual('스마트폰 카메라로 QR 코드를 스캔하세요!', 'Scan QR Code with Smartphone Camera!') +
+      '</h1>' +
+      '<p style="color:#9aa6c0;font-size:1.15rem;margin:0 0 24px">' +
+        bilingual('별도의 앱 설치나 회원가입 없이 즉시 문제가 열립니다.', 'Starts immediately without signup or app installation.') +
+      '</p>' +
       '<div style="background:#fff;padding:16px;border-radius:24px;box-shadow:0 0 60px rgba(124,196,255,.4);margin-bottom:20px">' +
         '<img src="' + qrBig + '" style="width:340px;height:340px;display:block" alt="Large QR">' +
       '</div>' +
@@ -871,7 +956,7 @@
     var btn = (window.event && window.event.target) ? window.event.target.closest('button, a') : null;
     var origText = btn ? btn.innerHTML : '';
     if (btn) {
-      btn.innerHTML = '⏳ 오프라인 다운로드 중...';
+      btn.innerHTML = bilingual('⏳ 오프라인 다운로드 중...', '⏳ Downloading offline...');
       btn.style.pointerEvents = 'none';
     }
 
@@ -897,7 +982,7 @@
       if (fetchedBlob && fetchedBlob.size > 1000) {
         triggerBlobDownload(fetchedBlob, 'mathedu_' + slug + '_offline.html');
         if (btn) {
-          btn.innerHTML = '✅ 다운로드 완료!';
+          btn.innerHTML = bilingual('✅ 다운로드 완료!', '✅ Downloaded!');
           setTimeout(function() { btn.innerHTML = origText; btn.style.pointerEvents = ''; }, 2500);
         }
         return;
@@ -950,33 +1035,45 @@
         bannerDiv.innerHTML = 
           '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px">' +
             '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.25);border:1px solid #38bdf8;color:#38bdf8;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">' +
-              '📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)' +
+              bilingual('📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)', '📦 Offline Standalone Quiz (Runs without internet)') +
             '</div>' +
             '<div style="display:flex;align-items:center;gap:8px">' +
-              '<button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit">🔄 최신 버전 확인</button>' +
+              '<button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit">' +
+                bilingual('🔄 최신 버전 확인', '🔄 Check Updates') +
+              '</button>' +
               '<span style="font-size:0.78rem;color:#94a3b8">min7014 mathedu</span>' +
             '</div>' +
           '</div>' +
           '<div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">' + escapeHtml(quizTitle) + '</div>' +
           '<div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px">' +
-            '이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>' +
-            '보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.' +
+            bilingual(
+              '이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.',
+              'This file is a <b>standalone offline interactive math quiz</b> that runs anytime in your browser without internet.<br>Clicking options grades your answer and reveals detailed visual explanations.'
+            ) +
           '</div>' +
           '<div id="matheduUpdateAlertSlot" style="display:none;margin-bottom:12px;padding:12px 16px;background:rgba(253,230,138,.14);border:1.5px solid #fde68a;border-radius:12px;color:#fde68a;font-size:0.88rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
             '<div style="display:flex;align-items:center;gap:8px">' +
               '<span style="font-size:1.1rem">🔔</span>' +
-              '<span><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>' +
+              '<span>' +
+                bilingual('<b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)', '<b>A newer update of this problem is available!</b> (Download to practice)') +
+              '</span>' +
             '</div>' +
-            '<button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">업데이트 보기 ➔</button>' +
+            '<button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">' +
+              bilingual('업데이트 보기 ➔', 'View Update ➔') +
+            '</button>' +
           '</div>' +
           '<div style="background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">' +
             '<div style="font-size:0.85rem;color:#e2e8f0;word-break:break-all">' +
-              '<span style="color:#7cc4ff;font-weight:700">🌐 온라인 원본 문제 주소:</span><br>' +
+              '<span style="color:#7cc4ff;font-weight:700">' + bilingual('🌐 온라인 원본 문제 주소:', '🌐 Online Original URL:') + '</span><br>' +
               '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700;text-decoration:underline;font-family:monospace">' + originalOnlineUrl + '</a>' +
             '</div>' +
             '<div style="display:flex;gap:8px">' +
-              '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none">🌐 온라인 원본 열기 ➔</a>' +
-              '<a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">🏛️ min7014 자료실</a>' +
+              '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none">' +
+                bilingual('🌐 온라인 원본 열기 ➔', '🌐 Open Online Original ➔') +
+              '</a>' +
+              '<a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">' +
+                bilingual('🏛️ min7014 자료실', '🏛️ min7014 Library') +
+              '</a>' +
             '</div>' +
           '</div>';
 
@@ -989,27 +1086,51 @@
         '<div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">' +
           '<div class="mathedu-update-card">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">' +
-              '<div class="mathedu-update-badge">🔔 최신 업데이트 감지</div>' +
+              '<div class="mathedu-update-badge">' + bilingual('🔔 최신 업데이트 감지', '🔔 Update Detected') + '</div>' +
               '<button class="mathedu-update-close-btn" onclick="closeUpdateModal()">✕</button>' +
             '</div>' +
-            '<h2 style="margin:0 0 8px;font-size:1.35rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">✨ 이 문제의 최신 버전이 있습니다!</h2>' +
-            '<p style="margin:0 0 16px;color:#cbd5e1;font-size:0.9rem;line-height:1.55">선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.</p>' +
+            '<h2 style="margin:0 0 8px;font-size:1.35rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">' +
+              bilingual('✨ 이 문제의 최신 버전이 있습니다!', '✨ A newer version of this problem is available!') +
+            '</h2>' +
+            '<p style="margin:0 0 16px;color:#cbd5e1;font-size:0.9rem;line-height:1.55">' +
+              bilingual(
+                '선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.',
+                'The teacher has updated explanations, improved scaffolding prompts, or added interactive stepping stones.<br>Download the new version to practice, or continue with your current version.'
+              ) +
+            '</p>' +
             '<div class="mathedu-ver-box">' +
-              '<div class="mathedu-ver-item cur"><span class="mathedu-ver-lbl">현재 내 오프라인 버전</span><b id="lblCurrentVer">-</b></div>' +
+              '<div class="mathedu-ver-item cur"><span class="mathedu-ver-lbl">' + bilingual('현재 내 오프라인 버전', 'Current Offline Version') + '</span><b id="lblCurrentVer">-</b></div>' +
               '<div style="color:#7cc4ff;font-size:1.2rem;font-weight:800">➔</div>' +
-              '<div class="mathedu-ver-item new"><span class="mathedu-ver-lbl">🚀 온라인 최신 버전</span><b id="lblLatestVer">-</b></div>' +
+              '<div class="mathedu-ver-item new"><span class="mathedu-ver-lbl">' + bilingual('🚀 온라인 최신 버전', '🚀 Latest Online Version') + '</span><b id="lblLatestVer">-</b></div>' +
             '</div>' +
             '<div class="mathedu-update-btn-row">' +
-              '<button id="btnDownloadUpdate" class="mathedu-btn-primary" onclick="downloadLatestOfflineVersion()">📥 새 버전 내려받아서 풀기 (저장)</button>' +
-              '<button class="mathedu-btn-sec" onclick="continueCurrentVersion()">📝 그냥 현재 버전으로 풀기</button>' +
-              '<a id="btnOpenOnlineLatest" href="' + originalOnlineUrl + '" target="_blank" rel="noopener" class="mathedu-btn-link">🌐 온라인 최신판 웹으로 바로 열기 ➔</a>' +
+              '<button id="btnDownloadUpdate" class="mathedu-btn-primary" onclick="downloadLatestOfflineVersion()">' +
+                bilingual('📥 새 버전 내려받아서 풀기 (저장)', '📥 Download New Version & Practice') +
+              '</button>' +
+              '<button class="mathedu-btn-sec" onclick="continueCurrentVersion()">' +
+                bilingual('📝 그냥 현재 버전으로 풀기', '📝 Continue with Current Version') +
+              '</button>' +
+              '<a id="btnOpenOnlineLatest" href="' + originalOnlineUrl + '" target="_blank" rel="noopener" class="mathedu-btn-link">' +
+                bilingual('🌐 온라인 최신판 웹으로 바로 열기 ➔', '🌐 Open Latest Web Version ➔') +
+              '</a>' +
             '</div>' +
             '<div id="updateDownloadSuccess" style="display:none;margin-top:16px;background:rgba(94,234,212,.15);border:1px solid #5eead4;border-radius:12px;padding:14px;text-align:left">' +
-              '<div style="font-weight:800;color:#5eead4;margin-bottom:4px">🎉 최신 버전 다운로드 완료!</div>' +
-              '<div style="font-size:0.86rem;color:#e2e8f0;line-height:1.5">다운로드 폴더에 최신 문제 파일이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.</div>' +
+              '<div style="font-weight:800;color:#5eead4;margin-bottom:4px">' +
+                bilingual('🎉 최신 버전 다운로드 완료!', '🎉 Latest Version Downloaded!') +
+              '</div>' +
+              '<div style="font-size:0.86rem;color:#e2e8f0;line-height:1.5">' +
+                bilingual(
+                  '다운로드 폴더에 최신 문제 파일이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.',
+                  'The latest problem file has been saved to your Downloads folder. Open the newly saved file in your browser or jump directly to the online page.'
+                ) +
+              '</div>' +
               '<div style="margin-top:12px;display:flex;gap:8px">' +
-                '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">🌐 온라인 최신판 열기</a>' +
-                '<button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">✕ 닫고 현재 화면 풀기</button>' +
+                '<a href="' + originalOnlineUrl + '" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">' +
+                  bilingual('🌐 온라인 최신판 열기', '🌐 Open Online Latest') +
+                '</a>' +
+                '<button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">' +
+                  bilingual('✕ 닫고 현재 화면 풀기', '✕ Close & Continue') +
+                '</button>' +
               '</div>' +
             '</div>' +
           '</div>' +
@@ -1041,17 +1162,17 @@
             'window.openUpdateModal=function(){var m=document.getElementById("matheduUpdateModal");if(!m)return;var c=document.getElementById("lblCurrentVer"),n=document.getElementById("lblLatestVer");if(c)c.textContent=fmt(bt);if(n)n.textContent=fmt(window._serverUpdateInfo?window._serverUpdateInfo.updated_at:new Date().toISOString());m.style.display="flex";};' +
             'window.closeUpdateModal=function(){var m=document.getElementById("matheduUpdateModal");if(m)m.style.display="none";};' +
             'window.continueCurrentVersion=function(){closeUpdateModal();try{sessionStorage.setItem("mathedu_update_dismissed_"+s,"true");}catch(e){}};' +
-            'window.downloadLatestOfflineVersion=async function(){var b=document.getElementById("btnDownloadUpdate");if(b){b.innerHTML="⏳ 최신 버전 다운로드 중...";b.style.pointerEvents="none";}' +
-            'try{var r=await fetch(du+"?_t="+Date.now());if(!r.ok)throw new Error("HTTP "+r.status);var bl=await r.blob();var u=URL.createObjectURL(bl);var a=document.createElement("a");a.href=u;a.download="mathedu_"+s+"_offline_latest.html";document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},500);if(b)b.innerHTML="✅ 새 버전 저장 완료!";var bx=document.getElementById("updateDownloadSuccess");if(bx)bx.style.display="block";}' +
-            'catch(e){alert("다운로드 실패: "+e.message);window.open(ou,"_blank");if(b){b.innerHTML="📥 다시 시도";b.style.pointerEvents="";}}};' +
-            'window.checkUpdateManual=function(){var b=document.getElementById("btnManualCheckUpdate");if(b)b.innerHTML="⏳ 확인 중...";chk(true);};' +
-            'function showUp(inf){window._serverUpdateInfo=inf;var sl=document.getElementById("matheduUpdateAlertSlot");if(sl)sl.style.display="flex";var bm=document.getElementById("btnManualCheckUpdate");if(bm){bm.innerHTML="✨ 새 버전 있음!";bm.style.background="rgba(253,230,138,.25)";bm.style.color="#fde68a";bm.style.borderColor="#fde68a";}' +
+            'window.downloadLatestOfflineVersion=async function(){var b=document.getElementById("btnDownloadUpdate");if(b){b.innerHTML="' + (isEnMode() ? '⏳ Downloading latest version...' : '⏳ 최신 버전 다운로드 중...') + '";b.style.pointerEvents="none";}' +
+            'try{var r=await fetch(du+"?_t="+Date.now());if(!r.ok)throw new Error("HTTP "+r.status);var bl=await r.blob();var u=URL.createObjectURL(bl);var a=document.createElement("a");a.href=u;a.download="mathedu_"+s+"_offline_latest.html";document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},500);if(b)b.innerHTML="' + (isEnMode() ? '✅ New version saved!' : '✅ 새 버전 저장 완료!') + '";var bx=document.getElementById("updateDownloadSuccess");if(bx)bx.style.display="block";}' +
+            'catch(e){alert("' + (isEnMode() ? 'Download failed: ' : '다운로드 실패: ') + '"+e.message);window.open(ou,"_blank");if(b){b.innerHTML="' + (isEnMode() ? '📥 Retry' : '📥 다시 시도') + '";b.style.pointerEvents="";}}};' +
+            'window.checkUpdateManual=function(){var b=document.getElementById("btnManualCheckUpdate");if(b)b.innerHTML="' + (isEnMode() ? '⏳ Checking...' : '⏳ 확인 중...') + '";chk(true);};' +
+            'function showUp(inf){window._serverUpdateInfo=inf;var sl=document.getElementById("matheduUpdateAlertSlot");if(sl)sl.style.display="flex";var bm=document.getElementById("btnManualCheckUpdate");if(bm){bm.innerHTML="' + (isEnMode() ? '✨ New version available!' : '✨ 새 버전 있음!') + '";bm.style.background="rgba(253,230,138,.25)";bm.style.color="#fde68a";bm.style.borderColor="#fde68a";}' +
             'var dis=false;try{dis=sessionStorage.getItem("mathedu_update_dismissed_"+s)==="true";}catch(e){}if(!dis)openUpdateModal();}' +
-            'function chk(man){if(!navigator.onLine){if(man)alert("현재 오프라인 상태입니다.");var b=document.getElementById("btnManualCheckUpdate");if(b)b.innerHTML="📡 오프라인";return;}' +
+            'function chk(man){if(!navigator.onLine){if(man)alert("' + (isEnMode() ? 'Currently offline.' : '현재 오프라인 상태입니다.') + '");var b=document.getElementById("btnManualCheckUpdate");if(b)b.innerHTML="' + (isEnMode() ? '📡 Offline' : '📡 오프라인') + '";return;}' +
             'fetch(vu+"?_t="+Date.now(),{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){' +
             'var it=d&&d.quizzes&&d.quizzes[s];if(it&&it.updated_at&&(new Date(it.updated_at).getTime()-new Date(bt).getTime()>60000)){showUp(it);}else{hUp(man);}}).catch(function(){' +
             'fetch(du+"?_t="+Date.now(),{method:"HEAD",cache:"no-cache"}).then(function(r){var lm=r.headers.get("Last-Modified");if(lm&&(new Date(lm).getTime()-new Date(bt).getTime()>120000)){showUp({updated_at:new Date(lm).toISOString()});}else{hUp(man);}}).catch(function(){hUp(man);});});}' +
-            'function hUp(man){var b=document.getElementById("btnManualCheckUpdate");if(b){b.innerHTML="✅ 최신 버전";b.style.color="#5eead4";b.style.borderColor="rgba(94,234,212,.4)";}if(man)alert("현재 문제 파일이 최신 버전입니다.");}' +
+            'function hUp(man){var b=document.getElementById("btnManualCheckUpdate");if(b){b.innerHTML="' + (isEnMode() ? '✅ Latest' : '✅ 최신 버전') + '";b.style.color="#5eead4";b.style.borderColor="rgba(94,234,212,.4)";}if(man)alert("' + (isEnMode() ? 'You are using the latest version.' : '현재 문제 파일이 최신 버전입니다.') + '");}' +
             'setTimeout(function(){chk(false);},1000);' +
             'window.addEventListener("online",function(){chk(false);});' +
           '})();' +
@@ -1063,22 +1184,40 @@
         docClone.body.appendChild(dummy.firstChild);
       }
 
-      var fullHtml = '<!DOCTYPE html>\n<html lang="ko">\n' + docClone.innerHTML + '\n</html>';
+      var fullHtml = '<!DOCTYPE html>\n<html lang="' + (isEnMode() ? 'en' : 'ko') + '">\n' + docClone.innerHTML + '\n</html>';
       var blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
       triggerBlobDownload(blob, 'mathedu_' + slug + '_offline.html');
 
       if (btn) {
-        btn.innerHTML = '✅ 다운로드 완료!';
+        btn.innerHTML = bilingual('✅ 다운로드 완료!', '✅ Downloaded!');
         setTimeout(function() { btn.innerHTML = origText; btn.style.pointerEvents = ''; }, 2500);
       }
     } catch(err) {
-      alert('오프라인 파일 다운로드 생성 중 오류: ' + err.message);
+      alert((isEnMode() ? 'Error generating offline download file: ' : '오프라인 파일 다운로드 생성 중 오류: ') + err.message);
       if (btn) {
         btn.innerHTML = origText;
         btn.style.pointerEvents = '';
       }
     }
   };
+
+  // 🌐 언어 변경 이벤트 리스너 (mathedu:lang-changed)
+  window.addEventListener('mathedu:lang-changed', function(e) {
+    var lang = (e && e.detail && e.detail.lang) || document.documentElement.lang || 'ko';
+    var isEn = lang.toLowerCase().startsWith('en');
+    
+    // Update placeholders
+    var inputs = document.querySelectorAll('input[data-ko-placeholder]');
+    inputs.forEach(function(inp) {
+      inp.placeholder = isEn ? (inp.getAttribute('data-en-placeholder') || '') : (inp.getAttribute('data-ko-placeholder') || '');
+    });
+
+    // Update titles
+    var titleEls = document.querySelectorAll('[data-ko-title]');
+    titleEls.forEach(function(el) {
+      el.title = isEn ? (el.getAttribute('data-en-title') || '') : (el.getAttribute('data-ko-title') || '');
+    });
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRoom);

@@ -24,24 +24,40 @@
   var WRONG_KEY = 'mathedu_wrong_answers';
   var BOOKMARKS_KEY = 'mathedu_bookmarks';
 
+  // 🌐 i18n 헬퍼 함수
+  function isEnMode() {
+    var l = (typeof document !== 'undefined' && document.documentElement && document.documentElement.lang) ? document.documentElement.lang : '';
+    return l.toLowerCase().startsWith('en');
+  }
+
+  function bilingual(ko, en) {
+    return '<span class="bilingual-ko">' + ko + '</span><span class="bilingual-en">' + en + '</span>';
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
   // 1. 레벨 테이블
   var LEVELS = [
-    { level: 1, title: '🔰 디딤돌 입문자', minXP: 0, maxXP: 99 },
-    { level: 2, title: '🌿 수식 탐험가', minXP: 100, maxXP: 299 },
-    { level: 3, title: '💡 원리 분석가', minXP: 300, maxXP: 599 },
-    { level: 4, title: '📐 기하 마스터', minXP: 600, maxXP: 999 },
-    { level: 5, title: '👑 수능 정복자', minXP: 1000, maxXP: 999999 }
+    { level: 1, title: '🔰 디딤돌 입문자', titleEn: '🔰 Scaffolding Novice', minXP: 0, maxXP: 99 },
+    { level: 2, title: '🌿 수식 탐험가', titleEn: '🌿 Formula Explorer', minXP: 100, maxXP: 299 },
+    { level: 3, title: '💡 원리 분석가', titleEn: '💡 Principle Analyst', minXP: 300, maxXP: 599 },
+    { level: 4, title: '📐 기하 마스터', titleEn: '📐 Geometry Master', minXP: 600, maxXP: 999 },
+    { level: 5, title: '👑 수능 정복자', titleEn: '👑 Exam Conqueror', minXP: 1000, maxXP: 999999 }
   ];
 
   // 2. 뱃지 마스터 정의
   var ALL_BADGES = [
-    { id: 'first_step', icon: '🔰', title: '첫 발자국', desc: '첫 번째 디딤돌 문제를 정답으로 통과함' },
-    { id: 'full_clear', icon: '🎯', title: '완전 정복', desc: '수능·모평 본문항까지 모든 단계를 완주함' },
-    { id: 'perfect_run', icon: '🛡️', title: '완벽주의자', desc: '오답 없이 한 번에 모든 단계를 클리어함' },
-    { id: 'streak_3', icon: '🔥', title: '열정의 불꽃', desc: '3일 연속으로 수학 문제를 풀이함' },
-    { id: 'streak_7', icon: '⚡', title: '수학의 달인', desc: '7일 연속 학습 스트릭을 달성함' },
-    { id: 'min7014_explorer', icon: '📐', title: '기하의 눈', desc: '민은기 선생님의 GeoGebra 증명 자료를 3회 이상 탐구함' },
-    { id: 'review_master', icon: '🔄', title: '복습의 제왕', desc: '오답노트에 기록된 문제를 다시 풀어 극복함' }
+    { id: 'first_step', icon: '🔰', title: '첫 발자국', titleEn: 'First Step', desc: '첫 번째 디딤돌 문제를 정답으로 통과함', descEn: 'Passed the first stepping stone question' },
+    { id: 'full_clear', icon: '🎯', title: '완전 정복', titleEn: 'Full Clear', desc: '수능·모평 본문항까지 모든 단계를 완주함', descEn: 'Completed all steps through the main exam problem' },
+    { id: 'perfect_run', icon: '🛡️', title: '완벽주의자', titleEn: 'Perfectionist', desc: '오답 없이 한 번에 모든 단계를 클리어함', descEn: 'Cleared all steps on the first attempt with zero mistakes' },
+    { id: 'streak_3', icon: '🔥', title: '열정의 불꽃', titleEn: 'Flame of Passion', desc: '3일 연속으로 수학 문제를 풀이함', descEn: 'Solved math problems 3 days in a row' },
+    { id: 'streak_7', icon: '⚡', title: '수학의 달인', titleEn: 'Math Master', desc: '7일 연속 학습 스트릭을 달성함', descEn: 'Maintained a 7-day daily study streak' },
+    { id: 'min7014_explorer', icon: '📐', title: '기하의 눈', titleEn: 'Eye of Geometry', desc: '민은기 선생님의 GeoGebra 증명 자료를 3회 이상 탐구함', descEn: "Explored Teacher Min's GeoGebra proofs 3+ times" },
+    { id: 'review_master', icon: '🔄', title: '복습의 제왕', titleEn: 'King of Review', desc: '오답노트에 기록된 문제를 다시 풀어 극복함', descEn: 'Conquered and solved problems from the Review Vault' }
   ];
 
   var MatheduGame = {
@@ -350,12 +366,14 @@
     showBadgeUnlockToast: function(badge) {
       var toast = document.createElement('div');
       toast.style.cssText = 'position:fixed;top:24px;right:24px;z-index:999999;background:#141833;border:1.5px solid #fde68a;border-radius:16px;padding:14px 18px;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,.6);display:flex;align-items:center;gap:12px;animation:matheduSlideIn .3s ease;font-family:system-ui,sans-serif;max-width:320px';
+      var bTitle = isEnMode() ? (badge.titleEn || badge.title) : badge.title;
+      var bDesc = isEnMode() ? (badge.descEn || badge.desc) : badge.desc;
       toast.innerHTML = 
         '<div style="font-size:2rem">' + badge.icon + '</div>' +
         '<div>' +
-          '<div style="font-size:0.75rem;color:#fde68a;font-weight:800">🎉 새로운 뱃지 획득!</div>' +
-          '<div style="font-size:0.95rem;font-weight:700">' + badge.title + '</div>' +
-          '<div style="font-size:0.78rem;color:#94a3b8">' + badge.desc + '</div>' +
+          '<div style="font-size:0.75rem;color:#fde68a;font-weight:800">' + bilingual('🎉 새로운 뱃지 획득!', '🎉 New Badge Unlocked!') + '</div>' +
+          '<div style="font-size:0.95rem;font-weight:700">' + escapeHtml(bTitle) + '</div>' +
+          '<div style="font-size:0.78rem;color:#94a3b8">' + escapeHtml(bDesc) + '</div>' +
         '</div>';
       document.body.appendChild(toast);
       MatheduGame.triggerConfetti(2000);
@@ -370,15 +388,18 @@
     showLevelUpModal: function(levelInfo) {
       var modal = document.createElement('div');
       modal.style.cssText = 'position:fixed;inset:0;z-index:9999999;background:rgba(10,13,26,.85);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:16px;animation:matheduFadeIn .2s ease;font-family:system-ui,sans-serif';
+      var lvTitle = isEnMode() ? (levelInfo.titleEn || levelInfo.title) : levelInfo.title;
       modal.innerHTML = 
         '<div style="background:#141833;border:2px solid #5eead4;border-radius:24px;max-width:440px;width:100%;padding:32px 24px;text-align:center;color:#fff;box-shadow:0 24px 60px rgba(0,0,0,.7);position:relative">' +
           '<div style="font-size:3.5rem;margin-bottom:8px">👑</div>' +
           '<div style="display:inline-block;background:rgba(94,234,212,.2);color:#5eead4;border:1px solid #5eead4;padding:4px 14px;border-radius:20px;font-size:0.8rem;font-weight:800;margin-bottom:10px">LEVEL UP!</div>' +
-          '<h2 style="font-size:1.6rem;margin:0 0 10px;background:linear-gradient(90deg,#5eead4,#7cc4ff);-webkit-background-clip:text;background-clip:text;color:transparent">' + levelInfo.title + '</h2>' +
+          '<h2 style="font-size:1.6rem;margin:0 0 10px;background:linear-gradient(90deg,#5eead4,#7cc4ff);-webkit-background-clip:text;background-clip:text;color:transparent">' + escapeHtml(lvTitle) + '</h2>' +
           '<p style="color:#cbd5e1;font-size:0.92rem;line-height:1.6;margin-bottom:24px">' +
-            '축하합니다! 수학적 원리와 디딤돌을 성실하게 정복하여 <b>레벨 ' + levelInfo.level + '</b>로 승급하셨습니다.' +
+            bilingual('축하합니다! 수학적 원리와 디딤돌을 성실하게 정복하여 <b>레벨 ' + levelInfo.level + '</b>로 승급하셨습니다.', 'Congratulations! You mastered mathematical principles and scaffolding steps to reach <b>Level ' + levelInfo.level + '</b>.') +
           '</p>' +
-          '<button onclick="this.closest(\'div\').parentElement.remove()" style="background:linear-gradient(90deg,#5eead4,#38bdf8);color:#0b1020;border:none;border-radius:12px;padding:12px 32px;font-size:1rem;font-weight:800;cursor:pointer">계속 도전하기 ➔</button>' +
+          '<button onclick="this.closest(\'div\').parentElement.remove()" style="background:linear-gradient(90deg,#5eead4,#38bdf8);color:#0b1020;border:none;border-radius:12px;padding:12px 32px;font-size:1rem;font-weight:800;cursor:pointer">' +
+            bilingual('계속 도전하기 ➔', 'Continue Practice ➔') +
+          '</button>' +
         '</div>';
       document.body.appendChild(modal);
       MatheduGame.triggerConfetti(3500);
@@ -392,6 +413,9 @@
 
       var badgesHtml = ALL_BADGES.map(function(b) {
         var isUnlocked = unlocked.indexOf(b.id) !== -1;
+        var bTitle = isEnMode() ? (b.titleEn || b.title) : b.title;
+        var bDesc = isEnMode() ? (b.descEn || b.desc) : b.desc;
+        var badgeStatus = isUnlocked ? bilingual(' <span style="font-size:0.75rem;color:#5eead4">✓ 획득</span>', ' <span style="font-size:0.75rem;color:#5eead4">✓ Unlocked</span>') : '';
         return (
           '<div style="background:' + (isUnlocked ? 'rgba(124,196,255,.12)' : 'rgba(255,255,255,.04)') + ';' +
                       'border:1px solid ' + (isUnlocked ? 'rgba(124,196,255,.4)' : 'rgba(255,255,255,.1)') + ';' +
@@ -400,9 +424,9 @@
             '<div style="font-size:2rem">' + b.icon + '</div>' +
             '<div style="flex:1">' +
               '<div style="font-size:0.95rem;font-weight:700;color:' + (isUnlocked ? '#7cc4ff' : '#94a3b8') + '">' +
-                b.title + (isUnlocked ? ' <span style="font-size:0.75rem;color:#5eead4">✓ 획득</span>' : '') +
+                escapeHtml(bTitle) + badgeStatus +
               '</div>' +
-              '<div style="font-size:0.78rem;color:#aab4d4;margin-top:2px">' + b.desc + '</div>' +
+              '<div style="font-size:0.78rem;color:#aab4d4;margin-top:2px">' + escapeHtml(bDesc) + '</div>' +
             '</div>' +
           '</div>'
         );
@@ -410,6 +434,7 @@
 
       var lv = MatheduGame.getLevelInfo();
       var streak = MatheduGame.getStreak();
+      var lvTitle = isEnMode() ? (lv.titleEn || lv.title) : lv.title;
 
       modal.innerHTML = 
         '<div style="background:#141833;border:1.5px solid rgba(124,196,255,.35);border-radius:22px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;padding:26px;color:#fff;box-shadow:0 24px 60px rgba(0,0,0,.7);position:relative">' +
@@ -417,8 +442,15 @@
           '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">' +
             '<span style="font-size:1.8rem">🏆</span>' +
             '<div>' +
-              '<h2 style="font-size:1.35rem;margin:0;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">나의 수학 업적 & 명예의 전당</h2>' +
-              '<div style="font-size:0.82rem;color:#94a3b8;margin-top:2px">현재 레벨: <b>' + lv.title + '</b> (총 <b>' + lv.currentXP + ' XP</b>) · 연속 출석: <b>' + streak.count + '일</b></div>' +
+              '<h2 style="font-size:1.35rem;margin:0;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">' +
+                bilingual('나의 수학 업적 & 명예의 전당', 'My Math Badges & Hall of Fame') +
+              '</h2>' +
+              '<div style="font-size:0.82rem;color:#94a3b8;margin-top:2px">' +
+                bilingual(
+                  '현재 레벨: <b>' + escapeHtml(lv.title) + '</b> (총 <b>' + lv.currentXP + ' XP</b>) · 연속 출석: <b>' + streak.count + '일</b>',
+                  'Current Level: <b>' + escapeHtml(lvTitle) + '</b> (Total <b>' + lv.currentXP + ' XP</b>) · Streak: <b>' + streak.count + ' days</b>'
+                ) +
+              '</div>' +
             '</div>' +
           '</div>' +
           '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:16px">' +
@@ -465,7 +497,7 @@
         noteBox.id = 'worksheetNoteBox';
         noteBox.className = 'worksheet-notes-box';
         noteBox.style.display = 'none';
-        noteBox.innerHTML = '✏️ <b>[학생 풀이 및 증명 필기 공간]</b>';
+        noteBox.innerHTML = bilingual('✏️ <b>[학생 풀이 및 증명 필기 공간]</b>', '✏️ <b>[Student Scratch & Proof Work Area]</b>');
         origCard.parentNode.insertBefore(noteBox, origCard.nextSibling);
       }
 
@@ -477,7 +509,7 @@
       var isChalk = document.body.classList.toggle('mathedu-chalkboard-mode');
       var btn = document.getElementById('btnChalkboardModeTopbar');
       if (btn) {
-        btn.innerHTML = isChalk ? '🖥️ 일반 화면' : '🖥️ 칠판 모드';
+        btn.innerHTML = isChalk ? bilingual('🖥️ 일반 화면', '🖥️ Normal View') : bilingual('🖥️ 칠판 모드', '🖥️ Board Mode');
       }
 
       var styleId = 'matheduChalkboardStyle';
