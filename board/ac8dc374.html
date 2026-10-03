@@ -1,6 +1,19 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2027학년도 9월 모의평가 수학 21번 · 삼차함수와 절댓값 미분가능성 · min7014 mathedu</title>
+<meta name="description" content="2027학년도 9월 모의평가 수학 21번 · 삼차함수와 절댓값 미분가능성 심층 분석. 초·중학생도 풀 수 있는 0~7단계 인터랙티브 디딤돌 퀴즈 & 민은기 선생님의 GeoGebra 시각적 증명 연계">
+<meta name="keywords" content="2027학년도 9월 모평 수학 21번, 삼차함수, 절댓값 미분가능성, 좌우미분계수, 수능 수학, min7014, 민은기, GeoGebra, Scaffolding Math">
+<meta name="author" content="민은기 (Min Eun-gi)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2027학년도 9월 모의평가 수학 21번 · 삼차함수와 절댓값 미분가능성 | min7014 mathedu">
+<meta property="og:description" content="0~7단계 인터랙티브 디딤돌 빌드업 퀴즈 & 민은기 선생님의 GeoGebra 동적 기하 시각적 증명 연계 (100% 무료, 무가입 즉시 풀이)">
+<meta property="og:url" content="https://min7014.github.io/mathedu/board/ac8dc374.html">
+<meta property="og:image" content="https://min7014.github.io/mathedu/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2027학년도 9월 모의평가 수학 21번 · 삼차함수와 절댓값 미분가능성 | min7014 mathedu">
+<meta name="twitter:description" content="0~7단계 인터랙티브 디딤돌 빌드업 퀴즈 & 민은기 선생님의 GeoGebra 동적 기하 시각적 증명 연계">
+<meta name="twitter:image" content="https://min7014.github.io/mathedu/assets/og-image.png">
+<link rel="canonical" href="https://min7014.github.io/mathedu/board/ac8dc374.html">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <style>
 :root{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
@@ -213,14 +226,14 @@ window.toggleMinGgb = function(btn, ggbUrl) {
   if (wrap.classList.contains('active')) {
     wrap.classList.remove('active');
     wrap.innerHTML = '';
-    btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    btn.innerHTML = '<span class="bilingual-ko">📐 GeoGebra 조작 ▾</span><span class="bilingual-en">📐 Open GeoGebra ▾</span>';
   } else {
     var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
     var id = m ? m[1] : '';
     var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
     wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
     wrap.classList.add('active');
-    btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    btn.innerHTML = '<span class="bilingual-ko">📐 GeoGebra 조작 닫기 ▴</span><span class="bilingual-en">📐 Close GeoGebra ▴</span>';
   }
 };
 </script>
@@ -1607,8 +1620,7 @@ qs.forEach(q=>{
       if(exp) exp.classList.add('show');
       var toggleBtn = q.querySelector('.exp-toggle-btn');
       if(toggleBtn) {
-        var isEn = (document.documentElement.lang === 'en');
-        toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기';
+        toggleBtn.innerHTML = '<span class="bilingual-ko">💡 해설 닫기</span><span class="bilingual-en">💡 Close Explanation</span>';
       }
       document.getElementById('pts').textContent=pts;
       var total = document.querySelectorAll('.q').length;
@@ -1645,11 +1657,14 @@ function sendProgress(){
 
 function copyLink(){
   const b=document.getElementById('copyBtn');
-  const t=b.textContent;
+  const origHtml = b.innerHTML;
+  const isEn = (document.documentElement.lang === 'en');
   navigator.clipboard.writeText(location.href).then(()=>{
-    b.textContent='✅ 복사됨';
-    setTimeout(()=>b.textContent=t,1500);
-  }).catch(()=>{prompt('아래 링크를 복사하세요',location.href);});
+    b.innerHTML = '<span class="bilingual-ko">✅ 복사됨</span><span class="bilingual-en">✅ Copied!</span>';
+    setTimeout(()=>{ b.innerHTML = origHtml; }, 1500);
+  }).catch(()=>{
+    prompt(isEn ? 'Copy link below:' : '아래 링크를 복사하세요:', location.href);
+  });
 }
 
 function toggleReport(el){
