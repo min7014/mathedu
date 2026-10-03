@@ -267,7 +267,7 @@ html[lang="en"] .sym div .bilingual-en {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270922.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270922">
-<meta name="mathedu-offline-build-time" content="2026-10-03T00:24:06.961562+00:00">
+<meta name="mathedu-offline-build-time" content="2026-10-03T00:42:35.640937+00:00">
 <meta name="mathedu-offline-hash" content="74105f40">
 <meta name="mathedu-version-label" content="v2026.10.03">
 
@@ -277,41 +277,56 @@ html[lang="en"] .sym div .bilingual-en {
 <div class="mathedu-offline-banner" style="background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(129,140,248,.18));border:2px solid #38bdf8;border-radius:16px;padding:18px 22px;margin:16px 0 24px;box-shadow:0 8px 30px rgba(0,0,0,.45);color:#fff;font-family:system-ui,sans-serif">
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px">
     <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.25);border:1px solid #38bdf8;color:#38bdf8;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">
-      📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)
+      <span class="bilingual-ko">📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)</span>
+      <span class="bilingual-en">📦 Standalone Offline Quiz (No Internet Required)</span>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
-      <button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:.15s">🔄 최신 버전 확인</button>
+      <button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:.15s">
+        <span class="bilingual-ko">🔄 최신 버전 확인</span>
+        <span class="bilingual-en">🔄 Check for Updates</span>
+      </button>
       <span style="font-size:0.78rem;color:#94a3b8">min7014 mathedu</span>
     </div>
   </div>
   <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">[2027학년도 9월 고3 22번] 지수·로그함수와 직사각형의 기하학적 성질📘 [September 2027 High School 3rd Class No. 22] Exponential/logarithmic functions and geometric properties of rectangles</div>
   <div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px">
-    이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
-    보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.
+    <span class="bilingual-ko">이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
+    보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.</span>
+    <span class="bilingual-en">This file is a <b>standalone offline interactive math quiz</b> runnable in any browser without internet.<br>
+    Selecting an option reveals instant scoring and detailed step-by-step explanations.</span>
   </div>
 
   <!-- 🔔 업데이트 감지 시 표시되는 인라인 알림 바 -->
   <div id="matheduUpdateAlertSlot" style="display:none;margin-bottom:12px;padding:12px 16px;background:rgba(253,230,138,.14);border:1.5px solid #fde68a;border-radius:12px;color:#fde68a;font-size:0.88rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
     <div style="display:flex;align-items:center;gap:8px">
       <span style="font-size:1.1rem">🔔</span>
-      <span><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>
+      <span class="bilingual-ko"><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>
+      <span class="bilingual-en"><b>An update for this quiz is available!</b> (Download and save latest version)</span>
     </div>
-    <button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">업데이트 보기 ➔</button>
+    <button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">
+      <span class="bilingual-ko">업데이트 보기 ➔</span>
+      <span class="bilingual-en">View Update ➔</span>
+    </button>
   </div>
 
   <div style="background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
     <div style="font-size:0.85rem;color:#e2e8f0;word-break:break-all">
-      <span style="color:#7cc4ff;font-weight:700">🌐 온라인 원본 문제 주소:</span><br>
+      <span style="color:#7cc4ff;font-weight:700">
+        <span class="bilingual-ko">🌐 온라인 원본 문제 주소:</span>
+        <span class="bilingual-en">🌐 Online Problem URL:</span>
+      </span><br>
       <a href="https://min7014.github.io/mathedu/board/c270922.html" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700;text-decoration:underline;font-family:monospace">
         https://min7014.github.io/mathedu/board/c270922.html
       </a>
     </div>
     <div style="display:flex;gap:8px">
       <a href="https://min7014.github.io/mathedu/board/c270922.html" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
-        🌐 온라인 원본 열기 ➔
+        <span class="bilingual-ko">🌐 온라인 원본 열기 ➔</span>
+        <span class="bilingual-en">🌐 Open Online ➔</span>
       </a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">
-        🏛️ min7014 자료실
+        <span class="bilingual-ko">🏛️ min7014 자료실</span>
+        <span class="bilingual-en">🏛️ min7014 Archive</span>
       </a>
     </div>
   </div>
@@ -691,25 +706,28 @@ function setBoardLang(lang) {
 <div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">
   <div class="mathedu-update-card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div class="mathedu-update-badge">🔔 최신 업데이트 감지</div>
+      <div class="mathedu-update-badge"><span class="bilingual-ko">🔔 최신 업데이트 감지</span><span class="bilingual-en">🔔 Update Detected</span></div>
       <button class="mathedu-update-close-btn" onclick="closeUpdateModal()">✕</button>
     </div>
     <h2 style="margin:0 0 8px;font-size:1.35rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">
-      ✨ 이 문제의 최신 버전이 있습니다!
+      <span class="bilingual-ko">✨ 이 문제의 최신 버전이 있습니다!</span>
+      <span class="bilingual-en">✨ An updated version of this quiz is available!</span>
     </h2>
     <p style="margin:0 0 16px;color:#cbd5e1;font-size:0.9rem;line-height:1.55">
-      선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>
-      새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.
+      <span class="bilingual-ko">선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>
+      새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.</span>
+      <span class="bilingual-en">New explanations, improvements, or interactive scaffolding steps have been updated.<br>
+      You can download and save the latest version, or continue with the current version.</span>
     </p>
 
     <div class="mathedu-ver-box">
       <div class="mathedu-ver-item cur">
-        <span class="mathedu-ver-lbl">현재 내 오프라인 버전</span>
+        <span class="mathedu-ver-lbl"><span class="bilingual-ko">현재 내 오프라인 버전</span><span class="bilingual-en">Current Offline Version</span></span>
         <b id="lblCurrentVer">-</b>
       </div>
       <div style="color:#7cc4ff;font-size:1.2rem;font-weight:800">➔</div>
       <div class="mathedu-ver-item new">
-        <span class="mathedu-ver-lbl">🚀 온라인 최신 버전</span>
+        <span class="mathedu-ver-lbl"><span class="bilingual-ko">🚀 온라인 최신 버전</span><span class="bilingual-en">🚀 Online Latest Version</span></span>
         <b id="lblLatestVer">-</b>
       </div>
     </div>
@@ -717,24 +735,37 @@ function setBoardLang(lang) {
     <!-- 옵션: 새 버전 다운로드 vs 그냥 현재 버전으로 풀기 -->
     <div class="mathedu-update-btn-row">
       <button id="btnDownloadUpdate" class="mathedu-btn-primary" onclick="downloadLatestOfflineVersion()">
-        📥 새 버전 내려받아서 풀기 (저장)
+        <span class="bilingual-ko">📥 새 버전 내려받아서 풀기 (저장)</span>
+        <span class="bilingual-en">📥 Download Latest Version (Save)</span>
       </button>
       <button class="mathedu-btn-sec" onclick="continueCurrentVersion()">
-        📝 그냥 현재 버전으로 풀기
+        <span class="bilingual-ko">📝 그냥 현재 버전으로 풀기</span>
+        <span class="bilingual-en">📝 Continue with Current Version</span>
       </button>
       <a id="btnOpenOnlineLatest" href="https://min7014.github.io/mathedu/board/c270922.html" target="_blank" rel="noopener" class="mathedu-btn-link">
-        🌐 온라인 최신판 웹으로 바로 열기 ➔
+        <span class="bilingual-ko">🌐 온라인 최신판 웹으로 바로 열기 ➔</span>
+        <span class="bilingual-en">🌐 Open Latest Online Web ➔</span>
       </a>
     </div>
 
     <div id="updateDownloadSuccess" style="display:none;margin-top:16px;background:rgba(94,234,212,.15);border:1px solid #5eead4;border-radius:12px;padding:14px;text-align:left">
-      <div style="font-weight:800;color:#5eead4;margin-bottom:4px">🎉 최신 버전 다운로드 완료!</div>
+      <div style="font-weight:800;color:#5eead4;margin-bottom:4px">
+        <span class="bilingual-ko">🎉 최신 버전 다운로드 완료!</span>
+        <span class="bilingual-en">🎉 Download Complete!</span>
+      </div>
       <div style="font-size:0.86rem;color:#e2e8f0;line-height:1.5">
-        다운로드 폴더에 최신 문제 파일(<code>mathedu_c270922_offline_latest.html</code>)이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.
+        <span class="bilingual-ko">다운로드 폴더에 최신 문제 파일(<code>mathedu_c270922_offline_latest.html</code>)이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.</span>
+        <span class="bilingual-en">The latest file (<code>mathedu_c270922_offline_latest.html</code>) was saved to your downloads folder. You can open it in your browser or visit the online page.</span>
       </div>
       <div style="margin-top:12px;display:flex;gap:8px">
-        <a href="https://min7014.github.io/mathedu/board/c270922.html" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">🌐 온라인 최신판 열기</a>
-        <button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">✕ 닫고 현재 화면 풀기</button>
+        <a href="https://min7014.github.io/mathedu/board/c270922.html" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">
+          <span class="bilingual-ko">🌐 온라인 최신판 열기</span>
+          <span class="bilingual-en">🌐 Open Online Latest</span>
+        </a>
+        <button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">
+          <span class="bilingual-ko">✕ 닫고 현재 화면 풀기</span>
+          <span class="bilingual-en">✕ Close &amp; Continue</span>
+        </button>
       </div>
     </div>
   </div>
@@ -800,7 +831,7 @@ function setBoardLang(lang) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270922';
-window._offlineBuildTime = '2026-10-03T00:24:06.961562+00:00';
+window._offlineBuildTime = '2026-10-03T00:42:35.640937+00:00';
 window._offlineHash = '74105f40';
 window._offlineVersion = 'v2026.10.03';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270922.html';
@@ -826,7 +857,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270922';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T00:24:06.961562+00:00';
+  var localBuildTime = window._offlineBuildTime || '2026-10-03T00:42:35.640937+00:00';
   var localHash = window._offlineHash || '74105f40';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270922.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';

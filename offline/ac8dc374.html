@@ -158,88 +158,23 @@ box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:
 .min-ggb-frame-wrap.active{display:block}
 
 /* Bilingual Dual-Display Engine */
-.bilingual-en { display: none; }
+/* Pure Bilingual Engine */
+.bilingual-en { display: none !important; }
 .bilingual-ko { display: inline; }
-div.bilingual-ko, p.bilingual-ko { display: block; }
+div.bilingual-ko, p.bilingual-ko, h1.bilingual-ko, h2.bilingual-ko, h3.bilingual-ko, h4.bilingual-ko { display: block; }
+svg text.bilingual-ko { display: inline; }
+svg text.bilingual-en { display: none !important; }
+
 html[lang="en"] .bilingual-ko { display: none !important; }
-html[lang="en"] .bilingual-en {
-  display: block;
-  margin-top: 8px;
-  color: #93c5fd;
-  font-size: 0.9em;
-  line-height: 1.6;
-  border-left: 2px solid rgba(147, 197, 253, 0.45);
-  padding-left: 12px;
-  font-weight: 400;
-}
-html[lang="en"] span.bilingual-en {
-  display: inline !important;
-  border-left: none !important;
-  padding-left: 0 !important;
-  margin-top: 0 !important;
-}
-html[lang="en"] .stem span.bilingual-en {
-  display: inline !important;
-  color: #bfdbfe;
-  font-weight: 600;
-}
-html[lang="en"] h1 .bilingual-en {
-  font-size: 1.05rem;
-  color: #bfdbfe;
-  font-weight: 600;
-  border-left: none;
-  padding-left: 0;
-  margin-top: 4px;
-}
-html[lang="en"] h2 .bilingual-en {
-  font-size: 0.92rem;
-  color: #a78bfa;
-  font-weight: 600;
-  border-left: none;
-  padding-left: 0;
-  margin-top: 4px;
-}
-html[lang="en"] .lead .bilingual-en {
-  color: #cbd5e1;
-  border-left: none;
-  padding-left: 0;
-  font-size: 0.88rem;
-}
-html[lang="en"] .stem .bilingual-en {
-  color: #bfdbfe;
-  font-weight: 500;
-  margin-top: 8px;
-}
-html[lang="en"] .orig-tag .bilingual-en {
-  display: inline;
-  margin-left: 6px;
-  font-weight: 700;
-  border: none;
-  padding: 0;
-}
-html[lang="en"] .orig-tip .bilingual-en {
-  color: #cbd5e1;
-  margin-top: 4px;
-}
-html[lang="en"] .know .bilingual-en {
-  color: #a5f3fc;
-  border-left-color: rgba(165, 243, 252, 0.5);
-}
-html[lang="en"] .sol .bilingual-en {
-  color: #cbd5e1;
-  border-left-color: rgba(167, 139, 250, 0.5);
-}
-html[lang="en"] .exp .bilingual-en {
-  color: #fef08a;
-  border-left-color: rgba(254, 240, 138, 0.5);
-}
-html[lang="en"] .sym div .bilingual-en {
-  color: #cbd5e1;
-  font-size: 0.82rem;
-  margin-top: 4px;
-  border-left: none;
-  padding-left: 0;
-}
+html[lang="en"] .bilingual-en { display: inline !important; }
+html[lang="en"] div.bilingual-en,
+html[lang="en"] p.bilingual-en,
+html[lang="en"] h1.bilingual-en,
+html[lang="en"] h2.bilingual-en,
+html[lang="en"] h3.bilingual-en,
+html[lang="en"] h4.bilingual-en { display: block !important; }
+html[lang="en"] svg text.bilingual-ko { display: none !important; }
+html[lang="en"] svg text.bilingual-en { display: inline !important; }
 .lang-group {
   display: inline-flex;
   gap: 3px;
@@ -294,8 +229,8 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/ac8dc374.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="ac8dc374">
-<meta name="mathedu-offline-build-time" content="2026-10-03T00:24:06.961562+00:00">
-<meta name="mathedu-offline-hash" content="e9b4765c">
+<meta name="mathedu-offline-build-time" content="2026-10-03T00:42:35.640937+00:00">
+<meta name="mathedu-offline-hash" content="060428bf">
 <meta name="mathedu-version-label" content="v2026.10.03">
 
 </head><body><div class="wrap">
@@ -304,41 +239,56 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <div class="mathedu-offline-banner" style="background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(129,140,248,.18));border:2px solid #38bdf8;border-radius:16px;padding:18px 22px;margin:16px 0 24px;box-shadow:0 8px 30px rgba(0,0,0,.45);color:#fff;font-family:system-ui,sans-serif">
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px">
     <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.25);border:1px solid #38bdf8;color:#38bdf8;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">
-      📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)
+      <span class="bilingual-ko">📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)</span>
+      <span class="bilingual-en">📦 Standalone Offline Quiz (No Internet Required)</span>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
-      <button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:.15s">🔄 최신 버전 확인</button>
+      <button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:.15s">
+        <span class="bilingual-ko">🔄 최신 버전 확인</span>
+        <span class="bilingual-en">🔄 Check for Updates</span>
+      </button>
       <span style="font-size:0.78rem;color:#94a3b8">min7014 mathedu</span>
     </div>
   </div>
-  <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">[2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 심층 분석📘 [2027 AY Sep Mock Exam Grade 12 #21] In-Depth Pedagogical Analysis: Cubic Function & Absolute Value Differentiability</div>
+  <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px"><span class="bilingual-ko">[2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 심층 분석</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #21] In-Depth Pedagogical Analysis: Cubic Function & Absolute Value Differentiability</span></div>
   <div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px">
-    이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
-    보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.
+    <span class="bilingual-ko">이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
+    보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.</span>
+    <span class="bilingual-en">This file is a <b>standalone offline interactive math quiz</b> runnable in any browser without internet.<br>
+    Selecting an option reveals instant scoring and detailed step-by-step explanations.</span>
   </div>
 
   <!-- 🔔 업데이트 감지 시 표시되는 인라인 알림 바 -->
   <div id="matheduUpdateAlertSlot" style="display:none;margin-bottom:12px;padding:12px 16px;background:rgba(253,230,138,.14);border:1.5px solid #fde68a;border-radius:12px;color:#fde68a;font-size:0.88rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
     <div style="display:flex;align-items:center;gap:8px">
       <span style="font-size:1.1rem">🔔</span>
-      <span><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>
+      <span class="bilingual-ko"><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>
+      <span class="bilingual-en"><b>An update for this quiz is available!</b> (Download and save latest version)</span>
     </div>
-    <button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">업데이트 보기 ➔</button>
+    <button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">
+      <span class="bilingual-ko">업데이트 보기 ➔</span>
+      <span class="bilingual-en">View Update ➔</span>
+    </button>
   </div>
 
   <div style="background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
     <div style="font-size:0.85rem;color:#e2e8f0;word-break:break-all">
-      <span style="color:#7cc4ff;font-weight:700">🌐 온라인 원본 문제 주소:</span><br>
+      <span style="color:#7cc4ff;font-weight:700">
+        <span class="bilingual-ko">🌐 온라인 원본 문제 주소:</span>
+        <span class="bilingual-en">🌐 Online Problem URL:</span>
+      </span><br>
       <a href="https://min7014.github.io/mathedu/board/ac8dc374.html" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700;text-decoration:underline;font-family:monospace">
         https://min7014.github.io/mathedu/board/ac8dc374.html
       </a>
     </div>
     <div style="display:flex;gap:8px">
       <a href="https://min7014.github.io/mathedu/board/ac8dc374.html" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
-        🌐 온라인 원본 열기 ➔
+        <span class="bilingual-ko">🌐 온라인 원본 열기 ➔</span>
+        <span class="bilingual-en">🌐 Open Online ➔</span>
       </a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">
-        🏛️ min7014 자료실
+        <span class="bilingual-ko">🏛️ min7014 자료실</span>
+        <span class="bilingual-en">🏛️ min7014 Archive</span>
       </a>
     </div>
   </div>
@@ -352,18 +302,18 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
 <div class="lang-group">
   <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko')">한국어</button>
-  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English (Bilingual)</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en')">English</button>
 </div>
 </div>
 <div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 [2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 심층 분석<span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #21] In-Depth Pedagogical Analysis: Cubic Function & Absolute Value Differentiability</span></h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
+<h1><span class="bilingual-ko">📘 [2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 심층 분석</span><span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #21] In-Depth Pedagogical Analysis: Cubic Function & Absolute Value Differentiability</span></h1>
+<p class="lead"><span class="bilingual-ko">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.</span><span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
-    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
+    <div class="orig-tag"><span class="bilingual-ko">📌 원본 문제 (오늘의 목표)</span><span class="bilingual-en">📌 Original CSAT Problem (Today's Goal)</span></div>
     <span class="orig-badge"><span class="bilingual-ko">2027학년도 9월 모의평가 수학 21번 [4점]</span><span class="bilingual-en">2027 AY Sep Mock Exam Math #21 [4 pts]</span></span>
   </div>
 
@@ -379,7 +329,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
     <!-- 우측: 원본 문항 정밀 수식 조판 & 핵심 조건 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
-        <h4>📋 원본 문항 텍스트 조판 및 조건<span class="bilingual-en">📋 Official Problem Statement & Conditions</span></h4>
+        <h4><span class="bilingual-ko">📋 원본 문항 텍스트 조판 및 조건</span><span class="bilingual-en">📋 Official Problem Statement & Conditions</span></h4>
         <p style="margin:0 0 10px">
           <span class="bilingual-ko"><b>21.</b> 최고차항의 계수가 $1$인 삼차함수 $f(x)$가 다음 조건을 만족시킬 때, $f(0)$의 최댓값과 최솟값의 곱을 구하시오. <span style="color:var(--gold);font-weight:700">[4점]</span></span>
           <span class="bilingual-en"><b>21.</b> Let $f(x)$ be a cubic polynomial with leading coefficient $1$. When $f(x)$ satisfies the following conditions, find the product of the maximum and minimum values of $f(0)$. <span style="color:var(--gold);font-weight:700">[4 pts]</span></span>
@@ -400,45 +350,61 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         </div>
       </div>
       <div class="orig-tip">
-        💡 <b>핵심 길잡이</b>: 삼차함수 $f(x)=(x-\alpha)^2(x-\beta)$에서 $g(x)$의 뾰족점($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$)과 $|P(x)|$의 V자 첨점이 만나는 경계점에서 <b>우미분계수와 좌미분계수가 같아지는 미분가능 조건($h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$)</b>을 좌우 가로 배치로 한눈에 대조하며 풀이할 수 있습니다.<span class="bilingual-en">💡 <b>Core Guide</b>: Monic cubic $f(x)=(x-\alpha)^2(x-\beta)$ requires matching one-sided derivatives $h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$ for differentiability.</span>
+        <span class="bilingual-ko">💡 <b>핵심 길잡이</b>: 삼차함수 $f(x)=(x-\alpha)^2(x-\beta)$에서 $g(x)$의 뾰족점($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$)과 $|P(x)|$의 V자 첨점이 만나는 경계점에서 <b>우미분계수와 좌미분계수가 같아지는 미분가능 조건($h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$)</b>을 좌우 가로 배치로 한눈에 대조하며 풀이할 수 있습니다.</span>
+        <span class="bilingual-en">💡 <b>Core Guide</b>: For the monic cubic $f(x)=(x-\alpha)^2(x-\beta)$, differentiability at the boundary where the peak of $g(x)$ ($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$) meets the V-shaped corner of $|P(x)|$ is established by equating one-sided derivatives: <b>$h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$</b>.</span>
       </div>
     </div>
   </div>
 
   <!-- 하단: 민은기 선생님의 시각적 증명 팁 전면 가로 확장 -->
   <div class="min-visual-tip" style="margin-top:16px">
-    💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>
-    선생님의 PDF 자료(<a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="color:#67e8f9;text-decoration:underline;font-weight:700">접선에 접근하는 할선들</a> 등)는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>
-    • <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>
-    • <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>
-    • <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>
-    • <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점</b>이 정확히 한 점에서 만나 <b>우미분계수와 좌미분계수가 같아지는 미분가능 조건($h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$)</b>을 만족시키는 데 있습니다.
-    <div class="bilingual-en">💡 <b>Visual Proof Analysis by Min Eun Gi (PDF &amp; GeoGebra Exploration)</b><br>
-    As secant line $PQ$ rotates continuously towards the limit $x \to a$, it coincides with the tangent line. The differentiability condition $h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$ ensures smooth differentiability across the corner. Explore the interactive materials below.</div>
+    <div class="bilingual-ko">
+      💡 <b>민은기 선생님의 프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>
+      선생님의 PDF 자료(<a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="color:#67e8f9;text-decoration:underline;font-weight:700">접선에 접근하는 할선들</a> 등)는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>
+      • <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>
+      • <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>
+      • <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>
+      • <b>[기하학적 통찰]</b> 본 문제의 핵심은 $g(x)$가 만드는 <b>위로 뾰족한 첨점($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$)</b>과 $|P(x)|$가 만드는 <b>아래로 뾰족한 V자 첨점</b>이 정확히 한 점에서 만나 <b>우미분계수와 좌미분계수가 같아지는 미분가능 조건($h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$)</b>을 만족시키는 데 있습니다.
+    </div>
+    <div class="bilingual-en">
+      💡 <b>Visual Proof Analysis by Min Eun Gi (PDF &amp; GeoGebra Exploration)</b><br>
+      Teacher Min Eun Gi's PDF materials (<a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="color:#67e8f9;text-decoration:underline;font-weight:700">Secant lines approaching the tangent line</a>, etc.) vividly demonstrate the emergence of the derivative limit frame-by-frame with each page turn.<br>
+      • <b>[Initial State]</b> Secant line $PQ$ connects fixed point $P(a, f(a))$ and moving point $Q(x, f(x))$ on $y=f(x)$ with average rate of change $\frac{f(x)-f(a)}{x-a}$.<br>
+      • <b>[Continuous Frame Progression]</b> As $x \to a$, moving point $Q$ slides along the curve and the green secant rotates continuously.<br>
+      • <b>[Convergence at Limit]</b> At the final frame, the green secant coincides with the red tangent line, reaching instantaneous rate of change $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$.<br>
+      • <b>[Geometric Insight]</b> The core of this problem is that the upward corner of $g(x)$ ($g'(\beta^+) - g'(\beta^-) = -8f'(\beta)$) and the downward V-corner of $|P(x)|$ cancel out at $x = \beta$, satisfying the differentiability condition $h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$.
+    </div>
 
     <!-- 🔗 위 시각적 증명 분석과 직결된 민은기 선생님의 핵심 자료 링크 -->
     <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px">
       <div style="font-weight:700;color:#93c5fd;font-size:.85rem;display:flex;align-items:center;gap:6px">
-        <span>🔗 위 시각적 증명과 직결된 민은기 선생님 핵심 자료:</span>
+        <span class="bilingual-ko">🔗 위 시각적 증명과 직결된 민은기 선생님 핵심 자료:</span>
+        <span class="bilingual-en">🔗 Min Eun Gi's Core Visual Proof Resources for this problem:</span>
       </div>
 
       <!-- 자료 1: 접선에 접근하는 할선들 (초록색 할선 -> 빨간색 접선 수렴 직접 조작) -->
       <div class="min-tip-item" style="background:rgba(15,23,42,.55);border:1px solid rgba(56,189,248,.35);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
           <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="font-weight:700;color:#38bdf8;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px">
-            <span style="font-size:1rem">📐</span> 접선에 접근하는 할선들 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Secant lines approaching the tangent line)</span>
+            <span style="font-size:1rem">📐</span>
+            <span class="bilingual-ko">접선에 접근하는 할선들 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Secant lines approaching the tangent line)</span></span>
+            <span class="bilingual-en">Secant Lines Approaching the Tangent Line</span>
           </a>
-          <span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">🌟 위 설명 직결 핵심자료</span>
+          <span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">
+            <span class="bilingual-ko">🌟 위 설명 직결 핵심자료</span>
+            <span class="bilingual-en">🌟 Core Visual Proof</span>
+          </span>
         </div>
         <div style="font-size:.8rem;color:#cbd5e1;line-height:1.5">
-          곡선 위의 고정점 $P$와 동점 $Q$를 잇는 초록색 할선이 $Q \to P$로 이동하며 빨간색 접선과 일치하는 미분계수의 기하학적 수렴 과정을 인터랙티브 앱렛과 단계별 PDF로 직접 확인할 수 있습니다.
+          <span class="bilingual-ko">곡선 위의 고정점 $P$와 동점 $Q$를 잇는 초록색 할선이 $Q \to P$로 이동하며 빨간색 접선과 일치하는 미분계수의 기하학적 수렴 과정을 인터랙티브 앱렛과 단계별 PDF로 직접 확인할 수 있습니다.</span>
+          <span class="bilingual-en">Directly experience the geometric convergence where green secant $PQ$ rotates into the red tangent line as $Q \to P$ via interactive applets and step-by-step flipbook PDF.</span>
         </div>
         <div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-          <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button>
+          <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="GeoGebra"><span class="bilingual-ko">📐 GeoGebra 조작 ▾</span><span class="bilingual-en">📐 GeoGebra ▾</span></button>
           <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a>
-          <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a>
-          <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a>
-          <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="PDF"><span class="bilingual-ko">📄 단계별 증명 PDF</span><span class="bilingual-en">📄 Proof PDF</span></a>
+          <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="YouTube"><span class="bilingual-ko">🎥 해설 강의</span><span class="bilingual-en">🎥 Video</span></a>
+          <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail"><span class="bilingual-ko">웹 상세 탐구 ➔</span><span class="bilingual-en">Details ➔</span></a>
         </div>
         <div class="min-ggb-frame-wrap"></div>
       </div>
@@ -447,28 +413,36 @@ window.toggleMinGgb = function(btn, ggbUrl) {
       <div class="min-tip-item" style="background:rgba(15,23,42,.55);border:1px solid rgba(168,85,247,.35);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
           <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" style="font-weight:700;color:#c084fc;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px">
-            <span style="font-size:1rem">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Tangents and Normals at a Point)</span>
+            <span style="font-size:1rem">📌</span>
+            <span class="bilingual-ko">미분가능 함수 상의 한 점에서 접선과 법선 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Tangents and Normals at a Point)</span></span>
+            <span class="bilingual-en">Tangents and Normals at a Point on a Differentiable Function</span>
           </a>
-          <span style="font-size:.72rem;background:rgba(168,85,247,.18);color:#d8b4fe;padding:2px 8px;border-radius:6px;border:1px solid rgba(168,85,247,.35)">미분계수와 매끄러움</span>
+          <span style="font-size:.72rem;background:rgba(168,85,247,.18);color:#d8b4fe;padding:2px 8px;border-radius:6px;border:1px solid rgba(168,85,247,.35)">
+            <span class="bilingual-ko">미분계수와 매끄러움</span>
+            <span class="bilingual-en">Smoothness & Derivatives</span>
+          </span>
         </div>
         <div style="font-size:.8rem;color:#cbd5e1;line-height:1.5">
-          미분계수의 좌우 극한이 일치하여 뾰족점(첨점) 없이 매끄러운 단일 접선이 결정되는 기하학적 조건과 원리를 AlgeoMath와 단계별 PDF로 증명합니다.
+          <span class="bilingual-ko">미분계수의 좌우 극한이 일치하여 뾰족점(첨점) 없이 매끄러운 단일 접선이 결정되는 기하학적 조건과 원리를 AlgeoMath와 단계별 PDF로 증명합니다.</span>
+          <span class="bilingual-en">Explore the geometric principles where matching one-sided derivative limits guarantee a unique tangent line without corners via AlgeoMath and step-by-step PDF.</span>
         </div>
         <div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-          <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath 실습</a>
-          <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a>
-          <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a>
-          <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath"><span class="bilingual-ko">🔢 AlgeoMath 실습</span><span class="bilingual-en">🔢 AlgeoMath</span></a>
+          <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="PDF"><span class="bilingual-ko">📄 단계별 증명 PDF</span><span class="bilingual-en">📄 Proof PDF</span></a>
+          <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="YouTube"><span class="bilingual-ko">🎥 해설 강의</span><span class="bilingual-en">🎥 Video</span></a>
+          <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail"><span class="bilingual-ko">웹 상세 탐구 ➔</span><span class="bilingual-en">Details ➔</span></a>
         </div>
       </div>
 
       <!-- 하단 안내 및 이동 버튼 -->
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px">
         <a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
-          <span>👇</span> 하단 연계 심층 탐구 자료실 전체(4개 주제 &amp; 도함수 앱렛) 보기 ➔
+          <span class="bilingual-ko"><span>👇</span> 하단 연계 심층 탐구 자료실 전체(4개 주제 &amp; 도함수 앱렛) 보기 ➔</span>
+          <span class="bilingual-en"><span>👇</span> View All 4 Exploration Topics &amp; Applets Below ➔</span>
         </a>
         <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
-          <span>🌐</span> 민은기 선생님의 수학자료실 메인 (3,400+ 주제) ↗
+          <span class="bilingual-ko"><span>🌐</span> 민은기 선생님의 수학자료실 메인 (3,400+ 주제) ↗</span>
+          <span class="bilingual-en"><span>🌐</span> Min Eun Gi's Mathematics Archive (3,400+ Topics) ↗</span>
         </a>
       </div>
     </div>
@@ -476,7 +450,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 </div>
 
 <!-- 🔰 제0단계 · 수학 기호 및 기본 정리 디딤돌 (심층 상세 해설 & 시각적 기하 다이어그램) -->
-<h2>🔰 제0단계 · 수학 기호 및 기본 정리 디딤돌<span class="bilingual-en">🔰 Step 0 · In-Depth Foundational Theorems & Mathematical Notation</span></h2>
+<h2><span class="bilingual-ko">🔰 제0단계 · 수학 기호 및 기본 정리 디딤돌</span><span class="bilingual-en">🔰 Step 0 · In-Depth Foundational Theorems & Mathematical Notation</span></h2>
 
 <div class="sym" style="grid-template-columns:1fr 1fr;gap:16px;margin:16px 0">
   
@@ -491,7 +465,8 @@ window.toggleMinGgb = function(btn, ggbUrl) {
       <span class="bilingual-en">1. In-Depth Theory & Geometric Classification of Monic Cubic with Exactly 2 Real Roots</span>
     </div>
     <div class="sym-formula-box">
-      <b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta) \iff (\text{극댓값}) \times (\text{극솟값}) = 0$$</b>
+      <div class="bilingual-ko"><b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta) \iff (\text{극댓값}) \times (\text{극솟값}) = 0$$</b></div>
+      <div class="bilingual-en"><b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta) \iff (\text{Local Max}) \times (\text{Local Min}) = 0$$</b></div>
     </div>
     <div class="sym-desc">
       <span class="bilingual-ko">
@@ -558,16 +533,20 @@ window.toggleMinGgb = function(btn, ggbUrl) {
               <!-- alpha (double root) -->
               <circle cx="90" cy="100" r="4.5" fill="#5eead4" stroke="#0f172a" stroke-width="1.5" />
               <text x="86" y="90" fill="#5eead4" font-size="11" font-weight="bold">α</text>
-              <text x="45" y="76" fill="#a7f3d0" font-size="8.5">극대 f(α)=0</text>
-              <text x="50" y="86" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (접함)</text>
+              <text class="bilingual-ko" x="45" y="76" fill="#a7f3d0" font-size="8.5">극대 f(α)=0</text>
+              <text class="bilingual-en" x="45" y="76" fill="#a7f3d0" font-size="8.5">Local Max f(α)=0</text>
+              <text class="bilingual-ko" x="50" y="86" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (접함)</text>
+              <text class="bilingual-en" x="50" y="86" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (Tangent)</text>
               <!-- Local min -->
               <circle cx="195" cy="152" r="3.5" fill="#a78bfa" />
-              <text x="175" y="165" fill="#c084fc" font-size="8.5">극솟값 m &lt; 0</text>
+              <text class="bilingual-ko" x="175" y="165" fill="#c084fc" font-size="8.5">극솟값 m &lt; 0</text>
+              <text class="bilingual-en" x="175" y="165" fill="#c084fc" font-size="8.5">Local Min m &lt; 0</text>
               <!-- beta (simple root) -->
               <circle cx="245" cy="100" r="4.5" fill="#fb7185" stroke="#0f172a" stroke-width="1.5" />
               <text x="248" y="116" fill="#fb7185" font-size="11" font-weight="bold">β</text>
               <text x="210" y="62" fill="#fca5a5" font-size="8.5" font-weight="bold">f&#39;(β) = (β-α)² &gt; 0</text>
-              <text x="235" y="130" fill="#fca5a5" font-size="8">단순실근 (상향 관통)</text>
+              <text class="bilingual-ko" x="235" y="130" fill="#fca5a5" font-size="8">단순실근 (상향 관통)</text>
+              <text class="bilingual-en" x="215" y="130" fill="#fca5a5" font-size="8">Simple Root (Crossing)</text>
               <!-- 2:1 ratio annotation -->
               <line x1="90" y1="108" x2="195" y2="108" stroke="#38bdf8" stroke-width="1" stroke-dasharray="2 2" />
               <line x1="195" y1="108" x2="245" y2="108" stroke="#f43f5e" stroke-width="1" stroke-dasharray="2 2" />
@@ -612,15 +591,19 @@ window.toggleMinGgb = function(btn, ggbUrl) {
               <circle cx="75" cy="100" r="4.5" fill="#fb7185" stroke="#0f172a" stroke-width="1.5" />
               <text x="65" y="90" fill="#fb7185" font-size="11" font-weight="bold">β</text>
               <text x="45" y="60" fill="#fca5a5" font-size="8.5" font-weight="bold">f&#39;(β) = (β-α)² &gt; 0</text>
-              <text x="42" y="118" fill="#fca5a5" font-size="8">단순실근 (상향 관통)</text>
+              <text class="bilingual-ko" x="42" y="118" fill="#fca5a5" font-size="8">단순실근 (상향 관통)</text>
+              <text class="bilingual-en" x="22" y="118" fill="#fca5a5" font-size="8">Simple Root (Crossing)</text>
               <!-- Local max -->
               <circle cx="130" cy="46" r="3.5" fill="#38bdf8" />
-              <text x="115" y="38" fill="#7dd3fc" font-size="8.5">극댓값 M &gt; 0</text>
+              <text class="bilingual-ko" x="115" y="38" fill="#7dd3fc" font-size="8.5">극댓값 M &gt; 0</text>
+              <text class="bilingual-en" x="115" y="38" fill="#7dd3fc" font-size="8.5">Local Max M &gt; 0</text>
               <!-- alpha (double root) -->
               <circle cx="215" cy="100" r="4.5" fill="#5eead4" stroke="#0f172a" stroke-width="1.5" />
               <text x="212" y="116" fill="#5eead4" font-size="11" font-weight="bold">α</text>
-              <text x="205" y="90" fill="#a7f3d0" font-size="8.5">극소 f(α)=0</text>
-              <text x="205" y="80" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (접함)</text>
+              <text class="bilingual-ko" x="205" y="90" fill="#a7f3d0" font-size="8.5">극소 f(α)=0</text>
+              <text class="bilingual-en" x="205" y="90" fill="#a7f3d0" font-size="8.5">Local Min f(α)=0</text>
+              <text class="bilingual-ko" x="205" y="80" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (접함)</text>
+              <text class="bilingual-en" x="205" y="80" fill="#a7f3d0" font-size="8">f&#39;(α)=0 (Tangent)</text>
               <!-- 1:2 ratio annotation -->
               <line x1="75" y1="108" x2="130" y2="108" stroke="#f43f5e" stroke-width="1" stroke-dasharray="2 2" />
               <line x1="130" y1="108" x2="215" y2="108" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 2" />
@@ -767,14 +750,14 @@ window.toggleMinGgb = function(btn, ggbUrl) {
       <span class="bilingual-ko">시각적 증명 대조: $g(x)$의 첨점과 $|P(x)|$의 V자 첨점이 만나 $h(x)$로 매끄럽게 합일되는 원리</span>
       <span class="bilingual-en">Visual Geometric Proof: Corner Smoothing Mechanism of $g(x) + |P(x)|$</span>
     </div>
-    <span style="font-size:.76rem;background:rgba(94,234,212,.18);color:#5eead4;border:1px solid rgba(94,234,212,.4);padding:3px 10px;border-radius:12px;font-weight:700">기하학적 완전 평활화</span>
+    <span style="font-size:.76rem;background:rgba(94,234,212,.18);color:#5eead4;border:1px solid rgba(94,234,212,.4);padding:3px 10px;border-radius:12px;font-weight:700"><span class="bilingual-ko">기하학적 완전 평활화</span><span class="bilingual-en">Geometric Smoothing</span></span>
   </div>
 
   <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:14px;margin-bottom:14px">
     
     <!-- 패널 1: g(x) 그래프 -->
     <div style="background:rgba(10,13,26,.8);border:1px solid rgba(251,113,133,.4);border-radius:12px;padding:12px;text-align:center">
-      <div style="font-size:.85rem;font-weight:700;color:#fb7185;margin-bottom:6px">① $g(x)$의 좌우 미분계수</div>
+      <div style="font-size:.85rem;font-weight:700;color:#fb7185;margin-bottom:6px"><span class="bilingual-ko">① $g(x)$의 좌우 미분계수</span><span class="bilingual-en">① One-Sided Derivatives of $g(x)$</span></div>
       <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
         <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
         <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
@@ -790,7 +773,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         <!-- tangent lines near beta -->
         <line x1="145" y1="108" x2="170" y2="90" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
         <line x1="170" y1="90" x2="195" y2="115" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
-        <text x="135" y="70" fill="#fca5a5" font-size="9" font-weight="bold">좌:+7f', 우:-f'</text>
+        <text class="bilingual-ko" x="135" y="70" fill="#fca5a5" font-size="9" font-weight="bold">좌:+7f', 우:-f'</text><text class="bilingual-en" x="125" y="70" fill="#fca5a5" font-size="9" font-weight="bold">Left:+7f', Right:-f'</text>
       </svg>
       <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
         <span class="bilingual-ko">좌미분계수 $+7f'$, 우미분계수 $-f'$<br>$\implies$ <b>좌우 불일치로 첨점</b></span>
@@ -800,13 +783,13 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 
     <!-- 패널 2: |P(x)| 그래프 -->
     <div style="background:rgba(10,13,26,.8);border:1px solid rgba(124,196,255,.4);border-radius:12px;padding:12px;text-align:center">
-      <div style="font-size:.85rem;font-weight:700;color:#7cc4ff;margin-bottom:6px">② $|P(x)|$의 좌우 미분계수</div>
+      <div style="font-size:.85rem;font-weight:700;color:#7cc4ff;margin-bottom:6px"><span class="bilingual-ko">② $|P(x)|$의 좌우 미분계수</span><span class="bilingual-en">② One-Sided Derivatives of $|P(x)|$</span></div>
       <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
         <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
         <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
         <!-- double root -->
         <circle cx="70" cy="90" r="3.5" fill="#a78bfa" />
-        <text x="55" y="105" fill="#a78bfa" font-size="10" font-weight="bold">중근</text>
+        <text class="bilingual-ko" x="55" y="105" fill="#a78bfa" font-size="10" font-weight="bold">중근</text><text class="bilingual-en" x="45" y="105" fill="#a78bfa" font-size="10" font-weight="bold">Double</text>
         <!-- beta simple root -->
         <circle cx="170" cy="90" r="4" fill="#7cc4ff" />
         <text x="166" y="105" fill="#7cc4ff" font-size="10" font-weight="bold">β</text>
@@ -814,7 +797,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         <path d="M 25 125 Q 50 90 70 90 Q 95 90 120 50 Q 145 60 170 90 L 195 50" fill="none" stroke="#7cc4ff" stroke-width="2.5" stroke-linecap="round" />
         <line x1="145" y1="65" x2="170" y2="90" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
         <line x1="170" y1="90" x2="195" y2="50" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
-        <text x="135" y="125" fill="#93c5fd" font-size="9" font-weight="bold">좌:-P', 우:+P'</text>
+        <text class="bilingual-ko" x="135" y="125" fill="#93c5fd" font-size="9" font-weight="bold">좌:-P', 우:+P'</text><text class="bilingual-en" x="125" y="125" fill="#93c5fd" font-size="9" font-weight="bold">Left:-P', Right:+P'</text>
       </svg>
       <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
         <span class="bilingual-ko">좌미분계수 $-P'$, 우미분계수 $+P'$<br>$\implies$ <b>좌우 불일치로 V자</b></span>
@@ -824,7 +807,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 
     <!-- 패널 3: h(x) 합성 그래프 -->
     <div style="background:rgba(10,13,26,.8);border:1px solid rgba(94,234,212,.4);border-radius:12px;padding:12px;text-align:center">
-      <div style="font-size:.85rem;font-weight:700;color:#5eead4;margin-bottom:6px">③ $h(x) = g(x) + |P(x)|$</div>
+      <div style="font-size:.85rem;font-weight:700;color:#5eead4;margin-bottom:6px"><span class="bilingual-ko">③ $h(x) = g(x) + |P(x)|$</span><span class="bilingual-en">③ $h(x) = g(x) + |P(x)|$</span></div>
       <svg viewBox="0 0 240 140" style="width:100%;height:auto;display:block;margin:0 auto">
         <line x1="15" y1="90" x2="225" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
         <text x="225" y="85" fill="#aab4d4" font-size="10">x</text>
@@ -835,7 +818,7 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         <!-- h(x) smooth curve: perfectly differentiable, no corner! -->
         <path d="M 20 130 Q 40 90 60 90 Q 95 90 120 75 Q 145 60 170 90 Q 190 115 215 95" fill="none" stroke="#5eead4" stroke-width="3" stroke-linecap="round" />
         <path d="M 140 90 Q 170 90 200 90" stroke="#3ddc97" stroke-width="1.5" stroke-dasharray="3 3" />
-        <text x="130" y="70" fill="#a7f3d0" font-size="9" font-weight="bold">h'(β⁺) = h'(β⁻) 일치!</text>
+        <text class="bilingual-ko" x="130" y="70" fill="#a7f3d0" font-size="9" font-weight="bold">h'(β⁺) = h'(β⁻) 일치!</text><text class="bilingual-en" x="115" y="70" fill="#a7f3d0" font-size="9" font-weight="bold">h'(β⁺) = h'(β⁻) Match!</text>
       </svg>
       <div style="font-size:.76rem;color:#cbd5e1;margin-top:4px">
         <span class="bilingual-ko"><b>우미분계수 = 좌미분계수</b><br>$\implies$ <b>실수 전체 미분가능</b></span>
@@ -853,25 +836,32 @@ window.toggleMinGgb = function(btn, ggbUrl) {
       <span class="bilingual-en">💡 <b>Curriculum-Standard Intuition (Right = Left Derivative)</b>: Differentiability requires $h'(\beta^+) = h'(\beta^-) \iff -f'(\beta) + P'(\beta) = 7f'(\beta) - P'(\beta) \iff P'(\beta) = 4f'(\beta)$.</span>
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.45);color:#38bdf8;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none">📐 접선 수렴 원리 PDF ↗</a>
-      <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" style="background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.45);color:#c084fc;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none">📈 도함수 기하 탐구 ↗</a>
+      <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.45);color:#38bdf8;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none"><span class="bilingual-ko">📐 접선 수렴 원리 PDF ↗</span><span class="bilingual-en">📐 Tangent Convergence PDF ↗</span></a>
+      <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" style="background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.45);color:#c084fc;padding:4px 10px;border-radius:7px;font-size:.76rem;font-weight:700;text-decoration:none"><span class="bilingual-ko">📈 도함수 기하 탐구 ↗</span><span class="bilingual-en">📈 Derivative Geometry ↗</span></a>
     </div>
   </div>
 </div>
 
-<h2>제1단계 · [기초 개념] 삼차함수 $f(x)=0$의 실근이 2개일 때의 기하학적 형태<span class="bilingual-en">Step 1 · [Foundations] Geometry of Monic Cubic with Exactly 2 Real Roots</span></h2>
+<h2><span class="bilingual-ko">제1단계 · [기초 개념] 삼차함수 $f(x)=0$의 실근이 2개일 때의 기하학적 형태</span><span class="bilingual-en">Step 1 · [Foundations] Geometry of Monic Cubic with Exactly 2 Real Roots</span></h2>
 <div class="know">
-<h3>먼저 알아야 할 지식</h3>
+<h3><span class="bilingual-ko">먼저 알아야 할 지식</span><span class="bilingual-en">Prerequisite Knowledge</span></h3>
+<div class="bilingual-ko">
 최고차항 계수가 1인 삼차함수 $f(x)$에 대하여 방정식 $f(x)=0$의 서로 다른 실근이 2개라는 것은, 삼차함수 그래프가 $x$축과 정확히 두 점에서만 만남을 뜻합니다.<br>
 • <b>대수학의 기본정리와 켤레근</b>: 실계수 삼차방정식은 복소수 범위에서 근을 3개(중복도 포함) 가지며, 허근은 항상 켤레쌍(2개)으로 나타납니다. 따라서 서로 다른 실근이 정확히 2개이려면 실근 3개 중 <b>2개의 실근이 완벽히 겹치는 중근 1개($\alpha$) + 단순 실근 1개($\beta$)</b>이어야만 합니다 ($\alpha \neq \beta$).<br>
 • <b>접선과 극값 접촉 원리</b>: 중근 $x=\alpha$에서는 함숫값 $f(\alpha)=0$뿐만 아니라 <b>접선의 기울기 $f'(\alpha)=0$</b>입니다. 따라서 접선이 $y=0$ ($x$축)이 되어, 극댓값 또는 극솟값 중 하나가 $x$축에 정확히 얹혀 <b>$x$축에 매끄럽게 접하며 튕겨 나옵니다</b>.<br>
 • <b>유일한 인수분해</b>: 관통하는 단순 실근 $\beta$와 접하는 중근 $\alpha$에 의해 $f(x)$는 다음과 같이 완벽히 인수분해됩니다:
 <div style="text-align:center;margin:8px 0;font-size:1.05rem"><b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta)$$</b></div>
 • <b>기하학적 2대 형태</b>: 극댓값이 $0$인 경우($\alpha < \beta$, 극대 접함)와 극솟값이 $0$인 경우($\beta < \alpha$, 극소 접함)가 존재하며, 두 경우 모두 상단 <b>[제0단계 기본정리 1]</b>의 2-패널 비교 다이어그램에서 생생하게 확인할 수 있습니다.
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For a monic cubic $f(x)$, having exactly 2 distinct real roots forces the curve to touch the x-axis tangentially at a double root $\alpha$ ($f(\alpha)=f'(\alpha)=0$, local extremum touching the x-axis) and cross at a simple root $\beta$ ($\alpha \neq \beta$). By the Fundamental Theorem of Algebra and Conjugate Root Theorem, this 1 double root + 1 simple root configuration is unique, giving $f(x) = (x - \alpha)^2(x - \beta)$. (See Step 0 Theorem 1 for detailed Type 1 vs Type 2 vector diagrams).</div>
+</div>
+<div class="bilingual-en">
+• <b>Fundamental Theorem of Algebra &amp; Conjugates:</b> For a monic cubic $f(x)$, having exactly 2 distinct real roots forces the curve to touch the x-axis tangentially at a double root $\alpha$ ($f(\alpha)=f'(\alpha)=0$, local extremum touching the x-axis) and cross at a simple root $\beta$ ($\alpha \neq \beta$).<br>
+• <b>Unique Factorization:</b> By the Fundamental Theorem of Algebra, this (1 double root + 1 simple root) configuration is unique, yielding:
+<div style="text-align:center;margin:8px 0;font-size:1.05rem"><b>$$f(x) = (x - \alpha)^2(x - \beta) \quad (\alpha \neq \beta)$$</b></div>
+• <b>Two Geometric Classifications:</b> Type 1 where local maximum touches $y=0$ ($\alpha < \beta$) and Type 2 where local minimum touches $y=0$ ($\beta < \alpha$).
+</div>
 </div>
 <div class="q" data-ans="3" data-exp="실근이 서로 다른 2개라는 것은 삼차함수가 x축과 접하는 중근(α) 하나와 x축을 관통하는 단순 실근(β) 하나를 가짐을 의미합니다. 따라서 f(x) = (x - α)²(x - β) 입니다." data-exp-en="Having exactly 2 real roots means the cubic curve is tangent to the x-axis at a double root α and crosses the x-axis at a simple root β. Thus f(x) = (x - α)²(x - β)." >
-<div class="lvl">1단계 기본 개념</div>
+<div class="lvl"><span class="bilingual-ko">1단계 기본 개념</span><span class="bilingual-en">Step 1 · Basic Concept</span></div>
 <div class="stem"><span class="bilingual-ko">최고차항의 계수가 1인 삼차함수 $f(x)$에 대하여 방정식 $f(x)=0$의 서로 다른 실근의 개수가 2개일 때, $f(x)$의 올바른 인수분해 형태는 무엇인가요? (단, $\alpha \neq \beta$)</span><div class="bilingual-en">For a monic cubic function $f(x)$, if the equation $f(x)=0$ has exactly 2 distinct real roots, what is its factorization? (where $\alpha \neq \beta$)</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$f(x) = (x - \alpha)(x - \beta)(x - \gamma)$</div>
@@ -880,25 +870,26 @@ window.toggleMinGgb = function(btn, ggbUrl) {
 <div class="opt"><span class="n">4</span>$f(x) = (x - \alpha)(x^2 + \beta x + \gamma)$</div>
 <div class="opt"><span class="n">5</span>$f(x) = x^3 - \alpha x^2 + \beta$</div>
 </div>
-<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;"><span class="bilingual-ko">🚨 이 문제에 이상이 있어요</span><span class="bilingual-en">🚨 Report an issue with this question</span></button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
-<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px"><span class="bilingual-ko">어떤 부분이 이상한가요? 자세히 적어주세요.</span><span class="bilingual-en">What seems incorrect? Please describe in detail.</span></div>
 <textarea class="report-text" rows="3" style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">취소</span><span class="bilingual-en">Cancel</span></button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">신고 접수</span><span class="bilingual-en">Submit Report</span></button>
 </div>
 </div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right"><span class="bilingual-ko">✅ 신고가 접수되었어요. 확인 후 고칠게요!</span><span class="bilingual-en">✅ Report received. We will review and fix it!</span></div>
 </div>
 </div>
 
-<h2>제2단계 · [미분 기초] 곱의 미분법과 관통점 $\beta$에서의 접선 기울기 $f'(\beta)$<span class="bilingual-en">Step 2 · [Derivatives] Product Rule & Strict Positivity of Derivative $f'(\beta)$</span></h2>
+<h2><span class="bilingual-ko">제2단계 · [미분 기초] 곱의 미분법과 관통점 $\beta$에서의 접선 기울기 $f'(\beta)$</span><span class="bilingual-en">Step 2 · [Derivatives] Product Rule & Strict Positivity of Derivative $f'(\beta)$</span></h2>
 <div class="know">
-<h3>먼저 알아야 할 지식</h3>
+<h3><span class="bilingual-ko">먼저 알아야 할 지식</span><span class="bilingual-en">Prerequisite Knowledge</span></h3>
+<div class="bilingual-ko">
 $f(x) = (x - \alpha)^2(x - \beta)$를 곱의 미분법으로 미분해 봅시다:<br>
 $$f'(x) = 2(x - \alpha)(x - \beta) + (x - \alpha)^2 = (x - \alpha)(2x - 2\beta + x - \alpha) = (x - \alpha)(3x - \alpha - 2\beta)$$
 이 도함수에 두 실근을 대입해보면 놀라운 사실을 알 수 있습니다:<br>
@@ -906,36 +897,45 @@ $$f'(x) = 2(x - \alpha)(x - \beta) + (x - \alpha)^2 = (x - \alpha)(2x - 2\beta +
 • 관통점 $x = \beta$에서: <b>$f'(\beta) = (\beta - \alpha)(3\beta - \alpha - 2\beta) = (\beta - \alpha)^2$</b><br>
 $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 제곱으로서 항상 엄밀한 양수($> 0$)</b>입니다!<br>
 즉, $\alpha < \beta$이든 $\alpha > \beta$이든 삼차함수가 $x$축을 통과할 때의 기울기는 <b>언제나 양수($>0$)</b>로 $x$축을 상향 돌파합니다!
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Differentiating $f(x) = (x - \alpha)^2(x - \beta)$ gives $f'(x) = (x - \alpha)(3x - \alpha - 2\beta)$. At the tangent point, $f'(\alpha) = 0$. At the crossing point, $f'(\beta) = (\beta - \alpha)^2 > 0$ strictly holds for all $\alpha \neq \beta$. Hence, the slope at the crossing root is always strictly positive!</div>
+</div>
+<div class="bilingual-en">
+Differentiating $f(x) = (x - \alpha)^2(x - \beta)$ via the product rule:<br>
+$$f'(x) = 2(x - \alpha)(x - \beta) + (x - \alpha)^2 = (x - \alpha)(3x - \alpha - 2\beta)$$
+Evaluating at the two roots reveals key properties:<br>
+• Tangent point $x = \alpha$: <b>$f'(\alpha) = 0$</b> (horizontal tangent line touches $y=0$)<br>
+• Crossing root $x = \beta$: <b>$f'(\beta) = (\beta - \alpha)(3\beta - \alpha - 2\beta) = (\beta - \alpha)^2 > 0$</b><br>
+Because $\alpha \neq \beta$, the square of a non-zero real number is always <b>strictly positive ($> 0$)</b>! Thus, the cubic curve always pierces the x-axis with an upward positive slope regardless of whether $\alpha < \beta$ or $\beta < \alpha$.
+</div>
 </div>
 <div class="q" data-ans="3" data-exp="f'(x) = (x - α)(3x - α - 2β)에 x = β를 대입하면 f'(β) = (β - α)(3β - α - 2β) = (β - α)² 입니다. 실수의 제곱이며 α ≠ β 이므로 항상 f'(β) &gt; 0 (엄밀한 양수)입니다." data-exp-en="Substituting x = β into f'(x) gives f'(β) = (β - α)², which is strictly positive (&gt; 0) for all α ≠ β since the square of any non-zero real number is positive." >
-<div class="lvl">2단계 미분계수 계산</div>
+<div class="lvl"><span class="bilingual-ko">2단계 미분계수 계산</span><span class="bilingual-en">Step 2 · Derivative Computation</span></div>
 <div class="stem"><span class="bilingual-ko">삼차함수 $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$)의 도함수 $f'(x)$에 대하여, 관통 실근 $\beta$에서의 미분계수 $f'(\beta)$의 값과 부호는 무엇인가요?</span><div class="bilingual-en">For the cubic $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$), what is the derivative value $f'(\beta)$ and its sign at the crossing root $\beta$?</div></div>
 <div class="opts">
 <div class="opt"><span class="n">1</span>$f'(\beta) = 0$</div>
 <div class="opt"><span class="n">2</span>$f'(\beta) = -(\beta - \alpha)^2 &lt; 0$</div>
 <div class="opt"><span class="n">3</span>$f'(\beta) = (\beta - \alpha)^2 &gt; 0$</div>
-<div class="opt"><span class="n">4</span>$f'(\beta) = 2(\beta - \alpha)$ (부호 모름)</div>
+<div class="opt"><span class="n">4</span>$f'(\beta) = 2(\beta - \alpha)$ <span class="bilingual-ko">(부호 모름)</span><span class="bilingual-en">(Sign unknown)</span></div>
 <div class="opt"><span class="n">5</span>$f'(\beta) = 3(\beta - \alpha)^2$</div>
 </div>
-<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;"><span class="bilingual-ko">🚨 이 문제에 이상이 있어요</span><span class="bilingual-en">🚨 Report an issue with this question</span></button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px"><span class="bilingual-ko">어떤 부분이 이상한가요? 자세히 적어주세요.</span><span class="bilingual-en">What seems incorrect? Please describe in detail.</span></div>
 <textarea class="report-text" rows="3" style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">취소</span><span class="bilingual-en">Cancel</span></button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">신고 접수</span><span class="bilingual-en">Submit Report</span></button>
 </div>
 </div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right"><span class="bilingual-ko">✅ 신고가 접수되었어요. 확인 후 고칠게요!</span><span class="bilingual-en">✅ Report received. We will review and fix it!</span></div>
 </div>
 </div>
 
-<h2>제3단계 · [구간 함수] $g(x)$의 꺾인 점(첨점)과 좌우 미분계수의 차이<span class="bilingual-en">Step 3 · [Piecewise Analysis] Sharp Corner of $g(x)$ & One-Sided Derivatives</span></h2>
+<h2><span class="bilingual-ko">제3단계 · [구간 함수] $g(x)$의 꺾인 점(첨점)과 좌우 미분계수의 차이</span><span class="bilingual-en">Step 3 · [Piecewise Analysis] Sharp Corner of $g(x)$ & One-Sided Derivatives</span></h2>
 <div class="know">
-<h3>먼저 알아야 할 지식</h3>
+<h3><span class="bilingual-ko">먼저 알아야 할 지식</span><span class="bilingual-en">Prerequisite Knowledge</span></h3>
 
 <!-- 💡 교육과정 표준 개념: 우미분계수와 좌미분계수 -->
 <div style="background:rgba(20,24,51,.75);border:1.5px solid rgba(124,196,255,.4);border-radius:12px;padding:14px 16px;margin-bottom:14px">
@@ -982,8 +982,8 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
         <path d="M 40 100 L 110 40 L 180 90" fill="none" stroke="#fb7185" stroke-width="2.5" stroke-linecap="round" />
         <line x1="85" y1="62" x2="110" y2="40" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
         <line x1="110" y1="40" x2="135" y2="58" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2 2" />
-        <text x="42" y="58" fill="#fca5a5" font-size="8.5" font-weight="bold">좌기울기 +7f'</text>
-        <text x="135" y="52" fill="#fca5a5" font-size="8.5" font-weight="bold">우기울기 -f'</text>
+        <text class="bilingual-ko" x="42" y="58" fill="#fca5a5" font-size="8.5" font-weight="bold">좌기울기 +7f'</text><text class="bilingual-en" x="35" y="58" fill="#fca5a5" font-size="8.5" font-weight="bold">Left slope +7f'</text>
+        <text class="bilingual-ko" x="135" y="52" fill="#fca5a5" font-size="8.5" font-weight="bold">우기울기 -f'</text><text class="bilingual-en" x="125" y="52" fill="#fca5a5" font-size="8.5" font-weight="bold">Right slope -f'</text>
       </svg>
       <div style="font-size:.74rem;color:#cbd5e1;margin-top:2px">
         <span class="bilingual-ko">좌우 접선이 칼날처럼 부딪혀 <b>미분불가능</b></span>
@@ -1013,7 +1013,7 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
         <!-- Downward gap arrow -->
         <line x1="110" y1="34" x2="110" y2="80" stroke="#facc15" stroke-width="2" stroke-dasharray="2 2" />
         <polygon points="107,77 110,83 113,77" fill="#facc15" />
-        <text x="115" y="58" fill="#facc15" font-size="9" font-weight="bold">단차: -8f'(β)</text>
+        <text class="bilingual-ko" x="115" y="58" fill="#facc15" font-size="9" font-weight="bold">단차: -8f'(β)</text><text class="bilingual-en" x="115" y="58" fill="#facc15" font-size="9" font-weight="bold">Gap: -8f'(β)</text>
       </svg>
       <div style="font-size:.74rem;color:#cbd5e1;margin-top:2px">
         <span class="bilingual-ko"><b>우미분계수 - 좌미분계수</b> = $-8f'(\beta)$</span>
@@ -1023,6 +1023,7 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
   </div>
 </div>
 
+<div class="bilingual-ko">
 문제에서 $g(x)$는 다음과 같이 정의되어 있습니다:<br>
 $$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
 1. <b>점 $x = \alpha$에서의 연속성과 미분가능성:</b><br>
@@ -1034,36 +1035,49 @@ $f'(\beta) > 0$이므로 $x$가 $\beta$를 지나면서 $f(x)$는 음수($<0$)�
 따라서 우미분계수에서 좌미분계수를 뺀 <b>좌우 미분계수의 차이</b>는 다음과 같습니다:<br>
 $$\mathbf{g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$
 $f'(\beta) > 0$이므로 $-8f'(\beta) < 0$이며, <b>$g(x)$는 실수 전체에서 오직 $x = \beta$ 한 점에서만 위로 뾰족한 첨점</b>을 갖습니다!
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> At $x = \alpha$, $f'(\alpha) = 0 \implies g'(\alpha) = 0$, so the difference is $g'(\alpha^+) - g'(\alpha^-) = 0$, meaning $g(x)$ is perfectly smooth. At $x = \beta$, left derivative is $g'(\beta^-) = 7f'(\beta)$ and right derivative is $g'(\beta^+) = -f'(\beta)$. The difference across $\beta$ is $g'(\beta^+) - g'(\beta^-) = -8f'(\beta) < 0$, making $x = \beta$ the unique sharp corner of $g(x)$.</div>
+</div>
+<div class="bilingual-en">
+Function $g(x)$ is defined piecewise:<br>
+$$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
+1. <b>Smoothness at $x = \alpha$:</b> Since $f(\alpha) = f'(\alpha) = 0$, both left and right derivatives vanish ($g'(\alpha^-) = g'(\alpha^+) = 0$). Hence $g(x)$ is smoothly differentiable at $\alpha$.<br>
+2. <b>Sharp Corner at $x = \beta$:</b> Because $f'(\beta) > 0$, $f(x)$ transitions from negative to positive:<br>
+• Left ($x < \beta$): $g'(\beta^-) = 7f'(\beta)$ (steep rise)<br>
+• Right ($x > \beta$): $g'(\beta^+) = -f'(\beta)$ (downward slope)<br>
+The difference between right and left derivatives is:
+$$\mathbf{g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$
+This difference of $-8f'(\beta) \neq 0$ creates the unique sharp upward corner of $g(x)$ across $\mathbb{R}$.
+</div>
 </div>
 <div class="q" data-ans="4" data-exp="x &lt; β에서 g(x) = 7f(x)이므로 좌미분계수는 g'(β⁻) = 7f'(β)이고, x &gt; β에서 g(x) = -f(x)이므로 우미분계수는 g'(β⁺) = -f'(β)입니다. 따라서 우미분계수와 좌미분계수의 차이는 g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β) 입니다." data-exp-en="Since g(x) = 7f(x) for x &lt; β and g(x) = -f(x) for x &gt; β, the left derivative is 7f'(β) and right derivative is -f'(β). Thus the difference between the right and left derivatives is g'(β⁺) - g'(β⁻) = -f'(β) - 7f'(β) = -8f'(β)." >
-<div class="lvl">3단계 좌우 미분계수</div>
+<div class="lvl"><span class="bilingual-ko">3단계 좌우 미분계수</span><span class="bilingual-en">Step 3 · One-Sided Derivatives</span></div>
 <div class="stem"><span class="bilingual-ko">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 정확한 값은 얼마인가요?</span><div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the exact difference between the right-hand and left-hand derivatives $g'(\beta^+) - g'(\beta^-)$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span>$0$ (미분가능)</div>
+<div class="opt"><span class="n">1</span>$0$ <span class="bilingual-ko">(미분가능)</span><span class="bilingual-en">(Differentiable)</span></div>
 <div class="opt"><span class="n">2</span>$-6f'(\beta)$</div>
 <div class="opt"><span class="n">3</span>$+6f'(\beta)$</div>
 <div class="opt"><span class="n">4</span>$-8f'(\beta)$</div>
 <div class="opt"><span class="n">5</span>$+8f'(\beta)$</div>
 </div>
-<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;"><span class="bilingual-ko">🚨 이 문제에 이상이 있어요</span><span class="bilingual-en">🚨 Report an issue with this question</span></button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px"><span class="bilingual-ko">어떤 부분이 이상한가요? 자세히 적어주세요.</span><span class="bilingual-en">What seems incorrect? Please describe in detail.</span></div>
 <textarea class="report-text" rows="3" style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">취소</span><span class="bilingual-en">Cancel</span></button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">신고 접수</span><span class="bilingual-en">Submit Report</span></button>
 </div>
 </div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right"><span class="bilingual-ko">✅ 신고가 접수되었어요. 확인 후 고칠게요!</span><span class="bilingual-en">✅ Report received. We will review and fix it!</span></div>
 </div>
 </div>
 
-<h2>제4단계 · [절댓값 제어] $P(x)$의 중근 조건과 유일한 첨점의 위치<span class="bilingual-en">Step 4 · [Corner Control] Double Root of $P(x)$ & Unique Corner Location</span></h2>
+<h2><span class="bilingual-ko">제4단계 · [절댓값 제어] $P(x)$의 중근 조건과 유일한 첨점의 위치</span><span class="bilingual-en">Step 4 · [Corner Control] Double Root of $P(x)$ & Unique Corner Location</span></h2>
 <div class="know">
-<h3>먼저 알아야 할 지식</h3>
+<h3><span class="bilingual-ko">먼저 알아야 할 지식</span><span class="bilingual-en">Prerequisite Knowledge</span></h3>
+<div class="bilingual-ko">
 함수 $h(x) = g(x) + |P(x)|$가 실수 전체의 집합에서 미분가능해야 합니다.<br>
 그런데 $P(x) = (x - 1)(x - a)(x - 4 + a)$의 세 실근은 <b>$1, \; a, \; 4 - a$</b>입니다.<br>
 • 절댓값 다항함수 $|P(x)|$는 단순 실근을 지날 때마다 아래로 뾰족한 V자 첨점을 형성합니다.<br>
@@ -1076,36 +1090,46 @@ $f'(\beta) > 0$이므로 $-8f'(\beta) < 0$이며, <b>$g(x)$는 실수 전체에�
 • <b>Case 2 ($a = 4 - a$):</b><br>
   $2a = 4 \implies a = 2$이면 근은 $1, 2, 2$. 즉 $P(x) = (x - 2)^2(x - 1)$입니다.<br>
   $x = 2$는 중근이므로 미분가능하고, <b>$x = 1$이 유일한 첨점</b>이 됩니다.
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $P(x) = (x - 1)(x - a)(x - 4 + a)$ has roots $1, a, 4 - a$. To be cancelled by $g(x)$ which only has one corner, $|P(x)|$ must have at most 1 corner, requiring two roots to coincide. If $a=1$ or $a=3$, $P(x)=(x-1)^2(x-3)$ with corner at $x=3$. If $a=2$, $P(x)=(x-2)^2(x-1)$ with corner at $x=1$.</div>
+</div>
+<div class="bilingual-en">
+Function $h(x) = g(x) + |P(x)|$ must be differentiable on all of $\mathbb{R}$.<br>
+$P(x) = (x - 1)(x - a)(x - 4 + a)$ has roots $1, a, 4 - a$.<br>
+• Since $g(x)$ has only 1 corner, $|P(x)|$ must have at most 1 corner, forcing two of its roots to coincide into a double root.<br>
+<b>[Two Root-Coincidence Cases]</b><br>
+• <b>Case 1 ($1 = a$ or $1 = 4 - a$):</b> $a = 1$ or $a = 3 \implies P(x) = (x - 1)^2(x - 3)$, with double root at $x=1$ (smooth) and a unique corner at $x = 3$.<br>
+• <b>Case 2 ($a = 4 - a$):</b> $a = 2 \implies P(x) = (x - 2)^2(x - 1)$, with double root at $x=2$ (smooth) and a unique corner at $x = 1$.
+</div>
 </div>
 <div class="q" data-ans="1" data-exp="세 근 1, a, 4-a 중 두 근이 일치해야 합니다. 1=a 또는 1=4-a이면 a=1 또는 a=3이며 P(x)=(x-1)²(x-3)으로 x=3이 유일한 첨점입니다. a=4-a이면 a=2이며 P(x)=(x-2)²(x-1)로 x=1이 유일한 첨점입니다." data-exp-en="Two of the roots must coincide. If 1=a or 1=4-a, then a=1 or 3, giving P(x)=(x-1)²(x-3) with unique corner at x=3. If a=4-a, then a=2, giving P(x)=(x-2)²(x-1) with unique corner at x=1." >
-<div class="lvl">4단계 첨점 제어</div>
+<div class="lvl"><span class="bilingual-ko">4단계 첨점 제어</span><span class="bilingual-en">Step 4 · Corner Control</span></div>
 <div class="stem"><span class="bilingual-ko">함수 $|P(x)| = |(x - 1)(x - a)(x - 4 + a)|$가 오직 1개의 첨점만 갖도록 하는 $a$의 값들과, 각 경우의 유일한 첨점의 위치를 바르게 짝지은 것은?</span><div class="bilingual-en">Which choice correctly identifies the values of $a$ and the unique non-differentiable corner of $|P(x)|$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span>$a = 1, 3$ 일 때 첨점 $x = 3$, 그리고 $a = 2$ 일 때 첨점 $x = 1$</div>
-<div class="opt"><span class="n">2</span>$a = 0, 4$ 일 때 첨점 $x = 2$, 그리고 $a = 1$ 일 때 첨점 $x = 3$</div>
-<div class="opt"><span class="n">3</span>$a = 1$ 일 때만 가능하며 첨점은 $x = 1$</div>
-<div class="opt"><span class="n">4</span>$a = 2$ 일 때만 가능하며 첨점은 $x = 2$</div>
-<div class="opt"><span class="n">5</span>모든 실수 $a$에 대해 항상 3개의 첨점을 가짐</div>
+<div class="opt"><span class="n">1</span><span class="bilingual-ko">$a = 1, 3$ 일 때 첨점 $x = 3$, 그리고 $a = 2$ 일 때 첨점 $x = 1$</span><span class="bilingual-en">When $a = 1, 3$, corner at $x = 3$; when $a = 2$, corner at $x = 1$</span></div>
+<div class="opt"><span class="n">2</span><span class="bilingual-ko">$a = 0, 4$ 일 때 첨점 $x = 2$, 그리고 $a = 1$ 일 때 첨점 $x = 3$</span><span class="bilingual-en">When $a = 0, 4$, corner at $x = 2$; when $a = 1$, corner at $x = 3$</span></div>
+<div class="opt"><span class="n">3</span><span class="bilingual-ko">$a = 1$ 일 때만 가능하며 첨점은 $x = 1$</span><span class="bilingual-en">Only possible when $a = 1$, with corner at $x = 1$</span></div>
+<div class="opt"><span class="n">4</span><span class="bilingual-ko">$a = 2$ 일 때만 가능하며 첨점은 $x = 2$</span><span class="bilingual-en">Only possible when $a = 2$, with corner at $x = 2$</span></div>
+<div class="opt"><span class="n">5</span><span class="bilingual-ko">모든 실수 $a$에 대해 항상 3개의 첨점을 가짐</span><span class="bilingual-en">Always has 3 corners for all real numbers $a$</span></div>
 </div>
-<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;"><span class="bilingual-ko">🚨 이 문제에 이상이 있어요</span><span class="bilingual-en">🚨 Report an issue with this question</span></button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px"><span class="bilingual-ko">어떤 부분이 이상한가요? 자세히 적어주세요.</span><span class="bilingual-en">What seems incorrect? Please describe in detail.</span></div>
 <textarea class="report-text" rows="3" style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">취소</span><span class="bilingual-en">Cancel</span></button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">신고 접수</span><span class="bilingual-en">Submit Report</span></button>
 </div>
 </div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right"><span class="bilingual-ko">✅ 신고가 접수되었어요. 확인 후 고칠게요!</span><span class="bilingual-en">✅ Report received. We will review and fix it!</span></div>
 </div>
 </div>
 
-<h2>제5단계 · [Case 1 분석] $a = 1, 3$일 때 미분가능성과 $f(0)$의 값들<span class="bilingual-en">Step 5 · [Case 1 Solution] Differentiability at $x = 3$ & Values of $f(0)$</span></h2>
+<h2><span class="bilingual-ko">제5단계 · [Case 1 분석] $a = 1, 3$일 때 미분가능성과 $f(0)$의 값들</span><span class="bilingual-en">Step 5 · [Case 1 Solution] Differentiability at $x = 3$ & Values of $f(0)$</span></h2>
 <div class="know">
-<h3>먼저 알아야 할 지식</h3>
+<h3><span class="bilingual-ko">먼저 알아야 할 지식</span><span class="bilingual-en">Prerequisite Knowledge</span></h3>
+<div class="bilingual-ko">
 Case 1 ($a = 1$ 또는 $a = 3$)에서 $P(x) = (x - 1)^2(x - 3)$의 유일한 첨점은 $x = 3$입니다.<br>
 $h(x) = g(x) + |P(x)|$가 실수 전체에서 미분가능하려면 두 함수의 첨점 위치가 반드시 일치해야 하므로 <b>$\beta = 3$</b>이어야 합니다!<br>
 • $h(x) = g(x) + |P(x)|$가 $x = 3$에서 미분가능하려면 <b>우미분계수와 좌미분계수가 같아야 합니다 ($h'(3^+) = h'(3^-)$)</b>:<br>
@@ -1120,36 +1144,49 @@ $$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \mathbf{\alpha = 2 \te
 이제 $f(x) = (x - \alpha)^2(x - 3)$에 $x = 0$을 대입하여 $f(0)$을 구합니다:<br>
 • $\alpha = 2$ 일 때: <b>$f(0) = (0 - 2)^2(0 - 3) = 4 \times (-3) = \mathbf{-12}$</b><br>
 • $\alpha = 4$ 일 때: <b>$f(0) = (0 - 4)^2(0 - 3) = 16 \times (-3) = \mathbf{-48}$</b>
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In Case 1, $P(x) = (x - 1)^2(x - 3)$ has its corner at $x = 3$, forcing $\beta = 3$. Differentiability requires $h'(3^+) = h'(3^-) \iff -f'(3) + P'(3) = 7f'(3) - P'(3) \iff P'(3) = 4f'(3)$. Since $P'(3) = 4$, we get $f'(3) = 1$. Since $f'(3) = (3 - \alpha)^2 = 1$, we get $\alpha \in \{2, 4\}$. Evaluating $f(0) = (0 - \alpha)^2(0 - 3)$ gives $f(0) \in \{-12, -48\}$.</div>
+</div>
+<div class="bilingual-en">
+In Case 1 ($a = 1$ or $a = 3$), $P(x) = (x - 1)^2(x - 3)$ has its unique corner at $x = 3$, forcing $\beta = 3$.<br>
+• Differentiability condition at $x = 3$ requires right derivative equal to left derivative ($h'(3^+) = h'(3^-)$):<br>
+$$-f'(3) + P'(3) = 7f'(3) - P'(3) \iff 2P'(3) = 8f'(3) \iff P'(3) = 4f'(3)$$
+Since $P'(3) = (3 - 1)^2 = 4$, we find:
+$$4 = 4f'(3) \implies f'(3) = 1$$
+Using $f'(3) = (3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \alpha = 2 \text{ or } \alpha = 4$.<br>
+Evaluating $f(0) = (0 - \alpha)^2(0 - 3)$:<br>
+• $\alpha = 2$: $f(0) = 4 \times (-3) = -12$<br>
+• $\alpha = 4$: $f(0) = 16 \times (-3) = -48$
+</div>
 </div>
 <div class="q" data-ans="2" data-exp="첨점이 x=3이므로 β=3이어야 하고, 미분가능 조건 h'(3⁺) = h'(3⁻)에서 -f'(3) + P'(3) = 7f'(3) - P'(3) ⇔ P'(3) = 4f'(3)입니다. P'(3)=4이므로 f'(3) = (3 - α)² = 1입니다. 따라서 3 - α = ±1이므로 α = 2 또는 α = 4입니다. f(x) = (x - α)²(x - 3)에 0을 대입하면 f(0)은 (-2)²(-3) = -12, 또는 (-4)²(-3) = -48 입니다." data-exp-en="Since the corner is at x=3, we have β=3. Differentiability h'(3⁺)=h'(3⁻) requires P'(3)=4f'(3), so 4=4f'(3) => f'(3)=1. Since f'(3)=(3-α)²=1, α is 2 or 4. Evaluating f(0) = (0-α)²(0-3) gives f(0) in {-12, -48}." >
-<div class="lvl">5단계 Case 1 계산</div>
+<div class="lvl"><span class="bilingual-ko">5단계 Case 1 계산</span><span class="bilingual-en">Step 5 · Case 1 Computation</span></div>
 <div class="stem"><span class="bilingual-ko">Case 1 ($a = 1$ 또는 $a = 3$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 1 ($a = 1$ or $a = 3$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span>$\alpha = 1, 2$ 이고 $f(0) = -3, -6$</div>
-<div class="opt"><span class="n">2</span>$\alpha = 2, 4$ 이고 $f(0) = -12, -48$</div>
-<div class="opt"><span class="n">3</span>$\alpha = 3, 5$ 이고 $f(0) = 0, -24$</div>
-<div class="opt"><span class="n">4</span>$\alpha = -2, -4$ 이고 $f(0) = 12, 48$</div>
-<div class="opt"><span class="n">5</span>$\alpha = 1, 3$ 이고 $f(0) = -9, -27$</div>
+<div class="opt"><span class="n">1</span><span class="bilingual-ko">$\alpha = 1, 2$ 이고 $f(0) = -3, -6$</span><span class="bilingual-en">$\alpha = 1, 2$ and $f(0) = -3, -6$</span></div>
+<div class="opt"><span class="n">2</span><span class="bilingual-ko">$\alpha = 2, 4$ 이고 $f(0) = -12, -48$</span><span class="bilingual-en">$\alpha = 2, 4$ and $f(0) = -12, -48$</span></div>
+<div class="opt"><span class="n">3</span><span class="bilingual-ko">$\alpha = 3, 5$ 이고 $f(0) = 0, -24$</span><span class="bilingual-en">$\alpha = 3, 5$ and $f(0) = 0, -24$</span></div>
+<div class="opt"><span class="n">4</span><span class="bilingual-ko">$\alpha = -2, -4$ 이고 $f(0) = 12, 48$</span><span class="bilingual-en">$\alpha = -2, -4$ and $f(0) = 12, 48$</span></div>
+<div class="opt"><span class="n">5</span><span class="bilingual-ko">$\alpha = 1, 3$ 이고 $f(0) = -9, -27$</span><span class="bilingual-en">$\alpha = 1, 3$ and $f(0) = -9, -27$</span></div>
 </div>
-<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;"><span class="bilingual-ko">🚨 이 문제에 이상이 있어요</span><span class="bilingual-en">🚨 Report an issue with this question</span></button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px"><span class="bilingual-ko">어떤 부분이 이상한가요? 자세히 적어주세요.</span><span class="bilingual-en">What seems incorrect? Please describe in detail.</span></div>
 <textarea class="report-text" rows="3" style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">취소</span><span class="bilingual-en">Cancel</span></button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">신고 접수</span><span class="bilingual-en">Submit Report</span></button>
 </div>
 </div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right"><span class="bilingual-ko">✅ 신고가 접수되었어요. 확인 후 고칠게요!</span><span class="bilingual-en">✅ Report received. We will review and fix it!</span></div>
 </div>
 </div>
 
-<h2>제6단계 · [Case 2 분석] $a = 2$일 때 미분가능성과 $f(0)$의 값들<span class="bilingual-en">Step 6 · [Case 2 Solution] Differentiability at $x = 1$ & Values of $f(0)$</span></h2>
+<h2><span class="bilingual-ko">제6단계 · [Case 2 분석] $a = 2$일 때 미분가능성과 $f(0)$의 값들</span><span class="bilingual-en">Step 6 · [Case 2 Solution] Differentiability at $x = 1$ & Values of $f(0)$</span></h2>
 <div class="know">
-<h3>먼저 알아야 할 지식</h3>
+<h3><span class="bilingual-ko">먼저 알아야 할 지식</span><span class="bilingual-en">Prerequisite Knowledge</span></h3>
+<div class="bilingual-ko">
 Case 2 ($a = 2$)에서 $P(x) = (x - 2)^2(x - 1)$의 유일한 첨점은 $x = 1$입니다.<br>
 $h(x)$가 미분가능하려면 첨점 위치가 일치해야 하므로 반드시 <b>$\beta = 1$</b>이어야 합니다!<br>
 • $h(x) = g(x) + |P(x)|$가 $x = 1$에서 미분가능하려면 <b>우미분계수와 좌미분계수가 같아야 합니다 ($h'(1^+) = h'(1^-)$)</b>:<br>
@@ -1164,38 +1201,53 @@ $$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \m
 이제 $f(x) = (x - \alpha)^2(x - 1)$에 $x = 0$을 대입하여 $f(0)$을 구합니다:<br>
 • $\alpha = \frac{1}{2}$ 일 때: <b>$f(0) = \left(0 - \frac{1}{2}\right)^2(0 - 1) = \frac{1}{4} \times (-1) = \mathbf{-\frac{1}{4}}$</b><br>
 • $\alpha = \frac{3}{2}$ 일 때: <b>$f(0) = \left(0 - \frac{3}{2}\right)^2(0 - 1) = \frac{9}{4} \times (-1) = \mathbf{-\frac{9}{4}}$</b>
-<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In Case 2, $P(x) = (x - 2)^2(x - 1)$ has its corner at $x = 1$, forcing $\beta = 1$. Differentiability requires $h'(1^+) = h'(1^-) \iff -f'(1) + P'(1) = 7f'(1) - P'(1) \iff P'(1) = 4f'(1)$. Since $P'(1) = 1$, we get $f'(1) = 1/4$. Since $f'(1) = (1 - \alpha)^2 = 1/4$, we get $\alpha \in \{1/2, 3/2\}$. Evaluating $f(0) = (0 - \alpha)^2(0 - 1)$ gives $f(0) \in \{-1/4, -9/4\}$.</div>
+</div>
+<div class="bilingual-en">
+In Case 2 ($a = 2$), $P(x) = (x - 2)^2(x - 1)$ has its unique corner at $x = 1$, forcing $\beta = 1$.<br>
+• Differentiability condition at $x = 1$ requires right derivative equal to left derivative ($h'(1^+) = h'(1^-)$):<br>
+$$-f'(1) + P'(1) = 7f'(1) - P'(1) \iff 2P'(1) = 8f'(1) \iff P'(1) = 4f'(1)$$
+Since $P'(1) = (1 - 2)^2 = 1$, we get:
+$$1 = 4f'(1) \implies f'(1) = \frac{1}{4}$$
+Using $f'(1) = (1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \alpha = \frac{1}{2} \text{ or } \alpha = \frac{3}{2}$.<br>
+Evaluating $f(0) = (0 - \alpha)^2(0 - 1)$:<br>
+• $\alpha = \frac{1}{2}$: $f(0) = \frac{1}{4} \times (-1) = -\frac{1}{4}$<br>
+• $\alpha = \frac{3}{2}$: $f(0) = \frac{9}{4} \times (-1) = -\frac{9}{4}$
+</div>
 </div>
 <div class="q" data-ans="1" data-exp="첨점이 x=1이므로 β=1이어야 하고, 미분가능 조건 h'(1⁺) = h'(1⁻)에서 -f'(1) + P'(1) = 7f'(1) - P'(1) ⇔ P'(1) = 4f'(1)입니다. P'(1)=1이므로 f'(1) = (1 - α)² = 1/4입니다. 따라서 1 - α = ±1/2이므로 α = 1/2 또는 α = 3/2 입니다. f(x) = (x - α)²(x - 1)에 0을 대입하면 f(0)은 (-1/2)²(-1) = -1/4, 또는 (-3/2)²(-1) = -9/4 입니다." data-exp-en="Since the corner is at x=1, we have β=1. Differentiability h'(1⁺)=h'(1⁻) requires P'(1)=4f'(1), so 1=4f'(1) => f'(1)=1/4. Since f'(1)=(1-α)²=1/4, α is 1/2 or 3/2. Evaluating f(0) = (0-α)²(0-1) yields f(0) in {-1/4, -9/4}." >
-<div class="lvl">6단계 Case 2 계산</div>
+<div class="lvl"><span class="bilingual-ko">6단계 Case 2 계산</span><span class="bilingual-en">Step 6 · Case 2 Computation</span></div>
 <div class="stem"><span class="bilingual-ko">Case 2 ($a = 2$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 2 ($a = 2$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span>$\alpha = \frac{1}{2}, \frac{3}{2}$ 이고 $f(0) = -\frac{1}{4}, -\frac{9}{4}$</div>
-<div class="opt"><span class="n">2</span>$\alpha = 1, 2$ 이고 $f(0) = -1, -4$</div>
-<div class="opt"><span class="n">3</span>$\alpha = \frac{1}{4}, \frac{3}{4}$ 이고 $f(0) = -\frac{1}{16}, -\frac{9}{16}$</div>
-<div class="opt"><span class="n">4</span>$\alpha = 0, 1$ 이고 $f(0) = 0, -1$</div>
-<div class="opt"><span class="n">5</span>$\alpha = -\frac{1}{2}, -\frac{3}{2}$ 이고 $f(0) = \frac{1}{4}, \frac{9}{4}$</div>
+<div class="opt"><span class="n">1</span><span class="bilingual-ko">$\alpha = \frac{1}{2}, \frac{3}{2}$ 이고 $f(0) = -\frac{1}{4}, -\frac{9}{4}$</span><span class="bilingual-en">$\alpha = \frac{1}{2}, \frac{3}{2}$ and $f(0) = -\frac{1}{4}, -\frac{9}{4}$</span></div>
+<div class="opt"><span class="n">2</span><span class="bilingual-ko">$\alpha = 1, 2$ 이고 $f(0) = -1, -4$</span><span class="bilingual-en">$\alpha = 1, 2$ and $f(0) = -1, -4$</span></div>
+<div class="opt"><span class="n">3</span><span class="bilingual-ko">$\alpha = \frac{1}{4}, \frac{3}{4}$ 이고 $f(0) = -\frac{1}{16}, -\frac{9}{16}$</span><span class="bilingual-en">$\alpha = \frac{1}{4}, \frac{3}{4}$ and $f(0) = -\frac{1}{16}, -\frac{9}{16}$</span></div>
+<div class="opt"><span class="n">4</span><span class="bilingual-ko">$\alpha = 0, 1$ 이고 $f(0) = 0, -1$</span><span class="bilingual-en">$\alpha = 0, 1$ and $f(0) = 0, -1$</span></div>
+<div class="opt"><span class="n">5</span><span class="bilingual-ko">$\alpha = -\frac{1}{2}, -\frac{3}{2}$ 이고 $f(0) = \frac{1}{4}, \frac{9}{4}$</span><span class="bilingual-en">$\alpha = -\frac{1}{2}, -\frac{3}{2}$ and $f(0) = \frac{1}{4}, \frac{9}{4}$</span></div>
 </div>
-<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;"><span class="bilingual-ko">🚨 이 문제에 이상이 있어요</span><span class="bilingual-en">🚨 Report an issue with this question</span></button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px"><span class="bilingual-ko">어떤 부분이 이상한가요? 자세히 적어주세요.</span><span class="bilingual-en">What seems incorrect? Please describe in detail.</span></div>
 <textarea class="report-text" rows="3" style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">취소</span><span class="bilingual-en">Cancel</span></button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">신고 접수</span><span class="bilingual-en">Submit Report</span></button>
 </div>
 </div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right"><span class="bilingual-ko">✅ 신고가 접수되었어요. 확인 후 고칠게요!</span><span class="bilingual-en">✅ Report received. We will review and fix it!</span></div>
 </div>
 </div>
 
-<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"ac8dc374",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
+<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px"><span class="bilingual-ko">📝 먼저 이름을 입력하세요</span><span class="bilingual-en">📝 Please enter your name first</span></h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"ac8dc374",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
 
-<h2>🎯 최종 문제 + 명쾌하고 상세한 전체 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Comprehensive Mathematical Proof</span></h2>
+<h2><span class="bilingual-ko">🎯 최종 문제 + 명쾌하고 상세한 전체 풀이</span><span class="bilingual-en">🎯 Final Official Exam Problem & Comprehensive Mathematical Proof</span></h2>
 <div class="sol">
-<h3>📐 2027학년도 9월 모의평가 수학 21번 완전 정복 해설</h3>
+<h3>
+  <span class="bilingual-ko">📐 2027학년도 9월 모의평가 수학 21번 완전 정복 해설</span>
+  <span class="bilingual-en">📐 Full In-Depth Pedagogical Solution: 2027 AY Sep Mock Exam Math #21</span>
+</h3>
 
 <!-- 첨점 상쇄 시각화 SVG 다이어그램 -->
 <div class="diagram">
@@ -1218,26 +1270,34 @@ $$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \m
   <line x1="40" y1="170" x2="640" y2="170" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
   <text x="635" y="165" fill="#aab4d4" font-size="12">x</text>
   <line x1="340" y1="20" x2="340" y2="200" stroke="rgba(255,255,255,0.2)" stroke-dasharray="4" stroke-width="1"/>
-  <text x="345" y="215" fill="#fde68a" font-size="12" font-weight="bold">x = β (공통 첨점)</text>
+  <text class="bilingual-ko" x="345" y="215" fill="#fde68a" font-size="12" font-weight="bold">x = β (공통 첨점)</text>
+  <text class="bilingual-en" x="345" y="215" fill="#fde68a" font-size="12" font-weight="bold">x = β (Common Corner)</text>
 
   <!-- g(x): x < β 에서 급경사 상승(+7f'), x > β 에서 완만한 하강(-f') -->
   <path d="M 120 170 C 220 160 300 120 340 70 C 370 110 440 160 520 168" fill="none" stroke="url(#gLine)" stroke-width="2.5"/>
   <circle cx="340" cy="70" r="4" fill="#38bdf8"/>
-  <text x="210" y="85" fill="#38bdf8" font-size="12" font-weight="bold">y = g(x) [좌우불일치: -8f'(β)]</text>
+  <text class="bilingual-ko" x="210" y="85" fill="#38bdf8" font-size="12" font-weight="bold">y = g(x) [좌우불일치: -8f'(β)]</text>
+  <text class="bilingual-en" x="200" y="85" fill="#38bdf8" font-size="12" font-weight="bold">y = g(x) [Gap: -8f'(β)]</text>
 
   <!-- |P(x)|: x=β 에서 아래로 뾰족한 V자 -->
   <path d="M 160 30 C 240 60 310 110 340 140 C 370 110 440 60 520 30" fill="none" stroke="url(#pLine)" stroke-width="2.5"/>
   <circle cx="340" cy="140" r="4" fill="#f472b6"/>
-  <text x="450" y="75" fill="#f472b6" font-size="12" font-weight="bold">y = |P(x)| [좌우불일치: +2P'(β)]</text>
+  <text class="bilingual-ko" x="450" y="75" fill="#f472b6" font-size="12" font-weight="bold">y = |P(x)| [좌우불일치: +2P'(β)]</text>
+  <text class="bilingual-en" x="430" y="75" fill="#f472b6" font-size="12" font-weight="bold">y = |P(x)| [Gap: +2P'(β)]</text>
 
   <!-- h(x) = g(x) + |P(x)|: 부드럽게 연결되는 곡선 -->
   <path d="M 140 135 C 230 115 310 90 340 90 C 370 90 450 115 540 135" fill="none" stroke="url(#hLine)" stroke-width="3.5"/>
   <circle cx="340" cy="90" r="4" fill="#facc15"/>
-  <text x="280" y="45" fill="#facc15" font-size="13" font-weight="bold">y = h(x) = g(x) + |P(x)| (완전 매끄러움!)</text>
+  <text class="bilingual-ko" x="280" y="45" fill="#facc15" font-size="13" font-weight="bold">y = h(x) = g(x) + |P(x)| (완전 매끄러움!)</text>
+  <text class="bilingual-en" x="270" y="45" fill="#facc15" font-size="13" font-weight="bold">y = h(x) = g(x) + |P(x)| (Smooth!)</text>
 </svg>
-<div class="diagram-caption">💡 <b>기하학적 통찰</b>: 위로 뾰족한 $g(x)$의 각진 점과 아래로 뾰족한 $|P(x)|$의 V자 첨점이 만나 미분계수의 좌우 단차가 상쇄되어 매끄러운 곡선 $h(x)$가 완성됩니다.</div>
+<div class="diagram-caption">
+  <span class="bilingual-ko">💡 <b>기하학적 통찰</b>: 위로 뾰족한 $g(x)$의 각진 점과 아래로 뾰족한 $|P(x)|$의 V자 첨점이 만나 미분계수의 좌우 단차가 상쇄되어 매끄러운 곡선 $h(x)$가 완성됩니다.</span>
+  <span class="bilingual-en">💡 <b>Geometric Insight</b>: The sharp peak of $g(x)$ and the downward V-corner of $|P(x)|$ cancel out each other's one-sided derivative differences, producing a smooth, differentiable curve $h(x)$.</span>
+</div>
 </div>
 
+<div class="bilingual-ko">
 <h4>1. 삼차함수 $f(x)$의 인수분해 및 도함수 유도</h4>
 <p>
 조건 (가)에서 $f(x)=0$의 서로 다른 실근이 2개이므로, 삼차함수는 한 실근 $\alpha$에서 접하는 중근을 갖고, 다른 실근 $\beta$에서 x축을 통과해야 합니다 ($\alpha \neq \beta$).<br>
@@ -1319,18 +1379,92 @@ $$-48 < -12 < -\frac{9}{4} \; (= -2.25) < -\frac{1}{4} \; (= -0.25) < 0$$
 $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 따라서 정답은 <b>②번 ($12$)</b>입니다.
 </p>
+</div>
 
 <div class="bilingual-en">
-<b>Comprehensive English Proof:</b><br>
-1. <b>Factorization:</b> Having 2 distinct real roots means $f(x) = (x - \alpha)^2(x - \beta)$ with $f'(\beta) = (\beta - \alpha)^2 > 0$ strictly positive.<br>
-2. <b>One-Sided Derivatives of $g(x)$:</b> $g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) = -8(\beta - \alpha)^2$.<br>
-3. <b>Differentiability of $h(x) = g(x) + |P(x)|$:</b> Equating right and left derivatives $h'(\beta^+) = h'(\beta^-)$ yields $P'(\beta) = 4f'(\beta)$. $P(x)=(x-1)(x-a)(x-4+a)$ must have a double root. If $a=1, 3$, the corner is at $x=3$ with $P'(3)=4$, forcing $\beta=3$ and $f'(3)=1 \implies \alpha \in \{2, 4\} \implies f(0) \in \{-12, -48\}$. If $a=2$, the corner is at $x=1$ with $P'(1)=1$, forcing $\beta=1$ and $f'(1)=1/4 \implies \alpha \in \{1/2, 3/2\} \implies f(0) \in \{-1/4, -9/4\}$.<br>
-4. <b>Extrema:</b> $M = -1/4$ (max), $m = -48$ (min). Product: $M \times m = (-1/4) \times (-48) = 12$. Option ② is correct.
-</div>
+<h4>1. Factorization and Derivatives of Cubic $f(x)$</h4>
+<p>
+By condition (a), $f(x)=0$ has exactly 2 distinct real roots. Hence, $f(x)$ must possess a double root $\alpha$ (tangent to $y=0$) and a simple crossing root $\beta$ ($\alpha \neq \beta$).<br>
+Since the leading coefficient is 1:
+$$f(x) = (x - \alpha)^2(x - \beta)$$
+Differentiating via the product rule:
+$$f'(x) = 2(x - \alpha)(x - \beta) + (x - \alpha)^2 = (x - \alpha)(3x - \alpha - 2\beta)$$
+Therefore:
+• At tangent root $x = \alpha$: $f'(\alpha) = 0$<br>
+• At crossing root $x = \beta$: <b>$f'(\beta) = (\beta - \alpha)(3\beta - \alpha - 2\beta) = (\beta - \alpha)^2 > 0$</b> (strictly positive!)
+</p>
+
+<h4>2. Non-Differentiable Sharp Corner of $g(x)$</h4>
+<p>
+$$g(x) = \begin{cases} -f(x) & (f(x) \ge 0) \\ 7f(x) & (f(x) < 0) \end{cases}$$
+• Near $x = \alpha$, $f'(\alpha) = 0$, so both one-sided derivatives are 0, ensuring smooth differentiability.<br>
+• Near $x = \beta$, $f'(\beta) > 0$, so $f(x)$ crosses from negative to positive across $\beta$:<br>
+  - Left derivative: $g'(\beta^-) = 7f'(\beta)$<br>
+  - Right derivative: $g'(\beta^+) = -f'(\beta)$<br>
+  - One-sided derivative gap: <b>$g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) = -8(\beta - \alpha)^2 < 0$</b><br>
+Thus $g(x)$ has a unique sharp upward corner at $x = \beta$ on $\mathbb{R}$.
+</p>
+
+<h4>3. Double Root Constraint for $|P(x)|$</h4>
+<p>
+$P(x) = (x-1)(x-a)(x-4+a)$ has three real roots: $1, \; a, \; 4-a$.<br>
+If all three roots were distinct, $|P(x)|$ would possess three sharp corners, which cannot be cancelled by $g(x)$'s single corner.<br>
+Thus $|P(x)|$ must have at most 1 corner, requiring two of its roots to coincide into a double root:
+</p>
+
+<div class="sol-highlight">
+<b>[Two Root-Coincidence Cases]</b><br>
+• <b>Case 1 ($a = 1$ or $a = 3$):</b><br>
+  $a=1 \implies$ roots $1, 1, 3$. $a=3 \implies$ roots $1, 3, 1$. Both yield $P(x) = (x-1)^2(x-3)$.<br>
+  $x=1$ is a double root (differentiable), and <b>$x=3$ is the unique corner</b>.<br>
+• <b>Case 2 ($a = 2$):</b><br>
+  $a = 4-a \implies a=2 \implies$ roots $1, 2, 2$, giving $P(x) = (x-2)^2(x-1)$.<br>
+  $x=2$ is a double root (differentiable), and <b>$x=1$ is the unique corner</b>.
 </div>
 
+<h4>4. Detailed Solution for Case 1 ($a = 1$ or $a = 3$)</h4>
+<p>
+Since $P(x) = (x - 1)^2(x - 3)$ has its corner at $x = 3$, it must match $g(x)$'s corner: <b>$\beta = 3$</b>.<br>
+Differentiability of $h(x) = g(x) + |P(x)|$ at $x = 3$ requires $h'(3^+) = h'(3^-)$:<br>
+$$-f'(3) + P'(3) = 7f'(3) - P'(3) \iff 2P'(3) = 8f'(3) \iff P'(3) = 4f'(3)$$
+Since $P'(3) = (3 - 1)^2 = 4$:
+$$4 = 4f'(3) \implies f'(3) = 1$$
+Since $f'(3) = (3 - \alpha)^2$:
+$$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \alpha = 2 \text{ or } \alpha = 4$$
+Evaluating $f(0) = (0 - \alpha)^2(0 - 3)$:<br>
+• For $\alpha = 2$: <b>$f(0) = (0 - 2)^2(0 - 3) = 4 \times (-3) = -12$</b><br>
+• For $\alpha = 4$: <b>$f(0) = (0 - 4)^2(0 - 3) = 16 \times (-3) = -48$</b>
+</p>
+
+<h4>5. Detailed Solution for Case 2 ($a = 2$)</h4>
+<p>
+Since $P(x) = (x - 2)^2(x - 1)$ has its corner at $x = 1$, it must match $g(x)$'s corner: <b>$\beta = 1$</b>.<br>
+Differentiability of $h(x)$ at $x = 1$ requires $h'(1^+) = h'(1^-)$:<br>
+$$-f'(1) + P'(1) = 7f'(1) - P'(1) \iff 2P'(1) = 8f'(1) \iff P'(1) = 4f'(1)$$
+Since $P'(1) = (1 - 2)^2 = 1$:
+$$1 = 4f'(1) \implies f'(1) = \frac{1}{4}$$
+Since $f'(1) = (1 - \alpha)^2$:
+$$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \alpha = \frac{1}{2} \text{ or } \alpha = \frac{3}{2}$$
+Evaluating $f(0) = (0 - \alpha)^2(0 - 1)$:<br>
+• For $\alpha = \frac{1}{2}$: <b>$f(0) = \left(0 - \frac{1}{2}\right)^2(0 - 1) = -\frac{1}{4}$</b><br>
+• For $\alpha = \frac{3}{2}$: <b>$f(0) = \left(0 - \frac{3}{2}\right)^2(0 - 1) = -\frac{9}{4}$</b>
+</p>
+
+<h4>6. Determination of Maximum $M$, Minimum $m$, and Final Answer</h4>
+<p>
+Arranging all four possible values of $f(0)$ in ascending order:
+$$-48 < -12 < -\frac{9}{4} \; (= -2.25) < -\frac{1}{4} \; (= -0.25) < 0$$
+Thus:
+• <b>Maximum $M$</b>: <b>$-\frac{1}{4}$</b> (least negative)<br>
+• <b>Minimum $m$</b>: <b>$-48$</b> (most negative)<br><br>
+Their product:
+$$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
+Hence, the correct answer is <b>Option ② ($12$)</b>.
+</p>
+</div>
+</div>
 <div class="q" data-ans="2" data-exp="f(0)의 가능한 4개 값 {-48, -12, -9/4, -1/4} 중 최댓값은 -1/4, 최솟값은 -48입니다. 따라서 M × m = (-1/4) × (-48) = 12 입니다." data-exp-en="Among the four values $\{-48, -12, -9/4, -1/4\}$, maximum $M = -1/4$ and minimum $m = -48$. Their product is $(-1/4) \times (-48) = 12$, which corresponds to Option ②." >
-<div class="lvl">7단계 최종 본문항</div>
+<div class="lvl"><span class="bilingual-ko">7단계 최종 본문항</span><span class="bilingual-en">Step 7 · Final CSAT Question</span></div>
 <div class="stem"><span class="bilingual-ko">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값 $M$과 최솟값 $m$의 곱 $M \times m$의 값은 얼마인가요?</span><div class="bilingual-en">What is the product $M \times m$ of the maximum $M$ and minimum $m$ of $f(0)$ derived from the problem conditions?</div></div>
 <div class="opts opts-inline">
 <div class="opt"><span class="n">1</span>$6$</div>
@@ -1339,18 +1473,19 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 <div class="opt"><span class="n">4</span>$36$</div>
 <div class="opt"><span class="n">5</span>$48$</div>
 </div>
-<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div>
+<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
 <div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;"><span class="bilingual-ko">🚨 이 문제에 이상이 있어요</span><span class="bilingual-en">🚨 Report an issue with this question</span></button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px"><span class="bilingual-ko">어떤 부분이 이상한가요? 자세히 적어주세요.</span><span class="bilingual-en">What seems incorrect? Please describe in detail.</span></div>
 <textarea class="report-text" rows="3" style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
-<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">취소</span><span class="bilingual-en">Cancel</span></button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer"><span class="bilingual-ko">신고 접수</span><span class="bilingual-en">Submit Report</span></button>
 </div>
 </div>
-<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right"><span class="bilingual-ko">✅ 신고가 접수되었어요. 확인 후 고칠게요!</span><span class="bilingual-en">✅ Report received. We will review and fix it!</span></div>
 </div>
 </div>
 
@@ -1359,70 +1494,82 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
   <div class="min-header">
     <div class="min-header-title">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAHIElEQVR4nK1Xa4xdVRX+9j7n3HNfc+f9aJ2ZdtqGlkZaO5AOFdTJZEgD/DAK1UYbiTFgjIg/jPKHZDIJMeg/0Rij/iAmKIEEf5CiVCmjUKEgg21aGtoyJcNlWufJzD33cV57mbXvOXfuTOfW0rCSffe5e6+91rfXXnuvtQRiOnTIwHPPhXYmiwdeLAxeODGxN3BWmoUkAgzcGIUgJYSZzS1vuWP41J/ubpp0S05NF3MIzTc2JsX4uHr0PzT0xm9//dhma2X4pt72bHNTBkJI3DgRGH6hWMLFmSUn7zVN3PKN7z7+5AFxksbGJMbHFcaIpBDAA8/kD9/74Lhz9Ogx8koOEZH6NFtQKdHLL/+DvvrwE86Rp6cPs07WrXH++G267e7vjBcvnnuXFft6QRCSHwRrWqBbqPv1c/F8fb86HsYb8vMfTNF9P/hZ8fuv0W1VIxHJL37vyRf+duw4MwWu51EjUkpRGIa6bzTPxDwbkVeVHZx84y0a/eFvXmDd8sET2NNnl4ZHR+6kUClpmebqCRIhDEP4vg/P83SvlKrN1beYjykIAs2/ns80TbCO/UODtCMXDn/zKPbI948fH9zV35WFYbHPCGZkASwsViil1Isty9J9IxJ8sAASiYT+dl13zbgGpEgAEru3dmXzk38fNIOKk8v1pPRkuVKGIaUWwEp5YbyYgdX31/R9Ig2WrcIgYnn1a3PZFKhSyplCyto4X4eY0TCMmumuj5hvlVdFMngDbEn+rrcei2Xday45MzNaNjsjrzfd1cpU1GKlLNyo/efNMHiWYdu2lslA1ouUG5mPQTDiSqWilQgRK+ReRMuMqMUilgAU9byAwqLnQvERamsovfvYmevJXA+AlRGFeoEQJlxXwbIkDKNqNoAdawXAPIDZahMLkHIBQvJOD+LMUj8K6QR6Ah+9ijSI2BK+H1wLgIh2BSheKItI2Avw3BkQLcI050BYgkAhAsJWEYCSUGRBqRW8M/9XlNMj6E58Fh4ZcEyFdmEwgtoV3gAARb9lEJ2AELOQchnAAoASkkmC6xFCT8BOWBokqSQUASQlIE1IFHFuoQfF7JfQkwUsMQWirShQCi28gq5WXgcg9owkIFogxOv4cEkgNNrQlskgK1dgJxRrg88btwR7sD4T+rgEdaWIy1On8d/dn0F7q4m03wJp8i06gxCb4WIP0qKJn6hGACIighS3Ir/YjemFP6Kv/Rymy7dCGQPwcAFJdwV9SYGmgoB/ZQnhYgmGmcAFcxbvbLuCVPIKZsLzOEi3o9m0oQRBkQsDJ0E4BKBPh+iGACj6nS8A+cW7YMkpbGk/j1ftEFNnu7Bv6i+YW65gV0cfkh0JJLttBM0WwmWJMr+SJYLf2gYXXSBpQ8Dnw4LEHAR+BUWjAO5sDABVfwUhAIkyZpf24djHU1je+RRG0AzqzuPSQBvClIlbujfBUCFSlsRNXVtgzTqY8+eQrfTCVwVc9srIJNtQVq3ImfvQZvUA4GNQ1wJA+jdpWfrKpc0QeaeA5xfeg/+5g+j1tiGtilj6SKCpNYEUBw9YsJDB7uyXAXQi8NuwWExhelHifc+CkhkM9Q/U6bjGOyAiZ2xJZ2AIA0VVxn7zAF66/AxOtoWYVj3YOjeDYXs/0tiJUHVAik4QtQIioyWYFtCZA9ozBEjeUAjDUNVXsW6TDXyAdADJ2TbSVgKVsILuRB9+5P0UZ+YuoSQk7hAP4ebNB/QVlNHlqT6vVWX6seIJUjqqWoxIv5ZrY0VDC7iui0w6jS0dHTg7M4PAcDFg70JPMIR9rS3Y3tEEhbB2cVevcPxEV/UYhgkpDS3PUPya8rFeDUDW/7HthI4D/F7v3LQJrek0yq6Pgl/Czc0Wtnc2ocIPAYd0vVTWHHc9xcqSyaT+rsWAdazm+kUcA9h0pBQ+v2MHzn40g+7mJgx0dlVD7CfMkuPgxkfLINYbwSSlxJqMJQLB77YN4Pbt26vPfc2Jro9YZn26Vj9e7dlNlDDNZHrFKXMo1cM1EBzP+dwqbkUnKbyL/5ecxEoZPLeYP86uqnlBdcwpuRDJ3Irs/8Lo5PkP5x2oAELqwF8FEfV8hkxsvsYJShX0RnkkA+ee/0d71KJZZ/fg6KR8ahinpyupiddOvCUMKRWff5wL1ieZbA0m7uvzxfoWK2QeTmhqSiPrBGHIOac6feqMeG9ZTjx7L07rSS4SvvLwE8X8B5fWFCbBdRQda4uWRuMhhVFhMn95ho785BfFh16JCpOxqDQ78vSlw/c/8nPn1X/+i8h3P/XSjEKP3nzzbfrWo790vvaHi7XSTFRRVIvTR16noXef/f1j29Ll4Z39XdmWHBenn8T3N/aNQrGMC/kFZ8qxJ3rv+fbjvxtZLU5XpUclcyKVwaHnncGZfx/fq8pOM0n9oN8wCaWETGWXO/eOnPrz17OTfrm4pjz/H/aNPSojI0nwAAAAAElFTkSuQmCC" alt="min7014" class="min-logo">
-      <span>📚 min7014 수학자료실 공식 연계 심층 탐구</span>
+      <span><span class="bilingual-ko">📚 min7014 수학자료실 공식 연계 심층 탐구</span><span class="bilingual-en">📚 min7014 Official Mathematics Archive In-Depth Exploration</span></span>
     </div>
-    <span class="min-tag">GeoGebra · AlgeoMath · 단계별 증명 PDF</span>
+    <span class="min-tag"><span class="bilingual-ko">GeoGebra · AlgeoMath · 단계별 증명 PDF</span><span class="bilingual-en">GeoGebra · AlgeoMath · Step-by-Step Proof PDF</span></span>
   </div>
-  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
+  <p class="min-lead">
+    <span class="bilingual-ko">이 문제와 관련된 수학적 원리를 <b>민은기 선생님의 수학자료실(min7014)</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</span>
+    <span class="bilingual-en">Explore mathematical principles related to this problem in depth with <b>Teacher Min Eun Gi's Mathematics Archive (min7014)</b> interactive dynamic geometry applets and visual proof materials.</span>
+  </p>
   
   <div class="min-guide-banner" style="background:rgba(124,196,255,.08);border:1px solid rgba(124,196,255,.25);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;line-height:1.6;color:#c7d2fe">
-    🎬 <b>선생님의 자료를 깊이 있게 감상하는 법</b>: 민은기 선생님의 PDF는 책장을 넘기듯 페이지를 넘겨갈 때마다 <b>도형의 점이 이동하고 보조선이 더해지며 수식이 스스로 완성되는 '단계별 플립북 애니메이션 증명'</b>입니다. 상단 미리보기나 새 창에서 키보드 방향키나 마우스 휠로 페이지를 넘기며, <b>각 프레임마다 변하는 요소와 보존되는 원리의 의미</b>를 곱씹어 보세요.
+    <span class="bilingual-ko">🎬 <b>선생님의 자료를 깊이 있게 감상하는 법</b>: 민은기 선생님의 PDF는 책장을 넘기듯 페이지를 넘겨갈 때마다 <b>도형의 점이 이동하고 보조선이 더해지며 수식이 스스로 완성되는 '단계별 플립북 애니메이션 증명'</b>입니다. 상단 미리보기나 새 창에서 키보드 방향키나 마우스 휠로 페이지를 넘기며, <b>각 프레임마다 변하는 요소와 보존되는 원리의 의미</b>를 곱씹어 보세요.</span>
+    <span class="bilingual-en">🎬 <b>How to Explore Teacher's Materials</b>: Teacher Min Eun Gi's PDF flipbooks reveal mathematical derivations step-by-step as points move and auxiliary lines appear. Use keyboard arrows or scroll to reflect on what changes and what remains invariant.</span>
   </div>
 
   <div class="min-list">
     
         <div class="min-item">
           <div class="min-item-main">
-            <div class="min-cat-badge">📂 일반 수학</div>
+            <div class="min-cat-badge"><span class="bilingual-ko">📂 일반 수학</span><span class="bilingual-en">📂 General Mathematics</span></div>
             <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선
+              <span class="min-bullet">📌</span>
+              <span class="bilingual-ko">미분가능 함수 상의 한 점에서 접선과 법선</span>
+              <span class="bilingual-en">Tangents and Normals at a Point on a Differentiable Function</span>
               <span class="min-item-sub">Tangents and Normals at a Point on the Differential Function</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath"><span class="bilingual-ko">🔢 AlgeoMath</span><span class="bilingual-en">🔢 AlgeoMath</span></a> <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="PDF"><span class="bilingual-ko">📄 단계별 증명 PDF</span><span class="bilingual-en">📄 Proof PDF</span></a> <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="YouTube"><span class="bilingual-ko">🎥 해설 강의</span><span class="bilingual-en">🎥 Video</span></a> <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail"><span class="bilingual-ko">웹 상세 탐구 ➔</span><span class="bilingual-en">Details ➔</span></a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <div class="min-cat-badge">📂 일반 수학</div>
+            <div class="min-cat-badge"><span class="bilingual-ko">📂 일반 수학</span><span class="bilingual-en">📂 General Mathematics</span></div>
             <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 도함수의 의미를 이용하여 함수의 도함수 그래프 그리기
+              <span class="min-bullet">📌</span>
+              <span class="bilingual-ko">도함수의 의미를 이용하여 함수의 도함수 그래프 그리기</span>
+              <span class="bilingual-en">Draw Derivative Graph Using the Meaning of Derivative</span>
               <span class="min-item-sub">Draw derivative graph of a function using the meaning of the derivative</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=54ce0d3afd8911e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019110302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/XbPZgnUE_uc" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=54ce0d3afd8911e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath"><span class="bilingual-ko">🔢 AlgeoMath</span><span class="bilingual-en">🔢 AlgeoMath</span></a> <a href="https://min7014.github.io/2019/2019110302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="PDF"><span class="bilingual-ko">📄 단계별 증명 PDF</span><span class="bilingual-en">📄 Proof PDF</span></a> <a href="https://youtu.be/XbPZgnUE_uc" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="YouTube"><span class="bilingual-ko">🎥 해설 강의</span><span class="bilingual-en">🎥 Video</span></a> <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail"><span class="bilingual-ko">웹 상세 탐구 ➔</span><span class="bilingual-en">Details ➔</span></a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <div class="min-cat-badge">📂 일반 수학</div>
+            <div class="min-cat-badge"><span class="bilingual-ko">📂 일반 수학</span><span class="bilingual-en">📂 General Mathematics</span></div>
             <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 접선에 접근하는 할선들
+              <span class="min-bullet">📌</span>
+              <span class="bilingual-ko">접선에 접근하는 할선들</span>
+              <span class="bilingual-en">Secant Lines Approaching the Tangent Line</span>
               <span class="min-item-sub">Secant lines approaching the tangent line</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="GeoGebra"><span class="bilingual-ko">📐 GeoGebra 조작 ▾</span><span class="bilingual-en">📐 GeoGebra ▾</span></button> <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="Tube">Tube ↗</a> <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="PDF"><span class="bilingual-ko">📄 단계별 증명 PDF</span><span class="bilingual-en">📄 Proof PDF</span></a> <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="YouTube"><span class="bilingual-ko">🎥 해설 강의</span><span class="bilingual-en">🎥 Video</span></a> <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail"><span class="bilingual-ko">웹 상세 탐구 ➔</span><span class="bilingual-en">Details ➔</span></a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
         
         <div class="min-item">
           <div class="min-item-main">
-            <div class="min-cat-badge">📂 도함수(Derivatives)</div>
+            <div class="min-cat-badge"><span class="bilingual-ko">📂 도함수(Derivatives)</span><span class="bilingual-en">📂 Derivatives</span></div>
             <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" class="min-item-title">
-              <span class="min-bullet">📌</span> 도함수
+              <span class="min-bullet">📌</span>
+              <span class="bilingual-ko">도함수</span>
+              <span class="bilingual-en">Derivatives</span>
               <span class="min-item-sub">Derivatives</span>
             </a>
           </div>
           <div class="min-item-actions">
-            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ay6xtcd4')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/ay6xtcd4" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2024/2024021901.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="선생님의 단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/Zj0I986YS28" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="선생님의 동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ay6xtcd4')" title="GeoGebra"><span class="bilingual-ko">📐 GeoGebra 조작 ▾</span><span class="bilingual-en">📐 GeoGebra ▾</span></button> <a href="https://www.geogebra.org/m/ay6xtcd4" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="Tube">Tube ↗</a> <a href="https://min7014.github.io/2024/2024021901.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="PDF"><span class="bilingual-ko">📄 단계별 증명 PDF</span><span class="bilingual-en">📄 Proof PDF</span></a> <a href="https://youtu.be/Zj0I986YS28" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="YouTube"><span class="bilingual-ko">🎥 해설 강의</span><span class="bilingual-en">🎥 Video</span></a> <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" class="min-btn min-btn-detail"><span class="bilingual-ko">웹 상세 탐구 ➔</span><span class="bilingual-en">Details ➔</span></a>
           </div>
           <div class="min-ggb-frame-wrap"></div>
         </div>
@@ -1431,7 +1578,8 @@ $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
 
   <div class="min-footer">
     <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
-      🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
+      <span class="bilingual-ko">🌐 민은기 선생님의 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔</span>
+      <span class="bilingual-en">🌐 Visit Min Eun Gi's Mathematics Archive Main (3,400+ GeoGebra &amp; Proof PDFs) ➔</span>
     </a>
   </div>
 </div>
@@ -1459,8 +1607,8 @@ if (!window.toggleMinGgb) {
 }
 </script>
 
-<div class="final"><p>🎉 완료!</p><div class="ans" id="finalAns">정답 $12$</div>
-<button class="btn" onclick="location.reload()">다시 풀기</button></div>
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns"><span class="bilingual-ko">정답 $12$</span><span class="bilingual-en">Correct Answer: $12$</span></div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Retry Quiz</span></button></div>
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -1472,7 +1620,9 @@ function updateExplanations(lang) {
     var btn = q.querySelector('.exp-toggle-btn');
     if (btn) {
       var isShown = exp && exp.classList.contains('show');
-      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+      btn.innerHTML = isShown
+        ? '<span class="bilingual-ko">💡 해설 닫기</span><span class="bilingual-en">💡 Close Explanation</span>'
+        : '<span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span>';
     }
     if (exp) {
       var koExp = q.dataset.exp || '';
@@ -1495,13 +1645,12 @@ function toggleExp(btn){
   if(!q) return;
   var exp = q.querySelector('.exp');
   if(!exp) return;
-  var isEn = (document.documentElement.lang === 'en');
   if(exp.classList.contains('show')){
     exp.classList.remove('show');
-    btn.textContent = isEn ? '💡 View Explanation' : '💡 해설 보기';
+    btn.innerHTML = '<span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span>';
   } else {
     exp.classList.add('show');
-    btn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기';
+    btn.innerHTML = '<span class="bilingual-ko">💡 해설 닫기</span><span class="bilingual-en">💡 Close Explanation</span>';
   }
 }
 
@@ -1621,6 +1770,19 @@ function setBoardLang(lang) {
     MatheduI18n.setLanguage(lang);
   }
   updateExplanations(lang);
+  window.dispatchEvent(new CustomEvent('mathedu:lang-changed', { detail: { lang: lang } }));
+  if (window.MatheduReport && typeof MatheduReport.updateTexts === 'function') {
+    MatheduReport.updateTexts();
+  }
+  var nameInput = document.getElementById('studentName');
+  if (nameInput) {
+    nameInput.placeholder = (lang === 'en') ? 'Enter name' : '이름 입력';
+  }
+  if (document.title) {
+    document.title = (lang === 'en')
+      ? "2027 AY Sep Mock Exam Math #21 · Cubic Function & Differentiability · min7014 mathedu"
+      : "2027학년도 9월 모의평가 수학 21번 · 삼차함수와 절댓값 미분가능성 · min7014 mathedu";
+  }
 }
 
 (function(){
@@ -1640,25 +1802,28 @@ function setBoardLang(lang) {
 <div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">
   <div class="mathedu-update-card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div class="mathedu-update-badge">🔔 최신 업데이트 감지</div>
+      <div class="mathedu-update-badge"><span class="bilingual-ko">🔔 최신 업데이트 감지</span><span class="bilingual-en">🔔 Update Detected</span></div>
       <button class="mathedu-update-close-btn" onclick="closeUpdateModal()">✕</button>
     </div>
     <h2 style="margin:0 0 8px;font-size:1.35rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">
-      ✨ 이 문제의 최신 버전이 있습니다!
+      <span class="bilingual-ko">✨ 이 문제의 최신 버전이 있습니다!</span>
+      <span class="bilingual-en">✨ An updated version of this quiz is available!</span>
     </h2>
     <p style="margin:0 0 16px;color:#cbd5e1;font-size:0.9rem;line-height:1.55">
-      선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>
-      새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.
+      <span class="bilingual-ko">선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>
+      새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.</span>
+      <span class="bilingual-en">New explanations, improvements, or interactive scaffolding steps have been updated.<br>
+      You can download and save the latest version, or continue with the current version.</span>
     </p>
 
     <div class="mathedu-ver-box">
       <div class="mathedu-ver-item cur">
-        <span class="mathedu-ver-lbl">현재 내 오프라인 버전</span>
+        <span class="mathedu-ver-lbl"><span class="bilingual-ko">현재 내 오프라인 버전</span><span class="bilingual-en">Current Offline Version</span></span>
         <b id="lblCurrentVer">-</b>
       </div>
       <div style="color:#7cc4ff;font-size:1.2rem;font-weight:800">➔</div>
       <div class="mathedu-ver-item new">
-        <span class="mathedu-ver-lbl">🚀 온라인 최신 버전</span>
+        <span class="mathedu-ver-lbl"><span class="bilingual-ko">🚀 온라인 최신 버전</span><span class="bilingual-en">🚀 Online Latest Version</span></span>
         <b id="lblLatestVer">-</b>
       </div>
     </div>
@@ -1666,24 +1831,37 @@ function setBoardLang(lang) {
     <!-- 옵션: 새 버전 다운로드 vs 그냥 현재 버전으로 풀기 -->
     <div class="mathedu-update-btn-row">
       <button id="btnDownloadUpdate" class="mathedu-btn-primary" onclick="downloadLatestOfflineVersion()">
-        📥 새 버전 내려받아서 풀기 (저장)
+        <span class="bilingual-ko">📥 새 버전 내려받아서 풀기 (저장)</span>
+        <span class="bilingual-en">📥 Download Latest Version (Save)</span>
       </button>
       <button class="mathedu-btn-sec" onclick="continueCurrentVersion()">
-        📝 그냥 현재 버전으로 풀기
+        <span class="bilingual-ko">📝 그냥 현재 버전으로 풀기</span>
+        <span class="bilingual-en">📝 Continue with Current Version</span>
       </button>
       <a id="btnOpenOnlineLatest" href="https://min7014.github.io/mathedu/board/ac8dc374.html" target="_blank" rel="noopener" class="mathedu-btn-link">
-        🌐 온라인 최신판 웹으로 바로 열기 ➔
+        <span class="bilingual-ko">🌐 온라인 최신판 웹으로 바로 열기 ➔</span>
+        <span class="bilingual-en">🌐 Open Latest Online Web ➔</span>
       </a>
     </div>
 
     <div id="updateDownloadSuccess" style="display:none;margin-top:16px;background:rgba(94,234,212,.15);border:1px solid #5eead4;border-radius:12px;padding:14px;text-align:left">
-      <div style="font-weight:800;color:#5eead4;margin-bottom:4px">🎉 최신 버전 다운로드 완료!</div>
+      <div style="font-weight:800;color:#5eead4;margin-bottom:4px">
+        <span class="bilingual-ko">🎉 최신 버전 다운로드 완료!</span>
+        <span class="bilingual-en">🎉 Download Complete!</span>
+      </div>
       <div style="font-size:0.86rem;color:#e2e8f0;line-height:1.5">
-        다운로드 폴더에 최신 문제 파일(<code>mathedu_ac8dc374_offline_latest.html</code>)이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.
+        <span class="bilingual-ko">다운로드 폴더에 최신 문제 파일(<code>mathedu_ac8dc374_offline_latest.html</code>)이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.</span>
+        <span class="bilingual-en">The latest file (<code>mathedu_ac8dc374_offline_latest.html</code>) was saved to your downloads folder. You can open it in your browser or visit the online page.</span>
       </div>
       <div style="margin-top:12px;display:flex;gap:8px">
-        <a href="https://min7014.github.io/mathedu/board/ac8dc374.html" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">🌐 온라인 최신판 열기</a>
-        <button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">✕ 닫고 현재 화면 풀기</button>
+        <a href="https://min7014.github.io/mathedu/board/ac8dc374.html" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">
+          <span class="bilingual-ko">🌐 온라인 최신판 열기</span>
+          <span class="bilingual-en">🌐 Open Online Latest</span>
+        </a>
+        <button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">
+          <span class="bilingual-ko">✕ 닫고 현재 화면 풀기</span>
+          <span class="bilingual-en">✕ Close &amp; Continue</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1749,8 +1927,8 @@ function setBoardLang(lang) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'ac8dc374';
-window._offlineBuildTime = '2026-10-03T00:24:06.961562+00:00';
-window._offlineHash = 'e9b4765c';
+window._offlineBuildTime = '2026-10-03T00:42:35.640937+00:00';
+window._offlineHash = '060428bf';
 window._offlineVersion = 'v2026.10.03';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/ac8dc374.html';
 
@@ -1775,8 +1953,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'ac8dc374';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T00:24:06.961562+00:00';
-  var localHash = window._offlineHash || 'e9b4765c';
+  var localBuildTime = window._offlineBuildTime || '2026-10-03T00:42:35.640937+00:00';
+  var localHash = window._offlineHash || '060428bf';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/ac8dc374.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
