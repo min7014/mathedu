@@ -14,16 +14,16 @@
         allQuizzes: "📚 퀴즈 모음",
         offlineVault: "📦 오프라인 보관함",
         offlineVaultTitle: "인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함",
-        minExplorer: "🌐 min7014 기하 탐색관",
+        minExplorer: "🌐 동적 기하 탐색관",
         myBadges: "🏆 나의 업적",
         createQuiz: "✨ 문제 출제",
         membersOnly: "회원전용",
         dashboard: "📊 수업 대시보드",
-        minHome: "🌐 min7014 홈"
+        minHome: "🌐 자료실 홈"
       },
       hero: {
-        badgePill: "🏛️ 3,400+ 시각적 수학 증명과 직관 · min7014 수학자료실",
-        mainTitleLab: "min7014",
+        badgePill: "🏛️ 3,400+ 시각적 수학 증명과 직관 · 수학자료실",
+        mainTitleLab: "수학자료실",
         mainTitleHub: "mathedu",
         leadDesc: "3,400+ 시각적 기하 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학자료실</b>",
         emblemCaption: "📐 공식 엠블럼",
@@ -39,7 +39,7 @@
         storyDrawerP1: "원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <b>단델린의 구</b>라고 합니다.",
         storyDrawerP2: "구가 평면과 접하는 점($F_1, F_2$)이 바로 원뿔곡선의 <b>초점(Focus)</b>이 되며, 곡선 위의 점에서 두 초점까지의 거리의 차(또는 합)가 일정함을 입체 기하학으로 우아하게 밝혀냅니다.",
         storyDrawerQuote: '"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"',
-        storyDrawerAuthor: "수학의 본질과 직관을 밝히는 min7014의 교육 철학입니다.",
+        storyDrawerAuthor: "수학의 본질과 직관을 밝히는 수학교육의 지향점입니다.",
         statTopics: "🏛️ 수학 주제",
         statAssets: "📐 GeoGebra & PDF 증명",
         statQuizzes: "🎯 수능·모평 디딤돌 퀴즈",
@@ -169,7 +169,7 @@
         btnStart: "▶️ 1번 바로 풀기"
       },
       footer: {
-        brandDesc: "min7014 mathedu · 단계별 인터랙티브 수학교육 플랫폼",
+        brandDesc: "mathedu · 단계별 인터랙티브 수학교육 플랫폼",
         collabDesc: "min7014의 3,400+ 수학자료실과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평",
         terms: "이용약관",
         privacy: "개인정보처리방침",
@@ -276,7 +276,7 @@
         modalScanQr: "스마트폰 카메라로 QR 코드를 스캔하세요!",
         modalInstantJoin: "회원가입 없이 즉시 참여할 수 있습니다.",
         alertNoData: "내보낼 데이터가 없습니다.",
-        pageTitle: "실시간 수업 대시보드 · min7014 mathedu (min7014 수학자료실)",
+        pageTitle: "실시간 수업 대시보드 · mathedu (수학자료실)",
         teacherWarnMsgGeneral: "⚠️ 현재 교사 전용 실명 확인 모드입니다. 빔프로젝터 송출 시 학생 실제 이름이 노출될 수 있습니다!",
         authDeployPrompt: "수업 배포",
         anonymous: "익명"
@@ -320,13 +320,13 @@
         createQuiz: "✨ Create Quiz",
         membersOnly: "Members",
         dashboard: "📊 Classroom Dashboard",
-        minHome: "🌐 min7014 Home"
+        minHome: "🌐 Archive Home"
       },
       hero: {
-        badgePill: "🏛️ 3,400+ Dynamic Visual Proofs & Geometric Intuition · min7014 Math Archive",
-        mainTitleLab: "min7014",
+        badgePill: "🏛️ 3,400+ Dynamic Visual Proofs & Geometric Intuition · Math Archive",
+        mainTitleLab: "수학자료실",
         mainTitleHub: "mathedu",
-        leadDesc: "min7014 Math Archive: Over 3,400 Dynamic Visual Proofs & Scaffolding Quizzes, <b>100% Freely Open</b>",
+        leadDesc: "Math Archive: Over 3,400 Dynamic Visual Proofs & Scaffolding Quizzes, <b>100% Freely Open</b>",
         emblemCaption: "📐 Official Emblem",
         emblemSub: "Dandelin Spheres",
         emblemTitle: "Click to explore the geometric principle of Dandelin Spheres",
@@ -340,7 +340,7 @@
         storyDrawerP1: "When an oblique cutting plane intersects a double cone, the two spheres inscribed in the cone and tangent to the plane are known as <b>Dandelin Spheres</b>.",
         storyDrawerP2: "The points of tangency where the spheres touch the plane ($F_1, F_2$) are precisely the <b>foci</b> of the conic section (ellipse, parabola, or hyperbola). This solid geometry construction elegantly proves that the sum or difference of distances from any point on the curve to the two foci is constant.",
         storyDrawerQuote: '"Math that frees you from blind calculation to see the deep visual principle."',
-        storyDrawerAuthor: "The pedagogical philosophy of min7014.",
+        storyDrawerAuthor: "The pedagogical philosophy of mathematical insight.",
         statTopics: "🏛️ Math Topics",
         statAssets: "📐 GeoGebra & Visual Proofs",
         statQuizzes: "🎯 College Entrance Quizzes",
@@ -359,7 +359,7 @@
         master: "Grand Mathematician"
       },
       todayGgb: {
-        tag: "💡 Today's Featured Dynamic Geometry (min7014 Lab)",
+        tag: "💡 Today's Featured Dynamic Geometry (Math Archive)",
         btnNext: "Next Pick",
         btnApplet: "🎮 Explore in GeoGebra ➔",
         btnPdf: "📄 Visual Proof PDF",
@@ -470,11 +470,11 @@
         btnStart: "▶️ Start Problem #1"
       },
       footer: {
-        brandDesc: "min7014 mathedu · Interactive Step-by-Step Math Scaffolding Platform",
-        collabDesc: "A new horizon in mathematics education uniting min7014's 3,400+ visual math archives with Antigravity AI.",
+        brandDesc: "mathedu · Interactive Step-by-Step Math Scaffolding Platform",
+        collabDesc: "A new horizon in mathematics education uniting 3,400+ visual math archives with Antigravity AI.",
         terms: "Terms of Use",
         privacy: "Privacy Policy",
-        home: "min7014 Home",
+        home: "Archive Home",
         github: "GitHub Repository"
       },
       meta: {
@@ -577,7 +577,7 @@
         modalScanQr: "Scan QR Code with Smartphone Camera!",
         modalInstantJoin: "Join instantly without signup or login.",
         alertNoData: "No data to export.",
-        pageTitle: "Live Classroom Dashboard · min7014 mathedu",
+        pageTitle: "Live Classroom Dashboard · mathedu",
         teacherWarnMsgGeneral: "⚠️ Teacher Real Name Mode is active. Projecting this screen may expose student identities!",
         authDeployPrompt: "Classroom Distribution",
         anonymous: "Anonymous"

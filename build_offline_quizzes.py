@@ -29,7 +29,7 @@ ONLINE_BASE_URL = 'https://min7014.github.io/mathedu'
 os.makedirs(OFFLINE_DIR, exist_ok=True)
 
 OFFLINE_UPDATER_TEMPLATE = """
-<!-- 🔔 min7014 mathedu 오프라인 업데이트 안내 모달 -->
+<!-- 🔔 mathedu 오프라인 업데이트 안내 모달 -->
 <div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">
   <div class="mathedu-update-card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
@@ -487,7 +487,7 @@ def process_file(html_path, build_timestamp, build_version):
         <span class="bilingual-ko">🔄 최신 버전 확인</span>
         <span class="bilingual-en">🔄 Check for Updates</span>
       </button>
-      <span style="font-size:0.78rem;color:#94a3b8">min7014 mathedu</span>
+      <span style="font-size:0.78rem;color:#94a3b8">mathedu</span>
     </div>
   </div>
   <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">{title}</div>
@@ -527,8 +527,8 @@ def process_file(html_path, build_timestamp, build_version):
         <span class="bilingual-en">🌐 Open Online ➔</span>
       </a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">
-        <span class="bilingual-ko">🏛️ min7014 자료실</span>
-        <span class="bilingual-en">🏛️ min7014 Archive</span>
+        <span class="bilingual-ko">🏛️ 수학자료실</span>
+        <span class="bilingual-en">🏛️ Math Archive</span>
       </a>
     </div>
   </div>
@@ -632,8 +632,8 @@ def main():
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>min7014 mathedu · min7014 수학자료실 · 오프라인 전체 문제 보관함</title>
-<meta name="author" content="min7014">
+<title>mathedu · 수학자료실 · 오프라인 전체 문제 보관함</title>
+<meta name="author" content="mathedu">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
@@ -721,14 +721,14 @@ h1 {{
     </div>
   </div>
 
-  <h1 id="txtTitle">📦 min7014 mathedu 오프라인 전체 문제 보관함</h1>
+  <h1 id="txtTitle">📦 mathedu 오프라인 전체 문제 보관함</h1>
   <p class="lead" id="txtLead">인터넷 접속 없이 언제 어디서나 풀이할 수 있는 오프라인 독립 실행형 수학 퀴즈 모음입니다.</p>
 
   <div class="banner">
     <div style="font-weight:700;color:var(--good);margin-bottom:4px" id="txtBannerTitle">💡 오프라인 단독 파일 안내</div>
     <div style="font-size:0.88rem;color:#cbd5e1" id="txtBannerBody">
       • 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>
-      • 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 min7014 수학자료실 링크가 포함되어 있습니다.<br>
+      • 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 수학자료실 링크가 포함되어 있습니다.<br>
       • 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>
       • 총 <b>{len(results)}개</b>의 문제 파일이 준비되어 있습니다.
     </div>
@@ -772,18 +772,18 @@ function setOfflineLang(lang, isUserAction) {{
   var elBannerTitle = document.getElementById('txtBannerTitle');
   var elBannerBody = document.getElementById('txtBannerBody');
   var elBack = document.getElementById('txtBackLink');
-  if (elTitle) elTitle.textContent = isEn ? '📦 min7014 mathedu Standalone Offline Problem Archive' : '📦 min7014 mathedu 오프라인 전체 문제 보관함';
+  if (elTitle) elTitle.textContent = isEn ? '📦 mathedu Standalone Offline Problem Archive' : '📦 mathedu 오프라인 전체 문제 보관함';
   if (elLead) elLead.textContent = isEn ? 'Collection of standalone, self-contained interactive math quizzes that run completely offline without internet.' : '인터넷 접속 없이 언제 어디서나 풀이할 수 있는 오프라인 독립 실행형 수학 퀴즈 모음입니다.';
   if (elBannerTitle) elBannerTitle.textContent = isEn ? '💡 About Offline Standalone Quizzes' : '💡 오프라인 단독 파일 안내';
   if (elBack) elBack.textContent = isEn ? 'Back to mathedu Main' : 'mathedu 메인으로';
   if (elBannerBody) {{
     elBannerBody.innerHTML = isEn ?
       '• Each problem is a <b>self-contained single-file HTML</b> bundle with embedded images and interactive step-by-step scoring.<br>' +
-      '• Every quiz links back to its official online URL and min7014 Mathematics Archive.<br>' +
+      '• Every quiz links back to its official online URL and Mathematics Archive.<br>' +
       '• When connected to the internet, it <b>automatically detects online updates</b> with options to download the newest version or continue offline.<br>' +
       '• Total <b>{len(results)}</b> verified offline quizzes available.' :
       '• 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>' +
-      '• 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 min7014 수학자료실 링크가 포함되어 있습니다.<br>' +
+      '• 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 수학자료실 링크가 포함되어 있습니다.<br>' +
       '• 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>' +
       '• 총 <b>{len(results)}개</b>의 문제 파일이 준비되어 있습니다.';
   }}
