@@ -626,10 +626,11 @@ window.toggleMinGgb = function(btn, ggbUrl) {
         • <b>연속성과 미분 불가능성</b>: 경계점 $\alpha, \beta$에서 $f=0$이므로 $g(\alpha)=g(\beta)=0$으로 끊김 없이 연속입니다. 그러나 관통점 $x = \beta$를 지나며 부호가 바뀌므로 좌우 미분계수가 급변합니다:<br>
         &nbsp;&nbsp;• $x < \beta$ (좌측): $f(x) < 0 \implies g'(\beta^-) = 7f'(\beta)$ (기울기 $+7f'$ 급상승)<br>
         &nbsp;&nbsp;• $x > \beta$ (우측): $f(x) > 0 \implies g'(\beta^+) = -f'(\beta)$ (기울기 $-f'$ 하강)<br>
-        • <b>도함수의 '도약(Jump)'이란 무엇인가?</b>:<br>
-        원함수 $g(x)$ 자체는 $x = \beta$에서 $0$으로 끊김 없이 이어져(연속) 있지만, <b>접선의 기울기(도함수 $g'(x)$)는 $+7f'$에서 $-f'$로 순간적으로 뚝 떨어집니다.</b> 이처럼 <b>우미분계수에서 좌미분계수를 뺀 기울기의 단차(계단형 낙차)</b>를 해석학에서 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다:
+        • <b>좌우 미분계수의 차이와 '도약(Jump)'의 교육과정적 의미</b>:<br>
+        <b>현행 고등학교 수학교육과정(수학 II, 미적분) 교과서의 공식 용어는 '우미분계수와 좌미분계수의 차이'</b>이며, 교과서에는 '도약'이라는 용어가 없습니다. 대학 미적분학(Calculus) 및 수능 심화 분석에서는 이 좌우 미분계수의 순간적인 단차(계단형 낙차)를 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다.<br>
+        원함수 $g(x)$ 자체는 $x = \beta$에서 $0$으로 끊김 없이 이어져(연속) 있지만, 접선의 기울기(도함수 $g'(x)$)는 $+7f'$에서 $-f'$로 순간적으로 뚝 떨어집니다:
         <div style="text-align:center;margin:6px 0">$$\mathbf{\Delta g'(\beta) = g'(\beta^+) - g'(\beta^-) = -f'(\beta) - 7f'(\beta) = -8f'(\beta) < 0}$$</div>
-        $f'(\beta)>0$이므로 도약은 항상 음수($<0$)이며, 좌우 기울기가 어긋나면서 $g(x)$는 $x=\beta$에서 <b>위로 뾰족한 산 모양 첨점(Sharp Peak)</b>을 갖게 됩니다!
+        $f'(\beta)>0$이므로 차이(도약)는 항상 음수($<0$)이며, 좌우 기울기가 칼날처럼 어긋나면서 $g(x)$는 $x=\beta$에서 <b>위로 뾰족한 산 모양 첨점(Sharp Peak)</b>을 갖게 됩니다!
       </span>
       <div class="bilingual-en">
         • <b>Geometric Transformation</b>: When $f(x) \ge 0$, reflected across the x-axis ($-f(x)$). When $f(x) < 0$, amplified by $7\times$ ($7f(x)$).<br>
@@ -875,7 +876,7 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
 </div>
 </div>
 
-<h2>제3단계 · [구간 함수] $g(x)$의 꺾인 점(첨점)과 도함수 도약(Jump)<span class="bilingual-en">Step 3 · [Piecewise Analysis] Sharp Corner of $g(x)$ & Derivative Discontinuity Jump</span></h2>
+<h2>제3단계 · [구간 함수] $g(x)$의 꺾인 점(첨점)과 좌우 미분계수의 차이(도약)<span class="bilingual-en">Step 3 · [Piecewise Analysis] Sharp Corner of $g(x)$ & Difference of One-Sided Derivatives (Jump)</span></h2>
 <div class="know">
 <h3>먼저 알아야 할 지식</h3>
 
@@ -883,30 +884,32 @@ $\alpha \neq \beta$이므로 $(\beta - \alpha)^2$은 <b>0이 아닌 실수의 �
 <div style="background:rgba(20,24,51,.75);border:1.5px solid rgba(124,196,255,.4);border-radius:12px;padding:14px 16px;margin-bottom:14px">
   <div style="font-size:.95rem;font-weight:800;color:#93c5fd;display:flex;align-items:center;gap:6px;margin-bottom:8px">
     <span>💡</span>
-    <span class="bilingual-ko">수학 개념 탐구: '도약(Jump, 跳躍)'이란 도대체 무엇인가?</span>
-    <span class="bilingual-en">Mathematical Concept: What Does 'Jump' Mean in Calculus?</span>
+    <span class="bilingual-ko">수학 개념 탐구: 현행 수학교육과정 용어와 '도약(Jump)'의 관계</span>
+    <span class="bilingual-en">Mathematical Concept: Curriculum Terminology vs. 'Derivative Jump'</span>
   </div>
   <div style="font-size:.88rem;line-height:1.75;color:#e0e7ff">
     <span class="bilingual-ko">
-      • <b>일상적 의미 vs 해석학(Calculus) 정의</b>:<br>
-      일상에서 '도약'은 계단을 껑충 뛰어넘거나 단차를 뛰어오르는 것을 뜻합니다. 수학에서도 마찬가지로, 어떤 함수 $\phi(x)$에서 점 $x_0$의 좌극한과 우극한 사이에 발생하는 <b>순간적인 높낮이 차이(단차)</b>를 <b>도약 불연속(Jump Discontinuity)</b>이라고 부릅니다.<br>
-      해석학에서 <b>'도약의 크기(Jump Magnitude)'</b>는 항상 <b>우극한에서 좌극한을 뺀 값</b>으로 정의됩니다:
-      <div style="text-align:center;margin:6px 0"><b>$$\Delta \phi(x_0) = \lim_{x \to x_0^+} \phi(x) - \lim_{x \to x_0^-} \phi(x) = \phi(x_0^+) - \phi(x_0^-)$$</b></div>
+      • <b>현행 고등학교 수학교육과정(2015·2022 개정)에는 '도약'이란 말이 있나요?</b><br>
+      <b>아닙니다! 현행 고등학교 교과서(수학 II, 미적분)에는 '도약'이라는 용어가 공식적으로 없습니다.</b><br>
+      고등학교 공교육 교과서의 공식 표준 용어는 <b>'우미분계수와 좌미분계수의 차이'</b> 또는 <b>'좌우 미분계수의 불일치'</b>입니다.<br><br>
+      • <b>그렇다면 왜 수능 심화 풀이에서 '도약(Jump)'이란 표현을 쓸까요?</b><br>
+      대학교 미적분학(Calculus) 및 해석학에서는 좌극한과 우극한의 단차를 <b>도약 불연속(Jump Discontinuity)</b>이라 부릅니다. 수능 킬러 문항에서 꺾인 점(첨점)을 가진 두 함수가 더해져 미분가능해지는 원리를 설명할 때, <b>"우미분계수에서 좌미분계수를 뺀 기울기의 단차"</b>를 직관적으로 이해하기 위해 대학 해석학의 <b>'도함수의 도약(Derivative Jump)'</b> 개념을 차용하여 널리 설명합니다:
+      <div style="text-align:center;margin:6px 0"><b>$$\Delta g'(x_0) = \lim_{x \to x_0^+} g'(x) - \lim_{x \to x_0^-} g'(x) = g'(x_0^+) - g'(x_0^-)$$</b></div>
       • <b>원함수 $g(x)$는 끊김 없이 이어져 있는데, 왜 '도약'이라 부르는가?</b><br>
       원함수 $g(x)$ 자체는 $x = \beta$에서 $g(\beta^-) = g(\beta^+) = 0$으로 끊어지지 않고 이어져 있는 <b>연속 함수</b>입니다.<br>
-      그러나 그 <b>도함수 $g'(x)$(접선의 기울기)</b>를 관찰하면 엄청난 일이 벌어집니다:<br>
+      그러나 그 <b>도함수 $g'(x)$(접선의 기울기)</b>를 관찰하면 극적인 단차가 벌어집니다:<br>
       &nbsp;&nbsp;1) $x = \beta$ 직전(좌측): 기울기가 <b>$+7f'(\beta)$</b>로 가파르게 치솟아 오름 (양수)<br>
       &nbsp;&nbsp;2) $x = \beta$ 직후(우측): 기울기가 <b>$-f'(\beta)$</b>로 급격히 꺾여 내려감 (음수)<br>
-      도함수 $g'(x)$의 관점에서는 값이 $+7f'$에서 $-f'$로 <b>순간적으로 $-8f'(\beta)$만큼 수직으로 뚝 떨어지는 '계단형 단차'</b>가 생깁니다! 바로 이 도함수의 단차를 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다.<br>
-      • <b>도약의 부호와 첨점의 기하학적 형태</b>:<br>
-      &nbsp;&nbsp;• <b>음의 도약 ($\Delta < 0$)</b>: 기울기가 급상승($+7f'$) 후 급하강($-f'$) $\implies$ 원함수는 <b>위로 뾰족한 산봉우리 모양 첨점</b> 형성!<br>
-      &nbsp;&nbsp;• <b>양의 도약 ($\Delta > 0$)</b>: 기울기가 하강 후 상승 $\implies$ 원함수는 <b>아래로 뾰족한 V자 골짜기 첨점</b> 형성!<br>
-      &nbsp;&nbsp;• <b>도약 $= 0$ ($\Delta = 0$)</b>: 좌우 기울기 완전 일치 $\implies$ <b>미분가능 (부드러운 평활 곡선)</b>!
+      도함수 $g'(x)$의 관점에서는 값이 $+7f'$에서 $-f'$로 <b>순간적으로 $-8f'(\beta)$만큼 수직으로 뚝 떨어지는 '계단형 단차(낙차)'</b>가 생기며, 이를 <b>'도함수의 도약(Derivative Jump)'</b>이라 부릅니다.<br>
+      • <b>좌우 미분계수 차이(도약)의 부호와 첨점의 형태</b>:<br>
+      &nbsp;&nbsp;• <b>음의 차이 ($\Delta < 0$)</b>: 기울기가 급상승($+7f'$) 후 급하강($-f'$) $\implies$ 원함수는 <b>위로 뾰족한 산봉우리 모양 첨점</b> 형성!<br>
+      &nbsp;&nbsp;• <b>양의 차이 ($\Delta > 0$)</b>: 기울기가 하강 후 상승 $\implies$ 원함수는 <b>아래로 뾰족한 V자 골짜기 첨점</b> 형성!<br>
+      &nbsp;&nbsp;• <b>차이 $= 0$ ($\Delta = 0$)</b>: 좌우 기울기 완전 일치 $\implies$ <b>미분가능 (부드러운 평활 곡선)</b>!
     </span>
     <div class="bilingual-en">
-      • <b>Rigorous Definition of Jump</b>: In calculus, a **Jump Discontinuity** at $x_0$ is the gap between the right-hand and left-hand limits: $\Delta \phi(x_0) = \phi(x_0^+) - \phi(x_0^-)$.<br>
-      • <b>Why Use 'Jump' When $g(x)$ is Continuous?</b>: Although the original function $g(x)$ is continuous at $\beta$ ($g(\beta)=0$), its derivative $g'(x)$ (tangent slope) undergoes a sudden drop: from $+7f'(\beta)$ on the left to $-f'(\beta)$ on the right. This step-like drop of $-8f'(\beta)$ in the derivative is called the **Derivative Jump**.<br>
-      • <b>Jump Sign & Corner Shape</b>: A negative jump ($\Delta g' < 0$) means rising then falling, creating a sharp upward peak. A positive jump ($\Delta > 0$) creates a downward V-shaped corner. Zero jump ($\Delta = 0$) means smooth differentiability!
+      • <b>Is 'Jump' in the High School Math Curriculum?</b><br>
+      <b>No. The official Korean high school curriculum does NOT contain the word 'Jump'.</b> The official textbook terminology is strictly **"Difference between Right-hand and Left-hand Derivatives"** ($g'(\beta^+) - g'(\beta^-)$). The term **'Derivative Jump'** comes from University Calculus (**Jump Discontinuity**), used in advanced exam problem-solving as an intuitive physical model.<br>
+      • <b>Why Use 'Jump' When $g(x)$ is Continuous?</b>: Although the original curve $g(x)$ is continuous ($g(\beta)=0$), its slope drops abruptly from $+7f'(\beta)$ to $-f'(\beta)$. This step drop of $-8f'(\beta)$ in slope creates the sharp upward corner. Zero jump means smooth differentiability!
     </div>
   </div>
 
