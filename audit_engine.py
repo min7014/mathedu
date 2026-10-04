@@ -152,7 +152,23 @@ def check_file_rules(filepath, content):
             'msg': '.sol .bilingual-en 스타일 리셋이 누락되어 영문 전환 시 레이아웃 이상 가능성이 있습니다.'
         })
         
+    # 5. 초등학생 눈높이 무장벽 디딤돌 확장 검사 (GEMINI.md Rule 6)
+    if '<div class="q"' in content and not rel_path.endswith('index.html'):
+        stems = re.findall(r'<div class="stem">(.*?)</div>', content, re.DOTALL)
+        lvls = re.findall(r'<div class="lvl">(.*?)</div>', content, re.DOTALL)
+        if stems and lvls:
+            s1 = re.sub(r'<.*?>', '', stems[0]).strip()
+            l1 = re.sub(r'<.*?>', '', lvls[0]).strip()
+            has_elem = any(k in s1 or k in l1 for k in ['초등', 'Elementary', '구구단', '사칙연산'])
+            if not has_elem:
+                issues.append({
+                    'rule': 'SCAFFOLDING_ELEMENTARY_GROUNDING',
+                    'severity': 'WARNING',
+                    'msg': '1단계(Step 1)에 초등학생 눈높이 직관 디딤돌(초등 개념, 구구단, 사칙연산 연계)이 누락되었습니다.'
+                })
+        
     return issues
+
 
 def scan_repository(include_offline=True, custom_pattern=None, custom_missing=None):
     """전체 리포지토리 기계적 스캔 실행"""
