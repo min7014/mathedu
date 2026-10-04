@@ -103,6 +103,12 @@
 
       // 8. 오답 선택 감지기 (학생 오답노트 자동 적립)
       attachWrongAnswerTracker();
+
+      // 9. 친구 도전장(?challenger=...) 파라미터 감지 및 상단 배너 표시
+      checkAndShowIncomingChallenge();
+
+      // 10. 해설 하단 상시 선물/도전장 공유 카드 삽입
+      injectAltruisticShareCard();
     });
   }
 
@@ -736,6 +742,11 @@
           window.MatheduGame.clearWrongAnswer(currentSlug);
           window.MatheduGame.triggerConfetti(4000);
 
+          // 🚀 4대 무비용 바이럴 성장 엔진: 완주 축하 & 친구 도전장 & 커뮤니티 복사 & 선물 모달 팝업
+          setTimeout(function() {
+            showCompletionViralModal(total, correct);
+          }, 1000);
+
           // 수업 팩 연계 안내
           var packParam = (urlParams.get('pack') || '').trim();
           if (packParam) {
@@ -1227,6 +1238,356 @@
       }
     }
   };
+
+  // ════════════════════════════════════════════════════════════════════════
+  // 🚀 4대 무비용 바이럴 성장 엔진 (Zero-Cost Organic Viral Loop Suite)
+  // 1. 지적 성취감 과시 (Intellectual Flex & Result Card)
+  // 2. 친구 승부욕 자극 (도전장 챌린지 - Duel Mode: ?challenger=...)
+  // 3. 커뮤니티 전파용 워들 스타일 이모지 텍스트 복사 (Wordle-Style Text Copy)
+  // 4. 수포자 친구 살리기 이타적 추천 (Altruistic Scaffolding Gift)
+  // ════════════════════════════════════════════════════════════════════════
+
+  function showViralToast(msg) {
+    var t = document.getElementById('mathedu-viral-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'mathedu-viral-toast';
+      t.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(15,23,42,.96);color:#fff;border:1.5px solid rgba(56,189,248,.65);border-radius:14px;padding:12px 22px;font-size:0.92rem;font-weight:700;z-index:99999999;box-shadow:0 12px 35px rgba(0,0,0,.65);transition:opacity .25s ease,transform .25s ease;opacity:0;pointer-events:none;display:flex;align-items:center;gap:10px;backdrop-filter:blur(12px);max-width:90vw;text-align:center;word-break:keep-all;font-family:system-ui,sans-serif;';
+      document.body.appendChild(t);
+    }
+    t.innerHTML = msg;
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(0)';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function() {
+      t.style.opacity = '0';
+      t.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 3200);
+  }
+
+  function getProblemTitle() {
+    var h1 = document.querySelector('h1');
+    if (h1) {
+      var clone = h1.cloneNode(true);
+      var hidden = clone.querySelectorAll('.bilingual-en, [style*="display: none"], [style*="display:none"]');
+      if (isEnMode()) {
+        hidden = clone.querySelectorAll('.bilingual-ko');
+      }
+      hidden.forEach(function(el) { el.remove(); });
+      var t = clone.innerText.trim();
+      if (t) return t.replace(/^📐\s*/, '').replace(/^📘\s*/, '');
+    }
+    return document.title.replace(/\|.*$/, '').trim() || (isEnMode() ? 'Math Problem' : '수학 문제');
+  }
+
+  function getBaseShareUrl() {
+    return window.location.origin + window.location.pathname;
+  }
+
+  function getChallengeUrl(name) {
+    var n = (name || window._studentName || (isEnMode() ? 'Friend' : '익명 도전자')).trim();
+    return getBaseShareUrl() + '?challenger=' + encodeURIComponent(n);
+  }
+
+  function getQuizStats() {
+    var qs = document.querySelectorAll('.q');
+    var total = qs.length || 6;
+    var done = document.querySelectorAll('.q.done');
+    var correct = 0;
+    done.forEach(function(q) {
+      if (q.querySelector('.opt.correct')) correct++;
+    });
+    if (correct === 0 && done.length > 0) correct = done.length;
+    if (correct === 0) correct = total;
+    return { total: total, correct: correct, done: done.length || total };
+  }
+
+  function buildGreenBlocks(total, correct) {
+    var blocks = '';
+    for (var i = 0; i < total; i++) {
+      blocks += (i < correct) ? '🟩' : '🟨';
+    }
+    return blocks;
+  }
+
+  function nativeShareOrCopy(shareData, fallbackMsg) {
+    if (navigator.share) {
+      navigator.share(shareData).catch(function(err) {
+        if (err && err.name !== 'AbortError') {
+          copyToClipboard(shareData.text + '\n' + shareData.url, fallbackMsg);
+        }
+      });
+    } else {
+      copyToClipboard(shareData.text + '\n' + shareData.url, fallbackMsg);
+    }
+  }
+
+  function copyToClipboard(text, successMsg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showViralToast(successMsg || (isEnMode() ? '✅ Copied to clipboard!' : '✅ 클립보드에 복사되었습니다!'));
+      }).catch(function() {
+        legacyCopy(text, successMsg);
+      });
+    } else {
+      legacyCopy(text, successMsg);
+    }
+  }
+
+  function legacyCopy(text, successMsg) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showViralToast(successMsg || (isEnMode() ? '✅ Copied to clipboard!' : '✅ 클립보드에 복사되었습니다!'));
+    } catch (e) {
+      showViralToast(isEnMode() ? '⚠️ Please copy manually.' : '⚠️ 수동으로 복사해주세요.');
+    }
+    ta.remove();
+  }
+
+  // 1. 친구에게 3초 도전장 보내기 (호승심/승부욕 자극)
+  window.shareAsChallenge = function() {
+    var stats = getQuizStats();
+    var name = (window._studentName || (isEnMode() ? 'A friend' : '친구')).trim();
+    var title = getProblemTitle();
+    var url = getChallengeUrl(name);
+    
+    var shareText = isEnMode()
+      ? '⚔️ [' + name + '] sent you a Math Quest Challenge!\n"I cleared ' + title + ' (' + stats.total + ' steps) with zero errors. Can you beat me?"'
+      : '⚔️ [' + name + '] 님이 보낸 수능 킬러 도전장!\n"나 ' + title + ' ' + stats.total + '단계 오답 없이 완주했는데, 너도 나처럼 풀 수 있을까?"';
+      
+    var msg = isEnMode() 
+      ? '⚔️ Challenge link copied! Send it to your friend to spark a duel!' 
+      : '⚔️ 도전장 링크가 복사되었습니다! 친구나 단톡방에 공유해보세요!';
+      
+    nativeShareOrCopy({
+      title: isEnMode() ? 'Math Quest Challenge' : '수능 킬러 수학 도전장',
+      text: shareText,
+      url: url
+    }, msg);
+  };
+
+  // 2. 커뮤니티 자랑용 텍스트 복사 (워들 포맷)
+  window.copyCommunityScoreText = function() {
+    var stats = getQuizStats();
+    var title = getProblemTitle();
+    var blocks = buildGreenBlocks(stats.total, stats.correct);
+    var rate = Math.round((stats.correct / stats.total) * 100);
+    var url = getBaseShareUrl();
+    
+    var text = isEnMode()
+      ? '📘 mathedu Math Quest Challenge!\n' +
+        '📐 ' + title + '\n' +
+        blocks + ' ' + stats.total + '/' + stats.total + ' Steps Cleared! (' + rate + '% Accuracy)\n\n' +
+        'Mastered this high-level exam problem in 10 mins with micro-scaffolding! 🚀\n' +
+        '👉 Try beating my score: ' + url
+      : '📘 mathedu 수능 킬러 정복 챌린지!\n' +
+        '📐 ' + title + '\n' +
+        blocks + ' ' + stats.total + '/' + stats.total + ' 단계 올클리어! (정답률 ' + rate + '%)\n\n' +
+        '초등학생 눈높이 사다리로 수능 킬러 10분 컷 완주 완료 🚀\n' +
+        '👉 너도 풀 수 있는지 도전해봐: ' + url;
+
+    copyToClipboard(text, isEnMode() ? '📋 Community share text copied! Paste it in Reddit, Discord, or group chats!' : '📋 커뮤니티(수만휘, 오르비, 에타, 단톡방)용 결과 텍스트가 복사되었습니다!');
+  };
+
+  // 3. 수포자 친구 살리기 디딤돌 풀이 선물하기 (이타적 추천)
+  window.shareAsGift = function() {
+    var title = getProblemTitle();
+    var url = getBaseShareUrl();
+    
+    var shareText = isEnMode()
+      ? '💝 Found a crystal-clear step-by-step scaffolding solution for ' + title + '!\n' +
+        'Starts from elementary fundamentals and leads all the way to the full proof.\n' +
+        'Sharing this helpful study gift with you: '
+      : '💝 수능 킬러 문제를 초등학생도 이해할 수 있게 쪼갠 마법의 디딤돌 풀이 발견함!\n' +
+        '📐 ' + title + '\n' +
+        '수학 개념이랑 직관 잡기 진짜 좋아서 너한테 선물로 보낸다 꼭 풀어봐:\n';
+        
+    var msg = isEnMode()
+      ? '💝 Gift solution link copied! Send it to encourage your friends!'
+      : '💝 친구 선물용 디딤돌 풀이 링크가 복사되었습니다! 카톡으로 전송해보세요!';
+      
+    nativeShareOrCopy({
+      title: isEnMode() ? 'Helpful Math Gift' : '선물: 디딤돌 수학 풀이',
+      text: shareText,
+      url: url
+    }, msg);
+  };
+
+  // 4. 완주 시 축하 & 바이럴 통합 모달 팝업
+  window.showCompletionViralModal = function(total, correct) {
+    if (document.getElementById('matheduViralModal')) return;
+
+    var title = getProblemTitle();
+    var studentName = (window._studentName || (isEnMode() ? 'Guest Learner' : '자유 학습자')).trim();
+    var greenBlocks = buildGreenBlocks(total, correct);
+    var rate = Math.round((correct / total) * 100);
+
+    var modal = document.createElement('div');
+    modal.id = 'matheduViralModal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:999999;background:rgba(10,13,26,.88);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:16px;animation:matheduFadeIn .25s ease;font-family:system-ui,sans-serif';
+
+    modal.innerHTML = 
+      '<div style="background:linear-gradient(160deg,#141833 0%,#0e1222 100%);border:2px solid rgba(124,196,255,.45);border-radius:24px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;padding:26px;color:#fff;box-shadow:0 24px 60px rgba(0,0,0,.8);position:relative;text-align:center;box-sizing:border-box">' +
+        '<button type="button" onclick="document.getElementById(\'matheduViralModal\').remove()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.1);border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;transition:.15s" onmouseover="this.style.color=\'#fff\'">✕</button>' +
+        '<div style="font-size:2.6rem;margin-bottom:4px;animation:matheduPopUp .4s ease">🏆</div>' +
+        '<div style="display:inline-block;background:linear-gradient(90deg,rgba(56,189,248,.2),rgba(94,234,212,.2));border:1px solid #5eead4;color:#5eead4;padding:4px 14px;border-radius:20px;font-size:0.8rem;font-weight:800;margin-bottom:8px">' +
+          bilingual('수능 킬러 문항 정복 완료', 'PROBLEM MASTERED') +
+        '</div>' +
+        '<h2 style="font-size:1.28rem;margin:0 0 6px;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;line-height:1.4">' +
+          escapeHtml(title) +
+        '</h2>' +
+        '<p style="color:#cbd5e1;font-size:0.88rem;margin:0 0 16px">' +
+          bilingual('👤 <b>' + escapeHtml(studentName) + '</b> 님, 축하합니다! 초등학생 디딤돌부터 끝까지 완주하셨습니다!', '👤 Congratulations <b>' + escapeHtml(studentName) + '</b>! You cleared all scaffolding steps!') +
+        '</p>' +
+        '<div style="background:rgba(15,20,38,.85);border:1px solid rgba(124,196,255,.3);border-radius:16px;padding:14px;margin-bottom:18px">' +
+          '<div style="font-size:1.35rem;letter-spacing:4px;margin-bottom:8px">' + greenBlocks + '</div>' +
+          '<div style="display:flex;justify-content:space-around;font-size:0.83rem;color:#94a3b8;border-top:1px dashed rgba(255,255,255,.12);padding-top:10px">' +
+            '<div>' + bilingual('완주: ', 'Cleared: ') + '<b style="color:#5eead4">' + total + '/' + total + '</b></div>' +
+            '<div>' + bilingual('정답: ', 'Score: ') + '<b style="color:#38bdf8">' + correct + ' (' + rate + '%)</b></div>' +
+            '<div>' + bilingual('보너스: ', 'Bonus: ') + '<b style="color:#fde68a">+50 XP</b></div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:10px;text-align:left">' +
+          '<button type="button" onclick="window.shareAsChallenge()" style="background:linear-gradient(90deg,#f59e0b,#ef4444);color:#fff;border:none;border-radius:14px;padding:13px 18px;font-size:0.94rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(245,158,11,.3);transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'none\'">' +
+            '<div style="display:flex;align-items:center;gap:10px">' +
+              '<span style="font-size:1.3rem">⚔️</span>' +
+              '<div>' +
+                '<div>' + bilingual('친구에게 3초 도전장 보내기', 'Send 3-Sec Challenge to Friend') + '</div>' +
+                '<div style="font-size:0.75rem;color:rgba(255,255,255,.85);font-weight:400">' + bilingual('"나 다 풀었는데 너도 풀 수 있어?" 호승심 자극', '"I solved it, can you beat me?"') + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<span style="font-size:1.1rem">➔</span>' +
+          '</button>' +
+          '<button type="button" onclick="window.copyCommunityScoreText()" style="background:linear-gradient(90deg,#3b82f6,#8b5cf6);color:#fff;border:none;border-radius:14px;padding:13px 18px;font-size:0.94rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(59,130,246,.3);transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'none\'">' +
+            '<div style="display:flex;align-items:center;gap:10px">' +
+              '<span style="font-size:1.3rem">📋</span>' +
+              '<div>' +
+                '<div>' + bilingual('커뮤니티 자랑용 텍스트 복사 (워들 포맷)', 'Copy Community Text (Wordle Format)') + '</div>' +
+                '<div style="font-size:0.75rem;color:rgba(255,255,255,.85);font-weight:400">' + bilingual('수만휘, 오르비, 에타, 단톡방 1초 복붙', 'Paste in Reddit, Discord, or group chats') + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<span style="font-size:1.1rem">➔</span>' +
+          '</button>' +
+          '<button type="button" onclick="window.shareAsGift()" style="background:linear-gradient(90deg,#ec4899,#a855f7);color:#fff;border:none;border-radius:14px;padding:13px 18px;font-size:0.94rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(236,72,153,.3);transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'none\'">' +
+            '<div style="display:flex;align-items:center;gap:10px">' +
+              '<span style="font-size:1.3rem">💝</span>' +
+              '<div>' +
+                '<div>' + bilingual('수포자 친구에게 디딤돌 풀이 선물하기', 'Gift Scaffolding Solution to Friend') + '</div>' +
+                '<div style="font-size:0.75rem;color:rgba(255,255,255,.85);font-weight:400">' + bilingual('초등학생 눈높이 사다리로 수학 개념 구원', 'Help friends master difficult math concepts') + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<span style="font-size:1.1rem">➔</span>' +
+          '</button>' +
+        '</div>' +
+        '<div style="margin-top:16px">' +
+          '<button type="button" onclick="document.getElementById(\'matheduViralModal\').remove()" style="background:rgba(255,255,255,.08);color:#94a3b8;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:9px 18px;font-size:0.85rem;cursor:pointer;transition:.15s" onmouseover="this.style.color=\'#fff\'">' +
+            bilingual('🔍 닫고 해설 및 GeoGebra 계속 탐구하기', '🔍 Close & Explore GeoGebra Solutions') +
+          '</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+  };
+
+  // 5. 친구 도전장(?challenger=...) 파라미터 감지 및 상단 배너 표시
+  function checkAndShowIncomingChallenge() {
+    var challengerName = (urlParams.get('challenger') || '').trim();
+    if (!challengerName) return;
+
+    var steps = (urlParams.get('steps') || '').trim();
+
+    // 시작 모달(#trackFull) 상단에 도전장 카드 삽입
+    var trackFull = document.getElementById('trackFull');
+    if (trackFull && !document.getElementById('incomingChallengeBox')) {
+      var box = document.createElement('div');
+      box.id = 'incomingChallengeBox';
+      box.style.cssText = 'background:linear-gradient(135deg,rgba(245,158,11,.18) 0%,rgba(239,68,68,.18) 100%);border:1.5px solid rgba(245,158,11,.7);border-radius:14px;padding:12px 16px;margin:8px 0 14px;width:100%;max-width:440px;box-shadow:0 4px 20px rgba(245,158,11,.25);animation:matheduPopUp .3s ease;text-align:center;box-sizing:border-box';
+      box.innerHTML = 
+        '<div style="font-size:1.06rem;font-weight:800;color:#fcd34d;display:flex;align-items:center;justify-content:center;gap:6px">' +
+          '⚔️ <span>' + escapeHtml(challengerName) + '</span>' + bilingual(' 님의 수능 킬러 도전장!', '\'s Math Quest Challenge!') +
+        '</div>' +
+        '<div style="font-size:0.83rem;color:#e2e8f0;margin-top:4px;line-height:1.45">' +
+          bilingual(
+            '<b>' + escapeHtml(challengerName) + '</b> 님이 이 문제의 ' + (steps ? steps + '단계 ' : '') + '풀이를 완주하고 도전장을 보냈습니다. 너도 오답 없이 완주할 수 있을까?',
+            '<b>' + escapeHtml(challengerName) + '</b> finished this problem and challenged you to beat their score!'
+          ) +
+        '</div>';
+
+      var h2 = trackFull.querySelector('h2');
+      if (h2 && h2.nextSibling) {
+        trackFull.insertBefore(box, h2.nextSibling);
+      } else {
+        trackFull.insertBefore(box, trackFull.firstChild);
+      }
+    }
+
+    // 문제 풀이 본문화면 상단에도 고정 도전 바 삽입
+    var wrap = document.querySelector('.wrap');
+    if (wrap && !document.getElementById('activeChallengerBanner')) {
+      var banner = document.createElement('div');
+      banner.id = 'activeChallengerBanner';
+      banner.style.cssText = 'background:linear-gradient(90deg,rgba(245,158,11,.18),rgba(239,68,68,.18));border:1px solid rgba(245,158,11,.5);border-radius:12px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;color:#fde68a;font-size:0.86rem;font-weight:700;flex-wrap:wrap;gap:8px';
+      banner.innerHTML = 
+        '<div style="display:flex;align-items:center;gap:8px">' +
+          '<span style="font-size:1.1rem">⚔️</span>' +
+          '<span>' + bilingual('<b>' + escapeHtml(challengerName) + '</b> 님의 도전 진행 중! 끝까지 완주하여 승리를 증명하세요!', 'Challenged by <b>' + escapeHtml(challengerName) + '</b>! Clear all steps to win!') + '</span>' +
+        '</div>' +
+        '<span style="font-size:0.75rem;background:rgba(245,158,11,.3);border:1px solid rgba(245,158,11,.6);padding:3px 10px;border-radius:8px;color:#fff;font-weight:800">VS DUEL</span>';
+
+      wrap.insertBefore(banner, wrap.firstChild);
+    }
+  }
+
+  // 6. 해설 하단 상시 선물/도전장 공유 카드 삽입
+  function injectAltruisticShareCard() {
+    if (document.getElementById('matheduAltruisticShareCard')) return;
+    var target = document.querySelector('.sol') || document.querySelector('.wrap');
+    if (!target) return;
+
+    var card = document.createElement('div');
+    card.id = 'matheduAltruisticShareCard';
+    card.className = 'altruistic-share-card';
+    card.style.cssText = 'margin:32px 0 16px;background:linear-gradient(135deg,rgba(236,72,153,.12) 0%,rgba(168,85,247,.12) 100%);border:1.5px solid rgba(236,72,153,.4);border-radius:18px;padding:22px;color:#fff;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)';
+    card.innerHTML = 
+      '<div style="font-size:2rem;margin-bottom:6px">💝</div>' +
+      '<h3 style="margin:0 0 6px;font-size:1.18rem;color:#f472b6">' +
+        bilingual('이 문제가 헷갈려하는 친구에게 디딤돌 풀이 선물하기', 'Share this Scaffolding Solution with Friends') +
+      '</h3>' +
+      '<p style="font-size:0.88rem;color:#cbd5e1;line-height:1.6;max-width:540px;margin:0 auto 16px">' +
+        bilingual(
+          '아무리 복잡한 수능 킬러 문제도 초등학생 눈높이 미세 디딤돌과 수학자료실(min7014)의 시각적 증명으로 보면 누구나 직관적으로 이해할 수 있습니다. 함께 공부하는 친구들에게 이 풀이를 선물해보세요!',
+          'Complex exam problems become crystal clear with micro-scaffolding steps and visual proofs. Share this friendly learning gift with your classmates!'
+        ) +
+      '</p>' +
+      '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+        '<button type="button" onclick="window.shareAsGift()" style="background:linear-gradient(90deg,#ec4899,#a855f7);color:#fff;font-weight:800;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
+          bilingual('🎁 친구에게 풀이 선물하기 (카톡/공유)', '🎁 Gift to Friend (Kakao/Share)') +
+        '</button>' +
+        '<button type="button" onclick="window.shareAsChallenge()" style="background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.5);font-weight:700;padding:10px 18px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
+          bilingual('⚔️ 친구에게 도전장 보내기', '⚔️ Send Challenge to Friend') +
+        '</button>' +
+        '<button type="button" onclick="window.copyCommunityScoreText()" style="background:rgba(255,255,255,.08);color:#e2e8f0;border:1px solid rgba(255,255,255,.2);font-weight:600;padding:10px 18px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
+          bilingual('📋 커뮤니티 자랑 텍스트 복사', '📋 Copy Community Text') +
+        '</button>' +
+      '</div>';
+
+    if (target.classList && target.classList.contains('sol')) {
+      target.appendChild(card);
+    } else {
+      var sol = document.querySelector('.sol');
+      if (sol) {
+        sol.parentNode.insertBefore(card, sol.nextSibling);
+      } else {
+        target.appendChild(card);
+      }
+    }
+  }
 
   // 🌐 언어 변경 이벤트 리스너 (mathedu:lang-changed)
   window.addEventListener('mathedu:lang-changed', function(e) {
