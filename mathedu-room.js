@@ -163,9 +163,28 @@
         '<button type="button" id="btnTrackFullLangKo" onclick="window.setBoardLanguage(\'ko\')" style="background:' + (curLang === 'en' ? 'transparent' : '#38bdf8') + ';color:' + (curLang === 'en' ? '#cbd5e1' : '#0b1020') + ';border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:' + (curLang === 'en' ? '700' : '800') + ';cursor:pointer;transition:.15s">🇰🇷 한국어</button>' +
         '<button type="button" id="btnTrackFullLangEn" onclick="window.setBoardLanguage(\'en\')" style="background:' + (curLang === 'en' ? '#38bdf8' : 'transparent') + ';color:' + (curLang === 'en' ? '#0b1020' : '#cbd5e1') + ';border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:' + (curLang === 'en' ? '800' : '700') + ';cursor:pointer;transition:.15s">🌐 English</button>';
       trackFull.appendChild(langSwitcher);
-    } else {
-      updateModalLangButtons(curLang);
     }
+
+    var existingCenterSwitcher = document.getElementById('modalCenterLangSwitcher');
+    if (!existingCenterSwitcher) {
+      var centerSwitcher = document.createElement('div');
+      centerSwitcher.id = 'modalCenterLangSwitcher';
+      centerSwitcher.style.cssText = 'margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,23,42,.92);border:1.5px solid rgba(124,196,255,.5);border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10';
+      centerSwitcher.innerHTML = 
+        '<span style="font-size:0.83rem;color:#cbd5e1;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px">' +
+          '<span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span>' +
+        '</span>' +
+        '<button type="button" id="btnModalCenterLangKo" onclick="window.setBoardLanguage(\'ko\')" style="background:' + (curLang === 'en' ? 'transparent' : 'linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)') + ';color:' + (curLang === 'en' ? '#cbd5e1' : '#0b1020') + ';border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:' + (curLang === 'en' ? '700' : '800') + ';cursor:pointer;transition:all .18s;' + (curLang === 'en' ? '' : 'box-shadow:0 2px 10px rgba(56,189,248,.45)') + '">🇰🇷 한국어</button>' +
+        '<button type="button" id="btnModalCenterLangEn" onclick="window.setBoardLanguage(\'en\')" style="background:' + (curLang === 'en' ? 'linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)' : 'transparent') + ';color:' + (curLang === 'en' ? '#0b1020' : '#cbd5e1') + ';border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:' + (curLang === 'en' ? '800' : '700') + ';cursor:pointer;transition:all .18s;' + (curLang === 'en' ? 'box-shadow:0 2px 10px rgba(56,189,248,.45)' : '') + '">🌐 English</button>';
+      var h2 = trackFull.querySelector('h2');
+      if (h2 && h2.nextSibling) {
+        trackFull.insertBefore(centerSwitcher, h2.nextSibling);
+      } else {
+        trackFull.insertBefore(centerSwitcher, trackFull.firstChild);
+      }
+    }
+
+    updateModalLangButtons(curLang);
 
     var currentUser = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
     var currentGuest = window.MatheduAuth ? window.MatheduAuth.getCurrentGuest() : null;
@@ -1576,11 +1595,12 @@
           bilingual('✨ 가입 없이 아래 [👀 자유 풀기] 버튼을 누르면 즉시 시작됩니다!', '✨ Click the button below to start solving freely in 1 sec!') +
         '</div>';
 
-      var h2 = trackFull.querySelector('h2');
-      if (h2 && h2.nextSibling) {
-        trackFull.insertBefore(gBox, h2.nextSibling);
+      var centerSw = document.getElementById('modalCenterLangSwitcher');
+      var refNode = (centerSw && centerSw.nextSibling) ? centerSw.nextSibling : (h2 && h2.nextSibling ? h2.nextSibling : null);
+      if (refNode) {
+        trackFull.insertBefore(gBox, refNode);
       } else {
-        trackFull.insertBefore(gBox, trackFull.firstChild);
+        trackFull.appendChild(gBox);
       }
     }
 
@@ -1601,10 +1621,12 @@
         '</div>';
 
       var h2Target = trackFull.querySelector('h2');
-      if (h2Target && h2Target.nextSibling) {
-        trackFull.insertBefore(box, h2Target.nextSibling);
+      var centerSwTarget = document.getElementById('modalCenterLangSwitcher');
+      var refNodeTarget = (centerSwTarget && centerSwTarget.nextSibling) ? centerSwTarget.nextSibling : (h2Target && h2Target.nextSibling ? h2Target.nextSibling : null);
+      if (refNodeTarget) {
+        trackFull.insertBefore(box, refNodeTarget);
       } else {
-        trackFull.insertBefore(box, trackFull.firstChild);
+        trackFull.appendChild(box);
       }
     }
 
@@ -1730,6 +1752,30 @@
         btnEn.style.background = 'transparent';
         btnEn.style.color = '#cbd5e1';
         btnEn.style.fontWeight = '700';
+      }
+    }
+
+    var cKo = document.getElementById('btnModalCenterLangKo');
+    var cEn = document.getElementById('btnModalCenterLangEn');
+    if (cKo && cEn) {
+      if (isEn) {
+        cKo.style.background = 'transparent';
+        cKo.style.color = '#cbd5e1';
+        cKo.style.fontWeight = '700';
+        cKo.style.boxShadow = 'none';
+        cEn.style.background = 'linear-gradient(135deg, #38bdf8 0%, #818cf8 100%)';
+        cEn.style.color = '#0b1020';
+        cEn.style.fontWeight = '800';
+        cEn.style.boxShadow = '0 2px 10px rgba(56,189,248,.45)';
+      } else {
+        cKo.style.background = 'linear-gradient(135deg, #38bdf8 0%, #818cf8 100%)';
+        cKo.style.color = '#0b1020';
+        cKo.style.fontWeight = '800';
+        cKo.style.boxShadow = '0 2px 10px rgba(56,189,248,.45)';
+        cEn.style.background = 'transparent';
+        cEn.style.color = '#cbd5e1';
+        cEn.style.fontWeight = '700';
+        cEn.style.boxShadow = 'none';
       }
     }
   }
