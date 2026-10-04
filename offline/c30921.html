@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30921.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30921">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="3d6d450f">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="485e7c60">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,28 +698,91 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30921",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-주어진 부등식<br>
-$$2k-8 \le \frac{f(k+2)-f(k)}{2} \le 4k^2+14k \quad \cdots\cdots \text{㉠}$$<br>
-에서 양 끝의 두 이차식이 같아지는 정수 $k$를 찾습니다.<br>
-$$2k - 8 = 4k^2 + 14k \implies 4k^2 + 12k + 8 = 0 \implies k^2 + 3k + 2 = 0$$<br>
-$$(k+1)(k+2) = 0 \implies k = -1 \text{ 또는 } k = -2$$<br>
-1) $k = -1$을 ㉠에 대입하면 좌변과 우변이 모두 $-10$이 되므로<br>
-$$-10 \le \frac{f(1)-f(-1)}{2} \le -10 \implies f(1) - f(-1) = -20 \quad \cdots\cdots \text{㉡}$$<br>
-2) $k = -2$를 ㉠에 대입하면 좌변과 우변이 모두 $-12$가 되므로<br>
-$$-12 \le \frac{f(0)-f(-2)}{2} \le -12 \implies f(0) - f(-2) = -24 \quad \cdots\cdots \text{㉢}$$<br>
-삼차함수 $f(x)$의 최고차항 계수가 $1$이므로 도함수 $f'(x)$는 최고차항 계수가 $3$인 이차함수입니다.<br>
-$$f'(x) = 3x^2 + \alpha x + \beta$$<br>
-㉡에서 정적분을 이용하면<br>
-$$f(1) - f(-1) = \int_{-1}^1 (3x^2 + \alpha x + \beta)dx = \left[x^3 + \frac{\alpha}{2}x^2 + \beta x\right]_{-1}^1 = 2 + 2\beta = -20 \implies \beta = -11$$<br>
-㉢에서<br>
-$$f(0) - f(-2) = \int_{-2}^0 (3x^2 + \alpha x - 11)dx = \left[x^3 + \frac{\alpha}{2}x^2 - 11x\right]_{-2}^0 = 0 - (-8 + 2\alpha + 22) = -2\alpha - 14 = -24$$<br>
-$$-2\alpha = -10 \implies \alpha = 5$$<br>
-따라서 도함수는<br>
-$$f'(x) = 3x^2 + 5x - 11$$<br>
-구하는 값은<br>
-$$f'(3) = 3(3)^2 + 5(3) - 11 = 27 + 15 - 11 = 31$$<br>
-정답은 <b>31</b> 입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> In the given inequality <br> <br> $$2k - 8 = 4k^2 + 14k \implies 4k^2 + 12k + 8 = 0 \implies k^2 + 3k + 2 = 0$$ <br> $$(k+1)(k+2) = 0 \implies k = -1 \text{또는} k = -2$$ If you substitute ㉠, both the left and right sides become $-12$, so <br> If you use the definite integral in <br> $$f'(x) = 3x^2 + \alpha x + \beta$$ $$f'(x) = 3x^2 + 5x - 11$$ <br> The values to be obtained are <br></div></div><div class="q" data-ans="3" data-exp="$f&#x27;(x) = 3x^2+5x-11 \implies f&#x27;(3) = 31$ (단답형 정답: 31)." data-exp-en="$f&#x27;(x) = 3x^2+5x-11 \implies f&#x27;(3) = 31$ (Short answer: 31)."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">최고차항의 계수가 1인 삼차함수 $f(x)$가 모든 정수 $k$에 대하여 $2k-8 \le \frac{f(k+2)-f(k)}{2} \le 4k^2+14k$를 만족시킬 때, $f&#x27;(3)$의 값을 구하시오. [4점]</span><div class="bilingual-en">When the cubic function $f(x)$, whose coefficient of the highest order term is 1, satisfies $2k-8 \le \frac{f(k+2)-f(k)}{2} \le 4k^2+14k$ for all integers [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>27</div><div class="opt"><span class="n">2</span>29</div><div class="opt"><span class="n">3</span>31</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>35</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 정수 $k$에 대한 부등식의 양 끝이 일치하는 <b>특이점(압착 조건)</b>을 포착하여 특정 구간에서의 평균변화율(정적분) 값을 확정하고, 최고차항 계수가 1인 삼차함수의 도함수 $f'(x)$의 계수를 완벽히 결정하는 최고난도 대수·미분 추론 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 양 끝 이차식이 일치하는 특이 정수 $k$ 찾기</b><br>
+  주어진 부등식은 모든 정수 $k$에 대하여 다음을 만족합니다.<br>
+  $$2k-8 \le \frac{f(k+2)-f(k)}{2} \le 4k^2+14k \quad \cdots\cdots \text{㉠}$$
+  양 끝의 두 식 $2k-8$과 $4k^2+14k$가 같아지는 $k$를 조사합니다.<br>
+  $$4k^2 + 14k = 2k - 8 \implies 4k^2 + 12k + 8 = 0 \implies k^2 + 3k + 2 = 0$$
+  인수분해하면 $(k+1)(k+2) = 0$ 이므로 정수 $k = -1$ 과 $k = -2$ 에서 양 끝 값이 완전히 일치합니다!
+  <br><br>
+  <b>2단계: 샌드위치 정리를 통한 함숫값의 차 결정</b><br>
+  • $k = -1$ 대입: 양 끝 값이 모두 $2(-1)-8 = -10$ 이 되므로 부등식에 의해<br>
+  $$-10 \le \frac{f(1)-f(-1)}{2} \le -10 \implies f(1) - f(-1) = -20 \quad \cdots\cdots \text{㉡}$$<br>
+  • $k = -2$ 대입: 양 끝 값이 모두 $2(-2)-8 = -12$ 가 되므로 부등식에 의해<br>
+  $$-12 \le \frac{f(0)-f(-2)}{2} \le -12 \implies f(0) - f(-2) = -24 \quad \cdots\cdots \text{㉢}$$
+  <br>
+  <b>3단계: 정적분을 통한 도함수 $f'(x)$의 결정</b><br>
+  삼차함수 $f(x)$의 최고차항 계수가 $1$이므로, 도함수 $f'(x)$는 최고차항 계수가 $3$인 이차함수입니다.<br>
+  $$f'(x) = 3x^2 + \alpha x + \beta$$
+  미적분학의 기본정리에 의해 $f(b) - f(a) = \int_a^b f'(x)dx$ 입니다.<br>
+  • 식 ㉡ 적용:<br>
+  $$f(1) - f(-1) = \int_{-1}^1 (3x^2 + \alpha x + \beta)dx = 2\int_0^1 (3x^2 + \beta)dx = 2[x^3 + \beta x]_0^1 = 2(1 + \beta) = -20$$
+  $$1 + \beta = -10 \implies \beta = -11$$<br>
+  • 식 ㉢ 적용:<br>
+  $$f(0) - f(-2) = \int_{-2}^0 (3x^2 + \alpha x - 11)dx = \left[ x^3 + \frac{\alpha}{2}x^2 - 11x \right]_{-2}^0$$
+  $$= 0 - \left( (-2)^3 + \frac{\alpha}{2}(-2)^2 - 11(-2) \right) = -(-8 + 2\alpha + 22) = -(2\alpha + 14) = -24$$
+  $$2\alpha + 14 = 24 \implies 2\alpha = 10 \implies \alpha = 5$$
+  따라서 도함수는 $f'(x) = 3x^2 + 5x - 11$ 입니다.
+  <br><br>
+  <b>4단계: $f'(3)$ 계산</b><br>
+  $$f'(3) = 3(3)^2 + 5(3) - 11 = 27 + 15 - 11 = 31$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  구하는 값 $f'(3)$은 $31$ 입니다.<br>
+  따라서 올바른 정답은 <b>31</b> 입니다.<br>
+  💡 <b>실전 팁</b>: 부등식 $A(k) \le X \le B(k)$ 꼴에서 $A(k) = B(k)$가 되는 정수 지점은 양 끝이 조여들어 등식 $X = A(k)$로 확정되는 '조임 정리(Squeeze Lemma)'의 핵심 포인트입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem analyzes an inequality bounded by two quadratic polynomials for all integers $k$. Finding the points where the upper and lower bounds coincide forces exact values for the average rates of change, fully determining the quadratic derivative $f'(x) = 3x^2 + \alpha x + \beta$.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Identify integers $k$ where bounding quadratics coincide</b><br>
+  Given the inequality:<br>
+  $$2k-8 \le \frac{f(k+2)-f(k)}{2} \le 4k^2+14k \quad \cdots\cdots (1)$$<br>
+  Set the lower and upper bounds equal:<br>
+  $$4k^2 + 14k = 2k - 8 \implies 4k^2 + 12k + 8 = 0 \implies k^2 + 3k + 2 = 0$$<br>
+  This yields the integers $k = -1$ and $k = -2$.
+  <br><br>
+  <b>Step 2: Apply the squeeze property to deduce exact differences</b><br>
+  • At $k = -1$: Lower and upper bounds both evaluate to $2(-1)-8 = -10$:<br>
+  $$-10 \le \frac{f(1)-f(-1)}{2} \le -10 \implies f(1) - f(-1) = -20 \quad \cdots\cdots (2)$$<br>
+  • At $k = -2$: Lower and upper bounds both evaluate to $2(-2)-8 = -12$:<br>
+  $$-12 \le \frac{f(0)-f(-2)}{2} \le -12 \implies f(0) - f(-2) = -24 \quad \cdots\cdots (3)$$
+  <br>
+  <b>Step 3: Determine derivative coefficients via definite integrals</b><br>
+  Since $f(x)$ is a monic cubic, $f'(x) = 3x^2 + \alpha x + \beta$.<br>
+  By the Fundamental Theorem of Calculus:<br>
+  • From equation (2):<br>
+  $$f(1) - f(-1) = \int_{-1}^1 (3x^2 + \alpha x + \beta)dx = 2(1 + \beta) = -20 \implies \beta = -11$$<br>
+  • From equation (3):<br>
+  $$f(0) - f(-2) = \int_{-2}^0 (3x^2 + \alpha x - 11)dx = - (2\alpha + 14) = -24 \implies \alpha = 5$$<br>
+  Hence, $f'(x) = 3x^2 + 5x - 11$.
+  <br><br>
+  <b>Step 4: Evaluate $f'(3)$</b><br>
+  $$f'(3) = 3(3^2) + 5(3) - 11 = 27 + 15 - 11 = 31$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The value of $f'(3)$ is $31$.<br>
+  Hence, the answer is <b>31</b>.<br>
+  💡 <b>Strategy Tip</b>: Coinciding boundary curves collapse an inequality into strict equalities, eliminating all ambiguity in undetermined polynomial coefficients.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="$f&#x27;(x) = 3x^2+5x-11 \implies f&#x27;(3) = 31$ (단답형 정답: 31)." data-exp-en="$f&#x27;(x) = 3x^2+5x-11 \implies f&#x27;(3) = 31$ (Short answer: 31)."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">최고차항의 계수가 1인 삼차함수 $f(x)$가 모든 정수 $k$에 대하여 $2k-8 \le \frac{f(k+2)-f(k)}{2} \le 4k^2+14k$를 만족시킬 때, $f&#x27;(3)$의 값을 구하시오. [4점]</span><div class="bilingual-en">When the cubic function $f(x)$, whose coefficient of the highest order term is 1, satisfies $2k-8 \le \frac{f(k+2)-f(k)}{2} \le 4k^2+14k$ for all integers [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>27</div><div class="opt"><span class="n">2</span>29</div><div class="opt"><span class="n">3</span>31</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>35</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1148,9 +1211,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30921';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '3d6d450f';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '485e7c60';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30921.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1174,8 +1237,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30921';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '3d6d450f';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '485e7c60';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30921.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

@@ -785,7 +785,106 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><p><b>풀이.</b></p><p><b>① 상태 정의.</b> 초기 상태 $S_0$: A,A,A,B,B,B (B의 위치: 4,5,6). $k=1,2,4,5,6$ 이면 $S_0$ 유지(5가지), $k=3$ 이면 $S_1$(A,A,B,A,B,B)로 변화(1가지).</p><p><b>② $S_1$에서의 전이.</b> $S_1$에서 $k=3$ → $S_0$ 복귀(1가지), $k=2$ → $S_2$(A,B,A,A,B,B)(1가지), $k=4$ → $S_3$(A,A,B,B,A,B)(1가지), $k=1,5,6$ → $S_1$ 유지(3가지).</p><p><b>③ 2회 후 상태별 도달 수.</b> $M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$, $M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$, $M_2(S_2) = 1 \times 1 = 1$, $M_2(S_3) = 1 \times 1 = 1$.</p><p><b>④ 4회 후 $S_0$ 총 경우의 수.</b> 대칭성으로 $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$.</p><p><b>⑤ 3번째가 6인 조건부 경우의 수.</b> 3번째 $k=6$이면 $T_6$은 항등변환. 2회 후 상태 = 3회 후 상태 = $S_2$. $S_2 = S_0$ 이면 4번째 $k \in \{1,2,4,5,6\}$(5가지): $26 \times 5 = 130$. $S_2 = S_1$ 이면 4번째 $k=3$(1가지): $8 \times 1 = 8$. 합계 $130 + 8 = 138$.</p><p><b>⑥ 확률.</b> $P = \dfrac{138}{742} = \dfrac{69}{371}$.</p><p><b>정답: $\dfrac{69}{371}$</b></p><div class="bilingual-en"><b>Complete Solution:</b> <p> <b> Solution. </b> </p> <p> <b> ① State definition. </b> Initial state $S_0$: A,A,A,B,B,B (position of B: 4,5,6). If $k=1,2,4,5,6$, keep $S_0$ (5 types), if $k=3$, change to </p> <p> <b> ② Transition from $S_1$. </b> $S_1$ to $k=3$ → $S_0$ return (1 type), $k=2$ → $k=1,5,6$ → Maintain $S_1$ (3 types). </p> <p> <b> ③ Number of states reached after 2 times. </b> $M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$, $M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$, $M_2(S_2) = 1 \times 1 = 1$, $M_2(S_3) = 1 \times 1 = 1$. </p> <p> <b> ④ Total number of $S_0$ cases after 4 times. </b> With symmetry, $N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$. </p> <p> <b> ⑤ Number of conditional cases where the third is 6. If </b> is the third $k=6$, then $T_6$ is the identity transformation. Status after 2 times = Status after 3 times = $S_2$. If $S_2 = S_0$, the 4th $k \in \{1,2,4,5,6\}$ (5 types): $26 \times 5 = 130$. If $S_2 = S_1$, the 4th $k=3$ (1 type): $8 \times 1 = 8$. Total $130 + 8 = 138$. </p> <p> <b> ⑥ Probability. </b> $P = \dfrac{138}{742} = \dfrac{69}{371}$. </p> <p> <b> Correct answer: $\dfrac{69}{371}$</div></div><div class="q" data-ans="1" data-exp="4회 후 $S_0$ 도달 총 $742$가지 중 3번째가 6인 경우 $138$가지 → $\dfrac{138}{742} = \dfrac{69}{371}$." data-exp-en="$S_0$ is reached after 4 times. If the third of the total $742$ branches is 6, $138$ branches → $\dfrac{138}{742} = \dfrac{69}{371}$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">문자 &#x27;A&#x27;가 적힌 카드 3장과 문자 &#x27;B&#x27;가 적힌 카드 3장을 준비하여 1번째부터 6번째 자리까지 차례로 A, A, A, B, B, B가 되도록 놓는다. 한 개의 주사위를 던져 나온 눈의 수를 $k$라 할 때, $k \le 5$ 이면 $k$번째 자리의 카드와 $(k+1)$번째 자리의 카드를 교환하고, $k = 6$ 이면 카드의 위치를 그대로 둔다. 이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, 3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오.</span><div class="bilingual-en">Prepare three cards with the letters &#x27; A &#x27; and three cards with the letters &#x27; B If the number of eyes that come out when one die is thrown is $k$, if it is $k \le 5$, the card in the As a result of repeating this trial 4 times, when the cards are placed in the initial order of A, A, A, B, B, B, find the probability that the number of eyes in the 3rd trial is 6.</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\dfrac{69}{371}$</div><div class="opt"><span class="n">2</span>$\dfrac{1}{6}$</div><div class="opt"><span class="n">3</span>$\dfrac{5}{36}$</div><div class="opt"><span class="n">4</span>$\dfrac{1}{4}$</div><div class="opt"><span class="n">5</span>$\dfrac{1}{3}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 인접한 카드의 자리 교환 시행을 <b>이산 상태 공간(State Space)과 마르코프 전이 대칭성</b>으로 모델링하고, 4회 시행 후 초기 상태로 복귀한다는 조건 하에서 3번째 시행의 특정 사건이 발생할 <b>조건부확률($P(A|B) = \frac{N(A \cap B)}{N(B)}$)</b>을 정확히 계산하는 최고난도 확률과 통계 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 상태 공간 및 1단계 전이 규칙 정의</b><br>
+  초기 상태를 $S_0 = (\text{A,A,A,B,B,B})$ 라 합시다 (B의 위치: 4, 5, 6번 자리).<br>
+  주사위 눈 $k \in \{1, 2, 3, 4, 5, 6\}$에 따라 $k$번과 $(k+1)$번 자리를 교환합니다.<br>
+  • $S_0$에서 $k=3$일 때만 A와 B가 바뀌어 새로운 상태 $S_1 = (\text{A,A,B,A,B,B})$로 전이됩니다 (1가지).<br>
+  • $k \in \{1, 2, 4, 5, 6\}$일 때는 동종 문자(A-A 또는 B-B)끼리 바뀌거나 6번(제자리)이므로 $S_0$ 상태가 유지됩니다 (5가지).
+  <br><br>
+  <b>2단계: 상태 $S_1$에서의 전이 및 2회 시행 후 상태 벡터 산출</b><br>
+  $S_1$ 상태에서 주사위를 던질 때:<br>
+  - $k=3 \implies S_0$ 복귀 (1가지)<br>
+  - $k=2 \implies S_2 = (\text{A,B,A,A,B,B})$ 로 전이 (1가지)<br>
+  - $k=4 \implies S_3 = (\text{A,A,B,B,A,B})$ 로 전이 (1가지)<br>
+  - $k \in \{1, 5, 6\} \implies S_1$ 유지 (3가지)<br>
+  이를 통해 2회 시행 후 각 상태에 도달하는 경로 수를 계산하면 다음과 같습니다.<br>
+  • $M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$<br>
+  • $M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$<br>
+  • $M_2(S_2) = 1 \times 1 = 1$<br>
+  • $M_2(S_3) = 1 \times 1 = 1$
+  <br><br>
+  <b>3단계: 전이 대칭성을 이용한 4회 후 $S_0$ 복귀 총 경우의 수</b><br>
+  전이 연산의 대칭성에 의해 2회 후 상태 $S$에서 다시 2회 만에 $S_0$로 돌아가는 경로 수는 처음 $S_0$에서 $S$로 가는 경로 수와 완벽히 같습니다.<br>
+  따라서 4회 후 초기 상태 $S_0$가 되는 전체 경우의 수 $N_{\text{total}}$은 각 경로 수의 제곱의 합입니다.<br>
+  $$N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$$
+  <br>
+  <b>4단계: 3번째 주사위 눈이 6인 조건부 경우의 수 산출</b><br>
+  3번째 시행에서 $k=6$이 나오면 카드의 자리가 바뀌지 않으므로 항등변환($I$)입니다.<br>
+  따라서 3회 후의 상태는 2회 후의 상태와 정확히 동일합니다 ($S^{(3)} = S^{(2)}$).<br>
+  4회째 시행을 거쳐 $S_0$로 복귀해야 하므로 $S^{(2)}$는 1단계 만에 $S_0$로 갈 수 있는 $S_0$ 또는 $S_1$이어야 합니다.<br>
+  • $S^{(2)} = S_0$ 일 때: 4번째 주사위는 $S_0$를 유지하는 5가지 눈 ($k \in \{1,2,4,5,6\}$) 가능:<br>
+  $$26 \times 1 \times 5 = 130$$<br>
+  • $S^{(2)} = S_1$ 일 때: 4번째 주사위는 $S_0$로 복귀시키는 $k=3$ 1가지만 가능:<br>
+  $$8 \times 1 \times 1 = 8$$<br>
+  따라서 3번째가 6이면서 4회 후 $S_0$가 되는 경우의 수는 $130 + 8 = 138$ 입니다.
+  <br><br>
+  <b>5단계: 조건부확률 계산 및 약분</b><br>
+  $$P = \frac{138}{742} = \frac{69}{371}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  구하는 조건부확률은 $\frac{69}{371}$ 입니다.<br>
+  따라서 올바른 정답은 <b>$\frac{69}{371}$</b> 입니다.<br>
+  💡 <b>실전 팁</b>: 4단계 전이 과정 전체($6^4=1296$)를 나열하지 않고, 2단계 중간 기착점에서의 상태 수 $M_2(S)$를 구한 뒤 대칭성을 이용해 $N = \sum M_2(S)^2 = 742$로 축약하는 기법은 마르코프 체인의 대칭 행렬 성질을 활용한 최상위권의 필수 해법입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem models a card-adjacent transposing game using <b>discrete state spaces and Markovian symmetry</b>, evaluating the conditional probability $P(k_3 = 6 \mid S^{(4)} = S_0)$ after 4 trials.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Define state space and 1-step transitions</b><br>
+  Initial state $S_0 = (\text{A,A,A,B,B,B})$ with B at positions $\{4, 5, 6\}$.<br>
+  Roll $k \in \{1,2,3,4,5,6\}$ swaps cards at positions $k$ and $k+1$ (with $k=6$ acting as the identity $I$).<br>
+  • From $S_0$, only $k=3$ changes the configuration to $S_1 = (\text{A,A,B,A,B,B})$ (1 outcome).<br>
+  • Any other $k \in \{1,2,4,5,6\}$ leaves $S_0$ unchanged (5 outcomes).
+  <br><br>
+  <b>Step 2: 2-step path distributions</b><br>
+  From $S_1$:<br>
+  - $k=3 \to S_0$ (1 outcome)<br>
+  - $k=2 \to S_2 = (\text{A,B,A,A,B,B})$ (1 outcome)<br>
+  - $k=4 \to S_3 = (\text{A,A,B,B,A,B})$ (1 outcome)<br>
+  - $k \in \{1,5,6\} \to S_1$ (3 outcomes)<br>
+  Computing arrival multiplicities after 2 steps:<br>
+  • $M_2(S_0) = 5(5) + 1(1) = 26$<br>
+  • $M_2(S_1) = 5(1) + 1(3) = 8$<br>
+  • $M_2(S_2) = 1(1) = 1$<br>
+  • $M_2(S_3) = 1(1) = 1$
+  <br><br>
+  <b>Step 3: Total favorable 4-step paths returning to $S_0$</b><br>
+  By reversal symmetry of transposition operations, returning from state $S$ to $S_0$ in 2 steps equals the number of ways from $S_0$ to $S$.<br>
+  $$N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$$
+  <br>
+  <b>Step 4: Count conditional paths where the 3rd roll is 6</b><br>
+  Rolling $k_3 = 6$ leaves the state frozen ($S^{(3)} = S^{(2)}$). To reach $S_0$ on trial 4, $S^{(2)}$ must be within 1 step of $S_0$:<br>
+  • If $S^{(2)} = S_0$: 4th roll must keep $S_0$ ($k_4 \in \{1,2,4,5,6\}$):<br>
+  $$26 \times 1 \times 5 = 130$$<br>
+  • If $S^{(2)} = S_1$: 4th roll must be $k_4 = 3$:<br>
+  $$8 \times 1 \times 1 = 8$$<br>
+  Summing favorable conditional paths: $130 + 8 = 138$.
+  <br><br>
+  <b>Step 5: Compute conditional probability</b><br>
+  $$P = \frac{138}{742} = \frac{69}{371}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The required probability is $\frac{69}{371}$.<br>
+  Hence, the answer is <b>$\frac{69}{371}$</b>.<br>
+  💡 <b>Strategy Tip</b>: Splitting the 4-step chain at step 2 transforms a 1296-leaf tree into a compact symmetric sum of squares $26^2 + 8^2 + 1^2 + 1^2 = 742$.
+</p>
+  </div>
+</div><div class="q" data-ans="1" data-exp="4회 후 $S_0$ 도달 총 $742$가지 중 3번째가 6인 경우 $138$가지 → $\dfrac{138}{742} = \dfrac{69}{371}$." data-exp-en="$S_0$ is reached after 4 times. If the third of the total $742$ branches is 6, $138$ branches → $\dfrac{138}{742} = \dfrac{69}{371}$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">문자 &#x27;A&#x27;가 적힌 카드 3장과 문자 &#x27;B&#x27;가 적힌 카드 3장을 준비하여 1번째부터 6번째 자리까지 차례로 A, A, A, B, B, B가 되도록 놓는다. 한 개의 주사위를 던져 나온 눈의 수를 $k$라 할 때, $k \le 5$ 이면 $k$번째 자리의 카드와 $(k+1)$번째 자리의 카드를 교환하고, $k = 6$ 이면 카드의 위치를 그대로 둔다. 이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, 3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오.</span><div class="bilingual-en">Prepare three cards with the letters &#x27; A &#x27; and three cards with the letters &#x27; B If the number of eyes that come out when one die is thrown is $k$, if it is $k \le 5$, the card in the As a result of repeating this trial 4 times, when the cards are placed in the initial order of A, A, A, B, B, B, find the probability that the number of eyes in the 3rd trial is 6.</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\dfrac{69}{371}$</div><div class="opt"><span class="n">2</span>$\dfrac{1}{6}$</div><div class="opt"><span class="n">3</span>$\dfrac{5}{36}$</div><div class="opt"><span class="n">4</span>$\dfrac{1}{4}$</div><div class="opt"><span class="n">5</span>$\dfrac{1}{3}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

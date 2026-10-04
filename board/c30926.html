@@ -629,22 +629,77 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30926",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-$\sqrt{\frac{\pi}{6}} \le x \le \sqrt{\frac{\pi}{2}}$인 $x$에 대하여 $x$축에 수직인 평면으로 자른 단면은 지름이 $y$인 반원입니다.<br>
-단면의 넓이를 $S(x)$라 하면<br>
-$$S(x) = \frac{1}{2}\pi \left(\frac{y}{2}\right)^2 = \frac{\pi}{8}y^2$$<br>
-$$y^2 = (2x\sqrt{x\sin x^2})^2 = 4x^2(x\sin x^2) = 4x^3\sin x^2$$<br>
-$$S(x) = \frac{\pi}{8}(4x^3\sin x^2) = \frac{\pi}{2}x^3\sin x^2$$<br>
-입체도형의 부피 $V$는 다음과 같습니다.<br>
-$$V = \int_{\sqrt{\frac{\pi}{6}}}^{\sqrt{\frac{\pi}{2}}} \frac{\pi}{2}x^3\sin x^2 dx$$<br>
-$t = x^2$으로 치환하면 $dt = 2x dx \implies x dx = \frac{1}{2}dt$ 입니다.<br>
-$$V = \frac{\pi}{4}\int_{\frac{\pi}{6}}^{\frac{\pi}{2}} t\sin t dt$$<br>
-부분적분법을 적용하면<br>
-$$\int t\sin t dt = -t\cos t - \int (-\cos t)dt = -t\cos t + \sin t$$<br>
-$$\left[-t\cos t + \sin t\right]_{\frac{\pi}{6}}^{\frac{\pi}{2}} = (0 + 1) - \left(-\frac{\pi}{6} \times \frac{\sqrt{3}}{2} + \frac{1}{2}\right) = \frac{1}{2} + \frac{\sqrt{3}\pi}{12} = \frac{\sqrt{3}\pi + 6}{12}$$<br>
-따라서 부피는<br>
-$$V = \frac{\pi}{4} \times \frac{\sqrt{3}\pi + 6}{12} = \frac{\sqrt{3}\pi^2 + 6\pi}{48}$$<br>
-정답은 <b>③번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] For $x$ which is </b> <br> If the area of ​​the cross section of <br> is $S(x)$, <br> If you replace <br> $$V = \int_{\sqrt{\frac{\pi}{6}}}^{\sqrt{\frac{\pi}{2}}} \frac{\pi}{2}x^3\sin x^2 dx$$ <br> $t = x^2$, it becomes $dt = 2x dx \implies x dx = \frac{1}{2}dt$. <br> This is </b>.</div></div><div class="q" data-ans="3" data-exp="단면적 $S(x) = \frac{\pi}{2}x^3\sin x^2$을 적분하면 $\frac{\sqrt{3}\pi^2+6\pi}{48}$입니다." data-exp-en="Integrating the cross-sectional area $S(x) = \frac{\pi}{2}x^3\sin x^2$ gives $\frac{\sqrt{3}\pi^2+6\pi}{48}$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">그림과 같이 곡선 $y=2x\sqrt{x\sin x^2}$ ($0 \le x \le \sqrt{\pi}$)와 $x$축 및 두 직선 $x=\sqrt{\frac{\pi}{6}}, x=\sqrt{\frac{\pi}{2}}$로 둘러싸인 부분을 밑면으로 하는 입체도형이 있다. 이 입체도형을 $x$축에 수직인 평면으로 자른 단면이 모두 반원일 때, 이 입체도형의 부피는? [3점]</span><div class="bilingual-en">As shown in the figure, there is a three-dimensional figure whose base is surrounded by the curves $y=2x\sqrt{x\sin x^2}$ (If this three-dimensional figure is cut by a plane perpendicular to the $x$ axis and all cross sections are semicircles, what is the volume of this three-dimensional figure? [3 points]</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">2</span>$\frac{\sqrt{2}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{3}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{2}\pi^2+12\pi}{48}$</div><div class="opt"><span class="n">5</span>$\frac{\sqrt{3}\pi^2+12\pi}{48}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 단면이 반원인 <b>입체도형의 부피 적분</b>을 구하는 문제로, 단면적 $S(x)$를 올바르게 구성하고 $t = x^2$ <b>치환적분법</b>과 $t\sin t$의 <b>부분적분법</b>을 단계적으로 능숙하게 구사할 수 있는지를 종합 평가합니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 단면적 $S(x)$ 유도</b><br>
+  $\sqrt{\frac{\pi}{6}} \le x \le \sqrt{\frac{\pi}{2}}$ 에서 $x$축에 수직인 평면으로 자른 단면은 지름이 $y = 2x\sqrt{x\sin x^2}$ 인 반원입니다.<br>
+  반지름은 $R = \frac{y}{2} = x\sqrt{x\sin x^2}$ 이므로 반원의 넓이 $S(x)$는 다음과 같습니다.<br>
+  $$S(x) = \frac{1}{2}\pi R^2 = \frac{1}{2}\pi \left(x\sqrt{x\sin x^2}\right)^2 = \frac{\pi}{2} x^3 \sin x^2$$
+  <br>
+  <b>2단계: 치환적분을 통한 적분식 단순화</b><br>
+  입체도형의 부피 $V$는 다음과 같습니다.<br>
+  $$V = \int_{\sqrt{\frac{\pi}{6}}}^{\sqrt{\frac{\pi}{2}}} \frac{\pi}{2}x^3 \sin x^2 dx = \frac{\pi}{2} \int_{\sqrt{\frac{\pi}{6}}}^{\sqrt{\frac{\pi}{2}}} x^2 \sin(x^2) \cdot x dx$$
+  $t = x^2$ 으로 치환하면 $dt = 2x dx \implies x dx = \frac{1}{2}dt$ 입니다.<br>
+  적분 구간은 $x = \sqrt{\frac{\pi}{6}} \implies t = \frac{\pi}{6}$, $x = \sqrt{\frac{\pi}{2}} \implies t = \frac{\pi}{2}$ 로 변환됩니다.<br>
+  $$V = \frac{\pi}{2} \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} t \sin t \cdot \left(\frac{1}{2}dt\right) = \frac{\pi}{4} \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} t \sin t dt$$
+  <br>
+  <b>3단계: 부분적분법 적용 및 최종 부피 계산</b><br>
+  $u(t) = t \implies u'(t) = 1$, $v'(t) = \sin t \implies v(t) = -\cos t$ 로 둡니다.<br>
+  $$\int t \sin t dt = -t\cos t - \int (-\cos t)dt = -t\cos t + \sin t$$
+  위끝 $\frac{\pi}{2}$와 아래끝 $\frac{\pi}{6}$을 대입합니다.<br>
+  • $t = \frac{\pi}{2}$: $-\frac{\pi}{2}\cos\frac{\pi}{2} + \sin\frac{\pi}{2} = 0 + 1 = 1$<br>
+  • $t = \frac{\pi}{6}$: $-\frac{\pi}{6}\cos\frac{\pi}{6} + \sin\frac{\pi}{6} = -\frac{\pi}{6}\left(\frac{\sqrt{3}}{2}\right) + \frac{1}{2} = -\frac{\sqrt{3}\pi}{12} + \frac{1}{2}$<br>
+  정적분 값:<br>
+  $$1 - \left(-\frac{\sqrt{3}\pi}{12} + \frac{1}{2}\right) = \frac{1}{2} + \frac{\sqrt{3}\pi}{12} = \frac{6 + \sqrt{3}\pi}{12}$$
+  따라서 입체도형의 부피는 다음과 같습니다.<br>
+  $$V = \frac{\pi}{4} \times \frac{6 + \sqrt{3}\pi}{12} = \frac{\sqrt{3}\pi^2 + 6\pi}{48}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  계산된 부피 $V$는 $\frac{\sqrt{3}\pi^2 + 6\pi}{48}$ 입니다.<br>
+  따라서 올바른 정답은 <b>③번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 지름이 $y$인 반원의 넓이는 $\frac{1}{2}\pi (y/2)^2 = \frac{\pi}{8}y^2$ 입니다. 지름과 반지름을 혼동하여 $2$배 또는 $4$배 오차가 나지 않도록 단면적 공식을 확실히 점검하십시오.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem assesses the computation of a <b>solid's volume with semicircular cross-sections</b> perpendicular to the $x$-axis, combining $u$-substitution ($t = x^2$) and integration by parts on $\int t\sin t dt$.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Formulate the cross-sectional area $S(x)$</b><br>
+  Each cross-section is a semicircle with diameter $y = 2x\sqrt{x\sin x^2}$.<br>
+  The radius is $R = \frac{y}{2} = x\sqrt{x\sin x^2}$. The area of the semicircle is:<br>
+  $$S(x) = \frac{1}{2}\pi R^2 = \frac{1}{2}\pi x^2 (x\sin x^2) = \frac{\pi}{2}x^3 \sin x^2$$
+  <br>
+  <b>Step 2: Apply substitution $t = x^2$</b><br>
+  The volume integral is:<br>
+  $$V = \int_{\sqrt{\frac{\pi}{6}}}^{\sqrt{\frac{\pi}{2}}} \frac{\pi}{2}x^3 \sin x^2 dx$$<br>
+  Let $t = x^2$, so $dt = 2x dx \implies x dx = \frac{1}{2}dt$. Boundaries become $[\frac{\pi}{6}, \frac{\pi}{2}]$:<br>
+  $$V = \frac{\pi}{4}\int_{\frac{\pi}{6}}^{\frac{\pi}{2}} t\sin t dt$$
+  <br>
+  <b>Step 3: Integrate by parts and evaluate</b><br>
+  Using $\int t\sin t dt = -t\cos t + \sin t$:<br>
+  $$\left[-t\cos t + \sin t\right]_{\frac{\pi}{6}}^{\frac{\pi}{2}} = (0 + 1) - \left(-\frac{\sqrt{3}\pi}{12} + \frac{1}{2}\right) = \frac{1}{2} + \frac{\sqrt{3}\pi}{12} = \frac{6 + \sqrt{3}\pi}{12}$$<br>
+  Multiplying by $\frac{\pi}{4}$:<br>
+  $$V = \frac{\pi}{4} \cdot \frac{6 + \sqrt{3}\pi}{12} = \frac{\sqrt{3}\pi^2 + 6\pi}{48}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The resulting volume is $\frac{\sqrt{3}\pi^2 + 6\pi}{48}$.<br>
+  Hence, the correct answer is <b>Option ③</b>.<br>
+  💡 <b>Strategy Tip</b>: Always differentiate carefully between radius and diameter when expressing cross-sectional areas of semicircles.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="단면적 $S(x) = \frac{\pi}{2}x^3\sin x^2$을 적분하면 $\frac{\sqrt{3}\pi^2+6\pi}{48}$입니다." data-exp-en="Integrating the cross-sectional area $S(x) = \frac{\pi}{2}x^3\sin x^2$ gives $\frac{\sqrt{3}\pi^2+6\pi}{48}$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">그림과 같이 곡선 $y=2x\sqrt{x\sin x^2}$ ($0 \le x \le \sqrt{\pi}$)와 $x$축 및 두 직선 $x=\sqrt{\frac{\pi}{6}}, x=\sqrt{\frac{\pi}{2}}$로 둘러싸인 부분을 밑면으로 하는 입체도형이 있다. 이 입체도형을 $x$축에 수직인 평면으로 자른 단면이 모두 반원일 때, 이 입체도형의 부피는? [3점]</span><div class="bilingual-en">As shown in the figure, there is a three-dimensional figure whose base is surrounded by the curves $y=2x\sqrt{x\sin x^2}$ (If this three-dimensional figure is cut by a plane perpendicular to the $x$ axis and all cross sections are semicircles, what is the volume of this three-dimensional figure? [3 points]</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">2</span>$\frac{\sqrt{2}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{3}\pi^2+6\pi}{48}$</div><div class="opt"><span class="n">4</span>$\frac{\sqrt{2}\pi^2+12\pi}{48}$</div><div class="opt"><span class="n">5</span>$\frac{\sqrt{3}\pi^2+12\pi}{48}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

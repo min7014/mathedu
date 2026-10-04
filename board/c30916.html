@@ -629,22 +629,75 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30916",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-1) 진수 조건:<br>
-$$x + 2 > 0 \implies x > -2$$<br>
-$$x - 4 > 0 \implies x > 4$$<br>
-따라서 $x > 4$ 이어야 합니다.<br>
-2) 로그 밑 통일:<br>
-$$\log_{\frac{1}{3}}(x-4) = \log_{3^{-1}}(x-4) = -\log_3(x-4)$$<br>
-이므로 주어진 방정식은<br>
-$$\log_3(x+2) - \{-\log_3(x-4)\} = 3$$<br>
-$$\log_3(x+2) + \log_3(x-4) = 3$$<br>
-$$\log_3\{(x+2)(x-4)\} = 3$$<br>
-$$(x+2)(x-4) = 3^3 = 27$$<br>
-$$x^2 - 2x - 8 = 27 \implies x^2 - 2x - 35 = 0$$<br>
-$$(x-7)(x+5) = 0$$<br>
-진수 조건 $x > 4$에 의하여 $x = 7$ 입니다.<br>
-정답은 <b>7</b> 입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> 1) Hexadecimal condition: <br> $$x + 2 > 0 \implies x > -2$$ <br> <br> 2) Unification under logarithm: <br> $$x^2 - 2x - 8 = 27 \implies x^2 - 2x - 35 = 0$$ <br> $$(x-7)(x+5) = 0$$ <br> The correct answer is <b> 7 </b>.</div></div><div class="q" data-ans="3" data-exp="$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (단답형 정답: 7)." data-exp-en="$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (Short answer: 7)."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">방정식 $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$을 만족시키는 실수 $x$의 값을 구하시오. [3점]</span><div class="bilingual-en">Find the value of the real number $x$ that satisfies the equation $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$. [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>5</div><div class="opt"><span class="n">2</span>6</div><div class="opt"><span class="n">3</span>7</div><div class="opt"><span class="n">4</span>8</div><div class="opt"><span class="n">5</span>9</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>로그방정식의 해법</b>에서 가장 중요한 <b>진수 조건</b>을 확인하고, 밑 변환 공식을 통해 밑을 3으로 통일한 후 진수의 곱셈을 이용하여 이차방정식을 해결하는 단답형 문제입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 필수 진수 조건 확인</b><br>
+  로그가 정의되기 위해서는 모든 진수가 양수여야 합니다.<br>
+  • $x + 2 > 0 \implies x > -2$<br>
+  • $x - 4 > 0 \implies x > 4$<br>
+  두 조건의 공통 범위는 $x > 4$ 입니다.
+  <br><br>
+  <b>2단계: 밑을 3으로 통일하고 하나의 로그로 합성</b><br>
+  $\frac{1}{3} = 3^{-1}$ 이므로 로그의 밑 변환 성질에 의해 다음과 같습니다.<br>
+  $$\log_{\frac{1}{3}}(x-4) = \log_{3^{-1}}(x-4) = -\log_3(x-4)$$
+  주어진 방정식에 대입하면 마이너스가 플러스로 바뀝니다.<br>
+  $$\log_3(x+2) - \{-\log_3(x-4)\} = 3$$
+  $$\log_3(x+2) + \log_3(x-4) = 3$$
+  로그의 덧셈 성질 $\log_a M + \log_a N = \log_a(MN)$을 적용합니다.<br>
+  $$\log_3\{(x+2)(x-4)\} = 3$$
+  <br>
+  <b>3단계: 이차방정식 풀이 및 해 선별</b><br>
+  로그의 정의에 의해 진수는 $3^3 = 27$ 입니다.<br>
+  $$(x+2)(x-4) = 27 \implies x^2 - 2x - 8 = 27 \implies x^2 - 2x - 35 = 0$$
+  인수분해하면 $(x-7)(x+5) = 0$ 이므로 $x = 7$ 또는 $x = -5$ 입니다.<br>
+  1단계의 진수 조건 $x > 4$를 만족해야 하므로 $x = 7$ 만이 유일한 해입니다.
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  구하는 방정식의 해는 $7$ 입니다.<br>
+  따라서 올바른 정답은 <b>7</b> 입니다.<br>
+  💡 <b>실전 팁</b>: 로그방정식에서 진수 조건을 사전에 적어두지 않으면 무연근(이 문제에서는 $-5$)을 답으로 적어 감점되는 치명적 실수가 발생할 수 있습니다. 항상 **진수 조건($>0$)을 풀이 맨 첫 줄에 적는 습관**을 들이십시오.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem verifies the ability to solve a <b>logarithmic equation</b>, emphasizing domain constraints (argument $> 0$) and base unification via exponent inversion ($\log_{3^{-1}} u = -\log_3 u$).</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Determine the domain constraints (arguments $> 0$)</b><br>
+  For real logarithmic expressions, arguments must be strictly positive:<br>
+  • $x + 2 > 0 \implies x > -2$<br>
+  • $x - 4 > 0 \implies x > 4$<br>
+  Their intersection requires $x > 4$.
+  <br><br>
+  <b>Step 2: Unify bases to $3$ and condense</b><br>
+  Using base property $\log_{3^{-1}}(x-4) = -\log_3(x-4)$:<br>
+  $$\log_3(x+2) - [-\log_3(x-4)] = 3 \implies \log_3(x+2) + \log_3(x-4) = 3$$<br>
+  Applying the product rule of logarithms:<br>
+  $$\log_3[(x+2)(x-4)] = 3 \implies (x+2)(x-4) = 3^3 = 27$$
+  <br>
+  <b>Step 3: Solve the quadratic equation and verify constraints</b><br>
+  $$x^2 - 2x - 8 = 27 \implies x^2 - 2x - 35 = 0 \implies (x-7)(x+5) = 0$$<br>
+  The algebraic solutions are $x = 7$ and $x = -5$.<br>
+  Enforcing the domain restriction $x > 4$, the extraneous root $-5$ is rejected, leaving $x = 7$.
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The final solution is $7$.<br>
+  Therefore, the answer is <b>7</b>.<br>
+  💡 <b>Strategy Tip</b>: Always state the domain restrictions ($x > 4$) before converting to algebraic form to reliably weed out extraneous roots.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (단답형 정답: 7)." data-exp-en="$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (Short answer: 7)."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">방정식 $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$을 만족시키는 실수 $x$의 값을 구하시오. [3점]</span><div class="bilingual-en">Find the value of the real number $x$ that satisfies the equation $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$. [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>5</div><div class="opt"><span class="n">2</span>6</div><div class="opt"><span class="n">3</span>7</div><div class="opt"><span class="n">4</span>8</div><div class="opt"><span class="n">5</span>9</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

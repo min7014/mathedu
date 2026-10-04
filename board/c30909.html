@@ -629,15 +629,60 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30909",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-정적분의 성질을 이용하여 식을 하나로 합칩니다.<br>
-$$5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx = 5\int_0^1 f(x)dx - \int_0^1 5x dx - \int_0^1 f(x)dx$$<br>
-$$= 4\int_0^1 f(x)dx - \int_0^1 5x dx = \int_0^1 \{4f(x) - 5x\} dx$$<br>
-$f(x) = x^2+x$를 대입하면<br>
-$$4f(x) - 5x = 4(x^2+x) - 5x = 4x^2 - x$$<br>
-따라서 정적분을 계산하면<br>
-$$\int_0^1 (4x^2 - x)dx = \left[\frac{4}{3}x^3 - \frac{1}{2}x^2\right]_0^1 = \frac{4}{3} - \frac{1}{2} = \frac{5}{6}$$<br>
-정답은 <b>⑤번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> Combine the equations into one using the properties of definite integrals. If you substitute <br> $$5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx = 5\int_0^1 f(x)dx - \int_0^1 5x dx - \int_0^1 f(x)dx$$ <br> $$= 4\int_0^1 f(x)dx - \int_0^1 5x dx = \int_0^1 \{4f(x) - 5x\} dx$$ This is </b>.</div></div><div class="q" data-ans="5" data-exp="$\int_0^1 (4f(x) - 5x)dx = \int_0^1 (4x^2-x)dx = [4/3 x^3 - 1/2 x^2]_0^1 = 4/3 - 1/2 = 5/6$입니다." data-exp-en="This is $\int_0^1 (4f(x) - 5x)dx = \int_0^1 (4x^2-x)dx = [4/3 x^3 - 1/2 x^2]_0^1 = 4/3 - 1/2 = 5/6$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=x^2+x$에 대하여 $5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx$ 의 값은? [4점]</span><div class="bilingual-en">For function $f(x)=x^2+x$, what is the value of $5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{1}{6}$</div><div class="opt"><span class="n">2</span>$\frac{1}{3}$</div><div class="opt"><span class="n">3</span>$\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$\frac{2}{3}$</div><div class="opt"><span class="n">5</span>$\frac{5}{6}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>정적분의 선형성(Linearity of Definite Integrals)</b>을 이용하여 여러 개의 적분 기호를 하나의 적분으로 통합하고, 다항함수의 정적분을 효율적으로 계산하는 능력을 평가합니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 정적분의 선형성을 이용한 피적분함수 통합</b><br>
+  적분 구간이 $[0, 1]$로 모두 같으므로 정적분의 성질 $\int_a^b \{c f(x) + g(x)\}dx = c\int_a^b f(x)dx + \int_a^b g(x)dx$을 적용하여 식을 하나로 묶습니다.<br>
+  $$5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx = \int_0^1 \{5f(x) - (5x+f(x))\} dx = \int_0^1 \{4f(x) - 5x\} dx$$
+  <br>
+  <b>2단계: $f(x) = x^2+x$ 대입 및 피적분함수 정리</b><br>
+  주어진 $f(x) = x^2+x$를 피적분함수에 대입합니다.<br>
+  $$4f(x) - 5x = 4(x^2+x) - 5x = 4x^2 + 4x - 5x = 4x^2 - x$$
+  <br>
+  <b>3단계: 다항함수의 정적분 계산</b><br>
+  부정적분을 구하고 위끝과 아래끝을 대입합니다.<br>
+  $$\int_0^1 (4x^2 - x)dx = \left[ \frac{4}{3}x^3 - \frac{1}{2}x^2 \right]_0^1 = \left(\frac{4}{3} - \frac{1}{2}\right) - 0 = \frac{8 - 3}{6} = \frac{5}{6}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  계산된 정적분 값은 $\frac{5}{6}$ 입니다.<br>
+  따라서 올바른 정답은 <b>⑤번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 각각의 적분을 따로 계산한 뒤 빼려고 하면 계산 횟수가 늘어나 실수가 발생하기 쉽습니다. 구간이 동일한 적분은 먼저 하나의 기호 $\int$로 통합하여 동류항을 정리한 후 마지막에 한 번만 적분하십시오.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem verifies mastery of the <b>linearity property of definite integrals</b>, combining multiple integrals with identical limits into a single consolidated polynomial integral.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Consolidate the integral expression</b><br>
+  Because both terms share the identical interval of integration $[0, 1]$, combine them using linearity:<br>
+  $$5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx = \int_0^1 [5f(x) - (5x+f(x))] dx = \int_0^1 [4f(x) - 5x] dx$$
+  <br>
+  <b>Step 2: Substitute $f(x) = x^2+x$ into the integrand</b><br>
+  $$4f(x) - 5x = 4(x^2+x) - 5x = 4x^2 - x$$
+  <br>
+  <b>Step 3: Evaluate the definite integral</b><br>
+  Find the antiderivative and apply the Fundamental Theorem of Calculus:<br>
+  $$\int_0^1 (4x^2 - x)dx = \left[ \frac{4}{3}x^3 - \frac{1}{2}x^2 \right]_0^1 = \frac{4}{3} - \frac{1}{2} = \frac{5}{6}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The computed value is $\frac{5}{6}$.<br>
+  Thus, the correct choice is <b>Option ⑤</b>.<br>
+  💡 <b>Strategy Tip</b>: Combining integrands over identical integration bounds saves substantial algebra and prevents arithmetic mistakes.
+</p>
+  </div>
+</div><div class="q" data-ans="5" data-exp="$\int_0^1 (4f(x) - 5x)dx = \int_0^1 (4x^2-x)dx = [4/3 x^3 - 1/2 x^2]_0^1 = 4/3 - 1/2 = 5/6$입니다." data-exp-en="This is $\int_0^1 (4f(x) - 5x)dx = \int_0^1 (4x^2-x)dx = [4/3 x^3 - 1/2 x^2]_0^1 = 4/3 - 1/2 = 5/6$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=x^2+x$에 대하여 $5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx$ 의 값은? [4점]</span><div class="bilingual-en">For function $f(x)=x^2+x$, what is the value of $5\int_0^1 f(x)dx - \int_0^1 (5x+f(x))dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{1}{6}$</div><div class="opt"><span class="n">2</span>$\frac{1}{3}$</div><div class="opt"><span class="n">3</span>$\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$\frac{2}{3}$</div><div class="opt"><span class="n">5</span>$\frac{5}{6}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

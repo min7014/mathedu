@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30901.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30901">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="fe50aa80">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="4235f0af">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,13 +698,61 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30901",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-분자와 분모를 밑이 2인 거듭제곱 지수 형태로 변형합니다.<br>
-분자: $\sqrt[4]{32} = (2^5)^{\frac{1}{4}} = 2^{\frac{5}{4}}$<br>
-분모: $\sqrt[8]{4} = (2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$<br>
-따라서 주어진 식은<br>
-$$\frac{\sqrt[4]{32}}{\sqrt[8]{4}} = \frac{2^{\frac{5}{4}}}{2^{\frac{1}{4}}} = 2^{\frac{5}{4} - \frac{1}{4}} = 2^1 = 2$$<br>
-정답은 <b>②번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> Transform the numerator and denominator into a base 2 power exponent. <br> Numerator: $\sqrt[4]{32} = (2^5)^{\frac{1}{4}} = 2^{\frac{5}{4}}$ <br> Denominator: $\sqrt[8]{4} = (2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$</div></div><div class="q" data-ans="2" data-exp="$\frac{\sqrt[4]{32}}{\sqrt[8]{4}} = \frac{32^{1/4}}{4^{1/8}} = \frac{(2^5)^{1/4}}{(2^2)^{1/8}} = \frac{2^{5/4}}{2^{1/4}} = 2^{5/4 - 1/4} = 2^1 = 2$입니다." data-exp-en="This is $\frac{\sqrt[4]{32}}{\sqrt[8]{4}} = \frac{32^{1/4}}{4^{1/8}} = \frac{(2^5)^{1/4}}{(2^2)^{1/8}} = \frac{2^{5/4}}{2^{1/4}} = 2^{5/4 - 1/4} = 2^1 = 2$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$ 의 값은? [2점]</span><div class="bilingual-en">What is the value of $\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$? [2 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\sqrt{2}$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$2\sqrt{2}$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$4\sqrt{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>거듭제곱근의 성질과 유리수 지수의 계산 법칙</b>을 평가합니다. 서로 다른 거듭제곱근 기호($\sqrt[n]{a}$)로 표현된 식을 공통 밑인 소수 $2$의 유리수 지수 꼴 $2^{\frac{m}{n}}$으로 변환하여 나눗셈을 지수의 뺄셈으로 간결하게 정리하는 능력이 핵심입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 분자를 밑이 2인 유리수 지수 형태로 변형</b><br>
+  $32 = 2^5$이므로 $n$제곱근의 정의 $\sqrt[n]{a^m} = a^{\frac{m}{n}}$을 적용합니다.<br>
+  $$\sqrt[4]{32} = \sqrt[4]{2^5} = 2^{\frac{5}{4}}$$
+  <br>
+  <b>2단계: 분모를 밑이 2인 유리수 지수 형태로 변형</b><br>
+  $4 = 2^2$이므로 거듭제곱근의 기본 성질을 적용합니다.<br>
+  $$\sqrt[8]{4} = \sqrt[8]{2^2} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$$
+  <br>
+  <b>3단계: 밑이 같은 두 거듭제곱의 나눗셈 법칙 적용</b><br>
+  지수법칙 $\frac{a^m}{a^n} = a^{m-n}$을 적용하여 분수를 계산합니다.<br>
+  $$\frac{\sqrt[4]{32}}{\sqrt[8]{4}} = \frac{2^{\frac{5}{4}}}{2^{\frac{1}{4}}} = 2^{\frac{5}{4} - \frac{1}{4}} = 2^{\frac{4}{4}} = 2^1 = 2$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  계산된 최종 값은 $2$ 입니다.<br>
+  따라서 올바른 정답은 <b>②번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 밑이 소인수분해 가능한 합성수인 거듭제곱근 문제는 가장 먼저 밑을 소수로 통일하고 분수 지수로 전환하면 어떤 복잡한 곱셈/나눗셈도 단순한 덧셈/뺄셈 산수로 귀결됩니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem assesses foundational proficiency in <b>radical properties and laws of rational exponents</b>. The key strategy is converting radicals into fractional exponents with a common prime base of $2$, transforming a division of radicals into an elementary subtraction of exponents.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Convert the numerator into base-2 exponential form</b><br>
+  Factoring $32 = 2^5$ and applying $\sqrt[n]{a^m} = a^{\frac{m}{n}}$:<br>
+  $$\sqrt[4]{32} = \sqrt[4]{2^5} = 2^{\frac{5}{4}}$$
+  <br>
+  <b>Step 2: Convert the denominator into base-2 exponential form</b><br>
+  Factoring $4 = 2^2$ and simplifying the rational exponent:<br>
+  $$\sqrt[8]{4} = \sqrt[8]{2^2} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$$
+  <br>
+  <b>Step 3: Apply the quotient rule of exponents</b><br>
+  Using the exponent quotient property $\frac{a^m}{a^n} = a^{m-n}$:<br>
+  $$\frac{\sqrt[4]{32}}{\sqrt[8]{4}} = \frac{2^{\frac{5}{4}}}{2^{\frac{1}{4}}} = 2^{\frac{5}{4} - \frac{1}{4}} = 2^1 = 2$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The final simplified value is $2$.<br>
+  Therefore, the correct choice is <b>Option ②</b>.<br>
+  💡 <b>Strategy Tip</b>: Always factor composite bases into prime factor powers immediately. Fractional exponents streamline radical arithmetic into straightforward linear calculations.
+</p>
+  </div>
+</div><div class="q" data-ans="2" data-exp="$\frac{\sqrt[4]{32}}{\sqrt[8]{4}} = \frac{32^{1/4}}{4^{1/8}} = \frac{(2^5)^{1/4}}{(2^2)^{1/8}} = \frac{2^{5/4}}{2^{1/4}} = 2^{5/4 - 1/4} = 2^1 = 2$입니다." data-exp-en="This is $\frac{\sqrt[4]{32}}{\sqrt[8]{4}} = \frac{32^{1/4}}{4^{1/8}} = \frac{(2^5)^{1/4}}{(2^2)^{1/8}} = \frac{2^{5/4}}{2^{1/4}} = 2^{5/4 - 1/4} = 2^1 = 2$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$ 의 값은? [2점]</span><div class="bilingual-en">What is the value of $\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$? [2 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\sqrt{2}$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$2\sqrt{2}$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$4\sqrt{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1133,9 +1181,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30901';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = 'fe50aa80';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '4235f0af';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30901.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1159,8 +1207,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30901';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || 'fe50aa80';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '4235f0af';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30901.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

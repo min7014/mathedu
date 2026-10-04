@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30928.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30928">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="7ddd816f">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="00d956bf">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,25 +698,89 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30928",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-$g(0) = f'(0)\sin 0 + 0 = 0$<br>
-$g(1) = f'(2)\sin\pi + 1 = 1$<br>
-역함수의 정적분 성질에 의하여<br>
-$$\int_0^1 g(x)dx + \int_0^1 g^{-1}(x)dx = 1 \times 1 = 1 \quad \cdots\cdots \text{㉠}$$<br>
-$g(x) = f'(2x)\sin\pi x + x$이므로<br>
-$$\int_0^1 g(x)dx = \int_0^1 f'(2x)\sin\pi x dx + \left[\frac{1}{2}x^2\right]_0^1 = \int_0^1 f'(2x)\sin\pi x dx + \frac{1}{2}$$<br>
-문제의 조건 $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{4}$를 ㉠에 대입하면<br>
-$$\left(\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{2}\right) + \left(2\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{4}\right) = 1$$<br>
-$$3\int_0^1 f'(2x)\sin\pi x dx + \frac{3}{4} = 1 \implies 3\int_0^1 f'(2x)\sin\pi x dx = \frac{1}{4}$$<br>
-$$\int_0^1 f'(2x)\sin\pi x dx = \frac{1}{12} \quad \cdots\cdots \text{㉡}$$<br>
-이제 구하고자 하는 정적분 $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$에서 $x = 2t$로 치환하면 $dx = 2dt$이고 구간은 $[0, 1]$이 됩니다.<br>
-$$\int_0^2 f(x)\cos\frac{\pi x}{2}dx = 2\int_0^1 f(2t)\cos\pi t dt$$<br>
-부분적분법을 적용합니다: $u(t) = f(2t) \implies u'(t) = 2f'(2t)$, $v'(t) = \cos\pi t \implies v(t) = \frac{1}{\pi}\sin\pi t$<br>
-$$2\int_0^1 f(2t)\cos\pi t dt = 2\left[\frac{1}{\pi}f(2t)\sin\pi t\right]_0^1 - 2\int_0^1 2f'(2t)\left(\frac{1}{\pi}\sin\pi t\right)dt$$<br>
-$$= 0 - \frac{4}{\pi}\int_0^1 f'(2t)\sin\pi t dt$$<br>
-㉡의 결과를 대입하면<br>
-$$= -\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$$<br>
-정답은 <b>③번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> $g(0) = f'(0)\sin 0 + 0 = 0$ <br> $g(1) = f'(2)\sin\pi + 1 = 1$ Conditions of the <br> problem If you substitute $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{4}$ into ㉠, <br> It is $dx = 2dt$ and the section is $[0, 1]$. <br> $$\int_0^2 f(x)\cos\frac{\pi x}{2}dx = 2\int_0^1 f(2t)\cos\pi t dt$$ <br> Apply partial integration: <br> The correct answer is <b> ③ </b>.</div></div><div class="q" data-ans="3" data-exp="치환 및 부분적분에 의해 $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$입니다." data-exp-en="By substitution and partial integration, it is $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)$는 실수 전체의 집합에서 연속인 이계도함수를 갖고, 실수 전체의 집합에서 정의된 함수 $g(x)$를 $g(x) = f&#x27;(2x)\sin\pi x + x$라 하자. 함수 $g(x)$는 역함수 $g^{-1}(x)$를 갖고, $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$을 만족시킬 때, $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$의 값은? [4점]</span><div class="bilingual-en">The function $f(x)$ has a continuous second derivative in the set of all real numbers, and let the function $g(x)$ defined in the set of all real numbers be The function $g(x)$ has an inverse function $g^{-1}(x)$, and when $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$ is satisfied, what is the value of $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-\frac{1}{\pi}$</div><div class="opt"><span class="n">2</span>$-\frac{1}{2\pi}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{3\pi}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{4\pi}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6\pi}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>역함수의 정적분 기하학적 성질($\int_a^b g(x)dx + \int_{g(a)}^{g(b)} g^{-1}(y)dy = b\cdot g(b) - a\cdot g(a)$)</b>과 <b>치환적분 및 부분적분법</b>을 유기적으로 연결하여 삼각함수와 도함수의 적분식을 계산하는 고난도 변별력 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 역함수 정적분의 기본 항등식 수립</b><br>
+  $g(x) = f'(2x)\sin\pi x + x$ 에서 양 끝값을 조사합니다.<br>
+  • $g(0) = f'(0)\sin 0 + 0 = 0$<br>
+  • $g(1) = f'(2)\sin\pi + 1 = 0 + 1 = 1$<br>
+  역함수의 정적분 성질에 의하여 다음 등식이 항상 성립합니다.<br>
+  $$\int_0^1 g(x)dx + \int_0^1 g^{-1}(x)dx = 1 \cdot g(1) - 0 \cdot g(0) = 1 \times 1 - 0 = 1 \quad \cdots\cdots \text{㉠}$$
+  <br>
+  <b>2단계: 주어진 조건 대입 및 $\int_0^1 f'(2x)\sin\pi x dx$의 값 추출</b><br>
+  $g(x)$의 정적분을 계산합니다.<br>
+  $$\int_0^1 g(x)dx = \int_0^1 f'(2x)\sin\pi x dx + \int_0^1 x dx = \int_0^1 f'(2x)\sin\pi x dx + \frac{1}{2}$$
+  문제에서 주어진 조건 $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{4}$ 를 식 ㉠에 대입합니다.<br>
+  $$\left( \int_0^1 f'(2x)\sin\pi x dx + \frac{1}{2} \right) + \left( 2\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{4} \right) = 1$$
+  동류항을 묶어 정리하면:<br>
+  $$3\int_0^1 f'(2x)\sin\pi x dx + \frac{3}{4} = 1 \implies 3\int_0^1 f'(2x)\sin\pi x dx = \frac{1}{4}$$
+  $$\int_0^1 f'(2x)\sin\pi x dx = \frac{1}{12} \quad \cdots\cdots \text{㉡}$$
+  <br>
+  <b>3단계: 구하고자 하는 정적분의 치환적분 및 부분적분</b><br>
+  구하고자 하는 식은 $I = \int_0^2 f(x)\cos\frac{\pi x}{2}dx$ 입니다.<br>
+  $x = 2t$ 로 치환하면 $dx = 2dt$ 이고 적분 구간은 $[0, 1]$로 바뀝니다.<br>
+  $$I = \int_0^1 f(2t)\cos(\pi t) \cdot (2dt) = 2\int_0^1 f(2t)\cos(\pi t) dt$$
+  부분적분법을 적용합니다:<br>
+  • $u(t) = f(2t) \implies u'(t) = 2f'(2t)$<br>
+  • $v'(t) = \cos\pi t \implies v(t) = \frac{1}{\pi}\sin\pi t$<br>
+  $$I = 2 \left( \left[ f(2t) \cdot \frac{1}{\pi}\sin\pi t \right]_0^1 - \int_0^1 2f'(2t) \cdot \frac{1}{\pi}\sin\pi t dt \right)$$
+  $\sin\pi = 0, \sin 0 = 0$ 이므로 대입 항은 $0$입니다!<br>
+  $$I = 2 \left( 0 - \frac{2}{\pi}\int_0^1 f'(2t)\sin\pi t dt \right) = -\frac{4}{\pi} \int_0^1 f'(2t)\sin\pi t dt$$
+  식 ㉡의 결과 $\frac{1}{12}$를 대입합니다.<br>
+  $$I = -\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  계산된 정적분 값은 $-\frac{1}{3\pi}$ 입니다.<br>
+  따라서 올바른 정답은 <b>③번</b>입니다.<br>
+  💡 <b>실전 팁</b>: $\int_0^1 g(x)dx + \int_0^1 g^{-1}(x)dx = 1$은 원점과 $(1,1)$을 잇는 직사각형 면적 원리입니다. 이를 이용해 복잡한 미지의 적분 항 $\int_0^1 f'(2x)\sin\pi x dx = \frac{1}{12}$를 상수화한 후, 목표 식을 부분적분으로 연결하는 흐름을 체계화하십시오.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This advanced calculus question combines the <b>geometric box identity for inverse function integration</b> ($\int_a^b g + \int_{g(a)}^{g(b)} g^{-1} = b g(b) - a g(a)$) with substitution and integration by parts.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Apply the inverse integration formula</b><br>
+  For $g(x) = f'(2x)\sin\pi x + x$, evaluate endpoints:<br>
+  • $g(0) = 0$<br>
+  • $g(1) = 1$<br>
+  By the inverse definite integral identity:<br>
+  $$\int_0^1 g(x)dx + \int_0^1 g^{-1}(x)dx = 1 \cdot 1 - 0 = 1 \quad \cdots\cdots (1)$$
+  <br>
+  <b>Step 2: Isolate the integral $\int_0^1 f'(2x)\sin\pi x dx$</b><br>
+  Express $\int_0^1 g(x)dx$:<br>
+  $$\int_0^1 g(x)dx = \int_0^1 f'(2x)\sin\pi x dx + \left[\frac{x^2}{2}\right]_0^1 = \int_0^1 f'(2x)\sin\pi x dx + \frac{1}{2}$$<br>
+  Substitute the given expression for $\int_0^1 g^{-1}(x)dx$ into (1):<br>
+  $$\left(\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{2}\right) + \left(2\int_0^1 f'(2x)\sin\pi x dx + \frac{1}{4}\right) = 1$$<br>
+  $$3\int_0^1 f'(2x)\sin\pi x dx + \frac{3}{4} = 1 \implies \int_0^1 f'(2x)\sin\pi x dx = \frac{1}{12} \quad \cdots\cdots (2)$$
+  <br>
+  <b>Step 3: Integrate the target expression via substitution and parts</b><br>
+  Target: $I = \int_0^2 f(x)\cos\frac{\pi x}{2}dx$.<br>
+  Substitute $x = 2t$, so $dx = 2dt$ on $[0, 1]$:<br>
+  $$I = 2\int_0^1 f(2t)\cos\pi t dt$$<br>
+  Integrate by parts with $u = f(2t)$, $dv = \cos\pi t dt$ ($v = \frac{1}{\pi}\sin\pi t$):<br>
+  $$I = 2\left( \left[\frac{1}{\pi}f(2t)\sin\pi t\right]_0^1 - \frac{2}{\pi}\int_0^1 f'(2t)\sin\pi t dt \right)$$<br>
+  Since $\sin\pi = \sin 0 = 0$, the boundary term vanishes:<br>
+  $$I = -\frac{4}{\pi}\int_0^1 f'(2t)\sin\pi t dt = -\frac{4}{\pi} \left(\frac{1}{12}\right) = -\frac{1}{3\pi}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The evaluated integral equals $-\frac{1}{3\pi}$.<br>
+  Thus, the correct choice is <b>Option ③</b>.<br>
+  💡 <b>Strategy Tip</b>: The box formula $\int g + \int g^{-1} = 1$ allows extracting unknown functional integrals before deploying integration by parts on the final target.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="치환 및 부분적분에 의해 $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$입니다." data-exp-en="By substitution and partial integration, it is $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)$는 실수 전체의 집합에서 연속인 이계도함수를 갖고, 실수 전체의 집합에서 정의된 함수 $g(x)$를 $g(x) = f&#x27;(2x)\sin\pi x + x$라 하자. 함수 $g(x)$는 역함수 $g^{-1}(x)$를 갖고, $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$을 만족시킬 때, $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$의 값은? [4점]</span><div class="bilingual-en">The function $f(x)$ has a continuous second derivative in the set of all real numbers, and let the function $g(x)$ defined in the set of all real numbers be The function $g(x)$ has an inverse function $g^{-1}(x)$, and when $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$ is satisfied, what is the value of $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-\frac{1}{\pi}$</div><div class="opt"><span class="n">2</span>$-\frac{1}{2\pi}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{3\pi}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{4\pi}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6\pi}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1145,9 +1209,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30928';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '7ddd816f';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '00d956bf';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30928.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1171,8 +1235,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30928';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '7ddd816f';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '00d956bf';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30928.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

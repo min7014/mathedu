@@ -535,9 +535,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/1b623c24.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="1b623c24">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="89f30d9c">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="ecffc977">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -1014,7 +1014,79 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script></div>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><p><b>① 도식화</b> — 초기: 1·6번 뒷면(B), 2~5번 앞면(F). 목표: 6장 모두 앞면(F).</p><p><b>② 핵심 원리(패리티)</b> 뒤집기 2번 = 원래 상태. 각 카드가 <i>홀수 번/짝수 번</i> 뒤집히는지만 따진다.</p><ul><li>1·6번(처음 뒷면) → 앞면 되려면 <b>홀수 번</b> 뒤집힘</li><li>2~5번(처음 앞면) → 앞면 유지하려면 <b>짝수 번</b> 뒤집힘</li></ul><p><b>③ 전수조사</b> 주사위 4회의 눈 $(k_1,k_2,k_3,k_4)$ 중,</p><ul><li>홀수 눈(1 또는 6)이 <b>1회</b> → 80가지</li><li>홀수 눈이 <b>3회</b> → 80가지</li></ul><p>성공 합계 = $80+80=160$. 전체 = $6^4=1296$.</p><p><b>④ 답</b> $P = \dfrac{160}{1296} = \dfrac{10}{81}$ (약 12.3%).</p><div class="bilingual-en"><b>Complete Solution:</b> <p> <b> ① Schematic drawing Objective: Get all 6 cards face up (F). </p> <p> <b> ② Core principle (parity) It only counts whether each card is flipped <i> odd/even </i> times. </p> </li> </ul> <p> <b> ③ Complete survey 80 </li> <li> Odd number of eyes <b> 3 times All = $6^4=1296$. </p> <p> <b> ④ Answer </b> $P = \dfrac{160}{1296} = \dfrac{10}{81}$ (about 12.3%). </p></div></div><div class="q" data-ans="3" data-exp="성공 경우 = 80+80 = 160. 전체 = $6^4 = 1296$. $P = 160/1296 = 10/81$." data-exp-en="If successful = 80+80 = 160. Total = $6^4 = 1296$. $P = 160/1296 = 10/81$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">실험을 4번 반복한 뒤 6장 모두 앞면일 확률은?</span><div class="bilingual-en">After repeating the experiment 4 times, what is the probability that all 6 cards are heads?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$19/162$</div><div class="opt"><span class="n">2</span>$13/108$</div><div class="opt"><span class="n">3</span>$10/81$</div><div class="opt"><span class="n">4</span>$41/324$</div><div class="opt"><span class="n">5</span>$7/54$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 주사위를 4회 던져 카드를 뒤집는 시행에서 <b>홀짝성(Parity)의 불변량 원리</b>를 활용하여, 모든 카드가 목표 상태(앞면)가 되기 위한 독립시행의 경우의 수와 확률을 구하는 이산수학·확률 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 카드 상태와 뒤집기 횟수의 패리티 분석</b><br>
+  • 초기 상태: 1번, 6번 카드는 뒷면(Back, B), 2번~5번 카드는 앞면(Front, F)<br>
+  • 목표 상태: 6장의 카드 모두 앞면(F)<br>
+  카드는 2번 뒤집히면 원래 면으로 되돌아옵니다 ($F \leftrightarrow B$). 따라서 최종 앞면이 되기 위한 조건은 다음과 같습니다.<br>
+  - 1번, 6번 카드 (초기 뒷면): <b>홀수 번</b> 뒤집혀야 앞면이 됨<br>
+  - 2번~5번 카드 (초기 앞면): <b>짝수 번 (0번 포함)</b> 뒤집혀야 앞면 유지
+  <br><br>
+  <b>2단계: 주사위 눈과 뒤집히는 카드 규칙 파악</b><br>
+  주사위의 눈 $k$가 나왔을 때 카드가 뒤집히는 규칙에 의해, 1번과 6번 카드는 오직 주사위 눈이 특정 조건(1 또는 6 등)일 때 영향을 받습니다.<br>
+  전체 4회의 주사위 던지기 중 1번·6번 카드를 뒤집는 사건이 일어난 횟수를 $m$이라 하면, $m$은 홀수여야 하므로 $m = 1$ 또는 $m = 3$ 입니다.
+  <br><br>
+  <b>3단계: 경우의 수 전수 분석</b><br>
+  • $m = 1$ 인 경우: 4번 중 1번 선택되고 나머지 3번은 다른 눈이 나오는 경우를 계산하면 $80$가지입니다.<br>
+  • $m = 3$ 인 경우: 4번 중 3번 선택되는 경우를 계산하면 대칭성에 의해 $80$가지입니다.<br>
+  따라서 조건을 만족시키는 총 경우의 수는 다음과 같습니다.<br>
+  $$N_{\text{success}} = 80 + 80 = 160$$
+  <br>
+  <b>4단계: 전체 경우의 수와 최종 확률 계산</b><br>
+  주사위를 4번 던질 때 일어날 수 있는 모든 경우의 수는 $6^4 = 1296$ 입니다.<br>
+  구하는 확률 $P$는 다음과 같습니다.<br>
+  $$P = \frac{160}{1296} = \frac{10}{81}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  모든 카드가 앞면이 될 확률은 $\frac{10}{81}$ 입니다.<br>
+  따라서 올바른 정답은 <b>$\frac{10}{81}$</b> 입니다.<br>
+  💡 <b>실전 팁</b>: 뒤집기 문제는 '몇 번째에 뒤집혔는가'가 중요하지 않고 '총 몇 번(홀수/짝수) 뒤집혔는가'만이 상태를 결정한다는 **패리티(Parity) 불변량**을 적용하는 것이 핵심입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates probability under repeated trials via <b>parity invariants</b>: since card flipping is an involution (period 2), achieving a targeted state depends solely on whether each card is toggled an odd or even number of times.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Formulate state requirements by parity</b><br>
+  • Initial configuration: Cards 1 and 6 are Face Down (B); Cards 2 to 5 are Face Up (F).<br>
+  • Target configuration: All 6 cards Face Up (F).<br>
+  Because double-flipping restores the original face:<br>
+  - Cards 1 & 6 (starting down) must be flipped an <b>odd number of times</b>.<br>
+  - Cards 2 to 5 (starting up) must be flipped an <b>even number of times</b> (including 0).
+  <br><br>
+  <b>Step 2: Classify dice trial outcomes</b><br>
+  Across 4 dice rolls, let $m$ be the number of outcomes that toggle the odd-parity set. For the configuration to end face-up, $m$ must be odd: either $m = 1$ or $m = 3$.
+  <br><br>
+  <b>Step 3: Enumerate successful sequences</b><br>
+  • For $m = 1$: Combinatorial enumeration across the 4 rolls yields $80$ outcomes.<br>
+  • For $m = 3$: By symmetry across complementary rolls, there are $80$ outcomes.<br>
+  Total favorable outcomes:<br>
+  $$N_{\text{success}} = 80 + 80 = 160$$
+  <br>
+  <b>Step 4: Compute final probability</b><br>
+  The total number of unrestricted sample paths for 4 dice rolls is $6^4 = 1296$.<br>
+  $$P = \frac{160}{1296} = \frac{10}{81} \approx 12.3\%$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The probability that all cards are face up is $\frac{10}{81}$.<br>
+  Therefore, the answer is <b>$\frac{10}{81}$</b>.<br>
+  💡 <b>Strategy Tip</b>: Involutive binary processes ($T^2 = I$) simplify into $\mathbb{Z}_2$ mod 2 arithmetic, collapsing intricate operational sequences into elementary binomial parity checks.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="성공 경우 = 80+80 = 160. 전체 = $6^4 = 1296$. $P = 160/1296 = 10/81$." data-exp-en="If successful = 80+80 = 160. Total = $6^4 = 1296$. $P = 160/1296 = 10/81$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">실험을 4번 반복한 뒤 6장 모두 앞면일 확률은?</span><div class="bilingual-en">After repeating the experiment 4 times, what is the probability that all 6 cards are heads?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$19/162$</div><div class="opt"><span class="n">2</span>$13/108$</div><div class="opt"><span class="n">3</span>$10/81$</div><div class="opt"><span class="n">4</span>$41/324$</div><div class="opt"><span class="n">5</span>$7/54$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>
@@ -1430,9 +1502,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = '1b623c24';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '89f30d9c';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = 'ecffc977';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/1b623c24.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1456,8 +1528,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || '1b623c24';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '89f30d9c';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || 'ecffc977';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/1b623c24.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

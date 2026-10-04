@@ -629,20 +629,77 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30911",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-두 점 $P, Q$의 위치가 같아지는 시각을 구합니다.<br>
-$$t^2 + t - 6 = -t^3 + 7t^2 \implies t^3 - 6t^2 + t - 6 = 0$$<br>
-$$t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$$<br>
-$t \ge 0$이므로 위치가 같아지는 유일한 시각은 $t = 6$입니다.<br>
-각 점의 속도와 가속도를 구하면<br>
-$$v_1(t) = x_1' = 2t + 1 \implies a_1(t) = v_1' = 2$$<br>
-$$v_2(t) = x_2' = -3t^2 + 14t \implies a_2(t) = v_2' = -6t + 14$$<br>
-시각 $t=6$에서의 가속도는<br>
-$$p = a_1(6) = 2$$<br>
-$$q = a_2(6) = -6(6) + 14 = -36 + 14 = -22$$<br>
-따라서 구하는 값은<br>
-$$p - q = 2 - (-22) = 24$$<br>
-정답은 <b>①번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> Finds the time when the positions of two points $P, Q$ become the same. Since <br> $$t^2 + t - 6 = -t^3 + 7t^2 \implies t^3 - 6t^2 + t - 6 = 0$$ <br> $$t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$$ <br> <br> If you find the speed and acceleration of each point, <br> $$v_1(t) = x_1' = 2t + 1 \implies a_1(t) = v_1' = 2$$ <br> $$v_2(t) = x_2' = -3t^2 + 14t \implies a_2(t) = v_2' = -6t + 14$$ <br> $$p - q = 2 - (-22) = 24$$ <br> The correct answer is <b> ① </b>.</div></div><div class="q" data-ans="1" data-exp="$t=6$에서 위치가 일치하며, $p=2, q=-22$이므로 $p-q = 2 - (-22) = 24$입니다." data-exp-en="The position matches in $t=6$, which is $p=2, q=-22$ and therefore $p-q = 2 - (-22) = 24$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수직선 위를 움직이는 두 점 $P, Q$의 시각 $t(t \ge 0)$에서의 위치가 각각 $x_1 = t^2+t-6$, $x_2 = -t^3+7t^2$이다. 두 점 $P, Q$의 위치가 같아지는 순간 두 점 $P, Q$의 가속도를 각각 $p, q$라 할 때, $p-q$의 값은? [4점]</span><div class="bilingual-en">The positions of the two points moving on the vertical line at the time $t(t \ge 0)$ of $P, Q$ are $x_1 = t^2+t-6$ and $x_2 = -t^3+7t^2$, respectively. At the moment when the positions of the two points $P, Q$ become the same, if the acceleration of the two points $P, Q$ is [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>24</div><div class="opt"><span class="n">2</span>27</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>36</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 수직선 위를 움직이는 두 점의 <b>위치 함수($x(t)$), 속도 함수($v(t) = x'(t)$), 가속도 함수($a(t) = v'(t)$)의 미분 관계</b>를 파악하고, 두 점이 만나는 시각($x_1(t) = x_2(t)$)에서의 가속도의 차를 정확히 구하는 능력을 평가합니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 두 점이 만나는 시각 $t$ 구하기</b><br>
+  두 점 $P, Q$의 위치가 같아지는 시각은 $x_1(t) = x_2(t)$를 만족하는 $t \ge 0$입니다.<br>
+  $$t^2 + t - 6 = -t^3 + 7t^2 \implies t^3 - 6t^2 + t - 6 = 0$$
+  공통인수로 묶어 인수분해하면 다음과 같습니다.<br>
+  $$t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$$
+  모든 실수 $t$에 대하여 $t^2 + 1 > 0$ 이므로 두 점이 만나는 유일한 시각은 $t = 6$ 입니다.
+  <br><br>
+  <b>2단계: 속도 및 가속도 도함수 유도</b><br>
+  각 점의 위치 함수를 시간에 대해 두 번 미분하여 가속도 함수를 구합니다.<br>
+  • 점 $P$:<br>
+  $$v_1(t) = x_1'(t) = 2t + 1 \implies a_1(t) = v_1'(t) = 2$$<br>
+  • 점 $Q$:<br>
+  $$v_2(t) = x_2'(t) = -3t^2 + 14t \implies a_2(t) = v_2'(t) = -6t + 14$$
+  <br>
+  <b>3단계: $t=6$에서의 가속도 $p, q$ 및 차 $p-q$ 계산</b><br>
+  $t=6$을 대입합니다.<br>
+  $$p = a_1(6) = 2$$<br>
+  $$q = a_2(6) = -6(6) + 14 = -36 + 14 = -22$$<br>
+  따라서 구하는 값은:<br>
+  $$p - q = 2 - (-22) = 2 + 22 = 24$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  구하는 값 $p-q$는 $24$ 입니다.<br>
+  따라서 올바른 정답은 <b>①번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 3차 방정식 인수분해 시 계수의 비율($1:-6 = 1:-6$)을 관찰하면 조립제법 없이도 $t^2(t-6) + (t-6)$으로 순식간에 묶어낼 수 있습니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem assesses differential calculus applied to rectilinear kinematics: finding the encounter time ($x_1(t) = x_2(t)$) for two moving particles and evaluating their respective accelerations via second derivatives ($a(t) = x''(t)$).</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Determine the encounter time $t$</b><br>
+  The particles $P$ and $Q$ meet when their positions coincide ($x_1(t) = x_2(t)$) for $t \ge 0$:<br>
+  $$t^2 + t - 6 = -t^3 + 7t^2 \implies t^3 - 6t^2 + t - 6 = 0$$<br>
+  Factor by grouping terms:<br>
+  $$t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$$<br>
+  Since $t^2+1 > 0$ for all real $t$, the unique meeting moment is $t = 6$.
+  <br><br>
+  <b>Step 2: Differentiate positions to obtain acceleration functions</b><br>
+  • For particle $P$:<br>
+  $$v_1(t) = x_1'(t) = 2t + 1 \implies a_1(t) = 2$$<br>
+  • For particle $Q$:<br>
+  $$v_2(t) = x_2'(t) = -3t^2 + 14t \implies a_2(t) = -6t + 14$$
+  <br>
+  <b>Step 3: Evaluate accelerations at $t = 6$ and compute $p - q$</b><br>
+  $$p = a_1(6) = 2$$<br>
+  $$q = a_2(6) = -6(6) + 14 = -22$$<br>
+  Subtracting gives:<br>
+  $$p - q = 2 - (-22) = 24$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The final value $p-q$ is $24$.<br>
+  Therefore, the correct choice is <b>Option ①</b>.<br>
+  💡 <b>Strategy Tip</b>: Observing proportional coefficients in the cubic polynomial permits instant grouping without relying on synthetic division.
+</p>
+  </div>
+</div><div class="q" data-ans="1" data-exp="$t=6$에서 위치가 일치하며, $p=2, q=-22$이므로 $p-q = 2 - (-22) = 24$입니다." data-exp-en="The position matches in $t=6$, which is $p=2, q=-22$ and therefore $p-q = 2 - (-22) = 24$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수직선 위를 움직이는 두 점 $P, Q$의 시각 $t(t \ge 0)$에서의 위치가 각각 $x_1 = t^2+t-6$, $x_2 = -t^3+7t^2$이다. 두 점 $P, Q$의 위치가 같아지는 순간 두 점 $P, Q$의 가속도를 각각 $p, q$라 할 때, $p-q$의 값은? [4점]</span><div class="bilingual-en">The positions of the two points moving on the vertical line at the time $t(t \ge 0)$ of $P, Q$ are $x_1 = t^2+t-6$ and $x_2 = -t^3+7t^2$, respectively. At the moment when the positions of the two points $P, Q$ become the same, if the acceleration of the two points $P, Q$ is [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>24</div><div class="opt"><span class="n">2</span>27</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>36</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

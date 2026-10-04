@@ -539,9 +539,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270916.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270916">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="74f3a6ab">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="3e29b7cf">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -688,10 +688,64 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270916",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">1. 진수 조건: $x-3 > 0, 2x-3 > 0 \implies x > 3$.
-2. 밑 변환: $\log_3(x-3) = \log_9(x-3)^2$.
-3. 방정식 풀이: $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$.
-4. 진수 조건 $x > 3$에 의해 $x = 6$.<div class="bilingual-en"><b>Complete Solution:</b> 1. Hexadecimal condition: $x-3 > 0, 2x-3 > 0 \implies x > 3$. 2. Base conversion: $\log_3(x-3) = \log_9(x-3)^2$. 3. Solve equation: $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$. 4. Hexadecimal condition $x > 3$ by $x = 6$.</div></div><div class="q" data-ans="3" data-exp="진수 조건 $x &gt; 3$이고 $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$. 따라서 $x = 6$ 입니다." data-exp-en="The decimal conditions are $x &gt; 3$ and $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$. Hence $x = 6$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">방정식 $\log_3(x-3)=\log_9(2x-3)$을 만족시키는 실수 $x$의 값으로 알맞은 것은?</span><div class="bilingual-en">What is the correct value for the real number $x$ that satisfies the equation $\log_3(x-3)=\log_9(2x-3)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$4$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$6$</div><div class="opt"><span class="n">4</span>$7$</div><div class="opt"><span class="n">5</span>$8$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>로그방정식의 해법과 밑의 통일</b>, 그리고 가장 중요한 <b>진수의 양수 조건</b>을 철저히 검증하는 문제입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 진수 조건 확인 (필수)</b><br>
+  로그가 정의되기 위해서는 모든 진수가 양수여야 합니다:<br>
+  $$x - 3 > 0 \implies x > 3$$<br>
+  $$2x - 3 > 0 \implies x > \frac{3}{2}$$<br>
+  공통 범위는 <b>$x > 3$</b> 입니다.<br><br>
+  <b>2단계: 밑을 9로 통일하여 방정식 풀기</b><br>
+  $\log_3(x-3) = \log_{3^2}((x-3)^2) = \log_9((x-3)^2)$ 입니다. 주어진 방정식은 다음과 같습니다:<br>
+  $$\log_9((x-3)^2) = \log_9(2x-3)$$<br>
+  진수끼리 같으므로:<br>
+  $$(x-3)^2 = 2x - 3 \implies x^2 - 6x + 9 = 2x - 3$$<br>
+  $$x^2 - 8x + 12 = 0 \implies (x - 2)(x - 6) = 0$$<br>
+  따라서 $x = 2$ 또는 $x = 6$ 입니다.<br><br>
+  <b>3단계: 진수 조건 적용 및 최종해 선별</b><br>
+  1단계의 진수 조건 $x > 3$에 의하여 $x = 2$는 무연근(적합하지 않음)이고, 유일한 실근은 <b>$x = 6$</b> 입니다.
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 실수 $x$의 값은 $6$입니다.<br>
+  바른 답은 <b>③번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 로그방정식에서는 방정식을 풀기 전에 진수 조건을 시험지 여백에 먼저 적어두어야 무연근을 정답으로 고르는 치명적인 실수를 방지할 수 있습니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates solving <b>logarithmic equations</b> by unifying bases and strictly validating the <b>positive argument condition</b>.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Domain / Positive argument conditions</b><br>
+  $$x - 3 > 0 \implies x > 3$$<br>
+  $$2x - 3 > 0 \implies x > \frac{3}{2}$$<br>
+  The intersection requires <b>$x > 3$</b>.<br><br>
+  <b>Step 2: Unify bases to $9$ and solve</b><br>
+  $$\log_3(x-3) = \log_9((x-3)^2)$$<br>
+  $$(x-3)^2 = 2x - 3 \implies x^2 - 8x + 12 = 0 \implies (x - 2)(x - 6) = 0$$<br>
+  Thus, $x = 2$ or $x = 6$.<br><br>
+  <b>Step 3: Filter by domain</b><br>
+  Since $x > 3$, the extraneous root $x = 2$ is rejected. The unique valid solution is <b>$x = 6$</b>.
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The value of $x$ is $6$.<br>
+  Therefore, the correct choice is <b>Option ③</b>.<br>
+  💡 <b>Key Tip</b>: Always establish argument domain constraints before algebraic manipulation.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="진수 조건 $x &gt; 3$이고 $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$. 따라서 $x = 6$ 입니다." data-exp-en="The decimal conditions are $x &gt; 3$ and $(x-3)^2 = 2x-3 \implies x^2 - 8x + 12 = (x-2)(x-6) = 0$. Hence $x = 6$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">방정식 $\log_3(x-3)=\log_9(2x-3)$을 만족시키는 실수 $x$의 값으로 알맞은 것은?</span><div class="bilingual-en">What is the correct value for the real number $x$ that satisfies the equation $\log_3(x-3)=\log_9(2x-3)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$4$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$6$</div><div class="opt"><span class="n">4</span>$7$</div><div class="opt"><span class="n">5</span>$8$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -1139,9 +1193,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270916';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '74f3a6ab';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '3e29b7cf';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270916.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1165,8 +1219,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270916';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '74f3a6ab';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '3e29b7cf';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270916.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

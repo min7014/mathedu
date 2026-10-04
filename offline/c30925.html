@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30925.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30925">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="e806ae16">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="645ebca2">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,18 +698,73 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30925",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-등비수열 $\{a_n\}$의 공비를 $r$이라 하면 $a_n = a_1 r^{n-1}$입니다.<br>
-주어진 극한식에서 분모는 $3 \times 2^{n+1} = 6 \cdot 2^n$입니다.<br>
-$$\lim_{n \to \infty}\frac{4^n a_1 r^{n-1} - 1}{6 \cdot 2^n} = \lim_{n \to \infty}\frac{\frac{a_1}{r}(4r)^n - 1}{6 \cdot 2^n} = 1$$<br>
-극한값이 $0$이 아닌 실수 $1$로 수렴하려면 분자의 밑 $4r$이 분모의 밑 $2$와 같아야 하므로<br>
-$$4r = 2 \implies r = \frac{1}{2}$$<br>
-이를 대입하여 극한을 계산하면<br>
-$$\lim_{n \to \infty}\frac{2a_1 \cdot 2^n - 1}{6 \cdot 2^n} = \frac{2a_1}{6} = \frac{a_1}{3} = 1 \implies a_1 = 3$$<br>
-따라서 제2항은 $a_2 = a_1 r = 3 \times \frac{1}{2} = \frac{3}{2}$입니다.<br>
-구하는 값은<br>
-$$a_1 + a_2 = 3 + \frac{3}{2} = \frac{9}{2}$$<br>
-정답은 <b>④번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> In the given limit expression, the denominator is $3 \times 2^{n+1} = 6 \cdot 2^n$. <br> <br> $$\lim_{n \to \infty}\frac{2a_1 \cdot 2^n - 1}{6 \cdot 2^n} = \frac{2a_1}{6} = \frac{a_1}{3} = 1 \implies a_1 = 3$$ <br> Therefore, the second term is $a_2 = a_1 r = 3 \times \frac{1}{2} = \frac{3}{2}$. <br> The calculated value is <br> $$a_1 + a_2 = 3 + \frac{3}{2} = \frac{9}{2}$$ <br> The correct answer is <b> ④</div></div><div class="q" data-ans="4" data-exp="$r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$입니다." data-exp-en="This is $r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등비수열 $\{a_n\}$에 대하여 $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$일 때, $a_1+a_2$의 값은? [3점]</span><div class="bilingual-en">When the geometric sequence $\{a_n\}$ is $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$, what is the value of $a_1+a_2$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{3}{2}$</div><div class="opt"><span class="n">2</span>$\frac{5}{2}$</div><div class="opt"><span class="n">3</span>$\frac{7}{2}$</div><div class="opt"><span class="n">4</span>$\frac{9}{2}$</div><div class="opt"><span class="n">5</span>$\frac{11}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>등비수열의 극한과 수렴 조건</b>을 평가합니다. 밑의 크기에 따른 지수항의 증가 속도를 비교하여 분모와 분자의 최고차항 밑이 일치해야 $0$이 아닌 유한한 값으로 수렴한다는 원리를 이용합니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 등비수열의 극한식 구조 정리</b><br>
+  등비수열 $\{a_n\}$의 첫째항을 $a_1$, 공비를 $r$이라 하면 $a_n = a_1 r^{n-1}$ 입니다.<br>
+  분모는 $3 \times 2^{n+1} = 3 \times 2 \times 2^n = 6 \cdot 2^n$ 입니다.<br>
+  주어진 극한식은 다음과 같습니다.<br>
+  $$\lim_{n \to \infty} \frac{4^n a_n - 1}{3 \times 2^{n+1}} = \lim_{n \to \infty} \frac{4^n (a_1 r^{n-1}) - 1}{6 \cdot 2^n} = \lim_{n \to \infty} \frac{\frac{a_1}{r}(4r)^n - 1}{6 \cdot 2^n} = 1$$
+  <br>
+  <b>2단계: 수렴 조건을 통한 공비 $r$ 결정</b><br>
+  분모의 지수 밑은 $2$입니다.<br>
+  분자의 지수항 $(4r)^n$의 밑인 $4r$에 대하여:<br>
+  • $4r > 2$ 이면 분자가 훨씬 빠르게 증가하므로 $\infty$로 발산합니다.<br>
+  • $4r < 2$ 이면 분자가 분모보다 느리게 증가하므로 극한값이 $0$이 됩니다.<br>
+  따라서 $0$이 아닌 유한한 값인 $1$로 수렴하기 위해서는 밑이 일치해야 합니다!<br>
+  $$4r = 2 \implies r = \frac{1}{2}$$
+  <br>
+  <b>3단계: 계수 비교를 통한 첫째항 $a_1$ 및 $a_1 + a_2$ 계산</b><br>
+  $r = \frac{1}{2}$을 대입하면 분자의 계수는 $\frac{a_1}{r} = 2a_1$ 입니다.<br>
+  $$\lim_{n \to \infty} \frac{2a_1 \cdot 2^n - 1}{6 \cdot 2^n} = \frac{2a_1}{6} = \frac{a_1}{3} = 1 \implies a_1 = 3$$
+  따라서 제2항은 $a_2 = a_1 r = 3 \times \frac{1}{2} = \frac{3}{2}$ 입니다.<br>
+  구하고자 하는 두 항의 합은:<br>
+  $$a_1 + a_2 = 3 + \frac{3}{2} = \frac{9}{2}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  구하는 값 $a_1 + a_2$는 $\frac{9}{2}$ 입니다.<br>
+  따라서 올바른 정답은 <b>④번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 등비수열의 극한이 $0$이 아닌 상수로 수렴하려면 **분모와 분자의 최고 밑(Base)이 반드시 같아야 한다**는 원리를 떠올리면 $4r = 2$가 암산으로 즉시 나옵니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem tests <b>limits of sequences involving geometric terms</b>. For the limit of a rational exponential expression to converge to a non-zero finite constant, the dominant exponential bases in the numerator and denominator must match.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Simplify the limit expression</b><br>
+  Let $a_n = a_1 r^{n-1}$. The denominator expands as $3 \cdot 2^{n+1} = 6 \cdot 2^n$.<br>
+  $$\lim_{n \to \infty}\frac{4^n a_n - 1}{6 \cdot 2^n} = \lim_{n \to \infty}\frac{\frac{a_1}{r}(4r)^n - 1}{6 \cdot 2^n} = 1$$
+  <br>
+  <b>Step 2: Determine common ratio $r$ by base matching</b><br>
+  To achieve convergence to the non-zero constant $1$, the exponential growth base $(4r)$ in the numerator must equal the base $2$ in the denominator:<br>
+  $$4r = 2 \implies r = \frac{1}{2}$$
+  <br>
+  <b>Step 3: Solve for $a_1$ and calculate $a_1 + a_2$</b><br>
+  With $r = \frac{1}{2}$, the leading coefficient in the numerator is $\frac{a_1}{1/2} = 2a_1$:<br>
+  $$\lim_{n \to \infty}\frac{2a_1 \cdot 2^n - 1}{6 \cdot 2^n} = \frac{2a_1}{6} = \frac{a_1}{3} = 1 \implies a_1 = 3$$<br>
+  Thus, $a_2 = a_1 r = 3 \cdot \frac{1}{2} = \frac{3}{2}$.<br>
+  Evaluating the sum:<br>
+  $$a_1 + a_2 = 3 + \frac{3}{2} = \frac{9}{2}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The sum $a_1 + a_2$ is $\frac{9}{2}$.<br>
+  Hence, the correct option is <b>Option ④</b>.<br>
+  💡 <b>Strategy Tip</b>: Dominant base matching ($4r = 2$) immediately bypasses indeterminate $\frac{\infty}{\infty}$ algebra.
+</p>
+  </div>
+</div><div class="q" data-ans="4" data-exp="$r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$입니다." data-exp-en="This is $r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등비수열 $\{a_n\}$에 대하여 $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$일 때, $a_1+a_2$의 값은? [3점]</span><div class="bilingual-en">When the geometric sequence $\{a_n\}$ is $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$, what is the value of $a_1+a_2$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{3}{2}$</div><div class="opt"><span class="n">2</span>$\frac{5}{2}$</div><div class="opt"><span class="n">3</span>$\frac{7}{2}$</div><div class="opt"><span class="n">4</span>$\frac{9}{2}$</div><div class="opt"><span class="n">5</span>$\frac{11}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1138,9 +1193,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30925';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = 'e806ae16';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '645ebca2';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30925.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1164,8 +1219,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30925';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || 'e806ae16';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '645ebca2';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30925.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

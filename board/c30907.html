@@ -629,17 +629,72 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30907",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-함수 $f(x)$가 실수 전체의 집합에서 연속이 되려면 경계점 $x=4$에서 연속이어야 합니다.<br>
-즉, $\lim_{x \to 4^-} f(x) = \lim_{x \to 4^+} f(x) = f(4)$ 이어야 합니다.<br>
-좌극한: $\lim_{x \to 4^-} (x-a)^2 = (4-a)^2 = a^2 - 8a + 16$<br>
-우극한 및 함숫값: $f(4) = 2 \times 4 - 4 = 4$<br>
-연속 조건에 의해<br>
-$$a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$$<br>
-$$(a-2)(a-6) = 0 \implies a = 2 \text{ 또는 } a = 6$$<br>
-따라서 모든 상수 $a$의 값의 곱은<br>
-$$2 \times 6 = 12$$<br>
-정답은 <b>③번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> It must be <br>, that is, $\lim_{x \to 4^-} f(x) = \lim_{x \to 4^+} f(x) = f(4)$. <br> Left limit: $\lim_{x \to 4^-} (x-a)^2 = (4-a)^2 = a^2 - 8a + 16$ <br> Right limit and function value: <br> $$2 \times 6 = 12$$ <br> The correct answer is <b> ③ </b>.</div></div><div class="q" data-ans="3" data-exp="$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ 두 근의 곱은 12입니다." data-exp-en="$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ The product of two roots is 12."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ 가 실수 전체의 집합에서 연속이 되도록 하는 모든 상수 $a$의 값의 곱은? [3점]</span><div class="bilingual-en">What product of the values ​​of all constants $a$ makes the function $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ continuous over the set of real numbers? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>12</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>구간별로 다르게 정의된 함수의 연속성 조건</b>을 바탕으로, 경계점에서의 좌극한, 우극한, 함숫값이 일치함을 이용하여 미정계수 $a$에 관한 이차방정식을 세우고 모든 해의 곱을 구하는 문제입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 연속성 정의 및 경계점 조건 분석</b><br>
+  함수 $f(x)$가 실수 전체의 집합에서 연속이 되기 위해서는 두 규칙이 나뉘는 경계점인 $x=4$에서 연속이어야 합니다.<br>
+  즉, 다음 조건이 성립해야 합니다.<br>
+  $$\lim_{x \to 4^-} f(x) = \lim_{x \to 4^+} f(x) = f(4)$$
+  <br>
+  <b>2단계: 좌극한과 우극한(함숫값) 계산</b><br>
+  • $x < 4$ 일 때 $f(x) = (x-a)^2$ 이므로 좌극한은:<br>
+  $$\lim_{x \to 4^-} f(x) = (4-a)^2 = a^2 - 8a + 16$$
+  • $x \ge 4$ 일 때 $f(x) = 2x-4$ 이므로 우극한 및 함숫값은:<br>
+  $$\lim_{x \to 4^+} f(x) = f(4) = 2(4) - 4 = 4$$
+  <br>
+  <b>3단계: 이차방정식 수립 및 $a$의 값의 곱 산출</b><br>
+  연속 조건에 따라 좌극한과 우극한이 같아야 합니다.<br>
+  $$a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$$
+  인수분해하면 $(a-2)(a-6) = 0$ 이므로 $a = 2$ 또는 $a = 6$ 입니다.<br>
+  근과 계수의 관계에 의해서도 두 근의 곱은 상수항인 $12$임을 바로 확인할 수 있습니다.<br>
+  $$2 \times 6 = 12$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  모든 상수 $a$의 값의 곱은 $12$ 입니다.<br>
+  따라서 올바른 정답은 <b>③번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 이차방정식 $a^2 - 8a + 12 = 0$의 두 실근의 곱을 물었으므로, 판별식 $D/4 = 16 - 12 = 4 > 0$으로 실근 존재를 확인한 후 근과 계수의 관계를 통해 즉시 $12$를 도출하면 연산이 매우 빠릅니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates conditions for <b>continuity of a piecewise-defined function</b> at the boundary point $x=4$, translating the continuity requirement into a quadratic equation in parameter $a$.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: State the continuity condition at $x = 4$</b><br>
+  For $f(x)$ to be continuous everywhere on $\mathbb{R}$, the left-hand limit, right-hand limit, and function value must agree at $x=4$:<br>
+  $$\lim_{x \to 4^-} f(x) = \lim_{x \to 4^+} f(x) = f(4)$$
+  <br>
+  <b>Step 2: Evaluate one-sided limits</b><br>
+  • Left-hand limit ($x < 4$):<br>
+  $$\lim_{x \to 4^-} (x-a)^2 = (4-a)^2 = a^2 - 8a + 16$$<br>
+  • Right-hand limit and value ($x \ge 4$):<br>
+  $$f(4) = 2(4) - 4 = 4$$
+  <br>
+  <b>Step 3: Solve the quadratic equation for $a$</b><br>
+  Equating the two expressions:<br>
+  $$a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$$<br>
+  Factoring gives $(a-2)(a-6) = 0$, yielding $a = 2$ or $a = 6$.<br>
+  By Vieta's formulas, the product of all roots is the constant term $12$:<br>
+  $$2 \times 6 = 12$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The product of all possible values of $a$ is $12$.<br>
+  Therefore, the correct answer is <b>Option ③</b>.<br>
+  💡 <b>Strategy Tip</b>: Vieta's formulas provide instantaneous product solutions once real roots are confirmed via the discriminant ($D > 0$).
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ 두 근의 곱은 12입니다." data-exp-en="$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ The product of two roots is 12."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ 가 실수 전체의 집합에서 연속이 되도록 하는 모든 상수 $a$의 값의 곱은? [3점]</span><div class="bilingual-en">What product of the values ​​of all constants $a$ makes the function $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ continuous over the set of real numbers? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>12</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

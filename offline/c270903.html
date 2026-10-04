@@ -539,9 +539,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270903.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270903">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="3cc439df">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="3cd096d1">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -688,7 +688,60 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270903",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">$a_{10} - a_7 = 3d = 9 \implies d = 3$. $a_7 = a_2 + 5d = 2 + 5(3) = 17$.<div class="bilingual-en"><b>Complete Solution:</b> $a_{10} - a_7 = 3d = 9 \implies d = 3$. $a_7 = a_2 + 5d = 2 + 5(3) = 17$.</div></div><div class="q" data-ans="2" data-exp="$a_{10} - a_7 = 3d = 9$ 이므로 $d = 3$. 따라서 $a_7 = a_2 + 5d = 2 + 5(3) = 17$ 입니다. 정답은 ②입니다." data-exp-en="$a_{10} - a_7 = 3d = 9$ so $d = 3$. Hence $a_7 = a_2 + 5d = 2 + 5(3) = 17$. The correct answer is ②."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등차수열 $\{a_n\}$에 대하여 $a_2 = 2, a_{10} - a_7 = 9$ 일 때, $a_7$의 값은?</span><div class="bilingual-en">When the arithmetic sequence $\{a_n\}$ is $a_2 = 2, a_{10} - a_7 = 9$, what is the value of $a_7$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$16$</div><div class="opt"><span class="n">2</span>$17$</div><div class="opt"><span class="n">3</span>$18$</div><div class="opt"><span class="n">4</span>$19$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>등차수열의 일반항 성질</b>과 항 번호 차이에 따른 공차($d$)의 배수 관계($a_m - a_n = (m-n)d$)를 활용하여 특정 항의 값을 효율적으로 구하는 능력을 평가합니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 항의 차를 이용한 공차 $d$ 결정</b><br>
+  등차수열 $\{a_n\}$의 공차를 $d$라 하면, 일반항은 $a_n = a_1 + (n-1)d$입니다. 따라서 제10항과 제7항의 차는 다음과 같습니다:<br>
+  $$a_{10} - a_7 = \{a_1 + 9d\} - \{a_1 + 6d\} = 3d$$<br>
+  조건에서 $a_{10} - a_7 = 9$라 하였으므로:<br>
+  $$3d = 9 \implies d = 3$$<br>
+  <b>2단계: $a_2$를 기준으로 $a_7$ 표현 및 계산</b><br>
+  $a_7$을 구하기 위해 첫째항 $a_1$을 거치지 않고, 이미 주어진 $a_2$에서 공차 $d$를 $(7-2)=5$번 더하는 것이 가장 빠릅니다:<br>
+  $$a_7 = a_2 + (7 - 2)d = a_2 + 5d$$<br>
+  주어진 $a_2 = 2$와 $d = 3$을 대입합니다:<br>
+  $$a_7 = 2 + 5 \times 3 = 2 + 15 = 17$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 제7항의 값은 $17$입니다.<br>
+  바른 답은 <b>②번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 등차수열 문제에서 $a_m - a_n = (m-n)d$ 및 $a_m = a_k + (m-k)d$ 성질을 활용하면 불필요한 첫째항 $a_1$ 연립 방정식을 생략하고 5초 만에 암산으로도 정답을 도출할 수 있습니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates understanding of <b>arithmetic sequences</b>, specifically the index distance property: $a_m - a_n = (m-n)d$.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Find the common difference $d$</b><br>
+  For an arithmetic sequence with common difference $d$, the difference between the 10th and 7th terms is:<br>
+  $$a_{10} - a_7 = (10 - 7)d = 3d$$<br>
+  Given $a_{10} - a_7 = 9$, we have:<br>
+  $$3d = 9 \implies d = 3$$<br>
+  <b>Step 2: Calculate $a_7$ directly from $a_2$</b><br>
+  Express $a_7$ in terms of $a_2$ and $d$ without solving for $a_1$:<br>
+  $$a_7 = a_2 + (7 - 2)d = a_2 + 5d$$<br>
+  Substitute $a_2 = 2$ and $d = 3$:<br>
+  $$a_7 = 2 + 5(3) = 2 + 15 = 17$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The value of $a_7$ is $17$.<br>
+  Therefore, the correct choice is <b>Option ②</b>.<br>
+  💡 <b>Key Tip</b>: Connecting known terms via index gap $(m - k)d$ avoids redundant computation of $a_1$.
+</p>
+  </div>
+</div><div class="q" data-ans="2" data-exp="$a_{10} - a_7 = 3d = 9$ 이므로 $d = 3$. 따라서 $a_7 = a_2 + 5d = 2 + 5(3) = 17$ 입니다. 정답은 ②입니다." data-exp-en="$a_{10} - a_7 = 3d = 9$ so $d = 3$. Hence $a_7 = a_2 + 5d = 2 + 5(3) = 17$. The correct answer is ②."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등차수열 $\{a_n\}$에 대하여 $a_2 = 2, a_{10} - a_7 = 9$ 일 때, $a_7$의 값은?</span><div class="bilingual-en">When the arithmetic sequence $\{a_n\}$ is $a_2 = 2, a_{10} - a_7 = 9$, what is the value of $a_7$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$16$</div><div class="opt"><span class="n">2</span>$17$</div><div class="opt"><span class="n">3</span>$18$</div><div class="opt"><span class="n">4</span>$19$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -1136,9 +1189,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270903';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '3cc439df';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '3cd096d1';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270903.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1162,8 +1215,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270903';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '3cc439df';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '3cd096d1';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270903.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

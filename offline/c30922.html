@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30922.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30922">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="a5da5189">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="3f6a9bbf">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,23 +698,85 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30922",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-조건 (나)에 의하여 각 항의 점화식은 다음과 같이 두 갈래로 나뉩니다.<br>
-$$a_{n+1} = a_n - \frac{2k}{3} \quad \text{또는} \quad a_{n+1} = -k a_n$$<br>
-$a_1 = k > 0$이므로<br>
-$$a_2 = k - \frac{2k}{3} = \frac{k}{3} \quad \text{또는} \quad a_2 = -k(k) = -k^2$$<br>
-조건 (가)에서 $a_2 a_3 < 0$이므로 두 항의 부호가 반대이어야 합니다.<br>
-경우를 나누어 $a_5 = 0$이 되는 양수 $k$를 추적합니다.<br>
-[경우 1] $a_2 = \frac{k}{3} > 0$일 때 ($a_3 < 0$)<br>
-- $a_3 = -\frac{k}{3}$ 일 때: $a_4$와 $a_5$를 계산하면 $k = 2$ ($k^2 = 4$) 및 $k = \sqrt{2}$ ($k^2 = 2$)를 얻습니다.<br>
-- $a_3 = -\frac{k^2}{3}$ 일 때: $a_5 = 0$에서 실근이 존재하지 않거나 중복됩니다.<br>
-[경우 2] $a_2 = -k^2 < 0$일 때 ($a_3 > 0$)<br>
-- $a_3 = -k(-k^2) = k^3 > 0$ 일 때: 계산하면 $k = \frac{2}{\sqrt{3}}$ ($k^2 = \frac{4}{3}$) 및 $k = \sqrt{\frac{2}{3}}$ ($k^2 = \frac{2}{3}$)를 얻습니다.<br>
-따라서 $a_5 = 0$을 만족시키는 서로 다른 모든 양수 $k$의 값은<br>
-$$k = 2, \quad \sqrt{2}, \quad \frac{2}{\sqrt{3}}, \quad \sqrt{\frac{2}{3}}$$<br>
-구하는 $k^2$의 값의 합은<br>
-$$2^2 + (\sqrt{2})^2 + \left(\frac{2}{\sqrt{3}}\right)^2 + \left(\sqrt{\frac{2}{3}}\right)^2 = 4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + 2 = 8$$<br>
-정답은 <b>8</b> 입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> According to condition (b), the ignition equation for each term is divided into two branches as follows. Since <br> $$a_{n+1} = a_n - \frac{2k}{3} \quad \text{또는} \quad a_{n+1} = -k a_n$$ <br> $a_1 = k > 0$, <br> Divide the case of <br> and track the positive number $k$ which becomes $a_5 = 0$. <br> [Case 1] When $a_2 = \frac{k}{3} > 0$ ($a_3 < 0$) When When <br> - $a_3 = -\frac{k^2}{3}$: Real root does not exist or is duplicated in $a_5 = 0$ <br> [Case 2] When $a_2 = -k^2 < 0$ ($a_3 > 0$) When <br> Therefore, the values of all different positive numbers $k$ that satisfy $a_5 = 0$ are <br> This is </b>.</div></div><div class="q" data-ans="3" data-exp="가능한 $k^2$의 값은 $4, 2, 4/3, 2/3$이며 합은 8입니다 (단답형 정답: 8)." data-exp-en="The possible values ​​of $k^2$ are $4, 2, 4/3, 2/3$ and the sum is 8 (short answer: 8)."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">양수 $k$에 대하여 $a_1=k$인 수열 $\{a_n\}$이 다음 조건을 만족시킨다. (가) $a_2 \times a_3 &lt; 0$ (나) 모든 자연수 $n$에 대하여 $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$이다. $a_5=0$이 되도록 하는 서로 다른 모든 양수 $k$에 대하여 $k^2$의 값의 합을 구하시오. [4점]</span><div class="bilingual-en">For a positive number $k$, the sequence $\{a_n\}$, which is $a_1=k$, satisfies the following conditions. (a) $a_2 \times a_3 &lt; 0$ (b) For all natural numbers $n$, it is $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$. Find the sum of the values ​​of $k^2$ for all different positive integers [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 조건에 따라 분기되는 <b>수열의 귀납적 정의(점화식)</b>를 역추적 및 순방향 추적하여, 부호 조건($a_2 a_3 < 0$)과 특정 항 조건($a_5 = 0$)을 동시에 만족시키는 매개변수 $k$의 모든 값을 논리적으로 분류하고 합을 구하는 수능 최고난도 킬러 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 첫째항과 점화식 분기 분석</b><br>
+  첫째항 $a_1 = k > 0$ 이며 점화식은 다음과 같이 두 갈래로 주어집니다.<br>
+  $$a_{n+1} = a_n - \frac{2k}{3} \quad \text{또는} \quad a_{n+1} = -k a_n$$
+  따라서 제2항 $a_2$의 후보는 다음과 같습니다.<br>
+  • 경로 A: $a_2 = k - \frac{2k}{3} = \frac{k}{3} > 0$<br>
+  • 경로 B: $a_2 = -k(k) = -k^2 < 0$
+  <br><br>
+  <b>2단계: 조건 (가) $a_2 a_3 < 0$의 부호 필터링</b><br>
+  $a_2$와 $a_3$의 부호가 달라야 합니다.<br>
+  • 경로 A ($a_2 = \frac{k}{3} > 0$): $a_3 < 0$ 이어야 합니다.<br>
+  $\frac{k}{3} - \frac{2k}{3} = -\frac{k}{3} < 0$ 이므로 점화식의 뺄셈 규칙에 의해 $a_3 = -\frac{k}{3}$ 가 성립합니다.<br>
+  (만약 곱셈 규칙을 쓰면 $-k(k/3) = -k^2/3 < 0$ 도 가능)<br>
+  • 경로 B ($a_2 = -k^2 < 0$): $a_3 > 0$ 이어야 합니다.<br>
+  점화식의 곱셈 규칙에 의해 $a_3 = -k(-k^2) = k^3 > 0$ 이 성립합니다.
+  <br><br>
+  <b>3단계: $a_5 = 0$ 조건을 만족시키는 $k$의 모든 값 추적</b><br>
+  각 분기에서 $a_4, a_5$를 계산하여 $a_5 = 0$이 되는 양수 $k$를 구합니다.<br>
+  수열의 진행 과정에서 $a_5 = 0$이 되는 경우는 다음과 같은 4가지 서로 다른 양수 해를 산출합니다.<br>
+  1) $k = 2$ (이때 $k^2 = 4$)<br>
+  2) $k = \sqrt{2}$ (이때 $k^2 = 2$)<br>
+  3) $k = \frac{2}{\sqrt{3}}$ (이때 $k^2 = \frac{4}{3}$)<br>
+  4) $k = \sqrt{\frac{2}{3}}$ (이때 $k^2 = \frac{2}{3}$)
+  <br><br>
+  <b>4단계: $k^2$의 총합 계산</b><br>
+  구한 네 값의 제곱의 합을 계산합니다.<br>
+  $$\sum k^2 = 4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + \frac{6}{3} = 6 + 2 = 8$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  모든 가능한 $k^2$의 값의 합은 $8$ 입니다.<br>
+  따라서 올바른 정답은 <b>8</b> 입니다.<br>
+  💡 <b>실전 팁</b>: 킬러 수열 점화식 문항은 무작정 계산하기 전, 부호 조건($a_2 a_3 < 0$)으로 가지치기(Pruning)를 먼저 수행하여 불가능한 분기를 제거하는 것이 시간 단축의 절대적 열쇠입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem investigates a <b>bifurcating recursive sequence</b>, requiring forward tracking and algebraic case pruning based on sign alternating condition $a_2 a_3 < 0$ and endpoint condition $a_5 = 0$.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Analyze possible values for $a_2$</b><br>
+  Given $a_1 = k > 0$, the two recursion branches produce:<br>
+  • Branch A: $a_2 = k - \frac{2k}{3} = \frac{k}{3} > 0$<br>
+  • Branch B: $a_2 = -k(k) = -k^2 < 0$
+  <br><br>
+  <b>Step 2: Enforce the sign condition $a_2 a_3 < 0$</b><br>
+  • For Branch A ($a_2 > 0$): We require $a_3 < 0$.<br>
+  Applying the difference branch: $a_3 = \frac{k}{3} - \frac{2k}{3} = -\frac{k}{3} < 0$.<br>
+  • For Branch B ($a_2 < 0$): We require $a_3 > 0$.<br>
+  Applying the multiplication branch: $a_3 = -k(-k^2) = k^3 > 0$.
+  <br><br>
+  <b>Step 3: Trace forward to identify solutions for $a_5 = 0$</b><br>
+  Tracing each valid path to $a_5 = 0$ yields four distinct positive roots for $k$:<br>
+  1) $k = 2 \implies k^2 = 4$<br>
+  2) $k = \sqrt{2} \implies k^2 = 2$<br>
+  3) $k = \frac{2}{\sqrt{3}} \implies k^2 = \frac{4}{3}$<br>
+  4) $k = \sqrt{\frac{2}{3}} \implies k^2 = \frac{2}{3}$
+  <br><br>
+  <b>Step 4: Sum all valid values of $k^2$</b><br>
+  $$\sum k^2 = 4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + 2 = 8$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The sum of all possible values of $k^2$ is $8$.<br>
+  Therefore, the answer is <b>8</b>.<br>
+  💡 <b>Strategy Tip</b>: Pruning recursive branches using the sign condition $a_2 a_3 < 0$ eliminates dead-end paths before detailed calculation.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="가능한 $k^2$의 값은 $4, 2, 4/3, 2/3$이며 합은 8입니다 (단답형 정답: 8)." data-exp-en="The possible values ​​of $k^2$ are $4, 2, 4/3, 2/3$ and the sum is 8 (short answer: 8)."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">양수 $k$에 대하여 $a_1=k$인 수열 $\{a_n\}$이 다음 조건을 만족시킨다. (가) $a_2 \times a_3 &lt; 0$ (나) 모든 자연수 $n$에 대하여 $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$이다. $a_5=0$이 되도록 하는 서로 다른 모든 양수 $k$에 대하여 $k^2$의 값의 합을 구하시오. [4점]</span><div class="bilingual-en">For a positive number $k$, the sequence $\{a_n\}$, which is $a_1=k$, satisfies the following conditions. (a) $a_2 \times a_3 &lt; 0$ (b) For all natural numbers $n$, it is $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$. Find the sum of the values ​​of $k^2$ for all different positive integers [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1143,9 +1205,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30922';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = 'a5da5189';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '3f6a9bbf';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30922.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1169,8 +1231,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30922';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || 'a5da5189';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '3f6a9bbf';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30922.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

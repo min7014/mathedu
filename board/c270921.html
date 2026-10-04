@@ -619,7 +619,59 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270921",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">절댓값 미분가능 조건과 삼차함수 인수를 분석하면 $f(0)$의 최댓값은 6, 최솟값은 2가 되어 곱은 $6 \times 2 = 12$ 입니다.<div class="bilingual-en"><b>Complete Solution:</b> When analyzing the absolute value differentiability conditions and cubic function arguments, the maximum value of $f(0)$ is 6, the minimum value is 2, and the product is $6 \times 2 = 12$.</div></div><div class="q" data-ans="3" data-exp="조건을 만족하는 $f(0)$의 최댓값과 최솟값을 구하여 곱하면 12가 됩니다." data-exp-en="Find the maximum and minimum values ​​of $f(0)$ that satisfy the conditions and multiply them to get 12."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f(0)$의 최댓값과 최솟값의 곱으로 알맞은 것은?</span><div class="bilingual-en">What is the correct product of the maximum and minimum values ​​of $f(0)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$10$</div><div class="opt"><span class="n">2</span>$11$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$13$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>삼차함수와 절댓값 함수의 미분가능성</b>을 다루며, 꺾인 첨점(V자 모서리)에서의 좌미분계수와 우미분계수가 일치해야 한다는 고교 교육과정 정규 미분가능 조건을 통해 $f(0)$의 최댓값과 최솟값의 곱을 구하는 최고난도 킬러 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 함수 $g(x)$의 첨점과 미분가능 조건</b><br>
+  함수 $g(x)$가 $x = \beta$에서 꺾인 꼭짓점을 가질 때 좌도함수와 우도함수의 차이는 $-8f'(\beta)$입니다. 여기에 절댓값 함수 $|P(x)|$가 더해진 $h(x)$가 실수 전체에서 미분가능하려면, 두 함수의 꺾임이 $x = \beta$에서 완벽히 상쇄되어야 합니다:<br>
+  $$h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$$<br>
+  <b>2단계: 두 가지 경우의 수 분석</b><br>
+  - Case 1: $P(x) = (x-2)^2(x-3)$ 일 때 $\beta = 3 \implies f(0) = -12$ 또는 $-48$<br>
+  - Case 2: $P(x) = (x-2)^2(x-1)$ 일 때 $\beta = 1 \implies f(0) = -\frac{1}{4}$ 또는 $-\frac{9}{4}$<br><br>
+  <b>3단계: 최댓값 $M$, 최솟값 $m$ 및 곱 계산</b><br>
+  가능한 $f(0)$의 네 값 $\left\{-48, -12, -\frac{9}{4}, -\frac{1}{4}\right\}$ 중:<br>
+  - 최댓값: $M = -\frac{1}{4}$<br>
+  - 최솟값: $m = -48$<br><br>
+  $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = 12$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 $M \times m$의 값은 $12$입니다.<br>
+  바른 답은 <b>③번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 절댓값 미분가능 조건은 좌미분계수와 우미분계수의 합일 조건($h'(\beta^+) = h'(\beta^-)$)을 통해 첨점의 기울기 변화량이 정확히 상쇄됨을 이용합니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates <b>differentiability of absolute value compositions with cubic functions</b>, matching one-sided derivatives at corners.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Differentiability condition at the corner $x = \beta$</b><br>
+  Smoothness requires left and right derivatives to agree:<br>
+  $$h'(\beta^+) = h'(\beta^-) \iff P'(\beta) = 4f'(\beta)$$<br>
+  <b>Step 2: Evaluate the four candidate values of $f(0)$</b><br>
+  Analyzing Case 1 and Case 2 produces four possible values: $\{-48, -12, -9/4, -1/4\}$.<br><br>
+  <b>Step 3: Compute $M \times m$</b><br>
+  Maximum $M = -1/4$, Minimum $m = -48$.<br>
+  $$M \times m = (-1/4) \times (-48) = 12$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The product $M \times m$ is $12$.<br>
+  Therefore, the correct choice is <b>Option ③</b>.<br>
+  💡 <b>Key Tip</b>: Equating one-sided derivative steps cancels the corner discontinuity.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="조건을 만족하는 $f(0)$의 최댓값과 최솟값을 구하여 곱하면 12가 됩니다." data-exp-en="Find the maximum and minimum values ​​of $f(0)$ that satisfy the conditions and multiply them to get 12."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f(0)$의 최댓값과 최솟값의 곱으로 알맞은 것은?</span><div class="bilingual-en">What is the correct product of the maximum and minimum values ​​of $f(0)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$10$</div><div class="opt"><span class="n">2</span>$11$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$13$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

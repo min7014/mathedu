@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30905.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30905">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="a9f72d93">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="5f14e71d">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,14 +698,71 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30905",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-곱의 미분법을 이용하여 $f'(x)$를 구합니다.<br>
-$$f'(x) = (x+1)'(x^2+x-5) + (x+1)(x^2+x-5)'$$<br>
-$$= 1 \cdot (x^2+x-5) + (x+1)(2x+1)$$<br>
-따라서 $x=2$를 대입하면<br>
-$$f'(2) = (2^2 + 2 - 5) + (2+1)(2 \times 2 + 1)$$<br>
-$$= 1 + 3 \times 5 = 1 + 15 = 16$$<br>
-정답은 <b>②번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] Find $f'(x)$ using the differentiation method of the product </b> <br>. <br> $$f'(x) = (x+1)'(x^2+x-5) + (x+1)(x^2+x-5)'$$ <br> $$= 1 \cdot (x^2+x-5) + (x+1)(2x+1)$$</div></div><div class="q" data-ans="2" data-exp="$f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$입니다." data-exp-en="This is $f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=(x+1)(x^2+x-5)$에 대하여 $f&#x27;(2)$의 값은? [3점]</span><div class="bilingual-en">For function $f(x)=(x+1)(x^2+x-5)$, what is the value of $f&#x27;(2)$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>15</div><div class="opt"><span class="n">2</span>16</div><div class="opt"><span class="n">3</span>17</div><div class="opt"><span class="n">4</span>18</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 두 다항식의 곱으로 정의된 함수의 <b>곱의 미분법(Product Rule)</b>을 적용하고, 미분계수를 정확히 대입하여 산출할 수 있는지를 평가합니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 곱의 미분법 공식 적용</b><br>
+  $f(x) = u(x)v(x)$ 에 대하여 $\{u(x)v(x)\}' = u'(x)v(x) + u(x)v'(x)$ 입니다.<br>
+  여기서 $u(x) = x+1$, $v(x) = x^2+x-5$ 이므로<br>
+  $$u'(x) = 1, \quad v'(x) = 2x+1$$
+  도함수 $f'(x)$는 다음과 같습니다.<br>
+  $$f'(x) = 1 \cdot (x^2+x-5) + (x+1)(2x+1)$$
+  <br>
+  <b>2단계: $x=2$ 대입 및 각 인수의 값 계산</b><br>
+  전개하기 전 각 인수에 직접 $x=2$를 대입하여 계산을 간소화합니다.<br>
+  • $u(2) = 2+1 = 3$<br>
+  • $u'(2) = 1$<br>
+  • $v(2) = 2^2 + 2 - 5 = 4 + 2 - 5 = 1$<br>
+  • $v'(2) = 2(2) + 1 = 5$
+  <br>
+  <b>3단계: 최종 미분계수 산출</b><br>
+  $$f'(2) = u'(2)v(2) + u(2)v'(2) = 1 \cdot 1 + 3 \cdot 5 = 1 + 15 = 16$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  구하는 미분계수는 $16$ 입니다.<br>
+  따라서 올바른 정답은 <b>②번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 곱의 미분법에서 식 전체를 전개한 후 미분하기보다, 곱의 미분 공식 형태 그대로 $x=2$를 대입하는 것이 계산 오류를 최소화하는 가장 빠르고 안전한 방법입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem verifies the correct application of the <b>Product Rule of differentiation</b> on two polynomial factors and evaluating the derivative at a specified point.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: State and apply the product rule</b><br>
+  For $f(x) = (x+1)(x^2+x-5)$, let $u(x) = x+1$ and $v(x) = x^2+x-5$.<br>
+  Their respective derivatives are:<br>
+  $$u'(x) = 1, \quad v'(x) = 2x+1$$<br>
+  Applying $(uv)' = u'v + uv'$:<br>
+  $$f'(x) = 1 \cdot (x^2+x-5) + (x+1)(2x+1)$$
+  <br>
+  <b>Step 2: Evaluate factor values at $x = 2$</b><br>
+  Rather than expanding polynomials, evaluate each term at $x=2$ directly:<br>
+  • $u(2) = 3$<br>
+  • $u'(2) = 1$<br>
+  • $v(2) = 2^2 + 2 - 5 = 1$<br>
+  • $v'(2) = 2(2) + 1 = 5$
+  <br>
+  <b>Step 3: Compute the final derivative value</b><br>
+  $$f'(2) = (1)(1) + (3)(5) = 1 + 15 = 16$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The evaluated derivative $f'(2)$ equals $16$.<br>
+  Thus, the correct answer is <b>Option ②</b>.<br>
+  💡 <b>Strategy Tip</b>: Evaluating component factors before summing drastically reduces algebraic expanding errors under time constraints.
+</p>
+  </div>
+</div><div class="q" data-ans="2" data-exp="$f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$입니다." data-exp-en="This is $f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=(x+1)(x^2+x-5)$에 대하여 $f&#x27;(2)$의 값은? [3점]</span><div class="bilingual-en">For function $f(x)=(x+1)(x^2+x-5)$, what is the value of $f&#x27;(2)$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>15</div><div class="opt"><span class="n">2</span>16</div><div class="opt"><span class="n">3</span>17</div><div class="opt"><span class="n">4</span>18</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1134,9 +1191,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30905';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = 'a9f72d93';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '5f14e71d';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30905.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1160,8 +1217,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30905';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || 'a9f72d93';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '5f14e71d';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30905.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

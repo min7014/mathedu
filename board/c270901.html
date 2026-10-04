@@ -620,7 +620,52 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270901",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2><div class="sol">모든 단계를 종합하면 $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times (2^2)^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$ 입니다.<div class="bilingual-en">Synthesizing all steps: $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times (2^2)^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$.</div></div><div class="q" data-ans="4" data-exp="$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$ 이므로 정답은 ④입니다." data-exp-en="$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{1}{2}}$, so the correct answer is ④."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}}$ 의 값은?<div class="bilingual-en">What is the value of $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}}$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$2^{-1}$</div><div class="opt"><span class="n">2</span>$2^{-\frac{1}{2}}$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2^{\frac{1}{2}}$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>거듭제곱과 지수법칙</b>의 기본 성질을 정확히 이해하고, 밑을 소인수로 통일하여 식을 간단히 정리할 수 있는지를 평가하는 문항입니다. 특히 유리수 지수와 음의 지수의 정의를 올바르게 적용하는 것이 핵심입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 밑을 2로 통일하기</b><br>
+  합성수 $4$는 소인수분해하면 $4 = 2^2$입니다. 거듭제곱의 지수법칙 $(a^m)^n = a^{mn}$을 적용하면 다음과 같습니다.<br>
+  $$4^{-\frac{1}{2}} = (2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$$<br>
+  <b>2단계: 밑이 같은 두 거듭제곱의 곱셈 법칙 적용</b><br>
+  밑이 $2$로 같은 두 수의 곱셈에서는 지수끼리 더합니다 ($a^m \times a^n = a^{m+n}$):<br>
+  $$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2} + (-1)} = 2^{\frac{3}{2} - \frac{2}{2}} = 2^{\frac{1}{2}}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  계산 결과 구하는 값은 $2^{\frac{1}{2}}$ ($=\sqrt{2}$) 입니다.<br>
+  따라서 바른 답은 <b>④번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 지수에 분수나 음수가 포함되어 있을 때는 항상 소인수분해를 통해 모든 항의 밑을 가장 작은 소수(이 문제에서는 2)로 통일한 후 연산하면 실수를 원천 차단할 수 있습니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem assesses the ability to apply <b>laws of exponents</b> with rational and negative exponents by unifying composite bases into prime factor powers.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Unify bases to $2$</b><br>
+  Express the composite base $4$ as $2^2$ and apply the power rule $(a^m)^n = a^{mn}$:<br>
+  $$4^{-\frac{1}{2}} = (2^2)^{-\frac{1}{2}} = 2^{2 \times \left(-\frac{1}{2}\right)} = 2^{-1}$$<br>
+  <b>Step 2: Apply the product rule for exponents</b><br>
+  When multiplying powers with the same base, add their exponents ($a^m \times a^n = a^{m+n}$):<br>
+  $$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2} - 1} = 2^{\frac{1}{2}}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The final simplified value is $2^{\frac{1}{2}}$ (which equals $\sqrt{2}$).<br>
+  Therefore, the correct choice is <b>Option ④</b>.<br>
+  💡 <b>Key Tip</b>: Always factor composite numbers into prime bases before applying exponential operations.
+</p>
+  </div>
+</div><div class="q" data-ans="4" data-exp="$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{3}{2}-1} = 2^{\frac{1}{2}}$ 이므로 정답은 ④입니다." data-exp-en="$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}} = 2^{\frac{3}{2}} \times 2^{-1} = 2^{\frac{1}{2}}$, so the correct answer is ④."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">$2^{\frac{3}{2}} \times 4^{-\frac{1}{2}}$ 의 값은?<div class="bilingual-en">What is the value of $2^{\frac{3}{2}} \times 4^{-\frac{1}{2}}$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$2^{-1}$</div><div class="opt"><span class="n">2</span>$2^{-\frac{1}{2}}$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2^{\frac{1}{2}}$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

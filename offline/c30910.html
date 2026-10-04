@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30910.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30910">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="e587a9e6">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="c60d81af">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,21 +698,79 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30910",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-$\overline{AB}:\overline{AC} = \sqrt{2}:1$이므로 $\overline{AC}=x$라 하면 $\overline{AB}=\sqrt{2}x$입니다.<br>
-외접원의 넓이가 $50\pi$이므로 외접원 반지름 $R$은<br>
-$$\pi R^2 = 50\pi \implies R = 5\sqrt{2}$$<br>
-직각삼각형 $AHC$에서<br>
-$$\sin C = \frac{\overline{AH}}{\overline{AC}} = \frac{2}{x}$$<br>
-삼각형 $ABC$에서 사인법칙에 의하여<br>
-$$\frac{\overline{AB}}{\sin C} = 2R \implies \overline{AB} = 2R\sin C$$<br>
-$$\sqrt{2}x = 2(5\sqrt{2})\left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x}$$<br>
-양변에 $x$를 곱하고 $\sqrt{2}$로 나누면<br>
-$$x^2 = 20 \implies x = 2\sqrt{5}$$<br>
-따라서 $\overline{AB} = \sqrt{2}x = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$입니다.<br>
-직각삼각형 $ABH$에서 피타고라스 정리에 의해<br>
-$$\overline{BH} = \sqrt{\overline{AB}^2 - \overline{AH}^2} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40 - 4} = \sqrt{36} = 6$$<br>
-정답은 <b>①번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> <br> $\overline{AB}:\overline{AC} = \sqrt{2}:1$, so $\overline{AC}=x$ becomes $\overline{AB}=\sqrt{2}x$. Since the area of the circumscribed circle <br> is $50\pi$, the radius of the circumscribed circle $R$ is <br> $$\frac{\overline{AB}}{\sin C} = 2R \implies \overline{AB} = 2R\sin C$$ <br> $$\sqrt{2}x = 2(5\sqrt{2})\left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x}$$ In <br> right triangle $ABH$, by Pythagorean theorem, the correct answer is <br></div></div><div class="q" data-ans="1" data-exp="$\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$이므로 직각삼각형 $ABH$에서 $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$입니다." data-exp-en="Since it is $\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$, it is $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$ in the right triangle $ABH$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\angle A &gt; \frac{\pi}{2}$인 삼각형 $ABC$의 꼭짓점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하자. $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$이고, 삼각형 $ABC$의 외접원의 넓이가 $50\pi$일 때, 선분 $BH$의 길이는? [4점]</span><div class="bilingual-en">Let $H$ be the foot of the perpendicular line from the vertex $A$ of triangle $\angle A &gt; \frac{\pi}{2}$ to the line segment $BC$. If $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$ and the area of ​​the circumscribed circle of triangle $ABC$ is $50\pi$, what is the length of the line segment $BH$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>$\frac{25}{4}$</div><div class="opt"><span class="n">3</span>$\frac{13}{2}$</div><div class="opt"><span class="n">4</span>$\frac{27}{4}$</div><div class="opt"><span class="n">5</span>7</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 삼각형의 <b>사인법칙(Law of Sines)</b>과 외접원의 반지름, 그리고 직각삼각형에서의 피타고라스 정리를 종합적으로 연계하여 변의 길이를 추론하는 기하학적 종합 문제입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 외접원의 반지름 $R$ 및 변의 비율 설정</b><br>
+  삼각형 $ABC$의 외접원의 넓이가 $50\pi$이므로 외접원 반지름 $R$은 다음과 같습니다.<br>
+  $$\pi R^2 = 50\pi \implies R = \sqrt{50} = 5\sqrt{2}$$
+  조건 $\overline{AB} : \overline{AC} = \sqrt{2} : 1$ 에서 $\overline{AC} = x$ ($x>0$)라 두면 $\overline{AB} = \sqrt{2}x$ 입니다.
+  <br><br>
+  <b>2단계: 직각삼각형 $AHC$를 이용한 $\sin C$ 표현 및 사인법칙 적용</b><br>
+  점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하면, 직각삼각형 $AHC$에서 $\overline{AH} = 2$ 입니다.<br>
+  따라서 각 $C$에 대한 사인값은 다음과 같습니다.<br>
+  $$\sin C = \frac{\overline{AH}}{\overline{AC}} = \frac{2}{x}$$
+  삼각형 $ABC$에서 사인법칙을 대변 $\overline{AB}$와 각 $C$에 적용하면:<br>
+  $$\frac{\overline{AB}}{\sin C} = 2R \implies \overline{AB} = 2R \sin C$$
+  대입하면:<br>
+  $$\sqrt{2}x = 2(5\sqrt{2}) \cdot \left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x}$$
+  양변을 $\sqrt{2}$로 나누고 $x$를 곱하면:<br>
+  $$x^2 = 20 \implies x = \sqrt{20} = 2\sqrt{5}$$
+  <br>
+  <b>3단계: $\overline{AB}$ 산출 및 직각삼각형 $ABH$에서 피타고라스 정리 적용</b><br>
+  $\overline{AB} = \sqrt{2}x = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$ 입니다.<br>
+  직각삼각형 $ABH$에서 $\angle AHB = 90^\circ$ 이므로 피타고라스 정리를 적용합니다.<br>
+  $$\overline{BH} = \sqrt{\overline{AB}^2 - \overline{AH}^2} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40 - 4} = \sqrt{36} = 6$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  선분 $BH$의 길이는 $6$ 입니다.<br>
+  따라서 올바른 정답은 <b>①번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 수선의 발 $H$가 주어지면 높이($\overline{AH}$)를 공통으로 갖는 두 직각삼각형 $AHC$와 $ABH$를 분리하여 보고, 외접원 조건이 나오는 즉시 $2R$과 사인법칙을 결합하는 것이 표준적인 접근법입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem integrates the <b>Law of Sines</b>, circumradius properties, and the Pythagorean theorem on right triangles derived from an altitude dropped to the base.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Determine the circumradius $R$ and parameterize side lengths</b><br>
+  Given the circumcircle area $50\pi$, the circumradius is:<br>
+  $$\pi R^2 = 50\pi \implies R = 5\sqrt{2}$$<br>
+  Given the ratio $\overline{AB} : \overline{AC} = \sqrt{2} : 1$, let $\overline{AC} = x$. Then $\overline{AB} = \sqrt{2}x$.
+  <br><br>
+  <b>Step 2: Express $\sin C$ from right triangle $AHC$ and apply the Law of Sines</b><br>
+  In right triangle $AHC$ with altitude $\overline{AH} = 2$:<br>
+  $$\sin C = \frac{\overline{AH}}{\overline{AC}} = \frac{2}{x}$$<br>
+  By the Law of Sines on $\triangle ABC$:<br>
+  $$\frac{\overline{AB}}{\sin C} = 2R \implies \overline{AB} = 2R \sin C$$<br>
+  Substituting our parameterized expressions:<br>
+  $$\sqrt{2}x = 2(5\sqrt{2})\left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x}$$<br>
+  Multiplying both sides by $x$ and dividing by $\sqrt{2}$:<br>
+  $$x^2 = 20 \implies x = 2\sqrt{5}$$
+  <br>
+  <b>Step 3: Compute $\overline{AB}$ and determine $\overline{BH}$ via Pythagorean theorem</b><br>
+  The length of hypotenuse $\overline{AB}$ is:<br>
+  $$\overline{AB} = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$$<br>
+  In right triangle $ABH$:<br>
+  $$\overline{BH} = \sqrt{\overline{AB}^2 - \overline{AH}^2} = \sqrt{40 - 4} = \sqrt{36} = 6$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The length of segment $BH$ is $6$.<br>
+  Hence, the correct option is <b>Option ①</b>.<br>
+  💡 <b>Strategy Tip</b>: An altitude naturally divides a general triangle into two right triangles, letting you bridge trigonometric ratios ($\sin C = \frac{h}{b}$) with the circumradius Law of Sines ($\frac{c}{\sin C} = 2R$).
+</p>
+  </div>
+</div><div class="q" data-ans="1" data-exp="$\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$이므로 직각삼각형 $ABH$에서 $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$입니다." data-exp-en="Since it is $\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$, it is $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$ in the right triangle $ABH$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\angle A &gt; \frac{\pi}{2}$인 삼각형 $ABC$의 꼭짓점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하자. $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$이고, 삼각형 $ABC$의 외접원의 넓이가 $50\pi$일 때, 선분 $BH$의 길이는? [4점]</span><div class="bilingual-en">Let $H$ be the foot of the perpendicular line from the vertex $A$ of triangle $\angle A &gt; \frac{\pi}{2}$ to the line segment $BC$. If $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$ and the area of ​​the circumscribed circle of triangle $ABC$ is $50\pi$, what is the length of the line segment $BH$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>$\frac{25}{4}$</div><div class="opt"><span class="n">3</span>$\frac{13}{2}$</div><div class="opt"><span class="n">4</span>$\frac{27}{4}$</div><div class="opt"><span class="n">5</span>7</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1141,9 +1199,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30910';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = 'e587a9e6';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = 'c60d81af';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30910.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1167,8 +1225,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30910';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || 'e587a9e6';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || 'c60d81af';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30910.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

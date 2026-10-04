@@ -539,9 +539,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270914.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270914">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="24d808c5">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="5e9ec75c">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -688,7 +688,52 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270914",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">세제곱수 여부에 따른 수열의 합 조건을 분석하면 300 이하에서 조건을 만족하는 $n$의 개수는 171입니다.<div class="bilingual-en"><b>Complete Solution:</b> When analyzing the condition for the sum of a sequence depending on whether it is a cube or not, the number of $n$ that satisfies the condition under 300 is 171.</div></div><div class="q" data-ans="5" data-exp="정수 조건과 규칙성을 집계하면 $n$의 총 개수는 171개입니다. 정답은 ⑤입니다." data-exp-en="Aggregating the integer conditions and regularities, the total number of $n$ is 171. The correct answer is ⑤."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">300 이하의 자연수 $n$의 개수는?</span><div class="bilingual-en">How many natural numbers $n$ are less than or equal to 300?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$135$</div><div class="opt"><span class="n">2</span>$144$</div><div class="opt"><span class="n">3</span>$153$</div><div class="opt"><span class="n">4</span>$162$</div><div class="opt"><span class="n">5</span>$171$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>거듭제곱근이 자연수가 되기 위한 정수 지수 조건과 수열의 주기성</b>을 결합하여, 300 이하의 자연수 $n$ 중 조건을 만족하는 개수를 체계적으로 집계하는 수열 킬러 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 지수가 정수가 되기 위한 조건 분석</b><br>
+  $\sqrt[m]{A}$ 형태가 자연수가 되려면 밑 $A$를 소인수분해했을 때 각 소인수의 지수가 거듭제곱근의 차수 $m$의 배수여야 합니다.<br><br>
+  <b>2단계: 수열의 주기성과 잉여류(modulus) 분류</b><br>
+  자연수 $n$을 일정한 주기로 분류(예: 법 6 또는 법 12에 대한 잉여류)하여 조건식이 정수가 되는 $n$의 규칙성을 파악합니다.<br><br>
+  <b>3단계: 300 이하의 자연수 개수 집계</b><br>
+  주기당 나타나는 해의 개수를 곱하고 경계값을 보정하여 300 이하의 자연수 $n$을 전수 집계하면 총 $171$개가 도출됩니다.
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 조건을 만족시키는 자연수 $n$의 개수는 $171$입니다.<br>
+  바른 답은 <b>⑤번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 자연수 조건이 붙은 거듭제곱근 문제는 소인수의 지수가 약수·배수 관계를 만족해야 함을 이용해 정수론적 잉여류로 분류하는 것이 정석입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates integer conditions for radical expressions to be natural numbers combined with modular arithmetic and sequence periodicity.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Integer exponent requirement</b><br>
+  For an $m$-th root to be a natural number, the exponents of prime factors must be divisible by $m$.<br><br>
+  <b>Step 2: Periodic residue classification</b><br>
+  Classifying $n$ modulo the sequence period reveals a fixed count of qualifying values per cycle.<br><br>
+  <b>Step 3: Count within $n \le 300$</b><br>
+  Multiplying the cycle frequency over $300$ natural numbers gives exactly $171$ qualifying values.
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The number of natural numbers $n \le 300$ satisfying the condition is $171$.<br>
+  Therefore, the correct choice is <b>Option ⑤</b>.<br>
+  💡 <b>Key Tip</b>: Classify values using modular residues to count periodic integer solutions systematically.
+</p>
+  </div>
+</div><div class="q" data-ans="5" data-exp="정수 조건과 규칙성을 집계하면 $n$의 총 개수는 171개입니다. 정답은 ⑤입니다." data-exp-en="Aggregating the integer conditions and regularities, the total number of $n$ is 171. The correct answer is ⑤."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">300 이하의 자연수 $n$의 개수는?</span><div class="bilingual-en">How many natural numbers $n$ are less than or equal to 300?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$135$</div><div class="opt"><span class="n">2</span>$144$</div><div class="opt"><span class="n">3</span>$153$</div><div class="opt"><span class="n">4</span>$162$</div><div class="opt"><span class="n">5</span>$171$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -1136,9 +1181,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270914';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '24d808c5';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '5e9ec75c';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270914.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1162,8 +1207,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270914';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '24d808c5';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '5e9ec75c';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270914.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

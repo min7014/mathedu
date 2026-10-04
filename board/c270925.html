@@ -619,7 +619,57 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270925",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">등비수열 수렴 조건: $-1 < \frac{k^2-20}{16} \le 1 \implies 4 < k^2 \le 36 \implies k = \pm 3, \pm 4, \pm 5, \pm 6$ (8개).<div class="bilingual-en"><b>Complete Solution:</b> Geometric sequence convergence condition: $-1 < \frac{k^2-20}{16} \le 1 \implies 4 < k^2 \le 36 \implies k = \pm 3, \pm 4, \pm 5, \pm 6$ (8).</div></div><div class="q" data-ans="3" data-exp="$4 &lt; k^2 \le 36$을 만족하는 정수 $k$는 $\pm 3, \pm 4, \pm 5, \pm 6$으로 총 8개입니다. 정답은 ③입니다." data-exp-en="There are a total of 8 integers, $k$ and $\pm 3, \pm 4, \pm 5, \pm 6$, that satisfy $4 &lt; k^2 \le 36$. The correct answer is ③."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$이 수렴하도록 하는 $k$의 개수는?</span><div class="bilingual-en">What number of $k$ causes the sequence $\{a_n\}$ to converge?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$8$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>등비수열의 수렴 조건</b> $-1 < r \le 1$을 부등식에 정확히 적용하여 이를 만족하는 정수 $k$의 개수를 집계하는 문제입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 공비의 수렴 범위 부등식 설정</b><br>
+  등비수열이 $0$이 아닌 값으로 수렴하기 위한 공비 $R$의 조건은 $-1 < R \le 1$ 입니다.<br>
+  문제의 공비 식을 $k$에 대하여 정리하면 다음과 같은 부등식이 도출됩니다:<br>
+  $$4 < k^2 \le 36$$<br>
+  <b>2단계: $k^2$의 범위로부터 정수 $k$ 도출</b><br>
+  - 양수 $k$: $2 < k \le 6 \implies k \in \{3, 4, 5, 6\}$ (4개)<br>
+  - 음수 $k$: $-6 \le k < -2 \implies k \in \{-6, -5, -4, -3\}$ (4개)<br><br>
+  <b>3단계: 총 개수 계산</b><br>
+  $$4 + 4 = 8\text{개}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 수렴하도록 하는 정수 $k$의 개수는 $8$개입니다.<br>
+  바른 답은 <b>③번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 등비수열의 수렴 조건은 $-1 < r \le 1$($1$ 포함!)이며, 등비급수의 수렴 조건 $-1 < r < 1$($1$ 제외!)과 혼동하지 않도록 주의합니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates the <b>convergence condition of geometric sequences</b>: $-1 < r \le 1$.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Set up the convergence inequality</b><br>
+  Solving the common ratio inequality yields:<br>
+  $$4 < k^2 \le 36$$<br>
+  <b>Step 2: Count integer solutions</b><br>
+  Positive integers: $k \in \{3, 4, 5, 6\}$ (4 values).<br>
+  Negative integers: $k \in \{-6, -5, -4, -3\}$ (4 values).<br><br>
+  <b>Step 3: Total count</b><br>
+  $$4 + 4 = 8$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  There are $8$ integer values of $k$.<br>
+  Therefore, the correct choice is <b>Option ③</b>.<br>
+  💡 <b>Key Tip</b>: Do not confuse the sequence convergence interval (includes $1$) with series convergence (excludes $1$).
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="$4 &lt; k^2 \le 36$을 만족하는 정수 $k$는 $\pm 3, \pm 4, \pm 5, \pm 6$으로 총 8개입니다. 정답은 ③입니다." data-exp-en="There are a total of 8 integers, $k$ and $\pm 3, \pm 4, \pm 5, \pm 6$, that satisfy $4 &lt; k^2 \le 36$. The correct answer is ③."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$이 수렴하도록 하는 $k$의 개수는?</span><div class="bilingual-en">What number of $k$ causes the sequence $\{a_n\}$ to converge?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$8$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

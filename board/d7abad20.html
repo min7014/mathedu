@@ -841,7 +841,96 @@ function submitReport(btn){
   wrap.querySelector('.report-msg').style.display='block';
 }
 </script></div>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="figure"><img src="fig_18013c376a2645e6b0a172b98e8d8881.png" alt="문제 그림" style="max-width:100%;border-radius:10px"></div><div class="sol"><p><b>① 변수 설정.</b> 나무 실제 높이 $H$, 눈높이 위 남은 높이 $h=H-1$. 수평거리 $d$에 대해 꼭대기 고각 $\alpha$($\tan\alpha=h/d$), 지면 저각 $\beta$($\tan\beta=1/d$). 주어진 각 $\theta=\alpha+\beta$.</p><p><b>② $d=7$일 때.</b> $\tan\theta_1=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$.</p><p><b>③ $d=2$일 때.</b> $\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$.</p><p><b>④ 각 차이 활용.</b> $\theta_2-\theta_1=\pi/4$이므로 $\tan(\theta_2-\theta_1)=1$.</p><p>$\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}=1$에 대입. $u=h+1=H$로 두면 전개 후 <b>$u^2-12u+25=0$</b>.</p><p><b>⑤ 해.</b> $u=\dfrac{12\pm\sqrt{144-100}}{2}=6\pm\sqrt{11}=H$.</p><p>나무 높이 두 가능값 $a,b$의 합: $a+b=(6+\sqrt{11})+(6-\sqrt{11})=\boxed{12}$.</p><p>※ 참고: '지면 닿는 지점'은 수평선이 아니라 눈높이에서 내려다보는 저각 $\beta$임을 놓치면 해가 없어짐.</p><div class="bilingual-en"><b>Complete Solution:</b> <p> <b> ① Variable setting. </b> Actual height of tree $H$, remaining height above eye level $h=H-1$. Top elevation angle $\alpha$ ($\tan\alpha=h/d$), ground low angle $\beta$ (Given each $\theta=\alpha+\beta$. </p> <p> <b> ② When $d=7$. </b> $\tan\theta_1=\dfrac{h/7+1/7}{1-(h/7)(1/7)}=\dfrac{7(h+1)}{49-h}$. </p> <p> <b> ③ When $d=2$. </b> $\tan\theta_2=\dfrac{h/2+1/2}{1-(h/2)(1/2)}=\dfrac{2(h+1)}{4-h}$. </p> <p> <b> ④ Utilize each difference. </b> is $\theta_2-\theta_1=\pi/4$, so $\tan(\theta_2-\theta_1)=1$. Assign to </p> <p> $\tan(A-B)=\dfrac{\tan A-\tan B}{1+\tan A\tan B}=1$. If you leave it as $u=h+1=H$, after expansion it will be <b> </p> <p> <b> ⑤ Do it. </b> $u=\dfrac{12\pm\sqrt{144-100}}{2}=6\pm\sqrt{11}=H$. </p> <p> Tree height Sum of two possible values ​​ $a,b$: $a+b=(6+\sqrt{11})+(6-\sqrt{11})=\boxed{12}$. </p> </p></div></div><div class="q" data-ans="1" data-exp="$u=H$에 대해 $u^2-12u+25=0$, 해 $6\pm\sqrt{11}$, 합 $12$." data-exp-en="$u=H$ for $u^2-12u+25=0$, for $6\pm\sqrt{11}$, for $12$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">눈높이가 $1\mathrm{m}$인 어린이가 나무로부터 $7\mathrm{m}$ 떨어진 지점에서 나무의 꼭대기를 바라본 선과 나무가 지면에 닿는 지점을 바라본 선이 이루는 각이 $\theta$이었다. 나무로부터 $2\mathrm{m}$ 떨어진 지점에서 나무를 바라보았더니 그 각이 $\theta+\dfrac{\pi}{4}$가 되었다. 나무의 높이는 $a(\mathrm{m})$ 또는 $b(\mathrm{m})$이다. $a+b$의 값은? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</span><div class="bilingual-en">For a child whose eye height was $1\mathrm{m}$, the angle formed between the line viewed from a point When I looked at the tree from a point $2\mathrm{m}$ away from the tree, the angle became $\theta+\dfrac{\pi}{4}$. The height of the tree is $a(\mathrm{m})$ or $b(\mathrm{m})$. What is the value of $a+b$? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="figure"><img src="fig_18013c376a2645e6b0a172b98e8d8881.png" alt="문제 그림" style="max-width:100%;border-radius:10px"></div><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 지면 및 꼭대기를 올려다보고 내려다보는 시선각에 <b>삼각함수의 탄젠트 덧셈정리($\tan(\alpha+\beta)$)</b>를 적용하고, 두 지점에서의 각도 차이($\pi/4$) 조건을 연립하여 나무의 실제 높이를 구하는 실생활 연계 삼각함수 고난도 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 기하학적 모델링 및 변수 설정</b><br>
+  나무의 실제 높이를 $H$ ($\mathrm{m}$), 관측자의 눈높이를 $1\mathrm{m}$라 합시다.<br>
+  • 눈높이 위의 나무 높이: $h = H - 1$<br>
+  • 눈높이 아래의 지면까지 높이: $1\mathrm{m}$<br>
+  수평거리 $d$에서 나무를 바라볼 때:<br>
+  - 꼭대기를 올려다보는 고각 $\alpha$: $\tan\alpha = \frac{h}{d}$<br>
+  - 지면의 밑동을 내려다보는 저각 $\beta$: $\tan\beta = \frac{1}{d}$<br>
+  나무 전체를 바라보는 시야각 $\theta$는 고각과 저각의 합이므로 $\theta = \alpha + \beta$ 입니다.<br>
+  탄젠트 덧셈정리에 의해:<br>
+  $$\tan\theta = \tan(\alpha+\beta) = \frac{\tan\alpha + \tan\beta}{1 - \tan\alpha\tan\beta} = \frac{\frac{h}{d} + \frac{1}{d}}{1 - \frac{h}{d} \cdot \frac{1}{d}} = \frac{\frac{h+1}{d}}{\frac{d^2 - h}{d^2}} = \frac{d(h+1)}{d^2 - h}$$
+  <br>
+  <b>2단계: 두 거리 $d=7$과 $d=2$에서의 각도 표현</b><br>
+  $u = h + 1 = H$ (나무의 실제 높이)라 두면 편리합니다.<br>
+  • $d = 7$ 일 때: $\tan\theta_1 = \frac{7u}{49 - h} = \frac{7u}{50 - u}$<br>
+  • $d = 2$ 일 때: $\tan\theta_2 = \frac{2u}{4 - h} = \frac{2u}{5 - u}$
+  <br><br>
+  <b>3단계: 각의 차 $\theta_2 - \theta_1 = \frac{\pi}{4}$ 적용</b><br>
+  $\tan(\theta_2 - \theta_1) = \tan\frac{\pi}{4} = 1$ 입니다.<br>
+  탄젠트 뺄셈정리를 적용합니다.<br>
+  $$\frac{\tan\theta_2 - \tan\theta_1}{1 + \tan\theta_2\tan\theta_1} = 1 \implies \tan\theta_2 - \tan\theta_1 = 1 + \tan\theta_2\tan\theta_1$$
+  위의 식을 대입하여 전개 정리하면 $u$에 관한 다음 이차방정식이 유도됩니다.<br>
+  $$u^2 - 12u + 25 = 0$$
+  <br>
+  <b>4단계: 근의 공식을 통한 두 해 및 합 산출</b><br>
+  근과 계수의 관계에 의하여 두 근의 합은 일차항의 계수의 반대 부호인 $12$입니다!<br>
+  근의 공식을 직접 확인하면:<br>
+  $$u = \frac{12 \pm \sqrt{144 - 100}}{2} = 6 \pm \sqrt{11}$$
+  두 값 모두 $6 - \sqrt{11} \approx 6 - 3.316 = 2.68 > 1$ 이므로 유효한 나무 높이입니다.<br>
+  따라서 가능한 두 높이 $a, b$의 합은 다음과 같습니다.<br>
+  $$a + b = (6 + \sqrt{11}) + (6 - \sqrt{11}) = 12$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  가능한 나무의 높이의 합은 $12$ 입니다.<br>
+  따라서 올바른 정답은 <b>12</b> 입니다.<br>
+  💡 <b>실전 팁</b>: 나무 밑동이 지면에 있으므로 관측자의 눈높이($1\mathrm{m}$) 아래를 내려다보는 저각 $\beta$를 반드시 포함해야 합니다. $u = H$로 치환한 뒤 근과 계수의 관계를 쓰면 무리수 계산 없이 합 $12$가 즉각 나옵니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem models measuring tree height from eye level ($1\mathrm{m}$) using the <b>tangent angle addition and subtraction formulas</b>, relating viewing angles subtended at two different horizontal distances ($d = 7$ and $d = 2$).</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Set up the trigonometric model</b><br>
+  Let total tree height be $H$ and eye level be $1\mathrm{m}$.<br>
+  • Height above eye level: $h = H - 1$<br>
+  • Height below eye level to base: $1\mathrm{m}$<br>
+  At horizontal distance $d$:<br>
+  - Elevation angle to top: $\tan\alpha = \frac{h}{d}$<br>
+  - Depression angle to base: $\tan\beta = \frac{1}{d}$<br>
+  The total visual angle is $\theta = \alpha + \beta$. By the tangent addition identity:<br>
+  $$\tan\theta = \frac{\tan\alpha + \tan\beta}{1 - \tan\alpha\tan\beta} = \frac{\frac{h+1}{d}}{\frac{d^2 - h}{d^2}} = \frac{d(h+1)}{d^2 - h}$$
+  <br>
+  <b>Step 2: Express $\tan\theta$ at $d = 7$ and $d = 2$</b><br>
+  Let $u = h + 1 = H$ (total height). Note $h = u - 1$.<br>
+  • At $d = 7$: $\tan\theta_1 = \frac{7u}{49 - (u-1)} = \frac{7u}{50 - u}$<br>
+  • At $d = 2$: $\tan\theta_2 = \frac{2u}{4 - (u-1)} = \frac{2u}{5 - u}$
+  <br><br>
+  <b>Step 3: Apply the angle difference condition $\theta_2 - \theta_1 = \frac{\pi}{4}$</b><br>
+  Using $\tan(\theta_2 - \theta_1) = 1$:<br>
+  $$\frac{\tan\theta_2 - \tan\theta_1}{1 + \tan\theta_2\tan\theta_1} = 1 \implies \tan\theta_2 - \tan\theta_1 = 1 + \tan\theta_2\tan\theta_1$$<br>
+  Substituting and clearing fractions leads to the quadratic equation:<br>
+  $$u^2 - 12u + 25 = 0$$
+  <br>
+  <b>Step 4: Solve for tree heights and evaluate their sum</b><br>
+  By Vieta's formulas, the sum of the two roots is $12$.<br>
+  Explicitly:<br>
+  $$u = 6 \pm \sqrt{11}$$<br>
+  Both roots exceed eye level ($1\mathrm{m}$), confirming physical validity.<br>
+  $$a + b = (6 + \sqrt{11}) + (6 - \sqrt{11}) = 12$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The sum of both possible tree heights is $12$.<br>
+  Therefore, the answer is <b>12</b>.<br>
+  💡 <b>Strategy Tip</b>: Substituting $u = H$ early simplifies the algebra and lets Vieta's formulas deliver the sum of possible heights in a single step.
+</p>
+  </div>
+</div><div class="q" data-ans="1" data-exp="$u=H$에 대해 $u^2-12u+25=0$, 해 $6\pm\sqrt{11}$, 합 $12$." data-exp-en="$u=H$ for $u^2-12u+25=0$, for $6\pm\sqrt{11}$, for $12$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">question</span></div><div class="stem"><span class="bilingual-ko">눈높이가 $1\mathrm{m}$인 어린이가 나무로부터 $7\mathrm{m}$ 떨어진 지점에서 나무의 꼭대기를 바라본 선과 나무가 지면에 닿는 지점을 바라본 선이 이루는 각이 $\theta$이었다. 나무로부터 $2\mathrm{m}$ 떨어진 지점에서 나무를 바라보았더니 그 각이 $\theta+\dfrac{\pi}{4}$가 되었다. 나무의 높이는 $a(\mathrm{m})$ 또는 $b(\mathrm{m})$이다. $a+b$의 값은? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</span><div class="bilingual-en">For a child whose eye height was $1\mathrm{m}$, the angle formed between the line viewed from a point When I looked at the tree from a point $2\mathrm{m}$ away from the tree, the angle became $\theta+\dfrac{\pi}{4}$. The height of the tree is $a(\mathrm{m})$ or $b(\mathrm{m})$. What is the value of $a+b$? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$12$</div><div class="opt"><span class="n">2</span>$14$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div>

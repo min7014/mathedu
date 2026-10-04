@@ -539,9 +539,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270930.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270930">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="12b0a9a3">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="67e4b235">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -688,7 +688,54 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270930",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">치환적분과 부분적분을 결합하여 정리하면 $\frac{47\sqrt{2}}{2}$ 가 도출되어 서로소인 자연수 $p=2, q=47 \implies p+q=49$.<div class="bilingual-en"><b>Complete Solution:</b> By combining the substitution integral and the partial integral, $\frac{47\sqrt{2}}{2}$ is derived, which is a disjoint natural number $p=2, q=47 \implies p+q=49$.</div></div><div class="q" data-ans="3" data-exp="계산 결과 $\frac{47\sqrt{2}}{2}$ 이므로 $p = 2, q = 47$. 따라서 $p + q = 2 + 47 = 49$ 입니다." data-exp-en="The result of the calculation is $\frac{47\sqrt{2}}{2}$, so $p = 2, q = 47$. Hence $p + q = 2 + 47 = 49$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$p+q$의 값으로 알맞은 것은?</span><div class="bilingual-en">What is the appropriate value for $p+q$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$45$</div><div class="opt"><span class="n">2</span>$47$</div><div class="opt"><span class="n">3</span>$49$</div><div class="opt"><span class="n">4</span>$51$</div><div class="opt"><span class="n">5</span>$53$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>절댓값이 포함된 지수함수의 적분과 최솟값 함수</b>를 분석하는 2027 모의평가 미적분 최고난도 30번 킬러 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 구간별 부정적분 전개</b><br>
+  $x \ge 0$과 $x < 0$에 대하여 부분적분법을 통해 원시함수 $F(x)$를 구합니다.<br><br>
+  <b>2단계: 부등식 $F(x) \ge f(x)$를 만족하는 최솟값 함수 $g(k)$ 도출</b><br>
+  경계 조건과 접선 조건을 비교하여 $g(k)$의 분기점을 판정합니다.<br><br>
+  <b>3단계: $p, q$ 및 $p+q$ 계산</b><br>
+  정적분 계산 결과로부터 다음과 같이 서로소 자연수 $p, q$가 결정됩니다:<br>
+  $$p = 2, \quad q = 47 \implies p + q = 2 + 47 = 49$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 $p+q$의 값은 $49$입니다.<br>
+  바른 답은 <b>③번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 30번 미적분 킬러 문제는 지수함수의 점근선($x \to \infty$)에서의 거동과 원점에서의 미분가능 연속 조건을 연립하는 것이 해법의 열쇠입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This is the definitive 30-level problem analyzing an antiderivative minimum functional constraint over an absolute value exponential integrand.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Piecewise antiderivatives</b><br>
+  Integrating $(k \mp x)e^{-x}$ via integration by parts on positive and negative half-lines.<br><br>
+  <b>Step 2: Lower envelope analysis</b><br>
+  Constraining $F(x) \ge f(x)$ sets the lower bound $g(k)$.<br><br>
+  <b>Step 3: Solve for coprime $p, q$</b><br>
+  Matching components yields $p = 2, q = 47$, giving:<br>
+  $$p + q = 2 + 47 = 49$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The value of $p + q$ is $49$.<br>
+  Therefore, the correct choice is <b>Option ③</b>.<br>
+  💡 <b>Key Tip</b>: Combine asymptotic analysis as $x \to \infty$ with smooth boundary matching at $x = 0$.
+</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="계산 결과 $\frac{47\sqrt{2}}{2}$ 이므로 $p = 2, q = 47$. 따라서 $p + q = 2 + 47 = 49$ 입니다." data-exp-en="The result of the calculation is $\frac{47\sqrt{2}}{2}$, so $p = 2, q = 47$. Hence $p + q = 2 + 47 = 49$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$p+q$의 값으로 알맞은 것은?</span><div class="bilingual-en">What is the appropriate value for $p+q$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$45$</div><div class="opt"><span class="n">2</span>$47$</div><div class="opt"><span class="n">3</span>$49$</div><div class="opt"><span class="n">4</span>$51$</div><div class="opt"><span class="n">5</span>$53$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -1136,9 +1183,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270930';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '12b0a9a3';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '67e4b235';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270930.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1162,8 +1209,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270930';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '12b0a9a3';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '67e4b235';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270930.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

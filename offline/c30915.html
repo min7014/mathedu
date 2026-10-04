@@ -540,9 +540,9 @@ mjx-container::-webkit-scrollbar-thumb {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30915.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30915">
-<meta name="mathedu-offline-build-time" content="2026-10-03T04:22:14.521481+00:00">
-<meta name="mathedu-offline-hash" content="32d32999">
-<meta name="mathedu-version-label" content="v2026.10.03">
+<meta name="mathedu-offline-build-time" content="2026-10-04T01:17:40.938352+00:00">
+<meta name="mathedu-offline-hash" content="825f0931">
+<meta name="mathedu-version-label" content="v2026.10.04">
 
 </head><body><div class="wrap">
 
@@ -698,24 +698,80 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c30915",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><b>[풀이]</b><br>
-조건 (가)의 양변을 $x$에 대하여 미분하면<br>
-$$x f(x) + x g(x) = 12x^3 + 24x^2 - 6x$$<br>
-양변을 $x$로 나누면<br>
-$$f(x) + g(x) = 12x^2 + 24x - 6 \quad \cdots\cdots \text{㉠}$$<br>
-조건 (나)에서 $f(x) = x g'(x)$이므로 이를 ㉠에 대입하면<br>
-$$x g'(x) + g(x) = 12x^2 + 24x - 6$$<br>
-좌변은 곱의 미분법 $\{x g(x)\}'$과 같으므로<br>
-$$\{x g(x)\}' = 12x^2 + 24x - 6$$<br>
-양변을 부정적분하면<br>
-$$x g(x) = \int (12x^2 + 24x - 6)dx = 4x^3 + 12x^2 - 6x + C$$<br>
-$g(x)$는 다항함수이므로 $x=0$일 때 좌변이 $0$이어야 하므로 적분상수 $C = 0$입니다.<br>
-따라서<br>
-$$g(x) = 4x^2 + 12x - 6$$<br>
-구하는 정적분을 계산하면<br>
-$$\int_0^3 g(x)dx = \int_0^3 (4x^2 + 12x - 6)dx = \left[\frac{4}{3}x^3 + 6x^2 - 6x\right]_0^3$$<br>
-$$= \frac{4}{3}(27) + 6(9) - 6(3) = 36 + 54 - 18 = 72$$<br>
-정답은 <b>①번</b>입니다.<div class="bilingual-en"><b>Complete Solution:</b> <b> [Solution] </b> Therefore, if you substitute this into ㉠, <br> Since $g(x)$ is a polynomial function, the left side of $x=0$ must be $0$, so the integration constant is $C = 0$. <br> Therefore, if you calculate the definite integral of <br></div></div><div class="q" data-ans="1" data-exp="$g(x) = 4x^2+12x-6$이므로 $\int_0^3 g(x)dx = [4/3 x^3 + 6x^2 - 6x]_0^3 = 36 + 54 - 18 = 72$입니다." data-exp-en="It&#x27;s $g(x) = 4x^2+12x-6$, so it&#x27;s $\int_0^3 g(x)dx = [4/3 x^3 + 6x^2 - 6x]_0^3 = 36 + 54 - 18 = 72$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">두 다항함수 $f(x), g(x)$는 모든 실수 $x$에 대하여 다음 조건을 만족시킨다. (가) $\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$ (나) $f(x) = x g&#x27;(x)$. $\int_0^3 g(x)dx$의 값은? [4점]</span><div class="bilingual-en">The two polynomial functions $f(x), g(x)$ satisfy the following conditions for all real numbers $x$. (a) $\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$ (b) $f(x) = x g&#x27;(x)$. What is the value of $\int_0^3 g(x)dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>72</div><div class="opt"><span class="n">2</span>76</div><div class="opt"><span class="n">3</span>80</div><div class="opt"><span class="n">4</span>84</div><div class="opt"><span class="n">5</span>88</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>정적분으로 정의된 함수의 양변 미분</b>과 <b>곱의 미분법의 역연산(부정적분)</b>을 결합하여 미지의 다항함수 $g(x)$를 특정하고 정적분 값을 계산하는 고난도 해석학 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 조건 (가)의 양변을 $x$에 대하여 미분</b><br>
+  주어진 조건 $\int_0^x \{t f(t) + t g(t)\}dt = 3x^4 + 8x^3 - 3x^2$ 의 양변을 $x$에 대하여 미분합니다.<br>
+  미적분학의 기본정리에 의해 좌변의 도함수는 피적분함수에 $x$를 대입한 $x f(x) + x g(x)$ 입니다.<br>
+  $$x f(x) + x g(x) = 12x^3 + 24x^2 - 6x$$
+  양변을 $x$로 나누면 ($x \ne 0$에서 성립하며, 다항함수의 연속성에 의해 모든 실수에서 성립):<br>
+  $$f(x) + g(x) = 12x^2 + 24x - 6 \quad \cdots\cdots \text{㉠}$$
+  <br>
+  <b>2단계: 조건 (나) 대입 및 곱의 미분법 역연산</b><br>
+  조건 (나)에서 $f(x) = x g'(x)$ 이므로 이를 식 ㉠에 대입합니다.<br>
+  $$x g'(x) + g(x) = 12x^2 + 24x - 6$$
+  좌변의 $x g'(x) + g(x)$는 바로 곱의 미분법 $\{x g(x)\}'$의 전개식입니다!<br>
+  $$\{x g(x)\}' = 12x^2 + 24x - 6$$
+  양변을 부정적분하면 다음과 같습니다.<br>
+  $$x g(x) = \int (12x^2 + 24x - 6)dx = 4x^3 + 12x^2 - 6x + C$$
+  $g(x)$가 다항함수이므로 $x=0$을 대입할 때 좌변이 $0$이어야 하므로 적분상수 $C = 0$ 입니다.<br>
+  따라서 양변을 $x$로 나누면 $g(x)$가 완전히 결정됩니다.<br>
+  $$g(x) = 4x^2 + 12x - 6$$
+  <br>
+  <b>3단계: 정적분 $\int_0^3 g(x)dx$ 계산</b><br>
+  구하는 정적분을 계산합니다.<br>
+  $$\int_0^3 (4x^2 + 12x - 6)dx = \left[ \frac{4}{3}x^3 + 6x^2 - 6x \right]_0^3$$
+  $$= \frac{4}{3}(27) + 6(9) - 6(3) = 36 + 54 - 18 = 72$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  계산된 정적분 값은 $72$ 입니다.<br>
+  따라서 올바른 정답은 <b>①번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 수능에서 $x g'(x) + g(x)$ 꼴이 보이면 즉시 **곱의 미분법 $\{x g(x)\}'$**으로 한 덩어리로 묶어 적분하는 패턴은 빈출 핵심 킬러 테크닉입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates differentiation of integral-defined functions and recognizes the reverse product rule pattern $\{x g(x)\}' = x g'(x) + g(x)$ to reconstruct a polynomial function.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Differentiate condition (A) with respect to $x$</b><br>
+  Differentiating $\int_0^x \{t f(t) + t g(t)\}dt = 3x^4 + 8x^3 - 3x^2$ via the Fundamental Theorem of Calculus:<br>
+  $$x f(x) + x g(x) = 12x^3 + 24x^2 - 6x$$<br>
+  Dividing both sides by $x$ (valid everywhere by polynomial continuity):<br>
+  $$f(x) + g(x) = 12x^2 + 24x - 6 \quad \cdots\cdots (1)$$
+  <br>
+  <b>Step 2: Recognize the reverse product rule</b><br>
+  Condition (B) states $f(x) = x g'(x)$. Substituting into (1):<br>
+  $$x g'(x) + g(x) = 12x^2 + 24x - 6$$<br>
+  Observe that the left-hand side is the derivative of the product $x g(x)$:<br>
+  $$\{x g(x)\}' = 12x^2 + 24x - 6$$<br>
+  Integrating both sides:<br>
+  $$x g(x) = 4x^3 + 12x^2 - 6x + C$$<br>
+  Evaluating at $x = 0$ yields $0 = C \implies C = 0$. Dividing by $x$ gives:<br>
+  $$g(x) = 4x^2 + 12x - 6$$
+  <br>
+  <b>Step 3: Evaluate the definite integral over $[0, 3]$</b><br>
+  $$\int_0^3 (4x^2 + 12x - 6)dx = \left[ \frac{4}{3}x^3 + 6x^2 - 6x \right]_0^3$$<br>
+  $$= \frac{4}{3}(27) + 6(9) - 6(3) = 36 + 54 - 18 = 72$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaways]</h4>
+<p>
+  The value of the integral is $72$.<br>
+  Hence, the correct answer is <b>Option ①</b>.<br>
+  💡 <b>Strategy Tip</b>: Spotting the identity $\frac{d}{dx}[x g(x)] = x g'(x) + g(x)$ instantly unlocks anti-differentiation without having to guess polynomial degrees or undetermined coefficients.
+</p>
+  </div>
+</div><div class="q" data-ans="1" data-exp="$g(x) = 4x^2+12x-6$이므로 $\int_0^3 g(x)dx = [4/3 x^3 + 6x^2 - 6x]_0^3 = 36 + 54 - 18 = 72$입니다." data-exp-en="It&#x27;s $g(x) = 4x^2+12x-6$, so it&#x27;s $\int_0^3 g(x)dx = [4/3 x^3 + 6x^2 - 6x]_0^3 = 36 + 54 - 18 = 72$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">두 다항함수 $f(x), g(x)$는 모든 실수 $x$에 대하여 다음 조건을 만족시킨다. (가) $\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$ (나) $f(x) = x g&#x27;(x)$. $\int_0^3 g(x)dx$의 값은? [4점]</span><div class="bilingual-en">The two polynomial functions $f(x), g(x)$ satisfy the following conditions for all real numbers $x$. (a) $\int_1^x t f(t)dt + \int_{-1}^x t g(t)dt = 3x^4+8x^3-3x^2$ (b) $f(x) = x g&#x27;(x)$. What is the value of $\int_0^3 g(x)dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>72</div><div class="opt"><span class="n">2</span>76</div><div class="opt"><span class="n">3</span>80</div><div class="opt"><span class="n">4</span>84</div><div class="opt"><span class="n">5</span>88</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1144,9 +1200,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30915';
-window._offlineBuildTime = '2026-10-03T04:22:14.521481+00:00';
-window._offlineHash = '32d32999';
-window._offlineVersion = 'v2026.10.03';
+window._offlineBuildTime = '2026-10-04T01:17:40.938352+00:00';
+window._offlineHash = '825f0931';
+window._offlineVersion = 'v2026.10.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30915.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1170,8 +1226,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30915';
-  var localBuildTime = window._offlineBuildTime || '2026-10-03T04:22:14.521481+00:00';
-  var localHash = window._offlineHash || '32d32999';
+  var localBuildTime = window._offlineBuildTime || '2026-10-04T01:17:40.938352+00:00';
+  var localHash = window._offlineHash || '825f0931';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30915.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

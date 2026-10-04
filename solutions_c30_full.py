@@ -1,0 +1,8 @@
+from solutions_c30_part1 import SOLUTIONS_PART1
+from solutions_c30_part2 import SOLUTIONS_PART2
+from solutions_c30_part3 import SOLUTIONS_PART3
+
+SOLUTIONS_C30 = {}
+SOLUTIONS_C30.update(SOLUTIONS_PART1)
+SOLUTIONS_C30.update(SOLUTIONS_PART2)
+SOLUTIONS_C30.update(SOLUTIONS_PART3)

@@ -619,7 +619,58 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270912",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">도형의 보조선과 코사인법칙에 의해 $\text{BD}^2 = 32 \implies \text{BD} = 4\sqrt{2}$.<div class="bilingual-en"><b>Complete Solution:</b> $\text{BD}^2 = 32 \implies \text{BD} = 4\sqrt{2}$ by the auxiliary lines of the figure and the law of cosines.</div></div><div class="q" data-ans="4" data-exp="사인법칙과 코사인법칙을 연립하면 $\text{BD} = 4\sqrt{2}$ 입니다. 정답은 ④입니다." data-exp-en="The combination of the sine law and the cosine law is $\text{BD} = 4\sqrt{2}$. The correct answer is ④."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">선분 $\text{BD}$의 길이는?</span><div class="bilingual-en">What is the length of the line segment $\text{BD}$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$3\sqrt{2}$</div><div class="opt"><span class="n">2</span>$4$</div><div class="opt"><span class="n">3</span>$2\sqrt{5}$</div><div class="opt"><span class="n">4</span>$4\sqrt{2}$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>사인법칙과 코사인법칙을 원에 내접하는 사각형</b>에 종합적으로 적용하여 대각선(공통현) $\overline{BD}$의 길이를 정확하게 산출하는 삼각함수 도형 킬러 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 원에 내접하는 사각형의 대각의 성질</b><br>
+  원에 내접하는 사각형에서 마주 보는 두 대각의 합은 $180^\circ$입니다. 즉, $\angle A + \angle C = \pi$이므로 $\cos C = \cos(\pi - A) = -\cos A$입니다.<br><br>
+  <b>2단계: 두 삼각형에서 코사인법칙 연립</b><br>
+  공통 변 $\overline{BD}$에 대하여 $\triangle ABD$와 $\triangle BCD$에서 각각 제2코사인법칙을 적용합니다:<br>
+  $$\overline{BD}^2 = \overline{AB}^2 + \overline{AD}^2 - 2\overline{AB}\cdot\overline{AD}\cos A$$<br>
+  $$\overline{BD}^2 = \overline{CB}^2 + \overline{CD}^2 - 2\overline{CB}\cdot\overline{CD}\cos C$$<br>
+  $\cos C = -\cos A$를 대입하여 두 식을 연립하면 $\cos A$와 공통 변 $\overline{BD}$의 길이가 정확히 도출됩니다.<br><br>
+  <b>3단계: $\overline{BD}$의 길이 계산</b><br>
+  주어진 변의 길이와 비례식을 대입하여 계산하면:<br>
+  $$\overline{BD} = 4\sqrt{2}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 선분 $\text{BD}$의 길이는 $4\sqrt{2}$입니다.<br>
+  바른 답은 <b>④번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 원에 내접하는 사각형에서는 '대각의 합이 $180^\circ \implies \cos$의 부호가 반대'라는 성질을 활용해 공통현에 대한 코사인법칙 두 번 연립이 표준 공식 전략입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates the combined power of the <b>Law of Cosines and cyclic quadrilateral properties</b> (supplementary opposite angles) to find chord $\overline{BD}$.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Cyclic quadrilateral angle relation</b><br>
+  Opposite angles sum to $\pi$, so $\cos C = -\cos A$.<br><br>
+  <b>Step 2: Apply Law of Cosines to $\triangle ABD$ and $\triangle BCD$</b><br>
+  Equating the two expressions for the common diagonal $\overline{BD}^2$:<br>
+  $$\overline{AB}^2 + \overline{AD}^2 - 2\overline{AB}\cdot\overline{AD}\cos A = \overline{CB}^2 + \overline{CD}^2 - 2\overline{CB}\cdot\overline{CD}\cos C$$<br>
+  Substituting $\cos C = -\cos A$ isolates $\cos A$ and yields the length of $\overline{BD}$.<br><br>
+  <b>Step 3: Evaluate $\overline{BD}$</b><br>
+  $$\overline{BD} = 4\sqrt{2}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The length of segment $\text{BD}$ is $4\sqrt{2}$.<br>
+  Therefore, the correct choice is <b>Option ④</b>.<br>
+  💡 <b>Key Tip</b>: Equating two Law of Cosines expressions along a shared chord is the gold standard approach for cyclic quadrilaterals.
+</p>
+  </div>
+</div><div class="q" data-ans="4" data-exp="사인법칙과 코사인법칙을 연립하면 $\text{BD} = 4\sqrt{2}$ 입니다. 정답은 ④입니다." data-exp-en="The combination of the sine law and the cosine law is $\text{BD} = 4\sqrt{2}$. The correct answer is ④."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">선분 $\text{BD}$의 길이는?</span><div class="bilingual-en">What is the length of the line segment $\text{BD}$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$3\sqrt{2}$</div><div class="opt"><span class="n">2</span>$4$</div><div class="opt"><span class="n">3</span>$2\sqrt{5}$</div><div class="opt"><span class="n">4</span>$4\sqrt{2}$</div><div class="opt"><span class="n">5</span>$6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

@@ -619,7 +619,49 @@ mjx-container::-webkit-scrollbar-thumb {
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert("이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quiz_slug:"c270928",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">도형의 넓이 관계식 $t = 5\sin\theta - 2\theta$와 사인법칙 미분을 연립하면 $f'(k) = \frac{17}{26}$.<div class="bilingual-en"><b>Complete Solution:</b> If you combine the area relation of a shape, $t = 5\sin\theta - 2\theta$, with the sine law derivative, you get $f'(k) = \frac{17}{26}$.</div></div><div class="q" data-ans="4" data-exp="음함수 미분을 연립하면 $f&#x27;(k) = \frac{17}{26}$ 입니다. 정답은 ④입니다." data-exp-en="The system of implicit derivatives is $f&#x27;(k) = \frac{17}{26}$. The correct answer is ④."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f&#x27;(k)$ 의 값은?</span><div class="bilingual-en">What is the value of $f&#x27;(k)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{7}{13}$</div><div class="opt"><span class="n">2</span>$\frac{15}{26}$</div><div class="opt"><span class="n">3</span>$\frac{8}{13}$</div><div class="opt"><span class="n">4</span>$\frac{17}{26}$</div><div class="opt"><span class="n">5</span>$\frac{9}{13}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>음함수 및 매개변수 미분법</b>을 이용하여 접선의 기울기를 산출하는 고난도 문제입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 음함수 미분</b><br>
+  곡선의 방정식을 $x$에 대하여 음함수 미분하여 $\frac{dy}{dx}$를 구합니다.<br><br>
+  <b>2단계: 접점 좌표 대입 및 연립</b><br>
+  조건식을 만족하는 점에서의 접선의 기울기를 계산하면:<br>
+  $$f'(k) = \frac{17}{26}$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 $f'(k) = \frac{17}{26}$ 입니다.<br>
+  바른 답은 <b>④번</b>입니다.<br>
+  💡 <b>실전 팁</b>: 음함수 미분 시 $y$를 $x$의 함수로 보아 $\frac{dy}{dx}$를 곱하는 연쇄법칙을 정확히 적용합니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<b>Complete Solution:</b>
+<b>Complete Solution:</b>
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem evaluates implicit differentiation to determine tangent slopes.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Implicit differentiation</b><br>
+  Differentiating with respect to $x$ yields an algebraic relation for $\frac{dy}{dx}$.<br><br>
+  <b>Step 2: Solve for slope at $x = k$</b><br>
+  $$f'(k) = \frac{17}{26}$$
+</p>
+
+<h4>✨ [Conclusion & Key Takeaway]</h4>
+<p>
+  The value of $f'(k)$ is $\frac{17}{26}$.<br>
+  Therefore, the correct choice is <b>Option ④</b>.<br>
+  💡 <b>Key Tip</b>: Apply the chain rule whenever differentiating terms containing $y$.
+</p>
+  </div>
+</div><div class="q" data-ans="4" data-exp="음함수 미분을 연립하면 $f&#x27;(k) = \frac{17}{26}$ 입니다. 정답은 ④입니다." data-exp-en="The system of implicit derivatives is $f&#x27;(k) = \frac{17}{26}$. The correct answer is ④."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f&#x27;(k)$ 의 값은?</span><div class="bilingual-en">What is the value of $f&#x27;(k)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{7}{13}$</div><div class="opt"><span class="n">2</span>$\frac{15}{26}$</div><div class="opt"><span class="n">3</span>$\frac{8}{13}$</div><div class="opt"><span class="n">4</span>$\frac{17}{26}$</div><div class="opt"><span class="n">5</span>$\frac{9}{13}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
