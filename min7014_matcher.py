@@ -8,8 +8,10 @@ import html
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MATERIALS_PATH = os.path.join(BASE_DIR, "assets", "min7014_materials.json")
+DEEP_KNOWLEDGE_PATH = os.path.join(BASE_DIR, "assets", "min7014_deep_knowledge.json")
 
 _CACHED_MATERIALS = None
+_CACHED_DEEP_KNOWLEDGE = None
 
 def get_materials():
     global _CACHED_MATERIALS
@@ -20,6 +22,41 @@ def get_materials():
         else:
             _CACHED_MATERIALS = []
     return _CACHED_MATERIALS
+
+def get_deep_knowledge():
+    global _CACHED_DEEP_KNOWLEDGE
+    if _CACHED_DEEP_KNOWLEDGE is None:
+        if os.path.exists(DEEP_KNOWLEDGE_PATH):
+            with open(DEEP_KNOWLEDGE_PATH, "r", encoding="utf-8") as f:
+                _CACHED_DEEP_KNOWLEDGE = json.load(f)
+        else:
+            _CACHED_DEEP_KNOWLEDGE = []
+    return _CACHED_DEEP_KNOWLEDGE
+
+def match_deep_knowledge(text, limit=3):
+    """주어진 문항 텍스트나 수학 개념에 가장 적합한 심층 수학 지식 및 초등 디딤돌 발문 아이디어 반환"""
+    items = get_deep_knowledge()
+    if not items:
+        return []
+    
+    text_lower = text.lower()
+    scored = []
+    
+    for item in items:
+        t = item.get('title', '').lower()
+        cat = item.get('category', '').lower()
+        score = 0
+        
+        for word in text_lower.split():
+            if len(word) >= 2 and (word in t or word in cat):
+                score += 15
+                
+        if score > 0:
+            scored.append((score, item))
+            
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [x[1] for x in scored[:limit]]
+
 
 def match_materials(text, limit=4):
     materials = get_materials()
