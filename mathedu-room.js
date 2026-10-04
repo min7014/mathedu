@@ -1395,18 +1395,20 @@
     copyToClipboard(text, isEnMode() ? '📋 Community share text copied! Paste it in Reddit, Discord, or group chats!' : '📋 커뮤니티(수만휘, 오르비, 에타, 단톡방)용 결과 텍스트가 복사되었습니다!');
   };
 
-  // 3. 수포자 친구 살리기 디딤돌 풀이 선물하기 (이타적 추천)
+  // 3. 수포자 친구 살리기 디딤돌 풀이 선물하기 (이타적 추천 & Pay-It-Forward 루프)
   window.shareAsGift = function() {
     var title = getProblemTitle();
-    var url = getBaseShareUrl();
+    var name = (window._studentName || (isEnMode() ? 'A friend' : '친구')).trim();
+    var url = getBaseShareUrl() + '?gift_from=' + encodeURIComponent(name);
     
     var shareText = isEnMode()
-      ? '💝 Found a crystal-clear step-by-step scaffolding solution for ' + title + '!\n' +
-        'Starts from elementary fundamentals and leads all the way to the full proof.\n' +
-        'Sharing this helpful study gift with you: '
-      : '💝 수능 킬러 문제를 초등학생도 이해할 수 있게 쪼갠 마법의 디딤돌 풀이 발견함!\n' +
+      ? '💝 [' + name + '] sent you a helpful step-by-step Math Scaffolding Gift!\n' +
         '📐 ' + title + '\n' +
-        '수학 개념이랑 직관 잡기 진짜 좋아서 너한테 선물로 보낸다 꼭 풀어봐:\n';
+        'Starts from elementary fundamentals and leads all the way to the full proof.\n' +
+        'Try it freely without signup: '
+      : '💝 [' + name + '] 님이 보낸 디딤돌 수학 풀이 선물!\n' +
+        '📐 ' + title + '\n' +
+        '수능 킬러 문제인데 초등학교 사칙연산 수준부터 한 계단씩 풀리는 신기한 디딤돌이야. 가입 없이 바로 풀 수 있어 꼭 해봐:\n';
         
     var msg = isEnMode()
       ? '💝 Gift solution link copied! Send it to encourage your friends!'
@@ -1419,6 +1421,20 @@
     }, msg);
   };
 
+  // 선물해준 친구에게 고마움 전하기
+  window.sendThankYouToGiver = function(giverName) {
+    var title = getProblemTitle();
+    var text = isEnMode()
+      ? '🎉 Thanks ' + giverName + '! I cleared ' + title + ' all the way to the end thanks to your scaffolding gift! 🚀'
+      : '🎉 나 너가 보내준 디딤돌 풀이로 [' + title + '] 끝까지 다 풀었어! 진짜 초등학교 수준부터 쪼개져 있어서 다 이해되더라 고마워! 🚀';
+    
+    nativeShareOrCopy({
+      title: isEnMode() ? 'Thank You!' : '고마워! 수능 킬러 완주 성공!',
+      text: text,
+      url: getBaseShareUrl()
+    }, isEnMode() ? '💌 Thank-you message copied!' : '💌 고마움 메시지가 복사되었습니다! 친구에게 카톡으로 보내보세요!');
+  };
+
   // 4. 완주 시 축하 & 바이럴 통합 모달 팝업
   window.showCompletionViralModal = function(total, correct) {
     if (document.getElementById('matheduViralModal')) return;
@@ -1427,6 +1443,12 @@
     var studentName = (window._studentName || (isEnMode() ? 'Guest Learner' : '자유 학습자')).trim();
     var greenBlocks = buildGreenBlocks(total, correct);
     var rate = Math.round((correct / total) * 100);
+
+    var giftFrom = (urlParams.get('gift_from') || urlParams.get('gift') || '').trim();
+    var giftCongratHtml = giftFrom ? 
+      '<div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.5);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:0.86rem;color:#fbcfe8">' +
+        bilingual('🎉 <b>' + escapeHtml(giftFrom) + '</b> 님의 디딤돌 선물을 딛고 수능 킬러 문제를 완주하셨습니다! 대단합니다!', '🎉 You cleared this problem thanks to <b>' + escapeHtml(giftFrom) + '</b>\'s scaffolding gift!') +
+      '</div>' : '';
 
     var modal = document.createElement('div');
     modal.id = 'matheduViralModal';
@@ -1442,6 +1464,7 @@
         '<h2 style="font-size:1.28rem;margin:0 0 6px;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;line-height:1.4">' +
           escapeHtml(title) +
         '</h2>' +
+        giftCongratHtml +
         '<p style="color:#cbd5e1;font-size:0.88rem;margin:0 0 16px">' +
           bilingual('👤 <b>' + escapeHtml(studentName) + '</b> 님, 축하합니다! 초등학생 디딤돌부터 끝까지 완주하셨습니다!', '👤 Congratulations <b>' + escapeHtml(studentName) + '</b>! You cleared all scaffolding steps!') +
         '</p>' +
@@ -1454,6 +1477,17 @@
           '</div>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:10px;text-align:left">' +
+          (giftFrom ? 
+            '<button type="button" onclick="window.sendThankYouToGiver(\'' + escapeHtml(giftFrom) + '\')" style="background:linear-gradient(90deg,#ec4899,#f43f5e);color:#fff;border:none;border-radius:14px;padding:13px 18px;font-size:0.94rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(236,72,153,.35);transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'none\'">' +
+              '<div style="display:flex;align-items:center;gap:10px">' +
+                '<span style="font-size:1.3rem">💌</span>' +
+                '<div>' +
+                  '<div>' + bilingual(escapeHtml(giftFrom) + ' 님에게 "나 다 풀었다!" 고마움 전하기', 'Thank ' + escapeHtml(giftFrom) + ' for the Scaffolding Gift') + '</div>' +
+                  '<div style="font-size:0.75rem;color:rgba(255,255,255,.85);font-weight:400">' + bilingual('선물 덕분에 수능 킬러 완주 성공 인증', 'Share your success and joy') + '</div>' +
+                '</div>' +
+              '</div>' +
+              '<span style="font-size:1.1rem">➔</span>' +
+            '</button>' : '') +
           '<button type="button" onclick="window.shareAsChallenge()" style="background:linear-gradient(90deg,#f59e0b,#ef4444);color:#fff;border:none;border-radius:14px;padding:13px 18px;font-size:0.94rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(245,158,11,.3);transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'none\'">' +
             '<div style="display:flex;align-items:center;gap:10px">' +
               '<span style="font-size:1.3rem">⚔️</span>' +
@@ -1478,7 +1512,7 @@
             '<div style="display:flex;align-items:center;gap:10px">' +
               '<span style="font-size:1.3rem">💝</span>' +
               '<div>' +
-                '<div>' + bilingual('수포자 친구에게 디딤돌 풀이 선물하기', 'Gift Scaffolding Solution to Friend') + '</div>' +
+                '<div>' + bilingual('또 다른 수포자 친구에게 디딤돌 풀이 선물하기', 'Gift Scaffolding Solution to Another Friend') + '</div>' +
                 '<div style="font-size:0.75rem;color:rgba(255,255,255,.85);font-weight:400">' + bilingual('초등학생 눈높이 사다리로 수학 개념 구원', 'Help friends master difficult math concepts') + '</div>' +
               '</div>' +
             '</div>' +
@@ -1495,16 +1529,43 @@
     document.body.appendChild(modal);
   };
 
-  // 5. 친구 도전장(?challenger=...) 파라미터 감지 및 상단 배너 표시
+  // 5. 친구 도전장(?challenger=...) 및 선물(?gift_from=...) 파라미터 감지 및 상단 배너 표시
   function checkAndShowIncomingChallenge() {
     var challengerName = (urlParams.get('challenger') || '').trim();
-    if (!challengerName) return;
-
+    var giftFrom = (urlParams.get('gift_from') || urlParams.get('gift') || '').trim();
     var steps = (urlParams.get('steps') || '').trim();
 
-    // 시작 모달(#trackFull) 상단에 도전장 카드 삽입
     var trackFull = document.getElementById('trackFull');
-    if (trackFull && !document.getElementById('incomingChallengeBox')) {
+
+    // 1. 디딤돌 선물(?gift_from=...)로 유입된 경우 따뜻한 환영 카드 노출
+    if (giftFrom && trackFull && !document.getElementById('incomingGiftBox')) {
+      var gBox = document.createElement('div');
+      gBox.id = 'incomingGiftBox';
+      gBox.style.cssText = 'background:linear-gradient(135deg,rgba(236,72,153,.18) 0%,rgba(168,85,247,.18) 100%);border:1.5px solid rgba(236,72,153,.65);border-radius:14px;padding:13px 18px;margin:8px 0 14px;width:100%;max-width:440px;box-shadow:0 4px 20px rgba(236,72,153,.25);animation:matheduPopUp .3s ease;text-align:center;box-sizing:border-box';
+      gBox.innerHTML = 
+        '<div style="font-size:1.06rem;font-weight:800;color:#f472b6;display:flex;align-items:center;justify-content:center;gap:6px">' +
+          '💝 <span>' + escapeHtml(giftFrom) + '</span>' + bilingual(' 님이 보낸 디딤돌 수학 선물!', '\'s Math Scaffolding Gift!') +
+        '</div>' +
+        '<div style="font-size:0.84rem;color:#f1f5f9;margin-top:5px;line-height:1.55">' +
+          bilingual(
+            '수능 킬러 문제도 겁먹을 필요 없어요! 초등학교 사칙연산 수준의 쉬운 디딤돌부터 한 계단씩 밟아 올라가면 누구나 100% 풀 수 있습니다.',
+            'No need to fear complex math problems! With simple micro-steps, anyone can master this problem 100%.'
+          ) +
+        '</div>' +
+        '<div style="font-size:0.78rem;color:#fbcfe8;margin-top:6px;font-weight:700">' +
+          bilingual('✨ 가입 없이 아래 [👀 자유 풀기] 버튼을 누르면 즉시 시작됩니다!', '✨ Click the button below to start solving freely in 1 sec!') +
+        '</div>';
+
+      var h2 = trackFull.querySelector('h2');
+      if (h2 && h2.nextSibling) {
+        trackFull.insertBefore(gBox, h2.nextSibling);
+      } else {
+        trackFull.insertBefore(gBox, trackFull.firstChild);
+      }
+    }
+
+    // 2. 친구 도전장(?challenger=...)으로 유입된 경우 도전 박스 노출
+    if (challengerName && trackFull && !document.getElementById('incomingChallengeBox')) {
       var box = document.createElement('div');
       box.id = 'incomingChallengeBox';
       box.style.cssText = 'background:linear-gradient(135deg,rgba(245,158,11,.18) 0%,rgba(239,68,68,.18) 100%);border:1.5px solid rgba(245,158,11,.7);border-radius:14px;padding:12px 16px;margin:8px 0 14px;width:100%;max-width:440px;box-shadow:0 4px 20px rgba(245,158,11,.25);animation:matheduPopUp .3s ease;text-align:center;box-sizing:border-box';
@@ -1519,28 +1580,40 @@
           ) +
         '</div>';
 
-      var h2 = trackFull.querySelector('h2');
-      if (h2 && h2.nextSibling) {
-        trackFull.insertBefore(box, h2.nextSibling);
+      var h2Target = trackFull.querySelector('h2');
+      if (h2Target && h2Target.nextSibling) {
+        trackFull.insertBefore(box, h2Target.nextSibling);
       } else {
         trackFull.insertBefore(box, trackFull.firstChild);
       }
     }
 
-    // 문제 풀이 본문화면 상단에도 고정 도전 바 삽입
+    // 3. 문제 본문화면 상단 고정 안내 배너
     var wrap = document.querySelector('.wrap');
-    if (wrap && !document.getElementById('activeChallengerBanner')) {
-      var banner = document.createElement('div');
-      banner.id = 'activeChallengerBanner';
-      banner.style.cssText = 'background:linear-gradient(90deg,rgba(245,158,11,.18),rgba(239,68,68,.18));border:1px solid rgba(245,158,11,.5);border-radius:12px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;color:#fde68a;font-size:0.86rem;font-weight:700;flex-wrap:wrap;gap:8px';
-      banner.innerHTML = 
-        '<div style="display:flex;align-items:center;gap:8px">' +
-          '<span style="font-size:1.1rem">⚔️</span>' +
-          '<span>' + bilingual('<b>' + escapeHtml(challengerName) + '</b> 님의 도전 진행 중! 끝까지 완주하여 승리를 증명하세요!', 'Challenged by <b>' + escapeHtml(challengerName) + '</b>! Clear all steps to win!') + '</span>' +
-        '</div>' +
-        '<span style="font-size:0.75rem;background:rgba(245,158,11,.3);border:1px solid rgba(245,158,11,.6);padding:3px 10px;border-radius:8px;color:#fff;font-weight:800">VS DUEL</span>';
-
-      wrap.insertBefore(banner, wrap.firstChild);
+    if (wrap) {
+      if (giftFrom && !document.getElementById('activeGiftBanner')) {
+        var gBanner = document.createElement('div');
+        gBanner.id = 'activeGiftBanner';
+        gBanner.style.cssText = 'background:linear-gradient(90deg,rgba(236,72,153,.18),rgba(168,85,247,.18));border:1px solid rgba(236,72,153,.5);border-radius:12px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;color:#fbcfe8;font-size:0.86rem;font-weight:700;flex-wrap:wrap;gap:8px';
+        gBanner.innerHTML = 
+          '<div style="display:flex;align-items:center;gap:8px">' +
+            '<span style="font-size:1.1rem">💝</span>' +
+            '<span>' + bilingual('<b>' + escapeHtml(giftFrom) + '</b> 님이 선물한 디딤돌 풀이 진행 중! 천천히 한 계단씩 올라가면 누구나 풀 수 있어요.', 'Gifted by <b>' + escapeHtml(giftFrom) + '</b>! Take your time with each step.') + '</span>' +
+          '</div>' +
+          '<span style="font-size:0.75rem;background:rgba(236,72,153,.3);border:1px solid rgba(236,72,153,.6);padding:3px 10px;border-radius:8px;color:#fff;font-weight:800">STUDY GIFT</span>';
+        wrap.insertBefore(gBanner, wrap.firstChild);
+      } else if (challengerName && !document.getElementById('activeChallengerBanner')) {
+        var banner = document.createElement('div');
+        banner.id = 'activeChallengerBanner';
+        banner.style.cssText = 'background:linear-gradient(90deg,rgba(245,158,11,.18),rgba(239,68,68,.18));border:1px solid rgba(245,158,11,.5);border-radius:12px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;color:#fde68a;font-size:0.86rem;font-weight:700;flex-wrap:wrap;gap:8px';
+        banner.innerHTML = 
+          '<div style="display:flex;align-items:center;gap:8px">' +
+            '<span style="font-size:1.1rem">⚔️</span>' +
+            '<span>' + bilingual('<b>' + escapeHtml(challengerName) + '</b> 님의 도전 진행 중! 끝까지 완주하여 승리를 증명하세요!', 'Challenged by <b>' + escapeHtml(challengerName) + '</b>! Clear all steps to win!') + '</span>' +
+          '</div>' +
+          '<span style="font-size:0.75rem;background:rgba(245,158,11,.3);border:1px solid rgba(245,158,11,.6);padding:3px 10px;border-radius:8px;color:#fff;font-weight:800">VS DUEL</span>';
+        wrap.insertBefore(banner, wrap.firstChild);
+      }
     }
   }
 
