@@ -206,7 +206,10 @@ Input Title: {title if not is_title_empty else '(None provided - please analyze 
 
 Your tasks:
 1. Title Analysis: {title_instruction}
-2. Progressive Breakdown: Break this problem down into a progressive pedagogical quiz (at least 3 building-block levels + 1 final target problem level) so that even younger students can learn the principles step by step.
+2. Elementary-to-Advanced Progressive Scaffolding (GEMINI.md Rule 6):
+   - You MUST design the stepping-stone levels so that even an elementary school student (초등학생) can begin at Step 1 with intuitive arithmetic/visual observations (e.g. $2 \times 2 = 4$, pizza fraction slices, basic number lines, simple patterns) and progressively master the concepts.
+   - Micro-scaffold the problem into 4 to 7 building-block levels before the final problem. Each level must isolate ONE single atomic idea (Level 1: Elementary Intuition -> Level 2: Rule Discovery -> Level 3: Concrete Calculation -> Level 4+: Synthesis of Components).
+   - Ensure the final problem level combines the answers and discoveries from the earlier stepping stones like LEGO blocks.
 
 Return ONLY a strictly valid JSON object (no markdown code blocks, no backticks, just raw JSON) matching this exact schema:
 {{
