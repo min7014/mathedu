@@ -147,6 +147,26 @@
     var trackFull = document.getElementById('trackFull');
     if (!trackFull) return;
 
+    // 🌐 첫 화면 언어 선택기 (KO / EN Language Switcher on Start Modal)
+    var curLang = document.documentElement.lang || 'ko';
+    try {
+      var savedL = localStorage.getItem('mathedu_lang');
+      if (savedL === 'en' || savedL === 'ko') curLang = savedL;
+    } catch(e) {}
+
+    var existingLangSwitcher = document.getElementById('trackFullLangSwitcher');
+    if (!existingLangSwitcher) {
+      var langSwitcher = document.createElement('div');
+      langSwitcher.id = 'trackFullLangSwitcher';
+      langSwitcher.style.cssText = 'position:absolute;top:18px;right:20px;z-index:100;display:inline-flex;align-items:center;background:rgba(15,23,42,.85);border:1.5px solid rgba(124,196,255,.35);border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)';
+      langSwitcher.innerHTML = 
+        '<button type="button" id="btnTrackFullLangKo" onclick="window.setBoardLanguage(\'ko\')" style="background:' + (curLang === 'en' ? 'transparent' : '#38bdf8') + ';color:' + (curLang === 'en' ? '#cbd5e1' : '#0b1020') + ';border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:' + (curLang === 'en' ? '700' : '800') + ';cursor:pointer;transition:.15s">🇰🇷 한국어</button>' +
+        '<button type="button" id="btnTrackFullLangEn" onclick="window.setBoardLanguage(\'en\')" style="background:' + (curLang === 'en' ? '#38bdf8' : 'transparent') + ';color:' + (curLang === 'en' ? '#0b1020' : '#cbd5e1') + ';border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:' + (curLang === 'en' ? '800' : '700') + ';cursor:pointer;transition:.15s">🌐 English</button>';
+      trackFull.appendChild(langSwitcher);
+    } else {
+      updateModalLangButtons(curLang);
+    }
+
     var currentUser = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
     var currentGuest = window.MatheduAuth ? window.MatheduAuth.getCurrentGuest() : null;
     var solvedList = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems() : [];
@@ -1662,11 +1682,66 @@
     }
   }
 
+  // 🌐 모달 및 전체 화면 언어 전환 제어기
+  window.setBoardLanguage = function(lang) {
+    if (lang !== 'ko' && lang !== 'en') return;
+    document.documentElement.lang = lang;
+    try {
+      localStorage.setItem('mathedu_lang', lang);
+      localStorage.setItem('mathedu_lang_manual', 'true');
+    } catch(e) {}
+
+    updateModalLangButtons(lang);
+
+    if (window.setBoardLang) {
+      window.setBoardLang(lang, true);
+    }
+    if (window.MatheduI18n && window.MatheduI18n.setLanguage) {
+      window.MatheduI18n.setLanguage(lang);
+    }
+
+    var sn = document.getElementById('studentName');
+    if (sn) sn.placeholder = (lang === 'en') ? 'Enter name' : '이름 입력';
+
+    var pin = document.getElementById('studentPin');
+    if (pin) pin.placeholder = (lang === 'en') ? '4-digit PIN (optional)' : '간편비번 4자리 (선택)';
+
+    try {
+      window.dispatchEvent(new CustomEvent('mathedu:lang-changed', { detail: { lang: lang } }));
+    } catch(e) {}
+  };
+
+  function updateModalLangButtons(lang) {
+    var isEn = (lang === 'en' || (typeof lang === 'string' && lang.toLowerCase().startsWith('en')));
+    var btnKo = document.getElementById('btnTrackFullLangKo');
+    var btnEn = document.getElementById('btnTrackFullLangEn');
+    if (btnKo && btnEn) {
+      if (isEn) {
+        btnKo.style.background = 'transparent';
+        btnKo.style.color = '#cbd5e1';
+        btnKo.style.fontWeight = '700';
+        btnEn.style.background = '#38bdf8';
+        btnEn.style.color = '#0b1020';
+        btnEn.style.fontWeight = '800';
+      } else {
+        btnKo.style.background = '#38bdf8';
+        btnKo.style.color = '#0b1020';
+        btnKo.style.fontWeight = '800';
+        btnEn.style.background = 'transparent';
+        btnEn.style.color = '#cbd5e1';
+        btnEn.style.fontWeight = '700';
+      }
+    }
+  }
+
   // 🌐 언어 변경 이벤트 리스너 (mathedu:lang-changed)
   window.addEventListener('mathedu:lang-changed', function(e) {
     var lang = (e && e.detail && e.detail.lang) || document.documentElement.lang || 'ko';
     var isEn = lang.toLowerCase().startsWith('en');
     
+    // Update modal buttons
+    updateModalLangButtons(lang);
+
     // Update placeholders
     var inputs = document.querySelectorAll('input[data-ko-placeholder]');
     inputs.forEach(function(inp) {

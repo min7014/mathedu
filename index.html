@@ -1202,14 +1202,23 @@ body {
 
   <!-- 글로벌 탑 네비게이션 바 -->
   <nav class="top-nav-bar">
-    <a href="/mathedu/" class="nav-brand">
-      <div class="nav-logo-badge">
-        <img src="assets/favicon.png" alt="mathedu 로고">
+    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px;margin-bottom:6px">
+      <a href="/mathedu/" class="nav-brand">
+        <div class="nav-logo-badge">
+          <img src="assets/favicon.png" alt="mathedu 로고">
+        </div>
+        <div class="nav-brand-title">
+          <span class="hub">mathedu</span> <span class="lab">수학자료실</span>
+        </div>
+      </a>
+      
+      <!-- 🌐 글로벌 언어 전환기 (KO / EN) - 첫 화면 상단 상시 노출 -->
+      <div class="lang-switcher" id="langSwitcher" title="언어 선택 / Language">
+        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">🇰🇷 KO</button>
+        <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">🌐 EN</button>
       </div>
-      <div class="nav-brand-title">
-        <span class="hub">mathedu</span> <span class="lab">수학자료실</span>
-      </div>
-    </a>
+    </div>
+
     <div class="nav-menu">
       <a href="#quizFilterBar" class="nav-link" data-i18n="nav.allQuizzes">📚 퀴즈 모음</a>
       <a href="offline/index.html" class="nav-link" style="color:#7cc4ff;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.1)" data-i18n-title="nav.offlineVaultTitle" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함" data-i18n="nav.offlineVault">📦 오프라인 보관함</a>
@@ -1218,12 +1227,6 @@ body {
       <a href="create.html" class="nav-link nav-link-cta"><span data-i18n="nav.createQuiz">✨ 문제 출제</span> <span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:2px" data-i18n="nav.membersOnly">회원전용</span></a>
       <a href="dashboard.html" class="nav-link" data-i18n="nav.dashboard">📊 수업 대시보드</a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-link" data-i18n="nav.minHome">🌐 자료실 홈</a>
-      
-      <!-- 🌐 글로벌 언어 전환기 (KO / EN) -->
-      <div class="lang-switcher" id="langSwitcher" title="언어 선택 / Language">
-        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">🇰🇷 KO</button>
-        <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">🌐 EN</button>
-      </div>
     </div>
   </nav>
 
