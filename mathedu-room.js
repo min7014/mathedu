@@ -219,7 +219,33 @@
       }
     }
 
-    // 2. 하단 액션 버튼 행 (내가 푼 문제 모아보기 + 회원 전환 + 교사 수업 개설)
+    // 0. [맨 위 배치] 사용자 요청: [👀 가입 없이 문제 열람 & 자유 풀기]를 모달 최상단에 배치하여 1초 만에 무장벽 진입 보장
+    var existingTop = document.getElementById('btnTeacherPreviewInModal');
+    if (!existingTop) {
+      var topGuestBox = document.createElement('div');
+      topGuestBox.id = 'topGuestFreePassRow';
+      topGuestBox.style.cssText = 'margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px;';
+      topGuestBox.innerHTML = 
+        '<button type="button" id="btnTeacherPreviewInModal" style="width:100%;max-width:400px;background:linear-gradient(135deg,rgba(56,189,248,.25) 0%,rgba(99,102,241,.25) 100%);color:#e0f2fe;border:1.5px solid rgba(56,189,248,.65);border-radius:12px;padding:13px 20px;font-size:1.02rem;font-weight:800;cursor:pointer;transition:.18s;box-shadow:0 4px 16px rgba(56,189,248,.2);display:inline-flex;align-items:center;justify-content:center;gap:8px" ' +
+          'onmouseover="this.style.background=\'linear-gradient(135deg,#38bdf8 0%,#6366f1 100%)\';this.style.color=\'#0b1020\';this.style.transform=\'scale(1.02)\';this.style.boxShadow=\'0 6px 20px rgba(56,189,248,.4)\'" ' +
+          'onmouseout="this.style.background=\'linear-gradient(135deg,rgba(56,189,248,.25) 0%,rgba(99,102,241,.25) 100%)\';this.style.color=\'#e0f2fe\';this.style.transform=\'none\';this.style.boxShadow=\'0 4px 16px rgba(56,189,248,.2)\'">' +
+          bilingual('👀 가입 없이 문제 열람 & 자유 풀기', '👀 Free Practice (No Signup)') +
+        '</button>' +
+        '<div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px">' +
+          '<span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span>' +
+          '<span>' + bilingual('또는 이름을 입력하고 학습 기록 저장', 'Or enter name to save your progress') + '</span>' +
+          '<span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span>' +
+        '</div>';
+
+      var h2 = trackFull.querySelector('h2');
+      if (h2 && h2.nextSibling) {
+        trackFull.insertBefore(topGuestBox, h2.nextSibling);
+      } else {
+        trackFull.insertBefore(topGuestBox, trackFull.firstChild);
+      }
+    }
+
+    // 2. 하단 보조 액션 버튼 행 (내가 푼 문제 모아보기 + 회원 전환 + 오프라인 저장 + 교사 수업 개설)
     var actionRow = document.createElement('div');
     actionRow.style.cssText = 'margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:540px;';
 
@@ -238,9 +264,6 @@
           'data-ko-title="인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장" data-en-title="Download standalone HTML that runs without internet" ' +
           'title="' + (isEnMode() ? 'Download standalone HTML that runs without internet' : '인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장') + '">' +
           bilingual('📥 오프라인 저장', '📥 Offline Save') +
-        '</button>' +
-        '<button type="button" id="btnTeacherPreviewInModal" style="background:rgba(255,255,255,.06);color:#cbd5e1;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:9px 16px;font-size:0.86rem;cursor:pointer;transition:.15s;font-weight:600">' +
-          bilingual('👀 가입 없이 문제 열람 & 자유 풀기', '👀 Free Practice (No Signup)') +
         '</button>' +
       '</div>' +
       '<div style="margin-top:4px">' +
@@ -275,11 +298,15 @@
       };
     }
 
-    document.getElementById('btnTeacherPreviewInModal').onclick = function() {
-      trackFull.remove();
-      window._studentName = isEnMode() ? 'Guest Learner' : '자유 학습자';
-      if (window.sendProgress) window.sendProgress();
-    };
+    var btnPreview = document.getElementById('btnTeacherPreviewInModal');
+    if (btnPreview) {
+      btnPreview.onclick = function() {
+        trackFull.remove();
+        window._studentName = isEnMode() ? 'Guest Learner' : '자유 학습자';
+        if (window.sendProgress) window.sendProgress();
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+      };
+    }
 
     document.getElementById('btnTeacherOpenInModal').onclick = function() {
       trackFull.remove();
