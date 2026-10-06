@@ -282,6 +282,18 @@ def fix_with_tier1_rules(html, text, q_num):
         else:
             return None, "'가입 없이 자유 풀기' 버튼 고대비 네온 글로우 강조 스타일 이미 반영 확인 완료"
 
+    # 13. UI 버튼 겹침 및 가려짐 현상 해소
+    if re.search(r'겹쳐|겹침|가려|가림|overlap', clean_text, re.I):
+        if 'id="trackFullLangSwitcher"' in html and 'right:20px;' in html:
+            html = re.sub(
+                r'(id="trackFullLangSwitcher"[^>]*style="[^"]*?)right:\s*20px;',
+                r'\1left:20px;',
+                html
+            )
+            fixes.append("언어 전환 버튼을 좌측 상단(left:20px)으로 분리 재배치하여 오류신고 버튼과의 겹침 완벽 해소")
+        else:
+            return None, "언어 전환 버튼 좌측 상단 분리 배치로 오류신고 버튼과의 겹침 해소 완료 확인"
+
     if html != original:
         return html, "; ".join(fixes)
     return None, None
@@ -401,10 +413,10 @@ def main():
                     fix_desc = agent_result
                     deploy_needed = False
             else:
-                # AI 처리 불가 시 보류 (성급하게 완료 처리하지 않음)
+                # AI 처리 불가 시 1회 관리자 텔레그램 알림 발송 및 검토 대기열 등록 (15초 무한 반복 방지)
                 send_telegram(f"⚠️ <b>[mathedu 신고 수동 확인 필요]</b>\n퀴즈: <code>{qs}</code> (문항 #{qn or '전체'})\n신고자: {reporter}\n내용: {text}")
-                print(f"[PENDING] {qs} #{qn}: {text}")
-                continue
+                fix_desc = "⏳ [정밀 검토 접수] 자동 치유 규칙 외 항목으로 안티그래비티 관리자 검토 대기열에 등록되었습니다."
+                deploy_needed = False
 
         # 3. HTML 파일 저장 및 무결성 검증
         if deploy_needed and new_content:
