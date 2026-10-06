@@ -259,6 +259,29 @@ def fix_with_tier1_rules(html, text, q_num):
     if re.search(r'텍스트.*많|뭘 해야|AI.*없|ai.*사용', clean_text, re.I):
         return None, "사용자 UX 의견 접수 및 검토 종결 (첫 화면 자유 풀기 모드 및 단계별 질문 구조 유지)"
 
+    # 12. 가입 없이 문제 열람 & 자유 풀기 버튼 강조 요청
+    if re.search(r'가입\s*없이|자유\s*풀기|버튼.*강조|눈에\s*확|강조했으면', clean_text):
+        old_btn_pattern = re.compile(r'<button type="button" id="btnTeacherPreviewInModal"[^>]*>.*?</button>', re.DOTALL)
+        new_prominent_btn = (
+            '<button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" '
+            'style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);'
+            'color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;'
+            'cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);'
+            'display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px" '
+            'onmouseover="this.style.transform=\'translateY(-2px) scale(1.03)\';this.style.boxShadow=\'0 0 32px rgba(56,189,248,.95),0 8px 24px rgba(0,0,0,.6)\'" '
+            'onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5)\'">'
+            '<span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span>'
+            '<span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span>'
+            '</button>'
+        )
+        if 'rgba(56,189,248,.25)' in html and 'btnTeacherPreviewInModal' in html:
+            new_html = old_btn_pattern.sub(new_prominent_btn, html, count=1)
+            if new_html != html:
+                html = new_html
+                fixes.append("첫 화면 '가입 없이 자유 풀기' 버튼을 고대비 네온 글로우 스타일로 전격 강조 완료")
+        else:
+            return None, "'가입 없이 자유 풀기' 버튼 고대비 네온 글로우 강조 스타일 이미 반영 확인 완료"
+
     if html != original:
         return html, "; ".join(fixes)
     return None, None
