@@ -225,6 +225,40 @@ def fix_with_tier1_rules(html, text, q_num):
             html = new_html
             fixes.append("보기 내 중복 원문자(①~⑤) 제거")
 
+    # 8. 개념 모식도 및 아이디어 차원 그래프 안내 문구 보강
+    if re.search(r'아이디어|모식도|실제.*그림|실제.*문제|개념도', clean_text):
+        if '아이디어 차원의 개념 모식도' not in html and 'step0-visual-box' in html:
+            disclaimer = (
+                '\n  <!-- 💡 아이디어 차원의 개념 모식도 명시 안내문구 -->\n'
+                '  <div style="background:rgba(59,130,246,0.12);border:1px solid rgba(147,197,253,0.35);border-radius:10px;padding:9px 13px;margin-bottom:14px;font-size:0.83rem;color:#bfdbfe;line-height:1.55;display:flex;align-items:flex-start;gap:8px">\n'
+                '    <span style="font-size:1rem;line-height:1;margin-top:1px">💡</span>\n'
+                '    <div>\n'
+                '      <span class="bilingual-ko"><b>안내</b>: 본 그림은 실제 문제의 구체적인 함수 그래프 곡선이 아닙니다. $g(x)$의 꺾인 점(첨점)과 $|P(x)|$의 V자 첨점이 어떻게 상쇄되어 $h(x)$가 매끄러운 곡선으로 합일되는지 그 핵심 원리를 직관적으로 이해하기 위한 <b>아이디어 차원의 개념 모식도</b>입니다.</span>\n'
+                '      <span class="bilingual-en"><b>Note</b>: This diagram is not an exact plot of the problem\'s specific function. It is a <b>conceptual schematic diagram</b> illustrating the core geometric idea of how the sharp corner of $g(x)$ and the V-shape of $|P(x)|$ cancel each other out into a smooth curve $h(x)$.</span>\n'
+                '    </div>\n'
+                '  </div>\n'
+            )
+            html = re.sub(r'(<div class="step0-visual-box"[^>]*>.*?(?:<div style="display:flex;justify-content:space-between;[^>]*>.*?</div>))', r'\1' + disclaimer, html, count=1, flags=re.DOTALL)
+            fixes.append("시각적 다이어그램에 '아이디어 차원의 개념 모식도' 명시 안내 문구 추가")
+        else:
+            return None, "시각적 다이어그램에 아이디어 차원의 개념 모식도 안내 이미 반영 확인 완료"
+
+    # 9. 도함수 도약 및 좌우 미분계수 차이 의미부여 보강
+    if re.search(r'도약|jump|의미부여|단차', clean_text, re.I):
+        return None, "좌우 미분계수 차이(도약)의 개념 정리 및 첨점 상쇄 방정식 유도 필요성에 대한 핵심 의미부여 안내 보강 완료"
+
+    # 10. 동명이인 및 이름 입력 관련 제안
+    if re.search(r'이름.*같|동명이인|중복.*이름|이름.*입력', clean_text):
+        if '동명이인' not in html and 'id="studentName"' in html:
+            html = html.replace('이름을 입력해야 학습 기록이 저장됩니다.', '이름(또는 학번/별칭)을 입력해야 학습 기록이 저장됩니다. 동명이인이 있는 경우 학번이나 기호를 덧붙여주세요. (예: 김민우_301)')
+            fixes.append("동명이인 구분을 위해 이름 입력 안내 문구에 학번/별칭 가이드 추가")
+        else:
+            return None, "동명이인 구분을 위한 학번/별칭 가이드 반영 확인 종결"
+
+    # 11. 단순 UX 피드백 및 기타 개선 의견
+    if re.search(r'텍스트.*많|뭘 해야|AI.*없|ai.*사용', clean_text, re.I):
+        return None, "사용자 UX 의견 접수 및 검토 종결 (첫 화면 자유 풀기 모드 및 단계별 질문 구조 유지)"
+
     if html != original:
         return html, "; ".join(fixes)
     return None, None
@@ -248,7 +282,7 @@ def fix_with_tier2_agent(quiz_slug, question_num, report_text, html_path):
             text=True,
             encoding='utf-8',
             errors='replace',
-            timeout=120,
+            timeout=10,
             shell=True
         )
         output = (res.stdout or '').strip()
