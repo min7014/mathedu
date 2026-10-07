@@ -123,8 +123,12 @@ letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
 .orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
 @media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
 .orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-tabs{display:flex;gap:6px;margin-bottom:2px}
+.orig-media-tab{flex:1;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--sub);border-radius:8px;padding:6px 10px;font-size:.8rem;font-weight:700;cursor:pointer;transition:.15s;text-align:center}
+.orig-media-tab:hover{background:rgba(124,196,255,.16);color:#fff;border-color:rgba(124,196,255,.4)}
+.orig-media-tab.active{background:linear-gradient(90deg,rgba(124,196,255,.25),rgba(167,139,250,.25));border-color:var(--accent);color:#7cc4ff;box-shadow:0 2px 10px rgba(124,196,255,.2)}
 .orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
-.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-frame img, .orig-media-frame video{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
 .orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
 .orig-col-desc{display:flex;flex-direction:column;gap:10px}
 .orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
@@ -522,6 +526,32 @@ window.toggleMinGgb = function(btn, ggbUrl) {
     btn.innerHTML = '<span class="bilingual-ko">📐 GeoGebra 조작 닫기 ▴</span><span class="bilingual-en">📐 Close GeoGebra ▴</span>';
   }
 };
+window.switchMediaTab = function(tab) {
+  var imgFrame = document.getElementById('mediaImgFrame');
+  var videoFrame = document.getElementById('mediaVideoFrame');
+  var tabImg = document.getElementById('tabMediaImg');
+  var tabVideo = document.getElementById('tabMediaVideo');
+  if (!imgFrame || !videoFrame) return;
+  if (tab === 'video') {
+    imgFrame.style.display = 'none';
+    videoFrame.style.display = 'block';
+    if (tabImg) tabImg.classList.remove('active');
+    if (tabVideo) tabVideo.classList.add('active');
+    var vid = document.getElementById('csat21Video');
+    if (vid && vid.paused) {
+      vid.play().catch(function(){});
+    }
+  } else {
+    imgFrame.style.display = 'block';
+    videoFrame.style.display = 'none';
+    if (tabImg) tabImg.classList.add('active');
+    if (tabVideo) tabVideo.classList.remove('active');
+    var vid2 = document.getElementById('csat21Video');
+    if (vid2 && !vid2.paused) {
+      vid2.pause();
+    }
+  }
+};
 </script>
 </head><body><div class="wrap">
 <div class="topbar">
@@ -548,12 +578,44 @@ window.toggleMinGgb = function(btn, ggbUrl) {
   </div>
 
   <div class="orig-grid">
-    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 & 15초 직관 풀이 영상 듀얼 뷰어 -->
     <div class="orig-col-media">
-      <div class="orig-media-frame">
-        <img src="img_ac8dc374.png" alt="2027학년도 9월 모의평가 수학 21번 원본 문제">
+      <div class="orig-media-tabs">
+        <button type="button" class="orig-media-tab active" id="tabMediaImg" onclick="switchMediaTab('img')">
+          <span class="bilingual-ko">📄 원본 시험지</span>
+          <span class="bilingual-en">📄 Exam Paper</span>
+        </button>
+        <button type="button" class="orig-media-tab" id="tabMediaVideo" onclick="switchMediaTab('video')">
+          <span class="bilingual-ko">🎬 15초 직관 풀이 영상</span>
+          <span class="bilingual-en">🎬 15s Video</span>
+        </button>
       </div>
-      <div class="orig-media-sub"><span class="bilingual-ko">📄 한국교육과정평가원 수능 모의평가 원본 시험지</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
+
+      <!-- 1. 시험지 원본 이미지 프레임 -->
+      <div id="mediaImgFrame">
+        <div class="orig-media-frame">
+          <img src="img_ac8dc374.png" alt="2027학년도 9월 모의평가 수학 21번 원본 문제">
+        </div>
+        <div class="orig-media-sub"><span class="bilingual-ko">📄 한국교육과정평가원 수능 모의평가 원본 시험지</span><span class="bilingual-en">📄 Official KICE College Entrance Mock Exam Paper</span></div>
+      </div>
+
+      <!-- 2. 직관 풀이 영상 프레임 -->
+      <div id="mediaVideoFrame" style="display:none">
+        <div class="orig-media-frame" style="padding:6px">
+          <video id="csat21Video" controls playsinline preload="metadata" poster="../media/mathedu_csat21_preview.gif" style="width:100%;border-radius:8px;background:#000;display:block">
+            <source src="../media/mathedu_csat21_landscape.mp4" type="video/mp4">
+            <span class="bilingual-ko">브라우저가 비디오 재생을 지원하지 않습니다.</span>
+            <span class="bilingual-en">Your browser does not support HTML5 video.</span>
+          </video>
+        </div>
+        <div class="orig-media-sub" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-top:4px">
+          <span><span class="bilingual-ko">🎬 15초 직관 풀이 (1080p HD)</span><span class="bilingual-en">🎬 15s Intuitive Video (1080p HD)</span></span>
+          <a href="../media/mathedu_csat21_vertical_reels.mp4" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700">
+            <span class="bilingual-ko">📱 세로형(쇼츠/릴스) ↗</span>
+            <span class="bilingual-en">📱 Vertical (Reels) ↗</span>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- 우측: 원본 문항 정밀 수식 조판 & 핵심 조건 -->
