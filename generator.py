@@ -302,27 +302,51 @@ mjx-container[display="true"] {{
   border-radius: 10px;
   border: 1px solid rgba(124, 196, 255, 0.2);
   text-align: center !important;
+  scrollbar-width: thin;
 }}
 
+mjx-container[display="true"]::-webkit-scrollbar {{
+  height: 3px;
+}}
+mjx-container[display="true"]::-webkit-scrollbar-track {{
+  background: transparent;
+}}
+mjx-container[display="true"]::-webkit-scrollbar-thumb {{
+  background: rgba(124, 196, 255, 0.25);
+  border-radius: 3px;
+}}
+
+/* 인라인 수식 ($...$): 밑줄 및 가로 스크롤바 원천 차단 */
 mjx-container:not([display="true"]) {{
   display: inline-flex !important;
   vertical-align: middle !important;
   max-width: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  padding: 1px 2px !important;
+  overflow: visible !important;
+  padding: 0 1px !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  scrollbar-width: none !important;
 }}
 
-mjx-container::-webkit-scrollbar {{
-  height: 4px;
+mjx-container:not([display="true"])::-webkit-scrollbar {{
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
 }}
-mjx-container::-webkit-scrollbar-track {{
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+
+/* 4지/5지선다 선택지(.opt): 수식 및 보기 항목의 불필요한 밑줄·스크롤바 전면 제거 */
+.opt, .opt * {{
+  text-decoration: none !important;
+  border-bottom: none !important;
 }}
-mjx-container::-webkit-scrollbar-thumb {{
-  background: rgba(124, 196, 255, 0.45);
-  border-radius: 4px;
+.opt mjx-container {{
+  overflow: visible !important;
+  scrollbar-width: none !important;
+}}
+.opt mjx-container::-webkit-scrollbar {{
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
 }}
 
 /* 3. 그리드/플렉스 자식 요소 min-width: 0 리셋 */
