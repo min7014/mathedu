@@ -22,6 +22,10 @@
 <meta name="twitter:description" content="3,400+ 시각적 증명과 인터랙티브 디딤돌 퀴즈 · 수학자료실">
 <meta name="twitter:image" content="https://min7014.github.io/mathedu/assets/og-image.png">
 
+<!-- 📢 RSS Feed & Creative Commons License (OER 弘益人間) -->
+<link rel="alternate" type="application/rss+xml" title="mathedu RSS Feed" href="https://min7014.github.io/mathedu/feed.xml">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+
 <!-- 🌐 AI & 검색엔진용 공식 교육 자료실 구조화 데이터 (Schema.org) -->
 <script type="application/ld+json">
 {
@@ -47,7 +51,15 @@
       "name": "mathedu - Interactive Scaffolding Math & Dynamic Geometry Archive",
       "description": "100% free mathematics archive with 3,400+ dynamic visual proofs and step-by-step scaffolding quizzes freely open to learners and teachers.",
       "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "educationalLevel": ["Elementary School", "Middle School", "High School", "College"],
+      "learningResourceType": ["Interactive simulation", "Quiz", "Open educational resource"],
+      "teaches": "Mathematics, Dynamic Geometry, Calculus, Probability, Algebra",
       "inLanguage": ["ko", "en"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": ["student", "teacher", "parent"]
+      },
       "publisher": { "@id": "https://min7014.github.io/mathedu/#organization" }
     }
   ]
@@ -587,6 +599,144 @@ body {
   color: #cbd5e1;
   line-height: 1.55;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   🌏 弘益人間 (홍익인간) 열린 수학교육 헌장 & 글로벌 전파 센터
+   ══════════════════════════════════════════════════════════════ */
+.hongik-spread-card {
+  position: relative;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(99, 102, 241, 0.2) 0%, rgba(14, 165, 233, 0.12) 45%, rgba(15, 23, 42, 0.92) 100%);
+  border: 1.5px solid rgba(129, 140, 248, 0.45);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.55), 0 0 32px rgba(99, 102, 241, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+.hongik-spread-card::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(25px);
+}
+.hongik-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.hongik-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg, rgba(234, 179, 8, 0.22), rgba(245, 158, 11, 0.28));
+  border: 1px solid rgba(234, 179, 8, 0.55);
+  color: #fde047;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.hongik-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hongik-manifesto {
+  font-size: 0.91rem;
+  color: #e2e8f0;
+  line-height: 1.7;
+  max-width: 900px;
+  margin-bottom: 4px;
+}
+.hongik-manifesto strong, .hongik-manifesto b {
+  color: #fde047;
+}
+.hongik-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.hongik-pill {
+  font-size: 0.76rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  padding: 4px 10px;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+.hongik-share-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.hongik-share-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn-viral {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  font-family: inherit;
+}
+.btn-viral:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.btn-viral-gold {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  border-color: #fbbf24;
+  color: #0f172a;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+}
+.btn-viral-gold:hover {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+.btn-viral-x { background: #000; border-color: #444; }
+.btn-viral-kakao { background: #fee500; color: #191919; border-color: #f7da00; }
+.btn-viral-kakao:hover { background: #ffe812; color: #191919; }
+.btn-viral-fb { background: #1877f2; border-color: #2d88ff; }
+.btn-viral-wa { background: #25d366; border-color: #34e777; color: #064e1e; font-weight:800; }
+.btn-viral-tg { background: #229ed9; border-color: #3cb4ed; }
 
 /* ══════════════════════════════════════════════════════════════
    🚀 히어로 3-박스 빠른 액션 (교사 / 문제생성 / 학생)
@@ -1356,6 +1506,62 @@ body {
       </a>
     </div>
   </div>
+
+  <!-- 🌏 弘益人間 (홍익인간) 열린 수학교육 헌장 & 글로벌 전파 센터 -->
+  <section class="hongik-spread-card" id="hongikSpreadSection">
+    <div class="hongik-header">
+      <div>
+        <div class="hongik-badge" data-i18n="hongik.badge">
+          ✨ 弘益人間 · 널리 세상을 이롭게 하는 열린 수학교육
+        </div>
+        <h2 class="hongik-title" data-i18n="hongik.title">
+          🌏 모두를 위한 100% 무료 시각적 수학 자산 & 글로벌 공유
+        </h2>
+        <p class="hongik-manifesto" data-i18n-html="hongik.manifesto">
+          <b>민은기 선생님의 수학자료실(min7014) 3,400+ 동적 기하 자료</b>와 <b>안티그래비티 디딤돌 퀴즈</b>는 경제적·지역적 차별 없이 누구나 수학의 아름다움을 시각적으로 체득할 수 있도록 <b>영구 무료·열린 교육 자원(OER)</b>으로 세상에 전면 공개되었습니다. 학교 현장, 홈스쿨링, 전 세계 모든 배움터로 널리 퍼져나가도록 자유롭게 활용하고 공유해 주세요.
+        </p>
+        <div class="hongik-pills">
+          <span class="hongik-pill" data-i18n="hongik.pillOer">🔓 CC BY-NC-SA 4.0 열린 교육자원</span>
+          <span class="hongik-pill" data-i18n="hongik.pillGeogebra">📐 3,400+ GeoGebra & 원리 증명</span>
+          <span class="hongik-pill" data-i18n="hongik.pillScaffolding">🪜 초등 눈높이 무장벽 디딤돌 사다리</span>
+          <span class="hongik-pill" data-i18n="hongik.pillUniversal">🌐 전 세계 모든 교실 & 학생 100% 무료</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1-클릭 바이럴 전파 툴바 -->
+    <div class="hongik-share-toolbar">
+      <div style="font-size:0.86rem;font-weight:700;color:#94a3b8;display:flex;align-items:center;gap:6px">
+        <span>📢</span> <span data-i18n="hongik.sharePrompt">세상에 널리 알리기:</span>
+      </div>
+      <div class="hongik-share-buttons">
+        <button type="button" class="btn-viral btn-viral-gold" onclick="shareMatheduGlobal()" data-i18n="hongik.btnShare">
+          🔗 1초 링크 복사 / 공유
+        </button>
+        <button type="button" class="btn-viral btn-viral-x" onclick="shareToTwitter()" title="X (Twitter)에 공유">
+          𝕏 트위터
+        </button>
+        <button type="button" class="btn-viral btn-viral-kakao" onclick="shareToKakao()" title="카카오톡으로 공유">
+          💬 카카오톡
+        </button>
+        <button type="button" class="btn-viral btn-viral-fb" onclick="shareToFacebook()" title="페이스북에 공유">
+          📘 페이스북
+        </button>
+        <button type="button" class="btn-viral btn-viral-wa" onclick="shareToWhatsApp()" title="WhatsApp으로 글로벌 전파">
+          📱 WhatsApp
+        </button>
+        <button type="button" class="btn-viral btn-viral-tg" onclick="shareToTelegram()" title="텔레그램으로 공유">
+          ✈️ Telegram
+        </button>
+        <button type="button" class="btn-viral" onclick="openClassroomQrModal()" style="border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.15);color:#38bdf8" data-i18n="hongik.btnQr">
+          📱 교실 빔프로젝터 QR
+        </button>
+        <button type="button" class="btn-viral" onclick="openEmbedModal()" style="border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.15);color:#c4b5fd" data-i18n="hongik.btnEmbed">
+          📦 LMS/노션 위젯 임베드
+        </button>
+      </div>
+    </div>
+  </section>
 
   <!-- 교사 / 문제생성 / 학생 빠른 액션 히어로 -->
   <div class="hero-box">
@@ -2724,6 +2930,198 @@ function toggleMathStory() {
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
+
+  /* ══════════════════════════════════════════════════════════════
+     🌏 弘益人間 (홍익인간) 1-클릭 글로벌 바이럴 공유 & 전파 시스템
+     ══════════════════════════════════════════════════════════════ */
+  var MATHEDU_CANONICAL = 'https://min7014.github.io/mathedu/';
+  var SHARE_TITLE_KO = 'mathedu · 3,400+ 시각적 수학증명과 초등 눈높이 디딤돌 퀴즈';
+  var SHARE_DESC_KO = '민은기 선생님의 수학자료실(min7014)과 안티그래비티가 함께 만든 100% 무료 시각적 수학자료실! 초등학생도 수능 문제까지 스스로 풀 수 있는 단계별 디딤돌 퀴즈와 3,400+ GeoGebra 증명.';
+  var SHARE_TITLE_EN = 'mathedu · 3,400+ Dynamic Visual Math Proofs & Interactive Scaffolding Quizzes';
+  var SHARE_DESC_EN = '100% Free Open Educational Resource: 3,400+ GeoGebra visual proofs & step-by-step scaffolding quizzes for students and teachers worldwide!';
+
+  function getShareData() {
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    return {
+      title: isEn ? SHARE_TITLE_EN : SHARE_TITLE_KO,
+      text: isEn ? SHARE_DESC_EN : SHARE_DESC_KO,
+      url: MATHEDU_CANONICAL
+    };
+  }
+
+  function showToast(msg) {
+    var toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fde047;border:1.5px solid #fbbf24;padding:12px 24px;border-radius:12px;font-size:0.92rem;font-weight:700;z-index:999999;box-shadow:0 12px 30px rgba(0,0,0,0.6);animation:fadeIn .2s ease;text-align:center;max-width:90vw';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(function() {
+      toast.style.transition = 'opacity 0.4s ease';
+      toast.style.opacity = '0';
+      setTimeout(function() { toast.remove(); }, 400);
+    }, 2800);
+  }
+
+  window.shareMatheduGlobal = function() {
+    var data = getShareData();
+    if (navigator.share) {
+      navigator.share({
+        title: data.title,
+        text: data.text,
+        url: data.url
+      }).catch(function(err) {
+        if (err.name !== 'AbortError') {
+          copyCanonicalLink();
+        }
+      });
+    } else {
+      copyCanonicalLink();
+    }
+  };
+
+  function copyCanonicalLink() {
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    var textToCopy = getShareData().text + '\n' + MATHEDU_CANONICAL;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(function() {
+        showToast(isEn ? '🔗 Share link and introduction copied to clipboard!' : '🎉 널리 세상을 이롭게 할 수학자료실 소개와 링크가 복사되었습니다!');
+      }).catch(function() {
+        prompt(isEn ? 'Copy link below:' : '아래 링크를 복사하여 공유하세요:', MATHEDU_CANONICAL);
+      });
+    } else {
+      prompt(isEn ? 'Copy link below:' : '아래 링크를 복사하여 공유하세요:', MATHEDU_CANONICAL);
+    }
+  }
+
+  window.shareToTwitter = function() {
+    var data = getShareData();
+    var tweetText = encodeURIComponent(data.title + '\n' + data.text);
+    var tweetUrl = encodeURIComponent(data.url);
+    var hashtags = encodeURIComponent('수학교육,GeoGebra,mathedu,홍익인간,디딤돌수학,시각적증명');
+    window.open('https://twitter.com/intent/tweet?text=' + tweetText + '&url=' + tweetUrl + '&hashtags=' + hashtags, '_blank', 'noopener,noreferrer,width=600,height=500');
+  };
+
+  window.shareToKakao = function() {
+    var data = getShareData();
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    var kakaoText = '✨ [mathedu · 100% 무료 열린 수학자료실]\n\n' + data.text + '\n\n👉 바로가기: ' + data.url;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(kakaoText).then(function() {
+        showToast(isEn ? '💬 KakaoTalk message copied! Paste it in your chat.' : '💬 카카오톡 전송용 소개 메시지와 링크가 복사되었습니다! 채팅방에 붙여넣어 주세요.');
+      });
+    } else {
+      prompt('카카오톡 공유 문구:', kakaoText);
+    }
+  };
+
+  window.shareToFacebook = function() {
+    var url = encodeURIComponent(MATHEDU_CANONICAL);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank', 'noopener,noreferrer,width=600,height=500');
+  };
+
+  window.shareToWhatsApp = function() {
+    var data = getShareData();
+    var msg = encodeURIComponent(data.title + '\n' + data.text + '\n' + data.url);
+    window.open('https://api.whatsapp.com/send?text=' + msg, '_blank', 'noopener,noreferrer');
+  };
+
+  window.shareToTelegram = function() {
+    var data = getShareData();
+    var url = encodeURIComponent(data.url);
+    var text = encodeURIComponent(data.title + '\n' + data.text);
+    window.open('https://t.me/share/url?url=' + url + '&text=' + text, '_blank', 'noopener,noreferrer');
+  };
+
+  window.openClassroomQrModal = function() {
+    var existing = document.getElementById('classroomQrModal');
+    if (existing) existing.remove();
+
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=' + encodeURIComponent(MATHEDU_CANONICAL);
+
+    var modal = document.createElement('div');
+    modal.id = 'classroomQrModal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:999999;background:rgba(10,13,26,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease';
+
+    modal.innerHTML = 
+      '<div style="background:#141833;border:1.5px solid rgba(56,189,248,.45);border-radius:24px;max-width:520px;width:100%;padding:32px;box-shadow:0 24px 70px rgba(0,0,0,.75);color:#eef2ff;font-family:system-ui,sans-serif;position:relative;text-align:center">' +
+        '<button onclick="document.getElementById(\'classroomQrModal\').remove()" style="position:absolute;top:18px;right:20px;background:none;border:none;color:#9aa6c0;font-size:1.6rem;cursor:pointer">✕</button>' +
+        '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.18);color:#38bdf8;border:1px solid rgba(56,189,248,.4);border-radius:20px;padding:4px 14px;font-size:.8rem;font-weight:800;margin-bottom:12px">' +
+          (isEn ? '🖥️ Classroom Beam Projector Screen' : '🖥️ 교실 칠판 빔프로젝터 / 스마트기기 접속') +
+        '</div>' +
+        '<h2 style="margin:0 0 8px;font-size:1.35rem;color:#ffffff;font-weight:900">' +
+          (isEn ? 'Instant Math Archive Access QR' : '3,400+ 열린 수학자료실 즉시 접속 QR') +
+        '</h2>' +
+        '<p style="margin:0 0 20px;color:#9aa6c0;font-size:.88rem;line-height:1.55">' +
+          (isEn ? 'Project this screen onto your classroom board or print it out. Students can scan with their phone/tablet camera to start exploring immediately.' : '교실 칠판 빔프로젝터에 띄우거나 학습지에 인쇄하여 배포하세요. 카메라로 비추면 누구나 100% 무료 시각적 수학자료실로 즉시 연결됩니다.') +
+        '</p>' +
+        '<div style="background:#fff;padding:16px;border-radius:18px;display:inline-block;box-shadow:0 8px 30px rgba(0,0,0,.4);margin-bottom:16px">' +
+          '<img src="' + qrUrl + '" alt="QR Code" style="width:260px;height:260px;display:block">' +
+        '</div>' +
+        '<div style="font-size:0.86rem;color:#7cc4ff;font-weight:700;word-break:break-all;margin-bottom:20px">' +
+          MATHEDU_CANONICAL +
+        '</div>' +
+        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+          '<button onclick="window.print()" style="background:#222a3d;color:#eef2ff;border:1px solid #2e3850;border-radius:10px;padding:10px 18px;font-size:.88rem;font-weight:700;cursor:pointer">' +
+            (isEn ? '🖨️ Print QR' : '🖨️ 인쇄하기') +
+          '</button>' +
+          '<button onclick="document.getElementById(\'classroomQrModal\').remove()" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0f172a;border:none;border-radius:10px;padding:10px 22px;font-size:.88rem;font-weight:800;cursor:pointer">' +
+            (isEn ? 'Done' : '확인 완료') +
+          '</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+  };
+
+  window.openEmbedModal = function() {
+    var existing = document.getElementById('embedWidgetModal');
+    if (existing) existing.remove();
+
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    var embedCode = '<iframe src="https://min7014.github.io/mathedu/" width="100%" height="720" frameborder="0" style="border:1px solid #334155;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.3);" allow="fullscreen" allowfullscreen></iframe>';
+
+    var modal = document.createElement('div');
+    modal.id = 'embedWidgetModal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:999999;background:rgba(10,13,26,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease';
+
+    modal.innerHTML = 
+      '<div style="background:#141833;border:1.5px solid rgba(167,139,250,.45);border-radius:24px;max-width:580px;width:100%;padding:32px;box-shadow:0 24px 70px rgba(0,0,0,.75);color:#eef2ff;font-family:system-ui,sans-serif;position:relative">' +
+        '<button onclick="document.getElementById(\'embedWidgetModal\').remove()" style="position:absolute;top:18px;right:20px;background:none;border:none;color:#9aa6c0;font-size:1.6rem;cursor:pointer">✕</button>' +
+        '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(167,139,250,.18);color:#c4b5fd;border:1px solid rgba(167,139,250,.4);border-radius:20px;padding:4px 14px;font-size:.8rem;font-weight:800;margin-bottom:12px">' +
+          (isEn ? '📦 Notion · LMS · School Website Embed' : '📦 노션 · 구글 사이트 · 학교 LMS 위젯 임베드') +
+        '</div>' +
+        '<h2 style="margin:0 0 8px;font-size:1.35rem;color:#ffffff;font-weight:900">' +
+          (isEn ? '1-Click Iframe Embed Code' : '1초 만에 학급 사이트에 수학자료실 넣기') +
+        '</h2>' +
+        '<p style="margin:0 0 16px;color:#9aa6c0;font-size:.88rem;line-height:1.55">' +
+          (isEn ? 'Copy and paste the HTML snippet below into Notion, Google Sites, Canvas, Moodle, or your personal blog.' : '아래 HTML 코드를 복사하여 노션, 구글 사이트, 캔버스(LMS), 무들, 학급 홈페이지 또는 블로그에 붙여넣으면 언제든 실시간 수학자료실 위젯이 임베드됩니다.') +
+        '</p>' +
+        '<textarea id="embedCodeArea" readonly style="width:100%;height:100px;background:#0b0f19;border:1px solid #2e3850;border-radius:10px;padding:10px 12px;color:#7cc4ff;font-family:Consolas,monospace;font-size:.8rem;resize:none;box-sizing:border-box;margin-bottom:16px">' + escapeHtml(embedCode) + '</textarea>' +
+        '<div style="display:flex;gap:10px;justify-content:flex-end">' +
+          '<button onclick="copyEmbedCodeSnippet()" style="background:linear-gradient(90deg,#a78bfa,#818cf8);color:#0f172a;border:none;border-radius:10px;padding:10px 20px;font-size:.88rem;font-weight:800;cursor:pointer">' +
+            (isEn ? '📋 Copy Embed Code' : '📋 임베드 코드 복사') +
+          '</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+  };
+
+  window.copyEmbedCodeSnippet = function() {
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    var area = document.getElementById('embedCodeArea');
+    if (area) {
+      area.select();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(area.value).then(function() {
+          showToast(isEn ? '📋 Embed code copied to clipboard!' : '📋 LMS/노션 임베드 코드가 클립보드에 복사되었습니다!');
+        });
+      } else {
+        document.execCommand('copy');
+        showToast(isEn ? '📋 Embed code copied to clipboard!' : '📋 LMS/노션 임베드 코드가 클립보드에 복사되었습니다!');
+      }
+    }
+  };
 })();
 </script>
 </body>
