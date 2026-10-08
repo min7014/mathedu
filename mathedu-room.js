@@ -104,11 +104,8 @@
       // 8. 오답 선택 감지기 (학생 오답노트 자동 적립)
       attachWrongAnswerTracker();
 
-      // 9. 친구 도전장(?challenger=...) 파라미터 감지 및 상단 배너 표시
-      checkAndShowIncomingChallenge();
-
-      // 10. 해설 하단 상시 선물/도전장 공유 카드 삽입
-      injectAltruisticShareCard();
+      // 9. 🪜 차분한 단계별 몰입형 순차 공개 시스템 (스크롤 훑어보기 방지)
+      initProgressiveScaffolding();
     });
   }
 
@@ -781,11 +778,6 @@
           window.MatheduGame.clearWrongAnswer(currentSlug);
           window.MatheduGame.triggerConfetti(4000);
 
-          // 🚀 4대 무비용 바이럴 성장 엔진: 완주 축하 & 친구 도전장 & 커뮤니티 복사 & 선물 모달 팝업
-          setTimeout(function() {
-            showCompletionViralModal(total, correct);
-          }, 1000);
-
           // 수업 팩 연계 안내
           var packParam = (urlParams.get('pack') || '').trim();
           if (packParam) {
@@ -823,6 +815,207 @@
         });
       }
     };
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     🪜 차분한 단계별 몰입형 순차 공개 시스템 (Progressive Scaffolding Focus Mode)
+     한 화면에 모든 문제가 펼쳐져 있어 스크롤로 훑어내려가는 불상사를 방지하고,
+     학생이 한 번에 하나의 디딤돌에만 온전히 깊이 고민할 수 있도록 제어
+     ══════════════════════════════════════════════════════════════ */
+  function initProgressiveScaffolding() {
+    var qs = Array.from(document.querySelectorAll('.q'));
+    if (qs.length <= 1) return; // 문항이 1개뿐이면 분절화 불필요
+
+    // 1. 필수 CSS 주입
+    if (!document.getElementById('mathedu-scaffolding-focus-styles')) {
+      var st = document.createElement('style');
+      st.id = 'mathedu-scaffolding-focus-styles';
+      st.textContent = 
+        '.mathedu-step-hidden { display: none !important; }\n' +
+        '.mathedu-step-unlocked { animation: matheduStepFadeIn 0.35s ease-out forwards; }\n' +
+        '@keyframes matheduStepFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }\n' +
+        '.mathedu-step-mode-switch { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,.08); border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; font-size: 0.78rem; font-weight: 700; color: var(--sub); cursor: pointer; transition: .15s; }\n' +
+        '.mathedu-step-mode-switch:hover { border-color: var(--accent); color: #fff; background: rgba(255,255,255,.14); }\n' +
+        '.mathedu-next-step-hint { background: linear-gradient(135deg, rgba(56,189,248,.08) 0%, rgba(129,140,248,.08) 100%); border: 1.5px dashed rgba(56,189,248,.35); border-radius: var(--radius); padding: 18px 22px; margin: 24px 0; text-align: center; color: #93c5fd; font-size: 0.92rem; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,.25); }\n' +
+        '.mathedu-step-progress-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,.18); color: #38bdf8; border: 1px solid rgba(56,189,248,.4); border-radius: 12px; padding: 2px 10px; font-size: 0.76rem; font-weight: 800; margin-bottom: 6px; }\n' +
+        '.viral-share-card { display: none !important; }\n'; // 번잡한 바이럴 카드 숨김
+      (document.head || document.documentElement).appendChild(st);
+    }
+
+    var isFocusMode = true; // 기본값: 단계별 집중 모드 (스크롤 훑어보기 방지)
+    try {
+      var saved = localStorage.getItem('mathedu_step_mode');
+      if (saved === 'all') isFocusMode = false;
+    } catch(e) {}
+
+    // 최종 해설 요소들 (.sol, .final 및 관련 제목)
+    var solEl = document.querySelector('.sol');
+    var finalHeading = solEl ? solEl.previousElementSibling : null;
+    var finalEl = document.querySelector('.final');
+
+    // 상단 점수 바 또는 상단 네비게이션에 모드 전환 버튼 배치
+    var scoreBar = document.querySelector('.score') || document.querySelector('.topbar');
+    var switchBtn = document.createElement('button');
+    switchBtn.type = 'button';
+    switchBtn.className = 'mathedu-step-mode-switch';
+    switchBtn.id = 'btnStepModeSwitch';
+
+    function updateSwitchText() {
+      switchBtn.innerHTML = isFocusMode 
+        ? bilingual('🪜 단계별 집중 모드', '🪜 Step Focus Mode')
+        : bilingual('📖 전체 펼쳐보기', '📖 View All Steps');
+      switchBtn.title = isFocusMode
+        ? (isEnMode() ? 'Switch to view all steps at once' : '전체 문제를 한 번에 펼쳐보기')
+        : (isEnMode() ? 'Switch to step-by-step focus mode' : '차분한 단계별 집중 풀기 모드로 전환');
+    }
+    updateSwitchText();
+
+    switchBtn.onclick = function() {
+      isFocusMode = !isFocusMode;
+      try { localStorage.setItem('mathedu_step_mode', isFocusMode ? 'focus' : 'all'); } catch(e) {}
+      updateSwitchText();
+      applyStepVisibility(true);
+    };
+
+    if (scoreBar) {
+      scoreBar.appendChild(switchBtn);
+    }
+
+    function applyStepVisibility(shouldScroll) {
+      if (!isFocusMode) {
+        // 전체 펼쳐보기: 모든 숨김 해제
+        document.querySelectorAll('.mathedu-step-hidden').forEach(function(el) {
+          el.classList.remove('mathedu-step-hidden');
+        });
+        if (solEl) solEl.classList.remove('mathedu-step-hidden');
+        if (finalHeading) finalHeading.classList.remove('mathedu-step-hidden');
+        if (finalEl) finalEl.classList.remove('mathedu-step-hidden');
+        var hintBox = document.getElementById('matheduNextStepHintBox');
+        if (hintBox) hintBox.remove();
+        return;
+      }
+
+      // 단계별 집중 모드: 아직 안 푼 첫 번째 문제까지 표시
+      var firstUnsolvedIndex = -1;
+      for (var i = 0; i < qs.length; i++) {
+        if (!qs[i].classList.contains('done')) {
+          firstUnsolvedIndex = i;
+          break;
+        }
+      }
+
+      var allDone = (firstUnsolvedIndex === -1);
+      var maxVisibleIndex = allDone ? (qs.length - 1) : firstUnsolvedIndex;
+
+      for (var idx = 0; idx < qs.length; idx++) {
+        var q = qs[idx];
+        var isVisible = (idx <= maxVisibleIndex);
+
+        if (isVisible) {
+          if (q.classList.contains('mathedu-step-hidden')) {
+            q.classList.remove('mathedu-step-hidden');
+            q.classList.add('mathedu-step-unlocked');
+          }
+        } else {
+          q.classList.add('mathedu-step-hidden');
+        }
+
+        // q 바로 앞의 형제 요소들(개념 카드, h2, h3, .know, .sym-card 등)도 동일하게 연동
+        // 단, qs[0] 이전의 인트로 및 원본 문제는 항상 표시
+        if (idx > 0) {
+          var prev = q.previousElementSibling;
+          while (prev && prev !== qs[idx - 1] && !prev.classList.contains('q')) {
+            // 단, .sol이나 그 직전 제목은 마지막 문항까지 풀기 전에는 절대 노출하지 않음
+            var isSolRelated = (prev === solEl || prev === finalHeading || prev.classList.contains('sol'));
+            if (isSolRelated) {
+              if (allDone) prev.classList.remove('mathedu-step-hidden');
+              else prev.classList.add('mathedu-step-hidden');
+            } else {
+              if (isVisible) prev.classList.remove('mathedu-step-hidden');
+              else prev.classList.add('mathedu-step-hidden');
+            }
+            prev = prev.previousElementSibling;
+          }
+        }
+      }
+
+      // qs[last] 뒤에 위치한 요소들(결과, 최종 풀이 등) 제어
+      if (solEl) {
+        if (allDone) solEl.classList.remove('mathedu-step-hidden');
+        else solEl.classList.add('mathedu-step-hidden');
+      }
+      if (finalHeading) {
+        if (allDone) finalHeading.classList.remove('mathedu-step-hidden');
+        else finalHeading.classList.add('mathedu-step-hidden');
+      }
+      if (finalEl) {
+        if (allDone) finalEl.classList.remove('mathedu-step-hidden');
+        else finalEl.classList.add('mathedu-step-hidden');
+      }
+
+      // qs[qs.length - 1] 뒤의 다른 형제 요소들도 allDone 전에는 숨김
+      var lastQ = qs[qs.length - 1];
+      var nextAfterLast = lastQ ? lastQ.nextElementSibling : null;
+      while (nextAfterLast) {
+        if (nextAfterLast.id !== 'matheduNextStepHintBox') {
+          if (allDone) nextAfterLast.classList.remove('mathedu-step-hidden');
+          else nextAfterLast.classList.add('mathedu-step-hidden');
+        }
+        nextAfterLast = nextAfterLast.nextElementSibling;
+      }
+
+      // 다음 디딤돌 잠금 안내 박스
+      var hintBox = document.getElementById('matheduNextStepHintBox');
+      if (!allDone && isFocusMode) {
+        if (!hintBox) {
+          hintBox = document.createElement('div');
+          hintBox.id = 'matheduNextStepHintBox';
+          hintBox.className = 'mathedu-next-step-hint';
+        }
+        var nextStepNum = maxVisibleIndex + 1;
+        var totalStepNum = qs.length;
+        hintBox.innerHTML = 
+          '<div class="mathedu-step-progress-badge">' +
+            bilingual('진행 중: ' + nextStepNum + ' / ' + totalStepNum + ' 단계', 'Progress: Step ' + nextStepNum + ' of ' + totalStepNum) +
+          '</div>' +
+          '<div>' +
+            bilingual(
+              '💡 <b>' + nextStepNum + '단계 디딤돌</b>을 차분히 풀면 다음 단계가 열립니다.<br><span style="font-size:0.82rem;color:var(--sub);font-weight:400">앞 단계를 해결하면서 수학적 원리를 한 계단씩 스스로 깨우쳐보세요.</span>',
+              '💡 Solve <b>Step ' + nextStepNum + '</b> to unlock the next step.<br><span style="font-size:0.82rem;color:var(--sub);font-weight:400">Think calmly and take your time with each mathematical step.</span>'
+            ) +
+          '</div>';
+
+        var curQ = qs[maxVisibleIndex];
+        if (curQ && curQ.nextSibling) {
+          curQ.parentNode.insertBefore(hintBox, curQ.nextSibling);
+        } else if (curQ) {
+          curQ.parentNode.appendChild(hintBox);
+        }
+      } else if (hintBox) {
+        hintBox.remove();
+      }
+
+      if (shouldScroll && maxVisibleIndex < qs.length) {
+        setTimeout(function() {
+          var targetQ = qs[maxVisibleIndex];
+          if (targetQ) {
+            targetQ.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 150);
+      }
+    }
+
+    // 옵션 클릭 감지하여 자동 다음 단계 언락
+    document.addEventListener('click', function(e) {
+      var opt = e.target.closest ? e.target.closest('.opt') : null;
+      if (!opt) return;
+      setTimeout(function() {
+        applyStepVisibility(true);
+      }, 60);
+    });
+
+    // 초기 적용
+    applyStepVisibility(false);
   }
 
   function ensureAuth(actionName, callback) {
