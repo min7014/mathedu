@@ -927,8 +927,16 @@
           while (prev && prev !== qs[idx - 1] && !prev.classList.contains('q')) {
             // 단, .sol이나 그 직전 제목은 마지막 문항까지 풀기 전에는 절대 노출하지 않음
             var isSolRelated = (prev === solEl || prev === finalHeading || prev.classList.contains('sol'));
+            var isQPart = (prev.classList.contains('opts') || prev.classList.contains('q-actions') || 
+                           prev.classList.contains('exp') || prev.classList.contains('report-wrap') || 
+                           prev.classList.contains('opt'));
             if (isSolRelated) {
               if (allDone) prev.classList.remove('mathedu-step-hidden');
+              else prev.classList.add('mathedu-step-hidden');
+            } else if (isQPart) {
+              // 앞선 문항(qs[idx - 1])에 속한 보기/해설/신고 폼인 경우, 앞 문항이 보이면 항상 표시
+              var prevVisible = ((idx - 1) <= maxVisibleIndex);
+              if (prevVisible) prev.classList.remove('mathedu-step-hidden');
               else prev.classList.add('mathedu-step-hidden');
             } else {
               if (isVisible) prev.classList.remove('mathedu-step-hidden');
@@ -986,10 +994,19 @@
           '</div>';
 
         var curQ = qs[maxVisibleIndex];
-        if (curQ && curQ.nextSibling) {
-          curQ.parentNode.insertBefore(hintBox, curQ.nextSibling);
-        } else if (curQ) {
-          curQ.parentNode.appendChild(hintBox);
+        // curQ에 속한 뒤따르는 형제 요소(.opts, .q-actions, .exp, .report-wrap)가 있다면 그 뒤에 안내 박스 배치
+        var insertAnchor = curQ;
+        while (insertAnchor && insertAnchor.nextElementSibling && 
+               (insertAnchor.nextElementSibling.classList.contains('opts') ||
+                insertAnchor.nextElementSibling.classList.contains('q-actions') ||
+                insertAnchor.nextElementSibling.classList.contains('exp') ||
+                insertAnchor.nextElementSibling.classList.contains('report-wrap'))) {
+          insertAnchor = insertAnchor.nextElementSibling;
+        }
+        if (insertAnchor && insertAnchor.nextSibling) {
+          insertAnchor.parentNode.insertBefore(hintBox, insertAnchor.nextSibling);
+        } else if (insertAnchor) {
+          insertAnchor.parentNode.appendChild(hintBox);
         }
       } else if (hintBox) {
         hintBox.remove();
