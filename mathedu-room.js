@@ -826,6 +826,15 @@
     var qs = Array.from(document.querySelectorAll('.q'));
     if (qs.length <= 1) return; // 문항이 1개뿐이면 분절화 불필요
 
+    // 0. trackFull(입장 모달) 등 고정 오버레이 요소가 .wrap 내부에 있다면 document.body로 안전하게 이동하여 문항 형제 간섭 원천 배제
+    var tfModal = document.getElementById('trackFull');
+    if (tfModal && tfModal.parentNode && tfModal.parentNode !== document.body) {
+      document.body.appendChild(tfModal);
+    }
+    if (tfModal) {
+      tfModal.classList.remove('mathedu-step-hidden');
+    }
+
     // 1. 필수 CSS 주입
     if (!document.getElementById('mathedu-scaffolding-focus-styles')) {
       var st = document.createElement('style');
@@ -925,6 +934,15 @@
         if (idx > 0) {
           var prev = q.previousElementSibling;
           while (prev && prev !== qs[idx - 1] && !prev.classList.contains('q')) {
+            // 입장 모달, 다이얼로그, 시스템 스크립트/스타일은 스캐폴딩 숨김 대상에서 절대 제외
+            var isModalOrSpecial = (prev.id === 'trackFull' || prev.id === 'topGuestFreePassRow' || 
+                                    prev.classList.contains('mathedu-modal') || prev.classList.contains('mathedu-dialog') || 
+                                    prev.tagName === 'SCRIPT' || prev.tagName === 'STYLE');
+            if (isModalOrSpecial) {
+              prev = prev.previousElementSibling;
+              continue;
+            }
+
             // 단, .sol이나 그 직전 제목은 마지막 문항까지 풀기 전에는 절대 노출하지 않음
             var isSolRelated = (prev === solEl || prev === finalHeading || prev.classList.contains('sol'));
             var isQPart = (prev.classList.contains('opts') || prev.classList.contains('q-actions') || 
@@ -965,7 +983,14 @@
       var lastQ = qs[qs.length - 1];
       var nextAfterLast = lastQ ? lastQ.nextElementSibling : null;
       while (nextAfterLast) {
-        if (nextAfterLast.id !== 'matheduNextStepHintBox') {
+        var isSpecial = (nextAfterLast.id === 'matheduNextStepHintBox' || 
+                         nextAfterLast.id === 'trackFull' || 
+                         nextAfterLast.id === 'topGuestFreePassRow' || 
+                         nextAfterLast.classList.contains('mathedu-modal') || 
+                         nextAfterLast.classList.contains('mathedu-dialog') || 
+                         nextAfterLast.tagName === 'SCRIPT' || 
+                         nextAfterLast.tagName === 'STYLE');
+        if (!isSpecial) {
           if (allDone) nextAfterLast.classList.remove('mathedu-step-hidden');
           else nextAfterLast.classList.add('mathedu-step-hidden');
         }
