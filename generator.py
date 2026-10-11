@@ -880,7 +880,12 @@ def generate_html(data):
     sym_items = []
     for s in data.get("symbols", []):
         stxt = str(s.get("sym", "")).strip()
-        if stxt and not (stxt.startswith("$") and stxt.endswith("$")):
+        # ★근본수정: 이미 $ 수식기호를 포함한 sym은 재래핑 금지 ($k$ → $$ 이중래핑 방지).
+        # 종전 판정(startswith $ AND endswith $)은 "주사위 눈 $k$"처럼 중간에 $가 있는
+        # 혼합 문자열을 통과시켜 $주사위 눈 $k$$ 를 만들어 MathJax 디스플레이 모드가
+        # 기호 설명 전체를 삼키는 치명적 렌더 붕괴를 유발했음 (라이브 검증 확인).
+        # 따라서 "$" 문자가 하나라도 있으면 원문 그대로 사용.
+        if stxt and "$" not in stxt:
             stxt = f"${stxt}$"
         stxt = re.sub(r'(?<![a-zA-Z\\])\\frac(?=\{)', r'\\dfrac', stxt)
         desc_txt = _esc(s.get("desc", ""))
