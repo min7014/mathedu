@@ -269,7 +269,253 @@ def delegate_to_hermes(text):
     except Exception:
         return ''
 
+# ── 동적 모델 발견 (근본 해결: 하드코딩 모델명 제거) ──
+# 라이브 /v1/models 목록에서 :free 모델을 실시간 조회 → 프로브 → 살아있는 것만 폴백 체인에 등록.
+# 모델이 무료기간 종료/404로 죽어도 다음 실행 때 자동으로 우회하므로 "명목상 모델 문제"가 시스템을 멈추지 않음.
+_MODEL_CACHE = {"ts": 0, "chain": []}
+_MODEL_CACHE_TTL = 1800  # 30분
+
+def discover_free_models(token, timeout=20):
+    """Nous inference-api에서 사용 가능한 :free 모델 ID 목록을 라이브 조회."""
+    try:
+        req = urllib.request.Request(
+            'https://inference-api.nousresearch.com/v1/models',
+            headers={'Authorization': f'Bearer {token}'}
+        )
+        d = json.loads(urllib.request.urlopen(req, timeout=timeout).read().decode('utf-8'))
+        ids = [x.get('id', '') for x in d.get('data', [])]
+        return [i for i in ids if i and ':free' in i]
+    except Exception:
+        return []
+
+def probe_model(token, model, timeout=45):
+    """모델에 '2'를 반환하는 초경량 프로브를 보내 생존 여부 판정."""
+    payload = json.dumps({
+        "model": model,
+        "messages": [{"role": "user", "content": "1+1=? 숫자만 답해"}],
+        "max_tokens": 50
+    }).encode('utf-8')
+    req = urllib.request.Request(
+        'https://inference-api.nousresearch.com/v1/chat/completions',
+        data=payload,
+        headers={'Content-Type': 'application/json', 'Authorization': f'Bearer {token}'}
+    )
+    try:
+        resp = urllib.request.urlopen(req, timeout=timeout)
+        res = json.loads(resp.read().decode('utf-8'))
+        msg = res['choices'][0]['message']
+        return bool((msg.get('content') or msg.get('reasoning') or '').strip())
+    except Exception:
+        return False
+
+def resolve_model_chain(token):
+    """살아있는 free 모델 체인을 캐시 기반으로 반환. 캐시 만료/빈 체인이면 재발견."""
+    import time as _time
+    now = _time.time()
+    if _MODEL_CACHE["chain"] and (now - _MODEL_CACHE["ts"]) < _MODEL_CACHE_TTL:
+        return _MODEL_CACHE["chain"]
+
+    discovered = discover_free_models(token)
+    # 우선순위: step-5 → laguna-s → solar-mini4 → longcat → 나머지
+    def _rank(mid):
+        prefs = ["stepfun/step-5-preview", "poolside/laguna-s-2.1", "upstage/solar-mini4", "meituan/longcat-2.5"]
+        for idx, p in enumerate(prefs):
+            if p in mid:
+                return idx
+        return 99
+    discovered.sort(key=_rank)
+
+    chain = []
+    for mid in discovered:
+        if probe_model(token, mid):
+            chain.append(mid)
+        if len(chain) >= 3:  # 상위 3개만 확보하면 충분 (프로브 비용 절감)
+            break
+
+    if chain:
+        _MODEL_CACHE["chain"] = chain
+        _MODEL_CACHE["ts"] = now
+    return chain
+
+# ══════════════════════════════════════════════════════════════════════
+# [B방식] 안티그래비티 단일 인터페이스 아키텍처 보강
+# 원칙: 아래층(비예측 제약)은 LLM 불개입 · 위층(예측/대화)만 LLM 경유
+# ══════════════════════════════════════════════════════════════════════
+import hashlib
+
+# ── 1계층: 라우터 분리 ──
+# 메시지를 아래층(lower)/위층(upper)으로 결정론적 분류. 이 분류 자체가 LLM을 쓰지 않음.
+_LOWER_INTENT_RULES = [
+    ('asset_ratio',   ['자산비율', '슬라이스', '자산 배분', '자산배분']),
+    ('cash_floor',    ['현금 비율', '현금비율', 'cash floor', '캐시 플로어', '현금 바닥', '현금바닥', '현금 보유', '현금보유']),
+    ('collapse_gate', ['붕괴게이트', '붕괴 게이트', '붕괴게 이트', '생존 게이트', '서킷브레이커']),
+    ('bot_state',     ['봇 상태', '봇상태', '트레이딩 상태', '트레이딩상태', '포지션', '보유 종목', '보유종목', '잔고']),
+]
+
+def classify_message(query):
+    """결정론적 메시지 분류기 — 아래층(lower) 명령은 LLM 없이 처리 대상."""
+    if not query:
+        return ('upper', None)
+    q = query.lower()
+    for intent, keywords in _LOWER_INTENT_RULES:
+        for kw in keywords:
+            if kw in q:
+                return ('lower', intent)
+    return ('upper', None)
+
+
+# ── 2계층: 도구 화이트리스트 ──
+# 아래층 도구 = 검증된 결정론적 API 전용. 위층(LLM) 도구와 물리적 분리.
+LOWER_TOOL_WHITELIST = frozenset({
+    'bot_state_api',      # /api/state (결정론적 HTTP 조회)
+    'assets_history',     # assets_history.json (결정론적 파일 조회)
+    'deterministic_rule', # 규칙 엔진 (순수 함수, LLM 불개입)
+})
+
+def _lower_tool_bot_state():
+    """결정론적 봇 상태 조회 (HTTP). 봇 미가동 시 결정론적 '미가동' 반환."""
+    try:
+        req = urllib.request.Request('http://127.0.0.1:5000/api/state',
+                                     headers={'User-Agent': 'Antigravity-LowerTier/1.0'})
+        raw = urllib.request.urlopen(req, timeout=5).read().decode('utf-8')
+        return json.loads(raw), True
+    except Exception:
+        return None, False
+
+def _lower_tool_assets_history():
+    """결정론적 자산 이력 조회 (파일)."""
+    path = r'C:\Users\min\Desktop\Hermes\assets_history.json'
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        if isinstance(data, list) and data:
+            return data[-1], True
+    except Exception:
+        pass
+    return None, False
+
+# 아래층 규칙 엔진 — 순수 결정론 파라미터 (LLM 불개입 보장)
+_LOWER_RULES = {
+    'cash_floor_pct': 50.0,      # M-Parity 현금 바닥
+    'asset_ratio_pct': 50.0,     # 투자 자산비율
+    'collapse_gate_pct': -30.0,  # 붕괴 게이트 발동 임계 (총자산 -30%)
+    'base_assets': 10000.0,      # 기준 자산
+}
+
+def _rule_engine_cash_floor(state):
+    """현금 비율 규칙 판정 — 순수 결정론."""
+    if not state:
+        return None
+    cash = float(state.get('cash', 0) or 0)
+    total = float(state.get('total_assets', 0) or state.get('total', 0) or 0)
+    if total <= 0:
+        return None
+    ratio = cash / total * 100.0
+    floor = _LOWER_RULES['cash_floor_pct']
+    if ratio >= floor:
+        verdict = '정상'
+    elif ratio >= floor * 0.6:
+        verdict = '주의 (바닥 미달)'
+    else:
+        verdict = '위험 (바닥 심각 미달)'
+    return {'cash_pct': round(ratio, 2), 'threshold': floor, 'verdict': verdict}
+
+def _rule_engine_asset_ratio(state):
+    """자산비율(슬라이스) 규칙 판정 — 순수 결정론."""
+    if not state:
+        return None
+    total = float(state.get('total_assets', 0) or 0)
+    if total <= 0:
+        return None
+    invest = total * (_LOWER_RULES['asset_ratio_pct'] / 100.0)
+    return {'total': round(total, 0), 'invest_target': round(invest, 0),
+            'ratio_pct': _LOWER_RULES['asset_ratio_pct']}
+
+def _rule_engine_collapse_gate(state):
+    """붕괴게이트 규칙 판정 — 순수 결정론."""
+    if not state:
+        return None
+    total = float(state.get('total_assets', 0) or 0)
+    base = float(state.get('initial_assets', 0) or _LOWER_RULES['base_assets'])
+    if base <= 0:
+        base = _LOWER_RULES['base_assets']
+    pnl_pct = (total - base) / base * 100.0
+    gate = pnl_pct <= _LOWER_RULES['collapse_gate_pct']
+    return {'pnl_pct': round(pnl_pct, 2), 'gate_threshold': _LOWER_RULES['collapse_gate_pct'],
+            'gate_triggered': gate}
+
+def route_lower_tier(intent, query):
+    """아래층 명령 라우팅 — LLM 불개입, 결정론적 도구+규칙엔진만 사용."""
+    state, bot_alive = _lower_tool_bot_state()
+    if not state:
+        last, _ = _lower_tool_assets_history()
+        state = {'total_assets': (last.get('total_assets', 0) if last else 0), 'cash': 0}
+
+    src = '봇 가동 중' if bot_alive else '봇 미가동 — 마지막 기록 기준'
+
+    if intent == 'cash_floor':
+        r = _rule_engine_cash_floor(state)
+        if not r:
+            return None
+        return (f"[아래층·결정론] 현금 비율: {r['cash_pct']}% (바닥 {r['threshold']}%) → {r['verdict']}\n"
+                f"({src})")
+    if intent == 'asset_ratio':
+        r = _rule_engine_asset_ratio(state)
+        if not r:
+            return None
+        return (f"[아래층·결정론] 자산비율: 총 {r['total']:,.0f}원 × {r['ratio_pct']}% = 투자 {r['invest_target']:,.0f}원\n"
+                f"({src})")
+    if intent == 'collapse_gate':
+        r = _rule_engine_collapse_gate(state)
+        if not r:
+            return None
+        gate = '🚨 발동' if r['gate_triggered'] else '✅ 정상'
+        return (f"[아래층·결정론] 붕괴게이트: 손익 {r['pnl_pct']}% (임계 {r['gate_threshold']}%) → {gate}\n"
+                f"({src})")
+    if intent == 'bot_state':
+        if not bot_alive:
+            return ("[아래층·결정론] 봇 상태: 미가동\n"
+                    "(single_trader.py 대시보드 127.0.0.1:5000 응답 없음)")
+        pos = state.get('positions') or state.get('position') or '정보 없음'
+        return (f"[아래층·결정론] 봇 상태: 가동 중\n"
+                f"총자산: {float(state.get('total_assets', 0)):,.0f}원 / 현금: {float(state.get('cash', 0)):,.0f}원\n"
+                f"포지션: {pos}")
+    return None
+
+
+# ── 3계층: 감사 로그 분리 ──
+# 아래층 실행 로그는 LLM 응답 경로(INQUIRIES_LOG)와 별도 저장소에 기록.
+LOWER_AUDIT_LOG = os.path.join(REPO_DIR, '_ag_audit_lower.jsonl')
+
+def audit_lower_execution(intent, query, result):
+    """아래층 실행 감사 기록 — LLM 응답 경로와 물리적으로 분리된 저장소."""
+    try:
+        entry = {
+            'ts': datetime.now(KST).isoformat(),
+            'tier': 'lower',
+            'intent': intent,
+            'query': (query or '')[:200],
+            'result_sha': hashlib.sha256((result or '').encode('utf-8')).hexdigest()[:16],
+            'llm_involved': False,
+            'tools': sorted(LOWER_TOOL_WHITELIST & {'bot_state_api', 'deterministic_rule'}),
+        }
+        with open(LOWER_AUDIT_LOG, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+    except Exception:
+        pass  # 감사 로그 실패가 아래층 응답을 막지 않음
+
+
 def generate_ai_response(query, user_name="M님", image_path=None):
+    # ── [B방식] 1계층 라우터: 아래층 명령은 LLM 불개입으로 결정론적 처리 ──
+    if not image_path:
+        tier, intent = classify_message(query)
+        if tier == 'lower':
+            result = route_lower_tier(intent, query)
+            if result:
+                audit_lower_execution(intent, query, result)
+                return result
+            # 결과 없으면 위층(LLM)으로 자연스럽게 fall through
+
     # 0. PC 직접 제어 액션 감지 (음악 재생 등)
     if not image_path:
         action_resp = handle_pc_action(query)
@@ -307,7 +553,7 @@ def generate_ai_response(query, user_name="M님", image_path=None):
                 {"type": "image_url", "image_url": {"url": data_url}}
             ]
             payload = json.dumps({
-                "model": "stepfun/step-3.7-flash:free",
+                "model": resolve_model_chain(token)[0] if resolve_model_chain(token) else "stepfun/step-5-preview:free",
                 "messages": [
                     {"role": "system", "content": system_content},
                     {"role": "user", "content": user_content}
@@ -335,12 +581,10 @@ def generate_ai_response(query, user_name="M님", image_path=None):
         {"role": "user", "content": query}
     ]
 
-    candidate_models = [
-        "upstage/solar-pro4:free",
-        "stepfun/step-3.7-flash:free",
-        "inclusionai/ling-3.0-flash-fin:free",
-        "inclusionai/ling-3.0-flash-sante:free"
-    ]
+    # 동적 모델 체인 (죽은 모델 자동 우회). 실패 시 하드코딩 백업도 유지.
+    candidate_models = resolve_model_chain(token)
+    if not candidate_models:
+        candidate_models = ["stepfun/step-5-preview:free", "upstage/solar-mini4:free", "poolside/laguna-s-2.1:free"]
 
     last_err = None
     for model in candidate_models:
@@ -357,10 +601,14 @@ def generate_ai_response(query, user_name="M님", image_path=None):
         )
 
         try:
-            resp = urllib.request.urlopen(req, timeout=25)
+            resp = urllib.request.urlopen(req, timeout=60)
             res = json.loads(resp.read().decode('utf-8'))
-            answer = res['choices'][0]['message']['content'].strip()
-            return answer
+            msg = res['choices'][0]['message']
+            answer = (msg.get('content') or msg.get('reasoning') or "").strip()
+            if answer:
+                return answer
+            last_err = RuntimeError(f"{model}: 빈 응답")
+            continue
         except Exception as e:
             last_err = e
             continue
