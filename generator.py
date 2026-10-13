@@ -536,7 +536,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {{
   }}
 }}
 </style>
-<script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\\\(','\\\\)']]}}}};</script>
+<script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\(','\\)']]}}}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 <script src="../mathedu-i18n.js"></script>
 </head><body><div class="wrap">
