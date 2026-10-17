@@ -64,6 +64,11 @@ def _autofix_latex(s: str):
     out = []
     i = 0; n = len(s)
     while i < n:
+        if s[i:i+2] == "$$":
+            j = s.find("$$", i + 2)
+            if j == -1:
+                out.append(s[i:]); break
+            out.append(s[i:j + 2]); i = j + 2; continue
         if s[i] == "$":
             j = s.find("$", i + 1)
             if j == -1:

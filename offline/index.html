@@ -6,6 +6,13 @@
 <meta name="author" content="mathedu">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'"></script>
 <style>
 :root {
   --bg: #050811; --card: rgba(15, 23, 42, 0.72); --card2: rgba(30, 41, 59, 0.75); --line: rgba(255,255,255,.12);
@@ -37,8 +44,19 @@ h1 {
 .banner {
   background: linear-gradient(135deg, rgba(56,189,248,.15), rgba(15,23,42,.8));
   border: 1px solid rgba(56,189,248,.38); border-radius: var(--radius);
-  padding: 22px 26px; margin-bottom: 30px; box-shadow: var(--glass-shadow);
+  padding: 22px 26px; margin-bottom: 20px; box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+.search-box {
+  margin-bottom: 20px; position: relative;
+}
+.search-input {
+  width: 100%; background: rgba(15,23,42,0.85); border: 1.5px solid rgba(56,189,248,0.35);
+  border-radius: 14px; padding: 13px 18px; color: #fff; font-size: 0.95rem;
+  font-family: inherit; outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.search-input:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
 }
 .list { display: grid; gap: 14px; }
 .card {
@@ -79,6 +97,9 @@ h1 {
   background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
   box-shadow: 0 2px 10px rgba(56,189,248,0.45);
 }
+.bilingual-en { display: none; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en { display: inline !important; }
 </style>
 </head>
 <body>
@@ -104,10 +125,14 @@ h1 {
     </div>
   </div>
 
-  <div class="list">
-    <div class="card">
+  <div class="search-box">
+    <input type="text" id="offlineSearchInput" class="search-input" placeholder="🔍 문제 제목, 키워드(수열, 미분, 포물선, 확률 등), 슬러그 실시간 검색..." oninput="filterOfflineCards()">
+  </div>
+
+  <div class="list" id="offlineList">
+    <div class="card" data-slug="1b623c24">
       <div>
-        <a href="1b623c24.html" class="card-title">📘 카드 뒤집기 4회 반복 후 모두 앞면일 확률 (자동 폴백 아님·직접제작)📘 Probability of all heads after flipping the card 4 times (not automatic fallback, made manually)</a>
+        <a href="1b623c24.html" class="card-title">📘 <span class="bilingual-ko">카드 뒤집기 4회 반복 후 모두 앞면일 확률 (기초→심화)</span><span class="bilingual-en">Probability of All Heads After Flipping Cards 4 Times (Fundamentals → Advanced)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>1b623c24</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/1b623c24.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -118,9 +143,9 @@ h1 {
         <a href="1b623c24.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="51908207">
       <div>
-        <a href="51908207.html" class="card-title">📘 카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 확률 (기초→심화)</a>
+        <a href="51908207.html" class="card-title">📘 <span class="bilingual-ko">카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 확률 (기초→심화)</span><span class="bilingual-en">Card Swap Dice Game · Conditional Probability of Rolling 6 on the 3rd Trial Given Return to Initial State After 4 Trials</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>51908207</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/51908207.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -131,9 +156,9 @@ h1 {
         <a href="51908207.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="a33ab59b">
       <div>
-        <a href="a33ab59b.html" class="card-title">📘 쌍곡선 PF&#x27; - PF = 2 조건의 점 P좌표와 삼각형 넓이 (기초→심화)</a>
+        <a href="a33ab59b.html" class="card-title">📘 <span class="bilingual-ko">쌍곡선 PF&#x27; - PF = 2 조건의 점 P좌표와 삼각형 넓이 (기초→심화)</span><span class="bilingual-en">Hyperbola Condition PF&#x27; - PF = 2 · Coordinates of Point P and Triangle Area</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>a33ab59b</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/a33ab59b.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -144,7 +169,7 @@ h1 {
         <a href="a33ab59b.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="ac8dc374">
       <div>
         <a href="ac8dc374.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 심층 분석</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #21] In-Depth Pedagogical Analysis: Cubic Function & Absolute Value Differentiability</span></a>
         <div class="card-meta">
@@ -157,9 +182,9 @@ h1 {
         <a href="ac8dc374.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c1092101">
       <div>
-        <a href="c1092101.html" class="card-title">📘 [2025학년도 9월 고1 21번] 원의 방정식과 직선의 위치 관계 및 거리의 최댓값📘 [September 2025, High School 1st Class No. 21] Equation of a circle and positional relationship of straight lines and maximum value of distance</a>
+        <a href="c1092101.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고1 21번] 원의 방정식과 직선의 위치 관계 및 거리의 최댓값</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 10 #21] Equation of a circle and positional relationship of straight lines and maximum value of distance</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c1092101</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c1092101.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -170,9 +195,9 @@ h1 {
         <a href="c1092101.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c2092102">
       <div>
-        <a href="c2092102.html" class="card-title">📘 [2025학년도 9월 고2 21번] 삼각함수의 그래프와 주기를 이용한 삼각형의 넓이📘 [September 2025, High School 2nd Class No. 21] Area of ​​a triangle using graphs and cycles of trigonometric functions</a>
+        <a href="c2092102.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고2 21번] 삼각함수의 그래프와 주기를 이용한 삼각형의 넓이</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 11 #21] Area of ​​a triangle using graphs and cycles of trigonometric functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2092102</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2092102.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -183,9 +208,9 @@ h1 {
         <a href="c2092102.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270901">
       <div>
-        <a href="c270901.html" class="card-title">📘 [2027학년도 9월 고3 1번] 거듭제곱과 지수법칙 계산📘 [2027 AY Sep Mock Exam Grade 12 #1] Exponent Rules & Powers Calculation</a>
+        <a href="c270901.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 1번] 거듭제곱과 지수법칙 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #1] Exponent Rules & Powers Calculation</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270901</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270901.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -196,9 +221,9 @@ h1 {
         <a href="c270901.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270902">
       <div>
-        <a href="c270902.html" class="card-title">📘 [2027학년도 9월 고3 2번] 미분계수의 정의와 다항함수의 도함수📘 [2027 AY Sep Mock Exam Grade 12 #2] Definition of differential coefficients and derivatives of polynomial functions</a>
+        <a href="c270902.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 2번] 미분계수의 정의와 다항함수의 도함수</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #2] Definition of differential coefficients and derivatives of polynomial functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270902</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270902.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -209,9 +234,9 @@ h1 {
         <a href="c270902.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270903">
       <div>
-        <a href="c270903.html" class="card-title">📘 [2027학년도 9월 고3 3번] 등차수열의 성질과 특정 항 구하기📘 [September 2027, High School 3rd Class #3] Properties of arithmetic sequences and finding specific terms</a>
+        <a href="c270903.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 3번] 등차수열의 성질과 특정 항 구하기</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #3] Properties of arithmetic sequences and finding specific terms</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270903</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270903.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -222,9 +247,9 @@ h1 {
         <a href="c270903.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270904">
       <div>
-        <a href="c270904.html" class="card-title">📘 [2027학년도 9월 고3 4번] 함수의 연속 조건과 미정계수 결정📘 [2027 AY Sep Mock Exam Grade 12 #4] Continuity Conditions of Functions & Determination of Indeterminate Coefficients</a>
+        <a href="c270904.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 4번] 함수의 연속 조건과 미정계수 결정</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #4] Continuity Conditions of Functions & Determination of Indeterminate Coefficients</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270904</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270904.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -235,9 +260,9 @@ h1 {
         <a href="c270904.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270905">
       <div>
-        <a href="c270905.html" class="card-title">📘 [2027학년도 9월 고3 5번] 다항함수의 정적분 계산📘 [2027 AY Sep Mock Exam Grade 12 #5] Calculating definite integrals of polynomial functions</a>
+        <a href="c270905.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 5번] 다항함수의 정적분 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #5] Calculating definite integrals of polynomial functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270905</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270905.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -248,9 +273,9 @@ h1 {
         <a href="c270905.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270906">
       <div>
-        <a href="c270906.html" class="card-title">📘 [2027학년도 9월 고3 6번] 삼각함수의 최댓값과 주기📘 [2027 AY Sep Mock Exam Grade 12 #6] Maximum value and period of trigonometric functions</a>
+        <a href="c270906.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 6번] 삼각함수의 최댓값과 주기</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #6] Maximum value and period of trigonometric functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270906</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270906.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -261,9 +286,9 @@ h1 {
         <a href="c270906.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270907">
       <div>
-        <a href="c270907.html" class="card-title">📘 [2027학년도 9월 고3 7번] 도함수를 활용한 다항함수의 극댓값 계산📘 [2027 AY Sep Mock Exam Grade 12 #7] Calculating the local maximum of a polynomial function using the derivative</a>
+        <a href="c270907.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 7번] 도함수를 활용한 다항함수의 극댓값 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #7] Calculating the local maximum of a polynomial function using the derivative</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270907</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270907.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -274,9 +299,9 @@ h1 {
         <a href="c270907.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270908">
       <div>
-        <a href="c270908.html" class="card-title">📘 [2027학년도 9월 고3 8번] 수열의 일반항과 비례식 계산📘 [2027 AY Sep Mock Exam Grade 12 #8] Calculation of general terms and proportional expressions in sequence</a>
+        <a href="c270908.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 8번] 수열의 일반항과 비례식 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #8] Calculation of general terms and proportional expressions in sequence</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270908</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270908.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -287,9 +312,9 @@ h1 {
         <a href="c270908.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270909">
       <div>
-        <a href="c270909.html" class="card-title">📘 [2027학년도 9월 고3 9번] 위치의 미분과 두 점의 속도·가속도📘 [September 2027, High School 3rd Class, No. 9] Differentiation of position and velocity/acceleration of two points</a>
+        <a href="c270909.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 9번] 위치의 미분과 두 점의 속도·가속도</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #9] Differentiation of position and velocity/acceleration of two points</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270909</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270909.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -300,9 +325,9 @@ h1 {
         <a href="c270909.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270910">
       <div>
-        <a href="c270910.html" class="card-title">📘 [2027학년도 9월 고3 10번] 지수함수의 그래프와 선분의 길이를 이용한 미정계수 결정📘 [2027 AY Sep Mock Exam Grade 12 #10] Determination of undetermined coefficient using graph of exponential function and length of line segment</a>
+        <a href="c270910.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 10번] 지수함수의 그래프와 선분의 길이를 이용한 미정계수 결정</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #10] Determination of undetermined coefficient using graph of exponential function and length of line segment</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270910</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270910.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -313,9 +338,9 @@ h1 {
         <a href="c270910.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270911">
       <div>
-        <a href="c270911.html" class="card-title">📘 [2027학년도 9월 고3 11번] 미분과 적분의 관계 및 다항함수의 결정📘 [2027 AY Sep Mock Exam Grade 12 #11] Relationship between differentiation and integration and determination of polynomial functions</a>
+        <a href="c270911.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 11번] 미분과 적분의 관계 및 다항함수의 결정</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #11] Relationship between differentiation and integration and determination of polynomial functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270911</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270911.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -326,9 +351,9 @@ h1 {
         <a href="c270911.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270912">
       <div>
-        <a href="c270912.html" class="card-title">📘 [2027학년도 9월 고3 12번] 사인법칙과 코사인법칙을 이용한 도형 계산📘 [2027 AY Sep Mock Exam Grade 12 #12] Calculating shapes using the law of sines and the law of cosines</a>
+        <a href="c270912.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 12번] 사인법칙과 코사인법칙을 이용한 도형 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #12] Calculating shapes using the law of sines and the law of cosines</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270912</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270912.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -339,9 +364,9 @@ h1 {
         <a href="c270912.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270913">
       <div>
-        <a href="c270913.html" class="card-title">📘 [2027학년도 9월 고3 13번] 이차함수의 정적분과 합답형(ㄱ, ㄴ, ㄷ) 추론📘 [2027 AY Sep Mock Exam Grade 12 #13] Definite integral and summation type (ㄱ, ㄴ, ㄷ) inference of quadratic functions</a>
+        <a href="c270913.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 13번] 이차함수의 정적분과 합답형(ㄱ, ㄴ, ㄷ) 추론</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #13] Definite integral and summation type (ㄱ, ㄴ, ㄷ) inference of quadratic functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270913</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270913.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -352,9 +377,9 @@ h1 {
         <a href="c270913.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270914">
       <div>
-        <a href="c270914.html" class="card-title">📘 [2027학년도 9월 고3 14번] 거듭제곱근과 수열의 합이 자연수가 되는 조건📘 [September 2027, high school senior number 14] Condition for the sum of a power root and a sequence to be a natural number</a>
+        <a href="c270914.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 14번] 거듭제곱근과 수열의 합이 자연수가 되는 조건</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #14] Condition for the sum of a power root and a sequence to be a natural number</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270914</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270914.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -365,9 +390,9 @@ h1 {
         <a href="c270914.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270915">
       <div>
-        <a href="c270915.html" class="card-title">📘 [2027학년도 9월 고3 15번] 극한의 존재 조건과 최고난도 이차함수 추론📘 [2027 AY Sep Mock Exam Grade 12 #15] Extreme existence conditions and the most difficult quadratic function inference</a>
+        <a href="c270915.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 15번] 극한의 존재 조건과 최고난도 이차함수 추론</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #15] Extreme existence conditions and the most difficult quadratic function inference</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270915</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270915.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -378,9 +403,9 @@ h1 {
         <a href="c270915.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270916">
       <div>
-        <a href="c270916.html" class="card-title">📘 [2027학년도 9월 고3 16번] 밑 변환을 활용한 로그방정식 풀이📘 [September 2027 High School 3rd Class No. 16] Solving logarithmic equations using base transformation</a>
+        <a href="c270916.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 16번] 밑 변환을 활용한 로그방정식 풀이</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #16] Solving logarithmic equations using base transformation</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270916</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270916.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -391,9 +416,9 @@ h1 {
         <a href="c270916.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270917">
       <div>
-        <a href="c270917.html" class="card-title">📘 [2027학년도 9월 고3 17번] 부정적분과 함숫값 계산📘 [September 2027 High School 3rd Class No. 17] Calculating indefinite integrals and function values</a>
+        <a href="c270917.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 17번] 부정적분과 함숫값 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #17] Calculating indefinite integrals and function values</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270917</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270917.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -404,9 +429,9 @@ h1 {
         <a href="c270917.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270918">
       <div>
-        <a href="c270918.html" class="card-title">📘 [2027학년도 9월 고3 18번] 짝수·홀수 규칙 수열의 귀납적 추론📘 [September 2027 High School 3rd Class No. 18] Inductive reasoning of even and odd regular sequences</a>
+        <a href="c270918.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 18번] 짝수·홀수 규칙 수열의 귀납적 추론</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #18] Inductive reasoning of even and odd regular sequences</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270918</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270918.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -417,9 +442,9 @@ h1 {
         <a href="c270918.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270919">
       <div>
-        <a href="c270919.html" class="card-title">📘 [2027학년도 9월 고3 19번] 삼차함수의 접선의 방정식과 좌표 대입📘 [2027 AY Sep Mock Exam Grade 12 #19] Substituting the equation and coordinates of the tangent to the cubic function</a>
+        <a href="c270919.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 19번] 삼차함수의 접선의 방정식과 좌표 대입</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #19] Substituting the equation and coordinates of the tangent to the cubic function</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270919</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270919.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -430,9 +455,9 @@ h1 {
         <a href="c270919.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270920">
       <div>
-        <a href="c270920.html" class="card-title">📘 [2027학년도 9월 고3 20번] 삼각함수의 대칭성과 삼각형 넓이비 빈칸추론📘 [2027 AY Sep Mock Exam Grade 12 #20] Symmetry of trigonometric functions and triangle area ratio, blank deduction</a>
+        <a href="c270920.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 20번] 삼각함수의 대칭성과 삼각형 넓이비 빈칸추론</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #20] Symmetry of trigonometric functions and triangle area ratio, blank deduction</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270920</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270920.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -443,9 +468,9 @@ h1 {
         <a href="c270920.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270921">
       <div>
-        <a href="c270921.html" class="card-title">📘 [2027학년도 9월 고3 21번] 삼차함수의 실근 조건과 미분가능성📘 [2027 AY Sep Mock Exam Grade 12 #21] Real root conditions and differentiability of cubic functions</a>
+        <a href="c270921.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 21번] 삼차함수의 실근 조건과 미분가능성</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #21] Real root conditions and differentiability of cubic functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270921</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270921.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -456,9 +481,9 @@ h1 {
         <a href="c270921.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270922">
       <div>
-        <a href="c270922.html" class="card-title">📘 [2027학년도 9월 고3 22번] 지수·로그함수와 직사각형의 기하학적 성질📘 [September 2027 High School 3rd Class No. 22] Exponential/logarithmic functions and geometric properties of rectangles</a>
+        <a href="c270922.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 22번] 지수·로그함수와 직사각형의 기하학적 성질</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #22] Exponential/logarithmic functions and geometric properties of rectangles</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270922</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270922.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -469,9 +494,9 @@ h1 {
         <a href="c270922.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270923">
       <div>
-        <a href="c270923.html" class="card-title">📘 [2027학년도 9월 고3 23번] 자연로그함수의 극한 기본 계산📘 [September 2027 High School 3rd Class No. 23] Basic calculation of limits of natural log functions</a>
+        <a href="c270923.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 23번] 자연로그함수의 극한 기본 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #23] Basic calculation of limits of natural log functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270923</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270923.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -482,9 +507,9 @@ h1 {
         <a href="c270923.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270924">
       <div>
-        <a href="c270924.html" class="card-title">📘 [2027학년도 9월 고3 24번] 부분적분법을 이용한 정적분 계산📘 [2027 AY Sep Mock Exam Grade 12 #24] Definite integral calculation using partial integration method</a>
+        <a href="c270924.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 24번] 부분적분법을 이용한 정적분 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #24] Definite integral calculation using partial integration method</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270924</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270924.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -495,9 +520,9 @@ h1 {
         <a href="c270924.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270925">
       <div>
-        <a href="c270925.html" class="card-title">📘 [2027학년도 9월 고3 25번] 등비수열의 수렴 조건과 정수 개수 카운팅📘 [No. 25, High School 3, September 2027] Convergence conditions for geometric sequences and counting integers</a>
+        <a href="c270925.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 25번] 등비수열의 수렴 조건과 정수 개수 카운팅</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #25] Convergence conditions for geometric sequences and counting integers</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270925</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270925.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -508,9 +533,9 @@ h1 {
         <a href="c270925.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270926">
       <div>
-        <a href="c270926.html" class="card-title">📘 [2027학년도 9월 고3 26번] 유리함수의 접선과 부분분수 정적분 넓이📘 [No. 26, High School 3, September 2027] Tangents of rational functions and area of ​​definite integrals of partial fractions</a>
+        <a href="c270926.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 26번] 유리함수의 접선과 부분분수 정적분 넓이</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #26] Tangents of rational functions and area of ​​definite integrals of partial fractions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270926</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270926.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -521,9 +546,9 @@ h1 {
         <a href="c270926.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270927">
       <div>
-        <a href="c270927.html" class="card-title">📘 [2027학년도 9월 고3 27번] 합성함수의 미분법과 역함수 관계📘 [High School 3rd Class No. 27, September 2027] Differentiation and inverse function relationships of composite functions</a>
+        <a href="c270927.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 27번] 합성함수의 미분법과 역함수 관계</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #27] Differentiation and inverse function relationships of composite functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270927</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270927.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -534,9 +559,9 @@ h1 {
         <a href="c270927.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270928">
       <div>
-        <a href="c270928.html" class="card-title">📘 [2027학년도 9월 고3 28번] 원과 접선, 삼각함수의 음함수 미분법📘 [2027 AY Sep Mock Exam Grade 12 #28] Implicit differential calculus of circles, tangents, and trigonometric functions</a>
+        <a href="c270928.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 28번] 원과 접선, 삼각함수의 음함수 미분법</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #28] Implicit differential calculus of circles, tangents, and trigonometric functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270928</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270928.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -547,9 +572,9 @@ h1 {
         <a href="c270928.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270929">
       <div>
-        <a href="c270929.html" class="card-title">📘 [2027학년도 9월 고3 29번] 등비수열과 무한급수의 수렴 조건 추론📘 [No. 29, High School 3, September 2027] Inference on convergence conditions for geometric sequences and infinite series</a>
+        <a href="c270929.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 29번] 등비수열과 무한급수의 수렴 조건 추론</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #29] Inference on convergence conditions for geometric sequences and infinite series</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270929</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270929.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -560,9 +585,9 @@ h1 {
         <a href="c270929.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c270930">
       <div>
-        <a href="c270930.html" class="card-title">📘 [2027학년도 9월 고3 30번] 치환적분법과 역함수 정적분의 최고난도 계산📘 [High School 30th September 2027] Highest difficulty calculation of substitution integral method and inverse function definite integral</a>
+        <a href="c270930.html" class="card-title">📘 <span class="bilingual-ko">[2027학년도 9월 고3 30번] 치환적분법과 역함수 정적분의 최고난도 계산</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #30] Highest difficulty calculation of substitution integral method and inverse function definite integral</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270930</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270930.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -573,9 +598,9 @@ h1 {
         <a href="c270930.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30901">
       <div>
-        <a href="c30901.html" class="card-title">📘 [2025학년도 9월 고3 1번] 거듭제곱근과 지수법칙 계산📘 [2025 AY Sep Mock Exam Grade 12 #1] Calculating power roots and exponent laws</a>
+        <a href="c30901.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 1번] 거듭제곱근과 지수법칙 계산</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #1] Calculating power roots and exponent laws</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30901</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30901.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -586,9 +611,9 @@ h1 {
         <a href="c30901.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30902">
       <div>
-        <a href="c30902.html" class="card-title">📘 [2025학년도 9월 고3 2번] 미분계수의 정의와 다항함수의 도함수📘 [2025 AY Sep Mock Exam Grade 12 #2] Definition of differential coefficients and derivatives of polynomial functions</a>
+        <a href="c30902.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 2번] 미분계수의 정의와 다항함수의 도함수</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #2] Definition of differential coefficients and derivatives of polynomial functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30902</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30902.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -599,9 +624,9 @@ h1 {
         <a href="c30902.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30903">
       <div>
-        <a href="c30903.html" class="card-title">📘 [2025학년도 9월 고3 3번] 등비수열의 일반항과 조건의 연립📘 [2025 AY Sep Mock Exam Grade 12 #3] Combination of general terms and conditions of geometric sequence</a>
+        <a href="c30903.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 3번] 등비수열의 일반항과 조건의 연립</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #3] Combination of general terms and conditions of geometric sequence</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30903</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30903.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -612,9 +637,9 @@ h1 {
         <a href="c30903.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30904">
       <div>
-        <a href="c30904.html" class="card-title">📘 [2025학년도 9월 고3 4번] 함수의 그래프에서 좌극한과 우극한의 판독📘 [September 2025, high school seniors, number 4] Interpreting the left and right limits in the graph of a function</a>
+        <a href="c30904.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 4번] 함수의 그래프에서 좌극한과 우극한의 판독</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #4] Interpreting the left and right limits in the graph of a function</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30904</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30904.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -625,9 +650,9 @@ h1 {
         <a href="c30904.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30905">
       <div>
-        <a href="c30905.html" class="card-title">📘 [2025학년도 9월 고3 5번] 곱의 미분법과 미분계수의 계산📘 [2025 AY Sep Mock Exam Grade 12 #5] Differentiation of products and calculation of differential coefficients</a>
+        <a href="c30905.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 5번] 곱의 미분법과 미분계수의 계산</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #5] Differentiation of products and calculation of differential coefficients</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30905</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30905.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -638,9 +663,9 @@ h1 {
         <a href="c30905.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30906">
       <div>
-        <a href="c30906.html" class="card-title">📘 [2025학년도 9월 고3 6번] 삼각함수의 각 변환과 삼각함수의 덧셈📘 [September 2025, High School 3, No. 6] Each conversion of trigonometric functions and addition of trigonometric functions</a>
+        <a href="c30906.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 6번] 삼각함수의 각 변환과 삼각함수의 덧셈</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #6] Each conversion of trigonometric functions and addition of trigonometric functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30906</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30906.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -651,9 +676,9 @@ h1 {
         <a href="c30906.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30907">
       <div>
-        <a href="c30907.html" class="card-title">📘 [2025학년도 9월 고3 7번] 구간별 함수의 연속성 조건과 이차방정식📘 [2025 AY Sep Mock Exam Grade 12 #7] Continuity conditions and quadratic equations for sectional functions</a>
+        <a href="c30907.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 7번] 구간별 함수의 연속성 조건과 이차방정식</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #7] Continuity conditions and quadratic equations for sectional functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30907</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30907.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -664,9 +689,9 @@ h1 {
         <a href="c30907.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30908">
       <div>
-        <a href="c30908.html" class="card-title">📘 [2025학년도 9월 고3 8번] 로그의 성질과 치환을 이용한 방정식📘 [2025 AY Sep Mock Exam Grade 12 #8] Equations using logarithmic properties and substitution</a>
+        <a href="c30908.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 8번] 로그의 성질과 치환을 이용한 방정식</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #8] Equations using logarithmic properties and substitution</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30908</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30908.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -677,9 +702,9 @@ h1 {
         <a href="c30908.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30909">
       <div>
-        <a href="c30909.html" class="card-title">📘 [2025학년도 9월 고3 9번] 정적분의 성질과 다항함수의 정적분📘 [2025 AY Sep Mock Exam Grade 12 #9] Properties of definite integrals and definite integrals of polynomial functions</a>
+        <a href="c30909.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 9번] 정적분의 성질과 다항함수의 정적분</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #9] Properties of definite integrals and definite integrals of polynomial functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30909</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30909.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -690,9 +715,9 @@ h1 {
         <a href="c30909.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30910">
       <div>
-        <a href="c30910.html" class="card-title">📘 [2025학년도 9월 고3 10번] 사인법칙과 직각삼각형의 피타고라스 정리📘 [2025 AY Sep Mock Exam Grade 12 #10] Law of Sines and Pythagorean Theorem of Right Triangles</a>
+        <a href="c30910.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 10번] 사인법칙과 직각삼각형의 피타고라스 정리</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #10] Law of Sines and Pythagorean Theorem of Right Triangles</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30910</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30910.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -703,9 +728,9 @@ h1 {
         <a href="c30910.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30911">
       <div>
-        <a href="c30911.html" class="card-title">📘 [2025학년도 9월 고3 11번] 수직선 위를 움직이는 두 점의 위치와 가속도📘 [September 2025 High School 3rd Class No. 11] Position and acceleration of two points moving on a vertical line</a>
+        <a href="c30911.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 11번] 수직선 위를 움직이는 두 점의 위치와 가속도</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #11] Position and acceleration of two points moving on a vertical line</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30911</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30911.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -716,9 +741,9 @@ h1 {
         <a href="c30911.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30912">
       <div>
-        <a href="c30912.html" class="card-title">📘 [2025학년도 9월 고3 12번] 등차수열과 부호 교대 합으로 정의된 수열📘 [2025 AY Sep Mock Exam Grade 12 #12] Sequence defined as the sum of an arithmetic sequence and alternating signs</a>
+        <a href="c30912.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 12번] 등차수열과 부호 교대 합으로 정의된 수열</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #12] Sequence defined as the sum of an arithmetic sequence and alternating signs</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30912</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30912.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -729,9 +754,9 @@ h1 {
         <a href="c30912.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30913">
       <div>
-        <a href="c30913.html" class="card-title">📘 [2025학년도 9월 고3 13번] 대칭인 이차함수와 정적분 넓이 조건📘 [2025 AY Sep Mock Exam Grade 12 #13] Symmetric quadratic function and definite integral area condition</a>
+        <a href="c30913.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 13번] 대칭인 이차함수와 정적분 넓이 조건</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #13] Symmetric quadratic function and definite integral area condition</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30913</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30913.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -742,9 +767,9 @@ h1 {
         <a href="c30913.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30914">
       <div>
-        <a href="c30914.html" class="card-title">📘 [2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점📘 [September 2025, high school senior number 14] Inverse function symmetry of exponential and logarithmic functions and intersection of circles</a>
+        <a href="c30914.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #14] Inverse function symmetry of exponential and logarithmic functions and intersection of circles</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30914</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30914.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -755,9 +780,9 @@ h1 {
         <a href="c30914.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30915">
       <div>
-        <a href="c30915.html" class="card-title">📘 [2025학년도 9월 고3 15번] 정적분으로 정의된 함수와 다항함수의 결정📘 [September 2025, High School 3, No. 15] Determination of functions and polynomial functions defined by definite integrals</a>
+        <a href="c30915.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 15번] 정적분으로 정의된 함수와 다항함수의 결정</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #15] Determination of functions and polynomial functions defined by definite integrals</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30915</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30915.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -768,9 +793,9 @@ h1 {
         <a href="c30915.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30916">
       <div>
-        <a href="c30916.html" class="card-title">📘 [2025학년도 9월 고3 16번] 로그방정식과 진수 조건 (단답형)📘 [2025 AY Sep Mock Exam Grade 12 #16] Logarithmic equations and base conditions (short answer type)</a>
+        <a href="c30916.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 16번] 로그방정식과 진수 조건 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #16] Logarithmic equations and base conditions (short answer type)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30916</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30916.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -781,9 +806,9 @@ h1 {
         <a href="c30916.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30917">
       <div>
-        <a href="c30917.html" class="card-title">📘 [2025학년도 9월 고3 17번] 부정적분과 적분상수의 결정 (단답형)📘 [2025 AY Sep Mock Exam Grade 12 #17] Determination of indefinite integrals and integral constants (short answer type)</a>
+        <a href="c30917.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 17번] 부정적분과 적분상수의 결정 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #17] Determination of indefinite integrals and integral constants (short answer type)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30917</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30917.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -794,9 +819,9 @@ h1 {
         <a href="c30917.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30918">
       <div>
-        <a href="c30918.html" class="card-title">📘 [2025학년도 9월 고3 18번] 시그마의 전개와 수열의 합 계산 (단답형)📘 [2025 AY Sep Mock Exam Grade 12 #18] Sigma expansion and calculation of the sum of a sequence (short answer)</a>
+        <a href="c30918.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 18번] 시그마의 전개와 수열의 합 계산 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #18] Sigma expansion and calculation of the sum of a sequence (short answer)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30918</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30918.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -807,9 +832,9 @@ h1 {
         <a href="c30918.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30919">
       <div>
-        <a href="c30919.html" class="card-title">📘 [2025학년도 9월 고3 19번] 삼차함수의 극대·극소와 미지수 결정 (단답형)📘 [2025 AY Sep Mock Exam Grade 12 #19] Determination of maximum, minimum and unknowns of cubic function (short answer type)</a>
+        <a href="c30919.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 19번] 삼차함수의 극대·극소와 미지수 결정 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #19] Determination of maximum, minimum and unknowns of cubic function (short answer type)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30919</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30919.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -820,9 +845,9 @@ h1 {
         <a href="c30919.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30920">
       <div>
-        <a href="c30920.html" class="card-title">📘 [2025학년도 9월 고3 20번] 삼각함수의 그래프와 실근의 개수 (단답형)📘 [2025 AY Sep Mock Exam Grade 12 #20] Graphs of trigonometric functions and number of real roots (short answer)</a>
+        <a href="c30920.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 20번] 삼각함수의 그래프와 실근의 개수 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #20] Graphs of trigonometric functions and number of real roots (short answer)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30920</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30920.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -833,9 +858,9 @@ h1 {
         <a href="c30920.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30921">
       <div>
-        <a href="c30921.html" class="card-title">📘 [2025학년도 9월 고3 21번] 부등식을 만족시키는 삼차함수의 도함수 추론 (단답형)📘 [2025 AY Sep Mock Exam Grade 12 #21] Inference of the derivative of a cubic function that satisfies an inequality (short answer)</a>
+        <a href="c30921.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 21번] 부등식을 만족시키는 삼차함수의 도함수 추론 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #21] Inference of the derivative of a cubic function that satisfies an inequality (short answer)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30921</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30921.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -846,9 +871,9 @@ h1 {
         <a href="c30921.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30922">
       <div>
-        <a href="c30922.html" class="card-title">📘 [2025학년도 9월 고3 22번] 수열의 귀납적 정의와 분기 추론 (단답형)📘 [2025 AY Sep Mock Exam Grade 12 #22] Inductive definition of sequence and branching inference (short answer type)</a>
+        <a href="c30922.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 22번] 수열의 귀납적 정의와 분기 추론 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #22] Inductive definition of sequence and branching inference (short answer type)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30922</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30922.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -859,9 +884,9 @@ h1 {
         <a href="c30922.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30923">
       <div>
-        <a href="c30923.html" class="card-title">📘 [2025학년도 9월 고3 미적분 23번] 삼각함수의 기본 극한📘 [September 2025, High School 3rd Calculus No. 23] Basic limits of trigonometric functions</a>
+        <a href="c30923.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 23번] 삼각함수의 기본 극한</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #23] Basic limits of trigonometric functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30923</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30923.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -872,9 +897,9 @@ h1 {
         <a href="c30923.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30924">
       <div>
-        <a href="c30924.html" class="card-title">📘 [2025학년도 9월 고3 미적분 24번] 지수·로그함수의 부정적분과 접선의 기울기📘 [Calculus No. 24 for high school seniors, September 2025] Indefinite integrals of exponential and logarithmic functions and slope of tangent lines</a>
+        <a href="c30924.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 24번] 지수·로그함수의 부정적분과 접선의 기울기</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #24] Indefinite integrals of exponential and logarithmic functions and slope of tangent lines</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30924</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30924.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -885,9 +910,9 @@ h1 {
         <a href="c30924.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30925">
       <div>
-        <a href="c30925.html" class="card-title">📘 [2025학년도 9월 고3 미적분 25번] 등비수열의 극한과 수렴 조건📘 [Calculus No. 25 for high school seniors, September 2025] Limits and convergence conditions of geometric sequences</a>
+        <a href="c30925.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 25번] 등비수열의 극한과 수렴 조건</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #25] Limits and convergence conditions of geometric sequences</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30925</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30925.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -898,9 +923,9 @@ h1 {
         <a href="c30925.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30926">
       <div>
-        <a href="c30926.html" class="card-title">📘 [2025학년도 9월 고3 미적분 26번] 입체도형의 부피와 치환·부분적분📘 [Calculus No. 26 for high school seniors, September 2025] Volume and substitution/partial integration of three-dimensional figures</a>
+        <a href="c30926.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 26번] 입체도형의 부피와 치환·부분적분</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #26] Volume and substitution/partial integration of three-dimensional figures</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30926</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30926.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -911,9 +936,9 @@ h1 {
         <a href="c30926.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30927">
       <div>
-        <a href="c30927.html" class="card-title">📘 [2025학년도 9월 고3 미적분 27번] 합성함수의 미분법과 특수각 대입📘 [Calculus No. 27 for high school seniors, September 2025] Differential calculus of composite functions and special angle substitution</a>
+        <a href="c30927.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 27번] 합성함수의 미분법과 특수각 대입</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #27] Differential calculus of composite functions and special angle substitution</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30927</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30927.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -924,9 +949,9 @@ h1 {
         <a href="c30927.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30928">
       <div>
-        <a href="c30928.html" class="card-title">📘 [2025학년도 9월 고3 미적분 28번] 역함수의 정적분과 치환·부분적분📘 [Calculus No. 28 for high school seniors, September 2025] Definite integral and substitution/partial integration of inverse functions</a>
+        <a href="c30928.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 28번] 역함수의 정적분과 치환·부분적분</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #28] Definite integral and substitution/partial integration of inverse functions</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30928</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30928.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -937,9 +962,9 @@ h1 {
         <a href="c30928.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30929">
       <div>
-        <a href="c30929.html" class="card-title">📘 [2025학년도 9월 고3 미적분 29번] 부분분수 급수와 수열의 일반항 (단답형)📘 [Calculus No. 29 for high school seniors, September 2025] General terms of partial fraction series and sequences (short answer type)</a>
+        <a href="c30929.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 29번] 부분분수 급수와 수열의 일반항 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #29] General terms of partial fraction series and sequences (short answer type)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30929</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30929.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -950,9 +975,9 @@ h1 {
         <a href="c30929.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="c30930">
       <div>
-        <a href="c30930.html" class="card-title">📘 [2025학년도 9월 고3 미적분 30번] 절댓값 지수함수의 부정적분과 최솟값 함수 (단답형)📘 [Calculus No. 30 for high school seniors, September 2025] Indefinite integral and minimum value function of absolute value exponential function (short answer type)</a>
+        <a href="c30930.html" class="card-title">📘 <span class="bilingual-ko">[2025학년도 9월 고3 미적분 30번] 절댓값 지수함수의 부정적분과 최솟값 함수 (단답형)</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #30] Indefinite integral and minimum value function of absolute value exponential function (short answer type)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30930</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30930.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -963,9 +988,9 @@ h1 {
         <a href="c30930.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" data-slug="d7abad20">
       <div>
-        <a href="d7abad20.html" class="card-title">📘 2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)📘 June 2009 Academic Ability Assessment No. 29 · Measurement of tree height (trigonometric functions)</a>
+        <a href="d7abad20.html" class="card-title">📘 <span class="bilingual-ko">2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)</span><span class="bilingual-en">June 2009 Academic Ability Assessment No. 29 · Measurement of tree height (trigonometric functions)</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>d7abad20</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/d7abad20.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -979,6 +1004,13 @@ h1 {
   </div>
 </div>
 <script>
+function filterOfflineCards() {
+  var q = (document.getElementById('offlineSearchInput').value || '').trim().toLowerCase();
+  document.querySelectorAll('#offlineList .card').forEach(function(card) {
+    var txt = (card.textContent || '').toLowerCase();
+    card.style.display = (!q || txt.indexOf(q) !== -1) ? 'flex' : 'none';
+  });
+}
 function setOfflineLang(lang, isUserAction) {
   if (isUserAction) {
     try {
@@ -997,10 +1029,12 @@ function setOfflineLang(lang, isUserAction) {
   var elBannerTitle = document.getElementById('txtBannerTitle');
   var elBannerBody = document.getElementById('txtBannerBody');
   var elBack = document.getElementById('txtBackLink');
+  var elSearch = document.getElementById('offlineSearchInput');
   if (elTitle) elTitle.textContent = isEn ? '📦 mathedu Standalone Offline Problem Archive' : '📦 mathedu 오프라인 전체 문제 보관함';
   if (elLead) elLead.textContent = isEn ? 'Collection of standalone, self-contained interactive math quizzes that run completely offline without internet.' : '인터넷 접속 없이 언제 어디서나 풀이할 수 있는 오프라인 독립 실행형 수학 퀴즈 모음입니다.';
   if (elBannerTitle) elBannerTitle.textContent = isEn ? '💡 About Offline Standalone Quizzes' : '💡 오프라인 단독 파일 안내';
   if (elBack) elBack.textContent = isEn ? 'Back to mathedu Main' : 'mathedu 메인으로';
+  if (elSearch) elSearch.placeholder = isEn ? '🔍 Search by problem title, topic (sequence, derivative, conic, probability), or slug...' : '🔍 문제 제목, 키워드(수열, 미분, 포물선, 확률 등), 슬러그 실시간 검색...';
   if (elBannerBody) {
     elBannerBody.innerHTML = isEn ?
       '• Each problem is a <b>self-contained single-file HTML</b> bundle with embedded images and interactive step-by-step scoring.<br>' +
@@ -1016,6 +1050,7 @@ function setOfflineLang(lang, isUserAction) {
   document.querySelectorAll('.btn-solve-text').forEach(function(el) { el.textContent = isEn ? 'Solve ➔' : '풀기 ➔'; });
   document.querySelectorAll('.link-online-text').forEach(function(el) { el.textContent = isEn ? 'Online Original ➔' : '온라인 원본 링크 ➔'; });
   document.querySelectorAll('.txt-slug-prefix').forEach(function(el) { el.textContent = isEn ? 'Slug: ' : '고유 슬러그: '; });
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
 }
 function detectDefaultLang() {
   try {

@@ -551,7 +551,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
 <script src="../mathedu-i18n.js?v=20261003_v3"></script>
 
@@ -559,9 +559,9 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/d7abad20.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="d7abad20">
-<meta name="mathedu-offline-build-time" content="2026-10-13T20:27:42.399969+00:00">
-<meta name="mathedu-offline-hash" content="2eabb497">
-<meta name="mathedu-version-label" content="v2026.10.14">
+<meta name="mathedu-offline-build-time" content="2026-10-17T23:55:27.609314+00:00">
+<meta name="mathedu-offline-hash" content="eecce78b">
+<meta name="mathedu-version-label" content="v2026.10.18">
 
 </head><body><div class="wrap">
 
@@ -580,7 +580,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
       <span style="font-size:0.78rem;color:#94a3b8">mathedu</span>
     </div>
   </div>
-  <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)📘 June 2009 Academic Ability Assessment No. 29 · Measurement of tree height (trigonometric functions)</div>
+  <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px"><span class="bilingual-ko">2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)</span><span class="bilingual-en">June 2009 Academic Ability Assessment No. 29 · Measurement of tree height (trigonometric functions)</span></div>
   <div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px">
     <span class="bilingual-ko">이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
     보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.</span>
@@ -625,7 +625,10 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 </div>
 
 <div class="topbar">
-<a class="tbtn" href="https://min7014.github.io/mathedu/" target="_blank" rel="noopener">← 게시판</a>
+<a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
+<img src="data:image/png;base64,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" alt="mathedu" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
+<span><b>mathedu</b></span>
+</a>
 <button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
 <div class="lang-group">
   <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko', true)">한국어</button>
@@ -634,10 +637,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 </div>
 <div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)<span class="bilingual-en">📘 June 2009 Academic Ability Assessment No. 29 · Measurement of tree height (trigonometric functions)</span></h1>
-<h2>📋 원본 문제<span class="bilingual-en">📋 Original Issue</span></h2>
-<div class="sol" style="font-size:1.05rem;font-weight:600;margin:14px 0">눈높이가 $1\mathrm{m}$인 어린이가 나무로부터 $7\mathrm{m}$ 떨어진 지점에서 나무의 꼭대기를 바라본 선과 나무가 지면에 닿는 지점을 바라본 선이 이루는 각이 $\theta$이었다. 나무로부터 $2\mathrm{m}$ 떨어진 지점에서 나무를 바라보았더니 그 각이 $\theta+\dfrac{\pi}{4}$가 되었다. 나무의 높이는 $a(\mathrm{m})$ 또는 $b(\mathrm{m})$이다. $a+b$의 값은? (① 12 ② 14 ③ 16 ④ 18 ⑤ 20)</div>
-<div class="opts"></div>
+<h1><span class="bilingual-ko">📘 2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)</span><span class="bilingual-en">📘 June 2009 Academic Ability Assessment No. 29 · Measurement of tree height (trigonometric functions)</span></h1>
 <p class="lead">기초→심화 단계별 5지 선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
@@ -663,7 +663,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
         <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">이 문제는 <b>2009년 6월 학력평가 29번 · 나무 높이 측정 (삼각함수)</b>의 수학적 원리를 정확히 이해하고 단계별 디딤돌 개념을 적용하여 해결하는 역량을 평가합니다.</p>
         
       </div>
-      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: 💡 Core guide: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
+      <div class="orig-tip">💡 <b>핵심 길잡이</b>: 아래 0단계 기초 개념과 단계별 디딤돌 퀴즈를 순서대로 풀어나가면 원본 문제를 완벽하게 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: If you solve the basic concepts of level 0 and the step-by-step stepping stone quiz below in order, you can completely solve the original problem!</span></div>
     </div>
   </div>
 
@@ -672,7 +672,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
     💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 원운동이 파동 곡선으로 풀려나가는 <b>기하학적 전개 과정</b>을 한 프레임씩 보여줍니다.<br>• <b>[단위원의 동점]</b> 반지름 1인 원 위를 반시계 방향으로 회전하는 동점 $\mathrm{P}$의 회전각 $\theta$와 수직 투영 $y=\sin\theta$, 수평 투영 $x=\cos\theta$ 설정<br>• <b>[파동의 실시간 언래핑]</b> $\theta$가 증가함에 따라 각 좌표의 높낮이를 오른쪽 직교좌표계로 수평 이동시켜 사인·코사인 곡선의 마루와 골이 직조되는 과정<br>• <b>[주기의 필연성]</b> 한 바퀴($2\pi$) 회전하면 원점으로 귀환하는 원의 닫힌 궤적이 파동 함수의 무한 반복 주기성으로 승화되는 원리를 하단 자료에서 체득해 보세요.
   <div class="bilingual-en">💡 <b>Frame-by-Frame Visual Proof Analysis (PDF & GeoGebra Exploration)</b><br>The archive's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
-<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"></div><div><b>$시준각/시렉각$</b> — 꼭대기 보는 고각 $\alpha$, 지면 보는 저각 $\beta$. $\theta=\alpha+\beta$</div><div><b>눈높이 $1\mathrm{m}$</b> — 나무 기둥(지면)을 내려다보는 시선이 저각 $\beta$를 만듦</div></div>
+<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>시준각/시렉각</b> — 꼭대기 보는 고각 $\alpha$, 지면 보는 저각 $\beta$. $\theta=\alpha+\beta$</div><div><b>눈높이 $1\mathrm{m}$</b> — 나무 기둥(지면)을 내려다보는 시선이 저각 $\beta$를 만듦</div></div>
 <h2>🔰 제1단계 · [초등 비탈길 분수] 가로와 높이의 비율 설정하기<span class="bilingual-en">🔰 Step 1 · [Elementary Slope Fraction] Setting ratio of width and height</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 분수 비례: 가로 $d$미터 떨어진 곳에서 높이 $1\mathrm{m}$인 지면을 내려다볼 때, 직각삼각형에서 가로에 대한 높이의 비율은 $\frac{1}{d}$입니다. 이것이 바로 삼각비의 탄젠트($\tan$) 약속입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Elementary ratio: Looking down at ground level 1m below from distance $d$, the ratio of vertical height to horizontal distance is $\frac{1}{d}$, defined as tangent ($\tan$).</div></div><div class="q" data-ans="1" data-exp="수직 $1\mathrm{m}$, 수평 $d$이므로 $\tan\beta=1/d$." data-exp-en="Vertical $1\mathrm{m}$, horizontal $d$, so $\tan\beta=1/d$."><div class="lvl"><span class="bilingual-ko">초등 분수 비율 디딤돌 1</span><span class="bilingual-en">Elementary Fraction Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 분수와 비탈길 기울기: 가로 거리 $d$미터를 갈 때 높이가 $1\mathrm{m}$인 비탈길의 비율 $\frac{\text{높이}}{\text{가로}}$ ($\tan = \frac{1}{d}$)을 나타낸 식은?</span><div class="bilingual-en">Elementary slope fraction intuition: What represents the ratio $\frac{\text{height}}{\text{width}}$ ($\tan = \frac{1}{d}$) when horizontal distance is $d$ meters and eye height is $1\mathrm{m}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\dfrac{1}{d}$</div><div class="opt"><span class="n">2</span>$\dfrac{h}{d}$</div><div class="opt"><span class="n">3</span>$\dfrac{d}{1}$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$\dfrac{H}{d}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
@@ -981,7 +981,6 @@ function submitReport(btn){
 </p>
   </div>
   <div class="bilingual-en">
-<b>Complete Solution:</b>
 <h4>📋 [Problem Analysis & Core Concepts]</h4>
 <p>This problem models measuring tree height from eye level ($1\mathrm{m}$) using the <b>tangent angle addition and subtraction formulas</b>, relating viewing angles subtended at two different horizontal distances ($d = 7$ and $d = 2$).</p>
 
@@ -1437,9 +1436,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'd7abad20';
-window._offlineBuildTime = '2026-10-13T20:27:42.399969+00:00';
-window._offlineHash = '2eabb497';
-window._offlineVersion = 'v2026.10.14';
+window._offlineBuildTime = '2026-10-17T23:55:27.609314+00:00';
+window._offlineHash = 'eecce78b';
+window._offlineVersion = 'v2026.10.18';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/d7abad20.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1463,8 +1462,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'd7abad20';
-  var localBuildTime = window._offlineBuildTime || '2026-10-13T20:27:42.399969+00:00';
-  var localHash = window._offlineHash || '2eabb497';
+  var localBuildTime = window._offlineBuildTime || '2026-10-17T23:55:27.609314+00:00';
+  var localHash = window._offlineHash || 'eecce78b';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/d7abad20.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

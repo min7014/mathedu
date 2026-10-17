@@ -93,10 +93,11 @@ if os.path.exists(offline_index):
     with open(offline_index, "r", encoding="utf-8") as f:
         c_off_idx = f.read()
     count_links = len(re.findall(r'href="[^"]+\.html"', c_off_idx))
-    if count_links >= 80:
-        log_result(section, "offline/index.html 오프라인 전체 보관함", "PASS", f"오프라인 문제 링크 {count_links}개 정상 등록")
+    pub_board_count = len([f for f in glob.glob(os.path.join(BOARD_DIR, "*.html")) if not os.path.basename(f).startswith("index")])
+    if count_links >= pub_board_count and pub_board_count > 0:
+        log_result(section, "offline/index.html 오프라인 전체 보관함", "PASS", f"오프라인 문제 링크 {count_links}개 정상 등록 (공개 문항 {pub_board_count}개 전체 포함)")
     else:
-        log_result(section, "offline/index.html 오프라인 전체 보관함", "WARN", f"등록 링크 수: {count_links}")
+        log_result(section, "offline/index.html 오프라인 전체 보관함", "WARN", f"등록 링크 수: {count_links} (기대: {pub_board_count})")
 else:
     log_result(section, "offline/index.html 오프라인 전체 보관함", "FAIL", "파일 없음")
 

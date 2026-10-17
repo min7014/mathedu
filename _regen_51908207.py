@@ -24,30 +24,36 @@ SLUG = "51908207"
 OUT = os.path.join("board", f"{SLUG}.html")
 
 data = {
+  "slug": SLUG,
   "title": "카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 확률 (기초→심화)",
+  "title_en": "Card Swap Dice Game · Conditional Probability of Rolling 6 on the 3rd Trial Given Return to Initial State After 4 Trials",
   "symbols": [
-    {"sym": r"카드 교환", "desc": "인접한 두 카드의 위치를 서로 바꾸는 연산. $k$번째와 $(k+1)$번째 카드를 맞바꿈."},
-    {"sym": r"주사위 눈 $k$", "desc": r"주사위를 던져 나온 눈. $k \in \{1,2,3,4,5,6\}$. $k \le 5$ 이면 교환, $k=6$ 이면 변화 없음(항등변환)."},
-    {"sym": r"상태 $S$", "desc": r"6장 카드의 배치. 초기 상태 $S_0$: A,A,A,B,B,B (자리 1~6). B의 위치로 상태를 표현하기도 함."},
-    {"sym": r"조건부 확률 $P(A|B)$", "desc": r"사건 $B$가 일어났을 때 사건 $A$가 일어날 확률. $P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{n(A \cap B)}{n(B)}$ (동등 가능성일 때)."},
-    {"sym": r"경우의 수 $M_2(s)$", "desc": r"초기 상태 $S_0$에서 2회 시행하여 상태 $s$에 도달하는 순서쌍 $(k_1, k_2)$의 개수."},
-    {"sym": r"대칭성", "desc": r"그래프가 무향(대칭)이면 $N(s \to t,\; m) = N(t \to s,\; m)$. 왕복 경우의 수가 같음."},
+    {"sym": r"카드 교환", "desc": "인접한 두 카드의 위치를 서로 바꾸는 연산. $k$번째와 $(k+1)$번째 카드를 맞바꿈.", "desc_en": "Swapping two adjacent cards at positions $k$ and $k+1$."},
+    {"sym": r"주사위 눈 $k$", "desc": r"주사위를 던져 나온 눈. $k \in \{1,2,3,4,5,6\}$. $k \le 5$ 이면 교환, $k=6$ 이면 변화 없음(항등변환).", "desc_en": r"Dice roll $k \in \{1,2,3,4,5,6\}$. Swap if $k \le 5$; no change (identity) if $k=6$."},
+    {"sym": r"상태 $S$", "desc": r"6장 카드의 배치. 초기 상태 $S_0$: A,A,A,B,B,B (자리 1~6). B의 위치로 상태를 표현하기도 함.", "desc_en": r"Arrangement of 6 cards. Initial state $S_0$: A,A,A,B,B,B at positions 1 to 6."},
+    {"sym": r"조건부 확률 $P(A|B)$", "desc": r"사건 $B$가 일어났을 때 사건 $A$가 일어날 확률. $P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{n(A \cap B)}{n(B)}$ (동등 가능성일 때).", "desc_en": r"Conditional probability $P(A|B) = \frac{n(A \cap B)}{n(B)}$ under equally likely outcomes."},
+    {"sym": r"경우의 수 $M_2(s)$", "desc": r"초기 상태 $S_0$에서 2회 시행하여 상태 $s$에 도달하는 순서쌍 $(k_1, k_2)$의 개수.", "desc_en": r"Number of 2-step sequences $(k_1, k_2)$ reaching state $s$ from $S_0$."},
+    {"sym": r"대칭성", "desc": r"그래프가 무향(대칭)이면 $N(s \to t,\; m) = N(t \to s,\; m)$. 왕복 경우의 수가 같음.", "desc_en": r"By symmetry of adjacent swaps, the number of paths from $s$ to $t$ equals that from $t$ to $s$."},
   ],
   "levels": [
     # ============ 제1~4단계: 교환 규칙의 기본 (한 단계 = 한 개념) ============
     {
       "stage": "level1",
-      "title": "제1단계 · 교환 규칙의 의미 (가장 기초)",
-      "knowledge": r"주사위 눈 $k$가 나오면, $k \le 5$ 이면 $k$번째 자리와 $(k+1)$번째 자리의 카드를 맞바꿉니다. $k=6$ 이면 아무것도 하지 않습니다.",
+      "title": "🔰 제1단계 · [초등 규칙과 사칙연산 연계] 이웃한 카드 자리 바꾸기 규칙 (가장 기초)",
+      "title_en": "🔰 Step 1 · [Elementary Rules & Arithmetic Link] Meaning of the Adjacent Card Swap Rule",
+      "knowledge": r"초등학교에서 줄을 설 때 바로 옆 친구와 자리를 바꾸는 놀이를 떠올려 봅시다. 주사위 눈 $k$가 나오면, $k \le 5$ 이면 $k$번째 자리와 $(k+1)$번째 자리의 카드를 맞바꿉니다. $k=6$ 이면 아무것도 하지 않습니다.",
+      "knowledge_en": r"Just like swapping places with your neighbor in line in elementary school: when dice roll $k \le 5$, swap the $k$-th and $(k+1)$-th cards. When $k=6$, do nothing.",
       "questions": [
-        {"stem": r"$k \le 5$ 일 때 시행은 무엇을 하는가?",
+        {"stem": r"초등학교 규칙 찾기: 주사위 눈이 $k \le 5$ 일 때 시행은 무엇을 하는가?",
+         "stem_en": r"Elementary rule check: What operation is performed when the dice roll satisfies $k \le 5$?",
          "options": [r"$k$번째와 $(k+1)$번째 카드를 교환",
                      r"$k$번째 카드를 제거",
                      r"$k$번째와 $(k+2)$번째 카드를 교환",
                      r"모든 카드를 뒤집음",
                      r"아무 일도 하지 않음"],
          "answer": 1,
-         "exp": r"$k \le 5$ 이면 인접한 $k$번째와 $(k+1)$번째 카드를 맞바꿈."},
+         "exp": r"$k \le 5$ 이면 인접한 $k$번째와 $(k+1)$번째 카드를 맞바꿈.",
+         "exp_en": r"When $k \le 5$, swap the adjacent $k$-th and $(k+1)$-th cards."},
         {"stem": r"$k=6$ 일 때 시행은 무엇을 하는가?",
          "options": [r"6번째와 1번째 카드를 교환",
                      r"아무 일도 하지 않음(항등)",
@@ -471,32 +477,52 @@ data = {
              r"$k = 6$ 이면 카드의 위치를 그대로 둔다. "
              r"이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, "
              r"3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오."),
+    "stem_en": (r"Three 'A' cards and three 'B' cards are placed in positions 1 to 6 as A, A, A, B, B, B. "
+                r"A fair die is rolled to get $k$: if $k \le 5$, the $k$-th and $(k+1)$-th cards are swapped; "
+                r"if $k = 6$, the cards remain in place. "
+                r"Given that after 4 trials the cards return to the initial state A, A, A, B, B, B, "
+                r"find the conditional probability that the 3rd roll was 6."),
     "options": [r"$\dfrac{69}{371}$", r"$\dfrac{1}{6}$", r"$\dfrac{5}{36}$", r"$\dfrac{1}{4}$", r"$\dfrac{1}{3}$"],
     "answer": 1,
     "exp": (r"4회 후 $S_0$ 도달 총 $742$가지 중 3번째가 6인 경우 $138$가지 → "
             r"$\dfrac{138}{742} = \dfrac{69}{371}$."),
+    "exp_en": (r"Among $742$ total 4-step paths returning to $S_0$, $138$ have $k_3=6$, giving $\dfrac{138}{742} = \dfrac{69}{371}$."),
     "solution": (
-      r"<p><b>풀이.</b></p>"
-      r"<p><b>① 상태 정의.</b> 초기 상태 $S_0$: A,A,A,B,B,B (B의 위치: 4,5,6). "
-      r"$k=1,2,4,5,6$ 이면 $S_0$ 유지(5가지), $k=3$ 이면 $S_1$(A,A,B,A,B,B)로 변화(1가지).</p>"
-      r"<p><b>② $S_1$에서의 전이.</b> $S_1$에서 $k=3$ → $S_0$ 복귀(1가지), "
+      r"<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>"
+      r"<p>본 문항은 주사위 눈에 따른 인접 카드 교환 규칙을 <b>상태 전이 그래프(State Transition Graph)</b>로 모델링하고, 2회 시행 후 도달 가능한 상태별 경우의 수 $M_2(s)$와 대칭성을 활용하여 <b>조건부 확률</b>을 구하는 고난도 확률 문항입니다.</p>"
+      r"<h4>📐 [단계별 상세 풀이 전개]</h4>"
+      r"<p><b>① 상태 정의 및 1회 전이 분석:</b> 초기 상태 $S_0$: A,A,A,B,B,B (B의 위치: 4,5,6). "
+      r"$k=1,2,4,5,6$ 이면 같은 문자끼리 교환하거나 정지하므로 $S_0$ 유지(5가지), $k=3$ 이면 3번(A)과 4번(B)이 교환되어 $S_1$(A,A,B,A,B,B)로 변화(1가지)합니다.</p>"
+      r"<p><b>② $S_1$에서의 전이 분석:</b> $S_1$에서 $k=3$ → $S_0$ 복귀(1가지), "
       r"$k=2$ → $S_2$(A,B,A,A,B,B)(1가지), $k=4$ → $S_3$(A,A,B,B,A,B)(1가지), "
-      r"$k=1,5,6$ → $S_1$ 유지(3가지).</p>"
-      r"<p><b>③ 2회 후 상태별 도달 수.</b> "
-      r"$M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$, "
-      r"$M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$, "
-      r"$M_2(S_2) = 1 \times 1 = 1$, "
-      r"$M_2(S_3) = 1 \times 1 = 1$.</p>"
-      r"<p><b>④ 4회 후 $S_0$ 총 경우의 수.</b> 대칭성으로 "
-      r"$N_{\text{total}} = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$.</p>"
-      r"<p><b>⑤ 3번째가 6인 조건부 경우의 수.</b> "
-      r"3번째 $k=6$이면 $T_6$은 항등변환. 2회 후 상태 = 3회 후 상태. "
-      r"2회 후 $S_0$ 이면 4번째 $k \in \{1,2,4,5,6\}$(5가지): $26 \times 5 = 130$. "
-      r"2회 후 $S_1$ 이면 4번째 $k=3$(1가지): $8 \times 1 = 8$. "
-      r"2회 후 $S_2, S_3$ 이면 4번째로 $S_0$ 도달 불가(0가지). "
-      r"합계 $130 + 8 = 138$.</p>"
-      r"<p><b>⑥ 확률.</b> $P = \dfrac{138}{742} = \dfrac{69}{371}$.</p>"
-      r"<p><b>정답: $\dfrac{69}{371}$</b></p>"
+      r"$k=1,5,6$ → $S_1$ 유지(3가지)입니다.</p>"
+      r"<p><b>③ 2회 시행 후 상태별 도달 경우의 수 $M_2(s)$:</b><br>"
+      r"• $M_2(S_0) = 5 \times 5 + 1 \times 1 = 26$<br>"
+      r"• $M_2(S_1) = 5 \times 1 + 1 \times 3 = 8$<br>"
+      r"• $M_2(S_2) = 1 \times 1 = 1$, $M_2(S_3) = 1 \times 1 = 1$</p>"
+      r"<p><b>④ 4회 후 $S_0$ 복귀 총 경우의 수 (분모):</b> 인접 교환의 가역성(대칭성)에 의해 $s \to S_0$의 2회 경로 수도 $M_2(s)$와 같으므로:<br>"
+      r"$$n(B) = 26^2 + 8^2 + 1^2 + 1^2 = 676 + 64 + 1 + 1 = 742$$</p>"
+      r"<p><b>⑤ 3번째 눈이 6이고 4회 후 $S_0$인 경우의 수 (분자):</b> "
+      r"3번째 시행이 $k=6$이면 상태가 그대로 유지되므로(2회 후 상태 = 3회 후 상태), 4번째 시행 한 번으로 $S_0$에 도달해야 합니다.<br>"
+      r"• 2회 후 $S_0$일 때: 4번째에 $S_0$ 유지(5가지) $\implies 26 \times 5 = 130$<br>"
+      r"• 2회 후 $S_1$일 때: 4번째에 $k=3$으로 복귀(1가지) $\implies 8 \times 1 = 8$<br>"
+      r"• 2회 후 $S_2, S_3$일 때: 1회 시행으로 $S_0$ 복귀 불가(0가지)<br>"
+      r"따라서 $n(A \cap B) = 130 + 8 = 138$ 입니다.</p>"
+      r"<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>"
+      r"<p>구하는 조건부 확률은 $P(A|B) = \dfrac{138}{742} = \dfrac{69}{371}$ 이며, 정답은 <b>①번 ($\dfrac{69}{371}$)</b>입니다.</p>"
+    ),
+    "solution_en": (
+      r"<h4>📋 [Problem Analysis & Core Concepts]</h4>"
+      r"<p>This problem models adjacent card swaps driven by dice rolls as a <b>symmetric state transition graph</b> and computes the conditional probability using 2-step path counts $M_2(s)$.</p>"
+      r"<h4>📐 [Step-by-Step Rigorous Derivation]</h4>"
+      r"<p><b>Step 1 (Transitions from $S_0$ and $S_1$):</b> From $S_0$ (A,A,A,B,B,B), $k \in \{1,2,4,5,6\}$ keeps $S_0$ (5 ways), while $k=3$ moves to $S_1$ (A,A,B,A,B,B) (1 way). From $S_1$, $k=3$ returns to $S_0$ (1 way), $k=2 \to S_2$ (1 way), $k=4 \to S_3$ (1 way), and $k \in \{1,5,6\}$ stays at $S_1$ (3 ways).</p>"
+      r"<p><b>Step 2 (2-Step Path Counts $M_2(s)$):</b><br>"
+      r"$M_2(S_0) = 5^2 + 1^2 = 26$, $M_2(S_1) = 5(1) + 1(3) = 8$, $M_2(S_2) = 1$, $M_2(S_3) = 1$.</p>"
+      r"<p><b>Step 3 (Total 4-Step Return Paths & Favorable Paths):</b><br>"
+      r"By symmetry, total ways to return to $S_0$ in 4 steps is $26^2 + 8^2 + 1^2 + 1^2 = 742$.<br>"
+      r"If the 3rd roll is $k_3=6$ (identity), the 4th roll must transition directly from the 2nd-step state to $S_0$: $26 \times 5 + 8 \times 1 = 130 + 8 = 138$.</p>"
+      r"<h4>✨ [Conclusion & Key Takeaway]</h4>"
+      r"<p>The conditional probability is $P = \dfrac{138}{742} = \dfrac{69}{371}$ (<b>Option ①</b>).</p>"
     ),
   },
 }
@@ -515,6 +541,9 @@ if _rep["warn"]:
 html = generator.generate_html(data)
 with open(OUT, "w", encoding="utf-8") as f:
     f.write(html)
+if os.path.exists(os.path.join("board", "private")):
+    with open(os.path.join("board", "private", f"{SLUG}.html"), "w", encoding="utf-8") as f:
+        f.write(html)
 print(">> 덮어쓰기 완료:", OUT, "(%d bytes)" % len(html))
 print(">> 단계 수:", len(data["levels"]))
 print(">> 최종 정답:", data["final"]["options"][data["final"]["answer"]-1])

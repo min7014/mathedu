@@ -553,7 +553,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {{
 </div>
 <div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
 <span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1>📘 {title}</h1>
+<h1>📘 {h1_title}</h1>
 <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
 {original_block}
 {symbols_block}
@@ -803,16 +803,31 @@ def _resolve_options_and_ans(opts_list, ans):
 def _question_html(q):
     opts_list, ans_idx = _resolve_options_and_ans(q.get("options", []), q.get("answer", 1))
     exp = _esc(q.get("exp", "")).replace("\n", "<br>")
+    exp_en = _esc(q.get("exp_en", "")).replace("\n", "<br>")
+    exp_en_attr = f' data-exp-en="{exp_en}"' if exp_en else ""
     lvl_label = _esc(q.get("level_label") or "문항")
+    lvl_label_en = _esc(q.get("level_label_en") or "Question")
     
-    opts = "".join(
-        f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>'
-        for i, o in enumerate(opts_list))
+    opts_en_list = q.get("options_en", [])
+    opts_items = []
+    for i, o in enumerate(opts_list):
+        if i < len(opts_en_list) and opts_en_list[i]:
+            opts_items.append(f'<div class="opt"><span class="n">{i+1}</span><span class="bilingual-ko">{_esc(o)}</span><span class="bilingual-en">{_esc(opts_en_list[i])}</span></div>')
+        else:
+            opts_items.append(f'<div class="opt"><span class="n">{i+1}</span>{_esc(o)}</div>')
+    opts = "".join(opts_items)
     body = f'<div class="opts">{opts}</div>'
     
-    return (f'<div class="q" data-ans="{ans_idx}" data-exp="{exp}">'
-            f'<div class="lvl">{lvl_label}</div>'
-            f'<div class="stem">{_esc(q.get("stem","") )}</div>'
+    stem_ko = _esc(q.get("stem", ""))
+    stem_en = _esc(q.get("stem_en", ""))
+    if stem_en:
+        stem_html = f'<span class="bilingual-ko">{stem_ko}</span><div class="bilingual-en">{stem_en}</div>'
+    else:
+        stem_html = stem_ko
+
+    return (f'<div class="q" data-ans="{ans_idx}" data-exp="{exp}"{exp_en_attr}>'
+            f'<div class="lvl"><span class="bilingual-ko">{lvl_label}</span><span class="bilingual-en">{lvl_label_en}</span></div>'
+            f'<div class="stem">{stem_html}</div>'
             f'{body}'
             f'<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">'
             f'<button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>'
@@ -823,55 +838,86 @@ def _question_html(q):
 def _level_html(lvl):
     know = ""
     if lvl.get("knowledge"):
-        know = (f'<div class="know"><h3>먼저 알아야 할 지식</h3>{_esc(lvl["knowledge"])}</div>')
+        know_en = f'<div class="bilingual-en"><b>Prerequisite Knowledge:</b> {_esc(lvl["knowledge_en"])}</div>' if lvl.get("knowledge_en") else ""
+        know = (f'<div class="know"><h3>먼저 알아야 할 지식</h3>{_esc(lvl["knowledge"])}{know_en}</div>')
     qs = "".join(_question_html(q) for q in lvl.get("questions", []))
-    return f'<h2>{_esc(lvl.get("title",""))}</h2>{know}{qs}'
+    t_ko = _esc(lvl.get("title", ""))
+    t_en = f'<span class="bilingual-en">{_esc(lvl["title_en"])}</span>' if lvl.get("title_en") else ""
+    return f'<h2>{t_ko}{t_en}</h2>{know}{qs}'
 
 def _tracking_html(quiz_slug, sheets_api_url=''):
-    """Full-screen name gate."""
+    """Full-screen name gate with bilingual support and Guest Free Pass."""
     slug_js = quiz_slug.replace("'", "\\'")
-    html = '<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center">'
-    html += '<h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2>'
-    html += '<h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3>'
-    html += '<p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px">이름을 입력해야 학습 기록이 저장됩니다.</p>'
-    html += '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
-    html += '<input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center">'
-    html += '<button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px">시작하기</button>'
-    html += '</div></div>'
-    html += '<script>'
-    html += 'window._studentName="";'
-    html += 'window._sheetsApiUrl="' + sheets_api_url + '";'
-    html += 'function registerName(){'
-    html += 'var n=document.getElementById("studentName").value.trim();'
-    html += 'if(!n){alert("이름을 입력하세요");return;}'
-    html += 'window._studentName=n;'
-    html += 'document.getElementById("trackFull").remove();'
-    html += 'sendProgress();'
-    html += 'if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}'
-    html += '}'
-    html += 'function sendProgress(){'
-    html += 'var name=(window._studentName||"").trim();'
-    html += 'if(!name)return;'
-    html += 'var qs=document.querySelectorAll(".q");'
-    html += 'var total=qs.length;'
-    html += 'var done=document.querySelectorAll(".q.done");'
-    html += 'var correct=0;'
-    html += 'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
-    html += 'if(total===0)return;'
-    html += 'fetch(window._sheetsApiUrl,{'
-    html += 'method:"POST",headers:{"Content-Type":"application/json"},'
-    html += 'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
-    html += '}).catch(function(){});'
-    html += '}'
-    # Answer selection triggers sendProgress after done is set
-    html += 'document.querySelectorAll(".q").forEach(function(q){'
-    html += 'q.addEventListener("click",function(e){'
-    html += 'var opt=e.target.closest(".opt");'
-    html += 'if(opt){setTimeout(sendProgress,50);}'
-    html += '});'
-    html += '});'
-    html += 'document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});'
-    html += '</script>'
+    html = (
+        '<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center">'
+        '<div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:rgba(15,23,42,.85);border:1.5px solid rgba(124,196,255,.35);border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)">'
+        '<button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang(\'ko\')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button>'
+        '<button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang(\'en\')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button>'
+        '</div>'
+        '<h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2>'
+        '<div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,23,42,.92);border:1.5px solid rgba(124,196,255,.5);border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10">'
+        '<span style="font-size:0.83rem;color:#cbd5e1;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span>'
+        '<button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang(\'ko\')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button>'
+        '<button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang(\'en\')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button>'
+        '</div>'
+        '<div id="topGuestFreePassRow" style="margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px">'
+        '<button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px" onmouseover="this.style.transform=\'translateY(-2px) scale(1.03)\';this.style.boxShadow=\'0 0 32px rgba(56,189,248,.95),0 8px 24px rgba(0,0,0,.6)\'" onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5)\'">'
+        '<span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span><span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span>'
+        '</button>'
+        '<div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div>'
+        '</div>'
+        '<h3 style="color:#e8ecf5;margin:0 0 6px"><span class="bilingual-ko">📝 먼저 이름을 입력하세요</span><span class="bilingual-en">📝 Please enter your name first</span></h3>'
+        '<p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p>'
+        '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
+        '<input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center">'
+        '<button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button>'
+        '</div></div>'
+        '<script>'
+        'window._studentName="";'
+        'window._sheetsApiUrl="' + sheets_api_url + '";'
+        'function toggleModalLang(l){'
+        'document.documentElement.lang=l;'
+        'try{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}catch(e){}'
+        'var bKo=document.getElementById("btnTrackFullLangKo");var bEn=document.getElementById("btnTrackFullLangEn");'
+        'if(bKo&&bEn){if(l==="en"){bKo.style.background="transparent";bKo.style.color="#cbd5e1";bKo.style.fontWeight="700";bEn.style.background="#38bdf8";bEn.style.color="#0b1020";bEn.style.fontWeight="800";}else{bKo.style.background="#38bdf8";bKo.style.color="#0b1020";bKo.style.fontWeight="800";bEn.style.background="transparent";bEn.style.color="#cbd5e1";bEn.style.fontWeight="700";}}'
+        'var cKo=document.getElementById("btnModalCenterLangKo");var cEn=document.getElementById("btnModalCenterLangEn");'
+        'if(cKo&&cEn){if(l==="en"){cKo.style.background="transparent";cKo.style.color="#cbd5e1";cKo.style.fontWeight="700";cKo.style.boxShadow="none";cEn.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cEn.style.color="#0b1020";cEn.style.fontWeight="800";cEn.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";}else{cKo.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cKo.style.color="#0b1020";cKo.style.fontWeight="800";cKo.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";cEn.style.background="transparent";cEn.style.color="#cbd5e1";cEn.style.fontWeight="700";cEn.style.boxShadow="none";}}'
+        'var sn=document.getElementById("studentName");if(sn)sn.placeholder=(l==="en")?"Enter name":"이름 입력";'
+        'if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);'
+        '}'
+        '(function(){var cur="ko";try{var p=new URLSearchParams(window.location.search).get("lang");if(p==="en"||p==="ko"){cur=p;}else{var man=localStorage.getItem("mathedu_lang_manual")==="true";var sto=localStorage.getItem("mathedu_lang");if(man&&(sto==="en"||sto==="ko")){cur=sto;}else{var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}if(tz&&tz!=="Asia/Seoul"&&tz!=="ROK"&&tz!=="Asia/Pyongyang"){cur="en";}else{var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";if(l&&l.toLowerCase().indexOf("ko")!==0)cur="en";}}}}catch(e){}if(cur==="en"){document.documentElement.lang="en";toggleModalLang("en");}})();'
+        'function startFreePractice(){window._studentName=(document.documentElement.lang==="en")?"Guest Learner":"자유 학습자";var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}'
+        'function registerName(){'
+        'var n=document.getElementById("studentName").value.trim();'
+        'if(!n){alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}'
+        'window._studentName=n;'
+        'document.getElementById("trackFull").remove();'
+        'sendProgress();'
+        'if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}'
+        '}'
+        'function sendProgress(){'
+        'var name=(window._studentName||"").trim();'
+        'if(!name)return;'
+        'var qs=document.querySelectorAll(".q");'
+        'var total=qs.length;'
+        'var done=document.querySelectorAll(".q.done");'
+        'var correct=0;'
+        'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
+        'if(total===0)return;'
+        'fetch(window._sheetsApiUrl,{'
+        'method:"POST",headers:{"Content-Type":"application/json"},'
+        'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
+        '}).catch(function(){});'
+        '}'
+        'document.querySelectorAll(".q").forEach(function(q){'
+        'q.addEventListener("click",function(e){'
+        'var opt=e.target.closest(".opt");'
+        'if(opt){setTimeout(sendProgress,50);}'
+        '});'
+        '});'
+        'document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});'
+        '</script>'
+    )
     return html
 
 
@@ -880,24 +926,37 @@ def generate_html(data):
     sym_items = []
     for s in data.get("symbols", []):
         stxt = str(s.get("sym", "")).strip()
-        # ★근본수정: 이미 $ 수식기호를 포함한 sym은 재래핑 금지 ($k$ → $$ 이중래핑 방지).
-        # 종전 판정(startswith $ AND endswith $)은 "주사위 눈 $k$"처럼 중간에 $가 있는
-        # 혼합 문자열을 통과시켜 $주사위 눈 $k$$ 를 만들어 MathJax 디스플레이 모드가
-        # 기호 설명 전체를 삼키는 치명적 렌더 붕괴를 유발했음 (라이브 검증 확인).
-        # 따라서 "$" 문자가 하나라도 있으면 원문 그대로 사용.
-        if stxt and "$" not in stxt:
+        if stxt and "$" not in stxt and not re.search(r'[가-힣]', stxt):
             stxt = f"${stxt}$"
         stxt = re.sub(r'(?<![a-zA-Z\\])\\frac(?=\{)', r'\\dfrac', stxt)
         desc_txt = _esc(s.get("desc", ""))
-        sym_items.append(f'<div><b>{stxt}</b> — {desc_txt}</div>')
+        desc_en = f'<div class="bilingual-en">{_esc(s["desc_en"])}</div>' if s.get("desc_en") else ""
+        sym_items.append(f'<div><b>{stxt}</b> — {desc_txt}{desc_en}</div>')
     sym = "".join(sym_items)
-    symbols_block = (f'<h2>🔰 제0단계 · 수학 기호</h2><div class="sym">{sym}</div>' if sym else "")
+    symbols_block = (f'<h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols</span></h2><div class="sym">{sym}</div>' if sym else "")
     levels_block = "".join(_level_html(l) for l in data.get("levels", []))
     f = data.get("final", {})
     fopts_list, fans_idx = _resolve_options_and_ans(f.get("options", []), f.get("answer", 1))
     fexp = _esc(f.get("exp", "")).replace("\n", "<br>")
+    fexp_en = _esc(f.get("exp_en", "")).replace("\n", "<br>")
+    fexp_en_attr = f' data-exp-en="{fexp_en}"' if fexp_en else ""
     fsol = f.get("solution", "")
     if not isinstance(fsol, str): fsol = str(fsol)
+    fsol_en = f.get("solution_en", "")
+    if "bilingual-ko" not in fsol:
+        if not fsol_en:
+            fsol_en = (
+                "<h4>📋 [Problem Analysis & Core Concepts]</h4>"
+                "<p>This problem evaluates step-by-step mathematical reasoning and conceptual synthesis from fundamental rules to the final derivation.</p>"
+                "<h4>📐 [Step-by-Step Rigorous Derivation]</h4>"
+                f"<p>{fexp_en or fexp}</p>"
+                "<h4>✨ [Conclusion & Key Takeaway]</h4>"
+                "<p>By combining the intermediate results derived in the preceding scaffolding steps, we obtain the exact final answer.</p>"
+            )
+        fsol_combined = f'<div class="bilingual-ko">{fsol}</div><div class="bilingual-en">{fsol_en}</div>'
+    else:
+        fsol_combined = fsol
+
     diagram_html = ""
     if f.get("diagram"):
         diagram_html = f'<div class="diagram">{f["diagram"]}</div>'
@@ -914,14 +973,18 @@ def generate_html(data):
     except Exception:
         final_ans = str(f.get("answer", 1))
 
+    fstem_ko = _esc(f.get("stem", ""))
+    fstem_en = _esc(f.get("stem_en", ""))
+    fstem_html = f'<span class="bilingual-ko">{fstem_ko}</span><div class="bilingual-en">{fstem_en}</div>' if fstem_en else fstem_ko
+
     solution_block = (
-        f'<h2>🎯 최종 문제 + 상세 풀이</h2>'
+        f'<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2>'
         f'{diagram_html}'
         f'{figure_html}'
-        f'<div class="sol">{fsol}</div>'
-        f'<div class="q" data-ans="{fans_idx}" data-exp="{fexp}">'
-        f'<div class="lvl">최종 본문항</div>'
-        f'<div class="stem">{_esc(f.get("stem","") )}</div>'
+        f'<div class="sol">{fsol_combined}</div>'
+        f'<div class="q" data-ans="{fans_idx}" data-exp="{fexp}"{fexp_en_attr}>'
+        f'<div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div>'
+        f'<div class="stem">{fstem_html}</div>'
         f'{fbody}'
         f'<div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">'
         f'<button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>'
@@ -954,13 +1017,11 @@ def generate_html(data):
     orig_media_html = ""
     orig_text_html = ""
     if orig_img:
-        # 원본 그림이 있으면 그림으로 표시
         img_src = str(orig_img).strip()
         if img_src.startswith('/board/'):
             img_src = img_src[7:]
         orig_media_html = f'<div class="orig-media"><img src="{_esc(img_src)}" alt="{_esc(data.get("title", "수학"))} 원본 문제"></div>'
     elif orig_text:
-        # 원본 그림이 없을 때도 실제 시험지(Exam Paper)처럼 정갈하게 렌더링
         clean_text = _esc(str(orig_text)).replace("\n", "<br>")
         options = f.get("options", [])
         opts_html = ""
@@ -982,10 +1043,10 @@ def generate_html(data):
         original_block = (
             f'<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->\n'
             f'<div class="orig-card">\n'
-            f'<div class="orig-tag">📌 원본 문제 (오늘의 목표)</div>\n'
+            f'<div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original Problem (Today\'s Goal)</span></div>\n'
             f'{orig_media_html}\n'
             f'{orig_text_html}\n'
-            f'<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!</div>\n'
+            f'<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!<span class="bilingual-en">💡 Step-by-step scaffolding will guide you to master this problem completely!</span></div>\n'
             f'</div>'
         )
 
@@ -1009,8 +1070,16 @@ def generate_html(data):
     if visual_tip_html and original_block:
         original_block = original_block + "\n" + visual_tip_html
 
+    raw_title = _esc(data.get("title", "퀴즈"))
+    title_en = _esc(data.get("title_en", ""))
+    if title_en:
+        h1_title = f'<span class="bilingual-ko">{raw_title}</span><span class="bilingual-en">📘 {title_en}</span>'
+    else:
+        h1_title = raw_title
+
     html = TEMPLATE.format(
-        title=_esc(data.get("title", "퀴즈")),
+        title=raw_title,
+        h1_title=h1_title,
         original_block=original_block,
         symbols_block=symbols_block, levels_block=levels_block,
         solution_block=solution_block, final_ans=_esc(final_ans),

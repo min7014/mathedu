@@ -943,8 +943,8 @@
               continue;
             }
 
-            // 단, .sol이나 그 직전 제목은 마지막 문항까지 풀기 전에는 절대 노출하지 않음
-            var isSolRelated = (prev === solEl || prev === finalHeading || prev.classList.contains('sol'));
+            // 단, .sol(최종 해설 본문)은 마지막 문항까지 풀기 전에는 절대 노출하지 않음 (제목인 finalHeading은 최종 문항 도달 시 표시)
+            var isSolRelated = (prev === solEl || prev.classList.contains('sol'));
             var isQPart = (prev.classList.contains('opts') || prev.classList.contains('q-actions') || 
                            prev.classList.contains('exp') || prev.classList.contains('report-wrap') || 
                            prev.classList.contains('opt'));
@@ -971,7 +971,7 @@
         else solEl.classList.add('mathedu-step-hidden');
       }
       if (finalHeading) {
-        if (allDone) finalHeading.classList.remove('mathedu-step-hidden');
+        if (maxVisibleIndex >= qs.length - 1) finalHeading.classList.remove('mathedu-step-hidden');
         else finalHeading.classList.add('mathedu-step-hidden');
       }
       if (finalEl) {

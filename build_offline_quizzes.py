@@ -442,7 +442,7 @@ def process_file(html_path, build_timestamp, build_version):
 
     # 1-1. MathJax 스크립트: 오프라인 로컬 우선 + CDN 폴백
     content = re.sub(
-        r'<script id="mj"[^>]*></script>',
+        r'<script[^>]*src=["\']https://cdn\.jsdelivr\.net/npm/mathjax@3/es5/tex-[^"\']+\.js["\'][^>]*></script>',
         r'<script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>',
         content
     )
@@ -636,6 +636,13 @@ def main():
 <meta name="author" content="mathedu">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<script>
+window.MathJax = {{
+  tex: {{ inlineMath: [['$','$'], ['\\\\(','\\\\)']], displayMath: [['$$','$$'], ['\\\\[','\\\\]']] }},
+  options: {{ skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }}
+}};
+</script>
+<script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'"></script>
 <style>
 :root {{
   --bg: #050811; --card: rgba(15, 23, 42, 0.72); --card2: rgba(30, 41, 59, 0.75); --line: rgba(255,255,255,.12);
@@ -667,8 +674,19 @@ h1 {{
 .banner {{
   background: linear-gradient(135deg, rgba(56,189,248,.15), rgba(15,23,42,.8));
   border: 1px solid rgba(56,189,248,.38); border-radius: var(--radius);
-  padding: 22px 26px; margin-bottom: 30px; box-shadow: var(--glass-shadow);
+  padding: 22px 26px; margin-bottom: 20px; box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+}}
+.search-box {{
+  margin-bottom: 20px; position: relative;
+}}
+.search-input {{
+  width: 100%; background: rgba(15,23,42,0.85); border: 1.5px solid rgba(56,189,248,0.35);
+  border-radius: 14px; padding: 13px 18px; color: #fff; font-size: 0.95rem;
+  font-family: inherit; outline: none; transition: border-color .2s, box-shadow .2s;
+}}
+.search-input:focus {{
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
 }}
 .list {{ display: grid; gap: 14px; }}
 .card {{
@@ -709,6 +727,9 @@ h1 {{
   background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
   box-shadow: 0 2px 10px rgba(56,189,248,0.45);
 }}
+.bilingual-en {{ display: none; }}
+html[lang="en"] .bilingual-ko {{ display: none !important; }}
+html[lang="en"] .bilingual-en {{ display: inline !important; }}
 </style>
 </head>
 <body>
@@ -734,10 +755,14 @@ h1 {{
     </div>
   </div>
 
-  <div class="list">
+  <div class="search-box">
+    <input type="text" id="offlineSearchInput" class="search-input" placeholder="🔍 문제 제목, 키워드(수열, 미분, 포물선, 확률 등), 슬러그 실시간 검색..." oninput="filterOfflineCards()">
+  </div>
+
+  <div class="list" id="offlineList">
 """
     for r in results:
-        index_html += f"""    <div class="card">
+        index_html += f"""    <div class="card" data-slug="{r['slug']}">
       <div>
         <a href="{r['filename']}" class="card-title">📘 {r['title']}</a>
         <div class="card-meta">
@@ -754,6 +779,13 @@ h1 {{
     index_html += f"""  </div>
 </div>
 <script>
+function filterOfflineCards() {{
+  var q = (document.getElementById('offlineSearchInput').value || '').trim().toLowerCase();
+  document.querySelectorAll('#offlineList .card').forEach(function(card) {{
+    var txt = (card.textContent || '').toLowerCase();
+    card.style.display = (!q || txt.indexOf(q) !== -1) ? 'flex' : 'none';
+  }});
+}}
 function setOfflineLang(lang, isUserAction) {{
   if (isUserAction) {{
     try {{
@@ -772,10 +804,12 @@ function setOfflineLang(lang, isUserAction) {{
   var elBannerTitle = document.getElementById('txtBannerTitle');
   var elBannerBody = document.getElementById('txtBannerBody');
   var elBack = document.getElementById('txtBackLink');
+  var elSearch = document.getElementById('offlineSearchInput');
   if (elTitle) elTitle.textContent = isEn ? '📦 mathedu Standalone Offline Problem Archive' : '📦 mathedu 오프라인 전체 문제 보관함';
   if (elLead) elLead.textContent = isEn ? 'Collection of standalone, self-contained interactive math quizzes that run completely offline without internet.' : '인터넷 접속 없이 언제 어디서나 풀이할 수 있는 오프라인 독립 실행형 수학 퀴즈 모음입니다.';
   if (elBannerTitle) elBannerTitle.textContent = isEn ? '💡 About Offline Standalone Quizzes' : '💡 오프라인 단독 파일 안내';
   if (elBack) elBack.textContent = isEn ? 'Back to mathedu Main' : 'mathedu 메인으로';
+  if (elSearch) elSearch.placeholder = isEn ? '🔍 Search by problem title, topic (sequence, derivative, conic, probability), or slug...' : '🔍 문제 제목, 키워드(수열, 미분, 포물선, 확률 등), 슬러그 실시간 검색...';
   if (elBannerBody) {{
     elBannerBody.innerHTML = isEn ?
       '• Each problem is a <b>self-contained single-file HTML</b> bundle with embedded images and interactive step-by-step scoring.<br>' +
@@ -791,6 +825,7 @@ function setOfflineLang(lang, isUserAction) {{
   document.querySelectorAll('.btn-solve-text').forEach(function(el) {{ el.textContent = isEn ? 'Solve ➔' : '풀기 ➔'; }});
   document.querySelectorAll('.link-online-text').forEach(function(el) {{ el.textContent = isEn ? 'Online Original ➔' : '온라인 원본 링크 ➔'; }});
   document.querySelectorAll('.txt-slug-prefix').forEach(function(el) {{ el.textContent = isEn ? 'Slug: ' : '고유 슬러그: '; }});
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
 }}
 function detectDefaultLang() {{
   try {{

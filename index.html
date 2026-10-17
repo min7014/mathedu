@@ -1298,7 +1298,7 @@ body {
           <div class="stat-lbl" data-i18n="hero.statAssets">📐 GeoGebra &amp; PDF 증명</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-num">65개</div>
+          <div class="stat-num" id="heroStatQuizCount">67개</div>
           <div class="stat-lbl" data-i18n="hero.statQuizzes">🎯 수능·모평 디딤돌 퀴즈</div>
         </div>
         <div class="stat-cell">
@@ -1482,9 +1482,14 @@ body {
           <span style="font-size:0.8rem;color:#94a3b8;margin-left:8px;" data-i18n="examFinder.subtitle">(학년도 · 학년 · 시행월 · 선택과목 · 번호 선택 시 해당 문제만 즉시 추출)</span>
         </div>
       </div>
-      <button type="button" onclick="resetExamFilters()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;border-color:rgba(124,196,255,0.3);color:#cbd5e1;cursor:pointer;" data-i18n="examFinder.resetBtn">
-        🔄 필터 전체 초기화
-      </button>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <button type="button" onclick="startRandomQuiz()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;background:linear-gradient(90deg,rgba(56,189,248,0.2),rgba(129,140,248,0.2));border-color:#38bdf8;color:#7cc4ff;font-weight:800;cursor:pointer;" id="btnRandomQuizChallenge">
+          🎲 랜덤 기출 도전
+        </button>
+        <button type="button" onclick="resetExamFilters()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;border-color:rgba(124,196,255,0.3);color:#cbd5e1;cursor:pointer;" data-i18n="examFinder.resetBtn">
+          🔄 필터 전체 초기화
+        </button>
+      </div>
     </div>
 
     <!-- ⚖️ 공개 범위 정책 안내 -->
@@ -2528,7 +2533,26 @@ function toggleMathStory() {
     updateExamSelectOptions(lang);
     updateGamificationUI();
     updateStudentQuickBar();
+    renderTodayGeoGebra();
+    var heroCountEl = document.getElementById('heroStatQuizCount');
+    if (heroCountEl && allItems && allItems.length > 0) {
+      heroCountEl.textContent = (lang === 'en') ? (allItems.length + '+') : (allItems.length + '개');
+    }
+    var rndBtn = document.getElementById('btnRandomQuizChallenge');
+    if (rndBtn) {
+      rndBtn.innerHTML = (lang === 'en') ? '🎲 Random Quiz Challenge' : '🎲 랜덤 기출 도전';
+    }
     renderList();
+  };
+
+  window.startRandomQuiz = function() {
+    var pubItems = (allItems || []).filter(function(it) { return it.is_public !== false; });
+    if (pubItems.length === 0) {
+      window.location.href = 'board/ac8dc374.html';
+      return;
+    }
+    var pick = pubItems[Math.floor(Math.random() * pubItems.length)];
+    window.location.href = 'board/' + encodeURIComponent(pick.slug) + '.html';
   };
 
   window.addEventListener('mathedu:solved-updated', function() {
@@ -2584,7 +2608,7 @@ function toggleMathStory() {
   }
 
   window.openDefaultTeacherClass = function() {
-    var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : '48d0d98f';
+    var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : 'ac8dc374';
     if (window.MatheduAuth) {
       window.MatheduAuth.requireAuth('문제 배포', function() {
         if (typeof openClassCreatorModal === 'function') {
@@ -2613,7 +2637,7 @@ function toggleMathStory() {
     } catch(e) {}
 
     // 2. 기본 fallback: 최신 퀴즈로 입장
-    var fallbackSlug = (allItems && allItems.length > 0) ? allItems[0].slug : '48d0d98f';
+    var fallbackSlug = (allItems && allItems.length > 0) ? allItems[0].slug : 'ac8dc374';
     window.location.href = 'board/' + encodeURIComponent(fallbackSlug) + '.html?room=' + encodeURIComponent(code);
   };
 
