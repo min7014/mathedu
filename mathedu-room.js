@@ -91,6 +91,24 @@
     });
   }
 
+  function logInitialPageVisit() {
+    try {
+      if (window.location.protocol !== 'http:' && window.location.protocol !== 'https:') return;
+      if (navigator && navigator.webdriver) return;
+      var visitKey = 'mathedu_visit_logged_' + currentSlug;
+      if (sessionStorage.getItem(visitKey)) return;
+      sessionStorage.setItem(visitKey, '1');
+      if (!window._studentName) {
+        var u = window.MatheduAuth && window.MatheduAuth.getCurrentUser ? window.MatheduAuth.getCurrentUser() : null;
+        var g = window.MatheduAuth && window.MatheduAuth.getCurrentGuest ? window.MatheduAuth.getCurrentGuest() : null;
+        window._studentName = (u && u.name) ? u.name : ((g && g.name) ? g.name : getVisitorAnonName());
+      }
+      if (typeof window.sendProgress === 'function') {
+        window.sendProgress();
+      }
+    } catch (e) {}
+  }
+
   function initRoom() {
     injectBilingualStyles();
     // 즉시 sendProgress를 CORS-safe 버전으로 패치 (외부 스크립트 로드 전 클릭 시에도 누락 방지)
@@ -118,6 +136,9 @@
 
       // 6. sendProgress 가로채기 (Google Sheets 전송 + MatheduAuth 풀이 기록 + 게이미피케이션 XP/Confetti)
       patchSendProgress();
+
+      // 6-1. 외부 방문자 페이지 진입 즉시 자동 방문 기록 (모달 클릭 전 이탈자도 100% 추적)
+      logInitialPageVisit();
 
       // 7. 이전에 풀었던 문제라면 페이지 상단에 진행 안내 바 표시
       checkAndShowResumeBanner();

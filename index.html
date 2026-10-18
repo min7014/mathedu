@@ -2762,6 +2762,37 @@ function toggleMathStory() {
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
+
+  // 외부 방문자 메인 허브(index.html) 진입 실시간 기록 (세션당 1회, 봇 제외)
+  (function logHubVisit() {
+    try {
+      if (window.location.protocol !== 'http:' && window.location.protocol !== 'https:') return;
+      if (navigator && navigator.webdriver) return;
+      if (sessionStorage.getItem('mathedu_visit_logged_home')) return;
+      sessionStorage.setItem('mathedu_visit_logged_home', '1');
+      var vid = localStorage.getItem('mathedu_visitor_id');
+      if (!vid) {
+        vid = Math.random().toString(36).substring(2, 6).toUpperCase();
+        localStorage.setItem('mathedu_visitor_id', vid);
+      }
+      var u = window.MatheduAuth && window.MatheduAuth.getCurrentUser ? window.MatheduAuth.getCurrentUser() : null;
+      var g = window.MatheduAuth && window.MatheduAuth.getCurrentGuest ? window.MatheduAuth.getCurrentGuest() : null;
+      var sName = (u && u.name) ? u.name : ((g && g.name) ? g.name : ('홈방문#' + vid));
+      fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          quiz_slug: 'home',
+          student_name: sName,
+          current_step: 1,
+          total_steps: 1,
+          correct: 1
+        })
+      }).catch(function(){});
+    } catch(e) {}
+  })();
 })();
 </script>
 </body>

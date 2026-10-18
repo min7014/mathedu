@@ -903,9 +903,10 @@ function isMyRoom(roomId) {
   return false;
 }
 
-// 특정 학생 항목의 실명 표시 여부 결정 (오직 정식회원의 자기 수업만 실명 표시!)
+// 특정 학생 항목의 실명 표시 여부 결정 (오직 정식회원의 자기 수업 또는 이미 익명 코드인 외부 방문자 태그만 표시!)
 function shouldShowRealName(it) {
   if (isProjectorMode) return false; // 칠판 프로젝터 모드 가동 시 예외 없이 stu1 익명 강제
+  if (it && /^(자유\s*학습|Guest|홈방문|모평방문)/i.test(it.parsed_name || '')) return true; // 개인정보가 없는 익명 방문자 코드는 즉시 식별 표시
   if (!isOfficialMember()) return false; // 비회원/게스트는 실명 열람 불가
   if (it && it.parsed_room && isMyRoom(it.parsed_room)) return true; // 정식회원의 자기 수업: 실명 표시
   return false; // 그 외(타인 수업, 전체 대시보드): stu1, stu2... 익명 보호
@@ -1186,7 +1187,7 @@ function filterData(items) {
       if (!matchStu && !matchReal) return false;
     }
     return true;
-  });
+  }).sort((a, b) => b.updated_date.getTime() - a.updated_date.getTime());
 }
 
 function updateStats(items) {

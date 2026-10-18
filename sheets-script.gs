@@ -196,7 +196,7 @@ function doGet(e) {
         total_steps: row[3] || 0,
         correct: row[4] || 0,
         pct: row[5] || 0,
-        updated_at: row[6] ? row[6].toString() : ''
+        updated_at: normalizeTs(row[6])
       };
       if (!quizFilter || item.quiz_slug === quizFilter) {
         items.push(item);
