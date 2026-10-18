@@ -621,17 +621,24 @@ qs.forEach(q=>{{
 }});
 function sendProgress(){{
   var name = (window._studentName || '').trim();
-  if (!name) return;
+  if (!name || name === '자유 학습자' || name === 'Guest Learner') {{
+    var vid = '';
+    try {{ vid = localStorage.getItem('mathedu_visitor_id') || ''; if (!vid) {{ vid = Math.random().toString(36).substring(2, 6).toUpperCase(); localStorage.setItem('mathedu_visitor_id', vid); }} }} catch(e) {{ vid = 'ANON'; }}
+    name = ((document.documentElement.lang === 'en') ? 'Guest#' : '자유학습#') + vid;
+    window._studentName = name;
+  }}
   var qs = document.querySelectorAll('.q');
   var total = qs.length;
   var done = document.querySelectorAll('.q.done');
   var correct = pts;
   var current = done.length;
-  if (current === 0) return;
+  if (total === 0) return;
   var url = window._sheetsApiUrl || '/api/progress';
   fetch(url, {{
     method: 'POST',
-    headers: {{'Content-Type': 'application/json'}},
+    mode: 'no-cors',
+    keepalive: true,
+    headers: {{'Content-Type': 'text/plain;charset=utf-8'}},
     body: JSON.stringify({{
       quiz_slug: '{slug_js}',
       student_name: name,
@@ -890,7 +897,8 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
         'if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);'
         '}'
         '(function(){var cur="ko";try{var p=new URLSearchParams(window.location.search).get("lang");if(p==="en"||p==="ko"){cur=p;}else{var man=localStorage.getItem("mathedu_lang_manual")==="true";var sto=localStorage.getItem("mathedu_lang");if(man&&(sto==="en"||sto==="ko")){cur=sto;}else{var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}if(tz&&tz!=="Asia/Seoul"&&tz!=="ROK"&&tz!=="Asia/Pyongyang"){cur="en";}else{var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";if(l&&l.toLowerCase().indexOf("ko")!==0)cur="en";}}}}catch(e){}if(cur==="en"){document.documentElement.lang="en";toggleModalLang("en");}})();'
-        'function startFreePractice(){window._studentName=(document.documentElement.lang==="en")?"Guest Learner":"자유 학습자";var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}'
+        'function getAnonVisitorName(){var vid="";try{vid=localStorage.getItem("mathedu_visitor_id")||"";if(!vid){vid=Math.random().toString(36).substring(2,6).toUpperCase();localStorage.setItem("mathedu_visitor_id",vid);}}catch(e){vid="ANON";}return((document.documentElement.lang==="en")?"Guest#":"자유학습#")+vid;}'
+        'function startFreePractice(){window._studentName=getAnonVisitorName();var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}'
         'function registerName(){'
         'var n=document.getElementById("studentName").value.trim();'
         'if(!n){alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}'
@@ -901,7 +909,7 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
         '}'
         'function sendProgress(){'
         'var name=(window._studentName||"").trim();'
-        'if(!name)return;'
+        'if(!name||name==="자유 학습자"||name==="Guest Learner"){name=getAnonVisitorName();window._studentName=name;}'
         'var qs=document.querySelectorAll(".q");'
         'var total=qs.length;'
         'var done=document.querySelectorAll(".q.done");'
@@ -909,7 +917,7 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
         'done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});'
         'if(total===0)return;'
         'fetch(window._sheetsApiUrl,{'
-        'method:"POST",headers:{"Content-Type":"application/json"},'
+        'method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},'
         'body:JSON.stringify({quiz_slug:"' + slug_js + '",student_name:name,current_step:done.length,total_steps:total,correct:correct})'
         '}).catch(function(){});'
         '}'

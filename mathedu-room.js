@@ -29,6 +29,25 @@
     return l.toLowerCase().startsWith('en');
   }
 
+  function getVisitorAnonId() {
+    try {
+      var vid = localStorage.getItem('mathedu_visitor_id');
+      if (!vid) {
+        vid = Math.random().toString(36).substring(2, 6).toUpperCase();
+        localStorage.setItem('mathedu_visitor_id', vid);
+      }
+      return vid;
+    } catch(e) {
+      if (!window._fallbackVid) window._fallbackVid = Math.floor(1000 + Math.random() * 9000).toString();
+      return window._fallbackVid;
+    }
+  }
+
+  function getVisitorAnonName() {
+    var vid = getVisitorAnonId();
+    return isEnMode() ? ('Guest#' + vid) : ('자유학습#' + vid);
+  }
+
   function bilingual(ko, en) {
     return '<span class="bilingual-ko">' + ko + '</span><span class="bilingual-en">' + en + '</span>';
   }
@@ -74,6 +93,8 @@
 
   function initRoom() {
     injectBilingualStyles();
+    // 즉시 sendProgress를 CORS-safe 버전으로 패치 (외부 스크립트 로드 전 클릭 시에도 누락 방지)
+    patchSendProgress();
     ensureAuthLoaded(function() {
       // 0. 선생님의 오늘의 수업 팩(?pack=slug1,slug2,...) 네비게이션 안내
       injectLessonPackBanner();
@@ -340,14 +361,17 @@
       };
     }
 
+    window.startFreePractice = function() {
+      var tf = document.getElementById('trackFull');
+      if (tf) tf.remove();
+      window._studentName = getVisitorAnonName();
+      if (window.sendProgress) window.sendProgress();
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+    };
+
     var btnPreview = document.getElementById('btnTeacherPreviewInModal');
     if (btnPreview) {
-      btnPreview.onclick = function() {
-        trackFull.remove();
-        window._studentName = isEnMode() ? 'Guest Learner' : '자유 학습자';
-        if (window.sendProgress) window.sendProgress();
-        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
-      };
+      btnPreview.onclick = window.startFreePractice;
     }
 
     document.getElementById('btnTeacherOpenInModal').onclick = function() {
@@ -718,7 +742,10 @@
   function patchSendProgress() {
     window.sendProgress = function() {
       var name = (window._studentName || '').trim();
-      if (!name) return;
+      if (!name || name === '자유 학습자' || name === 'Guest Learner') {
+        name = getVisitorAnonName();
+        window._studentName = name;
+      }
 
       var qs = document.querySelectorAll('.q');
       var total = qs.length;
@@ -808,7 +835,8 @@
         fetch(window._sheetsApiUrl, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          keepalive: true,
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         }).catch(function(e) {
           console.warn('[mathedu] sendProgress error', e);
