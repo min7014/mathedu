@@ -29,8 +29,14 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-# Welcoming AI Educational Search & Citation Crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot)
+# Welcoming AI Educational Search & Citation Crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, CCBot)
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: ClaudeBot
@@ -51,5 +57,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-# XML Sitemap and Educational RSS Feed
+# XML Sitemap, RSS Feed, and AI Discovery Index (llms.txt)
 Sitemap: https://min7014.github.io/mathedu/sitemap.xml

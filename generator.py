@@ -5,6 +5,10 @@ import min7014_matcher
 TEMPLATE = r"""<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title} · min7014 mathedu</title>
+<meta name="description" content="{title} · 초등 눈높이부터 시작하는 단계별 인터랙티브 디딤돌 퀴즈 & GeoGebra 시각적 증명 무료 풀이">
+<meta name="keywords" content="{title}, 수능 수학 기출, 모의평가 수학 해설, 디딤돌 퀴즈, GeoGebra, 수학자료실, mathedu, min7014">
+<meta name="author" content="mathedu">
+<link rel="canonical" href="https://min7014.github.io/mathedu/board/{slug_js}.html">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <style>
 :root{{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);

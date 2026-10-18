@@ -1,6 +1,51 @@
 {
   "logs": [
     {
+      "slug": "scan_probe",
+      "script": "_regen_scan_probe.py",
+      "timestamp": "2026-10-18T00:20:59+00:00",
+      "status": "failure",
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "C:\\Users\\min\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\min\\\\Desktop\\\\mathedu\\\\_regen_scan_probe.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "slug": "scan",
+      "script": "_regen_scan.py",
+      "timestamp": "2026-10-18T00:20:59+00:00",
+      "status": "success",
+      "exit_code": 0,
+      "stdout": "[SKIP] _regen_data.py probe produced no PROBE line (rc=2)\n[STDERR] _regen_data.py C:\\Users\\min\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\min\\\\Desktop\\\\mathedu\\\\_regen_probe.py': [Errno 2] No such file or directory\n\n[SKIP] _regen_probe.py probe produced no PROBE line (rc=2)\n[STDERR] _regen_probe.py C:\\Users\\min\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\min\\\\Desktop\\\\mathedu\\\\_regen_probe.py': [Errno 2] No such file or directory\n\n[SKIP] _regen_scan.py probe produced no PROBE line (rc=2)\n[STDERR] _regen_scan.py C:\\Users\\min\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\min\\\\Desktop\\\\mathedu\\\\_regen_probe.py': [Errno 2] No such file or directory\n\n[SKIP] _regen_scan_probe.py probe produced no PROBE line (rc=2)\n[STDERR] _regen_scan_probe.py C:\\Users\\min\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\min\\\\Desktop\\\\mathedu\\\\_regen_probe.py': [Errno 2] No such file or directory\n\nSCAN_DONE regen=9 warn=0 fix=0\n",
+      "stderr": ""
+    },
+    {
+      "slug": "probe",
+      "script": "_regen_probe.py",
+      "timestamp": "2026-10-18T00:20:59+00:00",
+      "status": "failure",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_probe.py\", line 40, in <module>\n    main(sys.argv[1])\n         ~~~~~~~~^^^\nIndexError: list index out of range\n"
+    },
+    {
+      "slug": "a33ab59b",
+      "script": "_regen_a33ab59b.py",
+      "timestamp": "2026-10-18T00:20:59+00:00",
+      "status": "failure",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_a33ab59b.py\", line 13, in <module>\n    verify_quiz = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(verify_quiz)\n                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 940, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\n  File \"C:\\Users\\min\\Desktop\\mathedu\\verify_quiz.py\", line 19, in <module>\n    import sympy as sp\nModuleNotFoundError: No module named 'sympy'\n"
+    },
+    {
+      "slug": "51908207",
+      "script": "_regen_51908207.py",
+      "timestamp": "2026-10-18T00:20:59+00:00",
+      "status": "failure",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_51908207.py\", line 21, in <module>\n    verify_quiz = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(verify_quiz)\n                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 940, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\n  File \"C:\\Users\\min\\Desktop\\mathedu\\verify_quiz.py\", line 19, in <module>\n    import sympy as sp\nModuleNotFoundError: No module named 'sympy'\n"
+    },
+    {
       "slug": "51908207",
       "script": "_regen_51908207.py",
       "timestamp": "2026-10-14T18:08:31+00:00",
