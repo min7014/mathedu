@@ -1,0 +1,43 @@
+import os, re, json
+from datetime import datetime
+
+base = "C:/Users/min/Desktop/mathedu"
+
+# 1) _regen_*.py 스크립트 목록
+regen_files = sorted([f for f in os.listdir(base) if f.startswith("_regen_") and f.endswith(".py")])
+print(f"[1] _regen_*.py 스크립트: {len(regen_files)}개")
+for f in regen_files:
+    p = os.path.join(base, f)
+    print(f"    {f}  mtime={datetime.fromtimestamp(os.path.getmtime(p)).strftime('%Y-%m-%d %H:%M')}")
+
+# 2) board/*.html 최신 8개
+html_files = []
+for root, dirs, files in os.walk(base + "/board"):
+    for f in files:
+        if f.endswith(".html"):
+            html_files.append(os.path.join(root, f))
+html_files.sort(key=lambda p: os.path.getmtime(p), reverse=True)
+print(f"\n[2] board/*.html 최신 8개:")
+for p in html_files[:8]:
+    mt = datetime.fromtimestamp(os.path.getmtime(p)).strftime("%Y-%m-%d %H:%M")
+    print(f"    {mt}  {os.path.basename(p)}")
+
+# 3) 사이트 피드 항목 수
+feed = open(base + "/__site_feed.xml", encoding="utf-8").read()
+items = re.findall(r"<item>", feed)
+print(f"\n[3] __site_feed.xml 항목 수: {len(items)}")
+
+# 4) __site_index.json 및 __site_sitemap.xml mtime
+for f in ["__site_index.json", "__site_sitemap.xml", "__site_feed.xml", "__site_board_urls.txt"]:
+    p = os.path.join(base, f)
+    if os.path.exists(p):
+        mt = datetime.fromtimestamp(os.path.getmtime(p)).strftime("%Y-%m-%d %H:%M")
+        print(f"    {f}: {mt}")
+
+# 5) _regen_data.py의 생성 파일(index_site.json)은 board보다 최신인지
+idx = os.path.join(base, "board/index_site.json")
+if os.path.exists(idx):
+    mt = datetime.fromtimestamp(os.path.getmtime(idx)).strftime("%Y-%m-%d %H:%M")
+    print(f"\n    board/index_site.json: {mt}")
+else:
+    print("\n    board/index_site.json: 없음")

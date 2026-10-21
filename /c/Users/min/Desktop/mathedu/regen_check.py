@@ -1,0 +1,82 @@
+import os, sys, json, hashlib, glob
+
+BASE = "/c/Users/min/Desktop/mathedu"
+EXCLUDED = {"cron_check"}
+
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+files = sorted(glob.glob(os.path.join(BASE, "_regen_*.py")))
+print("=== ALL _regen scripts on disk ===")
+for p in files:
+    st = os.stat(p)
+    print(f"{st.st_mtime:.0f}  {os.path.basename(p)}")
+
+state = json.load(open(os.path.join(BASE, "_cron_state.json")))
+gstate = json.load(open(os.path.join(BASE, ".regen_cron_state.json")))
+print("\n=== _cron_state.json entries ===")
+print(json.dumps(state.get("entries", {}), ensure_ascii=False, indent=1))
+
+# Disk mapping
+on_disk = {os.path.basename(p).replace("_regen_", ""): p for p in files}
+
+# Compare with _cron_state.json
+print("\n=== COMPARISON vs _cron_state.json ===")
+any_changed = False
+for slug, entry in state.get("entries", {}).items():
+    if slug in EXCLUDED:
+        continue
+    path = on_disk.get(slug)
+    if not path:
+        print(f"  {slug}: MISSING ON DISK (in state only)")
+        any_changed = True
+        continue
+    sha = sha256(path)
+    mtime = os.stat(path).st_mtime
+    e = entry
+    hash_ok = sha == e.get("hash", "")
+    mtime_ok = mtime == e.get("mtime", 0)
+    status = "OK"
+    if not (hash_ok and mtime_ok):
+        any_changed = True
+        status = f"CHANGED (hash {'OK' if hash_ok else 'CHG'} mtime {'OK' if mtime_ok else 'CHG'})"
+    print(f"  {slug}: {status}")
+
+for slug, path in on_disk.items():
+    if slug in EXCLUDED:
+        continue
+    if slug not in state.get("entries", {}):
+        print(f"  {slug}: NEW ON DISK (not in state)")
+        any_changed = True
+
+# Compare with _regen_cron_state.json (build tracker)
+print("\n=== COMPARISON vs _regen_cron_state.json ===")
+for slug, entry in gstate.get("entries", {}).items():
+    if slug in EXCLUDED:
+        continue
+    path = on_disk.get(slug)
+    if not path:
+        print(f"  {slug}: MISSING ON DISK")
+        any_changed = True
+        continue
+    sha = sha256(path)
+    mtime = os.stat(path).st_mtime
+    e = entry
+    hash_ok = sha == e.get("hash", "")
+    mtime_ok = mtime == e.get("mtime", 0)
+    status = "OK"
+    if not (hash_ok and mtime_ok):
+        any_changed = True
+        status = f"CHANGED (hash {'OK' if hash_ok else 'CHG'} mtime {'OK' if mtime_ok else 'CHG'})"
+    print(f"  {slug}: {status}")
+for slug in on_disk:
+    if slug in EXCLUDED:
+        continue
+    if slug not in gstate.get("entries", {}):
+        print(f"  {slug}: NEW (not tracked in regen state)")
+
+print("\n=== RESULT:", "NEEDS BUILD" if any_changed else "SILENT", "===")

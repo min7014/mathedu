@@ -2312,7 +2312,7 @@ function toggleMathStory() {
 
       // 1. 학년도 매칭
       if (ef.year) {
-        var mYear = (it.examYear === ef.year) || title.includes(ef.year);
+        var mYear = (it.examYear === ef.year) || (it.examYearAlt === ef.year) || title.includes(ef.year);
         if (!mYear) return false;
       }
       // 2. 대상 학년 매칭

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안티그래비티 AI 퀴즈 제작 대기실 · mathedu</title>
+<style>
+:root {
+  --bg: #0b0f19;
+  --card: #151b2e;
+  --card2: #1c243d;
+  --line: #2e3850;
+  --txt: #f8fafc;
+  --sub: #94a3b8;
+  --accent: #7cc4ff;
+  --accent2: #c084fc;
+  --good: #4ade80;
+  --warn: #fbbf24;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  background: radial-gradient(circle at 50% 0%, #1a2240 0%, var(--bg) 75%);
+  color: var(--txt);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.container {
+  max-width: 620px;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+}
+.spinner-box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+}
+.spin {
+  width: 80px;
+  height: 80px;
+  border: 5px solid rgba(124,196,255,.15);
+  border-top-color: var(--accent);
+  border-right-color: var(--accent2);
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+.inner-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.15); } }
+
+h1 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #7cc4ff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+p.desc {
+  font-size: .98rem;
+  color: var(--sub);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* 문항 정보 카드 */
+.info-card {
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  text-align: left;
+  font-size: .9rem;
+}
+.info-card .item {
+  display: flex;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+.info-card .item:last-child { margin-bottom: 0; }
+.info-card .lbl {
+  color: var(--sub);
+  font-weight: 600;
+  min-width: 80px;
+}
+.info-card .val {
+  color: var(--txt);
+  font-weight: 700;
+  word-break: break-all;
+}
+
+/* 진행 단계 인디케이터 */
+.steps-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.step {
+  background: #11162a;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 8px;
+  font-size: .78rem;
+  color: var(--sub);
+  transition: .2s;
+}
+.step.done {
+  border-color: rgba(74,222,128,.4);
+  color: var(--good);
+  background: rgba(74,222,128,.08);
+}
+.step.active {
+  border-color: rgba(124,196,255,.5);
+  color: var(--accent);
+  background: rgba(124,196,255,.1);
+  font-weight: 700;
+}
+
+/* 실시간 상태 바 */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245,158,11,.15);
+  border: 1px solid rgba(245,158,11,.4);
+  color: #fbbf24;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: .85rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #fbbf24;
+  border-radius: 50%;
+  animation: blink 1s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: .9rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  background: var(--card2);
+  color: var(--txt);
+  cursor: pointer;
+  transition: .15s;
+}
+.btn:hover {
+  background: var(--accent);
+  color: #0b1020;
+}
+.btn-primary {
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  color: #0b1020;
+  border: none;
+}
+.btn-primary:hover {
+  opacity: .9;
+  transform: translateY(-1px);
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="quizWaitingBox" style="display:none;">
+  <div class="spinner-box">
+    <div class="spin"></div>
+    <div class="inner-icon">🤖</div>
+  </div>
+
+  <h1>안티그래비티 AI가 문제를 제작 중입니다!</h1>
+  <p class="desc">
+    출제 요청이 성공적으로 접수되어 현재 <b>5~8단계 인터랙티브 퀴즈</b>를 자동 생성 및 배포 중입니다.<br>
+    보통 1~2분 소요되며, <b>제작이 완료되는 즉시 이 페이지가 자동으로 문제 화면으로 바뀝니다.</b>
+  </p>
+
+  <div class="status-pill" id="liveStatusBadge">
+    <div class="status-dot"></div>
+    <span id="liveStatusText">AI 실시간 문제 분석 및 문항 빌드 중...</span>
+  </div>
+
+  <div class="steps-box">
+    <div class="step done">
+      <div>✅ 1단계</div>
+      <div style="margin-top:2px;">문제 접수 완료</div>
+    </div>
+    <div class="step active">
+      <div>⏳ 2단계</div>
+      <div style="margin-top:2px;">AI 개념 빌드업</div>
+    </div>
+    <div class="step">
+      <div>🚀 3단계</div>
+      <div style="margin-top:2px;">온라인 자동 배포</div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="item">
+      <span class="lbl">문항 코드:</span>
+      <span class="val" id="valSlug">-</span>
+    </div>
+    <div class="item">
+      <span class="lbl">접수 제목:</span>
+      <span class="val" id="valTitle">확인 중...</span>
+    </div>
+    <div class="item">
+      <span class="lbl">진행 상태:</span>
+      <span class="val" style="color:var(--warn)" id="valStatus">제작 및 배포 대기 중 (창을 유지해 주세요)</span>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="checkDeployment(true)">
+      🔄 수동 새로고침
+    </button>
+    <a href="./" class="btn">
+      🏠 mathedu 홈으로
+    </a>
+  </div>
+</div>
+
+<!-- 일반 404 안내 박스 -->
+<div class="container" id="generic404Box" style="display:none;">
+  <div style="font-size:3.5rem;margin-bottom:16px;">🔍</div>
+  <h1 style="background:none;-webkit-text-fill-color:initial;color:var(--txt);">페이지를 찾을 수 없습니다 (404)</h1>
+  <p class="desc">
+    요청하신 주소의 페이지가 존재하지 않거나 이동되었습니다.<br>
+    주소를 다시 확인해 주시기 바랍니다.
+  </p>
+  <div class="btn-group">
+    <a href="./" class="btn btn-primary">
+      🏠 mathedu 메인 홈으로 이동
+    </a>
+  </div>
+</div>
+
+<script>
+(function() {
+  const path = window.location.pathname;
+  const match = path.match(/\/board\/([a-zA-Z0-9_-]+)\.html/);
+
+  if (match) {
+    // 퀴즈 페이지 대기실 모드
+    const slug = match[1];
+    document.getElementById('quizWaitingBox').style.display = 'block';
+    document.getElementById('valSlug').innerHTML = '<code>' + escapeHtml(slug) + '</code>';
+
+    // Google Sheets API에서 최근 요청 제목 가져오기
+    fetchReportsForSlug(slug);
+
+    // 4초 주기로 배포 완료 여부 체크
+    setInterval(checkDeployment, 4000);
+  } else {
+    // 일반 404 모드
+    document.getElementById('generic404Box').style.display = 'block';
+  }
+
+  let checking = false;
+  async function checkDeployment(isManual = false) {
+    if (checking) return;
+    checking = true;
+
+    try {
+      // no-cache 옵션으로 현재 퀴즈 HTML이 실제 서버에 존재하는지 체크
+      const res = await fetch(window.location.href, {
+        method: 'GET',
+        cache: 'no-store'
+      });
+
+      // 404가 아니고 정상(200 OK)이며, 응답 본문에 mathedu 퀴즈 식별자가 포함되어 있다면 완성!
+      if (res.ok) {
+        const text = await res.text();
+        if (text.includes('quiz-container') || text.includes('mathedu-room') || text.includes('quiz-level') || text.includes('quiz-card')) {
+          const badge = document.getElementById('liveStatusBadge');
+          badge.style.background = 'rgba(74,222,128,.15)';
+          badge.style.borderColor = 'rgba(74,222,128,.4)';
+          badge.style.color = '#4ade80';
+          document.getElementById('liveStatusText').textContent = '🎉 퀴즈 제작 완료! 화면을 전환합니다...';
+          document.getElementById('valStatus').textContent = '✅ 배포 완료! 1초 후 이동합니다.';
+          document.getElementById('valStatus').style.color = 'var(--good)';
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 800);
+          return;
+        }
+      }
+    } catch (e) {
+      // 아직 배포 진행 중
+    } finally {
+      checking = false;
+    }
+
+    if (isManual) {
+      alert('현재 AI 에이전트가 문제를 정밀 분석 및 제작 중입니다. 보통 1~2분 소요되며 완료 즉시 자동 전환됩니다!');
+    }
+  }
+  window.checkDeployment = checkDeployment;
+
+  function fetchReportsForSlug(slug) {
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+    fetch(API_URL + '?action=reports&_t=' + Date.now())
+      .then(r => r.json())
+      .then(data => {
+        const reports = (data && data.reports) || [];
+        // 슬러그가 일치하거나 가장 최근의 _request_new 요청 찾기
+        const req = reports.slice().reverse().find(r => {
+          return r.quiz_slug === '_request_new' && (r.text || '').includes(slug);
+        }) || reports.slice().reverse().find(r => r.quiz_slug === '_request_new');
+
+        if (req && req.text) {
+          const titleMatch = req.text.match(/제목:\s*(.*?)(?=\n내용:|\n정답|\n이메일|\Z)/);
+          if (titleMatch && titleMatch[1].trim()) {
+            document.getElementById('valTitle').textContent = titleMatch[1].trim();
+          } else {
+            const firstLine = req.text.replace(/\[문제 생성 요청\]/g, '').trim().split('\n')[0];
+            document.getElementById('valTitle').textContent = firstLine || 'AI 수학 퀴즈 자동 생성';
+          }
+        }
+      })
+      .catch(() => {});
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1464 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값 · mathedu 수학자료실</title>
+<meta name="description" content="2026학년도 10월 학력평가 고3 공통(수학I·II) 19번 · [2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값. 초등학생도 풀 수 있는 단계별 디딤돌 5지선다 퀴즈 및 상세 해설. Step-by-step scaffolding quiz.">
+<meta name="keywords" content="2026학년도 10월 학력평가, 2027학년도 10월 모의평가, 고3 수학 19번, [2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값, 공통(수학I·II), 공통(수학I·II), 수학II, 미분, 최대와최소, 삼차함수, 단답형, 19번, 디딤돌 퀴즈, GeoGebra, 수학자료실, mathedu">
+<meta name="author" content="mathedu">
+<meta property="og:site_name" content="mathedu 수학자료실">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값 · mathedu 수학자료실">
+<meta property="og:description" content="2026학년도 10월 학력평가 고3 공통(수학I·II) 19번 · [2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값. 초등학생도 풀 수 있는 단계별 디딤돌 5지선다 퀴즈 및 상세 해설. Step-by-step scaffolding quiz.">
+<meta property="og:url" content="https://min7014.github.io/mathedu/board/c261019.html">
+<meta property="og:image" content="https://min7014.github.io/mathedu/board/img_c261019.png">
+<link rel="canonical" href="https://min7014.github.io/mathedu/board/c261019.html">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+<style>
+
+:root{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
+--txt:#eef2ff;--sub:#aab4d4;--accent:#7cc4ff;--accent2:#a78bfa;--good:#5eead4;--bad:#fb7185;--gold:#fde68a;
+--glass-blur:22px;--glass-shadow:0 8px 32px rgba(0,0,0,.40);--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;color:var(--txt);line-height:1.7;
+font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+background:
+ radial-gradient(circle at 12% 8%, rgba(124,196,255,.35), transparent 42%),
+ radial-gradient(circle at 88% 12%, rgba(167,139,250,.32), transparent 40%),
+ radial-gradient(circle at 50% 55%, rgba(94,234,212,.18), transparent 45%),
+ radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
+ linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);
+background-attachment:fixed;min-height:100vh}
+.wrap{max-width:820px;margin:0 auto;padding:24px 18px 80px}
+h1{font-size:1.55rem;margin:0 0 4px;
+background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:1.2rem;margin:34px 0 10px;color:var(--accent);
+border-left:4px solid transparent;border-image:linear-gradient(var(--accent),var(--accent2)) 1;padding-left:10px}
+.lead{color:var(--sub);font-size:.95rem;margin:0 0 8px}
+.sym{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.sym div{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:8px 10px;
+font-size:.9rem;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.sym b{color:var(--gold)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:var(--glass-shadow);transition:.2s}
+.q:hover{border-color:rgba(124,196,255,.4)}
+.q .lvl{font-size:.75rem;color:var(--sub)}
+.q .stem{font-size:1.02rem;margin:6px 0 12px;font-weight:600}
+.opts{display:grid;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--line);
+border-radius:12px;padding:10px 12px;cursor:pointer;transition:.15s;font-size:.95rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt .n{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:rgba(124,196,255,.25);
+display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--accent)}
+.opt.correct{background:rgba(94,234,212,.16);border-color:var(--good)}
+.opt.wrong{background:rgba(251,113,133,.16);border-color:var(--bad)}
+.opt.locked{cursor:default}
+.exp{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(124,196,255,.1);
+border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.exp.show{display:block}
+.exp b{color:var(--gold)}
+.exp-toggle-btn{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+.exp-toggle-btn:hover{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}
+.score{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
+display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.score b{color:var(--gold)}
+.bar{height:8px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden;flex:1;margin:0 12px}
+.bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:.3s}
+.know{background:var(--card);border:1px dashed var(--accent);border-radius:14px;padding:14px;margin:12px 0;font-size:.92rem;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.know h3{margin:0 0 6px;color:var(--accent);font-size:1rem}
+.cards{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.card{width:64px;height:92px;border-radius:10px;display:flex;flex-direction:column;
+align-items:center;justify-content:center;font-weight:700;border:2px solid rgba(255,255,255,.25)}
+.card .num{font-size:1.3rem}
+.card .face{font-size:.7rem;margin-top:4px;opacity:.85}
+.card.front{background:rgba(244,247,255,.85);color:#1b2436;border-color:#cfd8ee;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.card.back{background:rgba(57,67,95,.85);color:#fff;border-color:#56638c;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.sol{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));box-shadow:var(--glass-shadow)}
+.diagram{background:rgba(255,255,255,.92);color:#1b2436;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}
+.diagram svg,.diagram img{max-width:100%;height:auto}
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;
+padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.3);transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,196,255,.45)}
+.final{text-align:center;margin:30px 0;font-size:1.05rem}
+.final .ans{font-size:1.6rem;color:var(--good);font-weight:800;margin:8px 0}
+code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:var(--gold)}
+.topbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tbtn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
+padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+#trackSubmit{max-width:820px;margin:30px auto;padding:20px;background:rgba(110,168,254,.08);border:1px solid rgba(110,168,254,.3);border-radius:14px;text-align:center}
+#trackSubmit h3{color:#6ea8fe;margin:0 0 10px}
+#trackSubmit p{color:#9aa6c0;font-size:.88rem;margin:0 0 12px}
+#trackSubmit input{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}
+#trackSubmit button{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}
+#trackResult{display:none;padding:10px;border-radius:10px;font-weight:700}
+.orig-card{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
+border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.orig-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.orig-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+color:#0b1020;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:20px;
+letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}
+.orig-badge{font-size:.82rem;color:var(--gold);font-weight:700;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);padding:3px 10px;border-radius:8px}
+.orig-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:768px){.orig-grid{grid-template-columns:1fr} }
+.orig-col-media{display:flex;flex-direction:column;gap:8px}
+.orig-media-frame{background:rgba(13,16,32,.75);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.orig-media-frame img{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto}
+.orig-media-sub{font-size:.76rem;color:var(--sub);text-align:center}
+.orig-col-desc{display:flex;flex-direction:column;gap:10px}
+.orig-text-box{background:rgba(255,255,255,.07);border:1px solid rgba(124,196,255,.3);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7}
+.orig-text-box h4{margin:0 0 8px;color:var(--accent);font-size:.96rem;font-weight:700}
+.orig-cond-wrap{background:rgba(13,16,32,.7);border:1px solid rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;font-size:.88rem;line-height:1.65;margin-top:8px}
+.orig-tip{font-size:.85rem;color:var(--sub);background:rgba(13,16,32,.5);border:1px dashed rgba(124,196,255,.3);border-radius:10px;padding:10px 12px;line-height:1.6}
+
+/* 수학자료실 공식 연계 심층 탐구 카드: 가로 2열 그리드 배치 */
+.min7014-addon-card{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
+border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
+backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
+box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:.2s}
+.min7014-addon-card:hover{border-color:rgba(124,196,255,.55)}
+.min-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.min-header-title{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:#fff}
+.min-logo{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}
+.min-tag{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
+.min-lead{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}
+.min-list{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:14px;width:100%;box-sizing:border-box}
+@media (max-width:640px){.min-list{grid-template-columns:1fr} }
+.min-item{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}
+.min-item:hover{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}
+.min-item:has(.min-ggb-frame-wrap.active){grid-column:1 / -1}
+.min-item-main{width:100%;min-width:0;box-sizing:border-box}
+.min-item-title{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}
+.min-item-title:hover{color:var(--accent)}
+.min-item-sub{display:block;font-size:.8rem;font-weight:400;color:var(--sub);margin-top:4px;line-height:1.4;word-break:break-word}
+.min-bullet{font-size:.85rem;margin-right:4px}
+.min-item-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.min-btn{font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.min-btn-ggb{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.45);color:#38bdf8}
+.min-btn-ggb:hover{background:#38bdf8;color:#0b1020}
+.min-btn-pdf{background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.45);color:#f87171}
+.min-btn-pdf:hover{background:#f87171;color:#0b1020}
+.min-btn-yt{background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.45);color:#fca5a5}
+.min-btn-yt:hover{background:#ef4444;color:#fff}
+.min-btn-detail{background:rgba(124,196,255,.14);border:1px solid rgba(124,196,255,.4);color:var(--accent)}
+.min-btn-detail:hover{background:var(--accent);color:#0b1020;border-color:var(--accent)}
+.min-footer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}
+.min-footer-link{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}
+.min-footer-link:hover{text-decoration:underline;color:#fff}
+.min-btn-algeo{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}
+.min-btn-algeo:hover{background:#a855f7;color:#fff}
+.min-cat-badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}
+.min-visual-tip{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:.88rem;line-height:1.65;color:#e0e7ff}
+.min-visual-tip b{color:#67e8f9}
+.min-ggb-frame-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}
+.min-ggb-frame-wrap.active{display:block}
+.opts.opts-inline{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px}
+@media (max-width:640px){.opts.opts-inline{grid-template-columns:repeat(2, 1fr)} }
+/* Bilingual Dual-Display Engine */
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 0.9em;
+  line-height: 1.6;
+  border-left: 2px solid rgba(147, 197, 253, 0.45);
+  padding-left: 12px;
+  font-weight: 400;
+}
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}
+html[lang="en"] .stem span.bilingual-en {
+  display: inline !important;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+html[lang="en"] h1 .bilingual-en {
+  font-size: 1.05rem;
+  color: #bfdbfe;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] h2 .bilingual-en {
+  font-size: 0.92rem;
+  color: #a78bfa;
+  font-weight: 600;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 4px;
+}
+html[lang="en"] .lead .bilingual-en {
+  color: #cbd5e1;
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.88rem;
+}
+html[lang="en"] .stem .bilingual-en {
+  color: #bfdbfe;
+  font-weight: 500;
+  margin-top: 8px;
+}
+html[lang="en"] .orig-tag .bilingual-en {
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+html[lang="en"] .orig-tip .bilingual-en {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+html[lang="en"] .know .bilingual-en {
+  color: #a5f3fc;
+  border-left-color: rgba(165, 243, 252, 0.5);
+}
+html[lang="en"] .sol .bilingual-en {
+  color: #cbd5e1;
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+html[lang="en"] .exp .bilingual-en {
+  color: #fef08a;
+  border-left-color: rgba(254, 240, 138, 0.5);
+}
+html[lang="en"] .sym div .bilingual-en {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+.lang-group {
+  display: inline-flex;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}
+.lang-btn {
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.lang-btn.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #0b1020;
+  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   📱 모바일 화면 수식 및 텍스트 틀 이탈(오버플로) 완전 방지 시스템
+   Mobile-Responsive Mathematical Formula & Layout Overflow Prevention
+   ════════════════════════════════════════════════════════════════════════ */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  width: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.wrap {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 18px 80px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* 1. 텍스트 및 레이블 가로 넘침(틀 이탈) 방지 */
+h1, h2, h3, h4, h5, h6, p, div, span, li, a, label {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
+.lead, .exp, .sol p, .orig-text-box, .min-visual-tip, .sym-desc,
+.bilingual-ko, .bilingual-en, .orig-cond-wrap, .orig-tip, .know,
+.sol-highlight, .min-item-title, .min-item-sub {
+  overflow-wrap: anywhere !important;
+  word-break: normal;
+}
+
+/* 2. MathJax 3 수식 모바일 프레임 완벽 격리 및 반응형 스크롤 */
+mjx-container {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 블록 디스플레이 수식 ($$...$$): 긴 수식도 카드 틀 밖으로 튀어나가지 않고 내부에서 매끄럽게 가로 스크롤 */
+mjx-container[display="true"] {
+  display: block !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  margin: 0.85em 0 !important;
+  padding: 8px 10px !important;
+  background: rgba(13, 16, 32, 0.55);
+  border-radius: 10px;
+  border: 1px solid rgba(124, 196, 255, 0.2);
+  text-align: center !important;
+  scrollbar-width: thin;
+}
+
+mjx-container[display="true"]::-webkit-scrollbar {
+  height: 3px;
+}
+mjx-container[display="true"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+mjx-container[display="true"]::-webkit-scrollbar-thumb {
+  background: rgba(124, 196, 255, 0.25);
+  border-radius: 3px;
+}
+
+/* 인라인 수식 ($...$): 밑줄 및 가로 스크롤바 원천 차단, 자연스러운 인라인 정렬 */
+mjx-container:not([display="true"]) {
+  display: inline-flex !important;
+  vertical-align: middle !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  padding: 0 1px !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  scrollbar-width: none !important;
+}
+
+mjx-container:not([display="true"])::-webkit-scrollbar {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+/* 4지/5지선다 선택지(.opt): 수식 및 보기 항목의 불필요한 밑줄·스크롤바 전면 제거 */
+.opt, .opt * {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+.opt mjx-container {
+  overflow: visible !important;
+  scrollbar-width: none !important;
+}
+.opt mjx-container::-webkit-scrollbar {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+/* 3. 그리드/플렉스 자식 요소 min-width: 0 리셋 (내부 콘텐츠가 프레임을 밀어내는 현상 원천 차단) */
+.orig-grid,
+.orig-grid > div,
+.orig-col-media,
+.orig-col-desc,
+.min-list,
+.min-list > div,
+.min-item,
+.min-item-main,
+.min-item-actions,
+.opts,
+.opt,
+.sym,
+.sym > div,
+.sym-card,
+.topbar,
+.score,
+.score > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+/* 4. 카드 컨테이너 틀 경계선 보호 */
+.orig-card, .sol, .q, .exp, .know, .min7014-addon-card, .sym-card, .step0-visual-box {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* 5. 모바일 화면 최적화 (화면 폭 768px 이하) */
+@media (max-width: 768px) {
+  .orig-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  .sym {
+    grid-template-columns: 1fr !important;
+  }
+  .min-list {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 6. 스마트폰 표준 화면 최적화 (화면 폭 640px 이하) */
+@media (max-width: 640px) {
+  .wrap {
+    padding: 16px 14px 70px !important;
+  }
+  h1 {
+    font-size: 1.3rem !important;
+    line-height: 1.45 !important;
+  }
+  h2 {
+    font-size: 1.12rem !important;
+    margin: 26px 0 10px !important;
+  }
+  .lead {
+    font-size: 0.9rem !important;
+  }
+  .orig-card {
+    padding: 16px 14px !important;
+    margin: 14px 0 20px !important;
+  }
+  .orig-text-box {
+    padding: 12px 14px !important;
+    font-size: 0.88rem !important;
+  }
+  .q {
+    padding: 16px 14px !important;
+    margin: 14px 0 !important;
+  }
+  .q .stem {
+    font-size: 0.98rem !important;
+  }
+  .opts.opts-inline {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .opt {
+    padding: 9px 12px !important;
+    font-size: 0.92rem !important;
+  }
+  .sol {
+    padding: 18px 14px !important;
+    font-size: 0.9rem !important;
+  }
+  .min7014-addon-card {
+    padding: 16px 14px !important;
+    margin: 20px 0 !important;
+  }
+  .min-item {
+    padding: 12px 14px !important;
+  }
+  .min-ggb-frame-wrap iframe {
+    height: 380px !important;
+  }
+  /* 모바일 수식 가독성 및 균형 비례 축소 */
+  mjx-container {
+    font-size: 92% !important;
+  }
+}
+
+/* 7. 초소형 스마트폰 화면 최적화 (iPhone SE, Galaxy 폴드 등 폭 420px 이하) */
+@media (max-width: 420px) {
+  .wrap {
+    padding: 12px 10px 60px !important;
+  }
+  h1 {
+    font-size: 1.18rem !important;
+    line-height: 1.4 !important;
+  }
+  h2 {
+    font-size: 1.05rem !important;
+  }
+  .orig-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+  .orig-tag {
+    font-size: 0.75rem !important;
+    padding: 4px 10px !important;
+  }
+  .topbar {
+  padding-right: 125px;
+
+    gap: 6px !important;
+  }
+  .tbtn {
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+  }
+  .lang-btn {
+    padding: 4px 8px !important;
+    font-size: 0.76rem !important;
+  }
+  .score {
+    font-size: 0.86rem !important;
+    padding: 8px 0 !important;
+  }
+  .bar {
+    margin: 0 8px !important;
+  }
+  .opts.opts-inline {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+  .opt {
+    padding: 8px 10px !important;
+    font-size: 0.88rem !important;
+    gap: 6px !important;
+  }
+  .opt .n {
+    width: 22px !important;
+    height: 22px !important;
+    flex: 0 0 22px !important;
+    font-size: 0.76rem !important;
+  }
+  .min-item-actions {
+    gap: 4px !important;
+  }
+  .min-btn {
+    padding: 4px 8px !important;
+    font-size: 0.74rem !important;
+  }
+  .min-ggb-frame-wrap iframe {
+    height: 300px !important;
+  }
+  mjx-container {
+    font-size: 85% !important;
+  }
+  #studentName {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* 8. 극소형 뷰포트 (폭 360px 이하) */
+@media (max-width: 360px) {
+  .wrap {
+    padding: 10px 8px 50px !important;
+  }
+  h1 {
+    font-size: 1.08rem !important;
+  }
+  .q, .sol, .orig-card, .min7014-addon-card, .sym-card, .know {
+    padding: 12px 10px !important;
+    border-radius: 12px !important;
+  }
+  mjx-container {
+    font-size: 80% !important;
+  }
+}
+
+</style>
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\(','\)']]}};</script>
+<script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
+<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+
+<link rel="canonical" href="https://min7014.github.io/mathedu/board/c261019.html">
+<meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c261019.html">
+<meta name="mathedu-offline-version" content="true">
+<meta name="mathedu-quiz-slug" content="c261019">
+<meta name="mathedu-offline-build-time" content="2026-10-21T03:50:54.578522+00:00">
+<meta name="mathedu-offline-hash" content="eeb84636">
+<meta name="mathedu-version-label" content="v2026.10.21">
+
+</head><body><div class="wrap">
+
+<!-- 🌐 오프라인 단독 학습 배너 & 온라인 원본 문제 링크 안내 -->
+<div class="mathedu-offline-banner" style="background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(129,140,248,.18));border:2px solid #38bdf8;border-radius:16px;padding:18px 22px;margin:16px 0 24px;box-shadow:0 8px 30px rgba(0,0,0,.45);color:#fff;font-family:system-ui,sans-serif">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.25);border:1px solid #38bdf8;color:#38bdf8;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">
+      <span class="bilingual-ko">📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)</span>
+      <span class="bilingual-en">📦 Standalone Offline Quiz (No Internet Required)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:.15s">
+        <span class="bilingual-ko">🔄 최신 버전 확인</span>
+        <span class="bilingual-en">🔄 Check for Updates</span>
+      </button>
+      <span style="font-size:0.78rem;color:#94a3b8">mathedu</span>
+    </div>
+  </div>
+  <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px"><span class="bilingual-ko">[2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #19] Maximum and Minimum of a Cubic Function on a Closed Interval</span></div>
+  <div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px">
+    <span class="bilingual-ko">이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
+    보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.</span>
+    <span class="bilingual-en">This file is a <b>standalone offline interactive math quiz</b> runnable in any browser without internet.<br>
+    Selecting an option reveals instant scoring and detailed step-by-step explanations.</span>
+  </div>
+
+  <!-- 🔔 업데이트 감지 시 표시되는 인라인 알림 바 -->
+  <div id="matheduUpdateAlertSlot" style="display:none;margin-bottom:12px;padding:12px 16px;background:rgba(253,230,138,.14);border:1.5px solid #fde68a;border-radius:12px;color:#fde68a;font-size:0.88rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:1.1rem">🔔</span>
+      <span class="bilingual-ko"><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>
+      <span class="bilingual-en"><b>An update for this quiz is available!</b> (Download and save latest version)</span>
+    </div>
+    <button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">
+      <span class="bilingual-ko">업데이트 보기 ➔</span>
+      <span class="bilingual-en">View Update ➔</span>
+    </button>
+  </div>
+
+  <div style="background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <div style="font-size:0.85rem;color:#e2e8f0;word-break:break-all">
+      <span style="color:#7cc4ff;font-weight:700">
+        <span class="bilingual-ko">🌐 온라인 원본 문제 주소:</span>
+        <span class="bilingual-en">🌐 Online Problem URL:</span>
+      </span><br>
+      <a href="https://min7014.github.io/mathedu/board/c261019.html" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700;text-decoration:underline;font-family:monospace">
+        https://min7014.github.io/mathedu/board/c261019.html
+      </a>
+    </div>
+    <div style="display:flex;gap:8px">
+      <a href="https://min7014.github.io/mathedu/board/c261019.html" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
+        <span class="bilingual-ko">🌐 온라인 원본 열기 ➔</span>
+        <span class="bilingual-en">🌐 Open Online ➔</span>
+      </a>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">
+        <span class="bilingual-ko">🏛️ 수학자료실</span>
+        <span class="bilingual-en">🏛️ Math Archive</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="topbar">
+<a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
+<img src="data:image/png;base64,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" alt="mathedu" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
+<span><b>mathedu</b></span>
+</a>
+<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
+<div class="lang-group">
+  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko', true)">한국어</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en', true)">English (Bilingual)</button>
+</div>
+</div>
+<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
+<span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
+<h1><span class="bilingual-ko">📘 [2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값</span><span class="bilingual-en">📘 [2026 AY Oct Exam Grade 12 #19] Maximum and Minimum of a Cubic Function on a Closed Interval</span></h1>
+<p class="lead">초등학생도 1단계부터 차근차근 따라가면 수능·학력평가 본문항까지 스스로 풀 수 있는 단계별 디딤돌 퀴즈입니다.<span class="bilingual-en">Elementary-to-advanced step-by-step scaffolding quiz. Instant scoring & explanations upon selection.</span></p>
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
+<div class="orig-card">
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original Exam Problem (Today's Goal)</span></div>
+    <span class="orig-badge"><span class="bilingual-ko">2026학년도 10월 고3 19번</span><span class="bilingual-en">2026 AY Oct Exam Grade 12 #19</span></span>
+  </div>
+
+  <div class="orig-grid">
+    <!-- 좌측: 실제 시험지 원본 이미지 캡처 -->
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA6oAAACzCAIAAAAPL3aHAACXtklEQVR4nO29eTxU7///f2Zh7PtWtoiKqGhTUVLKi5KKNm1aad+0aRWtlFRKK0mRpZRClpJQZAkh2SlbWcY6xsz8bh/X7z033xnGGDOMXPc/uumc61znzFmf1/N6Ph9PFIVCQSAQCAQCgUAgkOEBerAPAAKBQCAQCAQCGTig+QuBQCAQCAQCGUZA8xcCgUAgEAgEMoyA5i8EAoFAIBAIZBgBzV8IBAKBQCAQyDACmr8QCAQCgUAgkGEENH8hEAgEAoFAIMMIaP5CIBAIBAKBQIYR0PyFQCAQCAQCgQwjoPkLgUAgEAgEAhlGQPMXAoFAIBAIBDKMgOYvBAKBQCAQCGQYAc1fCAQCgUAgEMgwApq/EAgEAoFAIJBhBDR/IRAIBAKBQCDDCGj+QiAQCAQCgUCGEdD8hUAgEAgEAoEMIwbO/C0rK7O0tCwtLWV+EwqF0tjYyMmDgkAgEAgEAoEMLwbC/P358+fatWvV1dWDgoKUlJR6bV9SUrJ7925lZWVxcXFFRUVJSUltbe1Xr14NwKFCIJABpq2tLS8vr6amBp55ZmhpacnLy6uqqoKnCwKBQFgGi3CMioqKN2/e3Llzp6ioqK6uDo1GnzlzhvEmeDzezs7uzZs3TU1NAgICQkJCPDw8TU1NOTk569evt7Ozu3DhAjLgNDc343A4LJZT56q6urq1tVVZWZlD/ZNIpJKSEgkJCTExMQ7tYohCoVBQKBT39DPcaGxsPHPmDJlMVlFR+fnz57t37w4ePLht27bBPi4upbm5+eDBg/X19XJycp8/f66trT19+rS1tTUyLKmrqxMTE+OS566srExMTExYWHiwDwTy/0Mmk21sbKinw8jIaMOGDUPr7GRmZrq4uFD/u3v37ilTpnB0jxQKpaCgQFpaWlRUlEP9//r1S6QThBugsJXy8vJDhw7NmTNn5MiRkpKSOByOuiMJCYn8/HwG26ampsrJyWEwGDExsSNHjtTU1IDlf//+nTJlCgqFEhMT+/z5M2VgaWho0NDQwGKxWlpa+/btS0xMZPsuVqxYgSCIpKTk4sWLb926VVVVxd7+s7Ky1NXVEQRRVVXdtWtXZmZmf3qztbVdv369v79/W1sbZSjz7ds3Q0PDpqamfvZDIBDmzZuXnJzMpuMaRlhYWHS9G69cuYIgiJOT06AeFPeydu3a9PR06n8PHDiAIMilS5cow4/g4GA+Pj4BAYEZM2Y4ODikpqYO4sEUFRWNHTsWQRA1NbWdO3fGx8dzYi+urq6HDx/28/MrKyujDDXc3NxWrlx56tSp6OjogflwEIlEBEE0NDRmd+Lq6koZanz58gUcvIGBAYIgAQEBnN7jr1+/9PT0UCjU5MmTjx071vVtwxYSExMVFRURBFFRUdmyZcv79+8pgwqbzd8TJ04gCMLPzy/WCQaDoZq/KioqDDaMiIiQkJBAEERKSurr1680a0tLSyUlJREEmT17NmXAIZFIz58/l5eXBz/E2dmZ7bvIzMw0MzMD/cvKyrK9fyKReO3aNV5eXgRBcDgciURiuatfv34tWrQIXKkLFy4MUSP4y5cvSkpKWVlZbOntx48fSkpKCQkJbOltmFBcXIwgiJiYGB6PB0t+/vyJIIigoCCZTB7so+M6goOD9+3b19HRQV3S3NwsISHBy8v7+/dvyvDj9+/fdnZ2VO9vZGTkIB4MiUQKCgoCXgYEQe7fv8/2XSQlJenr64P+p02b9ubNGwpnIBAIXW8ztlBdXX348GFBQUFgHhw9epQyIObvAJiMA8AA/xZfX19gjCEIwvbbjEgkPnjwQFpaGvRvZmZGGTxQ/2cCs4+cnJy/f/+CvwkEgq+v77Nnz9ra2jAYzMmTJ0+fPt3tVunp6UZGRmAyKyoqavLkyfRtRowYUVlZKSkp+efPH2QwqK6unjhxYmVlpYODg5OTEyd2ce7cuVOnTomKitbX1zPTnkwmz507t76+XllZWVZWlo+PD4fD8fLySkhIWFtbjxgxgqZ9YGCglZUV8/0z4PDhw8BXZ2tre/v2bWRIUVZWNm3aNG9v7wULFrCrz6ioqLVr1yYnJ4PRLaRXamtrx44dKygomJuby8fHhyBIUVGRqqqqgIBAc3MzPIE07Ny508PDY9OmTQ8ePKAuNDMze/v2rbe39/r164fnGYuIiDAzMyORSOHh4QsXLhzcg2lpaZk8eXJubq6Hh4ednR0zmwQHB1MoFGVlZUVFRSkpqa4Oo24JCAjYtm1bfX391KlTk5KSGDc+fvx4Xl6empqarKyssLAwDw8PGo3u6OggEomtra0EAqG5ubmtra21tbXtfxQVFaWlpVEoFDU1tadPn3b7LWaZ379/r1+/Pjo6WkJCgmoncIiOjg4eHp6AgABLS0tkiMO535KZmeno6KisrDx58uS5c+fKycmB5UVFRVOmTKmtrX316tXixYvZu1MEQf78+WNqapqcnKyjo5OamooMEmyOZ9XQ0Oj6XwKBEBQU1NbWJioqunbt2m43qa2tNTMzq6urExYWPnfuXE/Pm6ioaGVlJQqFqqiooDfsWIZEIuno6IwYMcLe3n7+/PkMWsrIyMyYMePFixfgU80Mzc3NGRkZkyZN4ufnZ6b9f//9d+rUqV7fgFTQaHRERMTx48fd3d1JJBJ1ORaLlZGRof8iGhoaIgjCfP8MKC8vRxCEl5e3a3zVkIBEIllZWS1ZsoSNti+CIPPnz7ewsLCysoqPj2fLGf7nkZCQ+P37NxqNpp6ujIwMBEFWrVo12IfGjYwaNQrEqnVdCNxpDQ0NyHBl4cKF06ZNS0xMZP61zDkEBARUVVVzc3O7Rv0xRltbe+nSpd+/fwf/FRUVFRYWFhcX3759+86dO+nbW1lZtbS0bNy4UVxcvNfOHR0dvb29L168mJ+fLywsPGfOnBEjRoh2IiQkJCEhoaSkJCAgwPc/+Pn5+fj4zM3Nc3NzZWRkJk6ciLCVkSNHXrhwYdq0aUx+ECGcRltbe926dYcPH3Z1dUWhUCdOnHB0dARz9fr6+q9evQIzxmxHSkpq7969a9eupbqB/7XUNzBUxePx4KkePXp0t2327NlTXV2NIIiCgkK3DzygpaUF/AEmAtgFBoN5+/atiYmJsbHxzJkzb926NWnSpJ4a9zXNQkBAwNPT09vbW0hIaMSIEUJCQhgMBmS5BQQECAgI9P/4+fj4rl69evz48fr6egwGg8VieXh4wJQowjEuXrz47NkzBEE8PT2nTZuGcAeVlZWvX7+ura01NDScPn16T82uXr3648ePd+/esf0Arly5MmrUqKtXr9rb27O9838SHh4e6t8gQFBVVdXZ2XlQD4pLsbe3NzMzGzNmTNeFWVlZCIKAwNNhS9e7aACgUChhneDxeD09PSa9vD2hrq6elJTk5uaWnJxM+B8CAgLUWDt6QFoSMx8jLBa7efPmTZs2FRQUyMvLM2l0grmXLVu2cCLbGxw2lyQsQhAEMTc3NzExWbFiRUhISHp6OsvnpLCwcO/evePGjdu8efO4ceN6bQ+8Hmg0+t80fykUSmhoKPidPSVdZmZmvn37tqOjQ0xMzMPDg8FTAcxfCoXC9mdSQUHh/fv3kydPTkhImDJlyrdv38aPH8+WnlEolJeX17x5844dO1ZYWIjBYHA4nLi4uICAAHsdhFKd0CwkkUhfv36tq6tTVFRk1y9CEOT69evHjh1DEERLS2vQZxupuLm5Xbx40dnZeeLEiQcPHlyyZEm3Nujfv38dHR0PHTrEicxTYWHhQ4cOnT17dv369bKysgjXAAIHk5KSamtrRUVFtbW1Z82axQ3eMsCnT5/+/Pnz8OFDJSUlf39/GRmZwT6i/7MAIiMjs7OziUSilJTU5MmT9fT0BvugEE1Nza7/TUtLy8nJ0dLSYjxtNZCUl5d/+PChrKxMUFBQXV3d2NiY5de1v7+/hobGhAkTmGzPLovq9+/f27dvJxAIfHx8IiIiCgoKUlJSra2tzc3NdXV1f//+TUtLKywsBI0zMjK6NX/7dDACAgLHjx/v63EyvwsUCqWmpsZ8zyC8kPG73dfX9/v37zIyMkCdCY1GE4lEAoHQ0tJCIBCIRGJ6evrXr1+lpaX37dtHPw/JVeZvTU1NZGRkcXExBoMZP378vHnzOOSc5tr3MC8v75YtW0JCQui9ZsxfKVVV1WXLlu3evdvFxcXExOT8+fM6OjoId8NB0zs+Ph7MyDOIfDh58mRdXR0ILQBT891SXV0NLgOZTKYGZbMRaWnp//77D0zIqqiosLfzdevWlZeXd3R0EAgEPB5fUlISEBDA/OwYDZGRkfHx8cXFxe3t7TSrmpubKyoqsrOz4+Pj3dzcxowZo6en999//2lpaYWEhPT/h1AolOPHj+/bt4+fn//hw4e7d+82MjIyNDR0cXFJTU0lk8nIIPHw4cP9+/efPHnSxsbm3r178fHxt27d6rali4tLa2vrjh07OHQkO3fuJJPJ58+fR7iGzMzMqVOnbt26NS0t7c+fP/7+/vPnz5eXlz9//nxHRwfCBZBIJBQKNWXKlJycnNevXw/uwZDJZEdHRz09vQ8fPsjKyioqKqakpMyaNUtDQ4MTMwb94fDhw7KyskFBQf3xoJDJ5OvXr7e2tvbzYAoKChYtWqSjo5OWlqagoCAgIPDw4cMpU6awrE+ckpIyceLEt2/fIgPLyJEjL168OHHixMjISF9f39u3b4uKio4ZM0ZfX3/VqlVHjhx58+ZNeXl5Q0MDiURKS0vrthO2mHeNjY0PHz50cnK6ceMGfaQshyzIurq61tZWbW1tahhot6xYsUJGRubSpUtbt261t7d/8eJFYmJiYWEhgUAQExNTV1fn5eUtLy/PyMhgfgAz8JBIpOPHj48dOzYnJ2fGjBna2tp+fn4qKip+fn7/3nv4xo0bT58+ZZzrherfTWVjY5OcnDxy5Mjw8PCpU6d++vSp100GeSDEuay6jRs3MtZ8qKurAwFMAgIC9+7dY9BVWFgY0KyVk5PjxKHW1NQICQkBJyKDZsuWLQMJapw4BgqFkpycDExwBm0iIiKoBjoWixUVFR0xYoSSkhI4k3Pnzl2yZMnq1as3bdq0c+fOQ4cOnTx58tatW0DeC1QWYNx/T+DxeHNzczBbl5GRQV0eFxe3bds2cXFxDAYjLS0tLCwsIyOzatWqAdM0aWlpkZGRQaPRf/78oeaCGBsb07dsb2+XkZFZuHAhR49nzZo1oqKira2tFC4gOTlZXl4+JCSk68KQkBDgcpgzZw6XHCcgKCgIREMN1gGQyWQLC4vjx4/TnBYvLy9wX3l6elK4g9u3b48YMSInJ6ef/ZSUlCAI0k/RktDQUH5+/tmzZ//584e6sL6+ft26dcuWLWOhw6KiojVr1oBc6l4bz549G0GQ2NhYClu5e/cuCCzp01ampqYIgnh5efXUIC0tbc+ePZcvX3727Fl4ePjHjx+TkpISExPfv3//5s0bPz8/T0/Py5cv79ixo6uj59ixY9QeXrx4ARJFKBzgy5cvCIIcOnSImcbt7e1paWnt7e30q4AIhp2dXbffOCUlJcpgqyWQyWQrKyscDkejNAUyudkrv9jP9zBblB+ePHmCIIifn1+3a193+h0sLS2pS8DnPiIioq87unbtGrhpGT+8IH7S1NSUMnhwyvwlk8lgOh6DwZw5c6bbNl5eXmCWoav4Ubds3boVnNCZM2dy4mj37t2LIMjo0aMJBAKXm79AmOb+/ftnz55NTk6mfm/weLyQkNDNmzcZbMiy+ZuYmKiqqorBYA4dOtStUG57e3tYWNiWLVu6zlzr6emVlpZSOIyHhweCIPr6+kAiev78+cuWLetWGhNYV5y2YICj3dfXlzLYtLS0KCkpvXv3jn6Vj48PuEbbt2+ncA1kMhkEjXz69GlQDsDf319SUtLZ2fnv3780q0DmGQaDKS4upgw279+/HzduXGFhYf+7KioqQhAkLi6O5R5A2pmamlpDQwO9ASQiItKng7GzswMalwAhISELCwvGhwfM348fP1LYCnA8T5w4kQXz19vbm0Gbx48fg5ODRqOVlZX19fUtLCwsLS0FBQXHjx9vb2/v5OTk5uZ27949X1/fwMDAd+/edTUxgfnLIbvB29sbQZB+Oi9AiVYRERGqeD/NN05ZWZnCYXo1Gd3c3BAEOXHiBP0qMBUcHR3NJe/hfpq/GRkZLi4uIG3g+PHj3eokvu7B/O32sBkDYrEWLFjAuNm/bP7GxcUBf6SkpGRP1S6o0UUzZsxg3NvIkSPBy4ITkvipqalg9tDa2pqx4Cgz5m96evr9+/ffvn376dOnpKSk5OTkL1++fPjw4e3btwEBAZ6enufPn1+xYoWYmBgvL+/WrVtZMH/pqa2tffv2LQ6H27VrV3NzMxvN3+bmZnt7ezQaPXv2bGbqZZDJ5MTERHt7e5DpyLmhApWZM2eCtLNeW4IInIKCAo4eT11dHQqF6voeGSw8PDzmzJnTk4QnuEAoFIpxMRrOUVpaevfuXZoPJBB4379//6AcEjVI0drammYV0LpGEMTd3Z0yqGRkZOjp6f369Yu6pD8yyf00f5ubm1VVVelHLB0dHcCzJSgoyKTKuI+PD/CGTJ061cHBwd3d/dy5cyYmJmB6dM+ePT39TA6ZvxEREQiCTJ8+nQXz9/Hjx4ybkUiklJQUmgHD5s2b1dXVe90FR83fgwcPioiIEIlElnsgkUgg1cTDw4N+LfjGjRo1isJhGJuMLS0twD4pKSmhXxscHAzElbnkPcyy+VtWVgYEjjAYjIqKipKSEkgV3b9/P42nD5i/VlZW/TR/c3JywHuy1+cRmL+Dq/vLqdjfBw8egKBeYWHhnjQfQOAUCoVavnw5g64+f/4MQtPExcXBJWEjbW1t69evJ5PJ+/fvLygosLKy6qeKkJaWFolE2r17t76+vp6e3rJly3bs2HH58uXnz58nJyc3NTUpKiry8PDU19djsdgjR4708/i/fv26cOFCKSmpXbt2TZ48OTIyUlJScsOGDb9+/epnzxQK5enTp5qamqmpqTExMbGxsVpaWr1uhUKh9PT0Ll++nJ+f39TUBMqgcI7y8vKEhATwFPXa+P3793JycuBrzTnExMQ0NDQ+fPjAXkVtFnjz5k1sbKyEhERUVBT92jlz5oCrzJa4cBbYunXrtm3bwMQLFfCi738oKmtQI/KpOjNUQHAUgiBNTU3I4FFaWnr48OFXr14BjwCCIElJSVQf0sBz5syZwsLCyZMnz5o1q+tyDAbj4+NjZmb25MkTZkKTX79+DcYegYGBSUlJTk5Ou3fvPnHiRFhYWHp6uqqqqru7+9GjR5EBBGQnsyYr0WtEIxqN1tXVBQm4ZDI5Jibm3LlzgYGBUlJS79+/76piyfIuWCMtLc3U1LQ/+eUeHh7fv3+fPXu2ra0twq28ePGirq5OTk4OWIQ0gJs5KSmJKkg3FN/Dv379mjFjRlRUlJOT09+/fwsLC0tKSsrLy1euXHnt2jUQXMT22+zq1atABhQ4MtjeP3tBc1TzAY1G96THDsS3wXeFgS5Bdna2iYkJsKSBTB17D3X37t1ZWVlWVlaurq7h4eGFhYUTJkwIDAzsNZGLQCB4eHhs3rx527ZtAQEB1OUYDGbbtm15eXnx8fFVVVWlpaVfv3598+bNo0ePLl26dODAgSVLloAcmnPnzvU0MGASf39/PT29pqamzMzMgoKC+Pj43NzcnJyc6urqCRMm9JSWQYVCoXz69CkkJIRGPr2jo8PX13fu3LkfP34MDAyMiooCj2hfAaKkHAWMWUeOHEkjOE1PUVHRr1+/aHLnOcS4ceP+/PlDHQcPFhUVFQiC4PH4bhMBwWw+giB5eXnIYAC8gzQXrqCgoNesc85x4sSJpUuXLlq0CJR0oRe6RhCEgTAip6mtrT1+/Livr29XsczY2Nheb34O0dLSAgJkly5dSr/W0tIyNDTUwsKi136IRKKtrS2FQrlz5w69K2TChAlRUVFCQkJXrlxhYI6w/TsKTECWDUEKhfLy5UsdHR0RERFJScn9+/d32yw4OHjUqFGrV68uLS09ePCgnp7ezp07R40aFRgYiAw4IDQZTHKyRmFh4ZEjR0RFRb28vBhckUFXfggLCwNiBd2ulZGRAbKkYAZgiL6HN27cWF5e/uDBAwcHByCWhyCIvLy8j4/Pxo0bg4KCIiMj2XtdSkpKHj16BCqxI0MBLEc1H8TFxXsyf1taWoBXAMiBddvm27dvc+bMobpj2VunAGh43b9/f/bs2Y8fP0ahUKKiopGRkYaGhlZWVpMmTQoNDe1WfDEsLKy8vDw0NJTqYX316pWVlVXXNmg0GkzK0+Ps7FxTU6Onp0fj9+or5eXlNjY26urqkZGRXSWER40a9erVqxkzZlhaWubm5tJ7L4hEYlRUVFlZ2a1bt1JSUsDCJ0+eWFtbg78fPnwoKSn57t07jooHswXwepo3b16vLYExSiObyiFAYF9WVtbAWNs9oaenBwrqdCtAQ33omHE1cYIdO3YICgo6ODhQl0RHR9fU1CxZsoQZm4kTKCkpgXlPGohEIjiTioqKg6Uy1tbWtnjx4pqaGmNj464L8/LyqN6BAeb58+fg5Txjxoz+9PPu3bvfv3+PHj163bp13TZQUVGxtbV1cXF59OiRi4sLMiD0VZcUj8f7+fmBiOHdu3fv3LmzpaUF2wl1/pqG27dv79ixY/Xq1Q8ePKCKbbm6ujo5OVlZWd28eZOBED4nLMi8vDwikcjMTFq3EIlEa2vrlpaWFy9eMBZQ6nrwIIQGh8MNpH4z+PAxUJGSlJRsaWlhS0GyQXkPp6enR0VF6erqUhUIunL58mVfX18PD4+uL5P+c+rUqY6ODj09PV1dXepCd3f37OxsNBpNJpOJRCIoLtjR0VFWVjboAyHsYEU+gJgwYAcXFhbOnTuXpkFwcLC1tXVbWxv4r7i4+L59+9h4kP7+/vv37zczMwsMDKRq70lKSkZHRxsYGKSnpy9YsCApKYnehSkjI6OhoaGjowOKDPPx8TFfGTI1NdXFxUVISMjX17ef0r9Pnz4FGl705TN4eHh27dplY2Pz5s0bekuCSCTevXsXi8WOHz9+4sSJWCxWTEys60d927ZtCBfT1tYWFxcHHpv379+DewPMK+FwuJ7mXH7+/An8xAx67ujocHd3DwgIwGAw7e3tdnZ2oKZdWlqao6MjkLScOnXqmTNnGDu2Qd3j3Nxcxj+kuro6KyuLZcE4IOeprKzcUwM3N7cpU6bgcLhu66hlZ2eDP3r6UJWXl7u7u3/+/BmLxaJQqFOnTs2ZMyc3NxeLxdLIiLJ23hYsWFBZWWlubm5lZTVu3Ljv378fO3Zs9erVd+7cQbgMf39/EA7h7u7e00ea06fr3Llz3YrSq6qqUgMzBpjo6GjwBxjmVVVVxcbG1tTUKCsrz507l/nJn2/fvoGalAy+hcbGxi4uLqBlt7D9Owrez72+pSsrK8PCwt6+fQtKYJqamr59+/bZs2cmJiaMNywqKtqzZ8+YMWO8vb273lQoFOrkyZMJCQlgqlBBQQEZKGJjY1esWAE+KFVVVb6+vnl5eUCh1tLSsleF2gMHDnz+/NnBwYGZ4SswgK5evfrw4cOWlhYMBuPt7U11wXAUasg7g8pTwsLC7PLI9vM9zBogJrAnj6G0tPTEiRPpjXv6h4j5xyohIeHx48cSEhINDQ1v3ryhDqI2bNjg7u7+9OlTLS0tNTU1MCAE9bnS0tL+NfOXmcgH8FoRExOrr69vb2+/ffv25s2bqauam5v37Nnj5eWFw+EUFBTAtKOQkBAbC4wFBgZaW1uvW7fuwYMHNNNbMjIyMTExBgYG2dnZu3fvfvjwIc22ixcv3rRpEws7bW1t3bBhA4lEevToEZMRqF+/fi0sLJSQkDA0NKQ5ztLSUjCX0e2GwM7r1gIbMWLE8+fPkSHL169fHRwcSCRSfX09Ho9HoVCfOkGhUOrq6j2Zv8BVz6CkQlNTk5WV1fLly+Pj49FodEJCwqxZs6qrqw0MDOzt7f39/RUUFG7cuGFvb9/Y2MjYRANFucHolgFXrlzppyvLzMwMPGvdwsPD01NJaiKRSFVU7dbZc+fOnf3799vZ2YWHhwsICJSXl5ubm+/Zs2fz5s0yMjJgOq//5239+vVWVlbR0dEpKSmCgoLx8fH9DAfiBPn5+fv27cNgMDdv3uzpuz4Ap8u5E4SbAGlMQNn9wYMHISEhFhYWEhISwcHBq1evPnz48LFjx5gJHgCeUcaVaIDwJXtLfjIGHHm3EfwlJSVfv36NjY39+PGjkJDQqlWrbt++DZSOgOoTMJ4Y8/z5846ODmtr624HVOvWrQsPDw8ICOgpaqInuyE8PPzZs2cjR46Uk5MDJZR5OgFBxkA4CNSnaG1tbWpqamxsbGpqwneSkpLS1tamrKzc3t5eWVnZtdvU1FQQ1tkTjx8/vnnzprW1tZOTU6+/vaSkRFlZGYPB8PDwKCgoYLFYISEhtivu98SfP3+AW43BzQm8/uAj20/68x5mGaAlzMC9LS4u/vXrV3l5+ba2NgKBQPUzskZ7e/v27dtRKJSfn5+CgoKhoWFISAgoFSQqKnqyE5pNvLy8gBbTP2X+JiQkUCMfeprMAmzevPn8+fOtra15eXnLli07cOAADw/Py5cv79y5g8fjlZWVAwMDgXMeh8MxmAbqK3fv3j106NC9e/d6uinl5eXfv3+vr6//6NGjI0eO0NQUpYbR9JXt27dnZWUdPHjQ0tKSQbO2trY7d+4QCITXr19T/St79uy5fv1612bA7ZeVldVtqBYIkgPfDBoYDOI7OjrQnfTlZ9EefFVVVVJS0tOnT0GlTQ0NDQMDAwsLC3aN8/T19UGw8vnz5x0cHHR1db9+/drrViBjqafhPoVCWb169YEDB6iTQTNnzlRXV3d0dATBJAoKCklJSXv27AHxbYz3BfxejY2NjJtdvnz52LFj/fH+dnt9meH169dABsTKymrixIk0a0+fPu3o6Lhv3z7qB09BQcHV1XXevHkUCqWrO6r/542fn58qqsA91NfXp6SkNDc3Z2RkXLt2TU9Pz9nZuaeo34E8XVxFcXExcGS8e/cuLS0NyF0hCLJ69Wp9ff3NmzcnJSW9ePGiVwsYvMqAAnFPAHcdNVByAACmQ3Z2dkpKSm1tbV5e3o8fP3Jzc1NTU+vq6gwMDJYtW2Zvbw+memjoGpzdE79//6YOlekBy8EZ7hPA6+zq6kpNtFJUVFRSUhL+H0JCQsLCwiIiIs+fP09JSbGzs1uxYoWgoKCAgABwy2EwGCAnQiKR8Hh8Q0NDR0cH4/iWmJiYzZs3m5ubg9DPXtHU1MzIyEAGCWr2KoM7E3j9Qf1nzsH4PdwfQJgfg/unpKRk5MiRr1+/5ufnFxAQiIuLW7duHcvf6GPHjmVlZTk5OYE328WLF42NjQMDA3vN4vjXvL/379+nRj4wrrVob2//+PHjwsLCxsbGly9fxsbGkkikxsZGPj6+vXv3Xrx40dvbm0AgAHuCLZW6CATCgQMHsrOzk5OTaYxaGpSVld+/f3/o0CF6Y5e12ahbt275+PgoKChcvHiRcUsSiQQyunA4HJDRwWKxixcvpmm2fPnyY8eOXb9+fd26dTTj5qqqKhcXFzQaDfQLaQCCL92SkZGxcuVKAoEgIyMjIiIiJCQE6jODdyKJRALvxLb/l6ZOmjuhCWDKzMwMDw+/du2an5/fypUrEbYSHh4OkkyZaQxeZD1Fmfv5+cnKytIEQqHR6JaWFm1tbeCSBLU9sVhsr0E4IIyvV4kAFArFiRKGvUIkEk+dOgVS9Dw9PWnWPn361NHRUU1NjSZ9wdDQUFJS8s+fP10jrdl73piksrKSZfkFNBotLy/fa83FmpqakJAQEolUVVUlKChIJpNB/Sr6kSH3ny4OAZyI4IDv3r0L1LiobNq0ydfXNzQ09OTJkxcuXGDc1fz581EoVGRkZENDQ0/OhadPnwK1rwH7jqqoqIwaNaq4uHjKlClgiYKCwrx58zZv3rxw4UIGI08MBsOMmQ40B/Lz87tdC3JAGcxWMfi9Jp38/PkzNjZ26tSpPdlV3759S0lJ0dbWZlBvlRnS0tJAwujz58+ZjN/tZ+BfP6EKyzA4DLCKXgFmwN7D/WTu3LmSkpJBQUEuLi70NZxTU1Pz8vK2b99ODdLNzMxk+bEKDQ29evXqmjVrqLW7bWxsYmJiTE1N7e3tHR0dGSQR/VNV36jVLtBo9KlTp3ptX19fv3r1anFxcUlJSXFxcXl5+QMHDgBZZjKZDAbWOBzu+PHj/T+2+vp6KyurnqqeMMPy5ct5eHi6rfvAmJcvX6LRaCMjowULFtja2vYkAQgmExUUFJjsFnxxpaWl7927V1VVBURnnz59Cl6sZ8+epWkPBppLly5l0CfwPYPkLeCEMDIy2rBhg729vYuLi5eXV2hoaFxc3NmzZ0HOGR6PJxAIVGlPIpHY1NRUUVGRm5ubkJAQHBzs4eHh6enZ0tJCYSt4PB6M3aOiophpD+JVnj171u3aKVOmfP/+veuS9vZ28NB23aS8vLy6urrXfQGf/ZIlSyhcCajJPG7cuIqKCppV5eXlYA76/v37NKva29uB7zwyMpJD540Z6uvr+/nG3Lt3b5/22NzcDIK4Jk+eTFPGhftPF4VCOXPmDBaLRfcMeF33BAaDWblyJX23XfPtutVCBl90Hh6erhLFPQHmCTdu3NjtWmD7amhodFtgDOj+xsfHU9jNp0+fLCws9u7d6+Pj8/PnT2Y2WbRo0ZQpU5hpmZ+fj0KhZGRkamtraVYRiUQw1ZCamkq/IRhpmJubU/oHkL66fft2fzpJT08XFxffvn17Tx+1br9xTJ6i/sBAK5dq6tnY2PS0OXXM0B9RbZbfw2zR/QUFoaytrWmEt2traydMmIDFYrtWZQMet9WrV1OXAJHZXmt/fPv2TVBQcOnSpTQ3QFNTE/BAL1iwoFvlbzBRwNga4TTYwYp8AIiKioJXW21tLX8n1FUhISF4PB64fvuvjwv21c+YV0lJSXNz877qecXFxa1cudLQ0DA0NJRMJhsZGRkaGt6+fZsZGV3GHD58WFxc3N7efmsnILkSTPG7ubn1pCzB2O2Nw+G2b9++bdu2z58/EwiEOXPmdGttAKcFHx8fTZQbmD4TFBRkXDK+/8TExABpfX19fWbag/Sg9vb2btfu2rWLRqUhPT0dNDYyMqIu7CnSmgYQR8VM/N/Ak5CQcOrUKU1NzejoaPprdOnSJTwez8fHR5+lkZyc3NLSwsvL2/WEs/e8MYOoqOiPHz9YFudGo9F9Vf8AJdk/f/6ckpJiYGCQkJBATaDk/tMFokhVVFR6irEhEAi2trZHjhzp6bSgUKhu3Ydd39XdCiOCDolEoo+PT68v8OvXryclJXl5ebW0tLi4uFAjCvB4PFBCEBMT8/f3H0hxAKD/SqNn3Cva2tpMTlSOHj3awcHBycnJxMTEz8+POoNXX1+/ffv29PT0DRs2dKsVAOh1BoNJ+hPqlpiYaGFhceLEiQMHDvRpwwG+jjRQQ+BAgGy3AIuTh4eHQ+5Jxu9htmBnZ/f582cwwX7gwIEJEyaQSKT4+HhnZ+fi4uLr16+PGzeun7uoqqpatGjR7Nmz/fz8aFzpgoKCAQEB06ZNe/funYeHx65duxAuhL3WNDWatp9lXdrb20GMgZCQkIuLC4U7KC4u7lrUnhmioqIEBATMzc2p7s8/f/6oq6uj0Wh7e3uakSUYGSsqKvZpF01NTX5+focOHdq8efP+/fu9vb3r6uq6bQmMhv4UOKUZuvXfA8EyQFMdhFcyA5hmunHjBpPtL1++DIYKLBzb48ePEQTZuXMnhcsoKyuTk5PT1dWlL0YK3JzAplm8eDH9WpDRYmhoyLnzxs1QYxtWrVr1L50uEKHO2juB+sEDU080UFUaFi5cyExvVVVV1DGAhobG3LlzdXR0wAyPlpZWV09Vt97fhIQEyhDEyckJ08nMmTNXrVplYmICBurr1q2jqctF4/3dtGkTW7y/d+/eZW3zoKCg0aNH97XYHvjGGRkZUTgMA48pNatvzZo1PW0OBm9iYmID/x5mb9FjDw8PmvjysWPHvnjxgqYZ8P52PSHA+xsTE9NTz1VVVVpaWtu2bWNQIxB4oEVEROinOIAJsWzZMsq/4f2lnkTGmg/McOXKldraWhAJ0FPqK1vIy8vbt28fkUiUlZXV0NDQ1NTk4eEhkUgdHR0gyBWkx9bV1RUUFACdjqVLl4Jpi14BesBbt251d3enDrIlJSXfvn07bdo0IK0Pvn9d6etwU1BQcGUnvbYUERG5d+8ek+5SZhjEwB2g+Mu8bCGQ2vj79y+T7UEAA/iy9hWQ6U8NIOmJx48fP3r0qD+pb/Pnz2e+rl59fb2Jicno0aPfvn3bbZZ9ZGQkiIrrNpwaaMz1KrHcn/PGzVAdnH5+fpcvX1ZUVISnS1FREeTWdBsISw3461UCBSAjIxMdHR0REeHv75+enl5UVCQqKrpixQoLC4vly5f3x0k5MNTW1vr6+mZnZ2MwGAsLCyZzEhwcHNauXevl5ZWQkJCbmysgIGBtbb127dpe39Isp73SwMKJJZFIx48fz8/PT0xMZCbJb1AqIjFAUlISi8V2dHT0NBkIZkUYJCb2h17fw+zFzs7O1tY2IyOjpKQEi8WOGTOGcUYWk1RUVCxcuHDLli2MyxfY2dnFxMQEBgZ++vSJPn9p0GN/sYMY+dATRUVFrq6uLS0tYmJiAQEBHH3xjRkz5uTJk25ubr6+vmDuHtSiBBmyIPcLMHny5JiYmOrqaibTlXx9fbdt23bt2jX6uTA1NbXAwMAFCxZcuXJlwYIFNC/Kvt4QRUVFX79+FRYWBhZ8V2EHqso0UDb5+PFjfn7+hQsX1q1bxxY5ycG6d/Pz80EmOPPmLzBGmcymJxKJnz59At471g6v1yATMMc9bty4/pi/zBdwJhAI5ubmI0eOfPnyZU/yF1++fAF/0E/4tre3AyFJxiekn+dtcCGRSA8fPiwoKFi7di19YFJXxejk5GRFRcVhfrrAyxOYv4wV+/tU/XthJwjX0NLSYmxsnJqaKisrq6SkNGnSJHl5efA6Bf82dlJfX5+YmAhsJpBIxHx5FGVl5dOnT/f1wNglEdjXd3h9ff3WrVutrKzAfMjv37/Pnj1bXFzMz88vJSWloqKyZs2aXiXMBiXllwoWix01alR+fj6DejFgFdvLJDHzHmY7IH6JjcoSpaWlO3fu9PLy6lreoicePXqkp6fHna84LIeqXfQ0wgCVLQMDA/X09JycnOifvY6OjkWLFtXW1oqIiJw8ebL/AbK9MqMTcXFxT0/Pbdu2dVuZEHD37t3q6mpqInBPgKn2Z8+excXF9XR/GBkZ3blzZ+vWrQ4ODv2sI/Xjxw93d3fwHUWj0ZKSkiQSCWg1gKocoDwHFovF4/GZmZlYLJZdIgyDZf4C16+kpCSD2DgatLW1MRgMVWOcMUlJSUApgt6LCRQrGW8OVOd6PbZ5nSCch0wmr1mzRlRUNDAwkCZkMDw8PCYmBkxBAKc1Pz8//YsyKSmptbUVh8NRtbeLi4vp09v7ed4Gl0ePHoGCL/fv3y8rK6NJl+6qkQR+4zA/XQiCGBgYgPrteDyePrucGljJ3lDmAX4XCQgIfPjw4fXr1+fOnYvrxN7eXlVVlfpq5ePj4+fnp/4BfCV9Ne8iIyPr6+v5+fnFxcXV1NRkZWV7/aXssmb66l0iEAheXl5U962UlNSaNWsiIiJ8fHyAQj8Ggzl69CjjTgaylke3aGtrMzB/29raQN4R8wWt2PgeHkQwdFIY3T5WZWVlz58/p3/ku0VISOjgwYM9rf1HvL/UyAcMBsPA9Xv8+PGbN282NTWlpqYuXLiQ/r2/e/fu4uJiPj4+ExOTvgbU94cJEyb06sYAITiMA8abmprWrl0rLi6emprKeGpjy5YtaDQ6Li6unzcEkLnx9vbeuHEjDw9PZmamjIxMt528e/du4cKF06dPZ95ryJjBmpEEkmfGxsbMnythYeGpU6empaURCIRes0bARL+KigrNa/rjx4+enp5goqAnOjo6vn37pqWlxfgbNpAAHdng4GD6jJPU1FSqGwmczDFjxtDLYYITMnXqVDCjXVRUtG/fvpCQEDaet0GHOjT6+/fvnz9/aPRcgWoKAPj1h/npQhDEwsICqNmXl5fT3+319fXgD/qKnkMLHh6eZcuWTZkyBQxIDh8+DNSN2EV7e/vbt2/9/PxATCoKhSorK2MwZpCSklJTUwM1BQb+HU5zoXl5eed0cuLECS0traKiIsZfPbC7niS0BwxjY+MXL170JDUNVOfAXAR1YWNjo4uLC4lEOnDgAGveaybfw4MID3MpiX3NB2XA4Jq/bDNf3r17B4b7YmJia9eu7bZNXV2dp6cnVbOTvoTPtWvXnj17RiQSNTQ0fHx8uq768uXL1q1bN2zYwCG5bBBKRVUE7BYikSgqKsogT7OgoGDNmjW7d+9+9OgRM2E9mzZtotcJZ+2GWL58OXi5yMrK9tQDCHWaPn06wiYGRb6RSCQCu6GvZXLmz59PIBA+f/5Ms/zdu3cTJkzo6hEHlgq95/7ChQu9RqKnpqY2Nzf306PPRi5evPj3799us+aBJJ+Ghgb4L/iD/s1OJBJBMh9V+v7du3fz589n73kbdKhjwiVLltDXMqCWVlFVVZ06dSo8XSAjDUxxJCYm9jQHgsFgBqaSLafh3FQ1Ly/vtWvXysvLQQ1ICoXCQCcVlEpJSkpi17uXXfaHgIAAiJRlfGCysrKqqqrsrXDGAitWrMDhcH///u22rHFKSgrwc3UtNHv8+HFHR0dnZ+d58+YxkIzo/3uYq25y1ODq8g4J87e6unrLli1guE8ikXpyLn78+JF636BQKG1t7a5r3dzcHB0dW1tbNTU1P3782PUVAEqo379///Hjxxx6coD5y1jmmkgkMnb9ZmRk+Pn59XNGm7UbTkhICIfDMYjlpxr3bDR/maloynbi4+Obm5tRKBSob8Q8YFICzFF0xcbGJjMzMyAgAITuJScngy83jeZ8cHDwiBEjeg19CQsLo+5r0PHx8Tl58mRbW9vKlSuXd2HZsmWmpqYaGhrJyclUKS5QPpCmzieFQrGzswPTmmCGBDyPixcvZu95G3RWrlwpJCR0//79ly9f0q+l+mJdXFzAEzrMTxcA1Ph9/PgxfYCvv78/mOMamCiOQXkXsREMBsNkoRMUCsWgdNGgz+AxNn/l5eV//PjB5Lw555CUlAS+2G7L1Pn5+SEIQlPkGVTpA2KF1Lh/TryHBxFRuqIznJ7gHZJlL1paWsrKynJyciIiIo4cOSIuLk79GUJCQgYGBoGBgenp6SUlJZWVldSt3rx5Qz2/YmJiSUlJYHlFRYWlpaWwsLCgoKCxsXFra2vXfTU0NHT1SImLi3crft5P4uPjgUORQRtxcfENGzZQOAYQhRk9ejRrm4MpVAYy3V5eXiAxi9JvwFuj/+I7LAA0RPX19VnYds6cOYqKijSnSExMDIVCgSotTU1Nenp68fHxysrKkyZNoraMiYmZOnVqQ0NDr7sYM2bMAIi6M0N4eHivNoGkpGTXTYCPNjY2Fvy3qalpzZo1Z8+eBbJx3t7eFArl48ePpqambD9v3EBwcLCsrKyvry/N8idPnoDT5eDg8I+drv4In3WVIKSRp7x9+zaobtDc3EzhMCCC7tu3bxzdCzX6hUmxKtYAu+j60eQcQPjM39+fXR3OnDkTQZCHDx9SuIBexcJaWlqmT5/Ox8eXnp7edTmwfXft2kXT/uvXr2PHjlVSUpo5c2afnhcW3sN9/S39JzQ0FEEQDw8PGuEzTlST6WpCdFtSZ8BgccS8adOm169f8/LydnR0gBcolaampri4uJSUFBwO19raKicnB5L0Qb6XkJAQUJ+tr683NjZWVVUlEonl5eV4PF5EROTUqVOHDh2i2VdISEjXmAQpKSlOiGYzGfwwADMULI+MxcTEysvL29vbe4ptbWxsFBUVZVfgL7WWxKDkvQHfW185ePCgubk5iIGmLnzw4MHJkydbWlouXLgQFRXl6Og4c+bMqKiolStXmpiYzJs378uXL1gsNiIioteAlri4uLy8vGfPniFcgKOjY68ztmAenwoIbluxYoWdnV1TU1NSUtL+/fstLCwIBEJaWhrQS3/9+nVQUBB7zxuXsHTp0hEjRuzYsePChQtWVlZjx47l4+MLDg5+/PixgoKCi4sLTc7oP3C6gPBIf3wwt27dkpCQOHr0aEpKiqWlJYFAePnyZVBQkJ2dnaur64D5+QbdochGWFaD4YagDu6XqAPw8/NHRUXZ2dkZGRk5OTmZmpq2trb6+Phcu3bNycnJwcGBpv3kyZNzc3MRBHFycuoqr8SJ9/DAg/2fwDaHqqv0BOM4H47DmtU8e/ZsZeZ49OhR1w3z8/PV1NQkJCSoL1wBAQFxcfG1a9eWlZV1u6+rV69SG4uKikZERFA4AJja0NPTY9AGh8O9fPmSwmHvL2t+TQqFAgLS8Xh8Tw0uXrzYqw5/n4ZuZ86coQwsv379Am9YZiqpdouhoaGBgQHNwra2tsTExPj4+K7Fmclkcm5u7ocPH5ivQGtiYjJ16lTO1ckcGKqrq6Ojo9PT02nqWObk5Lx//77rKWLXeeM2EhISnJycNm/evH79+iNHjoSGhvZUg2Con662trYJEyaw/DRRKSsrc3V1BeUnr169WlxcTBkogPe318qx/YQqGc5R7y8w4svLy3tticfj//z5w+C2ZNL729e6FQwACQ8gEmbQYd5jmpOTc/78+Y0bN27atOnq1as92SFUNm7c2P/npU8MgPc3OztbSUmpawEL4P398eMHh/YITIht27ZRhpz3NzY2lrUNR48e/fPnzy9fviQnJ1dVVUlJSWlra8+cOZPBcMrS0tLV1bW9vR2FQt2+fXvBggUIBwDe38bGxoqKiq6yjoROqqqqCgsL29vbX79+raKiQo3q4wQsi8IAp1FP4b+lpaVZWVkCAgIVFRXsUvPmdGXjniJrFy9e3FWHtU94enpOmjQpJCRkyZIl1IU4HI4+kxqFQo3thMmeoztJTk4e6ukC0tLSXWvwUhnXSdclbDlvXAgQQxwOpwuHw1HLs/UHBQWFgRTqoUdSUpKj/UtISEhLS9fU1Pz48aMn5YeKiooHDx5ERESQyWR5eXkHB4e+ypOZmZkFBgYGBARs27aNj4+P1AmZTKb+UVtb++nTpxs3bqSmpoJA22PHjp07d47l38VGWbq5c+dGRUVRJ3u7pbW19dmzZ97e3pWVlXx8fMuXLweRQoPIuHHjjh07xmRjCoVSWFjI8teHa9HQ0MjIyKAP0mCtrAnzcLp/xgxOusD0TphsrKioWFJSUlNTw1Fji5+fn5eX98ePHzNmzMD9D15eXhwOx8PDQ6FQOjo69PT0EhMT+fn5b9y4wbkjYXkeBERIg0LE7f8vjY2Nzc3NQAB41apVLI9eaGa42BhHwYDi4mKxThAEASFKDHQEe2XMmDHXr1+3s7MzNDSkj/RnmdbW1m3btjk6OrJRXRwCgfQKCoWSkZHhREQcDQEBAVu3bl2wYIGOjg4vLy9wy4HKoK2trc3NzdXV1V3ba2lp9fVt8PDhw9GjR/v6+rq5udErI3WFaoGBCTEWQKFQ0tLSvZaoYJ6DBw/W1tbevXvX19cXg8HQO9vIZHJ5eXnX39Xe3j7o5m+fCAsLY6PsF1chSvc1FBYWZmOS5SCaED0xNLJlMRjMADgapaWlZ8yYERAQgAwSYOzFcn0UaWlpHh6eq1ev8vPz8/DwUI14IMnO3sxocXFxQUHBrrowHGLnzp0eHh6qqqoFBQV4PD48PNzIyMjAwKA/fW7dujU9PX3VqlWhoaFs0Q+iUCjr16+fMmVKr3rvEAiEvfDy8g7AiwgUvs7Ly/vz509VVVWvpeyEhYVZkLwQFha+ePEiMiAICQmtW7eOjVNVOBzOpZP29nYmw5c5HVrKXlpaWhwdHd+8eYMMA7BYLHurftAgLCzcrUrmQDI0zN+BYeXKlawlVLELVVVVW1tbliXBJ0yYsH79ejbqmjHAyMjo1atXbPSedkt1dbWHhwc1NOXevXsUCsXd3b3/Pd+4ccPW1nbfvn1sceQfP368vb0dKD1BIJCBRFNTk0MRcd0i1Qky9Dl+/DiHpp4HOZ+pC8+ePUtLSwMTziCYlWU6OjrWr19/8eJFTofZUPn58ycQa+pT2XB2MXfuXI5qseno6IwdO5ajcaS9ghqUMwuBMAMej5eUlDQxMbl27RoGg5k8ebKrq6uNjQ27zt6jR4/WrVvXf7/4jRs3duzYMShFQCCQYQ6FQhnq0fYQtkMikcaMGUP975o1a/oTIQ2KdmVnZw9k5ENcXNzGjRup/71161Zfpe65nLa2tj5paLAdaP5CuJonT55cuXJl7NixOTk5J06coFGegkAgEAgEAukr0PyFcDskEqm6ulpOTg76eCAQCAQCgfQfaP5CIBAIBAKBQIYRQ6NACwQCgUAgEAgEwhag+QuBQCAQCAQCGUZA8xcCgUAgEAgEMoyA5i8EAoFAIBAIZBgBzV8IBAKBQCAQyDACmr8QCAQCgUAgkGEENH8hEAgEAoFAIMMIaP5CIBAIBAKBQIYR0PyFQCAQCAQCgQwjoPkLgUAgEAgEAhlGQPMXAoFAIBAIBDKMgOYvBAKBQCAQCGQYAc1fCAQCgUAgEMgwApq/EAgEAoFAIJBhBDR/IRAIBAKBQCDDCGj+QiAQCAQCgUCGEdD8hUAgEAgEAoEMI/4F87exsbG+vh4ZmjQ3N5eUlFAolME+EG4EXlnIINLc3FxXVwcvAeQfgEKhtLa2IlxDWVlZY2MjGzskkUgNDQ3IMKa6urqtrY3Te2nj/C4GjH/B/N29e7e4uLiMjMzy5cufPXvW0tLC9l2kp6dPnz593bp1Dx8+rK6uZmPPV69eVVNTExERMTY29vDwGOYPMIeu7IkTJ2bNmnXq1Knc3FxkoIBXdqizdu1aCQkJZWXlNWvW+Pj4cOjZXLVqlbq6+sqVK2/cuFFUVIRwBxs3bpSUlFy6dOmTJ0+G+gePa50LA3lgt27dkpSUVFdXX7169cOHDwfXYVRcXGxsbCwiIqKurr5r166EhIT+99na2qqjo2NmZkYikZDhR15enp6enpCQkIGBgYeHx9+/fzmxF2dnZ35+fgUFhTVr1gQFBREIBGRIQ/knyMzMNDY2Br9o5syZ/e+QTCaTSKSuSyIjIydOnIggCAaD2b59O4V9lJeX29nZodH/NxSRl5dnY8//AOy6sj4+PuLi4giCzJs3LyUlhTIgwCvLAgQCoaysrKqqikwmUwablJSU+fPng9tPWVmZE7toa2u7d++eoqIi2MvmzZsp3MHLly/l5eURBJGSkkpKSqIMQUgk0oEDB27dukXhSry9vXfs2NHR0TEwu/v169fGjRvBbcbPz5+WlkYZPEgkUlBQkLq6Ojie+/fv97PDqqqqSZMmycrKNjc3U7ie1tZWtvfZ1tZ2/vx5Xl5eBEEEBASio6PZvgsKhZKRkWFmZgaumqSk5I8fPyhDFhTXjowBjx498vHx0dXVVVJSEhcXx+FwaDSan59/6tSpMjIyNI23b99+9+5dLS2tzMzMfu53wYIFnz9/nj59+ty5c9esWTNq1CgEQYhE4saNG58+fcrHx8f2iSQvLy8bGxtpaWn2epe5loG/stHR0cCUMTU1ffPmDTJQDLcrS0NZWdmSJUtERUXl5OSEhYVxOBwKhQKTlUQikdBJaycEAqGxsTErK4tIJCIIcvTo0QsXLiBcgIODw/nz52VlZSsrKzm0i9bW1u3bt/v4+EycODE9PR0ZcGxsbIKCgqZNm2ZsbLxq1SplZWUEQSoqKnR0dKqqqvz9/VesWIEMKSgUirW1taCg4L179xBuZefOndXV1f7+/sD9MQA8efJk3bp1CILEx8fPnDkTGVRaWlomT56cm5vr4eFhZ2fHQg+tra137tx5+PBhVlYWWMLDwzNv3jx7e3sjIyOEw+Tm5u7du1dFRUVRUVFcXFxAQACDwVAolPZO2traWltbW1paWltb2/5HQ0NDSkpKVVWVqKjoihUr7t69y95DSkxMNDIyamtru3Xr1o4dOxDO8Pjx440bN1IolKioqHnz5rHWiaen54MHD86dO7dw4UJkUKBwPVeuXMFisTSHraurS9/y2bNnCIJMmDCh/zslk8ne3t4iIiIIgkydOpW6vKysDEEQGRkZCrtJTk5GEERBQYEybBjgK7thwwYwLM7KyqIMIMPwytLw9+/f/fv38/Hx8fDwmJub29vbX7ly5f79+4GBgRERER8/fkxKSsrIyMjJyfn58+ft27cRBBEVFa2vr6dwB+AKjhw5kqN7SUxM7On+Hxjevn2rpKQEnDrUhcDqffHiBWWocezYMQMDAyKRSOFiOjo65syZc/ToUbb0lpSUdODAgdLSUsbNgDfn8+fPFC7A1NQUQZAHDx6wsO2PHz+A/3ju3Lnu7u6vX79++fLl+fPnx44diyDI1q1bB8CznpeXt3btWh4eHvCFsra23rVrl4ODw6VLl27duuXt7R0UFPTmzZvo6Oj4+PiUlJTs7GzwikMQJDw8nJldvHjx4tOnT7W1tUwe0qJFixAEuXfvHoWTTJkyBVjbLPfQ2tqKQqEWLVpEGSRojQ8u5NChQytXroyOjm5sbMRgMOAjqq+vz9GdolCo9evXi4uLm5ubA2cVgN5coyEuLq62tlZOTk5cXJyfn5+Pjw+DwVBDKRobG6OiohAE0dbWnjVrVteehyEDeWVv3rzp7e0N3rPjx49noQd4ZVlGQkLi6tWrZ86cIZFIIASFASAQ0NLSUlRUFPlHaW9vB3OU9GAwGGSQ+O+//2JjY1VVVXs6tiHEmzdvrl+/npmZ2esbe3DBYDCPHj3S0tIyMDAAhmB/mDRpkrGxcXR0NOMJBLZf35aWloCAAEVFRWlpaSEhIX5+fh4eHhQKRSKRQAjTt2/fMjMzFRUVDQ0NZWVl2bLTv3//GhkZVVdXBwQEWFpaUpcvWbLk8OHDe/fuvXXrFg6Hu3HjBsJJ1NXVfXx8bty4gcfjweixVz5//gyCqZj0evLx8ZmZmTU0NPDz80tISAgICPDw8GAwGF1d3Vu3bgkKCrLr+lIoFOZtkv7MV/z48SMyMjIwMJBCoRCJRD8/v//++2/gX/hc/WqgoqioSA1a4gRNTU2+vr4/f/4kEokLFiyghrZoaGj0tStNTc29e/c+ffoURJWIi4uLiYkJCgoKCAiAf2NiYlpbW2VkZHJyciQkJGg2H24GMaevLODZs2d79uxBEGTixIksz7PAK9tPwFxKr4B88LVr1yJDkNbW1sWLF/Py8ioqKoqKivLx8QFjl0AgNDc3NzY2NjU1paSkVFRUoNHokJAQ4KfpyoBNgnfLqFGjgOGCcCuVlZWvX7+ura01NDScPn16t20aGhq2bt169OhRVVVVhOtRUVE5ceLEli1bsrOzxcTEWOukrq4uNjY2Ojq6oaFBRESkqKhIRUWF8SZsvMoCAgLCwsIbN24Es6NYLFZOTq7rV6+mpiYtLQ1BECcnJwcHB7YczOnTp3/9+nX16tWuti8Ag8HcuHEjJyfn5s2b27Zt09bWRjiMWCdMNv7z5w+CIMx/iUxMTNLT03fs2BEWFvbr1y+wEIVCiYqKgjixbulrXGtLS8ukSZPa2tqWL1++Z8+eXu8f1vj+/fuePXtiYmKoSyI6ERAQ2LZtm5OTE701P9zNX3ZRXV09Y8aMX79+SUpKampq6ujoNDU1VVdXR0VFUdO6f//+TTV/WUBSUvLJkyfnz5//+PHj5MmTaQzovLw8MC/j4eFBb/ty2vwFv7SoqAiNRqurq8+fP5/lt+0QwsvLa/PmzVgs1t3dnUQi6evr6+jorFq1asGCBX0aJXPzleUQYDo1KSmptrZWVFQUTFkAk45DNDc3FxQUCAgIqKmpsbfnsrIyFxcXFRWVkSNHioiI8PHxodFoYJU2NTXh8fjm5ubc3NyEhARhYeHt27dv3ryZhb3w8/O/fv3aw8PDzc2NSCSam5srKSmNHDlSVFRUTExMREREQEBg/fr1FRUVRkZG3b5nBsD7W19fX1xcrK2tDfYFAviamprmzZvH5BBlsHBzc7t48aKzs/PEiRMPHjy4ZMkSe3t7+mYXLlxobm4GI94B5u/fv5GRkUVFRRQKRV5e3sDAgBkTfPfu3S4uLk5OTi4uLn3dY21t7bFjx7y9vQkEAj8/v6ioaFxcnKqq6sKFC2/dujV69GhkQFi2bNmSJUuioqIIBML8+fMFBAS6rl29enVaWtqECROOHTvW7eYsvB6fP3/Oy8u7ffv2njoEZpa/v/8AmL99AgwSTExMmN9k1KhRb9++bWxs7OjoQHcC4ozZeFQCAgIZGRknTpxwdXW9efPm/v37nZ2dQVAHu3jz5s3y5cvb29tXr169efPmKVOmiIiI1NbWJiYm3rhxw83N7c2bN+/fvwcZt8PU/L1//35FRcXo0aOlpaUFBQWBN4IaRV5bW/vnz5/v37/HxMR0dHQYGho+ffqUyZ6Bz/Xhw4d79+4FD+rGjRtFRUVtbW3B90lcXFxKSqr/P0FJSalb95W7uzuCIPr6+suXL+92Qw4ZSUQi8dixY3FxcaampqNGjero6Hjz5g34xjs6OnLUoBmYK9stFArF0dHxzJkzI0aMCA4O1tPTQxDE1tb25cuXly9ftra2NjQ01NTUlJKSUlNTMzQ0ZGbyhduuLOfIzMy0sbFpb2+fMmWKoKBgeHj4/v37JSQkDh48ePjwYebnlPPy8hYsWPDnzx8JCQkNDQ3wKWpvbwcZIU1NTVQDtK2tra6uDoVCCQkJLVq0KDExkZ+fn10/R1FRcdq0aSdOnCguLgZL5DqR6kRMTExUVDQ/Px9I4509e5blHfHz8x/spNuZxKioqKysLAEBgXv37nV7S7DR+1tZWbl7924eHp6JEyfq6+v//v37/v37GAzG0dFx69atBQUF5ubmcnJyERERIG3IxcXl4MGDCLfy8OHD/fv337x508bGxsrKKj4+vry8nN78rauru3HjxpYtWwZ4LpVMJp89e9bDw2PGjBkqKio1NTUuLi51dXVGRkbXrl2bMGECg22FhIRsbW1dXV0PHTokJyfH/E7LysoMDQ0LCwvXrFlz/PhxENZVU1Pz6NGjU6dO6erqxsbGTpo0CRkQMBhMtx7NioqKoKAgoAXZ0+3d19dje3t7TU3NqFGjaOzsroCwYO4RE6Ty8+dPDAbDQsaYsLAw841ZUDXg4+NzcXEREBA4d+7clStXtLW1QZYkW8jJybG0tASSMubm5tTlkpKSizq5du3agQMHFixYkJqaisPhkAGAwn00NjYeOXIE3NY8PDyjR4+eMmXK/Pnzraystm7devjw4VOnToFBiZycXHZ2NgsJUuDsX7t2jXGznz9/Iggybdo06pKKigqWU99KSkp4eXnRaPTXr197Sq8ZNWoUhd0QCISFCxdeunSJRkkKeID09fUJBALlX7myVGpra8HM8rp16/78+UPfIDMzc9euXVT/Ny8v76ZNm4DbZqhcWc6RnJwsLy8fEhLSdWFISAgYKc2ZM6dPwj0tLS0XL14E59nBwSEsLOzjx49fv37Nzs4uKSmpqalpbm6m0RnkEB0dHaGhoXfu3KmoqKBfO2fOnG719diV+tbc3Aw+yZ6enj2lvs2ZM4fCPj5//rxgwQJw5idNmmRoaLhmzZq6urrGxkbgX9+wYcOzZ8/i4+NB8R0KhcLLy9v1l3JJ6ltLS4uMjAwajf7z509SUhL4RcbGxvQtr1+/Pih5XWvWrFm2bFl1dTV1SV1dHQjn5eXlpXmUevrWXLx4sU87nTVrFoIgR44coV/1/v17DAajqqra1tZGs2rMmDEIggyYmB1w0Jqbm3e7Fpwib2/vvnYrLCwsKirKQB7x48ePCILY2dlRuIxRo0bNnj2bLV2VlZUB8QRnZ+dPnz6BhcuWLUMQ5M6dO6z1ea9TKYWHh6eyspJBs2nTpvUp9Q14uxkbXWDO7fz585QBgRvNX0Btbe27d+8aGxvpV23ZsgVBkBEjRtBozjFvJK1ZswYMRgfS/AVew/3793e7FnxiVVRUKOzm7Nmzq1at6nZVeXm5gICAs7Mz5V+5soCIiAgFBQV1dfV3794xbtna2vr06VPqQFxISCgjI4MyRK4sh2hpaVFSUur21Pn4+IATxYL0NRhp5ObmUriS6upq4JoCCRmcMH9tbW1BVl+3a4H5a2RkRGErJBIJzIDTPHGbNm1CEITeLONO89fDwwPMrgAhkfnz5y9btqysrIy+pZaW1ogRIwb48G7dujVnzhx6lYm2tjYQJcXPz19QUMC4k0mTJqmrqzO/07i4OCAp05O6BXid+vj4DKL5m5ubi8VihYWFy8vLGZi/jx8/7mvPFhYWCIJERkb21GD37t0IggQEBFC4CZDbcOXKFQZtPD09jx075uLi8vDhQ19f3+fPnwcHBwcEBPj6+j548ODmzZsuLi7nzp2zsLDo6k3HYDB1dXX9N39ndsrhrVu3jnGzPpm/lZWVKBRKQkKCsa+ttLQUTLFSBgTurfomLi5ubGwsJCREs/z06dP379+Xl5ePjY0FjzELABfjQGoeR0ZGPnnyZPTo0U5OTgyasX2KnEwm37hxo6cZeXl5eXNzc6pN8w9c2YqKivXr19va2jo6Oubk5FBLZvQEHx/f6tWro6KiiouLjx07pqGhUV5ePiSuLOfw8vJSUVHpVjVz7dq1wJa6e/duQUFBn7oFOQ3MlBBraWkZ+KpU9+7dI5PJo0aNAp9VtnP37t07d+5oamp6eXkxaMb21Dc0Gs1gPn2oiDw8efIEJPUDIZHIyMigoCAFBQWaZoWFhVlZWSwLkbIGmUx2dHQ8efIkfUQQDocDmV6tra29RtQYGhr+/PkzOzubyf1++vQJSNT3FIm0ePFiqpTKoLyRgAne0dHh6urKOKCThYM5ceIEKEHVrRp3ZGTk7du3x48fD+4Z7gGIcnSd/adnyZIlIKR706ZNa9euvXjx4t27d/38/CIiIr5+/VpcXIzH43E4nLGx8f379589e/by5cuIiIi8vLyuyTysmTcpKSkJCQkoFKqnKG3WyMzMBJMVjF84ioqKampqpaWlVVVVCOfhXvOXHgqFcvjwYUdHR1VV1bi4OGrBGBYA74sBM3/r6+u3bNnCy8sbEBDAIFaJSmVl5Y4dO6SlpYWFhceOHcv8C5GekpKSP3/+1NTU9NRASUkJDLmG+pX9+/fv8ePHbWxsFixY8OPHDxsbG2pmgKWl5bhx42bPnr1169bv3793u7mysvL58+eTkpL++++/IXFlOcebN29iY2MlJCSASB8NIEIAxEL0qVsw2w5mVGggk8mtra0FBQXu7u5jxowRFBQUFxcHAZTIgEAkEm/evIkgyKlTpziRfBYeHg4k6Pfu3cs4tZlzqW/dvu64XBcMUF5eDmy4XpOSQUa5gYEBMoCkpaVVVVXNnz9/8eLFZDK52+cFONrp13YFRDJ0TYpnDCi9xCDEGRhDDMQBOM3169c/ffoEYtt6bQyiQnV0dERERCQlJffv38+4/eTJk+/fv19cXKyrq3vv3j1qmd+SkpITJ06YmppKSUkFBwezN3mr/6SkpGhoaDD278jKyt65c6esrOzp06cFBQUpKSlhYWGBgYHe3t7nz5+/cuXK2bNn7e3td+zYYWNjs2rVqiVLlixYsIAtOidOnU6cpUuXsiB7xQDg9WAmsUpaWhqItyCcZwi8+wCNjY2gLpGOjk5YWFg/tQP7ZP7m5OQYGBiAwlTNzc0s7G7Dhg2lpaV3797V0dFh3LKkpERGRgZceywWy8PD08+y2uCFe/Xq1bVr13YbOF9YWEgtuDp0r2xFRcWTJ0/Wrl17/vx5+rX379+/c+fOmTNn4uLiREREXF1dETYxiFeWc4AIHzwef+vWLWrJXypAMx/ktPWp25s3b9rZ2W3evPn48ePAB9DR0QFCfoHqM28n8vLyampq/Pz8ampqAyaC8+DBg4qKirFjx65fv57tnb97987CwkJRUfHGjRuHDx9OS0tzdnbuVh4E+AvZfgDAtdbt624QZYaZ5/Xr1yD4pNdPMgj31NTURAb8eUEQJDQ0NCsriybLbeTIkVgstqOjo6GhoaamhsH7bdy4cQiCxMbG7tq1i5n9AjdBt+PJrk8o6Hbg+fLli729/dixY+/fv99r4927d+/cubOlpQXbCZCD7XWrjRs3jh07dv/+/ds6ERER6ejoaGlpQaPRlpaW7u7u7NIYZiOJiYmrV69mpqWsrCx9y/3793/79o2ZDyUL3r3ExMSXL18C67Ojo4ONY2MwUUMdovSqCscWBYJ/xPz99u2blZXVz58/USjUgQMHwPigPzAT/JCeng5ipxQVFa9evcrfSWNjY6+GDg3nzp179eqVvb09MyPgmTNnxsbGsnFaSklJSVhYOD8/f/bs2c+ePaN5Ff769Ss0NPTSpUvIEL+yI0aM6FYCCSAmJnb06NFfv37dvHmTjebF4F5ZzqGnp5eamoogSLe3OvUEkkikPnWrpaUFohW5DTwef+rUKQRBLl++zHZzMDQ01NLScvr06UFBQVJSUgYGBitXrlRWVjYzM1uxYgWI0usKG8UumDF/h4T3NyIiAkEQZkIacnJyEARhOXSKNSZNmoTD4QgEgpiYGH3hAzQaDczfXh8ZYM5Si/f2ipmZGT8/f0RERLcqvyQS6fbt2ygUiv4eA3D0XfTr16/ly5dLSEiEh4czo6YXFBTEWo3iGTNmfP78+cePH58/f66srMRgMIqKirNnzx4xYgTClXz69Al8cMlk8ocPH8CcgLy8vJmZWa8CbVVVVW1tbZmZmX199zIDmUwG0dJXrlx5+vSpra0tM+MWJhk/fry4uHh8fDyRSGTgjy8vL//586eGhkZP3gH2wu3vPhKJdPny5TNnzowcOfLVq1fi4uJubm6nTp0yMTHh4eGhUChTp061srLqq3QXA+8vgUAIDQ19+PDh6NGj3d3dZ82aJSwsPHXqVLC2urq6Ty8Ob2/vU6dObdmyhUkTU1ZWlr1vJR4eng0bNty8eTM9PX3ixIkODg5Hjx4FvjcCgbBhw4bp06dzrjL4wF9ZBlAVJ9jS26BfWc7h5uY2ZcoUHA63atUq+rXUgA0O6aLTAOQaODqD6eTkVFNTY94Jk5vk5+f/+PFDRERk5syZDCxmFxeXI0eO7Nix4+rVq+AniIqKvnnzZt++fTdv3vT399+0adP9+/e73hi9VsVjAQY3Htfek21tbXFxceDw3r9/D84MiMbB4XA9hTcASan++0f6hIKCQlJS0vv3701NTemV1EtKSsDMLz8/v4yMDIN+cDicpKRkfn4+k443cXFxZ2fnAwcOWFhYREREdI3wJpFIdnZ2qampBw8eHJjntCt4PN7U1LStrS0qKoo6WcSYPsm90TO2k16bFRcXFxUVSUlJqaqqsjyzRCKRdu7cicViFRQUxMXFRUVFcTgcLy8vKO8K3lcEAgGoeba2tjZ2gsfjGxsba2trKysrjYyMCARCQ0NDU1MTtduTJ09WVlZKSkrS77G5ufnatWuPHj0qLCwESzQ0NObNm7d79+65c+eyy/t77dq1lJSUZcuWHTp0aPny5bq6ujIyMt3OprIADw/P1q1bL1++fPv2bQaC3I6OjiCvGhkYKFxMcnLylClThIWFz50711VoqaSk5PDhw1T3uJKS0qtXr/qkDwA8hV31Naqrq319fdetWzdixAhbW1sggAXmlebPn9+1GfAHM3P8/v7+aDR67969TP5YUAeYwm7q6uq6FhHQ0NCIj4///fv3nDlzrK2t6WVxhvSVZcDhw4eBy5Z+FYlECg4OtrS0XLp06e7du2/duvXt2zfuv7IDT3t7O9W2SE9PZ3v/zc3NlZWV+fn5ycnJAQEB1IgdERGRadOmUZV92EhqaioGgxEWFi4tLWV8BcXExHx8fO7fv981Onz37t3dbtLW1rZu3TpRUdHg4OBuG3h6egKD+OTJk12VHy5cuEBhN7NnzwaCuPTKD3FxcTSNeXl5hYSE9uzZA+R1gRdt4JUf4uLipk6dqqurCyIaUSiUbieTJ0/uScempaUFjDMp3AQQYkMQxMLCotfGWlpawHXKfP9nz55FoVAiIiJ79+719fUNDAw8f/48mOXbtGlTt3qCwDverUpj/8Hj8TNmzBgxYsT379+ZaW9qaopCoboVAgL4+/uHh4fn5+czaAOeuPr6+srKyoKCgqysrKSkpNjY2PDw8JcvXz5+/NjZ2XnGjBnUxxaFQvX05DJDVVXViRMnqN8pXl5eXV1dIyMjc3Nza2trW1tbe3v7c+fOgewxYWHhd+/excfHp6WlZWdn5+XlFRYWFhUVFRQU/Pz5MzMz89OnT2/fvk1LS+t2X/n5+SoqKjw8PMeOHcvJySESiW1tbcnJySBMC2QW0mwC/P03b94E0kYPHjwAoqIM3p/Z2dk4HE5VVbW+vh4sefXqFdDU60larq/CZ42Njerq6jgcLiwsrNsGoDy1rq5uT0ombIdLvb/l5eVnzpwJCAjYsmVLWFgYHo+Pi4sDUlZYLFZJSenSpUvnzp0LDg5+8OBBdHS0ubk54yrn3U7gBgQEkEik7OzstLS03NxcRUXF7du3u7m50TjelZWVafKymVGffvbsmY2Njbu7+86dO5k5JODn0NfXR9iNmJhYbGyspaUl+L7m5OTMmjVLTEzM3d2djaLWg3VlExMT7927p66uDsrN8/HxYTAYCoVCJpM7OjraOyEQCO3t7V+/fgV1B2pqampra//+/VtfX1/bCR6Pp4/Ezc3N7dajwD1XduB5/fo1SEezsrKaOHFiT82OHj3q6+uroaEhKysLvCNYLJZEIpHJ5Pb2dmoYfVMnwDvS0dFBJpN5eHhwnYCT1tHRISEhgcPhGhoakpKSvn37BtKD2AWRSNy4cSOJRPL09Ow1Ar61tRUMw1AoFFBrwmKx3SZjFRUVrVq1SlJSMiMjg342HLBt2zYdHZ3Vq1d7enoCnwf4yVOmTEEGMPih22QsIpEoLy/Pz88vICDw+/dvamzrQKKvrw/0fc+fP+/g4KCrqwueXwYAXxozGagDCVBRxWKxZ86c6bUxcEkCbSwmOXXqlKmpqaurq4+PDzC1cTicvr6+i4sL40xBTjj+6+vrzczMwMt25MiRzGyCQqEmTJhALwRERUJCYs+ePSCsBYVC8fPzg3pJaDSa1AkWixUUFBQVFRUSEgJrQV00VCfgzieRSHx8fLNmzQJvnra2tm79rEwiIyNz7ty5kydPhoWFtbW1LVq0qFtfcn5+/oULF/j4+HoVIOqJ1tbW//77r7S0NCIighr8g8Vip0yZ4u3traOjs3///p6yWYKCgrKyssLCwkpKSsCSp0+fdhspjsfjly5dKioq+u7dO2om5eLFiw8ePHjp0qWPHz96enr2v3KekJBQZGTkwoULzczMbGxstm3bNnnyZAwGQyQSExIS3NzcXr58qaWl9ebNmwGLyOI68zcvL8/Nze3Dhw9btmwpKysDYUNxcXH29vYFBQXCwsLR0dEgFIGXl3dVJ6WlpZ8/fx47dix4QpgBDI7TOhEUFDQzM3NzczM2NqZRHQLuma7ZP+Bx6vXBvnr16rVr18LDww0NDakLv3//Li4uTr/tli1bEhMTZ8+era6u3p96ywwYOXJkXFyctbW1v78/WFJfX3/mzBkFBQUGsydD4srOmDHj9+/fJ06cAPW6ADw8PFJSUhISEuLi4tLS0pKSkqKiovr6+vPmzePh4eHl5R03bhxItALzVsAO6OgEDK8lJSW7jSDknitLIBB+/frFOJecAcLCwn3NCyESiSBGdty4cZ6engxaXrx40dTU1MnJCehViYqKGhsbq6qqKigoUC+H4P9Lr4Jf7e3tbFfpOnXqVEZGxqZNm5hJRpGWln7z5k2vzTw9PUFhXiAuzoCpU6fm5ORQjUsZGRkNDQ1OPI/dmr91dXU00agdHR2enp5EIlFERARMlYBMrPj4eGTwCA8Pp3kJ9wTIS2YQ3F9ZWdl1urlPoNFoeXn5vmYO+Pn5gVhed3d3BsNFmsjvvh7klClTwMAMj8e3t7eLi4sPSkZjeXn5woULZ8yYcePGDWoIe11dXVlZ2dixY2lOXVpa2rJly6ZMmfLz588LFy4w6Hb+/Pnfv38PDQ29devW58+f58+fv2DBAmVlZTk5ORkZGUlJycES7+Pl5WVGVa0/wwwvL6+fP3/a2Nh0G/i+b9++x48fu7m57du3j370LiUlpaWlNWXKFL5OcDgc8NfSQKFQ1q1b9/v3748fP9KUyL548eLnz5/j4+NnzpyZmpraH60tgLKyckpKCiiO+ODBA1DgEwz2hISEjhw5cvr0aU4kP/QIhWtobW09cuTI/v37uy3Y09bWBlxxDKbhmJ8ib2lp2bVrl62t7evXr7utX1VeXl5VVdXR0bF169au4QHgmwEqmnYLgUDYunXr0qVLaSqNNTU1gU/siBEjduzYQTNhAeJHcThcTEwMhQPU1tauXr169uzZb968oQrxAA4dOsSgcM5QubIkEikoKMjMzOzgwYPl5eWc+EXcdmUPHDjQnwcfjUb//fu3T3sEcWDjxo3rtmRat+Tn579+/ZrxrOVgAWzZ2bNn91r1EAQ/KCgoMG5WXl5uYWFx9OhR6gRiX6Gfx2QLwKSmXu6cnBwLCwsQlBkeHg72+/LlS01NzYMHD/Lw8IiJiVG3BRNEg1X2Ao/HA1dQVFRUr43LyspA3lu3a+vr6/vp72Qy2IlKbW0tCPZ1c3NjchMwR8SJsCIqZDIZWDkpKSls7DY+Pl5LS4u+xkRoaCjQvpgxY0ZsbGzXVcXFxeDN3231vn8A4GqVk5NjuQeQjUBfiIfK8ePHwQwDffADzcKeOHPmjIiICH0QFKC8vBy4yf/7779+Bj90pbm5OSIi4vr162fPnr1+/fq7d++am5spAw4XeX/5+PiolVHpweFwsrKyP378YMu4lp+fHwSadAuFQnF0dLx7966BgcHx48e7DluFhITQaDSY+qSnpKTkwIEDixYt+vnzJ5gvMDAwAMkQgoKCT58+Xbdu3aJFi+7evXv58uWu0yWHDx92cXGpqanhxIRUfn7+f//9Z2Ji8uTJE3Dw3t7eBw4cqK2tBdk5FArFxcUFGcpXFo1GL+uk27UNDQ2rVq2SkJCwtrbu6doxhguv7NmzZ62trVn2/oqJifUpuzYhIeHUqVOamprR0dHM56mM7qSvx0Ymk9le/YGGkpKStWvXamhohISEMOk9YnwFiUTis2fPbt682VXev7Ky0tvbW1JSkhqWQ+6kuQsgAgSPx6emplIoFCMjI6BAzEbAkYPAwdu3b6empj579uz27dsPHz58/vz5q1evXrx4ISQk5OnpOXfu3Bs3bnQ9+QNZG4iemJiYjo4OPj4+ZmKHwAR6e3t7t2tFRUV//PjBsp4oGo3uk6AEGDlUV1dfv36dQa4PDSBJjpnguj5BIpG+f/+emJgYGxtbWVnZ1wTuXgGp1QcPHvz8+XNdXd20adOorm4zM7Pc3FxLS8t3796Fh4eDMHSAsrLy3r17d+zYwbUSkGyhP+cZuNsY3A9gEhWIhbGAh4fH7du3Y2NjJ02a1G0DeXl5Hx8fU1PTsLCwnJwcdokB8/Pz6+rqzp07d3BVmbnI/GUS+u8i8Gd8+PAhODiYLbtAoVCenp4zZsywsbH577//Dh48SLUOsVisj49PTxOUVVVVPj4+fHx8z58/P336dF5enqCgYFlZGTWb+7///pOXl0ehUDShQrm5uTU1NTIyMmwXbK+trZ0/f76mpmZXc3/Dhg2LFi06ePCgt7c3giCurq7W1tZ9FXQbQldWVFTU3d3dwsLi6dOn06ZNe/z4MTNpwlx+ZYWEhHR1dZEBoby8fPny5RMmTIiIiGBBkTExMfHt27cSEhKCgoIgbg+EmlAtv8bGRmoQcGFhYWlpqbCwcEpKSv+n2xhkpsvKysbExNCn6rP2GePh4Tl06BDNQjk5uTFjxjg7O6ekpIAYRzk5OZAtLiQkJCIiIiwsLC8vLyQkJCgo+Pfv37CwME6EP4HPJ7AgV6xYkZKSIiIiAkJfHj58KCQkdPz48YMHD1KHAZwee/Q18mHWrFnMRB0ICwuj0Wg8Ht9TAw7dTt1y6tSpt2/f3rt3D6hnMgkQRmVQyYJJamtrs7Kyvn//np6enpGRkZ+fP3XqVBMTk3Pnzo0ePXrs2LF9Ci9mTF1dnYGBwa5du0pKSj5//mxra0smk48dO0YVDRAWFl61atW7d+/oxw8fPnwA9yTzu2toaIiMjJSQkBASEuLl5UWhUCBora2tjdAJeJPg8fj8/PykpCR+fn47OztQl35Q6M/TBDIHMjMzFyxY0G2DzMxMkIvPQucencTHxzP2UPz333+HDx++fPlyWloau8zf4uJia2vrz58/jxo1ysDAwNPTk40ST/+4+dvQ0PDjx4/s7OyMTjAYzPTp083Nzfn5+aOjo9m1ow0bNuzatau5uZlmgMIgpI8aW7Nq1Spzc3M1NbWKigoaib5uP6KggJaVlRXbY7bOnTtXUlISGhpKs1xSUtLLy8vY2NjGxoZIJN67d8/DwwP5d6+surr6kydPdHV1k5KS/P39QQwr83DhlR0w6uvrTUxMRo8e/fbtW2YkPOmZMmVKYmKii4vL79+/gViYlJSUpKSkhISEmJjYqFGjxDoBRmFWVpaFhQXIhuTAr/m/CFcrKyvw6e1T9DNrXpylnWRlZYmLizOu+wripDlRcnnlypWvXr2aMGGCs7Mz1bzes2dPSkrKzJkzd+3aRZMG1PVeHVzvL1D8ZTJzCGi+lpaWDsDsAWPu379/8eJFPz+/Phl2oIKGqKgo46ysI0eOqKioTJo0SV5eXlBQsL29vaqqqqys7EcnuZ3U1NTw8/PPmDFjzpw5a9eu1dPTo3ezscv7K94J8ObeuXNn3Lhx+/fvp/Gyd7svIpEYFhaGRqPB88gkIiIieDz+8OHDRUVFQPJMTU1NTExMWFgYJGsKCAjw8/MLCwvPnDkzIiIiLS2NgST8ANCf82xpaenr63vz5s3t27fTZwfm5+cHBATgcDgTE5O+9nzr1q34+PgvX74wIwB36dKl6dOnszEtQUVFJSEh4c6dO3Z2dkVFRVevXh3u5m9BQcGVK1e0tbUVFRWFhYWBVHhjY2NDQ0NVVVVhYSEQHF22bBmZTJ42bZq+vr6xsfHp06epY2WQZMCup/rOnTvNzc1ycnIgvKavCAgIjBgxoqKiAoyz29vbiUQi+Jf+TQRKrfTpLcAkfn5+U6dOBXo69FhbW1dWVh46dAhEN/7bVzYtLQ1E6O7bt68//XDJlR0YCASCubn5yJEjX758yXJOPQ8Pz4EDB/bu3Zuenj5u3DjGL1xQqsrS0hLhACQSac2aNW1tbZ8+feKEwm5P9PQAdqWhoUFYWHj69Ols3/vq1astLCxockrk5OSAcUkPlwzV8vPzgYnDfOK8urp6SUlJaWkpk3KznOD169d79+598eLFokWL+rRhRUVFW1sbTdE4elavXr137147Ozua5Tw8POPHj9fR0Vm5cuW0adMmTZo0KDPLQGSTSCTW1dVR342VlZX0Ld+/f9/Y2DhnzhzGcsg0oFCoTZs2bdiwISoqio+PjyaVhYaLFy/y8fGxYB2ykf6MxJYsWTJv3rzo6GgzMzM/P7+utTwyMzOXLl3a3t5++fLlvqpY/P79e8SIEU+fPmV+k54CC/vDxo0bwW08KLYvd5m/o0eP1tPTO3nyZHl5Oc0qISEhbW3t5cuXT5w4cdKkSbq6upwoDdqV4uJiMGQcP358P6/NnDlzsFgs0GFBo9HV1dU0TqCMjIzPnz+j0ejg4GDGD3NfASqqjKsl7d69++zZsywnRA+VK/vjxw9Q0ubcuXOsuTC56soODGQyec2aNaKiooGBgTTXJTw8PCYm5vLly8z3hsFgJk+e3Gsz4DfixICBRCJt2LCBh4cnMjKShWxxTleIaGhoMDQ05JDoT5/yqbuenEH0/gLrXFJSkvm4LB0dnaioqOzs7MEyfz9//mxjYxMSEkIvVWFgYBAaGsogsOH79+9A95TxLiZNmhQbGxsZGXnhwoX379/PmDFj165dOjo6QDsS4Q6ePXsWGRlJfTd2G5Fy+/ZtkOdXWlrakz5gT2AwmIULF/barKmpydDQcLCsq/6bvygUKjg4ePny5VFRUaqqqgsXLhwzZgyJRPr27VtMTAyCICdOnGDBtz1y5EhOmLMsM1gRwNzytAA2bty4Zs0aX1/fGzduFBQUbNiwwcDAQEdHZ/To0cx/e/r/lQKa8M3NzbNnzxYVFTU1NQ0ODmY5HSE1NbVruGRXFWEACCwODAw8duxYSEgIM1oqTILD4dBoNOPEAl5eXqVOkH/3yhIIhBUrVrS0tIwdO/bEiRMjRoxgLQGOe67swABSdoKDg+lfT6mpqczntFVVVZWUlAgJCUlJSTH29FRWVn769ElQULCoqGj8+PFsnMJua2tbu3btjBkzDh48yFoPLNx+RCIxIiICj8eLiooqKSmpq6vz8fEBcT0ikUj9g0Ag5ObmFhcXk0ikiIgIZr7rHKXrUGcQzV8Q+GtsbMz8mZ8/f/6VK1eSk5PZ8oD3lby8vFWrVgUHB3dN8AJ0dHSUl5czDupNSUlh3tVt3ElzczPL1cs4Opxbv379rVu3qP/18vKysbHp2qCgoCAkJERPT2/z5s0rV6788OEDJxwfeDx+cF2//T/PIiIi7969CwgIuHfvXlRUFIimk5aWXrly5YEDB6j1aIc02EEatnGX+QusMZtOWO6h/59MMKoeMWLE8+fPpaWlt23bpq+vHxISwgmPwu/fv589e2ZhYbF06VI5OTkjI6Pbt29v3LiRLZ0Dfey4uDgGVTSbm5uLi4v37t1Ls7ylpSUkJGTChAnjx48f6lfW1tY2IyNDW1s7Li7u06dPq1atsra2dnV15ahCPkev7ABw8eLFv3//+vv70985FArl5cuXzKuFeHl5PX36NCMjAyRzyMvLg1okRCKRqlwBzCxQdUxNTc3V1VVbW5td9VobGhq2bNmyZ88eeruEo5+x1tbWgoICb29vEHjDy8sL5gcwGAwWi+XpAi8vr5aWFg8PT1JS0qCbv8w/F1+/fi0qKlqyZAnbtVeJRCKoddynXEB9fX1eXt7379+fPn0aGVgqKyutrKyePXvWtboYlYiIiF4/Hx8+fECj0X2KsGTZ9h30EBdQqcHDw0NHRycoKGjevHnBwcHMREE0NTVt27YNj8dLSkqOGjVKR0ena1Bse3s7SKj99etXWlpaQ0ODi4uLqqrq4sWLkUGi/wYJCoVa0Qn4+aA2EPKvgOqcH+h2VX5+/qdPn1AolIqKyvTp02l+dW1t7fPnz1VVVXvKCxx65u+gjyR8fHwcHByEhITevn0LMmPu379/4MCBSZMmubu7r127lr1JFadOnRISEnJ3dwcVHHbu3GljY/P161d2iR/Z29tbWVm5uroeOXKk2waurq4yMjKggmJXVq5cGRoaisFgvn37xi4LeFCu7KFDh7y8vBQVFcPDw0VFRc3MzD5//rx48WIdHZ0rV64sWrSIQ1kynL6yHMXHx+fkyZOLFi1auXJl1+VAp7mwsPDHjx+amppM9nakk02bNj169Gj06NEgXQOUHUEGhF+/ft27d495kQd2mb+gFO3u3bv19PSSk5Nv374NSg1zOV2dlAy8v8nJydOnT6dQKKtWrQLK3GwkPj6+ubkZhUL1yXsnICCwbNmywMDAurq6gYztbmxsNDEx6ejooB8Tkkik+vr6r1+/btiwgUEPLS0tHz9+NDU1HbDDHkTNqYKCgocPHx44cACEtdy/f3/8+PGTJk0KDw/vNfRZSEjo0qVLr169On78OB6PV1VVBYl94H1C/QOHw02fPt3AwEBAQGDAFHIG4DwzKI9HwyBmf65evbqyslJVVXX06NFSUlLi4uJiYmK8vLxYLBbI/pBIJCKRCOrUgOBAoAIJJIDweHxtbW1ycnLXcleSkpLPnz83MjKiLlm0aBEoZBsQEMBarsg/aP72Z2AUFRW1adMmAQGB169fd1XCu3r1qpCQ0IYNG5ydnS9cuMCuuJmEhIQHDx4EBgZShUucnZ1BeRstLS1bW9v+78LS0nLPnj1Hjx7FYrEHDhzo+gknk8nXO3n//j39SUtISADv7rCwMC4xf1m4ss7Ozq6urkpKSu/evaNWZdPU1Pz69evKlSuXLFkiLy+/ffv2w4cPs3c8PQBXlnNERERs2rQJlELoqY2kpGRfFdBAcAio+oYMLMxb6gxg+Q4BBcOSk5PZrufKIeh1nbv1FH758gUYx69eveKc5FlfbzNbW1s/P78XL14M2EiDSCQuXbr027dvCIKALF4WbsJXr161tLTQJ7RxjgEtr/X/smPHDk1NTaoymry8/PXr1zdu3Ghubp6Tk9PrgSkqKu7cufP9+/dBQUEHDhxgsvj8YDFYVbiZN5TZ7hR48ODBhQsXrl692tLSQl0oKChIVfgBSh04HG7r1q04HC4hIQFo2IGyLKAanJ6enqamJh6P//PnD6hBVlhYSDV/KRTK58+fwd+xsbHQ/P3/6VMaaVdiY2OXLl0qIiLy6tWrWbNm0ax1dHQUERGxt7dfvny5u7s7yKNiElBHt7WTjo4O8Hh3dHTY2tru2LFj+fLl1JY4HM7Ly2vmzJmnT5/euHEjW2L2r1+/PmHChGPHjt2/f3/dunVaWlpkMjklJcXPz2/s2LFpaWndBv5u2LDh2rVr4DiRoXllL126dOLEiYkTJ4aFhXXNmQViPWFhYUePHnVxcTl16lRUVFRoaCgL1sngXlkO4ejo2Osrm4WYM+Z/cmtra2VlJR8fn6ysLPdo0PbHeAXmI5coKjAGhUJ1VfcEBm63IxYzM7PTp0/X1tZy4hUB8t5YcDTMmTNHV1fX09NzwMzfiIiI5OTkXhNqtbW1Gay9e/fuuHHjBjJQtf/qwowBM0Wtra1tbW2gLgPwgwYEBCR10nXyZ8OGDf7+/mFhYXfu3Nm/fz/zk4Hck+03WOe5J/o52dUfI1tAQODcuXN79uzx9PTMzc01Nzc3MTFhV8Y5AIVCaWtrg4A61r37lH+IR48eIQiyf/9+FrYNDg7m4+PT1dX9+fMng2Z37twBoSqRkZG99gmuCvX7jcPhREREUCjUnDlzKBTKoUOHLCwsSCRST/VsHzx4QGEf7e3toaGhR48eXb9+/bZt21xdXX/8+MF4EyC1GxoaShlqV7ajowNEMy9duhSPxzNo6evrC8wyMzMz5kslc9WVHSqEhYUBCbCsrKyfXQBipVlZWWlpadHR0QcPHqR+MKSlpUtLSwf7wP//osfLli1juQcQ8/38+XMGberr6z09PY8fP37+/Pluy4MPDJqamrm5udT/guiXnt4Vra2t8+fPnzx5MnuP4devX+D5+vXrFwubg2IKHCogzwm+fPkykG/aMWPG4HA4DnX++vXrrk5BLBYrKCgIhtMfPnwoKSlRUFCIj4+n37C8vFxERERRUZHJ9zAY3nh4eDBoU1lZ6eHh4eTkdP369e/fv1MGo+jx2rVrB3i/YNCYmZnJ0b1M69TCr6qqogwSpaWlDg4OXl5eLPfA7SMnFujrTD2JRDp79uzly5dPnTp1+PBhxqPJ7du3i4iIrFu3ztrauri4mPE0DRqNFhMTKy4uFhAQoAYAjR07FkSnff/+PTg4uFvnlpOTU2ho6Pv379nowODh4THrhPlNJCQk5OTkmBfd5JIrW11dvW7duszMzKCgoF69R2vWrBk3bpyFhcWbN29cXV3pC3dx/5UdKpiYmAQFBb1+/dre3p6mYggNVO3bESNGDJbvhJ7+KPLa2Ni8fPnyzJkznz59oi4En3kSiQSEUT9+/EjVH8RisXg8flCmp9PS0miEz9BotIKCQreN+fj4BAQEzM3N2XsMYKS0ePFiasBSn5gzZ86mTZsOHTqUlJTE/R53MGC2srLiRMG/bsFisSyUImcS8N47f/78vn37eHl5wX/9/Pz27Nmjq6tramp67969mTNn0m8oLy/v5ua2adOmoqIiVVXVXne0bt2658+fX79+vaysjGptg6LiYFKuqKgoJiaGWgR79OjR+fn5yAACjqrbVEhOg8FgOF3jEIVCiYiISEtLI4OEoqKik5NTf3r4p8xfEJzHTHV4KhkZGTt37lRQUEhNTWUyQHD16tX8/PyrV6/OyspiPAUsKiq6dOlSmu+3k5PTqFGjPD09Q0JCegqK5+fnT0hIYLmQN7twcXFxd3cfsPwktlxZUJR46dKlz58/Z9Jy0tXVTUlJsbKyevnyJZPm71C/soPFsk6QoQYYEjPWz2bM7Nmzy8rKvn///ufPn56SybrGfY4dO3awQjNpnnceHh49Pb2egmGys7Orqqq2b9/e//0WFxeD0EDgB0UQhGWJOgRB3NzcJk+efO3aNSaf6EHk3r17hYWF/azr3iekpKTYpalCj6ioKAqFWr16dddgp7lz5/r4+Jw6dcrZ2ZmB+oqNjY2GhgaTCkuGhobl5eWpqak1NTVUAZmuzJ49m5puiEKhmCk9w16EhYX5+PgGvuYRBoPR19fntDoELy/vlClTOK2Gzlko/xBlZWXOzs7Mt3/+/Pnhw4dZm12tr6/vtU1QUFBxcTH98ry8PArXc/PmTScnJ8rQubJkMvnEiRO3bt1qbm5mbS8tLS1MthzSVxbSV4BuWrfRLP883t7eHz586HbVnz9/Fi5cWF5e3v+97NixA0EQVVVVcLb5+PiMjIz62WdeXp6MjMz79+8pXMyXL18kJCS+fv06kDu9cOECSFvkBC0tLbdv36Zf3tTUxJZbZWjRNY5owHBycnr9+jWn97J9+/YnT55QhjL/l2o32BY4hOsoKysLDg6mFwOGQCAQwNWrV1euXElT6ZAFqqurgcQkmIdxdXV1cHBISUnpv+BMamrqmjVrQkNDQSVebqOsrMzQ0NDT05O+RBwEwuVQKJSh7fpFEGj+QiAQCGTQACUMTExMrl27Bipju7q69qc+TleKi4vz8vJYFsbnKFFRUbKysowVISAQCIeA5i8EAoFABpMnT55cuXJl7NixOTk5J06coCm2AoFAIGwHmr8QCAQCGWRIJFJ1dbWcnNxQn1GFQCBDAmj+QiAQCAQCgUCGEdxSUQkCgUAgEAgEAhkAoPkLgUAgEAgEAhlGQPMXAoFAIBAIBDKMgOYvBAKBQCAQCGQYAc1fCAQCgUAgEMgwApq/EAgEAoFAIJBhBDR/IRAIBAKBQCDDCGj+QiAQCAQCgUCGEdD8hUAgEAgEAoEMI6D5C4FAIBAIBAIZRkDzFwKBQCAQCAQyjIDmLwQCgUAgEAhkGAHNXwiERerq6igUCidOH5lM/vPnD4c6H240NzcP9iFAIBAIhLsYMuZvW1tb/zupqam5fPnyvXv3vn37RiaT2XFckD5TWlqqpKQkJSWlp6e3Z8+ejx8/9uckxsfHL168+OzZsz9+/BjIi/HixYuRI0cKCQnNnDnzxIkTaWlpbOz89u3bI0aMEBAQ0NLSsrOz6+cpYsuzM0QpLy8fP368lJTUf//9d+nSpby8vME+IggEAoFwARSuB4/Hb9++PT4+vv9ddXR03LlzR0ZGBkEQMTGxDRs2FBUVseMYIX2jtbX1wYMHCgoK4CY8fPhwf87g48ePxcTEEAQxNjZOTU0dsIvx+/dvOzs7FAoFfkVkZCQbOy8vL9+zZw8vLy/oPDAwkOWu4uPjbW1tGxsbKRyjo6NDho5Zs2ZRuAACgXD16lVhYeFeL5Ofnx/9r7h27drAHi8EAoFAOA63m79FRUVaWlpv3rxhY5+NjY27du0C38Ljx49ThiDu7u7m5uYrVqyws7Nzd3f/+/cvZQiCx+N1dXURBNm4cWM/uyoqKpKWlv6/6Qw0+vfv35QBJDw8HIPBIAgSHh7O9s6zsrIkJCQQBHn+/Hl/+nn16pW2tnZJSQmFMxCJRPBA5efnF/2P8vJyCteQm5sLxkhBQUE9tWlsbKQefFFR0bp16xAEOXfu3MAeKQQCgUA4DlcHP+Tk5MycOfPAgQOmpqZs7FZISOjGjRtWVlYIgoiLiyNDECsrq8WLF1dVVd2+fXvPnj2PHz9GuAlPT09LS8uXL18yjjARFha2tLREEITq42SZhoaGxsZGBEHMzc1HjBiBDCALFy6cNm0agiB8fHxs73z8+PGTJk1CEITqY2aNxYsX79y5c+bMmZye/VdWVh71P+Tl5ZnZhEAg/P79u66ujqMHNnbs2NmzZ4MBUk9thISEqAc/atQoqsMYAoFAIP8YWIRb+fPnz3///WdiYmJjY8OJ/oGzcIgiJye3pRM9Pb0vX75gsdx1HdetW/fhw4elS5dqampeunRp0aJFPbXsp1UHqKiosLCwaGtrGz9+vI+PDzLg8PDwIFzP9u3bP378aGZmlpSUxA2jPjKZ/OjRo3v37jU3N0tISPzpZOnSpQ4ODoqKij1t9fHjx/b2dllZWREREV5eXhQKRSaTWztpbGzE4/HZ2dllZWV8fHwODg6CgoID+5sgEAgEMjTgLrOpKytXrmxra7t69WpPDRobG5OSkiQkJKSlpUeOHEnv1GlsbLxz587du3f//PkjKSnp7e09a9Ys5N9CUlIS4T4EBASePn2KIIifn9/ixYsfP34M5pE5QUVFxbx584qLixEE2bFjh4CAALt69vf319DQmDBhApPt+2PKUyiUuLi4379/CwsLT5s2jUNjs+vXr48bN87a2vrt27fIoNLY2Ghubl5bW/vq1StlZWWwMD09fdmyZf7+/qGhoT09qkJCQrt3705ISAD/FRYWlpKSEhcXl5CQEBcXx2Awfn5+IJwG2r4QCAQCGWLm7+PHj2NiYjw8PEC4XrdkZWVdvnwZJLIICQlNnTpVQkKisZOmpqaWlpb6+nocDickJKSmpiYrK8vPz4/8c+BwOIQrQaFQS5cuBbbIuHHjOLSXHz9+LFy4sKSkxNDQ0NHR0dPT8/LlywsWLDAxMZkzZ04/xwYpKSmrVq168+ZNP2Nvnj59+vz5c3FxcWlp6TFjxsyYMUNFRYVAIBCJxKampr9//2ZnZ1+/fp2qHWFgYNBPqYeekJKSOnbs2KFDhwICAkDwz2CxZs2aDx8+eHt7U21fBEEmTZoUFhY2ceJEc3Pznz9/gqBnGnR1dePj45OTkz9//rxw4cIxY8Z0XXvlyhU/Pz85Obnr168PyO+AQCAQyJCEG83ftra2w4cPy8nJbdq0iUGzGTNmREREFBQULFu2LCMjo76+3s/PT0BAAIfDDYnJaLbAiXhTtkAmky9evIggyKJFi6ZOncqJXbx+/dra2rqxsfH48eOOjo4YDMbAwODv379+fn4uLi7Lly8XERFBo9FkMllVVXXVqlXbtm1jftK/uLj4169fCIKoqqr28zgXLVqEx+NdXFwKCgqAa1xFRQWDwfDy8uJwOD4+PhERkQkTJujr6wsLC4uIiBgbGyMcw87O7sKFCwcOHLCwsBisx+Tr16+hoaEIgtA7aMeOHbtmzZpHjx7dvn3bwcGhpx6mdkKzEJxk4OQWERHhzLFDIBAI5F+AG1Pfnj17VlVVtXHjRmZcm6NHj962bRuI5ZWRkRESEho+ti/V/KXm3TMgLCxs06ZNixYtWrZs2dmzZwkEAkcP7NGjR2lpaTw8PFeuXGF75wQCYd++febm5oqKih8/fnR2dgbaCyAaZOfOnQkJCSUlJWfOnNHS0mpqakpPTz969KiioqKbmxvjnouLi3fs2CElJaWiogLiN6ZOnbp06dJPnz6xHPwgIiJia2ubmZk5ffp0BEEsLCyysrK+ffuWnJz86dOnqKio4OBgLy8vd3d3Z2fnI0eOADUMDiEgILBu3bry8vLAwEBkkPj27Rv4A2Qr0gCs/+jo6L52e+bMmerq6kWLFq1YsYIdhwmBQCCQfxZu9P56enoiCLJhwwYm24PEL6oBNKwAsgBPnz6dNGmSkJAQiUQiEokEAqG9vb21tbWlpaWxsbGuru7jx4/v3r2jbhUWFrZy5UrOxSTg8fjjx48jCLJ8+XK27yU+Pn7r1q3l5eWXLl3av39/T6MdJSWl/Z38+fPnzZs3z58/j4mJcXBwsLW17cll/uTJk23btrW2tk6dOtXW1lZWVrahoSE+Pj4kJOTly5d79uxxc3NjOcCXn59fX1//y5cvgx6vYmNj4+bmdvv27dWrVw/KAUyZMgWNRqNQqMmTJ9OvlZOTQxCksrKyT31+/PjRzc1NWlr6wYMH7DtSCAQCgfybcJ35W1NT8+XLl1GjRjFvNgHDl9vUDwaGHTt2YLHYxMREd3d3FAqFwWCwWCyYVQcICAgICgqamZmtWLFCqBMRERFNTU2O5szZ29tXV1fPnDkzPj7+5cuXFhYWbOm2rKzs5MmToaGhe/fu3b17N4O48K5ISUlt6KSjo4NEIvVkfb5+/Xr9+vV8fHyBgYHLly/vuiojI2Pp0qXu7u58fHyXLl1i+fhBduag36gTJkyQl5ePj4+vra3tNr6W00ycODEtLY1AIGhra9OvbWho6Ksi4d+/f9euXQsKoMjIyDQ3Nz9+/BiHw4HHgUwmNzU1NTQ05ObmsvV3QCAQCGSownUmI5j0NDQ0ZH6T4ez9xWKxOzpBuIZHjx7dvXt37NixoaGhJSUlRkZG7e3tTM5HV1RUfPv2jUKhaGlpdVW/KiwsdHV1zcnJWbFixc2bN4WEhFg4MGwn3a4iEom2trYUCuXOnTs0ti+wF6OioiZMmHDlypX169ePHz++2056dQwD85cbgnOMjIx8fHyio6MHKwGOgZ5GfHw8giALFixgsquOjg4rK6uysrKpU6eamJiAkGJlZWUnJ6fExETNTkD9NvYdPgQCgUCGNlxn/qanpyMIoqOjM8Dm77dv36Kjo9FotImJCeeiAv55vn79amtrKycnFx4eLt6Jj4/P0qVLw8LCDh48qKWl1e1Wv3//ftfJjRs32tvbQahAXV0d8NT+/PnzxYsX+/fvV1NT49Bhv3v37vfv36NHj+5JoE1FRcXW1tbFxeXRo0cgv4oFgPnLDeM0HR0dHx+f9PT0wdV/oOfPnz/379+Xk5Pbs2cPk5vs3Lnz/fv3Li4uP3/+PHr0KEi4NO2kpqamq4RcQkICp6t+QCAQCGRIwHXmL5igpNEzYsb8ZVDMiZ6ysrKsrCwEQSIiIvB4fGpq6ps3b8CqBw8eZGZm9v3AIUh2dra5ubmKikp4ePioUaPAGTEzM7t+/fqOHTu8vLzc3Nz27t1Lf6Z+/vz58OFDLBa7evVqHh4eLBY7efJkapSCurr64cOHByAZy9DQkIEH19jY2MXFhZq2xbL3lxvMX/B85eTkINxEQ0PDkiVL+Pj4QkNDmQx+cHBwuHv3rouLy8GDBzs6OubNm7dv3z4XFxfwTuhWPpktlVYgEAgEMqThOvO3oqICQZCRI0cyvwmwJ5gxf0kkUkREhJeXl6ioKAh+FRQUlJCQMDMzW7p0KQiW7TYdh+2QyeSQkJB79+61t7e3tLRMmzbt0qVLFArly5cvs2bNGoDwUAKBUF1djcViJSQk2JKMlZycbGJiMn78+JCQEBrbxc7OrrS09OLFi/v37586derMmTNptl29evXp06eRwQNIZzBWywKhxsyIbPQEuEX7NE7jEAoKCtRnbXBpaGgQFBT88+dPWFiYk5OThoZGWloayH7rFWdn58uXL9+7d2/Lli1gGPz8+fOJEydGR0c/ePAAVKKmh42FUSAQCAQyROE68xdoIfUpuBMYiwycOq2trR8+fAgODn737t1///134cKF0aNH79y5E4QYDnzgbFlZ2Zo1a8rKyvz8/PT09BAEuXbtmo2NTUtLS0hIiKenJ5Byo6e+vh6DwQgLCzO/r46ODlAMFlBfX19RUREbG/vixYvm5mZgjR04cKCf8mQhISE2Njb79+8/fvx4t97NCxcuVFdXP3z4cPPmzd+/f6cxARlc7vb2dl5eXpYPjEwm19fXFxYWvnjx4t27dxgMRk1NbdKkSVZWVl0LLoC/S0pKGHRVVFSEIAjVq80CLExT0EAmk318fIKDgzs6OgwMDI4ePcpaP+CEd6s7NsBoaGgAK1xAQODSpUvbtm1j8nIfP378zp07kZGRXfMEZGVlfX19jY2N//vvv2/fvgErnwYpKSm2/gIIBAKBDD24zvxta2vrazWHbr+Xra2tX758ievk48ePampq27Ztu3LlCo1cwMC74kpLS/X19VtaWpKSkqglFfbv3z979mwgLtvtNxuQl5e3du3a2tpaGRkZMTExXl5ekEdFJpNJJFL7/yAQCKhOyGQyGo3m4+Pj5+cHQQVYLBaME2bNmtXR0QFqj6moqLD8c1pbW/ft2/ft27eoqCjGgrX37t1rbm729/evqqoaMWJE11UMavzu27cvICBAqhNBQUGg6wx+CIVCIXfS3t7e9j8IBEJzc3NTUxP4F9xOXfny5Yuvr+/9+/e76gDMnz8fhUJFRkY2NDSIiop2eyRABphBBTgmgx/6Ovne0dGBIMipU6euX7+ek5Pz9+9fsPz79+8HDx5kLZEOPF+tra3IYJORkcHDw9PW1vb169d79+45OzufPn16+/btDM5Se3v75s2bi4uL09PTlZSUaNbOmzfv8OHDly5dOnDgwPPnz+k351wEOQQCgUCGClxn/oKpyZaWFuY3Aa67jx8/Pnr06O/fv+md5ObmkkgkOTk5Kyurixcv9mSZDXAgJoFAMDMzKysre/jwIU05sRUrVsTFxWGx2NmzZ/e0+bRp03JycgICAq5du5aYmCgkJLR69erJkyfLyspKSkqKi4uLiYmJiIgICwsPTIBjVlbW4cOHN2zYAKSaGYNGo589e+bg4EBj+yII0lXkgQYPD4+dO3devHjR39+fSCRisdgJEyYoKyuPGDFCVlZWWlpaSkpKQkJCVFTU3Ny8oqIiKipqxowZvLy8GAwGDACIRGJLSwvwfFdXV1dWVv79+3fGjBld96KgoLB27VofH599+/Y9evSI/jCePXv26tUrDQ2NpUuX9uUM0Z4B5huTSKS3b9/euXPn+/fvCIIcOnRIX18f2wUpKSmWB2/A8U9fdG3gAb5YUVFRs07A/EBiYuKjR4+6/XW/fv1at26dkZGRt7d3Tz/fyckpJiYmKCiIJvUNjUarqan1afIEAoFAIP8kXGf+go9Tn6ZltbS0tLW1MzMzqUWS1dXVd+3aZWlpOXPmTMYmwgCrUDk4OGRlZSkpKdEX9QA/edq0aYwDPzAYzKpOampqhIWFB7fosYSExKtXr5iPVK6pqSkrK9PQ0KBuAsz0nhQhAOPHj/fx8bl27Vp8fPz06dN7CgwFl1JMTKxrcCcajQYh3eLi4l2jHei5fv16UlKSl5dXS0uLi4sL1SLH4/Gurq5OTk5iYmL+/v79uWHArUihUBi0oVAoycnJ/v7+YWFhpqam3t7eK1eujImJUVJS6lM+KGPAzcaFhuCmTZsyMjKuX7+ura196NAhmrWgfMndu3cZe3CxWKy/v/+hQ4do7kxJScmJEydy5sAhEAgEMpTgOvNXUVHx8+fPJSUlfdI+e/78+eXLl8XFxXV0dGbNmsX8bP5Amo+VlZU3btwABe3ojfKYmBgwC89kbwwCBgaMPmUoAnN5+/btM2bMoM5Ki4iIzJkzh5nfIiUltWTJkl6bsezOFxcX//jx4+rVq593oqGhIScnV19fn5mZ2dHRoaWlFRAQwFgRj8ngh26T54qKij58+BATExMRESEqKmpra5uYmNhTGEb/AVHODJzug8ixY8fc3d3PnTtna2vbdShYVFSEw+G8vb2Z6URFRSUoKIhmob29PXf+ZAgEAoEMd/MXWBg/f/7s61YPHz5kYXcDOf97+/ZtIGpLP4FOJBKB2v+8efOQf5TS0tKoqKjq6moCgVBRUQFCIFavXr1s2TI27qU/UR8yMjLR0dERERH+/v7p6elFRUWioqIrVqywsLBYvnx5/8PEgbJEXl4emUyura1N6yQ1NTUhIaGsrExISMjS0tLf35+x/hpbAM+XpqYmwn3Iyspqamp+//79w4cPixYtoi5X6YSmcXZ29qtXr8TFxUePHq2rq8ugiB0ejyeTyYWFhWg0msl6gRAIBAL5V+E68xfojn358oW1zSkUSp9Mh4FMAw8JCQFexkmTJtGsSkpKam1t5ePjA0IQzPD169dVq1Z1dHSIi4urq6sfPXqUcebZIBIWFnbixInU1NRRo0ZNnjz558+f8vLy06dPd3R0NDY2Zu+++m84LuwE4QAgqjssLKyri1pMTGzRokXLly9fuHAhPz8/MiB8/vwZQRCuvWHk5eW/f/9eUFDQa0spKSkikXj06NH6+noUCqWjo4PD4YidtHYCBpxoNJpCodTU1JBIpF27doFJGAgEAoEMWwZfgpQGIyMjLBYbGxvb1w2JRKKhoSEajebl5VVQUDA1NS0sLOx1K8bxoGykvb0dVEyYOXMmvYn2/v17sIp5ka8pU6YkJCQcOnSosLAwICDA19cX4UouXrxoamrKx8eXkZFRVFSUkJCQnZ1dWVmpo6OzYMECR0dH9u5uEIsa9LprTU3NI0eOCAsLjxkzZtmyZRcuXPjy5cvfv399fHwsLCwGzPYlk8mxsbE8PDxz585FBpz29valS5fq6+uXlpb21IZMJlN14hgjIyNz8uTJgoICTU1NCoWiq6vr6en59OnT0NDQ+Pj4nJycX79+VVZW/v79u6KiAjiPqRkCEAgEAhm2cJ33V1hY2NDQMCoqKjExkSY9nzE8PDzv379PTU29fv26j4/Pr1+/8vPzadQVuoJGo0eMGNHX6FWWqaysBH/QF32gmr9z5swB/62urhYSEupVn19GRmbXrl11dXWnTp0a3By4noiJiTl27NiUKVNiYmK6FteQkZHx8PCQlpY+ffq0pqampaUlu/bIDUUlGHCxk8E16+Pi4urq6kxNTQdF+eHVq1cvX74EuYaurq7dtikrK+vT0FRCQmLx4sXZ2dlqamra2to9NSOTySgUijtDPiAQCAQykHCjrQDqUHh5efV1QxQKNXny5MePHwPpXMae1AkTJpw5c6Z/R9q3YwN/jB8/nmZVe3t7QkICgiD6+vpgyaFDh/Ly8pjsGeTvA4cZt3HhwgVg83VbWO7EiRMjR448efIkG/fIDSWFOQEbfxeIkt+1axcyGDQ1NYE/erpjKysrf/z4wcPDQ30cmAEUGgQayT1BJpMVFRXZUuMQAoFAIEMabjR/zc3Nx4wZ8/TpU6rCf18BCeOMLcKtW7f2VFyNSktLy7Nnz4Dwaj+Rl5cHR0WfnfP06dO2tjYUCjV9+nQQvpyWltZXhSbuNH/j4+NRKFRPSsY8PDxz5szJzc39/fs3u/Y4APWiB2XXjM3f2traO3fuvHv3rtd+Kisrnz9/rq2tbWJiggwG1FrEPfmzQWDuxo0b+5SgBhr3av7CmhcQCAQC4VLzF4PB3Lp1q6mpycXFpT8z4P23CFeuXLlmzZqJEyf23wJGo9FA8IEm5DEjI8PBwQEktoPJ6NjYWF1d3b5OdjNWkx0sWltb0Wg0A61cEPBaV1fHrj0OYhBIf4oz97PzRYsW2dnZLVy4MDAwkHE/Fy9ebGtru3Xr1mAFSWtqalpZWSEIkpmZSb82Li7uypUrysrKly9f7lO3wPwFiW49QSaT1dXV+37IEAgEAvnX4EbzF8jf2tjYXL169cePHyxsDj7t/bcIQUwCiUQKCwvrZ1egGJWYmNiDBw+oS6Kjozdt2hQeHi4oKAiMdQqF4uzsvHPnTua7BcYlY78XoKOjIzs7++vXr8zk1LMFNTU1EomUnZ3dU4OUlBT2CtAyLhrCUTiau8bArKdQKEDJAYydGHSSmZl569atHTt2GBgYIIOHt7f34sWLo6KiLl26RK3v2NDQcO3aNRMTEw0Njbi4uL5qkzHp/R07dmz/jh0CgUAg/wJcav4iCHLnzp3Jkyfb2Nh0WyaAGUOk/95fam02ZozLXlFSUnr37l1ZWdnixYsvXry4fPnyJ0+eREZGamtr+/v7NzQ07Ny509LSUl9fnzpBzAyzZs1Co9EfP37Mzc0tKysrLS0tKSkpLi4uKioqLCwsKCjIz8//8uWLk5OTkpLS+PHjp06dqqam1mvgB1sAOW09efLevHnz7du3uXPnAkHc/oNCodjVFQtwtIgagzQ1FApFzfdioGXW3t6+adOmmTNnurm5IYMKPz8/SICLi4tTVVVVUVEZNWqUmppaeHj4rVu3UlNTWRgOgRIhvZq/jAuXQCAQCGSYwHXKD1R4eXlDQ0NNTU337t3r4eHRp22NjY2/fv364sWL6dOni4iIkDohk8ngDxKJVF1dHR0dfePGjZ8/f6LRaAUFhYcPHxoZGdH0c/Xq1UWLFs2bN49BOnmfmDp1al5eXnp6ekNDw6ZNm2RkZMByMzOzkpKS9PR0WVnZvta2nTRp0ocPH3x8fA4ePMj486/dCTCYmBcY7g9Hjhx58uSJt7e3srLyqVOnugawhoWFWVtb8/DwXLlyhV27k5GRGUTlB0lJSc51zrgwXmhoqKenp7q6On0xbSo7duzA4XAhISEDXOi7J5Z0Qo1Y6GfoCPD+0gyViURiW1tbY2Njfn5+cnIyHo+Pi4sbP368kpJSvw8fAoFAIEMY7jV/QZZYTEyMtbX12bNnT58+zfyGTk5OMjIyQUFBurq6BAKBQUtQe4xEIhUWFtKbv+AY5OTk2FidAYjz0y8XFhZmeUraoBOE+xATE4uKijIzM3N0dPTx8TE1NZWXl6+rq4uNjU1KShIUFAwICACFTvoPGo1moHPHUVAolIyMDOfMSikpKcYFkBUVFZ2cnBg0OHXqVH19fWRkJKfVhb9//04d5OBwOGZibdkSMw3MXy8vr6CgoI6ODnQnOBxOQEAAh8NhsVg0Gq2lpRUWFjZmzJiNGzd220l9fX15eTn1v7W1tf0/MAgEAoFwISjuTJmi4eHDh6qqqoaGhgO/67Vr1y5ZsgQk60BYo6mp6caNG0+ePKEGAcvJyZmbmx89epS+jC3L6OrqmpqaMrYCOcSCBQtwONzr16850bmJiYmIiMjz589Z7uHDhw/FxcU92XxsgUQi0c9ajB49mhkxCrbQ3t6Ow+H27dt36dIllu3p4OBge3t7moUHDx4EUowQCAQC+WcYGubvYHHr1q36+nqgzADpP62trXV1dYKCgox9mazx/v37qVOnDkrq2759+xYsWGBqasqJzt3c3KZPn96nEjDDE01NTX9/f3bFKUEgEAjkHwaavz1SVlYWHBy8d+/egbwekKEIhUIZxGLLEHgVIBAIBNInoPkLgUAgEAgEAhlGcK/wGQQCgUAgEAgEwnag+QuBQCAQCAQCGUZA8xcCgUAgEAgEMoyA5i8EAoFAIBAIZBgBzV8IBAKBQCAQyDACmr8QCAQCgUAgkGEENH8hEAgEAoFAIMMIaP5CIBAIBAKBQIYR0PyFQCAQCAQCgQwjoPkLgUAgEAgEAhlGQPMXAoFAIBAIBDKMgOYvBAKBQCAQCGQYAc1fCAQCgUAgEMgwApq/EAgEAoFAIJBhBDR/IRAIBAKBQCDDCGj+QiAQCAQCgUCGEdD8hUAgEAgEAoEgw4f/DwgNfpVUAEmKAAAAAElFTkSuQmCC" alt="[2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값 원본 문제">
+      </div>
+      <div class="orig-media-sub"><span class="bilingual-ko">📄 2026학년도 10월 고3 전국연합학력평가 원본 시험지</span><span class="bilingual-en">📄 Official National Academic Assessment Paper (Grade 12)</span></div>
+    </div>
+
+    <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
+        <p style="margin:0 0 8px;font-weight:600;color:var(--txt)">닫힌구간에서 삼차함수의 최댓값과 최솟값</p>
+        <p style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">구간 [0, 2]에서 극점 x=0, 1과 끝점 x=2의 함숫값을 비교해 a=-2를 구하고 f(-2) 도출하기</p>
+        <div class="bilingual-en"><b>Problem Objective:</b> Compare values at critical points x=0, 1 and endpoint x=2 on [0, 2] to find a=-2, then compute f(-2).</div>
+      </div>
+      <div class="orig-tip">
+        💡 <b>초등 눈높이 디딤돌 길잡이</b>: 처음 나오는 기호도 제0단계 기호 번역과 1단계 초등 사칙연산·구구단 디딤돌부터 순서대로 밟아가면 누구나 100% 자신의 힘으로 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: Follow the elementary-grounded micro-steps below to master this problem completely!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단: 프레임별 시각적 증명 팁 전면 가로 확장 -->
+  <div class="min-visual-tip" style="margin-top:16px">
+    💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 삼차·사차함수 그래프의 <b>숨겨진 대칭성과 황금 비율 관계</b>를 단계별로 명쾌하게 드러냅니다.<br>• <b>[도함수의 뿌리]</b> 도함수 $f'(x)=0$의 두 실근에서 원래 함수 $f(x)$의 극대와 극소가 형성되는 역학적 관계를 추적합니다.<br>• <b>[변곡점과 대칭]</b> 극대점과 극소점의 정중앙에 위치한 변곡점 $\left(-\frac{b}{3a}, f\left(-\frac{b}{3a}\right)\right)$을 중심으로 점대칭을 이루는 프레임별 도형 관찰<br>• <b>[비율의 기하학]</b> 극값을 지나는 접선과 곡선이 다시 만나는 점 사이의 $1 : 2$ 및 $1 : \sqrt{3}$ 비율 관계가 왜 필연적으로 성립하는지 하단 자료의 시각적 분할로 확인해 보세요.
+  <div class="bilingual-en">💡 <b>Frame-by-Frame Visual Proof Analysis (PDF & GeoGebra Exploration)</b><br>The archive's flipbook proof materials demonstrate how fundamental mathematical principles converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
+</div>
+<h2>🔰 제0단계 · 수학 기호 번역기<span class="bilingual-en">🔰 Step 0 · Mathematical Symbol Translator</span></h2><div class="sym"><div><b>$f'(x) = 6ax(x - 1)$</b> — 미분하여 기울기가 0이 되는 극점 x=0, 1 찾기<div class="bilingual-en">Derivative factored to locate critical points at x=0 and x=1.</div></div><div><b>$f(0)=6,\ f(1)=6-a,\ f(2)=4a+6$</b> — 닫힌구간 [0, 2]의 양 끝점과 극점에서의 후보 함숫값<div class="bilingual-en">Candidate values at critical points and endpoints on [0, 2].</div></div></div>
+<h2>🔰 1단계 · [초등 대소 비교] $f(0) = 6$과 최댓값 $8$, 최솟값 $-2$ 비교하기<span class="bilingual-en">🔰 Step 1 · [Elementary Comparison] Comparing $f(0) = 6$ with max $8$ and min $-2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(x) = 2ax^3 - 3ax^2 + 6$에 $x = 0$을 넣으면 $a$의 값에 상관없이 $f(0) = 6$입니다. 초등학교 숫자 크기 비교에서 $6$은 최솟값 $-2$와 최댓값 $8$ 사이의 수이므로, 나머지 두 후보값 $f(1) = 6 - a$와 $f(2) = 4a + 6$이 각각 $8$과 $-2$가 되어야 합니다!<div class="bilingual-en"><b>Prerequisite Knowledge:</b> By elementary number comparison, $f(0) = 6$ lies strictly between the minimum $-2$ and maximum $8$. Thus the other two candidates $f(1) = 6 - a$ and $f(2) = 4a + 6$ must be $8$ and $-2$.</div></div><div class="q" data-ans="2" data-exp="$a = -2$를 넣으면 $6 - (-2) = 8$ (최댓값), $4(-2) + 6 = -2$ (최솟값)가 동시에 성립합니다!" data-exp-en="Substituting $a = -2$ gives $6 - (-2) = 8$ and $4(-2) + 6 = -2$ simultaneously."><div class="lvl"><span class="bilingual-ko">초등 숫자 비교 디딤돌 1</span><span class="bilingual-en">Elementary Comparison Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 미지수 찾기처럼 $6 - a = 8$이고 동시에 $4a + 6 = -2$를 만족시키는 정수 $a$의 값은?</span><div class="bilingual-en">Using elementary arithmetic, which integer $a$ satisfies both $6 - a = 8$ and $4a + 6 = -2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-3$</div><div class="opt"><span class="n">2</span>$-2$</div><div class="opt"><span class="n">3</span>$-1$</div><div class="opt"><span class="n">4</span>$1$</div><div class="opt"><span class="n">5</span>$2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🌿 2단계 · [함수식 완성] $a = -2$를 대입하여 $f(x)$ 적기<span class="bilingual-en">🌿 Step 2 · [Completing $f(x)$] Writing $f(x)$ with $a = -2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$f(x) = 2ax^3 - 3ax^2 + 6$에 $a = -2$를 대입하면 $f(x) = -4x^3 + 6x^2 + 6$이 됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Substituting $a = -2$ into $f(x) = 2ax^3 - 3ax^2 + 6$ gives $f(x) = -4x^3 + 6x^2 + 6$.</div></div><div class="q" data-ans="2" data-exp="$2a = 2(-2) = -4$이고 $-3a = -3(-2) = 6$입니다." data-exp-en="$2a = -4$ and $-3a = 6$."><div class="lvl"><span class="bilingual-ko">계수 확인 디딤돌 2</span><span class="bilingual-en">Coefficient Check Step 2</span></div><div class="stem"><span class="bilingual-ko">$a = -2$일 때 $f(x) = 2ax^3 - 3ax^2 + 6$의 $x^3$의 계수 $2a$와 $x^2$의 계수 $-3a$를 순서대로 바르게 짝지은 것은?</span><div class="bilingual-en">When $a = -2$, what are the coefficients $2a$ and $-3a$ of $x^3$ and $x^2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-4,\ -6$</div><div class="opt"><span class="n">2</span>$-4,\ 6$</div><div class="opt"><span class="n">3</span>$4,\ -6$</div><div class="opt"><span class="n">4</span>$4,\ 6$</div><div class="opt"><span class="n">5</span>$-2,\ 6$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🌱 3단계 · [음수의 세제곱] $x = -2$일 때 $-4x^3$ 계산하기<span class="bilingual-en">🌱 Step 3 · [Cube of Negative Number] Computing $-4x^3$ at $x = -2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$(-2)^3 = -8$이므로 $-4 \times (-8) = +32$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Since $(-2)^3 = -8$, we have $-4(-8) = 32$.</div></div><div class="q" data-ans="5" data-exp="음수끼리의 곱셈이므로 $-4 \times (-8) = 32$입니다." data-exp-en="$-4 \times (-8) = 32$."><div class="lvl"><span class="bilingual-ko">세제곱 항 계산 디딤돌 3</span><span class="bilingual-en">Cubic Term Step 3</span></div><div class="stem"><span class="bilingual-ko">$x = -2$일 때 $-4x^3 = -4 \times (-8)$의 값은?</span><div class="bilingual-en">At $x = -2$, what is $-4x^3 = -4 \times (-8)$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-32$</div><div class="opt"><span class="n">2</span>$-16$</div><div class="opt"><span class="n">3</span>$16$</div><div class="opt"><span class="n">4</span>$24$</div><div class="opt"><span class="n">5</span>$32$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🌳 4단계 · [음수의 제곱] $x = -2$일 때 $6x^2$ 계산하기<span class="bilingual-en">🌳 Step 4 · [Square of Negative Number] Computing $6x^2$ at $x = -2$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$(-2)^2 = 4$이므로 $6 \times 4 = 24$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Since $(-2)^2 = 4$, we have $6 \times 4 = 24$.</div></div><div class="q" data-ans="4" data-exp="$6 \times 4 = 24$입니다." data-exp-en="$6 \times 4 = 24$."><div class="lvl"><span class="bilingual-ko">제곱 항 계산 디딤돌 4</span><span class="bilingual-en">Quadratic Term Step 4</span></div><div class="stem"><span class="bilingual-ko">$x = -2$일 때 $6x^2 = 6 \times 4$의 값은?</span><div class="bilingual-en">At $x = -2$, what is $6x^2 = 6 \times 4$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-24$</div><div class="opt"><span class="n">2</span>$-12$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$24$</div><div class="opt"><span class="n">5</span>$36$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>💎 5단계 · [최종 종합] $f(-2) = 32 + 24 + 6$ 계산하기<span class="bilingual-en">💎 Step 5 · [Final Synthesis] Computing $f(-2) = 32 + 24 + 6$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>구한 세 항 $32, 24, 6$을 모두 더하면 $f(-2)$의 값이 완성됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Sum the three terms $32 + 24 + 6$ to find $f(-2)$.</div></div><div class="q" data-ans="4" data-exp="$32 + 24 + 6 = 62$입니다." data-exp-en="$32 + 24 + 6 = 62$."><div class="lvl"><span class="bilingual-ko">최종 종합 디딤돌 5</span><span class="bilingual-en">Final Synthesis Step 5</span></div><div class="stem"><span class="bilingual-ko">$f(-2) = 32 + 24 + 6$의 값은?</span><div class="bilingual-en">What is the value of $f(-2) = 32 + 24 + 6$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$56$</div><div class="opt"><span class="n">2</span>$58$</div><div class="opt"><span class="n">3</span>$60$</div><div class="opt"><span class="n">4</span>$62$</div><div class="opt"><span class="n">5</span>$64$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div>
+<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:rgba(15,23,42,.85);border:1.5px solid rgba(124,196,255,.35);border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)"><button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang('ko')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button><button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button></div><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,23,42,.92);border:1.5px solid rgba(124,196,255,.5);border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10"><span style="font-size:0.83rem;color:#cbd5e1;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span><button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang('ko')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button><button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button></div><div id="topGuestFreePassRow" style="margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px"><button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px" onmouseover="this.style.transform='translateY(-2px) scale(1.03)';this.style.boxShadow='0 0 32px rgba(56,189,248,.95),0 8px 24px rgba(0,0,0,.6)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5)'"><span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span><span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span></button><div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div></div><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function toggleModalLang(l){document.documentElement.lang=l;try{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}catch(e){}var bKo=document.getElementById("btnTrackFullLangKo");var bEn=document.getElementById("btnTrackFullLangEn");if(bKo&&bEn){if(l==="en"){bKo.style.background="transparent";bKo.style.color="#cbd5e1";bKo.style.fontWeight="700";bEn.style.background="#38bdf8";bEn.style.color="#0b1020";bEn.style.fontWeight="800";}else{bKo.style.background="#38bdf8";bKo.style.color="#0b1020";bKo.style.fontWeight="800";bEn.style.background="transparent";bEn.style.color="#cbd5e1";bEn.style.fontWeight="700";}}var cKo=document.getElementById("btnModalCenterLangKo");var cEn=document.getElementById("btnModalCenterLangEn");if(cKo&&cEn){if(l==="en"){cKo.style.background="transparent";cKo.style.color="#cbd5e1";cKo.style.fontWeight="700";cKo.style.boxShadow="none";cEn.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cEn.style.color="#0b1020";cEn.style.fontWeight="800";cEn.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";}else{cKo.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cKo.style.color="#0b1020";cKo.style.fontWeight="800";cKo.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";cEn.style.background="transparent";cEn.style.color="#cbd5e1";cEn.style.fontWeight="700";cEn.style.boxShadow="none";}}var sn=document.getElementById("studentName");if(sn)sn.placeholder=(l==="en")?"Enter name":"이름 입력";var pin=document.getElementById("studentPin");if(pin)pin.placeholder=(l==="en")?"4-digit PIN (optional)":"간편비번 4자리 (선택)";if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);}(function(){var cur="ko";try{var p=new URLSearchParams(window.location.search).get("lang");if(p==="en"||p==="ko"){cur=p;}else{var man=localStorage.getItem("mathedu_lang_manual")==="true";var sto=localStorage.getItem("mathedu_lang");if(man&&(sto==="en"||sto==="ko")){cur=sto;}else{var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}if(tz&&tz!=="Asia/Seoul"&&tz!=="ROK"&&tz!=="Asia/Pyongyang"){cur="en";}else{var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";if(l&&l.toLowerCase().indexOf("ko")!==0)cur="en";}}}}catch(e){}if(cur==="en"){document.documentElement.lang="en";toggleModalLang("en");}})();function startFreePractice(){var vid="";try{vid=localStorage.getItem("mathedu_visitor_id")||"";if(!vid){vid=Math.random().toString(36).substring(2,6).toUpperCase();localStorage.setItem("mathedu_visitor_id",vid);}}catch(e){vid="ANON";}window._studentName=((document.documentElement.lang==="en")?"Guest#":"자유학습#")+vid;var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({quiz_slug:"c261019",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2><div class="sol">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 <b>닫힌구간에서 삼차함수의 최댓값과 최솟값</b>을 이용해 미정계수 $a$의 부호와 값을 결정하는 문항입니다.</p>
+
+<h4>📐 [단계별 상세 풀이 전개]</h4>
+<p>
+  <b>1단계: 도함수와 구간 $[0, 2]$에서의 함숫값 후보 구하기</b><br>
+  $$f'(x) = 6ax^2 - 6ax = 6ax(x - 1)$$
+  구간 $[0, 2]$에서 극점과 양 끝점의 함숫값은 다음과 같습니다:<br>
+  $$f(0) = 6, \quad f(1) = 6 - a, \quad f(2) = 4a + 6$$<br>
+  <b>2단계: 최댓값 $8$, 최솟값 $-2$와 비교하여 $a$ 구하기</b><br>
+  $f(0) = 6$은 $-2$와 $8$ 사이의 값이므로, $6 - a$와 $4a + 6$이 각각 $8$과 $-2$가 되어야 합니다.<br>
+  $a < 0$일 때 $6 - a > 6 > 4a + 6$이므로:<br>
+  $$6 - a = 8 \implies a = -2, \quad 4(-2) + 6 = -2 \quad (\text{성립})$$<br>
+  <b>3단계: $f(-2)$의 값 계산</b><br>
+  $f(x) = -4x^3 + 6x^2 + 6$이므로:<br>
+  $$f(-2) = -4(-8) + 6(4) + 6 = 32 + 24 + 6 = 62$$
+</p>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>
+  따라서 구하는 값은 <b>$62$</b>입니다.
+</p>
+  </div>
+  <div class="bilingual-en">
+<h4>📋 [Problem Analysis & Core Concepts]</h4>
+<p>This problem determines the parameter $a$ from the <b>extrema of a cubic function on $[0, 2]$</b>.</p>
+
+<h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>
+  <b>Step 1: Candidate values on $[0, 2]$</b><br>
+  Since $f'(x) = 6ax(x-1)$, the candidates are $f(0) = 6$, $f(1) = 6 - a$, and $f(2) = 4a + 6$.<br><br>
+  <b>Step 2: Determine $a$</b><br>
+  For the maximum to be $8$ and minimum to be $-2$, we need $6 - a = 8$ and $4a + 6 = -2$, which both yield $a = -2$.<br><br>
+  <b>Step 3: Evaluate $f(-2)$</b><br>
+  $$f(-2) = -4(-2)^3 + 6(-2)^2 + 6 = 32 + 24 + 6 = 62$$
+</p>
+
+<h4>✨ [Final Answer & Practical Tips]</h4>
+<p>
+  The final answer is <b>$62$</b>.
+</p>
+  </div>
+</div><div class="q" data-ans="4" data-exp="$f&#x27;(x) = 6ax(x-1)$에서 $f(0)=6$, $f(1)=6-a$, $f(2)=4a+6$입니다. 최댓값 $8$, 최솟값 $-2$를 만족하려면 $a = -2$이므로 $f(x) = -4x^3 + 6x^2 + 6$이고 $f(-2) = 32 + 24 + 6 = 62$입니다." data-exp-en="Checking $f(0)=6$, $f(1)=6-a$, and $f(2)=4a+6$ against max $8$ and min $-2$ gives $a = -2$. Thus $f(x) = -4x^3 + 6x^2 + 6$ and $f(-2) = 62$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">닫힌구간 $[0, 2]$에서 함수 $f(x) = 2ax^3 - 3ax^2 + 6$의 최댓값은 $8$이고 최솟값은 $-2$이다. $f(-2)$의 값을 구하시오. (단, $a$는 $0$이 아닌 상수이다.) [3점]</span><div class="bilingual-en">On the closed interval $[0, 2]$, the function $f(x) = 2ax^3 - 3ax^2 + 6$ has a maximum value of $8$ and a minimum value of $-2$ ($a \neq 0$). Find the value of $f(-2)$. [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$56$</div><div class="opt"><span class="n">2</span>$58$</div><div class="opt"><span class="n">3</span>$60$</div><div class="opt"><span class="n">4</span>$62$</div><div class="opt"><span class="n">5</span>$64$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div>
+
+<!-- 📚 수학자료실 공식 연계 심층 탐구 자료 카드 -->
+<div class="min7014-addon-card">
+  <div class="min-header">
+    <div class="min-header-title">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAHIElEQVR4nK1Xa4xdVRX+9j7n3HNfc+f9aJ2ZdtqGlkZaO5AOFdTJZEgD/DAK1UYbiTFgjIg/jPKHZDIJMeg/0Rij/iAmKIEEf5CiVCmjUKEgg21aGtoyJcNlWufJzD33cV57mbXvOXfuTOfW0rCSffe5e6+91rfXXnuvtQRiOnTIwHPPhXYmiwdeLAxeODGxN3BWmoUkAgzcGIUgJYSZzS1vuWP41J/ubpp0S05NF3MIzTc2JsX4uHr0PzT0xm9//dhma2X4pt72bHNTBkJI3DgRGH6hWMLFmSUn7zVN3PKN7z7+5AFxksbGJMbHFcaIpBDAA8/kD9/74Lhz9Ogx8koOEZH6NFtQKdHLL/+DvvrwE86Rp6cPs07WrXH++G267e7vjBcvnnuXFft6QRCSHwRrWqBbqPv1c/F8fb86HsYb8vMfTNF9P/hZ8fuv0W1VIxHJL37vyRf+duw4MwWu51EjUkpRGIa6bzTPxDwbkVeVHZx84y0a/eFvXmDd8sET2NNnl4ZHR+6kUClpmebqCRIhDEP4vg/P83SvlKrN1beYjykIAs2/ns80TbCO/UODtCMXDn/zKPbI948fH9zV35WFYbHPCGZkASwsViil1Isty9J9IxJ8sAASiYT+dl13zbgGpEgAEru3dmXzk38fNIOKk8v1pPRkuVKGIaUWwEp5YbyYgdX31/R9Ig2WrcIgYnn1a3PZFKhSyplCyto4X4eY0TCMmumuj5hvlVdFMngDbEn+rrcei2Xday45MzNaNjsjrzfd1cpU1GKlLNyo/efNMHiWYdu2lslA1ouUG5mPQTDiSqWilQgRK+ReRMuMqMUilgAU9byAwqLnQvERamsovfvYmevJXA+AlRGFeoEQJlxXwbIkDKNqNoAdawXAPIDZahMLkHIBQvJOD+LMUj8K6QR6Ah+9ijSI2BK+H1wLgIh2BSheKItI2Avw3BkQLcI050BYgkAhAsJWEYCSUGRBqRW8M/9XlNMj6E58Fh4ZcEyFdmEwgtoV3gAARb9lEJ2AELOQchnAAoASkkmC6xFCT8BOWBokqSQUASQlIE1IFHFuoQfF7JfQkwUsMQWirShQCi28gq5WXgcg9owkIFogxOv4cEkgNNrQlskgK1dgJxRrg88btwR7sD4T+rgEdaWIy1On8d/dn0F7q4m03wJp8i06gxCb4WIP0qKJn6hGACIighS3Ir/YjemFP6Kv/Rymy7dCGQPwcAFJdwV9SYGmgoB/ZQnhYgmGmcAFcxbvbLuCVPIKZsLzOEi3o9m0oQRBkQsDJ0E4BKBPh+iGACj6nS8A+cW7YMkpbGk/j1ftEFNnu7Bv6i+YW65gV0cfkh0JJLttBM0WwmWJMr+SJYLf2gYXXSBpQ8Dnw4LEHAR+BUWjAO5sDABVfwUhAIkyZpf24djHU1je+RRG0AzqzuPSQBvClIlbujfBUCFSlsRNXVtgzTqY8+eQrfTCVwVc9srIJNtQVq3ImfvQZvUA4GNQ1wJA+jdpWfrKpc0QeaeA5xfeg/+5g+j1tiGtilj6SKCpNYEUBw9YsJDB7uyXAXQi8NuwWExhelHifc+CkhkM9Q/U6bjGOyAiZ2xJZ2AIA0VVxn7zAF66/AxOtoWYVj3YOjeDYXs/0tiJUHVAik4QtQIioyWYFtCZA9ozBEjeUAjDUNVXsW6TDXyAdADJ2TbSVgKVsILuRB9+5P0UZ+YuoSQk7hAP4ebNB/QVlNHlqT6vVWX6seIJUjqqWoxIv5ZrY0VDC7iui0w6jS0dHTg7M4PAcDFg70JPMIR9rS3Y3tEEhbB2cVevcPxEV/UYhgkpDS3PUPya8rFeDUDW/7HthI4D/F7v3LQJrek0yq6Pgl/Czc0Wtnc2ocIPAYd0vVTWHHc9xcqSyaT+rsWAdazm+kUcA9h0pBQ+v2MHzn40g+7mJgx0dlVD7CfMkuPgxkfLINYbwSSlxJqMJQLB77YN4Pbt26vPfc2Jro9YZn26Vj9e7dlNlDDNZHrFKXMo1cM1EBzP+dwqbkUnKbyL/5ecxEoZPLeYP86uqnlBdcwpuRDJ3Irs/8Lo5PkP5x2oAELqwF8FEfV8hkxsvsYJShX0RnkkA+ee/0d71KJZZ/fg6KR8ahinpyupiddOvCUMKRWff5wL1ieZbA0m7uvzxfoWK2QeTmhqSiPrBGHIOac6feqMeG9ZTjx7L07rSS4SvvLwE8X8B5fWFCbBdRQda4uWRuMhhVFhMn95ho785BfFh16JCpOxqDQ78vSlw/c/8nPn1X/+i8h3P/XSjEKP3nzzbfrWo790vvaHi7XSTFRRVIvTR16noXef/f1j29Ll4Z39XdmWHBenn8T3N/aNQrGMC/kFZ8qxJ3rv+fbjvxtZLU5XpUclcyKVwaHnncGZfx/fq8pOM0n9oN8wCaWETGWXO/eOnPrz17OTfrm4pjz/H/aNPSojI0nwAAAAAElFTkSuQmCC" alt="수학자료실" class="min-logo">
+      <span>📚 수학자료실 공식 연계 심층 탐구</span>
+    </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 단계별 증명 PDF</span>
+  </div>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>수학자료실</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
+  
+  <div class="min-guide-banner" style="background:rgba(124,196,255,.08);border:1px solid rgba(124,196,255,.25);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;line-height:1.6;color:#c7d2fe">
+    🎬 <b>자료를 깊이 있게 감상하는 법</b>: 수학자료실의 PDF는 책장을 넘기듯 페이지를 넘겨갈 때마다 <b>도형의 점이 이동하고 보조선이 더해지며 수식이 스스로 완성되는 '단계별 플립북 애니메이션 증명'</b>입니다. 상단 미리보기나 새 창에서 키보드 방향키나 마우스 휠로 페이지를 넘기며, <b>각 프레임마다 변하는 요소와 보존되는 원리의 의미</b>를 곱씹어 보세요.
+  </div>
+
+  <div class="min-list">
+    
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 도함수의 의미를 이용하여 함수의 도함수 그래프 그리기
+              <span class="min-item-sub">Draw derivative graph of a function using the meaning of the derivative</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=54ce0d3afd8911e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019110302.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/XbPZgnUE_uc" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20191103001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 접선에 접근하는 할선들
+              <span class="min-item-sub">Secant lines approaching the tangent line</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 도함수(Derivatives)</div>
+            <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 도함수
+              <span class="min-item-sub">Derivatives</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ay6xtcd4')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/ay6xtcd4" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://min7014.github.io/2024/2024021901.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/Zj0I986YS28" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20240120002.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 일반 수학</div>
+            <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선
+              <span class="min-item-sub">Tangents and Normals at a Point on the Differential Function</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+  </div>
+
+  <div class="min-footer">
+    <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
+      🌐 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
+    </a>
+  </div>
+</div>
+
+<script>
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
+}
+</script>
+
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $62$</div>
+<button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
+</div><script>
+const qs=document.querySelectorAll('.q');let pts=0;
+document.getElementById('tot').textContent=qs.length;
+
+function toggleExp(btn){
+  var q = btn.closest ? btn.closest('.q') : btn.parentElement;
+  while(q && !q.classList.contains('q')) { q = q.parentElement; }
+  if(!q) return;
+  var exp = q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
+  } else {
+    exp.classList.add('show');
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
+  }
+}
+
+qs.forEach(q=>{
+  const ans=+q.dataset.ans;
+  const exp=q.querySelector('.exp');
+  if(exp) {
+    var koExp = q.dataset.exp || '';
+    var enExp = q.dataset.expEn || '';
+    if(enExp) {
+      exp.innerHTML = koExp + '<div class="bilingual-en"><b>English Explanation:</b> ' + enExp + '</div>';
+    } else {
+      exp.innerHTML = koExp;
+    }
+  }
+  const opts=q.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{
+    o.addEventListener('click',()=>{
+      if(q.classList.contains('done')) return;
+      q.classList.add('done');
+      opts.forEach((oo,j)=>{
+        oo.classList.add('locked');
+        if(j+1==ans) oo.classList.add('correct');
+      });
+      if(i+1==ans){
+        o.classList.add('correct');
+        q.classList.add('correct-q');
+        pts++;
+      } else {
+        o.classList.add('wrong');
+      }
+      if(exp) exp.classList.add('show');
+      var toggleBtn = q.querySelector('.exp-toggle-btn');
+      if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
+      document.getElementById('pts').textContent=pts;
+      var total = document.querySelectorAll('.q').length;
+      const pct=Math.round(pts/total*100);
+      document.getElementById('bar').style.width=pct+'%';
+      document.getElementById('pct').textContent=pct+'%';
+      if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+    });
+  });
+});
+function sendProgress(){
+  var name = (window._studentName || '').trim();
+  if (!name) return;
+  var qs = document.querySelectorAll('.q');
+  var total = qs.length;
+  var done = document.querySelectorAll('.q.done');
+  var correct = pts;
+  var current = done.length;
+  if (current === 0) return;
+  var url = window._sheetsApiUrl || '/api/progress';
+  fetch(url, {
+    method: 'POST',
+    mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify({
+      quiz_slug: 'c261019',
+      student_name: name,
+      current_step: current,
+      total_steps: total,
+      correct: correct
+    })
+  }).catch(()=>{});
+}
+function copyLink(){const b=document.getElementById('copyBtn');const t=b.textContent;
+navigator.clipboard.writeText(location.href).then(()=>{b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);})
+.catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
+function toggleReport(el){
+  if(!el) return;
+  var wrap=el.closest ? el.closest('.report-wrap') : el.parentElement;
+  if(!wrap) return;
+  var btn=wrap.querySelector('.report-btn');
+  var form=wrap.querySelector('.report-form');
+  if(!btn||!form) return;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
+  var name=(window._studentName||'익명').trim();
+  var slug='c261019' || window.location.pathname.split('/').filter(Boolean).pop().replace('.html','');
+  var qEl=wrap.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try {
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
+  } catch(e){}
+  try {
+    var img=new Image();
+    img.src=reportUrl;
+  } catch(e){}
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+}
+</script>
+<script src="../mathedu-report.js"></script><script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang, isUserAction) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  if (isUserAction) {
+    try {
+      localStorage.setItem('mathedu_lang', lang);
+      localStorage.setItem('mathedu_lang_manual', 'true');
+    } catch(e){}
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    if (isUserAction) {
+      MatheduI18n.setLanguage(lang);
+    }
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') {
+      saved = p;
+      try {
+        localStorage.setItem('mathedu_lang', p);
+        localStorage.setItem('mathedu_lang_manual', 'true');
+      } catch(e){}
+    } else {
+      var manual = localStorage.getItem('mathedu_lang_manual') === 'true';
+      var stored = localStorage.getItem('mathedu_lang');
+      if (manual && (stored === 'en' || stored === 'ko')) {
+        saved = stored;
+      } else if (window.MatheduI18n && typeof MatheduI18n.getLanguage === 'function') {
+        saved = MatheduI18n.getLanguage();
+      } else {
+        var tz = '';
+        try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
+        if (tz === 'Asia/Seoul' || tz === 'ROK' || tz === 'Asia/Pyongyang') {
+          saved = 'ko';
+        } else if (tz) {
+          saved = 'en';
+        } else {
+          var l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+          saved = (l.toLowerCase().indexOf('ko') === 0) ? 'ko' : 'en';
+        }
+      }
+    }
+  } catch(e){
+    saved = 'ko';
+  }
+  setBoardLang(saved, false);
+})();
+</script>
+
+<!-- 🔔 mathedu 오프라인 업데이트 안내 모달 -->
+<div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">
+  <div class="mathedu-update-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div class="mathedu-update-badge"><span class="bilingual-ko">🔔 최신 업데이트 감지</span><span class="bilingual-en">🔔 Update Detected</span></div>
+      <button class="mathedu-update-close-btn" onclick="closeUpdateModal()">✕</button>
+    </div>
+    <h2 style="margin:0 0 8px;font-size:1.35rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">
+      <span class="bilingual-ko">✨ 이 문제의 최신 버전이 있습니다!</span>
+      <span class="bilingual-en">✨ An updated version of this quiz is available!</span>
+    </h2>
+    <p style="margin:0 0 16px;color:#cbd5e1;font-size:0.9rem;line-height:1.55">
+      <span class="bilingual-ko">선생님께서 문제의 해설 보강, 질문 개선, 또는 새로운 인터랙티브 디딤돌 단계를 업데이트하셨습니다.<br>
+      새로운 버전을 다운로드하여 저장 후 풀이하시거나, 지금 바로 현재 버전으로 계속 푸실 수 있습니다.</span>
+      <span class="bilingual-en">New explanations, improvements, or interactive scaffolding steps have been updated.<br>
+      You can download and save the latest version, or continue with the current version.</span>
+    </p>
+
+    <div class="mathedu-ver-box">
+      <div class="mathedu-ver-item cur">
+        <span class="mathedu-ver-lbl"><span class="bilingual-ko">현재 내 오프라인 버전</span><span class="bilingual-en">Current Offline Version</span></span>
+        <b id="lblCurrentVer">-</b>
+      </div>
+      <div style="color:#7cc4ff;font-size:1.2rem;font-weight:800">➔</div>
+      <div class="mathedu-ver-item new">
+        <span class="mathedu-ver-lbl"><span class="bilingual-ko">🚀 온라인 최신 버전</span><span class="bilingual-en">🚀 Online Latest Version</span></span>
+        <b id="lblLatestVer">-</b>
+      </div>
+    </div>
+
+    <!-- 옵션: 새 버전 다운로드 vs 그냥 현재 버전으로 풀기 -->
+    <div class="mathedu-update-btn-row">
+      <button id="btnDownloadUpdate" class="mathedu-btn-primary" onclick="downloadLatestOfflineVersion()">
+        <span class="bilingual-ko">📥 새 버전 내려받아서 풀기 (저장)</span>
+        <span class="bilingual-en">📥 Download Latest Version (Save)</span>
+      </button>
+      <button class="mathedu-btn-sec" onclick="continueCurrentVersion()">
+        <span class="bilingual-ko">📝 그냥 현재 버전으로 풀기</span>
+        <span class="bilingual-en">📝 Continue with Current Version</span>
+      </button>
+      <a id="btnOpenOnlineLatest" href="https://min7014.github.io/mathedu/board/c261019.html" target="_blank" rel="noopener" class="mathedu-btn-link">
+        <span class="bilingual-ko">🌐 온라인 최신판 웹으로 바로 열기 ➔</span>
+        <span class="bilingual-en">🌐 Open Latest Online Web ➔</span>
+      </a>
+    </div>
+
+    <div id="updateDownloadSuccess" style="display:none;margin-top:16px;background:rgba(94,234,212,.15);border:1px solid #5eead4;border-radius:12px;padding:14px;text-align:left">
+      <div style="font-weight:800;color:#5eead4;margin-bottom:4px">
+        <span class="bilingual-ko">🎉 최신 버전 다운로드 완료!</span>
+        <span class="bilingual-en">🎉 Download Complete!</span>
+      </div>
+      <div style="font-size:0.86rem;color:#e2e8f0;line-height:1.5">
+        <span class="bilingual-ko">다운로드 폴더에 최신 문제 파일(<code>mathedu_c261019_offline_latest.html</code>)이 저장되었습니다. 새로 저장된 파일을 브라우저로 열어 풀이하시거나, 온라인 최신 페이지로 바로 이동하실 수 있습니다.</span>
+        <span class="bilingual-en">The latest file (<code>mathedu_c261019_offline_latest.html</code>) was saved to your downloads folder. You can open it in your browser or visit the online page.</span>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <a href="https://min7014.github.io/mathedu/board/c261019.html" target="_blank" rel="noopener" style="background:#5eead4;color:#0b1020;padding:7px 16px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none">
+          <span class="bilingual-ko">🌐 온라인 최신판 열기</span>
+          <span class="bilingual-en">🌐 Open Online Latest</span>
+        </a>
+        <button onclick="closeUpdateModal()" style="background:transparent;border:1px solid #5eead4;color:#5eead4;padding:7px 16px;border-radius:8px;font-size:0.84rem;cursor:pointer;font-weight:700">
+          <span class="bilingual-ko">✕ 닫고 현재 화면 풀기</span>
+          <span class="bilingual-en">✕ Close &amp; Continue</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.mathedu-update-modal {
+  position: fixed; inset: 0; z-index: 999999;
+  background: rgba(10, 13, 26, 0.85);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; animation: matheduFadeIn .2s ease;
+}
+@keyframes matheduFadeIn { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: scale(1); } }
+.mathedu-update-card {
+  background: #141833; border: 1.5px solid rgba(124, 196, 255, 0.4);
+  border-radius: 20px; max-width: 520px; width: 100%; padding: 26px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.65); color: #eef2ff;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  position: relative; line-height: 1.6;
+}
+.mathedu-update-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(253, 230, 138, 0.15); border: 1px solid #fde68a; color: #fde68a;
+  border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 800;
+}
+.mathedu-update-close-btn {
+  background: transparent; border: none; color: #94a3b8; font-size: 1.4rem; cursor: pointer; padding: 0 4px;
+}
+.mathedu-update-close-btn:hover { color: #fff; }
+.mathedu-ver-box {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center;
+  background: rgba(13, 16, 32, 0.7); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 12px 14px; margin: 16px 0; text-align: center;
+}
+.mathedu-ver-item { font-size: 0.8rem; color: #94a3b8; }
+.mathedu-ver-item b { display: block; font-size: 0.95rem; margin-top: 2px; }
+.mathedu-ver-item.cur b { color: #cbd5e1; }
+.mathedu-ver-item.new b { color: #5eead4; }
+.mathedu-update-btn-row {
+  display: flex; flex-direction: column; gap: 8px; margin-top: 18px;
+}
+.mathedu-btn-primary {
+  background: linear-gradient(90deg, #38bdf8, #818cf8); color: #0b1020;
+  border: none; border-radius: 10px; padding: 12px 18px; font-size: 0.96rem;
+  font-weight: 800; cursor: pointer; transition: .15s; text-align: center;
+  box-shadow: 0 4px 16px rgba(56,189,248,0.35); text-decoration: none;
+}
+.mathedu-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(56,189,248,0.5); }
+.mathedu-btn-sec {
+  background: rgba(255, 255, 255, 0.1); color: #eef2ff;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 11px 18px;
+  font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: .15s; text-align: center;
+}
+.mathedu-btn-sec:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.35); }
+.mathedu-btn-link {
+  background: transparent; color: #7cc4ff; border: none; padding: 6px;
+  font-size: 0.85rem; cursor: pointer; text-decoration: underline; text-align: center;
+}
+</style>
+
+<script>
+// 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
+window._isOfflineFile = true;
+window._offlineQuizSlug = 'c261019';
+window._offlineBuildTime = '2026-10-21T03:50:54.578522+00:00';
+window._offlineHash = 'eeb84636';
+window._offlineVersion = 'v2026.10.21';
+window._originalUrl = 'https://min7014.github.io/mathedu/board/c261019.html';
+
+document.addEventListener("DOMContentLoaded", function() {
+  var tf = document.getElementById("trackFull");
+  if (tf) {
+    var quickBtn = document.createElement("button");
+    quickBtn.type = "button";
+    quickBtn.className = "btn";
+    quickBtn.style.cssText = "background:rgba(56,189,248,.2);border:1px solid #38bdf8;color:#38bdf8;font-size:.9rem;padding:8px 16px;border-radius:10px;cursor:pointer;margin-top:10px;font-weight:700;";
+    quickBtn.innerHTML = "⚡ 오프라인 바로 시작하기";
+    quickBtn.onclick = function() {
+      window._studentName = "오프라인 학습자";
+      tf.remove();
+      if (window.sendProgress) sendProgress();
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+    };
+    tf.appendChild(quickBtn);
+  }
+});
+
+// === 온라인 상태 시 최신 업데이트 확인 엔진 ===
+(function() {
+  var slug = window._offlineQuizSlug || 'c261019';
+  var localBuildTime = window._offlineBuildTime || '2026-10-21T03:50:54.578522+00:00';
+  var localHash = window._offlineHash || 'eeb84636';
+  var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c261019.html';
+  var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
+  var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
+
+  window._serverUpdateInfo = null;
+
+  function formatTime(isoStr) {
+    if (!isoStr) return '-';
+    try {
+      var d = new Date(isoStr);
+      if (isNaN(d.getTime())) return isoStr;
+      return d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate() + ' ' + (d.getHours() < 10 ? '0' : '') + d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+    } catch(e) {
+      return isoStr;
+    }
+  }
+
+  window.openUpdateModal = function() {
+    var modal = document.getElementById('matheduUpdateModal');
+    if (!modal) return;
+    var info = window._serverUpdateInfo || {};
+    var lblCur = document.getElementById('lblCurrentVer');
+    var lblNew = document.getElementById('lblLatestVer');
+    if (lblCur) lblCur.textContent = formatTime(localBuildTime);
+    if (lblNew) lblNew.textContent = formatTime(info.updated_at || new Date().toISOString());
+    modal.style.display = 'flex';
+  };
+
+  window.closeUpdateModal = function() {
+    var modal = document.getElementById('matheduUpdateModal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  window.continueCurrentVersion = function() {
+    closeUpdateModal();
+    try {
+      sessionStorage.setItem('mathedu_update_dismissed_' + slug, 'true');
+    } catch(e) {}
+  };
+
+  window.downloadLatestOfflineVersion = async function() {
+    var btn = document.getElementById('btnDownloadUpdate');
+    var origText = btn ? btn.innerHTML : '';
+    if (btn) {
+      btn.innerHTML = '⏳ 최신 버전 다운로드 중...';
+      btn.style.pointerEvents = 'none';
+    }
+
+    try {
+      var res = await fetch(offlineDownloadUrl + '?_t=' + Date.now());
+      if (!res.ok) throw new Error('파일을 가져올 수 없습니다 (HTTP ' + res.status + ')');
+      var blob = await res.blob();
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'mathedu_' + slug + '_offline_latest.html';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        a.remove();
+        URL.revokeObjectURL(url);
+      }, 500);
+
+      if (btn) btn.innerHTML = '✅ 새 버전 저장 완료!';
+      var succBox = document.getElementById('updateDownloadSuccess');
+      if (succBox) succBox.style.display = 'block';
+    } catch(err) {
+      alert('새 버전 직접 다운로드 중 오류: ' + err.message + '\n온라인 최신 페이지로 이동합니다.');
+      window.open(originalUrl, '_blank');
+      if (btn) {
+        btn.innerHTML = origText;
+        btn.style.pointerEvents = '';
+      }
+    }
+  };
+
+  window.checkUpdateManual = function() {
+    var btn = document.getElementById('btnManualCheckUpdate');
+    if (btn) btn.innerHTML = '⏳ 확인 중...';
+    performCheck(true);
+  };
+
+  function showUpdateDetected(serverInfo) {
+    window._serverUpdateInfo = serverInfo;
+
+    var alertSlot = document.getElementById('matheduUpdateAlertSlot');
+    if (alertSlot) alertSlot.style.display = 'flex';
+
+    var btnManual = document.getElementById('btnManualCheckUpdate');
+    if (btnManual) {
+      btnManual.innerHTML = '✨ 새 버전 있음!';
+      btnManual.style.background = 'rgba(253,230,138,.25)';
+      btnManual.style.color = '#fde68a';
+      btnManual.style.borderColor = '#fde68a';
+    }
+
+    var dismissed = false;
+    try {
+      dismissed = sessionStorage.getItem('mathedu_update_dismissed_' + slug) === 'true';
+    } catch(e) {}
+
+    if (!dismissed) {
+      openUpdateModal();
+    }
+  }
+
+  function performCheck(isManual) {
+    if (!navigator.onLine) {
+      if (isManual) alert('현재 오프라인 상태입니다. 인터넷에 연결된 후 다시 확인해주세요.');
+      var btn = document.getElementById('btnManualCheckUpdate');
+      if (btn) btn.innerHTML = '📡 오프라인 상태';
+      return;
+    }
+
+    var cacheBust = '?_t=' + Date.now();
+    fetch(versionsApiUrl + cacheBust, { cache: 'no-cache' })
+      .then(function(res) {
+        if (!res.ok) throw new Error('versions.json 응답 오류');
+        return res.json();
+      })
+      .then(function(data) {
+        var serverItem = (data && data.quizzes && data.quizzes[slug]) ? data.quizzes[slug] : null;
+        if (serverItem) {
+          var serverTime = serverItem.updated_at;
+          var serverHash = serverItem.hash;
+          var hasNewVer = false;
+
+          if (serverHash && localHash && serverHash !== localHash) {
+            hasNewVer = true;
+          } else if (serverTime && localBuildTime) {
+            var diff = new Date(serverTime).getTime() - new Date(localBuildTime).getTime();
+            if (diff > 60 * 1000) hasNewVer = true;
+          }
+
+          if (hasNewVer) {
+            showUpdateDetected(serverItem);
+          } else {
+            handleUpToDate(isManual);
+          }
+        } else {
+          fallbackCheckHead(isManual);
+        }
+      })
+      .catch(function() {
+        fallbackCheckHead(isManual);
+      });
+  }
+
+  function fallbackCheckHead(isManual) {
+    fetch(offlineDownloadUrl + '?_t=' + Date.now(), { method: 'HEAD', cache: 'no-cache' })
+      .then(function(res) {
+        if (!res.ok) throw new Error('HEAD 실패');
+        var lastMod = res.headers.get('Last-Modified');
+        if (lastMod && localBuildTime) {
+          var diff = new Date(lastMod).getTime() - new Date(localBuildTime).getTime();
+          if (diff > 120 * 1000) {
+            showUpdateDetected({ updated_at: new Date(lastMod).toISOString() });
+            return;
+          }
+        }
+        handleUpToDate(isManual);
+      })
+      .catch(function() {
+        handleUpToDate(isManual);
+      });
+  }
+
+  function handleUpToDate(isManual) {
+    var btn = document.getElementById('btnManualCheckUpdate');
+    if (btn) {
+      btn.innerHTML = '✅ 최신 버전';
+      btn.style.color = '#5eead4';
+      btn.style.borderColor = 'rgba(94,234,212,.4)';
+    }
+    if (isManual) {
+      alert('현재 문제 파일이 가장 최신 버전입니다! (새로운 업데이트 없음)');
+    }
+  }
+
+  setTimeout(function() {
+    performCheck(false);
+  }, 1000);
+
+  window.addEventListener('online', function() {
+    performCheck(false);
+  });
+})();
+</script>
+
+</body></html>
