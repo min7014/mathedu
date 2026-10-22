@@ -158,7 +158,7 @@ def build_problem_html(prob: dict) -> str:
 <style>
 {COMMON_STYLE}
 </style>
-<script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\(','\\)']]}}}};</script>
+<script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\\\(','\\\\)']]}}}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 <script src="../mathedu-i18n.js?v=20261003_v3"></script>
 </head><body><div class="wrap">

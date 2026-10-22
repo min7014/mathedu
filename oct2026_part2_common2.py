@@ -15,13 +15,13 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 12번] 평행이동한 두 지수함수의 그래프와 사다리꼴 변의 길이",
         "title_en": "[2026 AY Oct Exam Grade 12 #12] Translated Exponential Graphs and Segment Lengths",
-        "summary_ko": "점 A와 점 D의 y좌표가 같음을 발견해 선분 AD=2를 구하고 지수법칙으로 a와 k 도출하기",
-        "summary_en": "Identify that A and D share the same y-coordinate to find AD=2, then solve for a and k using exponent rules.",
+        "summary_ko": r"점 $\mathrm{A}$와 점 $\mathrm{D}$의 $y$좌표가 같음을 발견해 $\overline{\mathrm{AD}}=2$를 구하고 지수법칙으로 $a$와 $k$ 도출하기",
+        "summary_en": r"Identify that $\mathrm{A}$ and $\mathrm{D}$ share the same $y$-coordinate to find $\overline{\mathrm{AD}}=2$, then solve for $a$ and $k$ using exponent rules.",
         "tags": ["공통(수학I·II)", "수학I", "지수함수", "평행이동", "좌표와길이", "12번"],
         "symbols": [
-            {"sym": r"$y = a^{x-2}$", "desc": "함수 y=a^x의 그래프를 x축 방향으로 2만큼 이동한 식", "desc_en": "Graph of y=a^x translated by +2 along the x-axis."},
+            {"sym": r"$y = a^{x-2}$", "desc": r"함수 $y=a^x$의 그래프를 $x$축 방향으로 $2$만큼 이동한 식", "desc_en": r"Graph of $y=a^x$ translated by $+2$ along the $x$-axis."},
             {"sym": r"$\overline{AD} = (k+2) - k = 2$", "desc": "높이(y좌표)가 같은 두 점 사이의 가로 거리", "desc_en": "Horizontal distance between two points sharing the same y-coordinate."},
-            {"sym": r"$a^{k+2} - a^k = a^2(a^k - a^{k-2})$", "desc": "공통인수 a^2로 묶어 세로 길이의 비율 찾기", "desc_en": "Factoring out a^2 to find the ratio of vertical segments."}
+            {"sym": r"$a^{k+2} - a^k = a^2(a^k - a^{k-2})$", "desc": r"공통인수 $a^2$으로 묶어 세로 길이의 비율 찾기", "desc_en": r"Factoring out $a^2$ to find the ratio of vertical segments."}
         ],
         "levels": [
             {
@@ -43,8 +43,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [초등 뺄셈 활용] 세로 선분 $\\overline{\\mathrm{AC}}$와 $\\overline{\\mathrm{BD}}$의 길이 찾기",
-                "title_en": "🌿 Step 2 · [Elementary Subtraction] Finding the vertical lengths $\\overline{\\mathrm{AC}}$ and $\\overline{\\mathrm{BD}}$",
+                "title": r"🌿 2단계 · [초등 뺄셈 활용] 세로 선분 $\overline{\mathrm{AC}}$와 $\overline{\mathrm{BD}}$의 길이 찾기",
+                "title_en": r"🌿 Step 2 · [Elementary Subtraction] Finding the vertical lengths $\overline{\mathrm{AC}}$ and $\overline{\mathrm{BD}}$",
                 "knowledge": r"문제에서 $\overline{\mathrm{AC}} = \overline{\mathrm{AD}}$라고 했으므로 $\overline{\mathrm{AC}} = 2$입니다. 또 $\overline{\mathrm{AC}} + \overline{\mathrm{BD}} = 6$이므로 $\overline{\mathrm{BD}} = 6 - 2 = 4$가 됩니다.",
                 "knowledge_en": r"Since $\overline{\mathrm{AC}} = \overline{\mathrm{AD}} = 2$ and $\overline{\mathrm{AC}} + \overline{\mathrm{BD}} = 6$, we get $\overline{\mathrm{BD}} = 6 - 2 = 4$.",
                 "questions": [
@@ -97,8 +97,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $a \times k$의 값 구하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Calculating $a \times k$",
+                "title": r"💎 5단계 · [최종 종합] $a \times k$의 값 구하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Calculating $a \times k$",
                 "knowledge": r"앞 단계에서 구한 $a = \sqrt{2}$와 $k = 4$를 곱하면 최종 정답을 얻습니다.",
                 "knowledge_en": r"Multiply $a = \sqrt{2}$ and $k = 4$ found in the previous steps.",
                 "questions": [
@@ -173,13 +173,13 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 13번] 다항함수의 차수 결정과 도함수 항등식",
         "title_en": "[2026 AY Oct Exam Grade 12 #13] Degree Determination of a Polynomial and Derivative Identity",
-        "summary_ko": "양변의 차수와 최고차항 계수를 비교하여 이차함수 f(x)를 결정하고 f(4) 구하기",
-        "summary_en": "Compare degrees and leading coefficients on both sides to determine quadratic f(x) and evaluate f(4).",
+        "summary_ko": r"양변의 차수와 최고차항 계수를 비교하여 이차함수 $f(x)$를 결정하고 $f(4)$ 구하기",
+        "summary_en": r"Compare degrees and leading coefficients on both sides to determine quadratic $f(x)$ and evaluate $f(4)$.",
         "tags": ["공통(수학I·II)", "수학II", "미분", "다항함수의차수", "항등식", "13번"],
         "symbols": [
-            {"sym": r"$\deg(f) = n$", "desc": "다항함수 f(x)의 가장 높은 차수", "desc_en": "Degree (highest power) of polynomial f(x)."},
+            {"sym": r"$\deg(f) = n$", "desc": r"다항함수 $f(x)$의 가장 높은 차수", "desc_en": r"Degree (highest power) of polynomial $f(x)$."},
             {"sym": r"$\deg(f') = n - 1$", "desc": "미분하면 차수가 1만큼 줄어듦", "desc_en": "Differentiating reduces the polynomial degree by 1."},
-            {"sym": r"$f(x) = \{f'(x)\}^2 - 4$", "desc": "함수값은 도함수를 제곱한 뒤 4를 뺀 것과 항상 같음", "desc_en": "Identity relating f(x) directly to the square of its derivative."}
+            {"sym": r"$f(x) = \{f'(x)\}^2 - 4$", "desc": "함수값은 도함수를 제곱한 뒤 4를 뺀 것과 항상 같음", "desc_en": r"Identity relating $f(x)$ directly to the square of its derivative."}
         ],
         "levels": [
             {
@@ -237,8 +237,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [제곱 계산] $\{f'(4)\}^2$의 값 구하기",
-                "title_en": "🌳 Step 4 · [Squaring] Calculating $\{f'(4)\}^2$",
+                "title": r"🌳 4단계 · [제곱 계산] $\{f'(4)\}^2$의 값 구하기",
+                "title_en": r"🌳 Step 4 · [Squaring] Calculating $\{f'(4)\}^2$",
                 "knowledge": r"굳이 $f(x)$의 상수항을 따로 구하지 않아도, 문제에 주어진 관계식 $f(4) = \{f'(4)\}^2 - 4$에 $f'(4) = 3$을 바로 대입할 수 있습니다!",
                 "knowledge_en": r"We can directly substitute $f'(4) = 3$ into the given identity $f(4) = \{f'(4)\}^2 - 4$.",
                 "questions": [
@@ -255,8 +255,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $f(4) = \{f'(4)\}^2 - 4$ 계산하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Evaluating $f(4) = \{f'(4)\}^2 - 4$",
+                "title": r"💎 5단계 · [최종 종합] $f(4) = \{f'(4)\}^2 - 4$ 계산하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Evaluating $f(4) = \{f'(4)\}^2 - 4$",
                 "knowledge": r"$9$에서 $4$를 빼면 $f(4)$의 값이 완성됩니다.",
                 "knowledge_en": r"Subtract $4$ from $9$ to obtain $f(4)$.",
                 "questions": [
@@ -332,18 +332,18 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 14번] 원에 내접하는 사각형에서 사인법칙과 코사인법칙 빈칸 추론",
         "title_en": "[2026 AY Oct Exam Grade 12 #14] Law of Sines and Cosines in a Cyclic Quadrilateral",
-        "summary_ko": "삼각형 BCD의 사인법칙으로 BD=p를 구하고, 두 삼각형 ABD, BCD의 코사인법칙으로 q, r 구하기",
-        "summary_en": "Find BD=p via the Law of Sines in triangle BCD, then determine q and r using the Law of Cosines in triangles ABD and BCD.",
+        "summary_ko": r"삼각형 $\mathrm{BCD}$의 사인법칙으로 $\overline{\mathrm{BD}}=p$를 구하고, 두 삼각형 $\mathrm{ABD}, \mathrm{BCD}$의 코사인법칙으로 $q, r$ 구하기",
+        "summary_en": r"Find $\overline{\mathrm{BD}}=p$ via the Law of Sines in $\triangle\mathrm{BCD}$, then determine $q$ and $r$ using the Law of Cosines in $\triangle\mathrm{ABD}$ and $\triangle\mathrm{BCD}$.",
         "tags": ["공통(수학I·II)", "수학I", "삼각함수", "사인법칙", "코사인법칙", "빈칸추론", "14번"],
         "symbols": [
-            {"sym": r"$\dfrac{\overline{BD}}{\sin(\angle DCB)} = 2R$", "desc": "외접원의 반지름 R=3을 이용한 사인법칙", "desc_en": "Law of Sines using circumradius R=3."},
-            {"sym": r"$\angle DAB + \angle DCB = \pi$", "desc": "원에 내접하는 사각형의 마주 보는 각의 합은 180도", "desc_en": "Opposite angles of a cyclic quadrilateral sum to pi."},
+            {"sym": r"$\dfrac{\overline{BD}}{\sin(\angle DCB)} = 2R$", "desc": r"외접원의 반지름 $R=3$을 이용한 사인법칙", "desc_en": r"Law of Sines using circumradius $R=3$."},
+            {"sym": r"$\angle DAB + \angle DCB = \pi$", "desc": "원에 내접하는 사각형의 마주 보는 각의 합은 180도", "desc_en": r"Opposite angles of a cyclic quadrilateral sum to $\pi$."},
             {"sym": r"$c^2 = a^2 + b^2 - 2ab\cos C$", "desc": "두 변과 끼인각으로 나머지 한 변을 구하는 코사인법칙", "desc_en": "Law of Cosines relating three sides and one angle."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 곱셈과 피타고라스] $\\sin(\\angle\\mathrm{DCB})$와 외접원의 지름 $2R$ 구하기",
-                "title_en": "🔰 Step 1 · [Elementary Multiplication & Pythagoras] Finding $\\sin(\\angle\\mathrm{DCB})$ and diameter $2R$",
+                "title": r"🔰 1단계 · [초등 곱셈과 피타고라스] $\sin(\angle\mathrm{DCB})$와 외접원의 지름 $2R$ 구하기",
+                "title_en": r"🔰 Step 1 · [Elementary Multiplication & Pythagoras] Finding $\sin(\angle\mathrm{DCB})$ and diameter $2R$",
                 "knowledge": r"초등학교에서 원의 지름은 반지름($3$)의 $2$배이므로 $2 \times 3 = 6$입니다. 또한 $\cos(\angle\mathrm{DCB}) = \frac{1}{3}$이면 $\sin^2\theta + \cos^2\theta = 1$에서 $\sin(\angle\mathrm{DCB}) = \sqrt{1 - \frac{1}{9}} = \frac{2\sqrt{2}}{3}$입니다.",
                 "knowledge_en": r"By elementary multiplication, the diameter of a circle with radius $3$ is $2 \times 3 = 6$. Also $\sin(\angle\mathrm{DCB}) = \sqrt{1 - (1/3)^2} = \frac{2\sqrt{2}}{3}$.",
                 "questions": [
@@ -360,8 +360,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [내접사각형 성질] 마주 보는 각 $\\cos(\\angle\\mathrm{DAB})$의 값 구하기",
-                "title_en": "🌿 Step 2 · [Cyclic Quadrilateral] Finding $\\cos(\\angle\\mathrm{DAB})$",
+                "title": r"🌿 2단계 · [내접사각형 성질] 마주 보는 각 $\cos(\angle\mathrm{DAB})$의 값 구하기",
+                "title_en": r"🌿 Step 2 · [Cyclic Quadrilateral] Finding $\cos(\angle\mathrm{DAB})$",
                 "knowledge": r"원에 내접하는 사각형에서 마주 보는 두 각의 합은 $\pi$ ($180^\circ$)입니다. 따라서 $\cos(\angle\mathrm{DAB}) = \cos(\pi - \angle\mathrm{DCB}) = -\cos(\angle\mathrm{DCB}) = -\frac{1}{3}$입니다.",
                 "knowledge_en": r"Since $\angle\mathrm{DAB} = \pi - \angle\mathrm{DCB}$, we have $\cos(\angle\mathrm{DAB}) = -\cos(\angle\mathrm{DCB}) = -\frac{1}{3}$.",
                 "questions": [
@@ -378,8 +378,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [빈칸 (나) 구하기] $12k^2 = (4\sqrt{2})^2 = 32$에서 $q = \overline{\mathrm{AD}}$ 찾기",
-                "title_en": "🌱 Step 3 · [Blank (나)] Finding $q = \overline{\mathrm{AD}}$ from $12k^2 = 32$",
+                "title": r"🌱 3단계 · [빈칸 (나) 구하기] $12k^2 = (4\sqrt{2})^2 = 32$에서 $q = \overline{\mathrm{AD}}$ 찾기",
+                "title_en": r"🌱 Step 3 · [Blank (나)] Finding $q = \overline{\mathrm{AD}}$ from $12k^2 = 32$",
                 "knowledge": r"$\overline{\mathrm{BD}}^2 = (4\sqrt{2})^2 = 32$이므로 $12k^2 = 32 \implies k^2 = \frac{32}{12} = \frac{8}{3}$입니다.",
                 "knowledge_en": r"Since $\overline{\mathrm{BD}}^2 = 32$, $12k^2 = 32 \implies k^2 = \frac{8}{3}$.",
                 "questions": [
@@ -396,8 +396,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [빈칸 (다) 구하기] 이등변삼각형 $\\mathrm{BCD}$에서 $r = \\overline{\\mathrm{CD}}$ 찾기",
-                "title_en": "🌳 Step 4 · [Blank (다)] Finding $r = \\overline{\\mathrm{CD}}$ in isosceles $\\triangle\\mathrm{BCD}$",
+                "title": r"🌳 4단계 · [빈칸 (다) 구하기] 이등변삼각형 $\mathrm{BCD}$에서 $r = \overline{\mathrm{CD}}$ 찾기",
+                "title_en": r"🌳 Step 4 · [Blank (다)] Finding $r = \overline{\mathrm{CD}}$ in isosceles $\triangle\mathrm{BCD}$",
                 "knowledge": r"삼각형 $\mathrm{BCD}$에서 $\overline{\mathrm{CB}} = \overline{\mathrm{CD}} = r$로 놓으면 코사인법칙에 의해 $32 = r^2 + r^2 - 2r^2 \cdot \frac{1}{3} = \frac{4}{3}r^2$입니다.",
                 "knowledge_en": r"In $\triangle\mathrm{BCD}$ with $\overline{\mathrm{CB}} = \overline{\mathrm{CD}} = r$, the Law of Cosines gives $32 = 2r^2(1 - 1/3) = \frac{4}{3}r^2$.",
                 "questions": [
@@ -414,8 +414,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $\\dfrac{q \\times r}{p}$의 값 계산하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Calculating $\\dfrac{q \\times r}{p}$",
+                "title": r"💎 5단계 · [최종 종합] $\dfrac{q \times r}{p}$의 값 계산하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Calculating $\dfrac{q \times r}{p}$",
                 "knowledge": r"$p = 4\sqrt{2}$, $q = \frac{2\sqrt{6}}{3}$, $r = 2\sqrt{6}$을 $\frac{q \times r}{p}$에 대입하여 약분합니다.",
                 "knowledge_en": r"Substitute $p = 4\sqrt{2}$, $q = \frac{2\sqrt{6}}{3}$, and $r = 2\sqrt{6}$ into $\frac{q \times r}{p}$.",
                 "questions": [
@@ -489,13 +489,13 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 15번] 사차함수의 이중접선 항등식과 원점을 지나는 직선의 교점 개수",
         "title_en": "[2026 AY Oct Exam Grade 12 #15] Quartic Function Bitangent Identity and Intersection Count with Lines Through the Origin",
-        "summary_ko": "조건 (가)에서 x=1, 4에서의 이중접선을 파악하고 조건 (나)의 접선 조건으로 f(x)=x(x-3)^2(x-4) 결정하기",
-        "summary_en": "Deduce the bitangent at x=1, 4 from (가) and use the tangency condition at k=0 from (나) to find f(x)=x(x-3)^2(x-4).",
+        "summary_ko": r"조건 (가)에서 $x=1, 4$에서의 이중접선을 파악하고 조건 (나)의 접선 조건으로 $f(x)=x(x-3)^2(x-4)$ 결정하기",
+        "summary_en": r"Deduce the bitangent at $x=1, 4$ from (가) and use the tangency condition at $k=0$ from (나) to find $f(x)=x(x-3)^2(x-4)$.",
         "tags": ["공통(수학I·II)", "수학II", "미분", "사차함수", "이중접선", "교점의개수", "15번"],
         "symbols": [
-            {"sym": r"$f'(1) = f'(4) = \dfrac{f(4)-f(1)}{3}$", "desc": "조건 (가)가 모든 x에서 성립할 조건 (x=1, 4에서 동시에 접하는 직선)", "desc_en": "Condition (가) implies a common tangent line at x=1 and x=4."},
-            {"sym": r"$g(0) = 0$", "desc": "원점을 지나는 직선 y=kx와 y=f(x)의 교점 개수가 k=0에서 불연속", "desc_en": "Number of intersections with y=kx jumps at slope k=0, meaning y=0 is tangent to y=f(x)."},
-            {"sym": r"$f(x) = x(x-3)^2(x-4)$", "desc": "원점을 지나고 x=3에서 x축에 접하며 x=1, 4에서 이중접선을 갖는 사차함수", "desc_en": "Quartic function passing through (0,0) and tangent to y=0 at x=3."}
+            {"sym": r"$f'(1) = f'(4) = \dfrac{f(4)-f(1)}{3}$", "desc": r"조건 (가)가 모든 $x$에서 성립할 조건 ($x=1, 4$에서 동시에 접하는 직선)", "desc_en": r"Condition (가) implies a common tangent line at $x=1$ and $x=4$."},
+            {"sym": r"$g(0) = 0$", "desc": r"원점을 지나는 직선 $y=kx$와 $y=f(x)$의 교점 개수가 $k=0$에서 불연속", "desc_en": r"Number of intersections with $y=kx$ jumps at slope $k=0$, meaning $y=0$ is tangent to $y=f(x)$."},
+            {"sym": r"$f(x) = x(x-3)^2(x-4)$", "desc": r"원점을 지나고 $x=3$에서 $x$축에 접하며 $x=1, 4$에서 이중접선을 갖는 사차함수", "desc_en": r"Quartic function passing through $(0,0)$ and tangent to $y=0$ at $x=3$."}
         ],
         "levels": [
             {
@@ -553,7 +553,7 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [부호 확인] $f\\left(\\dfrac{7}{2}\\right) < 0$ 조건 검증과 인수분해",
+                "title": r"🌳 4단계 · [부호 확인] $f\left(\dfrac{7}{2}\right) < 0$ 조건 검증과 인수분해",
                 "title_en": "🌳 Step 4 · [Sign Verification] Factoring $f(x)$ and checking $f(7/2) < 0$",
                 "knowledge": r"$b = -36$일 때 $f(x) = x(x^3 - 10x^2 + 33x - 36) = x(x-3)^2(x-4)$입니다. 여기에 $x = \frac{7}{2}$을 넣으면 $\frac{7}{2} \times \left(\frac{1}{2}\right)^2 \times \left(-\frac{1}{2}\right) < 0$이 되어 문제의 조건 $f\left(\frac{7}{2}\right) < 0$을 완벽히 만족합니다!",
                 "knowledge_en": r"For $b = -36$, $f(x) = x(x-3)^2(x-4)$, which satisfies $f(7/2) = \frac{7}{2}\left(\frac{1}{4}\right)\left(-\frac{1}{2}\right) < 0$.",
@@ -650,8 +650,8 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 16번] 합의 기호 시그마(Σ)의 선형성과 상수의 합",
         "title_en": "[2026 AY Oct Exam Grade 12 #16] Linearity of Sigma Notation and Sum of Constants",
-        "summary_ko": "1이 7번 더해진 값을 먼저 빼서 a_k의 합을 구하고 3배하여 정답 도출하기",
-        "summary_en": "Subtract the sum of seven 1s to find the sum of a_k, then multiply by 3.",
+        "summary_ko": r"$1$이 $7$번 더해진 값을 먼저 빼서 $a_k$의 합을 구하고 $3$배하여 정답 도출하기",
+        "summary_en": r"Subtract the sum of seven $1$s to find the sum of $a_k$, then multiply by $3$.",
         "tags": ["공통(수학I·II)", "수학I", "수열", "시그마의성질", "단답형", "16번"],
         "symbols": [
             {"sym": r"$\sum_{k=1}^{7} 1 = 7$", "desc": "1을 첫째항부터 7번째항까지 7번 더하면 7", "desc_en": "Adding 1 seven times equals 7."},
@@ -677,8 +677,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [시그마 분리] $\\sum_{k=1}^{7} a_k$의 값 구하기",
-                "title_en": "🌿 Step 2 · [Splitting Sigma] Finding $\\sum_{k=1}^{7} a_k$",
+                "title": r"🌿 2단계 · [시그마 분리] $\sum_{k=1}^{7} a_k$의 값 구하기",
+                "title_en": r"🌿 Step 2 · [Splitting Sigma] Finding $\sum_{k=1}^{7} a_k$",
                 "knowledge": r"$\sum_{k=1}^{7} (a_k + 1) = \sum_{k=1}^{7} a_k + \sum_{k=1}^{7} 1 = 30$이므로, $\sum_{k=1}^{7} a_k + 7 = 30$입니다.",
                 "knowledge_en": r"Since $\sum_{k=1}^{7} a_k + 7 = 30$, subtract $7$ from $30$.",
                 "questions": [
@@ -713,8 +713,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [자리수 곱셈] $3 \times 20$과 $3 \times 3$ 계산하기",
-                "title_en": "🌳 Step 4 · [Place Value Multiplication] Computing $3 \times 20$ and $3 \times 3$",
+                "title": r"🌳 4단계 · [자리수 곱셈] $3 \times 20$과 $3 \times 3$ 계산하기",
+                "title_en": r"🌳 Step 4 · [Place Value Multiplication] Computing $3 \times 20$ and $3 \times 3$",
                 "knowledge": r"$3 \times 23$은 십의 자리 $3 \times 20 = 60$과 일의 자리 $3 \times 3 = 9$를 더하여 계산합니다.",
                 "knowledge_en": r"Break $3 \times 23$ into $3 \times 20 = 60$ plus $3 \times 3 = 9$.",
                 "questions": [
@@ -731,8 +731,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $\\sum_{k=1}^{7} 3a_k$의 최종 값 구하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Final value of $\\sum_{k=1}^{7} 3a_k$",
+                "title": r"💎 5단계 · [최종 종합] $\sum_{k=1}^{7} 3a_k$의 최종 값 구하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Final value of $\sum_{k=1}^{7} 3a_k$",
                 "knowledge": r"$60 + 9 = 69$로 단답형 정답을 구합니다.",
                 "knowledge_en": r"Add $60 + 9 = 69$ to get the final answer.",
                 "questions": [
@@ -799,12 +799,12 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 17번] 다항함수의 부정적분과 적분상수의 결정",
         "title_en": "[2026 AY Oct Exam Grade 12 #17] Indefinite Integral of a Polynomial and Constant of Integration",
-        "summary_ko": "f(x)=3x^2+4x-1을 적분하고 F(0)=1을 이용해 F(x)를 완성한 뒤 F(2) 구하기",
-        "summary_en": "Integrate f(x)=3x^2+4x-1, use F(0)=1 to find the integration constant, and evaluate F(2).",
+        "summary_ko": r"$f(x)=3x^2+4x-1$을 적분하고 $F(0)=1$을 이용해 $F(x)$를 완성한 뒤 $F(2)$ 구하기",
+        "summary_en": r"Integrate $f(x)=3x^2+4x-1$, use $F(0)=1$ to find the integration constant, and evaluate $F(2)$.",
         "tags": ["공통(수학I·II)", "수학II", "적분", "부정적분", "적분상수", "단답형", "17번"],
         "symbols": [
             {"sym": r"$\int x^n dx = \dfrac{1}{n+1}x^{n+1} + C$", "desc": "차수를 1 늘리고 그 차수로 나누는 부정적분 공식", "desc_en": "Power rule for indefinite integration."},
-            {"sym": r"$F(0) = C = 1$", "desc": "x=0을 대입했을 때 남는 상수항(적분상수)", "desc_en": "Evaluating at x=0 directly gives the constant term C."}
+            {"sym": r"$F(0) = C = 1$", "desc": r"$x=0$을 대입했을 때 남는 상수항(적분상수)", "desc_en": r"Evaluating at $x=0$ directly gives the constant term $C$."}
         ],
         "levels": [
             {
@@ -949,12 +949,12 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 18번] 사인함수의 최솟값과 삼각함수의 함숫값 계산",
         "title_en": "[2026 AY Oct Exam Grade 12 #18] Minimum Value of a Sine Function and Function Evaluation",
-        "summary_ko": "사인함수의 최솟값 -4+a=1에서 a=5를 구하고 x=pi/2를 대입하여 함숫값 7 구하기",
-        "summary_en": "Use the minimum value -4+a=1 to find a=5, then substitute x=pi/2 to obtain f(pi/2)=7.",
+        "summary_ko": r"사인함수의 최솟값 $-4+a=1$에서 $a=5$를 구하고 $x=\dfrac{\pi}{2}$를 대입하여 함숫값 $7$ 구하기",
+        "summary_en": r"Use the minimum value $-4+a=1$ to find $a=5$, then substitute $x=\dfrac{\pi}{2}$ to obtain $f\!\left(\dfrac{\pi}{2}\right)=7$.",
         "tags": ["공통(수학I·II)", "수학I", "삼각함수", "삼각함수의그래프", "최솟값", "단답형", "18번"],
         "symbols": [
-            {"sym": r"$-1 \le \sin\theta \le 1$", "desc": "사인값은 항상 가장 작을 때 -1, 가장 클 때 1", "desc_en": "The sine function always ranges between -1 and 1."},
-            {"sym": r"$\sin\left(\dfrac{\pi}{6}\right) = \dfrac{1}{2}$", "desc": "30도(pi/6)의 사인값은 1/2", "desc_en": "Sine of pi/6 (30 degrees) is 1/2."}
+            {"sym": r"$-1 \le \sin\theta \le 1$", "desc": "사인값은 항상 가장 작을 때 -1, 가장 클 때 1", "desc_en": r"The sine function always ranges between $-1$ and $1$."},
+            {"sym": r"$\sin\left(\dfrac{\pi}{6}\right) = \dfrac{1}{2}$", "desc": r"$30^\circ\left(\dfrac{\pi}{6}\right)$의 사인값은 $\dfrac{1}{2}$", "desc_en": r"Sine of $\dfrac{\pi}{6}$ ($30^\circ$) is $\dfrac{1}{2}$."}
         ],
         "levels": [
             {
@@ -976,8 +976,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [초등 분수 통분] $\\dfrac{\\pi}{2} - \\dfrac{\\pi}{3}$ 계산하기",
-                "title_en": "🌿 Step 2 · [Elementary Fraction Subtraction] Computing $\\dfrac{\\pi}{2} - \\dfrac{\\pi}{3}$",
+                "title": r"🌿 2단계 · [초등 분수 통분] $\dfrac{\pi}{2} - \dfrac{\pi}{3}$ 계산하기",
+                "title_en": r"🌿 Step 2 · [Elementary Fraction Subtraction] Computing $\dfrac{\pi}{2} - \dfrac{\pi}{3}$",
                 "knowledge": r"$x = \frac{\pi}{2}$를 대입하면 괄호 안의 각은 $\frac{\pi}{2} - \frac{\pi}{3}$가 됩니다. 분모 $2$와 $3$을 $6$으로 통분하면 $\frac{3\pi}{6} - \frac{2\pi}{6} = \frac{\pi}{6}$입니다.",
                 "knowledge_en": r"With common denominator $6$, $\frac{\pi}{2} - \frac{\pi}{3} = \frac{3\pi - 2\pi}{6} = \frac{\pi}{6}$.",
                 "questions": [
@@ -994,8 +994,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [특수각의 삼각비] $\\sin\\left(\\dfrac{\\pi}{6}\\right)$의 값 찾기",
-                "title_en": "🌱 Step 3 · [Special Angle] Value of $\\sin\\left(\\dfrac{\\pi}{6}\\right)$",
+                "title": r"🌱 3단계 · [특수각의 삼각비] $\sin\left(\dfrac{\pi}{6}\right)$의 값 찾기",
+                "title_en": r"🌱 Step 3 · [Special Angle] Value of $\sin\left(\dfrac{\pi}{6}\right)$",
                 "knowledge": r"라디안 각 $\frac{\pi}{6}$는 $180^\circ \div 6 = 30^\circ$입니다. $\sin 30^\circ = \frac{1}{2}$입니다.",
                 "knowledge_en": r"Since $\frac{\pi}{6} = 30^\circ$, we have $\sin\left(\frac{\pi}{6}\right) = \frac{1}{2}$.",
                 "questions": [
@@ -1012,8 +1012,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [앞부분 곱셈] $4 \\times \\sin\\left(\\dfrac{\\pi}{6}\\right)$ 계산하기",
-                "title_en": "🌳 Step 4 · [Multiplication] Computing $4 \\times \\sin\\left(\\dfrac{\\pi}{6}\\right)$",
+                "title": r"🌳 4단계 · [앞부분 곱셈] $4 \times \sin\left(\dfrac{\pi}{6}\right)$ 계산하기",
+                "title_en": r"🌳 Step 4 · [Multiplication] Computing $4 \times \sin\left(\dfrac{\pi}{6}\right)$",
                 "knowledge": r"$4 \times \frac{1}{2} = 2$입니다.",
                 "knowledge_en": r"$4 \times \frac{1}{2} = 2$.",
                 "questions": [
@@ -1030,8 +1030,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $f\\left(\\dfrac{\\pi}{2}\\right) = 2 + a$ 완성하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Completing $f\\left(\\dfrac{\\pi}{2}\\right) = 2 + a$",
+                "title": r"💎 5단계 · [최종 종합] $f\left(\dfrac{\pi}{2}\right) = 2 + a$ 완성하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Completing $f\left(\dfrac{\pi}{2}\right) = 2 + a$",
                 "knowledge": r"$4\sin\left(\frac{\pi}{6}\right) = 2$와 1단계에서 구한 $a = 5$를 더합니다.",
                 "knowledge_en": r"Add $2$ and $a = 5$ to find $f(\pi/2)$.",
                 "questions": [
@@ -1098,11 +1098,11 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값",
         "title_en": "[2026 AY Oct Exam Grade 12 #19] Maximum and Minimum of a Cubic Function on a Closed Interval",
-        "summary_ko": "구간 [0, 2]에서 극점 x=0, 1과 끝점 x=2의 함숫값을 비교해 a=-2를 구하고 f(-2) 도출하기",
-        "summary_en": "Compare values at critical points x=0, 1 and endpoint x=2 on [0, 2] to find a=-2, then compute f(-2).",
+        "summary_ko": r"구간 $[0, 2]$에서 극점 $x=0, 1$과 끝점 $x=2$의 함숫값을 비교해 $a=-2$를 구하고 $f(-2)$ 도출하기",
+        "summary_en": r"Compare values at critical points $x=0, 1$ and endpoint $x=2$ on $[0, 2]$ to find $a=-2$, then compute $f(-2)$.",
         "tags": ["공통(수학I·II)", "수학II", "미분", "최대와최소", "삼차함수", "단답형", "19번"],
         "symbols": [
-            {"sym": r"$f'(x) = 6ax(x - 1)$", "desc": "미분하여 기울기가 0이 되는 극점 x=0, 1 찾기", "desc_en": "Derivative factored to locate critical points at x=0 and x=1."},
+            {"sym": r"$f'(x) = 6ax(x - 1)$", "desc": r"미분하여 기울기가 $0$이 되는 극점 $x=0, 1$ 찾기", "desc_en": r"Derivative factored to locate critical points at $x=0$ and $x=1$."},
             {"sym": r"$f(0)=6,\ f(1)=6-a,\ f(2)=4a+6$", "desc": "닫힌구간 [0, 2]의 양 끝점과 극점에서의 후보 함숫값", "desc_en": "Candidate values at critical points and endpoints on [0, 2]."}
         ],
         "levels": [
@@ -1255,13 +1255,13 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 20번] 역함수 관계인 지수·로그함수와 직각삼각형의 닮음",
         "title_en": "[2026 AY Oct Exam Grade 12 #20] Inverse Exponential-Logarithmic Functions and Similar Right Triangles",
-        "summary_ko": "평행한 두 직선 사이의 동위각·동측내각 관계로 각 BAD=90도를 밝히고 닮음비로 점 A(-1, 1/3)을 찾아 a^2=27 구하기",
-        "summary_en": "Prove angle BAD=90 degrees using parallel lines and similar triangles, find A(-1, 1/3), and deduce a^2=27.",
+        "summary_ko": r"평행한 두 직선 사이의 동위각·동측내각 관계로 $\angle\mathrm{BAD}=90^\circ$를 밝히고 닮음비로 점 $\mathrm{A}\!\left(-1, \dfrac{1}{3}\right)$을 찾아 $a^2=27$ 구하기",
+        "summary_en": r"Prove $\angle\mathrm{BAD}=90^\circ$ using parallel lines and similar triangles, find $\mathrm{A}\!\left(-1, \dfrac{1}{3}\right)$, and deduce $a^2=27$.",
         "tags": ["공통(수학I·II)", "수학I", "지수함수와로그함수", "역함수", "삼각형의닮음", "단답형", "20번"],
         "symbols": [
-            {"sym": r"$f^{-1}(x) = g(x)$", "desc": "y=sqrt(3)a^x와 y=log_a(x/sqrt(3))는 직선 y=x에 대칭인 역함수", "desc_en": "f(x) and g(x) are inverse functions symmetric across y=x."},
+            {"sym": r"$f^{-1}(x) = g(x)$", "desc": r"$y=\sqrt{3}a^x$와 $y=\log_a\!\left(\dfrac{x}{\sqrt{3}}\right)$는 직선 $y=x$에 대칭인 역함수", "desc_en": r"$f(x)$ and $g(x)$ are inverse functions symmetric across $y=x$."},
             {"sym": r"$\triangle CBA \sim \triangle BAD$", "desc": "평행선 사이의 두 삼각형이 닮음이므로 끼인각이 모두 90도", "desc_en": "Similarity between parallel lines forces angles CBA and BAD to be 90 degrees."},
-            {"sym": r"$\overline{BA} = \dfrac{2\sqrt{2}}{3}$", "desc": "기울기가 -1인 두 평행선 y=-x-2/3과 y=-x+2/3 사이의 수직 거리", "desc_en": "Perpendicular distance between the two parallel lines of slope -1."}
+            {"sym": r"$\overline{BA} = \dfrac{2\sqrt{2}}{3}$", "desc": r"기울기가 $-1$인 두 평행선 $y=-x-\dfrac{2}{3}$과 $y=-x+\dfrac{2}{3}$ 사이의 수직 거리", "desc_en": r"Perpendicular distance between the two parallel lines of slope $-1$."}
         ],
         "levels": [
             {
@@ -1283,8 +1283,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [평행선 거리와 닮음비] $\\overline{\\mathrm{BA}}$와 $\\overline{\\mathrm{AD}}$의 길이 구하기",
-                "title_en": "🌿 Step 2 · [Parallel Distance & Similarity] Finding lengths $\\overline{\\mathrm{BA}}$ and $\\overline{\\mathrm{AD}}$",
+                "title": r"🌿 2단계 · [평행선 거리와 닮음비] $\overline{\mathrm{BA}}$와 $\overline{\mathrm{AD}}$의 길이 구하기",
+                "title_en": r"🌿 Step 2 · [Parallel Distance & Similarity] Finding lengths $\overline{\mathrm{BA}}$ and $\overline{\mathrm{AD}}$",
                 "knowledge": r"두 평행선 $y = -x - \frac{2}{3}$와 $y = -x + \frac{2}{3}$ 사이의 수직 거리는 $\overline{\mathrm{BA}} = \frac{4/3}{\sqrt{2}} = \frac{2\sqrt{2}}{3}$입니다. 또 넓이의 비가 $4 : 1$이므로 닮음비는 $2 : 1$이어서 $\overline{\mathrm{BA}} : \overline{\mathrm{AD}} = 2 : 1$입니다.",
                 "knowledge_en": r"The perpendicular distance between the two lines is $\overline{\mathrm{BA}} = \frac{2\sqrt{2}}{3}$. Since the area ratio is $4:1$, the similarity ratio is $2:1$, so $\overline{\mathrm{AD}} = \frac{1}{2}\overline{\mathrm{BA}}$.",
                 "questions": [
@@ -1301,8 +1301,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [점 $\\mathrm{A}$의 좌표 찾기] $\\mathrm{D}\\left(-\\dfrac{2}{3}, 0\\right)$에서 왼쪽 위로 이동하기",
-                "title_en": "🌱 Step 3 · [Coordinates of $\\mathrm{A}$] Moving from $\\mathrm{D}\\left(-\\dfrac{2}{3}, 0\\right)$ along slope $-1$",
+                "title": r"🌱 3단계 · [점 $\mathrm{A}$의 좌표 찾기] $\mathrm{D}\left(-\dfrac{2}{3}, 0\right)$에서 왼쪽 위로 이동하기",
+                "title_en": r"🌱 Step 3 · [Coordinates of $\mathrm{A}$] Moving from $\mathrm{D}\left(-\dfrac{2}{3}, 0\right)$ along slope $-1$",
                 "knowledge": r"직선 $y = -x - \frac{2}{3}$의 $x$절편은 $\mathrm{D}\left(-\frac{2}{3}, 0\right)$입니다. 기울기가 $-1$인 직선 위에서 거리가 $\frac{\sqrt{2}}{3}$만큼 왼쪽 위로 가면 $x$좌표는 $\frac{1}{3}$만큼 작아지고 $y$좌표는 $\frac{1}{3}$만큼 커집니다.",
                 "knowledge_en": r"Moving distance $\frac{\sqrt{2}}{3}$ up-left along a line of slope $-1$ from $\mathrm{D}\left(-\frac{2}{3}, 0\right)$ changes coordinates by $\left(-\frac{1}{3}, +\frac{1}{3}\right)$.",
                 "questions": [
@@ -1319,8 +1319,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [함수 대입] $\\mathrm{A}\\left(-1, \\dfrac{1}{3}\\right)$을 $f(x) = \\sqrt{3}a^x$에 대입하기",
-                "title_en": "🌳 Step 4 · [Function Substitution] Substituting $\\mathrm{A}\\left(-1, \\dfrac{1}{3}\\right)$ into $f(x) = \\sqrt{3}a^x$",
+                "title": r"🌳 4단계 · [함수 대입] $\mathrm{A}\left(-1, \dfrac{1}{3}\right)$을 $f(x) = \sqrt{3}a^x$에 대입하기",
+                "title_en": r"🌳 Step 4 · [Function Substitution] Substituting $\mathrm{A}\left(-1, \dfrac{1}{3}\right)$ into $f(x) = \sqrt{3}a^x$",
                 "knowledge": r"점 $\mathrm{A}\left(-1, \frac{1}{3}\right)$은 곡선 $y = \sqrt{3}a^x$ 위의 점이므로 $f(-1) = \frac{\sqrt{3}}{a} = \frac{1}{3}$이 성립합니다.",
                 "knowledge_en": r"Since $\mathrm{A}\left(-1, \frac{1}{3}\right)$ lies on $y = \sqrt{3}a^x$, we have $\frac{\sqrt{3}}{a} = \frac{1}{3}$.",
                 "questions": [
@@ -1417,12 +1417,12 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 21번] 도함수의 절댓값 정적분과 삼차함수의 극값 차 공식",
         "title_en": "[2026 AY Oct Exam Grade 12 #21] Definite Integral of Absolute Derivative and Cubic Extrema Difference",
-        "summary_ko": "구간 [0, t]에서 |f'(x)|의 정적분을 부호별로 쪼개어 f(alpha)-f(0)=f(2)=5/2를 도출하고 f(0)=1/2 구하기",
-        "summary_en": "Split the integral of |f'(x)| on [0, t] by sign to derive f(alpha)-f(0)=f(2)=5/2 and find f(0)=1/2.",
+        "summary_ko": r"구간 $[0, t]$에서 $|f'(x)|$의 정적분을 부호별로 쪼개어 $f(\alpha)-f(0)=f(2)=\dfrac{5}{2}$를 도출하고 $f(0)=\dfrac{1}{2}$ 구하기",
+        "summary_en": r"Split the integral of $|f'(x)|$ on $[0, t]$ by sign to derive $f(\alpha)-f(0)=f(2)=\dfrac{5}{2}$ and find $f(0)=\dfrac{1}{2}$.",
         "tags": ["공통(수학I·II)", "수학II", "적분", "정적분과미분", "절댓값적분", "삼차함수", "단답형", "21번"],
         "symbols": [
-            {"sym": r"$\int_a^b |f'(x)|dx$", "desc": "구간 [a, b]에서 함수 f(x)가 위아래로 움직인 총 변화량", "desc_en": "Total vertical distance traveled by f(x) over [a, b]."},
-            {"sym": r"$f'(x) = 3(x-\alpha)(x-2)$", "desc": "극대점 x=alpha(0<alpha<2)와 극소점 x=2를 갖는 도함수", "desc_en": "Derivative with local max at x=alpha and local min at x=2."},
+            {"sym": r"$\int_a^b |f'(x)|dx$", "desc": r"구간 $[a, b]$에서 함수 $f(x)$가 위아래로 움직인 총 변화량", "desc_en": r"Total vertical distance traveled by $f(x)$ over $[a, b]$."},
+            {"sym": r"$f'(x) = 3(x-\alpha)(x-2)$", "desc": r"극대점 $x=\alpha$ ($0 < \alpha < 2$)와 극소점 $x=2$를 갖는 도함수", "desc_en": r"Derivative with local max at $x=\alpha$ and local min at $x=2$."},
             {"sym": r"$f(\alpha) - f(2) = \dfrac{1}{2}(2-\alpha)^3$", "desc": "최고차항 계수가 1인 삼차함수의 극댓값과 극솟값의 차 공식", "desc_en": "Difference between local max and min of a monic cubic function."}
         ],
         "levels": [
@@ -1445,14 +1445,14 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [정적분 계산] $f(\\alpha) - f(0) = \\int_0^\\alpha 3(x-\\alpha)(x-2)dx$ 구하기",
-                "title_en": "🌿 Step 2 · [Definite Integral] Expressing $f(\\alpha) - f(0)$ in terms of $\\alpha$",
+                "title": r"🌿 2단계 · [정적분 계산] $f(\alpha) - f(0) = \int_0^\alpha 3(x-\alpha)(x-2)dx$ 구하기",
+                "title_en": r"🌿 Step 2 · [Definite Integral] Expressing $f(\alpha) - f(0)$ in terms of $\alpha$",
                 "knowledge": r"$f'(x) = 3x^2 - 3(\alpha + 2)x + 6\alpha$를 $0$부터 $\alpha$까지 적분하면 $f(\alpha) - f(0) = \left[x^3 - \frac{3}{2}(\alpha+2)x^2 + 6\alpha x\right]_0^\alpha = -\frac{1}{2}\alpha^3 + 3\alpha^2$이 됩니다.",
                 "knowledge_en": r"Integrating $f'(x) = 3(x-\alpha)(x-2)$ from $0$ to $\alpha$ gives $f(\alpha) - f(0) = -\frac{1}{2}\alpha^3 + 3\alpha^2$.",
                 "questions": [
                     {
-                        "level_label": "극대점 alpha 찾기 디딤돌 2",
-                        "level_label_en": "Finding alpha Step 2",
+                        "level_label": r"극대점 $\alpha$ 찾기 디딤돌 2",
+                        "level_label_en": r"Finding $\alpha$ Step 2",
                         "stem": r"$-\frac{1}{2}\alpha^3 + 3\alpha^2 = \frac{5}{2}$의 양변에 $-2$를 곱하면 $\alpha^3 - 6\alpha^2 + 5 = (\alpha - 1)(\alpha^2 - 5\alpha - 5) = 0$입니다. $0 < \alpha < 2$를 만족시키는 극대점의 $x$좌표 $\alpha$는?",
                         "stem_en": r"Solving $\alpha^3 - 6\alpha^2 + 5 = (\alpha - 1)(\alpha^2 - 5\alpha - 5) = 0$ for $0 < \alpha < 2$, what is $\alpha$?",
                         "options": [r"$\frac{1}{2}$", r"$1$", r"$\frac{4}{3}$", r"$\frac{3}{2}$", r"$\frac{5}{3}$"],
@@ -1463,8 +1463,8 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [도함수 완성] $\\alpha = 1$일 때 $f'(x)$ 전개하기",
-                "title_en": "🌱 Step 3 · [Expanding $f'(x)$] Writing $f'(x)$ when $\\alpha = 1$",
+                "title": r"🌱 3단계 · [도함수 완성] $\alpha = 1$일 때 $f'(x)$ 전개하기",
+                "title_en": r"🌱 Step 3 · [Expanding $f'(x)$] Writing $f'(x)$ when $\alpha = 1$",
                 "knowledge": r"$\alpha = 1$을 대입하면 $f'(x) = 3(x - 1)(x - 2) = 3x^2 - 9x + 6$입니다.",
                 "knowledge_en": r"With $\alpha = 1$, $f'(x) = 3(x - 1)(x - 2) = 3x^2 - 9x + 6$.",
                 "questions": [
@@ -1481,14 +1481,14 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [상수항 결정] $f(2) = \\dfrac{5}{2}$를 이용해 $f(0)$ 구하기",
-                "title_en": "🌳 Step 4 · [Finding $f(0)$] Using $f(2) = \\dfrac{5}{2}$ to find $f(0)$",
+                "title": r"🌳 4단계 · [상수항 결정] $f(2) = \dfrac{5}{2}$를 이용해 $f(0)$ 구하기",
+                "title_en": r"🌳 Step 4 · [Finding $f(0)$] Using $f(2) = \dfrac{5}{2}$ to find $f(0)$",
                 "knowledge": r"$f(2) = 2 + f(0) = \frac{5}{2}$이므로 $f(0) = \frac{5}{2} - 2 = \frac{1}{2}$입니다.",
                 "knowledge_en": r"From $f(2) = 2 + f(0) = \frac{5}{2}$, we get $f(0) = \frac{1}{2}$.",
                 "questions": [
                     {
-                        "level_label": "함숫값 f(0) 디딤돌 4",
-                        "level_label_en": "Finding f(0) Step 4",
+                        "level_label": r"함숫값 $f(0)$ 디딤돌 4",
+                        "level_label_en": r"Finding $f(0)$ Step 4",
                         "stem": r"$2 + f(0) = \frac{5}{2}$일 때, $f(0) = \frac{q}{p}$의 값은?",
                         "stem_en": r"Given $2 + f(0) = \frac{5}{2}$, what is $f(0) = \frac{q}{p}$?",
                         "options": [r"$\frac{1}{4}$", r"$\frac{1}{3}$", r"$\frac{1}{2}$", r"$\frac{2}{3}$", r"$\frac{3}{2}$"],
@@ -1580,12 +1580,12 @@ PART2_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 22번] 홀짝에 따라 분기하는 귀납적 수열의 역추적",
         "title_en": "[2026 AY Oct Exam Grade 12 #22] Backtracking an Inductively Defined Sequence with Parity Branching",
-        "summary_ko": "a_3=a_6 조건에서 홀짝 갈래를 분석해 a_3=15, 25를 찾고 거꾸로 역추적하여 가능한 네 개의 a_1의 합 202 구하기",
-        "summary_en": "Analyze parity branches for a_3=a_6 to find a_3 in {15, 25}, then backtrack to a_1 to obtain the sum 24+47+44+87=202.",
+        "summary_ko": r"$a_3=a_6$ 조건에서 홀짝 갈래를 분석해 $a_3=15, 25$를 찾고 거꾸로 역추적하여 가능한 네 개의 $a_1$의 합 $202$ 구하기",
+        "summary_en": r"Analyze parity branches for $a_3=a_6$ to find $a_3 \in \{15, 25\}$, then backtrack to $a_1$ to obtain the sum $24+47+44+87=202$.",
         "tags": ["공통(수학I·II)", "수학I", "수열", "수학적귀납법", "수열의역추적", "단답형", "22번"],
         "symbols": [
-            {"sym": r"$a_{n+1} = \dfrac{a_n + n + 4}{2}$", "desc": "a_n이 홀수일 때 다음 항을 만드는 규칙", "desc_en": "Rule for the next term when a_n is odd."},
-            {"sym": r"$a_{n+1} = \dfrac{3}{2}a_n - 5$", "desc": "a_n이 짝수일 때 다음 항을 만드는 규칙", "desc_en": "Rule for the next term when a_n is even."},
+            {"sym": r"$a_{n+1} = \dfrac{a_n + n + 4}{2}$", "desc": r"$a_n$이 홀수일 때 다음 항을 만드는 규칙", "desc_en": r"Rule for the next term when $a_n$ is odd."},
+            {"sym": r"$a_{n+1} = \dfrac{3}{2}a_n - 5$", "desc": r"$a_n$이 짝수일 때 다음 항을 만드는 규칙", "desc_en": r"Rule for the next term when $a_n$ is even."},
             {"sym": r"$a_3 = a_6$", "desc": "세 번째 항에서 세 번 규칙을 거치면 다시 자기 자신으로 돌아옴", "desc_en": "Period-3 return condition from the 3rd term to the 6th term."}
         ],
         "levels": [
@@ -1609,13 +1609,13 @@ PART2_PROBLEMS = [
             },
             {
                 "title": "🌿 2단계 · [두 번째 주기 해 찾기] $a_3$가 될 수 있는 두 자연수 $15$와 $25$ 확인하기",
-                "title_en": "🌿 Step 2 · [Second Periodic Solution] Verifying $a_3 \in \{15, 25\}$",
+                "title_en": r"🌿 Step 2 · [Second Periodic Solution] Verifying $a_3 \in \{15, 25\}$",
                 "knowledge": r"$a_3 \to a_4 \to a_5 \to a_6$의 홀짝 갈래를 조사하면 $a_3 = a_6$을 만족하는 자연수 $a_3$는 $15$ ($15 \to 11 \to 10 \to 15$)와 $25$ ($25 \to 16 \to 20 \to 25$) 두 가지입니다.",
                 "knowledge_en": r"Checking all parity branches of $a_3 \to a_4 \to a_5 \to a_6$ shows that $a_3 = a_6$ holds for $a_3 = 15$ ($15 \to 11 \to 10 \to 15$) and $a_3 = 25$ ($25 \to 16 \to 20 \to 25$).",
                 "questions": [
                     {
-                        "level_label": "a_3 값 확인 디딤돌 2",
-                        "level_label_en": "Checking a_3 Step 2",
+                        "level_label": r"$a_3$ 값 확인 디딤돌 2",
+                        "level_label_en": r"Checking $a_3$ Step 2",
                         "stem": r"$a_3 = a_6$을 만족시키는 두 자연수 $a_3 = 15$와 $a_3 = 25$의 합은?",
                         "stem_en": r"What is the sum of the two valid values $a_3 = 15$ and $a_3 = 25$?",
                         "options": [r"$30$", r"$35$", r"$40$", r"$45$", r"$50$"],
@@ -1626,14 +1626,14 @@ PART2_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [한 칸 거꾸로 추적] $a_3 \in \{15, 25\}$에서 가능한 자연수 $a_2$ 구하기",
-                "title_en": "🌱 Step 3 · [Backtracking to $a_2$] Finding valid natural numbers $a_2$ from $a_3 \in \{15, 25\}$",
+                "title": r"🌱 3단계 · [한 칸 거꾸로 추적] $a_3 \in \{15, 25\}$에서 가능한 자연수 $a_2$ 구하기",
+                "title_en": r"🌱 Step 3 · [Backtracking to $a_2$] Finding valid natural numbers $a_2$ from $a_3 \in \{15, 25\}$",
                 "knowledge": r"$a_3 = 15$ 또는 $a_3 = 25$가 나오도록 $a_2$를 역추적하면, 조건을 만족하는 자연수 $a_2$는 $a_2 = 25$ ($a_3 = 15$일 때)와 $a_2 = 45$ ($a_3 = 25$일 때) 두 개가 나옵니다.",
                 "knowledge_en": r"Backtracking one step from $a_3 \in \{15, 25\}$ yields two valid natural numbers for the second term: $a_2 = 25$ and $a_2 = 45$.",
                 "questions": [
                     {
-                        "level_label": "a_2 역추적 디딤돌 3",
-                        "level_label_en": "Backtracking to a_2 Step 3",
+                        "level_label": r"$a_2$ 역추적 디딤돌 3",
+                        "level_label_en": r"Backtracking to $a_2$ Step 3",
                         "stem": r"역추적으로 구한 두 자연수 $a_2 = 25$와 $a_2 = 45$의 차($45 - 25$)는?",
                         "stem_en": r"What is the difference $45 - 25$ between the two valid values of $a_2$?",
                         "options": [r"$10$", r"$15$", r"$20$", r"$25$", r"$30$"],
@@ -1645,13 +1645,13 @@ PART2_PROBLEMS = [
             },
             {
                 "title": "🌳 4단계 · [첫째항 $a_1$ 역추적] $a_2 = 25$와 $a_2 = 45$에서 나오는 네 개의 $a_1$ 구하기",
-                "title_en": "🌳 Step 4 · [Backtracking to $a_1$] Finding the four values of $a_1$ from $a_2 \in \{25, 45\}$",
+                "title_en": r"🌳 Step 4 · [Backtracking to $a_1$] Finding the four values of $a_1$ from $a_2 \in \{25, 45\}$",
                 "knowledge": r"$a_2 = 25$가 되는 $a_1$은 짝수일 때 $a_1 = 24$, 홀수일 때 $a_1 = 47$입니다. 마찬가지로 $a_2 = 45$가 되는 $a_1$은 짝수일 때 $a_1 = 44$, 홀수일 때 $a_1 = 87$입니다.",
                 "knowledge_en": r"From $a_2 = 25$, we get $a_1 = 24$ (even) and $a_1 = 47$ (odd). From $a_2 = 45$, we get $a_1 = 44$ (even) and $a_1 = 87$ (odd).",
                 "questions": [
                     {
-                        "level_label": "짝수 a_1 합산 디딤돌 4",
-                        "level_label_en": "Even a_1 Sum Step 4",
+                        "level_label": r"짝수 $a_1$ 합산 디딤돌 4",
+                        "level_label_en": r"Even $a_1$ Sum Step 4",
                         "stem": r"가능한 네 개의 $a_1 \in \{24, 47, 44, 87\}$ 중에서 짝수인 두 값 $24$와 $44$를 더하면?",
                         "stem_en": r"Among $a_1 \in \{24, 47, 44, 87\}$, what is the sum of the two even values $24 + 44$?",
                         "options": [r"$58$", r"$64$", r"$68$", r"$72$", r"$78$"],

@@ -15,12 +15,12 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 23번] 이항정리와 거듭제곱 전개식의 일반항 계수",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #23] Binomial Theorem and Coefficient in an Expansion",
-        "summary_ko": "(2x^2 + 1/(2x))^6의 전개식에서 2x^2을 4번, 1/(2x)을 2번 뽑아 x^6의 계수 60 구하기",
-        "summary_en": "Select 2x^2 four times and 1/(2x) twice in the expansion of (2x^2 + 1/(2x))^6 to find the coefficient 60 of x^6.",
+        "summary_ko": r"$\left(2x^2 + \dfrac{1}{2x}\right)^6$의 전개식에서 $2x^2$을 $4$번, $\dfrac{1}{2x}$을 $2$번 뽑아 $x^6$의 계수 $60$ 구하기",
+        "summary_en": r"Select $2x^2$ four times and $\dfrac{1}{2x}$ twice in the expansion of $\left(2x^2 + \dfrac{1}{2x}\right)^6$ to find the coefficient $60$ of $x^6$.",
         "tags": ["확률과 통계", "경우의수", "이항정리", "전개식의계수", "23번"],
         "symbols": [
-            {"sym": r"${}_{6}\mathrm{C}_{r} (2x^2)^{6-r} \left(\dfrac{1}{2x}\right)^r$", "desc": "6개의 괄호 중 1/(2x)을 r개 골라 곱한 이항정리 일반항", "desc_en": "General term of the binomial expansion choosing 1/(2x) r times."},
-            {"sym": r"$x^{12 - 3r} = x^6$", "desc": "x의 지수가 6이 되도록 하는 r=2 결정", "desc_en": "Equating the exponent of x to 6 gives r=2."}
+            {"sym": r"${}_{6}\mathrm{C}_{r} (2x^2)^{6-r} \left(\dfrac{1}{2x}\right)^r$", "desc": r"$6$개의 괄호 중 $\dfrac{1}{2x}$을 $r$개 골라 곱한 이항정리 일반항", "desc_en": r"General term of the binomial expansion choosing $\dfrac{1}{2x}$ $r$ times."},
+            {"sym": r"$x^{12 - 3r} = x^6$", "desc": r"$x$의 지수가 $6$이 되도록 하는 $r=2$ 결정", "desc_en": r"Equating the exponent of $x$ to $6$ gives $r=2$."}
         ],
         "levels": [
             {
@@ -42,8 +42,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [조합 계산] $6$개 중 $2$개를 고르는 경우의 수 ${}_{6}\\mathrm{C}_{2}$ 구하기",
-                "title_en": "🌿 Step 2 · [Combination] Computing ${}_{6}\\mathrm{C}_{2}$",
+                "title": r"🌿 2단계 · [조합 계산] $6$개 중 $2$개를 고르는 경우의 수 ${}_{6}\mathrm{C}_{2}$ 구하기",
+                "title_en": r"🌿 Step 2 · [Combination] Computing ${}_{6}\mathrm{C}_{2}$",
                 "knowledge": r"${}_{6}\mathrm{C}_{2} = \frac{6 \times 5}{2 \times 1} = 15$입니다.",
                 "knowledge_en": r"${}_{6}\mathrm{C}_{2} = \frac{6 \times 5}{2 \times 1} = 15$.",
                 "questions": [
@@ -60,8 +60,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [거듭제곱 계산] $2^4 \\times \\left(\\dfrac{1}{2}\\right)^2$ 구하기",
-                "title_en": "🌱 Step 3 · [Powers] Computing $2^4 \\times \\left(\\dfrac{1}{2}\\right)^2$",
+                "title": r"🌱 3단계 · [거듭제곱 계산] $2^4 \times \left(\dfrac{1}{2}\right)^2$ 구하기",
+                "title_en": r"🌱 Step 3 · [Powers] Computing $2^4 \times \left(\dfrac{1}{2}\right)^2$",
                 "knowledge": r"$r = 2$일 때 숫자 계수 부분은 $2^{6-2} \times \left(\frac{1}{2}\right)^2 = 2^4 \times \frac{1}{4} = \frac{16}{4} = 4$입니다.",
                 "knowledge_en": r"At $r = 2$, the numerical factor is $2^4 \times \left(\frac{1}{2}\right)^2 = 16 \times \frac{1}{4} = 4$.",
                 "questions": [
@@ -78,8 +78,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [계수 결합 식] ${}_{6}\\mathrm{C}_{2}$와 숫자 거듭제곱 곱하기",
-                "title_en": "🌳 Step 4 · [Combining Factors] Multiplying ${}_{6}\\mathrm{C}_{2}$ by $4$",
+                "title": r"🌳 4단계 · [계수 결합 식] ${}_{6}\mathrm{C}_{2}$와 숫자 거듭제곱 곱하기",
+                "title_en": r"🌳 Step 4 · [Combining Factors] Multiplying ${}_{6}\mathrm{C}_{2}$ by $4$",
                 "knowledge": r"$x^6$의 계수는 ${}_{6}\mathrm{C}_{2} \times 4 = 15 \times 4$입니다.",
                 "knowledge_en": r"The coefficient of $x^6$ is ${}_{6}\mathrm{C}_{2} \times 4 = 15 \times 4$.",
                 "questions": [
@@ -164,17 +164,17 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 24번] 이항분포의 평균과 분산으로 시행 횟수 n 구하기",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #24] Finding n from Mean and Variance of a Binomial Distribution",
-        "summary_ko": "E(X)=np=5, V(X)=np(1-p)=4에서 1-p=4/5, p=1/5를 구하고 n=25 도출하기",
-        "summary_en": "Divide V(X)=np(1-p)=4 by E(X)=np=5 to get 1-p=4/5, p=1/5, and n=25.",
+        "summary_ko": r"$\mathrm{E}(X)=np=5,\ \mathrm{V}(X)=np(1-p)=4$에서 $1-p=\dfrac{4}{5},\ p=\dfrac{1}{5}$를 구하고 $n=25$ 도출하기",
+        "summary_en": r"Divide $\mathrm{V}(X)=np(1-p)=4$ by $\mathrm{E}(X)=np=5$ to get $1-p=\dfrac{4}{5}$, $p=\dfrac{1}{5}$, and $n=25$.",
         "tags": ["확률과 통계", "통계", "이항분포", "평균과분산", "표준편차", "24번"],
         "symbols": [
-            {"sym": r"$\mathrm{E}(X) = np = 5$", "desc": "이항분포 B(n, p)의 평균", "desc_en": "Mean of binomial distribution B(n, p)."},
+            {"sym": r"$\mathrm{E}(X) = np = 5$", "desc": r"이항분포 $\mathrm{B}(n, p)$의 평균", "desc_en": r"Mean of binomial distribution $\mathrm{B}(n, p)$."},
             {"sym": r"$\mathrm{V}(X) = \sigma(X)^2 = np(1-p) = 4$", "desc": "표준편차 2를 제곱한 분산", "desc_en": "Variance equals the square of the standard deviation 2."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 구구단 제곱] 표준편차가 $2$일 때 분산 $\\mathrm{V}(X)$ 구하기",
-                "title_en": "🔰 Step 1 · [Elementary Multiplication] Finding variance $\\mathrm{V}(X)$ from $\\sigma(X) = 2$",
+                "title": r"🔰 1단계 · [초등 구구단 제곱] 표준편차가 $2$일 때 분산 $\mathrm{V}(X)$ 구하기",
+                "title_en": r"🔰 Step 1 · [Elementary Multiplication] Finding variance $\mathrm{V}(X)$ from $\sigma(X) = 2$",
                 "knowledge": r"통계에서 분산 $\mathrm{V}(X)$는 표준편차 $\sigma(X)$를 두 번 곱한(제곱한) 값입니다. 초등학교 구구단 $2 \times 2 = 4$로 분산을 바로 구할 수 있습니다.",
                 "knowledge_en": r"By elementary multiplication, variance $\mathrm{V}(X)$ is the square of the standard deviation: $2 \times 2 = 4$.",
                 "questions": [
@@ -227,8 +227,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [평균 공식 대입] $n \\times \\dfrac{1}{5} = 5$ 세우기",
-                "title_en": "🌳 Step 4 · [Mean Equation] Setting up $n \\times \\dfrac{1}{5} = 5$",
+                "title": r"🌳 4단계 · [평균 공식 대입] $n \times \dfrac{1}{5} = 5$ 세우기",
+                "title_en": r"🌳 Step 4 · [Mean Equation] Setting up $n \times \dfrac{1}{5} = 5$",
                 "knowledge": r"$\mathrm{E}(X) = np = 5$에 $p = \frac{1}{5}$을 대입하면 $\frac{n}{5} = 5$가 됩니다.",
                 "knowledge_en": r"Substituting $p = \frac{1}{5}$ into $np = 5$ gives $\frac{n}{5} = 5$.",
                 "questions": [
@@ -313,17 +313,17 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 25번] 거듭제곱 항이 포함된 음이 아닌 정수해의 개수 (중복조합)",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #25] Number of Non-Negative Integer Solutions via Combinations with Repetition",
-        "summary_ko": "d=0, 1, 2일 때로 케이스를 나누어 a+b+c=8-d^3의 중복조합 개수를 더해 82 구하기",
-        "summary_en": "Split into cases d=0, 1, 2 and sum the combinations with repetition for a+b+c=8-d^3 to get 45+36+1=82.",
+        "summary_ko": r"$d=0, 1, 2$일 때로 케이스를 나누어 $a+b+c=8-d^3$의 중복조합 개수를 더해 $82$ 구하기",
+        "summary_en": r"Split into cases $d=0, 1, 2$ and sum the combinations with repetition for $a+b+c=8-d^3$ to get $45+36+1=82$.",
         "tags": ["확률과 통계", "경우의수", "중복조합", "음이아닌정수해", "케이스분류", "25번"],
         "symbols": [
-            {"sym": r"$a + b + c = 8 - d^3$", "desc": "세제곱 항 d^3을 우변으로 넘겨 d의 값에 따라 분류", "desc_en": "Isolate a+b+c by moving d^3 to the right-hand side."},
+            {"sym": r"$a + b + c = 8 - d^3$", "desc": r"세제곱 항 $d^3$을 우변으로 넘겨 $d$의 값에 따라 분류", "desc_en": r"Isolate $a+b+c$ by moving $d^3$ to the right-hand side."},
             {"sym": r"${}_{3}\mathrm{H}_{k} = {}_{k+2}\mathrm{C}_{2}$", "desc": "음이 아닌 세 정수의 합이 k가 되는 중복조합 공식", "desc_en": "Number of non-negative integer triples summing to k."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 세제곱 계산] $d^3 \\le 8$이 되는 음이 아닌 정수 $d$ 찾기",
-                "title_en": "🔰 Step 1 · [Elementary Cubing] Finding non-negative integers $d$ with $d^3 \\le 8$",
+                "title": r"🔰 1단계 · [초등 세제곱 계산] $d^3 \le 8$이 되는 음이 아닌 정수 $d$ 찾기",
+                "title_en": r"🔰 Step 1 · [Elementary Cubing] Finding non-negative integers $d$ with $d^3 \le 8$",
                 "knowledge": r"초등학교 곱셈으로 똑같은 수를 세 번 곱해 봅시다: $0 \times 0 \times 0 = 0$, $1 \times 1 \times 1 = 1$, $2 \times 2 \times 2 = 8$, $3 \times 3 \times 3 = 27$. 합이 $8$이 되어야 하므로 $d^3$은 $8$을 넘을 수 없습니다!",
                 "knowledge_en": r"By elementary multiplication: $0^3 = 0$, $1^3 = 1$, $2^3 = 8$, and $3^3 = 27 > 8$. Since $a, b, c \ge 0$, $d^3$ cannot exceed $8$.",
                 "questions": [
@@ -346,8 +346,8 @@ PART3_PROBLEMS = [
                 "knowledge_en": r"When $d = 0$, $a + b + c = 8$, which has ${}_{3}\mathrm{H}_{8} = {}_{10}\mathrm{C}_{2} = 45$ solutions.",
                 "questions": [
                     {
-                        "level_label": "d=0 중복조합 디딤돌 2",
-                        "level_label_en": "Case d=0 Step 2",
+                        "level_label": r"$d=0$ 중복조합 디딤돌 2",
+                        "level_label_en": r"Case $d=0$ Step 2",
                         "stem": r"$d = 0$일 때 $a + b + c = 8$을 만족시키는 음이 아닌 정수해의 개수 ${}_{3}\mathrm{H}_{8} = {}_{10}\mathrm{C}_{2}$는?",
                         "stem_en": r"When $d = 0$, how many non-negative integer solutions does $a + b + c = 8$ have (${}_{3}\mathrm{H}_{8} = {}_{10}\mathrm{C}_{2}$)?",
                         "options": [r"$36$", r"$40$", r"$45$", r"$50$", r"$55$"],
@@ -364,8 +364,8 @@ PART3_PROBLEMS = [
                 "knowledge_en": r"When $d = 1$, $a + b + c = 7$, which has ${}_{3}\mathrm{H}_{7} = {}_{9}\mathrm{C}_{2} = 36$ solutions.",
                 "questions": [
                     {
-                        "level_label": "d=1 중복조합 디딤돌 3",
-                        "level_label_en": "Case d=1 Step 3",
+                        "level_label": r"$d=1$ 중복조합 디딤돌 3",
+                        "level_label_en": r"Case $d=1$ Step 3",
                         "stem": r"$d = 1$일 때 $a + b + c = 7$을 만족시키는 음이 아닌 정수해의 개수 ${}_{3}\mathrm{H}_{7} = {}_{9}\mathrm{C}_{2}$는?",
                         "stem_en": r"When $d = 1$, what is ${}_{3}\mathrm{H}_{7} = {}_{9}\mathrm{C}_{2}$?",
                         "options": [r"$28$", r"$32$", r"$36$", r"$42$", r"$45$"],
@@ -382,8 +382,8 @@ PART3_PROBLEMS = [
                 "knowledge_en": r"When $d = 2$, $a + b + c = 0$, which has only $1$ solution: $(0, 0, 0)$.",
                 "questions": [
                     {
-                        "level_label": "d=2 해의 개수 디딤돌 4",
-                        "level_label_en": "Case d=2 Step 4",
+                        "level_label": r"$d=2$ 해의 개수 디딤돌 4",
+                        "level_label_en": r"Case $d=2$ Step 4",
                         "stem": r"$d = 2$일 때 $a + b + c = 0$을 만족시키는 음이 아닌 정수 $(a, b, c)$의 순서쌍의 개수는?",
                         "stem_en": r"When $d = 2$, how many non-negative integer triples $(a, b, c)$ satisfy $a + b + c = 0$?",
                         "options": [r"$0$", r"$1$", r"$2$", r"$3$", r"$6$"],
@@ -467,11 +467,11 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 26번] 모평균의 신뢰구간 중심(표본평균)과 모표준편차 추론",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #26] Confidence Interval for Population Mean and Standard Deviation",
-        "summary_ko": "신뢰구간의 중점(표본평균) 비교로 a=3을 구하고 반쪽 길이 1.96*(sigma/14)=1에서 sigma=50/7을 구해 a*sigma 도출하기",
-        "summary_en": "Equate the midpoints (sample mean) to find a=3, and use the half-width 1.96*(sigma/14)=1 to find sigma=50/7 and a*sigma=150/7.",
+        "summary_ko": r"신뢰구간의 중점(표본평균) 비교로 $a=3$을 구하고 반쪽 길이 $1.96 \times \dfrac{\sigma}{14}=1$에서 $\sigma=\dfrac{50}{7}$을 구해 $a\sigma$ 도출하기",
+        "summary_en": r"Equate the midpoints (sample mean) to find $a=3$, and use the half-width $1.96 \times \dfrac{\sigma}{14}=1$ to find $\sigma=\dfrac{50}{7}$ and $a\sigma=\dfrac{150}{7}$.",
         "tags": ["확률과 통계", "통계", "통계적추정", "모평균의신뢰구간", "표본평균", "26번"],
         "symbols": [
-            {"sym": r"$\bar{x} = \dfrac{\text{양 끝점의 합}}{2}$", "desc": "모평균 신뢰구간의 한가운데 값은 항상 표본평균 bar{x}", "desc_en": "The midpoint of a confidence interval is always the sample mean."},
+            {"sym": r"$\bar{x} = \dfrac{\text{양 끝점의 합}}{2}$", "desc": r"모평균 신뢰구간의 한가운데 값은 항상 표본평균 $\bar{x}$", "desc_en": "The midpoint of a confidence interval is always the sample mean."},
             {"sym": r"$1.96 \times \dfrac{\sigma}{\sqrt{n}}$", "desc": "신뢰도 95% 신뢰구간의 중심에서 양 끝까지의 반쪽 길이(오차한계)", "desc_en": "Margin of error (half-width) for a 95% confidence interval."}
         ],
         "levels": [
@@ -512,8 +512,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [분수 변환] $0.14 \\sigma = 1$에서 모표준편차 $\\sigma$ 구하기",
-                "title_en": "🌱 Step 3 · [Fraction Conversion] Solving $0.14\\sigma = 1$ for $\\sigma$",
+                "title": r"🌱 3단계 · [분수 변환] $0.14 \sigma = 1$에서 모표준편차 $\sigma$ 구하기",
+                "title_en": r"🌱 Step 3 · [Fraction Conversion] Solving $0.14\sigma = 1$ for $\sigma$",
                 "knowledge": r"$0.14 = \frac{14}{100} = \frac{7}{50}$이므로 $\frac{7}{50}\sigma = 1 \implies \sigma = \frac{50}{7}$입니다.",
                 "knowledge_en": r"Since $0.14 = \frac{7}{50}$, $\frac{7}{50}\sigma = 1 \implies \sigma = \frac{50}{7}$.",
                 "questions": [
@@ -548,8 +548,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $a\\sigma$의 값 구하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Final value of $a\\sigma$",
+                "title": r"💎 5단계 · [최종 종합] $a\sigma$의 값 구하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Final value of $a\sigma$",
                 "knowledge": r"$a\sigma = \frac{150}{7}$로 정답을 확정합니다.",
                 "knowledge_en": r"$a\sigma = \frac{150}{7}$.",
                 "questions": [
@@ -617,12 +617,12 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 27번] 두 눈의 수의 곱의 홀짝에 따른 독립시행의 확률",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #27] Independent Trials Based on Parity of Product of Two Dice",
-        "summary_ko": "1회 시행에서 공을 1개 넣을 확률 1/4, 2개 넣을 확률 3/4을 구하고 4회 시행 후 공이 5개 이하일 확률 13/256 도출하기",
-        "summary_en": "Find P(1 ball)=1/4 and P(2 balls)=3/4 per trial, then compute the probability of at most 5 balls in 4 trials as 13/256.",
+        "summary_ko": r"$1$회 시행에서 공을 $1$개 넣을 확률 $\dfrac{1}{4}$, $2$개 넣을 확률 $\dfrac{3}{4}$을 구하고 $4$회 시행 후 공이 $5$개 이하일 확률 $\dfrac{13}{256}$ 도출하기",
+        "summary_en": r"Find $\mathrm{P}(1\text{ ball})=\dfrac{1}{4}$ and $\mathrm{P}(2\text{ balls})=\dfrac{3}{4}$ per trial, then compute the probability of at most $5$ balls in $4$ trials as $\dfrac{13}{256}$.",
         "tags": ["확률과 통계", "확률", "독립시행의확률", "주사위의곱", "여사건", "27번"],
         "symbols": [
-            {"sym": r"$\text{홀수} \times \text{홀수} = \text{홀수}$", "desc": "두 눈의 곱이 홀수가 되어 공을 1개 넣을 확률 1/2 * 1/2 = 1/4", "desc_en": "Product is odd (1 ball added) iff both dice are odd: probability 1/4."},
-            {"sym": r"$4\text{번 모두 } 1\text{개 또는 } 3\text{번 } 1\text{개} + 1\text{번 } 2\text{개}$", "desc": "4번 시행 후 공의 총합이 4개 또는 5개(5개 이하)가 되는 조건", "desc_en": "Total balls <= 5 in 4 trials means either four 1s (sum 4) or three 1s and one 2 (sum 5)."}
+            {"sym": r"$\text{홀수} \times \text{홀수} = \text{홀수}$", "desc": r"두 눈의 곱이 홀수가 되어 공을 $1$개 넣을 확률 $\dfrac{1}{2} \times \dfrac{1}{2} = \dfrac{1}{4}$", "desc_en": r"Product is odd ($1$ ball added) iff both dice are odd: probability $\dfrac{1}{4}$."},
+            {"sym": r"$4\text{번 모두 } 1\text{개 또는 } 3\text{번 } 1\text{개} + 1\text{번 } 2\text{개}$", "desc": "4번 시행 후 공의 총합이 4개 또는 5개(5개 이하)가 되는 조건", "desc_en": r"Total balls $\le 5$ in $4$ trials means either four $1$s (sum $4$) or three $1$s and one $2$ (sum $5$)."}
         ],
         "levels": [
             {
@@ -651,7 +651,7 @@ PART3_PROBLEMS = [
                 "questions": [
                     {
                         "level_label": "총합 4개 확률 디딤돌 2",
-                        "level_label_en": "Sum=4 Probability Step 2",
+                        "level_label_en": r"Sum $4$ Probability Step 2",
                         "stem": r"$4$번 모두 공을 $1$개씩 넣어 총 $4$개가 될 확률 $\left(\frac{1}{4}\right)^4$의 값은?",
                         "stem_en": r"What is the probability $\left(\frac{1}{4}\right)^4$ of adding $1$ ball in all $4$ trials?",
                         "options": [r"$\frac{1}{16}$", r"$\frac{1}{64}$", r"$\frac{1}{128}$", r"$\frac{1}{256}$", r"$\frac{1}{512}$"],
@@ -669,7 +669,7 @@ PART3_PROBLEMS = [
                 "questions": [
                     {
                         "level_label": "총합 5개 분자 디딤돌 3",
-                        "level_label_en": "Sum=5 Numerator Step 3",
+                        "level_label_en": r"Sum $5$ Numerator Step 3",
                         "stem": r"${}_{4}\mathrm{C}_{3}\left(\frac{1}{4}\right)^3\left(\frac{3}{4}\right) = \frac{k}{256}$에서 분자 $k = 4 \times 3$의 값은?",
                         "stem_en": r"In ${}_{4}\mathrm{C}_{3}\left(\frac{1}{4}\right)^3\left(\frac{3}{4}\right) = \frac{k}{256}$, what is the numerator $k = 4 \times 3$?",
                         "options": [r"$4$", r"$8$", r"$12$", r"$16$", r"$24$"],
@@ -767,8 +767,8 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 28번] 같은 숫자가 적힌 카드의 선택과 같은 것이 있는 순열",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #28] Card Selection and Permutations with Identical Items",
-        "summary_ko": "첫째 자리에 짝수(2 또는 4)를 놓은 뒤 나머지 5자리에 들어갈 숫자의 쌍 개수에 따라 케이스를 나누어 2*360=720 구하기",
-        "summary_en": "Fix the first digit as even (2 choices: 2 or 4), classify the remaining 5 digits by identical pairs, and compute 2*360=720.",
+        "summary_ko": r"첫째 자리에 짝수($2$ 또는 $4$)를 놓은 뒤 나머지 $5$자리에 들어갈 숫자의 쌍 개수에 따라 케이스를 나누어 $2 \times 360 = 720$ 구하기",
+        "summary_en": r"Fix the first digit as even ($2$ choices: $2$ or $4$), classify the remaining $5$ digits by identical pairs, and compute $2 \times 360 = 720$.",
         "tags": ["확률과 통계", "경우의수", "같은것이있는순열", "케이스분류", "28번"],
         "symbols": [
             {"sym": r"$\{1, 1, 2, 2, 3, 3, 4, 4\}$", "desc": "1, 2, 3, 4가 각각 2장씩 들어 있는 총 8장의 카드", "desc_en": "Eight cards consisting of two each of 1, 2, 3, and 4."},
@@ -923,13 +923,13 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 29번] 두 정규분포의 대칭성과 확률밀도함수의 비교",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #29] Symmetry of Two Normal Distributions and Probability Density Comparison",
-        "summary_ko": "조건 (가)에서 m_1=4를 찾고, 구간 확률 합과 f(5)=g(15)에서 m_2=16, sigma_2=10을 구하여 1000k=345 도출하기",
-        "summary_en": "Find m_1=4 from symmetry in (가), deduce m_2=16 and sigma_2=10 from (나) and f(5)=g(15), and compute 1000k=345.",
+        "summary_ko": r"조건 (가)에서 $m_1=4$를 찾고, 구간 확률 합과 $f(5)=g(15)$에서 $m_2=16,\ \sigma_2=10$을 구하여 $1000k=345$ 도출하기",
+        "summary_en": r"Find $m_1=4$ from symmetry in (가), deduce $m_2=16$ and $\sigma_2=10$ from (나) and $f(5)=g(15)$, and compute $1000k=345$.",
         "tags": ["확률과 통계", "통계", "정규분포", "확률밀도함수", "대칭성", "표준화", "단답형", "29번"],
         "symbols": [
-            {"sym": r"$\mathrm{P}(X \le 2) = \mathrm{P}(X \ge 6) \implies m_1 = 4$", "desc": "2와 6의 한가운데 값인 평균 m_1=4", "desc_en": "Symmetry of X implies the mean is the midpoint of 2 and 6."},
-            {"sym": r"$\mathrm{P}(1 \le X \le 2) = \mathrm{P}(6 \le X \le 7)$", "desc": "m_1=4에 대한 대칭 이동으로 두 구간 확률을 하나로 합침", "desc_en": "By symmetry about 4, [1, 2] reflects to [6, 7]."},
-            {"sym": r"$f(5) = g(15)$", "desc": "두 확률밀도함수의 함숫값 비교", "desc_en": "Equality of probability density values at x=5 and x=15."}
+            {"sym": r"$\mathrm{P}(X \le 2) = \mathrm{P}(X \ge 6) \implies m_1 = 4$", "desc": r"$2$와 $6$의 한가운데 값인 평균 $m_1=4$", "desc_en": "Symmetry of X implies the mean is the midpoint of 2 and 6."},
+            {"sym": r"$\mathrm{P}(1 \le X \le 2) = \mathrm{P}(6 \le X \le 7)$", "desc": r"$m_1=4$에 대한 대칭 이동으로 두 구간 확률을 하나로 합침", "desc_en": "By symmetry about 4, [1, 2] reflects to [6, 7]."},
+            {"sym": r"$f(5) = g(15)$", "desc": "두 확률밀도함수의 함숫값 비교", "desc_en": r"Equality of probability density values at $x=5$ and $x=15$."}
         ],
         "levels": [
             {
@@ -951,8 +951,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [대칭 구간 이어붙이기] $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9)$ 합치기",
-                "title_en": "🌿 Step 2 · [Joining Symmetric Intervals] Combining $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9)$",
+                "title": r"🌿 2단계 · [대칭 구간 이어붙이기] $\mathrm{P}(1 \le X \le 2) + \mathrm{P}(7 \le X \le 9)$ 합치기",
+                "title_en": r"🌿 Step 2 · [Joining Symmetric Intervals] Combining $\mathrm{P}(1 \le X \le 2) + \mathrm{P}(7 \le X \le 9)$",
                 "knowledge": r"평균 $m_1 = 4$에 대하여 구간 $[1, 2]$를 대칭이동하면 구간 $[6, 7]$이 됩니다! 따라서 $\mathrm{P}(1 \le X \le 2) + \mathrm{P}(7 \le X \le 9) = \mathrm{P}(6 \le X \le 7) + \mathrm{P}(7 \le X \le 9) = \mathrm{P}(6 \le X \le 9)$가 됩니다.",
                 "knowledge_en": r"Reflecting $[1, 2]$ across $m_1 = 4$ gives $[6, 7]$. Adding $[7, 9]$ yields the single interval $\mathrm{P}(6 \le X \le 9)$.",
                 "questions": [
@@ -969,8 +969,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [표준편차 확인] 조건 (가)에서 $\\sigma_2$의 값 구하기",
-                "title_en": "🌱 Step 3 · [Standard Deviation] Finding $\\sigma_2$ from Condition (가)",
+                "title": r"🌱 3단계 · [표준편차 확인] 조건 (가)에서 $\sigma_2$의 값 구하기",
+                "title_en": r"🌱 Step 3 · [Standard Deviation] Finding $\sigma_2$ from Condition (가)",
                 "knowledge": r"조건 (가)에서 $\mathrm{P}(X \le 2) + \mathrm{P}(Y \ge 26) > 0.5$ 등 표준편차 관계를 확인하면 $\sigma_1 = \sigma_2 = 10$ (또는 문제의 표준정규분포표 값 $z = 0.4 \implies 0.155$와의 매칭에서 $P(Y \ge 20) = P(Z \ge 0.4)$)임을 알 수 있습니다.",
                 "knowledge_en": r"Standardizing $Y \ge 20$ with $m_2 = 16$ gives $Z \ge \frac{20 - 16}{\sigma_2} = 0.4$, meaning $\sigma_2 = 10$.",
                 "questions": [
@@ -987,8 +987,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [표준정규분포표 읽기] $\\mathrm{P}(Z \\ge 0.4)$ 구하기",
-                "title_en": "🌳 Step 4 · [Normal Table] Computing $\\mathrm{P}(Z \\ge 0.4)$",
+                "title": r"🌳 4단계 · [표준정규분포표 읽기] $\mathrm{P}(Z \ge 0.4)$ 구하기",
+                "title_en": r"🌳 Step 4 · [Normal Table] Computing $\mathrm{P}(Z \ge 0.4)$",
                 "knowledge": r"표에서 $\mathrm{P}(0 \le Z \le 0.4) = 0.155$이므로, 오른쪽 꼬리 넓이 $k = \mathrm{P}(Z \ge 0.4) = 0.5 - 0.155 = 0.345$입니다.",
                 "knowledge_en": r"Since $\mathrm{P}(0 \le Z \le 0.4) = 0.155$, the upper tail probability is $k = 0.5 - 0.155 = 0.345$.",
                 "questions": [
@@ -1079,13 +1079,13 @@ PART3_PROBLEMS = [
         "subject": "확률과 통계",
         "title": "[2026학년도 10월 고3 확통 30번] 두 주머니에서 비복원 추출과 조건부확률",
         "title_en": "[2026 AY Oct Exam Grade 12 Prob&Stats #30] Conditional Probability with Sampling Without Replacement from Two Bags",
-        "summary_ko": "a_1=a_2=1이 되는 전체 경우 336가지 중 주머니 B에 1이 3개 남는 경우 96가지를 구해 조건부확률 2/7 도출하기",
-        "summary_en": "Count 336 total outcomes where a_1=a_2=1 and 96 favorable outcomes where bag B has three 1s left, giving conditional probability 96/336=2/7.",
+        "summary_ko": r"$a_1=a_2=1$이 되는 전체 경우 $336$가지 중 주머니 $\mathrm{B}$에 $1$이 $3$개 남는 경우 $96$가지를 구해 조건부확률 $\dfrac{2}{7}$ 도출하기",
+        "summary_en": r"Count $336$ total outcomes where $a_1=a_2=1$ and $96$ favorable outcomes where bag $\mathrm{B}$ has three $1$s left, giving conditional probability $\dfrac{96}{336}=\dfrac{2}{7}$.",
         "tags": ["확률과 통계", "확률", "조건부확률", "비복원추출", "경우의수", "단답형", "30번"],
         "symbols": [
             {"sym": r"$A=\{1,1,1,2,2\},\ B=\{1,1,1,1,2\}$", "desc": "주머니 A(1이 3개, 2가 2개)와 주머니 B(1이 4개, 2가 1개)", "desc_en": "Initial contents of Bag A (three 1s, two 2s) and Bag B (four 1s, one 2)."},
             {"sym": r"$a_n = 1 \iff \text{두 공 중 적어도 하나가 } 1$", "desc": "꺼낸 두 공의 최솟값이 1이 될 조건 (둘 다 2인 경우만 제외)", "desc_en": "Minimum of two drawn balls is 1 iff they are not both 2."},
-            {"sym": r"$\mathrm{P}(F \mid E) = \dfrac{n(E \cap F)}{n(E)} = \dfrac{96}{336} = \dfrac{2}{7}$", "desc": "사건 E(a_1=a_2=1)가 일어났을 때 사건 F(B에 1이 3개 남음)의 조건부확률", "desc_en": "Conditional probability of three 1s remaining in B given a_1=a_2=1."}
+            {"sym": r"$\mathrm{P}(F \mid E) = \dfrac{n(E \cap F)}{n(E)} = \dfrac{96}{336} = \dfrac{2}{7}$", "desc": r"사건 $E(a_1=a_2=1)$가 일어났을 때 사건 $F(\mathrm{B}\text{에 }1\text{이 }3\text{개 남음})$의 조건부확률", "desc_en": r"Conditional probability of three $1$s remaining in $\mathrm{B}$ given $a_1=a_2=1$."}
         ],
         "levels": [
             {
@@ -1125,8 +1125,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [분자 사건 분석] 주머니 $\\mathrm{B}$에 $1$이 $3$개 남아 있을 조건",
-                "title_en": "🌱 Step 3 · [Numerator Event] Condition for three $1$s remaining in Bag $\\mathrm{B}$",
+                "title": r"🌱 3단계 · [분자 사건 분석] 주머니 $\mathrm{B}$에 $1$이 $3$개 남아 있을 조건",
+                "title_en": r"🌱 Step 3 · [Numerator Event] Condition for three $1$s remaining in Bag $\mathrm{B}$",
                 "knowledge": r"처음에 주머니 $\mathrm{B}$에는 $1$이 $4$개, $2$가 $1$개 있었습니다. $2$번 꺼낸 뒤 $\mathrm{B}$에 $1$이 $3$개 남으려면, $\mathrm{B}$에서 꺼낸 공 $2$개가 $(1, 2)$ 또는 $(2, 1)$이어야 합니다! 이때 $\mathrm{B}$가 $2$를 꺼낸 회차에서는 $a_n = 1$이 되도록 주머니 $\mathrm{A}$에서 반드시 $1$을 꺼내야 합니다.",
                 "knowledge_en": r"For three $1$s to remain in B (which started with four $1$s and one $2$), B must draw one $1$ and one $2$. In the round where B draws $2$, A must draw $1$ so that $a_n = 1$.",
                 "questions": [
@@ -1143,8 +1143,8 @@ PART3_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [기약분수 약분] $\\dfrac{96}{336}$을 기약분수로 약분하기",
-                "title_en": "🌳 Step 4 · [Fraction Reduction] Reducing $\\dfrac{96}{336}$ to lowest terms",
+                "title": r"🌳 4단계 · [기약분수 약분] $\dfrac{96}{336}$을 기약분수로 약분하기",
+                "title_en": r"🌳 Step 4 · [Fraction Reduction] Reducing $\dfrac{96}{336}$ to lowest terms",
                 "knowledge": r"$96 = 48 \times 2$이고 $336 = 48 \times 7$이므로 분자와 분모를 최대공약수 $48$로 나누면 $\frac{2}{7}$이 됩니다.",
                 "knowledge_en": r"Dividing numerator and denominator by $\gcd(96, 336) = 48$ gives $\frac{96}{336} = \frac{2}{7}$.",
                 "questions": [

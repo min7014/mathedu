@@ -15,17 +15,17 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 23번] 자연로그 함수의 극한과 계수 비 규칙",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #23] Limit of Natural Logarithm Function and Coefficient Ratio",
-        "summary_ko": "lim (x->0) ln(1+5x^2)/(2x^2)에서 분모·분자의 x^2 계수 비 5/2 구하기",
-        "summary_en": "Evaluate lim_{x->0} ln(1+5x^2)/(2x^2) using the standard logarithmic limit to get 5/2.",
+        "summary_ko": r"$\lim_{x \to 0} \dfrac{\ln(1+5x^2)}{2x^2}$에서 분모·분자의 $x^2$ 계수 비 $\dfrac{5}{2}$ 구하기",
+        "summary_en": r"Evaluate $\lim_{x \to 0} \dfrac{\ln(1+5x^2)}{2x^2}$ using the standard logarithmic limit to get $\dfrac{5}{2}$.",
         "tags": ["미적분", "미분법", "지수로그함수의극한", "자연로그", "23번"],
         "symbols": [
-            {"sym": r"$\lim_{t \to 0} \dfrac{\ln(1+t)}{t} = 1$", "desc": "t가 0에 가까워질 때 ln(1+t)는 t와 거의 같아지는 극한 약속", "desc_en": "Fundamental limit of the natural logarithm near 0."},
-            {"sym": r"$\dfrac{5x^2}{2x^2} = \dfrac{5}{2}$", "desc": "ln(1+5x^2)을 5x^2으로 바꾸어 약분한 비율", "desc_en": "Ratio of coefficients of x^2 in numerator and denominator."}
+            {"sym": r"$\lim_{t \to 0} \dfrac{\ln(1+t)}{t} = 1$", "desc": r"$t$가 $0$에 가까워질 때 $\ln(1+t)$는 $t$와 거의 같아지는 극한 약속", "desc_en": "Fundamental limit of the natural logarithm near 0."},
+            {"sym": r"$\dfrac{5x^2}{2x^2} = \dfrac{5}{2}$", "desc": r"$\ln(1+5x^2)$을 $5x^2$으로 바꾸어 약분한 비율", "desc_en": r"Ratio of coefficients of $x^2$ in numerator and denominator."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 분수 약분] $\\dfrac{5 \\times \\square}{2 \\times \\square}$에서 똑같은 네모 지우기",
-                "title_en": "🔰 Step 1 · [Elementary Fraction Cancellation] Canceling common factors in $\\dfrac{5 \\times \\square}{2 \\times \\square}$",
+                "title": r"🔰 1단계 · [초등 분수 약분] $\dfrac{5 \times \square}{2 \times \square}$에서 똑같은 네모 지우기",
+                "title_en": r"🔰 Step 1 · [Elementary Fraction Cancellation] Canceling common factors in $\dfrac{5 \times \square}{2 \times \square}$",
                 "knowledge": r"초등학교 분수 약분에서 분자와 분모에 똑같이 곱해진 수($\square = x^2$)는 지울 수 있습니다! $x$가 $0$에 아주 가까워질 때 $\ln(1 + 5x^2)$은 $5x^2$과 거의 같아지므로 $\frac{5x^2}{2x^2}$을 약분하는 것과 같습니다.",
                 "knowledge_en": r"By elementary fraction cancellation, common factors in the numerator and denominator cancel out. Since $\ln(1+5x^2) \approx 5x^2$ near $x=0$, the ratio reduces to $\frac{5x^2}{2x^2}$.",
                 "questions": [
@@ -42,8 +42,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [기본 공식 확인] $\\lim_{t \\to 0} \\dfrac{\\ln(1+t)}{t}$의 값",
-                "title_en": "🌿 Step 2 · [Standard Limit] Value of $\\lim_{t \\to 0} \\dfrac{\\ln(1+t)}{t}$",
+                "title": r"🌿 2단계 · [기본 공식 확인] $\lim_{t \to 0} \dfrac{\ln(1+t)}{t}$의 값",
+                "title_en": r"🌿 Step 2 · [Standard Limit] Value of $\lim_{t \to 0} \dfrac{\ln(1+t)}{t}$",
                 "knowledge": r"자연로그의 정의에 의하여 $\lim_{t \to 0} \frac{\ln(1+t)}{t} = 1$입니다.",
                 "knowledge_en": r"By the definition of $e$, $\lim_{t \to 0} \frac{\ln(1+t)}{t} = 1$.",
                 "questions": [
@@ -78,8 +78,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [극한 곱셈] $1 \\times \\dfrac{5}{2}$ 계산하기",
-                "title_en": "🌳 Step 4 · [Limit Product] Computing $1 \\times \\dfrac{5}{2}$",
+                "title": r"🌳 4단계 · [극한 곱셈] $1 \times \dfrac{5}{2}$ 계산하기",
+                "title_en": r"🌳 Step 4 · [Limit Product] Computing $1 \times \dfrac{5}{2}$",
                 "knowledge": r"앞부분의 극한값 $1$과 뒷부분의 상수 $\frac{5}{2}$를 곱합니다.",
                 "knowledge_en": r"Multiply the limit $1$ by $\frac{5}{2}$.",
                 "questions": [
@@ -157,17 +157,17 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 24번] 분수함수의 분리를 통한 정적분 계산",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #24] Definite Integral of a Rational Function via Termwise Division",
-        "summary_ko": "(x+1)/x^2을 1/x + 1/x^2으로 쪼개어 [ln x - 1/x]_1^2 = ln 2 + 1/2 구하기",
-        "summary_en": "Split (x+1)/x^2 into 1/x + 1/x^2 and integrate from 1 to 2 to obtain ln 2 + 1/2.",
+        "summary_ko": r"$\dfrac{x+1}{x^2}$을 $\dfrac{1}{x} + \dfrac{1}{x^2}$으로 쪼개어 $\left[\ln x - \dfrac{1}{x}\right]_1^2 = \ln 2 + \dfrac{1}{2}$ 구하기",
+        "summary_en": r"Split $\dfrac{x+1}{x^2}$ into $\dfrac{1}{x} + \dfrac{1}{x^2}$ and integrate from $1$ to $2$ to obtain $\ln 2 + \dfrac{1}{2}$.",
         "tags": ["미적분", "적분법", "여러가지함수의정적분", "분수함수의적분", "24번"],
         "symbols": [
-            {"sym": r"$\dfrac{x+1}{x^2} = \dfrac{1}{x} + \dfrac{1}{x^2}$", "desc": "분자를 분모 x^2으로 각각 나누어 두 분수로 분리", "desc_en": "Splitting a fraction into two simpler terms."},
-            {"sym": r"$\int \dfrac{1}{x}dx = \ln|x| + C,\quad \int \dfrac{1}{x^2}dx = -\dfrac{1}{x} + C$", "desc": "1/x과 1/x^2의 부정적분 공식", "desc_en": "Antiderivatives of 1/x and 1/x^2."}
+            {"sym": r"$\dfrac{x+1}{x^2} = \dfrac{1}{x} + \dfrac{1}{x^2}$", "desc": r"분자를 분모 $x^2$으로 각각 나누어 두 분수로 분리", "desc_en": "Splitting a fraction into two simpler terms."},
+            {"sym": r"$\int \dfrac{1}{x}dx = \ln|x| + C,\quad \int \dfrac{1}{x^2}dx = -\dfrac{1}{x} + C$", "desc": r"$\dfrac{1}{x}$과 $\dfrac{1}{x^2}$의 부정적분 공식", "desc_en": r"Antiderivatives of $\dfrac{1}{x}$ and $\dfrac{1}{x^2}$."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 분수 쪼개기] $\\dfrac{x + 1}{x^2}$을 두 분수의 합으로 나누기",
-                "title_en": "🔰 Step 1 · [Elementary Fraction Splitting] Splitting $\\dfrac{x + 1}{x^2}$ into two fractions",
+                "title": r"🔰 1단계 · [초등 분수 쪼개기] $\dfrac{x + 1}{x^2}$을 두 분수의 합으로 나누기",
+                "title_en": r"🔰 Step 1 · [Elementary Fraction Splitting] Splitting $\dfrac{x + 1}{x^2}$ into two fractions",
                 "knowledge": r"초등학교 분수 덧셈에서 $\frac{a + b}{c} = \frac{a}{c} + \frac{b}{c}$로 쪼갤 수 있듯이, $\frac{x + 1}{x^2} = \frac{x}{x^2} + \frac{1}{x^2} = \frac{1}{x} + \frac{1}{x^2}$로 나누어 씁니다.",
                 "knowledge_en": r"Just as $\frac{a+b}{c} = \frac{a}{c} + \frac{b}{c}$ in elementary fractions, $\frac{x+1}{x^2} = \frac{x}{x^2} + \frac{1}{x^2} = \frac{1}{x} + \frac{1}{x^2}$.",
                 "questions": [
@@ -184,8 +184,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [앞부분 적분] $\\int_1^2 \\dfrac{1}{x}dx$ 계산하기",
-                "title_en": "🌿 Step 2 · [First Integral] Computing $\\int_1^2 \\dfrac{1}{x}dx$",
+                "title": r"🌿 2단계 · [앞부분 적분] $\int_1^2 \dfrac{1}{x}dx$ 계산하기",
+                "title_en": r"🌿 Step 2 · [First Integral] Computing $\int_1^2 \dfrac{1}{x}dx$",
                 "knowledge": r"$\frac{1}{x}$의 부정적분은 $\ln|x|$이고 $\ln 1 = 0$이므로 $\left[\ln x\right]_1^2 = \ln 2 - \ln 1 = \ln 2$입니다.",
                 "knowledge_en": r"$\int_1^2 \frac{1}{x}dx = [\ln x]_1^2 = \ln 2 - 0 = \ln 2$.",
                 "questions": [
@@ -202,8 +202,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [뒷부분 부정적분] $\\dfrac{1}{x^2} = x^{-2}$의 부정적분 구하기",
-                "title_en": "🌱 Step 3 · [Second Antiderivative] Antiderivative of $\\dfrac{1}{x^2} = x^{-2}$",
+                "title": r"🌱 3단계 · [뒷부분 부정적분] $\dfrac{1}{x^2} = x^{-2}$의 부정적분 구하기",
+                "title_en": r"🌱 Step 3 · [Second Antiderivative] Antiderivative of $\dfrac{1}{x^2} = x^{-2}$",
                 "knowledge": r"$\left(-\frac{1}{x}\right)' = \frac{1}{x^2}$이므로 $\frac{1}{x^2}$의 부정적분은 $-\frac{1}{x}$입니다.",
                 "knowledge_en": r"Since $\left(-\frac{1}{x}\right)' = \frac{1}{x^2}$, the antiderivative of $\frac{1}{x^2}$ is $-\frac{1}{x}$.",
                 "questions": [
@@ -220,8 +220,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [뒷부분 정적분] $\\left[-\\dfrac{1}{x}\\right]_1^2$ 계산하기",
-                "title_en": "🌳 Step 4 · [Second Definite Integral] Evaluating $\\left[-\\dfrac{1}{x}\\right]_1^2$",
+                "title": r"🌳 4단계 · [뒷부분 정적분] $\left[-\dfrac{1}{x}\right]_1^2$ 계산하기",
+                "title_en": r"🌳 Step 4 · [Second Definite Integral] Evaluating $\left[-\dfrac{1}{x}\right]_1^2$",
                 "knowledge": r"위끝 $2$와 아래끝 $1$을 대입하면 $\left(-\frac{1}{2}\right) - (-1) = -\frac{1}{2} + 1 = \frac{1}{2}$입니다.",
                 "knowledge_en": r"$\left[-\frac{1}{x}\right]_1^2 = -\frac{1}{2} - (-1) = \frac{1}{2}$.",
                 "questions": [
@@ -299,12 +299,12 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 25번] 이차부등식과 수열의 극한의 대소 관계 (샌드위치 정리)",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #25] Quadratic Inequality and Squeeze Theorem for Sequence Limits",
-        "summary_ko": "이차부등식을 풀어 (n^2-n)/k < a_n < (n^2+n)/k를 얻고 샌드위치 정리로 1/(4k)=k에서 k=1/2 구하기",
-        "summary_en": "Factor the quadratic inequality to bound a_n between (n^2-n)/k and (n^2+n)/k, then apply the Squeeze Theorem to get 1/(4k)=k and k=1/2.",
+        "summary_ko": r"이차부등식을 풀어 $\dfrac{n^2-n}{k} < a_n < \dfrac{n^2+n}{k}$를 얻고 샌드위치 정리로 $\dfrac{1}{4k}=k$에서 $k=\dfrac{1}{2}$ 구하기",
+        "summary_en": r"Factor the quadratic inequality to bound $a_n$ between $\dfrac{n^2-n}{k}$ and $\dfrac{n^2+n}{k}$, then apply the Squeeze Theorem to get $\dfrac{1}{4k}=k$ and $k=\dfrac{1}{2}$.",
         "tags": ["미적분", "수열의극한", "극한의대소관계", "샌드위치정리", "이차부등식", "25번"],
         "symbols": [
-            {"sym": r"$(ka_n - n^2 + n)(ka_n - n^2 - n) < 0$", "desc": "합차공식 X^2 - n^2 < 0으로 인수분해한 이차부등식", "desc_en": "Factoring the quadratic inequality via difference of squares."},
-            {"sym": r"$\dfrac{n^2 - n}{k} < a_n < \dfrac{n^2 + n}{k}$", "desc": "양수 k로 나누어 구한 수열 a_n의 양쪽 범위", "desc_en": "Sandwich bounds on a_n after dividing by k > 0."}
+            {"sym": r"$(ka_n - n^2 + n)(ka_n - n^2 - n) < 0$", "desc": r"합차공식 $X^2 - n^2 < 0$으로 인수분해한 이차부등식", "desc_en": "Factoring the quadratic inequality via difference of squares."},
+            {"sym": r"$\dfrac{n^2 - n}{k} < a_n < \dfrac{n^2 + n}{k}$", "desc": r"양수 $k$로 나누어 구한 수열 $a_n$의 양쪽 범위", "desc_en": r"Sandwich bounds on $a_n$ after dividing by $k > 0$."}
         ],
         "levels": [
             {
@@ -350,8 +350,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [최고차항 계수 비] $\\lim_{n \\to \\infty} \\dfrac{n^2 \\pm n}{k(4n^2 + 1)}$ 구하기",
-                "title_en": "🌱 Step 3 · [Leading Coefficient Ratio] Evaluating $\\lim_{n \\to \\infty} \\dfrac{n^2 \\pm n}{k(4n^2 + 1)}$",
+                "title": r"🌱 3단계 · [최고차항 계수 비] $\lim_{n \to \infty} \dfrac{n^2 \pm n}{k(4n^2 + 1)}$ 구하기",
+                "title_en": r"🌱 Step 3 · [Leading Coefficient Ratio] Evaluating $\lim_{n \to \infty} \dfrac{n^2 \pm n}{k(4n^2 + 1)}$",
                 "knowledge": r"각 변을 $4n^2 + 1$로 나누고 $n \to \infty$ 극한을 취하면, 분모·분자의 최고차항($n^2$)의 계수 비인 $\frac{1}{4k}$로 수렴합니다.",
                 "knowledge_en": r"Dividing by $4n^2 + 1$ and taking $n \to \infty$, both bounds converge to the ratio of the $n^2$ coefficients: $\frac{1}{4k}$.",
                 "questions": [
@@ -368,14 +368,14 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [방정식 세우기] $\\dfrac{1}{4k} = k$ 정리하기",
-                "title_en": "🌳 Step 4 · [Setting Up Equation] Solving $\\dfrac{1}{4k} = k$",
+                "title": r"🌳 4단계 · [방정식 세우기] $\dfrac{1}{4k} = k$ 정리하기",
+                "title_en": r"🌳 Step 4 · [Setting Up Equation] Solving $\dfrac{1}{4k} = k$",
                 "knowledge": r"문제에서 극한값이 $k$라고 했으므로 $\frac{1}{4k} = k \implies k^2 = \frac{1}{4}$입니다.",
                 "knowledge_en": r"Equating the limit to $k$ gives $\frac{1}{4k} = k \implies k^2 = \frac{1}{4}$.",
                 "questions": [
                     {
-                        "level_label": "k^2 구하기 디딤돌 4",
-                        "level_label_en": "Finding k^2 Step 4",
+                        "level_label": r"$k^2$ 구하기 디딤돌 4",
+                        "level_label_en": r"Finding $k^2$ Step 4",
                         "stem": r"$\frac{1}{4k} = k$에서 $k^2$의 값은?",
                         "stem_en": r"From $\frac{1}{4k} = k$, what is $k^2$?",
                         "options": [r"$\frac{1}{16}$", r"$\frac{1}{8}$", r"$\frac{1}{4}$", r"$\frac{1}{2}$", r"$1$"],
@@ -457,12 +457,12 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 26번] 반원을 단면으로 하는 입체도형의 부피와 부분적분",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #26] Volume of a Solid with Semicircular Cross-Sections",
-        "summary_ko": "지름이 sqrt(1+(ln x)^2)인 반원의 넓이 S(x)=(pi/8)(1+(ln x)^2)을 1부터 e까지 정적분하여 (2e-3)pi/8 구하기",
-        "summary_en": "Integrate the semicircular cross-sectional area S(x)=(pi/8)(1+(ln x)^2) from 1 to e to obtain (2e-3)pi/8.",
+        "summary_ko": r"지름이 $\sqrt{1+(\ln x)^2}$인 반원의 넓이 $S(x)=\dfrac{\pi}{8}\{1+(\ln x)^2\}$을 $1$부터 $e$까지 정적분하여 $\dfrac{2e-3}{8}\pi$ 구하기",
+        "summary_en": r"Integrate the semicircular cross-sectional area $S(x)=\dfrac{\pi}{8}\{1+(\ln x)^2\}$ from $1$ to $e$ to obtain $\dfrac{2e-3}{8}\pi$.",
         "tags": ["미적분", "적분법", "정적분의활용", "입체도형의부피", "부분적분", "26번"],
         "symbols": [
-            {"sym": r"$S(x) = \dfrac{1}{2}\pi r^2 = \dfrac{\pi}{8}D^2$", "desc": "지름의 길이가 D일 때 반원의 넓이는 (pi/8)*D^2", "desc_en": "Area of a semicircle with diameter D is (pi/8)D^2."},
-            {"sym": r"$\int_1^e (\ln x)^2 dx = \left[x(\ln x)^2 - 2x\ln x + 2x\right]_1^e = e - 2$", "desc": "부분적분을 이용한 (ln x)^2의 정적분", "desc_en": "Definite integral of (ln x)^2 evaluated via integration by parts."}
+            {"sym": r"$S(x) = \dfrac{1}{2}\pi r^2 = \dfrac{\pi}{8}D^2$", "desc": r"지름의 길이가 $D$일 때 반원의 넓이는 $\dfrac{\pi}{8}D^2$", "desc_en": r"Area of a semicircle with diameter $D$ is $\dfrac{\pi}{8}D^2$."},
+            {"sym": r"$\int_1^e (\ln x)^2 dx = \left[x(\ln x)^2 - 2x\ln x + 2x\right]_1^e = e - 2$", "desc": r"부분적분을 이용한 $(\ln x)^2$의 정적분", "desc_en": r"Definite integral of $(\ln x)^2$ evaluated via integration by parts."}
         ],
         "levels": [
             {
@@ -490,8 +490,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [상수항 적분] $\\int_1^e 1\\,dx$ 계산하기",
-                "title_en": "🌿 Step 2 · [Constant Integral] Evaluating $\\int_1^e 1\\,dx$",
+                "title": r"🌿 2단계 · [상수항 적분] $\int_1^e 1\\,dx$ 계산하기",
+                "title_en": r"🌿 Step 2 · [Constant Integral] Evaluating $\int_1^e 1\\,dx$",
                 "knowledge": r"$1$을 $1$부터 $e$까지 정적분하면 구간의 길이 $e - 1$입니다.",
                 "knowledge_en": r"$\int_1^e 1\,dx = e - 1$.",
                 "questions": [
@@ -508,8 +508,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [부분적분] $\\int_1^e (\\ln x)^2 dx$ 계산하기",
-                "title_en": "🌱 Step 3 · [Integration by Parts] Evaluating $\\int_1^e (\\ln x)^2 dx$",
+                "title": r"🌱 3단계 · [부분적분] $\int_1^e (\ln x)^2 dx$ 계산하기",
+                "title_en": r"🌱 Step 3 · [Integration by Parts] Evaluating $\int_1^e (\ln x)^2 dx$",
                 "knowledge": r"부분적분을 적용하면 $\int (\ln x)^2 dx = x(\ln x)^2 - 2\int \ln x\,dx = x(\ln x)^2 - 2x\ln x + 2x + C$입니다. 위끝 $e$와 아래끝 $1$을 대입하면 $(e - 2e + 2e) - (0 - 0 + 2) = e - 2$입니다.",
                 "knowledge_en": r"Using integration by parts, $\int_1^e (\ln x)^2 dx = \left[x(\ln x)^2 - 2x\ln x + 2x\right]_1^e = e - 2$.",
                 "questions": [
@@ -624,12 +624,12 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 27번] 구간별 정의된 지수함수의 미분가능성과 역함수의 미분법",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #27] Differentiability of Piecewise Exponential Function and Derivative of Inverse",
-        "summary_ko": "x=b에서의 연속·미분가능 조건으로 e^b=2, a=2를 구하고 f(x)=8을 만족하는 e^x=4에서 g'(8)=1/10 도출하기",
-        "summary_en": "Use continuity and differentiability at x=b to find e^b=2 and a=2, solve f(x)=8 to get e^x=4, and compute g'(8)=1/f'(ln 4)=1/10.",
+        "summary_ko": r"$x=b$에서의 연속·미분가능 조건으로 $e^b=2,\ a=2$를 구하고 $f(x)=8$을 만족하는 $e^x=4$에서 $g'(8)=\dfrac{1}{10}$ 도출하기",
+        "summary_en": r"Use continuity and differentiability at $x=b$ to find $e^b=2$ and $a=2$, solve $f(x)=8$ to get $e^x=4$, and compute $g'(8)=\dfrac{1}{f'(\ln 4)}=\dfrac{1}{10}$.",
         "tags": ["미적분", "미분법", "미분가능성", "역함수의미분법", "지수함수", "27번"],
         "symbols": [
-            {"sym": r"$f(b-) = f(b+),\quad f'(b-) = f'(b+)$", "desc": "경계점 x=b에서 미분가능하기 위한 함숫값 일치(연속)와 미분계수 일치 조건", "desc_en": "Continuity and matching left/right derivatives at x=b."},
-            {"sym": r"$g'(8) = \dfrac{1}{f'(c)} \quad (f(c) = 8)$", "desc": "역함수의 미분법 공식", "desc_en": "Formula for the derivative of the inverse function at y=8."}
+            {"sym": r"$f(b-) = f(b+),\quad f'(b-) = f'(b+)$", "desc": r"경계점 $x=b$에서 미분가능하기 위한 함숫값 일치(연속)와 미분계수 일치 조건", "desc_en": r"Continuity and matching left and right derivatives at $x=b$."},
+            {"sym": r"$g'(8) = \dfrac{1}{f'(c)} \quad (f(c) = 8)$", "desc": "역함수의 미분법 공식", "desc_en": r"Formula for the derivative of the inverse function at $y=8$."}
         ],
         "levels": [
             {
@@ -657,8 +657,8 @@ PART4_PROBLEMS = [
                 "knowledge_en": r"Equating derivatives at $x=b$ gives $2e^{2b} = 2e^b + 8e^{-b}$. Letting $t = e^b > 0$, we get $t^3 - t^2 - 4 = (t-2)(t^2+t+2) = 0$.",
                 "questions": [
                     {
-                        "level_label": "e^b 값 구하기 디딤돌 2",
-                        "level_label_en": "Finding e^b Step 2",
+                        "level_label": r"$e^b$ 값 구하기 디딤돌 2",
+                        "level_label_en": r"Finding $e^b$ Step 2",
                         "stem": r"$(t - 2)(t^2 + t + 2) = 0$에서 양수 $t = e^b$의 값은?",
                         "stem_en": r"What is the positive real root $t = e^b$ of $(t - 2)(t^2 + t + 2) = 0$?",
                         "options": [r"$1$", r"$2$", r"$3$", r"$4$", r"$8$"],
@@ -693,8 +693,8 @@ PART4_PROBLEMS = [
                 "knowledge_en": r"Since $f(b) = 2 < 8$, $c > b$. Solving $2e^c - 8e^{-c} + 2 = 8$ gives $(e^c - 4)(e^c + 1) = 0$.",
                 "questions": [
                     {
-                        "level_label": "e^c 값과 미분계수 디딤돌 4",
-                        "level_label_en": "Derivative f'(c) Step 4",
+                        "level_label": r"$e^c$ 값과 미분계수 디딤돌 4",
+                        "level_label_en": r"Derivative $f'(c)$ Step 4",
                         "stem": r"$e^c = 4$일 때, $f'(c) = 2e^c + 8e^{-c} = 2(4) + 8\left(\frac{1}{4}\right)$의 값은?",
                         "stem_en": r"When $e^c = 4$, what is $f'(c) = 2e^c + 8e^{-c} = 2(4) + 8\left(\frac{1}{4}\right)$?",
                         "options": [r"$6$", r"$8$", r"$10$", r"$12$", r"$14$"],
@@ -705,7 +705,7 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $g'(8) = \\dfrac{1}{f'(c)}$ 확정하기",
+                "title": r"💎 5단계 · [최종 종합] $g'(8) = \dfrac{1}{f'(c)}$ 확정하기",
                 "title_en": "💎 Step 5 · [Final Synthesis] Final value of $g'(8)$",
                 "knowledge": r"$f'(c) = 10$이므로 $g'(8) = \frac{1}{10}$입니다.",
                 "knowledge_en": r"Since $f'(c) = 10$, $g'(8) = \frac{1}{10}$.",
@@ -777,13 +777,13 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 28번] 곡선과 직선의 접점 매개변수화 및 음함수·합성함수 미분법",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #28] Tangent Parameterization and Implicit Differentiation",
-        "summary_ko": "f'(s)=s*sec^2(s)=s/t에서 t=cos^2(s)를 얻고 g(t)=f(s)-s^2/t를 미분하여 g'(1/2)=(pi^2+2pi)/4 구하기",
-        "summary_en": "From f'(s)=s*sec^2(s)=s/t deduce t=cos^2(s), differentiate g(t)=f(s)-s^2/t with respect to t, and evaluate g'(1/2)=(pi^2+2pi)/4.",
+        "summary_ko": r"$f'(s)=s\sec^2 s=\dfrac{s}{t}$에서 $t=\cos^2 s$를 얻고 $g(t)=f(s)-\dfrac{s^2}{t}$를 미분하여 $g'\!\left(\dfrac{1}{2}\right)=\dfrac{\pi^2+2\pi}{4}$ 구하기",
+        "summary_en": r"From $f'(s)=s\sec^2 s=\dfrac{s}{t}$ deduce $t=\cos^2 s$, differentiate $g(t)=f(s)-\dfrac{s^2}{t}$ with respect to $t$, and evaluate $g'\!\left(\dfrac{1}{2}\right)=\dfrac{\pi^2+2\pi}{4}$.",
         "tags": ["미적분", "미분법", "접선의방정식", "매개변수미분법", "삼각함수의미분", "28번"],
         "symbols": [
-            {"sym": r"$f'(s) = s\sec^2 s$", "desc": "f(x)=x tan x - ln(cos x)를 미분하여 간단히 정리한 도함수", "desc_en": "Simplified derivative of f(x)=x tan x - ln(cos x)."},
-            {"sym": r"$t = \cos^2 s$", "desc": "접점의 x좌표 s에서 f'(s) = s/t가 성립할 조건", "desc_en": "Relation between parameter t and point of tangency s."},
-            {"sym": r"$g'(t) = \dfrac{s^2}{t^2}$", "desc": "g(t) = f(s) - s*f'(s)를 t에 대해 미분할 때 앞의 항들이 소거되고 남는 도함수!", "desc_en": "Legendre-type cancellation when differentiating the y-intercept g(t)."}
+            {"sym": r"$f'(s) = s\sec^2 s$", "desc": r"$f(x)=x\tan x + \ln(\cos x)$를 미분하여 간단히 정리한 도함수", "desc_en": r"Simplified derivative of $f(x)=x\tan x + \ln(\cos x)$."},
+            {"sym": r"$t = \cos^2 s$", "desc": r"접점의 $x$좌표 $s$에서 $f'(s) = \dfrac{s}{t}$가 성립할 조건", "desc_en": "Relation between parameter t and point of tangency s."},
+            {"sym": r"$g'(t) = \dfrac{s^2}{t^2}$", "desc": r"$g(t) = f(s) - s f'(s)$를 $t$에 대해 미분할 때 앞의 항들이 소거되고 남는 도함수!", "desc_en": r"Legendre-type cancellation when differentiating the $y$-intercept $g(t)$."}
         ],
         "levels": [
             {
@@ -805,8 +805,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [접점 조건] $f'(s) = \\dfrac{s}{t}$에서 $t$와 $s$의 관계식 찾기",
-                "title_en": "🌿 Step 2 · [Tangency Condition] Relating $t$ and $s$ from $f'(s) = \\dfrac{s}{t}$",
+                "title": r"🌿 2단계 · [접점 조건] $f'(s) = \dfrac{s}{t}$에서 $t$와 $s$의 관계식 찾기",
+                "title_en": r"🌿 Step 2 · [Tangency Condition] Relating $t$ and $s$ from $f'(s) = \dfrac{s}{t}$",
                 "knowledge": r"접점의 $x$좌표를 $s$ ($0 < s < \frac{\pi}{2}$)라 하면, 직선의 기울기 $\frac{s}{t}$가 미분계수 $f'(s) = s\sec^2 s = \frac{s}{\cos^2 s}$와 같아야 합니다! 따라서 $t = \cos^2 s$입니다.",
                 "knowledge_en": r"Equating the line's slope $\frac{s}{t}$ to $f'(s) = \frac{s}{\cos^2 s}$ gives $t = \cos^2 s$.",
                 "questions": [
@@ -823,14 +823,14 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [변화율 계산] $t = \\cos^2 s$를 미분하여 $\\dfrac{dt}{ds}$ 구하기",
-                "title_en": "🌱 Step 3 · [Rate of Change] Differentiating $t = \\cos^2 s$ to find $\\dfrac{dt}{ds}$",
+                "title": r"🌱 3단계 · [변화율 계산] $t = \cos^2 s$를 미분하여 $\dfrac{dt}{ds}$ 구하기",
+                "title_en": r"🌱 Step 3 · [Rate of Change] Differentiating $t = \cos^2 s$ to find $\dfrac{dt}{ds}$",
                 "knowledge": r"$t = \cos^2 s$의 양변을 $s$에 대하여 미분하면 $\frac{dt}{ds} = -2\cos s \sin s = -\sin(2s)$입니다.",
                 "knowledge_en": r"Differentiating $t = \cos^2 s$ gives $\frac{dt}{ds} = -2\cos s\sin s = -\sin(2s)$.",
                 "questions": [
                     {
-                        "level_label": "미분계수 dt/ds 디딤돌 3",
-                        "level_label_en": "Derivative dt/ds Step 3",
+                        "level_label": r"미분계수 $\dfrac{dt}{ds}$ 디딤돌 3",
+                        "level_label_en": r"Derivative $\dfrac{dt}{ds}$ Step 3",
                         "stem": r"$s = \frac{\pi}{4}$일 때, $\frac{dt}{ds} = -\sin\left(2 \times \frac{\pi}{4}\right) = -\sin\left(\frac{\pi}{2}\right)$의 값은?",
                         "stem_en": r"At $s = \frac{\pi}{4}$, what is $\frac{dt}{ds} = -\sin\left(\frac{\pi}{2}\right)$?",
                         "options": [r"$-2$", r"$-1$", r"$0$", r"$1$", r"$2$"],
@@ -841,14 +841,14 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [$g(t)$ 미분식] $g(t) = f(s) - \\dfrac{s^2}{t}$를 $t$에 대하여 미분하기",
-                "title_en": "🌳 Step 4 · [Differentiating $g(t)$] Differentiating $g(t) = f(s) - \\dfrac{s^2}{t}$ with respect to $t$",
+                "title": r"🌳 4단계 · [$g(t)$ 미분식] $g(t) = f(s) - \dfrac{s^2}{t}$를 $t$에 대하여 미분하기",
+                "title_en": r"🌳 Step 4 · [Differentiating $g(t)$] Differentiating $g(t) = f(s) - \dfrac{s^2}{t}$ with respect to $t$",
                 "knowledge": r"접점 $(s, f(s))$가 직선 $y = \frac{s}{t}x + g(t)$ 위에 있으므로 $g(t) = f(s) - \frac{s^2}{t}$입니다. 양변을 $t$에 대해 미분하면 $g'(t) = f'(s)\frac{ds}{dt} - \frac{2s}{t}\frac{ds}{dt} + \frac{s^2}{t^2} = -\frac{s}{t}\frac{ds}{dt} + \frac{s^2}{t^2}$입니다!",
                 "knowledge_en": r"Since $g(t) = f(s) - \frac{s^2}{t}$ and $f'(s) = \frac{s}{t}$, differentiating gives $g'(t) = -\frac{s}{t}\frac{ds}{dt} + \frac{s^2}{t^2}$.",
                 "questions": [
                     {
-                        "level_label": "g'(1/2) 대입 디딤돌 4",
-                        "level_label_en": "Evaluating g'(1/2) Step 4",
+                        "level_label": r"$g'\!\left(\dfrac{1}{2}\right)$ 대입 디딤돌 4",
+                        "level_label_en": r"Evaluating $g'\!\left(\dfrac{1}{2}\right)$ Step 4",
                         "stem": r"$t = \frac{1}{2}$, $s = \frac{\pi}{4}$, $\frac{ds}{dt} = -1$을 $-\frac{s}{t}\frac{ds}{dt}$에 대입한 값은?",
                         "stem_en": r"Substituting $t = \frac{1}{2}$, $s = \frac{\pi}{4}$, and $\frac{ds}{dt} = -1$ into $-\frac{s}{t}\frac{ds}{dt}$ gives what value?",
                         "options": [r"$\frac{\pi}{4}$", r"$\frac{\pi}{2}$", r"$\pi$", r"$-\frac{\pi}{2}$", r"$-\frac{\pi}{4}$"],
@@ -859,8 +859,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $g'\\left(\\dfrac{1}{2}\\right) = \\dfrac{\\pi}{2} + \\dfrac{\\pi^2}{4}$ 통분하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Combining $\\dfrac{\\pi}{2} + \\dfrac{\\pi^2}{4}$",
+                "title": r"💎 5단계 · [최종 종합] $g'\left(\dfrac{1}{2}\right) = \dfrac{\pi}{2} + \dfrac{\pi^2}{4}$ 통분하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Combining $\dfrac{\pi}{2} + \dfrac{\pi^2}{4}$",
                 "knowledge": r"뒷부분 $\frac{s^2}{t^2} = \frac{\pi^2/16}{1/4} = \frac{\pi^2}{4}$이므로 $\frac{\pi}{2} + \frac{\pi^2}{4} = \frac{\pi^2 + 2\pi}{4}$입니다.",
                 "knowledge_en": r"Since $\frac{s^2}{t^2} = \frac{\pi^2}{4}$, we get $g'\left(\frac{1}{2}\right) = \frac{\pi}{2} + \frac{\pi^2}{4} = \frac{\pi^2 + 2\pi}{4}$.",
                 "questions": [
@@ -945,12 +945,12 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 29번] 등차수열과 등비수열의 결합 및 등비급수의 합",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #29] Arithmetic and Geometric Sequences and Infinite Geometric Series",
-        "summary_ko": "b_1=72, r=-1/2을 구하고 b_3=18=a_k, b_4=-9=a_{k+27}에서 공차 d=-1, k=5를 도출해 급수의 합 144/11 구하기",
-        "summary_en": "Find b_1=72 and r=-1/2, use b_3=18=a_k and b_4=-9=a_{k+27} to get d=-1 and k=5, and evaluate the infinite series to 144/11 (p+q=155).",
+        "summary_ko": r"$b_1=72,\ r=-\dfrac{1}{2}$을 구하고 $b_3=18=a_k,\ b_4=-9=a_{k+27}$에서 공차 $d=-1,\ k=5$를 도출해 급수의 합 $\dfrac{144}{11}$ 구하기",
+        "summary_en": r"Find $b_1=72$ and $r=-\dfrac{1}{2}$, use $b_3=18=a_k$ and $b_4=-9=a_{k+27}$ to get $d=-1$ and $k=5$, and evaluate the infinite series to $\dfrac{144}{11}$ ($p+q=155$).",
         "tags": ["미적분", "수열의극한", "등비급수", "등차수열", "등비수열", "단답형", "29번"],
         "symbols": [
             {"sym": r"$\sum_{n=k}^{\infty} b_n = \dfrac{b_k}{1 - r} = a_{k+15}$", "desc": "k번째 항부터 시작하는 등비급수의 합 공식", "desc_en": "Sum of the geometric series starting from the k-th term."},
-            {"sym": r"$S = \dfrac{a}{1 - R}$", "desc": "첫째항이 a이고 공비가 R (-1 < R < 1)인 무한등비급수의 합", "desc_en": "Infinite geometric series sum formula."}
+            {"sym": r"$S = \dfrac{a}{1 - R}$", "desc": r"첫째항이 $a$이고 공비가 $R$ ($-1 < R < 1$)인 무한등비급수의 합", "desc_en": "Infinite geometric series sum formula."}
         ],
         "levels": [
             {
@@ -990,8 +990,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [자연수 $k$ 확인] $\\sum_{n=k}^{\\infty} b_n = 3$을 만족하는 $k$ 찾기",
-                "title_en": "🌱 Step 3 · [Finding $k$] Solving $\\sum_{n=k}^{\\infty} b_n = 3$ for $k$",
+                "title": r"🌱 3단계 · [자연수 $k$ 확인] $\sum_{n=k}^{\infty} b_n = 3$을 만족하는 $k$ 찾기",
+                "title_en": r"🌱 Step 3 · [Finding $k$] Solving $\sum_{n=k}^{\infty} b_n = 3$ for $k$",
                 "knowledge": r"$\sum_{n=k}^{\infty} b_n = \frac{b_k}{1 - (-1/2)} = \frac{2}{3}b_k = 3$에서 $b_k = \frac{9}{2}$입니다. $b_1 = 72, b_2 = -36, b_3 = 18, b_4 = -9, b_5 = \frac{9}{2}$이므로 $k = 5$입니다.",
                 "knowledge_en": r"From $\frac{b_k}{1 - (-1/2)} = 3$, we get $b_k = \frac{9}{2}$. Since $b_n = 72(-1/2)^{n-1}$, $b_5 = \frac{9}{2} \implies k = 5$.",
                 "questions": [
@@ -1008,8 +1008,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [등비급수의 합] $\\sum_{n=1}^{\\infty} \\dfrac{b_n}{k^n} = \\sum_{n=1}^{\\infty} \\dfrac{b_n}{5^n}$ 구하기",
-                "title_en": "🌳 Step 4 · [Infinite Series] Evaluating $\\sum_{n=1}^{\\infty} \\dfrac{b_n}{5^n}$",
+                "title": r"🌳 4단계 · [등비급수의 합] $\sum_{n=1}^{\infty} \dfrac{b_n}{k^n} = \sum_{n=1}^{\infty} \dfrac{b_n}{5^n}$ 구하기",
+                "title_en": r"🌳 Step 4 · [Infinite Series] Evaluating $\sum_{n=1}^{\infty} \dfrac{b_n}{5^n}$",
                 "knowledge": r"수열 $\frac{b_n}{5^n}$은 첫째항이 $\frac{b_1}{5} = \frac{72}{5}$이고 공비가 $R = \frac{-1/2}{5} = -\frac{1}{10}$인 등비수열입니다. 따라서 급수의 합은 $\frac{72/5}{1 - (-1/10)} = \frac{72/5}{11/10} = \frac{144}{11}$입니다.",
                 "knowledge_en": r"The series $\sum_{n=1}^\infty \frac{b_n}{5^n}$ has first term $\frac{72}{5}$ and ratio $-\frac{1}{10}$, so its sum is $\frac{72/5}{11/10} = \frac{144}{11}$.",
                 "questions": [
@@ -1100,18 +1100,18 @@ PART4_PROBLEMS = [
         "subject": "미적분",
         "title": "[2026학년도 10월 고3 미적 30번] 삼각함수의 치환적분과 절댓값 정적분(총변화량)",
         "title_en": "[2026 AY Oct Exam Grade 12 Calculus #30] Trigonometric Substitution and Total Variation Integral",
-        "summary_ko": "두 번째 치환적분에서 b+1=1/a를 구하고 첫 번째 절댓값 정적분(총변화량)에서 sin(2pi*a)=1/2, a=5/12를 도출하여 f(2pi)=19/10 구하기",
-        "summary_en": "Use u-substitution on the second integral to find b+1=1/a, and analyze the total variation of (1-sin(ax))^2 on [0, 2pi] to find a=5/12 and f(2pi)=19/10 (p+q=29).",
+        "summary_ko": r"두 번째 치환적분에서 $b+1=\dfrac{1}{a}$를 구하고 첫 번째 절댓값 정적분(총변화량)에서 $\sin(2\pi a)=\dfrac{1}{2},\ a=\dfrac{5}{12}$를 도출하여 $f(2\pi)=\dfrac{19}{10}$ 구하기",
+        "summary_en": r"Use $u$-substitution on the second integral to find $b+1=\dfrac{1}{a}$, and analyze the total variation of $\{1-\sin(ax)\}^2$ on $[0, 2\pi]$ to find $a=\dfrac{5}{12}$ and $f(2\pi)=\dfrac{19}{10}$ ($p+q=29$).",
         "tags": ["미적분", "적분법", "치환적분법", "절댓값정적분", "삼각함수", "단답형", "30번"],
         "symbols": [
-            {"sym": r"$u = \sin x \implies du = \cos x\,dx$", "desc": "두 번째 적분에서 sin x를 u로 바꾸는 치환적분", "desc_en": "Substitution u = sin x in the second integral."},
-            {"sym": r"$H(x) = \{1 - \sin(ax)\}^2$", "desc": "미분하면 H'(x) = -2a cos(ax){1 - sin(ax)}가 되는 원시함수", "desc_en": "Antiderivative whose derivative matches the first integrand up to -2a."},
-            {"sym": r"$\int_0^{2\pi} |H'(x)|dx = \dfrac{5}{2}a$", "desc": "구간 [0, 2pi]에서 H(x)가 움직인 총 변화량", "desc_en": "Total variation of H(x) over [0, 2pi]."}
+            {"sym": r"$u = \sin x \implies du = \cos x\,dx$", "desc": r"두 번째 적분에서 $\sin x$를 $u$로 바꾸는 치환적분", "desc_en": r"Substitution $u = \sin x$ in the second integral."},
+            {"sym": r"$H(x) = \{1 - \sin(ax)\}^2$", "desc": r"미분하면 $H'(x) = -2a\cos(ax)\{1 - \sin(ax)\}$가 되는 원시함수", "desc_en": r"Antiderivative whose derivative matches the first integrand up to $-2a$."},
+            {"sym": r"$\int_0^{2\pi} |H'(x)|dx = \dfrac{5}{2}a$", "desc": r"구간 $[0, 2\pi]$에서 $H(x)$가 움직인 총 변화량", "desc_en": r"Total variation of $H(x)$ over $[0, 2\pi]$."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 분수 덧셈] $1 + \\{1 - \\sin(2\\pi a)\\}^2 = \\dfrac{5}{4}$에서 제곱값 구하기",
-                "title_en": "🔰 Step 1 · [Elementary Fraction Subtraction] Solving $1 + \\{1 - \\sin(2\\pi a)\\}^2 = \\dfrac{5}{4}$",
+                "title": r"🔰 1단계 · [초등 분수 덧셈] $1 + \{1 - \sin(2\pi a)\}^2 = \dfrac{5}{4}$에서 제곱값 구하기",
+                "title_en": r"🔰 Step 1 · [Elementary Fraction Subtraction] Solving $1 + \{1 - \sin(2\pi a)\}^2 = \dfrac{5}{4}$",
                 "knowledge": r"함수 $H(x) = \{1 - \sin(ax)\}^2$은 $x = 0$에서 $H(0) = 1$로 출발하여 최솟값 $0$까지 내려갔다가($1$만큼 이동), 다시 $x = 2\pi$에서의 값 $H(2\pi) = \{1 - \sin(2\pi a)\}^2$까지 올라갑니다. 총 이동 거리가 $\frac{5}{4}$이므로 초등학교 분수 뺄셈 $1 + \{1 - \sin(2\pi a)\}^2 = \frac{5}{4}$이 성립합니다!",
                 "knowledge_en": r"By elementary fraction subtraction, $H(x) = \{1 - \sin(ax)\}^2$ decreases from $H(0)=1$ to $0$ (distance $1$) and rises to $H(2\pi) = \{1 - \sin(2\pi a)\}^2$. Total distance $\frac{5}{4}$ gives $1 + \{1 - \sin(2\pi a)\}^2 = \frac{5}{4}$.",
                 "questions": [
@@ -1128,14 +1128,14 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [치환적분] 두 번째 적분식에서 $b + 1 = \\dfrac{1}{a}$ 이끌어내기",
-                "title_en": "🌿 Step 2 · [u-Substitution] Deriving $b + 1 = \\dfrac{1}{a}$ from the second integral",
+                "title": r"🌿 2단계 · [치환적분] 두 번째 적분식에서 $b + 1 = \dfrac{1}{a}$ 이끌어내기",
+                "title_en": r"🌿 Step 2 · [u-Substitution] Deriving $b + 1 = \dfrac{1}{a}$ from the second integral",
                 "knowledge": r"$u = \sin x$로 치환하면 $\int_0^{\pi/2} \cos x f(\sin x)dx = \int_0^1 f(u)du = \int_0^1 (\sin(au) + b + 1)du = \frac{1 - \cos a}{a} + b + 1$입니다. 이 값이 $\frac{2 - \cos a}{a}$와 같으므로 $b + 1 = \frac{1}{a}$입니다!",
                 "knowledge_en": r"Substituting $u = \sin x$ gives $\int_0^1 f(u)du = \frac{1 - \cos a}{a} + b + 1 = \frac{2 - \cos a}{a}$, which simplifies to $b + 1 = \frac{1}{a}$.",
                 "questions": [
                     {
-                        "level_label": "b+1 관계식 디딤돌 2",
-                        "level_label_en": "Relation for b+1 Step 2",
+                        "level_label": r"$b+1$ 관계식 디딤돌 2",
+                        "level_label_en": r"Relation for $b+1$ Step 2",
                         "stem": r"$\frac{1 - \cos a}{a} + b + 1 = \frac{2 - \cos a}{a}$의 양변에서 $\frac{1 - \cos a}{a}$를 빼면 $b + 1$을 $a$로 나타낸 식은?",
                         "stem_en": r"Subtracting $\frac{1 - \cos a}{a}$ from both sides gives what expression for $b + 1$?",
                         "options": [r"$a$", r"$2a$", r"$\frac{1}{a}$", r"$\frac{2}{a}$", r"$-\frac{1}{a}$"],
@@ -1146,8 +1146,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [상수 $a$ 결정] $\\sin(2\\pi a) = \\dfrac{1}{2}$과 범위 조건으로 $a$ 구하기",
-                "title_en": "🌱 Step 3 · [Determining $a$] Finding $a$ from $\\sin(2\\pi a) = \\dfrac{1}{2}$",
+                "title": r"🌱 3단계 · [상수 $a$ 결정] $\sin(2\pi a) = \dfrac{1}{2}$과 범위 조건으로 $a$ 구하기",
+                "title_en": r"🌱 Step 3 · [Determining $a$] Finding $a$ from $\sin(2\pi a) = \dfrac{1}{2}$",
                 "knowledge": r"$x = 2\pi$가 첫 번째 극소점($ax = \frac{\pi}{2}$)을 지나고 다음 극점($ax = \frac{3\pi}{2}$) 이전이어야 총 이동거리가 $1 + \{1 - \sin(2\pi a)\}^2$이 됩니다. 즉 $\frac{\pi}{2} < 2\pi a < \frac{3\pi}{2}$에서 $\sin(2\pi a) = \frac{1}{2}$을 만족하는 각은 $2\pi a = \frac{5\pi}{6}$입니다.",
                 "knowledge_en": r"For $2\pi a \in \left(\frac{\pi}{2}, \frac{3\pi}{2}\right)$, $\sin(2\pi a) = \frac{1}{2}$ yields $2\pi a = \frac{5\pi}{6}$.",
                 "questions": [
@@ -1164,8 +1164,8 @@ PART4_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [$f(2\\pi)$ 계산] $f(2\\pi) = -\\sin(2\\pi a) + b + 1$ 구하기",
-                "title_en": "🌳 Step 4 · [Evaluating $f(2\\pi)$] Computing $f(2\\pi) = -\\sin(2\\pi a) + b + 1$",
+                "title": r"🌳 4단계 · [$f(2\pi)$ 계산] $f(2\pi) = -\sin(2\pi a) + b + 1$ 구하기",
+                "title_en": r"🌳 Step 4 · [Evaluating $f(2\pi)$] Computing $f(2\pi) = -\sin(2\pi a) + b + 1$",
                 "knowledge": r"$a = \frac{5}{12}$이므로 $b + 1 = \frac{1}{a} = \frac{12}{5}$이고, $\sin(2\pi a) = \frac{1}{2}$이므로 $f(2\pi) = -\frac{1}{2} + \frac{12}{5}$입니다.",
                 "knowledge_en": r"With $b + 1 = \frac{1}{a} = \frac{12}{5}$ and $\sin(2\pi a) = \frac{1}{2}$, we get $f(2\pi) = -\frac{1}{2} + \frac{12}{5}$.",
                 "questions": [

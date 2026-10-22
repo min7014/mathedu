@@ -19,10 +19,10 @@ PART1_PROBLEMS = [
         "summary_en": "Convert cube roots into fractional exponents and unify the base to 2 using exponent rules.",
         "tags": ["공통(수학I·II)", "수학I", "지수", "거듭제곱근", "지수법칙", "1번"],
         "symbols": [
-            {"sym": r"$\sqrt[3]{a} = a^{\frac{1}{3}}$", "desc": "세 번 곱해 a가 되는 수 (지수를 1/3로 표현)", "desc_en": "Cube root of a, expressed with fractional exponent 1/3."},
+            {"sym": r"$\sqrt[3]{a} = a^{\frac{1}{3}}$", "desc": r"세 번 곱해 $a$가 되는 수 (지수를 $\frac{1}{3}$로 표현)", "desc_en": r"Cube root of $a$, expressed with fractional exponent $\frac{1}{3}$."},
             {"sym": r"$4 = 2^2$", "desc": "4는 2를 두 번 곱한 수 (밑을 2로 통일)", "desc_en": "Express composite number 4 as 2 squared."},
             {"sym": r"$(a^m)^n = a^{m \times n}$", "desc": "거듭제곱의 거듭제곱은 지수끼리 곱하기", "desc_en": "Power of a power rule: multiply the exponents."},
-            {"sym": r"$a^{-1} = \dfrac{1}{a}$", "desc": "지수가 -1이면 분모로 내려가는 역수 약속", "desc_en": "Negative exponent -1 represents the reciprocal 1/a."}
+            {"sym": r"$a^{-1} = \dfrac{1}{a}$", "desc": r"지수가 $-1$이면 분모로 내려가는 역수 약속", "desc_en": r"Negative exponent $-1$ represents the reciprocal $\frac{1}{a}$."}
         ],
         "levels": [
             {
@@ -44,8 +44,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [기호 번역] 세제곱근 기호 $\\sqrt[3]{2}$를 분수 지수로 바꾸기",
-                "title_en": "🌿 Step 2 · [Symbol Translation] Rewriting $\\sqrt[3]{2}$ as a fractional exponent",
+                "title": r"🌿 2단계 · [기호 번역] 세제곱근 기호 $\sqrt[3]{2}$를 분수 지수로 바꾸기",
+                "title_en": r"🌿 Step 2 · [Symbol Translation] Rewriting $\sqrt[3]{2}$ as a fractional exponent",
                 "knowledge": r"똑같은 수를 $3$번 곱해서 $2$가 되는 수를 $\sqrt[3]{2}$라고 쓰고, 지수로는 '3번 중의 1번'이라는 뜻으로 $2^{\frac{1}{3}}$이라고 바꿀 수 있습니다.",
                 "knowledge_en": r"The number that gives $2$ when multiplied $3$ times is written $\sqrt[3]{2}$, which equals $2^{\frac{1}{3}}$ in exponent form.",
                 "questions": [
@@ -63,7 +63,7 @@ PART1_PROBLEMS = [
             },
             {
                 "title": "🌱 3단계 · [분수 곱셈] 거듭제곱의 지수끼리 곱하기",
-                "title_en": "🌱 Step 3 · [Fraction Multiplication] Multiplying exponents in $(2^2)^{-\\frac{2}{3}}$",
+                "title_en": r"🌱 Step 3 · [Fraction Multiplication] Multiplying exponents in $(2^2)^{-\frac{2}{3}}$",
                 "knowledge": r"$4^{-\frac{2}{3}}$에서 $4$ 대신 $2^2$을 넣으면 $(2^2)^{-\frac{2}{3}}$이 됩니다. 괄호 안과 밖의 지수는 서로 곱합니다: $2 \times \left(-\frac{2}{3}\right) = -\frac{4}{3}$.",
                 "knowledge_en": r"Replacing $4$ with $2^2$ gives $(2^2)^{-\frac{2}{3}}$. Multiply the inner and outer exponents: $2 \times \left(-\frac{2}{3}\right) = -\frac{4}{3}$.",
                 "questions": [
@@ -175,11 +175,11 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 2번] 미분계수의 정의와 다항함수의 도함수",
         "title_en": "[2026 AY Oct Exam Grade 12 #2] Definition of Derivative & Polynomial Differentiation",
-        "summary_ko": "극한식으로 표현된 미분계수 f'(1)의 의미를 알고 다항함수를 미분하여 값 구하기",
-        "summary_en": "Recognize the limit definition of the derivative f'(1) and differentiate the cubic polynomial.",
+        "summary_ko": r"극한식으로 표현된 미분계수 $f'(1)$의 의미를 알고 다항함수를 미분하여 값 구하기",
+        "summary_en": r"Recognize the limit definition of the derivative $f'(1)$ and differentiate the cubic polynomial.",
         "tags": ["공통(수학I·II)", "수학II", "미분계수", "도함수", "극한", "2번"],
         "symbols": [
-            {"sym": r"$\lim_{h \to 0}\dfrac{f(1+h)-f(1)}{h}$", "desc": "x=1에서의 순간변화율(미분계수) f'(1)을 뜻하는 약속", "desc_en": "Limit definition of the derivative f'(1) at x=1."},
+            {"sym": r"$\lim_{h \to 0}\dfrac{f(1+h)-f(1)}{h}$", "desc": r"$x=1$에서의 순간변화율(미분계수) $f'(1)$을 뜻하는 약속", "desc_en": r"Limit definition of the derivative $f'(1)$ at $x=1$."},
             {"sym": r"$(x^n)' = n x^{n-1}$", "desc": "지수가 앞으로 내려오고 지수가 1 줄어드는 미분 규칙", "desc_en": "Power rule for differentiation."},
             {"sym": r"$(cx)' = c,\ (c)' = 0$", "desc": "일차항을 미분하면 앞의 숫자만 남고, 상수항은 0이 됨", "desc_en": "Derivative of a linear term is its coefficient; derivative of a constant is 0."}
         ],
@@ -331,18 +331,18 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 3번] 등비수열의 성질과 공비 추론",
         "title_en": "[2026 AY Oct Exam Grade 12 #3] Geometric Sequence & Common Ratio",
-        "summary_ko": "이웃한 항들의 곱의 비율로부터 공비 r을 구하고 제4항 계산하기",
-        "summary_en": "Find the common ratio r from the ratio of products of terms and compute the 4th term.",
+        "summary_ko": r"이웃한 항들의 곱의 비율로부터 공비 $r$을 구하고 제$4$항 계산하기",
+        "summary_en": r"Find the common ratio $r$ from the ratio of products of terms and compute the 4th term.",
         "tags": ["공통(수학I·II)", "수학I", "수열", "등비수열", "공비", "3번"],
         "symbols": [
-            {"sym": r"등비수열 $\{a_n\}$", "desc": "일정한 수(공비 r)를 계속 곱해 나가는 숫자 줄", "desc_en": "A sequence where each term is obtained by multiplying the previous term by a constant ratio r."},
-            {"sym": r"$a_n = a_1 r^{n-1}$", "desc": "첫째항 a_1에 공비 r을 (n-1)번 곱한 n번째 항", "desc_en": "General term formula of a geometric sequence."},
-            {"sym": r"$\dfrac{a_2 a_3}{a_1 a_2} = \dfrac{a_3}{a_1} = r^2$", "desc": "두 식을 나누면 a_2가 약분되어 공비의 제곱만 남음", "desc_en": "Dividing the two products cancels a_2 and leaves r^2."}
+            {"sym": r"등비수열 $\{a_n\}$", "desc": r"일정한 수(공비 $r$)를 계속 곱해 나가는 숫자 줄", "desc_en": "A sequence where each term is obtained by multiplying the previous term by a constant ratio r."},
+            {"sym": r"$a_n = a_1 r^{n-1}$", "desc": r"첫째항 $a_1$에 공비 $r$을 $(n-1)$번 곱한 $n$번째 항", "desc_en": "General term formula of a geometric sequence."},
+            {"sym": r"$\dfrac{a_2 a_3}{a_1 a_2} = \dfrac{a_3}{a_1} = r^2$", "desc": r"두 식을 나누면 $a_2$가 약분되어 공비의 제곱 $r^2$만 남음", "desc_en": r"Dividing the two products cancels $a_2$ and leaves $r^2$."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 분수 나눗셈 연계] $2$ 안에 $\\frac{1}{2}$이 몇 번 들어갈까?",
-                "title_en": "🔰 Step 1 · [Elementary Fraction Division Link] Dividing $2$ by $\\frac{1}{2}$",
+                "title": r"🔰 1단계 · [초등 분수 나눗셈 연계] $2$ 안에 $\frac{1}{2}$이 몇 번 들어갈까?",
+                "title_en": r"🔰 Step 1 · [Elementary Fraction Division Link] Dividing $2$ by $\frac{1}{2}$",
                 "knowledge": r"피자 $2$판을 반 판($\frac{1}{2}$)씩 나누면 총 $4$조각이 나옵니다. 즉 $2 \div \frac{1}{2} = 2 \times 2 = 4$입니다.",
                 "knowledge_en": r"Dividing $2$ wholes into halves ($\frac{1}{2}$) gives $2 \div \frac{1}{2} = 2 \times 2 = 4$ pieces.",
                 "questions": [
@@ -488,13 +488,13 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 4번] 구간별 정의된 함수의 연속성과 완전제곱식",
         "title_en": "[2026 AY Oct Exam Grade 12 #4] Continuity of Piecewise Function & Perfect Square",
-        "summary_ko": "경계점 x=a에서 두 식의 값이 같아야 함을 이용해 이차방정식 (a-2)^2=0 풀기",
-        "summary_en": "Equate the left-hand limit and right-hand value at boundary x=a to solve (a-2)^2=0.",
+        "summary_ko": r"경계점 $x=a$에서 두 식의 값이 같아야 함을 이용해 이차방정식 $(a-2)^2=0$ 풀기",
+        "summary_en": r"Equate the left-hand limit and right-hand value at boundary $x=a$ to solve $(a-2)^2=0$.",
         "tags": ["공통(수학I·II)", "수학II", "함수의연속", "이차방정식", "4번"],
         "symbols": [
             {"sym": r"실수 전체에서 연속", "desc": "그래프가 끊어지지 않고 매끄럽게 이어져 있음", "desc_en": "The graph is connected everywhere without any breaks."},
-            {"sym": r"$\lim_{x \to a^-} f(x) = f(a)$", "desc": "경계점 x=a 왼쪽 식에 a를 넣은 값과 오른쪽 식에 a를 넣은 값이 같음", "desc_en": "Left-hand limit equals the function value at boundary x=a."},
-            {"sym": r"$(a-2)^2 = a^2 - 4a + 4$", "desc": "똑같은 식 (a-2)를 두 번 곱한 완전제곱식", "desc_en": "Perfect square trinomial expansion."}
+            {"sym": r"$\lim_{x \to a^-} f(x) = f(a)$", "desc": r"경계점 $x=a$ 왼쪽 식에 $a$를 넣은 값과 오른쪽 식에 $a$를 넣은 값이 같음", "desc_en": r"Left-hand limit equals the function value at boundary $x=a$."},
+            {"sym": r"$(a-2)^2 = a^2 - 4a + 4$", "desc": r"똑같은 식 $(a-2)$를 두 번 곱한 완전제곱식", "desc_en": "Perfect square trinomial expansion."}
         ],
         "levels": [
             {
@@ -658,12 +658,12 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 5번] 곱의 미분법과 미분계수 계산",
         "title_en": "[2026 AY Oct Exam Grade 12 #5] Product Rule for Differentiation",
-        "summary_ko": "두 다항식의 곱으로 이루어진 함수를 곱의 미분법으로 미분하고 x=2 대입하기",
-        "summary_en": "Apply the product rule (uv)' = u'v + uv' and evaluate the derivative at x=2.",
+        "summary_ko": r"두 다항식의 곱으로 이루어진 함수를 곱의 미분법으로 미분하고 $x=2$ 대입하기",
+        "summary_en": r"Apply the product rule $(uv)' = u'v + uv'$ and evaluate the derivative at $x=2$.",
         "tags": ["공통(수학I·II)", "수학II", "미분법", "곱의미분법", "미분계수", "5번"],
         "symbols": [
             {"sym": r"$\{g(x)h(x)\}' = g'(x)h(x) + g(x)h'(x)$", "desc": "두 식의 곱을 미분할 때는 (앞 미분 × 뒤 그대로) + (앞 그대로 × 뒤 미분)", "desc_en": "Product rule: differentiate the first times the second, plus the first times the derivative of the second."},
-            {"sym": r"$f'(2)$", "desc": "도함수 f'(x)에 x=2를 대입한 값", "desc_en": "Value of the derivative f'(x) at x=2."}
+            {"sym": r"$f'(2)$", "desc": r"도함수 $f'(x)$에 $x=2$를 대입한 값", "desc_en": r"Value of the derivative $f'(x)$ at $x=2$."}
         ],
         "levels": [
             {
@@ -816,13 +816,13 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 6번] 삼각함수 사이의 관계와 사분면의 부호",
         "title_en": "[2026 AY Oct Exam Grade 12 #6] Trigonometric Identities & Quadrant Signs",
-        "summary_ko": "1 + tan^2(θ) = 1/cos^2(θ) 관계식과 제2사분면에서의 코사인 부호(-) 적용하기",
-        "summary_en": "Use 1 + tan^2(θ) = 1/cos^2(θ) and the negative sign of cosine in the second quadrant.",
+        "summary_ko": r"$1 + \tan^2\theta = \dfrac{1}{\cos^2\theta}$ 관계식과 제2사분면에서의 코사인 부호($-$) 적용하기",
+        "summary_en": r"Use $1 + \tan^2\theta = \dfrac{1}{\cos^2\theta}$ and the negative sign of cosine in the second quadrant.",
         "tags": ["공통(수학I·II)", "수학I", "삼각함수", "삼각함수사이의관계", "사분면", "6번"],
         "symbols": [
-            {"sym": r"$\dfrac{\pi}{2} < \theta < \pi$", "desc": "각도가 90도보다 크고 180도보다 작은 제2사분면(왼쪽 위)", "desc_en": "Angle θ lies in Quadrant II (between 90° and 180°)."},
+            {"sym": r"$\dfrac{\pi}{2} < \theta < \pi$", "desc": "각도가 90도보다 크고 180도보다 작은 제2사분면(왼쪽 위)", "desc_en": r"Angle $\theta$ lies in Quadrant II (between $90^\circ$ and $180^\circ$)."},
             {"sym": r"$1 + \tan^2\theta = \dfrac{1}{\cos^2\theta}$", "desc": "피타고라스 정리에서 나온 탄젠트와 코사인의 단짝 공식", "desc_en": "Pythagorean trigonometric identity relating tangent and cosine."},
-            {"sym": r"제2사분면 $\cos\theta < 0$", "desc": "코사인은 x좌표이므로 왼쪽(제2사분면)에서는 음수(-)", "desc_en": "Cosine represents the x-coordinate on the unit circle, which is negative in Quadrant II."}
+            {"sym": r"제2사분면 $\cos\theta < 0$", "desc": r"코사인은 $x$좌표이므로 왼쪽(제2사분면)에서는 음수($-$)", "desc_en": "Cosine represents the x-coordinate on the unit circle, which is negative in Quadrant II."}
         ],
         "levels": [
             {
@@ -844,8 +844,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [삼각함수 관계식] $\\cos^2\\theta$의 값 구하기",
-                "title_en": "🌿 Step 2 · [Trigonometric Identity] Finding $\\cos^2\\theta$",
+                "title": r"🌿 2단계 · [삼각함수 관계식] $\cos^2\theta$의 값 구하기",
+                "title_en": r"🌿 Step 2 · [Trigonometric Identity] Finding $\cos^2\theta$",
                 "knowledge": r"삼각함수 공식 $1 + \tan^2\theta = \dfrac{1}{\cos^2\theta}$에 $\tan^2\theta = 2$를 넣으면 $1 + 2 = 3 = \dfrac{1}{\cos^2\theta}$이 됩니다. 양변을 뒤집으면 $\cos^2\theta = \dfrac{1}{3}$입니다.",
                 "knowledge_en": r"Substituting $\tan^2\theta = 2$ into $1 + \tan^2\theta = \dfrac{1}{\cos^2\theta}$ gives $\dfrac{1}{\cos^2\theta} = 3 \implies \cos^2\theta = \dfrac{1}{3}$.",
                 "questions": [
@@ -862,8 +862,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [사분면의 부호] 제2사분면에서 $\\cos\\theta$의 부호 판단하기",
-                "title_en": "🌱 Step 3 · [Quadrant Sign] Sign of $\\cos\\theta$ in Quadrant II",
+                "title": r"🌱 3단계 · [사분면의 부호] 제2사분면에서 $\cos\theta$의 부호 판단하기",
+                "title_en": r"🌱 Step 3 · [Quadrant Sign] Sign of $\cos\theta$ in Quadrant II",
                 "knowledge": r"$\dfrac{\pi}{2} < \theta < \pi$ ($90^\circ < \theta < 180^\circ$)는 좌표평면의 왼쪽 위(제2사분면)입니다. 코사인($\cos\theta$)은 단위원 위의 점의 $x$좌표이므로 왼쪽에서는 항상 음수($-$)입니다.",
                 "knowledge_en": r"For $\dfrac{\pi}{2} < \theta < \pi$ (Quadrant II, upper-left), $\cos\theta$ corresponds to the $x$-coordinate, which is negative ($-$).",
                 "questions": [
@@ -886,8 +886,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 4단계 · [분모의 유리화] $-\\dfrac{1}{\\sqrt{3}}$을 유리화하여 정답 구하기",
-                "title_en": "💎 Step 4 · [Rationalizing Denominator] Rewriting $-\\dfrac{1}{\\sqrt{3}}$",
+                "title": r"💎 4단계 · [분모의 유리화] $-\dfrac{1}{\sqrt{3}}$을 유리화하여 정답 구하기",
+                "title_en": r"💎 Step 4 · [Rationalizing Denominator] Rewriting $-\dfrac{1}{\sqrt{3}}$",
                 "knowledge": r"$\cos^2\theta = \dfrac{1}{3}$이고 $\cos\theta < 0$이므로 $\cos\theta = -\dfrac{1}{\sqrt{3}}$입니다. 분모와 분자에 똑같이 $\sqrt{3}$을 곱하면 $-\dfrac{\sqrt{3}}{3}$이 됩니다.",
                 "knowledge_en": r"Since $\cos^2\theta = \dfrac{1}{3}$ and $\cos\theta < 0$, $\cos\theta = -\dfrac{1}{\sqrt{3}} = -\dfrac{\sqrt{3}}{3}$.",
                 "questions": [
@@ -972,13 +972,13 @@ PART1_PROBLEMS = [
         "summary_en": "Integrate the difference (upper curve minus lower curve) over the interval [0, 2].",
         "tags": ["공통(수학I·II)", "수학II", "정적분", "넓이", "이차함수", "7번"],
         "symbols": [
-            {"sym": r"$\int_0^2 (\text{위쪽 식} - \text{아래쪽 식})\,dx$", "desc": "x=0부터 x=2까지 세로 길이를 촘촘히 더해 넓이를 구하는 정적분", "desc_en": "Definite integral of (upper minus lower function) from x=0 to x=2 gives the area."},
-            {"sym": r"$\int x^2\,dx = \dfrac{1}{3}x^3 + C$", "desc": "x^2을 적분하면 지수가 3이 되고 앞에 1/3이 곱해짐", "desc_en": "Power rule for integration of x^2."}
+            {"sym": r"$\int_0^2 (\text{위쪽 식} - \text{아래쪽 식})\,dx$", "desc": r"$x=0$부터 $x=2$까지 세로 길이를 촘촘히 더해 넓이를 구하는 정적분", "desc_en": r"Definite integral of (upper minus lower function) from $x=0$ to $x=2$ gives the area."},
+            {"sym": r"$\int x^2\,dx = \dfrac{1}{3}x^3 + C$", "desc": r"$x^2$을 적분하면 지수가 $3$이 되고 앞에 $\frac{1}{3}$이 곱해짐", "desc_en": r"Power rule for integration of $x^2$."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 분수 덧셈 연계] $\\dfrac{1}{2}$과 $\\dfrac{1}{4}$ 통분하여 더하기",
-                "title_en": "🔰 Step 1 · [Elementary Fraction Addition Link] Adding $\\dfrac{1}{2} + \\dfrac{1}{4}$",
+                "title": r"🔰 1단계 · [초등 분수 덧셈 연계] $\dfrac{1}{2}$과 $\dfrac{1}{4}$ 통분하여 더하기",
+                "title_en": r"🔰 Step 1 · [Elementary Fraction Addition Link] Adding $\dfrac{1}{2} + \dfrac{1}{4}$",
                 "knowledge": r"초등학교 분수 덧셈에서 $\dfrac{1}{2}$은 분모와 분자에 $2$를 곱하면 $\dfrac{2}{4}$와 같습니다. 따라서 $\dfrac{1}{2} + \dfrac{1}{4} = \dfrac{2}{4} + \dfrac{1}{4} = \dfrac{3}{4}$입니다.",
                 "knowledge_en": r"In elementary fractions, $\dfrac{1}{2} = \dfrac{2}{4}$. Adding $\dfrac{1}{4}$ gives $\dfrac{2}{4} + \dfrac{1}{4} = \dfrac{3}{4}$.",
                 "questions": [
@@ -1019,15 +1019,15 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [적분 규칙] $\\dfrac{3}{4}x^2 + 3$을 부정적분하기",
-                "title_en": "🌱 Step 3 · [Integration Rule] Finding the antiderivative of $\\dfrac{3}{4}x^2 + 3$",
+                "title": r"🌱 3단계 · [적분 규칙] $\dfrac{3}{4}x^2 + 3$을 부정적분하기",
+                "title_en": r"🌱 Step 3 · [Integration Rule] Finding the antiderivative of $\dfrac{3}{4}x^2 + 3$",
                 "knowledge": r"$x^2$을 적분하면 $\dfrac{1}{3}x^3$이 됩니다. 따라서 $\dfrac{3}{4}x^2$을 적분하면 $\dfrac{3}{4} \times \dfrac{1}{3}x^3 = \dfrac{1}{4}x^3$이 되고, 상수 $3$을 적분하면 $3x$가 됩니다.",
                 "knowledge_en": r"Integrating $\dfrac{3}{4}x^2$ gives $\dfrac{3}{4} \cdot \dfrac{1}{3}x^3 = \dfrac{1}{4}x^3$, and integrating $3$ gives $3x$.",
                 "questions": [
                     {
                         "level_label": "적분 공식 디딤돌 3",
                         "level_label_en": "Antiderivative Step 3",
-                        "stem": r"$\dfrac{3}{4}x^2 + 3$을 적분한 식 $\left[\ \Box\ \right]_0^2$의 빈칸에 알맞은 식은?",
+                        "stem": r"$\dfrac{3}{4}x^2 + 3$을 적분한 식 $\left[\ \square\ \right]_0^2$의 빈칸에 알맞은 식은?",
                         "stem_en": r"What is the antiderivative of $\dfrac{3}{4}x^2 + 3$?",
                         "options": [
                             r"$\dfrac{1}{4}x^3 + 3x$",
@@ -1111,12 +1111,12 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 8번] 로그의 정의와 밑의 변환 성질",
         "title_en": "[2026 AY Oct Exam Grade 12 #8] Definition & Base Properties of Logarithms",
-        "summary_ko": "log_a(b)=2에서 b=a^2을 이끌어내고 log_4(a^2)=log_2(a) 성질로 a, b 구하기",
-        "summary_en": "Use b=a^2 from log_a(b)=2 and simplify log_4(a^2)=log_2(a) to find b/a.",
+        "summary_ko": r"$\log_a b = 2$에서 $b = a^2$을 이끌어내고 $\log_4(a^2) = \log_2 a$ 성질로 $a, b$ 구하기",
+        "summary_en": r"Use $b = a^2$ from $\log_a b = 2$ and simplify $\log_4(a^2) = \log_2 a$ to find $\dfrac{b}{a}$.",
         "tags": ["공통(수학I·II)", "수학I", "로그", "로그의성질", "밑변환", "8번"],
         "symbols": [
-            {"sym": r"$\log_a b = 2 \iff b = a^2$", "desc": "'a를 몇 번 곱해야 b가 될까?'의 답이 2라는 뜻이므로 b = a^2", "desc_en": "Definition of logarithm: log_a(b) = 2 means b = a^2."},
-            {"sym": r"$\log_{a^m} b^n = \dfrac{n}{m}\log_a b$", "desc": "밑과 진수에 똑같이 제곱이 있으면 약분되어 처음 로그와 같아짐", "desc_en": "Exponents of the base and argument come out as a ratio n/m."}
+            {"sym": r"$\log_a b = 2 \iff b = a^2$", "desc": r"'$a$를 몇 번 곱해야 $b$가 될까?'의 답이 $2$라는 뜻이므로 $b = a^2$", "desc_en": r"Definition of logarithm: $\log_a b = 2$ means $b = a^2$."},
+            {"sym": r"$\log_{a^m} b^n = \dfrac{n}{m}\log_a b$", "desc": "밑과 진수에 똑같이 제곱이 있으면 약분되어 처음 로그와 같아짐", "desc_en": r"Exponents of the base and argument come out as a ratio $\frac{n}{m}$."}
         ],
         "levels": [
             {
@@ -1138,8 +1138,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [기호 번역] $\\log_a b = 2$를 거듭제곱으로 바꾸기",
-                "title_en": "🌿 Step 2 · [Symbol Translation] Translating $\\log_a b = 2$ into exponents",
+                "title": r"🌿 2단계 · [기호 번역] $\log_a b = 2$를 거듭제곱으로 바꾸기",
+                "title_en": r"🌿 Step 2 · [Symbol Translation] Translating $\log_a b = 2$ into exponents",
                 "knowledge": r"로그 기호 $\log_a b = 2$는 '$a$를 $2$제곱하면 $b$가 된다'는 뜻입니다. 따라서 $b = a^2$이고, 양변을 $a$로 나누면 문제에서 묻는 $\dfrac{b}{a} = \dfrac{a^2}{a} = a$가 됩니다!",
                 "knowledge_en": r"$\log_a b = 2$ means $b = a^2$. Therefore, the target ratio $\dfrac{b}{a} = \dfrac{a^2}{a} = a$!",
                 "questions": [
@@ -1156,8 +1156,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [로그의 성질] $\\log_4 b = \\log_{2^2}(a^2)$ 간단히 하기",
-                "title_en": "🌱 Step 3 · [Logarithm Property] Simplifying $\\log_4(a^2)$",
+                "title": r"🌱 3단계 · [로그의 성질] $\log_4 b = \log_{2^2}(a^2)$ 간단히 하기",
+                "title_en": r"🌱 Step 3 · [Logarithm Property] Simplifying $\log_4(a^2)$",
                 "knowledge": r"$4 = 2^2$이고 $b = a^2$이므로 $\log_4 b = \log_{2^2}(a^2)$입니다. 밑의 지수 $2$와 진수의 지수 $2$가 똑같이 앞으로 나가 약분($\frac{2}{2} = 1$)되므로 $\log_2 a$와 같아집니다.",
                 "knowledge_en": r"Since $4 = 2^2$ and $b = a^2$, $\log_4 b = \log_{2^2}(a^2) = \dfrac{2}{2}\log_2 a = \log_2 a$.",
                 "questions": [
@@ -1180,8 +1180,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 4단계 · [방정식 풀이] $2\\log_2 a = 8$에서 $a$ 구하기",
-                "title_en": "💎 Step 4 · [Solving for $a$] Finding $a$ from $2\\log_2 a = 8$",
+                "title": r"💎 4단계 · [방정식 풀이] $2\log_2 a = 8$에서 $a$ 구하기",
+                "title_en": r"💎 Step 4 · [Solving for $a$] Finding $a$ from $2\log_2 a = 8$",
                 "knowledge": r"$2\log_2 a = 8$의 양변을 $2$로 나누면 $\log_2 a = 4$입니다. 즉 '$2$를 $4$제곱하면 $a$가 된다'는 뜻이므로 $a = 2^4 = 16$입니다.",
                 "knowledge_en": r"From $2\log_2 a = 8$, we get $\log_2 a = 4 \implies a = 2^4 = 16$.",
                 "questions": [
@@ -1250,12 +1250,12 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 9번] 분수함수의 극한 수렴 조건과 이차함수의 인수 추론",
         "title_en": "[2026 AY Oct Exam Grade 12 #9] Convergence of Rational Limit & Quadratic Factors",
-        "summary_ko": "분모 (x-a)^2을 약분시키기 위해 a=3인 경우와 a≠3인 경우로 나누어 실수 a 구하기",
-        "summary_en": "Analyze the two cases (a=3 and a≠3) where the numerator cancels the double root (x-a)^2 in the denominator.",
+        "summary_ko": r"분모 $(x-a)^2$을 약분시키기 위해 $a=3$인 경우와 $a \neq 3$인 경우로 나누어 실수 $a$ 구하기",
+        "summary_en": r"Analyze the two cases ($a=3$ and $a \neq 3$) where the numerator cancels the double root $(x-a)^2$ in the denominator.",
         "tags": ["공통(수학I·II)", "수학II", "함수의극한", "미정계수", "이차함수", "9번"],
         "symbols": [
-            {"sym": r"$\lim_{x \to a}\dfrac{f(x)(x-3)}{(x-a)^2} = 5$", "desc": "분모에 (x-a)가 두 개 있으므로 분자에도 (x-a)가 최소 두 개 있어야 약분되어 5가 됨", "desc_en": "Since the denominator has (x-a)^2 approaching 0, the numerator must also contain (x-a)^2 as a factor."},
-            {"sym": r"최고차항의 계수가 $1$인 이차함수", "desc": "f(x) = x^2 + px + q (또는 (x-α)(x-β)) 모양의 식", "desc_en": "A monic quadratic function of the form f(x) = (x - α)(x - β)."}
+            {"sym": r"$\lim_{x \to a}\dfrac{f(x)(x-3)}{(x-a)^2} = 5$", "desc": r"분모에 $(x-a)$가 두 개 있으므로 분자에도 $(x-a)$가 최소 두 개 있어야 약분되어 $5$가 됨", "desc_en": r"Since the denominator has $(x-a)^2$ approaching $0$, the numerator must also contain $(x-a)^2$ as a factor."},
+            {"sym": r"최고차항의 계수가 $1$인 이차함수", "desc": r"$f(x) = x^2 + px + q$ (또는 $(x-\alpha)(x-\beta)$) 모양의 식", "desc_en": r"A monic quadratic function of the form $f(x) = (x - \alpha)(x - \beta)$."}
         ],
         "levels": [
             {
@@ -1295,8 +1295,8 @@ PART1_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [두 번째 경우: $a \\neq 3$] $f(x)$ 혼자서 $(x-a)^2$을 다 책임질 때!",
-                "title_en": "🌱 Step 3 · [Case 2: $a \\neq 3$] When $f(x)$ alone must equal $(x-a)^2$",
+                "title": r"🌱 3단계 · [두 번째 경우: $a \neq 3$] $f(x)$ 혼자서 $(x-a)^2$을 다 책임질 때!",
+                "title_en": r"🌱 Step 3 · [Case 2: $a \neq 3$] When $f(x)$ alone must equal $(x-a)^2$",
                 "knowledge": r"$a \neq 3$이면 옆에 있는 $(x-3)$은 $(x-a)$ 약분에 도움을 주지 못합니다. 따라서 이차함수 $f(x)$ 혼자서 $(x-a)$를 두 개 모두 가져야 하므로 $f(x) = (x-a)^2$이 됩니다.",
                 "knowledge_en": r"If $a \neq 3$, $(x-3)$ does not cancel $(x-a)$. Thus the monic quadratic $f(x)$ must be $f(x) = (x-a)^2$.",
                 "questions": [
@@ -1386,13 +1386,13 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 10번] 등차수열의 일반항과 절댓값 합 방정식",
         "title_en": "[2026 AY Oct Exam Grade 12 #10] Arithmetic Sequence Sum & Absolute Value Equation",
-        "summary_ko": "a_2 + a_9 = 0에서 공차 d=-4를 구하고 |S_k|=48을 만족하는 k=4, 6, 12 찾기",
-        "summary_en": "Find the common difference d=-4 from a_2+a_9=0 and solve |S_k|=48 for natural numbers k.",
+        "summary_ko": r"$a_2 + a_9 = 0$에서 공차 $d=-4$를 구하고 $|S_k|=48$을 만족하는 $k=4, 6, 12$ 찾기",
+        "summary_en": r"Find the common difference $d=-4$ from $a_2+a_9=0$ and solve $|S_k|=48$ for natural numbers $k$.",
         "tags": ["공통(수학I·II)", "수학I", "수열", "등차수열", "등차수열의합", "10번"],
         "symbols": [
-            {"sym": r"등차수열 $a_n = a_1 + (n-1)d$", "desc": "첫째항 a_1에 일정한 차이(공차 d)를 (n-1)번 더한 수", "desc_en": "General term of an arithmetic sequence with first term a_1 and common difference d."},
-            {"sym": r"$S_k = \dfrac{k(a_1 + a_k)}{2}$", "desc": "첫째항부터 k번째 항까지 모두 더한 합", "desc_en": "Sum of the first k terms of an arithmetic sequence."},
-            {"sym": r"$|S_k| = 48$", "desc": "합 S_k가 +48이거나 -48이 되는 두 경우를 모두 찾음", "desc_en": "Absolute value equation meaning S_k = 48 or S_k = -48."}
+            {"sym": r"등차수열 $a_n = a_1 + (n-1)d$", "desc": r"첫째항 $a_1$에 일정한 차이(공차 $d$)를 $(n-1)$번 더한 수", "desc_en": r"General term of an arithmetic sequence with first term $a_1$ and common difference $d$."},
+            {"sym": r"$S_k = \dfrac{k(a_1 + a_k)}{2}$", "desc": r"첫째항부터 $k$번째 항까지 모두 더한 합", "desc_en": "Sum of the first k terms of an arithmetic sequence."},
+            {"sym": r"$|S_k| = 48$", "desc": r"합 $S_k$가 $+48$이거나 $-48$이 되는 두 경우를 모두 찾음", "desc_en": r"Absolute value equation meaning $S_k = 48$ or $S_k = -48$."}
         ],
         "levels": [
             {
@@ -1550,11 +1550,11 @@ PART1_PROBLEMS = [
         "subject": "공통(수학I·II)",
         "title": "[2026학년도 10월 고3 11번] 수직선 운동의 속도·위치와 이동 거리 합답형 추론",
         "title_en": "[2026 AY Oct Exam Grade 12 #11] Velocity, Position, and Total Distance on a Line",
-        "summary_ko": "운동 방향이 바뀌는 시각에서 v(4)=0임을 이용해 a=1을 구하고 위치와 이동 거리 판별하기",
-        "summary_en": "Use v(4)=0 at the turning point to find a=1, then evaluate position at t=3 and total distance on [0, 4].",
+        "summary_ko": r"운동 방향이 바뀌는 시각에서 $v(4)=0$임을 이용해 $a=1$을 구하고 위치와 이동 거리 판별하기",
+        "summary_en": r"Use $v(4)=0$ at the turning point to find $a=1$, then evaluate position at $t=3$ and total distance on $[0, 4]$.",
         "tags": ["공통(수학I·II)", "수학II", "정적분의활용", "속도와거리", "합답형", "11번"],
         "symbols": [
-            {"sym": r"운동 방향이 바뀔 때 $v(t) = 0$", "desc": "앞으로 가다가 뒤로(또는 뒤로 가다가 앞으로) 방향을 바꾸는 순간 속도는 0이 됨", "desc_en": "When a particle reverses direction, its instantaneous velocity v(t) is 0."},
+            {"sym": r"운동 방향이 바뀔 때 $v(t) = 0$", "desc": "앞으로 가다가 뒤로(또는 뒤로 가다가 앞으로) 방향을 바꾸는 순간 속도는 0이 됨", "desc_en": r"When a particle reverses direction, its instantaneous velocity $v(t)$ is $0$."},
             {"sym": r"위치 $x(t) = \int_0^t v(s)\,ds$", "desc": "원점 출발 시 속도를 그대로 적분하면 현재 위치가 됨", "desc_en": "Position starting from the origin is the definite integral of velocity."},
             {"sym": r"움직인 거리 $= \int_0^t |v(s)|\,ds$", "desc": "앞으로 간 거리와 뒤로 간 거리를 모두 양수로 더한 총 걸음 수", "desc_en": "Total distance traveled is the integral of the absolute value of velocity (speed)."}
         ],

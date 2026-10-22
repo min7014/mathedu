@@ -15,8 +15,8 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 23번] 평면벡터의 실수배와 성분 뺄셈 연산",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #23] Scalar Multiplication and Component Subtraction of Plane Vectors",
-        "summary_ko": "벡터 a=(1, 3)에서 2b=(-4, 2)를 성분별로 빼어 k=1-(-4)=5 구하기",
-        "summary_en": "Subtract 2b=(-4, 2) from a=(1, 3) componentwise to find k=1-(-4)=5.",
+        "summary_ko": r"벡터 $\vec{a}=(1, 3)$에서 $2\vec{b}=(-4, 2)$를 성분별로 빼어 $k=1-(-4)=5$ 구하기",
+        "summary_en": r"Subtract $2\vec{b}=(-4, 2)$ from $\vec{a}=(1, 3)$ componentwise to find $k=1-(-4)=5$.",
         "tags": ["기하", "평면벡터", "벡터의성분", "벡터의연산", "23번"],
         "symbols": [
             {"sym": r"$2\vec{b} = 2(-2, 1) = (-4, 2)$", "desc": "벡터의 각 성분에 2를 곱하는 실수배", "desc_en": "Scalar multiplication multiplies each component by 2."},
@@ -42,8 +42,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [$y$성분 확인] $\\vec{a} - 2\\vec{b}$의 $y$성분 구하기",
-                "title_en": "🌿 Step 2 · [$y$-Component] Checking the $y$-component of $\\vec{a} - 2\\vec{b}$",
+                "title": r"🌿 2단계 · [$y$성분 확인] $\vec{a} - 2\vec{b}$의 $y$성분 구하기",
+                "title_en": r"🌿 Step 2 · [$y$-Component] Checking the $y$-component of $\vec{a} - 2\vec{b}$",
                 "knowledge": r"$\vec{a} = (1, 3)$과 $2\vec{b} = (-4, 2)$의 $y$성분끼리 빼면 $3 - 2 = 1$입니다.",
                 "knowledge_en": r"Subtracting the $y$-components gives $3 - 2 = 1$.",
                 "questions": [
@@ -158,17 +158,17 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 24번] 쌍곡선의 점근선의 방정식과 기울기",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #24] Asymptotes of a Hyperbola and Their Slopes",
-        "summary_ko": "쌍곡선 x^2/a^2 - y^2/36 = 1의 점근선 y = ±(6/a)x에서 6/a = 2를 풀어 a=3 구하기",
-        "summary_en": "From the hyperbola x^2/a^2 - y^2/36 = 1 with asymptotes y = ±(6/a)x, solve 6/a = 2 to find a=3.",
+        "summary_ko": r"쌍곡선 $\dfrac{x^2}{a^2} - \dfrac{y^2}{36} = 1$의 점근선 $y = \pm\dfrac{6}{a}x$에서 $\dfrac{6}{a} = 2$를 풀어 $a=3$ 구하기",
+        "summary_en": r"From the hyperbola $\dfrac{x^2}{a^2} - \dfrac{y^2}{36} = 1$ with asymptotes $y = \pm\dfrac{6}{a}x$, solve $\dfrac{6}{a} = 2$ to find $a=3$.",
         "tags": ["기하", "이차곡선", "쌍곡선", "점근선의방정식", "24번"],
         "symbols": [
-            {"sym": r"$\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$", "desc": "쌍곡선의 기본 방정식 (b^2 = 36 -> b = 6)", "desc_en": "Standard equation of a hyperbola with b^2 = 36."},
+            {"sym": r"$\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$", "desc": r"쌍곡선의 기본 방정식 ($b^2 = 36 \implies b = 6$)", "desc_en": r"Standard equation of a hyperbola with $b^2 = 36$."},
             {"sym": r"$y = \pm \dfrac{b}{a}x = \pm \dfrac{6}{a}x$", "desc": "쌍곡선이 한없이 가까워지는 두 직선(점근선)의 방정식", "desc_en": "Equations of the two asymptotes of the hyperbola."}
         ],
         "levels": [
             {
                 "title": "🔰 1단계 · [초등 구구단 제곱] 곱해서 $36$이 되는 양수 $b$ 찾기",
-                "title_en": "🔰 Step 1 · [Elementary Multiplication] Finding $b > 0$ such that $b \times b = 36$",
+                "title_en": r"🔰 Step 1 · [Elementary Multiplication] Finding $b > 0$ such that $b \times b = 36$",
                 "knowledge": r"쌍곡선 식 $\frac{x^2}{a^2} - \frac{y^2}{36} = 1$에서 $y^2$ 아래의 분모 $36$은 초등학교 구구단 $6 \times 6 = 36$, 즉 $b^2 = 6^2$입니다.",
                 "knowledge_en": r"In elementary multiplication, $6 \times 6 = 36$, so $b^2 = 36 \implies b = 6$.",
                 "questions": [
@@ -203,8 +203,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [기울기 비교] $\\dfrac{6}{a} = 2$ 식 세우기",
-                "title_en": "🌱 Step 3 · [Comparing Slopes] Setting $\\dfrac{6}{a} = 2$",
+                "title": r"🌱 3단계 · [기울기 비교] $\dfrac{6}{a} = 2$ 식 세우기",
+                "title_en": r"🌱 Step 3 · [Comparing Slopes] Setting $\dfrac{6}{a} = 2$",
                 "knowledge": r"문제에서 한 점근선의 방정식이 $y = 2x$라고 했으므로 기울기 $\frac{6}{a} = 2$입니다.",
                 "knowledge_en": r"Since one asymptote is $y = 2x$, its slope satisfies $\frac{6}{a} = 2$.",
                 "questions": [
@@ -302,12 +302,12 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 25번] 좌표공간의 대칭이동과 두 점 사이의 거리",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #25] Reflections in 3D Coordinate Space and Distance Between Two Points",
-        "summary_ko": "xy평면 대칭점 B(1, 2, -k)에서 AB=2k=4로 k=2를 구하고, x축 대칭점 C(1, -2, -2)에서 AC=4*sqrt(2) 도출하기",
-        "summary_en": "Reflect A(1, 2, k) across the xy-plane to B(1, 2, -k), use AB=2k=4 to get k=2, and find AC=4*sqrt(2) where C(1, -2, -2) is the reflection across the x-axis.",
+        "summary_ko": r"$xy$평면 대칭점 $\mathrm{B}(1, 2, -k)$에서 $\overline{\mathrm{AB}}=2k=4$로 $k=2$를 구하고, $x$축 대칭점 $\mathrm{C}(1, -2, -2)$에서 $\overline{\mathrm{AC}}=4\sqrt{2}$ 도출하기",
+        "summary_en": r"Reflect $\mathrm{A}(1, 2, k)$ across the $xy$-plane to $\mathrm{B}(1, 2, -k)$, use $\overline{\mathrm{AB}}=2k=4$ to get $k=2$, and find $\overline{\mathrm{AC}}=4\sqrt{2}$ where $\mathrm{C}(1, -2, -2)$ is the reflection across the $x$-axis.",
         "tags": ["기하", "공간도형과공간좌표", "대칭이동", "두점사이의거리", "25번"],
         "symbols": [
-            {"sym": r"$\mathrm{B}(1, 2, -k)$", "desc": "점 A(1, 2, k)를 xy평면에 대하여 대칭이동한 점 (z좌표의 부호 반전)", "desc_en": "Reflection of A(1, 2, k) across the xy-plane negates z."},
-            {"sym": r"$\mathrm{C}(1, -2, -k)$", "desc": "점 A(1, 2, k)를 x축에 대하여 대칭이동한 점 (y, z좌표의 부호 반전)", "desc_en": "Reflection of A(1, 2, k) across the x-axis negates y and z."}
+            {"sym": r"$\mathrm{B}(1, 2, -k)$", "desc": r"점 $\mathrm{A}(1, 2, k)$를 $xy$평면에 대하여 대칭이동한 점 ($z$좌표의 부호 반전)", "desc_en": r"Reflection of $\mathrm{A}(1, 2, k)$ across the $xy$-plane negates $z$."},
+            {"sym": r"$\mathrm{C}(1, -2, -k)$", "desc": r"점 $\mathrm{A}(1, 2, k)$를 $x$축에 대하여 대칭이동한 점 ($y, z$좌표의 부호 반전)", "desc_en": r"Reflection of $\mathrm{A}(1, 2, k)$ across the $x$-axis negates $y$ and $z$."}
         ],
         "levels": [
             {
@@ -329,8 +329,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [$x$축 대칭이동] 점 $\\mathrm{A}(1, 2, 2)$를 $x$축에 대칭이동한 점 $\\mathrm{C}$ 구하기",
-                "title_en": "🌿 Step 2 · [Reflection Across $x$-Axis] Finding $\\mathrm{C}$ by reflecting $\\mathrm{A}(1, 2, 2)$ across the $x$-axis",
+                "title": r"🌿 2단계 · [$x$축 대칭이동] 점 $\mathrm{A}(1, 2, 2)$를 $x$축에 대칭이동한 점 $\mathrm{C}$ 구하기",
+                "title_en": r"🌿 Step 2 · [Reflection Across $x$-Axis] Finding $\mathrm{C}$ by reflecting $\mathrm{A}(1, 2, 2)$ across the $x$-axis",
                 "knowledge": r"$x$축에 대하여 대칭이동하면 $x$좌표는 그대로 유지되고, 나머지 $y$좌표와 $z$좌표의 부호가 바뀝니다.",
                 "knowledge_en": r"Reflecting across the $x$-axis preserves the $x$-coordinate and negates both $y$ and $z$.",
                 "questions": [
@@ -353,8 +353,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [좌표 차이 계산] 두 점 $\\mathrm{A}(1, 2, 2)$와 $\\mathrm{C}(1, -2, -2)$의 성분 차 구하기",
-                "title_en": "🌱 Step 3 · [Coordinate Differences] Differences between $\\mathrm{A}(1, 2, 2)$ and $\\mathrm{C}(1, -2, -2)$",
+                "title": r"🌱 3단계 · [좌표 차이 계산] 두 점 $\mathrm{A}(1, 2, 2)$와 $\mathrm{C}(1, -2, -2)$의 성분 차 구하기",
+                "title_en": r"🌱 Step 3 · [Coordinate Differences] Differences between $\mathrm{A}(1, 2, 2)$ and $\mathrm{C}(1, -2, -2)$",
                 "knowledge": r"$x$좌표의 차는 $1 - 1 = 0$, $y$좌표의 차는 $2 - (-2) = 4$, $z$좌표의 차는 $2 - (-2) = 4$입니다.",
                 "knowledge_en": r"The coordinate differences are $\Delta x = 0$, $\Delta y = 4$, and $\Delta z = 4$.",
                 "questions": [
@@ -371,8 +371,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [근호 간단히 하기] $\\sqrt{32}$를 $a\\sqrt{b}$ 꼴로 나타내기",
-                "title_en": "🌳 Step 4 · [Simplifying Radical] Simplifying $\\sqrt{32}$",
+                "title": r"🌳 4단계 · [근호 간단히 하기] $\sqrt{32}$를 $a\sqrt{b}$ 꼴로 나타내기",
+                "title_en": r"🌳 Step 4 · [Simplifying Radical] Simplifying $\sqrt{32}$",
                 "knowledge": r"$32 = 16 \times 2 = 4^2 \times 2$이므로 $\sqrt{32} = 4\sqrt{2}$입니다.",
                 "knowledge_en": r"Since $32 = 16 \times 2$, $\sqrt{32} = 4\sqrt{2}$.",
                 "questions": [
@@ -389,8 +389,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] 선분 $\\overline{\\mathrm{AC}}$의 길이 확정하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Final length of $\\overline{\\mathrm{AC}}$",
+                "title": r"💎 5단계 · [최종 종합] 선분 $\overline{\mathrm{AC}}$의 길이 확정하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Final length of $\overline{\mathrm{AC}}$",
                 "knowledge": r"선분 $\mathrm{AC}$의 길이는 $4\sqrt{2}$입니다.",
                 "knowledge_en": r"$\overline{\mathrm{AC}} = 4\sqrt{2}$.",
                 "questions": [
@@ -458,17 +458,17 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 26번] 포물선의 접선의 방정식과 준선까지의 거리",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #26] Tangent Line to a Parabola and Distance to Directrix",
-        "summary_ko": "포물선 y^2=4px의 기울기 2인 접선 y=2x+p/2와 y=2x+1을 비교해 p=2, 접점 P(1/2, 2)를 구하고 준선 x=-2까지의 거리 5/2 도출하기",
-        "summary_en": "Compare y=2x+p/2 with y=2x+1 to find p=2 and tangency point P(1/2, 2), then compute the distance to the directrix x=-2 as 5/2.",
+        "summary_ko": r"포물선 $y^2=4px$의 기울기 $2$인 접선 $y=2x+\dfrac{p}{2}$와 $y=2x+1$을 비교해 $p=2$, 접점 $\mathrm{P}\!\left(\dfrac{1}{2}, 2\right)$를 구하고 준선 $x=-2$까지의 거리 $\dfrac{5}{2}$ 도출하기",
+        "summary_en": r"Compare $y=2x+\dfrac{p}{2}$ with $y=2x+1$ to find $p=2$ and tangency point $\mathrm{P}\!\left(\dfrac{1}{2}, 2\right)$, then compute the distance to the directrix $x=-2$ as $\dfrac{5}{2}$.",
         "tags": ["기하", "이차곡선", "포물선", "포물선의접선", "포물선의정의", "26번"],
         "symbols": [
-            {"sym": r"$y = mx + \dfrac{p}{m}$", "desc": "포물선 y^2 = 4px에 접하고 기울기가 m인 직선의 방정식", "desc_en": "Tangent line of slope m to the parabola y^2 = 4px."},
-            {"sym": r"$x = -p = -2$", "desc": "초점이 F(p, 0)인 포물선의 준선의 방정식", "desc_en": "Directrix x = -p of the parabola."}
+            {"sym": r"$y = mx + \dfrac{p}{m}$", "desc": r"포물선 $y^2 = 4px$에 접하고 기울기가 $m$인 직선의 방정식", "desc_en": r"Tangent line of slope $m$ to the parabola $y^2 = 4px$."},
+            {"sym": r"$x = -p = -2$", "desc": r"초점이 $\mathrm{F}(p, 0)$인 포물선의 준선의 방정식", "desc_en": r"Directrix $x = -p$ of the parabola."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 나눗셈] $\\dfrac{p}{2} = 1$을 만족하는 수 $p$ 구하기",
-                "title_en": "🔰 Step 1 · [Elementary Division] Solving $\\dfrac{p}{2} = 1$ for $p$",
+                "title": r"🔰 1단계 · [초등 나눗셈] $\dfrac{p}{2} = 1$을 만족하는 수 $p$ 구하기",
+                "title_en": r"🔰 Step 1 · [Elementary Division] Solving $\dfrac{p}{2} = 1$ for $p$",
                 "knowledge": r"포물선 $y^2 = 4px$에 접하고 기울기가 $m = 2$인 직선의 방정식은 $y = 2x + \frac{p}{2}$입니다. 이 직선이 $y = 2x + 1$과 같으려면 초등학교 나눗셈에서 $\frac{p}{2} = 1$이어야 합니다!",
                 "knowledge_en": r"The tangent of slope $m = 2$ to $y^2 = 4px$ is $y = 2x + \frac{p}{2}$. Comparing with $y = 2x + 1$ gives $\frac{p}{2} = 1$.",
                 "questions": [
@@ -485,8 +485,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [접점 $\\mathrm{P}$ 구하기] $y^2 = 8x$와 $y = 2x + 1$이 접하는 점 찾기",
-                "title_en": "🌿 Step 2 · [Point of Tangency $\\mathrm{P}$] Finding where $y^2 = 8x$ and $y = 2x + 1$ touch",
+                "title": r"🌿 2단계 · [접점 $\mathrm{P}$ 구하기] $y^2 = 8x$와 $y = 2x + 1$이 접하는 점 찾기",
+                "title_en": r"🌿 Step 2 · [Point of Tangency $\mathrm{P}$] Finding where $y^2 = 8x$ and $y = 2x + 1$ touch",
                 "knowledge": r"$p = 2$이므로 포물선은 $y^2 = 8x$입니다. $4x = 2y - 2$를 대입하면 $y^2 = 4y - 4 \implies (y - 2)^2 = 0$이므로 $y = 2$, $x = \frac{1}{2}$입니다.",
                 "knowledge_en": r"Substituting $8x = 4y - 4$ into $y^2 = 8x$ gives $(y - 2)^2 = 0$, so $y = 2$ and $x = \frac{1}{2}$.",
                 "questions": [
@@ -521,8 +521,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [거리 식 세우기] $x = \\dfrac{1}{2}$과 $x = -2$ 사이의 가로 거리",
-                "title_en": "🌳 Step 4 · [Horizontal Distance] Distance between $x = \\dfrac{1}{2}$ and $x = -2$",
+                "title": r"🌳 4단계 · [거리 식 세우기] $x = \dfrac{1}{2}$과 $x = -2$ 사이의 가로 거리",
+                "title_en": r"🌳 Step 4 · [Horizontal Distance] Distance between $x = \dfrac{1}{2}$ and $x = -2$",
                 "knowledge": r"점 $\mathrm{P}\left(\frac{1}{2}, 2\right)$와 직선 $x = -2$ 사이의 거리는 오른쪽 $x$좌표에서 왼쪽 $x$좌표를 뺀 $\frac{1}{2} - (-2) = \frac{1}{2} + 2$입니다. (포물선의 정의에 의해 초점 $\mathrm{F}(2, 0)$까지의 거리 $\overline{\mathrm{PF}}$와도 똑같습니다!)",
                 "knowledge_en": r"The distance from $\mathrm{P}\left(\frac{1}{2}, 2\right)$ to $x = -2$ is $\frac{1}{2} - (-2) = \frac{1}{2} + 2$.",
                 "questions": [
@@ -539,8 +539,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] 점 $\\mathrm{P}$와 준선 사이의 거리 확정하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Final distance from $\\mathrm{P}$ to the directrix",
+                "title": r"💎 5단계 · [최종 종합] 점 $\mathrm{P}$와 준선 사이의 거리 확정하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Final distance from $\mathrm{P}$ to the directrix",
                 "knowledge": r"구하는 거리는 $\frac{5}{2}$입니다.",
                 "knowledge_en": r"The distance is $\frac{5}{2}$.",
                 "questions": [
@@ -609,12 +609,12 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 27번] 원기둥의 밑면 원주각과 삼수선의 정리",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #27] Cylinder Base Inscribed Angle and Theorem of Three Perpendiculars",
-        "summary_ko": "밑면 C_2의 지름 A'C=8에서 호 A'D=4pi/3에 대한 중심각·원주각으로 D에서 A'C까지의 거리 2*sqrt(3)을 구하고 삼수선의 정리로 높이 2*sqrt(6) 도출하기",
-        "summary_en": "Use diameter A'C=8 and arc length 4pi/3 on base C_2 to find the perpendicular distance 2*sqrt(3) from D to A'C, then apply the Theorem of Three Perpendiculars to find cylinder height 2*sqrt(6).",
+        "summary_ko": r"밑면 $C_2$의 지름 $\overline{\mathrm{A'C}}=8$에서 호 $\mathrm{A'D}=\dfrac{4}{3}\pi$에 대한 중심각·원주각으로 $\mathrm{D}$에서 $\mathrm{A'C}$까지의 거리 $2\sqrt{3}$을 구하고 삼수선의 정리로 높이 $2\sqrt{6}$ 도출하기",
+        "summary_en": r"Use diameter $\overline{\mathrm{A'C}}=8$ and arc length $\dfrac{4}{3}\pi$ on base $C_2$ to find the perpendicular distance $2\sqrt{3}$ from $\mathrm{D}$ to $\mathrm{A'C}$, then apply the Theorem of Three Perpendiculars to find cylinder height $2\sqrt{6}$.",
         "tags": ["기하", "공간도형과공간좌표", "삼수선의정리", "원기둥", "부채꼴의호의길이", "27번"],
         "symbols": [
-            {"sym": r"$\overline{A'C} = 2r = 8$", "desc": "밑면 원 C_2의 중심을 지나는 지름의 길이", "desc_en": "Diameter of the circular base C_2 with radius 4."},
-            {"sym": r"$l = r\theta \implies 4\theta = \dfrac{4}{3}\pi \implies \theta = \dfrac{\pi}{3}$", "desc": "중심각을 이용하여 밑면 직각삼각형 A'CD의 내각 결정", "desc_en": "Central angle formula l = r*theta on the base circle."},
+            {"sym": r"$\overline{A'C} = 2r = 8$", "desc": r"밑면 원 $C_2$의 중심을 지나는 지름의 길이", "desc_en": r"Diameter of the circular base $C_2$ with radius $4$."},
+            {"sym": r"$l = r\theta \implies 4\theta = \dfrac{4}{3}\pi \implies \theta = \dfrac{\pi}{3}$", "desc": r"중심각을 이용하여 밑면 직각삼각형 $\mathrm{A'CD}$의 내각 결정", "desc_en": r"Central angle formula $l = r\theta$ on the base circle."},
             {"sym": r"$\overline{DH}^2 + \overline{AA'}^2 = \overline{DM}^2$", "desc": "삼수선의 정리에 의한 공간 삼각형 ABD의 높이 제곱", "desc_en": "Pythagorean relation from the Theorem of Three Perpendiculars."}
         ],
         "levels": [
@@ -637,8 +637,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [밑면 중심각과 원주각] 호의 길이 $\\dfrac{4}{3}\\pi$로 직각삼각형 $\\mathrm{A'CD}$ 분석하기",
-                "title_en": "🌿 Step 2 · [Base Circle Angles] Analyzing right triangle $\\mathrm{A'CD}$ from arc length $\\dfrac{4}{3}\\pi$",
+                "title": r"🌿 2단계 · [밑면 중심각과 원주각] 호의 길이 $\dfrac{4}{3}\pi$로 직각삼각형 $\mathrm{A'CD}$ 분석하기",
+                "title_en": r"🌿 Step 2 · [Base Circle Angles] Analyzing right triangle $\mathrm{A'CD}$ from arc length $\dfrac{4}{3}\pi$",
                 "knowledge": r"점 $\mathrm{A}, \mathrm{B}$에서 밑면 $C_2$에 내린 수선의 발을 $\mathrm{A'}, \mathrm{C}$라 하면 $\overline{\mathrm{A'C}} = 8$은 지름입니다. 짧은 호 $\mathrm{A'D}$(또는 $\mathrm{CD}$)의 중심각에서 직각삼각형 $\mathrm{A'CD}$의 한 예각은 $\frac{\pi}{6}$ ($30^\circ$)가 되어 $\overline{\mathrm{A'D}} = 4$, $\overline{\mathrm{CD}} = 4\sqrt{3}$입니다.",
                 "knowledge_en": r"Projecting $\mathrm{A}, \mathrm{B}$ onto $C_2$ gives diameter $\overline{\mathrm{A'C}} = 8$. In right triangle $\mathrm{A'CD}$, the legs are $4$ and $4\sqrt{3}$.",
                 "questions": [
@@ -655,8 +655,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [삼수선의 정리] 원기둥의 높이 $h$와 $H = 6$, $\\overline{\\mathrm{DM}} = 2\\sqrt{3}$ 연결하기",
-                "title_en": "🌱 Step 3 · [Three Perpendiculars] Relating cylinder height $h$ with $H = 6$ and $\\overline{\\mathrm{DM}} = 2\\sqrt{3}$",
+                "title": r"🌱 3단계 · [삼수선의 정리] 원기둥의 높이 $h$와 $H = 6$, $\overline{\mathrm{DM}} = 2\sqrt{3}$ 연결하기",
+                "title_en": r"🌱 Step 3 · [Three Perpendiculars] Relating cylinder height $h$ with $H = 6$ and $\overline{\mathrm{DM}} = 2\sqrt{3}$",
                 "knowledge": r"삼수선의 정리에 의해 삼각형 $\mathrm{ABD}$의 높이 $H = 6$은 밑면에서의 수선 $\overline{\mathrm{DM}} = 2\sqrt{3}$과 원기둥의 높이 $h$를 두 직각변으로 하는 직각삼각형의 빗변입니다! 즉 $(2\sqrt{3})^2 + h^2 = 6^2$입니다.",
                 "knowledge_en": r"By the Theorem of Three Perpendiculars, $\overline{\mathrm{DM}}^2 + h^2 = H^2$, so $(2\sqrt{3})^2 + h^2 = 6^2$.",
                 "questions": [
@@ -673,8 +673,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [제곱근 정리] $\\sqrt{24}$ 간단히 하기",
-                "title_en": "🌳 Step 4 · [Simplifying Radical] Simplifying $\\sqrt{24}$",
+                "title": r"🌳 4단계 · [제곱근 정리] $\sqrt{24}$ 간단히 하기",
+                "title_en": r"🌳 Step 4 · [Simplifying Radical] Simplifying $\sqrt{24}$",
                 "knowledge": r"$24 = 4 \times 6 = 2^2 \times 6$이므로 $h = \sqrt{24} = 2\sqrt{6}$입니다.",
                 "knowledge_en": r"Since $24 = 4 \times 6$, $h = \sqrt{24} = 2\sqrt{6}$.",
                 "questions": [
@@ -767,19 +767,19 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 28번] 타원의 정의와 이등변삼각형의 닮음",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #28] Definition of an Ellipse and Similar Isosceles Triangles",
-        "summary_ko": "타원의 정의 F'P+PF=2a=F'Q에서 PF=PQ를 찾고 이등변삼각형의 닮음과 넓이 6*sqrt(7)로부터 c=3*sqrt(2), 둘레 8c=24*sqrt(2) 구하기",
-        "summary_en": "Use F'P+PF=2a=F'Q to show PF=PQ, apply similarity of isosceles triangles and Area(PFQ)=6*sqrt(7) to find c=3*sqrt(2), and compute Perimeter(F'RQ)=8c=24*sqrt(2).",
+        "summary_ko": r"타원의 정의 $\overline{\mathrm{F'P}}+\overline{\mathrm{PF}}=2a=\overline{\mathrm{F'Q}}$에서 $\overline{\mathrm{PF}}=\overline{\mathrm{PQ}}$를 찾고 이등변삼각형의 닮음과 넓이 $6\sqrt{7}$로부터 $c=3\sqrt{2}$, 둘레 $8c=24\sqrt{2}$ 구하기",
+        "summary_en": r"Use $\overline{\mathrm{F'P}}+\overline{\mathrm{PF}}=2a=\overline{\mathrm{F'Q}}$ to show $\overline{\mathrm{PF}}=\overline{\mathrm{PQ}}$, apply similarity of isosceles triangles and $\text{Area}(\triangle\mathrm{PFQ})=6\sqrt{7}$ to find $c=3\sqrt{2}$, and compute $\text{Perimeter}(\triangle\mathrm{F'RQ})=8c=24\sqrt{2}$.",
         "tags": ["기하", "이차곡선", "타원의정의", "이등변삼각형", "닮음", "28번"],
         "symbols": [
-            {"sym": r"$\overline{F'P} + \overline{PF} = 2a = \overline{F'Q}$", "desc": "타원의 정의(장축의 길이 2a)와 F'Q=2a에서 PF=PQ 도출", "desc_en": "Ellipse definition combined with F'Q=2a implies PF=PQ."},
-            {"sym": r"$\triangle F'FQ \sim \triangle FPQ$", "desc": "밑각 theta를 공유하는 두 이등변삼각형의 AA 닮음", "desc_en": "Two isosceles triangles sharing base angle theta are similar."},
-            {"sym": r"$\text{둘레}(\triangle F'RQ) = 4a + 2c = 8c$", "desc": "타원의 정의 F'R+FR=2a를 이용한 삼각형 F'RQ의 둘레의 길이", "desc_en": "Perimeter of triangle F'RQ expressed via the ellipse definition."}
+            {"sym": r"$\overline{F'P} + \overline{PF} = 2a = \overline{F'Q}$", "desc": r"타원의 정의(장축의 길이 $2a$)와 $\overline{\mathrm{F'Q}}=2a$에서 $\overline{\mathrm{PF}}=\overline{\mathrm{PQ}}$ 도출", "desc_en": r"Ellipse definition combined with $\overline{\mathrm{F'Q}}=2a$ implies $\overline{\mathrm{PF}}=\overline{\mathrm{PQ}}$."},
+            {"sym": r"$\triangle F'FQ \sim \triangle FPQ$", "desc": r"밑각 $\theta$를 공유하는 두 이등변삼각형의 $\mathrm{AA}$ 닮음", "desc_en": r"Two isosceles triangles sharing base angle $\theta$ are similar."},
+            {"sym": r"$\text{둘레}(\triangle F'RQ) = 4a + 2c = 8c$", "desc": r"타원의 정의 $\overline{\mathrm{F'R}}+\overline{\mathrm{FR}}=2a$를 이용한 삼각형 $\mathrm{F'RQ}$의 둘레의 길이", "desc_en": r"Perimeter of $\triangle\mathrm{F'RQ}$ expressed via the ellipse definition."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 선분 빼기] $\\overline{\\mathrm{F'P}} + \\overline{\\mathrm{PF}} = \\overline{\\mathrm{F'P}} + \\overline{\\mathrm{PQ}}$에서 같은 길이 찾기",
-                "title_en": "🔰 Step 1 · [Elementary Segment Subtraction] Finding equal segments from $\\overline{\\mathrm{F'P}} + \\overline{\\mathrm{PF}} = \\overline{\\mathrm{F'P}} + \\overline{\\mathrm{PQ}}$",
-                "knowledge": r"타원 위의 점 $\mathrm{P}$에서 두 초점까지의 거리의 합은 장축의 길이 $\overline{\mathrm{F'P}} + \overline{\\mathrm{PF}} = 2a$입니다. 그런데 점 $\mathrm{P}$를 지나는 선분 $\mathrm{F'Q}$의 길이도 $\overline{\mathrm{F'Q}} = \overline{\mathrm{F'P}} + \overline{\mathrm{PQ}} = 2a$라고 주어졌으므로, 초등학교 양팔저울처럼 양쪽에서 $\overline{\mathrm{F'P}}$를 빼면 $\overline{\mathrm{PF}} = \overline{\mathrm{PQ}}$가 됩니다!",
+                "title": r"🔰 1단계 · [초등 선분 빼기] $\overline{\mathrm{F'P}} + \overline{\mathrm{PF}} = \overline{\mathrm{F'P}} + \overline{\mathrm{PQ}}$에서 같은 길이 찾기",
+                "title_en": r"🔰 Step 1 · [Elementary Segment Subtraction] Finding equal segments from $\overline{\mathrm{F'P}} + \overline{\mathrm{PF}} = \overline{\mathrm{F'P}} + \overline{\mathrm{PQ}}$",
+                "knowledge": r"타원 위의 점 $\mathrm{P}$에서 두 초점까지의 거리의 합은 장축의 길이 $\overline{\mathrm{F'P}} + \overline{\mathrm{PF}} = 2a$입니다. 그런데 점 $\mathrm{P}$를 지나는 선분 $\mathrm{F'Q}$의 길이도 $\overline{\mathrm{F'Q}} = \overline{\mathrm{F'P}} + \overline{\mathrm{PQ}} = 2a$라고 주어졌으므로, 초등학교 양팔저울처럼 양쪽에서 $\overline{\mathrm{F'P}}$를 빼면 $\overline{\mathrm{PF}} = \overline{\mathrm{PQ}}$가 됩니다!",
                 "knowledge_en": r"By elementary subtraction, since $\overline{\mathrm{F'P}} + \overline{\mathrm{PF}} = 2a$ (ellipse definition) and $\overline{\mathrm{F'Q}} = \overline{\mathrm{F'P}} + \overline{\mathrm{PQ}} = 2a$, subtracting $\overline{\mathrm{F'P}}$ gives $\overline{\mathrm{PF}} = \overline{\mathrm{PQ}}$.",
                 "questions": [
                     {
@@ -801,8 +801,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [삼각비와 닮음] $\\tan\\theta = \\dfrac{\\sqrt{7}}{3}$에서 $\\cos\\theta$와 $2a : c$ 비율 구하기",
-                "title_en": "🌿 Step 2 · [Trigonometry & Similarity] Finding $\\cos\\theta$ and the ratio $2a : c$",
+                "title": r"🌿 2단계 · [삼각비와 닮음] $\tan\theta = \dfrac{\sqrt{7}}{3}$에서 $\cos\theta$와 $2a : c$ 비율 구하기",
+                "title_en": r"🌿 Step 2 · [Trigonometry & Similarity] Finding $\cos\theta$ and the ratio $2a : c$",
                 "knowledge": r"$\angle\mathrm{F'QF} = \theta$일 때 $\tan\theta = \frac{\sqrt{7}}{3}$이면 직각삼각형 피타고라스 정리로 빗변은 $\sqrt{3^2 + 7} = 4$이므로 $\cos\theta = \frac{3}{4}, \sin\theta = \frac{\sqrt{7}}{4}$입니다. 또한 $\overline{\mathrm{F'F}} = \overline{\mathrm{FQ}} = 2c$인 이등변삼각형 $\mathrm{F'FQ}$에서 $\overline{\mathrm{F'Q}} = 2a = 2(2c\cos\theta) = 3c$가 됩니다!",
                 "knowledge_en": r"From $\tan\theta = \frac{\sqrt{7}}{3}$, we have $\cos\theta = \frac{3}{4}$. In isosceles $\triangle\mathrm{F'FQ}$ with $\overline{\mathrm{F'F}} = \overline{\mathrm{FQ}} = 2c$, the base is $\overline{\mathrm{F'Q}} = 2a = 2(2c\cos\theta) = 3c$.",
                 "questions": [
@@ -819,8 +819,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [넓이로 $c$ 구하기] 삼각형 $\\mathrm{PFQ}$의 넓이 $6\\sqrt{7}$ 이용하기",
-                "title_en": "🌱 Step 3 · [Finding $c$ from Area] Using $\\text{Area}(\\triangle\\mathrm{PFQ}) = 6\\sqrt{7}$",
+                "title": r"🌱 3단계 · [넓이로 $c$ 구하기] 삼각형 $\mathrm{PFQ}$의 넓이 $6\sqrt{7}$ 이용하기",
+                "title_en": r"🌱 Step 3 · [Finding $c$ from Area] Using $\text{Area}(\triangle\mathrm{PFQ}) = 6\sqrt{7}$",
                 "knowledge": r"삼각형 $\mathrm{PFQ}$에서 밑변은 $\overline{\mathrm{FQ}} = 2c$이고 높이는 $c\tan\theta = \frac{\sqrt{7}}{3}c$이므로, 넓이는 $\frac{1}{2} \times 2c \times \frac{\sqrt{7}}{3}c = \frac{\sqrt{7}}{3}c^2 = 6\sqrt{7}$입니다.",
                 "knowledge_en": r"$\text{Area}(\triangle\mathrm{PFQ}) = \frac{1}{2}(2c)(c\tan\theta) = \frac{\sqrt{7}}{3}c^2 = 6\sqrt{7}$.",
                 "questions": [
@@ -837,8 +837,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [둘레의 길이 식] 삼각형 $\\mathrm{F'RQ}$의 둘레를 $c$로 나타내기",
-                "title_en": "🌳 Step 4 · [Perimeter Formula] Expressing the perimeter of $\\triangle\\mathrm{F'RQ}$ in terms of $c$",
+                "title": r"🌳 4단계 · [둘레의 길이 식] 삼각형 $\mathrm{F'RQ}$의 둘레를 $c$로 나타내기",
+                "title_en": r"🌳 Step 4 · [Perimeter Formula] Expressing the perimeter of $\triangle\mathrm{F'RQ}$ in terms of $c$",
                 "knowledge": r"선분 $\mathrm{FQ}$가 타원과 만나는 점이 $\mathrm{R}$이므로, 삼각형 $\mathrm{F'RQ}$의 둘레는 $\overline{\mathrm{F'Q}} + \overline{\mathrm{F'R}} + \overline{\mathrm{RQ}} = 2a + (\overline{\mathrm{F'R}} + \overline{\mathrm{RF}}) + \overline{\mathrm{FQ}} = 2a + 2a + 2c = 4a + 2c$입니다! $2a = 3c$이므로 $4a + 2c = 6c + 2c = 8c$입니다.",
                 "knowledge_en": r"Using $\overline{\mathrm{F'R}} + \overline{\mathrm{RF}} = 2a$ and $\overline{\mathrm{FQ}} = 2c$, the perimeter of $\triangle\mathrm{F'RQ}$ is $2a + 2a + 2c = 4a + 2c = 6c + 2c = 8c$.",
                 "questions": [
@@ -855,8 +855,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "💎 5단계 · [최종 종합] $8c = 8 \\times 3\\sqrt{2}$ 계산하기",
-                "title_en": "💎 Step 5 · [Final Synthesis] Computing $8c = 8 \\times 3\\sqrt{2}$",
+                "title": r"💎 5단계 · [최종 종합] $8c = 8 \times 3\sqrt{2}$ 계산하기",
+                "title_en": r"💎 Step 5 · [Final Synthesis] Computing $8c = 8 \times 3\sqrt{2}$",
                 "knowledge": r"$c = 3\sqrt{2}$를 $8c$에 대입하면 $24\sqrt{2}$가 완성됩니다.",
                 "knowledge_en": r"$8 \times 3\sqrt{2} = 24\sqrt{2}$.",
                 "questions": [
@@ -933,17 +933,17 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 29번] 구와 평면의 교선 및 두 평면이 이루는 각과 정사영의 넓이",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #29] Sphere-Plane Intersection, Dihedral Angle, and Area of Orthogonal Projection",
-        "summary_ko": "삼각형 QRS의 넓이 3*sqrt(10)에서 r=1을 구하고, yz평면 단면 벡터로 이면각의 코사인 4/5를 구해 정사영 넓이 S=8*sqrt(10)/5, 25S^2=640 도출하기",
-        "summary_en": "Find r=1 from Area(QRS)=3*sqrt(10), compute cos(theta)=4/5 between planes via yz-plane cross-section, and obtain S=8*sqrt(10)/5 and 25S^2=640.",
+        "summary_ko": r"삼각형 $\mathrm{QRS}$의 넓이 $3\sqrt{10}$에서 $r=1$을 구하고, $yz$평면 단면 벡터로 이면각의 코사인 $\dfrac{4}{5}$를 구해 정사영 넓이 $S=\dfrac{8\sqrt{10}}{5},\ 25S^2=640$ 도출하기",
+        "summary_en": r"Find $r=1$ from $\text{Area}(\triangle\mathrm{QRS})=3\sqrt{10}$, compute $\cos\theta=\dfrac{4}{5}$ between planes via $yz$-plane cross-section, and obtain $S=\dfrac{8\sqrt{10}}{5}$ and $25S^2=640$.",
         "tags": ["기하", "공간도형과공간좌표", "정사영", "이면각", "구의방정식", "단답형", "29번"],
         "symbols": [
-            {"sym": r"$S' = S_0 \cos\theta$", "desc": "두 평면이 이루는 각이 theta일 때 정사영의 넓이 공식", "desc_en": "Orthogonal projection area formula."},
+            {"sym": r"$S' = S_0 \cos\theta$", "desc": r"두 평면이 이루는 각이 $\theta$일 때 정사영의 넓이 공식", "desc_en": "Orthogonal projection area formula."},
             {"sym": r"$\overrightarrow{RA} = (0, -1, 3),\quad \overrightarrow{RQ} = (0, 1, 3)$", "desc": "교선 PR(x축과 평행)에 수직인 yz평면 위 두 직선의 방향벡터", "desc_en": "Vectors in the yz-plane perpendicular to the line of intersection PR."}
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 삼각형의 넓이] 밑변이 $6$이고 넓이가 $3\\sqrt{10}$인 삼각형의 높이 구하기",
-                "title_en": "🔰 Step 1 · [Elementary Triangle Area] Finding the altitude of $\\triangle\\mathrm{QRS}$ with base $6$ and area $3\\sqrt{10}$",
+                "title": r"🔰 1단계 · [초등 삼각형의 넓이] 밑변이 $6$이고 넓이가 $3\sqrt{10}$인 삼각형의 높이 구하기",
+                "title_en": r"🔰 Step 1 · [Elementary Triangle Area] Finding the altitude of $\triangle\mathrm{QRS}$ with base $6$ and area $3\sqrt{10}$",
                 "knowledge": r"구 $S_2$와 평면이 만나 생기는 원에서 지름 $\overline{\mathrm{QS}} = 6$을 밑변으로 하는 삼각형 $\mathrm{QRS}$의 넓이가 $3\sqrt{10}$입니다. 초등학교 삼각형 넓이 공식 $\frac{1}{2} \times 6 \times H = 3\sqrt{10}$으로 높이를 바로 구할 수 있습니다!",
                 "knowledge_en": r"Using the elementary triangle area formula $\frac{1}{2} \times 6 \times H = 3\sqrt{10}$ with base $\overline{\mathrm{QS}} = 6$, we immediately find the altitude $H$.",
                 "questions": [
@@ -978,8 +978,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [이면각의 코사인] 두 평면이 이루는 각 $\\cos\\theta$ 구하기",
-                "title_en": "🌱 Step 3 · [Dihedral Angle] Finding $\\cos\\theta$ between the two planes",
+                "title": r"🌱 3단계 · [이면각의 코사인] 두 평면이 이루는 각 $\cos\theta$ 구하기",
+                "title_en": r"🌱 Step 3 · [Dihedral Angle] Finding $\cos\theta$ between the two planes",
                 "knowledge": r"두 평면 $\mathrm{ARP}$와 $\mathrm{PRQ}$의 교선 $\mathrm{PR}$은 $x$축에 평행합니다. 따라서 $yz$평면 위의 두 벡터 $\overrightarrow{\mathrm{RA}} = (-1, 3)$과 $\overrightarrow{\mathrm{RQ}} = (1, 3)$이 이루는 각이 바로 두 평면의 이면각 $\theta$입니다!",
                 "knowledge_en": r"Since the intersection line $\mathrm{PR}$ is parallel to the $x$-axis, the dihedral angle $\theta$ is the angle between $\overrightarrow{\mathrm{RA}} = (-1, 3)$ and $\overrightarrow{\mathrm{RQ}} = (1, 3)$ in the $yz$-plane.",
                 "questions": [
@@ -996,8 +996,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [정사영의 넓이 $S$] $\\text{Area}(\\triangle\\mathrm{ARP}) \\times \\cos\\theta$ 구하기",
-                "title_en": "🌳 Step 4 · [Projected Area $S$] Computing $\\text{Area}(\\triangle\\mathrm{ARP}) \\times \\cos\\theta$",
+                "title": r"🌳 4단계 · [정사영의 넓이 $S$] $\text{Area}(\triangle\mathrm{ARP}) \times \cos\theta$ 구하기",
+                "title_en": r"🌳 Step 4 · [Projected Area $S$] Computing $\text{Area}(\triangle\mathrm{ARP}) \times \cos\theta$",
                 "knowledge": r"삼각형 $\mathrm{ARP}$는 밑변 $\overline{\mathrm{PR}} = 4$이고 높이가 $\overline{\mathrm{RA}} = \sqrt{10}$이므로 넓이는 $\frac{1}{2} \times 4 \times \sqrt{10} = 2\sqrt{10}$입니다. 따라서 정사영의 넓이는 $S = 2\sqrt{10} \times \frac{4}{5} = \frac{8\sqrt{10}}{5}$입니다.",
                 "knowledge_en": r"$\text{Area}(\triangle\mathrm{ARP}) = \frac{1}{2}(4)(\sqrt{10}) = 2\sqrt{10}$, so $S = 2\sqrt{10} \times \frac{4}{5} = \frac{8\sqrt{10}}{5}$.",
                 "questions": [
@@ -1094,8 +1094,8 @@ PART5_PROBLEMS = [
         "subject": "기하",
         "title": "[2026학년도 10월 고3 기하 30번] 평면벡터의 선형결합(내분점)과 내적의 계산",
         "title_en": "[2026 AY Oct Exam Grade 12 Geometry #30] Linear Combination of Plane Vectors, Internal Division, and Dot Product",
-        "summary_ko": "조건 (가)에서 점 P가 AC를 3:2로 내분함을 찾고, 조건 (나)와 넓이 4*sqrt(5)/5로부터 AB*AC=1을 구하여 AQ*BC=40/3 도출하기",
-        "summary_en": "Deduce from (가) that P divides AC in 3:2, use (나) and Area(APQ)=4*sqrt(5)/5 to find AB.AC=1, and compute AQ.BC=40/3 (p+q=43).",
+        "summary_ko": r"조건 (가)에서 점 $\mathrm{P}$가 $\mathrm{AC}$를 $3:2$로 내분함을 찾고, 조건 (나)와 넓이 $\dfrac{4\sqrt{5}}{5}$로부터 $\overrightarrow{\mathrm{AB}}\cdot\overrightarrow{\mathrm{AC}}=1$을 구하여 $\overrightarrow{\mathrm{AQ}}\cdot\overrightarrow{\mathrm{BC}}=\dfrac{40}{3}$ 도출하기",
+        "summary_en": r"Deduce from (가) that $\mathrm{P}$ divides $\mathrm{AC}$ in $3:2$, use (나) and $\text{Area}(\triangle\mathrm{APQ})=\dfrac{4\sqrt{5}}{5}$ to find $\overrightarrow{\mathrm{AB}}\cdot\overrightarrow{\mathrm{AC}}=1$, and compute $\overrightarrow{\mathrm{AQ}}\cdot\overrightarrow{\mathrm{BC}}=\dfrac{40}{3}$ ($p+q=43$).",
         "tags": ["기하", "평면벡터", "위치벡터", "내분점", "벡터의내적", "단답형", "30번"],
         "symbols": [
             {"sym": r"$2\overrightarrow{PA} + 3\overrightarrow{PC} = \vec{0}$", "desc": "점 P가 선분 AC를 3:2로 내분하는 점임을 뜻하는 벡터 등식", "desc_en": "Vector identity showing P divides segment AC internally in the ratio 3:2."},
@@ -1104,8 +1104,8 @@ PART5_PROBLEMS = [
         ],
         "levels": [
             {
-                "title": "🔰 1단계 · [초등 시소 균형과 비례배분] $2\\overrightarrow{\\mathrm{PA}} + 3\\overrightarrow{\\mathrm{PC}} = \\vec{0}$에서 내분비 찾기",
-                "title_en": "🔰 Step 1 · [Elementary Seesaw Ratio] Finding the internal division ratio from $2\\overrightarrow{\\mathrm{PA}} + 3\\overrightarrow{\\mathrm{PC}} = \\vec{0}$",
+                "title": r"🔰 1단계 · [초등 시소 균형과 비례배분] $2\overrightarrow{\mathrm{PA}} + 3\overrightarrow{\mathrm{PC}} = \vec{0}$에서 내분비 찾기",
+                "title_en": r"🔰 Step 1 · [Elementary Seesaw Ratio] Finding the internal division ratio from $2\overrightarrow{\mathrm{PA}} + 3\overrightarrow{\mathrm{PC}} = \vec{0}$",
                 "knowledge": r"조건 (가)의 $\overrightarrow{\mathrm{AB}} + \overrightarrow{\mathrm{PB}} = 2\overrightarrow{\mathrm{BC}} + 3\overrightarrow{\mathrm{PC}}$에서 $\overrightarrow{\mathrm{AB}} - 2\overrightarrow{\mathrm{BC}}$를 정리하면 $2\overrightarrow{\mathrm{PA}} + 3\overrightarrow{\mathrm{PC}} = \vec{0}$이 됩니다! 초등학교 시소 원리처럼 무게가 $2 : 3$이면 거리의 비는 반대로 $\overline{\mathrm{AP}} : \overline{\mathrm{PC}} = 3 : 2$이므로 $\overline{\mathrm{AP}}$는 전체 $\overline{\mathrm{AC}}$의 $\frac{3}{3 + 2} = \frac{3}{5}$입니다!",
                 "knowledge_en": r"Condition (가) simplifies to $2\overrightarrow{\mathrm{PA}} + 3\overrightarrow{\mathrm{PC}} = \vec{0}$. Like an elementary seesaw, $\overline{\mathrm{AP}} : \overline{\mathrm{PC}} = 3 : 2$, so $\overline{\mathrm{AP}} = \frac{3}{5}\overline{\mathrm{AC}}$.",
                 "questions": [
@@ -1122,8 +1122,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌿 2단계 · [삼각형 넓이 비] $\\text{Area}(\\triangle\\mathrm{APQ}) = \\dfrac{4\\sqrt{5}}{5}$에서 $\\text{Area}(\\triangle\\mathrm{ABC})$ 구하기",
-                "title_en": "🌿 Step 2 · [Area Ratio] Finding $\\text{Area}(\\triangle\\mathrm{ABC})$ from $\\text{Area}(\\triangle\\mathrm{APQ}) = \\dfrac{4\\sqrt{5}}{5}$",
+                "title": r"🌿 2단계 · [삼각형 넓이 비] $\text{Area}(\triangle\mathrm{APQ}) = \dfrac{4\sqrt{5}}{5}$에서 $\text{Area}(\triangle\mathrm{ABC})$ 구하기",
+                "title_en": r"🌿 Step 2 · [Area Ratio] Finding $\text{Area}(\triangle\mathrm{ABC})$ from $\text{Area}(\triangle\mathrm{APQ}) = \dfrac{4\sqrt{5}}{5}$",
                 "knowledge": r"조건 (나)에서 $\overrightarrow{\mathrm{PQ}} = \frac{2}{3}\overrightarrow{\mathrm{BP}}$이므로 $\text{Area}(\triangle\mathrm{ABP}) = \frac{3}{2}\text{Area}(\triangle\mathrm{APQ})$이고, 다시 $\overline{\mathrm{AC}} = \frac{5}{3}\overline{\mathrm{AP}}$이므로 $\text{Area}(\triangle\mathrm{ABC}) = \frac{5}{3}\text{Area}(\triangle\mathrm{ABP}) = \frac{5}{3} \times \frac{3}{2} \times \frac{4\sqrt{5}}{5} = 2\sqrt{5}$입니다!",
                 "knowledge_en": r"Since $\overrightarrow{\mathrm{PQ}} = \frac{2}{3}\overrightarrow{\mathrm{BP}}$ and $\overline{\mathrm{AP}} = \frac{3}{5}\overline{\mathrm{AC}}$, $\text{Area}(\triangle\mathrm{ABC}) = \frac{5}{3} \times \frac{3}{2}\text{Area}(\triangle\mathrm{APQ}) = 2\sqrt{5}$.",
                 "questions": [
@@ -1146,8 +1146,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌱 3단계 · [내적 구하기] $\\cos A$와 $\\overrightarrow{\\mathrm{AB}} \\cdot \\overrightarrow{\\mathrm{AC}}$ 계산하기",
-                "title_en": "🌱 Step 3 · [Dot Product] Computing $\\cos A$ and $\\overrightarrow{\\mathrm{AB}} \\cdot \\overrightarrow{\\mathrm{AC}}$",
+                "title": r"🌱 3단계 · [내적 구하기] $\cos A$와 $\overrightarrow{\mathrm{AB}} \cdot \overrightarrow{\mathrm{AC}}$ 계산하기",
+                "title_en": r"🌱 Step 3 · [Dot Product] Computing $\cos A$ and $\overrightarrow{\mathrm{AB}} \cdot \overrightarrow{\mathrm{AC}}$",
                 "knowledge": r"예각 $A$에 대하여 $\cos A = \sqrt{1 - \left(\frac{4\sqrt{5}}{9}\right)^2} = \sqrt{1 - \frac{80}{81}} = \frac{1}{9}$입니다. 따라서 내적 $\overrightarrow{\mathrm{AB}} \cdot \overrightarrow{\mathrm{AC}} = 3 \times 3 \times \frac{1}{9} = 1$입니다!",
                 "knowledge_en": r"For acute angle $A$, $\cos A = \sqrt{1 - \frac{80}{81}} = \frac{1}{9}$, so $\overrightarrow{\mathrm{AB}} \cdot \overrightarrow{\mathrm{AC}} = 3 \times 3 \times \frac{1}{9} = 1$.",
                 "questions": [
@@ -1164,8 +1164,8 @@ PART5_PROBLEMS = [
                 ]
             },
             {
-                "title": "🌳 4단계 · [벡터 전개] $\\overrightarrow{\\mathrm{AQ}} \\cdot \\overrightarrow{\\mathrm{BC}}$를 전개하여 계산하기",
-                "title_en": "🌳 Step 4 · [Expanding Dot Product] Evaluating $\\overrightarrow{\\mathrm{AQ}} \\cdot \\overrightarrow{\\mathrm{BC}}$",
+                "title": r"🌳 4단계 · [벡터 전개] $\overrightarrow{\mathrm{AQ}} \cdot \overrightarrow{\mathrm{BC}}$를 전개하여 계산하기",
+                "title_en": r"🌳 Step 4 · [Expanding Dot Product] Evaluating $\overrightarrow{\mathrm{AQ}} \cdot \overrightarrow{\mathrm{BC}}$",
                 "knowledge": r"$\overrightarrow{\mathrm{AQ}} = \overrightarrow{\mathrm{AP}} + \overrightarrow{\mathrm{PQ}} = \frac{3}{5}\overrightarrow{\mathrm{AC}} + \frac{2}{3}\left(\frac{3}{5}\overrightarrow{\mathrm{AC}} - \overrightarrow{\mathrm{AB}}\right) = \overrightarrow{\mathrm{AC}} - \frac{2}{3}\overrightarrow{\mathrm{AB}}$이고, $\overrightarrow{\mathrm{BC}} = \overrightarrow{\mathrm{AC}} - \overrightarrow{\mathrm{AB}}$입니다! 두 벡터를 내적하면 $|\overrightarrow{\mathrm{AC}}|^2 - \frac{5}{3}(\overrightarrow{\mathrm{AB}} \cdot \overrightarrow{\mathrm{AC}}) + \frac{2}{3}|\overrightarrow{\mathrm{AB}}|^2$이 됩니다.",
                 "knowledge_en": r"Since $\overrightarrow{\mathrm{AQ}} = \overrightarrow{\mathrm{AC}} - \frac{2}{3}\overrightarrow{\mathrm{AB}}$ and $\overrightarrow{\mathrm{BC}} = \overrightarrow{\mathrm{AC}} - \overrightarrow{\mathrm{AB}}$, their dot product is $|\overrightarrow{\mathrm{AC}}|^2 - \frac{5}{3}(\overrightarrow{\mathrm{AB}} \cdot \overrightarrow{\mathrm{AC}}) + \frac{2}{3}|\overrightarrow{\mathrm{AB}}|^2$.",
                 "questions": [

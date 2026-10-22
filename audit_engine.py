@@ -166,6 +166,46 @@ def check_file_rules(filepath, content):
                     'severity': 'WARNING',
                     'msg': '1단계(Step 1)에 초등학생 눈높이 직관 디딤돌(초등 개념, 구구단, 사칙연산 연계)이 누락되었습니다.'
                 })
+
+    # 6. 수식(MathJax / LaTeX) 무결성 검사 (GEMINI.md Rule 5)
+    m_cfg = re.search(r'window\.MathJax\s*=\s*\{[^\n<]+', content)
+    if m_cfg and r"'\('" in m_cfg.group(0):
+        issues.append({
+            'rule': 'MATHJAX_BROKEN_PAREN_DELIMITER',
+            'severity': 'ERROR',
+            'msg': "MathJax inlineMath 설정에 단일 백슬래시 ['\\(','\\)']가 포함되어 일반 괄호 ( ) 전체가 수식으로 오인식됩니다. ['\\\\(','\\\\)']로 수정하십시오."
+        })
+
+    no_script = re.sub(r'<(script|style)\b[^>]*>.*?</\1>', '', content, flags=re.S | re.I)
+    math_segments = []
+    for attr in re.finditer(r'(data-exp(?:-en)?)="([^"]*)"', no_script):
+        for m in re.finditer(r'\$\$[\s\S]*?\$\$|\$[^\$]*?\$', attr.group(2)):
+            math_segments.append((attr.group(1), m.group(0)))
+    no_attrs = re.sub(r'\b(?:data-[a-z-]+|alt|title|content)="[^"]*"', '', no_script)
+    for m in re.finditer(r'\$\$[\s\S]*?\$\$|\$[^\$]*?\$', no_attrs):
+        math_segments.append(('body', m.group(0)))
+
+    for loc, raw_math in math_segments:
+        inner = raw_math[2:-2] if raw_math.startswith('$$') else raw_math[1:-1]
+        if re.search(r'[\x00-\x08\x09\x0b\x0c]', inner):
+            issues.append({
+                'rule': 'MATH_TAB_OR_CTRL_CORRUPTION',
+                'severity': 'ERROR',
+                'msg': f"[{loc}] 수식 내부에 탭(\\t) 또는 제어문자가 혼입되어 수식이 깨졌습니다: {repr(raw_math[:60])}"
+            })
+        if not re.search(r'\\begin\{(array|cases|aligned|align|matrix|pmatrix|bmatrix|vmatrix)\}', inner):
+            if re.search(r'\\\\[a-zA-Z]', inner):
+                issues.append({
+                    'rule': 'MATH_DOUBLE_BACKSLASH_CORRUPTION',
+                    'severity': 'ERROR',
+                    'msg': f"[{loc}] 수식 내부에 이중 백슬래시(\\\\cmd)가 혼입되어 수식이 깨졌습니다: {raw_math[:60]}"
+                })
+        if loc == 'body' and re.search(r'<[a-zA-Z/!]', inner):
+            issues.append({
+                'rule': 'MATH_UNSPACED_LT_HTML_TAG',
+                'severity': 'ERROR',
+                'msg': f"[{loc}] 수식 내부의 '<문자'가 HTML 태그로 오인식되어 잘립니다('< '로 공백 추가 필요): {raw_math[:60]}"
+            })
         
     return issues
 
