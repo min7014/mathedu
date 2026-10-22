@@ -48,10 +48,52 @@ def extract_clean_qnum(raw_qnum: str) -> str:
     return m.group(1) if m else str(raw_qnum)
 
 
-def build_question_block(q_data: dict, is_final: bool = False) -> str:
+def build_question_block(
+    q_data: dict,
+    is_final: bool = False,
+    step_idx: int = 0,
+    know_ko: str = "",
+    know_en: str = "",
+    sol_ko: str = "",
+    sol_en: str = "",
+) -> str:
     ans = int(q_data["answer"])
-    exp_ko = html.escape(render_md_inline(q_data.get("exp", "")), quote=True)
-    exp_en = html.escape(render_md_inline(q_data.get("exp_en", "")), quote=True)
+    raw_exp_ko = render_md_inline(q_data.get("exp", ""))
+    raw_exp_en = render_md_inline(q_data.get("exp_en", ""))
+
+    if is_final:
+        if sol_ko:
+            raw_exp_ko = (
+                f"<b>📌 [최종 본문항 핵심 요약]</b><br>{raw_exp_ko}"
+                f'<hr style="border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0">'
+                f"{sol_ko}"
+            )
+        if sol_en:
+            raw_exp_en = (
+                f"<b>📌 [Final Problem Core Summary]</b><br>{raw_exp_en}"
+                f'<hr style="border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0">'
+                f"{sol_en}"
+            )
+    else:
+        if know_ko and know_ko not in raw_exp_ko:
+            if raw_exp_ko.startswith("<b>["):
+                raw_exp_ko = f"{raw_exp_ko}<br><br><b>📖 [제{step_idx}단계 핵심 원리 및 유도 과정]</b><br>{know_ko}"
+            else:
+                raw_exp_ko = (
+                    f"<b>✅ [제{step_idx}단계 정답 및 핵심 해설]</b><br>{raw_exp_ko}"
+                    f"<br><br><b>📖 [제{step_idx}단계 핵심 원리 및 유도 과정]</b><br>{know_ko}"
+                )
+        if know_en and know_en not in raw_exp_en:
+            if raw_exp_en.startswith("<b>["):
+                raw_exp_en = f"{raw_exp_en}<br><br><b>📖 [Step {step_idx} Core Principle &amp; Derivation]</b><br>{know_en}"
+            else:
+                raw_exp_en = (
+                    f"<b>✅ [Step {step_idx} Answer &amp; Explanation]</b><br>{raw_exp_en}"
+                    f"<br><br><b>📖 [Step {step_idx} Core Principle &amp; Derivation]</b><br>{know_en}"
+                )
+
+    exp_ko = html.escape(raw_exp_ko, quote=True)
+    exp_en = html.escape(raw_exp_en, quote=True)
     lvl_ko = q_data.get("level_label", "최종 본문항" if is_final else "디딤돌 문제")
     lvl_en = q_data.get("level_label_en", "Final Exam Problem" if is_final else "Scaffolding Step")
     stem_ko = render_md_inline(q_data["stem"])
@@ -118,25 +160,80 @@ def build_problem_html(prob: dict) -> str:
         en_div = f'<div class="bilingual-en">{desc_en}</div>' if desc_en else ""
         sym_items_html += f'<div><b>{sym_l}</b> — {desc_ko}{en_div}</div>'
 
-    # Levels (Step 1 ~ Step 5+)
+    # Levels (Step 1 ~ Step 5+) & Scaffolding Synthesis for Solution
     levels_html = ""
-    for lv in prob.get("levels", []):
+    ladder_items_ko = []
+    ladder_items_en = []
+    levels_list = prob.get("levels", [])
+    for s_idx, lv in enumerate(levels_list, 1):
         lv_title_ko = render_md_inline(lv["title"])
-        lv_title_en = render_md_inline(lv.get("title_en", ""))
+        lv_title_en = render_md_inline(lv.get("title_en", f"Step {s_idx}"))
         know_ko = render_md_inline(lv.get("knowledge", ""))
         know_en = render_md_inline(lv.get("knowledge_en", ""))
-        qs_html = "".join(build_question_block(q, is_final=False) for q in lv.get("questions", []))
+        qs_html = "".join(
+            build_question_block(q, is_final=False, step_idx=s_idx, know_ko=know_ko, know_en=know_en)
+            for q in lv.get("questions", [])
+        )
         levels_html += f"""<h2>{lv_title_ko}<span class="bilingual-en">{lv_title_en}</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>{know_ko}<div class="bilingual-en"><b>Prerequisite Knowledge:</b> {know_en}</div></div>{qs_html}"""
+
+        q0 = lv["questions"][0] if lv.get("questions") else None
+        if q0:
+            a_i = int(q0["answer"]) - 1
+            opts = q0.get("options", [])
+            ans_txt = render_md_inline(opts[a_i]) if 0 <= a_i < len(opts) else str(q0["answer"])
+            q_exp_ko = render_md_inline(q0.get("exp", ""))
+            q_exp_en = render_md_inline(q0.get("exp_en", ""))
+            ladder_items_ko.append(
+                f"  <li><b>{lv_title_ko}</b><br>"
+                f"    &nbsp;&nbsp;• <b>핵심 개념 및 원리</b>: {know_ko}<br>"
+                f"    &nbsp;&nbsp;• <b>단계 확인 정답 ({ans_txt})</b>: {q_exp_ko}</li>"
+            )
+            ladder_items_en.append(
+                f"  <li><b>{lv_title_en}</b><br>"
+                f"    &nbsp;&nbsp;• <b>Core Principle</b>: {know_en}<br>"
+                f"    &nbsp;&nbsp;• <b>Step Verification ({ans_txt})</b>: {q_exp_en}</li>"
+            )
 
     # Final problem & solution
     final_data = prob["final"]
     sol_ko = render_md_inline(final_data["solution"])
     sol_en = render_md_inline(final_data.get("solution_en", ""))
+
+    if ladder_items_ko and "🪜 [초등 눈높이 디딤돌" not in sol_ko:
+        n_st = len(ladder_items_ko)
+        ladder_block_ko = (
+            f"\n<h4>🪜 [초등 눈높이 디딤돌 전 단계(1단계~{n_st}단계) 완전 연결 상세 해설]</h4>\n"
+            f"<p>위 디딤돌 문제에서 밟아 온 $1$단계부터 ${n_st}$단계까지의 작은 조각들을 순서대로 연결하면 본문항의 풀이가 빈틈없이 완성됩니다.</p>\n"
+            f"<ul>\n" + "\n".join(ladder_items_ko) + "\n</ul>\n"
+        )
+        if "<h4>✨" in sol_ko:
+            sol_ko = sol_ko.replace("<h4>✨", ladder_block_ko + "\n<h4>✨", 1)
+        else:
+            sol_ko = sol_ko + ladder_block_ko
+
+    if ladder_items_en and "🪜 [Complete Step-by-Step" not in sol_en:
+        n_st_en = len(ladder_items_en)
+        ladder_block_en = (
+            f"\n<h4>🪜 [Complete Step-by-Step Scaffolding Walkthrough (Steps 1–{n_st_en})]</h4>\n"
+            f"<p>Connecting each elementary-grounded scaffolding step from Step 1 to Step {n_st_en} completes the entire derivation without any logical gaps:</p>\n"
+            f"<ul>\n" + "\n".join(ladder_items_en) + "\n</ul>\n"
+        )
+        if "<h4>✨" in sol_en:
+            sol_en = sol_en.replace("<h4>✨", ladder_block_en + "\n<h4>✨", 1)
+        else:
+            sol_en = sol_en + ladder_block_en
+
     # Ensure sol_en is at least 120 chars for audit_engine
     if len(sol_en.strip()) < 120:
         sol_en = sol_en + "\n<p>💡 <b>Key Takeaway</b>: Master each micro-scaffolding step from elementary arithmetic to complete the rigorous derivation accurately.</p>"
 
-    final_q_block = build_question_block(final_data, is_final=True)
+    final_q_block = build_question_block(
+        final_data,
+        is_final=True,
+        step_idx=len(levels_list) + 1,
+        sol_ko=sol_ko,
+        sol_en=sol_en,
+    )
     ans_idx = int(final_data["answer"]) - 1
     final_ans_display = final_data["options"][ans_idx] if 0 <= ans_idx < len(final_data["options"]) else str(final_data["answer"])
 
