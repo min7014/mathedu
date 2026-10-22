@@ -20,6 +20,7 @@ from oct2026_part3_prob import PART3_PROBLEMS
 from oct2026_part4_calc import PART4_PROBLEMS
 from oct2026_part5_geom import PART5_PROBLEMS
 import min7014_matcher
+from visual_diagram_engine import build_visual_and_schematic_block
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 BOARD_DIR = os.path.join(BASE_DIR, "board")
@@ -164,6 +165,8 @@ def build_problem_html(prob: dict) -> str:
     levels_html = ""
     ladder_items_ko = []
     ladder_items_en = []
+    step_summaries_ko = []
+    step_summaries_en = []
     levels_list = prob.get("levels", [])
     for s_idx, lv in enumerate(levels_list, 1):
         lv_title_ko = render_md_inline(lv["title"])
@@ -183,6 +186,8 @@ def build_problem_html(prob: dict) -> str:
             ans_txt = render_md_inline(opts[a_i]) if 0 <= a_i < len(opts) else str(q0["answer"])
             q_exp_ko = render_md_inline(q0.get("exp", ""))
             q_exp_en = render_md_inline(q0.get("exp_en", ""))
+            step_summaries_ko.append(f"{lv_title_ko} ⇒ {ans_txt}")
+            step_summaries_en.append(f"{lv_title_en} ⇒ {ans_txt}")
             ladder_items_ko.append(
                 f"  <li><b>{lv_title_ko}</b><br>"
                 f"    &nbsp;&nbsp;• <b>핵심 개념 및 원리</b>: {know_ko}<br>"
@@ -198,6 +203,40 @@ def build_problem_html(prob: dict) -> str:
     final_data = prob["final"]
     sol_ko = render_md_inline(final_data["solution"])
     sol_en = render_md_inline(final_data.get("solution_en", ""))
+    ans_idx = int(final_data["answer"]) - 1
+    final_ans_display = final_data["options"][ans_idx] if 0 <= ans_idx < len(final_data["options"]) else str(final_data["answer"])
+
+    if "math-visual-diagram" not in sol_ko:
+        vis_ko = build_visual_and_schematic_block(
+            pid=slug,
+            title_ko=title_ko,
+            step_summaries_ko=step_summaries_ko,
+            ans_str=final_ans_display,
+            sol_ko_plain=sol_ko,
+            lang="ko",
+        )
+        if "<h4>📐" in sol_ko:
+            sol_ko = sol_ko.replace("<h4>📐", vis_ko + "\n<h4>📐", 1)
+        elif "</p>" in sol_ko:
+            sol_ko = sol_ko.replace("</p>", "</p>\n" + vis_ko, 1)
+        else:
+            sol_ko = vis_ko + "\n" + sol_ko
+
+    if "math-visual-diagram" not in sol_en:
+        vis_en = build_visual_and_schematic_block(
+            pid=slug,
+            title_ko=title_en,
+            step_summaries_ko=step_summaries_en if step_summaries_en else step_summaries_ko,
+            ans_str=final_ans_display,
+            sol_ko_plain=sol_ko,
+            lang="en",
+        )
+        if "<h4>📐" in sol_en:
+            sol_en = sol_en.replace("<h4>📐", vis_en + "\n<h4>📐", 1)
+        elif "</p>" in sol_en:
+            sol_en = sol_en.replace("</p>", "</p>\n" + vis_en, 1)
+        else:
+            sol_en = vis_en + "\n" + sol_en
 
     if ladder_items_ko and "🪜 [초등 눈높이 디딤돌" not in sol_ko:
         n_st = len(ladder_items_ko)
@@ -234,8 +273,6 @@ def build_problem_html(prob: dict) -> str:
         sol_ko=sol_ko,
         sol_en=sol_en,
     )
-    ans_idx = int(final_data["answer"]) - 1
-    final_ans_display = final_data["options"][ans_idx] if 0 <= ans_idx < len(final_data["options"]) else str(final_data["answer"])
 
     meta_desc = html.escape(
         f"2026학년도 10월 학력평가 고3 {subject} {qnum_clean}번 · {title_ko}. 초등학생도 풀 수 있는 단계별 디딤돌 5지선다 퀴즈 및 상세 해설. Step-by-step scaffolding quiz.",

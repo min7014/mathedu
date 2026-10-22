@@ -108,7 +108,9 @@ def check_file_rules(filepath, content):
                 })
                 
             # 3-3. 영문 풀이 중간 잘림(Truncation) 검사
-            en_match = re.search(r'<div class="bilingual-en">(.*?)</div>', sol_text, re.DOTALL)
+            en_match = re.search(r'<div class="bilingual-en">(.*)</div>\s*$', sol_text, re.DOTALL)
+            if not en_match:
+                en_match = re.search(r'<div class="bilingual-en">(.*?)</div>', sol_text, re.DOTALL)
             if en_match:
                 en_body = en_match.group(1).strip()
                 if len(en_body) < 100 and not rel_path.endswith('index.html'):
@@ -150,6 +152,21 @@ def check_file_rules(filepath, content):
                     'len': len(sol_text.strip()),
                     'msg': f"상세 풀이(<div class=\"sol\">) 길이가 너무 압축적입니다 ({len(sol_text.strip())}자, 최소 1000자 이상 권장)."
                 })
+
+            # 3-5. 도식화 풀이 및 의도적 시각 도형 작도 필수 검사 (GEMINI.md Rule 7)
+            if not rel_path.endswith('index.html'):
+                if '<svg' not in sol_text or 'math-visual-diagram' not in sol_text:
+                    issues.append({
+                        'rule': 'VISUAL_DIAGRAM_REQUIRED',
+                        'severity': 'ERROR',
+                        'msg': '풀이 블록(<div class="sol">)에 의도적으로 작도한 시각적 기하·개념 도형(<svg> / .math-visual-diagram)이 누락되었습니다.'
+                    })
+                if 'math-schematic-flow' not in sol_text:
+                    issues.append({
+                        'rule': 'SCHEMATIC_FLOW_REQUIRED',
+                        'severity': 'ERROR',
+                        'msg': '풀이 블록(<div class="sol">)에 도식화 풀이 흐름도(.math-schematic-flow)가 누락되었습니다.'
+                    })
                     
     # 4. 반응형 UI 스타일 누락 검사
     if '<div class="sol">' in content and '.sol .bilingual-en' not in content:
