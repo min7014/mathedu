@@ -166,6 +166,28 @@ def check_file_rules(filepath, content):
                     'severity': 'WARNING',
                     'msg': '1단계(Step 1)에 초등학생 눈높이 직관 디딤돌(초등 개념, 구구단, 사칙연산 연계)이 누락되었습니다.'
                 })
+        if '잠깐!' in content:
+            issues.append({
+                'rule': 'DRAFT_MARKER_LEAK',
+                'severity': 'ERROR',
+                'msg': "해설 또는 본문에 초안 작성 흔적('잠깐!')이 남아 있습니다."
+            })
+        base_slug = os.path.splitext(os.path.basename(rel_path))[0].replace('_offline', '')
+        killer_min_steps = {
+            'c261015': 8, 'c261021': 8, 'c261022': 8,
+            'c2610p29': 8, 'c2610p30': 10,
+            'c2610m28': 8, 'c2610m29': 8, 'c2610m30': 8,
+            'c2610g28': 8, 'c2610g29': 8, 'c2610g30': 8,
+        }
+        if base_slug in killer_min_steps:
+            # Each scaffolding step has one <div class="know"> block
+            step_q_count = len(re.findall(r'<div class="know">', content))
+            if step_q_count < killer_min_steps[base_slug]:
+                issues.append({
+                    'rule': 'KILLER_SCAFFOLDING_DEPTH',
+                    'severity': 'ERROR',
+                    'msg': f"고난도/킬러 문항({base_slug})의 디딤돌 단계 수({step_q_count}단계)가 최소 기준({killer_min_steps[base_slug]}단계)보다 적습니다."
+                })
 
     # 6. 수식(MathJax / LaTeX) 무결성 검사 (GEMINI.md Rule 5)
     m_cfg = re.search(r'window\.MathJax\s*=\s*\{[^\n<]+', content)
