@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30923.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30923">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="e0d1c816">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="f7d30e4d">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -766,7 +766,47 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Utilize the asymptotic equivalence $\sin(ax) \sim ax$ as $x \to 0$ to read off the ratio of linear coefficients immediately.
 </p>
   </div>
-</div><div class="q" data-ans="5" data-exp="$\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{x \to 0}\frac{\sin 5x}{5x} \times 5 = 5$입니다." data-exp-en="This is $\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{x \to 0}\frac{\sin 5x}{5x} \times 5 = 5$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\lim_{x \to 0}\frac{\sin 5x}{x}$의 값은? [2점]</span><div class="bilingual-en">What is the value of $\lim_{x \to 0}\frac{\sin 5x}{x}$? [2 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="5" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{x \to 0}\frac{\sin 5x}{5x} \times 5 = 5$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;삼각함수의 기본 극한 공식($\lim_{t \to 0}\frac{\sin t}{t} = 1$)&lt;/b&gt;의 형태 맞추기 기법을 평가합니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 삼각함수 기본 극한 형태 만들기&lt;/b&gt;&lt;br&gt;
+  $\lim_{x \to 0}\frac{\sin 5x}{x}$ 에서 분자의 삼각함수 내부 각이 $5x$이므로, 분모에도 동일하게 $5x$가 오도록 식을 변형합니다.&lt;br&gt;
+  $$\frac{\sin 5x}{x} = \frac{\sin 5x}{5x} \times 5$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: 극한의 곱셈 성질 및 치환 적용&lt;/b&gt;&lt;br&gt;
+  $x \to 0$ 일 때 $5x \to 0$ 이므로 기본 극한 공식에 의해 다음이 성립합니다.&lt;br&gt;
+  $$\lim_{x \to 0} \frac{\sin 5x}{5x} = 1$$
+  따라서 전체 극한값은 다음과 같습니다.&lt;br&gt;
+  $$\lim_{x \to 0} \left( \frac{\sin 5x}{5x} \times 5 \right) = 1 \times 5 = 5$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 극한값은 $5$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;⑤번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: $x \to 0$ 일 때 $\sin(ax) \approx ax$ 라는 일차 근사 성질에 의해 $\lim_{x \to 0}\frac{\sin ax}{bx} = \frac{a}{b}$ 공식을 즉각 적용하면 $1$초 만에 답 $5$를 도출할 수 있습니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;This is $\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{x \to 0}\frac{\sin 5x}{5x} \times 5 = 5$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem verifies procedural fluency with the &lt;b&gt;fundamental trigonometric limit ($\lim_{t \to 0}\frac{\sin t}{t} = 1$)&lt;/b&gt; via argument matching.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Match the denominator to the sine argument&lt;/b&gt;&lt;br&gt;
+  Since the argument of the sine function is $5x$, adjust the denominator to $5x$ by multiplying and dividing by $5$:&lt;br&gt;
+  $$\frac{\sin 5x}{x} = \frac{\sin 5x}{5x} \cdot 5$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Evaluate the limit&lt;/b&gt;&lt;br&gt;
+  As $x \to 0$, $5x \to 0$. Applying the standard trigonometric limit:&lt;br&gt;
+  $$\lim_{x \to 0}\frac{\sin 5x}{x} = \lim_{5x \to 0}\left(\frac{\sin 5x}{5x}\right) \cdot 5 = 1 \cdot 5 = 5$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The evaluated limit is $5$.&lt;br&gt;
+  Hence, the correct choice is &lt;b&gt;Option ⑤&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Utilize the asymptotic equivalence $\sin(ax) \sim ax$ as $x \to 0$ to read off the ratio of linear coefficients immediately.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\lim_{x \to 0}\frac{\sin 5x}{x}$의 값은? [2점]</span><div class="bilingual-en">What is the value of $\lim_{x \to 0}\frac{\sin 5x}{x}$? [2 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>1</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>3</div><div class="opt"><span class="n">4</span>4</div><div class="opt"><span class="n">5</span>5</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1195,8 +1235,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30923';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = 'e0d1c816';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = 'f7d30e4d';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30923.html';
 
@@ -1221,8 +1261,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30923';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || 'e0d1c816';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || 'f7d30e4d';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30923.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

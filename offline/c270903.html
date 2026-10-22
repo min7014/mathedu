@@ -574,8 +574,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270903.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270903">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="87ac6473">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="6a30fbd5">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -774,7 +774,51 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Key Tip</b>: Connecting known terms via index gap $(m - k)d$ avoids redundant computation of $a_1$.
 </p>
   </div>
-</div><div class="q" data-ans="2" data-exp="$a_{10} - a_7 = 3d = 9$ 이므로 $d = 3$. 따라서 $a_7 = a_2 + 5d = 2 + 5(3) = 17$ 입니다. 정답은 ②입니다." data-exp-en="$a_{10} - a_7 = 3d = 9$ so $d = 3$. Hence $a_7 = a_2 + 5d = 2 + 5(3) = 17$. The correct answer is ②."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등차수열 $\{a_n\}$에 대하여 $a_2 = 2, a_{10} - a_7 = 9$ 일 때, $a_7$의 값은?</span><div class="bilingual-en">When the arithmetic sequence $\{a_n\}$ is $a_2 = 2, a_{10} - a_7 = 9$, what is the value of $a_7$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$16$</div><div class="opt"><span class="n">2</span>$17$</div><div class="opt"><span class="n">3</span>$18$</div><div class="opt"><span class="n">4</span>$19$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div><div class="q" data-ans="2" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$a_{10} - a_7 = 3d = 9$ 이므로 $d = 3$. 따라서 $a_7 = a_2 + 5d = 2 + 5(3) = 17$ 입니다. 정답은 ②입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;등차수열의 일반항 성질&lt;/b&gt;과 항 번호 차이에 따른 공차($d$)의 배수 관계($a_m - a_n = (m-n)d$)를 활용하여 특정 항의 값을 효율적으로 구하는 능력을 평가합니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 항의 차를 이용한 공차 $d$ 결정&lt;/b&gt;&lt;br&gt;
+  등차수열 $\{a_n\}$의 공차를 $d$라 하면, 일반항은 $a_n = a_1 + (n-1)d$입니다. 따라서 제10항과 제7항의 차는 다음과 같습니다:&lt;br&gt;
+  $$a_{10} - a_7 = \{a_1 + 9d\} - \{a_1 + 6d\} = 3d$$&lt;br&gt;
+  조건에서 $a_{10} - a_7 = 9$라 하였으므로:&lt;br&gt;
+  $$3d = 9 \implies d = 3$$&lt;br&gt;
+  &lt;b&gt;2단계: $a_2$를 기준으로 $a_7$ 표현 및 계산&lt;/b&gt;&lt;br&gt;
+  $a_7$을 구하기 위해 첫째항 $a_1$을 거치지 않고, 이미 주어진 $a_2$에서 공차 $d$를 $(7-2)=5$번 더하는 것이 가장 빠릅니다:&lt;br&gt;
+  $$a_7 = a_2 + (7 - 2)d = a_2 + 5d$$&lt;br&gt;
+  주어진 $a_2 = 2$와 $d = 3$을 대입합니다:&lt;br&gt;
+  $$a_7 = 2 + 5 \times 3 = 2 + 15 = 17$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  따라서 제7항의 값은 $17$입니다.&lt;br&gt;
+  바른 답은 &lt;b&gt;②번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 등차수열 문제에서 $a_m - a_n = (m-n)d$ 및 $a_m = a_k + (m-k)d$ 성질을 활용하면 불필요한 첫째항 $a_1$ 연립 방정식을 생략하고 5초 만에 암산으로도 정답을 도출할 수 있습니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;$a_{10} - a_7 = 3d = 9$ so $d = 3$. Hence $a_7 = a_2 + 5d = 2 + 5(3) = 17$. The correct answer is ②.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem evaluates understanding of &lt;b&gt;arithmetic sequences&lt;/b&gt;, specifically the index distance property: $a_m - a_n = (m-n)d$.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Find the common difference $d$&lt;/b&gt;&lt;br&gt;
+  For an arithmetic sequence with common difference $d$, the difference between the 10th and 7th terms is:&lt;br&gt;
+  $$a_{10} - a_7 = (10 - 7)d = 3d$$&lt;br&gt;
+  Given $a_{10} - a_7 = 9$, we have:&lt;br&gt;
+  $$3d = 9 \implies d = 3$$&lt;br&gt;
+  &lt;b&gt;Step 2: Calculate $a_7$ directly from $a_2$&lt;/b&gt;&lt;br&gt;
+  Express $a_7$ in terms of $a_2$ and $d$ without solving for $a_1$:&lt;br&gt;
+  $$a_7 = a_2 + (7 - 2)d = a_2 + 5d$$&lt;br&gt;
+  Substitute $a_2 = 2$ and $d = 3$:&lt;br&gt;
+  $$a_7 = 2 + 5(3) = 2 + 15 = 17$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;
+&lt;p&gt;
+  The value of $a_7$ is $17$.&lt;br&gt;
+  Therefore, the correct choice is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Key Tip&lt;/b&gt;: Connecting known terms via index gap $(m - k)d$ avoids redundant computation of $a_1$.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등차수열 $\{a_n\}$에 대하여 $a_2 = 2, a_{10} - a_7 = 9$ 일 때, $a_7$의 값은?</span><div class="bilingual-en">When the arithmetic sequence $\{a_n\}$ is $a_2 = 2, a_{10} - a_7 = 9$, what is the value of $a_7$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$16$</div><div class="opt"><span class="n">2</span>$17$</div><div class="opt"><span class="n">3</span>$18$</div><div class="opt"><span class="n">4</span>$19$</div><div class="opt"><span class="n">5</span>$20$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -1222,8 +1266,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270903';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = '87ac6473';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '6a30fbd5';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270903.html';
 
@@ -1248,8 +1292,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270903';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || '87ac6473';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '6a30fbd5';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270903.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

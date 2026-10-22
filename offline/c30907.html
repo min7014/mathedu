@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30907.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30907">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="da199393">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="479fed6e">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -797,7 +797,64 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Vieta's formulas provide instantaneous product solutions once real roots are confirmed via the discriminant ($D > 0$).
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ 두 근의 곱은 12입니다." data-exp-en="$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ The product of two roots is 12."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ 가 실수 전체의 집합에서 연속이 되도록 하는 모든 상수 $a$의 값의 곱은? [3점]</span><div class="bilingual-en">What product of the values ​​of all constants $a$ makes the function $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ continuous over the set of real numbers? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>12</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ 두 근의 곱은 12입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;구간별로 다르게 정의된 함수의 연속성 조건&lt;/b&gt;을 바탕으로, 경계점에서의 좌극한, 우극한, 함숫값이 일치함을 이용하여 미정계수 $a$에 관한 이차방정식을 세우고 모든 해의 곱을 구하는 문제입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 연속성 정의 및 경계점 조건 분석&lt;/b&gt;&lt;br&gt;
+  함수 $f(x)$가 실수 전체의 집합에서 연속이 되기 위해서는 두 규칙이 나뉘는 경계점인 $x=4$에서 연속이어야 합니다.&lt;br&gt;
+  즉, 다음 조건이 성립해야 합니다.&lt;br&gt;
+  $$\lim_{x \to 4^-} f(x) = \lim_{x \to 4^+} f(x) = f(4)$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: 좌극한과 우극한(함숫값) 계산&lt;/b&gt;&lt;br&gt;
+  • $x &lt; 4$ 일 때 $f(x) = (x-a)^2$ 이므로 좌극한은:&lt;br&gt;
+  $$\lim_{x \to 4^-} f(x) = (4-a)^2 = a^2 - 8a + 16$$
+  • $x \ge 4$ 일 때 $f(x) = 2x-4$ 이므로 우극한 및 함숫값은:&lt;br&gt;
+  $$\lim_{x \to 4^+} f(x) = f(4) = 2(4) - 4 = 4$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 이차방정식 수립 및 $a$의 값의 곱 산출&lt;/b&gt;&lt;br&gt;
+  연속 조건에 따라 좌극한과 우극한이 같아야 합니다.&lt;br&gt;
+  $$a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$$
+  인수분해하면 $(a-2)(a-6) = 0$ 이므로 $a = 2$ 또는 $a = 6$ 입니다.&lt;br&gt;
+  근과 계수의 관계에 의해서도 두 근의 곱은 상수항인 $12$임을 바로 확인할 수 있습니다.&lt;br&gt;
+  $$2 \times 6 = 12$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  모든 상수 $a$의 값의 곱은 $12$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;③번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 이차방정식 $a^2 - 8a + 12 = 0$의 두 실근의 곱을 물었으므로, 판별식 $D/4 = 16 - 12 = 4 &gt; 0$으로 실근 존재를 확인한 후 근과 계수의 관계를 통해 즉시 $12$를 도출하면 연산이 매우 빠릅니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;$(4-a)^2 = 2(4)-4 = 4 \implies a^2-8a+12=0 \implies$ The product of two roots is 12.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem evaluates conditions for &lt;b&gt;continuity of a piecewise-defined function&lt;/b&gt; at the boundary point $x=4$, translating the continuity requirement into a quadratic equation in parameter $a$.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: State the continuity condition at $x = 4$&lt;/b&gt;&lt;br&gt;
+  For $f(x)$ to be continuous everywhere on $\mathbb{R}$, the left-hand limit, right-hand limit, and function value must agree at $x=4$:&lt;br&gt;
+  $$\lim_{x \to 4^-} f(x) = \lim_{x \to 4^+} f(x) = f(4)$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Evaluate one-sided limits&lt;/b&gt;&lt;br&gt;
+  • Left-hand limit ($x &lt; 4$):&lt;br&gt;
+  $$\lim_{x \to 4^-} (x-a)^2 = (4-a)^2 = a^2 - 8a + 16$$&lt;br&gt;
+  • Right-hand limit and value ($x \ge 4$):&lt;br&gt;
+  $$f(4) = 2(4) - 4 = 4$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Solve the quadratic equation for $a$&lt;/b&gt;&lt;br&gt;
+  Equating the two expressions:&lt;br&gt;
+  $$a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$$&lt;br&gt;
+  Factoring gives $(a-2)(a-6) = 0$, yielding $a = 2$ or $a = 6$.&lt;br&gt;
+  By Vieta&#x27;s formulas, the product of all roots is the constant term $12$:&lt;br&gt;
+  $$2 \times 6 = 12$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The product of all possible values of $a$ is $12$.&lt;br&gt;
+  Therefore, the correct answer is &lt;b&gt;Option ③&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Vieta&#x27;s formulas provide instantaneous product solutions once real roots are confirmed via the discriminant ($D &gt; 0$).
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ 가 실수 전체의 집합에서 연속이 되도록 하는 모든 상수 $a$의 값의 곱은? [3점]</span><div class="bilingual-en">What product of the values ​​of all constants $a$ makes the function $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ continuous over the set of real numbers? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>12</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1226,8 +1283,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30907';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = 'da199393';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '479fed6e';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30907.html';
 
@@ -1252,8 +1309,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30907';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || 'da199393';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '479fed6e';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30907.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

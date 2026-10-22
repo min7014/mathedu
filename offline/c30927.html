@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30927.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30927">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="7f4fd5e7">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="843b871a">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -796,7 +796,63 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Observing that $\sin 0 = \sin \pi = 0$ directs you to evaluate at $0$ first to isolate the auxiliary value $f'(0)$.
 </p>
   </div>
-</div><div class="q" data-ans="2" data-exp="$f&#x27;(0) = 2/3 \implies f&#x27;(\pi) - 1/3 = -1 \implies f&#x27;(\pi) = -2/3$입니다." data-exp-en="This is $f&#x27;(0) = 2/3 \implies f&#x27;(\pi) - 1/3 = -1 \implies f&#x27;(\pi) = -2/3$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">실수 전체의 집합에서 미분가능한 함수 $f(x)$가 모든 실수 $x$에 대하여 $f(x) + f(\frac{1}{2}\sin x) = \sin x$를 만족시킬 때, $f&#x27;(\pi)$의 값은? [3점]</span><div class="bilingual-en">When a function $f(x)$ that is differentiable on the set of all real numbers satisfies $f(x) + f(\frac{1}{2}\sin x) = \sin x$ for all real numbers $x$, what is the value of [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-\frac{5}{6}$</div><div class="opt"><span class="n">2</span>$-\frac{2}{3}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{3}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="2" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$f&#x27;(0) = 2/3 \implies f&#x27;(\pi) - 1/3 = -1 \implies f&#x27;(\pi) = -2/3$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 함수방정식 형태의 항등식에서 &lt;b&gt;합성함수의 미분법(Chain Rule)&lt;/b&gt;을 적용하고, 특수각 $x = 0$과 $x = \pi$를 전략적으로 대입하여 원하는 미분계수 $f&#x27;(\pi)$를 연립 산출하는 문제입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 합성함수의 미분법을 통한 양변 미분&lt;/b&gt;&lt;br&gt;
+  주어진 항등식은 다음과 같습니다.&lt;br&gt;
+  $$f(x) + f\left(\frac{1}{2}\sin x\right) = \sin x$$
+  양변을 $x$에 대하여 미분합니다. 합성함수 $f(u(x))$의 도함수는 $f&#x27;(u(x)) \cdot u&#x27;(x)$ 이므로&lt;br&gt;
+  $$f&#x27;(x) + f&#x27;\left(\frac{1}{2}\sin x\right) \times \left(\frac{1}{2}\cos x\right) = \cos x \quad \cdots\cdots \text{㉠}$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: $x = 0$ 대입을 통한 $f&#x27;(0)$ 값 결정&lt;/b&gt;&lt;br&gt;
+  $\sin 0 = 0, \cos 0 = 1$ 이므로 식 ㉠에 $x = 0$을 대입합니다.&lt;br&gt;
+  $$f&#x27;(0) + f&#x27;(0) \times \left(\frac{1}{2} \cdot 1\right) = 1$$
+  $$f&#x27;(0) + \frac{1}{2}f&#x27;(0) = 1 \implies \frac{3}{2}f&#x27;(0) = 1 \implies f&#x27;(0) = \frac{2}{3}$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: $x = \pi$ 대입을 통한 $f&#x27;(\pi)$ 산출&lt;/b&gt;&lt;br&gt;
+  $\sin \pi = 0, \cos \pi = -1$ 이므로 식 ㉠에 $x = \pi$를 대입합니다.&lt;br&gt;
+  $$f&#x27;(\pi) + f&#x27;\left(\frac{1}{2}\sin \pi\right) \times \left(\frac{1}{2}\cos\pi\right) = \cos\pi$$
+  $$f&#x27;(\pi) + f&#x27;(0) \times \left(-\frac{1}{2}\right) = -1$$
+  2단계에서 구한 $f&#x27;(0) = \frac{2}{3}$를 대입합니다.&lt;br&gt;
+  $$f&#x27;(\pi) - \frac{1}{2}\left(\frac{2}{3}\right) = -1 \implies f&#x27;(\pi) - \frac{1}{3} = -1 \implies f&#x27;(\pi) = -1 + \frac{1}{3} = -\frac{2}{3}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 값 $f&#x27;(\pi)$는 $-\frac{2}{3}$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;②번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: $\sin x$는 $x=0$과 $x=\pi$에서 모두 $0$이 됩니다. 따라서 $x=0$ 대입으로 매개값 $f&#x27;(0)$을 먼저 확정하고, $x=\pi$ 대입으로 목표값 $f&#x27;(\pi)$를 구해내는 2단계 특수각 대입 전략이 핵심입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;This is $f&#x27;(0) = 2/3 \implies f&#x27;(\pi) - 1/3 = -1 \implies f&#x27;(\pi) = -2/3$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem verifies application of the &lt;b&gt;Chain Rule on functional equations&lt;/b&gt;, followed by strategic evaluation at specific angles ($x = 0$ and $x = \pi$) to solve for the target derivative $f&#x27;(\pi)$.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Differentiate the functional equation&lt;/b&gt;&lt;br&gt;
+  Given the identity:&lt;br&gt;
+  $$f(x) + f\left(\frac{1}{2}\sin x\right) = \sin x$$&lt;br&gt;
+  Differentiating with respect to $x$ via the chain rule:&lt;br&gt;
+  $$f&#x27;(x) + f&#x27;\left(\frac{1}{2}\sin x\right) \cdot \left(\frac{1}{2}\cos x\right) = \cos x \quad \cdots\cdots (1)$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Substitute $x = 0$ to find $f&#x27;(0)$&lt;/b&gt;&lt;br&gt;
+  Since $\sin 0 = 0$ and $\cos 0 = 1$:&lt;br&gt;
+  $$f&#x27;(0) + f&#x27;(0) \cdot \frac{1}{2} = 1 \implies \frac{3}{2}f&#x27;(0) = 1 \implies f&#x27;(0) = \frac{2}{3}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Substitute $x = \pi$ to evaluate $f&#x27;(\pi)$&lt;/b&gt;&lt;br&gt;
+  Since $\sin \pi = 0$ and $\cos \pi = -1$:&lt;br&gt;
+  $$f&#x27;(\pi) + f&#x27;(0) \cdot \left(-\frac{1}{2}\right) = -1$$&lt;br&gt;
+  Substitute $f&#x27;(0) = \frac{2}{3}$:&lt;br&gt;
+  $$f&#x27;(\pi) - \frac{1}{3} = -1 \implies f&#x27;(\pi) = -\frac{2}{3}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The value of $f&#x27;(\pi)$ is $-\frac{2}{3}$.&lt;br&gt;
+  Therefore, the correct answer is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Observing that $\sin 0 = \sin \pi = 0$ directs you to evaluate at $0$ first to isolate the auxiliary value $f&#x27;(0)$.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">실수 전체의 집합에서 미분가능한 함수 $f(x)$가 모든 실수 $x$에 대하여 $f(x) + f(\frac{1}{2}\sin x) = \sin x$를 만족시킬 때, $f&#x27;(\pi)$의 값은? [3점]</span><div class="bilingual-en">When a function $f(x)$ that is differentiable on the set of all real numbers satisfies $f(x) + f(\frac{1}{2}\sin x) = \sin x$ for all real numbers $x$, what is the value of [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-\frac{5}{6}$</div><div class="opt"><span class="n">2</span>$-\frac{2}{3}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{2}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{3}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1225,8 +1281,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30927';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = '7f4fd5e7';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '843b871a';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30927.html';
 
@@ -1251,8 +1307,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30927';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || '7f4fd5e7';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '843b871a';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30927.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

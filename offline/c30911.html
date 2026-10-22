@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30911.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30911">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="aa212245">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="bdbba9eb">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -802,7 +802,69 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Observing proportional coefficients in the cubic polynomial permits instant grouping without relying on synthetic division.
 </p>
   </div>
-</div><div class="q" data-ans="1" data-exp="$t=6$에서 위치가 일치하며, $p=2, q=-22$이므로 $p-q = 2 - (-22) = 24$입니다." data-exp-en="The position matches in $t=6$, which is $p=2, q=-22$ and therefore $p-q = 2 - (-22) = 24$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수직선 위를 움직이는 두 점 $P, Q$의 시각 $t(t \ge 0)$에서의 위치가 각각 $x_1 = t^2+t-6$, $x_2 = -t^3+7t^2$이다. 두 점 $P, Q$의 위치가 같아지는 순간 두 점 $P, Q$의 가속도를 각각 $p, q$라 할 때, $p-q$의 값은? [4점]</span><div class="bilingual-en">The positions of the two points moving on the vertical line at the time $t(t \ge 0)$ of $P, Q$ are $x_1 = t^2+t-6$ and $x_2 = -t^3+7t^2$, respectively. At the moment when the positions of the two points $P, Q$ become the same, if the acceleration of the two points $P, Q$ is [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>24</div><div class="opt"><span class="n">2</span>27</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>36</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="1" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$t=6$에서 위치가 일치하며, $p=2, q=-22$이므로 $p-q = 2 - (-22) = 24$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 수직선 위를 움직이는 두 점의 &lt;b&gt;위치 함수($x(t)$), 속도 함수($v(t) = x&#x27;(t)$), 가속도 함수($a(t) = v&#x27;(t)$)의 미분 관계&lt;/b&gt;를 파악하고, 두 점이 만나는 시각($x_1(t) = x_2(t)$)에서의 가속도의 차를 정확히 구하는 능력을 평가합니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 두 점이 만나는 시각 $t$ 구하기&lt;/b&gt;&lt;br&gt;
+  두 점 $P, Q$의 위치가 같아지는 시각은 $x_1(t) = x_2(t)$를 만족하는 $t \ge 0$입니다.&lt;br&gt;
+  $$t^2 + t - 6 = -t^3 + 7t^2 \implies t^3 - 6t^2 + t - 6 = 0$$
+  공통인수로 묶어 인수분해하면 다음과 같습니다.&lt;br&gt;
+  $$t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$$
+  모든 실수 $t$에 대하여 $t^2 + 1 &gt; 0$ 이므로 두 점이 만나는 유일한 시각은 $t = 6$ 입니다.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 속도 및 가속도 도함수 유도&lt;/b&gt;&lt;br&gt;
+  각 점의 위치 함수를 시간에 대해 두 번 미분하여 가속도 함수를 구합니다.&lt;br&gt;
+  • 점 $P$:&lt;br&gt;
+  $$v_1(t) = x_1&#x27;(t) = 2t + 1 \implies a_1(t) = v_1&#x27;(t) = 2$$&lt;br&gt;
+  • 점 $Q$:&lt;br&gt;
+  $$v_2(t) = x_2&#x27;(t) = -3t^2 + 14t \implies a_2(t) = v_2&#x27;(t) = -6t + 14$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: $t=6$에서의 가속도 $p, q$ 및 차 $p-q$ 계산&lt;/b&gt;&lt;br&gt;
+  $t=6$을 대입합니다.&lt;br&gt;
+  $$p = a_1(6) = 2$$&lt;br&gt;
+  $$q = a_2(6) = -6(6) + 14 = -36 + 14 = -22$$&lt;br&gt;
+  따라서 구하는 값은:&lt;br&gt;
+  $$p - q = 2 - (-22) = 2 + 22 = 24$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 값 $p-q$는 $24$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;①번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 3차 방정식 인수분해 시 계수의 비율($1:-6 = 1:-6$)을 관찰하면 조립제법 없이도 $t^2(t-6) + (t-6)$으로 순식간에 묶어낼 수 있습니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;The position matches in $t=6$, which is $p=2, q=-22$ and therefore $p-q = 2 - (-22) = 24$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem assesses differential calculus applied to rectilinear kinematics: finding the encounter time ($x_1(t) = x_2(t)$) for two moving particles and evaluating their respective accelerations via second derivatives ($a(t) = x&#x27;&#x27;(t)$).&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Determine the encounter time $t$&lt;/b&gt;&lt;br&gt;
+  The particles $P$ and $Q$ meet when their positions coincide ($x_1(t) = x_2(t)$) for $t \ge 0$:&lt;br&gt;
+  $$t^2 + t - 6 = -t^3 + 7t^2 \implies t^3 - 6t^2 + t - 6 = 0$$&lt;br&gt;
+  Factor by grouping terms:&lt;br&gt;
+  $$t^2(t-6) + (t-6) = (t-6)(t^2+1) = 0$$&lt;br&gt;
+  Since $t^2+1 &gt; 0$ for all real $t$, the unique meeting moment is $t = 6$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Differentiate positions to obtain acceleration functions&lt;/b&gt;&lt;br&gt;
+  • For particle $P$:&lt;br&gt;
+  $$v_1(t) = x_1&#x27;(t) = 2t + 1 \implies a_1(t) = 2$$&lt;br&gt;
+  • For particle $Q$:&lt;br&gt;
+  $$v_2(t) = x_2&#x27;(t) = -3t^2 + 14t \implies a_2(t) = -6t + 14$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Evaluate accelerations at $t = 6$ and compute $p - q$&lt;/b&gt;&lt;br&gt;
+  $$p = a_1(6) = 2$$&lt;br&gt;
+  $$q = a_2(6) = -6(6) + 14 = -22$$&lt;br&gt;
+  Subtracting gives:&lt;br&gt;
+  $$p - q = 2 - (-22) = 24$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The final value $p-q$ is $24$.&lt;br&gt;
+  Therefore, the correct choice is &lt;b&gt;Option ①&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Observing proportional coefficients in the cubic polynomial permits instant grouping without relying on synthetic division.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수직선 위를 움직이는 두 점 $P, Q$의 시각 $t(t \ge 0)$에서의 위치가 각각 $x_1 = t^2+t-6$, $x_2 = -t^3+7t^2$이다. 두 점 $P, Q$의 위치가 같아지는 순간 두 점 $P, Q$의 가속도를 각각 $p, q$라 할 때, $p-q$의 값은? [4점]</span><div class="bilingual-en">The positions of the two points moving on the vertical line at the time $t(t \ge 0)$ of $P, Q$ are $x_1 = t^2+t-6$ and $x_2 = -t^3+7t^2$, respectively. At the moment when the positions of the two points $P, Q$ become the same, if the acceleration of the two points $P, Q$ is [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>24</div><div class="opt"><span class="n">2</span>27</div><div class="opt"><span class="n">3</span>30</div><div class="opt"><span class="n">4</span>33</div><div class="opt"><span class="n">5</span>36</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1231,8 +1293,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30911';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = 'aa212245';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = 'bdbba9eb';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30911.html';
 
@@ -1257,8 +1319,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30911';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || 'aa212245';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || 'bdbba9eb';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30911.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

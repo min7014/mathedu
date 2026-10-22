@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c1092101.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c1092101">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="4b4cf31c">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="46a9f781">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -821,7 +821,71 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: The geometric extrema between a circle and a line are strictly governed by $d \pm r$. Never parameterize individual points on the circle with trigonometric coordinates when the center distance suffices.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="1. 원의 중심은 $(2, 3)$, 반지름 $r = 3$입니다.<br>2. 중심 $(2, 3)$에서 직선 $3x - 4y + k = 0$까지의 거리는 $d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$입니다.<br>3. 원 위의 점 $P$에서 직선까지 거리의 최댓값은 $d + r = 7$이므로 $d = 4$입니다.<br>4. $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$.<br>5. $k &gt; 0$ 이므로 $k - 6 = 20 \implies k = 26$입니다." data-exp-en="1. The center of the circle is $(2, 3)$ and the radius is $r = 3$. &lt;br&gt; 2. The distance from the center $(2, 3)$ to the straight line $3x - 4y + k = 0$ is $d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$. &lt;br&gt; 3. The maximum value of the distance from the point $P$ on the circle to the straight line is &lt;br&gt; 4. $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$. &lt;br&gt; 5. It is $k &gt; 0$, so it is $k - 6 = 20 \implies k = 26$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">좌표평면 위의 원 $C: (x - 2)^2 + (y - 3)^2 = 9$ 와 직선 $l: 3x - 4y + k = 0$ 이 있다. 원 $C$ 위의 임의의 점 $P$ 와 직선 $l$ 사이의 거리의 최댓값이 $7$ 일 때, 양수 $k$ 의 값은?</span><div class="bilingual-en">There is a circle $C: (x - 2)^2 + (y - 3)^2 = 9$ and a straight line $l: 3x - 4y + k = 0$ on the coordinate plane. If the maximum distance between any point $P$ on the circle $C$ and the line $l$ is</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$22$</div><div class="opt"><span class="n">2</span>$24$</div><div class="opt"><span class="n">3</span>$26$</div><div class="opt"><span class="n">4</span>$28$</div><div class="opt"><span class="n">5</span>$30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;1. 원의 중심은 $(2, 3)$, 반지름 $r = 3$입니다.&lt;br&gt;2. 중심 $(2, 3)$에서 직선 $3x - 4y + k = 0$까지의 거리는 $d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$입니다.&lt;br&gt;3. 원 위의 점 $P$에서 직선까지 거리의 최댓값은 $d + r = 7$이므로 $d = 4$입니다.&lt;br&gt;4. $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$.&lt;br&gt;5. $k &gt; 0$ 이므로 $k - 6 = 20 \implies k = 26$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;원의 방정식에서 중심과 반지름을 파악&lt;/b&gt;하고, &lt;b&gt;점과 직선 사이의 거리 공식&lt;/b&gt;을 이용하여 원 위의 임의의 점에서 직선에 이르는 거리의 최댓값($d + r$) 조건을 만족시키는 미정계수 $k$를 결정하는 기하학적 기본 역량을 평가합니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 원의 중심과 반지름 파악&lt;/b&gt;&lt;br&gt;
+  주어진 원의 방정식 $(x - 2)^2 + (y - 3)^2 = 9$ 에서&lt;br&gt;
+  • 중심의 좌표: $C(2, 3)$&lt;br&gt;
+  • 반지름의 길이: $r = \sqrt{9} = 3$
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 원의 중심과 직선 사이의 거리 $d$ 계산&lt;/b&gt;&lt;br&gt;
+  직선의 방정식은 $3x - 4y + k = 0$ 입니다.&lt;br&gt;
+  점 $(x_1, y_1)$과 직선 $ax+by+c=0$ 사이의 거리 공식 $d = \frac{|a x_1 + b y_1 + c|}{\sqrt{a^2 + b^2}}$을 적용합니다.&lt;br&gt;
+  $$d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|6 - 12 + k|}{\sqrt{9 + 16}} = \frac{|k - 6|}{5}$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 거리의 최댓값 조건 적용&lt;/b&gt;&lt;br&gt;
+  원 위의 점에서 직선에 이르는 거리의 최댓값은 중심에서 직선까지의 거리 $d$에 원의 반지름 $r$을 더한 값($d + r$)입니다.&lt;br&gt;
+  문제의 조건에서 거리의 최댓값이 $7$이라 하였으므로:&lt;br&gt;
+  $$d + r = 7 \implies d + 3 = 7 \implies d = 4$$
+  &lt;br&gt;
+  &lt;b&gt;4단계: $k$에 관한 방정식 풀이 및 양수 $k$ 결정&lt;/b&gt;&lt;br&gt;
+  2단계의 식에 $d = 4$를 대입합니다.&lt;br&gt;
+  $$\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$$
+  절댓값을 풀면:&lt;br&gt;
+  $$k - 6 = 20 \implies k = 26 \quad \text{또는} \quad k - 6 = -20 \implies k = -14$$
+  문제에서 $k &gt; 0$인 양수라 하였으므로 $k = 26$ 입니다.
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 양수 $k$의 값은 $26$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;26&lt;/b&gt; 입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 원 위의 점에서 직선에 이르는 거리의 최댓값은 $d+r$, 최솟값은 $d-r$ (단, $d \ge r$)입니다. 항상 원의 중심 $C$를 기준으로 수선의 발을 내리는 기하학적 모델을 머릿속에 시각화하십시오.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;1. The center of the circle is $(2, 3)$ and the radius is $r = 3$. &lt;br&gt; 2. The distance from the center $(2, 3)$ to the straight line $3x - 4y + k = 0$ is $d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|k - 6|}{5}$. &lt;br&gt; 3. The maximum value of the distance from the point $P$ on the circle to the straight line is &lt;br&gt; 4. $\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$. &lt;br&gt; 5. It is $k &gt; 0$, so it is $k - 6 = 20 \implies k = 26$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem assesses the ability to identify a &lt;b&gt;circle&#x27;s center and radius&lt;/b&gt;, apply the &lt;b&gt;point-to-line distance formula&lt;/b&gt;, and exploit the geometric extremum principle that maximum distance from a circle to a line equals $d + r$.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Extract circle parameters&lt;/b&gt;&lt;br&gt;
+  From the circle equation $(x - 2)^2 + (y - 3)^2 = 9$:&lt;br&gt;
+  • Center: $C(2, 3)$&lt;br&gt;
+  • Radius: $r = \sqrt{9} = 3$
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Calculate distance $d$ from the center to the line&lt;/b&gt;&lt;br&gt;
+  Given the line $3x - 4y + k = 0$, apply the distance formula $d = \frac{|a x_0 + b y_0 + c|}{\sqrt{a^2 + b^2}}$:&lt;br&gt;
+  $$d = \frac{|3(2) - 4(3) + k|}{\sqrt{3^2 + (-4)^2}} = \frac{|6 - 12 + k|}{\sqrt{25}} = \frac{|k - 6|}{5}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Enforce the maximum distance condition&lt;/b&gt;&lt;br&gt;
+  The maximum distance from any point on the circle to the line is achieved along the normal passing through the center: $\text{Max} = d + r$.&lt;br&gt;
+  Given that this maximum distance is $7$:&lt;br&gt;
+  $$d + r = 7 \implies d + 3 = 7 \implies d = 4$$
+  &lt;br&gt;
+  &lt;b&gt;Step 4: Solve for positive parameter $k$&lt;/b&gt;&lt;br&gt;
+  $$\frac{|k - 6|}{5} = 4 \implies |k - 6| = 20$$&lt;br&gt;
+  This yields two algebraic roots:&lt;br&gt;
+  $$k - 6 = 20 \implies k = 26 \quad \text{or} \quad k - 6 = -20 \implies k = -14$$&lt;br&gt;
+  Given the condition $k &gt; 0$, we select $k = 26$.
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The required positive value of $k$ is $26$.&lt;br&gt;
+  Therefore, the answer is &lt;b&gt;26&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: The geometric extrema between a circle and a line are strictly governed by $d \pm r$. Never parameterize individual points on the circle with trigonometric coordinates when the center distance suffices.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">좌표평면 위의 원 $C: (x - 2)^2 + (y - 3)^2 = 9$ 와 직선 $l: 3x - 4y + k = 0$ 이 있다. 원 $C$ 위의 임의의 점 $P$ 와 직선 $l$ 사이의 거리의 최댓값이 $7$ 일 때, 양수 $k$ 의 값은?</span><div class="bilingual-en">There is a circle $C: (x - 2)^2 + (y - 3)^2 = 9$ and a straight line $l: 3x - 4y + k = 0$ on the coordinate plane. If the maximum distance between any point $P$ on the circle $C$ and the line $l$ is</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$22$</div><div class="opt"><span class="n">2</span>$24$</div><div class="opt"><span class="n">3</span>$26$</div><div class="opt"><span class="n">4</span>$28$</div><div class="opt"><span class="n">5</span>$30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1251,8 +1315,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c1092101';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = '4b4cf31c';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '46a9f781';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c1092101.html';
 
@@ -1277,8 +1341,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c1092101';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || '4b4cf31c';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '46a9f781';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c1092101.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

@@ -143,6 +143,13 @@ def check_file_rules(filepath, content):
                         'missing': missing_parts,
                         'msg': f"3단계 교육학적 풀이 표준 항목 누락: {', '.join(missing_parts)}"
                     })
+            if len(sol_text.strip()) < 1000 and not rel_path.endswith('index.html'):
+                issues.append({
+                    'rule': 'SOL_BLOCK_MIN_DEPTH',
+                    'severity': 'WARNING',
+                    'len': len(sol_text.strip()),
+                    'msg': f"상세 풀이(<div class=\"sol\">) 길이가 너무 압축적입니다 ({len(sol_text.strip())}자, 최소 1000자 이상 권장)."
+                })
                     
     # 4. 반응형 UI 스타일 누락 검사
     if '<div class="sol">' in content and '.sol .bilingual-en' not in content:
@@ -154,6 +161,14 @@ def check_file_rules(filepath, content):
         
     # 5. 초등학생 눈높이 무장벽 디딤돌 확장 검사 (GEMINI.md Rule 6)
     if '<div class="q"' in content and not rel_path.endswith('index.html'):
+        all_exps = re.findall(r'data-exp="([^"]*)"', content)
+        if all_exps and len(all_exps[-1]) < 500:
+            issues.append({
+                'rule': 'FINAL_EXP_DEPTH_CHECK',
+                'severity': 'ERROR',
+                'len': len(all_exps[-1]),
+                'msg': f"최종 본문항의 해설(data-exp)이 너무 압축적입니다 ({len(all_exps[-1])}자, 최소 500자 이상 단계별 상세 풀이 포함 필수)."
+            })
         stems = re.findall(r'<div class="stem">(.*?)</div>', content, re.DOTALL)
         lvls = re.findall(r'<div class="lvl">(.*?)</div>', content, re.DOTALL)
         if stems and lvls:

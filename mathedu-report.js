@@ -877,6 +877,8 @@
       label = (stepNum > 0 ? ('제' + stepNum + '단계 ') : '') + '문제 지문';
     } else if (el.closest && el.closest('.exp')) {
       label = (stepNum > 0 ? ('제' + stepNum + '단계 ') : '') + '해설 / 풀이';
+    } else if (el.closest && el.closest('.sol')) {
+      label = '최종 문제 상세 풀이 영역';
     } else if (el.closest && el.closest('.know')) {
       label = '사전 지식 영역';
     } else if (el.closest && (el.closest('svg') || el.closest('img') || el.closest('.diagram'))) {
@@ -896,6 +898,12 @@
     }
 
     var rawText = (el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ');
+    if (!rawText && el.closest) {
+      var fallbackContainer = el.closest('.exp, .sol, .stem, .opt, .know, .q');
+      if (fallbackContainer) {
+        rawText = (fallbackContainer.innerText || fallbackContainer.textContent || '').trim().replace(/\s+/g, ' ');
+      }
+    }
     var snippet = rawText.length > 120 ? (rawText.substring(0, 117) + '...') : (rawText || '(텍스트 없음 / 그래픽 또는 레이아웃 요소)');
 
     return {

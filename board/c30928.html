@@ -745,7 +745,81 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: The box formula $\int g + \int g^{-1} = 1$ allows extracting unknown functional integrals before deploying integration by parts on the final target.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="치환 및 부분적분에 의해 $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$입니다." data-exp-en="By substitution and partial integration, it is $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)$는 실수 전체의 집합에서 연속인 이계도함수를 갖고, 실수 전체의 집합에서 정의된 함수 $g(x)$를 $g(x) = f&#x27;(2x)\sin\pi x + x$라 하자. 함수 $g(x)$는 역함수 $g^{-1}(x)$를 갖고, $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$을 만족시킬 때, $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$의 값은? [4점]</span><div class="bilingual-en">The function $f(x)$ has a continuous second derivative in the set of all real numbers, and let the function $g(x)$ defined in the set of all real numbers be The function $g(x)$ has an inverse function $g^{-1}(x)$, and when $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$ is satisfied, what is the value of $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-\frac{1}{\pi}$</div><div class="opt"><span class="n">2</span>$-\frac{1}{2\pi}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{3\pi}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{4\pi}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6\pi}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;치환 및 부분적분에 의해 $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;역함수의 정적분 기하학적 성질($\int_a^b g(x)dx + \int_{g(a)}^{g(b)} g^{-1}(y)dy = b\cdot g(b) - a\cdot g(a)$)&lt;/b&gt;과 &lt;b&gt;치환적분 및 부분적분법&lt;/b&gt;을 유기적으로 연결하여 삼각함수와 도함수의 적분식을 계산하는 고난도 변별력 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 역함수 정적분의 기본 항등식 수립&lt;/b&gt;&lt;br&gt;
+  $g(x) = f&#x27;(2x)\sin\pi x + x$ 에서 양 끝값을 조사합니다.&lt;br&gt;
+  • $g(0) = f&#x27;(0)\sin 0 + 0 = 0$&lt;br&gt;
+  • $g(1) = f&#x27;(2)\sin\pi + 1 = 0 + 1 = 1$&lt;br&gt;
+  역함수의 정적분 성질에 의하여 다음 등식이 항상 성립합니다.&lt;br&gt;
+  $$\int_0^1 g(x)dx + \int_0^1 g^{-1}(x)dx = 1 \cdot g(1) - 0 \cdot g(0) = 1 \times 1 - 0 = 1 \quad \cdots\cdots \text{㉠}$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: 주어진 조건 대입 및 $\int_0^1 f&#x27;(2x)\sin\pi x dx$의 값 추출&lt;/b&gt;&lt;br&gt;
+  $g(x)$의 정적분을 계산합니다.&lt;br&gt;
+  $$\int_0^1 g(x)dx = \int_0^1 f&#x27;(2x)\sin\pi x dx + \int_0^1 x dx = \int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{2}$$
+  문제에서 주어진 조건 $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$ 를 식 ㉠에 대입합니다.&lt;br&gt;
+  $$\left( \int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{2} \right) + \left( 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4} \right) = 1$$
+  동류항을 묶어 정리하면:&lt;br&gt;
+  $$3\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{3}{4} = 1 \implies 3\int_0^1 f&#x27;(2x)\sin\pi x dx = \frac{1}{4}$$
+  $$\int_0^1 f&#x27;(2x)\sin\pi x dx = \frac{1}{12} \quad \cdots\cdots \text{㉡}$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 구하고자 하는 정적분의 치환적분 및 부분적분&lt;/b&gt;&lt;br&gt;
+  구하고자 하는 식은 $I = \int_0^2 f(x)\cos\frac{\pi x}{2}dx$ 입니다.&lt;br&gt;
+  $x = 2t$ 로 치환하면 $dx = 2dt$ 이고 적분 구간은 $[0, 1]$로 바뀝니다.&lt;br&gt;
+  $$I = \int_0^1 f(2t)\cos(\pi t) \cdot (2dt) = 2\int_0^1 f(2t)\cos(\pi t) dt$$
+  부분적분법을 적용합니다:&lt;br&gt;
+  • $u(t) = f(2t) \implies u&#x27;(t) = 2f&#x27;(2t)$&lt;br&gt;
+  • $v&#x27;(t) = \cos\pi t \implies v(t) = \frac{1}{\pi}\sin\pi t$&lt;br&gt;
+  $$I = 2 \left( \left[ f(2t) \cdot \frac{1}{\pi}\sin\pi t \right]_0^1 - \int_0^1 2f&#x27;(2t) \cdot \frac{1}{\pi}\sin\pi t dt \right)$$
+  $\sin\pi = 0, \sin 0 = 0$ 이므로 대입 항은 $0$입니다!&lt;br&gt;
+  $$I = 2 \left( 0 - \frac{2}{\pi}\int_0^1 f&#x27;(2t)\sin\pi t dt \right) = -\frac{4}{\pi} \int_0^1 f&#x27;(2t)\sin\pi t dt$$
+  식 ㉡의 결과 $\frac{1}{12}$를 대입합니다.&lt;br&gt;
+  $$I = -\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  계산된 정적분 값은 $-\frac{1}{3\pi}$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;③번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: $\int_0^1 g(x)dx + \int_0^1 g^{-1}(x)dx = 1$은 원점과 $(1,1)$을 잇는 직사각형 면적 원리입니다. 이를 이용해 복잡한 미지의 적분 항 $\int_0^1 f&#x27;(2x)\sin\pi x dx = \frac{1}{12}$를 상수화한 후, 목표 식을 부분적분으로 연결하는 흐름을 체계화하십시오.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;By substitution and partial integration, it is $-\frac{4}{\pi} \times \frac{1}{12} = -\frac{1}{3\pi}$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This advanced calculus question combines the &lt;b&gt;geometric box identity for inverse function integration&lt;/b&gt; ($\int_a^b g + \int_{g(a)}^{g(b)} g^{-1} = b g(b) - a g(a)$) with substitution and integration by parts.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Apply the inverse integration formula&lt;/b&gt;&lt;br&gt;
+  For $g(x) = f&#x27;(2x)\sin\pi x + x$, evaluate endpoints:&lt;br&gt;
+  • $g(0) = 0$&lt;br&gt;
+  • $g(1) = 1$&lt;br&gt;
+  By the inverse definite integral identity:&lt;br&gt;
+  $$\int_0^1 g(x)dx + \int_0^1 g^{-1}(x)dx = 1 \cdot 1 - 0 = 1 \quad \cdots\cdots (1)$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Isolate the integral $\int_0^1 f&#x27;(2x)\sin\pi x dx$&lt;/b&gt;&lt;br&gt;
+  Express $\int_0^1 g(x)dx$:&lt;br&gt;
+  $$\int_0^1 g(x)dx = \int_0^1 f&#x27;(2x)\sin\pi x dx + \left[\frac{x^2}{2}\right]_0^1 = \int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{2}$$&lt;br&gt;
+  Substitute the given expression for $\int_0^1 g^{-1}(x)dx$ into (1):&lt;br&gt;
+  $$\left(\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{2}\right) + \left(2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}\right) = 1$$&lt;br&gt;
+  $$3\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{3}{4} = 1 \implies \int_0^1 f&#x27;(2x)\sin\pi x dx = \frac{1}{12} \quad \cdots\cdots (2)$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Integrate the target expression via substitution and parts&lt;/b&gt;&lt;br&gt;
+  Target: $I = \int_0^2 f(x)\cos\frac{\pi x}{2}dx$.&lt;br&gt;
+  Substitute $x = 2t$, so $dx = 2dt$ on $[0, 1]$:&lt;br&gt;
+  $$I = 2\int_0^1 f(2t)\cos\pi t dt$$&lt;br&gt;
+  Integrate by parts with $u = f(2t)$, $dv = \cos\pi t dt$ ($v = \frac{1}{\pi}\sin\pi t$):&lt;br&gt;
+  $$I = 2\left( \left[\frac{1}{\pi}f(2t)\sin\pi t\right]_0^1 - \frac{2}{\pi}\int_0^1 f&#x27;(2t)\sin\pi t dt \right)$$&lt;br&gt;
+  Since $\sin\pi = \sin 0 = 0$, the boundary term vanishes:&lt;br&gt;
+  $$I = -\frac{4}{\pi}\int_0^1 f&#x27;(2t)\sin\pi t dt = -\frac{4}{\pi} \left(\frac{1}{12}\right) = -\frac{1}{3\pi}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The evaluated integral equals $-\frac{1}{3\pi}$.&lt;br&gt;
+  Thus, the correct choice is &lt;b&gt;Option ③&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: The box formula $\int g + \int g^{-1} = 1$ allows extracting unknown functional integrals before deploying integration by parts on the final target.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)$는 실수 전체의 집합에서 연속인 이계도함수를 갖고, 실수 전체의 집합에서 정의된 함수 $g(x)$를 $g(x) = f&#x27;(2x)\sin\pi x + x$라 하자. 함수 $g(x)$는 역함수 $g^{-1}(x)$를 갖고, $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$을 만족시킬 때, $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$의 값은? [4점]</span><div class="bilingual-en">The function $f(x)$ has a continuous second derivative in the set of all real numbers, and let the function $g(x)$ defined in the set of all real numbers be The function $g(x)$ has an inverse function $g^{-1}(x)$, and when $\int_0^1 g^{-1}(x)dx = 2\int_0^1 f&#x27;(2x)\sin\pi x dx + \frac{1}{4}$ is satisfied, what is the value of $\int_0^2 f(x)\cos\frac{\pi x}{2}dx$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-\frac{1}{\pi}$</div><div class="opt"><span class="n">2</span>$-\frac{1}{2\pi}$</div><div class="opt"><span class="n">3</span>$-\frac{1}{3\pi}$</div><div class="opt"><span class="n">4</span>$-\frac{1}{4\pi}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{6\pi}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

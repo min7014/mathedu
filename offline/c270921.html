@@ -574,8 +574,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270921.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270921">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="2a865492">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="6f3b5c50">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -773,7 +773,50 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Key Tip</b>: Equating one-sided derivative steps cancels the corner discontinuity.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="조건을 만족하는 $f(0)$의 최댓값과 최솟값을 구하여 곱하면 12가 됩니다." data-exp-en="Find the maximum and minimum values ​​of $f(0)$ that satisfy the conditions and multiply them to get 12."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f(0)$의 최댓값과 최솟값의 곱으로 알맞은 것은?</span><div class="bilingual-en">What is the correct product of the maximum and minimum values ​​of $f(0)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$10$</div><div class="opt"><span class="n">2</span>$11$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$13$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;조건을 만족하는 $f(0)$의 최댓값과 최솟값을 구하여 곱하면 12가 됩니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;삼차함수와 절댓값 함수의 미분가능성&lt;/b&gt;을 다루며, 꺾인 첨점(V자 모서리)에서의 좌미분계수와 우미분계수가 일치해야 한다는 고교 교육과정 정규 미분가능 조건을 통해 $f(0)$의 최댓값과 최솟값의 곱을 구하는 최고난도 킬러 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 함수 $g(x)$의 첨점과 미분가능 조건&lt;/b&gt;&lt;br&gt;
+  함수 $g(x)$가 $x = \beta$에서 꺾인 꼭짓점을 가질 때 좌도함수와 우도함수의 차이는 $-8f&#x27;(\beta)$입니다. 여기에 절댓값 함수 $|P(x)|$가 더해진 $h(x)$가 실수 전체에서 미분가능하려면, 두 함수의 꺾임이 $x = \beta$에서 완벽히 상쇄되어야 합니다:&lt;br&gt;
+  $$h&#x27;(\beta^+) = h&#x27;(\beta^-) \iff P&#x27;(\beta) = 4f&#x27;(\beta)$$&lt;br&gt;
+  &lt;b&gt;2단계: 두 가지 경우의 수 분석&lt;/b&gt;&lt;br&gt;
+  - Case 1: $P(x) = (x-2)^2(x-3)$ 일 때 $\beta = 3 \implies f(0) = -12$ 또는 $-48$&lt;br&gt;
+  - Case 2: $P(x) = (x-2)^2(x-1)$ 일 때 $\beta = 1 \implies f(0) = -\frac{1}{4}$ 또는 $-\frac{9}{4}$&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;3단계: 최댓값 $M$, 최솟값 $m$ 및 곱 계산&lt;/b&gt;&lt;br&gt;
+  가능한 $f(0)$의 네 값 $\left\{-48, -12, -\frac{9}{4}, -\frac{1}{4}\right\}$ 중:&lt;br&gt;
+  - 최댓값: $M = -\frac{1}{4}$&lt;br&gt;
+  - 최솟값: $m = -48$&lt;br&gt;&lt;br&gt;
+  $$M \times m = \left(-\frac{1}{4}\right) \times (-48) = 12$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  따라서 $M \times m$의 값은 $12$입니다.&lt;br&gt;
+  바른 답은 &lt;b&gt;③번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 절댓값 미분가능 조건은 좌미분계수와 우미분계수의 합일 조건($h&#x27;(\beta^+) = h&#x27;(\beta^-)$)을 통해 첨점의 기울기 변화량이 정확히 상쇄됨을 이용합니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;Find the maximum and minimum values ​​of $f(0)$ that satisfy the conditions and multiply them to get 12.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem evaluates &lt;b&gt;differentiability of absolute value compositions with cubic functions&lt;/b&gt;, matching one-sided derivatives at corners.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Differentiability condition at the corner $x = \beta$&lt;/b&gt;&lt;br&gt;
+  Smoothness requires left and right derivatives to agree:&lt;br&gt;
+  $$h&#x27;(\beta^+) = h&#x27;(\beta^-) \iff P&#x27;(\beta) = 4f&#x27;(\beta)$$&lt;br&gt;
+  &lt;b&gt;Step 2: Evaluate the four candidate values of $f(0)$&lt;/b&gt;&lt;br&gt;
+  Analyzing Case 1 and Case 2 produces four possible values: $\{-48, -12, -9/4, -1/4\}$.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 3: Compute $M \times m$&lt;/b&gt;&lt;br&gt;
+  Maximum $M = -1/4$, Minimum $m = -48$.&lt;br&gt;
+  $$M \times m = (-1/4) \times (-48) = 12$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;
+&lt;p&gt;
+  The product $M \times m$ is $12$.&lt;br&gt;
+  Therefore, the correct choice is &lt;b&gt;Option ③&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Key Tip&lt;/b&gt;: Equating one-sided derivative steps cancels the corner discontinuity.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f(0)$의 최댓값과 최솟값의 곱으로 알맞은 것은?</span><div class="bilingual-en">What is the correct product of the maximum and minimum values ​​of $f(0)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$10$</div><div class="opt"><span class="n">2</span>$11$</div><div class="opt"><span class="n">3</span>$12$</div><div class="opt"><span class="n">4</span>$13$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -1221,8 +1264,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270921';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = '2a865492';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '6f3b5c50';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270921.html';
 
@@ -1247,8 +1290,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270921';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || '2a865492';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '6f3b5c50';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270921.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30929.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30929">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="e7f86291">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="333382ab">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -802,7 +802,69 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: When $S_m = \sum_{j=1}^{m+1} \frac{1}{j}$, the difference $S_m - S_{m-1}$ isolates the single term $\frac{1}{m+1}$ instantly.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="$a_1+a_{10} = 35/22 \implies p=22, q=35 \implies p+q = 57$ (단답형 정답: 57)." data-exp-en="$a_1+a_{10} = 35/22 \implies p=22, q=35 \implies p+q = 57$ (Short answer: 57)."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$의 첫째항부터 제$m$항까지의 합을 $S_m$이라 하자. 모든 자연수 $m$에 대하여 $S_m = \sum_{n=1}^\infty \frac{m+1}{n(n+m+1)}$일 때, $a_1+a_{10}=\frac{q}{p}$이다. $p+q$의 값을 구하시오. (단, $p$와 $q$는 서로소인 자연수이다.) [4점]</span><div class="bilingual-en">Let the sum of the first term to the second term $m$ of the sequence $\{a_n\}$ be $S_m$. For every natural number $m$, when it is $S_m = \sum_{n=1}^\infty \frac{m+1}{n(n+m+1)}$, it is $a_1+a_{10}=\frac{q}{p}$. Find the value of $p+q$. (However, $p$ and $q$ are natural numbers that are relatively prime.) [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>53</div><div class="opt"><span class="n">2</span>55</div><div class="opt"><span class="n">3</span>57</div><div class="opt"><span class="n">4</span>59</div><div class="opt"><span class="n">5</span>61</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$a_1+a_{10} = 35/22 \implies p=22, q=35 \implies p+q = 57$ (단답형 정답: 57).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;부분분수 분해(Telescoping Series)&lt;/b&gt;를 이용하여 무한급수의 합 $S_m$을 $m$에 관한 닫힌 형식(Closed Form)으로 유도하고, 수열의 합과 일반항의 관계($a_{10} = S_{10} - S_9$)를 적용하여 유리수의 합을 구하는 고난도 급수 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 일반항의 부분분수 분해&lt;/b&gt;&lt;br&gt;
+  주어진 식 $\frac{m+1}{n(n+m+1)}$ 에 부분분수 공식 $\frac{1}{A B} = \frac{1}{B-A}\left(\frac{1}{A} - \frac{1}{B}\right)$를 적용합니다.&lt;br&gt;
+  $B - A = (n+m+1) - n = m+1$ 이므로 분자의 $m+1$과 완벽히 상쇄됩니다.&lt;br&gt;
+  $$\frac{m+1}{n(n+m+1)} = \frac{1}{n} - \frac{1}{n+m+1}$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: 급수 $S_m$의 망원합(망원급수) 계산&lt;/b&gt;&lt;br&gt;
+  급수 $S_m$은 다음과 같습니다.&lt;br&gt;
+  $$S_m = \sum_{n=1}^\infty \left( \frac{1}{n} - \frac{1}{n+m+1} \right) = \lim_{N \to \infty} \sum_{n=1}^N \left( \frac{1}{n} - \frac{1}{n+m+1} \right)$$
+  앞에서부터 $m+1$개의 항이 남고, $N \to \infty$ 일 때 뒤쪽 항들은 모두 $0$으로 수렴합니다.&lt;br&gt;
+  $$S_m = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{m+1}$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: $a_1$ 및 $a_{10}$ 도출&lt;/b&gt;&lt;br&gt;
+  수열의 합과 일반항의 관계에 의하여:&lt;br&gt;
+  • $a_1 = S_1 = 1 + \frac{1}{2} = \frac{3}{2}$&lt;br&gt;
+  • $a_{10} = S_{10} - S_9$ 이므로 조화급수 형태의 차를 구하면 마지막 제11번째 항만 남습니다!&lt;br&gt;
+  $$a_{10} = \left( 1 + \frac{1}{2} + \cdots + \frac{1}{11} \right) - \left( 1 + \frac{1}{2} + \cdots + \frac{1}{10} \right) = \frac{1}{11}$$
+  &lt;br&gt;
+  &lt;b&gt;4단계: $a_1 + a_{10}$ 및 $p+q$ 계산&lt;/b&gt;&lt;br&gt;
+  두 수의 합을 통분하여 계산합니다.&lt;br&gt;
+  $$a_1 + a_{10} = \frac{3}{2} + \frac{1}{11} = \frac{33 + 2}{22} = \frac{35}{22}$$&lt;br&gt;
+  $p = 22, q = 35$ 이고 둘은 최대공약수가 $1$인 서로소인 자연수입니다.&lt;br&gt;
+  $$p + q = 22 + 35 = 57$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  최종 구하는 값 $p+q$는 $57$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;57&lt;/b&gt; 입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 부분분수 차가 $m+1$칸일 때 망원급수의 합은 $\sum_{k=1}^{m+1} \frac{1}{k}$로 앞쪽 $m+1$개의 항의 합이 됩니다. $a_{10} = S_{10} - S_9 = \frac{1}{11}$을 직접 나열하지 않고 즉시 뽑아내는 것이 핵심입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;$a_1+a_{10} = 35/22 \implies p=22, q=35 \implies p+q = 57$ (Short answer: 57).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem assesses the summation of &lt;b&gt;infinite telescoping series via partial fraction decomposition&lt;/b&gt;, determining the closed form of $S_m$, and relating series sums to individual terms ($a_{10} = S_{10} - S_9$).&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Decompose into partial fractions&lt;/b&gt;&lt;br&gt;
+  Using $\frac{1}{n(n+m+1)} = \frac{1}{m+1}\left(\frac{1}{n} - \frac{1}{n+m+1}\right)$:&lt;br&gt;
+  $$\frac{m+1}{n(n+m+1)} = \frac{1}{n} - \frac{1}{n+m+1}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Evaluate the telescoping series $S_m$&lt;/b&gt;&lt;br&gt;
+  Summing from $n = 1$ to $\infty$ causes all intermediate terms to cancel, leaving the first $m+1$ terms as the tail vanishes to $0$:&lt;br&gt;
+  $$S_m = \sum_{n=1}^\infty \left(\frac{1}{n} - \frac{1}{n+m+1}\right) = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{m+1}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Evaluate $a_1$ and $a_{10}$&lt;/b&gt;&lt;br&gt;
+  • $a_1 = S_1 = 1 + \frac{1}{2} = \frac{3}{2}$&lt;br&gt;
+  • $a_{10} = S_{10} - S_9 = \frac{1}{11}$
+  &lt;br&gt;
+  &lt;b&gt;Step 4: Compute $a_1 + a_{10}$ and $p + q$&lt;/b&gt;&lt;br&gt;
+  $$a_1 + a_{10} = \frac{3}{2} + \frac{1}{11} = \frac{35}{22}$$&lt;br&gt;
+  Here $p = 22$ and $q = 35$, which are coprime positive integers.&lt;br&gt;
+  $$p + q = 22 + 35 = 57$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The final value $p+q$ is $57$.&lt;br&gt;
+  Therefore, the answer is &lt;b&gt;57&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: When $S_m = \sum_{j=1}^{m+1} \frac{1}{j}$, the difference $S_m - S_{m-1}$ isolates the single term $\frac{1}{m+1}$ instantly.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$의 첫째항부터 제$m$항까지의 합을 $S_m$이라 하자. 모든 자연수 $m$에 대하여 $S_m = \sum_{n=1}^\infty \frac{m+1}{n(n+m+1)}$일 때, $a_1+a_{10}=\frac{q}{p}$이다. $p+q$의 값을 구하시오. (단, $p$와 $q$는 서로소인 자연수이다.) [4점]</span><div class="bilingual-en">Let the sum of the first term to the second term $m$ of the sequence $\{a_n\}$ be $S_m$. For every natural number $m$, when it is $S_m = \sum_{n=1}^\infty \frac{m+1}{n(n+m+1)}$, it is $a_1+a_{10}=\frac{q}{p}$. Find the value of $p+q$. (However, $p$ and $q$ are natural numbers that are relatively prime.) [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>53</div><div class="opt"><span class="n">2</span>55</div><div class="opt"><span class="n">3</span>57</div><div class="opt"><span class="n">4</span>59</div><div class="opt"><span class="n">5</span>61</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1231,8 +1293,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30929';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = 'e7f86291';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '333382ab';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30929.html';
 
@@ -1257,8 +1319,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30929';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || 'e7f86291';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '333382ab';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30929.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

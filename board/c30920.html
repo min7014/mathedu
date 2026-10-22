@@ -751,7 +751,87 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Critical horizontal intersection levels occur strictly at local extrema and piecewise stitching endpoints.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="합은 $13\pi/2 \implies p=2, q=13 \implies p+q = 15$ (단답형 정답: 15)." data-exp-en="The sum is $13\pi/2 \implies p=2, q=13 \implies p+q = 15$ (short answer: 15)."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">닫힌구간 $[0, 2\pi]$에서 정의된 함수 $f(x) = \begin{cases} \sin x - 1 &amp; (0 \le x &lt; \pi) \\ -\sqrt{2}\sin x - 1 &amp; (\pi \le x \le 2\pi) \end{cases}$가 있다. $0 \le t \le 2\pi$인 실수 $t$에 대하여 $x$에 대한 방정식 $f(x)=f(t)$의 서로 다른 실근의 개수가 3이 되도록 하는 모든 $t$의 값의 합은 $\frac{q}{p}\pi$이다. $p+q$의 값을 구하시오. (단, $p$와 $q$는 서로소인 자연수이다.) [4점]</span><div class="bilingual-en">There is a function $f(x) = \begin{cases} \sin x - 1 &amp; (0 \le x &lt; \pi) \\ -\sqrt{2}\sin x - 1 &amp; (\pi \le x \le 2\pi) \end{cases}$ defined in the closed interval $[0, 2\pi]$. For a real number $t$ that is Find the value of $p+q$. (However, $p$ and $q$ are natural numbers that are relatively prime.) [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>13</div><div class="opt"><span class="n">3</span>15</div><div class="opt"><span class="n">4</span>17</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;합은 $13\pi/2 \implies p=2, q=13 \implies p+q = 15$ (단답형 정답: 15).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;구간별 삼각함수의 그래프&lt;/b&gt;를 정확히 작도하고, 수평선 $y=f(t)$와의 교점의 개수가 3개가 되는 모든 $t$의 값을 찾아 합을 구하는 기하학적·해석학적 고난도 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 구간별 함수 $y=f(x)$의 그래프 분석&lt;/b&gt;&lt;br&gt;
+  정의역 $[0, 2\pi]$에서 함수 $f(x)$의 개형을 구간별로 조사합니다.&lt;br&gt;
+  • $0 \le x &lt; \pi$ 일 때: $f(x) = \sin x - 1$&lt;br&gt;
+  이 구간에서 $\sin x \ge 0$이므로 $-1 \le f(x) \le 0$ 입니다.&lt;br&gt;
+  - $x = 0$ 일 때 $f(0) = -1$&lt;br&gt;
+  - $x = \frac{\pi}{2}$ 일 때 최댓값 $f(\frac{\pi}{2}) = 0$&lt;br&gt;
+  - $x \to \pi^-$ 일 때 $f(x) \to -1$&lt;br&gt;
+  • $\pi \le x \le 2\pi$ 일 때: $f(x) = -\sqrt{2}\sin x - 1$&lt;br&gt;
+  이 구간에서 $\sin x \le 0$이므로 $-\sqrt{2}\sin x \ge 0$ 입니다.&lt;br&gt;
+  - $x = \pi$ 일 때 $f(\pi) = -1$&lt;br&gt;
+  - $x = \frac{3\pi}{2}$ 일 때 최댓값 $f(\frac{3\pi}{2}) = -\sqrt{2}(-1) - 1 = \sqrt{2} - 1 \approx 0.414$&lt;br&gt;
+  - $x = 2\pi$ 일 때 $f(2\pi) = -1$
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 교점 개수가 3개가 되는 수평선 높이 판별&lt;/b&gt;&lt;br&gt;
+  직선 $y = f(t)$와 곡선 $y=f(x)$의 교점 개수가 3개가 되는 $y$-값은 그래프 분석 결과 오직 두 가지입니다.&lt;br&gt;
+  (1) $y = -1$: 양쪽 구간의 시작/끝점이 만나는 높이로 교점 3개 발생 ($x = 0, \pi, 2\pi$)&lt;br&gt;
+  (2) $y = 0$: 첫 번째 구간의 극댓값이자 두 번째 구간의 곡선과 2번 만나는 높이로 교점 3개 발생 ($x = \frac{\pi}{2}$에서 접하고, $\pi &lt; x &lt; 2\pi$에서 2개 만남)
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;3단계: 각 경우에 해당하는 모든 $t$의 값 도출&lt;/b&gt;&lt;br&gt;
+  • &lt;b&gt;Case 1: $f(t) = -1$&lt;/b&gt;&lt;br&gt;
+  정의역 $[0, 2\pi]$에서 $f(t) = -1$이 되는 $t$는:&lt;br&gt;
+  $$t = 0, \quad t = \pi, \quad t = 2\pi$$
+  • &lt;b&gt;Case 2: $f(t) = 0$&lt;/b&gt;&lt;br&gt;
+  - $0 \le t &lt; \pi$에서: $\sin t - 1 = 0 \implies \sin t = 1 \implies t = \frac{\pi}{2}$&lt;br&gt;
+  - $\pi \le t \le 2\pi$에서: $-\sqrt{2}\sin t - 1 = 0 \implies \sin t = -\frac{1}{\sqrt{2}} = -\frac{\sqrt{2}}{2}$&lt;br&gt;
+  이 구간에서 $\sin$ 값이 $-\frac{\sqrt{2}}{2}$가 되는 두 각은 제3, 제4사분면의 각입니다.&lt;br&gt;
+  $$t = \pi + \frac{\pi}{4} = \frac{5\pi}{4}, \quad t = 2\pi - \frac{\pi}{4} = \frac{7\pi}{4}$$
+  &lt;br&gt;
+  &lt;b&gt;4단계: 모든 $t$의 합 및 $p+q$ 계산&lt;/b&gt;&lt;br&gt;
+  구한 모든 $t$의 값을 합산합니다.&lt;br&gt;
+  $$\text{합} = (0 + \pi + 2\pi) + \frac{\pi}{2} + \left(\frac{5\pi}{4} + \frac{7\pi}{4}\right)$$
+  $$= 3\pi + \frac{\pi}{2} + 3\pi = 6\pi + \frac{\pi}{2} = \frac{13\pi}{2}$$&lt;br&gt;
+  따라서 $p = 2, q = 13$ 이며 두 자연수는 서로소입니다.&lt;br&gt;
+  $$p + q = 2 + 13 = 15$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  최종 구하는 값 $p+q$는 $15$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;15&lt;/b&gt; 입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 수평선 $y = c$와의 교점 개수 문제는 그래프의 &lt;b&gt;극값(접선 기울기 0)&lt;/b&gt;과 &lt;b&gt;경계값(구간 연결점)&lt;/b&gt;에서 개수 변화가 일어납니다. 극댓값 $y=0$과 경계 최솟값 $y=-1$을 빠르게 특정하면 실근의 대칭성을 이용해 합을 신속히 구할 수 있습니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;The sum is $13\pi/2 \implies p=2, q=13 \implies p+q = 15$ (short answer: 15).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem analyzes the graph of a &lt;b&gt;piecewise sinusoidal function&lt;/b&gt;, identifying the exact horizontal levels $y = f(t)$ where the equation $f(x) = f(t)$ produces exactly three distinct real solutions, and summing all valid values of $t$.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Sketch and analyze $y = f(x)$ over $[0, 2\pi]$&lt;/b&gt;&lt;br&gt;
+  • Interval $[0, \pi)$: $f(x) = \sin x - 1$.&lt;br&gt;
+  Starts at $(0, -1)$, peaks at local maximum $(\frac{\pi}{2}, 0)$, and approaches $(-1)$ as $x \to \pi^-$.&lt;br&gt;
+  • Interval $[\pi, 2\pi]$: $f(x) = -\sqrt{2}\sin x - 1$.&lt;br&gt;
+  Starts at $(\pi, -1)$, reaches maximum at $x = \frac{3\pi}{2}$ where $f(\frac{3\pi}{2}) = \sqrt{2}-1 \approx 0.414$, and ends at $(2\pi, -1)$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Identify horizontal levels yielding exactly 3 intersections&lt;/b&gt;&lt;br&gt;
+  From the visual structure, a horizontal line intersects the graph at exactly 3 points only when:&lt;br&gt;
+  (1) $f(t) = -1$: The baseline containing the boundary points.&lt;br&gt;
+  (2) $f(t) = 0$: Tangent to the first crest ($x = \pi/2$) and cutting through the second crest twice.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 3: Solve for all corresponding values of $t$&lt;/b&gt;&lt;br&gt;
+  • For $f(t) = -1$:&lt;br&gt;
+  $$t = 0, \quad \pi, \quad 2\pi$$&lt;br&gt;
+  • For $f(t) = 0$:&lt;br&gt;
+  From $[0, \pi)$: $\sin t = 1 \implies t = \frac{\pi}{2}$.&lt;br&gt;
+  From $[\pi, 2\pi]$: $-\sqrt{2}\sin t - 1 = 0 \implies \sin t = -\frac{\sqrt{2}}{2} \implies t = \frac{5\pi}{4}, \frac{7\pi}{4}$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 4: Compute the sum of all valid $t$ and evaluate $p + q$&lt;/b&gt;&lt;br&gt;
+  $$\text{Sum} = (0 + \pi + 2\pi) + \frac{\pi}{2} + \left(\frac{5\pi}{4} + \frac{7\pi}{4}\right) = 3\pi + \frac{\pi}{2} + 3\pi = \frac{13\pi}{2}$$&lt;br&gt;
+  Here $p = 2$ and $q = 13$, which are coprime positive integers.&lt;br&gt;
+  $$p + q = 2 + 13 = 15$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The final value $p+q$ is $15$.&lt;br&gt;
+  Therefore, the answer is &lt;b&gt;15&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Critical horizontal intersection levels occur strictly at local extrema and piecewise stitching endpoints.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">닫힌구간 $[0, 2\pi]$에서 정의된 함수 $f(x) = \begin{cases} \sin x - 1 &amp; (0 \le x &lt; \pi) \\ -\sqrt{2}\sin x - 1 &amp; (\pi \le x \le 2\pi) \end{cases}$가 있다. $0 \le t \le 2\pi$인 실수 $t$에 대하여 $x$에 대한 방정식 $f(x)=f(t)$의 서로 다른 실근의 개수가 3이 되도록 하는 모든 $t$의 값의 합은 $\frac{q}{p}\pi$이다. $p+q$의 값을 구하시오. (단, $p$와 $q$는 서로소인 자연수이다.) [4점]</span><div class="bilingual-en">There is a function $f(x) = \begin{cases} \sin x - 1 &amp; (0 \le x &lt; \pi) \\ -\sqrt{2}\sin x - 1 &amp; (\pi \le x \le 2\pi) \end{cases}$ defined in the closed interval $[0, 2\pi]$. For a real number $t$ that is Find the value of $p+q$. (However, $p$ and $q$ are natural numbers that are relatively prime.) [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>13</div><div class="opt"><span class="n">3</span>15</div><div class="opt"><span class="n">4</span>17</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

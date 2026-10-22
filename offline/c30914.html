@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30914.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30914">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="9073a989">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="60e0d8e5">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -818,7 +818,85 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Symmetry across $y=x$ allows direct coordinate swapping $(x, y) \mapsto (y, x)$ without ever constructing the explicit algebraic circle equation.
 </p>
   </div>
-</div><div class="q" data-ans="5" data-exp="$x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$입니다." data-exp-en="This is $x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">자연수 $n$에 대하여 곡선 $y=2^x$ 위의 두 점 $A_n, B_n$이 다음 조건을 만족시킨다. (가) 직선 $A_n B_n$의 기울기는 3이다. (나) $\overline{A_n B_n} = n\sqrt{10}$. 중심이 직선 $y=x$ 위에 있고 두 점 $A_n, B_n$을 지나는 원이 곡선 $y=\log_2 x$와 만나는 두 점의 $x$좌표 중 큰 값을 $x_n$이라 하자. $x_1 + x_2 + x_3$의 값은? [4점]</span><div class="bilingual-en">For the natural number $n$, two points $A_n, B_n$ on the curve $y=2^x$ satisfy the following conditions. (A) The slope of the straight line $A_n B_n$ is 3. (B) $\overline{A_n B_n} = n\sqrt{10}$. Let $x_n$ be the larger of the $x$ coordinates of the two points where the center lies on the straight line What is the value of $x_1 + x_2 + x_3$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{150}{7}$</div><div class="opt"><span class="n">2</span>$\frac{155}{7}$</div><div class="opt"><span class="n">3</span>$\frac{160}{7}$</div><div class="opt"><span class="n">4</span>$\frac{165}{7}$</div><div class="opt"><span class="n">5</span>$\frac{170}{7}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="5" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;지수함수와 로그함수의 역함수 대칭성($y=x$)&lt;/b&gt;, 직선의 기울기와 점과 점 사이의 거리 공식, 그리고 원의 대칭성을 융합한 고난도 해석기하·대수 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 두 점 $A_n, B_n$의 좌표 및 기울기·거리 연립&lt;/b&gt;&lt;br&gt;
+  지수함수 $y=2^x$ 위의 두 점을 $A_n(a_n, 2^{a_n})$, $B_n(b_n, 2^{b_n})$ ($a_n &lt; b_n$)이라 합시다.&lt;br&gt;
+  조건 (가)에 의해 두 점을 지나는 직선의 기울기는 $3$입니다.&lt;br&gt;
+  $$\frac{2^{b_n} - 2^{a_n}}{b_n - a_n} = 3 \implies 2^{b_n} - 2^{a_n} = 3(b_n - a_n) \quad \cdots\cdots \text{㉠}$$
+  조건 (나)에 의해 두 점 사이의 거리가 $n\sqrt{10}$입니다.&lt;br&gt;
+  $$(b_n - a_n)^2 + (2^{b_n} - 2^{a_n})^2 = (n\sqrt{10})^2 = 10n^2 \quad \cdots\cdots \text{㉡}$$
+  ㉠을 ㉡에 대입하면:&lt;br&gt;
+  $$(b_n - a_n)^2 + [3(b_n - a_n)]^2 = 10(b_n - a_n)^2 = 10n^2 \implies (b_n - a_n)^2 = n^2$$
+  $b_n &gt; a_n$ 이므로 $b_n - a_n = n$ 입니다.&lt;br&gt;
+  따라서 $a_n = b_n - n$ 입니다.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: $2^{b_n}$의 일반식 유도&lt;/b&gt;&lt;br&gt;
+  $a_n = b_n - n$ 을 식 ㉠에 대입합니다.&lt;br&gt;
+  $$2^{b_n} - 2^{b_n - n} = 3n \implies 2^{b_n}(1 - 2^{-n}) = 3n$$
+  $$2^{b_n} = \frac{3n}{1 - 2^{-n}} = \frac{3n \cdot 2^n}{2^n - 1}$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 원의 대칭성과 로그함수와의 교점 $x_n$ 도출&lt;/b&gt;&lt;br&gt;
+  원의 중심이 직선 $y=x$ 위에 있으므로 원은 직선 $y=x$에 대하여 완벽히 대칭입니다.&lt;br&gt;
+  지수함수 $y=2^x$와 로그함수 $y=\log_2 x$ 역시 $y=x$에 대하여 대칭인 역함수 관계입니다.&lt;br&gt;
+  따라서 원과 로그함수의 교점은 원과 지수함수의 교점인 $A_n, B_n$을 직선 $y=x$에 대칭이동한 점 $(2^{a_n}, a_n)$과 $(2^{b_n}, b_n)$입니다.&lt;br&gt;
+  이 두 점의 $x$좌표 중 더 큰 값 $x_n$은 바로 $2^{b_n}$ 입니다!&lt;br&gt;
+  $$x_n = 2^{b_n} = \frac{3n \cdot 2^n}{2^n - 1}$$
+  &lt;br&gt;
+  &lt;b&gt;4단계: $x_1 + x_2 + x_3$ 계산&lt;/b&gt;&lt;br&gt;
+  $n=1, 2, 3$을 대입합니다.&lt;br&gt;
+  • $x_1 = \frac{3(1) \cdot 2^1}{2^1 - 1} = \frac{6}{1} = 6$&lt;br&gt;
+  • $x_2 = \frac{3(2) \cdot 2^2}{2^2 - 1} = \frac{24}{3} = 8$&lt;br&gt;
+  • $x_3 = \frac{3(3) \cdot 2^3}{2^3 - 1} = \frac{72}{7}$&lt;br&gt;
+  구하는 합은:&lt;br&gt;
+  $$x_1 + x_2 + x_3 = 6 + 8 + \frac{72}{7} = 14 + \frac{72}{7} = \frac{98 + 72}{7} = \frac{170}{7}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  세 값의 합은 $\frac{170}{7}$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;⑤번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 중심이 $y=x$ 위에 있는 원과 역함수 관계인 두 곡선($2^x, \log_2 x$)의 교점은 반드시 $y=x$에 대칭입니다. 따라서 복잡한 원의 방정식을 세울 필요 없이 $(x, y) \leftrightarrow (y, x)$ 대칭 원리만으로 $x_n = 2^{b_n}$을 즉시 간파하는 것이 핵심입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;This is $x_1=6, x_2=8, x_3=72/7 \implies 6 + 8 + 72/7 = 14 + 72/7 = 170/7$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem synthesizes the &lt;b&gt;inverse symmetry of exponential ($2^x$) and logarithmic ($\log_2 x$) functions across $y=x$&lt;/b&gt;, geometric line properties (slope and distance), and circle reflectional invariance.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Set up slope and distance equations on $y=2^x$&lt;/b&gt;&lt;br&gt;
+  Let the points on $y=2^x$ be $A_n(a_n, 2^{a_n})$ and $B_n(b_n, 2^{b_n})$ with $a_n &lt; b_n$.&lt;br&gt;
+  • Slope $= 3$ gives:&lt;br&gt;
+  $$\frac{2^{b_n} - 2^{a_n}}{b_n - a_n} = 3 \implies 2^{b_n} - 2^{a_n} = 3(b_n - a_n) \quad \cdots\cdots (1)$$&lt;br&gt;
+  • Distance $= n\sqrt{10}$ gives:&lt;br&gt;
+  $$(b_n - a_n)^2 + [3(b_n - a_n)]^2 = 10(b_n - a_n)^2 = 10n^2 \implies b_n - a_n = n$$&lt;br&gt;
+  Thus, $a_n = b_n - n$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Solve for $2^{b_n}$&lt;/b&gt;&lt;br&gt;
+  Substitute $a_n = b_n - n$ into equation (1):&lt;br&gt;
+  $$2^{b_n} - 2^{b_n - n} = 3n \implies 2^{b_n}(1 - 2^{-n}) = 3n \implies 2^{b_n} = \frac{3n \cdot 2^n}{2^n - 1}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Exploit circle and inverse symmetry across $y = x$&lt;/b&gt;&lt;br&gt;
+  Since the center of the circle lies on $y=x$, the circle is symmetric with respect to $y=x$.&lt;br&gt;
+  Because $y = \log_2 x$ is the reflection of $y = 2^x$ across $y = x$, the intersection points of the circle with $y = \log_2 x$ are precisely the reflections $(2^{a_n}, a_n)$ and $(2^{b_n}, b_n)$.&lt;br&gt;
+  The larger $x$-coordinate of these two points is $x_n = 2^{b_n}$:&lt;br&gt;
+  $$x_n = \frac{3n \cdot 2^n}{2^n - 1}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 4: Compute the sum $x_1 + x_2 + x_3$&lt;/b&gt;&lt;br&gt;
+  • $x_1 = \frac{3(1)(2)}{1} = 6$&lt;br&gt;
+  • $x_2 = \frac{3(2)(4)}{3} = 8$&lt;br&gt;
+  • $x_3 = \frac{3(3)(8)}{7} = \frac{72}{7}$&lt;br&gt;
+  Summing:&lt;br&gt;
+  $$x_1 + x_2 + x_3 = 14 + \frac{72}{7} = \frac{170}{7}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The sum of the three values is $\frac{170}{7}$.&lt;br&gt;
+  Therefore, the correct option is &lt;b&gt;Option ⑤&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Symmetry across $y=x$ allows direct coordinate swapping $(x, y) \mapsto (y, x)$ without ever constructing the explicit algebraic circle equation.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">자연수 $n$에 대하여 곡선 $y=2^x$ 위의 두 점 $A_n, B_n$이 다음 조건을 만족시킨다. (가) 직선 $A_n B_n$의 기울기는 3이다. (나) $\overline{A_n B_n} = n\sqrt{10}$. 중심이 직선 $y=x$ 위에 있고 두 점 $A_n, B_n$을 지나는 원이 곡선 $y=\log_2 x$와 만나는 두 점의 $x$좌표 중 큰 값을 $x_n$이라 하자. $x_1 + x_2 + x_3$의 값은? [4점]</span><div class="bilingual-en">For the natural number $n$, two points $A_n, B_n$ on the curve $y=2^x$ satisfy the following conditions. (A) The slope of the straight line $A_n B_n$ is 3. (B) $\overline{A_n B_n} = n\sqrt{10}$. Let $x_n$ be the larger of the $x$ coordinates of the two points where the center lies on the straight line What is the value of $x_1 + x_2 + x_3$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{150}{7}$</div><div class="opt"><span class="n">2</span>$\frac{155}{7}$</div><div class="opt"><span class="n">3</span>$\frac{160}{7}$</div><div class="opt"><span class="n">4</span>$\frac{165}{7}$</div><div class="opt"><span class="n">5</span>$\frac{170}{7}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1247,8 +1325,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30914';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = '9073a989';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '60e0d8e5';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30914.html';
 
@@ -1273,8 +1351,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30914';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || '9073a989';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '60e0d8e5';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30914.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

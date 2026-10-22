@@ -728,7 +728,64 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Recognizing reciprocal bases ($\log_a b = \frac{1}{\log_b a}$) immediately converts the setup into a symmetric sum-and-product quadratic structure.
 </p>
   </div>
-</div><div class="q" data-ans="1" data-exp="$k = 3$, $\log_2 a = 3 \implies a = 8$. 따라서 $a+k = 8+3 = 11$입니다." data-exp-en="$k = 3$, $\log_2 a = 3 \implies a = 8$. Hence $a+k = 8+3 = 11$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$a&gt;2$인 상수 $a$에 대하여 두 수 $\log_2 a, \log_a 8$의 합과 곱이 각각 $4, k$일 때, $a+k$의 값은? [3점]</span><div class="bilingual-en">When the sum and product of two numbers $\log_2 a, \log_a 8$ for the constant $a$ which is [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>12</div><div class="opt"><span class="n">3</span>13</div><div class="opt"><span class="n">4</span>14</div><div class="opt"><span class="n">5</span>15</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="1" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$k = 3$, $\log_2 a = 3 \implies a = 8$. 따라서 $a+k = 8+3 = 11$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;로그의 밑 변환 공식과 역수 관계&lt;/b&gt;를 파악하고, 공통 부분을 치환하여 이차방정식을 해결하는 대수적 추론 능력을 평가합니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 로그의 성질을 통한 두 수의 곱 $k$ 결정&lt;/b&gt;&lt;br&gt;
+  밑 변환 공식과 진수의 거듭제곱 성질에 의하여&lt;br&gt;
+  $$\log_a 8 = \log_a (2^3) = 3 \log_a 2 = \frac{3}{\log_2 a}$$
+  두 수 $\log_2 a$와 $\log_a 8$의 곱 $k$는 다음과 같이 상수로 결정됩니다.&lt;br&gt;
+  $$k = (\log_2 a) \times (\log_a 8) = (\log_2 a) \times \frac{3}{\log_2 a} = 3$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: 합 조건에 치환 적용 및 방정식 풀이&lt;/b&gt;&lt;br&gt;
+  두 수의 합이 $4$이므로 식을 세웁니다.&lt;br&gt;
+  $$\log_2 a + \frac{3}{\log_2 a} = 4$$
+  $X = \log_2 a$ 라 두면, 문제의 조건 $a &gt; 2$ 에서 $X &gt; \log_2 2 = 1$ 입니다.&lt;br&gt;
+  양변에 $X$를 곱하여 정리하면:&lt;br&gt;
+  $$X + \frac{3}{X} = 4 \implies X^2 - 4X + 3 = 0 \implies (X-1)(X-3) = 0$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 조건에 맞는 $a$ 및 $a+k$ 계산&lt;/b&gt;&lt;br&gt;
+  $X &gt; 1$ 이므로 $X = 3$ 입니다.&lt;br&gt;
+  $$\log_2 a = 3 \implies a = 2^3 = 8$$
+  따라서 구하고자 하는 값 $a+k$는 다음과 같습니다.&lt;br&gt;
+  $$a + k = 8 + 3 = 11$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  최종 구하는 값 $a+k$는 $11$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;①번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: $\log_a b$와 $\log_b a$는 서로 역수 관계입니다. $\log_a 8 = 3\log_a 2 = \frac{3}{\log_2 a}$임을 간파하면 두 수의 곱 $k=3$이 즉시 나오고, 합이 4이므로 합과 곱을 이용한 $X^2 - 4X + 3 = 0$이 순식간에 도출됩니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;$k = 3$, $\log_2 a = 3 \implies a = 8$. Hence $a+k = 8+3 = 11$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem evaluates proficiency in the &lt;b&gt;change of base formula and reciprocal relationships in logarithms&lt;/b&gt;, along with solving algebraic equations via substitution.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Simplify the product $k$ using logarithmic properties&lt;/b&gt;&lt;br&gt;
+  Using $\log_a (2^3) = 3\log_a 2 = \frac{3}{\log_2 a}$:&lt;br&gt;
+  $$k = (\log_2 a) \cdot (\log_a 8) = (\log_2 a) \cdot \frac{3}{\log_2 a} = 3$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Solve the sum equation via substitution&lt;/b&gt;&lt;br&gt;
+  The sum of the two numbers is given as $4$:&lt;br&gt;
+  $$\log_2 a + \frac{3}{\log_2 a} = 4$$&lt;br&gt;
+  Substitute $X = \log_2 a$. Since $a &gt; 2$, we have $X &gt; 1$.&lt;br&gt;
+  $$X + \frac{3}{X} = 4 \implies X^2 - 4X + 3 = 0 \implies (X-1)(X-3) = 0$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Determine $a$ and evaluate $a+k$&lt;/b&gt;&lt;br&gt;
+  Given the constraint $X &gt; 1$, we must have $X = 3$.&lt;br&gt;
+  $$\log_2 a = 3 \implies a = 2^3 = 8$$&lt;br&gt;
+  Thus, compute the required sum:&lt;br&gt;
+  $$a + k = 8 + 3 = 11$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The final value $a+k$ is $11$.&lt;br&gt;
+  Hence, the correct answer is &lt;b&gt;Option ①&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Recognizing reciprocal bases ($\log_a b = \frac{1}{\log_b a}$) immediately converts the setup into a symmetric sum-and-product quadratic structure.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$a&gt;2$인 상수 $a$에 대하여 두 수 $\log_2 a, \log_a 8$의 합과 곱이 각각 $4, k$일 때, $a+k$의 값은? [3점]</span><div class="bilingual-en">When the sum and product of two numbers $\log_2 a, \log_a 8$ for the constant $a$ which is [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>11</div><div class="opt"><span class="n">2</span>12</div><div class="opt"><span class="n">3</span>13</div><div class="opt"><span class="n">4</span>14</div><div class="opt"><span class="n">5</span>15</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

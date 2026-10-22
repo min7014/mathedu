@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30925.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30925">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="e144818f">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="2771cac4">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -798,7 +798,65 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Dominant base matching ($4r = 2$) immediately bypasses indeterminate $\frac{\infty}{\infty}$ algebra.
 </p>
   </div>
-</div><div class="q" data-ans="4" data-exp="$r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$입니다." data-exp-en="This is $r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등비수열 $\{a_n\}$에 대하여 $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$일 때, $a_1+a_2$의 값은? [3점]</span><div class="bilingual-en">When the geometric sequence $\{a_n\}$ is $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$, what is the value of $a_1+a_2$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{3}{2}$</div><div class="opt"><span class="n">2</span>$\frac{5}{2}$</div><div class="opt"><span class="n">3</span>$\frac{7}{2}$</div><div class="opt"><span class="n">4</span>$\frac{9}{2}$</div><div class="opt"><span class="n">5</span>$\frac{11}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="4" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;등비수열의 극한과 수렴 조건&lt;/b&gt;을 평가합니다. 밑의 크기에 따른 지수항의 증가 속도를 비교하여 분모와 분자의 최고차항 밑이 일치해야 $0$이 아닌 유한한 값으로 수렴한다는 원리를 이용합니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 등비수열의 극한식 구조 정리&lt;/b&gt;&lt;br&gt;
+  등비수열 $\{a_n\}$의 첫째항을 $a_1$, 공비를 $r$이라 하면 $a_n = a_1 r^{n-1}$ 입니다.&lt;br&gt;
+  분모는 $3 \times 2^{n+1} = 3 \times 2 \times 2^n = 6 \cdot 2^n$ 입니다.&lt;br&gt;
+  주어진 극한식은 다음과 같습니다.&lt;br&gt;
+  $$\lim_{n \to \infty} \frac{4^n a_n - 1}{3 \times 2^{n+1}} = \lim_{n \to \infty} \frac{4^n (a_1 r^{n-1}) - 1}{6 \cdot 2^n} = \lim_{n \to \infty} \frac{\frac{a_1}{r}(4r)^n - 1}{6 \cdot 2^n} = 1$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: 수렴 조건을 통한 공비 $r$ 결정&lt;/b&gt;&lt;br&gt;
+  분모의 지수 밑은 $2$입니다.&lt;br&gt;
+  분자의 지수항 $(4r)^n$의 밑인 $4r$에 대하여:&lt;br&gt;
+  • $4r &gt; 2$ 이면 분자가 훨씬 빠르게 증가하므로 $\infty$로 발산합니다.&lt;br&gt;
+  • $4r &lt; 2$ 이면 분자가 분모보다 느리게 증가하므로 극한값이 $0$이 됩니다.&lt;br&gt;
+  따라서 $0$이 아닌 유한한 값인 $1$로 수렴하기 위해서는 밑이 일치해야 합니다!&lt;br&gt;
+  $$4r = 2 \implies r = \frac{1}{2}$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 계수 비교를 통한 첫째항 $a_1$ 및 $a_1 + a_2$ 계산&lt;/b&gt;&lt;br&gt;
+  $r = \frac{1}{2}$을 대입하면 분자의 계수는 $\frac{a_1}{r} = 2a_1$ 입니다.&lt;br&gt;
+  $$\lim_{n \to \infty} \frac{2a_1 \cdot 2^n - 1}{6 \cdot 2^n} = \frac{2a_1}{6} = \frac{a_1}{3} = 1 \implies a_1 = 3$$
+  따라서 제2항은 $a_2 = a_1 r = 3 \times \frac{1}{2} = \frac{3}{2}$ 입니다.&lt;br&gt;
+  구하고자 하는 두 항의 합은:&lt;br&gt;
+  $$a_1 + a_2 = 3 + \frac{3}{2} = \frac{9}{2}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 값 $a_1 + a_2$는 $\frac{9}{2}$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;④번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 등비수열의 극한이 $0$이 아닌 상수로 수렴하려면 &lt;b&gt;분모와 분자의 최고 밑(Base)이 반드시 같아야 한다&lt;/b&gt;는 원리를 떠올리면 $4r = 2$가 암산으로 즉시 나옵니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;This is $r=1/2, a_1=3 \implies a_1+a_2 = 3 + 3/2 = 9/2$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem tests &lt;b&gt;limits of sequences involving geometric terms&lt;/b&gt;. For the limit of a rational exponential expression to converge to a non-zero finite constant, the dominant exponential bases in the numerator and denominator must match.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Simplify the limit expression&lt;/b&gt;&lt;br&gt;
+  Let $a_n = a_1 r^{n-1}$. The denominator expands as $3 \cdot 2^{n+1} = 6 \cdot 2^n$.&lt;br&gt;
+  $$\lim_{n \to \infty}\frac{4^n a_n - 1}{6 \cdot 2^n} = \lim_{n \to \infty}\frac{\frac{a_1}{r}(4r)^n - 1}{6 \cdot 2^n} = 1$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Determine common ratio $r$ by base matching&lt;/b&gt;&lt;br&gt;
+  To achieve convergence to the non-zero constant $1$, the exponential growth base $(4r)$ in the numerator must equal the base $2$ in the denominator:&lt;br&gt;
+  $$4r = 2 \implies r = \frac{1}{2}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Solve for $a_1$ and calculate $a_1 + a_2$&lt;/b&gt;&lt;br&gt;
+  With $r = \frac{1}{2}$, the leading coefficient in the numerator is $\frac{a_1}{1/2} = 2a_1$:&lt;br&gt;
+  $$\lim_{n \to \infty}\frac{2a_1 \cdot 2^n - 1}{6 \cdot 2^n} = \frac{2a_1}{6} = \frac{a_1}{3} = 1 \implies a_1 = 3$$&lt;br&gt;
+  Thus, $a_2 = a_1 r = 3 \cdot \frac{1}{2} = \frac{3}{2}$.&lt;br&gt;
+  Evaluating the sum:&lt;br&gt;
+  $$a_1 + a_2 = 3 + \frac{3}{2} = \frac{9}{2}$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The sum $a_1 + a_2$ is $\frac{9}{2}$.&lt;br&gt;
+  Hence, the correct option is &lt;b&gt;Option ④&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Dominant base matching ($4r = 2$) immediately bypasses indeterminate $\frac{\infty}{\infty}$ algebra.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">등비수열 $\{a_n\}$에 대하여 $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$일 때, $a_1+a_2$의 값은? [3점]</span><div class="bilingual-en">When the geometric sequence $\{a_n\}$ is $\lim_{n \to \infty}\frac{4^n \times a_n - 1}{3 \times 2^{n+1}} = 1$, what is the value of $a_1+a_2$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{3}{2}$</div><div class="opt"><span class="n">2</span>$\frac{5}{2}$</div><div class="opt"><span class="n">3</span>$\frac{7}{2}$</div><div class="opt"><span class="n">4</span>$\frac{9}{2}$</div><div class="opt"><span class="n">5</span>$\frac{11}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1227,8 +1285,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30925';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = 'e144818f';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '2771cac4';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30925.html';
 
@@ -1253,8 +1311,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30925';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || 'e144818f';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '2771cac4';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30925.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

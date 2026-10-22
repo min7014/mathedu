@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30919.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30919">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="af5d6f42">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="4f1ea774">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -798,7 +798,65 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: A cubic polynomial's local maximum always precedes its local minimum when the leading coefficient is positive.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="$a=3, b=1 \implies a+b = 4$ (단답형 정답: 4)." data-exp-en="$a=3, b=1 \implies a+b = 4$ (Short answer: 4)."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=x^3+ax^2-9x+b$는 $x=1$에서 극소이다. 함수 $f(x)$의 극댓값이 28일 때, $a+b$의 값을 구하시오. (단, $a$와 $b$는 상수이다.) [3점]</span><div class="bilingual-en">The function $f(x)=x^3+ax^2-9x+b$ is infinitesimal in $x=1$. When the local maximum of the function $f(x)$ is 28, find the value of $a+b$. (However, $a$ and $b$ are constants.) [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>2</div><div class="opt"><span class="n">2</span>3</div><div class="opt"><span class="n">3</span>4</div><div class="opt"><span class="n">4</span>5</div><div class="opt"><span class="n">5</span>6</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$a=3, b=1 \implies a+b = 4$ (단답형 정답: 4).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;삼차함수의 극대·극소 조건&lt;/b&gt;($f&#x27;(x) = 0$)을 바탕으로 미정계수 $a, b$를 차례로 결정하고, 극댓값을 활용하여 계수의 합 $a+b$를 구하는 전형적인 다항함수 미분 문제입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 도함수 유도 및 극소 조건 적용&lt;/b&gt;&lt;br&gt;
+  함수 $f(x) = x^3 + ax^2 - 9x + b$ 의 도함수는 다음과 같습니다.&lt;br&gt;
+  $$f&#x27;(x) = 3x^2 + 2ax - 9$$
+  함수 $f(x)$가 $x=1$에서 극소이므로 미분계수가 $0$이어야 합니다 ($f&#x27;(1) = 0$).&lt;br&gt;
+  $$f&#x27;(1) = 3(1)^2 + 2a(1) - 9 = 2a - 6 = 0 \implies 2a = 6 \implies a = 3$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: $f&#x27;(x) = 0$의 두 근을 통한 극대점의 위치 파악&lt;/b&gt;&lt;br&gt;
+  $a=3$을 도함수에 대입하여 인수분해합니다.&lt;br&gt;
+  $$f&#x27;(x) = 3x^2 + 6x - 9 = 3(x^2 + 2x - 3) = 3(x+3)(x-1) = 0$$
+  최고차항 계수가 $1&gt;0$인 삼차함수의 도함수가 아래로 볼록한 이차함수이므로,&lt;br&gt;
+  $x = -3$에서 도함수의 부호가 양에서 음으로 바뀌어 &lt;b&gt;극대&lt;/b&gt;를 갖고,&lt;br&gt;
+  $x = 1$에서 도함수의 부호가 음에서 양으로 바뀌어 &lt;b&gt;극소&lt;/b&gt;를 갖습니다.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;3단계: 극댓값 28을 이용한 $b$ 결정 및 $a+b$ 계산&lt;/b&gt;&lt;br&gt;
+  극댓값이 $28$이므로 $f(-3) = 28$ 입니다.&lt;br&gt;
+  $$f(-3) = (-3)^3 + 3(-3)^2 - 9(-3) + b = -27 + 27 + 27 + b = 27 + b = 28$$
+  따라서 $b = 1$ 입니다.&lt;br&gt;
+  구하고자 하는 두 계수의 합은 다음과 같습니다.&lt;br&gt;
+  $$a + b = 3 + 1 = 4$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 값 $a+b$는 $4$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;4&lt;/b&gt; 입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 삼차함수에서 극대와 극소의 $x$좌표는 도함수의 두 실근입니다. $x=1$이 극소점이면 더 작은 근인 $x=-3$이 반드시 극대점이 됨을 증감표 없이 개형으로 즉시 판단하십시오.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;$a=3, b=1 \implies a+b = 4$ (Short answer: 4).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem verifies ability to determine polynomial coefficients using &lt;b&gt;local extrema conditions ($f&#x27;(x) = 0$)&lt;/b&gt; of a cubic function and calculating function values at local maximum points.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Differentiate and apply the local minimum condition&lt;/b&gt;&lt;br&gt;
+  For $f(x) = x^3 + ax^2 - 9x + b$:&lt;br&gt;
+  $$f&#x27;(x) = 3x^2 + 2ax - 9$$&lt;br&gt;
+  Since $f(x)$ attains a local minimum at $x = 1$, we have $f&#x27;(1) = 0$:&lt;br&gt;
+  $$f&#x27;(1) = 3(1)^2 + 2a(1) - 9 = 2a - 6 = 0 \implies a = 3$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Factor $f&#x27;(x)$ to find the local maximum location&lt;/b&gt;&lt;br&gt;
+  Substituting $a = 3$:&lt;br&gt;
+  $$f&#x27;(x) = 3x^2 + 6x - 9 = 3(x+3)(x-1) = 0$$&lt;br&gt;
+  For a cubic with positive leading coefficient, the graph transitions from increasing to decreasing at the smaller critical value $x = -3$ (local maximum), and from decreasing to increasing at $x = 1$ (local minimum).
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 3: Solve for $b$ using the maximum value $28$&lt;/b&gt;&lt;br&gt;
+  $$f(-3) = (-3)^3 + 3(-3)^2 - 9(-3) + b = 27 + b = 28 \implies b = 1$$&lt;br&gt;
+  Then evaluate the required sum:&lt;br&gt;
+  $$a + b = 3 + 1 = 4$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The final value $a+b$ is $4$.&lt;br&gt;
+  Hence, the answer is &lt;b&gt;4&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: A cubic polynomial&#x27;s local maximum always precedes its local minimum when the leading coefficient is positive.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=x^3+ax^2-9x+b$는 $x=1$에서 극소이다. 함수 $f(x)$의 극댓값이 28일 때, $a+b$의 값을 구하시오. (단, $a$와 $b$는 상수이다.) [3점]</span><div class="bilingual-en">The function $f(x)=x^3+ax^2-9x+b$ is infinitesimal in $x=1$. When the local maximum of the function $f(x)$ is 28, find the value of $a+b$. (However, $a$ and $b$ are constants.) [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>2</div><div class="opt"><span class="n">2</span>3</div><div class="opt"><span class="n">3</span>4</div><div class="opt"><span class="n">4</span>5</div><div class="opt"><span class="n">5</span>6</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1227,8 +1285,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30919';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = 'af5d6f42';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '4f1ea774';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30919.html';
 
@@ -1253,8 +1311,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30919';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || 'af5d6f42';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '4f1ea774';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30919.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

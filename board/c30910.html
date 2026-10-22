@@ -735,7 +735,71 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: An altitude naturally divides a general triangle into two right triangles, letting you bridge trigonometric ratios ($\sin C = \frac{h}{b}$) with the circumradius Law of Sines ($\frac{c}{\sin C} = 2R$).
 </p>
   </div>
-</div><div class="q" data-ans="1" data-exp="$\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$이므로 직각삼각형 $ABH$에서 $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$입니다." data-exp-en="Since it is $\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$, it is $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$ in the right triangle $ABH$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\angle A &gt; \frac{\pi}{2}$인 삼각형 $ABC$의 꼭짓점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하자. $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$이고, 삼각형 $ABC$의 외접원의 넓이가 $50\pi$일 때, 선분 $BH$의 길이는? [4점]</span><div class="bilingual-en">Let $H$ be the foot of the perpendicular line from the vertex $A$ of triangle $\angle A &gt; \frac{\pi}{2}$ to the line segment $BC$. If $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$ and the area of ​​the circumscribed circle of triangle $ABC$ is $50\pi$, what is the length of the line segment $BH$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>$\frac{25}{4}$</div><div class="opt"><span class="n">3</span>$\frac{13}{2}$</div><div class="opt"><span class="n">4</span>$\frac{27}{4}$</div><div class="opt"><span class="n">5</span>7</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="1" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$이므로 직각삼각형 $ABH$에서 $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 삼각형의 &lt;b&gt;사인법칙(Law of Sines)&lt;/b&gt;과 외접원의 반지름, 그리고 직각삼각형에서의 피타고라스 정리를 종합적으로 연계하여 변의 길이를 추론하는 기하학적 종합 문제입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 외접원의 반지름 $R$ 및 변의 비율 설정&lt;/b&gt;&lt;br&gt;
+  삼각형 $ABC$의 외접원의 넓이가 $50\pi$이므로 외접원 반지름 $R$은 다음과 같습니다.&lt;br&gt;
+  $$\pi R^2 = 50\pi \implies R = \sqrt{50} = 5\sqrt{2}$$
+  조건 $\overline{AB} : \overline{AC} = \sqrt{2} : 1$ 에서 $\overline{AC} = x$ ($x&gt;0$)라 두면 $\overline{AB} = \sqrt{2}x$ 입니다.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 직각삼각형 $AHC$를 이용한 $\sin C$ 표현 및 사인법칙 적용&lt;/b&gt;&lt;br&gt;
+  점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하면, 직각삼각형 $AHC$에서 $\overline{AH} = 2$ 입니다.&lt;br&gt;
+  따라서 각 $C$에 대한 사인값은 다음과 같습니다.&lt;br&gt;
+  $$\sin C = \frac{\overline{AH}}{\overline{AC}} = \frac{2}{x}$$
+  삼각형 $ABC$에서 사인법칙을 대변 $\overline{AB}$와 각 $C$에 적용하면:&lt;br&gt;
+  $$\frac{\overline{AB}}{\sin C} = 2R \implies \overline{AB} = 2R \sin C$$
+  대입하면:&lt;br&gt;
+  $$\sqrt{2}x = 2(5\sqrt{2}) \cdot \left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x}$$
+  양변을 $\sqrt{2}$로 나누고 $x$를 곱하면:&lt;br&gt;
+  $$x^2 = 20 \implies x = \sqrt{20} = 2\sqrt{5}$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: $\overline{AB}$ 산출 및 직각삼각형 $ABH$에서 피타고라스 정리 적용&lt;/b&gt;&lt;br&gt;
+  $\overline{AB} = \sqrt{2}x = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$ 입니다.&lt;br&gt;
+  직각삼각형 $ABH$에서 $\angle AHB = 90^\circ$ 이므로 피타고라스 정리를 적용합니다.&lt;br&gt;
+  $$\overline{BH} = \sqrt{\overline{AB}^2 - \overline{AH}^2} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40 - 4} = \sqrt{36} = 6$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  선분 $BH$의 길이는 $6$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;①번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 수선의 발 $H$가 주어지면 높이($\overline{AH}$)를 공통으로 갖는 두 직각삼각형 $AHC$와 $ABH$를 분리하여 보고, 외접원 조건이 나오는 즉시 $2R$과 사인법칙을 결합하는 것이 표준적인 접근법입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;Since it is $\overline{AB} = 2\sqrt{10}, \overline{AH} = 2$, it is $\overline{BH} = \sqrt{(2\sqrt{10})^2 - 2^2} = \sqrt{40-4} = 6$ in the right triangle $ABH$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem integrates the &lt;b&gt;Law of Sines&lt;/b&gt;, circumradius properties, and the Pythagorean theorem on right triangles derived from an altitude dropped to the base.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Determine the circumradius $R$ and parameterize side lengths&lt;/b&gt;&lt;br&gt;
+  Given the circumcircle area $50\pi$, the circumradius is:&lt;br&gt;
+  $$\pi R^2 = 50\pi \implies R = 5\sqrt{2}$$&lt;br&gt;
+  Given the ratio $\overline{AB} : \overline{AC} = \sqrt{2} : 1$, let $\overline{AC} = x$. Then $\overline{AB} = \sqrt{2}x$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Express $\sin C$ from right triangle $AHC$ and apply the Law of Sines&lt;/b&gt;&lt;br&gt;
+  In right triangle $AHC$ with altitude $\overline{AH} = 2$:&lt;br&gt;
+  $$\sin C = \frac{\overline{AH}}{\overline{AC}} = \frac{2}{x}$$&lt;br&gt;
+  By the Law of Sines on $\triangle ABC$:&lt;br&gt;
+  $$\frac{\overline{AB}}{\sin C} = 2R \implies \overline{AB} = 2R \sin C$$&lt;br&gt;
+  Substituting our parameterized expressions:&lt;br&gt;
+  $$\sqrt{2}x = 2(5\sqrt{2})\left(\frac{2}{x}\right) = \frac{20\sqrt{2}}{x}$$&lt;br&gt;
+  Multiplying both sides by $x$ and dividing by $\sqrt{2}$:&lt;br&gt;
+  $$x^2 = 20 \implies x = 2\sqrt{5}$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Compute $\overline{AB}$ and determine $\overline{BH}$ via Pythagorean theorem&lt;/b&gt;&lt;br&gt;
+  The length of hypotenuse $\overline{AB}$ is:&lt;br&gt;
+  $$\overline{AB} = \sqrt{2}(2\sqrt{5}) = 2\sqrt{10}$$&lt;br&gt;
+  In right triangle $ABH$:&lt;br&gt;
+  $$\overline{BH} = \sqrt{\overline{AB}^2 - \overline{AH}^2} = \sqrt{40 - 4} = \sqrt{36} = 6$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The length of segment $BH$ is $6$.&lt;br&gt;
+  Hence, the correct option is &lt;b&gt;Option ①&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: An altitude naturally divides a general triangle into two right triangles, letting you bridge trigonometric ratios ($\sin C = \frac{h}{b}$) with the circumradius Law of Sines ($\frac{c}{\sin C} = 2R$).
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\angle A &gt; \frac{\pi}{2}$인 삼각형 $ABC$의 꼭짓점 $A$에서 선분 $BC$에 내린 수선의 발을 $H$라 하자. $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$이고, 삼각형 $ABC$의 외접원의 넓이가 $50\pi$일 때, 선분 $BH$의 길이는? [4점]</span><div class="bilingual-en">Let $H$ be the foot of the perpendicular line from the vertex $A$ of triangle $\angle A &gt; \frac{\pi}{2}$ to the line segment $BC$. If $\overline{AB}:\overline{AC} = \sqrt{2}:1, \overline{AH}=2$ and the area of ​​the circumscribed circle of triangle $ABC$ is $50\pi$, what is the length of the line segment $BH$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>$\frac{25}{4}$</div><div class="opt"><span class="n">3</span>$\frac{13}{2}$</div><div class="opt"><span class="n">4</span>$\frac{27}{4}$</div><div class="opt"><span class="n">5</span>7</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

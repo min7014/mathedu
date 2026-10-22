@@ -741,7 +741,77 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Pruning recursive branches using the sign condition $a_2 a_3 < 0$ eliminates dead-end paths before detailed calculation.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="가능한 $k^2$의 값은 $4, 2, 4/3, 2/3$이며 합은 8입니다 (단답형 정답: 8)." data-exp-en="The possible values ​​of $k^2$ are $4, 2, 4/3, 2/3$ and the sum is 8 (short answer: 8)."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">양수 $k$에 대하여 $a_1=k$인 수열 $\{a_n\}$이 다음 조건을 만족시킨다. (가) $a_2 \times a_3 &lt; 0$ (나) 모든 자연수 $n$에 대하여 $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$이다. $a_5=0$이 되도록 하는 서로 다른 모든 양수 $k$에 대하여 $k^2$의 값의 합을 구하시오. [4점]</span><div class="bilingual-en">For a positive number $k$, the sequence $\{a_n\}$, which is $a_1=k$, satisfies the following conditions. (a) $a_2 \times a_3 &lt; 0$ (b) For all natural numbers $n$, it is $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$. Find the sum of the values ​​of $k^2$ for all different positive integers [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;가능한 $k^2$의 값은 $4, 2, 4/3, 2/3$이며 합은 8입니다 (단답형 정답: 8).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 조건에 따라 분기되는 &lt;b&gt;수열의 귀납적 정의(점화식)&lt;/b&gt;를 역추적 및 순방향 추적하여, 부호 조건($a_2 a_3 &lt; 0$)과 특정 항 조건($a_5 = 0$)을 동시에 만족시키는 매개변수 $k$의 모든 값을 논리적으로 분류하고 합을 구하는 수능 최고난도 킬러 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 첫째항과 점화식 분기 분석&lt;/b&gt;&lt;br&gt;
+  첫째항 $a_1 = k &gt; 0$ 이며 점화식은 다음과 같이 두 갈래로 주어집니다.&lt;br&gt;
+  $$a_{n+1} = a_n - \frac{2k}{3} \quad \text{또는} \quad a_{n+1} = -k a_n$$
+  따라서 제2항 $a_2$의 후보는 다음과 같습니다.&lt;br&gt;
+  • 경로 A: $a_2 = k - \frac{2k}{3} = \frac{k}{3} &gt; 0$&lt;br&gt;
+  • 경로 B: $a_2 = -k(k) = -k^2 &lt; 0$
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 조건 (가) $a_2 a_3 &lt; 0$의 부호 필터링&lt;/b&gt;&lt;br&gt;
+  $a_2$와 $a_3$의 부호가 달라야 합니다.&lt;br&gt;
+  • 경로 A ($a_2 = \frac{k}{3} &gt; 0$): $a_3 &lt; 0$ 이어야 합니다.&lt;br&gt;
+  $\frac{k}{3} - \frac{2k}{3} = -\frac{k}{3} &lt; 0$ 이므로 점화식의 뺄셈 규칙에 의해 $a_3 = -\frac{k}{3}$ 가 성립합니다.&lt;br&gt;
+  (만약 곱셈 규칙을 쓰면 $-k(k/3) = -k^2/3 &lt; 0$ 도 가능)&lt;br&gt;
+  • 경로 B ($a_2 = -k^2 &lt; 0$): $a_3 &gt; 0$ 이어야 합니다.&lt;br&gt;
+  점화식의 곱셈 규칙에 의해 $a_3 = -k(-k^2) = k^3 &gt; 0$ 이 성립합니다.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;3단계: $a_5 = 0$ 조건을 만족시키는 $k$의 모든 값 추적&lt;/b&gt;&lt;br&gt;
+  각 분기에서 $a_4, a_5$를 계산하여 $a_5 = 0$이 되는 양수 $k$를 구합니다.&lt;br&gt;
+  수열의 진행 과정에서 $a_5 = 0$이 되는 경우는 다음과 같은 4가지 서로 다른 양수 해를 산출합니다.&lt;br&gt;
+  1) $k = 2$ (이때 $k^2 = 4$)&lt;br&gt;
+  2) $k = \sqrt{2}$ (이때 $k^2 = 2$)&lt;br&gt;
+  3) $k = \frac{2}{\sqrt{3}}$ (이때 $k^2 = \frac{4}{3}$)&lt;br&gt;
+  4) $k = \sqrt{\frac{2}{3}}$ (이때 $k^2 = \frac{2}{3}$)
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;4단계: $k^2$의 총합 계산&lt;/b&gt;&lt;br&gt;
+  구한 네 값의 제곱의 합을 계산합니다.&lt;br&gt;
+  $$\sum k^2 = 4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + \frac{6}{3} = 6 + 2 = 8$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  모든 가능한 $k^2$의 값의 합은 $8$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;8&lt;/b&gt; 입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 킬러 수열 점화식 문항은 무작정 계산하기 전, 부호 조건($a_2 a_3 &lt; 0$)으로 가지치기(Pruning)를 먼저 수행하여 불가능한 분기를 제거하는 것이 시간 단축의 절대적 열쇠입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;The possible values ​​of $k^2$ are $4, 2, 4/3, 2/3$ and the sum is 8 (short answer: 8).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem investigates a &lt;b&gt;bifurcating recursive sequence&lt;/b&gt;, requiring forward tracking and algebraic case pruning based on sign alternating condition $a_2 a_3 &lt; 0$ and endpoint condition $a_5 = 0$.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Analyze possible values for $a_2$&lt;/b&gt;&lt;br&gt;
+  Given $a_1 = k &gt; 0$, the two recursion branches produce:&lt;br&gt;
+  • Branch A: $a_2 = k - \frac{2k}{3} = \frac{k}{3} &gt; 0$&lt;br&gt;
+  • Branch B: $a_2 = -k(k) = -k^2 &lt; 0$
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Enforce the sign condition $a_2 a_3 &lt; 0$&lt;/b&gt;&lt;br&gt;
+  • For Branch A ($a_2 &gt; 0$): We require $a_3 &lt; 0$.&lt;br&gt;
+  Applying the difference branch: $a_3 = \frac{k}{3} - \frac{2k}{3} = -\frac{k}{3} &lt; 0$.&lt;br&gt;
+  • For Branch B ($a_2 &lt; 0$): We require $a_3 &gt; 0$.&lt;br&gt;
+  Applying the multiplication branch: $a_3 = -k(-k^2) = k^3 &gt; 0$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 3: Trace forward to identify solutions for $a_5 = 0$&lt;/b&gt;&lt;br&gt;
+  Tracing each valid path to $a_5 = 0$ yields four distinct positive roots for $k$:&lt;br&gt;
+  1) $k = 2 \implies k^2 = 4$&lt;br&gt;
+  2) $k = \sqrt{2} \implies k^2 = 2$&lt;br&gt;
+  3) $k = \frac{2}{\sqrt{3}} \implies k^2 = \frac{4}{3}$&lt;br&gt;
+  4) $k = \sqrt{\frac{2}{3}} \implies k^2 = \frac{2}{3}$
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 4: Sum all valid values of $k^2$&lt;/b&gt;&lt;br&gt;
+  $$\sum k^2 = 4 + 2 + \frac{4}{3} + \frac{2}{3} = 6 + 2 = 8$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The sum of all possible values of $k^2$ is $8$.&lt;br&gt;
+  Therefore, the answer is &lt;b&gt;8&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Pruning recursive branches using the sign condition $a_2 a_3 &lt; 0$ eliminates dead-end paths before detailed calculation.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">양수 $k$에 대하여 $a_1=k$인 수열 $\{a_n\}$이 다음 조건을 만족시킨다. (가) $a_2 \times a_3 &lt; 0$ (나) 모든 자연수 $n$에 대하여 $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$이다. $a_5=0$이 되도록 하는 서로 다른 모든 양수 $k$에 대하여 $k^2$의 값의 합을 구하시오. [4점]</span><div class="bilingual-en">For a positive number $k$, the sequence $\{a_n\}$, which is $a_1=k$, satisfies the following conditions. (a) $a_2 \times a_3 &lt; 0$ (b) For all natural numbers $n$, it is $(a_{n+1}-a_n+\frac{2k}{3})(a_{n+1}+k a_n)=0$. Find the sum of the values ​​of $k^2$ for all different positive integers [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>7</div><div class="opt"><span class="n">3</span>8</div><div class="opt"><span class="n">4</span>9</div><div class="opt"><span class="n">5</span>10</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

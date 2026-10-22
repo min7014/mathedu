@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30916.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30916">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="2f108932">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="88ba5b77">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -800,7 +800,67 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Always state the domain restrictions ($x > 4$) before converting to algebraic form to reliably weed out extraneous roots.
 </p>
   </div>
-</div><div class="q" data-ans="3" data-exp="$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (단답형 정답: 7)." data-exp-en="$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (Short answer: 7)."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">방정식 $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$을 만족시키는 실수 $x$의 값을 구하시오. [3점]</span><div class="bilingual-en">Find the value of the real number $x$ that satisfies the equation $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$. [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>5</div><div class="opt"><span class="n">2</span>6</div><div class="opt"><span class="n">3</span>7</div><div class="opt"><span class="n">4</span>8</div><div class="opt"><span class="n">5</span>9</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (단답형 정답: 7).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;로그방정식의 해법&lt;/b&gt;에서 가장 중요한 &lt;b&gt;진수 조건&lt;/b&gt;을 확인하고, 밑 변환 공식을 통해 밑을 3으로 통일한 후 진수의 곱셈을 이용하여 이차방정식을 해결하는 단답형 문제입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 필수 진수 조건 확인&lt;/b&gt;&lt;br&gt;
+  로그가 정의되기 위해서는 모든 진수가 양수여야 합니다.&lt;br&gt;
+  • $x + 2 &gt; 0 \implies x &gt; -2$&lt;br&gt;
+  • $x - 4 &gt; 0 \implies x &gt; 4$&lt;br&gt;
+  두 조건의 공통 범위는 $x &gt; 4$ 입니다.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 밑을 3으로 통일하고 하나의 로그로 합성&lt;/b&gt;&lt;br&gt;
+  $\frac{1}{3} = 3^{-1}$ 이므로 로그의 밑 변환 성질에 의해 다음과 같습니다.&lt;br&gt;
+  $$\log_{\frac{1}{3}}(x-4) = \log_{3^{-1}}(x-4) = -\log_3(x-4)$$
+  주어진 방정식에 대입하면 마이너스가 플러스로 바뀝니다.&lt;br&gt;
+  $$\log_3(x+2) - \{-\log_3(x-4)\} = 3$$
+  $$\log_3(x+2) + \log_3(x-4) = 3$$
+  로그의 덧셈 성질 $\log_a M + \log_a N = \log_a(MN)$을 적용합니다.&lt;br&gt;
+  $$\log_3\{(x+2)(x-4)\} = 3$$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 이차방정식 풀이 및 해 선별&lt;/b&gt;&lt;br&gt;
+  로그의 정의에 의해 진수는 $3^3 = 27$ 입니다.&lt;br&gt;
+  $$(x+2)(x-4) = 27 \implies x^2 - 2x - 8 = 27 \implies x^2 - 2x - 35 = 0$$
+  인수분해하면 $(x-7)(x+5) = 0$ 이므로 $x = 7$ 또는 $x = -5$ 입니다.&lt;br&gt;
+  1단계의 진수 조건 $x &gt; 4$를 만족해야 하므로 $x = 7$ 만이 유일한 해입니다.
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 방정식의 해는 $7$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;7&lt;/b&gt; 입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 로그방정식에서 진수 조건을 사전에 적어두지 않으면 무연근(이 문제에서는 $-5$)을 답으로 적어 감점되는 치명적 실수가 발생할 수 있습니다. 항상 &lt;b&gt;진수 조건($&gt;0$)을 풀이 맨 첫 줄에 적는 습관&lt;/b&gt;을 들이십시오.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;$(x+2)(x-4) = 27 \implies x^2-2x-35=0 \implies x=7$ (Short answer: 7).&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem verifies the ability to solve a &lt;b&gt;logarithmic equation&lt;/b&gt;, emphasizing domain constraints (argument $&gt; 0$) and base unification via exponent inversion ($\log_{3^{-1}} u = -\log_3 u$).&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Determine the domain constraints (arguments $&gt; 0$)&lt;/b&gt;&lt;br&gt;
+  For real logarithmic expressions, arguments must be strictly positive:&lt;br&gt;
+  • $x + 2 &gt; 0 \implies x &gt; -2$&lt;br&gt;
+  • $x - 4 &gt; 0 \implies x &gt; 4$&lt;br&gt;
+  Their intersection requires $x &gt; 4$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Unify bases to $3$ and condense&lt;/b&gt;&lt;br&gt;
+  Using base property $\log_{3^{-1}}(x-4) = -\log_3(x-4)$:&lt;br&gt;
+  $$\log_3(x+2) - [-\log_3(x-4)] = 3 \implies \log_3(x+2) + \log_3(x-4) = 3$$&lt;br&gt;
+  Applying the product rule of logarithms:&lt;br&gt;
+  $$\log_3[(x+2)(x-4)] = 3 \implies (x+2)(x-4) = 3^3 = 27$$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Solve the quadratic equation and verify constraints&lt;/b&gt;&lt;br&gt;
+  $$x^2 - 2x - 8 = 27 \implies x^2 - 2x - 35 = 0 \implies (x-7)(x+5) = 0$$&lt;br&gt;
+  The algebraic solutions are $x = 7$ and $x = -5$.&lt;br&gt;
+  Enforcing the domain restriction $x &gt; 4$, the extraneous root $-5$ is rejected, leaving $x = 7$.
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The final solution is $7$.&lt;br&gt;
+  Therefore, the answer is &lt;b&gt;7&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Always state the domain restrictions ($x &gt; 4$) before converting to algebraic form to reliably weed out extraneous roots.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">방정식 $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$을 만족시키는 실수 $x$의 값을 구하시오. [3점]</span><div class="bilingual-en">Find the value of the real number $x$ that satisfies the equation $\log_3(x+2) - \log_{\frac{1}{3}}(x-4) = 3$. [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>5</div><div class="opt"><span class="n">2</span>6</div><div class="opt"><span class="n">3</span>7</div><div class="opt"><span class="n">4</span>8</div><div class="opt"><span class="n">5</span>9</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1229,8 +1289,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30916';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = '2f108932';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = '88ba5b77';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30916.html';
 
@@ -1255,8 +1315,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30916';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || '2f108932';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || '88ba5b77';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30916.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

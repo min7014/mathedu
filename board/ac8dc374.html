@@ -1818,7 +1818,165 @@ Hence, the correct answer is <b>Option ② ($12$)</b>.
 </p>
 </div>
 </div>
-<div class="q" data-ans="2" data-exp="f(0)의 가능한 4개 값 {-48, -12, -9/4, -1/4} 중 최댓값은 -1/4, 최솟값은 -48입니다. 따라서 M × m = (-1/4) × (-48) = 12 입니다." data-exp-en="Among the four values $\{-48, -12, -9/4, -1/4\}$, maximum $M = -1/4$ and minimum $m = -48$. Their product is $(-1/4) \times (-48) = 12$, which corresponds to Option ②." >
+<div class="q" data-ans="2" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;f(0)의 가능한 4개 값 {-48, -12, -9/4, -1/4} 중 최댓값은 -1/4, 최솟값은 -48입니다. 따라서 M × m = (-1/4) × (-48) = 12 입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;1. 삼차함수 $f(x)$의 인수분해 및 도함수 유도&lt;/h4&gt;
+&lt;p&gt;
+조건 (가)에서 $f(x)=0$의 서로 다른 실근이 2개이므로, 삼차함수는 한 실근 $\alpha$에서 접하는 중근을 갖고, 다른 실근 $\beta$에서 x축을 통과해야 합니다 ($\alpha \neq \beta$).&lt;br&gt;
+최고차항 계수가 1이므로:
+$$f(x) = (x - \alpha)^2(x - \beta)$$
+이 함수의 도함수를 구하면:
+$$f&#x27;(x) = 2(x - \alpha)(x - \beta) + (x - \alpha)^2 = (x - \alpha)(3x - \alpha - 2\beta)$$
+따라서:
+• 접점 $x = \alpha$에서: $f&#x27;(\alpha) = 0$&lt;br&gt;
+• 통과점 $x = \beta$에서: &lt;b&gt;$f&#x27;(\beta) = (\beta - \alpha)(3\beta - \alpha - 2\beta) = (\beta - \alpha)^2 &gt; 0$&lt;/b&gt; (항상 양수!)
+&lt;/p&gt;
+
+&lt;h4&gt;2. 구간별 함수 $g(x)$의 첨점(꺾인 점)의 정체&lt;/h4&gt;
+&lt;p&gt;
+$$g(x) = \begin{cases} -f(x) &amp; (f(x) \ge 0) \\ 7f(x) &amp; (f(x) &lt; 0) \end{cases}$$
+• $x = \alpha$ 근방에서는 $f&#x27;(\alpha) = 0$이므로 좌미분계수와 우미분계수가 모두 $0$으로 일치하여 부드럽게 미분가능합니다.&lt;br&gt;
+• $x = \beta$ 근방에서는 $f&#x27;(\beta) &gt; 0$이므로 $x$가 $\beta$를 지나면서 $f(x)$가 음수에서 양수로 바뀝니다:&lt;br&gt;
+  - 좌미분계수: $g&#x27;(\beta^-) = 7f&#x27;(\beta)$&lt;br&gt;
+  - 우미분계수: $g&#x27;(\beta^+) = -f&#x27;(\beta)$&lt;br&gt;
+  - 좌우 미분계수의 차이: &lt;b&gt;$g&#x27;(\beta^+) - g&#x27;(\beta^-) = -f&#x27;(\beta) - 7f&#x27;(\beta) = -8f&#x27;(\beta) = -8(\beta - \alpha)^2 &lt; 0$&lt;/b&gt; (좌우 불일치)&lt;br&gt;
+따라서 $g(x)$는 실수 전체에서 &lt;b&gt;오직 $x = \beta$ 한 점에서만 미분 불가능&lt;/b&gt;합니다.
+&lt;/p&gt;
+
+&lt;h4&gt;3. $P(x) = (x-1)(x-a)(x-4+a)$의 절댓값 첨점 개수 제어&lt;/h4&gt;
+&lt;p&gt;
+$P(x)$의 세 실근은 $1, \; a, \; 4-a$입니다.&lt;br&gt;
+만약 세 실근이 모두 다르면 $|P(x)|$는 3개의 첨점을 갖게 되어, 단 하나의 첨점만 가진 $g(x)$와 더해서 실수 전체에서 미분가능하게 만들 수 없습니다.&lt;br&gt;
+따라서 $|P(x)|$ 역시 &lt;b&gt;오직 1개의 첨점&lt;/b&gt;만 가져야 하므로, &lt;b&gt;세 근 중 두 근이 일치(중근)&lt;/b&gt;해야 합니다!
+&lt;/p&gt;
+
+&lt;div class=&quot;sol-highlight&quot;&gt;
+&lt;b&gt;【두 근이 일치하는 경우의 분류】&lt;/b&gt;&lt;br&gt;
+• &lt;b&gt;Case 1 ($a = 1$ 또는 $a = 3$):&lt;/b&gt;&lt;br&gt;
+  $a=1$이면 근은 $1, 1, 3$. $a=3$이면 근은 $1, 3, 1$. 둘 다 $P(x) = (x-1)^2(x-3)$입니다.&lt;br&gt;
+  $x=1$은 중근이므로 미분가능하고, &lt;b&gt;$x=3$이 유일한 첨점&lt;/b&gt;이 됩니다.&lt;br&gt;
+• &lt;b&gt;Case 2 ($a = 2$):&lt;/b&gt;&lt;br&gt;
+  $a = 4-a \implies a=2$이면 근은 $1, 2, 2$. 즉 $P(x) = (x-2)^2(x-1)$입니다.&lt;br&gt;
+  $x=2$는 중근이므로 미분가능하고, &lt;b&gt;$x=1$이 유일한 첨점&lt;/b&gt;이 됩니다.
+&lt;/div&gt;
+
+&lt;h4&gt;4. Case 1 ($a = 1$ 또는 $a = 3$) 상세 계산&lt;/h4&gt;
+&lt;p&gt;
+$P(x) = (x - 1)^2(x - 3)$의 유일한 첨점이 $x = 3$이므로, $g(x)$의 첨점 위치와 반드시 일치해야 합니다.&lt;br&gt;
+따라서 &lt;b&gt;$\beta = 3$&lt;/b&gt;이어야 합니다.&lt;br&gt;
+$h(x) = g(x) + |P(x)|$가 $x = 3$에서 미분가능하려면 우미분계수와 좌미분계수가 같아야 합니다 ($h&#x27;(3^+) = h&#x27;(3^-)$):
+$$-f&#x27;(3) + P&#x27;(3) = 7f&#x27;(3) - P&#x27;(3) \iff 2P&#x27;(3) = 8f&#x27;(3) \iff P&#x27;(3) = 4f&#x27;(3)$$
+$P&#x27;(3) = (3 - 1)^2 = 4$이므로:
+$$4 = 4f&#x27;(3) \implies f&#x27;(3) = 1$$
+그런데 $f&#x27;(3) = (3 - \alpha)^2$이므로:
+$$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \alpha = 2 \text{ 또는 } \alpha = 4$$
+이제 각 경우의 $f(0)$을 구합니다 ($f(x) = (x - \alpha)^2(x - 3)$):&lt;br&gt;
+• $\alpha = 2$ 일 때: &lt;b&gt;$f(0) = (0 - 2)^2(0 - 3) = 4 \times (-3) = \mathbf{-12}$&lt;/b&gt;&lt;br&gt;
+• $\alpha = 4$ 일 때: &lt;b&gt;$f(0) = (0 - 4)^2(0 - 3) = 16 \times (-3) = \mathbf{-48}$&lt;/b&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;5. Case 2 ($a = 2$) 상세 계산&lt;/h4&gt;
+&lt;p&gt;
+$P(x) = (x - 2)^2(x - 1)$의 유일한 첨점이 $x = 1$이므로, $g(x)$의 첨점 위치와 일치해야 합니다.&lt;br&gt;
+따라서 &lt;b&gt;$\beta = 1$&lt;/b&gt;이어야 합니다.&lt;br&gt;
+$h(x) = g(x) + |P(x)|$가 $x = 1$에서 미분가능하려면 우미분계수와 좌미분계수가 같아야 합니다 ($h&#x27;(1^+) = h&#x27;(1^-)$):
+$$-f&#x27;(1) + P&#x27;(1) = 7f&#x27;(1) - P&#x27;(1) \iff 2P&#x27;(1) = 8f&#x27;(1) \iff P&#x27;(1) = 4f&#x27;(1)$$
+$P&#x27;(1) = (1 - 2)^2 = 1$이므로:
+$$1 = 4f&#x27;(1) \implies f&#x27;(1) = \frac{1}{4}$$
+그런데 $f&#x27;(1) = (1 - \alpha)^2$이므로:
+$$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \alpha = \frac{1}{2} \text{ 또는 } \alpha = \frac{3}{2}$$
+이제 각 경우의 $f(0)$을 구합니다 ($f(x) = (x - \alpha)^2(x - 1)$):&lt;br&gt;
+• $\alpha = \frac{1}{2}$ 일 때: &lt;b&gt;$f(0) = \left(0 - \frac{1}{2}\right)^2(0 - 1) = \frac{1}{4} \times (-1) = \mathbf{-\frac{1}{4}}$&lt;/b&gt;&lt;br&gt;
+• $\alpha = \frac{3}{2}$ 일 때: &lt;b&gt;$f(0) = \left(0 - \frac{3}{2}\right)^2(0 - 1) = \frac{9}{4} \times (-1) = \mathbf{-\frac{9}{4}}$&lt;/b&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;6. 최댓값 $M$과 최솟값 $m$의 판정 및 최종 정답&lt;/h4&gt;
+&lt;p&gt;
+도출된 모든 가능한 $f(0)$의 값들을 크기순으로 나열하면 다음과 같습니다:
+$$-48 &lt; -12 &lt; -\frac{9}{4} \; (= -2.25) &lt; -\frac{1}{4} \; (= -0.25) &lt; 0$$
+따라서:
+• &lt;b&gt;최댓값(Maximum) $M$&lt;/b&gt;: 음수 중 절댓값이 가장 작은 &lt;b&gt;$-\frac{1}{4}$&lt;/b&gt;&lt;br&gt;
+• &lt;b&gt;최솟값(Minimum) $m$&lt;/b&gt;: 음수 중 절댓값이 가장 큰 &lt;b&gt;$-48$&lt;/b&gt;&lt;br&gt;&lt;br&gt;
+구하고자 하는 최댓값과 최솟값의 곱:
+$$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
+따라서 정답은 &lt;b&gt;②번 ($12$)&lt;/b&gt;입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;Among the four values $\{-48, -12, -9/4, -1/4\}$, maximum $M = -1/4$ and minimum $m = -48$. Their product is $(-1/4) \times (-48) = 12$, which corresponds to Option ②.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;1. Factorization and Derivatives of Cubic $f(x)$&lt;/h4&gt;
+&lt;p&gt;
+By condition (a), $f(x)=0$ has exactly 2 distinct real roots. Hence, $f(x)$ must possess a double root $\alpha$ (tangent to $y=0$) and a simple crossing root $\beta$ ($\alpha \neq \beta$).&lt;br&gt;
+Since the leading coefficient is 1:
+$$f(x) = (x - \alpha)^2(x - \beta)$$
+Differentiating via the product rule:
+$$f&#x27;(x) = 2(x - \alpha)(x - \beta) + (x - \alpha)^2 = (x - \alpha)(3x - \alpha - 2\beta)$$
+Therefore:
+• At tangent root $x = \alpha$: $f&#x27;(\alpha) = 0$&lt;br&gt;
+• At crossing root $x = \beta$: &lt;b&gt;$f&#x27;(\beta) = (\beta - \alpha)(3\beta - \alpha - 2\beta) = (\beta - \alpha)^2 &gt; 0$&lt;/b&gt; (strictly positive!)
+&lt;/p&gt;
+
+&lt;h4&gt;2. Non-Differentiable Sharp Corner of $g(x)$&lt;/h4&gt;
+&lt;p&gt;
+$$g(x) = \begin{cases} -f(x) &amp; (f(x) \ge 0) \\ 7f(x) &amp; (f(x) &lt; 0) \end{cases}$$
+• Near $x = \alpha$, $f&#x27;(\alpha) = 0$, so both one-sided derivatives are 0, ensuring smooth differentiability.&lt;br&gt;
+• Near $x = \beta$, $f&#x27;(\beta) &gt; 0$, so $f(x)$ crosses from negative to positive across $\beta$:&lt;br&gt;
+  - Left derivative: $g&#x27;(\beta^-) = 7f&#x27;(\beta)$&lt;br&gt;
+  - Right derivative: $g&#x27;(\beta^+) = -f&#x27;(\beta)$&lt;br&gt;
+  - One-sided derivative gap: &lt;b&gt;$g&#x27;(\beta^+) - g&#x27;(\beta^-) = -f&#x27;(\beta) - 7f&#x27;(\beta) = -8f&#x27;(\beta) = -8(\beta - \alpha)^2 &lt; 0$&lt;/b&gt;&lt;br&gt;
+Thus $g(x)$ has a unique sharp upward corner at $x = \beta$ on $\mathbb{R}$.
+&lt;/p&gt;
+
+&lt;h4&gt;3. Double Root Constraint for $|P(x)|$&lt;/h4&gt;
+&lt;p&gt;
+$P(x) = (x-1)(x-a)(x-4+a)$ has three real roots: $1, \; a, \; 4-a$.&lt;br&gt;
+If all three roots were distinct, $|P(x)|$ would possess three sharp corners, which cannot be cancelled by $g(x)$&#x27;s single corner.&lt;br&gt;
+Thus $|P(x)|$ must have at most 1 corner, requiring two of its roots to coincide into a double root:
+&lt;/p&gt;
+
+&lt;div class=&quot;sol-highlight&quot;&gt;
+&lt;b&gt;[Two Root-Coincidence Cases]&lt;/b&gt;&lt;br&gt;
+• &lt;b&gt;Case 1 ($a = 1$ or $a = 3$):&lt;/b&gt;&lt;br&gt;
+  $a=1 \implies$ roots $1, 1, 3$. $a=3 \implies$ roots $1, 3, 1$. Both yield $P(x) = (x-1)^2(x-3)$.&lt;br&gt;
+  $x=1$ is a double root (differentiable), and &lt;b&gt;$x=3$ is the unique corner&lt;/b&gt;.&lt;br&gt;
+• &lt;b&gt;Case 2 ($a = 2$):&lt;/b&gt;&lt;br&gt;
+  $a = 4-a \implies a=2 \implies$ roots $1, 2, 2$, giving $P(x) = (x-2)^2(x-1)$.&lt;br&gt;
+  $x=2$ is a double root (differentiable), and &lt;b&gt;$x=1$ is the unique corner&lt;/b&gt;.
+&lt;/div&gt;
+
+&lt;h4&gt;4. Detailed Solution for Case 1 ($a = 1$ or $a = 3$)&lt;/h4&gt;
+&lt;p&gt;
+Since $P(x) = (x - 1)^2(x - 3)$ has its corner at $x = 3$, it must match $g(x)$&#x27;s corner: &lt;b&gt;$\beta = 3$&lt;/b&gt;.&lt;br&gt;
+Differentiability of $h(x) = g(x) + |P(x)|$ at $x = 3$ requires $h&#x27;(3^+) = h&#x27;(3^-)$:&lt;br&gt;
+$$-f&#x27;(3) + P&#x27;(3) = 7f&#x27;(3) - P&#x27;(3) \iff 2P&#x27;(3) = 8f&#x27;(3) \iff P&#x27;(3) = 4f&#x27;(3)$$
+Since $P&#x27;(3) = (3 - 1)^2 = 4$:
+$$4 = 4f&#x27;(3) \implies f&#x27;(3) = 1$$
+Since $f&#x27;(3) = (3 - \alpha)^2$:
+$$(3 - \alpha)^2 = 1 \implies 3 - \alpha = \pm 1 \implies \alpha = 2 \text{ or } \alpha = 4$$
+Evaluating $f(0) = (0 - \alpha)^2(0 - 3)$:&lt;br&gt;
+• For $\alpha = 2$: &lt;b&gt;$f(0) = (0 - 2)^2(0 - 3) = 4 \times (-3) = -12$&lt;/b&gt;&lt;br&gt;
+• For $\alpha = 4$: &lt;b&gt;$f(0) = (0 - 4)^2(0 - 3) = 16 \times (-3) = -48$&lt;/b&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;5. Detailed Solution for Case 2 ($a = 2$)&lt;/h4&gt;
+&lt;p&gt;
+Since $P(x) = (x - 2)^2(x - 1)$ has its corner at $x = 1$, it must match $g(x)$&#x27;s corner: &lt;b&gt;$\beta = 1$&lt;/b&gt;.&lt;br&gt;
+Differentiability of $h(x)$ at $x = 1$ requires $h&#x27;(1^+) = h&#x27;(1^-)$:&lt;br&gt;
+$$-f&#x27;(1) + P&#x27;(1) = 7f&#x27;(1) - P&#x27;(1) \iff 2P&#x27;(1) = 8f&#x27;(1) \iff P&#x27;(1) = 4f&#x27;(1)$$
+Since $P&#x27;(1) = (1 - 2)^2 = 1$:
+$$1 = 4f&#x27;(1) \implies f&#x27;(1) = \frac{1}{4}$$
+Since $f&#x27;(1) = (1 - \alpha)^2$:
+$$(1 - \alpha)^2 = \frac{1}{4} \implies 1 - \alpha = \pm \frac{1}{2} \implies \alpha = \frac{1}{2} \text{ or } \alpha = \frac{3}{2}$$
+Evaluating $f(0) = (0 - \alpha)^2(0 - 1)$:&lt;br&gt;
+• For $\alpha = \frac{1}{2}$: &lt;b&gt;$f(0) = \left(0 - \frac{1}{2}\right)^2(0 - 1) = -\frac{1}{4}$&lt;/b&gt;&lt;br&gt;
+• For $\alpha = \frac{3}{2}$: &lt;b&gt;$f(0) = \left(0 - \frac{3}{2}\right)^2(0 - 1) = -\frac{9}{4}$&lt;/b&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;6. Determination of Maximum $M$, Minimum $m$, and Final Answer&lt;/h4&gt;
+&lt;p&gt;
+Arranging all four possible values of $f(0)$ in ascending order:
+$$-48 &lt; -12 &lt; -\frac{9}{4} \; (= -2.25) &lt; -\frac{1}{4} \; (= -0.25) &lt; 0$$
+Thus:
+• &lt;b&gt;Maximum $M$&lt;/b&gt;: &lt;b&gt;$-\frac{1}{4}$&lt;/b&gt; (least negative)&lt;br&gt;
+• &lt;b&gt;Minimum $m$&lt;/b&gt;: &lt;b&gt;$-48$&lt;/b&gt; (most negative)&lt;br&gt;&lt;br&gt;
+Their product:
+$$M \times m = \left(-\frac{1}{4}\right) \times (-48) = \mathbf{12}$$
+Hence, the correct answer is &lt;b&gt;Option ② ($12$)&lt;/b&gt;.
+&lt;/p&gt;" >
 <div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div>
 <div class="stem"><span class="bilingual-ko">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값 $M$과 최솟값 $m$의 곱 $M \times m$의 값은 얼마인가요?</span><div class="bilingual-en">What is the product $M \times m$ of the maximum $M$ and minimum $m$ of $f(0)$ derived from the problem conditions?</div></div>
 <div class="opts opts-inline">

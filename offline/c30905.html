@@ -575,8 +575,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30905.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30905">
-<meta name="mathedu-offline-build-time" content="2026-10-22T05:23:45.484508+00:00">
-<meta name="mathedu-offline-hash" content="fb65d318">
+<meta name="mathedu-offline-build-time" content="2026-10-22T05:32:54.492071+00:00">
+<meta name="mathedu-offline-hash" content="c743cbda">
 <meta name="mathedu-version-label" content="v2026.10.22">
 
 </head><body><div class="wrap">
@@ -796,7 +796,63 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Evaluating component factors before summing drastically reduces algebraic expanding errors under time constraints.
 </p>
   </div>
-</div><div class="q" data-ans="2" data-exp="$f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$입니다." data-exp-en="This is $f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=(x+1)(x^2+x-5)$에 대하여 $f&#x27;(2)$의 값은? [3점]</span><div class="bilingual-en">For function $f(x)=(x+1)(x^2+x-5)$, what is the value of $f&#x27;(2)$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>15</div><div class="opt"><span class="n">2</span>16</div><div class="opt"><span class="n">3</span>17</div><div class="opt"><span class="n">4</span>18</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="2" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 두 다항식의 곱으로 정의된 함수의 &lt;b&gt;곱의 미분법(Product Rule)&lt;/b&gt;을 적용하고, 미분계수를 정확히 대입하여 산출할 수 있는지를 평가합니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 곱의 미분법 공식 적용&lt;/b&gt;&lt;br&gt;
+  $f(x) = u(x)v(x)$ 에 대하여 $\{u(x)v(x)\}&#x27; = u&#x27;(x)v(x) + u(x)v&#x27;(x)$ 입니다.&lt;br&gt;
+  여기서 $u(x) = x+1$, $v(x) = x^2+x-5$ 이므로&lt;br&gt;
+  $$u&#x27;(x) = 1, \quad v&#x27;(x) = 2x+1$$
+  도함수 $f&#x27;(x)$는 다음과 같습니다.&lt;br&gt;
+  $$f&#x27;(x) = 1 \cdot (x^2+x-5) + (x+1)(2x+1)$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: $x=2$ 대입 및 각 인수의 값 계산&lt;/b&gt;&lt;br&gt;
+  전개하기 전 각 인수에 직접 $x=2$를 대입하여 계산을 간소화합니다.&lt;br&gt;
+  • $u(2) = 2+1 = 3$&lt;br&gt;
+  • $u&#x27;(2) = 1$&lt;br&gt;
+  • $v(2) = 2^2 + 2 - 5 = 4 + 2 - 5 = 1$&lt;br&gt;
+  • $v&#x27;(2) = 2(2) + 1 = 5$
+  &lt;br&gt;
+  &lt;b&gt;3단계: 최종 미분계수 산출&lt;/b&gt;&lt;br&gt;
+  $$f&#x27;(2) = u&#x27;(2)v(2) + u(2)v&#x27;(2) = 1 \cdot 1 + 3 \cdot 5 = 1 + 15 = 16$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 미분계수는 $16$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;②번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 곱의 미분법에서 식 전체를 전개한 후 미분하기보다, 곱의 미분 공식 형태 그대로 $x=2$를 대입하는 것이 계산 오류를 최소화하는 가장 빠르고 안전한 방법입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;This is $f&#x27;(x) = (x^2+x-5) + (x+1)(2x+1) \implies f&#x27;(2) = (4+2-5) + (3)(5) = 1 + 15 = 16$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem verifies the correct application of the &lt;b&gt;Product Rule of differentiation&lt;/b&gt; on two polynomial factors and evaluating the derivative at a specified point.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: State and apply the product rule&lt;/b&gt;&lt;br&gt;
+  For $f(x) = (x+1)(x^2+x-5)$, let $u(x) = x+1$ and $v(x) = x^2+x-5$.&lt;br&gt;
+  Their respective derivatives are:&lt;br&gt;
+  $$u&#x27;(x) = 1, \quad v&#x27;(x) = 2x+1$$&lt;br&gt;
+  Applying $(uv)&#x27; = u&#x27;v + uv&#x27;$:&lt;br&gt;
+  $$f&#x27;(x) = 1 \cdot (x^2+x-5) + (x+1)(2x+1)$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Evaluate factor values at $x = 2$&lt;/b&gt;&lt;br&gt;
+  Rather than expanding polynomials, evaluate each term at $x=2$ directly:&lt;br&gt;
+  • $u(2) = 3$&lt;br&gt;
+  • $u&#x27;(2) = 1$&lt;br&gt;
+  • $v(2) = 2^2 + 2 - 5 = 1$&lt;br&gt;
+  • $v&#x27;(2) = 2(2) + 1 = 5$
+  &lt;br&gt;
+  &lt;b&gt;Step 3: Compute the final derivative value&lt;/b&gt;&lt;br&gt;
+  $$f&#x27;(2) = (1)(1) + (3)(5) = 1 + 15 = 16$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The evaluated derivative $f&#x27;(2)$ equals $16$.&lt;br&gt;
+  Thus, the correct answer is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Evaluating component factors before summing drastically reduces algebraic expanding errors under time constraints.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x)=(x+1)(x^2+x-5)$에 대하여 $f&#x27;(2)$의 값은? [3점]</span><div class="bilingual-en">For function $f(x)=(x+1)(x^2+x-5)$, what is the value of $f&#x27;(2)$? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>15</div><div class="opt"><span class="n">2</span>16</div><div class="opt"><span class="n">3</span>17</div><div class="opt"><span class="n">4</span>18</div><div class="opt"><span class="n">5</span>19</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
@@ -1225,8 +1281,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30905';
-window._offlineBuildTime = '2026-10-22T05:23:45.484508+00:00';
-window._offlineHash = 'fb65d318';
+window._offlineBuildTime = '2026-10-22T05:32:54.492071+00:00';
+window._offlineHash = 'c743cbda';
 window._offlineVersion = 'v2026.10.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30905.html';
 
@@ -1251,8 +1307,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30905';
-  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:23:45.484508+00:00';
-  var localHash = window._offlineHash || 'fb65d318';
+  var localBuildTime = window._offlineBuildTime || '2026-10-22T05:32:54.492071+00:00';
+  var localHash = window._offlineHash || 'c743cbda';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30905.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

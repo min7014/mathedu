@@ -347,6 +347,7 @@ function toggleExp(btn){{
   }} else {{
     exp.classList.add('show');
     btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
+    if(window.MathJax&&window.MathJax.typesetPromise){{window.MathJax.typesetPromise([exp]).catch(function(){{}});}}
   }}
 }}
 
@@ -378,7 +379,7 @@ qs.forEach(q=>{{
       }} else {{
         o.classList.add('wrong');
       }}
-      if(exp) exp.classList.add('show');
+      if(exp){{exp.classList.add('show');if(window.MathJax&&window.MathJax.typesetPromise){{window.MathJax.typesetPromise([exp]).catch(function(){{}});}}}}
       var toggleBtn = q.querySelector('.exp-toggle-btn');
       if(toggleBtn) {{ var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }}
       document.getElementById('pts').textContent=pts;

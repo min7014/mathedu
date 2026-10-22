@@ -708,7 +708,53 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Key Tip</b>: Directly evaluating each piecewise formula at the transition point quickly sets up the linear equation.
 </p>
   </div>
-</div><div class="q" data-ans="2" data-exp="$14 + a = 4 + 2a \implies a = 10$ 이므로 정답은 ②입니다." data-exp-en="Since $14 + a = 4 + 2a \implies a = 10$, the correct answer is ②."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">함수 $f(x)$가 실수 전체에서 연속일 때, 상수 $a$의 값은?<div class="bilingual-en">Given that function $f(x)$ is continuous for all real numbers, what is the value of constant $a$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div><div class="q" data-ans="2" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$14 + a = 4 + 2a \implies a = 10$ 이므로 정답은 ②입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;구간별로 정의된 함수의 연속성&lt;/b&gt;을 판정하고, 경계점에서 좌극한, 우극한, 함숫값이 일치해야 한다는 연속의 기본 정의를 통해 미정계수 $a$를 결정하는 문제입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 연속 조건의 설정&lt;/b&gt;&lt;br&gt;
+  함수 $f(x)$는 $x &lt; 2$에서 일차함수 $7x+a$, $x \ge 2$에서 이차함수 $x^2+ax$로 각각 연속함수입니다. 따라서 실수 전체의 집합에서 연속이 되려면 오직 두 구간의 경계인 &lt;b&gt;$x = 2$에서 연속&lt;/b&gt;이어야 합니다.&lt;br&gt;
+  $$x = 2 \text{에서 연속} \iff \lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = f(2)$$&lt;br&gt;
+  &lt;b&gt;2단계: 좌극한 계산&lt;/b&gt;&lt;br&gt;
+  $x &lt; 2$일 때 $f(x) = 7x + a$이므로 좌극한은 다음과 같습니다:&lt;br&gt;
+  $$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-}(7x + a) = 7(2) + a = 14 + a$$&lt;br&gt;
+  &lt;b&gt;3단계: 우극한 및 함숫값 계산&lt;/b&gt;&lt;br&gt;
+  $x \ge 2$일 때 $f(x) = x^2 + ax$이므로 우극한과 함숫값은 동일합니다:&lt;br&gt;
+  $$\lim_{x \to 2^+} f(x) = f(2) = 2^2 + a(2) = 4 + 2a$$&lt;br&gt;
+  &lt;b&gt;4단계: 일차방정식 수립 및 미정계수 $a$ 계산&lt;/b&gt;&lt;br&gt;
+  좌극한과 우극한이 같아야 하므로:&lt;br&gt;
+  $$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  따라서 조건을 만족시키는 상수 $a$의 값은 $10$입니다.&lt;br&gt;
+  바른 답은 &lt;b&gt;②번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 경계값 $x=2$를 좌측 식과 우측 식에 각각 직접 대입하여 $7(2)+a = 2^2+2a$로 즉시 등식을 세우는 것이 실전 수능의 가장 신속한 접근법입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;Since $14 + a = 4 + 2a \implies a = 10$, the correct answer is ②.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem tests the core condition for &lt;b&gt;continuity of a piecewise function&lt;/b&gt;: equating the left-hand limit, right-hand limit, and function value at the boundary $x = 2$.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Formulate the continuity requirement&lt;/b&gt;&lt;br&gt;
+  Since $f(x)$ is polynomial on each open interval, it is continuous everywhere if and only if it is continuous at $x = 2$:&lt;br&gt;
+  $$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = f(2)$$&lt;br&gt;
+  &lt;b&gt;Step 2: Compute the left-hand limit&lt;/b&gt;&lt;br&gt;
+  $$\lim_{x \to 2^-} f(x) = 7(2) + a = 14 + a$$&lt;br&gt;
+  &lt;b&gt;Step 3: Compute the right-hand limit and function value&lt;/b&gt;&lt;br&gt;
+  $$\lim_{x \to 2^+} f(x) = f(2) = 2^2 + a(2) = 4 + 2a$$&lt;br&gt;
+  &lt;b&gt;Step 4: Solve for $a$&lt;/b&gt;&lt;br&gt;
+  Equating the limits:&lt;br&gt;
+  $$14 + a = 4 + 2a \implies a = 10$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;
+&lt;p&gt;
+  The constant $a$ equals $10$.&lt;br&gt;
+  Therefore, the correct choice is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Key Tip&lt;/b&gt;: Directly evaluating each piecewise formula at the transition point quickly sets up the linear equation.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">함수 $f(x)$가 실수 전체에서 연속일 때, 상수 $a$의 값은?<div class="bilingual-en">Given that function $f(x)$ is continuous for all real numbers, what is the value of constant $a$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

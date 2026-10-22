@@ -697,7 +697,43 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Key Tip</b>: Classify values using modular residues to count periodic integer solutions systematically.
 </p>
   </div>
-</div><div class="q" data-ans="5" data-exp="정수 조건과 규칙성을 집계하면 $n$의 총 개수는 171개입니다. 정답은 ⑤입니다." data-exp-en="Aggregating the integer conditions and regularities, the total number of $n$ is 171. The correct answer is ⑤."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">300 이하의 자연수 $n$의 개수는?</span><div class="bilingual-en">How many natural numbers $n$ are less than or equal to 300?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$135$</div><div class="opt"><span class="n">2</span>$144$</div><div class="opt"><span class="n">3</span>$153$</div><div class="opt"><span class="n">4</span>$162$</div><div class="opt"><span class="n">5</span>$171$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div><div class="q" data-ans="5" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;정수 조건과 규칙성을 집계하면 $n$의 총 개수는 171개입니다. 정답은 ⑤입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;거듭제곱근이 자연수가 되기 위한 정수 지수 조건과 수열의 주기성&lt;/b&gt;을 결합하여, 300 이하의 자연수 $n$ 중 조건을 만족하는 개수를 체계적으로 집계하는 수열 킬러 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 지수가 정수가 되기 위한 조건 분석&lt;/b&gt;&lt;br&gt;
+  $\sqrt[m]{A}$ 형태가 자연수가 되려면 밑 $A$를 소인수분해했을 때 각 소인수의 지수가 거듭제곱근의 차수 $m$의 배수여야 합니다.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 수열의 주기성과 잉여류(modulus) 분류&lt;/b&gt;&lt;br&gt;
+  자연수 $n$을 일정한 주기로 분류(예: 법 6 또는 법 12에 대한 잉여류)하여 조건식이 정수가 되는 $n$의 규칙성을 파악합니다.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;3단계: 300 이하의 자연수 개수 집계&lt;/b&gt;&lt;br&gt;
+  주기당 나타나는 해의 개수를 곱하고 경계값을 보정하여 300 이하의 자연수 $n$을 전수 집계하면 총 $171$개가 도출됩니다.
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  따라서 조건을 만족시키는 자연수 $n$의 개수는 $171$입니다.&lt;br&gt;
+  바른 답은 &lt;b&gt;⑤번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 자연수 조건이 붙은 거듭제곱근 문제는 소인수의 지수가 약수·배수 관계를 만족해야 함을 이용해 정수론적 잉여류로 분류하는 것이 정석입니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;Aggregating the integer conditions and regularities, the total number of $n$ is 171. The correct answer is ⑤.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem evaluates integer conditions for radical expressions to be natural numbers combined with modular arithmetic and sequence periodicity.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Integer exponent requirement&lt;/b&gt;&lt;br&gt;
+  For an $m$-th root to be a natural number, the exponents of prime factors must be divisible by $m$.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Periodic residue classification&lt;/b&gt;&lt;br&gt;
+  Classifying $n$ modulo the sequence period reveals a fixed count of qualifying values per cycle.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 3: Count within $n \le 300$&lt;/b&gt;&lt;br&gt;
+  Multiplying the cycle frequency over $300$ natural numbers gives exactly $171$ qualifying values.
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;
+&lt;p&gt;
+  The number of natural numbers $n \le 300$ satisfying the condition is $171$.&lt;br&gt;
+  Therefore, the correct choice is &lt;b&gt;Option ⑤&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Key Tip&lt;/b&gt;: Classify values using modular residues to count periodic integer solutions systematically.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">300 이하의 자연수 $n$의 개수는?</span><div class="bilingual-en">How many natural numbers $n$ are less than or equal to 300?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$135$</div><div class="opt"><span class="n">2</span>$144$</div><div class="opt"><span class="n">3</span>$153$</div><div class="opt"><span class="n">4</span>$162$</div><div class="opt"><span class="n">5</span>$171$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>

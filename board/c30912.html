@@ -742,7 +742,78 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   💡 <b>Strategy Tip</b>: Pairing alternating signs as $-d$ reduces alternating series to simple arithmetic steps, revealing useful symmetries around zero.
 </p>
   </div>
-</div><div class="q" data-ans="2" data-exp="$d=2, a_1=-4$. $b_n$의 1항부터 9항까지 합은 $-20$입니다." data-exp-en="$d=2, a_1=-4$. The sum of terms 1 to 9 of $b_n$ is $-20$."><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</span><div class="bilingual-en">The sequence $\{a_n\}$ is an arithmetic sequence, and the sequence $\{b_n\}$ satisfies $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$ for all natural numbers $n$. When $b_2 = -2, b_3 + b_7 = 0$, what is the sum of the first to ninth terms of the sequence $\{b_n\}$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-22$</div><div class="opt"><span class="n">2</span>$-20$</div><div class="opt"><span class="n">3</span>$-18$</div><div class="opt"><span class="n">4</span>$-16$</div><div class="opt"><span class="n">5</span>$-14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div><div class="q" data-ans="2" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$d=2, a_1=-4$. $b_n$의 1항부터 9항까지 합은 $-20$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 등차수열 $\{a_n\}$에 대하여 부호가 교대로 바뀌는 누적합으로 정의된 새로운 수열 $\{b_n\}$의 &lt;b&gt;홀수 항과 짝수 항의 주기적·규칙적 특성&lt;/b&gt;을 분석하고 합을 구하는 수열 추론 문제입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 공차 $d$의 도출&lt;/b&gt;&lt;br&gt;
+  등차수열 $\{a_n\}$의 첫째항을 $a_1$, 공차를 $d$라 합시다.&lt;br&gt;
+  $b_2 = a_1 - a_2$ 이고 등차수열의 정의에 의해 $a_2 - a_1 = d$ 이므로&lt;br&gt;
+  $$b_2 = -(a_2 - a_1) = -d = -2 \implies d = 2$$
+  &lt;br&gt;
+  &lt;b&gt;2단계: $b_3 + b_7 = 0$ 조건을 통한 첫째항 $a_1$ 결정&lt;/b&gt;&lt;br&gt;
+  홀수 번째 항 $b_{2k-1}$의 구조를 관찰하면 인접한 두 항의 차가 $-d$로 묶입니다.&lt;br&gt;
+  • $b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$&lt;br&gt;
+  • $b_7 = (a_1 - a_2) + (a_3 - a_4) + (a_5 - a_6) + a_7 = -3d + a_7 = a_7 - 6$&lt;br&gt;
+  조건 $b_3 + b_7 = 0$ 에 대입하면:&lt;br&gt;
+  $$(a_3 - 2) + (a_7 - 6) = a_3 + a_7 - 8 = 0$$
+  $a_3 = a_1 + 2d = a_1 + 4$, $a_7 = a_1 + 6d = a_1 + 12$ 이므로&lt;br&gt;
+  $$(a_1 + 4) + (a_1 + 12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$$
+  따라서 등차수열의 일반항은 $a_n = -4 + 2(n-1) = 2n - 6$ 입니다.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;3단계: $b_1$부터 $b_9$까지의 총합 계산&lt;/b&gt;&lt;br&gt;
+  • 짝수 항 ($b_{2k} = -kd = -2k$):&lt;br&gt;
+  $b_2 = -2,\; b_4 = -4,\; b_6 = -6,\; b_8 = -8$&lt;br&gt;
+  $$\sum_{k=1}^4 b_{2k} = -(2 + 4 + 6 + 8) = -20$$&lt;br&gt;
+  • 홀수 항 ($b_{2k-1} = -(k-1)d + a_{2k-1} = -2(k-1) + [2(2k-1)-6] = 2k-6$):&lt;br&gt;
+  $b_1 = -4,\; b_3 = -2,\; b_5 = 0,\; b_7 = 2,\; b_9 = 4$&lt;br&gt;
+  $$\sum_{k=1}^5 b_{2k-1} = (-4) + (-2) + 0 + 2 + 4 = 0$$&lt;br&gt;
+  따라서 제1항부터 제9항까지의 합은:&lt;br&gt;
+  $$\sum_{n=1}^9 b_n = \sum_{k=1}^5 b_{2k-1} + \sum_{k=1}^4 b_{2k} = 0 + (-20) = -20$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  구하는 합은 $-20$ 입니다.&lt;br&gt;
+  따라서 올바른 정답은 &lt;b&gt;②번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 부호 교대 수열 $b_n$은 짝수 항에서는 인접한 쌍들이 모두 $-d$로 깔끔하게 묶이고, 홀수 항은 등차수열을 이룹니다. 짝수항과 홀수항을 분리하여 더하면 대칭성에 의해 홀수 항의 합이 $0$이 되어 계산이 대단히 명쾌해집니다.
+&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;$d=2, a_1=-4$. The sum of terms 1 to 9 of $b_n$ is $-20$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This sequence problem investigates an arithmetic sequence $\{a_n\}$ coupled with an alternating partial sum sequence $\{b_n\}$. The key strategy is separating even and odd indexed terms to exploit pairwise telescoping cancellations.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Determine the common difference $d$&lt;/b&gt;&lt;br&gt;
+  Let $\{a_n\}$ have first term $a_1$ and common difference $d$.&lt;br&gt;
+  By definition, $b_2 = a_1 - a_2 = -d$. Given $b_2 = -2$:&lt;br&gt;
+  $$-d = -2 \implies d = 2$$
+  &lt;br&gt;
+  &lt;b&gt;Step 2: Find $a_1$ using the condition $b_3 + b_7 = 0$&lt;/b&gt;&lt;br&gt;
+  Group consecutive pairs $(a_{2k-1} - a_{2k}) = -d = -2$:&lt;br&gt;
+  • $b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$&lt;br&gt;
+  • $b_7 = (a_1 - a_2) + (a_3 - a_4) + (a_5 - a_6) + a_7 = -3d + a_7 = a_7 - 6$&lt;br&gt;
+  Substitute into $b_3 + b_7 = 0$:&lt;br&gt;
+  $$(a_3 - 2) + (a_7 - 6) = a_3 + a_7 - 8 = 0$$&lt;br&gt;
+  Using $a_3 = a_1 + 4$ and $a_7 = a_1 + 12$:&lt;br&gt;
+  $$(a_1 + 4) + (a_1 + 12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$$&lt;br&gt;
+  Thus, $a_n = -4 + 2(n-1) = 2n - 6$.
+  &lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 3: Sum the terms from $n = 1$ to $9$&lt;/b&gt;&lt;br&gt;
+  Split into even and odd indices:&lt;br&gt;
+  • Even terms ($b_{2k} = -kd = -2k$ for $k=1,2,3,4$):&lt;br&gt;
+  $$\sum_{k=1}^4 b_{2k} = -2(1 + 2 + 3 + 4) = -20$$&lt;br&gt;
+  • Odd terms ($b_{2k-1} = 2k - 6$ for $k=1,2,3,4,5$):&lt;br&gt;
+  $$\sum_{k=1}^5 b_{2k-1} = (-4) + (-2) + 0 + 2 + 4 = 0$$&lt;br&gt;
+  Summing both components:&lt;br&gt;
+  $$\sum_{n=1}^9 b_n = (-20) + 0 = -20$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;
+  The total sum $\sum_{n=1}^9 b_n$ is $-20$.&lt;br&gt;
+  Therefore, the correct answer is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Pairing alternating signs as $-d$ reduces alternating series to simple arithmetic steps, revealing useful symmetries around zero.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</span><div class="bilingual-en">The sequence $\{a_n\}$ is an arithmetic sequence, and the sequence $\{b_n\}$ satisfies $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$ for all natural numbers $n$. When $b_2 = -2, b_3 + b_7 = 0$, what is the sum of the first to ninth terms of the sequence $\{b_n\}$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-22$</div><div class="opt"><span class="n">2</span>$-20$</div><div class="opt"><span class="n">3</span>$-18$</div><div class="opt"><span class="n">4</span>$-16$</div><div class="opt"><span class="n">5</span>$-14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">

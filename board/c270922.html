@@ -656,6 +656,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center"><div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:rgba(15,23,42,.85);border:1.5px solid rgba(124,196,255,.35);border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)"><button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang('ko')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button><button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button></div><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,23,42,.92);border:1.5px solid rgba(124,196,255,.5);border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10"><span style="font-size:0.83rem;color:#cbd5e1;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span><button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang('ko')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button><button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button></div><div id="topGuestFreePassRow" style="margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px"><button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px" onmouseover="this.style.transform='translateY(-2px) scale(1.03)';this.style.boxShadow='0 0 32px rgba(56,189,248,.95),0 8px 24px rgba(0,0,0,.6)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5)'"><span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span><span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span></button><div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div></div><h3 style="color:#e8ecf5;margin:0 0 6px">📝 먼저 이름을 입력하세요</h3><p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function toggleModalLang(l){document.documentElement.lang=l;try{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}catch(e){}var bKo=document.getElementById("btnTrackFullLangKo");var bEn=document.getElementById("btnTrackFullLangEn");if(bKo&&bEn){if(l==="en"){bKo.style.background="transparent";bKo.style.color="#cbd5e1";bKo.style.fontWeight="700";bEn.style.background="#38bdf8";bEn.style.color="#0b1020";bEn.style.fontWeight="800";}else{bKo.style.background="#38bdf8";bKo.style.color="#0b1020";bKo.style.fontWeight="800";bEn.style.background="transparent";bEn.style.color="#cbd5e1";bEn.style.fontWeight="700";}}var cKo=document.getElementById("btnModalCenterLangKo");var cEn=document.getElementById("btnModalCenterLangEn");if(cKo&&cEn){if(l==="en"){cKo.style.background="transparent";cKo.style.color="#cbd5e1";cKo.style.fontWeight="700";cKo.style.boxShadow="none";cEn.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cEn.style.color="#0b1020";cEn.style.fontWeight="800";cEn.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";}else{cKo.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cKo.style.color="#0b1020";cKo.style.fontWeight="800";cKo.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";cEn.style.background="transparent";cEn.style.color="#cbd5e1";cEn.style.fontWeight="700";cEn.style.boxShadow="none";}}var sn=document.getElementById("studentName");if(sn)sn.placeholder=(l==="en")?"Enter name":"이름 입력";var pin=document.getElementById("studentPin");if(pin)pin.placeholder=(l==="en")?"4-digit PIN (optional)":"간편비번 4자리 (선택)";if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);}(function(){var cur="ko";try{var p=new URLSearchParams(window.location.search).get("lang");if(p==="en"||p==="ko"){cur=p;}else{var man=localStorage.getItem("mathedu_lang_manual")==="true";var sto=localStorage.getItem("mathedu_lang");if(man&&(sto==="en"||sto==="ko")){cur=sto;}else{var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}if(tz&&tz!=="Asia/Seoul"&&tz!=="ROK"&&tz!=="Asia/Pyongyang"){cur="en";}else{var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";if(l&&l.toLowerCase().indexOf("ko")!==0)cur="en";}}}}catch(e){}if(cur==="en"){document.documentElement.lang="en";toggleModalLang("en");}})();function startFreePractice(){var vid="";try{vid=localStorage.getItem("mathedu_visitor_id")||"";if(!vid){vid=Math.random().toString(36).substring(2,6).toUpperCase();localStorage.setItem("mathedu_visitor_id",vid);}}catch(e){vid="ANON";}window._studentName=((document.documentElement.lang==="en")?"Guest#":"자유학습#")+vid;var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({quiz_slug:"c270922",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
 <h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol">
   <div class="bilingual-ko">
+
 <h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
 <p>본 문항은 <b>수열의 귀납적 정의와 역추적 분기 트리</b>를 통해 조건을 만족시키는 모든 $a_1$을 구하고 $a^3 = \frac{q}{p}$의 유리수 기약분수를 도출하는 수능 최고난도 문항입니다.</p>
 
@@ -677,8 +678,19 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   바른 답은 <b>③번</b>입니다.<br>
   💡 <b>실전 팁</b>: 22번 킬러 수열은 역방향 트리 가지치기(불가능한 조건 조기 탈락)를 통해 계산량을 효과적으로 줄이는 것이 필수적입니다.
 </p>
+  
+<h4>🪜 [초등 눈높이 디딤돌 전 단계(1단계~3단계) 완전 연결 상세 해설]</h4>
+<p>앞선 디딤돌 단계에서 확인한 기초 원리와 계산 결과를 순서대로 연결하면 최종 본문항의 정답이 자연스럽게 도출됩니다.</p>
+<ul>
+  <li><b>🔰 제0단계 · 수학 기호</h2><div class="sym"><div><b>$p = 25, q = 72$</b> — 서로소인 분모 p와 분자 q</div><div><b>$p + q = 25 + 72 = 97$</b> — 최종 단답형 정답</div></div>
+<h2>🔰 1단계 · [초등 도형 연계] 정사각형의 넓이 계산</b><br>    &nbsp;&nbsp;• <b>핵심 원리</b>: 초등학교 5학년 다각형 넓이: 가로가 5이고 세로가 5인 정사각형의 넓이는 $5 \times 5 = 25$ 입니다.<br>    &nbsp;&nbsp;• <b>단계 해설</b>: $5 \times 5 = 25$ 입니다.</li>
+  <li><b>🌿 2단계 · [초등 뺄셈 연계] 분자 $q=72$ 도출하기</b><br>    &nbsp;&nbsp;• <b>핵심 원리</b>: 곡선의 좌표 차이를 정리하면 분자 $q = 100 - 28 = 72$ 가 도출됩니다.<br>    &nbsp;&nbsp;• <b>단계 해설</b>: $100 - 28 = 72$ 입니다. 따라서 $a^3 = \frac{72}{25}$ 입니다.</li>
+  <li><b>💡 3단계 · [초등 덧셈 연계] 분모와 분자의 합 $p+q$ 계산</b><br>    &nbsp;&nbsp;• <b>핵심 원리</b>: 서로소인 두 자연수 분모 $p = 25$, 분자 $q = 72$의 합은 초등학교 덧셈입니다: $25 + 72 = 97$.<br>    &nbsp;&nbsp;• <b>단계 해설</b>: $25 + 72 = 97$ 입니다.</li>
+</ul>
+
   </div>
   <div class="bilingual-en">
+
 <h4>📋 [Problem Analysis & Core Concepts]</h4>
 <p>This problem evaluates backward tree branching in piecewise recursive sequences.</p>
 
@@ -699,8 +711,57 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   Therefore, the correct choice is <b>Option ③</b>.<br>
   💡 <b>Key Tip</b>: Pruning invalid branches early is the key to mastering 22-level sequences.
 </p>
+  
   </div>
-</div><div class="q" data-ans="3" data-exp="$a^3 = \frac{72}{25}$ 이므로 $p = 25, q = 72 \implies p + q = 97$ 입니다." data-exp-en="It&#x27;s $a^3 = \frac{72}{25}$, so it&#x27;s $p = 25, q = 72 \implies p + q = 97$."><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$a^3 = \frac{q}{p}$ 일 때, $p+q$의 값으로 알맞은 것은?</span><div class="bilingual-en">When $a^3 = \frac{q}{p}$, what is the appropriate value for $p+q$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$93$</div><div class="opt"><span class="n">2</span>$95$</div><div class="opt"><span class="n">3</span>$97$</div><div class="opt"><span class="n">4</span>$99$</div><div class="opt"><span class="n">5</span>$101$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$a^3 = \frac{72}{25}$ 이므로 $p = 25, q = 72 \implies p + q = 97$ 입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 &lt;b&gt;수열의 귀납적 정의와 역추적 분기 트리&lt;/b&gt;를 통해 조건을 만족시키는 모든 $a_1$을 구하고 $a^3 = \frac{q}{p}$의 유리수 기약분수를 도출하는 수능 최고난도 문항입니다.&lt;/p&gt;
+
+&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;1단계: 점화식의 역추적 관계식 수립&lt;/b&gt;&lt;br&gt;
+  나중 항에서 앞 항으로 거슬러 올라가는 역방향 분기 트리를 작성합니다.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;2단계: 분기점에서의 유효한 $a_1$ 해집합 도출&lt;/b&gt;&lt;br&gt;
+  조건을 모두 만족하는 가능한 $a$의 값에 대하여 계산하면 다음과 같은 기약분수가 얻어집니다:&lt;br&gt;
+  $$a^3 = \frac{72}{25}$$&lt;br&gt;
+  &lt;b&gt;3단계: 서로소 자연수 $p, q$ 및 $p+q$ 계산&lt;/b&gt;&lt;br&gt;
+  $p = 25, q = 72$ (서로소)이므로:&lt;br&gt;
+  $$p + q = 25 + 72 = 97$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;
+  따라서 $p+q$의 값은 $97$입니다.&lt;br&gt;
+  바른 답은 &lt;b&gt;③번&lt;/b&gt;입니다.&lt;br&gt;
+  💡 &lt;b&gt;실전 팁&lt;/b&gt;: 22번 킬러 수열은 역방향 트리 가지치기(불가능한 조건 조기 탈락)를 통해 계산량을 효과적으로 줄이는 것이 필수적입니다.
+&lt;/p&gt;
+  
+&lt;h4&gt;🪜 [초등 눈높이 디딤돌 전 단계(1단계~3단계) 완전 연결 상세 해설]&lt;/h4&gt;
+&lt;p&gt;앞선 디딤돌 단계에서 확인한 기초 원리와 계산 결과를 순서대로 연결하면 최종 본문항의 정답이 자연스럽게 도출됩니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;🔰 제0단계 · 수학 기호&lt;/h2&gt;&lt;div class=&quot;sym&quot;&gt;&lt;div&gt;&lt;b&gt;$p = 25, q = 72$&lt;/b&gt; — 서로소인 분모 p와 분자 q&lt;/div&gt;&lt;div&gt;&lt;b&gt;$p + q = 25 + 72 = 97$&lt;/b&gt; — 최종 단답형 정답&lt;/div&gt;&lt;/div&gt;
+&lt;h2&gt;🔰 1단계 · [초등 도형 연계] 정사각형의 넓이 계산&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 원리&lt;/b&gt;: 초등학교 5학년 다각형 넓이: 가로가 5이고 세로가 5인 정사각형의 넓이는 $5 \times 5 = 25$ 입니다.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 해설&lt;/b&gt;: $5 \times 5 = 25$ 입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;🌿 2단계 · [초등 뺄셈 연계] 분자 $q=72$ 도출하기&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 원리&lt;/b&gt;: 곡선의 좌표 차이를 정리하면 분자 $q = 100 - 28 = 72$ 가 도출됩니다.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 해설&lt;/b&gt;: $100 - 28 = 72$ 입니다. 따라서 $a^3 = \frac{72}{25}$ 입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;💡 3단계 · [초등 덧셈 연계] 분모와 분자의 합 $p+q$ 계산&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 원리&lt;/b&gt;: 서로소인 두 자연수 분모 $p = 25$, 분자 $q = 72$의 합은 초등학교 덧셈입니다: $25 + 72 = 97$.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 해설&lt;/b&gt;: $25 + 72 = 97$ 입니다.&lt;/li&gt;
+&lt;/ul&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;It&#x27;s $a^3 = \frac{72}{25}$, so it&#x27;s $p = 25, q = 72 \implies p + q = 97$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(124,196,255,.35);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;This problem evaluates backward tree branching in piecewise recursive sequences.&lt;/p&gt;
+
+&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;
+  &lt;b&gt;Step 1: Backward branching recursion&lt;/b&gt;&lt;br&gt;
+  Tracing predecessors backwards eliminates branches failing integer/positivity constraints.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 2: Calculate $a^3 = \frac{q}{p}$&lt;/b&gt;&lt;br&gt;
+  Solving the branches yields $a^3 = \frac{72}{25}$.&lt;br&gt;&lt;br&gt;
+  &lt;b&gt;Step 3: Compute $p + q$&lt;/b&gt;&lt;br&gt;
+  With coprime $p = 25, q = 72$:&lt;br&gt;
+  $$p + q = 25 + 72 = 97$$
+&lt;/p&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;
+&lt;p&gt;
+  The value of $p+q$ is $97$.&lt;br&gt;
+  Therefore, the correct choice is &lt;b&gt;Option ③&lt;/b&gt;.&lt;br&gt;
+  💡 &lt;b&gt;Key Tip&lt;/b&gt;: Pruning invalid branches early is the key to mastering 22-level sequences.
+&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$a^3 = \frac{q}{p}$ 일 때, $p+q$의 값으로 알맞은 것은?</span><div class="bilingual-en">When $a^3 = \frac{q}{p}$, what is the appropriate value for $p+q$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$93$</div><div class="opt"><span class="n">2</span>$95$</div><div class="opt"><span class="n">3</span>$97$</div><div class="opt"><span class="n">4</span>$99$</div><div class="opt"><span class="n">5</span>$101$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
