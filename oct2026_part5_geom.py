@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Auto-upgraded with Elementary-to-Advanced Micro-Scaffolding
 
 PART5_PROBLEMS = [{'slug': 'c2610g23',
   'qNum': '기하 23',

@@ -34,6 +34,14 @@ style_match = re.search(r"<style>(.*?)</style>", ref_html, re.DOTALL)
 COMMON_STYLE = style_match.group(1) if style_match else ""
 
 
+def render_md_inline(s: str) -> str:
+    if not s:
+        return ""
+    s = re.sub(r"\*\*([^*<\n]+)\*\*", r"<b>\1</b>", s)
+    s = re.sub(r"`([^`<\n]+)`", r"<code>\1</code>", s)
+    return s
+
+
 def extract_clean_qnum(raw_qnum: str) -> str:
     """'확통 23' -> '23', '15' -> '15'"""
     m = re.search(r"(\d+)", str(raw_qnum))
@@ -42,12 +50,12 @@ def extract_clean_qnum(raw_qnum: str) -> str:
 
 def build_question_block(q_data: dict, is_final: bool = False) -> str:
     ans = int(q_data["answer"])
-    exp_ko = html.escape(q_data.get("exp", ""), quote=True)
-    exp_en = html.escape(q_data.get("exp_en", ""), quote=True)
+    exp_ko = html.escape(render_md_inline(q_data.get("exp", "")), quote=True)
+    exp_en = html.escape(render_md_inline(q_data.get("exp_en", "")), quote=True)
     lvl_ko = q_data.get("level_label", "최종 본문항" if is_final else "디딤돌 문제")
     lvl_en = q_data.get("level_label_en", "Final Exam Problem" if is_final else "Scaffolding Step")
-    stem_ko = q_data["stem"]
-    stem_en = q_data.get("stem_en", "")
+    stem_ko = render_md_inline(q_data["stem"])
+    stem_en = render_md_inline(q_data.get("stem_en", ""))
     options = q_data["options"]
 
     # Determine if options are short enough for inline 5-column layout
@@ -56,7 +64,7 @@ def build_question_block(q_data: dict, is_final: bool = False) -> str:
 
     opts_html = ""
     for idx, opt_text in enumerate(options, 1):
-        opts_html += f'<div class="opt"><span class="n">{idx}</span>{opt_text}</div>'
+        opts_html += f'<div class="opt"><span class="n">{idx}</span>{render_md_inline(opt_text)}</div>'
 
     stem_en_div = f'<div class="bilingual-en">{stem_en}</div>' if stem_en else ""
 
@@ -105,25 +113,25 @@ def build_problem_html(prob: dict) -> str:
     sym_items_html = ""
     for s in prob.get("symbols", []):
         sym_l = s["sym"]
-        desc_ko = s["desc"]
-        desc_en = s.get("desc_en", "")
+        desc_ko = render_md_inline(s["desc"])
+        desc_en = render_md_inline(s.get("desc_en", ""))
         en_div = f'<div class="bilingual-en">{desc_en}</div>' if desc_en else ""
         sym_items_html += f'<div><b>{sym_l}</b> — {desc_ko}{en_div}</div>'
 
     # Levels (Step 1 ~ Step 5+)
     levels_html = ""
     for lv in prob.get("levels", []):
-        lv_title_ko = lv["title"]
-        lv_title_en = lv.get("title_en", "")
-        know_ko = lv.get("knowledge", "")
-        know_en = lv.get("knowledge_en", "")
+        lv_title_ko = render_md_inline(lv["title"])
+        lv_title_en = render_md_inline(lv.get("title_en", ""))
+        know_ko = render_md_inline(lv.get("knowledge", ""))
+        know_en = render_md_inline(lv.get("knowledge_en", ""))
         qs_html = "".join(build_question_block(q, is_final=False) for q in lv.get("questions", []))
         levels_html += f"""<h2>{lv_title_ko}<span class="bilingual-en">{lv_title_en}</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>{know_ko}<div class="bilingual-en"><b>Prerequisite Knowledge:</b> {know_en}</div></div>{qs_html}"""
 
     # Final problem & solution
     final_data = prob["final"]
-    sol_ko = final_data["solution"]
-    sol_en = final_data.get("solution_en", "")
+    sol_ko = render_md_inline(final_data["solution"])
+    sol_en = render_md_inline(final_data.get("solution_en", ""))
     # Ensure sol_en is at least 120 chars for audit_engine
     if len(sol_en.strip()) < 120:
         sol_en = sol_en + "\n<p>💡 <b>Key Takeaway</b>: Master each micro-scaffolding step from elementary arithmetic to complete the rigorous derivation accurately.</p>"

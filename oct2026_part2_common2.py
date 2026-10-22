@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Auto-upgraded with Elementary-to-Advanced Micro-Scaffolding
 
 PART2_PROBLEMS = [{'slug': 'c261012',
   'qNum': '12',
@@ -535,7 +534,7 @@ PART2_PROBLEMS = [{'slug': 'c261012',
               'title_en': "🌿 Step 2 · [Bitangent Slope] Comparing constant terms when $f'(1) = f'(4) = m$",
               'knowledge': "1단계에서 $f'(1) = f'(4) = m$이라 놓으면, 조건 (가)의 우변은 $0 \\cdot x - m + 4m = 3m$이 됩니다! 즉 $f(4) - "
                            "f(1) = 3m \\implies \\dfrac{f(4) - f(1)}{4 - 1} = f'(1) = f'(4) = m$이므로, 두 점 $(1, f(1))$과 "
-                           '$(4, f(4))$를 잇는 직선 $L(x)$는 $x = 1$과 $x = 4$에서 곡선 $y = f(x)$에 **동시에 접하는 이중접선**입니다!',
+                           '$(4, f(4))$를 잇는 직선 $L(x)$는 $x = 1$과 $x = 4$에서 곡선 $y = f(x)$에 <b>동시에 접하는 이중접선</b>입니다!',
               'knowledge_en': "Setting $f'(1) = f'(4) = m$ reduces (가) to $f(4) - f(1) = 3m$, so the secant line "
                               "through $x=1$ and $x=4$ has slope $m = f'(1) = f'(4)$ and is a bitangent line $L(x)$!",
               'questions': [{'level_label': '이중접선 식 세우기 디딤돌 2',
@@ -576,7 +575,7 @@ PART2_PROBLEMS = [{'slug': 'c261012',
              {'title': "🌱 4단계 · [삼차함수 $P(x)$의 극점 찾기] $P'(x) = 3x^2 - 20x + 33 = 0$ 인수분해하기",
               'title_en': "🌱 Step 4 · [Extrema of $P(x)$] Factoring $P'(x) = 3x^2 - 20x + 33 = 0$",
               'knowledge': '가로선 $y = k$를 위아래로 움직일 때 삼차함수 $y = P(x) = x^3 - 10x^2 + 33x + b$와의 교점 개수가 갑자기 바뀌는(불연속이 되는) '
-                           "순간은 바로 $y = k$가 **$P(x)$의 극대점 또는 극소점을 지날 때**입니다! 이를 위해 $P'(x) = 3x^2 - 20x + 33$을 인수분해해 "
+                           "순간은 바로 $y = k$가 <b>$P(x)$의 극대점 또는 극소점을 지날 때</b>입니다! 이를 위해 $P'(x) = 3x^2 - 20x + 33$을 인수분해해 "
                            '봅시다.',
               'knowledge_en': 'The number of intersections between $y = P(x)$ and the horizontal line $y = k$ jumps '
                               "when $k$ equals a local extremum of $P(x)$. Differentiating gives $P'(x) = 3x^2 - 20x + "
@@ -597,7 +596,7 @@ PART2_PROBLEMS = [{'slug': 'c261012',
               'knowledge': '문제에서 $f\\left(\\dfrac{7}{2}\\right) < 0$이라고 했습니다. $\\dfrac{7}{2} = 3.5$는 $3$과 '
                            '$\\dfrac{11}{3} \\approx 3.67$ 사이의 수입니다!<ul><li>만약 극솟값 $P\\left(\\frac{11}{3}\\right) = '
                            '0$이면, 모든 $x > 0$에서 $P(x) \\ge 0$이 되어 $f\\left(\\frac{7}{2}\\right) > 0$이 되므로 '
-                           '모순입니다!</li><li>따라서 **극댓값 $P(3) = 0$**이어야 하며, 이때 $k = 0$($g(0) = 0$)에서 접선이 되어 불연속이 되고 '
+                           '모순입니다!</li><li>따라서 <b>극댓값 $P(3) = 0$</b>이어야 하며, 이때 $k = 0$($g(0) = 0$)에서 접선이 되어 불연속이 되고 '
                            '$f\\left(\\frac{7}{2}\\right) < 0$도 완벽히 성립합니다!</li></ul>',
               'knowledge_en': 'Since $\\frac{7}{2} = 3.5 \\in \\left(3, \\frac{11}{3}\\right)$ and '
                               '$f\\left(\\frac{7}{2}\\right) < 0$, the local minimum $P\\left(\\frac{11}{3}\\right)$ '
@@ -1454,7 +1453,7 @@ PART2_PROBLEMS = [{'slug': 'c261012',
                'desc_en': 'Difference between local max and min of a monic cubic function.'}],
   'levels': [{'title': '🔰 1단계 · [초등 엘리베이터 이동거리] 올라간 거리와 내려간 거리 각각 구하기',
               'title_en': '🔰 Step 1 · [Elementary Elevator Distance] Upward and downward travel segments',
-              'knowledge': "정적분 $\\int_0^t |f'(x)|dx$는 엘리베이터가 $x = 0$부터 $x = t$까지 **위아래로 움직인 총 이동 거리**입니다! $0 < "
+              'knowledge': "정적분 $\\int_0^t |f'(x)|dx$는 엘리베이터가 $x = 0$부터 $x = t$까지 <b>위아래로 움직인 총 이동 거리</b>입니다! $0 < "
                            '\\alpha < 2 < t$일 때 세 구간으로 나누어 봅시다.<ul><li>$[0, \\alpha]$ (증가): $f(0)$층에서 $f(\\alpha)$층으로 '
                            '올라간 거리 $= f(\\alpha) - f(0)$</li><li>$[\\alpha, 2]$ (감소): $f(\\alpha)$층에서 $f(2)$층으로 내려간 거리 '
                            '$= f(\\alpha) - f(2)$</li><li>$[2, t]$ (증가): $f(2)$층에서 $f(t)$층으로 올라간 거리 $= f(t) - '
@@ -1682,8 +1681,8 @@ PART2_PROBLEMS = [{'slug': 'c261012',
   'levels': [{'title': '🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기',
               'title_en': '🔰 Step 1 · [Elementary Parity Rules] Computing $a_4, a_5, a_6$ starting from $a_3 = 15$ '
                           '(odd)',
-              'knowledge': '조건 (가)의 규칙은 아주 간단합니다!<ul><li>**$a_n$이 홀수일 때**: $a_n$에 $1$을 더해 반으로 나눈 뒤 번호 $n$을 더합니다 '
-                           '$\\implies a_{n+1} = \\dfrac{1}{2}(a_n + 1) + n$</li><li>**$a_n$이 짝수일 때**: $a_n$에 그냥 번호 '
+              'knowledge': '조건 (가)의 규칙은 아주 간단합니다!<ul><li><b>$a_n$이 홀수일 때</b>: $a_n$에 $1$을 더해 반으로 나눈 뒤 번호 $n$을 더합니다 '
+                           '$\\implies a_{n+1} = \\dfrac{1}{2}(a_n + 1) + n$</li><li><b>$a_n$이 짝수일 때</b>: $a_n$에 그냥 번호 '
                            '$n$을 더합니다 $\\implies a_{n+1} = a_n + n$</li></ul>먼저 $a_3 = 15$(홀수, $n=3$)에서 출발해 '
                            '볼까요?<ul><li>$a_4 = \\dfrac{1}{2}(15 + 1) + 3 = 8 + 3 = 11$ (홀수, $n=4$)</li><li>$a_5 = '
                            '\\dfrac{1}{2}(11 + 1) + 4 = 6 + 4 = 10$ (짝수, $n=5$)</li></ul>이제 $a_5 = 10$은 짝수이므로 짝수 '
@@ -1725,9 +1724,9 @@ PART2_PROBLEMS = [{'slug': 'c261012',
                              'exp_en': '$a_3 = 25$ gives $25 \\to 16 \\to 20 \\to 25$.'}]},
              {'title': '🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기',
               'title_en': '🌱 Step 3 · [Backtracking Part 1] Finding valid $a_2$ when $a_3 = 15$',
-              'knowledge': '이제 $n = 2$일 때의 규칙으로 $a_3 = 15$에서 $a_2$를 거꾸로 찾아봅시다!<ul><li>만약 **$a_2$가 짝수**라면: $a_3 = a_2 + '
-                           "2 = 15 \\implies a_2 = 13$인데, $13$은 홀수이므로 '짝수' 가정에 모순입니다(탈락!).</li><li>만약 **$a_2$가 홀수**라면: "
-                           '$a_3 = \\dfrac{1}{2}(a_2 + 1) + 2 = 15$입니다.</li></ul>',
+              'knowledge': '이제 $n = 2$일 때의 규칙으로 $a_3 = 15$에서 $a_2$를 거꾸로 찾아봅시다!<ul><li>만약 <b>$a_2$가 짝수</b>라면: $a_3 = '
+                           "a_2 + 2 = 15 \\implies a_2 = 13$인데, $13$은 홀수이므로 '짝수' 가정에 모순입니다(탈락!).</li><li>만약 <b>$a_2$가 "
+                           '홀수</b>라면: $a_3 = \\dfrac{1}{2}(a_2 + 1) + 2 = 15$입니다.</li></ul>',
               'knowledge_en': 'Backtracking from $a_3 = 15$ ($n = 2$): if $a_2$ were even, $a_2 + 2 = 15 \\implies a_2 '
                               '= 13$ (odd, contradiction!). If $a_2$ is odd, $\\frac{1}{2}(a_2 + 1) + 2 = 15$.',
               'questions': [{'level_label': 'a2 역추적 ① 디딤돌 3',
@@ -1741,8 +1740,8 @@ PART2_PROBLEMS = [{'slug': 'c261012',
                              'exp_en': '$a_2 = 25$ (odd).'}]},
              {'title': '🌱 4단계 · [첫째항 역추적 ①] $a_2 = 25$에서 가능한 두 개의 $a_1$ 구하기',
               'title_en': '🌱 Step 4 · [Backtracking to $a_1$ (Case 1)] Finding the two values of $a_1$ from $a_2 = 25$',
-              'knowledge': '방금 구한 $a_2 = 25$에서 $n = 1$일 때의 규칙으로 첫째항 $a_1$을 역추적해 봅시다!<ul><li>**$a_1$이 짝수인 경우**: $a_2 = '
-                           'a_1 + 1 = 25 \\implies a_1 = 24$ ($24$는 짝수이므로 합격!)</li><li>**$a_1$이 홀수인 경우**: $a_2 = '
+              'knowledge': '방금 구한 $a_2 = 25$에서 $n = 1$일 때의 규칙으로 첫째항 $a_1$을 역추적해 봅시다!<ul><li><b>$a_1$이 짝수인 경우</b>: $a_2 '
+                           '= a_1 + 1 = 25 \\implies a_1 = 24$ ($24$는 짝수이므로 합격!)</li><li><b>$a_1$이 홀수인 경우</b>: $a_2 = '
                            '\\dfrac{1}{2}(a_1 + 1) + 1 = 25 \\implies \\dfrac{1}{2}(a_1 + 1) = 24 \\implies a_1 = 47$ '
                            '($47$은 홀수이므로 합격!)</li></ul>',
               'knowledge_en': 'From $a_2 = 25$ ($n = 1$): if $a_1$ is even, $a_1 + 1 = 25 \\implies a_1 = 24$ (even, '
@@ -1759,9 +1758,9 @@ PART2_PROBLEMS = [{'slug': 'c261012',
                              'exp_en': '$24 + 47 = 71$.'}]},
              {'title': '🌳 5단계 · [한 칸 역추적 ②] $a_3 = 25$가 되도록 하는 자연수 $a_2$ 구하기',
               'title_en': '🌳 Step 5 · [Backtracking Part 2] Finding valid $a_2$ when $a_3 = 25$',
-              'knowledge': '이제 두 번째 주기 해인 $a_3 = 25$에서 $n = 2$일 때의 규칙으로 $a_2$를 역추적해 봅시다!<ul><li>만약 **$a_2$가 짝수**라면: '
+              'knowledge': '이제 두 번째 주기 해인 $a_3 = 25$에서 $n = 2$일 때의 규칙으로 $a_2$를 역추적해 봅시다!<ul><li>만약 <b>$a_2$가 짝수</b>라면: '
                            "$a_3 = a_2 + 2 = 25 \\implies a_2 = 23$인데, $23$은 홀수이므로 '짝수' 가정에 모순입니다(탈락!).</li><li>만약 "
-                           '**$a_2$가 홀수**라면: $a_3 = \\dfrac{1}{2}(a_2 + 1) + 2 = 25$입니다.</li></ul>',
+                           '<b>$a_2$가 홀수</b>라면: $a_3 = \\dfrac{1}{2}(a_2 + 1) + 2 = 25$입니다.</li></ul>',
               'knowledge_en': 'Backtracking from $a_3 = 25$ ($n = 2$): if $a_2$ were even, $a_2 + 2 = 25 \\implies a_2 '
                               '= 23$ (odd, contradiction!). If $a_2$ is odd, $\\frac{1}{2}(a_2 + 1) + 2 = 25$.',
               'questions': [{'level_label': 'a2 역추적 ② 디딤돌 5',

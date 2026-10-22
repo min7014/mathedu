@@ -144,9 +144,17 @@ def match_materials(text, limit=4):
 
         # 9. 확률과 통계
         if is_prob:
-            if '정규분포' in text_lower and '정규분포' in item_text: score += 200
-            elif '확률분포' in item_text or '정규분포' in item_text: score += 160
-            elif '확률' in item_text: score += 120
+            if any(k in text_lower for k in ['정규분포', '표준정규', '신뢰구간', '모평균', '표본평균']):
+                if '정규분포' in item_text or '모집단' in item_text or '표본' in item_text: score += 200
+                elif '확률분포' in item_text: score += 160
+            elif any(k in text_lower for k in ['조건부확률', '여사건', '비복원', '독립시행', '사건', '경우의수', '순열', '조합']):
+                if '시행과 사건' in item_text or '확률수업' in item_text: score += 220
+                elif '확률분포' in item_text: score += 180
+                elif 'c_r' in item_text or '추출' in item_text: score += 170
+                elif '확률' in item_text or '통계' in item_text: score += 120
+            else:
+                if '확률분포' in item_text or '정규분포' in item_text: score += 160
+                elif '확률' in item_text: score += 120
 
         # 10. 이차곡선 & 원뿔곡선
         if is_conic:
@@ -292,6 +300,14 @@ def _get_visual_tip_text(problem_title):
             "• <b>[작도의 논리]</b> 세 변의 수직이등분선이 왜 반드시 한 점(외심)에서 만날 수밖에 없는지, 각의 이등분선(내심)과 중선(무게중심)의 필연적 수렴 추적<br>"
             "• <b>[면적과 길이의 조화]</b> 무게중심이 세 중선을 $2:1$로 내분하고 삼각형의 넓이를 6개의 동일한 면적으로 분할하는 기하학적 균형미<br>"
             "• <b>[수학적 의미]</b> 눈금 없는 자와 컴퍼스만으로 증명해낸 그리스 기하학의 정수를 하단 인터랙티브 작도기에서 직접 확인해 보세요."
+        )
+    elif any(k in t for k in ['조건부확률', '여사건', '비복원', '순열', '조합', '경우의수']) and '정규분포' not in t:
+        return (
+            "💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>"
+            "수학자료실의 확률·조합 자료는 <b>시행과 사건(표본공간과 부분집합)의 구조</b>와 <b>조합(${}_n\\mathrm{C}_r$)의 단계별 대수적·기하학적 원리</b>를 투명하게 시각화합니다.<br>"
+            "• <b>[시행과 표본공간 분할]</b> 연속 시행의 결과를 순서쌍 $(x_1, y_1, x_2, y_2)$로 나타내어 전체 표본공간을 빠짐없이 격자화하는 과정<br>"
+            "• <b>[여사건과 배반사건 소거]</b> 복잡한 '또는' 조건을 여사건의 상호배반인 케이스들로 분해하고 불가능한 순서쌍을 소거하여 정확히 세는 논리<br>"
+            "• <b>[조건부확률의 축소된 표본공간]</b> 사건 $\\mathrm{I})$이 일어났을 때 그 안에서 사건 $\\mathrm{II})$가 차지하는 비율 $\\dfrac{n(\\mathrm{I}\\cap\\mathrm{II})}{n(\\mathrm{I})}$의 의미를 하단 자료에서 깊이 있게 탐구해 보세요."
         )
     elif any(k in t for k in ['확률', '순열', '조합', '독립', '정규분포']):
         return (

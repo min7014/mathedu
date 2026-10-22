@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Auto-upgraded with Elementary-to-Advanced Micro-Scaffolding
 
 PART3_PROBLEMS = [{'slug': 'c2610p23',
   'qNum': '확통 23',
@@ -887,7 +886,7 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
                           'the mean.'}],
   'levels': [{'title': '🔰 1단계 · [초등 산봉우리 꼭대기 찾기] 조건 (가) $f(x) \\le f(4)$에서 평균 $m_1$ 구하기',
               'title_en': '🔰 Step 1 · [Elementary Peak Finding] Finding the mean $m_1$ from $f(x) \\le f(4)$',
-              'knowledge': '초등학교 그래프 읽기처럼 정규분포의 확률밀도함수 $f(x)$는 **평균 $x = m_1$에서 가장 높은 산봉우리(최댓값)**를 가지는 좌우 대칭 종 모양 '
+              'knowledge': '초등학교 그래프 읽기처럼 정규분포의 확률밀도함수 $f(x)$는 <b>평균 $x = m_1$에서 가장 높은 산봉우리(최댓값)</b>를 가지는 좌우 대칭 종 모양 '
                            "곡선입니다! 조건 (가)에서 '모든 실수 $x$에 대하여 $f(x) \\le f(4)$'라는 뜻은 $x = 4$에서의 높이가 가장 높다는 뜻입니다.",
               'knowledge_en': 'Like reading the highest peak of a hill in elementary math, a normal density curve '
                               '$f(x)$ reaches its maximum at the mean $x = m_1$. Condition (가) $f(x) \\le f(4)$ tells '
@@ -946,9 +945,9 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
                                        'mean.'}]},
              {'title': '🌱 4단계 · [조건 (나) $f(5) = g(15)$ 해석] $m_2$의 후보 두 개 찾기',
               'title_en': '🌱 Step 4 · [Condition (나) $f(5) = g(15)$] Finding the two candidates for $m_2$',
-              'knowledge': '두 확률변수 $X \\sim \\mathrm{N}(4, 10^2)$과 $Y \\sim \\mathrm{N}(m_2, 10^2)$는 **표준편차가 $10$으로 '
-                           '똑같기 때문에** 종 모양 곡선의 생김새가 완전히 합동입니다! 따라서 두 곡선의 높이가 같으려면($f(5) = g(15)$), 각각의 평균으로부터 떨어진 거리가 '
-                           '같아야 합니다:$$|15 - m_2| = |5 - 4| = 1$$',
+              'knowledge': '두 확률변수 $X \\sim \\mathrm{N}(4, 10^2)$과 $Y \\sim \\mathrm{N}(m_2, 10^2)$는 <b>표준편차가 $10$으로 '
+                           '똑같기 때문에</b> 종 모양 곡선의 생김새가 완전히 합동입니다! 따라서 두 곡선의 높이가 같으려면($f(5) = g(15)$), 각각의 평균으로부터 떨어진 '
+                           '거리가 같아야 합니다:$$|15 - m_2| = |5 - 4| = 1$$',
               'knowledge_en': 'Because $X$ and $Y$ share the same standard deviation $\\sigma = 10$, their density '
                               'curves are congruent. Thus $f(5) = g(15)$ holds iff $15$ is the same distance from '
                               '$m_2$ as $5$ is from $m_1 = 4$: $|15 - m_2| = |5 - 4| = 1$.',
@@ -968,11 +967,11 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
                        '16$ 결정하기',
               'title_en': '🌳 Step 5 · [Determining $m_2$] Using $\\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y '
                           '\\le 14)$ to fix $m_2 = 16$',
-              'knowledge': '3단계에서 좌변의 구간 $[6, 9]$는 평균 $m_1 = 4$로부터 **거리가 $2 \\sim 5$만큼 떨어진 구간**이었습니다. 모양이 똑같은 $Y$에서도 '
-                           '우변 $\\mathrm{P}(11 \\le Y \\le 14)$의 넓이가 같으려면, 구간 $[11, 14]$ 역시 평균 $m_2$로부터 **거리가 $2 \\sim '
-                           '5$만큼 떨어진 구간**이어야 합니다!<ul><li>만약 $m_2 = 14$이면 구간 $[11, 14]$는 평균 $14$로부터 거리가 $0 \\sim 3$이어서 '
-                           '넓이가 다릅니다(탈락!).</li><li>만약 $m_2 = 16$이면 $16 - 14 = 2$, $16 - 11 = 5$이므로 평균 $16$으로부터 거리가 정확히 '
-                           '$2 \\sim 5$가 되어 일치합니다!</li></ul>',
+              'knowledge': '3단계에서 좌변의 구간 $[6, 9]$는 평균 $m_1 = 4$로부터 <b>거리가 $2 \\sim 5$만큼 떨어진 구간</b>이었습니다. 모양이 똑같은 '
+                           '$Y$에서도 우변 $\\mathrm{P}(11 \\le Y \\le 14)$의 넓이가 같으려면, 구간 $[11, 14]$ 역시 평균 $m_2$로부터 <b>거리가 '
+                           '$2 \\sim 5$만큼 떨어진 구간</b>이어야 합니다!<ul><li>만약 $m_2 = 14$이면 구간 $[11, 14]$는 평균 $14$로부터 거리가 $0 '
+                           '\\sim 3$이어서 넓이가 다릅니다(탈락!).</li><li>만약 $m_2 = 16$이면 $16 - 14 = 2$, $16 - 11 = 5$이므로 평균 '
+                           '$16$으로부터 거리가 정확히 $2 \\sim 5$가 되어 일치합니다!</li></ul>',
               'knowledge_en': 'For $\\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$ to hold, $[11, 14]$ '
                               'must also lie at distance $2$ to $5$ from $m_2$. Testing the candidates: $m_2 = 14$ '
                               'gives distance $0$ to $3$ (invalid), whereas $m_2 = 16$ gives distance $16 - 14 = 2$ to '
@@ -1109,254 +1108,427 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
   'title': '[2026학년도 10월 고3 확통 30번] 두 주머니에서 비복원 추출과 조건부확률',
   'title_en': '[2026 AY Oct Exam Grade 12 Prob&Stats #30] Conditional Probability with Sampling Without Replacement '
               'from Two Bags',
-  'summary_ko': '전체 $400$가지에서 $a_1=2$($32$가지)·$a_2=2$($32$가지)를 빼 분모 $336$가지를 구하고, $\\mathrm{B}$에서 $(1,2)$ 또는 $(2,1)$을 '
-                '뽑는 분자 $48+48=96$가지를 구해 조건부확률 $\\dfrac{96}{336}=\\dfrac{2}{7}$ 도출하기',
-  'summary_en': 'Subtract $a_1=2$ ($32$ ways) and $a_2=2$ ($32$ ways) from $400$ total outcomes to get denominator '
-                '$336$, count $48+48=96$ numerator outcomes where $\\mathrm{B}$ draws $(1,2)$ or $(2,1)$ with '
-                '$a_1=a_2=1$, and reduce $\\dfrac{96}{336}=\\dfrac{2}{7}$ ($p+q=9$).',
+  'summary_ko': '1시행 $(x_1, y_1)$과 2시행 $(x_2, y_2)$를 순서쌍 $(x_1, y_1, x_2, y_2)$로 놓고, $\\mathrm{I})\\ a_1=a_2=1$의 여사건 '
+                '$4$가지($24+8+24+8=64$)를 전체 ${}_5\\mathrm{C}_1 \\times {}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 '
+                '\\times {}_4\\mathrm{C}_1 = 400$에서 빼 분모 $336$을 구한 뒤, $\\mathrm{II})\\ \\mathrm{B}_{y_1,y_2}$에 ①이 $3$개 '
+                '남는 $(y_1,y_2)=(1,2),(2,1)$의 분자 $48+48=96$을 구해 $\\dfrac{96}{336}=\\dfrac{12}{42}=\\dfrac{2}{7}$ 도출하기',
+  'summary_en': 'Represent the two rounds as 4-tuples $(x_1, y_1, x_2, y_2)$. For $\\mathrm{I})\\ a_1=a_2=1$, subtract '
+                'the $4$ surviving complement tuples ($24+8+24+8=64$) from ${}_5\\mathrm{C}_1 \\times '
+                '{}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 400$ to get $336$. For '
+                '$\\mathrm{II})$, count $48+48=96$ tuples with $(y_1,y_2)=(1,2),(2,1)$ leaving three ①s in '
+                '$\\mathrm{B}_{y_1,y_2}$, giving $\\dfrac{96}{336}=\\dfrac{12}{42}=\\dfrac{2}{7}$ ($p+q=9$).',
   'tags': ['확률과 통계', '확률', '조건부확률', '비복원추출', '여사건', '경우의수', '단답형', '30번'],
-  'symbols': [{'sym': '$\\mathrm{A}=\\{1_a,1_b,1_c,2_a,2_b\\},\\ \\mathrm{B}=\\{1_p,1_q,1_r,1_s,2_p\\}$',
-               'desc': '주머니 $\\mathrm{A}$($1$이 $3$개, $2$가 $2$개)와 주머니 $\\mathrm{B}$($1$이 $4$개, $2$가 $1$개)의 서로 구별되는 공 '
-                       '$5$개씩',
-               'desc_en': 'Five distinguishable balls in Bag $\\mathrm{A}$ (three $1$s, two $2$s) and Bag '
-                          '$\\mathrm{B}$ (four $1$s, one $2$).'},
-              {'sym': '$a_n = 1 \\iff \\text{꺼낸 두 공이 } (2, 2)\\text{가 아님}$',
-               'desc': '두 수 중 크지 않은 수($\\min$)가 $1$이 될 조건: 적어도 한 주머니에서 $1$이 나오면 무조건 $a_n=1$!',
-               'desc_en': 'The minimum of two drawn numbers is $1$ unless both bags draw $2$.'},
-              {'sym': '$\\mathrm{P}(F \\mid E) = \\dfrac{n(E \\cap F)}{n(E)} = \\dfrac{48 + 48}{400 - (32 + 32)} = '
-                      '\\dfrac{96}{336} = \\dfrac{2}{7}$',
-               'desc': '사건 $E(a_1=a_2=1)$가 일어났을 때 사건 $F(\\mathrm{B}\\text{에 }1\\text{이 }3\\text{개 남음})$의 조건부확률',
-               'desc_en': 'Conditional probability of three $1$s remaining in $\\mathrm{B}$ given $a_1=a_2=1$.'}],
-  'levels': [{'title': "🔰 1단계 · [초등 수 비교와 규칙 번역] '두 수 중 크지 않은 수($a_n$)'가 언제 $1$이 되고 언제 $2$가 될까?",
-              'title_en': "🔰 Step 1 · [Elementary Comparison] When is the 'number not larger ($a_n$)' equal to $1$ vs. "
-                          '$2$?',
-              'knowledge': "문제에서 **'두 수 중 크지 않은 수'**란 두 숫자를 비교했을 때 **더 작거나 같은 수**를 뜻합니다! 주머니 속 공에는 숫자 $1$ 아니면 $2$만 적혀 "
-                           '있으므로 네 가지 경우를 직접 비교해 봅시다.<ul><li>$(\\mathrm{A}=1,\\ \\mathrm{B}=1) \\implies$ 크지 않은 수는 '
-                           '**$1$**</li><li>$(\\mathrm{A}=1,\\ \\mathrm{B}=2) \\implies 1$과 $2$ 중 크지 않은 수는 '
-                           '**$1$**</li><li>$(\\mathrm{A}=2,\\ \\mathrm{B}=1) \\implies 2$와 $1$ 중 크지 않은 수는 '
-                           '**$1$**</li><li>$(\\mathrm{A}=2,\\ \\mathrm{B}=2) \\implies$ 둘 다 $2$이므로 이때만 크지 않은 수가 '
-                           '**$2$**!</li></ul>즉, **둘 중 하나라도 $1$이 나오면 무조건 $a_n = 1$**이고, 오직 **두 주머니 모두 $2$를 꺼낸 $(2, '
-                           '2)$일 때만 $a_n = 2$**가 됩니다!',
-              'knowledge_en': "'The number not larger' simply means the smaller (or equal) of the two numbers drawn. "
-                              'Since balls only have $1$ or $2$: $(1,1)\\to 1$, $(1,2)\\to 1$, $(2,1)\\to 1$, and ONLY '
-                              '$(2,2)\\to 2$. Thus $a_n = 1$ whenever at least one bag draws $1$, and $a_n = 2$ only '
-                              'when both bags draw $2$!',
-              'questions': [{'level_label': '초등 숫자 비교 디딤돌 1',
-                             'level_label_en': 'Elementary Comparison Step 1',
-                             'stem': '초등학교 숫자 비교 규칙으로, 한 시행에서 주머니 $\\mathrm{A}$와 주머니 $\\mathrm{B}$에서 꺼낸 두 공의 숫자가 $(1, '
-                                     "2)$일 때 '두 수 중 크지 않은 수'는 얼마이고, 반대로 크지 않은 수가 $2$가 되려면 두 공의 숫자가 무엇이어야 할까요?",
-                             'stem_en': 'Using elementary number comparison, if the drawn pair is $(1, 2)$, what is '
-                                        "the 'number not larger', and which pair is the ONLY one that makes it $2$?",
-                             'options': ['$(1, 2)$일 때는 $1$이고, 오직 $(2, 2)$일 때만 $2$가 된다.',
-                                         '$(1, 2)$일 때는 $2$이고, 오직 $(1, 1)$일 때만 $1$이 된다.',
-                                         '$(1, 2)$일 때는 $1$이고, $(1, 2)$나 $(2, 1)$이어도 $2$가 된다.',
-                                         '$(1, 2)$일 때는 $2$이고, 오직 $(2, 2)$일 때만 $2$가 된다.',
-                                         '모든 경우에서 항상 $1$이 된다.'],
+  'symbols': [{'sym': '$\\mathrm{A}: \\text{①}\\times 3,\\ \\text{②}\\times 2 \\quad / \\quad \\mathrm{B}: '
+                      '\\text{①}\\times 4,\\ \\text{②}\\times 1$',
+               'desc': '주머니 $\\mathrm{A}$(숫자 $1$인 공 $3$개, 숫자 $2$인 공 $2$개)와 주머니 $\\mathrm{B}$(숫자 $1$인 공 $4$개, 숫자 $2$인 공 '
+                       '$1$개)의 초기 구성',
+               'desc_en': 'Initial composition of Bag $\\mathrm{A}$ (three ①s, two ②s) and Bag $\\mathrm{B}$ (four ①s, '
+                          'one ②).'},
+              {'sym': '$(x_1, y_1, x_2, y_2),\\ \\ a_1=\\min(x_1,y_1),\\ \\ a_2=\\min(x_2,y_2)$',
+               'desc': '$1$시행에서 $\\mathrm{A}, \\mathrm{B}$가 꺼낸 수 $x_1, y_1$(남은 주머니 $\\mathrm{A}_{x_1}, '
+                       '\\mathrm{B}_{y_1}$)과 $2$시행에서 꺼낸 수 $x_2, y_2$(남은 주머니 $\\mathrm{A}_{x_1,x_2}, '
+                       '\\mathrm{B}_{y_1,y_2}$)',
+               'desc_en': '$x_1, y_1$ drawn from $\\mathrm{A}, \\mathrm{B}$ in Round 1 (leaving $\\mathrm{A}_{x_1}, '
+                          '\\mathrm{B}_{y_1}$) and $x_2, y_2$ drawn in Round 2 (leaving $\\mathrm{A}_{x_1,x_2}, '
+                          '\\mathrm{B}_{y_1,y_2}$).'},
+              {'sym': '${}_n\\mathrm{C}_1 = n \\quad (\\text{전체: } {}_5\\mathrm{C}_1 \\times {}_5\\mathrm{C}_1 \\times '
+                      '{}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 400)$',
+               'desc': "$n$개의 공 중 $1$개를 뽑는 기호 ${}_n\\mathrm{C}_1$은 초등학교의 '$n$가지 중 하나 고르기($n$)'와 같으며, $(x_1, y_1, x_2, "
+                       'y_2)$ 순서 그대로 곱해 계산',
+               'desc_en': '${}_n\\mathrm{C}_1 = n$ counts ways to pick $1$ ball out of $n$, multiplied in the exact '
+                          'tuple order $(x_1, y_1, x_2, y_2)$.'},
+              {'sym': '$\\text{by }\\mathrm{I})\\ \\mathrm{II}):\\ \\dfrac{48+48}{400-(24+8+24+8)} = \\dfrac{96}{336} '
+                      '= \\dfrac{12}{42} = \\dfrac{2}{7}$',
+               'desc': '분모 $\\mathrm{I})$($a_1=a_2=1$인 $336$가지) 분의 분자 $\\mathrm{II})$($\\mathrm{B}_{y_1,y_2}$에 ①이 $3$개 '
+                       '남는 $96$가지)를 $8$과 $6$으로 차례로 약분',
+               'desc_en': 'Conditional probability $\\dfrac{\\text{II)}}{\\text{I)}} = \\dfrac{96}{336}$, reduced by '
+                          '$8$ to $\\dfrac{12}{42}$ and by $6$ to $\\dfrac{2}{7}$.'}],
+  'levels': [{'title': "🔰 1단계 · [초등 기호 번역과 여사건 선택] $a_1=\\min(x_1,y_1)$, $a_2=\\min(x_2,y_2)$에서 '직접 계산'과 '여사건' 중 어느 쪽이 "
+                       '편할까?',
+              'title_en': '🔰 Step 1 · [Symbol Translation & Complement Choice] Direct calculation vs. Complement for '
+                          '$a_1=\\min(x_1,y_1)$ and $a_2=\\min(x_2,y_2)$',
+              'knowledge': '먼저 시행 과정을 한눈에 보이도록 기호로 정리해 봅시다!<ul><li><b>$1$시행</b>: 주머니 $\\mathrm{A}$에서 꺼낸 수를 $x_1$(남은 '
+                           '주머니 $\\mathrm{A}_{x_1}$), 주머니 $\\mathrm{B}$에서 꺼낸 수를 $y_1$(남은 주머니 $\\mathrm{B}_{y_1}$)이라 '
+                           '하면, 두 수 중 크지 않은(더 작거나 같은) 수는 <b>$a_1 = \\min(x_1, y_1)$</b>입니다.</li><li><b>$2$시행</b>: 남은 '
+                           '주머니 $\\mathrm{A}_{x_1}$에서 꺼낸 수를 $x_2$(남은 주머니 $\\mathrm{A}_{x_1,x_2}$), 남은 주머니 '
+                           '$\\mathrm{B}_{y_1}$에서 꺼낸 수를 $y_2$(남은 주머니 $\\mathrm{B}_{y_1,y_2}$)라 하면, 크지 않은 수는 <b>$a_2 = '
+                           '\\min(x_2, y_2)$</b>입니다.</li><li><b>$\\mathrm{I})\\ a_1 = a_2 = 1$의 조건 비교 ("어느 쪽 계산이 '
+                           '편할까?")</b>:<br>&nbsp;&nbsp;• <b>직접 세기</b>: $(x_1\\text{ 또는 }y_1\\text{은 }1)$ <b>그리고</b> '
+                           "$(x_2\\text{ 또는 }y_2\\text{는 }1)$ $\\to$ '또는'이 겹쳐 있어 가짓수가 너무 많습니다!<br>&nbsp;&nbsp;• "
+                           '<b>여사건(반대 경우) 세기</b>: $a_1 = 2\\text{ 또는 }a_2 = 2$가 되려면 두 수 중 작은 수가 $2$여야 하므로, <b>$(x_1 = '
+                           'y_1 = 2)\\text{ 또는 }(x_2 = y_2 = 2)$</b>일 때만 찾으면 되어 여사건 계산이 훨씬 편합니다!</li></ul>',
+              'knowledge_en': 'Let $x_1, y_1$ be the numbers drawn from $\\mathrm{A}, \\mathrm{B}$ in Round 1 (leaving '
+                              '$\\mathrm{A}_{x_1}, \\mathrm{B}_{y_1}$) with $a_1 = \\min(x_1, y_1)$, and let $x_2, '
+                              'y_2$ be the numbers drawn in Round 2 (leaving $\\mathrm{A}_{x_1,x_2}, '
+                              '\\mathrm{B}_{y_1,y_2}$) with $a_2 = \\min(x_2, y_2)$.<ul><li><b>Direct condition for '
+                              '$\\mathrm{I})\\ a_1=a_2=1$</b>: $(x_1=1\\text{ or }y_1=1)$ <b>and</b> $(x_2=1\\text{ or '
+                              '}y_2=1)$.</li><li><b>Complement ($a_1=2\\text{ or }a_2=2$)</b>: Since the minimum of '
+                              'two numbers in $\\{1,2\\}$ is $2$ iff both are $2$, the complement is simply <b>$(x_1 = '
+                              'y_1 = 2)\\text{ or }(x_2 = y_2 = 2)$</b>, which is much easier to count!</li></ul>',
+              'questions': [{'level_label': '초등 기호 번역과 여사건 디딤돌 1',
+                             'level_label_en': 'Symbol Translation & Complement Step 1',
+                             'stem': '초등학교 숫자 비교 규칙으로 $a_1 = \\min(x_1, y_1)$, $a_2 = \\min(x_2, y_2)$라 할 때, 분모 사건 '
+                                     '$\\mathrm{I})\\ a_1 = a_2 = 1$을 쉽게 구하기 위한 <b>여사건($a_1 = 2$ 또는 $a_2 = 2$)</b>을 '
+                                     '올바르게 나타낸 것은?',
+                             'stem_en': 'With $a_1 = \\min(x_1, y_1)$ and $a_2 = \\min(x_2, y_2)$, how is the '
+                                        'complement event ($a_1 = 2$ or $a_2 = 2$) of $\\mathrm{I})\\ a_1 = a_2 = 1$ '
+                                        'expressed?',
+                             'options': ['$(x_1 = y_1 = 2)$ 또는 $(x_2 = y_2 = 2)$',
+                                         '$(x_1 = y_1 = 1)$ 또는 $(x_2 = y_2 = 1)$',
+                                         '$(x_1 = 2$이고 $x_2 = 2)$',
+                                         '$(y_1 = 2$이고 $y_2 = 2)$',
+                                         '$(x_1 = y_1 = 2)$ 그리고 $(x_2 = y_2 = 2)$'],
                              'answer': 1,
-                             'exp': '$1$과 $2$ 중 크지 않은(작거나 같은) 수는 $1$입니다. 크지 않은 수가 $2$가 되는 경우는 두 주머니 모두 $2$를 뽑은 $(2, '
-                                    '2)$ 한 가지뿐입니다!',
-                             'exp_en': 'The minimum of $(1, 2)$ is $1$, and the minimum is $2$ if and only if the pair '
-                                       'is $(2, 2)$.'}]},
-             {'title': '🌿 2단계 · [초등 곱셈과 전체 가짓수] 두 주머니에서 각각 $2$번 연속 공을 꺼내는 전체 경우의 수($400$가지)',
-              'title_en': '🌿 Step 2 · [Elementary Multiplication] Total outcomes ($400$) for drawing $2$ balls without '
-                          'replacement from both bags',
-              'knowledge': '확률을 정확히 계산하려면 같은 숫자가 적힌 공이라도 서로 다른 공(예: $1_a, 1_b, 1_c, 2_a, 2_b$)으로 번호표를 붙여 구별해서 세어야 모든 '
-                           '경우가 똑같은 가능성을 가집니다.<ul><li>**주머니 $\\mathrm{A}$ (공 $5$개)**: $1$회차에 꺼낼 수 있는 공 $5$가지 $\\times$ '
-                           '다시 넣지 않고 $2$회차에 남은 $4$개 중 꺼내는 공 $4$가지 $= 5 \\times 4 = 20$가지</li><li>**주머니 $\\mathrm{B}$ '
-                           '(공 $5$개)**: 마찬가지로 $1$회차 $5$가지 $\\times$ $2$회차 $4$가지 $= 5 \\times 4 = 20$가지</li><li>**두 주머니 '
-                           '동시 진행**: 주머니 $\\mathrm{A}$의 $20$가지 각각에 대하여 주머니 $\\mathrm{B}$의 $20$가지가 짝지어지므로 전체 경우의 수는 $20 '
-                           '\\times 20 = 400$가지입니다!</li></ul>',
-              'knowledge_en': 'Treating all $5$ balls in each bag as distinct: Bag A has $5 \\times 4 = 20$ ordered '
-                              'pairs of draws without replacement, and Bag B also has $5 \\times 4 = 20$ ordered '
-                              'pairs. Together there are $20 \\times 20 = 400$ equally likely total outcomes.',
-              'questions': [{'level_label': '초등 곱셈 법칙 디딤돌 2',
-                             'level_label_en': 'Elementary Multiplication Step 2',
-                             'stem': '공 $5$개가 든 주머니 하나에서 다시 넣지 않고 $2$번 연속 꺼내는 가짓수는 $5 \\times 4 = 20$가지입니다. 두 주머니 '
-                                     '$\\mathrm{A}, \\mathrm{B}$에서 동시에 $2$번씩 시행할 때 가능한 전체 경우의 수 $20 \\times 20$은?',
-                             'stem_en': 'Each bag has $5 \\times 4 = 20$ ordered pairs of draws. What is the total '
-                                        'number of outcomes $20 \\times 20$ for both bags together?',
+                             'exp': '<b>[1단계 상세 해설]</b><br>• 주머니 속 공에는 숫자 $1$ 또는 $2$만 적혀 있습니다.<br>• $(1, 2)$를 꺼내면 $1$과 '
+                                    '$2$ 중 크지 않은(더 작거나 같은) 수는 <b>$1$</b>입니다.<br>• 네 가지 순서쌍 $(1,1)\\to 1$, $(1,2)\\to '
+                                    '1$, $(2,1)\\to 1$, $(2,2)\\to 2$를 모두 비교해 보면, 두 주머니 중 <b>적어도 한 곳에서 $1$이 나오면 무조건 '
+                                    '$a_n = 1$</b>이 되고, 오직 <b>두 주머니 모두 $2$를 꺼낸 $(2, 2)$일 때만 $a_n = 2$</b>가 됩니다.',
+                             'exp_en': '<b>[Step 1 Detailed Explanation]</b><br>Comparing all four pairs $(1,1)\\to '
+                                       '1$, $(1,2)\\to 1$, $(2,1)\\to 1$, and $(2,2)\\to 2$, the minimum is $1$ '
+                                       'whenever at least one bag draws $1$, and the minimum is $2$ if and only if '
+                                       'both bags draw $2$, i.e., $(2, 2)$.'}]},
+             {'title': '🌿 2단계 · [초등 곱셈과 전체 경우의 수] $(x_1, y_1, x_2, y_2)$를 뽑는 전체 가짓수 ${}_5\\mathrm{C}_1 \\times '
+                       '{}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 400$',
+              'title_en': '🌿 Step 2 · [Elementary Multiplication & Total Outcomes] Computing ${}_5\\mathrm{C}_1 '
+                          '\\times {}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 400$',
+              'knowledge': '고등학교 조합 기호 <b>${}_n\\mathrm{C}_1$</b>은 사실 초등학교에서 배운 <b>"서로 다른 $n$개의 공 중에서 꺼낼 공 $1$개를 고르는 '
+                           '가짓수($n$가지)"</b>를 뜻하는 약속입니다! (${}_5\\mathrm{C}_1 = 5$, ${}_4\\mathrm{C}_1 = 4$)<br>두 번의 시행 '
+                           '결과를 순서쌍 <b>$(x_1, y_1, x_2, y_2)$</b>로 적고, 자리 순서 그대로 전체 경우의 수를 곱해 봅시다:<ul><li><b>$1$시행 '
+                           '($x_1, y_1$)</b>: 주머니 $\\mathrm{A}$의 공 $5$개 중 $1$개 선택(${}_5\\mathrm{C}_1 = 5$) $\\times$ '
+                           '주머니 $\\mathrm{B}$의 공 $5$개 중 $1$개 선택(${}_5\\mathrm{C}_1 = 5$)</li><li><b>$2$시행 ($x_2, '
+                           'y_2$)</b>: 꺼낸 공을 다시 넣지 않으므로, 남은 $\\mathrm{A}_{x_1}$의 공 $4$개 중 $1$개 선택(${}_4\\mathrm{C}_1 = '
+                           '4$) $\\times$ 남은 $\\mathrm{B}_{y_1}$의 공 $4$개 중 $1$개 선택(${}_4\\mathrm{C}_1 = '
+                           '4$)</li></ul>따라서 전체 경우의 수는 <b>${}_5\\mathrm{C}_1 \\times {}_5\\mathrm{C}_1 \\times '
+                           '{}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 5 \\times 5 \\times 4 \\times 4$</b>입니다!',
+              'knowledge_en': 'The symbol ${}_n\\mathrm{C}_1 = n$ simply means choosing $1$ ball out of $n$ distinct '
+                              'balls. Multiplying in the exact order of the 4-tuple $(x_1, y_1, x_2, '
+                              'y_2)$:<ul><li><b>Round 1 ($x_1, y_1$)</b>: ${}_5\\mathrm{C}_1 \\times {}_5\\mathrm{C}_1 '
+                              '= 5 \\times 5 = 25$ ways.</li><li><b>Round 2 ($x_2, y_2$)</b>: Since balls are not '
+                              'replaced, $\\mathrm{A}_{x_1}$ and $\\mathrm{B}_{y_1}$ each have $4$ balls left, giving '
+                              '${}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 4 \\times 4 = 16$ ways.</li></ul>',
+              'questions': [{'level_label': '초등 곱셈과 전체 가짓수 디딤돌 2',
+                             'level_label_en': 'Total Outcomes Step 2',
+                             'stem': '순서쌍 $(x_1, y_1, x_2, y_2)$의 자리 순서대로 공을 꺼내는 전체 경우의 수 ${}_5\\mathrm{C}_1 \\times '
+                                     '{}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 5 '
+                                     '\\times 5 \\times 4 \\times 4$를 계산하면?',
+                             'stem_en': 'What is the total number of outcomes ${}_5\\mathrm{C}_1 \\times '
+                                        '{}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 5 '
+                                        '\\times 5 \\times 4 \\times 4$?',
                              'options': ['$100$', '$200$', '$300$', '$400$', '$500$'],
                              'answer': 4,
-                             'exp': '$20 \\times 20 = 400$가지가 아무 조건 없을 때의 전체 근원사건 개수입니다.',
-                             'exp_en': '$20 \\times 20 = 400$ total outcomes.'}]},
-             {'title': '🌱 3단계 · [여사건 쪼개기 ①: 1회차 탈락] $1$회차에 $a_1 = 2$가 되어 탈락하는 경우의 수($32$가지) 직접 유도하기',
-              'title_en': '🌱 Step 3 · [Complement Part 1: Round 1 Failure] Counting the $32$ outcomes where $a_1 = 2$',
-              'knowledge': '조건부확률의 분모는 **$a_1 = 1$이고 $a_2 = 1$인 사건 $E$의 경우의 수 $n(E)$**입니다. 이를 직접 세는 것보다, 전체 $400$가지에서 '
-                           '**탈락하는 경우($a_1 = 2$ 또는 $a_2 = 2$)**를 빼는 여사건 방법이 훨씬 쉽습니다! 먼저 **$1$회차에 $a_1 = 2$가 되는 경우(즉 '
-                           '$1$회차에 $\\mathrm{A}, \\mathrm{B}$ 모두 $2$를 꺼내는 경우)**를 차근차근 세어 봅시다.<ul><li>**주머니 '
-                           '$\\mathrm{A}$ ($1$이 $3$개, $2$가 $2$개)**: $1$회차에 숫자 $2$인 공을 꺼내는 방법 **$2$가지** $\\times$ '
-                           '$2$회차에 남은 공 $4$개 중 아무거나 꺼내는 방법 **$4$가지** $\\implies 2 \\times 4 = 8$가지</li><li>**주머니 '
-                           '$\\mathrm{B}$ ($1$이 $4$개, $2$가 $1$개)**: $1$회차에 유일한 숫자 $2$인 공을 꺼내는 방법 **$1$가지** $\\times$ '
-                           '$2$회차에 남은 공 $4$개 중 아무거나 꺼내는 방법 **$4$가지** $\\implies 1 \\times 4 = 4$가지</li></ul>따라서 $1$회차에 '
-                           '$a_1 = 2$가 되는 경우의 수는 두 가짓수를 곱한 $8 \\times 4$입니다!',
-              'knowledge_en': "Let's count how many of the $400$ outcomes fail in Round 1 ($a_1 = 2$, meaning both A "
-                              'and B draw $2$ in Round 1):<ul><li><b>Bag A (three $1$s, two $2$s)</b>: $2$ choices for '
-                              "a '$2$' in Round 1 $\\times$ $4$ remaining balls for Round 2 $= 2 \\times 4 = 8$ "
-                              "ways.</li><li><b>Bag B (four $1$s, one $2$)</b>: $1$ choice for the single '$2$' in "
-                              'Round 1 $\\times$ $4$ remaining balls for Round 2 $= 1 \\times 4 = 4$ '
-                              'ways.</li></ul>Multiplying gives $8 \\times 4$ ways where $a_1 = 2$.',
-              'questions': [{'level_label': '1회차 탈락 가짓수 디딤돌 3',
-                             'level_label_en': 'Round 1 Failure Count Step 3',
-                             'stem': '$1$회차에 두 주머니 모두 $2$를 꺼내어 $a_1 = 2$가 되는 경우의 수(주머니 $\\mathrm{A}$의 $2 \\times 4 = '
-                                     '8$가지와 주머니 $\\mathrm{B}$의 $1 \\times 4 = 4$가지의 곱 $8 \\times 4$)는?',
-                             'stem_en': "Multiplying Bag A's $2 \\times 4 = 8$ ways and Bag B's $1 \\times 4 = 4$ "
-                                        'ways, how many outcomes give $a_1 = 2$ in Round 1?',
-                             'options': ['$16$', '$24$', '$32$', '$40$', '$48$'],
-                             'answer': 3,
-                             'exp': '주머니 $\\mathrm{A}$에서 $8$가지, 주머니 $\\mathrm{B}$에서 $4$가지이므로 동시에 일어나는 경우의 수는 $8 '
-                                    '\\times 4 = 32$가지입니다.',
-                             'exp_en': '$8 \\times 4 = 32$ outcomes.'}]},
-             {'title': '🌱 4단계 · [여사건 쪼개기 ②: 2회차 탈락과 분모 확정] $a_1 = a_2 = 1$인 분모 $n(E) = 336$ 구하기',
-              'title_en': '🌱 Step 4 · [Complement Part 2 & Denominator] Confirming zero overlap and finding $n(E) = '
-                          '336$',
-              'knowledge': '이제 **$2$회차에 $a_2 = 2$가 되어 탈락하는 경우**를 세어 봅시다.<ul><li>$1$회차와 $2$회차의 역할만 바뀐 대칭 구조이므로, $2$회차에 '
-                           '$\\mathrm{A}$가 $2$를 꺼내고($2 \\times 4 = 8$가지) $\\mathrm{B}$도 $2$를 꺼내는($1 \\times 4 = 4$가지) '
-                           '경우의 수 역시 똑같이 **$8 \\times 4 = 32$가지**입니다.</li><li>**핵심 체크 (중복 여부)**: 혹시 $1$회차에도 $a_1 = '
-                           '2$이고 $2$회차에도 $a_2 = 2$인(두 번 모두 탈락하는) 겹치는 경우가 있을까요? **절대 없습니다($0$가지)!** 왜냐하면 주머니 '
-                           '$\\mathrm{B}$에는 숫자 $2$가 적힌 공이 **딱 $1$개뿐**이고 꺼낸 공을 다시 넣지 않으므로, $\\mathrm{B}$에서 $1$회차와 '
-                           '$2$회차에 연속으로 $2$를 꺼내는 것은 불가능하기 때문입니다!</li></ul>따라서 탈락하는 전체 가짓수는 $32 + 32 = 64$가지이고, 조건 $a_1 '
-                           '= a_2 = 1$을 만족하는 **분모의 경우의 수 $n(E)$**는 $400 - 64$입니다!',
-              'knowledge_en': 'By symmetry between Round 1 and Round 2, $a_2 = 2$ also occurs in $8 \\times 4 = 32$ '
-                              'ways. Can $a_1 = 2$ and $a_2 = 2$ happen simultaneously? <b>Impossible ($0$ ways)</b>, '
-                              'because Bag B contains only ONE ball labeled $2$ and draws are without replacement! '
-                              'Thus the denominator is $n(E) = 400 - (32 + 32)$.',
-              'questions': [{'level_label': '분모 경우의 수 확정 디딤돌 4',
-                             'level_label_en': 'Denominator Count Step 4',
-                             'stem': '전체 $400$가지에서 $a_1 = 2$인 $32$가지와 $a_2 = 2$인 $32$가지(중복 $0$가지)를 뺀, $a_1 = a_2 = 1$을 '
-                                     '만족하는 조건부확률의 분모 $n(E) = 400 - (32 + 32)$의 값은?',
-                             'stem_en': 'Subtracting the $32 + 32 = 64$ mutually exclusive failure cases from $400$, '
-                                        'what is the denominator $n(E) = 400 - 64$?',
+                             'exp': '<b>[2단계 상세 해설]</b><br>• 같은 숫자가 적힌 공이라도 서로 다른 '
+                                    '공($\\mathrm{A}=\\{1_a,1_b,1_c,2_a,2_b\\}$, '
+                                    '$\\mathrm{B}=\\{1_p,1_q,1_r,1_s,2_p\\}$)으로 구별해야 각 경우가 모두 똑같은 확률을 가집니다.<br>• 주머니 '
+                                    '$\\mathrm{A}$에서 비복원으로 $2$번 꺼내는 가짓수: $5 \\times 4 = 20$가지<br>• 주머니 $\\mathrm{B}$에서 '
+                                    '비복원으로 $2$번 꺼내는 가짓수: $5 \\times 4 = 20$가지<br>• 두 주머니에서 동시에 꺼내므로 곱의 법칙에 의해 전체 근원사건의 '
+                                    '개수는 $20 \\times 20 = \\mathbf{400}$가지입니다.',
+                             'exp_en': '<b>[Step 2 Detailed Explanation]</b><br>Labeling all $5$ balls in each bag as '
+                                       'distinct ensures equally likely outcomes. Bag A has $5 \\times 4 = 20$ ordered '
+                                       'pairs and Bag B has $5 \\times 4 = 20$ ordered pairs, giving $20 \\times 20 = '
+                                       '\\mathbf{400}$ total outcomes.'}]},
+             {'title': '🌱 3단계 · [여사건 순서쌍 소거] $(x_1, y_1, x_2, y_2)$ 후보 중 불가능한 순서쌍 지우기',
+              'title_en': '🌱 Step 3 · [Eliminating Impossible Tuples] Crossing out impossible $(x_1, y_1, x_2, y_2)$ '
+                          'candidates in the complement',
+              'knowledge': '여사건 <b>$(x_1 = y_1 = 2)\\text{ 또는 }(x_2 = y_2 = 2)$</b>를 만족하는 순서쌍 $(x_1, y_1, x_2, y_2)$ '
+                           '후보들을 칠판처럼 모두 나열해 보고, 실제로 일어날 수 없는 것을 지워 봅시다!<ul><li><b>$x_1 = y_1 = 2$일 때</b> (뒤의 $x_2, '
+                           'y_2$ 자리에 $1, 2$를 넣어 봄):<br>$$\\checkmark\\ (2, 2, 1, 1), \\quad \\cancel{(2, 2, 1, 2)}, '
+                           '\\quad \\checkmark\\ (2, 2, 2, 1), \\quad \\cancel{(2, 2, 2, 2)}$$</li><li><b>$x_2 = y_2 = '
+                           '2$일 때</b> (앞의 $x_1, y_1$ 자리에 $1, 2$를 넣어 봄):<br>$$\\checkmark\\ (1, 1, 2, 2), \\quad '
+                           '\\cancel{(1, 2, 2, 2)}, \\quad \\checkmark\\ (2, 1, 2, 2), \\quad \\cancel{(2, 2, 2, '
+                           '2)}$$</li></ul><b>핵심 이유</b>: 주머니 $\\mathrm{B}$($\\text{①}\\times 4,\\ \\text{②}\\times '
+                           '1$)에는 숫자 $2$가 적힌 공(`②`)이 <b>오직 $1$개뿐</b>입니다! 따라서 비복원 추출에서 $y_1 = 2$와 $y_2 = 2$가 동시에 들어 있는 '
+                           '$\\cancel{(2, 2, 1, 2)}$, $\\cancel{(1, 2, 2, 2)}$, $\\cancel{(2, 2, 2, 2)}$는 절대 일어날 수 없어 '
+                           '지워지고, <b>서로 겹치지 않는 $4$가지 순서쌍(`i ~ iv`)</b>만 남습니다!',
+              'knowledge_en': 'Listing all candidate 4-tuples $(x_1, y_1, x_2, y_2)$ for $(x_1=y_1=2)\\text{ or '
+                              '}(x_2=y_2=2)$:<ul><li>From $x_1=y_1=2$: $\\checkmark\\ (2,2,1,1),\\ '
+                              '\\cancel{(2,2,1,2)},\\ \\checkmark\\ (2,2,2,1),\\ \\cancel{(2,2,2,2)}$</li><li>From '
+                              '$x_2=y_2=2$: $\\checkmark\\ (1,1,2,2),\\ \\cancel{(1,2,2,2)},\\ \\checkmark\\ '
+                              '(2,1,2,2),\\ \\cancel{(2,2,2,2)}$</li></ul>Why are $\\cancel{(2,2,1,2)},\\ '
+                              '\\cancel{(1,2,2,2)},\\ \\cancel{(2,2,2,2)}$ crossed out? Because Bag $\\mathrm{B}$ has '
+                              'only <b>one</b> ball labeled $2$ ($\\text{②}\\times 1$), so $y_1=2$ and $y_2=2$ cannot '
+                              'both occur! Thus exactly $4$ mutually exclusive tuples survive.',
+              'questions': [{'level_label': '여사건 순서쌍 소거 디딤돌 3',
+                             'level_label_en': 'Complement Tuple Elimination Step 3',
+                             'stem': '여사건의 $(x_1, y_1, x_2, y_2)$ 후보들 중에서 $\\cancel{(2, 2, 1, 2)}$, $\\cancel{(1, 2, '
+                                     '2, 2)}$, $\\cancel{(2, 2, 2, 2)}$가 모두 지워지고 $\\mathrm{i})\\ (2,2,1,1)$, '
+                                     '$\\mathrm{ii})\\ (2,2,2,1)$, $\\mathrm{iii})\\ (1,1,2,2)$, $\\mathrm{iv})\\ '
+                                     '(2,1,2,2)$의 $4$가지만 살아남는 이유는?',
+                             'stem_en': 'Why are $\\cancel{(2, 2, 1, 2)}$, $\\cancel{(1, 2, 2, 2)}$, and $\\cancel{(2, '
+                                        '2, 2, 2)}$ crossed out, leaving only the $4$ tuples '
+                                        '$\\mathrm{i})\\sim\\mathrm{iv})$?',
+                             'options': ['주머니 $\\mathrm{B}$에 숫자 $2$가 적힌 공이 $1$개뿐이어서 $y_1 = 2$와 $y_2 = 2$가 동시에 나올 수 없기 '
+                                         '때문',
+                                         '주머니 $\\mathrm{A}$에 숫자 $2$가 적힌 공이 $1$개뿐이어서 $x_1 = 2$와 $x_2 = 2$가 동시에 나올 수 없기 '
+                                         '때문',
+                                         '주머니 $\\mathrm{A}$에 숫자 $1$이 적힌 공이 $1$개뿐이기 때문',
+                                         '주머니 $\\mathrm{B}$에 숫자 $1$이 적힌 공이 $1$개뿐이기 때문',
+                                         '꺼낸 공을 다시 주머니에 넣는 복원 추출이기 때문'],
+                             'answer': 1,
+                             'exp': '<b>[3단계 상세 해설]</b><br>• $a_1 = 2$가 되려면 $1$회차에 주머니 $\\mathrm{A}$와 주머니 '
+                                    '$\\mathrm{B}$에서 <b>둘 다 숫자 $2$</b>를 꺼내야 합니다.<br>• <b>주머니 $\\mathrm{A}$ ($1$이 $3$개, '
+                                    '$2$가 $2$개)</b>: $1$회차에 $2$를 뽑는 $2$가지 $\\times$ $2$회차에 남은 공 $4$개 중 아무거나 뽑는 $4$가지 '
+                                    '$= 2 \\times 4 = 8$가지 (즉, $(2,1)$이 $2\\times 3=6$가지, $(2,2)$가 $2\\times 1=2$가지로 총 '
+                                    '$8$가지)<br>• <b>주머니 $\\mathrm{B}$ ($1$이 $4$개, $2$가 $1$개)</b>: $1$회차에 유일한 $2$를 뽑는 '
+                                    '$1$가지 $\\times$ $2$회차에 남은 $1$ 네 개 중 하나를 뽑는 $4$가지 $= 1 \\times 4 = 4$가지<br>• 따라서 '
+                                    '$n(a_1 = 2) = 8 \\times 4 = \\mathbf{32}$가지입니다.',
+                             'exp_en': '<b>[Step 3 Detailed Explanation]</b><br>For $a_1 = 2$, both bags must draw $2$ '
+                                       'in Round 1. Bag A has $2 \\times 4 = 8$ ways ($(2,1)$ in $6$ ways + $(2,2)$ in '
+                                       '$2$ ways) and Bag B has $1 \\times 4 = 4$ ways ($(2,1)$ in $4$ ways), giving '
+                                       '$8 \\times 4 = \\mathbf{32}$ outcomes.'}]},
+             {'title': '🌱 4단계 · [여사건 계산 $\\mathrm{i}), \\mathrm{ii})$] $x_1 = y_1 = 2$인 $(2, 2, 1, 1)$과 $(2, 2, 2, '
+                       '1)$의 경우의 수($24$와 $8$)',
+              'title_en': '🌱 Step 4 · [Complement Cases $\\mathrm{i}), \\mathrm{ii})$] Counting $(2, 2, 1, 1)$ and '
+                          '$(2, 2, 2, 1)$ ($24$ and $8$)',
+              'knowledge': '살아남은 $4$가지 여사건 순서쌍 중 앞의 두 가지 $\\mathrm{i}), \\mathrm{ii})$를 <b>$(x_1, y_1, x_2, y_2)$ 자리 '
+                           '순서 그대로</b> 계산해 봅시다! (주머니 초기 상태: $\\mathrm{A}$는 $\\text{①}\\times 3, \\text{②}\\times 2$ / '
+                           '$\\mathrm{B}$는 $\\text{①}\\times 4, \\text{②}\\times 1$)<ul><li><b>$\\mathrm{i})\\ (x_1, '
+                           'y_1, x_2, y_2) = (2, 2, 1, 1)$</b>:<br>&nbsp;&nbsp;• $1$시행: $\\mathrm{A}$의 `②` $2$개 중 '
+                           '$1$개(${}_2\\mathrm{C}_1$) $\\times$ $\\mathrm{B}$의 `②` $1$개 중 '
+                           '$1$개(${}_1\\mathrm{C}_1$)<br>&nbsp;&nbsp;• $2$시행: 남은 $\\mathrm{A}_{x_1}$의 `①` $3$개 중 '
+                           '$1$개(${}_3\\mathrm{C}_1$) $\\times$ 남은 $\\mathrm{B}_{y_1}$의 `①` $4$개 중 '
+                           '$1$개(${}_4\\mathrm{C}_1$)<br>$$\\implies {}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 '
+                           '\\times {}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 2 \\times 1 \\times 3 \\times 4 = '
+                           '24$$</li><li><b>$\\mathrm{ii})\\ (x_1, y_1, x_2, y_2) = (2, 2, 2, '
+                           '1)$</b>:<br>&nbsp;&nbsp;• $1$시행에 $\\mathrm{A}$에서 이미 `②`를 $1$개 꺼냈으므로, <b>$2$시행에서 '
+                           '$\\mathrm{A}_{x_1}$에 남아 있는 `②`는 $1$개뿐(${}_1\\mathrm{C}_1$)</b>입니다!<br>$$\\implies '
+                           '{}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times '
+                           '{}_4\\mathrm{C}_1 = 2 \\times 1 \\times 1 \\times 4 = 8$$</li></ul>',
+              'knowledge_en': 'Using $\\mathrm{A}: (\\text{①}\\times 3,\\ \\text{②}\\times 2)$ and $\\mathrm{B}: '
+                              '(\\text{①}\\times 4,\\ \\text{②}\\times 1)$, we multiply choices in the order $(x_1, '
+                              'y_1, x_2, y_2)$:<ul><li><b>$\\mathrm{i})\\ (2, 2, 1, 1)$</b>: ${}_2\\mathrm{C}_1 '
+                              '\\times {}_1\\mathrm{C}_1 \\times {}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 2 '
+                              '\\times 1 \\times 3 \\times 4 = 24$.</li><li><b>$\\mathrm{ii})\\ (2, 2, 2, 1)$</b>: '
+                              'Since one ② was already drawn from $\\mathrm{A}$ in Round 1, only $1$ ball labeled ② '
+                              'remains in $\\mathrm{A}_{x_1}$ (${}_1\\mathrm{C}_1$), giving ${}_2\\mathrm{C}_1 \\times '
+                              '{}_1\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 2 \\times 1 '
+                              '\\times 1 \\times 4 = 8$.</li></ul>',
+              'questions': [{'level_label': '여사건 i), ii) 계산 디딤돌 4',
+                             'level_label_en': 'Complement Cases i), ii) Step 4',
+                             'stem': '여사건 순서쌍 $\\mathrm{i})\\ (2, 2, 1, 1)$의 경우의 수 ${}_2\\mathrm{C}_1 \\times '
+                                     '{}_1\\mathrm{C}_1 \\times {}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1$과 '
+                                     '$\\mathrm{ii})\\ (2, 2, 2, 1)$의 경우의 수 ${}_2\\mathrm{C}_1 \\times '
+                                     '{}_1\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1$을 바르게 짝지은 '
+                                     '것은?',
+                             'stem_en': 'What are the counts for $\\mathrm{i})\\ (2, 2, 1, 1)$ and $\\mathrm{ii})\\ '
+                                        '(2, 2, 2, 1)$, respectively?',
+                             'options': ['$\\mathrm{i})\\ 12,\\quad \\mathrm{ii})\\ 8$',
+                                         '$\\mathrm{i})\\ 24,\\quad \\mathrm{ii})\\ 8$',
+                                         '$\\mathrm{i})\\ 24,\\quad \\mathrm{ii})\\ 16$',
+                                         '$\\mathrm{i})\\ 32,\\quad \\mathrm{ii})\\ 8$',
+                                         '$\\mathrm{i})\\ 24,\\quad \\mathrm{ii})\\ 12$'],
+                             'answer': 2,
+                             'exp': '<b>[4단계 상세 해설]</b><br>• $2$회차에 $a_2 = 2$가 되는 경우: 주머니 $\\mathrm{A}$에서 $2$회차에 $2$를 '
+                                    '뽑는 $8$가지($(1,2)$ $6$가지 + $(2,2)$ $2$가지) $\\times$ 주머니 $\\mathrm{B}$에서 $2$회차에 $2$를 '
+                                    '뽑는 $4$가지($(1,2)$ $4$가지) $= 8 \\times 4 = 32$가지<br>• $a_1 = 2$이면서 동시에 $a_2 = 2$인 '
+                                    '경우: 주머니 $\\mathrm{B}$에 숫자 $2$가 단 $1$개뿐이므로 $1, 2$회차 모두 $2$가 나올 수 없어 '
+                                    '<b>$0$가지(배반사건)</b>입니다.<br>• 따라서 여사건에 의해 조건부확률의 분모는 $n(E) = 400 - (32 + 32 - 0) = '
+                                    '400 - 64 = \\mathbf{336}$가지입니다.',
+                             'exp_en': '<b>[Step 4 Detailed Explanation]</b><br>$a_2 = 2$ also occurs in $8 \\times 4 '
+                                       '= 32$ ways, and $a_1 = a_2 = 2$ has $0$ ways because Bag B has only one $2$. '
+                                       'Subtracting $32 + 32 = 64$ from $400$ yields $n(E) = \\mathbf{336}$.'}]},
+             {'title': '🌱 5단계 · [여사건 계산 $\\mathrm{iii}), \\mathrm{iv})$ 및 분모 $\\mathrm{I})$ 확정] $400 - (24 + 8 + 24 + '
+                       '8) = 336$ 구하기',
+              'title_en': '🌱 Step 5 · [Complement Cases $\\mathrm{iii}), \\mathrm{iv})$ & Denominator $\\mathrm{I})$] '
+                          'Computing $400 - (24 + 8 + 24 + 8) = 336$',
+              'knowledge': '마찬가지로 $x_2 = y_2 = 2$인 나머지 두 여사건 순서쌍 $\\mathrm{iii}), \\mathrm{iv})$도 $(x_1, y_1, x_2, '
+                           'y_2)$ 순서대로 계산합니다:<ul><li><b>$\\mathrm{iii})\\ (1, 1, 2, 2)$</b>: ${}_3\\mathrm{C}_1 '
+                           '\\times {}_4\\mathrm{C}_1 \\times {}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 = 3 \\times '
+                           '4 \\times 2 \\times 1 = 24$</li><li><b>$\\mathrm{iv})\\ (2, 1, 2, 2)$</b>: ($1$시행에 '
+                           '$\\mathrm{A}$에서 `②`를 $1$개 뽑았으므로 $2$시행 $\\mathrm{A}_{x_1}$에는 `②`가 $1$개 '
+                           '남음)<br>$${}_2\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times '
+                           '{}_1\\mathrm{C}_1 = 2 \\times 4 \\times 1 \\times 1 = 8$$</li></ul>이제 전체 경우의 수에서 여사건 '
+                           '$4$가지를 빼면 <b>분모 $\\mathrm{I})\\ a_1 = a_2 = 1$의 경우의 수</b>가 확정됩니다:$${}_5\\mathrm{C}_1 '
+                           '\\times {}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 - (24 + 8 + '
+                           '24 + 8) = 400 - 64 = 336$$',
+              'knowledge_en': 'Counting the remaining two complement tuples in $(x_1, y_1, x_2, y_2)$ '
+                              'order:<ul><li><b>$\\mathrm{iii})\\ (1, 1, 2, 2)$</b>: ${}_3\\mathrm{C}_1 \\times '
+                              '{}_4\\mathrm{C}_1 \\times {}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 = '
+                              '24$.</li><li><b>$\\mathrm{iv})\\ (2, 1, 2, 2)$</b>: ${}_2\\mathrm{C}_1 \\times '
+                              '{}_4\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 = '
+                              '8$.</li></ul>Subtracting all four from the total gives $\\mathrm{I})$: '
+                              '${}_5\\mathrm{C}_1 \\times {}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times '
+                              '{}_4\\mathrm{C}_1 - (24 + 8 + 24 + 8) = 400 - 64 = 336$.',
+              'questions': [{'level_label': '분모 I) 확정 디딤돌 5',
+                             'level_label_en': 'Denominator I) Total Step 5',
+                             'stem': '전체 경우의 수 ${}_5\\mathrm{C}_1 \\times {}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 '
+                                     '\\times {}_4\\mathrm{C}_1 = 400$에서 여사건 $4$가지의 합 $(24 + 8 + 24 + 8) = 64$를 뺀, 조건 '
+                                     '$\\mathrm{I})\\ a_1 = a_2 = 1$을 만족하는 분모의 경우의 수는?',
+                             'stem_en': 'Subtracting $(24 + 8 + 24 + 8) = 64$ from ${}_5\\mathrm{C}_1 \\times '
+                                        '{}_5\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 400$, '
+                                        'what is the denominator count for $\\mathrm{I})\\ a_1 = a_2 = 1$?',
                              'options': ['$316$', '$324$', '$336$', '$344$', '$352$'],
                              'answer': 3,
-                             'exp': '$400 - 64 = 336$가지가 조건부확률의 분모 $n(E)$가 됩니다.',
-                             'exp_en': '$400 - 64 = 336$.'}]},
-             {'title': '🌳 5단계 · [분자 사건 번역] 주머니 $\\mathrm{B}$에 숫자 $1$인 공이 $3$개 남아 있으려면 $\\mathrm{B}$에서 무엇을 꺼내야 할까?',
-              'title_en': '🌳 Step 5 · [Translating the Target Event] What must Bag $\\mathrm{B}$ draw so that three '
-                          '$1$s remain in $\\mathrm{B}$?',
-              'knowledge': "이제 조건부확률의 **분자 $n(E \\cap F)$**, 즉 **'$a_1 = a_2 = 1$이면서 동시에 $2$번째 시행 후 주머니 $\\mathrm{B}$에 "
-                           "숫자 $1$이 적힌 공이 $3$개 남아 있는 경우'**를 구할 차례입니다!<ul><li>처음에 주머니 $\\mathrm{B}$에는 **숫자 $1$이 $4$개, "
-                           '숫자 $2$가 $1$개** 들어 있었습니다.</li><li>$2$번 시행 후 주머니 $\\mathrm{B}$에 **숫자 $1$이 $3$개** 남았다는 것은, '
-                           '$2$번의 시행 동안 주머니 $\\mathrm{B}$에서 빠져나간 공 $2$개가 **숫자 $1$ 한 개($4 - 3 = 1$)와 숫자 $2$ 한 개**라는 '
-                           '뜻입니다!</li><li>즉, 주머니 $\\mathrm{B}$가 $(1\\text{회차}, 2\\text{회차})$에 꺼낸 공의 숫자는 반드시 **케이스 ① '
-                           '$\\mathrm{B}: (1, 2)$** 이거나 **케이스 ② $\\mathrm{B}: (2, 1)$** 두 가지뿐입니다!</li></ul>먼저 케이스 ①에서 '
-                           '주머니 $\\mathrm{B}$가 $1$회차에 $1$($4$개 중 하나), $2$회차에 $2$($1$개 중 하나)를 꺼내는 가짓수를 구해 봅시다.',
-              'knowledge_en': 'Bag B starts with four $1$s and one $2$. For three $1$s to remain in Bag B after $2$ '
-                              "draws, Bag B must have lost exactly one '$1$' ($4 - 3 = 1$) and its single '$2$'. Thus "
-                              "Bag B's $(1\\text{st}, 2\\text{nd})$ draws must be either <b>Case 1: $\\mathrm{B}=(1, "
-                              '2)$</b> or <b>Case 2: $\\mathrm{B}=(2, 1)$</b>!',
-              'questions': [{'level_label': '주머니 B 추출 가짓수 디딤돌 5',
-                             'level_label_en': 'Bag B Draw Count Step 5',
-                             'stem': '주머니 $\\mathrm{B}$($1$이 $4$개, $2$가 $1$개)에서 $1$회차에 숫자 $1$인 공을 꺼내고($4$가지), $2$회차에 '
-                                     '숫자 $2$인 공을 꺼내는($1$가지) 케이스 ① $\\mathrm{B}: (1, 2)$의 경우의 수 $4 \\times 1$은?',
-                             'stem_en': 'In Bag B (four $1$s, one $2$), how many ways can Bag B draw $1$ in Round 1 '
-                                        '($4$ choices) and $2$ in Round 2 ($1$ choice)?',
-                             'options': ['$2$', '$3$', '$4$', '$6$', '$8$'],
+                             'exp': '<b>[5단계 상세 해설]</b><br>• 처음 주머니 $\\mathrm{B}$에는 $1$이 $4$개, $2$가 $1$개 들어 있으므로, $2$번 '
+                                    '시행 후 $\\mathrm{B}$에 $1$이 $3$개 남으려면 $\\mathrm{B}$에서 꺼낸 두 공이 <b>$1$ 한 개와 $2$ 한 '
+                                    '개</b>여야 합니다.<br>• 그중 케이스 ①($\\mathrm{B}$가 $1$회차에 $1$, $2$회차에 $2$를 꺼내는 경우)은 $1$회차에 '
+                                    '$4$개의 $1$ 중 하나를 고르고($4$가지), $2$회차에 유일한 $2$를 고르므로($1$가지) $4 \\times 1 = '
+                                    '\\mathbf{4}$가지입니다.',
+                             'exp_en': '<b>[Step 5 Detailed Explanation]</b><br>For three $1$s to remain in Bag B, Bag '
+                                       'B must draw one $1$ and one $2$. In Case 1 ($\\mathrm{B}=(1, 2)$), there are '
+                                       '$4$ choices for $1$ in Round 1 and $1$ choice for $2$ in Round 2, giving $4 '
+                                       '\\times 1 = \\mathbf{4}$ ways.'}]},
+             {'title': '🌳 6단계 · [분자 사건 $\\mathrm{II})$ 조건 번역] $\\mathrm{B}_{y_1, y_2}$에 ①이 $3$개 남을 조건 $(y_1, y_2) = '
+                       '(1, 2),\\ (2, 1)$',
+              'title_en': '🌳 Step 6 · [Numerator $\\mathrm{II})$ Condition] Condition on $(y_1, y_2)$ for three ①s to '
+                          'remain in $\\mathrm{B}_{y_1, y_2}$',
+              'knowledge': '이제 분자 사건 <b>$\\mathrm{II})\\ a_1 = a_2 = 1$ 이고 $2$시행 후 남은 주머니 $\\mathrm{B}_{y_1, y_2}$에 '
+                           '`①`이 $3$개 들어 있는 경우</b>를 살펴봅시다!<ul><li>처음 주머니 $\\mathrm{B}$에는 <b>`①`이 $4$개, `②`가 $1$개</b> '
+                           '들어 있었습니다.</li><li>$2$번 꺼낸 뒤 남은 주머니 $\\mathrm{B}_{y_1, y_2}$에 <b>`①`이 $3$개</b> 남으려면, 두 번의 '
+                           '시행 동안 주머니 $\\mathrm{B}$에서 빠져나간 두 공 $(y_1, y_2)$에 <b>`①`이 $1$개($4 - 3 = 1$), `②`가 $1$개</b> '
+                           '있어야 합니다!</li><li>따라서 주머니 $\\mathrm{B}$에서 꺼낸 수의 순서쌍 $(y_1, y_2)$는 반드시 다음 두 '
+                           '가지뿐입니다:<br>$$(y_1, y_2) = (1, 2),\\ (2, 1)$$</li></ul>',
+              'knowledge_en': 'Bag $\\mathrm{B}$ initially contains four ①s and one ②. For the remaining bag '
+                              '$\\mathrm{B}_{y_1, y_2}$ after $2$ rounds to contain exactly three ①s, $\\mathrm{B}$ '
+                              'must have drawn one ① and one ② across the two rounds:$$(y_1, y_2) = (1, 2),\\ (2, 1)$$',
+              'questions': [{'level_label': '분자 II) 주머니 B 조건 디딤돌 6',
+                             'level_label_en': 'Bag B Condition Step 6',
+                             'stem': '처음에 `①`이 $4$개, `②`가 $1$개 들어 있던 주머니 $\\mathrm{B}$에서 $2$번 시행 후 남은 주머니 '
+                                     '$\\mathrm{B}_{y_1, y_2}$에 `①`이 $3$개 남아 있으려면, $\\mathrm{B}$에서 꺼낸 두 수의 순서쌍 $(y_1, '
+                                     'y_2)$는 무엇이어야 할까요?',
+                             'stem_en': 'For $\\mathrm{B}_{y_1, y_2}$ to have three ①s remaining out of four ①s and '
+                                        'one ②, what must $(y_1, y_2)$ be?',
+                             'options': ['$(y_1, y_2) = (1, 1)$',
+                                         '$(y_1, y_2) = (2, 2)$',
+                                         '$(y_1, y_2) = (1, 2),\\ (2, 1)$',
+                                         '$(y_1, y_2) = (1, 1),\\ (1, 2)$',
+                                         '$(y_1, y_2) = (1, 1),\\ (2, 1)$'],
                              'answer': 3,
-                             'exp': '$1$회차에 $4$개의 $1$ 중 하나를 뽑고($4$가지), $2$회차에 $1$개의 $2$를 뽑으므로($1$가지) $4 \\times 1 = '
-                                    '4$가지입니다.',
-                             'exp_en': '$4 \\times 1 = 4$ ways.'}]},
-             {'title': '🌳 6단계 · [분자 케이스 ①: 주머니 A의 조건] $\\mathrm{B}$가 $(1, 2)$를 꺼낼 때 $a_1 = a_2 = 1$이 되도록 '
-                       '$\\mathrm{A}$에서 꺼내는 가짓수($12$가지)',
-              'title_en': '🌳 Step 6 · [Numerator Case 1: Condition on Bag A] Counting the $12$ ways for Bag '
-                          '$\\mathrm{A}$ when $\\mathrm{B}$ draws $(1, 2)$',
-              'knowledge': '케이스 ①처럼 **주머니 $\\mathrm{B}$가 $1$회차에 $1$, $2$회차에 $2$를 꺼냈을 때($\\mathrm{B}: (1, 2)$)**, $a_1 '
-                           '= 1$이고 $a_2 = 1$이 되려면 주머니 $\\mathrm{A}$는 어떤 공을 꺼내야 할까요?<ul><li>**$1$회차 확인**: '
-                           '$\\mathrm{B}$가 이미 $1$을 꺼냈으므로, $\\mathrm{A}$가 $1$을 꺼내든 $2$를 꺼내든 크지 않은 수 $a_1$은 무조건 $1$이 '
-                           '됩니다! (즉, $1$회차에는 $\\mathrm{A}$에 제한이 없습니다.)</li><li>**$2$회차 확인**: $\\mathrm{B}$가 $2$회차에 '
-                           '**$2$**를 꺼냈습니다! 만약 $\\mathrm{A}$도 $2$회차에 $2$를 꺼내면 $a_2 = 2$가 되어 탈락하므로, **주머니 '
-                           '$\\mathrm{A}$는 $2$회차에 반드시 숫자 $1$을 꺼내야만 합니다!**</li></ul>그럼 주머니 $\\mathrm{A}$($1$이 $3$개, '
-                           '$2$가 $2$개, 총 $5$개)에서 **$2$회차에 반드시 $1$을 꺼내는 경우의 수**를 두 가지 방법으로 세어 볼까요?<ul><li>**방법 1 ($2$회차 '
-                           '먼저 고르기)**: $2$회차에 꺼낼 숫자 $1$인 공을 먼저 고르는 방법 **$3$가지** $\\times$ $1$회차에는 방금 고른 공을 제외한 나머지 '
-                           '$4$개의 공 중 아무거나 꺼내는 방법 **$4$가지** $= 3 \\times 4 = 12$가지!</li><li>**방법 2 ($1$회차 숫자 나누기)**: '
-                           '$\\mathrm{A}$가 $(1, 1)$을 꺼내는 경우($3 \\times 2 = 6$가지) $+$ $\\mathrm{A}$가 $(2, 1)$을 꺼내는 '
-                           '경우($2 \\times 3 = 6$가지) $= 6 + 6 = 12$가지!</li></ul>',
-              'knowledge_en': 'When Bag B draws $(1, 2)$: in Round 1, B already drew $1$, so $a_1 = 1$ automatically; '
-                              'in Round 2, B drew $2$, so <b>Bag A MUST draw $1$ in Round 2</b> to make $a_2 = 1$! In '
-                              'Bag A (three $1$s, two $2$s):<ul><li><b>Method 1</b>: Pick which of the three $1$s A '
-                              'draws in Round 2 ($3$ ways) $\\times$ pick any of the remaining $4$ balls for Round 1 '
-                              '($4$ ways) $= 3 \\times 4 = 12$ ways.</li><li><b>Method 2</b>: A draws $(1, 1)$ in $3 '
-                              '\\times 2 = 6$ ways, or A draws $(2, 1)$ in $2 \\times 3 = 6$ ways $\\implies 6 + 6 = '
-                              '12$ ways!</li></ul>',
-              'questions': [{'level_label': '주머니 A 추출 가짓수 디딤돌 6',
-                             'level_label_en': 'Bag A Draw Count Step 6',
-                             'stem': '주머니 $\\mathrm{B}$가 $(1, 2)$를 꺼냈을 때 $a_2 = 1$이 되려면 주머니 $\\mathrm{A}$($1$이 $3$개, '
-                                     '$2$가 $2$개)는 $2$회차에 반드시 $1$을 꺼내야 합니다. $2$회차에 $1$을 고르는 $3$가지와 $1$회차에 남은 $4$개 중 하나를 '
-                                     '고르는 $4$가지를 곱한 주머니 $\\mathrm{A}$의 경우의 수 $3 \\times 4$는?',
-                             'stem_en': 'For Bag A (three $1$s, two $2$s) to draw $1$ in Round 2 ($3$ choices) and any '
-                                        'of the remaining $4$ balls in Round 1 ($4$ choices), how many ways $3 \\times '
-                                        '4$ are there for Bag A?',
-                             'options': ['$6$', '$8$', '$10$', '$12$', '$15$'],
-                             'answer': 4,
-                             'exp': '$2$회차에 $1$을 뽑는 $3$가지 각각에 대하여 $1$회차에 남은 $4$개 중 아무 공이나 뽑을 수 있으므로 $3 \\times 4 = '
-                                    '12$가지입니다.',
-                             'exp_en': '$3 \\times 4 = 12$ ways for Bag A.'}]},
-             {'title': '🌳 7단계 · [분자 케이스 ① 결합] 주머니 $\\mathrm{B}$가 $(1, 2)$를 꺼낼 때 조건을 만족하는 전체 가짓수($48$가지)',
-              'title_en': '🌳 Step 7 · [Combining Case 1] Total outcomes ($48$) when Bag $\\mathrm{B}$ draws $(1, 2)$',
-              'knowledge': '5단계와 6단계에서 구한 두 조각을 레고 블록처럼 곱셈 법칙으로 결합해 봅시다!<ul><li>주머니 $\\mathrm{B}$가 $(1, 2)$ 순서로 꺼내는 '
-                           '경우의 수: **$4$가지**</li><li>그 각각에 대하여 주머니 $\\mathrm{A}$가 $2$회차에 $1$을 꺼내어 $a_1 = a_2 = 1$을 만드는 '
-                           '경우의 수: **$12$가지**</li></ul>따라서 케이스 ①($\\mathrm{B}$가 $(1, 2)$를 꺼내는 경우)의 전체 가짓수는 $4 \\times '
-                           '12$입니다!',
-              'knowledge_en': 'Combining Step 5 and Step 6 by multiplication: Bag B draws $(1, 2)$ in $4$ ways, and '
-                              'Bag A satisfies $a_1 = a_2 = 1$ in $12$ ways, giving $4 \\times 12$ outcomes for Case '
-                              '1.',
-              'questions': [{'level_label': '케이스 ① 결합 디딤돌 7',
-                             'level_label_en': 'Case 1 Product Step 7',
-                             'stem': '주머니 $\\mathrm{B}$가 $(1, 2)$를 꺼내는 $4$가지와 주머니 $\\mathrm{A}$가 조건을 만족하도록 꺼내는 $12$가지를 '
-                                     '곱한 케이스 ①의 경우의 수 $4 \\times 12$는?',
-                             'stem_en': "Multiplying Bag B's $4$ ways and Bag A's $12$ ways, how many outcomes belong "
-                                        'to Case 1?',
+                             'exp': '<b>[6단계 상세 해설]</b><br>• $\\mathrm{B}=(1, 2)$일 때 $1$회차에는 $\\mathrm{B}$가 이미 $1$을 '
+                                    '뽑았으므로 $a_1=1$이 자동 성립하고, $2$회차에는 $\\mathrm{B}$가 $2$를 뽑았으므로 $a_2=1$이 되려면 '
+                                    '<b>$\\mathrm{A}$는 $2$회차에 반드시 $1$을 뽑아야 합니다.</b><br>• <b>[방법 1: 시행 순서대로 '
+                                    '$1\\text{회차}\\to 2\\text{회차}$ 세기]</b> $\\mathrm{A}=(1, 1)$인 경우 $3 \\times 2 = '
+                                    '6$가지 $+$ $\\mathrm{A}=(2, 1)$인 경우 $2 \\times 3 = 6$가지 $= 6 + 6 = '
+                                    '\\mathbf{12}$가지<br>• <b>[방법 2: 조건이 걸린 $2$회차부터 고정하기]</b> $2$회차에 $1$을 고르는 $3$가지 '
+                                    '$\\times$ $1$회차에 나머지 공 $4$개 중 하나를 고르는 $4$가지 $= 3 \\times 4 = \\mathbf{12}$가지',
+                             'exp_en': '<b>[Step 6 Detailed Explanation]</b><br>When $\\mathrm{B}=(1, 2)$, Bag A must '
+                                       'draw $1$ in Round 2. Method 1 (by Round 1): $\\mathrm{A}=(1, 1)$ gives $3 '
+                                       '\\times 2 = 6$ ways and $\\mathrm{A}=(2, 1)$ gives $2 \\times 3 = 6$ ways, '
+                                       'totaling $6 + 6 = \\mathbf{12}$ ways. Method 2 (fix Round 2 first): $3$ '
+                                       'choices for Round 2 $\\times$ $4$ remaining balls for Round 1 $= \\mathbf{12}$ '
+                                       'ways.'}]},
+             {'title': '🌳 7단계 · [분자 계산 $\\mathrm{i})$] $(y_1, y_2) = (1, 2)$일 때 $(x_1, y_1, x_2, y_2) = (1, 1, 1, '
+                       '2),\\ (2, 1, 1, 2)$의 경우의 수($48$)',
+              'title_en': '🌳 Step 7 · [Numerator Case $\\mathrm{i})$] Counting $(1, 1, 1, 2)$ and $(2, 1, 1, 2)$ when '
+                          '$(y_1, y_2) = (1, 2)$ ($48$)',
+              'knowledge': '분자 $\\mathrm{II})$에서 첫 번째 경우인 <b>$\\mathrm{i})\\ (y_1, y_2) = (1, 2)$</b>일 때를 칠판 풀이 그대로 '
+                           '따라가 봅시다!<ul><li>조건 $a_1 = a_2 = 1$은 <b>$(x_1 = 1\\text{ 또는 }y_1 = 1)$ 그리고 $(x_2 = 1\\text{ '
+                           '또는 }y_2 = 1)$</b>입니다.</li><li>여기에 $y_1 = 1,\\ y_2 = 2$를 대입하면: $1$시행은 이미 $y_1 = 1$이므로 $x_1 '
+                           '= 1, 2$가 모두 가능하지만, $2$시행은 $y_2 = 2$이므로 반드시 <b>$x_2 = 1$</b>이어야 합니다!</li><li>따라서 가능한 순서쌍 '
+                           '$(x_1, y_1, x_2, y_2)$는 다음 두 가지입니다:<br>$$(x_1, y_1, x_2, y_2) = (1, 1, 1, 2),\\ (2, 1, 1, '
+                           '2)$$</li><li>각 순서쌍의 경우의 수를 $(x_1, y_1, x_2, y_2)$ 자리 순서대로 구해 더하면:<br>&nbsp;&nbsp;• <b>$(1, '
+                           '1, 1, 2)$</b>: $1$시행에 $\\mathrm{A}$에서 `①`($3$개)을 뽑았으므로 $2$시행 $\\mathrm{A}_{x_1}$에는 `①`이 '
+                           '$2$개 남음 $\\to {}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_2\\mathrm{C}_1 '
+                           '\\times {}_1\\mathrm{C}_1 = 24$<br>&nbsp;&nbsp;• <b>$(2, 1, 1, 2)$</b>: $1$시행에 '
+                           '$\\mathrm{A}$에서 `②`($2$개)를 뽑았으므로 $2$시행 $\\mathrm{A}_{x_1}$에는 `①`이 $3$개 그대로 남음 $\\to '
+                           '{}_2\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times {}_3\\mathrm{C}_1 \\times '
+                           '{}_1\\mathrm{C}_1 = 24$<br>$${}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times '
+                           '{}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 + {}_2\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 '
+                           '\\times {}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 = 24 + 24 = '
+                           '\\underline{48}$$</li></ul>',
+              'knowledge_en': 'When $\\mathrm{i})\\ (y_1, y_2) = (1, 2)$, the condition $(x_1=1\\text{ or }y_1=1)$ and '
+                              '$(x_2=1\\text{ or }y_2=1)$ allows $x_1 \\in \\{1, 2\\}$ and forces $x_2 = 1$, giving '
+                              'two 4-tuples:$$(x_1, y_1, x_2, y_2) = (1, 1, 1, 2),\\ (2, 1, 1, 2)$$Counting in $(x_1, '
+                              'y_1, x_2, y_2)$ order:$${}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 \\times '
+                              '{}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 + {}_2\\mathrm{C}_1 \\times '
+                              '{}_4\\mathrm{C}_1 \\times {}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 = 24 + 24 = '
+                              '\\underline{48}$$',
+              'questions': [{'level_label': '분자 i) (y1,y2)=(1,2) 디딤돌 7',
+                             'level_label_en': 'Numerator Case i) Step 7',
+                             'stem': '$\\mathrm{i})\\ (y_1, y_2) = (1, 2)$일 때 가능한 두 순서쌍 $(x_1, y_1, x_2, y_2) = (1, 1, '
+                                     '1, 2),\\ (2, 1, 1, 2)$의 경우의 수의 합 ${}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 '
+                                     '\\times {}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 + {}_2\\mathrm{C}_1 \\times '
+                                     '{}_4\\mathrm{C}_1 \\times {}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1$은?',
+                             'stem_en': 'For $\\mathrm{i})\\ (y_1, y_2) = (1, 2)$, what is the sum of counts for $(1, '
+                                        '1, 1, 2)$ and $(2, 1, 1, 2)$: ${}_3\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 '
+                                        '\\times {}_2\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 + {}_2\\mathrm{C}_1 '
+                                        '\\times {}_4\\mathrm{C}_1 \\times {}_3\\mathrm{C}_1 \\times '
+                                        '{}_1\\mathrm{C}_1$?',
                              'options': ['$24$', '$36$', '$48$', '$60$', '$72$'],
                              'answer': 3,
-                             'exp': '$4 \\times 12 = 48$가지입니다.',
-                             'exp_en': '$4 \\times 12 = 48$ outcomes.'}]},
-             {'title': '🌳 8단계 · [분자 케이스 ②와 분자 확정] 주머니 $\\mathrm{B}$가 $(2, 1)$을 꺼내는 경우까지 더해 분자 $n(E \\cap F) = 96$ 구하기',
-              'title_en': '🌳 Step 8 · [Case 2 & Numerator Total] Adding Case 2 where Bag $\\mathrm{B}$ draws $(2, 1)$ '
-                          'to get $n(E \\cap F) = 96$',
-              'knowledge': '이제 두 번째 케이스인 **주머니 $\\mathrm{B}$가 $1$회차에 $2$, $2$회차에 $1$을 꺼내는 경우($\\mathrm{B}: (2, 1)$)**를 '
-                           '봅시다!<ul><li>주머니 $\\mathrm{B}$가 $1$회차에 $2$($1$가지), $2$회차에 $1$($4$가지)을 꺼내는 가짓수: $1 \\times 4 '
-                           '= 4$가지</li><li>이번에는 $\\mathrm{B}$가 $1$회차에 $2$를 꺼냈으므로, $a_1 = 1$이 되려면 **주머니 $\\mathrm{A}$가 '
-                           '$1$회차에 반드시 $1$($3$가지)**을 꺼내고 $2$회차에 남은 공($4$가지)을 꺼내야 하므로: $3 \\times 4 = 12$가지</li><li>따라서 '
-                           '케이스 ②($\\mathrm{B}$가 $(2, 1)$을 꺼내는 경우)의 가짓수도 정확히 대칭적으로 **$4 \\times 12 = '
-                           '48$가지**입니다!</li></ul>케이스 ①($48$가지)과 케이스 ②($48$가지)를 더하면 조건부확률의 **분자 $n(E \\cap F)$**가 '
-                           '완성됩니다!',
-              'knowledge_en': 'In Case 2, Bag B draws $(2, 1)$ in $1 \\times 4 = 4$ ways, and since B drew $2$ in '
-                              'Round 1, Bag A must draw $1$ in Round 1 ($3 \\times 4 = 12$ ways), giving another $4 '
-                              '\\times 12 = 48$ ways. Adding Case 1 and Case 2 gives the numerator $n(E \\cap F) = 48 '
-                              '+ 48$.',
-              'questions': [{'level_label': '분자 경우의 수 확정 디딤돌 8',
-                             'level_label_en': 'Numerator Total Step 8',
-                             'stem': '케이스 ①($\\mathrm{B}$가 $(1, 2)$를 뽑는 $48$가지)과 케이스 ②($\\mathrm{B}$가 $(2, 1)$을 뽑는 '
-                                     '$48$가지)를 합친 조건부확률의 분자 $n(E \\cap F) = 48 + 48$의 값은?',
-                             'stem_en': 'Adding Case 1 ($48$ ways) and Case 2 ($48$ ways), what is the numerator $n(E '
-                                        '\\cap F) = 48 + 48$?',
+                             'exp': '<b>[7단계 상세 해설]</b><br>• 주머니 $\\mathrm{B}$가 $(1, 2)$를 꺼내는 $4$가지 각각에 대하여, 주머니 '
+                                    '$\\mathrm{A}$가 $(1, 1)$($6$가지) 또는 $(2, 1)$($6$가지)을 꺼내는 $12$가지가 짝지어집니다.<br>• 따라서 '
+                                    '곱의 법칙에 의해 케이스 ①의 경우의 수는 $4 \\times 12 = \\mathbf{48}$가지(즉, $4\\times 6 + 4\\times '
+                                    '6 = 24 + 24 = 48$가지)입니다.',
+                             'exp_en': '<b>[Step 7 Detailed Explanation]</b><br>Each of the $4$ ways for Bag B to draw '
+                                       '$(1, 2)$ pairs with $12$ valid ways for Bag A ($6$ ways for $(1,1)$ + $6$ ways '
+                                       'for $(2,1)$), giving $4 \\times 12 = \\mathbf{48}$ outcomes.'}]},
+             {'title': '🌳 8단계 · [분자 계산 $\\mathrm{ii})$와 분자 확정] $(y_1, y_2) = (2, 1)$일 때 $(1, 2, 1, 1),\\ (1, 2, 2, '
+                       '1)$의 경우의 수($48$)와 합($96$)',
+              'title_en': '🌳 Step 8 · [Numerator Case $\\mathrm{ii})$ & Total] Counting $(1, 2, 1, 1)$ and $(1, 2, 2, '
+                          '1)$ when $(y_1, y_2) = (2, 1)$ ($48$) to get $96$',
+              'knowledge': '이제 분자 $\\mathrm{II})$의 두 번째 경우인 <b>$\\mathrm{ii})\\ (y_1, y_2) = (2, 1)$</b>일 때를 계산해 '
+                           '봅시다!<ul><li>$y_1 = 2,\\ y_2 = 1$이므로, $(x_1 = 1\\text{ 또는 }y_1 = 1)$이 성립하려면 반드시 <b>$x_1 = '
+                           '1$</b>이어야 하고, $2$시행은 이미 $y_2 = 1$이므로 $x_2 = 1, 2$가 모두 가능합니다!</li><li>따라서 가능한 순서쌍 $(x_1, '
+                           'y_1, x_2, y_2)$는 다음 두 가지입니다:<br>$$(x_1, y_1, x_2, y_2) = (1, 2, 1, 1),\\ (1, 2, 2, '
+                           '1)$$</li><li>각 순서쌍의 경우의 수를 $(x_1, y_1, x_2, y_2)$ 자리 순서대로 구해 더하면:<br>&nbsp;&nbsp;• <b>$(1, '
+                           '2, 1, 1)$</b>: $1$시행에 $\\mathrm{A}$에서 `①`($3$개)을 뽑았으므로 $2$시행 $\\mathrm{A}_{x_1}$에는 `①`이 '
+                           '$2$개 남음 $\\to {}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times {}_2\\mathrm{C}_1 '
+                           '\\times {}_4\\mathrm{C}_1 = 24$<br>&nbsp;&nbsp;• <b>$(1, 2, 2, 1)$</b>: $1$시행에 '
+                           '$\\mathrm{A}$에서 `①`($3$개)을 뽑았으므로 $2$시행 $\\mathrm{A}_{x_1}$에는 `②`가 $2$개 그대로 남음 $\\to '
+                           '{}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times {}_2\\mathrm{C}_1 \\times '
+                           '{}_4\\mathrm{C}_1 = 24$<br>$${}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times '
+                           '{}_2\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 + {}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 '
+                           '\\times {}_2\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 = 24 + 24 = '
+                           '\\underline{48}$$</li></ul>그러므로 분자 $\\mathrm{II})$의 전체 경우의 수는 $\\mathrm{i})\\ 48 + '
+                           '\\mathrm{ii})\\ 48 = 96$입니다!',
+              'knowledge_en': 'When $\\mathrm{ii})\\ (y_1, y_2) = (2, 1)$, the condition forces $x_1 = 1$ and allows '
+                              '$x_2 \\in \\{1, 2\\}$, giving two 4-tuples:$$(x_1, y_1, x_2, y_2) = (1, 2, 1, 1),\\ (1, '
+                              '2, 2, 1)$$Counting in $(x_1, y_1, x_2, y_2)$ order:$${}_3\\mathrm{C}_1 \\times '
+                              '{}_1\\mathrm{C}_1 \\times {}_2\\mathrm{C}_1 \\times {}_4\\mathrm{C}_1 + '
+                              '{}_3\\mathrm{C}_1 \\times {}_1\\mathrm{C}_1 \\times {}_2\\mathrm{C}_1 \\times '
+                              '{}_4\\mathrm{C}_1 = 24 + 24 = \\underline{48}$$Combining $\\mathrm{i})$ and '
+                              '$\\mathrm{ii})$ gives the total numerator $48 + 48 = 96$.',
+              'questions': [{'level_label': '분자 ii) 및 분자 총합 디딤돌 8',
+                             'level_label_en': 'Numerator Case ii) & Total Step 8',
+                             'stem': '$\\mathrm{ii})\\ (y_1, y_2) = (2, 1)$일 때 $(1, 2, 1, 1),\\ (1, 2, 2, 1)$의 경우의 수의 '
+                                     '합($48$)과 앞선 $\\mathrm{i})$의 경우의 수($48$)를 더한 분자 $\\mathrm{II})$의 총 경우의 수는?',
+                             'stem_en': 'Adding $\\mathrm{i})$ ($48$ ways) and $\\mathrm{ii})$ ($48$ ways), what is '
+                                        'the total count for the numerator $\\mathrm{II})$?',
                              'options': ['$72$', '$84$', '$96$', '$108$', '$120$'],
                              'answer': 3,
-                             'exp': '$48 + 48 = 96$가지가 조건부확률의 분자 $n(E \\cap F)$입니다.',
-                             'exp_en': '$48 + 48 = 96$.'}]},
-             {'title': '💎 9단계 · [조건부확률 식 세우기와 약분] $\\mathrm{P}(F \\mid E) = \\dfrac{96}{336}$을 기약분수로 약분하기',
-              'title_en': '💎 Step 9 · [Conditional Probability & Reduction] Reducing $\\mathrm{P}(F \\mid E) = '
-                          '\\dfrac{96}{336}$ to lowest terms',
-              'knowledge': '드디어 조건부확률의 분모 $n(E) = 336$과 분자 $n(E \\cap F) = 96$을 모두 구했습니다!$$\\mathrm{P}(F \\mid E) = '
-                           '\\frac{n(E \\cap F)}{n(E)} = \\frac{96}{336}$$차근차근 약분해 볼까요?<ul><li>먼저 분자와 분모를 $16$으로 나누면: '
-                           '$96 \\div 16 = 6$, $336 \\div 16 = 21$이므로 $\\dfrac{6}{21}$이 됩니다.</li><li>다시 분자와 분모를 $3$으로 '
-                           '나누면: $6 \\div 3 = 2$, $21 \\div 3 = 7$이므로 기약분수 **$\\dfrac{2}{7}$**이 됩니다! (즉, 최대공약수 $48$로 한 '
-                           '번에 나누면 $96 = 48 \\times 2$, $336 = 48 \\times 7$입니다.)</li></ul>',
-              'knowledge_en': 'Combining the numerator $96$ and denominator $336$:$$\\mathrm{P}(F \\mid E) = '
-                              '\\frac{96}{336}$$Dividing by $16$ gives $\\frac{6}{21}$, and dividing by $3$ gives '
-                              '$\\frac{2}{7}$ (since $96 = 48 \\times 2$ and $336 = 48 \\times 7$).',
-              'questions': [{'level_label': '기약분수 약분 디딤돌 9',
-                             'level_label_en': 'Lowest Terms Step 9',
-                             'stem': '구하는 조건부확률 $\\dfrac{96}{336}$의 분자와 분모를 $48$로 약분하여 기약분수 $\\dfrac{q}{p}$로 나타내면?',
-                             'stem_en': 'Reducing $\\dfrac{96}{336}$ by dividing numerator and denominator by $48$, '
-                                        'what is the fraction $\\dfrac{q}{p}$ in lowest terms?',
+                             'exp': '<b>[8단계 상세 해설]</b><br>• 케이스 ②($\\mathrm{B}=(2, 1)$)에서 주머니 $\\mathrm{B}$의 가짓수는 $1 '
+                                    '\\times 4 = 4$가지이고, $1$회차에 $a_1=1$이 되려면 주머니 $\\mathrm{A}$는 $1$회차에 반드시 $1$을 뽑아야 '
+                                    '하므로 $\\mathrm{A}=(1, 1)$($6$가지) $+$ $\\mathrm{A}=(1, 2)$($6$가지) $= 12$가지입니다.<br>• '
+                                    '따라서 케이스 ②의 가짓수도 $4 \\times 12 = 48$가지이며, 케이스 ①과 케이스 ②는 배반이므로 합의 법칙에 의해 분자는 $n(E '
+                                    '\\cap F) = 48 + 48 = \\mathbf{96}$가지입니다.',
+                             'exp_en': '<b>[Step 8 Detailed Explanation]</b><br>In Case 2 ($\\mathrm{B}=(2, 1)$, $1 '
+                                       '\\times 4 = 4$ ways), Bag A must draw $1$ in Round 1 ($\\mathrm{A}=(1,1)$ in '
+                                       '$6$ ways + $\\mathrm{A}=(1,2)$ in $6$ ways $= 12$ ways), giving $4 \\times 12 '
+                                       '= 48$ ways. Summing Case 1 and Case 2 gives $n(E \\cap F) = 48 + 48 = '
+                                       '\\mathbf{96}$.'}]},
+             {'title': '💎 9단계 · [$\\text{by }\\mathrm{I})\\ \\mathrm{II})$ 조건부확률과 단계별 약분] $\\dfrac{96}{336} = '
+                       '\\dfrac{12}{42} = \\dfrac{2}{7}$ 구하기',
+              'title_en': '💎 Step 9 · [$\\text{by }\\mathrm{I})\\ \\mathrm{II})$ Reduction] Reducing $\\dfrac{96}{336} '
+                          '= \\dfrac{12}{42} = \\dfrac{2}{7}$',
+              'knowledge': '드디어 $\\mathrm{I})$에서 구한 분모 $336$과 $\\mathrm{II})$에서 구한 분자 $96$을 결합할 차례입니다! 칠판의 약분 과정을 그대로 '
+                           '따라가 볼까요?<ul><li>여사건에서 뺀 숫자들을 보면 $24 + 8 + 24 + 8 = 8 \\times (3 + 1 + 3 + 1)$이고, 전체 $400 = '
+                           '8 \\times 50$, 분자 $96 = 8 \\times 12$이므로 <b>모든 수가 $8$의 배수</b>입니다!</li><li>먼저 분자와 분모를 '
+                           '<b>$8$</b>로 약분하면: $96 \\div 8 = 12$, $336 \\div 8 = 42$이므로 $\\dfrac{12}{42}$가 '
+                           '됩니다.</li><li>다시 분자와 분모를 <b>$6$</b>으로 약분하면: $12 \\div 6 = 2$, $42 \\div 6 = 7$이므로 기약분수 '
+                           '<b>$\\dfrac{2}{7}$</b>이 됩니다!</li></ul>$$\\text{by }\\mathrm{I})\\ \\mathrm{II}) \\quad '
+                           '\\frac{96}{336} = \\frac{12}{42} = \\frac{2}{7}$$',
+              'knowledge_en': 'Combining $\\mathrm{I})$ ($336$) and $\\mathrm{II})$ ($96$) and reducing first by $8$ '
+                              'and then by $6$:$$\\text{by }\\mathrm{I})\\ \\mathrm{II}) \\quad \\frac{96}{336} = '
+                              '\\frac{12}{42} = \\frac{2}{7}$$',
+              'questions': [{'level_label': 'by I) II) 약분 디딤돌 9',
+                             'level_label_en': 'by I) II) Reduction Step 9',
+                             'stem': '$\\text{by }\\mathrm{I})\\ \\mathrm{II})$에 의해 구하는 확률 $\\dfrac{96}{336}$을 먼저 $8$로 '
+                                     '약분해 $\\dfrac{12}{42}$로 만든 뒤, 다시 $6$으로 약분하여 기약분수 $\\dfrac{q}{p}$로 나타내면?',
+                             'stem_en': 'Reducing $\\dfrac{96}{336}$ by $8$ to $\\dfrac{12}{42}$ and then by $6$, what '
+                                        'is the fraction $\\dfrac{q}{p}$ in lowest terms?',
                              'options': ['$\\frac{1}{4}$',
                                          '$\\frac{2}{7}$',
                                          '$\\frac{3}{8}$',
                                          '$\\frac{2}{9}$',
                                          '$\\frac{3}{11}$'],
                              'answer': 2,
-                             'exp': '$\\dfrac{96 \\div 48}{336 \\div 48} = \\dfrac{2}{7}$이므로 $p = 7, q = 2$입니다.',
-                             'exp_en': '$\\dfrac{96}{336} = \\dfrac{2}{7}$.'}]},
+                             'exp': '<b>[9단계 상세 해설]</b><br>• 조건부확률 $\\mathrm{P}(F \\mid E) = \\dfrac{n(E \\cap '
+                                    'F)}{n(E)} = \\dfrac{96}{336}$입니다.<br>• 분자와 분모를 먼저 $16$으로 나누면 $\\dfrac{96 \\div '
+                                    '16}{336 \\div 16} = \\dfrac{6}{21}$이고, 다시 $3$으로 나누면(즉 최대공약수 $48$로 약분하면) 기약분수 '
+                                    '<b>$\\dfrac{2}{7}$</b>이 됩니다.<br>• 따라서 서로소인 두 자연수는 $p = 7$, $q = 2$입니다.',
+                             'exp_en': '<b>[Step 9 Detailed Explanation]</b><br>$\\mathrm{P}(F \\mid E) = '
+                                       '\\dfrac{96}{336} = \\dfrac{96 \\div 16}{336 \\div 16} = \\dfrac{6}{21} = '
+                                       '\\mathbf{\\dfrac{2}{7}}$, so $p = 7$ and $q = 2$.'}]},
              {'title': '🏆 10단계 · [최종 정답 완성] 서로소인 자연수 $p + q$의 값 구하기',
               'title_en': '🏆 Step 10 · [Final Synthesis] Computing $p + q$',
               'knowledge': '9단계에서 구한 기약분수 $\\dfrac{q}{p} = \\dfrac{2}{7}$에서 분모 $p = 7$, 분자 $q = 2$ ($7$과 $2$는 서로소인 '
@@ -1369,8 +1541,13 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
                              'stem_en': 'Given $p = 7$ and $q = 2$, what is the final answer $p + q$?',
                              'options': ['$7$', '$8$', '$9$', '$10$', '$11$'],
                              'answer': 3,
-                             'exp': '$p + q = 7 + 2 = 9$입니다.',
-                             'exp_en': '$7 + 2 = 9$.'}]}],
+                             'exp': '<b>[10단계 상세 해설]</b><br>• 전체 경우의 수 $n(S) = 20 \\times 20 = 400$가지<br>• 분모 $n(E) = '
+                                    '400 - (32 + 32) = 336$가지<br>• 분자 $n(E \\cap F) = 48 + 48 = 96$가지<br>• 조건부확률 '
+                                    '$\\dfrac{q}{p} = \\dfrac{96}{336} = \\dfrac{2}{7}$이므로 $p = 7,\\ q = 2$이고, 구하는 값은 '
+                                    '$p + q = 7 + 2 = \\mathbf{9}$입니다.',
+                             'exp_en': '<b>[Step 10 Detailed Explanation]</b><br>From $n(S) = 400$, $n(E) = 336$, and '
+                                       '$n(E \\cap F) = 96$, we obtain $\\dfrac{q}{p} = \\dfrac{96}{336} = '
+                                       '\\dfrac{2}{7}$, so $p + q = 7 + 2 = \\mathbf{9}$.'}]}],
   'final': {'stem': '주머니 $\\mathrm{A}$에는 숫자 $1$이 적힌 공 $3$개, 숫자 $2$가 적힌 공 $2$개가 들어 있고, 주머니 $\\mathrm{B}$에는 숫자 $1$이 적힌 공 '
                     '$4$개, 숫자 $2$가 적힌 공 $1$개가 들어 있다. 두 주머니 $\\mathrm{A}, \\mathrm{B}$에서 각각 공을 임의로 한 개씩 꺼내어 꺼낸 두 개의 공에 '
                     '적힌 수를 확인한 후 다시 넣지 않는다. 이 시행을 $2$번 반복할 때, 첫 번째 시행에서 확인한 두 수 중 크지 않은 수를 $a_1$, 두 번째 시행에서 확인한 두 수 중 '
@@ -1384,99 +1561,359 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
             'options': ['$7$', '$8$', '$9$', '$10$', '$11$'],
             'answer': 3,
             'exp': '전체 $(5\\times 4)\\times(5\\times 4) = 400$가지 중 $a_1=2$인 경우($(2\\times 4)\\times(1\\times '
-                   '4)=32$가지)와 $a_2=2$인 경우($32$가지, 중복 $0$가지)를 제외한 분모는 $400 - 64 = 336$가지입니다. 이 중 $\\mathrm{B}$에 $1$이 '
-                   '$3$개 남으려면 $\\mathrm{B}$가 $(1,2)$ 또는 $(2,1)$을 뽑아야 하며, 각 경우 $(4\\times 1)\\times(3\\times 4) = '
-                   '48$가지씩 총 $96$가지이므로 확률은 $\\dfrac{96}{336} = \\dfrac{2}{7}$이고 $p+q=9$입니다.',
-            'exp_en': 'Out of $20 \\times 20 = 400$ ordered outcomes, excluding $a_1=2$ ($8 \\times 4 = 32$) and '
-                      '$a_2=2$ ($32$, zero overlap) leaves $336$ outcomes where $a_1=a_2=1$. Among these, leaving '
-                      'three $1$s in B requires B to draw $(1,2)$ or $(2,1)$, giving $4 \\times 12 + 4 \\times 12 = '
-                      '96$ outcomes. Thus $\\dfrac{96}{336} = \\dfrac{2}{7}$ and $p+q = 9$.',
-            'solution': '<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>\n'
-                        '<p>본 문항은 확률과 통계 최고난도(30번) 문항으로, <b>비복원 추출에서의 여사건을 이용한 조건부확률 $\\mathrm{P}(F \\mid E) = '
-                        '\\dfrac{n(E \\cap F)}{n(E)}$</b>을 구하는 문제입니다. 같은 숫자가 적힌 공이라도 모두 구별되는 $5$개의 공으로 보고 <b>순열($5 '
-                        '\\times 4 = 20$)</b>로 근원사건의 개수를 세면 분모와 분자를 매우 직관적이고 오차 없이 구할 수 있습니다.</p>\n'
+                   '4)=32$가지)와 $a_2=2$인 경우($32$가지, 중복 $0$가지)를 제외한 분모는 $n(E) = 400 - 64 = 336$가지입니다. 이 중 $\\mathrm{B}$에 '
+                   '$1$이 $3$개 남으려면 $\\mathrm{B}$가 $(1,2)$ 또는 $(2,1)$을 뽑아야 하며, 각 경우 $\\mathrm{B}$의 $4$가지에 대하여 '
+                   '$\\mathrm{A}$가 $(1,1)$($6$가지) 또는 $(2,1)$·$(1,2)$($6$가지)로 총 $12$가지씩 성립하므로 분자는 $n(E \\cap F) = '
+                   '(4\\times 12) + (4\\times 12) = 48 + 48 = 96$가지입니다. 따라서 조건부확률은 $\\dfrac{96}{336} = '
+                   '\\dfrac{2}{7}$이고 $p+q=7+2=9$입니다.',
+            'exp_en': 'Out of $20 \\times 20 = 400$ equally likely ordered outcomes, excluding $a_1=2$ ($8 \\times 4 = '
+                      '32$) and $a_2=2$ ($32$, zero overlap) leaves $n(E) = 336$ outcomes where $a_1=a_2=1$. Leaving '
+                      'three $1$s in B requires B to draw $(1,2)$ ($4$ ways) or $(2,1)$ ($4$ ways), each pairing with '
+                      '$12$ valid ways in A ($6+6$), giving $n(E \\cap F) = 48 + 48 = 96$. Thus $\\dfrac{96}{336} = '
+                      '\\dfrac{2}{7}$ and $p+q = 9$.',
+            'solution': '<h4>📋 [1. 문제 조건 완벽 해부 및 핵심 출제 의도]</h4>\n'
+                        '<p>본 문항은 확률과 통계 30번 최고난도 문항으로, <b>비복원 추출에서의 여사건을 활용한 조건부확률 $\\mathrm{P}(F \\mid E) = '
+                        '\\dfrac{\\mathrm{P}(E \\cap F)}{\\mathrm{P}(E)} = \\dfrac{n(E \\cap F)}{n(E)}$</b>을 정확하게 구하는 '
+                        '문제입니다.</p>\n'
+                        '<ul>\n'
+                        '  <li><b>주머니 초기 상태</b>: 주머니 $\\mathrm{A}$에는 숫자 $1$이 $3$개, 숫자 $2$가 $2$개(총 $5$개), 주머니 '
+                        '$\\mathrm{B}$에는 숫자 $1$이 $4$개, 숫자 $2$가 $1$개(총 $5$개) 들어 있습니다.</li>\n'
+                        '  <li><b>비복원 $2$회 추출</b>: 꺼낸 공은 다시 넣지 않으므로 $1$회차에 공을 꺼내면 $2$회차에는 남은 $4$개의 공 중에서 $1$개를 꺼내게 '
+                        '됩니다.</li>\n'
+                        "  <li><b>$a_n$의 의미 번역 ('두 수 중 크지 않은 수')</b>: $n$회차($n=1, 2$)에 주머니 $\\mathrm{A}, "
+                        '\\mathrm{B}$에서 꺼낸 공의 숫자를 각각 $\\mathrm{A}_n, \\mathrm{B}_n$이라 하면 $a_n = \\min(\\mathrm{A}_n, '
+                        '\\mathrm{B}_n)$입니다.<br>\n'
+                        '    &nbsp;&nbsp;• $(1, 1) \\to 1$, &nbsp;$(1, 2) \\to 1$, &nbsp;$(2, 1) \\to 1$, &nbsp;$(2, '
+                        '2) \\to 2$<br>\n'
+                        '    &nbsp;&nbsp;• 즉, <b>적어도 한 주머니에서 $1$이 나오면 무조건 $a_n = 1$</b>이고, 오직 <b>두 주머니 모두 $2$를 꺼낸 $(2, '
+                        '2)$일 때만 $a_n = 2$</b>가 됩니다!</li>\n'
+                        '  <li><b>사건 정의</b>:<br>\n'
+                        '    &nbsp;&nbsp;• <b>조건 사건 $E$ (분모)</b>: $a_1 = 1$이고 $a_2 = 1$인 사건 (즉, $1$회차에도 $(2, 2)$가 안 '
+                        '나오고 $2$회차에도 $(2, 2)$가 안 나오는 사건)<br>\n'
+                        '    &nbsp;&nbsp;• <b>목표 사건 $F$</b>: $2$번째 시행 후 주머니 $\\mathrm{B}$에 숫자 $1$이 적힌 공이 $3$개 남아 있는 '
+                        '사건</li>\n'
+                        '</ul>\n'
                         '\n'
-                        '<h4>📐 [단계별 상세 풀이 전개]</h4>\n'
-                        '<p>\n'
-                        '  <b>1단계: 전체 근원사건의 개수 ($400$가지)</b><br>\n'
-                        '  주머니 $\\mathrm{A}$($5$개)에서 비복원으로 $2$번 꺼내는 경우의 수는 $5 \\times 4 = 20$가지, 주머니 '
-                        '$\\mathrm{B}$($5$개)에서 비복원으로 $2$번 꺼내는 경우의 수도 $5 \\times 4 = 20$가지이므로 전체 경우의 수는:<br>\n'
-                        '  $$20 \\times 20 = 400\\text{가지}$$<br>\n'
-                        '  <b>2단계: 조건 사건 $E$ ($a_1 = 1$이고 $a_2 = 1$)의 경우의 수 $n(E) = 336$</b><br>\n'
-                        '  두 수 중 크지 않은 수 $a_n$이 $1$이 아닌 경우($a_n = 2$)는 $n$번째 시행에서 $\\mathrm{A}$와 $\\mathrm{B}$ 모두 숫자 '
-                        '$2$를 꺼낼 때뿐입니다.<br>\n'
-                        '  - <b>$a_1 = 2$인 경우 ($1$회차에 둘 다 $2$)</b>:<br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{A}$ ($1$이 $3$개, $2$가 $2$개): $1$회차에 $2$ ($2$가지) $\\times$ '
-                        '$2$회차에 남은 공 ($4$가지) $= 8$가지<br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{B}$ ($1$이 $4$개, $2$가 $1$개): $1$회차에 $2$ ($1$가지) $\\times$ '
-                        '$2$회차에 남은 공 ($4$가지) $= 4$가지<br>\n'
-                        '    &nbsp;&nbsp;• 곱하면 $8 \\times 4 = 32$가지입니다.<br>\n'
-                        '  - <b>$a_2 = 2$인 경우 ($2$회차에 둘 다 $2$)</b>:<br>\n'
-                        '    &nbsp;&nbsp;• $1$회차와 $2$회차의 대칭성에 의해 똑같이 $8 \\times 4 = 32$가지입니다.<br>\n'
-                        '  - <b>교집합 ($a_1 = 2$이고 $a_2 = 2$)</b>:<br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{B}$에는 숫자 $2$가 적힌 공이 단 $1$개뿐이므로 $1, 2$회차 연속으로 $2$를 뽑을 수 없어 '
-                        '$0$가지입니다.<br>\n'
-                        '  따라서 여사건에 의해 분모의 경우의 수는:<br>\n'
-                        '  $$n(E) = 400 - (32 + 32) = 336\\text{가지}$$<br>\n'
-                        '  <b>3단계: 교집합 사건 $E \\cap F$ ($\\mathrm{B}$에 $1$이 $3$개 남고 $a_1 = a_2 = 1$)의 경우의 수 $n(E \\cap '
-                        'F) = 96$</b><br>\n'
-                        '  처음에 $\\mathrm{B}$에는 $1$이 $4$개, $2$가 $1$개 있으므로, $2$번 시행 후 $\\mathrm{B}$에 $1$이 $3$개 남으려면 '
-                        '$\\mathrm{B}$에서 꺼낸 두 공이 <b>$1$ 한 개와 $2$ 한 개</b>여야 합니다.<br>\n'
-                        '  - <b>(케이스 ①) $\\mathrm{B}$가 $1$회차에 $1$, $2$회차에 $2$를 꺼내는 경우</b>:<br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{B}$의 가짓수: $4 \\times 1 = 4$가지<br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{A}$의 조건: $1$회차에는 $\\mathrm{B}$가 이미 $1$을 뽑았으므로 $a_1 = 1$이 자동 '
-                        '성립하고, $2$회차에는 $\\mathrm{B}$가 $2$를 뽑았으므로 $a_2 = 1$이 되려면 <b>$\\mathrm{A}$가 $2$회차에 반드시 $1$을 뽑아야 '
-                        '합니다.</b><br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{A}$의 가짓수: $2$회차에 $1$을 먼저 고르는 방법($3$가지) $\\times$ $1$회차에 남은 '
-                        '$4$개 중 하나를 고르는 방법($4$가지) $= 3 \\times 4 = 12$가지<br>\n'
-                        '    &nbsp;&nbsp;• 따라서 케이스 ①의 가짓수는 $4 \\times 12 = 48$가지입니다.<br>\n'
-                        '  - <b>(케이스 ②) $\\mathrm{B}$가 $1$회차에 $2$, $2$회차에 $1$을 꺼내는 경우</b>:<br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{B}$의 가짓수: $1 \\times 4 = 4$가지<br>\n'
-                        '    &nbsp;&nbsp;• 주머니 $\\mathrm{A}$의 가짓수: 이번에는 $\\mathrm{A}$가 $1$회차에 반드시 $1$($3$가지)을 뽑고 '
-                        '$2$회차에 남은 공($4$가지)을 뽑아야 하므로 $3 \\times 4 = 12$가지<br>\n'
-                        '    &nbsp;&nbsp;• 따라서 케이스 ②의 가짓수도 $4 \\times 12 = 48$가지입니다.<br>\n'
-                        '  그러므로 분자의 경우의 수는:<br>\n'
-                        '  $$n(E \\cap F) = 48 + 48 = 96\\text{가지}$$\n'
-                        '</p>\n'
+                        '<h4>🔍 [2. 예비 단계: 왜 같은 숫자의 공을 구별해야 하며, 각 주머니의 $20$가지는 어떻게 나뉠까?]</h4>\n'
+                        '<p>주머니 안에 $1$과 $2$의 개수가 다르므로, 단순히 숫자 순서쌍 $(1,1), (1,2)$만 세면 각 순서쌍이 일어날 확률이 서로 다릅니다. 모든 근원사건이 '
+                        '<b>동등한 가능성($\\dfrac{1}{400}$)</b>을 갖도록 하려면 같은 숫자가 적힌 공이라도 번호표를 붙여 서로 다른 공으로 구별해야 합니다:<br>\n'
+                        '$$\\mathrm{A} = \\{1_a,\\ 1_b,\\ 1_c,\\ 2_a,\\ 2_b\\}, \\qquad \\mathrm{B} = \\{1_p,\\ 1_q,\\ '
+                        '1_r,\\ 1_s,\\ 2_p\\}$$</p>\n'
+                        '<ul>\n'
+                        '  <li><b>주머니 $\\mathrm{A}$ ($1$이 $3$개, $2$가 $2$개)에서 $2$번 연속 꺼내는 $5 \\times 4 = 20$가지의 완전 '
+                        '분해</b>:\n'
+                        '    <ul>\n'
+                        '      <li>① $\\mathrm{A} = (1, 1)$ ($1$회차 $1$, $2$회차 $1$): $1$회차에 $3$개의 $1$ 중 하나($3$가지) '
+                        '$\\times$ $2$회차에 남은 $2$개의 $1$ 중 하나($2$가지) $= 3 \\times 2 = \\mathbf{6}\\text{가지}$</li>\n'
+                        '      <li>② $\\mathrm{A} = (1, 2)$ ($1$회차 $1$, $2$회차 $2$): $1$회차에 $3$개의 $1$ 중 하나($3$가지) '
+                        '$\\times$ $2$회차에 $2$개의 $2$ 중 하나($2$가지) $= 3 \\times 2 = \\mathbf{6}\\text{가지}$</li>\n'
+                        '      <li>③ $\\mathrm{A} = (2, 1)$ ($1$회차 $2$, $2$회차 $1$): $1$회차에 $2$개의 $2$ 중 하나($2$가지) '
+                        '$\\times$ $2$회차에 $3$개의 $1$ 중 하나($3$가지) $= 2 \\times 3 = \\mathbf{6}\\text{가지}$</li>\n'
+                        '      <li>④ $\\mathrm{A} = (2, 2)$ ($1$회차 $2$, $2$회차 $2$): $1$회차에 $2$개의 $2$ 중 하나($2$가지) '
+                        '$\\times$ $2$회차에 남은 $1$개의 $2$($1$가지) $= 2 \\times 1 = \\mathbf{2}\\text{가지}$</li>\n'
+                        '      <li><i>(합계 검산: $6 + 6 + 6 + 2 = 20$가지)</i></li>\n'
+                        '    </ul>\n'
+                        '  </li>\n'
+                        '  <li><b>주머니 $\\mathrm{B}$ ($1$이 $4$개, $2$가 $1$개)에서 $2$번 연속 꺼내는 $5 \\times 4 = 20$가지의 완전 '
+                        '분해</b>:\n'
+                        '    <ul>\n'
+                        '      <li>① $\\mathrm{B} = (1, 1)$ ($1$회차 $1$, $2$회차 $1$): $1$회차에 $4$개의 $1$ 중 하나($4$가지) '
+                        '$\\times$ $2$회차에 남은 $3$개의 $1$ 중 하나($3$가지) $= 4 \\times 3 = \\mathbf{12}\\text{가지}$</li>\n'
+                        '      <li>② $\\mathrm{B} = (1, 2)$ ($1$회차 $1$, $2$회차 $2$): $1$회차에 $4$개의 $1$ 중 하나($4$가지) '
+                        '$\\times$ $2$회차에 유일한 $2$($1$가지) $= 4 \\times 1 = \\mathbf{4}\\text{가지}$</li>\n'
+                        '      <li>③ $\\mathrm{B} = (2, 1)$ ($1$회차 $2$, $2$회차 $1$): $1$회차에 유일한 $2$($1$가지) $\\times$ '
+                        '$2$회차에 $4$개의 $1$ 중 하나($4$가지) $= 1 \\times 4 = \\mathbf{4}\\text{가지}$</li>\n'
+                        '      <li>④ $\\mathrm{B} = (2, 2)$ ($1$회차 $2$, $2$회차 $2$): 주머니 $\\mathrm{B}$에는 $2$가 적힌 공이 '
+                        '<b>단 $1$개뿐</b>이므로 비복원 추출에서 두 번 연속 $2$가 나오는 경우는 $\\mathbf{0}\\text{가지(불가능)}$</li>\n'
+                        '      <li><i>(합계 검산: $12 + 4 + 4 + 0 = 20$가지)</i></li>\n'
+                        '    </ul>\n'
+                        '  </li>\n'
+                        '  <li><b>전체 근원사건의 수 $n(S)$</b>: 두 주머니에서 동시에 시행하므로 곱의 법칙에 의해\n'
+                        '    $$n(S) = 20 \\times 20 = \\mathbf{400}\\text{가지}$$</li>\n'
+                        '</ul>\n'
                         '\n'
-                        '<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>\n'
+                        '<h4>📐 [3. 단계별 상세 풀이 ①: 조건부확률의 분모 $n(E) = 336$ 구하기]</h4>\n'
+                        '<p>사건 $E$ ($a_1 = 1$이고 $a_2 = 1$)의 경우의 수는 전체 $400$가지에서 <b>여사건 $E^c$ ($a_1 = 2$ 또는 $a_2 = 2$가 '
+                        '되어 탈락하는 경우)</b>를 빼서 구합니다.</p>\n'
+                        '<ul>\n'
+                        '  <li><b>(탈락 1) $1$회차에 $a_1 = 2$인 경우 ($\\mathrm{A}_1 = 2$이고 $\\mathrm{B}_1 = 2$)</b>:\n'
+                        '    <ul>\n'
+                        '      <li>주머니 $\\mathrm{A}$가 $1$회차에 $2$를 꺼내는 가짓수: 위 분해표에서 $\\mathrm{A}=(2,1)$인 $6$가지 $+$ '
+                        '$\\mathrm{A}=(2,2)$인 $2$가지 $= \\mathbf{8}\\text{가지}$<br>\n'
+                        '        <i>(또는 $1$회차에 $2$인 공 $2$개 중 택1($2$가지) $\\times$ $2$회차에 남은 공 $4$개 중 택1($4$가지) $= 2 '
+                        '\\times 4 = 8$가지)</i></li>\n'
+                        '      <li>주머니 $\\mathrm{B}$가 $1$회차에 $2$를 꺼내는 가짓수: 위 분해표에서 $\\mathrm{B}=(2,1)$인 '
+                        '$\\mathbf{4}\\text{가지}$<br>\n'
+                        '        <i>(또는 $1$회차에 유일한 $2$ 택1($1$가지) $\\times$ $2$회차에 남은 공 $4$개 중 택1($4$가지) $= 1 \\times 4 '
+                        '= 4$가지)</i></li>\n'
+                        '      <li>따라서 $n(a_1 = 2) = 8 \\times 4 = \\mathbf{32}\\text{가지}$입니다.</li>\n'
+                        '    </ul>\n'
+                        '  </li>\n'
+                        '  <li><b>(탈락 2) $2$회차에 $a_2 = 2$인 경우 ($\\mathrm{A}_2 = 2$이고 $\\mathrm{B}_2 = 2$)</b>:\n'
+                        '    <ul>\n'
+                        '      <li>주머니 $\\mathrm{A}$가 $2$회차에 $2$를 꺼내는 가짓수: 위 분해표에서 $\\mathrm{A}=(1,2)$인 $6$가지 $+$ '
+                        '$\\mathrm{A}=(2,2)$인 $2$가지 $= \\mathbf{8}\\text{가지}$<br>\n'
+                        '        <i>(또는 $2$회차에 $2$인 공 $2$개 중 택1($2$가지) $\\times$ $1$회차에 남은 공 $4$개 중 택1($4$가지) $= 2 '
+                        '\\times 4 = 8$가지)</i></li>\n'
+                        '      <li>주머니 $\\mathrm{B}$가 $2$회차에 $2$를 꺼내는 가짓수: 위 분해표에서 $\\mathrm{B}=(1,2)$인 '
+                        '$\\mathbf{4}\\text{가지}$<br>\n'
+                        '        <i>(또는 $2$회차에 유일한 $2$ 택1($1$가지) $\\times$ $1$회차에 남은 공 $4$개 중 택1($4$가지) $= 1 \\times 4 '
+                        '= 4$가지)</i></li>\n'
+                        '      <li>따라서 $n(a_2 = 2) = 8 \\times 4 = \\mathbf{32}\\text{가지}$입니다.</li>\n'
+                        '    </ul>\n'
+                        '  </li>\n'
+                        '  <li><b>(중복 확인) $a_1 = 2$이면서 동시에 $a_2 = 2$인 경우</b>:\n'
+                        '    <ul>\n'
+                        '      <li>두 회차 모두 $2$가 되려면 주머니 $\\mathrm{B}$에서도 $1, 2$회차 연속으로 $2$를 뽑아야 하지만, 주머니 '
+                        '$\\mathrm{B}$에는 $2$가 단 $1$개뿐이므로 $\\mathrm{B}=(2,2)$는 $0$가지입니다.</li>\n'
+                        '      <li>즉, $n(a_1 = 2 \\cap a_2 = 2) = \\mathbf{0}$ (두 사건은 배반사건)입니다.</li>\n'
+                        '    </ul>\n'
+                        '  </li>\n'
+                        '</ul>\n'
+                        '<p>따라서 조건부확률의 분모 $n(E)$는:\n'
+                        '$$n(E) = 400 - (32 + 32 - 0) = 400 - 64 = \\mathbf{336}\\text{가지}$$</p>\n'
+                        '\n'
+                        '<h4>🎯 [4. 단계별 상세 풀이 ②: 조건부확률의 분자 $n(E \\cap F) = 96$ 구하기]</h4>\n'
+                        '<p>사건 $E \\cap F$는 <b>"$a_1 = 1$이고 $a_2 = 1$이면서, 동시에 $2$번 시행 후 주머니 $\\mathrm{B}$에 숫자 $1$이 적힌 '
+                        '공이 $3$개 남아 있는 사건"</b>입니다.<br>\n'
+                        '처음에 주머니 $\\mathrm{B}$에는 숫자 $1$이 $4$개, 숫자 $2$가 $1$개 있었으므로, $2$번 꺼낸 후 $\\mathrm{B}$에 숫자 $1$이 '
+                        '$3$개 남으려면 $2$번의 시행 동안 <b>주머니 $\\mathrm{B}$에서 숫자 $1$이 정확히 $1$개($4-3=1$), 숫자 $2$가 정확히 $1$개 '
+                        '빠져나가야 합니다.</b><br>\n'
+                        '즉, 주머니 $\\mathrm{B}$의 $(1\\text{회차}, 2\\text{회차})$ 추출 결과는 반드시 <b>[케이스 ①] $\\mathrm{B} = (1, '
+                        '2)$</b> 이거나 <b>[케이스 ②] $\\mathrm{B} = (2, 1)$</b> 두 가지뿐입니다.</p>\n'
+                        '<ul>\n'
+                        '  <li><b>[케이스 ①] 주머니 $\\mathrm{B}$가 $1$회차에 $1$, $2$회차에 $2$를 꺼내는 경우 ($\\mathrm{B} = (1, '
+                        '2)$)</b>:\n'
+                        '    <ol>\n'
+                        '      <li><b>주머니 $\\mathrm{B}$의 가짓수</b>: $1$회차에 $4$개의 $1$ 중 하나($4$가지) $\\times$ $2$회차에 유일한 '
+                        '$2$($1$가지) $= 4 \\times 1 = \\mathbf{4}\\text{가지}$</li>\n'
+                        '      <li><b>주머니 $\\mathrm{A}$의 조건 해석</b>:\n'
+                        '        <br>&nbsp;&nbsp;• <b>$1$회차</b>: 주머니 $\\mathrm{B}$가 이미 $1$을 뽑았으므로($\\mathrm{B}_1 = '
+                        '1$), 주머니 $\\mathrm{A}$가 $1$회차에 $1$을 뽑든 $2$를 뽑든 $a_1 = \\min(\\mathrm{A}_1, 1) = 1$이 무조건 '
+                        '성립합니다.\n'
+                        '        <br>&nbsp;&nbsp;• <b>$2$회차</b>: 주머니 $\\mathrm{B}$가 $2$를 뽑았으므로($\\mathrm{B}_2 = 2$), '
+                        '만약 $\\mathrm{A}$도 $2$회차에 $2$를 뽑으면 $a_2 = \\min(2, 2) = 2$가 되어 탈락합니다! 따라서 $a_2 = 1$이 되려면 '
+                        '<b>주머니 $\\mathrm{A}$는 $2$회차에 반드시 숫자 $1$을 꺼내야 합니다 ($\\mathrm{A}_2 = 1$)!</b></li>\n'
+                        '      <li><b>주머니 $\\mathrm{A}$에서 $\\mathrm{A}_2 = 1$이 되는 가짓수($12$가지)를 구하는 두 가지 방법</b>:\n'
+                        '        <br>&nbsp;&nbsp;• <b>[방법 A: 시행 순서대로 $1\\text{회차} \\to 2\\text{회차}$ 나누어 세기]</b>\n'
+                        '        <br>&nbsp;&nbsp;&nbsp;&nbsp;- (가) $\\mathrm{A}$가 $1$회차에 $1$, $2$회차에도 $1$을 뽑는 경우 '
+                        '$\\mathrm{A} = (1, 1)$: $3 \\times 2 = 6$가지\n'
+                        '        <br>&nbsp;&nbsp;&nbsp;&nbsp;- (나) $\\mathrm{A}$가 $1$회차에 $2$, $2$회차에 $1$을 뽑는 경우 '
+                        '$\\mathrm{A} = (2, 1)$: $2 \\times 3 = 6$가지\n'
+                        '        <br>&nbsp;&nbsp;&nbsp;&nbsp;- 합하면 $6 + 6 = \\mathbf{12}\\text{가지}$!\n'
+                        '        <br>&nbsp;&nbsp;• <b>[방법 B: 조건이 걸린 $2$회차를 먼저 고정하고 세기]</b>\n'
+                        '        <br>&nbsp;&nbsp;&nbsp;&nbsp;- $2$회차에 들어갈 숫자 $1$인 공($3$개 중 하나)을 먼저 고르는 방법: $3$가지\n'
+                        '        <br>&nbsp;&nbsp;&nbsp;&nbsp;- $1$회차에는 방금 고른 공을 제외한 나머지 $4$개의 공 중 아무거나 고르는 방법: $4$가지\n'
+                        '        <br>&nbsp;&nbsp;&nbsp;&nbsp;- 곱하면 $3 \\times 4 = \\mathbf{12}\\text{가지}$!</li>\n'
+                        '      <li><b>케이스 ①의 경우의 수</b>: $(\\text{주머니 B의 } 4\\text{가지}) \\times (\\text{주머니 A의 } '
+                        '12\\text{가지}) = 4 \\times 12 = \\mathbf{48}\\text{가지}$</li>\n'
+                        '    </ol>\n'
+                        '  </li>\n'
+                        '  <li><b>[케이스 ②] 주머니 $\\mathrm{B}$가 $1$회차에 $2$, $2$회차에 $1$을 꺼내는 경우 ($\\mathrm{B} = (2, '
+                        '1)$)</b>:\n'
+                        '    <ol>\n'
+                        '      <li><b>주머니 $\\mathrm{B}$의 가짓수</b>: $1$회차에 유일한 $2$($1$가지) $\\times$ $2$회차에 $4$개의 $1$ 중 '
+                        '하나($4$가지) $= 1 \\times 4 = \\mathbf{4}\\text{가지}$</li>\n'
+                        '      <li><b>주머니 $\\mathrm{A}$의 조건 해석</b>:\n'
+                        '        <br>&nbsp;&nbsp;• <b>$1$회차</b>: 이번에는 주머니 $\\mathrm{B}$가 $1$회차에 $2$를 '
+                        '뽑았으므로($\\mathrm{B}_1 = 2$), $a_1 = 1$이 되려면 <b>주머니 $\\mathrm{A}$는 $1$회차에 반드시 숫자 $1$을 꺼내야 합니다 '
+                        '($\\mathrm{A}_1 = 1$)!</b>\n'
+                        '        <br>&nbsp;&nbsp;• <b>$2$회차</b>: 주머니 $\\mathrm{B}$가 $2$회차에 $1$을 뽑았으므로($\\mathrm{B}_2 = '
+                        '1$), $\\mathrm{A}$가 $2$회차에 무엇을 뽑아도 $a_2 = 1$이 자동 성립합니다.</li>\n'
+                        '      <li><b>주머니 $\\mathrm{A}$에서 $\\mathrm{A}_1 = 1$이 되는 가짓수($12$가지)</b>:\n'
+                        '        <br>&nbsp;&nbsp;• <b>[방법 A: $1\\text{회차} \\to 2\\text{회차}$ 분류]</b> $\\mathrm{A} = (1, '
+                        '1)$인 $3 \\times 2 = 6$가지 $+$ $\\mathrm{A} = (1, 2)$인 $3 \\times 2 = 6$가지 $= '
+                        '\\mathbf{12}\\text{가지}$\n'
+                        '        <br>&nbsp;&nbsp;• <b>[방법 B: $1$회차 고정 $\\to$ $2$회차 선택]</b> $1$회차에 $1$($3$가지) $\\times$ '
+                        '$2$회차에 남은 공 아무거나($4$가지) $= 3 \\times 4 = \\mathbf{12}\\text{가지}$</li>\n'
+                        '      <li><b>케이스 ②의 경우의 수</b>: $(\\text{주머니 B의 } 4\\text{가지}) \\times (\\text{주머니 A의 } '
+                        '12\\text{가지}) = 4 \\times 12 = \\mathbf{48}\\text{가지}$</li>\n'
+                        '    </ol>\n'
+                        '  </li>\n'
+                        '</ul>\n'
+                        '<p>따라서 조건부확률의 분자 $n(E \\cap F)$는:\n'
+                        '$$n(E \\cap F) = 48 + 48 = \\mathbf{96}\\text{가지}$$</p>\n'
+                        '\n'
+                        '<h4>📊 [5. 한눈에 보는 $400$가지 전체 경우의 수 완전 해부표 (시각적 전수 검산)]</h4>\n'
+                        '<p>주머니 $\\mathrm{A}$의 $4$가지 패턴($6+6+6+2=20$)과 주머니 $\\mathrm{B}$의 $3$가지 패턴($12+4+4=20$)이 만나는 '
+                        '$12$개 칸($400$가지)을 표로 정리하면 분모($336$)와 분자($96$)가 한눈에 확인됩니다.</p>\n'
+                        '<table style="width:100%;border-collapse:collapse;margin:10px '
+                        '0;font-size:0.86rem;text-align:center;border:1px solid rgba(124,196,255,.35)">\n'
+                        '  <thead>\n'
+                        '    <tr style="background:rgba(124,196,255,.16);color:#7cc4ff">\n'
+                        '      <th style="padding:8px;border:1px solid rgba(124,196,255,.25)">$\\mathrm{A} \\backslash '
+                        '\\mathrm{B}$</th>\n'
+                        '      <th style="padding:8px;border:1px solid rgba(124,196,255,.25)">$\\mathrm{B}=(1,1)$ : '
+                        '$12$가지<br><span style="font-size:0.78rem;color:#9aa6c0">($\\mathrm{B}$에 $1$이 $2$개 '
+                        '남음)</span></th>\n'
+                        '      <th style="padding:8px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(94,234,212,.14);color:#5eead4">$\\mathrm{B}=(1,2)$ : '
+                        '$4$가지<br><span style="font-size:0.78rem">🎯 $\\mathrm{B}$에 $1$이 $3$개 남음</span></th>\n'
+                        '      <th style="padding:8px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(94,234,212,.14);color:#5eead4">$\\mathrm{B}=(2,1)$ : '
+                        '$4$가지<br><span style="font-size:0.78rem">🎯 $\\mathrm{B}$에 $1$이 $3$개 남음</span></th>\n'
+                        '    </tr>\n'
+                        '  </thead>\n'
+                        '  <tbody>\n'
+                        '    <tr>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);font-weight:700">$\\mathrm{A}=(1,1)$ : $6$가지</td>\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">$6\\times 12 = '
+                        '72$가지<br><span style="color:#93c5fd">⭕ $a_1=1, a_2=1$ (분모)</span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(94,234,212,.10)"><b>$6\\times 4 = 24$가지</b><br><span '
+                        'style="color:#5eead4">🎯 <b>분자 &amp; 분모</b></span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(94,234,212,.10)"><b>$6\\times 4 = 24$가지</b><br><span '
+                        'style="color:#5eead4">🎯 <b>분자 &amp; 분모</b></span></td>\n'
+                        '    </tr>\n'
+                        '    <tr>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);font-weight:700">$\\mathrm{A}=(1,2)$ : $6$가지</td>\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">$6\\times 12 = '
+                        '72$가지<br><span style="color:#93c5fd">⭕ $a_1=1, a_2=1$ (분모)</span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(251,113,133,.12)">$6\\times 4 = 24$가지<br><span '
+                        'style="color:#fb7185">❌ $a_2=2$ (탈락)</span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(94,234,212,.10)"><b>$6\\times 4 = 24$가지</b><br><span '
+                        'style="color:#5eead4">🎯 <b>분자 &amp; 분모</b></span></td>\n'
+                        '    </tr>\n'
+                        '    <tr>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);font-weight:700">$\\mathrm{A}=(2,1)$ : $6$가지</td>\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">$6\\times 12 = '
+                        '72$가지<br><span style="color:#93c5fd">⭕ $a_1=1, a_2=1$ (분모)</span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(94,234,212,.10)"><b>$6\\times 4 = 24$가지</b><br><span '
+                        'style="color:#5eead4">🎯 <b>분자 &amp; 분모</b></span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(251,113,133,.12)">$6\\times 4 = 24$가지<br><span '
+                        'style="color:#fb7185">❌ $a_1=2$ (탈락)</span></td>\n'
+                        '    </tr>\n'
+                        '    <tr>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);font-weight:700">$\\mathrm{A}=(2,2)$ : $2$가지</td>\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">$2\\times 12 = '
+                        '24$가지<br><span style="color:#93c5fd">⭕ $a_1=1, a_2=1$ (분모)</span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(251,113,133,.12)">$2\\times 4 = 8$가지<br><span '
+                        'style="color:#fb7185">❌ $a_2=2$ (탈락)</span></td>\n'
+                        '      <td style="padding:7px;border:1px solid '
+                        'rgba(124,196,255,.25);background:rgba(251,113,133,.12)">$2\\times 4 = 8$가지<br><span '
+                        'style="color:#fb7185">❌ $a_1=2$ (탈락)</span></td>\n'
+                        '    </tr>\n'
+                        '    <tr style="background:rgba(255,255,255,.06);font-weight:700">\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">열 합계</td>\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">분모 $240$가지</td>\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">🎯분자 $48$ / ❌탈락 '
+                        '$32$</td>\n'
+                        '      <td style="padding:7px;border:1px solid rgba(124,196,255,.25)">🎯분자 $48$ / ❌탈락 '
+                        '$32$</td>\n'
+                        '    </tr>\n'
+                        '  </tbody>\n'
+                        '</table>\n'
+                        '<p>• <b>분모 $n(E)$ 합계</b>: $240 + 48 + 48 = \\mathbf{336}\\text{가지}$ (또는 전체 $400 - \\text{탈락 '
+                        '}(32 + 32) = 336$가지)<br>\n'
+                        '• <b>분자 $n(E \\cap F)$ 합계</b>: 🎯 초록색 칸 $24 + 24 + 24 + 24 = 48 + 48 = '
+                        '\\mathbf{96}\\text{가지}$</p>\n'
+                        '\n'
+                        '<h4>💡 [6. 별해 (Alternative Solution): 경우의 수 대신 확률의 곱셈정리로 직접 구하기]</h4>\n'
+                        '<p>근원사건의 개수를 세지 않고 <b>확률의 덧셈·곱셈정리</b>로도 완전히 동일하게 풀 수 있습니다.</p>\n'
+                        '<ul>\n'
+                        '  <li><b>분모 $\\mathrm{P}(E)$ 구하기</b>:\n'
+                        '    <ul>\n'
+                        '      <li>$1$회차에 둘 다 $2$를 뽑을 확률: $\\mathrm{P}(a_1 = 2) = '
+                        '\\mathrm{P}(\\mathrm{A}_1=2)\\mathrm{P}(\\mathrm{B}_1=2) = \\dfrac{2}{5} \\times '
+                        '\\dfrac{1}{5} = \\dfrac{2}{25}$</li>\n'
+                        '      <li>$2$회차에 둘 다 $2$를 뽑을 확률: 비복원 추출에서 매 회차 특정 숫자가 뽑힐 주변확률은 $1$회차와 동일하므로 $\\mathrm{P}(a_2 '
+                        '= 2) = \\dfrac{2}{5} \\times \\dfrac{1}{5} = \\dfrac{2}{25}$</li>\n'
+                        '      <li>$\\mathrm{B}$에 $2$가 $1$개뿐이므로 $\\mathrm{P}(a_1=2 \\cap a_2=2) = 0$입니다. 따라서:\n'
+                        '        $$\\mathrm{P}(E) = 1 - \\left(\\frac{2}{25} + \\frac{2}{25}\\right) = 1 - '
+                        '\\frac{4}{25} = \\frac{21}{25}$$</li>\n'
+                        '    </ul>\n'
+                        '  </li>\n'
+                        '  <li><b>분자 $\\mathrm{P}(E \\cap F)$ 구하기</b>:\n'
+                        '    <ul>\n'
+                        '      <li>케이스 ① ($\\mathrm{B}=(1,2)$이고 $\\mathrm{A}_2=1$): $\\mathrm{P}(\\mathrm{B}=(1,2)) '
+                        '\\times \\mathrm{P}(\\mathrm{A}_2=1) = \\left(\\dfrac{4}{5} \\times \\dfrac{1}{4}\\right) '
+                        '\\times \\dfrac{3}{5} = \\dfrac{1}{5} \\times \\dfrac{3}{5} = \\dfrac{3}{25}$</li>\n'
+                        '      <li>케이스 ② ($\\mathrm{B}=(2,1)$이고 $\\mathrm{A}_1=1$): $\\mathrm{P}(\\mathrm{B}=(2,1)) '
+                        '\\times \\mathrm{P}(\\mathrm{A}_1=1) = \\left(\\dfrac{1}{5} \\times \\dfrac{4}{4}\\right) '
+                        '\\times \\dfrac{3}{5} = \\dfrac{1}{5} \\times \\dfrac{3}{5} = \\dfrac{3}{25}$</li>\n'
+                        '      <li>따라서 $\\mathrm{P}(E \\cap F) = \\dfrac{3}{25} + \\dfrac{3}{25} = '
+                        '\\dfrac{6}{25}$입니다.</li>\n'
+                        '    </ul>\n'
+                        '  </li>\n'
+                        '  <li><b>조건부확률 계산</b>:\n'
+                        '    $$\\mathrm{P}(F \\mid E) = \\frac{\\mathrm{P}(E \\cap F)}{\\mathrm{P}(E)} = '
+                        '\\frac{6/25}{21/25} = \\frac{6}{21} = \\frac{2}{7}$$</li>\n'
+                        '</ul>\n'
+                        '\n'
+                        '<h4>✨ [7. 정답 도출 및 실전 점검 포인트]</h4>\n'
                         '<p>\n'
-                        '  구하는 조건부확률은:<br>\n'
+                        '  구하는 조건부확률은:\n'
                         '  $$\\mathrm{P}(F \\mid E) = \\frac{n(E \\cap F)}{n(E)} = \\frac{96}{336} = \\frac{48 \\times '
-                        '2}{48 \\times 7} = \\frac{2}{7}$$\n'
-                        '  따라서 $p = 7, q = 2$이므로 $p + q = 7 + 2 =$ <b>$9$</b>입니다.\n'
+                        '2}{48 \\times 7} = \\frac{2}{7} = \\frac{q}{p}$$\n'
+                        '  따라서 서로소인 두 자연수는 $p = 7,\\ q = 2$이므로 최종 정답은 $p + q = 7 + 2 =$ <b>$9$</b>입니다.\n'
                         '</p>',
-            'solution_en': '<h4>📋 [Problem Analysis & Core Concepts]</h4>\n'
-                           '<p>This problem is the #30 killer question in Probability & Statistics, asking for the '
-                           '<b>conditional probability $\\mathrm{P}(F \\mid E) = \\dfrac{n(E \\cap F)}{n(E)}$ under '
-                           'sampling without replacement</b>. Treating all $5$ balls in each bag as distinct makes '
-                           'every ordered pair of draws equally likely.</p>\n'
+            'solution_en': '<h4>📋 [1. Problem Analysis &amp; Core Concepts]</h4>\n'
+                           '<p>This #30 killer question in Probability &amp; Statistics asks for the <b>conditional '
+                           'probability $\\mathrm{P}(F \\mid E) = \\dfrac{\\mathrm{P}(E \\cap F)}{\\mathrm{P}(E)} = '
+                           '\\dfrac{n(E \\cap F)}{n(E)}$ under sampling without replacement</b>. Labeling the balls as '
+                           '$\\mathrm{A} = \\{1_a, 1_b, 1_c, 2_a, 2_b\\}$ and $\\mathrm{B} = \\{1_p, 1_q, 1_r, 1_s, '
+                           '2_p\\}$ makes all $20 \\times 20 = 400$ ordered pairs of draws equally likely.</p>\n'
                            '\n'
-                           '<h4>📐 [Step-by-Step Rigorous Derivation]</h4>\n'
+                           '<h4>🔍 [2. Decomposition of the $20$ Draws in Each Bag]</h4>\n'
+                           '<ul>\n'
+                           '  <li><b>Bag $\\mathrm{A}$ (three $1$s, two $2$s; $5 \\times 4 = 20$ ordered pairs)</b>: '
+                           '$(1,1): 3\\times 2=6$, $(1,2): 3\\times 2=6$, $(2,1): 2\\times 3=6$, $(2,2): 2\\times 1=2$ '
+                           '(Total $= 20$).</li>\n'
+                           '  <li><b>Bag $\\mathrm{B}$ (four $1$s, one $2$; $5 \\times 4 = 20$ ordered pairs)</b>: '
+                           '$(1,1): 4\\times 3=12$, $(1,2): 4\\times 1=4$, $(2,1): 1\\times 4=4$, $(2,2): 0$ (Total $= '
+                           '20$).</li>\n'
+                           '</ul>\n'
+                           '\n'
+                           '<h4>📐 [3. Step-by-Step Rigorous Derivation]</h4>\n'
                            '<p>\n'
-                           '  <b>Step 1: Total outcomes and Denominator $n(E)$ ($a_1 = 1$ and $a_2 = 1$)</b><br>\n'
-                           '  Total ordered outcomes across both bags: $(5 \\times 4) \\times (5 \\times 4) = '
-                           '400$.<br>\n'
-                           '  Since $a_n = 2$ occurs iff both bags draw $2$ in round $n$:<br>\n'
-                           '  - $a_1 = 2$: Bag A draws $2$ first ($2 \\times 4 = 8$ ways) and Bag B draws $2$ first '
-                           '($1 \\times 4 = 4$ ways) $\\implies 8 \\times 4 = 32$ ways.<br>\n'
-                           '  - $a_2 = 2$: By symmetry, $8 \\times 4 = 32$ ways.<br>\n'
-                           "  - $a_1 = 2$ and $a_2 = 2$: Impossible ($0$ ways) because Bag B has only one '$2$'.<br>\n"
-                           '  Thus $n(E) = 400 - (32 + 32) = 336$.<br><br>\n'
+                           '  <b>Step 1: Denominator $n(E)$ ($a_1 = 1$ and $a_2 = 1$) via Complement</b><br>\n'
+                           '  Since $a_n = \\min(\\mathrm{A}_n, \\mathrm{B}_n) = 2$ occurs iff both bags draw $2$ in '
+                           'round $n$:<br>\n'
+                           '  • $a_1 = 2$: Bag A draws $2$ in Round 1 ($6 + 2 = 8$ ways) $\\times$ Bag B draws $2$ in '
+                           'Round 1 ($4$ ways) $= 32$ ways.<br>\n'
+                           '  • $a_2 = 2$: Bag A draws $2$ in Round 2 ($6 + 2 = 8$ ways) $\\times$ Bag B draws $2$ in '
+                           'Round 2 ($4$ ways) $= 32$ ways.<br>\n'
+                           '  • $a_1 = 2$ and $a_2 = 2$: $0$ ways since Bag B has only one ball labeled $2$.<br>\n'
+                           '  Thus $n(E) = 400 - (32 + 32 - 0) = \\mathbf{336}$.<br><br>\n'
                            '  <b>Step 2: Numerator $n(E \\cap F)$ (Three $1$s remain in B and $a_1 = a_2 = '
                            '1$)</b><br>\n'
-                           "  For three $1$s to remain in B (out of four $1$s and one $2$), B must draw one '$1$' and "
-                           "one '$2$':<br>\n"
-                           '  - <b>Case 1: B draws $(1, 2)$</b> ($4 \\times 1 = 4$ ways). Then A must draw $1$ in '
-                           'Round 2 ($3$ choices for Round 2 $\\times$ $4$ remaining balls for Round 1 $= 12$ ways) '
-                           '$\\implies 4 \\times 12 = 48$ ways.<br>\n'
-                           '  - <b>Case 2: B draws $(2, 1)$</b> ($1 \\times 4 = 4$ ways). Then A must draw $1$ in '
-                           'Round 1 ($3 \\times 4 = 12$ ways) $\\implies 4 \\times 12 = 48$ ways.<br>\n'
-                           '  Thus $n(E \\cap F) = 48 + 48 = 96$.\n'
+                           '  For three $1$s to remain in B (out of four $1$s and one $2$), B must draw one $1$ and '
+                           'one $2$:<br>\n'
+                           '  • <b>Case 1: $\\mathrm{B} = (1, 2)$ ($4 \\times 1 = 4$ ways)</b>. Since $\\mathrm{B}_1 = '
+                           '1$, $a_1 = 1$ holds automatically. Since $\\mathrm{B}_2 = 2$, Bag A must draw $1$ in Round '
+                           '2 ($\\mathrm{A}_2 = 1$), which occurs in $12$ ways (Method A: $\\mathrm{A}=(1,1)$ in $6$ '
+                           'ways + $\\mathrm{A}=(2,1)$ in $6$ ways $= 12$; Method B: $3$ choices for Round 2 $\\times$ '
+                           '$4$ remaining balls for Round 1 $= 12$). Product: $4 \\times 12 = \\mathbf{48}$ ways.<br>\n'
+                           '  • <b>Case 2: $\\mathrm{B} = (2, 1)$ ($1 \\times 4 = 4$ ways)</b>. Since $\\mathrm{B}_1 = '
+                           '2$, Bag A must draw $1$ in Round 1 ($\\mathrm{A}_1 = 1$), which occurs in $12$ ways '
+                           '($\\mathrm{A}=(1,1)$ in $6$ ways + $\\mathrm{A}=(1,2)$ in $6$ ways $= 12$). Product: $4 '
+                           '\\times 12 = \\mathbf{48}$ ways.<br>\n'
+                           '  Thus $n(E \\cap F) = 48 + 48 = \\mathbf{96}$.\n'
                            '</p>\n'
                            '\n'
-                           '<h4>✨ [Final Answer & Practical Tips]</h4>\n'
+                           '<h4>💡 [4. Alternative Solution via Probability Rules]</h4>\n'
                            '<p>\n'
-                           '  $$\\mathrm{P}(F \\mid E) = \\frac{96}{336} = \\frac{2}{7} \\implies p = 7,\\ q = 2 '
-                           '\\implies p + q = \\mathbf{9}$$\n'
+                           '  • $\\mathrm{P}(E) = 1 - \\left(\\dfrac{2}{5}\\cdot\\dfrac{1}{5} + '
+                           '\\dfrac{2}{5}\\cdot\\dfrac{1}{5}\\right) = 1 - \\dfrac{4}{25} = \\dfrac{21}{25}$.<br>\n'
+                           '  • $\\mathrm{P}(E \\cap F) = '
+                           '\\left(\\dfrac{4}{5}\\cdot\\dfrac{1}{4}\\right)\\cdot\\dfrac{3}{5} + '
+                           '\\left(\\dfrac{1}{5}\\cdot\\dfrac{4}{4}\\right)\\cdot\\dfrac{3}{5} = \\dfrac{3}{25} + '
+                           '\\dfrac{3}{25} = \\dfrac{6}{25}$.<br>\n'
+                           '  • $\\mathrm{P}(F \\mid E) = \\dfrac{6/25}{21/25} = \\dfrac{6}{21} = \\dfrac{2}{7}$.\n'
+                           '</p>\n'
+                           '\n'
+                           '<h4>✨ [5. Final Answer &amp; Practical Tips]</h4>\n'
+                           '<p>\n'
+                           '  $$\\mathrm{P}(F \\mid E) = \\frac{96}{336} = \\frac{48 \\times 2}{48 \\times 7} = '
+                           '\\frac{2}{7} \\implies p = 7,\\ q = 2 \\implies p + q = \\mathbf{9}$$\n'
                            '</p>'}}]

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Auto-upgraded with Elementary-to-Advanced Micro-Scaffolding
 
 PART4_PROBLEMS = [{'slug': 'c2610m23',
   'qNum': '미적 23',
@@ -994,9 +993,9 @@ PART4_PROBLEMS = [{'slug': 'c2610m23',
                           'b_3 = 27d$',
               'knowledge': '조건 (나)에서 무한등비급수 $\\sum_{n=k}^\\infty b_n$이 수렴하므로 공비 $r$의 범위는 $-1 < r < 1$ ($r \\neq '
                            '0$)입니다! 또한 $\\{a_n\\}$의 모든 항은 정수이므로 $b_3 = 72r^2$과 $b_4 = 72r^3$도 모두 정수여야 하고, 그 차 $b_4 - '
-                           'b_3 = 72r^2(r - 1) = 27d$는 **$27$의 배수**여야 합니다!<ul><li>$r = -\\dfrac{1}{2}$을 대입해 볼까요? $b_3 '
-                           '= 72 \\times \\dfrac{1}{4} = 18$, $b_4 = 72 \\times \\left(-\\dfrac{1}{8}\\right) = -9$가 '
-                           '되어 $b_4 - b_3 = -9 - 18 = -27$ (정확히 $27 \\times (-1)$!)이 됩니다!</li></ul>',
+                           'b_3 = 72r^2(r - 1) = 27d$는 <b>$27$의 배수</b>여야 합니다!<ul><li>$r = -\\dfrac{1}{2}$을 대입해 볼까요? '
+                           '$b_3 = 72 \\times \\dfrac{1}{4} = 18$, $b_4 = 72 \\times \\left(-\\dfrac{1}{8}\\right) = '
+                           '-9$가 되어 $b_4 - b_3 = -9 - 18 = -27$ (정확히 $27 \\times (-1)$!)이 됩니다!</li></ul>',
               'knowledge_en': 'Since $\\sum_{n=k}^\\infty b_n$ converges, $-1 < r < 1$. Also $b_3 = 72r^2$ and $b_4 = '
                               '72r^3$ must be integers whose difference $72r^2(r-1) = 27d$ is a multiple of $27$. '
                               'Testing $r = -\\frac{1}{2}$ gives $b_3 = 18$ and $b_4 = -9$, so $b_4 - b_3 = -27 = '
@@ -1025,7 +1024,7 @@ PART4_PROBLEMS = [{'slug': 'c2610m23',
                              'exp_en': '$18 - 15 = 3$.'}]},
              {'title': '🌱 4단계 · [조건 (나)의 좌변 등비급수] $\\sum_{n=k}^{\\infty} b_n = \\dfrac{b_k}{1 - r} = 3$에서 $b_k$ 구하기',
               'title_en': '🌱 Step 4 · [LHS Infinite Series] Finding $b_k$ from $\\dfrac{b_k}{1 - (-1/2)} = 3$',
-              'knowledge': '$n = k$부터 시작하는 등비급수 $\\sum_{n=k}^{\\infty} b_n$은 **첫째항이 $b_k$**이고 공비가 $r = '
+              'knowledge': '$n = k$부터 시작하는 등비급수 $\\sum_{n=k}^{\\infty} b_n$은 <b>첫째항이 $b_k$</b>이고 공비가 $r = '
                            '-\\dfrac{1}{2}$입니다! 따라서 등비급수의 합 공식에 의해:$$\\sum_{n=k}^{\\infty} b_n = \\frac{b_k}{1 - '
                            '\\left(-\\frac{1}{2}\\right)} = \\frac{b_k}{\\frac{3}{2}} = \\frac{2}{3}b_k = 3$$',
               'knowledge_en': 'The series $\\sum_{n=k}^\\infty b_n$ starts at $b_k$ with ratio $r = -\\frac{1}{2}$, so '
@@ -1057,8 +1056,8 @@ PART4_PROBLEMS = [{'slug': 'c2610m23',
              {'title': '🌳 6단계 · [새로운 등비급수 분석] 수열 $\\left\\{\\dfrac{b_n}{5^n}\\right\\}$의 첫째항과 공비 구하기',
               'title_en': '🌳 Step 6 · [New Geometric Series] First term and ratio of '
                           '$\\left\\{\\dfrac{b_n}{5^n}\\right\\}$',
-              'knowledge': '$k = 5$를 대입하면 우리가 구해야 할 급수는 $\\sum_{n=1}^{\\infty} \\dfrac{b_n}{5^n}$입니다!<ul><li>**첫째항 ($n '
-                           '= 1$)**: $\\dfrac{b_1}{5^1} = \\dfrac{72}{5}$</li><li>**공비 ($R$)**: $b_n$의 공비 '
+              'knowledge': '$k = 5$를 대입하면 우리가 구해야 할 급수는 $\\sum_{n=1}^{\\infty} \\dfrac{b_n}{5^n}$입니다!<ul><li><b>첫째항 '
+                           '($n = 1$)</b>: $\\dfrac{b_1}{5^1} = \\dfrac{72}{5}$</li><li><b>공비 ($R$)</b>: $b_n$의 공비 '
                            '$-\\dfrac{1}{2}$을 $5$로 나눈 값 $\\implies R = \\dfrac{-1/2}{5} = -\\dfrac{1}{10}$</li></ul>',
               'knowledge_en': 'For $\\sum_{n=1}^\\infty \\frac{b_n}{5^n}$, the first term ($n=1$) is $\\frac{b_1}{5} = '
                               '\\frac{72}{5}$, and the common ratio is $R = \\frac{-1/2}{5} = -\\frac{1}{10}$.',
@@ -1253,10 +1252,10 @@ PART4_PROBLEMS = [{'slug': 'c2610m23',
              {'title': '🌱 4단계 · [총 이동 거리(절댓값 적분) 계산] $1 + \\{1 - \\sin(2\\pi a)\\}^2 = \\dfrac{5}{4}$ 풀기',
               'title_en': '🌱 Step 4 · [Total Variation Distance] Solving $1 + \\{1 - \\sin(2\\pi a)\\}^2 = '
                           '\\dfrac{5}{4}$',
-              'knowledge': "$\\int_0^{2\\pi} |H'(x)|dx = \\dfrac{5}{4}$는 $x = 0$부터 $x = 2\\pi$까지 **$H(x)$가 움직인 총 이동 "
-                           '거리**가 $\\dfrac{5}{4}$라는 뜻입니다!<ul><li>$H(x)$는 $H(0) = 1$에서 출발하여 $ax = \\dfrac{\\pi}{2}$일 때 '
-                           '최솟값 $0$까지 내려갑니다 ($\\implies$ 내려간 거리 $= 1 - 0 = 1$).</li><li>총 이동 거리가 $\\dfrac{5}{4} = 1 + '
-                           '\\dfrac{1}{4}$이 되려면, 최솟값 $0$을 찍은 뒤 $x = 2\\pi$에서의 값 $H(2\\pi) = \\{1 - \\sin(2\\pi '
+              'knowledge': "$\\int_0^{2\\pi} |H'(x)|dx = \\dfrac{5}{4}$는 $x = 0$부터 $x = 2\\pi$까지 <b>$H(x)$가 움직인 총 이동 "
+                           '거리</b>가 $\\dfrac{5}{4}$라는 뜻입니다!<ul><li>$H(x)$는 $H(0) = 1$에서 출발하여 $ax = \\dfrac{\\pi}{2}$일 '
+                           '때 최솟값 $0$까지 내려갑니다 ($\\implies$ 내려간 거리 $= 1 - 0 = 1$).</li><li>총 이동 거리가 $\\dfrac{5}{4} = 1 '
+                           '+ \\dfrac{1}{4}$이 되려면, 최솟값 $0$을 찍은 뒤 $x = 2\\pi$에서의 값 $H(2\\pi) = \\{1 - \\sin(2\\pi '
                            'a)\\}^2$이 정확히 $\\dfrac{1}{4}$만큼만 다시 올라가야 합니다!</li></ul>',
               'knowledge_en': 'Since $H(x)$ starts at $H(0) = 1$ and drops to $0$ at $ax = \\frac{\\pi}{2}$ (distance '
                               '$1$), a total travel distance of $\\frac{5}{4}$ means it must rise from $0$ to '
@@ -1280,8 +1279,8 @@ PART4_PROBLEMS = [{'slug': 'c2610m23',
               'title_en': '🌳 Step 5 · [Determining $a$] Finding $2\\pi a = \\dfrac{5\\pi}{6}$ and $a = \\dfrac{5}{12}$',
               'knowledge': '$H(x)$가 $ax = \\dfrac{\\pi}{2}$에서 최솟값 $0$을 찍고 난 뒤 단조증가하는 구간($\\dfrac{\\pi}{2} < ax < '
                            '\\dfrac{3\\pi}{2}$) 안에 끝점 $2\\pi a$가 있어야 합니다!<ul><li>$\\dfrac{\\pi}{2} < 2\\pi a < '
-                           '\\dfrac{3\\pi}{2}$에서 $\\sin(2\\pi a) = \\dfrac{1}{2}$을 만족시키는 각은 제2사분면의 각 **$2\\pi a = '
-                           '\\dfrac{5\\pi}{6}$**입니다!</li></ul>',
+                           '\\dfrac{3\\pi}{2}$에서 $\\sin(2\\pi a) = \\dfrac{1}{2}$을 만족시키는 각은 제2사분면의 각 <b>$2\\pi a = '
+                           '\\dfrac{5\\pi}{6}$</b>입니다!</li></ul>',
               'knowledge_en': 'Since $2\\pi a$ must lie after the minimum at $\\frac{\\pi}{2}$ and before '
                               '$\\frac{3\\pi}{2}$, $\\sin(2\\pi a) = \\frac{1}{2}$ gives $2\\pi a = \\frac{5\\pi}{6}$.',
               'questions': [{'level_label': '상수 a 구하기 디딤돌 5',
