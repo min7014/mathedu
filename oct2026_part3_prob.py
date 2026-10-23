@@ -869,238 +869,501 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
   'title': '[2026학년도 10월 고3 확통 29번] 두 정규분포의 대칭성과 확률밀도함수의 비교',
   'title_en': '[2026 AY Oct Exam Grade 12 Prob&Stats #29] Symmetry of Two Normal Distributions and Probability Density '
               'Comparison',
-  'summary_ko': '조건 (가) $f(x)\\le f(4)$에서 $m_1=4$를 찾고, 대칭 구간 합 $\\mathrm{P}(6\\le X\\le 9)=\\mathrm{P}(11\\le Y\\le '
-                '14)$와 조건 (나) $f(5)=g(15)$에서 $m_2=16$을 구하여 $1000k=345$ 도출하기',
-  'summary_en': 'Find $m_1=4$ from $f(x)\\le f(4)$ in (가), merge symmetric intervals into $\\mathrm{P}(6\\le X\\le '
-                '9)=\\mathrm{P}(11\\le Y\\le 14)$ and combine with $f(5)=g(15)$ to get $m_2=16$, yielding $1000k=345$.',
+  'summary_ko': '표준화 변수 $Z_1=\\dfrac{X-m_1}{10},\\ Z_2=\\dfrac{Y-m_2}{10} \\sim \\mathrm{N}(0,1)$을 설정하고, 조건 (가) '
+                '$f(x)\\le f(4)$에서 대칭축 $m_1=4$를 찾은 뒤, 좌변을 표준화·대칭 결합하여 $\\mathrm{P}(-0.3\\le Z\\le '
+                '-0.2)+\\mathrm{P}(0.3\\le Z\\le 0.5)=(\\cancel{0.118}-0.079)+(0.191-\\cancel{0.118})=0.112$를 구하고, 조건 '
+                '(나) $f(5)=g(15)$의 두 대칭 케이스 $\\text{Case 1}(m_2=16)$과 $\\text{Case 2}(m_2=14)$ 중 $\\mathrm{P}(11\\le '
+                'Y\\le 14)=0.112$를 만족하는 $m_2=16$을 확정하여 $\\mathrm{P}(Y\\ge 20)=\\mathrm{P}(Z\\ge 0.4)=0.5-0.155=0.345 '
+                '\\implies 1000k=345$ 도출하기',
+  'summary_en': 'Set $Z_1=\\dfrac{X-m_1}{10},\\ Z_2=\\dfrac{Y-m_2}{10} \\sim \\mathrm{N}(0,1)$. From (가) $f(x)\\le '
+                'f(4)$, find the symmetry axis $m_1=4$. Standardize and geometrically merge the left-hand side into '
+                '$\\mathrm{P}(-0.3\\le Z\\le -0.2)+\\mathrm{P}(0.3\\le Z\\le '
+                '0.5)=(\\cancel{0.118}-0.079)+(0.191-\\cancel{0.118})=0.112$. Test the two symmetric cases of '
+                '$f(5)=g(15)$ ($\\text{Case 1}: m_2=16$ vs. $\\text{Case 2}: m_2=14$) against $\\mathrm{P}(11\\le '
+                'Y\\le 14)=0.112$ to confirm $m_2=16$, yielding $\\mathrm{P}(Y\\ge 20)=\\mathrm{P}(Z\\ge '
+                '0.4)=0.5-0.155=0.345$ and $1000k=345$.',
   'tags': ['확률과 통계', '통계', '정규분포', '확률밀도함수', '대칭성', '표준화', '단답형', '29번'],
-  'symbols': [{'sym': '$f(x) \\le f(4) \\implies m_1 = 4$',
-               'desc': '정규분포 곡선의 가장 높은 봉우리(최댓값)가 $x=4$이므로 평균 $m_1=4$',
-               'desc_en': 'The peak of the normal density $f(x)$ is at $x=4$, so the mean is $m_1=4$.'},
-              {'sym': '$\\mathrm{P}(1 \\le X \\le 2) = \\mathrm{P}(6 \\le X \\le 7)$',
-               'desc': '평균 $m_1=4$에 대한 좌우 대칭으로 $[1, 2]$를 $[6, 7]$로 옮겨 $[7, 9]$와 이어붙임',
-               'desc_en': 'By symmetry about $m_1=4$, $[1, 2]$ reflects to $[6, 7]$ and joins $[7, 9]$.'},
-              {'sym': '$f(5) = g(15) \\iff |5 - 4| = |15 - m_2| = 1$',
-               'desc': '표준편차가 $10$으로 같은 두 정규분포에서 함숫값이 같으려면 평균으로부터 떨어진 거리가 같아야 함',
-               'desc_en': 'With equal standard deviations $\\sigma=10$, equal density values mean equal distances from '
-                          'the mean.'}],
-  'levels': [{'title': '🔰 1단계 · [초등 산봉우리 꼭대기 찾기] 조건 (가) $f(x) \\le f(4)$에서 평균 $m_1$ 구하기',
-              'title_en': '🔰 Step 1 · [Elementary Peak Finding] Finding the mean $m_1$ from $f(x) \\le f(4)$',
-              'knowledge': '초등학교 그래프 읽기처럼 정규분포의 확률밀도함수 $f(x)$는 <b>평균 $x = m_1$에서 가장 높은 산봉우리(최댓값)</b>를 가지는 좌우 대칭 종 모양 '
-                           "곡선입니다! 조건 (가)에서 '모든 실수 $x$에 대하여 $f(x) \\le f(4)$'라는 뜻은 $x = 4$에서의 높이가 가장 높다는 뜻입니다.",
-              'knowledge_en': 'Like reading the highest peak of a hill in elementary math, a normal density curve '
-                              '$f(x)$ reaches its maximum at the mean $x = m_1$. Condition (가) $f(x) \\le f(4)$ tells '
-                              'us the highest peak is at $x = 4$.',
-              'questions': [{'level_label': '초등 최댓값 봉우리 디딤돌 1',
-                             'level_label_en': 'Elementary Peak Step 1',
-                             'stem': '초등학교 그래프에서 가장 높은 곳을 찾듯이, 모든 실수 $x$에 대하여 $f(x) \\le f(4)$일 때 정규분포 '
-                                     '$\\mathrm{N}(m_1, 10^2)$의 평균 $m_1$의 값은?',
-                             'stem_en': 'Since $f(x) \\le f(4)$ for all real $x$, what is the mean $m_1$ of $X \\sim '
-                                        '\\mathrm{N}(m_1, 10^2)$?',
+  'symbols': [{'sym': '$Z_1 = \\dfrac{X - m_1}{10} \\sim \\mathrm{N}(0,1),\\quad Z_2 = \\dfrac{Y - m_2}{10} \\sim '
+                      '\\mathrm{N}(0,1)$',
+               'desc': '표준편차가 $\\sigma=10$으로 같은 두 정규분포 $X, Y$는 종 모양 곡선 $f(x), g(x)$가 완전히 합동(평행이동 관계)이며, 평균을 빼고 $10$으로 '
+                       '나누면 표준정규분포 $\\mathrm{N}(0,1)$로 통일됨',
+               'desc_en': 'Since both $X$ and $Y$ have $\\sigma=10$, their bell curves $f(x)$ and $g(x)$ are congruent '
+                          'translations and standardize to $Z_1, Z_2 \\sim \\mathrm{N}(0,1)$.'},
+              {'sym': '$f(x) \\le f(4) \\implies m_1 = 4 \\quad \\& \\quad f(5) = g(15) \\implies m_2 = 16 \\text{ 또는 '
+                      '} 14$',
+               'desc': '곡선 $f$의 가장 높은 산봉우리(대칭축)는 $m_1=4$이고, $x=5$(대칭축에서 거리 $1$)와 높이가 같은 곡선 $g$ 위의 점 $15$는 대칭축 $m_2$의 '
+                       '왼쪽($\\text{Case 1}: m_2=16$) 또는 오른쪽($\\text{Case 2}: m_2=14$)에 위치함',
+               'desc_en': 'The peak of $f$ is at $m_1=4$. On congruent curve $g$, $g(15)=f(5)$ places $15$ either $1$ '
+                          'unit left of $m_2$ ($\\text{Case 1}: m_2=16$) or $1$ unit right of $m_2$ ($\\text{Case 2}: '
+                          'm_2=14$).'},
+              {'sym': '$\\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5) = \\cancel{0.118} - '
+                      '0.079 + 0.191 - \\cancel{0.118} = 0.112$',
+               'desc': '기하학적으로 왼쪽 조각 $[-0.3, -0.2]$를 $Z=0$에 대칭이동한 $[0.2, 0.3]$이 $[0.3, 0.5]$와 경계 $Z=0.3$($0.118$)에서 '
+                       '맞물려 이어붙여지므로 $0.118$이 상쇄되고 연속 구간 $[0.2, 0.5]$의 넓이 $0.112$가 됨',
+               'desc_en': 'Geometrically reflecting $[-0.3, -0.2]$ to $[0.2, 0.3]$ joins $[0.3, 0.5]$ at $Z=0.3$, '
+                          'canceling $0.118$ and forming $[0.2, 0.5]$ of area $0.191 - 0.079 = 0.112$.'},
+              {'sym': '$\\text{Case 1 }(m_2=16): 0.112\\text{ (O.K.)} \\quad \\text{vs} \\quad \\text{Case 2 '
+                      '}(m_2=14): 0.118\\text{ (}\\times\\text{)}$',
+               'desc': '$\\mathrm{P}(11\\le Y\\le 14)$를 표준화할 때 $m_2=16$이면 $\\mathrm{P}(-0.5\\le Z\\le '
+                       '-0.2)=0.191-0.079=0.112$로 좌변과 합동이지만, $m_2=14$이면 $\\mathrm{P}(-0.3\\le Z\\le 0)=0.118$이 되어 모순!',
+               'desc_en': 'Standardizing $\\mathrm{P}(11\\le Y\\le 14)$ gives $\\mathrm{P}(-0.5\\le Z\\le -0.2)=0.112$ '
+                          'for $\\text{Case 1 }(m_2=16)$ (valid) vs. $\\mathrm{P}(-0.3\\le Z\\le 0)=0.118$ for '
+                          '$\\text{Case 2 }(m_2=14)$ (invalid).'}],
+  'levels': [{'title': '🔰 1단계 · [초등 산봉우리 꼭대기 찾기] 조건 (가) $f(x) \\le f(4)$에서 곡선 $f$의 대칭축(평균) $m_1$ 구하기',
+              'title_en': '🔰 Step 1 · [Elementary Peak Finding] Finding the symmetry axis (mean) $m_1$ from $f(x) \\le '
+                          'f(4)$',
+              'knowledge': '초등학교 그래프 읽기처럼 정규분포 $X \\sim \\mathrm{N}(m_1, 10^2)$의 확률밀도함수 $y = f(x)$는 <b>대칭축인 평균 $x = '
+                           'm_1$에서 가장 높은 산봉우리 꼭대기(최댓값)</b>를 가지는 좌우 대칭 종 모양 곡선입니다! 조건 (가)에서 '
+                           '$\\underline{\\underline{f(x) \\le f(4)}}$라는 뜻은 모든 실수 $x$ 중에서 $x = 4$일 때 곡선의 높이가 가장 높다는 '
+                           '뜻이므로, 곡선 $f$의 대칭축(평균)은 <b>$m_1 = 4$</b>이고 표준화 변수는 $Z_1 = \\dfrac{X - 4}{10} \\sim '
+                           '\\mathrm{N}(0, 1)$이 됩니다.',
+              'knowledge_en': 'Like finding the highest peak of a hill in elementary math, the normal density curve $y '
+                              '= f(x)$ of $X \\sim \\mathrm{N}(m_1, 10^2)$ is symmetric and reaches its unique maximum '
+                              'at the mean $x = m_1$. Condition (가) $f(x) \\le f(4)$ means the peak is at $x = 4$, so '
+                              '$m_1 = 4$ and $Z_1 = \\dfrac{X - 4}{10} \\sim \\mathrm{N}(0, 1)$.',
+              'questions': [{'level_label': '초등 산봉우리 대칭축 디딤돌 1',
+                             'level_label_en': 'Bell Curve Peak Step 1',
+                             'stem': '종 모양 곡선 $y = f(x)$에서 가장 높은 곳을 찾듯이, 모든 실수 $x$에 대하여 $f(x) \\le f(4)$일 때 정규분포 '
+                                     '$\\mathrm{N}(m_1, 10^2)$의 대칭축(평균) $m_1$의 값은?',
+                             'stem_en': 'Since $f(x) \\le f(4)$ for all real $x$, what is the symmetry axis (mean) '
+                                        '$m_1$ of $X \\sim \\mathrm{N}(m_1, 10^2)$?',
                              'options': ['$2$', '$3$', '$4$', '$5$', '$6$'],
                              'answer': 3,
-                             'exp': '$x = 4$에서 함숫값이 최대이므로 대칭축인 평균은 $m_1 = 4$입니다.',
-                             'exp_en': 'The maximum occurs at the mean, so $m_1 = 4$.'}]},
-             {'title': '🌿 2단계 · [초등 수직선 거울 대칭] 평균 $m_1 = 4$를 기준으로 구간 $[1, 2]$를 반대쪽으로 접기',
-              'title_en': '🌿 Step 2 · [Mirror Symmetry on a Number Line] Reflecting $[1, 2]$ across $m_1 = 4$',
-              'knowledge': '수직선에서 중심 $4$를 거울 삼아 왼쪽의 숫자를 오른쪽으로 똑같은 거리만큼 옮겨 봅시다.<ul><li>$2$는 $4$보다 왼쪽으로 $2$칸($4 - 2 = '
-                           '2$) 떨어져 있으므로, 오른쪽으로 $2$칸 가면 $4 + 2 = 6$입니다.</li><li>$1$은 $4$보다 왼쪽으로 $3$칸($4 - 1 = 3$) 떨어져 '
-                           '있으므로, 오른쪽으로 $3$칸 가면 $4 + 3 = 7$입니다.</li></ul>따라서 좌우 대칭에 의해 $\\mathrm{P}(1 \\le X \\le 2) = '
-                           '\\mathrm{P}(6 \\le X \\le 7)$입니다!',
-              'knowledge_en': 'Reflecting across $m_1 = 4$: $2$ ($2$ units left of $4$) maps to $4 + 2 = 6$, and $1$ '
-                              '($3$ units left of $4$) maps to $4 + 3 = 7$. Thus $\\mathrm{P}(1 \\le X \\le 2) = '
-                              '\\mathrm{P}(6 \\le X \\le 7)$.',
-              'questions': [{'level_label': '수직선 대칭 이동 디딤돌 2',
-                             'level_label_en': 'Symmetric Reflection Step 2',
-                             'stem': '평균 $m_1 = 4$에 대하여 구간 $1 \\le X \\le 2$와 넓이(확률)가 똑같은 오른쪽 대칭 구간은?',
-                             'stem_en': 'By symmetry about $m_1 = 4$, which interval on the right has the exact same '
-                                        'probability as $1 \\le X \\le 2$?',
-                             'options': ['$4 \\le X \\le 5$',
-                                         '$5 \\le X \\le 6$',
-                                         '$6 \\le X \\le 7$',
-                                         '$7 \\le X \\le 8$',
-                                         '$8 \\le X \\le 9$'],
+                             'exp': '<b>[1단계 기하학적 해설]</b><br>정규분포 확률밀도함수 $f(x)$는 대칭축 $x = m_1$에서 최댓값을 가집니다. 모든 실수 $x$에 '
+                                    '대하여 $f(x) \\le f(4)$이므로 산봉우리 꼭대기(대칭축)는 $m_1 = 4$입니다.',
+                             'exp_en': '<b>[Step 1 Geometric Explanation]</b><br>A normal density curve $f(x)$ attains '
+                                       'its global maximum at its symmetry axis $x = m_1$. Thus $f(x) \\le f(4)$ '
+                                       'implies $m_1 = 4$.'}]},
+             {'title': '🌿 2단계 · [두 종 모양 곡선 $f, g$의 합동과 대칭점] 조건 (나) $f(5) = g(15)$에서 $\\text{Case 1}, \\text{Case 2}$ '
+                       '나누기',
+              'title_en': '🌿 Step 2 · [Congruent Bell Curves $f, g$ & Symmetric Points] Splitting $f(5) = g(15)$ into '
+                          'Case 1 and Case 2',
+              'knowledge': '두 확률변수 $X \\sim \\mathrm{N}(4, 10^2)$과 $Y \\sim \\mathrm{N}(m_2, 10^2)$는 <b>표준편차가 $\\sigma '
+                           '= 10$으로 똑같기 때문에</b> 두 종 모양 곡선 $y = f(x)$와 $y = g(x)$는 평행이동하면 완전히 포개어지는 <b>합동 '
+                           '도형</b>입니다!<ul><li>왼쪽 곡선 $f$: 대칭축 $m_1 = 4$에서 오른쪽으로 $1$칸 떨어진 $x = 5$($5 - 4 = 1$)에서의 높이가 '
+                           '$f(5)$입니다.</li><li>오른쪽 곡선 $g$: 모양이 똑같은 곡선 $g$에서 높이가 $f(5)$와 같아지는 지점($g(15) = f(5)$)은 대칭축 '
+                           '$m_2$로부터 <b>거리가 $1$만큼 떨어진 왼쪽 비탈면과 오른쪽 비탈면 두 곳</b>에 대칭으로 존재합니다!</li><li><b>$\\text{Case 1}$ '
+                           '($15$가 대칭축 $m_2$의 왼쪽에 있는 경우)</b>: $15$가 $m_2$보다 $1$칸 작으므로 $m_2 - 1 = 15 \\implies '
+                           '\\underline{m_2 = 16}$</li><li><b>$\\text{Case 2}$ ($15$가 대칭축 $m_2$의 오른쪽에 있는 경우)</b>: '
+                           '$15$가 $m_2$보다 $1$칸 크므로 $m_2 + 1 = 15 \\implies \\underline{m_2 = 14}$</li></ul>',
+              'knowledge_en': 'Because $X$ and $Y$ have the same standard deviation $\\sigma = 10$, the bell curves '
+                              '$f(x)$ and $g(x)$ are congruent. On curve $f$, $x = 5$ lies at distance $1$ from the '
+                              'peak $m_1 = 4$. On curve $g$, a point at height $g(15) = f(5)$ must also lie at '
+                              'distance $1$ from the peak $m_2$: either $15$ is $1$ unit to the left of $m_2$ '
+                              '(<b>$\\text{Case 1}: m_2 = 16$</b>) or $1$ unit to the right of $m_2$ (<b>$\\text{Case '
+                              '2}: m_2 = 14$</b>).',
+              'questions': [{'level_label': '두 곡선 합동과 대칭점 디딤돌 2',
+                             'level_label_en': 'Congruent Curves & Cases Step 2',
+                             'stem': '합동인 두 종 모양 곡선 $f, g$에서 $f(5) = g(15)$일 때, 점 $15$가 곡선 $g$의 대칭축 $m_2$의 왼쪽 $1$칸에 '
+                                     '놓이는 경우($\\text{Case 1}$)와 오른쪽 $1$칸에 놓이는 경우($\\text{Case 2}$)의 평균 $m_2$의 값을 순서대로 '
+                                     '짝지은 것은?',
+                             'stem_en': 'When $f(5) = g(15)$ on congruent bell curves $f$ and $g$, what are the values '
+                                        'of $m_2$ in Case 1 ($15$ is $1$ unit left of $m_2$) and Case 2 ($15$ is $1$ '
+                                        'unit right of $m_2$)?',
+                             'options': ['$\\text{Case 1}: m_2 = 15,\\ \\ \\text{Case 2}: m_2 = 13$',
+                                         '$\\text{Case 1}: m_2 = 14,\\ \\ \\text{Case 2}: m_2 = 16$',
+                                         '$\\text{Case 1}: m_2 = 16,\\ \\ \\text{Case 2}: m_2 = 14$',
+                                         '$\\text{Case 1}: m_2 = 17,\\ \\ \\text{Case 2}: m_2 = 13$',
+                                         '$\\text{Case 1}: m_2 = 16,\\ \\ \\text{Case 2}: m_2 = 15$'],
                              'answer': 3,
-                             'exp': '$4 + (4 - 2) = 6$, $4 + (4 - 1) = 7$이므로 구간 $6 \\le X \\le 7$과 확률이 같습니다.',
-                             'exp_en': 'Reflecting $[1, 2]$ across $4$ gives $[6, 7]$.'}]},
-             {'title': '🌱 3단계 · [구간 이어붙이기] $\\mathrm{P}(6 \\le X \\le 7) + \\mathrm{P}(7 \\le X \\le 9)$를 하나의 구간으로 합치기',
-              'title_en': '🌱 Step 3 · [Joining Intervals] Merging $\\mathrm{P}(6 \\le X \\le 7) + \\mathrm{P}(7 \\le X '
-                          '\\le 9)$',
-              'knowledge': '2단계 덕분에 문제의 좌변 $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9)$는 '
-                           '$\\mathrm{P}(6 \\le X \\le 7) + \\mathrm{P}(7 \\le X \\le 9)$가 되었습니다! $6$부터 $7$까지의 넓이와 '
-                           '$7$부터 $9$까지의 넓이를 이어붙이면 바로 $6$부터 $9$까지의 하나의 연결된 구간 넓이가 됩니다.',
-              'knowledge_en': 'Since $[6, 7]$ and $[7, 9]$ meet at $7$, their probabilities add up to a single '
-                              'continuous interval $\\mathrm{P}(6 \\le X \\le 9)$.',
-              'questions': [{'level_label': '구간 결합 디딤돌 3',
-                             'level_label_en': 'Interval Merge Step 3',
-                             'stem': '$\\mathrm{P}(6 \\le X \\le 7) + \\mathrm{P}(7 \\le X \\le 9)$를 하나의 구간 확률 '
-                                     '$\\mathrm{P}(6 \\le X \\le 9)$로 합쳤을 때, 이 구간 $[6, 9]$는 평균 $m_1 = 4$로부터 오른쪽으로 몇 '
-                                     '칸에서 몇 칸까지 떨어진 구간인가요?',
-                             'stem_en': 'When merged into $\\mathrm{P}(6 \\le X \\le 9)$, how many units to the right '
-                                        'of the mean $m_1 = 4$ does the interval $[6, 9]$ lie?',
-                             'options': ['$1$칸 ~ $3$칸', '$1$칸 ~ $4$칸', '$2$칸 ~ $5$칸', '$3$칸 ~ $6$칸', '$4$칸 ~ $7$칸'],
+                             'exp': '<b>[2단계 기하학적 해설]</b><br>곡선 $f$에서 $x = 5$는 대칭축 $m_1 = 4$에서 거리가 $1$인 점입니다. 곡선 $g$에서 '
+                                    '$15$가 대칭축 $m_2$의 왼쪽 $1$칸에 있으면 $m_2 = 15 + 1 = 16$($\\text{Case 1}$)이고, 오른쪽 $1$칸에 '
+                                    '있으면 $m_2 = 15 - 1 = 14$($\\text{Case 2}$)입니다.',
+                             'exp_en': '<b>[Step 2 Geometric Explanation]</b><br>If $15$ lies $1$ unit to the left of '
+                                       '$m_2$, then $m_2 = 15 + 1 = 16$ (Case 1). If $15$ lies $1$ unit to the right '
+                                       'of $m_2$, then $m_2 = 15 - 1 = 14$ (Case 2).'}]},
+             {'title': '🌱 3단계 · [좌변의 표준화 변환] $Z_1 = \\dfrac{X - 4}{10}$으로 $\\mathrm{P}(1 \\le X \\le 2) + '
+                       '\\mathrm{P}(7 \\le X \\le 9)$ 변환하기',
+              'title_en': '🌱 Step 3 · [Standardizing the LHS] Converting $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 '
+                          '\\le X \\le 9)$ via $Z_1 = \\dfrac{X - 4}{10}$',
+              'knowledge': '$X \\sim \\mathrm{N}(4, 10^2)$이므로 표준화 공식 <b>$Z_1 = \\dfrac{X - 4}{10} \\sim \\mathrm{N}(0, '
+                           '1)$</b>에 좌변의 양 끝점을 대입해 봅시다!<ul><li>첫째 구간 $1 \\le X \\le 2$: $\\dfrac{1 - 4}{10} \\le Z '
+                           '\\le \\dfrac{2 - 4}{10} \\implies \\dfrac{-3}{10} \\le Z \\le \\dfrac{-2}{10} \\implies '
+                           '\\mathbf{-0.3 \\le Z \\le -0.2}$</li><li>둘째 구간 $7 \\le X \\le 9$: $\\dfrac{7 - 4}{10} \\le '
+                           'Z \\le \\dfrac{9 - 4}{10} \\implies \\dfrac{3}{10} \\le Z \\le \\dfrac{5}{10} \\implies '
+                           '\\mathbf{0.3 \\le Z \\le 0.5}$</li></ul>기하학적으로 $Z$의 부호 $(-)$는 대칭축 왼쪽, $(+)$는 대칭축 오른쪽을 뜻하며, '
+                           '숫자는 표준편차($10$) 단위로 잰 상대적 거리입니다!',
+              'knowledge_en': 'Using $Z_1 = \\dfrac{X - 4}{10} \\sim \\mathrm{N}(0, 1)$:<ul><li>$1 \\le X \\le 2 '
+                              '\\implies \\dfrac{-3}{10} \\le Z \\le \\dfrac{-2}{10} \\iff -0.3 \\le Z \\le '
+                              '-0.2$</li><li>$7 \\le X \\le 9 \\implies \\dfrac{3}{10} \\le Z \\le \\dfrac{5}{10} '
+                              '\\iff 0.3 \\le Z \\le 0.5$</li></ul>',
+              'questions': [{'level_label': '좌변 표준화 변환 디딤돌 3',
+                             'level_label_en': 'LHS Standardization Step 3',
+                             'stem': '$X \\sim \\mathrm{N}(4, 10^2)$에서 $Z = \\dfrac{X - 4}{10}$을 이용하여 좌변 '
+                                     '$\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9)$를 표준정규분포 $Z$로 올바르게 '
+                                     '나타낸 것은?',
+                             'stem_en': 'Using $Z = \\dfrac{X - 4}{10}$ for $X \\sim \\mathrm{N}(4, 10^2)$, how is '
+                                        '$\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9)$ expressed in '
+                                        'terms of $Z$?',
+                             'options': ['$\\mathrm{P}(-0.2 \\le Z \\le -0.1) + \\mathrm{P}(0.2 \\le Z \\le 0.4)$',
+                                         '$\\mathrm{P}(-0.3 \\le Z \\le -0.1) + \\mathrm{P}(0.3 \\le Z \\le 0.4)$',
+                                         '$\\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5)$',
+                                         '$\\mathrm{P}(-0.4 \\le Z \\le -0.2) + \\mathrm{P}(0.4 \\le Z \\le 0.6)$',
+                                         '$\\mathrm{P}(-0.5 \\le Z \\le -0.3) + \\mathrm{P}(0.2 \\le Z \\le 0.5)$'],
                              'answer': 3,
-                             'exp': '$6 - 4 = 2$칸, $9 - 4 = 5$칸이므로 평균 $4$로부터 거리가 $2$ 이상 $5$ 이하인 구간입니다!',
-                             'exp_en': '$6 - 4 = 2$ and $9 - 4 = 5$, so it lies from $2$ to $5$ units from the '
-                                       'mean.'}]},
-             {'title': '🌱 4단계 · [조건 (나) $f(5) = g(15)$ 해석] $m_2$의 후보 두 개 찾기',
-              'title_en': '🌱 Step 4 · [Condition (나) $f(5) = g(15)$] Finding the two candidates for $m_2$',
-              'knowledge': '두 확률변수 $X \\sim \\mathrm{N}(4, 10^2)$과 $Y \\sim \\mathrm{N}(m_2, 10^2)$는 <b>표준편차가 $10$으로 '
-                           '똑같기 때문에</b> 종 모양 곡선의 생김새가 완전히 합동입니다! 따라서 두 곡선의 높이가 같으려면($f(5) = g(15)$), 각각의 평균으로부터 떨어진 '
-                           '거리가 같아야 합니다:$$|15 - m_2| = |5 - 4| = 1$$',
-              'knowledge_en': 'Because $X$ and $Y$ share the same standard deviation $\\sigma = 10$, their density '
-                              'curves are congruent. Thus $f(5) = g(15)$ holds iff $15$ is the same distance from '
-                              '$m_2$ as $5$ is from $m_1 = 4$: $|15 - m_2| = |5 - 4| = 1$.',
-              'questions': [{'level_label': '평균으로부터의 거리 디딤돌 4',
-                             'level_label_en': 'Distance from Mean Step 4',
-                             'stem': '$15$와의 거리가 $1$인 수, 즉 $|15 - m_2| = 1$을 만족시키는 $m_2$의 두 후보 값은?',
-                             'stem_en': 'Which two values of $m_2$ satisfy $|15 - m_2| = 1$?',
-                             'options': ['$12$ 또는 $14$',
-                                         '$13$ 또는 $15$',
-                                         '$14$ 또는 $16$',
-                                         '$15$ 또는 $17$',
-                                         '$16$ 또는 $18$'],
-                             'answer': 3,
-                             'exp': '$15 - 1 = 14$ 또는 $15 + 1 = 16$이므로 $m_2$의 후보는 $14$ 또는 $16$입니다.',
-                             'exp_en': '$m_2 = 14$ or $m_2 = 16$.'}]},
-             {'title': '🌳 5단계 · [평균 $m_2$ 확정] $\\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$로 $m_2 = '
-                       '16$ 결정하기',
-              'title_en': '🌳 Step 5 · [Determining $m_2$] Using $\\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y '
-                          '\\le 14)$ to fix $m_2 = 16$',
-              'knowledge': '3단계에서 좌변의 구간 $[6, 9]$는 평균 $m_1 = 4$로부터 <b>거리가 $2 \\sim 5$만큼 떨어진 구간</b>이었습니다. 모양이 똑같은 '
-                           '$Y$에서도 우변 $\\mathrm{P}(11 \\le Y \\le 14)$의 넓이가 같으려면, 구간 $[11, 14]$ 역시 평균 $m_2$로부터 <b>거리가 '
-                           '$2 \\sim 5$만큼 떨어진 구간</b>이어야 합니다!<ul><li>만약 $m_2 = 14$이면 구간 $[11, 14]$는 평균 $14$로부터 거리가 $0 '
-                           '\\sim 3$이어서 넓이가 다릅니다(탈락!).</li><li>만약 $m_2 = 16$이면 $16 - 14 = 2$, $16 - 11 = 5$이므로 평균 '
-                           '$16$으로부터 거리가 정확히 $2 \\sim 5$가 되어 일치합니다!</li></ul>',
-              'knowledge_en': 'For $\\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$ to hold, $[11, 14]$ '
-                              'must also lie at distance $2$ to $5$ from $m_2$. Testing the candidates: $m_2 = 14$ '
-                              'gives distance $0$ to $3$ (invalid), whereas $m_2 = 16$ gives distance $16 - 14 = 2$ to '
-                              '$16 - 11 = 5$ (valid!).',
-              'questions': [{'level_label': '평균 m2 확정 디딤돌 5',
-                             'level_label_en': 'Confirming m2 Step 5',
-                             'stem': '구간 $[11, 14]$의 오른쪽 끝점 $14$가 평균 $m_2$보다 왼쪽으로 $2$칸 떨어져 있도록($m_2 - 14 = 2$) 하는 '
-                                     '$m_2$의 값은?',
-                             'stem_en': 'Which value of $m_2$ places the endpoint $14$ at distance $2$ below $m_2$ '
-                                        '($m_2 - 14 = 2$)?',
-                             'options': ['$13$', '$14$', '$15$', '$16$', '$17$'],
+                             'exp': '<b>[3단계 상세 해설]</b><br>$\\mathrm{P}\\left(\\dfrac{-3}{10} \\le Z \\le '
+                                    '\\dfrac{-2}{10}\\right) + \\mathrm{P}\\left(\\dfrac{3}{10} \\le Z \\le '
+                                    '\\dfrac{5}{10}\\right) = \\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 '
+                                    '\\le Z \\le 0.5)$입니다.',
+                             'exp_en': '<b>[Step 3 Detailed Explanation]</b><br>$\\mathrm{P}\\left(\\dfrac{-3}{10} '
+                                       '\\le Z \\le \\dfrac{-2}{10}\\right) + \\mathrm{P}\\left(\\dfrac{3}{10} \\le Z '
+                                       '\\le \\dfrac{5}{10}\\right) = \\mathrm{P}(-0.3 \\le Z \\le -0.2) + '
+                                       '\\mathrm{P}(0.3 \\le Z \\le 0.5)$.'}]},
+             {'title': '🌱 4단계 · [기하적 대칭 이어붙이기와 $\\cancel{0.118}$ 상쇄] 좌변의 확률 합 $0.112$ 구하기',
+              'title_en': '🌱 Step 4 · [Geometric Interval Merging & Cancellation of $0.118$] Evaluating the LHS '
+                          'Probability $0.112$',
+              'knowledge': '칠판 판서의 핵심 계산과 그 속에 담긴 <b>기하학적 의미</b>를 함께 확인해 봅시다!<ul><li><b>칠판 표준정규분포표 대입 계산</b>:<br>표에서 '
+                           '$z=0.2 \\to 0.079$, $z=0.3 \\to 0.118$, $z=0.5 \\to 0.191$이므로<br>$$\\mathrm{P}(-0.3 \\le Z '
+                           '\\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5) = (\\cancel{0.118} - 0.079) + (0.191 - '
+                           '\\cancel{0.118}) = 0.191 - 0.079 = \\mathbf{0.112}$$</li><li><b>🎨 [기하학적 설명] 왜 $0.118$이 '
+                           '감쪽같이 지워질까?</b><br>대칭축 $Z = 0$($X = 4$)을 거울 삼아 왼쪽 조각 $[-0.3, -0.2]$($X \\in [1, 2]$)를 오른쪽으로 '
+                           '접어 옮기면 <b>$[0.2, 0.3]$($X \\in [6, 7]$)</b>이 됩니다. 이 조각을 원래 오른쪽에 있던 <b>$[0.3, 0.5]$($X \\in '
+                           '[7, 9]$)</b>와 합치면, 정확히 <b>경계선 $Z = 0.3$($X = 7$, 넓이 $0.118$)에서 빈틈없이 맞물려 하나의 연속된 구간 $[0.2, '
+                           '0.5]$($X \\in [6, 9]$)</b>로 이어붙여지기 때문에 경계값 $0.118$이 $+0.118$과 $-0.118$로 상쇄되는 '
+                           '것입니다!</li></ul>',
+              'knowledge_en': 'From the table ($z=0.2 \\to 0.079,\\ z=0.3 \\to 0.118,\\ z=0.5 \\to 0.191$): '
+                              '$\\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5) = '
+                              '(\\cancel{0.118} - 0.079) + (0.191 - \\cancel{0.118}) = 0.191 - 0.079 = 0.112$. '
+                              'Geometrically, reflecting $[-0.3, -0.2]$ across $Z=0$ gives $[0.2, 0.3]$, which joins '
+                              '$[0.3, 0.5]$ seamlessly at the shared boundary $Z = 0.3$ ($0.118$), forming the single '
+                              'interval $[0.2, 0.5]$.',
+              'questions': [{'level_label': '0.118 상쇄와 넓이 합 디딤돌 4',
+                             'level_label_en': 'Cancellation & Area Sum Step 4',
+                             'stem': '표준정규분포표에서 $\\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5) '
+                                     '= (\\cancel{0.118} - 0.079) + (0.191 - \\cancel{0.118})$을 계산한 좌변의 확률 값은?',
+                             'stem_en': 'What is the value of $\\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 '
+                                        '\\le Z \\le 0.5) = (\\cancel{0.118} - 0.079) + (0.191 - \\cancel{0.118})$?',
+                             'options': ['$0.102$', '$0.112$', '$0.118$', '$0.122$', '$0.155$'],
+                             'answer': 2,
+                             'exp': '<b>[4단계 기하·대수 해설]</b><br>$0.118$이 $+0.118$과 $-0.118$로 서로 소거되어 $0.191 - 0.079 = '
+                                    '0.112$가 됩니다. 기하학적으로도 구간 $[0.2, 0.3]$과 $[0.3, 0.5]$가 경계 $Z = 0.3$에서 합쳐져 $[0.2, '
+                                    '0.5]$ 하나의 구간 넓이가 된 것입니다.',
+                             'exp_en': '<b>[Step 4 Geometric & Algebraic Explanation]</b><br>The boundary value '
+                                       '$0.118$ cancels out, leaving $0.191 - 0.079 = 0.112$, which is the area over '
+                                       'the merged interval $[0.2, 0.5]$.'}]},
+             {'title': '🌳 5단계 · [$\\text{Case 1}(m_2=16)$ vs $\\text{Case 2}(m_2=14)$ 검증] $\\mathrm{P}(11 \\le Y \\le '
+                       '14) = 0.112$를 만족하는 $m_2$ 확정하기',
+              'title_en': '🌳 Step 5 · [Testing Case 1 ($m_2=16$) vs Case 2 ($m_2=14$)] Confirming $m_2$ via '
+                          '$\\mathrm{P}(11 \\le Y \\le 14) = 0.112$',
+              'knowledge': '4단계에서 좌변의 확률이 $0.112$이므로, 우변 $\\mathrm{P}(11 \\le Y \\le 14)$도 <b>$0.112$</b>가 되어야 합니다! 칠판 '
+                           '중앙의 두 케이스를 각각 $Z_2 = \\dfrac{Y - m_2}{10}$으로 표준화하여 검증해 봅시다:<ul><li><b>[$\\text{Case 1}$: '
+                           '$\\underline{m_2 = 16}$일 때]</b><br>$$\\mathrm{P}(11 \\le Y \\le 14) = '
+                           '\\mathrm{P}\\left(\\frac{-5}{10} \\le Z \\le \\frac{-2}{10}\\right) = \\mathrm{P}(-0.5 '
+                           '\\le Z \\le -0.2) = 0.191 - 0.079 = \\underline{\\underline{0.112}} \\quad '
+                           '(\\mathbf{\\text{O.K.! 성립}})$$&nbsp;&nbsp;👉 <b>기하학적 이유</b>: 구간 $[11, 14]$는 평균 $16$으로부터 '
+                           '왼쪽으로 $2\\sim 5$칸 떨어진 구간($Z \\in [-0.5, -0.2]$)이므로, 좌변의 합쳐진 구간 $[6, 9]$($Z \\in [0.2, '
+                           '0.5]$, 오른쪽 $2\\sim 5$칸)와 <b>완벽한 거울 대칭(합동)</b>이 되어 넓이가 $0.112$로 '
+                           '일치합니다!</li><li><b>[$\\text{Case 2}$: $\\underline{m_2 = 14}$일 때]</b><br>$$\\mathrm{P}(11 '
+                           '\\le Y \\le 14) = \\mathrm{P}\\left(\\frac{-3}{10} \\le Z \\le \\frac{0}{10}\\right) = '
+                           '\\mathrm{P}(-0.3 \\le Z \\le 0) = 0.118 \\ne 0.112 \\quad (\\mathbf{\\times \\text{ '
+                           '탈락!}})$$&nbsp;&nbsp;👉 <b>기하학적 이유</b>: 끝점 $14$가 산봉우리 꼭대기($m_2 = 14, Z = 0$)에 걸치면서 평균으로부터 왼쪽 '
+                           '$0\\sim 3$칸인 봉우리 중심부 영역이 되어 넓이가 $0.118$로 달라집니다.</li></ul>',
+              'knowledge_en': 'We test both candidates for $\\mathrm{P}(11 \\le Y \\le 14) = 0.112$ using $Z_2 = '
+                              '\\dfrac{Y - m_2}{10}$:<ul><li><b>$\\text{Case 1}$ ($m_2 = 16$)</b>: '
+                              '$\\mathrm{P}\\left(\\dfrac{-5}{10} \\le Z \\le \\dfrac{-2}{10}\\right) = '
+                              '\\mathrm{P}(-0.5 \\le Z \\le -0.2) = 0.191 - 0.079 = 0.112$ (<b>O.K.!</b> Mirrors '
+                              '$[0.2, 0.5]$ across $Z=0$).</li><li><b>$\\text{Case 2}$ ($m_2 = 14$)</b>: '
+                              '$\\mathrm{P}\\left(\\dfrac{-3}{10} \\le Z \\le \\dfrac{0}{10}\\right) = '
+                              '\\mathrm{P}(-0.3 \\le Z \\le 0) = 0.118 \\ne 0.112$ (<b>Invalid!</b> Touches the peak '
+                              '$Z=0$).</li></ul>',
+              'questions': [{'level_label': 'Case 1 · Case 2 검증 디딤돌 5',
+                             'level_label_en': 'Case 1 vs Case 2 Verification Step 5',
+                             'stem': '$\\text{Case 1}(m_2 = 16)$과 $\\text{Case 2}(m_2 = 14)$에 대하여 $\\mathrm{P}(11 \\le '
+                                     'Y \\le 14)$를 표준화하여 계산한 결과와 올바른 $m_2$의 값을 고르면?',
+                             'stem_en': 'Which option correctly states $\\mathrm{P}(11 \\le Y \\le 14)$ for Case 1 '
+                                        '($m_2 = 16$) and Case 2 ($m_2 = 14$) and identifies the valid $m_2$?',
+                             'options': ['$\\text{Case 1}: 0.118,\\ \\ \\text{Case 2}: 0.112 \\implies m_2 = 14$',
+                                         '$\\text{Case 1}: 0.155,\\ \\ \\text{Case 2}: 0.118 \\implies m_2 = 14$',
+                                         '$\\text{Case 1}: 0.112,\\ \\ \\text{Case 2}: 0.155 \\implies m_2 = 16$',
+                                         '$\\text{Case 1}: 0.112,\\ \\ \\text{Case 2}: 0.118 \\implies m_2 = 16$',
+                                         '$\\text{Case 1}: 0.191,\\ \\ \\text{Case 2}: 0.079 \\implies m_2 = 16$'],
                              'answer': 4,
-                             'exp': '$m_2 = 14 + 2 = 16$일 때 구간 $[11, 14]$는 평균 $16$으로부터 거리가 $2 \\sim 5$가 되어 좌변과 넓이가 완전히 '
-                                    '같아집니다.',
-                             'exp_en': '$m_2 = 16$.'}]},
-             {'title': '🌳 6단계 · [표준화 $Z$ 변환] $Y \\sim \\mathrm{N}(16, 10^2)$에서 $\\mathrm{P}(Y \\ge 20)$을 표준정규분포로 바꾸기',
-              'title_en': '🌳 Step 6 · [Standardization] Converting $\\mathrm{P}(Y \\ge 20)$ using $Z = \\dfrac{Y - '
-                          '16}{10}$',
-              'knowledge': '이제 $Y$의 평균 $m_2 = 16$과 표준편차 $\\sigma_2 = 10$을 모두 알았습니다! 구하려는 확률 $\\mathrm{P}(Y \\ge 20)$을 '
-                           '표준정규분포표로 읽으려면 $Y$에서 평균 $16$을 빼고 표준편차 $10$으로 나눈 표준화 변수 $Z = \\dfrac{Y - 16}{10}$으로 바꿉니다.',
-              'knowledge_en': 'With $m_2 = 16$ and $\\sigma_2 = 10$, standardize $Y = 20$ via $Z = \\dfrac{20 - '
-                              '16}{10}$.',
-              'questions': [{'level_label': '표준화 Z값 디딤돌 6',
-                             'level_label_en': 'Standardization Step 6',
-                             'stem': '$Y = 20$일 때, 표준화 공식 $Z = \\dfrac{20 - 16}{10}$으로 계산한 $z$의 값은?',
-                             'stem_en': 'What is the standardized value $z = \\dfrac{20 - 16}{10}$ when $Y = 20$?',
+                             'exp': '<b>[5단계 상세 해설]</b><br>$\\text{Case 1}(m_2 = 16)$일 때 $\\mathrm{P}(-0.5 \\le Z \\le '
+                                    '-0.2) = 0.191 - 0.079 = 0.112$가 되어 좌변($0.112$)과 일치하므로 $m_2 = 16$이 확정됩니다! '
+                                    '($\\text{Case 2}: m_2 = 14$일 때는 $\\mathrm{P}(-0.3 \\le Z \\le 0) = 0.118$로 '
+                                    '모순입니다.)',
+                             'exp_en': '<b>[Step 5 Detailed Explanation]</b><br>Case 1 ($m_2 = 16$) gives '
+                                       '$\\mathrm{P}(-0.5 \\le Z \\le -0.2) = 0.191 - 0.079 = 0.112$, matching the LHS '
+                                       '($0.112$), while Case 2 ($m_2 = 14$) gives $0.118$. Thus $m_2 = 16$.'}]},
+             {'title': '🌳 6단계 · [최종 목표 확률의 표준화] $Y \\sim \\mathrm{N}(16, 10^2)$에서 $\\mathrm{P}(Y \\ge 20)$을 표준정규분포로 '
+                       '바꾸기',
+              'title_en': '🌳 Step 6 · [Standardizing the Target Probability] Converting $\\mathrm{P}(Y \\ge 20)$ using '
+                          '$Z_2 = \\dfrac{Y - 16}{10}$',
+              'knowledge': '5단계에서 $\\text{Case 1}$이 채택되어 $Y \\sim \\mathrm{N}(16, 10^2)$으로 확정되었습니다! 이제 칠판 우측 판서처럼 구하려는 '
+                           '확률 $\\mathrm{P}(Y \\ge 20)$을 표준화 공식 $Z = \\dfrac{Y - 16}{10}$으로 변환합니다:$$\\mathrm{P}(Y \\ge '
+                           '20) = \\mathrm{P}\\left(Z \\ge \\frac{20 - 16}{10}\\right) = \\mathrm{P}(Z \\ge '
+                           '0.4)$$기하학적으로 $Y = 20$은 대칭축 $m_2 = 16$에서 오른쪽으로 $4$칸, 즉 표준편차($10$)의 $0.4$배만큼 떨어진 위치입니다.',
+              'knowledge_en': 'With $m_2 = 16$ and $\\sigma = 10$ confirmed from Case 1, standardize $\\mathrm{P}(Y '
+                              '\\ge 20)$ via $Z = \\dfrac{Y - 16}{10}$: $\\mathrm{P}(Y \\ge 20) = \\mathrm{P}\\left(Z '
+                              '\\ge \\dfrac{20 - 16}{10}\\right) = \\mathrm{P}(Z \\ge 0.4)$.',
+              'questions': [{'level_label': '목표 확률 표준화 디딤돌 6',
+                             'level_label_en': 'Target Standardization Step 6',
+                             'stem': '확정된 평균 $m_2 = 16$을 대입하여 $\\mathrm{P}(Y \\ge 20) = \\mathrm{P}\\left(Z \\ge '
+                                     '\\dfrac{20 - 16}{10}\\right) = \\mathrm{P}(Z \\ge z_0)$으로 나타낼 때, 경계값 $z_0$는?',
+                             'stem_en': 'With $m_2 = 16$, what is the standardized boundary $z_0 = \\dfrac{20 - '
+                                        '16}{10}$ in $\\mathrm{P}(Y \\ge 20) = \\mathrm{P}(Z \\ge z_0)$?',
                              'options': ['$0.2$', '$0.3$', '$0.4$', '$0.5$', '$0.6$'],
                              'answer': 3,
-                             'exp': '$\\dfrac{20 - 16}{10} = \\dfrac{4}{10} = 0.4$이므로 $\\mathrm{P}(Y \\ge 20) = '
-                                    '\\mathrm{P}(Z \\ge 0.4)$입니다.',
-                             'exp_en': '$\\dfrac{4}{10} = 0.4$.'}]},
-             {'title': '💎 7단계 · [표준정규분포표 읽기] 오른쪽 꼬리 확률 $k = \\mathrm{P}(Z \\ge 0.4)$ 구하기',
-              'title_en': '💎 Step 7 · [Reading the Normal Table] Computing the upper tail $k = \\mathrm{P}(Z \\ge '
-                          '0.4)$',
-              'knowledge': '표준정규분포 곡선에서 $Z \\ge 0$인 오른쪽 반쪽 전체의 넓이는 $0.5$입니다. 문제의 표에서 가운데 부분 넓이 $\\mathrm{P}(0 \\le Z '
-                           '\\le 0.4) = 0.155$이므로, $0.4$보다 오른쪽 꼬리 부분의 넓이 $k = \\mathrm{P}(Z \\ge 0.4)$는 $0.5$에서 '
-                           '$0.155$를 빼면 됩니다!',
-              'knowledge_en': 'Since $\\mathrm{P}(Z \\ge 0) = 0.5$ and the table gives $\\mathrm{P}(0 \\le Z \\le 0.4) '
-                              '= 0.155$, the tail probability is $k = 0.5 - 0.155$.',
-              'questions': [{'level_label': '꼬리 확률 계산 디딤돌 7',
-                             'level_label_en': 'Tail Probability Step 7',
-                             'stem': '$k = \\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155$를 계산한 값은?',
-                             'stem_en': 'What is $k = 0.5 - 0.155$?',
+                             'exp': '<b>[6단계 상세 해설]</b><br>$z_0 = \\dfrac{20 - 16}{10} = \\dfrac{4}{10} = 0.4$이므로 '
+                                    '$\\mathrm{P}(Y \\ge 20) = \\mathrm{P}(Z \\ge 0.4)$입니다.',
+                             'exp_en': '<b>[Step 6 Detailed Explanation]</b><br>$z_0 = \\dfrac{20 - 16}{10} = 0.4$, so '
+                                       '$\\mathrm{P}(Y \\ge 20) = \\mathrm{P}(Z \\ge 0.4)$.'}]},
+             {'title': '💎 7단계 · [오른쪽 꼬리 넓이 계산] 반쪽 넓이 $0.5$에서 가운데 넓이 $0.155$를 빼서 $k = \\mathrm{P}(Z \\ge 0.4)$ 구하기',
+              'title_en': '💎 Step 7 · [Upper Tail Area] Computing $k = \\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155$',
+              'knowledge': '종 모양의 표준정규분포 곡선 아래 전체 넓이는 $1$이고, 대칭축 $Z = 0$을 기준으로 오른쪽 반쪽 전체($Z \\ge 0$)의 넓이는 정확히 '
+                           '<b>$0.5$</b>입니다. 표준정규분포표에서 가운데 구간 넓이 $\\mathrm{P}(0 \\le Z \\le 0.4) = 0.155$이므로, 오른쪽 꼬리 '
+                           '영역의 넓이 $k = \\mathrm{P}(Z \\ge 0.4)$는:$$k = \\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155 = '
+                           '0.345$$',
+              'knowledge_en': 'The total area to the right of the symmetry axis $Z = 0$ is $0.5$. Subtracting the '
+                              'central strip $\\mathrm{P}(0 \\le Z \\le 0.4) = 0.155$ leaves the upper tail area $k = '
+                              '\\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155 = 0.345$.',
+              'questions': [{'level_label': '꼬리 넓이 계산 디딤돌 7',
+                             'level_label_en': 'Tail Area Calculation Step 7',
+                             'stem': '오른쪽 반쪽 넓이 $0.5$에서 $\\mathrm{P}(0 \\le Z \\le 0.4) = 0.155$를 뺀 꼬리 확률 $k = '
+                                     '\\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155$의 값은?',
+                             'stem_en': 'What is the upper tail probability $k = \\mathrm{P}(Z \\ge 0.4) = 0.5 - '
+                                        '0.155$?',
                              'options': ['$0.245$', '$0.315$', '$0.345$', '$0.355$', '$0.385$'],
                              'answer': 3,
-                             'exp': '$0.500 - 0.155 = 0.345$입니다.',
-                             'exp_en': '$0.500 - 0.155 = 0.345$.'}]},
+                             'exp': '<b>[7단계 기하학적 해설]</b><br>오른쪽 반쪽 전체 넓이 $0.500$에서 가운데 부분 넓이 $0.155$를 잘라내면 오른쪽 꼬리 넓이 '
+                                    '$k = 0.500 - 0.155 = 0.345$가 남습니다.',
+                             'exp_en': '<b>[Step 7 Geometric Explanation]</b><br>Subtracting the central area $0.155$ '
+                                       'from the right half-bell area $0.500$ gives $k = 0.345$.'}]},
              {'title': '🏆 8단계 · [최종 정답 완성] $1000 \\times k$의 값 구하기',
               'title_en': '🏆 Step 8 · [Final Synthesis] Computing $1000 \\times k$',
-              'knowledge': '$k = 0.345$에 $1000$을 곱하면 소수점이 오른쪽으로 세 칸 이동하여 자연수 $345$가 완성됩니다.',
-              'knowledge_en': 'Multiply $k = 0.345$ by $1000$ to obtain the final answer $345$.',
+              'knowledge': '$k = 0.345$에 $1000$을 곱하면 소수점이 오른쪽으로 세 칸 이동하여 최종 정답 <b>$345$</b>가 완성됩니다.',
+              'knowledge_en': 'Multiplying $k = 0.345$ by $1000$ shifts the decimal point three places to the right, '
+                              'yielding the final answer $345$.',
               'questions': [{'level_label': '최종 종합 디딤돌 8',
                              'level_label_en': 'Final Synthesis Step 8',
                              'stem': '$k = 0.345$일 때, $1000 \\times k$의 값은?',
                              'stem_en': 'Given $k = 0.345$, what is $1000 \\times k$?',
                              'options': ['$315$', '$335$', '$345$', '$355$', '$365$'],
                              'answer': 3,
-                             'exp': '$1000 \\times 0.345 = 345$입니다.',
-                             'exp_en': '$1000 \\times 0.345 = 345$.'}]}],
+                             'exp': '<b>[8단계 최종 정답]</b><br>$\\therefore 1000 \\times k = 1000 \\times 0.345 = '
+                                    '\\underline{\\underline{345}}$입니다.',
+                             'exp_en': '<b>[Step 8 Final Answer]</b><br>$\\therefore 1000 \\times k = 1000 \\times '
+                                       '0.345 = 345$.'}]}],
   'final': {'stem': '확률변수 $X$는 정규분포 $\\mathrm{N}(m_1, 10^2)$을 따르고, 확률변수 $Y$는 정규분포 $\\mathrm{N}(m_2, 10^2)$을 따른다. 확률변수 '
                     '$X$의 확률밀도함수 $f(x)$와 확률변수 $Y$의 확률밀도함수 $g(x)$가 다음 조건을 만족시킨다.<br><br>(가) 모든 실수 $x$에 대하여 $f(x) \\le '
                     'f(4)$이다.<br>(나) $f(5) = g(15)$<br><br>$\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le '
                     '9) = \\mathrm{P}(11 \\le Y \\le 14)$일 때, $\\mathrm{P}(Y \\ge 20)$의 값을 표준정규분포표를 이용하여 구한 값이 $k$이다. '
-                    '$1000 \\times k$의 값을 구하시오. (단, $\\mathrm{P}(0 \\le Z \\le 0.4) = 0.155$) [4점]',
+                    '$1000 \\times k$의 값을 구하시오. (단, $\\mathrm{P}(0 \\le Z \\le 0.1)=0.040,\\ \\mathrm{P}(0 \\le Z \\le '
+                    '0.2)=0.079,\\ \\mathrm{P}(0 \\le Z \\le 0.3)=0.118,\\ \\mathrm{P}(0 \\le Z \\le 0.4)=0.155,\\ '
+                    '\\mathrm{P}(0 \\le Z \\le 0.5)=0.191,\\ \\mathrm{P}(0 \\le Z \\le 0.6)=0.226$) [4점]',
             'stem_en': 'Random variables $X \\sim \\mathrm{N}(m_1, 10^2)$ and $Y \\sim \\mathrm{N}(m_2, 10^2)$ have '
                        'probability density functions $f(x)$ and $g(x)$ satisfying:<br>(가) $f(x) \\le f(4)$ for all '
                        'real $x$.<br>(나) $f(5) = g(15)$.<br>Given $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X '
-                       '\\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$, let $k = \\mathrm{P}(Y \\ge 20)$ using '
-                       '$\\mathrm{P}(0 \\le Z \\le 0.4) = 0.155$. Find $1000 \\times k$. [4 points]',
+                       '\\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$, let $k = \\mathrm{P}(Y \\ge 20)$ using the standard '
+                       'normal table ($\\mathrm{P}(0 \\le Z \\le 0.2)=0.079,\\ \\mathrm{P}(0 \\le Z \\le 0.3)=0.118,\\ '
+                       '\\mathrm{P}(0 \\le Z \\le 0.4)=0.155,\\ \\mathrm{P}(0 \\le Z \\le 0.5)=0.191$). Find $1000 '
+                       '\\times k$. [4 points]',
             'options': ['$315$', '$335$', '$345$', '$355$', '$365$'],
             'answer': 3,
-            'exp': '조건 (가)에서 $m_1 = 4$이고, 대칭성에 의해 $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9) = '
-                   '\\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$입니다. 조건 (나) $f(5)=g(15)$에서 '
-                   '$|15-m_2|=1 \\implies m_2 \\in \\{14, 16\\}$이며 구간 거리 비교로 $m_2 = 16$이 확정됩니다. 따라서 $k = \\mathrm{P}(Z '
-                   '\\ge 0.4) = 0.5 - 0.155 = 0.345$이고 $1000k = 345$입니다.',
-            'exp_en': 'From (가) $m_1 = 4$, and by symmetry $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le '
-                      '9) = \\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$. Combining with '
-                      '$f(5)=g(15)$ fixes $m_2 = 16$, so $k = \\mathrm{P}(Z \\ge 0.4) = 0.345$ and $1000k = 345$.',
-            'solution': '<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>\n'
-                        '<p>본 문항은 <b>정규분포 곡선의 최댓값(평균)과 대칭성</b>을 이용하여 떨어진 두 구간의 확률 합을 하나의 연결된 구간 확률로 바꾼 뒤, 표준편차가 같은 두 '
-                        '정규분포의 평행이동 관계를 추론하는 문항입니다.</p>\n'
+            'exp': '조건 (가) $f(x) \\le f(4)$에서 곡선 $f$의 대칭축(평균)은 $m_1 = 4$이고, 조건 (나) $f(5) = g(15)$에서 합동인 곡선 $g$ 위의 점 '
+                   '$15$의 위치에 따라 $\\text{Case 1}(m_2 = 16)$과 $\\text{Case 2}(m_2 = 14)$로 나뉩니다. 좌변을 $Z_1 = '
+                   '\\dfrac{X-4}{10}$으로 표준화하면 $\\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5) = '
+                   '(\\cancel{0.118} - 0.079) + (0.191 - \\cancel{0.118}) = 0.112$입니다. 우변 $\\mathrm{P}(11 \\le Y \\le '
+                   '14)$를 검증하면 $\\text{Case 1}(m_2 = 16)$일 때 $\\mathrm{P}(-0.5 \\le Z \\le -0.2) = 0.191 - 0.079 = '
+                   '0.112$로 성립하고($\\text{Case 2}: m_2 = 14$일 때는 $0.118$로 모순), 따라서 $k = \\mathrm{P}(Y \\ge 20) = '
+                   '\\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155 = 0.345 \\implies 1000k = 345$입니다.',
+            'exp_en': 'From (가) $f(x) \\le f(4)$, $m_1 = 4$. From (나) $f(5) = g(15)$, congruent curve $g$ yields '
+                      '$\\text{Case 1 }(m_2 = 16)$ and $\\text{Case 2 }(m_2 = 14)$. Standardizing the LHS gives '
+                      '$\\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5) = (\\cancel{0.118} - '
+                      '0.079) + (0.191 - \\cancel{0.118}) = 0.112$. Testing the RHS $\\mathrm{P}(11 \\le Y \\le 14)$ '
+                      'confirms $\\text{Case 1 }(m_2 = 16)$ with $\\mathrm{P}(-0.5 \\le Z \\le -0.2) = 0.112$ (while '
+                      '$\\text{Case 2}$ gives $0.118$). Thus $k = \\mathrm{P}(Y \\ge 20) = \\mathrm{P}(Z \\ge 0.4) = '
+                      '0.5 - 0.155 = 0.345$ and $1000k = 345$.',
+            'solution': '<h4>📋 [1. 문제 분석 및 핵심 출제 의도 — 종 모양 곡선의 합동과 대칭성]</h4>\n'
+                        '<p>본 문항은 표준편차가 $\\sigma = 10$으로 같은 두 정규분포 $X \\sim \\mathrm{N}(m_1, 10^2)$과 $Y \\sim '
+                        '\\mathrm{N}(m_2, 10^2)$에서 <b>두 확률밀도함수 곡선 $y = f(x)$, $y = g(x)$가 평행이동에 의해 완전히 포개어지는 합동 '
+                        '도형</b>임을 기하학적으로 이해하고, 표준화 변환 $Z_1 = \\dfrac{X - m_1}{10},\\ Z_2 = \\dfrac{Y - m_2}{10} \\sim '
+                        '\\mathrm{N}(0, 1)$을 통해 대칭 구간의 넓이 합과 평균 $m_2$의 위치를 추론하는 문항입니다.</p>\n'
                         '\n'
-                        '<h4>📐 [단계별 상세 풀이 전개]</h4>\n'
+                        '<h4>📐 [2. 칠판 판서 완결 풀이 &amp; 기하학적 원리 상세 전개]</h4>\n'
                         '<p>\n'
-                        '  <b>1단계: 조건 (가)에서 평균 $m_1 = 4$ 도출 및 대칭 구간 결합</b><br>\n'
-                        '  조건 (가)에서 모든 실수 $x$에 대하여 $f(x) \\le f(4)$이므로 정규분포 $\\mathrm{N}(m_1, 10^2)$의 대칭축(평균)은 $m_1 = '
-                        '4$입니다.<br>\n'
-                        '  평균 $m_1 = 4$에 대한 대칭성에 의해 구간 $[1, 2]$를 $x = 4$에 대칭이동하면 $[6, 7]$이 되므로 $\\mathrm{P}(1 \\le X '
-                        '\\le 2) = \\mathrm{P}(6 \\le X \\le 7)$입니다. 따라서:<br>\n'
-                        '  $$\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9) = \\mathrm{P}(6 \\le X \\le '
-                        '7) + \\mathrm{P}(7 \\le X \\le 9) = \\mathrm{P}(6 \\le X \\le 9)$$<br>\n'
-                        '  <b>2단계: 조건 (나)와 구간 비교로 $m_2 = 16$ 확정</b><br>\n'
-                        '  두 정규분포의 표준편차가 모두 $10$으로 같으므로, 조건 (나) $f(5) = g(15)$에서:<br>\n'
-                        '  $$|15 - m_2| = |5 - 4| = 1 \\implies m_2 = 14 \\text{ 또는 } m_2 = 16$$\n'
-                        '  또한 $\\mathrm{P}(6 \\le X \\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$에서 좌변의 구간 $[6, 9]$는 평균 '
-                        '$m_1 = 4$로부터 거리가 $2$ 이상 $5$ 이하인 구간입니다. 우변의 구간 $[11, 14]$도 평균 $m_2$로부터 거리가 $2$ 이상 $5$ 이하가 되려면 '
-                        '$m_2 = 16$이어야 합니다.<br><br>\n'
-                        '  <b>3단계: $\\mathrm{P}(Y \\ge 20)$ 표준화 계산</b><br>\n'
-                        '  $Y \\sim \\mathrm{N}(16, 10^2)$이므로:<br>\n'
-                        '  $$k = \\mathrm{P}(Y \\ge 20) = \\mathrm{P}\\left(Z \\ge \\frac{20 - 16}{10}\\right) = '
+                        '  <b>■ 1단계: 표준화 변수 설정과 조건 (가) $f(x) \\le f(4)$의 기하학적 해석 ($m_1 = 4$)</b><br>\n'
+                        '  $$X \\sim \\mathrm{N}(m_1, 10^2) \\ (\\text{확률밀도함수 } f(x)), \\qquad Z_1 = \\frac{X - '
+                        'm_1}{10} \\sim \\mathrm{N}(0, 1)$$\n'
+                        '  $$Y \\sim \\mathrm{N}(m_2, 10^2) \\ (\\text{확률밀도함수 } g(x)), \\qquad Z_2 = \\frac{Y - '
+                        'm_2}{10} \\sim \\mathrm{N}(0, 1)$$\n'
+                        '  • <b>기하학적 의미</b>: 조건 (가)에서 모든 실수 $x$에 대하여 $\\underline{\\underline{f(x) \\le f(4)}}$라는 것은, '
+                        '종 모양 곡선 $y = f(x)$에서 <b>$x = 4$일 때의 높이 $f(4)$가 가장 높은 산봉우리 꼭대기(최댓값)</b>라는 뜻입니다.<br>\n'
+                        '  • 정규분포 곡선은 좌우 대칭축인 평균에서 유일한 최댓값을 가지므로 곡선 $f(x)$의 대칭축(평균)은 <b>$m_1 = 4$</b>입니다.<br><br>\n'
+                        '  <b>■ 2단계: 조건 (나) $\\underline{\\underline{f(5) = g(15)}}$의 기하학적 작도와 $\\text{Case 1}, '
+                        '\\text{Case 2}$ 분류</b><br>\n'
+                        '  • 두 정규분포 $X, Y$는 표준편차가 $10$으로 같으므로 두 종 모양 곡선 $f(x)$와 $g(x)$는 폭과 높이가 똑같은 <b>합동 '
+                        '곡선</b>입니다.<br>\n'
+                        '  • 곡선 $f$에서 $x = 5$는 대칭축 $m_1 = 4$로부터 오른쪽으로 <b>거리가 $1$만큼 떨어진 지점</b>($5 - 4 = 1$)입니다.<br>\n'
+                        '  • 따라서 합동인 곡선 $g$에서 높이가 $f(5)$와 똑같은 점($g(15) = f(5)$)은 대칭축 $x = m_2$를 중심으로 <b>왼쪽으로 $1$칸 떨어진 '
+                        '비탈면</b>과 <b>오른쪽으로 $1$칸 떨어진 비탈면</b> 두 곳에 대칭으로 나타납니다:<br>\n'
+                        '  &nbsp;&nbsp;① <b>$\\text{Case 1}$ ($15$가 대칭축 $m_2$의 왼쪽에 위치할 때)</b>: $m_2 - 1 = 15 \\implies '
+                        '\\underline{\\mathbf{m_2 = 16}}$<br>\n'
+                        '  &nbsp;&nbsp;② <b>$\\text{Case 2}$ ($15$가 대칭축 $m_2$의 오른쪽에 위치할 때)</b>: $m_2 + 1 = 15 '
+                        '\\implies \\underline{\\mathbf{m_2 = 14}}$<br><br>\n'
+                        '  <b>■ 3단계: 좌변 $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9)$의 표준화 계산과 '
+                        '$\\cancel{0.118}$ 상쇄의 기하학</b><br>\n'
+                        '  주어진 확률 등식 $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9) = \\mathrm{P}(11 '
+                        '\\le Y \\le 14)$의 좌변을 $Z_1 = \\dfrac{X - 4}{10}$으로 표준화하면:\n'
+                        '  $$\\mathrm{P}\\left(\\frac{-3}{10} \\le Z \\le \\frac{-2}{10}\\right) + '
+                        '\\mathrm{P}\\left(\\frac{3}{10} \\le Z \\le \\frac{5}{10}\\right)$$\n'
+                        '  $$= \\mathrm{P}(-0.3 \\le Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5)$$\n'
+                        '  $$= \\cancel{0.118} - 0.079 + 0.191 - \\cancel{0.118} = \\mathbf{0.112}$$\n'
+                        '  • <b>🎨 [기하학적 설명: 왜 $0.118$이 상쇄되고 하나의 구간이 될까?]</b><br>\n'
+                        '  &nbsp;&nbsp;- 곡선 $f(x)$에서 왼쪽 조각 $[1, 2]$($Z \\in [-0.3, -0.2]$, 대칭축 $4$에서 왼쪽 $2\\sim 3$칸)를 '
+                        '대칭축 $m_1 = 4$($Z = 0$)에 대하여 오른쪽으로 거울 대칭이동하면 <b>$[6, 7]$ ($Z \\in [0.2, 0.3]$, 오른쪽 $2\\sim '
+                        '3$칸)</b>에 정확히 포개어집니다.<br>\n'
+                        '  &nbsp;&nbsp;- 이 옮겨진 조각 $[6, 7]$($Z \\in [0.2, 0.3]$)이 원래 오른쪽에 있던 조각 $[7, 9]$($Z \\in [0.3, '
+                        '0.5]$)와 <b>경계선 $X = 7$($Z = 0.3$, 표준정규분포표 넓이 $0.118$)에서 빈틈없이 맞물려 하나의 연속된 넓이 구간 $[6, 9]$($Z '
+                        '\\in [0.2, 0.5]$, 대칭축에서 거리 $2\\sim 5$칸)</b>로 합쳐지기 때문에 중간 경계 넓이 $0.118$이 $+0.118$과 $-0.118$로 '
+                        '서로 지워지는 것입니다!<br><br>\n'
+                        '  <b>■ 4단계: 우변 $\\mathrm{P}(11 \\le Y \\le 14)$에 대한 $\\text{Case 1}$과 $\\text{Case 2}$ 대조 '
+                        '검증</b><br>\n'
+                        '  우변 $\\mathrm{P}(11 \\le Y \\le 14)$를 $Z_2 = \\dfrac{Y - m_2}{10}$으로 표준화하여 좌변의 넓이 $0.112$와 '
+                        '비교합니다:\n'
+                        '</p>\n'
+                        '<table style="width:100%;border-collapse:collapse;margin:10px 0 '
+                        '16px;font-size:0.88rem;border:1px solid rgba(124,196,255,0.35)">\n'
+                        '  <thead>\n'
+                        '    <tr style="background:rgba(56,189,248,0.16);color:#fde68a;text-align:center">\n'
+                        '      <th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:20%">구분</th>\n'
+                        '      <th style="padding:8px 10px;border:1px solid '
+                        'rgba(148,163,184,0.3);width:40%;background:rgba(52,211,153,0.16);color:#6ee7b7">⭕ '
+                        '$\\text{Case 1}: \\underline{m_2 = 16}$ ($15$가 $m_2$ 왼쪽 $1$칸)</th>\n'
+                        '      <th style="padding:8px 10px;border:1px solid '
+                        'rgba(148,163,184,0.3);width:40%;background:rgba(251,113,133,0.14);color:#fecdd3">❌ '
+                        '$\\text{Case 2}: \\underline{m_2 = 14}$ ($15$가 $m_2$ 오른쪽 $1$칸)</th>\n'
+                        '    </tr>\n'
+                        '  </thead>\n'
+                        '  <tbody>\n'
+                        '    <tr>\n'
+                        '      <td style="padding:8px 10px;border:1px solid '
+                        'rgba(148,163,184,0.25);font-weight:700;text-align:center;color:#7cc4ff">칠판 표준화 식</td>\n'
+                        '      <td style="padding:8px 12px;border:1px solid rgba(148,163,184,0.25)">$$\\mathrm{P}(11 '
+                        '\\le Y \\le 14) = \\mathrm{P}\\left(\\frac{-5}{10} \\le Z \\le \\frac{-2}{10}\\right)$$$$= '
+                        '\\mathrm{P}(-0.5 \\le Z \\le -0.2)$$</td>\n'
+                        '      <td style="padding:8px 12px;border:1px solid rgba(148,163,184,0.25)">$$\\mathrm{P}(11 '
+                        '\\le Y \\le 14) = \\mathrm{P}\\left(\\frac{-3}{10} \\le Z \\le \\frac{0}{10}\\right)$$$$= '
+                        '\\mathrm{P}(-0.3 \\le Z \\le 0)$$</td>\n'
+                        '    </tr>\n'
+                        '    <tr>\n'
+                        '      <td style="padding:8px 10px;border:1px solid '
+                        'rgba(148,163,184,0.25);font-weight:700;text-align:center;color:#7cc4ff">표 대입 계산값</td>\n'
+                        '      <td style="padding:8px 12px;border:1px solid '
+                        'rgba(148,163,184,0.25);text-align:center;background:rgba(52,211,153,0.10)">$0.191 - 0.079 = '
+                        '\\underline{\\underline{\\mathbf{0.112}}}$<br><b style="color:#34d399">O.K.! (좌변 $0.112$와 정확히 '
+                        '일치)</b></td>\n'
+                        '      <td style="padding:8px 12px;border:1px solid '
+                        'rgba(148,163,184,0.25);text-align:center;background:rgba(251,113,133,0.08)">$\\mathbf{0.118} '
+                        '\\ne 0.112$<br><b style="color:#fb7185">✕ 탈락! (좌변 $0.112$와 불일치)</b></td>\n'
+                        '    </tr>\n'
+                        '    <tr>\n'
+                        '      <td style="padding:8px 10px;border:1px solid '
+                        'rgba(148,163,184,0.25);font-weight:700;text-align:center;color:#7cc4ff">기하학적 위치 해석</td>\n'
+                        '      <td style="padding:8px 12px;border:1px solid '
+                        'rgba(148,163,184,0.25);line-height:1.55">구간 $[11, 14]$는 대칭축 $m_2=16$으로부터 <b>왼쪽으로 $2\\sim 5$칸 '
+                        '떨어진 구간</b>이므로, 좌변의 $[6, 9]$(대칭축 $4$에서 오른쪽 $2\\sim 5$칸)와 <b>완벽한 좌우 대칭(합동)</b>이 되어 넓이가 '
+                        '같습니다!</td>\n'
+                        '      <td style="padding:8px 12px;border:1px solid '
+                        'rgba(148,163,184,0.25);line-height:1.55">구간 $[11, 14]$의 오른쪽 끝점 $14$가 <b>산봉우리 꼭대기($m_2=14$) '
+                        '자체</b>에 걸치면서 대칭축에서 왼쪽 $0\\sim 3$칸인 가장 높은 중심부 영역이 되어 넓이가 더 커집니다.</td>\n'
+                        '    </tr>\n'
+                        '  </tbody>\n'
+                        '</table>\n'
+                        '<p>\n'
+                        '  <b>■ 5단계: 최종 확률 $\\mathrm{P}(Y \\ge 20)$ 및 정답 $1000k$ 도출</b><br>\n'
+                        '  $\\text{Case 1}$에 의해 $m_2 = 16$으로 확정되었으므로 $Y \\sim \\mathrm{N}(16, 10^2)$입니다. 구하는 확률 '
+                        '$\\mathrm{P}(Y \\ge 20)$을 표준화하면:\n'
+                        '  $$\\mathrm{P}(Y \\ge 20) = \\mathrm{P}\\left(Z \\ge \\frac{20 - 16}{10}\\right) = '
                         '\\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155 = 0.345$$\n'
+                        '  • <b>기하학적 의미</b>: 대칭축 $m_2 = 16$($Z = 0$) 오른쪽 반쪽 전체의 넓이 $0.5$에서, $16 \\le Y \\le 20$($0 '
+                        '\\le Z \\le 0.4$) 구간의 넓이 $0.155$를 빼낸 오른쪽 꼬리 영역의 넓이가 바로 $k = 0.345$입니다.\n'
                         '</p>\n'
                         '\n'
-                        '<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>\n'
+                        '<h4>🔗 [3. 수학자료실(min7014.github.io) 연계 심층 탐구]</h4>\n'
+                        '<ul>\n'
+                        '  <li>📌 <b><a href="https://min7014.github.io/math20230602001.html" target="_blank" '
+                        'rel="noopener" style="color:#38bdf8">정규분포 (Normal Distribution)</a></b>: 평균 $m$과 표준편차 '
+                        '$\\sigma$를 슬라이더로 움직이며 종 모양 확률밀도함수 곡선이 평행이동($m$ 변화)하거나 높낮이가 변하는($\\sigma$ 변화) 기하학적 성질을 <a '
+                        'href="https://www.geogebra.org/m/enufqbhp" target="_blank" rel="noopener" '
+                        'style="color:#6ee7b7">GeoGebra 앱렛</a>과 <a '
+                        'href="https://min7014.github.io/2023/2023060201.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" '
+                        'target="_blank" rel="noopener" style="color:#fca5a5">단계별 증명 PDF</a>로 직접 확인해 보세요.</li>\n'
+                        '  <li>📌 <b><a href="https://min7014.github.io/math20230603001.html" target="_blank" '
+                        'rel="noopener" style="color:#38bdf8">표준정규분포 (Standard Normal Distribution)</a></b>: 서로 다른 '
+                        '정규분포를 $Z = \\dfrac{X - m}{\\sigma}$으로 표준화할 때 곡선 아래의 색칠된 넓이(확률)가 어떻게 보존되는지 <a '
+                        'href="https://www.geogebra.org/m/ewfbgb5b" target="_blank" rel="noopener" '
+                        'style="color:#6ee7b7">GeoGebra 조작</a> 및 <a href="https://youtu.be/BZzCy9js8K8" '
+                        'target="_blank" rel="noopener" style="color:#fde68a">해설 강의 영상</a>으로 탐구할 수 있습니다.</li>\n'
+                        '  <li>📌 <b><a href="https://min7014.github.io/math20230613002.html" target="_blank" '
+                        'rel="noopener" style="color:#38bdf8">표준정규분포표 ($z \\to p$) 동적 탐색기</a></b>: $z$값의 구간에 따른 넓이의 합과 '
+                        '차($0.191 - 0.079 = 0.112$, $0.5 - 0.155 = 0.345$)를 <a '
+                        'href="https://www.geogebra.org/m/pUgrEav5" target="_blank" rel="noopener" '
+                        'style="color:#6ee7b7">GeoGebra 인터랙티브 도구</a>로 실험해 보세요.</li>\n'
+                        '</ul>\n'
+                        '\n'
+                        '<h4>✨ [4. 정답 도출 및 실전 점검 포인트]</h4>\n'
                         '<p>\n'
-                        '  따라서 $1000 \\times k = 1000 \\times 0.345 =$ <b>$345$</b>입니다.\n'
+                        '  따라서 $k = 0.345$이므로 구하는 값은:\n'
+                        '  $$\\therefore 1000 \\times k = 1000 \\times 0.345 = '
+                        '\\underline{\\underline{\\mathbf{345}}}$$\n'
                         '</p>',
-            'solution_en': '<h4>📋 [Problem Analysis & Core Concepts]</h4>\n'
-                           '<p>This problem uses the <b>peak and symmetry of normal density curves</b> with equal '
-                           'standard deviations ($\\sigma = 10$) to merge disjoint probability intervals and determine '
-                           '$m_1$ and $m_2$.</p>\n'
+            'solution_en': '<h4>📋 [1. Problem Analysis &amp; Core Geometric Concepts]</h4>\n'
+                           '<p>Because $X \\sim \\mathrm{N}(m_1, 10^2)$ and $Y \\sim \\mathrm{N}(m_2, 10^2)$ share the '
+                           'same standard deviation $\\sigma = 10$, their probability density curves $y = f(x)$ and $y '
+                           '= g(x)$ are <b>geometrically congruent bell curves</b> related by horizontal translation. '
+                           'Standardizing via $Z_1 = \\dfrac{X - m_1}{10} \\sim \\mathrm{N}(0, 1)$ and $Z_2 = '
+                           '\\dfrac{Y - m_2}{10} \\sim \\mathrm{N}(0, 1)$ lets us compare intervals directly on the '
+                           'standard normal curve.</p>\n'
                            '\n'
-                           '<h4>📐 [Step-by-Step Rigorous Derivation]</h4>\n'
+                           '<h4>📐 [2. Complete Whiteboard Solution &amp; Geometric Explanation]</h4>\n'
                            '<p>\n'
-                           '  <b>Step 1: Symmetry of $X$</b><br>\n'
-                           '  From $f(x) \\le f(4)$, the mean is $m_1 = 4$. Reflecting $[1, 2]$ across $4$ gives $[6, '
-                           '7]$, so $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9) = \\mathrm{P}(6 \\le '
-                           'X \\le 9) = \\mathrm{P}(11 \\le Y \\le 14)$.<br><br>\n'
-                           '  <b>Step 2: Mean $m_2$ of $Y$ and final probability</b><br>\n'
-                           '  From $f(5) = g(15)$ with $\\sigma_1 = \\sigma_2 = 10$, we have $|15 - m_2| = |5 - 4| = 1 '
-                           '\\implies m_2 \\in \\{14, 16\\}$. Since $[6, 9]$ is at distance $2$ to $5$ from $4$, $[11, '
-                           '14]$ must be at distance $2$ to $5$ from $m_2$, fixing $m_2 = 16$. Thus:<br>\n'
-                           '  $$k = \\mathrm{P}(Y \\ge 20) = \\mathrm{P}\\left(Z \\ge \\frac{20-16}{10}\\right) = '
+                           '  <b>■ Step 1: Condition (가) $f(x) \\le f(4) \\implies m_1 = 4$</b><br>\n'
+                           '  Geometrically, $f(x) \\le f(4)$ for all real $x$ means the bell curve $y = f(x)$ reaches '
+                           'its highest peak at $x = 4$. Since the peak of a normal curve is its symmetry axis (mean), '
+                           'we have <b>$m_1 = 4$</b>.<br><br>\n'
+                           '  <b>■ Step 2: Condition (나) $f(5) = g(15) \\implies \\text{Case 1 }(m_2 = 16)$ vs. '
+                           '$\\text{Case 2 }(m_2 = 14)$</b><br>\n'
+                           '  On curve $f$, $x = 5$ is $1$ unit to the right of the peak $m_1 = 4$. Since curve $g$ is '
+                           'congruent to $f$, a point with the same height $g(15) = f(5)$ must lie at distance $1$ '
+                           'from the peak $m_2$ of $g$, giving two symmetric cases:<br>\n'
+                           '  • <b>$\\text{Case 1}$ ($15$ is $1$ unit left of $m_2$)</b>: $m_2 - 1 = 15 \\implies '
+                           '\\underline{m_2 = 16}$<br>\n'
+                           '  • <b>$\\text{Case 2}$ ($15$ is $1$ unit right of $m_2$)</b>: $m_2 + 1 = 15 \\implies '
+                           '\\underline{m_2 = 14}$<br><br>\n'
+                           '  <b>■ Step 3: Standardizing the LHS &amp; Geometric Meaning of Canceling '
+                           '$\\cancel{0.118}$</b><br>\n'
+                           '  Standardizing $\\mathrm{P}(1 \\le X \\le 2) + \\mathrm{P}(7 \\le X \\le 9)$ with $Z_1 = '
+                           '\\dfrac{X - 4}{10}$:<br>\n'
+                           '  $$\\mathrm{P}\\left(\\frac{-3}{10} \\le Z \\le \\frac{-2}{10}\\right) + '
+                           '\\mathrm{P}\\left(\\frac{3}{10} \\le Z \\le \\frac{5}{10}\\right) = \\mathrm{P}(-0.3 \\le '
+                           'Z \\le -0.2) + \\mathrm{P}(0.3 \\le Z \\le 0.5)$$\n'
+                           '  $$= \\cancel{0.118} - 0.079 + 0.191 - \\cancel{0.118} = \\mathbf{0.112}$$\n'
+                           '  <i>Geometric insight</i>: Reflecting $[1, 2]$ ($Z \\in [-0.3, -0.2]$) across the '
+                           'symmetry axis $m_1 = 4$ ($Z = 0$) maps it onto $[6, 7]$ ($Z \\in [0.2, 0.3]$), which '
+                           'shares the boundary $X = 7$ ($Z = 0.3$, where $0.118$ cancels) with $[7, 9]$ ($Z \\in '
+                           '[0.3, 0.5]$), forming the single contiguous interval $[6, 9]$ ($Z \\in [0.2, '
+                           '0.5]$).<br><br>\n'
+                           '  <b>■ Step 4: Testing $\\text{Case 1}$ and $\\text{Case 2}$ on the RHS $\\mathrm{P}(11 '
+                           '\\le Y \\le 14)$</b><br>\n'
+                           '  • <b>$\\text{Case 1}$ ($m_2 = 16$)</b>: $\\mathrm{P}(11 \\le Y \\le 14) = '
+                           '\\mathrm{P}\\left(\\dfrac{-5}{10} \\le Z \\le \\dfrac{-2}{10}\\right) = \\mathrm{P}(-0.5 '
+                           '\\le Z \\le -0.2) = 0.191 - 0.079 = \\underline{\\underline{0.112}}$ (<b>O.K.!</b> Mirrors '
+                           '$Z \\in [0.2, 0.5]$ across $Z = 0$).<br>\n'
+                           '  • <b>$\\text{Case 2}$ ($m_2 = 14$)</b>: $\\mathrm{P}(11 \\le Y \\le 14) = '
+                           '\\mathrm{P}\\left(\\dfrac{-3}{10} \\le Z \\le \\dfrac{0}{10}\\right) = \\mathrm{P}(-0.3 '
+                           '\\le Z \\le 0) = 0.118 \\ne 0.112$ (<b>Invalid!</b> Right endpoint $14$ sits at the peak '
+                           '$Z = 0$).<br><br>\n'
+                           '  <b>■ Step 5: Final Tail Probability $\\mathrm{P}(Y \\ge 20)$</b><br>\n'
+                           '  With $m_2 = 16$ confirmed:<br>\n'
+                           '  $$k = \\mathrm{P}(Y \\ge 20) = \\mathrm{P}\\left(Z \\ge \\frac{20 - 16}{10}\\right) = '
                            '\\mathrm{P}(Z \\ge 0.4) = 0.5 - 0.155 = 0.345$$\n'
                            '</p>\n'
                            '\n'
-                           '<h4>✨ [Final Answer & Practical Tips]</h4>\n'
+                           '<h4>✨ [3. Final Answer &amp; Practical Tips]</h4>\n'
                            '<p>\n'
-                           '  Therefore, $1000k =$ <b>$345$</b>.\n'
+                           '  Therefore, $1000 \\times k = 1000 \\times 0.345 = '
+                           '\\underline{\\underline{\\mathbf{345}}}$.\n'
                            '</p>'}},
  {'slug': 'c2610p30',
   'qNum': '확통 30',

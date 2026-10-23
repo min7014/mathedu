@@ -69,7 +69,8 @@ def match_materials(text, limit=4):
     is_circle = ('원의 방정식' in text_lower) or ('원' in text_lower and any(k in text_lower for k in ['거리', '직선', '접선', '중심', '반지름']))
     is_trig = any(k in text_lower for k in ['삼각함수', '삼각비', '단위원', '호도법', '주기'])
     is_law = any(k in text_lower for k in ['사인법칙', '코사인법칙', '사인 법칙', '코사인 법칙'])
-    is_diff = any(k in text_lower for k in ['미분', '접선', '도함수', '할선', '미분계수', '미분가능', '변곡점', '극대', '극소'])
+    text_no_pdf = text_lower.replace('확률밀도함수', '확률밀도')
+    is_diff = any(k in text_no_pdf for k in ['미분', '접선', '도함수', '할선', '미분계수', '미분가능', '변곡점', '극대', '극소'])
     is_poly = any(k in text_lower for k in ['삼차함수', '사차함수', '다항함수'])
     is_integral = any(k in text_lower for k in ['적분', '정적분', '부정적분', '구분구적법', '넓이'])
     is_seq = any(k in text_lower for k in ['수열', '등차', '등비', '시그마', '점화식', '급수'])
@@ -144,9 +145,16 @@ def match_materials(text, limit=4):
 
         # 9. 확률과 통계
         if is_prob:
-            if any(k in text_lower for k in ['정규분포', '표준정규', '신뢰구간', '모평균', '표본평균']):
-                if '정규분포' in item_text or '모집단' in item_text or '표본' in item_text: score += 200
+            if any(k in text_lower for k in ['신뢰구간', '모평균', '표본평균']):
+                if '표본' in item_text or '모집단' in item_text: score += 250
+                elif '정규분포' in item_text: score += 190
                 elif '확률분포' in item_text: score += 160
+            elif any(k in text_lower for k in ['정규분포', '표준정규', '확률밀도']):
+                if '정규분포(normal' in item_text or '표준정규분포(standard' in item_text: score += 280
+                elif '표준정규분포표' in item_text: score += 260
+                elif '확률분포(probability' in item_text: score += 240
+                elif '정규분포' in item_text: score += 220
+                elif '모집단' in item_text or '표본' in item_text: score += 150
             elif any(k in text_lower for k in ['조건부확률', '여사건', '비복원', '독립시행', '사건', '경우의수', '순열', '조합']):
                 if '시행과 사건' in item_text or '확률수업' in item_text: score += 220
                 elif '확률분포' in item_text: score += 180
@@ -216,7 +224,7 @@ def match_materials(text, limit=4):
     return results[:limit]
 
 def _get_visual_tip_text(problem_title):
-    t = problem_title.lower()
+    t = problem_title.lower().replace('확률밀도함수', '확률밀도')
     
     if any(k in t for k in ['사인법칙', '코사인법칙', '사인 법칙', '코사인 법칙']):
         return (
@@ -309,7 +317,15 @@ def _get_visual_tip_text(problem_title):
             "• <b>[여사건과 배반사건 소거]</b> 복잡한 '또는' 조건을 여사건의 상호배반인 케이스들로 분해하고 불가능한 순서쌍을 소거하여 정확히 세는 논리<br>"
             "• <b>[조건부확률의 축소된 표본공간]</b> 사건 $\\mathrm{I})$이 일어났을 때 그 안에서 사건 $\\mathrm{II})$가 차지하는 비율 $\\dfrac{n(\\mathrm{I}\\cap\\mathrm{II})}{n(\\mathrm{I})}$의 의미를 하단 자료에서 깊이 있게 탐구해 보세요."
         )
-    elif any(k in t for k in ['확률', '순열', '조합', '독립', '정규분포']):
+    elif any(k in t for k in ['정규분포', '표준정규', '확률밀도']):
+        return (
+            "💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>"
+            "수학자료실의 정규분포·표준정규분포 자료는 <b>종 모양 확률밀도함수 곡선의 기하학적 대칭성과 표준화($Z$) 원리</b>를 동적 기하로 한눈에 보여줍니다.<br>"
+            "• <b>[대칭축과 산봉우리 최댓값]</b> 정규분포 $\\mathrm{N}(m, \\sigma^2)$의 확률밀도함수 곡선은 대칭축인 평균 $x = m$에서 가장 높은 산봉우리(최댓값)를 가지며, 표준편차 $\\sigma$가 같으면 평행이동에 의해 완전히 포개어지는 합동 도형이 됩니다.<br>"
+            "• <b>[거울 대칭과 넓이의 보존]</b> 대칭축 $x = m$으로부터 같은 거리만큼 떨어진 구간은 좌우 넓이(확률)가 똑같으므로, 떨어진 두 조각도 대칭이동을 통해 하나의 연속된 구간 넓이로 이어붙일 수 있습니다.<br>"
+            "• <b>[표준화 변환 $Z = \\dfrac{X-m}{\\sigma}$의 기하학]</b> 서로 다른 평균 $m_1, m_2$를 가진 정규분포라도 표준화 변수 $Z \\sim \\mathrm{N}(0, 1)$로 변환하면 대칭축이 $Z = 0$으로 통일되어 표준정규분포표의 넓이로 즉시 비교할 수 있음을 하단 GeoGebra 앱렛과 증명 PDF에서 직접 조작하며 확인해 보세요."
+        )
+    elif any(k in t for k in ['확률', '순열', '조합', '독립']):
         return (
             "💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>"
             "수학자료실의 PDF 자료는 독립시행의 무수한 우연이 <b>필연적인 정규분포의 종 모양 곡선으로 수렴하는 과정</b>을 시각화합니다.<br>"

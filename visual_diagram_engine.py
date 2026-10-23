@@ -83,6 +83,127 @@ def _right_panel_svg(hdr: str, stroke_col: str, hdr_col: str, eq_label: str, pt1
 # 20 SPECIALIZED GEOMETRIC / VISUAL SVG DRAWERS
 # ==============================================================================
 
+def _draw_c2610p29_svg(lang="ko") -> str:
+    title = (
+        "📐 [기하적 대칭·합동 모델] 두 정규분포 곡선 f, g의 대칭 이동과 Case 1(m₂=16)·Case 2(m₂=14) 검증"
+        if lang == "ko"
+        else "📐 [Geometric Symmetry & Congruence Model] Normal Curves f, g & Case 1 (m₂=16) vs Case 2 (m₂=14)"
+    )
+    sub = "m₁=4, m₂=16 ⇒ k=0.345, 1000k=345"
+    inner = """
+    <!-- PANEL 1: Curve f(x), m1=4, f(5), and symmetric reflection of [1,2] to [6,7] joining [7,9] -->
+    <rect x="14" y="50" width="216" height="152" rx="10" fill="rgba(15,23,42,0.92)" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="122" y="67" fill="#7cc4ff" font-size="11" font-weight="800" text-anchor="middle">① 곡선 f(x) : X ~ N(4, 10²) &amp; 대칭 결합</text>
+    <!-- Baseline -->
+    <line x1="24" y1="148" x2="220" y2="148" stroke="#94a3b8" stroke-width="1.4"/>
+    <!-- Left shaded [1,2] (Z in [-0.3,-0.2]) -->
+    <path d="M 68 148 L 68 119 Q 76 112 84 106 L 84 148 Z" fill="rgba(251,113,133,0.42)" stroke="#fb7185" stroke-width="1.2"/>
+    <!-- Reflected [6,7] (Z in [0.2,0.3]) -->
+    <path d="M 148 148 L 148 106 Q 156 112 164 119 L 164 148 Z" fill="rgba(251,113,133,0.32)" stroke="#fb7185" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- Right shaded [7,9] (Z in [0.3,0.5]) -->
+    <path d="M 164 148 L 164 119 Q 180 132 196 141 L 196 148 Z" fill="rgba(56,189,248,0.42)" stroke="#38bdf8" stroke-width="1.2"/>
+    <!-- Bell curve f -->
+    <path d="M 28 146 C 62 144, 88 80, 116 80 C 144 80, 170 144, 214 146" fill="none" stroke="#38bdf8" stroke-width="2.6"/>
+    <!-- Symmetry axis m1 = 4 -->
+    <line x1="116" y1="74" x2="116" y2="152" stroke="#fbbf24" stroke-width="1.8" stroke-dasharray="4,3"/>
+    <circle cx="116" cy="80" r="4" fill="#fbbf24"/>
+    <text x="116" y="162" fill="#fde68a" font-size="10" font-weight="800" text-anchor="middle">m₁=4</text>
+    <!-- Point x = 5 on curve f (distance +1 from 4) -->
+    <line x1="132" y1="86" x2="132" y2="150" stroke="#fde68a" stroke-width="1.2" stroke-dasharray="2,2"/>
+    <circle cx="132" cy="86" r="4" fill="#fde68a" stroke="#0b1120" stroke-width="1.2"/>
+    <text x="134" y="162" fill="#fde68a" font-size="9.5" font-weight="700" text-anchor="middle">5</text>
+    <!-- Reflection curved arrow from [1,2] to [6,7] -->
+    <path d="M 76 104 Q 116 64 155 102" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#arrCoral)"/>
+    <text x="116" y="75" fill="#fecdd3" font-size="8.8" font-weight="700" text-anchor="middle">거울 대칭 접기</text>
+    <!-- x-axis ticks -->
+    <text x="66" y="161" fill="#fecdd3" font-size="9" text-anchor="middle">1</text>
+    <text x="84" y="161" fill="#fecdd3" font-size="9" text-anchor="middle">2</text>
+    <text x="148" y="161" fill="#bae6fd" font-size="9" text-anchor="middle">6</text>
+    <text x="164" y="161" fill="#34d399" font-size="9.5" font-weight="800" text-anchor="middle">7</text>
+    <text x="196" y="161" fill="#bae6fd" font-size="9" text-anchor="middle">9</text>
+    <!-- Formula summary inside Panel 1 -->
+    <text x="122" y="177" fill="#e2e8f0" font-size="9.2" font-weight="700" text-anchor="middle">P(-0.3≤Z≤-0.2) + P(0.3≤Z≤0.5)</text>
+    <text x="122" y="192" fill="#34d399" font-size="9.5" font-weight="800" text-anchor="middle">= (0.118-0.079)+(0.191-0.118) = 0.112</text>
+
+    <!-- Horizontal equal-height connector line: f(5) = g(15) -->
+    <line x1="132" y1="86" x2="366" y2="86" stroke="#fbbf24" stroke-width="1.3" stroke-dasharray="4,3"/>
+    <rect x="200" y="74" width="68" height="15" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+    <text x="234" y="84.5" fill="#fde68a" font-size="8.8" font-weight="800" text-anchor="middle">f(5) = g(15)</text>
+
+    <!-- PANEL 2: Curve g(x), m2, and the two symmetric points (15) for Case 1 vs Case 2 -->
+    <rect x="238" y="50" width="224" height="152" rx="10" fill="rgba(15,23,42,0.92)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="350" y="67" fill="#c4b5fd" font-size="11" font-weight="800" text-anchor="middle">② 곡선 g(x) : f(5)=g(15)의 두 대칭 케이스</text>
+    <line x1="252" y1="132" x2="448" y2="132" stroke="#94a3b8" stroke-width="1.4"/>
+    <!-- Bell curve g -->
+    <path d="M 262 130 C 294 128, 322 80, 350 80 C 378 80, 406 128, 438 130" fill="none" stroke="#a78bfa" stroke-width="2.6"/>
+    <!-- Symmetry axis m2 -->
+    <line x1="350" y1="74" x2="350" y2="136" stroke="#fbbf24" stroke-width="1.8" stroke-dasharray="4,3"/>
+    <text x="350" y="145" fill="#fde68a" font-size="10" font-weight="800" text-anchor="middle">m₂</text>
+    <!-- Left symmetric point 15 (Case 1: m2 = 16) -->
+    <line x1="334" y1="86" x2="334" y2="134" stroke="#34d399" stroke-width="1.4" stroke-dasharray="2,2"/>
+    <circle cx="334" cy="86" r="4.5" fill="#34d399" stroke="#0b1120" stroke-width="1.2"/>
+    <text x="315" y="102" fill="#6ee7b7" font-size="9.2" font-weight="800" text-anchor="end">⑮(Case1)</text>
+    <!-- Right symmetric point 15 (Case 2: m2 = 14) -->
+    <line x1="366" y1="86" x2="366" y2="134" stroke="#fb7185" stroke-width="1.4" stroke-dasharray="2,2"/>
+    <circle cx="366" cy="86" r="4.5" fill="#fb7185" stroke="#0b1120" stroke-width="1.2"/>
+    <text x="385" y="102" fill="#fecdd3" font-size="9.2" font-weight="800" text-anchor="start">⑮(Case2)</text>
+
+    <!-- Case 1 vs Case 2 comparison sub-boxes inside Panel 2 -->
+    <rect x="245" y="150" width="104" height="45" rx="6" fill="rgba(52,211,153,0.16)" stroke="#34d399" stroke-width="1.3"/>
+    <text x="297" y="163" fill="#6ee7b7" font-size="9.2" font-weight="800" text-anchor="middle">Case 1 : m₂ = 16</text>
+    <text x="297" y="176" fill="#ecfdf5" font-size="8.6" text-anchor="middle">P(-0.5≤Z≤-0.2)</text>
+    <text x="297" y="189" fill="#fde68a" font-size="9.2" font-weight="800" text-anchor="middle">= 0.112 (O.K.!)</text>
+
+    <rect x="353" y="150" width="102" height="45" rx="6" fill="rgba(251,113,133,0.14)" stroke="#fb7185" stroke-width="1.2"/>
+    <text x="404" y="163" fill="#fecdd3" font-size="9.2" font-weight="800" text-anchor="middle">Case 2 : m₂ = 14</text>
+    <text x="404" y="176" fill="#e2e8f0" font-size="8.6" text-anchor="middle">P(-0.3≤Z≤0)</text>
+    <text x="404" y="189" fill="#fb7185" font-size="9.2" font-weight="800" text-anchor="middle">= 0.118 (✕ 모순)</text>
+
+    <!-- PANEL 3: Final Tail Probability P(Y >= 20) = P(Z >= 0.4) = 0.345 -->
+    <rect x="470" y="50" width="196" height="152" rx="10" fill="rgba(15,23,42,0.92)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="568" y="67" fill="#6ee7b7" font-size="11" font-weight="800" text-anchor="middle">③ 확정 g(x) : P(Y ≥ 20) 꼬리 넓이</text>
+    <line x1="482" y1="142" x2="654" y2="142" stroke="#94a3b8" stroke-width="1.4"/>
+    <!-- Middle area [16, 20] (0 <= Z <= 0.4) = 0.155 -->
+    <path d="M 556 142 L 556 80 Q 574 82 590 106 L 590 142 Z" fill="rgba(56,189,248,0.25)"/>
+    <!-- Right tail area [20, inf) (Z >= 0.4) = 0.345 -->
+    <path d="M 590 142 L 590 106 C 608 128, 626 139, 648 141 L 648 142 Z" fill="rgba(52,211,153,0.48)" stroke="#34d399" stroke-width="1.3"/>
+    <!-- Bell curve Y ~ N(16, 10^2) -->
+    <path d="M 486 140 C 514 138, 534 80, 556 80 C 578 80, 606 138, 648 140" fill="none" stroke="#34d399" stroke-width="2.5"/>
+    <line x1="556" y1="74" x2="556" y2="146" stroke="#fbbf24" stroke-width="1.7" stroke-dasharray="4,3"/>
+    <line x1="590" y1="102" x2="590" y2="146" stroke="#fde68a" stroke-width="1.5"/>
+    <text x="556" y="155" fill="#fde68a" font-size="9.5" font-weight="800" text-anchor="middle">m₂=16</text>
+    <text x="590" y="155" fill="#6ee7b7" font-size="9.5" font-weight="800" text-anchor="middle">20(Z=0.4)</text>
+    <text x="573" y="126" fill="#bae6fd" font-size="8.8" font-weight="700" text-anchor="middle">0.155</text>
+    <text x="618" y="124" fill="#ecfdf5" font-size="9.5" font-weight="800" text-anchor="middle">k=0.345</text>
+    <text x="568" y="174" fill="#e2e8f0" font-size="9.2" font-weight="700" text-anchor="middle">k = P(Z ≥ 0.4) = 0.5 - 0.155 = 0.345</text>
+    <rect x="492" y="180" width="152" height="17" rx="5" fill="rgba(251,191,36,0.22)" stroke="#fbbf24" stroke-width="1.2"/>
+    <text x="568" y="192" fill="#fde68a" font-size="10.2" font-weight="900" text-anchor="middle">∴ 1000 × k = 345</text>
+
+    <!-- PANEL 4: Bottom Geometric Alignment & Cancellation Diagram -->
+    <rect x="14" y="210" width="652" height="108" rx="10" fill="rgba(30,41,59,0.92)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="340" y="228" fill="#fde68a" font-size="11.5" font-weight="800" text-anchor="middle">🔍 [기하학적 넓이 이동 &amp; 0.118 상쇄 원리] 왜 좌변은 Z ∈ [0.2, 0.5]가 되고, 우변은 Case 1(m₂=16)만 성립할까?</text>
+
+    <!-- Left sub-diagram: Z-interval glueing at Z=0.3 -->
+    <rect x="26" y="236" width="304" height="74" rx="8" fill="rgba(15,23,42,0.85)" stroke="rgba(56,189,248,0.4)"/>
+    <text x="178" y="251" fill="#7cc4ff" font-size="10" font-weight="800" text-anchor="middle">좌변(X) : 대칭 이동 조각 [6, 7] + 원래 조각 [7, 9] = 연속 구간 [6, 9]</text>
+    <rect x="38" y="259" width="112" height="24" rx="5" fill="rgba(251,113,133,0.28)" stroke="#fb7185" stroke-width="1.3"/>
+    <text x="94" y="275" fill="#fecdd3" font-size="9.2" font-weight="800" text-anchor="middle">[6,7] (Z: 0.2~0.3) : 0.118-0.079</text>
+    <text x="158" y="275" fill="#fbbf24" font-size="12" font-weight="900" text-anchor="middle">+</text>
+    <rect x="166" y="259" width="152" height="24" rx="5" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="1.3"/>
+    <text x="242" y="275" fill="#bae6fd" font-size="9.2" font-weight="800" text-anchor="middle">[7,9] (Z: 0.3~0.5) : 0.191-0.118</text>
+    <text x="178" y="301" fill="#6ee7b7" font-size="9.5" font-weight="800" text-anchor="middle">경계 X=7 (Z=0.3, 넓이 0.118)에서 맞물려 +0.118과 -0.118 상쇄 ⇒ 0.191 - 0.079 = 0.112</text>
+
+    <!-- Right sub-diagram: Case 1 vs Case 2 geometric distance from mean m2 -->
+    <rect x="340" y="236" width="314" height="74" rx="8" fill="rgba(15,23,42,0.85)" stroke="rgba(52,211,153,0.4)"/>
+    <text x="497" y="251" fill="#6ee7b7" font-size="10" font-weight="800" text-anchor="middle">우변(Y) : 구간 [11, 14]와 대칭축 m₂ 사이의 기하학적 거리 비교</text>
+    <rect x="350" y="258" width="294" height="22" rx="5" fill="rgba(52,211,153,0.22)" stroke="#34d399" stroke-width="1.2"/>
+    <text x="497" y="273" fill="#ecfdf5" font-size="9.2" font-weight="800" text-anchor="middle">⭕ Case 1 (m₂=16) : [11, 14]는 16에서 왼쪽 2~5칸 (Z: -0.5~-0.2) ⇒ 넓이 0.112 합동!</text>
+    <rect x="350" y="284" width="294" height="21" rx="5" fill="rgba(251,113,133,0.18)" stroke="#fb7185" stroke-width="1.1"/>
+    <text x="497" y="298" fill="#fecdd3" font-size="9.1" font-weight="700" text-anchor="middle">❌ Case 2 (m₂=14) : [11, 14]는 봉우리(14)에 걸친 왼쪽 0~3칸 (Z: -0.3~0) ⇒ 넓이 0.118 탈락!</text>
+    """
+    return _svg_wrap(title, sub, inner, 328)
+
+
 def _draw_c2610p30_svg(lang="ko") -> str:
     title = "📐 [시각적 도형 모델] 두 주머니 A·B 비복원 추출 & 400칸 표본공간 넓이 분할 도형" if lang == "ko" else "📐 [Visual Geometric Model] Two Bags A & B Non-Replacement & 400-Outcome Area Partition"
     sub = "n(E)=336, n(E∩F)=96 ⇒ P=2/7"
@@ -550,13 +671,15 @@ def _draw_sequence_algebra_prob_svg(pid: str, title_ko: str, eq_label: str, pt1_
 
 def _classify_problem(pid: str, title: str, sol_text: str):
     t = (title + " " + sol_text[:300]).lower()
-    if pid == "c2610p30":
+    if pid == "c2610p29":
+        return ("c2610p29", "normal_two_cases")
+    if pid in ("c2610p30", "c2709p30"):
         return ("c2610p30", "bags")
-    if pid in ("a33ab59b", "c2610g24") or "쌍곡선" in t:
+    if pid in ("a33ab59b", "c2610g24", "c2709g29") or "쌍곡선" in t:
         return ("geo", "hyperbola")
-    if pid == "c2610g26" or "포물선" in t:
+    if pid in ("c2610g26", "c2709g27") or "포물선" in t:
         return ("geo", "parabola")
-    if pid == "c2610g28" or "타원" in t:
+    if pid in ("c2610g28", "c2709g25") or "타원" in t:
         return ("geo", "ellipse")
     if pid == "c1092101":
         return ("geo", "circle_line")
@@ -568,17 +691,17 @@ def _classify_problem(pid: str, title: str, sol_text: str):
         return ("geo", "trig_quadrant")
     if pid in ("c261012", "c261020", "c270910", "c30914"):
         return ("geo", "exp_log_sym")
-    if pid in ("c2610g25", "c2610g27", "c2610g29", "c2610m26", "c30926") or "공간" in t or "정사영" in t or "원기둥" in t or "입체도형" in t:
+    if pid in ("c2610g25", "c2610g27", "c2610g29", "c2610m26", "c30926", "c2709g24", "c2709g26", "c2709g28") or "공간" in t or "정사영" in t or "원기둥" in t or "입체도형" in t:
         return ("geo", "space3d")
-    if pid in ("c2610g23", "c2610g30") or "벡터" in t:
+    if pid in ("c2610g23", "c2610g30", "c2709g23", "c2709g30") or "벡터" in t:
         return ("geo", "vector")
     if pid in ("c261014", "c270912", "c30910", "c270920") or "사인법칙" in t or "외접원" in t:
         return ("geo", "circle_tri")
-    if pid in ("36790012", "c2610p24", "c2610p26", "c2610p29") or "정규분포" in t or "신뢰구간" in t or "이항분포" in t:
+    if pid in ("36790012", "c2610p24", "c2610p26", "c2610p29", "c2709p27") or "정규분포" in t or "신뢰구간" in t or "이항분포" in t:
         return ("seq", "bell")
-    if pid in ("8f24f3c3", "c2610p27"):
+    if pid in ("8f24f3c3", "c2610p27", "c2709p24", "c2709p26"):
         return ("seq", "dice_grid")
-    if pid in ("4cb6d212", "a05b47bc", "c2610p23", "c2610p25", "c2610p28"):
+    if pid in ("4cb6d212", "a05b47bc", "c2610p23", "c2610p25", "c2610p28", "c2709p23", "c2709p25", "c2709p28", "c2709p29"):
         return ("seq", "cards_slots")
     if pid in ("c270916", "c30916", "c2610m25", "c270925"):
         return ("seq", "number_line_domain")
@@ -609,6 +732,8 @@ def _classify_problem(pid: str, title: str, sol_text: str):
 
 def _clean_plain(s: str, max_len: int = 34) -> str:
     s = re.sub(r"<[^>]+>", " ", str(s))
+    s = re.sub(r"\\d?frac\{([^{}]+)\}\{([^{}]+)\}", r"\1/\2", s)
+    s = re.sub(r"\\sqrt\{([^{}]+)\}", r"√\1", s)
     s = s.replace("\\dfrac", "").replace("\\frac", "/").replace("\\sqrt", "√")
     s = s.replace("\\overline", "").replace("\\mathrm", "").replace("\\left", "").replace("\\right", "")
     s = s.replace("\\implies", "⇒").replace("\\iff", "⇔").replace("\\to", "→")
@@ -644,7 +769,9 @@ def build_visual_and_schematic_block(
     pt2_lbl = s_clean[-1] if len(s_clean) > 2 else f"수식 연립 및 도출 → {ans_clean}"
 
     cat, submode = _classify_problem(pid, short_title, sol_ko_plain)
-    if cat == "c2610p30":
+    if cat == "c2610p29":
+        svg_html = _draw_c2610p29_svg(lang=lang)
+    elif cat == "c2610p30":
         svg_html = _draw_c2610p30_svg(lang=lang)
     elif cat == "geo":
         svg_html = _draw_geometry_conic_trig_svg(pid, short_title[:28], eq_lbl, pt1_lbl, pt2_lbl, ans_clean, geo_type=submode, lang=lang)
