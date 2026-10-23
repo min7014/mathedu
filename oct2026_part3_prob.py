@@ -724,88 +724,282 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
   'subject': '확률과 통계',
   'title': '[2026학년도 10월 고3 확통 28번] 같은 숫자가 적힌 카드의 선택과 같은 것이 있는 순열',
   'title_en': '[2026 AY Oct Exam Grade 12 Prob&Stats #28] Card Selection and Permutations with Identical Items',
-  'summary_ko': '첫째 자리에 짝수($2$ 또는 $4$)를 놓은 뒤 나머지 $5$자리에 들어갈 숫자의 쌍 개수에 따라 케이스를 나누어 $2 \\times 360 = 720$ 구하기',
-  'summary_en': 'Fix the first digit as even ($2$ choices: $2$ or $4$), classify the remaining $5$ digits by identical '
-                'pairs, and compute $2 \\times 360 = 720$.',
-  'tags': ['확률과 통계', '경우의수', '같은것이있는순열', '케이스분류', '28번'],
-  'symbols': [{'sym': '$\\{1, 1, 2, 2, 3, 3, 4, 4\\}$',
-               'desc': '1, 2, 3, 4가 각각 2장씩 들어 있는 총 8장의 카드',
-               'desc_en': 'Eight cards consisting of two each of 1, 2, 3, and 4.'},
-              {'sym': '$\\dfrac{5!}{2!2!} = 30,\\quad \\dfrac{5!}{2!} = 60$',
-               'desc': '나머지 5개의 자리에 같은 숫자가 2쌍 또는 1쌍 있을 때의 나열 수',
-               'desc_en': 'Permutations of 5 positions with two pairs (30) or one pair (60).'}],
-  'levels': [{'title': '🔰 1단계 · [초등 짝수 고르기] 첫 번째 자리에 올 수 있는 짝수 종류 세기',
-              'title_en': '🔰 Step 1 · [Elementary Even Numbers] Counting choices for the first even digit',
-              'knowledge': '숫자 $1, 2, 3, 4$ 중에서 초등학교에서 배운 짝수는 $2$와 $4$ 두 가지입니다! 같은 숫자가 적힌 카드끼리는 구별하지 않으므로, 맨 앞자리에 놓을 수 '
-                           '있는 숫자는 $2$ 또는 $4$의 $2$가지입니다.',
-              'knowledge_en': 'Among $1, 2, 3, 4$, the elementary even numbers are $2$ and $4$. Since identical digits '
-                              'are indistinguishable, there are $2$ choices for the first position.',
-              'questions': [{'level_label': '초등 짝수 선택 디딤돌 1',
-                             'level_label_en': 'Elementary Even Choice Step 1',
-                             'stem': '초등학교 짝수 개념에 따라 첫 번째 자리에 놓을 수 있는 짝수($2$ 또는 $4$)의 선택 가짓수는?',
-                             'stem_en': 'Using elementary even numbers, how many choices are there for the even digit '
-                                        '($2$ or $4$) in the first position?',
-                             'options': ['$1$', '$2$', '$3$', '$4$', '$6$'],
-                             'answer': 2,
-                             'exp': '$2$ 또는 $4$이므로 $2$가지입니다. (맨 앞자리를 $2$로 고정해 구한 뒤 $2$배 하면 됩니다!)',
-                             'exp_en': 'There are $2$ choices ($2$ or $4$).'}]},
-             {'title': '🌿 2단계 · [경우 1] 맨 앞이 $2$이고 나머지 $5$자리에 $2$가 안 쓰이는 경우',
-              'title_en': '🌿 Step 2 · [Case 1] First digit is $2$, and the other $2$ is not used in the remaining $5$ '
-                          'positions',
-              'knowledge': '맨 앞에 $2$를 $1$장 썼을 때, 남은 카드 중 $2$를 빼고 $\\{1, 1, 3, 3, 4, 4\\}$ $6$장 중에서 $5$장을 골라 나열합니다. $1, '
-                           '3, 4$ 중 $2$종류는 $2$장씩, $1$종류는 $1$장 쓰이므로 ${}_{3}\\mathrm{C}_{1} \\times \\frac{5!}{2!2!} = 3 '
-                           '\\times 30 = 90$가지입니다.',
-              'knowledge_en': 'If the second $2$ is not used, we pick $5$ cards from $\\{1, 1, 3, 3, 4, 4\\}$ (two '
-                              'pairs and one single): $3 \\times \\frac{5!}{2!2!} = 3 \\times 30 = 90$ ways.',
-              'questions': [{'level_label': '경우 1 나열 디딤돌 2',
-                             'level_label_en': 'Case 1 Permutation Step 2',
-                             'stem': '$3 \\times \\frac{5!}{2!2!} = 3 \\times 30$을 계산한 값은?',
-                             'stem_en': 'What is the value of $3 \\times \\frac{5!}{2!2!} = 3 \\times 30$?',
-                             'options': ['$60$', '$90$', '$120$', '$150$', '$180$'],
-                             'answer': 2,
-                             'exp': '$3 \\times 30 = 90$입니다.',
-                             'exp_en': '$3 \\times 30 = 90$.'}]},
-             {'title': '🌱 3단계 · [경우 2] 나머지 $5$자리에 남은 $2$가 $1$장 포함되는 경우',
-              'title_en': '🌱 Step 3 · [Case 2] The remaining $2$ is included among the other $5$ positions',
-              'knowledge': '남은 $2$ 한 장을 포함하면, 나머지 $4$자리는 $\\{1, 1, 3, 3, 4, 4\\}$에서 $4$장을 골라야 합니다. (a) 두 쌍(예: '
-                           '$1,1,3,3$)을 고르면 ${}_{3}\\mathrm{C}_{2} \\times \\frac{5!}{2!2!} = 3 \\times 30 = 90$가지이고, '
-                           '(b) 한 쌍과 단짝 두 개(예: $1,1,3,4$)를 고르면 ${}_{3}\\mathrm{C}_{1} \\times \\frac{5!}{2!} = 3 '
-                           '\\times 60 = 180$가지입니다.',
-              'knowledge_en': 'If the second $2$ is used, the other $4$ cards from $\\{1,1,3,3,4,4\\}$ can be: (a) two '
-                              'pairs: ${}_{3}\\mathrm{C}_{2} \\times \\frac{5!}{2!2!} = 90$, or (b) one pair and two '
-                              'singles: ${}_{3}\\mathrm{C}_{1} \\times \\frac{5!}{2!} = 180$.',
-              'questions': [{'level_label': '경우 2 합산 디딤돌 3',
-                             'level_label_en': 'Case 2 Sum Step 3',
-                             'stem': '나머지 $5$자리에 $2$가 포함되는 경우의 수 $90 + 180$은?',
-                             'stem_en': 'What is the sum $90 + 180$ for Case 2?',
-                             'options': ['$180$', '$210$', '$240$', '$270$', '$300$'],
-                             'answer': 4,
-                             'exp': '$90 + 180 = 270$가지입니다.',
-                             'exp_en': '$90 + 180 = 270$.'}]},
-             {'title': '🌳 4단계 · [맨 앞이 $2$일 때 총합] 경우 1과 경우 2 더하기',
-              'title_en': '🌳 Step 4 · [Total for First Digit $2$] Adding Case 1 and Case 2',
-              'knowledge': '맨 앞자리가 $2$일 때 전체 경우의 수는 $90 + 270 = 360$가지입니다.',
-              'knowledge_en': 'When the first digit is $2$, the total is $90 + 270 = 360$.',
-              'questions': [{'level_label': '앞자리 2 총합 디딤돌 4',
-                             'level_label_en': 'First Digit 2 Total Step 4',
-                             'stem': '맨 앞자리가 $2$일 때의 총 경우의 수 $90 + 270$은?',
-                             'stem_en': 'What is $90 + 270$?',
-                             'options': ['$300$', '$330$', '$360$', '$390$', '$420$'],
+  'summary_ko': '$8$장($1,1,2,2,3,3,4,4$) 중 택한 $6$장의 구성을 $\\text{Case 1}(a\\,a\\,b\\,b\\,c\\,c)$과 $\\text{Case '
+                '2}(a\\,a\\,b\\,b\\,c\\,d)$로 분류하고, 첫 번째 자리에 놓이는 짝수 카드의 종류에 따라 $6$가지 세부 케이스($120 + 60 + 60 + 120 + 120 '
+                '+ 240 = 720$)로 나누어 합산하기',
+  'summary_en': 'Classify the $6$ chosen cards from $\\{1,1,2,2,3,3,4,4\\}$ into $\\text{Case 1 '
+                '}(a\\,a\\,b\\,b\\,c\\,c)$ and $\\text{Case 2 }(a\\,a\\,b\\,b\\,c\\,d)$, and sum the $6$ sub-cases by '
+                'the even card placed in the first slot: $120 + 60 + 60 + 120 + 120 + 240 = 720$.',
+  'tags': ['확률과 통계', '경우의수', '같은것이있는순열', '케이스분류', '카드배열', '28번'],
+  'symbols': [{'sym': '$1, 1, 2, 2, 3, 3, 4, 4 \\longrightarrow \\bigcirc\\bigcirc\\bigcirc\\bigcirc\\bigcirc\\bigcirc '
+                      '\\longrightarrow \\stackrel{\\text{짝수}}{\\sqcup_1}\\ \\sqcup_2\\ \\sqcup_3\\ \\sqcup_4\\ '
+                      '\\sqcup_5\\ \\sqcup_6$',
+               'desc': '$8$장 중 $6$장을 택해 일렬로 $6$자리에 나열할 때 첫 번째 자리($\\sqcup_1$)에 짝수($2$ 또는 $4$)를 배치하고 남은 $5$자리에 같은 것이 있는 '
+                       '순열을 적용하는 구조',
+               'desc_en': 'Select $6$ of $8$ cards and place an even card ($2$ or $4$) in slot $1$, then permute the '
+                          'remaining $5$ cards.'},
+              {'sym': '$\\text{Case 1 }(a\\,a\\,b\\,b\\,c\\,c): \\text{i) } 2\\times 2\\times \\dfrac{5!}{2!\\,2!} = '
+                      '120,\\quad \\text{ii) } 2\\times \\dfrac{5!}{2!\\,2!} = 60$',
+               'desc': '$3$종류가 $2$장씩 뽑힌 경우: i) 짝수 $2$종류 포함($\\star\\,\\star\\,2\\,2\\,4\\,4$)은 $120$가지, ii) 홀수 $2$종류 '
+                       '포함($\\star\\,\\star\\,1\\,1\\,3\\,3$)은 $60$가지',
+               'desc_en': 'When $3$ pairs ($aabbcc$) are chosen: i) two even pairs give $120$, ii) two odd pairs give '
+                          '$60$.'},
+              {'sym': '$\\text{Case 2 }(a\\,a\\,b\\,b\\,c\\,d): \\text{i) } 2\\times \\dfrac{5!}{2!\\,2!} = 60,\\quad '
+                      '\\text{ii) } 2\\times \\dfrac{5!}{2!} = 120$',
+               'desc': '$2$종류는 $2$장씩, $2$종류($c, d$)는 $1$장씩 뽑힌 경우: i) $c, d$가 모두 짝수($1\\,1\\,3\\,3\\,2\\,4$)면 $60$가지, '
+                       'ii) $c, d$가 모두 홀수($2\\,2\\,4\\,4\\,1\\,3$)면 $120$가지',
+               'desc_en': 'For $aabbcd$: i) $c, d$ both even ($1,1,3,3,2,4$) gives $60$, ii) $c, d$ both odd '
+                          '($2,2,4,4,1,3$) gives $120$.'},
+              {'sym': '$\\text{Case 2-iii) }(e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1): \\text{앞자리 } e_1 \\to 120,\\quad '
+                      '\\text{앞자리 } e_2 \\to 240$',
+               'desc': '$c, d$가 짝수 $1$개($e_1$)·홀수 $1$개($o_1$)일 때, 첫 자리에 $1$장짜리 짝수 $e_1$이 오면 '
+                       '$2\\times\\dfrac{5!}{2!\\,2!}\\times 2=120$가지, $2$장짜리 짝수 $e_2$가 오면 $2\\times '
+                       '2\\times\\dfrac{5!}{2!}=240$가지',
+               'desc_en': 'When $c, d$ have one even ($e_1$) and one odd ($o_1$), placing $e_1$ first gives $120$ and '
+                          'placing $e_2$ first gives $240$.'}],
+  'levels': [{'title': '🔰 1단계 · [초등 카드 뽑기와 기본 나열 계산] $8$장에서 $6$장을 뽑는 두 가지 모양($aabbcc$ vs $aabbcd$)과 '
+                       '$\\dfrac{5!}{2!\\,2!}=30$',
+              'title_en': '🔰 Step 1 · [Card Selection Shapes & Base Factorials] Two shapes ($aabbcc$ vs. $aabbcd$) and '
+                          '$\\dfrac{5!}{2!\\,2!}=30$',
+              'knowledge': '초등학교 숫자 카드 놀이처럼 $1, 1, 2, 2, 3, 3, 4, 4$ 총 $8$장의 카드 중에서 $6$장을 '
+                           '고르면($\\bigcirc\\bigcirc\\bigcirc\\bigcirc\\bigcirc\\bigcirc$), 남겨지는 카드는 $2$장입니다. 따라서 뽑힌 '
+                           '$6$장의 카드 묶음은 딱 두 가지 모양으로 나뉩니다!<ul><li><b>$\\text{Case 1}$ ($a\\,a\\,b\\,b\\,c\\,c$)</b>: '
+                           '$3$종류의 숫자가 각각 $2$장씩 뽑힌 모양 (예: $1, 1, 2, 2, 4, 4$)</li><li><b>$\\text{Case 2}$ '
+                           '($a\\,a\\,b\\,b\\,c\\,d$)</b>: $2$종류는 $2$장씩, 다른 $2$종류($c, d$)는 $1$장씩 뽑힌 모양 (예: $1, 1, 3, '
+                           '3, 2, 4$)</li></ul>또한 첫 번째 자리($\\sqcup_1$)에 짝수 카드 $1$장을 놓고 난 뒤, <b>남은 $5$개의 '
+                           '빈칸($\\sqcup_2\\,\\sqcup_3\\,\\sqcup_4\\,\\sqcup_5\\,\\sqcup_6$)</b>에 카드를 줄 세울 때 칠판 왼쪽 아래의 '
+                           '두 기본 나눗셈이 계속 쓰입니다:<br>$$\\bullet\\text{ 같은 숫자 카드가 } 2\\text{쌍 있을 때: } \\frac{5!}{2!\\,2!} '
+                           '= \\frac{5 \\times 4 \\times 3 \\times 2}{2 \\times 2} = 5 \\times 6 = '
+                           '\\mathbf{30}$$$$\\bullet\\text{ 같은 숫자 카드가 } 1\\text{쌍만 있을 때: } \\frac{5!}{2!} = '
+                           '\\frac{120}{2} = \\mathbf{60}$$',
+              'knowledge_en': 'Choosing $6$ cards out of $\\{1,1,2,2,3,3,4,4\\}$ yields two possible card-set '
+                              'patterns: <b>$\\text{Case 1}$ ($a\\,a\\,b\\,b\\,c\\,c$: three pairs)</b> and '
+                              '<b>$\\text{Case 2}$ ($a\\,a\\,b\\,b\\,c\\,d$: two pairs and two singles)</b>. After '
+                              'fixing an even card in the first slot, arranging the remaining $5$ cards uses two '
+                              'fundamental building blocks: $\\dfrac{5!}{2!\\,2!} = 30$ (when two pairs remain) and '
+                              '$\\dfrac{5!}{2!} = 60$ (when one pair remains).',
+              'questions': [{'level_label': '초등 나눗셈과 남은 5자리 기본 나열 디딤돌 1',
+                             'level_label_en': 'Elementary Division & 5-Slot Permutation Step 1',
+                             'stem': '초등학교 약분과 사칙연산을 활용하여, 첫 번째 자리에 카드를 놓은 뒤 남은 $5$자리에 같은 숫자 카드가 $2$쌍 포함된 $5$장을 일렬로 '
+                                     '나열하는 경우의 수 $\\dfrac{5!}{2!\\,2!} = \\dfrac{5\\times 4\\times 3\\times '
+                                     '2}{2\\times 2}$를 계산한 값은?',
+                             'stem_en': 'Using elementary division, what is the number of ways to arrange $5$ cards '
+                                        'containing two identical pairs in the remaining $5$ slots, '
+                                        '$\\dfrac{5!}{2!\\,2!}$?',
+                             'options': ['$15$', '$20$', '$30$', '$60$', '$120$'],
                              'answer': 3,
-                             'exp': '$90 + 270 = 360$입니다.',
-                             'exp_en': '$90 + 270 = 360$.'}]},
-             {'title': '💎 5단계 · [최종 종합] 첫 자리 짝수 $2$종류($2$ 또는 $4$) 곱하기',
-              'title_en': '💎 Step 5 · [Final Synthesis] Multiplying by $2$ choices for the first digit',
-              'knowledge': '맨 앞자리가 $4$일 때도 대칭성에 의해 똑같이 $360$가지이므로 $2 \\times 360 = 720$가지입니다.',
-              'knowledge_en': 'By symmetry, starting with $4$ also gives $360$ ways, so $2 \\times 360 = 720$.',
-              'questions': [{'level_label': '최종 종합 디딤돌 5',
-                             'level_label_en': 'Final Synthesis Step 5',
-                             'stem': '구하는 전체 경우의 수 $2 \\times 360$은?',
-                             'stem_en': 'What is the total number of arrangements $2 \\times 360$?',
+                             'exp': '<b>[1단계 해설]</b><br>$\\dfrac{5!}{2!\\,2!} = \\dfrac{5 \\times 4 \\times 3 \\times '
+                                    '2 \\times 1}{2 \\times 2} = 5 \\times 6 = 30$입니다.',
+                             'exp_en': '<b>[Step 1 Explanation]</b><br>$\\dfrac{5!}{2!\\,2!} = \\dfrac{120}{4} = '
+                                       '30$.'}]},
+             {'title': '🌿 2단계 · [$\\text{Case 1 - i)}$] $a\\,a\\,b\\,b\\,c\\,c$에서 $a, b, c$ 중 $2$개가 짝수인 경우 '
+                       '($\\star\\,\\star\\,2\\,2\\,4\\,4$)',
+              'title_en': '🌿 Step 2 · [Case 1 - i)] $a\\,a\\,b\\,b\\,c\\,c$ where $2$ of $a, b, c$ are even '
+                          '($\\star\\,\\star\\,2\\,2\\,4\\,4$)',
+              'knowledge': '칠판의 <b>$\\text{Case 1}$: 뽑힌 $6$장이 $a\\,a\\,b\\,b\\,c\\,c$ ($3$종류가 $2$장씩)</b>인 경우부터 차례대로 세어 '
+                           '봅시다!<br>먼저 <b>$\\text{i)}$ $a, b, c$ 중 $2$개가 짝수인 경우</b>입니다.<ul><li>짝수는 $2$와 $4$뿐이므로 $2, 2, '
+                           '4, 4$가 모두 뽑히고, 나머지 한 종류 $\\star$는 홀수($1$ 또는 $3$) 중 하나가 뽑힙니다: $$\\underbrace{\\star\\ '
+                           '\\star}_{\\star \\leftarrow 1 \\text{ 또는 } 3\\text{ (2가지)}}\\ 2\\ 2\\ 4\\ 4$$</li><li>첫 번째 '
+                           '자리 $\\square$에는 짝수인 $2$ 또는 $4$ 중 하나를 놓을 수 있으므로 <b>$2$가지</b>입니다.</li><li>첫 자리에 $\\square$를 '
+                           '한 장 놓으면, 남은 $5$자리에는 $\\square\\ \\triangle\\ \\triangle\\ \\star\\ \\star$ (같은 카드 '
+                           '$\\triangle, \\triangle$ 한 쌍과 $\\star, \\star$ 한 쌍, 총 $2$쌍!)가 남으므로 나열하는 가짓수는 '
+                           '$\\dfrac{5!}{2!\\,2!} = 30$가지입니다.</li></ul>$$\\therefore\\ \\underbrace{2}_{\\text{홀수 '
+                           '}\\star\\text{ 선택}} \\times \\underbrace{2}_{\\text{첫자리 짝수 선택}} \\times '
+                           '\\frac{5!}{2!\\,2!} = 4 \\times 30 = \\mathbf{120}$$',
+              'knowledge_en': 'In <b>$\\text{Case 1 - i)}$</b>, two of $a, b, c$ are even, so the $6$ cards are '
+                              '$\\star\\,\\star\\,2\\,2\\,4\\,4$ where $\\star \\in \\{1, 3\\}$ ($2$ choices). There '
+                              'are $2$ choices ($2$ or $4$) for the even card $\\square$ in the first position, '
+                              'leaving $\\square\\,\\triangle\\,\\triangle\\,\\star\\,\\star$ (two pairs) for the '
+                              'remaining $5$ slots: $2 \\times 2 \\times \\dfrac{5!}{2!\\,2!} = 4 \\times 30 = 120$.',
+              'questions': [{'level_label': 'Case 1 - i) 계산 디딤돌 2',
+                             'level_label_en': 'Case 1 - i) Step 2',
+                             'stem': '$\\text{Case 1}$($a\\,a\\,b\\,b\\,c\\,c$)의 $\\text{i)}$ $a, b, c$ 중 $2$개가 '
+                                     '짝수($\\star\\,\\star\\,2\\,2\\,4\\,4$)일 때, 첫 번째 자리가 짝수인 경우의 수 $2 \\times 2 '
+                                     '\\times \\dfrac{5!}{2!\\,2!}$를 계산한 값은?',
+                             'stem_en': 'In $\\text{Case 1 - i)}$ ($\\star\\,\\star\\,2\\,2\\,4\\,4$), what is $2 '
+                                        '\\times 2 \\times \\dfrac{5!}{2!\\,2!}$?',
+                             'options': ['$60$', '$90$', '$120$', '$150$', '$180$'],
+                             'answer': 3,
+                             'exp': '<b>[2단계 칠판 풀이 해설]</b><br>홀수 $\\star$ 종류 선택($1$ 또는 $3$: $2$가지) $\\times$ 첫 자리 짝수 '
+                                    '선택($2$ 또는 $4$: $2$가지) $\\times$ 남은 '
+                                    '$5$장($\\square\\,\\triangle\\,\\triangle\\,\\star\\,\\star$) 배열 '
+                                    '$\\dfrac{5!}{2!\\,2!}(=30)$이므로 $2 \\times 2 \\times 30 = 120$입니다.',
+                             'exp_en': '<b>[Step 2 Whiteboard Explanation]</b><br>$2 \\text{ (choice of odd '
+                                       '}\\star\\text{)} \\times 2 \\text{ (first even digit)} \\times '
+                                       '\\dfrac{5!}{2!\\,2!}(=30) = 4 \\times 30 = 120$.'}]},
+             {'title': '🌱 3단계 · [$\\text{Case 1 - ii)}$] $a\\,a\\,b\\,b\\,c\\,c$에서 $a, b, c$ 중 $2$개가 홀수인 경우 '
+                       '($\\star\\,\\star\\,1\\,1\\,3\\,3$)',
+              'title_en': '🌱 Step 3 · [Case 1 - ii)] $a\\,a\\,b\\,b\\,c\\,c$ where $2$ of $a, b, c$ are odd '
+                          '($\\star\\,\\star\\,1\\,1\\,3\\,3$)',
+              'knowledge': '이어서 칠판의 <b>$\\text{Case 1 - ii)}$ $a, b, c$ 중 $2$개가 홀수인 경우</b>입니다.<ul><li>홀수 $1, 3$이 모두 '
+                           '뽑히고, 짝수 한 종류 $\\star$($2$ 또는 $4$)가 뽑힙니다: $$\\underbrace{\\star\\ \\star}_{\\star '
+                           '\\leftarrow 2 \\text{ 또는 } 4\\text{ (2가지)}}\\ 1\\ 1\\ 3\\ 3$$</li><li>첫 번째 자리에는 짝수가 와야 '
+                           '하므로, 뽑힌 카드 중 유일한 짝수인 <b>$\\star$가 무조건 첫 번째 자리에 놓입니다 ($1$가지)</b>!</li><li>그러면 남은 $5$자리에는 '
+                           '$\\star\\ 1\\ 1\\ 3\\ 3$ (같은 숫자 카드 $1, 1$과 $3, 3$ 두 쌍)을 나열하면 되므로 $\\dfrac{5!}{2!\\,2!} = '
+                           '30$가지입니다.</li></ul>$$\\therefore\\ \\underbrace{2}_{\\text{짝수 }\\star\\text{ 선택}} \\times '
+                           '\\frac{5!}{2!\\,2!} = 2 \\times 30 = \\mathbf{60}$$',
+              'knowledge_en': 'In <b>$\\text{Case 1 - ii)}$</b>, two of $a, b, c$ are odd, so the $6$ cards are '
+                              '$\\star\\,\\star\\,1\\,1\\,3\\,3$ where $\\star \\in \\{2, 4\\}$ ($2$ choices). The '
+                              'first slot must be filled by the only available even digit $\\star$ ($1$ way), leaving '
+                              '$\\star\\,1\\,1\\,3\\,3$ (two pairs) for the remaining $5$ slots: $2 \\times '
+                              '\\dfrac{5!}{2!\\,2!} = 2 \\times 30 = 60$.',
+              'questions': [{'level_label': 'Case 1 - ii) 계산 디딤돌 3',
+                             'level_label_en': 'Case 1 - ii) Step 3',
+                             'stem': '$\\text{Case 1}$($a\\,a\\,b\\,b\\,c\\,c$)의 $\\text{ii)}$ $a, b, c$ 중 $2$개가 '
+                                     '홀수($\\star\\,\\star\\,1\\,1\\,3\\,3$)일 때, 첫 번째 자리에 $\\star$를 놓고 남은 $5$자리에 '
+                                     '$\\star\\,1\\,1\\,3\\,3$을 나열하는 경우의 수 $2 \\times \\dfrac{5!}{2!\\,2!}$는?',
+                             'stem_en': 'In $\\text{Case 1 - ii)}$ ($\\star\\,\\star\\,1\\,1\\,3\\,3$), what is $2 '
+                                        '\\times \\dfrac{5!}{2!\\,2!}$?',
+                             'options': ['$30$', '$60$', '$90$', '$120$', '$150$'],
+                             'answer': 2,
+                             'exp': '<b>[3단계 칠판 풀이 해설]</b><br>짝수 $\\star$ 종류 선택($2$ 또는 $4$: $2$가지) $\\times$ 남은 '
+                                    '$5$장($\\star\\,1\\,1\\,3\\,3$) 배열 $\\dfrac{5!}{2!\\,2!}(=30) = 60$가지입니다.',
+                             'exp_en': '<b>[Step 3 Whiteboard Explanation]</b><br>$2 \\text{ (choice of even '
+                                       '}\\star\\text{)} \\times \\dfrac{5!}{2!\\,2!}(=30) = 60$.'}]},
+             {'title': '🌳 4단계 · [$\\text{Case 2 - i)}$] $a\\,a\\,b\\,b\\,c\\,d$에서 $1$장씩 뽑힌 $c, d$가 둘 다 짝수인 경우 '
+                       '($1\\,1\\,3\\,3\\,2\\,4$)',
+              'title_en': '🌳 Step 4 · [Case 2 - i)] $a\\,a\\,b\\,b\\,c\\,d$ where singles $c, d$ are both even '
+                          '($1\\,1\\,3\\,3\\,2\\,4$)',
+              'knowledge': '이제 칠판의 <b>$\\text{Case 2}$: 뽑힌 $6$장이 $a\\,a\\,b\\,b\\,c\\,d$ ($2$종류는 $2$장씩, $2$종류 $c, d$는 '
+                           '$1$장씩)</b>인 경우입니다!<br>$1$장씩 뽑힌 두 숫자 $c, d$의 홀짝 구성에 따라 $\\text{i)}, \\text{ii)}, '
+                           '\\text{iii)}$ 세 가지로 나눕니다.<br>먼저 <b>$\\text{i)}$ $c, d$가 둘 다 짝수인 경우</b>입니다:<ul><li>$1$장씩 뽑힌 '
+                           '$c, d$가 짝수 $2, 4$이면, $2$장씩 뽑힌 $a, b$는 자동으로 홀수 $1, 3$이 됩니다: $$1\\ 1\\ 3\\ 3\\ '
+                           '\\underbrace{2\\ 4}_{c,\\,d}$$</li><li>첫 번째 자리 $\\star$에는 짝수 $2$ 또는 $4$ 중 하나가 오므로 '
+                           '<b>$2$가지</b>입니다.</li><li>남은 $5$자리($\\text{--- --- --- --- ---}$)에는 남은 짝수 $1$장($\\square$)과 '
+                           '$1, 1, 3, 3$을 나열하므로 $\\dfrac{5!}{2!\\,2!} = 30$가지입니다.</li></ul>$$\\therefore\\ 2 \\times '
+                           '\\frac{5!}{2!\\,2!} = 2 \\times 30 = \\mathbf{60}$$',
+              'knowledge_en': 'In <b>$\\text{Case 2}$ ($a\\,a\\,b\\,b\\,c\\,d$)</b>, we classify by the parity of the '
+                              'two single cards $c, d$. In <b>$\\text{i)}$ $c, d$ are both even</b>, the $6$ cards '
+                              'must be $1\\,1\\,3\\,3\\,2\\,4$. There are $2$ choices ($2$ or $4$) for the first slot '
+                              '$\\star$, and $\\dfrac{5!}{2!\\,2!} = 30$ ways to arrange $\\square\\,1\\,1\\,3\\,3$ in '
+                              'the remaining $5$ slots: $2 \\times 30 = 60$.',
+              'questions': [{'level_label': 'Case 2 - i) 계산 디딤돌 4',
+                             'level_label_en': 'Case 2 - i) Step 4',
+                             'stem': '$\\text{Case 2}$($a\\,a\\,b\\,b\\,c\\,d$)의 $\\text{i)}$ $c, d$가 둘 다 '
+                                     '짝수($1\\,1\\,3\\,3\\,2\\,4$)일 때, 첫 번째 자리에 $2$ 또는 $4$를 놓고 남은 $5$장을 나열하는 경우의 수 $2 '
+                                     '\\times \\dfrac{5!}{2!\\,2!}$는?',
+                             'stem_en': 'In $\\text{Case 2 - i)}$ ($1\\,1\\,3\\,3\\,2\\,4$), what is $2 \\times '
+                                        '\\dfrac{5!}{2!\\,2!}$?',
+                             'options': ['$30$', '$60$', '$90$', '$120$', '$180$'],
+                             'answer': 2,
+                             'exp': '<b>[4단계 칠판 풀이 해설]</b><br>첫 자리 짝수($2$ 또는 $4$) 선택 $2$가지 $\\times$ 남은 '
+                                    '$5$장($\\square\\,1\\,1\\,3\\,3$) 나열 $\\dfrac{5!}{2!\\,2!}(=30) = 60$가지입니다.',
+                             'exp_en': '<b>[Step 4 Whiteboard Explanation]</b><br>$2 \\times \\dfrac{5!}{2!\\,2!}(=30) '
+                                       '= 60$.'}]},
+             {'title': '🌲 5단계 · [$\\text{Case 2 - ii)}$] $a\\,a\\,b\\,b\\,c\\,d$에서 $1$장씩 뽑힌 $c, d$가 둘 다 홀수인 경우 '
+                       '($2\\,2\\,4\\,4\\,1\\,3$)',
+              'title_en': '🌲 Step 5 · [Case 2 - ii)] $a\\,a\\,b\\,b\\,c\\,d$ where singles $c, d$ are both odd '
+                          '($2\\,2\\,4\\,4\\,1\\,3$)',
+              'knowledge': '다음으로 칠판의 <b>$\\text{Case 2 - ii)}$ $1$장씩 뽑힌 $c, d$가 둘 다 홀수인 경우</b>입니다:<ul><li>$1$장씩 뽑힌 $c, '
+                           'd$가 홀수 $1, 3$이면, $2$장씩 뽑힌 $a, b$는 자동으로 짝수 $2, 4$가 됩니다: $$2\\ 2\\ 4\\ 4\\ \\underbrace{1\\ '
+                           '3}_{c,\\,d}$$</li><li>첫 번째 자리 $\\star$에는 짝수 $2$ 또는 $4$ 중 하나가 오므로 '
+                           '<b>$2$가지</b>입니다.</li><li>첫 자리에 $\\star$ 한 장을 쓰면, 남은 $5$자리에는 <b>$\\star\\ \\square\\ '
+                           '\\square\\ 1\\ 3$</b>이 남습니다! 여기서 같은 숫자 카드는 다른 짝수 $\\square, \\square$ <b>딱 $1$쌍뿐</b>이고 '
+                           '나머지($\\star, 1, 3$)는 모두 서로 다른 숫자이므로 나열하는 경우의 수는 $\\dfrac{5!}{2!} = '
+                           '60$가지입니다!</li></ul>$$\\therefore\\ 2 \\times \\frac{5!}{2!} = 2 \\times 60 = '
+                           '\\mathbf{120}$$',
+              'knowledge_en': 'In <b>$\\text{Case 2 - ii)}$ $c, d$ are both odd</b>, the $6$ cards must be '
+                              '$2\\,2\\,4\\,4\\,1\\,3$. There are $2$ choices ($2$ or $4$) for the first slot '
+                              '$\\star$. Then the remaining $5$ cards are $\\star\\,\\square\\,\\square\\,1\\,3$, '
+                              'which has only <b>one identical pair</b> ($\\square, \\square$), giving '
+                              '$\\dfrac{5!}{2!} = 60$ permutations: $2 \\times 60 = 120$.',
+              'questions': [{'level_label': 'Case 2 - ii) 계산 디딤돌 5',
+                             'level_label_en': 'Case 2 - ii) Step 5',
+                             'stem': '$\\text{Case 2}$($a\\,a\\,b\\,b\\,c\\,d$)의 $\\text{ii)}$ $c, d$가 둘 다 '
+                                     '홀수($2\\,2\\,4\\,4\\,1\\,3$)일 때, 첫 자리에 짝수 $\\star$를 놓고 남은 $5$자리에 '
+                                     '$\\star\\,\\square\\,\\square\\,1\\,3$을 나열하는 경우의 수 $2 \\times \\dfrac{5!}{2!}$은?',
+                             'stem_en': 'In $\\text{Case 2 - ii)}$ ($2\\,2\\,4\\,4\\,1\\,3$), what is $2 \\times '
+                                        '\\dfrac{5!}{2!}$?',
+                             'options': ['$60$', '$90$', '$120$', '$180$', '$240$'],
+                             'answer': 3,
+                             'exp': '<b>[5단계 칠판 풀이 해설]</b><br>첫 자리 짝수($2$ 또는 $4$) 선택 $2$가지 $\\times$ 남은 '
+                                    '$5$장($\\star\\,\\square\\,\\square\\,1\\,3$: 같은 카드는 $\\square,\\square$ $1$쌍뿐) 나열 '
+                                    '$\\dfrac{5!}{2!}(=60) = 120$가지입니다.',
+                             'exp_en': '<b>[Step 5 Whiteboard Explanation]</b><br>$2 \\times \\dfrac{5!}{2!} = 2 '
+                                       '\\times 60 = 120$.'}]},
+             {'title': '🏔️ 6단계 · [$\\text{Case 2 - iii)}$ ①] $e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$에서 첫 자리에 $e_1$($1$장짜리 '
+                       '짝수)이 오는 경우',
+              'title_en': '🏔️ Step 6 · [Case 2 - iii) Branch 1] $e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$ with single even '
+                          '$e_1$ in the first slot',
+              'knowledge': '이제 가장 중요한 칠판의 <b>$\\text{Case 2 - iii)}$ $1$장씩 뽑힌 $c, d$가 홀수 $1$개, 짝수 $1$개인 '
+                           '경우</b>입니다!<br>선생님의 칠판 판서 기호 그대로, 짝수(even)를 $e$, 홀수(odd)를 $o$라 하고, <b>$2$장 뽑힌 짝수·홀수를 $e_2, '
+                           'o_2$</b>, <b>$1$장 뽑힌 짝수·홀수를 $e_1, o_1$</b>이라 쓰면 뽑힌 $6$장은 다음과 같습니다:$$\\mathbf{e_2\\ e_2\\ '
+                           'o_2\\ o_2\\ e_1\\ o_1}$$<ul><li>$e_1$($1$장 뽑힌 짝수)이 될 숫자를 $2$ 또는 $4$ 중에서 고르는 가짓수: '
+                           '<b>$2$가지</b> (그러면 $e_2$는 남은 짝수로 자동 결정!)</li><li>$o_1$($1$장 뽑힌 홀수)이 될 숫자를 $1$ 또는 $3$ 중에서 '
+                           '고르는 가짓수: <b>$2$가지</b> (그러면 $o_2$는 남은 홀수로 자동 결정!)</li></ul>여기서 <b>첫 번째 자리에 어떤 짝수($e_1$ 또는 '
+                           '$e_2$)가 오느냐</b>에 따라 남은 $5$장의 쌍 개수가 달라지므로 두 줄로 나누어 셉니다!<br>먼저 <b>① 첫 번째 자리에 $e_1$($1$장짜리 '
+                           '짝수)이 오는 경우</b>:$$e_1\\ \\underbrace{\\text{---}\\ \\text{---}\\ \\text{---}\\ '
+                           '\\text{---}\\ \\text{---}}_{e_2\\,\\,e_2\\,\\,o_2\\,\\,o_2\\,\\,o_1}$$남은 $5$자리에는 $e_2, '
+                           'e_2$와 $o_2, o_2$ <b>두 쌍</b>이 남으므로 나열하는 가짓수는 $\\dfrac{5!}{2!\\,2!} = '
+                           '30$가지입니다!$$\\therefore\\ \\underbrace{2}_{e_1\\text{ 선택}} \\times \\frac{5!}{2!\\,2!} '
+                           '\\times \\underbrace{2}_{o_1\\text{ 선택}} = 2 \\times 30 \\times 2 = \\mathbf{120}$$',
+              'knowledge_en': 'In <b>$\\text{Case 2 - iii)}$</b>, $c, d$ consist of one even ($e_1$) and one odd '
+                              '($o_1$), so the $6$ cards are written as $\\mathbf{e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1}$, '
+                              'with $2$ choices for $e_1 \\in \\{2,4\\}$ and $2$ choices for $o_1 \\in \\{1,3\\}$. '
+                              '<b>Branch ① (First slot is $e_1$)</b>: The remaining $5$ slots receive $e_2, e_2, o_2, '
+                              'o_2, o_1$ (two pairs), giving $2 \\times \\dfrac{5!}{2!\\,2!} \\times 2 = 2 \\times 30 '
+                              '\\times 2 = 120$.',
+              'questions': [{'level_label': 'Case 2 - iii) 앞자리 e₁ 디딤돌 6',
+                             'level_label_en': 'Case 2 - iii) First Slot e₁ Step 6',
+                             'stem': '$e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$에서 첫 번째 자리에 $1$장짜리 짝수 $e_1$을 놓고 남은 $5$자리에 '
+                                     '$e_2, e_2, o_2, o_2, o_1$을 나열하는 경우의 수 $2 \\times \\dfrac{5!}{2!\\,2!} \\times '
+                                     '2$는?',
+                             'stem_en': 'For $e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$ with $e_1$ in the first slot, what is '
+                                        '$2 \\times \\dfrac{5!}{2!\\,2!} \\times 2$?',
+                             'options': ['$60$', '$120$', '$180$', '$240$', '$300$'],
+                             'answer': 2,
+                             'exp': '<b>[6단계 칠판 풀이 해설]</b><br>$e_1$ 선택($2$가지) $\\times$ 남은 $5$장($e_2, e_2, o_2, o_2, '
+                                    'o_1$) 나열 $\\dfrac{5!}{2!\\,2!}(=30) \\times o_1$ 선택($2$가지) $= 2 \\times 30 '
+                                    '\\times 2 = 120$가지입니다.',
+                             'exp_en': '<b>[Step 6 Whiteboard Explanation]</b><br>$2 \\times 30 \\times 2 = 120$.'}]},
+             {'title': '⛰️ 7단계 · [$\\text{Case 2 - iii)}$ ②] $e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$에서 첫 자리에 $e_2$($2$장짜리 '
+                       '짝수)가 오는 경우',
+              'title_en': '⛰️ Step 7 · [Case 2 - iii) Branch 2] $e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$ with paired even '
+                          '$e_2$ in the first slot',
+              'knowledge': '이어서 칠판의 <b>$\\text{Case 2 - iii)}$ 두 번째 줄: 첫 번째 자리에 $e_2$($2$장짜리 짝수)가 오는 경우</b>입니다!$$e_2\\ '
+                           '\\underbrace{\\text{---}\\ \\text{---}\\ \\text{---}\\ \\text{---}\\ '
+                           '\\text{---}}_{e_1\\,\\,e_2\\,\\,o_2\\,\\,o_2\\,\\,o_1}$$<ul><li>첫 번째 자리에 $e_2$ 한 장을 쓰면, 남은 '
+                           '$5$자리에 들어갈 카드는 <b>$e_1,\\ e_2,\\ o_2,\\ o_2,\\ o_1$</b>입니다!</li><li>여기서 같은 숫자 카드는 <b>$o_2, '
+                           'o_2$ 딱 한 쌍뿐</b>이고, $e_1, e_2, o_1$은 모두 $1$장씩이므로 남은 $5$자리를 나열하는 가짓수는 $\\dfrac{5!}{2!} = '
+                           '60$가지가 됩니다!</li><li>따라서 $e_1$ 선택($2$가지) $\\times$ $o_1$ 선택($2$가지) $\\times$ 남은 $5$장 나열 '
+                           '$\\dfrac{5!}{2!}(=60)$을 곱하면:</li></ul>$$\\therefore\\ 2 \\times 2 \\times \\frac{5!}{2!} = '
+                           '4 \\times 60 = \\mathbf{240}$$',
+              'knowledge_en': '<b>Branch ② (First slot is $e_2$)</b>: When one $e_2$ is placed in the first slot, the '
+                              'remaining $5$ slots receive $e_1, e_2, o_2, o_2, o_1$, which has only <b>one pair</b> '
+                              '($o_2, o_2$). Thus there are $\\dfrac{5!}{2!} = 60$ ways to permute them: $2 \\times 2 '
+                              '\\times \\dfrac{5!}{2!} = 4 \\times 60 = 240$.',
+              'questions': [{'level_label': 'Case 2 - iii) 앞자리 e₂ 디딤돌 7',
+                             'level_label_en': 'Case 2 - iii) First Slot e₂ Step 7',
+                             'stem': '$e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$에서 첫 번째 자리에 $2$장짜리 짝수 $e_2$를 놓고 남은 $5$자리에 '
+                                     '$e_1, e_2, o_2, o_2, o_1$을 나열하는 경우의 수 $2 \\times 2 \\times \\dfrac{5!}{2!}$는?',
+                             'stem_en': 'For $e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$ with $e_2$ in the first slot, what is '
+                                        '$2 \\times 2 \\times \\dfrac{5!}{2!}$?',
+                             'options': ['$120$', '$180$', '$200$', '$240$', '$300$'],
+                             'answer': 4,
+                             'exp': '<b>[7단계 칠판 풀이 해설]</b><br>$e_1$ 선택($2$가지) $\\times$ $o_1$ 선택($2$가지) $\\times$ 남은 '
+                                    '$5$장($e_1, e_2, o_2, o_2, o_1$) 나열 $\\dfrac{5!}{2!}(=60) = 4 \\times 60 = '
+                                    '240$가지입니다.',
+                             'exp_en': '<b>[Step 7 Whiteboard Explanation]</b><br>$2 \\times 2 \\times \\dfrac{5!}{2!} '
+                                       '= 4 \\times 60 = 240$.'}]},
+             {'title': '💎 8단계 · [칠판 우측 상단 최종 합산] $6$가지 세부 케이스의 합 $120 + 60 + 60 + 120 + 120 + 240 = 720$',
+              'title_en': '💎 Step 8 · [Final Whiteboard Sum] Summing all $6$ branches: $120 + 60 + 60 + 120 + 120 + '
+                          '240 = 720$',
+              'knowledge': '드디어 칠판 오른쪽 위 네모 박스에 적힌 대로, 지금까지 구한 $6$개의 세부 케이스를 모두 더하면 최종 정답이 '
+                           '완성됩니다!<ul><li><b>$\\text{Case 1}$ ($a\\,a\\,b\\,b\\,c\\,c$)</b>: $\\text{i) } 120 + '
+                           '\\text{ii) } 60 = 180$</li><li><b>$\\text{Case 2}$ ($a\\,a\\,b\\,b\\,c\\,d$)</b>: '
+                           '$\\text{i) } 60 + \\text{ii) } 120 + \\text{iii-①) } 120 + \\text{iii-②) } 240 = '
+                           '540$</li></ul>$$\\therefore\\ \\boxed{120 + 60 + 60 + 120 + 120 + 240 = \\mathbf{720}}$$',
+              'knowledge_en': 'Summing all $6$ mutually exclusive sub-cases exactly as written in the top-right box of '
+                              'the whiteboard gives: $$120 + 60 + 60 + 120 + 120 + 240 = 720$$',
+              'questions': [{'level_label': '칠판 최종 합산 디딤돌 8',
+                             'level_label_en': 'Final Whiteboard Sum Step 8',
+                             'stem': '칠판에서 구한 $6$가지 세부 케이스의 경우의 수를 모두 더한 값 $120 + 60 + 60 + 120 + 120 + 240$은?',
+                             'stem_en': 'What is the total sum $120 + 60 + 60 + 120 + 120 + 240$ of all $6$ sub-cases?',
                              'options': ['$640$', '$680$', '$720$', '$760$', '$800$'],
                              'answer': 3,
-                             'exp': '$2 \\times 360 = 720$이므로 정답은 ③입니다.',
-                             'exp_en': '$2 \\times 360 = 720$ (choice ③).'}]}],
+                             'exp': '<b>[8단계 최종 완결 해설]</b><br>$120 + 60 + 60 + 120 + 120 + 240 = 720$이므로 정답은 ③번입니다.',
+                             'exp_en': '<b>[Step 8 Final Explanation]</b><br>$120 + 60 + 60 + 120 + 120 + 240 = 720$ '
+                                       '(choice ③).'}]}],
   'final': {'stem': '$1, 2, 3, 4$의 숫자가 하나씩 적혀 있는 카드가 각각 $2$장씩 $8$장이 있다. 이 $8$장의 카드 중에서 $6$장의 카드를 택하여 왼쪽에서 오른쪽으로 일렬로 '
                     '나열할 때, 첫 번째 자리에 놓인 카드에 적힌 수가 짝수인 경우의 수는? (단, 같은 숫자가 적힌 카드끼리는 서로 구별하지 않는다.) [4점]',
             'stem_en': 'There are $8$ cards, two each numbered $1, 2, 3, 4$. When $6$ cards are selected and arranged '
@@ -813,55 +1007,113 @@ PART3_PROBLEMS = [{'slug': 'c2610p23',
                        '(Cards with the same number are indistinguishable.) [4 points]',
             'options': ['$640$', '$680$', '$720$', '$760$', '$800$'],
             'answer': 3,
-            'exp': '전체 $8$장 중 $6$장을 뽑아 일렬로 나열하는 총 경우의 수는 $1440$가지이고, 첫 번째 자리에 짝수($2, 4$)와 홀수($1, 3$)가 올 확률이 대칭이므로 '
-                   '$\\dfrac{1440}{2} = 720$가지입니다.',
-            'exp_en': 'By symmetry between even ($2, 4$) and odd ($1, 3$) digits, exactly half of all $6$-card '
-                      'arrangements start with an even digit: $2 \\times (90 + 90 + 180) = 720$.',
-            'solution': '<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>\n'
-                        '<p>본 문항은 <b>같은 것이 있는 순열과 대칭성</b>을 활용하여 $8$장 중 $6$장을 뽑아 나열하는 경우의 수를 구하는 문항입니다. 첫 번째 자리를 고정하고 '
-                        '나머지 $5$자리를 분류하거나, 전체 $6$장 배열 수의 절반($\\frac{1}{2}$)으로 계산하면 매우 명쾌하게 풀립니다.</p>\n'
+            'exp': '뽑힌 $6$장의 구성을 $\\text{Case 1}(a\\,a\\,b\\,b\\,c\\,c)$과 $\\text{Case 2}(a\\,a\\,b\\,b\\,c\\,d)$로 나누어 '
+                   '첫 번째 자리에 짝수가 오는 경우의 수를 세면, $\\text{Case 1}$에서 $120 + 60 = 180$, $\\text{Case 2}$에서 $60 + 120 + '
+                   '(120 + 240) = 540$이므로 $120 + 60 + 60 + 120 + 120 + 240 = 720$입니다.',
+            'exp_en': 'Splitting by the $6$-card composition into $\\text{Case 1 }(a\\,a\\,b\\,b\\,c\\,c: 120 + 60 = '
+                      '180)$ and $\\text{Case 2 }(a\\,a\\,b\\,b\\,c\\,d: 60 + 120 + 120 + 240 = 540)$ yields $120 + 60 '
+                      '+ 60 + 120 + 120 + 240 = 720$.',
+            'solution': '<h4>📋 [1. 문제 분석 및 칠판 도식 설정]</h4>\n'
+                        '<p>$1, 1, 2, 2, 3, 3, 4, 4$의 $8$장 중에서 '
+                        '$6$장($\\bigcirc\\bigcirc\\bigcirc\\bigcirc\\bigcirc\\bigcirc$)을 택해 $6$개의 자리($\\sqcup_1\\ '
+                        '\\sqcup_2\\ \\sqcup_3\\ \\sqcup_4\\ \\sqcup_5\\ \\sqcup_6$)에 일렬로 나열할 때, <b>첫 번째 '
+                        '자리($\\sqcup_1$)에 짝수($2$ 또는 $4$)</b>가 놓이는 경우의 수를 구합니다.<br>뽑힌 $6$장의 카드 묶음의 형태는 <b>$\\text{Case '
+                        '1}$: $a\\,a\\,b\\,b\\,c\\,c$ ($3$종류가 $2$장씩)</b>과 <b>$\\text{Case 2}$: $a\\,a\\,b\\,b\\,c\\,d$ '
+                        '($2$종류는 $2$장씩, $2$종류는 $1$장씩)</b>의 두 가지로 분류됩니다.</p>\n'
                         '\n'
-                        '<h4>📐 [단계별 상세 풀이 전개]</h4>\n'
+                        '<h4>📐 [2. 칠판 판서 완결 풀이: $\\text{Case 1}$과 $\\text{Case 2}$의 $6$가지 세부 카운팅]</h4>\n'
                         '<p>\n'
-                        '  <b>1단계: 뽑힌 $6$장의 카드 구성 분류 (전체 나열 수)</b><br>\n'
-                        '  $8$장 중에서 $6$장을 택하면 제외되는 카드는 $2$장입니다:<br>\n'
-                        '  - (유형 A) 같은 숫자 $2$장이 제외될 때 ($3$종류 각각 $2$장씩, 예: $1,1,2,2,3,3$):<br>\n'
-                        '    제외할 숫자 선택 ${}_{4}\\mathrm{C}_{1} = 4$가지, $6$장 나열 $\\frac{6!}{2!2!2!} = 90$가지 $\\implies 4 '
-                        '\\times 90 = 360$가지.<br>\n'
-                        '  - (유형 B) 서로 다른 숫자 $2$장이 제외될 때 ($2$종류는 $2$장씩, $2$종류는 $1$장씩, 예: $1,1,2,2,3,4$):<br>\n'
-                        '    제외할 숫자 $2$종류 선택 ${}_{4}\\mathrm{C}_{2} = 6$가지, $6$장 나열 $\\frac{6!}{2!2!} = 180$가지 '
-                        '$\\implies 6 \\times 180 = 1080$가지.<br>\n'
-                        '  따라서 $6$장을 택해 일렬로 나열하는 전체 경우의 수는 $360 + 1080 = 1440$가지입니다.<br><br>\n'
-                        '  <b>2단계: 첫 번째 자리가 짝수인 경우의 수 (대칭성 활용)</b><br>\n'
-                        '  숫자 $1, 2, 3, 4$가 모두 $2$장씩으로 동등하고 짝수($2, 4$)와 홀수($1, 3$)의 개수가 같으므로, 첫 번째 자리에 짝수가 오는 경우의 수는 '
-                        '전체의 정확히 절반입니다:<br>\n'
-                        '  $$\\frac{1440}{2} = 720$$\n'
+                        '  <b>■ $\\text{Case 1}$ : 뽑힌 $6$장이 $a\\,a\\,b\\,b\\,c\\,c$ ($3$종류가 $2$장씩)인 경우</b><br>\n'
+                        '  • <b>$\\text{i)}$ $a, b, c$ 중 $2$개가 짝수인 경우 ($\\star\\,\\star\\,2\\,2\\,4\\,4$)</b>:<br>\n'
+                        '    짝수 $2, 4$가 모두 뽑히고, 홀수 $\\star$는 $1$ 또는 $3$ 중 하나가 뽑힙니다 ($2$가지).<br>\n'
+                        '    첫 번째 자리 $\\square$에 놓을 짝수는 $2$ 또는 $4$ ($2$가지)이고, 남은 $5$자리에는 '
+                        '$\\square\\,\\triangle\\,\\triangle\\,\\star\\,\\star$ (같은 카드 $2$쌍)을 나열하므로:<br>\n'
+                        '    $$2 \\times 2 \\times \\frac{5!}{2!\\,2!} = 4 \\times 30 = \\mathbf{120}$$\n'
+                        '  • <b>$\\text{ii)}$ $a, b, c$ 중 $2$개가 홀수인 경우 ($\\star\\,\\star\\,1\\,1\\,3\\,3$)</b>:<br>\n'
+                        '    홀수 $1, 3$이 모두 뽑히고, 짝수 $\\star$는 $2$ 또는 $4$ 중 하나가 뽑힙니다 ($2$가지).<br>\n'
+                        '    첫 번째 자리에는 유일한 짝수인 $\\star$가 반드시 와야 하고($1$가지), 남은 $5$자리에는 $\\star\\,1\\,1\\,3\\,3$ (같은 카드 '
+                        '$2$쌍)을 나열하므로:<br>\n'
+                        '    $$2 \\times \\frac{5!}{2!\\,2!} = 2 \\times 30 = \\mathbf{60}$$\n'
+                        '  <br>\n'
+                        '  <b>■ $\\text{Case 2}$ : 뽑힌 $6$장이 $a\\,a\\,b\\,b\\,c\\,d$ ($2$종류는 $2$장씩, $c, d$는 $1$장씩)인 '
+                        '경우</b><br>\n'
+                        '  • <b>$\\text{i)}$ $1$장씩 뽑힌 $c, d$가 둘 다 짝수인 경우 '
+                        '($1\\,1\\,3\\,3\\,\\underbrace{2\\,4}$)</b>:<br>\n'
+                        '    첫 번째 자리 $\\star$에 놓을 짝수는 $2$ 또는 $4$ ($2$가지)이고, 남은 $5$자리($\\text{--- --- --- --- ---}$)에는 '
+                        '남은 짝수 $\\square$ $1$장과 $1, 1, 3, 3$을 나열하므로:<br>\n'
+                        '    $$2 \\times \\frac{5!}{2!\\,2!} = 2 \\times 30 = \\mathbf{60}$$\n'
+                        '  • <b>$\\text{ii)}$ $1$장씩 뽑힌 $c, d$가 둘 다 홀수인 경우 ($2\\,2\\,4\\,4\\,1\\,3$)</b>:<br>\n'
+                        '    첫 번째 자리 $\\star$에 놓을 짝수는 $2$ 또는 $4$ ($2$가지)이고, 남은 $5$자리($\\text{--- --- --- --- ---}$)에는 '
+                        '$\\star\\,\\square\\,\\square\\,1\\,3$ (같은 카드는 $\\square,\\square$ $1$쌍뿐)을 나열하므로:<br>\n'
+                        '    $$2 \\times \\frac{5!}{2!} = 2 \\times 60 = \\mathbf{120}$$\n'
+                        '  • <b>$\\text{iii)}$ $1$장씩 뽑힌 $c, d$가 홀수 $1$개, 짝수 $1$개인 경우 '
+                        '($e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$)</b>:<br>\n'
+                        '    $1$장 뽑힌 짝수 $e_1$ 선택($2$ 또는 $4 \\to 2$가지), $1$장 뽑힌 홀수 $o_1$ 선택($1$ 또는 $3 \\to 2$가지)에 대하여, '
+                        '첫 번째 자리에 놓이는 짝수가 $e_1$인지 $e_2$인지에 따라 두 가지로 나뉩니다:<br>\n'
+                        '    ① <b>첫 번째 자리에 $e_1$($1$장짜리 짝수)이 오는 경우</b> ($e_1\\ \\underbrace{\\text{--- --- --- --- '
+                        '---}}_{e_2\\,e_2\\,o_2\\,o_2\\,o_1}$):<br>\n'
+                        '    $$2 \\times \\frac{5!}{2!\\,2!} \\times 2 = 2 \\times 30 \\times 2 = \\mathbf{120}$$\n'
+                        '    ② <b>첫 번째 자리에 $e_2$($2$장짜리 짝수)가 오는 경우</b> ($e_2\\ \\underbrace{\\text{--- --- --- --- '
+                        '---}}_{e_1\\,e_2\\,o_2\\,o_2\\,o_1}$):<br>\n'
+                        '    $$2 \\times 2 \\times \\frac{5!}{2!} = 4 \\times 60 = \\mathbf{240}$$\n'
                         '</p>\n'
                         '\n'
-                        '<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>\n'
+                        '<h4>✨ [3. 최종 정답 도출 및 대칭성 검산]</h4>\n'
                         '<p>\n'
-                        '  따라서 구하는 경우의 수는 $720$이므로 정답은 <b>③번</b>입니다.\n'
+                        '  위 $6$가지 세부 케이스를 모두 합산하면 칠판 우측 상단의 식과 같이 정답을 얻습니다:<br>\n'
+                        '  $$120 + 60 + 60 + 120 + 120 + 240 = \\underline{\\underline{\\mathbf{720}}} \\quad '
+                        '(\\text{정답 ③})$$\n'
+                        '  <i>[참고 검산]</i> 전체 $6$장 나열 수($\\text{Case 1}: {}_4\\mathrm{C}_3 \\times \\dfrac{6!}{2!2!2!} '
+                        '= 360$, $\\text{Case 2}: {}_4\\mathrm{C}_2 \\times \\dfrac{6!}{2!2!} = 1080$)에서 홀짝 대칭성에 의해 첫 '
+                        '자리가 짝수인 경우의 수는 각각 $\\dfrac{360}{2}=180(=120+60)$, $\\dfrac{1080}{2}=540(=60+120+120+240)$이 되어 '
+                        '$180 + 540 = 720$으로 완벽히 일치합니다.\n'
                         '</p>',
-            'solution_en': '<h4>📋 [Problem Analysis & Core Concepts]</h4>\n'
-                           '<p>This problem counts permutations of $6$ cards chosen from $\\{1,1,2,2,3,3,4,4\\}$ using '
-                           '<b>permutations with repetition and symmetry</b>.</p>\n'
+            'solution_en': '<h4>📋 [1. Problem Structure &amp; Whiteboard Setup]</h4>\n'
+                           '<p>We select $6$ cards from $\\{1, 1, 2, 2, 3, 3, 4, 4\\}$ and arrange them in $6$ slots '
+                           'so that the first slot contains an <b>even digit ($2$ or $4$)</b>. The chosen $6$ cards '
+                           'fall into two patterns: <b>$\\text{Case 1}$ ($a\\,a\\,b\\,b\\,c\\,c$: three pairs)</b> and '
+                           '<b>$\\text{Case 2}$ ($a\\,a\\,b\\,b\\,c\\,d$: two pairs and two singles)</b>.</p>\n'
                            '\n'
-                           '<h4>📐 [Step-by-Step Rigorous Derivation]</h4>\n'
+                           '<h4>📐 [2. Complete Whiteboard Derivation: 6 Sub-Cases]</h4>\n'
                            '<p>\n'
-                           '  <b>Step 1: Total number of $6$-card arrangements</b><br>\n'
-                           '  - Leaving out two identical cards: ${}_{4}\\mathrm{C}_{1} \\times \\frac{6!}{2!2!2!} = 4 '
-                           '\\times 90 = 360$.<br>\n'
-                           '  - Leaving out two different cards: ${}_{4}\\mathrm{C}_{2} \\times \\frac{6!}{2!2!} = 6 '
-                           '\\times 180 = 1080$.<br>\n'
-                           '  Total arrangements $= 360 + 1080 = 1440$.<br><br>\n'
-                           '  <b>Step 2: Apply symmetry for the first digit</b><br>\n'
-                           '  Since there are two even digits ($2, 4$) and two odd digits ($1, 3$) with identical '
-                           'multiplicities, exactly half start with an even digit: $\\frac{1440}{2} = 720$.\n'
+                           '  <b>■ $\\text{Case 1}$ : $a\\,a\\,b\\,b\\,c\\,c$ (Three Pairs)</b><br>\n'
+                           '  • <b>$\\text{i)}$ Two of $a, b, c$ are even ($\\star\\,\\star\\,2\\,2\\,4\\,4$, where '
+                           '$\\star \\in \\{1, 3\\}$)</b>:<br>\n'
+                           '    $2$ choices for odd $\\star$, $2$ choices ($2$ or $4$) for the first slot $\\square$, '
+                           'and $\\dfrac{5!}{2!\\,2!} = 30$ ways to arrange '
+                           '$\\square\\,\\triangle\\,\\triangle\\,\\star\\,\\star$:<br>\n'
+                           '    $$2 \\times 2 \\times \\frac{5!}{2!\\,2!} = 4 \\times 30 = \\mathbf{120}$$\n'
+                           '  • <b>$\\text{ii)}$ Two of $a, b, c$ are odd ($\\star\\,\\star\\,1\\,1\\,3\\,3$, where '
+                           '$\\star \\in \\{2, 4\\}$)</b>:<br>\n'
+                           '    $2$ choices for even $\\star$, $1$ forced choice ($\\star$) for the first slot, and '
+                           '$\\dfrac{5!}{2!\\,2!} = 30$ ways to arrange $\\star\\,1\\,1\\,3\\,3$:<br>\n'
+                           '    $$2 \\times \\frac{5!}{2!\\,2!} = 2 \\times 30 = \\mathbf{60}$$\n'
+                           '  <br>\n'
+                           '  <b>■ $\\text{Case 2}$ : $a\\,a\\,b\\,b\\,c\\,d$ (Two Pairs &amp; Two Singles $c, '
+                           'd$)</b><br>\n'
+                           '  • <b>$\\text{i)}$ Both $c, d$ are even ($1\\,1\\,3\\,3\\,2\\,4$)</b>:<br>\n'
+                           '    $2$ choices ($2$ or $4$) for the first slot $\\star$, and $\\dfrac{5!}{2!\\,2!} = 30$ '
+                           'ways to arrange $\\square\\,1\\,1\\,3\\,3$:<br>\n'
+                           '    $$2 \\times \\frac{5!}{2!\\,2!} = 2 \\times 30 = \\mathbf{60}$$\n'
+                           '  • <b>$\\text{ii)}$ Both $c, d$ are odd ($2\\,2\\,4\\,4\\,1\\,3$)</b>:<br>\n'
+                           '    $2$ choices ($2$ or $4$) for the first slot $\\star$, and $\\dfrac{5!}{2!} = 60$ ways '
+                           'to arrange $\\star\\,\\square\\,\\square\\,1\\,3$:<br>\n'
+                           '    $$2 \\times \\frac{5!}{2!} = 2 \\times 60 = \\mathbf{120}$$\n'
+                           '  • <b>$\\text{iii)}$ One of $c, d$ is odd and one is even '
+                           '($e_2\\,e_2\\,o_2\\,o_2\\,e_1\\,o_1$)</b>:<br>\n'
+                           '    There are $2$ choices for the single even card $e_1$ and $2$ choices for the single '
+                           'odd card $o_1$:<br>\n'
+                           '    ① <b>First slot is $e_1$</b> (remaining $5$ cards: $e_2, e_2, o_2, o_2, o_1$):<br>\n'
+                           '    $$2 \\times \\frac{5!}{2!\\,2!} \\times 2 = 2 \\times 30 \\times 2 = \\mathbf{120}$$\n'
+                           '    ② <b>First slot is $e_2$</b> (remaining $5$ cards: $e_1, e_2, o_2, o_2, o_1$):<br>\n'
+                           '    $$2 \\times 2 \\times \\frac{5!}{2!} = 4 \\times 60 = \\mathbf{240}$$\n'
                            '</p>\n'
                            '\n'
-                           '<h4>✨ [Final Answer & Practical Tips]</h4>\n'
+                           '<h4>✨ [3. Final Sum]</h4>\n'
                            '<p>\n'
-                           '  The correct answer is <b>choice ③ ($720$)</b>.\n'
+                           '  Summing all $6$ branches gives:<br>\n'
+                           '  $$120 + 60 + 60 + 120 + 120 + 240 = \\underline{\\underline{\\mathbf{720}}} \\quad '
+                           '(\\text{Choice ③})$$\n'
                            '</p>'}},
  {'slug': 'c2610p29',
   'qNum': '확통 29',

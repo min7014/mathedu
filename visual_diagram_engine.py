@@ -83,6 +83,84 @@ def _right_panel_svg(hdr: str, stroke_col: str, hdr_col: str, eq_label: str, pt1
 # 20 SPECIALIZED GEOMETRIC / VISUAL SVG DRAWERS
 # ==============================================================================
 
+def _draw_c2610p28_svg(lang="ko") -> str:
+    title = (
+        "🎴 [칠판 판서 도식] 8장(1,1,2,2,3,3,4,4) 중 6장 선택(aabbcc vs aabbcd) · 첫 자리 짝수 6분할 카운팅"
+        if lang == "ko"
+        else "🎴 [Whiteboard Diagram] Choosing 6 of 8 Cards (aabbcc vs. aabbcd) & 6-Branch Even-First Counting"
+    )
+    sub = "120+60+60+120+120+240 = 720"
+    inner = """
+    <!-- TOP BAR: 1,1,2,2,3,3,4,4 -> 6 Cards -> 6 Slots (Slot 1 = Even) & Final Sum Box -->
+    <rect x="14" y="48" width="414" height="58" rx="9" fill="rgba(15,23,42,0.94)" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="24" y="65" fill="#7cc4ff" font-size="10.2" font-weight="800">① 전체 카드 8장: 1, 1, 2, 2, 3, 3, 4, 4  ➔  ○○○○○○ (6장 선택)</text>
+    <text x="24" y="83" fill="#e2e8f0" font-size="10" font-weight="700">② 6자리 일렬 나열:</text>
+    <!-- 6 Slots with Slot 1 highlighted as EVEN -->
+    <rect x="128" y="68" width="38" height="28" rx="5" fill="rgba(251,191,36,0.28)" stroke="#fbbf24" stroke-width="1.8"/>
+    <text x="147" y="80" fill="#fde68a" font-size="8.5" font-weight="900" text-anchor="middle">짝수</text>
+    <text x="147" y="92" fill="#fff" font-size="8.5" font-weight="800" text-anchor="middle">[1자리]</text>
+    <rect x="172" y="72" width="32" height="24" rx="4" fill="rgba(56,189,248,0.16)" stroke="#38bdf8"/><text x="188" y="88" fill="#bae6fd" font-size="9" font-weight="700" text-anchor="middle">2</text>
+    <rect x="208" y="72" width="32" height="24" rx="4" fill="rgba(56,189,248,0.16)" stroke="#38bdf8"/><text x="224" y="88" fill="#bae6fd" font-size="9" font-weight="700" text-anchor="middle">3</text>
+    <rect x="244" y="72" width="32" height="24" rx="4" fill="rgba(56,189,248,0.16)" stroke="#38bdf8"/><text x="260" y="88" fill="#bae6fd" font-size="9" font-weight="700" text-anchor="middle">4</text>
+    <rect x="280" y="72" width="32" height="24" rx="4" fill="rgba(56,189,248,0.16)" stroke="#38bdf8"/><text x="296" y="88" fill="#bae6fd" font-size="9" font-weight="700" text-anchor="middle">5</text>
+    <rect x="316" y="72" width="32" height="24" rx="4" fill="rgba(56,189,248,0.16)" stroke="#38bdf8"/><text x="332" y="88" fill="#bae6fd" font-size="9" font-weight="700" text-anchor="middle">6</text>
+    <text x="388" y="84" fill="#6ee7b7" font-size="9.2" font-weight="800" text-anchor="middle">남은 5자리</text>
+    <text x="388" y="96" fill="#fde68a" font-size="8.8" font-weight="700" text-anchor="middle">5!/(2!2!), 5!/2!</text>
+
+    <!-- TOP-RIGHT WHITEBOARD SUMMARY BOX -->
+    <rect x="436" y="48" width="230" height="58" rx="9" fill="rgba(52,211,153,0.16)" stroke="#34d399" stroke-width="1.8"/>
+    <text x="551" y="66" fill="#6ee7b7" font-size="10.2" font-weight="800" text-anchor="middle">🎯 칠판 우측 상단 최종 합산</text>
+    <text x="551" y="83" fill="#fff" font-size="10.5" font-weight="800" text-anchor="middle">120 + 60 + 60 + 120 + 120 + 240</text>
+    <text x="551" y="99" fill="#fde68a" font-size="12" font-weight="900" text-anchor="middle">= 720 (정답 ③)</text>
+
+    <!-- LEFT PANEL: CASE 1 (a a b b c c : 3 pairs) -->
+    <rect x="14" y="114" width="256" height="194" rx="10" fill="rgba(15,23,42,0.94)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="142" y="132" fill="#c4b5fd" font-size="11" font-weight="800" text-anchor="middle">Case 1 : a a b b c c (3종류 2장씩 = 180)</text>
+
+    <!-- Case 1 - i) -->
+    <rect x="22" y="140" width="240" height="76" rx="7" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.45)"/>
+    <text x="30" y="155" fill="#7cc4ff" font-size="9.8" font-weight="800">i) a, b, c 중 2개가 짝수 (★ ★ 2 2 4 4)</text>
+    <text x="30" y="170" fill="#cbd5e1" font-size="9" font-weight="700">· 홀수 ★ 선택(1 또는 3): 2가지 × 첫자리 짝수 □(2 또는 4): 2가지</text>
+    <text x="30" y="185" fill="#e2e8f0" font-size="9" font-weight="700">· 배열: [□] + (□ △ △ ★ ★)  ➔  같은 카드 2쌍!</text>
+    <text x="142" y="205" fill="#fde68a" font-size="10.5" font-weight="900" text-anchor="middle">2 × 2 × (5! / 2!2!) = 4 × 30 = 120</text>
+
+    <!-- Case 1 - ii) -->
+    <rect x="22" y="222" width="240" height="76" rx="7" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.45)"/>
+    <text x="30" y="237" fill="#ddd6fe" font-size="9.8" font-weight="800">ii) a, b, c 중 2개가 홀수 (★ ★ 1 1 3 3)</text>
+    <text x="30" y="252" fill="#cbd5e1" font-size="9" font-weight="700">· 짝수 ★ 선택(2 또는 4): 2가지 × 첫자리는 반드시 ★(1가지)</text>
+    <text x="30" y="267" fill="#e2e8f0" font-size="9" font-weight="700">· 배열: [★] + (★ 1 1 3 3)  ➔  같은 카드 2쌍(1,1 / 3,3)!</text>
+    <text x="142" y="287" fill="#fde68a" font-size="10.5" font-weight="900" text-anchor="middle">2 × (5! / 2!2!) = 2 × 30 = 60</text>
+
+    <!-- RIGHT PANEL: CASE 2 (a a b b c d : 2 pairs + 2 singles) -->
+    <rect x="278" y="114" width="388" height="194" rx="10" fill="rgba(15,23,42,0.94)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="472" y="132" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">Case 2 : a a b b c d (2종류 2장씩 + 2종류 1장씩 = 540)</text>
+
+    <!-- Case 2 - i) -->
+    <rect x="286" y="140" width="182" height="68" rx="7" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.45)"/>
+    <text x="293" y="155" fill="#6ee7b7" font-size="9.4" font-weight="800">i) c, d가 모두 짝수 (1 1 3 3 2 4)</text>
+    <text x="293" y="170" fill="#cbd5e1" font-size="8.7" font-weight="700">· 첫자리 ★(2 or 4): 2가지</text>
+    <text x="293" y="184" fill="#e2e8f0" font-size="8.7" font-weight="700">· 남은 5자리: (□ 1 1 3 3)</text>
+    <text x="377" y="201" fill="#fde68a" font-size="9.8" font-weight="900" text-anchor="middle">2 × (5! / 2!2!) = 60</text>
+
+    <!-- Case 2 - ii) -->
+    <rect x="476" y="140" width="182" height="68" rx="7" fill="rgba(251,113,133,0.12)" stroke="rgba(251,113,133,0.45)"/>
+    <text x="483" y="155" fill="#fecdd3" font-size="9.4" font-weight="800">ii) c, d가 모두 홀수 (2 2 4 4 1 3)</text>
+    <text x="483" y="170" fill="#cbd5e1" font-size="8.7" font-weight="700">· 첫자리 ★(2 or 4): 2가지</text>
+    <text x="483" y="184" fill="#e2e8f0" font-size="8.7" font-weight="700">· 남은 5자리: (★ □ □ 1 3)</text>
+    <text x="567" y="201" fill="#fde68a" font-size="9.8" font-weight="900" text-anchor="middle">2 × (5! / 2!) = 120</text>
+
+    <!-- Case 2 - iii) -->
+    <rect x="286" y="214" width="372" height="84" rx="7" fill="rgba(251,191,36,0.14)" stroke="#fbbf24" stroke-width="1.3"/>
+    <text x="472" y="230" fill="#fde68a" font-size="9.8" font-weight="800" text-anchor="middle">iii) c, d가 홀수 1개·짝수 1개 : e₂ e₂ o₂ o₂ e₁ o₁ (e₁: 2가지 × o₁: 2가지)</text>
+    <text x="296" y="249" fill="#bae6fd" font-size="9.2" font-weight="800">① 첫자리 [e₁] + (e₂ e₂ o₂ o₂ o₁) :</text>
+    <text x="648" y="249" fill="#fde68a" font-size="9.6" font-weight="900" text-anchor="end">2 × (5! / 2!2!) × 2 = 120</text>
+    <text x="296" y="269" fill="#6ee7b7" font-size="9.2" font-weight="800">② 첫자리 [e₂] + (e₁ e₂ o₂ o₂ o₁) :</text>
+    <text x="648" y="269" fill="#fde68a" font-size="9.6" font-weight="900" text-anchor="end">2 × 2 × (5! / 2!) = 240</text>
+    <text x="472" y="289" fill="#ecfdf5" font-size="9.2" font-weight="800" text-anchor="middle">★ e₁(1장 짝수)이 앞설 때는 2쌍(e₂,o₂) 남고, e₂(2장 짝수)가 앞설 때는 1쌍(o₂)만 남음!</text>
+    """
+    return _svg_wrap(title, sub, inner, 320)
+
+
 def _draw_c2610p29_svg(lang="ko") -> str:
     title = (
         "📐 [기하적 대칭·합동 모델] 두 정규분포 곡선 f, g의 대칭 이동과 Case 1(m₂=16)·Case 2(m₂=14) 검증"
@@ -671,6 +749,8 @@ def _draw_sequence_algebra_prob_svg(pid: str, title_ko: str, eq_label: str, pt1_
 
 def _classify_problem(pid: str, title: str, sol_text: str):
     t = (title + " " + sol_text[:300]).lower()
+    if pid == "c2610p28":
+        return ("c2610p28", "cards_six_cases")
     if pid == "c2610p29":
         return ("c2610p29", "normal_two_cases")
     if pid in ("c2610p30", "c2709p30"):
@@ -769,7 +849,9 @@ def build_visual_and_schematic_block(
     pt2_lbl = s_clean[-1] if len(s_clean) > 2 else f"수식 연립 및 도출 → {ans_clean}"
 
     cat, submode = _classify_problem(pid, short_title, sol_ko_plain)
-    if cat == "c2610p29":
+    if cat == "c2610p28":
+        svg_html = _draw_c2610p28_svg(lang=lang)
+    elif cat == "c2610p29":
         svg_html = _draw_c2610p29_svg(lang=lang)
     elif cat == "c2610p30":
         svg_html = _draw_c2610p30_svg(lang=lang)
