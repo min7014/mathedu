@@ -13,7 +13,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#050811">
+<meta name="theme-color" content="#fcf8fa">
 <meta property="og:type" content="website">
 <meta property="og:title" content="mathedu · 수학자료실">
 <meta property="og:description" content="Mathematics Archive: 3,400+ dynamic visual proofs & interactive scaffolding quizzes, 100% freely open.">
@@ -80,1626 +80,1204 @@ window.MathJax = {
 <script src="mathedu-gamification.js?v=20261003_v3"></script>
 <script src="mathedu-i18n.js?v=20261003_v3"></script>
 <script src="mathedu-report.js?v=20261003_v3"></script>
+<!-- Google Stitch Design System: Mathematical Clarity & Dynamic Geometry -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "tertiary": "#000000",
+        "on-primary-fixed": "#131b2e",
+        "on-secondary-container": "#00476e",
+        "surface": "#fcf8fa",
+        "on-error": "#ffffff",
+        "surface-tint": "#565e74",
+        "surface-container-lowest": "#ffffff",
+        "surface-glass-border": "rgba(226, 232, 240, 0.8)",
+        "on-secondary-fixed": "#001d31",
+        "tertiary-fixed-dim": "#dec29a",
+        "on-tertiary-fixed": "#271901",
+        "on-secondary": "#ffffff",
+        "surface-variant": "#e4e2e4",
+        "inverse-primary": "#bec6e0",
+        "surface-container-low": "#f6f3f5",
+        "surface-dim": "#dcd9db",
+        "secondary-container": "#5bb8fe",
+        "surface-bright": "#fcf8fa",
+        "on-tertiary": "#ffffff",
+        "surface-card": "rgba(255, 255, 255, 0.85)",
+        "inverse-surface": "#303032",
+        "secondary-fixed-dim": "#93ccff",
+        "tertiary-container": "#271901",
+        "accent-indigo": "#818CF8",
+        "on-surface-variant": "#45464d",
+        "outline": "#76777d",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed-variant": "#004b73",
+        "on-background": "#1b1b1d",
+        "on-tertiary-container": "#98805d",
+        "outline-variant": "#c6c6cd",
+        "status-emerald": "#10B981",
+        "primary-container": "#131b2e",
+        "on-primary-container": "#7c839b",
+        "math-dark": "#050811",
+        "primary-fixed": "#dae2fd",
+        "on-primary-fixed-variant": "#3f465c",
+        "on-tertiary-fixed-variant": "#574425",
+        "inverse-on-surface": "#f3f0f2",
+        "status-amber": "#F59E0B",
+        "surface-container": "#f0edef",
+        "background": "#fcf8fa",
+        "secondary": "#006398",
+        "surface-container-high": "#eae7e9",
+        "error": "#ba1a1a",
+        "primary-fixed-dim": "#bec6e0",
+        "on-surface": "#1b1b1d",
+        "surface-canvas": "#F8FAFC",
+        "surface-container-highest": "#e4e2e4",
+        "tertiary-fixed": "#fcdeb5",
+        "secondary-fixed": "#cce5ff",
+        "primary": "#000000",
+        "on-primary": "#ffffff",
+        "on-error-container": "#93000a",
+        "accent-azure": "#38BDF8"
+      },
+      borderRadius: {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "2xl": "1rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-sm": "0.5rem",
+        "margin-desktop": "3.5rem",
+        "gutter": "1.25rem",
+        "space-xs": "0.25rem",
+        "margin": "1rem",
+        "space-md": "1rem",
+        "gutter-desktop": "1.75rem",
+        "space-xl": "2.25rem",
+        "space-lg": "1.5rem",
+        "margin-tablet": "2rem"
+      },
+      fontFamily: {
+        "headline-sm": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "headline-md": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "body-sm": ["Inter", "Pretendard", "sans-serif"],
+        "label-badge": ["Space Grotesk", "Pretendard", "sans-serif"],
+        "body-lg": ["Inter", "Pretendard", "sans-serif"],
+        "label-code": ["Space Grotesk", "Pretendard", "monospace"],
+        "display-hero-mobile": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "display-hero": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "headline-lg-mobile": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "headline-lg": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "body-md": ["Inter", "Pretendard", "sans-serif"]
+      },
+      fontSize: {
+        "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+        "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
+        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+        "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+        "label-code": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+        "display-hero-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "display-hero": ["44px", { "lineHeight": "54px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }]
+      }
+    }
+  }
+};
+</script>
 <style>
-/* ══════════════════════════════════════════════════════════════
-   💎 min7014 mathedu · LUXURY CELESTIAL DESIGN SYSTEM (2026)
-   ══════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════════
+   🎨 Google Stitch Design System: Mathematical Clarity & Dynamic Geometry
+   ══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --bg-deep: #050811;
-  --bg-surface: #0a0e1c;
-  --card: rgba(15, 23, 42, 0.68);
-  --card2: rgba(30, 41, 59, 0.72);
-  --card-hover: rgba(30, 48, 80, 0.80);
-  --line: rgba(255, 255, 255, 0.12);
-  --line-light: rgba(255, 255, 255, 0.20);
-  --line-glow: rgba(56, 189, 248, 0.38);
-  --line-gold: rgba(245, 158, 11, 0.40);
-  --txt: #f8fafc;
-  --sub: #94a3b8;
-  --dim: #64748b;
-  --accent: #38bdf8;
-  --accent2: #818cf8;
-  --accent3: #c084fc;
-  --good: #34d399;
-  --bad: #fb7185;
-  --gold: #fbbf24;
-  --gold-light: #fef08a;
-  --glass-blur: 24px;
-  --glass-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  --radius: 18px;
-  --radius-sm: 12px;
-  --radius-lg: 24px;
+  --bg-deep: #fcf8fa;
+  --bg-surface: #ffffff;
+  --card: #ffffff;
+  --card2: #f6f3f5;
+  --line: rgba(226, 232, 240, 0.9);
+  --txt: #1b1b1d;
+  --sub: #45464d;
+  --accent: #006398;
+  --accent2: #818CF8;
+  --good: #10B981;
+  --bad: #ba1a1a;
+  --gold: #F59E0B;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  color: var(--txt);
-  line-height: 1.65;
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Apple SD Gothic Neo", sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #fcf8fa;
+  color: #1b1b1d;
+  font-family: "Inter", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  background:
-    radial-gradient(circle at 14% 12%, rgba(56, 189, 248, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 86% 16%, rgba(129, 140, 248, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.10) 0%, transparent 50%),
-    radial-gradient(circle at 25% 85%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
-    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(175deg, #050811 0%, #0b1022 45%, #060914 100%);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 30px 30px, 100% 100%;
-  background-attachment: fixed;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.wrap {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 32px 20px 80px;
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   💎 글로벌 탑 네비게이션 바 (Floating Glass Island)
-   ══════════════════════════════════════════════════════════════ */
-.top-nav-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: rgba(10, 14, 28, 0.72);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  margin-bottom: 24px;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-.nav-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: var(--txt);
-  transition: transform .2s ease;
-}
-.nav-brand:hover {
-  transform: translateY(-1px);
-}
-.nav-logo-badge {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: #ffffff;
-  padding: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
-}
-.nav-logo-badge img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 9px;
-}
-.nav-brand-title {
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-.nav-brand-title .lab {
-  color: #ffffff;
-}
-.nav-brand-title .hub {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.nav-link {
-  color: var(--sub);
-  text-decoration: none;
-  font-size: .84rem;
-  font-weight: 600;
-  padding: 7px 14px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  transition: .2s;
-  letter-spacing: -0.01em;
-}
-.nav-link:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-1px);
-}
-.nav-link-cta {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(129, 140, 248, 0.18));
-  border: 1px solid rgba(56, 189, 248, 0.45);
-  color: var(--accent);
-  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.15);
-}
-.nav-link-cta:hover {
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  color: #050811;
-  border-color: transparent;
-  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
-}
-.lang-switcher {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(124, 196, 255, 0.35);
-  border-radius: 20px;
-  padding: 2px 4px;
-  gap: 3px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-left: 6px;
-}
+/* Language switcher buttons */
 .lang-btn {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #45464d;
   background: transparent;
   border: none;
-  color: var(--sub);
-  font-family: inherit;
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 4px 9px;
-  border-radius: 14px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  letter-spacing: -0.01em;
-}
-.lang-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.15s ease;
 }
 .lang-btn.active {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  color: #050811;
-  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.45);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   💎 럭셔리 브랜드 히어로 카드 (Brand Emblem Showcase)
-   ══════════════════════════════════════════════════════════════ */
-.brand-hero-card {
-  position: relative;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(15, 23, 42, 0.82) 100%);
-  border: 1px solid rgba(124, 196, 255, 0.32);
-  border-radius: var(--radius-lg);
-  padding: 34px 38px;
-  margin-bottom: 32px;
-  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.65), 0 0 45px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  display: flex;
-  gap: 36px;
-  align-items: center;
-  overflow: hidden;
-  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s ease, border-color .3s ease;
-}
-.brand-hero-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(124, 196, 255, 0.55);
-  box-shadow: 0 30px 70px -12px rgba(0, 0, 0, 0.75), 0 0 60px rgba(56, 189, 248, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-.brand-hero-glow {
-  position: absolute;
-  width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.20) 0%, rgba(129, 140, 248, 0.12) 45%, transparent 70%);
-  top: -80px;
-  left: -50px;
-  filter: blur(45px);
-  pointer-events: none;
-}
-.brand-emblem-wrap {
-  flex: 0 0 260px;
-  max-width: 260px;
-  position: relative;
-  z-index: 1;
-}
-.brand-emblem-frame {
-  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-  border-radius: 20px;
-  padding: 12px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), inset 0 0 0 1.5px rgba(245, 158, 11, 0.5), 0 0 25px rgba(245, 158, 11, 0.18);
-  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s ease;
-  cursor: pointer;
-}
-.brand-emblem-frame:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 24px 50px rgba(245, 158, 11, 0.35), inset 0 0 0 2px #fbbf24;
-}
-.brand-emblem-frame img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 14px;
-}
-.brand-emblem-caption {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: .75rem;
-  color: #475569;
-  font-weight: 700;
-  padding: 0 4px;
-}
-.brand-emblem-pill {
-  background: #f1f5f9;
-  padding: 2px 8px;
-  border-radius: 6px;
-  color: #0f172a;
-  border: 1px solid #e2e8f0;
-  font-weight: 800;
-}
-.brand-hero-text {
-  flex: 1;
-  min-width: 0;
-  position: relative;
-  z-index: 1;
-}
-.brand-badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.45);
-  color: var(--accent);
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: .8rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
-  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.15);
-}
-.brand-main-title {
-  font-size: 2.3rem;
-  font-weight: 800;
-  line-height: 1.22;
-  margin-bottom: 12px;
-  letter-spacing: -0.03em;
-}
-.brand-main-title .math-lab {
+  background: #000000;
   color: #ffffff;
-}
-.brand-main-title .math-sep {
-  color: rgba(255,255,255,0.3);
-  margin: 0 4px;
-}
-.brand-main-title .math-hub {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.brand-lead-desc {
-  font-size: 1.02rem;
-  color: var(--sub);
-  margin-bottom: 18px;
-  line-height: 1.6;
-}
-.brand-lead-desc b {
-  color: #ffffff;
-}
-.brand-pills-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.pill-item {
-  background: var(--card2);
-  border: 1px solid var(--line);
-  padding: 5px 13px;
-  border-radius: 12px;
-  font-size: .8rem;
-  font-weight: 600;
-  color: var(--txt);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: .15s;
-}
-.pill-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-/* 🏛️ 4대 핵심 지표 럭셔리 쇼케이스 그리드 */
-.brand-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 20px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+/* Auth slot overrides for light academic surface */
+.nav-auth-slot .auth-btn-sub {
+  background: #f0edef !important;
+  border: 1px solid #e4e2e4 !important;
+  color: #1b1b1d !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 6px 12px !important;
 }
-.stat-cell {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 10px 12px;
-  text-align: center;
-  transition: .2s ease;
+.nav-auth-slot .auth-btn-sub:hover {
+  background: #e4e2e4 !important;
 }
-.stat-cell:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(56, 189, 248, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+.nav-auth-slot .auth-btn-login {
+  background: #006398 !important;
+  border: 1px solid #006398 !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 6px 12px !important;
 }
-.stat-num {
-  font-size: 1.35rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: -0.02em;
-}
-.stat-lbl {
-  font-size: 0.72rem;
-  color: var(--sub);
-  font-weight: 600;
-  margin-top: 3px;
-  letter-spacing: -0.01em;
+.nav-auth-slot .auth-logged-pill,
+.nav-auth-slot .auth-guest-pill {
+  background: #f6f3f5 !important;
+  border: 1px solid #dcd9db !important;
+  color: #1b1b1d !important;
 }
 
-.story-btn {
-  background: transparent;
-  border: 1px dashed rgba(56, 189, 248, 0.5);
-  color: var(--accent);
-  padding: 7px 16px;
-  border-radius: 10px;
-  font-size: .84rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .15s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.story-btn:hover {
-  background: rgba(56, 189, 248, 0.15);
-  border-style: solid;
-}
-.story-drawer {
-  background: rgba(10, 15, 30, 0.90);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  border-radius: 14px;
-  padding: 18px;
-  margin-top: 14px;
-  font-size: .88rem;
-  line-height: 1.68;
-  color: #cbd5e1;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-.story-drawer h4 {
-  color: var(--gold);
-  font-size: .98rem;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   🌟 학생 게이미피케이션 & 연속 출석 스트릭 바
-   ══════════════════════════════════════════════════════════════ */
-.gamification-hub-strip {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(129, 140, 248, 0.12) 100%);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  border-radius: var(--radius);
-  padding: 16px 24px;
-  margin-bottom: 24px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.streak-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.streak-flame {
-  font-size: 2rem;
-  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.65));
-  animation: flamePulse 1.8s infinite ease-in-out;
-}
-@keyframes flamePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-}
-.streak-text-title {
-  font-size: 0.98rem;
-  font-weight: 800;
-  color: #fde68a;
-  letter-spacing: -0.01em;
-}
-.streak-text-sub {
-  font-size: 0.78rem;
-  color: var(--sub);
-}
-.xp-level-box {
-  flex: 1;
-  min-width: 220px;
-  max-width: 380px;
-}
-.xp-level-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-  font-size: 0.82rem;
-}
-.xp-bar-bg {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
-  overflow: hidden;
-}
-.xp-bar-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #34d399 0%, #38bdf8 50%, #818cf8 100%);
-  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-}
-.game-actions-group {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   🎲 오늘의 추천 동적 기하 카드 (min7014 Featured)
-   ══════════════════════════════════════════════════════════════ */
-.today-geogebra-card {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(15, 23, 42, 0.78) 100%);
-  border: 1px solid rgba(56, 189, 248, 0.38);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 28px;
-  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-.today-ggb-title {
-  font-size: 1.08rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 4px;
-  letter-spacing: -0.01em;
-}
-.today-ggb-desc {
-  font-size: 0.85rem;
-  color: #cbd5e1;
-  line-height: 1.55;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   🚀 히어로 3-박스 빠른 액션 (교사 / 문제생성 / 학생)
-   ══════════════════════════════════════════════════════════════ */
-.hero-box {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 34px;
-}
-.hero-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(15, 23, 42, 0.75) 100%);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 24px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  overflow: hidden;
-  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease, border-color .25s ease;
-}
-.hero-card:hover {
-  transform: translateY(-3px);
-}
-.hero-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-}
-.hero-card.teacher-card::before { background: linear-gradient(90deg, #38bdf8, #818cf8); }
-.hero-card.create-card::before { background: linear-gradient(90deg, #a78bfa, #f472b6); }
-.hero-card.student-card::before { background: linear-gradient(90deg, #34d399, #38bdf8); }
-
-.hero-card.teacher-card { border-color: rgba(56, 189, 248, 0.35); }
-.hero-card.teacher-card:hover { border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 16px 40px -8px rgba(56, 189, 248, 0.25); }
-
-.hero-card.create-card { border-color: rgba(167, 139, 250, 0.35); }
-.hero-card.create-card:hover { border-color: rgba(167, 139, 250, 0.6); box-shadow: 0 16px 40px -8px rgba(167, 139, 250, 0.25); }
-
-.hero-card.student-card { border-color: rgba(52, 211, 153, 0.35); }
-.hero-card.student-card:hover { border-color: rgba(52, 211, 153, 0.6); box-shadow: 0 16px 40px -8px rgba(52, 211, 153, 0.25); }
-
-.hero-tag {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: .78rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  width: fit-content;
-  letter-spacing: -0.01em;
-}
-.tag-teacher { background: rgba(56, 189, 248, 0.18); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.4); }
-.tag-create { background: rgba(167, 139, 250, 0.18); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.4); }
-.tag-student { background: rgba(52, 211, 153, 0.18); color: var(--good); border: 1px solid rgba(52, 211, 153, 0.4); }
-
-.hero-title {
-  font-size: 1.22rem;
-  font-weight: 800;
-  margin-bottom: 8px;
-  color: var(--txt);
-  letter-spacing: -0.02em;
-}
-.hero-desc {
-  font-size: .88rem;
-  color: var(--sub);
-  margin-bottom: 20px;
-  line-height: 1.55;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   🔘 버튼 및 인터랙티브 폼 컨트롤 (Buttons & Controls)
-   ══════════════════════════════════════════════════════════════ */
-.btn-primary {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  color: #050811;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 22px;
-  font-size: .92rem;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 6px 20px -4px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .2s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-decoration: none;
-  letter-spacing: -0.01em;
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px -4px rgba(56, 189, 248, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-.tbtn {
-  background: var(--card2);
-  color: var(--txt);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 8px 16px;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: .86rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: .15s;
-}
-.tbtn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(56, 189, 248, 0.12);
-  transform: translateY(-1px);
-}
-
-.student-join-form {
-  display: flex;
-  gap: 8px;
-}
-.student-join-form input {
-  flex: 1;
-  background: #0d1224;
-  border: 1px solid rgba(52, 211, 153, 0.35);
-  border-radius: 12px;
-  padding: 10px 14px;
-  color: #fff;
-  font-size: .95rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  outline: none;
-  transition: .2s;
-}
-.student-join-form input:focus {
-  border-color: var(--good);
-  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25);
-}
-.student-join-form button {
-  background: linear-gradient(135deg, var(--good) 0%, #38bdf8 100%);
-  color: #050811;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 18px;
-  font-weight: 800;
-  cursor: pointer;
-  font-size: .9rem;
-  transition: .2s;
-  box-shadow: 0 4px 14px rgba(52, 211, 153, 0.3);
-}
-.student-join-form button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(52, 211, 153, 0.5);
-}
-
-/* 최근 수업 바로가기 */
-.recent-rooms-box {
-  background: var(--card2);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 12px 18px;
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  font-size: .88rem;
-}
-.recent-rooms-box .lbl { color: var(--sub); font-weight: 700; }
-.room-chip {
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: var(--accent);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: .8rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: .15s;
-}
-.room-chip:hover {
-  background: var(--accent);
-  color: #050811;
-  transform: translateY(-1px);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   🎯 수능·모평 정밀 탐색기 & 필터 탭
-   ══════════════════════════════════════════════════════════════ */
+/* Mode Filter Tabs */
 .filter-tab-bar {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
   flex-wrap: wrap;
+  align-items: center;
 }
 .filter-tab-btn {
-  background: var(--card2);
-  border: 1px solid var(--line);
-  color: var(--sub);
-  padding: 9px 18px;
-  border-radius: 12px;
-  font-size: 0.88rem;
+  background: #f0edef;
+  border: 1px solid transparent;
+  color: #45464d;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: .2s;
-  letter-spacing: -0.01em;
-}
-.filter-tab-btn:hover {
-  color: #fff;
-  border-color: var(--accent);
-  background: rgba(56, 189, 248, 0.1);
-  transform: translateY(-1px);
-}
-.filter-tab-btn.active {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(129, 140, 248, 0.22));
-  border-color: var(--accent);
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.28);
-}
-
-.exam-select {
-  width: 100%;
-  background: #090d1c;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 10px;
-  color: #f8fafc;
-  padding: 9px 12px;
-  font-size: 0.86rem;
-  font-weight: 600;
-  outline: none;
-  transition: border-color .15s, box-shadow .15s;
-}
-.exam-select:focus {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
-}
-
-.topic-chip {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--sub);
-  padding: 6px 15px;
-  border-radius: 20px;
-  font-size: .8rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .2s;
-  letter-spacing: -0.01em;
-}
-.topic-chip:hover {
-  border-color: var(--accent);
-  color: #fff;
-  background: rgba(56, 189, 248, 0.12);
-  transform: translateY(-1px);
-}
-.topic-chip.active {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(129, 140, 248, 0.25));
-  border-color: #38bdf8;
-  color: #ffffff;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   📚 퀴즈 카드 리스트 (Problem Cards)
-   ══════════════════════════════════════════════════════════════ */
-.list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-.list-title {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--txt);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  letter-spacing: -0.02em;
-}
-.count-badge {
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  border-radius: 20px;
-  padding: 4px 14px;
-  font-size: .8rem;
-  font-weight: 800;
-  color: var(--accent);
-}
-
-.list {
-  display: grid;
-  gap: 14px;
-}
-.card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(15, 23, 42, 0.78) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-radius: var(--radius);
-  padding: 20px 22px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease, border-color .25s ease;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.card:hover {
-  border-color: rgba(56, 189, 248, 0.45);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 45px -10px rgba(56, 189, 248, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.card .icon {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(129, 140, 248, 0.22));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-}
-.card .body { flex: 1; min-width: 0; }
-.card .title {
-  font-size: 1.08rem;
-  font-weight: 700;
-  margin: 0 0 6px;
-  color: var(--txt);
-  text-decoration: none;
-  display: block;
-  letter-spacing: -0.01em;
-}
-.card .title:hover { color: var(--accent); }
-.card .meta {
-  font-size: .84rem;
-  color: var(--sub);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.card-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.btn-launch-class {
-  background: rgba(56, 189, 248, 0.18);
-  border: 1px solid rgba(56, 189, 248, 0.45);
-  color: #7cc4ff;
-  border-radius: 10px;
-  padding: 7px 15px;
-  font-size: .84rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .15s;
-  white-space: nowrap;
-}
-.btn-launch-class:hover {
-  background: var(--accent);
-  color: #050811;
-  transform: translateY(-1px);
-}
-.btn-solve {
-  background: var(--card2);
-  border: 1px solid var(--line);
-  color: var(--txt);
-  border-radius: 10px;
-  padding: 7px 15px;
-  font-size: .84rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: .15s;
-  white-space: nowrap;
-}
-.btn-solve:hover {
-  border-color: var(--good);
-  color: var(--good);
-  background: rgba(52, 211, 153, 0.12);
-}
-.btn-offline {
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  color: #7cc4ff;
-  border-radius: 10px;
-  padding: 7px 13px;
-  font-size: .84rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: .15s;
-  white-space: nowrap;
+  transition: all 0.18s ease;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
-.btn-offline:hover {
-  background: rgba(56, 189, 248, 0.25);
-  border-color: #38bdf8;
-  color: #fff;
-  transform: translateY(-1px);
+.filter-tab-btn:hover {
+  background: #eae7e9;
+  color: #1b1b1d;
+}
+.filter-tab-btn.active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
+/* Stitch Pill Filters (Year / Subject / Topic) */
+.stitch-year-pill,
+.stitch-subj-pill {
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: #f0edef;
+  color: #1b1b1d;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.stitch-year-pill:hover,
+.stitch-subj-pill:hover {
+  background: #eae7e9;
+}
+.stitch-year-pill.active {
+  background: #000000;
+  color: #ffffff;
+}
+.stitch-subj-pill.active {
+  background: #006398;
+  color: #ffffff;
+}
+
+.topic-chip {
+  padding: 5px 11px;
+  border-radius: 6px;
+  background: #f0edef;
+  color: #1b1b1d;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.topic-chip:hover {
+  background: #eae7e9;
+}
+.topic-chip.active {
+  background: rgba(0, 99, 152, 0.12);
+  color: #006398;
+  font-weight: 700;
+}
+
+/* Precision Exam Select Dropdowns */
+.exam-select {
+  width: 100%;
+  background: #f6f3f5;
+  border: 1px solid #e4e2e4;
+  border-radius: 8px;
+  color: #1b1b1d;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.exam-select:focus {
+  border-color: #006398;
+  background: #ffffff;
+}
+
+/* Dynamic Quiz Card List (#list) in Stitch Academic Modernism style */
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 768px) {
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.08);
+  border-color: rgba(0, 99, 152, 0.35);
+}
+.card .title {
+  font-family: "Plus Jakarta Sans", "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #1b1b1d;
+  text-decoration: none;
+  display: block;
+}
+.card .title:hover {
+  color: #006398;
+}
+.card .meta {
+  font-size: 12px;
+  color: #45464d;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f6f3f5;
+  flex-wrap: wrap;
+}
+.btn-launch-class {
+  background: rgba(0, 99, 152, 0.08);
+  border: none;
+  color: #006398;
+  border-radius: 8px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-launch-class:hover {
+  background: rgba(0, 99, 152, 0.16);
+}
+.btn-offline {
+  background: #f0edef;
+  color: #45464d;
+  border-radius: 8px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.btn-offline:hover {
+  background: #e4e2e4;
+  color: #1b1b1d;
+}
+.btn-solve {
+  background: #000000;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn-solve:hover {
+  background: #131b2e;
+  transform: translateY(-1px);
+}
 .card-bookmark-btn {
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: 18px;
   cursor: pointer;
-  padding: 4px;
+  padding: 2px 4px;
   line-height: 1;
-  transition: transform .15s ease;
-  color: rgba(255, 255, 255, 0.3);
+  color: #c6c6cd;
+  transition: transform 0.15s ease, color 0.15s ease;
 }
 .card-bookmark-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 .card-bookmark-btn.active {
-  color: #fbbf24;
-  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.7));
+  color: #F59E0B;
 }
 .card-pack-checkbox {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
-  accent-color: #818cf8;
+  accent-color: #006398;
 }
 
-/* 🎒 교사용 수업 팩 플로팅 바 */
+/* Recent rooms & request items */
+.room-chip {
+  background: rgba(0, 99, 152, 0.1);
+  color: #006398;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.room-chip:hover {
+  background: #006398;
+  color: #ffffff;
+}
+.req-item-card {
+  background: #f6f3f5;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.req-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+.badge-done {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+.badge-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #B45309;
+}
+.req-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1b1b1d;
+}
+
+/* Lesson pack floating bar */
 .lesson-pack-float-bar {
   position: fixed;
-  bottom: 24px;
+  bottom: 76px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
-  background: rgba(15, 23, 42, 0.95);
-  border: 1.5px solid #818cf8;
-  border-radius: 20px;
-  padding: 14px 26px;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(129, 140, 248, 0.3);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  color: #fff;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   🏛️ 럭셔리 푸터 (Footer)
-   ══════════════════════════════════════════════════════════════ */
-.site-footer {
-  margin-top: 55px;
-  border-top: 1px solid var(--line);
-  padding-top: 32px;
-}
-.footer-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(15, 23, 42, 0.78) 100%);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 26px 32px;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 18px;
-  box-shadow: var(--glass-shadow);
-}
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.footer-logo {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #ffffff;
-  padding: 3px;
-  border: 1.5px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
-}
-.footer-title {
-  font-size: 1.1rem;
-  font-weight: 800;
+  z-index: 9990;
+  width: calc(100% - 2rem);
+  max-width: 720px;
+  background: #131b2e;
   color: #ffffff;
-  letter-spacing: -0.01em;
-}
-.footer-desc {
-  font-size: .84rem;
-  color: var(--sub);
-  margin-top: 2px;
-}
-.footer-links {
+  border-radius: 16px;
+  padding: 14px 20px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
   display: flex;
-  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
   flex-wrap: wrap;
-}
-.footer-link {
-  color: var(--sub);
-  text-decoration: none;
-  font-size: .86rem;
-  font-weight: 600;
-  transition: .15s;
-}
-.footer-link:hover {
-  color: var(--accent);
-}
-.footer-copy {
-  text-align: center;
-  color: #64748b;
-  font-size: .8rem;
-  margin-top: 18px;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   📱 반응형 미디어 쿼리 (Responsive Rules)
-   ══════════════════════════════════════════════════════════════ */
-@media (max-width: 880px) {
-  .hero-box { grid-template-columns: 1fr; }
-  .brand-stats-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-  .brand-hero-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 26px 20px;
-    gap: 22px;
-  }
-  .brand-emblem-wrap {
-    max-width: 220px;
-  }
-  .brand-pills-row {
-    justify-content: center;
-  }
-  .top-nav-bar {
-    flex-direction: column;
-    gap: 14px;
-  }
-  .nav-menu {
-    width: 100%;
-    justify-content: space-around;
-  }
-  .footer-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  .footer-brand {
-    flex-direction: column;
-  }
-  .footer-links {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .wrap {
-    padding: 14px 10px 60px !important;
-  }
-  .brand-hero-card {
-    padding: 18px 12px !important;
-  }
-  .brand-title-box h1 {
-    font-size: 1.7rem !important;
-  }
-  .brand-pills-row {
-    gap: 4px !important;
-  }
-  .brand-pill {
-    font-size: 0.76rem !important;
-    padding: 3px 8px !important;
-  }
-  .brand-stats-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 6px !important;
-  }
-  .brand-stat-card {
-    padding: 10px 8px !important;
-  }
-  .brand-stat-val {
-    font-size: 1.25rem !important;
-  }
-  .hero-card {
-    padding: 16px 12px !important;
-  }
-  .filter-tabs {
-    gap: 4px !important;
-  }
-  .filter-tab {
-    padding: 6px 10px !important;
-    font-size: 0.8rem !important;
-  }
 }
 </style>
 </head>
-<body>
-<div class="wrap">
+<body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen">
 
-  <!-- 글로벌 탑 네비게이션 바 -->
-  <nav class="top-nav-bar">
-    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px;margin-bottom:6px">
-      <a href="/mathedu/" class="nav-brand">
-        <div class="nav-logo-badge">
-          <img src="assets/favicon.png" alt="mathedu 로고">
+<!-- 1. Fixed Glassmorphic Top Header (Google Stitch Redesign) -->
+<header class="top-nav-bar fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe border-b border-surface-glass-border">
+  <div class="max-w-5xl mx-auto h-20 px-margin flex items-center justify-between gap-space-sm">
+    <a href="/mathedu/" class="flex items-center gap-space-sm min-w-0 no-underline">
+      <img alt="mathedu 로고" class="h-9 w-9 rounded-lg object-contain shrink-0 bg-white p-0.5 shadow-sm border border-surface-variant" src="assets/favicon.png"/>
+      <div class="flex flex-col min-w-0">
+        <div class="flex items-center gap-space-xs truncate">
+          <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate">mathedu · 수학자료실</span>
         </div>
-        <div class="nav-brand-title">
-          <span class="hub">mathedu</span> <span class="lab">수학자료실</span>
+        <div class="flex items-center gap-1.5">
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge" data-i18n="hero.badgePill">3,400+ 시각적 수학 증명</span>
+          <span class="hidden sm:inline-block font-label-code text-label-code text-on-surface-variant truncate">Interactive Archive</span>
         </div>
-      </a>
-      
-      <!-- 🌐 글로벌 언어 전환기 (KO / EN) - 첫 화면 상단 상시 노출 -->
-      <div class="lang-switcher" id="langSwitcher" title="언어 선택 / Language">
-        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">🇰🇷 KO</button>
-        <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">🌐 EN</button>
       </div>
+    </a>
+
+    <!-- Desktop Quick Navigation -->
+    <div class="hidden lg:flex items-center gap-1 nav-menu">
+      <a href="#quizExplorerSection" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors" data-i18n="nav.allQuizzes">퀴즈 모음</a>
+      <a href="offline/index.html" class="px-3 py-1.5 rounded-lg text-secondary hover:bg-secondary/10 font-body-sm text-body-sm font-semibold transition-colors" data-i18n-title="nav.offlineVaultTitle" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함" data-i18n="nav.offlineVault">오프라인 보관함</a>
+      <button type="button" onclick="openMin7014ExplorerModal()" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors cursor-pointer" data-i18n="nav.minExplorer">동적 기하관</button>
+      <a href="create.html" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors" data-i18n="nav.createQuiz">문제 출제</a>
+      <a href="dashboard.html" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors" data-i18n="nav.dashboard">수업 대시보드</a>
     </div>
 
-    <div class="nav-menu">
-      <a href="#quizFilterBar" class="nav-link" data-i18n="nav.allQuizzes">📚 퀴즈 모음</a>
-      <a href="offline/index.html" class="nav-link" style="color:#7cc4ff;border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.1)" data-i18n-title="nav.offlineVaultTitle" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함" data-i18n="nav.offlineVault">📦 오프라인 보관함</a>
-      <button type="button" class="nav-link" onclick="openMin7014ExplorerModal()" style="background:rgba(124,196,255,.15);border:1px solid rgba(124,196,255,.35);color:#7cc4ff;cursor:pointer;font-family:inherit" data-i18n="nav.minExplorer">🌐 동적 기하 탐색관</button>
-      <button type="button" class="nav-link" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" style="background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.35);color:#fde68a;cursor:pointer;font-family:inherit" data-i18n="nav.myBadges">🏆 나의 업적</button>
-      <a href="create.html" class="nav-link nav-link-cta"><span data-i18n="nav.createQuiz">✨ 문제 출제</span> <span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:2px" data-i18n="nav.membersOnly">회원전용</span></a>
-      <a href="dashboard.html" class="nav-link" data-i18n="nav.dashboard">📊 수업 대시보드</a>
-      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-link" data-i18n="nav.minHome">🌐 자료실 홈</a>
-    </div>
-  </nav>
-
-  <!-- 💎 시그니처 엠블럼 쇼케이스 히어로 카드 -->
-  <header class="brand-hero-card">
-    <div class="brand-hero-glow"></div>
-    <div class="brand-emblem-wrap">
-      <div class="brand-emblem-frame" onclick="toggleMathStory()" data-i18n-title="hero.emblemTitle" title="클릭하여 단델린 구의 기하학적 원리 보기">
-        <img src="assets/logo_cropped.png" alt="단델린 구 엠블럼">
-        <div class="brand-emblem-caption">
-          <span class="brand-emblem-pill" data-i18n="hero.emblemCaption">📐 공식 엠블럼</span>
-          <span data-i18n="hero.emblemSub">Dandelin Spheres</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="brand-hero-text">
-      <div class="brand-badge-pill" data-i18n="hero.badgePill">🏛️ 3,400+ 시각적 수학 증명과 직관 · 수학자료실</div>
-      <h1 class="brand-main-title">
-        <span class="math-hub" data-i18n="hero.mainTitleHub">mathedu</span><span class="math-sep">·</span><span class="math-lab" data-i18n="hero.mainTitleLab">수학자료실</span>
-      </h1>
-      <p class="brand-lead-desc" data-i18n-html="hero.leadDesc">
-        수학자료실의 3,400+ 시각적 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학자료실</b>
-      </p>
-
-      <div class="brand-pills-row">
-        <span class="pill-item" data-i18n="hero.pill1">⚡ 학생: 무가입 5초 즉시 학습</span>
-        <span class="pill-item" data-i18n="hero.pill2">🎯 0~5단계 개념 빌드업</span>
-        <a href="dashboard.html" class="pill-item" style="color:var(--txt);text-decoration:none" data-i18n="hero.pill3">📊 실시간 교실 현황 분석 (stu1~ 익명 보호)</a>
-        <a href="offline/index.html" class="pill-item" style="background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4);color:#38bdf8;text-decoration:none" data-i18n="hero.pill4">📦 100% 오프라인 다운로드</a>
-        <span class="pill-item" style="background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.4);color:#c4b5fd" data-i18n="hero.pill5">🔐 회원 전용 출제 & 배포</span>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <!-- Language Switcher (KO / EN) -->
+      <div class="flex items-center bg-surface-container rounded-xl p-0.5" id="langSwitcher" title="언어 선택 / Language">
+        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">KO</button>
+        <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">EN</button>
       </div>
 
-      <div>
-        <button class="story-btn" onclick="toggleMathStory()">
-          <span>💡</span> <span data-i18n="hero.storyBtn">엠블럼의 수학적 원리 (단델린의 구와 원뿔곡선)</span> <span id="storyArrow">▼</span>
-        </button>
-      </div>
-
-      <div id="mathStoryDrawer" class="story-drawer" style="display:none;">
-        <h4 data-i18n="hero.storyDrawerTitle">🔬 단델린의 구(Dandelin Spheres)와 원뿔곡선의 기하학적 증명</h4>
-        <p>
-          <span data-i18n-html="hero.storyDrawerP1">원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <b>단델린의 구</b>라고 합니다.</span><br>
-          <span data-i18n-html="hero.storyDrawerP2">구가 평면과 접하는 점($F_1, F_2$)이 바로 원뿔곡선의 <b>초점(Focus)</b>이 되며, 곡선 위의 점에서 두 초점까지의 거리의 차(또는 합)가 일정함을 입체 기하학으로 우아하게 밝혀냅니다.</span><br>
-          <span style="color:var(--gold);font-weight:700;" data-i18n="hero.storyDrawerQuote">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"</span> — <b data-i18n="hero.storyDrawerAuthor">수학교육의 지향점입니다.</b>
-        </p>
-      </div>
-
-      <!-- 🏛️ 4대 핵심 지표 럭셔리 쇼케이스 그리드 -->
-      <div class="brand-stats-grid">
-        <div class="stat-cell">
-          <div class="stat-num">3,400+</div>
-          <div class="stat-lbl" data-i18n="hero.statTopics">🏛️ 수학 주제</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num">1,087+</div>
-          <div class="stat-lbl" data-i18n="hero.statAssets">📐 GeoGebra &amp; PDF 증명</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num" id="heroStatQuizCount">67개</div>
-          <div class="stat-lbl" data-i18n="hero.statQuizzes">🎯 수능·모평 디딤돌 퀴즈</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num">100%</div>
-          <div class="stat-lbl" data-i18n="hero.statRigor">⚡ 무결성 오프라인 &amp; 관제</div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- 🌟 학생 게이미피케이션 허브: 연속 학습 스트릭 & 레벨 XP -->
-  <div class="gamification-hub-strip" id="gamificationHubStrip">
-    <div class="streak-box">
-      <div class="streak-flame" id="streakFlameIcon">🔥</div>
-      <div>
-        <div class="streak-text-title" id="streakTitle">연속 출석 1일차</div>
-        <div class="streak-text-sub" id="streakSub">오늘 수학 문제 풀면 불꽃 유지!</div>
-      </div>
-    </div>
-
-    <div class="xp-level-box">
-      <div class="xp-level-header">
-        <span style="font-weight:800;color:#7cc4ff;" id="gameLevelTitle">🔰 Lv.1 디딤돌 입문자</span>
-        <span style="color:#cbd5e1;font-size:0.78rem;" id="gameXpText">0 / 100 XP</span>
-      </div>
-      <div class="xp-bar-bg">
-        <div class="xp-bar-fill" id="gameXpBarFill" style="width:0%;"></div>
-      </div>
-    </div>
-
-    <div class="game-actions-group">
-      <button type="button" class="btn-primary" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" style="padding:8px 16px;font-size:0.84rem;background:linear-gradient(90deg,#fde68a,#fbbf24);color:#0b1020;border-radius:10px;font-weight:800;box-shadow:none;cursor:pointer">
-        🏆 나의 뱃지
+      <!-- Header Streak Pill -->
+      <button type="button" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#FEF3C7] text-[#B45309] font-label-badge text-label-badge shadow-[0_2px_8px_rgba(245,158,11,0.15)] cursor-pointer border-0" title="나의 연속 학습 스트릭 및 업적">
+        <span class="material-symbols-outlined text-[16px] text-status-amber" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+        <span class="font-bold" id="headerStreakCount">1</span>
       </button>
-      <button type="button" class="btn-primary" onclick="switchFilterMode('wrong')" style="padding:8px 14px;font-size:0.84rem;background:rgba(251,113,133,.18);border:1px solid rgba(251,113,133,.4);color:#fb7185;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" id="btnQuickWrongVault">
-        🔴 오답노트 (<span id="quickWrongCount">0</span>)
+
+      <!-- Auth Slot for Desktop + Profile Trigger -->
+      <div id="navAuthSlot" class="nav-auth-slot hidden md:inline-flex"></div>
+      <button type="button" onclick="if(window.MatheduAuth){MatheduAuth.isLoggedIn()?MatheduAuth.showMyProblemsModal():MatheduAuth.showAuthModal()}" aria-label="내 계정 및 학습 기록" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center cursor-pointer border-0 shadow-sm hover:opacity-90 transition-opacity" title="로그인 / 내 학습 서재">
+        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
       </button>
     </div>
   </div>
+</header>
 
-  <!-- 🎲 오늘의 추천 동적 기하: 눈으로 원리를 보는 수학 (min7014 연계) -->
-  <div class="today-geogebra-card" id="todayGeogebraCard">
-    <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:280px">
-      <div style="width:48px;height:48px;border-radius:14px;background:#fff;padding:3px;flex:0 0 48px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(56,189,248,.35)">
-        <img src="assets/favicon.png" alt="mathedu" style="width:100%;height:100%;object-fit:contain">
-      </div>
-      <div style="flex:1;min-width:0">
-        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.2);border:1px solid rgba(56,189,248,.4);color:#38bdf8;padding:2px 10px;border-radius:12px;font-size:0.74rem;font-weight:800;margin-bottom:4px" data-i18n="todayGgb.tag">
-          💡 오늘의 추천 동적 기하 (수학자료실)
+<!-- Main Content Container -->
+<main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen">
+  <div class="flex flex-col w-full max-w-5xl mx-auto pb-12">
+
+    <!-- 2. Brand / Identity Hero Card & 4-Column Key Stats Bento Grid -->
+    <div class="px-margin pt-3 pb-1">
+      <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-md sm:p-6 shadow-sm border border-surface-glass-border">
+        <div class="relative z-10 flex flex-col gap-space-xs">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-secondary text-[20px]">architecture</span>
+              <span class="font-label-badge text-label-badge text-secondary font-bold tracking-wide">수학자료실 · mathedu</span>
+            </div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-status-emerald/10 text-status-emerald font-label-badge text-label-badge font-semibold">
+              100% 영구 무료
+            </span>
+          </div>
+
+          <h1 class="font-headline-lg-mobile sm:text-headline-lg text-headline-lg-mobile text-on-surface tracking-tight mt-1">
+            3,400+ 시각적 증명과<br class="sm:hidden"/>
+            <span class="text-secondary">단델린 구의 직관</span>
+          </h1>
+
+          <p class="font-body-sm sm:text-body-md text-body-sm text-on-surface-variant leading-relaxed mt-0.5" data-i18n-html="hero.leadDesc">
+            수학자료실의 3,400+ 시각적 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학자료실</b>
+          </p>
+
+          <!-- Quick feature badges horizontally scrolling -->
+          <div class="flex items-center gap-1.5 overflow-x-auto py-1.5 mt-1 -mx-1 px-1">
+            <span class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-status-amber">bolt</span>
+              <span data-i18n="hero.pill1">무가입 5초 즉시 학습</span>
+            </span>
+            <span class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-secondary">target</span>
+              <span data-i18n="hero.pill2">0~5단계 빌드업</span>
+            </span>
+            <a href="offline/index.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline transition-colors">
+              <span class="material-symbols-outlined text-[14px] text-secondary">inventory_2</span>
+              <span data-i18n="hero.pill4">100% 오프라인 보관함</span>
+            </a>
+            <a href="dashboard.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline transition-colors">
+              <span class="material-symbols-outlined text-[14px] text-status-emerald">monitoring</span>
+              <span data-i18n="hero.pill3">실시간 교실 현황</span>
+            </a>
+          </div>
         </div>
-        <div class="today-ggb-title" id="todayGgbTitle">타원에서의 빛 반사 (광학적 성질)</div>
-        <div class="today-ggb-desc" id="todayGgbDesc">한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. GeoGebra 앱렛으로 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-      <button type="button" class="tbtn" id="btnNextGgb" onclick="rotateTodayGeoGebra(1)" title="다른 추천 동적 기하 탐구하기" style="padding:9px 12px;font-size:0.82rem;display:inline-flex;align-items:center;gap:4px">
-        🎲 <span data-i18n="todayGgb.btnNext">다른 추천</span>
-      </button>
-      <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="btn-primary" style="padding:10px 18px;font-size:0.86rem;background:linear-gradient(90deg,#38bdf8,#818cf8)" data-i18n="todayGgb.btnApplet">
-        🎮 GeoGebra로 조작하기 ➔
-      </a>
-      <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="tbtn" style="padding:9px 14px;font-size:0.84rem" data-i18n="todayGgb.btnPdf">
-        📄 원리 증명 PDF
-      </a>
-      <a id="btnTodayGgbWeb" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener" class="tbtn" style="padding:9px 14px;font-size:0.84rem" data-i18n="todayGgb.btnWeb">
-        🌐 웹 상세 해설
-      </a>
-    </div>
-  </div>
 
-  <!-- 교사 / 문제생성 / 학생 빠른 액션 히어로 -->
-  <div class="hero-box">
-    <!-- 교사용 카드 -->
-    <div class="hero-card teacher-card">
-      <div>
-        <span class="hero-tag tag-teacher" data-i18n="heroCards.teacherTag">👩‍🏫 교사 회원 전용 · 수업 배포</span>
-        <div class="hero-title" data-i18n="heroCards.teacherTitle">3초 만에 수업 개설하기</div>
-        <p class="hero-desc" data-i18n="heroCards.teacherDesc">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</p>
+        <!-- Key Stats Bento Grid (4 Columns) -->
+        <div class="grid grid-cols-4 gap-1.5 sm:gap-3 mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-3">
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-on-surface font-bold tracking-tight">3,400+</span>
+            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statTopics">수학 주제</span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-secondary font-bold tracking-tight">1,087+</span>
+            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statAssets">GeoGebra</span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-status-amber font-bold tracking-tight" id="heroStatQuizCount">67개</span>
+            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statQuizzes">수능·디딤돌</span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-status-emerald font-bold tracking-tight">100%</span>
+            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statRigor">오프라인</span>
+          </div>
+        </div>
       </div>
-      <div>
-        <button class="btn-primary" onclick="openDefaultTeacherClass()" style="width:100%" data-i18n="heroCards.teacherBtn">
-          🚀 3초 수업 개설 (QR)
+    </div>
+
+    <!-- 3. Gamification / Daily Streak Banner -->
+    <div class="px-margin mt-space-sm" id="gamificationHubStrip">
+      <div class="flex items-center justify-between p-space-sm px-space-md sm:py-3.5 sm:px-5 rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border gap-3 flex-wrap">
+        <div class="flex items-center gap-space-sm min-w-0 flex-1">
+          <div class="w-10 h-10 rounded-full bg-[#FEF3C7] flex items-center justify-center shrink-0" id="streakFlameIcon">
+            <span class="material-symbols-outlined text-status-amber text-[22px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+          </div>
+          <div class="flex flex-col min-w-0 flex-1">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface" id="streakTitle">연속 출석 1일차</span>
+              <span class="font-label-badge text-[10px] px-2 py-0.5 rounded bg-surface-container text-secondary font-bold" id="gameLevelTitle">Lv.1 디딤돌 입문자</span>
+              <span class="font-label-code text-[11px] text-on-surface-variant" id="gameXpText">0 / 100 XP</span>
+            </div>
+            <span class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5" id="streakSub">오늘 수학 문제 풀면 불꽃 유지!</span>
+            <div class="w-full max-w-xs h-1.5 bg-surface-container rounded-full overflow-hidden mt-1">
+              <div id="gameXpBarFill" class="h-full bg-gradient-to-r from-secondary to-accent-indigo transition-all duration-300" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button type="button" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" aria-label="나의 뱃지" class="h-9 px-3 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center gap-1 text-on-surface font-label-badge text-label-badge cursor-pointer transition-colors">
+            <span class="material-symbols-outlined text-[18px] text-status-amber">military_tech</span>
+            <span class="hidden sm:inline">나의 뱃지</span>
+          </button>
+          <button type="button" id="btnQuickWrongVault" onclick="switchFilterMode('wrong')" aria-label="오답노트" class="h-9 px-3 rounded-full bg-error-container/50 hover:bg-error-container flex items-center justify-center gap-1 text-error font-label-badge text-label-badge cursor-pointer transition-colors">
+            <span class="material-symbols-outlined text-[18px]">bookmark</span>
+            <span>오답노트 (<span id="quickWrongCount">0</span>)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Emblem / Dandelin Spheres Interactive Spotlight & Today's Dynamic Geometry (2-Column on Desktop) -->
+    <div class="px-margin mt-space-md grid grid-cols-1 lg:grid-cols-2 gap-space-md">
+      <!-- Emblem / Dandelin Spheres Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm overflow-hidden relative border border-surface-glass-border flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-space-xs">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-accent-indigo text-[20px]">view_in_ar</span>
+              <span class="font-label-code text-label-code text-on-surface font-bold" data-i18n="hero.emblemCaption">공식 엠블럼 Dandelin Spheres</span>
+            </div>
+            <button type="button" onclick="toggleMathStory()" class="font-label-badge text-label-badge text-secondary font-semibold bg-secondary/10 px-2.5 py-1 rounded-full cursor-pointer border-0">
+              입체 기하 증명 <span id="storyArrow">▼</span>
+            </button>
+          </div>
+          <!-- Geometry Preview & Explanatory visual frame -->
+          <div class="mt-space-sm rounded-lg overflow-hidden bg-surface-canvas relative flex flex-col">
+            <div class="w-full h-44 relative bg-cover bg-center cursor-pointer" onclick="toggleMathStory()" style="background-image: url('assets/stitch_dandelin_hero.png')">
+              <img src="assets/logo_cropped.png" alt="단델린 구 엠블럼" class="absolute top-3 right-3 w-12 h-12 rounded-xl bg-white/90 p-1 shadow-md object-contain"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-space-md text-on-primary">
+                <span class="font-label-badge text-label-badge text-accent-azure tracking-widest uppercase">Visual Proof Archive</span>
+                <p class="font-headline-sm text-headline-sm text-white font-bold leading-tight mt-0.5" data-i18n="hero.storyDrawerTitle">단델린의 구와 원뿔곡선의 기하학적 증명</p>
+              </div>
+            </div>
+            <div id="mathStoryDrawer" class="p-space-md bg-surface-container-low flex flex-col gap-space-xs">
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                <span data-i18n-html="hero.storyDrawerP1">원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <strong class="text-on-surface">단델린의 구</strong>라고 합니다.</span>
+                <span data-i18n-html="hero.storyDrawerP2">구가 평면과 접하는 점(<span class="font-label-code text-secondary font-bold">$F_1, F_2$</span>)이 원뿔곡선의 초점(Focus)이 됩니다.</span>
+              </p>
+              <div class="p-space-sm rounded-md bg-surface-container-lowest mt-1 flex items-start gap-2">
+                <span class="material-symbols-outlined text-status-amber text-[18px] shrink-0 mt-0.5">format_quote</span>
+                <p class="font-body-sm text-body-sm text-on-surface font-medium italic">
+                  <span data-i18n="hero.storyDrawerQuote">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"</span> — <span data-i18n="hero.storyDrawerAuthor">수학교육의 지향점입니다.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Today's Recommended Dynamic Geometry Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between" id="todayGeogebraCard">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-status-amber text-[20px]">lightbulb</span>
+              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="todayGgb.tag">오늘의 추천 동적 기하</span>
+            </div>
+            <button type="button" id="btnNextGgb" onclick="rotateTodayGeoGebra(1)" class="text-on-surface-variant hover:text-on-surface bg-surface-container hover:bg-surface-container-high px-2.5 py-1 rounded-full flex items-center gap-1 font-label-badge text-label-badge cursor-pointer transition-colors">
+              <span class="material-symbols-outlined text-[15px]">casino</span>
+              <span data-i18n="todayGgb.btnNext">다른 추천</span>
+            </button>
+          </div>
+          <div class="rounded-lg bg-surface-container-low p-space-md flex flex-col gap-space-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-semibold">광학적 성질 · 시각적 증명</span>
+              <span class="font-label-code text-body-sm text-on-surface-variant">GeoGebra 3D</span>
+            </div>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1" id="todayGgbTitle">
+              타원에서의 빛 반사 (광학적 성질)
+            </h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="todayGgbDesc">
+              한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.
+            </p>
+            <!-- CTA Buttons -->
+            <div class="flex flex-col gap-2 mt-3">
+              <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="w-full h-11 px-space-md rounded-lg bg-primary text-on-primary font-headline-sm text-[14px] flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors shadow-sm no-underline">
+                <span class="material-symbols-outlined text-[18px]">sports_esports</span>
+                <span data-i18n="todayGgb.btnApplet">GeoGebra로 조작하기</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+              <div class="grid grid-cols-2 gap-2">
+                <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline">
+                  <span class="material-symbols-outlined text-[16px] text-secondary">picture_as_pdf</span>
+                  <span data-i18n="todayGgb.btnPdf">원리 증명 PDF</span>
+                </a>
+                <a id="btnTodayGgbWeb" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline">
+                  <span class="material-symbols-outlined text-[16px] text-on-surface-variant">language</span>
+                  <span data-i18n="todayGgb.btnWeb">웹 상세 해설</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. User Gateway Cards (Teacher / Problem Creation / Student Quick Action) -->
+    <div class="px-margin mt-space-md grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+      <!-- Teacher Class Creation Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between gap-2">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary text-[22px]">co_present</span>
+            <div class="flex flex-col">
+              <span class="font-label-badge text-label-badge text-secondary font-bold uppercase" data-i18n="heroCards.teacherTag">교사 회원 전용 · 수업 배포</span>
+              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.teacherTitle">3초 만에 수업 개설하기</span>
+            </div>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.teacherDesc">
+            회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 mt-1">
+          <button type="button" onclick="openDefaultTeacherClass()" class="flex-1 h-11 rounded-lg bg-secondary hover:opacity-95 text-on-secondary font-body-md text-body-md font-semibold flex items-center justify-center gap-1.5 shadow-sm cursor-pointer border-0">
+            <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+            <span data-i18n="heroCards.teacherBtn">3초 수업 개설 (QR)</span>
+          </button>
+          <a href="dashboard.html" class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-semibold flex items-center justify-center gap-1 no-underline">
+            <span class="material-symbols-outlined text-[18px]">dashboard</span>
+            <span>현황판</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Exam Quiz Creation Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between gap-2">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-status-amber text-[22px]">auto_awesome</span>
+            <div class="flex flex-col">
+              <span class="font-label-badge text-label-badge text-[#B45309] font-bold uppercase" data-i18n="heroCards.createTag">수능·모평 기출 전용 · 1일 1문제</span>
+              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.createTitle">수능·모의평가 기출 출제</span>
+            </div>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n-html="heroCards.createDesc">
+            공개된 <b>수능 및 모의평가 기출문제</b>를 올리면 초등학생 눈높이 <b>5~8단계 인터랙티브 디딤돌 퀴즈</b>와 시각적 증명으로 제작·배포합니다.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 mt-1">
+          <a href="create.html" class="w-full h-11 rounded-lg bg-primary-container hover:opacity-95 text-white font-body-md text-body-md font-semibold flex items-center justify-center gap-1.5 shadow-sm no-underline">
+            <span class="material-symbols-outlined text-[18px] text-accent-azure">add_circle</span>
+            <span data-i18n="heroCards.createBtn">수능·모평 퀴즈 만들기 ➔</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Student / Guest Entry Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between gap-2">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-accent-indigo text-[22px]">school</span>
+            <div class="flex flex-col">
+              <span class="font-label-badge text-label-badge text-accent-indigo font-bold uppercase" data-i18n="heroCards.studentTag">비회원·학생 · 100% 자유 풀이</span>
+              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.studentTitle">수업 코드로 입장하기 (또는 자유 풀이)</span>
+            </div>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.studentDesc">
+            회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.
+          </p>
+        </div>
+        <div>
+          <div class="flex gap-2 mt-1">
+            <div class="flex-1 relative flex items-center">
+              <input id="inputRoomCode" class="w-full h-11 pl-3 pr-3 rounded-lg bg-surface-container-low font-label-code text-label-code text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container border border-surface-variant" placeholder="6자리 수업 코드 입력" data-i18n-placeholder="heroCards.studentPlaceholder" maxlength="12" type="text"/>
+            </div>
+            <button type="button" onclick="joinClassroom()" class="h-11 px-5 rounded-lg bg-primary text-on-primary font-body-md text-body-md font-semibold shrink-0 flex items-center justify-center gap-1 cursor-pointer border-0" data-i18n="heroCards.studentJoinBtn">
+              입장 ➔
+            </button>
+          </div>
+          <div class="flex items-center justify-between pt-2 flex-wrap gap-2" id="studentLibraryQuickBar">
+            <button type="button" onclick="MatheduAuth.showMyProblemsModal()" class="font-body-sm text-body-sm text-secondary font-semibold flex items-center gap-1 hover:underline bg-transparent border-0 cursor-pointer p-0" data-i18n="heroCards.studentMySolved">
+              <span class="material-symbols-outlined text-[16px]">folder_open</span>
+              내가 푼 문제 모아보기
+            </button>
+            <button type="button" onclick="MatheduAuth.showGuestLoginModal()" class="font-body-sm text-body-sm text-on-surface-variant font-medium flex items-center gap-1 hover:underline bg-transparent border-0 cursor-pointer p-0" data-i18n="heroCards.studentGuestSync">
+              <span class="material-symbols-outlined text-[16px]">manage_accounts</span>
+              익명 기록 연동
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Teacher Rooms Bar (Shown if teacher has local rooms) -->
+    <div class="px-margin mt-space-sm" id="recentRoomsBox" style="display:none">
+      <div class="rounded-xl bg-surface-container-lowest p-3 px-4 shadow-sm border border-surface-glass-border flex items-center gap-3 flex-wrap w-full">
+        <span class="font-label-badge text-label-badge text-on-surface-variant font-bold">📂 최근 개설한 내 수업:</span>
+        <div id="recentRoomsList" class="flex gap-2 flex-wrap"></div>
+        <a href="dashboard.html" class="ml-auto font-body-sm text-body-sm text-secondary font-bold no-underline hover:underline">전체 대시보드 ➔</a>
+      </div>
+    </div>
+
+    <!-- Live Problem Creation Requests Status Box -->
+    <div class="px-margin mt-space-sm" id="requestsBoardBox" style="display:none;">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border">
+        <div class="flex justify-between items-center mb-3 flex-wrap gap-2">
+          <div class="font-headline-sm text-[15px] font-bold text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-status-amber text-[20px]">campaign</span>
+            <span>실시간 문제 출제 &amp; 제작 현황</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-status-amber/15 text-[#B45309] font-label-badge text-label-badge" id="requestsCountBadge">확인 중...</span>
+          </div>
+          <a href="create.html" class="font-body-sm text-body-sm text-status-emerald font-bold no-underline hover:underline">
+            ✨ 나도 새 문제 출제하기 ➔
+          </a>
+        </div>
+        <div id="requestsList" class="grid gap-2"></div>
+      </div>
+    </div>
+
+    <!-- 7. Precision Question Filter & Interactive Quiz Explorer -->
+    <div class="px-margin mt-space-lg flex flex-col gap-space-sm" id="quizExplorerSection">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[22px]">tune</span>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold" data-i18n="examFinder.title">수능·모의평가 기출 정밀 탐색기</h2>
+              <span class="px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge font-bold" id="countBadge">불러오는 중…</span>
+            </div>
+            <span class="font-body-sm text-[11px] text-on-surface-variant" data-i18n="examFinder.subtitle">학년도·선택과목·문항 번호 즉시 추출 (비회원 100% 무료 풀이)</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button type="button" id="btnRandomQuizChallenge" onclick="startRandomQuiz()" class="h-8 px-3 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-label-badge font-bold flex items-center gap-1 cursor-pointer border-0 transition-colors">
+            🎲 랜덤 기출 도전
+          </button>
+          <button type="button" onclick="resetExamFilters()" class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface cursor-pointer border-0 transition-colors" title="필터 초기화">
+            <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode Tabs (All / Wrong Vault / Bookmarks / Lesson Pack) -->
+      <div class="filter-tab-bar" id="filterModeTabBar">
+        <button type="button" class="filter-tab-btn active" data-mode="all" onclick="switchFilterMode('all')">
+          <span data-i18n="filterTabs.allQuizzes">📚 전체 퀴즈</span> (<span id="tabAllCount">-</span>)
+        </button>
+        <button type="button" class="filter-tab-btn" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">
+          <span data-i18n="filterTabs.wrongVault">🔴 나의 오답노트</span> (<span id="tabWrongCount">0</span>)
+        </button>
+        <button type="button" class="filter-tab-btn" data-mode="bookmarks" onclick="switchFilterMode('bookmarks')" id="tabBtnBookmarks">
+          <span data-i18n="filterTabs.bookmarks">⭐ 즐겨찾기</span> (<span id="tabBookmarkCount">0</span>)
+        </button>
+        <button type="button" class="filter-tab-btn ml-auto" data-mode="pack" onclick="toggleLessonPackMode()" id="tabBtnLessonPack">
+          <span data-i18n="filterTabs.lessonPack">🎒 교사용 수업 팩 묶기</span>
+        </button>
+      </div>
+
+      <!-- Stitch Filter Multi-Select Pills + Precision 5-Select Bar -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col gap-3" id="quizFilterBar">
+        <!-- Stitch Quick Year Pills -->
+        <div class="flex flex-col gap-1.5">
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold" data-i18n="examFinder.labelYear">학년도</span>
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="stitchYearPills">
+            <button type="button" class="stitch-year-pill active" data-year="" onclick="selectStitchYearPill('')">전체</button>
+            <button type="button" class="stitch-year-pill" data-year="2026" onclick="selectStitchYearPill('2026')">2026학년도</button>
+            <button type="button" class="stitch-year-pill" data-year="2025" onclick="selectStitchYearPill('2025')">2025학년도</button>
+            <button type="button" class="stitch-year-pill" data-year="2024" onclick="selectStitchYearPill('2024')">2024학년도</button>
+            <button type="button" class="stitch-year-pill" data-year="2023" onclick="selectStitchYearPill('2023')">2023학년도</button>
+            <button type="button" class="stitch-year-pill" data-year="2022" onclick="selectStitchYearPill('2022')">이전 기출</button>
+          </div>
+        </div>
+
+        <!-- Stitch Quick Subject Pills -->
+        <div class="flex flex-col gap-1.5">
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold" data-i18n="examFinder.labelSubject">선택과목</span>
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="stitchSubjectPills">
+            <button type="button" class="stitch-subj-pill active" data-subj="" onclick="selectStitchSubjectPill('')">전체 과목</button>
+            <button type="button" class="stitch-subj-pill" data-subj="공통(수학I·II)" onclick="selectStitchSubjectPill('공통(수학I·II)')">공통(수학I·II)</button>
+            <button type="button" class="stitch-subj-pill" data-subj="미적분" onclick="selectStitchSubjectPill('미적분')">미적분</button>
+            <button type="button" class="stitch-subj-pill" data-subj="기하" onclick="selectStitchSubjectPill('기하')">기하</button>
+            <button type="button" class="stitch-subj-pill" data-subj="확률과 통계" onclick="selectStitchSubjectPill('확률과 통계')">확률과 통계</button>
+          </div>
+        </div>
+
+        <!-- Topic Pills -->
+        <div class="flex flex-col gap-1.5 pt-1">
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold" data-i18n="examFinder.topicPrefix">주제별 탐색</span>
+          <div class="flex flex-wrap gap-1.5" id="topicChips">
+            <button type="button" class="topic-chip active" data-topic="" data-i18n="examFinder.topicAll">#전체보기</button>
+            <button type="button" class="topic-chip" data-topic="이차함수|포물선" data-i18n="examFinder.topicQuad">#이차함수·포물선</button>
+            <button type="button" class="topic-chip" data-topic="수열|점화식" data-i18n="examFinder.topicSeq">#수열</button>
+            <button type="button" class="topic-chip" data-topic="지수|로그" data-i18n="examFinder.topicExp">#지수·로그</button>
+            <button type="button" class="topic-chip" data-topic="삼각함수" data-i18n="examFinder.topicTrig">#삼각함수</button>
+            <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이" data-i18n="examFinder.topicCalc">#미적분</button>
+            <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합" data-i18n="examFinder.topicProb">#확률·통계</button>
+          </div>
+        </div>
+
+        <!-- 5 Precision Dropdowns + Keyword Search -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-2 border-t border-surface-container">
+          <div>
+            <label for="filterYear" id="lblFilterYear" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelYear">📅 학년도</label>
+            <select id="filterYear" class="exam-select" onchange="syncPillsFromSelects(); renderList()">
+              <option value="">전체 학년도</option>
+              <option value="2027">2027학년도</option>
+              <option value="2026">2026학년도</option>
+              <option value="2025">2025학년도</option>
+              <option value="2024">2024학년도</option>
+              <option value="2023">2023학년도</option>
+              <option value="2022">2022학년도</option>
+              <option value="2021">2021학년도</option>
+              <option value="2020">2020학년도 이전</option>
+            </select>
+          </div>
+          <div>
+            <label for="filterGrade" id="lblFilterGrade" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelGrade">🎓 대상 학년</label>
+            <select id="filterGrade" class="exam-select" onchange="renderList()">
+              <option value="">전체 학년</option>
+              <option value="고3">고3 · N수</option>
+              <option value="고2">고2</option>
+              <option value="고1">고1</option>
+            </select>
+          </div>
+          <div>
+            <label for="filterMonth" id="lblFilterMonth" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelMonth">🗓️ 시행월</label>
+            <select id="filterMonth" class="exam-select" onchange="renderList()">
+              <option value="">전체 시행월</option>
+              <option value="11월">11월 수능 (대수능)</option>
+              <option value="9월">9월 모의평가 (평가원)</option>
+              <option value="6월">6월 모의평가 (평가원)</option>
+              <option value="10월">10월 학력평가</option>
+              <option value="7월">7월 학력평가</option>
+              <option value="4월">4월 학력평가</option>
+              <option value="3월">3월 학력평가</option>
+            </select>
+          </div>
+          <div>
+            <label for="filterSubject" id="lblFilterSubject" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelSubject">📐 선택과목</label>
+            <select id="filterSubject" class="exam-select" onchange="syncPillsFromSelects(); renderList()">
+              <option value="">전체 과목</option>
+              <option value="공통(수학I·II)">공통 (수학I·II)</option>
+              <option value="미적분">미적분</option>
+              <option value="기하">기하</option>
+              <option value="확률과 통계">확률과 통계</option>
+              <option value="공통수학">공통수학 (고1)</option>
+            </select>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label for="filterNum" id="lblFilterNum" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelNum">🔢 문항 번호</label>
+            <select id="filterNum" class="exam-select" onchange="renderList()">
+              <option value="">전체 번호 (1~30)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative">
+          <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 직접 검색..." data-i18n-placeholder="examFinder.searchPlaceholder" class="w-full h-10 px-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary focus:bg-white transition-colors"/>
+        </div>
+      </div>
+
+      <!-- Dynamic Quiz Question Cards List (#list) -->
+      <div class="list mt-1" id="list">
+        <div class="rounded-xl bg-surface-container-lowest p-8 text-center text-on-surface-variant shadow-sm col-span-full">
+          게시판을 불러오는 중…
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Teacher Lesson Pack Notification Pill (Stitch Section) -->
+    <div class="px-margin mt-space-md">
+      <div class="rounded-xl bg-primary-container text-on-primary-container p-space-md shadow-md flex items-center justify-between gap-space-sm flex-wrap">
+        <div class="flex items-center gap-space-sm min-w-0">
+          <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-secondary-container text-[22px]">backpack</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-headline-sm text-[14px] text-white font-bold truncate">선택한 문항으로 수업 팩 묶기</span>
+            <span class="font-body-sm text-body-sm text-white/70 truncate">학생들에게 링크 1개로 오늘 수업 문항 제공</span>
+          </div>
+        </div>
+        <button type="button" onclick="toggleLessonPackMode()" class="h-9 px-3.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold shrink-0 flex items-center gap-1 cursor-pointer border-0">
+          수업 팩 생성
         </button>
       </div>
     </div>
 
-    <!-- 문제 생성 게시판 카드 -->
-    <div class="hero-card create-card">
-      <div>
-        <span class="hero-tag tag-create" data-i18n="heroCards.createTag">🤖 수능·모평 기출 전용 · 1일 1문제</span>
-        <div class="hero-title" data-i18n="heroCards.createTitle">✨ 수능·모의평가 기출 출제</div>
-        <p class="hero-desc" data-i18n-html="heroCards.createDesc">공개된 <b>수능 및 모의평가(평가원/교육청) 기출문제</b>를 올리면, <b>안티그래비티 AI</b>가 초·중학생도 풀 수 있는 <b>5~8단계 인터랙티브 빌드업 퀴즈</b>로 자동 제작하여 깃에 배포합니다. (정회원 1일 1문제)</p>
+    <!-- External Curated Collections & Download Repository (Stitch Section) -->
+    <div class="px-margin mt-space-lg flex flex-col gap-space-sm">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[22px]">folder_special</span>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">수학자료실 공인 학습 컬렉션</h2>
+        </div>
+        <button type="button" onclick="openMin7014ExplorerModal()" class="h-8 px-3 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-label-badge font-bold flex items-center gap-1 cursor-pointer border-0">
+          <span class="material-symbols-outlined text-[15px]">search</span>
+          3,400+ 동적 기하 1초 검색
+        </button>
       </div>
-      <div>
-        <a href="create.html" class="btn-primary" style="width:100%;background:linear-gradient(90deg,var(--accent2),var(--accent))" data-i18n="heroCards.createBtn">
-          ✨ 수능·모평 퀴즈 만들기 (회원 전용) ➔
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+        <!-- Collection 1: GeoGebra Tube -->
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.geogebra.org/u/min7014" rel="noopener noreferrer" target="_blank">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-secondary text-[24px]">view_in_ar</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface">GeoGebra Tube 국제 공인 컬렉션</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">3,000+ 전 세계 인증 인터랙티브 수학 앱렛</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">open_in_new</span>
+        </a>
+        <!-- Collection 2: AlgeoMath -->
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.algeomath.kr/algeo/algeomath/doc/view?id=ea07074cf37811e889430200634b0001" rel="noopener noreferrer" target="_blank">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-lg bg-status-emerald/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-status-emerald text-[24px]">calculate</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface">AlgeoMath 한국과학창의재단 자료</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">한국 교육과정에 맞춘 공식 기하 탐구 활동</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">open_in_new</span>
+        </a>
+        <!-- Collection 3: PDF Archive -->
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://min7014.github.io/2019080802.html" rel="noopener noreferrer" target="_blank">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-lg bg-status-amber/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-status-amber text-[24px]">menu_book</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface">중등~고등 전 단원 개념 증명 PDF</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">순서대로 체계적으로 정리된 다운로드 보관함</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">download</span>
         </a>
       </div>
     </div>
 
-    <!-- 학생 / 비회원용 카드 -->
-    <div class="hero-card student-card">
-      <div>
-        <span class="hero-tag tag-student" data-i18n="heroCards.studentTag">🧑‍🎓 비회원·학생 · 100% 자유 풀이</span>
-        <div class="hero-title" data-i18n="heroCards.studentTitle">수업 코드로 입장하기 (또는 자유 풀이)</div>
-        <p class="hero-desc" data-i18n="heroCards.studentDesc">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다. 고유 이름과 비밀번호를 등록하면 언제든 내 기록을 모아볼 수 있습니다.</p>
+    <!-- Clean Minimalist Footer Section (Stitch Section) -->
+    <footer class="px-margin mt-space-xl pt-space-md pb-6 flex flex-col items-center text-center gap-2 border-t border-surface-container">
+      <div class="flex items-center gap-2 text-on-surface-variant font-label-badge text-label-badge flex-wrap justify-center">
+        <a class="hover:underline text-on-surface-variant no-underline" href="https://min7014.github.io/" target="_blank" rel="noopener" data-i18n="footer.home">공식 웹사이트</a>
+        <span>·</span>
+        <a class="hover:underline text-on-surface-variant no-underline" href="dashboard.html" data-i18n="nav.dashboard">실시간 관제 대시보드</a>
+        <span>·</span>
+        <a class="hover:underline text-on-surface-variant no-underline" href="offline/index.html" data-i18n="nav.offlineVault">오프라인 보관함</a>
+        <span>·</span>
+        <a class="hover:underline text-on-surface-variant no-underline" href="privacy.html" data-i18n="footer.privacy">개인정보처리방침</a>
       </div>
-      <div class="student-join-form">
-        <input type="text" id="inputRoomCode" placeholder="예: MATH-A8F2" data-i18n-placeholder="heroCards.studentPlaceholder" maxlength="12">
-        <button onclick="joinClassroom()" data-i18n="heroCards.studentJoinBtn">입장 ➔</button>
-      </div>
-      <div style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(94,234,212,.3);display:flex;gap:8px;flex-wrap:wrap;align-items:center" id="studentLibraryQuickBar">
-        <button type="button" class="btn-primary" style="background:rgba(94,234,212,.18);border:1px solid rgba(94,234,212,.4);color:#5eead4;font-size:0.84rem;padding:7px 14px;border-radius:10px;font-weight:700;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showMyProblemsModal()" data-i18n="heroCards.studentMySolved">
-          📂 내가 푼 문제 모아보기
-        </button>
-        <button type="button" class="btn-primary" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;font-size:0.84rem;padding:7px 14px;border-radius:10px;box-shadow:none;cursor:pointer" onclick="MatheduAuth.showGuestLoginModal()" data-i18n="heroCards.studentGuestSync">
-          👤 비회원 이름·비번 연동
-        </button>
-      </div>
+      <p class="font-body-sm text-[11px] text-on-surface-variant max-w-md" data-i18n="footer.collabDesc">
+        © mathedu · 수학자료실. 3,400+ 시각적 수학 증명과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평.
+      </p>
+    </footer>
+
+  </div>
+</main>
+
+<!-- 🎒 교사용 수업 팩 생성 플로팅 바 -->
+<div id="lessonPackFloatingBar" class="lesson-pack-float-bar" style="display:none">
+  <div class="flex items-center gap-2.5">
+    <span class="material-symbols-outlined text-secondary-container text-[24px]">backpack</span>
+    <div>
+      <div class="font-bold text-white text-sm">선택한 <b id="packSelectedCount" class="text-accent-azure">0</b>개 문제로 수업 팩 만들기</div>
+      <div class="text-xs text-white/75">학생들에게 링크 1개로 오늘 수업할 문항들을 순서대로 제공합니다.</div>
     </div>
   </div>
-
-  <!-- 최근 개설한 내 수업 (선생님 컴퓨터 로컬 기억) -->
-  <div class="recent-rooms-box" id="recentRoomsBox" style="display:none">
-    <span class="lbl">📂 최근 개설한 내 수업:</span>
-    <div id="recentRoomsList" style="display:flex;gap:8px;flex-wrap:wrap"></div>
-    <a href="dashboard.html" style="margin-left:auto;color:var(--accent);text-decoration:none;font-weight:700">전체 대시보드 ➔</a>
-  </div>
-
-  <!-- 실시간 문제 출제 & AI 제작 현황 섹션 -->
-  <div class="requests-board-box" id="requestsBoardBox" style="display:none;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-      <div style="font-size:1.1rem;font-weight:700;color:var(--txt);display:flex;align-items:center;gap:8px;">
-        <span>📢 실시간 문제 출제 & 제작 현황</span>
-        <span class="count-badge" id="requestsCountBadge" style="background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);color:#fbbf24;">확인 중...</span>
-      </div>
-      <a href="create.html" style="font-size:.82rem;color:var(--good);text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:4px;">
-        ✨ 나도 새 문제 출제하기 ➔
-      </a>
-    </div>
-    <div id="requestsList" style="display:grid;gap:10px;">
-      <!-- 접수된 문제 목록 동적 렌더링 -->
-    </div>
-  </div>
-
-  <!-- 🧭 학습 모드 & 교사용 도구 탭 바 -->
-  <div class="filter-tab-bar" id="filterModeTabBar" style="margin-bottom:18px;">
-    <button type="button" class="filter-tab-btn active" data-mode="all" onclick="switchFilterMode('all')">
-      <span data-i18n="filterTabs.allQuizzes">📚 전체 퀴즈</span> (<span id="tabAllCount">-</span>)
+  <div class="flex gap-2 items-center flex-wrap">
+    <button type="button" onclick="createLessonPackAction('copy')" class="h-9 px-3.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold cursor-pointer border-0">
+      📋 학생 배포 링크 복사
     </button>
-    <button type="button" class="filter-tab-btn" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">
-      <span data-i18n="filterTabs.wrongVault">🔴 나의 오답노트</span> (<span id="tabWrongCount">0</span>)
+    <button type="button" onclick="createLessonPackAction('qr')" class="h-9 px-3.5 rounded-lg bg-white/10 text-white font-label-badge text-label-badge font-bold cursor-pointer border border-white/20">
+      🖥️ 칠판 대형 QR
     </button>
-    <button type="button" class="filter-tab-btn" data-mode="bookmarks" onclick="switchFilterMode('bookmarks')" id="tabBtnBookmarks">
-      <span data-i18n="filterTabs.bookmarks">⭐ 즐겨찾기</span> (<span id="tabBookmarkCount">0</span>)
+    <button type="button" onclick="createLessonPackAction('start')" class="h-9 px-3.5 rounded-lg bg-status-emerald text-white font-label-badge text-label-badge font-bold cursor-pointer border-0">
+      ▶️ 1번 바로 풀기
     </button>
-    <button type="button" class="filter-tab-btn" data-mode="pack" onclick="toggleLessonPackMode()" id="tabBtnLessonPack" style="margin-left:auto;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#c4b5fd;">
-      <span data-i18n="filterTabs.lessonPack">🎒 교사용 수업 팩 묶기</span>
-    </button>
+    <button type="button" onclick="toggleLessonPackMode(false)" class="bg-transparent border-0 text-white/70 text-lg cursor-pointer px-1.5">✕</button>
   </div>
-
-  <!-- 퀴즈 목록 섹션 -->
-  <div class="list-header">
-    <div class="list-title">
-      <span data-i18n="listHeader.title">📚 수능·모의평가 기출 인터랙티브 퀴즈 목록 (비회원 누구나 100% 무료 열람 & 즉시 풀이)</span>
-      <span class="count-badge" id="countBadge">불러오는 중…</span>
-    </div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <a href="create.html" style="font-size:.85rem;color:var(--good);text-decoration:none;font-weight:700" data-i18n="listHeader.newQuiz">✨ 새 퀴즈 출제하기</a>
-      <a href="dashboard.html" style="font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:700" data-i18n="listHeader.liveDashboard">📊 전체 실시간 현황판</a>
-    </div>
-  </div>
-
-  <!-- 🎯 수능·모의평가 기출 정밀 5대 탐색기 (Exam Problem Finder) -->
-  <div style="margin-bottom:20px;background:linear-gradient(135deg,rgba(15,23,42,0.85) 0%,rgba(20,24,51,0.85) 100%);border:1.5px solid rgba(124,196,255,0.32);border-radius:16px;padding:16px 20px;box-shadow:0 8px 30px rgba(0,0,0,0.35);">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.08);">
-      <div style="display:flex;align-items:center;gap:8px;">
-        <span style="font-size:1.25rem;">🎯</span>
-        <div>
-          <span style="font-size:0.96rem;font-weight:800;color:#7cc4ff;" data-i18n="examFinder.title">수능·모의평가 기출 정밀 탐색기</span>
-          <span style="font-size:0.8rem;color:#94a3b8;margin-left:8px;" data-i18n="examFinder.subtitle">(학년도 · 학년 · 시행월 · 선택과목 · 번호 선택 시 해당 문제만 즉시 추출)</span>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <button type="button" onclick="startRandomQuiz()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;background:linear-gradient(90deg,rgba(56,189,248,0.2),rgba(129,140,248,0.2));border-color:#38bdf8;color:#7cc4ff;font-weight:800;cursor:pointer;" id="btnRandomQuizChallenge">
-          🎲 랜덤 기출 도전
-        </button>
-        <button type="button" onclick="resetExamFilters()" class="tbtn" style="padding:4px 12px;font-size:0.78rem;border-color:rgba(124,196,255,0.3);color:#cbd5e1;cursor:pointer;" data-i18n="examFinder.resetBtn">
-          🔄 필터 전체 초기화
-        </button>
-      </div>
-    </div>
-
-    <!-- ⚖️ 공개 범위 정책 안내 -->
-    <div style="background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);border-radius:10px;padding:8px 14px;margin-bottom:14px;font-size:0.83rem;color:#cbd5e1;display:flex;align-items:center;gap:8px;">
-      <span style="font-size:1.1rem;">⚖️</span>
-      <span data-i18n-html="examFinder.policyText"><b>공개 원칙:</b> 본 게시판은 저작권이 투명한 <b>대학수학능력시험(대수능) 및 한국교육과정평가원·시도교육청 모의평가(전국연합학력평가) 기출문제만 선별 공개</b>합니다. (기타 사설·경시·일반 문제는 비공개 전환)</span>
-    </div>
-
-    <!-- 5대 정밀 선택 드롭다운 그리드 -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;">
-      <div>
-        <label for="filterYear" id="lblFilterYear" style="font-size:0.75rem;font-weight:700;color:#7cc4ff;display:block;margin-bottom:4px;" data-i18n="examFinder.labelYear">📅 학년도</label>
-        <select id="filterYear" class="exam-select" onchange="renderList()">
-          <option value="">전체 학년도</option>
-          <option value="2027">2027학년도</option>
-          <option value="2026">2026학년도</option>
-          <option value="2025">2025학년도</option>
-          <option value="2024">2024학년도</option>
-          <option value="2023">2023학년도</option>
-          <option value="2022">2022학년도</option>
-          <option value="2021">2021학년도</option>
-          <option value="2020">2020학년도 이전</option>
-        </select>
-      </div>
-      <div>
-        <label for="filterGrade" id="lblFilterGrade" style="font-size:0.75rem;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;" data-i18n="examFinder.labelGrade">🎓 대상 학년</label>
-        <select id="filterGrade" class="exam-select" onchange="renderList()">
-          <option value="">전체 학년</option>
-          <option value="고3">고3 · N수</option>
-          <option value="고2">고2</option>
-          <option value="고1">고1</option>
-        </select>
-      </div>
-      <div>
-        <label for="filterMonth" id="lblFilterMonth" style="font-size:0.75rem;font-weight:700;color:#5eead4;display:block;margin-bottom:4px;" data-i18n="examFinder.labelMonth">🗓️ 시행월 (시험명)</label>
-        <select id="filterMonth" class="exam-select" onchange="renderList()">
-          <option value="">전체 시행월</option>
-          <option value="11월">11월 수능 (대수능)</option>
-          <option value="9월">9월 모의평가 (평가원)</option>
-          <option value="6월">6월 모의평가 (평가원)</option>
-          <option value="10월">10월 학력평가</option>
-          <option value="7월">7월 학력평가</option>
-          <option value="4월">4월 학력평가</option>
-          <option value="3월">3월 학력평가</option>
-        </select>
-      </div>
-      <div>
-        <label for="filterSubject" id="lblFilterSubject" style="font-size:0.75rem;font-weight:700;color:#fde68a;display:block;margin-bottom:4px;" data-i18n="examFinder.labelSubject">📐 선택과목</label>
-        <select id="filterSubject" class="exam-select" onchange="renderList()">
-          <option value="">전체 과목</option>
-          <option value="공통(수학I·II)">공통 (수학I·II)</option>
-          <option value="미적분">미적분</option>
-          <option value="기하">기하</option>
-          <option value="확률과 통계">확률과 통계</option>
-          <option value="공통수학">공통수학 (고1)</option>
-        </select>
-      </div>
-      <div>
-        <label for="filterNum" id="lblFilterNum" style="font-size:0.75rem;font-weight:700;color:#f472b6;display:block;margin-bottom:4px;" data-i18n="examFinder.labelNum">🔢 문항 번호</label>
-        <select id="filterNum" class="exam-select" onchange="renderList()">
-          <option value="">전체 번호 (1~30)</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- 검색창 & 빠른 주제 칩 -->
-    <div style="position:relative;margin-top:12px;margin-bottom:10px;">
-      <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 직접 검색..." data-i18n-placeholder="examFinder.searchPlaceholder" style="width:100%;background:#0d1124;border:1px solid #2e3850;border-radius:10px;padding:9px 14px;color:#fff;font-size:0.88rem;outline:none;transition:.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2e3850'">
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;" id="topicChips">
-      <span style="font-size:.78rem;color:var(--sub);font-weight:700;margin-right:4px" data-i18n="examFinder.topicPrefix">주제별:</span>
-      <button type="button" class="topic-chip active" data-topic="" data-i18n="examFinder.topicAll">전체보기</button>
-      <button type="button" class="topic-chip" data-topic="이차함수|포물선" data-i18n="examFinder.topicQuad">이차함수·포물선</button>
-      <button type="button" class="topic-chip" data-topic="수열|점화식" data-i18n="examFinder.topicSeq">수열</button>
-      <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합" data-i18n="examFinder.topicProb">확률·통계</button>
-      <button type="button" class="topic-chip" data-topic="지수|로그" data-i18n="examFinder.topicExp">지수·로그</button>
-      <button type="button" class="topic-chip" data-topic="삼각함수" data-i18n="examFinder.topicTrig">삼각함수</button>
-      <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이" data-i18n="examFinder.topicCalc">미적분</button>
-    </div>
-  </div>
-
-  <div class="list" id="list">
-    <div class="loading">
-      <div class="spin"></div>
-      <div>게시판을 불러오는 중…</div>
-    </div>
-  </div>
-
-  <!-- 🎒 교사용 수업 팩 생성 플로팅 바 -->
-  <div id="lessonPackFloatingBar" class="lesson-pack-float-bar" style="display:none">
-    <div style="display:flex;align-items:center;gap:10px">
-      <span style="font-size:1.6rem">🎒</span>
-      <div>
-        <div style="font-weight:800;color:#c4b5fd;font-size:1rem">선택한 <b id="packSelectedCount" style="color:#5eead4">0</b>개 문제로 수업 팩 만들기</div>
-        <div style="font-size:0.78rem;color:#cbd5e1">학생들에게 링크 1개로 오늘 수업할 문항들을 순서대로 제공합니다.</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;margin-left:auto;flex-wrap:wrap">
-      <button type="button" onclick="createLessonPackAction('copy')" class="btn-primary" style="padding:10px 16px;font-size:0.86rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa)">
-        📋 학생 배포 링크 복사
-      </button>
-      <button type="button" onclick="createLessonPackAction('qr')" class="btn-primary" style="padding:10px 16px;font-size:0.86rem;background:#222a3d;color:#fff;border:1px solid #2e3850">
-        🖥️ 칠판 대형 QR
-      </button>
-      <button type="button" onclick="createLessonPackAction('start')" class="btn-primary" style="padding:10px 18px;font-size:0.86rem;background:linear-gradient(90deg,#5eead4,#38bdf8);color:#0b1020">
-        ▶️ 1번 바로 풀기
-      </button>
-      <button type="button" onclick="toggleLessonPackMode(false)" style="background:transparent;border:none;color:#94a3b8;font-size:1.4rem;cursor:pointer;padding:0 6px">✕</button>
-    </div>
-  </div>
-
-  <!-- 🌐 min7014 3,400+ 동적 기하 스마트 탐색관 모달 -->
-  <div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(10,13,26,.88);backdrop-filter:blur(18px);align-items:center;justify-content:center;padding:16px;">
-    <div style="background:#141833;border:1.5px solid rgba(124,196,255,.4);border-radius:24px;max-width:760px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.7);color:#fff;font-family:system-ui,sans-serif;position:relative;overflow:hidden">
-      <div style="padding:22px 26px 16px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div style="width:36px;height:36px;border-radius:10px;background:#fff;padding:2px;display:flex;align-items:center;justify-content:center">
-            <img src="assets/favicon.png" alt="수학자료실" style="width:100%;height:100%;object-fit:contain">
-          </div>
-          <div>
-            <h2 style="font-size:1.25rem;margin:0;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">
-              수학자료실 동적 기하 탐색관
-            </h2>
-            <div style="font-size:0.8rem;color:#94a3b8;margin-top:2px">3,400+ GeoGebra 인터랙티브 앱렛, 개념 증명 PDF &amp; 영상 1초 검색</div>
-          </div>
-        </div>
-        <button onclick="closeMin7014ExplorerModal()" style="background:none;border:none;color:#94a3b8;font-size:1.6rem;cursor:pointer">✕</button>
-      </div>
-      
-      <div style="padding:16px 26px;border-bottom:1px solid rgba(255,255,255,.08)">
-        <input type="text" id="min7014SearchInput" placeholder="🔍 개념 검색 (예: 타원, 포물선, 단델린, 피타고라스, 삼각함수, 매듭, AlgeoMath 등)..." style="width:100%;background:#0d1124;border:1px solid rgba(124,196,255,.35);border-radius:12px;padding:12px 16px;color:#fff;font-size:0.95rem;outline:none" oninput="filterMin7014Materials()">
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px" id="min7014ModalChips">
-          <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체</button>
-          <button type="button" class="topic-chip" onclick="setMin7014Chip('타원|쌍곡선|포물선|원뿔곡선', this)">원뿔곡선</button>
-          <button type="button" class="topic-chip" onclick="setMin7014Chip('피타고라스', this)">피타고라스</button>
-          <button type="button" class="topic-chip" onclick="setMin7014Chip('삼각함수', this)">삼각함수</button>
-          <button type="button" class="topic-chip" onclick="setMin7014Chip('매듭', this)">매듭 기하</button>
-          <button type="button" class="topic-chip" onclick="setMin7014Chip('미분|적분', this)">미적분</button>
-        </div>
-      </div>
-
-      <div id="min7014ResultsList" style="flex:1;overflow-y:auto;padding:18px 26px;display:flex;flex-direction:column;gap:12px">
-        <div style="text-align:center;padding:40px;color:#94a3b8">자료를 불러오는 중...</div>
-      </div>
-
-      <div style="padding:12px 26px;background:rgba(13,16,32,.7);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;color:#94a3b8">
-        <div>총 <b id="min7014ResultsCount" style="color:#7cc4ff">0</b>개 자료 검색됨</div>
-        <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:700">🌐 공식 웹사이트 전체 방문 ➔</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 🏛️ 수학자료실(min7014.github.io) 연계 탐구관 -->
-  <div class="min7014-hub-banner" style="background:linear-gradient(135deg,rgba(124,196,255,.12),rgba(167,139,250,.12));border:1px solid rgba(124,196,255,.35);border-radius:18px;padding:20px 24px;margin-top:36px;margin-bottom:30px;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));box-shadow:var(--glass-shadow)">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <img src="assets/favicon.png" alt="수학자료실" style="width:30px;height:30px;border-radius:8px;background:#fff;padding:2px">
-        <div>
-          <div style="font-size:1.1rem;font-weight:800;color:#fff;line-height:1.4;word-break:keep-all">수학자료실(Mathematics Archive)</div>
-          <div style="font-size:.82rem;color:var(--sub);margin-top:2px">모든 퀴즈 문제는 3,000+ GeoGebra 인터랙티브 앱렛, 증명 PDF 및 해설 영상과 직결됩니다.</div>
-        </div>
-      </div>
-      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="btn-primary" style="padding:8px 16px;font-size:.84rem">
-        🌐 바로가기 ➔
-      </a>
-    </div>
-    
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:14px">
-      <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" style="background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:#eef2ff;transition:.15s;display:block">
-        <div style="font-size:.9rem;font-weight:700;color:var(--good);margin-bottom:4px">내용 순으로 배열(Arrange by content)</div>
-        <div style="font-size:.8rem;color:var(--sub);line-height:1.4">중등~고등 전 단원 개념 원리 증명 PDF 다운로드</div>
-      </a>
-      <a href="https://www.geogebra.org/u/min7014" target="_blank" rel="noopener" style="background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:#eef2ff;transition:.15s;display:block">
-        <div style="font-size:.9rem;font-weight:700;color:#a78bfa;margin-bottom:4px">GeoGebra 수학 학습자료 링크 [GeoGebra Tube]</div>
-        <div style="font-size:.8rem;color:var(--sub);line-height:1.4">국제 GeoGebra Tube 공인 수학 학습 컬렉션</div>
-      </a>
-      <a href="https://www.algeomath.kr/algeo/algeomath/doc/view?id=ea07074cf37811e889430200634b0001" target="_blank" rel="noopener" style="background:rgba(13,16,32,.6);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:#eef2ff;transition:.15s;display:block">
-        <div style="font-size:.9rem;font-weight:700;color:#38bdf8;margin-bottom:4px">AlgeoMath 수학 학습자료 링크 [AlgeoMath]</div>
-        <div style="font-size:.8rem;color:var(--sub);line-height:1.4">한국과학창의재단 AlgeoMath 인터랙티브 학습자료</div>
-      </a>
-    </div>
-  </div>
-
-  <!-- 💎 mathedu 브랜드 푸터 -->
-  <footer class="site-footer">
-    <div class="footer-card">
-      <div class="footer-brand">
-        <img src="assets/brand_emblem.png" alt="mathedu 시그니처 엠블럼" class="footer-logo">
-        <div>
-          <div class="footer-title" data-i18n="footer.brandDesc">mathedu · 단계별 인터랙티브 수학교육 플랫폼</div>
-          <div class="footer-desc" data-i18n="footer.collabDesc">3,400+ 수학자료실과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평</div>
-        </div>
-      </div>
-      <div class="footer-links">
-        <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="footer-link" data-i18n="footer.home">🌐 수학자료실 홈</a>
-        <a href="create.html" class="footer-link" data-i18n="nav.createQuiz">✨ 문제 만들기</a>
-        <a href="dashboard.html" class="footer-link" data-i18n="nav.dashboard">📊 교실 대시보드</a>
-        <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">🔒 개인정보처리방침</a>
-      </div>
-    </div>
-    <div class="footer-copy">© mathedu. Visual proof powered by Dandelin Conic Geometry.</div>
-  </footer>
 </div>
+
+<!-- 🌐 min7014 3,400+ 동적 기하 스마트 탐색관 모달 -->
+<div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(15,23,42,.75);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;">
+  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
+    <div class="p-5 border-b border-surface-container flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="assets/favicon.png" alt="수학자료실" class="w-9 h-9 rounded-lg bg-white p-1 border border-surface-variant object-contain"/>
+        <div>
+          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">
+            수학자료실 동적 기하 탐색관
+          </h2>
+          <div class="font-body-sm text-body-sm text-on-surface-variant">3,400+ GeoGebra 인터랙티브 앱렛, 개념 증명 PDF &amp; 영상 1초 검색</div>
+        </div>
+      </div>
+      <button type="button" onclick="closeMin7014ExplorerModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center cursor-pointer border-0 text-lg">✕</button>
+    </div>
+    <div class="p-4 px-5 border-b border-surface-container bg-surface-container-low">
+      <input type="text" id="min7014SearchInput" placeholder="🔍 개념 검색 (예: 타원, 포물선, 단델린, 피타고라스, 삼각함수, 매듭, AlgeoMath 등)..." class="w-full h-11 px-4 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
+      <div class="flex gap-1.5 flex-wrap mt-2.5" id="min7014ModalChips">
+        <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('타원|쌍곡선|포물선|원뿔곡선', this)">원뿔곡선</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('피타고라스', this)">피타고라스</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('삼각함수', this)">삼각함수</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('매듭', this)">매듭 기하</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('미분|적분', this)">미적분</button>
+      </div>
+    </div>
+    <div id="min7014ResultsList" class="flex-1 overflow-y-auto p-5 flex flex-col gap-2.5 bg-surface">
+      <div class="text-center p-10 text-on-surface-variant">자료를 불러오는 중...</div>
+    </div>
+    <div class="p-3.5 px-5 bg-surface-container-lowest border-t border-surface-container flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant">
+      <div>총 <b id="min7014ResultsCount" class="text-secondary">0</b>개 자료 검색됨</div>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="text-secondary font-bold no-underline hover:underline">🌐 공식 웹사이트 전체 방문 ➔</a>
+    </div>
+  </div>
+</div>
+
+<!-- Fixed Bottom Navigation Bar (Stitch Mobile & Quick Access Bar) -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-surface-glass-border" data-active-classes="text-secondary font-semibold">
+  <div class="max-w-5xl mx-auto flex items-center justify-around h-16 px-space-xs">
+    <a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 transition-colors text-secondary font-semibold no-underline" data-path="home" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      <span class="font-body-sm text-body-sm leading-none">홈</span>
+    </a>
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="didimdol-quiz" href="#quizExplorerSection">
+      <span class="material-symbols-outlined text-[22px]">quiz</span>
+      <span class="font-body-sm text-body-sm leading-none">디딤돌 퀴즈</span>
+    </a>
+    <button type="button" onclick="openMin7014ExplorerModal()" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors bg-transparent border-0 cursor-pointer" data-path="geogebra-3d-explorer">
+      <span class="material-symbols-outlined text-[22px]">view_in_ar</span>
+      <span class="font-body-sm text-body-sm leading-none">동적 기하관</span>
+    </button>
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="classroom-and-qr" href="create.html">
+      <span class="material-symbols-outlined text-[22px]">qr_code_scanner</span>
+      <span class="font-body-sm text-body-sm leading-none">교사용 출제</span>
+    </a>
+    <button type="button" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal()" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors bg-transparent border-0 cursor-pointer" data-path="my-room">
+      <span class="material-symbols-outlined text-[22px]">folder_special</span>
+      <span class="font-body-sm text-body-sm leading-none">마이룸</span>
+    </button>
+  </div>
+</nav>
 
 <!-- 수업 모듈 로드 -->
 <script src="mathedu-room.js?v=20261003_v3"></script>
 
 <script>
+
+window.selectStitchYearPill = function(yearVal) {
+  var fy = document.getElementById('filterYear');
+  if (fy) fy.value = yearVal;
+  syncPillsFromSelects();
+  if (typeof window._triggerRenderList === 'function') window._triggerRenderList();
+};
+
+window.selectStitchSubjectPill = function(subjVal) {
+  var fs = document.getElementById('filterSubject');
+  if (fs) fs.value = subjVal;
+  syncPillsFromSelects();
+  if (typeof window._triggerRenderList === 'function') window._triggerRenderList();
+};
+
+window.syncPillsFromSelects = function() {
+  var fy = document.getElementById('filterYear');
+  var fs = document.getElementById('filterSubject');
+  var yVal = fy ? fy.value : '';
+  var sVal = fs ? fs.value : '';
+  document.querySelectorAll('#stitchYearPills .stitch-year-pill').forEach(function(btn) {
+    btn.classList.toggle('active', (btn.getAttribute('data-year') || '') === yVal);
+  });
+  document.querySelectorAll('#stitchSubjectPills .stitch-subj-pill').forEach(function(btn) {
+    btn.classList.toggle('active', (btn.getAttribute('data-subj') || '') === sVal);
+  });
+};
+
 function toggleMathStory() {
   var d = document.getElementById('mathStoryDrawer');
   var a = document.getElementById('storyArrow');
@@ -1843,6 +1421,7 @@ function toggleMathStory() {
     };
   }
 
+  window._triggerRenderList = renderList;
   window.resetExamFilters = function() {
     ['filterYear', 'filterGrade', 'filterMonth', 'filterSubject', 'filterNum'].forEach(function(id) {
       var el = document.getElementById(id);
@@ -1853,6 +1432,7 @@ function toggleMathStory() {
     document.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
     var allChip = document.querySelector('.topic-chip[data-topic=""]');
     if (allChip) allChip.classList.add('active');
+    if (window.syncPillsFromSelects) window.syncPillsFromSelects();
     renderList();
   };
 
@@ -1873,6 +1453,7 @@ function toggleMathStory() {
     var bookmarks = window.MatheduGame.getBookmarks();
     var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
 
+    var hStreak = document.getElementById('headerStreakCount'); if (hStreak) hStreak.textContent = streak.count > 0 ? streak.count : 1;
     var sTitle = document.getElementById('streakTitle');
     var sSub = document.getElementById('streakSub');
     if (sTitle) {
@@ -2456,35 +2037,43 @@ function toggleMathStory() {
       var metaTag = '';
       var metaFormatted = window.MatheduI18n ? window.MatheduI18n.formatProblemMeta(item) : '';
       if (metaFormatted) {
-        metaTag = '<span style="background:rgba(124,196,255,0.15);border:1px solid rgba(124,196,255,0.35);color:#7cc4ff;padding:2px 8px;border-radius:12px;font-size:0.74rem;font-weight:700;display:inline-block;margin-right:6px;">' + escapeHtml(metaFormatted) + '</span>';
+        metaTag = '<span style="background:rgba(0,99,152,0.12);border:1px solid rgba(0,99,152,0.25);color:#006398;padding:2px 8px;border-radius:12px;font-size:0.74rem;font-weight:700;display:inline-block;margin-right:6px;">' + escapeHtml(metaFormatted) + '</span>';
       }
 
       var isBm = window.MatheduGame && window.MatheduGame.isBookmarked ? window.MatheduGame.isBookmarked(slug) : false;
       var bmTitle = isBm ? (isEn ? 'Remove from Bookmarks' : '즐겨찾기 해제') : (isEn ? 'Add to Bookmarks' : '즐겨찾기 추가');
 
       html += '<div class="card" data-slug="' + slug + '">';
-      
-      // 수업 팩 체크박스 & 즐겨찾기 별표
-      html += '<div style="display:flex;align-items:center;gap:6px">';
+      html += '<div class="flex flex-col gap-2">';
+      html += '<div class="flex items-center justify-between gap-2 flex-wrap">';
+      html += '<div class="flex items-center gap-1.5 flex-wrap">';
       if (activeFilterMode === 'pack') {
         var isChecked = selectedPackSlugs.indexOf(slug) !== -1;
         html += '<input type="checkbox" class="card-pack-checkbox" onchange="togglePackSelect(\'' + slug + '\', this.checked)" ' + (isChecked ? 'checked' : '') + '>';
       }
+      if (metaTag) {
+        html += metaTag;
+      } else {
+        html += '<span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-badge text-label-badge font-bold">수능·모평 디딤돌</span>';
+      }
+      if (solveBadge) html += solveBadge;
+      html += '</div>';
+      html += '<div class="flex items-center gap-1.5">';
+      html += '<span class="font-label-badge text-label-badge text-status-amber font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">stairs</span>단계별 빌드업</span>';
       html += '<button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';
       html += '</div>';
-
-      html += '<div class="icon">📘</div>';
-      html += '<div class="body">';
+      html += '</div>';
       html += '<a class="title" href="board/' + slug + '.html">' + title + '</a>';
       html += '<div class="meta">';
-      if (metaTag) html += metaTag;
-      if (solveBadge) html += solveBadge + ' ';
       if (time) html += '<span>' + time + '</span>';
-      html += '<span style="color:var(--sub)">' + tSlugLabel + '<code>' + slug + '</code></span>';
-      html += '</div></div>';
+      html += '<span>' + tSlugLabel + '<code class="font-label-code text-secondary">' + slug + '</code></span>';
+      html += '</div>';
+      html += '</div>';
       html += '<div class="card-actions">';
+      html += '<div class="flex items-center gap-1.5">';
       html += '<button class="btn-launch-class" onclick="openClassCreatorModal(\'' + slug + '\')">' + tBtnLaunch + '</button>';
       html += '<a class="btn-offline" href="offline/' + slug + '.html" download title="' + tBtnOfflineTitle + '">' + tBtnOffline + '</a>';
+      html += '</div>';
       html += '<a class="btn-solve" style="' + solveBtnStyle + '" href="board/' + slug + '.html">' + solveBtnText + '</a>';
       html += '</div>';
       html += '</div>';
