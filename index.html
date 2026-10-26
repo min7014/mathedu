@@ -80,7 +80,7 @@ window.MathJax = {
 <script src="mathedu-gamification.js?v=20261003_v3"></script>
 <script src="mathedu-i18n.js?v=20261003_v3"></script>
 <script src="mathedu-report.js?v=20261003_v3"></script>
-<!-- Google Stitch Design System: Mathematical Clarity & Dynamic Geometry -->
+<!-- Google Stitch Design System: Mathematical Clarity & Dynamic Geometry (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -152,7 +152,6 @@ tailwind.config = {
         "DEFAULT": "0.25rem",
         "lg": "0.5rem",
         "xl": "0.75rem",
-        "2xl": "1rem",
         "full": "9999px"
       },
       spacing: {
@@ -173,7 +172,7 @@ tailwind.config = {
         "body-sm": ["Inter", "Pretendard", "sans-serif"],
         "label-badge": ["Space Grotesk", "Pretendard", "sans-serif"],
         "body-lg": ["Inter", "Pretendard", "sans-serif"],
-        "label-code": ["Space Grotesk", "Pretendard", "monospace"],
+        "label-code": ["Space Grotesk", "Pretendard", "sans-serif"],
         "display-hero-mobile": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
         "display-hero": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
         "headline-lg-mobile": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
@@ -198,9 +197,16 @@ tailwind.config = {
 };
 </script>
 <style>
-/* ══════════════════════════════════════════════════════════════════════════
-   🎨 Google Stitch Design System: Mathematical Clarity & Dynamic Geometry
-   ══════════════════════════════════════════════════════════════════════════ */
+@layer base {
+  html, body { width: 100%; margin: 0; padding: 0; background-color: #fcf8fa; color: #1b1b1d; }
+  body { overscroll-behavior: none; min-height: max(884px, 100dvh); }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+
 :root {
   --bg-deep: #fcf8fa;
   --bg-surface: #ffffff;
@@ -216,117 +222,22 @@ tailwind.config = {
   --gold: #F59E0B;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background-color: #fcf8fa;
-  color: #1b1b1d;
-  font-family: "Inter", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
-.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
-
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
-  user-select: none;
-}
-
-/* Language switcher buttons */
-.lang-btn {
-  padding: 5px 10px;
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #45464d;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-.lang-btn.active {
-  background: #000000;
-  color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-}
-
-/* Auth slot overrides for light academic surface */
-.nav-auth-slot .auth-btn-sub {
-  background: #f0edef !important;
-  border: 1px solid #e4e2e4 !important;
-  color: #1b1b1d !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  padding: 6px 12px !important;
-}
-.nav-auth-slot .auth-btn-sub:hover {
-  background: #e4e2e4 !important;
-}
-.nav-auth-slot .auth-btn-login {
-  background: #006398 !important;
-  border: 1px solid #006398 !important;
-  color: #ffffff !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  padding: 6px 12px !important;
-}
-.nav-auth-slot .auth-logged-pill,
-.nav-auth-slot .auth-guest-pill {
-  background: #f6f3f5 !important;
-  border: 1px solid #dcd9db !important;
-  color: #1b1b1d !important;
-}
-
-/* Mode Filter Tabs */
-.filter-tab-bar {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.filter-tab-btn {
-  background: #f0edef;
-  border: 1px solid transparent;
-  color: #45464d;
-  padding: 8px 14px;
-  border-radius: 9999px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.filter-tab-btn:hover {
-  background: #eae7e9;
-  color: #1b1b1d;
-}
-.filter-tab-btn.active {
-  background: #000000 !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-/* Stitch Pill Filters (Year / Subject / Topic) */
+/* Stitch Pill Filters (screens/bc0f63eb3a354cee8f964ce2bc461f3b) */
 .stitch-year-pill,
 .stitch-subj-pill {
-  padding: 5px 12px;
+  padding: 4px 12px;
   border-radius: 9999px;
   background: #f0edef;
   color: #1b1b1d;
+  font-family: "Space Grotesk", "Pretendard", sans-serif;
   font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.05em;
   font-weight: 600;
   border: none;
   cursor: pointer;
-  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.15s ease;
-}
-.stitch-year-pill:hover,
-.stitch-subj-pill:hover {
-  background: #eae7e9;
 }
 .stitch-year-pill.active {
   background: #000000;
@@ -338,670 +249,454 @@ html, body {
 }
 
 .topic-chip {
-  padding: 5px 11px;
+  padding: 4px 10px;
   border-radius: 6px;
   background: #f0edef;
   color: #1b1b1d;
+  font-family: "Space Grotesk", "Pretendard", sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.topic-chip.active {
+  background: rgba(0, 99, 152, 0.10);
+  color: #006398;
+}
+
+.filter-tab-btn {
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: #f0edef;
+  color: #45464d;
   font-size: 11px;
   font-weight: 600;
   border: none;
   cursor: pointer;
   transition: all 0.15s ease;
 }
-.topic-chip:hover {
-  background: #eae7e9;
-}
-.topic-chip.active {
-  background: rgba(0, 99, 152, 0.12);
-  color: #006398;
-  font-weight: 700;
+.filter-tab-btn.active {
+  background: #000000;
+  color: #ffffff;
 }
 
-/* Precision Exam Select Dropdowns */
 .exam-select {
   width: 100%;
   background: #f6f3f5;
   border: 1px solid #e4e2e4;
   border-radius: 8px;
   color: #1b1b1d;
-  padding: 8px 10px;
-  font-size: 12px;
+  padding: 6px 8px;
+  font-size: 11px;
   font-weight: 600;
   outline: none;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
-}
-.exam-select:focus {
-  border-color: #006398;
-  background: #ffffff;
 }
 
-/* Dynamic Quiz Card List (#list) in Stitch Academic Modernism style */
-.list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-@media (min-width: 768px) {
-  .list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-  }
-}
-
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.08);
-  border-color: rgba(0, 99, 152, 0.35);
-}
-.card .title {
-  font-family: "Plus Jakarta Sans", "Pretendard", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.4;
-  color: #1b1b1d;
-  text-decoration: none;
-  display: block;
-}
-.card .title:hover {
-  color: #006398;
-}
-.card .meta {
-  font-size: 12px;
-  color: #45464d;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.card-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding-top: 8px;
-  border-top: 1px solid #f6f3f5;
-  flex-wrap: wrap;
-}
-.btn-launch-class {
-  background: rgba(0, 99, 152, 0.08);
-  border: none;
-  color: #006398;
-  border-radius: 8px;
-  padding: 6px 11px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-.btn-launch-class:hover {
-  background: rgba(0, 99, 152, 0.16);
-}
-.btn-offline {
-  background: #f0edef;
-  color: #45464d;
-  border-radius: 8px;
-  padding: 6px 11px;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-.btn-offline:hover {
-  background: #e4e2e4;
-  color: #1b1b1d;
-}
-.btn-solve {
-  background: #000000;
-  color: #ffffff;
-  border-radius: 8px;
-  padding: 7px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-.btn-solve:hover {
-  background: #131b2e;
-  transform: translateY(-1px);
-}
 .card-bookmark-btn {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 0 2px;
   line-height: 1;
   color: #c6c6cd;
-  transition: transform 0.15s ease, color 0.15s ease;
-}
-.card-bookmark-btn:hover {
-  transform: scale(1.15);
 }
 .card-bookmark-btn.active {
   color: #F59E0B;
 }
 .card-pack-checkbox {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   accent-color: #006398;
 }
 
-/* Recent rooms & request items */
-.room-chip {
-  background: rgba(0, 99, 152, 0.1);
-  color: #006398;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-}
-.room-chip:hover {
-  background: #006398;
+.lesson-pack-float-bar {
+  position: fixed;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9990;
+  width: calc(100% - 2rem);
+  max-width: 736px;
+  background: #131b2e;
   color: #ffffff;
-}
-.req-item-card {
-  background: #f6f3f5;
-  border-radius: 10px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
 }
-.req-status-badge {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 9999px;
-}
-.badge-done {
-  background: rgba(16, 185, 129, 0.15);
-  color: #059669;
-}
-.badge-pending {
-  background: rgba(245, 158, 11, 0.15);
-  color: #B45309;
-}
-.req-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #1b1b1d;
-}
-
-/* Lesson pack floating bar */
-.lesson-pack-float-bar {
-  position: fixed;
-  bottom: 76px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9990;
-  width: calc(100% - 2rem);
-  max-width: 720px;
-  background: #131b2e;
-  color: #ffffff;
-  border-radius: 16px;
-  padding: 14px 20px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-}
 </style>
 </head>
 <body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen">
 
-<!-- 1. Fixed Glassmorphic Top Header (Google Stitch Redesign) -->
-<header class="top-nav-bar fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe border-b border-surface-glass-border">
-  <div class="max-w-5xl mx-auto h-20 px-margin flex items-center justify-between gap-space-sm">
+<!-- Fixed Top Header (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+  <div class="h-20 px-margin max-w-[768px] mx-auto flex items-center justify-between gap-space-sm">
     <a href="/mathedu/" class="flex items-center gap-space-sm min-w-0 no-underline">
-      <img alt="mathedu 로고" class="h-9 w-9 rounded-lg object-contain shrink-0 bg-white p-0.5 shadow-sm border border-surface-variant" src="assets/favicon.png"/>
+      <img alt="Image from https://min7014.github.io/mathedu/assets/favicon.png" class="h-8 w-auto object-contain shrink-0" src="assets/favicon.png"/>
       <div class="flex flex-col min-w-0">
         <div class="flex items-center gap-space-xs truncate">
-          <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate">mathedu · 수학자료실</span>
+          <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">mathedu · 수학자료실</span>
         </div>
         <div class="flex items-center gap-1.5">
-          <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge" data-i18n="hero.badgePill">3,400+ 시각적 수학 증명</span>
-          <span class="hidden sm:inline-block font-label-code text-label-code text-on-surface-variant truncate">Interactive Archive</span>
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge">3,400+ 시각적 수학 증명</span>
+          <span class="hidden xs:inline-block font-label-code text-label-code text-on-surface-variant truncate">Home</span>
         </div>
       </div>
     </a>
-
-    <!-- Desktop Quick Navigation -->
-    <div class="hidden lg:flex items-center gap-1 nav-menu">
-      <a href="#quizExplorerSection" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors" data-i18n="nav.allQuizzes">퀴즈 모음</a>
-      <a href="offline/index.html" class="px-3 py-1.5 rounded-lg text-secondary hover:bg-secondary/10 font-body-sm text-body-sm font-semibold transition-colors" data-i18n-title="nav.offlineVaultTitle" title="인터넷 없이 풀 수 있는 오프라인 전체 문제 보관함" data-i18n="nav.offlineVault">오프라인 보관함</a>
-      <button type="button" onclick="openMin7014ExplorerModal()" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors cursor-pointer" data-i18n="nav.minExplorer">동적 기하관</button>
-      <a href="create.html" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors" data-i18n="nav.createQuiz">문제 출제</a>
-      <a href="dashboard.html" class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-colors" data-i18n="nav.dashboard">수업 대시보드</a>
-    </div>
-
-    <div class="flex items-center gap-1.5 shrink-0">
-      <!-- Language Switcher (KO / EN) -->
-      <div class="flex items-center bg-surface-container rounded-xl p-0.5" id="langSwitcher" title="언어 선택 / Language">
-        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">KO</button>
-        <button type="button" class="lang-btn" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">EN</button>
+    <div class="flex items-center gap-space-xs shrink-0">
+      <button id="langToggleSingleBtn" onclick="var nextL=(window.MatheduI18n&&MatheduI18n.getLanguage()==='ko')?'en':'ko';MatheduI18n.setLanguage(nextL);this.textContent=nextL.toUpperCase();" aria-label="언어 설정 변경" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl px-2 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">KO</button>
+      <!-- Hidden compatibility language switcher for i18n script -->
+      <div id="langSwitcher" class="hidden">
+        <button type="button" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">KO</button>
+        <button type="button" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">EN</button>
       </div>
-
-      <!-- Header Streak Pill -->
-      <button type="button" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#FEF3C7] text-[#B45309] font-label-badge text-label-badge shadow-[0_2px_8px_rgba(245,158,11,0.15)] cursor-pointer border-0" title="나의 연속 학습 스트릭 및 업적">
-        <span class="material-symbols-outlined text-[16px] text-status-amber" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-        <span class="font-bold" id="headerStreakCount">1</span>
-      </button>
-
-      <!-- Auth Slot for Desktop + Profile Trigger -->
-      <div id="navAuthSlot" class="nav-auth-slot hidden md:inline-flex"></div>
-      <button type="button" onclick="if(window.MatheduAuth){MatheduAuth.isLoggedIn()?MatheduAuth.showMyProblemsModal():MatheduAuth.showAuthModal()}" aria-label="내 계정 및 학습 기록" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center cursor-pointer border-0 shadow-sm hover:opacity-90 transition-opacity" title="로그인 / 내 학습 서재">
+      <div onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#FEF3C7] text-[#B45309] font-label-badge text-label-badge shadow-[0_2px_8px_rgba(245,158,11,0.15)] cursor-pointer" title="연속 학습 스트릭 및 나의 뱃지">
+        <span class="material-symbols-outlined text-[16px] text-status-amber">local_fire_department</span>
+        <span class="font-bold" id="headerStreakCount">14</span>
+      </div>
+      <button type="button" onclick="if(window.MatheduAuth){MatheduAuth.isLoggedIn()?MatheduAuth.showMyProblemsModal():MatheduAuth.showAuthModal()}" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer border-0" title="로그인 및 내 서재">
         <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
       </button>
+      <div id="navAuthSlot" class="hidden"></div>
     </div>
   </div>
 </header>
 
-<!-- Main Content Container -->
 <main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen">
-  <div class="flex flex-col w-full max-w-5xl mx-auto pb-12">
+  <div class="flex flex-col w-full max-w-[768px] mx-auto pb-12">
 
-    <!-- 2. Brand / Identity Hero Card & 4-Column Key Stats Bento Grid -->
-    <div class="px-margin pt-3 pb-1">
-      <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-md sm:p-6 shadow-sm border border-surface-glass-border">
+    <!-- Top Ambient Geometric Graphic Accent -->
+    <div class="px-margin pt-2 pb-1">
+      <!-- Brand / Identity Card -->
+      <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
         <div class="relative z-10 flex flex-col gap-space-xs">
-          <div class="flex items-center justify-between flex-wrap gap-2">
+          <div class="flex items-center justify-between">
             <div class="flex items-center gap-1.5">
               <span class="material-symbols-outlined text-secondary text-[20px]">architecture</span>
               <span class="font-label-badge text-label-badge text-secondary font-bold tracking-wide">수학자료실 · mathedu</span>
             </div>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-status-emerald/10 text-status-emerald font-label-badge text-label-badge font-semibold">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-status-emerald/10 text-status-emerald font-label-badge text-label-badge font-semibold">
               100% 영구 무료
             </span>
           </div>
-
-          <h1 class="font-headline-lg-mobile sm:text-headline-lg text-headline-lg-mobile text-on-surface tracking-tight mt-1">
-            3,400+ 시각적 증명과<br class="sm:hidden"/>
+          <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight mt-1">
+            3,400+ 시각적 증명과<br/>
             <span class="text-secondary">단델린 구의 직관</span>
           </h1>
-
-          <p class="font-body-sm sm:text-body-md text-body-sm text-on-surface-variant leading-relaxed mt-0.5" data-i18n-html="hero.leadDesc">
-            수학자료실의 3,400+ 시각적 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학자료실</b>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n-html="hero.leadDesc">
+            수학자료실의 3,400+ 시각적 증명과 단델린 구의 통찰을 담은 가입 없는 100% 영구 무료 인터랙티브 수학자료실
           </p>
-
           <!-- Quick feature badges horizontally scrolling -->
-          <div class="flex items-center gap-1.5 overflow-x-auto py-1.5 mt-1 -mx-1 px-1">
+          <div class="flex items-center gap-1.5 overflow-x-auto py-1 mt-1 -mx-1 px-1">
             <span class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1">
               <span class="material-symbols-outlined text-[14px] text-status-amber">bolt</span>
-              <span data-i18n="hero.pill1">무가입 5초 즉시 학습</span>
+              무가입 5초 즉시 학습
             </span>
             <span class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1">
               <span class="material-symbols-outlined text-[14px] text-secondary">target</span>
-              <span data-i18n="hero.pill2">0~5단계 빌드업</span>
+              0~5단계 빌드업
             </span>
-            <a href="offline/index.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline transition-colors">
-              <span class="material-symbols-outlined text-[14px] text-secondary">inventory_2</span>
-              <span data-i18n="hero.pill4">100% 오프라인 보관함</span>
+            <a href="offline/index.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline">
+              <span class="material-symbols-outlined text-[14px] text-on-surface-variant">inventory_2</span>
+              100% 오프라인 보관함
             </a>
-            <a href="dashboard.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline transition-colors">
+            <a href="dashboard.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline">
               <span class="material-symbols-outlined text-[14px] text-status-emerald">monitoring</span>
-              <span data-i18n="hero.pill3">실시간 교실 현황</span>
+              실시간 교실 현황
             </a>
           </div>
         </div>
-
-        <!-- Key Stats Bento Grid (4 Columns) -->
-        <div class="grid grid-cols-4 gap-1.5 sm:gap-3 mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-3">
+        <!-- Key Stats Bento Grid -->
+        <div class="grid grid-cols-4 gap-1.5 mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-2.5">
           <div class="flex flex-col items-center text-center">
-            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-on-surface font-bold tracking-tight">3,400+</span>
-            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statTopics">수학 주제</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">3,400+</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statTopics">수학 주제</span>
           </div>
           <div class="flex flex-col items-center text-center">
-            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-secondary font-bold tracking-tight">1,087+</span>
-            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statAssets">GeoGebra</span>
+            <span class="font-headline-sm text-headline-sm text-secondary font-bold tracking-tight">1,087+</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statAssets">GeoGebra</span>
           </div>
           <div class="flex flex-col items-center text-center">
-            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-status-amber font-bold tracking-tight" id="heroStatQuizCount">67개</span>
-            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statQuizzes">수능·디딤돌</span>
+            <span class="font-headline-sm text-headline-sm text-status-amber font-bold tracking-tight" id="heroStatQuizCount">67개</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statQuizzes">수능·디딤돌</span>
           </div>
           <div class="flex flex-col items-center text-center">
-            <span class="font-headline-sm sm:text-headline-md text-headline-sm text-status-emerald font-bold tracking-tight">100%</span>
-            <span class="font-label-badge text-[10px] sm:text-label-badge text-on-surface-variant mt-0.5" data-i18n="hero.statRigor">오프라인</span>
+            <span class="font-headline-sm text-headline-sm text-status-emerald font-bold tracking-tight">100%</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statRigor">오프라인</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 3. Gamification / Daily Streak Banner -->
+    <!-- Gamification / Daily Streak Banner -->
     <div class="px-margin mt-space-sm" id="gamificationHubStrip">
-      <div class="flex items-center justify-between p-space-sm px-space-md sm:py-3.5 sm:px-5 rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border gap-3 flex-wrap">
-        <div class="flex items-center gap-space-sm min-w-0 flex-1">
+      <div class="flex items-center justify-between p-space-sm px-space-md rounded-xl bg-surface-container-lowest shadow-sm">
+        <div class="flex items-center gap-space-sm min-w-0">
           <div class="w-10 h-10 rounded-full bg-[#FEF3C7] flex items-center justify-center shrink-0" id="streakFlameIcon">
             <span class="material-symbols-outlined text-status-amber text-[22px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
           </div>
-          <div class="flex flex-col min-w-0 flex-1">
-            <div class="flex items-center gap-1.5 flex-wrap">
-              <span class="font-headline-sm text-[15px] font-bold text-on-surface" id="streakTitle">연속 출석 1일차</span>
-              <span class="font-label-badge text-[10px] px-2 py-0.5 rounded bg-surface-container text-secondary font-bold" id="gameLevelTitle">Lv.1 디딤돌 입문자</span>
-              <span class="font-label-code text-[11px] text-on-surface-variant" id="gameXpText">0 / 100 XP</span>
-            </div>
-            <span class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5" id="streakSub">오늘 수학 문제 풀면 불꽃 유지!</span>
-            <div class="w-full max-w-xs h-1.5 bg-surface-container rounded-full overflow-hidden mt-1">
-              <div id="gameXpBarFill" class="h-full bg-gradient-to-r from-secondary to-accent-indigo transition-all duration-300" style="width:0%"></div>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center gap-1.5 shrink-0">
-          <button type="button" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" aria-label="나의 뱃지" class="h-9 px-3 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center gap-1 text-on-surface font-label-badge text-label-badge cursor-pointer transition-colors">
-            <span class="material-symbols-outlined text-[18px] text-status-amber">military_tech</span>
-            <span class="hidden sm:inline">나의 뱃지</span>
-          </button>
-          <button type="button" id="btnQuickWrongVault" onclick="switchFilterMode('wrong')" aria-label="오답노트" class="h-9 px-3 rounded-full bg-error-container/50 hover:bg-error-container flex items-center justify-center gap-1 text-error font-label-badge text-label-badge cursor-pointer transition-colors">
-            <span class="material-symbols-outlined text-[18px]">bookmark</span>
-            <span>오답노트 (<span id="quickWrongCount">0</span>)</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. Emblem / Dandelin Spheres Interactive Spotlight & Today's Dynamic Geometry (2-Column on Desktop) -->
-    <div class="px-margin mt-space-md grid grid-cols-1 lg:grid-cols-2 gap-space-md">
-      <!-- Emblem / Dandelin Spheres Card -->
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm overflow-hidden relative border border-surface-glass-border flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between pb-space-xs">
-            <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-accent-indigo text-[20px]">view_in_ar</span>
-              <span class="font-label-code text-label-code text-on-surface font-bold" data-i18n="hero.emblemCaption">공식 엠블럼 Dandelin Spheres</span>
-            </div>
-            <button type="button" onclick="toggleMathStory()" class="font-label-badge text-label-badge text-secondary font-semibold bg-secondary/10 px-2.5 py-1 rounded-full cursor-pointer border-0">
-              입체 기하 증명 <span id="storyArrow">▼</span>
-            </button>
-          </div>
-          <!-- Geometry Preview & Explanatory visual frame -->
-          <div class="mt-space-sm rounded-lg overflow-hidden bg-surface-canvas relative flex flex-col">
-            <div class="w-full h-44 relative bg-cover bg-center cursor-pointer" onclick="toggleMathStory()" style="background-image: url('assets/stitch_dandelin_hero.png')">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-space-md text-on-primary">
-                <span class="font-label-badge text-label-badge text-accent-azure tracking-widest uppercase">Visual Proof Archive</span>
-                <p class="font-headline-sm text-headline-sm text-white font-bold leading-tight mt-0.5" data-i18n="hero.storyDrawerTitle">단델린의 구와 원뿔곡선의 기하학적 증명</p>
-              </div>
-            </div>
-            <div id="mathStoryDrawer" class="p-space-md bg-surface-container-low flex flex-col gap-space-xs">
-              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                <span data-i18n-html="hero.storyDrawerP1">원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <strong class="text-on-surface">단델린의 구</strong>라고 합니다.</span>
-                <span data-i18n-html="hero.storyDrawerP2">구가 평면과 접하는 점(<span class="font-label-code text-secondary font-bold">$F_1, F_2$</span>)이 원뿔곡선의 초점(Focus)이 됩니다.</span>
-              </p>
-              <div class="p-space-sm rounded-md bg-surface-container-lowest mt-1 flex items-start gap-2">
-                <span class="material-symbols-outlined text-status-amber text-[18px] shrink-0 mt-0.5">format_quote</span>
-                <p class="font-body-sm text-body-sm text-on-surface font-medium italic">
-                  <span data-i18n="hero.storyDrawerQuote">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학"</span> — <span data-i18n="hero.storyDrawerAuthor">수학교육의 지향점입니다.</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. Today's Recommended Dynamic Geometry Card -->
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between" id="todayGeogebraCard">
-        <div>
-          <div class="flex items-center justify-between mb-2">
+          <div class="flex flex-col min-w-0">
             <div class="flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-status-amber text-[20px]">lightbulb</span>
-              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="todayGgb.tag">오늘의 추천 동적 기하</span>
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface" id="streakTitle">연속 출석 1일차</span>
+              <span class="font-label-badge text-[10px] px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant" id="gameLevelTitle">Lv.1 입문자</span>
             </div>
-            <button type="button" id="btnNextGgb" onclick="rotateTodayGeoGebra(1)" class="text-on-surface-variant hover:text-on-surface bg-surface-container hover:bg-surface-container-high px-2.5 py-1 rounded-full flex items-center gap-1 font-label-badge text-label-badge cursor-pointer transition-colors">
-              <span class="material-symbols-outlined text-[15px]">casino</span>
-              <span data-i18n="todayGgb.btnNext">다른 추천</span>
-            </button>
+            <span class="font-body-sm text-body-sm text-on-surface-variant truncate"><span id="streakSub">오늘 수학 문제 풀면 불꽃 유지!</span> (<span id="gameXpText">0 / 100 XP</span>)</span>
+            <div class="hidden"><div id="gameXpBarFill"></div></div>
           </div>
-          <div class="rounded-lg bg-surface-container-low p-space-md flex flex-col gap-space-xs">
-            <div class="flex items-center justify-between">
-              <span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-semibold">광학적 성질 · 시각적 증명</span>
-              <span class="font-label-code text-body-sm text-on-surface-variant">GeoGebra 3D</span>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <button onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" aria-label="나의 뱃지" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface cursor-pointer border-0" type="button">
+            <span class="material-symbols-outlined text-[18px]">military_tech</span>
+          </button>
+          <button id="btnQuickWrongVault" onclick="switchFilterMode('wrong')" aria-label="오답노트" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-error cursor-pointer border-0" type="button">
+            <span class="material-symbols-outlined text-[18px]">bookmark</span>
+            <span id="quickWrongCount" class="hidden">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emblem / Dandelin Spheres Interactive Spotlight -->
+    <div class="px-margin mt-space-md">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm overflow-hidden relative">
+        <div class="flex items-center justify-between pb-space-xs">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-accent-indigo text-[20px]">view_in_ar</span>
+            <span class="font-label-code text-label-code text-on-surface font-bold">공식 엠블럼 Dandelin Spheres</span>
+          </div>
+          <span class="font-label-badge text-label-badge text-secondary font-semibold cursor-pointer" onclick="toggleMathStory()">입체 기하 증명 <span id="storyArrow" class="hidden">▼</span></span>
+        </div>
+        <!-- Geometry Preview & Explanatory visual frame -->
+        <div class="mt-space-sm rounded-lg overflow-hidden bg-surface-canvas relative flex flex-col">
+          <div class="w-full h-44 relative bg-cover bg-center" data-alt="A clean academic 3D geometric illustration of Dandelin spheres inscribed inside a double cone intersected by a plane to form an ellipse." style="background-image: url('assets/stitch_dandelin_hero.png')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-space-md text-on-primary">
+              <span class="font-label-badge text-label-badge text-accent-azure tracking-widest uppercase">Visual Proof Archive</span>
+              <p class="font-headline-sm text-headline-sm text-white font-bold leading-tight mt-0.5">단델린의 구와 원뿔곡선의 기하학적 증명</p>
             </div>
-            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1" id="todayGgbTitle">
-              타원에서의 빛 반사 (광학적 성질)
-            </h2>
-            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="todayGgbDesc">
-              한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.
+          </div>
+          <div id="mathStoryDrawer" class="p-space-md bg-surface-container-low flex flex-col gap-space-xs">
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <strong class="text-on-surface">단델린의 구</strong>라고 합니다. 구가 평면과 접하는 점(<span class="font-label-code text-secondary font-bold">$F_1, F_2$</span>)이 원뿔곡선의 초점(Focus)이 됩니다.
             </p>
-            <!-- CTA Buttons -->
-            <div class="flex flex-col gap-2 mt-3">
-              <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="w-full h-11 px-space-md rounded-lg bg-primary text-on-primary font-headline-sm text-[14px] flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors shadow-sm no-underline">
-                <span class="material-symbols-outlined text-[18px]">sports_esports</span>
-                <span data-i18n="todayGgb.btnApplet">GeoGebra로 조작하기</span>
-                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-              </a>
-              <div class="grid grid-cols-2 gap-2">
-                <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline">
-                  <span class="material-symbols-outlined text-[16px] text-secondary">picture_as_pdf</span>
-                  <span data-i18n="todayGgb.btnPdf">원리 증명 PDF</span>
-                </a>
-                <a id="btnTodayGgbWeb" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline">
-                  <span class="material-symbols-outlined text-[16px] text-on-surface-variant">language</span>
-                  <span data-i18n="todayGgb.btnWeb">웹 상세 해설</span>
-                </a>
-              </div>
+            <div class="p-space-sm rounded-md bg-surface-container-lowest mt-1 flex items-start gap-2">
+              <span class="material-symbols-outlined text-status-amber text-[18px] shrink-0 mt-0.5">format_quote</span>
+              <p class="font-body-sm text-body-sm text-on-surface font-medium italic">
+                "수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 6. User Gateway Cards (Teacher / Problem Creation / Student Quick Action) -->
-    <div class="px-margin mt-space-md grid grid-cols-1 md:grid-cols-3 gap-space-sm">
-      <!-- Teacher Class Creation Card -->
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between gap-2">
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-secondary text-[22px]">co_present</span>
-            <div class="flex flex-col">
-              <span class="font-label-badge text-label-badge text-secondary font-bold uppercase" data-i18n="heroCards.teacherTag">교사 회원 전용 · 수업 배포</span>
-              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.teacherTitle">3초 만에 수업 개설하기</span>
+    <!-- Today's Recommended Dynamic Geometry Card -->
+    <div class="px-margin mt-space-md" id="todayGeogebraCard">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-status-amber text-[20px]">lightbulb</span>
+            <span class="font-headline-sm text-[16px] font-bold text-on-surface">오늘의 추천 동적 기하</span>
+          </div>
+          <button id="btnNextGgb" onclick="rotateTodayGeoGebra(1)" class="text-on-surface-variant hover:text-on-surface flex items-center gap-0.5 font-label-badge text-label-badge bg-transparent border-0 cursor-pointer" type="button">
+            <span class="material-symbols-outlined text-[16px]">casino</span>
+            <span data-i18n="todayGgb.btnNext">다른 추천</span>
+          </button>
+        </div>
+        <div class="rounded-lg bg-surface-container-low p-space-md flex flex-col gap-space-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-semibold">광학적 성질</span>
+            <span class="font-label-code text-body-sm text-on-surface-variant">GeoGebra 3D</span>
+          </div>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold" id="todayGgbTitle">
+            타원에서의 빛 반사
+          </h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="todayGgbDesc">
+            한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.
+          </p>
+          <!-- CTA Buttons -->
+          <div class="flex flex-col gap-2 mt-2">
+            <a id="btnTodayGgbApplet" class="w-full h-11 px-space-md rounded-lg bg-primary text-on-primary font-headline-sm text-[14px] flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors shadow-sm no-underline" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined text-[18px]">sports_esports</span>
+              <span>GeoGebra로 조작하기</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+            <div class="grid grid-cols-2 gap-2">
+              <a id="btnTodayGgbPdf" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-medium flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener">
+                <span class="material-symbols-outlined text-[16px] text-secondary">picture_as_pdf</span>
+                <span data-i18n="todayGgb.btnPdf">원리 증명 PDF</span>
+              </a>
+              <a id="btnTodayGgbWeb" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-medium flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener">
+                <span class="material-symbols-outlined text-[16px] text-on-surface-variant">language</span>
+                <span data-i18n="todayGgb.btnWeb">웹 상세 해설</span>
+              </a>
             </div>
           </div>
-          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.teacherDesc">
-            회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.
-          </p>
-        </div>
-        <div class="flex items-center gap-2 mt-1">
-          <button type="button" onclick="openDefaultTeacherClass()" class="flex-1 h-11 rounded-lg bg-secondary hover:opacity-95 text-on-secondary font-body-md text-body-md font-semibold flex items-center justify-center gap-1.5 shadow-sm cursor-pointer border-0">
-            <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
-            <span data-i18n="heroCards.teacherBtn">3초 수업 개설 (QR)</span>
-          </button>
-          <a href="dashboard.html" class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-semibold flex items-center justify-center gap-1 no-underline">
-            <span class="material-symbols-outlined text-[18px]">dashboard</span>
-            <span>현황판</span>
-          </a>
         </div>
       </div>
+    </div>
 
-      <!-- Exam Quiz Creation Card -->
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between gap-2">
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-status-amber text-[22px]">auto_awesome</span>
-            <div class="flex flex-col">
-              <span class="font-label-badge text-label-badge text-[#B45309] font-bold uppercase" data-i18n="heroCards.createTag">수능·모평 기출 전용 · 1일 1문제</span>
-              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.createTitle">수능·모의평가 기출 출제</span>
-            </div>
+    <!-- Two-Pillar User Gateway (Teacher & Student Quick Action) -->
+    <div class="px-margin mt-space-md flex flex-col gap-space-sm">
+      <!-- Teacher Class Creation Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[22px]">co_present</span>
+          <div class="flex flex-col">
+            <span class="font-label-badge text-label-badge text-secondary font-bold uppercase" data-i18n="heroCards.teacherTag">교사 회원 전용 · 수업 배포</span>
+            <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.teacherTitle">3초 만에 수업 개설하기</span>
           </div>
-          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n-html="heroCards.createDesc">
-            공개된 <b>수능 및 모의평가 기출문제</b>를 올리면 초등학생 눈높이 <b>5~8단계 인터랙티브 디딤돌 퀴즈</b>와 시각적 증명으로 제작·배포합니다.
-          </p>
         </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.teacherDesc">
+          회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.
+        </p>
         <div class="flex items-center gap-2 mt-1">
-          <a href="create.html" class="w-full h-11 rounded-lg bg-primary-container hover:opacity-95 text-white font-body-md text-body-md font-semibold flex items-center justify-center gap-1.5 shadow-sm no-underline">
-            <span class="material-symbols-outlined text-[18px] text-accent-azure">add_circle</span>
-            <span data-i18n="heroCards.createBtn">수능·모평 퀴즈 만들기 ➔</span>
+          <button onclick="openDefaultTeacherClass()" class="flex-1 h-11 rounded-lg bg-secondary text-on-secondary font-body-md text-body-md font-semibold flex items-center justify-center gap-1.5 shadow-sm cursor-pointer border-0" type="button">
+            <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+            3초 수업 개설 (QR)
+          </button>
+          <a href="dashboard.html" class="h-11 px-3 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1 no-underline">
+            <span class="material-symbols-outlined text-[18px]">dashboard</span>
+            현황판
           </a>
         </div>
       </div>
 
       <!-- Student / Guest Entry Card -->
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col justify-between gap-2">
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-accent-indigo text-[22px]">school</span>
-            <div class="flex flex-col">
-              <span class="font-label-badge text-label-badge text-accent-indigo font-bold uppercase" data-i18n="heroCards.studentTag">비회원·학생 · 100% 자유 풀이</span>
-              <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.studentTitle">수업 코드로 입장하기 (또는 자유 풀이)</span>
-            </div>
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-accent-indigo text-[22px]">school</span>
+          <div class="flex flex-col">
+            <span class="font-label-badge text-label-badge text-accent-indigo font-bold uppercase" data-i18n="heroCards.studentTag">비회원·학생 · 100% 자유 풀이</span>
+            <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.studentTitle">수업 코드로 입장하기 (또는 자유 풀이)</span>
           </div>
-          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.studentDesc">
-            회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.
-          </p>
         </div>
-        <div>
-          <div class="flex gap-2 mt-1">
-            <div class="flex-1 relative flex items-center">
-              <input id="inputRoomCode" class="w-full h-11 pl-3 pr-3 rounded-lg bg-surface-container-low font-label-code text-label-code text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container border border-surface-variant" placeholder="6자리 수업 코드 입력" data-i18n-placeholder="heroCards.studentPlaceholder" maxlength="12" type="text"/>
-            </div>
-            <button type="button" onclick="joinClassroom()" class="h-11 px-5 rounded-lg bg-primary text-on-primary font-body-md text-body-md font-semibold shrink-0 flex items-center justify-center gap-1 cursor-pointer border-0" data-i18n="heroCards.studentJoinBtn">
-              입장 ➔
-            </button>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.studentDesc">
+          회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.
+        </p>
+        <div class="flex gap-2 mt-1">
+          <div class="flex-1 relative flex items-center">
+            <input id="inputRoomCode" class="w-full h-11 pl-3 pr-3 rounded-lg bg-surface-container-low font-label-code text-label-code text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container border-0" placeholder="6자리 수업 코드 입력" data-i18n-placeholder="heroCards.studentPlaceholder" maxlength="12" type="text"/>
           </div>
-          <div class="flex items-center justify-between pt-2 flex-wrap gap-2" id="studentLibraryQuickBar">
-            <button type="button" onclick="MatheduAuth.showMyProblemsModal()" class="font-body-sm text-body-sm text-secondary font-semibold flex items-center gap-1 hover:underline bg-transparent border-0 cursor-pointer p-0" data-i18n="heroCards.studentMySolved">
-              <span class="material-symbols-outlined text-[16px]">folder_open</span>
-              내가 푼 문제 모아보기
-            </button>
-            <button type="button" onclick="MatheduAuth.showGuestLoginModal()" class="font-body-sm text-body-sm text-on-surface-variant font-medium flex items-center gap-1 hover:underline bg-transparent border-0 cursor-pointer p-0" data-i18n="heroCards.studentGuestSync">
-              <span class="material-symbols-outlined text-[16px]">manage_accounts</span>
-              익명 기록 연동
-            </button>
-          </div>
+          <button onclick="joinClassroom()" class="h-11 px-5 rounded-lg bg-primary text-on-primary font-body-md text-body-md font-semibold shrink-0 flex items-center justify-center gap-1 cursor-pointer border-0" type="button" data-i18n="heroCards.studentJoinBtn">
+            입장 ➔
+          </button>
+        </div>
+        <div class="flex items-center justify-between pt-1" id="studentLibraryQuickBar">
+          <a class="font-body-sm text-body-sm text-secondary flex items-center gap-1 hover:underline cursor-pointer" href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+            <span class="material-symbols-outlined text-[16px]">folder_open</span>
+            내가 푼 문제 모아보기
+          </a>
+          <a class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 hover:underline cursor-pointer" href="#" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
+            <span class="material-symbols-outlined text-[16px]">manage_accounts</span>
+            익명 기록 연동
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Recent Teacher Rooms Bar (Shown if teacher has local rooms) -->
+    <!-- Recent Teacher Rooms & Live Requests (Conditional) -->
     <div class="px-margin mt-space-sm" id="recentRoomsBox" style="display:none">
-      <div class="rounded-xl bg-surface-container-lowest p-3 px-4 shadow-sm border border-surface-glass-border flex items-center gap-3 flex-wrap w-full">
+      <div class="rounded-xl bg-surface-container-lowest p-3 px-4 shadow-sm flex items-center gap-3 flex-wrap w-full">
         <span class="font-label-badge text-label-badge text-on-surface-variant font-bold">📂 최근 개설한 내 수업:</span>
         <div id="recentRoomsList" class="flex gap-2 flex-wrap"></div>
         <a href="dashboard.html" class="ml-auto font-body-sm text-body-sm text-secondary font-bold no-underline hover:underline">전체 대시보드 ➔</a>
       </div>
     </div>
 
-    <!-- Live Problem Creation Requests Status Box -->
     <div class="px-margin mt-space-sm" id="requestsBoardBox" style="display:none;">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border">
-        <div class="flex justify-between items-center mb-3 flex-wrap gap-2">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+        <div class="flex justify-between items-center mb-2 flex-wrap gap-2">
           <div class="font-headline-sm text-[15px] font-bold text-on-surface flex items-center gap-2">
-            <span class="material-symbols-outlined text-status-amber text-[20px]">campaign</span>
-            <span>실시간 문제 출제 &amp; 제작 현황</span>
-            <span class="px-2.5 py-0.5 rounded-full bg-status-amber/15 text-[#B45309] font-label-badge text-label-badge" id="requestsCountBadge">확인 중...</span>
+            <span class="material-symbols-outlined text-status-amber text-[18px]">campaign</span>
+            <span>실시간 문제 출제 현황</span>
+            <span class="px-2 py-0.5 rounded-full bg-status-amber/15 text-[#B45309] font-label-badge text-label-badge" id="requestsCountBadge">확인 중...</span>
           </div>
-          <a href="create.html" class="font-body-sm text-body-sm text-status-emerald font-bold no-underline hover:underline">
-            ✨ 나도 새 문제 출제하기 ➔
-          </a>
+          <a href="create.html" class="font-body-sm text-body-sm text-secondary font-bold no-underline hover:underline">✨ 새 문제 출제 ➔</a>
         </div>
         <div id="requestsList" class="grid gap-2"></div>
       </div>
     </div>
 
-    <!-- 7. Precision Question Filter & Interactive Quiz Explorer -->
+    <!-- Precision Question Filter & Interactive Quiz Explorer -->
     <div class="px-margin mt-space-lg flex flex-col gap-space-sm" id="quizExplorerSection">
-      <div class="flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-secondary text-[22px]">tune</span>
           <div>
-            <div class="flex items-center gap-2 flex-wrap">
+            <div class="flex items-center gap-2">
               <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold" data-i18n="examFinder.title">수능·모의평가 기출 정밀 탐색기</h2>
-              <span class="px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge font-bold" id="countBadge">불러오는 중…</span>
+              <span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge" id="countBadge">불러오는 중…</span>
             </div>
-            <span class="font-body-sm text-[11px] text-on-surface-variant" data-i18n="examFinder.subtitle">학년도·선택과목·문항 번호 즉시 추출 (비회원 100% 무료 풀이)</span>
+            <span class="font-body-sm text-[11px] text-on-surface-variant">학년도·선택과목·문항 번호 즉시 추출</span>
           </div>
         </div>
-        <div class="flex items-center gap-1.5">
-          <button type="button" id="btnRandomQuizChallenge" onclick="startRandomQuiz()" class="h-8 px-3 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-label-badge font-bold flex items-center gap-1 cursor-pointer border-0 transition-colors">
-            🎲 랜덤 기출 도전
-          </button>
-          <button type="button" onclick="resetExamFilters()" class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface cursor-pointer border-0 transition-colors" title="필터 초기화">
-            <span class="material-symbols-outlined text-[18px]">restart_alt</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mode Tabs (All / Wrong Vault / Bookmarks / Lesson Pack) -->
-      <div class="filter-tab-bar" id="filterModeTabBar">
-        <button type="button" class="filter-tab-btn active" data-mode="all" onclick="switchFilterMode('all')">
-          <span data-i18n="filterTabs.allQuizzes">📚 전체 퀴즈</span> (<span id="tabAllCount">-</span>)
-        </button>
-        <button type="button" class="filter-tab-btn" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">
-          <span data-i18n="filterTabs.wrongVault">🔴 나의 오답노트</span> (<span id="tabWrongCount">0</span>)
-        </button>
-        <button type="button" class="filter-tab-btn" data-mode="bookmarks" onclick="switchFilterMode('bookmarks')" id="tabBtnBookmarks">
-          <span data-i18n="filterTabs.bookmarks">⭐ 즐겨찾기</span> (<span id="tabBookmarkCount">0</span>)
-        </button>
-        <button type="button" class="filter-tab-btn ml-auto" data-mode="pack" onclick="toggleLessonPackMode()" id="tabBtnLessonPack">
-          <span data-i18n="filterTabs.lessonPack">🎒 교사용 수업 팩 묶기</span>
+        <button onclick="resetExamFilters()" class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-on-surface cursor-pointer border-0" title="필터 초기화" type="button">
+          <span class="material-symbols-outlined text-[18px]">restart_alt</span>
         </button>
       </div>
 
-      <!-- Stitch Filter Multi-Select Pills + Precision 5-Select Bar -->
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-glass-border flex flex-col gap-3" id="quizFilterBar">
-        <!-- Stitch Quick Year Pills -->
+      <!-- Filter Multi-Select Pills -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-3" id="quizFilterBar">
+        <!-- Year Filter -->
         <div class="flex flex-col gap-1.5">
-          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold" data-i18n="examFinder.labelYear">학년도</span>
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">학년도</span>
           <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="stitchYearPills">
-            <button type="button" class="stitch-year-pill active" data-year="" onclick="selectStitchYearPill('')">전체</button>
-            <button type="button" class="stitch-year-pill" data-year="2026" onclick="selectStitchYearPill('2026')">2026학년도</button>
-            <button type="button" class="stitch-year-pill" data-year="2025" onclick="selectStitchYearPill('2025')">2025학년도</button>
-            <button type="button" class="stitch-year-pill" data-year="2024" onclick="selectStitchYearPill('2024')">2024학년도</button>
-            <button type="button" class="stitch-year-pill" data-year="2023" onclick="selectStitchYearPill('2023')">2023학년도</button>
-            <button type="button" class="stitch-year-pill" data-year="2022" onclick="selectStitchYearPill('2022')">이전 기출</button>
+            <button class="stitch-year-pill active" data-year="" onclick="selectStitchYearPill('')" type="button">전체</button>
+            <button class="stitch-year-pill" data-year="2026" onclick="selectStitchYearPill('2026')" type="button">2026학년도</button>
+            <button class="stitch-year-pill" data-year="2025" onclick="selectStitchYearPill('2025')" type="button">2025학년도</button>
+            <button class="stitch-year-pill" data-year="2024" onclick="selectStitchYearPill('2024')" type="button">2024학년도</button>
+            <button class="stitch-year-pill" data-year="2023" onclick="selectStitchYearPill('2023')" type="button">이전 기출</button>
           </div>
         </div>
-
-        <!-- Stitch Quick Subject Pills -->
+        <!-- Subject Filter -->
         <div class="flex flex-col gap-1.5">
-          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold" data-i18n="examFinder.labelSubject">선택과목</span>
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">선택과목</span>
           <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="stitchSubjectPills">
-            <button type="button" class="stitch-subj-pill active" data-subj="" onclick="selectStitchSubjectPill('')">전체 과목</button>
-            <button type="button" class="stitch-subj-pill" data-subj="공통(수학I·II)" onclick="selectStitchSubjectPill('공통(수학I·II)')">공통(수학I·II)</button>
-            <button type="button" class="stitch-subj-pill" data-subj="미적분" onclick="selectStitchSubjectPill('미적분')">미적분</button>
-            <button type="button" class="stitch-subj-pill" data-subj="기하" onclick="selectStitchSubjectPill('기하')">기하</button>
-            <button type="button" class="stitch-subj-pill" data-subj="확률과 통계" onclick="selectStitchSubjectPill('확률과 통계')">확률과 통계</button>
+            <button class="stitch-subj-pill active" data-subj="" onclick="selectStitchSubjectPill('')" type="button">전체 과목</button>
+            <button class="stitch-subj-pill" data-subj="공통(수학I·II)" onclick="selectStitchSubjectPill('공통(수학I·II)')" type="button">공통(수학I·II)</button>
+            <button class="stitch-subj-pill" data-subj="미적분" onclick="selectStitchSubjectPill('미적분')" type="button">미적분</button>
+            <button class="stitch-subj-pill" data-subj="기하" onclick="selectStitchSubjectPill('기하')" type="button">기하</button>
+            <button class="stitch-subj-pill" data-subj="확률과 통계" onclick="selectStitchSubjectPill('확률과 통계')" type="button">확률과 통계</button>
           </div>
         </div>
-
         <!-- Topic Pills -->
         <div class="flex flex-col gap-1.5 pt-1">
-          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold" data-i18n="examFinder.topicPrefix">주제별 탐색</span>
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">주제별 탐색</span>
           <div class="flex flex-wrap gap-1.5" id="topicChips">
-            <button type="button" class="topic-chip active" data-topic="" data-i18n="examFinder.topicAll">#전체보기</button>
-            <button type="button" class="topic-chip" data-topic="이차함수|포물선" data-i18n="examFinder.topicQuad">#이차함수·포물선</button>
-            <button type="button" class="topic-chip" data-topic="수열|점화식" data-i18n="examFinder.topicSeq">#수열</button>
-            <button type="button" class="topic-chip" data-topic="지수|로그" data-i18n="examFinder.topicExp">#지수·로그</button>
-            <button type="button" class="topic-chip" data-topic="삼각함수" data-i18n="examFinder.topicTrig">#삼각함수</button>
-            <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이" data-i18n="examFinder.topicCalc">#미적분</button>
-            <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합" data-i18n="examFinder.topicProb">#확률·통계</button>
+            <button type="button" class="topic-chip active" data-topic="">#전체보기</button>
+            <button type="button" class="topic-chip" data-topic="이차함수|포물선">#이차함수·포물선</button>
+            <button type="button" class="topic-chip" data-topic="수열|점화식">#수열</button>
+            <button type="button" class="topic-chip" data-topic="지수|로그">#지수·로그</button>
+            <button type="button" class="topic-chip" data-topic="삼각함수">#삼각함수</button>
+            <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이">#미적분</button>
+            <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합">#확률·통계</button>
           </div>
         </div>
 
-        <!-- 5 Precision Dropdowns + Keyword Search -->
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-2 border-t border-surface-container">
-          <div>
-            <label for="filterYear" id="lblFilterYear" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelYear">📅 학년도</label>
-            <select id="filterYear" class="exam-select" onchange="syncPillsFromSelects(); renderList()">
+        <!-- Compact Search & Detailed Filter Toggle -->
+        <div class="pt-1 border-t border-surface-container flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드, 문항 번호 검색..." data-i18n-placeholder="examFinder.searchPlaceholder" class="flex-1 h-9 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant border-0 focus:outline-none focus:bg-surface-container"/>
+            <button type="button" id="btnRandomQuizChallenge" onclick="startRandomQuiz()" class="h-9 px-3 rounded-lg bg-surface-container text-on-surface font-label-badge text-label-badge shrink-0 cursor-pointer border-0">🎲 랜덤 도전</button>
+          </div>
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5" id="filterModeTabBar">
+            <button type="button" class="filter-tab-btn active shrink-0" data-mode="all" onclick="switchFilterMode('all')">전체 (<span id="tabAllCount">-</span>)</button>
+            <button type="button" class="filter-tab-btn shrink-0" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">오답노트 (<span id="tabWrongCount">0</span>)</button>
+            <button type="button" class="filter-tab-btn shrink-0" data-mode="bookmarks" onclick="switchFilterMode('bookmarks')" id="tabBtnBookmarks">즐겨찾기 (<span id="tabBookmarkCount">0</span>)</button>
+            <button type="button" class="filter-tab-btn shrink-0" data-mode="pack" onclick="toggleLessonPackMode()" id="tabBtnLessonPack">교사용 수업 팩</button>
+          </div>
+          <!-- Precision Select Dropdowns -->
+          <div class="grid grid-cols-5 gap-1.5">
+            <select id="filterYear" class="exam-select" aria-label="학년도" onchange="syncPillsFromSelects(); renderList()">
               <option value="">전체 학년도</option>
               <option value="2027">2027학년도</option>
               <option value="2026">2026학년도</option>
@@ -1012,65 +707,48 @@ html, body {
               <option value="2021">2021학년도</option>
               <option value="2020">2020학년도 이전</option>
             </select>
-          </div>
-          <div>
-            <label for="filterGrade" id="lblFilterGrade" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelGrade">🎓 대상 학년</label>
-            <select id="filterGrade" class="exam-select" onchange="renderList()">
+            <select id="filterGrade" class="exam-select" aria-label="대상 학년" onchange="renderList()">
               <option value="">전체 학년</option>
               <option value="고3">고3 · N수</option>
               <option value="고2">고2</option>
               <option value="고1">고1</option>
             </select>
-          </div>
-          <div>
-            <label for="filterMonth" id="lblFilterMonth" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelMonth">🗓️ 시행월</label>
-            <select id="filterMonth" class="exam-select" onchange="renderList()">
+            <select id="filterMonth" class="exam-select" aria-label="시행월" onchange="renderList()">
               <option value="">전체 시행월</option>
-              <option value="11월">11월 수능 (대수능)</option>
-              <option value="9월">9월 모의평가 (평가원)</option>
-              <option value="6월">6월 모의평가 (평가원)</option>
-              <option value="10월">10월 학력평가</option>
-              <option value="7월">7월 학력평가</option>
-              <option value="4월">4월 학력평가</option>
-              <option value="3월">3월 학력평가</option>
+              <option value="11월">11월 수능</option>
+              <option value="9월">9월 모평</option>
+              <option value="6월">6월 모평</option>
+              <option value="10월">10월 학평</option>
+              <option value="7월">7월 학평</option>
+              <option value="4월">4월 학평</option>
+              <option value="3월">3월 학평</option>
             </select>
-          </div>
-          <div>
-            <label for="filterSubject" id="lblFilterSubject" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelSubject">📐 선택과목</label>
-            <select id="filterSubject" class="exam-select" onchange="syncPillsFromSelects(); renderList()">
+            <select id="filterSubject" class="exam-select" aria-label="선택과목" onchange="syncPillsFromSelects(); renderList()">
               <option value="">전체 과목</option>
-              <option value="공통(수학I·II)">공통 (수학I·II)</option>
+              <option value="공통(수학I·II)">공통(수학I·II)</option>
               <option value="미적분">미적분</option>
               <option value="기하">기하</option>
               <option value="확률과 통계">확률과 통계</option>
-              <option value="공통수학">공통수학 (고1)</option>
+              <option value="공통수학">공통수학</option>
+            </select>
+            <select id="filterNum" class="exam-select" aria-label="문항 번호" onchange="renderList()">
+              <option value="">전체 번호</option>
             </select>
           </div>
-          <div class="col-span-2 sm:col-span-1">
-            <label for="filterNum" id="lblFilterNum" class="font-label-badge text-[10px] text-on-surface-variant block mb-1" data-i18n="examFinder.labelNum">🔢 문항 번호</label>
-            <select id="filterNum" class="exam-select" onchange="renderList()">
-              <option value="">전체 번호 (1~30)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Search Input -->
-        <div class="relative">
-          <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드(포물선, 수열, 미분, 확률 등), 슬러그 직접 검색..." data-i18n-placeholder="examFinder.searchPlaceholder" class="w-full h-10 px-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary focus:bg-white transition-colors"/>
         </div>
       </div>
 
-      <!-- Dynamic Quiz Question Cards List (#list) -->
-      <div class="list mt-1" id="list">
-        <div class="rounded-xl bg-surface-container-lowest p-8 text-center text-on-surface-variant shadow-sm col-span-full">
+      <!-- Quiz Question Cards List (Single-Column Vertical Flow matching screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+      <div class="flex flex-col gap-space-sm mt-1" id="list">
+        <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm text-center text-on-surface-variant">
           게시판을 불러오는 중…
         </div>
       </div>
     </div>
 
-    <!-- Interactive Teacher Lesson Pack Notification Pill (Stitch Section) -->
+    <!-- Interactive Teacher Lesson Pack Floating Notification Pill -->
     <div class="px-margin mt-space-md">
-      <div class="rounded-xl bg-primary-container text-on-primary-container p-space-md shadow-md flex items-center justify-between gap-space-sm flex-wrap">
+      <div class="rounded-xl bg-primary-container text-on-primary-container p-space-md shadow-md flex items-center justify-between gap-space-sm">
         <div class="flex items-center gap-space-sm min-w-0">
           <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined text-secondary-container text-[22px]">backpack</span>
@@ -1080,27 +758,21 @@ html, body {
             <span class="font-body-sm text-body-sm text-white/70 truncate">학생들에게 링크 1개로 오늘 수업 문항 제공</span>
           </div>
         </div>
-        <button type="button" onclick="toggleLessonPackMode()" class="h-9 px-3.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold shrink-0 flex items-center gap-1 cursor-pointer border-0">
+        <button onclick="toggleLessonPackMode()" class="h-9 px-3 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold shrink-0 flex items-center gap-1 cursor-pointer border-0" type="button">
           수업 팩 생성
         </button>
       </div>
     </div>
 
-    <!-- External Curated Collections & Download Repository (Stitch Section) -->
+    <!-- External Curated Collections & Download Repository -->
     <div class="px-margin mt-space-lg flex flex-col gap-space-sm">
-      <div class="flex items-center justify-between flex-wrap gap-2">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-secondary text-[22px]">folder_special</span>
-          <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">수학자료실 공인 학습 컬렉션</h2>
-        </div>
-        <button type="button" onclick="openMin7014ExplorerModal()" class="h-8 px-3 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-label-badge font-bold flex items-center gap-1 cursor-pointer border-0">
-          <span class="material-symbols-outlined text-[15px]">search</span>
-          3,400+ 동적 기하 1초 검색
-        </button>
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-secondary text-[22px]">folder_special</span>
+        <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">수학자료실 공인 학습 컬렉션</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+      <div class="grid grid-cols-1 gap-2.5">
         <!-- Collection 1: GeoGebra Tube -->
-        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.geogebra.org/u/min7014" rel="noopener noreferrer" target="_blank">
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.geogebra.org/u/min7014" rel="noopener noreferrer" target="_blank">
           <div class="flex items-center gap-3">
             <div class="w-11 h-11 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
               <span class="material-symbols-outlined text-secondary text-[24px]">view_in_ar</span>
@@ -1113,7 +785,7 @@ html, body {
           <span class="material-symbols-outlined text-on-surface-variant text-[20px]">open_in_new</span>
         </a>
         <!-- Collection 2: AlgeoMath -->
-        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.algeomath.kr/algeo/algeomath/doc/view?id=ea07074cf37811e889430200634b0001" rel="noopener noreferrer" target="_blank">
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.algeomath.kr" rel="noopener noreferrer" target="_blank">
           <div class="flex items-center gap-3">
             <div class="w-11 h-11 rounded-lg bg-status-emerald/10 flex items-center justify-center shrink-0">
               <span class="material-symbols-outlined text-status-emerald text-[24px]">calculate</span>
@@ -1126,7 +798,7 @@ html, body {
           <span class="material-symbols-outlined text-on-surface-variant text-[20px]">open_in_new</span>
         </a>
         <!-- Collection 3: PDF Archive -->
-        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm border border-surface-glass-border flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://min7014.github.io/2019080802.html" rel="noopener noreferrer" target="_blank">
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://min7014.github.io/2019080802.html" rel="noopener noreferrer" target="_blank">
           <div class="flex items-center gap-3">
             <div class="w-11 h-11 rounded-lg bg-status-amber/10 flex items-center justify-center shrink-0">
               <span class="material-symbols-outlined text-status-amber text-[24px]">menu_book</span>
@@ -1141,21 +813,19 @@ html, body {
       </div>
     </div>
 
-    <!-- Clean Minimalist Footer Section (Stitch Section) -->
-    <footer class="px-margin mt-space-xl pt-space-md pb-6 flex flex-col items-center text-center gap-2 border-t border-surface-container">
-      <div class="flex items-center gap-2 text-on-surface-variant font-label-badge text-label-badge flex-wrap justify-center">
-        <a class="hover:underline text-on-surface-variant no-underline" href="https://min7014.github.io/" target="_blank" rel="noopener" data-i18n="footer.home">공식 웹사이트</a>
+    <!-- Clean Minimalist Footer Section -->
+    <div class="px-margin mt-space-xl pt-space-md pb-6 flex flex-col items-center text-center gap-2">
+      <div class="flex items-center gap-2 text-on-surface-variant font-label-badge text-label-badge">
+        <a class="hover:underline text-on-surface-variant no-underline" href="https://min7014.github.io/">공식 웹사이트</a>
         <span>·</span>
-        <a class="hover:underline text-on-surface-variant no-underline" href="dashboard.html" data-i18n="nav.dashboard">실시간 관제 대시보드</a>
+        <a class="hover:underline text-on-surface-variant no-underline" href="dashboard.html">실시간 관제 대시보드</a>
         <span>·</span>
-        <a class="hover:underline text-on-surface-variant no-underline" href="offline/index.html" data-i18n="nav.offlineVault">오프라인 보관함</a>
-        <span>·</span>
-        <a class="hover:underline text-on-surface-variant no-underline" href="privacy.html" data-i18n="footer.privacy">개인정보처리방침</a>
+        <a class="hover:underline text-on-surface-variant no-underline" href="privacy.html">개인정보처리방침</a>
       </div>
-      <p class="font-body-sm text-[11px] text-on-surface-variant max-w-md" data-i18n="footer.collabDesc">
+      <p class="font-body-sm text-[11px] text-on-surface-variant max-w-xs">
         © mathedu · 수학자료실. 3,400+ 시각적 수학 증명과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평.
       </p>
-    </footer>
+    </div>
 
   </div>
 </main>
@@ -1170,37 +840,29 @@ html, body {
     </div>
   </div>
   <div class="flex gap-2 items-center flex-wrap">
-    <button type="button" onclick="createLessonPackAction('copy')" class="h-9 px-3.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold cursor-pointer border-0">
-      📋 학생 배포 링크 복사
-    </button>
-    <button type="button" onclick="createLessonPackAction('qr')" class="h-9 px-3.5 rounded-lg bg-white/10 text-white font-label-badge text-label-badge font-bold cursor-pointer border border-white/20">
-      🖥️ 칠판 대형 QR
-    </button>
-    <button type="button" onclick="createLessonPackAction('start')" class="h-9 px-3.5 rounded-lg bg-status-emerald text-white font-label-badge text-label-badge font-bold cursor-pointer border-0">
-      ▶️ 1번 바로 풀기
-    </button>
+    <button type="button" onclick="createLessonPackAction('copy')" class="h-9 px-3.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold cursor-pointer border-0">📋 링크 복사</button>
+    <button type="button" onclick="createLessonPackAction('qr')" class="h-9 px-3.5 rounded-lg bg-white/10 text-white font-label-badge text-label-badge font-bold cursor-pointer border border-white/20">🖥️ 칠판 QR</button>
+    <button type="button" onclick="createLessonPackAction('start')" class="h-9 px-3.5 rounded-lg bg-status-emerald text-white font-label-badge text-label-badge font-bold cursor-pointer border-0">▶️ 바로 풀기</button>
     <button type="button" onclick="toggleLessonPackMode(false)" class="bg-transparent border-0 text-white/70 text-lg cursor-pointer px-1.5">✕</button>
   </div>
 </div>
 
 <!-- 🌐 min7014 3,400+ 동적 기하 스마트 탐색관 모달 -->
 <div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(15,23,42,.75);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;">
-  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
-    <div class="p-5 border-b border-surface-container flex justify-between items-center">
+  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
+    <div class="p-4 px-5 border-b border-surface-container flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <img src="assets/favicon.png" alt="수학자료실" class="w-9 h-9 rounded-lg bg-white p-1 border border-surface-variant object-contain"/>
+        <img src="assets/favicon.png" alt="수학자료실" class="w-8 h-8 rounded-lg bg-white p-0.5 border border-surface-variant object-contain"/>
         <div>
-          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">
-            수학자료실 동적 기하 탐색관
-          </h2>
+          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">수학자료실 동적 기하 탐색관</h2>
           <div class="font-body-sm text-body-sm text-on-surface-variant">3,400+ GeoGebra 인터랙티브 앱렛, 개념 증명 PDF &amp; 영상 1초 검색</div>
         </div>
       </div>
       <button type="button" onclick="closeMin7014ExplorerModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center cursor-pointer border-0 text-lg">✕</button>
     </div>
     <div class="p-4 px-5 border-b border-surface-container bg-surface-container-low">
-      <input type="text" id="min7014SearchInput" placeholder="🔍 개념 검색 (예: 타원, 포물선, 단델린, 피타고라스, 삼각함수, 매듭, AlgeoMath 등)..." class="w-full h-11 px-4 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
-      <div class="flex gap-1.5 flex-wrap mt-2.5" id="min7014ModalChips">
+      <input type="text" id="min7014SearchInput" placeholder="🔍 개념 검색 (예: 타원, 포물선, 단델린, 피타고라스, 삼각함수, 매듭, AlgeoMath 등)..." class="w-full h-10 px-3.5 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
+      <div class="flex gap-1.5 flex-wrap mt-2" id="min7014ModalChips">
         <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체</button>
         <button type="button" class="topic-chip" onclick="setMin7014Chip('타원|쌍곡선|포물선|원뿔곡선', this)">원뿔곡선</button>
         <button type="button" class="topic-chip" onclick="setMin7014Chip('피타고라스', this)">피타고라스</button>
@@ -1209,19 +871,19 @@ html, body {
         <button type="button" class="topic-chip" onclick="setMin7014Chip('미분|적분', this)">미적분</button>
       </div>
     </div>
-    <div id="min7014ResultsList" class="flex-1 overflow-y-auto p-5 flex flex-col gap-2.5 bg-surface">
+    <div id="min7014ResultsList" class="flex-1 overflow-y-auto p-4 px-5 flex flex-col gap-2 bg-surface">
       <div class="text-center p-10 text-on-surface-variant">자료를 불러오는 중...</div>
     </div>
-    <div class="p-3.5 px-5 bg-surface-container-lowest border-t border-surface-container flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant">
+    <div class="p-3 px-5 bg-surface-container-lowest border-t border-surface-container flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant">
       <div>총 <b id="min7014ResultsCount" class="text-secondary">0</b>개 자료 검색됨</div>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="text-secondary font-bold no-underline hover:underline">🌐 공식 웹사이트 전체 방문 ➔</a>
     </div>
   </div>
 </div>
 
-<!-- Fixed Bottom Navigation Bar (Stitch Mobile & Quick Access Bar) -->
-<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-surface-glass-border" data-active-classes="text-secondary font-semibold">
-  <div class="max-w-5xl mx-auto flex items-center justify-around h-16 px-space-xs">
+<!-- Fixed Bottom Navigation Bar (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]" data-active-classes="text-secondary font-semibold">
+  <div class="max-w-[768px] mx-auto flex items-center justify-around h-16 px-space-xs">
     <a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 transition-colors text-secondary font-semibold no-underline" data-path="home" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
       <span class="material-symbols-outlined text-[22px]">home</span>
       <span class="font-body-sm text-body-sm leading-none">홈</span>
@@ -1230,18 +892,18 @@ html, body {
       <span class="material-symbols-outlined text-[22px]">quiz</span>
       <span class="font-body-sm text-body-sm leading-none">디딤돌 퀴즈</span>
     </a>
-    <button type="button" onclick="openMin7014ExplorerModal()" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors bg-transparent border-0 cursor-pointer" data-path="geogebra-3d-explorer">
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="geogebra-3d-explorer" href="#" onclick="openMin7014ExplorerModal();return false;">
       <span class="material-symbols-outlined text-[22px]">view_in_ar</span>
       <span class="font-body-sm text-body-sm leading-none">동적 기하관</span>
-    </button>
+    </a>
     <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="classroom-and-qr" href="create.html">
       <span class="material-symbols-outlined text-[22px]">qr_code_scanner</span>
       <span class="font-body-sm text-body-sm leading-none">교사용 출제</span>
     </a>
-    <button type="button" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal()" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors bg-transparent border-0 cursor-pointer" data-path="my-room">
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="my-room" href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
       <span class="material-symbols-outlined text-[22px]">folder_special</span>
       <span class="font-body-sm text-body-sm leading-none">마이룸</span>
-    </button>
+    </a>
   </div>
 </nav>
 
@@ -2009,112 +1671,65 @@ function toggleMathStory() {
 
     for (var i = 0; i < filtered.length; i++) {
       var item = filtered[i];
-      var rawTitle = item.title || item.slug || '';
-      var cleanTitle = rawTitle.replace(/^\[[^\]]+\]\s*/, '').trim() || rawTitle;
-      var title = escapeHtml(cleanTitle);
-      var fullTitleAttr = escapeHtml(rawTitle);
+      var title = escapeHtml(item.title || item.slug);
+      var time = escapeHtml(item.time || '');
       var slug = escapeHtml(item.slug);
 
-      // Stitch Top Left Pills: Exam Pill + Subject/Number Pill
-      var examPillText = '';
-      var isCsat = false;
-      if (item.examYear && item.month) {
-        var mShort = item.month === '11월' ? (isEn ? 'CSAT' : '대수능') :
-                     (item.month === '9월' || item.month === '6월') ? (isEn ? item.month + ' Mock' : item.month + ' 모평') :
-                     (isEn ? item.month + ' Exam' : item.month + ' 학평');
-        isCsat = (item.month === '11월');
-        examPillText = item.examYear + ' · ' + mShort;
-      } else if (item.examYear) {
-        examPillText = isEn ? (item.examYear + ' AY') : (item.examYear + '학년도');
-      } else {
-        examPillText = isEn ? 'CSAT · Mock' : '수능 · 모평';
-      }
-
-      var subjShort = item.subject || '';
-      if (subjShort.indexOf('공통') !== -1) subjShort = isEn ? 'Common' : '공통';
-      else if (subjShort.indexOf('확률') !== -1) subjShort = isEn ? 'Prob&Stat' : '확통';
-      else if (subjShort.indexOf('미적') !== -1) subjShort = isEn ? 'Calculus' : '미적분';
-      else if (subjShort.indexOf('기하') !== -1) subjShort = isEn ? 'Geometry' : '기하';
-      var qNumText = item.qNum ? (isEn ? ('#' + item.qNum) : (item.qNum + '번')) : '';
-      var subjNumPillText = [subjShort, qNumText].filter(Boolean).join(' ') || (isEn ? 'Stepping Stone' : '디딤돌 문항');
-
-      // Stitch Top Right Scaffolding Feature Badge
-      var isGeo = (rawTitle.indexOf('기하') !== -1 || rawTitle.indexOf('타원') !== -1 || rawTitle.indexOf('포물선') !== -1 || rawTitle.indexOf('쌍곡선') !== -1 || rawTitle.indexOf('원뿔') !== -1 || rawTitle.indexOf('벡터') !== -1 || (item.subject && item.subject.indexOf('기하') !== -1));
-      var rightBadgeHtml = '';
-      if (isGeo) {
-        rightBadgeHtml = '<span class="flex items-center gap-0.5 font-label-badge text-label-badge text-status-emerald font-semibold"><span class="material-symbols-outlined text-[14px]">view_in_ar</span>' + (isEn ? 'Dandelin & 3D' : '단델린 구 연계') + '</span>';
-      } else if (Number(item.qNum) >= 20 || Number(item.qNum) === 15) {
-        rightBadgeHtml = '<span class="flex items-center gap-0.5 font-label-badge text-label-badge text-status-amber font-semibold"><span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>' + (isEn ? '5~8 Step Build-up' : '단계별 빌드업') + '</span>';
-      } else {
-        rightBadgeHtml = '<span class="flex items-center gap-0.5 font-label-badge text-label-badge text-on-surface-variant font-semibold"><span class="material-symbols-outlined text-[14px]">layers</span>' + (isEn ? 'Concept Steps' : '개념 디딤돌') + '</span>';
-      }
-
-      // Pedagogical 2-line preview description matching Stitch screen bc0f63eb3a354cee8f964ce2bc461f3b
-      var tagList = Array.isArray(item.tags) ? item.tags.filter(function(t) { return t && !/^[0-9]+번$/.test(t) && t !== item.subject; }) : [];
-      var tagPreview = tagList.slice(0, 3).join(', ');
-      var descText = '';
-      if (isEn) {
-        descText = 'Step-by-step scaffolding from elementary intuition (Step 1) to full CSAT mastery with visual diagrams' + (tagPreview ? (' · Core concepts: ' + tagPreview) : '') + '.';
-      } else {
-        descText = (tagPreview ? ('핵심 개념(' + tagPreview + ')을 ') : '핵심 수학 원리를 ') + '초등 눈높이 기초 직관(1단계)부터 본문항 완주까지 도식화 흐름도와 시각적 도형으로 차근차근 해결합니다.';
-      }
-
-      // Deterministic completion & view metrics for visual consistency with Stitch card footer
-      var hashNum = 0;
-      for (var cIdx = 0; cIdx < slug.length; cIdx++) {
-        hashNum = ((hashNum << 5) - hashNum + slug.charCodeAt(cIdx)) | 0;
-      }
-      hashNum = Math.abs(hashNum);
-      var completionRate = 82 + (hashNum % 15);
-      var viewCount = (1200 + (hashNum % 3400)).toLocaleString();
-
       var solved = solvedMap[slug];
-      var solveBadge = '';
       var solveBtnText = tBtnSolve;
+      var statusBadgeHtml = '<span class="font-label-badge text-label-badge text-on-surface-variant flex items-center gap-0.5"><span class="material-symbols-outlined text-[16px] text-status-emerald">check_circle</span>초등 눈높이 디딤돌</span>';
 
       if (solved) {
         if (solved.completed) {
-          solveBadge = '<span class="px-2 py-0.5 rounded bg-status-emerald/15 text-status-emerald font-label-badge text-label-badge font-bold">' + tBadgeMastered + '</span>';
+          statusBadgeHtml = '<span class="font-label-badge text-label-badge text-status-emerald font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[16px] text-status-emerald">check_circle</span>' + tBadgeMastered + ' (100%)</span>';
           solveBtnText = tBtnReSolve;
         } else {
           var pct = solved.totalSteps > 0 ? Math.round((solved.stepDone / solved.totalSteps) * 100) : 0;
-          solveBadge = '<span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-badge text-label-badge font-bold">⚡ ' + solved.stepDone + '/' + solved.totalSteps + ' (' + pct + '%)</span>';
+          statusBadgeHtml = '<span class="font-label-badge text-label-badge text-secondary font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>진행율 ' + pct + '% (' + solved.stepDone + '/' + solved.totalSteps + ')</span>';
           solveBtnText = tBtnResume;
         }
       }
 
+      var badge1 = (item.examYear ? item.examYear : '수능·모평') + (item.month ? (' · ' + item.month) : '');
+      var badge2 = (item.subject ? item.subject : '공통') + (item.qNum ? (' ' + item.qNum + '번') : '');
+      var isGeom = (item.subject === '기하') || title.includes('타원') || title.includes('포물선') || title.includes('쌍곡선') || title.includes('벡터') || title.includes('공간');
+      var rightTagHtml = isGeom
+        ? '<span class="font-label-badge text-label-badge text-status-emerald font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">view_in_ar</span>단델린·기하 연계</span>'
+        : '<span class="font-label-badge text-label-badge text-status-amber font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">stairs</span>단계별 빌드업</span>';
+
+      var descText = isEn
+        ? 'Step-by-step interactive scaffolding from elementary intuition to CSAT mastery with visual geometric proofs and diagrams.'
+        : '초등 기초 직관 1단계부터 수능 본문항 해결까지 차근차근 디딤돌 사다리로 해체하여 도식화 흐름도와 시각적 도형으로 풀이합니다.';
+
       var isBm = window.MatheduGame && window.MatheduGame.isBookmarked ? window.MatheduGame.isBookmarked(slug) : false;
       var bmTitle = isBm ? (isEn ? 'Remove from Bookmarks' : '즐겨찾기 해제') : (isEn ? 'Add to Bookmarks' : '즐겨찾기 추가');
-      var examPillClass = isCsat ? 'bg-accent-indigo/15 text-accent-indigo' : 'bg-secondary/10 text-secondary';
 
-      html += '<div class="card" data-slug="' + slug + '">';
-      html += '  <div class="flex flex-col gap-1.5">';
-      html += '    <div class="flex items-center justify-between gap-2 flex-wrap">';
-      html += '      <div class="flex items-center gap-1.5 flex-wrap">';
+      html += '<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2" data-slug="' + slug + '">';
+      html += '  <div class="flex items-center justify-between gap-2 flex-wrap">';
+      html += '    <div class="flex items-center gap-1.5 flex-wrap">';
       if (activeFilterMode === 'pack') {
         var isChecked = selectedPackSlugs.indexOf(slug) !== -1;
-        html += '        <input type="checkbox" class="card-pack-checkbox" onchange="togglePackSelect(\'' + slug + '\', this.checked)" ' + (isChecked ? 'checked' : '') + '>';
+        html += '      <input type="checkbox" class="card-pack-checkbox" onchange="togglePackSelect(\'' + slug + '\', this.checked)" ' + (isChecked ? 'checked' : '') + '>';
       }
-      html += '        <span class="px-2 py-0.5 rounded ' + examPillClass + ' font-label-badge text-label-badge font-semibold">' + escapeHtml(examPillText) + '</span>';
-      html += '        <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-badge text-label-badge font-semibold">' + escapeHtml(subjNumPillText) + '</span>';
-      if (solveBadge) html += solveBadge;
-      html += '      </div>';
-      html += '      <div class="flex items-center gap-1.5">';
-      html += '        ' + rightBadgeHtml;
-      html += '        <button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';
-      html += '      </div>';
+      html += '      <span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-badge text-label-badge font-bold">' + escapeHtml(badge1) + '</span>';
+      html += '      <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-badge text-label-badge">' + escapeHtml(badge2) + '</span>';
       html += '    </div>';
-      html += '    <a class="title mt-0.5" href="board/' + slug + '.html" title="' + fullTitleAttr + '">' + title + '</a>';
-      html += '    <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 m-0 leading-relaxed">' + escapeHtml(descText) + '</p>';
+      html += '    <div class="flex items-center gap-1.5">';
+      html +=        rightTagHtml;
+      html += '      <button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';
+      html += '    </div>';
       html += '  </div>';
-      html += '  <div class="card-actions mt-1">';
-      html += '    <div class="flex items-center gap-2.5 flex-wrap text-on-surface-variant font-label-code text-body-sm">';
-      html += '      <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-status-emerald">check_circle</span>' + (isEn ? ('Rate ' + completionRate + '%') : ('완료율 ' + completionRate + '%')) + '</span>';
-      html += '      <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">visibility</span>' + viewCount + (isEn ? '' : '회') + '</span>';
-      html += '      <button type="button" class="btn-launch-class !py-1 !px-2 !text-[11px]" onclick="openClassCreatorModal(\'' + slug + '\')" title="교사용 수업 QR 생성">' + tBtnLaunch + '</button>';
-      html += '      <a class="btn-offline !py-1 !px-2 !text-[11px]" href="offline/' + slug + '.html" download title="' + tBtnOfflineTitle + '">' + tBtnOffline + '</a>';
+      html += '  <h3 class="font-headline-sm text-[16px] text-on-surface font-bold leading-snug m-0">';
+      html += '    <a href="board/' + slug + '.html" class="text-on-surface no-underline hover:text-secondary transition-colors">' + title + '</a>';
+      html += '  </h3>';
+      html += '  <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 m-0">' + descText + '</p>';
+      html += '  <div class="flex items-center justify-between pt-2 gap-2 flex-wrap">';
+      html += '    <div class="flex items-center gap-2 flex-wrap">';
+      html +=        statusBadgeHtml;
+      html += '      <button type="button" onclick="openClassCreatorModal(\'' + slug + '\')" class="font-label-badge text-label-badge text-on-surface-variant hover:text-secondary bg-transparent border-0 cursor-pointer flex items-center gap-0.5 p-0"><span class="material-symbols-outlined text-[15px]">co_present</span>' + tBtnLaunch.replace('🚀 ', '') + '</button>';
+      html += '      <a href="offline/' + slug + '.html" download title="' + tBtnOfflineTitle + '" class="font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface no-underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[15px]">download</span>' + tBtnOffline.replace('📥 ', '') + '</a>';
       html += '    </div>';
-      html += '    <a class="btn-solve shrink-0" href="board/' + slug + '.html"><span>' + solveBtnText + '</span><span class="material-symbols-outlined text-[15px]">arrow_forward</span></a>';
+      html += '    <a class="h-9 px-3.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="board/' + slug + '.html">' + solveBtnText + '</a>';
       html += '  </div>';
       html += '</div>';
     }
