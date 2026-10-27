@@ -157,7 +157,7 @@
       var h3 = trackFull.querySelector('h3');
       if (h3) {
         var roomBadge = document.createElement('div');
-        roomBadge.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.35);color:#7cc4ff;border-radius:20px;padding:5px 16px;font-size:0.9rem;margin-bottom:14px;font-weight:700;box-shadow:0 0 16px rgba(124,196,255,.2);animation:popIn .3s ease';
+        roomBadge.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:rgba(0,99,152,.10);border:1px solid rgba(0,99,152,.28);color:#006398;border-radius:20px;padding:5px 16px;font-size:0.9rem;margin-bottom:14px;font-weight:700;animation:popIn .3s ease';
         roomBadge.innerHTML = bilingual('🏫 <b>[' + escapeHtml(rId) + ']</b> 수업에 참여합니다', '🏫 Joining Class <b>[' + escapeHtml(rId) + ']</b>');
         h3.parentNode.insertBefore(roomBadge, h3);
       }
@@ -176,7 +176,7 @@
     var topbar = document.querySelector('.topbar') || document.querySelector('.navbar');
     if (topbar) {
       var activeRoomBadge = document.createElement('div');
-      activeRoomBadge.style.cssText = 'margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:rgba(62,220,151,.15);border:1px solid rgba(62,220,151,.35);color:#3ddc97;border-radius:10px;padding:6px 14px;font-size:0.85rem;font-weight:700;';
+      activeRoomBadge.style.cssText = 'margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:#ecfdf5;border:1px solid #10b981;color:#047857;border-radius:10px;padding:6px 14px;font-size:0.85rem;font-weight:700;';
       activeRoomBadge.innerHTML = bilingual('🟢 <b>' + escapeHtml(rId) + '</b> 수업 참여 중', '🟢 In Class <b>' + escapeHtml(rId) + '</b>');
       topbar.appendChild(activeRoomBadge);
     }
@@ -197,7 +197,7 @@
     if (!existingLangSwitcher) {
       var langSwitcher = document.createElement('div');
       langSwitcher.id = 'trackFullLangSwitcher';
-      langSwitcher.style.cssText = 'position:absolute;top:18px;right:20px;z-index:100;display:inline-flex;align-items:center;background:rgba(15,23,42,.85);border:1.5px solid rgba(124,196,255,.35);border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)';
+      langSwitcher.style.cssText = 'position:absolute;top:18px;right:20px;z-index:100;display:inline-flex;align-items:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 2px 8px rgba(19,27,46,.06);';
       langSwitcher.innerHTML = 
         '<button type="button" id="btnTrackFullLangKo" onclick="window.setBoardLanguage(\'ko\')" style="background:' + (curLang === 'en' ? 'transparent' : '#38bdf8') + ';color:' + (curLang === 'en' ? '#cbd5e1' : '#0b1020') + ';border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:' + (curLang === 'en' ? '700' : '800') + ';cursor:pointer;transition:.15s">🇰🇷 한국어</button>' +
         '<button type="button" id="btnTrackFullLangEn" onclick="window.setBoardLanguage(\'en\')" style="background:' + (curLang === 'en' ? '#38bdf8' : 'transparent') + ';color:' + (curLang === 'en' ? '#0b1020' : '#cbd5e1') + ';border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:' + (curLang === 'en' ? '800' : '700') + ';cursor:pointer;transition:.15s">🌐 English</button>';
@@ -208,9 +208,9 @@
     if (!existingCenterSwitcher) {
       var centerSwitcher = document.createElement('div');
       centerSwitcher.id = 'modalCenterLangSwitcher';
-      centerSwitcher.style.cssText = 'margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,23,42,.92);border:1.5px solid rgba(124,196,255,.5);border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10';
+      centerSwitcher.style.cssText = 'margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 2px 10px rgba(19,27,46,.06);z-index:10';
       centerSwitcher.innerHTML = 
-        '<span style="font-size:0.83rem;color:#cbd5e1;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px">' +
+        '<span style="font-size:0.83rem;color:#45464d;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px">' +
           '<span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span>' +
         '</span>' +
         '<button type="button" id="btnModalCenterLangKo" onclick="window.setBoardLanguage(\'ko\')" style="background:' + (curLang === 'en' ? 'transparent' : 'linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)') + ';color:' + (curLang === 'en' ? '#cbd5e1' : '#0b1020') + ';border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:' + (curLang === 'en' ? '700' : '800') + ';cursor:pointer;transition:all .18s;' + (curLang === 'en' ? '' : 'box-shadow:0 2px 10px rgba(56,189,248,.45)') + '">🇰🇷 한국어</button>' +
@@ -278,7 +278,7 @@
         pinInput.setAttribute('data-en-placeholder', '4-digit PIN (optional)');
         pinInput.placeholder = isEnMode() ? '4-digit PIN (optional)' : '간편비번 4자리 (선택)';
         pinInput.maxLength = 12;
-        pinInput.style.cssText = 'background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 14px;font-size:1.05rem;max-width:170px;text-align:center;outline:none;';
+        pinInput.style.cssText = 'background:#ffffff;color:#1b1b1d;border:1.5px solid #c5c6cd;border-radius:10px;padding:12px 14px;font-size:1.05rem;max-width:170px;text-align:center;outline:none;';
         pinInput.autocomplete = 'current-password';
 
         // 시작하기 버튼 앞에 삽입
@@ -294,7 +294,7 @@
         });
 
         var tipDiv = document.createElement('div');
-        tipDiv.style.cssText = 'font-size:0.83rem;color:#7cc4ff;margin-top:12px;line-height:1.5;max-width:460px;text-align:center;word-break:keep-all';
+        tipDiv.style.cssText = 'font-size:0.83rem;color:#006398;margin-top:12px;line-height:1.5;max-width:460px;text-align:center;word-break:keep-all';
         tipDiv.innerHTML = bilingual(
           '💡 <b>비회원 안내:</b> [이름]과 [간편 비밀번호]를 넣으시면 나중에 같은 문제에 오더라도 <b>동일 학습자로 자동 인식</b>되어 이전 풀이를 복원하고 <b>[내가 푼 문제]</b>를 모아볼 수 있습니다. (비번 미입력 시 익명 풀이)',
           '💡 <b>Guest Notice:</b> Entering [Name] and [4-digit PIN] lets the system <b>recognize you automatically</b> when returning, restoring previous steps and tracking your <b>[Solved Problems]</b>. (Anonymous if left blank)'
@@ -331,27 +331,27 @@
 
     // 2. 하단 보조 액션 버튼 행 (내가 푼 문제 모아보기 + 회원 전환 + 오프라인 저장 + 교사 수업 개설)
     var actionRow = document.createElement('div');
-    actionRow.style.cssText = 'margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:540px;';
+    actionRow.style.cssText = 'margin-top:22px;padding-top:18px;border-top:1px solid #e4e2e4;display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:540px;';
 
     var solvedCount = solvedList.length;
 
     actionRow.innerHTML = 
       '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center">' +
-        '<button type="button" id="btnMyProblemsInModal" style="background:rgba(94,234,212,.15);border:1px solid rgba(94,234,212,.35);color:#5eead4;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+        '<button type="button" id="btnMyProblemsInModal" style="background:#ecfdf5;border:1px solid #a7f3d0;color:#047857;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
           bilingual('📂 내가 푼 문제 모아보기', '📂 My Solved Problems') + (solvedCount > 0 ? ' (' + solvedCount + ')' : '') +
         '</button>' +
         (!currentUser ? 
-          '<button type="button" id="btnUpgradeInModal" style="background:linear-gradient(90deg,rgba(124,196,255,.18),rgba(167,139,250,.18));border:1px solid rgba(124,196,255,.4);color:#c4b5fd;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+          '<button type="button" id="btnUpgradeInModal" style="background:#eef2ff;border:1px solid #c7d2fe;color:#4338ca;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
             bilingual('✨ 정식 회원 전환 / 가입', '✨ Upgrade to Member / Sign Up') +
           '</button>' : '') +
-        '<button type="button" id="btnDownloadOfflineInModal" style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.45);color:#38bdf8;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px" ' +
+        '<button type="button" id="btnDownloadOfflineInModal" style="background:#f0f7ff;border:1px solid #bae6fd;color:#0369a1;border-radius:10px;padding:9px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px" ' +
           'data-ko-title="인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장" data-en-title="Download standalone HTML that runs without internet" ' +
           'title="' + (isEnMode() ? 'Download standalone HTML that runs without internet' : '인터넷 연결 없이 단독으로 풀 수 있는 HTML 파일로 저장') + '">' +
           bilingual('📥 오프라인 저장', '📥 Offline Save') +
         '</button>' +
       '</div>' +
       '<div style="margin-top:4px">' +
-        '<button type="button" id="btnTeacherOpenInModal" style="background:rgba(124,196,255,.16);color:#7cc4ff;border:1px solid rgba(124,196,255,.4);border-radius:10px;padding:8px 18px;font-size:0.84rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+        '<button type="button" id="btnTeacherOpenInModal" style="background:#131b2e;color:#ffffff;border:1px solid #131b2e;border-radius:10px;padding:8px 18px;font-size:0.84rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
           bilingual('👩‍🏫 선생님 전용: 3초 수업 개설 (QR)', '👩‍🏫 Teacher Only: 3-Sec Class Launch (QR)') +
         '</button>' +
       '</div>';
@@ -481,7 +481,7 @@
 
     var banner = document.createElement('div');
     banner.id = 'problemResumeBanner';
-    banner.style.cssText = 'background:linear-gradient(90deg, rgba(62,220,151,.15), rgba(56,189,248,.15));border:1px solid rgba(62,220,151,.4);border-radius:12px;padding:12px 18px;margin:14px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;animation:fadeIn .3s ease;';
+    banner.style.cssText = 'background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:12px 18px;margin:14px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;animation:fadeIn .3s ease;';
 
     var pct = prev.totalSteps > 0 ? Math.round((prev.stepDone / prev.totalSteps) * 100) : 100;
     var statusText = prev.completed 
@@ -489,12 +489,12 @@
       : bilingual('⚡ 이전에 <b>' + prev.stepDone + '/' + prev.totalSteps + '단계 (' + pct + '%)</b>까지 풀이하셨습니다.', '⚡ Previously solved up to <b>Step ' + prev.stepDone + '/' + prev.totalSteps + ' (' + pct + '%)</b>.');
 
     banner.innerHTML = 
-      '<div style="font-size:0.88rem;color:#eef2ff;display:flex;align-items:center;gap:8px">' +
+      '<div style="font-size:0.88rem;color:#065f46;display:flex;align-items:center;gap:8px">' +
         '<span>📌</span>' +
         '<div>' + statusText + ' ' + bilingual('(정답: <b>' + prev.correct + '</b>문항)', '(Correct: <b>' + prev.correct + '</b>)') + '</div>' +
       '</div>' +
       '<div style="display:flex;gap:8px">' +
-        '<button type="button" onclick="MatheduAuth.showMyProblemsModal()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;border-radius:8px;padding:5px 12px;font-size:0.8rem;cursor:pointer;font-weight:700">' +
+        '<button type="button" onclick="MatheduAuth.showMyProblemsModal()" style="background:#ffffff;border:1px solid #10b981;color:#047857;border-radius:8px;padding:5px 12px;font-size:0.8rem;cursor:pointer;font-weight:700">' +
           bilingual('📂 내 서재', '📂 My Library') +
         '</button>' +
         '<button type="button" onclick="document.getElementById(\'problemResumeBanner\').remove()" style="background:transparent;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer">✕</button>' +
@@ -514,18 +514,18 @@
 
     var banner = document.createElement('div');
     banner.className = 'teacher-class-banner';
-    banner.style.cssText = 'background:linear-gradient(90deg, rgba(124,196,255,.14), rgba(167,139,250,.14));border:1px solid rgba(124,196,255,.35);border-radius:14px;padding:14px 18px;margin:16px 0 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)';
+    banner.style.cssText = 'background:#ffffff;border:1px solid #e4e2e4;border-left:4px solid #006398;border-radius:14px;padding:14px 18px;margin:16px 0 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(19,27,46,.05);';
 
     banner.innerHTML = 
       '<div>' +
-        '<div style="font-weight:800;font-size:1rem;color:#7cc4ff;display:flex;align-items:center;gap:6px">' +
+        '<div style="font-weight:800;font-size:1rem;color:#131b2e;display:flex;align-items:center;gap:6px">' +
           bilingual('👩‍🏫 이 문제로 학급 수업을 시작할 수 있습니다', '👩‍🏫 Start a Classroom Lesson with This Problem') +
         '</div>' +
-        '<div style="font-size:0.83rem;color:#aab4d4;margin-top:3px">' +
+        '<div style="font-size:0.83rem;color:#45464d;margin-top:3px">' +
           bilingual('회원 로그인 후 3초 만에 수업 코드를 만들고, 교실 칠판에 학생용 대형 QR코드를 띄워보세요.', 'Generate a class session code in 3 seconds and display a projector QR code on the blackboard.') +
         '</div>' +
       '</div>' +
-      '<button type="button" onclick="openClassCreatorModal(\'' + currentSlug + '\')" style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:10px;padding:10px 20px;font-size:0.9rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.35);transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
+      '<button type="button" onclick="openClassCreatorModal(\'' + currentSlug + '\')" style="background:#131b2e;color:#ffffff;border:none;border-radius:10px;padding:10px 20px;font-size:0.9rem;font-weight:800;cursor:pointer;box-shadow:0 2px 8px rgba(19,27,46,.15);transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
         bilingual('🚀 이 문제로 수업 열기 (QR / 대시보드)', '🚀 Open Classroom (QR / Dashboard)') +
       '</button>';
 
@@ -544,7 +544,7 @@
     if (document.getElementById('floatClassBtn')) return;
     var floatBtn = document.createElement('button');
     floatBtn.id = 'floatClassBtn';
-    floatBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:30px;padding:12px 22px;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 20px rgba(124,196,255,.45);display:flex;align-items:center;gap:8px;transition:.2s';
+    floatBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9998;background:#131b2e;color:#ffffff;border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:12px 22px;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(19,27,46,.22);display:flex;align-items:center;gap:8px;transition:.2s';
     floatBtn.innerHTML = bilingual('🚀 이 문제로 수업 열기', '🚀 Open Classroom');
     floatBtn.setAttribute('data-ko-title', '3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급 (회원 전용)');
     floatBtn.setAttribute('data-en-title', 'Instant class code & projector QR in 3 seconds (Teachers)');
@@ -566,11 +566,11 @@
       var libBtn = document.createElement('button');
       libBtn.id = 'btnMyLibraryTopbar';
       libBtn.className = 'tbtn navbtn';
-      libBtn.style.cssText = 'background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#eef2ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;text-decoration:none;';
+      libBtn.style.cssText = 'background:#ffffff;border:1px solid #e4e2e4;color:#1b1b1d;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;text-decoration:none;';
       
       function updateLibBtnText() {
         var count = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems().length : 0;
-        var badge = count > 0 ? ' <span style="background:rgba(124,196,255,.25);color:#7cc4ff;padding:1px 6px;border-radius:10px;font-size:0.75rem">' + count + '</span>' : '';
+        var badge = count > 0 ? ' <span style="background:rgba(0,99,152,.12);color:#006398;padding:1px 6px;border-radius:10px;font-size:0.75rem">' + count + '</span>' : '';
         libBtn.innerHTML = bilingual('📂 내가 푼 문제' + badge, '📂 Solved' + badge);
       }
       updateLibBtnText();
@@ -588,7 +588,7 @@
       var teacherBtn = document.createElement('button');
       teacherBtn.id = 'btnTeacherTopbar';
       teacherBtn.className = 'tbtn navbtn';
-      teacherBtn.style.cssText = 'background:linear-gradient(90deg,rgba(124,196,255,.2),rgba(167,139,250,.2));border:1px solid rgba(124,196,255,.4);color:#eef2ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      teacherBtn.style.cssText = 'background:#f0f7ff;border:1px solid rgba(0,99,152,.25);color:#006398;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
       teacherBtn.innerHTML = bilingual('🚀 수업 열기 (QR)', '🚀 Open Class (QR)');
       teacherBtn.setAttribute('data-ko-title', '선생님을 위한 3초 수업 생성 및 QR 발급 (회원 전용)');
       teacherBtn.setAttribute('data-en-title', '3-second class creation & QR code for teachers (Members)');
@@ -605,7 +605,7 @@
       var offlineBtn = document.createElement('button');
       offlineBtn.id = 'btnOfflineTopbar';
       offlineBtn.className = 'tbtn navbtn';
-      offlineBtn.style.cssText = 'background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.4);color:#7cc4ff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      offlineBtn.style.cssText = 'background:#ffffff;border:1px solid #e4e2e4;color:#006398;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
       offlineBtn.innerHTML = bilingual('📥 오프라인 저장', '📥 Save Offline');
       offlineBtn.setAttribute('data-ko-title', '인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일로 다운로드');
       offlineBtn.setAttribute('data-en-title', 'Download standalone offline HTML file that runs without internet');
@@ -623,13 +623,13 @@
       var bmBtn = document.createElement('button');
       bmBtn.id = 'btnBookmarkTopbar';
       bmBtn.className = 'tbtn navbtn';
-      bmBtn.style.cssText = 'background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.35);color:#fde68a;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      bmBtn.style.cssText = 'background:#fffbeb;border:1px solid #fde68a;color:#b45309;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
       
       function updateBmBtn() {
         var isBm = (window.MatheduGame && window.MatheduGame.isBookmarked) ? window.MatheduGame.isBookmarked(currentSlug) : false;
         bmBtn.innerHTML = isBm ? bilingual('★ 즐겨찾기됨', '★ Bookmarked') : bilingual('☆ 즐겨찾기', '☆ Bookmark');
-        bmBtn.style.background = isBm ? 'rgba(253,230,138,.28)' : 'rgba(253,230,138,.12)';
-        bmBtn.style.color = isBm ? '#fff' : '#fde68a';
+        bmBtn.style.background = isBm ? '#fef3c7' : '#fffbeb';
+        bmBtn.style.color = isBm ? '#92400e' : '#b45309';
       }
       updateBmBtn();
       bmBtn.onclick = function() {
@@ -647,7 +647,7 @@
       var printBtn = document.createElement('button');
       printBtn.id = 'btnPrintWorksheetTopbar';
       printBtn.className = 'tbtn navbtn';
-      printBtn.style.cssText = 'background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      printBtn.style.cssText = 'background:#ffffff;border:1px solid #e4e2e4;color:#1b1b1d;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
       printBtn.innerHTML = bilingual('🖨️ A4 학습지 인쇄', '🖨️ Print Worksheet');
       printBtn.setAttribute('data-ko-title', '교실 유인물 및 학생 필기 공간이 포함된 규격 A4 시험지 인쇄/PDF 저장');
       printBtn.setAttribute('data-en-title', 'Print standard A4 worksheet with student note area / Save PDF');
@@ -667,7 +667,7 @@
       var chalkBtn = document.createElement('button');
       chalkBtn.id = 'btnChalkboardModeTopbar';
       chalkBtn.className = 'tbtn navbtn';
-      chalkBtn.style.cssText = 'background:rgba(94,234,212,.12);border:1px solid rgba(94,234,212,.35);color:#5eead4;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
+      chalkBtn.style.cssText = 'background:#ecfdf5;border:1px solid #a7f3d0;color:#047857;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
       chalkBtn.innerHTML = bilingual('🖥️ 칠판 모드', '🖥️ Board Mode');
       chalkBtn.setAttribute('data-ko-title', '교실 칠판 판서 및 빔프로젝터 투사를 위한 초대형 폰트 & 고대비 뷰');
       chalkBtn.setAttribute('data-en-title', 'High-contrast large font view for classroom chalkboard / projector');
@@ -697,7 +697,7 @@
 
     var packBar = document.createElement('div');
     packBar.className = 'lesson-pack-nav-bar';
-    packBar.style.cssText = 'background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(124,196,255,.2));border:1.5px solid rgba(167,139,250,.45);border-radius:14px;padding:12px 18px;margin:12px 0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,.3);backdrop-filter:blur(16px);animation:matheduFadeIn .3s ease';
+    packBar.style.cssText = 'background:#eef2ff;border:1.5px solid #c7d2fe;border-radius:14px;padding:12px 18px;margin:12px 0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 2px 10px rgba(19,27,46,.05);animation:matheduFadeIn .3s ease';
 
     var prevSlug = curIdx > 0 ? slugs[curIdx - 1] : null;
     var nextSlug = curIdx < slugs.length - 1 ? slugs[curIdx + 1] : null;
@@ -717,7 +717,7 @@
       '<div style="display:flex;align-items:center;gap:10px">' +
         '<span style="font-size:1.2rem">🎒</span>' +
         '<div>' +
-          '<div style="font-size:0.92rem;font-weight:800;color:#c4b5fd">' +
+          '<div style="font-size:0.92rem;font-weight:800;color:#3730a3">' +
             bilingual('오늘의 수업 팩 진행 중 (문제 ' + (curIdx + 1) + ' / ' + slugs.length + ')', 'Lesson Pack in Progress (Problem ' + (curIdx + 1) + ' / ' + slugs.length + ')') +
           '</div>' +
           '<div style="display:flex;gap:4px;align-items:center;margin-top:4px">' + dotsHtml + '</div>' +
@@ -892,10 +892,10 @@
         '.mathedu-step-hidden { display: none !important; }\n' +
         '.mathedu-step-unlocked { animation: matheduStepFadeIn 0.35s ease-out forwards; }\n' +
         '@keyframes matheduStepFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }\n' +
-        '.mathedu-step-mode-switch { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,.08); border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; font-size: 0.78rem; font-weight: 700; color: var(--sub); cursor: pointer; transition: .15s; }\n' +
-        '.mathedu-step-mode-switch:hover { border-color: var(--accent); color: #fff; background: rgba(255,255,255,.14); }\n' +
-        '.mathedu-next-step-hint { background: linear-gradient(135deg, rgba(56,189,248,.08) 0%, rgba(129,140,248,.08) 100%); border: 1.5px dashed rgba(56,189,248,.35); border-radius: var(--radius); padding: 18px 22px; margin: 24px 0; text-align: center; color: #93c5fd; font-size: 0.92rem; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,.25); }\n' +
-        '.mathedu-step-progress-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,.18); color: #38bdf8; border: 1px solid rgba(56,189,248,.4); border-radius: 12px; padding: 2px 10px; font-size: 0.76rem; font-weight: 800; margin-bottom: 6px; }\n' +
+        '.mathedu-step-mode-switch { display: inline-flex; align-items: center; gap: 5px; background: #f0edef; border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; font-size: 0.78rem; font-weight: 700; color: var(--txt); cursor: pointer; transition: .15s; }\n' +
+        '.mathedu-step-mode-switch:hover { border-color: var(--accent); color: #fff; background: #131b2e; }\n' +
+        '.mathedu-next-step-hint { background: #f0f7ff; border: 1.5px dashed rgba(0,99,152,.35); border-radius: var(--radius); padding: 18px 22px; margin: 24px 0; text-align: center; color: #006398; font-size: 0.92rem; font-weight: 700; box-shadow: 0 2px 10px rgba(19,27,46,.04); }\n' +
+        '.mathedu-step-progress-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,99,152,.10); color: #006398; border: 1px solid rgba(0,99,152,.25); border-radius: 12px; padding: 2px 10px; font-size: 0.76rem; font-weight: 800; margin-bottom: 6px; }\n' +
         '.viral-share-card { display: none !important; }\n'; // 번잡한 바이럴 카드 숨김
       (document.head || document.documentElement).appendChild(st);
     }
@@ -1952,13 +1952,13 @@
     var card = document.createElement('div');
     card.id = 'matheduAltruisticShareCard';
     card.className = 'altruistic-share-card';
-    card.style.cssText = 'margin:32px 0 16px;background:linear-gradient(135deg,rgba(236,72,153,.12) 0%,rgba(168,85,247,.12) 100%);border:1.5px solid rgba(236,72,153,.4);border-radius:18px;padding:22px;color:#fff;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)';
+    card.style.cssText = 'margin:32px 0 16px;background:#ffffff;border:1.5px solid #f472b6;border-radius:18px;padding:22px;color:#1b1b1d;text-align:center;box-shadow:0 4px 20px rgba(19,27,46,.05)';
     card.innerHTML = 
       '<div style="font-size:2rem;margin-bottom:6px">💝</div>' +
-      '<h3 style="margin:0 0 6px;font-size:1.18rem;color:#f472b6">' +
+      '<h3 style="margin:0 0 6px;font-size:1.18rem;color:#db2777">' +
         bilingual('이 문제가 헷갈려하는 친구에게 디딤돌 풀이 선물하기', 'Share this Scaffolding Solution with Friends') +
       '</h3>' +
-      '<p style="font-size:0.88rem;color:#cbd5e1;line-height:1.6;max-width:540px;margin:0 auto 16px">' +
+      '<p style="font-size:0.88rem;color:#45464d;line-height:1.6;max-width:540px;margin:0 auto 16px">' +
         bilingual(
           '아무리 복잡한 수능 킬러 문제도 초등학생 눈높이 미세 디딤돌과 수학자료실(min7014)의 시각적 증명으로 보면 누구나 직관적으로 이해할 수 있습니다. 함께 공부하는 친구들에게 이 풀이를 선물해보세요!',
           'Complex exam problems become crystal clear with micro-scaffolding steps and visual proofs. Share this friendly learning gift with your classmates!'
@@ -1968,10 +1968,10 @@
         '<button type="button" onclick="window.shareAsGift()" style="background:linear-gradient(90deg,#ec4899,#a855f7);color:#fff;font-weight:800;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
           bilingual('🎁 친구에게 풀이 선물하기 (카톡/공유)', '🎁 Gift to Friend (Kakao/Share)') +
         '</button>' +
-        '<button type="button" onclick="window.shareAsChallenge()" style="background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.5);font-weight:700;padding:10px 18px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
+        '<button type="button" onclick="window.shareAsChallenge()" style="background:#fffbeb;color:#b45309;border:1px solid #fcd34d;font-weight:700;padding:10px 18px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
           bilingual('⚔️ 친구에게 도전장 보내기', '⚔️ Send Challenge to Friend') +
         '</button>' +
-        '<button type="button" onclick="window.copyCommunityScoreText()" style="background:rgba(255,255,255,.08);color:#e2e8f0;border:1px solid rgba(255,255,255,.2);font-weight:600;padding:10px 18px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
+        '<button type="button" onclick="window.copyCommunityScoreText()" style="background:#f6f3f5;color:#1b1b1d;border:1px solid #e4e2e4;font-weight:600;padding:10px 18px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.03)\'" onmouseout="this.style.transform=\'none\'">' +
           bilingual('📋 커뮤니티 자랑 텍스트 복사', '📋 Copy Community Text') +
         '</button>' +
       '</div>';
@@ -2024,7 +2024,7 @@
     if (btnKo && btnEn) {
       if (isEn) {
         btnKo.style.background = 'transparent';
-        btnKo.style.color = '#cbd5e1';
+        btnKo.style.color = '#45464d';
         btnKo.style.fontWeight = '700';
         btnEn.style.background = '#38bdf8';
         btnEn.style.color = '#0b1020';
@@ -2034,7 +2034,7 @@
         btnKo.style.color = '#0b1020';
         btnKo.style.fontWeight = '800';
         btnEn.style.background = 'transparent';
-        btnEn.style.color = '#cbd5e1';
+        btnEn.style.color = '#45464d';
         btnEn.style.fontWeight = '700';
       }
     }
@@ -2044,7 +2044,7 @@
     if (cKo && cEn) {
       if (isEn) {
         cKo.style.background = 'transparent';
-        cKo.style.color = '#cbd5e1';
+        cKo.style.color = '#45464d';
         cKo.style.fontWeight = '700';
         cKo.style.boxShadow = 'none';
         cEn.style.background = 'linear-gradient(135deg, #38bdf8 0%, #818cf8 100%)';
@@ -2057,7 +2057,7 @@
         cKo.style.fontWeight = '800';
         cKo.style.boxShadow = '0 2px 10px rgba(56,189,248,.45)';
         cEn.style.background = 'transparent';
-        cEn.style.color = '#cbd5e1';
+        cEn.style.color = '#45464d';
         cEn.style.fontWeight = '700';
         cEn.style.boxShadow = 'none';
       }

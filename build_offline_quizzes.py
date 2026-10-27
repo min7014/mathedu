@@ -476,22 +476,22 @@ def process_file(html_path, build_timestamp, build_version):
     # 3. 오프라인 단독 실행 배너 & 원본 주소 링크 카드 생성
     offline_banner = f"""
 <!-- 🌐 오프라인 단독 학습 배너 & 온라인 원본 문제 링크 안내 -->
-<div class="mathedu-offline-banner" style="background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(129,140,248,.18));border:2px solid #38bdf8;border-radius:16px;padding:18px 22px;margin:16px 0 24px;box-shadow:0 8px 30px rgba(0,0,0,.45);color:#fff;font-family:system-ui,sans-serif">
+<div class="mathedu-offline-banner" style="background:#ffffff;border:1px solid #e4e2e4;border-top:4px solid #006398;border-radius:16px;padding:18px 22px;margin:16px 0 24px;box-shadow:0 4px 20px rgba(19,27,46,.06);color:#1b1b1d;font-family:'Inter','Pretendard',system-ui,sans-serif">
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px">
-    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.25);border:1px solid #38bdf8;color:#38bdf8;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,99,152,.10);border:1px solid rgba(0,99,152,.25);color:#006398;border-radius:20px;padding:4px 14px;font-size:0.82rem;font-weight:800">
       <span class="bilingual-ko">📦 오프라인 단독 실행 파일 (인터넷 접속 없이 풀이 가능)</span>
       <span class="bilingual-en">📦 Standalone Offline Quiz (No Internet Required)</span>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
-      <button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;padding:3px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:.15s">
+      <button id="btnManualCheckUpdate" onclick="checkUpdateManual()" style="background:#f6f3f5;border:1px solid #e4e2e4;color:#45464d;padding:4px 12px;border-radius:14px;font-size:0.75rem;cursor:pointer;font-family:inherit;font-weight:700;transition:.15s">
         <span class="bilingual-ko">🔄 최신 버전 확인</span>
         <span class="bilingual-en">🔄 Check for Updates</span>
       </button>
-      <span style="font-size:0.78rem;color:#94a3b8">mathedu</span>
+      <span style="font-size:0.78rem;color:#45464d;font-weight:700">mathedu</span>
     </div>
   </div>
-  <div style="font-size:1.15rem;font-weight:800;color:#ffffff;margin-bottom:6px">{title}</div>
-  <div style="font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px">
+  <div style="font-size:1.15rem;font-weight:800;color:#131b2e;margin-bottom:6px;font-family:'Plus Jakarta Sans','Pretendard',sans-serif">{title}</div>
+  <div style="font-size:0.86rem;color:#45464d;line-height:1.5;margin-bottom:12px">
     <span class="bilingual-ko">이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
     보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.</span>
     <span class="bilingual-en">This file is a <b>standalone offline interactive math quiz</b> runnable in any browser without internet.<br>
@@ -499,34 +499,34 @@ def process_file(html_path, build_timestamp, build_version):
   </div>
 
   <!-- 🔔 업데이트 감지 시 표시되는 인라인 알림 바 -->
-  <div id="matheduUpdateAlertSlot" style="display:none;margin-bottom:12px;padding:12px 16px;background:rgba(253,230,138,.14);border:1.5px solid #fde68a;border-radius:12px;color:#fde68a;font-size:0.88rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+  <div id="matheduUpdateAlertSlot" style="display:none;margin-bottom:12px;padding:12px 16px;background:#fffbeb;border:1.5px solid #fcd34d;border-radius:12px;color:#92400e;font-size:0.88rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
     <div style="display:flex;align-items:center;gap:8px">
       <span style="font-size:1.1rem">🔔</span>
       <span class="bilingual-ko"><b>이 문제의 최신 업데이트 버전이 있습니다!</b> (새 버전으로 저장 후 풀이 가능)</span>
       <span class="bilingual-en"><b>An update for this quiz is available!</b> (Download and save latest version)</span>
     </div>
-    <button onclick="openUpdateModal()" style="background:#fde68a;color:#0b1020;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">
+    <button onclick="openUpdateModal()" style="background:#131b2e;color:#ffffff;border:none;padding:6px 14px;border-radius:8px;font-weight:800;font-size:0.82rem;cursor:pointer">
       <span class="bilingual-ko">업데이트 보기 ➔</span>
       <span class="bilingual-en">View Update ➔</span>
     </button>
   </div>
 
-  <div style="background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-    <div style="font-size:0.85rem;color:#e2e8f0;word-break:break-all">
-      <span style="color:#7cc4ff;font-weight:700">
+  <div style="background:#f6f3f5;border:1px solid #e4e2e4;border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <div style="font-size:0.85rem;color:#1b1b1d;word-break:break-all">
+      <span style="color:#006398;font-weight:700">
         <span class="bilingual-ko">🌐 온라인 원본 문제 주소:</span>
         <span class="bilingual-en">🌐 Online Problem URL:</span>
       </span><br>
-      <a href="{original_online_url}" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700;text-decoration:underline;font-family:monospace">
+      <a href="{original_online_url}" target="_blank" rel="noopener" style="color:#006398;font-weight:700;text-decoration:underline;font-family:monospace">
         {original_online_url}
       </a>
     </div>
     <div style="display:flex;gap:8px">
-      <a href="{original_online_url}" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#38bdf8,#818cf8);color:#0b1020;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
+      <a href="{original_online_url}" target="_blank" rel="noopener" style="background:#000000;color:#ffffff;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
         <span class="bilingual-ko">🌐 온라인 원본 열기 ➔</span>
         <span class="bilingual-en">🌐 Open Online ➔</span>
       </a>
-      <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#eef2ff;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="background:#ffffff;border:1px solid #e4e2e4;color:#1b1b1d;padding:8px 14px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none">
         <span class="bilingual-ko">🏛️ 수학자료실</span>
         <span class="bilingual-en">🏛️ Math Archive</span>
       </a>
@@ -645,87 +645,72 @@ window.MathJax = {{
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'"></script>
 <style>
 :root {{
-  --bg: #050811; --card: rgba(15, 23, 42, 0.72); --card2: rgba(30, 41, 59, 0.75); --line: rgba(255,255,255,.12);
-  --txt: #f8fafc; --sub: #94a3b8; --accent: #38bdf8; --accent2: #818cf8; --good: #34d399; --gold: #fbbf24;
-  --glass-blur: 24px; --glass-shadow: 0 16px 40px -10px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);
-  --radius: 18px;
+  --bg: #fcf8fa; --card: #ffffff; --card2: #f6f3f5; --line: #e4e2e4;
+  --txt: #1b1b1d; --sub: #45464d; --primary: #131b2e; --accent: #006398; --accent2: #4f46e5; --good: #059669; --gold: #b45309;
+  --glass-blur: 16px; --glass-shadow: 0 2px 12px rgba(19,27,46,.05);
+  --radius: 16px;
 }}
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
 body {{
   color: var(--txt); line-height: 1.65;
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  background:
-    radial-gradient(circle at 14% 12%, rgba(56, 189, 248, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 86% 16%, rgba(129, 140, 248, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.10) 0%, transparent 50%),
-    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(175deg, #050811 0%, #0b1022 45%, #060914 100%);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px, 100% 100%;
-  background-attachment: fixed; min-height: 100vh; padding: 36px 20px 80px;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg);
+  min-height: 100vh; padding: 36px 20px 80px;
 }}
 .wrap {{ max-width: 960px; margin: 0 auto; }}
 h1 {{
-  font-size: 2.2rem; background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-size: 2.1rem; color: var(--primary);
   font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em;
 }}
-.lead {{ color: var(--sub); font-size: 1.02rem; margin-bottom: 28px; }}
+.lead {{ color: var(--sub); font-size: 1.02rem; margin-bottom: 24px; }}
 .banner {{
-  background: linear-gradient(135deg, rgba(56,189,248,.15), rgba(15,23,42,.8));
-  border: 1px solid rgba(56,189,248,.38); border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: var(--radius);
   padding: 22px 26px; margin-bottom: 20px; box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
 }}
-.search-box {{
-  margin-bottom: 20px; position: relative;
-}}
+.search-box {{ margin-bottom: 20px; position: relative; }}
 .search-input {{
-  width: 100%; background: rgba(15,23,42,0.85); border: 1.5px solid rgba(56,189,248,0.35);
-  border-radius: 14px; padding: 13px 18px; color: #fff; font-size: 0.95rem;
+  width: 100%; background: #ffffff; border: 1.5px solid #c5c6cd;
+  border-radius: 14px; padding: 13px 18px; color: var(--txt); font-size: 0.95rem;
   font-family: inherit; outline: none; transition: border-color .2s, box-shadow .2s;
 }}
 .search-input:focus {{
-  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,99,152,0.12);
 }}
 .list {{ display: grid; gap: 14px; }}
 .card {{
-  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(15,23,42,0.78) 100%);
-  border: 1px solid rgba(255,255,255,.10); border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid var(--line); border-radius: var(--radius);
   padding: 20px 24px; display: flex; align-items: center; justify-content: space-between;
-  gap: 18px; flex-wrap: wrap; transition: .25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 30px -8px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.1);
-  backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+  gap: 18px; flex-wrap: wrap; transition: .2s;
+  box-shadow: var(--glass-shadow);
 }}
 .card:hover {{
-  border-color: rgba(56,189,248,.45); transform: translateY(-3px);
-  box-shadow: 0 20px 45px -10px rgba(56,189,248,.25), inset 0 1px 0 rgba(255,255,255,.2);
+  border-color: var(--accent); transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(19,27,46,.08);
 }}
-.card-title {{ font-size: 1.08rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.01em; }}
+.card-title {{ font-size: 1.06rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: -0.01em; }}
 .card-title:hover {{ color: var(--accent); }}
 .card-meta {{ font-size: 0.84rem; color: var(--sub); margin-top: 6px; }}
 .btn {{
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
-  padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 0.88rem;
+  background: #000000; color: #ffffff;
+  padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 0.88rem;
   text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-  box-shadow: 0 4px 16px rgba(56,189,248,.4); transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1); transition: transform .15s;
 }}
-.btn:hover {{
-  transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,.6);
-}}
+.btn:hover {{ transform: translateY(-1px); background: #1e293b; }}
 .lang-switcher {{
-  display: inline-flex; align-items: center; background: rgba(15,23,42,0.75);
-  border: 1px solid rgba(124,196,255,0.35); border-radius: 20px; padding: 2px 4px; gap: 3px;
+  display: inline-flex; align-items: center; background: #f0edef;
+  border: 1px solid var(--line); border-radius: 20px; padding: 3px 4px; gap: 3px;
 }}
 .lang-btn {{
   background: transparent; border: none; color: var(--sub); font-family: inherit;
-  font-size: 0.78rem; font-weight: 800; padding: 4px 9px; border-radius: 14px; cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+  font-size: 0.78rem; font-weight: 800; padding: 4px 10px; border-radius: 14px; cursor: pointer;
+  transition: all 0.15s;
 }}
-.lang-btn:hover {{ color: #ffffff; background: rgba(255,255,255,0.08); }}
 .lang-btn.active {{
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
-  box-shadow: 0 2px 10px rgba(56,189,248,0.45);
+  background: #000000; color: #ffffff;
 }}
 .bilingual-en {{ display: none; }}
 html[lang="en"] .bilingual-ko {{ display: none !important; }}
@@ -747,7 +732,7 @@ html[lang="en"] .bilingual-en {{ display: inline !important; }}
 
   <div class="banner">
     <div style="font-weight:700;color:var(--good);margin-bottom:4px" id="txtBannerTitle">💡 오프라인 단독 파일 안내</div>
-    <div style="font-size:0.88rem;color:#cbd5e1" id="txtBannerBody">
+    <div style="font-size:0.88rem;color:#45464d" id="txtBannerBody">
       • 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>
       • 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 수학자료실 링크가 포함되어 있습니다.<br>
       • 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>
@@ -772,7 +757,7 @@ html[lang="en"] .bilingual-en {{ display: inline !important; }}
       </div>
       <div>
         <a href="{r['filename']}" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="{r['filename']}" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="{r['filename']}" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
 """

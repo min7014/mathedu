@@ -346,7 +346,7 @@ def _append_visual_links(tip_html, matched_items):
         return tip_html
     
     links_html = '<div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;">'
-    links_html += '<div style="font-weight:700;color:#93c5fd;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div>'
+    links_html += '<div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div>'
     for it in matched_items[:2]:
         t_name = it.get('title', '관련 자료')
         sub = it.get('sub', '')
@@ -356,10 +356,10 @@ def _append_visual_links(tip_html, matched_items):
         algeo = it.get('algeomath', '')
         yt = it.get('youtube', '')
         
-        links_html += '<div class="min-tip-item" style="background:rgba(15,23,42,.55);border:1px solid rgba(56,189,248,.35);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">'
+        links_html += '<div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">'
         links_html += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">'
         sub_text = f' <span style="font-size:.76rem;color:#94a3b8;font-weight:400">({sub})</span>' if sub else ''
-        links_html += f'<a href="{u}" target="_blank" rel="noopener" style="font-weight:700;color:#38bdf8;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> {t_name}{sub_text}</a>'
+        links_html += f'<a href="{u}" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> {t_name}{sub_text}</a>'
         links_html += '<span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div>'
         
         actions = '<div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'
@@ -463,7 +463,7 @@ def generate_addon_card_html(materials, problem_title=""):
   </div>
   <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>수학자료실</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
   
-  <div class="min-guide-banner" style="background:rgba(124,196,255,.08);border:1px solid rgba(124,196,255,.25);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;line-height:1.6;color:#c7d2fe">
+  <div class="min-guide-banner" style="background:#f0f7ff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;line-height:1.6;color:#1e293b">
     🎬 <b>자료를 깊이 있게 감상하는 법</b>: 수학자료실의 PDF는 책장을 넘기듯 페이지를 넘겨갈 때마다 <b>도형의 점이 이동하고 보조선이 더해지며 수식이 스스로 완성되는 '단계별 플립북 애니메이션 증명'</b>입니다. 상단 미리보기나 새 창에서 키보드 방향키나 마우스 휠로 페이지를 넘기며, <b>각 프레임마다 변하는 요소와 보존되는 원리의 의미</b>를 곱씹어 보세요.
   </div>
 

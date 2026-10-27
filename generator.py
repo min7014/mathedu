@@ -11,259 +11,53 @@ TEMPLATE = r"""<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/{slug_js}.html">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 <style>
-:root{{--bg:#0d1020;--card:rgba(255,255,255,.10);--card2:rgba(255,255,255,.14);--line:rgba(255,255,255,.20);
---txt:#eef2ff;--sub:#aab4d4;--accent:#7cc4ff;--accent2:#a78bfa;--good:#5eead4;--bad:#fb7185;--gold:#fde68a;
---glass-blur:22px;--glass-shadow:0 8px 32px rgba(0,0,0,.40);--radius:16px}}
-*{{box-sizing:border-box}}
-body{{margin:0;color:var(--txt);line-height:1.7;
-font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-background:
- radial-gradient(circle at 12% 8%, rgba(124,196,255,.35), transparent 42%),
- radial-gradient(circle at 88% 12%, rgba(167,139,250,.32), transparent 40%),
- radial-gradient(circle at 50% 55%, rgba(94,234,212,.18), transparent 45%),
- radial-gradient(circle at 20% 90%, rgba(253,230,138,.15), transparent 40%),
- linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);
-background-attachment:fixed;min-height:100vh}}
-.wrap{{max-width:820px;margin:0 auto;padding:24px 18px 80px}}
-h1{{font-size:1.55rem;margin:0 0 4px;
-background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}}
-h2{{font-size:1.2rem;margin:34px 0 10px;color:var(--accent);
-border-left:4px solid transparent;border-image:linear-gradient(var(--accent),var(--accent2)) 1;padding-left:10px}}
-.lead{{color:var(--sub);font-size:.95rem;margin:0 0 8px}}
-.sym{{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}}
-.sym div{{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:8px 10px;
-font-size:.9rem;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.sym b{{color:var(--gold)}}
-.q{{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
-box-shadow:var(--glass-shadow);transition:.2s}}
-.q:hover{{border-color:rgba(124,196,255,.4)}}
-.q .lvl{{font-size:.75rem;color:var(--sub)}}
-.q .stem{{font-size:1.02rem;margin:6px 0 12px;font-weight:600}}
-.opts{{display:grid;gap:8px}}
-.opt{{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--line);
-border-radius:12px;padding:10px 12px;cursor:pointer;transition:.15s;font-size:.95rem;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.opt:hover{{border-color:var(--accent);transform:translateY(-1px)}}
-.opt .n{{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:rgba(124,196,255,.25);
-display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--accent)}}
-.opt.correct{{background:rgba(94,234,212,.16);border-color:var(--good)}}
-.opt.wrong{{background:rgba(251,113,133,.16);border-color:var(--bad)}}
-.opt.locked{{cursor:default}}
-.exp{{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(124,196,255,.1);
-border:1px solid var(--line);font-size:.9rem;display:none;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.exp.show{{display:block}}
-.exp b{{color:var(--gold)}}
-.exp-toggle-btn{{background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.3);color:var(--accent);border-radius:8px;padding:5px 12px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}}
-.exp-toggle-btn:hover{{background:rgba(124,196,255,.25);border-color:var(--accent);color:#fff}}
-.score{{position:sticky;top:0;z-index:50;background:rgba(13,16,32,.7);padding:12px 0;border-bottom:1px solid var(--line);
-display:flex;justify-content:space-between;align-items:center;font-size:.95rem;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.score b{{color:var(--gold)}}
-.bar{{height:8px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden;flex:1;margin:0 12px}}
-.bar > i{{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:.3s}}
-.know{{background:var(--card);border:1px dashed var(--accent);border-radius:14px;padding:14px;margin:12px 0;font-size:.92rem;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.know h3{{margin:0 0 6px;color:var(--accent);font-size:1rem}}
-.cards{{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}}
-.card{{width:64px;height:92px;border-radius:10px;display:flex;flex-direction:column;
-align-items:center;justify-content:center;font-weight:700;border:2px solid rgba(255,255,255,.25)}}
-.card .num{{font-size:1.3rem}}
-.card .face{{font-size:.7rem;margin-top:4px;opacity:.85}}
-.card.front{{background:rgba(244,247,255,.85);color:#1b2436;border-color:#cfd8ee;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.card.back{{background:rgba(57,67,95,.85);color:#fff;border-color:#56638c;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.sol{{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));box-shadow:var(--glass-shadow)}}
-.diagram{{background:rgba(255,255,255,.92);color:#1b2436;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur))}}
-.diagram svg,.diagram img{{max-width:100%;height:auto}}
-.btn{{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;border:none;border-radius:10px;
-padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(124,196,255,.3);transition:.15s}}
-.btn:hover{{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,196,255,.45)}}
-.final{{text-align:center;margin:30px 0;font-size:1.05rem}}
-.final .ans{{font-size:1.6rem;color:var(--good);font-weight:800;margin:8px 0}}
-code{{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:var(--gold)}}
-.topbar{{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}}
-.tbtn{{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
-padding:8px 14px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));transition:.15s}}
-.tbtn:hover{{border-color:var(--accent);color:var(--accent)}}
-#trackSubmit{{max-width:820px;margin:30px auto;padding:20px;background:rgba(110,168,254,.08);border:1px solid rgba(110,168,254,.3);border-radius:14px;text-align:center}}
-#trackSubmit h3{{color:#6ea8fe;margin:0 0 10px}}
-#trackSubmit p{{color:#9aa6c0;font-size:.88rem;margin:0 0 12px}}
-#trackSubmit input{{background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:8px;padding:10px 14px;font-size:.95rem;min-width:160px}}
-#trackSubmit button{{background:#6ea8fe;color:#0b1020;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer}}
-#trackResult{{display:none;padding:10px;border-radius:10px;font-weight:700}}
-.orig-card{{background:linear-gradient(135deg,rgba(124,196,255,.14) 0%,rgba(167,139,250,.14) 100%);
-border:1.5px solid rgba(124,196,255,.45);border-radius:var(--radius);padding:18px 20px;margin:18px 0 24px;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
-box-shadow:0 8px 32px rgba(0,0,0,.35)}}
-.orig-tag{{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-color:#0b1020;font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px;
-letter-spacing:.3px;box-shadow:0 2px 8px rgba(124,196,255,.3)}}
-.orig-stem{{font-size:1.08rem;line-height:1.75;font-weight:600;color:var(--txt);word-break:keep-all;margin:6px 0}}
-.orig-media{{text-align:center;margin:14px 0}}
-.orig-media img{{max-width:100%;max-height:360px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.35)}}
-.orig-tip{{font-size:.84rem;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:6px}}
-
-/* min7014 수학자료실 공식 연계 심층 탐구 카드 */
-.min7014-addon-card{{background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(20,24,51,.45) 100%);
-border:1px solid rgba(124,196,255,.35);border-radius:var(--radius);padding:20px 22px;margin:28px 0;
-backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
-box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 20px rgba(124,196,255,.1);transition:.2s}}
-.min7014-addon-card:hover{{border-color:rgba(124,196,255,.55)}}
-.min-header{{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}}
-.min-header-title{{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:#fff}}
-.min-logo{{width:24px;height:24px;border-radius:6px;background:#fff;padding:1px}}
-.min-tag{{background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.4);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}}
-.min-lead{{font-size:.88rem;color:var(--sub);margin-bottom:16px;line-height:1.55;word-break:keep-all}}
-.min-list{{display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box}}
-.min-item{{background:rgba(13,16,32,.65);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.15s;box-sizing:border-box;overflow:hidden;width:100%}}
-.min-item:hover{{background:rgba(22,28,54,.75);border-color:var(--accent);transform:translateY(-1px)}}
-.min-item-main{{width:100%;min-width:0;box-sizing:border-box}}
-.min-item-title{{display:block;color:#eef2ff;font-size:.94rem;font-weight:700;text-decoration:none;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;white-space:normal}}
-.min-item-title:hover{{color:var(--accent)}}
-.min-item-sub{{display:block;font-size:.8rem;font-weight:400;color:var(--sub);margin-top:4px;line-height:1.4;word-break:break-word}}
-.min-bullet{{font-size:.85rem;margin-right:4px}}
-.min-item-actions{{display:flex;gap:8px;flex-wrap:wrap;align-items:center}}
-.min-btn{{font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:8px;text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:4px}}
-.min-btn-ggb{{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.45);color:#38bdf8}}
-.min-btn-ggb:hover{{background:#38bdf8;color:#0b1020}}
-.min-btn-pdf{{background:rgba(248,113,113,.16);border:1px solid rgba(248,113,113,.45);color:#f87171}}
-.min-btn-pdf:hover{{background:#f87171;color:#0b1020}}
-.min-btn-yt{{background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.45);color:#fca5a5}}
-.min-btn-yt:hover{{background:#ef4444;color:#fff}}
-.min-btn-detail{{background:rgba(124,196,255,.14);border:1px solid rgba(124,196,255,.4);color:var(--accent)}}
-.min-btn-detail:hover{{background:var(--accent);color:#0b1020;border-color:var(--accent)}}
-.min-btn-algeo{{background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.45);color:#c084fc}}
-.min-btn-algeo:hover{{background:#a855f7;color:#fff}}
-.min-cat-badge{{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;background:rgba(124,196,255,.12);color:#93c5fd;border:1px solid rgba(124,196,255,.25);margin-bottom:6px}}
-.min-visual-tip{{background:linear-gradient(135deg,rgba(124,196,255,.12) 0%,rgba(167,139,250,.10) 100%);border:1px solid rgba(124,196,255,.35);border-left:4px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:18px 0;font-size:.88rem;line-height:1.6;color:#e0e7ff}}
-.min-visual-tip b{{color:#67e8f9}}
-.min-ggb-frame-wrap{{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.4);background:#000;display:none}}
-.min-ggb-frame-wrap.active{{display:block}}
-.min-footer{{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:right}}
-.min-footer-link{{color:var(--accent);font-size:.84rem;font-weight:700;text-decoration:none;transition:.15s}}
-.min-footer-link:hover{{text-decoration:underline;color:#fff}}
-/* Bilingual Dual-Display Engine */
-.bilingual-en {{ display: none; }}
-.bilingual-ko {{ display: inline; }}
-div.bilingual-ko, p.bilingual-ko {{ display: block; }}
-html[lang="en"] .bilingual-ko {{ display: none !important; }}
-html[lang="en"] .bilingual-en {{
-  display: block;
-  margin-top: 8px;
-  color: #93c5fd;
-  font-size: 0.9em;
-  line-height: 1.6;
-  border-left: 2px solid rgba(147, 197, 253, 0.45);
-  padding-left: 12px;
-  font-weight: 400;
-}}
-html[lang="en"] span.bilingual-en {{
-  display: inline !important;
-  border-left: none !important;
-  padding-left: 0 !important;
-  margin-top: 0 !important;
-}}
-html[lang="en"] .stem span.bilingual-en {{
-  display: inline !important;
-  color: #bfdbfe;
-  font-weight: 600;
-}}
-html[lang="en"] h1 .bilingual-en {{
-  font-size: 1.05rem;
-  color: #bfdbfe;
-  font-weight: 600;
-  border-left: none;
-  padding-left: 0;
-  margin-top: 4px;
-}}
-html[lang="en"] h2 .bilingual-en {{
-  font-size: 0.92rem;
-  color: #a78bfa;
-  font-weight: 600;
-  border-left: none;
-  padding-left: 0;
-  margin-top: 4px;
-}}
-html[lang="en"] .lead .bilingual-en {{
-  color: #cbd5e1;
-  border-left: none;
-  padding-left: 0;
-  font-size: 0.88rem;
-}}
-html[lang="en"] .stem .bilingual-en {{
-  color: #bfdbfe;
-  font-weight: 500;
-  margin-top: 8px;
-}}
-html[lang="en"] .orig-tag .bilingual-en {{
-  display: inline;
-  margin-left: 6px;
-  font-weight: 700;
-  border: none;
-  padding: 0;
-}}
-html[lang="en"] .orig-tip .bilingual-en {{
-  color: #cbd5e1;
-  margin-top: 4px;
-}}
-html[lang="en"] .know .bilingual-en {{
-  color: #a5f3fc;
-  border-left-color: rgba(165, 243, 252, 0.5);
-}}
-html[lang="en"] .sol .bilingual-en {{
-  color: #cbd5e1;
-  border-left-color: rgba(167, 139, 250, 0.5);
-}}
-html[lang="en"] .exp .bilingual-en {{
-  color: #fef08a;
-  border-left-color: rgba(254, 240, 138, 0.5);
-}}
-html[lang="en"] .sym div .bilingual-en {{
-  color: #cbd5e1;
-  font-size: 0.82rem;
-  margin-top: 4px;
-  border-left: none;
-  padding-left: 0;
-}}
-.lang-group {{
-  display: inline-flex;
-  gap: 3px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 3px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  margin-left: auto;
-}}
-.lang-btn {{
-  background: transparent;
-  color: var(--sub);
-  border: none;
-  border-radius: 7px;
-  padding: 4px 10px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.15s;
-}}
-.lang-btn.active {{
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  color: #0b1020;
-  box-shadow: 0 2px 8px rgba(124, 196, 255, 0.3);
-}}
-
 /* ════════════════════════════════════════════════════════════════════════
-   📱 모바일 화면 수식 및 텍스트 틀 이탈(오버플로) 완전 방지 시스템
+   ✨ Google Stitch Design System: "Mathematical Clarity & Dynamic Geometry"
+   Academic Modernism Light Palette for Problem & Scaffolding Pages
    ════════════════════════════════════════════════════════════════════════ */
+:root {{
+  --bg: #fcf8fa;
+  --card: #ffffff;
+  --card2: #f6f3f5;
+  --card3: #f0edef;
+  --line: #e4e2e4;
+  --line-strong: #c5c6cd;
+  --txt: #1b1b1d;
+  --sub: #45464d;
+  --primary: #131b2e;
+  --accent: #006398;
+  --accent2: #4f46e5;
+  --good: #059669;
+  --bad: #ba1a1a;
+  --gold: #b45309;
+  --glass-blur: 16px;
+  --glass-shadow: 0 2px 12px rgba(19, 27, 46, 0.05);
+  --radius: 16px;
+}}
+
+*, *::before, *::after {{
+  box-sizing: border-box;
+}}
+
 html, body {{
   overflow-x: hidden !important;
   max-width: 100vw;
   width: 100%;
 }}
 
-*, *::before, *::after {{
-  box-sizing: border-box;
+body {{
+  margin: 0;
+  color: var(--txt);
+  line-height: 1.7;
+  font-family: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(0, 99, 152, 0.05), transparent 40%),
+    radial-gradient(circle at 88% 12%, rgba(79, 70, 229, 0.05), transparent 40%),
+    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.04), transparent 45%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }}
 
 .wrap {{
@@ -275,7 +69,1222 @@ html, body {{
   box-sizing: border-box;
 }}
 
-/* 1. 텍스트 및 레이블 가로 넘침(틀 이탈) 방지 */
+/* ── Top Navigation Bar ── */
+.topbar {{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(19, 27, 46, 0.04);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}}
+
+.tbtn {{
+  background: #ffffff;
+  color: var(--txt);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: .86rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s ease;
+  box-shadow: 0 1px 2px rgba(19, 27, 46, 0.03);
+}}
+
+.tbtn:hover {{
+  background: var(--card2);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}}
+
+.tbtn.brand-btn {{
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+}}
+
+.tbtn.brand-btn:hover {{
+  background: #1e293b !important;
+  color: #ffffff !important;
+}}
+
+.lang-group {{
+  display: inline-flex;
+  gap: 3px;
+  background: var(--card3);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-left: auto;
+}}
+
+.lang-btn {{
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  border-radius: 7px;
+  padding: 5px 11px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}}
+
+.lang-btn.active {{
+  background: #000000;
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}}
+
+/* ── Sticky Score & Progress Bar ── */
+.score {{
+  position: sticky;
+  top: 8px;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 10px 16px;
+  margin-bottom: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .92rem;
+  color: var(--txt);
+  font-weight: 600;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 4px 14px rgba(19, 27, 46, 0.05);
+}}
+
+.score b {{
+  color: var(--accent);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+}}
+
+.bar {{
+  height: 8px;
+  background: #e4e2e4;
+  border-radius: 9999px;
+  overflow: hidden;
+  flex: 1;
+  margin: 0 14px;
+}}
+
+.bar > i {{
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), #10b981);
+  border-radius: 9999px;
+  transition: .3s;
+}}
+
+/* ── Headings & Typography ── */
+h1 {{
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+  color: var(--primary);
+  line-height: 1.38;
+}}
+
+h2 {{
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin: 34px 0 12px;
+  color: var(--primary);
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+  line-height: 1.4;
+}}
+
+.lead {{
+  color: var(--sub);
+  font-size: .95rem;
+  margin: 0 0 12px;
+  line-height: 1.65;
+}}
+
+code {{
+  background: var(--card3);
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.9em;
+}}
+
+/* ── Original Exam Problem Card ── */
+.orig-card {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin: 18px 0 26px;
+  box-shadow: 0 4px 20px rgba(19, 27, 46, 0.06);
+}}
+
+.orig-header {{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}}
+
+.orig-tag {{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: .78rem;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  letter-spacing: .2px;
+  box-shadow: 0 2px 6px rgba(19, 27, 46, 0.12);
+}}
+
+.orig-badge {{
+  font-size: .8rem;
+  color: var(--accent);
+  font-weight: 700;
+  background: rgba(0, 99, 152, 0.08);
+  border: 1px solid rgba(0, 99, 152, 0.22);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: 'Space Grotesk', 'Pretendard', sans-serif;
+}}
+
+.orig-grid {{
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 18px;
+  align-items: start;
+}}
+
+.orig-col-media {{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}}
+
+.orig-media-tabs {{
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}}
+
+.orig-media-tab {{
+  flex: 1;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  color: var(--sub);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: .8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s;
+  text-align: center;
+}}
+
+.orig-media-tab:hover {{
+  background: var(--card3);
+  color: var(--primary);
+  border-color: var(--accent);
+}}
+
+.orig-media-tab.active {{
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}}
+
+.orig-media-frame {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(19, 27, 46, 0.04);
+}}
+
+.orig-media-frame img, .orig-media-frame video {{
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}}
+
+.orig-media-sub {{
+  font-size: .76rem;
+  color: var(--sub);
+  text-align: center;
+}}
+
+.orig-col-desc {{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}}
+
+.orig-text-box {{
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: .92rem;
+  line-height: 1.7;
+  color: var(--txt);
+}}
+
+.orig-text-box h4 {{
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: .96rem;
+  font-weight: 800;
+}}
+
+.orig-cond-wrap {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: .88rem;
+  line-height: 1.65;
+  margin-top: 8px;
+  color: var(--txt);
+}}
+
+.orig-stem {{
+  font-size: 1.05rem;
+  line-height: 1.75;
+  font-weight: 600;
+  color: var(--txt);
+  word-break: keep-all;
+  margin: 6px 0;
+}}
+
+.orig-media {{
+  text-align: center;
+  margin: 14px 0;
+}}
+
+.orig-media img {{
+  max-width: 100%;
+  max-height: 360px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 12px rgba(19, 27, 46, 0.06);
+}}
+
+.orig-tip {{
+  font-size: .85rem;
+  color: var(--sub);
+  background: var(--card2);
+  border: 1px dashed rgba(0, 99, 152, 0.35);
+  border-radius: 10px;
+  padding: 10px 12px;
+  line-height: 1.6;
+}}
+
+.min-visual-tip {{
+  background: #f0f7ff;
+  border: 1px solid rgba(0, 99, 152, 0.22);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 18px 0;
+  font-size: .88rem;
+  line-height: 1.65;
+  color: #1e293b;
+}}
+
+.min-visual-tip b {{
+  color: var(--accent);
+}}
+
+/* ── Step 0 Symbol Translator & Knowledge Cards ── */
+.sym {{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}}
+
+.sym div {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: .9rem;
+  color: var(--txt);
+  box-shadow: 0 1px 4px rgba(19, 27, 46, 0.03);
+}}
+
+.sym b {{
+  color: var(--accent);
+}}
+
+.sym-card {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: var(--glass-shadow);
+  transition: .2s;
+}}
+
+.sym-card:hover {{
+  border-color: rgba(0, 99, 152, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(19, 27, 46, 0.08);
+}}
+
+.sym-badge {{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 99, 152, 0.08);
+  border: 1px solid rgba(0, 99, 152, 0.22);
+  color: var(--accent);
+  font-size: .76rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}}
+
+.sym-title {{
+  font-size: 1.05rem;
+  color: var(--primary);
+  font-weight: 800;
+  margin: 0 0 10px;
+  line-height: 1.45;
+}}
+
+.sym-formula-box {{
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 8px 0 12px;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--txt);
+}}
+
+.sym-desc {{
+  color: var(--txt);
+  font-size: .91rem;
+  line-height: 1.75;
+}}
+
+.sym-desc b {{
+  color: var(--accent);
+}}
+
+.step0-visual-box {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0 26px;
+  box-shadow: var(--glass-shadow);
+}}
+
+.know {{
+  background: var(--card2);
+  border: 1px dashed rgba(0, 99, 152, 0.40);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  font-size: .92rem;
+  color: var(--txt);
+}}
+
+.know h3 {{
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: .98rem;
+  font-weight: 800;
+}}
+
+/* ── Interactive Step Quiz Cards ── */
+.q {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 14px 0;
+  box-shadow: var(--glass-shadow);
+  transition: .2s;
+}}
+
+.q:hover {{
+  border-color: rgba(0, 99, 152, 0.35);
+  box-shadow: 0 6px 22px rgba(19, 27, 46, 0.07);
+}}
+
+.q .lvl {{
+  display: inline-block;
+  font-size: .74rem;
+  font-weight: 800;
+  color: var(--accent);
+  background: rgba(0, 99, 152, 0.08);
+  border: 1px solid rgba(0, 99, 152, 0.18);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  margin-bottom: 4px;
+}}
+
+.q .stem {{
+  font-size: 1.02rem;
+  margin: 8px 0 14px;
+  font-weight: 600;
+  color: var(--txt);
+  line-height: 1.65;
+}}
+
+.opts {{
+  display: grid;
+  gap: 8px;
+}}
+
+.opts.opts-inline {{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}}
+
+.opt {{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: .15s;
+  font-size: .95rem;
+  color: var(--txt);
+}}
+
+.opt:hover {{
+  background: var(--card3);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}}
+
+.opt .n {{
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: 'Space Grotesk', sans-serif;
+}}
+
+.opt.correct {{
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+  font-weight: 600;
+}}
+
+.opt.correct .n {{
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+}}
+
+.opt.wrong {{
+  background: rgba(239, 68, 68, 0.10) !important;
+  border-color: #ef4444 !important;
+  color: #991b1b !important;
+}}
+
+.opt.wrong .n {{
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+}}
+
+.opt.locked {{
+  cursor: default;
+}}
+
+.exp-toggle-btn {{
+  background: var(--card3);
+  border: 1px solid var(--line-strong);
+  color: var(--primary);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s;
+}}
+
+.exp-toggle-btn:hover {{
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}}
+
+.exp {{
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  font-size: .92rem;
+  display: none;
+  color: var(--txt);
+  line-height: 1.7;
+}}
+
+.exp.show {{
+  display: block;
+}}
+
+.exp b {{
+  color: var(--primary);
+}}
+
+/* ── Solution Card, Visual Diagrams & Schematic Flowcharts ── */
+.sol {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 14px 0;
+  box-shadow: var(--glass-shadow);
+  color: var(--txt);
+}}
+
+.sol h4 {{
+  color: var(--primary);
+  margin: 18px 0 8px;
+  font-size: 1.02rem;
+  font-weight: 800;
+}}
+
+.sol-highlight {{
+  background: #f0f7ff;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin: 12px 0;
+  color: var(--txt);
+}}
+
+.diagram {{
+  background: #ffffff;
+  color: #1b2436;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  margin: 14px 0;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(19, 27, 46, 0.04);
+}}
+
+.diagram svg, .diagram img {{
+  max-width: 100%;
+  height: auto;
+}}
+
+.diagram-caption {{
+  font-size: .82rem;
+  color: var(--sub);
+  margin-top: 8px;
+}}
+
+figure.math-visual-diagram {{
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  margin: 12px 0 18px !important;
+  text-align: center !important;
+}}
+
+figure.math-visual-diagram figcaption {{
+  color: #475569 !important;
+  font-size: 0.85rem !important;
+  margin-top: 10px !important;
+  line-height: 1.55 !important;
+}}
+
+section.math-schematic-flow {{
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  margin: 12px 0 18px !important;
+}}
+
+section.math-schematic-flow table {{
+  background: transparent !important;
+}}
+
+section.math-schematic-flow td,
+section.math-schematic-flow th {{
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}}
+
+section.math-schematic-flow thead tr,
+section.math-schematic-flow thead th {{
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}}
+
+section.math-schematic-flow td span,
+section.math-schematic-flow td b {{
+  color: #1e293b !important;
+}}
+
+section.math-schematic-flow td > b:first-child {{
+  color: #006398 !important;
+}}
+
+/* ── Buttons & Final Score Block ── */
+.btn {{
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: .15s;
+}}
+
+.btn:hover {{
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}}
+
+.final {{
+  text-align: center;
+  margin: 34px 0;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  font-size: 1.05rem;
+}}
+
+.final .ans {{
+  font-size: 1.6rem;
+  color: var(--good);
+  font-weight: 800;
+  margin: 8px 0 14px;
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+}}
+
+/* ── Cards (Playing Cards Visual) ── */
+.cards {{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}}
+
+.card {{
+  width: 64px;
+  height: 92px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: 2px solid var(--line-strong);
+}}
+
+.card .num {{ font-size: 1.3rem; }}
+.card .face {{ font-size: .7rem; margin-top: 4px; opacity: .85; }}
+.card.front {{ background: #ffffff; color: #1b2436; border-color: #94a3b8; }}
+.card.back {{ background: #334155; color: #ffffff; border-color: #1e293b; }}
+
+/* ── min7014 Deep Exploration Addon Card ── */
+.min7014-addon-card {{
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin: 28px 0;
+  box-shadow: 0 4px 20px rgba(19, 27, 46, 0.05);
+  transition: .2s;
+}}
+
+.min7014-addon-card:hover {{
+  border-color: rgba(0, 99, 152, 0.45);
+}}
+
+.min-header {{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}}
+
+.min-header-title {{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+}}
+
+.min-logo {{
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  padding: 1px;
+}}
+
+.min-tag {{
+  background: rgba(0, 99, 152, 0.08);
+  border: 1px solid rgba(0, 99, 152, 0.25);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: .75rem;
+  font-weight: 700;
+}}
+
+.min-lead {{
+  font-size: .88rem;
+  color: var(--sub);
+  margin-bottom: 16px;
+  line-height: 1.55;
+  word-break: keep-all;
+}}
+
+.min-guide-banner {{
+  background: #f0f7ff !important;
+  border: 1px solid rgba(0, 99, 152, 0.22) !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+  margin-bottom: 16px !important;
+  font-size: .85rem !important;
+  line-height: 1.6 !important;
+  color: #1e293b !important;
+}}
+
+.min-list {{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}}
+
+.min-item {{
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: .15s;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+}}
+
+.min-item:hover {{
+  background: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px rgba(0, 99, 152, 0.08);
+  transform: translateY(-1px);
+}}
+
+.min-item:has(.min-ggb-frame-wrap.active) {{
+  grid-column: 1 / -1;
+}}
+
+.min-item-main {{
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}}
+
+.min-item-title {{
+  display: block;
+  color: var(--txt);
+  font-size: .94rem;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}}
+
+.min-item-title:hover {{
+  color: var(--accent);
+}}
+
+.min-item-sub {{
+  display: block;
+  font-size: .8rem;
+  font-weight: 400;
+  color: var(--sub);
+  margin-top: 4px;
+  line-height: 1.4;
+  word-break: break-word;
+}}
+
+.min-bullet {{
+  font-size: .85rem;
+  margin-right: 4px;
+}}
+
+.min-item-actions {{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}}
+
+.min-btn {{
+  font-size: .78rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}}
+
+.min-btn-ggb {{
+  background: rgba(2, 132, 199, 0.10);
+  border: 1px solid rgba(2, 132, 199, 0.30);
+  color: #0369a1;
+}}
+
+.min-btn-ggb:hover {{
+  background: #0284c7;
+  color: #ffffff;
+}}
+
+.min-btn-pdf {{
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #b91c1c;
+}}
+
+.min-btn-pdf:hover {{
+  background: #dc2626;
+  color: #ffffff;
+}}
+
+.min-btn-yt {{
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #dc2626;
+}}
+
+.min-btn-yt:hover {{
+  background: #ef4444;
+  color: #ffffff;
+}}
+
+.min-btn-algeo {{
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  color: #6d28d9;
+}}
+
+.min-btn-algeo:hover {{
+  background: #7c3aed;
+  color: #ffffff;
+}}
+
+.min-btn-detail {{
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  color: #ffffff;
+}}
+
+.min-btn-detail:hover {{
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}}
+
+.min-cat-badge {{
+  display: inline-block;
+  font-size: .72rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(0, 99, 152, 0.08);
+  color: var(--accent);
+  border: 1px solid rgba(0, 99, 152, 0.20);
+  margin-bottom: 6px;
+  font-weight: 600;
+}}
+
+.min-ggb-frame-wrap {{
+  margin-top: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  display: none;
+}}
+
+.min-ggb-frame-wrap.active {{
+  display: block;
+}}
+
+.min-footer {{
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  text-align: right;
+}}
+
+.min-footer-link {{
+  color: var(--accent);
+  font-size: .84rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: .15s;
+}}
+
+.min-footer-link:hover {{
+  text-decoration: underline;
+  color: var(--primary);
+}}
+
+.min-tip-item {{
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 99, 152, 0.22) !important;
+  color: var(--txt) !important;
+}}
+
+/* ── Report Form Overrides ── */
+.report-wrap {{
+  margin-top: 10px !important;
+  border-top: 1px solid var(--line) !important;
+  padding-top: 10px !important;
+}}
+
+.report-btn {{
+  background: transparent !important;
+  color: var(--sub) !important;
+  border: 1px solid var(--line) !important;
+}}
+
+.report-text {{
+  background: #ffffff !important;
+  color: var(--txt) !important;
+  border: 1px solid var(--line-strong) !important;
+}}
+
+.report-cancel {{
+  background: #ffffff !important;
+  color: var(--sub) !important;
+  border: 1px solid var(--line-strong) !important;
+}}
+
+/* ── TrackFull Entry Modal Light Academic Styling ── */
+#trackFull {{
+  background: rgba(252, 248, 250, 0.96) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  color: var(--txt) !important;
+}}
+
+#trackFull h2 {{
+  border-left: none !important;
+  padding-left: 0 !important;
+  color: var(--primary) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--primary) !important;
+}}
+
+#trackFull h3 {{
+  color: var(--primary) !important;
+}}
+
+#trackFull p {{
+  color: var(--sub) !important;
+}}
+
+#trackFull #studentName,
+#trackFull #studentPin {{
+  background: #ffffff !important;
+  color: var(--txt) !important;
+  border: 1.5px solid var(--line-strong) !important;
+  box-shadow: 0 2px 6px rgba(19, 27, 46, 0.04) !important;
+}}
+
+/* ── Bilingual Dual-Display Engine (Light Mode High-Contrast) ── */
+.bilingual-en {{ display: none; }}
+.bilingual-ko {{ display: inline; }}
+div.bilingual-ko, p.bilingual-ko {{ display: block; }}
+html[lang="en"] .bilingual-ko {{ display: none !important; }}
+html[lang="en"] .bilingual-en {{
+  display: block;
+  margin-top: 8px;
+  color: #006398;
+  font-size: 0.92em;
+  line-height: 1.6;
+  border-left: 3px solid rgba(0, 99, 152, 0.35);
+  padding-left: 12px;
+  font-weight: 500;
+}}
+html[lang="en"] span.bilingual-en {{
+  display: inline !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+}}
+html[lang="en"] .stem span.bilingual-en {{
+  display: inline !important;
+  color: var(--txt);
+  font-weight: 600;
+}}
+html[lang="en"] h1 .bilingual-en {{
+  font-size: 1.35rem;
+  color: var(--primary);
+  font-weight: 800;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 2px;
+}}
+html[lang="en"] h2 .bilingual-en {{
+  font-size: 1.05rem;
+  color: var(--primary);
+  font-weight: 800;
+  border-left: none;
+  padding-left: 0;
+  margin-top: 2px;
+}}
+html[lang="en"] .lead .bilingual-en {{
+  color: var(--sub);
+  border-left: none;
+  padding-left: 0;
+  font-size: 0.92rem;
+}}
+html[lang="en"] .stem .bilingual-en {{
+  color: var(--txt);
+  font-weight: 600;
+  margin-top: 6px;
+}}
+html[lang="en"] .orig-tag .bilingual-en {{
+  display: inline;
+  margin-left: 6px;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+  color: #ffffff;
+}}
+html[lang="en"] .orig-tip .bilingual-en {{
+  color: var(--sub);
+  margin-top: 4px;
+}}
+html[lang="en"] .know .bilingual-en {{
+  color: #0369a1;
+  border-left-color: rgba(3, 105, 161, 0.4);
+}}
+html[lang="en"] .sol .bilingual-en {{
+  color: var(--txt);
+  border-left-color: rgba(0, 99, 152, 0.4);
+}}
+html[lang="en"] .exp .bilingual-en {{
+  color: var(--txt);
+  border-left-color: rgba(0, 99, 152, 0.4);
+}}
+html[lang="en"] .sym div .bilingual-en {{
+  color: var(--sub);
+  font-size: 0.84rem;
+  margin-top: 4px;
+  border-left: none;
+  padding-left: 0;
+}}
+html[lang="en"] .sym-card .bilingual-en {{
+  display: block !important;
+  color: var(--sub);
+  font-size: .88rem;
+  line-height: 1.6;
+  margin-top: 10px;
+  border-left: 2px solid rgba(0, 99, 152, 0.35);
+  padding-left: 10px;
+}}
+html[lang="en"] .sym-badge .bilingual-en {{
+  display: inline !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: inherit !important;
+}}
+html[lang="en"] .sym-title .bilingual-en {{
+  display: block !important;
+  color: var(--primary) !important;
+  font-size: .95rem !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-top: 4px !important;
+}}
+
+/* ── Mobile-Responsive Mathematical Formula & Layout Overflow Prevention ── */
 h1, h2, h3, h4, h5, h6, p, div, span, li, a, label {{
   overflow-wrap: break-word;
   word-break: keep-all;
@@ -288,7 +1297,6 @@ h1, h2, h3, h4, h5, h6, p, div, span, li, a, label {{
   word-break: normal;
 }}
 
-/* 2. MathJax 3 수식 모바일 프레임 완벽 격리 및 반응형 스크롤 */
 mjx-container {{
   max-width: 100% !important;
   box-sizing: border-box !important;
@@ -301,26 +1309,19 @@ mjx-container[display="true"] {{
   overflow-x: auto !important;
   overflow-y: hidden !important;
   margin: 0.85em 0 !important;
-  padding: 8px 10px !important;
-  background: rgba(13, 16, 32, 0.55);
+  padding: 10px 14px !important;
+  background: var(--card2) !important;
   border-radius: 10px;
-  border: 1px solid rgba(124, 196, 255, 0.2);
+  border: 1px solid var(--line) !important;
+  color: var(--txt) !important;
   text-align: center !important;
   scrollbar-width: thin;
 }}
 
-mjx-container[display="true"]::-webkit-scrollbar {{
-  height: 3px;
-}}
-mjx-container[display="true"]::-webkit-scrollbar-track {{
-  background: transparent;
-}}
-mjx-container[display="true"]::-webkit-scrollbar-thumb {{
-  background: rgba(124, 196, 255, 0.25);
-  border-radius: 3px;
-}}
+mjx-container[display="true"]::-webkit-scrollbar {{ height: 4px; }}
+mjx-container[display="true"]::-webkit-scrollbar-track {{ background: transparent; }}
+mjx-container[display="true"]::-webkit-scrollbar-thumb {{ background: rgba(0, 99, 152, 0.25); border-radius: 3px; }}
 
-/* 인라인 수식 ($...$): 밑줄 및 가로 스크롤바 원천 차단 */
 mjx-container:not([display="true"]) {{
   display: inline-flex !important;
   vertical-align: middle !important;
@@ -338,7 +1339,6 @@ mjx-container:not([display="true"])::-webkit-scrollbar {{
   width: 0 !important;
 }}
 
-/* 4지/5지선다 선택지(.opt): 수식 및 보기 항목의 불필요한 밑줄·스크롤바 전면 제거 */
 .opt, .opt * {{
   text-decoration: none !important;
   border-bottom: none !important;
@@ -353,29 +1353,13 @@ mjx-container:not([display="true"])::-webkit-scrollbar {{
   width: 0 !important;
 }}
 
-/* 3. 그리드/플렉스 자식 요소 min-width: 0 리셋 */
-.orig-grid,
-.orig-grid > div,
-.orig-col-media,
-.orig-col-desc,
-.min-list,
-.min-list > div,
-.min-item,
-.min-item-main,
-.min-item-actions,
-.opts,
-.opt,
-.sym,
-.sym > div,
-.sym-card,
-.topbar,
-.score,
-.score > * {{
+.orig-grid, .orig-grid > div, .orig-col-media, .orig-col-desc,
+.min-list, .min-list > div, .min-item, .min-item-main, .min-item-actions,
+.opts, .opt, .sym, .sym > div, .sym-card, .topbar, .score, .score > * {{
   min-width: 0 !important;
   max-width: 100% !important;
 }}
 
-/* 4. 카드 컨테이너 틀 경계선 보호 */
 .orig-card, .sol, .q, .exp, .know, .min7014-addon-card, .sym-card, .step0-visual-box {{
   max-width: 100% !important;
   overflow-x: hidden !important;
@@ -383,161 +1367,55 @@ mjx-container:not([display="true"])::-webkit-scrollbar {{
 }}
 
 @media (max-width: 768px) {{
-  .orig-grid {{
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }}
-  .sym {{
-    grid-template-columns: 1fr !important;
-  }}
-  .min-list {{
-    grid-template-columns: 1fr !important;
-  }}
+  .orig-grid {{ grid-template-columns: 1fr !important; gap: 14px !important; }}
+  .sym {{ grid-template-columns: 1fr !important; }}
+  .min-list {{ grid-template-columns: 1fr !important; }}
 }}
 
 @media (max-width: 640px) {{
-  .wrap {{
-    padding: 16px 14px 70px !important;
-  }}
-  h1 {{
-    font-size: 1.3rem !important;
-    line-height: 1.45 !important;
-  }}
-  h2 {{
-    font-size: 1.12rem !important;
-    margin: 26px 0 10px !important;
-  }}
-  .lead {{
-    font-size: 0.9rem !important;
-  }}
-  .orig-card {{
-    padding: 16px 14px !important;
-    margin: 14px 0 20px !important;
-  }}
-  .orig-text-box {{
-    padding: 12px 14px !important;
-    font-size: 0.88rem !important;
-  }}
-  .q {{
-    padding: 16px 14px !important;
-    margin: 14px 0 !important;
-  }}
-  .q .stem {{
-    font-size: 0.98rem !important;
-  }}
-  .opts.opts-inline {{
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
-  }}
-  .opt {{
-    padding: 9px 12px !important;
-    font-size: 0.92rem !important;
-  }}
-  .sol {{
-    padding: 18px 14px !important;
-    font-size: 0.9rem !important;
-  }}
-  .min7014-addon-card {{
-    padding: 16px 14px !important;
-    margin: 20px 0 !important;
-  }}
-  .min-item {{
-    padding: 12px 14px !important;
-  }}
-  .min-ggb-frame-wrap iframe {{
-    height: 380px !important;
-  }}
-  mjx-container {{
-    font-size: 92% !important;
-  }}
+  .wrap {{ padding: 16px 14px 70px !important; }}
+  h1 {{ font-size: 1.3rem !important; line-height: 1.45 !important; }}
+  h2 {{ font-size: 1.12rem !important; margin: 26px 0 10px !important; }}
+  .lead {{ font-size: 0.9rem !important; }}
+  .orig-card {{ padding: 16px 14px !important; margin: 14px 0 20px !important; }}
+  .orig-text-box {{ padding: 12px 14px !important; font-size: 0.88rem !important; }}
+  .q {{ padding: 16px 14px !important; margin: 14px 0 !important; }}
+  .q .stem {{ font-size: 0.98rem !important; }}
+  .opts.opts-inline {{ grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }}
+  .opt {{ padding: 9px 12px !important; font-size: 0.92rem !important; }}
+  .sol {{ padding: 18px 14px !important; font-size: 0.9rem !important; }}
+  .min7014-addon-card {{ padding: 16px 14px !important; margin: 20px 0 !important; }}
+  .min-item {{ padding: 12px 14px !important; }}
+  .min-ggb-frame-wrap iframe {{ height: 380px !important; }}
+  mjx-container {{ font-size: 92% !important; }}
 }}
 
 @media (max-width: 420px) {{
-  .wrap {{
-    padding: 12px 10px 60px !important;
-  }}
-  h1 {{
-    font-size: 1.18rem !important;
-    line-height: 1.4 !important;
-  }}
-  h2 {{
-    font-size: 1.05rem !important;
-  }}
-  .orig-header {{
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 6px !important;
-  }}
-  .orig-tag {{
-    font-size: 0.75rem !important;
-    padding: 4px 10px !important;
-  }}
-  .topbar {{
-    gap: 6px !important;
-  }}
-  .tbtn {{
-    padding: 6px 10px !important;
-    font-size: 0.8rem !important;
-  }}
-  .lang-btn {{
-    padding: 4px 8px !important;
-    font-size: 0.76rem !important;
-  }}
-  .score {{
-    font-size: 0.86rem !important;
-    padding: 8px 0 !important;
-  }}
-  .bar {{
-    margin: 0 8px !important;
-  }}
-  .opts.opts-inline {{
-    grid-template-columns: 1fr !important;
-    gap: 6px !important;
-  }}
-  .opt {{
-    padding: 8px 10px !important;
-    font-size: 0.88rem !important;
-    gap: 6px !important;
-  }}
-  .opt .n {{
-    width: 22px !important;
-    height: 22px !important;
-    flex: 0 0 22px !important;
-    font-size: 0.76rem !important;
-  }}
-  .min-item-actions {{
-    gap: 4px !important;
-  }}
-  .min-btn {{
-    padding: 4px 8px !important;
-    font-size: 0.74rem !important;
-  }}
-  .min-ggb-frame-wrap iframe {{
-    height: 300px !important;
-  }}
-  mjx-container {{
-    font-size: 85% !important;
-  }}
-  #studentName {{
-    min-width: 0 !important;
-    width: 100% !important;
-  }}
+  .wrap {{ padding: 12px 10px 60px !important; }}
+  h1 {{ font-size: 1.18rem !important; line-height: 1.4 !important; }}
+  h2 {{ font-size: 1.05rem !important; }}
+  .orig-header {{ flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }}
+  .orig-tag {{ font-size: 0.75rem !important; padding: 4px 10px !important; }}
+  .topbar {{ gap: 6px !important; }}
+  .tbtn {{ padding: 6px 10px !important; font-size: 0.8rem !important; }}
+  .lang-btn {{ padding: 4px 8px !important; font-size: 0.76rem !important; }}
+  .score {{ font-size: 0.86rem !important; padding: 8px 12px !important; }}
+  .bar {{ margin: 0 8px !important; }}
+  .opts.opts-inline {{ grid-template-columns: 1fr !important; gap: 6px !important; }}
+  .opt {{ padding: 8px 10px !important; font-size: 0.88rem !important; gap: 6px !important; }}
+  .opt .n {{ width: 22px !important; height: 22px !important; flex: 0 0 22px !important; font-size: 0.76rem !important; }}
+  .min-item-actions {{ gap: 4px !important; }}
+  .min-btn {{ padding: 4px 8px !important; font-size: 0.74rem !important; }}
+  .min-ggb-frame-wrap iframe {{ height: 300px !important; }}
+  mjx-container {{ font-size: 85% !important; }}
+  #studentName {{ min-width: 0 !important; width: 100% !important; }}
 }}
 
 @media (max-width: 360px) {{
-  .wrap {{
-    padding: 10px 8px 50px !important;
-  }}
-  h1 {{
-    font-size: 1.08rem !important;
-  }}
-  .q, .sol, .orig-card, .min7014-addon-card, .sym-card, .know {{
-    padding: 12px 10px !important;
-    border-radius: 12px !important;
-  }}
-  mjx-container {{
-    font-size: 80% !important;
-  }}
+  .wrap {{ padding: 10px 8px 50px !important; }}
+  h1 {{ font-size: 1.08rem !important; }}
+  .q, .sol, .orig-card, .min7014-addon-card, .sym-card, .know {{ padding: 12px 10px !important; border-radius: 12px !important; }}
+  mjx-container {{ font-size: 80% !important; }}
 }}
 </style>
 <script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\(','\\)']]}}}};</script>
@@ -772,11 +1650,11 @@ function setBoardLang(lang, isUserAction) {{
 
 def _esc(s): return html.escape(str(s))
 
-REPORT_WRAP_HTML = '''<div class="report-wrap" style="margin-top:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+REPORT_WRAP_HTML = '''<div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
-<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:rgba(13,16,32,.6);color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
 <button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
 <button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
@@ -860,14 +1738,14 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
     """Full-screen name gate with bilingual support and Guest Free Pass."""
     slug_js = quiz_slug.replace("'", "\\'")
     html = (
-        '<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0a0d1a 0%,#141833 50%,#0a0d1a 100%);padding:24px;text-align:center">'
-        '<div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:rgba(15,23,42,.85);border:1.5px solid rgba(124,196,255,.35);border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)">'
+        '<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(252,248,250,0.97);padding:24px;text-align:center">'
+        '<div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)">'
         '<button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang(\'ko\')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button>'
         '<button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang(\'en\')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button>'
         '</div>'
         '<h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2>'
-        '<div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,23,42,.92);border:1.5px solid rgba(124,196,255,.5);border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10">'
-        '<span style="font-size:0.83rem;color:#cbd5e1;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span>'
+        '<div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10">'
+        '<span style="font-size:0.83rem;color:#45464d;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span>'
         '<button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang(\'ko\')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button>'
         '<button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang(\'en\')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button>'
         '</div>'
@@ -877,10 +1755,10 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
         '</button>'
         '<div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div>'
         '</div>'
-        '<h3 style="color:#e8ecf5;margin:0 0 6px"><span class="bilingual-ko">📝 먼저 이름을 입력하세요</span><span class="bilingual-en">📝 Please enter your name first</span></h3>'
-        '<p style="color:#9aa6c0;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p>'
+        '<h3 style="color:#131b2e;margin:0 0 6px;font-weight:800"><span class="bilingual-ko">📝 먼저 이름을 입력하세요</span><span class="bilingual-en">📝 Please enter your name first</span></h3>'
+        '<p style="color:#45464d;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p>'
         '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
-        '<input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#222a3d;color:#e8ecf5;border:1px solid #2e3850;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center">'
+        '<input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#ffffff;color:#1b1b1d;border:1.5px solid #c5c6cd;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center">'
         '<button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button>'
         '</div></div>'
         '<script>'
@@ -890,9 +1768,9 @@ def _tracking_html(quiz_slug, sheets_api_url=''):
         'document.documentElement.lang=l;'
         'try{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}catch(e){}'
         'var bKo=document.getElementById("btnTrackFullLangKo");var bEn=document.getElementById("btnTrackFullLangEn");'
-        'if(bKo&&bEn){if(l==="en"){bKo.style.background="transparent";bKo.style.color="#cbd5e1";bKo.style.fontWeight="700";bEn.style.background="#38bdf8";bEn.style.color="#0b1020";bEn.style.fontWeight="800";}else{bKo.style.background="#38bdf8";bKo.style.color="#0b1020";bKo.style.fontWeight="800";bEn.style.background="transparent";bEn.style.color="#cbd5e1";bEn.style.fontWeight="700";}}'
+        'if(bKo&&bEn){if(l==="en"){bKo.style.background="transparent";bKo.style.color="#45464d";bKo.style.fontWeight="700";bEn.style.background="#38bdf8";bEn.style.color="#0b1020";bEn.style.fontWeight="800";}else{bKo.style.background="#38bdf8";bKo.style.color="#0b1020";bKo.style.fontWeight="800";bEn.style.background="transparent";bEn.style.color="#45464d";bEn.style.fontWeight="700";}}'
         'var cKo=document.getElementById("btnModalCenterLangKo");var cEn=document.getElementById("btnModalCenterLangEn");'
-        'if(cKo&&cEn){if(l==="en"){cKo.style.background="transparent";cKo.style.color="#cbd5e1";cKo.style.fontWeight="700";cKo.style.boxShadow="none";cEn.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cEn.style.color="#0b1020";cEn.style.fontWeight="800";cEn.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";}else{cKo.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cKo.style.color="#0b1020";cKo.style.fontWeight="800";cKo.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";cEn.style.background="transparent";cEn.style.color="#cbd5e1";cEn.style.fontWeight="700";cEn.style.boxShadow="none";}}'
+        'if(cKo&&cEn){if(l==="en"){cKo.style.background="transparent";cKo.style.color="#45464d";cKo.style.fontWeight="700";cKo.style.boxShadow="none";cEn.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cEn.style.color="#0b1020";cEn.style.fontWeight="800";cEn.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";}else{cKo.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cKo.style.color="#0b1020";cKo.style.fontWeight="800";cKo.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";cEn.style.background="transparent";cEn.style.color="#45464d";cEn.style.fontWeight="700";cEn.style.boxShadow="none";}}'
         'var sn=document.getElementById("studentName");if(sn)sn.placeholder=(l==="en")?"Enter name":"이름 입력";'
         'if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);'
         '}'
