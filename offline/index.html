@@ -15,87 +15,72 @@ window.MathJax = {
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'"></script>
 <style>
 :root {
-  --bg: #050811; --card: rgba(15, 23, 42, 0.72); --card2: rgba(30, 41, 59, 0.75); --line: rgba(255,255,255,.12);
-  --txt: #f8fafc; --sub: #94a3b8; --accent: #38bdf8; --accent2: #818cf8; --good: #34d399; --gold: #fbbf24;
-  --glass-blur: 24px; --glass-shadow: 0 16px 40px -10px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);
-  --radius: 18px;
+  --bg: #fcf8fa; --card: #ffffff; --card2: #f6f3f5; --line: #e4e2e4;
+  --txt: #1b1b1d; --sub: #45464d; --primary: #131b2e; --accent: #006398; --accent2: #4f46e5; --good: #059669; --gold: #b45309;
+  --glass-blur: 16px; --glass-shadow: 0 2px 12px rgba(19,27,46,.05);
+  --radius: 16px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   color: var(--txt); line-height: 1.65;
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  background:
-    radial-gradient(circle at 14% 12%, rgba(56, 189, 248, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 86% 16%, rgba(129, 140, 248, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.10) 0%, transparent 50%),
-    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(175deg, #050811 0%, #0b1022 45%, #060914 100%);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px, 100% 100%;
-  background-attachment: fixed; min-height: 100vh; padding: 36px 20px 80px;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg);
+  min-height: 100vh; padding: 36px 20px 80px;
 }
 .wrap { max-width: 960px; margin: 0 auto; }
 h1 {
-  font-size: 2.2rem; background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-size: 2.1rem; color: var(--primary);
   font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em;
 }
-.lead { color: var(--sub); font-size: 1.02rem; margin-bottom: 28px; }
+.lead { color: var(--sub); font-size: 1.02rem; margin-bottom: 24px; }
 .banner {
-  background: linear-gradient(135deg, rgba(56,189,248,.15), rgba(15,23,42,.8));
-  border: 1px solid rgba(56,189,248,.38); border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: var(--radius);
   padding: 22px 26px; margin-bottom: 20px; box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
 }
-.search-box {
-  margin-bottom: 20px; position: relative;
-}
+.search-box { margin-bottom: 20px; position: relative; }
 .search-input {
-  width: 100%; background: rgba(15,23,42,0.85); border: 1.5px solid rgba(56,189,248,0.35);
-  border-radius: 14px; padding: 13px 18px; color: #fff; font-size: 0.95rem;
+  width: 100%; background: #ffffff; border: 1.5px solid #c5c6cd;
+  border-radius: 14px; padding: 13px 18px; color: var(--txt); font-size: 0.95rem;
   font-family: inherit; outline: none; transition: border-color .2s, box-shadow .2s;
 }
 .search-input:focus {
-  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,99,152,0.12);
 }
 .list { display: grid; gap: 14px; }
 .card {
-  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(15,23,42,0.78) 100%);
-  border: 1px solid rgba(255,255,255,.10); border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid var(--line); border-radius: var(--radius);
   padding: 20px 24px; display: flex; align-items: center; justify-content: space-between;
-  gap: 18px; flex-wrap: wrap; transition: .25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 30px -8px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.1);
-  backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+  gap: 18px; flex-wrap: wrap; transition: .2s;
+  box-shadow: var(--glass-shadow);
 }
 .card:hover {
-  border-color: rgba(56,189,248,.45); transform: translateY(-3px);
-  box-shadow: 0 20px 45px -10px rgba(56,189,248,.25), inset 0 1px 0 rgba(255,255,255,.2);
+  border-color: var(--accent); transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(19,27,46,.08);
 }
-.card-title { font-size: 1.08rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.01em; }
+.card-title { font-size: 1.06rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: -0.01em; }
 .card-title:hover { color: var(--accent); }
 .card-meta { font-size: 0.84rem; color: var(--sub); margin-top: 6px; }
 .btn {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
-  padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 0.88rem;
+  background: #000000; color: #ffffff;
+  padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 0.88rem;
   text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-  box-shadow: 0 4px 16px rgba(56,189,248,.4); transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1); transition: transform .15s;
 }
-.btn:hover {
-  transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,.6);
-}
+.btn:hover { transform: translateY(-1px); background: #1e293b; }
 .lang-switcher {
-  display: inline-flex; align-items: center; background: rgba(15,23,42,0.75);
-  border: 1px solid rgba(124,196,255,0.35); border-radius: 20px; padding: 2px 4px; gap: 3px;
+  display: inline-flex; align-items: center; background: #f0edef;
+  border: 1px solid var(--line); border-radius: 20px; padding: 3px 4px; gap: 3px;
 }
 .lang-btn {
   background: transparent; border: none; color: var(--sub); font-family: inherit;
-  font-size: 0.78rem; font-weight: 800; padding: 4px 9px; border-radius: 14px; cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+  font-size: 0.78rem; font-weight: 800; padding: 4px 10px; border-radius: 14px; cursor: pointer;
+  transition: all 0.15s;
 }
-.lang-btn:hover { color: #ffffff; background: rgba(255,255,255,0.08); }
 .lang-btn.active {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); color: #050811;
-  box-shadow: 0 2px 10px rgba(56,189,248,0.45);
+  background: #000000; color: #ffffff;
 }
 .bilingual-en { display: none; }
 html[lang="en"] .bilingual-ko { display: none !important; }
@@ -117,7 +102,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
 
   <div class="banner">
     <div style="font-weight:700;color:var(--good);margin-bottom:4px" id="txtBannerTitle">💡 오프라인 단독 파일 안내</div>
-    <div style="font-size:0.88rem;color:#cbd5e1" id="txtBannerBody">
+    <div style="font-size:0.88rem;color:#45464d" id="txtBannerBody">
       • 각 문제 파일은 이미지와 인터랙티브 채점 로직이 포함된 <b>단일 HTML 파일</b>입니다.<br>
       • 모든 문제에는 온라인 원본 주소(<code>https://min7014.github.io/mathedu/board/...</code>) 및 수학자료실 링크가 포함되어 있습니다.<br>
       • 온라인 상태가 되면 <b>새로운 업데이트 버전이 있는지 자동 감지</b>하여 알림창을 통해 [새 버전 내려받기] 또는 [현재 버전 풀기]를 선택할 수 있습니다.<br>
@@ -140,7 +125,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="1b623c24.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="1b623c24.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="1b623c24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="36790012">
@@ -153,7 +138,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="36790012.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="36790012.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="36790012.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="4cb6d212">
@@ -166,7 +151,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="4cb6d212.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="4cb6d212.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="4cb6d212.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="51908207">
@@ -179,7 +164,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="51908207.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="51908207.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="51908207.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="8e9d528d">
@@ -192,7 +177,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="8e9d528d.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="8e9d528d.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="8e9d528d.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="8f24f3c3">
@@ -205,7 +190,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="8f24f3c3.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="8f24f3c3.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="8f24f3c3.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="a05b47bc">
@@ -218,7 +203,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="a05b47bc.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="a05b47bc.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="a05b47bc.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="a33ab59b">
@@ -231,7 +216,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="a33ab59b.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="a33ab59b.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="a33ab59b.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="ac8dc374">
@@ -244,7 +229,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="ac8dc374.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="ac8dc374.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="ac8dc374.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c1092101">
@@ -257,7 +242,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c1092101.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c1092101.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c1092101.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2092102">
@@ -270,7 +255,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2092102.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2092102.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2092102.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261001">
@@ -283,7 +268,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261001.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261001.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261001.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261002">
@@ -296,7 +281,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261002.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261002.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261002.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261003">
@@ -309,7 +294,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261003.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261003.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261003.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261004">
@@ -322,7 +307,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261004.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261004.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261004.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261005">
@@ -335,7 +320,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261005.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261005.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261005.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261006">
@@ -348,7 +333,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261006.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261006.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261006.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261007">
@@ -361,7 +346,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261007.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261007.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261007.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261008">
@@ -374,7 +359,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261008.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261008.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261008.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261009">
@@ -387,7 +372,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261009.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261009.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261009.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261010">
@@ -400,7 +385,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261010.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261010.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261010.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261011">
@@ -413,7 +398,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261011.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261011.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261011.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261012">
@@ -426,7 +411,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261012.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261012.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261012.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261013">
@@ -439,7 +424,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261013.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261013.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261013.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261014">
@@ -452,7 +437,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261014.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261014.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261014.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261015">
@@ -465,7 +450,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261015.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261015.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261015.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261016">
@@ -478,7 +463,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261016.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261016.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261016.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261017">
@@ -491,7 +476,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261017.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261017.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261017.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261018">
@@ -504,7 +489,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261018.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261018.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261018.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261019">
@@ -517,7 +502,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261019.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261019.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261019.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261020">
@@ -530,7 +515,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261020.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261020.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261020.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261021">
@@ -543,7 +528,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261021.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261021.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261021.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c261022">
@@ -556,7 +541,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c261022.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c261022.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c261022.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g23">
@@ -569,7 +554,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g23.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g23.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g23.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g24">
@@ -582,7 +567,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g24.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g24.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g25">
@@ -595,7 +580,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g25.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g25.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g25.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g26">
@@ -608,7 +593,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g26.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g26.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g26.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g27">
@@ -621,7 +606,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g27.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g27.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g27.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g28">
@@ -634,7 +619,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g28.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g28.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g28.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g29">
@@ -647,7 +632,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g29.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g29.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g29.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610g30">
@@ -660,7 +645,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610g30.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610g30.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610g30.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m23">
@@ -673,7 +658,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m23.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m23.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m23.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m24">
@@ -686,7 +671,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m24.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m24.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m25">
@@ -699,7 +684,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m25.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m25.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m25.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m26">
@@ -712,7 +697,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m26.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m26.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m26.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m27">
@@ -725,7 +710,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m27.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m27.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m27.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m28">
@@ -738,7 +723,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m28.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m28.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m28.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m29">
@@ -751,7 +736,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m29.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m29.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m29.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610m30">
@@ -764,7 +749,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610m30.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610m30.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610m30.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p23">
@@ -777,7 +762,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p23.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p23.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p23.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p24">
@@ -790,7 +775,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p24.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p24.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p25">
@@ -803,7 +788,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p25.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p25.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p25.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p26">
@@ -816,7 +801,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p26.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p26.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p26.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p27">
@@ -829,7 +814,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p27.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p27.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p27.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p28">
@@ -842,7 +827,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p28.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p28.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p28.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p29">
@@ -855,7 +840,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p29.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p29.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p29.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c2610p30">
@@ -868,7 +853,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c2610p30.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c2610p30.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c2610p30.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270901">
@@ -881,7 +866,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270901.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270901.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270901.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270902">
@@ -894,7 +879,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270902.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270902.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270902.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270903">
@@ -907,7 +892,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270903.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270903.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270903.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270904">
@@ -920,7 +905,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270904.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270904.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270904.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270905">
@@ -933,7 +918,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270905.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270905.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270905.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270906">
@@ -946,7 +931,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270906.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270906.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270906.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270907">
@@ -959,7 +944,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270907.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270907.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270907.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270908">
@@ -972,7 +957,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270908.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270908.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270908.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270909">
@@ -985,7 +970,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270909.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270909.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270909.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270910">
@@ -998,7 +983,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270910.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270910.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270910.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270911">
@@ -1011,7 +996,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270911.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270911.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270911.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270912">
@@ -1024,7 +1009,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270912.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270912.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270912.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270913">
@@ -1037,7 +1022,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270913.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270913.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270913.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270914">
@@ -1050,7 +1035,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270914.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270914.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270914.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270915">
@@ -1063,7 +1048,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270915.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270915.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270915.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270916">
@@ -1076,7 +1061,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270916.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270916.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270916.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270917">
@@ -1089,7 +1074,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270917.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270917.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270917.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270918">
@@ -1102,7 +1087,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270918.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270918.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270918.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270919">
@@ -1115,7 +1100,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270919.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270919.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270919.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270920">
@@ -1128,7 +1113,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270920.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270920.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270920.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270921">
@@ -1141,7 +1126,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270921.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270921.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270921.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270922">
@@ -1154,7 +1139,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270922.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270922.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270922.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270923">
@@ -1167,7 +1152,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270923.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270923.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270923.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270924">
@@ -1180,7 +1165,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270924.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270924.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270924.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270925">
@@ -1193,7 +1178,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270925.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270925.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270925.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270926">
@@ -1206,7 +1191,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270926.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270926.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270926.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270927">
@@ -1219,7 +1204,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270927.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270927.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270927.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270928">
@@ -1232,7 +1217,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270928.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270928.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270928.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270929">
@@ -1245,7 +1230,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270929.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270929.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270929.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c270930">
@@ -1258,7 +1243,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c270930.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c270930.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c270930.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30901">
@@ -1271,7 +1256,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30901.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30901.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30901.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30902">
@@ -1284,7 +1269,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30902.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30902.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30902.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30903">
@@ -1297,7 +1282,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30903.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30903.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30903.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30904">
@@ -1310,7 +1295,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30904.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30904.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30904.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30905">
@@ -1323,7 +1308,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30905.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30905.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30905.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30906">
@@ -1336,7 +1321,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30906.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30906.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30906.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30907">
@@ -1349,7 +1334,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30907.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30907.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30907.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30908">
@@ -1362,7 +1347,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30908.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30908.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30908.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30909">
@@ -1375,7 +1360,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30909.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30909.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30909.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30910">
@@ -1388,7 +1373,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30910.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30910.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30910.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30911">
@@ -1401,7 +1386,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30911.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30911.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30911.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30912">
@@ -1414,7 +1399,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30912.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30912.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30912.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30913">
@@ -1427,7 +1412,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30913.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30913.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30913.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30914">
@@ -1440,7 +1425,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30914.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30914.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30914.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30915">
@@ -1453,7 +1438,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30915.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30915.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30915.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30916">
@@ -1466,7 +1451,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30916.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30916.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30916.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30917">
@@ -1479,7 +1464,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30917.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30917.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30917.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30918">
@@ -1492,7 +1477,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30918.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30918.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30918.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30919">
@@ -1505,7 +1490,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30919.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30919.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30919.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30920">
@@ -1518,7 +1503,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30920.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30920.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30920.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30921">
@@ -1531,7 +1516,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30921.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30921.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30921.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30922">
@@ -1544,7 +1529,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30922.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30922.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30922.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30923">
@@ -1557,7 +1542,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30923.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30923.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30923.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30924">
@@ -1570,7 +1555,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30924.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30924.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30924.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30925">
@@ -1583,7 +1568,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30925.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30925.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30925.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30926">
@@ -1596,7 +1581,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30926.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30926.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30926.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30927">
@@ -1609,7 +1594,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30927.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30927.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30927.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30928">
@@ -1622,7 +1607,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30928.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30928.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30928.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30929">
@@ -1635,7 +1620,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30929.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30929.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30929.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="c30930">
@@ -1648,7 +1633,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="c30930.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="c30930.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="c30930.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="d7abad20">
@@ -1661,7 +1646,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="d7abad20.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="d7abad20.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="d7abad20.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
     <div class="card" data-slug="e7d51a27">
@@ -1674,7 +1659,7 @@ html[lang="en"] .bilingual-en { display: inline !important; }
       </div>
       <div>
         <a href="e7d51a27.html" class="btn" download><span class="btn-download-text">📥 다운로드</span></a>
-        <a href="e7d51a27.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
+        <a href="e7d51a27.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
   </div>
