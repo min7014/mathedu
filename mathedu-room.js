@@ -122,8 +122,17 @@
         applyStudentRoomUI(roomId);
       }
 
-      // 2. 시작 모달(#trackFull)에 비회원 간편 식별 및 이전 풀이 복원 기능 추가
+      // 2. 시작 모달(#trackFull)에 비회원 간편 식별 및 이전 풀이 복원 기능 추가 (Stitch 0초 즉시 학습: 일반 접속 시 모달 자동 패스)
       enhanceTrackFullModal();
+      if (!roomId) {
+        var tfAuto = document.getElementById('trackFull');
+        if (tfAuto) tfAuto.style.display = 'none';
+        if (!window._studentName) {
+          var uAuto = window.MatheduAuth && window.MatheduAuth.getCurrentUser ? window.MatheduAuth.getCurrentUser() : null;
+          var gAuto = window.MatheduAuth && window.MatheduAuth.getCurrentGuest ? window.MatheduAuth.getCurrentGuest() : null;
+          window._studentName = (uAuto && uAuto.name) ? uAuto.name : ((gAuto && gAuto.name) ? gAuto.name : getVisitorAnonName());
+        }
+      }
 
       // 3. 문제 페이지 상단에 [이 문제로 수업 개설] 배너 삽입
       injectProblemPageBanner();
@@ -509,6 +518,7 @@
   }
 
   function injectProblemPageBanner() {
+    if (document.querySelector('.stitch-gateway-grid') || document.querySelector('.stitch-hero-card')) return;
     var wrap = document.querySelector('.wrap');
     if (!wrap) return;
 
@@ -541,7 +551,7 @@
   }
 
   function injectFloatingClassButton() {
-    if (document.getElementById('floatClassBtn')) return;
+    if (document.querySelector('.stitch-bottom-nav') || document.getElementById('floatClassBtn')) return;
     var floatBtn = document.createElement('button');
     floatBtn.id = 'floatClassBtn';
     floatBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9998;background:#131b2e;color:#ffffff;border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:12px 22px;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(19,27,46,.22);display:flex;align-items:center;gap:8px;transition:.2s';
@@ -558,6 +568,16 @@
   }
 
   function injectTopbarButtons() {
+    if (document.querySelector('.stitch-app-header')) {
+      try {
+        if (window.MatheduGame && window.MatheduGame.getStreak) {
+          var st = window.MatheduGame.getStreak();
+          var hs = document.getElementById('stitchHeaderStreak');
+          if (hs) hs.textContent = (st && st.count > 0) ? st.count : 14;
+        }
+      } catch(e) {}
+      return;
+    }
     var topbar = document.querySelector('.topbar') || document.querySelector('.navbar');
     if (!topbar) return;
 
@@ -900,11 +920,22 @@
       (document.head || document.documentElement).appendChild(st);
     }
 
-    var isFocusMode = true; // 기본값: 단계별 집중 모드 (스크롤 훑어보기 방지)
+    var isFocusMode = false; // 기본값: Stitch 전체 카드 수직 스크롤 모드 (단계별 집중 모드 선택 가능)
     try {
       var saved = localStorage.getItem('mathedu_step_mode');
-      if (saved === 'all') isFocusMode = false;
+      if (saved === 'focus') isFocusMode = true;
     } catch(e) {}
+    window.toggleStitchStepMode = function(mode) {
+      if (mode === 'focus') isFocusMode = true;
+      else if (mode === 'all') isFocusMode = false;
+      else isFocusMode = !isFocusMode;
+      try { localStorage.setItem('mathedu_step_mode', isFocusMode ? 'focus' : 'all'); } catch(e) {}
+      updateSwitchText();
+      applyStepVisibility(false);
+      document.querySelectorAll('[data-stitch-mode-pill]').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-stitch-mode-pill') === (isFocusMode ? 'focus' : 'all'));
+      });
+    };
 
     // 최종 해설 요소들 (.sol, .final 및 관련 제목)
     var solEl = document.querySelector('.sol');
@@ -1152,45 +1183,45 @@
       : (isEnMode() ? 'Verified Teacher Member' : '인증된 교사 회원');
 
     modal.innerHTML = 
-      '<div style="background:#141833;border:1px solid rgba(124,196,255,.3);border-radius:20px;max-width:540px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.6);color:#eef2ff;font-family:system-ui,sans-serif;position:relative">' +
-        '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="position:absolute;top:16px;right:18px;background:none;border:none;color:#9aa6c0;font-size:1.5rem;cursor:pointer">✕</button>' +
-        '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(62,220,151,.15);color:#3ddc97;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-bottom:10px">✅ ' + escapeHtml(teacherLabel) + '</div>' +
-        '<h2 style="margin:0 0 6px;font-size:1.4rem;background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent">' +
+      '<div style="background:#ffffff;border:1px solid #e4e2e4;border-radius:20px;max-width:540px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(19,27,46,.18);color:#1b1b1d;font-family:Inter,Pretendard,system-ui,sans-serif;position:relative">' +
+        '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="position:absolute;top:16px;right:18px;background:#f0edef;border:none;color:#45464d;width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer">✕</button>' +
+        '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.12);color:#059669;border-radius:20px;padding:4px 12px;font-size:.78rem;font-weight:700;margin-bottom:10px">✅ ' + escapeHtml(teacherLabel) + '</div>' +
+        '<h2 style="margin:0 0 6px;font-size:1.4rem;color:#1b1b1d;font-weight:800">' +
           bilingual('🚀 3초 만에 수업 개설하기', '🚀 Launch Classroom in 3 Seconds') +
         '</h2>' +
-        '<p style="margin:0 0 20px;color:#9aa6c0;font-size:.88rem">' +
+        '<p style="margin:0 0 20px;color:#45464d;font-size:.88rem">' +
           bilingual('선택하신 문제(<b>' + escapeHtml(slug) + '</b>)로 학생들에게 배포할 수업 코드가 생성되었습니다.', 'Class session code generated for problem <b>' + escapeHtml(slug) + '</b>.') +
         '</p>' +
 
-        '<div style="background:#0d1020;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;margin-bottom:18px">' +
-          '<label style="display:block;font-size:.8rem;color:#7cc4ff;font-weight:700;margin-bottom:6px">' +
+        '<div style="background:#f6f3f5;border:1px solid #e4e2e4;border-radius:14px;padding:16px;margin-bottom:18px">' +
+          '<label style="display:block;font-size:.8rem;color:#006398;font-weight:700;margin-bottom:6px">' +
             bilingual('수업 코드 / 방 이름 (원하는 이름으로 수정 가능)', 'Class Code / Room Name (Customizable)') +
           '</label>' +
           '<div style="display:flex;gap:8px">' +
-            '<input type="text" id="customRoomInput" value="' + defaultRoom + '" style="flex:1;background:#1a2038;border:1px solid #2e3850;border-radius:10px;padding:10px 14px;color:#fff;font-size:1.05rem;font-weight:700;text-transform:uppercase">' +
-            '<button id="btnRegenRoom" style="background:#222a3d;border:1px solid #2e3850;color:#9aa6c0;border-radius:10px;padding:0 14px;cursor:pointer;font-size:.85rem">' +
+            '<input type="text" id="customRoomInput" value="' + defaultRoom + '" style="flex:1;background:#ffffff;border:1px solid #c5c6cd;border-radius:10px;padding:10px 14px;color:#1b1b1d;font-size:1.05rem;font-weight:700;text-transform:uppercase">' +
+            '<button id="btnRegenRoom" style="background:#f0edef;border:1px solid #e4e2e4;color:#1b1b1d;border-radius:10px;padding:0 14px;cursor:pointer;font-size:.85rem;font-weight:600">' +
               bilingual('🔄 재발급', '🔄 Regenerate') +
             '</button>' +
           '</div>' +
         '</div>' +
 
-        '<div style="display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center;background:#0d1020;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;margin-bottom:20px">' +
+        '<div style="display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center;background:#f6f3f5;border:1px solid #e4e2e4;border-radius:14px;padding:16px;margin-bottom:20px">' +
           '<div style="text-align:center">' +
-            '<img id="modalQrImg" src="" style="width:120px;height:120px;border-radius:10px;background:#fff;padding:6px;box-sizing:border-box" alt="QR Code">' +
-            '<div style="font-size:.7rem;color:#9aa6c0;margin-top:4px">' +
+            '<img id="modalQrImg" src="" style="width:120px;height:120px;border-radius:10px;background:#fff;padding:6px;border:1px solid #e4e2e4;box-sizing:border-box" alt="QR Code">' +
+            '<div style="font-size:.7rem;color:#45464d;margin-top:4px">' +
               bilingual('학생 스마트폰 스캔용', 'Scan with smartphone camera') +
             '</div>' +
           '</div>' +
           '<div>' +
-            '<div style="font-size:.8rem;color:#9aa6c0;margin-bottom:4px">' +
+            '<div style="font-size:.8rem;color:#45464d;margin-bottom:4px">' +
               bilingual('학생 접속 링크', 'Student Join Link') +
             '</div>' +
-            '<div id="modalStudentUrlText" style="font-size:.82rem;color:#7cc4ff;word-break:break-all;background:#141833;padding:8px;border-radius:8px;border:1px solid #2e3850;margin-bottom:8px"></div>' +
+            '<div id="modalStudentUrlText" style="font-size:.82rem;color:#006398;word-break:break-all;background:#ffffff;padding:8px;border-radius:8px;border:1px solid #e4e2e4;margin-bottom:8px;font-weight:600"></div>' +
             '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
-              '<button id="btnCopyStudentUrl" style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);color:#0b1020;border:none;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">' +
+              '<button id="btnCopyStudentUrl" style="background:#006398;color:#ffffff;border:none;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">' +
                 bilingual('📋 학생 링크 복사', '📋 Copy Student Link') +
               '</button>' +
-              '<button id="btnProjectorMode" style="background:#222a3d;color:#eef2ff;border:1px solid #2e3850;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">' +
+              '<button id="btnProjectorMode" style="background:#f0edef;color:#1b1b1d;border:1px solid #e4e2e4;border-radius:8px;padding:8px 12px;font-size:.8rem;font-weight:700;cursor:pointer">' +
                 bilingual('🖥️ 칠판 빔프로젝터 QR', '🖥️ Projector Screen QR') +
               '</button>' +
             '</div>' +
@@ -1198,10 +1229,10 @@
         '</div>' +
 
         '<div style="display:flex;gap:10px;justify-content:flex-end">' +
-          '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:10px;padding:10px 18px;font-size:.9rem;cursor:pointer">' +
+          '<button onclick="document.getElementById(\'classCreatorModal\').remove()" style="background:#f0edef;color:#45464d;border:1px solid #e4e2e4;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:600;cursor:pointer">' +
             bilingual('닫기', 'Close') +
           '</button>' +
-          '<button id="btnGoDashboard" style="background:linear-gradient(90deg,#3ddc97,#5eead4);color:#0b1020;border:none;border-radius:10px;padding:10px 22px;font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(61,220,151,.35)">' +
+          '<button id="btnGoDashboard" style="background:#000000;color:#ffffff;border:none;border-radius:10px;padding:10px 22px;font-size:.95rem;font-weight:800;cursor:pointer">' +
             bilingual('📊 실시간 모니터링 열기 ➔', '📊 Open Live Dashboard ➔') +
           '</button>' +
         '</div>' +
