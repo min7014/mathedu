@@ -1903,14 +1903,76 @@ mjx-container:not([display="true"]) {
 </style>"""
 
 
-def split_title_two_tone(h1_ko_raw):
-    # Clean leading emoji
+CUSTOM_TITLE_MAP = {
+    '1b623c24': (
+        '확률과 통계 · 독립시행과 패리티',
+        '카드 뒤집기 4회 반복 후 모두 앞면일 확률',
+        'Probability & Parity · All 6 Cards Face-Up After 4 Dice Rolls'
+    ),
+    '36790012': (
+        '확률과 통계 · 모평균의 신뢰구간',
+        '정규분포 신뢰구간으로 표본크기 n 구하기',
+        'Statistical Estimation · Finding Sample Size n from Confidence Interval'
+    ),
+    '4cb6d212': (
+        '확률과 통계 · 조합(nCr)의 활용',
+        '3 ≤ x < y < z < w ≤ 13 자연수 순서쌍의 개수',
+        'Combinatorics · Counting Strictly Increasing Integer Quadruples'
+    ),
+    '51908207': (
+        '확률과 통계 · 조건부확률과 상태전이',
+        '카드 교환 주사위 게임 · 4회 후 초기 상태일 때의 조건부확률',
+        'Conditional Probability & State Transition · 4-Round Card Swap Game'
+    ),
+    '8e9d528d': (
+        '수학I · 로그의 성질과 밑의 변환',
+        'log 2 = a, log 3 = b일 때 log 12를 a, b로 나타내기',
+        'Logarithm Properties · Expressing log 12 in Terms of a = log 2 and b = log 3'
+    ),
+    '8f24f3c3': (
+        '확률과 통계 · 수학적 확률과 표본공간',
+        '주사위를 두 번 굴려 눈의 합이 7이 나올 확률',
+        'Mathematical Probability · Sum of Two Dice Equals 7'
+    ),
+    'a05b47bc': (
+        '확률과 통계 · 순서가 정해진 순열',
+        '7개 깃발 배열에서 빨강이 노랑·파랑보다 왼쪽에 올 경우의 수',
+        'Permutations with Order Constraints · Arranging 7 Colored Flags'
+    ),
+    'a33ab59b': (
+        '기하 · 이차곡선(쌍곡선의 정의)',
+        "쌍곡선 PF' - PF = 2 조건의 점 P 좌표와 삼각형 넓이",
+        "Conic Sections (Hyperbola) · Coordinates of P and Area of △PF'F"
+    ),
+    'ac8dc374': (
+        '2027학년도 9월 모의평가 수학 21번',
+        '삼차함수와 절댓값 함수의 미분가능성',
+        '2027 AY Sep Mock CSAT Math #21 · Cubic Function & Absolute Value Differentiability'
+    ),
+    'd7abad20': (
+        '2009학년도 6월 학력평가 수학 29번',
+        '삼각함수 덧셈정리를 활용한 나무 높이 측정',
+        '2009 AY June Exam Math #29 · Measuring Tree Height via Tangent Addition Formula'
+    ),
+    'e7d51a27': (
+        '수학II · 절댓값 함수의 미분가능성',
+        '절댓값 합성함수의 미분가능 조건과 자연수 n의 합',
+        'Calculus · Differentiability of Absolute Value Composite Functions'
+    ),
+}
+
+
+def split_title_two_tone(h1_ko_raw, slug=""):
+    if slug in CUSTOM_TITLE_MAP:
+        return CUSTOM_TITLE_MAP[slug][0], CUSTOM_TITLE_MAP[slug][1]
+    # Clean leading emoji and internal tags
     clean = re.sub(r'^[📘📙📕📝📐]\s*', '', h1_ko_raw).strip()
+    clean = re.sub(r'\s*\(자동 폴백 아님[^)]*\)', '', clean).strip()
     m = re.match(r'^\[([^\]]+)\]\s*(.+)$', clean)
     if m:
         return m.group(1).strip(), m.group(2).strip()
-    # If there's a middle dot or colon
-    if '·' in clean:
+    # If there's a middle dot outside parentheses
+    if '·' in clean and not clean.endswith(')'):
         parts = clean.split('·', 1)
         return parts[0].strip(), parts[1].strip()
     return "수능·학력평가 기출 디딤돌", clean
@@ -1921,45 +1983,62 @@ def latex_ans_to_svg_text(html):
     if not m:
         return None
     raw = m.group(1)
-    raw = re.sub(r'^정답\s*', '', raw).strip()
+    raw = re.sub(r'<span class="bilingual-en">.*?</span>', '', raw, flags=re.S)
+    raw = re.sub(r'<[^>]+>', ' ', raw)
+    raw = re.sub(r'(?:정답|Correct Answer|Answer|\:)', ' ', raw, flags=re.I).strip()
     raw = raw.strip('$').strip()
-    # Convert \dfrac{A}{B} and \frac{A}{B}
+    # Convert \sqrt[3]{...} and \sqrt{...} FIRST before \frac/\dfrac so nested braces work!
     for _ in range(3):
+        raw = re.sub(r'\\sqrt\[3\]\{([^{}]+)\}', r'³√\1', raw)
+        raw = re.sub(r'\\sqrt\{([^{}]+)\}', r'√\1', raw)
         raw = re.sub(
             r'\\d?frac\{([^{}]+)\}\{([^{}]+)\}',
             lambda fm: (f"({fm.group(1)})" if ('+' in fm.group(1) or '-' in fm.group(1)[1:]) else fm.group(1)) + '/' + fm.group(2),
             raw
         )
-    raw = re.sub(r'\\sqrt\{([^{}]+)\}', r'√\1', raw)
     raw = raw.replace(r'\pi', 'π').replace(r'\ln', 'ln ').replace(r'\le', '≤').replace(r'\ge', '≥')
-    raw = raw.replace('{', '').replace('}', '').replace('\\', '').strip()
+    raw = raw.replace('^2', '²').replace('^3', '³')
+    raw = raw.replace('$', '').replace('{', '').replace('}', '').replace('\\', '').strip()
     raw = re.sub(r'\s+', ' ', raw)
     return raw
 
 
 def convert_svg_to_stitch_light(svg_str, clean_ans=None):
     if clean_ans:
-        svg_str = re.sub(r'Answer:\s*[^<]+', f'Answer: {clean_ans}', svg_str)
-        svg_str = re.sub(r'🎯 최종 결론:\s*[^<]+', f'🎯 최종 결론: {clean_ans}', svg_str)
+        svg_str = re.sub(r'Answer:\s*[^<]+(?=</text>)', f'Answer: {clean_ans}', svg_str)
+        svg_str = re.sub(r'🎯 최종 결론:\s*[^<]+(?=</text>)', f'🎯 최종 결론: {clean_ans}', svg_str)
+
+    # 1. Regex replacements for dark rgba fills on rects/paths
+    svg_str = re.sub(r'fill="rgba\(15,\s*23,\s*42,\s*[0-9.]+\)"', 'fill="#ffffff"', svg_str)
+    svg_str = re.sub(r'fill="rgba\(30,\s*41,\s*59,\s*[0-9.]+\)"', 'fill="#f8fafc"', svg_str)
+    svg_str = re.sub(r'(<rect\b[^>]*?)\bfill="#(?:131b2e|0f172a|0b1120)"', r'\1fill="#f8fafc"', svg_str)
+    svg_str = re.sub(r'(<rect\b[^>]*?)\bfill="#065f46"', r'\1fill="#ecfdf5"', svg_str)
 
     svg_replacements = [
         ('background:linear-gradient(145deg,#0b1120 0%,#131c33 100%)', 'background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%)'),
         ('border:1.5px solid rgba(124,196,255,0.35);box-shadow:0 6px 24px rgba(0,0,0,0.45)', 'border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)'),
         ('stroke="rgba(148,163,184,0.08)"', 'stroke="rgba(0,99,184,0.06)"'),
         ('fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.35)"', 'fill="#e0f2fe" stroke="#7dd3fc"'),
-        ('fill="rgba(15,23,42,0.9)"', 'fill="#ffffff"'),
-        ('fill="rgba(30,41,59,0.9)"', 'fill="#f8fafc"'),
-        ('fill="rgba(30,41,59,0.85)"', 'fill="#f8fafc"'),
+        ('fill="rgba(56,189,248,0.12)"', 'fill="#eff6ff"'),
         ('fill="rgba(56,189,248,0.14)"', 'fill="#eff6ff"'),
         ('fill="rgba(56,189,248,0.15)"', 'fill="#eff6ff"'),
+        ('fill="rgba(56,189,248,0.16)"', 'fill="#e0f2fe"'),
         ('fill="rgba(56,189,248,0.18)"', 'fill="#e0f2fe"'),
+        ('fill="rgba(167,139,250,0.12)"', 'fill="#f5f3ff"'),
         ('fill="rgba(167,139,250,0.15)"', 'fill="#f5f3ff"'),
+        ('fill="rgba(52,211,153,0.12)"', 'fill="#ecfdf5"'),
         ('fill="rgba(52,211,153,0.15)"', 'fill="#ecfdf5"'),
+        ('fill="rgba(52,211,153,0.16)"', 'fill="#ecfdf5"'),
         ('fill="rgba(52,211,153,0.22)"', 'fill="#ecfdf5"'),
         ('fill="rgba(52,211,153,0.32)"', 'fill="#dcfce7"'),
         ('fill="rgba(52,211,153,0.45)"', 'fill="#bbf7d0"'),
+        ('fill="rgba(251,191,36,0.14)"', 'fill="#fef3c7"'),
         ('fill="rgba(251,191,36,0.18)"', 'fill="#fef3c7"'),
         ('fill="rgba(251,191,36,0.2)"', 'fill="#fef3c7"'),
+        ('fill="rgba(251,191,36,0.22)"', 'fill="#fef3c7"'),
+        ('fill="rgba(251,113,133,0.12)"', 'fill="#fff1f2"'),
+        ('fill="rgba(251,113,133,0.14)"', 'fill="#fff1f2"'),
+        ('fill="rgba(251,113,133,0.18)"', 'fill="#ffe4e6"'),
         ('fill="rgba(251,113,133,0.28)"', 'fill="#ffe4e6"'),
         ('fill="#38bdf8"', 'fill="#006398"'),
         ('fill="#7cc4ff"', 'fill="#006398"'),
@@ -1967,13 +2046,11 @@ def convert_svg_to_stitch_light(svg_str, clean_ans=None):
         ('fill="#fde68a"', 'fill="#b45309"'),
         ('fill="#6ee7b7"', 'fill="#047857"'),
         ('fill="#a7f3d0"', 'fill="#047857"'),
-        ('fill="#ecfdf5"', 'fill="#065f46"'),
         ('fill="#c4b5fd"', 'fill="#4f46e5"'),
         ('fill="#ddd6fe"', 'fill="#4f46e5"'),
         ('fill="#fecdd3"', 'fill="#be123c"'),
         ('fill="#fb7185"', 'fill="#be123c"'),
         ('fill="#e2e8f0"', 'fill="#334155"'),
-        ('fill="#f8fafc"', 'fill="#131b2e"'),
         ('fill="#cbd5e1"', 'fill="#475569"'),
         ('stroke="#0b1120"', 'stroke="#ffffff"'),
         ('fill="#0b1120"', 'fill="#ffffff"'),
@@ -1981,12 +2058,15 @@ def convert_svg_to_stitch_light(svg_str, clean_ans=None):
     for old_s, new_s in svg_replacements:
         svg_str = svg_str.replace(old_s, new_s)
 
-    # Change standalone <text ... fill="#fff" ...> (not on a <circle> line) to fill="#1b1b1d"
+    # Only on <text> tags (when not on the same line as a <circle>), replace light text fills with high-contrast dark fills
     lines = svg_str.split('\n')
     out_lines = []
     for ln in lines:
-        if '<circle' not in ln and 'fill="#fff"' in ln and '<text' in ln:
+        if '<text' in ln and '<circle' not in ln:
             ln = ln.replace('fill="#fff"', 'fill="#1b1b1d"')
+            ln = ln.replace('fill="#ffffff"', 'fill="#1b1b1d"')
+            ln = ln.replace('fill="#f8fafc"', 'fill="#131b2e"')
+            ln = ln.replace('fill="#ecfdf5"', 'fill="#065f46"')
         out_lines.append(ln)
     return '\n'.join(out_lines)
 
@@ -2407,6 +2487,10 @@ def clean_non_svg_inline_colors(html):
         ('color:#fb7185', 'color:#be123c'),
         ('color:#9aa6c0', 'color:#64748b'),
         ("color='#9aa6c0'", "color='#64748b'"),
+        ('color:#cbd5e1', 'color:#475569'),
+        ('color:#67e8f9', 'color:#006398'),
+        ('color:#c084fc', 'color:#4f46e5'),
+        ('color:#d8b4fe', 'color:#4f46e5'),
         ('border:1px solid #2e3850', 'border:1px solid #cbd5e1'),
         ("borderColor='#2e3850'", "borderColor='#cbd5e1'"),
         ('background:rgba(255,255,255,.06)', 'background:#f1f5f9'),
@@ -2453,7 +2537,9 @@ def transform_file(filepath):
     main_m = re.search(r'<span class="stitch-h1-main">(.*?)</span>', h1_inner, flags=re.S)
     acc_m = re.search(r'<span class="stitch-h1-accent">(.*?)</span>', h1_inner, flags=re.S)
     en_m = re.search(r'<span class="bilingual-en">(.*?)</span>', h1_inner, flags=re.S)
-    if main_m and acc_m:
+    if slug in CUSTOM_TITLE_MAP:
+        h1_line1, h1_line2, h1_en_text = CUSTOM_TITLE_MAP[slug]
+    elif main_m and acc_m:
         h1_line1 = main_m.group(1).strip()
         h1_line2 = acc_m.group(1).strip()
         h1_en_text = en_m.group(1).strip() if en_m else (h1_line1 + ' ' + h1_line2)
@@ -2464,7 +2550,7 @@ def transform_file(filepath):
         else:
             h1_ko_raw = re.sub(r'<[^>]+>', '', h1_inner).strip()
         h1_en_text = en_m.group(1).strip() if en_m else h1_ko_raw
-        h1_line1, h1_line2 = split_title_two_tone(h1_ko_raw)
+        h1_line1, h1_line2 = split_title_two_tone(h1_ko_raw, slug=slug)
 
     lead_m = re.search(r'<p class="lead">(.*?)</p>', html, flags=re.S)
     lead_inner = lead_m.group(1) if lead_m else '초등학생도 1단계부터 차근차근 따라가면 수능·학력평가 본문항까지 스스로 풀 수 있는 단계별 디딤돌 퀴즈입니다.'
@@ -2527,7 +2613,7 @@ def transform_file(filepath):
   </div>
 </div>"""
         html = re.sub(
-            r'(<div class="orig-card">(?:(?!<h2).)*?)(</div>\s*(?=<h2))',
+            r'(<div class="orig-card">(?:(?!<h2).)*?)(</div>(\s*<!--[^>]*-->)*\s*(?=<h2))',
             lambda m: m.group(1) + orig_cta_html + '\n',
             html,
             count=1,

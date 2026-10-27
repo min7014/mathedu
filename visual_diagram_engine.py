@@ -33,29 +33,29 @@ def _svg_wrap(title_badge: str, subtitle_badge: str, inner_svg: str, height: int
         f'<svg class="mathedu-bespoke-svg" viewBox="0 0 680 {height}" '
         f'xmlns="http://www.w3.org/2000/svg" '
         f'style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;'
-        f'background:linear-gradient(145deg,#0b1120 0%,#131c33 100%);border:1.5px solid rgba(124,196,255,0.35);'
-        f'box-shadow:0 6px 24px rgba(0,0,0,0.45)">'
+        f'background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;'
+        f'box-shadow:0 4px 16px rgba(19,27,46,0.06)">'
         f'<defs>'
         f'<pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse">'
-        f'<path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(148,163,184,0.08)" stroke-width="1"/>'
+        f'<path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,99,184,0.06)" stroke-width="1"/>'
         f'</pattern>'
         f'<marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
-        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/>'
+        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#006398"/>'
         f'</marker>'
         f'<marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
-        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#fbbf24"/>'
+        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706"/>'
         f'</marker>'
         f'<marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
-        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399"/>'
+        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#059669"/>'
         f'</marker>'
         f'<marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
-        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#fb7185"/>'
+        f'<path d="M 0 1 L 8 5 L 0 9 z" fill="#be123c"/>'
         f'</marker>'
         f'</defs>'
         f'<rect width="680" height="{height}" fill="url(#grid20)" rx="12"/>'
-        f'<rect x="12" y="10" width="656" height="32" rx="8" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.35)"/>'
-        f'<text x="24" y="31" fill="#38bdf8" font-size="13" font-weight="800" font-family="sans-serif">{_esc(title_badge)}</text>'
-        f'<text x="656" y="31" fill="#fde68a" font-size="12" font-weight="700" text-anchor="end" font-family="sans-serif">{_esc(subtitle_badge)}</text>'
+        f'<rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/>'
+        f'<text x="24" y="31" fill="#006398" font-size="11.8" font-weight="800" font-family="sans-serif">{_esc(title_badge)}</text>'
+        f'<text x="656" y="31" fill="#047857" font-size="11.8" font-weight="800" text-anchor="end" font-family="sans-serif">{_esc(subtitle_badge)}</text>'
         f'{inner_svg}'
         f'</svg>'
     )
@@ -63,20 +63,71 @@ def _svg_wrap(title_badge: str, subtitle_badge: str, inner_svg: str, height: int
 
 def _right_panel_svg(hdr: str, stroke_col: str, hdr_col: str, eq_label: str, pt1_label: str, pt2_label: str, ans_label: str) -> str:
     return f"""
-    <rect x="400" y="52" width="260" height="226" rx="10" fill="rgba(30,41,59,0.9)" stroke="{stroke_col}" stroke-width="1.5"/>
-    <text x="530" y="74" fill="{hdr_col}" font-size="12" font-weight="800" text-anchor="middle">{_esc(hdr)}</text>
-    <rect x="414" y="86" width="232" height="42" rx="7" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.4)"/>
-    <text x="530" y="103" fill="#bae6fd" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
-    <text x="530" y="120" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">{_esc(eq_label[:34])}</text>
-    <rect x="414" y="136" width="232" height="42" rx="7" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.4)"/>
-    <text x="530" y="153" fill="#ddd6fe" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
-    <text x="530" y="170" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">{_esc(pt1_label[:34])}</text>
-    <rect x="414" y="186" width="232" height="40" rx="7" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.4)"/>
-    <text x="530" y="202" fill="#a7f3d0" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
-    <text x="530" y="218" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">{_esc(pt2_label[:34])}</text>
-    <rect x="414" y="233" width="232" height="35" rx="7" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" stroke-width="1.5"/>
-    <text x="530" y="255" fill="#fde68a" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 결론: {_esc(ans_label[:26])}</text>
+    <rect x="400" y="52" width="260" height="226" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="530" y="74" fill="#006398" font-size="12" font-weight="800" text-anchor="middle">{_esc(hdr)}</text>
+    <rect x="414" y="86" width="232" height="42" rx="7" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="530" y="103" fill="#006398" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
+    <text x="530" y="120" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">{_esc(eq_label)}</text>
+    <rect x="414" y="136" width="232" height="42" rx="7" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="530" y="153" fill="#4f46e5" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
+    <text x="530" y="170" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">{_esc(pt1_label)}</text>
+    <rect x="414" y="186" width="232" height="40" rx="7" fill="#ecfdf5" stroke="#6ee7b7"/>
+    <text x="530" y="202" fill="#047857" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
+    <text x="530" y="218" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">{_esc(pt2_label)}</text>
+    <rect x="414" y="233" width="232" height="35" rx="7" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="530" y="255" fill="#b45309" font-size="12" font-weight="900" text-anchor="middle">🎯 최종 결론: {_esc(ans_label)}</text>
     """
+
+
+def _draw_c2610p27_svg(lang="ko") -> str:
+    title = (
+        "📐 [시각적 도형 모델] 주사위 2회 36칸 홀짝 격자(P=1/4, 3/4) & 4회 독립시행 넓이 모델"
+        if lang == "ko"
+        else "📐 [Visual Geometric Model] 6×6 Dice Odd/Even Grid (P=1/4, 3/4) & 4-Trial Binomial Sum"
+    )
+    sub = "P(X ≤ 5) = 13/256"
+    inner = """
+    <rect x="16" y="54" width="316" height="232" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="174" y="75" fill="#131b2e" font-size="12" font-weight="800" text-anchor="middle">1회 시행: 주사위 2번(6×6=36칸) 눈의 곱 홀짝 판정</text>
+    <text x="112" y="96" fill="#006398" font-size="10.5" font-weight="800" text-anchor="middle">홀수 {1,3,5} (3칸)</text>
+    <text x="196" y="96" fill="#64748b" font-size="10.5" font-weight="700" text-anchor="middle">짝수 {2,4,6} (3칸)</text>
+    <text x="64" y="132" fill="#006398" font-size="10" font-weight="800" text-anchor="end">홀 {1,3,5}</text>
+    <text x="64" y="196" fill="#64748b" font-size="10" font-weight="700" text-anchor="end">짝 {2,4,6}</text>
+    <rect x="70" y="102" width="84" height="60" rx="6" fill="#dcfce7" stroke="#10b981" stroke-width="2"/>
+    <text x="112" y="126" fill="#047857" font-size="11.5" font-weight="900" text-anchor="middle">홀 × 홀 = 홀수</text>
+    <text x="112" y="143" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">3×3 = 9칸 (1/4)</text>
+    <text x="112" y="157" fill="#059669" font-size="10" font-weight="800" text-anchor="middle">★ 공 +1개</text>
+    <rect x="158" y="102" width="84" height="60" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="200" y="128" fill="#475569" font-size="11" font-weight="700" text-anchor="middle">홀 × 짝 = 짝수</text>
+    <text x="200" y="145" fill="#64748b" font-size="10" font-weight="700" text-anchor="middle">9칸 (공 +2개)</text>
+    <rect x="70" y="166" width="84" height="60" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="112" y="192" fill="#475569" font-size="11" font-weight="700" text-anchor="middle">짝 × 홀 = 짝수</text>
+    <text x="112" y="209" fill="#64748b" font-size="10" font-weight="700" text-anchor="middle">9칸 (공 +2개)</text>
+    <rect x="158" y="166" width="84" height="60" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="200" y="192" fill="#475569" font-size="11" font-weight="700" text-anchor="middle">짝 × 짝 = 짝수</text>
+    <text x="200" y="209" fill="#64748b" font-size="10" font-weight="700" text-anchor="middle">9칸 (공 +2개)</text>
+    <rect x="250" y="102" width="72" height="58" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="286" y="123" fill="#047857" font-size="10.5" font-weight="800" text-anchor="middle">공 1개 확률</text>
+    <text x="286" y="145" fill="#065f46" font-size="13" font-weight="900" text-anchor="middle">p = 1/4</text>
+    <rect x="250" y="168" width="72" height="58" rx="8" fill="#eff6ff" stroke="#006398" stroke-width="1.5"/>
+    <text x="286" y="189" fill="#006398" font-size="10.5" font-weight="800" text-anchor="middle">공 2개 확률</text>
+    <text x="286" y="211" fill="#006398" font-size="13" font-weight="900" text-anchor="middle">q = 3/4</text>
+    <rect x="28" y="236" width="292" height="38" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="174" y="259" fill="#1e293b" font-size="11" font-weight="800" text-anchor="middle">P(공 1개) = 9/36 = 1/4  |  P(공 2개) = 27/36 = 3/4</text>
+    <rect x="346" y="54" width="318" height="232" rx="12" fill="#ffffff" stroke="#006398" stroke-width="1.5"/>
+    <text x="505" y="75" fill="#006398" font-size="12" font-weight="800" text-anchor="middle">4회 독립시행 후 상자 속 공의 총 개수 ≤ 5개</text>
+    <rect x="360" y="88" width="290" height="54" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
+    <text x="372" y="108" fill="#047857" font-size="11" font-weight="800">① 총 4개: (1, 1, 1, 1) — 4번 모두 1개씩</text>
+    <text x="372" y="129" fill="#1e293b" font-size="11.5" font-weight="800">₄C₄ · (1/4)⁴ = 1 × 1/256 = 1/256</text>
+    <rect x="360" y="150" width="290" height="66" rx="8" fill="#eff6ff" stroke="#006398" stroke-width="1.5"/>
+    <text x="372" y="170" fill="#006398" font-size="11" font-weight="800">② 총 5개: (1,1,1,2) 배열 — 1개 3번, 2개 1번 (4가지)</text>
+    <text x="372" y="189" fill="#475569" font-size="10.5" font-weight="700">(2,1,1,1), (1,2,1,1), (1,1,2,1), (1,1,1,2) ⇒ ₄C₁ = 4가지</text>
+    <text x="372" y="207" fill="#1e293b" font-size="11.5" font-weight="800">₄C₃ · (1/4)³ · (3/4)¹ = 4 × 3/256 = 12/256</text>
+    <rect x="360" y="224" width="290" height="50" rx="9" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="505" y="244" fill="#92400e" font-size="11" font-weight="800" text-anchor="middle">배반사건 합의 법칙: 1/256 + 12/256</text>
+    <text x="505" y="265" fill="#b45309" font-size="13.5" font-weight="900" text-anchor="middle">🎯 최종 정답: P(X ≤ 5) = 13/256 (⑤)</text>
+    """
+    return _svg_wrap(title, sub, inner, 300)
 
 
 # ==============================================================================
@@ -771,7 +822,7 @@ def _classify_problem(pid: str, title: str, sol_text: str):
         return ("geo", "trig_quadrant")
     if pid in ("c261012", "c261020", "c270910", "c30914"):
         return ("geo", "exp_log_sym")
-    if pid in ("c2610g25", "c2610g27", "c2610g29", "c2610m26", "c30926", "c2709g24", "c2709g26", "c2709g28") or "공간" in t or "정사영" in t or "원기둥" in t or "입체도형" in t:
+    if pid in ("c2610g25", "c2610g27", "c2610g29", "c2610m26", "c30926", "c2709g24", "c2709g26", "c2709g28") or "공간도형" in t or "공간좌표" in t or "정사영" in t or "원기둥" in t or "입체도형" in t:
         return ("geo", "space3d")
     if pid in ("c2610g23", "c2610g30", "c2709g23", "c2709g30") or "벡터" in t:
         return ("geo", "vector")
@@ -810,19 +861,66 @@ def _classify_problem(pid: str, title: str, sol_text: str):
     return ("calc", "cubic")
 
 
-def _clean_plain(s: str, max_len: int = 34) -> str:
-    s = re.sub(r"<[^>]+>", " ", str(s))
-    s = re.sub(r"\\d?frac\{([^{}]+)\}\{([^{}]+)\}", r"\1/\2", s)
-    s = re.sub(r"\\sqrt\{([^{}]+)\}", r"√\1", s)
+def _clean_plain(s: str, max_len: int = 60) -> str:
+    s = str(s)
+    s = re.sub(r'<span class="bilingual-en">.*?</span>', ' ', s, flags=re.S)
+    s = re.sub(r"<[^>]+>", " ", s)
+    s = re.sub(r"\s*\(자동 폴백 아님[^)]*\)", "", s)
+    s = re.sub(r"\s*\(기초→심화\)", "", s)
+    for _ in range(3):
+        s = re.sub(r"\\sqrt\[3\]\{([^{}]+)\}", r"³√\1", s)
+        s = re.sub(r"\\sqrt\{([^{}]+)\}", r"√\1", s)
+        s = re.sub(r"\\binom\{([^{}]+)\}\{([^{}]+)\}", r"C(\1,\2)", s)
+        s = re.sub(
+            r"\\d?frac\{([^{}]+)\}\{([^{}]+)\}",
+            lambda fm: (f"({fm.group(1)})" if ('+' in fm.group(1) or '-' in fm.group(1)[1:]) else fm.group(1)) + '/' + fm.group(2),
+            s
+        )
     s = s.replace("\\dfrac", "").replace("\\frac", "/").replace("\\sqrt", "√")
     s = s.replace("\\overline", "").replace("\\mathrm", "").replace("\\left", "").replace("\\right", "")
     s = s.replace("\\implies", "⇒").replace("\\iff", "⇔").replace("\\to", "→")
     s = s.replace("\\le", "≤").replace("\\ge", "≥").replace("\\ne", "≠")
     s = s.replace("\\pi", "π").replace("\\theta", "θ").replace("\\alpha", "α").replace("\\beta", "β")
     s = s.replace("\\times", "×").replace("\\cdot", "·").replace("\\pm", "±")
+    s = s.replace("^2", "²").replace("^3", "³")
     s = s.replace("$", "").replace("{", "").replace("}", "").replace("\\", "")
     s = re.sub(r"\s+", " ", s).strip()
-    return s[:max_len]
+    if len(s) <= max_len:
+        return s
+    # Word-boundary truncation without cutting mid-word
+    cut = s[:max_len]
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    return cut
+
+
+def _compact_title_for_svg(short_title: str) -> str:
+    t = _clean_plain(short_title, 90)
+    # Shorten verbose exam prefixes so the full mathematical topic fits without truncation
+    t = re.sub(r"^\[20\d\d학년도\s*(\d+월)\s*(?:고\d\s*)?([^\]]+)\]", r"[\1 \2]", t)
+    t = re.sub(r"^20\d\d학년도\s*(\d+월)\s*(?:모의평가|학력평가)\s*", r"[\1] ", t)
+    t = re.sub(r"^20\d\d년\s*(\d+월)\s*학력평가\s*", r"[\1] ", t)
+    return _clean_plain(t, 42)
+
+
+def _compact_step_for_svg(raw_step: str) -> str:
+    s = _clean_plain(raw_step, 120)
+    # Strip verbose prefix like '🔰 1단계 · [초등 구구단 연계] ' or '제1단계 · '
+    s = re.sub(r"^[🔰🌿🌱🌳💎🏆📘🎯\s]*(?:제?\d+단계)\s*·\s*(?:\[[^\]]+\]\s*)?", "", s).strip()
+    if len(s) <= 32:
+        return s
+    if "⇒" in s:
+        left, right = s.split("⇒", 1)
+        left = left.strip()
+        right = right.strip()
+        avail = max(12, 29 - len(right))
+        if len(left) > avail:
+            cut_l = left[:avail]
+            if " " in cut_l and len(cut_l.rsplit(" ", 1)[0]) >= 8:
+                cut_l = cut_l.rsplit(" ", 1)[0]
+            left = cut_l.strip()
+        return f"{left} ⇒ {right}"
+    return _clean_plain(s, 32)
 
 
 def build_visual_and_schematic_block(
@@ -833,36 +931,38 @@ def build_visual_and_schematic_block(
     sol_ko_plain: str = "",
     lang: str = "ko",
 ) -> str:
-    """
-    Returns an HTML string (using ONLY <figure>, <figcaption>, <section>, <table>, <tr>, <td>, <span>, <b> —
-    ZERO <div> tags) containing:
-      1. Intentionally constructed SVG Geometric / Visual Diagram (<figure class="math-visual-diagram">)
-      2. Schematic Solution Flowchart & Summary Table (<section class="math-schematic-flow">)
-    """
+    from stitch_screen_builder import convert_svg_to_stitch_light
     short_title = re.sub(r"\s*·\s*(?:mathedu|min7014).*$", "", title_ko).strip()
-    ans_clean = _clean_plain(ans_str, 24) or "확정"
+    short_title = re.sub(r"\s*\(자동 폴백 아님[^)]*\)", "", short_title).strip()
+    svg_title = _compact_title_for_svg(short_title)
 
-    # Extract 3 key step labels for SVG & Flowchart
-    s_clean = [_clean_plain(x, 34) for x in step_summaries_ko if _clean_plain(x, 34)]
-    eq_lbl = s_clean[0] if len(s_clean) > 0 else _clean_plain(short_title, 34)
+    ans_raw = re.sub(r'<span class="bilingual-en">.*?</span>', '', str(ans_str), flags=re.S)
+    ans_raw = re.sub(r'(?:정답|Correct Answer|Answer|\:)', ' ', ans_raw, flags=re.I)
+    ans_clean = _clean_plain(ans_raw, 26) or "확정"
+
+    s_clean = [_compact_step_for_svg(x) for x in step_summaries_ko if _compact_step_for_svg(x)]
+    eq_lbl = s_clean[0] if len(s_clean) > 0 else svg_title
     pt1_lbl = s_clean[1] if len(s_clean) > 1 else "핵심 공식 및 기하 관계 적용"
-    pt2_lbl = s_clean[-1] if len(s_clean) > 2 else f"수식 연립 및 도출 → {ans_clean}"
+    pt2_lbl = s_clean[-1] if len(s_clean) > 2 else f"수식 연립 및 도출 ⇒ {ans_clean}"
 
     cat, submode = _classify_problem(pid, short_title, sol_ko_plain)
-    if cat == "c2610p28":
+    if pid == "c2610p27":
+        svg_html = _draw_c2610p27_svg(lang=lang)
+    elif cat == "c2610p28":
         svg_html = _draw_c2610p28_svg(lang=lang)
     elif cat == "c2610p29":
         svg_html = _draw_c2610p29_svg(lang=lang)
     elif cat == "c2610p30":
         svg_html = _draw_c2610p30_svg(lang=lang)
     elif cat == "geo":
-        svg_html = _draw_geometry_conic_trig_svg(pid, short_title[:28], eq_lbl, pt1_lbl, pt2_lbl, ans_clean, geo_type=submode, lang=lang)
+        svg_html = _draw_geometry_conic_trig_svg(pid, svg_title, eq_lbl, pt1_lbl, pt2_lbl, ans_clean, geo_type=submode, lang=lang)
     elif cat == "seq":
-        svg_html = _draw_sequence_algebra_prob_svg(pid, short_title[:28], eq_lbl, pt1_lbl, pt2_lbl, ans_clean, seq_type=submode, lang=lang)
+        svg_html = _draw_sequence_algebra_prob_svg(pid, svg_title, eq_lbl, pt1_lbl, pt2_lbl, ans_clean, seq_type=submode, lang=lang)
     else:
-        svg_html = _draw_coordinate_curve_svg(pid, short_title[:28], eq_lbl, pt1_lbl, pt2_lbl, ans_clean, mode=submode, lang=lang)
+        svg_html = _draw_coordinate_curve_svg(pid, svg_title, eq_lbl, pt1_lbl, pt2_lbl, ans_clean, mode=submode, lang=lang)
 
-    # Build 4 schematic flow steps (preserving LaTeX math if present in step_summaries_ko, but ensuring balanced $)
+    svg_html = convert_svg_to_stitch_light(svg_html, ans_clean)
+
     flow_steps = []
     for raw_s in step_summaries_ko:
         if raw_s.count("$") % 2 != 0:
@@ -903,21 +1003,21 @@ def build_visual_and_schematic_block(
     for idx, st_txt in enumerate(picked):
         b_lbl = badge_labels[idx] if idx < len(badge_labels) else f"STEP {idx+1}"
         flow_cells.append(
-            f'<td style="background:rgba(30,41,59,0.85);border:1px solid rgba(124,196,255,0.35);border-radius:10px;padding:10px 12px;vertical-align:top;width:22%">'
-            f'<b style="color:#38bdf8;font-size:0.78rem;display:block;margin-bottom:4px">{b_lbl}</b>'
-            f'<span style="color:#f1f5f9;font-size:0.86rem;line-height:1.45">{st_txt}</span>'
+            f'<td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%">'
+            f'<b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">{b_lbl}</b>'
+            f'<span style="color:#1e293b;font-size:0.86rem;line-height:1.45">{st_txt}</span>'
             f'</td>'
         )
         if idx < len(picked) - 1:
             flow_cells.append(
-                '<td style="text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td>'
+                '<td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td>'
             )
 
     flow_cells.append(
-        '<td style="text-align:center;vertical-align:middle;color:#34d399;font-weight:900;font-size:1.1rem;padding:0 4px">⇒</td>'
-        f'<td style="background:rgba(52,211,153,0.16);border:1.5px solid #34d399;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%">'
-        f'<b style="color:#6ee7b7;font-size:0.78rem;display:block;margin-bottom:4px">🎯 최종 정답</b>'
-        f'<b style="color:#fde68a;font-size:0.98rem">{ans_math}</b>'
+        '<td style="text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.1rem;padding:0 4px">⇒</td>'
+        f'<td style="background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%">'
+        f'<b style="color:#047857;font-size:0.78rem;display:block;margin-bottom:4px">🎯 최종 정답</b>'
+        f'<b style="color:#065f46;font-size:0.98rem">{ans_math}</b>'
         f'</td>'
     )
 
@@ -926,9 +1026,9 @@ def build_visual_and_schematic_block(
         stage_lbl = f"제{idx}단계" if lang == "ko" else f"Step {idx}"
         summary_rows.append(
             f'<tr>'
-            f'<td style="padding:7px 10px;border:1px solid rgba(148,163,184,0.25);color:#7cc4ff;font-weight:700;text-align:center;white-space:nowrap">{stage_lbl}</td>'
-            f'<td style="padding:7px 12px;border:1px solid rgba(148,163,184,0.25);color:#e2e8f0;line-height:1.5">{full_st}</td>'
-            f'<td style="padding:7px 10px;border:1px solid rgba(148,163,184,0.25);color:#34d399;font-weight:700;text-align:center">'
+            f'<td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">{stage_lbl}</td>'
+            f'<td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">{full_st}</td>'
+            f'<td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">'
             f'{"다음 단계 연결 ➔" if idx < len(flow_steps) else f"정답: {ans_math}"}'
             f'</td>'
             f'</tr>'
@@ -936,18 +1036,18 @@ def build_visual_and_schematic_block(
 
     block_html = (
         f'<h4>{fig_hdr}</h4>'
-        f'<figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:rgba(15,23,42,0.75);border:1.5px solid rgba(56,189,248,0.35);border-radius:14px;text-align:center">'
+        f'<figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center">'
         f'{svg_html}'
-        f'<figcaption style="margin-top:10px;font-size:0.85rem;color:#cbd5e1;line-height:1.55">{fig_cap}</figcaption>'
+        f'<figcaption style="margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55">{fig_cap}</figcaption>'
         f'</figure>'
         f'<h4>{flow_hdr}</h4>'
-        f'<section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:rgba(30,41,59,0.55);border:1px solid rgba(167,139,250,0.35);border-radius:14px">'
+        f'<section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px">'
         f'<table style="width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px"><tr>{"".join(flow_cells)}</tr></table>'
-        f'<table style="width:100%;border-collapse:collapse;font-size:0.86rem;background:rgba(15,23,42,0.65);border-radius:8px;overflow:hidden">'
-        f'<thead><tr style="background:rgba(56,189,248,0.18);color:#fde68a">'
-        f'<th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:14%">{tbl_hdr_1}</th>'
-        f'<th style="padding:8px 12px;border:1px solid rgba(148,163,184,0.3)">{tbl_hdr_2}</th>'
-        f'<th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:22%">{tbl_hdr_3}</th>'
+        f'<table style="width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden">'
+        f'<thead><tr style="background:#f1f5f9;color:#0f172a">'
+        f'<th style="padding:8px 10px;border:1px solid #cbd5e1;width:14%">{tbl_hdr_1}</th>'
+        f'<th style="padding:8px 12px;border:1px solid #cbd5e1">{tbl_hdr_2}</th>'
+        f'<th style="padding:8px 10px;border:1px solid #cbd5e1;width:22%">{tbl_hdr_3}</th>'
         f'</tr></thead>'
         f'<tbody>{"".join(summary_rows)}</tbody>'
         f'</table>'

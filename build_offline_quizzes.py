@@ -582,6 +582,16 @@ def main():
         and (not public_slugs or os.path.splitext(os.path.basename(f))[0] in public_slugs)
     ]
 
+    private_quiz_files = [
+        f for f in files
+        if not os.path.basename(f).startswith('index')
+        and public_slugs and os.path.splitext(os.path.basename(f))[0] not in public_slugs
+    ]
+    build_timestamp_priv = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    build_version_priv = f"v{datetime.datetime.now().strftime('%Y.%m.%d')}"
+    for pf in private_quiz_files:
+        process_file(pf, build_timestamp_priv, build_version_priv)
+
     # 비공개 문항 오프라인 파일은 offline/private/ 로 격리 보관
     offline_private_dir = os.path.join(OFFLINE_DIR, 'private')
     os.makedirs(offline_private_dir, exist_ok=True)
@@ -852,6 +862,12 @@ setOfflineLang(curLang, false);
 """
     with open(os.path.join(OFFLINE_DIR, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(index_html)
+    for priv_f in glob.glob(os.path.join(offline_private_dir, '*.html')):
+        pub_f = os.path.join(OFFLINE_DIR, os.path.basename(priv_f))
+        if os.path.exists(pub_f):
+            import shutil
+            shutil.copyfile(pub_f, priv_f)
+
 
     print(f"✅ 총 {len(results)}개 문제의 오프라인 HTML 파일, offline/versions.json 및 offline/index.html 빌드 완료!")
 
