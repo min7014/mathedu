@@ -79,6 +79,80 @@ def _right_panel_svg(hdr: str, stroke_col: str, hdr_col: str, eq_label: str, pt1
     """
 
 
+def _draw_c261021_svg(lang="ko") -> str:
+    title = (
+        "📐 [칠판 판서 원본 도식] [10월 21번] ∫₀²|f'(x)|dx = f(2)+f(0) ➔ f(α) = f(2)+f(0) ➔ f(0) = ∫₂¹ f'(x)dx"
+        if lang == "ko"
+        else "📐 [Whiteboard Solution] [Oct #21] ∫₀²|f'(x)|dx = f(2)+f(0) ➔ f(α) = f(2)+f(0) ➔ f(0) = ∫₂¹ f'(x)dx"
+    )
+    sub = "f(0) = 1/2 ⇒ p+q = 3"
+    inner = """
+    <!-- LEFT PANEL: Photo 1 — Integral Split at x=2, Cubic Sketch (0 < α < 2), and Boxed f(α) = f(2) + f(0) -->
+    <rect x="12" y="48" width="320" height="240" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="172" y="67" fill="#131b2e" font-size="11" font-weight="800" text-anchor="middle">① [0, t] 정적분 분리 &amp; 극대점 α (0 &lt; α &lt; 2) 개형</text>
+
+    <!-- Mini Cubic Graph Sketch (matching Whiteboard Photo 1 center) -->
+    <rect x="22" y="75" width="152" height="102" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <line x1="30" y1="154" x2="166" y2="154" stroke="#64748b" stroke-width="1.5"/>
+    <!-- Cubic curve: (38,142) -> local max (78,92) -> local min (122,134) -> (156,82) -->
+    <path d="M 34 148 C 46 112, 62 92, 78 92 C 94 92, 106 134, 122 134 C 136 134, 148 104, 158 80" fill="none" stroke="#006398" stroke-width="2.4"/>
+    <!-- Vertical dashed lines & arrows at x=0, x=α, x=2 -->
+    <line x1="44" y1="154" x2="44" y2="126" stroke="#059669" stroke-width="1.5" marker-end="url(#arrGreen)"/>
+    <line x1="78" y1="92" x2="78" y2="154" stroke="#4f46e5" stroke-width="1.3" stroke-dasharray="3,2"/>
+    <line x1="122" y1="92" x2="122" y2="134" stroke="#be123c" stroke-width="1.5" marker-end="url(#arrCoral)"/>
+    <line x1="122" y1="134" x2="122" y2="154" stroke="#64748b" stroke-width="1.2" stroke-dasharray="2,2"/>
+    <circle cx="44" cy="126" r="3" fill="#059669"/>
+    <circle cx="78" cy="92" r="3.5" fill="#4f46e5"/>
+    <circle cx="122" cy="134" r="3.5" fill="#be123c"/>
+    <text x="44" y="168" fill="#1e293b" font-size="9.5" font-weight="800" text-anchor="middle">0</text>
+    <text x="78" y="168" fill="#4f46e5" font-size="9.8" font-weight="900" text-anchor="middle">α</text>
+    <text x="124" y="168" fill="#be123c" font-size="9.2" font-weight="800" text-anchor="middle">x=2</text>
+    <text x="78" y="86" fill="#4f46e5" font-size="8.5" font-weight="800" text-anchor="middle">극대 f(α)</text>
+    <text x="138" y="144" fill="#be123c" font-size="8.2" font-weight="800">극소 5/2</text>
+
+    <!-- Boxed Key System (Right of Mini Graph in Left Panel) -->
+    <rect x="180" y="75" width="144" height="102" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.6"/>
+    <text x="252" y="92" fill="#047857" font-size="9.2" font-weight="800" text-anchor="middle">★ 칠판 핵심 관계식</text>
+    <rect x="188" y="98" width="128" height="24" rx="5" fill="#ffffff" stroke="#10b981"/>
+    <text x="252" y="114" fill="#065f46" font-size="10.2" font-weight="900" text-anchor="middle">f(α) = f(2) + f(0)</text>
+    <text x="190" y="139" fill="#1e293b" font-size="9" font-weight="800">• f'(x) = 3(x-2)(x-α)</text>
+    <text x="190" y="155" fill="#1e293b" font-size="9" font-weight="800">• f(2) = 5/2 (극솟값)</text>
+    <text x="190" y="170" fill="#be123c" font-size="8.2" font-weight="700">※ α≤0 이면 모순 (✕)</text>
+
+    <!-- Bottom of Left Panel: Integral Split Derivation -->
+    <rect x="22" y="183" width="302" height="96" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="30" y="199" fill="#006398" font-size="9.2" font-weight="800">• ∫₂ᵗ |f'(x)|dx + ∫₀² |f'(x)|dx = f(t) + f(0)</text>
+    <text x="30" y="216" fill="#1e293b" font-size="9.2" font-weight="700">⇒ f(t) - f(2) + ∫₀² |f'(x)|dx = f(t) + f(0)  (양변 f(t) 소거)</text>
+    <text x="30" y="233" fill="#006398" font-size="9.5" font-weight="800">⇒ ∫₀² |f'(x)|dx = f(2) + f(0)</text>
+    <text x="30" y="251" fill="#475569" font-size="9" font-weight="700">⇒ f(α) - f(0) - (f(2) - f(α)) = f(2) + f(0)</text>
+    <text x="30" y="269" fill="#047857" font-size="9.8" font-weight="900">⇒ 2f(α) = 2f(2) + 2f(0)   ∴ f(α) = f(2) + f(0)</text>
+
+    <!-- RIGHT PANEL: Photo 2 — Finding α = 1 and Direct Integral f(0) = f(1) - f(2) = 1/2 -->
+    <rect x="340" y="48" width="328" height="240" rx="12" fill="#f8fafc" stroke="#006398" stroke-width="1.5"/>
+    <text x="504" y="67" fill="#006398" font-size="11" font-weight="800" text-anchor="middle">② α = 1 도출 및 f(0) = f(1) - f(2) 정적분 계산</text>
+
+    <!-- Step 1 in Right Panel: Integral from 0 to α -->
+    <rect x="350" y="75" width="308" height="82" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.4"/>
+    <text x="358" y="91" fill="#006398" font-size="9.4" font-weight="800">[1] f(α) - f(0) = f(2)  ⇒  ∫₀^α 3(x-2)(x-α)dx = 5/2</text>
+    <text x="358" y="108" fill="#1e293b" font-size="9.2" font-weight="700">• [x³ - (3/2)(2+α)x² + 6αx]₀^α = α³ - (3/2)(2+α)α² + 6α² = 5/2</text>
+    <text x="358" y="125" fill="#1e293b" font-size="9.2" font-weight="800">• -(1/2)α³ + 3α² = 5/2  ⇒  α³ - 6α² + 5 = 0</text>
+    <text x="358" y="144" fill="#047857" font-size="9.6" font-weight="900">• (α - 1)(α² - 5α - 5) = 0   ∴ α = 1  (∵ 0 &lt; α &lt; 2)</text>
+
+    <!-- Step 2 in Right Panel: f(0) = f(1) - f(2) = ∫₂¹ 3(x-1)(x-2)dx -->
+    <rect x="350" y="163" width="308" height="72" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.4"/>
+    <text x="358" y="179" fill="#047857" font-size="9.4" font-weight="800">[2] f'(x) = 3(x-1)(x-2),   f(0) = f(1) - f(2) = ∫₂¹ (3x²-9x+6)dx</text>
+    <text x="358" y="196" fill="#1e293b" font-size="9.2" font-weight="700">• [x³ - (9/2)x² + 6x]₂¹ = (1 - 8) - (9/2)(1 - 4) + 6(1 - 2)</text>
+    <text x="358" y="213" fill="#065f46" font-size="9.8" font-weight="900">• f(0) = -7 + 27/2 - 6 = 1/2 = q/p   (p = 2, q = 1)</text>
+    <text x="358" y="228" fill="#64748b" font-size="8.3" font-weight="700">※ f(2)=5/2를 따로 대입하지 않고 ∫₂¹ f'(x)dx 한 번으로 f(0) 직결!</text>
+
+    <!-- Final Conclusion Bar -->
+    <rect x="350" y="241" width="308" height="39" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="504" y="257" fill="#92400e" font-size="9.6" font-weight="800" text-anchor="middle">f(0) = q/p = 1/2 (gcd(p,q)=1)  ⇒  p = 2, q = 1</text>
+    <text x="504" y="273" fill="#b45309" font-size="11.8" font-weight="900" text-anchor="middle">🎯 최종 정답: p + q = 3</text>
+    """
+    return _svg_wrap(title, sub, inner, 300)
+
+
 def _draw_c261022_svg(lang="ko") -> str:
     title = (
         "📐 [칠판 판서 원본 도식] [10월 22번] 0/1(짝/홀) 진리표 소거법 · Case 1~4 방정식 & a₁ = 2x-6, 4x-13"
