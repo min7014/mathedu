@@ -1916,14 +1916,82 @@ def split_title_two_tone(h1_ko_raw):
     return "수능·학력평가 기출 디딤돌", clean
 
 
-def build_stitch_top_shell(slug, asset_prefix, h1_full_inner, h1_ko_line1, h1_ko_line2, h1_en_text, lead_inner, q_count):
-    step_pills = []
-    for i in range(1, q_count):
-        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({i-1})">{i}단계</button>')
-    if q_count >= 1:
-        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({q_count-1})">최종 본문항</button>')
-    step_pills_html = "\n        ".join(step_pills)
+def latex_ans_to_svg_text(html):
+    m = re.search(r'<div class="ans" id="finalAns">(.*?)</div>', html, flags=re.S)
+    if not m:
+        return None
+    raw = m.group(1)
+    raw = re.sub(r'^정답\s*', '', raw).strip()
+    raw = raw.strip('$').strip()
+    # Convert \dfrac{A}{B} and \frac{A}{B}
+    for _ in range(3):
+        raw = re.sub(
+            r'\\d?frac\{([^{}]+)\}\{([^{}]+)\}',
+            lambda fm: (f"({fm.group(1)})" if ('+' in fm.group(1) or '-' in fm.group(1)[1:]) else fm.group(1)) + '/' + fm.group(2),
+            raw
+        )
+    raw = re.sub(r'\\sqrt\{([^{}]+)\}', r'√\1', raw)
+    raw = raw.replace(r'\pi', 'π').replace(r'\ln', 'ln ').replace(r'\le', '≤').replace(r'\ge', '≥')
+    raw = raw.replace('{', '').replace('}', '').replace('\\', '').strip()
+    raw = re.sub(r'\s+', ' ', raw)
+    return raw
 
+
+def convert_svg_to_stitch_light(svg_str, clean_ans=None):
+    if clean_ans:
+        svg_str = re.sub(r'Answer:\s*[^<]+', f'Answer: {clean_ans}', svg_str)
+        svg_str = re.sub(r'🎯 최종 결론:\s*[^<]+', f'🎯 최종 결론: {clean_ans}', svg_str)
+
+    svg_replacements = [
+        ('background:linear-gradient(145deg,#0b1120 0%,#131c33 100%)', 'background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%)'),
+        ('border:1.5px solid rgba(124,196,255,0.35);box-shadow:0 6px 24px rgba(0,0,0,0.45)', 'border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)'),
+        ('stroke="rgba(148,163,184,0.08)"', 'stroke="rgba(0,99,184,0.06)"'),
+        ('fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.35)"', 'fill="#e0f2fe" stroke="#7dd3fc"'),
+        ('fill="rgba(15,23,42,0.9)"', 'fill="#ffffff"'),
+        ('fill="rgba(30,41,59,0.9)"', 'fill="#f8fafc"'),
+        ('fill="rgba(30,41,59,0.85)"', 'fill="#f8fafc"'),
+        ('fill="rgba(56,189,248,0.14)"', 'fill="#eff6ff"'),
+        ('fill="rgba(56,189,248,0.15)"', 'fill="#eff6ff"'),
+        ('fill="rgba(56,189,248,0.18)"', 'fill="#e0f2fe"'),
+        ('fill="rgba(167,139,250,0.15)"', 'fill="#f5f3ff"'),
+        ('fill="rgba(52,211,153,0.15)"', 'fill="#ecfdf5"'),
+        ('fill="rgba(52,211,153,0.22)"', 'fill="#ecfdf5"'),
+        ('fill="rgba(52,211,153,0.32)"', 'fill="#dcfce7"'),
+        ('fill="rgba(52,211,153,0.45)"', 'fill="#bbf7d0"'),
+        ('fill="rgba(251,191,36,0.18)"', 'fill="#fef3c7"'),
+        ('fill="rgba(251,191,36,0.2)"', 'fill="#fef3c7"'),
+        ('fill="rgba(251,113,133,0.28)"', 'fill="#ffe4e6"'),
+        ('fill="#38bdf8"', 'fill="#006398"'),
+        ('fill="#7cc4ff"', 'fill="#006398"'),
+        ('fill="#bae6fd"', 'fill="#006398"'),
+        ('fill="#fde68a"', 'fill="#b45309"'),
+        ('fill="#6ee7b7"', 'fill="#047857"'),
+        ('fill="#a7f3d0"', 'fill="#047857"'),
+        ('fill="#ecfdf5"', 'fill="#065f46"'),
+        ('fill="#c4b5fd"', 'fill="#4f46e5"'),
+        ('fill="#ddd6fe"', 'fill="#4f46e5"'),
+        ('fill="#fecdd3"', 'fill="#be123c"'),
+        ('fill="#fb7185"', 'fill="#be123c"'),
+        ('fill="#e2e8f0"', 'fill="#334155"'),
+        ('fill="#f8fafc"', 'fill="#131b2e"'),
+        ('fill="#cbd5e1"', 'fill="#475569"'),
+        ('stroke="#0b1120"', 'stroke="#ffffff"'),
+        ('fill="#0b1120"', 'fill="#ffffff"'),
+    ]
+    for old_s, new_s in svg_replacements:
+        svg_str = svg_str.replace(old_s, new_s)
+
+    # Change standalone <text ... fill="#fff" ...> (not on a <circle> line) to fill="#1b1b1d"
+    lines = svg_str.split('\n')
+    out_lines = []
+    for ln in lines:
+        if '<circle' not in ln and 'fill="#fff"' in ln and '<text' in ln:
+            ln = ln.replace('fill="#fff"', 'fill="#1b1b1d"')
+        out_lines.append(ln)
+    return '\n'.join(out_lines)
+
+
+def build_stitch_top_shell(slug, asset_prefix, h1_full_inner, h1_ko_line1, h1_ko_line2, h1_en_text, lead_inner, q_count):
     return f"""<!-- STITCH_HEADER_START -->
 <header class="stitch-app-header">
   <div class="stitch-app-header-inner">
@@ -1980,6 +2048,10 @@ def build_stitch_top_shell(slug, asset_prefix, h1_full_inner, h1_ko_line1, h1_ko
       <span class="material-symbols-outlined" style="font-size:14px;color:#006398">target</span>
       <span class="bilingual-ko">0~{max(1, q_count-1)}단계 빌드업</span><span class="bilingual-en">Step-by-Step Build-up</span>
     </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.openClassCreatorModal)openClassCreatorModal('{slug}')">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#4F46E5">qr_code_2</span>
+      <span class="bilingual-ko">3초 수업 QR</span><span class="bilingual-en">3-Sec Class QR</span>
+    </button>
     <button type="button" class="stitch-feature-chip" onclick="if(window.downloadOfflineQuiz)window.downloadOfflineQuiz('{slug}')">
       <span class="material-symbols-outlined" style="font-size:14px;color:#45464d">inventory_2</span>
       <span class="bilingual-ko">100% 오프라인 보관함</span><span class="bilingual-en">100% Offline Save</span>
@@ -2011,8 +2083,58 @@ def build_stitch_top_shell(slug, asset_prefix, h1_full_inner, h1_ko_line1, h1_ko
     </div>
   </div>
 </div>
+<!-- STITCH_HEADER_END -->"""
 
-<!-- 2. Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+
+def build_stitch_explorer_shell(q_count):
+    step_pills = []
+    for i in range(1, q_count):
+        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({i-1})">{i}단계</button>')
+    if q_count >= 1:
+        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({q_count-1})">최종 본문항</button>')
+    step_pills_html = "\n        ".join(step_pills)
+
+    return f"""<!-- STITCH_EXPLORER_START -->
+<div class="stitch-explorer-header" id="stitchQuizStepsSection">
+  <div class="stitch-explorer-title-wrap">
+    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
+    <div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 디딤돌 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
+        <span class="stitch-count-badge">총 {q_count}문항</span>
+      </div>
+      <span class="stitch-explorer-sub"><span class="bilingual-ko">원본 기출 · 제0단계 기호 번역 · 1~{max(1,q_count-1)}단계 디딤돌 즉시 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
+    </div>
+  </div>
+  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({{top:0,behavior:'smooth'}})" title="맨 위로">
+    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
+  </button>
+</div>
+
+<div class="stitch-filter-card">
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
+      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
+    </div>
+  </div>
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
+      {step_pills_html}
+    </div>
+  </div>
+</div>
+<!-- STITCH_EXPLORER_END -->"""
+
+
+def build_stitch_bottom_shell(slug, asset_prefix, h1_ko_line2, q_count):
+    return f"""<!-- STITCH_FOOTER_START -->
+<!-- Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
 <div class="stitch-streak-card">
   <div class="stitch-streak-left">
     <div class="stitch-flame-circle">
@@ -2036,39 +2158,7 @@ def build_stitch_top_shell(slug, asset_prefix, h1_full_inner, h1_ko_line1, h1_ko
   </div>
 </div>
 
-<!-- 3. Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-dandelin-card">
-  <div class="stitch-card-head">
-    <div class="stitch-card-head-left">
-      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
-      <span>공식 엠블럼 Dandelin Spheres</span>
-    </div>
-    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
-  </div>
-  <div class="stitch-visual-canvas">
-    <div class="stitch-visual-banner" style="background-image: url('{asset_prefix}assets/stitch_dandelin_hero.png')">
-      <div class="stitch-visual-overlay">
-        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
-        <p class="stitch-visual-headline"><span class="bilingual-ko">{h1_ko_line2} · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
-      </div>
-    </div>
-    <div class="stitch-visual-drawer">
-      <p class="stitch-visual-desc">
-        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~{max(1,q_count-1)}단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
-        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
-      </p>
-      <div class="stitch-quote-box">
-        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
-        <p class="stitch-quote-text">
-          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
-          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 4. Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<!-- Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
 <div class="stitch-gateway-grid">
   <div class="stitch-gateway-card">
     <div class="stitch-gw-head">
@@ -2119,46 +2209,38 @@ def build_stitch_top_shell(slug, asset_prefix, h1_full_inner, h1_ko_line1, h1_ko
   </div>
 </div>
 
-<!-- 5. Step-by-Step Scaffolding Explorer Header & Filter Pills (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-explorer-header" id="stitchQuizStepsSection">
-  <div class="stitch-explorer-title-wrap">
-    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
-    <div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 디딤돌 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
-        <span class="stitch-count-badge">총 {q_count}문항</span>
+<!-- Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-dandelin-card">
+  <div class="stitch-card-head">
+    <div class="stitch-card-head-left">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
+      <span>공식 엠블럼 Dandelin Spheres</span>
+    </div>
+    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
+  </div>
+  <div class="stitch-visual-canvas">
+    <div class="stitch-visual-banner" style="background-image: url('{asset_prefix}assets/stitch_dandelin_hero.png')">
+      <div class="stitch-visual-overlay">
+        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
+        <p class="stitch-visual-headline"><span class="bilingual-ko">{h1_ko_line2} · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
       </div>
-      <span class="stitch-explorer-sub"><span class="bilingual-ko">원본 기출 · 제0단계 기호 번역 · 1~{max(1,q_count-1)}단계 디딤돌 즉시 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
     </div>
-  </div>
-  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({{top:0,behavior:'smooth'}})" title="맨 위로">
-    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
-  </button>
-</div>
-
-<div class="stitch-filter-card">
-  <div class="stitch-filter-group">
-    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
-    <div class="stitch-pill-row">
-      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
-      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
-      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
-      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
-    </div>
-  </div>
-  <div class="stitch-filter-group">
-    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
-    <div class="stitch-pill-row">
-      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
-      {step_pills_html}
+    <div class="stitch-visual-drawer">
+      <p class="stitch-visual-desc">
+        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~{max(1,q_count-1)}단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
+        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
+      </p>
+      <div class="stitch-quote-box">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
+        <p class="stitch-quote-text">
+          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
+          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
+        </p>
+      </div>
     </div>
   </div>
 </div>
-<!-- STITCH_HEADER_END -->"""
 
-
-def build_stitch_bottom_shell(slug, asset_prefix):
-    return f"""<!-- STITCH_FOOTER_START -->
 <div class="stitch-pack-banner">
   <div class="stitch-pack-left">
     <div class="stitch-pack-icon">
@@ -2293,14 +2375,25 @@ function stitchSaveInlineName() {{
 
 
 def clean_non_svg_inline_colors(html):
-    # Temporarily mask <svg>...</svg> and &lt;svg...&gt;...&lt;/svg&gt; so SVG dark blueprint canvases stay intact
+    import html as html_mod
+    clean_ans = latex_ans_to_svg_text(html)
+
+    # Convert inline <svg>...</svg> to Stitch Light Blueprint theme
     svgs = []
     def mask_svg(m):
-        svgs.append(m.group(0))
+        converted = convert_svg_to_stitch_light(m.group(0), clean_ans)
+        svgs.append(converted)
+        return f"__SVG_PLACEHOLDER_{len(svgs)-1}__"
+
+    def mask_escaped_svg(m):
+        unesc = html_mod.unescape(m.group(0))
+        converted = convert_svg_to_stitch_light(unesc, clean_ans)
+        re_esc = html_mod.escape(converted, quote=True)
+        svgs.append(re_esc)
         return f"__SVG_PLACEHOLDER_{len(svgs)-1}__"
 
     masked = re.sub(r'<svg\b[^>]*>.*?</svg>', mask_svg, html, flags=re.S | re.I)
-    masked = re.sub(r'&lt;svg\b.*?&lt;/svg&gt;', mask_svg, masked, flags=re.S | re.I)
+    masked = re.sub(r'&lt;svg\b.*?&lt;/svg&gt;', mask_escaped_svg, masked, flags=re.S | re.I)
 
     # Replace dark/pale inline styles outside SVGs
     replacements = [
@@ -2334,6 +2427,10 @@ def clean_non_svg_inline_colors(html):
         r'\1display:none;',
         masked
     )
+
+    # Add cache-busting query string to mathedu-room.js and mathedu-report.js
+    masked = re.sub(r'mathedu-room\.js(\?v=[^"\']*)?', 'mathedu-room.js?v=20261027_stitch3', masked)
+    masked = re.sub(r'mathedu-report\.js(\?v=[^"\']*)?', 'mathedu-report.js?v=20261027_stitch3', masked)
 
     # Restore SVGs
     for idx, s in enumerate(svgs):
@@ -2372,8 +2469,9 @@ def transform_file(filepath):
     lead_m = re.search(r'<p class="lead">(.*?)</p>', html, flags=re.S)
     lead_inner = lead_m.group(1) if lead_m else '초등학생도 1단계부터 차근차근 따라가면 수능·학력평가 본문항까지 스스로 풀 수 있는 단계별 디딤돌 퀴즈입니다.'
 
-    # 2. Strip any previous STITCH_HEADER / STITCH_FOOTER blocks if re-running
+    # 2. Strip any previous STITCH_HEADER / STITCH_EXPLORER / STITCH_FOOTER blocks if re-running
     html = re.sub(r'<!-- STITCH_HEADER_START -->.*?<!-- STITCH_HEADER_END -->\s*', '', html, flags=re.S)
+    html = re.sub(r'<!-- STITCH_EXPLORER_START -->.*?<!-- STITCH_EXPLORER_END -->\s*', '', html, flags=re.S)
     html = re.sub(r'\s*<!-- STITCH_FOOTER_START -->.*?<!-- STITCH_FOOTER_END -->', '', html, flags=re.S)
 
     # 3. Ensure Google Fonts & Material Symbols Outlined before <style>
@@ -2390,7 +2488,8 @@ def transform_file(filepath):
     stitch_top = build_stitch_top_shell(
         slug, asset_prefix, h1_inner, h1_line1, h1_line2, h1_en_text, lead_inner, q_count
     )
-    stitch_bottom = build_stitch_bottom_shell(slug, asset_prefix)
+    stitch_explorer = build_stitch_explorer_shell(q_count)
+    stitch_bottom = build_stitch_bottom_shell(slug, asset_prefix, h1_line2, q_count)
 
     # 4. Replace from <div class="wrap"> through <p class="lead">...</p> with <div class="wrap">\n + stitch_top
     pattern_top = re.compile(
@@ -2435,6 +2534,14 @@ def transform_file(filepath):
             flags=re.S
         )
 
+    # 5b. Insert stitch_explorer right before the first <h2> (which is right after .orig-card)
+    html = re.sub(
+        r'(<h2)',
+        lambda m: stitch_explorer + '\n' + m.group(1),
+        html,
+        count=1
+    )
+
     # 6. Insert stitch_bottom right after <div class="final">...</button></div>
     html = re.sub(
         r'(<div class="final">.*?</button>\s*</div>)',
@@ -2444,7 +2551,7 @@ def transform_file(filepath):
         flags=re.S
     )
 
-    # 7. Clean non-SVG pale/dark inline colors & hide #trackFull by default
+    # 7. Clean non-SVG pale/dark inline colors, convert SVGs to Stitch Light, & hide #trackFull by default
     html = clean_non_svg_inline_colors(html)
 
     with open(filepath, 'w', encoding='utf-8') as f:

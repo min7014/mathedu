@@ -1962,6 +1962,10 @@ mjx-container:not([display="true"]) {
       <span class="material-symbols-outlined" style="font-size:14px;color:#006398">target</span>
       <span class="bilingual-ko">0~52단계 빌드업</span><span class="bilingual-en">Step-by-Step Build-up</span>
     </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.openClassCreatorModal)openClassCreatorModal('51908207')">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#4F46E5">qr_code_2</span>
+      <span class="bilingual-ko">3초 수업 QR</span><span class="bilingual-en">3-Sec Class QR</span>
+    </button>
     <button type="button" class="stitch-feature-chip" onclick="if(window.downloadOfflineQuiz)window.downloadOfflineQuiz('51908207')">
       <span class="material-symbols-outlined" style="font-size:14px;color:#45464d">inventory_2</span>
       <span class="bilingual-ko">100% 오프라인 보관함</span><span class="bilingual-en">100% Offline Save</span>
@@ -1993,115 +1997,35 @@ mjx-container:not([display="true"]) {
     </div>
   </div>
 </div>
+<!-- STITCH_HEADER_END -->
+<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
+<div class="orig-card">
+<div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original Problem (Today's Goal)</span></div>
 
-<!-- 2. Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-streak-card">
-  <div class="stitch-streak-left">
-    <div class="stitch-flame-circle">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
-    </div>
-    <div class="stitch-streak-info">
-      <div class="stitch-streak-title-row">
-        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
-        <span class="stitch-lvl-badge">Lv.1 입문자</span>
-      </div>
-      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
-    </div>
-  </div>
-  <div class="stitch-streak-actions">
-    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
-      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
-    </button>
-    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('51908207')" title="즐겨찾기 및 오답노트">
-      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
-    </button>
-  </div>
+<div class="orig-media" style="margin:12px 0;"><div class="exam-paper-sheet" style="background:#ffffff;color:#0f172a;border-radius:12px;padding:22px 26px;border:1.5px solid #334155;box-shadow:0 8px 24px rgba(0,0,0,0.35);text-align:left;line-height:1.8;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;"><div style="font-weight:700;font-size:1.05rem;color:#0f172a;margin-bottom:6px;">문자 &#x27;A&#x27;가 적힌 카드 3장과 문자 &#x27;B&#x27;가 적힌 카드 3장을 준비하여 1번째부터 6번째 자리까지 차례로 A, A, A, B, B, B가 되도록 놓는다. 한 개의 주사위를 던져 나온 눈의 수를 $k$라 할 때, $k \le 5$ 이면 $k$번째 자리의 카드와 $(k+1)$번째 자리의 카드를 교환하고, $k = 6$ 이면 카드의 위치를 그대로 둔다. 이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, 3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오.</div><div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px dashed #94a3b8;font-size:0.95rem;color:#0f172a;"><div style="flex:1;min-width:110px"><b>①</b> $\dfrac{69}{371}$</div><div style="flex:1;min-width:110px"><b>②</b> $\dfrac{1}{6}$</div><div style="flex:1;min-width:110px"><b>③</b> $\dfrac{5}{36}$</div><div style="flex:1;min-width:110px"><b>④</b> $\dfrac{1}{4}$</div><div style="flex:1;min-width:110px"><b>⑤</b> $\dfrac{1}{3}$</div></div></div></div>
+<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!<span class="bilingual-en">💡 Step-by-step scaffolding will guide you to master this problem completely!</span></div>
 </div>
-
-<!-- 3. Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-dandelin-card">
-  <div class="stitch-card-head">
-    <div class="stitch-card-head-left">
-      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
-      <span>공식 엠블럼 Dandelin Spheres</span>
-    </div>
-    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
-  </div>
-  <div class="stitch-visual-canvas">
-    <div class="stitch-visual-banner" style="background-image: url('../../assets/stitch_dandelin_hero.png')">
-      <div class="stitch-visual-overlay">
-        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
-        <p class="stitch-visual-headline"><span class="bilingual-ko">51908207 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
-      </div>
-    </div>
-    <div class="stitch-visual-drawer">
-      <p class="stitch-visual-desc">
-        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~52단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
-        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
-      </p>
-      <div class="stitch-quote-box">
-        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
-        <p class="stitch-quote-text">
-          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
-          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 4. Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-gateway-grid">
-  <div class="stitch-gateway-card">
-    <div class="stitch-gw-head">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
-      <div>
-        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
-        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
-      </div>
-    </div>
-    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
-    <div class="stitch-gw-actions">
-      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('51908207')">
-        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
-        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
+<div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 독립시행의 무수한 우연이 <b>필연적인 정규분포의 종 모양 곡선으로 수렴하는 과정</b>을 시각화합니다.<br>• <b>[이항계수의 삼각형]</b> 파스칼 삼각형의 조합 수열이 이항분포 $\mathrm{B}(n, p)$의 이산 확률기둥들로 쌓여가는 단계별 구축 과정<br>• <b>[중심극한정리의 출현]</b> 시행 횟수 $n$이 증가함에 따라 거친 계단 모양의 히스토그램이 매끄러운 가우스 정규분포 곡선 $N(\mu, \sigma^2)$으로 완벽하게 수렴<br>• <b>[수학적 의미]</b> 개별 사건은 불확실하지만, 전체의 통계적 집합은 수학의 가장 우아한 대칭 곡선을 따른다는 경이로움을 하단 자료에서 체득해 보세요.
+<div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20230602001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 정규분포(Normal Distribution)</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/enufqbhp')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/enufqbhp" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://min7014.github.io/2023/2023060201.pdf#toolbar=0&view=Fit&scrollbar=0#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/dmvInzFq-NE" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20230602001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20230603001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 표준정규분포(Standard Normal Distribution)</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ewfbgb5b')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/ewfbgb5b" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://min7014.github.io/2023/2023060301.pdf#toolbar=0&view=Fit&scrollbar=0#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/BZzCy9js8K8" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20230603001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#006398;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#4f46e5;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div>
+  <div class="stitch-orig-cta-stack">
+    <button type="button" class="stitch-cta-black" onclick="scrollToQuizStep(0)">
+      <span class="material-symbols-outlined" style="font-size:18px">sports_esports</span>
+      <span><span class="bilingual-ko">1단계 디딤돌부터 바로 풀기</span><span class="bilingual-en">Start Solving from Step 1</span></span>
+      <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+    </button>
+    <div class="stitch-cta-sub-grid">
+      <button type="button" class="stitch-cta-gray" onclick="scrollToSolSection()">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#006398">picture_as_pdf</span>
+        <span><span class="bilingual-ko">시각적 도형·원리 해설</span><span class="bilingual-en">Visual Proof & Solution</span></span>
       </button>
-      <a href="../../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
-        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
-        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="stitch-gateway-card">
-    <div class="stitch-gw-head">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
-      <div>
-        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
-        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
-      </div>
-    </div>
-    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
-    <div class="stitch-gw-actions">
-      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="이름 또는 6자리 수업 코드 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
-      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
-        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
+      <button type="button" class="stitch-cta-gray" onclick="var m=document.querySelector('.min7014-addon-card');if(m)m.scrollIntoView({behavior:'smooth'});">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#45464d">language</span>
+        <span><span class="bilingual-ko">수학자료실 웹 탐구</span><span class="bilingual-en">Explore Archive</span></span>
       </button>
     </div>
-    <div class="stitch-gw-links">
-      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
-        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
-        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
-      </a>
-      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
-        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
-        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
-      </a>
-    </div>
   </div>
 </div>
-
-<!-- 5. Step-by-Step Scaffolding Explorer Header & Filter Pills (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<!-- STITCH_EXPLORER_START -->
 <div class="stitch-explorer-header" id="stitchQuizStepsSection">
   <div class="stitch-explorer-title-wrap">
     <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
@@ -2188,34 +2112,7 @@ mjx-container:not([display="true"]) {
     </div>
   </div>
 </div>
-<!-- STITCH_HEADER_END -->
-<!-- ★ 원본 문제 카드: 원본 그림 우선 표시 -->
-<div class="orig-card">
-<div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original Problem (Today's Goal)</span></div>
-
-<div class="orig-media" style="margin:12px 0;"><div class="exam-paper-sheet" style="background:#ffffff;color:#0f172a;border-radius:12px;padding:22px 26px;border:1.5px solid #334155;box-shadow:0 8px 24px rgba(0,0,0,0.35);text-align:left;line-height:1.8;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;"><div style="font-weight:700;font-size:1.05rem;color:#0f172a;margin-bottom:6px;">문자 &#x27;A&#x27;가 적힌 카드 3장과 문자 &#x27;B&#x27;가 적힌 카드 3장을 준비하여 1번째부터 6번째 자리까지 차례로 A, A, A, B, B, B가 되도록 놓는다. 한 개의 주사위를 던져 나온 눈의 수를 $k$라 할 때, $k \le 5$ 이면 $k$번째 자리의 카드와 $(k+1)$번째 자리의 카드를 교환하고, $k = 6$ 이면 카드의 위치를 그대로 둔다. 이 시행을 4회 반복한 결과 카드가 다시 초기 상태인 A, A, A, B, B, B 순서로 놓여 있을 때, 3번째 시행에서 나온 눈의 수가 6일 확률을 구하시오.</div><div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px dashed #94a3b8;font-size:0.95rem;color:#0f172a;"><div style="flex:1;min-width:110px"><b>①</b> $\dfrac{69}{371}$</div><div style="flex:1;min-width:110px"><b>②</b> $\dfrac{1}{6}$</div><div style="flex:1;min-width:110px"><b>③</b> $\dfrac{5}{36}$</div><div style="flex:1;min-width:110px"><b>④</b> $\dfrac{1}{4}$</div><div style="flex:1;min-width:110px"><b>⑤</b> $\dfrac{1}{3}$</div></div></div></div>
-<div class="orig-tip">💡 아래 0단계 기초 개념부터 차근차근 해결해 나가면 원본 문제를 완벽하게 풀 수 있습니다!<span class="bilingual-en">💡 Step-by-step scaffolding will guide you to master this problem completely!</span></div>
-</div>
-<div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 독립시행의 무수한 우연이 <b>필연적인 정규분포의 종 모양 곡선으로 수렴하는 과정</b>을 시각화합니다.<br>• <b>[이항계수의 삼각형]</b> 파스칼 삼각형의 조합 수열이 이항분포 $\mathrm{B}(n, p)$의 이산 확률기둥들로 쌓여가는 단계별 구축 과정<br>• <b>[중심극한정리의 출현]</b> 시행 횟수 $n$이 증가함에 따라 거친 계단 모양의 히스토그램이 매끄러운 가우스 정규분포 곡선 $N(\mu, \sigma^2)$으로 완벽하게 수렴<br>• <b>[수학적 의미]</b> 개별 사건은 불확실하지만, 전체의 통계적 집합은 수학의 가장 우아한 대칭 곡선을 따른다는 경이로움을 하단 자료에서 체득해 보세요.
-<div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20230602001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 정규분포(Normal Distribution)</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/enufqbhp')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/enufqbhp" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://min7014.github.io/2023/2023060201.pdf#toolbar=0&view=Fit&scrollbar=0#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/dmvInzFq-NE" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20230602001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20230603001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 표준정규분포(Standard Normal Distribution)</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ewfbgb5b')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/ewfbgb5b" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://min7014.github.io/2023/2023060301.pdf#toolbar=0&view=Fit&scrollbar=0#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/BZzCy9js8K8" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20230603001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#006398;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#4f46e5;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div>
-  <div class="stitch-orig-cta-stack">
-    <button type="button" class="stitch-cta-black" onclick="scrollToQuizStep(0)">
-      <span class="material-symbols-outlined" style="font-size:18px">sports_esports</span>
-      <span><span class="bilingual-ko">1단계 디딤돌부터 바로 풀기</span><span class="bilingual-en">Start Solving from Step 1</span></span>
-      <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
-    </button>
-    <div class="stitch-cta-sub-grid">
-      <button type="button" class="stitch-cta-gray" onclick="scrollToSolSection()">
-        <span class="material-symbols-outlined" style="font-size:16px;color:#006398">picture_as_pdf</span>
-        <span><span class="bilingual-ko">시각적 도형·원리 해설</span><span class="bilingual-en">Visual Proof & Solution</span></span>
-      </button>
-      <button type="button" class="stitch-cta-gray" onclick="var m=document.querySelector('.min7014-addon-card');if(m)m.scrollIntoView({behavior:'smooth'});">
-        <span class="material-symbols-outlined" style="font-size:16px;color:#45464d">language</span>
-        <span><span class="bilingual-ko">수학자료실 웹 탐구</span><span class="bilingual-en">Explore Archive</span></span>
-      </button>
-    </div>
-  </div>
-</div>
+<!-- STITCH_EXPLORER_END -->
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols</span></h2><div class="sym"><div><b>카드 교환</b> — 인접한 두 카드의 위치를 서로 바꾸는 연산. $k$번째와 $(k+1)$번째 카드를 맞바꿈.<div class="bilingual-en">Swapping two adjacent cards at positions $k$ and $k+1$.</div></div><div><b>주사위 눈 $k$</b> — 주사위를 던져 나온 눈. $k \in \{1,2,3,4,5,6\}$. $k \le 5$ 이면 교환, $k=6$ 이면 변화 없음(항등변환).<div class="bilingual-en">Dice roll $k \in \{1,2,3,4,5,6\}$. Swap if $k \le 5$; no change (identity) if $k=6$.</div></div><div><b>상태 $S$</b> — 6장 카드의 배치. 초기 상태 $S_0$: A,A,A,B,B,B (자리 1~6). B의 위치로 상태를 표현하기도 함.<div class="bilingual-en">Arrangement of 6 cards. Initial state $S_0$: A,A,A,B,B,B at positions 1 to 6.</div></div><div><b>조건부 확률 $P(A|B)$</b> — 사건 $B$가 일어났을 때 사건 $A$가 일어날 확률. $P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{n(A \cap B)}{n(B)}$ (동등 가능성일 때).<div class="bilingual-en">Conditional probability $P(A|B) = \frac{n(A \cap B)}{n(B)}$ under equally likely outcomes.</div></div><div><b>경우의 수 $M_2(s)$</b> — 초기 상태 $S_0$에서 2회 시행하여 상태 $s$에 도달하는 순서쌍 $(k_1, k_2)$의 개수.<div class="bilingual-en">Number of 2-step sequences $(k_1, k_2)$ reaching state $s$ from $S_0$.</div></div><div><b>대칭성</b> — 그래프가 무향(대칭)이면 $N(s \to t,\; m) = N(t \to s,\; m)$. 왕복 경우의 수가 같음.<div class="bilingual-en">By symmetry of adjacent swaps, the number of paths from $s$ to $t$ equals that from $t$ to $s$.</div></div></div>
 <h2>🔰 제1단계 · [초등 규칙과 사칙연산 연계] 이웃한 카드 자리 바꾸기 규칙 (가장 기초)<span class="bilingual-en">🔰 Step 1 · [Elementary Rules &amp; Arithmetic Link] Meaning of the Adjacent Card Swap Rule</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교에서 줄을 설 때 바로 옆 친구와 자리를 바꾸는 놀이를 떠올려 봅시다. 주사위 눈 $k$가 나오면, $k \le 5$ 이면 $k$번째 자리와 $(k+1)$번째 자리의 카드를 맞바꿉니다. $k=6$ 이면 아무것도 하지 않습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Just like swapping places with your neighbor in line in elementary school: when dice roll $k \le 5$, swap the $k$-th and $(k+1)$-th cards. When $k=6$, do nothing.</div></div><div class="q" data-ans="1" data-exp="$k \le 5$ 이면 인접한 $k$번째와 $(k+1)$번째 카드를 맞바꿈." data-exp-en="When $k \le 5$, swap the adjacent $k$-th and $(k+1)$-th cards."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem"><span class="bilingual-ko">초등학교 규칙 찾기: 주사위 눈이 $k \le 5$ 일 때 시행은 무엇을 하는가?</span><div class="bilingual-en">Elementary rule check: What operation is performed when the dice roll satisfies $k \le 5$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$k$번째와 $(k+1)$번째 카드를 교환</div><div class="opt"><span class="n">2</span>$k$번째 카드를 제거</div><div class="opt"><span class="n">3</span>$k$번째와 $(k+2)$번째 카드를 교환</div><div class="opt"><span class="n">4</span>모든 카드를 뒤집음</div><div class="opt"><span class="n">5</span>아무 일도 하지 않음</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
@@ -2912,6 +2809,113 @@ if (!window.toggleMinGgb) {
 <div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns"><span class="bilingual-ko">정답</span><span class="bilingual-en">Answer</span> $\dfrac{69}{371}$</div>
 <button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 <!-- STITCH_FOOTER_START -->
+<!-- Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-streak-card">
+  <div class="stitch-streak-left">
+    <div class="stitch-flame-circle">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
+    </div>
+    <div class="stitch-streak-info">
+      <div class="stitch-streak-title-row">
+        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
+        <span class="stitch-lvl-badge">Lv.1 입문자</span>
+      </div>
+      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
+    </div>
+  </div>
+  <div class="stitch-streak-actions">
+    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
+      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
+    </button>
+    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('51908207')" title="즐겨찾기 및 오답노트">
+      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
+    </button>
+  </div>
+</div>
+
+<!-- Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-gateway-grid">
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
+    <div class="stitch-gw-actions">
+      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('51908207')">
+        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
+        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
+      </button>
+      <a href="../../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
+        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
+        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
+    <div class="stitch-gw-actions">
+      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="이름 또는 6자리 수업 코드 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
+      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
+        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
+      </button>
+    </div>
+    <div class="stitch-gw-links">
+      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
+        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
+      </a>
+      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
+        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-dandelin-card">
+  <div class="stitch-card-head">
+    <div class="stitch-card-head-left">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
+      <span>공식 엠블럼 Dandelin Spheres</span>
+    </div>
+    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
+  </div>
+  <div class="stitch-visual-canvas">
+    <div class="stitch-visual-banner" style="background-image: url('../../assets/stitch_dandelin_hero.png')">
+      <div class="stitch-visual-overlay">
+        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
+        <p class="stitch-visual-headline"><span class="bilingual-ko">51908207 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
+      </div>
+    </div>
+    <div class="stitch-visual-drawer">
+      <p class="stitch-visual-desc">
+        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~52단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
+        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
+      </p>
+      <div class="stitch-quote-box">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
+        <p class="stitch-quote-text">
+          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
+          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="stitch-pack-banner">
   <div class="stitch-pack-left">
     <div class="stitch-pack-icon">
@@ -3244,4 +3248,4 @@ function setBoardLang(lang, isUserAction) {
   }
   setBoardLang(saved, false);
 })();
-</script><script src="../mathedu-room.js"></script><script src="../mathedu-report.js"></script></body></html>
+</script><script src="../mathedu-room.js?v=20261027_stitch3"></script><script src="../mathedu-report.js?v=20261027_stitch3"></script></body></html>

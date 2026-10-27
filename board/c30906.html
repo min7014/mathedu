@@ -1969,6 +1969,10 @@ mjx-container:not([display="true"]) {
       <span class="material-symbols-outlined" style="font-size:14px;color:#006398">target</span>
       <span class="bilingual-ko">0~3단계 빌드업</span><span class="bilingual-en">Step-by-Step Build-up</span>
     </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.openClassCreatorModal)openClassCreatorModal('c30906')">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#4F46E5">qr_code_2</span>
+      <span class="bilingual-ko">3초 수업 QR</span><span class="bilingual-en">3-Sec Class QR</span>
+    </button>
     <button type="button" class="stitch-feature-chip" onclick="if(window.downloadOfflineQuiz)window.downloadOfflineQuiz('c30906')">
       <span class="material-symbols-outlined" style="font-size:14px;color:#45464d">inventory_2</span>
       <span class="bilingual-ko">100% 오프라인 보관함</span><span class="bilingual-en">100% Offline Save</span>
@@ -1997,152 +2001,6 @@ mjx-container:not([display="true"]) {
     </div>
     <div class="stitch-progress-wrap">
       <span class="bar"><i id="bar"></i></span>
-    </div>
-  </div>
-</div>
-
-<!-- 2. Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-streak-card">
-  <div class="stitch-streak-left">
-    <div class="stitch-flame-circle">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
-    </div>
-    <div class="stitch-streak-info">
-      <div class="stitch-streak-title-row">
-        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
-        <span class="stitch-lvl-badge">Lv.1 입문자</span>
-      </div>
-      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
-    </div>
-  </div>
-  <div class="stitch-streak-actions">
-    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
-      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
-    </button>
-    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('c30906')" title="즐겨찾기 및 오답노트">
-      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
-    </button>
-  </div>
-</div>
-
-<!-- 3. Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-dandelin-card">
-  <div class="stitch-card-head">
-    <div class="stitch-card-head-left">
-      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
-      <span>공식 엠블럼 Dandelin Spheres</span>
-    </div>
-    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
-  </div>
-  <div class="stitch-visual-canvas">
-    <div class="stitch-visual-banner" style="background-image: url('../assets/stitch_dandelin_hero.png')">
-      <div class="stitch-visual-overlay">
-        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
-        <p class="stitch-visual-headline"><span class="bilingual-ko">삼각함수의 각 변환과 삼각함수의 덧셈 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
-      </div>
-    </div>
-    <div class="stitch-visual-drawer">
-      <p class="stitch-visual-desc">
-        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~3단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
-        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
-      </p>
-      <div class="stitch-quote-box">
-        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
-        <p class="stitch-quote-text">
-          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
-          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 4. Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-gateway-grid">
-  <div class="stitch-gateway-card">
-    <div class="stitch-gw-head">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
-      <div>
-        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
-        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
-      </div>
-    </div>
-    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
-    <div class="stitch-gw-actions">
-      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('c30906')">
-        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
-        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
-      </button>
-      <a href="../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
-        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
-        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="stitch-gateway-card">
-    <div class="stitch-gw-head">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
-      <div>
-        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
-        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
-      </div>
-    </div>
-    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
-    <div class="stitch-gw-actions">
-      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="이름 또는 6자리 수업 코드 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
-      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
-        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
-      </button>
-    </div>
-    <div class="stitch-gw-links">
-      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
-        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
-        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
-      </a>
-      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
-        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
-        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- 5. Step-by-Step Scaffolding Explorer Header & Filter Pills (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-explorer-header" id="stitchQuizStepsSection">
-  <div class="stitch-explorer-title-wrap">
-    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
-    <div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 디딤돌 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
-        <span class="stitch-count-badge">총 4문항</span>
-      </div>
-      <span class="stitch-explorer-sub"><span class="bilingual-ko">원본 기출 · 제0단계 기호 번역 · 1~3단계 디딤돌 즉시 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
-    </div>
-  </div>
-  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">
-    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
-  </button>
-</div>
-
-<div class="stitch-filter-card">
-  <div class="stitch-filter-group">
-    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
-    <div class="stitch-pill-row">
-      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
-      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
-      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
-      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
-    </div>
-  </div>
-  <div class="stitch-filter-group">
-    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
-    <div class="stitch-pill-row">
-      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
-      <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(0)">1단계</button>
-        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(1)">2단계</button>
-        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(2)">3단계</button>
-        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(3)">최종 본문항</button>
     </div>
   </div>
 </div>
@@ -2198,6 +2056,45 @@ mjx-container:not([display="true"]) {
     </div>
   </div>
 </div>
+<!-- STITCH_EXPLORER_START -->
+<div class="stitch-explorer-header" id="stitchQuizStepsSection">
+  <div class="stitch-explorer-title-wrap">
+    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
+    <div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 디딤돌 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
+        <span class="stitch-count-badge">총 4문항</span>
+      </div>
+      <span class="stitch-explorer-sub"><span class="bilingual-ko">원본 기출 · 제0단계 기호 번역 · 1~3단계 디딤돌 즉시 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
+    </div>
+  </div>
+  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">
+    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
+  </button>
+</div>
+
+<div class="stitch-filter-card">
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
+      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
+    </div>
+  </div>
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
+      <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(0)">1단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(1)">2단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(2)">3단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(3)">최종 본문항</button>
+    </div>
+  </div>
+</div>
+<!-- STITCH_EXPLORER_END -->
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$\sin^2\theta + \cos^2\theta = 1$</b> — 삼각함수의 기본 항등식</div><div><b>$\dfrac{\pi}{2} < \theta < \pi$</b> — 제2사분면의 각 (sin &gt; 0, cos &lt; 0)</div></div>
 <h2>🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전<span class="bilingual-en">🔰 Step 1 · [Elementary Angles & Rotation] Half-turn rotation and sign reversal</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 각도기에서 반 바퀴는 $180^\circ$입니다. 수학에서 반 바퀴($\pi$)를 더 회전하면 방향이 정반대로 바뀌므로 코사인 값의 부호가 마이너스로 바뀝니다: $\cos(\pi+\theta) = -\cos\theta$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> A half turn is $180^\circ$ ($\pi$ radians). Rotating a half turn reverses direction, giving $\cos(\pi+\theta) = -\cos\theta$.</div></div><div class="q" data-ans="1" data-exp="$\cos(\pi+\theta) = -\cos\theta$이므로 $\cos\theta = -\frac{2\sqrt{5}}{5}$입니다." data-exp-en="It&#x27;s $\cos(\pi+\theta) = -\cos\theta$, so it&#x27;s $\cos\theta = -\frac{2\sqrt{5}}{5}$."><div class="lvl"><span class="bilingual-ko">초등 각도 회전 디딤돌 1</span><span class="bilingual-en">Elementary Rotation Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 각도 직관: 반 바퀴 회전으로 부호가 반전되는 원리 $\cos(\pi+\theta) = -\cos\theta$에서, $\cos(\pi+\theta) = \frac{2\sqrt{5}}{5}$ 일 때 $\cos\theta$의 값은?</span><div class="bilingual-en">Elementary angle intuition: Since a half turn negates cosine ($\cos(\pi+\theta) = -\cos\theta$), what is $\cos\theta$ when $\cos(\pi+\theta) = \frac{2\sqrt{5}}{5}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">2</span>$-\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">3</span>$\frac{\sqrt{5}}{5}$</div><div class="opt"><span class="n">4</span>$\frac{2\sqrt{5}}{5}$</div><div class="opt"><span class="n">5</span>$-\frac{1}{5}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
@@ -2247,8 +2144,8 @@ mjx-container:not([display="true"]) {
 <h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
 <p>본 문항은 <b>삼각함수의 각 변환 공식</b>과 사분면에 따른 삼각함수 값의 부호 결정, 그리고 삼각함수의 기본 항등식 $\sin^2\theta + \cos^2\theta = 1$을 유기적으로 활용하는 문제입니다.</p>
 
-<h4>🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#0b1120 0%,#131c33 100%);border:1.5px solid rgba(124,196,255,0.35);box-shadow:0 6px 24px rgba(0,0,0,0.45)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(148,163,184,0.08)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#fbbf24"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#fb7185"/></marker></defs><rect width="680" height="290" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.35)"/><text x="24" y="31" fill="#38bdf8" font-size="13" font-weight="800" font-family="sans-serif">📐 [의도적 기하 작도 다이어그램] [2025학년도 9월 고3 6번] 삼각함수의 각 변</text><text x="656" y="31" fill="#fde68a" font-size="12" font-weight="700" text-anchor="end" font-family="sans-serif">Answer: 정답 -/√55</text>
-    <rect x="20" y="52" width="365" height="226" rx="10" fill="rgba(15,23,42,0.9)" stroke="#475569" stroke-width="1.5"/>
+<h4>🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,99,184,0.06)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#006398"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#fbbf24"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#be123c"/></marker></defs><rect width="680" height="290" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#006398" font-size="13" font-weight="800" font-family="sans-serif">📐 [의도적 기하 작도 다이어그램] [2025학년도 9월 고3 6번] 삼각함수의 각 변</text><text x="656" y="31" fill="#b45309" font-size="12" font-weight="700" text-anchor="end" font-family="sans-serif">Answer: -frac√55</text>
+    <rect x="20" y="52" width="365" height="226" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
     
         <!-- Unit Circle & Quadrant Right Triangle -->
         <line x1="55" y1="162" x2="350" y2="162" stroke="#94a3b8" stroke-width="1.5"/>
@@ -2256,27 +2153,27 @@ mjx-container:not([display="true"]) {
         <circle cx="202" cy="162" r="78" fill="rgba(56,189,248,0.08)" stroke="#38bdf8" stroke-width="2"/>
         <polygon points="202,162 138,162 138,116" fill="rgba(52,211,153,0.25)" stroke="#34d399" stroke-width="2"/>
         <circle cx="138" cy="116" r="5" fill="#fbbf24"/>
-        <text x="118" y="110" fill="#fde68a" font-size="11" font-weight="800">P(x, y)</text>
-        <text x="265" y="105" fill="#7cc4ff" font-size="10.5" font-weight="700">1사분면: 모두(+)</text>
-        <text x="72" y="105" fill="#6ee7b7" font-size="10.5" font-weight="700">2사분면: sin(+)</text>
-        <text x="72" y="232" fill="#c4b5fd" font-size="10.5" font-weight="700">3사분면: tan(+)</text>
-        <text x="265" y="232" fill="#fde68a" font-size="10.5" font-weight="700">4사분면: cos(+)</text>
-        <text x="202" y="268" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">단위원 직각삼각형 &amp; 사분면 부호(얼싸안고)</text>
+        <text x="118" y="110" fill="#b45309" font-size="11" font-weight="800">P(x, y)</text>
+        <text x="265" y="105" fill="#006398" font-size="10.5" font-weight="700">1사분면: 모두(+)</text>
+        <text x="72" y="105" fill="#047857" font-size="10.5" font-weight="700">2사분면: sin(+)</text>
+        <text x="72" y="232" fill="#4f46e5" font-size="10.5" font-weight="700">3사분면: tan(+)</text>
+        <text x="265" y="232" fill="#b45309" font-size="10.5" font-weight="700">4사분면: cos(+)</text>
+        <text x="202" y="268" fill="#b45309" font-size="11" font-weight="800" text-anchor="middle">단위원 직각삼각형 &amp; 사분면 부호(얼싸안고)</text>
         
     
-    <rect x="400" y="52" width="260" height="226" rx="10" fill="rgba(30,41,59,0.9)" stroke="#a78bfa" stroke-width="1.5"/>
-    <text x="530" y="74" fill="#c4b5fd" font-size="12" font-weight="800" text-anchor="middle">기하 작도 및 길이·각도 분석</text>
-    <rect x="414" y="86" width="232" height="42" rx="7" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.4)"/>
-    <text x="530" y="103" fill="#bae6fd" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
-    <text x="530" y="120" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">🔰 제0단계 · 수학 기호 ⇒ -/2√55</text>
-    <rect x="414" y="136" width="232" height="42" rx="7" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.4)"/>
-    <text x="530" y="153" fill="#ddd6fe" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
-    <text x="530" y="170" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전</text>
-    <rect x="414" y="186" width="232" height="40" rx="7" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.4)"/>
-    <text x="530" y="202" fill="#a7f3d0" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
-    <text x="530" y="218" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">제2단계 · 제2사분면에서 sinθ 구하기 ⇒ -/√55</text>
-    <rect x="414" y="233" width="232" height="35" rx="7" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" stroke-width="1.5"/>
-    <text x="530" y="255" fill="#fde68a" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 결론: 정답 -/√55</text>
+    <rect x="400" y="52" width="260" height="226" rx="10" fill="#131b2e" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="530" y="74" fill="#4f46e5" font-size="12" font-weight="800" text-anchor="middle">기하 작도 및 길이·각도 분석</text>
+    <rect x="414" y="86" width="232" height="42" rx="7" fill="#eff6ff" stroke="rgba(56,189,248,0.4)"/>
+    <text x="530" y="103" fill="#006398" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
+    <text x="530" y="120" fill="#1b1b1d" font-size="11" font-weight="800" text-anchor="middle">🔰 제0단계 · 수학 기호 ⇒ -/2√55</text>
+    <rect x="414" y="136" width="232" height="42" rx="7" fill="#f5f3ff" stroke="rgba(167,139,250,0.4)"/>
+    <text x="530" y="153" fill="#4f46e5" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
+    <text x="530" y="170" fill="#1b1b1d" font-size="11" font-weight="800" text-anchor="middle">🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전</text>
+    <rect x="414" y="186" width="232" height="40" rx="7" fill="#065f46" stroke="rgba(52,211,153,0.4)"/>
+    <text x="530" y="202" fill="#047857" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
+    <text x="530" y="218" fill="#1b1b1d" font-size="11" font-weight="800" text-anchor="middle">제2단계 · 제2사분면에서 sinθ 구하기 ⇒ -/√55</text>
+    <rect x="414" y="233" width="232" height="35" rx="7" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="530" y="255" fill="#b45309" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 결론: -frac√55</text>
     
     </svg><figcaption style="margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55">▲ <b>[[2025학년도 9월 고3 6번] 삼각함수의 각 변환과 삼각함수의 덧셈]</b> 문항의 조건과 기하학적·구조적 관계를 한눈에 볼 수 있도록 의도적으로 작도한 시각적 도형 모델입니다.</figcaption></figure><h4>🗺️ [한눈에 보는 도식화 풀이 흐름도 (Schematic Solution Flowchart)]</h4><section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px"><table style="width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px"><tr><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 1 · 출발 조건</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🔰 제0단계 · 수학 기호 ⇒ $-\frac{2\sqrt{5}}{5}$</span></td><td style="text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 2 · 도형·공식 변환</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전 ⇒ $\frac{\sqrt{5}}{5}$</span></td><td style="text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 3 · 핵심 식 도출</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">제2단계 · 제2사분면에서 $\sin\theta$ 구하기 ⇒ $-\frac{\sqrt{5}}{5}$</span></td><td style="text-align:center;vertical-align:middle;color:#34d399;font-weight:900;font-size:1.1rem;padding:0 4px">⇒</td><td style="background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%"><b style="color:#047857;font-size:0.78rem;display:block;margin-bottom:4px">🎯 최종 정답</b><b style="color:#065f46;font-size:0.98rem">정답 $-\frac{\sqrt{5}}{5}$</b></td></tr></table><table style="width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden"><thead><tr style="background:#f1f5f9;color:#0f172a"><th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:14%">도식화 단계</th><th style="padding:8px 12px;border:1px solid rgba(148,163,184,0.3)">핵심 개념 · 기하 도형 · 적용 공식</th><th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:22%">도출 결과</th></tr></thead><tbody><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제1단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🔰 제0단계 · 수학 기호 ⇒ $-\frac{2\sqrt{5}}{5}$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제2단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전 ⇒ $\frac{\sqrt{5}}{5}$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제3단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">제2단계 · 제2사분면에서 $\sin\theta$ 구하기 ⇒ $-\frac{\sqrt{5}}{5}$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">정답: 정답 $-\frac{\sqrt{5}}{5}$</td></tr></tbody></table></section>
 <h4>📐 [단계별 상세 풀이 전개]</h4>
@@ -2314,8 +2211,8 @@ mjx-container:not([display="true"]) {
 <h4>📋 [Problem Analysis & Core Concepts]</h4>
 <p>This problem tests the application of <b>trigonometric reduction formulas ($\cos(\pi+\theta) = -\cos\theta$)</b>, quadrant-based sign analysis, and the Pythagorean identity $\sin^2\theta + \cos^2\theta = 1$.</p>
 
-<h4>🎨 [Visual Geometric & Conceptual Diagram]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#0b1120 0%,#131c33 100%);border:1.5px solid rgba(124,196,255,0.35);box-shadow:0 6px 24px rgba(0,0,0,0.45)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(148,163,184,0.08)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#fbbf24"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#fb7185"/></marker></defs><rect width="680" height="290" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.35)"/><text x="24" y="31" fill="#38bdf8" font-size="13" font-weight="800" font-family="sans-serif">📐 [Intentional Geometric Construction] C30906</text><text x="656" y="31" fill="#fde68a" font-size="12" font-weight="700" text-anchor="end" font-family="sans-serif">Answer: 정답 -/√55</text>
-    <rect x="20" y="52" width="365" height="226" rx="10" fill="rgba(15,23,42,0.9)" stroke="#475569" stroke-width="1.5"/>
+<h4>🎨 [Visual Geometric & Conceptual Diagram]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,99,184,0.06)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#006398"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#fbbf24"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#be123c"/></marker></defs><rect width="680" height="290" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#006398" font-size="13" font-weight="800" font-family="sans-serif">📐 [Intentional Geometric Construction] C30906</text><text x="656" y="31" fill="#b45309" font-size="12" font-weight="700" text-anchor="end" font-family="sans-serif">Answer: -frac√55</text>
+    <rect x="20" y="52" width="365" height="226" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
     
         <!-- Unit Circle & Quadrant Right Triangle -->
         <line x1="55" y1="162" x2="350" y2="162" stroke="#94a3b8" stroke-width="1.5"/>
@@ -2323,27 +2220,27 @@ mjx-container:not([display="true"]) {
         <circle cx="202" cy="162" r="78" fill="rgba(56,189,248,0.08)" stroke="#38bdf8" stroke-width="2"/>
         <polygon points="202,162 138,162 138,116" fill="rgba(52,211,153,0.25)" stroke="#34d399" stroke-width="2"/>
         <circle cx="138" cy="116" r="5" fill="#fbbf24"/>
-        <text x="118" y="110" fill="#fde68a" font-size="11" font-weight="800">P(x, y)</text>
-        <text x="265" y="105" fill="#7cc4ff" font-size="10.5" font-weight="700">1사분면: 모두(+)</text>
-        <text x="72" y="105" fill="#6ee7b7" font-size="10.5" font-weight="700">2사분면: sin(+)</text>
-        <text x="72" y="232" fill="#c4b5fd" font-size="10.5" font-weight="700">3사분면: tan(+)</text>
-        <text x="265" y="232" fill="#fde68a" font-size="10.5" font-weight="700">4사분면: cos(+)</text>
-        <text x="202" y="268" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">단위원 직각삼각형 &amp; 사분면 부호(얼싸안고)</text>
+        <text x="118" y="110" fill="#b45309" font-size="11" font-weight="800">P(x, y)</text>
+        <text x="265" y="105" fill="#006398" font-size="10.5" font-weight="700">1사분면: 모두(+)</text>
+        <text x="72" y="105" fill="#047857" font-size="10.5" font-weight="700">2사분면: sin(+)</text>
+        <text x="72" y="232" fill="#4f46e5" font-size="10.5" font-weight="700">3사분면: tan(+)</text>
+        <text x="265" y="232" fill="#b45309" font-size="10.5" font-weight="700">4사분면: cos(+)</text>
+        <text x="202" y="268" fill="#b45309" font-size="11" font-weight="800" text-anchor="middle">단위원 직각삼각형 &amp; 사분면 부호(얼싸안고)</text>
         
     
-    <rect x="400" y="52" width="260" height="226" rx="10" fill="rgba(30,41,59,0.9)" stroke="#a78bfa" stroke-width="1.5"/>
-    <text x="530" y="74" fill="#c4b5fd" font-size="12" font-weight="800" text-anchor="middle">기하 작도 및 길이·각도 분석</text>
-    <rect x="414" y="86" width="232" height="42" rx="7" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.4)"/>
-    <text x="530" y="103" fill="#bae6fd" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
-    <text x="530" y="120" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">🔰 Level 0 · Mathematical symbols ⇒</text>
-    <rect x="414" y="136" width="232" height="42" rx="7" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.4)"/>
-    <text x="530" y="153" fill="#ddd6fe" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
-    <text x="530" y="170" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">🔰 Step 1 · [Elementary Angles &amp; Ro</text>
-    <rect x="414" y="186" width="232" height="40" rx="7" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.4)"/>
-    <text x="530" y="202" fill="#a7f3d0" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
-    <text x="530" y="218" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">Step 2 · Find sinθ in Quadrant 2 ⇒</text>
-    <rect x="414" y="233" width="232" height="35" rx="7" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" stroke-width="1.5"/>
-    <text x="530" y="255" fill="#fde68a" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 결론: 정답 -/√55</text>
+    <rect x="400" y="52" width="260" height="226" rx="10" fill="#131b2e" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="530" y="74" fill="#4f46e5" font-size="12" font-weight="800" text-anchor="middle">기하 작도 및 길이·각도 분석</text>
+    <rect x="414" y="86" width="232" height="42" rx="7" fill="#eff6ff" stroke="rgba(56,189,248,0.4)"/>
+    <text x="530" y="103" fill="#006398" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
+    <text x="530" y="120" fill="#1b1b1d" font-size="11" font-weight="800" text-anchor="middle">🔰 Level 0 · Mathematical symbols ⇒</text>
+    <rect x="414" y="136" width="232" height="42" rx="7" fill="#f5f3ff" stroke="rgba(167,139,250,0.4)"/>
+    <text x="530" y="153" fill="#4f46e5" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
+    <text x="530" y="170" fill="#1b1b1d" font-size="11" font-weight="800" text-anchor="middle">🔰 Step 1 · [Elementary Angles &amp; Ro</text>
+    <rect x="414" y="186" width="232" height="40" rx="7" fill="#065f46" stroke="rgba(52,211,153,0.4)"/>
+    <text x="530" y="202" fill="#047857" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
+    <text x="530" y="218" fill="#1b1b1d" font-size="11" font-weight="800" text-anchor="middle">Step 2 · Find sinθ in Quadrant 2 ⇒</text>
+    <rect x="414" y="233" width="232" height="35" rx="7" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="530" y="255" fill="#b45309" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 결론: -frac√55</text>
     
     </svg><figcaption style="margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55">▲ Intentionally constructed geometric & visual model illustrating the core mathematical relationships of <b>[C30906]</b>.</figcaption></figure><h4>🗺️ [At-a-Glance Schematic Solution Flowchart]</h4><section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px"><table style="width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px"><tr><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 1 · Given Condition</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🔰 Level 0 · Mathematical symbols ⇒ $-\frac{2\sqrt{5}}{5}$</span></td><td style="text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 2 · Visual/Formula Transform</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🔰 Step 1 · [Elementary Angles & Rotation] Half-turn rotation and sign reversal ⇒ $\frac{\sqrt{5}}{5}$</span></td><td style="text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 3 · Key Derivation</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">Step 2 · Find $\sin\theta$ in Quadrant 2 ⇒ $-\frac{\sqrt{5}}{5}$</span></td><td style="text-align:center;vertical-align:middle;color:#34d399;font-weight:900;font-size:1.1rem;padding:0 4px">⇒</td><td style="background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%"><b style="color:#047857;font-size:0.78rem;display:block;margin-bottom:4px">🎯 최종 정답</b><b style="color:#065f46;font-size:0.98rem">정답 $-\frac{\sqrt{5}}{5}$</b></td></tr></table><table style="width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden"><thead><tr style="background:#f1f5f9;color:#0f172a"><th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:14%">Schematic Stage</th><th style="padding:8px 12px;border:1px solid rgba(148,163,184,0.3)">Core Concept · Geometric Model · Formula</th><th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:22%">Derived Result</th></tr></thead><tbody><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 1</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🔰 Level 0 · Mathematical symbols ⇒ $-\frac{2\sqrt{5}}{5}$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 2</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🔰 Step 1 · [Elementary Angles & Rotation] Half-turn rotation and sign reversal ⇒ $\frac{\sqrt{5}}{5}$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 3</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">Step 2 · Find $\sin\theta$ in Quadrant 2 ⇒ $-\frac{\sqrt{5}}{5}$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">정답: 정답 $-\frac{\sqrt{5}}{5}$</td></tr></tbody></table></section>
 <h4>📐 [Step-by-Step Rigorous Derivation]</h4>
@@ -2380,8 +2277,8 @@ mjx-container:not([display="true"]) {
 &lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
 &lt;p&gt;본 문항은 &lt;b&gt;삼각함수의 각 변환 공식&lt;/b&gt;과 사분면에 따른 삼각함수 값의 부호 결정, 그리고 삼각함수의 기본 항등식 $\sin^2\theta + \cos^2\theta = 1$을 유기적으로 활용하는 문제입니다.&lt;/p&gt;
 
-&lt;h4&gt;🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 290&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#0b1120 0%,#131c33 100%);border:1.5px solid rgba(124,196,255,0.35);box-shadow:0 6px 24px rgba(0,0,0,0.45)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(148,163,184,0.08)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#38bdf8&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#fbbf24&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#34d399&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#fb7185&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;290&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;rgba(56,189,248,0.12)&quot; stroke=&quot;rgba(56,189,248,0.35)&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#38bdf8&quot; font-size=&quot;13&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [의도적 기하 작도 다이어그램] [2025학년도 9월 고3 6번] 삼각함수의 각 변&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#fde68a&quot; font-size=&quot;12&quot; font-weight=&quot;700&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;Answer: 정답 -/√55&lt;/text&gt;
-    &lt;rect x=&quot;20&quot; y=&quot;52&quot; width=&quot;365&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;rgba(15,23,42,0.9)&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot;/&gt;
+&lt;h4&gt;🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 290&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(0,99,184,0.06)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#006398&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#fbbf24&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#34d399&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#be123c&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;290&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#006398&quot; font-size=&quot;13&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [의도적 기하 작도 다이어그램] [2025학년도 9월 고3 6번] 삼각함수의 각 변&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#b45309&quot; font-size=&quot;12&quot; font-weight=&quot;700&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;Answer: -frac√55&lt;/text&gt;
+    &lt;rect x=&quot;20&quot; y=&quot;52&quot; width=&quot;365&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#ffffff&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot;/&gt;
     
         &lt;!-- Unit Circle &amp; Quadrant Right Triangle --&gt;
         &lt;line x1=&quot;55&quot; y1=&quot;162&quot; x2=&quot;350&quot; y2=&quot;162&quot; stroke=&quot;#94a3b8&quot; stroke-width=&quot;1.5&quot;/&gt;
@@ -2389,27 +2286,27 @@ mjx-container:not([display="true"]) {
         &lt;circle cx=&quot;202&quot; cy=&quot;162&quot; r=&quot;78&quot; fill=&quot;rgba(56,189,248,0.08)&quot; stroke=&quot;#38bdf8&quot; stroke-width=&quot;2&quot;/&gt;
         &lt;polygon points=&quot;202,162 138,162 138,116&quot; fill=&quot;rgba(52,211,153,0.25)&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot;/&gt;
         &lt;circle cx=&quot;138&quot; cy=&quot;116&quot; r=&quot;5&quot; fill=&quot;#fbbf24&quot;/&gt;
-        &lt;text x=&quot;118&quot; y=&quot;110&quot; fill=&quot;#fde68a&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;P(x, y)&lt;/text&gt;
-        &lt;text x=&quot;265&quot; y=&quot;105&quot; fill=&quot;#7cc4ff&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;1사분면: 모두(+)&lt;/text&gt;
-        &lt;text x=&quot;72&quot; y=&quot;105&quot; fill=&quot;#6ee7b7&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;2사분면: sin(+)&lt;/text&gt;
-        &lt;text x=&quot;72&quot; y=&quot;232&quot; fill=&quot;#c4b5fd&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;3사분면: tan(+)&lt;/text&gt;
-        &lt;text x=&quot;265&quot; y=&quot;232&quot; fill=&quot;#fde68a&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;4사분면: cos(+)&lt;/text&gt;
-        &lt;text x=&quot;202&quot; y=&quot;268&quot; fill=&quot;#fde68a&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;단위원 직각삼각형 &amp;amp; 사분면 부호(얼싸안고)&lt;/text&gt;
+        &lt;text x=&quot;118&quot; y=&quot;110&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;P(x, y)&lt;/text&gt;
+        &lt;text x=&quot;265&quot; y=&quot;105&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;1사분면: 모두(+)&lt;/text&gt;
+        &lt;text x=&quot;72&quot; y=&quot;105&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;2사분면: sin(+)&lt;/text&gt;
+        &lt;text x=&quot;72&quot; y=&quot;232&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;3사분면: tan(+)&lt;/text&gt;
+        &lt;text x=&quot;265&quot; y=&quot;232&quot; fill=&quot;#b45309&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;4사분면: cos(+)&lt;/text&gt;
+        &lt;text x=&quot;202&quot; y=&quot;268&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;단위원 직각삼각형 &amp;amp; 사분면 부호(얼싸안고)&lt;/text&gt;
         
     
-    &lt;rect x=&quot;400&quot; y=&quot;52&quot; width=&quot;260&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;rgba(30,41,59,0.9)&quot; stroke=&quot;#a78bfa&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;74&quot; fill=&quot;#c4b5fd&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;기하 작도 및 길이·각도 분석&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;86&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;rgba(56,189,248,0.14)&quot; stroke=&quot;rgba(56,189,248,0.4)&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;103&quot; fill=&quot;#bae6fd&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;① 주어진 조건 · 기하 구조&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;120&quot; fill=&quot;#fff&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 제0단계 · 수학 기호 ⇒ -/2√55&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;136&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;rgba(167,139,250,0.15)&quot; stroke=&quot;rgba(167,139,250,0.4)&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;153&quot; fill=&quot;#ddd6fe&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;② 핵심 도형 성질 · 변환 공식&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;170&quot; fill=&quot;#fff&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;186&quot; width=&quot;232&quot; height=&quot;40&quot; rx=&quot;7&quot; fill=&quot;rgba(52,211,153,0.15)&quot; stroke=&quot;rgba(52,211,153,0.4)&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;202&quot; fill=&quot;#a7f3d0&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;③ 결정적 관계식 · 수치 도출&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;218&quot; fill=&quot;#fff&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;제2단계 · 제2사분면에서 sinθ 구하기 ⇒ -/√55&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;233&quot; width=&quot;232&quot; height=&quot;35&quot; rx=&quot;7&quot; fill=&quot;rgba(251,191,36,0.2)&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#fde68a&quot; font-size=&quot;12.5&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: 정답 -/√55&lt;/text&gt;
+    &lt;rect x=&quot;400&quot; y=&quot;52&quot; width=&quot;260&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#131b2e&quot; stroke=&quot;#a78bfa&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;74&quot; fill=&quot;#4f46e5&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;기하 작도 및 길이·각도 분석&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;86&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#eff6ff&quot; stroke=&quot;rgba(56,189,248,0.4)&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;103&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;① 주어진 조건 · 기하 구조&lt;/text&gt;
+    &lt;text x=&quot;530&quot; y=&quot;120&quot; fill=&quot;#1b1b1d&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 제0단계 · 수학 기호 ⇒ -/2√55&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;136&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;rgba(167,139,250,0.4)&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;153&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;② 핵심 도형 성질 · 변환 공식&lt;/text&gt;
+    &lt;text x=&quot;530&quot; y=&quot;170&quot; fill=&quot;#1b1b1d&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;186&quot; width=&quot;232&quot; height=&quot;40&quot; rx=&quot;7&quot; fill=&quot;#065f46&quot; stroke=&quot;rgba(52,211,153,0.4)&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;202&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;③ 결정적 관계식 · 수치 도출&lt;/text&gt;
+    &lt;text x=&quot;530&quot; y=&quot;218&quot; fill=&quot;#1b1b1d&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;제2단계 · 제2사분면에서 sinθ 구하기 ⇒ -/√55&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;233&quot; width=&quot;232&quot; height=&quot;35&quot; rx=&quot;7&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#b45309&quot; font-size=&quot;12.5&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: -frac√55&lt;/text&gt;
     
     &lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ &lt;b&gt;[[2025학년도 9월 고3 6번] 삼각함수의 각 변환과 삼각함수의 덧셈]&lt;/b&gt; 문항의 조건과 기하학적·구조적 관계를 한눈에 볼 수 있도록 의도적으로 작도한 시각적 도형 모델입니다.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [한눈에 보는 도식화 풀이 흐름도 (Schematic Solution Flowchart)]&lt;/h4&gt;&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · 출발 조건&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🔰 제0단계 · 수학 기호 ⇒ $-\frac{2\sqrt{5}}{5}$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · 도형·공식 변환&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전 ⇒ $\frac{\sqrt{5}}{5}$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · 핵심 식 도출&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제2단계 · 제2사분면에서 $\sin\theta$ 구하기 ⇒ $-\frac{\sqrt{5}}{5}$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#34d399;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;🎯 최종 정답&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.98rem&quot;&gt;정답 $-\frac{\sqrt{5}}{5}$&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden&quot;&gt;&lt;thead&gt;&lt;tr style=&quot;background:#f1f5f9;color:#0f172a&quot;&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:14%&quot;&gt;도식화 단계&lt;/th&gt;&lt;th style=&quot;padding:8px 12px;border:1px solid rgba(148,163,184,0.3)&quot;&gt;핵심 개념 · 기하 도형 · 적용 공식&lt;/th&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:22%&quot;&gt;도출 결과&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제1단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🔰 제0단계 · 수학 기호 ⇒ $-\frac{2\sqrt{5}}{5}$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제2단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🔰 1단계 · [초등 각도와 회전] 반 바퀴 회전과 부호 반전 ⇒ $\frac{\sqrt{5}}{5}$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제3단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제2단계 · 제2사분면에서 $\sin\theta$ 구하기 ⇒ $-\frac{\sqrt{5}}{5}$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;정답: 정답 $-\frac{\sqrt{5}}{5}$&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/section&gt;
 &lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
@@ -2447,8 +2344,8 @@ mjx-container:not([display="true"]) {
 &lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
 &lt;p&gt;This problem tests the application of &lt;b&gt;trigonometric reduction formulas ($\cos(\pi+\theta) = -\cos\theta$)&lt;/b&gt;, quadrant-based sign analysis, and the Pythagorean identity $\sin^2\theta + \cos^2\theta = 1$.&lt;/p&gt;
 
-&lt;h4&gt;🎨 [Visual Geometric &amp; Conceptual Diagram]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 290&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#0b1120 0%,#131c33 100%);border:1.5px solid rgba(124,196,255,0.35);box-shadow:0 6px 24px rgba(0,0,0,0.45)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(148,163,184,0.08)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#38bdf8&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#fbbf24&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#34d399&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#fb7185&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;290&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;rgba(56,189,248,0.12)&quot; stroke=&quot;rgba(56,189,248,0.35)&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#38bdf8&quot; font-size=&quot;13&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [Intentional Geometric Construction] C30906&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#fde68a&quot; font-size=&quot;12&quot; font-weight=&quot;700&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;Answer: 정답 -/√55&lt;/text&gt;
-    &lt;rect x=&quot;20&quot; y=&quot;52&quot; width=&quot;365&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;rgba(15,23,42,0.9)&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot;/&gt;
+&lt;h4&gt;🎨 [Visual Geometric &amp; Conceptual Diagram]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 290&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(0,99,184,0.06)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#006398&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#fbbf24&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#34d399&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#be123c&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;290&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#006398&quot; font-size=&quot;13&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [Intentional Geometric Construction] C30906&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#b45309&quot; font-size=&quot;12&quot; font-weight=&quot;700&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;Answer: -frac√55&lt;/text&gt;
+    &lt;rect x=&quot;20&quot; y=&quot;52&quot; width=&quot;365&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#ffffff&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot;/&gt;
     
         &lt;!-- Unit Circle &amp; Quadrant Right Triangle --&gt;
         &lt;line x1=&quot;55&quot; y1=&quot;162&quot; x2=&quot;350&quot; y2=&quot;162&quot; stroke=&quot;#94a3b8&quot; stroke-width=&quot;1.5&quot;/&gt;
@@ -2456,27 +2353,27 @@ mjx-container:not([display="true"]) {
         &lt;circle cx=&quot;202&quot; cy=&quot;162&quot; r=&quot;78&quot; fill=&quot;rgba(56,189,248,0.08)&quot; stroke=&quot;#38bdf8&quot; stroke-width=&quot;2&quot;/&gt;
         &lt;polygon points=&quot;202,162 138,162 138,116&quot; fill=&quot;rgba(52,211,153,0.25)&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot;/&gt;
         &lt;circle cx=&quot;138&quot; cy=&quot;116&quot; r=&quot;5&quot; fill=&quot;#fbbf24&quot;/&gt;
-        &lt;text x=&quot;118&quot; y=&quot;110&quot; fill=&quot;#fde68a&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;P(x, y)&lt;/text&gt;
-        &lt;text x=&quot;265&quot; y=&quot;105&quot; fill=&quot;#7cc4ff&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;1사분면: 모두(+)&lt;/text&gt;
-        &lt;text x=&quot;72&quot; y=&quot;105&quot; fill=&quot;#6ee7b7&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;2사분면: sin(+)&lt;/text&gt;
-        &lt;text x=&quot;72&quot; y=&quot;232&quot; fill=&quot;#c4b5fd&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;3사분면: tan(+)&lt;/text&gt;
-        &lt;text x=&quot;265&quot; y=&quot;232&quot; fill=&quot;#fde68a&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;4사분면: cos(+)&lt;/text&gt;
-        &lt;text x=&quot;202&quot; y=&quot;268&quot; fill=&quot;#fde68a&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;단위원 직각삼각형 &amp;amp; 사분면 부호(얼싸안고)&lt;/text&gt;
+        &lt;text x=&quot;118&quot; y=&quot;110&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;P(x, y)&lt;/text&gt;
+        &lt;text x=&quot;265&quot; y=&quot;105&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;1사분면: 모두(+)&lt;/text&gt;
+        &lt;text x=&quot;72&quot; y=&quot;105&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;2사분면: sin(+)&lt;/text&gt;
+        &lt;text x=&quot;72&quot; y=&quot;232&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;3사분면: tan(+)&lt;/text&gt;
+        &lt;text x=&quot;265&quot; y=&quot;232&quot; fill=&quot;#b45309&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot;&gt;4사분면: cos(+)&lt;/text&gt;
+        &lt;text x=&quot;202&quot; y=&quot;268&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;단위원 직각삼각형 &amp;amp; 사분면 부호(얼싸안고)&lt;/text&gt;
         
     
-    &lt;rect x=&quot;400&quot; y=&quot;52&quot; width=&quot;260&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;rgba(30,41,59,0.9)&quot; stroke=&quot;#a78bfa&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;74&quot; fill=&quot;#c4b5fd&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;기하 작도 및 길이·각도 분석&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;86&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;rgba(56,189,248,0.14)&quot; stroke=&quot;rgba(56,189,248,0.4)&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;103&quot; fill=&quot;#bae6fd&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;① 주어진 조건 · 기하 구조&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;120&quot; fill=&quot;#fff&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 Level 0 · Mathematical symbols ⇒&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;136&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;rgba(167,139,250,0.15)&quot; stroke=&quot;rgba(167,139,250,0.4)&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;153&quot; fill=&quot;#ddd6fe&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;② 핵심 도형 성질 · 변환 공식&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;170&quot; fill=&quot;#fff&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 Step 1 · [Elementary Angles &amp;amp; Ro&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;186&quot; width=&quot;232&quot; height=&quot;40&quot; rx=&quot;7&quot; fill=&quot;rgba(52,211,153,0.15)&quot; stroke=&quot;rgba(52,211,153,0.4)&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;202&quot; fill=&quot;#a7f3d0&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;③ 결정적 관계식 · 수치 도출&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;218&quot; fill=&quot;#fff&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;Step 2 · Find sinθ in Quadrant 2 ⇒&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;233&quot; width=&quot;232&quot; height=&quot;35&quot; rx=&quot;7&quot; fill=&quot;rgba(251,191,36,0.2)&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#fde68a&quot; font-size=&quot;12.5&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: 정답 -/√55&lt;/text&gt;
+    &lt;rect x=&quot;400&quot; y=&quot;52&quot; width=&quot;260&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#131b2e&quot; stroke=&quot;#a78bfa&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;74&quot; fill=&quot;#4f46e5&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;기하 작도 및 길이·각도 분석&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;86&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#eff6ff&quot; stroke=&quot;rgba(56,189,248,0.4)&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;103&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;① 주어진 조건 · 기하 구조&lt;/text&gt;
+    &lt;text x=&quot;530&quot; y=&quot;120&quot; fill=&quot;#1b1b1d&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 Level 0 · Mathematical symbols ⇒&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;136&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;rgba(167,139,250,0.4)&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;153&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;② 핵심 도형 성질 · 변환 공식&lt;/text&gt;
+    &lt;text x=&quot;530&quot; y=&quot;170&quot; fill=&quot;#1b1b1d&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;🔰 Step 1 · [Elementary Angles &amp;amp; Ro&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;186&quot; width=&quot;232&quot; height=&quot;40&quot; rx=&quot;7&quot; fill=&quot;#065f46&quot; stroke=&quot;rgba(52,211,153,0.4)&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;202&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;③ 결정적 관계식 · 수치 도출&lt;/text&gt;
+    &lt;text x=&quot;530&quot; y=&quot;218&quot; fill=&quot;#1b1b1d&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;Step 2 · Find sinθ in Quadrant 2 ⇒&lt;/text&gt;
+    &lt;rect x=&quot;414&quot; y=&quot;233&quot; width=&quot;232&quot; height=&quot;35&quot; rx=&quot;7&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#b45309&quot; font-size=&quot;12.5&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: -frac√55&lt;/text&gt;
     
     &lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ Intentionally constructed geometric &amp; visual model illustrating the core mathematical relationships of &lt;b&gt;[C30906]&lt;/b&gt;.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [At-a-Glance Schematic Solution Flowchart]&lt;/h4&gt;&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · Given Condition&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🔰 Level 0 · Mathematical symbols ⇒ $-\frac{2\sqrt{5}}{5}$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · Visual/Formula Transform&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🔰 Step 1 · [Elementary Angles &amp; Rotation] Half-turn rotation and sign reversal ⇒ $\frac{\sqrt{5}}{5}$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#fbbf24;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · Key Derivation&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;Step 2 · Find $\sin\theta$ in Quadrant 2 ⇒ $-\frac{\sqrt{5}}{5}$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#34d399;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;🎯 최종 정답&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.98rem&quot;&gt;정답 $-\frac{\sqrt{5}}{5}$&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden&quot;&gt;&lt;thead&gt;&lt;tr style=&quot;background:#f1f5f9;color:#0f172a&quot;&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:14%&quot;&gt;Schematic Stage&lt;/th&gt;&lt;th style=&quot;padding:8px 12px;border:1px solid rgba(148,163,184,0.3)&quot;&gt;Core Concept · Geometric Model · Formula&lt;/th&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid rgba(148,163,184,0.3);width:22%&quot;&gt;Derived Result&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 1&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🔰 Level 0 · Mathematical symbols ⇒ $-\frac{2\sqrt{5}}{5}$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 2&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🔰 Step 1 · [Elementary Angles &amp; Rotation] Half-turn rotation and sign reversal ⇒ $\frac{\sqrt{5}}{5}$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 3&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;Step 2 · Find $\sin\theta$ in Quadrant 2 ⇒ $-\frac{\sqrt{5}}{5}$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;정답: 정답 $-\frac{\sqrt{5}}{5}$&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/section&gt;
 &lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
@@ -2636,6 +2533,113 @@ if (!window.toggleMinGgb) {
 <div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $-\frac{\sqrt{5}}{5}$</div>
 <button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 <!-- STITCH_FOOTER_START -->
+<!-- Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-streak-card">
+  <div class="stitch-streak-left">
+    <div class="stitch-flame-circle">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
+    </div>
+    <div class="stitch-streak-info">
+      <div class="stitch-streak-title-row">
+        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
+        <span class="stitch-lvl-badge">Lv.1 입문자</span>
+      </div>
+      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
+    </div>
+  </div>
+  <div class="stitch-streak-actions">
+    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
+      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
+    </button>
+    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('c30906')" title="즐겨찾기 및 오답노트">
+      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
+    </button>
+  </div>
+</div>
+
+<!-- Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-gateway-grid">
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
+    <div class="stitch-gw-actions">
+      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('c30906')">
+        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
+        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
+      </button>
+      <a href="../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
+        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
+        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
+    <div class="stitch-gw-actions">
+      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="이름 또는 6자리 수업 코드 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
+      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
+        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
+      </button>
+    </div>
+    <div class="stitch-gw-links">
+      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
+        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
+      </a>
+      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
+        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-dandelin-card">
+  <div class="stitch-card-head">
+    <div class="stitch-card-head-left">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
+      <span>공식 엠블럼 Dandelin Spheres</span>
+    </div>
+    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
+  </div>
+  <div class="stitch-visual-canvas">
+    <div class="stitch-visual-banner" style="background-image: url('../assets/stitch_dandelin_hero.png')">
+      <div class="stitch-visual-overlay">
+        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
+        <p class="stitch-visual-headline"><span class="bilingual-ko">삼각함수의 각 변환과 삼각함수의 덧셈 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
+      </div>
+    </div>
+    <div class="stitch-visual-drawer">
+      <p class="stitch-visual-desc">
+        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~3단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
+        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
+      </p>
+      <div class="stitch-quote-box">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
+        <p class="stitch-quote-text">
+          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
+          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="stitch-pack-banner">
   <div class="stitch-pack-left">
     <div class="stitch-pack-icon">
@@ -2856,8 +2860,8 @@ function submitReport(btn){
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js"></script>
-<script src="../mathedu-report.js"></script><script>
+</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
+<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
