@@ -16,29 +16,35 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
 /* ════════════════════════════════════════════════════════════════════════
-   ✨ Google Stitch Design System: "Mathematical Clarity & Dynamic Geometry"
-   Academic Modernism Light Palette for Problem & Scaffolding Pages
+   ✨ Google Stitch Screen: projects/8555798074171219045/screens/bc0f63eb3a354cee8f964ce2bc461f3b
+   "Mathematical Clarity & Dynamic Geometry" — Exact Component & Token System
    ════════════════════════════════════════════════════════════════════════ */
 :root {
   --bg: #fcf8fa;
   --card: #ffffff;
   --card2: #f6f3f5;
   --card3: #f0edef;
+  --card-high: #eae7e9;
   --line: #e4e2e4;
   --line-strong: #c5c6cd;
   --txt: #1b1b1d;
   --sub: #45464d;
-  --primary: #131b2e;
+  --primary: #000000;
+  --navy: #131b2e;
   --accent: #006398;
-  --accent2: #4f46e5;
-  --good: #059669;
+  --accent-sky: #38BDF8;
+  --accent2: #4F46E5;
+  --good: #10B981;
+  --good-dark: #059669;
   --bad: #ba1a1a;
-  --gold: #b45309;
-  --glass-blur: 16px;
-  --glass-shadow: 0 2px 12px rgba(19, 27, 46, 0.05);
+  --gold: #F59E0B;
+  --gold-dark: #B45309;
+  --glass-blur: 20px;
+  --glass-shadow: 0 1px 4px rgba(0, 0, 0, 0.04), 0 2px 10px rgba(19, 27, 46, 0.03);
   --radius: 16px;
 }
 
@@ -55,140 +61,323 @@ html, body {
 body {
   margin: 0;
   color: var(--txt);
-  line-height: 1.7;
+  line-height: 1.65;
   font-family: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   background-color: var(--bg);
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(0, 99, 152, 0.05), transparent 40%),
-    radial-gradient(circle at 88% 12%, rgba(79, 70, 229, 0.05), transparent 40%),
-    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.04), transparent 45%);
-  background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
+  user-select: none;
+}
+
 .wrap {
-  max-width: 860px;
+  max-width: 768px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 18px 80px;
+  padding: 88px 16px 104px;
   overflow-x: hidden;
   box-sizing: border-box;
 }
 
-/* ── Top Navigation Bar ── */
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.90);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(19, 27, 46, 0.04);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+/* ── 1. Fixed Top Header (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) ── */
+.stitch-app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(252, 248, 250, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(228, 226, 228, 0.6);
 }
 
-.tbtn {
-  background: #ffffff;
-  color: var(--txt);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 7px 13px;
-  font-weight: 700;
-  cursor: pointer;
+.stitch-app-header-inner {
+  max-width: 768px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stitch-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
   text-decoration: none;
-  font-size: .86rem;
+  color: var(--txt);
+}
+
+.stitch-brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.stitch-brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stitch-brand-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--txt);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.stitch-brand-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.stitch-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: rgba(0, 99, 152, 0.10);
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.stitch-brand-code {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.7rem;
+  color: var(--sub);
+  font-weight: 600;
+}
+
+.stitch-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.stitch-lang-toggle {
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 12px;
+  background: var(--card3);
+  color: var(--txt);
+  font-size: 0.76rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  transition: background 0.15s;
+}
+
+.stitch-lang-toggle:hover {
+  background: var(--card-high);
+}
+
+.stitch-streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 11px;
+  border-radius: 9999px;
+  background: #FEF3C7;
+  color: #B45309;
+  font-size: 0.76rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+  cursor: pointer;
+}
+
+.stitch-profile-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s;
+}
+
+.stitch-profile-btn:hover {
+  opacity: 0.85;
+}
+
+/* Legacy topbar & score hidden or integrated */
+.topbar { display: none !important; }
+.score { display: none !important; }
+
+/* ── 2. Stitch Hero Identity Card ── */
+.stitch-hero-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stitch-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.stitch-hero-brand {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: all .15s ease;
-  box-shadow: 0 1px 2px rgba(19, 27, 46, 0.03);
-}
-
-.tbtn:hover {
-  background: var(--card2);
-  border-color: var(--accent);
   color: var(--accent);
-  transform: translateY(-1px);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
-.tbtn.brand-btn {
-  background: var(--primary) !important;
-  color: #ffffff !important;
-  border-color: var(--primary) !important;
-}
-
-.tbtn.brand-btn:hover {
-  background: #1e293b !important;
-  color: #ffffff !important;
-}
-
-.lang-group {
+.stitch-free-pill {
   display: inline-flex;
-  gap: 3px;
-  background: var(--card3);
-  padding: 3px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  margin-left: auto;
-}
-
-.lang-btn {
-  background: transparent;
-  color: var(--sub);
-  border: none;
-  border-radius: 7px;
-  padding: 5px 11px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.15s;
-}
-
-.lang-btn.active {
-  background: #000000;
-  color: #ffffff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-}
-
-/* ── Sticky Score & Progress Bar ── */
-.score {
-  position: sticky;
-  top: 8px;
-  z-index: 50;
-  background: rgba(255, 255, 255, 0.92);
-  padding: 10px 16px;
-  margin-bottom: 18px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: .92rem;
-  color: var(--txt);
-  font-weight: 600;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: 0 4px 14px rgba(19, 27, 46, 0.05);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.10);
+  color: #059669;
+  font-size: 0.72rem;
+  font-weight: 700;
 }
 
-.score b {
+.stitch-hero-card h1 {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
+  margin: 4px 0 8px;
+  color: var(--txt);
+}
+
+.stitch-hero-card h1 .stitch-h1-main {
+  display: block;
+  color: var(--txt);
+}
+
+.stitch-hero-card h1 .stitch-h1-accent {
+  display: block;
   color: var(--accent);
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
+  margin-top: 2px;
+}
+
+.stitch-hero-card .lead {
+  font-size: 0.85rem;
+  color: var(--sub);
+  line-height: 1.55;
+  margin: 0 0 10px;
+}
+
+.stitch-chip-scroll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px;
+  margin: 2px -2px 0;
+  scrollbar-width: none;
+}
+.stitch-chip-scroll::-webkit-scrollbar { display: none; }
+
+.stitch-feature-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 9999px;
+  background: var(--card3);
+  color: var(--txt);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.stitch-feature-chip:hover {
+  background: var(--card-high);
+}
+
+.stitch-bento-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+  padding: 12px 10px;
+  background: var(--card2);
+  border-radius: 12px;
+}
+
+.stitch-bento-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stitch-bento-val {
+  font-family: 'Plus Jakarta Sans', 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.stitch-bento-lbl {
+  font-size: 0.65rem;
+  color: var(--sub);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.stitch-progress-wrap {
+  grid-column: 1 / -1;
+  margin-top: 6px;
 }
 
 .bar {
-  height: 8px;
+  height: 6px;
   background: #e4e2e4;
   border-radius: 9999px;
   overflow: hidden;
-  flex: 1;
-  margin: 0 14px;
+  width: 100%;
+  display: block;
 }
 
 .bar > i {
@@ -197,64 +386,226 @@ body {
   width: 0;
   background: linear-gradient(90deg, var(--accent), #10b981);
   border-radius: 9999px;
-  transition: .3s;
+  transition: width 0.3s ease;
 }
 
-/* ── Headings & Typography ── */
-h1 {
+/* ── 3. Gamification / Daily Streak Strip Card ── */
+.stitch-streak-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stitch-streak-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.stitch-flame-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: #FEF3C7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stitch-streak-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stitch-streak-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stitch-streak-title {
   font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
-  font-size: 1.55rem;
+  font-size: 0.92rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 6px;
-  color: var(--primary);
-  line-height: 1.38;
+  color: var(--txt);
 }
 
-h2 {
-  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
-  font-size: 1.18rem;
-  font-weight: 800;
-  letter-spacing: -0.015em;
-  margin: 34px 0 12px;
-  color: var(--primary);
-  border-left: 4px solid var(--accent);
-  padding-left: 12px;
-  line-height: 1.4;
-}
-
-.lead {
-  color: var(--sub);
-  font-size: .95rem;
-  margin: 0 0 12px;
-  line-height: 1.65;
-}
-
-code {
-  background: var(--card3);
+.stitch-lvl-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
   padding: 2px 6px;
-  border-radius: 6px;
-  color: var(--accent);
-  font-family: 'Space Grotesk', monospace;
-  font-size: 0.9em;
+  border-radius: 4px;
+  background: var(--card3);
+  color: var(--sub);
 }
 
-/* ── Original Exam Problem Card ── */
+.stitch-streak-sub {
+  font-size: 0.78rem;
+  color: var(--sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stitch-streak-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.stitch-circle-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: var(--card3);
+  color: var(--txt);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.stitch-circle-icon-btn:hover {
+  background: var(--card-high);
+}
+
+/* ── 4. Visual Proof Archive Card (Dandelin Spheres / Visual Proof Spotlight) ── */
+.stitch-dandelin-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 14px;
+}
+
+.stitch-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.stitch-card-head-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', 'Pretendard', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--txt);
+}
+
+.stitch-card-head-right {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.stitch-visual-canvas {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+}
+
+.stitch-visual-banner {
+  width: 100%;
+  height: 168px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: #131b2e;
+}
+
+.stitch-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.22) 55%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.stitch-visual-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #38BDF8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stitch-visual-headline {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 2px 0 0;
+  line-height: 1.3;
+}
+
+.stitch-visual-drawer {
+  padding: 14px 16px;
+  background: var(--card2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stitch-visual-desc {
+  font-size: 0.82rem;
+  color: var(--sub);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.stitch-quote-box {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.stitch-quote-text {
+  font-size: 0.8rem;
+  color: var(--txt);
+  font-weight: 500;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── 5. Original Exam Problem Card (.orig-card — Today's Recommended Dynamic Geometry Style) ── */
 .orig-card {
   background: #ffffff;
-  border: 1px solid var(--line);
-  border-top: 4px solid var(--primary);
   border-radius: var(--radius);
-  padding: 22px 24px;
-  margin: 18px 0 26px;
-  box-shadow: 0 4px 20px rgba(19, 27, 46, 0.06);
+  padding: 18px 20px;
+  margin: 0 0 14px;
+  box-shadow: var(--glass-shadow);
+  border: none;
 }
 
 .orig-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
   gap: 8px;
 }
@@ -263,31 +614,32 @@ code {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--primary);
-  color: #ffffff;
-  font-size: .78rem;
+  background: transparent;
+  color: var(--txt);
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.98rem;
   font-weight: 800;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  letter-spacing: .2px;
-  box-shadow: 0 2px 6px rgba(19, 27, 46, 0.12);
+  padding: 0;
+  box-shadow: none;
 }
 
 .orig-badge {
-  font-size: .8rem;
+  font-size: 0.74rem;
   color: var(--accent);
   font-weight: 700;
-  background: rgba(0, 99, 152, 0.08);
-  border: 1px solid rgba(0, 99, 152, 0.22);
-  padding: 4px 12px;
+  background: rgba(0, 99, 152, 0.12);
+  padding: 3px 10px;
   border-radius: 9999px;
   font-family: 'Space Grotesk', 'Pretendard', sans-serif;
 }
 
 .orig-grid {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 16px;
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 18px;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 16px;
   align-items: start;
 }
 
@@ -300,56 +652,53 @@ code {
 .orig-media-tabs {
   display: flex;
   gap: 6px;
-  margin-bottom: 4px;
+  flex-wrap: wrap;
 }
 
-.orig-media-tab {
-  flex: 1;
-  background: var(--card2);
-  border: 1px solid var(--line);
+.orig-tab-btn {
+  background: #ffffff;
   color: var(--sub);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 6px 10px;
-  font-size: .8rem;
+  padding: 5px 11px;
+  font-size: .78rem;
   font-weight: 700;
   cursor: pointer;
   transition: .15s;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.orig-media-tab:hover {
-  background: var(--card3);
-  color: var(--primary);
-  border-color: var(--accent);
-}
-
-.orig-media-tab.active {
-  background: var(--primary);
-  border-color: var(--primary);
+.orig-tab-btn.active {
+  background: #000000;
   color: #ffffff;
+  border-color: #000000;
 }
 
 .orig-media-frame {
   background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 10px;
   text-align: center;
-  box-shadow: 0 1px 4px rgba(19, 27, 46, 0.04);
+  border: 1px solid var(--line);
+  overflow: hidden;
 }
 
-.orig-media-frame img, .orig-media-frame video {
+.orig-media-frame img, .orig-media-frame svg {
   max-width: 100%;
+  max-height: 400px;
+  width: auto;
   height: auto;
-  border-radius: 8px;
+  border-radius: 6px;
   display: block;
   margin: 0 auto;
 }
 
 .orig-media-sub {
-  font-size: .76rem;
-  color: var(--sub);
   text-align: center;
+  font-size: .75rem;
+  color: var(--sub);
 }
 
 .orig-col-desc {
@@ -359,218 +708,534 @@ code {
 }
 
 .orig-text-box {
-  background: var(--card2);
+  background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 14px 16px;
-  font-size: .92rem;
-  line-height: 1.7;
+  font-size: .9rem;
+  line-height: 1.65;
   color: var(--txt);
 }
 
 .orig-text-box h4 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--accent);
-  font-size: .96rem;
+  font-size: .88rem;
   font-weight: 800;
 }
 
-.orig-cond-wrap {
+.orig-tip {
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 10px 12px;
-  font-size: .88rem;
-  line-height: 1.65;
-  margin-top: 8px;
+  padding: 10px 14px;
+  font-size: .82rem;
   color: var(--txt);
-}
-
-.orig-stem {
-  font-size: 1.05rem;
-  line-height: 1.75;
-  font-weight: 600;
-  color: var(--txt);
-  word-break: keep-all;
-  margin: 6px 0;
-}
-
-.orig-media {
-  text-align: center;
-  margin: 14px 0;
-}
-
-.orig-media img {
-  max-width: 100%;
-  max-height: 360px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  box-shadow: 0 2px 12px rgba(19, 27, 46, 0.06);
-}
-
-.orig-tip {
-  font-size: .85rem;
-  color: var(--sub);
-  background: var(--card2);
-  border: 1px dashed rgba(0, 99, 152, 0.35);
-  border-radius: 10px;
-  padding: 10px 12px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .min-visual-tip {
-  background: #f0f7ff;
-  border: 1px solid rgba(0, 99, 152, 0.22);
-  border-left: 4px solid var(--accent);
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin: 18px 0;
-  font-size: .88rem;
-  line-height: 1.65;
-  color: #1e293b;
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 12px !important;
+  font-size: .82rem;
+  color: var(--sub);
+  line-height: 1.6;
 }
 
-.min-visual-tip b {
+.stitch-orig-cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stitch-cta-black {
+  width: 100%;
+  height: 44px;
+  border-radius: 10px;
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.stitch-cta-black:hover {
+  background: #262626;
+}
+
+.stitch-cta-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stitch-cta-gray {
+  height: 40px;
+  border-radius: 10px;
+  background: var(--card3);
+  color: var(--txt);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.stitch-cta-gray:hover {
+  background: var(--card-high);
+}
+
+/* ── 6. Two-Pillar User Gateway Cards (Teacher & Student Quick Action) ── */
+.stitch-gateway-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stitch-gateway-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stitch-gw-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stitch-gw-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.stitch-gw-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--txt);
+}
+
+.stitch-gw-desc {
+  font-size: 0.8rem;
+  color: var(--sub);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.stitch-gw-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.stitch-btn-azure {
+  flex: 1;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.15s;
+}
+
+.stitch-btn-azure:hover {
+  opacity: 0.92;
+}
+
+.stitch-gw-input {
+  flex: 1;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: var(--card2);
+  border: 1px solid transparent;
+  font-family: 'Space Grotesk', 'Pretendard', sans-serif;
+  font-size: 0.86rem;
+  color: var(--txt);
+  outline: none;
+}
+
+.stitch-gw-input:focus {
+  background: var(--card3);
+  border-color: var(--accent);
+}
+
+.stitch-btn-enter {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.stitch-gw-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  font-size: 0.78rem;
+}
+
+.stitch-gw-links a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+/* ── 7. Precision Step Filter & Quiz Explorer Header ── */
+.stitch-explorer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 0 10px;
+}
+
+.stitch-explorer-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stitch-explorer-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--txt);
+  margin: 0;
+}
+
+.stitch-count-badge {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(0, 99, 152, 0.10);
   color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 
-/* ── Step 0 Symbol Translator & Knowledge Cards ── */
+.stitch-explorer-sub {
+  font-size: 0.7rem;
+  color: var(--sub);
+  display: block;
+}
+
+.stitch-filter-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stitch-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stitch-filter-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--sub);
+}
+
+.stitch-pill-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+}
+.stitch-pill-row::-webkit-scrollbar { display: none; }
+
+.stitch-mode-pill {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  background: var(--card3);
+  color: var(--sub);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.stitch-mode-pill.active {
+  background: #000000;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.stitch-step-pill {
+  flex-shrink: 0;
+  padding: 6px 13px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--card3);
+  color: var(--sub);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.stitch-step-pill.active, .stitch-step-pill:hover {
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ── 8. Section Headings, Symbol Translator (.sym), Prerequisite (.know) & Question Cards (.q) ── */
+h2 {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin: 24px 0 10px;
+  color: var(--txt);
+  border-left: 4px solid var(--accent);
+  padding-left: 10px;
+  line-height: 1.38;
+}
+
+code {
+  background: var(--card3);
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.9em;
+}
+
 .sym {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin: 12px 0;
+  margin: 10px 0 16px;
 }
 
-.sym div {
+.sym > div {
   background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-size: .9rem;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: .88rem;
+  box-shadow: var(--glass-shadow);
   color: var(--txt);
-  box-shadow: 0 1px 4px rgba(19, 27, 46, 0.03);
 }
 
 .sym b {
   color: var(--accent);
+  font-size: .96rem;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .sym-card {
   background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 18px 20px;
+  margin: 10px 0 16px;
   box-shadow: var(--glass-shadow);
-  transition: .2s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.sym-card:hover {
-  border-color: rgba(0, 99, 152, 0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(19, 27, 46, 0.08);
+.sym-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .sym-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(0, 99, 152, 0.08);
-  border: 1px solid rgba(0, 99, 152, 0.22);
+  background: rgba(0, 99, 152, 0.10);
   color: var(--accent);
-  font-size: .76rem;
+  font-size: .74rem;
   font-weight: 800;
-  padding: 3px 10px;
-  border-radius: 12px;
-  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 6px;
 }
 
 .sym-title {
-  font-size: 1.05rem;
-  color: var(--primary);
+  margin: 0;
+  font-size: 1rem;
+  color: var(--txt);
   font-weight: 800;
-  margin: 0 0 10px;
+}
+
+.sym-visual-box {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
+.sym-visual-box svg, .sym-visual-box img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.sym-caption {
+  font-size: .78rem;
+  color: var(--sub);
+  margin-top: 8px;
   line-height: 1.45;
 }
 
-.sym-formula-box {
-  background: var(--card2);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 10px 14px;
-  margin: 8px 0 12px;
-  text-align: center;
-  font-size: 1.05rem;
-  color: var(--txt);
-}
-
 .sym-desc {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: .88rem;
+  line-height: 1.65;
   color: var(--txt);
-  font-size: .91rem;
-  line-height: 1.75;
-}
-
-.sym-desc b {
-  color: var(--accent);
-}
-
-.step0-visual-box {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 20px;
-  margin: 20px 0 26px;
-  box-shadow: var(--glass-shadow);
 }
 
 .know {
-  background: var(--card2);
-  border: 1px dashed rgba(0, 99, 152, 0.40);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
   border-radius: 14px;
-  padding: 14px 16px;
-  margin: 12px 0;
-  font-size: .92rem;
+  padding: 16px 18px;
+  margin: 10px 0;
+  font-size: .9rem;
+  box-shadow: var(--glass-shadow);
   color: var(--txt);
 }
 
 .know h3 {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--accent);
-  font-size: .98rem;
+  font-size: .95rem;
   font-weight: 800;
 }
 
-/* ── Interactive Step Quiz Cards ── */
-.q {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  margin: 14px 0;
-  box-shadow: var(--glass-shadow);
-  transition: .2s;
+.know ul {
+  margin: 6px 0 0 18px;
+  padding: 0;
 }
 
-.q:hover {
-  border-color: rgba(0, 99, 152, 0.35);
-  box-shadow: 0 6px 22px rgba(19, 27, 46, 0.07);
+.know li {
+  margin: 4px 0;
+}
+
+.step0-visual-box {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 16px !important;
+  margin: 12px 0 !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* ── Question Card (.q) Matching Exact Quiz Cards in screens/bc0f63eb3a354cee8f964ce2bc461f3b ── */
+.q {
+  background: #ffffff;
+  border: 1px solid rgba(228, 226, 228, 0.85);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 12px 0 18px;
+  transition: all .2s ease;
+  box-shadow: var(--glass-shadow);
+}
+
+.q.correct-q {
+  border-color: #10B981;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.10);
 }
 
 .q .lvl {
-  display: inline-block;
-  font-size: .74rem;
-  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  padding: 0 0 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--card3);
+  border-radius: 0;
+  font-size: .75rem;
   color: var(--accent);
-  background: rgba(0, 99, 152, 0.08);
-  border: 1px solid rgba(0, 99, 152, 0.18);
-  padding: 2px 10px;
-  border-radius: 9999px;
-  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.q .lvl > span:first-child {
+  background: rgba(0, 99, 152, 0.10);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.q .lvl::after {
+  content: "🪜 단계별 빌드업";
+  color: #D97706;
+  background: #FEF3C7;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .q .stem {
   font-size: 1.02rem;
-  margin: 8px 0 14px;
+  margin-bottom: 14px;
   font-weight: 600;
   color: var(--txt);
   line-height: 1.65;
@@ -582,22 +1247,26 @@ code {
 }
 
 .opts.opts-inline {
-  display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  gap: 8px;
+}
+
+.opts.opts-inline .opt {
+  justify-content: center;
+  padding: 10px 8px;
 }
 
 .opt {
+  background: var(--card2);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 14px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--card2);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  transition: .15s;
-  font-size: .95rem;
+  transition: all .15s ease;
+  font-size: .94rem;
   color: var(--txt);
 }
 
@@ -617,22 +1286,22 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: .8rem;
+  font-size: .78rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
-  border-color: #10b981 !important;
+  border-color: #10B981 !important;
   color: #065f46 !important;
   font-weight: 600;
 }
 
 .opt.correct .n {
-  background: #10b981 !important;
-  border-color: #10b981 !important;
+  background: #10B981 !important;
+  border-color: #10B981 !important;
   color: #ffffff !important;
 }
 
@@ -652,22 +1321,36 @@ code {
   cursor: default;
 }
 
+.q-actions {
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid var(--card3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.q-actions::before {
+  content: "✓ 즉시 채점 · 상세 해설";
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #059669;
+}
+
 .exp-toggle-btn {
-  background: var(--card3);
-  border: 1px solid var(--line-strong);
-  color: var(--primary);
-  border-radius: 8px;
-  padding: 5px 12px;
-  font-size: .82rem;
-  font-weight: 700;
+  background: #000000 !important;
+  border: none !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: .8rem !important;
+  font-weight: 700 !important;
   cursor: pointer;
-  transition: .15s;
+  transition: background .15s;
 }
 
 .exp-toggle-btn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
+  background: #262626 !important;
 }
 
 .exp {
@@ -677,7 +1360,7 @@ code {
   background: var(--card2);
   border: 1px solid var(--line);
   border-left: 4px solid var(--accent);
-  font-size: .92rem;
+  font-size: .9rem;
   display: none;
   color: var(--txt);
   line-height: 1.7;
@@ -688,24 +1371,24 @@ code {
 }
 
 .exp b {
-  color: var(--primary);
+  color: var(--navy);
 }
 
-/* ── Solution Card, Visual Diagrams & Schematic Flowcharts ── */
+/* ── 9. Solution Card (.sol), Visual Diagrams & Schematic Flowcharts ── */
 .sol {
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 20px 22px;
+  padding: 20px;
   margin: 14px 0;
   box-shadow: var(--glass-shadow);
   color: var(--txt);
 }
 
 .sol h4 {
-  color: var(--primary);
+  color: var(--navy);
   margin: 18px 0 8px;
-  font-size: 1.02rem;
+  font-size: 1rem;
   font-weight: 800;
 }
 
@@ -726,7 +1409,6 @@ code {
   padding: 14px;
   margin: 14px 0;
   text-align: center;
-  box-shadow: 0 1px 4px rgba(19, 27, 46, 0.04);
 }
 
 .diagram svg, .diagram img {
@@ -735,7 +1417,7 @@ code {
 }
 
 .diagram-caption {
-  font-size: .82rem;
+  font-size: .8rem;
   color: var(--sub);
   margin-top: 8px;
 }
@@ -751,7 +1433,7 @@ figure.math-visual-diagram {
 
 figure.math-visual-diagram figcaption {
   color: #475569 !important;
-  font-size: 0.85rem !important;
+  font-size: 0.84rem !important;
   margin-top: 10px !important;
   line-height: 1.55 !important;
 }
@@ -790,7 +1472,6 @@ section.math-schematic-flow td > b:first-child {
   color: #006398 !important;
 }
 
-/* ── Buttons & Final Score Block ── */
 .btn {
   background: #000000;
   color: #ffffff;
@@ -799,75 +1480,48 @@ section.math-schematic-flow td > b:first-child {
   padding: 10px 20px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   transition: .15s;
 }
 
 .btn:hover {
-  background: #1e293b;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  background: #262626;
 }
 
 .final {
   text-align: center;
-  margin: 34px 0;
+  margin: 24px 0;
   padding: 24px;
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--glass-shadow);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
 }
 
 .final .ans {
-  font-size: 1.6rem;
-  color: var(--good);
+  font-size: 1.55rem;
+  color: var(--good-dark);
   font-weight: 800;
   margin: 8px 0 14px;
   font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
 }
 
 /* ── Cards (Playing Cards Visual) ── */
-.cards {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 14px 0;
-}
-
-.card {
-  width: 64px;
-  height: 92px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  border: 2px solid var(--line-strong);
-}
-
+.cards { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+.card { width: 64px; height: 92px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--line-strong); }
 .card .num { font-size: 1.3rem; }
 .card .face { font-size: .7rem; margin-top: 4px; opacity: .85; }
 .card.front { background: #ffffff; color: #1b2436; border-color: #94a3b8; }
 .card.back { background: #334155; color: #ffffff; border-color: #1e293b; }
 
-/* ── min7014 Deep Exploration Addon Card ── */
+/* ── 10. min7014 Deep Exploration Addon Card ── */
 .min7014-addon-card {
   background: #ffffff;
   border: 1px solid var(--line);
-  border-top: 4px solid var(--accent);
   border-radius: var(--radius);
-  padding: 22px 24px;
-  margin: 28px 0;
-  box-shadow: 0 4px 20px rgba(19, 27, 46, 0.05);
-  transition: .2s;
-}
-
-.min7014-addon-card:hover {
-  border-color: rgba(0, 99, 152, 0.45);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: var(--glass-shadow);
 }
 
 .min-header {
@@ -883,9 +1537,9 @@ section.math-schematic-flow td > b:first-child {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   font-weight: 800;
-  color: var(--primary);
+  color: var(--txt);
   font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
 }
 
@@ -893,46 +1547,40 @@ section.math-schematic-flow td > b:first-child {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background: #ffffff;
-  border: 1px solid var(--line);
-  padding: 1px;
 }
 
 .min-tag {
-  background: rgba(0, 99, 152, 0.08);
-  border: 1px solid rgba(0, 99, 152, 0.25);
+  background: rgba(0, 99, 152, 0.10);
   color: var(--accent);
   padding: 3px 10px;
   border-radius: 9999px;
-  font-size: .75rem;
+  font-size: .72rem;
   font-weight: 700;
 }
 
 .min-lead {
-  font-size: .88rem;
+  font-size: .84rem;
   color: var(--sub);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   line-height: 1.55;
-  word-break: keep-all;
 }
 
 .min-guide-banner {
-  background: #f0f7ff !important;
-  border: 1px solid rgba(0, 99, 152, 0.22) !important;
+  background: var(--card2) !important;
+  border: 1px solid var(--line) !important;
   border-radius: 10px !important;
-  padding: 12px 16px !important;
-  margin-bottom: 16px !important;
-  font-size: .85rem !important;
+  padding: 12px 14px !important;
+  margin-bottom: 14px !important;
+  font-size: .82rem !important;
   line-height: 1.6 !important;
-  color: #1e293b !important;
+  color: var(--txt) !important;
 }
 
 .min-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 10px;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .min-item {
@@ -942,487 +1590,323 @@ section.math-schematic-flow td > b:first-child {
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 10px;
-  transition: .15s;
-  box-sizing: border-box;
-  overflow: hidden;
-  width: 100%;
-}
-
-.min-item:hover {
-  background: #ffffff;
-  border-color: var(--accent);
-  box-shadow: 0 4px 14px rgba(0, 99, 152, 0.08);
-  transform: translateY(-1px);
-}
-
-.min-item:has(.min-ggb-frame-wrap.active) {
-  grid-column: 1 / -1;
-}
-
-.min-item-main {
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
 }
 
 .min-item-title {
   display: block;
   color: var(--txt);
-  font-size: .94rem;
+  font-size: .92rem;
   font-weight: 700;
   text-decoration: none;
-  line-height: 1.6;
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-  white-space: normal;
-}
-
-.min-item-title:hover {
-  color: var(--accent);
+  line-height: 1.5;
 }
 
 .min-item-sub {
   display: block;
-  font-size: .8rem;
+  font-size: .78rem;
   font-weight: 400;
   color: var(--sub);
-  margin-top: 4px;
-  line-height: 1.4;
-  word-break: break-word;
-}
-
-.min-bullet {
-  font-size: .85rem;
-  margin-right: 4px;
+  margin-top: 2px;
 }
 
 .min-item-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .min-btn {
-  font-size: .78rem;
+  font-size: .76rem;
   font-weight: 700;
-  padding: 5px 12px;
+  padding: 6px 12px;
   border-radius: 8px;
   text-decoration: none;
-  transition: .15s;
   display: inline-flex;
   align-items: center;
   gap: 4px;
   cursor: pointer;
 }
 
-.min-btn-ggb {
-  background: rgba(2, 132, 199, 0.10);
-  border: 1px solid rgba(2, 132, 199, 0.30);
-  color: #0369a1;
-}
-
-.min-btn-ggb:hover {
-  background: #0284c7;
-  color: #ffffff;
-}
-
-.min-btn-pdf {
-  background: rgba(220, 38, 38, 0.08);
-  border: 1px solid rgba(220, 38, 38, 0.25);
-  color: #b91c1c;
-}
-
-.min-btn-pdf:hover {
-  background: #dc2626;
-  color: #ffffff;
-}
-
-.min-btn-yt {
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  color: #dc2626;
-}
-
-.min-btn-yt:hover {
-  background: #ef4444;
-  color: #ffffff;
-}
-
-.min-btn-algeo {
-  background: rgba(124, 58, 237, 0.08);
-  border: 1px solid rgba(124, 58, 237, 0.25);
-  color: #6d28d9;
-}
-
-.min-btn-algeo:hover {
-  background: #7c3aed;
-  color: #ffffff;
-}
-
-.min-btn-detail {
-  background: var(--primary);
-  border: 1px solid var(--primary);
-  color: #ffffff;
-}
-
-.min-btn-detail:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #ffffff;
-}
+.min-btn-ggb { background: rgba(0, 99, 152, 0.10); border: 1px solid rgba(0, 99, 152, 0.25); color: var(--accent); }
+.min-btn-pdf { background: var(--card3); border: 1px solid var(--line); color: var(--txt); }
+.min-btn-yt { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.22); color: #dc2626; }
+.min-btn-algeo { background: rgba(16, 185, 129, 0.10); border: 1px solid rgba(16, 185, 129, 0.25); color: #059669; }
+.min-btn-detail { background: #000000; border: 1px solid #000000; color: #ffffff; }
 
 .min-cat-badge {
   display: inline-block;
-  font-size: .72rem;
+  font-size: .7rem;
   padding: 2px 8px;
   border-radius: 6px;
   background: rgba(0, 99, 152, 0.08);
   color: var(--accent);
-  border: 1px solid rgba(0, 99, 152, 0.20);
-  margin-bottom: 6px;
-  font-weight: 600;
+  margin-bottom: 4px;
+  font-weight: 700;
 }
 
 .min-ggb-frame-wrap {
-  margin-top: 12px;
-  border-radius: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--line);
   background: #ffffff;
   display: none;
 }
-
-.min-ggb-frame-wrap.active {
-  display: block;
-}
+.min-ggb-frame-wrap.active { display: block; }
 
 .min-footer {
-  margin-top: 14px;
-  padding-top: 12px;
+  margin-top: 12px;
+  padding-top: 10px;
   border-top: 1px dashed var(--line);
   text-align: right;
 }
+.min-footer-link { color: var(--accent); font-size: .82rem; font-weight: 700; text-decoration: none; }
 
-.min-footer-link {
-  color: var(--accent);
-  font-size: .84rem;
-  font-weight: 700;
+/* ── 11. Stitch Dark Navy Lesson Pack Banner & Curated Collections ── */
+.stitch-pack-banner {
+  background: #131b2e;
+  color: #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 16px rgba(19, 27, 46, 0.14);
+}
+
+.stitch-pack-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.stitch-pack-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: rgba(0, 99, 152, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stitch-pack-btn {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: #93ccff;
+  color: #003352;
+  font-size: 0.76rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
   text-decoration: none;
-  transition: .15s;
+  display: inline-flex;
+  align-items: center;
 }
 
-.min-footer-link:hover {
-  text-decoration: underline;
-  color: var(--primary);
+.stitch-collections-section {
+  margin: 24px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.min-tip-item {
-  background: #ffffff !important;
-  border: 1px solid rgba(0, 99, 152, 0.22) !important;
-  color: var(--txt) !important;
+.stitch-collection-card {
+  padding: 16px;
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--txt);
+  transition: background 0.15s;
 }
 
-/* ── Report Form Overrides ── */
-.report-wrap {
-  margin-top: 10px !important;
-  border-top: 1px solid var(--line) !important;
-  padding-top: 10px !important;
+.stitch-collection-card:hover {
+  background: var(--card2);
 }
 
-.report-btn {
-  background: transparent !important;
-  color: var(--sub) !important;
-  border: 1px solid var(--line) !important;
+.stitch-col-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.report-text {
-  background: #ffffff !important;
-  color: var(--txt) !important;
-  border: 1px solid var(--line-strong) !important;
+.stitch-col-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.report-cancel {
-  background: #ffffff !important;
-  color: var(--sub) !important;
-  border: 1px solid var(--line-strong) !important;
+.stitch-col-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--txt);
+  display: block;
 }
 
-/* ── TrackFull Entry Modal Light Academic Styling ── */
+.stitch-col-sub {
+  font-size: 0.76rem;
+  color: var(--sub);
+  display: block;
+  margin-top: 2px;
+}
+
+.stitch-footer {
+  margin-top: 28px;
+  padding: 16px 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.stitch-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--sub);
+}
+
+.stitch-footer-links a {
+  color: var(--sub);
+  text-decoration: none;
+}
+
+.stitch-footer-copy {
+  font-size: 0.68rem;
+  color: var(--sub);
+  max-width: 340px;
+  margin: 0;
+}
+
+/* ── 12. Fixed Bottom Navigation Bar (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) ── */
+.stitch-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(252, 248, 250, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(228, 226, 228, 0.6);
+}
+
+.stitch-bottom-nav-inner {
+  max-width: 768px;
+  height: 64px;
+  margin: 0 auto;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.stitch-bnav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 44px;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--sub);
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.stitch-bnav-item.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── Report Form & Bilingual Engine ── */
+.report-wrap { margin-top: 8px !important; border-top: none !important; padding-top: 4px !important; }
+.report-btn { background: transparent !important; color: #64748b !important; border: 1px solid var(--line) !important; }
+.report-text { background: #ffffff !important; color: var(--txt) !important; border: 1px solid var(--line-strong) !important; }
+.report-cancel { background: #ffffff !important; color: var(--sub) !important; border: 1px solid var(--line-strong) !important; }
+
 #trackFull {
+  display: none;
   background: rgba(252, 248, 250, 0.96) !important;
   backdrop-filter: blur(18px) !important;
-  -webkit-backdrop-filter: blur(18px) !important;
   color: var(--txt) !important;
 }
 
-#trackFull h2 {
-  border-left: none !important;
-  padding-left: 0 !important;
-  color: var(--primary) !important;
-  background: none !important;
-  -webkit-text-fill-color: var(--primary) !important;
-}
-
-#trackFull h3 {
-  color: var(--primary) !important;
-}
-
-#trackFull p {
-  color: var(--sub) !important;
-}
-
-#trackFull #studentName,
-#trackFull #studentPin {
-  background: #ffffff !important;
-  color: var(--txt) !important;
-  border: 1.5px solid var(--line-strong) !important;
-  box-shadow: 0 2px 6px rgba(19, 27, 46, 0.04) !important;
-}
-
-/* ── Bilingual Dual-Display Engine (Light Mode High-Contrast) ── */
 .bilingual-en { display: none; }
 .bilingual-ko { display: inline; }
 div.bilingual-ko, p.bilingual-ko { display: block; }
 html[lang="en"] .bilingual-ko { display: none !important; }
 html[lang="en"] .bilingual-en {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   color: #006398;
   font-size: 0.92em;
   line-height: 1.6;
-  border-left: 3px solid rgba(0, 99, 152, 0.35);
-  padding-left: 12px;
-  font-weight: 500;
 }
 html[lang="en"] span.bilingual-en {
   display: inline !important;
-  border-left: none !important;
-  padding-left: 0 !important;
   margin-top: 0 !important;
 }
-html[lang="en"] .stem span.bilingual-en {
-  display: inline !important;
-  color: var(--txt);
-  font-weight: 600;
-}
-html[lang="en"] h1 .bilingual-en {
-  font-size: 1.35rem;
-  color: var(--primary);
-  font-weight: 800;
-  border-left: none;
-  padding-left: 0;
-  margin-top: 2px;
-}
-html[lang="en"] h2 .bilingual-en {
-  font-size: 1.05rem;
-  color: var(--primary);
-  font-weight: 800;
-  border-left: none;
-  padding-left: 0;
-  margin-top: 2px;
-}
-html[lang="en"] .lead .bilingual-en {
-  color: var(--sub);
-  border-left: none;
-  padding-left: 0;
-  font-size: 0.92rem;
-}
-html[lang="en"] .stem .bilingual-en {
-  color: var(--txt);
-  font-weight: 600;
-  margin-top: 6px;
-}
-html[lang="en"] .orig-tag .bilingual-en {
-  display: inline;
-  margin-left: 6px;
-  font-weight: 700;
-  border: none;
-  padding: 0;
-  color: #ffffff;
-}
-html[lang="en"] .orig-tip .bilingual-en {
-  color: var(--sub);
-  margin-top: 4px;
-}
-html[lang="en"] .know .bilingual-en {
-  color: #0369a1;
-  border-left-color: rgba(3, 105, 161, 0.4);
-}
-html[lang="en"] .sol .bilingual-en {
-  color: var(--txt);
-  border-left-color: rgba(0, 99, 152, 0.4);
-}
-html[lang="en"] .exp .bilingual-en {
-  color: var(--txt);
-  border-left-color: rgba(0, 99, 152, 0.4);
-}
-html[lang="en"] .sym div .bilingual-en {
-  color: var(--sub);
-  font-size: 0.84rem;
-  margin-top: 4px;
-  border-left: none;
-  padding-left: 0;
-}
-html[lang="en"] .sym-card .bilingual-en {
-  display: block !important;
-  color: var(--sub);
-  font-size: .88rem;
-  line-height: 1.6;
-  margin-top: 10px;
-  border-left: 2px solid rgba(0, 99, 152, 0.35);
-  padding-left: 10px;
-}
-html[lang="en"] .sym-badge .bilingual-en {
-  display: inline !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  color: inherit !important;
-}
-html[lang="en"] .sym-title .bilingual-en {
-  display: block !important;
-  color: var(--primary) !important;
-  font-size: .95rem !important;
-  border: none !important;
-  padding: 0 !important;
-  margin-top: 4px !important;
-}
 
-/* ── Mobile-Responsive Mathematical Formula & Layout Overflow Prevention ── */
+/* ── Responsive MathJax & Mobile Layout ── */
 h1, h2, h3, h4, h5, h6, p, div, span, li, a, label {
   overflow-wrap: break-word;
   word-break: keep-all;
 }
-
-.lead, .exp, .sol p, .orig-text-box, .min-visual-tip, .sym-desc,
-.bilingual-ko, .bilingual-en, .orig-cond-wrap, .orig-tip, .know,
-.sol-highlight, .min-item-title, .min-item-sub {
-  overflow-wrap: anywhere !important;
-  word-break: normal;
-}
-
-mjx-container {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  -webkit-overflow-scrolling: touch;
-}
-
+mjx-container { max-width: 100% !important; box-sizing: border-box !important; }
 mjx-container[display="true"] {
   display: block !important;
   max-width: 100% !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
-  margin: 0.85em 0 !important;
-  padding: 10px 14px !important;
+  margin: 0.75em 0 !important;
+  padding: 10px 12px !important;
   background: var(--card2) !important;
   border-radius: 10px;
   border: 1px solid var(--line) !important;
   color: var(--txt) !important;
   text-align: center !important;
-  scrollbar-width: thin;
 }
-
-mjx-container[display="true"]::-webkit-scrollbar { height: 4px; }
-mjx-container[display="true"]::-webkit-scrollbar-track { background: transparent; }
-mjx-container[display="true"]::-webkit-scrollbar-thumb { background: rgba(0, 99, 152, 0.25); border-radius: 3px; }
-
 mjx-container:not([display="true"]) {
   display: inline-flex !important;
   vertical-align: middle !important;
   max-width: 100% !important;
   overflow: visible !important;
-  padding: 0 1px !important;
-  text-decoration: none !important;
-  border-bottom: none !important;
-  scrollbar-width: none !important;
-}
-
-mjx-container:not([display="true"])::-webkit-scrollbar {
-  display: none !important;
-  height: 0 !important;
-  width: 0 !important;
-}
-
-.opt, .opt * {
-  text-decoration: none !important;
-  border-bottom: none !important;
-}
-.opt mjx-container {
-  overflow: visible !important;
-  scrollbar-width: none !important;
-}
-.opt mjx-container::-webkit-scrollbar {
-  display: none !important;
-  height: 0 !important;
-  width: 0 !important;
-}
-
-.orig-grid, .orig-grid > div, .orig-col-media, .orig-col-desc,
-.min-list, .min-list > div, .min-item, .min-item-main, .min-item-actions,
-.opts, .opt, .sym, .sym > div, .sym-card, .topbar, .score, .score > * {
-  min-width: 0 !important;
-  max-width: 100% !important;
-}
-
-.orig-card, .sol, .q, .exp, .know, .min7014-addon-card, .sym-card, .step0-visual-box {
-  max-width: 100% !important;
-  overflow-x: hidden !important;
-  box-sizing: border-box !important;
 }
 
 @media (max-width: 768px) {
-  .orig-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .orig-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
   .sym { grid-template-columns: 1fr !important; }
-  .min-list { grid-template-columns: 1fr !important; }
 }
-
 @media (max-width: 640px) {
-  .wrap { padding: 16px 14px 70px !important; }
-  h1 { font-size: 1.3rem !important; line-height: 1.45 !important; }
-  h2 { font-size: 1.12rem !important; margin: 26px 0 10px !important; }
-  .lead { font-size: 0.9rem !important; }
-  .orig-card { padding: 16px 14px !important; margin: 14px 0 20px !important; }
-  .orig-text-box { padding: 12px 14px !important; font-size: 0.88rem !important; }
-  .q { padding: 16px 14px !important; margin: 14px 0 !important; }
-  .q .stem { font-size: 0.98rem !important; }
-  .opts.opts-inline { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
-  .opt { padding: 9px 12px !important; font-size: 0.92rem !important; }
-  .sol { padding: 18px 14px !important; font-size: 0.9rem !important; }
-  .min7014-addon-card { padding: 16px 14px !important; margin: 20px 0 !important; }
-  .min-item { padding: 12px 14px !important; }
-  .min-ggb-frame-wrap iframe { height: 380px !important; }
+  .wrap { padding: 82px 14px 96px !important; }
+  .opts.opts-inline { grid-template-columns: repeat(2, 1fr) !important; }
   mjx-container { font-size: 92% !important; }
-}
-
-@media (max-width: 420px) {
-  .wrap { padding: 12px 10px 60px !important; }
-  h1 { font-size: 1.18rem !important; line-height: 1.4 !important; }
-  h2 { font-size: 1.05rem !important; }
-  .orig-header { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
-  .orig-tag { font-size: 0.75rem !important; padding: 4px 10px !important; }
-  .topbar { gap: 6px !important; }
-  .tbtn { padding: 6px 10px !important; font-size: 0.8rem !important; }
-  .lang-btn { padding: 4px 8px !important; font-size: 0.76rem !important; }
-  .score { font-size: 0.86rem !important; padding: 8px 12px !important; }
-  .bar { margin: 0 8px !important; }
-  .opts.opts-inline { grid-template-columns: 1fr !important; gap: 6px !important; }
-  .opt { padding: 8px 10px !important; font-size: 0.88rem !important; gap: 6px !important; }
-  .opt .n { width: 22px !important; height: 22px !important; flex: 0 0 22px !important; font-size: 0.76rem !important; }
-  .min-item-actions { gap: 4px !important; }
-  .min-btn { padding: 4px 8px !important; font-size: 0.74rem !important; }
-  .min-ggb-frame-wrap iframe { height: 300px !important; }
-  mjx-container { font-size: 85% !important; }
-  #studentName { min-width: 0 !important; width: 100% !important; }
-}
-
-@media (max-width: 360px) {
-  .wrap { padding: 10px 8px 50px !important; }
-  h1 { font-size: 1.08rem !important; }
-  .q, .sol, .orig-card, .min7014-addon-card, .sym-card, .know { padding: 12px 10px !important; border-radius: 12px !important; }
-  mjx-container { font-size: 80% !important; }
 }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
@@ -1433,8 +1917,8 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270915.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270915">
-<meta name="mathedu-offline-build-time" content="2026-10-27T06:50:05.979851+00:00">
-<meta name="mathedu-offline-hash" content="3352b3ce">
+<meta name="mathedu-offline-build-time" content="2026-10-27T07:09:34.613818+00:00">
+<meta name="mathedu-offline-hash" content="dc0df8fd">
 <meta name="mathedu-version-label" content="v2026.10.27">
 
 </head><body><div class="wrap">
@@ -1454,7 +1938,7 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
       <span style="font-size:0.78rem;color:#45464d;font-weight:700">mathedu</span>
     </div>
   </div>
-  <div style="font-size:1.15rem;font-weight:800;color:#131b2e;margin-bottom:6px;font-family:'Plus Jakarta Sans','Pretendard',sans-serif"><span class="bilingual-ko">[2027학년도 9월 고3 15번] 극한의 존재 조건과 최고난도 이차함수 추론</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #15] Extreme existence conditions and the most difficult quadratic function inference</span></div>
+  <div style="font-size:1.15rem;font-weight:800;color:#131b2e;margin-bottom:6px;font-family:'Plus Jakarta Sans','Pretendard',sans-serif"><span class="bilingual-ko">2027학년도 9월 고3 15번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #15] Extreme existence conditions and the most difficult quadratic function inference</span></div>
   <div style="font-size:0.86rem;color:#45464d;line-height:1.5;margin-bottom:12px">
     <span class="bilingual-ko">이 파일은 인터넷 연결 없이 웹 브라우저에서 언제든 풀 수 있는 <b>단독 오프라인 인터랙티브 수학 퀴즈</b>입니다.<br>
     보기를 클릭하면 채점과 단계별 상세 해설이 열리며, 점수가 자동 계산됩니다.</span>
@@ -1498,21 +1982,240 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   </div>
 </div>
 
-<div class="topbar">
-<a class="tbtn brand-btn" href="/mathedu/" style="display:inline-flex;align-items:center;gap:8px">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAHIElEQVR4nK1Xa4xdVRX+9j7n3HNfc+f9aJ2ZdtqGlkZaO5AOFdTJZEgD/DAK1UYbiTFgjIg/jPKHZDIJMeg/0Rij/iAmKIEEf5CiVCmjUKEgg21aGtoyJcNlWufJzD33cV57mbXvOXfuTOfW0rCSffe5e6+91rfXXnuvtQRiOnTIwHPPhXYmiwdeLAxeODGxN3BWmoUkAgzcGIUgJYSZzS1vuWP41J/ubpp0S05NF3MIzTc2JsX4uHr0PzT0xm9//dhma2X4pt72bHNTBkJI3DgRGH6hWMLFmSUn7zVN3PKN7z7+5AFxksbGJMbHFcaIpBDAA8/kD9/74Lhz9Ogx8koOEZH6NFtQKdHLL/+DvvrwE86Rp6cPs07WrXH++G267e7vjBcvnnuXFft6QRCSHwRrWqBbqPv1c/F8fb86HsYb8vMfTNF9P/hZ8fuv0W1VIxHJL37vyRf+duw4MwWu51EjUkpRGIa6bzTPxDwbkVeVHZx84y0a/eFvXmDd8sET2NNnl4ZHR+6kUClpmebqCRIhDEP4vg/P83SvlKrN1beYjykIAs2/ns80TbCO/UODtCMXDn/zKPbI948fH9zV35WFYbHPCGZkASwsViil1Isty9J9IxJ8sAASiYT+dl13zbgGpEgAEru3dmXzk38fNIOKk8v1pPRkuVKGIaUWwEp5YbyYgdX31/R9Ig2WrcIgYnn1a3PZFKhSyplCyto4X4eY0TCMmumuj5hvlVdFMngDbEn+rrcei2Xday45MzNaNjsjrzfd1cpU1GKlLNyo/efNMHiWYdu2lslA1ouUG5mPQTDiSqWilQgRK+ReRMuMqMUilgAU9byAwqLnQvERamsovfvYmevJXA+AlRGFeoEQJlxXwbIkDKNqNoAdawXAPIDZahMLkHIBQvJOD+LMUj8K6QR6Ah+9ijSI2BK+H1wLgIh2BSheKItI2Avw3BkQLcI050BYgkAhAsJWEYCSUGRBqRW8M/9XlNMj6E58Fh4ZcEyFdmEwgtoV3gAARb9lEJ2AELOQchnAAoASkkmC6xFCT8BOWBokqSQUASQlIE1IFHFuoQfF7JfQkwUsMQWirShQCi28gq5WXgcg9owkIFogxOv4cEkgNNrQlskgK1dgJxRrg88btwR7sD4T+rgEdaWIy1On8d/dn0F7q4m03wJp8i06gxCb4WIP0qKJn6hGACIighS3Ir/YjemFP6Kv/Rymy7dCGQPwcAFJdwV9SYGmgoB/ZQnhYgmGmcAFcxbvbLuCVPIKZsLzOEi3o9m0oQRBkQsDJ0E4BKBPh+iGACj6nS8A+cW7YMkpbGk/j1ftEFNnu7Bv6i+YW65gV0cfkh0JJLttBM0WwmWJMr+SJYLf2gYXXSBpQ8Dnw4LEHAR+BUWjAO5sDABVfwUhAIkyZpf24djHU1je+RRG0AzqzuPSQBvClIlbujfBUCFSlsRNXVtgzTqY8+eQrfTCVwVc9srIJNtQVq3ImfvQZvUA4GNQ1wJA+jdpWfrKpc0QeaeA5xfeg/+5g+j1tiGtilj6SKCpNYEUBw9YsJDB7uyXAXQi8NuwWExhelHifc+CkhkM9Q/U6bjGOyAiZ2xJZ2AIA0VVxn7zAF66/AxOtoWYVj3YOjeDYXs/0tiJUHVAik4QtQIioyWYFtCZA9ozBEjeUAjDUNVXsW6TDXyAdADJ2TbSVgKVsILuRB9+5P0UZ+YuoSQk7hAP4ebNB/QVlNHlqT6vVWX6seIJUjqqWoxIv5ZrY0VDC7iui0w6jS0dHTg7M4PAcDFg70JPMIR9rS3Y3tEEhbB2cVevcPxEV/UYhgkpDS3PUPya8rFeDUDW/7HthI4D/F7v3LQJrek0yq6Pgl/Czc0Wtnc2ocIPAYd0vVTWHHc9xcqSyaT+rsWAdazm+kUcA9h0pBQ+v2MHzn40g+7mJgx0dlVD7CfMkuPgxkfLINYbwSSlxJqMJQLB77YN4Pbt26vPfc2Jro9YZn26Vj9e7dlNlDDNZHrFKXMo1cM1EBzP+dwqbkUnKbyL/5ecxEoZPLeYP86uqnlBdcwpuRDJ3Irs/8Lo5PkP5x2oAELqwF8FEfV8hkxsvsYJShX0RnkkA+ee/0d71KJZZ/fg6KR8ahinpyupiddOvCUMKRWff5wL1ieZbA0m7uvzxfoWK2QeTmhqSiPrBGHIOac6feqMeG9ZTjx7L07rSS4SvvLwE8X8B5fWFCbBdRQda4uWRuMhhVFhMn95ho785BfFh16JCpOxqDQ78vSlw/c/8nPn1X/+i8h3P/XSjEKP3nzzbfrWo790vvaHi7XSTFRRVIvTR16noXef/f1j29Ll4Z39XdmWHBenn8T3N/aNQrGMC/kFZ8qxJ3rv+fbjvxtZLU5XpUclcyKVwaHnncGZfx/fq8pOM0n9oN8wCaWETGWXO/eOnPrz17OTfrm4pjz/H/aNPSojI0nwAAAAAElFTkSuQmCC" alt="mathedu" style="width:20px;height:20px;border-radius:5px;background:#fff;padding:1px">
-<span><b>mathedu</b></span>
-</a>
-<button class="tbtn" id="copyBtn" onclick="copyLink()"><span class="bilingual-ko">🔗 링크 복사</span><span class="bilingual-en">🔗 Copy Link</span></button>
-<div class="lang-group">
-  <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko', true)">한국어</button>
-  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en', true)">English (Bilingual)</button>
+<!-- STITCH_HEADER_START -->
+<header class="stitch-app-header">
+  <div class="stitch-app-header-inner">
+    <a href="/mathedu/" class="stitch-brand-link">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAHIElEQVR4nK1Xa4xdVRX+9j7n3HNfc+f9aJ2ZdtqGlkZaO5AOFdTJZEgD/DAK1UYbiTFgjIg/jPKHZDIJMeg/0Rij/iAmKIEEf5CiVCmjUKEgg21aGtoyJcNlWufJzD33cV57mbXvOXfuTOfW0rCSffe5e6+91rfXXnuvtQRiOnTIwHPPhXYmiwdeLAxeODGxN3BWmoUkAgzcGIUgJYSZzS1vuWP41J/ubpp0S05NF3MIzTc2JsX4uHr0PzT0xm9//dhma2X4pt72bHNTBkJI3DgRGH6hWMLFmSUn7zVN3PKN7z7+5AFxksbGJMbHFcaIpBDAA8/kD9/74Lhz9Ogx8koOEZH6NFtQKdHLL/+DvvrwE86Rp6cPs07WrXH++G267e7vjBcvnnuXFft6QRCSHwRrWqBbqPv1c/F8fb86HsYb8vMfTNF9P/hZ8fuv0W1VIxHJL37vyRf+duw4MwWu51EjUkpRGIa6bzTPxDwbkVeVHZx84y0a/eFvXmDd8sET2NNnl4ZHR+6kUClpmebqCRIhDEP4vg/P83SvlKrN1beYjykIAs2/ns80TbCO/UODtCMXDn/zKPbI948fH9zV35WFYbHPCGZkASwsViil1Isty9J9IxJ8sAASiYT+dl13zbgGpEgAEru3dmXzk38fNIOKk8v1pPRkuVKGIaUWwEp5YbyYgdX31/R9Ig2WrcIgYnn1a3PZFKhSyplCyto4X4eY0TCMmumuj5hvlVdFMngDbEn+rrcei2Xday45MzNaNjsjrzfd1cpU1GKlLNyo/efNMHiWYdu2lslA1ouUG5mPQTDiSqWilQgRK+ReRMuMqMUilgAU9byAwqLnQvERamsovfvYmevJXA+AlRGFeoEQJlxXwbIkDKNqNoAdawXAPIDZahMLkHIBQvJOD+LMUj8K6QR6Ah+9ijSI2BK+H1wLgIh2BSheKItI2Avw3BkQLcI050BYgkAhAsJWEYCSUGRBqRW8M/9XlNMj6E58Fh4ZcEyFdmEwgtoV3gAARb9lEJ2AELOQchnAAoASkkmC6xFCT8BOWBokqSQUASQlIE1IFHFuoQfF7JfQkwUsMQWirShQCi28gq5WXgcg9owkIFogxOv4cEkgNNrQlskgK1dgJxRrg88btwR7sD4T+rgEdaWIy1On8d/dn0F7q4m03wJp8i06gxCb4WIP0qKJn6hGACIighS3Ir/YjemFP6Kv/Rymy7dCGQPwcAFJdwV9SYGmgoB/ZQnhYgmGmcAFcxbvbLuCVPIKZsLzOEi3o9m0oQRBkQsDJ0E4BKBPh+iGACj6nS8A+cW7YMkpbGk/j1ftEFNnu7Bv6i+YW65gV0cfkh0JJLttBM0WwmWJMr+SJYLf2gYXXSBpQ8Dnw4LEHAR+BUWjAO5sDABVfwUhAIkyZpf24djHU1je+RRG0AzqzuPSQBvClIlbujfBUCFSlsRNXVtgzTqY8+eQrfTCVwVc9srIJNtQVq3ImfvQZvUA4GNQ1wJA+jdpWfrKpc0QeaeA5xfeg/+5g+j1tiGtilj6SKCpNYEUBw9YsJDB7uyXAXQi8NuwWExhelHifc+CkhkM9Q/U6bjGOyAiZ2xJZ2AIA0VVxn7zAF66/AxOtoWYVj3YOjeDYXs/0tiJUHVAik4QtQIioyWYFtCZA9ozBEjeUAjDUNVXsW6TDXyAdADJ2TbSVgKVsILuRB9+5P0UZ+YuoSQk7hAP4ebNB/QVlNHlqT6vVWX6seIJUjqqWoxIv5ZrY0VDC7iui0w6jS0dHTg7M4PAcDFg70JPMIR9rS3Y3tEEhbB2cVevcPxEV/UYhgkpDS3PUPya8rFeDUDW/7HthI4D/F7v3LQJrek0yq6Pgl/Czc0Wtnc2ocIPAYd0vVTWHHc9xcqSyaT+rsWAdazm+kUcA9h0pBQ+v2MHzn40g+7mJgx0dlVD7CfMkuPgxkfLINYbwSSlxJqMJQLB77YN4Pbt26vPfc2Jro9YZn26Vj9e7dlNlDDNZHrFKXMo1cM1EBzP+dwqbkUnKbyL/5ecxEoZPLeYP86uqnlBdcwpuRDJ3Irs/8Lo5PkP5x2oAELqwF8FEfV8hkxsvsYJShX0RnkkA+ee/0d71KJZZ/fg6KR8ahinpyupiddOvCUMKRWff5wL1ieZbA0m7uvzxfoWK2QeTmhqSiPrBGHIOac6feqMeG9ZTjx7L07rSS4SvvLwE8X8B5fWFCbBdRQda4uWRuMhhVFhMn95ho785BfFh16JCpOxqDQ78vSlw/c/8nPn1X/+i8h3P/XSjEKP3nzzbfrWo790vvaHi7XSTFRRVIvTR16noXef/f1j29Ll4Z39XdmWHBenn8T3N/aNQrGMC/kFZ8qxJ3rv+fbjvxtZLU5XpUclcyKVwaHnncGZfx/fq8pOM0n9oN8wCaWETGWXO/eOnPrz17OTfrm4pjz/H/aNPSojI0nwAAAAAElFTkSuQmCC" alt="mathedu" class="stitch-brand-logo">
+      <div class="stitch-brand-text">
+        <span class="stitch-brand-title">mathedu · 수학자료실</span>
+        <div class="stitch-brand-sub">
+          <span class="stitch-brand-pill"><span class="bilingual-ko">3,400+ 시각적 수학 증명</span><span class="bilingual-en">3,400+ Visual Proofs</span></span>
+          <span class="stitch-brand-code">C270915</span>
+        </div>
+      </div>
+    </a>
+    <div class="stitch-header-actions">
+      <button type="button" id="langToggleSingleBtn" class="stitch-lang-toggle" onclick="var nextL=(document.documentElement.lang==='en')?'ko':'en';setBoardLang(nextL,true);this.textContent=nextL.toUpperCase();">KO</button>
+      <div class="lang-group" style="display:none">
+        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko', true)">한국어</button>
+        <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en', true)">English</button>
+      </div>
+      <div class="stitch-streak-pill" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="연속 학습 스트릭 및 뱃지">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
+        <span id="stitchHeaderStreak">14</span>
+      </div>
+      <button type="button" class="stitch-profile-btn" onclick="if(window.MatheduAuth){MatheduAuth.isLoggedIn()?MatheduAuth.showMyProblemsModal():MatheduAuth.showAuthModal()}" title="내 서재 및 학습 기록">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#ffffff">person</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 1. Brand / Problem Identity Hero Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-hero-card">
+  <div class="stitch-hero-top">
+    <div class="stitch-hero-brand">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#006398">architecture</span>
+      <span>수학자료실 · mathedu</span>
+    </div>
+    <span class="stitch-free-pill"><span class="bilingual-ko">100% 영구 무료</span><span class="bilingual-en">100% Forever Free</span></span>
+  </div>
+  <h1>
+    <span class="bilingual-ko">
+      <span class="stitch-h1-main">2027학년도 9월 고3 15번</span>
+      <span class="stitch-h1-accent">극한의 존재 조건과 최고난도 이차함수 추론</span>
+    </span>
+    <span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #15] Extreme existence conditions and the most difficult quadratic function inference</span>
+  </h1>
+  <p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
+  <div class="stitch-chip-scroll">
+    <button type="button" class="stitch-feature-chip" onclick="scrollToQuizStep(0)">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#F59E0B">bolt</span>
+      <span class="bilingual-ko">무가입 5초 즉시 학습</span><span class="bilingual-en">Instant Free Practice</span>
+    </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode()">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#006398">target</span>
+      <span class="bilingual-ko">0~3단계 빌드업</span><span class="bilingual-en">Step-by-Step Build-up</span>
+    </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.downloadOfflineQuiz)window.downloadOfflineQuiz('c270915')">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#45464d">inventory_2</span>
+      <span class="bilingual-ko">100% 오프라인 보관함</span><span class="bilingual-en">100% Offline Save</span>
+    </button>
+    <button type="button" class="stitch-feature-chip" id="copyBtn" onclick="copyLink()">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#10B981">monitoring</span>
+      <span class="bilingual-ko">링크 복사 · 공유</span><span class="bilingual-en">Copy Link</span>
+    </button>
+  </div>
+  <div class="stitch-bento-stats">
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#1b1b1d">3,400+</span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">수학 주제</span><span class="bilingual-en">Topics</span></span>
+    </div>
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#006398"><b id="pts">0</b> / <b id="tot">4</b></span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">디딤돌 정답</span><span class="bilingual-en">Score</span></span>
+    </div>
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#F59E0B" id="pct">0%</span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">수능·디딤돌</span><span class="bilingual-en">Progress</span></span>
+    </div>
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#10B981">100%</span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">오프라인</span><span class="bilingual-en">Offline</span></span>
+    </div>
+    <div class="stitch-progress-wrap">
+      <span class="bar"><i id="bar"></i></span>
+    </div>
+  </div>
 </div>
+
+<!-- 2. Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-streak-card">
+  <div class="stitch-streak-left">
+    <div class="stitch-flame-circle">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
+    </div>
+    <div class="stitch-streak-info">
+      <div class="stitch-streak-title-row">
+        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
+        <span class="stitch-lvl-badge">Lv.1 입문자</span>
+      </div>
+      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
+    </div>
+  </div>
+  <div class="stitch-streak-actions">
+    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
+      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
+    </button>
+    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('c270915')" title="즐겨찾기 및 오답노트">
+      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
+    </button>
+  </div>
 </div>
-<div class="score"><span><span class="bilingual-ko">점수</span><span class="bilingual-en">Score</span> <b id="pts">0</b> / <b id="tot">0</b></span>
-<span class="bar"><i id="bar"></i></span><span id="pct">0%</span></div>
-<h1><span class="bilingual-ko">📘 [2027학년도 9월 고3 15번] 극한의 존재 조건과 최고난도 이차함수 추론</span><span class="bilingual-en">📘 [2027 AY Sep Mock Exam Grade 12 #15] Extreme existence conditions and the most difficult quadratic function inference</span></h1>
-<p class="lead">기초→심화 단계별 5지선다 퀴즈. 정답 고르면 바로 채점+해설이 열립니다.<span class="bilingual-en">Step-by-step 5-choice scaffolding quiz from fundamentals to advanced mastery. Instant scoring & explanations upon selection.</span></p>
+
+<!-- 3. Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-dandelin-card">
+  <div class="stitch-card-head">
+    <div class="stitch-card-head-left">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
+      <span>공식 엠블럼 Dandelin Spheres</span>
+    </div>
+    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
+  </div>
+  <div class="stitch-visual-canvas">
+    <div class="stitch-visual-banner" style="background-image: url('../assets/stitch_dandelin_hero.png')">
+      <div class="stitch-visual-overlay">
+        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
+        <p class="stitch-visual-headline"><span class="bilingual-ko">극한의 존재 조건과 최고난도 이차함수 추론 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
+      </div>
+    </div>
+    <div class="stitch-visual-drawer">
+      <p class="stitch-visual-desc">
+        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~3단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
+        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
+      </p>
+      <div class="stitch-quote-box">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
+        <p class="stitch-quote-text">
+          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
+          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-gateway-grid">
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
+    <div class="stitch-gw-actions">
+      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('c270915')">
+        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
+        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
+      </button>
+      <a href="../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
+        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
+        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
+    <div class="stitch-gw-actions">
+      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="이름 또는 6자리 수업 코드 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
+      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
+        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
+      </button>
+    </div>
+    <div class="stitch-gw-links">
+      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
+        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
+      </a>
+      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
+        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 5. Step-by-Step Scaffolding Explorer Header & Filter Pills (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-explorer-header" id="stitchQuizStepsSection">
+  <div class="stitch-explorer-title-wrap">
+    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
+    <div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 디딤돌 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
+        <span class="stitch-count-badge">총 4문항</span>
+      </div>
+      <span class="stitch-explorer-sub"><span class="bilingual-ko">원본 기출 · 제0단계 기호 번역 · 1~3단계 디딤돌 즉시 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
+    </div>
+  </div>
+  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">
+    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
+  </button>
+</div>
+
+<div class="stitch-filter-card">
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
+      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
+    </div>
+  </div>
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
+      <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(0)">1단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(1)">2단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(2)">3단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(3)">최종 본문항</button>
+    </div>
+  </div>
+</div>
+<!-- STITCH_HEADER_END -->
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
   <div class="orig-header">
@@ -1545,43 +2248,61 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
   <div class="min-visual-tip" style="margin-top:16px">
     💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 단순 결과가 아닌 <b>처음부터 끝까지 생각의 모든 과정이 투명하게 드러나는 단계별 시각적 증명</b>입니다.<br>하단의 <b>수학자료실</b> PDF 문서를 키보드 방향키나 마우스 휠로 넘겨가며, 각 페이지마다 변하는 요소와 보존되는 불변량의 수학적 의미를 깊이 있게 음미해 보세요.
   <div class="bilingual-en">💡 <b>Frame-by-Frame Visual Proof Analysis (PDF & GeoGebra Exploration)</b><br>The archive's flipbook proof materials demonstrate how fundamental mathematical principles and limits converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
+
+  <div class="stitch-orig-cta-stack">
+    <button type="button" class="stitch-cta-black" onclick="scrollToQuizStep(0)">
+      <span class="material-symbols-outlined" style="font-size:18px">sports_esports</span>
+      <span><span class="bilingual-ko">1단계 디딤돌부터 바로 풀기</span><span class="bilingual-en">Start Solving from Step 1</span></span>
+      <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+    </button>
+    <div class="stitch-cta-sub-grid">
+      <button type="button" class="stitch-cta-gray" onclick="scrollToSolSection()">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#006398">picture_as_pdf</span>
+        <span><span class="bilingual-ko">시각적 도형·원리 해설</span><span class="bilingual-en">Visual Proof & Solution</span></span>
+      </button>
+      <button type="button" class="stitch-cta-gray" onclick="var m=document.querySelector('.min7014-addon-card');if(m)m.scrollIntoView({behavior:'smooth'});">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#45464d">language</span>
+        <span><span class="bilingual-ko">수학자료실 웹 탐구</span><span class="bilingual-en">Explore Archive</span></span>
+      </button>
+    </div>
+  </div>
 </div>
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$f(2) = 10$</b> — 조건을 만족하는 이차함수의 함숫값</div></div>
 <h2>🔰 1단계 · [초등 나눗셈 직관] 0을 나눌 때의 몫<span class="bilingual-en">🔰 Step 1 · [Elementary Division Intuition] Quotient when dividing 0</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>0개의 사탕을 어떤 수로 나누면 몫은 항상 0입니다: $\frac{0}{b} = 0$. 분모가 0에 한없이 가까워질 때 분수가 유한한 값으로 수렴하려면 분자도 반드시 0이어야 합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Dividing 0 by any nonzero number is 0: $\frac{0}{b} = 0$. For a fraction with vanishing denominator to converge, the numerator must also approach 0.</div></div><div class="q" data-ans="2" data-exp="분모 $\to 0$일 때 극한값이 수렴하려면 분자 $\lim_{x \to 2} g(x) = 0$ 이어야 합니다." data-exp-en="For the limit to converge when the denominator is $\to 0$, the numerator must be $\lim_{x \to 2} g(x) = 0$."><div class="lvl"><span class="bilingual-ko">초등 나눗셈 디딤돌 1</span><span class="bilingual-en">Elementary Division Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 나눗셈과 분수: 극한 $\lim_{x \to 2}\frac{g(x)}{x-2}$의 값이 유한한 실수로 수렴하기 위한 분자의 극한값 $\lim_{x \to 2}g(x)$는?</span><div class="bilingual-en">Elementary division & fractions: For the limit $\lim_{x \to 2}\frac{g(x)}{x-2}$ to converge to a finite real number, what must the numerator limit $\lim_{x \to 2}g(x)$ be?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-1$</div><div class="opt"><span class="n">2</span>$0$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span><span class="bilingual-ko">발산</span><span class="bilingual-en">diffusion</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
-<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
 <textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
 <button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div><h2>🌿 2단계 · [공통인수 소거] 제거 가능한 불연속점의 극한값<span class="bilingual-en">🌿 Step 2 · [Common factor elimination] Limit value of discontinuity that can be removed</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \neq 2$일 때 분수함수 $h(x) = \frac{(x-2)(x+k)}{x-2} = x + k$ 입니다. $x \to 2$로 접근할 때의 극한값은 공통인수 $(x-2)$를 약분한 다항식에 $x=2$를 대입한 $2 + k$가 됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When $x \neq 2$, it is the fractional function $h(x) = \frac{(x-2)(x+k)}{x-2} = x + k$. When approaching with $x \to 2$, the limit value becomes $2 + k$ by substituting</div></div><div class="q" data-ans="2" data-exp="공통인수 $(x-2)$를 약분하면 $\lim_{x \to 2}(x+k) = 2+k$ 입니다." data-exp-en="The common factor $(x-2)$ can be reduced to $\lim_{x \to 2}(x+k) = 2+k$."><div class="lvl"><span class="bilingual-ko">인수 약분 디딤돌 2</span><span class="bilingual-en">Takeover Medicine Scaffolding Step 2</span></div><div class="stem"><span class="bilingual-ko">분수함수 $h(x) = \frac{(x-2)(x+k)}{x-2}$ ($x \neq 2$)의 $x \to 2$에서의 극한값 표현으로 옳은 것은?</span><div class="bilingual-en">What is the correct expression for the limit of the fractional function $h(x) = \frac{(x-2)(x+k)}{x-2}$ ($x \neq 2$) in $x \to 2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$k$</div><div class="opt"><span class="n">2</span>$2+k$</div><div class="opt"><span class="n">3</span>$2k$</div><div class="opt"><span class="n">4</span>$4+k$</div><div class="opt"><span class="n">5</span><span class="bilingual-ko">존재하지 않는다</span><span class="bilingual-en">doesn't exist</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
-<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
 <textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
 <button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div><h2>💡 3단계 · [이차함수 계수 추론] 함숫값 $f(2)$ 확정<span class="bilingual-en">💡 Step 3 · [Quadratic function coefficient inference] Confirm function value $f(2)$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>좌우극한의 존재성과 불연속점 제거 조건을 만족하는 최고차항의 계수가 1인 이차함수 $f(x)$를 해석하면, 요구되는 $x=2$에서의 함숫값은 $f(2) = 10$으로 유일하게 결정됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When interpreting the quadratic function</div></div><div class="q" data-ans="3" data-exp="조건을 만족하는 이차함수의 $x=2$에서의 함숫값은 $f(2) = 10$ 입니다." data-exp-en="The function value in $x=2$ of the quadratic function that satisfies the conditions is $f(2) = 10$."><div class="lvl"><span class="bilingual-ko">이차함수 결정 디딤돌 3</span><span class="bilingual-en">Scaffolding Step to Quadratic Function Determination 3</span></div><div class="stem"><span class="bilingual-ko">최고차항의 계수가 1인 이차함수 $f(x)$가 극한 조건을 만족할 때 $f(2)$의 값은?</span><div class="bilingual-en">When the quadratic function $f(x)$, whose coefficient of the highest order term is 1, satisfies the limit condition, what is the value of</div></div><div class="opts"><div class="opt"><span class="n">1</span>$6$</div><div class="opt"><span class="n">2</span>$8$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
-<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
 <textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
 <button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div>
-<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(252,248,250,0.97);padding:24px;text-align:center"><div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)"><button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang('ko')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button><button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button></div><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10"><span style="font-size:0.83rem;color:#45464d;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span><button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang('ko')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button><button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button></div><div id="topGuestFreePassRow" style="margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px"><button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px" onmouseover="this.style.transform='translateY(-2px) scale(1.03)';this.style.boxShadow='0 0 32px rgba(56,189,248,.95),0 8px 24px rgba(0,0,0,.6)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5)'"><span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span><span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span></button><div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div></div><h3 style="color:#131b2e;margin:0 0 6px;font-weight:800">📝 먼저 이름을 입력하세요</h3><p style="color:#45464d;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#ffffff;color:#1b1b1d;border:1.5px solid #c5c6cd;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function toggleModalLang(l){document.documentElement.lang=l;try{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}catch(e){}var bKo=document.getElementById("btnTrackFullLangKo");var bEn=document.getElementById("btnTrackFullLangEn");if(bKo&&bEn){if(l==="en"){bKo.style.background="transparent";bKo.style.color="#45464d";bKo.style.fontWeight="700";bEn.style.background="#38bdf8";bEn.style.color="#0b1020";bEn.style.fontWeight="800";}else{bKo.style.background="#38bdf8";bKo.style.color="#0b1020";bKo.style.fontWeight="800";bEn.style.background="transparent";bEn.style.color="#45464d";bEn.style.fontWeight="700";}}var cKo=document.getElementById("btnModalCenterLangKo");var cEn=document.getElementById("btnModalCenterLangEn");if(cKo&&cEn){if(l==="en"){cKo.style.background="transparent";cKo.style.color="#45464d";cKo.style.fontWeight="700";cKo.style.boxShadow="none";cEn.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cEn.style.color="#0b1020";cEn.style.fontWeight="800";cEn.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";}else{cKo.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cKo.style.color="#0b1020";cKo.style.fontWeight="800";cKo.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";cEn.style.background="transparent";cEn.style.color="#45464d";cEn.style.fontWeight="700";cEn.style.boxShadow="none";}}var sn=document.getElementById("studentName");if(sn)sn.placeholder=(l==="en")?"Enter name":"이름 입력";var pin=document.getElementById("studentPin");if(pin)pin.placeholder=(l==="en")?"4-digit PIN (optional)":"간편비번 4자리 (선택)";if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);}(function(){var cur="ko";try{var p=new URLSearchParams(window.location.search).get("lang");if(p==="en"||p==="ko"){cur=p;}else{var man=localStorage.getItem("mathedu_lang_manual")==="true";var sto=localStorage.getItem("mathedu_lang");if(man&&(sto==="en"||sto==="ko")){cur=sto;}else{var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}if(tz&&tz!=="Asia/Seoul"&&tz!=="ROK"&&tz!=="Asia/Pyongyang"){cur="en";}else{var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";if(l&&l.toLowerCase().indexOf("ko")!==0)cur="en";}}}}catch(e){}if(cur==="en"){document.documentElement.lang="en";toggleModalLang("en");}})();function startFreePractice(){var vid="";try{vid=localStorage.getItem("mathedu_visitor_id")||"";if(!vid){vid=Math.random().toString(36).substring(2,6).toUpperCase();localStorage.setItem("mathedu_visitor_id",vid);}}catch(e){vid="ANON";}window._studentName=((document.documentElement.lang==="en")?"Guest#":"자유학습#")+vid;var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({quiz_slug:"c270915",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
+<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(252,248,250,0.97);padding:24px;text-align:center"><div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)"><button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang('ko')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button><button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button></div><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10"><span style="font-size:0.83rem;color:#45464d;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span><button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang('ko')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button><button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button></div><div id="topGuestFreePassRow" style="margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px"><button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px" onmouseover="this.style.transform='translateY(-2px) scale(1.03)';this.style.boxShadow='0 0 32px rgba(56,189,248,.95),0 8px 24px rgba(0,0,0,.6)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5)'"><span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span><span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span></button><div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div></div><h3 style="color:#131b2e;margin:0 0 6px;font-weight:800">📝 먼저 이름을 입력하세요</h3><p style="color:#45464d;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#ffffff;color:#1b1b1d;border:1.5px solid #c5c6cd;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function toggleModalLang(l){document.documentElement.lang=l;try{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}catch(e){}var bKo=document.getElementById("btnTrackFullLangKo");var bEn=document.getElementById("btnTrackFullLangEn");if(bKo&&bEn){if(l==="en"){bKo.style.background="transparent";bKo.style.color="#45464d";bKo.style.fontWeight="700";bEn.style.background="#38bdf8";bEn.style.color="#0b1020";bEn.style.fontWeight="800";}else{bKo.style.background="#38bdf8";bKo.style.color="#0b1020";bKo.style.fontWeight="800";bEn.style.background="transparent";bEn.style.color="#45464d";bEn.style.fontWeight="700";}}var cKo=document.getElementById("btnModalCenterLangKo");var cEn=document.getElementById("btnModalCenterLangEn");if(cKo&&cEn){if(l==="en"){cKo.style.background="transparent";cKo.style.color="#45464d";cKo.style.fontWeight="700";cKo.style.boxShadow="none";cEn.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cEn.style.color="#0b1020";cEn.style.fontWeight="800";cEn.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";}else{cKo.style.background="linear-gradient(135deg,#38bdf8 0%,#818cf8 100%)";cKo.style.color="#0b1020";cKo.style.fontWeight="800";cKo.style.boxShadow="0 2px 10px rgba(56,189,248,.45)";cEn.style.background="transparent";cEn.style.color="#45464d";cEn.style.fontWeight="700";cEn.style.boxShadow="none";}}var sn=document.getElementById("studentName");if(sn)sn.placeholder=(l==="en")?"Enter name":"이름 입력";var pin=document.getElementById("studentPin");if(pin)pin.placeholder=(l==="en")?"4-digit PIN (optional)":"간편비번 4자리 (선택)";if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);}(function(){var cur="ko";try{var p=new URLSearchParams(window.location.search).get("lang");if(p==="en"||p==="ko"){cur=p;}else{var man=localStorage.getItem("mathedu_lang_manual")==="true";var sto=localStorage.getItem("mathedu_lang");if(man&&(sto==="en"||sto==="ko")){cur=sto;}else{var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}if(tz&&tz!=="Asia/Seoul"&&tz!=="ROK"&&tz!=="Asia/Pyongyang"){cur="en";}else{var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";if(l&&l.toLowerCase().indexOf("ko")!==0)cur="en";}}}}catch(e){}if(cur==="en"){document.documentElement.lang="en";toggleModalLang("en");}})();function startFreePractice(){var vid="";try{vid=localStorage.getItem("mathedu_visitor_id")||"";if(!vid){vid=Math.random().toString(36).substring(2,6).toUpperCase();localStorage.setItem("mathedu_visitor_id",vid);}}catch(e){vid="ANON";}window._studentName=((document.documentElement.lang==="en")?"Guest#":"자유학습#")+vid;var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}function registerName(){var n=document.getElementById("studentName").value.trim();if(!n){alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}}function sendProgress(){var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){if(q.querySelector(".opt.correct"))correct++;});if(total===0)return;fetch(window._sheetsApiUrl,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({quiz_slug:"c270915",student_name:name,current_step:done.length,total_steps:total,correct:correct})}).catch(function(){});}document.querySelectorAll(".q").forEach(function(q){q.addEventListener("click",function(e){var opt=e.target.closest(".opt");if(opt){setTimeout(sendProgress,50);}});});document.getElementById("studentName").addEventListener("keydown",function(e){if(e.key==="Enter")registerName();});</script>
 <h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final problem + detailed solution</span></h2><div class="sol"><div class="bilingual-ko">
 
 <h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
@@ -1839,12 +2560,12 @@ mjx-container:not([display="true"])::-webkit-scrollbar {
 &lt;/p&gt;
   
   "><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">최고차항의 계수가 $1$인 이차함수 $f(x)$에 대하여 $f(2)$의 값은?</span><div class="bilingual-en">For a quadratic function $f(x)$ whose coefficient of the highest order term is $1$, what is the value of $f(2)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{5}{2}$</div><div class="opt"><span class="n">2</span>$5$</div><div class="opt"><span class="n">3</span>$\frac{15}{2}$</div><div class="opt"><span class="n">4</span>$10$</div><div class="opt"><span class="n">5</span>$\frac{25}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
-<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#2e3850';this.style.color='#9aa6c0'">🚨 이 문제에 이상이 있어요</button>
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
-<div style="color:#9aa6c0;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
 <textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
 <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
-<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#9aa6c0;border:1px solid #2e3850;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
 <button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
 </div>
 </div>
@@ -1961,6 +2682,138 @@ if (!window.toggleMinGgb) {
 
 <div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $10$</div>
 <button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
+<!-- STITCH_FOOTER_START -->
+<div class="stitch-pack-banner">
+  <div class="stitch-pack-left">
+    <div class="stitch-pack-icon">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#93ccff">backpack</span>
+    </div>
+    <div style="min-width:0">
+      <div style="font-family:'Plus Jakarta Sans','Pretendard',sans-serif;font-size:0.9rem;font-weight:800;color:#ffffff"><span class="bilingual-ko">선택한 문항으로 수업 팩 묶기</span><span class="bilingual-en">Bundle Problems into a Lesson Pack</span></div>
+      <div style="font-size:0.76rem;color:rgba(255,255,255,0.72)"><span class="bilingual-ko">학생들에게 링크 1개로 오늘 수업 문항 제공</span><span class="bilingual-en">Share multiple problems with a single link</span></div>
+    </div>
+  </div>
+  <a href="../index.html#quizExplorerSection" class="stitch-pack-btn"><span class="bilingual-ko">수업 팩 생성</span><span class="bilingual-en">Create Pack</span></a>
+</div>
+
+<div class="stitch-collections-section" id="stitchMin7014Section">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">folder_special</span>
+    <h3 style="margin:0;font-family:'Plus Jakarta Sans','Pretendard',sans-serif;font-size:1.05rem;font-weight:800;color:#1b1b1d"><span class="bilingual-ko">수학자료실 공인 학습 컬렉션</span><span class="bilingual-en">Official Curated Math Collections</span></h3>
+  </div>
+  <a class="stitch-collection-card" href="https://www.geogebra.org/u/min7014" target="_blank" rel="noopener noreferrer">
+    <div class="stitch-col-left">
+      <div class="stitch-col-icon" style="background:rgba(0,99,152,0.10)">
+        <span class="material-symbols-outlined" style="font-size:24px;color:#006398">view_in_ar</span>
+      </div>
+      <div>
+        <span class="stitch-col-title">GeoGebra Tube 국제 공인 컬렉션</span>
+        <span class="stitch-col-sub">3,000+ 전 세계 인증 인터랙티브 수학 앱렛</span>
+      </div>
+    </div>
+    <span class="material-symbols-outlined" style="font-size:20px;color:#45464d">open_in_new</span>
+  </a>
+  <a class="stitch-collection-card" href="https://www.algeomath.kr" target="_blank" rel="noopener noreferrer">
+    <div class="stitch-col-left">
+      <div class="stitch-col-icon" style="background:rgba(16,185,129,0.10)">
+        <span class="material-symbols-outlined" style="font-size:24px;color:#10B981">calculate</span>
+      </div>
+      <div>
+        <span class="stitch-col-title">AlgeoMath 한국과학창의재단 자료</span>
+        <span class="stitch-col-sub">한국 교육과정에 맞춘 공식 기하 탐구 활동</span>
+      </div>
+    </div>
+    <span class="material-symbols-outlined" style="font-size:20px;color:#45464d">open_in_new</span>
+  </a>
+  <a class="stitch-collection-card" href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener noreferrer">
+    <div class="stitch-col-left">
+      <div class="stitch-col-icon" style="background:rgba(245,158,11,0.10)">
+        <span class="material-symbols-outlined" style="font-size:24px;color:#F59E0B">menu_book</span>
+      </div>
+      <div>
+        <span class="stitch-col-title">중등~고등 전 단원 개념 증명 PDF</span>
+        <span class="stitch-col-sub">순서대로 체계적으로 정리된 다운로드 보관함</span>
+      </div>
+    </div>
+    <span class="material-symbols-outlined" style="font-size:20px;color:#45464d">download</span>
+  </a>
+</div>
+
+<div class="stitch-footer">
+  <div class="stitch-footer-links">
+    <a href="https://min7014.github.io/">공식 웹사이트</a>
+    <span>·</span>
+    <a href="../dashboard.html">실시간 관제 대시보드</a>
+    <span>·</span>
+    <a href="../privacy.html">개인정보처리방침</a>
+  </div>
+  <p class="stitch-footer-copy">© mathedu · 수학자료실. 3,400+ 시각적 수학 증명과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평.</p>
+</div>
+
+<nav class="stitch-bottom-nav">
+  <div class="stitch-bottom-nav-inner">
+    <a href="/mathedu/" class="stitch-bnav-item">
+      <span class="material-symbols-outlined" style="font-size:22px">home</span>
+      <span><span class="bilingual-ko">홈</span><span class="bilingual-en">Home</span></span>
+    </a>
+    <button type="button" class="stitch-bnav-item active" onclick="scrollToQuizStep(0)">
+      <span class="material-symbols-outlined" style="font-size:22px">quiz</span>
+      <span><span class="bilingual-ko">디딤돌 퀴즈</span><span class="bilingual-en">Quizzes</span></span>
+    </button>
+    <button type="button" class="stitch-bnav-item" onclick="scrollToSolSection()">
+      <span class="material-symbols-outlined" style="font-size:22px">view_in_ar</span>
+      <span><span class="bilingual-ko">동적 기하관</span><span class="bilingual-en">Visual Proof</span></span>
+    </button>
+    <button type="button" class="stitch-bnav-item" onclick="if(window.openClassCreatorModal)openClassCreatorModal('c270915')">
+      <span class="material-symbols-outlined" style="font-size:22px">qr_code_scanner</span>
+      <span><span class="bilingual-ko">교사용 출제</span><span class="bilingual-en">Class QR</span></span>
+    </button>
+    <button type="button" class="stitch-bnav-item" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal()">
+      <span class="material-symbols-outlined" style="font-size:22px">folder_special</span>
+      <span><span class="bilingual-ko">마이룸</span><span class="bilingual-en">My Room</span></span>
+    </button>
+  </div>
+</nav>
+<script>
+function scrollToOrigCard() {
+  var el = document.querySelector('.orig-card');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function scrollToQuizStep(idx) {
+  var qs = document.querySelectorAll('.q');
+  if (qs[idx]) {
+    if (qs[idx].classList.contains('mathedu-step-hidden') && window.toggleStitchStepMode) {
+      window.toggleStitchStepMode('all');
+    }
+    qs[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+function scrollToSolSection() {
+  var sol = document.querySelector('.sol') || document.querySelector('.min7014-addon-card');
+  if (sol) {
+    if (sol.classList.contains('mathedu-step-hidden') && window.toggleStitchStepMode) {
+      window.toggleStitchStepMode('all');
+    }
+    sol.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+function stitchSaveInlineName() {
+  var inp = document.getElementById('stitchStudentNameInline');
+  if (!inp) return;
+  var val = inp.value.trim();
+  if (!val) {
+    scrollToQuizStep(0);
+    return;
+  }
+  window._studentName = val;
+  var sn = document.getElementById('studentName');
+  if (sn) sn.value = val;
+  if (typeof sendProgress === 'function') sendProgress();
+  inp.value = '';
+  inp.placeholder = '✅ ' + val + ' 님 기록 연동됨';
+}
+</script>
+<!-- STITCH_FOOTER_END -->
 </div><script>
 const qs=document.querySelectorAll('.q');let pts=0;
 document.getElementById('tot').textContent=qs.length;
@@ -2286,8 +3139,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270915';
-window._offlineBuildTime = '2026-10-27T06:50:05.979851+00:00';
-window._offlineHash = '3352b3ce';
+window._offlineBuildTime = '2026-10-27T07:09:34.613818+00:00';
+window._offlineHash = 'dc0df8fd';
 window._offlineVersion = 'v2026.10.27';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270915.html';
 
@@ -2312,8 +3165,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270915';
-  var localBuildTime = window._offlineBuildTime || '2026-10-27T06:50:05.979851+00:00';
-  var localHash = window._offlineHash || '3352b3ce';
+  var localBuildTime = window._offlineBuildTime || '2026-10-27T07:09:34.613818+00:00';
+  var localHash = window._offlineHash || 'dc0df8fd';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270915.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
