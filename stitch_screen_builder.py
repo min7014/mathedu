@@ -2029,6 +2029,10 @@ def convert_svg_to_stitch_light(svg_str, clean_ans=None):
         ('fill="rgba(52,211,153,0.12)"', 'fill="#ecfdf5"'),
         ('fill="rgba(52,211,153,0.15)"', 'fill="#ecfdf5"'),
         ('fill="rgba(52,211,153,0.16)"', 'fill="#ecfdf5"'),
+        ('fill="rgba(52,211,153,0.2)"', 'fill="#ecfdf5"'),
+        ('fill="rgba(52,211,153,0.28)"', 'fill="#dcfce7"'),
+        ('fill="rgba(251,113,133,0.15)"', 'fill="#fff1f2"'),
+        ('fill="rgba(56,189,248,0.22)"', 'fill="#e0f2fe"'),
         ('fill="rgba(52,211,153,0.22)"', 'fill="#ecfdf5"'),
         ('fill="rgba(52,211,153,0.32)"', 'fill="#dcfce7"'),
         ('fill="rgba(52,211,153,0.45)"', 'fill="#bbf7d0"'),
@@ -2163,58 +2167,8 @@ def build_stitch_top_shell(slug, asset_prefix, h1_full_inner, h1_ko_line1, h1_ko
     </div>
   </div>
 </div>
-<!-- STITCH_HEADER_END -->"""
 
-
-def build_stitch_explorer_shell(q_count):
-    step_pills = []
-    for i in range(1, q_count):
-        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({i-1})">{i}단계</button>')
-    if q_count >= 1:
-        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({q_count-1})">최종 본문항</button>')
-    step_pills_html = "\n        ".join(step_pills)
-
-    return f"""<!-- STITCH_EXPLORER_START -->
-<div class="stitch-explorer-header" id="stitchQuizStepsSection">
-  <div class="stitch-explorer-title-wrap">
-    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
-    <div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 디딤돌 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
-        <span class="stitch-count-badge">총 {q_count}문항</span>
-      </div>
-      <span class="stitch-explorer-sub"><span class="bilingual-ko">원본 기출 · 제0단계 기호 번역 · 1~{max(1,q_count-1)}단계 디딤돌 즉시 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
-    </div>
-  </div>
-  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({{top:0,behavior:'smooth'}})" title="맨 위로">
-    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
-  </button>
-</div>
-
-<div class="stitch-filter-card">
-  <div class="stitch-filter-group">
-    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
-    <div class="stitch-pill-row">
-      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
-      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
-      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
-      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
-    </div>
-  </div>
-  <div class="stitch-filter-group">
-    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
-    <div class="stitch-pill-row">
-      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
-      {step_pills_html}
-    </div>
-  </div>
-</div>
-<!-- STITCH_EXPLORER_END -->"""
-
-
-def build_stitch_bottom_shell(slug, asset_prefix, h1_ko_line2, q_count):
-    return f"""<!-- STITCH_FOOTER_START -->
-<!-- Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<!-- 2. Gamification / Daily Streak Strip Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
 <div class="stitch-streak-card">
   <div class="stitch-streak-left">
     <div class="stitch-flame-circle">
@@ -2238,7 +2192,50 @@ def build_stitch_bottom_shell(slug, asset_prefix, h1_ko_line2, q_count):
   </div>
 </div>
 
-<!-- Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<!-- 3. Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-dandelin-card">
+  <div class="stitch-card-head">
+    <div class="stitch-card-head-left">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
+      <span>공식 엠블럼 Dandelin Spheres</span>
+    </div>
+    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">입체·시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
+  </div>
+  <div class="stitch-visual-canvas">
+    <div class="stitch-visual-banner" style="background-image: url('{asset_prefix}assets/stitch_dandelin_hero.png')">
+      <div class="stitch-visual-overlay">
+        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
+        <p class="stitch-visual-headline"><span class="bilingual-ko">{h1_ko_line2} · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
+      </div>
+    </div>
+    <div class="stitch-visual-drawer">
+      <p class="stitch-visual-desc">
+        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~{max(1,q_count-1)}단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
+        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
+      </p>
+      <div class="stitch-quote-box">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
+        <p class="stitch-quote-text">
+          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
+          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- STITCH_HEADER_END -->"""
+
+
+def build_stitch_explorer_shell(q_count, slug="", asset_prefix="../"):
+    step_pills = []
+    for i in range(1, q_count):
+        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({i-1})">{i}단계</button>')
+    if q_count >= 1:
+        step_pills.append(f'<button type="button" class="stitch-step-pill" onclick="scrollToQuizStep({q_count-1})">최종 본문항</button>')
+    step_pills_html = "\n        ".join(step_pills)
+
+    return f"""<!-- STITCH_EXPLORER_START -->
+<!-- 5. Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
 <div class="stitch-gateway-grid">
   <div class="stitch-gateway-card">
     <div class="stitch-gw-head">
@@ -2271,7 +2268,7 @@ def build_stitch_bottom_shell(slug, asset_prefix, h1_ko_line2, q_count):
     </div>
     <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
     <div class="stitch-gw-actions">
-      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="이름 또는 6자리 수업 코드 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
+      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="6자리 수업 코드 또는 이름 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
       <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
         <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
       </button>
@@ -2289,38 +2286,46 @@ def build_stitch_bottom_shell(slug, asset_prefix, h1_ko_line2, q_count):
   </div>
 </div>
 
-<!-- Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-dandelin-card">
-  <div class="stitch-card-head">
-    <div class="stitch-card-head-left">
-      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
-      <span>공식 엠블럼 Dandelin Spheres</span>
+<!-- 6. Precision Step Explorer Header & Filter Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-explorer-header" id="stitchQuizStepsSection">
+  <div class="stitch-explorer-title-wrap">
+    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
+    <div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 정밀 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
+        <span class="stitch-count-badge">총 {q_count}문항</span>
+      </div>
+      <span class="stitch-explorer-sub"><span class="bilingual-ko">학년도·선택과목·단계별 분류 즉시 추출 · 1~{max(1,q_count-1)}단계 디딤돌 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
     </div>
-    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
   </div>
-  <div class="stitch-visual-canvas">
-    <div class="stitch-visual-banner" style="background-image: url('{asset_prefix}assets/stitch_dandelin_hero.png')">
-      <div class="stitch-visual-overlay">
-        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
-        <p class="stitch-visual-headline"><span class="bilingual-ko">{h1_ko_line2} · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
-      </div>
+  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({{top:0,behavior:'smooth'}})" title="맨 위로">
+    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
+  </button>
+</div>
+
+<div class="stitch-filter-card">
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
+      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
     </div>
-    <div class="stitch-visual-drawer">
-      <p class="stitch-visual-desc">
-        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~{max(1,q_count-1)}단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
-        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
-      </p>
-      <div class="stitch-quote-box">
-        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
-        <p class="stitch-quote-text">
-          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
-          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
-        </p>
-      </div>
+  </div>
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
+      {step_pills_html}
     </div>
   </div>
 </div>
+<!-- STITCH_EXPLORER_END -->"""
 
+
+def build_stitch_bottom_shell(slug, asset_prefix, h1_ko_line2, q_count):
+    return f"""<!-- STITCH_FOOTER_START -->
 <div class="stitch-pack-banner">
   <div class="stitch-pack-left">
     <div class="stitch-pack-icon">
@@ -2574,7 +2579,7 @@ def transform_file(filepath):
     stitch_top = build_stitch_top_shell(
         slug, asset_prefix, h1_inner, h1_line1, h1_line2, h1_en_text, lead_inner, q_count
     )
-    stitch_explorer = build_stitch_explorer_shell(q_count)
+    stitch_explorer = build_stitch_explorer_shell(q_count, slug, asset_prefix)
     stitch_bottom = build_stitch_bottom_shell(slug, asset_prefix, h1_line2, q_count)
 
     # 4. Replace from <div class="wrap"> through <p class="lead">...</p> with <div class="wrap">\n + stitch_top

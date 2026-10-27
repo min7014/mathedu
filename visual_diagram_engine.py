@@ -79,6 +79,80 @@ def _right_panel_svg(hdr: str, stroke_col: str, hdr_col: str, eq_label: str, pt1
     """
 
 
+def _draw_c261022_svg(lang="ko") -> str:
+    title = (
+        "📐 [시각적 역추적 트리 모델] [10월 22번] a₃ = a₆ 주기 분기(15, 25) & a₂ → a₁ 역추적 분기 트리"
+        if lang == "ko"
+        else "📐 [Visual Backtracking Tree] [Oct #22] Period-3 Branches (a₃ = 15, 25) & Backtracking to a₁"
+    )
+    sub = "∑a₁ = 24+47+44+87 = 202"
+    inner = """
+    <!-- LEFT PANEL: Periodicity a3 = a6 Parity Branching -->
+    <rect x="16" y="50" width="308" height="236" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="170" y="70" fill="#131b2e" font-size="11.5" font-weight="800" text-anchor="middle">① 주기 조건 (a₃ = a₆) · 홀짝 갈래 탐색</text>
+    <rect x="28" y="78" width="284" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="170" y="94" fill="#006398" font-size="9.8" font-weight="800" text-anchor="middle">홀수: aₙ₊₁ = (aₙ+1)/2 + n  |  짝수: aₙ₊₁ = aₙ + n (항상 증가)</text>
+
+    <!-- Branch 1: a3=15 -->
+    <rect x="28" y="110" width="284" height="62" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="40" y="128" fill="#047857" font-size="10.5" font-weight="800">경로 A (홀 → 홀 → 짝): (a₃+1)/2+3 → 홀수</text>
+    <text x="40" y="146" fill="#1e293b" font-size="11" font-weight="800">a₃ = 15(홀) ➔ a₄ = 11(홀) ➔ a₅ = 10(짝) ➔ a₆ = 15</text>
+    <text x="40" y="163" fill="#059669" font-size="10" font-weight="800">✓ 첫 번째 주기 해: a₃ = 15 확정!</text>
+
+    <!-- Branch 2: a3=25 -->
+    <rect x="28" y="180" width="284" height="62" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="40" y="198" fill="#4f46e5" font-size="10.5" font-weight="800">경로 B (홀 → 짝 → 짝): (a₃+1)/2+12 = a₃</text>
+    <text x="40" y="216" fill="#1e293b" font-size="11" font-weight="800">a₃ = 25(홀) ➔ a₄ = 16(짝) ➔ a₅ = 20(짝) ➔ a₆ = 25</text>
+    <text x="40" y="233" fill="#4f46e5" font-size="10" font-weight="800">✓ 두 번째 주기 해: a₃ = 25 확정!</text>
+
+    <text x="170" y="274" fill="#64748b" font-size="9.8" font-weight="700" text-anchor="middle">※ a₃가 짝수이면 a₃ &lt; a₄ &lt; a₅ &lt; a₆이므로 a₃ = a₆ 불가</text>
+
+    <!-- RIGHT PANEL: Backtracking Tree a3 -> a2 -> a1 -->
+    <rect x="336" y="50" width="328" height="236" rx="12" fill="#f8fafc" stroke="#006398" stroke-width="1.5"/>
+    <text x="500" y="70" fill="#006398" font-size="11.5" font-weight="800" text-anchor="middle">② 역추적 분기 트리 (a₃ ➔ a₂ ➔ a₁)</text>
+
+    <!-- Tree 1: From a3 = 15 -->
+    <rect x="348" y="80" width="304" height="68" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
+    <rect x="356" y="96" width="58" height="36" rx="6" fill="#dcfce7" stroke="#10b981"/>
+    <text x="385" y="112" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">a₃ = 15</text>
+    <text x="385" y="125" fill="#047857" font-size="9" font-weight="700" text-anchor="middle">(경로 A)</text>
+    <line x1="414" y1="114" x2="438" y2="114" stroke="#059669" stroke-width="1.8" marker-end="url(#arrGreen)"/>
+    <rect x="442" y="90" width="76" height="48" rx="6" fill="#ecfdf5" stroke="#10b981"/>
+    <text x="480" y="106" fill="#047857" font-size="10" font-weight="800" text-anchor="middle">a₂ = 25 (홀)</text>
+    <text x="480" y="120" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=13(모순)</text>
+    <text x="480" y="132" fill="#059669" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=15</text>
+    <line x1="518" y1="104" x2="544" y2="96" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <line x1="518" y1="124" x2="544" y2="132" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <rect x="548" y="85" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="101" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 24 (짝수 ✓)</text>
+    <rect x="548" y="116" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="132" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 47 (홀수 ✓)</text>
+
+    <!-- Tree 2: From a3 = 25 -->
+    <rect x="348" y="156" width="304" height="68" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <rect x="356" y="172" width="58" height="36" rx="6" fill="#ede9fe" stroke="#8b5cf6"/>
+    <text x="385" y="188" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₃ = 25</text>
+    <text x="385" y="201" fill="#4f46e5" font-size="9" font-weight="700" text-anchor="middle">(경로 B)</text>
+    <line x1="414" y1="190" x2="438" y2="190" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#arrCyan)"/>
+    <rect x="442" y="166" width="76" height="48" rx="6" fill="#f5f3ff" stroke="#8b5cf6"/>
+    <text x="480" y="182" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₂ = 45 (홀)</text>
+    <text x="480" y="196" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=23(모순)</text>
+    <text x="480" y="208" fill="#4f46e5" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=25</text>
+    <line x1="518" y1="180" x2="544" y2="172" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <line x1="518" y1="200" x2="544" y2="208" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <rect x="548" y="161" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="177" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 44 (짝수 ✓)</text>
+    <rect x="548" y="192" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="208" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 87 (홀수 ✓)</text>
+
+    <!-- Final Conclusion Bar -->
+    <rect x="348" y="232" width="304" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="500" y="250" fill="#92400e" font-size="10.2" font-weight="800" text-anchor="middle">가능한 모든 a₁의 합 = (24 + 47) + (44 + 87) = 71 + 131</text>
+    <text x="500" y="268" fill="#b45309" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 정답: ∑a₁ = 202</text>
+    """
+    return _svg_wrap(title, sub, inner, 300)
+
+
 def _draw_c2610p27_svg(lang="ko") -> str:
     title = (
         "📐 [시각적 도형 모델] 주사위 2회 36칸 홀짝 격자(P=1/4, 3/4) & 4회 독립시행 넓이 모델"
@@ -879,10 +953,16 @@ def _clean_plain(s: str, max_len: int = 60) -> str:
     s = s.replace("\\dfrac", "").replace("\\frac", "/").replace("\\sqrt", "√")
     s = s.replace("\\overline", "").replace("\\mathrm", "").replace("\\left", "").replace("\\right", "")
     s = s.replace("\\implies", "⇒").replace("\\iff", "⇔").replace("\\to", "→")
+    s = s.replace("\\in", "∈").replace("\\subset", "⊂").replace("\\cup", "∪").replace("\\cap", "∩")
+    s = s.replace("\\sum", "∑").replace("\\infty", "∞")
     s = s.replace("\\le", "≤").replace("\\ge", "≥").replace("\\ne", "≠")
     s = s.replace("\\pi", "π").replace("\\theta", "θ").replace("\\alpha", "α").replace("\\beta", "β")
     s = s.replace("\\times", "×").replace("\\cdot", "·").replace("\\pm", "±")
     s = s.replace("^2", "²").replace("^3", "³")
+    for idx_d, sub_c in enumerate("₀₁₂₃₄₅₆₇₈₉"):
+        s = re.sub(rf"([a-zA-Z])_{idx_d}\b", rf"\1{sub_c}", s)
+    s = re.sub(r"([a-zA-Z])_n\b", r"\1ₙ", s)
+    s = re.sub(r"([a-zA-Z])_k\b", r"\1ₖ", s)
     s = s.replace("$", "").replace("{", "").replace("}", "").replace("\\", "")
     s = re.sub(r"\s+", " ", s).strip()
     if len(s) <= max_len:
@@ -946,7 +1026,9 @@ def build_visual_and_schematic_block(
     pt2_lbl = s_clean[-1] if len(s_clean) > 2 else f"수식 연립 및 도출 ⇒ {ans_clean}"
 
     cat, submode = _classify_problem(pid, short_title, sol_ko_plain)
-    if pid == "c2610p27":
+    if pid == "c261022":
+        svg_html = _draw_c261022_svg(lang=lang)
+    elif pid == "c2610p27":
         svg_html = _draw_c2610p27_svg(lang=lang)
     elif cat == "c2610p28":
         svg_html = _draw_c2610p28_svg(lang=lang)

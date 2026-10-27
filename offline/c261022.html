@@ -1917,8 +1917,8 @@ mjx-container:not([display="true"]) {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c261022.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c261022">
-<meta name="mathedu-offline-build-time" content="2026-10-27T07:59:20.459209+00:00">
-<meta name="mathedu-offline-hash" content="266850fe">
+<meta name="mathedu-offline-build-time" content="2026-10-27T08:06:54.473340+00:00">
+<meta name="mathedu-offline-hash" content="89104566">
 <meta name="mathedu-version-label" content="v2026.10.27">
 
 </head><body><div class="wrap">
@@ -2073,6 +2073,62 @@ mjx-container:not([display="true"]) {
     </div>
   </div>
 </div>
+
+<!-- 2. Gamification / Daily Streak Strip Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-streak-card">
+  <div class="stitch-streak-left">
+    <div class="stitch-flame-circle">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
+    </div>
+    <div class="stitch-streak-info">
+      <div class="stitch-streak-title-row">
+        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
+        <span class="stitch-lvl-badge">Lv.1 입문자</span>
+      </div>
+      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
+    </div>
+  </div>
+  <div class="stitch-streak-actions">
+    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
+      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
+    </button>
+    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('c261022')" title="즐겨찾기 및 오답노트">
+      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
+    </button>
+  </div>
+</div>
+
+<!-- 3. Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-dandelin-card">
+  <div class="stitch-card-head">
+    <div class="stitch-card-head-left">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
+      <span>공식 엠블럼 Dandelin Spheres</span>
+    </div>
+    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">입체·시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
+  </div>
+  <div class="stitch-visual-canvas">
+    <div class="stitch-visual-banner" style="background-image: url('../assets/stitch_dandelin_hero.png')">
+      <div class="stitch-visual-overlay">
+        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
+        <p class="stitch-visual-headline"><span class="bilingual-ko">홀짝에 따라 분기하는 귀납적 수열의 역추적 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
+      </div>
+    </div>
+    <div class="stitch-visual-drawer">
+      <p class="stitch-visual-desc">
+        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~8단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
+        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
+      </p>
+      <div class="stitch-quote-box">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
+        <p class="stitch-quote-text">
+          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
+          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- STITCH_HEADER_END -->
 <!-- ★ 원본 문제 카드: 가로 2열 대조 배치 (Side-by-Side Horizontal Grid) -->
 <div class="orig-card">
@@ -2128,15 +2184,67 @@ mjx-container:not([display="true"]) {
   </div>
 </div>
 <!-- STITCH_EXPLORER_START -->
+<!-- 5. Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-gateway-grid">
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
+    <div class="stitch-gw-actions">
+      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('c261022')">
+        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
+        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
+      </button>
+      <a href="../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
+        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
+        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
+    <div class="stitch-gw-actions">
+      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="6자리 수업 코드 또는 이름 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
+      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
+        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
+      </button>
+    </div>
+    <div class="stitch-gw-links">
+      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
+        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
+      </a>
+      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
+        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Precision Step Explorer Header & Filter Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
 <div class="stitch-explorer-header" id="stitchQuizStepsSection">
   <div class="stitch-explorer-title-wrap">
     <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
     <div>
       <div style="display:flex;align-items:center;gap:8px">
-        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 디딤돌 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
+        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 정밀 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
         <span class="stitch-count-badge">총 9문항</span>
       </div>
-      <span class="stitch-explorer-sub"><span class="bilingual-ko">원본 기출 · 제0단계 기호 번역 · 1~8단계 디딤돌 즉시 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
+      <span class="stitch-explorer-sub"><span class="bilingual-ko">학년도·선택과목·단계별 분류 즉시 추출 · 1~8단계 디딤돌 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
     </div>
   </div>
   <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">
@@ -2267,40 +2375,69 @@ mjx-container:not([display="true"]) {
 <h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
 <p>본 문항은 공통 영역 최고난도(22번) 문항으로, <b>홀짝 분기 귀납적 정의에서 $a_3 = a_6$이 되는 주기 해를 찾고 첫째항 $a_1$까지 역추적</b>하는 문제입니다.</p>
 
-<h4>🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,99,184,0.06)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#006398"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#059669"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#be123c"/></marker></defs><rect width="680" height="290" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#006398" font-size="11.8" font-weight="800" font-family="sans-serif">📐 [의도적 도형·시각화 모델] [10월 22번] 홀짝에 따라 분기하는 귀납적 수열의 역추적</text><text x="656" y="31" fill="#047857" font-size="11.8" font-weight="800" text-anchor="end" font-family="sans-serif">Answer: 202</text>
-    <rect x="20" y="52" width="365" height="226" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
-    
-        <rect x="45" y="145" width="68" height="34" rx="8" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.8"/>
-        <text x="79" y="166" fill="#b45309" font-size="11" font-weight="800" text-anchor="middle">기준 상태</text>
-        <line x1="113" y1="155" x2="168" y2="108" stroke="#34d399" stroke-width="2" marker-end="url(#arrGreen)"/>
-        <line x1="113" y1="170" x2="168" y2="212" stroke="#fb7185" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrCoral)"/>
-        <rect x="172" y="88" width="82" height="36" rx="8" fill="rgba(52,211,153,0.2)" stroke="#34d399" stroke-width="1.8"/>
-        <text x="213" y="110" fill="#047857" font-size="10.5" font-weight="800" text-anchor="middle">경로 ① (유효)</text>
-        <rect x="172" y="195" width="82" height="36" rx="8" fill="rgba(251,113,133,0.15)" stroke="#fb7185" stroke-width="1.5"/>
-        <text x="213" y="217" fill="#be123c" font-size="10.5" font-weight="700" text-anchor="middle">경로 ② (제외)</text>
-        <line x1="254" y1="106" x2="292" y2="82" stroke="#34d399" stroke-width="2" marker-end="url(#arrGreen)"/>
-        <line x1="254" y1="106" x2="292" y2="136" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
-        <rect x="296" y="65" width="76" height="34" rx="7" fill="rgba(52,211,153,0.28)" stroke="#34d399" stroke-width="2"/>
-        <text x="334" y="86" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">해 ① 확정</text>
-        <rect x="296" y="120" width="76" height="34" rx="7" fill="rgba(56,189,248,0.22)" stroke="#38bdf8" stroke-width="1.8"/>
-        <text x="334" y="141" fill="#006398" font-size="10.5" font-weight="800" text-anchor="middle">해 ② 확정</text>
-        <text x="205" y="262" fill="#b45309" font-size="11" font-weight="800" text-anchor="middle">상태 전이 · 홀짝 분기 · 역추적 트리 도형</text>
-        
-    
-    <rect x="400" y="52" width="260" height="226" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="530" y="74" fill="#006398" font-size="12" font-weight="800" text-anchor="middle">도식화 핵심 구조 및 수치</text>
-    <rect x="414" y="86" width="232" height="42" rx="7" fill="#eff6ff" stroke="#93c5fd"/>
-    <text x="530" y="103" fill="#006398" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
-    <text x="530" y="120" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">a_3 = 15(홀수)일 때 a_4, a_5, ⇒ 15</text>
-    <rect x="414" y="136" width="232" height="42" rx="7" fill="#f5f3ff" stroke="#c4b5fd"/>
-    <text x="530" y="153" fill="#4f46e5" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
-    <text x="530" y="170" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">(홀 → 짝 → 짝) 갈래에서 a_3 = 25 ⇒ 25</text>
-    <rect x="414" y="186" width="232" height="40" rx="7" fill="#ecfdf5" stroke="#6ee7b7"/>
-    <text x="530" y="202" fill="#047857" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
-    <text x="530" y="218" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">네 개의 a_1 in 24, 47, 44, ⇒ 202</text>
-    <rect x="414" y="233" width="232" height="35" rx="7" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="530" y="255" fill="#b45309" font-size="12" font-weight="900" text-anchor="middle">🎯 최종 결론: 202</text>
-    
+<h4>🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,99,184,0.06)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#006398"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#059669"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#be123c"/></marker></defs><rect width="680" height="300" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#006398" font-size="11.8" font-weight="800" font-family="sans-serif">📐 [시각적 역추적 트리 모델] [10월 22번] a₃ = a₆ 주기 분기(15, 25) &amp; a₂ → a₁ 역추적 분기 트리</text><text x="656" y="31" fill="#047857" font-size="11.8" font-weight="800" text-anchor="end" font-family="sans-serif">∑a₁ = 24+47+44+87 = 202</text>
+    <!-- LEFT PANEL: Periodicity a3 = a6 Parity Branching -->
+    <rect x="16" y="50" width="308" height="236" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="170" y="70" fill="#131b2e" font-size="11.5" font-weight="800" text-anchor="middle">① 주기 조건 (a₃ = a₆) · 홀짝 갈래 탐색</text>
+    <rect x="28" y="78" width="284" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="170" y="94" fill="#006398" font-size="9.8" font-weight="800" text-anchor="middle">홀수: aₙ₊₁ = (aₙ+1)/2 + n  |  짝수: aₙ₊₁ = aₙ + n (항상 증가)</text>
+
+    <!-- Branch 1: a3=15 -->
+    <rect x="28" y="110" width="284" height="62" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="40" y="128" fill="#047857" font-size="10.5" font-weight="800">경로 A (홀 → 홀 → 짝): (a₃+1)/2+3 → 홀수</text>
+    <text x="40" y="146" fill="#1e293b" font-size="11" font-weight="800">a₃ = 15(홀) ➔ a₄ = 11(홀) ➔ a₅ = 10(짝) ➔ a₆ = 15</text>
+    <text x="40" y="163" fill="#059669" font-size="10" font-weight="800">✓ 첫 번째 주기 해: a₃ = 15 확정!</text>
+
+    <!-- Branch 2: a3=25 -->
+    <rect x="28" y="180" width="284" height="62" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="40" y="198" fill="#4f46e5" font-size="10.5" font-weight="800">경로 B (홀 → 짝 → 짝): (a₃+1)/2+12 = a₃</text>
+    <text x="40" y="216" fill="#1e293b" font-size="11" font-weight="800">a₃ = 25(홀) ➔ a₄ = 16(짝) ➔ a₅ = 20(짝) ➔ a₆ = 25</text>
+    <text x="40" y="233" fill="#4f46e5" font-size="10" font-weight="800">✓ 두 번째 주기 해: a₃ = 25 확정!</text>
+
+    <text x="170" y="274" fill="#64748b" font-size="9.8" font-weight="700" text-anchor="middle">※ a₃가 짝수이면 a₃ &lt; a₄ &lt; a₅ &lt; a₆이므로 a₃ = a₆ 불가</text>
+
+    <!-- RIGHT PANEL: Backtracking Tree a3 -> a2 -> a1 -->
+    <rect x="336" y="50" width="328" height="236" rx="12" fill="#f8fafc" stroke="#006398" stroke-width="1.5"/>
+    <text x="500" y="70" fill="#006398" font-size="11.5" font-weight="800" text-anchor="middle">② 역추적 분기 트리 (a₃ ➔ a₂ ➔ a₁)</text>
+
+    <!-- Tree 1: From a3 = 15 -->
+    <rect x="348" y="80" width="304" height="68" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
+    <rect x="356" y="96" width="58" height="36" rx="6" fill="#dcfce7" stroke="#10b981"/>
+    <text x="385" y="112" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">a₃ = 15</text>
+    <text x="385" y="125" fill="#047857" font-size="9" font-weight="700" text-anchor="middle">(경로 A)</text>
+    <line x1="414" y1="114" x2="438" y2="114" stroke="#059669" stroke-width="1.8" marker-end="url(#arrGreen)"/>
+    <rect x="442" y="90" width="76" height="48" rx="6" fill="#ecfdf5" stroke="#10b981"/>
+    <text x="480" y="106" fill="#047857" font-size="10" font-weight="800" text-anchor="middle">a₂ = 25 (홀)</text>
+    <text x="480" y="120" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=13(모순)</text>
+    <text x="480" y="132" fill="#059669" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=15</text>
+    <line x1="518" y1="104" x2="544" y2="96" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <line x1="518" y1="124" x2="544" y2="132" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <rect x="548" y="85" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="101" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 24 (짝수 ✓)</text>
+    <rect x="548" y="116" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="132" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 47 (홀수 ✓)</text>
+
+    <!-- Tree 2: From a3 = 25 -->
+    <rect x="348" y="156" width="304" height="68" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <rect x="356" y="172" width="58" height="36" rx="6" fill="#ede9fe" stroke="#8b5cf6"/>
+    <text x="385" y="188" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₃ = 25</text>
+    <text x="385" y="201" fill="#4f46e5" font-size="9" font-weight="700" text-anchor="middle">(경로 B)</text>
+    <line x1="414" y1="190" x2="438" y2="190" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#arrCyan)"/>
+    <rect x="442" y="166" width="76" height="48" rx="6" fill="#f5f3ff" stroke="#8b5cf6"/>
+    <text x="480" y="182" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₂ = 45 (홀)</text>
+    <text x="480" y="196" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=23(모순)</text>
+    <text x="480" y="208" fill="#4f46e5" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=25</text>
+    <line x1="518" y1="180" x2="544" y2="172" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <line x1="518" y1="200" x2="544" y2="208" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <rect x="548" y="161" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="177" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 44 (짝수 ✓)</text>
+    <rect x="548" y="192" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="208" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 87 (홀수 ✓)</text>
+
+    <!-- Final Conclusion Bar -->
+    <rect x="348" y="232" width="304" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="500" y="250" fill="#92400e" font-size="10.2" font-weight="800" text-anchor="middle">가능한 모든 a₁의 합 = (24 + 47) + (44 + 87) = 71 + 131</text>
+    <text x="500" y="268" fill="#b45309" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 정답: ∑a₁ = 202</text>
     </svg><figcaption style="margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55">▲ <b>[[2026학년도 10월 고3 22번] 홀짝에 따라 분기하는 귀납적 수열의 역추적]</b> 문항의 조건과 기하학적·구조적 관계를 한눈에 볼 수 있도록 의도적으로 작도한 시각적 도형 모델입니다.</figcaption></figure><h4>🗺️ [한눈에 보는 도식화 풀이 흐름도 (Schematic Solution Flowchart)]</h4><section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px"><table style="width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px"><tr><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 1 · 출발 조건</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 2 · 도형·공식 변환</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 3 · 핵심 식 도출</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 4 · 결합 및 계산</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$</span></td><td style="text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.1rem;padding:0 4px">⇒</td><td style="background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%"><b style="color:#047857;font-size:0.78rem;display:block;margin-bottom:4px">🎯 최종 정답</b><b style="color:#065f46;font-size:0.98rem">$202$</b></td></tr></table><table style="width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden"><thead><tr style="background:#f1f5f9;color:#0f172a"><th style="padding:8px 10px;border:1px solid #cbd5e1;width:14%">도식화 단계</th><th style="padding:8px 12px;border:1px solid #cbd5e1">핵심 개념 · 기하 도형 · 적용 공식</th><th style="padding:8px 10px;border:1px solid #cbd5e1;width:22%">도출 결과</th></tr></thead><tbody><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제1단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제2단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌿 2단계 · [두 번째 주기 해 찾기] (홀 $\to$ 짝 $\to$ 짝) 갈래에서 $a_3 = 25$ 확인하기 ⇒ $25$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제3단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제4단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌱 4단계 · [첫째항 역추적 ①] $a_2 = 25$에서 가능한 두 개의 $a_1$ 구하기 ⇒ $71$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제5단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌳 5단계 · [한 칸 역추적 ②] $a_3 = 25$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $45$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제6단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제7단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">💎 7단계 · [첫째항 역추적 ②: 홀수] $a_2 = 45$에서 홀수인 $a_1$ 구하기 ⇒ $87$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">제8단계</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">정답: $202$</td></tr></tbody></table></section>
 <h4>📐 [단계별 상세 풀이 전개]</h4>
 <p>
@@ -2342,40 +2479,69 @@ mjx-container:not([display="true"]) {
 <h4>📋 [Problem Analysis & Core Concepts]</h4>
 <p>This problem requires finding the periodic points satisfying $a_3 = a_6$ under a parity-branching recurrence, then backtracking to $a_1$.</p>
 
-<h4>🎨 [Visual Geometric & Conceptual Diagram]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,99,184,0.06)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#006398"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#059669"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#be123c"/></marker></defs><rect width="680" height="290" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#006398" font-size="11.8" font-weight="800" font-family="sans-serif">📐 [Intentional Visual Model] C261022</text><text x="656" y="31" fill="#047857" font-size="11.8" font-weight="800" text-anchor="end" font-family="sans-serif">Answer: 202</text>
-    <rect x="20" y="52" width="365" height="226" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
-    
-        <rect x="45" y="145" width="68" height="34" rx="8" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.8"/>
-        <text x="79" y="166" fill="#b45309" font-size="11" font-weight="800" text-anchor="middle">기준 상태</text>
-        <line x1="113" y1="155" x2="168" y2="108" stroke="#34d399" stroke-width="2" marker-end="url(#arrGreen)"/>
-        <line x1="113" y1="170" x2="168" y2="212" stroke="#fb7185" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrCoral)"/>
-        <rect x="172" y="88" width="82" height="36" rx="8" fill="rgba(52,211,153,0.2)" stroke="#34d399" stroke-width="1.8"/>
-        <text x="213" y="110" fill="#047857" font-size="10.5" font-weight="800" text-anchor="middle">경로 ① (유효)</text>
-        <rect x="172" y="195" width="82" height="36" rx="8" fill="rgba(251,113,133,0.15)" stroke="#fb7185" stroke-width="1.5"/>
-        <text x="213" y="217" fill="#be123c" font-size="10.5" font-weight="700" text-anchor="middle">경로 ② (제외)</text>
-        <line x1="254" y1="106" x2="292" y2="82" stroke="#34d399" stroke-width="2" marker-end="url(#arrGreen)"/>
-        <line x1="254" y1="106" x2="292" y2="136" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
-        <rect x="296" y="65" width="76" height="34" rx="7" fill="rgba(52,211,153,0.28)" stroke="#34d399" stroke-width="2"/>
-        <text x="334" y="86" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">해 ① 확정</text>
-        <rect x="296" y="120" width="76" height="34" rx="7" fill="rgba(56,189,248,0.22)" stroke="#38bdf8" stroke-width="1.8"/>
-        <text x="334" y="141" fill="#006398" font-size="10.5" font-weight="800" text-anchor="middle">해 ② 확정</text>
-        <text x="205" y="262" fill="#b45309" font-size="11" font-weight="800" text-anchor="middle">상태 전이 · 홀짝 분기 · 역추적 트리 도형</text>
-        
-    
-    <rect x="400" y="52" width="260" height="226" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="530" y="74" fill="#006398" font-size="12" font-weight="800" text-anchor="middle">도식화 핵심 구조 및 수치</text>
-    <rect x="414" y="86" width="232" height="42" rx="7" fill="#eff6ff" stroke="#93c5fd"/>
-    <text x="530" y="103" fill="#006398" font-size="10.5" font-weight="700" text-anchor="middle">① 주어진 조건 · 기하 구조</text>
-    <text x="530" y="120" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">a_3 = 15(홀수)일 때 a_4, a_5, ⇒ 15</text>
-    <rect x="414" y="136" width="232" height="42" rx="7" fill="#f5f3ff" stroke="#c4b5fd"/>
-    <text x="530" y="153" fill="#4f46e5" font-size="10.5" font-weight="700" text-anchor="middle">② 핵심 도형 성질 · 변환 공식</text>
-    <text x="530" y="170" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">(홀 → 짝 → 짝) 갈래에서 a_3 = 25 ⇒ 25</text>
-    <rect x="414" y="186" width="232" height="40" rx="7" fill="#ecfdf5" stroke="#6ee7b7"/>
-    <text x="530" y="202" fill="#047857" font-size="10.5" font-weight="700" text-anchor="middle">③ 결정적 관계식 · 수치 도출</text>
-    <text x="530" y="218" fill="#1e293b" font-size="10.2" font-weight="800" text-anchor="middle">네 개의 a_1 in 24, 47, 44, ⇒ 202</text>
-    <rect x="414" y="233" width="232" height="35" rx="7" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="530" y="255" fill="#b45309" font-size="12" font-weight="900" text-anchor="middle">🎯 최종 결론: 202</text>
-    
+<h4>🎨 [Visual Geometric & Conceptual Diagram]</h4><figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)"><defs><pattern id="grid20" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,99,184,0.06)" stroke-width="1"/></pattern><marker id="arrCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#006398"/></marker><marker id="arrGold" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#d97706"/></marker><marker id="arrGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#059669"/></marker><marker id="arrCoral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#be123c"/></marker></defs><rect width="680" height="300" fill="url(#grid20)" rx="12"/><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#006398" font-size="11.8" font-weight="800" font-family="sans-serif">📐 [Visual Backtracking Tree] [Oct #22] Period-3 Branches (a₃ = 15, 25) &amp; Backtracking to a₁</text><text x="656" y="31" fill="#047857" font-size="11.8" font-weight="800" text-anchor="end" font-family="sans-serif">∑a₁ = 24+47+44+87 = 202</text>
+    <!-- LEFT PANEL: Periodicity a3 = a6 Parity Branching -->
+    <rect x="16" y="50" width="308" height="236" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="170" y="70" fill="#131b2e" font-size="11.5" font-weight="800" text-anchor="middle">① 주기 조건 (a₃ = a₆) · 홀짝 갈래 탐색</text>
+    <rect x="28" y="78" width="284" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="170" y="94" fill="#006398" font-size="9.8" font-weight="800" text-anchor="middle">홀수: aₙ₊₁ = (aₙ+1)/2 + n  |  짝수: aₙ₊₁ = aₙ + n (항상 증가)</text>
+
+    <!-- Branch 1: a3=15 -->
+    <rect x="28" y="110" width="284" height="62" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="40" y="128" fill="#047857" font-size="10.5" font-weight="800">경로 A (홀 → 홀 → 짝): (a₃+1)/2+3 → 홀수</text>
+    <text x="40" y="146" fill="#1e293b" font-size="11" font-weight="800">a₃ = 15(홀) ➔ a₄ = 11(홀) ➔ a₅ = 10(짝) ➔ a₆ = 15</text>
+    <text x="40" y="163" fill="#059669" font-size="10" font-weight="800">✓ 첫 번째 주기 해: a₃ = 15 확정!</text>
+
+    <!-- Branch 2: a3=25 -->
+    <rect x="28" y="180" width="284" height="62" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="40" y="198" fill="#4f46e5" font-size="10.5" font-weight="800">경로 B (홀 → 짝 → 짝): (a₃+1)/2+12 = a₃</text>
+    <text x="40" y="216" fill="#1e293b" font-size="11" font-weight="800">a₃ = 25(홀) ➔ a₄ = 16(짝) ➔ a₅ = 20(짝) ➔ a₆ = 25</text>
+    <text x="40" y="233" fill="#4f46e5" font-size="10" font-weight="800">✓ 두 번째 주기 해: a₃ = 25 확정!</text>
+
+    <text x="170" y="274" fill="#64748b" font-size="9.8" font-weight="700" text-anchor="middle">※ a₃가 짝수이면 a₃ &lt; a₄ &lt; a₅ &lt; a₆이므로 a₃ = a₆ 불가</text>
+
+    <!-- RIGHT PANEL: Backtracking Tree a3 -> a2 -> a1 -->
+    <rect x="336" y="50" width="328" height="236" rx="12" fill="#f8fafc" stroke="#006398" stroke-width="1.5"/>
+    <text x="500" y="70" fill="#006398" font-size="11.5" font-weight="800" text-anchor="middle">② 역추적 분기 트리 (a₃ ➔ a₂ ➔ a₁)</text>
+
+    <!-- Tree 1: From a3 = 15 -->
+    <rect x="348" y="80" width="304" height="68" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
+    <rect x="356" y="96" width="58" height="36" rx="6" fill="#dcfce7" stroke="#10b981"/>
+    <text x="385" y="112" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">a₃ = 15</text>
+    <text x="385" y="125" fill="#047857" font-size="9" font-weight="700" text-anchor="middle">(경로 A)</text>
+    <line x1="414" y1="114" x2="438" y2="114" stroke="#059669" stroke-width="1.8" marker-end="url(#arrGreen)"/>
+    <rect x="442" y="90" width="76" height="48" rx="6" fill="#ecfdf5" stroke="#10b981"/>
+    <text x="480" y="106" fill="#047857" font-size="10" font-weight="800" text-anchor="middle">a₂ = 25 (홀)</text>
+    <text x="480" y="120" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=13(모순)</text>
+    <text x="480" y="132" fill="#059669" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=15</text>
+    <line x1="518" y1="104" x2="544" y2="96" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <line x1="518" y1="124" x2="544" y2="132" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <rect x="548" y="85" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="101" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 24 (짝수 ✓)</text>
+    <rect x="548" y="116" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="132" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 47 (홀수 ✓)</text>
+
+    <!-- Tree 2: From a3 = 25 -->
+    <rect x="348" y="156" width="304" height="68" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <rect x="356" y="172" width="58" height="36" rx="6" fill="#ede9fe" stroke="#8b5cf6"/>
+    <text x="385" y="188" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₃ = 25</text>
+    <text x="385" y="201" fill="#4f46e5" font-size="9" font-weight="700" text-anchor="middle">(경로 B)</text>
+    <line x1="414" y1="190" x2="438" y2="190" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#arrCyan)"/>
+    <rect x="442" y="166" width="76" height="48" rx="6" fill="#f5f3ff" stroke="#8b5cf6"/>
+    <text x="480" y="182" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₂ = 45 (홀)</text>
+    <text x="480" y="196" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=23(모순)</text>
+    <text x="480" y="208" fill="#4f46e5" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=25</text>
+    <line x1="518" y1="180" x2="544" y2="172" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <line x1="518" y1="200" x2="544" y2="208" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
+    <rect x="548" y="161" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="177" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 44 (짝수 ✓)</text>
+    <rect x="548" y="192" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
+    <text x="596" y="208" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 87 (홀수 ✓)</text>
+
+    <!-- Final Conclusion Bar -->
+    <rect x="348" y="232" width="304" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="500" y="250" fill="#92400e" font-size="10.2" font-weight="800" text-anchor="middle">가능한 모든 a₁의 합 = (24 + 47) + (44 + 87) = 71 + 131</text>
+    <text x="500" y="268" fill="#b45309" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 정답: ∑a₁ = 202</text>
     </svg><figcaption style="margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55">▲ Intentionally constructed geometric & visual model illustrating the core mathematical relationships of <b>[C261022]</b>.</figcaption></figure><h4>🗺️ [At-a-Glance Schematic Solution Flowchart]</h4><section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px"><table style="width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px"><tr><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 1 · Given Condition</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 2 · Visual/Formula Transform</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 3 · Key Derivation</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%"><b style="color:#006398;font-size:0.78rem;display:block;margin-bottom:4px">STEP 4 · Synthesis</b><span style="color:#1e293b;font-size:0.86rem;line-height:1.45">🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$</span></td><td style="text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.1rem;padding:0 4px">⇒</td><td style="background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%"><b style="color:#047857;font-size:0.78rem;display:block;margin-bottom:4px">🎯 최종 정답</b><b style="color:#065f46;font-size:0.98rem">$202$</b></td></tr></table><table style="width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden"><thead><tr style="background:#f1f5f9;color:#0f172a"><th style="padding:8px 10px;border:1px solid #cbd5e1;width:14%">Schematic Stage</th><th style="padding:8px 12px;border:1px solid #cbd5e1">Core Concept · Geometric Model · Formula</th><th style="padding:8px 10px;border:1px solid #cbd5e1;width:22%">Derived Result</th></tr></thead><tbody><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 1</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 2</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌿 2단계 · [두 번째 주기 해 찾기] (홀 $\to$ 짝 $\to$ 짝) 갈래에서 $a_3 = 25$ 확인하기 ⇒ $25$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 3</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 4</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌱 4단계 · [첫째항 역추적 ①] $a_2 = 25$에서 가능한 두 개의 $a_1$ 구하기 ⇒ $71$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 5</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌳 5단계 · [한 칸 역추적 ②] $a_3 = 25$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $45$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 6</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 7</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">💎 7단계 · [첫째항 역추적 ②: 홀수] $a_2 = 45$에서 홀수인 $a_1$ 구하기 ⇒ $87$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">다음 단계 연결 ➔</td></tr><tr><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap">Step 8</td><td style="padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5">🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$</td><td style="padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center">정답: $202$</td></tr></tbody></table></section>
 <h4>📐 [Step-by-Step Rigorous Derivation]</h4>
 <p>
@@ -2410,40 +2576,69 @@ mjx-container:not([display="true"]) {
 </div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$a_3 = a_6$을 만족하는 홀수 $a_3$는 $15$ ($15\to 11\to 10\to 15$)와 $25$ ($25\to 16\to 20\to 25$)이고, 이를 역추적하면 $a_2 \in \{25, 45\}$, 다시 역추적하면 $a_1 \in \{24, 47, 44, 87\}$이므로 합은 $202$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed #cbd5e1;margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
 &lt;p&gt;본 문항은 공통 영역 최고난도(22번) 문항으로, &lt;b&gt;홀짝 분기 귀납적 정의에서 $a_3 = a_6$이 되는 주기 해를 찾고 첫째항 $a_1$까지 역추적&lt;/b&gt;하는 문제입니다.&lt;/p&gt;
 
-&lt;h4&gt;🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 290&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(0,99,184,0.06)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#006398&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#d97706&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#059669&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#be123c&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;290&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#006398&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [의도적 도형·시각화 모델] [10월 22번] 홀짝에 따라 분기하는 귀납적 수열의 역추적&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#047857&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;Answer: 202&lt;/text&gt;
-    &lt;rect x=&quot;20&quot; y=&quot;52&quot; width=&quot;365&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#ffffff&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot;/&gt;
-    
-        &lt;rect x=&quot;45&quot; y=&quot;145&quot; width=&quot;68&quot; height=&quot;34&quot; rx=&quot;8&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;1.8&quot;/&gt;
-        &lt;text x=&quot;79&quot; y=&quot;166&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;기준 상태&lt;/text&gt;
-        &lt;line x1=&quot;113&quot; y1=&quot;155&quot; x2=&quot;168&quot; y2=&quot;108&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrGreen)&quot;/&gt;
-        &lt;line x1=&quot;113&quot; y1=&quot;170&quot; x2=&quot;168&quot; y2=&quot;212&quot; stroke=&quot;#fb7185&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;4,3&quot; marker-end=&quot;url(#arrCoral)&quot;/&gt;
-        &lt;rect x=&quot;172&quot; y=&quot;88&quot; width=&quot;82&quot; height=&quot;36&quot; rx=&quot;8&quot; fill=&quot;rgba(52,211,153,0.2)&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;1.8&quot;/&gt;
-        &lt;text x=&quot;213&quot; y=&quot;110&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;경로 ① (유효)&lt;/text&gt;
-        &lt;rect x=&quot;172&quot; y=&quot;195&quot; width=&quot;82&quot; height=&quot;36&quot; rx=&quot;8&quot; fill=&quot;rgba(251,113,133,0.15)&quot; stroke=&quot;#fb7185&quot; stroke-width=&quot;1.5&quot;/&gt;
-        &lt;text x=&quot;213&quot; y=&quot;217&quot; fill=&quot;#be123c&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;경로 ② (제외)&lt;/text&gt;
-        &lt;line x1=&quot;254&quot; y1=&quot;106&quot; x2=&quot;292&quot; y2=&quot;82&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrGreen)&quot;/&gt;
-        &lt;line x1=&quot;254&quot; y1=&quot;106&quot; x2=&quot;292&quot; y2=&quot;136&quot; stroke=&quot;#38bdf8&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
-        &lt;rect x=&quot;296&quot; y=&quot;65&quot; width=&quot;76&quot; height=&quot;34&quot; rx=&quot;7&quot; fill=&quot;rgba(52,211,153,0.28)&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot;/&gt;
-        &lt;text x=&quot;334&quot; y=&quot;86&quot; fill=&quot;#065f46&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;해 ① 확정&lt;/text&gt;
-        &lt;rect x=&quot;296&quot; y=&quot;120&quot; width=&quot;76&quot; height=&quot;34&quot; rx=&quot;7&quot; fill=&quot;rgba(56,189,248,0.22)&quot; stroke=&quot;#38bdf8&quot; stroke-width=&quot;1.8&quot;/&gt;
-        &lt;text x=&quot;334&quot; y=&quot;141&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;해 ② 확정&lt;/text&gt;
-        &lt;text x=&quot;205&quot; y=&quot;262&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;상태 전이 · 홀짝 분기 · 역추적 트리 도형&lt;/text&gt;
-        
-    
-    &lt;rect x=&quot;400&quot; y=&quot;52&quot; width=&quot;260&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#f8fafc&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;74&quot; fill=&quot;#006398&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;도식화 핵심 구조 및 수치&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;86&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#93c5fd&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;103&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;① 주어진 조건 · 기하 구조&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;120&quot; fill=&quot;#1e293b&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a_3 = 15(홀수)일 때 a_4, a_5, ⇒ 15&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;136&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;#c4b5fd&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;153&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;② 핵심 도형 성질 · 변환 공식&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;170&quot; fill=&quot;#1e293b&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(홀 → 짝 → 짝) 갈래에서 a_3 = 25 ⇒ 25&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;186&quot; width=&quot;232&quot; height=&quot;40&quot; rx=&quot;7&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#6ee7b7&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;202&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;③ 결정적 관계식 · 수치 도출&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;218&quot; fill=&quot;#1e293b&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;네 개의 a_1 in 24, 47, 44, ⇒ 202&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;233&quot; width=&quot;232&quot; height=&quot;35&quot; rx=&quot;7&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#b45309&quot; font-size=&quot;12&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: 202&lt;/text&gt;
-    
+&lt;h4&gt;🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 300&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(0,99,184,0.06)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#006398&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#d97706&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#059669&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#be123c&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;300&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#006398&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [시각적 역추적 트리 모델] [10월 22번] a₃ = a₆ 주기 분기(15, 25) &amp;amp; a₂ → a₁ 역추적 분기 트리&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#047857&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;∑a₁ = 24+47+44+87 = 202&lt;/text&gt;
+    &lt;!-- LEFT PANEL: Periodicity a3 = a6 Parity Branching --&gt;
+    &lt;rect x=&quot;16&quot; y=&quot;50&quot; width=&quot;308&quot; height=&quot;236&quot; rx=&quot;12&quot; fill=&quot;#ffffff&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;170&quot; y=&quot;70&quot; fill=&quot;#131b2e&quot; font-size=&quot;11.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;① 주기 조건 (a₃ = a₆) · 홀짝 갈래 탐색&lt;/text&gt;
+    &lt;rect x=&quot;28&quot; y=&quot;78&quot; width=&quot;284&quot; height=&quot;24&quot; rx=&quot;6&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#93c5fd&quot;/&gt;
+    &lt;text x=&quot;170&quot; y=&quot;94&quot; fill=&quot;#006398&quot; font-size=&quot;9.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;홀수: aₙ₊₁ = (aₙ+1)/2 + n  |  짝수: aₙ₊₁ = aₙ + n (항상 증가)&lt;/text&gt;
+
+    &lt;!-- Branch 1: a3=15 --&gt;
+    &lt;rect x=&quot;28&quot; y=&quot;110&quot; width=&quot;284&quot; height=&quot;62&quot; rx=&quot;8&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#10b981&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;40&quot; y=&quot;128&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot;&gt;경로 A (홀 → 홀 → 짝): (a₃+1)/2+3 → 홀수&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;146&quot; fill=&quot;#1e293b&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;a₃ = 15(홀) ➔ a₄ = 11(홀) ➔ a₅ = 10(짝) ➔ a₆ = 15&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;163&quot; fill=&quot;#059669&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot;&gt;✓ 첫 번째 주기 해: a₃ = 15 확정!&lt;/text&gt;
+
+    &lt;!-- Branch 2: a3=25 --&gt;
+    &lt;rect x=&quot;28&quot; y=&quot;180&quot; width=&quot;284&quot; height=&quot;62&quot; rx=&quot;8&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;#8b5cf6&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;40&quot; y=&quot;198&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot;&gt;경로 B (홀 → 짝 → 짝): (a₃+1)/2+12 = a₃&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;216&quot; fill=&quot;#1e293b&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;a₃ = 25(홀) ➔ a₄ = 16(짝) ➔ a₅ = 20(짝) ➔ a₆ = 25&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;233&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot;&gt;✓ 두 번째 주기 해: a₃ = 25 확정!&lt;/text&gt;
+
+    &lt;text x=&quot;170&quot; y=&quot;274&quot; fill=&quot;#64748b&quot; font-size=&quot;9.8&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;※ a₃가 짝수이면 a₃ &amp;lt; a₄ &amp;lt; a₅ &amp;lt; a₆이므로 a₃ = a₆ 불가&lt;/text&gt;
+
+    &lt;!-- RIGHT PANEL: Backtracking Tree a3 -&gt; a2 -&gt; a1 --&gt;
+    &lt;rect x=&quot;336&quot; y=&quot;50&quot; width=&quot;328&quot; height=&quot;236&quot; rx=&quot;12&quot; fill=&quot;#f8fafc&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;500&quot; y=&quot;70&quot; fill=&quot;#006398&quot; font-size=&quot;11.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;② 역추적 분기 트리 (a₃ ➔ a₂ ➔ a₁)&lt;/text&gt;
+
+    &lt;!-- Tree 1: From a3 = 15 --&gt;
+    &lt;rect x=&quot;348&quot; y=&quot;80&quot; width=&quot;304&quot; height=&quot;68&quot; rx=&quot;8&quot; fill=&quot;#ffffff&quot; stroke=&quot;#10b981&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;rect x=&quot;356&quot; y=&quot;96&quot; width=&quot;58&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#dcfce7&quot; stroke=&quot;#10b981&quot;/&gt;
+    &lt;text x=&quot;385&quot; y=&quot;112&quot; fill=&quot;#065f46&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₃ = 15&lt;/text&gt;
+    &lt;text x=&quot;385&quot; y=&quot;125&quot; fill=&quot;#047857&quot; font-size=&quot;9&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;(경로 A)&lt;/text&gt;
+    &lt;line x1=&quot;414&quot; y1=&quot;114&quot; x2=&quot;438&quot; y2=&quot;114&quot; stroke=&quot;#059669&quot; stroke-width=&quot;1.8&quot; marker-end=&quot;url(#arrGreen)&quot;/&gt;
+    &lt;rect x=&quot;442&quot; y=&quot;90&quot; width=&quot;76&quot; height=&quot;48&quot; rx=&quot;6&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#10b981&quot;/&gt;
+    &lt;text x=&quot;480&quot; y=&quot;106&quot; fill=&quot;#047857&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₂ = 25 (홀)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;120&quot; fill=&quot;#be123c&quot; font-size=&quot;8.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;짝수 a₂=13(모순)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;132&quot; fill=&quot;#059669&quot; font-size=&quot;8.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(a₂+1)/2+2=15&lt;/text&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;104&quot; x2=&quot;544&quot; y2=&quot;96&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;124&quot; x2=&quot;544&quot; y2=&quot;132&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;85&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;101&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 24 (짝수 ✓)&lt;/text&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;116&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;132&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 47 (홀수 ✓)&lt;/text&gt;
+
+    &lt;!-- Tree 2: From a3 = 25 --&gt;
+    &lt;rect x=&quot;348&quot; y=&quot;156&quot; width=&quot;304&quot; height=&quot;68&quot; rx=&quot;8&quot; fill=&quot;#ffffff&quot; stroke=&quot;#8b5cf6&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;rect x=&quot;356&quot; y=&quot;172&quot; width=&quot;58&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#ede9fe&quot; stroke=&quot;#8b5cf6&quot;/&gt;
+    &lt;text x=&quot;385&quot; y=&quot;188&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₃ = 25&lt;/text&gt;
+    &lt;text x=&quot;385&quot; y=&quot;201&quot; fill=&quot;#4f46e5&quot; font-size=&quot;9&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;(경로 B)&lt;/text&gt;
+    &lt;line x1=&quot;414&quot; y1=&quot;190&quot; x2=&quot;438&quot; y2=&quot;190&quot; stroke=&quot;#4f46e5&quot; stroke-width=&quot;1.8&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;rect x=&quot;442&quot; y=&quot;166&quot; width=&quot;76&quot; height=&quot;48&quot; rx=&quot;6&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;#8b5cf6&quot;/&gt;
+    &lt;text x=&quot;480&quot; y=&quot;182&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₂ = 45 (홀)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;196&quot; fill=&quot;#be123c&quot; font-size=&quot;8.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;짝수 a₂=23(모순)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;208&quot; fill=&quot;#4f46e5&quot; font-size=&quot;8.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(a₂+1)/2+2=25&lt;/text&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;180&quot; x2=&quot;544&quot; y2=&quot;172&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;200&quot; x2=&quot;544&quot; y2=&quot;208&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;161&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;177&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 44 (짝수 ✓)&lt;/text&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;192&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;208&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 87 (홀수 ✓)&lt;/text&gt;
+
+    &lt;!-- Final Conclusion Bar --&gt;
+    &lt;rect x=&quot;348&quot; y=&quot;232&quot; width=&quot;304&quot; height=&quot;44&quot; rx=&quot;8&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot; stroke-width=&quot;1.8&quot;/&gt;
+    &lt;text x=&quot;500&quot; y=&quot;250&quot; fill=&quot;#92400e&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;가능한 모든 a₁의 합 = (24 + 47) + (44 + 87) = 71 + 131&lt;/text&gt;
+    &lt;text x=&quot;500&quot; y=&quot;268&quot; fill=&quot;#b45309&quot; font-size=&quot;12.5&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 정답: ∑a₁ = 202&lt;/text&gt;
     &lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ &lt;b&gt;[[2026학년도 10월 고3 22번] 홀짝에 따라 분기하는 귀납적 수열의 역추적]&lt;/b&gt; 문항의 조건과 기하학적·구조적 관계를 한눈에 볼 수 있도록 의도적으로 작도한 시각적 도형 모델입니다.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [한눈에 보는 도식화 풀이 흐름도 (Schematic Solution Flowchart)]&lt;/h4&gt;&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · 출발 조건&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · 도형·공식 변환&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · 핵심 식 도출&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 4 · 결합 및 계산&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;🎯 최종 정답&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.98rem&quot;&gt;$202$&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden&quot;&gt;&lt;thead&gt;&lt;tr style=&quot;background:#f1f5f9;color:#0f172a&quot;&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:14%&quot;&gt;도식화 단계&lt;/th&gt;&lt;th style=&quot;padding:8px 12px;border:1px solid #cbd5e1&quot;&gt;핵심 개념 · 기하 도형 · 적용 공식&lt;/th&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:22%&quot;&gt;도출 결과&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제1단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제2단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌿 2단계 · [두 번째 주기 해 찾기] (홀 $\to$ 짝 $\to$ 짝) 갈래에서 $a_3 = 25$ 확인하기 ⇒ $25$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제3단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제4단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌱 4단계 · [첫째항 역추적 ①] $a_2 = 25$에서 가능한 두 개의 $a_1$ 구하기 ⇒ $71$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제5단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌳 5단계 · [한 칸 역추적 ②] $a_3 = 25$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $45$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제6단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제7단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;💎 7단계 · [첫째항 역추적 ②: 홀수] $a_2 = 45$에서 홀수인 $a_1$ 구하기 ⇒ $87$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;제8단계&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;정답: $202$&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/section&gt;
 &lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
 &lt;p&gt;
@@ -2482,40 +2677,69 @@ mjx-container:not([display="true"]) {
 &lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;Solving $a_3 = a_6$ yields $a_3 \in \{15, 25\}$, backtracking to $a_2 \in \{25, 45\}$ and $a_1 \in \{24, 47, 44, 87\}$, whose sum is $202$.&lt;hr style=&quot;border:none;border-top:1px dashed #cbd5e1;margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;
 &lt;p&gt;This problem requires finding the periodic points satisfying $a_3 = a_6$ under a parity-branching recurrence, then backtracking to $a_1$.&lt;/p&gt;
 
-&lt;h4&gt;🎨 [Visual Geometric &amp; Conceptual Diagram]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 290&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(0,99,184,0.06)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#006398&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#d97706&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#059669&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#be123c&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;290&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#006398&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [Intentional Visual Model] C261022&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#047857&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;Answer: 202&lt;/text&gt;
-    &lt;rect x=&quot;20&quot; y=&quot;52&quot; width=&quot;365&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#ffffff&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot;/&gt;
-    
-        &lt;rect x=&quot;45&quot; y=&quot;145&quot; width=&quot;68&quot; height=&quot;34&quot; rx=&quot;8&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;1.8&quot;/&gt;
-        &lt;text x=&quot;79&quot; y=&quot;166&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;기준 상태&lt;/text&gt;
-        &lt;line x1=&quot;113&quot; y1=&quot;155&quot; x2=&quot;168&quot; y2=&quot;108&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrGreen)&quot;/&gt;
-        &lt;line x1=&quot;113&quot; y1=&quot;170&quot; x2=&quot;168&quot; y2=&quot;212&quot; stroke=&quot;#fb7185&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;4,3&quot; marker-end=&quot;url(#arrCoral)&quot;/&gt;
-        &lt;rect x=&quot;172&quot; y=&quot;88&quot; width=&quot;82&quot; height=&quot;36&quot; rx=&quot;8&quot; fill=&quot;rgba(52,211,153,0.2)&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;1.8&quot;/&gt;
-        &lt;text x=&quot;213&quot; y=&quot;110&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;경로 ① (유효)&lt;/text&gt;
-        &lt;rect x=&quot;172&quot; y=&quot;195&quot; width=&quot;82&quot; height=&quot;36&quot; rx=&quot;8&quot; fill=&quot;rgba(251,113,133,0.15)&quot; stroke=&quot;#fb7185&quot; stroke-width=&quot;1.5&quot;/&gt;
-        &lt;text x=&quot;213&quot; y=&quot;217&quot; fill=&quot;#be123c&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;경로 ② (제외)&lt;/text&gt;
-        &lt;line x1=&quot;254&quot; y1=&quot;106&quot; x2=&quot;292&quot; y2=&quot;82&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrGreen)&quot;/&gt;
-        &lt;line x1=&quot;254&quot; y1=&quot;106&quot; x2=&quot;292&quot; y2=&quot;136&quot; stroke=&quot;#38bdf8&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
-        &lt;rect x=&quot;296&quot; y=&quot;65&quot; width=&quot;76&quot; height=&quot;34&quot; rx=&quot;7&quot; fill=&quot;rgba(52,211,153,0.28)&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;2&quot;/&gt;
-        &lt;text x=&quot;334&quot; y=&quot;86&quot; fill=&quot;#065f46&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;해 ① 확정&lt;/text&gt;
-        &lt;rect x=&quot;296&quot; y=&quot;120&quot; width=&quot;76&quot; height=&quot;34&quot; rx=&quot;7&quot; fill=&quot;rgba(56,189,248,0.22)&quot; stroke=&quot;#38bdf8&quot; stroke-width=&quot;1.8&quot;/&gt;
-        &lt;text x=&quot;334&quot; y=&quot;141&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;해 ② 확정&lt;/text&gt;
-        &lt;text x=&quot;205&quot; y=&quot;262&quot; fill=&quot;#b45309&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;상태 전이 · 홀짝 분기 · 역추적 트리 도형&lt;/text&gt;
-        
-    
-    &lt;rect x=&quot;400&quot; y=&quot;52&quot; width=&quot;260&quot; height=&quot;226&quot; rx=&quot;10&quot; fill=&quot;#f8fafc&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;74&quot; fill=&quot;#006398&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;도식화 핵심 구조 및 수치&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;86&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#93c5fd&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;103&quot; fill=&quot;#006398&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;① 주어진 조건 · 기하 구조&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;120&quot; fill=&quot;#1e293b&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a_3 = 15(홀수)일 때 a_4, a_5, ⇒ 15&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;136&quot; width=&quot;232&quot; height=&quot;42&quot; rx=&quot;7&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;#c4b5fd&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;153&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;② 핵심 도형 성질 · 변환 공식&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;170&quot; fill=&quot;#1e293b&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(홀 → 짝 → 짝) 갈래에서 a_3 = 25 ⇒ 25&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;186&quot; width=&quot;232&quot; height=&quot;40&quot; rx=&quot;7&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#6ee7b7&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;202&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;③ 결정적 관계식 · 수치 도출&lt;/text&gt;
-    &lt;text x=&quot;530&quot; y=&quot;218&quot; fill=&quot;#1e293b&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;네 개의 a_1 in 24, 47, 44, ⇒ 202&lt;/text&gt;
-    &lt;rect x=&quot;414&quot; y=&quot;233&quot; width=&quot;232&quot; height=&quot;35&quot; rx=&quot;7&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot; stroke-width=&quot;1.5&quot;/&gt;
-    &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#b45309&quot; font-size=&quot;12&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: 202&lt;/text&gt;
-    
+&lt;h4&gt;🎨 [Visual Geometric &amp; Conceptual Diagram]&lt;/h4&gt;&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 300&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f6f3f5 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 16px rgba(19,27,46,0.06)&quot;&gt;&lt;defs&gt;&lt;pattern id=&quot;grid20&quot; width=&quot;20&quot; height=&quot;20&quot; patternUnits=&quot;userSpaceOnUse&quot;&gt;&lt;path d=&quot;M 20 0 L 0 0 0 20&quot; fill=&quot;none&quot; stroke=&quot;rgba(0,99,184,0.06)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/pattern&gt;&lt;marker id=&quot;arrCyan&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#006398&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGold&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#d97706&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrGreen&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#059669&quot;/&gt;&lt;/marker&gt;&lt;marker id=&quot;arrCoral&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;7&quot; refY=&quot;5&quot; markerWidth=&quot;6&quot; markerHeight=&quot;6&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M 0 1 L 8 5 L 0 9 z&quot; fill=&quot;#be123c&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect width=&quot;680&quot; height=&quot;300&quot; fill=&quot;url(#grid20)&quot; rx=&quot;12&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#006398&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [Visual Backtracking Tree] [Oct #22] Period-3 Branches (a₃ = 15, 25) &amp;amp; Backtracking to a₁&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#047857&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;∑a₁ = 24+47+44+87 = 202&lt;/text&gt;
+    &lt;!-- LEFT PANEL: Periodicity a3 = a6 Parity Branching --&gt;
+    &lt;rect x=&quot;16&quot; y=&quot;50&quot; width=&quot;308&quot; height=&quot;236&quot; rx=&quot;12&quot; fill=&quot;#ffffff&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;170&quot; y=&quot;70&quot; fill=&quot;#131b2e&quot; font-size=&quot;11.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;① 주기 조건 (a₃ = a₆) · 홀짝 갈래 탐색&lt;/text&gt;
+    &lt;rect x=&quot;28&quot; y=&quot;78&quot; width=&quot;284&quot; height=&quot;24&quot; rx=&quot;6&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#93c5fd&quot;/&gt;
+    &lt;text x=&quot;170&quot; y=&quot;94&quot; fill=&quot;#006398&quot; font-size=&quot;9.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;홀수: aₙ₊₁ = (aₙ+1)/2 + n  |  짝수: aₙ₊₁ = aₙ + n (항상 증가)&lt;/text&gt;
+
+    &lt;!-- Branch 1: a3=15 --&gt;
+    &lt;rect x=&quot;28&quot; y=&quot;110&quot; width=&quot;284&quot; height=&quot;62&quot; rx=&quot;8&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#10b981&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;40&quot; y=&quot;128&quot; fill=&quot;#047857&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot;&gt;경로 A (홀 → 홀 → 짝): (a₃+1)/2+3 → 홀수&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;146&quot; fill=&quot;#1e293b&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;a₃ = 15(홀) ➔ a₄ = 11(홀) ➔ a₅ = 10(짝) ➔ a₆ = 15&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;163&quot; fill=&quot;#059669&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot;&gt;✓ 첫 번째 주기 해: a₃ = 15 확정!&lt;/text&gt;
+
+    &lt;!-- Branch 2: a3=25 --&gt;
+    &lt;rect x=&quot;28&quot; y=&quot;180&quot; width=&quot;284&quot; height=&quot;62&quot; rx=&quot;8&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;#8b5cf6&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;40&quot; y=&quot;198&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10.5&quot; font-weight=&quot;800&quot;&gt;경로 B (홀 → 짝 → 짝): (a₃+1)/2+12 = a₃&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;216&quot; fill=&quot;#1e293b&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot;&gt;a₃ = 25(홀) ➔ a₄ = 16(짝) ➔ a₅ = 20(짝) ➔ a₆ = 25&lt;/text&gt;
+    &lt;text x=&quot;40&quot; y=&quot;233&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot;&gt;✓ 두 번째 주기 해: a₃ = 25 확정!&lt;/text&gt;
+
+    &lt;text x=&quot;170&quot; y=&quot;274&quot; fill=&quot;#64748b&quot; font-size=&quot;9.8&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;※ a₃가 짝수이면 a₃ &amp;lt; a₄ &amp;lt; a₅ &amp;lt; a₆이므로 a₃ = a₆ 불가&lt;/text&gt;
+
+    &lt;!-- RIGHT PANEL: Backtracking Tree a3 -&gt; a2 -&gt; a1 --&gt;
+    &lt;rect x=&quot;336&quot; y=&quot;50&quot; width=&quot;328&quot; height=&quot;236&quot; rx=&quot;12&quot; fill=&quot;#f8fafc&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;text x=&quot;500&quot; y=&quot;70&quot; fill=&quot;#006398&quot; font-size=&quot;11.5&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;② 역추적 분기 트리 (a₃ ➔ a₂ ➔ a₁)&lt;/text&gt;
+
+    &lt;!-- Tree 1: From a3 = 15 --&gt;
+    &lt;rect x=&quot;348&quot; y=&quot;80&quot; width=&quot;304&quot; height=&quot;68&quot; rx=&quot;8&quot; fill=&quot;#ffffff&quot; stroke=&quot;#10b981&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;rect x=&quot;356&quot; y=&quot;96&quot; width=&quot;58&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#dcfce7&quot; stroke=&quot;#10b981&quot;/&gt;
+    &lt;text x=&quot;385&quot; y=&quot;112&quot; fill=&quot;#065f46&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₃ = 15&lt;/text&gt;
+    &lt;text x=&quot;385&quot; y=&quot;125&quot; fill=&quot;#047857&quot; font-size=&quot;9&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;(경로 A)&lt;/text&gt;
+    &lt;line x1=&quot;414&quot; y1=&quot;114&quot; x2=&quot;438&quot; y2=&quot;114&quot; stroke=&quot;#059669&quot; stroke-width=&quot;1.8&quot; marker-end=&quot;url(#arrGreen)&quot;/&gt;
+    &lt;rect x=&quot;442&quot; y=&quot;90&quot; width=&quot;76&quot; height=&quot;48&quot; rx=&quot;6&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#10b981&quot;/&gt;
+    &lt;text x=&quot;480&quot; y=&quot;106&quot; fill=&quot;#047857&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₂ = 25 (홀)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;120&quot; fill=&quot;#be123c&quot; font-size=&quot;8.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;짝수 a₂=13(모순)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;132&quot; fill=&quot;#059669&quot; font-size=&quot;8.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(a₂+1)/2+2=15&lt;/text&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;104&quot; x2=&quot;544&quot; y2=&quot;96&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;124&quot; x2=&quot;544&quot; y2=&quot;132&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;85&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;101&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 24 (짝수 ✓)&lt;/text&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;116&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;132&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 47 (홀수 ✓)&lt;/text&gt;
+
+    &lt;!-- Tree 2: From a3 = 25 --&gt;
+    &lt;rect x=&quot;348&quot; y=&quot;156&quot; width=&quot;304&quot; height=&quot;68&quot; rx=&quot;8&quot; fill=&quot;#ffffff&quot; stroke=&quot;#8b5cf6&quot; stroke-width=&quot;1.5&quot;/&gt;
+    &lt;rect x=&quot;356&quot; y=&quot;172&quot; width=&quot;58&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#ede9fe&quot; stroke=&quot;#8b5cf6&quot;/&gt;
+    &lt;text x=&quot;385&quot; y=&quot;188&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₃ = 25&lt;/text&gt;
+    &lt;text x=&quot;385&quot; y=&quot;201&quot; fill=&quot;#4f46e5&quot; font-size=&quot;9&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;(경로 B)&lt;/text&gt;
+    &lt;line x1=&quot;414&quot; y1=&quot;190&quot; x2=&quot;438&quot; y2=&quot;190&quot; stroke=&quot;#4f46e5&quot; stroke-width=&quot;1.8&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;rect x=&quot;442&quot; y=&quot;166&quot; width=&quot;76&quot; height=&quot;48&quot; rx=&quot;6&quot; fill=&quot;#f5f3ff&quot; stroke=&quot;#8b5cf6&quot;/&gt;
+    &lt;text x=&quot;480&quot; y=&quot;182&quot; fill=&quot;#4f46e5&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₂ = 45 (홀)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;196&quot; fill=&quot;#be123c&quot; font-size=&quot;8.5&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;짝수 a₂=23(모순)&lt;/text&gt;
+    &lt;text x=&quot;480&quot; y=&quot;208&quot; fill=&quot;#4f46e5&quot; font-size=&quot;8.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(a₂+1)/2+2=25&lt;/text&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;180&quot; x2=&quot;544&quot; y2=&quot;172&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;line x1=&quot;518&quot; y1=&quot;200&quot; x2=&quot;544&quot; y2=&quot;208&quot; stroke=&quot;#006398&quot; stroke-width=&quot;1.6&quot; marker-end=&quot;url(#arrCyan)&quot;/&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;161&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;177&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 44 (짝수 ✓)&lt;/text&gt;
+    &lt;rect x=&quot;548&quot; y=&quot;192&quot; width=&quot;96&quot; height=&quot;25&quot; rx=&quot;5&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#006398&quot;/&gt;
+    &lt;text x=&quot;596&quot; y=&quot;208&quot; fill=&quot;#006398&quot; font-size=&quot;10&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;a₁ = 87 (홀수 ✓)&lt;/text&gt;
+
+    &lt;!-- Final Conclusion Bar --&gt;
+    &lt;rect x=&quot;348&quot; y=&quot;232&quot; width=&quot;304&quot; height=&quot;44&quot; rx=&quot;8&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot; stroke-width=&quot;1.8&quot;/&gt;
+    &lt;text x=&quot;500&quot; y=&quot;250&quot; fill=&quot;#92400e&quot; font-size=&quot;10.2&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;가능한 모든 a₁의 합 = (24 + 47) + (44 + 87) = 71 + 131&lt;/text&gt;
+    &lt;text x=&quot;500&quot; y=&quot;268&quot; fill=&quot;#b45309&quot; font-size=&quot;12.5&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 정답: ∑a₁ = 202&lt;/text&gt;
     &lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ Intentionally constructed geometric &amp; visual model illustrating the core mathematical relationships of &lt;b&gt;[C261022]&lt;/b&gt;.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [At-a-Glance Schematic Solution Flowchart]&lt;/h4&gt;&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · Given Condition&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · Visual/Formula Transform&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · Key Derivation&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 4 · Synthesis&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;🎯 최종 정답&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.98rem&quot;&gt;$202$&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden&quot;&gt;&lt;thead&gt;&lt;tr style=&quot;background:#f1f5f9;color:#0f172a&quot;&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:14%&quot;&gt;Schematic Stage&lt;/th&gt;&lt;th style=&quot;padding:8px 12px;border:1px solid #cbd5e1&quot;&gt;Core Concept · Geometric Model · Formula&lt;/th&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:22%&quot;&gt;Derived Result&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 1&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🔰 1단계 · [초등 홀짝 규칙 연습] $a_3 = 15$(홀수)일 때 $a_4, a_5, a_6$ 순서대로 구해보기 ⇒ $15$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 2&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌿 2단계 · [두 번째 주기 해 찾기] (홀 $\to$ 짝 $\to$ 짝) 갈래에서 $a_3 = 25$ 확인하기 ⇒ $25$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 3&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌱 3단계 · [한 칸 역추적 ①] $a_3 = 15$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $25$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 4&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌱 4단계 · [첫째항 역추적 ①] $a_2 = 25$에서 가능한 두 개의 $a_1$ 구하기 ⇒ $71$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 5&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌳 5단계 · [한 칸 역추적 ②] $a_3 = 25$가 되도록 하는 자연수 $a_2$ 구하기 ⇒ $45$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 6&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🌳 6단계 · [첫째항 역추적 ②: 짝수] $a_2 = 45$에서 짝수인 $a_1$ 구하기 ⇒ $44$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 7&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;💎 7단계 · [첫째항 역추적 ②: 홀수] $a_2 = 45$에서 홀수인 $a_1$ 구하기 ⇒ $87$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 8&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;🏆 8단계 · [최종 정답 완성] 네 개의 $a_1 \in \{24, 47, 44, 87\}$의 총합 구하기 ⇒ $202$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;정답: $202$&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/section&gt;
 &lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
 &lt;p&gt;
@@ -2666,113 +2890,6 @@ if (!window.toggleMinGgb) {
 <div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $202$</div>
 <button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 <!-- STITCH_FOOTER_START -->
-<!-- Gamification / Daily Streak Banner (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-streak-card">
-  <div class="stitch-streak-left">
-    <div class="stitch-flame-circle">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
-    </div>
-    <div class="stitch-streak-info">
-      <div class="stitch-streak-title-row">
-        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
-        <span class="stitch-lvl-badge">Lv.1 입문자</span>
-      </div>
-      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
-    </div>
-  </div>
-  <div class="stitch-streak-actions">
-    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
-      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
-    </button>
-    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('c261022')" title="즐겨찾기 및 오답노트">
-      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
-    </button>
-  </div>
-</div>
-
-<!-- Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-gateway-grid">
-  <div class="stitch-gateway-card">
-    <div class="stitch-gw-head">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
-      <div>
-        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
-        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
-      </div>
-    </div>
-    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
-    <div class="stitch-gw-actions">
-      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('c261022')">
-        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
-        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
-      </button>
-      <a href="../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
-        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
-        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="stitch-gateway-card">
-    <div class="stitch-gw-head">
-      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
-      <div>
-        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
-        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
-      </div>
-    </div>
-    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
-    <div class="stitch-gw-actions">
-      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="이름 또는 6자리 수업 코드 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
-      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
-        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
-      </button>
-    </div>
-    <div class="stitch-gw-links">
-      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
-        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
-        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
-      </a>
-      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
-        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
-        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<div class="stitch-dandelin-card">
-  <div class="stitch-card-head">
-    <div class="stitch-card-head-left">
-      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
-      <span>공식 엠블럼 Dandelin Spheres</span>
-    </div>
-    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
-  </div>
-  <div class="stitch-visual-canvas">
-    <div class="stitch-visual-banner" style="background-image: url('../assets/stitch_dandelin_hero.png')">
-      <div class="stitch-visual-overlay">
-        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
-        <p class="stitch-visual-headline"><span class="bilingual-ko">홀짝에 따라 분기하는 귀납적 수열의 역추적 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
-      </div>
-    </div>
-    <div class="stitch-visual-drawer">
-      <p class="stitch-visual-desc">
-        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~8단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
-        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
-      </p>
-      <div class="stitch-quote-box">
-        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
-        <p class="stitch-quote-text">
-          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
-          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="stitch-pack-banner">
   <div class="stitch-pack-left">
     <div class="stitch-pack-icon">
@@ -3238,8 +3355,8 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c261022';
-window._offlineBuildTime = '2026-10-27T07:59:20.459209+00:00';
-window._offlineHash = '266850fe';
+window._offlineBuildTime = '2026-10-27T08:06:54.473340+00:00';
+window._offlineHash = '89104566';
 window._offlineVersion = 'v2026.10.27';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c261022.html';
 
@@ -3264,8 +3381,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c261022';
-  var localBuildTime = window._offlineBuildTime || '2026-10-27T07:59:20.459209+00:00';
-  var localHash = window._offlineHash || '266850fe';
+  var localBuildTime = window._offlineBuildTime || '2026-10-27T08:06:54.473340+00:00';
+  var localHash = window._offlineHash || '89104566';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c261022.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
