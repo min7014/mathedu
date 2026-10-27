@@ -81,77 +81,123 @@ def _right_panel_svg(hdr: str, stroke_col: str, hdr_col: str, eq_label: str, pt1
 
 def _draw_c261022_svg(lang="ko") -> str:
     title = (
-        "📐 [시각적 역추적 트리 모델] [10월 22번] a₃ = a₆ 주기 분기(15, 25) & a₂ → a₁ 역추적 분기 트리"
+        "📐 [칠판 판서 원본 도식] [10월 22번] 0/1(짝/홀) 진리표 소거법 · Case 1~4 방정식 & a₁ = 2x-6, 4x-13"
         if lang == "ko"
-        else "📐 [Visual Backtracking Tree] [Oct #22] Period-3 Branches (a₃ = 15, 25) & Backtracking to a₁"
+        else "📐 [Whiteboard Solution] [Oct #22] 0/1 Parity Table Elimination · Case 1~4 & Direct Formulas a₁ = 2x-6, 4x-13"
     )
-    sub = "∑a₁ = 24+47+44+87 = 202"
+    sub = "24 + 44 + 47 + 87 = 202"
     inner = """
-    <!-- LEFT PANEL: Periodicity a3 = a6 Parity Branching -->
-    <rect x="16" y="50" width="308" height="236" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="170" y="70" fill="#131b2e" font-size="11.5" font-weight="800" text-anchor="middle">① 주기 조건 (a₃ = a₆) · 홀짝 갈래 탐색</text>
-    <rect x="28" y="78" width="284" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
-    <text x="170" y="94" fill="#006398" font-size="9.8" font-weight="800" text-anchor="middle">홀수: aₙ₊₁ = (aₙ+1)/2 + n  |  짝수: aₙ₊₁ = aₙ + n (항상 증가)</text>
+    <!-- LEFT PANEL: Photo 1 & 2 Left — (a3, a4, a5, a3) 0/1 Parity Table & Case 1~4 Equations -->
+    <rect x="12" y="48" width="356" height="240" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="190" y="67" fill="#131b2e" font-size="11.2" font-weight="800" text-anchor="middle">① (a₃, a₄, a₅, a₃) 홀짝 표(0:짝, 1:홀) &amp; Case 1~4 방정식</text>
 
-    <!-- Branch 1: a3=15 -->
-    <rect x="28" y="110" width="284" height="62" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
-    <text x="40" y="128" fill="#047857" font-size="10.5" font-weight="800">경로 A (홀 → 홀 → 짝): (a₃+1)/2+3 → 홀수</text>
-    <text x="40" y="146" fill="#1e293b" font-size="11" font-weight="800">a₃ = 15(홀) ➔ a₄ = 11(홀) ➔ a₅ = 10(짝) ➔ a₆ = 15</text>
-    <text x="40" y="163" fill="#059669" font-size="10" font-weight="800">✓ 첫 번째 주기 해: a₃ = 15 확정!</text>
+    <!-- 8-Row Binary Parity Table (Left Sub-box) -->
+    <rect x="20" y="75" width="122" height="204" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="46" y="91" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₃</text>
+    <text x="69" y="91" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₄</text>
+    <text x="92" y="91" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₅</text>
+    <text x="115" y="91" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₃</text>
+    <line x1="26" y1="96" x2="136" y2="96" stroke="#cbd5e1" stroke-width="1"/>
 
-    <!-- Branch 2: a3=25 -->
-    <rect x="28" y="180" width="284" height="62" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="40" y="198" fill="#4f46e5" font-size="10.5" font-weight="800">경로 B (홀 → 짝 → 짝): (a₃+1)/2+12 = a₃</text>
-    <text x="40" y="216" fill="#1e293b" font-size="11" font-weight="800">a₃ = 25(홀) ➔ a₄ = 16(짝) ➔ a₅ = 20(짝) ➔ a₆ = 25</text>
-    <text x="40" y="233" fill="#4f46e5" font-size="10" font-weight="800">✓ 두 번째 주기 해: a₃ = 25 확정!</text>
+    <!-- Row 1: 0 0 0 0 (crossed out) -->
+    <text x="81" y="112" fill="#94a3b8" font-size="9.8" font-weight="700" text-anchor="middle" letter-spacing="6">0 0 0 0</text>
+    <line x1="34" y1="108" x2="128" y2="108" stroke="#be123c" stroke-width="1.4"/>
+    <!-- Row 2: 0 0 1 0 (crossed out) -->
+    <text x="81" y="131" fill="#94a3b8" font-size="9.8" font-weight="700" text-anchor="middle" letter-spacing="6">0 0 1 0</text>
+    <line x1="34" y1="127" x2="128" y2="127" stroke="#be123c" stroke-width="1.4"/>
+    <!-- Row 3: 0 1 0 0 (crossed out) -->
+    <text x="81" y="150" fill="#94a3b8" font-size="9.8" font-weight="700" text-anchor="middle" letter-spacing="6">0 1 0 0</text>
+    <line x1="34" y1="146" x2="128" y2="146" stroke="#be123c" stroke-width="1.4"/>
+    <!-- Row 4: Case 1 -> 0 1 1 0 -->
+    <rect x="24" y="156" width="114" height="19" rx="4" fill="#fff1f2" stroke="#fda4af"/>
+    <text x="41" y="169" fill="#be123c" font-size="8.2" font-weight="800" text-anchor="middle">C1→</text>
+    <text x="93" y="169" fill="#1e293b" font-size="9.8" font-weight="800" text-anchor="middle" letter-spacing="4">0 1 1 0</text>
+    <!-- Row 5: Case 2 -> 1 0 0 1 -->
+    <rect x="24" y="179" width="114" height="19" rx="4" fill="#ecfdf5" stroke="#6ee7b7"/>
+    <text x="41" y="192" fill="#047857" font-size="8.2" font-weight="800" text-anchor="middle">C2→</text>
+    <text x="93" y="192" fill="#065f46" font-size="9.8" font-weight="900" text-anchor="middle" letter-spacing="4">1 0 0 1</text>
+    <!-- Row 6: 1 0 1 1 (crossed out) -->
+    <text x="81" y="213" fill="#94a3b8" font-size="9.8" font-weight="700" text-anchor="middle" letter-spacing="6">1 0 1 1</text>
+    <line x1="34" y1="209" x2="128" y2="209" stroke="#be123c" stroke-width="1.4"/>
+    <!-- Row 7: Case 3 -> 1 1 0 1 -->
+    <rect x="24" y="220" width="114" height="19" rx="4" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="41" y="233" fill="#006398" font-size="8.2" font-weight="800" text-anchor="middle">C3→</text>
+    <text x="93" y="233" fill="#006398" font-size="9.8" font-weight="900" text-anchor="middle" letter-spacing="4">1 1 0 1</text>
+    <!-- Row 8: Case 4 -> 1 1 1 1 -->
+    <rect x="24" y="243" width="114" height="19" rx="4" fill="#fff1f2" stroke="#fda4af"/>
+    <text x="41" y="256" fill="#be123c" font-size="8.2" font-weight="800" text-anchor="middle">C4→</text>
+    <text x="93" y="256" fill="#1e293b" font-size="9.8" font-weight="800" text-anchor="middle" letter-spacing="4">1 1 1 1</text>
+    <text x="81" y="274" fill="#64748b" font-size="8" font-weight="700" text-anchor="middle">짝수(0)+n 규칙 소거</text>
 
-    <text x="170" y="274" fill="#64748b" font-size="9.8" font-weight="700" text-anchor="middle">※ a₃가 짝수이면 a₃ &lt; a₄ &lt; a₅ &lt; a₆이므로 a₃ = a₆ 불가</text>
+    <!-- Case 1 ~ Case 4 Equations (Right Sub-box of Left Panel) -->
+    <!-- Case 1 -->
+    <rect x="148" y="75" width="212" height="46" rx="7" fill="#fff1f2" stroke="#fecdd3"/>
+    <text x="156" y="90" fill="#be123c" font-size="9.2" font-weight="800">Case 1 (0 1 1 0): ½((½((a₃+3)+1)+4)+1)+5 = a₃</text>
+    <text x="156" y="104" fill="#475569" font-size="9.5" font-weight="700">¼a₃ + 17/2 = a₃  ⇒  34 = 3a₃  (자연수 해 없음 ✕)</text>
 
-    <!-- RIGHT PANEL: Backtracking Tree a3 -> a2 -> a1 -->
-    <rect x="336" y="50" width="328" height="236" rx="12" fill="#f8fafc" stroke="#006398" stroke-width="1.5"/>
-    <text x="500" y="70" fill="#006398" font-size="11.5" font-weight="800" text-anchor="middle">② 역추적 분기 트리 (a₃ ➔ a₂ ➔ a₁)</text>
+    <!-- Case 2 -->
+    <rect x="148" y="126" width="212" height="48" rx="7" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="156" y="141" fill="#047857" font-size="9.2" font-weight="800">Case 2 (1 0 0 1): ((½(a₃+1)+3)+4)+5 = a₃</text>
+    <text x="156" y="156" fill="#065f46" font-size="10" font-weight="900">½a₃ + 25/2 = a₃  ⇒  a₃ = 25 (성립 ✓)</text>
 
-    <!-- Tree 1: From a3 = 15 -->
-    <rect x="348" y="80" width="304" height="68" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
-    <rect x="356" y="96" width="58" height="36" rx="6" fill="#dcfce7" stroke="#10b981"/>
-    <text x="385" y="112" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">a₃ = 15</text>
-    <text x="385" y="125" fill="#047857" font-size="9" font-weight="700" text-anchor="middle">(경로 A)</text>
-    <line x1="414" y1="114" x2="438" y2="114" stroke="#059669" stroke-width="1.8" marker-end="url(#arrGreen)"/>
-    <rect x="442" y="90" width="76" height="48" rx="6" fill="#ecfdf5" stroke="#10b981"/>
-    <text x="480" y="106" fill="#047857" font-size="10" font-weight="800" text-anchor="middle">a₂ = 25 (홀)</text>
-    <text x="480" y="120" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=13(모순)</text>
-    <text x="480" y="132" fill="#059669" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=15</text>
-    <line x1="518" y1="104" x2="544" y2="96" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
-    <line x1="518" y1="124" x2="544" y2="132" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
-    <rect x="548" y="85" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
-    <text x="596" y="101" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 24 (짝수 ✓)</text>
-    <rect x="548" y="116" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
-    <text x="596" y="132" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 47 (홀수 ✓)</text>
+    <!-- Case 3 -->
+    <rect x="148" y="179" width="212" height="48" rx="7" fill="#eff6ff" stroke="#006398" stroke-width="1.5"/>
+    <text x="156" y="194" fill="#006398" font-size="9.2" font-weight="800">Case 3 (1 1 0 1): (½((½(a₃+1)+3)+1)+4)+5 = a₃</text>
+    <text x="156" y="209" fill="#006398" font-size="10" font-weight="900">¼a₃ + 45/4 = a₃  ⇒  45 = 3a₃  ⇒  a₃ = 15 (✓)</text>
 
-    <!-- Tree 2: From a3 = 25 -->
-    <rect x="348" y="156" width="304" height="68" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
-    <rect x="356" y="172" width="58" height="36" rx="6" fill="#ede9fe" stroke="#8b5cf6"/>
-    <text x="385" y="188" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₃ = 25</text>
-    <text x="385" y="201" fill="#4f46e5" font-size="9" font-weight="700" text-anchor="middle">(경로 B)</text>
-    <line x1="414" y1="190" x2="438" y2="190" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#arrCyan)"/>
-    <rect x="442" y="166" width="76" height="48" rx="6" fill="#f5f3ff" stroke="#8b5cf6"/>
-    <text x="480" y="182" fill="#4f46e5" font-size="10" font-weight="800" text-anchor="middle">a₂ = 45 (홀)</text>
-    <text x="480" y="196" fill="#be123c" font-size="8.5" font-weight="700" text-anchor="middle">짝수 a₂=23(모순)</text>
-    <text x="480" y="208" fill="#4f46e5" font-size="8.8" font-weight="800" text-anchor="middle">(a₂+1)/2+2=25</text>
-    <line x1="518" y1="180" x2="544" y2="172" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
-    <line x1="518" y1="200" x2="544" y2="208" stroke="#006398" stroke-width="1.6" marker-end="url(#arrCyan)"/>
-    <rect x="548" y="161" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
-    <text x="596" y="177" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 44 (짝수 ✓)</text>
-    <rect x="548" y="192" width="96" height="25" rx="5" fill="#eff6ff" stroke="#006398"/>
-    <text x="596" y="208" fill="#006398" font-size="10" font-weight="800" text-anchor="middle">a₁ = 87 (홀수 ✓)</text>
+    <!-- Case 4 -->
+    <rect x="148" y="232" width="212" height="47" rx="7" fill="#fff1f2" stroke="#fecdd3"/>
+    <text x="156" y="247" fill="#be123c" font-size="9.2" font-weight="800">Case 4 (1 1 1 1): ½(½(½(a₃+1)+4)+5)+5 = a₃</text>
+    <text x="156" y="262" fill="#475569" font-size="9.5" font-weight="700">⅛a₃ + 69/8 = a₃  ⇒  69 = 7a₃  (자연수 해 없음 ✕)</text>
+
+    <!-- RIGHT PANEL: Photo 2 Right — (a1, a2, a3) Parity Table & Direct Formulas a1 = 2x-6, 4x-13 -->
+    <rect x="376" y="48" width="292" height="240" rx="12" fill="#f8fafc" stroke="#006398" stroke-width="1.5"/>
+    <text x="522" y="67" fill="#006398" font-size="11.2" font-weight="800" text-anchor="middle">② (a₁, a₂, a₃) 홀짝 표 &amp; a₃ = x ∈ {15, 25} 대입</text>
+
+    <!-- (a1, a2, a3) 4-Row Parity Table -->
+    <rect x="384" y="75" width="82" height="106" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="401" y="91" fill="#006398" font-size="9.8" font-weight="800" text-anchor="middle">a₁</text>
+    <text x="425" y="91" fill="#006398" font-size="9.8" font-weight="800" text-anchor="middle">a₂</text>
+    <text x="449" y="91" fill="#006398" font-size="9.8" font-weight="800" text-anchor="middle">a₃</text>
+    <line x1="389" y1="96" x2="461" y2="96" stroke="#cbd5e1"/>
+    <!-- 0 0 1 (crossed out) -->
+    <text x="425" y="112" fill="#94a3b8" font-size="9.8" font-weight="700" text-anchor="middle" letter-spacing="5">0 0 1</text>
+    <line x1="392" y1="108" x2="458" y2="108" stroke="#be123c" stroke-width="1.4"/>
+    <!-- 0 1 1 (valid) -->
+    <rect x="388" y="118" width="74" height="18" rx="4" fill="#ecfdf5" stroke="#10b981"/>
+    <text x="425" y="131" fill="#065f46" font-size="9.8" font-weight="900" text-anchor="middle" letter-spacing="5">0 1 1</text>
+    <!-- 1 0 1 (crossed out) -->
+    <text x="425" y="150" fill="#94a3b8" font-size="9.8" font-weight="700" text-anchor="middle" letter-spacing="5">1 0 1</text>
+    <line x1="392" y1="146" x2="458" y2="146" stroke="#be123c" stroke-width="1.4"/>
+    <!-- 1 1 1 (valid) -->
+    <rect x="388" y="156" width="74" height="18" rx="4" fill="#eff6ff" stroke="#006398"/>
+    <text x="425" y="169" fill="#006398" font-size="9.8" font-weight="900" text-anchor="middle" letter-spacing="5">1 1 1</text>
+
+    <!-- Formula 1: (0, 1, 1) -> a1 = 2x - 6 -->
+    <rect x="472" y="75" width="188" height="72" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
+    <text x="480" y="91" fill="#047857" font-size="9.5" font-weight="800">[경로 0 1 1] ½((a₁+1)+1)+2 = x</text>
+    <text x="480" y="107" fill="#1e293b" font-size="10" font-weight="800">½a₁ + 3 = x  ⇒  a₁ = 2x - 6</text>
+    <text x="480" y="123" fill="#475569" font-size="9.2" font-weight="700">↑ x = 15, 25 대입</text>
+    <text x="480" y="139" fill="#065f46" font-size="10.5" font-weight="900">∴ a₁ = 24, 44</text>
+
+    <!-- Formula 2: (1, 1, 1) -> a1 = 4x - 13 -->
+    <rect x="472" y="153" width="188" height="74" rx="8" fill="#ffffff" stroke="#006398" stroke-width="1.5"/>
+    <text x="480" y="169" fill="#006398" font-size="9.5" font-weight="800">[경로 1 1 1] ½((½(a₁+1)+1)+1)+2 = x</text>
+    <text x="480" y="185" fill="#1e293b" font-size="10" font-weight="800">¼a₁ + 13/4 = x  ⇒  a₁ = 4x - 13</text>
+    <text x="480" y="201" fill="#475569" font-size="9.2" font-weight="700">↑ x = 15, 25 대입</text>
+    <text x="480" y="218" fill="#006398" font-size="10.5" font-weight="900">∴ a₁ = 47, 87</text>
+
+    <!-- Note under (a1,a2,a3) table -->
+    <rect x="384" y="186" width="82" height="41" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="425" y="202" fill="#006398" font-size="8.5" font-weight="800" text-anchor="middle">a₃ = x</text>
+    <text x="425" y="216" fill="#1e293b" font-size="8.5" font-weight="800" text-anchor="middle">x ∈ {15, 25}</text>
 
     <!-- Final Conclusion Bar -->
-    <rect x="348" y="232" width="304" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
-    <text x="500" y="250" fill="#92400e" font-size="10.2" font-weight="800" text-anchor="middle">가능한 모든 a₁의 합 = (24 + 47) + (44 + 87) = 71 + 131</text>
-    <text x="500" y="268" fill="#b45309" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 정답: ∑a₁ = 202</text>
+    <rect x="384" y="233" width="276" height="46" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="522" y="251" fill="#92400e" font-size="10.2" font-weight="800" text-anchor="middle">∴ 모든 a₁의 값의 합 = 24 + 44 + 47 + 87</text>
+    <text x="522" y="270" fill="#b45309" font-size="12.5" font-weight="900" text-anchor="middle">🎯 최종 정답: 202</text>
     """
     return _svg_wrap(title, sub, inner, 300)
-
 
 def _draw_c2610p27_svg(lang="ko") -> str:
     title = (
