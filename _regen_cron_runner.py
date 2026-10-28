@@ -85,7 +85,8 @@ for k in stale:
 if not new_or_changed:
     print("[SILENT]")
     save_json(STATE_FILE, state)
-    sys.exit(0)
+    if __name__ == '__main__':
+        sys.exit(0)
 
 print(f"\n[cron] 총 {len(new_or_changed)}건 변경됨. 빌드 진행.")
 
