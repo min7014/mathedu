@@ -1729,7 +1729,14 @@ def _level_html(lvl):
     if lvl.get("knowledge"):
         know_en = f'<div class="bilingual-en"><b>Prerequisite Knowledge:</b> {_esc(lvl["knowledge_en"])}</div>' if lvl.get("knowledge_en") else ""
         know = (f'<div class="know"><h3>먼저 알아야 할 지식</h3>{_esc(lvl["knowledge"])}{know_en}</div>')
-    qs = "".join(_question_html(q) for q in lvl.get("questions", []))
+    q_list = list(lvl.get("questions", []))
+    if q_list and str(lvl.get("stage", "")) == "level1":
+        q0 = dict(q_list[0])
+        if not q0.get("level_label"):
+            q0["level_label"] = lvl.get("title") or "🔰 1단계 · [초등 기초 직관·사칙연산 디딤돌]"
+            q0["level_label_en"] = lvl.get("title_en") or "🔰 Step 1 · [Elementary Intuition Scaffolding]"
+        q_list[0] = q0
+    qs = "".join(_question_html(q) for q in q_list)
     t_ko = _esc(lvl.get("title", ""))
     t_en = f'<span class="bilingual-en">{_esc(lvl["title_en"])}</span>' if lvl.get("title_en") else ""
     return f'<h2>{t_ko}{t_en}</h2>{know}{qs}'
@@ -1843,9 +1850,44 @@ def generate_html(data):
                 "<h4>✨ [Conclusion & Key Takeaway]</h4>"
                 "<p>By combining the intermediate results derived in the preceding scaffolding steps, we obtain the exact final answer.</p>"
             )
+        try:
+            if "math-visual-diagram" not in fsol:
+                import visual_diagram_engine
+                step_summaries_ko = []
+                for _lv in data.get("levels", []):
+                    _lt = str(_lv.get("title", "")).replace("\x09o", r"\to")
+                    _qs = _lv.get("questions") or []
+                    if _qs:
+                        _q0 = _qs[0]
+                        _qo, _qa = _resolve_options_and_ans(_q0.get("options", []), _q0.get("answer", 1))
+                        _qat = _qo[int(_qa) - 1] if 1 <= int(_qa) <= len(_qo) else ""
+                        step_summaries_ko.append(f"{_lt} ⇒ {_qat}")
+                    else:
+                        step_summaries_ko.append(_lt)
+                _ans_for_vis = fopts_list[int(fans_idx) - 1] if 1 <= int(fans_idx) <= len(fopts_list) else str(f.get("answer", 1))
+                _slug_v = str(data.get("slug", "quiz")).strip()
+                _vis_ko = visual_diagram_engine.build_visual_and_schematic_block(
+                    _slug_v, str(data.get("title", "")), step_summaries_ko, _ans_for_vis, fsol, lang="ko"
+                )
+                _vis_en = visual_diagram_engine.build_visual_and_schematic_block(
+                    _slug_v, str(data.get("title_en") or data.get("title", "")), step_summaries_ko, _ans_for_vis, fsol_en, lang="en"
+                )
+                fsol = _vis_ko + "\n" + fsol
+                fsol_en = _vis_en + "\n" + fsol_en
+        except Exception as _ve:
+            pass
         fsol_combined = f'<div class="bilingual-ko">{fsol}</div><div class="bilingual-en">{fsol_en}</div>'
     else:
         fsol_combined = fsol
+
+    if len(fexp) < 500:
+        _short_ko = f.get("exp", "")
+        _short_en = f.get("exp_en") or _short_ko
+        _full_ko = f'<b>📌 [최종 본문항 핵심 요약]</b><br>{_short_ko}<hr style="border:none;border-top:1px dashed #cbd5e1;margin:12px 0">{fsol}'
+        _full_en = f'<b>📌 [Final Problem Core Summary]</b><br>{_short_en}<hr style="border:none;border-top:1px dashed #cbd5e1;margin:12px 0">{fsol_en}'
+        fexp = _esc(_full_ko)
+        fexp_en = _esc(_full_en)
+        fexp_en_attr = f' data-exp-en="{fexp_en}"'
 
     diagram_html = ""
     if f.get("diagram"):

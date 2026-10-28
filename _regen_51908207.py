@@ -13,7 +13,8 @@
 
 로컬 LLM 미사용. 에이전트 직접 작성(sympy/전수검사 검증).
 """
-import os, importlib.util
+import os, sys, importlib.util
+if hasattr(sys.stdout, 'reconfigure'): sys.stdout.reconfigure(encoding='utf-8')
 import generator
 
 # 검증기(자체 교정+경고) — 모든 문제 생성 시 필수 통과
@@ -221,7 +222,7 @@ data = {
     # ============ 제10~13단계: M2(S0) 계산 (한 단계 = 한 계산) ============
     {
       "stage": "level10",
-      "title": "제10단계 · 2회 후 $S_0$ 도달 — 경로 ① ($S_0 \to S_0 \to S_0$)",
+      "title": r"제10단계 · 2회 후 $S_0$ 도달 — 경로 ① ($S_0 \to S_0 \to S_0$)",
       "knowledge": r"2회 시행 후 $S_0$에 도달하는 경로는 두 갈래입니다. 첫 갈래: $S_0 \to S_0 \to S_0$. 첫 시행에 $S_0$ 유지가 5가지, 둘째에도 5가지이므로 $5 \times 5$ 가지.",
       "questions": [
         {"stem": r"$S_0 \to S_0 \to S_0$ 경로의 수 $5 \times 5$ 은?",
@@ -240,7 +241,7 @@ data = {
     },
     {
       "stage": "level11",
-      "title": "제11단계 · 2회 후 $S_0$ 도달 — 경로 ② ($S_0 \to S_1 \to S_0$)",
+      "title": r"제11단계 · 2회 후 $S_0$ 도달 — 경로 ② ($S_0 \to S_1 \to S_0$)",
       "knowledge": r"둘째 갈래: $S_0 \to S_1 \to S_0$. 첫 시행에 $S_1$로 가는 눈은 $k=3$ (1가지), 둘째에 $S_1 \to S_0$ 도 $k=3$ (1가지)이므로 $1 \times 1$ 가지.",
       "questions": [
         {"stem": r"$S_0 \to S_1 \to S_0$ 경로의 수 $1 \times 1$ 은?",
@@ -544,6 +545,10 @@ with open(OUT, "w", encoding="utf-8") as f:
 if os.path.exists(os.path.join("board", "private")):
     with open(os.path.join("board", "private", f"{SLUG}.html"), "w", encoding="utf-8") as f:
         f.write(html)
+import stitch_screen_builder
+stitch_screen_builder.transform_file(OUT)
+if os.path.exists(os.path.join("board", "private", f"{SLUG}.html")):
+    stitch_screen_builder.transform_file(os.path.join("board", "private", f"{SLUG}.html"))
 print(">> 덮어쓰기 완료:", OUT, "(%d bytes)" % len(html))
 print(">> 단계 수:", len(data["levels"]))
 print(">> 최종 정답:", data["final"]["options"][data["final"]["answer"]-1])

@@ -5,7 +5,8 @@
 - 정교화: 5단계 → 17단계 원자 분해, 단계 간 재료 연결 명시, 기호(닮음비) 추가.
 - 로컬 LLM 미사용. 에이전트 직접 작성.
 """
-import os, importlib.util
+import os, sys, importlib.util
+if hasattr(sys.stdout, 'reconfigure'): sys.stdout.reconfigure(encoding='utf-8')
 import generator
 
 # 검증기(자체 교정+경고) — 모든 문제 생성 시 필수 통과
@@ -323,6 +324,10 @@ with open(OUT, "w", encoding="utf-8") as f:
 if os.path.exists(os.path.join("board", "private")):
     with open(os.path.join("board", "private", f"{SLUG}.html"), "w", encoding="utf-8") as f:
         f.write(html)
+import stitch_screen_builder
+stitch_screen_builder.transform_file(OUT)
+if os.path.exists(os.path.join("board", "private", f"{SLUG}.html")):
+    stitch_screen_builder.transform_file(os.path.join("board", "private", f"{SLUG}.html"))
 print(">> 덮어쓰기 완료:", OUT, "(%d bytes)" % len(html))
 print(">> 단계 수:", len(data["levels"]))
 print(">> 최종 정답:", data["final"]["options"][data["final"]["answer"]-1])

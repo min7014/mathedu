@@ -1860,6 +1860,8 @@ html[lang="en"] .bilingual-en {
   font-size: 0.92em;
   line-height: 1.6;
 }
+.sol .bilingual-en { display: none; }
+html[lang="en"] .sol .bilingual-en { display: block !important; }
 html[lang="en"] span.bilingual-en {
   display: inline !important;
   margin-top: 0 !important;
