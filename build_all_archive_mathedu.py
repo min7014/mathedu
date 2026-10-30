@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-build_all_ebsi_mathedu.py
+build_all_archive_mathedu.py
 =========================
-EBSi 기출문제(https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs)
+전국 수능·모의평가·학력평가 수학 기출문제 아카이브
 전 연도(2006~2026 시행 = 2007~2027학년도) · 전 학년(고3 D300, 고2 D200, 고1 D100)
 총 608개 수학 시험지 · 16,747개 고유 수학 문항을 mathedu 초등 눈높이 5단계 디딤돌 퀴즈 +
 시각적 도형(SVG) + 도식화 풀이 흐름도 + min7014.github.io 연계 문제로 일괄 생성하는 빌더.
 
 생성 산출물:
 1. 대표 수능 실물 단독 HTML 페이지 (board/csat26_*.html 46문항 + board/csat25_*.html 46문항 = 92문항)
-2. 전 연도(2006~2026) · 전 학년(고1·고2·고3) 16,747문항 연도별 샤드 DB (board/ebsi_shards/ebsi_2006.json ~ ebsi_2026.json)
-3. 통합 자연어 검색용 전 문항 카탈로그 (board/ebsi_catalog.json — 16,747문항)
-4. 16,747문항 통합 단계별 인터랙티브 플레이어 (board/ebsi.html)
+2. 전 연도(2006~2026) · 전 학년(고1·고2·고3) 16,747문항 연도별 샤드 DB (board/archive_shards/exam_2006.json ~ exam_2026.json)
+3. 통합 자연어 검색용 전 문항 카탈로그 (board/archive_catalog.json — 16,747문항)
+4. 16,747문항 통합 단계별 인터랙티브 플레이어 (board/archive.html)
 """
 
 import os
@@ -24,7 +24,7 @@ import xml.etree.ElementTree as ET
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from ebsi_lml_engine import (
+from exam_lml_engine import (
     extract_question_and_explanation,
     synthesize_mathedu_problem,
     UNIT_TEMPLATES,
@@ -41,16 +41,16 @@ from visual_diagram_engine import build_visual_and_schematic_block
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 BOARD_DIR = os.path.join(BASE_DIR, "board")
-SHARDS_DIR = os.path.join(BOARD_DIR, "ebsi_shards")
+SHARDS_DIR = os.path.join(BOARD_DIR, "archive_shards")
 os.makedirs(SHARDS_DIR, exist_ok=True)
 
 SCRATCH_DIR = r"C:\Users\min\.gemini\antigravity-cli\brain\338ec562-09b6-4442-af01-9e2f87c3d74d\scratch"
-PAPERS_JSON = os.path.join(SCRATCH_DIR, "ebsi_math_papers.json")
-CACHE_DIR = os.path.join(SCRATCH_DIR, "ebsi_xml_cache")
+PAPERS_JSON = os.path.join(SCRATCH_DIR, "exam_math_papers.json")
+CACHE_DIR = os.path.join(SCRATCH_DIR, "exam_xml_cache")
 
 
 def parse_paper_metadata(p: dict) -> dict:
-    """Normalize EBSi paper metadata into examYear, examYearAlt, month, grade, subject, source."""
+    """Normalize paper metadata into examYear, examYearAlt, month, grade, subject, source."""
     cal_year = str(p.get("year", "2026")).strip()
     grade = str(p.get("grade", "고3")).strip()
     title = str(p.get("title", "")).strip()
@@ -125,7 +125,7 @@ def parse_paper_metadata(p: dict) -> dict:
     }
 
 
-def build_ebsi_problem_html(prob: dict, extra_top_html: str = "", extra_bottom_js: str = "") -> str:
+def build_exam_problem_html(prob: dict, extra_top_html: str = "", extra_bottom_js: str = "") -> str:
     """Build a standalone Stitch-ready problem HTML page (with rendered official stem in .orig-media-frame)."""
     slug = prob["slug"]
     qnum_clean = extract_clean_qnum(prob["qNum"])
@@ -287,13 +287,13 @@ def build_ebsi_problem_html(prob: dict, extra_top_html: str = "", extra_bottom_j
         for i, opt in enumerate(final_data.get("options", [])[:5])
     )
     orig_paper_box = (
-        f'<section id="ebsiOrigPaperBox" style="width:100%;text-align:left;padding:18px 20px;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:12px;color:#1b1b1d;line-height:1.8;font-size:0.96rem;box-shadow:inset 0 1px 4px rgba(15,23,42,0.04)">'
+        f'<section id="examOrigPaperBox" style="width:100%;text-align:left;padding:18px 20px;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:12px;color:#1b1b1d;line-height:1.8;font-size:0.96rem;box-shadow:inset 0 1px 4px rgba(15,23,42,0.04)">'
         f'<p style="margin:0 0 10px;padding-bottom:8px;border-bottom:1.5px solid #0f172a;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:0.86rem;color:#0f172a">'
         f'<span>📄 {html.escape(source_label)} · {html.escape(subject)}</span>'
         f'<span style="background:#0f172a;color:#ffffff;padding:2px 10px;border-radius:999px;font-size:0.78rem">문항 {qnum_clean}번</span>'
         f'</p>'
-        f'<p id="ebsiOrigStemContent" style="margin:0 0 14px;color:#111827;font-size:0.97rem;line-height:1.85">{final_data["stem"]}</p>'
-        f'<p id="ebsiOrigOptsContent" style="margin:0;padding-top:10px;border-top:1px dashed #cbd5e1;font-size:0.92rem;line-height:1.7">{orig_opts_spans}</p>'
+        f'<p id="examOrigStemContent" style="margin:0 0 14px;color:#111827;font-size:0.97rem;line-height:1.85">{final_data["stem"]}</p>'
+        f'<p id="examOrigOptsContent" style="margin:0;padding-top:10px;border-top:1px dashed #cbd5e1;font-size:0.92rem;line-height:1.7">{orig_opts_spans}</p>'
         f'</section>'
     )
 
@@ -346,7 +346,7 @@ def build_ebsi_problem_html(prob: dict, extra_top_html: str = "", extra_bottom_j
 <div class="orig-card">
   <div class="orig-header">
     <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Original Exam Problem (Today's Goal)</span></div>
-    <span class="orig-badge" id="ebsiOrigBadge"><span class="bilingual-ko">{badge_ko}</span><span class="bilingual-en">{badge_en}</span></span>
+    <span class="orig-badge" id="examOrigBadge"><span class="bilingual-ko">{badge_ko}</span><span class="bilingual-en">{badge_en}</span></span>
   </div>
 {extra_top_html}
   <div class="orig-grid">
@@ -355,16 +355,16 @@ def build_ebsi_problem_html(prob: dict, extra_top_html: str = "", extra_bottom_j
       <div class="orig-media-frame">
         {orig_paper_box}
       </div>
-      <div class="orig-media-sub" id="ebsiOrigMediaSub"><span class="bilingual-ko">📄 {html.escape(source_label)} 공식 기출문항</span><span class="bilingual-en">📄 Official National Exam Paper ({grade})</span></div>
+      <div class="orig-media-sub" id="examOrigMediaSub"><span class="bilingual-ko">📄 {html.escape(source_label)} 공식 기출문항</span><span class="bilingual-en">📄 Official National Exam Paper ({grade})</span></div>
     </div>
 
     <!-- 우측: 원본 문항 핵심 요약 및 목표 -->
     <div class="orig-col-desc">
       <div class="orig-text-box">
         <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary & Objectives</span></h4>
-        <p id="ebsiOrigTopicTitle" style="margin:0 0 8px;font-weight:600;color:var(--txt)">{clean_topic_ko}</p>
-        <p id="ebsiOrigSummaryKo" style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">{summary_ko}</p>
-        <div class="bilingual-en" id="ebsiOrigSummaryEn"><b>Problem Objective:</b> {summary_en}</div>
+        <p id="examOrigTopicTitle" style="margin:0 0 8px;font-weight:600;color:var(--txt)">{clean_topic_ko}</p>
+        <p id="examOrigSummaryKo" style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">{summary_ko}</p>
+        <div class="bilingual-en" id="examOrigSummaryEn"><b>Problem Objective:</b> {summary_en}</div>
       </div>
       <div class="orig-tip">
         💡 <b>초등 눈높이 디딤돌 길잡이</b>: 처음 나오는 기호도 제0단계 기호 번역과 1단계 초등 사칙연산·구구단 디딤돌부터 순서대로 밟아가면 누구나 100% 자신의 힘으로 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: Follow the elementary-grounded micro-steps below to master this problem completely!</span>
@@ -373,24 +373,24 @@ def build_ebsi_problem_html(prob: dict, extra_top_html: str = "", extra_bottom_j
   </div>
 
   <!-- 하단: 프레임별 시각적 증명 팁 전면 가로 확장 -->
-  <div class="min-visual-tip" id="ebsiVisualTipBox" style="margin-top:16px">
+  <div class="min-visual-tip" id="examVisualTipBox" style="margin-top:16px">
     {visual_tip_ko}
   <div class="bilingual-en">💡 <b>Frame-by-Frame Visual Proof Analysis (PDF & GeoGebra Exploration)</b><br>The archive's flipbook proof materials demonstrate how fundamental mathematical principles converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
 </div>
-<h2>🔰 제0단계 · 수학 기호 번역기<span class="bilingual-en">🔰 Step 0 · Mathematical Symbol Translator</span></h2><div class="sym" id="ebsiSymContainer">{sym_items_html}</div>
-<div id="ebsiDynamicLevelsWrap">
+<h2>🔰 제0단계 · 수학 기호 번역기<span class="bilingual-en">🔰 Step 0 · Mathematical Symbol Translator</span></h2><div class="sym" id="examSymContainer">{sym_items_html}</div>
+<div id="examDynamicLevelsWrap">
 {levels_html}
 </div>
-<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(252,248,250,0.97);padding:24px;text-align:center"><div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)"><button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang('ko')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button><button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button></div><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10"><span style="font-size:0.83rem;color:#45464d;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span><button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang('ko')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button><button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button></div><div id="topGuestFreePassRow" style="margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px"><button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px"><span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span><span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span></button><div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div></div><h3 style="color:#131b2e;margin:0 0 6px;font-weight:800">📝 먼저 이름을 입력하세요</h3><p style="color:#45464d;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#ffffff;color:#1b1b1d;border:1.5px solid #c5c6cd;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function toggleModalLang(l){{document.documentElement.lang=l;try{{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}}catch(e){{}}if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);}}function startFreePractice(){{var vid="";try{{vid=localStorage.getItem("mathedu_visitor_id")||"";if(!vid){{vid=Math.random().toString(36).substring(2,6).toUpperCase();localStorage.setItem("mathedu_visitor_id",vid);}}}}catch(e){{vid="ANON";}}window._studentName=((document.documentElement.lang==="en")?"Guest#":"자유학습#")+vid;var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}}function registerName(){{var n=document.getElementById("studentName").value.trim();if(!n){{alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){{MathJax.typesetPromise();}}}}function sendProgress(){{var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){{if(q.querySelector(".opt.correct"))correct++;}});if(total===0)return;fetch(window._sheetsApiUrl,{{method:"POST",mode:"no-cors",keepalive:true,headers:{{"Content-Type":"text/plain;charset=utf-8"}},body:JSON.stringify({{quiz_slug:window._activeEbsiSlug||"{slug}",student_name:name,current_step:done.length,total_steps:total,correct:correct}})}}).catch(function(){{}});}}</script>
-<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2><div class="sol" id="ebsiSolContainer">
+<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(252,248,250,0.97);padding:24px;text-align:center"><div id="trackFullLangSwitcher" style="position:absolute;top:18px;left:20px;z-index:100;display:inline-flex;align-items:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:24px;padding:3px 4px;gap:3px;box-shadow:0 4px 16px rgba(0,0,0,.4);backdrop-filter:blur(10px)"><button type="button" id="btnTrackFullLangKo" onclick="toggleModalLang('ko')" style="background:#38bdf8;color:#0b1020;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:800;cursor:pointer;transition:.15s">🇰🇷 한국어</button><button type="button" id="btnTrackFullLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:18px;padding:5px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;transition:.15s">🌐 English</button></div><h2 style="background:linear-gradient(90deg,#7cc4ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px">📘 mathedu</h2><div id="modalCenterLangSwitcher" style="margin:4px 0 16px;display:inline-flex;align-items:center;justify-content:center;background:#f0edef;border:1.5px solid #e4e2e4;border-radius:28px;padding:4px 8px;gap:5px;box-shadow:0 6px 20px rgba(0,0,0,.45);backdrop-filter:blur(10px);z-index:10"><span style="font-size:0.83rem;color:#45464d;font-weight:700;margin:0 4px 0 8px;display:inline-flex;align-items:center;gap:4px"><span>🌐</span><span class="bilingual-ko">언어 선택:</span><span class="bilingual-en">Language:</span></span><button type="button" id="btnModalCenterLangKo" onclick="toggleModalLang('ko')" style="background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);color:#0b1020;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 2px 10px rgba(56,189,248,.45)">🇰🇷 한국어</button><button type="button" id="btnModalCenterLangEn" onclick="toggleModalLang('en')" style="background:transparent;color:#cbd5e1;border:none;border-radius:20px;padding:6px 16px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all .18s">🌐 English</button></div><div id="topGuestFreePassRow" style="margin:12px 0 16px;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:10px"><button type="button" id="btnTeacherPreviewInModal" onclick="startFreePractice()" style="width:100%;max-width:420px;background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#a855f7 100%);color:#070d1e;border:2px solid #ffffff;border-radius:14px;padding:14px 22px;font-size:1.1rem;font-weight:900;cursor:pointer;transition:all .2s ease;box-shadow:0 0 24px rgba(56,189,248,.7),0 6px 18px rgba(0,0,0,.5);display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-0.2px"><span class="bilingual-ko">🚀 가입 없이 바로 문제 열람 & 자유 풀기 ➔</span><span class="bilingual-en">🚀 Free Practice (No Login Required) ➔</span></button><div style="font-size:0.81rem;color:#94a3b8;display:flex;align-items:center;gap:8px;width:100%;max-width:380px"><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span><span><span class="bilingual-ko">또는 이름을 입력하고 학습 기록 저장</span><span class="bilingual-en">Or enter name to save your progress</span></span><span style="flex:1;height:1px;background:rgba(255,255,255,.15)"></span></div></div><h3 style="color:#131b2e;margin:0 0 6px;font-weight:800">📝 먼저 이름을 입력하세요</h3><p style="color:#45464d;font-size:.9rem;margin:0 0 20px"><span class="bilingual-ko">이름을 입력해야 학습 기록이 저장됩니다.</span><span class="bilingual-en">Your learning progress will be saved under this name.</span></p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" autofocus style="background:#ffffff;color:#1b1b1d;border:1.5px solid #c5c6cd;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div><script>window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";function toggleModalLang(l){{document.documentElement.lang=l;try{{localStorage.setItem("mathedu_lang",l);localStorage.setItem("mathedu_lang_manual","true");}}catch(e){{}}if(window.setBoardLanguage)window.setBoardLanguage(l);else if(window.setBoardLang)window.setBoardLang(l,true);}}function startFreePractice(){{var vid="";try{{vid=localStorage.getItem("mathedu_visitor_id")||"";if(!vid){{vid=Math.random().toString(36).substring(2,6).toUpperCase();localStorage.setItem("mathedu_visitor_id",vid);}}}}catch(e){{vid="ANON";}}window._studentName=((document.documentElement.lang==="en")?"Guest#":"자유학습#")+vid;var tf=document.getElementById("trackFull");if(tf)tf.remove();if(window.sendProgress)sendProgress();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise();}}function registerName(){{var n=document.getElementById("studentName").value.trim();if(!n){{alert((document.documentElement.lang==="en")?"Please enter your name":"이름을 입력하세요");return;}}window._studentName=n;document.getElementById("trackFull").remove();sendProgress();if(window.MathJax&&MathJax.typesetPromise){{MathJax.typesetPromise();}}}}function sendProgress(){{var name=(window._studentName||"").trim();if(!name)return;var qs=document.querySelectorAll(".q");var total=qs.length;var done=document.querySelectorAll(".q.done");var correct=0;done.forEach(function(q){{if(q.querySelector(".opt.correct"))correct++;}});if(total===0)return;fetch(window._sheetsApiUrl,{{method:"POST",mode:"no-cors",keepalive:true,headers:{{"Content-Type":"text/plain;charset=utf-8"}},body:JSON.stringify({{quiz_slug:window._activeExamSlug||"{slug}",student_name:name,current_step:done.length,total_steps:total,correct:correct}})}}).catch(function(){{}});}}</script>
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem & Complete Solution</span></h2><div class="sol" id="examSolContainer">
   <div class="bilingual-ko">
 {sol_ko}
   </div>
   <div class="bilingual-en">
 {sol_en}
   </div>
-</div><div id="ebsiFinalQWrap">{final_q_block}</div>
-<div id="ebsiAddonWrap">{addon_card_html}</div>
+</div><div id="examFinalQWrap">{final_q_block}</div>
+<div id="examAddonWrap">{addon_card_html}</div>
 <div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 {final_ans_display}</div>
 <button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button></div>
 </div><script>
@@ -491,7 +491,7 @@ function toggleReport(el){{
 function submitReport(btn){{
   var wrap=btn.closest('.report-wrap');
   var name=(window._studentName||'익명').trim();
-  var slug=window._activeEbsiSlug || '{slug}';
+  var slug=window._activeExamSlug || '{slug}';
   var qEl=wrap.closest('.q');
   var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
   var textEl=wrap.querySelector('.report-text');
@@ -555,44 +555,44 @@ function setBoardLang(lang, isUserAction) {{
     return page_html
 
 
-def build_ebsi_dynamic_player_scripts() -> tuple:
-    """Return (extra_top_html, extra_bottom_js) for board/ebsi.html so it can dynamically load any of the 16,747 EBSi problems."""
+def build_exam_dynamic_player_scripts() -> tuple:
+    """Return (extra_top_html, extra_bottom_js) for board/archive.html so it can dynamically load any of the 16,747 problems."""
     extra_top_html = """
-  <section id="ebsiUniversalNavBar" style="margin:12px 0 14px;padding:14px 16px;background:linear-gradient(135deg,#f8fafc 0%,#eff6ff 100%);border:1.5px solid #bfdbfe;border-radius:14px;box-shadow:0 2px 10px rgba(0,99,152,0.06)">
+  <section id="examUniversalNavBar" style="margin:12px 0 14px;padding:14px 16px;background:linear-gradient(135deg,#f8fafc 0%,#eff6ff 100%);border:1.5px solid #bfdbfe;border-radius:14px;box-shadow:0 2px 10px rgba(0,99,152,0.06)">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
       <div style="display:flex;align-items:center;gap:6px;font-weight:800;font-size:0.88rem;color:#006398">
-        <span>🗂️ EBSi 전 연도(2006~2027학년도) · 전 학년(고1·고2·고3) 16,548문항 단계별 플레이어</span>
+        <span>🗂️ 전 연도(2006~2027학년도) · 전 학년(고1·고2·고3) 16,548문항 단계별 플레이어</span>
       </div>
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-        <button type="button" onclick="navEbsiProblem(-1)" style="background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;border-radius:8px;padding:4px 10px;font-size:0.78rem;font-weight:700;cursor:pointer">◀ 이전 번호</button>
-        <button type="button" onclick="navEbsiProblem(1)" style="background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;border-radius:8px;padding:4px 10px;font-size:0.78rem;font-weight:700;cursor:pointer">다음 번호 ▶</button>
-        <button type="button" onclick="downloadCurrentEbsiOffline()" style="background:#006398;border:none;color:#ffffff;border-radius:8px;padding:5px 12px;font-size:0.78rem;font-weight:800;cursor:pointer">📥 이 문항 단독 오프라인 HTML 저장</button>
+        <button type="button" onclick="navExamProblem(-1)" style="background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;border-radius:8px;padding:4px 10px;font-size:0.78rem;font-weight:700;cursor:pointer">◀ 이전 번호</button>
+        <button type="button" onclick="navExamProblem(1)" style="background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;border-radius:8px;padding:4px 10px;font-size:0.78rem;font-weight:700;cursor:pointer">다음 번호 ▶</button>
+        <button type="button" onclick="downloadCurrentExamOffline()" style="background:#006398;border:none;color:#ffffff;border-radius:8px;padding:5px 12px;font-size:0.78rem;font-weight:800;cursor:pointer">📥 이 문항 단독 오프라인 HTML 저장</button>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px">
-      <select id="ebsiSelYear" onchange="onEbsiFilterChange('year')" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:700;color:#1e293b"></select>
-      <select id="ebsiSelGrade" onchange="onEbsiFilterChange('grade')" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:700;color:#1e293b">
+      <select id="examSelYear" onchange="onExamFilterChange('year')" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:700;color:#1e293b"></select>
+      <select id="examSelGrade" onchange="onExamFilterChange('grade')" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:700;color:#1e293b">
         <option value="고3">고3 (수능·모평·학평)</option>
         <option value="고2">고2 (전국연합학력평가)</option>
         <option value="고1">고1 (전국연합학력평가)</option>
       </select>
-      <select id="ebsiSelPaper" onchange="onEbsiFilterChange('paper')" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:700;color:#1e293b;grid-column:span 2"></select>
-      <select id="ebsiSelQnum" onchange="onEbsiQnumSelect()" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:800;color:#006398"></select>
+      <select id="examSelPaper" onchange="onExamFilterChange('paper')" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:700;color:#1e293b;grid-column:span 2"></select>
+      <select id="examSelQnum" onchange="onExamQnumSelect()" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:800;color:#006398"></select>
     </div>
   </section>"""
 
     tpl_json = json.dumps(UNIT_TEMPLATES + [DEFAULT_UNIT_TEMPLATE], ensure_ascii=False)
 
     extra_bottom_js = f"""<script>
-window.EBSI_UNIT_TEMPLATES = {tpl_json};
-window._ebsiShardCache = {{}};
-window._ebsiCurrentYearData = null;
-window._activeEbsiSlug = new URLSearchParams(window.location.search).get('id') || 'e25_26111851_01';
+window.EXAM_UNIT_TEMPLATES = {tpl_json};
+window._examShardCache = {{}};
+window._examCurrentYearData = null;
+window._activeExamSlug = new URLSearchParams(window.location.search).get('id') || 'e25_26111851_01';
 
 function getShardBaseUrl() {{
   var p = window.location.pathname.replace(/\\\\/g, '/');
-  if (p.indexOf('/offline/') !== -1) return '../board/ebsi_shards/';
-  return 'ebsi_shards/';
+  if (p.indexOf('/offline/') !== -1) return '../board/archive_shards/';
+  return 'archive_shards/';
 }}
 
 function escapeHtmlAttr(s) {{
@@ -610,8 +610,8 @@ function buildDynamicSvgBlock(prob, tpl, ansDisplay) {{
   return '<figure class="math-visual-diagram" style="margin:16px 0;padding:16px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center">' +
     '<div style="font-weight:800;font-size:0.92rem;color:#006398;margin-bottom:10px">🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램: ' + unit + ']</div>' +
     '<svg viewBox="0 0 640 210" style="width:100%;max-width:620px;height:auto;background:#ffffff;border-radius:10px;border:1px solid #e2e8f0" xmlns="http://www.w3.org/2000/svg">' +
-      '<defs><linearGradient id="ebsiGrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e0f2fe"/><stop offset="100%" stop-color="#ede9fe"/></linearGradient></defs>' +
-      '<rect x="16" y="16" width="180" height="178" rx="12" fill="url(#ebsiGrad1)" stroke="#0284c7" stroke-width="2"/>' +
+      '<defs><linearGradient id="examGrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e0f2fe"/><stop offset="100%" stop-color="#ede9fe"/></linearGradient></defs>' +
+      '<rect x="16" y="16" width="180" height="178" rx="12" fill="url(#examGrad1)" stroke="#0284c7" stroke-width="2"/>' +
       '<text x="106" y="48" text-anchor="middle" font-size="13" font-weight="bold" fill="#0369a1">[출발 조건 &amp; 단원 원리]</text>' +
       '<text x="106" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">' + unit.slice(0, 14) + '</text>' +
       '<circle cx="106" cy="135" r="34" fill="#ffffff" stroke="#0284c7" stroke-width="2" stroke-dasharray="4,3"/>' +
@@ -666,11 +666,11 @@ function renderSingleQBlockHtml(qObj, isFinal, stepIdx, knowKo, solKo) {{
   '</div>';
 }}
 
-function renderEbsiProblemToDom(prob) {{
+function renderExamProblemToDom(prob) {{
   if (!prob) return;
-  window._activeEbsiSlug = prob.slug;
-  window._activeEbsiProblem = prob;
-  var tpl = window.EBSI_UNIT_TEMPLATES[prob.tpl_idx] || window.EBSI_UNIT_TEMPLATES[window.EBSI_UNIT_TEMPLATES.length - 1];
+  window._activeExamSlug = prob.slug;
+  window._activeExamProblem = prob;
+  var tpl = window.EXAM_UNIT_TEMPLATES[prob.tpl_idx] || window.EXAM_UNIT_TEMPLATES[window.EXAM_UNIT_TEMPLATES.length - 1];
   var unitParts = prob.unit_parts || [];
   var leafUnit = unitParts.length ? unitParts[unitParts.length - 1] : tpl.topic_ko;
   var midUnit = unitParts.length >= 2 ? unitParts[unitParts.length - 2] : tpl.topic_ko;
@@ -691,7 +691,7 @@ function renderEbsiProblemToDom(prob) {{
     if (h1Ko) h1Ko.textContent = '📘 ' + prob.title;
   }}
 
-  var badgeEl = document.getElementById('ebsiOrigBadge');
+  var badgeEl = document.getElementById('examOrigBadge');
   if (badgeEl) badgeEl.innerHTML = '<span class="bilingual-ko">' + prob.examYear + '학년도 ' + prob.month + ' ' + prob.grade + ' ' + prob.subject + ' ' + prob.qNum + '번</span>';
 
   var circled = ['①','②','③','④','⑤'];
@@ -699,7 +699,7 @@ function renderEbsiProblemToDom(prob) {{
     return '<span style="display:inline-block;margin:3px 6px 3px 0;font-weight:600;color:#1e293b">' + (circled[idx] || (idx+1)) + ' ' + o + '</span>';
   }}).join(' &nbsp;&nbsp; ');
 
-  var paperBox = document.getElementById('ebsiOrigPaperBox');
+  var paperBox = document.getElementById('examOrigPaperBox');
   if (paperBox) {{
     paperBox.innerHTML =
       '<p style="margin:0 0 10px;padding-bottom:8px;border-bottom:1.5px solid #0f172a;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:0.86rem;color:#0f172a">' +
@@ -710,13 +710,13 @@ function renderEbsiProblemToDom(prob) {{
       '<p style="margin:0;padding-top:10px;border-top:1px dashed #cbd5e1;font-size:0.92rem;line-height:1.7">' + origOpts + '</p>';
   }}
 
-  var topicEl = document.getElementById('ebsiOrigTopicTitle');
+  var topicEl = document.getElementById('examOrigTopicTitle');
   if (topicEl) topicEl.textContent = prob.title.replace(/^\\[.*?\\]\\s*/, '');
-  var sumEl = document.getElementById('ebsiOrigSummaryKo');
+  var sumEl = document.getElementById('examOrigSummaryKo');
   if (sumEl) sumEl.textContent = (prob.intent || leafUnit) + ' · 초등 눈높이 5단계 디딤돌 퀴즈 및 시각적 도식화 해설';
 
   // Step 0 symbols
-  var symEl = document.getElementById('ebsiSymContainer');
+  var symEl = document.getElementById('examSymContainer');
   if (symEl && tpl.symbols) {{
     symEl.innerHTML = tpl.symbols.map(function(s) {{
       return '<div><b>' + s.sym + '</b> — ' + s.desc + '<div class="bilingual-en">' + (s.desc_en || '') + '</div></div>';
@@ -788,7 +788,7 @@ function renderEbsiProblemToDom(prob) {{
       '<div class="know"><h3>먼저 알아야 할 지식</h3>' + st.know + '</div>' +
       renderSingleQBlockHtml(st.q, false, idx + 1, st.know, '');
   }});
-  var lvWrap = document.getElementById('ebsiDynamicLevelsWrap');
+  var lvWrap = document.getElementById('examDynamicLevelsWrap');
   if (lvWrap) lvWrap.innerHTML = lvHtml;
 
   // Solution & Visual Diagram
@@ -804,12 +804,12 @@ function renderEbsiProblemToDom(prob) {{
     '<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>' +
     '<p>따라서 구하는 최종 정답은 <b>' + ansDisplay + ' (정답 ' + ansIdx + '번)</b>입니다.</p>';
 
-  var solContainer = document.getElementById('ebsiSolContainer');
+  var solContainer = document.getElementById('examSolContainer');
   if (solContainer) {{
     solContainer.innerHTML = '<div class="bilingual-ko">' + solKo + '</div><div class="bilingual-en">' + solKo + '</div>';
   }}
 
-  var finalWrap = document.getElementById('ebsiFinalQWrap');
+  var finalWrap = document.getElementById('examFinalQWrap');
   if (finalWrap) {{
     finalWrap.innerHTML = renderSingleQBlockHtml({{
       level_label: '최종 본문항',
@@ -830,26 +830,26 @@ function renderEbsiProblemToDom(prob) {{
   }}
 }}
 
-function loadEbsiYearShard(yearStr, callback) {{
-  if (window._ebsiShardCache[yearStr]) {{
-    callback(window._ebsiShardCache[yearStr]);
+function loadExamYearShard(yearStr, callback) {{
+  if (window._examShardCache[yearStr]) {{
+    callback(window._examShardCache[yearStr]);
     return;
   }}
-  var url = getShardBaseUrl() + 'ebsi_' + yearStr + '.json';
+  var url = getShardBaseUrl() + 'exam_' + yearStr + '.json';
   fetch(url)
     .then(function(r) {{ return r.json(); }})
     .then(function(data) {{
-      window._ebsiShardCache[yearStr] = data;
+      window._examShardCache[yearStr] = data;
       callback(data);
     }})
     .catch(function(err) {{
-      console.error('Failed to load EBSi shard:', err);
+      console.error('Failed to load shard:', err);
     }});
 }}
 
-function populateEbsiNavigator(yearData, activeProb) {{
-  window._ebsiCurrentYearData = yearData;
-  var selYear = document.getElementById('ebsiSelYear');
+function populateExamNavigator(yearData, activeProb) {{
+  window._examCurrentYearData = yearData;
+  var selYear = document.getElementById('examSelYear');
   if (selYear && selYear.options.length === 0) {{
     for (var y = 2026; y >= 2006; y--) {{
       var opt = document.createElement('option');
@@ -859,17 +859,17 @@ function populateEbsiNavigator(yearData, activeProb) {{
     }}
   }}
   if (selYear && activeProb) selYear.value = String(activeProb.year || '2025');
-  var selGrade = document.getElementById('ebsiSelGrade');
+  var selGrade = document.getElementById('examSelGrade');
   if (selGrade && activeProb) selGrade.value = activeProb.grade || '고3';
 
-  updateEbsiPaperDropdown(activeProb ? activeProb.paperId : null, activeProb ? activeProb.qNum : '1');
+  updateExamPaperDropdown(activeProb ? activeProb.paperId : null, activeProb ? activeProb.qNum : '1');
 }}
 
-function updateEbsiPaperDropdown(targetPaperId, targetQnum) {{
-  var yearData = window._ebsiCurrentYearData;
+function updateExamPaperDropdown(targetPaperId, targetQnum) {{
+  var yearData = window._examCurrentYearData;
   if (!yearData || !yearData.problems) return;
-  var grade = document.getElementById('ebsiSelGrade').value;
-  var selPaper = document.getElementById('ebsiSelPaper');
+  var grade = document.getElementById('examSelGrade').value;
+  var selPaper = document.getElementById('examSelPaper');
   var papersMap = {{}};
   var paperOrder = [];
   Object.keys(yearData.problems).forEach(function(slug) {{
@@ -897,16 +897,16 @@ function updateEbsiPaperDropdown(targetPaperId, targetQnum) {{
       }}
     }}
   }}
-  window._ebsiPapersMap = papersMap;
-  updateEbsiQnumDropdown(targetQnum);
+  window._examPapersMap = papersMap;
+  updateExamQnumDropdown(targetQnum);
 }}
 
-function updateEbsiQnumDropdown(targetQnum) {{
-  var selPaper = document.getElementById('ebsiSelPaper');
-  var selQnum = document.getElementById('ebsiSelQnum');
-  if (!selPaper || !selQnum || !window._ebsiPapersMap) return;
+function updateExamQnumDropdown(targetQnum) {{
+  var selPaper = document.getElementById('examSelPaper');
+  var selQnum = document.getElementById('examSelQnum');
+  if (!selPaper || !selQnum || !window._examPapersMap) return;
   var pk = selPaper.value;
-  var group = window._ebsiPapersMap[pk];
+  var group = window._examPapersMap[pk];
   selQnum.innerHTML = '';
   if (!group) return;
   group.items.sort(function(a, b) {{ return parseInt(a.qNum, 10) - parseInt(b.qNum, 10); }});
@@ -926,48 +926,48 @@ function updateEbsiQnumDropdown(targetQnum) {{
   }}
 }}
 
-function onEbsiFilterChange(level) {{
+function onExamFilterChange(level) {{
   if (level === 'year') {{
-    var y = document.getElementById('ebsiSelYear').value;
-    loadEbsiYearShard(y, function(yearData) {{
-      window._ebsiCurrentYearData = yearData;
-      updateEbsiPaperDropdown(null, '1');
-      onEbsiQnumSelect();
+    var y = document.getElementById('examSelYear').value;
+    loadExamYearShard(y, function(yearData) {{
+      window._examCurrentYearData = yearData;
+      updateExamPaperDropdown(null, '1');
+      onExamQnumSelect();
     }});
   }} else if (level === 'grade') {{
-    updateEbsiPaperDropdown(null, '1');
-    onEbsiQnumSelect();
+    updateExamPaperDropdown(null, '1');
+    onExamQnumSelect();
   }} else if (level === 'paper') {{
-    updateEbsiQnumDropdown('1');
-    onEbsiQnumSelect();
+    updateExamQnumDropdown('1');
+    onExamQnumSelect();
   }}
 }}
 
-function onEbsiQnumSelect() {{
-  var selQnum = document.getElementById('ebsiSelQnum');
-  if (!selQnum || !selQnum.value || !window._ebsiCurrentYearData) return;
+function onExamQnumSelect() {{
+  var selQnum = document.getElementById('examSelQnum');
+  if (!selQnum || !selQnum.value || !window._examCurrentYearData) return;
   var slug = selQnum.value;
-  var prob = window._ebsiCurrentYearData.problems[slug];
+  var prob = window._examCurrentYearData.problems[slug];
   if (prob) {{
     try {{ history.replaceState(null, '', '?id=' + encodeURIComponent(slug)); }} catch(e){{}}
-    renderEbsiProblemToDom(prob);
+    renderExamProblemToDom(prob);
   }}
 }}
 
-function navEbsiProblem(delta) {{
-  var selQnum = document.getElementById('ebsiSelQnum');
+function navExamProblem(delta) {{
+  var selQnum = document.getElementById('examSelQnum');
   if (!selQnum || selQnum.options.length === 0) return;
   var nextIdx = selQnum.selectedIndex + delta;
   if (nextIdx >= 0 && nextIdx < selQnum.options.length) {{
     selQnum.selectedIndex = nextIdx;
-    onEbsiQnumSelect();
+    onExamQnumSelect();
   }}
 }}
 
-function downloadCurrentEbsiOffline() {{
-  var slug = window._activeEbsiSlug || 'ebsi_quiz';
+function downloadCurrentExamOffline() {{
+  var slug = window._activeExamSlug || 'exam_quiz';
   var docClone = document.documentElement.cloneNode(true);
-  var nav = docClone.querySelector('#ebsiUniversalNavBar');
+  var nav = docClone.querySelector('#examUniversalNavBar');
   if (nav) nav.remove();
   var htmlStr = '<!DOCTYPE html>\\n' + docClone.outerHTML;
   var blob = new Blob([htmlStr], {{ type: 'text/html;charset=utf-8' }});
@@ -980,20 +980,20 @@ function downloadCurrentEbsiOffline() {{
   setTimeout(function() {{ a.remove(); URL.revokeObjectURL(url); }}, 500);
 }}
 
-(function initEbsiPlayer() {{
+(function initExamPlayer() {{
   var params = new URLSearchParams(window.location.search);
   var id = params.get('id') || 'e25_26111851_01';
   var m = id.match(/^e(\\d{{2}})_/);
   var yearStr = m ? ('20' + m[1]) : '2025';
-  loadEbsiYearShard(yearStr, function(yearData) {{
+  loadExamYearShard(yearStr, function(yearData) {{
     var prob = (yearData && yearData.problems && yearData.problems[id]) ? yearData.problems[id] : null;
     if (!prob && yearData && yearData.problems) {{
       var firstKey = Object.keys(yearData.problems)[0];
       prob = yearData.problems[firstKey];
     }}
     if (prob) {{
-      populateEbsiNavigator(yearData, prob);
-      renderEbsiProblemToDom(prob);
+      populateExamNavigator(yearData, prob);
+      renderExamProblemToDom(prob);
     }}
   }});
 }})();
@@ -1014,12 +1014,12 @@ def main():
         papers = json.load(f)
 
     odd_papers = [p for p in papers if p.get("isEven") != "1"]
-    print(f"Loaded {len(odd_papers)} standard/odd EBSi math exam papers across 2006~2026 (고3, 고2, 고1).")
+    print(f"Loaded {len(odd_papers)} standard/odd math exam papers across 2006~2026 (고3, 고2, 고1).")
 
     shards_by_year = {}
     catalog_items = []
     standalone_problems = []
-    default_ebsi_prob = None
+    default_exam_prob = None
 
     # Deduplication set for 2022-curriculum Grade 12 common questions (1~22 shared across 확통/미적분/기하)
     seen_common_keys = set()
@@ -1076,7 +1076,7 @@ def main():
                 continue
 
             yy = cal_year[-2:]
-            ebsi_slug = f"e{yy}_{pid}_{qnum_int:02d}"
+            exam_slug = f"e{yy}_{pid}_{qnum_int:02d}"
 
             # Check if this problem is part of 2026학년도 수능 or 2025학년도 수능 (for standalone HTML generation)
             standalone_slug = None
@@ -1091,7 +1091,7 @@ def main():
                 elif eff_subj == "기하":
                     standalone_slug = f"{prefix}_g{qnum_int:02d}"
 
-            active_slug = standalone_slug if standalone_slug else ebsi_slug
+            active_slug = standalone_slug if standalone_slug else exam_slug
 
             prob_full = synthesize_mathedu_problem(
                 slug=active_slug,
@@ -1109,7 +1109,7 @@ def main():
             if standalone_slug:
                 standalone_problems.append(prob_full)
                 if standalone_slug == "csat26_01":
-                    default_ebsi_prob = dict(prob_full)
+                    default_exam_prob = dict(prob_full)
 
             # Extract compact step 3/4/5 derivation lines for shard
             exp_lines = parsed.get("exp_lines", [])
@@ -1125,7 +1125,7 @@ def main():
             tpl_idx = get_tpl_idx(parsed.get("unit_parts", []), parsed.get("intent_ko", ""), parsed.get("stem_html", ""))
 
             shard_record = {
-                "slug": ebsi_slug,
+                "slug": exam_slug,
                 "standaloneSlug": standalone_slug or "",
                 "paperId": pid,
                 "year": cal_year,
@@ -1152,12 +1152,12 @@ def main():
                 "s3_q": prob_full.get("step3_q"),
                 "s4_q": prob_full.get("step4_q"),
             }
-            shards_by_year[cal_year]["problems"][ebsi_slug] = shard_record
+            shards_by_year[cal_year]["problems"][exam_slug] = shard_record
 
-            # If it's a standalone problem, we don't duplicate it in ebsi_catalog.json because it will be in board/index.json!
+            # If it's a standalone problem, we don't duplicate it in archive_catalog.json because it will be in board/index.json!
             if not standalone_slug:
                 catalog_items.append({
-                    "s": ebsi_slug,
+                    "s": exam_slug,
                     "t": prob_full["title"],
                     "y": exam_year,
                     "ya": exam_year_alt,
@@ -1169,21 +1169,21 @@ def main():
                     "tg": prob_full["tags"][:6],
                 })
 
-    # 1. Write 21 yearly shards (board/ebsi_shards/ebsi_2006.json ~ ebsi_2026.json)
+    # 1. Write 21 yearly shards (board/archive_shards/exam_2006.json ~ exam_2026.json)
     total_shard_probs = 0
     for yr, sdata in sorted(shards_by_year.items()):
         cnt = len(sdata["problems"])
         total_shard_probs += cnt
-        shard_path = os.path.join(SHARDS_DIR, f"ebsi_{yr}.json")
+        shard_path = os.path.join(SHARDS_DIR, f"exam_{yr}.json")
         with open(shard_path, "w", encoding="utf-8") as f:
             json.dump(sdata, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"Saved {len(shards_by_year)} yearly shards in board/ebsi_shards/ ({total_shard_probs} unique problems).")
+    print(f"Saved {len(shards_by_year)} yearly shards in board/archive_shards/ ({total_shard_probs} unique problems).")
 
-    # 2. Write compact catalog (board/ebsi_catalog.json)
-    catalog_path = os.path.join(BOARD_DIR, "ebsi_catalog.json")
+    # 2. Write compact catalog (board/archive_catalog.json)
+    catalog_path = os.path.join(BOARD_DIR, "archive_catalog.json")
     with open(catalog_path, "w", encoding="utf-8") as f:
         json.dump(catalog_items, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"Saved board/ebsi_catalog.json ({len(catalog_items)} catalog items, {os.path.getsize(catalog_path):,} bytes).")
+    print(f"Saved board/archive_catalog.json ({len(catalog_items)} catalog items, {os.path.getsize(catalog_path):,} bytes).")
 
     # 3. Write standalone HTML files for 2026학년도 수능 (46문항) & 2025학년도 수능 (46문항)
     new_index_entries = []
@@ -1191,7 +1191,7 @@ def main():
     for prob in standalone_problems:
         slug = prob["slug"]
         out_path = os.path.join(BOARD_DIR, f"{slug}.html")
-        html_content = build_ebsi_problem_html(prob)
+        html_content = build_exam_problem_html(prob)
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(html_content)
 
@@ -1212,31 +1212,31 @@ def main():
             "is_public": True,
         })
 
-    # 4. Write Universal Stitch Player board/ebsi.html and register in board/index.json
-    if default_ebsi_prob is None and standalone_problems:
-        default_ebsi_prob = dict(standalone_problems[0])
-    if default_ebsi_prob:
-        ebsi_player_prob = dict(default_ebsi_prob)
-        ebsi_player_prob["slug"] = "ebsi"
-        ebsi_player_prob["title"] = "[EBSi 전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,548문항 단계별 디딤돌"
-        ebsi_player_prob["title_en"] = "[EBSi All-Years & All-Grades Math Player] 16,548 Step-by-Step Scaffolding Problems"
-        extra_top_html, extra_bottom_js = build_ebsi_dynamic_player_scripts()
-        ebsi_html = build_ebsi_problem_html(ebsi_player_prob, extra_top_html=extra_top_html, extra_bottom_js=extra_bottom_js)
-        with open(os.path.join(BOARD_DIR, "ebsi.html"), "w", encoding="utf-8") as f:
-            f.write(ebsi_html)
+    # 4. Write Universal Stitch Player board/archive.html and register in board/index.json
+    if default_exam_prob is None and standalone_problems:
+        default_exam_prob = dict(standalone_problems[0])
+    if default_exam_prob:
+        exam_player_prob = dict(default_exam_prob)
+        exam_player_prob["slug"] = "archive"
+        exam_player_prob["title"] = "[전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,548문항 단계별 디딤돌"
+        exam_player_prob["title_en"] = "[All-Years & All-Grades Math Player] 16,548 Step-by-Step Scaffolding Problems"
+        extra_top_html, extra_bottom_js = build_exam_dynamic_player_scripts()
+        archive_html = build_exam_problem_html(exam_player_prob, extra_top_html=extra_top_html, extra_bottom_js=extra_bottom_js)
+        with open(os.path.join(BOARD_DIR, "archive.html"), "w", encoding="utf-8") as f:
+            f.write(archive_html)
 
         new_index_entries.insert(0, {
-            "slug": "ebsi",
-            "title": "[EBSi 전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,548문항 단계별 디딤돌",
+            "slug": "archive",
+            "title": "[전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,548문항 단계별 디딤돌",
             "time": "2026-10-30 22:00",
-            "file": "ebsi.html",
+            "file": "archive.html",
             "examYear": "2026",
             "examYearAlt": "2027",
             "grade": "고3",
             "month": "11월",
             "subject": "공통(수학I·II)",
             "qNum": "1",
-            "source": "EBSi 전 연도·전 학년 기출 아카이브 (16,548문항)",
+            "source": "전 연도·전 학년 기출 아카이브 (16,548문항)",
             "date": "2026-10-30",
             "tags": ["수능", "모의평가", "학력평가", "고3", "고2", "고1", "전연도기출", "16548문항"],
             "is_public": True,
@@ -1254,11 +1254,11 @@ def main():
     with open(index_json_path, "w", encoding="utf-8") as f:
         json.dump(updated_items, f, ensure_ascii=False, indent=2)
 
-    print(f"Generated {len(standalone_problems)} standalone CSAT HTML files + board/ebsi.html, updated board/index.json ({len(updated_items)} items).")
-    upgrade_index_html_for_ebsi()
+    print(f"Generated {len(standalone_problems)} standalone CSAT HTML files + board/archive.html, updated board/index.json ({len(updated_items)} items).")
+    upgrade_index_html_for_archive()
 
 
-def upgrade_index_html_for_ebsi():
+def upgrade_index_html_for_archive():
     idx_path = os.path.join(BASE_DIR, "index.html")
     if not os.path.exists(idx_path):
         return
@@ -1296,21 +1296,21 @@ def upgrade_index_html_for_ebsi():
         "} else if (opt.value === '2005') {\n          opt.textContent = isEn ? 'Before Year 2005' : '2005학년도 이전';"
     )
 
-    # 2. Load board/ebsi_catalog.json right after board/index.json
+    # 2. Load board/archive_catalog.json right after board/index.json
     old_fetch_tail = "      renderList();\n    })"
     new_fetch_tail = """      renderList();
-      if (!window._ebsiCatalogLoaded) {
-        window._ebsiCatalogLoaded = true;
-        fetch('board/ebsi_catalog.json')
+      if (!window._examCatalogLoaded) {
+        window._examCatalogLoaded = true;
+        fetch('board/archive_catalog.json')
           .then(function(r) { return r.ok ? r.json() : []; })
           .then(function(cat) {
             if (!Array.isArray(cat) || cat.length === 0) return;
             var existingSlugs = new Set(allItems.map(function(x) { return x.slug; }));
-            var ebsiMapped = [];
+            var archiveMapped = [];
             for (var i = 0; i < cat.length; i++) {
               var c = cat[i];
               if (!c || existingSlugs.has(c.s)) continue;
-              ebsiMapped.push({
+              archiveMapped.push({
                 slug: c.s,
                 title: c.t,
                 examYear: c.y,
@@ -1321,12 +1321,12 @@ def upgrade_index_html_for_ebsi():
                 qNum: c.q,
                 source: c.src,
                 tags: c.tg || [],
-                url: 'board/ebsi.html?id=' + encodeURIComponent(c.s),
-                offlineUrl: 'offline/ebsi.html?id=' + encodeURIComponent(c.s),
+                url: 'board/archive.html?id=' + encodeURIComponent(c.s),
+                offlineUrl: 'offline/archive.html?id=' + encodeURIComponent(c.s),
                 is_public: true
               });
             }
-            allItems = allItems.concat(ebsiMapped);
+            allItems = allItems.concat(archiveMapped);
             var hEl = document.getElementById('heroStatQuizCount');
             var isEn2 = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
             if (hEl) hEl.textContent = isEn2 ? (allItems.length.toLocaleString() + '+') : (allItems.length.toLocaleString() + '개');
@@ -1335,7 +1335,7 @@ def upgrade_index_html_for_ebsi():
           .catch(function(){});
       }
     })"""
-    if "board/ebsi_catalog.json" not in txt_norm and old_fetch_tail in txt_norm:
+    if "board/archive_catalog.json" not in txt_norm and old_fetch_tail in txt_norm:
         txt_norm = txt_norm.replace(old_fetch_tail, new_fetch_tail, 1)
 
     # 3. Support 가형, 나형, 고2수학 in parseMatheduNaturalQuery
@@ -1405,7 +1405,7 @@ def upgrade_index_html_for_ebsi():
 
     with open(idx_path, "w", encoding="utf-8") as f:
         f.write(txt_norm)
-    print("Upgraded index.html to load board/ebsi_catalog.json (16,548 total problems) with pagination and 2006~2027 filters.")
+    print("Upgraded index.html to load board/archive_catalog.json (16,548 total problems) with pagination and 2006~2027 filters.")
 
 
 if __name__ == "__main__":

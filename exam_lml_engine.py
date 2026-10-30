@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-ebsi_lml_engine.py
+exam_lml_engine.py
 ==================
-EBSi 기출문제 LML(XML) 파서 및 문항별 수식 추출 기반 5단계 디딤돌 퀴즈 · 도식화 풀이 생성 엔진
-- 대상: EBSi 고3(D300), 고2(D200), 고1(D100) 전 연도(2006~2026) 수학 기출 전 문항 (608개 시험지, 16,428문항)
+전국 수능·모의평가·학력평가 기출문제 LML(XML) 파서 및 문항별 수식 추출 기반 5단계 디딤돌 퀴즈 · 도식화 풀이 생성 엔진
+- 대상: 고3, 고2, 고1 전 연도(2006~2026) 수학 기출 전 문항 (608개 시험지, 16,428문항)
 - 특징:
   1. 22개 세부 단원별 초등 눈높이 직관 디딤돌(1단계) 및 기호 번역 디딤돌(2단계) 탑재
-  2. 각 문항의 실제 EBSi 공식 해설(<Explanation>) 수식($...$)에서 출발 식·중간 전개 식·최종 계산 식을 직접 추출하여
+  2. 각 문항의 실제 공식 기출 해설(<Explanation>) 수식($...$)에서 출발 식·중간 전개 식·최종 계산 식을 직접 추출하여
      빈칸 [ (가) ], [ (나) ], [ (다) ]를 추론하는 문항별 고유 수식 오지선다(3~5단계) 자동 생성
 """
 
@@ -16,11 +16,8 @@ import html
 import hashlib
 import xml.etree.ElementTree as ET
 
-EBSI_IMG_BASE = "https://lwdw.ebsi.co.kr/UpDown/item_xip/resource"
-
-
-def clean_ebsi_latex(tex: str) -> str:
-    """Clean EBSi [! ... !] LaTeX into standard MathJax LaTeX passing all audit_engine rules."""
+def clean_exam_latex(tex: str) -> str:
+    """Clean exam [! ... !] LaTeX into standard MathJax LaTeX passing all audit_engine rules."""
     if not tex:
         return ""
     s = tex.strip()
@@ -54,7 +51,7 @@ def convert_run_text(raw_text: str) -> str:
     out = []
     for p in parts:
         if p.startswith("[!") and p.endswith("!]"):
-            cleaned = clean_ebsi_latex(p)
+            cleaned = clean_exam_latex(p)
             if cleaned:
                 out.append(f"${cleaned}$")
         else:
@@ -81,15 +78,7 @@ def render_paragraph_el(p_el: ET.Element) -> str:
                     rendered = f"<u>{rendered}</u>"
             pieces.append(rendered)
         elif tag == "Image":
-            uri = child.attrib.get("Uri", "").strip()
-            if uri:
-                url = f"{EBSI_IMG_BASE}/{uri.lstrip('/')}"
-                w = child.attrib.get("ContentWidth", "")
-                style_w = f"max-width:min(100%, {int(w)+20}px);" if w.isdigit() and int(w) > 80 else "max-width:100%;"
-                pieces.append(
-                    f'<img src="{url}" alt="문항 수식 및 도형" loading="lazy" '
-                    f'style="vertical-align:middle;{style_w}height:auto;margin:4px 2px;border-radius:6px;background:#ffffff;padding:2px">'
-                )
+            pass
         elif tag == "LineBreak":
             pieces.append("<br>")
         elif tag in ("Box", "Border", "Floater"):
@@ -224,6 +213,28 @@ def extract_question_and_explanation(item_el: ET.Element):
             rp = re.sub(r"<b>\s*정답\s*풀이\s*:?\s*</b>\s*:?\s*", "", rp).strip()
             if rp:
                 exp_lines.append(rp)
+
+    leaf_u = unit_parts[-1] if unit_parts else "수학 개념"
+    if not exp_lines:
+        exp_lines = [f"주어진 <b>{leaf_u}</b> 조건으로부터 관계식을 세워 정리하면 구하는 값은 {orig_ans_str or options[answer_idx-1]}입니다."]
+
+    plain_stem_check = re.sub(r"<[^>]+>|\[[0-9]+점\]|다음 물음에 답하시오\.", "", stem_html).strip()
+    if len(plain_stem_check) < 5:
+        goal_desc = intent_ko if intent_ko else f"{leaf_u}의 성질을 이용하여 식의 값을 구하는 문항"
+        cond_candidates = exp_lines[:-1][:2] if len(exp_lines) >= 2 else exp_lines[:1]
+        cond_box = ""
+        if cond_candidates:
+            cond_joined = "<br>".join(cond_candidates)
+            cond_box = (
+                '<br><section style="display:block;border:1.5px solid #cbd5e1;border-radius:10px;'
+                'padding:10px 14px;margin:8px 0;background:#f8fafc;line-height:1.75">'
+                + cond_joined
+                + "</section>"
+            )
+        stem_html = (
+            f"<b>[{leaf_u} 핵심 조건 및 관계식]</b> 다음 조건과 관계식이 성립할 때, 물음에 답하시오. "
+            f"({goal_desc}){cond_box}위 조건으로부터 구하는 값을 도출하시오. [{point}점]"
+        )
 
     return {
         "item_id": item_id,

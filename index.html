@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#fcf8fa">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="mathedu · 수학자료실">
 <meta property="og:description" content="Mathematics Archive: 3,400+ dynamic visual proofs & interactive scaffolding quizzes, 100% freely open.">
 <meta property="og:url" content="https://min7014.github.io/mathedu/">
@@ -1066,18 +1066,18 @@ function toggleMathStory() {
         }
       } catch(e) {}
       renderList();
-      if (!window._ebsiCatalogLoaded) {
-        window._ebsiCatalogLoaded = true;
-        fetch('board/ebsi_catalog.json')
+      if (!window._examCatalogLoaded) {
+        window._examCatalogLoaded = true;
+        fetch('board/archive_catalog.json')
           .then(function(r) { return r.ok ? r.json() : []; })
           .then(function(cat) {
             if (!Array.isArray(cat) || cat.length === 0) return;
             var existingSlugs = new Set(allItems.map(function(x) { return x.slug; }));
-            var ebsiMapped = [];
+            var archiveMapped = [];
             for (var i = 0; i < cat.length; i++) {
               var c = cat[i];
               if (!c || existingSlugs.has(c.s)) continue;
-              ebsiMapped.push({
+              archiveMapped.push({
                 slug: c.s,
                 title: c.t,
                 examYear: c.y,
@@ -1088,12 +1088,12 @@ function toggleMathStory() {
                 qNum: c.q,
                 source: c.src,
                 tags: c.tg || [],
-                url: 'board/ebsi.html?id=' + encodeURIComponent(c.s),
-                offlineUrl: 'offline/ebsi.html?id=' + encodeURIComponent(c.s),
+                url: 'board/archive.html?id=' + encodeURIComponent(c.s),
+                offlineUrl: 'offline/archive.html?id=' + encodeURIComponent(c.s),
                 is_public: true
               });
             }
-            allItems = allItems.concat(ebsiMapped);
+            allItems = allItems.concat(archiveMapped);
             var hEl = document.getElementById('heroStatQuizCount');
             var isEn2 = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
             if (hEl) hEl.textContent = isEn2 ? (allItems.length.toLocaleString() + '+') : (allItems.length.toLocaleString() + '개');
@@ -2258,6 +2258,13 @@ function toggleMathStory() {
       html += '    </div>';
       html += '    <a class="h-9 px-3.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="' + itemHref + '">' + solveBtnText + '</a>';
       html += '  </div>';
+      html += '</div>';
+    }
+    if (filtered.length > renderCount) {
+      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      html += '  </button>';
       html += '</div>';
     }
     if (filtered.length > renderCount) {

@@ -1,0 +1,2628 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mathedu · 시각적 수학 증명과 디딤돌 퀴즈 · 수학자료실</title>
+<meta name="description" content="3,400+ 시각적 기하·증명과 단계별 디딤돌 퀴즈를 담은 100% 영구 무료 수학자료실">
+<meta name="keywords" content="수학교육, 수학자료실, mathedu, 단델린의 구, 원뿔곡선, 지오지브라, 디딤돌 퀴즈, 수능 기출, GeoGebra, Scaffolding Math">
+<meta name="author" content="mathedu">
+<link rel="canonical" href="https://min7014.github.io/mathedu/">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#fcf8fa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mathedu · 수학자료실">
+<meta property="og:description" content="Mathematics Archive: 3,400+ dynamic visual proofs & interactive scaffolding quizzes, 100% freely open.">
+<meta property="og:url" content="https://min7014.github.io/mathedu/">
+<meta property="og:image" content="https://min7014.github.io/mathedu/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="mathedu · Mathematics Archive">
+<meta name="twitter:description" content="3,400+ 시각적 증명과 인터랙티브 디딤돌 퀴즈 · 수학자료실">
+<meta name="twitter:image" content="https://min7014.github.io/mathedu/assets/og-image.png">
+
+<!-- 📢 RSS Feed & Creative Commons License (OER 弘益人間) -->
+<link rel="alternate" type="application/rss+xml" title="mathedu RSS Feed" href="https://min7014.github.io/mathedu/feed.xml">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+
+<!-- 🌐 AI & 검색엔진용 공식 교육 자료실 구조화 데이터 (Schema.org) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://min7014.github.io/mathedu/#organization",
+      "name": "mathedu (수학교육 자료실)",
+      "url": "https://min7014.github.io/mathedu/",
+      "logo": "https://min7014.github.io/mathedu/assets/logo_original.png",
+      "sameAs": [
+        "https://min7014.github.io/",
+        "https://www.geogebra.org/u/min7014",
+        "https://www.youtube.com/@min7014",
+        "https://www.algeomath.kr/",
+        "https://github.com/min7014"
+      ]
+    },
+    {
+      "@type": "LearningResource",
+      "@id": "https://min7014.github.io/mathedu/#platform",
+      "name": "mathedu - Interactive Scaffolding Math & Dynamic Geometry Archive",
+      "description": "100% free mathematics archive with 3,400+ dynamic visual proofs and step-by-step scaffolding quizzes freely open to learners and teachers.",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "educationalLevel": ["Elementary School", "Middle School", "High School", "College"],
+      "learningResourceType": ["Interactive simulation", "Quiz", "Open educational resource"],
+      "teaches": "Mathematics, Dynamic Geometry, Calculus, Probability, Algebra",
+      "inLanguage": ["ko", "en"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": ["student", "teacher", "parent"]
+      },
+      "publisher": { "@id": "https://min7014.github.io/mathedu/#organization" }
+    }
+  ]
+}
+</script>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
+<script src="mathedu-auth.js?v=20261003_v3"></script>
+<script src="mathedu-gamification.js?v=20261003_v3"></script>
+<script src="mathedu-i18n.js?v=20261003_v3"></script>
+<script src="mathedu-report.js?v=20261003_v3"></script>
+<!-- Google Stitch Design System: Mathematical Clarity & Dynamic Geometry (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "tertiary": "#000000",
+        "on-primary-fixed": "#131b2e",
+        "on-secondary-container": "#00476e",
+        "surface": "#fcf8fa",
+        "on-error": "#ffffff",
+        "surface-tint": "#565e74",
+        "surface-container-lowest": "#ffffff",
+        "surface-glass-border": "rgba(226, 232, 240, 0.8)",
+        "on-secondary-fixed": "#001d31",
+        "tertiary-fixed-dim": "#dec29a",
+        "on-tertiary-fixed": "#271901",
+        "on-secondary": "#ffffff",
+        "surface-variant": "#e4e2e4",
+        "inverse-primary": "#bec6e0",
+        "surface-container-low": "#f6f3f5",
+        "surface-dim": "#dcd9db",
+        "secondary-container": "#5bb8fe",
+        "surface-bright": "#fcf8fa",
+        "on-tertiary": "#ffffff",
+        "surface-card": "rgba(255, 255, 255, 0.85)",
+        "inverse-surface": "#303032",
+        "secondary-fixed-dim": "#93ccff",
+        "tertiary-container": "#271901",
+        "accent-indigo": "#818CF8",
+        "on-surface-variant": "#45464d",
+        "outline": "#76777d",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed-variant": "#004b73",
+        "on-background": "#1b1b1d",
+        "on-tertiary-container": "#98805d",
+        "outline-variant": "#c6c6cd",
+        "status-emerald": "#10B981",
+        "primary-container": "#131b2e",
+        "on-primary-container": "#7c839b",
+        "math-dark": "#050811",
+        "primary-fixed": "#dae2fd",
+        "on-primary-fixed-variant": "#3f465c",
+        "on-tertiary-fixed-variant": "#574425",
+        "inverse-on-surface": "#f3f0f2",
+        "status-amber": "#F59E0B",
+        "surface-container": "#f0edef",
+        "background": "#fcf8fa",
+        "secondary": "#006398",
+        "surface-container-high": "#eae7e9",
+        "error": "#ba1a1a",
+        "primary-fixed-dim": "#bec6e0",
+        "on-surface": "#1b1b1d",
+        "surface-canvas": "#F8FAFC",
+        "surface-container-highest": "#e4e2e4",
+        "tertiary-fixed": "#fcdeb5",
+        "secondary-fixed": "#cce5ff",
+        "primary": "#000000",
+        "on-primary": "#ffffff",
+        "on-error-container": "#93000a",
+        "accent-azure": "#38BDF8"
+      },
+      borderRadius: {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-sm": "0.5rem",
+        "margin-desktop": "3.5rem",
+        "gutter": "1.25rem",
+        "space-xs": "0.25rem",
+        "margin": "1rem",
+        "space-md": "1rem",
+        "gutter-desktop": "1.75rem",
+        "space-xl": "2.25rem",
+        "space-lg": "1.5rem",
+        "margin-tablet": "2rem"
+      },
+      fontFamily: {
+        "headline-sm": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "headline-md": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "body-sm": ["Inter", "Pretendard", "sans-serif"],
+        "label-badge": ["Space Grotesk", "Pretendard", "sans-serif"],
+        "body-lg": ["Inter", "Pretendard", "sans-serif"],
+        "label-code": ["Space Grotesk", "Pretendard", "sans-serif"],
+        "display-hero-mobile": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "display-hero": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "headline-lg-mobile": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "headline-lg": ["Plus Jakarta Sans", "Pretendard", "sans-serif"],
+        "body-md": ["Inter", "Pretendard", "sans-serif"]
+      },
+      fontSize: {
+        "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+        "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
+        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+        "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+        "label-code": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+        "display-hero-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "display-hero": ["44px", { "lineHeight": "54px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }]
+      }
+    }
+  }
+};
+</script>
+<style>
+@layer base {
+  html, body { width: 100%; margin: 0; padding: 0; background-color: #fcf8fa; color: #1b1b1d; }
+  body { overscroll-behavior: none; min-height: max(884px, 100dvh); }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+
+:root {
+  --bg-deep: #fcf8fa;
+  --bg-surface: #ffffff;
+  --card: #ffffff;
+  --card2: #f6f3f5;
+  --line: rgba(226, 232, 240, 0.9);
+  --txt: #1b1b1d;
+  --sub: #45464d;
+  --accent: #006398;
+  --accent2: #818CF8;
+  --good: #10B981;
+  --bad: #ba1a1a;
+  --gold: #F59E0B;
+}
+
+/* Stitch Pill Filters (screens/bc0f63eb3a354cee8f964ce2bc461f3b) */
+.stitch-year-pill,
+.stitch-subj-pill {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: #f0edef;
+  color: #1b1b1d;
+  font-family: "Space Grotesk", "Pretendard", sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+.stitch-year-pill.active {
+  background: #000000;
+  color: #ffffff;
+}
+.stitch-subj-pill.active {
+  background: #006398;
+  color: #ffffff;
+}
+
+.topic-chip {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #f0edef;
+  color: #1b1b1d;
+  font-family: "Space Grotesk", "Pretendard", sans-serif;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.topic-chip.active {
+  background: rgba(0, 99, 152, 0.10);
+  color: #006398;
+}
+
+.filter-tab-btn {
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: #f0edef;
+  color: #45464d;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-tab-btn.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+.exam-select {
+  width: 100%;
+  background: #f6f3f5;
+  border: 1px solid #e4e2e4;
+  border-radius: 8px;
+  color: #1b1b1d;
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  outline: none;
+}
+
+.card-bookmark-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  color: #c6c6cd;
+}
+.card-bookmark-btn.active {
+  color: #F59E0B;
+}
+.card-pack-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #006398;
+}
+
+.lesson-pack-float-bar {
+  position: fixed;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9990;
+  width: calc(100% - 2rem);
+  max-width: 736px;
+  background: #131b2e;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+</style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen">
+
+<!-- Fixed Top Header (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+  <div class="h-20 px-margin max-w-[768px] mx-auto flex items-center justify-between gap-space-sm">
+    <a href="/mathedu/" class="flex items-center gap-space-sm min-w-0 no-underline">
+      <img alt="Image from https://min7014.github.io/mathedu/assets/favicon.png" class="h-8 w-auto object-contain shrink-0" src="assets/favicon.png"/>
+      <div class="flex flex-col min-w-0">
+        <div class="flex items-center gap-space-xs truncate">
+          <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">mathedu · 수학자료실</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge">3,400+ 시각적 수학 증명</span>
+          <span class="hidden xs:inline-block font-label-code text-label-code text-on-surface-variant truncate">Home</span>
+        </div>
+      </div>
+    </a>
+    <div class="flex items-center gap-space-xs shrink-0">
+      <button id="langToggleSingleBtn" onclick="var nextL=(window.MatheduI18n&&MatheduI18n.getLanguage()==='ko')?'en':'ko';MatheduI18n.setLanguage(nextL);this.textContent=nextL.toUpperCase();" aria-label="언어 설정 변경" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl px-2 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">KO</button>
+      <!-- Hidden compatibility language switcher for i18n script -->
+      <div id="langSwitcher" class="hidden">
+        <button type="button" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">KO</button>
+        <button type="button" data-lang-btn="en" onclick="MatheduI18n.setLanguage('en')">EN</button>
+      </div>
+      <div onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#FEF3C7] text-[#B45309] font-label-badge text-label-badge shadow-[0_2px_8px_rgba(245,158,11,0.15)] cursor-pointer" title="연속 학습 스트릭 및 나의 뱃지">
+        <span class="material-symbols-outlined text-[16px] text-status-amber">local_fire_department</span>
+        <span class="font-bold" id="headerStreakCount">14</span>
+      </div>
+      <button type="button" onclick="if(window.MatheduAuth){MatheduAuth.isLoggedIn()?MatheduAuth.showMyProblemsModal():MatheduAuth.showAuthModal()}" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer border-0" title="로그인 및 내 서재">
+        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+      </button>
+      <div id="navAuthSlot" class="hidden"></div>
+    </div>
+  </div>
+</header>
+
+<main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen">
+  <div class="flex flex-col w-full max-w-[768px] mx-auto pb-12">
+
+    <!-- Top Ambient Geometric Graphic Accent -->
+    <div class="px-margin pt-2 pb-1">
+      <!-- Brand / Identity Card -->
+      <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+        <div class="relative z-10 flex flex-col gap-space-xs">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-secondary text-[20px]">architecture</span>
+              <span class="font-label-badge text-label-badge text-secondary font-bold tracking-wide">수학자료실 · mathedu</span>
+            </div>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-status-emerald/10 text-status-emerald font-label-badge text-label-badge font-semibold">
+              100% 영구 무료
+            </span>
+          </div>
+          <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight mt-1">
+            3,400+ 시각적 증명과<br/>
+            <span class="text-secondary">단델린 구의 직관</span>
+          </h1>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n-html="hero.leadDesc">
+            수학자료실의 3,400+ 시각적 증명과 단델린 구의 통찰을 담은 가입 없는 100% 영구 무료 인터랙티브 수학자료실
+          </p>
+          <!-- Quick feature badges horizontally scrolling -->
+          <div class="flex items-center gap-1.5 overflow-x-auto py-1 mt-1 -mx-1 px-1">
+            <span class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-status-amber">bolt</span>
+              무가입 5초 즉시 학습
+            </span>
+            <span class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-secondary">target</span>
+              0~5단계 빌드업
+            </span>
+            <a href="offline/index.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline">
+              <span class="material-symbols-outlined text-[14px] text-on-surface-variant">inventory_2</span>
+              100% 오프라인 보관함
+            </a>
+            <a href="dashboard.html" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1 no-underline">
+              <span class="material-symbols-outlined text-[14px] text-status-emerald">monitoring</span>
+              실시간 교실 현황
+            </a>
+          </div>
+        </div>
+        <!-- Key Stats Bento Grid -->
+        <div class="grid grid-cols-4 gap-1.5 mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-2.5">
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">3,400+</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statTopics">수학 주제</span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm text-headline-sm text-secondary font-bold tracking-tight">1,087+</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statAssets">GeoGebra</span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm text-headline-sm text-status-amber font-bold tracking-tight" id="heroStatQuizCount">119개</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statQuizzes">수능·디딤돌</span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="font-headline-sm text-headline-sm text-status-emerald font-bold tracking-tight">100%</span>
+            <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statRigor">오프라인</span>
+          </div>
+        </div>
+
+        <!-- ✨ 상단 자연어 스마트 문제 즉시 검색 바 (Hero Quick Search) -->
+        <div class="mt-space-sm pt-space-sm border-t border-surface-container flex flex-col gap-1.5" id="heroQuickSearchBox">
+          <div class="flex items-center gap-1.5">
+            <div class="flex-1 relative flex items-center">
+              <span class="material-symbols-outlined text-secondary text-[18px] absolute left-3 pointer-events-none">search</span>
+              <input type="text" id="heroQuickSearchInput" placeholder="자연어 문제 검색 (예: 9월 고3 확통 문제들, 10월 미적분 30번, 6월 기하)" class="w-full h-10 pl-9 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary focus:bg-white transition-colors" oninput="syncHeroSearchInput(this.value)" onkeydown="if(event.key==='Enter'){triggerSmartQuizSearch(this.value, true);}"/>
+              <button type="button" id="btnClearHeroSearch" onclick="triggerSmartQuizSearch('', false)" style="display:none" class="absolute right-2 w-5 h-5 rounded-full bg-surface-container-high text-on-surface-variant text-[11px] flex items-center justify-center border-0 cursor-pointer" title="검색어 지우기">✕</button>
+            </div>
+            <button type="button" onclick="triggerSmartQuizSearch(document.getElementById('heroQuickSearchInput').value, true)" class="h-10 px-3.5 rounded-lg bg-secondary text-on-secondary font-label-badge text-label-badge font-bold shrink-0 flex items-center gap-1 cursor-pointer border-0 shadow-sm">
+              <span>문제 검색</span>
+              <span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-1 overflow-x-auto py-0.5 -mx-1 px-1">
+            <span class="font-label-badge text-[10px] text-on-surface-variant shrink-0 mr-0.5">자연어 예시:</span>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 확통 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-[11px] border-0 cursor-pointer transition-colors">9월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 확통 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">10월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 미적분 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">9월 고3 미적분</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 기하 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">10월 고3 기하</button>
+            <button type="button" onclick="triggerSmartQuizSearch('수2 미분가능성 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">수2 미분가능성</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gamification / Daily Streak Banner -->
+    <div class="px-margin mt-space-sm" id="gamificationHubStrip">
+      <div class="flex items-center justify-between p-space-sm px-space-md rounded-xl bg-surface-container-lowest shadow-sm">
+        <div class="flex items-center gap-space-sm min-w-0">
+          <div class="w-10 h-10 rounded-full bg-[#FEF3C7] flex items-center justify-center shrink-0" id="streakFlameIcon">
+            <span class="material-symbols-outlined text-status-amber text-[22px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface" id="streakTitle">연속 출석 1일차</span>
+              <span class="font-label-badge text-[10px] px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant" id="gameLevelTitle">Lv.1 입문자</span>
+            </div>
+            <span class="font-body-sm text-body-sm text-on-surface-variant truncate"><span id="streakSub">오늘 수학 문제 풀면 불꽃 유지!</span> (<span id="gameXpText">0 / 100 XP</span>)</span>
+            <div class="hidden"><div id="gameXpBarFill"></div></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <button onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" aria-label="나의 뱃지" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface cursor-pointer border-0" type="button">
+            <span class="material-symbols-outlined text-[18px]">military_tech</span>
+          </button>
+          <button id="btnQuickWrongVault" onclick="switchFilterMode('wrong')" aria-label="오답노트" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-error cursor-pointer border-0" type="button">
+            <span class="material-symbols-outlined text-[18px]">bookmark</span>
+            <span id="quickWrongCount" class="hidden">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emblem / Dandelin Spheres Interactive Spotlight -->
+    <div class="px-margin mt-space-md">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm overflow-hidden relative">
+        <div class="flex items-center justify-between pb-space-xs">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-accent-indigo text-[20px]">view_in_ar</span>
+            <span class="font-label-code text-label-code text-on-surface font-bold">공식 엠블럼 Dandelin Spheres</span>
+          </div>
+          <span class="font-label-badge text-label-badge text-secondary font-semibold cursor-pointer" onclick="toggleMathStory()">입체 기하 증명 <span id="storyArrow" class="hidden">▼</span></span>
+        </div>
+        <!-- Geometry Preview & Explanatory visual frame -->
+        <div class="mt-space-sm rounded-lg overflow-hidden bg-surface-canvas relative flex flex-col">
+          <div class="w-full h-44 relative bg-cover bg-center" data-alt="A clean academic 3D geometric illustration of Dandelin spheres inscribed inside a double cone intersected by a plane to form an ellipse." style="background-image: url('assets/stitch_dandelin_hero.png')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-space-md text-on-primary">
+              <span class="font-label-badge text-label-badge text-accent-azure tracking-widest uppercase">Visual Proof Archive</span>
+              <p class="font-headline-sm text-headline-sm text-white font-bold leading-tight mt-0.5">단델린의 구와 원뿔곡선의 기하학적 증명</p>
+            </div>
+          </div>
+          <div id="mathStoryDrawer" class="p-space-md bg-surface-container-low flex flex-col gap-space-xs">
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              원뿔을 비스듬한 평면으로 자를 때 생기는 곡선(쌍곡선/타원/포물선)에 내접하는 두 개의 구를 <strong class="text-on-surface">단델린의 구</strong>라고 합니다. 구가 평면과 접하는 점(<span class="font-label-code text-secondary font-bold">$F_1, F_2$</span>)이 원뿔곡선의 초점(Focus)이 됩니다.
+            </p>
+            <div class="p-space-sm rounded-md bg-surface-container-lowest mt-1 flex items-start gap-2">
+              <span class="material-symbols-outlined text-status-amber text-[18px] shrink-0 mt-0.5">format_quote</span>
+              <p class="font-body-sm text-body-sm text-on-surface font-medium italic">
+                "수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Today's Recommended Dynamic Geometry Card -->
+    <div class="px-margin mt-space-md" id="todayGeogebraCard">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-status-amber text-[20px]">lightbulb</span>
+            <span class="font-headline-sm text-[16px] font-bold text-on-surface">오늘의 추천 동적 기하</span>
+          </div>
+          <button id="btnNextGgb" onclick="rotateTodayGeoGebra(1)" class="text-on-surface-variant hover:text-on-surface flex items-center gap-0.5 font-label-badge text-label-badge bg-transparent border-0 cursor-pointer" type="button">
+            <span class="material-symbols-outlined text-[16px]">casino</span>
+            <span data-i18n="todayGgb.btnNext">다른 추천</span>
+          </button>
+        </div>
+        <div class="rounded-lg bg-surface-container-low p-space-md flex flex-col gap-space-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-semibold">광학적 성질</span>
+            <span class="font-label-code text-body-sm text-on-surface-variant">GeoGebra 3D</span>
+          </div>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold" id="todayGgbTitle">
+            타원에서의 빛 반사
+          </h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="todayGgbDesc">
+            한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.
+          </p>
+          <!-- CTA Buttons -->
+          <div class="flex flex-col gap-2 mt-2">
+            <a id="btnTodayGgbApplet" class="w-full h-11 px-space-md rounded-lg bg-primary text-on-primary font-headline-sm text-[14px] flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors shadow-sm no-underline" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined text-[18px]">sports_esports</span>
+              <span>GeoGebra로 조작하기</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+            <div class="grid grid-cols-2 gap-2">
+              <a id="btnTodayGgbPdf" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-medium flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener">
+                <span class="material-symbols-outlined text-[16px] text-secondary">picture_as_pdf</span>
+                <span data-i18n="todayGgb.btnPdf">원리 증명 PDF</span>
+              </a>
+              <a id="btnTodayGgbWeb" class="h-10 px-2 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm font-medium flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors no-underline" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener">
+                <span class="material-symbols-outlined text-[16px] text-on-surface-variant">language</span>
+                <span data-i18n="todayGgb.btnWeb">웹 상세 해설</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-Pillar User Gateway (Teacher & Student Quick Action) -->
+    <div class="px-margin mt-space-md flex flex-col gap-space-sm">
+      <!-- Teacher Class Creation Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[22px]">co_present</span>
+          <div class="flex flex-col">
+            <span class="font-label-badge text-label-badge text-secondary font-bold uppercase" data-i18n="heroCards.teacherTag">교사 회원 전용 · 수업 배포</span>
+            <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.teacherTitle">3초 만에 수업 개설하기</span>
+          </div>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.teacherDesc">
+          회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.
+        </p>
+        <div class="flex items-center gap-2 mt-1">
+          <button onclick="openDefaultTeacherClass()" class="flex-1 h-11 rounded-lg bg-secondary text-on-secondary font-body-md text-body-md font-semibold flex items-center justify-center gap-1.5 shadow-sm cursor-pointer border-0" type="button">
+            <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+            3초 수업 개설 (QR)
+          </button>
+          <a href="dashboard.html" class="h-11 px-3 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1 no-underline">
+            <span class="material-symbols-outlined text-[18px]">dashboard</span>
+            현황판
+          </a>
+        </div>
+      </div>
+
+      <!-- Student / Guest Entry Card -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-accent-indigo text-[22px]">school</span>
+          <div class="flex flex-col">
+            <span class="font-label-badge text-label-badge text-accent-indigo font-bold uppercase" data-i18n="heroCards.studentTag">비회원·학생 · 100% 자유 풀이</span>
+            <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.studentTitle">수업 코드로 입장하기 (또는 자유 풀이)</span>
+          </div>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.studentDesc">
+          회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.
+        </p>
+        <div class="flex gap-2 mt-1">
+          <div class="flex-1 relative flex items-center">
+            <input id="inputRoomCode" class="w-full h-11 pl-3 pr-3 rounded-lg bg-surface-container-low font-label-code text-label-code text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container border-0" placeholder="6자리 수업 코드 입력" data-i18n-placeholder="heroCards.studentPlaceholder" maxlength="12" type="text"/>
+          </div>
+          <button onclick="joinClassroom()" class="h-11 px-5 rounded-lg bg-primary text-on-primary font-body-md text-body-md font-semibold shrink-0 flex items-center justify-center gap-1 cursor-pointer border-0" type="button" data-i18n="heroCards.studentJoinBtn">
+            입장 ➔
+          </button>
+        </div>
+        <div class="flex items-center justify-between pt-1" id="studentLibraryQuickBar">
+          <a class="font-body-sm text-body-sm text-secondary flex items-center gap-1 hover:underline cursor-pointer" href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+            <span class="material-symbols-outlined text-[16px]">folder_open</span>
+            내가 푼 문제 모아보기
+          </a>
+          <a class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 hover:underline cursor-pointer" href="#" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
+            <span class="material-symbols-outlined text-[16px]">manage_accounts</span>
+            익명 기록 연동
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Teacher Rooms & Live Requests (Conditional) -->
+    <div class="px-margin mt-space-sm" id="recentRoomsBox" style="display:none">
+      <div class="rounded-xl bg-surface-container-lowest p-3 px-4 shadow-sm flex items-center gap-3 flex-wrap w-full">
+        <span class="font-label-badge text-label-badge text-on-surface-variant font-bold">📂 최근 개설한 내 수업:</span>
+        <div id="recentRoomsList" class="flex gap-2 flex-wrap"></div>
+        <a href="dashboard.html" class="ml-auto font-body-sm text-body-sm text-secondary font-bold no-underline hover:underline">전체 대시보드 ➔</a>
+      </div>
+    </div>
+
+    <div class="px-margin mt-space-sm" id="requestsBoardBox" style="display:none;">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+        <div class="flex justify-between items-center mb-2 flex-wrap gap-2">
+          <div class="font-headline-sm text-[15px] font-bold text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-status-amber text-[18px]">campaign</span>
+            <span>실시간 문제 출제 현황</span>
+            <span class="px-2 py-0.5 rounded-full bg-status-amber/15 text-[#B45309] font-label-badge text-label-badge" id="requestsCountBadge">확인 중...</span>
+          </div>
+          <a href="create.html" class="font-body-sm text-body-sm text-secondary font-bold no-underline hover:underline">✨ 새 문제 출제 ➔</a>
+        </div>
+        <div id="requestsList" class="grid gap-2"></div>
+      </div>
+    </div>
+
+    <!-- Precision Question Filter & Interactive Quiz Explorer -->
+    <div class="px-margin mt-space-lg flex flex-col gap-space-sm" id="quizExplorerSection">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[22px]">tune</span>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold" data-i18n="examFinder.title">수능·모의평가 기출 정밀 탐색기</h2>
+              <span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge" id="countBadge">불러오는 중…</span>
+            </div>
+            <span class="font-body-sm text-[11px] text-on-surface-variant">학년도·선택과목·문항 번호 즉시 추출</span>
+          </div>
+        </div>
+        <button onclick="resetExamFilters()" class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-on-surface cursor-pointer border-0" title="필터 초기화" type="button">
+          <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+        </button>
+      </div>
+
+      <!-- Filter Multi-Select Pills & Smart Natural-Language Search -->
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-3" id="quizFilterBar">
+        <!-- 🧠 Smart Natural-Language Problem Search Box (Top Priority) -->
+        <div class="flex flex-col gap-2 pb-2.5 border-b border-surface-container">
+          <div class="flex items-center justify-between">
+            <span class="font-label-badge text-label-badge text-secondary font-bold flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">psychology</span>
+              <span>스마트 자연어·키워드 문제 검색</span>
+            </span>
+            <span class="font-body-sm text-[11px] text-on-surface-variant">시행월·학년·과목·단원·문항번호 복합 질문 자동 인식</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex-1 relative flex items-center">
+              <span class="material-symbols-outlined text-secondary text-[20px] absolute left-3 pointer-events-none">search</span>
+              <input type="text" id="quizSearchInput" placeholder="예: 9월 고3 확통 문제들, 10월 미적분 30번, 정규분포 신뢰구간, 수1 삼각함수..." data-i18n-placeholder="examFinder.searchPlaceholder" class="w-full h-11 pl-10 pr-9 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary focus:bg-white transition-all"/>
+              <button type="button" id="btnClearQuizSearch" onclick="triggerSmartQuizSearch('', false)" style="display:none" class="absolute right-2.5 w-6 h-6 rounded-full bg-surface-container-high hover:bg-surface-dim text-on-surface-variant text-xs flex items-center justify-center border-0 cursor-pointer" title="검색어 지우기">✕</button>
+            </div>
+            <button type="button" id="btnRandomQuizChallenge" onclick="startRandomQuiz()" class="h-11 px-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-label-badge shrink-0 cursor-pointer border-0 transition-colors">🎲 랜덤 도전</button>
+          </div>
+          <!-- Quick Natural-Language Example Query Chips -->
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="smartQueryExampleChips">
+            <span class="font-label-badge text-[10px] text-on-surface-variant shrink-0">추천 질문:</span>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 확통 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-[11px] font-bold border-0 cursor-pointer transition-colors">✨ 9월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 확통 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📘 10월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 미적분 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📐 9월 고3 미적분 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 기하 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">🧭 10월 고3 기하 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('6월 고3 확통', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">🎯 6월 고3 확통</button>
+            <button type="button" onclick="triggerSmartQuizSearch('정규분포 신뢰구간 문제', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📊 정규분포 신뢰구간</button>
+            <button type="button" onclick="triggerSmartQuizSearch('수1 삼각함수 문제', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📏 수1 삼각함수</button>
+          </div>
+          <!-- Dynamic Parsed Natural-Language Tokens Status Bar -->
+          <div id="smartSearchAnalysisBar" style="display:none" class="rounded-lg bg-secondary/5 border border-secondary/20 p-2 px-3 flex items-center justify-between gap-2 flex-wrap"></div>
+        </div>
+
+        <!-- Year Filter -->
+        <div class="flex flex-col gap-1.5">
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">학년도</span>
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="stitchYearPills">
+            <button class="stitch-year-pill active" data-year="" onclick="selectStitchYearPill('')" type="button">전체</button>
+            <button class="stitch-year-pill" data-year="2027" onclick="selectStitchYearPill('2027')" type="button">2027학년도</button>
+            <button class="stitch-year-pill" data-year="2026" onclick="selectStitchYearPill('2026')" type="button">2026학년도</button>
+            <button class="stitch-year-pill" data-year="2025" onclick="selectStitchYearPill('2025')" type="button">2025학년도</button>
+            <button class="stitch-year-pill" data-year="2024" onclick="selectStitchYearPill('2024')" type="button">2024학년도</button>
+            <button class="stitch-year-pill" data-year="2023" onclick="selectStitchYearPill('2023')" type="button">이전 기출</button>
+          </div>
+        </div>
+        <!-- Subject Filter -->
+        <div class="flex flex-col gap-1.5">
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">선택과목</span>
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="stitchSubjectPills">
+            <button class="stitch-subj-pill active" data-subj="" onclick="selectStitchSubjectPill('')" type="button">전체 과목</button>
+            <button class="stitch-subj-pill" data-subj="공통(수학I·II)" onclick="selectStitchSubjectPill('공통(수학I·II)')" type="button">공통(수학I·II)</button>
+            <button class="stitch-subj-pill" data-subj="미적분" onclick="selectStitchSubjectPill('미적분')" type="button">미적분</button>
+            <button class="stitch-subj-pill" data-subj="기하" onclick="selectStitchSubjectPill('기하')" type="button">기하</button>
+            <button class="stitch-subj-pill" data-subj="확률과 통계" onclick="selectStitchSubjectPill('확률과 통계')" type="button">확률과 통계</button>
+          </div>
+        </div>
+        <!-- Topic Pills -->
+        <div class="flex flex-col gap-1.5 pt-1">
+          <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">주제별 탐색</span>
+          <div class="flex flex-wrap gap-1.5" id="topicChips">
+            <button type="button" class="topic-chip active" data-topic="">#전체보기</button>
+            <button type="button" class="topic-chip" data-topic="이차함수|포물선|타원|쌍곡선">#이차함수·이차곡선</button>
+            <button type="button" class="topic-chip" data-topic="수열|점화식|등차|등비|시그마|귀납">#수열</button>
+            <button type="button" class="topic-chip" data-topic="지수|로그|거듭제곱">#지수·로그</button>
+            <button type="button" class="topic-chip" data-topic="삼각함수|사인|코사인">#삼각함수</button>
+            <button type="button" class="topic-chip" data-topic="미분|적분|도함수|접선|극한|연속|넓이">#미적분</button>
+            <button type="button" class="topic-chip" data-topic="확률|통계|경우의수|순열|조합|정규분포|신뢰구간|이항">#확률·통계</button>
+          </div>
+        </div>
+
+        <!-- Detailed Filter Mode & Dropdowns -->
+        <div class="pt-1 border-t border-surface-container flex flex-col gap-2">
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5" id="filterModeTabBar">
+            <button type="button" class="filter-tab-btn active shrink-0" data-mode="all" onclick="switchFilterMode('all')">전체 (<span id="tabAllCount">-</span>)</button>
+            <button type="button" class="filter-tab-btn shrink-0" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">오답노트 (<span id="tabWrongCount">0</span>)</button>
+            <button type="button" class="filter-tab-btn shrink-0" data-mode="bookmarks" onclick="switchFilterMode('bookmarks')" id="tabBtnBookmarks">즐겨찾기 (<span id="tabBookmarkCount">0</span>)</button>
+            <button type="button" class="filter-tab-btn shrink-0" data-mode="pack" onclick="toggleLessonPackMode()" id="tabBtnLessonPack">교사용 수업 팩</button>
+          </div>
+          <!-- Precision Select Dropdowns -->
+          <div class="grid grid-cols-5 gap-1.5">
+            <select id="filterYear" class="exam-select" aria-label="학년도" onchange="syncPillsFromSelects(); renderList()">
+              <option value="">전체 학년도</option>
+              <option value="2027">2027학년도</option>
+              <option value="2026">2026학년도</option>
+              <option value="2025">2025학년도</option>
+              <option value="2024">2024학년도</option>
+              <option value="2023">2023학년도</option>
+              <option value="2022">2022학년도</option>
+              <option value="2021">2021학년도</option>
+              <option value="2020">2020학년도</option>
+              <option value="2019">2019학년도</option>
+              <option value="2018">2018학년도</option>
+              <option value="2017">2017학년도</option>
+              <option value="2016">2016학년도</option>
+              <option value="2015">2015학년도</option>
+              <option value="2014">2014학년도</option>
+              <option value="2013">2013학년도</option>
+              <option value="2012">2012학년도</option>
+              <option value="2011">2011학년도</option>
+              <option value="2010">2010학년도</option>
+              <option value="2009">2009학년도</option>
+              <option value="2008">2008학년도</option>
+              <option value="2007">2007학년도</option>
+              <option value="2006">2006학년도</option>
+            </select>
+            <select id="filterGrade" class="exam-select" aria-label="대상 학년" onchange="renderList()">
+              <option value="">전체 학년</option>
+              <option value="고3">고3 · N수</option>
+              <option value="고2">고2</option>
+              <option value="고1">고1</option>
+            </select>
+            <select id="filterMonth" class="exam-select" aria-label="시행월" onchange="renderList()">
+              <option value="">전체 시행월</option>
+              <option value="11월">11월 수능</option>
+              <option value="9월">9월 모평</option>
+              <option value="6월">6월 모평</option>
+              <option value="10월">10월 학평</option>
+              <option value="7월">7월 학평</option>
+              <option value="5월">5월 모평·학평</option>
+              <option value="4월">4월 학평</option>
+              <option value="3월">3월 학평</option>
+            </select>
+            <select id="filterSubject" class="exam-select" aria-label="선택과목" onchange="syncPillsFromSelects(); renderList()">
+              <option value="">전체 과목</option>
+              <option value="공통(수학I·II)">공통(수학I·II)</option>
+              <option value="미적분">미적분</option>
+              <option value="기하">기하</option>
+              <option value="확률과 통계">확률과 통계</option>
+              <option value="수학(가형)">수학(가형)</option>
+              <option value="수학(나형)">수학(나형)</option>
+              <option value="수학(고2)">수학(고2)</option>
+              <option value="공통수학">공통수학(고1)</option>
+            </select>
+            <select id="filterNum" class="exam-select" aria-label="문항 번호" onchange="renderList()">
+              <option value="">전체 번호</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz Question Cards List (Single-Column Vertical Flow matching screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+      <div class="flex flex-col gap-space-sm mt-1" id="list">
+        <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm text-center text-on-surface-variant">
+          게시판을 불러오는 중…
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Teacher Lesson Pack Floating Notification Pill -->
+    <div class="px-margin mt-space-md">
+      <div class="rounded-xl bg-primary-container text-on-primary-container p-space-md shadow-md flex items-center justify-between gap-space-sm">
+        <div class="flex items-center gap-space-sm min-w-0">
+          <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-secondary-container text-[22px]">backpack</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-headline-sm text-[14px] text-white font-bold truncate">선택한 문항으로 수업 팩 묶기</span>
+            <span class="font-body-sm text-body-sm text-white/70 truncate">학생들에게 링크 1개로 오늘 수업 문항 제공</span>
+          </div>
+        </div>
+        <button onclick="toggleLessonPackMode()" class="h-9 px-3 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold shrink-0 flex items-center gap-1 cursor-pointer border-0" type="button">
+          수업 팩 생성
+        </button>
+      </div>
+    </div>
+
+    <!-- External Curated Collections & Download Repository -->
+    <div class="px-margin mt-space-lg flex flex-col gap-space-sm">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-secondary text-[22px]">folder_special</span>
+        <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">수학자료실 공인 학습 컬렉션</h2>
+      </div>
+      <div class="grid grid-cols-1 gap-2.5">
+        <!-- Collection 1: GeoGebra Tube -->
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.geogebra.org/u/min7014" rel="noopener noreferrer" target="_blank">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-secondary text-[24px]">view_in_ar</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface">GeoGebra Tube 국제 공인 컬렉션</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">3,000+ 전 세계 인증 인터랙티브 수학 앱렛</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">open_in_new</span>
+        </a>
+        <!-- Collection 2: AlgeoMath -->
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.algeomath.kr" rel="noopener noreferrer" target="_blank">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-lg bg-status-emerald/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-status-emerald text-[24px]">calculate</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface">AlgeoMath 한국과학창의재단 자료</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">한국 교육과정에 맞춘 공식 기하 탐구 활동</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">open_in_new</span>
+        </a>
+        <!-- Collection 3: PDF Archive -->
+        <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://min7014.github.io/2019080802.html" rel="noopener noreferrer" target="_blank">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-lg bg-status-amber/10 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-status-amber text-[24px]">menu_book</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-[15px] font-bold text-on-surface">중등~고등 전 단원 개념 증명 PDF</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">순서대로 체계적으로 정리된 다운로드 보관함</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">download</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Clean Minimalist Footer Section -->
+    <div class="px-margin mt-space-xl pt-space-md pb-6 flex flex-col items-center text-center gap-2">
+      <div class="flex items-center gap-2 text-on-surface-variant font-label-badge text-label-badge">
+        <a class="hover:underline text-on-surface-variant no-underline" href="https://min7014.github.io/">공식 웹사이트</a>
+        <span>·</span>
+        <a class="hover:underline text-on-surface-variant no-underline" href="dashboard.html">실시간 관제 대시보드</a>
+        <span>·</span>
+        <a class="hover:underline text-on-surface-variant no-underline" href="privacy.html">개인정보처리방침</a>
+      </div>
+      <p class="font-body-sm text-[11px] text-on-surface-variant max-w-xs">
+        © mathedu · 수학자료실. 3,400+ 시각적 수학 증명과 안티그래비티 AI가 함께 만드는 수학교육의 새 지평.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<!-- 🎒 교사용 수업 팩 생성 플로팅 바 -->
+<div id="lessonPackFloatingBar" class="lesson-pack-float-bar" style="display:none">
+  <div class="flex items-center gap-2.5">
+    <span class="material-symbols-outlined text-secondary-container text-[24px]">backpack</span>
+    <div>
+      <div class="font-bold text-white text-sm">선택한 <b id="packSelectedCount" class="text-accent-azure">0</b>개 문제로 수업 팩 만들기</div>
+      <div class="text-xs text-white/75">학생들에게 링크 1개로 오늘 수업할 문항들을 순서대로 제공합니다.</div>
+    </div>
+  </div>
+  <div class="flex gap-2 items-center flex-wrap">
+    <button type="button" onclick="createLessonPackAction('copy')" class="h-9 px-3.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-bold cursor-pointer border-0">📋 링크 복사</button>
+    <button type="button" onclick="createLessonPackAction('qr')" class="h-9 px-3.5 rounded-lg bg-white/10 text-white font-label-badge text-label-badge font-bold cursor-pointer border border-white/20">🖥️ 칠판 QR</button>
+    <button type="button" onclick="createLessonPackAction('start')" class="h-9 px-3.5 rounded-lg bg-status-emerald text-white font-label-badge text-label-badge font-bold cursor-pointer border-0">▶️ 바로 풀기</button>
+    <button type="button" onclick="toggleLessonPackMode(false)" class="bg-transparent border-0 text-white/70 text-lg cursor-pointer px-1.5">✕</button>
+  </div>
+</div>
+
+<!-- 🌐 min7014 3,400+ 동적 기하 스마트 탐색관 모달 -->
+<div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(15,23,42,.75);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;">
+  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
+    <div class="p-4 px-5 border-b border-surface-container flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="assets/favicon.png" alt="수학자료실" class="w-8 h-8 rounded-lg bg-white p-0.5 border border-surface-variant object-contain"/>
+        <div>
+          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">수학자료실 동적 기하 탐색관</h2>
+          <div class="font-body-sm text-body-sm text-on-surface-variant">3,400+ GeoGebra 인터랙티브 앱렛, 개념 증명 PDF &amp; 영상 1초 검색</div>
+        </div>
+      </div>
+      <button type="button" onclick="closeMin7014ExplorerModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center cursor-pointer border-0 text-lg">✕</button>
+    </div>
+    <div class="p-4 px-5 border-b border-surface-container bg-surface-container-low">
+      <input type="text" id="min7014SearchInput" placeholder="🔍 개념 검색 (예: 타원, 포물선, 단델린, 피타고라스, 삼각함수, 매듭, AlgeoMath 등)..." class="w-full h-10 px-3.5 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
+      <div class="flex gap-1.5 flex-wrap mt-2" id="min7014ModalChips">
+        <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('타원|쌍곡선|포물선|원뿔곡선', this)">원뿔곡선</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('피타고라스', this)">피타고라스</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('삼각함수', this)">삼각함수</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('매듭', this)">매듭 기하</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('미분|적분', this)">미적분</button>
+      </div>
+    </div>
+    <div id="min7014ResultsList" class="flex-1 overflow-y-auto p-4 px-5 flex flex-col gap-2 bg-surface">
+      <div class="text-center p-10 text-on-surface-variant">자료를 불러오는 중...</div>
+    </div>
+    <div class="p-3 px-5 bg-surface-container-lowest border-t border-surface-container flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant">
+      <div>총 <b id="min7014ResultsCount" class="text-secondary">0</b>개 자료 검색됨</div>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="text-secondary font-bold no-underline hover:underline">🌐 공식 웹사이트 전체 방문 ➔</a>
+    </div>
+  </div>
+</div>
+
+<!-- Fixed Bottom Navigation Bar (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]" data-active-classes="text-secondary font-semibold">
+  <div class="max-w-[768px] mx-auto flex items-center justify-around h-16 px-space-xs">
+    <a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 transition-colors text-secondary font-semibold no-underline" data-path="home" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      <span class="font-body-sm text-body-sm leading-none">홈</span>
+    </a>
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="didimdol-quiz" href="#quizExplorerSection">
+      <span class="material-symbols-outlined text-[22px]">quiz</span>
+      <span class="font-body-sm text-body-sm leading-none">디딤돌 퀴즈</span>
+    </a>
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="geogebra-3d-explorer" href="#" onclick="openMin7014ExplorerModal();return false;">
+      <span class="material-symbols-outlined text-[22px]">view_in_ar</span>
+      <span class="font-body-sm text-body-sm leading-none">동적 기하관</span>
+    </a>
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="classroom-and-qr" href="create.html">
+      <span class="material-symbols-outlined text-[22px]">qr_code_scanner</span>
+      <span class="font-body-sm text-body-sm leading-none">교사용 출제</span>
+    </a>
+    <a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors no-underline" data-path="my-room" href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+      <span class="material-symbols-outlined text-[22px]">folder_special</span>
+      <span class="font-body-sm text-body-sm leading-none">마이룸</span>
+    </a>
+  </div>
+</nav>
+
+<!-- 수업 모듈 로드 -->
+<script src="mathedu-room.js?v=20261003_v3"></script>
+
+<script>
+
+window.selectStitchYearPill = function(yearVal) {
+  var fy = document.getElementById('filterYear');
+  if (fy) fy.value = yearVal;
+  syncPillsFromSelects();
+  if (typeof window._triggerRenderList === 'function') window._triggerRenderList();
+};
+
+window.selectStitchSubjectPill = function(subjVal) {
+  var fs = document.getElementById('filterSubject');
+  if (fs) fs.value = subjVal;
+  syncPillsFromSelects();
+  if (typeof window._triggerRenderList === 'function') window._triggerRenderList();
+};
+
+window.syncPillsFromSelects = function() {
+  var fy = document.getElementById('filterYear');
+  var fs = document.getElementById('filterSubject');
+  var yVal = fy ? fy.value : '';
+  var sVal = fs ? fs.value : '';
+  document.querySelectorAll('#stitchYearPills .stitch-year-pill').forEach(function(btn) {
+    btn.classList.toggle('active', (btn.getAttribute('data-year') || '') === yVal);
+  });
+  document.querySelectorAll('#stitchSubjectPills .stitch-subj-pill').forEach(function(btn) {
+    btn.classList.toggle('active', (btn.getAttribute('data-subj') || '') === sVal);
+  });
+};
+
+function toggleMathStory() {
+  var d = document.getElementById('mathStoryDrawer');
+  var a = document.getElementById('storyArrow');
+  if (!d) return;
+  if (d.style.display === 'none' || !d.style.display) {
+    d.style.display = 'block';
+    if (a) a.textContent = '▲';
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([d]).catch(function(){});
+    }
+  } else {
+    d.style.display = 'none';
+    if (a) a.textContent = '▼';
+  }
+}
+
+(function() {
+  var listEl = document.getElementById('list');
+  var countBadge = document.getElementById('countBadge');
+  var searchInput = document.getElementById('quizSearchInput');
+  var allItems = [];
+  var activeTopic = '';
+
+  renderRecentRooms();
+  loadQuizRequests();
+
+  fetch('board/index.json')
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function(items) {
+      if (!Array.isArray(items) || items.length === 0) {
+        listEl.innerHTML = '<div style="text-align:center;padding:40px;color:var(--sub)">아직 등록된 퀴즈가 없습니다.</div>';
+        countBadge.textContent = '0개';
+        return;
+      }
+      allItems = items;
+      var heroCountEl = document.getElementById('heroStatQuizCount');
+      var isEnNow = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+      if (heroCountEl) {
+        heroCountEl.textContent = isEnNow ? (allItems.length + '+') : (allItems.length + '개');
+      }
+      try {
+        var urlParams = new URLSearchParams(window.location.search);
+        var qParam = urlParams.get('q') || urlParams.get('query') || urlParams.get('search');
+        if (qParam && searchInput) {
+          searchInput.value = qParam;
+          var heroInp = document.getElementById('heroQuickSearchInput');
+          if (heroInp) heroInp.value = qParam;
+          setTimeout(function() {
+            var sec = document.getElementById('quizExplorerSection');
+            if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 150);
+        }
+      } catch(e) {}
+      renderList();
+      if (!window._examCatalogLoaded) {
+        window._examCatalogLoaded = true;
+        fetch('board/archive_catalog.json')
+          .then(function(r) { return r.ok ? r.json() : []; })
+          .then(function(cat) {
+            if (!Array.isArray(cat) || cat.length === 0) return;
+            var existingSlugs = new Set(allItems.map(function(x) { return x.slug; }));
+            var archiveMapped = [];
+            for (var i = 0; i < cat.length; i++) {
+              var c = cat[i];
+              if (!c || existingSlugs.has(c.s)) continue;
+              archiveMapped.push({
+                slug: c.s,
+                title: c.t,
+                examYear: c.y,
+                examYearAlt: c.ya,
+                month: c.m,
+                grade: c.g,
+                subject: c.sub,
+                qNum: c.q,
+                source: c.src,
+                tags: c.tg || [],
+                url: 'board/archive.html?id=' + encodeURIComponent(c.s),
+                offlineUrl: 'offline/archive.html?id=' + encodeURIComponent(c.s),
+                is_public: true
+              });
+            }
+            allItems = allItems.concat(archiveMapped);
+            var hEl = document.getElementById('heroStatQuizCount');
+            var isEn2 = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+            if (hEl) hEl.textContent = isEn2 ? (allItems.length.toLocaleString() + '+') : (allItems.length.toLocaleString() + '개');
+            renderList();
+          })
+          .catch(function(){});
+      }
+    })
+    .catch(function(err) {
+      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">게시판을 불러올 수 없습니다.<br><small>' + escapeHtml(err.message) + '</small></div>';
+      countBadge.textContent = '오류';
+    });
+
+  // 시험 검색 드롭다운 다국어 옵션 텍스트 동적 업데이트
+  function updateExamSelectOptions(lang) {
+    var isEn = (lang === 'en');
+    
+    // 1. Year options
+    var fy = document.getElementById('filterYear');
+    if (fy) {
+      for (var i = 0; i < fy.options.length; i++) {
+        var opt = fy.options[i];
+        if (!opt.value) {
+          opt.textContent = isEn ? 'All Exam Years' : '전체 학년도';
+        } else if (opt.value === '2005') {
+          opt.textContent = isEn ? 'Before Year 2005' : '2005학년도 이전';
+        } else {
+          opt.textContent = isEn ? ('Academic Year ' + opt.value) : (opt.value + '학년도');
+        }
+      }
+    }
+
+    // 2. Grade options
+    var fg = document.getElementById('filterGrade');
+    if (fg) {
+      for (var i = 0; i < fg.options.length; i++) {
+        var opt = fg.options[i];
+        if (!opt.value) opt.textContent = isEn ? 'All Grades' : '전체 학년';
+        else if (opt.value === '고3') opt.textContent = isEn ? 'Grade 12 (College Bound)' : '고3 · N수';
+        else if (opt.value === '고2') opt.textContent = isEn ? 'Grade 11' : '고2';
+        else if (opt.value === '고1') opt.textContent = isEn ? 'Grade 10' : '고1';
+      }
+    }
+
+    // 3. Month options
+    var fm = document.getElementById('filterMonth');
+    if (fm) {
+      for (var i = 0; i < fm.options.length; i++) {
+        var opt = fm.options[i];
+        if (!opt.value) opt.textContent = isEn ? 'All Exam Months' : '전체 시행월';
+        else if (opt.value === '11월') opt.textContent = isEn ? 'Nov Official CSAT' : '11월 수능 (대수능)';
+        else if (opt.value === '9월') opt.textContent = isEn ? 'Sep Official Mock' : '9월 모의평가 (평가원)';
+        else if (opt.value === '6월') opt.textContent = isEn ? 'Jun Official Mock' : '6월 모의평가 (평가원)';
+        else if (opt.value === '10월') opt.textContent = isEn ? 'Oct Academic Exam' : '10월 학력평가';
+        else if (opt.value === '7월') opt.textContent = isEn ? 'Jul Academic Exam' : '7월 학력평가';
+        else if (opt.value === '4월') opt.textContent = isEn ? 'Apr Academic Exam' : '4월 학력평가';
+        else if (opt.value === '3월') opt.textContent = isEn ? 'Mar Academic Exam' : '3월 학력평가';
+      }
+    }
+
+    // 4. Subject options
+    var fs = document.getElementById('filterSubject');
+    if (fs) {
+      for (var i = 0; i < fs.options.length; i++) {
+        var opt = fs.options[i];
+        if (!opt.value) opt.textContent = isEn ? 'All Subjects' : '전체 과목';
+        else if (opt.value === '공통(수학I·II)') opt.textContent = isEn ? 'Common (Math I·II)' : '공통 (수학I·II)';
+        else if (opt.value === '미적분') opt.textContent = isEn ? 'Calculus' : '미적분';
+        else if (opt.value === '기하') opt.textContent = isEn ? 'Geometry' : '기하';
+        else if (opt.value === '확률과 통계') opt.textContent = isEn ? 'Probability & Statistics' : '확률과 통계';
+        else if (opt.value === '공통수학') opt.textContent = isEn ? 'Common Math (Grade 10)' : '공통수학 (고1)';
+      }
+    }
+
+    // 5. Number options
+    var fn = document.getElementById('filterNum');
+    if (fn) {
+      if (fn.options.length <= 1) {
+        fn.innerHTML = '';
+        var optAll = document.createElement('option');
+        optAll.value = '';
+        optAll.textContent = isEn ? 'All Numbers (1~30)' : '전체 번호 (1~30)';
+        fn.appendChild(optAll);
+        for (var n = 1; n <= 30; n++) {
+          var o = document.createElement('option');
+          o.value = String(n);
+          o.textContent = isEn ? ('Question #' + n) : (n + '번 문항');
+          fn.appendChild(o);
+        }
+      } else {
+        fn.options[0].textContent = isEn ? 'All Numbers (1~30)' : '전체 번호 (1~30)';
+        for (var i = 1; i < fn.options.length; i++) {
+          fn.options[i].textContent = isEn ? ('Question #' + fn.options[i].value) : (fn.options[i].value + '번 문항');
+        }
+      }
+    }
+  }
+
+  // 초기 실행 시 현재 언어에 맞춰 드롭다운 옵션 텍스트 세팅
+  updateExamSelectOptions(window.MatheduI18n ? window.MatheduI18n.getLanguage() : 'ko');
+
+  function getExamFilters() {
+    return {
+      year: (document.getElementById('filterYear')?.value || '').trim(),
+      grade: (document.getElementById('filterGrade')?.value || '').trim(),
+      month: (document.getElementById('filterMonth')?.value || '').trim(),
+      subject: (document.getElementById('filterSubject')?.value || '').trim(),
+      num: (document.getElementById('filterNum')?.value || '').trim()
+    };
+  }
+
+  window._triggerRenderList = renderList;
+  window.syncHeroSearchInput = function(val) {
+    if (searchInput && searchInput.value !== val) {
+      searchInput.value = val;
+      renderList();
+    }
+  };
+  window.triggerSmartQuizSearch = function(queryText, shouldScroll) {
+    var val = String(queryText || '').trim();
+    if (searchInput) searchInput.value = val;
+    var heroInp = document.getElementById('heroQuickSearchInput');
+    if (heroInp) heroInp.value = val;
+    renderList();
+    if (shouldScroll) {
+      var sec = document.getElementById('quizExplorerSection');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+  window.resetExamFilters = function() {
+    ['filterYear', 'filterGrade', 'filterMonth', 'filterSubject', 'filterNum'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    if (searchInput) searchInput.value = '';
+    var heroInp = document.getElementById('heroQuickSearchInput');
+    if (heroInp) heroInp.value = '';
+    activeTopic = '';
+    document.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
+    var allChip = document.querySelector('.topic-chip[data-topic=""]');
+    if (allChip) allChip.classList.add('active');
+    if (window.syncPillsFromSelects) window.syncPillsFromSelects();
+    renderList();
+  };
+
+  // ════════════════════════════════════════════════════════════════════════
+  // 🧠 mathedu 스마트 자연어 수학 문제 검색 파서 (Natural-Language Query Engine)
+  // 예: "9월 고3 확통 문제들", "10월 미적분 30번", "정규분포 신뢰구간 찾아줘"
+  // ════════════════════════════════════════════════════════════════════════
+  var MATHEDU_STOPWORDS = new Set([
+    '문제들', '문제들을', '문제들은', '문제들이', '문제들만', '문제', '문제를', '문제는', '문제가', '문제만',
+    '문항들', '문항들을', '문항', '문항을', '기출문제들', '기출문제', '기출들', '기출',
+    '관련된', '관련', '모음집', '모음', '전체', '전부', '모두', '목록', '리스트', '추천',
+    '풀기', '풀이', '해설', '보여줘', '찾아줘', '검색해줘', '검색', '알려줘', '있을까', '있나요',
+    '해주세요', '해줘', '좀', '다', '것', '거', '들', '꺼', '달', '유형', '단원', '개념',
+    '모평', '학평', '모의평가', '학력평가', '모의고사', '수학', '영역', '과목', '선택', '선택과목',
+    '에서', '으로', '로', '의', '에', '을', '를', '이', '가', '은', '는', '과', '와', '도', '만'
+  ]);
+
+  window.parseMatheduNaturalQuery = function(rawQuery) {
+    var q = String(rawQuery || '').trim();
+    if (!q) {
+      return {
+        raw: '',
+        hasQuery: false,
+        year: '',
+        month: '',
+        grade: '',
+        subject: '',
+        subSubject: '',
+        qNum: '',
+        bareNums: [],
+        isKiller: false,
+        isFourPt: false,
+        isShortAns: false,
+        keywords: [],
+        ignoredStopwords: []
+      };
+    }
+
+    var norm = q.toLowerCase();
+    // 1. Multi-word curriculum & synonym normalization
+    norm = norm
+      .replace(/확률과\s*통계|확률\s*통계/g, ' 확통 ')
+      .replace(/미적분학/g, ' 미적분 ')
+      .replace(/공통\s*\(\s*수학\s*i[·\s]*ii\s*\)|공통\s*과목/gi, ' 공통 ')
+      .replace(/수학\s*ii|수학\s*2|수학\s*Ⅱ|수\s*2(?![0-9])/gi, ' 수학ii ')
+      .replace(/수학\s*i(?![i])|수학\s*1(?![0-9])|수학\s*Ⅰ|수\s*1(?![0-9])/gi, ' 수학i ')
+      .replace(/공통\s*수학/g, ' 공통수학 ')
+      .replace(/모의\s*평가|모의\s*고사/g, ' 모평 ')
+      .replace(/학력\s*평가/g, ' 학평 ')
+      .replace(/경우의\s*수/g, ' 경우의수 ')
+      .replace(/같은\s*것이\s*있는\s*순열/g, ' 같은것이있는순열 ')
+      .replace(/여러\s*가지\s*순열/g, ' 여러가지순열 ')
+      .replace(/중복\s*조합/g, ' 중복조합 ')
+      .replace(/이항\s*정리/g, ' 이항정리 ')
+      .replace(/조건부\s*확률/g, ' 조건부확률 ')
+      .replace(/독립\s*시행/g, ' 독립시행 ')
+      .replace(/정규\s*분포/g, ' 정규분포 ')
+      .replace(/이항\s*분포/g, ' 이항분포 ')
+      .replace(/신뢰\s*구간/g, ' 신뢰구간 ')
+      .replace(/모평균의\s*추정|모평균\s*추정|통계적\s*추정/g, ' 통계적추정 ')
+      .replace(/표본\s*공간/g, ' 표본공간 ')
+      .replace(/표본\s*크기/g, ' 표본크기 ')
+      .replace(/표본\s*평균/g, ' 표본평균 ')
+      .replace(/등차\s*수열/g, ' 등차수열 ')
+      .replace(/등비\s*수열/g, ' 등비수열 ')
+      .replace(/수열의\s*귀납적\s*정의|귀납적\s*정의|수학적\s*귀납법|귀납적/g, ' 귀납 ')
+      .replace(/등비\s*급수|무한\s*급수/g, ' 급수 ')
+      .replace(/부분\s*적분/g, ' 부분적분 ')
+      .replace(/치환\s*적분/g, ' 치환적분 ')
+      .replace(/여러\s*가지\s*적분법/g, ' 여러가지적분법 ')
+      .replace(/여러\s*가지\s*미분법/g, ' 여러가지미분법 ')
+      .replace(/도함수의\s*활용/g, ' 도함수의활용 ')
+      .replace(/정적분의\s*활용/g, ' 정적분의활용 ')
+      .replace(/삼각함수의\s*활용/g, ' 삼각함수의활용 ')
+      .replace(/삼각\s*함수/g, ' 삼각함수 ')
+      .replace(/사인\s*법칙/g, ' 사인법칙 ')
+      .replace(/코사인\s*법칙/g, ' 코사인법칙 ')
+      .replace(/지수\s*함수/g, ' 지수함수 ')
+      .replace(/로그\s*함수/g, ' 로그함수 ')
+      .replace(/삼차\s*함수/g, ' 삼차함수 ')
+      .replace(/사차\s*함수/g, ' 사차함수 ')
+      .replace(/이차\s*함수/g, ' 이차함수 ')
+      .replace(/미분\s*가능성|미분\s*가능/g, ' 미분가능 ')
+      .replace(/미분\s*계수/g, ' 미분계수 ')
+      .replace(/이차\s*곡선|원뿔\s*곡선/g, ' 이차곡선 ')
+      .replace(/공간\s*도형/g, ' 공간도형 ')
+      .replace(/공간\s*좌표/g, ' 공간좌표 ')
+      .replace(/평면\s*벡터/g, ' 벡터 ')
+      .replace(/삼수선의\s*정리|삼수선\s*정리/g, ' 삼수선 ');
+
+    // 2. Pre-split attached tokens so "9월고3확통문제들" splits cleanly
+    norm = norm
+      .replace(/(20\d{2}\s*학년도|20\d{2}\s*년|\d{2}\s*학년도)/g, ' $1 ')
+      .replace(/(1[012]|[345679])\s*(월|모평|모|학평)/g, ' $1$2 ')
+      .replace(/(고\s*[123]|[123]\s*학년)/g, ' $1 ')
+      .replace(/(확통|미적분|미적(?!분)|기하(?!학)|공통수학|공통(?!수)|수학ii|수학i)/g, ' $1 ')
+      .replace(/(\d{1,2}\s*번)/g, ' $1 ')
+      .replace(/(문제들|문제|문항들|문항|기출문제들|기출문제|기출|모음집|모음|찾아줘|보여줘|알려줘)/g, ' $1 ');
+
+    var rawTokens = norm.split(/[\s,·/\[\]()]+/).filter(Boolean);
+
+    var res = {
+      raw: q,
+      hasQuery: true,
+      year: '',
+      month: '',
+      grade: '',
+      subject: '',
+      subSubject: '',
+      qNum: '',
+      bareNums: [],
+      isKiller: false,
+      isFourPt: false,
+      isShortAns: false,
+      keywords: [],
+      ignoredStopwords: []
+    };
+
+    for (var i = 0; i < rawTokens.length; i++) {
+      var tok = rawTokens[i];
+      if (MATHEDU_STOPWORDS.has(tok)) {
+        res.ignoredStopwords.push(tok);
+        continue;
+      }
+      var mSuf = tok.match(/(문제들|문제|문항들|문항|기출문제|기출|모음|관련|꺼)$/);
+      if (mSuf && tok.length > mSuf[1].length) {
+        res.ignoredStopwords.push(mSuf[1]);
+        tok = tok.slice(0, -mSuf[1].length);
+      }
+      if (!tok || MATHEDU_STOPWORDS.has(tok)) continue;
+
+      var mPart = tok.match(/(에서|으로|부터|까지|이랑|하고|들은|들이|들을)$/);
+      if (mPart && (tok.length - mPart[1].length) >= 2) {
+        tok = tok.slice(0, -mPart[1].length);
+      }
+
+      // Year
+      var mYr = tok.match(/^(20\d{2})(?:학년도|년)?$/);
+      if (mYr) { res.year = mYr[1]; continue; }
+      var mYr2 = tok.match(/^(\d{2})(?:학년도|년)$/);
+      if (mYr2) { res.year = '20' + mYr2[1]; continue; }
+
+      // Month
+      var mMo = tok.match(/^(1[012]|[345679])(?:월|모평|모|학평)$/);
+      if (mMo) { res.month = mMo[1] + '월'; continue; }
+      if (tok === '11월' || tok === '대수능') { res.month = '11월'; continue; }
+      if (tok === '수능') { if (!res.grade) res.grade = '고3'; continue; }
+
+      // Grade
+      var mGr = tok.match(/^(?:고\s*([123])|([123])\s*학년)$/);
+      if (mGr) { res.grade = '고' + (mGr[1] || mGr[2]); continue; }
+      if (tok === 'n수' || tok === '수험생') { res.grade = '고3'; continue; }
+
+      // Subject
+      if (/^(확통|확률과통계|확률통계|prob|probability|statistics)$/.test(tok)) {
+        res.subject = '확률과 통계'; continue;
+      }
+      if (/^(미적분|미적|calculus)$/.test(tok)) {
+        res.subject = '미적분'; continue;
+      }
+      if (/^(기하|기하학|기벡|기하와벡터|geometry)$/.test(tok)) {
+        res.subject = '기하'; continue;
+      }
+      if (tok === '공통수학') {
+        res.subject = '공통수학'; continue;
+      }
+      if (tok === '가형' || tok === '수학가형' || tok === 'b형') {
+        res.subject = '수학(가형)'; continue;
+      }
+      if (tok === '나형' || tok === '수학나형' || tok === 'a형') {
+        res.subject = '수학(나형)'; continue;
+      }
+      if (tok === '공통' || tok === '공통과목') {
+        res.subject = '공통(수학I·II)'; continue;
+      }
+      if (/^(수학i|수1|수학1)$/.test(tok)) {
+        res.subSubject = '수학I';
+        if (!res.subject) res.subject = '공통(수학I·II)';
+        continue;
+      }
+      if (/^(수학ii|수2|수학2)$/.test(tok)) {
+        res.subSubject = '수학II';
+        if (!res.subject) res.subject = '공통(수학I·II)';
+        continue;
+      }
+
+      // Question Number
+      var mQn = tok.match(/^(\d{1,2})번$/);
+      if (mQn) {
+        var nVal = parseInt(mQn[1], 10);
+        if (nVal >= 1 && nVal <= 30) { res.qNum = String(nVal); continue; }
+      }
+      var mBn = tok.match(/^(\d{1,2})$/);
+      if (mBn) {
+        var bVal = parseInt(mBn[1], 10);
+        if (bVal >= 1 && bVal <= 30) { res.bareNums.push(String(bVal)); continue; }
+      }
+
+      // Difficulty / Section
+      if (/^(킬러|고난도|최고난도|심화|어려운)$/.test(tok)) { res.isKiller = true; continue; }
+      if (/^(4점|중킬러|주요문항)$/.test(tok)) { res.isFourPt = true; continue; }
+      if (/^(단답형|주관식)$/.test(tok)) { res.isShortAns = true; continue; }
+
+      // Safe single-char trailing particle strip for Korean keywords
+      if (tok.length >= 3 && !/(넓이|길이|높이|풀이|차이|구하기|기울기)$/.test(tok)) {
+        var stripped = tok.replace(/[은는이가을를의에로도만]$/, '');
+        if (stripped.length >= 2) tok = stripped;
+      }
+      if (tok && !MATHEDU_STOPWORDS.has(tok) && res.keywords.indexOf(tok) === -1) {
+        res.keywords.push(tok);
+      }
+    }
+    return res;
+  };
+
+  window.matchMatheduProblem = function(it, p) {
+    if (!p || !p.hasQuery) return true;
+    var title = (it.title || '').toLowerCase();
+    var slug = (it.slug || '').toLowerCase();
+    var subj = it.subject || '';
+    var month = it.month || '';
+    var grade = it.grade || '';
+    var qnum = String(it.qNum || '');
+    var tags = (it.tags || []).map(function(t) { return String(t).toLowerCase(); });
+    var corpus = [
+      title, slug, subj.toLowerCase(), month.toLowerCase(), grade.toLowerCase(),
+      String(it.examYear || ''), String(it.examYearAlt || ''),
+      (it.source || '').toLowerCase(), tags.join(' ')
+    ].join(' ');
+    var corpusNoSpace = corpus.replace(/\s+/g, '');
+
+    if (p.year) {
+      if (String(it.examYear) !== p.year && String(it.examYearAlt) !== p.year && !title.includes(p.year)) {
+        return false;
+      }
+    }
+    if (p.month) {
+      if (month !== p.month && !title.includes(p.month)) {
+        return false;
+      }
+    }
+    if (p.grade) {
+      var mGrade = (grade === p.grade) ||
+                   (p.grade === '고3' && (title.includes('고3') || title.includes('수능') || title.includes('모평'))) ||
+                   title.includes(p.grade.toLowerCase());
+      if (!mGrade) return false;
+    }
+    if (p.subject) {
+      if (subj !== p.subject) return false;
+    }
+    if (p.subSubject) {
+      var subLow = p.subSubject.toLowerCase();
+      if (tags.indexOf(subLow) === -1 && !corpus.includes(subLow)) return false;
+    }
+    if (p.qNum) {
+      if (qnum !== p.qNum) return false;
+    }
+    for (var b = 0; b < p.bareNums.length; b++) {
+      var bn = p.bareNums[b];
+      if (qnum !== bn && !title.includes(bn) && !slug.includes(bn)) return false;
+    }
+    if (p.isKiller) {
+      var killerNums = ['15', '21', '22', '28', '29', '30'];
+      if (killerNums.indexOf(qnum) === -1 && !corpus.includes('킬러') && !corpus.includes('최고난도') && !corpus.includes('심화')) {
+        return false;
+      }
+    }
+    if (p.isFourPt) {
+      var fourNums = ['9','10','11','12','13','14','15','20','21','22','28','29','30'];
+      if (fourNums.indexOf(qnum) === -1 && !corpus.includes('4점')) return false;
+    }
+    if (p.isShortAns) {
+      var shortNums = ['16','17','18','19','20','21','22','29','30'];
+      if (shortNums.indexOf(qnum) === -1 && !corpus.includes('단답형')) return false;
+    }
+    for (var k = 0; k < p.keywords.length; k++) {
+      var kw = p.keywords[k];
+      var kwNs = kw.replace(/\s+/g, '');
+      if (!corpus.includes(kw) && !corpusNoSpace.includes(kwNs)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  ['filterYear', 'filterGrade', 'filterMonth', 'filterSubject', 'filterNum'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', renderList);
+  });
+
+  var activeFilterMode = 'all'; // 'all', 'wrong', 'bookmarks', 'pack'
+  var selectedPackSlugs = [];
+
+  // 게이미피케이션 상태 업데이트
+  function updateGamificationUI() {
+    if (!window.MatheduGame) return;
+    var streak = window.MatheduGame.getStreak();
+    var lv = window.MatheduGame.getLevelInfo();
+    var wrongs = window.MatheduGame.getWrongAnswers();
+    var bookmarks = window.MatheduGame.getBookmarks();
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+
+    var hStreak = document.getElementById('headerStreakCount'); if (hStreak) hStreak.textContent = streak.count > 0 ? streak.count : 1;
+    var sTitle = document.getElementById('streakTitle');
+    var sSub = document.getElementById('streakSub');
+    if (sTitle) {
+      if (isEn) {
+        sTitle.textContent = streak.count > 0 ? ('Day ' + streak.count + ' Streak 🔥') : 'Start Day 1 Streak';
+      } else {
+        sTitle.textContent = streak.count > 0 ? ('연속 출석 ' + streak.count + '일차 🔥') : '연속 출석 1일차 시작';
+      }
+    }
+    if (sSub) {
+      if (isEn) {
+        sSub.textContent = streak.activeToday ? '✅ Math Quest Completed Today!' : 'Solve 1 problem to keep the flame!';
+      } else {
+        sSub.textContent = streak.activeToday ? '✅ 오늘 수학 퀘스트 완료!' : '오늘 1문제 풀면 불꽃 유지!';
+      }
+    }
+
+    var lvTitle = document.getElementById('gameLevelTitle');
+    var xpText = document.getElementById('gameXpText');
+    var barFill = document.getElementById('gameXpBarFill');
+    if (lvTitle) {
+      if (isEn) {
+        var levelNamesEn = ['Scaffolding Novice', 'Concept Explorer', 'Geometric Prover', 'Conic Section Master', 'Grand Mathematician'];
+        lvTitle.textContent = '🔰 Lv.' + lv.level + ' ' + (levelNamesEn[lv.level - 1] || 'Master');
+      } else {
+        lvTitle.textContent = lv.title;
+      }
+    }
+    if (xpText) {
+      if (isEn) {
+        xpText.textContent = lv.currentXP + ' / ' + (lv.nextXP ? (lv.nextXP + ' XP') : 'Max Level');
+      } else {
+        xpText.textContent = lv.currentXP + ' / ' + (lv.nextXP ? (lv.nextXP + ' XP') : '최고 등급');
+      }
+    }
+    if (barFill) barFill.style.width = lv.progressPct + '%';
+
+    var qwCount = document.getElementById('quickWrongCount');
+    if (qwCount) qwCount.textContent = wrongs.length;
+    var tabWCount = document.getElementById('tabWrongCount');
+    if (tabWCount) tabWCount.textContent = wrongs.length;
+    var tabBCount = document.getElementById('tabBookmarkCount');
+    if (tabBCount) tabBCount.textContent = bookmarks.length;
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // 🎲 7대 핵심 동적 기하 걸작 (min7014 100% 무결성 실시간 연계)
+  // ══════════════════════════════════════════════════════════════
+  var FEATURED_GEOGEBRA_PICKS = [
+    {
+      id: "ellipse_reflection",
+      title: {
+        ko: "타원에서의 빛 반사 (광학적 성질)",
+        en: "Reflection of Light on an Ellipse (Optical Property)"
+      },
+      desc: {
+        ko: "한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. GeoGebra 앱렛으로 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.",
+        en: "A ray of light emitted from one focus reflects off the ellipse and always converges at the other focus. Drag the focal points in GeoGebra to explore this optical principle interactively."
+      },
+      applet: "https://www.geogebra.org/m/jggpufc4",
+      pdf: "https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20220515007.html",
+      yt: "https://youtu.be/AVFodL71fSk"
+    },
+    {
+      id: "pythagoras_tree",
+      title: {
+        ko: "피타고라스 나무 (프랙탈 기하와 면적 보존)",
+        en: "Pythagoras Tree (Fractal Geometry & Area Invariance)"
+      },
+      desc: {
+        ko: "직각삼각형의 세 변 위에 정사각형을 무한히 올려나가는 프랙탈 트리입니다. GeoGebra 동적 조작으로 가지의 각도를 실시간 회전시키며 각 단계별 면적 보존 법칙을 관찰해 보세요.",
+        en: "A mathematical fractal tree constructed by recursively attaching squares onto a right triangle. Rotate the branch angle dynamically in GeoGebra to verify area invariance at every stage."
+      },
+      applet: "https://www.geogebra.org/m/xK2WwJtQ",
+      pdf: "https://min7014.github.io/2025/2025013001.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20250130001.html",
+      yt: "https://youtu.be/vks-ZgCfXpw"
+    },
+    {
+      id: "parabola_reflection",
+      title: {
+        ko: "포물선에서의 빛 반사 (파라볼라 안테나 원리)",
+        en: "Reflection of Light on a Parabola (Parabolic Mirror)"
+      },
+      desc: {
+        ko: "축에 평행하게 입사한 빛은 포물선에 반사되어 초점에 완벽히 집광됩니다. 접선과 준선, 초점이 이루는 기하학적 대칭성을 슬라이더로 조작하며 확인해 보세요.",
+        en: "Parallel incoming light rays reflecting off a parabola always converge precisely at the focal point. Manipulate the GeoGebra slider to explore the tangent and focal optical geometry."
+      },
+      applet: "https://www.geogebra.org/m/UTyJNKeb",
+      pdf: "https://min7014.github.io/2022/2022042501.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20220425001.html",
+      yt: "https://youtu.be/nsXEim6SuIA"
+    },
+    {
+      id: "dandelin_ellipse",
+      title: {
+        ko: "단델린 구: 원뿔로부터 타원의 정의 유도",
+        en: "Dandelin Spheres: Deriving the Ellipse from a Cone"
+      },
+      desc: {
+        ko: "원뿔을 평면으로 자를 때 내접하는 두 단델린 구가 평면과 만나는 접점이 바로 초점입니다. 3D 입체 기하학을 통해 두 초점까지 거리의 합이 일정함을 시각적으로 증명합니다.",
+        en: "When a cone is sliced by a plane, the two inscribed Dandelin spheres touch the plane at the two foci, proving that the sum of distances from any point on the ellipse is strictly constant."
+      },
+      applet: "https://www.geogebra.org/m/btgeds5j",
+      pdf: "https://min7014.github.io/2022/2022101601.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20221016001.html",
+      yt: "https://youtu.be/BCGf_f_y5-s"
+    },
+    {
+      id: "dandelin_parabola",
+      title: {
+        ko: "단델린 구: 원뿔로부터 포물선의 정의 유도",
+        en: "Dandelin Spheres: Deriving the Parabola from a Cone"
+      },
+      desc: {
+        ko: "원뿔의 모선과 평행한 평면으로 자를 때 생기는 단면이 포물선입니다. 내접 구와 평면의 접점(초점) 및 평면과 구의 접촉원(준선) 사이의 거리가 같음을 3차원 기하학으로 입증합니다.",
+        en: "Slicing a cone parallel to a generator creates a parabola. The inscribed Dandelin sphere visually proves that the distance to the focus equals the distance to the directrix."
+      },
+      applet: "https://www.geogebra.org/m/zfwgegsy",
+      pdf: "https://min7014.github.io/2022/2022101602.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20221016002.html",
+      yt: "https://youtu.be/es4FSjwcCX8"
+    },
+    {
+      id: "dandelin_hyperbola",
+      title: {
+        ko: "단델린 구: 원뿔로부터 쌍곡선의 정의 유도",
+        en: "Dandelin Spheres: Deriving the Hyperbola from a Cone"
+      },
+      desc: {
+        ko: "맞꼭지 원뿔을 자를 때 내접하는 두 단델린 구를 통해, 곡선 위의 점에서 두 초점에 이르는 거리의 차가 모선의 길이로 일정함을 공간 기하학으로 명쾌하게 증명합니다.",
+        en: "Slicing a double cone yields a hyperbola. Two Dandelin spheres prove that the absolute difference between distances to the two foci is invariant."
+      },
+      applet: "https://www.geogebra.org/m/aben7qgm",
+      pdf: "https://min7014.github.io/2022/2022101603.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20221016003.html",
+      yt: "https://youtu.be/plmFRLIG22U"
+    },
+    {
+      id: "secant_to_tangent",
+      title: {
+        ko: "접선에 접근하는 할선들 (미분계수의 시각적 극한)",
+        en: "Secant Lines Approaching Tangent (Visual Limit of Derivative)"
+      },
+      desc: {
+        ko: "곡선 위의 고정점으로 동점이 다가갈 때 두 점을 잇는 할선의 평균변화율이 순간변화율(접선)로 합일되는 미분의 핵심 극한 과정을 GeoGebra의 동적 회전으로 관찰해 보세요.",
+        en: "As a moving point approaches a fixed point along a curve, secant lines rotate continuously to unite into the tangent line, demonstrating the fundamental limit of the derivative."
+      },
+      applet: "https://www.geogebra.org/m/dn5dqdxv",
+      pdf: "https://min7014.github.io/2023/2023081301.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20230813001.html",
+      yt: "https://youtu.be/aiT4cVw99Do"
+    }
+  ];
+
+  var currentFeaturedIndex = new Date().getDate() % FEATURED_GEOGEBRA_PICKS.length;
+
+  function renderTodayGeoGebra() {
+    var p = FEATURED_GEOGEBRA_PICKS[currentFeaturedIndex];
+    if (!p) return;
+    var lang = (window.MatheduI18n && window.MatheduI18n.getLanguage) ? window.MatheduI18n.getLanguage() : 'ko';
+    var tEl = document.getElementById('todayGgbTitle');
+    var dEl = document.getElementById('todayGgbDesc');
+    var aBtn = document.getElementById('btnTodayGgbApplet');
+    var pBtn = document.getElementById('btnTodayGgbPdf');
+    var wBtn = document.getElementById('btnTodayGgbWeb');
+
+    if (tEl) tEl.textContent = (p.title && p.title[lang]) || p.title.ko;
+    if (dEl) dEl.textContent = (p.desc && p.desc[lang]) || p.desc.ko;
+    if (aBtn) aBtn.href = p.applet;
+    if (pBtn) pBtn.href = p.pdf;
+    if (wBtn) wBtn.href = p.web;
+  }
+
+  window.rotateTodayGeoGebra = function(delta) {
+    var n = FEATURED_GEOGEBRA_PICKS.length;
+    currentFeaturedIndex = (currentFeaturedIndex + delta + n) % n;
+    renderTodayGeoGebra();
+  };
+
+  // 언어 변경 시 실시간 제목 및 설명 동기화
+  var prevLangCallback = window.onMatheduLanguageChange;
+  window.onMatheduLanguageChange = function(lang) {
+    if (typeof prevLangCallback === 'function') {
+      try { prevLangCallback(lang); } catch(e){}
+    }
+    renderTodayGeoGebra();
+  };
+
+  renderTodayGeoGebra();
+
+  // 필터 모드 전환 (전체, 오답노트, 즐겨찾기)
+  window.switchFilterMode = function(mode) {
+    activeFilterMode = mode;
+    document.querySelectorAll('.filter-tab-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    var activeBtn = document.querySelector('.filter-tab-btn[data-mode="' + mode + '"]');
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // 수업 팩 모드가 아니면 플로팅 바 숨김
+    var floatBar = document.getElementById('lessonPackFloatingBar');
+    if (mode !== 'pack' && floatBar) {
+      floatBar.style.display = 'none';
+    }
+
+    renderList();
+  };
+
+  // 즐겨찾기 토글
+  window.toggleBookmarkCard = function(slug, btn) {
+    if (!window.MatheduGame || !window.MatheduGame.toggleBookmark) return;
+    var isNowBookmarked = window.MatheduGame.toggleBookmark(slug);
+    if (btn) {
+      btn.textContent = isNowBookmarked ? '★' : '☆';
+      btn.className = 'card-bookmark-btn' + (isNowBookmarked ? ' active' : '');
+      btn.title = isNowBookmarked ? '즐겨찾기 해제' : '즐겨찾기 추가';
+    }
+    updateGamificationUI();
+    if (activeFilterMode === 'bookmarks') {
+      renderList();
+    }
+  };
+
+  // 교사용 수업 팩 묶기 토글
+  window.toggleLessonPackMode = function(forceState) {
+    if (typeof forceState === 'boolean') {
+      activeFilterMode = forceState ? 'pack' : 'all';
+    } else {
+      activeFilterMode = (activeFilterMode === 'pack') ? 'all' : 'pack';
+    }
+
+    var packBtn = document.getElementById('tabBtnLessonPack');
+    var floatBar = document.getElementById('lessonPackFloatingBar');
+
+    if (activeFilterMode === 'pack') {
+      document.querySelectorAll('.filter-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      if (packBtn) {
+        packBtn.classList.add('active');
+        packBtn.innerHTML = '🎒 수업 팩 묶기 모드 (체크 중)';
+      }
+      if (floatBar) floatBar.style.display = 'flex';
+      updatePackCounter();
+    } else {
+      if (packBtn) {
+        packBtn.classList.remove('active');
+        packBtn.innerHTML = '🎒 교사용 수업 팩 묶기';
+      }
+      if (floatBar) floatBar.style.display = 'none';
+      var allBtn = document.querySelector('.filter-tab-btn[data-mode="all"]');
+      if (allBtn) allBtn.classList.add('active');
+    }
+
+    renderList();
+  };
+
+  // 수업 팩 체크박스 선택/해제
+  window.togglePackSelect = function(slug, checked) {
+    var idx = selectedPackSlugs.indexOf(slug);
+    if (checked && idx === -1) {
+      selectedPackSlugs.push(slug);
+    } else if (!checked && idx !== -1) {
+      selectedPackSlugs.splice(idx, 1);
+    }
+    updatePackCounter();
+  };
+
+  function updatePackCounter() {
+    var el = document.getElementById('packSelectedCount');
+    if (el) el.textContent = selectedPackSlugs.length;
+  }
+
+  // 수업 팩 생성 액션 (복사, QR, 즉시 시작)
+  window.createLessonPackAction = function(action) {
+    if (selectedPackSlugs.length === 0) {
+      alert('오늘 수업에서 다룰 문제를 목록에서 최소 1개 이상 체크해주세요!');
+      return;
+    }
+
+    var firstSlug = selectedPackSlugs[0];
+    var packParam = selectedPackSlugs.join(',');
+    var origin = window.location.origin;
+    var pathname = window.location.pathname;
+    var basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+    var defaultRoom = 'CLASS-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+
+    var studentUrl = origin + basePath + '/board/' + firstSlug + '.html?pack=' + encodeURIComponent(packParam) + '&room=' + encodeURIComponent(defaultRoom);
+
+    if (action === 'copy') {
+      navigator.clipboard.writeText(studentUrl).then(function() {
+        alert('🎉 학생 배포용 수업 팩 링크가 복사되었습니다!\n\n총 ' + selectedPackSlugs.length + '개 문제가 순서대로 진행됩니다.\n수업 코드: ' + defaultRoom);
+      }).catch(function() {
+        prompt('아래 링크를 복사하여 학생들에게 공유하세요:', studentUrl);
+      });
+    } else if (action === 'qr') {
+      if (typeof openProjectorScreen === 'function') {
+        openProjectorScreen(studentUrl, defaultRoom + ' (수업 팩 ' + selectedPackSlugs.length + '문항)');
+      } else {
+        window.open('https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=' + encodeURIComponent(studentUrl), '_blank');
+      }
+    } else if (action === 'start') {
+      window.location.href = 'board/' + firstSlug + '.html?pack=' + encodeURIComponent(packParam) + '&room=' + encodeURIComponent(defaultRoom);
+    }
+  };
+
+  // min7014 동적 기하 스마트 탐색관 모달 제어
+  var _min7014Materials = null;
+  var _min7014ActiveTag = '';
+
+  window.openMin7014ExplorerModal = function() {
+    var modal = document.getElementById('min7014ExplorerModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+
+    if (!_min7014Materials) {
+      var listEl = document.getElementById('min7014ResultsList');
+      if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#7cc4ff">⏳ 3,400+ 동적 기하 자료실을 불러오는 중...</div>';
+
+      fetch('assets/min7014_materials.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          _min7014Materials = data || [];
+          filterMin7014Materials();
+        })
+        .catch(function(e) {
+          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" style="color:#7cc4ff">공식 웹사이트 바로가기</a></div>';
+        });
+    } else {
+      filterMin7014Materials();
+    }
+  };
+
+  window.closeMin7014ExplorerModal = function() {
+    var modal = document.getElementById('min7014ExplorerModal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  window.setMin7014Chip = function(tag, btn) {
+    _min7014ActiveTag = tag;
+    var container = document.getElementById('min7014ModalChips');
+    if (container) {
+      container.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
+    }
+    if (btn) btn.classList.add('active');
+    filterMin7014Materials();
+  };
+
+  window.filterMin7014Materials = function() {
+    if (!_min7014Materials) return;
+    var q = (document.getElementById('min7014SearchInput')?.value || '').trim().toLowerCase();
+    var listEl = document.getElementById('min7014ResultsList');
+    var countEl = document.getElementById('min7014ResultsCount');
+    if (!listEl) return;
+
+    var matched = _min7014Materials.filter(function(item) {
+      var title = (item.title || '').toLowerCase();
+      var tagStr = (item.tags || []).join(' ').toLowerCase();
+      var matchesQ = !q || title.includes(q) || tagStr.includes(q);
+      var matchesTag = !_min7014ActiveTag || new RegExp(_min7014ActiveTag, 'i').test(title) || new RegExp(_min7014ActiveTag, 'i').test(tagStr);
+      return matchesQ && matchesTag;
+    });
+
+    if (countEl) countEl.textContent = matched.length;
+
+    if (matched.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">검색어에 일치하는 기하 자료가 없습니다. 다른 검색어를 입력해보세요.</div>';
+      return;
+    }
+
+    var displayList = matched.slice(0, 40);
+    var h = '';
+    displayList.forEach(function(m) {
+      var title = escapeHtml(m.title || '제목 없음');
+      var ggbUrl = m.geogebra || '';
+      var pdfUrl = m.pdf || '';
+      var ytUrl = m.youtube || '';
+      var mainUrl = m.url || 'https://min7014.github.io/';
+
+      h += '<div class="bg-surface-container-lowest border border-surface-glass-border rounded-xl p-3.5 px-4 flex items-center justify-between gap-3 flex-wrap shadow-sm hover:border-secondary/40 transition-colors">';
+      h += '  <div class="flex-1 min-w-[220px]">';
+      h += '    <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" class="text-on-surface hover:text-secondary font-headline-sm text-[15px] font-bold no-underline block leading-snug">' + title + '</a>';
+      if (m.tags && m.tags.length > 0) {
+        h += '  <div class="flex gap-1 mt-1.5 flex-wrap">';
+        m.tags.forEach(function(t) {
+          h += '    <span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded-full font-label-badge text-[11px] font-semibold">#' + escapeHtml(t) + '</span>';
+        });
+        h += '  </div>';
+      }
+      h += '  </div>';
+
+      h += '  <div class="flex gap-1.5 items-center flex-wrap">';
+      if (ggbUrl) {
+        h += '    <a href="' + escapeHtml(ggbUrl) + '" target="_blank" rel="noopener" class="bg-secondary/10 hover:bg-secondary/20 text-secondary px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-bold no-underline">🎮 GeoGebra</a>';
+      }
+      if (pdfUrl) {
+        h += '    <a href="' + escapeHtml(pdfUrl) + '" target="_blank" rel="noopener" class="bg-status-amber/15 hover:bg-status-amber/25 text-[#B45309] px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-bold no-underline">📄 증명 PDF</a>';
+      }
+      if (ytUrl) {
+        h += '    <a href="' + escapeHtml(ytUrl) + '" target="_blank" rel="noopener" class="bg-error-container/60 hover:bg-error-container text-error px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-bold no-underline">▶️ 유튜브</a>';
+      }
+      h += '    <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" class="bg-surface-container hover:bg-surface-container-high text-on-surface px-2.5 py-1.5 rounded-lg font-body-sm text-body-sm font-semibold no-underline">상세 ➔</a>';
+      h += '  </div>';
+      h += '</div>';
+    });
+
+    listEl.innerHTML = h;
+  };
+
+  function renderList() {
+    var rawQuery = (searchInput ? searchInput.value : '').trim();
+    var heroInp = document.getElementById('heroQuickSearchInput');
+    if (heroInp && heroInp.value !== rawQuery) {
+      heroInp.value = rawQuery;
+    }
+    var btnClearMain = document.getElementById('btnClearQuizSearch');
+    if (btnClearMain) btnClearMain.style.display = rawQuery ? 'flex' : 'none';
+    var btnClearHero = document.getElementById('btnClearHeroSearch');
+    if (btnClearHero) btnClearHero.style.display = rawQuery ? 'flex' : 'none';
+
+    var parsedQ = window.parseMatheduNaturalQuery(rawQuery);
+    var ef = getExamFilters();
+    // If natural-language query specifies structured exam attributes, let parsedQ override stale dropdown filters
+    var effectiveEf = {
+      year: parsedQ.hasQuery && parsedQ.year ? parsedQ.year : (parsedQ.hasQuery ? '' : ef.year),
+      grade: parsedQ.hasQuery && parsedQ.grade ? parsedQ.grade : (parsedQ.hasQuery ? '' : ef.grade),
+      month: parsedQ.hasQuery && parsedQ.month ? parsedQ.month : (parsedQ.hasQuery ? '' : ef.month),
+      subject: parsedQ.hasQuery && parsedQ.subject ? parsedQ.subject : (parsedQ.hasQuery ? '' : ef.subject),
+      num: parsedQ.hasQuery && parsedQ.qNum ? parsedQ.qNum : (parsedQ.hasQuery ? '' : ef.num)
+    };
+    var hasActiveExamFilter = Boolean(effectiveEf.year || effectiveEf.grade || effectiveEf.month || effectiveEf.subject || effectiveEf.num);
+
+    var wrongSlugs = new Set((window.MatheduGame ? window.MatheduGame.getWrongAnswers() : []).map(function(w) { return w.slug; }));
+    var bookmarkSlugs = new Set(window.MatheduGame ? window.MatheduGame.getBookmarks() : []);
+
+    var tabAll = document.getElementById('tabAllCount');
+    if (tabAll) tabAll.textContent = allItems.length;
+
+    var filtered = allItems.filter(function(it) {
+      if (it.is_public === false) return false;
+      var title = (it.title || '').toLowerCase();
+      var tagStr = (it.tags || []).join(' ').toLowerCase();
+
+      // 모드별 필터링
+      if (activeFilterMode === 'wrong' && !wrongSlugs.has(it.slug)) {
+        return false;
+      }
+      if (activeFilterMode === 'bookmarks' && !bookmarkSlugs.has(it.slug)) {
+        return false;
+      }
+
+      if (parsedQ.hasQuery) {
+        if (!window.matchMatheduProblem(it, parsedQ)) return false;
+      }
+
+      if (!parsedQ.hasQuery && activeTopic) {
+        var topicRe = new RegExp(activeTopic, 'i');
+        if (!topicRe.test(title) && !topicRe.test(tagStr)) return false;
+      }
+
+      // 1. 학년도 매칭
+      if (effectiveEf.year) {
+        var mYear = (it.examYear === effectiveEf.year) || (it.examYearAlt === effectiveEf.year) || title.includes(effectiveEf.year);
+        if (!mYear) return false;
+      }
+      // 2. 대상 학년 매칭
+      if (effectiveEf.grade) {
+        var mGrade = (it.grade === effectiveEf.grade) ||
+                     (effectiveEf.grade === '고3' && (title.includes('고3') || title.includes('3학년') || title.includes('수능') || title.includes('모평'))) ||
+                     title.includes(effectiveEf.grade);
+        if (!mGrade) return false;
+      }
+      // 3. 시행월 매칭
+      if (effectiveEf.month) {
+        var mMonth = (it.month === effectiveEf.month) ||
+                     (effectiveEf.month === '11월' && (title.includes('수능') || title.includes('대수능') || title.includes('11월'))) ||
+                     title.includes(effectiveEf.month);
+        if (!mMonth) return false;
+      }
+      // 4. 선택과목 매칭
+      if (effectiveEf.subject) {
+        var mSubject = (it.subject === effectiveEf.subject) || title.includes(effectiveEf.subject.toLowerCase());
+        if (!mSubject) return false;
+      }
+      // 5. 문항 번호 매칭
+      if (effectiveEf.num) {
+        var mNum = (String(it.qNum) === String(effectiveEf.num)) ||
+                   new RegExp('(?:문항|문제|번)\\s*' + effectiveEf.num + '(?![0-9])|' + effectiveEf.num + '\\s*번(?![0-9])|수학\\s*' + effectiveEf.num + '(?![0-9])').test(title);
+        if (!mNum) return false;
+      }
+
+      return true;
+    });
+
+    // When searching by exam/month/subject, sort by examYear desc, then qNum asc so 23번->30번 appear in order
+    if (parsedQ.hasQuery || hasActiveExamFilter) {
+      filtered = filtered.slice().sort(function(a, b) {
+        var yA = parseInt(a.examYear || '0', 10);
+        var yB = parseInt(b.examYear || '0', 10);
+        if (yA !== yB) return yB - yA;
+        var qA = parseInt(a.qNum || '99', 10);
+        var qB = parseInt(b.qNum || '99', 10);
+        return qA - qB;
+      });
+    }
+
+    // Related problems expansion when a specific month+subject query (e.g. "9월 고3 확통 문제들") has < 8 items
+    var relatedItems = [];
+    if (parsedQ.hasQuery && parsedQ.month && (parsedQ.subject || parsedQ.subSubject) && filtered.length > 0 && filtered.length < 8) {
+      var exactSlugs = new Set(filtered.map(function(x) { return x.slug; }));
+      var relParsed = Object.assign({}, parsedQ, { month: '' });
+      relatedItems = allItems.filter(function(it) {
+        if (it.is_public === false || exactSlugs.has(it.slug)) return false;
+        return window.matchMatheduProblem(it, relParsed);
+      }).sort(function(a, b) {
+        var qA = parseInt(a.qNum || '99', 10);
+        var qB = parseInt(b.qNum || '99', 10);
+        return qA - qB;
+      });
+    }
+
+    // Render Smart Search Analysis Bar
+    var analysisBar = document.getElementById('smartSearchAnalysisBar');
+    if (analysisBar) {
+      if (parsedQ.hasQuery) {
+        var chipsHtml = '<div class="flex items-center gap-1.5 flex-wrap">';
+        chipsHtml += '<span class="font-label-badge text-[11px] text-secondary font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">auto_awesome</span>AI 검색 인식:</span>';
+        if (parsedQ.year) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-secondary text-white font-label-badge text-[11px]">📅 ' + escapeHtml(parsedQ.year) + '학년도</span>';
+        if (parsedQ.month) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-secondary text-white font-label-badge text-[11px]">🗓️ ' + escapeHtml(parsedQ.month) + '</span>';
+        if (parsedQ.grade) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-primary text-white font-label-badge text-[11px]">🎓 ' + escapeHtml(parsedQ.grade) + '</span>';
+        if (parsedQ.subject) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-status-emerald text-white font-label-badge text-[11px]">📘 ' + escapeHtml(parsedQ.subject) + '</span>';
+        if (parsedQ.subSubject) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-accent-indigo text-white font-label-badge text-[11px]">📙 ' + escapeHtml(parsedQ.subSubject) + '</span>';
+        if (parsedQ.qNum) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-status-amber text-white font-label-badge text-[11px]">#️⃣ ' + escapeHtml(parsedQ.qNum) + '번</span>';
+        if (parsedQ.isKiller) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-error text-white font-label-badge text-[11px]">🔥 킬러·고난도</span>';
+        if (parsedQ.isFourPt) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-status-amber text-white font-label-badge text-[11px]">⭐ 4점 주요문항</span>';
+        if (parsedQ.isShortAns) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-badge text-[11px]">✏️ 단답형</span>';
+        parsedQ.keywords.forEach(function(kw) {
+          chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-badge text-[11px] font-bold">🔍 ' + escapeHtml(kw) + '</span>';
+        });
+        if (parsedQ.ignoredStopwords.length > 0) {
+          chipsHtml += '<span class="font-body-sm text-[11px] text-on-surface-variant">(일반어 자동 제외: ' + escapeHtml(parsedQ.ignoredStopwords.join(', ')) + ')</span>';
+        }
+        chipsHtml += '</div>';
+        chipsHtml += '<div class="flex items-center gap-2 ml-auto">';
+        chipsHtml += '<span class="font-label-badge text-[11px] text-secondary font-bold">정확 일치 ' + filtered.length + '문항' + (relatedItems.length > 0 ? (' (+ 연관 ' + relatedItems.length + '문항)') : '') + '</span>';
+        chipsHtml += '<button type="button" onclick="triggerSmartQuizSearch(\'\', false)" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-badge text-[10px] border-0 cursor-pointer">초기화 ✕</button>';
+        chipsHtml += '</div>';
+        analysisBar.innerHTML = chipsHtml;
+        analysisBar.style.display = 'flex';
+      } else {
+        analysisBar.style.display = 'none';
+        analysisBar.innerHTML = '';
+      }
+    }
+
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    countBadge.textContent = filtered.length + (isEn ? ' quizzes' : '개') + (filtered.length !== allItems.length ? (isEn ? ' (of ' + allItems.length + ' total)' : ' (전체 ' + allItems.length + '개)') : '');
+
+    if (filtered.length === 0) {
+      if (activeFilterMode === 'wrong') {
+        listEl.innerHTML = 
+          '<div class="col-span-full text-center py-12 px-5 bg-surface-container-lowest border border-dashed border-error/40 rounded-2xl shadow-sm">' +
+            '<div class="text-4xl mb-2">🎉</div>' +
+            '<div class="font-headline-sm text-headline-sm font-bold text-status-emerald mb-1.5">' + (isEn ? 'Your Review Vault is completely clean!' : '오답노트가 깨끗하게 비어 있습니다!') + '</div>' +
+            '<div class="font-body-sm text-body-sm text-on-surface-variant mb-4">' + (isEn ? 'You have no unsolved mistakes or have successfully mastered all review questions. Outstanding!' : '틀린 문제가 없거나 모든 오답을 성공적으로 복습하셨습니다. 완벽합니다!') + '</div>' +
+            '<button type="button" class="btn-solve cursor-pointer border-0" onclick="switchFilterMode(\'all\')">' + (isEn ? 'Browse All Quizzes ➔' : '전체 문제 둘러보기 ➔') + '</button>' +
+          '</div>';
+        return;
+      }
+      if (activeFilterMode === 'bookmarks') {
+        listEl.innerHTML = 
+          '<div class="col-span-full text-center py-12 px-5 bg-surface-container-lowest border border-dashed border-status-amber/50 rounded-2xl shadow-sm">' +
+            '<div class="text-4xl mb-2">⭐</div>' +
+            '<div class="font-headline-sm text-headline-sm font-bold text-[#B45309] mb-1.5">' + (isEn ? 'No bookmarked questions yet' : '즐겨찾기한 문제가 아직 없습니다') + '</div>' +
+            '<div class="font-body-sm text-body-sm text-on-surface-variant mb-4">' + (isEn ? 'Click the star icon (☆) on any problem card to save it as your core reference collection.' : '문제 카드 오른쪽의 별표(☆)를 누르면 나만의 핵심 유형으로 보관할 수 있습니다.') + '</div>' +
+            '<button type="button" class="btn-solve cursor-pointer border-0" onclick="switchFilterMode(\'all\')">' + (isEn ? 'Browse All Quizzes ➔' : '전체 문제 둘러보기 ➔') + '</button>' +
+          '</div>';
+        return;
+      }
+      if (hasActiveExamFilter) {
+        var criteriaDesc = [ef.year ? (isEn ? ef.year + ' AY' : ef.year + '학년도') : '', ef.month, ef.grade, ef.subject, ef.num ? (isEn ? '#' + ef.num : ef.num + '번') : ''].filter(Boolean).join(' ');
+        var reqUrl = 'create.html?year=' + encodeURIComponent(ef.year) + '&grade=' + encodeURIComponent(ef.grade) + '&month=' + encodeURIComponent(ef.month) + '&subject=' + encodeURIComponent(ef.subject) + '&num=' + encodeURIComponent(ef.num);
+        listEl.innerHTML = 
+          '<div class="col-span-full bg-surface-container-lowest border border-dashed border-secondary/45 rounded-2xl py-9 px-5 text-center shadow-sm">' +
+            '<div class="text-3xl mb-2">🔍</div>' +
+            '<div class="font-headline-sm text-headline-sm font-bold text-on-surface mb-1.5">' + (isEn ? 'No exam problem found matching these exact criteria yet' : '선택하신 조건의 기출문항이 아직 등록되지 않았습니다') + '</div>' +
+            '<div class="font-body-sm text-body-sm text-on-surface-variant max-w-lg mx-auto mb-4 leading-relaxed">' +
+              '<span class="text-secondary font-bold">[' + escapeHtml(criteriaDesc) + ']</span> ' + (isEn ? 'Request this question now, and Antigravity AI will craft a 5~8 step interactive scaffolding quiz with GeoGebra visual proofs.' : '문항을 지금 바로 출제 요청하시면,<br>안티그래비티 AI가 5~8단계 인터랙티브 빌드업 퀴즈와 GeoGebra 시각화로 자동 제작해 드립니다.') +
+            '</div>' +
+            '<div class="flex justify-center gap-2.5 flex-wrap">' +
+              '<a href="' + reqUrl + '" class="btn-solve px-5 py-2.5 text-sm no-underline">' +
+                (isEn ? '✨ Request this Exam Problem Now ➔' : '✨ 이 기출문제 지금 출제 요청하기 ➔') +
+              '</a>' +
+              '<button type="button" class="btn-offline cursor-pointer border-0 px-4 py-2.5 text-sm" onclick="resetExamFilters()">' +
+                (isEn ? '🔄 Reset All Filters' : '🔄 필터 전체 초기화') +
+              '</button>' +
+            '</div>' +
+          '</div>';
+      } else {
+        listEl.innerHTML = '<div class="col-span-full text-center py-10 text-on-surface-variant bg-surface-container-lowest rounded-xl">' + (isEn ? 'No quizzes match your current search criteria.' : '검색 조건에 일치하는 퀴즈가 없습니다.') + '</div>';
+      }
+      return;
+    }
+
+    var solvedList = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems() : [];
+    var solvedMap = {};
+    solvedList.forEach(function(s) { solvedMap[s.slug] = s; });
+
+    var html = '';
+
+    // 단일 문항 정확 매칭 시 상단 정밀 타겟 히어로 카드 표출
+    if (filtered.length === 1 && hasActiveExamFilter) {
+      var exactItem = filtered[0];
+      var exactTitle = escapeHtml(exactItem.title || exactItem.slug);
+      var exactDesc = window.MatheduI18n ? window.MatheduI18n.formatProblemMeta(exactItem) : [exactItem.examYear ? exactItem.examYear + '학년도' : '', exactItem.month, exactItem.grade, exactItem.subject, exactItem.qNum ? exactItem.qNum + '번' : ''].filter(Boolean).join(' ');
+      html += 
+        '<div class="col-span-full bg-surface-container-lowest border-2 border-secondary rounded-2xl p-4 px-5 mb-2 flex items-center justify-between gap-3.5 flex-wrap shadow-md">' +
+          '<div class="flex items-center gap-3">' +
+            '<span class="text-2xl leading-none">🎯</span>' +
+            '<div>' +
+              '<div class="font-headline-sm text-[15px] font-bold text-secondary">' + (isEn ? 'Found the exact matching exam problem!' : '선택하신 기출문항을 정확히 찾았습니다!') + '</div>' +
+              '<div class="font-body-sm text-body-sm text-on-surface mt-0.5 font-semibold"><span class="text-secondary">[' + escapeHtml(exactDesc) + ']</span> ' + exactTitle + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="flex gap-2">' +
+            '<a href="' + (exactItem.url || ('board/' + exactItem.slug + '.html')) + '" class="btn-solve px-5 py-2.5 text-sm no-underline">' + (isEn ? '🚀 Instant Solve ➔' : '🚀 1초 바로 풀기 ➔') + '</a>' +
+          '</div>' +
+        '</div>';
+    }
+
+    var tBtnLaunch = isEn ? 'Class QR' : '수업 QR';
+    var tBtnOffline = isEn ? 'Offline' : '오프라인';
+    var tBtnOfflineTitle = isEn ? 'Download standalone offline HTML quiz' : '인터넷 없이 풀 수 있는 단독 오프라인 HTML 파일 다운로드';
+    var tBtnSolve = isEn ? 'Solve' : '풀기';
+    var tBtnResume = isEn ? 'Resume' : '이어풀기';
+    var tBtnReSolve = isEn ? 'Re-solve' : '다시풀기';
+    var tBadgeMastered = isEn ? '🏆 Mastered' : '🏆 완주';
+
+    var displayLimit = window._matheduDisplayLimit || 60;
+    var renderCount = Math.min(filtered.length, displayLimit);
+    for (var i = 0; i < renderCount; i++) {
+      var item = filtered[i];
+      var itemHref = item.url || ('board/' + encodeURIComponent(item.slug) + '.html');
+      var itemOffHref = item.offlineUrl || ('offline/' + encodeURIComponent(item.slug) + '.html');
+      var title = escapeHtml(item.title || item.slug);
+      var time = escapeHtml(item.time || '');
+      var slug = escapeHtml(item.slug);
+
+      var solved = solvedMap[slug];
+      var solveBtnText = tBtnSolve;
+      var statusBadgeHtml = '<span class="font-label-badge text-label-badge text-on-surface-variant flex items-center gap-0.5"><span class="material-symbols-outlined text-[16px] text-status-emerald">check_circle</span>초등 눈높이 디딤돌</span>';
+
+      if (solved) {
+        if (solved.completed) {
+          statusBadgeHtml = '<span class="font-label-badge text-label-badge text-status-emerald font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[16px] text-status-emerald">check_circle</span>' + tBadgeMastered + ' (100%)</span>';
+          solveBtnText = tBtnReSolve;
+        } else {
+          var pct = solved.totalSteps > 0 ? Math.round((solved.stepDone / solved.totalSteps) * 100) : 0;
+          statusBadgeHtml = '<span class="font-label-badge text-label-badge text-secondary font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>진행율 ' + pct + '% (' + solved.stepDone + '/' + solved.totalSteps + ')</span>';
+          solveBtnText = tBtnResume;
+        }
+      }
+
+      var badge1 = (item.examYear ? item.examYear : '수능·모평') + (item.month ? (' · ' + item.month) : '');
+      var badge2 = (item.subject ? item.subject : '공통') + (item.qNum ? (' ' + item.qNum + '번') : '');
+      var isGeom = (item.subject === '기하') || title.includes('타원') || title.includes('포물선') || title.includes('쌍곡선') || title.includes('벡터') || title.includes('공간');
+      var rightTagHtml = isGeom
+        ? '<span class="font-label-badge text-label-badge text-status-emerald font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">view_in_ar</span>단델린·기하 연계</span>'
+        : '<span class="font-label-badge text-label-badge text-status-amber font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">stairs</span>단계별 빌드업</span>';
+
+      var descText = isEn
+        ? 'Step-by-step interactive scaffolding from elementary intuition to CSAT mastery with visual geometric proofs and diagrams.'
+        : '초등 기초 직관 1단계부터 수능 본문항 해결까지 차근차근 디딤돌 사다리로 해체하여 도식화 흐름도와 시각적 도형으로 풀이합니다.';
+
+      var isBm = window.MatheduGame && window.MatheduGame.isBookmarked ? window.MatheduGame.isBookmarked(slug) : false;
+      var bmTitle = isBm ? (isEn ? 'Remove from Bookmarks' : '즐겨찾기 해제') : (isEn ? 'Add to Bookmarks' : '즐겨찾기 추가');
+
+      html += '<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2" data-slug="' + slug + '">';
+      html += '  <div class="flex items-center justify-between gap-2 flex-wrap">';
+      html += '    <div class="flex items-center gap-1.5 flex-wrap">';
+      if (activeFilterMode === 'pack') {
+        var isChecked = selectedPackSlugs.indexOf(slug) !== -1;
+        html += '      <input type="checkbox" class="card-pack-checkbox" onchange="togglePackSelect(\'' + slug + '\', this.checked)" ' + (isChecked ? 'checked' : '') + '>';
+      }
+      html += '      <span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-badge text-label-badge font-bold">' + escapeHtml(badge1) + '</span>';
+      html += '      <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-badge text-label-badge">' + escapeHtml(badge2) + '</span>';
+      html += '    </div>';
+      html += '    <div class="flex items-center gap-1.5">';
+      html +=        rightTagHtml;
+      html += '      <button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';
+      html += '    </div>';
+      html += '  </div>';
+      var tagPillsHtml = '';
+      if (item.tags && item.tags.length > 0) {
+        var displayTags = item.tags.filter(function(t) {
+          return t !== item.subject && t !== (item.qNum + '번') && t !== item.month && t !== item.grade;
+        }).slice(0, 5);
+        if (displayTags.length > 0) {
+          tagPillsHtml = '<div class="flex items-center gap-1 flex-wrap mt-0.5">';
+          displayTags.forEach(function(tg) {
+            tagPillsHtml += '<button type="button" onclick="triggerSmartQuizSearch(\'' + escapeHtml(tg) + '\', false)" class="px-1.5 py-0.5 rounded bg-surface-container-low hover:bg-secondary/10 text-on-surface-variant hover:text-secondary font-label-badge text-[10px] border-0 cursor-pointer transition-colors">#' + escapeHtml(tg) + '</button>';
+          });
+          tagPillsHtml += '</div>';
+        }
+      }
+
+      html += '  <h3 class="font-headline-sm text-[16px] text-on-surface font-bold leading-snug m-0">';
+      html += '    <a href="' + itemHref + '" class="text-on-surface no-underline hover:text-secondary transition-colors">' + title + '</a>';
+      html += '  </h3>';
+      html +=    tagPillsHtml;
+      html += '  <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 m-0">' + descText + '</p>';
+      html += '  <div class="flex items-center justify-between pt-2 gap-2 flex-wrap">';
+      html += '    <div class="flex items-center gap-2 flex-wrap">';
+      html +=        statusBadgeHtml;
+      html += '      <button type="button" onclick="openClassCreatorModal(\'' + slug + '\')" class="font-label-badge text-label-badge text-on-surface-variant hover:text-secondary bg-transparent border-0 cursor-pointer flex items-center gap-0.5 p-0"><span class="material-symbols-outlined text-[15px]">co_present</span>' + tBtnLaunch.replace('🚀 ', '') + '</button>';
+      html += '      <a href="' + itemOffHref + '" download title="' + tBtnOfflineTitle + '" class="font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface no-underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[15px]">download</span>' + tBtnOffline.replace('📥 ', '') + '</a>';
+      html += '    </div>';
+      html += '    <a class="h-9 px-3.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="' + itemHref + '">' + solveBtnText + '</a>';
+      html += '  </div>';
+      html += '</div>';
+    }
+    if (filtered.length > renderCount) {
+      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      html += '  </button>';
+      html += '</div>';
+    }
+    if (filtered.length > renderCount) {
+      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      html += '  </button>';
+      html += '</div>';
+    }
+    if (filtered.length > renderCount) {
+      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      html += '  </button>';
+      html += '</div>';
+    }
+
+    // Render Related Problems Section if available (e.g. when searching "9월 고3 확통 문제들", show 10월/6월 고3 확통 below)
+    if (relatedItems.length > 0) {
+      var relSubjLabel = [parsedQ.grade, parsedQ.subject || parsedQ.subSubject].filter(Boolean).join(' · ');
+      html += '<div class="rounded-xl bg-secondary/10 border border-secondary/25 p-3 px-4 mt-2 flex items-center justify-between gap-2 flex-wrap">';
+      html += '  <div class="flex items-center gap-2">';
+      html += '    <span class="material-symbols-outlined text-secondary text-[20px]">library_books</span>';
+      html += '    <div>';
+      html += '      <div class="font-headline-sm text-[14px] font-bold text-secondary">함께 풀면 좋은 [' + escapeHtml(relSubjLabel) + '] 타 시행월(6월·10월) 연관 기출 (' + relatedItems.length + '문항)</div>';
+      html += '      <div class="font-body-sm text-[11px] text-on-surface-variant">검색하신 ' + escapeHtml(parsedQ.month) + ' 문항과 동일한 과목·수준의 연관 기출문제입니다.</div>';
+      html += '    </div>';
+      html += '  </div>';
+      html += '  <button type="button" onclick="triggerSmartQuizSearch(\'' + escapeHtml(relSubjLabel) + ' 문제들\', false)" class="px-3 py-1 rounded-lg bg-secondary text-white font-label-badge text-[11px] font-bold border-0 cursor-pointer">' + escapeHtml(parsedQ.subject || parsedQ.subSubject) + ' 전체 보기</button>';
+      html += '</div>';
+
+      for (var rIdx = 0; rIdx < relatedItems.length; rIdx++) {
+        var rItem = relatedItems[rIdx];
+        var rTitle = escapeHtml(rItem.title || rItem.slug);
+        var rSlug = escapeHtml(rItem.slug);
+        var rBadge1 = (rItem.examYear ? rItem.examYear : '수능·모평') + (rItem.month ? (' · ' + rItem.month) : '');
+        var rBadge2 = (rItem.subject ? rItem.subject : '공통') + (rItem.qNum ? (' ' + rItem.qNum + '번') : '');
+        html += '<div class="rounded-xl bg-surface-container-lowest/90 border border-surface-variant p-space-md shadow-sm flex flex-col gap-2" data-slug="' + rSlug + '">';
+        html += '  <div class="flex items-center justify-between gap-2 flex-wrap">';
+        html += '    <div class="flex items-center gap-1.5 flex-wrap">';
+        html += '      <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-label-badge text-label-badge font-bold">' + escapeHtml(rBadge1) + '</span>';
+        html += '      <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-badge text-label-badge">' + escapeHtml(rBadge2) + '</span>';
+        html += '      <span class="px-2 py-0.5 rounded bg-status-amber/15 text-[#B45309] font-label-badge text-[10px] font-bold">연관 추천</span>';
+        html += '    </div>';
+        html += '    <a class="h-8 px-3 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="' + (rItem.url || ('board/' + rSlug + '.html')) + '">' + tBtnSolve + '</a>';
+        html += '  </div>';
+        html += '  <h3 class="font-headline-sm text-[15px] text-on-surface font-bold leading-snug m-0">';
+        html += '    <a href="' + (rItem.url || ('board/' + rSlug + '.html')) + '" class="text-on-surface no-underline hover:text-secondary transition-colors">' + rTitle + '</a>';
+        html += '  </h3>';
+        html += '</div>';
+      }
+    }
+
+    listEl.innerHTML = html;
+
+    // 수식 렌더링
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([listEl]).catch(function(){});
+    }
+
+    updateGamificationUI();
+  }
+
+  function updateStudentQuickBar() {
+    var bar = document.getElementById('studentLibraryQuickBar');
+    if (!bar) return;
+    var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    var guest = window.MatheduAuth ? window.MatheduAuth.getCurrentGuest() : null;
+    var user = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
+    var count = (window.MatheduAuth && window.MatheduAuth.getSolvedProblems) ? window.MatheduAuth.getSolvedProblems().length : 0;
+    
+    if (user) {
+      var userLabel = isEn ? ('👤 <b>' + escapeHtml(user.name) + '</b> (' + escapeHtml(user.roleLabel) + ')') : ('👤 <b>' + escapeHtml(user.name) + '</b>님 (' + escapeHtml(user.roleLabel) + ')');
+      var libBtn = isEn ? ('📂 My Library (' + count + ' quizzes)') : ('📂 내 서재 (' + count + '개 문항)');
+      bar.innerHTML = 
+        '<span class="font-body-sm text-body-sm text-status-emerald font-bold">' + userLabel + '</span>' +
+        '<button type="button" class="px-3 py-1.5 rounded-lg bg-secondary/10 hover:bg-secondary/20 text-secondary font-body-sm text-body-sm font-bold border-0 cursor-pointer" onclick="MatheduAuth.showMyProblemsModal()">' +
+          libBtn +
+        '</button>';
+    } else if (guest) {
+      var guestLabel = isEn ? ('🧑‍🎓 <b>' + escapeHtml(guest.name) + '</b>') : ('🧑‍🎓 <b>' + escapeHtml(guest.name) + '</b>님');
+      var solvedBtn = isEn ? ('📂 Solved (' + count + ')') : ('📂 푼 문제 (' + count + '개)');
+      var upgradeBtn = isEn ? '✨ Upgrade to Member' : '✨ 정회원 전환';
+      bar.innerHTML = 
+        '<span class="font-body-sm text-body-sm text-secondary font-bold">' + guestLabel + '</span>' +
+        '<button type="button" class="px-2.5 py-1 rounded-lg bg-secondary/10 hover:bg-secondary/20 text-secondary font-body-sm text-body-sm font-bold border-0 cursor-pointer" onclick="MatheduAuth.showMyProblemsModal()">' +
+          solvedBtn +
+        '</button>' +
+        '<button type="button" class="px-2.5 py-1 rounded-lg bg-accent-indigo/15 hover:bg-accent-indigo/25 text-accent-indigo font-body-sm text-body-sm font-bold border-0 cursor-pointer" onclick="MatheduAuth.showUpgradeModal()">' +
+          upgradeBtn +
+        '</button>';
+    }
+  }
+
+  // 언어 변경 시 UI 자동 재렌더링 콜백 등록
+  window.onMatheduLanguageChange = function(lang) {
+    updateExamSelectOptions(lang);
+    updateGamificationUI();
+    updateStudentQuickBar();
+    renderTodayGeoGebra();
+    var heroCountEl = document.getElementById('heroStatQuizCount');
+    if (heroCountEl && allItems && allItems.length > 0) {
+      heroCountEl.textContent = (lang === 'en') ? (allItems.length + '+') : (allItems.length + '개');
+    }
+    var rndBtn = document.getElementById('btnRandomQuizChallenge');
+    if (rndBtn) {
+      rndBtn.innerHTML = (lang === 'en') ? '🎲 Random Quiz Challenge' : '🎲 랜덤 기출 도전';
+    }
+    renderList();
+  };
+
+  window.startRandomQuiz = function() {
+    var pubItems = (allItems || []).filter(function(it) { return it.is_public !== false; });
+    if (pubItems.length === 0) {
+      window.location.href = 'board/ac8dc374.html';
+      return;
+    }
+    var pick = pubItems[Math.floor(Math.random() * pubItems.length)];
+    window.location.href = 'board/' + encodeURIComponent(pick.slug) + '.html';
+  };
+
+  window.addEventListener('mathedu:solved-updated', function() {
+    renderList();
+    updateStudentQuickBar();
+  });
+  window.addEventListener('mathedu:auth-changed', function() {
+    renderList();
+    updateStudentQuickBar();
+  });
+  window.addEventListener('mathedu:streak-updated', updateGamificationUI);
+  window.addEventListener('mathedu:xp-updated', updateGamificationUI);
+  window.addEventListener('mathedu:badge-unlocked', updateGamificationUI);
+  window.addEventListener('mathedu:wrong-updated', function() {
+    updateGamificationUI();
+    if (activeFilterMode === 'wrong') renderList();
+  });
+  window.addEventListener('mathedu:bookmarks-updated', function() {
+    updateGamificationUI();
+    if (activeFilterMode === 'bookmarks') renderList();
+  });
+
+  updateStudentQuickBar();
+  updateGamificationUI();
+
+  // 실시간 검색 이벤트
+  searchInput.addEventListener('input', renderList);
+
+  // 주제 태그 필터 클릭 이벤트
+  document.getElementById('topicChips').addEventListener('click', function(e) {
+    var chip = e.target.closest('.topic-chip');
+    if (!chip) return;
+    document.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
+    chip.classList.add('active');
+    activeTopic = chip.getAttribute('data-topic') || '';
+    renderList();
+  });
+
+  function renderRecentRooms() {
+    try {
+      var rooms = JSON.parse(localStorage.getItem('mathedu_teacher_rooms') || '[]');
+      if (rooms && rooms.length > 0) {
+        var box = document.getElementById('recentRoomsBox');
+        var list = document.getElementById('recentRoomsList');
+        var h = '';
+        rooms.slice(0, 5).forEach(function(item) {
+          h += '<a class="room-chip" href="dashboard.html?room=' + encodeURIComponent(item.room) + '">🏫 ' + escapeHtml(item.room) + ' 대시보드</a>';
+        });
+        list.innerHTML = h;
+        box.style.display = 'flex';
+      }
+    } catch(e) {}
+  }
+
+  window.openDefaultTeacherClass = function() {
+    var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : 'ac8dc374';
+    if (window.MatheduAuth) {
+      window.MatheduAuth.requireAuth('문제 배포', function() {
+        if (typeof openClassCreatorModal === 'function') {
+          openClassCreatorModal(defaultSlug);
+        }
+      });
+    } else if (typeof openClassCreatorModal === 'function') {
+      openClassCreatorModal(defaultSlug);
+    }
+  };
+
+  window.joinClassroom = function() {
+    var code = (document.getElementById('inputRoomCode').value || '').trim();
+    if (!code) {
+      alert('선생님께 전달받은 수업 코드를 입력하세요.');
+      return;
+    }
+    // 1. 로컬스토리지에서 최근 개설된 해당 방의 슬러그 확인
+    try {
+      var rooms = JSON.parse(localStorage.getItem('mathedu_teacher_rooms') || '[]');
+      var match = rooms.find(function(it) { return (it.room || '').toUpperCase() === code.toUpperCase(); });
+      if (match && match.slug) {
+        window.location.href = 'board/' + encodeURIComponent(match.slug) + '.html?room=' + encodeURIComponent(code);
+        return;
+      }
+    } catch(e) {}
+
+    // 2. 기본 fallback: 최신 퀴즈로 입장
+    var fallbackSlug = (allItems && allItems.length > 0) ? allItems[0].slug : 'ac8dc374';
+    window.location.href = 'board/' + encodeURIComponent(fallbackSlug) + '.html?room=' + encodeURIComponent(code);
+  };
+
+  function loadQuizRequests() {
+    var API_URL = 'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+    var box = document.getElementById('requestsBoardBox');
+    var list = document.getElementById('requestsList');
+    var badge = document.getElementById('requestsCountBadge');
+    if (!box || !list) return;
+
+    fetch(API_URL + '?action=reports&_t=' + Date.now())
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var reports = (data && data.reports) || [];
+        var requests = reports.filter(function(r) {
+          return r.quiz_slug === '_request_new';
+        });
+
+        if (requests.length === 0) {
+          box.style.display = 'none';
+          return;
+        }
+
+        // 최신순 정렬 (역순)
+        requests.reverse();
+        var pendingCount = requests.filter(function(r) { return !r.fix_timestamp; }).length;
+        if (badge) {
+          badge.textContent = pendingCount > 0 ? (pendingCount + '건 AI 제작 중') : '전체 제작 완료 (' + requests.length + '건)';
+          badge.className = 'count-badge ' + (pendingCount > 0 ? 'badge-pending' : 'badge-done');
+        }
+
+        // 최근 6개 표시
+        var displayItems = requests.slice(0, 6);
+        var html = '';
+
+        displayItems.forEach(function(r) {
+          var isDone = !!r.fix_timestamp;
+          var text = r.text || '';
+          
+          // 제목 추출
+          var titleMatch = text.match(/제목:\s*(.*?)(?=\n내용:|\n정답|\n이메일|\Z)/);
+          var title = titleMatch ? titleMatch[1].trim() : '';
+          if (!title) {
+            var firstLine = text.replace(/\[문제 생성 요청\]/g, '').trim().split('\n')[0];
+            title = firstLine || '새 수학 문제 요청';
+          }
+          if (title.length > 50) title = title.substring(0, 50) + '…';
+
+          // 신청자 및 시간
+          var reporter = r.reporter || '선생님';
+          var timeStr = formatRelativeTime(r.timestamp);
+
+          // 완료 링크 추출
+          var doneUrl = '';
+          if (isDone && r.fix_result) {
+            var urlMatch = r.fix_result.match(/https?:\/\/[^\s]+/);
+            if (urlMatch) {
+              doneUrl = urlMatch[0];
+            }
+          }
+
+          html += '<div class="req-item-card">';
+          html += '  <div style="flex:1;min-width:0;">';
+          html += '    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">';
+          if (isDone) {
+            html += '      <span class="req-status-badge badge-done">✅ 제작 완료</span>';
+          } else {
+            html += '      <span class="req-status-badge badge-pending">⏳ AI 제작 중</span>';
+          }
+          html += '      <span style="font-size:.8rem;color:var(--sub)">신청: <b>' + escapeHtml(reporter) + '</b></span>';
+          if (timeStr) {
+            html += '      <span style="font-size:.78rem;color:var(--sub)">· ' + escapeHtml(timeStr) + '</span>';
+          }
+          html += '    </div>';
+          html += '    <div class="req-title">' + escapeHtml(title) + '</div>';
+          html += '  </div>';
+
+          html += '  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">';
+          if (isDone && doneUrl) {
+            html += '    <a href="' + escapeHtml(doneUrl) + '" class="btn-solve" style="color:var(--good);border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.12)">문제 풀기 ➔</a>';
+          } else {
+            html += '    <span style="font-size:.82rem;color:var(--sub);font-weight:600;display:inline-flex;align-items:center;gap:4px">🤖 AI 자동 분석 중</span>';
+          }
+          html += '  </div>';
+          html += '</div>';
+        });
+
+        list.innerHTML = html;
+        box.style.display = 'block';
+
+        if (window.MathJax && MathJax.typesetPromise) {
+          MathJax.typesetPromise([list]).catch(function(){});
+        }
+      })
+      .catch(function(err) {
+        console.error('요청 현황 로드 실패:', err);
+      });
+  }
+
+  function formatRelativeTime(tsStr) {
+    if (!tsStr) return '';
+    try {
+      var d = new Date(tsStr);
+      if (isNaN(d.getTime())) return tsStr;
+      var diffSec = Math.floor((Date.now() - d.getTime()) / 1000);
+      if (diffSec < 60) return '방금 전';
+      var diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return diffMin + '분 전';
+      var diffHour = Math.floor(diffMin / 60);
+      if (diffHour < 24) return diffHour + '시간 전';
+      var diffDay = Math.floor(diffHour / 24);
+      return diffDay + '일 전';
+    } catch(e) {
+      return tsStr;
+    }
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  // 외부 방문자 메인 허브(index.html) 진입 실시간 기록 (세션당 1회, 봇 제외)
+  (function logHubVisit() {
+    try {
+      if (window.location.protocol !== 'http:' && window.location.protocol !== 'https:') return;
+      if (navigator && navigator.webdriver) return;
+      if (sessionStorage.getItem('mathedu_visit_logged_home')) return;
+      sessionStorage.setItem('mathedu_visit_logged_home', '1');
+      var vid = localStorage.getItem('mathedu_visitor_id');
+      if (!vid) {
+        vid = Math.random().toString(36).substring(2, 6).toUpperCase();
+        localStorage.setItem('mathedu_visitor_id', vid);
+      }
+      var u = window.MatheduAuth && window.MatheduAuth.getCurrentUser ? window.MatheduAuth.getCurrentUser() : null;
+      var g = window.MatheduAuth && window.MatheduAuth.getCurrentGuest ? window.MatheduAuth.getCurrentGuest() : null;
+      var sName = (u && u.name) ? u.name : ((g && g.name) ? g.name : ('홈방문#' + vid));
+      fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          quiz_slug: 'home',
+          student_name: sName,
+          current_step: 1,
+          total_steps: 1,
+          correct: 1
+        })
+      }).catch(function(){});
+    } catch(e) {}
+  })();
+})();
+</script>
+</body>
+</html>
