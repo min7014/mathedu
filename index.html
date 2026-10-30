@@ -2274,6 +2274,13 @@ function toggleMathStory() {
       html += '  </button>';
       html += '</div>';
     }
+    if (filtered.length > renderCount) {
+      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      html += '  </button>';
+      html += '</div>';
+    }
 
     // Render Related Problems Section if available (e.g. when searching "9월 고3 확통 문제들", show 10월/6월 고3 확통 below)
     if (relatedItems.length > 0) {

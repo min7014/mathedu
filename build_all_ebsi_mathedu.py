@@ -561,7 +561,7 @@ def build_ebsi_dynamic_player_scripts() -> tuple:
   <section id="ebsiUniversalNavBar" style="margin:12px 0 14px;padding:14px 16px;background:linear-gradient(135deg,#f8fafc 0%,#eff6ff 100%);border:1.5px solid #bfdbfe;border-radius:14px;box-shadow:0 2px 10px rgba(0,99,152,0.06)">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
       <div style="display:flex;align-items:center;gap:6px;font-weight:800;font-size:0.88rem;color:#006398">
-        <span>🗂️ EBSi 전 연도(2006~2027학년도) · 전 학년(고1·고2·고3) 16,747문항 단계별 플레이어</span>
+        <span>🗂️ EBSi 전 연도(2006~2027학년도) · 전 학년(고1·고2·고3) 16,548문항 단계별 플레이어</span>
       </div>
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
         <button type="button" onclick="navEbsiProblem(-1)" style="background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;border-radius:8px;padding:4px 10px;font-size:0.78rem;font-weight:700;cursor:pointer">◀ 이전 번호</button>
@@ -727,6 +727,23 @@ function renderEbsiProblemToDom(prob) {{
   var s3Line = prob.s3 || ('주어진 조건을 <b>' + leafUnit + '</b>의 기본 수식으로 나타냅니다.');
   var s4Line = prob.s4 || ('세운 관계식에 조건의 수치를 대입하여 중간 식을 정리합니다.');
   var s5Line = prob.s5 || ('정리한 식으로부터 최종 목표값을 계산하면 정답은 ' + ansDisplay + '입니다.');
+  var s3Q = prob.s3_q || {{
+    level_label: '조건 식 세우기 디딤돌 3',
+    stem: '본문항의 출발 조건을 <b>' + leafUnit + '</b>의 관계식으로 나타내면 다음과 같습니다:<br><div style="margin:8px 0;padding:10px 14px;background:#f8fafc;border-left:4px solid #0284c7;border-radius:8px">' + s3Line + '</div>위 식의 전개 방향과 일치하는 핵심 단원 원리는?',
+    options: [midUnit + ' · ' + leafUnit + '의 정의와 성질 적용', '역삼각함수의 치환적분', '벡터의 외적과 평면의 방정식', '복소평면의 극형식 변환', '행렬식의 여인수 전개'],
+    answer: 1,
+    exp: '출발 조건을 <b>' + leafUnit + '</b>의 관계식으로 세우면 다음과 같습니다:<br>• ' + s3Line
+  }};
+  s3Q.level_label = s3Q.level_label || '조건 식 세우기 디딤돌 3';
+
+  var s4Q = prob.s4_q || {{
+    level_label: '중간 관계식 디딤돌 4',
+    stem: '앞선 출발 식을 정리하여 중간 관계식을 유도하면 다음과 같습니다:<br><div style="margin:8px 0;padding:10px 14px;background:#f0fdf4;border-left:4px solid #059669;border-radius:8px">' + s4Line + '</div>위 중간 식으로부터 얻을 수 있는 올바른 결론은?',
+    options: opts,
+    answer: ansIdx,
+    exp: '<b>' + leafUnit + '</b>의 성질에 따라 주어진 식을 정리하면 다음과 같이 전개됩니다:<br>• ' + s4Line
+  }};
+  s4Q.level_label = s4Q.level_label || '중간 관계식 디딤돌 4';
 
   var stepsData = [
     {{
@@ -743,37 +760,13 @@ function renderEbsiProblemToDom(prob) {{
       title: '🌱 3단계 · [출발 조건 식 세우기] ' + leafUnit + ' 핵심 조건 변환',
       title_en: '🌱 Step 3 · [Setting Up the Equation]',
       know: '본문항 해결의 첫걸음은 문제의 조건을 <b>' + leafUnit + '</b> 단원의 수식으로 옮기는 것입니다.<br>• <b>출발 식 및 원리</b>: ' + s3Line,
-      q: {{
-        level_label: '조건 식 세우기 디딤돌 3',
-        stem: '이 문제를 풀기 위해 가장 먼저 적용해야 할 <b>핵심 단원과 출발 원리</b>로 가장 알맞은 것은?',
-        options: [
-          midUnit + ' · ' + leafUnit + '의 정의와 성질 적용',
-          '공간좌표의 구면삼각법 정리',
-          '복소평면의 드무아브르 정리',
-          '행렬의 고윳값과 케일리-해밀턴 정리',
-          '테일러 급수의 무한차수 근사'
-        ],
-        answer: 1,
-        exp: '이 문항의 출제의도는 <b>' + (prob.intent || leafUnit) + '</b>이므로 <b>' + midUnit + ' · ' + leafUnit + '</b>의 성질을 먼저 적용합니다.<br>• ' + s3Line
-      }}
+      q: s3Q
     }},
     {{
       title: '🌳 4단계 · [풀이 전개] 핵심 관계식 정리 및 중간 값 도출',
       title_en: '🌳 Step 4 · [Intermediate Derivation]',
       know: '3단계에서 세운 출발 식을 정리하여 문제에서 요구하는 핵심 미지수 또는 관계식을 도출합니다.<br>• <b>중간 전개 과정</b>: ' + s4Line,
-      q: {{
-        level_label: '중간 관계식 디딤돌 4',
-        stem: '앞선 출발 식을 정리하는 과정에서 거치게 되는 <b>핵심 풀이 단계</b>에 해당하는 설명으로 옳은 것은?',
-        options: [
-          '주어진 조건과 무관한 임의의 상수를 곱한다.',
-          leafUnit + '의 성질로 식을 정리하여 구하는 값을 계산 가능한 형태로 만든다.',
-          '분모가 $0$이 되도록 양변을 $0$으로 나눈다.',
-          '조건식을 모두 지우고 첫째항을 $0$으로 고정한다.',
-          '정의역을 허수 전체의 집합으로 임의 변경한다.'
-        ],
-        answer: 2,
-        exp: '<b>' + leafUnit + '</b>의 성질에 따라 주어진 식을 정리하면 다음과 같이 전개됩니다:<br>• ' + s4Line
-      }}
+      q: s4Q
     }},
     {{
       title: '💎 5단계 · [최종 계산 조립] 디딤돌 조각을 합쳐 최종 정답 구하기',
@@ -1156,6 +1149,8 @@ def main():
                 "s3": s3,
                 "s4": s4,
                 "s5": s5,
+                "s3_q": prob_full.get("step3_q"),
+                "s4_q": prob_full.get("step4_q"),
             }
             shards_by_year[cal_year]["problems"][ebsi_slug] = shard_record
 
@@ -1223,8 +1218,8 @@ def main():
     if default_ebsi_prob:
         ebsi_player_prob = dict(default_ebsi_prob)
         ebsi_player_prob["slug"] = "ebsi"
-        ebsi_player_prob["title"] = "[EBSi 전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,747문항 단계별 디딤돌"
-        ebsi_player_prob["title_en"] = "[EBSi All-Years & All-Grades Math Player] 16,747 Step-by-Step Scaffolding Problems"
+        ebsi_player_prob["title"] = "[EBSi 전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,548문항 단계별 디딤돌"
+        ebsi_player_prob["title_en"] = "[EBSi All-Years & All-Grades Math Player] 16,548 Step-by-Step Scaffolding Problems"
         extra_top_html, extra_bottom_js = build_ebsi_dynamic_player_scripts()
         ebsi_html = build_ebsi_problem_html(ebsi_player_prob, extra_top_html=extra_top_html, extra_bottom_js=extra_bottom_js)
         with open(os.path.join(BOARD_DIR, "ebsi.html"), "w", encoding="utf-8") as f:
@@ -1232,7 +1227,7 @@ def main():
 
         new_index_entries.insert(0, {
             "slug": "ebsi",
-            "title": "[EBSi 전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,747문항 단계별 디딤돌",
+            "title": "[EBSi 전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,548문항 단계별 디딤돌",
             "time": "2026-10-30 22:00",
             "file": "ebsi.html",
             "examYear": "2026",
@@ -1241,9 +1236,9 @@ def main():
             "month": "11월",
             "subject": "공통(수학I·II)",
             "qNum": "1",
-            "source": "EBSi 전 연도·전 학년 기출 아카이브 (16,747문항)",
+            "source": "EBSi 전 연도·전 학년 기출 아카이브 (16,548문항)",
             "date": "2026-10-30",
-            "tags": ["수능", "모의평가", "학력평가", "고3", "고2", "고1", "전연도기출", "16747문항"],
+            "tags": ["수능", "모의평가", "학력평가", "고3", "고2", "고1", "전연도기출", "16548문항"],
             "is_public": True,
         })
 

@@ -2,8 +2,12 @@
 """
 ebsi_lml_engine.py
 ==================
-EBSi 기출문제 LML(XML) 파서 및 초등 눈높이 5단계 디딤돌 퀴즈 · 도식화 풀이 자동 생성 엔진
-- 대상: EBSi 고3(D300), 고2(D200), 고1(D100) 전 연도(2006~2026) 수학 기출 전 문항 (608개 시험지, 16,747문항)
+EBSi 기출문제 LML(XML) 파서 및 문항별 수식 추출 기반 5단계 디딤돌 퀴즈 · 도식화 풀이 생성 엔진
+- 대상: EBSi 고3(D300), 고2(D200), 고1(D100) 전 연도(2006~2026) 수학 기출 전 문항 (608개 시험지, 16,428문항)
+- 특징:
+  1. 22개 세부 단원별 초등 눈높이 직관 디딤돌(1단계) 및 기호 번역 디딤돌(2단계) 탑재
+  2. 각 문항의 실제 EBSi 공식 해설(<Explanation>) 수식($...$)에서 출발 식·중간 전개 식·최종 계산 식을 직접 추출하여
+     빈칸 [ (가) ], [ (나) ], [ (다) ]를 추론하는 문항별 고유 수식 오지선다(3~5단계) 자동 생성
 """
 
 import os
@@ -22,21 +26,16 @@ def clean_ebsi_latex(tex: str) -> str:
     s = tex.strip()
     if s.startswith("[!") and s.endswith("!]"):
         s = s[2:-2].strip()
-    # Remove any control chars or tabs
     s = re.sub(r"[\x00-\x1f]+", " ", s)
-    # Fix common EBSi LaTeX artifacts
     s = s.replace("\\it ", " ").replace("\\rm ", " ")
     s = re.sub(r"\\,\\,\s*'", "'", s)
     s = re.sub(r"\\,\s*'", "'", s)
     s = s.replace("$", "")
-    # Prevent double backslash before command
     if re.search(r"\\begin\{(array|cases|aligned|align|matrix|pmatrix|bmatrix|vmatrix)\}", s):
         s = re.sub(r"\\\\([a-zA-Z])", r"\\\\ \1", s)
     else:
         s = re.sub(r"\\\\([a-zA-Z])", r"\\\1", s)
-    # Prevent <letter being parsed as HTML tag
     s = re.sub(r"<([a-zA-Z/!])", r"< \1", s)
-    # Balance braces if needed
     open_b = s.count("{") - s.count("\\{")
     close_b = s.count("}") - s.count("\\}")
     if open_b > close_b:
@@ -605,6 +604,180 @@ def clean_plain_for_title(s: str, max_len: int = 44) -> str:
     return txt
 
 
+def _is_balanced_tex(tex: str) -> bool:
+    if not tex or len(tex) > 120:
+        return False
+    if (tex.count("{") - tex.count("\\{")) != (tex.count("}") - tex.count("\\}")):
+        return False
+    if tex.count("\\left") != tex.count("\\right"):
+        return False
+    if "\\begin" in tex or "\\end" in tex:
+        return False
+    return True
+
+
+def generate_math_options_from_tex(target_tex: str, seed_int: int) -> tuple:
+    """
+    Given a valid LaTeX expression `target_tex` (without outer $),
+    generate 5 distinct valid `$ ... $` options where `f"${target_tex}$"` is placed at a deterministic index 1..5.
+    """
+    t = target_tex.strip()
+    if not t:
+        t = "1"
+    ans_pos = seed_int % 5  # 0..4
+
+    # Case 1: Pure integer
+    if re.match(r"^-?\d+$", t):
+        val = int(t)
+        step = 1 if abs(val) < 25 else (2 if abs(val) < 100 else 5)
+        start = val - ans_pos * step
+        if val > 0 and start <= 0:
+            start = 1
+        vals = [start + i * step for i in range(5)]
+        if val not in vals:
+            vals[ans_pos] = val
+            vals = sorted(set(vals))
+            while len(vals) < 5:
+                vals.append(vals[-1] + step)
+        idx = vals.index(val) + 1
+        return [f"${v}$" for v in vals], idx
+
+    # Case 2: General LaTeX expression — perturb digits safely (only increasing d -> d+k so denominators/roots never become 0)
+    distractors = []
+    digit_matches = list(re.finditer(r"\d+", t))
+    if digit_matches:
+        # Perturb the last digit match first, then first digit match
+        for dm in reversed(digit_matches):
+            d_val = int(dm.group(0))
+            for delta in (1, 2, -1, 3, 4):
+                new_d = d_val + delta
+                if new_d <= 0:
+                    continue
+                cand = t[:dm.start()] + str(new_d) + t[dm.end():]
+                if cand != t and cand not in distractors:
+                    distractors.append(cand)
+                if len(distractors) >= 4:
+                    break
+            if len(distractors) >= 4:
+                break
+
+    # Also try sign flip if needed
+    if len(distractors) < 4 and "+" in t:
+        cand_minus = t.replace("+", "-", 1)
+        if cand_minus != t and cand_minus not in distractors:
+            distractors.append(cand_minus)
+    if len(distractors) < 4 and "-" in t:
+        cand_plus = t.replace("-", "+", 1)
+        if cand_plus != t and cand_plus not in distractors:
+            distractors.append(cand_plus)
+
+    # Fallback safe algebraic offsets
+    for suffix in (" + 1", " - 1", " + 2", " - 2", " + 3"):
+        if len(distractors) >= 4:
+            break
+        cand = f"{t}{suffix}"
+        if cand != t and cand not in distractors:
+            distractors.append(cand)
+
+    distractors = distractors[:4]
+    opts_5 = []
+    d_idx = 0
+    for i in range(5):
+        if i == ans_pos:
+            opts_5.append(f"${t}$")
+        else:
+            opts_5.append(f"${distractors[d_idx]}$")
+            d_idx += 1
+    return opts_5, ans_pos + 1
+
+
+def extract_blank_question_from_line(
+    line_html: str,
+    blank_name: str,
+    step_num: int,
+    leaf_unit: str,
+    fallback_tex: str,
+    seed_int: int,
+) -> dict:
+    """
+    Extract a real mathematical expression `$ ... $` from `line_html`, replace it with `$[\\;\\text{(가)}\\;]$`,
+    and build a 5-choice mathematical derivation question.
+    """
+    math_matches = list(re.finditer(r"\$([^\$]+)\$", line_html))
+    chosen_tex = ""
+    masked_line = line_html
+
+    # Prefer RHS of an equation inside $ ... = ... $
+    for m in reversed(math_matches):
+        inner = m.group(1).strip()
+        if "=" in inner and "\\begin" not in inner:
+            lhs, rhs = inner.rsplit("=", 1)
+            lhs_s, rhs_s = lhs.strip(), rhs.strip()
+            if lhs_s and _is_balanced_tex(rhs_s):
+                chosen_tex = rhs_s
+                new_seg = f"${lhs_s} = [\\;\\text{{{blank_name}}}\\;]$"
+                masked_line = line_html[:m.start()] + new_seg + line_html[m.end():]
+                break
+
+    # Otherwise pick the last balanced $ ... $ in line_html
+    if not chosen_tex:
+        for m in reversed(math_matches):
+            inner = m.group(1).strip()
+            if _is_balanced_tex(inner) and len(inner) >= 1:
+                chosen_tex = inner
+                new_seg = f"$[\\;\\text{{{blank_name}}}\\;]$"
+                masked_line = line_html[:m.start()] + new_seg + line_html[m.end():]
+                break
+
+    if not chosen_tex:
+        chosen_tex = fallback_tex.replace("$", "").strip() or "1"
+        if not _is_balanced_tex(chosen_tex):
+            chosen_tex = "1"
+        masked_line = f"{line_html} $\\implies [\\;\\text{{{blank_name}}}\\;]$"
+
+    opts_5, ans_idx = generate_math_options_from_tex(chosen_tex, seed_int)
+
+    if step_num == 3:
+        lbl_ko = "출발 관계식 디딤돌 3"
+        lbl_en = "Starting Equation Step 3"
+        stem_ko = (
+            f"문제의 출발 조건을 <b>{leaf_unit}</b>의 수식으로 나타낼 때, "
+            f"다음 풀이 단계의 빈칸 $[\\;\\text{{{blank_name}}}\\;]$에 들어갈 알맞은 식(또는 값)은?<br>"
+            f'<section style="margin-top:8px;padding:10px 14px;background:#f8fafc;border-left:4px solid #0284c7;border-radius:8px">{masked_line}</section>'
+        )
+        stem_en = (
+            f"When translating the starting condition of <b>{leaf_unit}</b> into an equation, "
+            f"which expression (or value) fits in $[\\;\\text{{{blank_name}}}\\;]$?<br>"
+            f'<section style="margin-top:8px;padding:10px 14px;background:#f8fafc;border-left:4px solid #0284c7;border-radius:8px">{masked_line}</section>'
+        )
+    else:
+        lbl_ko = "중간 관계식 디딤돌 4"
+        lbl_en = "Intermediate Derivation Step 4"
+        stem_ko = (
+            f"앞선 식을 정리하여 중간 관계식을 도출할 때, "
+            f"다음 전개 과정의 빈칸 $[\\;\\text{{{blank_name}}}\\;]$에 들어갈 알맞은 식(또는 값)은?<br>"
+            f'<section style="margin-top:8px;padding:10px 14px;background:#f0fdf4;border-left:4px solid #059669;border-radius:8px">{masked_line}</section>'
+        )
+        stem_en = (
+            f"Simplifying the intermediate relation, which expression (or value) fits in $[\\;\\text{{{blank_name}}}\\;]$?<br>"
+            f'<section style="margin-top:8px;padding:10px 14px;background:#f0fdf4;border-left:4px solid #059669;border-radius:8px">{masked_line}</section>'
+        )
+
+    exp_ko = f"주어진 조건과 <b>{leaf_unit}</b>의 성질에 따라 빈칸 $[\\;\\text{{{blank_name}}}\\;]$에 들어갈 알맞은 식(값)은 <b>${chosen_tex}$</b> (정답 {ans_idx}번)입니다.<br>• <b>원본 풀이 확인</b>: {line_html}"
+    exp_en = f"By applying the properties of {leaf_unit}, the expression for $[\\;\\text{{{blank_name}}}\\;]$ is <b>${chosen_tex}$</b> (Option #{ans_idx})."
+
+    return {
+        "level_label": lbl_ko,
+        "level_label_en": lbl_en,
+        "stem": stem_ko,
+        "stem_en": stem_en,
+        "options": opts_5,
+        "answer": ans_idx,
+        "exp": exp_ko,
+        "exp_en": exp_en,
+    }
+
+
 def synthesize_mathedu_problem(
     slug: str,
     exam_year: str,
@@ -662,17 +835,45 @@ def synthesize_mathedu_problem(
     step2_q = dict(tpl["step2"])
 
     step3_line = text_exp_lines[0] if len(text_exp_lines) >= 1 else (
-        f"주어진 문제의 출발 조건을 <b>{leaf_unit}</b>의 기본 관계식으로 나타냅니다."
+        f"출발 조건으로부터 {correct_opt_str}을 유도하는 첫 관계식을 세웁니다."
     )
     step4_line = (
         text_exp_lines[len(text_exp_lines) // 2]
         if len(text_exp_lines) >= 2
-        else f"세운 관계식에 조건의 수치를 대입하여 중간 식을 정리합니다."
+        else step3_line
     )
     step5_line = (
         text_exp_lines[-1]
         if len(text_exp_lines) >= 3
         else f"정리한 식으로부터 구하는 최종 목표값을 도출하면 정답은 {correct_opt_str}입니다."
+    )
+
+    seed_base = int(hashlib.md5(slug.encode("utf-8")).hexdigest()[:6], 16)
+    step3_q_obj = extract_blank_question_from_line(
+        line_html=step3_line,
+        blank_name="(가)",
+        step_num=3,
+        leaf_unit=leaf_unit,
+        fallback_tex=correct_opt_str,
+        seed_int=seed_base + 1,
+    )
+    step4_q_obj = extract_blank_question_from_line(
+        line_html=step4_line,
+        blank_name="(나)",
+        step_num=4,
+        leaf_unit=leaf_unit,
+        fallback_tex=correct_opt_str,
+        seed_int=seed_base + 3,
+    )
+
+    step5_stem_ko = (
+        f"1~4단계의 풀이 전개를 종합하여 마무리 계산을 수행할 때, "
+        f"이 문항이 요구하는 <b>최종 목표값</b>은?<br>"
+        f'<section style="margin-top:8px;padding:10px 14px;background:#fffbeb;border-left:4px solid #d97706;border-radius:8px">{step5_line}</section>'
+    )
+    step5_stem_en = (
+        f"Combining Steps 1–4 to complete the final calculation, what is the target value?<br>"
+        f'<section style="margin-top:8px;padding:10px 14px;background:#fffbeb;border-left:4px solid #d97706;border-radius:8px">{step5_line}</section>'
     )
 
     levels = [
@@ -713,52 +914,18 @@ def synthesize_mathedu_problem(
             ],
         },
         {
-            "title": f"🌱 3단계 · [출발 조건 식 세우기] {leaf_unit} 핵심 조건 변환",
+            "title": f"🌱 3단계 · [출발 조건 식 세우기] {leaf_unit} 핵심 조건 수식화",
             "title_en": f"🌱 Step 3 · [Setting Up the Equation] Applying {tpl['topic_en']}",
             "knowledge": f"본문항 해결의 첫걸음은 문제의 조건을 <b>{leaf_unit}</b> 단원의 수식으로 옮기는 것입니다.<br>• <b>출발 식 및 원리</b>: {step3_line}",
             "knowledge_en": f"First, translate the problem conditions into the core equation of {tpl['topic_en']}.",
-            "questions": [
-                {
-                    "level_label": "조건 식 세우기 디딤돌 3",
-                    "level_label_en": "Equation Setup Step 3",
-                    "stem": f"이 문제를 풀기 위해 가장 먼저 적용해야 할 <b>핵심 단원과 출발 원리</b>로 가장 알맞은 것은?",
-                    "stem_en": "Which core concept and starting principle should be applied first to solve this problem?",
-                    "options": [
-                        f"{mid_unit} · {leaf_unit}의 정의와 성질 적용",
-                        "공간좌표의 구면삼각법 정리",
-                        "복소평면의 드무아브르 정리",
-                        "행렬의 고윳값과 케일리-해밀턴 정리",
-                        "테일러 급수의 무한차수 근사",
-                    ],
-                    "answer": 1,
-                    "exp": f"이 문항의 출제의도는 <b>'{intent_ko or leaf_unit}'</b>이므로, <b>{mid_unit} · {leaf_unit}</b>의 정의와 성질을 먼저 적용합니다.<br>• {step3_line}",
-                    "exp_en": f"This problem tests {tpl['topic_en']}.",
-                }
-            ],
+            "questions": [step3_q_obj],
         },
         {
-            "title": f"🌳 4단계 · [풀이 전개] 핵심 관계식 정리 및 중간 값 도출",
+            "title": f"🌳 4단계 · [풀이 전개] 핵심 관계식 정리 및 중간 식 도출",
             "title_en": "🌳 Step 4 · [Intermediate Derivation] Simplifying Key Relations",
             "knowledge": f"3단계에서 세운 출발 식을 정리하여 문제에서 요구하는 핵심 미지수 또는 관계식을 도출합니다.<br>• <b>중간 전개 과정</b>: {step4_line}",
             "knowledge_en": "Simplify the starting relation to derive the key intermediate expression.",
-            "questions": [
-                {
-                    "level_label": "중간 관계식 디딤돌 4",
-                    "level_label_en": "Intermediate Derivation Step 4",
-                    "stem": f"앞선 출발 식을 정리하는 과정에서 거치게 되는 <b>핵심 풀이 단계</b>에 해당하는 설명으로 옳은 것은?",
-                    "stem_en": "Which statement correctly describes the intermediate derivation step?",
-                    "options": [
-                        "주어진 조건과 전혀 무관한 임의의 상수를 곱한다.",
-                        f"{leaf_unit}의 성질로 식을 정리하여 구하는 값을 계산 가능한 형태로 만든다.",
-                        "분모가 $0$이 되도록 양변을 $0$으로 나눈다.",
-                        "조건식을 모두 지우고 첫째항을 $0$으로 고정한다.",
-                        "정의역을 허수 전체의 집합으로 임의 변경한다.",
-                    ],
-                    "answer": 2,
-                    "exp": f"<b>{leaf_unit}</b>의 성질에 따라 주어진 식을 정리하면 다음과 같이 전개됩니다:<br>• {step4_line}",
-                    "exp_en": "Apply the properties of the unit to simplify the equation into a solvable form.",
-                }
-            ],
+            "questions": [step4_q_obj],
         },
         {
             "title": "💎 5단계 · [최종 계산 조립] 디딤돌 조각을 합쳐 최종 정답 구하기",
@@ -769,8 +936,8 @@ def synthesize_mathedu_problem(
                 {
                     "level_label": "최종 정답 조립 디딤돌 5",
                     "level_label_en": "Final Synthesis Step 5",
-                    "stem": "위의 단계별 전개 과정을 끝까지 계산하여 얻는 이 문제의 <b>최종 결과값</b>은?",
-                    "stem_en": "Completing the calculation from the previous steps, what is the final result?",
+                    "stem": step5_stem_ko,
+                    "stem_en": step5_stem_en,
                     "options": options,
                     "answer": ans_idx,
                     "exp": f"단계별 계산을 마무리하면 최종 결과는 <b>{correct_opt_str}</b> (<b>{ans_idx}번</b>)입니다.<br>• {step5_line}",
@@ -820,6 +987,8 @@ def synthesize_mathedu_problem(
         "tags": tags,
         "symbols": tpl["symbols"],
         "levels": levels,
+        "step3_q": step3_q_obj,
+        "step4_q": step4_q_obj,
         "final": {
             "stem": stem_html,
             "stem_en": stem_html,
