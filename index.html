@@ -757,7 +757,21 @@ tailwind.config = {
               <option value="2023">2023학년도</option>
               <option value="2022">2022학년도</option>
               <option value="2021">2021학년도</option>
-              <option value="2020">2020학년도 이전</option>
+              <option value="2020">2020학년도</option>
+              <option value="2019">2019학년도</option>
+              <option value="2018">2018학년도</option>
+              <option value="2017">2017학년도</option>
+              <option value="2016">2016학년도</option>
+              <option value="2015">2015학년도</option>
+              <option value="2014">2014학년도</option>
+              <option value="2013">2013학년도</option>
+              <option value="2012">2012학년도</option>
+              <option value="2011">2011학년도</option>
+              <option value="2010">2010학년도</option>
+              <option value="2009">2009학년도</option>
+              <option value="2008">2008학년도</option>
+              <option value="2007">2007학년도</option>
+              <option value="2006">2006학년도</option>
             </select>
             <select id="filterGrade" class="exam-select" aria-label="대상 학년" onchange="renderList()">
               <option value="">전체 학년</option>
@@ -772,6 +786,7 @@ tailwind.config = {
               <option value="6월">6월 모평</option>
               <option value="10월">10월 학평</option>
               <option value="7월">7월 학평</option>
+              <option value="5월">5월 모평·학평</option>
               <option value="4월">4월 학평</option>
               <option value="3월">3월 학평</option>
             </select>
@@ -781,7 +796,10 @@ tailwind.config = {
               <option value="미적분">미적분</option>
               <option value="기하">기하</option>
               <option value="확률과 통계">확률과 통계</option>
-              <option value="공통수학">공통수학</option>
+              <option value="수학(가형)">수학(가형)</option>
+              <option value="수학(나형)">수학(나형)</option>
+              <option value="수학(고2)">수학(고2)</option>
+              <option value="공통수학">공통수학(고1)</option>
             </select>
             <select id="filterNum" class="exam-select" aria-label="문항 번호" onchange="renderList()">
               <option value="">전체 번호</option>
@@ -1048,6 +1066,41 @@ function toggleMathStory() {
         }
       } catch(e) {}
       renderList();
+      if (!window._ebsiCatalogLoaded) {
+        window._ebsiCatalogLoaded = true;
+        fetch('board/ebsi_catalog.json')
+          .then(function(r) { return r.ok ? r.json() : []; })
+          .then(function(cat) {
+            if (!Array.isArray(cat) || cat.length === 0) return;
+            var existingSlugs = new Set(allItems.map(function(x) { return x.slug; }));
+            var ebsiMapped = [];
+            for (var i = 0; i < cat.length; i++) {
+              var c = cat[i];
+              if (!c || existingSlugs.has(c.s)) continue;
+              ebsiMapped.push({
+                slug: c.s,
+                title: c.t,
+                examYear: c.y,
+                examYearAlt: c.ya,
+                month: c.m,
+                grade: c.g,
+                subject: c.sub,
+                qNum: c.q,
+                source: c.src,
+                tags: c.tg || [],
+                url: 'board/ebsi.html?id=' + encodeURIComponent(c.s),
+                offlineUrl: 'offline/ebsi.html?id=' + encodeURIComponent(c.s),
+                is_public: true
+              });
+            }
+            allItems = allItems.concat(ebsiMapped);
+            var hEl = document.getElementById('heroStatQuizCount');
+            var isEn2 = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+            if (hEl) hEl.textContent = isEn2 ? (allItems.length.toLocaleString() + '+') : (allItems.length.toLocaleString() + '개');
+            renderList();
+          })
+          .catch(function(){});
+      }
     })
     .catch(function(err) {
       listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">게시판을 불러올 수 없습니다.<br><small>' + escapeHtml(err.message) + '</small></div>';
@@ -1065,8 +1118,8 @@ function toggleMathStory() {
         var opt = fy.options[i];
         if (!opt.value) {
           opt.textContent = isEn ? 'All Exam Years' : '전체 학년도';
-        } else if (opt.value === '2020') {
-          opt.textContent = isEn ? 'Before Year 2020' : '2020학년도 이전';
+        } else if (opt.value === '2005') {
+          opt.textContent = isEn ? 'Before Year 2005' : '2005학년도 이전';
         } else {
           opt.textContent = isEn ? ('Academic Year ' + opt.value) : (opt.value + '학년도');
         }
@@ -1348,6 +1401,12 @@ function toggleMathStory() {
       }
       if (tok === '공통수학') {
         res.subject = '공통수학'; continue;
+      }
+      if (tok === '가형' || tok === '수학가형' || tok === 'b형') {
+        res.subject = '수학(가형)'; continue;
+      }
+      if (tok === '나형' || tok === '수학나형' || tok === 'a형') {
+        res.subject = '수학(나형)'; continue;
       }
       if (tok === '공통' || tok === '공통과목') {
         res.subject = '공통(수학I·II)'; continue;
@@ -2105,7 +2164,7 @@ function toggleMathStory() {
             '</div>' +
           '</div>' +
           '<div class="flex gap-2">' +
-            '<a href="board/' + exactItem.slug + '.html" class="btn-solve px-5 py-2.5 text-sm no-underline">' + (isEn ? '🚀 Instant Solve ➔' : '🚀 1초 바로 풀기 ➔') + '</a>' +
+            '<a href="' + (exactItem.url || ('board/' + exactItem.slug + '.html')) + '" class="btn-solve px-5 py-2.5 text-sm no-underline">' + (isEn ? '🚀 Instant Solve ➔' : '🚀 1초 바로 풀기 ➔') + '</a>' +
           '</div>' +
         '</div>';
     }
@@ -2118,8 +2177,12 @@ function toggleMathStory() {
     var tBtnReSolve = isEn ? 'Re-solve' : '다시풀기';
     var tBadgeMastered = isEn ? '🏆 Mastered' : '🏆 완주';
 
-    for (var i = 0; i < filtered.length; i++) {
+    var displayLimit = window._matheduDisplayLimit || 60;
+    var renderCount = Math.min(filtered.length, displayLimit);
+    for (var i = 0; i < renderCount; i++) {
       var item = filtered[i];
+      var itemHref = item.url || ('board/' + encodeURIComponent(item.slug) + '.html');
+      var itemOffHref = item.offlineUrl || ('offline/' + encodeURIComponent(item.slug) + '.html');
       var title = escapeHtml(item.title || item.slug);
       var time = escapeHtml(item.time || '');
       var slug = escapeHtml(item.slug);
@@ -2183,7 +2246,7 @@ function toggleMathStory() {
       }
 
       html += '  <h3 class="font-headline-sm text-[16px] text-on-surface font-bold leading-snug m-0">';
-      html += '    <a href="board/' + slug + '.html" class="text-on-surface no-underline hover:text-secondary transition-colors">' + title + '</a>';
+      html += '    <a href="' + itemHref + '" class="text-on-surface no-underline hover:text-secondary transition-colors">' + title + '</a>';
       html += '  </h3>';
       html +=    tagPillsHtml;
       html += '  <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 m-0">' + descText + '</p>';
@@ -2191,10 +2254,24 @@ function toggleMathStory() {
       html += '    <div class="flex items-center gap-2 flex-wrap">';
       html +=        statusBadgeHtml;
       html += '      <button type="button" onclick="openClassCreatorModal(\'' + slug + '\')" class="font-label-badge text-label-badge text-on-surface-variant hover:text-secondary bg-transparent border-0 cursor-pointer flex items-center gap-0.5 p-0"><span class="material-symbols-outlined text-[15px]">co_present</span>' + tBtnLaunch.replace('🚀 ', '') + '</button>';
-      html += '      <a href="offline/' + slug + '.html" download title="' + tBtnOfflineTitle + '" class="font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface no-underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[15px]">download</span>' + tBtnOffline.replace('📥 ', '') + '</a>';
+      html += '      <a href="' + itemOffHref + '" download title="' + tBtnOfflineTitle + '" class="font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface no-underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[15px]">download</span>' + tBtnOffline.replace('📥 ', '') + '</a>';
       html += '    </div>';
-      html += '    <a class="h-9 px-3.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="board/' + slug + '.html">' + solveBtnText + '</a>';
+      html += '    <a class="h-9 px-3.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="' + itemHref + '">' + solveBtnText + '</a>';
       html += '  </div>';
+      html += '</div>';
+    }
+    if (filtered.length > renderCount) {
+      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      html += '  </button>';
+      html += '</div>';
+    }
+    if (filtered.length > renderCount) {
+      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      html += '  </button>';
       html += '</div>';
     }
 
@@ -2225,10 +2302,10 @@ function toggleMathStory() {
         html += '      <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-badge text-label-badge">' + escapeHtml(rBadge2) + '</span>';
         html += '      <span class="px-2 py-0.5 rounded bg-status-amber/15 text-[#B45309] font-label-badge text-[10px] font-bold">연관 추천</span>';
         html += '    </div>';
-        html += '    <a class="h-8 px-3 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="board/' + rSlug + '.html">' + tBtnSolve + '</a>';
+        html += '    <a class="h-8 px-3 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="' + (rItem.url || ('board/' + rSlug + '.html')) + '">' + tBtnSolve + '</a>';
         html += '  </div>';
         html += '  <h3 class="font-headline-sm text-[15px] text-on-surface font-bold leading-snug m-0">';
-        html += '    <a href="board/' + rSlug + '.html" class="text-on-surface no-underline hover:text-secondary transition-colors">' + rTitle + '</a>';
+        html += '    <a href="' + (rItem.url || ('board/' + rSlug + '.html')) + '" class="text-on-surface no-underline hover:text-secondary transition-colors">' + rTitle + '</a>';
         html += '  </h3>';
         html += '</div>';
       }
