@@ -1,0 +1,52 @@
+import hashlib, json, time
+from pathlib import Path
+
+BASE = Path(r'C:/Users/min/Desktop/mathedu')
+STATE_FILE = BASE / '._regen_cron_state.json'
+
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for chunk in iter(lambda: f.read(8192), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+state = json.loads(STATE_FILE.read_text(encoding='utf-8')) if STATE_FILE.exists() else {}
+entries = state.get('entries', {})
+EXCLUDED = {'cron_check', 'data', 'cron_runner', 'check_state'}
+
+print('현재 시각:', time.strftime('%Y-%m-%d %H:%M:%S +09:00'))
+print('state 파일:', STATE_FILE)
+print()
+
+changed = []
+for p in sorted(BASE.glob('_regen_*.py')):
+    slug = p.stem.replace('_regen_', '')
+    if slug in EXCLUDED:
+        continue
+    cur_hash = sha256(p)
+    cur_mtime = p.stat().st_mtime
+    st = entries.get(slug, {})
+    st_hash = st.get('hash', '')
+    st_mtime = st.get('mtime', 0)
+    if cur_hash != st_hash or cur_mtime != st_mtime:
+        changed.append({
+            'slug': slug, 'path': str(p),
+            'cur_hash': cur_hash, 'cur_mtime': cur_mtime,
+            'st_hash': st_hash, 'st_mtime': st_mtime,
+        })
+
+print('=== 비교 결과 ===')
+if not changed:
+    print('[SILENT] 변경 없음 — 빌드가 필요한 새/변경된 _regen_*.py 없음')
+else:
+    for c in changed:
+        print('변경 감지:', c['slug'])
+        print('  현재 hash :', c['cur_hash'])
+        print('  이전 hash :', c['st_hash'])
+        print('  현재 mtime:', c['cur_mtime'], '(이전:', c['st_mtime'], ')')
+print()
+print('=== 상태에 없는 스크립트 (신규 후보) ===')
+existing = {p.stem.replace('_regen_', '') for p in BASE.glob('_regen_*.py')}
+for slug in sorted(existing - EXCLUDED - set(entries.keys())):
+    print('  -', slug)

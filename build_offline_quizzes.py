@@ -570,10 +570,12 @@ def main():
     # 수능 및 모의평가 전용 공개 원칙에 따라 board/index.json의 공개 문항만 빌드
     index_json_path = os.path.join(BOARD_DIR, 'index.json')
     public_slugs = set()
+    meta_by_slug = {}
     if os.path.exists(index_json_path):
         with open(index_json_path, 'r', encoding='utf-8') as f:
             public_items = json.load(f)
             public_slugs = set(it['slug'] for it in public_items if it.get('is_public') is not False)
+            meta_by_slug = {it['slug']: it for it in public_items}
 
     files = sorted(glob.glob(os.path.join(BOARD_DIR, '*.html')))
     quiz_files = [
@@ -616,6 +618,15 @@ def main():
     results = []
     for f in quiz_files:
         res = process_file(f, build_timestamp, build_version)
+        m = meta_by_slug.get(res['slug'], {})
+        if m.get('title'):
+            res['title'] = m['title']
+        res['month'] = str(m.get('month') or '')
+        res['grade'] = str(m.get('grade') or '')
+        res['subject'] = str(m.get('subject') or '')
+        res['examYear'] = str(m.get('examYear') or '')
+        res['qNum'] = str(m.get('qNum') or '')
+        res['tags'] = ' '.join(m.get('tags') or [])
         results.append(res)
 
     # 1. 버전 매니페스트 (offline/versions.json) 생성
@@ -750,15 +761,38 @@ html[lang="en"] .bilingual-en {{ display: inline !important; }}
     </div>
   </div>
 
-  <div class="search-box">
-    <input type="text" id="offlineSearchInput" class="search-input" placeholder="🔍 문제 제목, 키워드(수열, 미분, 포물선, 확률 등), 슬러그 실시간 검색..." oninput="filterOfflineCards()">
+  <div class="search-box" style="background:#ffffff;border:1.5px solid #cbd5e1;border-radius:16px;padding:16px 18px;box-shadow:var(--glass-shadow)">
+    <div style="font-size:0.82rem;font-weight:800;color:var(--accent);margin-bottom:8px">🔍 자연어 스마트 문제 검색 (예: "9월 고3 확통 문제들", "10월 고3 미적분", "6월 기하 30번", "정규분포")</div>
+    <input type="text" id="offlineSearchInput" class="search-input" placeholder="🔍 예: '9월 고3 확통 문제들', '10월 고3 미적분', '6월 기하 30번', '수열 귀납적 정의'..." oninput="filterOfflineCards()">
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px">
+      <span style="font-size:0.75rem;font-weight:800;color:var(--sub)">💡 원클릭 예시 검색:</span>
+      <button type="button" onclick="setOfflineSmartQuery('9월 고3 확통 문제들')" style="background:#eff6ff;border:1px solid #bfdbfe;color:#006398;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:800;cursor:pointer;font-family:inherit">✨ 9월 고3 확통 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('10월 고3 확통 문제들')" style="background:#f8fafc;border:1px solid #e2e8f0;color:#334155;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:inherit">📘 10월 고3 확통 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('9월 고3 미적분 문제들')" style="background:#f8fafc;border:1px solid #e2e8f0;color:#334155;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:inherit">📐 9월 고3 미적분 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('10월 고3 기하 문제들')" style="background:#f8fafc;border:1px solid #e2e8f0;color:#334155;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:inherit">🧭 10월 고3 기하 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('')" style="background:#fff1f2;border:1px solid #fecdd3;color:#be123c;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:800;cursor:pointer;font-family:inherit">초기화</button>
+    </div>
+    <div id="offlineSearchStatus" style="display:none;margin-top:10px;padding:8px 12px;border-radius:10px;background:#f0f9ff;border:1px solid #bae6fd;font-size:0.8rem;color:#0369a1;font-weight:700"></div>
   </div>
 
   <div class="list" id="offlineList">
 """
     for r in results:
-        index_html += f"""    <div class="card" data-slug="{r['slug']}">
+        badge_parts = []
+        if r.get('examYear'):
+            badge_parts.append(f"{r['examYear']}학년도")
+        if r.get('month'):
+            badge_parts.append(r['month'])
+        if r.get('grade'):
+            badge_parts.append(r['grade'])
+        if r.get('subject'):
+            badge_parts.append(r['subject'])
+        if r.get('qNum'):
+            badge_parts.append(f"{r['qNum']}번")
+        badge_str = " · ".join(badge_parts)
+        index_html += f"""    <div class="card" data-slug="{r['slug']}" data-month="{r.get('month','')}" data-grade="{r.get('grade','')}" data-subject="{r.get('subject','')}" data-year="{r.get('examYear','')}" data-qnum="{r.get('qNum','')}" data-tags="{r.get('tags','')}">
       <div>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">{badge_str}</div>
         <a href="{r['filename']}" class="card-title">📘 {r['title']}</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>{r['slug']}</code></span> · 
@@ -774,12 +808,145 @@ html[lang="en"] .bilingual-en {{ display: inline !important; }}
     index_html += f"""  </div>
 </div>
 <script>
-function filterOfflineCards() {{
-  var q = (document.getElementById('offlineSearchInput').value || '').trim().toLowerCase();
-  document.querySelectorAll('#offlineList .card').forEach(function(card) {{
-    var txt = (card.textContent || '').toLowerCase();
-    card.style.display = (!q || txt.indexOf(q) !== -1) ? 'flex' : 'none';
+function parseOfflineNaturalQuery(rawQuery) {{
+  var q = String(rawQuery || '').trim();
+  if (!q) return {{ isEmpty: true, months: [], grades: [], subjects: [], subSubjects: [], years: [], qNums: [], keywords: [] }};
+  var norm = q.toLowerCase();
+  var months = [], grades = [], subjects = [], subSubjects = [], years = [], qNums = [];
+
+  norm = norm.replace(/(20\\d{{2}})\\s*(?:학년도|년)?/g, function(_, y) {{ if (years.indexOf(y) === -1) years.push(y); return ' '; }});
+  norm = norm.replace(/(?:^|\\s)(2[3-9])\\s*학년도/g, function(_, y2) {{ var fy = '20' + y2; if (years.indexOf(fy) === -1) years.push(fy); return ' '; }});
+  norm = norm.replace(/(10|11|3|4|5|6|7|9)\\s*(?:월|모평|모의평가|학평|학력평가)/g, function(_, m) {{
+    var mv = (m === '11') ? '수능' : (m + '월');
+    if (months.indexOf(mv) === -1) months.push(mv);
+    return ' ';
   }});
+  if (/(수능|대학수학능력시험|대수능)/.test(norm)) {{
+    if (months.indexOf('수능') === -1) months.push('수능');
+    norm = norm.replace(/(수능|대학수학능력시험|대수능)/g, ' ');
+  }}
+  norm = norm.replace(/고\\s*([123])|([123])\\s*학년/g, function(_, g1, g2) {{
+    var gv = '고' + (g1 || g2);
+    if (grades.indexOf(gv) === -1) grades.push(gv);
+    return ' ';
+  }});
+  norm = norm.replace(/(\\d{{1,2}})\\s*번/g, function(_, n) {{
+    var nv = String(parseInt(n, 10));
+    if (qNums.indexOf(nv) === -1) qNums.push(nv);
+    return ' ';
+  }});
+  if (/(확률과\\s*통계|확률통계|확통)/.test(norm)) {{
+    if (subjects.indexOf('확률과 통계') === -1) subjects.push('확률과 통계');
+    norm = norm.replace(/(확률과\\s*통계|확률통계|확통)/g, ' ');
+  }}
+  if (/(미적분학|미적분|미적)/.test(norm)) {{
+    if (subjects.indexOf('미적분') === -1) subjects.push('미적분');
+    norm = norm.replace(/(미적분학|미적분|미적)/g, ' ');
+  }}
+  if (/(기하와\\s*벡터|기하벡터|기하)/.test(norm)) {{
+    if (subjects.indexOf('기하') === -1) subjects.push('기하');
+    norm = norm.replace(/(기하와\\s*벡터|기하벡터|기하)/g, ' ');
+  }}
+  if (/(수학\\s*i\\b|수학\\s*1|수\\s*1|수i\\b)/i.test(norm)) {{
+    if (subjects.indexOf('공통(수학I·II)') === -1) subjects.push('공통(수학I·II)');
+    if (subSubjects.indexOf('수학i') === -1) subSubjects.push('수학i');
+    norm = norm.replace(/(수학\\s*i\\b|수학\\s*1|수\\s*1|수i\\b)/gi, ' ');
+  }}
+  if (/(수학\\s*ii\\b|수학\\s*2|수\\s*2|수ii\\b)/i.test(norm)) {{
+    if (subjects.indexOf('공통(수학I·II)') === -1) subjects.push('공통(수학I·II)');
+    if (subSubjects.indexOf('수학ii') === -1) subSubjects.push('수학ii');
+    norm = norm.replace(/(수학\\s*ii\\b|수학\\s*2|수\\s*2|수ii\\b)/gi, ' ');
+  }}
+  if (/(공통과목|공통문항|공통)/.test(norm)) {{
+    if (subjects.indexOf('공통(수학I·II)') === -1) subjects.push('공통(수학I·II)');
+    norm = norm.replace(/(공통과목|공통문항|공통)/g, ' ');
+  }}
+  var STOPWORDS = {{
+    '문제들':1,'문제':1,'문항들':1,'문항':1,'기출문제':1,'기출문항':1,'기출':1,
+    '모의고사':1,'모의평가':1,'모평':1,'학력평가':1,'학평':1,'관련':1,'목록':1,
+    '추천':1,'검색':1,'찾아줘':1,'찾기':1,'보여줘':1,'알려줘':1,'풀기':1,'풀이':1,'수학':1,'고등':1,'고등학교':1
+  }};
+  var SUFFIXES = ['문제들','문제','문항들','문항','기출','에서','관련','들과','들의','들을','들은','들만','들','으로','로','이나','나','과','와','의','을','를','이','가','은','는','도','만'];
+  var rawTokens = norm.replace(/[\\[\\]()·•,./?!~'"`➕➖×÷=<>:;|\\\\]+/g, ' ').split(/\\s+/);
+  var keywords = [];
+  for (var i = 0; i < rawTokens.length; i++) {{
+    var tok = rawTokens[i].trim();
+    if (!tok || STOPWORDS[tok]) continue;
+    for (var s = 0; s < SUFFIXES.length; s++) {{
+      var sfx = SUFFIXES[s];
+      if (tok.length > sfx.length + 1 && tok.slice(-sfx.length) === sfx) {{
+        tok = tok.slice(0, -sfx.length);
+        break;
+      }}
+    }}
+    if (!tok || STOPWORDS[tok]) continue;
+    if (/^(\\d{{1,2}})$/.test(tok)) {{
+      var numVal = parseInt(tok, 10);
+      if (numVal >= 1 && numVal <= 30 && qNums.indexOf(String(numVal)) === -1) {{
+        qNums.push(String(numVal));
+        continue;
+      }}
+    }}
+    if (keywords.indexOf(tok) === -1) keywords.push(tok);
+  }}
+  return {{ isEmpty: false, months: months, grades: grades, subjects: subjects, subSubjects: subSubjects, years: years, qNums: qNums, keywords: keywords }};
+}}
+
+function setOfflineSmartQuery(q) {{
+  var inp = document.getElementById('offlineSearchInput');
+  if (inp) inp.value = q;
+  filterOfflineCards();
+}}
+
+function filterOfflineCards() {{
+  var raw = (document.getElementById('offlineSearchInput').value || '').trim();
+  var parsed = parseOfflineNaturalQuery(raw);
+  var matchedCount = 0;
+  document.querySelectorAll('#offlineList .card').forEach(function(card) {{
+    if (parsed.isEmpty) {{
+      card.style.display = 'flex';
+      matchedCount++;
+      return;
+    }}
+    var cMonth = card.getAttribute('data-month') || '';
+    var cGrade = card.getAttribute('data-grade') || '';
+    var cSubj = card.getAttribute('data-subject') || '';
+    var cYear = card.getAttribute('data-year') || '';
+    var cQnum = card.getAttribute('data-qnum') || '';
+    var haystack = ((card.textContent || '') + ' ' + (card.getAttribute('data-tags') || '') + ' ' + cMonth + ' ' + cGrade + ' ' + cSubj + ' ' + cYear).toLowerCase();
+    var hayCompact = haystack.replace(/\\s+/g, '');
+    var ok = true;
+    if (parsed.months.length && parsed.months.indexOf(cMonth) === -1) ok = false;
+    if (ok && parsed.grades.length && parsed.grades.indexOf(cGrade) === -1) ok = false;
+    if (ok && parsed.subjects.length && parsed.subjects.indexOf(cSubj) === -1) ok = false;
+    if (ok && parsed.years.length && parsed.years.indexOf(cYear) === -1) ok = false;
+    if (ok && parsed.qNums.length && parsed.qNums.indexOf(cQnum) === -1) ok = false;
+    if (ok && parsed.subSubjects.length) {{
+      var subOk = false;
+      for (var i = 0; i < parsed.subSubjects.length; i++) {{
+        if (hayCompact.indexOf(parsed.subSubjects[i]) !== -1) {{ subOk = true; break; }}
+      }}
+      if (!subOk) ok = false;
+    }}
+    if (ok && parsed.keywords.length) {{
+      for (var k = 0; k < parsed.keywords.length; k++) {{
+        var kw = parsed.keywords[k];
+        var kwCompact = kw.replace(/\\s+/g, '');
+        if (haystack.indexOf(kw) === -1 && hayCompact.indexOf(kwCompact) === -1) {{ ok = false; break; }}
+      }}
+    }}
+    card.style.display = ok ? 'flex' : 'none';
+    if (ok) matchedCount++;
+  }});
+  var statusEl = document.getElementById('offlineSearchStatus');
+  if (statusEl) {{
+    if (parsed.isEmpty) {{
+      statusEl.style.display = 'none';
+    }} else {{
+      statusEl.style.display = 'block';
+      statusEl.textContent = '🤖 자연어 검색 결과: "' + raw + '" 조건에 일치하는 오프라인 문제 ' + matchedCount + '건이 검색되었습니다.';
+    }}
+  }}
 }}
 function setOfflineLang(lang, isUserAction) {{
   if (isUserAction) {{
@@ -856,6 +1023,13 @@ try {{
   curLang = detectDefaultLang();
 }}
 setOfflineLang(curLang, false);
+try {{
+  var urlParams = new URLSearchParams(window.location.search);
+  var qParam = urlParams.get('q') || urlParams.get('search') || '';
+  if (qParam && qParam.trim()) {{
+    setOfflineSmartQuery(qParam.trim());
+  }}
+}} catch(e) {{}}
 </script>
 </body>
 </html>

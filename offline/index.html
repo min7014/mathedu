@@ -110,14 +110,25 @@ html[lang="en"] .bilingual-en { display: inline !important; }
     </div>
   </div>
 
-  <div class="search-box">
-    <input type="text" id="offlineSearchInput" class="search-input" placeholder="🔍 문제 제목, 키워드(수열, 미분, 포물선, 확률 등), 슬러그 실시간 검색..." oninput="filterOfflineCards()">
+  <div class="search-box" style="background:#ffffff;border:1.5px solid #cbd5e1;border-radius:16px;padding:16px 18px;box-shadow:var(--glass-shadow)">
+    <div style="font-size:0.82rem;font-weight:800;color:var(--accent);margin-bottom:8px">🔍 자연어 스마트 문제 검색 (예: "9월 고3 확통 문제들", "10월 고3 미적분", "6월 기하 30번", "정규분포")</div>
+    <input type="text" id="offlineSearchInput" class="search-input" placeholder="🔍 예: '9월 고3 확통 문제들', '10월 고3 미적분', '6월 기하 30번', '수열 귀납적 정의'..." oninput="filterOfflineCards()">
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px">
+      <span style="font-size:0.75rem;font-weight:800;color:var(--sub)">💡 원클릭 예시 검색:</span>
+      <button type="button" onclick="setOfflineSmartQuery('9월 고3 확통 문제들')" style="background:#eff6ff;border:1px solid #bfdbfe;color:#006398;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:800;cursor:pointer;font-family:inherit">✨ 9월 고3 확통 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('10월 고3 확통 문제들')" style="background:#f8fafc;border:1px solid #e2e8f0;color:#334155;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:inherit">📘 10월 고3 확통 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('9월 고3 미적분 문제들')" style="background:#f8fafc;border:1px solid #e2e8f0;color:#334155;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:inherit">📐 9월 고3 미적분 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('10월 고3 기하 문제들')" style="background:#f8fafc;border:1px solid #e2e8f0;color:#334155;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:inherit">🧭 10월 고3 기하 문제들</button>
+      <button type="button" onclick="setOfflineSmartQuery('')" style="background:#fff1f2;border:1px solid #fecdd3;color:#be123c;border-radius:999px;padding:4px 11px;font-size:0.76rem;font-weight:800;cursor:pointer;font-family:inherit">초기화</button>
+    </div>
+    <div id="offlineSearchStatus" style="display:none;margin-top:10px;padding:8px 12px;border-radius:10px;background:#f0f9ff;border:1px solid #bae6fd;font-size:0.8rem;color:#0369a1;font-weight:700"></div>
   </div>
 
   <div class="list" id="offlineList">
-    <div class="card" data-slug="1b623c24">
+    <div class="card" data-slug="1b623c24" data-month="6월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="28" data-tags="확률과 통계 확통 확률 독립시행 여사건 경우의수 28번 6월 고3 4점 고난도">
       <div>
-        <a href="1b623c24.html" class="card-title">📘 <span class="bilingual-ko">확률과 통계 · 독립시행과 패리티</span><span class="bilingual-en">Probability & Parity · All 6 Cards Face-Up After 4 Dice Rolls</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 6월 · 고3 · 확률과 통계 · 28번</div>
+        <a href="1b623c24.html" class="card-title">📘 [2026학년도 6월 고3 확통 28번] 카드 뒤집기 4회 반복 후 모두 앞면일 확률 · 독립시행과 홀짝성</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>1b623c24</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/1b623c24.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -128,9 +139,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="1b623c24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="36790012">
+    <div class="card" data-slug="36790012" data-month="9월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="26" data-tags="확률과 통계 확통 통계 정규분포 신뢰구간 모평균의추정 통계적추정 표본크기 9월 고3 26번">
       <div>
-        <a href="36790012.html" class="card-title">📘 <span class="bilingual-ko">확률과 통계 · 모평균의 신뢰구간</span><span class="bilingual-en">Statistical Estimation · Finding Sample Size n from Confidence Interval</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 9월 · 고3 · 확률과 통계 · 26번</div>
+        <a href="36790012.html" class="card-title">📘 [2026학년도 9월 고3 확통 26번] 정규분포 신뢰구간 → 표본크기 $n$ 구하기 · 모평균의 추정</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>36790012</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/36790012.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -141,9 +153,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="36790012.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="4cb6d212">
+    <div class="card" data-slug="4cb6d212" data-month="9월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="25" data-tags="확률과 통계 확통 경우의수 조합 중복조합 순서쌍 부등식영역 9월 고3 25번">
       <div>
-        <a href="4cb6d212.html" class="card-title">📘 <span class="bilingual-ko">확률과 통계 · 조합(nCr)의 활용</span><span class="bilingual-en">Combinatorics · Counting Strictly Increasing Integer Quadruples</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 9월 · 고3 · 확률과 통계 · 25번</div>
+        <a href="4cb6d212.html" class="card-title">📘 [2026학년도 9월 고3 확통 25번] $3\le x < y < z < w\le 13$ 자연수 순서쌍 개수 · 조합($_{n}\mathrm{C}_{r}$)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>4cb6d212</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/4cb6d212.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -154,9 +167,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="4cb6d212.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="51908207">
+    <div class="card" data-slug="51908207" data-month="6월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="30" data-tags="확률과 통계 확통 확률 조건부확률 독립시행 상태전이 킬러 30번 6월 고3 4점 고난도">
       <div>
-        <a href="51908207.html" class="card-title">📘 <span class="bilingual-ko">확률과 통계 · 조건부확률과 상태전이</span><span class="bilingual-en">Conditional Probability & State Transition · 4-Round Card Swap Game</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 6월 · 고3 · 확률과 통계 · 30번</div>
+        <a href="51908207.html" class="card-title">📘 [2026학년도 6월 고3 확통 30번] 카드 교환 주사위 게임 · 4회 후 초기 상태일 때 3번째가 6일 조건부확률</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>51908207</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/51908207.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -167,9 +181,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="51908207.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="8e9d528d">
+    <div class="card" data-slug="8e9d528d" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="8" data-tags="공통(수학I·II) 수학I 로그 로그의성질 밑변환 소인수분해 9월 고3 8번 공통">
       <div>
-        <a href="8e9d528d.html" class="card-title">📘 <span class="bilingual-ko">수학I · 로그의 성질과 밑의 변환</span><span class="bilingual-en">Logarithm Properties · Expressing log 12 in Terms of a = log 2 and b = log 3</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 9월 · 고3 · 공통(수학I·II) · 8번</div>
+        <a href="8e9d528d.html" class="card-title">📘 [2026학년도 9월 고3 공통 8번] $\log 2 = a,\ \log 3 = b$ 일 때 $\log 12$ 를 $a,b$로 나타내기</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>8e9d528d</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/8e9d528d.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -180,9 +195,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="8e9d528d.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="8f24f3c3">
+    <div class="card" data-slug="8f24f3c3" data-month="9월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="23" data-tags="확률과 통계 확통 확률 수학적확률 주사위 표본공간 경우의수 9월 고3 23번">
       <div>
-        <a href="8f24f3c3.html" class="card-title">📘 <span class="bilingual-ko">확률과 통계 · 수학적 확률과 표본공간</span><span class="bilingual-en">Mathematical Probability · Sum of Two Dice Equals 7</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 9월 · 고3 · 확률과 통계 · 23번</div>
+        <a href="8f24f3c3.html" class="card-title">📘 [2026학년도 9월 고3 확통 23번] 주사위 두 번 굴려 '합 7'이 나올 확률 · 수학적 확률과 표본공간</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>8f24f3c3</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/8f24f3c3.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -193,9 +209,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="8f24f3c3.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="a05b47bc">
+    <div class="card" data-slug="a05b47bc" data-month="9월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="28" data-tags="확률과 통계 확통 경우의수 순열 여러가지순열 같은것이있는순열 깃발배열 9월 고3 28번 4점 고난도">
       <div>
-        <a href="a05b47bc.html" class="card-title">📘 <span class="bilingual-ko">확률과 통계 · 순서가 정해진 순열</span><span class="bilingual-en">Permutations with Order Constraints · Arranging 7 Colored Flags</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 9월 · 고3 · 확률과 통계 · 28번</div>
+        <a href="a05b47bc.html" class="card-title">📘 [2026학년도 9월 고3 확통 28번] 7개 깃발 배열 (빨강이 노랑·파랑보다 왼쪽) · 순서가 정해진 순열</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>a05b47bc</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/a05b47bc.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -206,9 +223,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="a05b47bc.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="a33ab59b">
+    <div class="card" data-slug="a33ab59b" data-month="6월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="30" data-tags="기하 이차곡선 쌍곡선 쌍곡선의정의 초점 삼각형넓이 킬러 30번 6월 고3 넓이 정적분의활용 4점 고난도">
       <div>
-        <a href="a33ab59b.html" class="card-title">📘 <span class="bilingual-ko">기하 · 이차곡선(쌍곡선의 정의)</span><span class="bilingual-en">Conic Sections (Hyperbola) · Coordinates of P and Area of △PF'F</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 6월 · 고3 · 기하 · 30번</div>
+        <a href="a33ab59b.html" class="card-title">📘 [2026학년도 6월 고3 기하 30번] 쌍곡선 $PF' - PF = 2$ 조건의 점 $P$ 좌표와 삼각형 넓이</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>a33ab59b</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/a33ab59b.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -219,9 +237,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="a33ab59b.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="ac8dc374">
+    <div class="card" data-slug="ac8dc374" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="21" data-tags="공통(수학I·II) 수학II 미분 도함수의활용 삼차함수 절댓값함수 미분가능성 21번 9월 고3 공통 도함수 4점 고난도">
       <div>
-        <a href="ac8dc374.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 모의평가 수학 21번</span><span class="bilingual-en">2027 AY Sep Mock CSAT Math #21 · Cubic Function & Absolute Value Differentiability</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 21번</div>
+        <a href="ac8dc374.html" class="card-title">📘 [2027학년도 9월 고3 21번] 삼차함수와 절댓값 미분가능성 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>ac8dc374</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/ac8dc374.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -232,9 +251,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="ac8dc374.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c1092101">
+    <div class="card" data-slug="c1092101" data-month="9월" data-grade="고1" data-subject="공통수학" data-year="2025" data-qnum="21" data-tags="공통수학 21번 4점 고난도 도함수의활용">
       <div>
-        <a href="c1092101.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고1 21번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 10 #21] Equation of a circle and positional relationship of straight lines and maximum value of distance</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고1 · 공통수학 · 21번</div>
+        <a href="c1092101.html" class="card-title">📘 [2025학년도 9월 고1 21번] 원의 방정식과 직선의 위치 관계 및 거리의 최댓값</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c1092101</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c1092101.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -245,9 +265,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c1092101.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2092102">
+    <div class="card" data-slug="c2092102" data-month="9월" data-grade="고2" data-subject="공통(수학I·II)" data-year="2025" data-qnum="21" data-tags="공통(수학I·II) 공통 수학I 삼각함수 넓이 21번 4점 고난도 정적분의활용">
       <div>
-        <a href="c2092102.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고2 21번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 11 #21] Area of ​​a triangle using graphs and cycles of trigonometric functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고2 · 공통(수학I·II) · 21번</div>
+        <a href="c2092102.html" class="card-title">📘 [2025학년도 9월 고2 21번] 삼각함수의 그래프와 주기를 이용한 삼각형의 넓이</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2092102</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2092102.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -258,9 +279,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2092102.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261001">
+    <div class="card" data-slug="c261001" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="1" data-tags="공통(수학I·II) 수학I 지수 거듭제곱근 지수법칙 1번 공통">
       <div>
-        <a href="c261001.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 1번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #1] Radicals and Rational Exponent Rules</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 1번</div>
+        <a href="c261001.html" class="card-title">📘 [2026학년도 10월 고3 1번] 거듭제곱근과 유리수 지수법칙 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261001</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261001.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -271,9 +293,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261001.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261002">
+    <div class="card" data-slug="c261002" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="2" data-tags="공통(수학I·II) 수학II 미분계수 도함수 극한 2번 공통 미분">
       <div>
-        <a href="c261002.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 2번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #2] Definition of Derivative & Polynomial Differentiation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 2번</div>
+        <a href="c261002.html" class="card-title">📘 [2026학년도 10월 고3 2번] 미분계수의 정의와 다항함수의 도함수</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261002</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261002.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -284,9 +307,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261002.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261003">
+    <div class="card" data-slug="c261003" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="3" data-tags="공통(수학I·II) 수학I 수열 등비수열 공비 3번 공통">
       <div>
-        <a href="c261003.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 3번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #3] Geometric Sequence & Common Ratio</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 3번</div>
+        <a href="c261003.html" class="card-title">📘 [2026학년도 10월 고3 3번] 등비수열의 성질과 공비 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261003</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261003.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -297,9 +321,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261003.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261004">
+    <div class="card" data-slug="c261004" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="4" data-tags="공통(수학I·II) 수학II 함수의연속 이차방정식 4번 공통 연속">
       <div>
-        <a href="c261004.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 4번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #4] Continuity of Piecewise Function & Perfect Square</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 4번</div>
+        <a href="c261004.html" class="card-title">📘 [2026학년도 10월 고3 4번] 구간별 정의된 함수의 연속성과 완전제곱식</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261004</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261004.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -310,9 +335,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261004.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261005">
+    <div class="card" data-slug="c261005" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="5" data-tags="공통(수학I·II) 수학II 미분법 곱의미분법 미분계수 5번 공통 미분 도함수">
       <div>
-        <a href="c261005.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 5번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #5] Product Rule for Differentiation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 5번</div>
+        <a href="c261005.html" class="card-title">📘 [2026학년도 10월 고3 5번] 곱의 미분법과 미분계수 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261005</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261005.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -323,9 +349,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261005.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261006">
+    <div class="card" data-slug="c261006" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="6" data-tags="공통(수학I·II) 수학I 삼각함수 삼각함수사이의관계 사분면 6번 공통">
       <div>
-        <a href="c261006.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 6번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #6] Trigonometric Identities & Quadrant Signs</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 6번</div>
+        <a href="c261006.html" class="card-title">📘 [2026학년도 10월 고3 6번] 삼각함수 사이의 관계와 사분면의 부호</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261006</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261006.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -336,9 +363,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261006.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261007">
+    <div class="card" data-slug="c261007" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="7" data-tags="공통(수학I·II) 수학II 정적분 넓이 이차함수 7번 공통 정적분의활용">
       <div>
-        <a href="c261007.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 7번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #7] Area Bounded by Two Curves and Vertical Lines</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 7번</div>
+        <a href="c261007.html" class="card-title">📘 [2026학년도 10월 고3 7번] 두 곡선과 두 직선으로 둘러싸인 도형의 넓이</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261007</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261007.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -349,9 +377,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261007.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261008">
+    <div class="card" data-slug="c261008" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="8" data-tags="공통(수학I·II) 수학I 로그 로그의성질 밑변환 8번 공통 로그함수">
       <div>
-        <a href="c261008.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 8번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #8] Definition & Base Properties of Logarithms</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 8번</div>
+        <a href="c261008.html" class="card-title">📘 [2026학년도 10월 고3 8번] 로그의 정의와 밑의 변환 성질</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261008</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261008.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -362,9 +391,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261008.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261009">
+    <div class="card" data-slug="c261009" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="9" data-tags="공통(수학I·II) 수학II 함수의극한 미정계수 이차함수 9번 공통 극한">
       <div>
-        <a href="c261009.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 9번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #9] Convergence of Rational Limit & Quadratic Factors</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 9번</div>
+        <a href="c261009.html" class="card-title">📘 [2026학년도 10월 고3 9번] 분수함수의 극한 수렴 조건과 이차함수의 인수 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261009</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261009.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -375,9 +405,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261009.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261010">
+    <div class="card" data-slug="c261010" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="10" data-tags="공통(수학I·II) 수학I 수열 등차수열 등차수열의합 10번 공통">
       <div>
-        <a href="c261010.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 10번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #10] Arithmetic Sequence Sum & Absolute Value Equation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 10번</div>
+        <a href="c261010.html" class="card-title">📘 [2026학년도 10월 고3 10번] 등차수열의 일반항과 절댓값 합 방정식</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261010</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261010.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -388,9 +419,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261010.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261011">
+    <div class="card" data-slug="c261011" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="11" data-tags="공통(수학I·II) 수학II 정적분의활용 속도와거리 합답형 11번 공통 도함수의활용">
       <div>
-        <a href="c261011.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 11번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #11] Velocity, Position, and Total Distance on a Line</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 11번</div>
+        <a href="c261011.html" class="card-title">📘 [2026학년도 10월 고3 11번] 수직선 운동의 속도·위치와 이동 거리 합답형 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261011</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261011.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -401,9 +433,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261011.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261012">
+    <div class="card" data-slug="c261012" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="12" data-tags="공통(수학I·II) 수학I 지수함수 평행이동 좌표와길이 12번 공통 지수 지수법칙">
       <div>
-        <a href="c261012.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 12번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #12] Translated Exponential Graphs and Segment Lengths</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 12번</div>
+        <a href="c261012.html" class="card-title">📘 [2026학년도 10월 고3 12번] 평행이동한 두 지수함수의 그래프와 사다리꼴 변의 길이</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261012</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261012.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -414,9 +447,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261012.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261013">
+    <div class="card" data-slug="c261013" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="13" data-tags="공통(수학I·II) 수학II 미분 다항함수의차수 항등식 13번 공통 도함수">
       <div>
-        <a href="c261013.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 13번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #13] Degree Determination of a Polynomial and Derivative Identity</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 13번</div>
+        <a href="c261013.html" class="card-title">📘 [2026학년도 10월 고3 13번] 다항함수의 차수 결정과 도함수 항등식</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261013</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261013.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -427,9 +461,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261013.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261014">
+    <div class="card" data-slug="c261014" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="14" data-tags="공통(수학I·II) 수학I 삼각함수 사인법칙 코사인법칙 빈칸추론 14번 공통 도형 삼각함수의활용">
       <div>
-        <a href="c261014.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 14번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #14] Law of Sines and Cosines in a Cyclic Quadrilateral</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 14번</div>
+        <a href="c261014.html" class="card-title">📘 [2026학년도 10월 고3 14번] 원에 내접하는 사각형에서 사인법칙과 코사인법칙 빈칸 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261014</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261014.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -440,9 +475,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261014.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261015">
+    <div class="card" data-slug="c261015" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="15" data-tags="공통(수학I·II) 수학II 미분 사차함수 이중접선 교점의개수 15번 공통 도함수 접선의방정식 4점 고난도 킬러 도함수의활용">
       <div>
-        <a href="c261015.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 15번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #15] Quartic Function Bitangent Identity and Intersection Count with Lines Through the Origin</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 15번</div>
+        <a href="c261015.html" class="card-title">📘 [2026학년도 10월 고3 15번] 사차함수의 이중접선 항등식과 원점을 지나는 직선의 교점 개수</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261015</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261015.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -453,9 +489,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261015.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261016">
+    <div class="card" data-slug="c261016" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="16" data-tags="공통(수학I·II) 수학I 수열 시그마의성질 단답형 16번 공통 시그마 수열의합">
       <div>
-        <a href="c261016.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 16번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #16] Linearity of Sigma Notation and Sum of Constants</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 16번</div>
+        <a href="c261016.html" class="card-title">📘 [2026학년도 10월 고3 16번] 합의 기호 시그마(Σ)의 선형성과 상수의 합</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261016</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261016.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -466,9 +503,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261016.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261017">
+    <div class="card" data-slug="c261017" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="17" data-tags="공통(수학I·II) 수학II 적분 부정적분 적분상수 단답형 17번 공통 정적분">
       <div>
-        <a href="c261017.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 17번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #17] Indefinite Integral of a Polynomial and Constant of Integration</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 17번</div>
+        <a href="c261017.html" class="card-title">📘 [2026학년도 10월 고3 17번] 다항함수의 부정적분과 적분상수의 결정</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261017</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261017.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -479,9 +517,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261017.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261018">
+    <div class="card" data-slug="c261018" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="18" data-tags="공통(수학I·II) 수학I 삼각함수 삼각함수의그래프 최솟값 단답형 18번 공통 도함수의활용">
       <div>
-        <a href="c261018.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 18번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #18] Minimum Value of a Sine Function and Function Evaluation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 18번</div>
+        <a href="c261018.html" class="card-title">📘 [2026학년도 10월 고3 18번] 사인함수의 최솟값과 삼각함수의 함숫값 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261018</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261018.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -492,9 +531,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261018.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261019">
+    <div class="card" data-slug="c261019" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="19" data-tags="공통(수학I·II) 수학II 미분 최대와최소 삼차함수 단답형 19번 공통 도함수의활용">
       <div>
-        <a href="c261019.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 19번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #19] Maximum and Minimum of a Cubic Function on a Closed Interval</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 19번</div>
+        <a href="c261019.html" class="card-title">📘 [2026학년도 10월 고3 19번] 닫힌구간에서 삼차함수의 최댓값과 최솟값</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261019</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261019.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -505,9 +545,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261019.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261020">
+    <div class="card" data-slug="c261020" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="20" data-tags="공통(수학I·II) 수학I 지수함수와로그함수 역함수 삼각형의닮음 단답형 20번 공통 지수 지수법칙 로그 로그함수">
       <div>
-        <a href="c261020.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 20번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #20] Inverse Exponential-Logarithmic Functions and Similar Right Triangles</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 20번</div>
+        <a href="c261020.html" class="card-title">📘 [2026학년도 10월 고3 20번] 역함수 관계인 지수·로그함수와 직각삼각형의 닮음</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261020</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261020.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -518,9 +559,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261020.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261021">
+    <div class="card" data-slug="c261021" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="21" data-tags="공통(수학I·II) 수학II 적분 정적분과미분 절댓값적분 삼차함수 단답형 21번 공통 미분 도함수 정적분 4점 고난도 도함수의활용">
       <div>
-        <a href="c261021.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 21번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #21] Definite Integral of Absolute Derivative and Cubic Extrema Difference</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 21번</div>
+        <a href="c261021.html" class="card-title">📘 [2026학년도 10월 고3 21번] 도함수의 절댓값 정적분과 삼차함수의 극값 차 공식</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261021</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261021.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -531,9 +573,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261021.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c261022">
+    <div class="card" data-slug="c261022" data-month="10월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="22" data-tags="공통(수학I·II) 수학I 수열 수학적귀납법 수열의역추적 단답형 22번 공통 점화식 4점 고난도 킬러 수열의귀납적정의 귀납">
       <div>
-        <a href="c261022.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 22번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 #22] Backtracking an Inductively Defined Sequence with Parity Branching</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 공통(수학I·II) · 22번</div>
+        <a href="c261022.html" class="card-title">📘 [2026학년도 10월 고3 22번] 홀짝에 따라 분기하는 귀납적 수열의 역추적</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c261022</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c261022.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -544,9 +587,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c261022.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g23">
+    <div class="card" data-slug="c2610g23" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="23" data-tags="기하 평면벡터 벡터의성분 벡터의연산 23번 벡터">
       <div>
-        <a href="c2610g23.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 23번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #23] Scalar Multiplication and Component Subtraction of Plane Vectors</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 23번</div>
+        <a href="c2610g23.html" class="card-title">📘 [2026학년도 10월 고3 기하 23번] 평면벡터의 실수배와 성분 뺄셈 연산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g23</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g23.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -557,9 +601,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g23.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g24">
+    <div class="card" data-slug="c2610g24" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="24" data-tags="기하 이차곡선 쌍곡선 점근선의방정식 24번">
       <div>
-        <a href="c2610g24.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 24번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #24] Asymptotes of a Hyperbola and Their Slopes</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 24번</div>
+        <a href="c2610g24.html" class="card-title">📘 [2026학년도 10월 고3 기하 24번] 쌍곡선의 점근선의 방정식과 기울기</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g24</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g24.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -570,9 +615,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g25">
+    <div class="card" data-slug="c2610g25" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="25" data-tags="기하 공간도형과공간좌표 대칭이동 두점사이의거리 25번 공간도형 공간좌표">
       <div>
-        <a href="c2610g25.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 25번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #25] Reflections in 3D Coordinate Space and Distance Between Two Points</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 25번</div>
+        <a href="c2610g25.html" class="card-title">📘 [2026학년도 10월 고3 기하 25번] 좌표공간의 대칭이동과 두 점 사이의 거리</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g25</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g25.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -583,9 +629,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g25.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g26">
+    <div class="card" data-slug="c2610g26" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="26" data-tags="기하 이차곡선 포물선 포물선의접선 포물선의정의 26번 미분 도함수 접선의방정식 도함수의활용">
       <div>
-        <a href="c2610g26.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 26번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #26] Tangent Line to a Parabola and Distance to Directrix</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 26번</div>
+        <a href="c2610g26.html" class="card-title">📘 [2026학년도 10월 고3 기하 26번] 포물선의 접선의 방정식과 준선까지의 거리</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g26</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g26.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -596,9 +643,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g26.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g27">
+    <div class="card" data-slug="c2610g27" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="27" data-tags="기하 공간도형과공간좌표 삼수선의정리 원기둥 부채꼴의호의길이 27번 공간도형 공간좌표">
       <div>
-        <a href="c2610g27.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 27번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #27] Cylinder Base Inscribed Angle and Theorem of Three Perpendiculars</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 27번</div>
+        <a href="c2610g27.html" class="card-title">📘 [2026학년도 10월 고3 기하 27번] 원기둥의 밑면 원주각과 삼수선의 정리</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g27</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g27.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -609,9 +657,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g27.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g28">
+    <div class="card" data-slug="c2610g28" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="28" data-tags="기하 이차곡선 타원의정의 이등변삼각형 닮음 28번 타원 4점 고난도">
       <div>
-        <a href="c2610g28.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 28번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #28] Definition of an Ellipse and Two Similar Isosceles Triangles</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 28번</div>
+        <a href="c2610g28.html" class="card-title">📘 [2026학년도 10월 고3 기하 28번] 타원의 정의와 두 이등변삼각형의 닮음</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g28</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g28.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -622,9 +671,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g28.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g29">
+    <div class="card" data-slug="c2610g29" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="29" data-tags="기하 공간도형과공간좌표 정사영 이면각 삼수선의정리 단답형 29번 넓이 공간도형 공간좌표 4점 고난도 킬러 정적분의활용">
       <div>
-        <a href="c2610g29.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 29번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #29] Dihedral Angle and Orthogonal Projection Area in a Rectangular Box</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 29번</div>
+        <a href="c2610g29.html" class="card-title">📘 [2026학년도 10월 고3 기하 29번] 직육면체에서 두 평면이 이루는 각과 정사영의 넓이</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g29</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g29.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -635,9 +685,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g29.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610g30">
+    <div class="card" data-slug="c2610g30" data-month="10월" data-grade="고3" data-subject="기하" data-year="2026" data-qnum="30" data-tags="기하 평면벡터 위치벡터 내분점 벡터의내적 단답형 30번 벡터 4점 고난도 킬러">
       <div>
-        <a href="c2610g30.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 기하 30번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Geometry #30] Internal Division of Plane Vectors and Geometric Interpretation of Dot Product</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 기하 · 30번</div>
+        <a href="c2610g30.html" class="card-title">📘 [2026학년도 10월 고3 기하 30번] 평면벡터의 내분점과 내적 등식의 기하학적 해석</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610g30</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610g30.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -648,9 +699,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610g30.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m23">
+    <div class="card" data-slug="c2610m23" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="23" data-tags="미적분 미분법 지수로그함수의극한 자연로그 23번 미적 로그 로그함수 함수의극한 극한">
       <div>
-        <a href="c2610m23.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 23번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #23] Limit of Natural Logarithm Function and Coefficient Ratio</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 23번</div>
+        <a href="c2610m23.html" class="card-title">📘 [2026학년도 10월 고3 미적 23번] 자연로그 함수의 극한과 계수 비 규칙</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m23</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m23.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -661,9 +713,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m23.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m24">
+    <div class="card" data-slug="c2610m24" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="24" data-tags="미적분 적분법 여러가지함수의정적분 분수함수의적분 24번 미적 적분 정적분">
       <div>
-        <a href="c2610m24.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 24번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #24] Definite Integral of a Rational Function via Termwise Division</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 24번</div>
+        <a href="c2610m24.html" class="card-title">📘 [2026학년도 10월 고3 미적 24번] 분수함수의 분리를 통한 정적분 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m24</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m24.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -674,9 +727,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m25">
+    <div class="card" data-slug="c2610m25" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="25" data-tags="미적분 수열의극한 극한의대소관계 샌드위치정리 이차부등식 25번 미적 수열 함수의극한 극한">
       <div>
-        <a href="c2610m25.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 25번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #25] Quadratic Inequality and Squeeze Theorem for Sequence Limits</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 25번</div>
+        <a href="c2610m25.html" class="card-title">📘 [2026학년도 10월 고3 미적 25번] 이차부등식과 수열의 극한의 대소 관계 (샌드위치 정리)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m25</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m25.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -687,9 +741,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m25.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m26">
+    <div class="card" data-slug="c2610m26" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="26" data-tags="미적분 적분법 정적분의활용 입체도형의부피 부분적분 26번 미적 적분 부피 여러가지적분법">
       <div>
-        <a href="c2610m26.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 26번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #26] Volume of a Solid with Semicircular Cross-Sections</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 26번</div>
+        <a href="c2610m26.html" class="card-title">📘 [2026학년도 10월 고3 미적 26번] 반원을 단면으로 하는 입체도형의 부피와 부분적분</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m26</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m26.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -700,9 +755,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m26.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m27">
+    <div class="card" data-slug="c2610m27" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="27" data-tags="미적분 미분법 미분가능성 역함수의미분법 지수함수 27번 미적 지수 지수법칙 미분 도함수 역함수 여러가지미분법 음함수미분법">
       <div>
-        <a href="c2610m27.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 27번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #27] Differentiability of Piecewise Exponential Function and Derivative of Inverse</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 27번</div>
+        <a href="c2610m27.html" class="card-title">📘 [2026학년도 10월 고3 미적 27번] 구간별 정의된 지수함수의 미분가능성과 역함수의 미분법</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m27</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m27.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -713,9 +769,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m27.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m28">
+    <div class="card" data-slug="c2610m28" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="28" data-tags="미적분 미분법 접선의방정식 매개변수미분법 삼각함수의미분 28번 미적 미분 도함수 음함수미분법 4점 고난도 여러가지미분법">
       <div>
-        <a href="c2610m28.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 28번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #28] Tangent Parameterization and Implicit Differentiation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 28번</div>
+        <a href="c2610m28.html" class="card-title">📘 [2026학년도 10월 고3 미적 28번] 곡선과 직선의 접점 매개변수화 및 음함수·합성함수 미분법</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m28</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m28.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -726,9 +783,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m28.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m29">
+    <div class="card" data-slug="c2610m29" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="29" data-tags="미적분 수열의극한 등비급수 등차수열 등비수열 단답형 29번 미적 수열 급수 4점 고난도 킬러">
       <div>
-        <a href="c2610m29.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 29번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #29] Arithmetic and Geometric Sequences and Infinite Geometric Series</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 29번</div>
+        <a href="c2610m29.html" class="card-title">📘 [2026학년도 10월 고3 미적 29번] 등차수열과 등비수열의 결합 및 등비급수의 합</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m29</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m29.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -739,9 +797,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m29.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610m30">
+    <div class="card" data-slug="c2610m30" data-month="10월" data-grade="고3" data-subject="미적분" data-year="2026" data-qnum="30" data-tags="미적분 적분법 치환적분법 절댓값정적분 합성함수 단답형 30번 미적 적분 정적분 치환적분 4점 고난도 킬러 여러가지적분법">
       <div>
-        <a href="c2610m30.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 미적 30번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Calculus #30] Composite Substitution and Total Variation Integral</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 미적분 · 30번</div>
+        <a href="c2610m30.html" class="card-title">📘 [2026학년도 10월 고3 미적 30번] 합성함수의 치환적분과 절댓값 정적분(총변화량)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610m30</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610m30.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -752,9 +811,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610m30.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p23">
+    <div class="card" data-slug="c2610p23" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="23" data-tags="확률과 통계 경우의수 이항정리 전개식의계수 23번 확통 지수 지수법칙">
       <div>
-        <a href="c2610p23.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 23번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #23] Binomial Theorem and Coefficient in an Expansion</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 23번</div>
+        <a href="c2610p23.html" class="card-title">📘 [2026학년도 10월 고3 확통 23번] 이항정리와 거듭제곱 전개식의 일반항 계수</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p23</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p23.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -765,9 +825,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p23.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p24">
+    <div class="card" data-slug="c2610p24" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="24" data-tags="확률과 통계 통계 이항분포 평균과분산 표준편차 24번 확통">
       <div>
-        <a href="c2610p24.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 24번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #24] Finding n from Mean and Variance of a Binomial Distribution</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 24번</div>
+        <a href="c2610p24.html" class="card-title">📘 [2026학년도 10월 고3 확통 24번] 이항분포의 평균과 분산으로 시행 횟수 n 구하기</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p24</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p24.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -778,9 +839,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p24.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p25">
+    <div class="card" data-slug="c2610p25" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="25" data-tags="확률과 통계 경우의수 중복조합 음이아닌정수해 케이스분류 25번 확통 지수 지수법칙 조합">
       <div>
-        <a href="c2610p25.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 25번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #25] Number of Non-Negative Integer Solutions via Combinations with Repetition</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 25번</div>
+        <a href="c2610p25.html" class="card-title">📘 [2026학년도 10월 고3 확통 25번] 거듭제곱 항이 포함된 음이 아닌 정수해의 개수 (중복조합)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p25</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p25.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -791,9 +853,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p25.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p26">
+    <div class="card" data-slug="c2610p26" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="26" data-tags="확률과 통계 통계 통계적추정 모평균의신뢰구간 표본평균 26번 확통 모평균의추정 신뢰구간 정규분포">
       <div>
-        <a href="c2610p26.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 26번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #26] Confidence Interval for Population Mean and Standard Deviation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 26번</div>
+        <a href="c2610p26.html" class="card-title">📘 [2026학년도 10월 고3 확통 26번] 모평균의 신뢰구간 중심(표본평균)과 모표준편차 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p26</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p26.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -804,9 +867,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p26.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p27">
+    <div class="card" data-slug="c2610p27" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="27" data-tags="확률과 통계 확률 독립시행의확률 주사위의곱 여사건 27번 확통 독립시행">
       <div>
-        <a href="c2610p27.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 27번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #27] Independent Trials Based on Parity of Product of Two Dice</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 27번</div>
+        <a href="c2610p27.html" class="card-title">📘 [2026학년도 10월 고3 확통 27번] 두 눈의 수의 곱의 홀짝에 따른 독립시행의 확률</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p27</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p27.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -817,9 +881,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p27.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p28">
+    <div class="card" data-slug="c2610p28" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="28" data-tags="확률과 통계 경우의수 같은것이있는순열 케이스분류 28번 확통 순열 4점 고난도 여러가지순열">
       <div>
-        <a href="c2610p28.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 28번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #28] Card Selection and Permutations with Identical Items</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 28번</div>
+        <a href="c2610p28.html" class="card-title">📘 [2026학년도 10월 고3 확통 28번] 같은 숫자가 적힌 카드의 선택과 같은 것이 있는 순열</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p28</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p28.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -830,9 +895,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p28.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p29">
+    <div class="card" data-slug="c2610p29" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="29" data-tags="확률과 통계 통계 정규분포 확률밀도함수 대칭성 표준화 단답형 29번 확통 미분 도함수 4점 고난도 킬러">
       <div>
-        <a href="c2610p29.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 29번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #29] Symmetry of Two Normal Distributions and Probability Density Comparison</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 29번</div>
+        <a href="c2610p29.html" class="card-title">📘 [2026학년도 10월 고3 확통 29번] 두 정규분포의 대칭성과 확률밀도함수의 비교</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p29</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p29.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -843,9 +909,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p29.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c2610p30">
+    <div class="card" data-slug="c2610p30" data-month="10월" data-grade="고3" data-subject="확률과 통계" data-year="2026" data-qnum="30" data-tags="확률과 통계 확률 조건부확률 비복원추출 여사건 경우의수 단답형 30번 확통 4점 고난도 킬러">
       <div>
-        <a href="c2610p30.html" class="card-title">📘 <span class="bilingual-ko">2026학년도 10월 고3 확통 30번</span><span class="bilingual-en">[2026 AY Oct Exam Grade 12 Prob&Stats #30] Conditional Probability with Sampling Without Replacement from Two Bags</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 10월 · 고3 · 확률과 통계 · 30번</div>
+        <a href="c2610p30.html" class="card-title">📘 [2026학년도 10월 고3 확통 30번] 두 주머니에서 비복원 추출과 조건부확률</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c2610p30</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c2610p30.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -856,9 +923,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c2610p30.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270901">
+    <div class="card" data-slug="c270901" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="1" data-tags="공통(수학I·II) 1번 공통 수학I 지수 지수법칙">
       <div>
-        <a href="c270901.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 1번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #1] Exponent Rules & Powers Calculation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 1번</div>
+        <a href="c270901.html" class="card-title">📘 [2027학년도 9월 고3 1번] 거듭제곱과 지수법칙 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270901</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270901.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -869,9 +937,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270901.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270902">
+    <div class="card" data-slug="c270902" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="2" data-tags="공통(수학I·II) 2번 공통 수학II 미분 도함수">
       <div>
-        <a href="c270902.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 2번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #2] Definition of differential coefficients and derivatives of polynomial functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 2번</div>
+        <a href="c270902.html" class="card-title">📘 [2027학년도 9월 고3 2번] 미분계수의 정의와 다항함수의 도함수</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270902</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270902.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -882,9 +951,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270902.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270903">
+    <div class="card" data-slug="c270903" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="3" data-tags="공통(수학I·II) 3번 공통 수학I 수열 등차수열">
       <div>
-        <a href="c270903.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 3번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #3] Properties of arithmetic sequences and finding specific terms</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 3번</div>
+        <a href="c270903.html" class="card-title">📘 [2027학년도 9월 고3 3번] 등차수열의 성질과 특정 항 구하기</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270903</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270903.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -895,9 +965,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270903.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270904">
+    <div class="card" data-slug="c270904" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="4" data-tags="공통(수학I·II) 4번 공통 수학II 함수의연속 연속">
       <div>
-        <a href="c270904.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 4번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #4] Continuity Conditions of Functions & Determination of Indeterminate Coefficients</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 4번</div>
+        <a href="c270904.html" class="card-title">📘 [2027학년도 9월 고3 4번] 함수의 연속 조건과 미정계수 결정</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270904</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270904.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -908,9 +979,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270904.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270905">
+    <div class="card" data-slug="c270905" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="5" data-tags="공통(수학I·II) 5번 공통 수학II 적분 정적분">
       <div>
-        <a href="c270905.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 5번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #5] Calculating definite integrals of polynomial functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 5번</div>
+        <a href="c270905.html" class="card-title">📘 [2027학년도 9월 고3 5번] 다항함수의 정적분 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270905</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270905.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -921,9 +993,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270905.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270906">
+    <div class="card" data-slug="c270906" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="6" data-tags="공통(수학I·II) 6번 공통 수학I 삼각함수 도함수의활용">
       <div>
-        <a href="c270906.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 6번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #6] Maximum value and period of trigonometric functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 6번</div>
+        <a href="c270906.html" class="card-title">📘 [2027학년도 9월 고3 6번] 삼각함수의 최댓값과 주기</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270906</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270906.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -934,9 +1007,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270906.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270907">
+    <div class="card" data-slug="c270907" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="7" data-tags="공통(수학I·II) 7번 공통 수학II 미분 도함수 도함수의활용">
       <div>
-        <a href="c270907.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 7번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #7] Calculating the local maximum of a polynomial function using the derivative</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 7번</div>
+        <a href="c270907.html" class="card-title">📘 [2027학년도 9월 고3 7번] 도함수를 활용한 다항함수의 극댓값 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270907</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270907.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -947,9 +1021,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270907.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270908">
+    <div class="card" data-slug="c270908" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="8" data-tags="공통(수학I·II) 8번 공통 수학I 수열">
       <div>
-        <a href="c270908.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 8번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #8] Calculation of general terms and proportional expressions in sequence</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 8번</div>
+        <a href="c270908.html" class="card-title">📘 [2027학년도 9월 고3 8번] 수열의 일반항과 비례식 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270908</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270908.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -960,9 +1035,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270908.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270909">
+    <div class="card" data-slug="c270909" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="9" data-tags="공통(수학I·II) 9번 공통 수학II 미분 도함수 속도와거리 도함수의활용 정적분의활용">
       <div>
-        <a href="c270909.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 9번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #9] Differentiation of position and velocity/acceleration of two points</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 9번</div>
+        <a href="c270909.html" class="card-title">📘 [2027학년도 9월 고3 9번] 위치의 미분과 두 점의 속도·가속도</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270909</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270909.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -973,9 +1049,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270909.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270910">
+    <div class="card" data-slug="c270910" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="10" data-tags="공통(수학I·II) 10번 공통 수학I 지수 지수법칙 지수함수">
       <div>
-        <a href="c270910.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 10번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #10] Determination of undetermined coefficient using graph of exponential function and length of line segment</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 10번</div>
+        <a href="c270910.html" class="card-title">📘 [2027학년도 9월 고3 10번] 지수함수의 그래프와 선분의 길이를 이용한 미정계수 결정</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270910</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270910.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -986,9 +1063,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270910.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270911">
+    <div class="card" data-slug="c270911" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="11" data-tags="공통(수학I·II) 11번 공통 수학II 미분 도함수 적분">
       <div>
-        <a href="c270911.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 11번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #11] Relationship between differentiation and integration and determination of polynomial functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 11번</div>
+        <a href="c270911.html" class="card-title">📘 [2027학년도 9월 고3 11번] 미분과 적분의 관계 및 다항함수의 결정</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270911</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270911.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -999,9 +1077,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270911.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270912">
+    <div class="card" data-slug="c270912" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="12" data-tags="공통(수학I·II) 12번 공통 수학I 삼각함수 사인법칙 코사인법칙 도형 삼각함수의활용">
       <div>
-        <a href="c270912.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 12번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #12] Calculating shapes using the law of sines and the law of cosines</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 12번</div>
+        <a href="c270912.html" class="card-title">📘 [2027학년도 9월 고3 12번] 사인법칙과 코사인법칙을 이용한 도형 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270912</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270912.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1012,9 +1091,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270912.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270913">
+    <div class="card" data-slug="c270913" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="13" data-tags="공통(수학I·II) 13번 공통 수학II 적분 정적분">
       <div>
-        <a href="c270913.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 13번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #13] Definite integral and summation type (ㄱ, ㄴ, ㄷ) inference of quadratic functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 13번</div>
+        <a href="c270913.html" class="card-title">📘 [2027학년도 9월 고3 13번] 이차함수의 정적분과 합답형(ㄱ, ㄴ, ㄷ) 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270913</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270913.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1025,9 +1105,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270913.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270914">
+    <div class="card" data-slug="c270914" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="14" data-tags="공통(수학I·II) 14번 공통 수학I 지수 지수법칙 수열">
       <div>
-        <a href="c270914.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 14번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #14] Condition for the sum of a power root and a sequence to be a natural number</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 14번</div>
+        <a href="c270914.html" class="card-title">📘 [2027학년도 9월 고3 14번] 거듭제곱근과 수열의 합이 자연수가 되는 조건</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270914</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270914.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1038,9 +1119,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270914.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270915">
+    <div class="card" data-slug="c270915" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="15" data-tags="공통(수학I·II) 15번 공통 수학II 함수의극한 극한 4점 고난도 킬러">
       <div>
-        <a href="c270915.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 15번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #15] Extreme existence conditions and the most difficult quadratic function inference</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 15번</div>
+        <a href="c270915.html" class="card-title">📘 [2027학년도 9월 고3 15번] 극한의 존재 조건과 최고난도 이차함수 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270915</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270915.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1051,9 +1133,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270915.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270916">
+    <div class="card" data-slug="c270916" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="16" data-tags="공통(수학I·II) 16번 공통 수학I 로그 로그함수">
       <div>
-        <a href="c270916.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 16번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #16] Solving logarithmic equations using base transformation</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 16번</div>
+        <a href="c270916.html" class="card-title">📘 [2027학년도 9월 고3 16번] 밑 변환을 활용한 로그방정식 풀이</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270916</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270916.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1064,9 +1147,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270916.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270917">
+    <div class="card" data-slug="c270917" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="17" data-tags="공통(수학I·II) 17번 공통 수학II 적분 정적분 부정적분">
       <div>
-        <a href="c270917.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 17번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #17] Calculating indefinite integrals and function values</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 17번</div>
+        <a href="c270917.html" class="card-title">📘 [2027학년도 9월 고3 17번] 부정적분과 함숫값 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270917</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270917.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1077,9 +1161,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270917.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270918">
+    <div class="card" data-slug="c270918" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="18" data-tags="공통(수학I·II) 18번 공통 수학I 수열 수학적귀납법 점화식 수열의귀납적정의 귀납">
       <div>
-        <a href="c270918.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 18번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #18] Inductive reasoning of even and odd regular sequences</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 18번</div>
+        <a href="c270918.html" class="card-title">📘 [2027학년도 9월 고3 18번] 짝수·홀수 규칙 수열의 귀납적 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270918</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270918.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1090,9 +1175,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270918.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270919">
+    <div class="card" data-slug="c270919" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="19" data-tags="공통(수학I·II) 19번 공통 수학II 미분 도함수 접선의방정식 삼차함수 도함수의활용">
       <div>
-        <a href="c270919.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 19번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #19] Substituting the equation and coordinates of the tangent to the cubic function</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 19번</div>
+        <a href="c270919.html" class="card-title">📘 [2027학년도 9월 고3 19번] 삼차함수의 접선의 방정식과 좌표 대입</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270919</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270919.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1103,9 +1189,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270919.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270920">
+    <div class="card" data-slug="c270920" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="20" data-tags="공통(수학I·II) 20번 공통 수학I 삼각함수 넓이 정적분의활용">
       <div>
-        <a href="c270920.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 20번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #20] Symmetry of trigonometric functions and triangle area ratio, blank deduction</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 20번</div>
+        <a href="c270920.html" class="card-title">📘 [2027학년도 9월 고3 20번] 삼각함수의 대칭성과 삼각형 넓이비 빈칸추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270920</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270920.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1116,9 +1203,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270920.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270921">
+    <div class="card" data-slug="c270921" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="21" data-tags="공통(수학I·II) 21번 공통 수학II 미분 도함수 미분가능성 삼차함수 4점 고난도 도함수의활용">
       <div>
-        <a href="c270921.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 21번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #21] Real root conditions and differentiability of cubic functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 21번</div>
+        <a href="c270921.html" class="card-title">📘 [2027학년도 9월 고3 21번] 삼차함수의 실근 조건과 미분가능성</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270921</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270921.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1129,9 +1217,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270921.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270922">
+    <div class="card" data-slug="c270922" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2027" data-qnum="22" data-tags="공통(수학I·II) 22번 공통 수학I 지수 지수법칙 로그 로그함수 4점 고난도 킬러">
       <div>
-        <a href="c270922.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 22번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #22] Exponential/logarithmic functions and geometric properties of rectangles</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 공통(수학I·II) · 22번</div>
+        <a href="c270922.html" class="card-title">📘 [2027학년도 9월 고3 22번] 지수·로그함수와 직사각형의 기하학적 성질</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270922</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270922.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1142,9 +1231,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270922.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270923">
+    <div class="card" data-slug="c270923" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="23" data-tags="미적분 23번 미적 로그 로그함수 함수의극한 극한">
       <div>
-        <a href="c270923.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 23번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #23] Basic calculation of limits of natural log functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 23번</div>
+        <a href="c270923.html" class="card-title">📘 [2027학년도 9월 고3 23번] 자연로그함수의 극한 기본 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270923</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270923.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1155,9 +1245,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270923.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270924">
+    <div class="card" data-slug="c270924" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="24" data-tags="미적분 24번 미적 적분 정적분 부분적분 여러가지적분법">
       <div>
-        <a href="c270924.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 24번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #24] Definite integral calculation using partial integration method</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 24번</div>
+        <a href="c270924.html" class="card-title">📘 [2027학년도 9월 고3 24번] 부분적분법을 이용한 정적분 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270924</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270924.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1168,9 +1259,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270924.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270925">
+    <div class="card" data-slug="c270925" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="25" data-tags="미적분 25번 미적 수열 등비수열">
       <div>
-        <a href="c270925.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 25번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #25] Convergence conditions for geometric sequences and counting integers</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 25번</div>
+        <a href="c270925.html" class="card-title">📘 [2027학년도 9월 고3 25번] 등비수열의 수렴 조건과 정수 개수 카운팅</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270925</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270925.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1181,9 +1273,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270925.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270926">
+    <div class="card" data-slug="c270926" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="26" data-tags="미적분 26번 미적 미분 도함수 접선의방정식 적분 정적분 넓이 도함수의활용 정적분의활용">
       <div>
-        <a href="c270926.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 26번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #26] Tangents of rational functions and area of ​​definite integrals of partial fractions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 26번</div>
+        <a href="c270926.html" class="card-title">📘 [2027학년도 9월 고3 26번] 유리함수의 접선과 부분분수 정적분 넓이</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270926</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270926.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1194,9 +1287,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270926.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270927">
+    <div class="card" data-slug="c270927" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="27" data-tags="미적분 27번 미적 미분 도함수 역함수 여러가지미분법 음함수미분법">
       <div>
-        <a href="c270927.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 27번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #27] Differentiation and inverse function relationships of composite functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 27번</div>
+        <a href="c270927.html" class="card-title">📘 [2027학년도 9월 고3 27번] 합성함수의 미분법과 역함수 관계</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270927</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270927.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1207,9 +1301,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270927.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270928">
+    <div class="card" data-slug="c270928" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="28" data-tags="미적분 28번 미적 삼각함수 미분 도함수 접선의방정식 음함수미분법 4점 고난도 도함수의활용 여러가지미분법">
       <div>
-        <a href="c270928.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 28번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #28] Implicit differential calculus of circles, tangents, and trigonometric functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 28번</div>
+        <a href="c270928.html" class="card-title">📘 [2027학년도 9월 고3 28번] 원과 접선, 삼각함수의 음함수 미분법</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270928</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270928.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1220,9 +1315,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270928.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270929">
+    <div class="card" data-slug="c270929" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="29" data-tags="미적분 29번 미적 수열 등비수열 급수 등비급수 4점 고난도 킬러">
       <div>
-        <a href="c270929.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 29번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #29] Inference on convergence conditions for geometric sequences and infinite series</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 29번</div>
+        <a href="c270929.html" class="card-title">📘 [2027학년도 9월 고3 29번] 등비수열과 무한급수의 수렴 조건 추론</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270929</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270929.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1233,9 +1329,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270929.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c270930">
+    <div class="card" data-slug="c270930" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2027" data-qnum="30" data-tags="미적분 30번 미적 적분 정적분 치환적분 역함수 4점 고난도 킬러 여러가지적분법">
       <div>
-        <a href="c270930.html" class="card-title">📘 <span class="bilingual-ko">2027학년도 9월 고3 30번</span><span class="bilingual-en">[2027 AY Sep Mock Exam Grade 12 #30] Highest difficulty calculation of substitution integral method and inverse function definite integral</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2027학년도 · 9월 · 고3 · 미적분 · 30번</div>
+        <a href="c270930.html" class="card-title">📘 [2027학년도 9월 고3 30번] 치환적분법과 역함수 정적분의 최고난도 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c270930</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c270930.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1246,9 +1343,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c270930.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30901">
+    <div class="card" data-slug="c30901" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="1" data-tags="수학I 지수 거듭제곱근 지수법칙 공통(수학I·II) 공통 1번">
       <div>
-        <a href="c30901.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 1번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #1] Calculating power roots and exponent laws</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 1번</div>
+        <a href="c30901.html" class="card-title">📘 [2025학년도 9월 고3 1번] 거듭제곱근과 지수법칙 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30901</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30901.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1259,9 +1357,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30901.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30902">
+    <div class="card" data-slug="c30902" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="2" data-tags="수학II 미분계수 도함수 미분법 공통(수학I·II) 공통 미분 2번">
       <div>
-        <a href="c30902.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 2번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #2] Definition of differential coefficients and derivatives of polynomial functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 2번</div>
+        <a href="c30902.html" class="card-title">📘 [2025학년도 9월 고3 2번] 미분계수의 정의와 다항함수의 도함수</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30902</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30902.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1272,9 +1371,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30902.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30903">
+    <div class="card" data-slug="c30903" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="3" data-tags="수학I 수열 등비수열 일반항 공통(수학I·II) 공통 3번">
       <div>
-        <a href="c30903.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 3번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #3] Combination of general terms and conditions of geometric sequence</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 3번</div>
+        <a href="c30903.html" class="card-title">📘 [2025학년도 9월 고3 3번] 등비수열의 일반항과 조건의 연립</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30903</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30903.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1285,9 +1385,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30903.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30904">
+    <div class="card" data-slug="c30904" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="4" data-tags="수학II 극한 좌극한 우극한 함수의그래프 공통(수학I·II) 공통 함수의극한 4번">
       <div>
-        <a href="c30904.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 4번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #4] Interpreting the left and right limits in the graph of a function</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 4번</div>
+        <a href="c30904.html" class="card-title">📘 [2025학년도 9월 고3 4번] 함수의 그래프에서 좌극한과 우극한의 판독</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30904</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30904.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1298,9 +1399,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30904.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30905">
+    <div class="card" data-slug="c30905" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="5" data-tags="수학II 도함수 곱의미분법 미분계수 공통(수학I·II) 공통 미분 5번">
       <div>
-        <a href="c30905.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 5번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #5] Differentiation of products and calculation of differential coefficients</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 5번</div>
+        <a href="c30905.html" class="card-title">📘 [2025학년도 9월 고3 5번] 곱의 미분법과 미분계수의 계산</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30905</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30905.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1311,9 +1413,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30905.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30906">
+    <div class="card" data-slug="c30906" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="6" data-tags="수학I 삼각함수 각변환 사분면 공통(수학I·II) 공통 6번">
       <div>
-        <a href="c30906.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 6번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #6] Each conversion of trigonometric functions and addition of trigonometric functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 6번</div>
+        <a href="c30906.html" class="card-title">📘 [2025학년도 9월 고3 6번] 삼각함수의 각 변환과 삼각함수의 덧셈</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30906</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30906.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1324,9 +1427,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30906.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30907">
+    <div class="card" data-slug="c30907" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="7" data-tags="수학II 함수의연속 좌극한 우극한 근과계수의관계 공통(수학I·II) 공통 연속 7번">
       <div>
-        <a href="c30907.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 7번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #7] Continuity conditions and quadratic equations for sectional functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 7번</div>
+        <a href="c30907.html" class="card-title">📘 [2025학년도 9월 고3 7번] 구간별 함수의 연속성 조건과 이차방정식</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30907</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30907.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1337,9 +1441,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30907.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30908">
+    <div class="card" data-slug="c30908" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="8" data-tags="수학I 로그 밑변환공식 이차방정식 공통(수학I·II) 공통 로그함수 8번">
       <div>
-        <a href="c30908.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 8번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #8] Equations using logarithmic properties and substitution</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 8번</div>
+        <a href="c30908.html" class="card-title">📘 [2025학년도 9월 고3 8번] 로그의 성질과 치환을 이용한 방정식</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30908</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30908.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1350,9 +1455,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30908.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30909">
+    <div class="card" data-slug="c30909" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="9" data-tags="수학II 적분 정적분 정적분의성질 공통(수학I·II) 공통 9번">
       <div>
-        <a href="c30909.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 9번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #9] Properties of definite integrals and definite integrals of polynomial functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 9번</div>
+        <a href="c30909.html" class="card-title">📘 [2025학년도 9월 고3 9번] 정적분의 성질과 다항함수의 정적분</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30909</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30909.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1363,9 +1469,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30909.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30910">
+    <div class="card" data-slug="c30910" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="10" data-tags="수학I 삼각함수 사인법칙 외접원 피타고라스정리 공통(수학I·II) 공통 코사인법칙 도형 10번 삼각함수의활용">
       <div>
-        <a href="c30910.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 10번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #10] Law of Sines and Pythagorean Theorem of Right Triangles</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 10번</div>
+        <a href="c30910.html" class="card-title">📘 [2025학년도 9월 고3 10번] 사인법칙과 직각삼각형의 피타고라스 정리</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30910</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30910.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1376,9 +1483,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30910.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30911">
+    <div class="card" data-slug="c30911" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="11" data-tags="수학II 도함수의활용 속도와가속도 위치방정식 공통(수학I·II) 공통 속도와거리 11번 정적분의활용">
       <div>
-        <a href="c30911.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 11번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #11] Position and acceleration of two points moving on a vertical line</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 11번</div>
+        <a href="c30911.html" class="card-title">📘 [2025학년도 9월 고3 11번] 수직선 위를 움직이는 두 점의 위치와 가속도</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30911</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30911.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1389,9 +1497,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30911.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30912">
+    <div class="card" data-slug="c30912" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="12" data-tags="수학I 수열 등차수열 교대합 시그마 공통(수학I·II) 공통 12번">
       <div>
-        <a href="c30912.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 12번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #12] Sequence defined as the sum of an arithmetic sequence and alternating signs</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 12번</div>
+        <a href="c30912.html" class="card-title">📘 [2025학년도 9월 고3 12번] 등차수열과 부호 교대 합으로 정의된 수열</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30912</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30912.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1402,9 +1511,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30912.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30913">
+    <div class="card" data-slug="c30913" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="13" data-tags="수학II 정적분 넓이 함수의대칭성 공통(수학I·II) 공통 적분 13번 정적분의활용">
       <div>
-        <a href="c30913.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 13번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #13] Symmetric quadratic function and definite integral area condition</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 13번</div>
+        <a href="c30913.html" class="card-title">📘 [2025학년도 9월 고3 13번] 대칭인 이차함수와 정적분 넓이 조건</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30913</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30913.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1415,9 +1525,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30913.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30914">
+    <div class="card" data-slug="c30914" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="14" data-tags="수학I 지수함수 로그함수 역함수 대칭성 공통(수학I·II) 공통 지수 지수법칙 로그 14번 도함수의활용">
       <div>
-        <a href="c30914.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 14번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #14] Inverse function symmetry of exponential and logarithmic functions and intersection of circles</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 14번</div>
+        <a href="c30914.html" class="card-title">📘 [2025학년도 9월 고3 14번] 지수함수·로그함수의 역함수 대칭성과 원의 교점</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30914</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30914.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1428,9 +1539,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30914.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30915">
+    <div class="card" data-slug="c30915" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="15" data-tags="수학II 적분 정적분으로정의된함수 다항함수 공통(수학I·II) 공통 정적분 15번 4점 고난도 킬러">
       <div>
-        <a href="c30915.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 15번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #15] Determination of functions and polynomial functions defined by definite integrals</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 15번</div>
+        <a href="c30915.html" class="card-title">📘 [2025학년도 9월 고3 15번] 정적분으로 정의된 함수와 다항함수의 결정</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30915</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30915.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1441,9 +1553,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30915.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30916">
+    <div class="card" data-slug="c30916" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="16" data-tags="수학I 로그 로그방정식 진수조건 단답형 공통(수학I·II) 공통 로그함수 16번">
       <div>
-        <a href="c30916.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 16번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #16] Logarithmic equations and base conditions (short answer type)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 16번</div>
+        <a href="c30916.html" class="card-title">📘 [2025학년도 9월 고3 16번] 로그방정식과 진수 조건 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30916</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30916.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1454,9 +1567,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30916.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30917">
+    <div class="card" data-slug="c30917" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="17" data-tags="수학II 적분 부정적분 적분상수 단답형 공통(수학I·II) 공통 정적분 17번">
       <div>
-        <a href="c30917.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 17번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #17] Determination of indefinite integrals and integral constants (short answer type)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 17번</div>
+        <a href="c30917.html" class="card-title">📘 [2025학년도 9월 고3 17번] 부정적분과 적분상수의 결정 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30917</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30917.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1467,9 +1581,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30917.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30918">
+    <div class="card" data-slug="c30918" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="18" data-tags="수학I 수열 시그마 수열의합 단답형 공통(수학I·II) 공통 18번">
       <div>
-        <a href="c30918.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 18번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #18] Sigma expansion and calculation of the sum of a sequence (short answer)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 18번</div>
+        <a href="c30918.html" class="card-title">📘 [2025학년도 9월 고3 18번] 시그마의 전개와 수열의 합 계산 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30918</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30918.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1480,9 +1595,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30918.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30919">
+    <div class="card" data-slug="c30919" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="19" data-tags="수학II 도함수의활용 극대극소 증감표 단답형 공통(수학I·II) 공통 지수 지수법칙 미분 도함수 삼차함수 19번">
       <div>
-        <a href="c30919.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 19번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #19] Determination of maximum, minimum and unknowns of cubic function (short answer type)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 19번</div>
+        <a href="c30919.html" class="card-title">📘 [2025학년도 9월 고3 19번] 삼차함수의 극대·극소와 미지수 결정 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30919</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30919.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1493,9 +1609,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30919.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30920">
+    <div class="card" data-slug="c30920" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="20" data-tags="수학I 삼각함수 삼각방정식 실근의개수 단답형 공통(수학I·II) 공통 20번 도함수의활용">
       <div>
-        <a href="c30920.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 20번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #20] Graphs of trigonometric functions and number of real roots (short answer)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 20번</div>
+        <a href="c30920.html" class="card-title">📘 [2025학년도 9월 고3 20번] 삼각함수의 그래프와 실근의 개수 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30920</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30920.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1506,9 +1623,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30920.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30921">
+    <div class="card" data-slug="c30921" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="21" data-tags="수학II 도함수 부등식 정수조건 단답형 공통(수학I·II) 공통 미분 삼차함수 21번 4점 고난도">
       <div>
-        <a href="c30921.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 21번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #21] Inference of the derivative of a cubic function that satisfies an inequality (short answer)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 21번</div>
+        <a href="c30921.html" class="card-title">📘 [2025학년도 9월 고3 21번] 부등식을 만족시키는 삼차함수의 도함수 추론 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30921</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30921.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1519,9 +1637,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30921.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30922">
+    <div class="card" data-slug="c30922" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2025" data-qnum="22" data-tags="수학I 수열 점화식 귀납적정의 단답형 공통(수학I·II) 공통 수학적귀납법 22번 4점 고난도 킬러 수열의귀납적정의 귀납">
       <div>
-        <a href="c30922.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 22번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 #22] Inductive definition of sequence and branching inference (short answer type)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 공통(수학I·II) · 22번</div>
+        <a href="c30922.html" class="card-title">📘 [2025학년도 9월 고3 22번] 수열의 귀납적 정의와 분기 추론 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30922</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30922.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1532,9 +1651,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30922.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30923">
+    <div class="card" data-slug="c30923" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="23" data-tags="미적분 삼각함수의극한 극한값계산 미적 삼각함수 함수의극한 극한 적분 23번">
       <div>
-        <a href="c30923.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 23번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #23] Basic limits of trigonometric functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 23번</div>
+        <a href="c30923.html" class="card-title">📘 [2025학년도 9월 고3 미적분 23번] 삼각함수의 기본 극한</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30923</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30923.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1545,9 +1665,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30923.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30924">
+    <div class="card" data-slug="c30924" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="24" data-tags="미적분 부정적분 접선의기울기 지수함수 로그함수 미적 지수 지수법칙 로그 미분 도함수 접선의방정식 적분 정적분 24번 도함수의활용">
       <div>
-        <a href="c30924.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 24번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #24] Indefinite integrals of exponential and logarithmic functions and slope of tangent lines</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 24번</div>
+        <a href="c30924.html" class="card-title">📘 [2025학년도 9월 고3 미적분 24번] 지수·로그함수의 부정적분과 접선의 기울기</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30924</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30924.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1558,9 +1679,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30924.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30925">
+    <div class="card" data-slug="c30925" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="25" data-tags="미적분 수열의극한 등비수열의극한 수렴조건 미적 수열 등비수열 함수의극한 극한 적분 25번">
       <div>
-        <a href="c30925.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 25번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #25] Limits and convergence conditions of geometric sequences</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 25번</div>
+        <a href="c30925.html" class="card-title">📘 [2025학년도 9월 고3 미적분 25번] 등비수열의 극한과 수렴 조건</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30925</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30925.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1571,9 +1693,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30925.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30926">
+    <div class="card" data-slug="c30926" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="26" data-tags="미적분 정적분의활용 입체도형의부피 치환적분 부분적분 미적 적분 부피 26번 여러가지적분법">
       <div>
-        <a href="c30926.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 26번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #26] Volume and substitution/partial integration of three-dimensional figures</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 26번</div>
+        <a href="c30926.html" class="card-title">📘 [2025학년도 9월 고3 미적분 26번] 입체도형의 부피와 치환·부분적분</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30926</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30926.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1584,9 +1707,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30926.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30927">
+    <div class="card" data-slug="c30927" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="27" data-tags="미적분 합성함수미분 도함수 미분계수 미적 미분 적분 27번 여러가지미분법 음함수미분법">
       <div>
-        <a href="c30927.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 27번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #27] Differential calculus of composite functions and special angle substitution</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 27번</div>
+        <a href="c30927.html" class="card-title">📘 [2025학년도 9월 고3 미적분 27번] 합성함수의 미분법과 특수각 대입</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30927</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30927.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1597,9 +1721,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30927.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30928">
+    <div class="card" data-slug="c30928" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="28" data-tags="미적분 역함수정적분 치환적분 부분적분 이계도함수 미적 적분 정적분 역함수 28번 4점 고난도 여러가지적분법">
       <div>
-        <a href="c30928.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 28번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #28] Definite integral and substitution/partial integration of inverse functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 28번</div>
+        <a href="c30928.html" class="card-title">📘 [2025학년도 9월 고3 미적분 28번] 역함수의 정적분과 치환·부분적분</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30928</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30928.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1610,9 +1735,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30928.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30929">
+    <div class="card" data-slug="c30929" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="29" data-tags="미적분 급수 부분분수 수열의합 단답형 미적 수열 적분 등비급수 29번 4점 고난도 킬러">
       <div>
-        <a href="c30929.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 29번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #29] General terms of partial fraction series and sequences (short answer type)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 29번</div>
+        <a href="c30929.html" class="card-title">📘 [2025학년도 9월 고3 미적분 29번] 부분분수 급수와 수열의 일반항 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30929</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30929.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1623,9 +1749,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30929.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="c30930">
+    <div class="card" data-slug="c30930" data-month="9월" data-grade="고3" data-subject="미적분" data-year="2025" data-qnum="30" data-tags="미적분 부정적분 절댓값함수 미분가능성 최솟값함수 단답형 미적 지수 지수법칙 지수함수 적분 정적분 30번 4점 고난도 킬러 도함수의활용">
       <div>
-        <a href="c30930.html" class="card-title">📘 <span class="bilingual-ko">2025학년도 9월 고3 미적분 30번</span><span class="bilingual-en">[2025 AY Sep Mock Exam Grade 12 Calculus #30] Indefinite integral and minimum value function of absolute value exponential function (short answer type)</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2025학년도 · 9월 · 고3 · 미적분 · 30번</div>
+        <a href="c30930.html" class="card-title">📘 [2025학년도 9월 고3 미적분 30번] 절댓값 지수함수의 부정적분과 최솟값 함수 (단답형)</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>c30930</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/c30930.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1636,9 +1763,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="c30930.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="d7abad20">
+    <div class="card" data-slug="d7abad20" data-month="6월" data-grade="고3" data-subject="공통수학" data-year="2009" data-qnum="29" data-tags="공통수학 삼각함수 삼각함수의활용 삼각함수덧셈정리 탄젠트 기하 29번 6월 고3 4점 고난도 킬러">
       <div>
-        <a href="d7abad20.html" class="card-title">📘 <span class="bilingual-ko">2009학년도 6월 학력평가 수학 29번</span><span class="bilingual-en">2009 AY June Exam Math #29 · Measuring Tree Height via Tangent Addition Formula</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2009학년도 · 6월 · 고3 · 공통수학 · 29번</div>
+        <a href="d7abad20.html" class="card-title">📘 [2009학년도 6월 고3 29번] 삼각함수 덧셈정리를 활용한 나무 높이 측정</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>d7abad20</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/d7abad20.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1649,9 +1777,10 @@ html[lang="en"] .bilingual-en { display: inline !important; }
         <a href="d7abad20.html" class="btn" style="background:#f6f3f5;color:#1b1b1d;border:1px solid var(--line);margin-left:6px"><span class="btn-solve-text">풀기 ➔</span></a>
       </div>
     </div>
-    <div class="card" data-slug="e7d51a27">
+    <div class="card" data-slug="e7d51a27" data-month="9월" data-grade="고3" data-subject="공통(수학I·II)" data-year="2026" data-qnum="22" data-tags="공통(수학I·II) 수학II 미분 미분가능성 도함수의활용 절댓값함수 합성함수 9월 고3 22번 공통 도함수 4점 고난도 킬러">
       <div>
-        <a href="e7d51a27.html" class="card-title">📘 <span class="bilingual-ko">수학II · 절댓값 함수의 미분가능성</span><span class="bilingual-en">Calculus · Differentiability of Absolute Value Composite Functions</span></a>
+        <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">2026학년도 · 9월 · 고3 · 공통(수학I·II) · 22번</div>
+        <a href="e7d51a27.html" class="card-title">📘 [2026학년도 9월 고3 공통 22번] 절댓값 함수의 미분가능성 → 자연수 $n$의 합</a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>e7d51a27</code></span> · 
           <a href="https://min7014.github.io/mathedu/board/e7d51a27.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1665,12 +1794,145 @@ html[lang="en"] .bilingual-en { display: inline !important; }
   </div>
 </div>
 <script>
-function filterOfflineCards() {
-  var q = (document.getElementById('offlineSearchInput').value || '').trim().toLowerCase();
-  document.querySelectorAll('#offlineList .card').forEach(function(card) {
-    var txt = (card.textContent || '').toLowerCase();
-    card.style.display = (!q || txt.indexOf(q) !== -1) ? 'flex' : 'none';
+function parseOfflineNaturalQuery(rawQuery) {
+  var q = String(rawQuery || '').trim();
+  if (!q) return { isEmpty: true, months: [], grades: [], subjects: [], subSubjects: [], years: [], qNums: [], keywords: [] };
+  var norm = q.toLowerCase();
+  var months = [], grades = [], subjects = [], subSubjects = [], years = [], qNums = [];
+
+  norm = norm.replace(/(20\d{2})\s*(?:학년도|년)?/g, function(_, y) { if (years.indexOf(y) === -1) years.push(y); return ' '; });
+  norm = norm.replace(/(?:^|\s)(2[3-9])\s*학년도/g, function(_, y2) { var fy = '20' + y2; if (years.indexOf(fy) === -1) years.push(fy); return ' '; });
+  norm = norm.replace(/(10|11|3|4|5|6|7|9)\s*(?:월|모평|모의평가|학평|학력평가)/g, function(_, m) {
+    var mv = (m === '11') ? '수능' : (m + '월');
+    if (months.indexOf(mv) === -1) months.push(mv);
+    return ' ';
   });
+  if (/(수능|대학수학능력시험|대수능)/.test(norm)) {
+    if (months.indexOf('수능') === -1) months.push('수능');
+    norm = norm.replace(/(수능|대학수학능력시험|대수능)/g, ' ');
+  }
+  norm = norm.replace(/고\s*([123])|([123])\s*학년/g, function(_, g1, g2) {
+    var gv = '고' + (g1 || g2);
+    if (grades.indexOf(gv) === -1) grades.push(gv);
+    return ' ';
+  });
+  norm = norm.replace(/(\d{1,2})\s*번/g, function(_, n) {
+    var nv = String(parseInt(n, 10));
+    if (qNums.indexOf(nv) === -1) qNums.push(nv);
+    return ' ';
+  });
+  if (/(확률과\s*통계|확률통계|확통)/.test(norm)) {
+    if (subjects.indexOf('확률과 통계') === -1) subjects.push('확률과 통계');
+    norm = norm.replace(/(확률과\s*통계|확률통계|확통)/g, ' ');
+  }
+  if (/(미적분학|미적분|미적)/.test(norm)) {
+    if (subjects.indexOf('미적분') === -1) subjects.push('미적분');
+    norm = norm.replace(/(미적분학|미적분|미적)/g, ' ');
+  }
+  if (/(기하와\s*벡터|기하벡터|기하)/.test(norm)) {
+    if (subjects.indexOf('기하') === -1) subjects.push('기하');
+    norm = norm.replace(/(기하와\s*벡터|기하벡터|기하)/g, ' ');
+  }
+  if (/(수학\s*i\b|수학\s*1|수\s*1|수i\b)/i.test(norm)) {
+    if (subjects.indexOf('공통(수학I·II)') === -1) subjects.push('공통(수학I·II)');
+    if (subSubjects.indexOf('수학i') === -1) subSubjects.push('수학i');
+    norm = norm.replace(/(수학\s*i\b|수학\s*1|수\s*1|수i\b)/gi, ' ');
+  }
+  if (/(수학\s*ii\b|수학\s*2|수\s*2|수ii\b)/i.test(norm)) {
+    if (subjects.indexOf('공통(수학I·II)') === -1) subjects.push('공통(수학I·II)');
+    if (subSubjects.indexOf('수학ii') === -1) subSubjects.push('수학ii');
+    norm = norm.replace(/(수학\s*ii\b|수학\s*2|수\s*2|수ii\b)/gi, ' ');
+  }
+  if (/(공통과목|공통문항|공통)/.test(norm)) {
+    if (subjects.indexOf('공통(수학I·II)') === -1) subjects.push('공통(수학I·II)');
+    norm = norm.replace(/(공통과목|공통문항|공통)/g, ' ');
+  }
+  var STOPWORDS = {
+    '문제들':1,'문제':1,'문항들':1,'문항':1,'기출문제':1,'기출문항':1,'기출':1,
+    '모의고사':1,'모의평가':1,'모평':1,'학력평가':1,'학평':1,'관련':1,'목록':1,
+    '추천':1,'검색':1,'찾아줘':1,'찾기':1,'보여줘':1,'알려줘':1,'풀기':1,'풀이':1,'수학':1,'고등':1,'고등학교':1
+  };
+  var SUFFIXES = ['문제들','문제','문항들','문항','기출','에서','관련','들과','들의','들을','들은','들만','들','으로','로','이나','나','과','와','의','을','를','이','가','은','는','도','만'];
+  var rawTokens = norm.replace(/[\[\]()·•,./?!~'"`➕➖×÷=<>:;|\\]+/g, ' ').split(/\s+/);
+  var keywords = [];
+  for (var i = 0; i < rawTokens.length; i++) {
+    var tok = rawTokens[i].trim();
+    if (!tok || STOPWORDS[tok]) continue;
+    for (var s = 0; s < SUFFIXES.length; s++) {
+      var sfx = SUFFIXES[s];
+      if (tok.length > sfx.length + 1 && tok.slice(-sfx.length) === sfx) {
+        tok = tok.slice(0, -sfx.length);
+        break;
+      }
+    }
+    if (!tok || STOPWORDS[tok]) continue;
+    if (/^(\d{1,2})$/.test(tok)) {
+      var numVal = parseInt(tok, 10);
+      if (numVal >= 1 && numVal <= 30 && qNums.indexOf(String(numVal)) === -1) {
+        qNums.push(String(numVal));
+        continue;
+      }
+    }
+    if (keywords.indexOf(tok) === -1) keywords.push(tok);
+  }
+  return { isEmpty: false, months: months, grades: grades, subjects: subjects, subSubjects: subSubjects, years: years, qNums: qNums, keywords: keywords };
+}
+
+function setOfflineSmartQuery(q) {
+  var inp = document.getElementById('offlineSearchInput');
+  if (inp) inp.value = q;
+  filterOfflineCards();
+}
+
+function filterOfflineCards() {
+  var raw = (document.getElementById('offlineSearchInput').value || '').trim();
+  var parsed = parseOfflineNaturalQuery(raw);
+  var matchedCount = 0;
+  document.querySelectorAll('#offlineList .card').forEach(function(card) {
+    if (parsed.isEmpty) {
+      card.style.display = 'flex';
+      matchedCount++;
+      return;
+    }
+    var cMonth = card.getAttribute('data-month') || '';
+    var cGrade = card.getAttribute('data-grade') || '';
+    var cSubj = card.getAttribute('data-subject') || '';
+    var cYear = card.getAttribute('data-year') || '';
+    var cQnum = card.getAttribute('data-qnum') || '';
+    var haystack = ((card.textContent || '') + ' ' + (card.getAttribute('data-tags') || '') + ' ' + cMonth + ' ' + cGrade + ' ' + cSubj + ' ' + cYear).toLowerCase();
+    var hayCompact = haystack.replace(/\s+/g, '');
+    var ok = true;
+    if (parsed.months.length && parsed.months.indexOf(cMonth) === -1) ok = false;
+    if (ok && parsed.grades.length && parsed.grades.indexOf(cGrade) === -1) ok = false;
+    if (ok && parsed.subjects.length && parsed.subjects.indexOf(cSubj) === -1) ok = false;
+    if (ok && parsed.years.length && parsed.years.indexOf(cYear) === -1) ok = false;
+    if (ok && parsed.qNums.length && parsed.qNums.indexOf(cQnum) === -1) ok = false;
+    if (ok && parsed.subSubjects.length) {
+      var subOk = false;
+      for (var i = 0; i < parsed.subSubjects.length; i++) {
+        if (hayCompact.indexOf(parsed.subSubjects[i]) !== -1) { subOk = true; break; }
+      }
+      if (!subOk) ok = false;
+    }
+    if (ok && parsed.keywords.length) {
+      for (var k = 0; k < parsed.keywords.length; k++) {
+        var kw = parsed.keywords[k];
+        var kwCompact = kw.replace(/\s+/g, '');
+        if (haystack.indexOf(kw) === -1 && hayCompact.indexOf(kwCompact) === -1) { ok = false; break; }
+      }
+    }
+    card.style.display = ok ? 'flex' : 'none';
+    if (ok) matchedCount++;
+  });
+  var statusEl = document.getElementById('offlineSearchStatus');
+  if (statusEl) {
+    if (parsed.isEmpty) {
+      statusEl.style.display = 'none';
+    } else {
+      statusEl.style.display = 'block';
+      statusEl.textContent = '🤖 자연어 검색 결과: "' + raw + '" 조건에 일치하는 오프라인 문제 ' + matchedCount + '건이 검색되었습니다.';
+    }
+  }
 }
 function setOfflineLang(lang, isUserAction) {
   if (isUserAction) {
@@ -1747,6 +2009,13 @@ try {
   curLang = detectDefaultLang();
 }
 setOfflineLang(curLang, false);
+try {
+  var urlParams = new URLSearchParams(window.location.search);
+  var qParam = urlParams.get('q') || urlParams.get('search') || '';
+  if (qParam && qParam.trim()) {
+    setOfflineSmartQuery(qParam.trim());
+  }
+} catch(e) {}
 </script>
 </body>
 </html>

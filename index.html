@@ -426,12 +426,35 @@ tailwind.config = {
             <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statAssets">GeoGebra</span>
           </div>
           <div class="flex flex-col items-center text-center">
-            <span class="font-headline-sm text-headline-sm text-status-amber font-bold tracking-tight" id="heroStatQuizCount">67개</span>
+            <span class="font-headline-sm text-headline-sm text-status-amber font-bold tracking-tight" id="heroStatQuizCount">119개</span>
             <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statQuizzes">수능·디딤돌</span>
           </div>
           <div class="flex flex-col items-center text-center">
             <span class="font-headline-sm text-headline-sm text-status-emerald font-bold tracking-tight">100%</span>
             <span class="font-label-badge text-[10px] text-on-surface-variant mt-0.5" data-i18n="hero.statRigor">오프라인</span>
+          </div>
+        </div>
+
+        <!-- ✨ 상단 자연어 스마트 문제 즉시 검색 바 (Hero Quick Search) -->
+        <div class="mt-space-sm pt-space-sm border-t border-surface-container flex flex-col gap-1.5" id="heroQuickSearchBox">
+          <div class="flex items-center gap-1.5">
+            <div class="flex-1 relative flex items-center">
+              <span class="material-symbols-outlined text-secondary text-[18px] absolute left-3 pointer-events-none">search</span>
+              <input type="text" id="heroQuickSearchInput" placeholder="자연어 문제 검색 (예: 9월 고3 확통 문제들, 10월 미적분 30번, 6월 기하)" class="w-full h-10 pl-9 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary focus:bg-white transition-colors" oninput="syncHeroSearchInput(this.value)" onkeydown="if(event.key==='Enter'){triggerSmartQuizSearch(this.value, true);}"/>
+              <button type="button" id="btnClearHeroSearch" onclick="triggerSmartQuizSearch('', false)" style="display:none" class="absolute right-2 w-5 h-5 rounded-full bg-surface-container-high text-on-surface-variant text-[11px] flex items-center justify-center border-0 cursor-pointer" title="검색어 지우기">✕</button>
+            </div>
+            <button type="button" onclick="triggerSmartQuizSearch(document.getElementById('heroQuickSearchInput').value, true)" class="h-10 px-3.5 rounded-lg bg-secondary text-on-secondary font-label-badge text-label-badge font-bold shrink-0 flex items-center gap-1 cursor-pointer border-0 shadow-sm">
+              <span>문제 검색</span>
+              <span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-1 overflow-x-auto py-0.5 -mx-1 px-1">
+            <span class="font-label-badge text-[10px] text-on-surface-variant shrink-0 mr-0.5">자연어 예시:</span>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 확통 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-[11px] border-0 cursor-pointer transition-colors">9월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 확통 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">10월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 미적분 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">9월 고3 미적분</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 기하 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">10월 고3 기하</button>
+            <button type="button" onclick="triggerSmartQuizSearch('수2 미분가능성 문제들', true)" class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">수2 미분가능성</button>
           </div>
         </div>
       </div>
@@ -644,13 +667,46 @@ tailwind.config = {
         </button>
       </div>
 
-      <!-- Filter Multi-Select Pills -->
+      <!-- Filter Multi-Select Pills & Smart Natural-Language Search -->
       <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-3" id="quizFilterBar">
+        <!-- 🧠 Smart Natural-Language Problem Search Box (Top Priority) -->
+        <div class="flex flex-col gap-2 pb-2.5 border-b border-surface-container">
+          <div class="flex items-center justify-between">
+            <span class="font-label-badge text-label-badge text-secondary font-bold flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">psychology</span>
+              <span>스마트 자연어·키워드 문제 검색</span>
+            </span>
+            <span class="font-body-sm text-[11px] text-on-surface-variant">시행월·학년·과목·단원·문항번호 복합 질문 자동 인식</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex-1 relative flex items-center">
+              <span class="material-symbols-outlined text-secondary text-[20px] absolute left-3 pointer-events-none">search</span>
+              <input type="text" id="quizSearchInput" placeholder="예: 9월 고3 확통 문제들, 10월 미적분 30번, 정규분포 신뢰구간, 수1 삼각함수..." data-i18n-placeholder="examFinder.searchPlaceholder" class="w-full h-11 pl-10 pr-9 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary focus:bg-white transition-all"/>
+              <button type="button" id="btnClearQuizSearch" onclick="triggerSmartQuizSearch('', false)" style="display:none" class="absolute right-2.5 w-6 h-6 rounded-full bg-surface-container-high hover:bg-surface-dim text-on-surface-variant text-xs flex items-center justify-center border-0 cursor-pointer" title="검색어 지우기">✕</button>
+            </div>
+            <button type="button" id="btnRandomQuizChallenge" onclick="startRandomQuiz()" class="h-11 px-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-label-badge shrink-0 cursor-pointer border-0 transition-colors">🎲 랜덤 도전</button>
+          </div>
+          <!-- Quick Natural-Language Example Query Chips -->
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="smartQueryExampleChips">
+            <span class="font-label-badge text-[10px] text-on-surface-variant shrink-0">추천 질문:</span>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 확통 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-badge text-[11px] font-bold border-0 cursor-pointer transition-colors">✨ 9월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 확통 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📘 10월 고3 확통 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('9월 고3 미적분 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📐 9월 고3 미적분 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('10월 고3 기하 문제들', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">🧭 10월 고3 기하 문제들</button>
+            <button type="button" onclick="triggerSmartQuizSearch('6월 고3 확통', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">🎯 6월 고3 확통</button>
+            <button type="button" onclick="triggerSmartQuizSearch('정규분포 신뢰구간 문제', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📊 정규분포 신뢰구간</button>
+            <button type="button" onclick="triggerSmartQuizSearch('수1 삼각함수 문제', false)" class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-badge text-[11px] border-0 cursor-pointer transition-colors">📏 수1 삼각함수</button>
+          </div>
+          <!-- Dynamic Parsed Natural-Language Tokens Status Bar -->
+          <div id="smartSearchAnalysisBar" style="display:none" class="rounded-lg bg-secondary/5 border border-secondary/20 p-2 px-3 flex items-center justify-between gap-2 flex-wrap"></div>
+        </div>
+
         <!-- Year Filter -->
         <div class="flex flex-col gap-1.5">
           <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">학년도</span>
           <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1" id="stitchYearPills">
             <button class="stitch-year-pill active" data-year="" onclick="selectStitchYearPill('')" type="button">전체</button>
+            <button class="stitch-year-pill" data-year="2027" onclick="selectStitchYearPill('2027')" type="button">2027학년도</button>
             <button class="stitch-year-pill" data-year="2026" onclick="selectStitchYearPill('2026')" type="button">2026학년도</button>
             <button class="stitch-year-pill" data-year="2025" onclick="selectStitchYearPill('2025')" type="button">2025학년도</button>
             <button class="stitch-year-pill" data-year="2024" onclick="selectStitchYearPill('2024')" type="button">2024학년도</button>
@@ -673,21 +729,17 @@ tailwind.config = {
           <span class="font-label-badge text-label-badge text-on-surface-variant font-semibold">주제별 탐색</span>
           <div class="flex flex-wrap gap-1.5" id="topicChips">
             <button type="button" class="topic-chip active" data-topic="">#전체보기</button>
-            <button type="button" class="topic-chip" data-topic="이차함수|포물선">#이차함수·포물선</button>
-            <button type="button" class="topic-chip" data-topic="수열|점화식">#수열</button>
-            <button type="button" class="topic-chip" data-topic="지수|로그">#지수·로그</button>
-            <button type="button" class="topic-chip" data-topic="삼각함수">#삼각함수</button>
-            <button type="button" class="topic-chip" data-topic="미분|적분|면적|넓이">#미적분</button>
-            <button type="button" class="topic-chip" data-topic="확률|통계|경우의 수|순열|조합">#확률·통계</button>
+            <button type="button" class="topic-chip" data-topic="이차함수|포물선|타원|쌍곡선">#이차함수·이차곡선</button>
+            <button type="button" class="topic-chip" data-topic="수열|점화식|등차|등비|시그마|귀납">#수열</button>
+            <button type="button" class="topic-chip" data-topic="지수|로그|거듭제곱">#지수·로그</button>
+            <button type="button" class="topic-chip" data-topic="삼각함수|사인|코사인">#삼각함수</button>
+            <button type="button" class="topic-chip" data-topic="미분|적분|도함수|접선|극한|연속|넓이">#미적분</button>
+            <button type="button" class="topic-chip" data-topic="확률|통계|경우의수|순열|조합|정규분포|신뢰구간|이항">#확률·통계</button>
           </div>
         </div>
 
-        <!-- Compact Search & Detailed Filter Toggle -->
+        <!-- Detailed Filter Mode & Dropdowns -->
         <div class="pt-1 border-t border-surface-container flex flex-col gap-2">
-          <div class="flex items-center gap-2">
-            <input type="text" id="quizSearchInput" placeholder="🔍 문제 제목, 키워드, 문항 번호 검색..." data-i18n-placeholder="examFinder.searchPlaceholder" class="flex-1 h-9 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant border-0 focus:outline-none focus:bg-surface-container"/>
-            <button type="button" id="btnRandomQuizChallenge" onclick="startRandomQuiz()" class="h-9 px-3 rounded-lg bg-surface-container text-on-surface font-label-badge text-label-badge shrink-0 cursor-pointer border-0">🎲 랜덤 도전</button>
-          </div>
           <div class="flex items-center gap-1.5 overflow-x-auto py-0.5" id="filterModeTabBar">
             <button type="button" class="filter-tab-btn active shrink-0" data-mode="all" onclick="switchFilterMode('all')">전체 (<span id="tabAllCount">-</span>)</button>
             <button type="button" class="filter-tab-btn shrink-0" data-mode="wrong" onclick="switchFilterMode('wrong')" id="tabBtnWrong">오답노트 (<span id="tabWrongCount">0</span>)</button>
@@ -977,6 +1029,24 @@ function toggleMathStory() {
         return;
       }
       allItems = items;
+      var heroCountEl = document.getElementById('heroStatQuizCount');
+      var isEnNow = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+      if (heroCountEl) {
+        heroCountEl.textContent = isEnNow ? (allItems.length + '+') : (allItems.length + '개');
+      }
+      try {
+        var urlParams = new URLSearchParams(window.location.search);
+        var qParam = urlParams.get('q') || urlParams.get('query') || urlParams.get('search');
+        if (qParam && searchInput) {
+          searchInput.value = qParam;
+          var heroInp = document.getElementById('heroQuickSearchInput');
+          if (heroInp) heroInp.value = qParam;
+          setTimeout(function() {
+            var sec = document.getElementById('quizExplorerSection');
+            if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 150);
+        }
+      } catch(e) {}
       renderList();
     })
     .catch(function(err) {
@@ -1083,18 +1153,313 @@ function toggleMathStory() {
   }
 
   window._triggerRenderList = renderList;
+  window.syncHeroSearchInput = function(val) {
+    if (searchInput && searchInput.value !== val) {
+      searchInput.value = val;
+      renderList();
+    }
+  };
+  window.triggerSmartQuizSearch = function(queryText, shouldScroll) {
+    var val = String(queryText || '').trim();
+    if (searchInput) searchInput.value = val;
+    var heroInp = document.getElementById('heroQuickSearchInput');
+    if (heroInp) heroInp.value = val;
+    renderList();
+    if (shouldScroll) {
+      var sec = document.getElementById('quizExplorerSection');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
   window.resetExamFilters = function() {
     ['filterYear', 'filterGrade', 'filterMonth', 'filterSubject', 'filterNum'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) el.value = '';
     });
     if (searchInput) searchInput.value = '';
+    var heroInp = document.getElementById('heroQuickSearchInput');
+    if (heroInp) heroInp.value = '';
     activeTopic = '';
     document.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
     var allChip = document.querySelector('.topic-chip[data-topic=""]');
     if (allChip) allChip.classList.add('active');
     if (window.syncPillsFromSelects) window.syncPillsFromSelects();
     renderList();
+  };
+
+  // ════════════════════════════════════════════════════════════════════════
+  // 🧠 mathedu 스마트 자연어 수학 문제 검색 파서 (Natural-Language Query Engine)
+  // 예: "9월 고3 확통 문제들", "10월 미적분 30번", "정규분포 신뢰구간 찾아줘"
+  // ════════════════════════════════════════════════════════════════════════
+  var MATHEDU_STOPWORDS = new Set([
+    '문제들', '문제들을', '문제들은', '문제들이', '문제들만', '문제', '문제를', '문제는', '문제가', '문제만',
+    '문항들', '문항들을', '문항', '문항을', '기출문제들', '기출문제', '기출들', '기출',
+    '관련된', '관련', '모음집', '모음', '전체', '전부', '모두', '목록', '리스트', '추천',
+    '풀기', '풀이', '해설', '보여줘', '찾아줘', '검색해줘', '검색', '알려줘', '있을까', '있나요',
+    '해주세요', '해줘', '좀', '다', '것', '거', '들', '꺼', '달', '유형', '단원', '개념',
+    '모평', '학평', '모의평가', '학력평가', '모의고사', '수학', '영역', '과목', '선택', '선택과목',
+    '에서', '으로', '로', '의', '에', '을', '를', '이', '가', '은', '는', '과', '와', '도', '만'
+  ]);
+
+  window.parseMatheduNaturalQuery = function(rawQuery) {
+    var q = String(rawQuery || '').trim();
+    if (!q) {
+      return {
+        raw: '',
+        hasQuery: false,
+        year: '',
+        month: '',
+        grade: '',
+        subject: '',
+        subSubject: '',
+        qNum: '',
+        bareNums: [],
+        isKiller: false,
+        isFourPt: false,
+        isShortAns: false,
+        keywords: [],
+        ignoredStopwords: []
+      };
+    }
+
+    var norm = q.toLowerCase();
+    // 1. Multi-word curriculum & synonym normalization
+    norm = norm
+      .replace(/확률과\s*통계|확률\s*통계/g, ' 확통 ')
+      .replace(/미적분학/g, ' 미적분 ')
+      .replace(/공통\s*\(\s*수학\s*i[·\s]*ii\s*\)|공통\s*과목/gi, ' 공통 ')
+      .replace(/수학\s*ii|수학\s*2|수학\s*Ⅱ|수\s*2(?![0-9])/gi, ' 수학ii ')
+      .replace(/수학\s*i(?![i])|수학\s*1(?![0-9])|수학\s*Ⅰ|수\s*1(?![0-9])/gi, ' 수학i ')
+      .replace(/공통\s*수학/g, ' 공통수학 ')
+      .replace(/모의\s*평가|모의\s*고사/g, ' 모평 ')
+      .replace(/학력\s*평가/g, ' 학평 ')
+      .replace(/경우의\s*수/g, ' 경우의수 ')
+      .replace(/같은\s*것이\s*있는\s*순열/g, ' 같은것이있는순열 ')
+      .replace(/여러\s*가지\s*순열/g, ' 여러가지순열 ')
+      .replace(/중복\s*조합/g, ' 중복조합 ')
+      .replace(/이항\s*정리/g, ' 이항정리 ')
+      .replace(/조건부\s*확률/g, ' 조건부확률 ')
+      .replace(/독립\s*시행/g, ' 독립시행 ')
+      .replace(/정규\s*분포/g, ' 정규분포 ')
+      .replace(/이항\s*분포/g, ' 이항분포 ')
+      .replace(/신뢰\s*구간/g, ' 신뢰구간 ')
+      .replace(/모평균의\s*추정|모평균\s*추정|통계적\s*추정/g, ' 통계적추정 ')
+      .replace(/표본\s*공간/g, ' 표본공간 ')
+      .replace(/표본\s*크기/g, ' 표본크기 ')
+      .replace(/표본\s*평균/g, ' 표본평균 ')
+      .replace(/등차\s*수열/g, ' 등차수열 ')
+      .replace(/등비\s*수열/g, ' 등비수열 ')
+      .replace(/수열의\s*귀납적\s*정의|귀납적\s*정의|수학적\s*귀납법|귀납적/g, ' 귀납 ')
+      .replace(/등비\s*급수|무한\s*급수/g, ' 급수 ')
+      .replace(/부분\s*적분/g, ' 부분적분 ')
+      .replace(/치환\s*적분/g, ' 치환적분 ')
+      .replace(/여러\s*가지\s*적분법/g, ' 여러가지적분법 ')
+      .replace(/여러\s*가지\s*미분법/g, ' 여러가지미분법 ')
+      .replace(/도함수의\s*활용/g, ' 도함수의활용 ')
+      .replace(/정적분의\s*활용/g, ' 정적분의활용 ')
+      .replace(/삼각함수의\s*활용/g, ' 삼각함수의활용 ')
+      .replace(/삼각\s*함수/g, ' 삼각함수 ')
+      .replace(/사인\s*법칙/g, ' 사인법칙 ')
+      .replace(/코사인\s*법칙/g, ' 코사인법칙 ')
+      .replace(/지수\s*함수/g, ' 지수함수 ')
+      .replace(/로그\s*함수/g, ' 로그함수 ')
+      .replace(/삼차\s*함수/g, ' 삼차함수 ')
+      .replace(/사차\s*함수/g, ' 사차함수 ')
+      .replace(/이차\s*함수/g, ' 이차함수 ')
+      .replace(/미분\s*가능성|미분\s*가능/g, ' 미분가능 ')
+      .replace(/미분\s*계수/g, ' 미분계수 ')
+      .replace(/이차\s*곡선|원뿔\s*곡선/g, ' 이차곡선 ')
+      .replace(/공간\s*도형/g, ' 공간도형 ')
+      .replace(/공간\s*좌표/g, ' 공간좌표 ')
+      .replace(/평면\s*벡터/g, ' 벡터 ')
+      .replace(/삼수선의\s*정리|삼수선\s*정리/g, ' 삼수선 ');
+
+    // 2. Pre-split attached tokens so "9월고3확통문제들" splits cleanly
+    norm = norm
+      .replace(/(20\d{2}\s*학년도|20\d{2}\s*년|\d{2}\s*학년도)/g, ' $1 ')
+      .replace(/(1[012]|[345679])\s*(월|모평|모|학평)/g, ' $1$2 ')
+      .replace(/(고\s*[123]|[123]\s*학년)/g, ' $1 ')
+      .replace(/(확통|미적분|미적(?!분)|기하(?!학)|공통수학|공통(?!수)|수학ii|수학i)/g, ' $1 ')
+      .replace(/(\d{1,2}\s*번)/g, ' $1 ')
+      .replace(/(문제들|문제|문항들|문항|기출문제들|기출문제|기출|모음집|모음|찾아줘|보여줘|알려줘)/g, ' $1 ');
+
+    var rawTokens = norm.split(/[\s,·/\[\]()]+/).filter(Boolean);
+
+    var res = {
+      raw: q,
+      hasQuery: true,
+      year: '',
+      month: '',
+      grade: '',
+      subject: '',
+      subSubject: '',
+      qNum: '',
+      bareNums: [],
+      isKiller: false,
+      isFourPt: false,
+      isShortAns: false,
+      keywords: [],
+      ignoredStopwords: []
+    };
+
+    for (var i = 0; i < rawTokens.length; i++) {
+      var tok = rawTokens[i];
+      if (MATHEDU_STOPWORDS.has(tok)) {
+        res.ignoredStopwords.push(tok);
+        continue;
+      }
+      var mSuf = tok.match(/(문제들|문제|문항들|문항|기출문제|기출|모음|관련|꺼)$/);
+      if (mSuf && tok.length > mSuf[1].length) {
+        res.ignoredStopwords.push(mSuf[1]);
+        tok = tok.slice(0, -mSuf[1].length);
+      }
+      if (!tok || MATHEDU_STOPWORDS.has(tok)) continue;
+
+      var mPart = tok.match(/(에서|으로|부터|까지|이랑|하고|들은|들이|들을)$/);
+      if (mPart && (tok.length - mPart[1].length) >= 2) {
+        tok = tok.slice(0, -mPart[1].length);
+      }
+
+      // Year
+      var mYr = tok.match(/^(20\d{2})(?:학년도|년)?$/);
+      if (mYr) { res.year = mYr[1]; continue; }
+      var mYr2 = tok.match(/^(\d{2})(?:학년도|년)$/);
+      if (mYr2) { res.year = '20' + mYr2[1]; continue; }
+
+      // Month
+      var mMo = tok.match(/^(1[012]|[345679])(?:월|모평|모|학평)$/);
+      if (mMo) { res.month = mMo[1] + '월'; continue; }
+      if (tok === '11월' || tok === '대수능') { res.month = '11월'; continue; }
+      if (tok === '수능') { if (!res.grade) res.grade = '고3'; continue; }
+
+      // Grade
+      var mGr = tok.match(/^(?:고\s*([123])|([123])\s*학년)$/);
+      if (mGr) { res.grade = '고' + (mGr[1] || mGr[2]); continue; }
+      if (tok === 'n수' || tok === '수험생') { res.grade = '고3'; continue; }
+
+      // Subject
+      if (/^(확통|확률과통계|확률통계|prob|probability|statistics)$/.test(tok)) {
+        res.subject = '확률과 통계'; continue;
+      }
+      if (/^(미적분|미적|calculus)$/.test(tok)) {
+        res.subject = '미적분'; continue;
+      }
+      if (/^(기하|기하학|기벡|기하와벡터|geometry)$/.test(tok)) {
+        res.subject = '기하'; continue;
+      }
+      if (tok === '공통수학') {
+        res.subject = '공통수학'; continue;
+      }
+      if (tok === '공통' || tok === '공통과목') {
+        res.subject = '공통(수학I·II)'; continue;
+      }
+      if (/^(수학i|수1|수학1)$/.test(tok)) {
+        res.subSubject = '수학I';
+        if (!res.subject) res.subject = '공통(수학I·II)';
+        continue;
+      }
+      if (/^(수학ii|수2|수학2)$/.test(tok)) {
+        res.subSubject = '수학II';
+        if (!res.subject) res.subject = '공통(수학I·II)';
+        continue;
+      }
+
+      // Question Number
+      var mQn = tok.match(/^(\d{1,2})번$/);
+      if (mQn) {
+        var nVal = parseInt(mQn[1], 10);
+        if (nVal >= 1 && nVal <= 30) { res.qNum = String(nVal); continue; }
+      }
+      var mBn = tok.match(/^(\d{1,2})$/);
+      if (mBn) {
+        var bVal = parseInt(mBn[1], 10);
+        if (bVal >= 1 && bVal <= 30) { res.bareNums.push(String(bVal)); continue; }
+      }
+
+      // Difficulty / Section
+      if (/^(킬러|고난도|최고난도|심화|어려운)$/.test(tok)) { res.isKiller = true; continue; }
+      if (/^(4점|중킬러|주요문항)$/.test(tok)) { res.isFourPt = true; continue; }
+      if (/^(단답형|주관식)$/.test(tok)) { res.isShortAns = true; continue; }
+
+      // Safe single-char trailing particle strip for Korean keywords
+      if (tok.length >= 3 && !/(넓이|길이|높이|풀이|차이|구하기|기울기)$/.test(tok)) {
+        var stripped = tok.replace(/[은는이가을를의에로도만]$/, '');
+        if (stripped.length >= 2) tok = stripped;
+      }
+      if (tok && !MATHEDU_STOPWORDS.has(tok) && res.keywords.indexOf(tok) === -1) {
+        res.keywords.push(tok);
+      }
+    }
+    return res;
+  };
+
+  window.matchMatheduProblem = function(it, p) {
+    if (!p || !p.hasQuery) return true;
+    var title = (it.title || '').toLowerCase();
+    var slug = (it.slug || '').toLowerCase();
+    var subj = it.subject || '';
+    var month = it.month || '';
+    var grade = it.grade || '';
+    var qnum = String(it.qNum || '');
+    var tags = (it.tags || []).map(function(t) { return String(t).toLowerCase(); });
+    var corpus = [
+      title, slug, subj.toLowerCase(), month.toLowerCase(), grade.toLowerCase(),
+      String(it.examYear || ''), String(it.examYearAlt || ''),
+      (it.source || '').toLowerCase(), tags.join(' ')
+    ].join(' ');
+    var corpusNoSpace = corpus.replace(/\s+/g, '');
+
+    if (p.year) {
+      if (String(it.examYear) !== p.year && String(it.examYearAlt) !== p.year && !title.includes(p.year)) {
+        return false;
+      }
+    }
+    if (p.month) {
+      if (month !== p.month && !title.includes(p.month)) {
+        return false;
+      }
+    }
+    if (p.grade) {
+      var mGrade = (grade === p.grade) ||
+                   (p.grade === '고3' && (title.includes('고3') || title.includes('수능') || title.includes('모평'))) ||
+                   title.includes(p.grade.toLowerCase());
+      if (!mGrade) return false;
+    }
+    if (p.subject) {
+      if (subj !== p.subject) return false;
+    }
+    if (p.subSubject) {
+      var subLow = p.subSubject.toLowerCase();
+      if (tags.indexOf(subLow) === -1 && !corpus.includes(subLow)) return false;
+    }
+    if (p.qNum) {
+      if (qnum !== p.qNum) return false;
+    }
+    for (var b = 0; b < p.bareNums.length; b++) {
+      var bn = p.bareNums[b];
+      if (qnum !== bn && !title.includes(bn) && !slug.includes(bn)) return false;
+    }
+    if (p.isKiller) {
+      var killerNums = ['15', '21', '22', '28', '29', '30'];
+      if (killerNums.indexOf(qnum) === -1 && !corpus.includes('킬러') && !corpus.includes('최고난도') && !corpus.includes('심화')) {
+        return false;
+      }
+    }
+    if (p.isFourPt) {
+      var fourNums = ['9','10','11','12','13','14','15','20','21','22','28','29','30'];
+      if (fourNums.indexOf(qnum) === -1 && !corpus.includes('4점')) return false;
+    }
+    if (p.isShortAns) {
+      var shortNums = ['16','17','18','19','20','21','22','29','30'];
+      if (shortNums.indexOf(qnum) === -1 && !corpus.includes('단답형')) return false;
+    }
+    for (var k = 0; k < p.keywords.length; k++) {
+      var kw = p.keywords[k];
+      var kwNs = kw.replace(/\s+/g, '');
+      if (!corpus.includes(kw) && !corpusNoSpace.includes(kwNs)) {
+        return false;
+      }
+    }
+    return true;
   };
 
   ['filterYear', 'filterGrade', 'filterMonth', 'filterSubject', 'filterNum'].forEach(function(id) {
@@ -1525,9 +1890,27 @@ function toggleMathStory() {
   };
 
   function renderList() {
-    var query = (searchInput.value || '').trim().toLowerCase();
+    var rawQuery = (searchInput ? searchInput.value : '').trim();
+    var heroInp = document.getElementById('heroQuickSearchInput');
+    if (heroInp && heroInp.value !== rawQuery) {
+      heroInp.value = rawQuery;
+    }
+    var btnClearMain = document.getElementById('btnClearQuizSearch');
+    if (btnClearMain) btnClearMain.style.display = rawQuery ? 'flex' : 'none';
+    var btnClearHero = document.getElementById('btnClearHeroSearch');
+    if (btnClearHero) btnClearHero.style.display = rawQuery ? 'flex' : 'none';
+
+    var parsedQ = window.parseMatheduNaturalQuery(rawQuery);
     var ef = getExamFilters();
-    var hasActiveExamFilter = Boolean(ef.year || ef.grade || ef.month || ef.subject || ef.num);
+    // If natural-language query specifies structured exam attributes, let parsedQ override stale dropdown filters
+    var effectiveEf = {
+      year: parsedQ.hasQuery && parsedQ.year ? parsedQ.year : (parsedQ.hasQuery ? '' : ef.year),
+      grade: parsedQ.hasQuery && parsedQ.grade ? parsedQ.grade : (parsedQ.hasQuery ? '' : ef.grade),
+      month: parsedQ.hasQuery && parsedQ.month ? parsedQ.month : (parsedQ.hasQuery ? '' : ef.month),
+      subject: parsedQ.hasQuery && parsedQ.subject ? parsedQ.subject : (parsedQ.hasQuery ? '' : ef.subject),
+      num: parsedQ.hasQuery && parsedQ.qNum ? parsedQ.qNum : (parsedQ.hasQuery ? '' : ef.num)
+    };
+    var hasActiveExamFilter = Boolean(effectiveEf.year || effectiveEf.grade || effectiveEf.month || effectiveEf.subject || effectiveEf.num);
 
     var wrongSlugs = new Set((window.MatheduGame ? window.MatheduGame.getWrongAnswers() : []).map(function(w) { return w.slug; }));
     var bookmarkSlugs = new Set(window.MatheduGame ? window.MatheduGame.getBookmarks() : []);
@@ -1538,7 +1921,7 @@ function toggleMathStory() {
     var filtered = allItems.filter(function(it) {
       if (it.is_public === false) return false;
       var title = (it.title || '').toLowerCase();
-      var slug = (it.slug || '').toLowerCase();
+      var tagStr = (it.tags || []).join(' ').toLowerCase();
 
       // 모드별 필터링
       if (activeFilterMode === 'wrong' && !wrongSlugs.has(it.slug)) {
@@ -1548,43 +1931,109 @@ function toggleMathStory() {
         return false;
       }
 
-      var matchesQuery = !query || title.includes(query) || slug.includes(query);
-      var matchesTopic = !activeTopic || new RegExp(activeTopic, 'i').test(title);
-      if (!matchesQuery || !matchesTopic) return false;
+      if (parsedQ.hasQuery) {
+        if (!window.matchMatheduProblem(it, parsedQ)) return false;
+      }
+
+      if (!parsedQ.hasQuery && activeTopic) {
+        var topicRe = new RegExp(activeTopic, 'i');
+        if (!topicRe.test(title) && !topicRe.test(tagStr)) return false;
+      }
 
       // 1. 학년도 매칭
-      if (ef.year) {
-        var mYear = (it.examYear === ef.year) || (it.examYearAlt === ef.year) || title.includes(ef.year);
+      if (effectiveEf.year) {
+        var mYear = (it.examYear === effectiveEf.year) || (it.examYearAlt === effectiveEf.year) || title.includes(effectiveEf.year);
         if (!mYear) return false;
       }
       // 2. 대상 학년 매칭
-      if (ef.grade) {
-        var mGrade = (it.grade === ef.grade) ||
-                     (ef.grade === '고3' && (title.includes('고3') || title.includes('3학년') || title.includes('수능') || title.includes('모평'))) ||
-                     title.includes(ef.grade);
+      if (effectiveEf.grade) {
+        var mGrade = (it.grade === effectiveEf.grade) ||
+                     (effectiveEf.grade === '고3' && (title.includes('고3') || title.includes('3학년') || title.includes('수능') || title.includes('모평'))) ||
+                     title.includes(effectiveEf.grade);
         if (!mGrade) return false;
       }
       // 3. 시행월 매칭
-      if (ef.month) {
-        var mMonth = (it.month === ef.month) ||
-                     (ef.month === '11월' && (title.includes('수능') || title.includes('대수능') || title.includes('11월'))) ||
-                     title.includes(ef.month);
+      if (effectiveEf.month) {
+        var mMonth = (it.month === effectiveEf.month) ||
+                     (effectiveEf.month === '11월' && (title.includes('수능') || title.includes('대수능') || title.includes('11월'))) ||
+                     title.includes(effectiveEf.month);
         if (!mMonth) return false;
       }
       // 4. 선택과목 매칭
-      if (ef.subject) {
-        var mSubject = (it.subject === ef.subject) || title.includes(ef.subject.toLowerCase());
+      if (effectiveEf.subject) {
+        var mSubject = (it.subject === effectiveEf.subject) || title.includes(effectiveEf.subject.toLowerCase());
         if (!mSubject) return false;
       }
       // 5. 문항 번호 매칭
-      if (ef.num) {
-        var mNum = (String(it.qNum) === String(ef.num)) ||
-                   new RegExp('(?:문항|문제|번)\\s*' + ef.num + '(?![0-9])|' + ef.num + '\\s*번(?![0-9])|수학\\s*' + ef.num + '(?![0-9])').test(title);
+      if (effectiveEf.num) {
+        var mNum = (String(it.qNum) === String(effectiveEf.num)) ||
+                   new RegExp('(?:문항|문제|번)\\s*' + effectiveEf.num + '(?![0-9])|' + effectiveEf.num + '\\s*번(?![0-9])|수학\\s*' + effectiveEf.num + '(?![0-9])').test(title);
         if (!mNum) return false;
       }
 
       return true;
     });
+
+    // When searching by exam/month/subject, sort by examYear desc, then qNum asc so 23번->30번 appear in order
+    if (parsedQ.hasQuery || hasActiveExamFilter) {
+      filtered = filtered.slice().sort(function(a, b) {
+        var yA = parseInt(a.examYear || '0', 10);
+        var yB = parseInt(b.examYear || '0', 10);
+        if (yA !== yB) return yB - yA;
+        var qA = parseInt(a.qNum || '99', 10);
+        var qB = parseInt(b.qNum || '99', 10);
+        return qA - qB;
+      });
+    }
+
+    // Related problems expansion when a specific month+subject query (e.g. "9월 고3 확통 문제들") has < 8 items
+    var relatedItems = [];
+    if (parsedQ.hasQuery && parsedQ.month && (parsedQ.subject || parsedQ.subSubject) && filtered.length > 0 && filtered.length < 8) {
+      var exactSlugs = new Set(filtered.map(function(x) { return x.slug; }));
+      var relParsed = Object.assign({}, parsedQ, { month: '' });
+      relatedItems = allItems.filter(function(it) {
+        if (it.is_public === false || exactSlugs.has(it.slug)) return false;
+        return window.matchMatheduProblem(it, relParsed);
+      }).sort(function(a, b) {
+        var qA = parseInt(a.qNum || '99', 10);
+        var qB = parseInt(b.qNum || '99', 10);
+        return qA - qB;
+      });
+    }
+
+    // Render Smart Search Analysis Bar
+    var analysisBar = document.getElementById('smartSearchAnalysisBar');
+    if (analysisBar) {
+      if (parsedQ.hasQuery) {
+        var chipsHtml = '<div class="flex items-center gap-1.5 flex-wrap">';
+        chipsHtml += '<span class="font-label-badge text-[11px] text-secondary font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">auto_awesome</span>AI 검색 인식:</span>';
+        if (parsedQ.year) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-secondary text-white font-label-badge text-[11px]">📅 ' + escapeHtml(parsedQ.year) + '학년도</span>';
+        if (parsedQ.month) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-secondary text-white font-label-badge text-[11px]">🗓️ ' + escapeHtml(parsedQ.month) + '</span>';
+        if (parsedQ.grade) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-primary text-white font-label-badge text-[11px]">🎓 ' + escapeHtml(parsedQ.grade) + '</span>';
+        if (parsedQ.subject) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-status-emerald text-white font-label-badge text-[11px]">📘 ' + escapeHtml(parsedQ.subject) + '</span>';
+        if (parsedQ.subSubject) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-accent-indigo text-white font-label-badge text-[11px]">📙 ' + escapeHtml(parsedQ.subSubject) + '</span>';
+        if (parsedQ.qNum) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-status-amber text-white font-label-badge text-[11px]">#️⃣ ' + escapeHtml(parsedQ.qNum) + '번</span>';
+        if (parsedQ.isKiller) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-error text-white font-label-badge text-[11px]">🔥 킬러·고난도</span>';
+        if (parsedQ.isFourPt) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-status-amber text-white font-label-badge text-[11px]">⭐ 4점 주요문항</span>';
+        if (parsedQ.isShortAns) chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-badge text-[11px]">✏️ 단답형</span>';
+        parsedQ.keywords.forEach(function(kw) {
+          chipsHtml += '<span class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-badge text-[11px] font-bold">🔍 ' + escapeHtml(kw) + '</span>';
+        });
+        if (parsedQ.ignoredStopwords.length > 0) {
+          chipsHtml += '<span class="font-body-sm text-[11px] text-on-surface-variant">(일반어 자동 제외: ' + escapeHtml(parsedQ.ignoredStopwords.join(', ')) + ')</span>';
+        }
+        chipsHtml += '</div>';
+        chipsHtml += '<div class="flex items-center gap-2 ml-auto">';
+        chipsHtml += '<span class="font-label-badge text-[11px] text-secondary font-bold">정확 일치 ' + filtered.length + '문항' + (relatedItems.length > 0 ? (' (+ 연관 ' + relatedItems.length + '문항)') : '') + '</span>';
+        chipsHtml += '<button type="button" onclick="triggerSmartQuizSearch(\'\', false)" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-badge text-[10px] border-0 cursor-pointer">초기화 ✕</button>';
+        chipsHtml += '</div>';
+        analysisBar.innerHTML = chipsHtml;
+        analysisBar.style.display = 'flex';
+      } else {
+        analysisBar.style.display = 'none';
+        analysisBar.innerHTML = '';
+      }
+    }
 
     var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
     countBadge.textContent = filtered.length + (isEn ? ' quizzes' : '개') + (filtered.length !== allItems.length ? (isEn ? ' (of ' + allItems.length + ' total)' : ' (전체 ' + allItems.length + '개)') : '');
@@ -1719,9 +2168,24 @@ function toggleMathStory() {
       html += '      <button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';
       html += '    </div>';
       html += '  </div>';
+      var tagPillsHtml = '';
+      if (item.tags && item.tags.length > 0) {
+        var displayTags = item.tags.filter(function(t) {
+          return t !== item.subject && t !== (item.qNum + '번') && t !== item.month && t !== item.grade;
+        }).slice(0, 5);
+        if (displayTags.length > 0) {
+          tagPillsHtml = '<div class="flex items-center gap-1 flex-wrap mt-0.5">';
+          displayTags.forEach(function(tg) {
+            tagPillsHtml += '<button type="button" onclick="triggerSmartQuizSearch(\'' + escapeHtml(tg) + '\', false)" class="px-1.5 py-0.5 rounded bg-surface-container-low hover:bg-secondary/10 text-on-surface-variant hover:text-secondary font-label-badge text-[10px] border-0 cursor-pointer transition-colors">#' + escapeHtml(tg) + '</button>';
+          });
+          tagPillsHtml += '</div>';
+        }
+      }
+
       html += '  <h3 class="font-headline-sm text-[16px] text-on-surface font-bold leading-snug m-0">';
       html += '    <a href="board/' + slug + '.html" class="text-on-surface no-underline hover:text-secondary transition-colors">' + title + '</a>';
       html += '  </h3>';
+      html +=    tagPillsHtml;
       html += '  <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 m-0">' + descText + '</p>';
       html += '  <div class="flex items-center justify-between pt-2 gap-2 flex-wrap">';
       html += '    <div class="flex items-center gap-2 flex-wrap">';
@@ -1733,6 +2197,43 @@ function toggleMathStory() {
       html += '  </div>';
       html += '</div>';
     }
+
+    // Render Related Problems Section if available (e.g. when searching "9월 고3 확통 문제들", show 10월/6월 고3 확통 below)
+    if (relatedItems.length > 0) {
+      var relSubjLabel = [parsedQ.grade, parsedQ.subject || parsedQ.subSubject].filter(Boolean).join(' · ');
+      html += '<div class="rounded-xl bg-secondary/10 border border-secondary/25 p-3 px-4 mt-2 flex items-center justify-between gap-2 flex-wrap">';
+      html += '  <div class="flex items-center gap-2">';
+      html += '    <span class="material-symbols-outlined text-secondary text-[20px]">library_books</span>';
+      html += '    <div>';
+      html += '      <div class="font-headline-sm text-[14px] font-bold text-secondary">함께 풀면 좋은 [' + escapeHtml(relSubjLabel) + '] 타 시행월(6월·10월) 연관 기출 (' + relatedItems.length + '문항)</div>';
+      html += '      <div class="font-body-sm text-[11px] text-on-surface-variant">검색하신 ' + escapeHtml(parsedQ.month) + ' 문항과 동일한 과목·수준의 연관 기출문제입니다.</div>';
+      html += '    </div>';
+      html += '  </div>';
+      html += '  <button type="button" onclick="triggerSmartQuizSearch(\'' + escapeHtml(relSubjLabel) + ' 문제들\', false)" class="px-3 py-1 rounded-lg bg-secondary text-white font-label-badge text-[11px] font-bold border-0 cursor-pointer">' + escapeHtml(parsedQ.subject || parsedQ.subSubject) + ' 전체 보기</button>';
+      html += '</div>';
+
+      for (var rIdx = 0; rIdx < relatedItems.length; rIdx++) {
+        var rItem = relatedItems[rIdx];
+        var rTitle = escapeHtml(rItem.title || rItem.slug);
+        var rSlug = escapeHtml(rItem.slug);
+        var rBadge1 = (rItem.examYear ? rItem.examYear : '수능·모평') + (rItem.month ? (' · ' + rItem.month) : '');
+        var rBadge2 = (rItem.subject ? rItem.subject : '공통') + (rItem.qNum ? (' ' + rItem.qNum + '번') : '');
+        html += '<div class="rounded-xl bg-surface-container-lowest/90 border border-surface-variant p-space-md shadow-sm flex flex-col gap-2" data-slug="' + rSlug + '">';
+        html += '  <div class="flex items-center justify-between gap-2 flex-wrap">';
+        html += '    <div class="flex items-center gap-1.5 flex-wrap">';
+        html += '      <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-label-badge text-label-badge font-bold">' + escapeHtml(rBadge1) + '</span>';
+        html += '      <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-badge text-label-badge">' + escapeHtml(rBadge2) + '</span>';
+        html += '      <span class="px-2 py-0.5 rounded bg-status-amber/15 text-[#B45309] font-label-badge text-[10px] font-bold">연관 추천</span>';
+        html += '    </div>';
+        html += '    <a class="h-8 px-3 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold flex items-center gap-1 no-underline hover:bg-neutral-800 transition-colors" href="board/' + rSlug + '.html">' + tBtnSolve + '</a>';
+        html += '  </div>';
+        html += '  <h3 class="font-headline-sm text-[15px] text-on-surface font-bold leading-snug m-0">';
+        html += '    <a href="board/' + rSlug + '.html" class="text-on-surface no-underline hover:text-secondary transition-colors">' + rTitle + '</a>';
+        html += '  </h3>';
+        html += '</div>';
+      }
+    }
+
     listEl.innerHTML = html;
 
     // 수식 렌더링

@@ -1868,6 +1868,8 @@ html[lang="en"] .bilingual-en {
   font-size: 0.92em;
   line-height: 1.6;
 }
+.sol .bilingual-en { display: none; }
+html[lang="en"] .sol .bilingual-en { display: block !important; }
 html[lang="en"] span.bilingual-en {
   display: inline !important;
   margin-top: 0 !important;
@@ -1908,9 +1910,6 @@ mjx-container:not([display="true"]) {
   .opts.opts-inline { grid-template-columns: repeat(2, 1fr) !important; }
   mjx-container { font-size: 92% !important; }
 }
-
-.sol .bilingual-en { display: none; }
-html[lang="en"] .sol .bilingual-en { display: block !important; }
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
@@ -1920,9 +1919,9 @@ html[lang="en"] .sol .bilingual-en { display: block !important; }
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c2610p25.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c2610p25">
-<meta name="mathedu-offline-build-time" content="2026-10-28T02:27:59.826684+00:00">
-<meta name="mathedu-offline-hash" content="3739ef14">
-<meta name="mathedu-version-label" content="v2026.10.28">
+<meta name="mathedu-offline-build-time" content="2026-10-30T12:48:12.084386+00:00">
+<meta name="mathedu-offline-hash" content="d32bb795">
+<meta name="mathedu-version-label" content="v2026.10.30">
 
 </head><body><div class="wrap">
 
@@ -2256,6 +2255,19 @@ html[lang="en"] .sol .bilingual-en { display: block !important; }
 </div>
 
 <div class="stitch-filter-card">
+  <div class="stitch-filter-group" style="padding-bottom:10px;border-bottom:1px dashed #e4e2e4;margin-bottom:4px">
+    <span class="stitch-filter-label" style="color:#006398"><span class="bilingual-ko">🔍 전체 기출 자연어 스마트 검색 (다른 문제 바로 찾기)</span><span class="bilingual-en">🔍 Natural-Language Smart Search Across All Problems</span></span>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input type="text" id="stitchGlobalSearchInput" placeholder="예: '9월 고3 확통 문제들', '10월 고3 미적분', '6월 기하 30번'..." onkeydown="if(event.key==='Enter')stitchRunGlobalSearch()" style="flex:1;min-width:210px;height:38px;background:#fcf8fa;border:1.5px solid #cbd5e1;border-radius:10px;padding:0 12px;font-size:0.84rem;font-weight:700;color:#1b1b1d;font-family:inherit;outline:none">
+      <button type="button" onclick="stitchRunGlobalSearch()" style="height:38px;padding:0 14px;border-radius:10px;border:none;background:#006398;color:#ffffff;font-size:0.8rem;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap"><span class="bilingual-ko">문제 검색 ➔</span><span class="bilingual-en">Search ➔</span></button>
+    </div>
+    <div class="stitch-pill-row" style="margin-top:4px">
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('9월 고3 확통 문제들')">✨ 9월 고3 확통 문제들</button>
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('10월 고3 확통 문제들')">📘 10월 고3 확통</button>
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('9월 고3 미적분 문제들')">📐 9월 고3 미적분</button>
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('10월 고3 기하 문제들')">🧭 10월 고3 기하</button>
+    </div>
+  </div>
   <div class="stitch-filter-group">
     <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
     <div class="stitch-pill-row">
@@ -2830,6 +2842,17 @@ function stitchSaveInlineName() {
   inp.value = '';
   inp.placeholder = '✅ ' + val + ' 님 기록 연동됨';
 }
+function stitchRunGlobalSearch(presetQuery) {
+  var inp = document.getElementById('stitchGlobalSearchInput');
+  var q = (typeof presetQuery === 'string') ? presetQuery.trim() : (inp ? inp.value.trim() : '');
+  var isOff = !!document.querySelector('meta[name="mathedu-offline-version"]');
+  var baseUrl = isOff ? 'index.html' : '../index.html';
+  if (!q) {
+    window.location.href = baseUrl + (isOff ? '' : '#quizExplorerSection');
+    return;
+  }
+  window.location.href = baseUrl + '?q=' + encodeURIComponent(q) + (isOff ? '' : '#quizExplorerSection');
+}
 </script>
 <!-- STITCH_FOOTER_END -->
 </div><script>
@@ -3166,9 +3189,9 @@ function setBoardLang(lang, isUserAction) {
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c2610p25';
-window._offlineBuildTime = '2026-10-28T02:27:59.826684+00:00';
-window._offlineHash = '3739ef14';
-window._offlineVersion = 'v2026.10.28';
+window._offlineBuildTime = '2026-10-30T12:48:12.084386+00:00';
+window._offlineHash = 'd32bb795';
+window._offlineVersion = 'v2026.10.30';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c2610p25.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3192,8 +3215,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c2610p25';
-  var localBuildTime = window._offlineBuildTime || '2026-10-28T02:27:59.826684+00:00';
-  var localHash = window._offlineHash || '3739ef14';
+  var localBuildTime = window._offlineBuildTime || '2026-10-30T12:48:12.084386+00:00';
+  var localHash = window._offlineHash || 'd32bb795';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c2610p25.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

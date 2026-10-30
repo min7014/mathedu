@@ -1,0 +1,39 @@
+import os, hashlib, json
+
+root = r"C:\Users\min\Desktop\mathedu"
+state_path = os.path.join(root, ".regen_cron_state.json")
+
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+with open(state_path, encoding="utf-8") as f:
+    state = json.load(f)
+
+entries = state.get("entries", {})
+print("=== CURRENT SCRIPT STATE vs RECORDED ===")
+for slug, rec in sorted(entries.items()):
+    fname = rec.get("script", "")
+    p = os.path.join(root, fname)
+    if os.path.exists(p):
+        cur_hash = sha256(p)
+        cur_mtime = os.path.getmtime(p)
+        print(f"\n[{slug}] {fname}")
+        print(f"  recorded hash : {rec.get('hash')}")
+        print(f"  current  hash : {cur_hash}")
+        print(f"  hashes match  : {cur_hash == rec.get('hash')}")
+        print(f"  recorded mtime: {rec.get('mtime')}")
+        print(f"  current  mtime: {cur_mtime}")
+        print(f"  mtimes match  : {cur_mtime == rec.get('mtime')}")
+    else:
+        print(f"\n[{slug}] {fname} -> MISSING")
+
+# list all _regen_*.py excluding cron_check
+print("\n=== ALL _regen_*.py (excl cron_check) ===")
+for fn in sorted(os.listdir(root)):
+    if fn.startswith("_regen_") and fn.endswith(".py") and fn != "_regen_cron_check.py":
+        p = os.path.join(root, fn)
+        print(f"  {fn}  mtime={os.path.getmtime(p)}")

@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+import os, json, glob
+
+base = r"C:/Users/min/Desktop/mathedu"
+
+def ls(pattern):
+    out = []
+    for f in sorted(glob.glob(os.path.join(base, pattern))):
+        st = os.stat(f)
+        out.append((f, st.st_mtime, st.st_size))
+    return out
+
+print("=== real _regen_*.py (main scripts) ===")
+for f, mt, sz in ls("_regen_*.py"):
+    bn = os.path.basename(f)
+    if "cron" in bn or "data" in bn:
+        continue
+    print(bn, "mtime=%.0f" % mt, "size=", sz)
+
+print()
+print("=== build log last entries ===")
+try:
+    with open(os.path.join(base, ".regen_build_log.json"), encoding="utf-8") as fh:
+        log = json.load(fh)
+    for e in log.get("logs", [])[-6:]:
+        print(e.get("slug"), e.get("timestamp"), "status=", e.get("status"))
+except Exception as ex:
+    print("ERR", ex)
+
+print()
+print("=== regen_cron_state entries ===")
+try:
+    with open(os.path.join(base, ".regen_cron_state.json"), encoding="utf-8") as fh:
+        st = json.load(fh)
+    for slug, e in st.get("entries", {}).items():
+        print(slug, "script_mtime=%.0f" % e["mtime"], "last_build=", e.get("last_build"), "last_build_ts=", e.get("last_build_ts"), "output_size=", e.get("output_size"))
+except Exception as ex:
+    print("ERR", ex)

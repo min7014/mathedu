@@ -1,0 +1,36 @@
+import hashlib, json, os
+from pathlib import Path
+
+BASE = Path(os.environ.get("MAThedu_PATH", "C:/Users/min/Desktop/mathedu"))
+state_file = BASE / "._regen_cron_state.json"
+state = json.loads(state_file.read_text(encoding="utf-8")) if state_file.exists() else {}
+entries = state.get("entries", {})
+
+print("=== Tracked scripts vs current disk ===")
+for slug, entry in entries.items():
+    sp = BASE / entry["script"]
+    if not sp.exists():
+        print(f"{slug}: MISSING on disk ({sp})")
+        continue
+    h = hashlib.sha256(sp.read_bytes()).hexdigest()
+    mtime = sp.stat().st_mtime
+    same_hash = (h == entry.get("hash", ""))
+    same_mtime = (mtime == entry.get("mtime", 0))
+    status = "OK" if (same_hash and same_mtime) else f"CHANGED(hash={not same_hash}, mtime={not same_mtime})"
+    print(f"{slug}: disk_hash={h[:12]}... disk_mtime={mtime:.3f} | state_hash={entry.get('hash','')[:12]}... state_mtime={entry.get('mtime',0):.3f} => {status}")
+
+# Also list all _regen_*.py and whether they're in state/EXCLUDED
+regen_files = sorted(BASE.glob("_regen_*.py"))
+print("\n=== All _regen_*.py (excluding EXCLUDED) ===")
+EXCLUDED = {"cron_check", "data", "cron_runner", "check_state"}
+for sp in regen_files:
+    slug = sp.stem.replace("_regen_", "")
+    if slug in EXCLUDED:
+        print(f"{sp.name}: EXCLUDED")
+        continue
+    h = hashlib.sha256(sp.read_bytes()).hexdigest()
+    mtime = sp.stat().st_mtime
+    entry = entries.get(slug, {})
+    same_h = (h == entry.get("hash", ""))
+    same_m = (mtime == entry.get("mtime", 0))
+    print(f"{sp.name}: sha256={h[:12]}... mtime={mtime:.3f} | in_state={slug in entries} same_hash={same_h} same_mtime={same_m}")

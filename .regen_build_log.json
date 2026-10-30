@@ -1,6 +1,42 @@
 {
   "logs": [
     {
+      "slug": "cron_state_update",
+      "script": "_regen_cron_state_update.py",
+      "timestamp": "2026-10-29T20:14:20+00:00",
+      "status": "failure",
+      "exit_code": 1,
+      "stdout": "STATE UPDATED\n",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_cron_state_update.py\", line 110, in <module>\n    print(json.dumps({k: {\"hash\": v[\"hash\"][:12], \"output_size\": v[\"output_size\"]} for k, v in entries.items()}, ensure_ascii=False, indent=2))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_cron_state_update.py\", line 110, in <dictcomp>\n    print(json.dumps({k: {\"hash\": v[\"hash\"][:12], \"output_size\": v[\"output_size\"]} for k, v in entries.items()}, ensure_ascii=False, indent=2))\n                                                                 ~^^^^^^^^^^^^^^^\nKeyError: 'output_size'\n"
+    },
+    {
+      "slug": "a33ab59b",
+      "script": "_regen_a33ab59b.py",
+      "timestamp": "2026-10-29T20:14:20+00:00",
+      "status": "failure",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_a33ab59b.py\", line 14, in <module>\n    verify_quiz = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(verify_quiz)\n                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 940, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\n  File \"C:\\Users\\min\\Desktop\\mathedu\\verify_quiz.py\", line 19, in <module>\n    import sympy as sp\nModuleNotFoundError: No module named 'sympy'\n"
+    },
+    {
+      "slug": "51908207",
+      "script": "_regen_51908207.py",
+      "timestamp": "2026-10-29T20:14:20+00:00",
+      "status": "failure",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_51908207.py\", line 22, in <module>\n    verify_quiz = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(verify_quiz)\n                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 940, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\n  File \"C:\\Users\\min\\Desktop\\mathedu\\verify_quiz.py\", line 19, in <module>\n    import sympy as sp\nModuleNotFoundError: No module named 'sympy'\n"
+    },
+    {
+      "slug": "48d0d98f",
+      "script": "_regen_48d0d98f.py",
+      "timestamp": "2026-10-29T20:14:20+00:00",
+      "status": "failure",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\min\\Desktop\\mathedu\\_regen_48d0d98f.py\", line 16, in <module>\n    _spec.loader.exec_module(verify_quiz)\n  File \"<frozen importlib._bootstrap_external>\", line 940, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\n  File \"C:\\Users\\min\\Desktop\\mathedu\\verify_quiz.py\", line 19, in <module>\n    import sympy as sp\nModuleNotFoundError: No module named 'sympy'\n"
+    },
+    {
       "slug": "a33ab59b",
       "script": "_regen_a33ab59b.py",
       "timestamp": "2026-10-22T03:19:45+00:00",
