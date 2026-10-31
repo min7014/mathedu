@@ -34,7 +34,10 @@ def cmd_status():
     print("  2) 6대 대륙 3D 행성계 성좌 뷰 (Galaxy Constellation Mode) & 보조선 X-Ray 투시")
     print("  3) 3D 보스 배틀 아레나 (3중 짐벌 결계 파쇄, 3D 파티클 폭발, 육각 허니컴 디딤돌 방어막)")
     print("  4) WebAudio 신디사이저 효과음 (SFX) + 🔥 피버 러시(Fever Rush) + ⚡ 오답 약점 3D 리벤지 레이드")
-    print("  5) 16,548문항 실시간 기출 보스 소환 & min7014.github.io 3,400+ 시각 증명 비급서 연동")
+    print("  5) 🌟 기하 통찰 필살기(초신성 레이저 오답 2개 소거) + 🚀 60초 3D 스피드 디딤돌 블리츠 + 📜 일일 퀘스트 & 보물상자")
+    print("  6) 🃏 로그라이크 수학자의 성물(Relics) 9종 & 3택1 드래프트 & 3종 덱 시너지 (가우스·오일러·페르마·단델린 등)")
+    print("  7) 🌌 4대 수학 성좌(Constellations) 12성 각성 스킬트리 & 💥 PART BREAK · CRITICAL DERIVATION · Q.E.D. 총공격 피니시")
+    print("  8) 16,548문항 실시간 기출 보스 소환 & min7014.github.io 3,400+ 시각 증명 비급서 연동")
     print("=" * 74)
 
 

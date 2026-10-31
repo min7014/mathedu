@@ -750,6 +750,139 @@
     { unit: '기하 · 평면벡터 내적 최댓값', stem: '길이가 $|\vec{a}|=4, |\vec{b}|=3$인 두 벡터가 같은 방향($\\theta=0^\\circ$)을 향할 때 $\\vec{a}\\cdot\\vec{b}$의 값은?', options: ['$7$', '$9$', '$12$', '$15$', '$16$'], answer: 3, hint: '같은 방향이면 $\\cos 0^\\circ = 1$이므로 $4 \\times 3 \\times 1 = 12$입니다.' }
   ];
 
+  // 🃏 [로그라이크 수학자의 성물 9종: Relics of the Mathematicians] (Slay the Spire / Hades / Balatro 벤치마킹)
+  var MATH_RELICS = [
+    {
+      id: 'relic_dandelin',
+      icon: '🔮',
+      name: '단델린의 황금 쌍구',
+      rarity: 'SSR',
+      formula: '$\\overline{PF}+\\overline{PF\\prime}=2a$',
+      intuition: '원뿔 안에 내접하는 두 구의 접점이 이차곡선의 초점이 된다는 기하학적 불변량 원리',
+      effectDesc: '3D 보조선 상시 활성화 + 비급서·필살기 게이지 충전량 +50% 가속'
+    },
+    {
+      id: 'relic_gauss',
+      icon: '📐',
+      name: '가우스의 대칭 덧셈 저울',
+      rarity: 'SR',
+      formula: '$S_n = \\dfrac{n(a_1+a_n)}{2}$',
+      intuition: '양 끝에서 대칭인 두 항의 합이 항상 일정하다는 등차수열 대칭 직관',
+      effectDesc: '1단계 정답 시 보너스 XP +50% & 전투 시작 시 +1 콤보 선충전'
+    },
+    {
+      id: 'relic_euler',
+      icon: '🌀',
+      name: '오일러의 초월 나선 나침반',
+      rarity: 'SSR',
+      formula: '$e^{i\\theta}=\\cos\\theta+i\\sin\\theta$',
+      intuition: '지수함수의 성장이 복소평면 단위원 회전과 하나로 통합되는 초월 항등식',
+      effectDesc: '오답 발생 시 콤보 깨짐 1회 완벽 방어 + 3D 결계 회전 감속'
+    },
+    {
+      id: 'relic_fermat',
+      icon: '⛰️',
+      name: '페르마의 극치 프리즘',
+      rarity: 'SR',
+      formula: '$f\\prime(c)=0$',
+      intuition: '미분가능한 함수가 극대·극소를 갖는 봉우리와 골짜기에서 접선은 수평이 된다는 정리',
+      effectDesc: '2단계 수식 빈칸 (가)·(나) 정답 시 치명타 발동 (+25 XP 추가)'
+    },
+    {
+      id: 'relic_leibniz',
+      icon: '📜',
+      name: '라이프니츠의 미적분 태엽',
+      rarity: 'SSR',
+      formula: '$\\int_a^b f(x)dx = F(b)-F(a)$',
+      intuition: '무수히 잘게 쪼갠 넓이의 합(정적분)을 부정적분의 양 끝값 차이로 단번에 계산하는 마법',
+      effectDesc: '보스 승리 시 총 XP 1.3배 증폭 & 수능 점수 +1점 추가 획득'
+    },
+    {
+      id: 'relic_descartes',
+      icon: '🪞',
+      name: '데카르트의 y=x 대칭 거울',
+      rarity: 'SR',
+      formula: '$y=f(x) \\iff x=f^{-1}(y)$',
+      intuition: '기하학적 도형을 좌표평면의 대수 방정식으로 번역하고 역함수 대칭을 비추는 거울',
+      effectDesc: '전투 진입 시 5지선다 중 오답 함정 선지 1개를 자동 투시하여 표시'
+    },
+    {
+      id: 'relic_pascal',
+      icon: '🔺',
+      name: '파스칼의 이항 삼각 성배',
+      rarity: 'R',
+      formula: '$_n\\mathrm{C}_r = {}_{n-1}\\mathrm{C}_{r-1}+{}_{n-1}\\mathrm{C}_r$',
+      intuition: '이웃한 두 경우의 수를 더하면 다음 단계의 경우의 수가 탄생하는 조합의 연쇄 법칙',
+      effectDesc: '3콤보 대신 2콤보부터 즉시 🔥 FEVER RUSH 조기 발동'
+    },
+    {
+      id: 'relic_bernoulli',
+      icon: '🎲',
+      name: '베르누이의 독립시행 주사위',
+      rarity: 'R',
+      formula: '$P(X=r)={}_n\\mathrm{C}_r p^r(1-p)^{n-r}$',
+      intuition: '반복되는 도전 속에서도 확률 법칙에 따라 반드시 목표에 수렴하는 불굴의 주사위',
+      effectDesc: '보스 전투 승리 시 수능 점수 +2점 추가 보너스'
+    },
+    {
+      id: 'relic_cauchy',
+      icon: '⚡',
+      name: '코시-슈바르츠의 정사영 창',
+      rarity: 'SSR',
+      formula: '$\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$',
+      intuition: '두 벡터가 완전히 같은 방향을 가리킬 때 내적 에너지가 최대가 된다는 코사인 정사영 원리',
+      effectDesc: '1단계 정답 시 보스 외곽 방어력 50% 즉시 관통 파쇄 (+필살기 +20%)'
+    }
+  ];
+
+  // 🌌 [4대 수학 성좌 각성 스킬트리: Constellations of Mastery] (Genshin Impact / Zelda 벤치마킹)
+  var MATH_CONSTELLATIONS = [
+    {
+      id: 'const_archimedes',
+      code: '♈ 제1성좌',
+      name: '아르키메데스 대수·수열 성좌',
+      color: '#fb923c',
+      stars: [
+        { id: 'c1_s1', star: '★1', name: '거듭제곱과 밑 통일의 별', formula: '$a^m \\times a^n = a^{m+n}$', buff: '지수·로그 1단계 돌파 시 보호막 +10% 추가 회복' },
+        { id: 'c1_s2', star: '★★2', name: '시그마 소거의 별', formula: '$\\sum_{k=1}^n (a_{k+1}-a_k)=a_{n+1}-a_1$', buff: '모든 단계 정답 시 기본 XP +5 영구 증가' },
+        { id: 'c1_s3', star: '★★★3', name: '귀납적 역추적의 태초성', formula: '$a_{n+1}=f(a_n) \\implies a_1$ 역추적', buff: '보스 클리어 시 수능 점수 +1점 영구 추가' }
+      ]
+    },
+    {
+      id: 'const_newton',
+      code: '♉ 제2성좌',
+      name: '뉴턴-라이프니츠 미적분 성좌',
+      color: '#38bdf8',
+      stars: [
+        { id: 'c2_s1', star: '★1', name: '극한 수렴의 별', formula: '$\\lim_{x\\to a}\\dfrac{f(x)-f(a)}{x-a}=f\\prime(a)$', buff: '전투 시작 시 기하 필살기 게이지 +20% 선충전' },
+        { id: 'c2_s2', star: '★★2', name: '도함수 접선의 별', formula: '$y - f(t) = f\\prime(t)(x - t)$', buff: '15초 이내 스피드 크리티컬 판정 시간 +5초 연장 (20초)' },
+        { id: 'c2_s3', star: '★★★3', name: '정적분 넓이의 초신성', formula: '$S = \\dfrac{|a|(\\beta-\\alpha)^3}{6}$', buff: '🌟 기하 통찰 필살기 발동 시 +30 XP 즉시 획득' }
+      ]
+    },
+    {
+      id: 'const_dandelin',
+      code: '♊ 제3성좌',
+      name: '단델린-유클리드 기하·벡터 성좌',
+      color: '#34d399',
+      stars: [
+        { id: 'c3_s1', star: '★1', name: '피타고라스 직각의 별', formula: '$a^2 + b^2 = c^2$', buff: '디딤돌 보호막 최대 내구도 및 시작 보호막 100% 고정' },
+        { id: 'c3_s2', star: '★★2', name: '단델린 초점의 별', formula: '$c^2 = a^2 \\mp b^2$', buff: 'min7014 비급서 탐구 시 XP 보상 2배 (+30 XP)' },
+        { id: 'c3_s3', star: '★★★3', name: '정사영과 공간의 제왕성', formula: '$S\\prime = S\\cos\\theta$', buff: '3단계 본문항 총공격(Q.E.D.) 성공 시 +25 XP 추가' }
+      ]
+    },
+    {
+      id: 'const_pascal',
+      code: '♋ 제4성좌',
+      name: '파스칼-가우스 확률·통계 성좌',
+      color: '#a78bfa',
+      stars: [
+        { id: 'c4_s1', star: '★1', name: '여사건 전환의 별', formula: '$P(A^c) = 1 - P(A)$', buff: '오답 발생 시 필살기 충전량 +35%로 상승' },
+        { id: 'c4_s2', star: '★★2', name: '조건부확률 축소의 별', formula: '$P(B|A) = \\dfrac{P(A\\cap B)}{P(A)}$', buff: 'FEVER RUSH 배율 1.5배 ➔ 1.8배로 강화' },
+        { id: 'c4_s3', star: '★★★3', name: '표준정규분포 만점 수렴성', formula: '$Z = \\dfrac{X - m}{\\sigma}$', buff: '60초 스피드 블리츠 시작 시간 +10초 연장 (70초)' }
+      ]
+    }
+  ];
+
   function getTodayKey() {
     var now = new Date();
     var kst = new Date(now.getTime() + (9 * 60 * 60 * 1000));
@@ -792,6 +925,9 @@
           summonedCount: parsed.summonedCount || 0,
           soundEnabled: typeof parsed.soundEnabled === 'boolean' ? parsed.soundEnabled : true,
           blitzBestScore: parsed.blitzBestScore || 0,
+          equippedRelics: Array.isArray(parsed.equippedRelics) ? parsed.equippedRelics.slice(0, 3) : ['relic_gauss'],
+          unlockedRelics: Array.isArray(parsed.unlockedRelics) ? parsed.unlockedRelics : ['relic_gauss', 'relic_dandelin', 'relic_pascal'],
+          constellationStars: Array.isArray(parsed.constellationStars) ? parsed.constellationStars : ['c1_s1'],
           dailyQuests: ensureDailyQuests(parsed.dailyQuests)
         };
       }
@@ -807,6 +943,9 @@
       summonedCount: 0,
       soundEnabled: true,
       blitzBestScore: 0,
+      equippedRelics: ['relic_gauss'],
+      unlockedRelics: ['relic_gauss', 'relic_dandelin', 'relic_pascal'],
+      constellationStars: ['c1_s1'],
       dailyQuests: ensureDailyQuests(null)
     };
   }
@@ -922,9 +1061,261 @@
       time: 0,
       shake: 0,
       laserTimer: 0,
+      supernovaTimer: 0,
+      allOutSlashTimer: 0,
       shieldFlash: 0,
+      stepStartTime: 0,
+      stepAttempts: 0,
+      stageMistakes: 0,
+      eulerShieldUsed: false,
       particles: [],
+      floatingTexts: [],
       animId: null
+    },
+
+    // =========================================================================
+    // 🃏 수학자의 성물(Relics) & 🌌 4대 수학 성좌(Constellations) 헬퍼 및 모달 시스템
+    // =========================================================================
+    hasRelic: function(relicId) {
+      var eq = (this.state && Array.isArray(this.state.equippedRelics)) ? this.state.equippedRelics : [];
+      return eq.indexOf(relicId) !== -1;
+    },
+
+    getRelicById: function(relicId) {
+      for (var i = 0; i < MATH_RELICS.length; i++) {
+        if (MATH_RELICS[i].id === relicId) return MATH_RELICS[i];
+      }
+      return null;
+    },
+
+    hasConstellationStar: function(starId) {
+      var cs = (this.state && Array.isArray(this.state.constellationStars)) ? this.state.constellationStars : [];
+      return cs.indexOf(starId) !== -1;
+    },
+
+    getFeverThreshold: function() {
+      return this.hasRelic('relic_pascal') ? 2 : 3;
+    },
+
+    getFeverMultiplier: function() {
+      return this.hasConstellationStar('c4_s2') ? 1.8 : 1.5;
+    },
+
+    getActiveSynergies: function() {
+      var list = [];
+      if (this.hasRelic('relic_fermat') && this.hasRelic('relic_leibniz')) {
+        list.push({
+          id: 'syn_ftc',
+          name: '⚡ [미적분학의 기본정리 시너지]',
+          desc: '페르마의 극치 + 라이프니츠 태엽 공명: 모든 단계 XP +20% 증폭'
+        });
+      }
+      if (this.hasRelic('relic_dandelin') && (this.hasRelic('relic_descartes') || this.hasRelic('relic_cauchy'))) {
+        list.push({
+          id: 'syn_geo',
+          name: '🔮 [동적 기하 각성 시너지]',
+          desc: '단델린의 쌍구 + 데카르트/코시 공명: 필살기 게이지 충전 +30% 가속'
+        });
+      }
+      if (this.hasRelic('relic_gauss') && (this.hasRelic('relic_pascal') || this.hasRelic('relic_bernoulli'))) {
+        list.push({
+          id: 'syn_prob',
+          name: '🎲 [이산수학 대칭 시너지]',
+          desc: '가우스의 저울 + 파스칼/베르누이 공명: 보스 격파 시 수능 점수 +1점 추가'
+        });
+      }
+      return list;
+    },
+
+    spawnFloatingText: function(text, color, offsetY) {
+      this.battle3D.floatingTexts.push({
+        text: text,
+        color: color || '#fde047',
+        yOffset: offsetY || 0,
+        life: 1.0
+      });
+    },
+
+    openRelicDraftModal: function() {
+      this.playGameSfx('summon');
+      var existing = document.getElementById('matheduRelicDraftModal');
+      if (!existing) {
+        existing = document.createElement('div');
+        existing.id = 'matheduRelicDraftModal';
+        existing.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(4,8,22,0.92);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:14px;overflow-y:auto';
+        document.body.appendChild(existing);
+      }
+
+      // 무작위 3택1 드래프트 후보 추출
+      var shuffled = MATH_RELICS.slice().sort(function() { return Math.random() - 0.5; });
+      var draft3 = shuffled.slice(0, 3);
+      var eq = this.state.equippedRelics || [];
+      var synergies = this.getActiveSynergies();
+
+      var draftCardsHtml = draft3.map(function(r) {
+        var isEq = eq.indexOf(r.id) !== -1;
+        var rarityCol = r.rarity === 'SSR' ? '#f59e0b' : (r.rarity === 'SR' ? '#38bdf8' : '#34d399');
+        return '<div style="background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);border:2px solid ' + (isEq ? '#fde047' : rarityCol) + ';border-radius:16px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,0.45)">' +
+          '<div>' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">' +
+              '<span style="font-size:24px">' + r.icon + '</span>' +
+              '<span style="padding:2px 8px;border-radius:999px;background:' + rarityCol + ';color:#0f172a;font-size:10.5px;font-weight:900">' + r.rarity + ' 성물</span>' +
+            '</div>' +
+            '<div style="font-size:15px;font-weight:900;color:#ffffff;margin-bottom:4px">' + r.name + '</div>' +
+            '<div style="padding:5px 8px;border-radius:8px;background:rgba(255,255,255,0.07);color:#fde047;font-size:12px;font-weight:700;margin-bottom:6px">' + r.formula + '</div>' +
+            '<div style="font-size:11.5px;color:#cbd5e1;line-height:1.5;margin-bottom:8px">💡 ' + r.intuition + '</div>' +
+            '<div style="font-size:12px;font-weight:800;color:#34d399;line-height:1.45">⚡ 전투 효과: ' + r.effectDesc + '</div>' +
+          '</div>' +
+          '<button type="button" onclick="window.MatheduQuest.toggleEquipRelic(\'' + r.id + '\')" ' +
+            'style="width:100%;padding:9px;border-radius:10px;border:none;background:' + (isEq ? 'linear-gradient(135deg,#059669 0%,#10b981 100%)' : 'linear-gradient(135deg,#f59e0b 0%,#ea580c 100%)') + ';color:#ffffff;font-size:12px;font-weight:900;cursor:pointer">' +
+            (isEq ? '✅ 장착 중 (클릭 시 해제)' : '🃏 이 성물 선택·장착하기') +
+          '</button>' +
+        '</div>';
+      }).join('');
+
+      var allRelicsHtml = MATH_RELICS.map(function(r) {
+        var isEq = eq.indexOf(r.id) !== -1;
+        return '<button type="button" onclick="window.MatheduQuest.toggleEquipRelic(\'' + r.id + '\')" ' +
+          'style="padding:7px 11px;border-radius:10px;border:1.5px solid ' + (isEq ? '#fbbf24' : '#cbd5e1') + ';background:' + (isEq ? '#fef3c7' : '#f8fafc') + ';color:#0f172a;font-size:12px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:5px">' +
+          '<span>' + r.icon + ' ' + r.name + '</span>' +
+          '<span style="font-size:10px;padding:1px 5px;border-radius:999px;background:' + (isEq ? '#d97706' : '#64748b') + ';color:#fff">' + (isEq ? '장착중' : r.rarity) + '</span>' +
+        '</button>';
+      }).join('');
+
+      var synHtml = synergies.length
+        ? synergies.map(function(s) {
+            return '<div style="padding:6px 10px;border-radius:8px;background:#fef3c7;border:1px solid #f59e0b;color:#92400e;font-size:12px;font-weight:800">' + s.name + ' — ' + s.desc + '</div>';
+          }).join('')
+        : '<div style="font-size:12px;color:#64748b">성물을 2~3개 조합하면 특별 수학 시너지(미적분학의 기본정리, 동적 기하 각성, 이산수학 대칭)가 발동합니다!</div>';
+
+      existing.innerHTML =
+        '<div style="width:100%;max-width:760px;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 24px 52px rgba(0,0,0,0.65);border:2px solid #f59e0b;max-height:94vh;display:flex;flex-direction:column">' +
+          '<div style="background:linear-gradient(135deg,#070d1e 0%,#4c1d95 100%);color:#ffffff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+            '<div>' +
+              '<div style="font-size:11px;color:#fbbf24;font-weight:800">🃏 로그라이크 수학자의 성물 3택1 드래프트 & 덱 빌딩 (최대 3개 장착)</div>' +
+              '<div style="font-size:17px;font-weight:900;margin-top:2px">🏛️ 위대한 수학자 9인의 성물 보관소 (' + eq.length + ' / 3 슬롯 장착 중)</div>' +
+            '</div>' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<button type="button" onclick="window.MatheduQuest.openRelicDraftModal()" style="padding:6px 12px;border-radius:999px;border:1px solid #fbbf24;background:rgba(251,191,36,0.2);color:#fde047;font-size:11.5px;font-weight:800;cursor:pointer">🎲 3택1 다시 뽑기</button>' +
+              '<button type="button" onclick="window.MatheduQuest.closeRelicDraftModal()" style="width:32px;height:32px;border-radius:999px;border:none;background:rgba(255,255,255,0.16);color:#ffffff;font-size:16px;font-weight:800;cursor:pointer">✕</button>' +
+            '</div>' +
+          '</div>' +
+          '<div style="padding:16px 20px;overflow-y:auto;flex:1">' +
+            '<div style="margin-bottom:12px;font-size:13px;font-weight:800;color:#0f172a">✨ 오늘의 3택 1 성물 드래프트 추천 카드 (원하는 성물을 클릭해 즉시 장착하세요!)</div>' +
+            '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:16px">' +
+              draftCardsHtml +
+            '</div>' +
+            '<div style="margin-bottom:14px;padding:12px;border-radius:12px;background:#fffbeb;border:1px solid #fde68a">' +
+              '<div style="font-size:12.5px;font-weight:900;color:#92400e;margin-bottom:6px">🔥 현재 발동 중인 수학 성물 덱 시너지</div>' +
+              '<div style="display:flex;flex-direction:column;gap:6px">' + synHtml + '</div>' +
+            '</div>' +
+            '<div style="padding:12px;border-radius:12px;background:#f1f5f9;border:1px solid #cbd5e1">' +
+              '<div style="font-size:12.5px;font-weight:900;color:#0f172a;margin-bottom:8px">📚 전체 9종 수학 성물 도감 (클릭하여 장착 슬롯 최대 3개 자유 교체)</div>' +
+              '<div style="display:flex;flex-wrap:wrap;gap:6px">' + allRelicsHtml + '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      typesetMath(existing);
+    },
+
+    toggleEquipRelic: function(relicId) {
+      var eq = Array.isArray(this.state.equippedRelics) ? this.state.equippedRelics.slice() : [];
+      var idx = eq.indexOf(relicId);
+      if (idx !== -1) {
+        eq.splice(idx, 1);
+        this.playGameSfx('shield');
+      } else {
+        if (eq.length >= 3) {
+          eq.shift(); // 가장 먼저 장착한 슬롯을 교체
+        }
+        eq.push(relicId);
+        this.playGameSfx('hit');
+      }
+      this.state.equippedRelics = eq;
+      if (this.state.unlockedRelics.indexOf(relicId) === -1) {
+        this.state.unlockedRelics.push(relicId);
+      }
+      saveQuestState(this.state);
+      this.openRelicDraftModal();
+      this.renderConsoleHub();
+    },
+
+    closeRelicDraftModal: function() {
+      var m = document.getElementById('matheduRelicDraftModal');
+      if (m) m.remove();
+      this.renderConsoleHub();
+    },
+
+    openConstellationModal: function() {
+      this.playGameSfx('summon');
+      var existing = document.getElementById('matheduConstellationModal');
+      if (!existing) {
+        existing = document.createElement('div');
+        existing.id = 'matheduConstellationModal';
+        existing.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(4,8,22,0.92);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:14px;overflow-y:auto';
+        document.body.appendChild(existing);
+      }
+
+      var awakened = this.state.constellationStars || [];
+
+      var constCardsHtml = MATH_CONSTELLATIONS.map(function(c) {
+        var starsHtml = c.stars.map(function(st) {
+          var isOn = awakened.indexOf(st.id) !== -1;
+          return '<div onclick="window.MatheduQuest.toggleConstellationStar(\'' + st.id + '\')" ' +
+            'style="padding:10px 12px;border-radius:12px;border:1.5px solid ' + (isOn ? c.color : 'rgba(255,255,255,0.15)') + ';background:' + (isOn ? 'rgba(56,189,248,0.16)' : 'rgba(255,255,255,0.04)') + ';cursor:pointer;transition:all .15s">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">' +
+              '<span style="font-size:12.5px;font-weight:900;color:' + (isOn ? '#fde047' : '#e2e8f0') + '">' + st.star + ' · ' + st.name + '</span>' +
+              '<span style="font-size:11px;padding:2px 8px;border-radius:999px;background:' + (isOn ? '#10b981' : 'rgba(255,255,255,0.12)') + ';color:#ffffff;font-weight:800">' + (isOn ? '✨ 각성 완료' : '클릭하여 각성') + '</span>' +
+            '</div>' +
+            '<div style="font-size:12px;color:#93c5fd;margin-bottom:4px">공식: ' + st.formula + '</div>' +
+            '<div style="font-size:11.5px;color:#34d399;font-weight:700">🌟 영구 패시브: ' + st.buff + '</div>' +
+          '</div>';
+        }).join('');
+
+        return '<div style="background:linear-gradient(180deg,#09152b 0%,#0f172a 100%);border:1.5px solid ' + c.color + ';border-radius:16px;padding:14px">' +
+          '<div style="font-size:14.5px;font-weight:900;color:' + c.color + ';margin-bottom:10px">' + c.code + ' · ' + c.name + '</div>' +
+          '<div style="display:flex;flex-direction:column;gap:8px">' + starsHtml + '</div>' +
+        '</div>';
+      }).join('');
+
+      existing.innerHTML =
+        '<div style="width:100%;max-width:780px;background:#040914;color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 24px 52px rgba(0,0,0,0.75);border:2px solid #38bdf8;max-height:94vh;display:flex;flex-direction:column">' +
+          '<div style="background:linear-gradient(135deg,#070d1e 0%,#0c4a6e 100%);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+            '<div>' +
+              '<div style="font-size:11px;color:#38bdf8;font-weight:800">🌌 4대 수학 성좌 각성 스킬트리 (Constellations of CSAT 100 Mastery)</div>' +
+              '<div style="font-size:17px;font-weight:900;margin-top:2px">✨ 각성한 별자리: ' + awakened.length + ' / 12성 (별자리를 클릭해 영구 패시브를 각성하세요!)</div>' +
+            '</div>' +
+            '<button type="button" onclick="window.MatheduQuest.closeConstellationModal()" style="width:32px;height:32px;border-radius:999px;border:none;background:rgba(255,255,255,0.16);color:#ffffff;font-size:16px;font-weight:800;cursor:pointer">✕</button>' +
+          '</div>' +
+          '<div style="padding:16px 20px;overflow-y:auto;flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px">' +
+            constCardsHtml +
+          '</div>' +
+        '</div>';
+
+      typesetMath(existing);
+    },
+
+    toggleConstellationStar: function(starId) {
+      var cs = Array.isArray(this.state.constellationStars) ? this.state.constellationStars.slice() : [];
+      var idx = cs.indexOf(starId);
+      if (idx !== -1) {
+        cs.splice(idx, 1);
+        this.playGameSfx('shield');
+      } else {
+        cs.push(starId);
+        this.playGameSfx('victory');
+      }
+      this.state.constellationStars = cs;
+      saveQuestState(this.state);
+      this.openConstellationModal();
+      this.renderConsoleHub();
+    },
+
+    closeConstellationModal: function() {
+      var m = document.getElementById('matheduConstellationModal');
+      if (m) m.remove();
+      this.renderConsoleHub();
     },
 
     getWorlds: function() {
@@ -1864,8 +2255,9 @@
         ctx.globalAlpha = 1.0;
       }
 
-      // 6. 🔥 FEVER RUSH (3연속 콤보 이상일 때 3D 황금 피버 오라 링)
-      if ((this.state.combo || 0) >= 3) {
+      // 6. 🔥 FEVER RUSH (연속 콤보 피버 오라 링)
+      var feverThresh = this.getFeverThreshold();
+      if ((this.state.combo || 0) >= feverThresh) {
         ctx.strokeStyle = 'rgba(251,191,36,' + (0.7 + 0.3 * Math.sin(b.time * 6)).toFixed(2) + ')';
         ctx.lineWidth = 2.8;
         ctx.beginPath();
@@ -1878,12 +2270,76 @@
         }
         ctx.stroke();
       }
+
+      // 7. 💥 ALL-OUT GEOMETRIC FINISH! — Q.E.D. (총공격 공간 절단 슬래시 연출)
+      if (b.allOutSlashTimer && b.allOutSlashTimer > 0) {
+        b.allOutSlashTimer--;
+        ctx.save();
+        ctx.strokeStyle = '#fde047';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(0, h * 0.85);
+        ctx.lineTo(w, h * 0.15);
+        ctx.moveTo(w * 0.15, 0);
+        ctx.lineTo(w * 0.85, h);
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(251,191,36,0.96)';
+        ctx.font = '900 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('✨ ALL-OUT GEOMETRIC FINISH! — Q.E.D. ✨', cx, cy - 8);
+        ctx.restore();
+      }
+
+      // 8. 💬 3D 플로팅 데미지 & 수학 판정 텍스트 (PART BREAK / CRITICAL DERIVATION! / Q.E.D.)
+      if (b.floatingTexts && b.floatingTexts.length > 0) {
+        for (var fi = b.floatingTexts.length - 1; fi >= 0; fi--) {
+          var ft = b.floatingTexts[fi];
+          ft.y += ft.vy;
+          ft.life -= 0.022;
+          if (ft.life <= 0) {
+            b.floatingTexts.splice(fi, 1);
+            continue;
+          }
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, Math.min(1, ft.life));
+          ctx.font = '900 13px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#020617';
+          ctx.fillText(ft.text, cx + ft.x + 1, cy + ft.y + 1);
+          ctx.fillStyle = ft.color || '#fde047';
+          ctx.fillText(ft.text, cx + ft.x, cy + ft.y);
+          ctx.restore();
+        }
+      }
     },
 
     startStageBattle: function(stageObj) {
       if (!stageObj) return;
       this.activeStage = stageObj;
       this.activeStepIdx = 0;
+      this.stepStartTime = Date.now();
+      this.stepAttempts = 0;
+      this.stageMistakes = 0;
+      this.eulerShieldUsed = false;
+
+      // 👑 가우스의 등차수열 왕관: 전투 개시 시 기본 1콤보 부여
+      if (this.hasRelic('relic_gauss') && (this.state.combo || 0) < 1) {
+        this.state.combo = 1;
+      }
+      // 🔮 단델린의 쌍구면 렌즈: 3D 보조선 투시 상시 활성화
+      if (this.hasRelic('relic_dandelin')) {
+        this.cam3D.xray = true;
+      }
+      // 🌟 성좌 [직관의 눈 ★1]: 전투 개시 시 필살기 게이지 최소 20% 보장
+      if (this.hasConstellationStar('c2_s1') && (this.state.ultimateGauge || 0) < 20) {
+        this.state.ultimateGauge = 20;
+      }
+      // 🌟 성좌 [귀납의 방패 ★1]: 전투 개시 시 보호막 100% 완충
+      if (this.hasConstellationStar('c3_s1')) {
+        this.state.shieldHp = 100;
+      }
+      saveQuestState(this.state);
       this.renderBattleModal();
     },
 
@@ -2463,7 +2919,9 @@
       }).join('');
 
       var formulaBanner = this.getWorldMonumentFormulaDesc(activeW.id);
-      var isFever = (st.combo || 0) >= 3;
+      var feverThresh = this.getFeverThreshold();
+      var feverMult = this.getFeverMultiplier();
+      var isFever = (st.combo || 0) >= feverThresh;
       var soundOn = (st.soundEnabled !== false);
       var wrongCount = (window.MatheduGame && typeof window.MatheduGame.getWrongAnswers === 'function')
         ? window.MatheduGame.getWrongAnswers().length
@@ -2473,6 +2931,26 @@
       var q2Done = dq.archiveSummoned >= 1;
       var q3Done = dq.grimoireOpened >= 1;
       var allDailyDone = q1Done && q2Done && q3Done;
+
+      var selfRef = this;
+      var eqRelics = st.equippedRelics || [];
+      var equippedRelicsHtml = eqRelics.map(function(rid) {
+        var r = selfRef.getRelicById(rid);
+        if (!r) return '';
+        return '<span title="' + r.desc + '" style="padding:3px 9px;border-radius:999px;background:rgba(251,191,36,0.16);border:1px solid #f59e0b;color:#fde047;font-size:11px;font-weight:800">' +
+          r.icon + ' ' + r.name +
+        '</span>';
+      }).join('');
+
+      var activeSynergies = this.getActiveSynergies();
+      var synergiesHtml = activeSynergies.map(function(syn) {
+        return '<span title="' + syn.desc + '" style="padding:3px 9px;border-radius:999px;background:rgba(16,185,129,0.22);border:1px solid #34d399;color:#6ee7b7;font-size:11px;font-weight:900">' +
+          syn.name +
+        '</span>';
+      }).join('');
+
+      var unlockedRelicsCount = (st.unlockedRelics || []).length;
+      var unlockedStarsCount = (st.constellationStars || []).length;
 
       container.innerHTML =
         '<div style="border-radius:20px;background:linear-gradient(180deg,#070d1e 0%,#111c35 100%);padding:18px;color:#ffffff;box-shadow:0 16px 36px rgba(15,23,42,0.28);border:1.5px solid rgba(56,189,248,0.28)">' +
@@ -2495,7 +2973,7 @@
           '</div>' +
 
           '<!-- 📜 오늘의 수능 만점 일일 퀘스트 3종 & 🎁 황금 보물상자 바 -->' +
-          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;padding:10px 14px;border-radius:14px;background:rgba(15,23,42,0.75);border:1px solid rgba(251,191,36,0.35)">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding:10px 14px;border-radius:14px;background:rgba(15,23,42,0.75);border:1px solid rgba(251,191,36,0.35)">' +
             '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;font-weight:800">' +
               '<span style="color:#fbbf24">📜 오늘의 일일 퀘스트:</span>' +
               '<span style="padding:3px 9px;border-radius:999px;background:' + (q1Done ? 'rgba(16,185,129,0.25)' : 'rgba(255,255,255,0.08)') + ';color:' + (q1Done ? '#34d399' : '#cbd5e1') + '">① 디딤돌 단계 돌파 (' + Math.min(3, dq.stepsCleared) + '/3) ' + (q1Done ? '✅' : '') + '</span>' +
@@ -2509,6 +2987,25 @@
                   'style="padding:6px 12px;border-radius:999px;border:1px solid ' + (allDailyDone ? '#fde047' : 'rgba(255,255,255,0.2)') + ';background:' + (allDailyDone ? 'linear-gradient(135deg,#f59e0b 0%,#d97706 100%)' : 'rgba(255,255,255,0.08)') + ';color:' + (allDailyDone ? '#ffffff' : '#94a3b8') + ';font-size:11.5px;font-weight:900;cursor:' + (allDailyDone ? 'pointer' : 'not-allowed') + '">' +
                   '🎁 황금 보물상자 열기 (+수능 5점 · +100 XP)' +
                 '</button>') +
+          '</div>' +
+
+          '<!-- 🃏 장착 중인 수학자의 성물(Relics) & 🌌 4대 수학 성좌(Constellations) 바 -->' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;padding:10px 14px;border-radius:14px;background:rgba(30,41,59,0.78);border:1px solid rgba(167,139,250,0.4)">' +
+            '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11.5px;font-weight:800">' +
+              '<span style="color:#c4b5fd">🃏 장착 성물 (' + eqRelics.length + '/3):</span>' +
+              (equippedRelicsHtml || '<span style="color:#94a3b8">장착된 성물 없음</span>') +
+              synergiesHtml +
+            '</div>' +
+            '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
+              '<button type="button" onclick="window.MatheduQuest.openRelicDraftModal(true)" ' +
+                'style="padding:6px 12px;border-radius:999px;border:1px solid #f59e0b;background:linear-gradient(135deg,#b45309 0%,#d97706 100%);color:#ffffff;font-size:11.5px;font-weight:900;cursor:pointer">' +
+                '🃏 수학 성물 3택1 드래프트 & 도감 (' + unlockedRelicsCount + '/' + MATH_RELICS.length + ')' +
+              '</button>' +
+              '<button type="button" onclick="window.MatheduQuest.openConstellationModal()" ' +
+                'style="padding:6px 12px;border-radius:999px;border:1px solid #818cf8;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);color:#ffffff;font-size:11.5px;font-weight:900;cursor:pointer">' +
+                '🌌 4대 수학 성좌 각성 트리 (' + unlockedStarsCount + '/12 ★)' +
+              '</button>' +
+            '</div>' +
           '</div>' +
 
           '<!-- 6대 대륙 월드맵 탭 -->' +
@@ -2525,7 +3022,7 @@
                 '<span style="padding:4px 10px;border-radius:999px;background:rgba(15,23,42,0.82);border:1px solid rgba(56,189,248,0.45);color:#e0f2fe;font-size:11.5px;font-weight:800;backdrop-filter:blur(4px)">' +
                   formulaBanner +
                 '</span>' +
-                (isFever ? '<span style="padding:4px 10px;border-radius:999px;background:linear-gradient(135deg,#f59e0b 0%,#ea580c 100%);border:1px solid #fde047;color:#ffffff;font-size:11px;font-weight:900;box-shadow:0 0 14px rgba(251,191,36,0.65)">🔥 FEVER RUSH (' + st.combo + '연속 콤보 가속 중! 보상 XP 1.5배)</span>' : '') +
+                (isFever ? '<span style="padding:4px 10px;border-radius:999px;background:linear-gradient(135deg,#f59e0b 0%,#ea580c 100%);border:1px solid #fde047;color:#ffffff;font-size:11px;font-weight:900;box-shadow:0 0 14px rgba(251,191,36,0.65)">🔥 FEVER RUSH (' + st.combo + '연속 콤보 가속 중! 보상 XP ' + feverMult.toFixed(1) + '배)</span>' : '') +
               '</div>' +
               '<span style="padding:3px 9px;border-radius:999px;background:rgba(15,23,42,0.75);color:#93c5fd;font-size:10.5px;font-weight:700">' +
                 '🖱️ 드래그: 360° 회전 · 휠: 줌' +
@@ -2620,9 +3117,24 @@
       var totalSteps = stg.steps.length;
       var curStep = stg.steps[this.activeStepIdx] || stg.steps[0];
       var bossHpPct = Math.max(0, Math.round(((totalSteps - this.activeStepIdx) / totalSteps) * 100));
-      var isFever = (this.state.combo || 0) >= 3;
+      var feverThresh = this.getFeverThreshold();
+      var feverMult = this.getFeverMultiplier();
+      var isFever = (this.state.combo || 0) >= feverThresh;
       var ultPct = Math.min(100, Math.max(0, this.state.ultimateGauge || 0));
       var ultReady = ultPct >= 100;
+
+      // 🧭 데카르트의 좌표평면 조준경: 각 단계 시작 시 함정 오답 1개 자동 투시 소거
+      var descartesElimIdx = -1;
+      if (this.hasRelic('relic_descartes')) {
+        var ansIdx = parseInt(curStep.answer, 10);
+        var candWrong = [];
+        for (var wi = 1; wi <= (curStep.options || []).length; wi++) {
+          if (wi !== ansIdx) candWrong.push(wi);
+        }
+        if (candWrong.length > 0) {
+          descartesElimIdx = candWrong[(this.activeStepIdx * 3) % candWrong.length];
+        }
+      }
 
       var symHtml = (stg.symbols || []).map(function(s) {
         return '<div style="padding:6px 10px;background:#ffffff;border:1px solid #bae6fd;border-radius:8px;font-size:12px;color:#0f172a">' +
@@ -2632,12 +3144,20 @@
 
       var optsHtml = (curStep.options || []).map(function(opt, i) {
         var optNum = i + 1;
+        var isDescartesElim = (optNum === descartesElimIdx);
         return '<button type="button" class="quest-battle-opt-btn" onclick="window.MatheduQuest.submitBattleOption(' + optNum + ')" ' +
-          'style="width:100%;text-align:left;padding:11px 14px;border-radius:12px;border:1.5px solid #cbd5e1;background:#ffffff;color:#0f172a;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .15s">' +
+          (isDescartesElim ? 'disabled ' : '') +
+          'style="width:100%;text-align:left;padding:11px 14px;border-radius:12px;border:1.5px solid #cbd5e1;background:' + (isDescartesElim ? '#f1f5f9' : '#ffffff') + ';color:#0f172a;font-size:14px;font-weight:600;cursor:' + (isDescartesElim ? 'not-allowed' : 'pointer') + ';display:flex;align-items:center;gap:10px;transition:all .15s;opacity:' + (isDescartesElim ? '0.45' : '1') + ';text-decoration:' + (isDescartesElim ? 'line-through' : 'none') + '">' +
           '<span style="width:26px;height:26px;border-radius:999px;background:#f1f5f9;color:#0f172a;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">' + optNum + '</span>' +
-          '<span style="flex:1">' + opt + '</span>' +
+          '<span style="flex:1">' + opt + (isDescartesElim ? ' <b style="color:#dc2626;font-size:11px">(🧭 데카르트 성물 함정 소거)</b>' : '') + '</span>' +
         '</button>';
       }).join('');
+
+      var selfRef = this;
+      var battleRelicsBar = (this.state.equippedRelics || []).map(function(rid) {
+        var r = selfRef.getRelicById(rid);
+        return r ? ('<span style="padding:2px 8px;border-radius:999px;background:rgba(251,191,36,0.2);border:1px solid #fbbf24;color:#fde047;font-size:10.5px;font-weight:800">' + r.icon + ' ' + r.name + '</span>') : '';
+      }).join(' ');
 
       existing.innerHTML =
         '<div style="width:100%;max-width:700px;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 24px 52px rgba(0,0,0,0.55);border:2px solid ' + (isFever ? '#fbbf24' : '#38bdf8') + ';max-height:94vh;display:flex;flex-direction:column">' +
@@ -2658,8 +3178,9 @@
             '<canvas id="questBattle3DCanvas" width="680" height="150" style="width:100%;height:145px;display:block"></canvas>' +
             '<div style="position:absolute;top:8px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;pointer-events:none;font-size:11.5px;font-weight:800">' +
               '<span style="padding:3px 10px;border-radius:999px;background:rgba(15,23,42,0.8);color:#f87171;border:1px solid rgba(248,113,113,0.4)">👾 3D 보스 결계 장갑: ' + bossHpPct + '% (남은 결계 ' + (totalSteps - this.activeStepIdx) + '겹)</span>' +
-              '<span style="padding:3px 10px;border-radius:999px;background:' + (isFever ? 'linear-gradient(135deg,#f59e0b 0%,#ea580c 100%)' : 'rgba(15,23,42,0.8)') + ';color:' + (isFever ? '#ffffff' : '#38bdf8') + ';border:1px solid ' + (isFever ? '#fde047' : 'rgba(56,189,248,0.4)') + '">🛡️ 디딤돌 보호막: <b id="questBattleShieldText">' + this.state.shieldHp + '%</b> · 🔥 ' + this.state.combo + '콤보' + (isFever ? ' (FEVER RUSH · XP 1.5배!)' : '') + '</span>' +
+              '<span style="padding:3px 10px;border-radius:999px;background:' + (isFever ? 'linear-gradient(135deg,#f59e0b 0%,#ea580c 100%)' : 'rgba(15,23,42,0.8)') + ';color:' + (isFever ? '#ffffff' : '#38bdf8') + ';border:1px solid ' + (isFever ? '#fde047' : 'rgba(56,189,248,0.4)') + '">🛡️ 디딤돌 보호막: <b id="questBattleShieldText">' + this.state.shieldHp + '%</b> · 🔥 ' + this.state.combo + '콤보' + (isFever ? ' (FEVER RUSH · XP ' + feverMult.toFixed(1) + '배!)' : '') + '</span>' +
             '</div>' +
+            (battleRelicsBar ? '<div style="position:absolute;bottom:6px;left:14px;display:flex;gap:4px;flex-wrap:wrap;pointer-events:none">' + battleRelicsBar + '</div>' : '') +
           '</div>' +
 
           '<!-- 전투 본문 스크롤 영역 -->' +
@@ -2712,46 +3233,94 @@
       var curStep = stg.steps[this.activeStepIdx];
       if (!curStep) return;
 
+      this.stepAttempts = (this.stepAttempts || 0) + 1;
+      var elapsedSec = (Date.now() - (this.stepStartTime || Date.now())) / 1000;
+      var critLimit = this.hasConstellationStar('c2_s2') ? 20 : 15;
+
       var isCorrect = (chosenIdx === parseInt(curStep.answer, 10));
       var fb = document.getElementById('questBattleFeedbackBox');
       if (!fb) return;
 
       fb.style.display = 'block';
       if (isCorrect) {
+        var isCritDerivation = (this.stepAttempts === 1 && elapsedSec <= critLimit);
+        var shieldGain = 15 + (this.hasRelic('relic_cauchy') ? 10 : 0);
+        var ultGain = 35 + (this.hasRelic('relic_fermat') ? 10 : 0) + (this.hasConstellationStar('c4_s1') ? 10 : 0) + (isCritDerivation ? 15 : 0);
+
         this.state.combo = (this.state.combo || 0) + 1;
-        this.state.shieldHp = Math.min(100, (this.state.shieldHp || 80) + 15);
-        this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + 35);
+        this.state.shieldHp = Math.min(100, (this.state.shieldHp || 80) + shieldGain);
+        this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + ultGain);
         this.state.dailyQuests = ensureDailyQuests(this.state.dailyQuests);
         this.state.dailyQuests.stepsCleared = (this.state.dailyQuests.stepsCleared || 0) + 1;
         saveQuestState(this.state);
-
-        this.playGameSfx('hit');
 
         // 3D 결계 파쇄 파티클 폭발 & 레이저 빔 발동!
         var ringColors = ['#38bdf8', '#fbbf24', '#f43f5e'];
         this.spawnRingShatterParticles(ringColors[this.activeStepIdx % 3]);
 
-        var isFever = this.state.combo >= 3;
-        var stepXp = isFever ? 23 : 15;
+        var isLastStep = (this.activeStepIdx >= stg.steps.length - 1);
+        var partBreakLabel = '';
+        if (isLastStep) {
+          partBreakLabel = '✨ ALL-OUT GEOMETRIC FINISH! — Q.E.D. ✨';
+          this.battle3D.allOutSlashTimer = 42;
+          this.playGameSfx('victory');
+          this.spawnFloatingText('✨ ALL-OUT GEOMETRIC FINISH! — Q.E.D. ✨', '#fde047');
+        } else if (this.activeStepIdx === 0) {
+          partBreakLabel = '💥 PART BREAK [1/' + stg.steps.length + ']: 외곽 기호 결계 파쇄!';
+          this.playGameSfx('hit');
+          this.spawnFloatingText('💥 PART BREAK! [외곽 결계 파쇄]', '#38bdf8');
+        } else {
+          partBreakLabel = '💥 ARMOR BREAK [2/' + stg.steps.length + ']: 중간 유도 장갑 붕괴!';
+          this.playGameSfx('hit');
+          this.spawnFloatingText('💥 ARMOR BREAK! [중간 장갑 붕괴]', '#fbbf24');
+        }
+
+        if (isCritDerivation) {
+          this.spawnFloatingText('⚡ CRITICAL DERIVATION! (' + elapsedSec.toFixed(1) + '초 돌파 · XP 1.5x)', '#34d399');
+        }
+
+        var feverThresh = this.getFeverThreshold();
+        var feverMult = this.getFeverMultiplier();
+        var isFever = this.state.combo >= feverThresh;
+        var baseXp = 15 + (this.hasConstellationStar('c1_s1') ? 5 : 0);
+        var stepXp = Math.round(baseXp * (isFever ? feverMult : 1.0) * (isCritDerivation ? 1.5 : 1.0));
 
         if (window.MatheduGame) {
           window.MatheduGame.recordActivity();
-          window.MatheduGame.addXP(stepXp, curStep.label + ' 3D 결계 파쇄!' + (isFever ? ' (🔥 FEVER 1.5x)' : ''));
+          window.MatheduGame.addXP(stepXp, curStep.label + ' ' + partBreakLabel + (isCritDerivation ? ' (⚡ CRITICAL!)' : '') + (isFever ? ' (🔥 FEVER)' : ''));
           window.MatheduGame.unlockBadge('first_step');
         }
 
-        var isLastStep = (this.activeStepIdx >= stg.steps.length - 1);
         fb.style.background = '#f0fdf4';
         fb.style.border = '1.5px solid #22c55e';
         fb.innerHTML =
-          '<div style="font-size:14px;font-weight:900;color:#15803d;margin-bottom:6px">💥 3D 수식 결계 파쇄 성공! (' + this.state.combo + '연속 콤보' + (isFever ? ' · 🔥 FEVER RUSH XP 1.5배!' : '') + ' · 보호막 +15% · 필살기 +35%)</div>' +
+          '<div style="font-size:14px;font-weight:900;color:#15803d;margin-bottom:6px">' +
+            partBreakLabel + ' (' + this.state.combo + '연속 콤보' +
+            (isCritDerivation ? ' · ⚡ CRITICAL DERIVATION [' + elapsedSec.toFixed(1) + '초]!' : '') +
+            (isFever ? ' · 🔥 FEVER RUSH XP ' + feverMult.toFixed(1) + '배!' : '') +
+            ' · +' + stepXp + ' XP)' +
+          '</div>' +
           '<div style="font-size:13px;color:#1e293b;line-height:1.65;margin-bottom:12px">' + curStep.exp + '</div>' +
           (isLastStep
-            ? '<button type="button" onclick="window.MatheduQuest.completeStageVictory()" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:#ffffff;font-size:14px;font-weight:900;cursor:pointer">🎉 3D 보스 코어 완전 격파! 수능 점수 +' + stg.scoreReward + '점 획득하기 ➔</button>'
+            ? '<button type="button" onclick="window.MatheduQuest.completeStageVictory()" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:#ffffff;font-size:14px;font-weight:900;cursor:pointer">🎉 [Q.E.D. 총공격 완수!] 보스 코어 완전 격파 & 수능 점수 +' + stg.scoreReward + '점 획득하기 ➔</button>'
             : '<button type="button" onclick="window.MatheduQuest.nextBattleStep()" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#006398 0%,#2563eb 100%);color:#ffffff;font-size:14px;font-weight:900;cursor:pointer">다음 3D 결계 링 공략으로 진격 (' + (this.activeStepIdx + 2) + '/' + stg.steps.length + ') ➔</button>');
       } else {
-        this.state.combo = 0;
-        this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + 20);
+        this.stageMistakes = (this.stageMistakes || 0) + 1;
+        var eulerProtected = false;
+        if (this.hasRelic('relic_euler') && !this.eulerShieldUsed && (this.state.combo || 0) > 0) {
+          this.eulerShieldUsed = true;
+          eulerProtected = true;
+          this.spawnFloatingText('🌉 EULER BRIDGE! (콤보 초기화 방어)', '#38bdf8');
+        } else {
+          this.state.combo = 0;
+        }
+
+        var wrongUltGain = 20 + (this.hasRelic('relic_bernoulli') ? 15 : 0);
+        if (this.hasRelic('relic_bernoulli')) {
+          this.state.shieldHp = Math.min(100, (this.state.shieldHp || 80) + 10);
+          this.spawnFloatingText('🎲 BERNOULLI TRIAL! (+필살기 ' + wrongUltGain + '%)', '#fbbf24');
+        }
+        this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + wrongUltGain);
         this.battle3D.shieldFlash = 25;
         this.battle3D.shake = 6;
         saveQuestState(this.state);
@@ -2764,7 +3333,7 @@
         fb.style.background = '#fef2f2';
         fb.style.border = '1.5px solid #ef4444';
         fb.innerHTML =
-          '<div style="font-size:14px;font-weight:900;color:#b91c1c;margin-bottom:6px">🛡️ [3D 육각 허니컴 디딤돌 방어막 발동!] 충격을 흡수하고 필살기 게이지를 +20% 충전했습니다!</div>' +
+          '<div style="font-size:14px;font-weight:900;color:#b91c1c;margin-bottom:6px">🛡️ [3D 육각 허니컴 디딤돌 방어막 발동!] 충격을 흡수하고 필살기 게이지를 +' + wrongUltGain + '% 충전했습니다!' + (eulerProtected ? ' (🌉 오일러의 성물이 콤보를 보호했습니다!)' : '') + '</div>' +
           '<div style="font-size:13px;color:#1e293b;line-height:1.65">' +
             '<b>👩‍🏫 mathteacher 핵심 코칭:</b> ' + curStep.exp + '<br>' +
             '<span style="color:#0369a1;font-weight:700">위 해설의 정답 번호(' + curStep.answer + '번)를 다시 눌러 보스의 3D 결계를 파쇄하세요!</span>' +
@@ -2776,6 +3345,8 @@
     nextBattleStep: function() {
       if (!this.activeStage) return;
       this.activeStepIdx++;
+      this.stepStartTime = Date.now();
+      this.stepAttempts = 0;
       this.renderBattleModal();
     },
 
@@ -2785,11 +3356,17 @@
 
       this.playGameSfx('victory');
 
+      var isPerfectInduction = ((this.stageMistakes || 0) === 0);
+      var extraCsat = 0;
+      if (this.hasRelic('relic_leibniz')) extraCsat += 1;
+      if (isPerfectInduction && this.hasConstellationStar('c3_s2')) extraCsat += 1;
+      if (this.hasConstellationStar('c4_s3')) extraCsat += 2;
+
       if (this.state.clearedStages.indexOf(stg.id) === -1) {
         this.state.clearedStages.push(stg.id);
-        this.state.csatScore = Math.min(100, (this.state.csatScore || 0) + (stg.scoreReward || 5));
+        this.state.csatScore = Math.min(100, (this.state.csatScore || 0) + (stg.scoreReward || 5) + extraCsat);
       } else {
-        this.state.csatScore = Math.min(100, (this.state.csatScore || 0) + 2);
+        this.state.csatScore = Math.min(100, (this.state.csatScore || 0) + 2 + extraCsat);
       }
 
       var curW = this.getWorldById(this.state.activeWorldId);
@@ -2805,9 +3382,11 @@
       saveQuestState(this.state);
 
       if (window.MatheduGame) {
-        var isFever = (this.state.combo || 0) >= 3;
-        var finalXp = Math.round((stg.xpReward || 50) * (isFever ? 1.5 : 1.0));
-        window.MatheduGame.addXP(finalXp, '🏆 ' + stg.bossName + ' 3D 완전 정복!' + (isFever ? ' (🔥 FEVER 1.5x)' : ''));
+        var feverThresh = this.getFeverThreshold();
+        var feverMult = this.getFeverMultiplier();
+        var isFever = (this.state.combo || 0) >= feverThresh;
+        var finalXp = Math.round((stg.xpReward || 50) * (isFever ? feverMult : 1.0) * (isPerfectInduction ? 1.25 : 1.0));
+        window.MatheduGame.addXP(finalXp, '🏆 [Q.E.D.] ' + stg.bossName + ' 3D 완전 정복!' + (isPerfectInduction ? ' (✨ PERFECT INDUCTION!)' : '') + (isFever ? ' (🔥 FEVER)' : ''));
         window.MatheduGame.unlockBadge('full_clear');
         if (typeof window.MatheduGame.clearWrongAnswer === 'function' && stg.slug) {
           window.MatheduGame.clearWrongAnswer(stg.slug);
@@ -2819,6 +3398,11 @@
 
       this.closeBattleModal();
       this.renderConsoleHub();
+
+      // 🃏 아직 해금하지 않은 수학자의 성물이 남아 있다면 보스 격파 보상으로 3택1 성물 드래프트 오픈!
+      if ((this.state.unlockedRelics || []).length < MATH_RELICS.length) {
+        this.openRelicDraftModal(true);
+      }
     },
 
     closeBattleModal: function() {

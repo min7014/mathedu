@@ -50,9 +50,10 @@
   2. **[함수·극한·미분·적분]**: 좌표평면 위의 함수 그래프, 접선과 기울기 직각삼각형($\Delta x, \Delta y$), 극대·극소·첨점, 정적분 색칠 넓이 영역을 `<svg>`로 작도합니다.
   3. **[대수·지수·로그·수열·확률·통계]**: 추상적인 수식 문제라 하더라도 반드시 **의도적으로 도형화**(분수·지수 막대 결합 도형, 수직선 진수·수렴 범위 교집합 도형, 항 번호 점프 기둥 도형, 부분분수 도미노 연쇄 상쇄 도형, 귀납 역추적 분기 트리, 주머니·격자 넓이 분할 도형, 정규분포 종 모양 대칭 넓이 도형 등)하여 학생이 눈으로 보고 직관적으로 이해할 수 있게 합니다.
 
-## 8. `mathteacher` & `gamemaker` 에이전트 상시 협업 원칙 (Mandatory Collaboration with `mathteacher` & `gamemaker` Agents)
+## 8. `mathteacher` & `gamemaker` 에이전트 상시 협업 및 지속적 게임 진화 원칙 (Mandatory Collaboration & Continuous Game Evolution)
 - **`mathteacher` (수석 수학 교사 에이전트)**: 모든 수학 문제 출제, 단계별 디딤돌 설계, 교육용 게임/탐험 콘텐츠의 수학적 커리큘럼, 수식·기하 해설 구성, 교육과정 연계 작업 시 **항상 `mathteacher` 에이전트(`.agents/skills/mathteacher/SKILL.md` 및 `mathteacher` 서브에이전트)와 수학적·교육학적 내용을 상의하여 진행**합니다.
-- **`gamemaker` (수석 3D 게임 디렉터 에이전트)**: 흥미진진한 3D 인터랙티브 수학 게임, 3D 보스 레이드, 파티클·사운드 연출, 피버·콤보 시스템, 퀘스트 진행 설계는 **`gamemaker` 에이전트(`.agents/skills/gamemaker/SKILL.md` 및 `gamemaker` 서브에이전트)가 전담**하며, 수학적 내용은 항상 `mathteacher`와 협력하여 구현합니다.
+- **`gamemaker` (수석 3D 게임 디렉터 에이전트)**: 흥미진진한 3D 인터랙티브 수학 게임, 3D 보스 레이드, 파티클·사운드 연출, 피버·콤보 시스템, 퀘스트 진행 설계는 **`gamemaker` 에이전트(`.agents/skills/gamemaker/SKILL.md` 및 `gamemaker` 서브에이전트)가 전담**합니다.
+- **세계 최고 명작 게임 메커니즘 벤치마킹 및 지속적 진화**: `gamemaker`는 세계적으로 검증된 명작 게임들(로그라이크 덱빌딩·성물 선택 *Slay the Spire / Hades / Balatro*, 오픈월드 사당·성좌 각성 *Zelda / Genshin Impact*, 약점 부위 파괴·총공격 피니시 *Persona 5 / Monster Hunter*, 리듬·스피드 타격 판정 *Hi-Fi Rush* 등)의 재미 요소를 연구하여, 이를 **`mathteacher`와 상의해 순수 수학적 원리(공식 시너지 카드, 수학 성좌 특성 트리, 크리티컬 수식 타격, 단델린 비급 총공격 등)로 승화시켜 지속적으로 게임을 발전**시킵니다.
 - **수능 수학 100점 만점 지향**: `mathedu`의 전체 16,548문항 자원과 민은기 선생님의 수학자료실(`min7014.github.io`) 3,400+개 자료를 유기적으로 결합하여, 학생이 초등 기초 직관부터 출발해 최종적으로 수능 수학 100점 만점에 도달하도록 `mathteacher`와 `gamemaker`의 협업을 거칩니다.
 
 
