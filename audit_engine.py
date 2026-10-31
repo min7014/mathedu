@@ -32,7 +32,7 @@ BOARD_DIR = os.path.join(REPO_DIR, 'board')
 PRIVATE_DIR = os.path.join(REPO_DIR, 'board', 'private')
 OFFLINE_DIR = os.path.join(REPO_DIR, 'offline')
 
-PROHIBITED_TERMS = ["민은기", "평생수학", "세계적인", "비트코인", "암호화폐", "트레이딩", "매매", "코인", "선물거래"]
+PROHIBITED_TERMS = ["민은기", "평생수학", "세계적인", "왕국", "비트코인", "암호화폐", "트레이딩", "매매", "코인", "선물거래"]
 
 def get_target_files(include_offline=True):
     """검사 대상 HTML 파일 목록 수집"""
