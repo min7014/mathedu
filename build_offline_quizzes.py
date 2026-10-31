@@ -152,6 +152,49 @@ OFFLINE_UPDATER_TEMPLATE = """
   background: transparent; color: #7cc4ff; border: none; padding: 6px;
   font-size: 0.85rem; cursor: pointer; text-decoration: underline; text-align: center;
 }
+
+body {{
+  background-image:
+    radial-gradient(at 10% 6%, rgba(0, 99, 152, 0.08) 0px, transparent 48%),
+    radial-gradient(at 90% 10%, rgba(79, 70, 229, 0.08) 0px, transparent 48%),
+    radial-gradient(at 50% 88%, rgba(16, 185, 129, 0.06) 0px, transparent 52%),
+    radial-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}}
+h1#txtTitle {{
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 55%, #059669 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}}
+html.dark-theme {{
+  --bg: #070b19; --card: rgba(19, 28, 49, 0.86); --card2: rgba(30, 41, 59, 0.85); --line: rgba(56, 189, 248, 0.22);
+  --txt: #f8fafc; --sub: #94a3b8; --primary: #f8fafc; --accent: #38bdf8;
+}}
+html.dark-theme body {{
+  background-color: #070b19;
+  background-image:
+    radial-gradient(at 12% 8%, rgba(56, 189, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 88% 14%, rgba(129, 140, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(16, 185, 129, 0.10) 0px, transparent 55%),
+    radial-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+  color: #f8fafc;
+}}
+html.dark-theme .banner,
+html.dark-theme .search-box,
+html.dark-theme .card {{
+  background: rgba(19, 28, 49, 0.86) !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+  color: #f8fafc !important;
+}}
+html.dark-theme .search-input {{
+  background: rgba(15, 23, 42, 0.90) !important;
+  color: #f8fafc !important;
+  border-color: rgba(56, 189, 248, 0.28) !important;
+}}
 </style>
 
 <script>
@@ -679,7 +722,7 @@ body {{
   background-color: var(--bg);
   min-height: 100vh; padding: 36px 20px 80px;
 }}
-.wrap {{ max-width: 960px; margin: 0 auto; }}
+.wrap {{ max-width: 1120px; margin: 0 auto; }}
 h1 {{
   font-size: 2.1rem; color: var(--primary);
   font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em;
@@ -699,7 +742,8 @@ h1 {{
 .search-input:focus {{
   border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,99,152,0.12);
 }}
-.list {{ display: grid; gap: 14px; }}
+.list {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(460px, 1fr)); gap: 14px; }}
+@media (max-width: 640px) {{ .list {{ grid-template-columns: 1fr; }} }}
 .card {{
   background: #ffffff;
   border: 1px solid var(--line); border-radius: var(--radius);
@@ -742,9 +786,12 @@ html[lang="en"] .bilingual-en {{ display: inline !important; }}
 <div class="wrap">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
     <a href="../index.html" style="color:var(--accent);text-decoration:none;font-weight:700;font-size:0.9rem;display:inline-flex;align-items:center;gap:6px">⬅️ <span id="txtBackLink">mathedu 메인으로</span></a>
+    <div style="display:flex;align-items:center;gap:8px">
+    <button type="button" id="themeToggleGlobalBtn" class="lang-btn active" onclick="toggleSiteDarkMode()" title="다크/라이트 테마 전환" style="padding:6px 12px;border-radius:16px"><span id="themeToggleGlobalIcon">🌙</span> 다크</button>
     <div class="lang-switcher" id="langSwitcher" title="Language">
       <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setOfflineLang('ko', true)">🇰🇷 KO</button>
       <button type="button" class="lang-btn" data-lang-btn="en" onclick="setOfflineLang('en', true)">🌐 EN</button>
+    </div>
     </div>
   </div>
 
@@ -948,6 +995,19 @@ function filterOfflineCards() {{
     }}
   }}
 }}
+
+(function() {{
+  try {{
+    if (localStorage.getItem('mathedu_site_theme') === 'dark') document.documentElement.classList.add('dark-theme');
+  }} catch(e) {{}}
+}})();
+window.toggleSiteDarkMode = function() {{
+  var isDark = document.documentElement.classList.toggle('dark-theme');
+  try {{ localStorage.setItem('mathedu_site_theme', isDark ? 'dark' : 'light'); }} catch(e) {{}}
+  var btn = document.getElementById('themeToggleGlobalBtn');
+  if (btn) btn.innerHTML = isDark ? '<span id="themeToggleGlobalIcon">☀️</span> 라이트' : '<span id="themeToggleGlobalIcon">🌙</span> 다크';
+}};
+
 function setOfflineLang(lang, isUserAction) {{
   if (isUserAction) {{
     try {{

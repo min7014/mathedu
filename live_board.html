@@ -198,9 +198,47 @@ tailwind.config = {
   }
 };
 </script>
+<script>
+// 2026 Spatial Aurora & Cosmic Dark/Light Theme Engine
+(function() {
+  try {
+    var savedTheme = localStorage.getItem('mathedu_site_theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.add('dark');
+    }
+  } catch (e) {}
+})();
+window.syncSiteThemeUI = function() {
+  var isDark = document.documentElement.classList.contains('dark-theme');
+  var iconEl = document.getElementById('themeToggleGlobalIcon');
+  var lblEl = document.getElementById('themeToggleGlobalLabel');
+  var btnEl = document.getElementById('themeToggleGlobalBtn');
+  if (iconEl) iconEl.textContent = isDark ? '☀️' : '🌙';
+  if (lblEl) {
+    var isEn = (document.documentElement.lang === 'en') || (window.MatheduI18n && window.MatheduI18n.getLanguage && window.MatheduI18n.getLanguage() === 'en');
+    lblEl.textContent = isDark ? (isEn ? 'Light' : '라이트') : (isEn ? 'Dark' : '다크');
+  }
+  if (btnEl) {
+    btnEl.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+  }
+};
+window.toggleSiteDarkMode = function() {
+  var htmlEl = document.documentElement;
+  var isDark = htmlEl.classList.toggle('dark-theme');
+  htmlEl.classList.toggle('dark', isDark);
+  try {
+    localStorage.setItem('mathedu_site_theme', isDark ? 'dark' : 'light');
+  } catch (e) {}
+  window.syncSiteThemeUI();
+};
+document.addEventListener('DOMContentLoaded', function() {
+  window.syncSiteThemeUI();
+});
+</script>
 <style>
 @layer base {
-  html, body { width: 100%; margin: 0; padding: 0; background-color: #fcf8fa; color: #1b1b1d; }
+  html, body { width: 100%; margin: 0; padding: 0; background-color: var(--bg-deep); color: var(--txt); }
   body { overscroll-behavior: none; min-height: max(884px, 100dvh); }
   .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
   .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
@@ -210,91 +248,266 @@ tailwind.config = {
 ::-webkit-scrollbar { display: none; }
 
 :root {
-  --bg-deep: #fcf8fa;
-  --bg-surface: #ffffff;
-  --card: #ffffff;
-  --card2: #f6f3f5;
-  --line: rgba(226, 232, 240, 0.9);
-  --txt: #1b1b1d;
-  --sub: #45464d;
+  --bg-deep: #f8fafc;
+  --bg-surface: rgba(255, 255, 255, 0.86);
+  --card: rgba(255, 255, 255, 0.90);
+  --card2: #f1f5f9;
+  --line: rgba(203, 213, 225, 0.72);
+  --txt: #0f172a;
+  --sub: #475569;
   --accent: #006398;
-  --accent2: #818CF8;
+  --accent2: #4f46e5;
   --good: #10B981;
   --bad: #ba1a1a;
   --gold: #F59E0B;
+  --bento-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  --bento-hover-shadow: 0 16px 36px -8px rgba(0, 99, 152, 0.14), 0 6px 16px -4px rgba(79, 70, 229, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
-/* Stitch Pill Filters (screens/bc0f63eb3a354cee8f964ce2bc461f3b) */
+html.dark-theme {
+  --bg-deep: #070b19;
+  --bg-surface: rgba(15, 23, 42, 0.82);
+  --card: rgba(19, 28, 49, 0.84);
+  --card2: rgba(30, 41, 59, 0.85);
+  --line: rgba(56, 189, 248, 0.22);
+  --txt: #f8fafc;
+  --sub: #94a3b8;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+  --bento-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.45), 0 0 18px rgba(56, 189, 248, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --bento-hover-shadow: 0 18px 42px -6px rgba(0, 0, 0, 0.65), 0 0 28px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+/* 2026 Spatial Aurora Mesh Gradient + Precision Math Dot Grid Background */
+body,
+main.bg-surface {
+  background-color: var(--bg-deep) !important;
+  background-image:
+    radial-gradient(at 10% 6%, rgba(0, 99, 152, 0.085) 0px, transparent 48%),
+    radial-gradient(at 90% 10%, rgba(79, 70, 229, 0.085) 0px, transparent 48%),
+    radial-gradient(at 50% 88%, rgba(16, 185, 129, 0.065) 0px, transparent 52%),
+    radial-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px !important;
+  background-attachment: fixed !important;
+  color: var(--txt) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark-theme body,
+html.dark-theme main.bg-surface {
+  background-color: #070b19 !important;
+  background-image:
+    radial-gradient(at 12% 8%, rgba(56, 189, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 88% 14%, rgba(129, 140, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(16, 185, 129, 0.10) 0px, transparent 55%),
+    radial-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px !important;
+}
+
+/* Spatial Glass Header & Bottom Capsule Dock */
+header.spatial-glass-header {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 8px 30px -10px rgba(15, 23, 42, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.dark-theme header.spatial-glass-header {
+  background: rgba(13, 20, 38, 0.80) !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.20);
+  box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+nav.spatial-glass-dock {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-top: 1px solid rgba(226, 232, 240, 0.88);
+  box-shadow: 0 -8px 30px -8px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+html.dark-theme nav.spatial-glass-dock {
+  background: rgba(13, 20, 38, 0.84) !important;
+  border-top: 1px solid rgba(56, 189, 248, 0.22);
+  box-shadow: 0 -10px 36px -6px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Hero Gradient Headline Typography */
+.hero-gradient-accent {
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 52%, #059669 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+}
+html.dark-theme .hero-gradient-accent {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 52%, #34d399 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Spatial Glass Bento Cards & 3D Spring Micro-Interactions */
+.bg-surface-container-lowest {
+  background-color: var(--card) !important;
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid var(--line);
+  box-shadow: var(--bento-shadow) !important;
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.26s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.26s ease, background-color 0.26s ease;
+}
+
+#list > div[data-slug],
+.bento-interactive-card {
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.26s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.26s ease !important;
+}
+#list > div[data-slug]:hover,
+.bento-interactive-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--bento-hover-shadow) !important;
+  border-color: rgba(0, 99, 152, 0.38) !important;
+}
+html.dark-theme #list > div[data-slug]:hover,
+html.dark-theme .bento-interactive-card:hover {
+  border-color: rgba(56, 189, 248, 0.48) !important;
+}
+
+/* Dark Theme Surface & Text Overrides for Tailwind Utility Classes */
+html.dark-theme .text-on-surface { color: #f8fafc !important; }
+html.dark-theme .text-on-surface-variant { color: #94a3b8 !important; }
+html.dark-theme .text-secondary { color: #38bdf8 !important; }
+html.dark-theme .bg-surface-container-low,
+html.dark-theme .bg-surface-container {
+  background-color: rgba(30, 41, 59, 0.78) !important;
+  color: #e2e8f0 !important;
+}
+html.dark-theme .bg-surface-container-high {
+  background-color: rgba(51, 65, 85, 0.85) !important;
+  color: #f8fafc !important;
+}
+html.dark-theme input[type="text"],
+html.dark-theme select.exam-select {
+  background-color: rgba(15, 23, 42, 0.88) !important;
+  color: #f8fafc !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+}
+
+/* Stitch Pill Filters (2026 Gradient Active Pills & Micro-Interactions) */
 .stitch-year-pill,
 .stitch-subj-pill {
-  padding: 4px 12px;
+  padding: 5px 13px;
   border-radius: 9999px;
-  background: #f0edef;
-  color: #1b1b1d;
+  background: #f1f5f9;
+  color: #1e293b;
   font-family: "Space Grotesk", "Pretendard", sans-serif;
   font-size: 11px;
   line-height: 14px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   font-weight: 600;
-  border: none;
+  border: 1px solid rgba(203, 213, 225, 0.7);
   cursor: pointer;
   flex-shrink: 0;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stitch-year-pill:hover,
+.stitch-subj-pill:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+html.dark-theme .stitch-year-pill,
+html.dark-theme .stitch-subj-pill {
+  background: rgba(30, 41, 59, 0.82);
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.22);
 }
 .stitch-year-pill.active {
-  background: #000000;
-  color: #ffffff;
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.24);
+}
+html.dark-theme .stitch-year-pill.active {
+  background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%) !important;
+  color: #070b19 !important;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.32);
 }
 .stitch-subj-pill.active {
-  background: #006398;
-  color: #ffffff;
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(0, 99, 152, 0.28);
 }
 
 .topic-chip {
-  padding: 4px 10px;
-  border-radius: 6px;
-  background: #f0edef;
-  color: #1b1b1d;
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #1e293b;
   font-family: "Space Grotesk", "Pretendard", sans-serif;
   font-size: 11px;
   line-height: 14px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   font-weight: 600;
-  border: none;
+  border: 1px solid rgba(203, 213, 225, 0.65);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.topic-chip:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+html.dark-theme .topic-chip {
+  background: rgba(30, 41, 59, 0.82);
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.22);
 }
 .topic-chip.active {
-  background: rgba(0, 99, 152, 0.10);
-  color: #006398;
+  background: linear-gradient(135deg, rgba(0, 99, 152, 0.14) 0%, rgba(79, 70, 229, 0.14) 100%) !important;
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  font-weight: 700;
 }
 
 .filter-tab-btn {
-  padding: 5px 12px;
+  padding: 5px 13px;
   border-radius: 9999px;
-  background: #f0edef;
-  color: #45464d;
+  background: #f1f5f9;
+  color: #475569;
   font-size: 11px;
   font-weight: 600;
-  border: none;
+  border: 1px solid rgba(203, 213, 225, 0.65);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.dark-theme .filter-tab-btn {
+  background: rgba(30, 41, 59, 0.82);
+  color: #cbd5e1;
+  border-color: rgba(148, 163, 184, 0.22);
 }
 .filter-tab-btn.active {
-  background: #000000;
-  color: #ffffff;
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(0, 99, 152, 0.26);
 }
 
 .exam-select {
   width: 100%;
-  background: #f6f3f5;
-  border: 1px solid #e4e2e4;
-  border-radius: 8px;
-  color: #1b1b1d;
-  padding: 6px 8px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: #0f172a;
+  padding: 7px 9px;
   font-size: 11px;
   font-weight: 600;
   outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.exam-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 99, 152, 0.14);
 }
 
 .card-bookmark-btn {
@@ -305,6 +518,10 @@ tailwind.config = {
   padding: 0 2px;
   line-height: 1;
   color: #c6c6cd;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.card-bookmark-btn:hover {
+  transform: scale(1.18);
 }
 .card-bookmark-btn.active {
   color: #F59E0B;
@@ -318,17 +535,19 @@ tailwind.config = {
 
 .lesson-pack-float-bar {
   position: fixed;
-  bottom: 72px;
+  bottom: 76px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9990;
   width: calc(100% - 2rem);
-  max-width: 736px;
-  background: #131b2e;
+  max-width: 1088px;
+  background: rgba(19, 27, 46, 0.94);
+  backdrop-filter: blur(20px);
   color: #ffffff;
-  border-radius: 12px;
-  padding: 12px 16px;
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35);
+  border-radius: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 12px 18px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.42);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -340,8 +559,8 @@ tailwind.config = {
 <body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen">
 
 <!-- Fixed Top Header (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
-  <div class="h-20 px-margin max-w-[768px] mx-auto flex items-center justify-between gap-space-sm">
+<header class="spatial-glass-header fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe">
+  <div class="h-20 px-margin max-w-[1120px] mx-auto flex items-center justify-between gap-space-sm">
     <a href="/mathedu/" class="flex items-center gap-space-sm min-w-0 no-underline">
       <img alt="Image from https://min7014.github.io/mathedu/assets/favicon.png" class="h-8 w-auto object-contain shrink-0" src="assets/favicon.png"/>
       <div class="flex flex-col min-w-0">
@@ -355,7 +574,11 @@ tailwind.config = {
       </div>
     </a>
     <div class="flex items-center gap-space-xs shrink-0">
-      <button id="langToggleSingleBtn" onclick="var nextL=(window.MatheduI18n&&MatheduI18n.getLanguage()==='ko')?'en':'ko';MatheduI18n.setLanguage(nextL);this.textContent=nextL.toUpperCase();" aria-label="언어 설정 변경" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl px-2 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">KO</button>
+      <button id="themeToggleGlobalBtn" onclick="toggleSiteDarkMode()" aria-label="다크/라이트 테마 전환" title="다크/라이트 테마 전환 (Toggle Dark/Light Theme)" class="min-h-[40px] flex items-center justify-center gap-1 rounded-xl px-2.5 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">
+        <span id="themeToggleGlobalIcon">🌙</span>
+        <span id="themeToggleGlobalLabel" class="hidden sm:inline">다크</span>
+      </button>
+      <button id="langToggleSingleBtn" onclick="var nextL=(window.MatheduI18n&&MatheduI18n.getLanguage()==='ko')?'en':'ko';MatheduI18n.setLanguage(nextL);this.textContent=nextL.toUpperCase();if(window.syncSiteThemeUI)window.syncSiteThemeUI();" aria-label="언어 설정 변경" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl px-2 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">KO</button>
       <!-- Hidden compatibility language switcher for i18n script -->
       <div id="langSwitcher" class="hidden">
         <button type="button" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">KO</button>
@@ -374,7 +597,7 @@ tailwind.config = {
 </header>
 
 <main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen">
-  <div class="flex flex-col w-full max-w-[768px] mx-auto pb-12">
+  <div class="flex flex-col w-full max-w-[1120px] mx-auto pb-12">
 
     <!-- Top Ambient Geometric Graphic Accent -->
     <div class="px-margin pt-2 pb-1">
@@ -392,7 +615,7 @@ tailwind.config = {
           </div>
           <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight mt-1">
             3,400+ 시각적 증명과<br/>
-            <span class="text-secondary">단델린 구의 직관</span>
+            <span class="text-secondary hero-gradient-accent">단델린 구의 직관</span>
           </h1>
           <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n-html="hero.leadDesc">
             수학자료실의 3,400+ 시각적 증명과 단델린 구의 통찰을 담은 가입 없는 100% 영구 무료 인터랙티브 수학자료실
@@ -579,7 +802,7 @@ tailwind.config = {
     </div>
 
     <!-- Two-Pillar User Gateway (Teacher & Student Quick Action) -->
-    <div class="px-margin mt-space-md flex flex-col gap-space-sm">
+    <div class="px-margin mt-space-md grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Teacher Class Creation Card -->
       <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2">
         <div class="flex items-center gap-2">
@@ -820,7 +1043,7 @@ tailwind.config = {
       </div>
 
       <!-- Quiz Question Cards List (Single-Column Vertical Flow matching screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-      <div class="flex flex-col gap-space-sm mt-1" id="list">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 mt-1" id="list">
         <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm text-center text-on-surface-variant">
           게시판을 불러오는 중…
         </div>
@@ -851,7 +1074,7 @@ tailwind.config = {
         <span class="material-symbols-outlined text-secondary text-[22px]">folder_special</span>
         <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">수학자료실 공인 학습 컬렉션</h2>
       </div>
-      <div class="grid grid-cols-1 gap-2.5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <!-- Collection 1: GeoGebra Tube -->
         <a class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between hover:bg-surface-container-low transition-colors no-underline" href="https://www.geogebra.org/u/min7014" rel="noopener noreferrer" target="_blank">
           <div class="flex items-center gap-3">
@@ -963,8 +1186,8 @@ tailwind.config = {
 </div>
 
 <!-- Fixed Bottom Navigation Bar (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
-<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]" data-active-classes="text-secondary font-semibold">
-  <div class="max-w-[768px] mx-auto flex items-center justify-around h-16 px-space-xs">
+<nav class="spatial-glass-dock fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]" data-active-classes="text-secondary font-semibold">
+  <div class="max-w-[1120px] mx-auto flex items-center justify-around h-16 px-space-xs">
     <a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 transition-colors text-secondary font-semibold no-underline" data-path="home" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
       <span class="material-symbols-outlined text-[22px]">home</span>
       <span class="font-body-sm text-body-sm leading-none">홈</span>
@@ -2272,21 +2495,7 @@ function toggleMathStory() {
       html += '</div>';
     }
     if (filtered.length > renderCount) {
-      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
-      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
-      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
-      html += '  </button>';
-      html += '</div>';
-    }
-    if (filtered.length > renderCount) {
-      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
-      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
-      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
-      html += '  </button>';
-      html += '</div>';
-    }
-    if (filtered.length > renderCount) {
-      html += '<div class="rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
+      html += '<div class="col-span-full rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
       html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
       html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
       html += '  </button>';

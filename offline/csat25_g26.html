@@ -63,8 +63,16 @@ body {
   line-height: 1.65;
   font-family: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   background-color: var(--bg);
+  background-image:
+    radial-gradient(at 10% 6%, rgba(0, 99, 152, 0.08) 0px, transparent 48%),
+    radial-gradient(at 90% 10%, rgba(79, 70, 229, 0.08) 0px, transparent 48%),
+    radial-gradient(at 50% 88%, rgba(16, 185, 129, 0.06) 0px, transparent 52%),
+    radial-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+  background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .material-symbols-outlined {
@@ -75,7 +83,7 @@ body {
 }
 
 .wrap {
-  max-width: 768px;
+  max-width: 960px;
   width: 100%;
   margin: 0 auto;
   padding: 88px 16px 104px;
@@ -98,7 +106,7 @@ body {
 }
 
 .stitch-app-header-inner {
-  max-width: 768px;
+  max-width: 960px;
   height: 72px;
   margin: 0 auto;
   padding: 0 16px;
@@ -1812,7 +1820,7 @@ section.math-schematic-flow td > b:first-child {
 }
 
 .stitch-bottom-nav-inner {
-  max-width: 768px;
+  max-width: 960px;
   height: 64px;
   margin: 0 auto;
   padding: 0 8px;
@@ -1909,6 +1917,152 @@ mjx-container:not([display="true"]) {
   .opts.opts-inline { grid-template-columns: repeat(2, 1fr) !important; }
   mjx-container { font-size: 92% !important; }
 }
+
+/* ── 2026 Spatial Aurora & Glass Bento Upgrades + Dark Mode (html.dark-theme) ── */
+.stitch-app-header {
+  background: rgba(255, 255, 255, 0.80) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
+  box-shadow: 0 8px 30px -10px rgba(15, 23, 42, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+.stitch-bottom-nav {
+  background: rgba(255, 255, 255, 0.84) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-top: 1px solid rgba(226, 232, 240, 0.88) !important;
+  box-shadow: 0 -8px 30px -8px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+.stitch-hero-card h1 .stitch-h1-accent {
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 55%, #059669 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (min-width: 768px) {
+  .stitch-gateway-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+}
+.stitch-hero-card,
+.stitch-streak-card,
+.stitch-dandelin-card,
+.orig-card,
+.stitch-gateway-card,
+.stitch-filter-card,
+.know,
+.q,
+.sol,
+.final,
+.stitch-collection-card {
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+}
+.q:hover,
+.stitch-gateway-card:hover,
+.stitch-collection-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -6px rgba(0, 99, 152, 0.12), 0 4px 12px rgba(79, 70, 229, 0.06);
+  border-color: rgba(0, 99, 152, 0.35);
+}
+.opt {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease !important;
+}
+.opt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(0, 99, 152, 0.12);
+}
+.stitch-mode-pill.active,
+.stitch-step-pill.active {
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(0, 99, 152, 0.26);
+}
+
+html.dark-theme {
+  --bg: #070b19;
+  --card: rgba(19, 28, 49, 0.86);
+  --card2: rgba(30, 41, 59, 0.85);
+  --card3: rgba(51, 65, 85, 0.82);
+  --card-high: rgba(71, 85, 105, 0.85);
+  --line: rgba(56, 189, 248, 0.22);
+  --line-strong: rgba(148, 163, 184, 0.35);
+  --txt: #f8fafc;
+  --sub: #94a3b8;
+  --primary: #38bdf8;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+}
+html.dark-theme body {
+  background-color: #070b19 !important;
+  background-image:
+    radial-gradient(at 12% 8%, rgba(56, 189, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 88% 14%, rgba(129, 140, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(16, 185, 129, 0.10) 0px, transparent 55%),
+    radial-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px !important;
+  color: #f8fafc !important;
+}
+html.dark-theme .stitch-app-header {
+  background: rgba(13, 20, 38, 0.82) !important;
+  border-bottom-color: rgba(56, 189, 248, 0.22) !important;
+  box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.55) !important;
+}
+html.dark-theme .stitch-bottom-nav {
+  background: rgba(13, 20, 38, 0.86) !important;
+  border-top-color: rgba(56, 189, 248, 0.22) !important;
+}
+html.dark-theme .stitch-hero-card,
+html.dark-theme .stitch-streak-card,
+html.dark-theme .stitch-dandelin-card,
+html.dark-theme .orig-card,
+html.dark-theme .stitch-gateway-card,
+html.dark-theme .stitch-filter-card,
+html.dark-theme .know,
+html.dark-theme .q,
+html.dark-theme .sol,
+html.dark-theme .final,
+html.dark-theme .stitch-collection-card,
+html.dark-theme .min7014-addon-card {
+  background: rgba(19, 28, 49, 0.86) !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+html.dark-theme .stitch-hero-card h1 .stitch-h1-accent {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 55%, #34d399 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html.dark-theme .opt,
+html.dark-theme .sym > div,
+html.dark-theme .orig-text-box,
+html.dark-theme #examOrigPaperBox,
+html.dark-theme #examUniversalNavBar {
+  background: rgba(30, 41, 59, 0.85) !important;
+  color: #f8fafc !important;
+  border-color: rgba(56, 189, 248, 0.24) !important;
+}
+html.dark-theme #examOrigPaperBox p,
+html.dark-theme #examOrigPaperBox span {
+  color: #f8fafc !important;
+}
+html.dark-theme .exp {
+  background: rgba(15, 23, 42, 0.90) !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+}
+html.dark-theme input[type="text"],
+html.dark-theme select {
+  background: rgba(15, 23, 42, 0.90) !important;
+  color: #f8fafc !important;
+  border-color: rgba(56, 189, 248, 0.28) !important;
+}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
@@ -1918,8 +2072,8 @@ mjx-container:not([display="true"]) {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/csat25_g26.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="csat25_g26">
-<meta name="mathedu-offline-build-time" content="2026-10-30T19:26:45.263700+00:00">
-<meta name="mathedu-offline-hash" content="941f73ed">
+<meta name="mathedu-offline-build-time" content="2026-10-31T06:28:15.269899+00:00">
+<meta name="mathedu-offline-hash" content="fbe8ce52">
 <meta name="mathedu-version-label" content="v2026.10.31">
 
 </head><body><div class="wrap">
@@ -1984,6 +2138,26 @@ mjx-container:not([display="true"]) {
 </div>
 
 <!-- STITCH_HEADER_START -->
+<script>
+(function() {
+  try {
+    if (localStorage.getItem('mathedu_site_theme') === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  } catch (e) {}
+})();
+window.syncSiteThemeUI = function() {
+  var isDark = document.documentElement.classList.contains('dark-theme');
+  var iconEl = document.getElementById('themeToggleGlobalIcon');
+  if (iconEl) iconEl.textContent = isDark ? '☀️' : '🌙';
+};
+window.toggleSiteDarkMode = function() {
+  var isDark = document.documentElement.classList.toggle('dark-theme');
+  try { localStorage.setItem('mathedu_site_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+  window.syncSiteThemeUI();
+};
+document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
+</script>
 <header class="stitch-app-header">
   <div class="stitch-app-header-inner">
     <a href="/mathedu/" class="stitch-brand-link">
@@ -1997,6 +2171,7 @@ mjx-container:not([display="true"]) {
       </div>
     </a>
     <div class="stitch-header-actions">
+      <button type="button" id="themeToggleGlobalBtn" class="stitch-lang-toggle" onclick="toggleSiteDarkMode()" title="다크/라이트 테마 전환 (Toggle Dark/Light Theme)"><span id="themeToggleGlobalIcon">🌙</span></button>
       <button type="button" id="langToggleSingleBtn" class="stitch-lang-toggle" onclick="var nextL=(document.documentElement.lang==='en')?'ko':'en';setBoardLang(nextL,true);this.textContent=nextL.toUpperCase();">KO</button>
       <div class="lang-group" style="display:none">
         <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko', true)">한국어</button>
@@ -3227,14 +3402,57 @@ function setBoardLang(lang, isUserAction) {
   background: transparent; color: #7cc4ff; border: none; padding: 6px;
   font-size: 0.85rem; cursor: pointer; text-decoration: underline; text-align: center;
 }
+
+body {{
+  background-image:
+    radial-gradient(at 10% 6%, rgba(0, 99, 152, 0.08) 0px, transparent 48%),
+    radial-gradient(at 90% 10%, rgba(79, 70, 229, 0.08) 0px, transparent 48%),
+    radial-gradient(at 50% 88%, rgba(16, 185, 129, 0.06) 0px, transparent 52%),
+    radial-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}}
+h1#txtTitle {{
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 55%, #059669 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}}
+html.dark-theme {{
+  --bg: #070b19; --card: rgba(19, 28, 49, 0.86); --card2: rgba(30, 41, 59, 0.85); --line: rgba(56, 189, 248, 0.22);
+  --txt: #f8fafc; --sub: #94a3b8; --primary: #f8fafc; --accent: #38bdf8;
+}}
+html.dark-theme body {{
+  background-color: #070b19;
+  background-image:
+    radial-gradient(at 12% 8%, rgba(56, 189, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 88% 14%, rgba(129, 140, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(16, 185, 129, 0.10) 0px, transparent 55%),
+    radial-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+  color: #f8fafc;
+}}
+html.dark-theme .banner,
+html.dark-theme .search-box,
+html.dark-theme .card {{
+  background: rgba(19, 28, 49, 0.86) !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+  color: #f8fafc !important;
+}}
+html.dark-theme .search-input {{
+  background: rgba(15, 23, 42, 0.90) !important;
+  color: #f8fafc !important;
+  border-color: rgba(56, 189, 248, 0.28) !important;
+}}
 </style>
 
 <script>
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'csat25_g26';
-window._offlineBuildTime = '2026-10-30T19:26:45.263700+00:00';
-window._offlineHash = '941f73ed';
+window._offlineBuildTime = '2026-10-31T06:28:15.269899+00:00';
+window._offlineHash = 'fbe8ce52';
 window._offlineVersion = 'v2026.10.31';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/csat25_g26.html';
 
@@ -3259,8 +3477,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'csat25_g26';
-  var localBuildTime = window._offlineBuildTime || '2026-10-30T19:26:45.263700+00:00';
-  var localHash = window._offlineHash || '941f73ed';
+  var localBuildTime = window._offlineBuildTime || '2026-10-31T06:28:15.269899+00:00';
+  var localHash = window._offlineHash || 'fbe8ce52';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/csat25_g26.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
