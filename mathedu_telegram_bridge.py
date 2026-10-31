@@ -3,21 +3,25 @@
 """
 mathedu_telegram_bridge.py
 ===============================================================================
-📱 mathedu 수학교육 플랫폼 전용 텔레그램 원격 지시 브릿지 (Telegram Remote Bridge)
-- 외부에서 스마트폰 텔레그램으로 mathedu 홈페이지 점검·빌드·배포 및 AI 에이전트 지시를 수행합니다.
-- 외부 패키지 의존성 없이 Python 표준 라이브러리(urllib)만으로 즉시 동작하며,
-  `google-antigravity` Python SDK가 설치된 경우 자유로운 자연어 코딩/수학교육 지시까지 실시간 실행합니다.
+📱 Antigravity ↔ Telegram 실시간 양방향 대화 & 원격 지시 브릿지
+- mathedu를 포함하여 Antigravity 에이전트와 스마트폰 텔레그램으로 실시간 대화·지시합니다.
 
-[사용 방법]
-1. 텔레그램 @BotFather 에서 봇 생성 후 토큰(TELEGRAM_BOT_TOKEN) 발급
-2. 프로젝트 루트에 `.env.telegram` 파일 생성 (Git에는 자동 제외됨):
-   TELEGRAM_BOT_TOKEN=123456789:ABCDEF...
-   TELEGRAM_CHAT_ID=본인의_채팅_ID (비워두고 봇에게 첫 메시지를 보내면 콘솔에 Chat ID가 표시됨)
-3. 실행:
-   python -X utf8 mathedu_telegram_bridge.py
+[2가지 연결 모드 모두 지원]
+1. 🔴 현재 대화창 직결 모드 (Live Session Reactive Wakeup)
+   - `python -X utf8 mathedu_telegram_bridge.py --listen-once`
+     : 백그라운드에서 대기하다가 텔레그램 메시지가 도착하면 즉시 종료(Exit 0)하여
+       현재 열려 있는 Antigravity 에이전트 세션을 자동으로 깨웁니다(Reactive Wakeup).
+   - `python -X utf8 mathedu_telegram_bridge.py --reply "답장 텍스트"`
+     : 현재 Antigravity 에이전트가 처리 결과나 대화를 텔레그램으로 즉시 전송합니다.
+
+2. 🟢 24시간 독립 데몬 모드 (Standalone Antigravity SDK Agent)
+   - `python -X utf8 mathedu_telegram_bridge.py` (또는 `--daemon`)
+     : PC에 설치된 `google.antigravity` SDK를 통해 대화 맥락을 유지하며
+       언제든 텔레그램으로 Antigravity와 자유롭게 대화하고 작업을 지시합니다.
 ===============================================================================
 """
 
+import argparse
 import asyncio
 import datetime
 import json
@@ -25,12 +29,12 @@ import os
 import subprocess
 import sys
 import time
-import urllib.parse
 import urllib.request
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent
 ENV_FILE = ROOT_DIR / ".env.telegram"
+OFFSET_FILE = ROOT_DIR / ".agents" / "telegram_offset.json"
 INBOX_FILE = ROOT_DIR / ".agents" / "telegram_inbox.jsonl"
 
 
@@ -52,6 +56,40 @@ def load_env_config() -> dict:
     return cfg
 
 
+def save_env_chat_id(chat_id: str) -> None:
+    if not ENV_FILE.exists():
+        return
+    lines = ENV_FILE.read_text(encoding="utf-8", errors="ignore").splitlines()
+    updated = False
+    new_lines = []
+    for line in lines:
+        if line.strip().startswith("TELEGRAM_CHAT_ID="):
+            new_lines.append(f"TELEGRAM_CHAT_ID={chat_id}")
+            updated = True
+        else:
+            new_lines.append(line)
+    if not updated:
+        new_lines.append(f"TELEGRAM_CHAT_ID={chat_id}")
+    ENV_FILE.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
+
+
+def load_offset_state() -> dict:
+    if OFFSET_FILE.exists():
+        try:
+            return json.loads(OFFSET_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {"offset": 0, "chat_id": ""}
+
+
+def save_offset_state(offset: int, chat_id: str) -> None:
+    OFFSET_FILE.parent.mkdir(parents=True, exist_ok=True)
+    OFFSET_FILE.write_text(
+        json.dumps({"offset": offset, "chat_id": str(chat_id)}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
 def tg_api(token: str, method: str, payload: dict | None = None, timeout: int = 35) -> dict:
     url = f"https://api.telegram.org/bot{token}/{method}"
     data = None
@@ -65,12 +103,16 @@ def tg_api(token: str, method: str, payload: dict | None = None, timeout: int = 
 
 
 def send_msg(token: str, chat_id: str | int, text: str) -> None:
-    if len(text) > 3900:
-        text = text[:3900] + "\n...(중략)..."
-    try:
-        tg_api(token, "sendMessage", {"chat_id": chat_id, "text": text})
-    except Exception as e:
-        print(f"[WARN] sendMessage 오류: {e}")
+    if not text:
+        return
+    # 텔레그램 메시지 길이 제한(4096자) 고려 분할 전송
+    chunk_size = 3800
+    for i in range(0, len(text), chunk_size):
+        chunk = text[i : i + chunk_size]
+        try:
+            tg_api(token, "sendMessage", {"chat_id": chat_id, "text": chunk})
+        except Exception as e:
+            print(f"[WARN] sendMessage 오류: {e}")
 
 
 def run_shell(cmd: list[str], timeout: int = 180) -> str:
@@ -90,128 +132,18 @@ def run_shell(cmd: list[str], timeout: int = 180) -> str:
         return f"❌ 명령 실행 오류: {e}"
 
 
-async def run_antigravity_agent_prompt(prompt: str) -> str:
+def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec: int = 3600) -> int:
     """
-    google-antigravity Python SDK가 설치되어 있으면 에이전트를 직접 스폰하여 지시를 수행하고,
-    설치되어 있지 않으면 .agents/telegram_inbox.jsonl 큐에 적재합니다.
+    현재 열려 있는 Antigravity 대화 세션과 1:1로 연동하기 위한 단일 수신 리스너.
+    메시지가 도착하면 즉시 콘솔에 출력하고 종료(code 0)하여 Antigravity의 Reactive Wakeup을 트리거합니다.
     """
-    try:
-        from google.antigravity import Agent, CapabilitiesConfig, LocalAgentConfig  # type: ignore
+    state = load_offset_state()
+    offset = int(state.get("offset", 0))
+    if not allowed_chat_id and state.get("chat_id"):
+        allowed_chat_id = str(state["chat_id"])
 
-        config = LocalAgentConfig(
-            system_instructions=(
-                "당신은 mathedu 수학교육 플랫폼 전담 자율 에이전트입니다. "
-                "GEMINI.md 규칙을 엄수하여 사용자의 텔레그램 지시를 끝까지 수행하고 핵심 결과를 한국어로 간결하게 보고하십시오."
-            ),
-            capabilities=CapabilitiesConfig(),
-        )
-        chunks: list[str] = []
-        async with Agent(config) as agent:
-            response = await agent.chat(prompt)
-            async for token in response:
-                chunks.append(token)
-        result = "".join(chunks).strip()
-        return result or "✅ 에이전트 작업이 완료되었습니다."
-    except ImportError:
-        INBOX_FILE.parent.mkdir(parents=True, exist_ok=True)
-        entry = {
-            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            "prompt": prompt,
-            "status": "queued",
-        }
-        with open(INBOX_FILE, "a", encoding="utf-8") as f:
-            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-        return (
-            "📥 지시사항이 `.agents/telegram_inbox.jsonl` 작업 큐에 기록되었습니다!\n"
-            f"• 내용: {prompt}\n\n"
-            "💡 실시간 자율 에이전트 직접 실행을 원하시면 터미널에서 `pip install google-antigravity`를 설치하거나, "
-            "현재 열려 있는 Antigravity 채팅창에서 바로 확인하실 수 있습니다."
-        )
-    except Exception as e:
-        return f"⚠️ 에이전트 실행 중 예외 발생: {e}"
-
-
-def handle_command(token: str, chat_id: str | int, text: str) -> None:
-    cmd = text.strip()
-    if cmd in ("/start", "/help"):
-        help_text = (
-            "🎓 [mathedu 수학교육 플랫폼 텔레그램 원격 제어 센터]\n\n"
-            "사용 가능한 명령어:\n"
-            "• /status : 현재 Git 상태 및 문항 현황 확인\n"
-            "• /audit : 기계적 전수 검사(426개) + 종합 무결성 점검(23개 항목) 즉시 실행\n"
-            "• /build : 오프라인 단독 퀴즈 패키지(212개) 재빌드\n"
-            "• /deploy [메시지] : 변경사항 Git 커밋 및 main 브랜치 즉시 배포\n"
-            "• 그 외 자유 메시지 입력 : Antigravity 에이전트에게 수학교육/홈페이지 개선 지시 전달"
-        )
-        send_msg(token, chat_id, help_text)
-        return
-
-    if cmd == "/status":
-        git_st = run_shell(["git", "status", "-s"])
-        git_log = run_shell(["git", "log", "-n", "3", "--oneline"])
-        msg = (
-            "📊 [mathedu 플랫폼 상태 보고]\n\n"
-            f"• 최신 커밋:\n{git_log}\n\n"
-            f"• 작업 트리 변경사항:\n{git_st if git_st else '깨끗함 (Clean)'}"
-        )
-        send_msg(token, chat_id, msg)
-        return
-
-    if cmd == "/audit":
-        send_msg(token, chat_id, "🔍 mathedu 전체 무결성 전수 검사를 시작합니다...")
-        out1 = run_shell([sys.executable, "-X", "utf8", "audit_engine.py"])
-        out2 = run_shell([sys.executable, "-X", "utf8", "audit_full_mathedu.py"])
-        send_msg(token, chat_id, f"✅ [전수 검사 완료]\n\n{out1}\n\n{out2[-1200:]}")
-        return
-
-    if cmd == "/build":
-        send_msg(token, chat_id, "🛠️ 오프라인 단독 퀴즈 패키지 재빌드를 시작합니다...")
-        out = run_shell([sys.executable, "-X", "utf8", "build_offline_quizzes.py"], timeout=300)
-        send_msg(token, chat_id, f"✅ [오프라인 재빌드 완료]\n\n{out[-1500:]}")
-        return
-
-    if cmd.startswith("/deploy"):
-        commit_msg = cmd[len("/deploy"):].strip() or "chore(telegram): remote update via mathedu telegram bridge"
-        send_msg(token, chat_id, f"🚀 Git 커밋 및 배포를 진행합니다: {commit_msg}")
-        add_out = run_shell(["git", "add", "-A"])
-        commit_out = run_shell(["git", "commit", "-m", commit_msg])
-        push_out = run_shell(["git", "push", "origin", "main"])
-        send_msg(token, chat_id, f"✅ [배포 결과]\n{add_out}\n{commit_out}\n{push_out}")
-        return
-
-    # 자유 자연어 지시 처리
-    send_msg(token, chat_id, f"🤖 지시를 접수했습니다:\n\"{cmd}\"\n처리를 시작합니다...")
-    reply = asyncio.run(run_antigravity_agent_prompt(cmd))
-    send_msg(token, chat_id, reply)
-
-
-def main() -> None:
-    cfg = load_env_config()
-    token = cfg["TELEGRAM_BOT_TOKEN"]
-    allowed_chat_id = cfg["TELEGRAM_CHAT_ID"]
-
-    if not token:
-        print("=" * 72)
-        print("📱 [mathedu 텔레그램 원격 브릿지 설정 안내]")
-        print("=" * 72)
-        print("아직 TELEGRAM_BOT_TOKEN이 설정되지 않았습니다.")
-        print(f"프로젝트 폴더의 `{ENV_FILE.name}` 파일에 아래 형식으로 저장해 주세요:\n")
-        print("TELEGRAM_BOT_TOKEN=123456789:ABCDEF_발급받은_봇_토큰")
-        print("TELEGRAM_CHAT_ID=본인의_텔레그램_Chat_ID\n")
-        print("※ TELEGRAM_CHAT_ID를 모르면 비워두고 실행한 뒤 봇에게 아무 메시지나 보내면 화면에 출력됩니다.")
-        print("=" * 72)
-        return
-
-    print("=" * 72)
-    print("🚀 mathedu 텔레그램 원격 지시 브릿지가 시작되었습니다! (Ctrl+C로 종료)")
-    if allowed_chat_id:
-        print(f"🔒 허용된 관리자 Chat ID: {allowed_chat_id}")
-    else:
-        print("⚠️ TELEGRAM_CHAT_ID가 비어 있습니다. 봇에게 첫 메시지를 보내면 Chat ID를 안내합니다.")
-    print("=" * 72)
-
-    offset = 0
-    while True:
+    start_ts = time.time()
+    while time.time() - start_ts < max_wait_sec:
         try:
             res = tg_api(token, "getUpdates", {"offset": offset, "timeout": 25}, timeout=35)
             for upd in res.get("result", []):
@@ -221,30 +153,197 @@ def main() -> None:
                 chat_id = str(chat.get("id", ""))
                 text = (msg.get("text") or "").strip()
                 if not chat_id or not text:
+                    save_offset_state(offset, allowed_chat_id or chat_id)
                     continue
 
                 if not allowed_chat_id:
-                    print(f"💡 감지된 첫 메시지 Chat ID: {chat_id} (사용자: {chat.get('username') or chat.get('first_name')})")
-                    send_msg(
-                        token,
-                        chat_id,
-                        f"👋 안녕하세요! 회원님의 Chat ID는 `{chat_id}` 입니다.\n"
-                        f"보안을 위해 `.env.telegram` 파일에 `TELEGRAM_CHAT_ID={chat_id}`를 추가하신 뒤 사용하세요.",
-                    )
                     allowed_chat_id = chat_id
+                    save_env_chat_id(chat_id)
 
                 if str(chat_id) != str(allowed_chat_id):
-                    print(f"⛔ 승인되지 않은 Chat ID 접근 차단: {chat_id}")
+                    save_offset_state(offset, allowed_chat_id)
                     continue
 
-                print(f"[📩 수신] ({chat_id}): {text}")
-                handle_command(token, chat_id, text)
+                save_offset_state(offset, allowed_chat_id)
+                send_msg(token, chat_id, "🤖 [Antigravity] 메시지를 수신했습니다. 생각하고 작업을 수행합니다...")
+                print("======================================================================")
+                print("📩 [TELEGRAM_INCOMING_MESSAGE]")
+                print(f"• Chat ID: {chat_id}")
+                print(f"• 사용자: {chat.get('username') or chat.get('first_name') or 'User'}")
+                print(f"• 시각: {datetime.datetime.now().isoformat()}")
+                print("• 내용:")
+                print(text)
+                print("======================================================================")
+                return 0
         except KeyboardInterrupt:
-            print("\n👋 텔레그램 브릿지를 종료합니다.")
-            break
+            return 130
         except Exception as e:
-            print(f"[재시도 대기] 폴링 오류: {e}")
-            time.sleep(5)
+            time.sleep(3)
+    print("[TIMEOUT] 대기 시간 동안 새 텔레그램 메시지가 없었습니다.")
+    return 0
+
+
+async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
+    """
+    google.antigravity Python SDK의 Agent 세션을 유지하며 텔레그램으로 연속 대화·지시를 수행합니다.
+    """
+    from google.antigravity import Agent, CapabilitiesConfig, LocalAgentConfig  # type: ignore
+
+    config = LocalAgentConfig(
+        system_instructions=(
+            "당신은 사용자의 PC(C:\\Users\\min\\Desktop\\mathedu)에서 동작하는 Antigravity AI 에이전트입니다. "
+            "사용자가 현재 텔레그램(Telegram) 메신저를 통해 당신과 직접 대화하고 지시하고 있습니다. "
+            "GEMINI.md의 자율 실행 원칙을 준수하여 대화, 질문 답변, 코드 수정, 검증, 배포 등 모든 지시를 끝까지 수행하고 "
+            "모바일 텔레그램 화면에서 읽기 편하도록 명확하고 간결한 한국어로 답변하십시오."
+        ),
+        capabilities=CapabilitiesConfig(),
+    )
+
+    state = load_offset_state()
+    offset = int(state.get("offset", 0))
+    if not allowed_chat_id and state.get("chat_id"):
+        allowed_chat_id = str(state["chat_id"])
+
+    print("🚀 [Antigravity SDK + Telegram 양방향 실시간 에이전트 데몬 가동 중]")
+    async with Agent(config) as agent:
+        while True:
+            try:
+                res = await asyncio.to_thread(
+                    tg_api, token, "getUpdates", {"offset": offset, "timeout": 25}, 35
+                )
+                for upd in res.get("result", []):
+                    offset = upd["update_id"] + 1
+                    msg = upd.get("message") or {}
+                    chat = msg.get("chat") or {}
+                    chat_id = str(chat.get("id", ""))
+                    text = (msg.get("text") or "").strip()
+                    if not chat_id or not text:
+                        save_offset_state(offset, allowed_chat_id or chat_id)
+                        continue
+
+                    if not allowed_chat_id:
+                        allowed_chat_id = chat_id
+                        save_env_chat_id(chat_id)
+                        await asyncio.to_thread(
+                            send_msg,
+                            token,
+                            chat_id,
+                            f"✅ Antigravity와 텔레그램이 연결되었습니다! (Chat ID: {chat_id})\n"
+                            "이제 무엇이든 대화하거나 지시해 주세요.",
+                        )
+
+                    if str(chat_id) != str(allowed_chat_id):
+                        save_offset_state(offset, allowed_chat_id)
+                        continue
+
+                    save_offset_state(offset, allowed_chat_id)
+                    print(f"[📩 수신] ({chat_id}): {text}")
+
+                    # 빠른 내장 단축 명령어 처리
+                    if text == "/status":
+                        git_st = run_shell(["git", "status", "-s"])
+                        git_log = run_shell(["git", "log", "-n", "3", "--oneline"])
+                        await asyncio.to_thread(
+                            send_msg,
+                            token,
+                            chat_id,
+                            f"📊 [현재 워크스페이스 상태]\n• 최근 커밋:\n{git_log}\n\n• 변경사항:\n{git_st or '없음 (Clean)'}",
+                        )
+                        continue
+                    elif text == "/audit":
+                        await asyncio.to_thread(send_msg, token, chat_id, "🔍 전체 무결성 검사를 실행합니다...")
+                        out1 = run_shell([sys.executable, "-X", "utf8", "audit_engine.py"])
+                        out2 = run_shell([sys.executable, "-X", "utf8", "audit_full_mathedu.py"])
+                        await asyncio.to_thread(send_msg, token, chat_id, f"✅ [검사 결과]\n{out1}\n\n{out2[-1200:]}")
+                        continue
+
+                    # Antigravity 에이전트와 직접 대화 및 작업 수행
+                    await asyncio.to_thread(
+                        send_msg, token, chat_id, "🤖 [Antigravity] 생각 및 작업 수행 중..."
+                    )
+                    chunks: list[str] = []
+                    response = await agent.chat(text)
+                    async for token_str in response:
+                        chunks.append(token_str)
+                    reply_text = "".join(chunks).strip() or "✅ 작업을 완료했습니다."
+                    await asyncio.to_thread(send_msg, token, chat_id, reply_text)
+            except KeyboardInterrupt:
+                print("\n👋 텔레그램 에이전트 데몬을 종료합니다.")
+                break
+            except Exception as e:
+                print(f"[재시도 대기] 오류: {e}")
+                await asyncio.sleep(4)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Antigravity ↔ Telegram 양방향 대화 및 지시 브릿지")
+    parser.add_argument(
+        "--listen-once",
+        action="store_true",
+        help="텔레그램 메시지 1건을 수신하면 즉시 출력 후 종료하여 현재 Antigravity 세션을 깨웁니다.",
+    )
+    parser.add_argument(
+        "--reply",
+        type=str,
+        default="",
+        help="지정한 텍스트를 사용자의 텔레그램 채팅방으로 즉시 전송합니다.",
+    )
+    parser.add_argument(
+        "--set-token",
+        type=str,
+        default="",
+        help=".env.telegram 파일에 TELEGRAM_BOT_TOKEN을 저장합니다.",
+    )
+    parser.add_argument(
+        "--set-chat-id",
+        type=str,
+        default="",
+        help=".env.telegram 파일에 TELEGRAM_CHAT_ID를 저장합니다.",
+    )
+    args = parser.parse_args()
+
+    if args.set_token or args.set_chat_id:
+        cfg = load_env_config()
+        if args.set_token:
+            cfg["TELEGRAM_BOT_TOKEN"] = args.set_token.strip()
+        if args.set_chat_id:
+            cfg["TELEGRAM_CHAT_ID"] = args.set_chat_id.strip()
+        ENV_FILE.write_text(
+            f"TELEGRAM_BOT_TOKEN={cfg['TELEGRAM_BOT_TOKEN']}\n"
+            f"TELEGRAM_CHAT_ID={cfg['TELEGRAM_CHAT_ID']}\n",
+            encoding="utf-8",
+        )
+        print(f"✅ `{ENV_FILE.name}` 설정이 저장되었습니다.")
+        return
+
+    cfg = load_env_config()
+    token = cfg["TELEGRAM_BOT_TOKEN"]
+    allowed_chat_id = cfg["TELEGRAM_CHAT_ID"]
+
+    if not token:
+        print("=" * 72)
+        print("📱 [Antigravity ↔ 텔레그램 직결 설정 안내]")
+        print("=" * 72)
+        print("아직 TELEGRAM_BOT_TOKEN이 설정되지 않았습니다.")
+        print("봇 토큰을 알려주시거나 아래 명령어로 등록해 주세요:\n")
+        print("  python -X utf8 mathedu_telegram_bridge.py --set-token \"발급받은_봇_토큰\"")
+        print("=" * 72)
+        return
+
+    if args.reply:
+        state = load_offset_state()
+        target_chat_id = allowed_chat_id or state.get("chat_id", "")
+        if not target_chat_id:
+            print("❌ 전송할 TELEGRAM_CHAT_ID가 아직 등록되지 않았습니다. 먼저 텔레그램 봇에게 메시지를 한 번 보내주세요.")
+            sys.exit(1)
+        send_msg(token, target_chat_id, args.reply)
+        print(f"✅ 텔레그램({target_chat_id})으로 답장을 전송했습니다.")
+        return
+
+    if args.listen_once:
+        sys.exit(listen_once_for_live_session(token, allowed_chat_id))
+
+    asyncio.run(run_daemon_with_sdk(token, allowed_chat_id))
 
 
 if __name__ == "__main__":
