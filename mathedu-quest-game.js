@@ -3542,6 +3542,10 @@
                   'style="padding:4px 12px;border-radius:999px;border:1px solid #fbbf24;background:linear-gradient(135deg,#f59e0b 0%,#db2777 100%);color:#ffffff;font-size:11px;font-weight:900;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(245,158,11,0.35)">' +
                   '📣 친구 도전장 & SNS 인증 공유' +
                 '</button>' +
+                '<button type="button" id="btnOpenRewardedAdTop" class="quest-micro-btn" onclick="if(window.MatheduAdEngine)window.MatheduAdEngine.openRewardedAdModal()" ' +
+                  'style="padding:4px 12px;border-radius:999px;border:1px solid #34d399;background:linear-gradient(135deg,#059669 0%,#0284c7 100%);color:#ffffff;font-size:11px;font-weight:900;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(16,185,129,0.35)">' +
+                  '🎁 무료 광고 보너스 (+50 XP·필살기 완충)' +
+                '</button>' +
               '</div>' +
               '<h2 style="margin:0;font-size:21px;font-weight:900;letter-spacing:-0.02em;color:#ffffff">👑 수능 수학 100점 만점 3D 원정대</h2>' +
               '<p style="margin:5px 0 0;font-size:12.5px;color:#cbd5e1;line-height:1.6">3D 입체 기하 모뉴먼트를 360° 회전하며 원리를 깊이 사색하고, 3중 수식 결계를 파쇄해 수능 100점 만점에 도달하세요!</p>' +
@@ -4558,10 +4562,26 @@
     closePrShareModal: function() {
       var m = document.getElementById('matheduPrShareModal');
       if (m) m.remove();
+    },
+
+    grantSponsorAdReward: function() {
+      this.state.ultimateGauge = 100;
+      this.state.shieldHp = 100;
+      this.insightGauge = Math.min(100, (this.insightGauge || 0) + 40);
+      saveQuestState(this.state);
+      this.playGameSfx('victory');
+      this.updateInsightGaugeDOM();
+      this.renderConsoleHub();
+      var battleModal = document.getElementById('matheduQuestBattleModal');
+      if (battleModal && this.activeStage) {
+        this.renderBattleModal();
+      }
+      this.showPrToast('🎁 스폰서 광고 시청 보상 수령 완료! (+50 XP · 기하 필살기 100% 완충 · 사색 통찰 +40%)');
     }
   };
 
   window.MatheduQuest = QuestEngine;
+  window.MatheduQuestGame = QuestEngine;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
