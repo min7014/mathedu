@@ -78,6 +78,7 @@ window.MathJax = {
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
 <script src="mathedu-auth.js?v=20261003_v3"></script>
 <script src="mathedu-gamification.js?v=20261003_v3"></script>
+<script src="mathedu-quest-game.js?v=20261031_v1"></script>
 <script src="mathedu-i18n.js?v=20261003_v3"></script>
 <script src="mathedu-report.js?v=20261003_v3"></script>
 <!-- Google Stitch Design System: Mathematical Clarity & Dynamic Geometry (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
@@ -397,6 +398,10 @@ tailwind.config = {
           </p>
           <!-- Quick feature badges horizontally scrolling -->
           <div class="flex items-center gap-1.5 overflow-x-auto py-1 mt-1 -mx-1 px-1">
+            <a href="#matheduQuestSection" class="shrink-0 px-2.5 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] font-label-badge text-label-badge flex items-center gap-1 no-underline font-bold">
+              <span class="material-symbols-outlined text-[14px] text-status-amber">sports_esports</span>
+              👑 수능 100점 원정대 게임
+            </a>
             <span class="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge flex items-center gap-1">
               <span class="material-symbols-outlined text-[14px] text-status-amber">bolt</span>
               무가입 5초 즉시 학습
@@ -487,6 +492,11 @@ tailwind.config = {
         </div>
       </div>
     </div>
+
+    <!-- 👑 수능 수학 100점 만점 원정대 (mathteacher × 16,548문항 × min7014 인터랙티브 탐험 게임) -->
+    <section class="px-margin mt-space-md" id="matheduQuestSection">
+      <div id="matheduQuestConsoleRoot"></div>
+    </section>
 
     <!-- Emblem / Dandelin Spheres Interactive Spotlight -->
     <div class="px-margin mt-space-md">
