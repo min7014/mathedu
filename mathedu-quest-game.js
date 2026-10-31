@@ -731,6 +731,51 @@
     }
   ];
 
+  // 🚀 [60초 3D 스피드 디딤돌 블리츠] mathteacher 엄선 수능 필수 공식·직관 15문항
+  var SPEED_BLITZ_QUESTIONS = [
+    { unit: '고1 공통 · 원과 직선', stem: '원의 중심에서 직선까지의 거리가 $d=4$, 반지름이 $r=4$일 때 원과 직선의 교점의 개수는?', options: ['$0$개', '$1$개 (접한다)', '$2$개', '$3$개', '$4$개'], answer: 2, hint: '$d = r$이면 원과 직선은 한 점에서 접합니다.' },
+    { unit: '고1 공통 · 이차함수 대칭축', stem: '이차함수 $y = (x-1)(x-7)$의 그래프의 대칭축의 방정식은?', options: ['$x=2$', '$x=3$', '$x=4$', '$x=5$', '$x=6$'], answer: 3, hint: '두 절편 $1$과 $7$의 중점 $\\dfrac{1+7}{2}=4$가 대칭축입니다.' },
+    { unit: '수학Ⅰ · 지수법칙', stem: '$2^3 \\times 2^{-1}$의 값은?', options: ['$1$', '$2$', '$4$', '$8$', '$16$'], answer: 3, hint: '$2^{3+(-1)} = 2^2 = 4$입니다.' },
+    { unit: '수학Ⅰ · 로그의 정의', stem: '$\\log_3 9 + \\log_3 1$의 값은?', options: ['$0$', '$1$', '$2$', '$3$', '$9$'], answer: 3, hint: '$\\log_3 3^2 = 2$이고 $\\log_3 1 = 0$이므로 $2+0=2$입니다.' },
+    { unit: '수학Ⅰ · 삼각함수 특수각', stem: '$2\\sin\\dfrac{\\pi}{6} + \\cos 0$의 값은?', options: ['$1$', '$\\dfrac{3}{2}$', '$2$', '$\\dfrac{5}{2}$', '$3$'], answer: 3, hint: '$\\sin\\dfrac{\\pi}{6}=\\dfrac{1}{2},\\; \\cos 0 = 1$이므로 $1 + 1 = 2$입니다.' },
+    { unit: '수학Ⅰ · 사인법칙', stem: '외접원의 반지름이 $R=5$인 삼각형 $\\mathrm{ABC}$에서 $\\dfrac{a}{\\sin A}$의 값은?', options: ['$5$', '$8$', '$10$', '$15$', '$20$'], answer: 3, hint: '사인법칙 $\\dfrac{a}{\\sin A} = 2R = 10$입니다.' },
+    { unit: '수학Ⅰ · 등차수열 중항', stem: '세 수 $2, x, 10$이 이 순서대로 등차수열을 이룰 때 $x$의 값은?', options: ['$4$', '$5$', '$6$', '$7$', '$8$'], answer: 3, hint: '등차중항 $x = \\dfrac{2+10}{2} = 6$입니다.' },
+    { unit: '수학Ⅰ · 시그마의 합', stem: '$\\sum_{k=1}^{5} k = 1+2+3+4+5$의 값은?', options: ['$10$', '$12$', '$15$', '$20$', '$25$'], answer: 3, hint: '$\\dfrac{5 \\times 6}{2} = 15$입니다.' },
+    { unit: '수학Ⅱ · 다항함수 미분계수', stem: '함수 $f(x) = x^3 + 2x$에 대하여 $f\\prime(1)$의 값은?', options: ['$3$', '$4$', '$5$', '$6$', '$7$'], answer: 3, hint: '$f\\prime(x) = 3x^2 + 2$이므로 $f\\prime(1) = 3 + 2 = 5$입니다.' },
+    { unit: '수학Ⅱ · 정적분 기본성질', stem: '임의의 다항함수 $f(x)$에 대하여 정적분 $\\int_{2}^{2} f(x)dx$의 값은?', options: ['$-2$', '$-1$', '$0$', '$1$', '$2$'], answer: 3, hint: '위끝과 아래끝이 같으면 정적분의 값은 항상 $0$입니다.' },
+    { unit: '수학Ⅱ · 이차곡선 정적분 넓이', stem: '포물선 $y = x^2 - 2x$와 $x$축으로 둘러싸인 부분의 넓이 $\\dfrac{|a|(\\beta-\\alpha)^3}{6}$는?', options: ['$\\dfrac{2}{3}$', '$1$', '$\\dfrac{4}{3}$', '$\\dfrac{5}{3}$', '$2$'], answer: 3, hint: '두 근이 $0, 2$이므로 넓이 공식 $\\dfrac{1 \\times (2-0)^3}{6} = \\dfrac{8}{6} = \\dfrac{4}{3}$입니다.' },
+    { unit: '미적분 · 삼각함수의 극한', stem: '$\\lim_{x \\to 0} \\dfrac{\\sin 5x}{x}$의 값은?', options: ['$1$', '$3$', '$5$', '$7$', '$10$'], answer: 3, hint: '$\\lim_{x \\to 0} 5 \\cdot \\dfrac{\\sin 5x}{5x} = 5$입니다.' },
+    { unit: '미적분 · 자연상수 e와 미분', stem: '함수 $f(x) = e^{2x}$를 미분한 도함수 $f\\prime(x)$에 대하여 $f\\prime(0)$의 값은?', options: ['$0$', '$1$', '$2$', '$e$', '$2e$'], answer: 3, hint: '$f\\prime(x) = 2e^{2x}$이므로 $f\\prime(0) = 2e^0 = 2$입니다.' },
+    { unit: '확통 · 조건부확률', stem: '$P(A) = \\dfrac{1}{2},\\; P(A \\cap B) = \\dfrac{1}{6}$일 때 조건부확률 $P(B|A)$의 값은?', options: ['$\\dfrac{1}{6}$', '$\\dfrac{1}{4}$', '$\\dfrac{1}{3}$', '$\\dfrac{1}{2}$', '$\\dfrac{2}{3}$'], answer: 3, hint: '$P(B|A) = \\dfrac{P(A \\cap B)}{P(A)} = \\dfrac{1/6}{1/2} = \\dfrac{1}{3}$입니다.' },
+    { unit: '기하 · 평면벡터 내적 최댓값', stem: '길이가 $|\vec{a}|=4, |\vec{b}|=3$인 두 벡터가 같은 방향($\\theta=0^\\circ$)을 향할 때 $\\vec{a}\\cdot\\vec{b}$의 값은?', options: ['$7$', '$9$', '$12$', '$15$', '$16$'], answer: 3, hint: '같은 방향이면 $\\cos 0^\\circ = 1$이므로 $4 \\times 3 \\times 1 = 12$입니다.' }
+  ];
+
+  function getTodayKey() {
+    var now = new Date();
+    var kst = new Date(now.getTime() + (9 * 60 * 60 * 1000));
+    return kst.toISOString().slice(0, 10);
+  }
+
+  function ensureDailyQuests(dq) {
+    var today = getTodayKey();
+    if (!dq || dq.date !== today) {
+      return {
+        date: today,
+        stepsCleared: 0,
+        archiveSummoned: 0,
+        grimoireOpened: 0,
+        chestClaimed: false
+      };
+    }
+    return {
+      date: today,
+      stepsCleared: dq.stepsCleared || 0,
+      archiveSummoned: dq.archiveSummoned || 0,
+      grimoireOpened: dq.grimoireOpened || 0,
+      chestClaimed: !!dq.chestClaimed
+    };
+  }
+
   function loadQuestState() {
     try {
       var raw = localStorage.getItem(QUEST_STATE_KEY);
@@ -742,8 +787,12 @@
           emblems: Array.isArray(parsed.emblems) ? parsed.emblems : [],
           combo: typeof parsed.combo === 'number' ? parsed.combo : 0,
           shieldHp: typeof parsed.shieldHp === 'number' ? parsed.shieldHp : 100,
+          ultimateGauge: typeof parsed.ultimateGauge === 'number' ? parsed.ultimateGauge : 100,
           activeWorldId: parsed.activeWorldId || 'w1',
-          summonedCount: parsed.summonedCount || 0
+          summonedCount: parsed.summonedCount || 0,
+          soundEnabled: typeof parsed.soundEnabled === 'boolean' ? parsed.soundEnabled : true,
+          blitzBestScore: parsed.blitzBestScore || 0,
+          dailyQuests: ensureDailyQuests(parsed.dailyQuests)
         };
       }
     } catch (e) {}
@@ -753,8 +802,12 @@
       emblems: [],
       combo: 0,
       shieldHp: 100,
+      ultimateGauge: 100,
       activeWorldId: 'w1',
-      summonedCount: 0
+      summonedCount: 0,
+      soundEnabled: true,
+      blitzBestScore: 0,
+      dailyQuests: ensureDailyQuests(null)
     };
   }
 
@@ -936,6 +989,83 @@
       this.view3D.ry = -0.55;
       this.view3D.zoom = 1.05;
       this.view3D.autoRotate = true;
+    },
+
+    // =========================================================================
+    // 🔊 무의존성 WebAudio API 신디사이저 사운드 엔진 (gamemaker SFX Engine)
+    // =========================================================================
+    audioCtx: null,
+
+    playGameSfx: function(type) {
+      if (this.state && this.state.soundEnabled === false) return;
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        if (!this.audioCtx) {
+          this.audioCtx = new AudioCtx();
+        }
+        var ctx = this.audioCtx;
+        if (ctx.state === 'suspended') {
+          ctx.resume();
+        }
+        var now = ctx.currentTime;
+
+        function playTone(freq, oscType, startTime, duration, vol, endFreq) {
+          var osc = ctx.createOscillator();
+          var gain = ctx.createGain();
+          osc.type = oscType || 'sine';
+          osc.frequency.setValueAtTime(freq, startTime);
+          if (endFreq) {
+            osc.frequency.exponentialRampToValueAtTime(endFreq, startTime + duration);
+          }
+          gain.gain.setValueAtTime(vol || 0.12, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + duration);
+        }
+
+        if (type === 'hit') {
+          // 정답 타격 & 3D 결계 파쇄: 경쾌한 상승 아르페지오 + 레이저 톤
+          playTone(523.25, 'triangle', now, 0.11, 0.14);        // C5
+          playTone(659.25, 'triangle', now + 0.06, 0.12, 0.14); // E5
+          playTone(783.99, 'triangle', now + 0.12, 0.16, 0.15); // G5
+          playTone(1046.50, 'sine', now + 0.18, 0.24, 0.16);    // C6
+          playTone(920, 'sawtooth', now, 0.18, 0.07, 240);      // Laser sweep
+        } else if (type === 'shield') {
+          // 오답 시 3D 허니컴 방어막 공명음
+          playTone(220, 'sine', now, 0.25, 0.15, 165);
+          playTone(330, 'triangle', now + 0.05, 0.25, 0.10, 247.5);
+        } else if (type === 'victory') {
+          // 보스 최종 격파: 웅장한 4화음 팡파르
+          var notes = [523.25, 659.25, 783.99, 1046.50];
+          for (var i = 0; i < notes.length; i++) {
+            playTone(notes[i], 'triangle', now + i * 0.09, 0.32, 0.15);
+          }
+          playTone(523.25, 'sine', now + 0.36, 0.55, 0.12);
+          playTone(783.99, 'triangle', now + 0.36, 0.55, 0.12);
+          playTone(1046.50, 'triangle', now + 0.36, 0.60, 0.16);
+        } else if (type === 'summon') {
+          // 16,548문항 3D 보스 소환: 하이퍼 워프 효과음
+          playTone(180, 'sine', now, 0.35, 0.14, 880);
+          playTone(270, 'triangle', now + 0.06, 0.32, 0.10, 1320);
+        }
+      } catch (e) {}
+    },
+
+    toggleSound: function() {
+      this.state.soundEnabled = (this.state.soundEnabled === false) ? true : false;
+      saveQuestState(this.state);
+      var btn = document.getElementById('btnToggle3DSound');
+      if (btn) {
+        btn.innerHTML = this.state.soundEnabled ? '🔊 효과음 ON' : '🔇 효과음 OFF';
+        btn.style.background = this.state.soundEnabled ? 'rgba(251,191,36,0.25)' : 'rgba(255,255,255,0.1)';
+        btn.style.borderColor = this.state.soundEnabled ? '#fbbf24' : 'rgba(255,255,255,0.2)';
+      }
+      if (this.state.soundEnabled) {
+        this.playGameSfx('hit');
+      }
     },
 
     // =========================================================================
@@ -1123,6 +1253,21 @@
         this.drawMonumentW5_TorusKnot(ctx, proj, t, v.showXray);
       } else {
         this.drawMonumentW6_CrownPolyhedra(ctx, proj, t, v.showXray);
+      }
+
+      // 5. 🔥 FEVER RUSH (3연속 콤보 달성 시 3D 황금 피버 링 오라)
+      if ((this.state.combo || 0) >= 3) {
+        ctx.strokeStyle = 'rgba(251,191,36,' + (0.65 + 0.3 * Math.sin(t * 5)).toFixed(2) + ')';
+        ctx.lineWidth = 2.6;
+        ctx.beginPath();
+        for (var fa = 0; fa <= 48; fa++) {
+          var fTh = (fa / 48) * Math.PI * 2;
+          var fRad = 1.92 + 0.08 * Math.sin(t * 4 + fa);
+          var fPt = proj(fRad * Math.cos(fTh + t), 0.15 * Math.sin(fTh * 3 + t * 2), fRad * Math.sin(fTh + t));
+          if (fa === 0) ctx.moveTo(fPt.x, fPt.y);
+          else ctx.lineTo(fPt.x, fPt.y);
+        }
+        ctx.stroke();
       }
     },
 
@@ -1657,7 +1802,19 @@
         ctx.stroke();
       }
 
-      // 3. 정답 타격 시 레이저 빔 연출
+      // 3. 정답 타격 시 레이저 빔 연출 및 🌟 기하 통찰 필살기 초신성 레이저 폭격 연출
+      if (b.supernovaTimer && b.supernovaTimer > 0) {
+        b.supernovaTimer--;
+        ctx.strokeStyle = '#fde047';
+        ctx.lineWidth = b.supernovaTimer * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(0, 0); ctx.lineTo(cx, cy);
+        ctx.moveTo(w, 0); ctx.lineTo(cx, cy);
+        ctx.moveTo(0, h); ctx.lineTo(cx, cy);
+        ctx.moveTo(w, h); ctx.lineTo(cx, cy);
+        ctx.moveTo(cx, 0); ctx.lineTo(cx, h);
+        ctx.stroke();
+      }
       if (b.laserTimer > 0) {
         ctx.strokeStyle = '#34d399';
         ctx.lineWidth = b.laserTimer * 0.45;
@@ -1706,6 +1863,21 @@
         ctx.fill();
         ctx.globalAlpha = 1.0;
       }
+
+      // 6. 🔥 FEVER RUSH (3연속 콤보 이상일 때 3D 황금 피버 오라 링)
+      if ((this.state.combo || 0) >= 3) {
+        ctx.strokeStyle = 'rgba(251,191,36,' + (0.7 + 0.3 * Math.sin(b.time * 6)).toFixed(2) + ')';
+        ctx.lineWidth = 2.8;
+        ctx.beginPath();
+        for (var fa = 0; fa <= 40; fa++) {
+          var fAng = (fa / 40) * Math.PI * 2;
+          var fPt = rotate3D(1.68 * Math.cos(fAng), 0.18 * Math.sin(fAng * 4 + b.time * 3), 1.68 * Math.sin(fAng), 0.25, b.ry * 1.5, -0.2);
+          var fP2 = project3D(fPt, cx, cy, fov, camDist, 1.0);
+          if (fa === 0) ctx.moveTo(fP2.x, fP2.y);
+          else ctx.lineTo(fP2.x, fP2.y);
+        }
+        ctx.stroke();
+      }
     },
 
     startStageBattle: function(stageObj) {
@@ -1720,15 +1892,56 @@
       if (!w) return;
       for (var i = 0; i < w.stages.length; i++) {
         if (w.stages[i].id === stageId) {
+          this.playGameSfx('summon');
           this.startStageBattle(w.stages[i]);
           return;
         }
       }
     },
 
+    // ⚡ 오답 약점 3D 리벤지 보스 소환 (`MatheduGame.getWrongAnswers()` 우선 연동)
+    summonWeaknessRevengeBoss: function(worldId) {
+      var self = this;
+      this.playGameSfx('summon');
+      this.state.dailyQuests = ensureDailyQuests(this.state.dailyQuests);
+      this.state.dailyQuests.archiveSummoned = (this.state.dailyQuests.archiveSummoned || 0) + 1;
+      saveQuestState(this.state);
+
+      var wrongList = (window.MatheduGame && typeof window.MatheduGame.getWrongAnswers === 'function')
+        ? window.MatheduGame.getWrongAnswers()
+        : [];
+
+      if (wrongList && wrongList.length > 0) {
+        var targetWrong = wrongList[Math.floor(Math.random() * wrongList.length)];
+        var targetSlug = targetWrong.slug;
+
+        // 1) WORLDS 내 모든 스테이지 중 해당 slug와 일치하는 보스가 있는지 탐색
+        for (var wi = 0; wi < WORLDS.length; wi++) {
+          var stgs = WORLDS[wi].stages || [];
+          for (var si = 0; si < stgs.length; si++) {
+            if (stgs[si].slug === targetSlug || stgs[si].id === targetSlug) {
+              var revengeStage = JSON.parse(JSON.stringify(stgs[si]));
+              revengeStage.gradeBadge = '⚡ 약점 3D 리벤지 레이드 · ' + revengeStage.gradeBadge;
+              revengeStage.bossName = '🔥 [약점 복수전] ' + revengeStage.bossName;
+              revengeStage.xpReward = Math.round((revengeStage.xpReward || 60) * 1.5);
+              self.startStageBattle(revengeStage);
+              return;
+            }
+          }
+        }
+      }
+
+      // 2) 오답 문항이 없거나 샤드 기출 문항인 경우 현재 대륙의 기출 보스를 소환
+      this.summonRandomArchiveProblem(worldId || this.state.activeWorldId);
+    },
+
     // 16,548문항 연도별 샤드 DB에서 실시간으로 해당 대륙 기출 보스 소환!
     summonRandomArchiveProblem: function(worldId) {
       var self = this;
+      this.playGameSfx('summon');
+      this.state.dailyQuests = ensureDailyQuests(this.state.dailyQuests);
+      this.state.dailyQuests.archiveSummoned = (this.state.dailyQuests.archiveSummoned || 0) + 1;
+      saveQuestState(this.state);
       var w = this.getWorldById(worldId || this.state.activeWorldId);
       var years = w.shardYears || ['2025'];
       var pickYear = years[Math.floor(Math.random() * years.length)];
@@ -1863,16 +2076,329 @@
 
     summonMin7014Grimoire: function(url) {
       this.state.shieldHp = 100;
+      this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + 50);
+      this.state.dailyQuests = ensureDailyQuests(this.state.dailyQuests);
+      this.state.dailyQuests.grimoireOpened = (this.state.dailyQuests.grimoireOpened || 0) + 1;
       saveQuestState(this.state);
+      this.playGameSfx('hit');
       if (window.MatheduGame && typeof window.MatheduGame.unlockBadge === 'function') {
         window.MatheduGame.unlockBadge('min7014_explorer');
-        window.MatheduGame.addXP(15, '📐 민은기 선생님 시각 증명 비급서 탐구 (+보호막 100% 충전)');
+        window.MatheduGame.addXP(15, '📐 민은기 선생님 시각 증명 비급서 탐구 (+보호막 100% · 필살기 +50%)');
       }
       var hpEl = document.getElementById('questBattleShieldText');
       if (hpEl) hpEl.textContent = '100%';
+      this.renderConsoleHub();
       if (url) {
         window.open(url, '_blank', 'noopener');
       }
+    },
+
+    // 🎁 오늘의 수능 만점 일일 퀘스트 3종 완료 보상 황금 보물상자 열기
+    claimDailyTreasureChest: function() {
+      var dq = ensureDailyQuests(this.state.dailyQuests);
+      if (dq.chestClaimed) return;
+      if (dq.stepsCleared < 3 || dq.archiveSummoned < 1 || dq.grimoireOpened < 1) return;
+
+      dq.chestClaimed = true;
+      this.state.dailyQuests = dq;
+      this.state.csatScore = Math.min(100, (this.state.csatScore || 0) + 5);
+      this.state.shieldHp = 100;
+      this.state.ultimateGauge = 100;
+      saveQuestState(this.state);
+
+      this.playGameSfx('victory');
+      if (window.MatheduGame) {
+        window.MatheduGame.addXP(100, '🎁 오늘의 수능 만점 일일 퀘스트 3종 올클리어 황금 보물상자! (+수능 5점)');
+        if (typeof window.MatheduGame.fireConfetti === 'function') {
+          window.MatheduGame.fireConfetti();
+        }
+      }
+      this.renderConsoleHub();
+    },
+
+    // 🌟 [3D 보스 배틀 필살기 시스템: "기하학적 통찰의 일격 (Geometric Ultimate Strike)"]
+    castGeometricUltimate: function() {
+      var stg = this.activeStage;
+      if (!stg) return;
+      var curStep = stg.steps[this.activeStepIdx];
+      if (!curStep) return;
+      if ((this.state.ultimateGauge || 0) < 100) return;
+
+      this.state.ultimateGauge = 0;
+      saveQuestState(this.state);
+
+      // 3D 초신성 레이저 폭격 & 황금 파티클 폭발 & 승리 팡파르
+      this.battle3D.supernovaTimer = 34;
+      this.spawnRingShatterParticles('#fde047');
+      this.playGameSfx('victory');
+
+      // 5지선다 중 오답 2개 즉시 소거 (취소선 + 비활성화)
+      var ansIdx = parseInt(curStep.answer, 10);
+      var wrongIndices = [];
+      var totalOpts = (curStep.options || []).length;
+      for (var i = 1; i <= totalOpts; i++) {
+        if (i !== ansIdx) wrongIndices.push(i);
+      }
+      // 셔플 후 2개 선택
+      wrongIndices.sort(function() { return Math.random() - 0.5; });
+      var toEliminate = wrongIndices.slice(0, 2);
+
+      var btns = document.querySelectorAll('.quest-battle-opt-btn');
+      for (var b = 0; b < btns.length; b++) {
+        var btnIdx = b + 1;
+        if (toEliminate.indexOf(btnIdx) !== -1) {
+          btns[b].disabled = true;
+          btns[b].style.opacity = '0.38';
+          btns[b].style.textDecoration = 'line-through';
+          btns[b].style.background = '#f1f5f9';
+          btns[b].style.borderColor = '#cbd5e1';
+          btns[b].style.cursor = 'not-allowed';
+        }
+      }
+
+      var ultBtn = document.getElementById('btnCastGeometricUltimate');
+      if (ultBtn) {
+        ultBtn.disabled = true;
+        ultBtn.innerHTML = '🌟 기하 통찰의 일격 발동 완료! (오답 ' + toEliminate.join('번, ') + '번 소거됨)';
+        ultBtn.style.background = '#64748b';
+      }
+
+      var ultBanner = document.getElementById('questUltimateInsightBox');
+      if (ultBanner) {
+        ultBanner.style.display = 'block';
+        ultBanner.innerHTML =
+          '🌟 <b>[기하 통찰 필살기 발동!]</b> 초신성 레이저가 함정 선택지 <b>' + toEliminate.join('번, ') + '번</b>을 분쇄했습니다!<br>' +
+          '👩‍🏫 <b>mathteacher 결정적 단서:</b> ' + (curStep.exp || curStep.know);
+        typesetMath(ultBanner);
+      }
+    },
+
+    // =========================================================================
+    // 🚀 [60초 3D 스피드 디딤돌 블리츠 (60s 3D Speed Blitz Mini-Game)]
+    // =========================================================================
+    blitzState: {
+      active: false,
+      timeLeft: 60,
+      score: 0,
+      combo: 0,
+      qIdx: 0,
+      pool: [],
+      timerId: null,
+      animId: null,
+      warpTime: 0
+    },
+
+    startSpeedBlitzMode: function() {
+      var self = this;
+      this.playGameSfx('summon');
+      var shuffled = SPEED_BLITZ_QUESTIONS.slice().sort(function() { return Math.random() - 0.5; });
+      this.blitzState.active = true;
+      this.blitzState.timeLeft = 60;
+      this.blitzState.score = 0;
+      this.blitzState.combo = 0;
+      this.blitzState.qIdx = 0;
+      this.blitzState.pool = shuffled;
+
+      if (this.blitzState.timerId) clearInterval(this.blitzState.timerId);
+      this.renderSpeedBlitzModal();
+
+      this.blitzState.timerId = setInterval(function() {
+        if (!self.blitzState.active) return;
+        self.blitzState.timeLeft--;
+        var tEl = document.getElementById('questBlitzTimerText');
+        if (tEl) tEl.textContent = self.blitzState.timeLeft + '초';
+        if (self.blitzState.timeLeft <= 0) {
+          self.finishSpeedBlitzMode();
+        }
+      }, 1000);
+    },
+
+    initBlitz3DCanvas: function() {
+      var self = this;
+      if (this.blitzState.animId) cancelAnimationFrame(this.blitzState.animId);
+
+      function loopBlitz() {
+        var c = document.getElementById('questBlitz3DCanvas');
+        if (!c || !self.blitzState.active) return;
+        var ctx = c.getContext('2d');
+        var w = c.width, h = c.height;
+        var cx = w * 0.5, cy = h * 0.5;
+        self.blitzState.warpTime += 0.055 + Math.min(0.08, self.blitzState.combo * 0.01);
+        var wt = self.blitzState.warpTime;
+
+        ctx.fillStyle = '#040816';
+        ctx.fillRect(0, 0, w, h);
+
+        // 3D 하이퍼워프 광속 성운 라인
+        for (var i = 0; i < 42; i++) {
+          var ang = (i / 42) * Math.PI * 2 + wt * 0.15;
+          var r1 = ((wt * 60 + i * 19) % 160) + 12;
+          var r2 = r1 + 26 + self.blitzState.combo * 4;
+          ctx.strokeStyle = (self.blitzState.combo >= 3) ? 'rgba(251,191,36,0.75)' : 'rgba(56,189,248,0.65)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * (r1 * 0.45));
+          ctx.lineTo(cx + Math.cos(ang) * r2, cy + Math.sin(ang) * (r2 * 0.45));
+          ctx.stroke();
+        }
+
+        // 중앙 회전 황금 다면체 코어
+        var fov = 140;
+        ctx.strokeStyle = self.blitzState.combo >= 3 ? '#fbbf24' : '#34d399';
+        ctx.lineWidth = 1.8;
+        for (var ei = 0; ei < ICOSA_EDGES.length; ei++) {
+          var vA = ICOSA_VERTS[ICOSA_EDGES[ei][0]];
+          var vB = ICOSA_VERTS[ICOSA_EDGES[ei][1]];
+          var rA = rotate3D(vA[0] * 0.48, vA[1] * 0.48, vA[2] * 0.48, wt * 0.8, wt * 1.1, 0.2);
+          var rB = rotate3D(vB[0] * 0.48, vB[1] * 0.48, vB[2] * 0.48, wt * 0.8, wt * 1.1, 0.2);
+          var pA = project3D(rA, cx, cy, fov, 4.2, 1.0);
+          var pB = project3D(rB, cx, cy, fov, 4.2, 1.0);
+          ctx.beginPath();
+          ctx.moveTo(pA.x, pA.y);
+          ctx.lineTo(pB.x, pB.y);
+          ctx.stroke();
+        }
+
+        self.blitzState.animId = requestAnimationFrame(loopBlitz);
+      }
+      loopBlitz();
+    },
+
+    renderSpeedBlitzModal: function() {
+      var existing = document.getElementById('matheduQuestBlitzModal');
+      if (!existing) {
+        existing = document.createElement('div');
+        existing.id = 'matheduQuestBlitzModal';
+        existing.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(4,8,22,0.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:14px;overflow-y:auto';
+        document.body.appendChild(existing);
+      }
+
+      var bz = this.blitzState;
+      var q = bz.pool[bz.qIdx % bz.pool.length];
+
+      var optsHtml = q.options.map(function(opt, idx) {
+        var num = idx + 1;
+        return '<button type="button" onclick="window.MatheduQuest.submitBlitzOption(' + num + ')" ' +
+          'style="padding:11px 14px;border-radius:12px;border:1.5px solid #cbd5e1;background:#ffffff;color:#0f172a;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;text-align:left;transition:all .12s">' +
+          '<span style="width:26px;height:26px;border-radius:999px;background:#fef3c7;color:#b45309;font-size:12px;font-weight:900;display:inline-flex;align-items:center;justify-content:center">' + num + '</span>' +
+          '<span style="flex:1">' + opt + '</span>' +
+        '</button>';
+      }).join('');
+
+      existing.innerHTML =
+        '<div style="width:100%;max-width:660px;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 24px 52px rgba(0,0,0,0.65);border:2px solid #f59e0b">' +
+          '<div style="background:linear-gradient(135deg,#0f172a 0%,#7c2d12 100%);color:#ffffff;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+            '<div>' +
+              '<div style="font-size:11px;color:#fbbf24;font-weight:800">🚀 60초 3D 스피드 디딤돌 블리츠 · 하이퍼워프 공식 타격</div>' +
+              '<div style="font-size:16px;font-weight:900;margin-top:2px">⚡ [' + q.unit + '] 연속 격파 챌린지</div>' +
+            '</div>' +
+            '<button type="button" onclick="window.MatheduQuest.closeSpeedBlitzModal()" style="width:32px;height:32px;border-radius:999px;border:none;background:rgba(255,255,255,0.16);color:#ffffff;font-size:16px;font-weight:800;cursor:pointer">✕</button>' +
+          '</div>' +
+          '<div style="position:relative;background:#040816;border-bottom:1.5px solid #1e293b">' +
+            '<canvas id="questBlitz3DCanvas" width="640" height="115" style="width:100%;height:115px;display:block"></canvas>' +
+            '<div style="position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;font-size:12px;font-weight:900">' +
+              '<span style="padding:4px 12px;border-radius:999px;background:rgba(239,68,68,0.88);color:#ffffff">⏱️ 남은 시간: <b id="questBlitzTimerText">' + bz.timeLeft + '초</b></span>' +
+              '<span style="padding:4px 12px;border-radius:999px;background:rgba(15,23,42,0.85);color:#fbbf24;border:1px solid #fbbf24">🔥 ' + bz.combo + '콤보 · 🏆 격파 점수: ' + bz.score + '점</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="padding:18px 20px">' +
+            '<div style="font-size:15px;font-weight:800;color:#0f172a;line-height:1.7;margin-bottom:14px;padding:12px 14px;background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px">' +
+              q.stem +
+            '</div>' +
+            '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px">' +
+              optsHtml +
+            '</div>' +
+            '<div id="questBlitzFeedback" style="margin-top:12px;font-size:12.5px;font-weight:700;color:#0369a1;min-height:20px">💡 ' + q.hint + '</div>' +
+          '</div>' +
+        '</div>';
+
+      this.initBlitz3DCanvas();
+      typesetMath(existing);
+    },
+
+    submitBlitzOption: function(chosenIdx) {
+      var bz = this.blitzState;
+      if (!bz.active) return;
+      var q = bz.pool[bz.qIdx % bz.pool.length];
+      if (chosenIdx === q.answer) {
+        bz.combo++;
+        bz.score += 10 + bz.combo * 2;
+        this.state.combo = (this.state.combo || 0) + 1;
+        this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + 25);
+        this.state.dailyQuests = ensureDailyQuests(this.state.dailyQuests);
+        this.state.dailyQuests.stepsCleared = (this.state.dailyQuests.stepsCleared || 0) + 1;
+        saveQuestState(this.state);
+        this.playGameSfx('hit');
+        bz.qIdx++;
+        this.renderSpeedBlitzModal();
+      } else {
+        bz.combo = 0;
+        this.playGameSfx('shield');
+        var fb = document.getElementById('questBlitzFeedback');
+        if (fb) {
+          fb.style.color = '#b91c1c';
+          fb.innerHTML = '🛡️ 방어막 발동! 힌트를 확인하세요: ' + q.hint + ' (정답: ' + q.answer + '번)';
+          typesetMath(fb);
+        }
+      }
+    },
+
+    finishSpeedBlitzMode: function() {
+      var bz = this.blitzState;
+      bz.active = false;
+      if (bz.timerId) {
+        clearInterval(bz.timerId);
+        bz.timerId = null;
+      }
+      if (bz.animId) {
+        cancelAnimationFrame(bz.animId);
+        bz.animId = null;
+      }
+      this.playGameSfx('victory');
+
+      var bonusCsat = Math.min(8, Math.max(2, Math.round(bz.score / 25)));
+      this.state.csatScore = Math.min(100, (this.state.csatScore || 0) + bonusCsat);
+      if (bz.score > (this.state.blitzBestScore || 0)) {
+        this.state.blitzBestScore = bz.score;
+      }
+      saveQuestState(this.state);
+
+      if (window.MatheduGame) {
+        window.MatheduGame.addXP(Math.max(20, bz.score), '🚀 60초 3D 스피드 블리츠 완주! (+' + bonusCsat + '점)');
+        if (typeof window.MatheduGame.fireConfetti === 'function') {
+          window.MatheduGame.fireConfetti();
+        }
+      }
+
+      var existing = document.getElementById('matheduQuestBlitzModal');
+      if (existing) {
+        existing.innerHTML =
+          '<div style="width:100%;max-width:520px;background:#ffffff;border-radius:20px;padding:24px;text-align:center;box-shadow:0 24px 52px rgba(0,0,0,0.65);border:2px solid #fbbf24">' +
+            '<div style="font-size:40px;margin-bottom:8px">🚀🏆</div>' +
+            '<h3 style="margin:0 0 6px;font-size:20px;font-weight:900;color:#0f172a">60초 3D 스피드 디딤돌 블리츠 완료!</h3>' +
+            '<p style="margin:0 0 14px;font-size:13.5px;color:#475569">총 <b>' + bz.qIdx + '문항</b> 돌파 · 블리츠 점수 <b>' + bz.score + '점</b> · 수능 만점 게이지 <b>+' + bonusCsat + '점</b> 상승!</p>' +
+            '<div style="display:flex;gap:8px;justify-content:center">' +
+              '<button type="button" onclick="window.MatheduQuest.startSpeedBlitzMode()" style="padding:10px 18px;border-radius:12px;border:none;background:linear-gradient(135deg,#ea580c 0%,#d97706 100%);color:#ffffff;font-size:13px;font-weight:900;cursor:pointer">🔥 한 번 더 스피드 도전</button>' +
+              '<button type="button" onclick="window.MatheduQuest.closeSpeedBlitzModal()" style="padding:10px 18px;border-radius:12px;border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;font-size:13px;font-weight:800;cursor:pointer">월드맵으로 돌아가기</button>' +
+            '</div>' +
+          '</div>';
+      }
+      this.renderConsoleHub();
+    },
+
+    closeSpeedBlitzModal: function() {
+      this.blitzState.active = false;
+      if (this.blitzState.timerId) {
+        clearInterval(this.blitzState.timerId);
+        this.blitzState.timerId = null;
+      }
+      if (this.blitzState.animId) {
+        cancelAnimationFrame(this.blitzState.animId);
+        this.blitzState.animId = null;
+      }
+      var m = document.getElementById('matheduQuestBlitzModal');
+      if (m) m.remove();
+      this.renderConsoleHub();
     },
 
     renderConsoleHub: function() {
@@ -1880,6 +2406,8 @@
       if (!container) return;
 
       var st = this.state;
+      st.dailyQuests = ensureDailyQuests(st.dailyQuests);
+      var dq = st.dailyQuests;
       var activeW = this.getWorldById(st.activeWorldId);
       var pctScore = Math.min(100, Math.max(0, st.csatScore));
 
@@ -1922,7 +2450,7 @@
         return '<button type="button" onclick="window.MatheduQuest.summonMin7014Grimoire(\'' + ml.url + '\')" ' +
           'style="padding:6px 11px;border-radius:999px;border:1px solid #bae6fd;background:#f0f9ff;color:#0369a1;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px">' +
           '<span>🔮 ' + ml.title + '</span>' +
-          '<span style="font-size:10px;background:#0284c7;color:#fff;padding:1px 6px;border-radius:999px">+보호막 충전</span>' +
+          '<span style="font-size:10px;background:#0284c7;color:#fff;padding:1px 6px;border-radius:999px">+보호막·필살기 충전</span>' +
         '</button>';
       }).join('');
 
@@ -1935,6 +2463,16 @@
       }).join('');
 
       var formulaBanner = this.getWorldMonumentFormulaDesc(activeW.id);
+      var isFever = (st.combo || 0) >= 3;
+      var soundOn = (st.soundEnabled !== false);
+      var wrongCount = (window.MatheduGame && typeof window.MatheduGame.getWrongAnswers === 'function')
+        ? window.MatheduGame.getWrongAnswers().length
+        : 0;
+
+      var q1Done = dq.stepsCleared >= 3;
+      var q2Done = dq.archiveSummoned >= 1;
+      var q3Done = dq.grimoireOpened >= 1;
+      var allDailyDone = q1Done && q2Done && q3Done;
 
       container.innerHTML =
         '<div style="border-radius:20px;background:linear-gradient(180deg,#070d1e 0%,#111c35 100%);padding:18px;color:#ffffff;box-shadow:0 16px 36px rgba(15,23,42,0.28);border:1.5px solid rgba(56,189,248,0.28)">' +
@@ -1942,7 +2480,7 @@
           '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">' +
             '<div>' +
               '<div style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:rgba(56,189,248,0.18);border:1px solid rgba(56,189,248,0.45);color:#38bdf8;font-size:11px;font-weight:800;margin-bottom:6px">' +
-                '<span>🌐 3D 인터랙티브 수학 홀로그램 엔진 · mathteacher × 16,548문항 × min7014</span>' +
+                '<span>🌐 3D 인터랙티브 수학 홀로그램 엔진 · mathteacher × gamemaker × 16,548문항 × min7014</span>' +
               '</div>' +
               '<h2 style="margin:0;font-size:20px;font-weight:900;letter-spacing:-0.02em;color:#ffffff">👑 수능 수학 100점 만점 3D 원정대</h2>' +
               '<p style="margin:4px 0 0;font-size:12.5px;color:#cbd5e1">3D 입체 기하 모뉴먼트를 360° 회전하며 원리를 통찰하고, 3중 수식 결계를 파쇄해 수능 100점 만점에 도달하세요!</p>' +
@@ -1956,19 +2494,39 @@
             '</div>' +
           '</div>' +
 
+          '<!-- 📜 오늘의 수능 만점 일일 퀘스트 3종 & 🎁 황금 보물상자 바 -->' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;padding:10px 14px;border-radius:14px;background:rgba(15,23,42,0.75);border:1px solid rgba(251,191,36,0.35)">' +
+            '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;font-weight:800">' +
+              '<span style="color:#fbbf24">📜 오늘의 일일 퀘스트:</span>' +
+              '<span style="padding:3px 9px;border-radius:999px;background:' + (q1Done ? 'rgba(16,185,129,0.25)' : 'rgba(255,255,255,0.08)') + ';color:' + (q1Done ? '#34d399' : '#cbd5e1') + '">① 디딤돌 단계 돌파 (' + Math.min(3, dq.stepsCleared) + '/3) ' + (q1Done ? '✅' : '') + '</span>' +
+              '<span style="padding:3px 9px;border-radius:999px;background:' + (q2Done ? 'rgba(16,185,129,0.25)' : 'rgba(255,255,255,0.08)') + ';color:' + (q2Done ? '#34d399' : '#cbd5e1') + '">② 기출/약점 3D 보스 소환 (' + Math.min(1, dq.archiveSummoned) + '/1) ' + (q2Done ? '✅' : '') + '</span>' +
+              '<span style="padding:3px 9px;border-radius:999px;background:' + (q3Done ? 'rgba(16,185,129,0.25)' : 'rgba(255,255,255,0.08)') + ';color:' + (q3Done ? '#34d399' : '#cbd5e1') + '">③ min7014 비급서 탐구 (' + Math.min(1, dq.grimoireOpened) + '/1) ' + (q3Done ? '✅' : '') + '</span>' +
+            '</div>' +
+            (dq.chestClaimed
+              ? '<span style="font-size:11.5px;font-weight:800;color:#fde047">🎁 오늘의 황금 보물상자 수령 완료!</span>'
+              : '<button type="button" onclick="window.MatheduQuest.claimDailyTreasureChest()" ' +
+                  (allDailyDone ? '' : 'disabled ') +
+                  'style="padding:6px 12px;border-radius:999px;border:1px solid ' + (allDailyDone ? '#fde047' : 'rgba(255,255,255,0.2)') + ';background:' + (allDailyDone ? 'linear-gradient(135deg,#f59e0b 0%,#d97706 100%)' : 'rgba(255,255,255,0.08)') + ';color:' + (allDailyDone ? '#ffffff' : '#94a3b8') + ';font-size:11.5px;font-weight:900;cursor:' + (allDailyDone ? 'pointer' : 'not-allowed') + '">' +
+                  '🎁 황금 보물상자 열기 (+수능 5점 · +100 XP)' +
+                '</button>') +
+          '</div>' +
+
           '<!-- 6대 대륙 월드맵 탭 -->' +
           '<div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:10px">' +
             worldTabsHtml +
           '</div>' +
 
           '<!-- 🌐 실시간 3D 수학 기하 홀로그램 뷰포트 (360° 드래그 회전 & 줌 & X-Ray 투시) -->' +
-          '<div style="position:relative;border-radius:16px;overflow:hidden;border:1.5px solid rgba(56,189,248,0.4);margin-bottom:14px;background:#040914">' +
+          '<div style="position:relative;border-radius:16px;overflow:hidden;border:1.5px solid ' + (isFever ? '#fbbf24' : 'rgba(56,189,248,0.4)') + ';margin-bottom:14px;background:#040914">' +
             '<canvas id="matheduQuest3DCanvas" width="720" height="270" style="width:100%;height:250px;display:block;cursor:grab"></canvas>' +
-            '<!-- 좌상단 3D 수식 구조물 배지 -->' +
+            '<!-- 좌상단 3D 수식 구조물 배지 & FEVER RUSH 배지 -->' +
             '<div style="position:absolute;top:10px;left:12px;right:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;pointer-events:none">' +
-              '<span style="padding:4px 10px;border-radius:999px;background:rgba(15,23,42,0.82);border:1px solid rgba(56,189,248,0.45);color:#e0f2fe;font-size:11.5px;font-weight:800;backdrop-filter:blur(4px)">' +
-                formulaBanner +
-              '</span>' +
+              '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
+                '<span style="padding:4px 10px;border-radius:999px;background:rgba(15,23,42,0.82);border:1px solid rgba(56,189,248,0.45);color:#e0f2fe;font-size:11.5px;font-weight:800;backdrop-filter:blur(4px)">' +
+                  formulaBanner +
+                '</span>' +
+                (isFever ? '<span style="padding:4px 10px;border-radius:999px;background:linear-gradient(135deg,#f59e0b 0%,#ea580c 100%);border:1px solid #fde047;color:#ffffff;font-size:11px;font-weight:900;box-shadow:0 0 14px rgba(251,191,36,0.65)">🔥 FEVER RUSH (' + st.combo + '연속 콤보 가속 중! 보상 XP 1.5배)</span>' : '') +
+              '</div>' +
               '<span style="padding:3px 9px;border-radius:999px;background:rgba(15,23,42,0.75);color:#93c5fd;font-size:10.5px;font-weight:700">' +
                 '🖱️ 드래그: 360° 회전 · 휠: 줌' +
               '</span>' +
@@ -1983,6 +2541,10 @@
                 '<button type="button" id="btnToggle3DGalaxy" onclick="window.MatheduQuest.toggleGalaxyMode()" ' +
                   'style="padding:5px 11px;border-radius:999px;border:1px solid rgba(56,189,248,0.5);background:rgba(14,165,233,0.25);color:#ffffff;font-size:11px;font-weight:800;cursor:pointer;backdrop-filter:blur(4px)">' +
                   '🌌 6대 대륙 3D 행성계 전체 성좌 보기' +
+                '</button>' +
+                '<button type="button" id="btnToggle3DSound" onclick="window.MatheduQuest.toggleSound()" ' +
+                  'style="padding:5px 11px;border-radius:999px;border:1px solid ' + (soundOn ? '#fbbf24' : 'rgba(255,255,255,0.2)') + ';background:' + (soundOn ? 'rgba(251,191,36,0.25)' : 'rgba(255,255,255,0.1)') + ';color:#ffffff;font-size:11px;font-weight:800;cursor:pointer;backdrop-filter:blur(4px)">' +
+                  (soundOn ? '🔊 효과음 ON' : '🔇 효과음 OFF') +
                 '</button>' +
               '</div>' +
               '<button type="button" onclick="window.MatheduQuest.resetCamera3D()" ' +
@@ -2005,10 +2567,20 @@
                 '<div style="font-size:16px;font-weight:900;color:#0f172a">' + activeW.icon + ' ' + activeW.name + '</div>' +
                 '<div style="font-size:12px;color:#475569;font-weight:600;margin-top:2px">' + activeW.sub + '</div>' +
               '</div>' +
-              '<button type="button" id="btnSummonArchiveBoss" onclick="window.MatheduQuest.summonRandomArchiveProblem(\'' + activeW.id + '\')" ' +
-                'style="padding:9px 14px;border-radius:12px;border:1.5px solid #7c3aed;background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);color:#ffffff;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(124,58,237,0.25)">' +
-                '🎲 이 대륙의 3D 기출 보스 무작위 소환 (16,548문항 DB)' +
-              '</button>' +
+              '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
+                '<button type="button" id="btnStartSpeedBlitz" onclick="window.MatheduQuest.startSpeedBlitzMode()" ' +
+                  'style="padding:9px 14px;border-radius:12px;border:1.5px solid #ea580c;background:linear-gradient(135deg,#ea580c 0%,#d97706 100%);color:#ffffff;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(234,88,12,0.28)">' +
+                  '🚀 60초 3D 스피드 공식 블리츠' + (st.blitzBestScore ? ' (최고 ' + st.blitzBestScore + '점)' : '') +
+                '</button>' +
+                '<button type="button" id="btnSummonArchiveBoss" onclick="window.MatheduQuest.summonRandomArchiveProblem(\'' + activeW.id + '\')" ' +
+                  'style="padding:9px 14px;border-radius:12px;border:1.5px solid #7c3aed;background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);color:#ffffff;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(124,58,237,0.25)">' +
+                  '🎲 이 대륙의 3D 기출 보스 무작위 소환 (16,548문항 DB)' +
+                '</button>' +
+                '<button type="button" id="btnSummonRevengeBoss" onclick="window.MatheduQuest.summonWeaknessRevengeBoss(\'' + activeW.id + '\')" ' +
+                  'style="padding:9px 14px;border-radius:12px;border:1.5px solid #e11d48;background:linear-gradient(135deg,#e11d48 0%,#be123c 100%);color:#ffffff;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(225,29,72,0.25)">' +
+                  '⚡ 약점 3D 리벤지 레이드' + (wrongCount > 0 ? ' (' + wrongCount + '문항 대기)' : '') +
+                '</button>' +
+              '</div>' +
             '</div>' +
 
             '<!-- mathteacher 에이전트 수학 조언 브리핑 -->' +
@@ -2048,6 +2620,9 @@
       var totalSteps = stg.steps.length;
       var curStep = stg.steps[this.activeStepIdx] || stg.steps[0];
       var bossHpPct = Math.max(0, Math.round(((totalSteps - this.activeStepIdx) / totalSteps) * 100));
+      var isFever = (this.state.combo || 0) >= 3;
+      var ultPct = Math.min(100, Math.max(0, this.state.ultimateGauge || 0));
+      var ultReady = ultPct >= 100;
 
       var symHtml = (stg.symbols || []).map(function(s) {
         return '<div style="padding:6px 10px;background:#ffffff;border:1px solid #bae6fd;border-radius:8px;font-size:12px;color:#0f172a">' +
@@ -2065,7 +2640,7 @@
       }).join('');
 
       existing.innerHTML =
-        '<div style="width:100%;max-width:700px;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 24px 52px rgba(0,0,0,0.55);border:2px solid #38bdf8;max-height:94vh;display:flex;flex-direction:column">' +
+        '<div style="width:100%;max-width:700px;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 24px 52px rgba(0,0,0,0.55);border:2px solid ' + (isFever ? '#fbbf24' : '#38bdf8') + ';max-height:94vh;display:flex;flex-direction:column">' +
           '<!-- 전투 상단 헤더 -->' +
           '<div style="background:linear-gradient(135deg,#070d1e 0%,#1e3a8a 100%);color:#ffffff;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px">' +
             '<div>' +
@@ -2081,9 +2656,9 @@
           '<!-- ⚔️ 실시간 3D 보스 코어 & 3중 짐벌 수식 결계 링 뷰포트 -->' +
           '<div style="position:relative;background:#020617;border-bottom:1.5px solid #1e293b">' +
             '<canvas id="questBattle3DCanvas" width="680" height="150" style="width:100%;height:145px;display:block"></canvas>' +
-            '<div style="position:absolute;top:8px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;font-size:11.5px;font-weight:800">' +
+            '<div style="position:absolute;top:8px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;pointer-events:none;font-size:11.5px;font-weight:800">' +
               '<span style="padding:3px 10px;border-radius:999px;background:rgba(15,23,42,0.8);color:#f87171;border:1px solid rgba(248,113,113,0.4)">👾 3D 보스 결계 장갑: ' + bossHpPct + '% (남은 결계 ' + (totalSteps - this.activeStepIdx) + '겹)</span>' +
-              '<span style="padding:3px 10px;border-radius:999px;background:rgba(15,23,42,0.8);color:#38bdf8;border:1px solid rgba(56,189,248,0.4)">🛡️ 디딤돌 보호막: <b id="questBattleShieldText">' + this.state.shieldHp + '%</b> · 🔥 ' + this.state.combo + '콤보</span>' +
+              '<span style="padding:3px 10px;border-radius:999px;background:' + (isFever ? 'linear-gradient(135deg,#f59e0b 0%,#ea580c 100%)' : 'rgba(15,23,42,0.8)') + ';color:' + (isFever ? '#ffffff' : '#38bdf8') + ';border:1px solid ' + (isFever ? '#fde047' : 'rgba(56,189,248,0.4)') + '">🛡️ 디딤돌 보호막: <b id="questBattleShieldText">' + this.state.shieldHp + '%</b> · 🔥 ' + this.state.combo + '콤보' + (isFever ? ' (FEVER RUSH · XP 1.5배!)' : '') + '</span>' +
             '</div>' +
           '</div>' +
 
@@ -2100,6 +2675,17 @@
               '<div style="font-size:13px;font-weight:900;color:#006398;margin-bottom:4px">' + curStep.label + '</div>' +
               '<div style="font-size:12.5px;color:#334155;line-height:1.6">💡 <b>[mathteacher 디딤돌 힌트]</b> ' + curStep.know + '</div>' +
             '</div>' +
+
+            '<!-- 🌟 기하 통찰 필살기 발동 바 (오답 2개 제거 & 수식 단서) -->' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding:8px 12px;border-radius:12px;background:#fffbeb;border:1px solid #fde68a">' +
+              '<div style="font-size:12px;font-weight:800;color:#92400e">⚡ 기하 통찰 필살기 게이지: <b>' + ultPct + '%</b></div>' +
+              '<button type="button" id="btnCastGeometricUltimate" onclick="window.MatheduQuest.castGeometricUltimate()" ' +
+                (ultReady ? '' : 'disabled ') +
+                'style="padding:6px 12px;border-radius:999px;border:none;background:' + (ultReady ? 'linear-gradient(135deg,#f59e0b 0%,#ea580c 100%)' : '#cbd5e1') + ';color:#ffffff;font-size:11.5px;font-weight:900;cursor:' + (ultReady ? 'pointer' : 'not-allowed') + ';box-shadow:' + (ultReady ? '0 2px 10px rgba(245,158,11,0.4)' : 'none') + '">' +
+                (ultReady ? '🌟 기하 통찰 필살기 발동 (오답 2개 즉시 소거!)' : '⚡ 필살기 충전 중 (' + ultPct + '% / 단계 통과 시 +35%)') +
+              '</button>' +
+            '</div>' +
+            '<div id="questUltimateInsightBox" style="display:none;margin-bottom:10px;padding:10px 14px;border-radius:10px;background:#fef3c7;border:1.5px solid #f59e0b;font-size:12.5px;color:#78350f;line-height:1.6"></div>' +
 
             '<!-- 발문 -->' +
             '<div style="font-size:14.5px;font-weight:700;color:#0f172a;line-height:1.75;margin-bottom:12px;padding:11px 14px;background:#ffffff;border:1.5px solid #e2e8f0;border-radius:12px">' +
@@ -2134,15 +2720,23 @@
       if (isCorrect) {
         this.state.combo = (this.state.combo || 0) + 1;
         this.state.shieldHp = Math.min(100, (this.state.shieldHp || 80) + 15);
+        this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + 35);
+        this.state.dailyQuests = ensureDailyQuests(this.state.dailyQuests);
+        this.state.dailyQuests.stepsCleared = (this.state.dailyQuests.stepsCleared || 0) + 1;
         saveQuestState(this.state);
+
+        this.playGameSfx('hit');
 
         // 3D 결계 파쇄 파티클 폭발 & 레이저 빔 발동!
         var ringColors = ['#38bdf8', '#fbbf24', '#f43f5e'];
         this.spawnRingShatterParticles(ringColors[this.activeStepIdx % 3]);
 
+        var isFever = this.state.combo >= 3;
+        var stepXp = isFever ? 23 : 15;
+
         if (window.MatheduGame) {
           window.MatheduGame.recordActivity();
-          window.MatheduGame.addXP(15, curStep.label + ' 3D 결계 파쇄!');
+          window.MatheduGame.addXP(stepXp, curStep.label + ' 3D 결계 파쇄!' + (isFever ? ' (🔥 FEVER 1.5x)' : ''));
           window.MatheduGame.unlockBadge('first_step');
         }
 
@@ -2150,23 +2744,27 @@
         fb.style.background = '#f0fdf4';
         fb.style.border = '1.5px solid #22c55e';
         fb.innerHTML =
-          '<div style="font-size:14px;font-weight:900;color:#15803d;margin-bottom:6px">💥 3D 수식 결계 파쇄 성공! (' + this.state.combo + '연속 콤보 · 디딤돌 보호막 +15% 회복)</div>' +
+          '<div style="font-size:14px;font-weight:900;color:#15803d;margin-bottom:6px">💥 3D 수식 결계 파쇄 성공! (' + this.state.combo + '연속 콤보' + (isFever ? ' · 🔥 FEVER RUSH XP 1.5배!' : '') + ' · 보호막 +15% · 필살기 +35%)</div>' +
           '<div style="font-size:13px;color:#1e293b;line-height:1.65;margin-bottom:12px">' + curStep.exp + '</div>' +
           (isLastStep
             ? '<button type="button" onclick="window.MatheduQuest.completeStageVictory()" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:#ffffff;font-size:14px;font-weight:900;cursor:pointer">🎉 3D 보스 코어 완전 격파! 수능 점수 +' + stg.scoreReward + '점 획득하기 ➔</button>'
             : '<button type="button" onclick="window.MatheduQuest.nextBattleStep()" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#006398 0%,#2563eb 100%);color:#ffffff;font-size:14px;font-weight:900;cursor:pointer">다음 3D 결계 링 공략으로 진격 (' + (this.activeStepIdx + 2) + '/' + stg.steps.length + ') ➔</button>');
       } else {
         this.state.combo = 0;
+        this.state.ultimateGauge = Math.min(100, (this.state.ultimateGauge || 0) + 20);
         this.battle3D.shieldFlash = 25;
         this.battle3D.shake = 6;
         saveQuestState(this.state);
+
+        this.playGameSfx('shield');
+
         if (window.MatheduGame && typeof window.MatheduGame.recordWrongAnswer === 'function') {
           window.MatheduGame.recordWrongAnswer(stg.slug, this.activeStepIdx + 1, stg.bossName);
         }
         fb.style.background = '#fef2f2';
         fb.style.border = '1.5px solid #ef4444';
         fb.innerHTML =
-          '<div style="font-size:14px;font-weight:900;color:#b91c1c;margin-bottom:6px">🛡️ [3D 육각 허니컴 디딤돌 방어막 발동!] 충격을 흡수하고 힌트로 즉시 재도전합니다!</div>' +
+          '<div style="font-size:14px;font-weight:900;color:#b91c1c;margin-bottom:6px">🛡️ [3D 육각 허니컴 디딤돌 방어막 발동!] 충격을 흡수하고 필살기 게이지를 +20% 충전했습니다!</div>' +
           '<div style="font-size:13px;color:#1e293b;line-height:1.65">' +
             '<b>👩‍🏫 mathteacher 핵심 코칭:</b> ' + curStep.exp + '<br>' +
             '<span style="color:#0369a1;font-weight:700">위 해설의 정답 번호(' + curStep.answer + '번)를 다시 눌러 보스의 3D 결계를 파쇄하세요!</span>' +
@@ -2184,6 +2782,8 @@
     completeStageVictory: function() {
       var stg = this.activeStage;
       if (!stg) return;
+
+      this.playGameSfx('victory');
 
       if (this.state.clearedStages.indexOf(stg.id) === -1) {
         this.state.clearedStages.push(stg.id);
@@ -2205,8 +2805,13 @@
       saveQuestState(this.state);
 
       if (window.MatheduGame) {
-        window.MatheduGame.addXP(stg.xpReward || 50, '🏆 ' + stg.bossName + ' 3D 완전 정복!');
+        var isFever = (this.state.combo || 0) >= 3;
+        var finalXp = Math.round((stg.xpReward || 50) * (isFever ? 1.5 : 1.0));
+        window.MatheduGame.addXP(finalXp, '🏆 ' + stg.bossName + ' 3D 완전 정복!' + (isFever ? ' (🔥 FEVER 1.5x)' : ''));
         window.MatheduGame.unlockBadge('full_clear');
+        if (typeof window.MatheduGame.clearWrongAnswer === 'function' && stg.slug) {
+          window.MatheduGame.clearWrongAnswer(stg.slug);
+        }
         if (typeof window.MatheduGame.fireConfetti === 'function') {
           window.MatheduGame.fireConfetti();
         }
