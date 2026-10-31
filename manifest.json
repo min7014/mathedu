@@ -1,31 +1,94 @@
 {
-  "name": "mathedu · 수학자료실 & 인터랙티브 디딤돌 퀴즈",
-  "short_name": "mathedu 수학",
-  "description": "3,400+ 시각적 수학 증명(GeoGebra·PDF)과 초등부터 수능까지 이어지는 인터랙티브 디딤돌 퀴즈 · 100% 영구 무료 열린 수학교육",
-  "start_url": "/mathedu/",
+  "id": "/mathedu/",
+  "name": "수학의 성전 3D : 16,548 디딤돌 수학 퀘스트 (mathedu)",
+  "short_name": "수학의 성전 3D",
+  "description": "초등 직관부터 수능 수학 100점까지! 16,548문항 무장벽 디딤돌 사다리, 3,400+ 동적 기하 증명, 아르키메데스의 사색과 3D 수학 보스 레이드 RPG",
+  "start_url": "/mathedu/game.html?source=playstore",
   "scope": "/mathedu/",
   "display": "standalone",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
   "background_color": "#050811",
   "theme_color": "#050811",
   "orientation": "any",
   "lang": "ko",
-  "categories": ["education", "mathematics"],
+  "dir": "ltr",
+  "categories": ["games", "education", "educational"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "assets/favicon.png",
       "sizes": "32x32",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "assets/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "assets/logo_original.png",
+      "src": "assets/app_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/app_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/app_icon_512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/app_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/play_store/phone_screenshot_1_1080x1920.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "3D 수학 보스 레이드 & 아르키메데스의 사색 결계"
+    },
+    {
+      "src": "assets/play_store/phone_screenshot_2_1080x1920.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "초등 눈높이 5~8단계 미세 디딤돌 & 시각적 SVG 도형"
+    },
+    {
+      "src": "assets/play_store/tablet_screenshot_1_1920x1080.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "태블릿 대화면 3D 수학의 성전 & 16,548문항 아카이브"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "⚔️ 3D 수학 보스 레이드 시작",
+      "short_name": "3D 보스전",
+      "description": "3D 수학의 성전 월드맵과 보스 배틀 아레나로 즉시 입장합니다.",
+      "url": "/mathedu/game.html?mode=raid",
+      "icons": [{ "src": "assets/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "📚 16,548문항 디딤돌 아카이브",
+      "short_name": "전체 문제집",
+      "description": "초등·중등·고등·수능 16,548문항 디딤돌 퀴즈 탐색기로 이동합니다.",
+      "url": "/mathedu/index.html",
+      "icons": [{ "src": "assets/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }

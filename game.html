@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>수학의 성전 3D : 16,548 디딤돌 수학 퀘스트 · mathedu</title>
+<meta name="description" content="초등 직관부터 수능 수학 100점까지! 16,548문항 무장벽 디딤돌 사다리, 3,400+ 동적 기하 증명, 아르키메데스의 사색과 3D 수학 보스 레이드 RPG">
+<meta name="theme-color" content="#050811">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="canonical" href="https://min7014.github.io/mathedu/game.html">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
+<script src="mathedu-auth.js?v=20261101_gp1"></script>
+<script src="mathedu-gamification.js?v=20261101_gp1"></script>
+<script src="mathedu-quest-game.js?v=20261101_gp1"></script>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% 0%, #111b38 0%, #050811 72%);
+    color: #f8fafc;
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+  .gp-app-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 16px;
+    background: rgba(5, 8, 17, 0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.24);
+  }
+  .gp-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+  }
+  .gp-brand img {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+  }
+  .gp-brand-title {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #f8fafc;
+  }
+  .gp-brand-sub {
+    font-size: 10.5px;
+    color: #7dd3fc;
+    font-weight: 700;
+  }
+  .gp-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .gp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(30, 41, 59, 0.78);
+    color: #e2e8f0;
+    transition: all 0.18s ease;
+  }
+  .gp-btn-primary {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-color: #fde68a;
+    color: #090d16;
+  }
+  .gp-main-shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 12px 14px 48px;
+  }
+  .gp-footer {
+    text-align: center;
+    padding: 20px 14px 36px;
+    font-size: 11.5px;
+    color: #64748b;
+  }
+  .gp-footer a {
+    color: #94a3b8;
+    text-decoration: underline;
+    margin: 0 6px;
+  }
+</style>
+</head>
+<body>
+  <header class="gp-app-topbar">
+    <a href="game.html" class="gp-brand">
+      <img src="assets/app_icon_192.png" alt="수학의 성전 3D 아이콘">
+      <div>
+        <div class="gp-brand-title">수학의 성전 3D</div>
+        <div class="gp-brand-sub">16,548 디딤돌 퀘스트 &amp; 동적 기하 RPG</div>
+      </div>
+    </a>
+    <div class="gp-nav-actions">
+      <button type="button" id="btnInstallPwaApp" class="gp-btn gp-btn-primary" style="display:none;">📲 앱 설치</button>
+      <a href="index.html" class="gp-btn">📚 16,548문항 전체 서고</a>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="gp-btn">📐 3,400+ 시각 증명</a>
+    </div>
+  </header>
+
+  <main class="gp-main-shell">
+    <!-- 3D Math Quest Game Console mounts directly inside #quizExplorerSection / #matheduQuestConsoleRoot -->
+    <div id="quizExplorerSection"></div>
+  </main>
+
+  <footer class="gp-footer">
+    <div>© 2026 민은기 선생님의 수학자료실 (mathedu) · 학생·교사 100% 무료 열린 수학교육</div>
+    <div style="margin-top:6px;">
+      <a href="privacy.html">개인정보처리방침 (Privacy Policy)</a> |
+      <a href="index.html">전체 단원 문제은행</a> |
+      <a href="create.html">교사용 출제 스튜디오</a>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // 1. Register Official Service Worker for Google Play TWA & Offline PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      });
+    }
+
+    // 2. Android Hardware Back-Button Guard (prevents accidental app exit when closing sub-modals)
+    try {
+      history.pushState({ page: 'mathedu_game_root' }, '', location.href);
+      window.addEventListener('popstate', function () {
+        var scratch = document.getElementById('questScratchpadOverlay');
+        if (scratch && scratch.style.display !== 'none') {
+          scratch.style.display = 'none';
+          history.pushState({ page: 'mathedu_game_root' }, '', location.href);
+          return;
+        }
+        var modals = document.querySelectorAll('.mathedu-ad-modal-backdrop, .quest-submodal-backdrop');
+        if (modals && modals.length > 0) {
+          modals[modals.length - 1].remove();
+          history.pushState({ page: 'mathedu_game_root' }, '', location.href);
+        }
+      });
+    } catch (e) {}
+
+    // 3. Native Install Prompt Hook
+    var deferredPrompt = null;
+    var installBtn = document.getElementById('btnInstallPwaApp');
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (installBtn) installBtn.style.display = 'inline-flex';
+    });
+    if (installBtn) {
+      installBtn.addEventListener('click', function () {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.finally(function () {
+          deferredPrompt = null;
+          installBtn.style.display = 'none';
+        });
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

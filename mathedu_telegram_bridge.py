@@ -36,6 +36,8 @@ ROOT_DIR = Path(__file__).resolve().parent
 ENV_FILE = ROOT_DIR / ".env.telegram"
 OFFSET_FILE = ROOT_DIR / ".agents" / "telegram_offset.json"
 INBOX_FILE = ROOT_DIR / ".agents" / "telegram_inbox.jsonl"
+HISTORY_FILE = ROOT_DIR / ".agents" / "telegram_history.json"
+PID_FILE = ROOT_DIR / ".agents" / "telegram_daemon.pid"
 
 
 def load_env_config() -> dict:
@@ -132,7 +134,7 @@ def run_shell(cmd: list[str], timeout: int = 180) -> str:
         return f"❌ 명령 실행 오류: {e}"
 
 
-def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec: int = 3600) -> int:
+def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec: int = 604800) -> int:
     """
     현재 열려 있는 Antigravity 대화 세션과 1:1로 연동하기 위한 단일 수신 리스너.
     메시지가 도착하면 즉시 콘솔에 출력하고 종료(code 0)하여 Antigravity의 Reactive Wakeup을 트리거합니다.
@@ -165,6 +167,27 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                     continue
 
                 save_offset_state(offset, allowed_chat_id)
+                collected_texts = [text]
+                # 긴 메시지가 여러 조각으로 나뉘어 도착하는 경우(1.2초 내 후속 청크)까지 한 번에 병합 수신
+                time.sleep(1.2)
+                try:
+                    more = tg_api(token, "getUpdates", {"offset": offset, "timeout": 1}, timeout=5)
+                    for m_upd in more.get("result", []):
+                        offset = m_upd["update_id"] + 1
+                        m_msg = m_upd.get("message") or {}
+                        m_chat = m_msg.get("chat") or {}
+                        if str(m_chat.get("id", "")) == str(allowed_chat_id):
+                            m_text = (m_msg.get("text") or "").strip()
+                            if m_text:
+                                collected_texts.append(m_text)
+                    save_offset_state(offset, allowed_chat_id)
+                except Exception:
+                    pass
+
+                full_text = "\n".join(collected_texts)
+                hist = load_history()
+                hist.append({"role": "user", "text": full_text, "ts": datetime.datetime.now().isoformat()})
+                save_history(hist)
                 send_msg(token, chat_id, "🤖 [Antigravity] 메시지를 수신했습니다. 생각하고 작업을 수행합니다...")
                 print("======================================================================")
                 print("📩 [TELEGRAM_INCOMING_MESSAGE]")
@@ -172,7 +195,7 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                 print(f"• 사용자: {chat.get('username') or chat.get('first_name') or 'User'}")
                 print(f"• 시각: {datetime.datetime.now().isoformat()}")
                 print("• 내용:")
-                print(text)
+                print(full_text)
                 print("======================================================================")
                 return 0
         except KeyboardInterrupt:
@@ -183,96 +206,155 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
     return 0
 
 
+def load_history() -> list[dict]:
+    if HISTORY_FILE.exists():
+        try:
+            data = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+            if isinstance(data, list):
+                return data[-100:]
+        except Exception:
+            pass
+    return []
+
+
+def save_history(history: list[dict]) -> None:
+    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    HISTORY_FILE.write_text(
+        json.dumps(history[-100:], ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+def run_agy_prompt(user_text: str) -> str:
+    history = load_history()
+    hist_lines = []
+    for item in history[-8:]:
+        role = "선생님(Telegram)" if item.get("role") == "user" else "Antigravity"
+        hist_lines.append(f"[{role}]: {item.get('text', '')}")
+    hist_block = "\n".join(hist_lines) if hist_lines else "(첫 대화)"
+
+    prompt = (
+        "[텔레그램 전용 독립 백그라운드 응답 모드]\n"
+        "당신은 민은기 선생님(min7014)의 전담 수석 비서 Antigravity입니다.\n"
+        "현재 선생님이 스마트폰 텔레그램(@anti7014_bot)으로 메시지를 보내셨습니다.\n"
+        "주의사항:\n"
+        "1. 이 응답의 표준 출력(stdout) 자체가 텔레그램 데몬에 의해 자동으로 선생님의 텔레그램으로 전송됩니다.\n"
+        "2. 따라서 절대 `mathedu_telegram_bridge.py --reply`나 `--listen-once` 명령을 직접 실행하지 마십시오.\n"
+        "3. GEMINI.md의 원칙(수학교육과 비수학 영역의 분리, 자율 실행 등)을 철저히 준수하되, 선생님의 질문이나 지시에 대해 모바일 텔레그램 화면에서 읽기 편하도록 명확하고 친절한 한국어로 바로 답변 텍스트만 출력하십시오.\n\n"
+        f"[최근 텔레그램 대화 맥락]\n{hist_block}\n\n"
+        f"[선생님의 새 텔레그램 메시지]\n{user_text}"
+    )
+
+    try:
+        proc = subprocess.run(
+            ["agy", "-p", prompt, "--dangerously-skip-permissions"],
+            cwd=str(ROOT_DIR),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=600,
+        )
+        reply = (proc.stdout or "").strip()
+        if not reply:
+            reply = "✅ 요청하신 작업을 완료했습니다."
+        history.append({"role": "user", "text": user_text, "ts": datetime.datetime.now().isoformat()})
+        history.append({"role": "assistant", "text": reply, "ts": datetime.datetime.now().isoformat()})
+        save_history(history)
+        return reply
+    except Exception as e:
+        return f"⚠️ 처리 중 오류가 발생했습니다: {e}"
+
+
 async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
     """
-    google.antigravity Python SDK의 Agent 세션을 유지하며 텔레그램으로 연속 대화·지시를 수행합니다.
+    독립 백그라운드 프로세스에서 상시 동작하며, 현재 열려 있는 대화창에 일절 로그나 툴 호출을 표시하지 않고
+    텔레그램 메시지를 수신·처리·응답합니다.
     """
-    from google.antigravity import Agent, CapabilitiesConfig, LocalAgentConfig  # type: ignore
-
-    config = LocalAgentConfig(
-        system_instructions=(
-            "당신은 사용자의 PC(C:\\Users\\min\\Desktop\\mathedu)에서 동작하는 Antigravity AI 에이전트입니다. "
-            "사용자가 현재 텔레그램(Telegram) 메신저를 통해 당신과 직접 대화하고 지시하고 있습니다. "
-            "GEMINI.md의 자율 실행 원칙을 준수하여 대화, 질문 답변, 코드 수정, 검증, 배포 등 모든 지시를 끝까지 수행하고 "
-            "모바일 텔레그램 화면에서 읽기 편하도록 명확하고 간결한 한국어로 답변하십시오."
-        ),
-        capabilities=CapabilitiesConfig(),
-    )
+    PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+    PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
+    log_file = open(ROOT_DIR / ".agents" / "telegram_daemon.log", "a", encoding="utf-8", buffering=1)
+    sys.stdout = log_file
+    sys.stderr = log_file
 
     state = load_offset_state()
     offset = int(state.get("offset", 0))
     if not allowed_chat_id and state.get("chat_id"):
         allowed_chat_id = str(state["chat_id"])
 
-    print("🚀 [Antigravity SDK + Telegram 양방향 실시간 에이전트 데몬 가동 중]")
-    async with Agent(config) as agent:
-        while True:
-            try:
-                res = await asyncio.to_thread(
-                    tg_api, token, "getUpdates", {"offset": offset, "timeout": 25}, 35
-                )
-                for upd in res.get("result", []):
-                    offset = upd["update_id"] + 1
-                    msg = upd.get("message") or {}
-                    chat = msg.get("chat") or {}
-                    chat_id = str(chat.get("id", ""))
-                    text = (msg.get("text") or "").strip()
-                    if not chat_id or not text:
-                        save_offset_state(offset, allowed_chat_id or chat_id)
-                        continue
+    print(f"🚀 [Antigravity Telegram 독립 데몬 가동 중 | PID={os.getpid()}]", flush=True)
+    while True:
+        try:
+            res = await asyncio.to_thread(
+                tg_api, token, "getUpdates", {"offset": offset, "timeout": 25}, 35
+            )
+            for upd in res.get("result", []):
+                offset = upd["update_id"] + 1
+                msg = upd.get("message") or {}
+                chat = msg.get("chat") or {}
+                chat_id = str(chat.get("id", ""))
+                text = (msg.get("text") or "").strip()
+                if not chat_id or not text:
+                    save_offset_state(offset, allowed_chat_id or chat_id)
+                    continue
 
-                    if not allowed_chat_id:
-                        allowed_chat_id = chat_id
-                        save_env_chat_id(chat_id)
-                        await asyncio.to_thread(
-                            send_msg,
-                            token,
-                            chat_id,
-                            f"✅ Antigravity와 텔레그램이 연결되었습니다! (Chat ID: {chat_id})\n"
-                            "이제 무엇이든 대화하거나 지시해 주세요.",
-                        )
+                if not allowed_chat_id:
+                    allowed_chat_id = chat_id
+                    save_env_chat_id(chat_id)
 
-                    if str(chat_id) != str(allowed_chat_id):
-                        save_offset_state(offset, allowed_chat_id)
-                        continue
-
+                if str(chat_id) != str(allowed_chat_id):
                     save_offset_state(offset, allowed_chat_id)
-                    print(f"[📩 수신] ({chat_id}): {text}")
+                    continue
 
-                    # 빠른 내장 단축 명령어 처리
-                    if text == "/status":
-                        git_st = run_shell(["git", "status", "-s"])
-                        git_log = run_shell(["git", "log", "-n", "3", "--oneline"])
-                        await asyncio.to_thread(
-                            send_msg,
-                            token,
-                            chat_id,
-                            f"📊 [현재 워크스페이스 상태]\n• 최근 커밋:\n{git_log}\n\n• 변경사항:\n{git_st or '없음 (Clean)'}",
-                        )
-                        continue
-                    elif text == "/audit":
-                        await asyncio.to_thread(send_msg, token, chat_id, "🔍 전체 무결성 검사를 실행합니다...")
-                        out1 = run_shell([sys.executable, "-X", "utf8", "audit_engine.py"])
-                        out2 = run_shell([sys.executable, "-X", "utf8", "audit_full_mathedu.py"])
-                        await asyncio.to_thread(send_msg, token, chat_id, f"✅ [검사 결과]\n{out1}\n\n{out2[-1200:]}")
-                        continue
-
-                    # Antigravity 에이전트와 직접 대화 및 작업 수행
-                    await asyncio.to_thread(
-                        send_msg, token, chat_id, "🤖 [Antigravity] 생각 및 작업 수행 중..."
+                save_offset_state(offset, allowed_chat_id)
+                collected_texts = [text]
+                await asyncio.sleep(1.0)
+                try:
+                    more = await asyncio.to_thread(
+                        tg_api, token, "getUpdates", {"offset": offset, "timeout": 1}, 5
                     )
-                    chunks: list[str] = []
-                    response = await agent.chat(text)
-                    async for token_str in response:
-                        chunks.append(token_str)
-                    reply_text = "".join(chunks).strip() or "✅ 작업을 완료했습니다."
-                    await asyncio.to_thread(send_msg, token, chat_id, reply_text)
-            except KeyboardInterrupt:
-                print("\n👋 텔레그램 에이전트 데몬을 종료합니다.")
-                break
-            except Exception as e:
-                print(f"[재시도 대기] 오류: {e}")
-                await asyncio.sleep(4)
+                    for m_upd in more.get("result", []):
+                        offset = m_upd["update_id"] + 1
+                        m_msg = m_upd.get("message") or {}
+                        m_chat = m_msg.get("chat") or {}
+                        if str(m_chat.get("id", "")) == str(allowed_chat_id):
+                            m_text = (m_msg.get("text") or "").strip()
+                            if m_text:
+                                collected_texts.append(m_text)
+                    save_offset_state(offset, allowed_chat_id)
+                except Exception:
+                    pass
+
+                full_text = "\n".join(collected_texts)
+                print(f"[📩 수신] ({chat_id}): {full_text}", flush=True)
+
+                # 빠른 내장 단축 명령어 처리
+                if full_text == "/status":
+                    git_st = run_shell(["git", "status", "-s"])
+                    git_log = run_shell(["git", "log", "-n", "3", "--oneline"])
+                    await asyncio.to_thread(
+                        send_msg,
+                        token,
+                        chat_id,
+                        f"📊 [현재 워크스페이스 상태]\n• 최근 커밋:\n{git_log}\n\n• 변경사항:\n{git_st or '없음 (Clean)'}",
+                    )
+                    continue
+                elif full_text == "/audit":
+                    await asyncio.to_thread(send_msg, token, chat_id, "🔍 전체 무결성 검사를 실행합니다...")
+                    out1 = run_shell([sys.executable, "-X", "utf8", "audit_engine.py"])
+                    out2 = run_shell([sys.executable, "-X", "utf8", "audit_full_mathedu.py"])
+                    await asyncio.to_thread(send_msg, token, chat_id, f"✅ [검사 결과]\n{out1}\n\n{out2[-1200:]}")
+                    continue
+
+                # 독립 백그라운드 Antigravity 에이전트 호출 및 응답
+                reply_text = await asyncio.to_thread(run_agy_prompt, full_text)
+                await asyncio.to_thread(send_msg, token, chat_id, reply_text)
+        except KeyboardInterrupt:
+            print("\n👋 텔레그램 에이전트 데몬을 종료합니다.")
+            break
+        except Exception as e:
+            print(f"[재시도 대기] 오류: {e}", flush=True)
+            await asyncio.sleep(4)
 
 
 def main() -> None:
@@ -281,6 +363,11 @@ def main() -> None:
         "--listen-once",
         action="store_true",
         help="텔레그램 메시지 1건을 수신하면 즉시 출력 후 종료하여 현재 Antigravity 세션을 깨웁니다.",
+    )
+    parser.add_argument(
+        "--start-detached",
+        action="store_true",
+        help="현재 대화창과 완전히 분리된 OS 백그라운드 데몬 프로세스로 텔레그램 브릿지를 실행합니다.",
     )
     parser.add_argument(
         "--reply",
@@ -337,7 +424,41 @@ def main() -> None:
             print("❌ 전송할 TELEGRAM_CHAT_ID가 아직 등록되지 않았습니다. 먼저 텔레그램 봇에게 메시지를 한 번 보내주세요.")
             sys.exit(1)
         send_msg(token, target_chat_id, args.reply)
+        hist = load_history()
+        hist.append({"role": "assistant", "text": args.reply, "ts": datetime.datetime.now().isoformat()})
+        save_history(hist)
         print(f"✅ 텔레그램({target_chat_id})으로 답장을 전송했습니다.")
+        return
+
+    if args.start_detached:
+        if PID_FILE.exists():
+            try:
+                old_pid = int(PID_FILE.read_text(encoding="utf-8").strip())
+                subprocess.run(
+                    ["taskkill", "/F", "/PID", str(old_pid)],
+                    capture_output=True,
+                )
+            except Exception:
+                pass
+        py_exe = Path(sys.executable)
+        pyw_exe = py_exe.with_name("pythonw.exe")
+        runner = str(pyw_exe if pyw_exe.exists() else py_exe)
+        script = str(Path(__file__).resolve())
+        cmd_line = f'"{runner}" -X utf8 "{script}"'
+        ps_cmd = (
+            "$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create "
+            f"-Arguments @{{CommandLine='{cmd_line}'; CurrentDirectory='{str(ROOT_DIR)}'}}; "
+            "Write-Output $r.ProcessId"
+        )
+        res = subprocess.run(
+            ["powershell", "-NoProfile", "-Command", ps_cmd],
+            capture_output=True,
+            text=True,
+        )
+        pid_str = (res.stdout or "").strip().splitlines()[-1].strip()
+        PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+        PID_FILE.write_text(pid_str, encoding="utf-8")
+        print(f"✅ 텔레그램 독립 백그라운드 데몬이 시작되었습니다 (PID: {pid_str}).")
         return
 
     if args.listen_once:
