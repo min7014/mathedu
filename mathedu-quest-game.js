@@ -3542,9 +3542,9 @@
                   'style="padding:4px 12px;border-radius:999px;border:1px solid #fbbf24;background:linear-gradient(135deg,#f59e0b 0%,#db2777 100%);color:#ffffff;font-size:11px;font-weight:900;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(245,158,11,0.35)">' +
                   '📣 친구 도전장 & SNS 인증 공유' +
                 '</button>' +
-                '<button type="button" id="btnOpenRewardedAdTop" class="quest-micro-btn" onclick="if(window.MatheduAdEngine)window.MatheduAdEngine.openRewardedAdModal()" ' +
+                '<button type="button" id="btnOpenRewardedAdTop" class="quest-micro-btn" onclick="window.MatheduQuest.grantSponsorAdReward()" ' +
                   'style="padding:4px 12px;border-radius:999px;border:1px solid #34d399;background:linear-gradient(135deg,#059669 0%,#0284c7 100%);color:#ffffff;font-size:11px;font-weight:900;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(16,185,129,0.35)">' +
-                  '🎁 무료 광고 보너스 (+50 XP·필살기 완충)' +
+                  '🎁 무료 학습 응원 보급 (+필살기 완충)' +
                 '</button>' +
               '</div>' +
               '<h2 style="margin:0;font-size:21px;font-weight:900;letter-spacing:-0.02em;color:#ffffff">👑 수능 수학 100점 만점 3D 원정대</h2>' +
@@ -4576,7 +4576,7 @@
       if (battleModal && this.activeStage) {
         this.renderBattleModal();
       }
-      this.showPrToast('🎁 스폰서 광고 시청 보상 수령 완료! (+50 XP · 기하 필살기 100% 완충 · 사색 통찰 +40%)');
+      this.showPrToast('🎁 아르키메데스의 100% 무료 학습 응원 보급 수령 완료! (기하 필살기 100% 완충 · 사색 통찰 +40%)');
     }
   };
 
