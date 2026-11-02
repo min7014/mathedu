@@ -649,6 +649,7 @@ html.dark-theme .filter-tab-btn {
             <a href="https://www.geogebra.org/u/min7014" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 GeoGebra Tube</a>
             <a href="https://www.algeomath.kr" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 AlgeoMath</a>
             <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 전 단원 개념 증명 PDF</a>
+            <a href="#" onclick="openAcademicPedagogyModal();return false;" class="text-secondary hover:underline no-underline font-semibold">🎓 수학교육학 5대 원리 학습법</a>
             <a href="#" onclick="openDefaultTeacherClass();return false;" class="text-secondary hover:underline no-underline font-semibold">🔗 3초 수업 QR 개설</a>
             <span id="studentLibraryQuickBar" class="inline-flex items-center gap-2">
               <a href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;" class="text-on-surface-variant hover:underline no-underline">📂 내 풀이 기록</a>
@@ -2533,5 +2534,50 @@ function toggleMathStory() {
   })();
 })();
 </script>
+
+<!-- 수학교육학 5대 검증 원리 안내 모달 -->
+<div id="academicPedagogyModal" class="hidden fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="bg-[var(--card)] border border-[var(--line)] rounded-2xl max-w-2xl w-full p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-3 pb-3 border-b border-[var(--line)]">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🎓</span>
+        <h2 class="text-base font-extrabold text-[var(--txt)] m-0">현대 수학교육학 5대 검증 원리 적용 안내</h2>
+      </div>
+      <button type="button" onclick="document.getElementById('academicPedagogyModal').classList.add('hidden')" class="px-2.5 py-1 rounded-lg bg-[var(--card2)] text-[var(--sub)] text-xs font-bold border-0 cursor-pointer">닫기 ✕</button>
+    </div>
+    <p class="text-xs text-[var(--sub)] leading-relaxed mb-4">
+      mathedu의 모든 문항 페이지에는 세계 수학교육학 및 교육인지과학 메타분석(Hattie, NMAP)에서 학습 효과 크기(Effect Size)가 가장 높은 5대 학문적 원리가 탑재되어 있습니다.
+    </p>
+    <div class="flex flex-col gap-2.5 text-xs">
+      <div class="p-3 rounded-xl bg-[var(--card2)] border border-[var(--line)]">
+        <div class="font-extrabold text-[#006398] mb-1">1. CPA 다중 표상 변환 (Bruner EIS & Duval 표상 레지스터 이론 · d = 0.75)</div>
+        <div class="text-[var(--sub)] leading-relaxed">각 문항 상단의 <b>[🎨 CPA 다중표상 대조]</b> 버튼을 누르면 <b>활동적 수치 실험(Enactive) ⟷ 시각적 기하 도형·GeoGebra(Iconic) ⟷ 기호 번역·도식화 흐름도(Symbolic)</b>를 문제 풀이와 동시에 대조할 수 있습니다.</div>
+      </div>
+      <div class="p-3 rounded-xl bg-[var(--card2)] border border-[var(--line)]">
+        <div class="font-extrabold text-[#4f46e5] mb-1">2. 근접발달영역(ZPD) 미세 디딤돌 & 점진적 빈칸 추론 (Vygotsky & Sweller · d = 0.82)</div>
+        <div class="text-[var(--sub)] leading-relaxed">초등 구구단·사칙연산 직관(1단계)부터 기호 번역(2단계), 핵심 관계식 빈칸 <code>(가)</code>·<code>(나)</code> 추론(3~4단계), 본문항 조립(5단계)까지 인지부하 없이 도약하며, 막힐 때는 정답 스포일러 없는 <b>[🪜 ZPD 단계 힌트 (1차·2차)]</b>를 제공합니다.</div>
+      </div>
+      <div class="p-3 rounded-xl bg-[var(--card2)] border border-[var(--line)]">
+        <div class="font-extrabold text-[#059669] mb-1">3. 안내된 재발명 (Freudenthal RME: Guided Reinvention)</div>
+        <div class="text-[var(--sub)] leading-relaxed">완성된 공식을 주입하는 대신, 구체적 수치 관찰과 3,400+개의 <b>민은기 선생님 수학자료실(min7014.github.io)</b> 동적 기하 증명을 통해 학생 스스로 공식을 재발명하도록 이끕니다.</div>
+      </div>
+      <div class="p-3 rounded-xl bg-[var(--card2)] border border-[var(--line)]">
+        <div class="font-extrabold text-[#d97706] mb-1">4. 발견술과 메타인지 자기조절 (Pólya 4단계 & Schoenfeld · d = 0.69)</div>
+        <div class="text-[var(--sub)] leading-relaxed">문항 페이지 내 <b>[✏️ 데카르트 연습장]</b>과 <b>[🧭 폴리아·쇤펠드 코치]</b>를 통해 조건 분리 → 표상 변환 계획 → 레고 조립 → 역산 점검의 메타인지 루프를 훈련합니다.</div>
+      </div>
+      <div class="p-3 rounded-xl bg-[var(--card2)] border border-[var(--line)]">
+        <div class="font-extrabold text-[#e11d48] mb-1">5. 블라인드 능동 인출 & 정교한 오개념 진단 피드백 (Roediger & Hattie · d = 0.73)</div>
+        <div class="text-[var(--sub)] leading-relaxed"><b>[🧠 블라인드 능동인출]</b>을 켜면 5지선다 보기를 먼저 가려 성급한 찍기를 방지하고, 오답 선택 시 <b>[🔬 수학교육학 오개념 정밀 진단]</b>이 선택한 보기와 정답의 구조적 차이를 즉시 교정합니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+window.openAcademicPedagogyModal = function() {
+  var m = document.getElementById('academicPedagogyModal');
+  if (m) m.classList.remove('hidden');
+};
+</script>
+
 </body>
 </html>

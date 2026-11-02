@@ -157,6 +157,9 @@
 
       // 9. 🪜 차분한 단계별 몰입형 순차 공개 시스템 (스크롤 훑어보기 방지)
       initProgressiveScaffolding();
+
+      // 10. 🎓 수학교육학 5대 학문 통합 엔진 (CPA 다중표상 · ZPD 힌트사다리 · 블라인드 인출 · 폴리아/쇤펠드 메타인지 · 정교한 오개념 진단)
+      initAcademicPedagogyEngine();
     });
   }
 
@@ -2115,6 +2118,488 @@
       el.title = isEn ? (el.getAttribute('data-en-title') || '') : (el.getAttribute('data-ko-title') || '');
     });
   });
+
+
+  // ════════════════════════════════════════════════════════════════════════
+  // 🎓 수학교육학 5대 학문 통합 엔진 (Academic Math Pedagogy Engine v1.0)
+  // 1. CPA & Duval 다중 표상 변환기 (구체적 수치 ⟷ 기하 도형·GeoGebra ⟷ 대수 기호·흐름도 동시 대조)
+  // 2. Vygotsky ZPD & Sweller 인지부하이론 (3단계 무오류 점진적 힌트 사다리 & 레고 브릿지)
+  // 3. Roediger 능동적 인출 효과 (블라인드 선지 가리기 · 생각 먼저 인출 연습 모드)
+  // 4. Pólya & Schoenfeld 발견술·메타인지 자기조절 코치 + 데카르트 인페이지 수학 연습장
+  // 5. Hattie 정교한 오개념 진단 피드백 & Freudenthal 안내된 재발명(Guided Reinvention) 연결
+  // ════════════════════════════════════════════════════════════════════════
+
+  var PEDAGOGY_STATE_KEY = 'mathedu_academic_pedagogy_v1';
+
+  function loadPedagogyState() {
+    try {
+      var raw = localStorage.getItem(PEDAGOGY_STATE_KEY);
+      if (!raw) return { retrievalBlindMode: false, cpaCount: 0, hintUsed: 0, retrievalSuccess: 0, metacogChecks: 0, scratchpadUsed: 0 };
+      return Object.assign({ retrievalBlindMode: false, cpaCount: 0, hintUsed: 0, retrievalSuccess: 0, metacogChecks: 0, scratchpadUsed: 0 }, JSON.parse(raw));
+    } catch (e) {
+      return { retrievalBlindMode: false, cpaCount: 0, hintUsed: 0, retrievalSuccess: 0, metacogChecks: 0, scratchpadUsed: 0 };
+    }
+  }
+
+  function savePedagogyState(st) {
+    try { localStorage.setItem(PEDAGOGY_STATE_KEY, JSON.stringify(st)); } catch (e) {}
+  }
+
+  function injectAcademicPedagogyStyles() {
+    if (document.getElementById('matheduAcademicPedagogyStyles')) return;
+    var st = document.createElement('style');
+    st.id = 'matheduAcademicPedagogyStyles';
+    st.textContent = [
+      '.acad-workbench-bar{margin:12px 0 16px;padding:12px 16px;border-radius:16px;background:linear-gradient(135deg,#f8fafc 0%,#eff6ff 100%);border:1.5px solid #bfdbfe;box-shadow:0 4px 14px rgba(0,99,152,0.06);display:flex;flex-direction:column;gap:10px;}',
+      'html.dark-theme .acad-workbench-bar{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-color:#334155;color:#f8fafc;}',
+      '.acad-workbench-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}',
+      '.acad-workbench-title{display:inline-flex;align-items:center;gap:6px;font-size:0.84rem;font-weight:800;color:#006398;}',
+      'html.dark-theme .acad-workbench-title{color:#38bdf8;}',
+      '.acad-pill-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}',
+      '.acad-pill-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:999px;border:1px solid #cbd5e1;background:#ffffff;color:#1e293b;font-size:0.77rem;font-weight:800;cursor:pointer;transition:all 0.16s ease;font-family:inherit;}',
+      'html.dark-theme .acad-pill-btn{background:#1e293b;border-color:#475569;color:#e2e8f0;}',
+      '.acad-pill-btn:hover,.acad-pill-btn.active{background:#006398;color:#ffffff;border-color:#006398;box-shadow:0 3px 10px rgba(0,99,152,0.22);}',
+      '.acad-drawer-panel{display:none;margin-top:4px;padding:14px;border-radius:12px;background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;font-size:0.84rem;line-height:1.6;}',
+      'html.dark-theme .acad-drawer-panel{background:#0f172a;border-color:#334155;color:#e2e8f0;}',
+      '.acad-drawer-panel.open{display:block;animation:matheduStepFadeIn 0.25s ease-out;}',
+      '.acad-cpa-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;border-bottom:1px solid #e2e8f0;padding-bottom:8px;}',
+      '.acad-cpa-tab{padding:5px 12px;border-radius:8px;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;font-size:0.76rem;font-weight:800;cursor:pointer;}',
+      '.acad-cpa-tab.active{background:#0284c7;color:#ffffff;border-color:#0284c7;}',
+      '.acad-blind-mask{margin-top:8px;padding:14px;border-radius:12px;background:linear-gradient(135deg,rgba(2,132,199,0.08),rgba(79,70,229,0.08));border:1.5px dashed #0284c7;text-align:center;}',
+      '.acad-blind-btn{padding:8px 16px;border-radius:999px;border:none;background:linear-gradient(135deg,#006398,#4f46e5);color:#ffffff;font-size:0.8rem;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,99,152,0.25);}',
+      '.acad-hint-btn{margin-right:6px;padding:5px 11px;border-radius:8px;border:1px solid #93c5fd;background:#eff6ff;color:#0369a1;font-size:0.76rem;font-weight:800;cursor:pointer;transition:0.15s;}',
+      '.acad-hint-btn:hover{background:#dbeafe;}',
+      '.acad-hint-box{display:none;margin-top:8px;padding:11px 14px;border-radius:10px;background:#f0f9ff;border-left:4px solid #0284c7;color:#0f172a;font-size:0.82rem;line-height:1.55;}',
+      'html.dark-theme .acad-hint-box{background:#1e293b;color:#e2e8f0;}',
+      '.acad-hint-box.show{display:block;}',
+      '.acad-diag-box{margin:0 0 12px;padding:12px 14px;border-radius:10px;font-size:0.83rem;line-height:1.55;}',
+      '.acad-diag-wrong{background:#fef2f2;border:1.5px solid #fca5a5;color:#7f1d1d;}',
+      'html.dark-theme .acad-diag-wrong{background:rgba(127,29,29,0.25);border-color:#ef4444;color:#fecaca;}',
+      '.acad-diag-correct{background:#ecfdf5;border:1.5px solid #6ee7b7;color:#065f46;}',
+      'html.dark-theme .acad-diag-correct{background:rgba(6,95,70,0.25);border-color:#10b981;color:#a7f3d0;}'
+    ].join('\n');
+    (document.head || document.documentElement).appendChild(st);
+  }
+
+  function initAcademicPedagogyEngine() {
+    var qs = Array.from(document.querySelectorAll('.q'));
+    if (qs.length === 0) return;
+    injectAcademicPedagogyStyles();
+
+    var pState = loadPedagogyState();
+
+    // 1. 상단 수학교육학 5대 원리 워크벤치 바 주입
+    var targetAnchor = document.querySelector('.stitch-filter-card') || document.getElementById('examSymContainer');
+    if (targetAnchor && !document.getElementById('acadWorkbenchBar')) {
+      var wb = document.createElement('div');
+      wb.id = 'acadWorkbenchBar';
+      wb.className = 'acad-workbench-bar';
+      wb.innerHTML =
+        '<div class="acad-workbench-top">' +
+          '<div class="acad-workbench-title">' +
+            '<span>🎓</span>' +
+            bilingual('수학교육학 5대 검증 학습 도구 (CPA 다중표상 · 능동인출 · ZPD 비계 · 메타인지)', '5 Proven Math Pedagogy Tools (CPA · Retrieval · ZPD · Metacognition)') +
+          '</div>' +
+          '<div class="acad-pill-row">' +
+            '<button type="button" class="acad-pill-btn" id="btnAcadCpa" onclick="window.toggleAcadDrawer(\'cpa\')">' +
+              bilingual('🎨 CPA 다중표상 대조', '🎨 CPA Multi-Representation') +
+            '</button>' +
+            '<button type="button" class="acad-pill-btn' + (pState.retrievalBlindMode ? ' active' : '') + '" id="btnAcadRetrieval" onclick="window.toggleAcadRetrievalMode()">' +
+              bilingual('🧠 블라인드 능동인출 ' + (pState.retrievalBlindMode ? 'ON' : 'OFF'), '🧠 Blind Retrieval ' + (pState.retrievalBlindMode ? 'ON' : 'OFF')) +
+            '</button>' +
+            '<button type="button" class="acad-pill-btn" id="btnAcadScratch" onclick="window.toggleAcadDrawer(\'scratch\')">' +
+              bilingual('✏️ 데카르트 연습장', '✏️ Math Scratchpad') +
+            '</button>' +
+            '<button type="button" class="acad-pill-btn" id="btnAcadMetacog" onclick="window.toggleAcadDrawer(\'metacog\')">' +
+              bilingual('🧭 폴리아·쇤펠드 코치', '🧭 Pólya & Schoenfeld Coach') +
+            '</button>' +
+          '</div>' +
+        '</div>' +
+        '<div id="acadDrawerCpa" class="acad-drawer-panel"></div>' +
+        '<div id="acadDrawerScratch" class="acad-drawer-panel"></div>' +
+        '<div id="acadDrawerMetacog" class="acad-drawer-panel"></div>';
+
+      if (targetAnchor.parentNode) {
+        targetAnchor.parentNode.insertBefore(wb, targetAnchor.nextSibling);
+      }
+    }
+
+    // 2. CPA 다중 표상 드로어 렌더러 (Bruner EIS / Duval 다중 표상 동시 대조)
+    function renderCpaDrawer(tab) {
+      var drawer = document.getElementById('acadDrawerCpa');
+      if (!drawer) return;
+      var curTab = tab || 'iconic';
+      var svgFig = document.querySelector('.math-visual-diagram');
+      var svgHtml = svgFig ? svgFig.outerHTML : '<p>시각적 도형 다이어그램이 아래 해설 섹션에 준비되어 있습니다.</p>';
+      var symEl = document.getElementById('examSymContainer');
+      var symHtml = symEl ? symEl.innerHTML : '';
+      var flowEl = document.querySelector('.math-schematic-flow');
+      var flowHtml = flowEl ? flowEl.outerHTML : '';
+      var step1Know = qs[0] && qs[0].previousElementSibling && qs[0].previousElementSibling.classList.contains('know')
+        ? qs[0].previousElementSibling.innerHTML
+        : '작은 자연수($n=1, 2, 3$ 또는 $x=0, 1, 2$)를 직접 대입해 규칙을 먼저 관찰하세요.';
+
+      var ggbBtn = document.querySelector('.min-btn-ggb, .min-btn-algeo');
+      var ggbLinkHtml = ggbBtn
+        ? '<div style="margin-top:8px;text-align:right"><button type="button" class="acad-pill-btn" onclick="var el=document.querySelector(\'.min7014-addon-card\');if(el)el.scrollIntoView({behavior:\'smooth\'});">📐 min7014 동적 기하(GeoGebra/AlgeoMath) 바로 조작하기 ➔</button></div>'
+        : '';
+
+      var bodyHtml = '';
+      if (curTab === 'iconic') {
+        bodyHtml =
+          '<div style="font-size:0.79rem;color:#0369a1;font-weight:700;margin-bottom:6px">' +
+            bilingual('💡 [뒤발(Duval) & 브루너(Bruner) 영상적 표상]: 아래 문제를 풀면서 시각적 기하·개념 도형을 동시에 대조해 보세요.', '💡 [Duval & Bruner Iconic Representation]: Compare the visual diagram side-by-side while solving each step.') +
+          '</div>' +
+          svgHtml + ggbLinkHtml;
+      } else if (curTab === 'enactive') {
+        bodyHtml =
+          '<div style="font-size:0.79rem;color:#047857;font-weight:700;margin-bottom:6px">' +
+            bilingual('💡 [프로이덴탈(Freudenthal) 구체적 수치 실험]: 추상적인 문자($x, n, k$)가 낯설 때는 가장 작은 정수($1, 2, 3$)를 대입해 구체적 감각을 먼저 깨우세요.', '💡 [Freudenthal Concrete Experiment]: Substitute small integers (1, 2, 3) to build concrete intuition before algebraic manipulation.') +
+          '</div>' +
+          '<div style="padding:10px 12px;border-radius:10px;background:#f0fdf4;border:1px solid #86efac;color:#065f46;margin-bottom:8px">' + step1Know + '</div>' +
+          '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px">' +
+            '<span style="font-size:0.78rem;font-weight:800">🔢 빠른 수식/수치 대입 계산기:</span>' +
+            '<input id="acadQuickCalcInput" type="text" placeholder="예: (3^2)*(1/4) - 1/2 또는 2*3+1" style="flex:1;min-width:180px;padding:6px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.8rem">' +
+            '<button type="button" class="acad-pill-btn" onclick="window.runAcadQuickCalc()">계산 확인</button>' +
+            '<span id="acadQuickCalcOut" style="font-weight:900;color:#006398"></span>' +
+          '</div>';
+      } else {
+        bodyHtml =
+          '<div style="font-size:0.79rem;color:#4f46e5;font-weight:700;margin-bottom:6px">' +
+            bilingual('💡 [기호 번역 & 도식화 흐름도]: 수식 기호의 약속과 단계별 연쇄 흐름을 한눈에 대조합니다.', '💡 [Symbolic & Schematic Flowchart]: Connect symbol definitions directly to the overall logical flow.') +
+          '</div>' +
+          '<div style="margin-bottom:10px">' + symHtml + '</div>' +
+          flowHtml;
+      }
+
+      drawer.innerHTML =
+        '<div class="acad-cpa-tabs">' +
+          '<button type="button" class="acad-cpa-tab' + (curTab === 'iconic' ? ' active' : '') + '" onclick="window.switchAcadCpaTab(\'iconic\')">🎨 영상적 표상 (시각 도형·GeoGebra)</button>' +
+          '<button type="button" class="acad-cpa-tab' + (curTab === 'enactive' ? ' active' : '') + '" onclick="window.switchAcadCpaTab(\'enactive\')">🧱 활동적 표상 (구체적 수치·초등 직관)</button>' +
+          '<button type="button" class="acad-cpa-tab' + (curTab === 'symbolic' ? ' active' : '') + '" onclick="window.switchAcadCpaTab(\'symbolic\')">📐 기호적 표상 (기호 번역·도식화 흐름도)</button>' +
+        '</div>' +
+        bodyHtml;
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([drawer]).catch(function() {});
+      }
+    }
+
+    window.switchAcadCpaTab = function(tab) {
+      renderCpaDrawer(tab);
+    };
+
+    window.runAcadQuickCalc = function() {
+      var inp = document.getElementById('acadQuickCalcInput');
+      var out = document.getElementById('acadQuickCalcOut');
+      if (!inp || !out) return;
+      var expr = (inp.value || '').replace(/\^/g, '**').replace(/[^0-9+\-*/().\s*]/g, '');
+      if (!expr.trim()) return;
+      try {
+        var val = Function('"use strict";return (' + expr + ')')();
+        out.textContent = '⇒ ' + (typeof val === 'number' && !isFinite(val) ? '정의되지 않음' : Number(val.toFixed(6)));
+      } catch (e) {
+        out.textContent = '수식 확인 필요';
+      }
+    };
+
+    // 3. 데카르트 인페이지 수학 연습장 (Scratchpad Canvas)
+    function renderScratchDrawer() {
+      var drawer = document.getElementById('acadDrawerScratch');
+      if (!drawer || drawer.dataset.ready === '1') return;
+      drawer.dataset.ready = '1';
+      drawer.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">' +
+          '<span style="font-size:0.8rem;font-weight:800;color:#006398">✏️ 데카르트 수학 연습장 — 보조선 작도·수식 전개·작은 수 대입을 직접 손이나 마우스로 적어보세요</span>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+            '<button type="button" class="acad-pill-btn active" id="scrPenBlue" onclick="window.setAcadScratchPen(\'#006398\',2.4,this)">파란 펜</button>' +
+            '<button type="button" class="acad-pill-btn" id="scrPenRed" onclick="window.setAcadScratchPen(\'#e11d48\',2.4,this)">보조선(빨강)</button>' +
+            '<button type="button" class="acad-pill-btn" id="scrPenGold" onclick="window.setAcadScratchPen(\'rgba(245,158,11,0.35)\',12,this)">형광펜</button>' +
+            '<button type="button" class="acad-pill-btn" onclick="window.clearAcadScratch()">🗑️ 전체 지우기</button>' +
+          '</div>' +
+        '</div>' +
+        '<canvas id="acadScratchCanvas" width="860" height="240" style="width:100%;height:220px;background:#ffffff;background-image:radial-gradient(#cbd5e1 1px,transparent 1px);background-size:18px 18px;border:1.5px solid #94a3b8;border-radius:10px;touch-action:none;cursor:crosshair;display:block"></canvas>';
+
+      var cvs = document.getElementById('acadScratchCanvas');
+      if (!cvs) return;
+      var ctx = cvs.getContext('2d');
+      var drawing = false;
+      window._acadPenColor = '#006398';
+      window._acadPenWidth = 2.4;
+
+      function getPos(ev) {
+        var r = cvs.getBoundingClientRect();
+        var clientX = ev.touches && ev.touches[0] ? ev.touches[0].clientX : ev.clientX;
+        var clientY = ev.touches && ev.touches[0] ? ev.touches[0].clientY : ev.clientY;
+        return {
+          x: (clientX - r.left) * (cvs.width / r.width),
+          y: (clientY - r.top) * (cvs.height / r.height)
+        };
+      }
+      function start(ev) {
+        drawing = true;
+        var p = getPos(ev);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ev.preventDefault();
+      }
+      function move(ev) {
+        if (!drawing) return;
+        var p = getPos(ev);
+        ctx.strokeStyle = window._acadPenColor;
+        ctx.lineWidth = window._acadPenWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        ev.preventDefault();
+      }
+      function stop() { drawing = false; }
+
+      cvs.addEventListener('mousedown', start);
+      cvs.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', stop);
+      cvs.addEventListener('touchstart', start, { passive: false });
+      cvs.addEventListener('touchmove', move, { passive: false });
+      cvs.addEventListener('touchend', stop);
+    }
+
+    window.setAcadScratchPen = function(color, width, btnEl) {
+      window._acadPenColor = color;
+      window._acadPenWidth = width;
+      var parent = btnEl && btnEl.parentNode;
+      if (parent) {
+        parent.querySelectorAll('.acad-pill-btn').forEach(function(b) { b.classList.remove('active'); });
+      }
+      if (btnEl) btnEl.classList.add('active');
+    };
+
+    window.clearAcadScratch = function() {
+      var cvs = document.getElementById('acadScratchCanvas');
+      if (!cvs) return;
+      cvs.getContext('2d').clearRect(0, 0, cvs.width, cvs.height);
+    };
+
+    // 4. 폴리아(Pólya) 4단계 발견술 & 쇤펠드(Schoenfeld) 메타인지 코치 드로어
+    function renderMetacogDrawer() {
+      var drawer = document.getElementById('acadDrawerMetacog');
+      if (!drawer) return;
+      var st = loadPedagogyState();
+      var doneCnt = document.querySelectorAll('.q.done').length;
+      drawer.innerHTML =
+        '<div style="font-weight:800;color:#006398;margin-bottom:8px">🧭 폴리아(G. Pólya) 문제해결 4단계 & 쇤펠드(Schoenfeld) 메타인지 자기조절 체크리스트</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:10px">' +
+          '<label style="display:flex;align-items:flex-start;gap:6px;padding:8px 10px;border-radius:10px;background:#f8fafc;border:1px solid #cbd5e1;cursor:pointer;font-size:0.79rem">' +
+            '<input type="checkbox" onchange="window.recordAcadMetacogCheck()"> <span><b>1. 문제 이해 (Understand)</b><br>구하려는 목표값과 주어진 조건, 정의역·진수·부호 범위를 분리했는가?</span>' +
+          '</label>' +
+          '<label style="display:flex;align-items:flex-start;gap:6px;padding:8px 10px;border-radius:10px;background:#f8fafc;border:1px solid #cbd5e1;cursor:pointer;font-size:0.79rem">' +
+            '<input type="checkbox" onchange="window.recordAcadMetacogCheck()"> <span><b>2. 계획 수립 (Plan · CPA)</b><br>수식을 도형(그래프)으로, 또는 작은 수($n=1,2$)로 먼저 실험해 보았는가?</span>' +
+          '</label>' +
+          '<label style="display:flex;align-items:flex-start;gap:6px;padding:8px 10px;border-radius:10px;background:#f8fafc;border:1px solid #cbd5e1;cursor:pointer;font-size:0.79rem">' +
+            '<input type="checkbox" onchange="window.recordAcadMetacogCheck()"> <span><b>3. 계획 실행 (Carry Out)</b><br>앞 단계 디딤돌에서 얻은 식을 다음 단계의 빈칸에 레고처럼 결합했는가?</span>' +
+          '</label>' +
+          '<label style="display:flex;align-items:flex-start;gap:6px;padding:8px 10px;border-radius:10px;background:#f8fafc;border:1px solid #cbd5e1;cursor:pointer;font-size:0.79rem">' +
+            '<input type="checkbox" onchange="window.recordAcadMetacogCheck()"> <span><b>4. 반성적 점검 (Look Back)</b><br>구한 답을 원래 조건에 역산 대입하거나 다른 관점(기하/대수)으로 검증했는가?</span>' +
+          '</label>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:8px 12px;border-radius:10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.78rem;color:#1e3a8a">' +
+          '<span>📊 <b>나의 수학교육학 5대 학습 역량 누적 지표</b></span>' +
+          '<span>CPA 표상 대조: <b>' + st.cpaCount + '회</b> · 능동 인출 성공: <b>' + st.retrievalSuccess + '회</b> · ZPD 비계 활용: <b>' + st.hintUsed + '회</b> · 메타인지 점검: <b>' + st.metacogChecks + '회</b> · 현재 문항 진도: <b>' + doneCnt + '/' + qs.length + '</b></span>' +
+        '</div>';
+    }
+
+    window.recordAcadMetacogCheck = function() {
+      var st = loadPedagogyState();
+      st.metacogChecks = (st.metacogChecks || 0) + 1;
+      savePedagogyState(st);
+      if (window.MatheduGame && window.MatheduGame.addXP) {
+        window.MatheduGame.addXP(5, '🧭 메타인지 자기점검');
+      }
+    };
+
+    window.toggleAcadDrawer = function(which) {
+      var map = {
+        cpa: { id: 'acadDrawerCpa', btn: 'btnAcadCpa', init: function() { renderCpaDrawer('iconic'); } },
+        scratch: { id: 'acadDrawerScratch', btn: 'btnAcadScratch', init: renderScratchDrawer },
+        metacog: { id: 'acadDrawerMetacog', btn: 'btnAcadMetacog', init: renderMetacogDrawer }
+      };
+      var item = map[which];
+      if (!item) return;
+      var el = document.getElementById(item.id);
+      var btn = document.getElementById(item.btn);
+      if (!el) return;
+      var isOpen = el.classList.contains('open');
+      ['acadDrawerCpa', 'acadDrawerScratch', 'acadDrawerMetacog'].forEach(function(id) {
+        var d = document.getElementById(id);
+        if (d) d.classList.remove('open');
+      });
+      ['btnAcadCpa', 'btnAcadScratch', 'btnAcadMetacog'].forEach(function(bid) {
+        var b = document.getElementById(bid);
+        if (b) b.classList.remove('active');
+      });
+      if (!isOpen) {
+        item.init();
+        el.classList.add('open');
+        if (btn) btn.classList.add('active');
+        var st = loadPedagogyState();
+        if (which === 'cpa') st.cpaCount = (st.cpaCount || 0) + 1;
+        if (which === 'scratch') st.scratchpadUsed = (st.scratchpadUsed || 0) + 1;
+        savePedagogyState(st);
+      }
+    };
+
+    // 5. Roediger 블라인드 능동 인출 모드 (선지 가리기 -> 스스로 먼저 생각 후 선지 열기)
+    function applyRetrievalBlindMode() {
+      var st = loadPedagogyState();
+      var btn = document.getElementById('btnAcadRetrieval');
+      if (btn) {
+        btn.classList.toggle('active', !!st.retrievalBlindMode);
+        btn.innerHTML = bilingual('🧠 블라인드 능동인출 ' + (st.retrievalBlindMode ? 'ON' : 'OFF'), '🧠 Blind Retrieval ' + (st.retrievalBlindMode ? 'ON' : 'OFF'));
+      }
+      qs.forEach(function(q, idx) {
+        var opts = q.querySelector('.opts');
+        if (!opts) return;
+        var maskId = 'acadBlindMask_' + idx;
+        var existingMask = document.getElementById(maskId);
+        if (!st.retrievalBlindMode || q.classList.contains('done') || q.dataset.retrievalRevealed === '1') {
+          opts.style.display = '';
+          if (existingMask) existingMask.remove();
+          return;
+        }
+        opts.style.display = 'none';
+        if (!existingMask) {
+          var mask = document.createElement('div');
+          mask.id = maskId;
+          mask.className = 'acad-blind-mask';
+          mask.innerHTML =
+            '<div style="font-size:0.82rem;font-weight:800;color:#006398;margin-bottom:6px">' +
+              bilingual('🧠 [로디거(Roediger) 능동적 인출 훈련]: 보기를 먼저 보면 뇌가 수동적 인식에 머뭅니다. 먼저 머릿속이나 연습장에 식/답을 떠올린 뒤 선지를 여세요!', '🧠 [Roediger Active Retrieval]: Think of the expression or answer first before revealing the choices!') +
+            '</div>' +
+            '<button type="button" class="acad-blind-btn" onclick="window.revealAcadRetrievalStep(' + idx + ')">' +
+              bilingual('👁️ 스스로 먼저 생각했습니다 — 5지선다 보기 열기 (+인출 보너스)', '👁️ I Thought It Through — Reveal Choices (+Bonus)') +
+            '</button>';
+          opts.parentNode.insertBefore(mask, opts);
+        }
+      });
+    }
+
+    window.toggleAcadRetrievalMode = function() {
+      var st = loadPedagogyState();
+      st.retrievalBlindMode = !st.retrievalBlindMode;
+      savePedagogyState(st);
+      applyRetrievalBlindMode();
+    };
+
+    window.revealAcadRetrievalStep = function(idx) {
+      var q = qs[idx];
+      if (!q) return;
+      q.dataset.retrievalRevealed = '1';
+      var st = loadPedagogyState();
+      st.retrievalSuccess = (st.retrievalSuccess || 0) + 1;
+      savePedagogyState(st);
+      applyRetrievalBlindMode();
+    };
+
+    applyRetrievalBlindMode();
+
+    // 6. 각 단계(.q)별 ZPD 3단계 점진적 힌트 사다리 & Hattie/Freudenthal 정교한 오개념 진단 피드백 장착
+    qs.forEach(function(q, idx) {
+      if (q.dataset.acadBound === '1') return;
+      q.dataset.acadBound = '1';
+
+      var actions = q.querySelector('.q-actions');
+      var expEl = q.querySelector('.exp');
+      var knowEl = q.previousElementSibling && q.previousElementSibling.classList.contains('know') ? q.previousElementSibling : null;
+
+      // ZPD 힌트 박스 및 버튼 추가
+      if (actions) {
+        var hintBox = document.createElement('div');
+        hintBox.className = 'acad-hint-box';
+        hintBox.id = 'acadHintBox_' + idx;
+        if (expEl && expEl.parentNode) {
+          expEl.parentNode.insertBefore(hintBox, expEl);
+        } else {
+          q.appendChild(hintBox);
+        }
+
+        var hintBtn = document.createElement('button');
+        hintBtn.type = 'button';
+        hintBtn.className = 'acad-hint-btn';
+        hintBtn.innerHTML = bilingual('🪜 ZPD 단계 힌트 (1/2)', '🪜 ZPD Step Hint (1/2)');
+        hintBtn.onclick = function() {
+          var level = parseInt(q.dataset.hintLevel || '0', 10) + 1;
+          q.dataset.hintLevel = String(level);
+          var st = loadPedagogyState();
+          st.hintUsed = (st.hintUsed || 0) + 1;
+          savePedagogyState(st);
+
+          var prevQ = idx > 0 ? qs[idx - 1] : null;
+          var prevAnsIdx = prevQ ? (+prevQ.dataset.ans - 1) : -1;
+          var prevOpts = prevQ ? prevQ.querySelectorAll('.opt') : [];
+          var prevAnsText = (prevOpts && prevOpts[prevAnsIdx]) ? prevOpts[prevAnsIdx].innerHTML.replace(/<span class="n">\d+<\/span>/, '') : '';
+
+          var knowText = knowEl ? knowEl.innerHTML : '제0단계 수학 기호 번역기의 기본 공식을 먼저 확인하세요.';
+          if (level === 1) {
+            hintBox.innerHTML =
+              '<b>🔍 [1차 비계 힌트 · 핵심 원리 및 발문 (Vygotsky ZPD)]</b><br>' +
+              knowText +
+              (prevAnsText ? '<div style="margin-top:6px;padding:6px 10px;background:#ffffff;border-radius:8px;border:1px solid #bae6fd">🔗 <b>앞 단계(' + idx + '단계)에서 구한 레고 조각</b>: ' + prevAnsText + '</div>' : '');
+            hintBtn.innerHTML = bilingual('🧭 2차 결정적 식 힌트 (2/2)', '🧭 2nd Formula Bridge Hint (2/2)');
+          } else {
+            var rawExp = q.dataset.exp || '';
+            hintBox.innerHTML =
+              '<b>🧭 [2차 비계 힌트 · 수식 유도 브릿지 (Sweller Faded Example)]</b><br>' +
+              rawExp;
+            hintBtn.innerHTML = bilingual('✅ 힌트 모두 열림', '✅ All Hints Opened');
+          }
+          hintBox.classList.add('show');
+          if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([hintBox]).catch(function() {});
+          }
+        };
+        actions.insertBefore(hintBtn, actions.firstChild);
+      }
+
+      // Hattie 정교한 오개념 진단 & Freudenthal 안내된 재발명 피드백
+      var opts = q.querySelectorAll('.opt');
+      var ansNum = +q.dataset.ans;
+      opts.forEach(function(optEl, optIdx) {
+        optEl.addEventListener('click', function() {
+          setTimeout(function() {
+            if (!expEl || expEl.querySelector('.acad-diag-box')) return;
+            var chosenNum = optIdx + 1;
+            var chosenTex = optEl.innerHTML.replace(/<span class="n">\d+<\/span>/, '').trim();
+            var correctOpt = opts[ansNum - 1];
+            var correctTex = correctOpt ? correctOpt.innerHTML.replace(/<span class="n">\d+<\/span>/, '').trim() : '';
+
+            var diagDiv = document.createElement('div');
+            if (chosenNum === ansNum) {
+              var nextStepGuide = (idx < qs.length - 1)
+                ? ('이제 방금 스스로 도출한 <b>' + correctTex + '</b> 조각을 다음 <b>' + (idx + 2) + '단계</b>의 조건에 레고 블록처럼 결합해 보세요!')
+                : '초등 기초 직관(1단계)부터 출발해 수능 본문항까지 스스로 재발명(Guided Reinvention)하여 완주했습니다!';
+              diagDiv.className = 'acad-diag-box acad-diag-correct';
+              diagDiv.innerHTML =
+                '<b>✨ [프로이덴탈 안내된 재발명(Guided Reinvention) 성공!]</b><br>' +
+                '정확합니다! 선택한 <b>' + chosenTex + '</b>은(는) 이 단계의 핵심 수학적 변환을 완벽히 만족합니다. ' + nextStepGuide;
+            } else {
+              var prevCheckMsg = idx > 0
+                ? ('앞선 <b>' + idx + '단계 디딤돌</b>의 결과와 <b>제0단계 기호 번역기</b>의 지수·부호·정의역 약속을 다시 대조해 보세요.')
+                : '<b>제0단계 수학 기호 번역기</b>의 기본 연산 약속(곱셈 횟수, 부호, 분수 계산)을 작은 숫자로 먼저 확인해 보세요.';
+              diagDiv.className = 'acad-diag-box acad-diag-wrong';
+              diagDiv.innerHTML =
+                '<b>🔬 [수학교육학 오개념 정밀 진단 (Hattie Elaborative Feedback)]</b><br>' +
+                '• 내가 선택한 보기(' + chosenNum + '번): <b>' + chosenTex + '</b> ➔ 목표 정답(' + ansNum + '번): <b>' + correctTex + '</b><br>' +
+                '• <b>진단 포인트</b>: 이 단계에서 흔히 발생하는 착오는 <b>① 지수·괄호·부호 결합 법칙의 혼동</b> 또는 <b>② 앞 단계 관계식 대입 과정의 계수/상수 착오</b>입니다. ' + prevCheckMsg;
+            }
+            expEl.insertBefore(diagDiv, expEl.firstChild);
+            if (window.MathJax && window.MathJax.typesetPromise) {
+              window.MathJax.typesetPromise([diagDiv]).catch(function() {});
+            }
+          }, 30);
+        });
+      });
+    });
+  }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRoom);
