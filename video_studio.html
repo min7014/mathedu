@@ -403,18 +403,20 @@
         </div>
       </div>
 
-      <!-- 📺 한국어(KO) 버전 & 영어(EN) 버전 유튜브(YouTube) 저장 및 업로드 관리 허브 -->
+      <!-- 📺 한국어(KO) 버전 & 영어(EN) 버전 유튜브(YouTube @min7014_ai) 자동 생성·업로드 관리 허브 -->
       <div id="youtubeStorageHub" class="yt-hub-box">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
           <div>
-            <b style="font-size:0.9rem;color:#be123c">📺 [YouTube 공식 채널: <a href="https://www.youtube.com/@min7014" target="_blank" rel="noopener" style="color:#be123c;text-decoration:underline">@min7014 (민은기 선생님의 수학자료실)</a>] 🇰🇷 한국어 &amp; 🇺🇸 영어 버전 저장 허브</b>
+            <b style="font-size:0.9rem;color:#be123c">🤖 [AI 자동생성 강의 전용 채널: <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" style="color:#be123c;text-decoration:underline">@min7014_ai (민은기 선생님의 수학자료실_AI)</a>]</b>
             <div style="font-size:0.75rem;color:#334155">
-              한국어(KO)와 영어(EN) 버전은 <b><a href="https://www.youtube.com/@min7014" target="_blank" rel="noopener" style="color:#006398">youtube.com/@min7014</a></b> 채널에 업로드하여 영구 저장·스트리밍하며, 제목·타임스탬프(00:00)·자막(.srt)·썸네일(1280×720)이 자동 생성됩니다.
+              AI로 자동 생성된 한국어(KO)·영어(EN) 강의 영상은 <b><a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" style="color:#006398">youtube.com/@min7014_ai</a></b> 에 자동 업로드·저장되며, 본 채널(<a href="https://www.youtube.com/@min7014" target="_blank" rel="noopener" style="color:#475569">@min7014</a>)과 연동됩니다.
             </div>
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-            <a href="https://www.youtube.com/@min7014" target="_blank" rel="noopener" class="btn" style="padding:5px 10px;font-size:0.74rem;text-decoration:none">📺 @min7014 채널 열기</a>
-            <a href="https://studio.youtube.com/channel/UC7DN_e571yaTderHffKFTTg/videos/upload?d=ud" target="_blank" rel="noopener" class="btn btn-yt" style="padding:5px 10px;font-size:0.74rem;text-decoration:none">📤 @min7014 YouTube Studio 업로드 창 열기</a>
+            <button type="button" class="btn btn-yt" style="padding:5px 11px;font-size:0.75rem" onclick="window.triggerAutoUploadCurrentSlug()">🚀 이 자료 AI 영상 자동생성 &amp; @min7014_ai 자동 업로드</button>
+            <button type="button" class="btn btn-primary" style="padding:5px 10px;font-size:0.74rem" onclick="window.triggerAutoUploadBatch(3)">🤖 연속 자동 업로드(3개)</button>
+            <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" class="btn" style="padding:5px 10px;font-size:0.74rem;text-decoration:none">📺 @min7014_ai 열기</a>
+            <a href="https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud" target="_blank" rel="noopener" class="btn" style="padding:5px 10px;font-size:0.74rem;text-decoration:none">📤 @min7014_ai 스튜디오</a>
             <div id="ytOrigQuickWatch" style="display:flex;gap:6px;flex-wrap:wrap"></div>
           </div>
         </div>
@@ -423,7 +425,7 @@
           <!-- 🇰🇷 한국어 버전 YouTube 카드 -->
           <div class="yt-lang-card">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">
-              <span style="font-size:0.82rem;font-weight:800;color:#006398">🇰🇷 한국어 버전 (YouTube KO)</span>
+              <span style="font-size:0.82rem;font-weight:800;color:#006398">🇰🇷 한국어 AI 강의 (@min7014_ai KO)</span>
               <span id="ytStatusBadgeKo" style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:999px;background:#fef3c7;color:#b45309">유튜브 패키지 준비 완료</span>
             </div>
             <div style="display:flex;gap:5px;flex-wrap:wrap">
@@ -433,7 +435,7 @@
               <button type="button" class="btn" onclick="window.downloadYoutubeThumbnail('ko')" style="padding:5px 9px;font-size:0.73rem">🖼️ KO 썸네일</button>
             </div>
             <div style="display:flex;gap:6px;align-items:center;margin-top:2px">
-              <input type="text" id="inputYtUrlKo" class="input-box" placeholder="한국어 유튜브 URL (https://youtu.be/...)" style="height:32px;font-size:0.75rem;flex:1">
+              <input type="text" id="inputYtUrlKo" class="input-box" placeholder="@min7014_ai 한국어 URL (https://youtu.be/...)" style="height:32px;font-size:0.75rem;flex:1">
               <button type="button" class="btn btn-primary" style="padding:5px 10px;font-size:0.73rem" onclick="window.saveYoutubeUrlBinding('ko')">저장</button>
             </div>
           </div>
@@ -441,7 +443,7 @@
           <!-- 🇺🇸 영어 버전 YouTube 카드 -->
           <div class="yt-lang-card">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">
-              <span style="font-size:0.82rem;font-weight:800;color:#4f46e5">🇺🇸 영어 버전 (YouTube EN)</span>
+              <span style="font-size:0.82rem;font-weight:800;color:#4f46e5">🇺🇸 영어 AI 강의 (@min7014_ai EN)</span>
               <span id="ytStatusBadgeEn" style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:999px;background:#fef3c7;color:#b45309">YouTube Package Ready</span>
             </div>
             <div style="display:flex;gap:5px;flex-wrap:wrap">
@@ -451,17 +453,21 @@
               <button type="button" class="btn" onclick="window.downloadYoutubeThumbnail('en')" style="padding:5px 9px;font-size:0.73rem">🖼️ EN Thumbnail</button>
             </div>
             <div style="display:flex;gap:6px;align-items:center;margin-top:2px">
-              <input type="text" id="inputYtUrlEn" class="input-box" placeholder="English YouTube URL (https://youtu.be/...)" style="height:32px;font-size:0.75rem;flex:1">
+              <input type="text" id="inputYtUrlEn" class="input-box" placeholder="@min7014_ai English URL (https://youtu.be/...)" style="height:32px;font-size:0.75rem;flex:1">
               <button type="button" class="btn btn-primary" style="padding:5px 10px;font-size:0.73rem" onclick="window.saveYoutubeUrlBinding('en')">Save</button>
             </div>
           </div>
         </div>
 
-        <!-- CLI 자동 렌더링 & YouTube API 업로드 안내 -->
+        <!-- CLI 자동 렌더링 & @min7014_ai 자동 업로드 안내 + 실시간 로그 -->
         <div style="padding:8px 12px;border-radius:10px;background:rgba(15,23,42,0.05);font-size:0.74rem;color:#334155;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-          <span id="ytCliCommandPreview">💻 <b>유튜브 자동 업로드 CLI</b>: <code>python -X utf8 min7014_video_maker.py --slug math20250130001 --upload-youtube</code></span>
-          <button type="button" class="btn" style="padding:3px 9px;font-size:0.72rem" onclick="window.copyCliUploadCommand()">📋 CLI 명령어 복사</button>
+          <span id="ytCliCommandPreview">💻 <b>@min7014_ai 자동 생성·업로드 CLI</b>: <code>python -X utf8 min7014_video_maker.py --auto-pipeline --slug math20250130001</code></span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button type="button" class="btn" style="padding:3px 9px;font-size:0.72rem" onclick="window.triggerSyncChannelRss()">🔄 @min7014_ai RSS 동기화</button>
+            <button type="button" class="btn" style="padding:3px 9px;font-size:0.72rem" onclick="window.copyCliUploadCommand()">📋 CLI 명령어 복사</button>
+          </div>
         </div>
+        <pre id="aiAutoServerLogBox" style="display:none;margin:0;padding:8px 10px;border-radius:8px;background:#0f172a;color:#38bdf8;font-size:0.72rem;max-height:110px;overflow-y:auto;white-space:pre-wrap"></pre>
       </div>
     </div>
 
@@ -768,7 +774,7 @@
 
     var cliPreview = document.getElementById('ytCliCommandPreview');
     if (cliPreview) {
-      cliPreview.innerHTML = '💻 <b>유튜브(KO/EN) 자동 빌드 &amp; 업로드 CLI</b>: <code>python -X utf8 min7014_video_maker.py --slug ' + escapeHtml(slug) + ' --langs ko,en --upload-youtube</code>';
+      cliPreview.innerHTML = '💻 <b>@min7014_ai 자동 생성·업로드 CLI</b>: <code>python -X utf8 min7014_video_maker.py --auto-pipeline --slug ' + escapeHtml(slug) + '</code>';
     }
   }
 
@@ -909,13 +915,120 @@
 
   window.copyCliUploadCommand = function() {
     var slug = (currentScriptDoc && currentScriptDoc.slug) || 'math20250130001';
-    var cmd = 'python -X utf8 min7014_video_maker.py --slug ' + slug + ' --langs ko,en --upload-youtube';
+    var cmd = 'python -X utf8 min7014_video_maker.py --auto-pipeline --slug ' + slug;
     navigator.clipboard.writeText(cmd).then(function() {
       var statusEl = document.getElementById('translationStatusMsg');
       if (statusEl) {
-        statusEl.textContent = '📋 CLI 명령어가 복사되었습니다: ' + cmd;
+        statusEl.textContent = '📋 @min7014_ai 자동 생성·업로드 CLI 명령어가 복사되었습니다: ' + cmd;
       }
     });
+  };
+
+  var aiLogPollTimer = null;
+  function pollAiAutoServerLogs() {
+    var logBox = document.getElementById('aiAutoServerLogBox');
+    if (logBox) logBox.style.display = 'block';
+    fetch('http://127.0.0.1:8765/status')
+      .then(function(r) { return r.json(); })
+      .then(function(st) {
+        if (logBox && st.logs) {
+          logBox.textContent = st.logs.slice(-15).join('\n');
+          logBox.scrollTop = logBox.scrollHeight;
+        }
+        if (st.status === 'idle' && aiLogPollTimer) {
+          clearInterval(aiLogPollTimer);
+          aiLogPollTimer = null;
+          // 카탈로그 및 현재 주제 URL 재로드
+          fetch('video_lectures/catalog.json?t=' + Date.now())
+            .then(function(r) { return r.ok ? r.json() : []; })
+            .then(function(cat) {
+              (cat || []).forEach(function(c) { videoCatalogMap[c.slug] = c; });
+              if (currentScriptDoc && videoCatalogMap[currentScriptDoc.slug]) {
+                currentScriptDoc.youtube_urls = videoCatalogMap[currentScriptDoc.slug].youtube_urls || currentScriptDoc.youtube_urls;
+                setupYoutubeStorageHub();
+              }
+            }).catch(function() {});
+        }
+      })
+      .catch(function() {});
+  }
+
+  window.triggerAutoUploadCurrentSlug = function() {
+    var slug = (currentScriptDoc && currentScriptDoc.slug) || 'math20250130001';
+    var logBox = document.getElementById('aiAutoServerLogBox');
+    if (logBox) {
+      logBox.style.display = 'block';
+      logBox.textContent = '🚀 [@min7014_ai 자동화 서버 연결 중] ' + slug + ' 자료의 AI 영상 생성 및 유튜브 업로드를 시작합니다...';
+    }
+    fetch('http://127.0.0.1:8765/auto-upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: slug, privacy: 'public', git_push: true })
+    })
+      .then(function(r) { return r.json(); })
+      .then(function() {
+        if (!aiLogPollTimer) {
+          aiLogPollTimer = setInterval(pollAiAutoServerLogs, 1500);
+        }
+        pollAiAutoServerLogs();
+      })
+      .catch(function() {
+        if (logBox) {
+          logBox.textContent =
+            '💡 로컬 자동 업로드 서버(127.0.0.1:8765)가 꺼져 있습니다.\n' +
+            '폴더의 upload_to_youtube_min7014.bat 파일을 실행하거나 터미널에서 아래 명령어를 실행하면 @min7014_ai 채널로 자동 업로드됩니다:\n' +
+            'python -X utf8 min7014_video_maker.py --auto-pipeline --slug ' + slug;
+        }
+        window.open('https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud', '_blank');
+      });
+  };
+
+  window.triggerAutoUploadBatch = function(cnt) {
+    var countVal = cnt || 3;
+    var logBox = document.getElementById('aiAutoServerLogBox');
+    if (logBox) {
+      logBox.style.display = 'block';
+      logBox.textContent = '🤖 [@min7014_ai 연속 자동 업로드] 미업로드 PDF 자료 ' + countVal + '개를 순서대로 AI 영상 생성 후 @min7014_ai에 자동 업로드합니다...';
+    }
+    fetch('http://127.0.0.1:8765/auto-upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: '', count: countVal, privacy: 'public', git_push: true })
+    })
+      .then(function(r) { return r.json(); })
+      .then(function() {
+        if (!aiLogPollTimer) {
+          aiLogPollTimer = setInterval(pollAiAutoServerLogs, 1500);
+        }
+        pollAiAutoServerLogs();
+      })
+      .catch(function() {
+        if (logBox) {
+          logBox.textContent =
+            '💡 터미널에서 아래 명령어를 실행하면 미업로드 자료들이 연속으로 자동 생성·업로드됩니다:\n' +
+            'python -X utf8 min7014_video_maker.py --auto-pipeline --count ' + countVal;
+        }
+      });
+  };
+
+  window.triggerSyncChannelRss = function() {
+    var logBox = document.getElementById('aiAutoServerLogBox');
+    if (logBox) {
+      logBox.style.display = 'block';
+      logBox.textContent = '🔄 https://www.youtube.com/@min7014_ai 채널 RSS 피드에서 업로드된 영상 주소를 자동 동기화합니다...';
+    }
+    fetch('http://127.0.0.1:8765/sync-rss', { method: 'POST' })
+      .then(function() {
+        if (!aiLogPollTimer) {
+          aiLogPollTimer = setInterval(pollAiAutoServerLogs, 1500);
+        }
+        pollAiAutoServerLogs();
+      })
+      .catch(function() {
+        if (logBox) {
+          logBox.textContent = '💻 터미널 명령어: python -X utf8 min7014_video_maker.py --sync-channel';
+        }
+      });
   };
 
   window.downloadYoutubeThumbnail = function(lang) {
