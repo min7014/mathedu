@@ -1066,9 +1066,15 @@ def refresh_all_youtube_metadata_packages():
     update_video_catalog()
 
 
-def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None):
-    """업로드 완료된 한국어(ko) 및 영어(en) 유튜브 URL을 스크립트, 카탈로그, 심층 지식 DB에 일괄 저장합니다."""
+def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=True):
+    """
+    업로드 완료된 한국어(ko) 및 영어(en) 유튜브 URL을 @min7014_ai 영상저장고 인덱스(vault_index.json),
+    스크립트, 카탈로그, 심층 지식 DB에 일괄 저장하고, 두 언어 모두 유튜브 저장고에 올라간 경우
+    로컬 임시 MP4를 자동 정리하여 @min7014_ai를 영구 클라우드 영상저장고로 활용합니다.
+    """
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    final_ko = ""
+    final_en = ""
     if script_path.exists():
         sdoc = json.loads(script_path.read_text(encoding="utf-8"))
         yt_urls = sdoc.setdefault("youtube_urls", {"ko": "", "en": "", "orig": ""})
@@ -1076,6 +1082,8 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None):
             yt_urls["ko"] = yt_ko.strip()
         if yt_en is not None:
             yt_urls["en"] = yt_en.strip()
+        final_ko = yt_urls.get("ko", "")
+        final_en = yt_urls.get("en", "")
         script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
 
     if DEEP_JSON_PATH.exists():
@@ -1102,8 +1110,19 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None):
                 lmap[slug_key]["ye"] = yt_en.strip()
             LOOKUP_JSON_PATH.write_text(json.dumps(lmap, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
+    # 한국어(ko)와 영어(en) 모두 @min7014_ai 영상저장고에 업로드 완료되면 로컬 MP4 용량 자동 회수
+    if purge_local_mp4 and final_ko and final_en:
+        up_dir = YT_UPLOADS_DIR / slug_key
+        if up_dir.exists():
+            for mp4_file in up_dir.glob("*.mp4"):
+                try:
+                    mp4_file.unlink()
+                    print(f"  [Vault Offload] @min7014_ai 저장 완료 -> 로컬 MP4 정리: {mp4_file.name}")
+                except Exception:
+                    pass
+
     update_video_catalog()
-    print(f"[YouTube URLs Registered] slug={slug_key} -> ko={yt_ko}, en={yt_en}")
+    print(f"[@min7014_ai Video Vault Registered] slug={slug_key} -> ko={yt_ko}, en={yt_en}")
 
 
 YOUTUBE_CHANNEL_HANDLE = "@min7014_ai"
@@ -1647,7 +1666,32 @@ def update_video_catalog():
         })
     with open(CATALOG_PATH, "w", encoding="utf-8") as f:
         json.dump(scripts, f, ensure_ascii=False, indent=2)
-    print(f"[Catalog Updated] {CATALOG_PATH} ({len(scripts)} topics)")
+
+    vault_index = {
+        "vault_channel_name": YOUTUBE_CHANNEL_NAME,
+        "vault_channel_handle": YOUTUBE_CHANNEL_HANDLE,
+        "vault_channel_id": YOUTUBE_CHANNEL_ID,
+        "vault_channel_url": YOUTUBE_CHANNEL_URL,
+        "studio_upload_url": YOUTUBE_STUDIO_UPLOAD_URL,
+        "rss_feed_url": YOUTUBE_RSS_URL,
+        "total_indexed_topics": len(scripts),
+        "vault_entries": {
+            s["slug"]: {
+                "title": s["title"],
+                "title_en": s["title_en"],
+                "page_count": s["page_count"],
+                "pdf_url": s["pdf_url"],
+                "youtube_ko": s["youtube_urls"].get("ko", ""),
+                "youtube_en": s["youtube_urls"].get("en", ""),
+                "youtube_orig": s["youtube_urls"].get("orig", ""),
+                "vault_stored": bool(s["youtube_urls"].get("ko") and s["youtube_urls"].get("en")),
+            }
+            for s in scripts
+        },
+    }
+    vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
+    vault_path.write_text(json.dumps(vault_index, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[Catalog & @min7014_ai Video Vault Updated] {CATALOG_PATH} / {vault_path} ({len(scripts)} topics)")
 
 
 if __name__ == "__main__":
