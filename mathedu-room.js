@@ -3254,6 +3254,17 @@
 
           var actDiv = itemEl.querySelector('.min-item-actions');
           if (actDiv) {
+            var pdfLinkEl = actDiv.querySelector('a[href$=".pdf"], a[href*=".pdf"]');
+            if (pdfLinkEl && !actDiv.querySelector('.min-video-studio-btn')) {
+              var pdfHref = pdfLinkEl.getAttribute('href') || '';
+              var studioBase = isBoard ? '../video_studio.html' : 'video_studio.html';
+              var vidBtn = document.createElement('a');
+              vidBtn.href = studioBase + '?pdf=' + encodeURIComponent(pdfHref);
+              vidBtn.className = 'mathedu-voice-btn min-video-studio-btn';
+              vidBtn.style.textDecoration = 'none';
+              vidBtn.innerHTML = bilingual('🎬 다국어 강의 영상', '🎬 Multi-Lang Video');
+              actDiv.insertBefore(vidBtn, actDiv.firstChild);
+            }
             var docentBtn = document.createElement('button');
             docentBtn.type = 'button';
             docentBtn.className = 'mathedu-voice-btn';

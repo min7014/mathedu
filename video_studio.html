@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>수학자료실(min7014.github.io) 다국어 PDF 단계별 강의 영상 스튜디오 | mathedu</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --line: #cbd5e1;
+      --txt: #0f172a;
+      --sub: #475569;
+      --accent: #006398;
+      --accent2: #4f46e5;
+      --emerald: #059669;
+      --amber: #d97706;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Pretendard', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.55;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 20px;
+    }
+    .topbar-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--txt);
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+    .brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px 16px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+    .pipeline-banner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .pipe-step {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--card2);
+      border: 1px solid var(--line);
+    }
+    .pipe-step b {
+      display: block;
+      color: var(--accent);
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .pipe-step span {
+      font-size: 0.78rem;
+      color: var(--sub);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--txt);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-primary {
+      background: linear-gradient(135deg, #006398 0%, #4f46e5 100%);
+      color: #ffffff;
+      border-color: transparent;
+    }
+    .btn-primary:hover { color: #ffffff; opacity: 0.94; }
+    .btn-emerald {
+      background: #059669;
+      color: #ffffff;
+      border-color: #059669;
+    }
+    .btn-emerald:hover { color: #ffffff; opacity: 0.94; }
+    .btn-amber {
+      background: #d97706;
+      color: #ffffff;
+      border-color: #d97706;
+    }
+    .btn-amber:hover { color: #ffffff; opacity: 0.94; }
+    .btn-danger {
+      background: #e11d48;
+      color: #ffffff;
+      border-color: #e11d48;
+    }
+    .chip-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .chip {
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--card2);
+      color: var(--txt);
+      cursor: pointer;
+    }
+    .chip.active, .chip:hover {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 980px) {
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      background: #0f172a;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid #38bdf8;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #studioCinemaCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .script-table-wrap {
+      max-height: 620px;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card2);
+    }
+    .script-page-row {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .script-page-row.active-page {
+      background: #f0f9ff;
+      border-left: 4px solid #006398;
+    }
+    .script-textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-family: inherit;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      resize: vertical;
+    }
+    .script-textarea.target-lang {
+      background: #fefce8;
+      border-color: #fde047;
+      color: #1e293b;
+      font-weight: 600;
+    }
+    .input-box, .select-box {
+      height: 38px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      font-size: 0.84rem;
+      background: #ffffff;
+      color: var(--txt);
+    }
+    .mp4-showcase-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%);
+      border: 1px solid #93c5fd;
+    }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/favicon.png" alt="mathedu">
+      <div>
+        <div>민은기 선생님의 수학자료실 · 다국어 PDF 강의 영상 스튜디오</div>
+        <div style="font-size:0.73rem;color:var(--sub);font-weight:600">설명 텍스트(대본) 우선 생성 ➔ 전 세계 모든 언어 나레이션 번역 ➔ 단계별 강의 영상 제작</div>
+      </div>
+    </a>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a href="index.html" class="btn">🏠 메인 허브로</a>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="btn">🌐 min7014.github.io 본관 ↗</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. 아키텍처 안내 및 PDF 자료 선택 카드 -->
+  <section class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>
+        <h1 style="margin:0;font-size:1.25rem;font-weight:800;color:var(--txt)">🎬 단계별 플립북 PDF ➔ 전 세계 다국어 수학 강의 영상 제작 시스템</h1>
+        <p style="margin:4px 0 0;font-size:0.84rem;color:var(--sub)">
+          <b>https://min7014.github.io/</b>의 각 PDF 자료는 한 페이지마다 도형과 수식이 한 단계씩 전개되는 플립북 구조입니다. 먼저 페이지별 <b>설명 텍스트(대본)</b>를 생성·편집한 뒤, 이를 통해 <b>어떤 나라의 언어로도 나레이션과 강의 영상</b>을 즉시 제작할 수 있습니다.
+        </p>
+      </div>
+    </div>
+
+    <div class="pipeline-banner">
+      <div class="pipe-step">
+        <b>STEP 1 · 페이지별 설명 텍스트(대본) 우선 생성</b>
+        <span>PDF의 1페이지부터 마지막 페이지까지 각 단계의 도형 작도·보조선·수식 변화를 분석하여 기본 설명 텍스트 대본을 먼저 만듭니다.</span>
+      </div>
+      <div class="pipe-step">
+        <b>STEP 2 · 전 세계 모든 국가 언어 나레이션 변환</b>
+        <span>작성된 설명 텍스트를 기반으로 한국어·영어·일본어·중국어·스페인어·프랑스어·독일어·베트남어 등 원하는 국가의 나레이션 대본을 자동 생성합니다.</span>
+      </div>
+      <div class="pipe-step">
+        <b>STEP 3 · 다국어 강의 영상 재생 &amp; MP4/WebM 파일 제작</b>
+        <span>각 페이지 나레이션 음성과 자막에 맞춰 PDF 페이지가 자동으로 넘어가며 강의 영상이 재생되고, 동영상 파일(.webm/.mp4)과 대본(.json/.srt)으로 저장됩니다.</span>
+      </div>
+    </div>
+
+    <!-- PDF 자료 검색 및 선택 -->
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <label style="font-size:0.84rem;font-weight:800;color:var(--accent)">📚 수학자료실 PDF 선택 (866개 전체):</label>
+      <input type="text" id="pdfSearchInput" class="input-box" placeholder="🔍 주제 검색 (예: 피타고라스, 체바, 타원, 단델린, 중점연결, 미분...)" style="min-width:240px;flex:1" oninput="window.filterStudioPdfList()">
+      <select id="pdfSelectDropdown" class="select-box" style="min-width:280px;flex:1.2" onchange="window.loadSelectedPdfTopic(this.value)"></select>
+      <button type="button" class="btn btn-primary" onclick="window.loadSelectedPdfTopic(document.getElementById('pdfSelectDropdown').value)">🔄 이 자료 불러오기</button>
+    </div>
+
+    <div class="chip-row" id="flagshipQuickChips">
+      <span style="font-size:0.76rem;font-weight:800;color:var(--sub);align-self:center;margin-right:4px">⭐ 추천 대표 강의 (다국어 대본 + 1080p MP4 완비):</span>
+      <button type="button" class="chip active" onclick="window.loadFlagshipByKey('math20250130001', this)">🌳 피타고라스 나무 (11p · KO/EN/JA/ES MP4)</button>
+      <button type="button" class="chip" onclick="window.loadFlagshipByKey('2014111902', this)">📐 체바의 정리 (17p · KO/EN MP4)</button>
+      <button type="button" class="chip" onclick="window.loadFlagshipByKey('2017090101', this)">📐 피타고라스 정리 넓이 분할 증명 (24p)</button>
+    </div>
+  </section>
+
+  <!-- 2. 다국어 언어 선택 & 일괄 번역 컨트롤 바 -->
+  <section class="card" style="background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%)">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-size:0.9rem;font-weight:800;color:var(--txt)">🌍 나레이션 및 영상 제작 국가 언어 선택:</span>
+        <select id="targetLangSelect" class="select-box" style="font-weight:800;border-color:var(--accent)" onchange="window.onTargetLanguageChange(this.value)">
+          <option value="ko">🇰🇷 한국어 (Korean · ko-KR)</option>
+          <option value="en">🇺🇸 영어 (English · en-US)</option>
+          <option value="ja">🇯🇵 일본어 (日本語 · ja-JP)</option>
+          <option value="zh-CN">🇨🇳 중국어 간체 (中文 · zh-CN)</option>
+          <option value="zh-TW">🇹🇼 중국어 번체 (繁體中文 · zh-TW)</option>
+          <option value="es">🇪🇸 스페인어 (Español · es-ES)</option>
+          <option value="fr">🇫🇷 프랑스어 (Français · fr-FR)</option>
+          <option value="de">🇩🇪 독일어 (Deutsch · de-DE)</option>
+          <option value="vi">🇻🇳 베트남어 (Tiếng Việt · vi-VN)</option>
+          <option value="th">🇹🇭 태국어 (ภาษาไทย · th-TH)</option>
+          <option value="id">🇮🇩 인도네시아어 (Bahasa Indonesia · id-ID)</option>
+          <option value="pt">🇧🇷 포르투갈어 (Português · pt-BR)</option>
+          <option value="ru">🇷🇺 러시아어 (Русский · ru-RU)</option>
+          <option value="ar">🇸🇦 아랍어 (العربية · ar-SA)</option>
+          <option value="hi">🇮🇳 힌디어 (हिन्दी · hi-IN)</option>
+          <option value="tr">🇹🇷 튀르키예어 (Türkçe · tr-TR)</option>
+          <option value="it">🇮🇹 이탈리아어 (Italiano · it-IT)</option>
+          <option value="pl">🇵🇱 폴란드어 (Polski · pl-PL)</option>
+          <option value="uz">🇺🇿 우즈베크어 (Oʻzbek · uz-UZ)</option>
+          <option value="mn">🇲🇳 몽골어 (Монгол · mn-MN)</option>
+        </select>
+        <input type="text" id="customIsoLangInput" class="input-box" placeholder="직접 코드 입력 (예: nl, sv, el)" style="width:185px" title="전 세계 어떤 언어든 ISO 언어 코드(예: nl, sv, el, fa, he, uk)를 입력하면 해당 언어로 번역됩니다.">
+        <button type="button" class="btn btn-amber" onclick="window.translateAllPagesToSelectedLang()">
+          🌐 [1차 설명 텍스트] ➔ 선택한 국가 언어로 전 페이지 나레이션 자동 생성
+        </button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button type="button" class="btn" onclick="window.downloadScriptJson()">📥 다국어 대본(.json) 다운로드</button>
+        <button type="button" class="btn" onclick="window.downloadSubtitleSrt()">📥 다국어 자막(.srt) 다운로드</button>
+      </div>
+    </div>
+    <div id="translationStatusMsg" style="margin-top:8px;font-size:0.78rem;color:var(--emerald);font-weight:700"></div>
+  </section>
+
+  <!-- 3. 메인 스튜디오 워크스페이스: 좌측 [16:9 강의 영상 플레이어 & MP4 쇼케이스] / 우측 [페이지별 설명 텍스트 & 다국어 나레이션 대본 편집기] -->
+  <div class="studio-grid">
+    <!-- 좌측: 16:9 시네마 강의 플레이어 및 녹화기 -->
+    <div class="card" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+        <div>
+          <h2 style="margin:0;font-size:1.02rem;font-weight:800;color:var(--txt)" id="playerTopicTitle">📺 실시간 다국어 PDF 단계별 강의 영상 플레이어</h2>
+          <div style="font-size:0.76rem;color:var(--sub)" id="playerPageCounter">페이지 로딩 중...</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button type="button" class="btn btn-primary" id="btnPlayLecture" onclick="window.toggleCinemaLecturePlay()">▶️ 전체 페이지 강의 영상 재생</button>
+          <button type="button" class="btn btn-danger" id="btnRecordVideo" onclick="window.startOrStopCanvasVideoRecording()">🔴 영상 파일(.webm) 녹화 추출</button>
+        </div>
+      </div>
+
+      <!-- 16:9 Broadcast Lecture Canvas -->
+      <div class="canvas-wrap">
+        <canvas id="studioCinemaCanvas" width="1280" height="720"></canvas>
+      </div>
+
+      <!-- 페이지 이동 및 음성 속도 컨트롤 -->
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px 12px;border-radius:10px;background:var(--card2);border:1px solid var(--line)">
+        <div style="display:flex;align-items:center;gap:6px">
+          <button type="button" class="btn" onclick="window.stepStudioPage(-1)">⏮️ 이전 페이지</button>
+          <span id="studioPageIndicator" style="font-size:0.84rem;font-weight:800;color:var(--accent);min-width:90px;text-align:center">1 / 1</span>
+          <button type="button" class="btn" onclick="window.stepStudioPage(1)">⏭️ 다음 페이지</button>
+          <button type="button" class="btn" onclick="window.speakCurrentPageOnly()">🔊 현재 페이지만 음성 듣기</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <label style="font-size:0.76rem;font-weight:700;color:var(--sub)">배속:</label>
+          <select id="studioVoiceSpeed" class="select-box" style="height:32px;font-size:0.78rem">
+            <option value="0.85">0.85x (천천히)</option>
+            <option value="1.0" selected>1.0x (표준)</option>
+            <option value="1.15">1.15x (약간 빠르게)</option>
+            <option value="1.3">1.3x (빠르게)</option>
+          </select>
+          <a id="btnOpenOriginalPdf" href="https://min7014.github.io/" target="_blank" rel="noopener" class="btn" style="font-size:0.75rem">📄 원본 PDF 열기 ↗</a>
+        </div>
+      </div>
+
+      <!-- 사전 렌더링된 1080p Neural TTS MP4 영상이 있는 경우 표시 -->
+      <div id="prebuiltMp4Container" class="mp4-showcase-box" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <div>
+            <b style="font-size:0.86rem;color:#1e3a8a">🎞️ [완성본 1080p MP4 강의 영상] Neural TTS 음성 + 1080p 슬라이드 합성 완료</b>
+            <div style="font-size:0.75rem;color:#334155">아래 언어 버튼을 누르면 페이지별 설명 대본으로 실제 렌더링된 고화질 MP4 강의 영상을 바로 재생하거나 다운로드할 수 있습니다.</div>
+          </div>
+          <div id="prebuiltMp4LangBtns" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+        </div>
+        <video id="prebuiltMp4VideoEl" controls style="width:100%;border-radius:10px;background:#000;max-height:340px"></video>
+      </div>
+    </div>
+
+    <!-- 우측: [1차] 페이지별 설명 텍스트 생성/편집 & [2차] 각 나라 언어 나레이션 대본 워크스테이션 -->
+    <div class="card" style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+        <div>
+          <h2 style="margin:0;font-size:1.02rem;font-weight:800;color:var(--txt)">📝 페이지별 [1차 설명 텍스트] &amp; [2차 다국어 나레이션] 대본 편집기</h2>
+          <div style="font-size:0.76rem;color:var(--sub)">
+            각 페이지의 <b>1차 설명 텍스트(한국어 기준)</b>를 수정한 뒤 상단의 <b>[🌐 선택한 국가 언어로 전 페이지 나레이션 자동 생성]</b>을 누르면 어떤 언어로든 즉시 변환됩니다.
+          </div>
+        </div>
+      </div>
+
+      <div id="scriptRowsContainer" class="script-table-wrap">
+        <div style="padding:40px;text-align:center;color:var(--sub)">PDF 자료를 불러오면 페이지별 설명 텍스트 대본이 여기에 생성됩니다.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="mathedu-room.js?v=20261102_voice"></script>
+<script>
+(function() {
+  'use strict';
+
+  if (window.pdfjsLib) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+
+  var allPdfMaterials = [];
+  var filteredPdfMaterials = [];
+  var videoCatalogMap = {};
+  var currentPdfDoc = null;
+  var currentTopicMeta = null;
+  var currentScriptDoc = null;
+  var currentPageNum = 1;
+  var totalPages = 1;
+  var pageImageCache = {};
+  var isLecturePlaying = false;
+  var mediaRecorder = null;
+  var recordedChunks = [];
+
+  var LANG_LABELS = {
+    'ko': { name: '한국어 (Korean)', flag: '🇰🇷', bcp47: 'ko-KR' },
+    'en': { name: 'English (영어)', flag: '🇺🇸', bcp47: 'en-US' },
+    'ja': { name: '日本語 (일본어)', flag: '🇯🇵', bcp47: 'ja-JP' },
+    'zh-CN': { name: '中文 (중국어 간체)', flag: '🇨🇳', bcp47: 'zh-CN' },
+    'zh-TW': { name: '繁體中文 (중국어 번체)', flag: '🇹🇼', bcp47: 'zh-TW' },
+    'es': { name: 'Español (스페인어)', flag: '🇪🇸', bcp47: 'es-ES' },
+    'fr': { name: 'Français (프랑스어)', flag: '🇫🇷', bcp47: 'fr-FR' },
+    'de': { name: 'Deutsch (독일어)', flag: '🇩🇪', bcp47: 'de-DE' },
+    'vi': { name: 'Tiếng Việt (베트남어)', flag: '🇻🇳', bcp47: 'vi-VN' },
+    'th': { name: 'ภาษาไทย (태국어)', flag: '🇹🇭', bcp47: 'th-TH' },
+    'id': { name: 'Bahasa Indonesia (인도네시아어)', flag: '🇮🇩', bcp47: 'id-ID' },
+    'pt': { name: 'Português (포르투갈어)', flag: '🇧🇷', bcp47: 'pt-BR' },
+    'ru': { name: 'Русский (러시아어)', flag: '🇷🇺', bcp47: 'ru-RU' },
+    'ar': { name: 'العربية (아랍어)', flag: '🇸🇦', bcp47: 'ar-SA' },
+    'hi': { name: 'हिन्दी (힌디어)', flag: '🇮🇳', bcp47: 'hi-IN' },
+    'tr': { name: 'Türkçe (튀르키예어)', flag: '🇹🇷', bcp47: 'tr-TR' },
+    'it': { name: 'Italiano (이탈리아어)', flag: '🇮🇹', bcp47: 'it-IT' },
+    'pl': { name: 'Polski (폴란드어)', flag: '🇵🇱', bcp47: 'pl-PL' },
+    'uz': { name: 'Oʻzbek (우즈베크어)', flag: '🇺🇿', bcp47: 'uz-UZ' },
+    'mn': { name: 'Монгол (몽골어)', flag: '🇲🇳', bcp47: 'mn-MN' }
+  };
+
+  function getActiveLangCode() {
+    var customInp = document.getElementById('customIsoLangInput');
+    if (customInp && customInp.value.trim()) {
+      return customInp.value.trim();
+    }
+    var sel = document.getElementById('targetLangSelect');
+    return sel ? sel.value : 'ko';
+  }
+
+  function getLangMeta(code) {
+    return LANG_LABELS[code] || { name: code, flag: '🌐', bcp47: code };
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function extractSlugFromItem(it) {
+    var u = (it && it.url) ? it.url : '';
+    var p = (it && it.pdf) ? it.pdf.split('#')[0] : '';
+    var webSlug = u.split('/').pop().replace('.html', '');
+    var pdfSlug = p.split('/').pop().replace('.pdf', '');
+    if (videoCatalogMap[webSlug]) return webSlug;
+    if (videoCatalogMap[pdfSlug]) return pdfSlug;
+    return webSlug || pdfSlug || 'topic';
+  }
+
+  // 초기 카탈로그 및 866개 PDF 목록 로드
+  Promise.all([
+    fetch('video_lectures/catalog.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; }),
+    fetch('assets/min7014_deep_knowledge.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; })
+  ]).then(function(results) {
+    var catalog = results[0] || [];
+    var deepList = results[1] || [];
+
+    catalog.forEach(function(c) {
+      videoCatalogMap[c.slug] = c;
+    });
+
+    allPdfMaterials = deepList.filter(function(it) { return Boolean(it.pdf); });
+    filteredPdfMaterials = allPdfMaterials.slice();
+    populatePdfDropdown();
+
+    var params = new URLSearchParams(window.location.search);
+    var initSlug = params.get('slug') || params.get('pdf') || 'math20250130001';
+    window.loadFlagshipByKey(initSlug);
+  });
+
+  function populatePdfDropdown() {
+    var sel = document.getElementById('pdfSelectDropdown');
+    if (!sel) return;
+    var h = '';
+    filteredPdfMaterials.slice(0, 300).forEach(function(it, idx) {
+      var pdfClean = (it.pdf || '').split('#')[0];
+      var subKo = it.sub_domain_ko ? ('[' + it.sub_domain_ko.split('(')[0].trim() + '] ') : '';
+      h += '<option value="' + escapeHtml(pdfClean) + '">' + escapeHtml(subKo + it.title) + '</option>';
+    });
+    sel.innerHTML = h;
+  }
+
+  window.filterStudioPdfList = function() {
+    var q = (document.getElementById('pdfSearchInput')?.value || '').trim().toLowerCase();
+    if (!q) {
+      filteredPdfMaterials = allPdfMaterials.slice();
+    } else {
+      filteredPdfMaterials = allPdfMaterials.filter(function(it) {
+        var corpus = ((it.title || '') + ' ' + (it.sub_domain_ko || '') + ' ' + (it.core_concept || '')).toLowerCase();
+        return corpus.indexOf(q) !== -1;
+      });
+    }
+    populatePdfDropdown();
+  };
+
+  window.loadFlagshipByKey = function(key, chipBtn) {
+    if (chipBtn) {
+      document.querySelectorAll('#flagshipQuickChips .chip').forEach(function(b) { b.classList.remove('active'); });
+      chipBtn.classList.add('active');
+    }
+    var found = allPdfMaterials.find(function(it) {
+      var u = it.url || '';
+      var p = (it.pdf || '').split('#')[0];
+      return u.indexOf(key) !== -1 || p.indexOf(key) !== -1;
+    });
+    if (found) {
+      var pdfClean = (found.pdf || '').split('#')[0];
+      var sel = document.getElementById('pdfSelectDropdown');
+      if (sel) sel.value = pdfClean;
+      window.loadSelectedPdfTopic(pdfClean, key);
+    } else if (videoCatalogMap[key]) {
+      window.loadSelectedPdfTopic(videoCatalogMap[key].pdf_url, key);
+    }
+  };
+
+  window.loadSelectedPdfTopic = function(pdfUrl, forcedSlug) {
+    if (!pdfUrl) return;
+    stopCinemaLecture();
+    pageImageCache = {};
+
+    var cleanPdfUrl = pdfUrl.split('#')[0];
+    currentTopicMeta = allPdfMaterials.find(function(it) {
+      return (it.pdf || '').split('#')[0] === cleanPdfUrl;
+    }) || { title: '수학자료실 시각적 증명', pdf: cleanPdfUrl, url: 'https://min7014.github.io/' };
+
+    var slugKey = forcedSlug || extractSlugFromItem(currentTopicMeta);
+    var pdfSlugAlt = cleanPdfUrl.split('/').pop().replace('.pdf', '');
+
+    var openBtn = document.getElementById('btnOpenOriginalPdf');
+    if (openBtn) openBtn.href = cleanPdfUrl;
+
+    var titleEl = document.getElementById('playerTopicTitle');
+    if (titleEl) titleEl.textContent = '📺 ' + (currentTopicMeta.title || '단계별 강의 영상');
+
+    // 사전 제작된 MP4 쇼케이스 확인
+    var catEntry = videoCatalogMap[slugKey] || videoCatalogMap[pdfSlugAlt];
+    setupPrebuiltMp4Showcase(catEntry);
+
+    // PDF.js로 PDF 로드 + 사전 생성된 대본 JSON 확인
+    var scriptFetchUrl = catEntry ? catEntry.script_url : ('video_lectures/scripts/' + slugKey + '.json');
+    Promise.all([
+      window.pdfjsLib.getDocument(cleanPdfUrl).promise,
+      fetch(scriptFetchUrl).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+    ]).then(function(res) {
+      currentPdfDoc = res[0];
+      var loadedScript = res[1];
+      totalPages = currentPdfDoc.numPages;
+      currentPageNum = 1;
+
+      var cntEl = document.getElementById('playerPageCounter');
+      if (cntEl) cntEl.textContent = '총 ' + totalPages + '페이지 (한 페이지 = 한 단계 시각적 증명 슬라이드)';
+
+      if (loadedScript && loadedScript.pages && loadedScript.pages.length === totalPages) {
+        currentScriptDoc = loadedScript;
+      } else {
+        currentScriptDoc = buildBrowserInitialScript(currentTopicMeta, totalPages, cleanPdfUrl);
+      }
+
+      renderScriptEditorRows();
+      renderPageOnCinemaCanvas(1);
+    }).catch(function(err) {
+      var cntEl = document.getElementById('playerPageCounter');
+      if (cntEl) cntEl.textContent = 'PDF 로드 오류: ' + (err && err.message ? err.message : err);
+    });
+  };
+
+  function setupPrebuiltMp4Showcase(catEntry) {
+    var box = document.getElementById('prebuiltMp4Container');
+    var btnWrap = document.getElementById('prebuiltMp4LangBtns');
+    var vidEl = document.getElementById('prebuiltMp4VideoEl');
+    if (!box || !btnWrap || !vidEl) return;
+
+    if (!catEntry || !catEntry.rendered_videos || Object.keys(catEntry.rendered_videos).length === 0) {
+      box.style.display = 'none';
+      vidEl.pause();
+      vidEl.removeAttribute('src');
+      return;
+    }
+
+    box.style.display = 'block';
+    var vids = catEntry.rendered_videos;
+    var langKeys = Object.keys(vids);
+    var html = '';
+    langKeys.forEach(function(lk, idx) {
+      var meta = getLangMeta(lk);
+      var vUrl = vids[lk];
+      html += '<button type="button" class="btn ' + (idx === 0 ? 'btn-primary' : '') + '" onclick="window.switchPrebuiltMp4(\'' + escapeHtml(vUrl) + '\', this)">' + meta.flag + ' ' + escapeHtml(meta.name) + ' MP4 재생</button>';
+      html += '<a href="' + escapeHtml(vUrl) + '" download class="btn" title="1080p MP4 다운로드">⬇️ MP4</a>';
+    });
+    btnWrap.innerHTML = html;
+    vidEl.src = vids[langKeys[0]];
+  }
+
+  window.switchPrebuiltMp4 = function(vUrl, btnEl) {
+    var vidEl = document.getElementById('prebuiltMp4VideoEl');
+    if (!vidEl) return;
+    var parent = btnEl && btnEl.parentNode;
+    if (parent) {
+      parent.querySelectorAll('button.btn').forEach(function(b) { b.classList.remove('btn-primary'); });
+    }
+    if (btnEl) btnEl.classList.add('btn-primary');
+    vidEl.src = vUrl;
+    vidEl.play().catch(function() {});
+  };
+
+  function buildBrowserInitialScript(meta, numPages, pdfUrl) {
+    var rawTitle = (meta && meta.title) ? meta.title.replace(/\$[^\$]*\$/g, '') : '수학자료실 시각적 증명';
+    var core = (meta && meta.core_concept) ? meta.core_concept.replace(/\$[^\$]*\$/g, '') : '도형의 기하학적 성질과 수식 관계를 단계별로 규명합니다.';
+    var vis = (meta && meta.visual_summary) ? meta.visual_summary.replace(/\$[^\$]*\$/g, '') : '보조선이 추가되며 도형의 대칭과 합동 관계가 드러납니다.';
+    var steps = (meta && meta.scaffolding_steps) || [];
+    var tips = (meta && meta.solving_tips) || [];
+
+    var pages = [];
+    for (var i = 1; i <= numPages; i++) {
+      var stepTitle = '';
+      var expKo = '';
+      if (i === 1) {
+        stepTitle = '도입 · 주제 및 증명 목표 안내';
+        expKo = '1페이지입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 주제는 ' + rawTitle + '이며, ' + core;
+      } else if (i === numPages) {
+        stepTitle = '완결 · 실전 보조선 팁 및 마무리';
+        var tipStr = tips[0] ? tips[0].replace(/\$[^\$]*\$/g, '') : '도형의 정의와 보조선을 기억하세요.';
+        expKo = '마지막 ' + i + '페이지입니다. 단계별 작도로 증명을 완결했습니다. 실전 팁으로, ' + tipStr;
+      } else if (i === 2) {
+        stepTitle = '기초 칠판 및 기준 도형 준비';
+        expKo = '2페이지입니다. 빈 칠판 위에서 기준이 되는 기본 도형과 꼭짓점을 배치하며 작도를 시작합니다.';
+      } else {
+        var ratio = (i - 2) / Math.max(1, numPages - 3);
+        if (ratio <= 0.3) {
+          stepTitle = '1단계 · 기본 도형 및 기준점 작도';
+          var s0 = steps[0] ? steps[0].replace(/\$[^\$]*\$/g, '') : '기본 도형의 변과 꼭짓점을 표시합니다.';
+          expKo = i + '페이지입니다. 기본 도형의 점과 선분을 차례대로 작도합니다. ' + s0;
+        } else if (ratio <= 0.6) {
+          stepTitle = '2단계 · 핵심 보조선 및 기하적 대칭 관찰';
+          var s1 = steps[1] ? steps[1].replace(/\$[^\$]*\$/g, '') : vis;
+          expKo = i + '페이지입니다. 핵심 보조선을 긋고 각과 선분의 대칭·합동 관계를 연결합니다. ' + s1;
+        } else if (ratio <= 0.85) {
+          stepTitle = '3단계 · 비례식 및 대수적 관계식 유도';
+          var s2 = steps[2] ? steps[2].replace(/\$[^\$]*\$/g, '') : '도형에서 찾은 비례 관계를 수식으로 나타냅니다.';
+          expKo = i + '페이지입니다. 도형의 기하학적 성질로부터 등식과 비례식을 유도합니다. ' + s2;
+        } else {
+          stepTitle = '4단계 · 수식 결합 및 정리 완성';
+          var s3 = steps[3] ? steps[3].replace(/\$[^\$]*\$/g, '') : '앞 단계의 식들을 결합하여 최종 정리를 완성합니다.';
+          expKo = i + '페이지입니다. 유도된 관계식들을 결합하여 최종 정리를 완성합니다. ' + s3;
+        }
+      }
+      pages.push({
+        page: i,
+        step_title: stepTitle,
+        explanation_text: expKo,
+        narrations: { ko: expKo }
+      });
+    }
+
+    return {
+      slug: extractSlugFromItem(meta),
+      title: meta.title || rawTitle,
+      sub_domain_ko: meta.sub_domain_ko || '',
+      pdf_url: pdfUrl,
+      web_url: meta.url || 'https://min7014.github.io/',
+      page_count: numPages,
+      base_language: 'ko',
+      pages: pages
+    };
+  }
+
+  function renderScriptEditorRows() {
+    var container = document.getElementById('scriptRowsContainer');
+    if (!container || !currentScriptDoc) return;
+    var lang = getActiveLangCode();
+    var langMeta = getLangMeta(lang);
+
+    var html = '';
+    currentScriptDoc.pages.forEach(function(pObj, idx) {
+      var pNum = pObj.page;
+      var baseKo = pObj.explanation_text || '';
+      var targetTxt = (pObj.narrations && pObj.narrations[lang]) ? pObj.narrations[lang] : (lang === 'ko' ? baseKo : '');
+
+      html += '<div class="script-page-row' + (pNum === currentPageNum ? ' active-page' : '') + '" id="scriptRowPage_' + pNum + '">';
+      html += '  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">';
+      html += '    <div style="display:flex;align-items:center;gap:6px">';
+      html += '      <span style="padding:2px 8px;border-radius:6px;background:var(--accent);color:#fff;font-size:0.75rem;font-weight:800">' + pNum + '페이지</span>';
+      html += '      <span style="font-size:0.78rem;font-weight:700;color:var(--sub)">' + escapeHtml(pObj.step_title || '') + '</span>';
+      html += '    </div>';
+      html += '    <div style="display:flex;gap:5px">';
+      html += '      <button type="button" class="btn" style="padding:3px 9px;font-size:0.73rem" onclick="window.jumpToStudioPage(' + pNum + ')">👁️ 슬라이드 보기</button>';
+      html += '      <button type="button" class="btn" style="padding:3px 9px;font-size:0.73rem" onclick="window.speakSinglePageFromRow(' + pNum + ')">🔊 ' + langMeta.flag + ' 음성 듣기</button>';
+      html += '    </div>';
+      html += '  </div>';
+      html += '  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+      html += '    <div>';
+      html += '      <div style="font-size:0.72rem;font-weight:800;color:var(--sub);margin-bottom:3px">🇰🇷 [1차] 기본 설명 텍스트 (한국어 원본·수정 가능)</div>';
+      html += '      <textarea class="script-textarea" rows="3" oninput="window.updateBaseExplanationText(' + idx + ', this.value)">' + escapeHtml(baseKo) + '</textarea>';
+      html += '    </div>';
+      html += '    <div>';
+      html += '      <div style="font-size:0.72rem;font-weight:800;color:#b45309;margin-bottom:3px">' + langMeta.flag + ' [2차] ' + escapeHtml(langMeta.name) + ' 나레이션 대본</div>';
+      html += '      <textarea class="script-textarea target-lang" id="targetTextarea_' + pNum + '" rows="3" placeholder="상단 [전 페이지 나레이션 자동 생성] 버튼을 누르거나 직접 입력하세요." oninput="window.updateTargetNarrationText(' + idx + ', this.value)">' + escapeHtml(targetTxt) + '</textarea>';
+      html += '    </div>';
+      html += '  </div>';
+      html += '</div>';
+    });
+
+    container.innerHTML = html;
+  }
+
+  window.updateBaseExplanationText = function(pageIdx, val) {
+    if (!currentScriptDoc || !currentScriptDoc.pages[pageIdx]) return;
+    currentScriptDoc.pages[pageIdx].explanation_text = val;
+    if (getActiveLangCode() === 'ko') {
+      currentScriptDoc.pages[pageIdx].narrations['ko'] = val;
+      var tEl = document.getElementById('targetTextarea_' + (pageIdx + 1));
+      if (tEl) tEl.value = val;
+      if (currentPageNum === pageIdx + 1) renderPageOnCinemaCanvas(currentPageNum);
+    }
+  };
+
+  window.updateTargetNarrationText = function(pageIdx, val) {
+    if (!currentScriptDoc || !currentScriptDoc.pages[pageIdx]) return;
+    var lang = getActiveLangCode();
+    if (!currentScriptDoc.pages[pageIdx].narrations) currentScriptDoc.pages[pageIdx].narrations = {};
+    currentScriptDoc.pages[pageIdx].narrations[lang] = val;
+    if (currentPageNum === pageIdx + 1) renderPageOnCinemaCanvas(currentPageNum);
+  };
+
+  window.onTargetLanguageChange = function() {
+    var customInp = document.getElementById('customIsoLangInput');
+    if (customInp) customInp.value = '';
+    var lang = getActiveLangCode();
+    if (!currentScriptDoc) return;
+
+    // 해당 언어 나레이션이 아직 비어 있으면 자동 번역 실행
+    var firstPage = currentScriptDoc.pages[0];
+    if (lang !== 'ko' && (!firstPage.narrations || !firstPage.narrations[lang])) {
+      window.translateAllPagesToSelectedLang();
+    } else {
+      renderScriptEditorRows();
+      renderPageOnCinemaCanvas(currentPageNum);
+    }
+  };
+
+  window.translateAllPagesToSelectedLang = function() {
+    if (!currentScriptDoc || !currentScriptDoc.pages) return;
+    var lang = getActiveLangCode();
+    var langMeta = getLangMeta(lang);
+    var statusEl = document.getElementById('translationStatusMsg');
+
+    if (lang === 'ko') {
+      currentScriptDoc.pages.forEach(function(p) {
+        p.narrations['ko'] = p.explanation_text;
+      });
+      renderScriptEditorRows();
+      renderPageOnCinemaCanvas(currentPageNum);
+      if (statusEl) statusEl.textContent = '✅ 한국어 기본 설명 텍스트가 나레이션 대본에 동기화되었습니다.';
+      return;
+    }
+
+    if (statusEl) {
+      statusEl.textContent = '⏳ 1페이지 ~ ' + currentScriptDoc.pages.length + '페이지 설명 텍스트를 ' + langMeta.flag + ' ' + langMeta.name + ' 나레이션으로 번역 중입니다...';
+    }
+
+    var tasks = currentScriptDoc.pages.map(function(pObj) {
+      var srcKo = pObj.explanation_text || '';
+      var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=' + encodeURIComponent(lang) + '&dt=t&q=' + encodeURIComponent(srcKo);
+      return fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var tr = (data && data[0]) ? data[0].map(function(seg) { return seg[0] || ''; }).join('') : srcKo;
+          if (!pObj.narrations) pObj.narrations = {};
+          pObj.narrations[lang] = tr || srcKo;
+        })
+        .catch(function() {
+          if (!pObj.narrations) pObj.narrations = {};
+          pObj.narrations[lang] = srcKo;
+        });
+    });
+
+    Promise.all(tasks).then(function() {
+      renderScriptEditorRows();
+      renderPageOnCinemaCanvas(currentPageNum);
+      if (statusEl) {
+        statusEl.textContent = '✅ 총 ' + currentScriptDoc.pages.length + '페이지의 설명 텍스트가 ' + langMeta.flag + ' [' + langMeta.name + '] 나레이션 대본으로 생성 완료되었습니다! 이제 [▶️ 전체 페이지 강의 영상 재생]을 눌러보세요.';
+      }
+    });
+  };
+
+  function getPdfPageCanvas(pageNum) {
+    if (pageImageCache[pageNum]) {
+      return Promise.resolve(pageImageCache[pageNum]);
+    }
+    if (!currentPdfDoc) return Promise.reject(new Error('No PDF loaded'));
+    return currentPdfDoc.getPage(pageNum).then(function(page) {
+      var viewport = page.getViewport({ scale: 2.0 });
+      var offCanvas = document.createElement('canvas');
+      offCanvas.width = viewport.width;
+      offCanvas.height = viewport.height;
+      var ctx = offCanvas.getContext('2d');
+      return page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function() {
+        pageImageCache[pageNum] = offCanvas;
+        return offCanvas;
+      });
+    });
+  }
+
+  function wrapCanvasText(ctx, text, maxWidth) {
+    var words = String(text || '').split(/\s+/);
+    // CJK 문장(공백이 적은 문장)은 글자 단위 줄바꿈 병행
+    if (words.length <= 3 && String(text || '').length > 25) {
+      var chars = Array.from(String(text || ''));
+      var cLines = [];
+      var cur = '';
+      for (var i = 0; i < chars.length; i++) {
+        var test = cur + chars[i];
+        if (ctx.measureText(test).width > maxWidth && cur) {
+          cLines.push(cur);
+          cur = chars[i];
+        } else {
+          cur = test;
+        }
+      }
+      if (cur) cLines.push(cur);
+      return cLines.slice(0, 3);
+    }
+
+    var lines = [];
+    var currentLine = words[0] || '';
+    for (var j = 1; j < words.length; j++) {
+      var word = words[j];
+      var width = ctx.measureText(currentLine + ' ' + word).width;
+      if (width < maxWidth) {
+        currentLine += ' ' + word;
+      } else {
+        lines.push(currentLine);
+        currentLine = word;
+      }
+    }
+    if (currentLine) lines.push(currentLine);
+    return lines.slice(0, 3);
+  }
+
+  function renderPageOnCinemaCanvas(pageNum) {
+    var canvas = document.getElementById('studioCinemaCanvas');
+    if (!canvas) return Promise.resolve();
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width;
+    var H = canvas.height;
+
+    var indEl = document.getElementById('studioPageIndicator');
+    if (indEl) indEl.textContent = pageNum + ' / ' + totalPages;
+
+    document.querySelectorAll('.script-page-row').forEach(function(r) { r.classList.remove('active-page'); });
+    var activeRow = document.getElementById('scriptRowPage_' + pageNum);
+    if (activeRow) {
+      activeRow.classList.add('active-page');
+    }
+
+    return getPdfPageCanvas(pageNum).then(function(pdfCanvas) {
+      // 1. 배경
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, W, H);
+
+      // 2. 상단 방송 헤더 바
+      ctx.fillStyle = '#131c31';
+      ctx.fillRect(0, 0, W, 52);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, 52);
+      ctx.lineTo(W, 52);
+      ctx.stroke();
+
+      var titleStr = '📐 민은기 선생님의 수학자료실 · ' + ((currentScriptDoc && currentScriptDoc.title) || '');
+      if (titleStr.length > 48) titleStr = titleStr.slice(0, 48) + '...';
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = 'bold 18px Pretendard, sans-serif';
+      ctx.fillText(titleStr, 20, 32);
+
+      var lang = getActiveLangCode();
+      var langMeta = getLangMeta(lang);
+      var badgeStr = 'STEP ' + pageNum + ' / ' + totalPages + '  |  ' + langMeta.flag + ' ' + langMeta.name;
+      ctx.fillStyle = '#006398';
+      ctx.fillRect(W - 340, 10, 324, 32);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 14px Pretendard, sans-serif';
+      ctx.fillText(badgeStr, W - 326, 31);
+
+      // 3. 중앙 PDF 슬라이드 렌더링 (y: 60 ~ 572)
+      var availW = W - 80;
+      var availH = 508;
+      var scale = Math.min(availW / pdfCanvas.width, availH / pdfCanvas.height);
+      var dw = Math.round(pdfCanvas.width * scale);
+      var dh = Math.round(pdfCanvas.height * scale);
+      var dx = Math.round((W - dw) / 2);
+      var dy = 60 + Math.round((availH - dh) / 2);
+
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(dx - 3, dy - 3, dw + 6, dh + 6);
+      ctx.drawImage(pdfCanvas, dx, dy, dw, dh);
+
+      // 4. 변화 영역 골드 포커스 하이라이트
+      var pInfo = (currentScriptDoc && currentScriptDoc.pages) ? currentScriptDoc.pages[pageNum - 1] : null;
+      if (pInfo && pInfo.diff_bbox && pageNum > 1 && pageNum < totalPages) {
+        var b = pInfo.diff_bbox;
+        var bx = dx + Math.round(b[0] * dw) - 6;
+        var by = dy + Math.round(b[1] * dh) - 6;
+        var bw = Math.round((b[2] - b[0]) * dw) + 12;
+        var bh = Math.round((b[3] - b[1]) * dh) + 12;
+        if (bw > 18 && bh > 18) {
+          ctx.strokeStyle = '#f59e0b';
+          ctx.lineWidth = 3;
+          ctx.strokeRect(bx, by, bw, bh);
+        }
+      }
+
+      // 5. 하단 다국어 나레이션 자막 바 (y: 576 ~ 720)
+      ctx.fillStyle = '#090e1c';
+      ctx.fillRect(0, 576, W, H - 576);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, 576);
+      ctx.lineTo(W, 576);
+      ctx.stroke();
+
+      var narrTxt = (pInfo && pInfo.narrations && pInfo.narrations[lang]) ? pInfo.narrations[lang] : (pInfo ? pInfo.explanation_text : '');
+      var koRef = pInfo ? pInfo.explanation_text : '';
+
+      ctx.fillStyle = '#fef08a';
+      ctx.font = 'bold 19px Pretendard, sans-serif';
+      var lines = wrapCanvasText(ctx, narrTxt, W - 64);
+      var ySub = 606;
+      lines.forEach(function(ln) {
+        ctx.fillText(ln, 32, ySub);
+        ySub += 26;
+      });
+
+      if (lang !== 'ko' && koRef) {
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '14px Pretendard, sans-serif';
+        var oneKo = koRef.length > 78 ? (koRef.slice(0, 78) + '...') : koRef;
+        ctx.fillText('[한국어 설명 원문] ' + oneKo, 32, 704);
+      }
+    });
+  }
+
+  window.stepStudioPage = function(delta) {
+    stopCinemaLecture();
+    currentPageNum = Math.max(1, Math.min(totalPages, currentPageNum + delta));
+    renderPageOnCinemaCanvas(currentPageNum);
+  };
+
+  window.jumpToStudioPage = function(pNum) {
+    stopCinemaLecture();
+    currentPageNum = Math.max(1, Math.min(totalPages, pNum));
+    renderPageOnCinemaCanvas(currentPageNum);
+  };
+
+  function speakTextInLanguage(text, langCode, onDone) {
+    if (!('speechSynthesis' in window)) {
+      setTimeout(onDone, 2800);
+      return;
+    }
+    try {
+      window.speechSynthesis.cancel();
+      var utter = new SpeechSynthesisUtterance(text);
+      var meta = getLangMeta(langCode);
+      utter.lang = meta.bcp47 || langCode;
+      var spdSel = document.getElementById('studioVoiceSpeed');
+      utter.rate = spdSel ? parseFloat(spdSel.value || '1.0') : 1.0;
+
+      var voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+      var prefix = langCode.split('-')[0].toLowerCase();
+      var matchedVoice = voices.find(function(v) {
+        return v.lang && v.lang.toLowerCase().indexOf(prefix) === 0 && (v.name.indexOf('Natural') !== -1 || v.name.indexOf('Google') !== -1);
+      }) || voices.find(function(v) {
+        return v.lang && v.lang.toLowerCase().indexOf(prefix) === 0;
+      });
+      if (matchedVoice) utter.voice = matchedVoice;
+
+      utter.onend = function() { if (onDone) onDone(); };
+      utter.onerror = function() { if (onDone) onDone(); };
+      window.speechSynthesis.speak(utter);
+    } catch (e) {
+      setTimeout(onDone, 2500);
+    }
+  }
+
+  window.speakCurrentPageOnly = function() {
+    stopCinemaLecture();
+    if (!currentScriptDoc || !currentScriptDoc.pages[currentPageNum - 1]) return;
+    var lang = getActiveLangCode();
+    var pInfo = currentScriptDoc.pages[currentPageNum - 1];
+    var txt = (pInfo.narrations && pInfo.narrations[lang]) ? pInfo.narrations[lang] : pInfo.explanation_text;
+    renderPageOnCinemaCanvas(currentPageNum).then(function() {
+      speakTextInLanguage(txt, lang);
+    });
+  };
+
+  window.speakSinglePageFromRow = function(pNum) {
+    currentPageNum = pNum;
+    window.speakCurrentPageOnly();
+  };
+
+  function stopCinemaLecture() {
+    isLecturePlaying = false;
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
+    var btn = document.getElementById('btnPlayLecture');
+    if (btn) btn.textContent = '▶️ 전체 페이지 강의 영상 재생';
+  }
+
+  function playCinemaStepLoop() {
+    if (!isLecturePlaying || !currentScriptDoc) return;
+    if (currentPageNum > totalPages) {
+      stopCinemaLecture();
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
+      return;
+    }
+
+    var activeRow = document.getElementById('scriptRowPage_' + currentPageNum);
+    if (activeRow) {
+      activeRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    var lang = getActiveLangCode();
+    var pInfo = currentScriptDoc.pages[currentPageNum - 1];
+    var txt = (pInfo && pInfo.narrations && pInfo.narrations[lang]) ? pInfo.narrations[lang] : (pInfo ? pInfo.explanation_text : '');
+
+    renderPageOnCinemaCanvas(currentPageNum).then(function() {
+      speakTextInLanguage(txt, lang, function() {
+        if (!isLecturePlaying) return;
+        setTimeout(function() {
+          if (!isLecturePlaying) return;
+          currentPageNum++;
+          playCinemaStepLoop();
+        }, 450);
+      });
+    });
+  }
+
+  window.toggleCinemaLecturePlay = function() {
+    var btn = document.getElementById('btnPlayLecture');
+    if (isLecturePlaying) {
+      stopCinemaLecture();
+      return;
+    }
+    if (currentPageNum >= totalPages) currentPageNum = 1;
+    isLecturePlaying = true;
+    if (btn) btn.textContent = '⏹️ 강의 재생 정지';
+    playCinemaStepLoop();
+  };
+
+  window.startOrStopCanvasVideoRecording = function() {
+    var recBtn = document.getElementById('btnRecordVideo');
+    var canvas = document.getElementById('studioCinemaCanvas');
+    if (!canvas) return;
+
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+      stopCinemaLecture();
+      return;
+    }
+
+    try {
+      var stream = canvas.captureStream(30);
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+      mediaRecorder.ondataavailable = function(e) {
+        if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+      };
+      mediaRecorder.onstop = function() {
+        var blob = new Blob(recordedChunks, { type: 'video/webm' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        var lang = getActiveLangCode();
+        var slug = (currentScriptDoc && currentScriptDoc.slug) || 'min7014_lecture';
+        a.href = url;
+        a.download = slug + '_' + lang + '_lecture.webm';
+        a.click();
+        if (recBtn) recBtn.textContent = '🔴 영상 파일(.webm) 녹화 추출';
+      };
+      mediaRecorder.start();
+      if (recBtn) recBtn.textContent = '⏹️ 녹화 완료 및 파일 저장';
+      currentPageNum = 1;
+      isLecturePlaying = true;
+      var playBtn = document.getElementById('btnPlayLecture');
+      if (playBtn) playBtn.textContent = '⏹️ 강의 재생 정지';
+      playCinemaStepLoop();
+    } catch (e) {
+      alert('브라우저 캔버스 녹화를 시작할 수 없습니다: ' + e.message);
+    }
+  };
+
+  window.downloadScriptJson = function() {
+    if (!currentScriptDoc) return;
+    var blob = new Blob([JSON.stringify(currentScriptDoc, null, 2)], { type: 'application/json;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (currentScriptDoc.slug || 'min7014_script') + '_multilingual_script.json';
+    a.click();
+  };
+
+  function formatSrtTime(sec) {
+    var hrs = Math.floor(sec / 3600);
+    var mins = Math.floor((sec % 3600) / 60);
+    var s = Math.floor(sec % 60);
+    var ms = Math.round((sec - Math.floor(sec)) * 1000);
+    return String(hrs).padStart(2, '0') + ':' + String(mins).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ',' + String(ms).padStart(3, '0');
+  }
+
+  window.downloadSubtitleSrt = function() {
+    if (!currentScriptDoc || !currentScriptDoc.pages) return;
+    var lang = getActiveLangCode();
+    var srt = '';
+    var t = 0;
+    currentScriptDoc.pages.forEach(function(p, idx) {
+      var txt = (p.narrations && p.narrations[lang]) ? p.narrations[lang] : p.explanation_text;
+      var dur = Math.max(4, Math.min(14, Math.ceil(String(txt || '').length / 11)));
+      srt += (idx + 1) + '\n';
+      srt += formatSrtTime(t) + ' --> ' + formatSrtTime(t + dur) + '\n';
+      srt += txt + '\n\n';
+      t += dur;
+    });
+    var blob = new Blob([srt], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (currentScriptDoc.slug || 'min7014') + '_' + lang + '.srt';
+    a.click();
+  };
+})();
+</script>
+</body>
+</html>

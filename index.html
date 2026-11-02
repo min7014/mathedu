@@ -617,6 +617,10 @@ html.dark-theme .filter-tab-btn {
 
         <!-- Primary Link Directory -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+          <a href="video_studio.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
+            <span class="font-semibold truncate">🎬 다국어 PDF 강의 영상 스튜디오</span>
+            <span class="text-secondary text-xs font-bold shrink-0">열기 ➔</span>
+          </a>
           <a href="game.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
             <span class="font-semibold truncate">🎮 수학의 성전 3D (퀘스트 게임)</span>
             <span class="text-secondary text-xs font-bold shrink-0">열기 ➔</span>
@@ -1914,6 +1918,7 @@ function toggleMathStory() {
         h += '      <a href="' + escapeHtml(algeoUrl) + '" target="_blank" rel="noopener" class="bg-status-emerald/15 hover:bg-status-emerald/25 text-status-emerald px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📐 AlgeoMath</a>';
       }
       if (pdfUrl) {
+        h += '      <a href="video_studio.html?pdf=' + encodeURIComponent(pdfUrl) + '" class="bg-[#eef2ff] hover:bg-[#e0e7ff] text-[#3730a3] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">🎬 다국어 영상 강의</a>';
         h += '      <a href="' + escapeHtml(pdfUrl) + '" target="_blank" rel="noopener" class="bg-status-amber/15 hover:bg-status-amber/25 text-[#B45309] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📄 증명 PDF</a>';
       }
       if (ytUrl) {
