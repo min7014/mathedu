@@ -787,6 +787,9 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     pdf_url = script_doc["pdf_url"]
     web_url = script_doc.get("web_url") or "https://min7014.github.io/"
     studio_url = f"https://min7014.github.io/mathedu/video_studio.html?slug={slug}"
+    channel_url = "https://www.youtube.com/@min7014"
+    channel_id = "UC7DN_e571yaTderHffKFTTg"
+    studio_upload_url = f"https://studio.youtube.com/channel/{channel_id}/videos/upload?d=ud"
 
     chapters = []
     for pt in page_timings:
@@ -803,37 +806,44 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
 
     if lang_code == "en":
         clean_en_title = script_doc.get("title_en") or script_doc.get("title", slug)
-        yt_title = f"[Min's Math Lab] {clean_en_title} (1080p Visual Proof)"
+        yt_title = f"[Min's Math Lab @min7014] {clean_en_title} (1080p Visual Proof)"
         if len(yt_title) > 98:
             yt_title = yt_title[:95] + "..."
         yt_desc = (
             f"📐 Step-by-Step Visual Mathematical Proof Lecture ({tot_p} Flipbook Pages · 1080p Broadcast Quality)\n"
-            f"Topic: {clean_en_title}\n\n"
+            f"Topic: {clean_en_title} [ID: {slug}_EN]\n"
+            f"📺 Official YouTube Channel: {channel_url}\n\n"
             f"🔗 Interactive GeoGebra & Original Flipbook PDF: {web_url}\n"
             f"📄 Direct PDF Link: {pdf_url}\n"
             f"🎬 Multilingual Lecture Studio (20+ Languages): {studio_url}\n\n"
             f"⏱️ [Step-by-Step Chapters]\n{chapters_block}\n\n"
-            f"#MathProof #Geometry #VisualMath #MinsMathLab #StepByStepMath #Mathematics"
+            f"#min7014 #MathProof #Geometry #VisualMath #MinsMathLab #StepByStepMath #Mathematics"
         )
-        yt_tags = ["Min's Math Lab", "Visual Math Proof", "Geometry Proof", "Mathematics", "GeoGebra", "Step by Step Math"]
+        yt_tags = ["min7014", "Min's Math Lab", "Visual Math Proof", "Geometry Proof", "Mathematics", "GeoGebra", "Step by Step Math"]
     else:
         clean_ko_title = re.sub(r"\$[^\$]*\$", "", script_doc.get("title", slug)).strip()
-        yt_title = f"[민은기 선생님의 수학자료실] {clean_ko_title} — 단계별 시각 증명 강의 (1080p)"
+        yt_title = f"[민은기 선생님의 수학자료실 @min7014] {clean_ko_title} — 단계별 시각 증명 강의 (1080p)"
         if len(yt_title) > 98:
             yt_title = yt_title[:95] + "..."
         yt_desc = (
             f"📐 민은기 선생님의 수학자료실(https://min7014.github.io/) 단계별 플립북 PDF 해설 강의 (총 {tot_p}페이지 · 1080p 초고화질)\n"
-            f"주제: {clean_ko_title}\n\n"
+            f"주제: {clean_ko_title} [ID: {slug}_KO]\n"
+            f"📺 공식 유튜브 채널: {channel_url}\n\n"
             f"🔗 대화형 GeoGebra 실습 및 원문 보기: {web_url}\n"
             f"📄 단계별 증명 PDF 원문: {pdf_url}\n"
             f"🎬 전 세계 다국어 강의 영상 스튜디오: {studio_url}\n\n"
             f"⏱️ [페이지별 단계 타임스탬프]\n{chapters_block}\n\n"
-            f"#민은기선생님의수학자료실 #수학증명 #기하학 #시각적증명 #수학교육 #GeoGebra #mathedu"
+            f"#min7014 #민은기선생님의수학자료실 #수학증명 #기하학 #시각적증명 #수학교육 #GeoGebra #mathedu"
         )
-        yt_tags = ["민은기 선생님의 수학자료실", "수학 증명", "기하 증명", "시각적 수학", "GeoGebra", "수능 수학", "mathedu"]
+        yt_tags = ["min7014", "민은기 선생님의 수학자료실", "수학 증명", "기하 증명", "시각적 수학", "GeoGebra", "수능 수학", "mathedu"]
 
     return {
         "lang": lang_code,
+        "channel_handle": "@min7014",
+        "channel_name": "민은기 선생님의 수학자료실",
+        "channel_id": channel_id,
+        "channel_url": channel_url,
+        "studio_upload_url": studio_upload_url,
         "title": yt_title,
         "description": yt_desc,
         "tags": yt_tags,
@@ -983,6 +993,18 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
             (topic_upload_dir / f"{slug_key}_youtube_meta.json").write_text(
                 json.dumps(full_meta, ensure_ascii=False, indent=2), encoding="utf-8"
             )
+            info_txt = (
+                f"=== YouTube Channel: {yt_meta['channel_url']} ({yt_meta['channel_name']}) ===\n"
+                f"=== Direct Upload Studio: {yt_meta['studio_upload_url']} ===\n"
+                f"=== Video File: youtube_uploads/{slug_key}/{slug_key}_{lang_code}.mp4 ===\n"
+                f"=== Thumbnail (1280x720): video_lectures/youtube_packages/{slug_key}_{lang_code}_thumb.png ===\n"
+                f"=== Subtitle SRT: video_lectures/youtube_packages/{slug_key}_{lang_code}.srt ===\n\n"
+                f"[TITLE]\n{yt_meta['title']}\n\n"
+                f"[DESCRIPTION]\n{yt_meta['description']}\n\n"
+                f"[TAGS]\n{', '.join(yt_meta['tags'])}\n"
+            )
+            (YT_PKG_DIR / f"{slug_key}_{lang_code}_youtube_info.txt").write_text(info_txt, encoding="utf-8")
+            (topic_upload_dir / f"{slug_key}_{lang_code}_youtube_info.txt").write_text(info_txt, encoding="utf-8")
 
             for p_obj, pt in zip(script_doc["pages"], page_timings):
                 p_obj.setdefault("durations", {})[lang_code] = pt["duration"]
@@ -994,6 +1016,52 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
         return out_mp4
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+def refresh_all_youtube_metadata_packages():
+    """기존 렌더링된 MP4의 타임스탬프를 유지하면서 @min7014 채널 메타데이터와 안내 파일을 일괄 갱신합니다."""
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        slug = sdoc["slug"]
+        mp = YT_PKG_DIR / f"{slug}_youtube_meta.json"
+        mdata = json.loads(mp.read_text(encoding="utf-8")) if mp.exists() else {}
+        up_dir = YT_UPLOADS_DIR / slug
+        up_dir.mkdir(parents=True, exist_ok=True)
+        for lc in ["ko", "en"]:
+            timings = []
+            cur = 0.0
+            for p in sdoc["pages"]:
+                dur = p.get("durations", {}).get(lc, 12.0)
+                timings.append({
+                    "page": p["page"],
+                    "start": round(cur, 3),
+                    "end": round(cur + dur, 3),
+                    "duration": dur,
+                    "text": p.get("narrations", {}).get(lc, p["explanation_text"]),
+                })
+                cur += dur
+            yt_meta = build_youtube_metadata_for_lang(sdoc, lc, timings)
+            yt_meta["srt_url"] = f"video_lectures/youtube_packages/{slug}_{lc}.srt"
+            yt_meta["thumbnail_url"] = f"video_lectures/youtube_packages/{slug}_{lc}_thumb.png"
+            yt_meta["local_mp4_path"] = f"youtube_uploads/{slug}/{slug}_{lc}.mp4"
+            mdata[lc] = yt_meta
+            sdoc.setdefault("youtube_packages", {})[lc] = yt_meta
+            info_txt = (
+                f"=== YouTube Channel: {yt_meta['channel_url']} ({yt_meta['channel_name']}) ===\n"
+                f"=== Direct Upload Studio: {yt_meta['studio_upload_url']} ===\n"
+                f"=== Video File: youtube_uploads/{slug}/{slug}_{lc}.mp4 ===\n"
+                f"=== Thumbnail (1280x720): video_lectures/youtube_packages/{slug}_{lc}_thumb.png ===\n"
+                f"=== Subtitle SRT: video_lectures/youtube_packages/{slug}_{lc}.srt ===\n\n"
+                f"[TITLE]\n{yt_meta['title']}\n\n"
+                f"[DESCRIPTION]\n{yt_meta['description']}\n\n"
+                f"[TAGS]\n{', '.join(yt_meta['tags'])}\n"
+            )
+            (YT_PKG_DIR / f"{slug}_{lc}_youtube_info.txt").write_text(info_txt, encoding="utf-8")
+            (up_dir / f"{slug}_{lc}_youtube_info.txt").write_text(info_txt, encoding="utf-8")
+        mp.write_text(json.dumps(mdata, ensure_ascii=False, indent=2), encoding="utf-8")
+        (up_dir / f"{slug}_youtube_meta.json").write_text(json.dumps(mdata, ensure_ascii=False, indent=2), encoding="utf-8")
+        sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+    update_video_catalog()
 
 
 def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None):
@@ -1036,8 +1104,99 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None):
     print(f"[YouTube URLs Registered] slug={slug_key} -> ko={yt_ko}, en={yt_en}")
 
 
+YOUTUBE_CHANNEL_HANDLE = "@min7014"
+YOUTUBE_CHANNEL_NAME = "민은기 선생님의 수학자료실"
+YOUTUBE_CHANNEL_ID = "UC7DN_e571yaTderHffKFTTg"
+YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@min7014"
+YOUTUBE_STUDIO_UPLOAD_URL = f"https://studio.youtube.com/channel/{YOUTUBE_CHANNEL_ID}/videos/upload?d=ud"
+YOUTUBE_RSS_URL = f"https://www.youtube.com/feeds/videos.xml?channel_id={YOUTUBE_CHANNEL_ID}"
+
+
+def find_google_client_secret():
+    """프로젝트 루트, 다운로드 폴더, 바탕화면에서 Google OAuth client_secret*.json을 자동 탐색합니다."""
+    exact_candidates = [
+        ROOT_DIR / "youtube_client_secret.json",
+        ROOT_DIR / "client_secret.json",
+        Path.home() / "youtube_client_secret.json",
+        Path.home() / "client_secret.json",
+    ]
+    for p in exact_candidates:
+        if p.exists():
+            return p
+    for search_dir in [ROOT_DIR, Path.home() / "Downloads", Path.home() / "Desktop"]:
+        if search_dir.exists():
+            matches = sorted(search_dir.glob("client_secret*.json"), key=lambda x: x.stat().st_mtime, reverse=True)
+            if matches:
+                target = ROOT_DIR / "youtube_client_secret.json"
+                shutil.copyfile(matches[0], target)
+                return target
+    return None
+
+
+def sync_youtube_channel_rss():
+    """https://www.youtube.com/@min7014 (UC7DN_e571yaTderHffKFTTg) 공개 RSS 피드를 조회하여 업로드된 한국어·영어 영상을 자동 매칭합니다."""
+    import xml.etree.ElementTree as ET
+    req = urllib.request.Request(YOUTUBE_RSS_URL, headers={"User-Agent": "Mozilla/5.0"})
+    raw = urllib.request.urlopen(req, timeout=15).read()
+    root = ET.fromstring(raw)
+    ns = {
+        "atom": "http://www.w3.org/2005/Atom",
+        "yt": "http://www.youtube.com/xml/schemas/2015",
+        "media": "http://search.yahoo.com/mrss/",
+    }
+    entries = []
+    for entry in root.findall("atom:entry", ns):
+        vid_el = entry.find("yt:videoId", ns)
+        title_el = entry.find("atom:title", ns)
+        desc_el = entry.find("media:group/media:description", ns)
+        if vid_el is not None and title_el is not None:
+            entries.append({
+                "video_id": vid_el.text.strip(),
+                "title": (title_el.text or "").strip(),
+                "description": (desc_el.text or "").strip() if desc_el is not None else "",
+                "url": f"https://youtu.be/{vid_el.text.strip()}",
+            })
+
+    matched_count = 0
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        slug = sdoc["slug"]
+        title_ko = re.sub(r"\$[^\$]*\$", "", sdoc.get("title", "")).strip()
+        title_en = (sdoc.get("title_en") or "").strip()
+        found_ko = None
+        found_en = None
+        for ent in entries:
+            blob = f"{ent['title']}\n{ent['description']}"
+            if f"[ID: {slug}_KO]" in blob or (slug in blob and ("단계별" in ent["title"] or "수학자료실" in ent["title"])):
+                found_ko = ent["url"]
+            elif f"[ID: {slug}_EN]" in blob or (slug in blob and ("Visual Proof" in ent["title"] or "Min's Math Lab" in ent["title"])):
+                found_en = ent["url"]
+            elif title_ko and len(title_ko) >= 3 and title_ko in ent["title"] and "Visual Proof" not in ent["title"]:
+                found_ko = ent["url"]
+            elif title_en and len(title_en) >= 5 and title_en.lower() in ent["title"].lower():
+                found_en = ent["url"]
+        if found_ko or found_en:
+            set_youtube_urls_for_slug(slug, yt_ko=found_ko, yt_en=found_en)
+            matched_count += 1
+    print(f"[@min7014 Channel RSS Sync] Checked {len(entries)} videos on {YOUTUBE_CHANNEL_URL} -> Matched {matched_count} topics.")
+    return matched_count
+
+
+def open_youtube_studio_for_min7014(slug_key="math20250130001"):
+    """@min7014 공식 YouTube Studio 업로드 창과 로컬 youtube_uploads 폴더를 즉시 엽니다."""
+    import webbrowser
+    target_dir = YT_UPLOADS_DIR / slug_key
+    if not target_dir.exists():
+        target_dir = YT_UPLOADS_DIR
+    print(f"[Opening @min7014 YouTube Studio] {YOUTUBE_STUDIO_UPLOAD_URL}")
+    print(f"[Opening Local Master MP4 Folder] {target_dir}")
+    webbrowser.open(YOUTUBE_STUDIO_UPLOAD_URL)
+    if os.name == "nt":
+        os.startfile(str(target_dir))
+
+
 def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
-    """YouTube Data API v3를 사용하여 한국어(ko) 및 영어(en) 강의 영상을 유튜브에 직접 업로드합니다."""
+    """YouTube Data API v3를 사용하여 https://www.youtube.com/@min7014 (UC7DN_e571yaTderHffKFTTg) 채널에 한국어(ko)·영어(en) 영상을 직접 업로드합니다."""
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
@@ -1046,19 +1205,17 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
 
     SCOPES = [
         "https://www.googleapis.com/auth/youtube.upload",
-        "https://www.googleapis.com/auth/youtube.force-ssl"
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
     ]
 
-    secret_candidates = [
-        ROOT_DIR / "youtube_client_secret.json",
-        ROOT_DIR / "client_secret.json",
-        Path.home() / "youtube_client_secret.json",
-    ]
-    secret_file = next((p for p in secret_candidates if p.exists()), None)
+    secret_file = find_google_client_secret()
     if not secret_file:
         raise FileNotFoundError(
-            "YouTube OAuth 클라이언트 시크릿 파일(youtube_client_secret.json)이 필요합니다.\n"
-            f"{ROOT_DIR / 'youtube_client_secret.json'} 위치에 저장하면 한국어·영어 영상이 유튜브에 자동 업로드됩니다."
+            f"[인증 파일 필요] {YOUTUBE_CHANNEL_URL} ({YOUTUBE_CHANNEL_NAME}) 채널로 자동 업로드하려면 "
+            f"Google Cloud Console의 OAuth 2.0 클라이언트 JSON 파일(client_secret.json)이 필요합니다.\n"
+            f"- 저장 위치: {ROOT_DIR / 'youtube_client_secret.json'} (또는 다운로드 폴더에 저장 시 자동 인식)\n"
+            f"- 지금 바로 브라우저에서 업로드하시려면: {YOUTUBE_STUDIO_UPLOAD_URL}"
         )
 
     token_file = ROOT_DIR / "youtube_token.json"
@@ -1069,11 +1226,25 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
+            print(f"[Google OAuth] 브라우저에서 {YOUTUBE_CHANNEL_URL} ({YOUTUBE_CHANNEL_NAME}) 계정을 선택하여 로그인해 주세요...")
             flow = InstalledAppFlow.from_client_secrets_file(str(secret_file), SCOPES)
             creds = flow.run_local_server(port=0)
         token_file.write_text(creds.to_json(), encoding="utf-8")
 
     youtube = build("youtube", "v3", credentials=creds)
+    try:
+        ch_resp = youtube.channels().list(part="snippet", mine=True).execute()
+        ch_items = ch_resp.get("items", [])
+        if ch_items:
+            auth_ch_id = ch_items[0]["id"]
+            auth_ch_title = ch_items[0]["snippet"].get("title", "")
+            auth_custom = ch_items[0]["snippet"].get("customUrl", "")
+            print(f"[Authenticated YouTube Channel] {auth_ch_title} ({auth_custom}, ID={auth_ch_id})")
+            if auth_ch_id != YOUTUBE_CHANNEL_ID:
+                print(f"  [주의] 현재 로그인된 채널({auth_custom})이 목표 채널({YOUTUBE_CHANNEL_HANDLE}: {YOUTUBE_CHANNEL_ID})과 다릅니다.")
+    except Exception as e:
+        print(f"[Channel Check Notice] {e}")
+
     uploaded_urls = {}
 
     for lang_code in langs:
@@ -1106,7 +1277,7 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
         vid_id = resp["id"]
         yt_url = f"https://youtu.be/{vid_id}"
         uploaded_urls[lang_code] = yt_url
-        print(f"[YouTube Uploaded ({lang_code.upper()})] {yt_url}")
+        print(f"[YouTube Uploaded to {YOUTUBE_CHANNEL_HANDLE} ({lang_code.upper()})] {yt_url}")
 
         thumb_path = YT_PKG_DIR / f"{slug_key}_{lang_code}_thumb.png"
         if thumb_path.exists():
@@ -1164,6 +1335,13 @@ def update_video_catalog():
             "quality_profile": sdoc.get("quality_profile", "Broadcast Master 1080p"),
             "script_url": f"video_lectures/scripts/{sp.name}",
             "available_langs": list(sdoc["pages"][0].get("narrations", {}).keys()) if sdoc.get("pages") else ["ko"],
+            "youtube_channel": {
+                "handle": YOUTUBE_CHANNEL_HANDLE,
+                "name": YOUTUBE_CHANNEL_NAME,
+                "channel_id": YOUTUBE_CHANNEL_ID,
+                "channel_url": YOUTUBE_CHANNEL_URL,
+                "studio_upload_url": YOUTUBE_STUDIO_UPLOAD_URL,
+            },
             "youtube_urls": yt_urls,
             "youtube_packages": {
                 k: {
@@ -1186,16 +1364,28 @@ if __name__ == "__main__":
     parser.add_argument("--slug", type=str, default="math20250130001", help="Topic slug or PDF ID")
     parser.add_argument("--step", type=str, choices=["script", "video", "both"], default="both")
     parser.add_argument("--langs", type=str, default="ko,en,ja,es,zh-CN,fr,de,vi")
+    parser.add_argument("--privacy", type=str, default="public", choices=["public", "unlisted", "private"], help="YouTube privacy status")
     parser.add_argument("--build-flagship", action="store_true", help="Generate flagship multi-language scripts and Master-Quality KR/EN YouTube packages")
-    parser.add_argument("--upload-youtube", action="store_true", help="Upload rendered KR and EN videos directly to YouTube via Data API v3")
+    parser.add_argument("--upload-youtube", action="store_true", help="Upload rendered KR and EN videos directly to https://www.youtube.com/@min7014 via Data API v3")
+    parser.add_argument("--upload-all", action="store_true", help="Upload all rendered topics in youtube_uploads/ to https://www.youtube.com/@min7014")
+    parser.add_argument("--sync-channel", action="store_true", help="Sync uploaded video URLs from https://www.youtube.com/@min7014 RSS feed")
+    parser.add_argument("--open-studio", action="store_true", help="Open https://www.youtube.com/@min7014 YouTube Studio upload modal and local MP4 folder")
     parser.add_argument("--set-youtube-ko", type=str, default=None, help="Bind uploaded Korean YouTube URL for --slug")
     parser.add_argument("--set-youtube-en", type=str, default=None, help="Bind uploaded English YouTube URL for --slug")
     args = parser.parse_args()
 
     if args.set_youtube_ko is not None or args.set_youtube_en is not None:
         set_youtube_urls_for_slug(args.slug, yt_ko=args.set_youtube_ko, yt_en=args.set_youtube_en)
+    elif args.sync_channel:
+        sync_youtube_channel_rss()
+    elif args.open_studio:
+        open_youtube_studio_for_min7014(args.slug)
+    elif args.upload_all:
+        slugs_to_upload = [d.name for d in sorted(YT_UPLOADS_DIR.iterdir()) if d.is_dir()] or ["math20250130001", "2014111902", "2017090101", "2014111901"]
+        for s_key in slugs_to_upload:
+            upload_slug_to_youtube(s_key, langs=("ko", "en"), privacy=args.privacy)
     elif args.upload_youtube:
-        upload_slug_to_youtube(args.slug, langs=("ko", "en"))
+        upload_slug_to_youtube(args.slug, langs=("ko", "en"), privacy=args.privacy)
     elif args.build_flagship:
         # 4대 핵심 대표 자료(피타고라스 나무, 체바의 정리, 피타고라스 정리, 메넬라우스의 정리) 초고품질 대본 + KO/EN 유튜브 마스터 패키지 생성
         for fl_slug in ["math20250130001", "2014111902", "2017090101", "2014111901"]:
