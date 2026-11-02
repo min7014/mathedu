@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>수학자료실(min7014.github.io) 다국어 PDF 단계별 강의 영상 스튜디오 | mathedu</title>
+  <title>수학자료실(min7014.github.io) 다국어 PDF 강의 영상 스튜디오 · KO/EN 유튜브 저장 허브 | mathedu</title>
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@
       --accent2: #4f46e5;
       --emerald: #059669;
       --amber: #d97706;
+      --yt-red: #dc2626;
     }
     * { box-sizing: border-box; }
     body {
@@ -40,7 +41,7 @@
       padding: 12px 20px;
     }
     .topbar-inner {
-      max-width: 1240px;
+      max-width: 1260px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -59,7 +60,7 @@
     }
     .brand img { width: 32px; height: 32px; border-radius: 8px; }
     .wrap {
-      max-width: 1240px;
+      max-width: 1260px;
       margin: 0 auto;
       padding: 20px 16px 80px;
       display: flex;
@@ -75,7 +76,7 @@
     }
     .pipeline-banner {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px;
       margin-top: 12px;
     }
@@ -99,9 +100,9 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 14px;
+      padding: 8px 13px;
       border-radius: 10px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 800;
       border: 1px solid var(--line);
       background: #ffffff;
@@ -117,6 +118,12 @@
       border-color: transparent;
     }
     .btn-primary:hover { color: #ffffff; opacity: 0.94; }
+    .btn-yt {
+      background: #dc2626;
+      color: #ffffff;
+      border-color: #dc2626;
+    }
+    .btn-yt:hover { color: #ffffff; background: #b91c1c; border-color: #b91c1c; }
     .btn-emerald {
       background: #059669;
       color: #ffffff;
@@ -180,8 +187,14 @@
       height: 100%;
       display: block;
     }
+    #studioYoutubeIframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: none;
+    }
     .script-table-wrap {
-      max-height: 620px;
+      max-height: 680px;
       overflow-y: auto;
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -220,16 +233,28 @@
       padding: 0 12px;
       border-radius: 10px;
       border: 1px solid var(--line);
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       background: #ffffff;
       color: var(--txt);
     }
-    .mp4-showcase-box {
-      margin-top: 12px;
+    .yt-hub-box {
+      margin-top: 6px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff1f2 0%, #eff6ff 100%);
+      border: 1.5px solid #fda4af;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .yt-lang-card {
       padding: 12px 14px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%);
-      border: 1px solid #93c5fd;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
   </style>
 </head>
@@ -241,11 +266,12 @@
       <img src="assets/favicon.png" alt="mathedu">
       <div>
         <div>민은기 선생님의 수학자료실 · 다국어 PDF 강의 영상 스튜디오</div>
-        <div style="font-size:0.73rem;color:var(--sub);font-weight:600">설명 텍스트(대본) 우선 생성 ➔ 전 세계 모든 언어 나레이션 번역 ➔ 단계별 강의 영상 제작</div>
+        <div style="font-size:0.73rem;color:var(--sub);font-weight:600">설명 텍스트 우선 생성 ➔ 🇰🇷 한국어·🇺🇸 영어 버전은 유튜브(YouTube) 저장 ➔ 전 세계 다국어 나레이션 확장</div>
       </div>
     </a>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <a href="index.html" class="btn">🏠 메인 허브로</a>
+      <a href="https://studio.youtube.com/" target="_blank" rel="noopener" class="btn btn-yt">📺 YouTube Studio 열기 ↗</a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="btn">🌐 min7014.github.io 본관 ↗</a>
     </div>
   </div>
@@ -256,9 +282,9 @@
   <section class="card">
     <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
       <div>
-        <h1 style="margin:0;font-size:1.25rem;font-weight:800;color:var(--txt)">🎬 단계별 플립북 PDF ➔ 전 세계 다국어 수학 강의 영상 제작 시스템</h1>
-        <p style="margin:4px 0 0;font-size:0.84rem;color:var(--sub)">
-          <b>https://min7014.github.io/</b>의 각 PDF 자료는 한 페이지마다 도형과 수식이 한 단계씩 전개되는 플립북 구조입니다. 먼저 페이지별 <b>설명 텍스트(대본)</b>를 생성·편집한 뒤, 이를 통해 <b>어떤 나라의 언어로도 나레이션과 강의 영상</b>을 즉시 제작할 수 있습니다.
+        <h1 style="margin:0;font-size:1.22rem;font-weight:800;color:var(--txt)">🎬 단계별 플립북 PDF 강의 영상 시스템 (🇰🇷 한국어 · 🇺🇸 영어 버전 YouTube 저장 방식)</h1>
+        <p style="margin:4px 0 0;font-size:0.83rem;color:var(--sub)">
+          <b>https://min7014.github.io/</b>의 각 PDF 자료는 페이지마다 한 단계씩 전개됩니다. 먼저 <b>설명 텍스트(대본)</b>를 생성한 뒤, 가장 수요가 높은 <b>한국어 버전(KO)과 영어 버전(EN) 영상은 유튜브(YouTube)에 저장·스트리밍</b>하고, 그 외 모든 국가 언어는 대본으로부터 즉시 생성합니다.
         </p>
       </div>
     </div>
@@ -266,15 +292,15 @@
     <div class="pipeline-banner">
       <div class="pipe-step">
         <b>STEP 1 · 페이지별 설명 텍스트(대본) 우선 생성</b>
-        <span>PDF의 1페이지부터 마지막 페이지까지 각 단계의 도형 작도·보조선·수식 변화를 분석하여 기본 설명 텍스트 대본을 먼저 만듭니다.</span>
+        <span>PDF 1페이지~마지막 페이지까지 도형·수식 단계 변화를 분석하여 가벼운 설명 텍스트 대본(JSON)을 먼저 생성·편집합니다.</span>
+      </div>
+      <div class="pipe-step" style="border-color:#fca5a5;background:#fff1f2">
+        <b style="color:#dc2626">STEP 2 · 🇰🇷 한국어 &amp; 🇺🇸 영어 버전은 YouTube에 저장</b>
+        <span>한국어(KO)와 영어(EN) 1080p 강의 영상·썸네일·자막(.srt)·타임스탬프를 자동 패키징하여 유튜브에 저장·스트리밍합니다.</span>
       </div>
       <div class="pipe-step">
-        <b>STEP 2 · 전 세계 모든 국가 언어 나레이션 변환</b>
-        <span>작성된 설명 텍스트를 기반으로 한국어·영어·일본어·중국어·스페인어·프랑스어·독일어·베트남어 등 원하는 국가의 나레이션 대본을 자동 생성합니다.</span>
-      </div>
-      <div class="pipe-step">
-        <b>STEP 3 · 다국어 강의 영상 재생 &amp; MP4/WebM 파일 제작</b>
-        <span>각 페이지 나레이션 음성과 자막에 맞춰 PDF 페이지가 자동으로 넘어가며 강의 영상이 재생되고, 동영상 파일(.webm/.mp4)과 대본(.json/.srt)으로 저장됩니다.</span>
+        <b>STEP 3 · 전 세계 어떤 언어로도 설명 영상 즉시 확장</b>
+        <span>동일한 설명 텍스트 대본을 바탕으로 일본어·스페인어·중국어·프랑스어·독일어·베트남어 등 모든 국가 언어 영상을 즉시 재생·추출합니다.</span>
       </div>
     </div>
 
@@ -287,10 +313,11 @@
     </div>
 
     <div class="chip-row" id="flagshipQuickChips">
-      <span style="font-size:0.76rem;font-weight:800;color:var(--sub);align-self:center;margin-right:4px">⭐ 추천 대표 강의 (다국어 대본 + 1080p MP4 완비):</span>
-      <button type="button" class="chip active" onclick="window.loadFlagshipByKey('math20250130001', this)">🌳 피타고라스 나무 (11p · KO/EN/JA/ES MP4)</button>
-      <button type="button" class="chip" onclick="window.loadFlagshipByKey('2014111902', this)">📐 체바의 정리 (17p · KO/EN MP4)</button>
-      <button type="button" class="chip" onclick="window.loadFlagshipByKey('2017090101', this)">📐 피타고라스 정리 넓이 분할 증명 (24p)</button>
+      <span style="font-size:0.76rem;font-weight:800;color:var(--sub);align-self:center;margin-right:4px">⭐ 대표 초고화질 유튜브 패키지(KO/EN) 완비 강의:</span>
+      <button type="button" class="chip active" onclick="window.loadFlagshipByKey('math20250130001', this)">🌳 피타고라스 나무 (11p · KO/EN 마스터 패키지)</button>
+      <button type="button" class="chip" onclick="window.loadFlagshipByKey('2014111902', this)">📐 체바의 정리 (17p · KO/EN 마스터 패키지)</button>
+      <button type="button" class="chip" onclick="window.loadFlagshipByKey('2017090101', this)">📐 피타고라스 정리 넓이 분할 증명 (25p · KO/EN 마스터 패키지)</button>
+      <button type="button" class="chip" onclick="window.loadFlagshipByKey('2014111901', this)">📐 메넬라우스의 정리 평행보조선 증명 (20p · KO/EN 마스터 패키지)</button>
     </div>
   </section>
 
@@ -300,8 +327,8 @@
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span style="font-size:0.9rem;font-weight:800;color:var(--txt)">🌍 나레이션 및 영상 제작 국가 언어 선택:</span>
         <select id="targetLangSelect" class="select-box" style="font-weight:800;border-color:var(--accent)" onchange="window.onTargetLanguageChange(this.value)">
-          <option value="ko">🇰🇷 한국어 (Korean · ko-KR)</option>
-          <option value="en">🇺🇸 영어 (English · en-US)</option>
+          <option value="ko">🇰🇷 한국어 (Korean · 유튜브 저장 대상)</option>
+          <option value="en">🇺🇸 영어 (English · YouTube Storage Target)</option>
           <option value="ja">🇯🇵 일본어 (日本語 · ja-JP)</option>
           <option value="zh-CN">🇨🇳 중국어 간체 (中文 · zh-CN)</option>
           <option value="zh-TW">🇹🇼 중국어 번체 (繁體中文 · zh-TW)</option>
@@ -321,37 +348,39 @@
           <option value="uz">🇺🇿 우즈베크어 (Oʻzbek · uz-UZ)</option>
           <option value="mn">🇲🇳 몽골어 (Монгол · mn-MN)</option>
         </select>
-        <input type="text" id="customIsoLangInput" class="input-box" placeholder="직접 코드 입력 (예: nl, sv, el)" style="width:185px" title="전 세계 어떤 언어든 ISO 언어 코드(예: nl, sv, el, fa, he, uk)를 입력하면 해당 언어로 번역됩니다.">
+        <input type="text" id="customIsoLangInput" class="input-box" placeholder="직접 코드 입력 (예: nl, sv, el)" style="width:180px" title="전 세계 어떤 언어든 ISO 언어 코드를 입력하면 해당 언어로 번역됩니다.">
         <button type="button" class="btn btn-amber" onclick="window.translateAllPagesToSelectedLang()">
           🌐 [1차 설명 텍스트] ➔ 선택한 국가 언어로 전 페이지 나레이션 자동 생성
         </button>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button type="button" class="btn" onclick="window.downloadScriptJson()">📥 다국어 대본(.json) 다운로드</button>
-        <button type="button" class="btn" onclick="window.downloadSubtitleSrt()">📥 다국어 자막(.srt) 다운로드</button>
+        <button type="button" class="btn" onclick="window.downloadSubtitleSrt()">📥 현재 언어 자막(.srt) 다운로드</button>
       </div>
     </div>
     <div id="translationStatusMsg" style="margin-top:8px;font-size:0.78rem;color:var(--emerald);font-weight:700"></div>
   </section>
 
-  <!-- 3. 메인 스튜디오 워크스페이스: 좌측 [16:9 강의 영상 플레이어 & MP4 쇼케이스] / 우측 [페이지별 설명 텍스트 & 다국어 나레이션 대본 편집기] -->
+  <!-- 3. 메인 스튜디오 워크스페이스 -->
   <div class="studio-grid">
-    <!-- 좌측: 16:9 시네마 강의 플레이어 및 녹화기 -->
+    <!-- 좌측: 16:9 시네마 강의 플레이어 + 한국어/영어 유튜브 저장 허브 -->
     <div class="card" style="display:flex;flex-direction:column;gap:12px">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
         <div>
-          <h2 style="margin:0;font-size:1.02rem;font-weight:800;color:var(--txt)" id="playerTopicTitle">📺 실시간 다국어 PDF 단계별 강의 영상 플레이어</h2>
+          <h2 style="margin:0;font-size:1.02rem;font-weight:800;color:var(--txt)" id="playerTopicTitle">📺 다국어 PDF 단계별 강의 플레이어 &amp; YouTube 스트리밍</h2>
           <div style="font-size:0.76rem;color:var(--sub)" id="playerPageCounter">페이지 로딩 중...</div>
         </div>
         <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button type="button" class="btn btn-primary" id="btnSwitchCanvasMode" onclick="window.switchToCanvasSlideMode()" style="display:none">🎬 다국어 슬라이드 모드로 복귀</button>
           <button type="button" class="btn btn-primary" id="btnPlayLecture" onclick="window.toggleCinemaLecturePlay()">▶️ 전체 페이지 강의 영상 재생</button>
           <button type="button" class="btn btn-danger" id="btnRecordVideo" onclick="window.startOrStopCanvasVideoRecording()">🔴 영상 파일(.webm) 녹화 추출</button>
         </div>
       </div>
 
-      <!-- 16:9 Broadcast Lecture Canvas -->
+      <!-- 16:9 Broadcast Lecture Canvas OR Embedded YouTube Player -->
       <div class="canvas-wrap">
         <canvas id="studioCinemaCanvas" width="1280" height="720"></canvas>
+        <iframe id="studioYoutubeIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
 
       <!-- 페이지 이동 및 음성 속도 컨트롤 -->
@@ -370,20 +399,65 @@
             <option value="1.15">1.15x (약간 빠르게)</option>
             <option value="1.3">1.3x (빠르게)</option>
           </select>
-          <a id="btnOpenOriginalPdf" href="https://min7014.github.io/" target="_blank" rel="noopener" class="btn" style="font-size:0.75rem">📄 원본 PDF 열기 ↗</a>
+          <a id="btnOpenOriginalPdf" href="https://min7014.github.io/" target="_blank" rel="noopener" class="btn" style="font-size:0.75rem">📄 원본 PDF ↗</a>
         </div>
       </div>
 
-      <!-- 사전 렌더링된 1080p Neural TTS MP4 영상이 있는 경우 표시 -->
-      <div id="prebuiltMp4Container" class="mp4-showcase-box" style="display:none">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+      <!-- 📺 한국어(KO) 버전 & 영어(EN) 버전 유튜브(YouTube) 저장 및 업로드 관리 허브 -->
+      <div id="youtubeStorageHub" class="yt-hub-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
           <div>
-            <b style="font-size:0.86rem;color:#1e3a8a">🎞️ [완성본 1080p MP4 강의 영상] Neural TTS 음성 + 1080p 슬라이드 합성 완료</b>
-            <div style="font-size:0.75rem;color:#334155">아래 언어 버튼을 누르면 페이지별 설명 대본으로 실제 렌더링된 고화질 MP4 강의 영상을 바로 재생하거나 다운로드할 수 있습니다.</div>
+            <b style="font-size:0.9rem;color:#be123c">📺 [YouTube 저장소 관리] 🇰🇷 한국어 버전 &amp; 🇺🇸 영어 버전은 유튜브에 저장합니다</b>
+            <div style="font-size:0.75rem;color:#334155">
+              한국어(KO)와 영어(EN) 버전은 유튜브 채널에 업로드하여 영구 저장·스트리밍하며, 제목·타임스탬프(00:00) 설명문·자막(.srt)·썸네일(1280×720)이 자동 생성됩니다.
+            </div>
           </div>
-          <div id="prebuiltMp4LangBtns" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+          <div id="ytOrigQuickWatch" style="display:flex;gap:6px;flex-wrap:wrap"></div>
         </div>
-        <video id="prebuiltMp4VideoEl" controls style="width:100%;border-radius:10px;background:#000;max-height:340px"></video>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
+          <!-- 🇰🇷 한국어 버전 YouTube 카드 -->
+          <div class="yt-lang-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">
+              <span style="font-size:0.82rem;font-weight:800;color:#006398">🇰🇷 한국어 버전 (YouTube KO)</span>
+              <span id="ytStatusBadgeKo" style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:999px;background:#fef3c7;color:#b45309">유튜브 패키지 준비 완료</span>
+            </div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <button type="button" class="btn btn-yt" id="btnWatchYtKo" onclick="window.playStoredYoutube('ko')" style="padding:5px 10px;font-size:0.74rem">▶️ 한국어 유튜브 재생</button>
+              <button type="button" class="btn" onclick="window.copyYoutubeMeta('ko')" style="padding:5px 9px;font-size:0.73rem">📋 KO 제목·타임스탬프 복사</button>
+              <button type="button" class="btn" onclick="window.downloadLangSrt('ko')" style="padding:5px 9px;font-size:0.73rem">📥 KO .srt 자막</button>
+              <button type="button" class="btn" onclick="window.downloadYoutubeThumbnail('ko')" style="padding:5px 9px;font-size:0.73rem">🖼️ KO 썸네일</button>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;margin-top:2px">
+              <input type="text" id="inputYtUrlKo" class="input-box" placeholder="한국어 유튜브 URL (https://youtu.be/...)" style="height:32px;font-size:0.75rem;flex:1">
+              <button type="button" class="btn btn-primary" style="padding:5px 10px;font-size:0.73rem" onclick="window.saveYoutubeUrlBinding('ko')">저장</button>
+            </div>
+          </div>
+
+          <!-- 🇺🇸 영어 버전 YouTube 카드 -->
+          <div class="yt-lang-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">
+              <span style="font-size:0.82rem;font-weight:800;color:#4f46e5">🇺🇸 영어 버전 (YouTube EN)</span>
+              <span id="ytStatusBadgeEn" style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:999px;background:#fef3c7;color:#b45309">YouTube Package Ready</span>
+            </div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <button type="button" class="btn btn-yt" id="btnWatchYtEn" onclick="window.playStoredYoutube('en')" style="padding:5px 10px;font-size:0.74rem">▶️ Play EN YouTube</button>
+              <button type="button" class="btn" onclick="window.copyYoutubeMeta('en')" style="padding:5px 9px;font-size:0.73rem">📋 Copy EN Title &amp; Chapters</button>
+              <button type="button" class="btn" onclick="window.downloadLangSrt('en')" style="padding:5px 9px;font-size:0.73rem">📥 EN .srt Captions</button>
+              <button type="button" class="btn" onclick="window.downloadYoutubeThumbnail('en')" style="padding:5px 9px;font-size:0.73rem">🖼️ EN Thumbnail</button>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;margin-top:2px">
+              <input type="text" id="inputYtUrlEn" class="input-box" placeholder="English YouTube URL (https://youtu.be/...)" style="height:32px;font-size:0.75rem;flex:1">
+              <button type="button" class="btn btn-primary" style="padding:5px 10px;font-size:0.73rem" onclick="window.saveYoutubeUrlBinding('en')">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLI 자동 렌더링 & YouTube API 업로드 안내 -->
+        <div style="padding:8px 12px;border-radius:10px;background:rgba(15,23,42,0.05);font-size:0.74rem;color:#334155;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+          <span id="ytCliCommandPreview">💻 <b>유튜브 자동 업로드 CLI</b>: <code>python -X utf8 min7014_video_maker.py --slug math20250130001 --upload-youtube</code></span>
+          <button type="button" class="btn" style="padding:3px 9px;font-size:0.72rem" onclick="window.copyCliUploadCommand()">📋 CLI 명령어 복사</button>
+        </div>
       </div>
     </div>
 
@@ -393,7 +467,7 @@
         <div>
           <h2 style="margin:0;font-size:1.02rem;font-weight:800;color:var(--txt)">📝 페이지별 [1차 설명 텍스트] &amp; [2차 다국어 나레이션] 대본 편집기</h2>
           <div style="font-size:0.76rem;color:var(--sub)">
-            각 페이지의 <b>1차 설명 텍스트(한국어 기준)</b>를 수정한 뒤 상단의 <b>[🌐 선택한 국가 언어로 전 페이지 나레이션 자동 생성]</b>을 누르면 어떤 언어로든 즉시 변환됩니다.
+            각 페이지의 <b>1차 설명 텍스트(한국어 기준)</b>가 먼저 만들어지고, 이를 통해 한국어·영어(유튜브 저장용) 및 전 세계 모든 국가 언어 나레이션이 생성됩니다.
           </div>
         </div>
       </div>
@@ -479,6 +553,29 @@
     return webSlug || pdfSlug || 'topic';
   }
 
+  function getLocalYtBindings() {
+    try {
+      return JSON.parse(localStorage.getItem('mathedu_yt_bindings_v1') || '{}');
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveLocalYtBinding(slug, lang, url) {
+    try {
+      var map = getLocalYtBindings();
+      if (!map[slug]) map[slug] = {};
+      map[slug][lang] = url;
+      localStorage.setItem('mathedu_yt_bindings_v1', JSON.stringify(map));
+    } catch (e) {}
+  }
+
+  function parseYoutubeVideoId(url) {
+    if (!url) return '';
+    var m = String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{6,15})/);
+    return m ? m[1] : '';
+  }
+
   // 초기 카탈로그 및 866개 PDF 목록 로드
   Promise.all([
     fetch('video_lectures/catalog.json').then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; }),
@@ -504,7 +601,7 @@
     var sel = document.getElementById('pdfSelectDropdown');
     if (!sel) return;
     var h = '';
-    filteredPdfMaterials.slice(0, 300).forEach(function(it, idx) {
+    filteredPdfMaterials.slice(0, 300).forEach(function(it) {
       var pdfClean = (it.pdf || '').split('#')[0];
       var subKo = it.sub_domain_ko ? ('[' + it.sub_domain_ko.split('(')[0].trim() + '] ') : '';
       h += '<option value="' + escapeHtml(pdfClean) + '">' + escapeHtml(subKo + it.title) + '</option>';
@@ -548,6 +645,7 @@
   window.loadSelectedPdfTopic = function(pdfUrl, forcedSlug) {
     if (!pdfUrl) return;
     stopCinemaLecture();
+    window.switchToCanvasSlideMode();
     pageImageCache = {};
 
     var cleanPdfUrl = pdfUrl.split('#')[0];
@@ -564,12 +662,9 @@
     var titleEl = document.getElementById('playerTopicTitle');
     if (titleEl) titleEl.textContent = '📺 ' + (currentTopicMeta.title || '단계별 강의 영상');
 
-    // 사전 제작된 MP4 쇼케이스 확인
     var catEntry = videoCatalogMap[slugKey] || videoCatalogMap[pdfSlugAlt];
-    setupPrebuiltMp4Showcase(catEntry);
-
-    // PDF.js로 PDF 로드 + 사전 생성된 대본 JSON 확인
     var scriptFetchUrl = catEntry ? catEntry.script_url : ('video_lectures/scripts/' + slugKey + '.json');
+
     Promise.all([
       window.pdfjsLib.getDocument(cleanPdfUrl).promise,
       fetch(scriptFetchUrl).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
@@ -580,7 +675,7 @@
       currentPageNum = 1;
 
       var cntEl = document.getElementById('playerPageCounter');
-      if (cntEl) cntEl.textContent = '총 ' + totalPages + '페이지 (한 페이지 = 한 단계 시각적 증명 슬라이드)';
+      if (cntEl) cntEl.textContent = '총 ' + totalPages + '페이지 (한 페이지 = 한 단계 시각적 증명 슬라이드 · KO/EN 유튜브 저장 지원)';
 
       if (loadedScript && loadedScript.pages && loadedScript.pages.length === totalPages) {
         currentScriptDoc = loadedScript;
@@ -588,6 +683,9 @@
         currentScriptDoc = buildBrowserInitialScript(currentTopicMeta, totalPages, cleanPdfUrl);
       }
 
+      // 영어 나레이션이 아직 없으면 백그라운드로 영어 나레이션도 미리 준비 (유튜브 EN 패키지용)
+      ensureEnglishNarrationReady();
+      setupYoutubeStorageHub(catEntry);
       renderScriptEditorRows();
       renderPageOnCinemaCanvas(1);
     }).catch(function(err) {
@@ -596,43 +694,280 @@
     });
   };
 
-  function setupPrebuiltMp4Showcase(catEntry) {
-    var box = document.getElementById('prebuiltMp4Container');
-    var btnWrap = document.getElementById('prebuiltMp4LangBtns');
-    var vidEl = document.getElementById('prebuiltMp4VideoEl');
-    if (!box || !btnWrap || !vidEl) return;
+  function ensureEnglishNarrationReady() {
+    if (!currentScriptDoc || !currentScriptDoc.pages || !currentScriptDoc.pages[0]) return;
+    if (currentScriptDoc.pages[0].narrations && currentScriptDoc.pages[0].narrations['en']) return;
+    currentScriptDoc.pages.forEach(function(pObj) {
+      var srcKo = pObj.explanation_text || '';
+      var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=en&dt=t&q=' + encodeURIComponent(srcKo);
+      fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var tr = (data && data[0]) ? data[0].map(function(seg) { return seg[0] || ''; }).join('') : srcKo;
+          if (!pObj.narrations) pObj.narrations = {};
+          pObj.narrations['en'] = tr || srcKo;
+        })
+        .catch(function() {});
+    });
+  }
 
-    if (!catEntry || !catEntry.rendered_videos || Object.keys(catEntry.rendered_videos).length === 0) {
-      box.style.display = 'none';
-      vidEl.pause();
-      vidEl.removeAttribute('src');
+  function setupYoutubeStorageHub() {
+    if (!currentScriptDoc) return;
+    var slug = currentScriptDoc.slug || 'topic';
+    var localBindings = (getLocalYtBindings()[slug]) || {};
+    var ytUrls = currentScriptDoc.youtube_urls || {};
+    var origYt = ytUrls.orig || (currentTopicMeta && currentTopicMeta.youtube) || '';
+    var koYt = localBindings.ko || ytUrls.ko || (currentTopicMeta && currentTopicMeta.youtube_ko) || '';
+    var enYt = localBindings.en || ytUrls.en || (currentTopicMeta && currentTopicMeta.youtube_en) || '';
+
+    var inpKo = document.getElementById('inputYtUrlKo');
+    var inpEn = document.getElementById('inputYtUrlEn');
+    if (inpKo) inpKo.value = koYt;
+    if (inpEn) inpEn.value = enYt;
+
+    var badgeKo = document.getElementById('ytStatusBadgeKo');
+    if (badgeKo) {
+      if (koYt) {
+        badgeKo.textContent = '✅ 유튜브(KO) 저장 완료';
+        badgeKo.style.background = '#d1fae5';
+        badgeKo.style.color = '#065f46';
+      } else {
+        badgeKo.textContent = '📦 KO 유튜브 업로드 패키지 준비됨';
+        badgeKo.style.background = '#fef3c7';
+        badgeKo.style.color = '#b45309';
+      }
+    }
+
+    var badgeEn = document.getElementById('ytStatusBadgeEn');
+    if (badgeEn) {
+      if (enYt) {
+        badgeEn.textContent = '✅ YouTube (EN) Stored';
+        badgeEn.style.background = '#d1fae5';
+        badgeEn.style.color = '#065f46';
+      } else {
+        badgeEn.textContent = '📦 EN YouTube Package Ready';
+        badgeEn.style.background = '#fef3c7';
+        badgeEn.style.color = '#b45309';
+      }
+    }
+
+    var origWrap = document.getElementById('ytOrigQuickWatch');
+    if (origWrap) {
+      if (origYt) {
+        origWrap.innerHTML =
+          '<button type="button" class="btn" style="padding:5px 10px;font-size:0.74rem" onclick="window.playStoredYoutube(\'orig\')">🎞️ 수학자료실 원본 유튜브 재생</button>' +
+          '<a href="' + escapeHtml(origYt) + '" target="_blank" rel="noopener" class="btn" style="padding:5px 10px;font-size:0.74rem">↗ YouTube에서 열기</a>';
+      } else {
+        origWrap.innerHTML = '';
+      }
+    }
+
+    var cliPreview = document.getElementById('ytCliCommandPreview');
+    if (cliPreview) {
+      cliPreview.innerHTML = '💻 <b>유튜브(KO/EN) 자동 빌드 &amp; 업로드 CLI</b>: <code>python -X utf8 min7014_video_maker.py --slug ' + escapeHtml(slug) + ' --langs ko,en --upload-youtube</code>';
+    }
+  }
+
+  window.switchToCanvasSlideMode = function() {
+    var canvas = document.getElementById('studioCinemaCanvas');
+    var iframe = document.getElementById('studioYoutubeIframe');
+    var backBtn = document.getElementById('btnSwitchCanvasMode');
+    if (iframe) {
+      iframe.src = '';
+      iframe.style.display = 'none';
+    }
+    if (canvas) canvas.style.display = 'block';
+    if (backBtn) backBtn.style.display = 'none';
+  };
+
+  window.playStoredYoutube = function(which) {
+    if (!currentScriptDoc) return;
+    stopCinemaLecture();
+    var slug = currentScriptDoc.slug || 'topic';
+    var localBindings = (getLocalYtBindings()[slug]) || {};
+    var ytUrls = currentScriptDoc.youtube_urls || {};
+    var origYt = ytUrls.orig || (currentTopicMeta && currentTopicMeta.youtube) || '';
+
+    var targetUrl = '';
+    if (which === 'ko') {
+      targetUrl = (document.getElementById('inputYtUrlKo')?.value || '').trim() || localBindings.ko || ytUrls.ko || '';
+      if (!targetUrl) {
+        // 한국어 유튜브 URL이 아직 등록 전이면 한국어 슬라이드 시네마 강의를 즉시 재생
+        document.getElementById('targetLangSelect').value = 'ko';
+        window.onTargetLanguageChange('ko');
+        window.switchToCanvasSlideMode();
+        window.toggleCinemaLecturePlay();
+        return;
+      }
+    } else if (which === 'en') {
+      targetUrl = (document.getElementById('inputYtUrlEn')?.value || '').trim() || localBindings.en || ytUrls.en || '';
+      if (!targetUrl) {
+        // 영어 유튜브 URL이 아직 등록 전이면 영어 슬라이드 시네마 강의를 즉시 재생
+        document.getElementById('targetLangSelect').value = 'en';
+        window.onTargetLanguageChange('en');
+        window.switchToCanvasSlideMode();
+        window.toggleCinemaLecturePlay();
+        return;
+      }
+    } else {
+      targetUrl = origYt;
+    }
+
+    var vidId = parseYoutubeVideoId(targetUrl);
+    if (!vidId) {
+      window.open(targetUrl || 'https://www.youtube.com/', '_blank');
       return;
     }
 
-    box.style.display = 'block';
-    var vids = catEntry.rendered_videos;
-    var langKeys = Object.keys(vids);
-    var html = '';
-    langKeys.forEach(function(lk, idx) {
-      var meta = getLangMeta(lk);
-      var vUrl = vids[lk];
-      html += '<button type="button" class="btn ' + (idx === 0 ? 'btn-primary' : '') + '" onclick="window.switchPrebuiltMp4(\'' + escapeHtml(vUrl) + '\', this)">' + meta.flag + ' ' + escapeHtml(meta.name) + ' MP4 재생</button>';
-      html += '<a href="' + escapeHtml(vUrl) + '" download class="btn" title="1080p MP4 다운로드">⬇️ MP4</a>';
-    });
-    btnWrap.innerHTML = html;
-    vidEl.src = vids[langKeys[0]];
+    var canvas = document.getElementById('studioCinemaCanvas');
+    var iframe = document.getElementById('studioYoutubeIframe');
+    var backBtn = document.getElementById('btnSwitchCanvasMode');
+    if (canvas) canvas.style.display = 'none';
+    if (iframe) {
+      iframe.style.display = 'block';
+      iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(vidId) + '?autoplay=1&rel=0';
+    }
+    if (backBtn) backBtn.style.display = 'inline-flex';
+  };
+
+  window.saveYoutubeUrlBinding = function(lang) {
+    if (!currentScriptDoc) return;
+    var slug = currentScriptDoc.slug || 'topic';
+    var inp = document.getElementById(lang === 'en' ? 'inputYtUrlEn' : 'inputYtUrlKo');
+    var val = inp ? inp.value.trim() : '';
+    saveLocalYtBinding(slug, lang, val);
+    if (!currentScriptDoc.youtube_urls) currentScriptDoc.youtube_urls = {};
+    currentScriptDoc.youtube_urls[lang] = val;
+    setupYoutubeStorageHub();
+    var statusEl = document.getElementById('translationStatusMsg');
+    if (statusEl) {
+      statusEl.textContent = '✅ [' + lang.toUpperCase() + ' 유튜브 주소 저장 완료] ' + (val || '(초기화됨)') + ' — 이제 [▶️ 유튜브 재생] 버튼으로 바로 시청할 수 있습니다.';
+    }
+  };
+
+  function generateClientYoutubeMetaText(lang) {
+    if (!currentScriptDoc) return '';
+    var slug = currentScriptDoc.slug || 'topic';
+    var totP = currentScriptDoc.page_count || currentScriptDoc.pages.length;
+    var pdfUrl = currentScriptDoc.pdf_url || '';
+    var webUrl = currentScriptDoc.web_url || 'https://min7014.github.io/';
+    var studioUrl = 'https://min7014.github.io/mathedu/video_studio.html?slug=' + encodeURIComponent(slug);
+
+    var tSec = 0;
+    var chapters = currentScriptDoc.pages.map(function(p) {
+      var mins = String(Math.floor(tSec / 60)).padStart(2, '0');
+      var secs = String(Math.floor(tSec % 60)).padStart(2, '0');
+      var txt = (p.narrations && p.narrations[lang]) ? p.narrations[lang] : p.explanation_text;
+      var dur = (p.durations && p.durations[lang]) ? p.durations[lang] : Math.max(5, Math.min(12, Math.ceil(String(txt || '').length / 11)));
+      tSec += dur;
+      var shortTxt = String(txt || '').replace(/\s+/g, ' ').slice(0, 56);
+      return mins + ':' + secs + (lang === 'en' ? (' Step ' + p.page + '/' + totP + ' — ') : (' ' + p.page + '페이지/' + totP + ' — ')) + shortTxt;
+    }).join('\n');
+
+    if (lang === 'en') {
+      var enTitle = currentScriptDoc.title_en || currentScriptDoc.title || slug;
+      return (
+        '=== [YouTube EN Title] ===\n' +
+        '[Min\'s Math Lab] ' + enTitle + ' | Step-by-Step Visual Math Proof (EN)\n\n' +
+        '=== [YouTube EN Description & Chapters] ===\n' +
+        '📐 Step-by-Step Visual Mathematical Proof Lecture (' + totP + ' Flipbook Pages)\n' +
+        '🔗 Interactive GeoGebra & Original PDF: ' + webUrl + '\n' +
+        '📄 Direct PDF: ' + pdfUrl + '\n' +
+        '🎬 Multilingual Lecture Studio: ' + studioUrl + '\n\n' +
+        '⏱️ [Step-by-Step Chapters]\n' + chapters + '\n\n' +
+        '#MathProof #Geometry #VisualMath #MinsMathLab #StepByStepMath'
+      );
+    }
+    var koTitle = (currentScriptDoc.title || slug).replace(/\$[^\$]*\$/g, '').trim();
+    return (
+      '=== [유튜브 한국어 제목] ===\n' +
+      '[민은기 선생님의 수학자료실] ' + koTitle + ' — 페이지별 단계 설명 강의 (KR)\n\n' +
+      '=== [유튜브 한국어 설명문 & 타임스탬프] ===\n' +
+      '📐 민은기 선생님의 수학자료실(https://min7014.github.io/) 단계별 플립북 PDF 해설 강의 (총 ' + totP + '페이지)\n' +
+      '🔗 대화형 GeoGebra 실습 및 원문: ' + webUrl + '\n' +
+      '📄 단계별 증명 PDF 원문: ' + pdfUrl + '\n' +
+      '🎬 다국어 강의 영상 스튜디오: ' + studioUrl + '\n\n' +
+      '⏱️ [페이지별 단계 타임스탬프]\n' + chapters + '\n\n' +
+      '#민은기선생님의수학자료실 #수학증명 #기하학 #시각적증명 #수학교육 #GeoGebra'
+    );
   }
 
-  window.switchPrebuiltMp4 = function(vUrl, btnEl) {
-    var vidEl = document.getElementById('prebuiltMp4VideoEl');
-    if (!vidEl) return;
-    var parent = btnEl && btnEl.parentNode;
-    if (parent) {
-      parent.querySelectorAll('button.btn').forEach(function(b) { b.classList.remove('btn-primary'); });
-    }
-    if (btnEl) btnEl.classList.add('btn-primary');
-    vidEl.src = vUrl;
-    vidEl.play().catch(function() {});
+  window.copyYoutubeMeta = function(lang) {
+    var text = generateClientYoutubeMetaText(lang);
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(function() {
+      var statusEl = document.getElementById('translationStatusMsg');
+      if (statusEl) {
+        statusEl.textContent = '📋 [' + lang.toUpperCase() + ' 유튜브 제목·타임스탬프 설명문 복사 완료!] YouTube Studio 업로드 창에 그대로 붙여넣으세요.';
+      }
+    });
+  };
+
+  window.copyCliUploadCommand = function() {
+    var slug = (currentScriptDoc && currentScriptDoc.slug) || 'math20250130001';
+    var cmd = 'python -X utf8 min7014_video_maker.py --slug ' + slug + ' --langs ko,en --upload-youtube';
+    navigator.clipboard.writeText(cmd).then(function() {
+      var statusEl = document.getElementById('translationStatusMsg');
+      if (statusEl) {
+        statusEl.textContent = '📋 CLI 명령어가 복사되었습니다: ' + cmd;
+      }
+    });
+  };
+
+  window.downloadYoutubeThumbnail = function(lang) {
+    if (!currentScriptDoc || !currentPdfDoc) return;
+    var keyPage = Math.max(1, totalPages - 1);
+    getPdfPageCanvas(keyPage).then(function(pdfCanvas) {
+      var off = document.createElement('canvas');
+      off.width = 1280;
+      off.height = 720;
+      var ctx = off.getContext('2d');
+
+      ctx.fillStyle = '#0b1224';
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // 우측 슬라이드 이미지
+      var scale = Math.min(660 / pdfCanvas.width, 580 / pdfCanvas.height);
+      var sw = Math.round(pdfCanvas.width * scale);
+      var sh = Math.round(pdfCanvas.height * scale);
+      var sx = 1280 - sw - 40;
+      var sy = Math.round((720 - sh) / 2);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(sx - 4, sy - 4, sw + 8, sh + 8);
+      ctx.drawImage(pdfCanvas, sx, sy, sw, sh);
+
+      // 좌측 배지 & 타이틀
+      var isEn = (lang === 'en');
+      ctx.fillStyle = isEn ? '#e11d48' : '#006398';
+      ctx.fillRect(42, 56, 460, 54);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 22px Pretendard, sans-serif';
+      ctx.fillText(isEn ? '🇺🇸 ENGLISH MATH PROOF LECTURE' : '🇰🇷 한국어 단계별 수학 증명 강의', 58, 91);
+
+      var titleTxt = (isEn ? (currentScriptDoc.title_en || currentScriptDoc.title) : currentScriptDoc.title) || '';
+      titleTxt = titleTxt.replace(/\$[^\$]*\$/g, '').trim();
+      ctx.fillStyle = '#fef08a';
+      ctx.font = 'bold 42px Pretendard, sans-serif';
+      var tLines = wrapCanvasText(ctx, titleTxt, 500);
+      var yT = 175;
+      tLines.forEach(function(ln) {
+        ctx.fillText(ln, 42, yT);
+        yT += 58;
+      });
+
+      ctx.fillStyle = '#bae6fd';
+      ctx.font = 'bold 24px Pretendard, sans-serif';
+      ctx.fillText(isEn ? ('Total ' + totalPages + ' Steps · Visual Proof') : ('총 ' + totalPages + '페이지 한 단계씩 눈으로 보는 증명'), 42, 470);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '22px Pretendard, sans-serif';
+      ctx.fillText('https://min7014.github.io/', 42, 520);
+
+      var a = document.createElement('a');
+      a.href = off.toDataURL('image/png');
+      a.download = (currentScriptDoc.slug || 'min7014') + '_' + lang + '_youtube_thumb.png';
+      a.click();
+    });
   };
 
   function buildBrowserInitialScript(meta, numPages, pdfUrl) {
@@ -692,6 +1027,11 @@
       web_url: meta.url || 'https://min7014.github.io/',
       page_count: numPages,
       base_language: 'ko',
+      youtube_urls: {
+        ko: meta.youtube_ko || '',
+        en: meta.youtube_en || '',
+        orig: meta.youtube || ''
+      },
       pages: pages
     };
   }
@@ -760,7 +1100,6 @@
     var lang = getActiveLangCode();
     if (!currentScriptDoc) return;
 
-    // 해당 언어 나레이션이 아직 비어 있으면 자동 번역 실행
     var firstPage = currentScriptDoc.pages[0];
     if (lang !== 'ko' && (!firstPage.narrations || !firstPage.narrations[lang])) {
       window.translateAllPagesToSelectedLang();
@@ -835,8 +1174,7 @@
 
   function wrapCanvasText(ctx, text, maxWidth) {
     var words = String(text || '').split(/\s+/);
-    // CJK 문장(공백이 적은 문장)은 글자 단위 줄바꿈 병행
-    if (words.length <= 3 && String(text || '').length > 25) {
+    if (words.length <= 3 && String(text || '').length > 22) {
       var chars = Array.from(String(text || ''));
       var cLines = [];
       var cur = '';
@@ -886,11 +1224,9 @@
     }
 
     return getPdfPageCanvas(pageNum).then(function(pdfCanvas) {
-      // 1. 배경
       ctx.fillStyle = '#0f172a';
       ctx.fillRect(0, 0, W, H);
 
-      // 2. 상단 방송 헤더 바
       ctx.fillStyle = '#131c31';
       ctx.fillRect(0, 0, W, 52);
       ctx.strokeStyle = '#38bdf8';
@@ -915,7 +1251,6 @@
       ctx.font = 'bold 14px Pretendard, sans-serif';
       ctx.fillText(badgeStr, W - 326, 31);
 
-      // 3. 중앙 PDF 슬라이드 렌더링 (y: 60 ~ 572)
       var availW = W - 80;
       var availH = 508;
       var scale = Math.min(availW / pdfCanvas.width, availH / pdfCanvas.height);
@@ -929,7 +1264,6 @@
       ctx.strokeRect(dx - 3, dy - 3, dw + 6, dh + 6);
       ctx.drawImage(pdfCanvas, dx, dy, dw, dh);
 
-      // 4. 변화 영역 골드 포커스 하이라이트
       var pInfo = (currentScriptDoc && currentScriptDoc.pages) ? currentScriptDoc.pages[pageNum - 1] : null;
       if (pInfo && pInfo.diff_bbox && pageNum > 1 && pageNum < totalPages) {
         var b = pInfo.diff_bbox;
@@ -944,7 +1278,6 @@
         }
       }
 
-      // 5. 하단 다국어 나레이션 자막 바 (y: 576 ~ 720)
       ctx.fillStyle = '#090e1c';
       ctx.fillRect(0, 576, W, H - 576);
       ctx.strokeStyle = '#38bdf8';
@@ -977,12 +1310,14 @@
 
   window.stepStudioPage = function(delta) {
     stopCinemaLecture();
+    window.switchToCanvasSlideMode();
     currentPageNum = Math.max(1, Math.min(totalPages, currentPageNum + delta));
     renderPageOnCinemaCanvas(currentPageNum);
   };
 
   window.jumpToStudioPage = function(pNum) {
     stopCinemaLecture();
+    window.switchToCanvasSlideMode();
     currentPageNum = Math.max(1, Math.min(totalPages, pNum));
     renderPageOnCinemaCanvas(currentPageNum);
   };
@@ -1019,6 +1354,7 @@
 
   window.speakCurrentPageOnly = function() {
     stopCinemaLecture();
+    window.switchToCanvasSlideMode();
     if (!currentScriptDoc || !currentScriptDoc.pages[currentPageNum - 1]) return;
     var lang = getActiveLangCode();
     var pInfo = currentScriptDoc.pages[currentPageNum - 1];
@@ -1074,6 +1410,7 @@
   }
 
   window.toggleCinemaLecturePlay = function() {
+    window.switchToCanvasSlideMode();
     var btn = document.getElementById('btnPlayLecture');
     if (isLecturePlaying) {
       stopCinemaLecture();
@@ -1086,6 +1423,7 @@
   };
 
   window.startOrStopCanvasVideoRecording = function() {
+    window.switchToCanvasSlideMode();
     var recBtn = document.getElementById('btnRecordVideo');
     var canvas = document.getElementById('studioCinemaCanvas');
     if (!canvas) return;
@@ -1143,14 +1481,13 @@
     return String(hrs).padStart(2, '0') + ':' + String(mins).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ',' + String(ms).padStart(3, '0');
   }
 
-  window.downloadSubtitleSrt = function() {
+  window.downloadLangSrt = function(lang) {
     if (!currentScriptDoc || !currentScriptDoc.pages) return;
-    var lang = getActiveLangCode();
     var srt = '';
     var t = 0;
     currentScriptDoc.pages.forEach(function(p, idx) {
       var txt = (p.narrations && p.narrations[lang]) ? p.narrations[lang] : p.explanation_text;
-      var dur = Math.max(4, Math.min(14, Math.ceil(String(txt || '').length / 11)));
+      var dur = (p.durations && p.durations[lang]) ? p.durations[lang] : Math.max(4, Math.min(14, Math.ceil(String(txt || '').length / 11)));
       srt += (idx + 1) + '\n';
       srt += formatSrtTime(t) + ' --> ' + formatSrtTime(t + dur) + '\n';
       srt += txt + '\n\n';
@@ -1161,6 +1498,10 @@
     a.href = URL.createObjectURL(blob);
     a.download = (currentScriptDoc.slug || 'min7014') + '_' + lang + '.srt';
     a.click();
+  };
+
+  window.downloadSubtitleSrt = function() {
+    window.downloadLangSrt(getActiveLangCode());
   };
 })();
 </script>
