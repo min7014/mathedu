@@ -160,6 +160,9 @@
 
       // 10. 🎓 수학교육학 5대 학문 통합 엔진 (CPA 다중표상 · ZPD 힌트사다리 · 블라인드 인출 · 폴리아/쇤펠드 메타인지 · 정교한 오개념 진단)
       initAcademicPedagogyEngine();
+
+      // 11. 🔊 AI 수식-음성 변환 해설 선생님 & min7014.github.io 1,111개 자료 심층 도슨트 연동
+      initVoiceTeacherAndMin7014Deep();
     });
   }
 
@@ -2213,11 +2216,15 @@
             '<button type="button" class="acad-pill-btn" id="btnAcadMetacog" onclick="window.toggleAcadDrawer(\'metacog\')">' +
               bilingual('🧭 폴리아·쇤펠드 코치', '🧭 Pólya & Schoenfeld Coach') +
             '</button>' +
+            '<button type="button" class="acad-pill-btn" id="btnAcadVariation" onclick="window.toggleAcadDrawer(\'variation\')">' +
+              bilingual('🔄 변이·전이 & 유레카 노트', '🔄 Variation & Eureka Note') +
+            '</button>' +
           '</div>' +
         '</div>' +
         '<div id="acadDrawerCpa" class="acad-drawer-panel"></div>' +
         '<div id="acadDrawerScratch" class="acad-drawer-panel"></div>' +
-        '<div id="acadDrawerMetacog" class="acad-drawer-panel"></div>';
+        '<div id="acadDrawerMetacog" class="acad-drawer-panel"></div>' +
+        '<div id="acadDrawerVariation" class="acad-drawer-panel"></div>';
 
       if (targetAnchor.parentNode) {
         targetAnchor.parentNode.insertBefore(wb, targetAnchor.nextSibling);
@@ -2417,11 +2424,94 @@
       }
     };
 
+    // 4-2. 마르톤의 변이 이론(Variation Theory) & 파인만 1줄 자기설명(Feynman Self-Explanation) 유레카 노트 드로어
+    function renderVariationDrawer() {
+      var drawer = document.getElementById('acadDrawerVariation');
+      if (!drawer) return;
+      var notesMap = {};
+      try { notesMap = JSON.parse(localStorage.getItem('mathedu_eureka_notes_v1') || '{}'); } catch (e) {}
+      var savedNote = (notesMap[currentSlug] && notesMap[currentSlug].note) ? notesMap[currentSlug].note : '';
+      var probTitle = getProblemTitle();
+
+      drawer.innerHTML =
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">' +
+          '<div style="padding:12px;border-radius:10px;background:#f8fafc;border:1px solid #cbd5e1">' +
+            '<div style="font-weight:800;color:#006398;margin-bottom:6px">🔄 마르톤의 변이 이론 (Marton Variation Theory) 사고 실험</div>' +
+            '<div style="font-size:0.78rem;color:#334155;line-height:1.55">' +
+              '• <b>불변 원리 포착</b>: 숫자와 식의 형태가 바뀌어도 이 문제에서 절대 변하지 않는 <b>단 하나의 핵심 성질</b>은 무엇인가요?<br>' +
+              '• <b>조건 변이 실험</b>: 만약 주어진 지수·계수·부호가 역수나 반대 부호로 바뀐다면 <b>3단계 (가)</b>와 <b>4단계 (나)</b> 식은 어떻게 달라질까요?<br>' +
+              '• <b>역문제(Converse) 구성</b>: 최종 정답을 조건으로 주고 처음 식의 상수를 미지수 $k$로 둔다면 어떤 순서로 역추적해야 할까요?' +
+            '</div>' +
+            '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">' +
+              '<button type="button" class="acad-pill-btn" onclick="if(window.stitchRunGlobalSearch)window.stitchRunGlobalSearch()">🔗 동일 단원 유사 기출 전이 훈련 ➔</button>' +
+            '</div>' +
+          '</div>' +
+          '<div style="padding:12px;border-radius:10px;background:#fefce8;border:1px solid #fde047">' +
+            '<div style="font-weight:800;color:#b45309;margin-bottom:6px">💡 파인만 1줄 자기설명 (Feynman Self-Explanation · d = 0.64)</div>' +
+            '<div style="font-size:0.77rem;color:#713f12;margin-bottom:6px">이 문제를 풀면서 깨달은 <b>결정적 한 줄 열쇠(보조선, 공식 변환, 함정 주의점)</b>를 내 언어로 요약해 두면 장기기억 전이율이 2배 이상 높아집니다.</div>' +
+            '<textarea id="acadEurekaNoteInput" rows="2" placeholder="예: 밑을 3으로 통일한 뒤 지수 법칙으로 합치면 지수가 0이 되어 3^0 = 1이 된다!" style="width:100%;padding:8px;border-radius:8px;border:1px solid #facc15;background:#ffffff;color:#1e293b;font-size:0.8rem;resize:vertical;box-sizing:border-box">' + escapeHtml(savedNote) + '</textarea>' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:6px;flex-wrap:wrap">' +
+              '<span id="acadEurekaSavedStatus" style="font-size:0.75rem;color:#059669;font-weight:800">' + (savedNote ? '✅ 내 유레카 노트에 저장됨' : '') + '</span>' +
+              '<button type="button" class="acad-pill-btn" style="background:#d97706;color:#ffffff;border-color:#d97706" onclick="window.saveAcadEurekaNote()">💾 나만의 유레카 노트 저장 (+20 XP)</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    window.saveAcadEurekaNote = function() {
+      var inp = document.getElementById('acadEurekaNoteInput');
+      var stEl = document.getElementById('acadEurekaSavedStatus');
+      if (!inp) return;
+      var txt = (inp.value || '').trim();
+      if (!txt) return;
+      try {
+        var map = JSON.parse(localStorage.getItem('mathedu_eureka_notes_v1') || '{}');
+        var isNew = !map[currentSlug];
+        map[currentSlug] = {
+          slug: currentSlug,
+          title: getProblemTitle(),
+          note: txt,
+          updatedAt: new Date().toISOString()
+        };
+        localStorage.setItem('mathedu_eureka_notes_v1', JSON.stringify(map));
+        if (stEl) stEl.textContent = '✅ 저장 완료! (메인 화면 유레카 노트에서 모아보기 가능)';
+        if (isNew && window.MatheduGame && window.MatheduGame.addXP) {
+          window.MatheduGame.addXP(20, '💡 파인만 1줄 유레카 노트 작성');
+        }
+      } catch (e) {}
+    };
+
+    window.recordStepClinicWeakness = function(stepIndex, reasonType) {
+      try {
+        var raw = localStorage.getItem('mathedu_step_clinic_v1');
+        var data = raw ? JSON.parse(raw) : { stepCounts: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }, reviewQueue: {} };
+        if (!data.stepCounts) data.stepCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+        if (!data.reviewQueue) data.reviewQueue = {};
+        var sKey = Math.min(6, Math.max(1, stepIndex + 1));
+        data.stepCounts[sKey] = (data.stepCounts[sKey] || 0) + 1;
+        var prevItem = data.reviewQueue[currentSlug] || { count: 0 };
+        var intervals = [1, 3, 7, 14];
+        var nextDays = intervals[Math.min(intervals.length - 1, prevItem.count || 0)];
+        var nextReviewDate = new Date(Date.now() + nextDays * 86400000).toISOString().slice(0, 10);
+        data.reviewQueue[currentSlug] = {
+          slug: currentSlug,
+          title: getProblemTitle(),
+          weakStep: sKey,
+          reason: reasonType || 'wrong',
+          count: (prevItem.count || 0) + 1,
+          nextReviewDate: nextReviewDate,
+          updatedAt: new Date().toISOString()
+        };
+        localStorage.setItem('mathedu_step_clinic_v1', JSON.stringify(data));
+      } catch (e) {}
+    };
+
     window.toggleAcadDrawer = function(which) {
       var map = {
         cpa: { id: 'acadDrawerCpa', btn: 'btnAcadCpa', init: function() { renderCpaDrawer('iconic'); } },
         scratch: { id: 'acadDrawerScratch', btn: 'btnAcadScratch', init: renderScratchDrawer },
-        metacog: { id: 'acadDrawerMetacog', btn: 'btnAcadMetacog', init: renderMetacogDrawer }
+        metacog: { id: 'acadDrawerMetacog', btn: 'btnAcadMetacog', init: renderMetacogDrawer },
+        variation: { id: 'acadDrawerVariation', btn: 'btnAcadVariation', init: renderVariationDrawer }
       };
       var item = map[which];
       if (!item) return;
@@ -2429,11 +2519,11 @@
       var btn = document.getElementById(item.btn);
       if (!el) return;
       var isOpen = el.classList.contains('open');
-      ['acadDrawerCpa', 'acadDrawerScratch', 'acadDrawerMetacog'].forEach(function(id) {
+      ['acadDrawerCpa', 'acadDrawerScratch', 'acadDrawerMetacog', 'acadDrawerVariation'].forEach(function(id) {
         var d = document.getElementById(id);
         if (d) d.classList.remove('open');
       });
-      ['btnAcadCpa', 'btnAcadScratch', 'btnAcadMetacog'].forEach(function(bid) {
+      ['btnAcadCpa', 'btnAcadScratch', 'btnAcadMetacog', 'btnAcadVariation'].forEach(function(bid) {
         var b = document.getElementById(bid);
         if (b) b.classList.remove('active');
       });
@@ -2532,6 +2622,7 @@
           var st = loadPedagogyState();
           st.hintUsed = (st.hintUsed || 0) + 1;
           savePedagogyState(st);
+          if (window.recordStepClinicWeakness) window.recordStepClinicWeakness(idx, 'hint');
 
           var prevQ = idx > 0 ? qs[idx - 1] : null;
           var prevAnsIdx = prevQ ? (+prevQ.dataset.ans - 1) : -1;
@@ -2582,6 +2673,7 @@
                 '<b>✨ [프로이덴탈 안내된 재발명(Guided Reinvention) 성공!]</b><br>' +
                 '정확합니다! 선택한 <b>' + chosenTex + '</b>은(는) 이 단계의 핵심 수학적 변환을 완벽히 만족합니다. ' + nextStepGuide;
             } else {
+              if (window.recordStepClinicWeakness) window.recordStepClinicWeakness(idx, 'wrong');
               var prevCheckMsg = idx > 0
                 ? ('앞선 <b>' + idx + '단계 디딤돌</b>의 결과와 <b>제0단계 기호 번역기</b>의 지수·부호·정의역 약속을 다시 대조해 보세요.')
                 : '<b>제0단계 수학 기호 번역기</b>의 기본 연산 약속(곱셈 횟수, 부호, 분수 계산)을 작은 숫자로 먼저 확인해 보세요.';
@@ -2599,6 +2691,586 @@
         });
       });
     });
+  }
+
+
+  // ════════════════════════════════════════════════════════════════════════
+  // 🔊 11. AI 수식-음성 변환 해설 선생님 (MatheduVoiceTeacher: LaTeX-to-Speech Engine)
+  //     & 민은기 선생님(min7014.github.io) 1,111개 자료 심층 원리·보조선 도슨트 연동
+  // ════════════════════════════════════════════════════════════════════════
+  function initVoiceTeacherAndMin7014Deep() {
+    if (window.MatheduVoiceTeacher) return;
+
+    // Style injection for Voice Teacher Floating Player & min7014 Deep Insight Box
+    if (!document.getElementById('mathedu-voice-teacher-styles')) {
+      var vStyle = document.createElement('style');
+      vStyle.id = 'mathedu-voice-teacher-styles';
+      vStyle.textContent =
+        '.mathedu-voice-btn { display:inline-flex; align-items:center; gap:5px; padding:6px 12px; border-radius:999px; font-size:0.76rem; font-weight:800; border:1px solid rgba(79,70,229,0.32); background:linear-gradient(135deg,#eef2ff 0%,#e0f2fe 100%); color:#3730a3; cursor:pointer; transition:all 0.15s ease; }\n' +
+        '.mathedu-voice-btn:hover { background:linear-gradient(135deg,#4f46e5 0%,#006398 100%); color:#ffffff; border-color:transparent; box-shadow:0 4px 12px rgba(79,70,229,0.25); }\n' +
+        '.mathedu-voice-btn.speaking { background:linear-gradient(135deg,#4f46e5 0%,#059669 100%); color:#ffffff; border-color:transparent; animation:voicePulse 1.6s infinite; }\n' +
+        '@keyframes voicePulse { 0%,100% { box-shadow:0 0 0 0 rgba(79,70,229,0.45); } 50% { box-shadow:0 0 0 7px rgba(79,70,229,0); } }\n' +
+        '#matheduVoiceFloatingBar { position:fixed; bottom:74px; left:50%; transform:translateX(-50%); z-index:1000005; width:calc(100% - 24px); max-width:780px; background:rgba(15,23,42,0.95); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); color:#f8fafc; border:1.5px solid rgba(56,189,248,0.42); border-radius:16px; padding:12px 16px; box-shadow:0 16px 40px rgba(0,0,0,0.45); display:none; flex-direction:column; gap:8px; }\n' +
+        '#matheduVoiceFloatingBar.show { display:flex; }\n' +
+        '.voice-bar-top { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }\n' +
+        '.voice-bar-title { font-size:0.8rem; font-weight:800; color:#38bdf8; display:flex; align-items:center; gap:6px; }\n' +
+        '.voice-bar-controls { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }\n' +
+        '.voice-ctrl-btn { padding:4px 10px; border-radius:8px; font-size:0.74rem; font-weight:800; border:1px solid rgba(148,163,184,0.35); background:rgba(30,41,59,0.9); color:#f8fafc; cursor:pointer; }\n' +
+        '.voice-ctrl-btn:hover { background:#0284c7; border-color:#38bdf8; }\n' +
+        '#matheduVoiceSubtitle { font-size:0.84rem; color:#e2e8f0; line-height:1.55; padding:8px 12px; background:rgba(30,41,59,0.75); border-radius:10px; border-left:3px solid #38bdf8; max-height:92px; overflow-y:auto; }\n' +
+        '.min7014-deep-box { margin-top:8px; padding:10px 12px; border-radius:10px; background:linear-gradient(135deg,#f8fafc 0%,#f0f9ff 100%); border:1px solid #bae6fd; font-size:0.8rem; color:#1e293b; line-height:1.55; }\n' +
+        '.min7014-deep-tip { margin-top:5px; padding:6px 10px; border-radius:8px; background:#fefce8; border:1px solid #fde047; color:#713f12; font-size:0.77rem; font-weight:700; }\n' +
+        'html.dark-theme .mathedu-voice-btn { background:rgba(49,46,129,0.65); color:#c7d2fe; border-color:rgba(129,140,248,0.4); }\n' +
+        'html.dark-theme .min7014-deep-box { background:rgba(15,23,42,0.85) !important; border-color:rgba(56,189,248,0.28) !important; color:#e2e8f0 !important; }\n' +
+        'html.dark-theme .min7014-deep-tip { background:rgba(66,32,6,0.55) !important; border-color:rgba(250,204,21,0.35) !important; color:#fef08a !important; }\n';
+      (document.head || document.documentElement).appendChild(vStyle);
+    }
+
+    // Tag all rendered MathJax containers with their original LaTeX string
+    function annotateMathJaxNodes(rootEl) {
+      try {
+        if (window.MathJax && window.MathJax.startup && window.MathJax.startup.document && typeof window.MathJax.startup.document.getMathItemsWithin === 'function') {
+          var items = window.MathJax.startup.document.getMathItemsWithin(rootEl || document.body);
+          items.forEach(function(it) {
+            if (it && it.typesetRoot && typeof it.math === 'string') {
+              it.typesetRoot.setAttribute('data-mjx-tex', it.math);
+            }
+          });
+        }
+      } catch (e) {}
+    }
+
+    // Convert a single LaTeX expression into natural Korean or English spoken words
+    function compileFormulaToSpeech(tex, isEn) {
+      var s = String(tex || '').trim();
+      if (!s) return '';
+
+      // Remove purely visual formatting commands
+      s = s.replace(/\\(?:displaystyle|textstyle|scriptstyle|underline|mathbf|mathrm|mathit|mathcal|mathbb|textbf|textrm|left|right|Big|big|quad|qquad|,|;|:|!)/g, ' ');
+      s = s.replace(/\\text\s*\{([^{}]*)\}/g, ' $1 ');
+
+      if (isEn) {
+        s = s.replace(/\\cancel\s*\{([^{}]*)\}/g, ' canceled $1 ');
+        for (var i = 0; i < 3; i++) {
+          s = s.replace(/\\(?:d|t)?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, ' $1 over $2 ');
+        }
+        s = s.replace(/\\sqrt\s*\[([^{}\]]*)\]\s*\{([^{}]*)\}/g, ' $1-th root of $2 ');
+        s = s.replace(/\\sqrt\s*\{([^{}]*)\}/g, ' square root of $2 ');
+        s = s.replace(/\\lim_\{([^{}]*)\\to\s*([^{}]*)\}/g, ' limit as $1 approaches $2 of ');
+        s = s.replace(/\\sum_\{([^{}]*)\}\^\{([^{}]*)\}/g, ' sum from $1 to $2 of ');
+        s = s.replace(/\\int_\{([^{}]*)\}\^\{([^{}]*)\}/g, ' integral from $1 to $2 of ');
+        s = s.replace(/\\log_\{([^{}]*)\}/g, ' log base $1 of ');
+        s = s.replace(/\^\{2\}|\^2/g, ' squared ');
+        s = s.replace(/\^\{3\}|\^3/g, ' cubed ');
+        s = s.replace(/\^\{([^{}]+)\}/g, ' to the power of $1 ');
+        s = s.replace(/_\{([^{}]+)\}|_([a-zA-Z0-9])/g, ' $1$2 ');
+        s = s.replace(/\\le|\\leq|≤/g, ' is less than or equal to ');
+        s = s.replace(/\\ge|\\geq|≥/g, ' is greater than or equal to ');
+        s = s.replace(/\\ne|\\neq|≠/g, ' is not equal to ');
+        s = s.replace(/\\implies|\\Rightarrow|⇒|➔/g, ', which implies ');
+        s = s.replace(/\\infty|∞/g, ' infinity ');
+        s = s.replace(/\\times|×|\\cdot/g, ' times ');
+        s = s.replace(/\\div|÷/g, ' divided by ');
+        s = s.replace(/[{}]/g, ' ').replace(/\\/g, ' ');
+        return s.replace(/\s+/g, ' ').trim();
+      }
+
+      // Korean natural mathematical speech conversion (분모 먼저 읽기: \frac{A}{B} -> B 분의 A)
+      s = s.replace(/\\cancel\s*\{([^{}]*)\}/g, ' 소거되는 $1 ');
+      s = s.replace(/\\(?:overrightarrow|vec)\s*\{([^{}]*)\}/g, ' 벡터 $1 ');
+      s = s.replace(/\\overline\s*\{([^{}]*)\}/g, ' 선분 $1 ');
+      s = s.replace(/\\triangle\s*([A-Za-z0-9]*)/g, ' 삼각형 $1 ');
+      s = s.replace(/\\angle\s*([A-Za-z0-9]*)/g, ' 각 $1 ');
+
+      // Nested fractions (3 passes): \frac{num}{den} -> den 분의 num
+      for (var k = 0; k < 3; k++) {
+        s = s.replace(/\\(?:d|t)?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, ' $2 분의 $1 ');
+      }
+      s = s.replace(/\\(?:d|t)?frac\s*([0-9a-zA-Z])\s*([0-9a-zA-Z])/g, ' $2 분의 $1 ');
+
+      // Roots
+      s = s.replace(/\\sqrt\s*\[([^{}\]]*)\]\s*\{([^{}]*)\}/g, ' $1제곱근 $2 ');
+      s = s.replace(/\\sqrt\s*\{([^{}]*)\}/g, ' 루트 $1 ');
+      s = s.replace(/\\sqrt\s*([0-9a-zA-Z]+)/g, ' 루트 $1 ');
+
+      // Limits, Sums, Integrals, Logs
+      s = s.replace(/\\lim_\{([^{}]*)\\to\s*\\infty\}/g, ' 리미트 $1 이 무한대로 갈 때 ');
+      s = s.replace(/\\lim_\{([^{}]*)\\to\s*([^{}]*)\}/g, ' 리미트 $1 이 $2 로 갈 때 ');
+      s = s.replace(/\\sum_\{([^{}]*)\}\^\{([^{}]*)\}/g, ' 시그마 $1 부터 $2 까지 ');
+      s = s.replace(/\\int_\{([^{}]*)\}\^\{([^{}]*)\}/g, ' $1 에서 $2 까지 정적분 ');
+      s = s.replace(/\\int_([0-9a-zA-Z]+)\^([0-9a-zA-Z]+)/g, ' $1 에서 $2 까지 정적분 ');
+      s = s.replace(/\\int/g, ' 인테그랄 ');
+      s = s.replace(/\\sum/g, ' 시그마 ');
+      s = s.replace(/\\log_\{([^{}]*)\}\s*\{([^{}]*)\}/g, ' 로그 $1 의 $2 ');
+      s = s.replace(/\\log_\{([^{}]*)\}/g, ' 밑이 $1 인 로그 ');
+      s = s.replace(/\\log_([0-9a-zA-Z]+)/g, ' 로그 $1 의 ');
+      s = s.replace(/\\ln/g, ' 자연로그 ');
+
+      // Trig & Functions
+      s = s.replace(/\\sin\^2/g, ' 사인 제곱 ');
+      s = s.replace(/\\cos\^2/g, ' 코사인 제곱 ');
+      s = s.replace(/\\tan\^2/g, ' 탄젠트 제곱 ');
+      s = s.replace(/\\sin/g, ' 사인 ');
+      s = s.replace(/\\cos/g, ' 코사인 ');
+      s = s.replace(/\\tan/g, ' 탄젠트 ');
+      s = s.replace(/([fghFGH])''\s*\(([^)]+)\)/g, ' $1 더블프라임 $2 ');
+      s = s.replace(/([fghFGH])'\s*\(([^)]+)\)/g, ' $1 프라임 $2 ');
+
+      // Exponents & Subscripts
+      s = s.replace(/\^\{\\circ\}|\^\\circ|°/g, ' 도 ');
+      s = s.replace(/\^\{2\}|\^2/g, ' 제곱 ');
+      s = s.replace(/\^\{3\}|\^3/g, ' 세제곱 ');
+      s = s.replace(/\^\{-1\}/g, ' 의 마이너스 1제곱 ');
+      s = s.replace(/\^\{([^{}]+)\}/g, ' 의 $1제곱 ');
+      s = s.replace(/\^([0-9a-zA-Z]+)/g, ' 의 $1제곱 ');
+      s = s.replace(/_\{([^{}]+)\}/g, ' $1 ');
+      s = s.replace(/_([0-9a-zA-Z]+)/g, ' $1 ');
+
+      // Greek letters & Symbols
+      var greekMap = {
+        '\\alpha': '알파', '\\beta': '베타', '\\gamma': '감마', '\\delta': '델타', '\\Delta': '델타',
+        '\\theta': '세타', '\\pi': '파이', '\\sigma': '시그마', '\\omega': '오메가', '\\lambda': '람다',
+        '\\mu': '뮤', '\\phi': '파이', '\\ell': '엘'
+      };
+      Object.keys(greekMap).forEach(function(gKey) {
+        s = s.split(gKey).join(' ' + greekMap[gKey] + ' ');
+      });
+
+      s = s.replace(/\\le|\\leq|≤/g, ' 이하 ');
+      s = s.replace(/\\ge|\\geq|≥/g, ' 이상 ');
+      s = s.replace(/\\ne|\\neq|≠/g, ' 같지 않고 ');
+      s = s.replace(/\\implies|\\Rightarrow|⇒|➔/g, ', 즉 ');
+      s = s.replace(/\\iff|\\Leftrightarrow|⇔/g, ', 필요충분조건으로 ');
+      s = s.replace(/\\to|\\rightarrow|→/g, ' 에서 ');
+      s = s.replace(/\\infty|∞/g, ' 무한대 ');
+      s = s.replace(/\\pm|±/g, ' 플러스마이너스 ');
+      s = s.replace(/\\times|×|\\cdot/g, ' 곱하기 ');
+      s = s.replace(/\\div|÷/g, ' 나누기 ');
+      s = s.replace(/\\therefore|∴/g, ' 따라서 ');
+      s = s.replace(/\\because|∵/g, ' 왜냐하면 ');
+      s = s.replace(/\\sim/g, ' 따른다 ');
+      s = s.replace(/\\in|∈/g, ' 속하며 ');
+      s = s.replace(/\\cup/g, ' 합집합 ');
+      s = s.replace(/\\cap/g, ' 교집합 ');
+      s = s.replace(/\\perp/g, ' 수직 ');
+      s = s.replace(/\\parallel/g, ' 평행 ');
+      s = s.replace(/=/g, ' 는 ');
+      s = s.replace(/\+/g, ' 더하기 ');
+      s = s.replace(/([0-9a-zA-Z])\s*-\s*([0-9a-zA-Z])/g, '$1 마이너스 $2');
+      s = s.replace(/-\s*([0-9]+)/g, ' 마이너스 $1');
+      s = s.replace(/[{}]/g, ' ').replace(/\\/g, ' ');
+      return s.replace(/\s+/g, ' ').trim();
+    }
+
+    function htmlOrTextToSpeechScript(rawInput, isEn) {
+      var str = '';
+      if (typeof rawInput === 'string') {
+        str = rawInput;
+      } else if (rawInput && rawInput.nodeType === 1) {
+        annotateMathJaxNodes(rawInput);
+        var clone = rawInput.cloneNode(true);
+        var toRemove = clone.querySelectorAll('svg, style, script, .report-wrap, .q-actions, .acad-hint-box, .acad-blind-mask');
+        toRemove.forEach(function(el) { el.remove(); });
+        var hiddenLang = clone.querySelectorAll(isEn ? '.bilingual-ko' : '.bilingual-en');
+        hiddenLang.forEach(function(el) { el.remove(); });
+        var mjxList = clone.querySelectorAll('mjx-container');
+        mjxList.forEach(function(mjx) {
+          var tex = mjx.getAttribute('data-mjx-tex') || '';
+          var span = document.createElement('span');
+          span.textContent = tex ? (' $' + tex + '$ ') : ' ';
+          if (mjx.parentNode) mjx.parentNode.replaceChild(span, mjx);
+        });
+        str = clone.innerHTML;
+      }
+
+      if (!str) return '';
+
+      // Strip SVG, style, script tags from raw HTML strings
+      str = str.replace(/<svg[\s\S]*?<\/svg>/gi, ' ');
+      str = str.replace(/<style[\s\S]*?<\/style>/gi, ' ');
+      str = str.replace(/<script[\s\S]*?<\/script>/gi, ' ');
+      str = str.replace(/<br\s*\/?>|<\/p>|<\/li>|<\/div>|<\/h[1-6]>|<\/tr>/gi, '. ');
+      str = str.replace(/<\/td>|<\/th>/gi, ', ');
+      str = str.replace(/<[^>]+>/g, ' ');
+
+      // Decode common HTML entities
+      str = str
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&le;/g, '≤')
+        .replace(/&ge;/g, '≥')
+        .replace(/&ne;/g, '≠')
+        .replace(/&times;/g, '×')
+        .replace(/&divide;/g, '÷')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+
+      // Compile display math $$...$$ and inline math $...$
+      str = str.replace(/\$\$([\s\S]*?)\$\$/g, function(_, tex) {
+        return ' ' + compileFormulaToSpeech(tex, isEn) + '. ';
+      });
+      str = str.replace(/\$([^\$]+?)\$/g, function(_, tex) {
+        return ' ' + compileFormulaToSpeech(tex, isEn) + ' ';
+      });
+      str = str.replace(/\\\(([\s\S]*?)\\\)/g, function(_, tex) {
+        return ' ' + compileFormulaToSpeech(tex, isEn) + ' ';
+      });
+
+      // Clean decorative emojis & symbols for smooth TTS
+      str = str.replace(/[🔰🌿🌱🌳💎🏆🎨🗺️📐📋✨📌🔗🎬📂🎮📄🎥▶️💡🧭🪜🧠🔬⭕❌▲■•]/g, ' ');
+      str = str.replace(/\s+/g, ' ').replace(/\.\s*\./g, '.').trim();
+      return str;
+    }
+
+    function splitIntoSentences(scriptText) {
+      var rawParts = String(scriptText || '').split(/(?<=[.!?])\s+|\s*\.\s+/);
+      var chunks = [];
+      var buf = '';
+      for (var i = 0; i < rawParts.length; i++) {
+        var p = rawParts[i].trim();
+        if (!p) continue;
+        if ((buf + ' ' + p).length < 110) {
+          buf = buf ? (buf + '. ' + p) : p;
+        } else {
+          if (buf) chunks.push(buf);
+          buf = p;
+        }
+      }
+      if (buf) chunks.push(buf);
+      return chunks.length > 0 ? chunks : [scriptText];
+    }
+
+    function ensureVoiceFloatingBar() {
+      var bar = document.getElementById('matheduVoiceFloatingBar');
+      if (bar) return bar;
+      bar = document.createElement('div');
+      bar.id = 'matheduVoiceFloatingBar';
+      bar.innerHTML =
+        '<div class="voice-bar-top">' +
+          '<div class="voice-bar-title">' +
+            '<span>🔊 AI 수학 음성 선생님</span>' +
+            '<span id="matheduVoiceTitleLabel" style="color:#f8fafc;font-weight:700"></span>' +
+          '</div>' +
+          '<div class="voice-bar-controls">' +
+            '<button type="button" class="voice-ctrl-btn" onclick="window.MatheduVoiceTeacher.prev()">⏮️ 이전</button>' +
+            '<button type="button" class="voice-ctrl-btn" id="matheduVoicePauseBtn" onclick="window.MatheduVoiceTeacher.togglePause()">⏸️ 일시정지</button>' +
+            '<button type="button" class="voice-ctrl-btn" onclick="window.MatheduVoiceTeacher.next()">⏭️ 다음</button>' +
+            '<button type="button" class="voice-ctrl-btn" id="matheduVoiceRateBtn" onclick="window.MatheduVoiceTeacher.cycleRate()">⚡ 1.0x</button>' +
+            '<button type="button" class="voice-ctrl-btn" style="background:#be123c;border-color:#fb7185" onclick="window.MatheduVoiceTeacher.stop()">⏹️ 닫기</button>' +
+          '</div>' +
+        '</div>' +
+        '<div id="matheduVoiceSubtitle">음성 강의를 준비 중입니다...</div>';
+      document.body.appendChild(bar);
+      return bar;
+    }
+
+    var voiceState = {
+      chunks: [],
+      idx: 0,
+      rate: 1.0,
+      playing: false,
+      paused: false,
+      title: ''
+    };
+
+    function playCurrentChunk() {
+      var bar = ensureVoiceFloatingBar();
+      var subEl = document.getElementById('matheduVoiceSubtitle');
+      var titleEl = document.getElementById('matheduVoiceTitleLabel');
+      var pauseBtn = document.getElementById('matheduVoicePauseBtn');
+
+      if (voiceState.idx >= voiceState.chunks.length) {
+        voiceState.playing = false;
+        if (subEl) subEl.textContent = '✅ 음성 해설이 완료되었습니다. (다시 들으려면 버튼을 누르세요)';
+        if (pauseBtn) pauseBtn.textContent = '🔄 처음부터';
+        document.querySelectorAll('.mathedu-voice-btn.speaking').forEach(function(b) { b.classList.remove('speaking'); });
+        return;
+      }
+
+      var chunk = voiceState.chunks[voiceState.idx];
+      if (titleEl) {
+        titleEl.textContent = '· ' + voiceState.title + ' (' + (voiceState.idx + 1) + '/' + voiceState.chunks.length + ')';
+      }
+      if (subEl) {
+        subEl.textContent = chunk;
+      }
+      if (pauseBtn) {
+        pauseBtn.textContent = '⏸️ 일시정지';
+      }
+
+      if (!('speechSynthesis' in window)) {
+        if (subEl) subEl.textContent = '💬 [자막 모드]: ' + chunk;
+        return;
+      }
+
+      try {
+        window.speechSynthesis.cancel();
+        var utter = new SpeechSynthesisUtterance(chunk);
+        var en = isEnMode();
+        utter.lang = en ? 'en-US' : 'ko-KR';
+        utter.rate = voiceState.rate;
+        utter.pitch = 1.02;
+
+        // Try to pick the clearest Korean / English voice available
+        var voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+        if (voices && voices.length > 0) {
+          var targetPrefix = en ? 'en' : 'ko';
+          var preferred = voices.find(function(v) {
+            return v.lang && v.lang.toLowerCase().indexOf(targetPrefix) === 0 && (v.name.indexOf('Natural') !== -1 || v.name.indexOf('Google') !== -1 || v.name.indexOf('Heami') !== -1 || v.name.indexOf('SunHi') !== -1);
+          }) || voices.find(function(v) {
+            return v.lang && v.lang.toLowerCase().indexOf(targetPrefix) === 0;
+          });
+          if (preferred) utter.voice = preferred;
+        }
+
+        utter.onend = function() {
+          if (!voiceState.playing || voiceState.paused) return;
+          voiceState.idx++;
+          playCurrentChunk();
+        };
+        utter.onerror = function() {
+          if (!voiceState.playing || voiceState.paused) return;
+          voiceState.idx++;
+          playCurrentChunk();
+        };
+
+        window.speechSynthesis.speak(utter);
+      } catch (e) {}
+    }
+
+    window.MatheduVoiceTeacher = {
+      compileToSpeech: htmlOrTextToSpeechScript,
+      speakRaw: function(rawHtmlOrNode, titleLabel, btnEl) {
+        var en = isEnMode();
+        var script = htmlOrTextToSpeechScript(rawHtmlOrNode, en);
+        if (!script) return;
+        document.querySelectorAll('.mathedu-voice-btn.speaking').forEach(function(b) { b.classList.remove('speaking'); });
+        if (btnEl && btnEl.classList) btnEl.classList.add('speaking');
+
+        voiceState.chunks = splitIntoSentences(script);
+        voiceState.idx = 0;
+        voiceState.playing = true;
+        voiceState.paused = false;
+        voiceState.title = titleLabel || (en ? 'AI Math Voice Explanation' : 'AI 수학 음성 해설');
+
+        var bar = ensureVoiceFloatingBar();
+        bar.classList.add('show');
+        playCurrentChunk();
+      },
+      speakQuizStep: function(idx, btnEl) {
+        var qs = document.querySelectorAll('.q');
+        var q = qs[idx];
+        if (!q) return;
+        var en = isEnMode();
+        var knowEl = q.previousElementSibling && q.previousElementSibling.classList.contains('know') ? q.previousElementSibling : null;
+        var stemEl = q.querySelector('.stem');
+        var isDone = q.classList.contains('done') || (q.querySelector('.exp') && q.querySelector('.exp').classList.contains('show'));
+
+        var parts = [];
+        parts.push(en ? ('Step ' + (idx + 1) + ' explanation.') : ((idx + 1) + '단계 디딤돌 음성 설명입니다.'));
+        if (knowEl) {
+          parts.push(htmlOrTextToSpeechScript(knowEl, en));
+        }
+        if (stemEl) {
+          parts.push((en ? 'Question: ' : '문제 조건을 함께 읽어봅시다. ') + htmlOrTextToSpeechScript(stemEl, en));
+        }
+        if (isDone) {
+          var rawExp = en ? (q.dataset.expEn || q.dataset.exp || '') : (q.dataset.exp || '');
+          parts.push((en ? 'Step Solution: ' : '이 단계의 풀이 및 정답 도출 과정입니다. ') + htmlOrTextToSpeechScript(rawExp, en));
+        } else {
+          parts.push(en ? 'Try thinking of the answer before checking the options, or click the ZPD Step Hint button if you need a clue.' : '아직 문제를 풀기 전이므로 정답은 스포일러하지 않습니다. 위 원리를 바탕으로 빈칸이나 값을 먼저 추론해 보세요!');
+        }
+
+        window.MatheduVoiceTeacher.speakRaw(parts.join(' '), (idx + 1) + '단계 ' + (isDone ? '문제·해설 강의' : '개념·발문 코칭'), btnEl);
+      },
+      speakFullProblemTour: function(btnEl) {
+        var en = isEnMode();
+        var parts = [];
+        var h1 = document.querySelector('.stitch-hero-card h1') || document.querySelector('h1');
+        if (h1) parts.push((en ? 'Problem Overview: ' : '민은기 선생님의 수학자료실 AI 음성 수학 강의입니다. 이번 문항은 ') + htmlOrTextToSpeechScript(h1, en));
+        var origBox = document.getElementById('examOrigPaperBox') || document.querySelector('.orig-text-box');
+        if (origBox) parts.push((en ? 'Original Exam Question: ' : '수능 및 모의평가 원문 조건입니다. ') + htmlOrTextToSpeechScript(origBox, en));
+        var symEl = document.getElementById('examSymContainer');
+        if (symEl) parts.push((en ? 'Key Symbol Definitions: ' : '제0단계 수학 기호 번역기입니다. ') + htmlOrTextToSpeechScript(symEl, en));
+        var flowEl = document.querySelector('.math-schematic-flow');
+        if (flowEl) parts.push((en ? 'Schematic Solution Flowchart: ' : '한눈에 보는 도식화 풀이 흐름도입니다. ') + htmlOrTextToSpeechScript(flowEl, en));
+
+        window.MatheduVoiceTeacher.speakRaw(parts.join(' '), en ? 'Full Problem Audio Lecture' : '문항 전체 핵심 흐름 음성 강의', btnEl);
+      },
+      speakFinalSolution: function(btnEl) {
+        var en = isEnMode();
+        var solEl = document.querySelector('.sol');
+        if (!solEl) return;
+        window.MatheduVoiceTeacher.speakRaw(solEl, en ? 'Complete Step-by-Step Solution Audio' : '완결 풀이 및 단계별 총정리 음성 강의', btnEl);
+      },
+      togglePause: function() {
+        var pauseBtn = document.getElementById('matheduVoicePauseBtn');
+        if (!voiceState.playing) {
+          voiceState.idx = 0;
+          voiceState.playing = true;
+          voiceState.paused = false;
+          playCurrentChunk();
+          return;
+        }
+        if (voiceState.paused) {
+          voiceState.paused = false;
+          if ('speechSynthesis' in window && window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          } else {
+            playCurrentChunk();
+          }
+          if (pauseBtn) pauseBtn.textContent = '⏸️ 일시정지';
+        } else {
+          voiceState.paused = true;
+          if ('speechSynthesis' in window) window.speechSynthesis.pause();
+          if (pauseBtn) pauseBtn.textContent = '▶️ 계속 듣기';
+        }
+      },
+      prev: function() {
+        if (voiceState.chunks.length === 0) return;
+        voiceState.idx = Math.max(0, voiceState.idx - 1);
+        voiceState.playing = true;
+        voiceState.paused = false;
+        playCurrentChunk();
+      },
+      next: function() {
+        if (voiceState.chunks.length === 0) return;
+        voiceState.idx = Math.min(voiceState.chunks.length - 1, voiceState.idx + 1);
+        voiceState.playing = true;
+        voiceState.paused = false;
+        playCurrentChunk();
+      },
+      cycleRate: function() {
+        var rates = [0.85, 1.0, 1.2, 1.4];
+        var curIdx = rates.indexOf(voiceState.rate);
+        voiceState.rate = rates[(curIdx + 1) % rates.length];
+        var rBtn = document.getElementById('matheduVoiceRateBtn');
+        if (rBtn) rBtn.textContent = '⚡ ' + voiceState.rate.toFixed(2).replace(/\.00$/, '.0').replace(/0$/, '') + 'x';
+        if (voiceState.playing && !voiceState.paused) {
+          playCurrentChunk();
+        }
+      },
+      stop: function() {
+        voiceState.playing = false;
+        voiceState.paused = false;
+        if ('speechSynthesis' in window) {
+          try { window.speechSynthesis.cancel(); } catch (e) {}
+        }
+        var bar = document.getElementById('matheduVoiceFloatingBar');
+        if (bar) bar.classList.remove('show');
+        document.querySelectorAll('.mathedu-voice-btn.speaking').forEach(function(b) { b.classList.remove('speaking'); });
+      }
+    };
+
+    // Attach Voice Lecture buttons to Problem Page elements
+    var pillRow = document.querySelector('#matheduAcademicWorkbench .acad-pill-row');
+    if (pillRow && !document.getElementById('btnAcadVoiceLecture')) {
+      var vTopBtn = document.createElement('button');
+      vTopBtn.type = 'button';
+      vTopBtn.id = 'btnAcadVoiceLecture';
+      vTopBtn.className = 'mathedu-voice-btn';
+      vTopBtn.innerHTML = bilingual('🔊 AI 음성 강의 듣기', '🔊 AI Voice Lecture');
+      vTopBtn.onclick = function() {
+        window.MatheduVoiceTeacher.speakFullProblemTour(vTopBtn);
+      };
+      pillRow.insertBefore(vTopBtn, pillRow.firstChild);
+    }
+
+    // Add step-level voice button to every .q
+    var qsAll = document.querySelectorAll('.q');
+    qsAll.forEach(function(q, idx) {
+      var actions = q.querySelector('.q-actions');
+      if (!actions || actions.querySelector('.step-voice-btn')) return;
+      var sBtn = document.createElement('button');
+      sBtn.type = 'button';
+      sBtn.className = 'mathedu-voice-btn step-voice-btn';
+      sBtn.style.marginRight = '6px';
+      sBtn.innerHTML = bilingual('🔊 음성 설명', '🔊 Voice Guide');
+      sBtn.onclick = function() {
+        window.MatheduVoiceTeacher.speakQuizStep(idx, sBtn);
+      };
+      actions.insertBefore(sBtn, actions.firstChild);
+    });
+
+    // Add full solution voice button to .sol
+    var solBox = document.querySelector('.sol');
+    if (solBox && !solBox.querySelector('.sol-voice-header-bar')) {
+      var solBar = document.createElement('div');
+      solBar.className = 'sol-voice-header-bar';
+      solBar.style.cssText = 'display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 14px;margin-bottom:14px;border-radius:12px;background:linear-gradient(135deg,#eef2ff 0%,#f0f9ff 100%);border:1px solid #bae6fd;';
+      solBar.innerHTML =
+        '<span style="font-size:0.82rem;font-weight:800;color:#006398">' +
+          bilingual('🎧 눈으로 도형·흐름도를 보면서 선생님의 칠판 풀이 음성 강의를 함께 들어보세요!', '🎧 Listen to the step-by-step audio explanation while viewing the visual diagram!') +
+        '</span>' +
+        '<button type="button" class="mathedu-voice-btn" onclick="window.MatheduVoiceTeacher.speakFinalSolution(this)">' +
+          bilingual('🔊 완결 풀이 전체 음성으로 듣기', '🔊 Listen to Full Solution') +
+        '</button>';
+      solBox.insertBefore(solBar, solBox.firstChild);
+    }
+
+    // Enrich .min7014-addon-card items with Deep Knowledge & Voice Docent
+    var minItems = document.querySelectorAll('.min7014-addon-card .min-item');
+    if (minItems.length > 0) {
+      var isBoard = window.location.pathname.indexOf('/board/') !== -1 || window.location.pathname.indexOf('/offline/') !== -1;
+      var lookupUrl = isBoard ? '../assets/min7014_lookup.json' : 'assets/min7014_lookup.json';
+
+      function applyMinItemEnrichment(lookupMap) {
+        minItems.forEach(function(itemEl) {
+          if (itemEl.dataset.minDeepBound === '1') return;
+          itemEl.dataset.minDeepBound = '1';
+
+          var linkEl = itemEl.querySelector('a.min-item-title');
+          var href = linkEl ? (linkEl.getAttribute('href') || '') : '';
+          var slugKey = href.split('/').pop().replace('.html', '');
+          var info = (lookupMap && lookupMap[slugKey]) ? lookupMap[slugKey] : null;
+
+          var rawTitle = linkEl ? linkEl.textContent.replace('📌', '').trim() : '수학자료실 개념 증명';
+          var subDomain = info && info.s ? info.s : '동적 기하·시각적 원리 증명';
+          var coreConcept = info && info.c ? info.c : ('[' + rawTitle + ']의 기하학적 불변 성질과 대수적 관계식을 동적 작도와 플립북 증명으로 규명합니다.');
+          var visSummary = info && info.v ? info.v : 'GeoGebra 슬라이더를 움직이거나 증명 PDF를 한 프레임씩 넘기며 보조선이 그어지는 순간의 성질을 관찰하세요.';
+          var solvingTip = info && info.p ? info.p : '수능 실전 문항에서 복잡한 계산에 막힐 때는 이 자료의 기하학적 정의와 대칭 보조선으로 돌아가면 직관적으로 해결됩니다.';
+          var voiceScript = info && info.w ? info.w : (rawTitle + '. ' + coreConcept + ' ' + visSummary + ' 실전 팁으로, ' + solvingTip);
+
+          var catBadge = itemEl.querySelector('.min-cat-badge');
+          if (catBadge) {
+            catBadge.textContent = '📂 ' + subDomain;
+          }
+
+          var mainDiv = itemEl.querySelector('.min-item-main');
+          if (mainDiv) {
+            var deepBox = document.createElement('div');
+            deepBox.className = 'min7014-deep-box';
+            deepBox.innerHTML =
+              '<div><b>🎓 핵심 원리</b>: ' + coreConcept + '</div>' +
+              '<div style="margin-top:3px;color:#0369a1"><b>👁️ 시각적 탐구</b>: ' + visSummary + '</div>' +
+              '<div class="min7014-deep-tip">💡 <b>수능 실전 보조선·풀이 팁</b>: ' + solvingTip + '</div>';
+            mainDiv.appendChild(deepBox);
+            if (window.MathJax && window.MathJax.typesetPromise) {
+              window.MathJax.typesetPromise([deepBox]).catch(function() {});
+            }
+          }
+
+          var actDiv = itemEl.querySelector('.min-item-actions');
+          if (actDiv) {
+            var docentBtn = document.createElement('button');
+            docentBtn.type = 'button';
+            docentBtn.className = 'mathedu-voice-btn';
+            docentBtn.innerHTML = bilingual('🔊 원리 음성 도슨트', '🔊 Audio Docent');
+            docentBtn.onclick = function() {
+              window.MatheduVoiceTeacher.speakRaw(voiceScript, '민은기 선생님 자료 도슨트', docentBtn);
+            };
+            actDiv.insertBefore(docentBtn, actDiv.firstChild);
+          }
+        });
+      }
+
+      fetch(lookupUrl)
+        .then(function(r) { return r.ok ? r.json() : {}; })
+        .then(function(map) { applyMinItemEnrichment(map); })
+        .catch(function() { applyMinItemEnrichment({}); });
+    }
   }
 
   if (document.readyState === 'loading') {

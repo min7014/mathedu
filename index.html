@@ -650,6 +650,7 @@ html.dark-theme .filter-tab-btn {
             <a href="https://www.algeomath.kr" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 AlgeoMath</a>
             <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 전 단원 개념 증명 PDF</a>
             <a href="#" onclick="openAcademicPedagogyModal();return false;" class="text-secondary hover:underline no-underline font-semibold">🎓 수학교육학 5대 원리 학습법</a>
+            <a href="#" onclick="openMathClinicModal();return false;" class="text-secondary hover:underline no-underline font-semibold">🧬 오개념 클리닉 & 유레카 노트</a>
             <a href="#" onclick="openDefaultTeacherClass();return false;" class="text-secondary hover:underline no-underline font-semibold">🔗 3초 수업 QR 개설</a>
             <span id="studentLibraryQuickBar" class="inline-flex items-center gap-2">
               <a href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;" class="text-on-surface-variant hover:underline no-underline">📂 내 풀이 기록</a>
@@ -862,36 +863,42 @@ html.dark-theme .filter-tab-btn {
   </div>
 </div>
 
-<!-- 🌐 min7014 3,400+ 동적 기하 스마트 탐색관 모달 -->
-<div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(15,23,42,.75);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;">
-  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
-    <div class="p-4 px-5 border-b border-surface-container flex justify-between items-center">
+<!-- 🌐 min7014 3,400+ 동적 기하 & 심층 원리·음성 도슨트 탐색관 모달 -->
+<div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(15,23,42,.75);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)closeMin7014ExplorerModal()">
+  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
+    <div class="p-4 px-5 border-b border-surface-container flex justify-between items-center gap-2">
       <div class="flex items-center gap-3">
         <img src="assets/favicon.png" alt="수학자료실" class="w-8 h-8 rounded-lg bg-white p-0.5 border border-surface-variant object-contain"/>
         <div>
-          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">수학자료실 동적 기하 탐색관</h2>
-          <div class="font-body-sm text-body-sm text-on-surface-variant">3,400+ GeoGebra 인터랙티브 앱렛, 개념 증명 PDF &amp; 영상 1초 검색</div>
+          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">민은기 선생님의 수학자료실 심층 분석 &amp; AI 음성 도슨트관</h2>
+          <div class="font-body-sm text-body-sm text-on-surface-variant">12개 수학 세부 영역 · 핵심 원리 · 플립북 증명 포인트 · 실전 보조선 팁 · 🔊 음성 해설</div>
         </div>
       </div>
       <button type="button" onclick="closeMin7014ExplorerModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center cursor-pointer border-0 text-lg">✕</button>
     </div>
     <div class="p-4 px-5 border-b border-surface-container bg-surface-container-low">
-      <input type="text" id="min7014SearchInput" placeholder="🔍 개념 검색 (예: 타원, 포물선, 단델린, 피타고라스, 삼각함수, 매듭, AlgeoMath 등)..." class="w-full h-10 px-3.5 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
+      <input type="text" id="min7014SearchInput" placeholder="🔍 개념·정리·보조선 검색 (예: 타원, 단델린, 피타고라스, 원주각, 정규분포, 구분구적법, 평균값 정리, 삼수선)..." class="w-full h-10 px-3.5 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
       <div class="flex gap-1.5 flex-wrap mt-2" id="min7014ModalChips">
-        <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('타원|쌍곡선|포물선|원뿔곡선', this)">원뿔곡선</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('피타고라스', this)">피타고라스</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('삼각함수', this)">삼각함수</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('매듭', this)">매듭 기하</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('미분|적분', this)">미적분</button>
+        <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체 (1,111)</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('이차곡선·원뿔곡선', this)">이차곡선·단델린</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('유클리드 평면기하', this)">유클리드 평면기하</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('벡터·공간도형', this)">벡터·공간도형</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('미분·도함수', this)">미분·접선</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('적분·구분구적법', this)">적분·구분구적법</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('함수의 극한과 연속', this)">극한·연속</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('삼각비·삼각함수', this)">삼각비·삼각함수</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('지수·로그', this)">지수·로그</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('수열·시그마', this)">수열·시그마</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('확률과 통계', this)">확률과 통계</button>
+        <button type="button" class="topic-chip" onclick="setMin7014Chip('기하 변환·대칭', this)">기하 변환·대칭</button>
       </div>
     </div>
-    <div id="min7014ResultsList" class="flex-1 overflow-y-auto p-4 px-5 flex flex-col gap-2 bg-surface">
+    <div id="min7014ResultsList" class="flex-1 overflow-y-auto p-4 px-5 flex flex-col gap-2.5 bg-surface">
       <div class="text-center p-10 text-on-surface-variant">자료를 불러오는 중...</div>
     </div>
-    <div class="p-3 px-5 bg-surface-container-lowest border-t border-surface-container flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant">
-      <div>총 <b id="min7014ResultsCount" class="text-secondary">0</b>개 자료 검색됨</div>
-      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="text-secondary font-bold no-underline hover:underline">🌐 공식 웹사이트 전체 방문 ➔</a>
+    <div class="p-3 px-5 bg-surface-container-lowest border-t border-surface-container flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant flex-wrap gap-2">
+      <div>총 <b id="min7014ResultsCount" class="text-secondary">0</b>개 심층 분석 주제 검색됨 (🔊 버튼으로 음성 해설 청취 가능)</div>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="text-secondary font-bold no-underline hover:underline">🌐 민은기 선생님의 수학자료실 본관 ➔</a>
     </div>
   </div>
 </div>
@@ -1790,7 +1797,7 @@ function toggleMathStory() {
     }
   };
 
-  // min7014 동적 기하 스마트 탐색관 모달 제어
+  // min7014 동적 기하 & 심층 원리·음성 도슨트 탐색관 모달 제어
   var _min7014Materials = null;
   var _min7014ActiveTag = '';
 
@@ -1801,16 +1808,16 @@ function toggleMathStory() {
 
     if (!_min7014Materials) {
       var listEl = document.getElementById('min7014ResultsList');
-      if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#7cc4ff">⏳ 3,400+ 동적 기하 자료실을 불러오는 중...</div>';
+      if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#006398">⏳ 민은기 선생님의 수학자료실 심층 분석 DB(1,111개 주제)를 불러오는 중...</div>';
 
-      fetch('assets/min7014_materials.json')
-        .then(function(r) { return r.json(); })
+      fetch('assets/min7014_deep_knowledge.json')
+        .then(function(r) { return r.ok ? r.json() : fetch('assets/min7014_materials.json').then(function(r2) { return r2.json(); }); })
         .then(function(data) {
           _min7014Materials = data || [];
           filterMin7014Materials();
         })
         .catch(function(e) {
-          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" style="color:#7cc4ff">공식 웹사이트 바로가기</a></div>';
+          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" style="color:#006398">공식 웹사이트 바로가기</a></div>';
         });
     } else {
       filterMin7014Materials();
@@ -1832,6 +1839,26 @@ function toggleMathStory() {
     filterMin7014Materials();
   };
 
+  window.speakMin7014Item = function(idx, btnEl) {
+    if (!window._min7014CurrentDisplayed || !window._min7014CurrentDisplayed[idx]) return;
+    var m = window._min7014CurrentDisplayed[idx];
+    var script = m.voice_script_ko || (m.title + '. ' + (m.core_concept || '') + ' ' + (m.visual_summary || '') + ' ' + ((m.solving_tips && m.solving_tips[0]) || ''));
+    if (window.MatheduVoiceTeacher && window.MatheduVoiceTeacher.speakRaw) {
+      window.MatheduVoiceTeacher.speakRaw(script, m.title || '수학자료실 도슨트', btnEl);
+    }
+  };
+
+  window.searchProblemsFromMin7014 = function(idx) {
+    if (!window._min7014CurrentDisplayed || !window._min7014CurrentDisplayed[idx]) return;
+    var rawTitle = window._min7014CurrentDisplayed[idx].title || '';
+    var clean = String(rawTitle || '').replace(/\$[^\$]*\$/g, ' ').replace(/[^가-힣a-zA-Z0-9\s]/g, ' ').trim();
+    var kw = clean.split(/\s+/)[0] || clean;
+    closeMin7014ExplorerModal();
+    if (window.triggerSmartQuizSearch) {
+      window.triggerSmartQuizSearch(kw, true);
+    }
+  };
+
   window.filterMin7014Materials = function() {
     if (!_min7014Materials) return;
     var q = (document.getElementById('min7014SearchInput')?.value || '').trim().toLowerCase();
@@ -1841,56 +1868,74 @@ function toggleMathStory() {
 
     var matched = _min7014Materials.filter(function(item) {
       var title = (item.title || '').toLowerCase();
+      var subKo = (item.sub_domain_ko || item.category || '').toLowerCase();
+      var core = (item.core_concept || '').toLowerCase();
       var tagStr = (item.tags || []).join(' ').toLowerCase();
-      var matchesQ = !q || title.includes(q) || tagStr.includes(q);
-      var matchesTag = !_min7014ActiveTag || new RegExp(_min7014ActiveTag, 'i').test(title) || new RegExp(_min7014ActiveTag, 'i').test(tagStr);
+      var corpus = title + ' ' + subKo + ' ' + core + ' ' + tagStr;
+      var matchesQ = !q || corpus.includes(q);
+      var matchesTag = !_min7014ActiveTag || subKo.includes(_min7014ActiveTag.toLowerCase()) || new RegExp(_min7014ActiveTag, 'i').test(corpus);
       return matchesQ && matchesTag;
     });
 
     if (countEl) countEl.textContent = matched.length;
 
     if (matched.length === 0) {
-      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">검색어에 일치하는 기하 자료가 없습니다. 다른 검색어를 입력해보세요.</div>';
+      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">검색어에 일치하는 수학자료실 주제가 없습니다. 다른 검색어를 입력해보세요.</div>';
       return;
     }
 
     var displayList = matched.slice(0, 40);
+    window._min7014CurrentDisplayed = displayList;
     var h = '';
-    displayList.forEach(function(m) {
+    displayList.forEach(function(m, idx) {
       var title = escapeHtml(m.title || '제목 없음');
+      var subKo = escapeHtml(m.sub_domain_ko || m.category || '동적 기하·시각적 증명');
+      var core = escapeHtml(m.core_concept || '');
+      var vis = escapeHtml(m.visual_summary || '');
+      var tip = escapeHtml((m.solving_tips && m.solving_tips[0]) || '');
       var ggbUrl = m.geogebra || '';
+      var algeoUrl = m.algeomath || '';
       var pdfUrl = m.pdf || '';
       var ytUrl = m.youtube || '';
       var mainUrl = m.url || 'https://min7014.github.io/';
 
-      h += '<div class="bg-surface-container-lowest border border-surface-glass-border rounded-xl p-3.5 px-4 flex items-center justify-between gap-3 flex-wrap shadow-sm hover:border-secondary/40 transition-colors">';
-      h += '  <div class="flex-1 min-w-[220px]">';
-      h += '    <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" class="text-on-surface hover:text-secondary font-headline-sm text-[15px] font-bold no-underline block leading-snug">' + title + '</a>';
-      if (m.tags && m.tags.length > 0) {
-        h += '  <div class="flex gap-1 mt-1.5 flex-wrap">';
-        m.tags.forEach(function(t) {
-          h += '    <span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded-full font-label-badge text-[11px] font-semibold">#' + escapeHtml(t) + '</span>';
-        });
-        h += '  </div>';
-      }
-      h += '  </div>';
-
-      h += '  <div class="flex gap-1.5 items-center flex-wrap">';
+      h += '<div class="bg-surface-container-lowest border border-surface-glass-border rounded-xl p-3.5 px-4 flex flex-col gap-2 shadow-sm hover:border-secondary/40 transition-colors">';
+      h += '  <div class="flex items-start justify-between gap-3 flex-wrap">';
+      h += '    <div class="flex-1 min-w-[220px]">';
+      h += '      <span class="inline-block bg-secondary/10 text-secondary px-2 py-0.5 rounded-md font-label-badge text-[11px] font-bold mb-1">📂 ' + subKo + '</span>';
+      h += '      <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" class="text-on-surface hover:text-secondary font-headline-sm text-[15px] font-bold no-underline block leading-snug">' + title + '</a>';
+      h += '    </div>';
+      h += '    <div class="flex gap-1.5 items-center flex-wrap">';
+      h += '      <button type="button" onclick="window.speakMin7014Item(' + idx + ', this)" class="mathedu-voice-btn">🔊 음성 도슨트</button>';
       if (ggbUrl) {
-        h += '    <a href="' + escapeHtml(ggbUrl) + '" target="_blank" rel="noopener" class="bg-secondary/10 hover:bg-secondary/20 text-secondary px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-bold no-underline">🎮 GeoGebra</a>';
+        h += '      <a href="' + escapeHtml(ggbUrl) + '" target="_blank" rel="noopener" class="bg-secondary/10 hover:bg-secondary/20 text-secondary px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">🎮 GeoGebra</a>';
+      }
+      if (algeoUrl) {
+        h += '      <a href="' + escapeHtml(algeoUrl) + '" target="_blank" rel="noopener" class="bg-status-emerald/15 hover:bg-status-emerald/25 text-status-emerald px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📐 AlgeoMath</a>';
       }
       if (pdfUrl) {
-        h += '    <a href="' + escapeHtml(pdfUrl) + '" target="_blank" rel="noopener" class="bg-status-amber/15 hover:bg-status-amber/25 text-[#B45309] px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-bold no-underline">📄 증명 PDF</a>';
+        h += '      <a href="' + escapeHtml(pdfUrl) + '" target="_blank" rel="noopener" class="bg-status-amber/15 hover:bg-status-amber/25 text-[#B45309] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📄 증명 PDF</a>';
       }
       if (ytUrl) {
-        h += '    <a href="' + escapeHtml(ytUrl) + '" target="_blank" rel="noopener" class="bg-error-container/60 hover:bg-error-container text-error px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-bold no-underline">▶️ 유튜브</a>';
+        h += '      <a href="' + escapeHtml(ytUrl) + '" target="_blank" rel="noopener" class="bg-error-container/60 hover:bg-error-container text-error px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">▶️ 영상</a>';
       }
-      h += '    <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" class="bg-surface-container hover:bg-surface-container-high text-on-surface px-2.5 py-1.5 rounded-lg font-body-sm text-body-sm font-semibold no-underline">상세 ➔</a>';
+      h += '      <button type="button" onclick="window.searchProblemsFromMin7014(' + idx + ')" class="bg-surface-container hover:bg-surface-container-high text-on-surface px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-semibold border-0 cursor-pointer">🔗 연관 기출</button>';
+      h += '    </div>';
       h += '  </div>';
+      if (core || vis || tip) {
+        h += '  <div class="text-xs leading-relaxed p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant border border-surface-container">';
+        if (core) h += '    <div><b class="text-on-surface">🎓 핵심 원리</b>: ' + core + '</div>';
+        if (vis) h += '    <div class="mt-0.5 text-secondary"><b>👁️ 시각적 증명</b>: ' + vis + '</div>';
+        if (tip) h += '    <div class="mt-1 pt-1 border-t border-surface-container text-[#B45309] font-semibold">💡 <b>수능 실전 보조선·풀이 팁</b>: ' + tip + '</div>';
+        h += '  </div>';
+      }
       h += '</div>';
     });
 
     listEl.innerHTML = h;
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise([listEl]).catch(function() {});
+    }
   };
 
   function renderList() {
@@ -2576,6 +2621,106 @@ function toggleMathStory() {
 window.openAcademicPedagogyModal = function() {
   var m = document.getElementById('academicPedagogyModal');
   if (m) m.classList.remove('hidden');
+};
+</script>
+
+
+<!-- 에빙하우스 오개념 클리닉 & 파인만 유레카 노트 모달 -->
+<div id="mathClinicModal" class="hidden fixed inset-0 z-[105] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="bg-[var(--card)] border border-[var(--line)] rounded-2xl max-w-2xl w-full p-6 shadow-2xl max-h-[86vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-3 pb-3 border-b border-[var(--line)]">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🧬</span>
+        <h2 class="text-base font-extrabold text-[var(--txt)] m-0">단계별 취약 고리 클리닉 & 파인만 유레카 노트</h2>
+      </div>
+      <button type="button" onclick="document.getElementById('mathClinicModal').classList.add('hidden')" class="px-2.5 py-1 rounded-lg bg-[var(--card2)] text-[var(--sub)] text-xs font-bold border-0 cursor-pointer">닫기 ✕</button>
+    </div>
+    <div id="mathClinicModalBody" class="flex flex-col gap-4 text-xs"></div>
+  </div>
+</div>
+<script>
+window.openMathClinicModal = function() {
+  var m = document.getElementById('mathClinicModal');
+  var body = document.getElementById('mathClinicModalBody');
+  if (!m || !body) return;
+
+  var clinic = { stepCounts: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }, reviewQueue: {} };
+  try {
+    var raw = localStorage.getItem('mathedu_step_clinic_v1');
+    if (raw) clinic = Object.assign(clinic, JSON.parse(raw));
+  } catch (e) {}
+
+  var eurekaMap = {};
+  try {
+    eurekaMap = JSON.parse(localStorage.getItem('mathedu_eureka_notes_v1') || '{}');
+  } catch (e) {}
+
+  var stepLabels = {
+    1: '1단계 · 초등 기초 직관 & 구체적 수치 실험',
+    2: '2단계 · 수학 기호 번역 & 기본 공식 적용',
+    3: '3단계 · 출발 조건 수식화 · 빈칸 (가) 추론',
+    4: '4단계 · 핵심 관계식 변형 · 빈칸 (나) 도출',
+    5: '5단계 · 디딤돌 조각 결합 & 마무리 계산',
+    6: '최종 본문항 · 수능·모평 실전 종합 해결'
+  };
+  var counts = clinic.stepCounts || {};
+  var maxCnt = Math.max(1, counts[1]||0, counts[2]||0, counts[3]||0, counts[4]||0, counts[5]||0, counts[6]||0);
+
+  var barsHtml = Object.keys(stepLabels).map(function(k) {
+    var c = counts[k] || 0;
+    var pct = Math.round((c / maxCnt) * 100);
+    return (
+      '<div class="flex flex-col gap-1">' +
+        '<div class="flex justify-between text-[11px] font-bold text-[var(--txt)]">' +
+          '<span>' + stepLabels[k] + '</span>' +
+          '<span class="text-[#006398]">' + c + '회 보강 기록</span>' +
+        '</div>' +
+        '<div class="w-full h-2 rounded-full bg-[var(--card2)] overflow-hidden">' +
+          '<div style="width:' + pct + '%;height:100%;background:linear-gradient(90deg,#006398,#4f46e5)"></div>' +
+        '</div>' +
+      '</div>'
+    );
+  }).join('');
+
+  var qItems = Object.values(clinic.reviewQueue || {});
+  var queueHtml = qItems.length === 0
+    ? '<div class="text-[var(--sub)] py-2">아직 오답이나 힌트 보강이 기록된 문항이 없습니다. 문제를 풀면 자동으로 에빙하우스 복습 주기가 설계됩니다.</div>'
+    : qItems.slice(0, 8).map(function(it) {
+        return (
+          '<a href="board/' + it.slug + '.html" class="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--line)] hover:border-[#006398] no-underline flex items-center justify-between gap-2">' +
+            '<div class="truncate text-[var(--txt)] font-semibold">' + (it.title || it.slug) + ' <span class="text-[#e11d48] text-[11px]">(' + (it.weakStep || 1) + '단계 집중 복습)</span></div>' +
+            '<span class="text-[11px] text-[#006398] font-bold shrink-0">복습 권장일: ' + (it.nextReviewDate || '오늘') + ' ➔</span>' +
+          '</a>'
+        );
+      }).join('');
+
+  var eurekaItems = Object.values(eurekaMap || {});
+  var eurekaHtml = eurekaItems.length === 0
+    ? '<div class="text-[var(--sub)] py-2">문항 페이지 상단 <b>[🔄 변이·전이 & 유레카 노트]</b>에서 작성한 나만의 1줄 핵심 원리가 이곳에 차곡차곡 모입니다.</div>'
+    : eurekaItems.map(function(item) {
+        return (
+          '<a href="board/' + item.slug + '.html" class="p-2.5 rounded-lg bg-[#fefce8] border border-[#fde047] no-underline flex flex-col gap-1">' +
+            '<div class="font-extrabold text-[#b45309]">💡 ' + (item.title || item.slug) + '</div>' +
+            '<div class="text-[#1e293b]">' + item.note + '</div>' +
+          '</a>'
+        );
+      }).join('');
+
+  body.innerHTML =
+    '<div class="p-3.5 rounded-xl bg-[var(--card2)] border border-[var(--line)] flex flex-col gap-2">' +
+      '<div class="font-extrabold text-[#006398]">📊 1. 나의 6단계 디딤돌 취약 고리 진단 (어느 단계에서 가장 자주 막히는가?)</div>' +
+      barsHtml +
+    '</div>' +
+    '<div class="p-3.5 rounded-xl bg-[var(--card2)] border border-[var(--line)] flex flex-col gap-2">' +
+      '<div class="font-extrabold text-[#e11d48]">⏰ 2. 에빙하우스 간격 반복(Spaced Repetition · 1·3·7·14일) 맞춤 복습 큐</div>' +
+      queueHtml +
+    '</div>' +
+    '<div class="p-3.5 rounded-xl bg-[var(--card2)] border border-[var(--line)] flex flex-col gap-2">' +
+      '<div class="font-extrabold text-[#d97706]">💡 3. 파인만 1줄 자기설명(Self-Explanation) 나만의 유레카 노트 보관함</div>' +
+      eurekaHtml +
+    '</div>';
+
+  m.classList.remove('hidden');
 };
 </script>
 
