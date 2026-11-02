@@ -3265,6 +3265,18 @@
               vidBtn.innerHTML = bilingual('🎬 다국어 강의 영상', '🎬 Multi-Lang Video');
               actDiv.insertBefore(vidBtn, actDiv.firstChild);
             }
+            if (info && (info.yk || info.ye) && !actDiv.querySelector('.min-yt-vault-btn')) {
+              var vaultBtn = document.createElement('button');
+              vaultBtn.type = 'button';
+              vaultBtn.className = 'mathedu-voice-btn min-yt-vault-btn';
+              vaultBtn.style.background = 'linear-gradient(135deg,#e11d48,#be123c)';
+              vaultBtn.innerHTML = bilingual('📺 @min7014_ai 영상저장고 재생', '📺 @min7014_ai Video Vault');
+              vaultBtn.onclick = function() {
+                var targetYt = (isEnMode() && info.ye) ? info.ye : (info.yk || info.ye);
+                window.open(targetYt || 'https://www.youtube.com/@min7014_ai', '_blank');
+              };
+              actDiv.insertBefore(vaultBtn, actDiv.firstChild);
+            }
             var docentBtn = document.createElement('button');
             docentBtn.type = 'button';
             docentBtn.className = 'mathedu-voice-btn';
