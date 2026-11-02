@@ -1194,9 +1194,9 @@ def sync_youtube_channel_rss():
         found_en = None
         for ent in entries:
             blob = f"{ent['title']}\n{ent['description']}"
-            if f"[ID: {slug}_KO]" in blob or (slug in blob and ("단계별" in ent["title"] or "수학자료실" in ent["title"])):
+            if f"[ID: {slug}_KO]" in blob or f"[{slug}_KO]" in blob or (slug in blob and ("단계별" in ent["title"] or "수학자료실" in ent["title"])):
                 found_ko = ent["url"]
-            elif f"[ID: {slug}_EN]" in blob or (slug in blob and ("Visual Proof" in ent["title"] or "Min's Math Lab" in ent["title"])):
+            elif f"[ID: {slug}_EN]" in blob or f"[{slug}_EN]" in blob or (slug in blob and ("Visual Proof" in ent["title"] or "Min's Math Lab" in ent["title"])):
                 found_en = ent["url"]
             elif title_ko and len(title_ko) >= 3 and title_ko in ent["title"] and "Visual Proof" not in ent["title"]:
                 found_ko = ent["url"]
@@ -1207,6 +1207,36 @@ def sync_youtube_channel_rss():
             matched_count += 1
     print(f"[@min7014_ai Channel RSS Sync] Checked {len(entries)} videos on {YOUTUBE_CHANNEL_URL} -> Matched {matched_count} topics.")
     return matched_count
+
+
+def prepare_ready_batch_folder(open_explorer=True):
+    """
+    이미 로그인된 크롬 YouTube Studio 창에 마우스로 한 번에 전체 드래그 앤 드롭(최대 15개 동시 업로드)할 수 있도록
+    유튜브 제목과 고유 식별 태그([slug_KO], [slug_EN])가 파일명으로 지정된 마스터 MP4 모음 폴더를 생성합니다.
+    """
+    ready_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai"
+    ready_dir.mkdir(parents=True, exist_ok=True)
+    count = 0
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        slug = sdoc["slug"]
+        meta_p = YT_PKG_DIR / f"{slug}_youtube_meta.json"
+        if not meta_p.exists():
+            continue
+        mdata = json.loads(meta_p.read_text(encoding="utf-8"))
+        for lc in ["ko", "en"]:
+            src = YT_UPLOADS_DIR / slug / f"{slug}_{lc}.mp4"
+            if src.exists() and lc in mdata:
+                raw_title = mdata[lc]["title"]
+                safe_title = re.sub(r'[\\/:*?"<>|]', " ", raw_title).strip()
+                fname = f"{safe_title[:78]} [{slug}_{lc.upper()}].mp4"
+                dst = ready_dir / fname
+                shutil.copyfile(src, dst)
+                count += 1
+                print(f"[Ready for 1-Drag Upload] {dst.name}")
+    if open_explorer and os.name == "nt":
+        os.startfile(str(ready_dir))
+    return ready_dir
 
 
 def open_youtube_studio_for_min7014(slug_key="math20250130001"):
@@ -1248,7 +1278,7 @@ def upload_slug_via_studio_browser(slug_key, langs=("ko", "en"), privacy="public
     meta_path = YT_PKG_DIR / f"{slug_key}_youtube_meta.json"
     meta_all = json.loads(meta_path.read_text(encoding="utf-8"))
 
-    profile_dir = ROOT_DIR / ".yt_studio_profile_min7014_ai"
+    profile_dir = ROOT_DIR / ".yt_chrome_robot_profile"
     profile_dir.mkdir(parents=True, exist_ok=True)
     uploaded_urls = {}
 
@@ -1260,12 +1290,13 @@ def upload_slug_via_studio_browser(slug_key, langs=("ko", "en"), privacy="public
 
     with sync_playwright() as p:
         browser_ctx = None
-        for ch_name in ["msedge", "chrome"]:
+        for ch_name in ["chrome", "msedge"]:
             try:
                 browser_ctx = p.chromium.launch_persistent_context(
                     user_data_dir=str(profile_dir),
                     channel=ch_name,
                     headless=False,
+                    ignore_default_args=["--enable-automation"],
                     args=["--disable-blink-features=AutomationControlled", "--start-maximized"],
                     no_viewport=True,
                 )
@@ -1276,10 +1307,15 @@ def upload_slug_via_studio_browser(slug_key, langs=("ko", "en"), privacy="public
             browser_ctx = p.chromium.launch_persistent_context(
                 user_data_dir=str(profile_dir),
                 headless=False,
+                ignore_default_args=["--enable-automation"],
                 args=["--disable-blink-features=AutomationControlled"],
             )
 
         page = browser_ctx.pages[0] if browser_ctx.pages else browser_ctx.new_page()
+        try:
+            page.bring_to_front()
+        except Exception:
+            pass
 
         for lang_code in langs:
             mp4_path = (YT_UPLOADS_DIR / slug_key / f"{slug_key}_{lang_code}.mp4").resolve()
@@ -1289,27 +1325,51 @@ def upload_slug_via_studio_browser(slug_key, langs=("ko", "en"), privacy="public
             print(f"[Studio Auto-Upload -> {YOUTUBE_CHANNEL_HANDLE}] Navigating to {YOUTUBE_STUDIO_UPLOAD_URL} ({slug_key}_{lang_code}.mp4)")
             page.goto(YOUTUBE_STUDIO_UPLOAD_URL, wait_until="domcontentloaded")
 
-            # 만약 구글 로그인이 안 되어 있다면 사용자가 1회 로그인할 때까지 대기 (최대 5분)
-            if "accounts.google.com" in page.url or "signin" in page.url.lower():
+            # 만약 구글 로그인이 안 되어 있다면 화면 상단에 친절한 안내 배너를 띄우고 사용자가 1회 로그인할 때까지 대기 (최대 10분)
+            if not page.url.startswith("https://studio.youtube.com/"):
+                try:
+                    page.evaluate("""() => {
+                        const b = document.createElement('div');
+                        b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:#006398;color:#fff;padding:14px 20px;font-size:17px;font-weight:bold;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);font-family:sans-serif;';
+                        b.innerHTML = '🤖 [자동 업로드 로봇 전용 창] 이 창에서 딱 1번만 로그인해 주시면, 지금부터 모든 영상을 로봇이 스스로 클릭하여 자동 업로드합니다!';
+                        document.body.prepend(b);
+                    }""")
+                except Exception:
+                    pass
                 print("=" * 72)
-                print(f"🔐 [최초 1회 로그인 안내] 열린 브라우저 창에서 {YOUTUBE_CHANNEL_URL} 계정에 로그인해 주세요.")
-                print("   (한 번 로그인하시면 세션이 저장되어 다음부터는 완전 자동으로 업로드됩니다.)")
+                print(f"🔐 [최초 1회 로그인 대기 중] 새로 열린 로봇 전용 크롬 창에서 로그인해 주세요.")
                 print("=" * 72)
-                page.wait_for_url(lambda u: "studio.youtube.com" in u, timeout=300000)
-                page.goto(YOUTUBE_STUDIO_UPLOAD_URL, wait_until="domcontentloaded")
+                page.wait_for_url(lambda u: u.startswith("https://studio.youtube.com/"), timeout=600000)
+                time.sleep(3.0)
+                if YOUTUBE_CHANNEL_ID not in page.url:
+                    page.goto(YOUTUBE_STUDIO_UPLOAD_URL, wait_until="domcontentloaded")
+                    time.sleep(3.0)
 
-            # 업로드 모달의 input[type="file"] 대기 (모달이 닫혀 있으면 만들기->동영상 업로드 클릭)
+            # 신규 채널 환영 팝업("계속" / "Continue") 자동 닫기
             try:
-                file_input = page.locator('ytcp-uploads-file-picker input[type="file"], input[name="Filedata"]').first
-                file_input.wait_for(state="attached", timeout=15000)
+                welcome_btn = page.locator('ytcp-button#dismiss-button, button:has-text("계속"), button:has-text("Continue")').first
+                if welcome_btn.is_visible(timeout=3000):
+                    welcome_btn.click(timeout=3000)
+                    time.sleep(1.0)
+            except Exception:
+                pass
+
+            # 업로드 모달의 input[type="file"] 대기 (모달이 닫혀 있으면 만들기->동영상 업로드 자동 클릭)
+            try:
+                file_input = page.locator('ytcp-uploads-file-picker input[type="file"], input[name="Filedata"], input[type="file"]').first
+                file_input.wait_for(state="attached", timeout=8000)
             except Exception:
                 try:
-                    page.locator('#create-icon, ytcp-button#create-icon').first.click(timeout=5000)
-                    page.locator('tp-yt-paper-item#text-item-0').first.click(timeout=5000)
+                    create_btn = page.locator('ytcp-button#create-icon, #create-icon, ytcp-button#upload-icon, #upload-icon, button[aria-label*="만들기"], button[aria-label*="Create"]').first
+                    create_btn.click(timeout=8000)
+                    time.sleep(1.0)
+                    upload_item = page.locator('tp-yt-paper-item#text-item-0, tp-yt-paper-item:has-text("동영상 업로드"), tp-yt-paper-item:has-text("Upload videos")').first
+                    if upload_item.is_visible(timeout=3000):
+                        upload_item.click(timeout=5000)
                 except Exception:
                     pass
                 file_input = page.locator('input[type="file"]').first
-                file_input.wait_for(state="attached", timeout=30000)
+                file_input.wait_for(state="attached", timeout=60000)
 
             file_input.set_input_files(str(mp4_path))
             print(f"  [1/5] MP4 파일 투입 완료: {mp4_path.name}")
@@ -1457,9 +1517,9 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            print(f"[Google OAuth] 브라우저에서 {YOUTUBE_CHANNEL_URL} ({YOUTUBE_CHANNEL_NAME}) 계정을 선택하여 로그인해 주세요...")
+            print(f"[Google OAuth] 아래 인증 주소를 크롬에서 열어 {YOUTUBE_CHANNEL_URL} ({YOUTUBE_CHANNEL_NAME}) 계정을 선택해 허용해 주세요...", flush=True)
             flow = InstalledAppFlow.from_client_secrets_file(str(secret_file), SCOPES)
-            creds = flow.run_local_server(port=0)
+            creds = flow.run_local_server(port=8089, open_browser=False)
         token_file.write_text(creds.to_json(), encoding="utf-8")
 
     youtube = build("youtube", "v3", credentials=creds)
@@ -1694,6 +1754,48 @@ def update_video_catalog():
     print(f"[Catalog & @min7014_ai Video Vault Updated] {CATALOG_PATH} / {vault_path} ({len(scripts)} topics)")
 
 
+def watch_for_client_secret_and_auto_upload(privacy="public", open_gcp=True):
+    """
+    [100% 무인 YouTube Data API v3 업로드 감시 데몬]
+    - 현재 로그인된 일반 크롬 브라우저에 Google Cloud OAuth 자격 증명 페이지를 열고,
+      다운로드 폴더(Downloads)에 client_secret*.json 파일이 내려받아지는 즉시 자동 감지하여
+      @min7014_ai 채널로 모든 한국어·영어 영상을 무인 업로드합니다.
+    """
+    import time
+    import webbrowser
+
+    if open_gcp and not find_google_client_secret():
+        webbrowser.open("https://console.cloud.google.com/apis/library/youtube.googleapis.com")
+        webbrowser.open("https://console.cloud.google.com/apis/credentials")
+
+    print("=" * 72)
+    print("🤖 [@min7014_ai 무인 자동 업로드 감시기 가동 중]")
+    print("1) 열린 크롬 탭(YouTube Data API v3)에서 [사용(Enable)] 클릭")
+    print("2) [사용자 인증 정보 만들기 -> OAuth 클라이언트 ID -> 데스크톱 앱] 생성 후 [JSON 다운로드] 클릭")
+    print("   -> 다운로드 폴더(Downloads)에 저장되는 즉시 자동으로 감지하여 @min7014_ai 업로드를 시작합니다!")
+    print("=" * 72)
+
+    while True:
+        secret = find_google_client_secret()
+        if secret:
+            print(f"✅ Google OAuth 파일 감지 완료: {secret}")
+            slugs = ["math20250130001", "2014111902", "2017090101", "2014111901"]
+            for s_key in slugs:
+                try:
+                    upload_slug_to_youtube(s_key, langs=("ko", "en"), privacy=privacy, method="api")
+                except Exception as e:
+                    print(f"[Upload Notice ({s_key})] {e}")
+            break
+        # 동시에 사용자가 수동 드래그 업로드한 경우에도 RSS 피드에서 자동 감지
+        try:
+            matched = sync_youtube_channel_rss()
+            if matched > 0:
+                print(f"✅ @min7014_ai RSS 피드에서 {matched}개 주제 업로드 감지 및 사이트 자동 등록 완료!")
+        except Exception:
+            pass
+        time.sleep(4.0)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="min7014.github.io Broadcast-Quality Script-First & @min7014_ai YouTube Auto-Uploader")
     parser.add_argument("--slug", type=str, default="math20250130001", help="Topic slug or PDF ID")
@@ -1703,6 +1805,7 @@ if __name__ == "__main__":
     parser.add_argument("--build-flagship", action="store_true", help="Generate flagship multi-language scripts and Master-Quality KR/EN YouTube packages")
     parser.add_argument("--upload-youtube", action="store_true", help="Upload rendered KR and EN videos directly to https://www.youtube.com/@min7014_ai")
     parser.add_argument("--upload-all", action="store_true", help="Upload all rendered topics in youtube_uploads/ to https://www.youtube.com/@min7014_ai")
+    parser.add_argument("--watch-oauth", action="store_true", help="Watch Downloads for client_secret*.json and RSS feed to auto-upload & sync to @min7014_ai")
     parser.add_argument("--auto-pipeline", action="store_true", help="Automatically generate scripts, render 1080p KR/EN videos, and upload to @min7014_ai")
     parser.add_argument("--count", type=int, default=1, help="Number of pending PDF topics to process in --auto-pipeline mode")
     parser.add_argument("--git-push", action="store_true", help="Automatically commit and push updated catalog/scripts after upload")
@@ -1714,6 +1817,8 @@ if __name__ == "__main__":
 
     if args.set_youtube_ko is not None or args.set_youtube_en is not None:
         set_youtube_urls_for_slug(args.slug, yt_ko=args.set_youtube_ko, yt_en=args.set_youtube_en)
+    elif args.watch_oauth:
+        watch_for_client_secret_and_auto_upload(privacy=args.privacy, open_gcp=True)
     elif args.sync_channel:
         sync_youtube_channel_rss()
     elif args.open_studio:
@@ -1722,9 +1827,16 @@ if __name__ == "__main__":
         spec = args.slug if "--slug" in sys.argv else None
         auto_pipeline_batch(count=args.count, specific_slug=spec, privacy=args.privacy, upload_enable=True, git_push=args.git_push)
     elif args.upload_all:
-        slugs_to_upload = [d.name for d in sorted(YT_UPLOADS_DIR.iterdir()) if d.is_dir()] or ["math20250130001", "2014111902", "2017090101", "2014111901"]
+        slugs_to_upload = ["math20250130001", "2014111902", "2017090101", "2014111901"]
         for s_key in slugs_to_upload:
-            upload_slug_to_youtube(s_key, langs=("ko", "en"), privacy=args.privacy)
+            try:
+                upload_slug_to_youtube(s_key, langs=("ko", "en"), privacy=args.privacy, method="api")
+            except Exception as e:
+                print(f"[Upload Error ({s_key})] {e}", flush=True)
+        if args.git_push:
+            subprocess.run(["git", "add", "video_lectures/", "assets/"], check=False)
+            subprocess.run(["git", "commit", "-m", "chore(youtube-vault): auto-upload & bind @min7014_ai video URLs"], check=False)
+            subprocess.run(["git", "push", "origin", "main"], check=False)
     elif args.upload_youtube:
         upload_slug_to_youtube(args.slug, langs=("ko", "en"), privacy=args.privacy)
     elif args.build_flagship:
