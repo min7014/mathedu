@@ -210,11 +210,62 @@ class AutoUploadHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "not found"}).encode("utf-8"))
 
     def do_POST(self):
+        content_len = int(self.headers.get("Content-Length", 0) or 0)
+        raw_body = self.rfile.read(content_len).decode("utf-8") if content_len > 0 else "{}"
+        try:
+            body_json = json.loads(raw_body) if raw_body.strip() else {}
+        except Exception:
+            body_json = {}
+
         if self.path.startswith("/sync-rss"):
             matched = maker.sync_youtube_channel_rss()
             self._send_cors_headers(200)
             self.wfile.write(json.dumps({"ok": True, "matched": matched}).encode("utf-8"))
             return
+
+        if self.path.startswith("/api/register_youtube_link"):
+            slug = str(body_json.get("slug") or "").strip()
+            yt_ko = body_json.get("youtube_ko")
+            yt_en = body_json.get("youtube_en")
+            if not slug:
+                self._send_cors_headers(400)
+                self.wfile.write(json.dumps({"ok": False, "error": "slug is required"}).encode("utf-8"))
+                return
+            maker.set_youtube_urls_for_slug(slug, yt_ko=yt_ko, yt_en=yt_en)
+            append_log(f"✅ 게시판 링크 수동/직접 등록 완료: {slug} -> KO={yt_ko}, EN={yt_en}")
+            self._send_cors_headers(200)
+            self.wfile.write(json.dumps({"ok": True, "slug": slug, "youtube_ko": yt_ko, "youtube_en": yt_en}).encode("utf-8"))
+            return
+
+        if self.path.startswith("/api/produce_and_upload"):
+            slug = str(body_json.get("slug") or "").strip() or None
+            count = int(body_json.get("count") or 1)
+            with STATE_LOCK:
+                if STATE["status"] == "running":
+                    self._send_cors_headers(200)
+                    self.wfile.write(json.dumps({"ok": False, "busy": True, "message": f"현재 {STATE['current_slug']} 작업이 진행 중입니다."}).encode("utf-8"))
+                    return
+                STATE["status"] = "running"
+                STATE["current_slug"] = slug or f"batch({count})"
+                STATE["mode"] = "auto_pipeline"
+
+            def _worker():
+                try:
+                    append_log(f"🚀 AI 설명영상 제작 & @min7014_ai 자동 업로드 시작: {slug or f'다음 {count}개 자료'}")
+                    res = maker.auto_pipeline_batch(count=count, specific_slug=slug, privacy="public", upload_enable=True, git_push=True)
+                    append_log(f"✅ AI 설명영상 제작 & @min7014_ai 업로드 완료: {json.dumps(res, ensure_ascii=False)}")
+                except Exception as e:
+                    append_log(f"⚠️ 작업 중 알림: {e}")
+                finally:
+                    with STATE_LOCK:
+                        STATE["status"] = "idle"
+                        STATE["current_slug"] = ""
+
+            threading.Thread(target=_worker, daemon=True).start()
+            self._send_cors_headers(200)
+            self.wfile.write(json.dumps({"ok": True, "started": True, "slug": slug, "count": count}).encode("utf-8"))
+            return
+
         self._send_cors_headers(200)
         self.wfile.write(json.dumps({"ok": True}).encode("utf-8"))
 

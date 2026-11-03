@@ -31,6 +31,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import textwrap
 import urllib.parse
@@ -1086,6 +1087,7 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
         final_en = yt_urls.get("en", "")
         script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
 
+    matched_web_slugs = [slug_key]
     if DEEP_JSON_PATH.exists():
         items = json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8"))
         changed = False
@@ -1093,6 +1095,9 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
             u = (it.get("url") or "").strip()
             p = (it.get("pdf") or "").split("#")[0].strip()
             if slug_key in (u, p) or u.endswith(f"/{slug_key}.html") or p.endswith(f"/{slug_key}.pdf"):
+                w_slug = u.split("/")[-1].replace(".html", "").strip()
+                if w_slug and w_slug not in matched_web_slugs:
+                    matched_web_slugs.append(w_slug)
                 if yt_ko is not None:
                     it["youtube_ko"] = yt_ko.strip()
                 if yt_en is not None:
@@ -1102,12 +1107,16 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
             DEEP_JSON_PATH.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
 
     if LOOKUP_JSON_PATH.exists():
-        lmap = json.loads(LOOKUP_JSON_PATH.read_text(encoding="utf-8"))
-        if slug_key in lmap:
-            if yt_ko is not None:
-                lmap[slug_key]["yk"] = yt_ko.strip()
-            if yt_en is not None:
-                lmap[slug_key]["ye"] = yt_en.strip()
+        lmap = json.load(open(LOOKUP_JSON_PATH, "r", encoding="utf-8"))
+        l_changed = False
+        for k_candidate in matched_web_slugs:
+            if k_candidate in lmap:
+                if yt_ko is not None:
+                    lmap[k_candidate]["yk"] = yt_ko.strip()
+                if yt_en is not None:
+                    lmap[k_candidate]["ye"] = yt_en.strip()
+                l_changed = True
+        if l_changed:
             LOOKUP_JSON_PATH.write_text(json.dumps(lmap, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     # 한국어(ko)와 영어(en) 모두 @min7014_ai 영상저장고에 업로드 완료되면 로컬 MP4 용량 자동 회수
@@ -1160,7 +1169,7 @@ def sync_youtube_channel_rss():
     """https://www.youtube.com/@min7014_ai (UCSlqQfOEtRfJuMPyGMLgFYA) 공개 RSS 피드를 조회하여 업로드된 한국어·영어 영상을 자동 매칭합니다."""
     import xml.etree.ElementTree as ET
     entries = []
-    for rss_url in [YOUTUBE_RSS_URL, f"https://www.youtube.com/feeds/videos.xml?channel_id={MAIN_CHANNEL_ID}"]:
+    for rss_url in [YOUTUBE_RSS_URL]:
         try:
             req = urllib.request.Request(rss_url, headers={"User-Agent": "Mozilla/5.0"})
             raw = urllib.request.urlopen(req, timeout=15).read()
@@ -1537,8 +1546,20 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
         print(f"[Channel Check Notice] {e}")
 
     uploaded_urls = {}
+    script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    existing_yt = {}
+    if script_path.exists():
+        try:
+            existing_yt = json.loads(script_path.read_text(encoding="utf-8")).get("youtube_urls") or {}
+        except Exception:
+            existing_yt = {}
 
     for lang_code in langs:
+        if existing_yt.get(lang_code):
+            uploaded_urls[lang_code] = existing_yt[lang_code]
+            print(f"[Already in @min7014_ai Vault ({lang_code.upper()})] {existing_yt[lang_code]}")
+            continue
+
         mp4_path = YT_UPLOADS_DIR / slug_key / f"{slug_key}_{lang_code}.mp4"
         if not mp4_path.exists():
             render_multilingual_video(slug_key, lang_code=lang_code)
@@ -1562,13 +1583,22 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
             },
         }
 
-        media = MediaFileUpload(str(mp4_path), chunksize=-1, resumable=True, mimetype="video/mp4")
-        req = youtube.videos().insert(part="snippet,status", body=body, media_body=media)
-        resp = req.execute()
-        vid_id = resp["id"]
-        yt_url = f"https://youtu.be/{vid_id}"
-        uploaded_urls[lang_code] = yt_url
-        print(f"[YouTube Uploaded to {YOUTUBE_CHANNEL_HANDLE} ({lang_code.upper()})] {yt_url}")
+        try:
+            media = MediaFileUpload(str(mp4_path), chunksize=-1, resumable=True, mimetype="video/mp4")
+            req = youtube.videos().insert(part="snippet,status", body=body, media_body=media)
+            resp = req.execute()
+            vid_id = resp["id"]
+            yt_url = f"https://youtu.be/{vid_id}"
+            uploaded_urls[lang_code] = yt_url
+            print(f"[YouTube Uploaded to {YOUTUBE_CHANNEL_HANDLE} ({lang_code.upper()})] {yt_url}", flush=True)
+            set_youtube_urls_for_slug(
+                slug_key,
+                yt_ko=yt_url if lang_code == "ko" else None,
+                yt_en=yt_url if lang_code == "en" else None,
+            )
+        except Exception as up_err:
+            print(f"  [YouTube Upload API Notice ({slug_key} / {lang_code})] {up_err}", flush=True)
+            break
 
         thumb_path = YT_PKG_DIR / f"{slug_key}_{lang_code}_thumb.png"
         if thumb_path.exists():
@@ -1598,11 +1628,12 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
             except Exception as e:
                 print(f"  [Caption Warning] {e}")
 
-    set_youtube_urls_for_slug(
-        slug_key,
-        yt_ko=uploaded_urls.get("ko"),
-        yt_en=uploaded_urls.get("en")
-    )
+    if uploaded_urls:
+        set_youtube_urls_for_slug(
+            slug_key,
+            yt_ko=uploaded_urls.get("ko"),
+            yt_en=uploaded_urls.get("en")
+        )
     return uploaded_urls
 
 
@@ -1676,7 +1707,15 @@ def auto_pipeline_batch(count=1, specific_slug=None, privacy="public", upload_en
 
     if git_push:
         try:
-            subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "data/"], check=False)
+            subprocess.run([
+                "git", "add",
+                "video_lectures/catalog.json",
+                "video_lectures/vault_index.json",
+                "video_lectures/scripts/",
+                "video_lectures/youtube_packages/",
+                "assets/min7014_deep_knowledge.json",
+                "assets/min7014_lookup.json",
+            ], check=False)
             subprocess.run(["git", "commit", "-m", f"chore(youtube-ai): auto-sync @min7014_ai videos ({', '.join(target_slugs)})"], check=False)
             subprocess.run(["git", "push", "origin", "main"], check=False)
         except Exception as e:

@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>민은기 선생님의 수학자료실 전체 자료 설명 영상 게시판 | @min7014_ai & min7014.github.io</title>
+  <meta name="description" content="https://min7014.github.io/ 의 전체 1,111개 수학 자료에 대한 설명 영상 게시판. @min7014_ai 채널(한국어·영어 AI 단계별 시각 증명 강의) 및 @min7014 원본 해설 영상 통합 아카이브." />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root {
+      --bg-page: #f4f7fb;
+      --bg-card: #ffffff;
+      --bg-dark: #0f172a;
+      --bg-navy: #1e3a8a;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #64748b;
+      --border-soft: #dbe3ef;
+      --accent-blue: #0284c7;
+      --accent-indigo: #4f46e5;
+      --accent-red: #e11d48;
+      --accent-emerald: #059669;
+      --accent-amber: #d97706;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.09);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+
+    /* 상단 네비게이션 */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 12px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, #e11d48, #f43f5e);
+      color: #fff;
+      font-weight: 900;
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.03em;
+    }
+    .brand-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #e2e8f0;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: all 0.18s ease;
+    }
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .nav-btn.yt-ai {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .nav-btn.studio {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* 히어로 배너 & 통계 */
+    .hero-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0f172a 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 26px 28px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .hero-title {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .hero-desc {
+      margin: 8px 0 0;
+      font-size: 0.93rem;
+      color: #cbd5e1;
+      max-width: 880px;
+    }
+    .hero-desc a {
+      color: #38bdf8;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+    }
+    .stat-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-box.highlight {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.28), rgba(79, 70, 229, 0.28));
+      border-color: rgba(251, 113, 133, 0.55);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+    .stat-value {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #fff;
+    }
+    .stat-sub {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    /* 자동 제작 & 업로드 파이프라인 바 */
+    .pipeline-bar {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .pipeline-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pipeline-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .pipeline-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      border: none;
+      border-radius: 9px;
+      padding: 9px 15px;
+      font-size: 0.83rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.16s ease;
+    }
+    .btn-action.primary {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+    }
+    .btn-action.primary:hover { transform: translateY(-1px); filter: brightness(1.07); }
+    .btn-action.secondary {
+      background: #0284c7;
+      color: #fff;
+    }
+    .btn-action.secondary:hover { background: #0369a1; }
+    .btn-action.outline {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* 상단 인라인 시네마 플레이어 */
+    .cinema-stage {
+      background: var(--bg-card);
+      border: 2px solid #0284c7;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: none;
+    }
+    .cinema-stage.active {
+      display: block;
+    }
+    .cinema-header {
+      background: #0f172a;
+      color: #fff;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .cinema-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .cinema-body {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 0;
+    }
+    @media (max-width: 980px) {
+      .cinema-body { grid-template-columns: 1fr; }
+    }
+    .cinema-video-box {
+      background: #000;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+    .cinema-video-box iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .cinema-info-box {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #f8fafc;
+      border-left: 1px solid var(--border-soft);
+    }
+    .lang-switch-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .lang-pill {
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: #1e293b;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .lang-pill.active {
+      background: #e11d48;
+      color: #fff;
+      border-color: #e11d48;
+    }
+
+    /* @min7014_ai 업로드 완료 대표 쇼케이스 */
+    .showcase-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .vault-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .vault-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+    .vault-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: #0284c7;
+    }
+    .vault-thumb-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .vault-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .vault-thumb-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(225, 29, 72, 0.92);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 6px;
+    }
+    .vault-page-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.88);
+      color: #fff;
+      font-size: 0.73rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .vault-card-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .vault-card-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+    }
+    .vault-card-sub {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin: 0;
+    }
+    .vault-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .yt-link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+    }
+    .yt-link-url {
+      font-family: 'Consolas', monospace;
+      color: #0284c7;
+      font-weight: 700;
+      text-decoration: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .yt-link-url:hover { text-decoration: underline; }
+    .mini-play-btn {
+      border: none;
+      background: #e11d48;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.73rem;
+      padding: 4px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .mini-play-btn.en { background: #2563eb; }
+
+    /* 전체 1,111개 게시판 필터 및 테이블 */
+    .board-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 14px;
+    }
+    .tab-btn {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab-btn:hover {
+      background: #e2e8f0;
+    }
+    .tab-btn.active {
+      background: #0f172a;
+      color: #fff;
+      border-color: #0f172a;
+    }
+    .tab-btn.ai-tab.active {
+      background: #e11d48;
+      border-color: #e11d48;
+    }
+
+    .search-toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .search-input-wrap {
+      flex: 1;
+      min-width: 260px;
+      display: flex;
+      gap: 8px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    .select-box {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: #fff;
+      color: #1e293b;
+    }
+
+    /* 게시판 테이블 */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+    }
+    table.video-board-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 980px;
+    }
+    table.video-board-table th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 800;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 2px solid #cbd5e1;
+      white-space: nowrap;
+    }
+    table.video-board-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+    table.video-board-table tr:hover td {
+      background: #f8fafc;
+    }
+    table.video-board-table tr.row-ai-uploaded td {
+      background: rgba(254, 242, 242, 0.45);
+    }
+    table.video-board-table tr.row-ai-uploaded:hover td {
+      background: rgba(254, 226, 226, 0.65);
+    }
+
+    .code-badge {
+      display: inline-block;
+      font-family: 'Consolas', monospace;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #475569;
+      background: #e2e8f0;
+      padding: 2px 7px;
+      border-radius: 5px;
+    }
+    .domain-pill {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .domain-geometry { background: #e0f2fe; color: #0369a1; }
+    .domain-algebra { background: #fef3c7; color: #b45309; }
+    .domain-calculus { background: #ede9fe; color: #6d28d9; }
+    .domain-prob_stat { background: #dcfce7; color: #047857; }
+
+    .topic-title-link {
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: #0f172a;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .topic-title-link:hover { color: #0284c7; text-decoration: underline; }
+    .topic-concept-preview {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .resource-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .res-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      background: #fff;
+    }
+    .res-chip:hover { background: #f1f5f9; border-color: #94a3b8; }
+
+    .ai-cell-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .yt-badge-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .yt-badge-btn.ko {
+      background: #ffe4e6;
+      color: #be123c;
+      border-color: #fecdd3;
+    }
+    .yt-badge-btn.en {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+    }
+    .yt-badge-btn.orig {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #cbd5e1;
+    }
+    .yt-badge-btn.studio-gen {
+      background: #f0f9ff;
+      color: #0369a1;
+      border-color: #bae6fd;
+    }
+    .yt-badge-btn.produce-now {
+      background: #fef2f2;
+      color: #dc2626;
+      border-color: #fecaca;
+    }
+
+    /* 모달 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 16px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 540px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .form-row label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #334155;
+    }
+    .form-row input {
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.86rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 네비게이션 -->
+  <header class="top-nav">
+    <div class="brand-group">
+      <span class="brand-badge">@min7014_ai × min7014.github.io</span>
+      <a href="video_board.html" class="brand-title">🎬 민은기 선생님의 수학자료실 전체 자료 설명 영상 게시판</a>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn">🏠 메인 홈</a>
+      <a href="video_studio.html" class="nav-btn studio">🎙️ 20개국어 AI 강의 스튜디오</a>
+      <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" class="nav-btn yt-ai">📺 @min7014_ai 공식 채널 ↗</a>
+      <a href="https://www.youtube.com/@min7014" target="_blank" rel="noopener" class="nav-btn">🎬 @min7014 원본 채널 ↗</a>
+      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-btn">📚 수학자료실 원본 ↗</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- 히어로 & 실시간 집계 -->
+    <section class="hero-card">
+      <div class="hero-top">
+        <div>
+          <h1 class="hero-title">민은기 선생님의 수학자료실 (min7014.github.io) 설명 영상 게시판</h1>
+          <p class="hero-desc">
+            <a href="https://min7014.github.io/" target="_blank" rel="noopener">https://min7014.github.io/</a> 의 모든 수학 개념·기하 작도·플립북 PDF 자료(총 1,111개)에 대한 단계별 설명 영상을 제작하여
+            공식 AI 설명영상 채널인 <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener">https://www.youtube.com/@min7014_ai</a> 에 업로드하고, 그 유튜브 링크와 원본 해설 영상을 한눈에 시청·관리하는 게시판입니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-label">📚 전체 수록 수학 자료</span>
+          <span class="stat-value" id="statTotalItems">1,111개</span>
+          <span class="stat-sub">min7014.github.io 전 영역 통합</span>
+        </div>
+        <div class="stat-box highlight">
+          <span class="stat-label">🤖 @min7014_ai 등록 완료 영상</span>
+          <span class="stat-value" id="statAiVideos">집계 중...</span>
+          <span class="stat-sub" id="statAiTopicsSub">한국어(KO) · 영어(EN) 1080p 마스터 강의</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">📄 단계별 플립북 PDF 자료</span>
+          <span class="stat-value" id="statPdfItems">866개</span>
+          <span class="stat-sub">AI 단계별 시각 증명 영상 제작 대상</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">🎬 @min7014 원본 유튜브 연결</span>
+          <span class="stat-value" id="statOrigYtItems">939개</span>
+          <span class="stat-sub">민은기 선생님 직접 작도·해설 영상</span>
+        </div>
+      </div>
+
+      <!-- 자동 제작 & @min7014_ai 업로드 컨트롤 바 -->
+      <div class="pipeline-bar">
+        <div class="pipeline-left">
+          <span class="pipeline-status-dot" id="serverStatusDot"></span>
+          <span style="font-size:0.86rem;font-weight:800;" id="serverStatusText">
+            🤖 @min7014_ai 자동 제작·업로드 엔진 대기 중 (새 자료 설명영상 제작 후 자동 유튜브 업로드 & 게시판 링크 등록)
+          </span>
+        </div>
+        <div class="pipeline-controls">
+          <select id="batchCountSelect" class="select-box" style="padding:7px 10px;font-size:0.8rem;">
+            <option value="1">다음 미등록 1개 자료</option>
+            <option value="3" selected>다음 미등록 3개 자료</option>
+            <option value="5">다음 미등록 5개 자료</option>
+          </select>
+          <button type="button" class="btn-action primary" onclick="triggerBatchProduceAndUpload()">
+            🚀 AI 설명영상 제작 & @min7014_ai 자동 업로드
+          </button>
+          <button type="button" class="btn-action secondary" onclick="syncChannelLinksNow()">
+            🔄 @min7014_ai 채널 링크 동기화
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 상단 인라인 시네마 플레이어 -->
+    <section class="cinema-stage" id="boardCinemaStage">
+      <div class="cinema-header">
+        <div class="cinema-title-wrap">
+          <span class="brand-badge" id="cinemaBadge">@min7014_ai</span>
+          <strong style="font-size:1.02rem;" id="cinemaTitle">영상을 선택하세요</strong>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <a id="cinemaDirectYtLink" href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" class="nav-btn yt-ai">YouTube에서 열기 ↗</a>
+          <button type="button" class="nav-btn" onclick="closeCinemaStage()" style="cursor:pointer;">✕ 플레이어 닫기</button>
+        </div>
+      </div>
+      <div class="cinema-body">
+        <div class="cinema-video-box">
+          <iframe id="cinemaIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="cinema-info-box">
+          <div class="lang-switch-bar" id="cinemaLangBar"></div>
+          <div style="background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:12px;">
+            <div style="font-size:0.76rem;font-weight:800;color:#64748b;margin-bottom:4px;">🔗 현재 재생 중인 유튜브 등록 링크</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <a id="cinemaUrlText" href="#" target="_blank" rel="noopener" class="yt-link-url" style="font-size:0.86rem;">https://youtu.be/...</a>
+              <button type="button" class="mini-play-btn" style="background:#334155;" onclick="copyCinemaUrl()">📋 링크 복사</button>
+            </div>
+          </div>
+          <div style="font-size:0.85rem;color:#1e293b;line-height:1.6;" id="cinemaConceptBox"></div>
+          <div class="resource-chips" id="cinemaResourceLinks"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- @min7014_ai 업로드 완료 대표 설명 영상 아카이브 -->
+    <section class="showcase-section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">
+            <span>🤖 @min7014_ai 채널 업로드 & 게시판 등록 완료 설명 영상</span>
+            <span class="code-badge" id="showcaseCountBadge">0개 주제</span>
+          </h2>
+          <p style="margin:4px 0 0;font-size:0.83rem;color:var(--text-muted);">
+            <code>min7014.github.io</code>의 단계별 플립북 PDF를 1080p 고화질 한국어(KO)·영어(EN) 설명 영상으로 제작하여 <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" style="color:#e11d48;font-weight:800;">@min7014_ai</a> 채널에 업로드하고 등록한 영상 목록입니다.
+          </p>
+        </div>
+        <a href="https://www.youtube.com/@min7014_ai/videos" target="_blank" rel="noopener" class="btn-action primary" style="text-decoration:none;">
+          📺 @min7014_ai 유튜브 채널 전체 영상 보기 ↗
+        </a>
+      </div>
+      <div class="vault-grid" id="vaultShowcaseGrid"></div>
+    </section>
+
+    <!-- 전체 1,111개 자료 통합 설명 영상 게시판 -->
+    <section class="board-section">
+      <div class="section-head" style="margin-bottom:4px;">
+        <h2 class="section-title">📋 min7014.github.io 전체 자료 설명 영상 게시판 (1,111개 전체 목록)</h2>
+        <span style="font-size:0.82rem;font-weight:700;color:var(--text-muted);" id="filteredResultInfo">전체 1,111개 표시 중</span>
+      </div>
+
+      <!-- 필터 탭 -->
+      <div class="filter-tabs" id="boardFilterTabs">
+        <button type="button" class="tab-btn active" data-filter="all">전체 자료 (1,111)</button>
+        <button type="button" class="tab-btn ai-tab" data-filter="ai_uploaded">🤖 @min7014_ai 영상 등록 완료</button>
+        <button type="button" class="tab-btn" data-filter="has_pdf">📄 단계별 PDF 설명자료 (866)</button>
+        <button type="button" class="tab-btn" data-filter="has_orig_yt">🎬 원본 유튜브 보유 (939)</button>
+        <button type="button" class="tab-btn" data-filter="geometry">📐 기하 (Geometry)</button>
+        <button type="button" class="tab-btn" data-filter="algebra">🔢 대수·수열·지수로그</button>
+        <button type="button" class="tab-btn" data-filter="calculus">📈 미적분·해석</button>
+        <button type="button" class="tab-btn" data-filter="prob_stat">🎲 확률·통계</button>
+      </div>
+
+      <!-- 검색 & 카테고리 툴바 -->
+      <div class="search-toolbar">
+        <div class="search-input-wrap">
+          <input type="text" id="boardSearchInput" class="search-input" placeholder="🔍 자료 제목, 코드(MIN-KB-0001), 슬러그(2017090101), 단원명, 핵심 개념 검색 (예: 피타고라스, 체바, 매듭, 타원, 미분)..." />
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <select id="categoryFilterSelect" class="select-box">
+            <option value="">📂 세부 단원 전체 (All Categories)</option>
+          </select>
+          <select id="pageSizeSelect" class="select-box">
+            <option value="50">50개씩 보기</option>
+            <option value="100" selected>100개씩 보기</option>
+            <option value="300">300개씩 보기</option>
+            <option value="2000">1,111개 전체 한눈에 보기</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 게시판 테이블 -->
+      <div class="table-responsive">
+        <table class="video-board-table">
+          <thead>
+            <tr>
+              <th style="width:90px;">번호 / 코드</th>
+              <th style="width:165px;">영역 · 단원 분류</th>
+              <th>자료 제목 · 핵심 개념 · 원본 자료 링크</th>
+              <th style="width:285px;">🤖 @min7014_ai 설명 영상 링크 (KO / EN)</th>
+              <th style="width:185px;">🎬 @min7014 원본 & 제작</th>
+            </tr>
+          </thead>
+          <tbody id="boardTableBody">
+            <tr>
+              <td colspan="5" style="text-align:center;padding:40px;font-weight:700;color:#64748b;">
+                데이터를 불러오는 중입니다...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 페이지네이션 -->
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding-top:6px;">
+        <div style="font-size:0.82rem;color:#64748b;font-weight:700;" id="pageStatusText"></div>
+        <div style="display:flex;gap:6px;" id="paginationBtns"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 유튜브 링크 직접 등록/수정 모달 -->
+  <div class="modal-backdrop" id="linkModalBackdrop">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:1.08rem;font-weight:900;">🔗 @min7014_ai 유튜브 설명 영상 링크 등록</h3>
+        <button type="button" onclick="closeLinkModal()" style="border:none;background:none;font-size:1.1rem;cursor:pointer;">✕</button>
+      </div>
+      <div style="font-size:0.83rem;color:#475569;" id="linkModalTopicTitle"></div>
+      <input type="hidden" id="linkModalSlug" />
+      <div class="form-row">
+        <label for="linkInputKo">🇰🇷 한국어(KO) @min7014_ai 유튜브 링크</label>
+        <input type="text" id="linkInputKo" placeholder="https://youtu.be/..." />
+      </div>
+      <div class="form-row">
+        <label for="linkInputEn">🇺🇸 영어(EN) @min7014_ai 유튜브 링크</label>
+        <input type="text" id="linkInputEn" placeholder="https://youtu.be/..." />
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:6px;">
+        <button type="button" class="btn-action outline" style="color:#334155;border-color:#cbd5e1;" onclick="closeLinkModal()">취소</button>
+        <button type="button" class="btn-action primary" onclick="saveManualYoutubeLinks()">💾 게시판에 링크 저장</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LOCAL_SERVER_URL = 'http://localhost:8765';
+    let ALL_ITEMS = [];
+    let CATALOG_MAP = {};
+    let VAULT_MAP = {};
+    let FILTERED_ITEMS = [];
+    let CURRENT_TAB = 'all';
+    let CURRENT_PAGE = 1;
+
+    const DOMAIN_LABELS = {
+      geometry: { label: '📐 기하 (Geometry)', cls: 'domain-geometry' },
+      algebra: { label: '🔢 대수·수열·지수로그', cls: 'domain-algebra' },
+      calculus: { label: '📈 미적분·해석', cls: 'domain-calculus' },
+      prob_stat: { label: '🎲 확률·통계', cls: 'domain-prob_stat' }
+    };
+
+    function extractSlug(item) {
+      const pdfUrl = (item.pdf || '').split('#')[0].trim();
+      const webUrl = (item.url || '').trim();
+      if (pdfUrl) {
+        const base = pdfUrl.split('/').pop().replace(/\.pdf$/i, '').trim();
+        if (base) return base;
+      }
+      if (webUrl) {
+        const base = webUrl.split('/').pop().replace(/\.html$/i, '').trim();
+        if (base) return base;
+      }
+      return item.id || '';
+    }
+
+    function extractWebSlug(item) {
+      const webUrl = (item.url || '').trim();
+      if (webUrl) {
+        return webUrl.split('/').pop().replace(/\.html$/i, '').trim();
+      }
+      return '';
+    }
+
+    function extractYoutubeId(url) {
+      if (!url) return '';
+      const s = String(url).trim();
+      const m1 = s.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+      if (m1) return m1[1];
+      const m2 = s.match(/[?&]v=([A-Za-z0-9_-]{6,})/);
+      if (m2) return m2[1];
+      const m3 = s.match(/embed\/([A-Za-z0-9_-]{6,})/);
+      if (m3) return m3[1];
+      return '';
+    }
+
+    function getLocalLinkOverrides() {
+      try {
+        return JSON.parse(localStorage.getItem('min7014_ai_board_links') || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function mergeVideoLinksForItem(item) {
+      const pdfSlug = extractSlug(item);
+      const webSlug = extractWebSlug(item);
+      const overrides = getLocalLinkOverrides();
+
+      const catEntry = CATALOG_MAP[pdfSlug] || CATALOG_MAP[webSlug] || null;
+      const vaultEntry = VAULT_MAP[pdfSlug] || VAULT_MAP[webSlug] || null;
+      const ovEntry = overrides[pdfSlug] || overrides[webSlug] || null;
+
+      const ko = (ovEntry && ovEntry.ko)
+        || (catEntry && catEntry.youtube_urls && catEntry.youtube_urls.ko)
+        || (vaultEntry && vaultEntry.youtube_ko)
+        || item.youtube_ko
+        || '';
+
+      const en = (ovEntry && ovEntry.en)
+        || (catEntry && catEntry.youtube_urls && catEntry.youtube_urls.en)
+        || (vaultEntry && vaultEntry.youtube_en)
+        || item.youtube_en
+        || '';
+
+      const orig = (catEntry && catEntry.youtube_urls && catEntry.youtube_urls.orig)
+        || (vaultEntry && vaultEntry.youtube_orig)
+        || item.youtube
+        || '';
+
+      const slugKey = (catEntry && catEntry.slug)
+        || (vaultEntry && (VAULT_MAP[pdfSlug] ? pdfSlug : webSlug))
+        || pdfSlug
+        || webSlug;
+
+      return {
+        slug: slugKey,
+        pdfSlug,
+        webSlug,
+        ko: ko.trim(),
+        en: en.trim(),
+        orig: orig.trim(),
+        hasScriptReady: !!catEntry,
+        pageCount: (catEntry && catEntry.page_count) || (vaultEntry && vaultEntry.page_count) || 0,
+        titleEn: (catEntry && catEntry.title_en) || (vaultEntry && vaultEntry.title_en) || '',
+        thumbKo: (catEntry && catEntry.youtube_packages && catEntry.youtube_packages.ko && catEntry.youtube_packages.ko.thumbnail_url) || ''
+      };
+    }
+
+    async function loadBoardData() {
+      const ts = Date.now();
+      const [deepRes, catRes, vaultRes] = await Promise.allSettled([
+        fetch(`assets/min7014_deep_knowledge.json?t=${ts}`),
+        fetch(`video_lectures/catalog.json?t=${ts}`),
+        fetch(`video_lectures/vault_index.json?t=${ts}`)
+      ]);
+
+      if (catRes.status === 'fulfilled' && catRes.value.ok) {
+        const catArr = await catRes.value.json();
+        CATALOG_MAP = {};
+        catArr.forEach(c => {
+          if (c.slug) CATALOG_MAP[c.slug] = c;
+          if (c.pdf_url) {
+            const ps = c.pdf_url.split('/').pop().replace(/\.pdf$/i, '');
+            CATALOG_MAP[ps] = c;
+          }
+          if (c.web_url) {
+            const ws = c.web_url.split('/').pop().replace(/\.html$/i, '');
+            CATALOG_MAP[ws] = c;
+          }
+        });
+      }
+
+      if (vaultRes.status === 'fulfilled' && vaultRes.value.ok) {
+        const vJson = await vaultRes.value.json();
+        VAULT_MAP = vJson.vault_entries || {};
+      }
+
+      if (deepRes.status === 'fulfilled' && deepRes.value.ok) {
+        const rawItems = await deepRes.value.json();
+        ALL_ITEMS = rawItems.map((it, idx) => {
+          const vInfo = mergeVideoLinksForItem(it);
+          return {
+            ...it,
+            _index: idx + 1,
+            _slug: vInfo.slug,
+            _pdfSlug: vInfo.pdfSlug,
+            _webSlug: vInfo.webSlug,
+            _ytKo: vInfo.ko,
+            _ytEn: vInfo.en,
+            _ytOrig: vInfo.orig,
+            _hasScriptReady: vInfo.hasScriptReady,
+            _pageCount: vInfo.pageCount,
+            _titleEn: vInfo.titleEn,
+            _thumbKo: vInfo.thumbKo
+          };
+        });
+      }
+
+      populateCategoryDropdown();
+      updateSummaryStats();
+      renderVaultShowcase();
+      applyFiltersAndRender();
+
+      // URL 파라미터 확인 (?slug=... 또는 ?play=...)
+      const params = new URLSearchParams(window.location.search);
+      const qSlug = params.get('slug') || params.get('play');
+      if (qSlug) {
+        const found = ALL_ITEMS.find(x => x._slug === qSlug || x._pdfSlug === qSlug || x._webSlug === qSlug || x.id === qSlug);
+        if (found) {
+          openCinemaForItem(found._index - 1, found._ytKo ? 'ko' : (found._ytEn ? 'en' : 'orig'));
+        }
+      }
+    }
+
+    function populateCategoryDropdown() {
+      const sel = document.getElementById('categoryFilterSelect');
+      const counts = {};
+      ALL_ITEMS.forEach(it => {
+        const c = (it.category || '기타').trim();
+        counts[c] = (counts[c] || 0) + 1;
+      });
+      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      sel.innerHTML = '<option value="">📂 세부 단원 전체 (' + sorted.length + '개 분류)</option>' +
+        sorted.map(([cat, cnt]) => `<option value="${cat.replace(/"/g, '&quot;')}">${cat} (${cnt})</option>`).join('');
+    }
+
+    function updateSummaryStats() {
+      const total = ALL_ITEMS.length;
+      const pdfCount = ALL_ITEMS.filter(x => !!(x.pdf && x.pdf.trim())).length;
+      const origYtCount = ALL_ITEMS.filter(x => !!x._ytOrig).length;
+      const aiTopics = ALL_ITEMS.filter(x => !!(x._ytKo || x._ytEn));
+      let totalAiVideos = 0;
+      aiTopics.forEach(x => {
+        if (x._ytKo) totalAiVideos++;
+        if (x._ytEn) totalAiVideos++;
+      });
+
+      document.getElementById('statTotalItems').textContent = `${total.toLocaleString()}개`;
+      document.getElementById('statPdfItems').textContent = `${pdfCount.toLocaleString()}개`;
+      document.getElementById('statOrigYtItems').textContent = `${origYtCount.toLocaleString()}개`;
+      document.getElementById('statAiVideos').textContent = `${aiTopics.length}개 주제 (${totalAiVideos}편)`;
+      document.getElementById('statAiTopicsSub').textContent = `한국어 ${aiTopics.filter(x => x._ytKo).length}편 · 영어 ${aiTopics.filter(x => x._ytEn).length}편 @min7014_ai 등록 완료`;
+
+      const aiTabBtn = document.querySelector('.tab-btn[data-filter="ai_uploaded"]');
+      if (aiTabBtn) {
+        aiTabBtn.textContent = `🤖 @min7014_ai 영상 등록 완료 (${aiTopics.length})`;
+      }
+    }
+
+    function renderVaultShowcase() {
+      const grid = document.getElementById('vaultShowcaseGrid');
+      const badge = document.getElementById('showcaseCountBadge');
+      const uploadedItems = ALL_ITEMS.filter(x => !!(x._ytKo || x._ytEn || x._hasScriptReady));
+      const ytUploadedCount = ALL_ITEMS.filter(x => !!(x._ytKo || x._ytEn)).length;
+      const ytVideoTotal = ALL_ITEMS.reduce((acc, x) => acc + (x._ytKo ? 1 : 0) + (x._ytEn ? 1 : 0), 0);
+      badge.textContent = `@min7014_ai 등록 ${ytUploadedCount}개 주제(${ytVideoTotal}편) · 제작 완료 총 ${uploadedItems.length}개 주제`;
+
+      if (uploadedItems.length === 0) {
+        grid.innerHTML = `<div style="padding:20px;color:#64748b;">등록된 @min7014_ai 영상이 없습니다.</div>`;
+        return;
+      }
+
+      grid.innerHTML = uploadedItems.map(item => {
+        const koId = extractYoutubeId(item._ytKo);
+        const thumbSrc = item._thumbKo || (koId ? `https://i.ytimg.com/vi/${koId}/hqdefault.jpg` : '');
+        const itemIdx = item._index - 1;
+        const isYtUploaded = !!(item._ytKo || item._ytEn);
+        return `
+          <article class="vault-card">
+            <div class="vault-thumb-wrap" onclick="${isYtUploaded ? `openCinemaForItem(${itemIdx}, 'ko')` : `window.location.href='video_studio.html?slug=${encodeURIComponent(item._slug)}'`}">
+              ${thumbSrc ? `<img src="${thumbSrc}" alt="${item.title.replace(/"/g, '&quot;')}" loading="lazy" />` : ''}
+              <span class="vault-thumb-badge" style="${isYtUploaded ? '' : 'background:rgba(2,132,199,0.92);'}">
+                ${isYtUploaded ? '🤖 @min7014_ai 공식 설명영상' : '📦 1080p 제작 완료 (업로드 대기열)'}
+              </span>
+              ${item._pageCount ? `<span class="vault-page-badge">📄 ${item._pageCount}단계 슬라이드</span>` : ''}
+            </div>
+            <div class="vault-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+                <span class="code-badge">${item.id} · ${item._slug}</span>
+                <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="res-chip" style="color:#0284c7;border-color:#bae6fd;background:#f0f9ff;">🎙️ 20개국어 스튜디오</a>
+              </div>
+              <h3 class="vault-card-title">${item.title}</h3>
+              ${item._titleEn ? `<p class="vault-card-sub">${item._titleEn}</p>` : ''}
+              <div class="vault-links-list">
+                ${item._ytKo ? `
+                  <div class="yt-link-row">
+                    <span style="font-weight:800;color:#be123c;">🇰🇷 KO</span>
+                    <a href="${item._ytKo}" target="_blank" rel="noopener" class="yt-link-url">${item._ytKo}</a>
+                    <button type="button" class="mini-play-btn" onclick="openCinemaForItem(${itemIdx}, 'ko')">▶ 바로 재생</button>
+                  </div>
+                ` : ''}
+                ${item._ytEn ? `
+                  <div class="yt-link-row">
+                    <span style="font-weight:800;color:#1d4ed8;">🇺🇸 EN</span>
+                    <a href="${item._ytEn}" target="_blank" rel="noopener" class="yt-link-url">${item._ytEn}</a>
+                    <button type="button" class="mini-play-btn en" onclick="openCinemaForItem(${itemIdx}, 'en')">▶ Play EN</button>
+                  </div>
+                ` : ''}
+                ${!isYtUploaded && item._hasScriptReady ? `
+                  <div class="yt-link-row">
+                    <span style="font-weight:800;color:#0369a1;">📦 KO/EN 1080p MP4 제작 완료</span>
+                    <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="mini-play-btn" style="background:#0284c7;text-decoration:none;">▶ 스튜디오 강의 재생</a>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function applyFiltersAndRender() {
+      const q = (document.getElementById('boardSearchInput').value || '').trim().toLowerCase();
+      const cat = document.getElementById('categoryFilterSelect').value;
+
+      FILTERED_ITEMS = ALL_ITEMS.filter(item => {
+        if (CURRENT_TAB === 'ai_uploaded' && !(item._ytKo || item._ytEn || item._hasScriptReady)) return false;
+        if (CURRENT_TAB === 'has_pdf' && !(item.pdf && item.pdf.trim())) return false;
+        if (CURRENT_TAB === 'has_orig_yt' && !item._ytOrig) return false;
+        if (['geometry', 'algebra', 'calculus', 'prob_stat'].includes(CURRENT_TAB) && item.domain !== CURRENT_TAB) return false;
+
+        if (cat && (item.category || '기타').trim() !== cat) return false;
+
+        if (q) {
+          const hay = `${item.id} ${item._slug} ${item._pdfSlug} ${item._webSlug} ${item.title} ${item._titleEn} ${item.category} ${item.sub_domain_ko} ${item.core_concept}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      // @min7014_ai 업로드 완료된 항목 -> 1080p 제작 완료 항목 -> 번호 순 정렬
+      FILTERED_ITEMS.sort((a, b) => {
+        const aRank = (a._ytKo || a._ytEn) ? 2 : (a._hasScriptReady ? 1 : 0);
+        const bRank = (b._ytKo || b._ytEn) ? 2 : (b._hasScriptReady ? 1 : 0);
+        if (aRank !== bRank) return bRank - aRank;
+        return a._index - b._index;
+      });
+
+      CURRENT_PAGE = 1;
+      renderBoardTable();
+    }
+
+    function renderBoardTable() {
+      const tbody = document.getElementById('boardTableBody');
+      const pageSize = parseInt(document.getElementById('pageSizeSelect').value || '100', 10);
+      const total = FILTERED_ITEMS.length;
+      const totalPages = Math.max(1, Math.ceil(total / pageSize));
+      if (CURRENT_PAGE > totalPages) CURRENT_PAGE = totalPages;
+
+      const startIdx = (CURRENT_PAGE - 1) * pageSize;
+      const pageItems = FILTERED_ITEMS.slice(startIdx, startIdx + pageSize);
+
+      document.getElementById('filteredResultInfo').textContent = `검색 결과 ${total.toLocaleString()}개 자료 (페이지 ${CURRENT_PAGE}/${totalPages})`;
+      document.getElementById('pageStatusText').textContent = `전체 ${total.toLocaleString()}개 중 ${total ? startIdx + 1 : 0}~${Math.min(startIdx + pageSize, total)}번째 자료 표시`;
+
+      if (pageItems.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center;padding:36px;color:#64748b;font-weight:700;">
+              조건에 해당하는 자료가 없습니다. 검색어나 필터를 초기화해 보세요.
+            </td>
+          </tr>
+        `;
+        renderPagination(totalPages);
+        return;
+      }
+
+      tbody.innerHTML = pageItems.map(item => {
+        const domInfo = DOMAIN_LABELS[item.domain] || { label: item.domain || '수학', cls: 'domain-geometry' };
+        const hasAi = !!(item._ytKo || item._ytEn);
+        const pdfClean = (item.pdf || '').split('#')[0].trim();
+        const itemIdx = item._index - 1;
+
+        return `
+          <tr class="${hasAi ? 'row-ai-uploaded' : ''}">
+            <td>
+              <div style="font-weight:900;color:#0f172a;">#${item._index}</div>
+              <span class="code-badge">${item.id}</span>
+              <div style="font-size:0.72rem;color:#64748b;margin-top:2px;font-family:monospace;">${item._slug}</div>
+            </td>
+            <td>
+              <span class="domain-pill ${domInfo.cls}">${domInfo.label}</span>
+              <div style="font-size:0.76rem;font-weight:700;color:#334155;margin-top:5px;">${item.category || ''}</div>
+            </td>
+            <td>
+              <a class="topic-title-link" onclick="openCinemaForItem(${itemIdx}, '${item._ytKo ? 'ko' : (item._ytEn ? 'en' : 'orig')}')">
+                ${item.title}
+              </a>
+              <div class="topic-concept-preview">${item.core_concept || ''}</div>
+              <div class="resource-chips">
+                ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="res-chip">🌐 수학자료실 웹페이지 ↗</a>` : ''}
+                ${pdfClean ? `<a href="${pdfClean}" target="_blank" rel="noopener" class="res-chip">📄 단계별 증명 PDF ↗</a>` : ''}
+                ${item.geogebra ? `<a href="${item.geogebra}" target="_blank" rel="noopener" class="res-chip">🧭 GeoGebra 앱렛 ↗</a>` : ''}
+                <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="res-chip" style="border-color:#7dd3fc;background:#f0f9ff;color:#0369a1;">🎙️ 다국어 AI 강의 스튜디오</a>
+              </div>
+            </td>
+            <td>
+              <div class="ai-cell-stack">
+                ${item._ytKo ? `
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    <button type="button" class="yt-badge-btn ko" onclick="openCinemaForItem(${itemIdx}, 'ko')">▶ 🇰🇷 한국어 설명영상 재생</button>
+                    <a href="${item._ytKo}" target="_blank" rel="noopener" class="yt-link-url" style="font-size:0.75rem;">${item._ytKo}</a>
+                  </div>
+                ` : ''}
+                ${item._ytEn ? `
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    <button type="button" class="yt-badge-btn en" onclick="openCinemaForItem(${itemIdx}, 'en')">▶ 🇺🇸 영어 설명영상 재생</button>
+                    <a href="${item._ytEn}" target="_blank" rel="noopener" class="yt-link-url" style="font-size:0.75rem;">${item._ytEn}</a>
+                  </div>
+                ` : ''}
+                ${!item._ytKo && !item._ytEn ? `
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    ${pdfClean ? `
+                      <button type="button" class="yt-badge-btn produce-now" onclick="produceSingleTopic('${item._slug}', ${itemIdx})">
+                        🚀 AI 영상 제작 & @min7014_ai 업로드
+                      </button>
+                    ` : ''}
+                    <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="yt-badge-btn studio-gen">
+                      🎙️ 스튜디오 즉시 음성강의
+                    </a>
+                  </div>
+                ` : ''}
+                <div>
+                  <button type="button" onclick="openLinkModal(${itemIdx})" style="border:none;background:none;color:#64748b;font-size:0.73rem;font-weight:700;cursor:pointer;padding:0;text-decoration:underline;">
+                    🔗 유튜브 링크 직접 등록/수정
+                  </button>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="ai-cell-stack">
+                ${item._ytOrig ? `
+                  <button type="button" class="yt-badge-btn orig" onclick="openCinemaForItem(${itemIdx}, 'orig')">
+                    🎬 @min7014 원본 영상 재생
+                  </button>
+                  <a href="${item._ytOrig}" target="_blank" rel="noopener" class="yt-link-url" style="font-size:0.74rem;">${item._ytOrig}</a>
+                ` : `<span style="font-size:0.76rem;color:#94a3b8;">원본 유튜브 미등록</span>`}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      renderPagination(totalPages);
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([tbody]).catch(() => {});
+      }
+    }
+
+    function renderPagination(totalPages) {
+      const wrap = document.getElementById('paginationBtns');
+      if (totalPages <= 1) {
+        wrap.innerHTML = '';
+        return;
+      }
+      const btns = [];
+      const addBtn = (page, label, active = false) => {
+        btns.push(`<button type="button" class="tab-btn ${active ? 'active' : ''}" style="padding:6px 12px;" onclick="goToPage(${page})">${label}</button>`);
+      };
+      if (CURRENT_PAGE > 1) addBtn(CURRENT_PAGE - 1, '◀ 이전');
+      const startP = Math.max(1, CURRENT_PAGE - 3);
+      const endP = Math.min(totalPages, CURRENT_PAGE + 3);
+      for (let p = startP; p <= endP; p++) {
+        addBtn(p, String(p), p === CURRENT_PAGE);
+      }
+      if (CURRENT_PAGE < totalPages) addBtn(CURRENT_PAGE + 1, '다음 ▶');
+      wrap.innerHTML = btns.join('');
+    }
+
+    function goToPage(p) {
+      CURRENT_PAGE = p;
+      renderBoardTable();
+      document.querySelector('.board-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function openCinemaForItem(itemIdx, mode = 'ko') {
+      const item = ALL_ITEMS[itemIdx];
+      if (!item) return;
+
+      let targetUrl = '';
+      let badgeLabel = '@min7014_ai';
+      if (mode === 'ko' && item._ytKo) {
+        targetUrl = item._ytKo;
+        badgeLabel = '🇰🇷 @min7014_ai 한국어 설명영상';
+      } else if (mode === 'en' && item._ytEn) {
+        targetUrl = item._ytEn;
+        badgeLabel = '🇺🇸 @min7014_ai English Explanation';
+      } else if (item._ytOrig) {
+        targetUrl = item._ytOrig;
+        mode = 'orig';
+        badgeLabel = '🎬 @min7014 원본 해설 영상';
+      } else {
+        window.location.href = `video_studio.html?slug=${encodeURIComponent(item._slug)}`;
+        return;
+      }
+
+      const vidId = extractYoutubeId(targetUrl);
+      if (!vidId) {
+        window.open(targetUrl, '_blank');
+        return;
+      }
+
+      const stage = document.getElementById('boardCinemaStage');
+      stage.classList.add('active');
+      document.getElementById('cinemaBadge').textContent = badgeLabel;
+      document.getElementById('cinemaTitle').textContent = `${item.title} (${item.id})`;
+      document.getElementById('cinemaDirectYtLink').href = targetUrl;
+      document.getElementById('cinemaUrlText').href = targetUrl;
+      document.getElementById('cinemaUrlText').textContent = targetUrl;
+      document.getElementById('cinemaIframe').src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0`;
+
+      // 언어 스위치 바
+      const langBar = document.getElementById('cinemaLangBar');
+      const pills = [];
+      if (item._ytKo) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'ko')">🇰🇷 @min7014_ai 한국어 설명영상</button>`);
+      }
+      if (item._ytEn) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'en')">🇺🇸 @min7014_ai 영어 설명영상</button>`);
+      }
+      if (item._ytOrig) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'orig' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'orig')">🎬 @min7014 원본 영상</button>`);
+      }
+      pills.push(`<a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="lang-pill">🎙️ 20개국어 AI 강의 스튜디오</a>`);
+      langBar.innerHTML = pills.join('');
+
+      // 개념 요약 및 디딤돌
+      const stepsHtml = (item.scaffolding_steps || []).map(s => `<li style="margin-bottom:4px;">${s}</li>`).join('');
+      document.getElementById('cinemaConceptBox').innerHTML = `
+        <div style="font-weight:800;color:#0f172a;margin-bottom:6px;">💡 핵심 수학 원리</div>
+        <div style="margin-bottom:10px;">${item.core_concept || ''}</div>
+        ${stepsHtml ? `<div style="font-weight:800;color:#0f172a;margin-bottom:4px;">🪜 단계별 시각 증명 디딤돌</div><ul style="margin:0;padding-left:18px;font-size:0.8rem;color:#334155;">${stepsHtml}</ul>` : ''}
+      `;
+
+      const pdfClean = (item.pdf || '').split('#')[0].trim();
+      document.getElementById('cinemaResourceLinks').innerHTML = `
+        ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="res-chip">🌐 min7014.github.io 웹페이지 ↗</a>` : ''}
+        ${pdfClean ? `<a href="${pdfClean}" target="_blank" rel="noopener" class="res-chip">📄 원본 플립북 PDF ↗</a>` : ''}
+        ${item.geogebra ? `<a href="${item.geogebra}" target="_blank" rel="noopener" class="res-chip">🧭 GeoGebra 인터랙티브 ↗</a>` : ''}
+      `;
+
+      stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([stage]).catch(() => {});
+      }
+    }
+
+    function closeCinemaStage() {
+      const stage = document.getElementById('boardCinemaStage');
+      document.getElementById('cinemaIframe').src = '';
+      stage.classList.remove('active');
+    }
+
+    function copyCinemaUrl() {
+      const u = document.getElementById('cinemaUrlText').textContent;
+      navigator.clipboard.writeText(u);
+      alert(`유튜브 링크가 복사되었습니다:\n${u}`);
+    }
+
+    // 링크 수동 등록 모달
+    function openLinkModal(itemIdx) {
+      const item = ALL_ITEMS[itemIdx];
+      if (!item) return;
+      document.getElementById('linkModalTopicTitle').textContent = `[${item.id} · ${item._slug}] ${item.title}`;
+      document.getElementById('linkModalSlug').value = item._slug;
+      document.getElementById('linkInputKo').value = item._ytKo || '';
+      document.getElementById('linkInputEn').value = item._ytEn || '';
+      document.getElementById('linkModalBackdrop').classList.add('open');
+    }
+
+    function closeLinkModal() {
+      document.getElementById('linkModalBackdrop').classList.remove('open');
+    }
+
+    async function saveManualYoutubeLinks() {
+      const slug = document.getElementById('linkModalSlug').value.trim();
+      const ko = document.getElementById('linkInputKo').value.trim();
+      const en = document.getElementById('linkInputEn').value.trim();
+      if (!slug) return;
+
+      // 1) localStorage 즉시 반영
+      const overrides = getLocalLinkOverrides();
+      overrides[slug] = { ko, en };
+      localStorage.setItem('min7014_ai_board_links', JSON.stringify(overrides));
+
+      // 2) 로컬 서버(min7014_ai_server.py)가 켜져 있으면 JSON 파일에도 영구 저장
+      try {
+        await fetch(`${LOCAL_SERVER_URL}/api/register_youtube_link`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, youtube_ko: ko, youtube_en: en })
+        });
+      } catch (e) {}
+
+      closeLinkModal();
+      await loadBoardData();
+    }
+
+    async function produceSingleTopic(slug, itemIdx) {
+      const item = ALL_ITEMS[itemIdx];
+      const title = item ? item.title : slug;
+      const statusText = document.getElementById('serverStatusText');
+      statusText.textContent = `🚀 [${title}] 한국어·영어 1080p 설명영상 제작 및 @min7014_ai 자동 업로드 요청 중...`;
+
+      try {
+        const res = await fetch(`${LOCAL_SERVER_URL}/api/produce_and_upload`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, count: 1 })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.busy) {
+            alert(data.message);
+          } else {
+            statusText.textContent = `🎬 [${title}] AI 영상 렌더링 및 @min7014_ai 자동 업로드 진행 중... (완료 시 자동 등록됩니다)`;
+          }
+          return;
+        }
+      } catch (e) {
+        const cmd = `python -u -X utf8 min7014_video_maker.py --auto-pipeline --slug ${slug} --git-push`;
+        navigator.clipboard.writeText(cmd);
+        alert(`로컬 자동화 명령어가 복사되었습니다:\n${cmd}\n\n(현재 백그라운드 파이프라인에서 순차적으로 제작 및 @min7014_ai 업로드가 진행 중입니다.)`);
+      }
+    }
+
+    async function triggerBatchProduceAndUpload() {
+      const count = parseInt(document.getElementById('batchCountSelect').value || '3', 10);
+      const statusText = document.getElementById('serverStatusText');
+      statusText.textContent = `🚀 다음 미등록 ${count}개 자료 AI 설명영상 자동 제작 및 @min7014_ai 업로드 가동 중...`;
+
+      try {
+        const res = await fetch(`${LOCAL_SERVER_URL}/api/produce_and_upload`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.busy) {
+            alert(data.message);
+          } else {
+            statusText.textContent = `🎬 다음 ${count}개 자료 1080p 한/영 영상 제작 & @min7014_ai 자동 업로드가 백그라운드에서 시작되었습니다!`;
+          }
+          return;
+        }
+      } catch (e) {
+        const cmd = `python -u -X utf8 min7014_video_maker.py --auto-pipeline --count ${count} --git-push`;
+        navigator.clipboard.writeText(cmd);
+        alert(`자동 제작 & @min7014_ai 업로드 명령어가 복사되었습니다:\n${cmd}`);
+      }
+    }
+
+    async function syncChannelLinksNow() {
+      const statusText = document.getElementById('serverStatusText');
+      statusText.textContent = '🔄 @min7014_ai 채널 및 카탈로그에서 최신 업로드 영상 링크를 동기화하는 중...';
+      try {
+        await fetch(`${LOCAL_SERVER_URL}/sync-rss`, { method: 'POST' });
+      } catch (e) {}
+      await loadBoardData();
+      statusText.textContent = '✅ @min7014_ai 채널 최신 설명영상 링크 동기화 완료!';
+    }
+
+    async function pollLocalServerStatus() {
+      try {
+        const res = await fetch(`${LOCAL_SERVER_URL}/status`);
+        if (res.ok) {
+          const st = await res.json();
+          const dot = document.getElementById('serverStatusDot');
+          const txt = document.getElementById('serverStatusText');
+          if (st.status === 'running') {
+            dot.style.background = '#f59e0b';
+            const lastLog = (st.logs && st.logs.length) ? st.logs[st.logs.length - 1] : '';
+            txt.textContent = `🎬 [제작·업로드 진행 중: ${st.current_slug}] ${lastLog}`;
+          } else {
+            dot.style.background = '#10b981';
+          }
+        }
+      } catch (e) {}
+    }
+
+    // 이벤트 바인딩
+    document.getElementById('boardFilterTabs').addEventListener('click', e => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      document.querySelectorAll('#boardFilterTabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      CURRENT_TAB = btn.dataset.filter || 'all';
+      applyFiltersAndRender();
+    });
+
+    document.getElementById('boardSearchInput').addEventListener('input', () => applyFiltersAndRender());
+    document.getElementById('categoryFilterSelect').addEventListener('change', () => applyFiltersAndRender());
+    document.getElementById('pageSizeSelect').addEventListener('change', () => applyFiltersAndRender());
+
+    loadBoardData();
+    setInterval(pollLocalServerStatus, 5000);
+  </script>
+</body>
+</html>
