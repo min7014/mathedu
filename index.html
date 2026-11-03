@@ -4695,12 +4695,9 @@ window.renderMathTeacherHubContent = function() {
 
   window.shareDailyEurekaChallenge = function() {
     var url = window.location.origin + window.location.pathname + '?daily_eureka=' + todayStr;
-    var shareTxt = '🌱 [mathedu 오늘의 3분 수학 유레카 챌린지 (' + todayStr + ')]
-5지선다 보기를 가리고 수식 블록 조립 + 10초 오개념 반례 퀴즈에 함께 도전해 보세요!
-👉 ' + url;
+    var shareTxt = '🌱 [mathedu 오늘의 3분 수학 유레카 챌린지 (' + todayStr + ')]\n5지선다 보기를 가리고 수식 블록 조립 + 10초 오개념 반례 퀴즈에 함께 도전해 보세요!\n👉 ' + url;
     if (navigator.clipboard) navigator.clipboard.writeText(shareTxt);
-    alert('🔗 오늘의 3분 수학 유레카 챌린지 초대장이 복사되었습니다!
-친구나 학급 단톡방에 붙여넣어 함께 도전해 보세요.');
+    alert('🔗 오늘의 3분 수학 유레카 챌린지 초대장이 복사되었습니다!\n친구나 학급 단톡방에 붙여넣어 함께 도전해 보세요.');
   };
 
   // Sync live daemon heartbeat badge

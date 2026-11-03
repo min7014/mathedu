@@ -137,6 +137,35 @@ def mine_next_pedagogy_item_from_deep_knowledge():
                 print(f"🧭 [Foundation Daemon: Pólya Heuristic Mined] {polya_id} ({title})", flush=True)
                 break
 
+    # 탈-5지선다 창의 구성 & What-If-Not 실험실 자동 확장
+    creative_list = ped.setdefault("creativeConstructiveLab", [])
+    existing_creative_ids = {c.get("id") for c in creative_list}
+    for it in deep_items:
+        item_id = (it.get("id") or "").strip()
+        title = re.sub(r"\$[^\$]*\$", "", (it.get("title") or "")).strip()
+        tips = it.get("solving_tips") or []
+        steps = it.get("scaffolding_steps") or []
+        sub_ko = (it.get("sub_domain_ko") or "기하·대수 탐구").split("(")[0].strip()
+        if not item_id or not title or len(title) < 4:
+            continue
+        cid = f"creative-min-{item_id}"
+        if cid not in existing_creative_ids and len(steps) >= 3 and len(creative_list) < 60:
+            creative_list.append({
+                "id": cid,
+                "domain": sub_ko,
+                "title": f"[{title}] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+                "originalProblem": (it.get("core_concept") or title)[:160],
+                "constructivePrompt": f"5지선다 보기에 의존하지 않고, '{title}'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+                "multiPathApproaches": [s[:130] for s in steps[:3]],
+                "whatIfNotMutation": f"만약 [{title}]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+                "min7014Query": sub_ko,
+                "searchKeyword": sub_ko.replace("·", " ").split()[0]
+            })
+            existing_creative_ids.add(cid)
+            changed = True
+            print(f"✍️ [Foundation Daemon: Creative What-If-Not Mined] {cid} ({title})", flush=True)
+            break
+
     if changed:
         PEDAGOGY_JSON.write_text(json.dumps(ped, ensure_ascii=False, indent=2), encoding="utf-8")
     return changed
