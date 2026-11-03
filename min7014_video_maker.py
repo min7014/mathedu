@@ -33,6 +33,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import textwrap
 import urllib.parse
 import urllib.request
@@ -43,6 +44,49 @@ import pymupdf
 from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageStat
 
 ROOT_DIR = Path(__file__).resolve().parent
+
+# ==============================================================================
+# 🔑 Multi-Project YouTube API Quota Rotation Pool & Pre-Flight Guard
+# ==============================================================================
+_EXHAUSTED_TOKEN_FILES = {}  # token_path -> backoff_until_ts
+
+def get_available_youtube_upload_service():
+    """
+    워크스페이스 내의 모든 youtube_token_min7014_ai*.json 파일을 스캔하여,
+    현재 일일 할당량(429 rateLimitExceeded)에 걸리지 않은 유효한 YouTube Data API v3 객체를 반환합니다.
+    여러 개의 GCP 프로젝트 토큰(youtube_token_min7014_ai.json, youtube_token_min7014_ai_2.json 등)을 두면
+    프로젝트당 하루 6개씩 합산하여 무중단 자동 로테이션 업로드가 가능합니다.
+    """
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    now_ts = time.time()
+    token_candidates = sorted(ROOT_DIR.glob('youtube_token_min7014_ai*.json'))
+    for t_file in token_candidates:
+        backoff_until = _EXHAUSTED_TOKEN_FILES.get(str(t_file), 0.0)
+        if now_ts < backoff_until:
+            continue
+        try:
+            creds = Credentials.from_authorized_user_file(str(t_file), SCOPES)
+            if not creds.valid and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+                t_file.write_text(creds.to_json(), encoding='utf-8')
+            return build('youtube', 'v3', credentials=creds), str(t_file)
+        except Exception as e:
+            print(f'⚠️ [Token Pool Skip ({t_file.name})]: {e}')
+    return None, None
+
+def mark_token_quota_exhausted(token_path_str, seconds=3600):
+    if token_path_str:
+        _EXHAUSTED_TOKEN_FILES[str(token_path_str)] = time.time() + seconds
+        print(f'🔄 [Quota Pool] {Path(token_path_str).name} 할당량 소진 감지 -> {seconds//60}분간 쿨다운 및 다음 프로젝트 토큰으로 자동 전환')
+
 DEEP_JSON_PATH = ROOT_DIR / "assets" / "min7014_deep_knowledge.json"
 LOOKUP_JSON_PATH = ROOT_DIR / "assets" / "min7014_lookup.json"
 SCRIPTS_DIR = ROOT_DIR / "video_lectures" / "scripts"
@@ -2587,15 +2631,9 @@ def boost_youtube_channel_popularity():
         "https://www.googleapis.com/auth/youtube.force-ssl",
         "https://www.googleapis.com/auth/youtube.readonly",
     ]
-    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
-    if not token_file.exists():
-        raise RuntimeError("youtube_token_min7014_ai.json not found.")
-    creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
-    if not creds.valid and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-        token_file.write_text(creds.to_json(), encoding="utf-8")
-
-    youtube = build("youtube", "v3", credentials=creds)
+    youtube, active_token_path = get_available_youtube_upload_service()
+    if youtube is None:
+        return {}
 
     ko_video_ids = []
     en_video_ids = []
@@ -3253,9 +3291,206 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
             err_s = str(e)
             print(f"  ⚠️ [YouTube #Shorts Upload Notice ({slug_key}/{lc})]: {e}")
             if "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s:
-                upload_short_to_youtube._backoff_until = time.time() + 1800
+                mark_token_quota_exhausted(active_token_path, 3600)
             break
     return uploaded_shorts
+
+def upload_shorts_via_studio_browser(slug_list=None, langs=("ko",), privacy="public"):
+    """
+    [Playwright 기반 @min7014_ai YouTube Studio 5대 #Shorts 무인 브라우저 업로더]
+    - Google Cloud API 일일 할당량(Video Uploads per day, 6회/일)이 소진되었을 때도
+      YouTube Studio 웹 자동화를 통해 5개 #Shorts(MP4, 제목, 5단 홈페이지 링크 설명란, 전체공개)를
+      연속으로 자동 업로드하고 URL을 홈페이지에 즉시 바인딩합니다.
+    """
+    from playwright.sync_api import sync_playwright
+
+    if not slug_list:
+        slug_list = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
+
+    profile_dir = ROOT_DIR / ".yt_chrome_robot_profile"
+    profile_dir.mkdir(parents=True, exist_ok=True)
+    privacy_radio_name = {"public": "PUBLIC", "unlisted": "UNLISTED", "private": "PRIVATE"}.get(privacy.lower(), "PUBLIC")
+    results = {}
+
+    with sync_playwright() as p:
+        browser_ctx = None
+        for ch_name in ["chrome", "msedge"]:
+            try:
+                browser_ctx = p.chromium.launch_persistent_context(
+                    user_data_dir=str(profile_dir),
+                    channel=ch_name,
+                    headless=False,
+                    ignore_default_args=["--enable-automation"],
+                    args=["--disable-blink-features=AutomationControlled", "--start-maximized"],
+                    no_viewport=True,
+                )
+                break
+            except Exception:
+                continue
+        if browser_ctx is None:
+            browser_ctx = p.chromium.launch_persistent_context(
+                user_data_dir=str(profile_dir),
+                headless=False,
+                ignore_default_args=["--enable-automation"],
+                args=["--disable-blink-features=AutomationControlled"],
+            )
+
+        page = browser_ctx.pages[0] if browser_ctx.pages else browser_ctx.new_page()
+        try:
+            page.bring_to_front()
+        except Exception:
+            pass
+
+        for idx, slug_key in enumerate(slug_list, 1):
+            script_path = SCRIPTS_DIR / f"{slug_key}.json"
+            sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+            for lc in langs:
+                existing = (sdoc.get("shorts_urls") or {}).get(lc, "").strip()
+                if existing:
+                    results[f"{slug_key}_{lc}"] = existing
+                    print(f"📱 [{idx}/{len(slug_list)}] Already uploaded: {existing}", flush=True)
+                    continue
+                short_mp4 = (YT_UPLOADS_DIR / "shorts" / f"{slug_key}_short_{lc}.mp4").resolve()
+                short_meta_path = YT_PKG_DIR / f"{slug_key}_shorts_meta.json"
+                if not short_mp4.exists() or not short_meta_path.exists():
+                    render_youtube_short_vertical(slug_key, lang_code=lc)
+                smeta = json.loads(short_meta_path.read_text(encoding="utf-8"))[lc]
+
+                print(f"🚀 [{idx}/{len(slug_list)}] Studio Browser Uploading #Shorts: {short_mp4.name}", flush=True)
+                page.goto(YOUTUBE_STUDIO_UPLOAD_URL, wait_until="domcontentloaded")
+
+                if not page.url.startswith("https://studio.youtube.com/"):
+                    try:
+                        page.evaluate("""() => {
+                            const b = document.createElement('div');
+                            b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:#e11d48;color:#fff;padding:16px 22px;font-size:18px;font-weight:bold;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:sans-serif;';
+                            b.innerHTML = '🤖 [@min7014_ai 5대 #Shorts 자동 업로드 로봇] 이 창에서 딱 1번만 로그인해 주시면 지금 즉시 5개 #Shorts를 로봇이 자동으로 모두 업로드합니다!';
+                            document.body.prepend(b);
+                        }""")
+                    except Exception:
+                        pass
+                    print("🔐 [최초 1회 로그인 대기 중] 열린 크롬 로봇 창에서 @min7014_ai 계정으로 로그인해 주세요...", flush=True)
+                    page.wait_for_url(lambda u: u.startswith("https://studio.youtube.com/"), timeout=600000)
+                    time.sleep(3.0)
+                    if YOUTUBE_CHANNEL_ID not in page.url:
+                        page.goto(YOUTUBE_STUDIO_UPLOAD_URL, wait_until="domcontentloaded")
+                        time.sleep(3.0)
+
+                try:
+                    welcome_btn = page.locator('ytcp-button#dismiss-button, button:has-text("계속"), button:has-text("Continue")').first
+                    if welcome_btn.is_visible(timeout=2500):
+                        welcome_btn.click(timeout=2500)
+                        time.sleep(1.0)
+                except Exception:
+                    pass
+
+                try:
+                    file_input = page.locator('ytcp-uploads-file-picker input[type="file"], input[name="Filedata"], input[type="file"]').first
+                    file_input.wait_for(state="attached", timeout=8000)
+                except Exception:
+                    try:
+                        create_btn = page.locator('ytcp-button#create-icon, #create-icon, ytcp-button#upload-icon, #upload-icon, button[aria-label*="만들기"], button[aria-label*="Create"]').first
+                        create_btn.click(timeout=8000)
+                        time.sleep(1.0)
+                        upload_item = page.locator('tp-yt-paper-item#text-item-0, tp-yt-paper-item:has-text("동영상 업로드"), tp-yt-paper-item:has-text("Upload videos")').first
+                        if upload_item.is_visible(timeout=3000):
+                            upload_item.click(timeout=5000)
+                    except Exception:
+                        pass
+                    file_input = page.locator('input[type="file"]').first
+                    file_input.wait_for(state="attached", timeout=60000)
+
+                file_input.set_input_files(str(short_mp4))
+                print(f"  [1/4] #Shorts MP4 투입 완료: {short_mp4.name}", flush=True)
+
+                title_box = page.locator('#title-textarea #textbox, ytcp-social-suggestions-textbox#title-textarea #textbox').first
+                title_box.wait_for(state="visible", timeout=45000)
+                time.sleep(1.5)
+                title_box.click()
+                page.keyboard.press("Control+A")
+                page.keyboard.press("Backspace")
+                title_box.fill(smeta["title"])
+                print(f"  [2/4] #Shorts 제목 입력 완료: {smeta['title']}", flush=True)
+
+                try:
+                    desc_box = page.locator('#description-textarea #textbox, ytcp-social-suggestions-textbox#description-textarea #textbox').first
+                    desc_box.click(timeout=8000)
+                    page.keyboard.press("Control+A")
+                    page.keyboard.press("Backspace")
+                    desc_box.fill(smeta["description"])
+                    print("  [3/4] 5단 홈페이지 링크 퍼널 설명문 입력 완료", flush=True)
+                except Exception as e:
+                    print(f"  [Description Warning] {e}", flush=True)
+
+                try:
+                    not_kids = page.locator('tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_NOT_MFK"], [name="VIDEO_MADE_FOR_KIDS_NOT_MFK"]').first
+                    not_kids.scroll_into_view_if_needed(timeout=5000)
+                    not_kids.click(timeout=5000)
+                except Exception:
+                    pass
+
+                vid_id = ""
+                try:
+                    link_el = page.locator('a[href*="youtu.be/"], a[href*="youtube.com/shorts/"]').first
+                    link_el.wait_for(state="visible", timeout=15000)
+                    href = link_el.get_attribute("href") or ""
+                    vid_id = href.rstrip("/").split("/")[-1].split("?")[0].strip()
+                except Exception:
+                    pass
+
+                for _ in range(3):
+                    time.sleep(1.0)
+                    next_btn = page.locator('#next-button').first
+                    next_btn.click(timeout=15000)
+
+                time.sleep(1.2)
+                try:
+                    vis_radio = page.locator(f'tp-yt-paper-radio-button[name="{privacy_radio_name}"], [name="{privacy_radio_name}"]').first
+                    vis_radio.click(timeout=8000)
+                except Exception:
+                    pass
+
+                if not vid_id:
+                    try:
+                        href = page.locator('a[href*="youtu.be/"], a[href*="youtube.com/shorts/"]').first.get_attribute("href") or ""
+                        vid_id = href.rstrip("/").split("/")[-1].split("?")[0].strip()
+                    except Exception:
+                        pass
+
+                time.sleep(1.5)
+                done_btn = page.locator('#done-button').first
+                done_btn.click(timeout=20000)
+                time.sleep(4.0)
+
+                if not vid_id:
+                    try:
+                        html_snap = page.content()
+                        m_url = re.search(r"https://(?:youtu\.be|youtube\.com/shorts)/([A-Za-z0-9_-]{11})", html_snap)
+                        if m_url:
+                            vid_id = m_url.group(1)
+                    except Exception:
+                        pass
+
+                if vid_id:
+                    short_url = f"https://youtube.com/shorts/{vid_id}"
+                    results[f"{slug_key}_{lc}"] = short_url
+                    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+                    if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
+                        sdoc["shorts_urls"] = {"ko": "", "en": ""}
+                    sdoc["shorts_urls"][lc] = short_url
+                    script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+                    update_video_catalog()
+                    print(f"  [4/4] 🎉 #Shorts 게시 완료! -> {short_url}", flush=True)
+                try:
+                    close_btn = page.locator('ytcp-button#close-button, #close-icon-button').first
+                    if close_btn.is_visible():
+                        close_btn.click(timeout=5000)
+                except Exception:
+                    pass
+                time.sleep(2.0)
+
+        browser_ctx.close()
+    return results
 
 
 def build_all_shorts(upload=False, privacy="public"):
