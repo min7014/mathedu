@@ -648,25 +648,65 @@ html.dark-theme .filter-tab-btn {
           </a>
         </div>
 
-        <!-- @min7014_ai Popular YouTube Visual Proof Strip -->
-        <div class="pt-2.5 border-t border-surface-container flex flex-col gap-2">
+        <!-- 📺 @min7014_ai 유튜브 시각적 증명 시네마 & 45초 #Shorts 극장 · 홈페이지 바이럴 홍보 허브 -->
+        <div class="pt-3 border-t border-surface-container flex flex-col gap-2.5" id="ytViralCinemaHub">
           <div class="flex items-center justify-between gap-2 flex-wrap text-xs">
-            <div class="flex items-center gap-1.5 font-bold text-[#be123c]">
-              <span>🔥 @min7014_ai 인기 시각적 수학 증명 유튜브 정주행 (1080p 한/영)</span>
-            </div>
             <div class="flex items-center gap-2 flex-wrap">
-              <a href="https://www.youtube.com/playlist?list=PLQfKuD3IPx1c" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ffe4e6] text-[#be123c] font-bold no-underline hover:underline">📂 🇰🇷 한국어 재생목록 ↗</a>
-              <a href="https://www.youtube.com/playlist?list=PLA4FYpQnYlJQ" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#dbeafe] text-[#1d4ed8] font-bold no-underline hover:underline">📂 🇺🇸 English Playlist ↗</a>
-              <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#e11d48] text-white font-bold no-underline hover:opacity-90">🔔 @min7014_ai 구독하기 ↗</a>
+              <span class="px-2 py-0.5 rounded bg-[#e11d48] text-white font-extrabold text-[11px]">📺 YouTube × mathedu 홍보·확장 허브</span>
+              <span class="font-extrabold text-[#be123c] text-[13px]">@min7014_ai 1080p 시각적 수학 증명 시네마 &amp; 45초 #Shorts 즉시 재생</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button type="button" onclick="toggleHomeYoutubeTheater()" id="btnToggleHomeYtTheater" class="px-2.5 py-1 rounded-md bg-[#0f172a] text-[#38bdf8] font-extrabold border-0 cursor-pointer text-xs">🎬 인라인 유튜브 극장 열기 ▼</button>
+              <button type="button" onclick="copyYoutubeWebsitePromoKit()" class="px-2.5 py-1 rounded-md bg-amber-100 hover:bg-amber-200 text-amber-900 font-extrabold border border-amber-300 cursor-pointer text-xs">📢 학급·SNS 홍보 카드 1초 복사</button>
+              <a href="https://www.youtube.com/playlist?list=PLQfKuD3IPx1c" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ffe4e6] text-[#be123c] font-bold no-underline hover:underline">🇰🇷 한국어 재생목록 ↗</a>
+              <a href="https://www.youtube.com/playlist?list=PLA4FYpQnYlJQ" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#dbeafe] text-[#1d4ed8] font-bold no-underline hover:underline">🇺🇸 EN Playlist ↗</a>
+              <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#e11d48] text-white font-bold no-underline hover:opacity-90">🔔 @min7014_ai 구독 ↗</a>
             </div>
           </div>
-          <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-            <a href="https://youtu.be/bQO7fnT6aDU" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold no-underline shrink-0">🌳 피타고라스 나무 넓이 보존 (KO) ↗</a>
-            <a href="https://youtu.be/k6LBYa5SCiA" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold no-underline shrink-0">🔥 피타고라스 정리 25단계 증명 (KO) ↗</a>
-            <a href="https://youtu.be/W_AWH-Gk89w" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold no-underline shrink-0">📐 체바의 정리 넓이 비 증명 (KO) ↗</a>
-            <a href="https://youtu.be/7zD66SWWceg" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold no-underline shrink-0">✨ 메넬라우스의 정리 평행선 증명 (KO) ↗</a>
-            <a href="https://youtu.be/Mq6s2JLV9mQ" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold no-underline shrink-0">🌟 정칠각형 종이띠 매듭 원리 (KO) ↗</a>
-            <a href="video_board.html" class="px-2.5 py-1.5 rounded-lg bg-[#fff1f2] text-[#be123c] font-bold no-underline shrink-0">📋 1,111개 전체 영상 게시판 ➔</a>
+
+          <!-- 원클릭 영상 선택 칩 (클릭 시 인라인 유튜브 플레이어 + 관련 기출 즉시 연동) -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs" id="homeYtCinemaChips">
+            <button type="button" onclick="playHomeYtCinema(0)" class="px-2.5 py-1.5 rounded-lg bg-[#fff1f2] hover:bg-[#ffe4e6] text-[#be123c] border border-[#fecdd3] font-bold shrink-0 cursor-pointer">🌳 1. 피타고라스 나무 넓이 보존</button>
+            <button type="button" onclick="playHomeYtCinema(1)" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant font-semibold shrink-0 cursor-pointer">🔥 2. 피타고라스 정리 25단계 증명</button>
+            <button type="button" onclick="playHomeYtCinema(2)" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant font-semibold shrink-0 cursor-pointer">📐 3. 체바의 정리 넓이 비 증명</button>
+            <button type="button" onclick="playHomeYtCinema(3)" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant font-semibold shrink-0 cursor-pointer">✨ 4. 메넬라우스 평행보조선 증명</button>
+            <button type="button" onclick="playHomeYtCinema(4)" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant font-semibold shrink-0 cursor-pointer">🌟 5. 정칠각형 종이띠 매듭 원리</button>
+            <button type="button" onclick="playHomeYtCinema(5)" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant font-semibold shrink-0 cursor-pointer">🪐 6. 타원 빛 반사 123프레임</button>
+            <button type="button" onclick="playHomeYtCinema(6)" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant font-semibold shrink-0 cursor-pointer">🔺 7. 비비아니 정리 정삼각형</button>
+            <a href="video_board.html" class="px-2.5 py-1.5 rounded-lg bg-[#0f172a] text-white font-bold no-underline shrink-0">📋 1,113개 전체 영상·숏폼 게시판 ➔</a>
+          </div>
+
+          <!-- 접이식 인라인 유튜브 1080p 본편 & 9:16 #Shorts 동시 체험 극장 -->
+          <div id="homeYtTheaterBox" style="display:none;" class="p-3.5 rounded-xl bg-[#0f172a] text-white border border-slate-700 flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-2 flex-wrap border-b border-slate-800 pb-2">
+              <div>
+                <div class="text-xs text-sky-400 font-extrabold" id="homeYtActiveBadge">🎬 @min7014_ai v4.0 Viral Cinema (1080p 본편 &amp; 9:16 #Shorts)</div>
+                <div class="text-sm font-extrabold text-white mt-0.5" id="homeYtActiveTitle">🌳 피타고라스 나무가 무한히 자라나도 넓이 합이 일정한 이유!</div>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button type="button" onclick="switchHomeYtMode('full_ko')" class="px-2.5 py-1 rounded bg-rose-600 text-white text-xs font-extrabold border-0 cursor-pointer">🇰🇷 1080p 본편 (KO)</button>
+                <button type="button" onclick="switchHomeYtMode('full_en')" class="px-2.5 py-1 rounded bg-sky-700 text-white text-xs font-extrabold border-0 cursor-pointer">🇺🇸 1080p Full (EN)</button>
+                <button type="button" onclick="switchHomeYtMode('short_ko')" class="px-2.5 py-1 rounded bg-amber-600 text-white text-xs font-extrabold border-0 cursor-pointer">📱 45초 #Shorts (KO)</button>
+                <button type="button" onclick="switchHomeYtMode('short_en')" class="px-2.5 py-1 rounded bg-indigo-600 text-white text-xs font-extrabold border-0 cursor-pointer">📱 45s #Shorts (EN)</button>
+                <button type="button" onclick="toggleHomeYoutubeTheater(false)" class="px-2 py-1 rounded bg-slate-800 text-slate-300 text-xs font-bold border-0 cursor-pointer">✕ 닫기</button>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 items-center">
+              <div class="lg:col-span-2 w-full rounded-xl overflow-hidden bg-black border border-slate-700" style="aspect-ratio:16/9;" id="homeYtPlayerContainer">
+                <iframe id="homeYtIframe" src="about:blank" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div class="flex flex-col gap-2 text-xs bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+                <div class="font-extrabold text-amber-400 text-[13px]">🚀 영상 시청 후 3단계 실력 완성 퍼널</div>
+                <p class="text-slate-300 m-0 leading-relaxed" id="homeYtActiveHook">영상에서 보조선이 그어지는 원리를 확인하셨나요? 이제 직접 마우스로 도형을 움직여 보고, 5지선다 보기를 가린 채 수능·모평 기출문제를 조립해 보세요!</p>
+                <a id="homeYtBoardLink" href="video_board.html?slug=math20250130001" class="py-2 px-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-extrabold no-underline text-center">📐 1단계: 이 도형 GeoGebra로 직접 조작하기 ➔</a>
+                <button type="button" id="homeYtQuizBtn" onclick="jumpToQuizFromMtHub('피타고라스 직각삼각형 넓이')" class="py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold border-0 cursor-pointer">✍️ 2단계: 탈-5지선다 관련 기출 바로 풀기 ➔</button>
+                <button type="button" onclick="copyCurrentHomeYtShareCard()" class="py-2 px-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold border-0 cursor-pointer">📢 3단계: 이 영상+문제 세트 단톡방 공유하기</button>
+                <div class="pt-1 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+                  <span>📺 공식 채널: @min7014_ai</span>
+                  <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="text-rose-400 font-extrabold no-underline hover:underline">🔔 유튜브 구독하기 ↗</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -830,7 +870,7 @@ html.dark-theme .filter-tab-btn {
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">24대 법칙</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">25대 법칙</span>
               </div>
               <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
             </div>
@@ -3307,9 +3347,9 @@ window.openMathClinicModal = function() {
     <div class="p-3 px-5 border-b border-surface-container bg-white flex flex-wrap items-center justify-between gap-2">
       <div class="flex gap-1.5 flex-wrap" id="mtHubTabButtons">
         <button type="button" data-mt-tab="genealogy" onclick="switchMathTeacherHubTab('genealogy')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-secondary text-white">🌳 1. 초·중·고 수직 계통성 트리 (12)</button>
-        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (24)</button>
+        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (25)</button>
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
-        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (15)</button>
+        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (17)</button>
         <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (9)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
@@ -3895,6 +3935,16 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "formulaBridge": "4단계 (본문항 종합): 원의 접선 수직 반지름($90^\\circ$), 원주각 이동, 할선·접선 비례($PA\\cdot PB = PT^2$)를 결합해 고난도 도형 문제 해결",
       "min7014Query": "유클리드 평면기하",
       "searchKeyword": "유클리드"
+    },
+    {
+      "id": "polya-min-MIN-KB-0009",
+      "domain": "유클리드 평면기하",
+      "condition": "[환의 넓이(Annular Area)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선($90^\\circ$)을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요.",
+      "visualIntuition": "[환의 넓이] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
+      "formulaBridge": "4단계 (본문항 종합): 원의 접선 수직 반지름($90^\\circ$), 원주각 이동, 할선·접선 비례($PA\\cdot PB = PT^2$)를 결합해 고난도 도형 문제 해결",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
     }
   ],
   "misconceptionLab": [
@@ -4174,6 +4224,28 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "min7014Query": "미분·도함수",
       "videoSlug": "2023081301",
       "quizKeyword": "미분"
+    },
+    {
+      "id": "lesson-auto-2025013001",
+      "gradeTarget": "중·고등 유클리드 평면기하 연계",
+      "topic": "[시각적 증명 탐구] 피타고라스 나무(Pythagoras Tree)",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 '피타고라스 나무(Pythagoras Tree)'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 '피타고라스 나무(Pythagoras Tree) (2025013001)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "유클리드 평면기하",
+      "videoSlug": "2025013001",
+      "quizKeyword": "유클리드 평면기하"
+    },
+    {
+      "id": "lesson-auto-2025013101",
+      "gradeTarget": "중·고등 벡터·공간도형 연계",
+      "topic": "[시각적 증명 탐구] Tetrahedron 5-Compound",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 'Tetrahedron 5-Compound'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 'Tetrahedron 5-Compound (2025013101)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "벡터·공간도형",
+      "videoSlug": "2025013101",
+      "quizKeyword": "벡터"
     }
   ],
   "creativeConstructiveLab": [
@@ -4769,6 +4841,162 @@ window.renderMathTeacherHubContent = function() {
   window.renderDailyOxQuiz();
   updateDailyProgressUI();
 })();
+
+
+// ══════════════════════════════════════════════════════════════════════════
+// 📺 @min7014_ai 유튜브 시네마 & #Shorts 인라인 극장 + 바이럴 홍보 카드 생성기
+// ══════════════════════════════════════════════════════════════════════════
+window.HOME_YT_CINEMA_ITEMS = [
+  {
+    slug: 'math20250130001',
+    title: '🌳 피타고라스 나무가 무한히 자라나도 넓이 합이 일정한 이유! (11단계 시각적 증명)',
+    hook: '정사각형 위에 직각삼각형과 두 정사각형 가지를 무한히 뻗어나가도 매 단계 넓이 합(a²+b²=c²)이 완벽히 보존되는 프랙탈 기하학의 기적을 확인하세요!',
+    yt_ko: 'bQO7fnT6aDU',
+    yt_en: '9JKLflqrtDU',
+    short_mp4_ko: 'video_lectures/shorts/math20250130001_short_ko.mp4',
+    short_mp4_en: 'video_lectures/shorts/math20250130001_short_en.mp4',
+    quizKeyword: '직각삼각형 넓이 등비급수'
+  },
+  {
+    slug: '2017090101',
+    title: '🔥 피타고라스 정리(a²+b²=c²), 정사각형 넓이 분할 25단계 완전 정복!',
+    hook: '한 변이 (a+b)인 큰 정사각형을 합동인 직각삼각형 4개와 가운데 정사각형(c²)으로 분할하여 양변에서 2ab를 소거하는 시각적 증명입니다.',
+    yt_ko: 'k6LBYa5SCiA',
+    yt_en: 'n9zyKwXXsbA',
+    short_mp4_ko: 'video_lectures/shorts/2017090101_short_ko.mp4',
+    short_mp4_en: 'video_lectures/shorts/2017090101_short_en.mp4',
+    quizKeyword: '직각삼각형 피타고라스'
+  },
+  {
+    slug: '2014111902',
+    title: '📐 체바의 정리(Ceva Theorem), 삼각형 넓이 비 하나로 4분 만에 완벽 증명!',
+    hook: '삼각형의 세 꼭짓점에서 그은 세 선분이 한 점에서 만날 때, 높이가 같은 삼각형의 밑변 비 = 넓이 비 원리로 세 분수가 연쇄 약분됩니다.',
+    yt_ko: 'W_AWH-Gk89w',
+    yt_en: 'ffNJhPRvh4Y',
+    short_mp4_ko: 'video_lectures/shorts/2014111902_short_ko.mp4',
+    short_mp4_en: 'video_lectures/shorts/2014111902_short_en.mp4',
+    quizKeyword: '삼각형의 넓이 내분'
+  },
+  {
+    slug: '2014111901',
+    title: '✨ 메넬라우스의 정리, 평행 보조선 단 한 줄로 끝내는 20단계 시각 증명!',
+    hook: '꼭짓점 C를 지나며 할선에 평행한 보조선 단 한 줄을 그으면 두 쌍의 닮음비가 도미노처럼 약분되어 1이 됩니다.',
+    yt_ko: '7zD66SWWceg',
+    yt_en: 'CjE2nyyzG2s',
+    short_mp4_ko: 'video_lectures/shorts/2014111901_short_ko.mp4',
+    short_mp4_en: 'video_lectures/shorts/2014111901_short_en.mp4',
+    quizKeyword: '삼각형 평행 닮음'
+  },
+  {
+    slug: '2025020101',
+    title: '🌟 종이띠로 접는 정칠각형 매듭(Regular Heptagonal Knot) 11단계 원리!',
+    hook: '자와 컴퍼스로 작도할 수 없는 정칠각형을 일정한 폭의 종이띠 매듭 하나로 오차 없이 접어내는 대칭·평행선 기하학입니다.',
+    yt_ko: 'Mq6s2JLV9mQ',
+    yt_en: 'fXQJ8s1La-E',
+    short_mp4_ko: 'video_lectures/shorts/2025020101_short_ko.mp4',
+    short_mp4_en: 'video_lectures/shorts/2025020101_short_en.mp4',
+    quizKeyword: '정다각형 대칭'
+  },
+  {
+    slug: '2022051507',
+    title: '🪐 타원에서의 빛 반사 (광학적 성질과 최단 경로 123프레임 플립북)',
+    hook: '타원의 한 초점에서 나온 빛은 접선에서 반사되어 반드시 다른 초점으로 모입니다. 초점 대칭 이동 보조선의 핵심 원리!',
+    yt_ko: 'AVFodL71fSk',
+    yt_en: 'AVFodL71fSk',
+    short_mp4_ko: 'video_lectures/shorts/2022051507_short_ko.mp4',
+    short_mp4_en: 'video_lectures/shorts/2022051507_short_en.mp4',
+    quizKeyword: '타원 두 초점 접선'
+  },
+  {
+    slug: '2025012901',
+    title: '🔺 비비아니 정리(Viviani Theorem) — 정삼각형 내부 점에서의 세 수선의 합 불변량',
+    hook: '정삼각형 내부 어느 점에서나 세 변에 내린 수선의 길이 합은 정삼각형의 높이 H로 일정하다는 아름다운 시각적 증명입니다.',
+    yt_ko: 'W_AWH-Gk89w',
+    yt_en: 'ffNJhPRvh4Y',
+    short_mp4_ko: 'video_lectures/shorts/2025012901_short_ko.mp4',
+    short_mp4_en: 'video_lectures/shorts/2025012901_short_en.mp4',
+    quizKeyword: '정삼각형 수선의 발 넓이'
+  }
+];
+window._homeYtIdx = 0;
+window._homeYtMode = 'full_ko';
+
+window.toggleHomeYoutubeTheater = function(forceShow) {
+  var box = document.getElementById('homeYtTheaterBox');
+  var btn = document.getElementById('btnToggleHomeYtTheater');
+  if (!box) return;
+  var show = (typeof forceShow === 'boolean') ? forceShow : (box.style.display === 'none' || !box.style.display);
+  box.style.display = show ? 'flex' : 'none';
+  if (btn) btn.textContent = show ? '🎬 인라인 유튜브 극장 닫기 ▲' : '🎬 인라인 유튜브 극장 열기 ▼';
+  if (show) {
+    window.renderHomeYtCinemaPlayer();
+  } else {
+    var ifr = document.getElementById('homeYtIframe');
+    if (ifr) ifr.src = 'about:blank';
+  }
+};
+
+window.playHomeYtCinema = function(idx) {
+  window._homeYtIdx = idx || 0;
+  window.toggleHomeYoutubeTheater(true);
+};
+
+window.switchHomeYtMode = function(mode) {
+  window._homeYtMode = mode || 'full_ko';
+  window.renderHomeYtCinemaPlayer();
+};
+
+window.renderHomeYtCinemaPlayer = function() {
+  var item = window.HOME_YT_CINEMA_ITEMS[window._homeYtIdx] || window.HOME_YT_CINEMA_ITEMS[0];
+  var mode = window._homeYtMode || 'full_ko';
+  var tEl = document.getElementById('homeYtActiveTitle');
+  var hEl = document.getElementById('homeYtActiveHook');
+  var bLink = document.getElementById('homeYtBoardLink');
+  var qBtn = document.getElementById('homeYtQuizBtn');
+  var pWrap = document.getElementById('homeYtPlayerContainer');
+  if (tEl) tEl.textContent = item.title;
+  if (hEl) hEl.textContent = item.hook;
+  if (bLink) bLink.href = 'video_board.html?slug=' + encodeURIComponent(item.slug);
+  if (qBtn) {
+    qBtn.setAttribute('onclick', "jumpToQuizFromMtHub('" + item.quizKeyword + "')");
+    qBtn.textContent = '✍️ 2단계: 탈-5지선다 기출 풀기 (' + item.quizKeyword + ') ➔';
+  }
+  if (!pWrap) return;
+  if (mode === 'short_ko' || mode === 'short_en') {
+    var mp4Url = mode === 'short_en' ? item.short_mp4_en : item.short_mp4_ko;
+    pWrap.innerHTML = '<video src="' + mp4Url + '" controls autoplay playsinline style="width:100%;max-height:420px;background:#000;display:block;margin:0 auto"></video>';
+  } else {
+    var vidId = mode === 'full_en' ? item.yt_en : item.yt_ko;
+    pWrap.innerHTML = '<iframe id="homeYtIframe" src="https://www.youtube-nocookie.com/embed/' + vidId + '?autoplay=1&rel=0" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  }
+};
+
+window.copyCurrentHomeYtShareCard = function() {
+  var item = window.HOME_YT_CINEMA_ITEMS[window._homeYtIdx] || window.HOME_YT_CINEMA_ITEMS[0];
+  var txt = [
+    '🔥 [눈으로 깨치는 시각적 수학 증명 & 탈-5지선다 창의 퀴즈]',
+    '📌 주제: ' + item.title,
+    '🎬 1080p 유튜브 영상 (KO): https://youtu.be/' + item.yt_ko,
+    '📐 직접 움직여보는 GeoGebra & 플립북 게시판: https://min7014.github.io/mathedu/video_board.html?slug=' + item.slug,
+    '✍️ 보기를 가리고 수식 블록 조립! 16,548문항 수능·모평 디딤돌: https://min7014.github.io/mathedu/?q=' + encodeURIComponent(item.quizKeyword),
+    '🔔 @min7014_ai 유튜브 구독: https://www.youtube.com/@min7014_ai?sub_confirmation=1'
+  ].join('\n');
+  if (navigator.clipboard) navigator.clipboard.writeText(txt);
+  alert('📢 [유튜브 영상 + 홈페이지 실습 + 탈-5지선다 기출] 세트가 클립보드에 복사되었습니다!\n단톡방·카페·블로그·SNS에 바로 붙여넣어 공유하세요.');
+};
+
+window.copyYoutubeWebsitePromoKit = function() {
+  var txt = [
+    '🌟 [민은기 선생님의 수학자료실 × @min7014_ai × mathedu 100% 무료 수학교육 플랫폼]',
+    '1️⃣ 📺 @min7014_ai 유튜브 채널 (1080p 시각적 수학 증명 & 45초 #Shorts): https://www.youtube.com/@min7014_ai?sub_confirmation=1',
+    '2️⃣ 📋 전체 1,113개 수학자료 설명영상 & GeoGebra 게시판: https://min7014.github.io/mathedu/video_board.html',
+    '3️⃣ ✍️ 탈-5지선다 창의 수식 블록 조립! 수능·모평 16,548문항 초등 눈높이 디딤돌: https://min7014.github.io/mathedu/',
+    '4️⃣ 🎮 수능 수학 100점 만점 3D 보스 레이드 RPG 게임: https://min7014.github.io/mathedu/game.html',
+    '5️⃣ 🏛️ 민은기 선생님의 수학자료실 본관 (3,400+ 동적 기하): https://min7014.github.io/'
+  ].join('\n');
+  if (navigator.clipboard) navigator.clipboard.writeText(txt);
+  alert('🚀 [유튜브 채널 + 수학홈페이지 통합 홍보 키트]가 복사되었습니다!\n학급 공지·수학교사 커뮤니티·SNS에 바로 공유하실 수 있습니다.');
+};
 
 </script>
 
