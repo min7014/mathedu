@@ -694,7 +694,105 @@ html.dark-theme .filter-tab-btn {
           <input type="text" id="heroQuickSearchInput"/>
           <button type="button" id="btnClearHeroSearch"></button>
           <span id="streakTitle"></span><span id="gameLevelTitle"></span><span id="streakSub"></span><span id="gameXpText"></span><div id="gameXpBarFill"></div><span id="quickWrongCount">0</span>
-          <span id="todayGgbTitle"></span><span id="todayGgbDesc"></span><a id="btnTodayGgbApplet" href="#"></a><a id="btnTodayGgbPdf" href="#"></a><a id="btnTodayGgbWeb" href="#"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🏛️ 민은기 선생님의 수학자료실 (min7014.github.io) 심층 커리큘럼 & 오늘의 시각적 증명 쇼케이스 -->
+    <div class="px-margin mt-space-sm" id="min7014DeepCurriculumSection">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-secondary/20 flex flex-col gap-3">
+        <!-- Header & Resource Statistics -->
+        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded-md bg-secondary text-white font-label-badge text-[11px] font-bold">min7014.github.io 심층 연동</span>
+            <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">🏛️ 민은기 선생님의 수학자료실 16대 영역 · 165개 세부 단원 시각적 증명 아카이브</h2>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-[11px] font-semibold">
+            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary">📚 1,113개 심층 주제</span>
+            <span class="px-2 py-0.5 rounded bg-status-amber/15 text-[#B45309]">📄 증명 PDF 847</span>
+            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary">🎮 GeoGebra 404</span>
+            <span class="px-2 py-0.5 rounded bg-status-emerald/15 text-status-emerald">📐 AlgeoMath 457</span>
+            <span class="px-2 py-0.5 rounded bg-[#f3e8ff] text-[#6d28d9]">📏 작도 60선</span>
+            <span class="px-2 py-0.5 rounded bg-[#ffe4e6] text-[#be123c]">🎥 영상·숏폼 927</span>
+          </div>
+        </div>
+
+        <!-- Today's Featured Visual Proof & Interactive Applet Card -->
+        <div class="rounded-xl bg-surface-container-low p-3.5 border border-surface-variant flex flex-col gap-2.5">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div class="flex-1 min-w-[240px]">
+              <div class="flex items-center gap-1.5 flex-wrap mb-1">
+                <span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-badge text-[11px] font-bold" id="todayGgbDomain">📐 오늘의 동적 기하 · 시각적 증명</span>
+                <span class="text-[11px] text-on-surface-variant font-semibold" id="todayGgbBreadcrumb">내용순 배열 ▸ 이차곡선 ▸ 타원</span>
+                <span class="text-[11px] text-secondary font-bold" id="todayGgbCounter">(1 / 12)</span>
+              </div>
+              <div class="font-headline-sm text-[15px] font-bold text-on-surface leading-snug" id="todayGgbTitle">타원에서의 빛 반사 (광학적 성질)</div>
+              <p class="font-body-sm text-xs text-on-surface-variant mt-1 mb-0 leading-relaxed" id="todayGgbDesc">한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다.</p>
+              <div class="mt-1.5 text-xs text-[#B45309] font-semibold" id="todayGgbTip">💡 수능 실전 보조선 팁: 타원·포물선·쌍곡선 문제에서는 항상 초점과 접점을 잇는 반사 대칭 보조선을 먼저 그으세요.</div>
+            </div>
+            <div class="flex flex-col items-end gap-1.5 shrink-0">
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="rotateTodayGeoGebra(-1)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-surface-container text-on-surface text-xs font-bold border border-surface-variant cursor-pointer">◀ 이전</button>
+                <button type="button" onclick="rotateTodayGeoGebra(1)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-surface-container text-on-surface text-xs font-bold border border-surface-variant cursor-pointer">다음 ▶</button>
+                <button type="button" onclick="speakTodayGeoGebra(this)" class="mathedu-voice-btn text-xs">🔊 도슨트</button>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap justify-end">
+                <button type="button" id="btnTodayGgbInlineToggle" onclick="toggleTodayInlineViewer('applet')" class="px-2.5 py-1.5 rounded-lg bg-secondary text-white text-xs font-bold border-0 cursor-pointer hover:opacity-90">🎮 인라인 실험실 열기</button>
+                <button type="button" onclick="toggleTodayInlineViewer('pdf')" class="px-2.5 py-1.5 rounded-lg bg-status-amber/20 text-[#B45309] text-xs font-bold border-0 cursor-pointer hover:bg-status-amber/30">📄 인라인 플립북 PDF</button>
+                <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-secondary/10 hover:bg-secondary/20 text-secondary text-xs font-bold no-underline">GeoGebra ↗</a>
+                <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold no-underline">PDF 새창 ↗</a>
+                <a id="btnTodayGgbYt" href="https://youtu.be/AVFodL71fSk" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-[#ffe4e6] hover:bg-[#fecdd3] text-[#be123c] text-xs font-bold no-underline">▶️ 해설 영상 ↗</a>
+                <a id="btnTodayGgbWeb" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant text-xs font-semibold no-underline">원문 ↗</a>
+              </div>
+            </div>
+          </div>
+          <!-- Collapsible Inline Interactive GeoGebra / PDF Viewer -->
+          <div id="todayGgbInlineFrameWrap" style="display:none;" class="mt-2 pt-2.5 border-t border-surface-variant flex flex-col gap-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-secondary" id="todayGgbInlineLabel">🎮 실시간 동적 기하 · 시각적 증명 실험실</span>
+              <button type="button" onclick="closeTodayInlineViewer()" class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border-0 cursor-pointer text-xs font-bold">✕ 실험실 닫기</button>
+            </div>
+            <div class="w-full rounded-xl overflow-hidden border border-surface-variant bg-white" style="height:440px;">
+              <iframe id="todayGgbInlineIframe" src="about:blank" class="w-full h-full border-0" allowfullscreen loading="lazy" title="민은기 선생님의 수학자료실 인터랙티브 뷰어"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 Curriculum Domains Quick Explorer Pills -->
+        <div class="flex flex-col gap-1.5">
+          <div class="flex items-center justify-between text-xs flex-wrap gap-1">
+            <span class="font-bold text-on-surface-variant">🧭 수학자료실 16대 영역 원클릭 심층 탐색 (클릭 시 단원별 원리·보조선·초등 4단계 디딤돌 즉시 열람):</span>
+            <button type="button" onclick="openMin7014ExplorerModal()" class="text-secondary font-bold bg-transparent border-0 cursor-pointer p-0 text-xs hover:underline">전체 1,113개 주제 탐색관 열기 ➔</button>
+          </div>
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+            <button type="button" onclick="openMin7014Domain('유클리드 평면기하')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">📐 유클리드 평면기하 (189)</button>
+            <button type="button" onclick="openMin7014Domain('다항식·방정식·수체계')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🔢 다항식·방정식·수체계 (178)</button>
+            <button type="button" onclick="openMin7014Domain('미분·도함수')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">📈 미분·도함수 (101)</button>
+            <button type="button" onclick="openMin7014Domain('이차곡선·원뿔곡선')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪐 이차곡선·단델린 (85)</button>
+            <button type="button" onclick="openMin7014Domain('벡터·공간도형')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🧭 벡터·공간도형 (80)</button>
+            <button type="button" onclick="openMin7014Domain('지수·로그')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🌱 지수·로그 (70)</button>
+            <button type="button" onclick="openMin7014Domain('함수의 극한과 연속')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🎯 극한과 연속 (69)</button>
+            <button type="button" onclick="openMin7014Domain('해석기하·원의 방정식')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⭕ 해석기하·원 (61)</button>
+            <button type="button" onclick="openMin7014Domain('삼각비·삼각함수')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🌊 삼각비·삼각함수 (54)</button>
+            <button type="button" onclick="openMin7014Domain('함수·집합·그래프')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🔗 함수·집합·그래프 (49)</button>
+            <button type="button" onclick="openMin7014Domain('기하 변환·대칭')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪞 기하 변환·대칭 (36)</button>
+            <button type="button" onclick="openMin7014Domain('확률과 통계')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🎲 확률과 통계 (35)</button>
+            <button type="button" onclick="openMin7014Domain('방정식·부등식')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⚖️ 방정식·부등식 (32)</button>
+            <button type="button" onclick="openMin7014Domain('적분·구분구적법')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⏳ 적분·구분구적법 (32)</button>
+            <button type="button" onclick="openMin7014Domain('수열·시그마')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪜 수열·시그마 (22)</button>
+            <button type="button" onclick="openMin7014Domain('__CONSTRUCTION__')" class="px-2.5 py-1.5 rounded-lg bg-[#f3e8ff] hover:bg-[#e9d5ff] text-[#6d28d9] font-bold border border-[#d8b4fe] shrink-0 cursor-pointer">📏 작도 60선</button>
+          </div>
+          <!-- Direct Hub Links to min7014.github.io -->
+          <div class="flex items-center gap-3 flex-wrap pt-1 text-[11.5px] text-on-surface-variant">
+            <span class="font-bold text-on-surface">🌐 수학자료실 본관 직통 허브:</span>
+            <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">📑 내용순 배열(전 단원 트리) ↗</a>
+            <a href="https://min7014.github.io/2019021101.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🗓️ 만든순서별 아카이브 ↗</a>
+            <a href="https://min7014.github.io/2019081603.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">📏 눈금 없는 자와 컴퍼스 작도 ↗</a>
+            <a href="https://min7014.github.io/2019030303.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🏫 학년도별 수학수업(2015~2023) ↗</a>
+            <a href="https://min7014.github.io/math20240225002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🏫 2024학년도 수학수업 ↗</a>
+            <a href="https://min7014.github.io/math20191130002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🎙️ 특강·강의 자료 ↗</a>
+            <a href="https://min7014.github.io/math20250129002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🧪 기타자료·Python Colab ↗</a>
+          </div>
         </div>
       </div>
     </div>
@@ -892,40 +990,49 @@ html.dark-theme .filter-tab-btn {
 
 <!-- 🌐 min7014 3,400+ 동적 기하 & 심층 원리·음성 도슨트 탐색관 모달 -->
 <div id="min7014ExplorerModal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(15,23,42,.75);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)closeMin7014ExplorerModal()">
-  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
+  <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl text-on-surface overflow-hidden">
     <div class="p-4 px-5 border-b border-surface-container flex justify-between items-center gap-2">
       <div class="flex items-center gap-3">
         <img src="assets/favicon.png" alt="수학자료실" class="w-8 h-8 rounded-lg bg-white p-0.5 border border-surface-variant object-contain"/>
         <div>
-          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">민은기 선생님의 수학자료실 심층 분석 &amp; AI 음성 도슨트관</h2>
-          <div class="font-body-sm text-body-sm text-on-surface-variant">12개 수학 세부 영역 · 핵심 원리 · 플립북 증명 포인트 · 실전 보조선 팁 · 🔊 음성 해설</div>
+          <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface m-0">민은기 선생님의 수학자료실 (`min7014.github.io`) 심층 커리큘럼 &amp; AI 도슨트관</h2>
+          <div class="font-body-sm text-body-sm text-on-surface-variant">16대 수학 영역 · 165개 세부 단원 트리 · 초등 4단계 디딤돌 · 시각적 증명 PDF · 실전 보조선 팁 · 🔊 음성 해설</div>
         </div>
       </div>
       <button type="button" onclick="closeMin7014ExplorerModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center cursor-pointer border-0 text-lg">✕</button>
     </div>
-    <div class="p-4 px-5 border-b border-surface-container bg-surface-container-low">
-      <input type="text" id="min7014SearchInput" placeholder="🔍 개념·정리·보조선 검색 (예: 타원, 단델린, 피타고라스, 원주각, 정규분포, 구분구적법, 평균값 정리, 삼수선)..." class="w-full h-10 px-3.5 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
+    <div class="p-3.5 px-5 border-b border-surface-container bg-surface-container-low">
+      <input type="text" id="min7014SearchInput" placeholder="🔍 개념·정리·보조선·단원 검색 (예: 타원, 단델린, 피타고라스, 원주각, 체바, 메넬라우스, 정칠각형, 정규분포, 구분구적법, 평균값 정리, 작도)..." class="w-full h-10 px-3.5 rounded-xl bg-white border border-surface-variant text-on-surface font-body-md text-body-md focus:outline-none focus:border-secondary" oninput="filterMin7014Materials()"/>
       <div class="flex gap-1.5 flex-wrap mt-2" id="min7014ModalChips">
-        <button type="button" class="topic-chip active" onclick="setMin7014Chip('', this)">전체 (1,111)</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('이차곡선·원뿔곡선', this)">이차곡선·단델린</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('유클리드 평면기하', this)">유클리드 평면기하</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('벡터·공간도형', this)">벡터·공간도형</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('미분·도함수', this)">미분·접선</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('적분·구분구적법', this)">적분·구분구적법</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('함수의 극한과 연속', this)">극한·연속</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('삼각비·삼각함수', this)">삼각비·삼각함수</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('지수·로그', this)">지수·로그</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('수열·시그마', this)">수열·시그마</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('확률과 통계', this)">확률과 통계</button>
-        <button type="button" class="topic-chip" onclick="setMin7014Chip('기하 변환·대칭', this)">기하 변환·대칭</button>
+        <button type="button" class="topic-chip active" data-tag="" onclick="setMin7014Chip('', this)">전체 (1,113)</button>
+        <button type="button" class="topic-chip" data-tag="유클리드 평면기하" onclick="setMin7014Chip('유클리드 평면기하', this)">유클리드 기하 (189)</button>
+        <button type="button" class="topic-chip" data-tag="다항식·방정식·수체계" onclick="setMin7014Chip('다항식·방정식·수체계', this)">다항식·수체계 (178)</button>
+        <button type="button" class="topic-chip" data-tag="미분·도함수" onclick="setMin7014Chip('미분·도함수', this)">미분·도함수 (101)</button>
+        <button type="button" class="topic-chip" data-tag="이차곡선·원뿔곡선" onclick="setMin7014Chip('이차곡선·원뿔곡선', this)">이차곡선·단델린 (85)</button>
+        <button type="button" class="topic-chip" data-tag="벡터·공간도형" onclick="setMin7014Chip('벡터·공간도형', this)">벡터·공간도형 (80)</button>
+        <button type="button" class="topic-chip" data-tag="지수·로그" onclick="setMin7014Chip('지수·로그', this)">지수·로그 (70)</button>
+        <button type="button" class="topic-chip" data-tag="함수의 극한과 연속" onclick="setMin7014Chip('함수의 극한과 연속', this)">극한·연속 (69)</button>
+        <button type="button" class="topic-chip" data-tag="해석기하·원의 방정식" onclick="setMin7014Chip('해석기하·원의 방정식', this)">해석기하·원 (61)</button>
+        <button type="button" class="topic-chip" data-tag="삼각비·삼각함수" onclick="setMin7014Chip('삼각비·삼각함수', this)">삼각비·삼각함수 (54)</button>
+        <button type="button" class="topic-chip" data-tag="함수·집합·그래프" onclick="setMin7014Chip('함수·집합·그래프', this)">함수·집합 (49)</button>
+        <button type="button" class="topic-chip" data-tag="기하 변환·대칭" onclick="setMin7014Chip('기하 변환·대칭', this)">기하 변환·대칭 (36)</button>
+        <button type="button" class="topic-chip" data-tag="확률과 통계" onclick="setMin7014Chip('확률과 통계', this)">확률과 통계 (35)</button>
+        <button type="button" class="topic-chip" data-tag="방정식·부등식" onclick="setMin7014Chip('방정식·부등식', this)">방정식·부등식 (32)</button>
+        <button type="button" class="topic-chip" data-tag="적분·구분구적법" onclick="setMin7014Chip('적분·구분구적법', this)">적분·구분구적법 (32)</button>
+        <button type="button" class="topic-chip" data-tag="수열·시그마" onclick="setMin7014Chip('수열·시그마', this)">수열·시그마 (22)</button>
+        <button type="button" class="topic-chip" data-tag="__CONSTRUCTION__" onclick="setMin7014Chip('__CONSTRUCTION__', this)">📏 작도 60선</button>
+        <button type="button" class="topic-chip" data-tag="__YOUTUBE_AI__" onclick="setMin7014Chip('__YOUTUBE_AI__', this)">🔥 @min7014_ai 영상·숏폼</button>
       </div>
     </div>
     <div id="min7014ResultsList" class="flex-1 overflow-y-auto p-4 px-5 flex flex-col gap-2.5 bg-surface">
       <div class="text-center p-10 text-on-surface-variant">자료를 불러오는 중...</div>
     </div>
     <div class="p-3 px-5 bg-surface-container-lowest border-t border-surface-container flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant flex-wrap gap-2">
-      <div>총 <b id="min7014ResultsCount" class="text-secondary">0</b>개 심층 분석 주제 검색됨 (🔊 버튼으로 음성 해설 청취 가능)</div>
-      <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="text-secondary font-bold no-underline hover:underline">🌐 민은기 선생님의 수학자료실 본관 ➔</a>
+      <div>총 <b id="min7014ResultsCount" class="text-secondary">0</b>개 심층 분석 주제 검색됨 (🔊 도슨트 · 🪜 4단계 디딤돌 · 🎮 인라인 실험실 지원)</div>
+      <div class="flex items-center gap-3">
+        <a href="video_board.html" class="text-[#be123c] font-bold no-underline hover:underline">🎬 @min7014_ai 설명 영상 게시판 ➔</a>
+        <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="text-secondary font-bold no-underline hover:underline">🌐 민은기 선생님의 수학자료실 본관 ➔</a>
+      </div>
     </div>
   </div>
 </div>
@@ -1564,64 +1671,94 @@ function toggleMathStory() {
   }
 
   // ══════════════════════════════════════════════════════════════
-  // 🎲 7대 핵심 동적 기하 걸작 (min7014 100% 무결성 실시간 연계)
+  // 🎲 12대 핵심 동적 기하 · 시각적 증명 걸작 (min7014.github.io 심층 연계)
   // ══════════════════════════════════════════════════════════════
   var FEATURED_GEOGEBRA_PICKS = [
     {
-      id: "ellipse_reflection",
+      id: "pythagoras_tree",
+      domain: "유클리드 평면기하 · 프랙탈",
+      breadcrumb: "내용순 배열 ▸ 피타고라스 정리 ▸ 피타고라스 나무",
       title: {
-        ko: "타원에서의 빛 반사 (광학적 성질)",
+        ko: "피타고라스 나무 (프랙탈 기하와 면적 보존의 기적)",
+        en: "Pythagoras Tree (Fractal Geometry & Area Invariance)"
+      },
+      desc: {
+        ko: "직각삼각형의 세 변 위에 정사각형을 무한히 올려나가는 프랙탈 트리입니다. GeoGebra 동적 조작으로 가지의 각도를 실시간 회전시키며 각 단계별 넓이 합 $a^2+b^2=c^2$ 보존 법칙을 관찰해 보세요.",
+        en: "A mathematical fractal tree constructed by recursively attaching squares onto a right triangle. Rotate the branch angle dynamically in GeoGebra to verify area invariance at every stage."
+      },
+      tip: "직각삼각형의 세 변 위에 닮은 도형(정사각형·반원·정삼각형)을 올리면 언제나 작은 두 넓이의 합이 가장 큰 넓이와 같습니다.",
+      applet: "https://www.geogebra.org/m/xK2WwJtQ",
+      pdf: "https://min7014.github.io/2025/2025013001.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20250130001.html",
+      yt: "https://youtu.be/bQO7fnT6aDU"
+    },
+    {
+      id: "ellipse_reflection",
+      domain: "이차곡선·원뿔곡선 · 광학",
+      breadcrumb: "내용순 배열 ▸ 이차곡선 ▸ 타원에서의 빛 반사",
+      title: {
+        ko: "타원에서의 빛 반사 (광학적 성질과 최단 경로)",
         en: "Reflection of Light on an Ellipse (Optical Property)"
       },
       desc: {
-        ko: "한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. GeoGebra 앱렛으로 장축과 초점을 직접 조작하며 광학적 반사 원리를 시각적으로 체험해 보세요.",
+        ko: "한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다. 접선에 대한 초점의 대칭점이 일직선(최단 거리 $2a$)을 이루는 원리를 시각적으로 체험해 보세요.",
         en: "A ray of light emitted from one focus reflects off the ellipse and always converges at the other focus. Drag the focal points in GeoGebra to explore this optical principle interactively."
       },
+      tip: "타원 위의 점 $P$에서의 접선 문제가 나오면, 두 초점 $F, F'$과 접점 $P$를 잇고 각의 이등분선 성질($\overline{PF}+\overline{PF'}=2a$)을 즉시 적용하세요.",
       applet: "https://www.geogebra.org/m/jggpufc4",
       pdf: "https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0",
       web: "https://min7014.github.io/math20220515007.html",
       yt: "https://youtu.be/AVFodL71fSk"
     },
     {
-      id: "pythagoras_tree",
+      id: "ceva_theorem",
+      domain: "유클리드 평면기하 · 공점선",
+      breadcrumb: "내용순 배열 ▸ 평면기하 ▸ 체바의 정리",
       title: {
-        ko: "피타고라스 나무 (프랙탈 기하와 면적 보존)",
-        en: "Pythagoras Tree (Fractal Geometry & Area Invariance)"
+        ko: "체바의 정리 (높이가 같은 삼각형 넓이 비와 한 점 교차)",
+        en: "Ceva's Theorem (Area Ratios & Concurrent Cevians)"
       },
       desc: {
-        ko: "직각삼각형의 세 변 위에 정사각형을 무한히 올려나가는 프랙탈 트리입니다. GeoGebra 동적 조작으로 가지의 각도를 실시간 회전시키며 각 단계별 면적 보존 법칙을 관찰해 보세요.",
-        en: "A mathematical fractal tree constructed by recursively attaching squares onto a right triangle. Rotate the branch angle dynamically in GeoGebra to verify area invariance at every stage."
+        ko: "삼각형의 세 꼭짓점에서 마주 보는 변에 그은 세 선분이 한 점 $P$에서 만날 때, 밑변 분할 비의 곱이 정확히 $1$이 되는 이유를 색칠된 삼각형의 넓이 비로 한눈에 증명합니다.",
+        en: "Visual proof of Ceva's Theorem using colored triangle area ratios sharing a common base, showing why three concurrent cevians always yield a product of 1."
       },
+      tip: "삼각형 내부에 세 선분이 한 점에서 만나는 기하 문제가 나오면, 밑변의 길이 비를 넓이 비로 바꾸는 체바의 정리 순환식을 떠올리세요.",
       applet: "https://www.geogebra.org/m/xK2WwJtQ",
-      pdf: "https://min7014.github.io/2025/2025013001.pdf#toolbar=0&view=Fit&scrollbar=0",
-      web: "https://min7014.github.io/math20250130001.html",
-      yt: "https://youtu.be/vks-ZgCfXpw"
+      pdf: "https://min7014.github.io/2025/2025012901.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20250129001.html",
+      yt: "https://youtu.be/W_AWH-Gk89w"
     },
     {
-      id: "parabola_reflection",
+      id: "menelaus_theorem",
+      domain: "유클리드 평면기하 · 할선",
+      breadcrumb: "내용순 배열 ▸ 평면기하 ▸ 메넬라우스의 정리",
       title: {
-        ko: "포물선에서의 빛 반사 (파라볼라 안테나 원리)",
-        en: "Reflection of Light on a Parabola (Parabolic Mirror)"
+        ko: "메넬라우스의 정리 (보조 평행선 작도와 닮음비 연쇄 상쇄)",
+        en: "Menelaus' Theorem (Auxiliary Parallel Line & Similarity)"
       },
       desc: {
-        ko: "축에 평행하게 입사한 빛은 포물선에 반사되어 초점에 완벽히 집광됩니다. 접선과 준선, 초점이 이루는 기하학적 대칭성을 슬라이더로 조작하며 확인해 보세요.",
-        en: "Parallel incoming light rays reflecting off a parabola always converge precisely at the focal point. Manipulate the GeoGebra slider to explore the tangent and focal optical geometry."
+        ko: "삼각형의 세 변(또는 연장선)을 가로지르는 직선이 만드는 선분 비의 곱이 $1$이 되는 원리를 단 한 줄의 보조 평행선 작도로 명쾌하게 증명합니다.",
+        en: "Constructing a single auxiliary parallel line creates two pairs of AA similar triangles whose ratios cancel in a clean domino chain."
       },
-      applet: "https://www.geogebra.org/m/UTyJNKeb",
-      pdf: "https://min7014.github.io/2022/2022042501.pdf#toolbar=0&view=Fit&scrollbar=0",
-      web: "https://min7014.github.io/math20220425001.html",
-      yt: "https://youtu.be/nsXEim6SuIA"
+      tip: "삼각형을 관통하는 직선과 변의 내분·외분점이 등장하면 꼭짓점을 지나고 할선에 평행한 보조선을 그어 닮음비를 세우세요.",
+      applet: "https://www.geogebra.org/m/xK2WwJtQ",
+      pdf: "https://min7014.github.io/2025/2025012801.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20250128001.html",
+      yt: "https://youtu.be/7zD66SWWceg"
     },
     {
       id: "dandelin_ellipse",
+      domain: "이차곡선·원뿔곡선 · 3D 단델린 구",
+      breadcrumb: "내용순 배열 ▸ 이차곡선 ▸ 단델린 구와 타원의 정의",
       title: {
-        ko: "단델린 구: 원뿔로부터 타원의 정의 유도",
+        ko: "단델린 구: 원뿔 단면으로부터 타원의 정의 유도",
         en: "Dandelin Spheres: Deriving the Ellipse from a Cone"
       },
       desc: {
-        ko: "원뿔을 평면으로 자를 때 내접하는 두 단델린 구가 평면과 만나는 접점이 바로 초점입니다. 3D 입체 기하학을 통해 두 초점까지 거리의 합이 일정함을 시각적으로 증명합니다.",
+        ko: "원뿔을 평면으로 자를 때 내접하는 두 단델린 구가 평면과 만나는 접점이 바로 초점입니다. 구 밖의 한 점에서 그은 두 접선 길이가 같음을 이용해 $\overline{PF}+\overline{PF'}=\text{일정}$을 3D로 증명합니다.",
         en: "When a cone is sliced by a plane, the two inscribed Dandelin spheres touch the plane at the two foci, proving that the sum of distances from any point on the ellipse is strictly constant."
       },
+      tip: "원뿔과 구가 접하는 공간도형 킬러 문항에서는 '구 밖의 한 점에서 구에 그은 모든 접선의 길이는 같다'는 단델린 불변량을 핵심 열쇠로 쓰세요.",
       applet: "https://www.geogebra.org/m/btgeds5j",
       pdf: "https://min7014.github.io/2022/2022101601.pdf#toolbar=0&view=Fit&scrollbar=0",
       web: "https://min7014.github.io/math20221016001.html",
@@ -1629,14 +1766,17 @@ function toggleMathStory() {
     },
     {
       id: "dandelin_parabola",
+      domain: "이차곡선·원뿔곡선 · 3D 단델린 구",
+      breadcrumb: "내용순 배열 ▸ 이차곡선 ▸ 단델린 구와 포물선의 정의",
       title: {
-        ko: "단델린 구: 원뿔로부터 포물선의 정의 유도",
+        ko: "단델린 구: 원뿔 단면으로부터 포물선의 정의 유도",
         en: "Dandelin Spheres: Deriving the Parabola from a Cone"
       },
       desc: {
-        ko: "원뿔의 모선과 평행한 평면으로 자를 때 생기는 단면이 포물선입니다. 내접 구와 평면의 접점(초점) 및 평면과 구의 접촉원(준선) 사이의 거리가 같음을 3차원 기하학으로 입증합니다.",
+        ko: "원뿔의 모선과 평행한 평면으로 자를 때 생기는 단면이 포물선입니다. 내접 구와 평면의 접점(초점) 및 평면과 구의 접촉원 평면(준선) 사이의 거리가 같음을 3차원 기하학으로 입증합니다.",
         en: "Slicing a cone parallel to a generator creates a parabola. The inscribed Dandelin sphere visually proves that the distance to the focus equals the distance to the directrix."
       },
+      tip: "포물선 위의 점 $P$가 주어지면 지체 없이 준선에 수선의 발 $H$를 내려 $\overline{PF}=\overline{PH}$ 이등변삼각형을 완성하세요.",
       applet: "https://www.geogebra.org/m/zfwgegsy",
       pdf: "https://min7014.github.io/2022/2022101602.pdf#toolbar=0&view=Fit&scrollbar=0",
       web: "https://min7014.github.io/math20221016002.html",
@@ -1644,37 +1784,116 @@ function toggleMathStory() {
     },
     {
       id: "dandelin_hyperbola",
+      domain: "이차곡선·원뿔곡선 · 3D 단델린 구",
+      breadcrumb: "내용순 배열 ▸ 이차곡선 ▸ 단델린 구와 쌍곡선의 정의",
       title: {
-        ko: "단델린 구: 원뿔로부터 쌍곡선의 정의 유도",
+        ko: "단델린 구: 맞꼭지 원뿔로부터 쌍곡선의 정의 유도",
         en: "Dandelin Spheres: Deriving the Hyperbola from a Cone"
       },
       desc: {
-        ko: "맞꼭지 원뿔을 자를 때 내접하는 두 단델린 구를 통해, 곡선 위의 점에서 두 초점에 이르는 거리의 차가 모선의 길이로 일정함을 공간 기하학으로 명쾌하게 증명합니다.",
+        ko: "맞꼭지 원뿔을 자를 때 내접하는 두 단델린 구를 통해, 곡선 위의 점에서 두 초점에 이르는 거리의 차 $|\overline{PF}-\overline{PF'}|$가 두 구의 접촉원 사이 모선 길이로 일정함을 증명합니다.",
         en: "Slicing a double cone yields a hyperbola. Two Dandelin spheres prove that the absolute difference between distances to the two foci is invariant."
       },
+      tip: "쌍곡선 문제에서는 두 초점까지의 거리 차 $|\overline{PF}-\overline{PF'}|=2a$와 점근선 직각삼각형($c^2=a^2+b^2$)을 동시에 활용하세요.",
       applet: "https://www.geogebra.org/m/aben7qgm",
       pdf: "https://min7014.github.io/2022/2022101603.pdf#toolbar=0&view=Fit&scrollbar=0",
       web: "https://min7014.github.io/math20221016003.html",
       yt: "https://youtu.be/plmFRLIG22U"
     },
     {
+      id: "parabola_reflection",
+      domain: "이차곡선·원뿔곡선 · 광학",
+      breadcrumb: "내용순 배열 ▸ 이차곡선 ▸ 포물선에서의 빛 반사",
+      title: {
+        ko: "포물선에서의 빛 반사 (파라볼라 안테나 집광 원리)",
+        en: "Reflection of Light on a Parabola (Parabolic Mirror)"
+      },
+      desc: {
+        ko: "축에 평행하게 입사한 빛은 포물선에 반사되어 초점 $F$에 완벽히 집광됩니다. 포물선의 접선이 $\angle FPH$를 이등분하여 마름모 대칭을 이루는 기하학적 원리를 확인해 보세요.",
+        en: "Parallel incoming light rays reflecting off a parabola always converge precisely at the focal point. Manipulate the GeoGebra slider to explore the tangent and focal optical geometry."
+      },
+      tip: "포물선 위의 점 $P(x_1, y_1)$에서의 접선이 $x$축과 만나는 점 $T(-x_1, 0)$는 초점 $F$와 함께 항상 $\overline{FP}=\overline{FT}$인 이등변삼각형을 이룹니다.",
+      applet: "https://www.geogebra.org/m/UTyJNKeb",
+      pdf: "https://min7014.github.io/2022/2022042501.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20220425001.html",
+      yt: "https://youtu.be/nsXEim6SuIA"
+    },
+    {
       id: "secant_to_tangent",
+      domain: "미분·도함수 · 극한 시각화",
+      breadcrumb: "내용순 배열 ▸ 미분 ▸ 접선에 접근하는 할선들",
       title: {
         ko: "접선에 접근하는 할선들 (미분계수의 시각적 극한)",
         en: "Secant Lines Approaching Tangent (Visual Limit of Derivative)"
       },
       desc: {
-        ko: "곡선 위의 고정점으로 동점이 다가갈 때 두 점을 잇는 할선의 평균변화율이 순간변화율(접선)로 합일되는 미분의 핵심 극한 과정을 GeoGebra의 동적 회전으로 관찰해 보세요.",
+        ko: "곡선 위의 고정점으로 동점이 다가갈 때 두 점을 잇는 할선의 평균변화율이 순간변화율(접선의 기울기 $f'(a)$)로 수렴하는 미분의 본질을 동적 회전으로 관찰해 보세요.",
         en: "As a moving point approaches a fixed point along a curve, secant lines rotate continuously to unite into the tangent line, demonstrating the fundamental limit of the derivative."
       },
+      tip: "극한식 $\lim_{x\to a}\frac{f(x)-f(a)}{x-a}$를 만나면 단순 대수 계산보다 두 점 $(a,f(a)), (x,f(x))$를 잇는 할선의 기울기가 접선으로 회전하는 그림을 먼저 그리세요.",
       applet: "https://www.geogebra.org/m/dn5dqdxv",
       pdf: "https://min7014.github.io/2023/2023081301.pdf#toolbar=0&view=Fit&scrollbar=0",
       web: "https://min7014.github.io/math20230813001.html",
       yt: "https://youtu.be/aiT4cVw99Do"
+    },
+    {
+      id: "regular_heptagon_knot",
+      domain: "유클리드 평면기하 · 종이접기 작도",
+      breadcrumb: "내용순 배열 ▸ 다각형과 작도 ▸ 정칠각형 종이띠 매듭",
+      title: {
+        ko: "정칠각형 종이띠 매듭 원리 (자·컴퍼스 불능 작도의 해법)",
+        en: "Regular Heptagon Paper Strip Knot (Origami Construction)"
+      },
+      desc: {
+        ko: "눈금 없는 자와 컴퍼스만으로는 작도할 수 없는 정칠각형($\cos\frac{2\pi}{7}$의 3차방정식)을 일정한 폭의 종이띠 매듭 하나로 완벽한 대칭 정칠각형으로 접어내는 기하학적 원리입니다.",
+        en: "Discover how tying a flat paper strip into a single overhand knot naturally solves the cubic angle-trisection equation to form an exact regular heptagon."
+      },
+      tip: "정다각형과 종이접기 문제에서는 접힌 선(대칭축)을 기준으로 합동인 사다리꼴과 등변사다리꼴의 대각선 길이가 같음을 추적하세요.",
+      applet: "https://www.geogebra.org/u/min7014",
+      pdf: "https://min7014.github.io/2025/2025012601.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20250126001.html",
+      yt: "https://youtu.be/Mq6s2JLV9mQ"
+    },
+    {
+      id: "ptolemy_theorem",
+      domain: "유클리드 평면기하 · 원에 내접하는 사각형",
+      breadcrumb: "내용순 배열 ▸ 원과 비례 ▸ 톨레미의 정리",
+      title: {
+        ko: "톨레미의 정리 (원에 내접하는 사각형의 대각선과 변의 곱)",
+        en: "Ptolemy's Theorem (Cyclic Quadrilaterals & Similarity)"
+      },
+      desc: {
+        ko: "원에 내접하는 사각형에서 두 대각선 길이의 곱은 마주 보는 두 쌍의 대변 길이의 곱의 합($\overline{AC}\cdot\overline{BD}=\overline{AB}\cdot\overline{CD}+\overline{BC}\cdot\overline{DA}$)과 같음을 회전 닮음 보조선으로 증명합니다.",
+        en: "Visual proof of Ptolemy's Theorem using an angle-preserving auxiliary line to split the diagonal into two pairs of similar triangles."
+      },
+      tip: "원에 내접하는 사각형과 정삼각형이 결합된 문제에서는 톨레미의 정리를 적용하면 $\overline{PC}=\overline{PA}+\overline{PB}$를 1초 만에 얻을 수 있습니다.",
+      applet: "https://www.geogebra.org/u/min7014",
+      pdf: "https://min7014.github.io/2024/2024122501.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20241225001.html",
+      yt: "https://youtu.be/yS2_vD0C9RY"
+    },
+    {
+      id: "viviani_theorem",
+      domain: "유클리드 평면기하 · 넓이 분할 불변량",
+      breadcrumb: "내용순 배열 ▸ 삼각형 ▸ 비비아니 정리",
+      title: {
+        ko: "비비아니 정리 (정삼각형 내부 점에서 세 변까지 수선의 합)",
+        en: "Viviani's Theorem (Sum of Distances in an Equilateral Triangle)"
+      },
+      desc: {
+        ko: "정삼각형 내부의 어느 점 $P$를 잡더라도 세 변에 내린 수선의 길이의 합($h_1+h_2+h_3$)은 정삼각형 전체 높이 $H$와 항상 같음을 세 삼각형의 넓이 분할과 등적변형으로 증명합니다.",
+        en: "For any interior point P of an equilateral triangle, the sum of perpendicular distances to the three sides equals the altitude H of the triangle."
+      },
+      tip: "정삼각형이나 이등변삼각형 내부의 점에서 변까지 내린 수선의 합을 묻는 문제는, 점 $P$와 세 꼭짓점을 이어 전체 넓이를 분할하는 등식을 세우세요.",
+      applet: "https://www.geogebra.org/u/min7014",
+      pdf: "https://min7014.github.io/2024/2024120301.pdf#toolbar=0&view=Fit&scrollbar=0",
+      web: "https://min7014.github.io/math20241203001.html",
+      yt: "https://youtu.be/8d2bZ8U0a_E"
     }
   ];
 
   var currentFeaturedIndex = new Date().getDate() % FEATURED_GEOGEBRA_PICKS.length;
+  var _currentTodayInlineMode = null;
 
   function renderTodayGeoGebra() {
     var p = FEATURED_GEOGEBRA_PICKS[currentFeaturedIndex];
@@ -1682,16 +1901,95 @@ function toggleMathStory() {
     var lang = (window.MatheduI18n && window.MatheduI18n.getLanguage) ? window.MatheduI18n.getLanguage() : 'ko';
     var tEl = document.getElementById('todayGgbTitle');
     var dEl = document.getElementById('todayGgbDesc');
+    var domEl = document.getElementById('todayGgbDomain');
+    var bcEl = document.getElementById('todayGgbBreadcrumb');
+    var cntEl = document.getElementById('todayGgbCounter');
+    var tipEl = document.getElementById('todayGgbTip');
     var aBtn = document.getElementById('btnTodayGgbApplet');
     var pBtn = document.getElementById('btnTodayGgbPdf');
     var wBtn = document.getElementById('btnTodayGgbWeb');
+    var yBtn = document.getElementById('btnTodayGgbYt');
 
-    if (tEl) tEl.textContent = (p.title && p.title[lang]) || p.title.ko;
-    if (dEl) dEl.textContent = (p.desc && p.desc[lang]) || p.desc.ko;
+    if (tEl) tEl.innerHTML = (p.title && p.title[lang]) || p.title.ko;
+    if (dEl) dEl.innerHTML = (p.desc && p.desc[lang]) || p.desc.ko;
+    if (domEl && p.domain) domEl.textContent = '📐 ' + p.domain;
+    if (bcEl && p.breadcrumb) bcEl.textContent = p.breadcrumb;
+    if (cntEl) cntEl.textContent = '(' + (currentFeaturedIndex + 1) + ' / ' + FEATURED_GEOGEBRA_PICKS.length + ')';
+    if (tipEl && p.tip) tipEl.innerHTML = '💡 <b>수능 실전 보조선 팁</b>: ' + p.tip;
     if (aBtn) aBtn.href = p.applet;
     if (pBtn) pBtn.href = p.pdf;
     if (wBtn) wBtn.href = p.web;
+    if (yBtn && p.yt) yBtn.href = p.yt;
+
+    if (_currentTodayInlineMode) {
+      updateTodayInlineIframe(_currentTodayInlineMode);
+    }
+    var cardWrap = document.getElementById('min7014DeepCurriculumSection');
+    if (cardWrap && window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise([cardWrap]).catch(function() {});
+    }
   }
+
+  function updateTodayInlineIframe(mode) {
+    var p = FEATURED_GEOGEBRA_PICKS[currentFeaturedIndex];
+    var wrap = document.getElementById('todayGgbInlineFrameWrap');
+    var ifr = document.getElementById('todayGgbInlineIframe');
+    var lbl = document.getElementById('todayGgbInlineLabel');
+    if (!p || !wrap || !ifr) return;
+    wrap.style.display = 'flex';
+    if (mode === 'pdf') {
+      ifr.src = p.pdf;
+      if (lbl) lbl.textContent = '📄 인라인 단계별 플립북 증명 PDF — ' + (p.title.ko || '');
+    } else {
+      var srcUrl = p.applet;
+      if (srcUrl && srcUrl.indexOf('geogebra.org/m/') !== -1) {
+        var matId = srcUrl.split('geogebra.org/m/')[1].split(/[?#]/)[0];
+        srcUrl = 'https://www.geogebra.org/material/iframe/id/' + matId + '/width/900/height/430/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false';
+      }
+      ifr.src = srcUrl;
+      if (lbl) lbl.textContent = '🎮 실시간 동적 기하 실험실 (마우스로 점을 드래그해 보세요) — ' + (p.title.ko || '');
+    }
+  }
+
+  window.toggleTodayInlineViewer = function(mode) {
+    var wrap = document.getElementById('todayGgbInlineFrameWrap');
+    if (!wrap) return;
+    if (wrap.style.display !== 'none' && _currentTodayInlineMode === mode) {
+      window.closeTodayInlineViewer();
+      return;
+    }
+    _currentTodayInlineMode = mode;
+    updateTodayInlineIframe(mode);
+  };
+
+  window.closeTodayInlineViewer = function() {
+    _currentTodayInlineMode = null;
+    var wrap = document.getElementById('todayGgbInlineFrameWrap');
+    var ifr = document.getElementById('todayGgbInlineIframe');
+    if (wrap) wrap.style.display = 'none';
+    if (ifr) ifr.src = 'about:blank';
+  };
+
+  window.speakTodayGeoGebra = function(btnEl) {
+    var p = FEATURED_GEOGEBRA_PICKS[currentFeaturedIndex];
+    if (!p) return;
+    var script = (p.title.ko || '') + '. ' + (p.desc.ko || '').replace(/\$[^\$]*\$/g, '') + ' ' + (p.tip || '').replace(/\$[^\$]*\$/g, '');
+    if (window.MatheduVoiceTeacher && window.MatheduVoiceTeacher.speakRaw) {
+      window.MatheduVoiceTeacher.speakRaw(script, p.title.ko || '오늘의 시각적 증명', btnEl);
+    }
+  };
+
+  window.openMin7014Domain = function(domainTag) {
+    window.openMin7014ExplorerModal();
+    var container = document.getElementById('min7014ModalChips');
+    var targetBtn = null;
+    if (container) {
+      container.querySelectorAll('.topic-chip').forEach(function(b) {
+        if (b.getAttribute('data-tag') === domainTag) targetBtn = b;
+      });
+    }
+    window.setMin7014Chip(domainTag, targetBtn);
+  };
 
   window.rotateTodayGeoGebra = function(delta) {
     var n = FEATURED_GEOGEBRA_PICKS.length;
@@ -1886,6 +2184,26 @@ function toggleMathStory() {
     }
   };
 
+  window.openMin7014ForProblemTitle = function(rawTitle) {
+    var clean = String(rawTitle || '').replace(/\$[^\$]*\$/g, ' ').replace(/\[[^\]]*\]/g, ' ');
+    var mathKeywords = ['타원', '포물선', '쌍곡선', '단델린', '피타고라스', '원주각', '접선', '내심', '외심', '무게중심', '수심', '방심', '체바', '메넬라우스', '톨레미', '아폴로니우스', '비비아니', '스튜어트', '파푸스', '정칠각형', '정오각형', '황금비', '작도', '정사영', '삼수선', '이면각', '벡터', '내적', '미분', '도함수', '평균값', '롤의 정리', '변곡점', '극대', '극소', '구분구적', '정적분', '사이클로이드', '극한', '연속', '사인법칙', '코사인법칙', '삼각함수', '삼각비', '지수', '로그', '등차', '등비', '수열', '시그마', '귀납', '정규분포', '이항분포', '확률', '조합', '파스칼', '대칭', '회전', '산술', '기하평균', '코시', '복소수', '나머지정리', '인수분해', '이차함수', '합성함수', '역함수'];
+    var picked = '';
+    for (var i = 0; i < mathKeywords.length; i++) {
+      if (clean.indexOf(mathKeywords[i]) !== -1) {
+        picked = mathKeywords[i];
+        break;
+      }
+    }
+    if (!picked) {
+      var words = clean.replace(/[^가-힣a-zA-Z0-9\s]/g, ' ').trim().split(/\s+/).filter(function(w) { return w.length >= 2 && !/^(학년도|모평|수능|학평|고1|고2|고3|문항|문제|구하기|값은)$/.test(w); });
+      picked = words[0] || '';
+    }
+    window.openMin7014ExplorerModal();
+    var inp = document.getElementById('min7014SearchInput');
+    if (inp) inp.value = picked;
+    window.setMin7014Chip('', document.querySelector('#min7014ModalChips .topic-chip[data-tag=""]'));
+  };
+
   window.filterMin7014Materials = function() {
     if (!_min7014Materials) return;
     var q = (document.getElementById('min7014SearchInput')?.value || '').trim().toLowerCase();
@@ -1896,44 +2214,80 @@ function toggleMathStory() {
     var matched = _min7014Materials.filter(function(item) {
       var title = (item.title || '').toLowerCase();
       var subKo = (item.sub_domain_ko || item.category || '').toLowerCase();
+      var bc = (item.breadcrumb || '').toLowerCase();
       var core = (item.core_concept || '').toLowerCase();
       var tagStr = (item.tags || []).join(' ').toLowerCase();
-      var corpus = title + ' ' + subKo + ' ' + core + ' ' + tagStr;
+      var corpus = title + ' ' + subKo + ' ' + bc + ' ' + core + ' ' + tagStr;
       var matchesQ = !q || corpus.includes(q);
-      var matchesTag = !_min7014ActiveTag || subKo.includes(_min7014ActiveTag.toLowerCase()) || new RegExp(_min7014ActiveTag, 'i').test(corpus);
+      var matchesTag = true;
+      if (_min7014ActiveTag === '__CONSTRUCTION__') {
+        matchesTag = !!item.is_construction || bc.includes('작도') || title.includes('작도');
+      } else if (_min7014ActiveTag === '__YOUTUBE_AI__') {
+        matchesTag = !!(item.youtube_ko || item.youtube_en || item.shorts_ko || item.shorts_en);
+      } else if (_min7014ActiveTag) {
+        matchesTag = subKo.includes(_min7014ActiveTag.toLowerCase()) || corpus.includes(_min7014ActiveTag.toLowerCase());
+      }
       return matchesQ && matchesTag;
     });
 
-    if (countEl) countEl.textContent = matched.length;
+    if (countEl) countEl.textContent = matched.length.toLocaleString();
 
     if (matched.length === 0) {
-      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">검색어에 일치하는 수학자료실 주제가 없습니다. 다른 검색어를 입력해보세요.</div>';
+      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">검색어에 일치하는 수학자료실 주제가 없습니다. 다른 검색어나 단원 칩을 선택해 보세요.</div>';
       return;
     }
 
-    var displayList = matched.slice(0, 40);
+    var displayList = matched.slice(0, 45);
     window._min7014CurrentDisplayed = displayList;
     var h = '';
     displayList.forEach(function(m, idx) {
       var title = escapeHtml(m.title || '제목 없음');
       var subKo = escapeHtml(m.sub_domain_ko || m.category || '동적 기하·시각적 증명');
+      var bc = escapeHtml(m.breadcrumb || '');
       var core = escapeHtml(m.core_concept || '');
       var vis = escapeHtml(m.visual_summary || '');
       var tip = escapeHtml((m.solving_tips && m.solving_tips[0]) || '');
+      var steps = Array.isArray(m.scaffolding_steps) ? m.scaffolding_steps : [];
       var ggbUrl = m.geogebra || '';
       var algeoUrl = m.algeomath || '';
       var pdfUrl = m.pdf || '';
       var ytUrl = m.youtube || '';
+      var ytKo = m.youtube_ko || '';
+      var ytEn = m.youtube_en || '';
+      var shKo = m.shorts_ko || '';
+      var colabUrl = m.colab || '';
       var mainUrl = m.url || 'https://min7014.github.io/';
+      var isConst = !!m.is_construction;
+      var years = Array.isArray(m.school_years) && m.school_years.length ? m.school_years.join(', ') + '학년도 수업' : '';
 
       h += '<div class="bg-surface-container-lowest border border-surface-glass-border rounded-xl p-3.5 px-4 flex flex-col gap-2 shadow-sm hover:border-secondary/40 transition-colors">';
       h += '  <div class="flex items-start justify-between gap-3 flex-wrap">';
       h += '    <div class="flex-1 min-w-[220px]">';
-      h += '      <span class="inline-block bg-secondary/10 text-secondary px-2 py-0.5 rounded-md font-label-badge text-[11px] font-bold mb-1">📂 ' + subKo + '</span>';
+      h += '      <div class="flex items-center gap-1.5 flex-wrap mb-1">';
+      h += '        <span class="inline-block bg-secondary/10 text-secondary px-2 py-0.5 rounded-md font-label-badge text-[11px] font-bold">📂 ' + subKo + '</span>';
+      if (bc && bc !== subKo) {
+        h += '        <span class="inline-block bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-md text-[10.5px] font-semibold">🧭 ' + bc + '</span>';
+      }
+      if (isConst) {
+        h += '        <span class="inline-block bg-[#f3e8ff] text-[#6d28d9] px-2 py-0.5 rounded-md text-[10.5px] font-bold">📏 자·컴퍼스 작도</span>';
+      }
+      if (years) {
+        h += '        <span class="inline-block bg-status-emerald/12 text-status-emerald px-2 py-0.5 rounded-md text-[10.5px] font-semibold">🏫 ' + escapeHtml(years) + '</span>';
+      }
+      h += '      </div>';
       h += '      <a href="' + escapeHtml(mainUrl) + '" target="_blank" rel="noopener" class="text-on-surface hover:text-secondary font-headline-sm text-[15px] font-bold no-underline block leading-snug">' + title + '</a>';
       h += '    </div>';
       h += '    <div class="flex gap-1.5 items-center flex-wrap">';
       h += '      <button type="button" onclick="window.speakMin7014Item(' + idx + ', this)" class="mathedu-voice-btn">🔊 음성 도슨트</button>';
+      if (ytKo) {
+        h += '      <a href="' + escapeHtml(ytKo) + '" target="_blank" rel="noopener" class="bg-[#ffe4e6] hover:bg-[#fecdd3] text-[#be123c] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">🔥 @min7014_ai 1080p</a>';
+      }
+      if (ytEn) {
+        h += '      <a href="' + escapeHtml(ytEn) + '" target="_blank" rel="noopener" class="bg-[#dbeafe] hover:bg-[#bfdbfe] text-[#1d4ed8] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">🇺🇸 EN 1080p</a>';
+      }
+      if (shKo) {
+        h += '      <a href="' + escapeHtml(shKo) + '" target="_blank" rel="noopener" class="bg-[#fef3c7] hover:bg-[#fde68a] text-[#b45309] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📱 #Shorts</a>';
+      }
       if (ggbUrl) {
         h += '      <a href="' + escapeHtml(ggbUrl) + '" target="_blank" rel="noopener" class="bg-secondary/10 hover:bg-secondary/20 text-secondary px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">🎮 GeoGebra</a>';
       }
@@ -1941,20 +2295,33 @@ function toggleMathStory() {
         h += '      <a href="' + escapeHtml(algeoUrl) + '" target="_blank" rel="noopener" class="bg-status-emerald/15 hover:bg-status-emerald/25 text-status-emerald px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📐 AlgeoMath</a>';
       }
       if (pdfUrl) {
-        h += '      <a href="video_studio.html?pdf=' + encodeURIComponent(pdfUrl) + '" class="bg-[#eef2ff] hover:bg-[#e0e7ff] text-[#3730a3] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">🎬 다국어 영상 강의</a>';
+        h += '      <a href="video_studio.html?pdf=' + encodeURIComponent(pdfUrl) + '" class="bg-[#eef2ff] hover:bg-[#e0e7ff] text-[#3730a3] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">🎬 다국어 스튜디오</a>';
         h += '      <a href="' + escapeHtml(pdfUrl) + '" target="_blank" rel="noopener" class="bg-status-amber/15 hover:bg-status-amber/25 text-[#B45309] px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📄 증명 PDF</a>';
       }
-      if (ytUrl) {
-        h += '      <a href="' + escapeHtml(ytUrl) + '" target="_blank" rel="noopener" class="bg-error-container/60 hover:bg-error-container text-error px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">▶️ 영상</a>';
+      if (ytUrl && !ytKo) {
+        h += '      <a href="' + escapeHtml(ytUrl) + '" target="_blank" rel="noopener" class="bg-error-container/60 hover:bg-error-container text-error px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">▶️ 원문 영상</a>';
+      }
+      if (colabUrl) {
+        h += '      <a href="' + escapeHtml(colabUrl) + '" target="_blank" rel="noopener" class="bg-surface-container hover:bg-surface-container-high text-on-surface px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-bold no-underline">📓 Colab</a>';
       }
       h += '      <button type="button" onclick="window.searchProblemsFromMin7014(' + idx + ')" class="bg-surface-container hover:bg-surface-container-high text-on-surface px-2.5 py-1.5 rounded-lg font-body-sm text-xs font-semibold border-0 cursor-pointer">🔗 연관 기출</button>';
       h += '    </div>';
       h += '  </div>';
-      if (core || vis || tip) {
-        h += '  <div class="text-xs leading-relaxed p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant border border-surface-container">';
+      if (core || vis || tip || steps.length > 0) {
+        h += '  <div class="text-xs leading-relaxed p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant border border-surface-container flex flex-col gap-1">';
         if (core) h += '    <div><b class="text-on-surface">🎓 핵심 원리</b>: ' + core + '</div>';
-        if (vis) h += '    <div class="mt-0.5 text-secondary"><b>👁️ 시각적 증명</b>: ' + vis + '</div>';
-        if (tip) h += '    <div class="mt-1 pt-1 border-t border-surface-container text-[#B45309] font-semibold">💡 <b>수능 실전 보조선·풀이 팁</b>: ' + tip + '</div>';
+        if (vis) h += '    <div class="text-secondary"><b>👁️ 시각적 증명</b>: ' + vis + '</div>';
+        if (tip) h += '    <div class="pt-1 border-t border-surface-container text-[#B45309] font-semibold">💡 <b>수능 실전 보조선·풀이 팁</b>: ' + tip + '</div>';
+        if (steps.length > 0) {
+          h += '    <details class="mt-1 pt-1 border-t border-surface-container">';
+          h += '      <summary class="cursor-pointer font-bold text-secondary select-none">🪜 초등 직관 ➔ 수능 마스터 4단계 무장벽 디딤돌 보기 (' + steps.length + '단계)</summary>';
+          h += '      <ol class="m-0 mt-1.5 pl-4 flex flex-col gap-1 text-on-surface">';
+          steps.forEach(function(st) {
+            h += '        <li>' + escapeHtml(st) + '</li>';
+          });
+          h += '      </ol>';
+          h += '    </details>';
+        }
         h += '  </div>';
       }
       h += '</div>';
@@ -2250,6 +2617,7 @@ function toggleMathStory() {
       } else if (solved) {
         html += '    <span class="text-secondary font-bold">진행중</span>';
       }
+      html += '    <button type="button" onclick="openMin7014ForProblemTitle(this.getAttribute(\'data-title\'))" data-title="' + title + '" title="이 문제와 연결된 민은기 선생님의 수학자료실 시각적 증명·GeoGebra·보조선 팁 열기" class="px-2 py-0.5 rounded bg-secondary/10 hover:bg-secondary/20 text-secondary font-bold border-0 cursor-pointer text-[11px]">📐 개념증명</button>';
       html += '    <a href="' + itemOffHref + '" download title="' + tBtnOfflineTitle + '" class="text-on-surface-variant hover:text-on-surface no-underline">오프라인</a>';
       html += '    <button type="button" onclick="openClassCreatorModal(\'' + slug + '\')" class="text-on-surface-variant hover:text-secondary bg-transparent border-0 cursor-pointer p-0 text-xs">수업QR</button>';
       html += '    <button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';

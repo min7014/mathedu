@@ -1318,11 +1318,12 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
                 w_slug = u.split("/")[-1].replace(".html", "").strip()
                 if w_slug and w_slug not in matched_web_slugs:
                     matched_web_slugs.append(w_slug)
-                if yt_ko is not None:
+                if yt_ko is not None and it.get("youtube_ko") != yt_ko.strip():
                     it["youtube_ko"] = yt_ko.strip()
-                if yt_en is not None:
+                    changed = True
+                if yt_en is not None and it.get("youtube_en") != yt_en.strip():
                     it["youtube_en"] = yt_en.strip()
-                changed = True
+                    changed = True
         if changed:
             DEEP_JSON_PATH.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
 
