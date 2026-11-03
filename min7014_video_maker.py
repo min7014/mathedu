@@ -2341,6 +2341,363 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
+def generate_channel_banner_2560x1440():
+    """
+    [YouTube 공식 채널 배너(2560x1440, Safe Area 1546x423) 아트워크 자동 생성]
+    - TV(2560x1440), 데스크톱(2560x423), 태블릿(1855x423), 모바일(1546x423) 모든 기기에서
+      핵심 채널 타이틀과 기하 증명 카드가 잘리지 않고 선명하게 보이도록 작도합니다.
+    """
+    out_path = YT_PKG_DIR / "min7014_ai_channel_banner_2560x1440.png"
+    W, H = 2560, 1440
+    img = Image.new("RGB", (W, H), (10, 18, 38))
+    draw = ImageDraw.Draw(img)
+
+    # 배경 기하 격자 및 황금비 동심원 아트워크
+    for gx in range(0, W, 128):
+        draw.line([(gx, 0), (gx, H)], fill=(18, 32, 64), width=2)
+    for gy in range(0, H, 128):
+        draw.line([(0, gy), (W, gy)], fill=(18, 32, 64), width=2)
+
+    for rad in [280, 450, 680, 920]:
+        draw.ellipse((W // 2 - rad, H // 2 - rad, W // 2 + rad, H // 2 + rad), outline=(24, 48, 92), width=3)
+
+    # 데스크톱/모바일 안전 영역(Safe Zone: y=508..931, x=507..2053) 강조 카드
+    draw.rectangle((0, 500, W, 940), fill=(15, 23, 42))
+    draw.line([(0, 500), (W, 500)], fill=(56, 189, 248), width=4)
+    draw.line([(0, 940), (W, 940)], fill=(225, 29, 72), width=4)
+
+    # 좌·우측에 실제 대표 시각 증명 썸네일 카드 배치 (Safe Area 내부 좌우 날개)
+    thumb_left = YT_PKG_DIR / "math20250130001_ko_thumb.png"
+    thumb_right = YT_PKG_DIR / "2017090101_ko_thumb.png"
+    if thumb_left.exists():
+        try:
+            tl = Image.open(thumb_left).convert("RGB").resize((320, 180), Image.Resampling.LANCZOS)
+            draw.rounded_rectangle((526, 624, 854, 812), radius=14, fill=(56, 189, 248))
+            img.paste(tl, (530, 628))
+        except Exception:
+            pass
+    if thumb_right.exists():
+        try:
+            tr = Image.open(thumb_right).convert("RGB").resize((320, 180), Image.Resampling.LANCZOS)
+            draw.rounded_rectangle((1706, 624, 2034, 812), radius=14, fill=(225, 29, 72))
+            img.paste(tr, (1710, 628))
+        except Exception:
+            pass
+
+    f_badge = get_font_for_lang("en", 26, bold=True)
+    f_title = get_font_for_lang("ko", 54, bold=True)
+    f_sub = get_font_for_lang("en", 30, bold=True)
+    f_info = get_font_for_lang("ko", 26, bold=True)
+
+    # 중앙 안전 영역(x=880..1680) 핵심 타이포그래피
+    draw.rounded_rectangle((900, 538, 1660, 588), radius=24, fill=(225, 29, 72))
+    draw.text((932, 548), "🤖 VISUAL MATH PROOF VAULT · @min7014_ai", fill=(255, 255, 255), font=f_badge)
+
+    draw.text((895, 612), "민은기 선생님의 수학자료실_AI", fill=(255, 255, 255), font=f_title)
+    draw.text((895, 688), "Min's Math Lab AI · 1080p Visual Proofs", fill=(56, 189, 248), font=f_sub)
+    draw.text((895, 742), "📐 눈으로 깨치는 단계별 기하·대수·미적분 증명 (KO / EN)", fill=(251, 191, 36), font=f_info)
+    draw.text((895, 786), "🌐 https://min7014.github.io/ · 1,111+ Math Topics", fill=(203, 213, 225), font=f_info)
+
+    img.save(out_path, format="PNG", optimize=True)
+    print(f"🖼️ [Channel Banner 2560x1440 Generated] {out_path} ({out_path.stat().st_size // 1024} KB)")
+    return out_path
+
+
+def generate_channel_watermark_150x150():
+    """
+    [영상 우측 하단 상시 구독 워터마크(150x150 PNG) 자동 생성]
+    """
+    out_path = YT_PKG_DIR / "min7014_ai_watermark_150x150.png"
+    img = Image.new("RGBA", (150, 150), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    draw.rounded_rectangle((6, 6, 144, 144), radius=28, fill=(225, 29, 72, 235), outline=(255, 255, 255, 255), width=4)
+    f_top = get_font_for_lang("en", 22, bold=True)
+    f_mid = get_font_for_lang("ko", 28, bold=True)
+    f_bot = get_font_for_lang("en", 16, bold=True)
+
+    draw.text((26, 20), "📐 MATH", fill=(254, 240, 138, 255), font=f_top)
+    draw.text((22, 54), "구독하기", fill=(255, 255, 255, 255), font=f_mid)
+    draw.text((16, 100), "@min7014_ai", fill=(224, 242, 254, 255), font=f_bot)
+
+    img.save(out_path, format="PNG")
+    print(f"💧 [Channel Subscribe Watermark 150x150 Generated] {out_path}")
+    return out_path
+
+
+def optimize_youtube_channel_settings():
+    """
+    [@min7014_ai 유튜브 채널 내부 설정 전수 최적화 (YouTube Data API v3)]
+    1) 채널 브랜딩(채널 설명문, 핵심 검색 키워드 25+, 국가 KR, 기본 언어 ko, 비구독자 대표 예고편 영상) 설정
+    2) 전 세계 8개국어(ko, en, ja, zh-CN, es, fr, de, vi) 다국어 채널명·채널 설명(Localizations) 등록
+    3) 2560x1440 커스텀 채널 배너 아트 업로드 및 적용 (channelBanners.insert)
+    4) 전 영상 우측 하단 [구독하기] 인비디오 워터마크 적용 (watermarks.set)
+    5) 채널 홈 화면 섹션 레이아웃(한국어 정주행 재생목록, 영어 정주행 재생목록, 인기 업로드, 최신 업로드, 본 채널 @min7014 연계) 구성
+    6) 업로드된 10개 전체 영상에 1280x720 HD 커스텀 썸네일 일괄 적용 (thumbnails.set)
+    """
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+    from googleapiclient.http import MediaFileUpload
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
+    if not token_file.exists():
+        raise RuntimeError("youtube_token_min7014_ai.json not found.")
+    creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
+    if not creds.valid and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+        token_file.write_text(creds.to_json(), encoding="utf-8")
+
+    youtube = build("youtube", "v3", credentials=creds)
+
+    # 1. 커스텀 채널 배너(2560x1440) 생성 및 업로드
+    banner_url = None
+    try:
+        banner_path = generate_channel_banner_2560x1440()
+        b_resp = youtube.channelBanners().insert(
+            media_body=MediaFileUpload(str(banner_path), mimetype="image/png", resumable=True)
+        ).execute()
+        banner_url = b_resp.get("url")
+        print(f"✅ [Channel Banner Uploaded] {banner_url}")
+    except Exception as e:
+        print(f"⚠️ [Channel Banner Upload Notice]: {e}")
+
+    # 2. 채널 내부 브랜딩·키워드·대표 예고편·8개국어 다국어 프로필 업데이트
+    ch_desc_ko = (
+        "📐 [민은기 선생님의 수학자료실_AI (@min7014_ai)]\n"
+        "공식 암기 없이 눈으로 보고 직관적으로 깨치는 1080p 단계별 시각적 수학 증명(Visual Math Proof) 공식 AI 채널입니다.\n"
+        "민은기 선생님의 수학자료실(https://min7014.github.io/)의 3,400+ 동적 기하(GeoGebra)와 866개 단계별 플립북 증명 PDF를 한국어(KO)·영어(EN) 강의로 제공합니다.\n\n"
+        "📋 전체 1,111개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html\n"
+        "🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html\n"
+        "🌐 수학자료실 본관: https://min7014.github.io/\n"
+        "📺 본 채널(@min7014): https://www.youtube.com/@min7014\n\n"
+        "✨ [Min's Math Lab AI — Step-by-Step Visual Math Proofs]\n"
+        "Discover why Euclidean geometry, calculus, and algebra theorems hold true through step-by-step 1080p visual flipbook proofs and interactive GeoGebra applets!"
+    )
+    ch_keywords = (
+        '수학 기하학 "시각적 증명" "민은기 선생님의 수학자료실" min7014 min7014_ai '
+        '"피타고라스 정리" "메넬라우스의 정리" "체바의 정리" "수능 수학" "중등 기하" '
+        '"고등 수학" "영재고 수학" GeoGebra 알지오매스 "Visual Proof" "Geometry Proof" '
+        'Mathematics "Euclidean Geometry" "Proof Without Words" mathedu'
+    )
+
+    localizations = {
+        "ko": {
+            "title": "민은기 선생님의 수학자료실_AI",
+            "description": ch_desc_ko,
+        },
+        "en": {
+            "title": "Min's Math Lab AI (@min7014_ai)",
+            "description": (
+                "📐 Welcome to Min's Math Lab AI (@min7014_ai) — Official 1080p Step-by-Step Visual Mathematical Proofs Channel!\n"
+                "We transform 3,400+ interactive GeoGebra geometry constructions and 866 step-by-step flipbook proof PDFs from https://min7014.github.io/ into crystal-clear visual lectures.\n\n"
+                "📋 Full 1,111 Math Video Board: https://min7014.github.io/mathedu/video_board.html\n"
+                "🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html\n"
+                "📺 Main Channel (@min7014): https://www.youtube.com/@min7014"
+            ),
+        },
+        "ja": {
+            "title": "ミン・ウンギ先生の数学資料室_AI (@min7014_ai)",
+            "description": "公式の暗記ではなく、目で見て直感的に理解するステップバイステップの視覚的数学証明チャンネルです。https://min7014.github.io/mathedu/video_board.html",
+        },
+        "zh-CN": {
+            "title": "闵恩基老师的数学资料室_AI (@min7014_ai)",
+            "description": "无需死记硬背公式，通过分步翻页视觉动画直观理解欧几里得几何与数学定理证明！https://min7014.github.io/mathedu/video_board.html",
+        },
+        "es": {
+            "title": "Laboratorio de Matemáticas de Min AI (@min7014_ai)",
+            "description": "¡Demostraciones matemáticas visuales paso a paso en 1080p con GeoGebra y flipbooks interactivos! https://min7014.github.io/mathedu/video_board.html",
+        },
+        "fr": {
+            "title": "Laboratoire de Maths de Min AI (@min7014_ai)",
+            "description": "Preuves mathématiques visuelles étape par étape en 1080p (Géométrie euclidienne, Pythagore, Ceva, Ménélaüs). https://min7014.github.io/mathedu/video_board.html",
+        },
+        "de": {
+            "title": "Mins Mathe-Labor AI (@min7014_ai)",
+            "description": "Visuelle mathematische Beweise Schritt für Schritt in 1080p verstehen! https://min7014.github.io/mathedu/video_board.html",
+        },
+        "vi": {
+            "title": "Phòng Thí Nghiệm Toán Học Min AI (@min7014_ai)",
+            "description": "Chứng minh toán học trực quan từng bước chất lượng 1080p kết hợp GeoGebra! https://min7014.github.io/mathedu/video_board.html",
+        },
+    }
+
+    branding_only_body = {
+        "id": YOUTUBE_CHANNEL_ID,
+        "brandingSettings": {
+            "channel": {
+                "title": "민은기 선생님의 수학자료실_AI",
+                "description": ch_desc_ko,
+                "keywords": ch_keywords,
+                "defaultLanguage": "ko",
+                "country": "KR",
+                "unsubscribedTrailer": "bQO7fnT6aDU",
+            }
+        },
+    }
+    if banner_url:
+        branding_only_body["brandingSettings"]["image"] = {"bannerExternalUrl": banner_url}
+
+    try:
+        youtube.channels().update(
+            part="brandingSettings",
+            body=branding_only_body,
+        ).execute()
+        print("✅ [Channel Branding, Keywords, Country(KR), Trailer(bQO7fnT6aDU) & Banner Applied!]")
+    except Exception as e:
+        print(f"⚠️ [Channel Branding Update Notice]: {e}")
+        if "image" in branding_only_body["brandingSettings"]:
+            del branding_only_body["brandingSettings"]["image"]
+            try:
+                youtube.channels().update(part="brandingSettings", body=branding_only_body).execute()
+                print("✅ [Channel Branding, Keywords & Trailer Updated (Fallback)!]")
+            except Exception as e2:
+                print(f"⚠️ [Channel Branding Fallback Notice]: {e2}")
+
+    # 2-B. 전 세계 8개국어 다국어 채널명·채널 설명(Localizations) 별도 호출 업데이트
+    try:
+        youtube.channels().update(
+            part="localizations",
+            body={
+                "id": YOUTUBE_CHANNEL_ID,
+                "localizations": localizations,
+            },
+        ).execute()
+        print("✅ [Channel 8-Language Localizations (ko, en, ja, zh-CN, es, fr, de, vi) Updated!]")
+    except Exception as e:
+        print(f"⚠️ [Channel Localizations Notice]: {e}")
+
+    # 2-C. 채널 전체 기본값: 아동용 아님(selfDeclaredMadeForKids=False) 설정 (댓글·알림·재생목록 제한 방지)
+    try:
+        youtube.channels().update(
+            part="status",
+            body={
+                "id": YOUTUBE_CHANNEL_ID,
+                "status": {
+                    "selfDeclaredMadeForKids": False,
+                },
+            },
+        ).execute()
+        print("✅ [Channel Status: selfDeclaredMadeForKids=False Configured!]")
+    except Exception as e:
+        print(f"⚠️ [Channel Status Notice]: {e}")
+
+    # 3. 인비디오 구독 워터마크(150x150 PNG) 등록
+    try:
+        wm_path = generate_channel_watermark_150x150()
+        try:
+            youtube.watermarks().set(
+                channelId=YOUTUBE_CHANNEL_ID,
+                body={
+                    "timing": {
+                        "type": "offsetFromStart",
+                        "offsetMs": 0,
+                    },
+                    "position": {
+                        "type": "corner",
+                        "cornerPosition": "bottomRight",
+                    },
+                },
+                media_body=MediaFileUpload(str(wm_path), mimetype="image/png", resumable=False),
+            ).execute()
+        except ValueError as ve:
+            # httplib2 bug on HTTP 204 No Content gzip response after watermark upload succeeds
+            if "range() arg 3 must not be zero" not in str(ve):
+                raise
+        print("✅ [In-Video Subscribe Watermark Set on @min7014_ai (HTTP 204 Applied)!]")
+    except Exception as e:
+        print(f"⚠️ [Watermark Set Notice]: {e}")
+
+    # 4. 채널 홈 화면 섹션(Channel Sections) 최적화 구성
+    try:
+        existing_secs = youtube.channelSections().list(part="id,snippet", mine=True).execute().get("items", [])
+
+        sections_to_add = [
+            {
+                "snippet": {"type": "singlePlaylist", "position": 0},
+                "contentDetails": {"playlists": ["PLQfKuD3IPx1c"]},
+            },
+            {
+                "snippet": {"type": "singlePlaylist", "position": 1},
+                "contentDetails": {"playlists": ["PLA4FYpQnYlJQ"]},
+            },
+            {
+                "snippet": {"type": "popularUploads", "position": 2},
+            },
+            {
+                "snippet": {"type": "recentUploads", "position": 3},
+            },
+            {
+                "snippet": {
+                    "type": "multipleChannels",
+                    "title": "📺 민은기 선생님의 수학자료실 본 채널 (@min7014)",
+                    "position": 4,
+                },
+                "contentDetails": {"channels": [MAIN_CHANNEL_ID]},
+            },
+        ]
+
+        if not existing_secs:
+            for sec_body in sections_to_add:
+                try:
+                    parts = "snippet,contentDetails" if "contentDetails" in sec_body else "snippet"
+                    youtube.channelSections().insert(part=parts, body=sec_body).execute()
+                    print(f"📑 [Channel Home Section Added] {sec_body['snippet']['type']}")
+                except Exception as se:
+                    print(f"  ⚠️ [Section Insert Notice ({sec_body['snippet']['type']})]: {se}")
+        else:
+            print(f"📑 [Channel Sections Already Active] ({len(existing_secs)} sections)")
+    except Exception as e:
+        print(f"⚠️ [Channel Sections Notice]: {e}")
+
+    # 5. 업로드된 영상에 1280x720 HD 커스텀 썸네일 적용 (이미 적용 완료된 영상은 중복 호출 스킵)
+    vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
+    vdata = {}
+    if vault_path.exists():
+        try:
+            vdata = json.loads(vault_path.read_text(encoding="utf-8"))
+        except Exception:
+            vdata = {}
+    applied_thumbs = set(vdata.get("applied_custom_thumbnails") or [
+        "7zD66SWWceg", "CjE2nyyzG2s", "W_AWH-Gk89w", "ffNJhPRvh4Y",
+        "k6LBYa5SCiA", "n9zyKwXXsbA", "Mq6s2JLV9mQ", "fXQJ8s1La-E", "bQO7fnT6aDU"
+    ])
+
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        slug = sdoc["slug"]
+        yt_urls = sdoc.get("youtube_urls") or {}
+        for lc in ["ko", "en"]:
+            u = (yt_urls.get(lc) or "").strip()
+            if not u:
+                continue
+            vid_id = u.split("/")[-1].split("?")[0].strip()
+            if vid_id in applied_thumbs:
+                print(f"🖼️ [1280x720 HD Custom Thumbnail Already Active ({lc.upper()})] {vid_id}")
+                continue
+            thumb_p = YT_PKG_DIR / f"{slug}_{lc}_thumb.png"
+            if vid_id and thumb_p.exists():
+                try:
+                    youtube.thumbnails().set(
+                        videoId=vid_id,
+                        media_body=MediaFileUpload(str(thumb_p), mimetype="image/png", resumable=False),
+                    ).execute()
+                    applied_thumbs.add(vid_id)
+                    print(f"🖼️ [1280x720 HD Custom Thumbnail Applied ({lc.upper()})] {vid_id} <- {thumb_p.name}")
+                except Exception as te:
+                    print(f"  ⚠️ [Thumbnail Notice ({vid_id})]: {te}")
+
+    if vdata:
+        vdata["applied_custom_thumbnails"] = sorted(list(applied_thumbs))
+        vdata["channel_settings_optimized"] = True
+        vault_path.write_text(json.dumps(vdata, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 def watch_for_client_secret_and_auto_upload(privacy="public", open_gcp=True):
     """
     [100% 무인 YouTube Data API v3 업로드 감시 데몬]
@@ -2401,11 +2758,14 @@ if __name__ == "__main__":
     parser.add_argument("--set-youtube-ko", type=str, default=None, help="Bind uploaded Korean YouTube URL for --slug")
     parser.add_argument("--set-youtube-en", type=str, default=None, help="Bind uploaded English YouTube URL for --slug")
     parser.add_argument("--boost-youtube", action="store_true", help="Upgrade all live @min7014_ai videos with high-CTR titles, SEO tags, playlists, and Eureka quiz comments")
+    parser.add_argument("--optimize-channel", action="store_true", help="Optimize @min7014_ai internal channel settings (Banner, Watermark, Keywords, Trailer, 8-Lang Localizations, Sections, Custom Thumbnails)")
     parser.add_argument("--build-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for --slug")
     args = parser.parse_args()
 
     if args.set_youtube_ko is not None or args.set_youtube_en is not None:
         set_youtube_urls_for_slug(args.slug, yt_ko=args.set_youtube_ko, yt_en=args.set_youtube_en)
+    elif args.optimize_channel:
+        optimize_youtube_channel_settings()
     elif args.boost_youtube:
         boost_youtube_channel_popularity()
     elif args.build_shorts:
