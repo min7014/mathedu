@@ -260,6 +260,38 @@ def check_file_rules(filepath, content):
                 'severity': 'ERROR',
                 'msg': f"[{loc}] 수식 내부의 '<문자'가 HTML 태그로 오인식되어 잘립니다('< '로 공백 추가 필요): {raw_math[:60]}"
             })
+
+    # 7. 수학자료실(min7014) 링크 · GeoGebra 토글 · AlgeoMath URL 무결성 검사
+    if re.search(r'#toolbar=0[^"\'\s]{1,120}#toolbar=0', content):
+        issues.append({
+            'rule': 'PDF_DUPLICATE_TOOLBAR_HASH',
+            'severity': 'ERROR',
+            'msg': 'PDF 링크에 #toolbar=0 해시 파라미터가 중복 부착되었습니다.'
+        })
+    if re.search(r'algeomath\.kr[^"\'\s]{1,200}#toolbar=0', content):
+        issues.append({
+            'rule': 'ALGEOMATH_INVALID_PDF_HASH',
+            'severity': 'ERROR',
+            'msg': 'AlgeoMath 링크에 PDF 전용 해시(#toolbar=0...)가 잘못 부착되었습니다.'
+        })
+    if "btn.closest('.min-item')" in content:
+        issues.append({
+            'rule': 'TOGGLE_MIN_GGB_SELECTOR_BUG',
+            'severity': 'ERROR',
+            'msg': "toggleMinGgb 함수의 셀렉터가 '.min-item'만 지정되어 상단 '.min-tip-item'에서 작동하지 않습니다('.min-item, .min-tip-item' 필수)."
+        })
+    if 'href="#min7014-addon"' in content and 'id="min7014-addon"' not in content:
+        issues.append({
+            'rule': 'MIN7014_ADDON_ID_MISSING',
+            'severity': 'WARNING',
+            'msg': '하단 수학자료실 카드에 id="min7014-addon" 속성이 누락되어 앵커 이동이 작동하지 않습니다.'
+        })
+    if re.search(r'\(([A-Za-z0-9 ,\-]{2,80})\) <span[^>]{1,100}>\(\1\)</span>', content):
+        issues.append({
+            'rule': 'MIN_TIP_DUPLICATE_SUBTITLE',
+            'severity': 'WARNING',
+            'msg': '상단 수학자료실 팁 링크에 영문 부제가 중복 표기되었습니다.'
+        })
         
     return issues
 

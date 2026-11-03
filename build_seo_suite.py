@@ -269,6 +269,20 @@ def generate_sitemap_feed_and_llms(index_items):
             'desc': '3,400+ 시각적 기하·증명과 단계별 디딤돌 퀴즈를 담은 100% 영구 무료 수학자료실'
         },
         {
+            'url': f'{BASE_URL}/video_board.html',
+            'priority': '0.95',
+            'changefreq': 'daily',
+            'title': '🎬 @min7014_ai 시각적 증명 영상 게시판 · 8개국어 플립북 극장 & #Shorts',
+            'desc': '민은기 선생님의 수학자료실 847개 플립북 시각적 증명과 @min7014_ai 1080p 해설 영상·#Shorts 통합 극장'
+        },
+        {
+            'url': f'{BASE_URL}/video_studio.html',
+            'priority': '0.85',
+            'changefreq': 'weekly',
+            'title': '🎙️ 수학자료실 AI 다국어 설명영상 제작 스튜디오 · mathedu',
+            'desc': '시각적 증명 PDF 프레임별 8개국어 대본 및 WebSpeech/TTS 동기화 플레이어 스튜디오'
+        },
+        {
             'url': f'{BASE_URL}/offline/index.html',
             'priority': '0.9',
             'changefreq': 'weekly',

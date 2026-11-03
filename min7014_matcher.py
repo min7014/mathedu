@@ -155,7 +155,7 @@ def match_materials(text, limit=4):
                 elif '확률분포(probability' in item_text: score += 240
                 elif '정규분포' in item_text: score += 220
                 elif '모집단' in item_text or '표본' in item_text: score += 150
-            elif any(k in text_lower for k in ['조건부확률', '여사건', '비복원', '독립시행', '사건', '경우의수', '순열', '조합']):
+            elif any(k in text_lower for k in ['조건부확률', '조건부 확률', '일 때', '주사위', '동전', '카드', '주머니', '시행', '여사건', '비복원', '독립시행', '사건', '경우의수', '경우의 수', '순열', '조합']):
                 if '시행과 사건' in item_text or '확률수업' in item_text: score += 220
                 elif '확률분포' in item_text: score += 180
                 elif 'c_r' in item_text or '추출' in item_text: score += 170
@@ -309,7 +309,7 @@ def _get_visual_tip_text(problem_title):
             "• <b>[면적과 길이의 조화]</b> 무게중심이 세 중선을 $2:1$로 내분하고 삼각형의 넓이를 6개의 동일한 면적으로 분할하는 기하학적 균형미<br>"
             "• <b>[수학적 의미]</b> 눈금 없는 자와 컴퍼스만으로 증명해낸 그리스 기하학의 정수를 하단 인터랙티브 작도기에서 직접 확인해 보세요."
         )
-    elif any(k in t for k in ['조건부확률', '여사건', '비복원', '순열', '조합', '경우의수']) and '정규분포' not in t:
+    elif any(k in t for k in ['조건부확률', '조건부 확률', '일 때', '주사위', '동전', '카드', '주머니', '시행', '여사건', '비복원', '순열', '조합', '경우의수', '경우의 수']) and '정규분포' not in t:
         return (
             "💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>"
             "수학자료실의 확률·조합 자료는 <b>시행과 사건(표본공간과 부분집합)의 구조</b>와 <b>조합(${}_n\\mathrm{C}_r$)의 단계별 대수적·기하학적 원리</b>를 투명하게 시각화합니다.<br>"
@@ -358,7 +358,7 @@ def _append_visual_links(tip_html, matched_items):
         
         links_html += '<div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">'
         links_html += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">'
-        sub_text = f' <span style="font-size:.76rem;color:#94a3b8;font-weight:400">({sub})</span>' if sub else ''
+        sub_text = f' <span style="font-size:.76rem;color:#94a3b8;font-weight:400">({sub})</span>' if (sub and sub not in t_name) else ''
         links_html += f'<a href="{u}" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> {t_name}{sub_text}</a>'
         links_html += '<span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div>'
         
@@ -367,9 +367,9 @@ def _append_visual_links(tip_html, matched_items):
             actions += f'<button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, \'{ggb}\')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button>'
             actions += f'<a href="{ggb}" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a>'
         if algeo:
-            actions += f'<a href="{algeo}" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a>'
+            actions += f'<a href="{re.sub(r"#toolbar=0.*$", "", algeo)}" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a>'
         if pdf:
-            actions += f'<a href="{pdf}#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a>'
+            actions += f'<a href="{re.sub(r"(#toolbar=0.*)+$", "", pdf)}#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a>'
         if yt:
             actions += f'<a href="{yt}" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a>'
         if u:
@@ -419,7 +419,7 @@ def generate_addon_card_html(materials, problem_title=""):
         pdf = it.get("pdf", "")
         yt = it.get("youtube", "")
         ggb = it.get("geogebra", "")
-        algeo = it.get("algeomath", "")
+        algeo = re.sub(r"#toolbar=0.*$", "", it.get("algeomath", ""))
         
         actions = []
         if ggb:
@@ -453,7 +453,7 @@ def generate_addon_card_html(materials, problem_title=""):
 
     return f"""
 <!-- 📚 수학자료실 공식 연계 심층 탐구 자료 카드 -->
-<div class="min7014-addon-card">
+<div id="min7014-addon" class="min7014-addon-card">
   <div class="min-header">
     <div class="min-header-title">
       <img src="../assets/favicon.png" alt="수학자료실" class="min-logo">
@@ -481,7 +481,7 @@ def generate_addon_card_html(materials, problem_title=""):
 <script>
 if (!window.toggleMinGgb) {{
   window.toggleMinGgb = function(btn, ggbUrl) {{
-    var item = btn.closest ? btn.closest('.min-item') : btn.parentElement.parentElement;
+    var item = btn.closest ? btn.closest('.min-item, .min-tip-item') : btn.parentElement.parentElement;
     if (!item) return;
     var wrap = item.querySelector('.min-ggb-frame-wrap');
     if (!wrap) return;
