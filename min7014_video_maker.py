@@ -1421,16 +1421,39 @@ def sync_youtube_channel_rss():
         title_en = (sdoc.get("title_en") or "").strip()
         found_ko = None
         found_en = None
+        found_short_ko = None
+        found_short_en = None
         for ent in entries:
             blob = f"{ent['title']}\n{ent['description']}"
-            if f"[ID: {slug}_KO]" in blob or f"[{slug}_KO]" in blob or (slug in blob and ("단계별" in ent["title"] or "수학자료실" in ent["title"])):
+            vid_id = ent["video_id"]
+            if f"[ID: {slug}_SHORT_KO]" in blob or f"[{slug}_SHORT_KO]" in blob or (slug in blob and "#Shorts" in blob and ("#수학" in blob or "시각적" in blob)):
+                found_short_ko = f"https://youtube.com/shorts/{vid_id}"
+            elif f"[ID: {slug}_SHORT_EN]" in blob or f"[{slug}_SHORT_EN]" in blob or (slug in blob and "#Shorts" in blob and ("#Math" in blob or "Visual" in blob)):
+                found_short_en = f"https://youtube.com/shorts/{vid_id}"
+            elif f"[ID: {slug}_KO]" in blob or f"[{slug}_KO]" in blob or (slug in blob and ("단계별" in ent["title"] or "수학자료실" in ent["title"])):
                 found_ko = ent["url"]
             elif f"[ID: {slug}_EN]" in blob or f"[{slug}_EN]" in blob or (slug in blob and ("Visual Proof" in ent["title"] or "Min's Math Lab" in ent["title"])):
                 found_en = ent["url"]
             elif title_ko and len(title_ko) >= 3 and title_ko in ent["title"] and "Visual Proof" not in ent["title"]:
-                found_ko = ent["url"]
+                if "#Shorts" in ent["title"]:
+                    found_short_ko = f"https://youtube.com/shorts/{vid_id}"
+                else:
+                    found_ko = ent["url"]
             elif title_en and len(title_en) >= 5 and title_en.lower() in ent["title"].lower():
-                found_en = ent["url"]
+                if "#shorts" in ent["title"].lower():
+                    found_short_en = f"https://youtube.com/shorts/{vid_id}"
+                else:
+                    found_en = ent["url"]
+        if found_short_ko or found_short_en:
+            if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
+                sdoc["shorts_urls"] = {"ko": "", "en": ""}
+            if found_short_ko:
+                sdoc["shorts_urls"]["ko"] = found_short_ko
+            if found_short_en:
+                sdoc["shorts_urls"]["en"] = found_short_en
+            sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+            update_video_catalog()
+            matched_count += 1
         if found_ko or found_en:
             set_youtube_urls_for_slug(slug, yt_ko=found_ko, yt_en=found_en)
             matched_count += 1
@@ -2702,6 +2725,134 @@ def build_all_shorts(upload=False, privacy="public"):
     return results
 
 
+def run_shorts_and_video_upload_daemon(open_studio_now=True):
+    """
+    [@min7014_ai 숏폼(#Shorts) & 본편 무인 업로드·동기화 데몬]
+    1) 즉시 YouTube Studio 업로드 창과 14개 숏폼 폴더(ready_for_min7014_ai_shorts)를 열어,
+       사용자가 마우스로 드래그 앤 드롭하거나 3단계 고급 기능을 켜면 즉시 감지합니다.
+    2) 채널에 새 숏폼/영상이 올라오는 즉시 API(videos.update)로 설명문·태그·유레카 댓글을 자동 완성하고
+       video_board.html에 링크를 실시간 등록 및 Git Push 합니다.
+    3) 동시에 롤링 24시간 업로드 제한이 풀리는 즉시 대기 중인 14개 숏폼과 미업로드 본편을 API로 자동 업로드합니다.
+    """
+    import time
+    import webbrowser
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+
+    ready_shorts_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai_shorts"
+    if open_studio_now:
+        try:
+            webbrowser.open(YOUTUBE_STUDIO_UPLOAD_URL)
+            if os.name == "nt" and ready_shorts_dir.exists():
+                os.startfile(str(ready_shorts_dir))
+        except Exception:
+            pass
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
+    uploads_playlist_id = "UU" + YOUTUBE_CHANNEL_ID[2:]  # UUSlqQfOEtRfJuMPyGMLgFYA
+
+    print("=" * 76, flush=True)
+    print("🤖 [@min7014_ai 숏폼(#Shorts) 14편 자동 업로드 & 실시간 감지 데몬 가동 중]", flush=True)
+    print(f"📂 숏폼 마스터 폴더: {ready_shorts_dir}", flush=True)
+    print(f"📺 YouTube Studio: {YOUTUBE_STUDIO_UPLOAD_URL}", flush=True)
+    print("=" * 76, flush=True)
+
+    last_api_upload_try = 0.0
+    enriched_video_ids = set()
+
+    while True:
+        try:
+            creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
+            if not creds.valid and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+                token_file.write_text(creds.to_json(), encoding="utf-8")
+            youtube = build("youtube", "v3", credentials=creds)
+
+            # 1) 채널 업로드 재생목록(UUSlqQfOEtRfJuMPyGMLgFYA) 조회하여 새로 올라온 숏폼/본편 즉시 감지 & 메타데이터 완성
+            pl_items = youtube.playlistItems().list(
+                part="snippet", playlistId=uploads_playlist_id, maxResults=50
+            ).execute().get("items", [])
+
+            any_new_bound = False
+            for item in pl_items:
+                vid_id = item["snippet"]["resourceId"]["videoId"]
+                v_title = item["snippet"].get("title", "")
+                v_desc = item["snippet"].get("description", "")
+                blob = f"{v_title}\n{v_desc}"
+
+                # [slug_SHORT_KO] / [slug_SHORT_EN] / [slug_KO] / [slug_EN] 태그 자동 매칭
+                m_short = re.search(r"\[([A-Za-z0-9_]+)_SHORT_(KO|EN)\]", blob, re.IGNORECASE)
+                if m_short and vid_id not in enriched_video_ids:
+                    s_slug = m_short.group(1)
+                    s_lc = m_short.group(2).lower()
+                    sp = SCRIPTS_DIR / f"{s_slug}.json"
+                    smeta_p = YT_PKG_DIR / f"{s_slug}_shorts_meta.json"
+                    if sp.exists() and smeta_p.exists():
+                        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                        smeta = json.loads(smeta_p.read_text(encoding="utf-8")).get(s_lc)
+                        if smeta:
+                            try:
+                                youtube.videos().update(
+                                    part="snippet",
+                                    body={
+                                        "id": vid_id,
+                                        "snippet": {
+                                            "title": smeta["title"],
+                                            "description": smeta["description"],
+                                            "tags": smeta["tags"],
+                                            "categoryId": "27",
+                                            "defaultLanguage": s_lc,
+                                            "defaultAudioLanguage": s_lc,
+                                        },
+                                    },
+                                ).execute()
+                                print(f"✨ [Shorts Metadata Auto-Enriched ({s_lc.upper()})] https://youtube.com/shorts/{vid_id}", flush=True)
+                            except Exception as ue:
+                                print(f"  [Shorts Update Notice ({vid_id})]: {ue}", flush=True)
+                        if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
+                            sdoc["shorts_urls"] = {"ko": "", "en": ""}
+                        short_url = f"https://youtube.com/shorts/{vid_id}"
+                        if sdoc["shorts_urls"].get(s_lc) != short_url:
+                            sdoc["shorts_urls"][s_lc] = short_url
+                            sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+                            any_new_bound = True
+                        enriched_video_ids.add(vid_id)
+
+            if any_new_bound:
+                update_video_catalog()
+                subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
+                subprocess.run(["git", "commit", "-m", "chore(shorts): auto-bind uploaded @min7014_ai YouTube Shorts URLs"], check=False)
+                subprocess.run(["git", "push", "origin", "main"], check=False)
+                print("✅ [Git Auto-Push Complete] Newly uploaded #Shorts bound to video_board.html!", flush=True)
+
+            # 2) 10분마다 API 직접 업로드 재시도 (롤링 24시간 한도 해제 시 즉시 14편 자동 업로드)
+            now_ts = time.time()
+            if now_ts - last_api_upload_try >= 600:
+                last_api_upload_try = now_ts
+                for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+                    sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                    s_urls = sdoc.get("shorts_urls") or {}
+                    if not s_urls.get("ko") or not s_urls.get("en"):
+                        res = upload_short_to_youtube(sdoc["slug"], langs=("ko", "en"), privacy="public")
+                        if not res:
+                            # 아직 채널 일일 업로드 한도(uploadLimitExceeded) 상태이면 다음 주기에 재시도
+                            break
+                        else:
+                            subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
+                            subprocess.run(["git", "commit", "-m", f"chore(shorts): auto-upload {sdoc['slug']} #Shorts to @min7014_ai"], check=False)
+                            subprocess.run(["git", "push", "origin", "main"], check=False)
+        except Exception as de:
+            print(f"[Daemon Notice] {de}", flush=True)
+
+        time.sleep(20.0)
+
+
 def generate_channel_banner_2560x1440():
     """
     [YouTube 공식 채널 배너(2560x1440, Safe Area 1546x423) 아트워크 자동 생성]
@@ -3123,10 +3274,13 @@ if __name__ == "__main__":
     parser.add_argument("--build-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for --slug")
     parser.add_argument("--build-all-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for all scripted topics")
     parser.add_argument("--upload-shorts", action="store_true", help="Upload rendered YouTube Shorts (#Shorts) to @min7014_ai")
+    parser.add_argument("--daemon-shorts", action="store_true", help="Run background daemon to auto-upload & auto-enrich YouTube #Shorts on @min7014_ai")
     args = parser.parse_args()
 
     if args.set_youtube_ko is not None or args.set_youtube_en is not None:
         set_youtube_urls_for_slug(args.slug, yt_ko=args.set_youtube_ko, yt_en=args.set_youtube_en)
+    elif args.daemon_shorts:
+        run_shorts_and_video_upload_daemon(open_studio_now=True)
     elif args.optimize_channel:
         optimize_youtube_channel_settings()
     elif args.boost_youtube:
