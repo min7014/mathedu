@@ -934,7 +934,7 @@ html.dark-theme .filter-tab-btn {
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">56대 법칙</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">58대 법칙</span>
               </div>
               <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
             </div>
@@ -3411,10 +3411,10 @@ window.openMathClinicModal = function() {
     <div class="p-3 px-5 border-b border-surface-container bg-white flex flex-wrap items-center justify-between gap-2">
       <div class="flex gap-1.5 flex-wrap" id="mtHubTabButtons">
         <button type="button" data-mt-tab="genealogy" onclick="switchMathTeacherHubTab('genealogy')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-secondary text-white">🌳 1. 초·중·고 수직 계통성 트리 (12)</button>
-        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (56)</button>
+        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (58)</button>
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
         <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (59)</button>
-        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (17)</button>
+        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (19)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
     </div>
@@ -4316,6 +4316,26 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "condition": "[2019학년도 영재학급 강의[경남 창원 신월고등학교](20190516)] 관련 도형·수식 구조가 문제에 등장할 때",
       "firstAction": "복잡한 기하·미적분 문제의 조건이 잘 그려지지 않을 때는 특수한 수치(정삼각형, 직각이등변삼각형, 좌표 원점)를 먼저 대입해 도형의 경향성을 관찰하세요.",
       "visualIntuition": "[2019학년도 영재학급 강의[경남 창원 신월고등학교]] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 활용한 시각적 수학교육 공학도구 설계와 수학적 모델링.",
+      "formulaBridge": "4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
+      "min7014Query": "수학 특강·공학도구",
+      "searchKeyword": "수학"
+    },
+    {
+      "id": "polya-min-MIN-KB-0041",
+      "domain": "지수·로그",
+      "condition": "[2019학년도 창원교육지원청영재교육원 강사 워크숍 - 학생 참여형 영재교육 프로그램에 대한 적용 사례 소개 및 제안 [경남 창원 창원과학고등학교](20190119)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "'$a$의 $n$제곱근 중 실수'는 방정식 $x^n = a$의 실근입니다! $n$이 홀수면 $a$의 부호와 상관없이 무조건 1개, $n$이 짝수면 $a>0$일 때 2개($\\pm\\sqrt[n]{a}$), $a=0$일 때 1개, $a<0$일 때 0개입니다.",
+      "visualIntuition": "[2019학년도 창원교육지원청영재교육원 강사 워크숍 - 학생 참여형 영재교육 프로그램에 대한 적용 사례 소개 및 제안 [경남 창원 창원과학고등학교]] 자연수 지수에서 정수·유리수·실수 지수로의 수체계 확장($a^0=1, a^{-n}=\\frac{1}{a",
+      "formulaBridge": "4단계 (본문항 종합): '$a$의 $n$제곱근 중 실수인 것의 개수'($n$의 홀짝과 $a$의 부호 판정표) 및 지수·로그함수의 역함수 대칭 교점 좌표 연립 해결",
+      "min7014Query": "지수·로그",
+      "searchKeyword": "지수"
+    },
+    {
+      "id": "polya-min-MIN-KB-0042",
+      "domain": "수학 특강·공학도구",
+      "condition": "[2013학년도 일정연수 강의 연수 자료] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "복잡한 기하·미적분 문제의 조건이 잘 그려지지 않을 때는 특수한 수치(정삼각형, 직각이등변삼각형, 좌표 원점)를 먼저 대입해 도형의 경향성을 관찰하세요.",
+      "visualIntuition": "[2013학년도 일정연수 강의 연수 자료] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 활용한 시각적 수학교육 공학도구 설계와 수학적 모델링.",
       "formulaBridge": "4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
       "min7014Query": "수학 특강·공학도구",
       "searchKeyword": "수학"
@@ -5337,6 +5357,36 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
         "3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 $\\frac{1}{2}$이고 지름에 대한 원주각은 $90^\\circ$임을 기호로 정리"
       ],
       "whatIfNotMutation": "만약 [환의 넓이(Annular Area)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
+    },
+    {
+      "id": "creative-min-MIN-KB-0010",
+      "domain": "이차곡선·원뿔곡선",
+      "title": "[원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+      "originalProblem": "[원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.] 평면 위의 두 정점(초점 $F, F'$)으로부터 거리의 합이 장축의 길이 $2a$로 일정한 점들의 자취($\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1, c^2=a^2-b^2$)와 접선·초점 반사 대칭",
+      "constructivePrompt": "5지선다 보기에 의존하지 않고, '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+      "multiPathApproaches": [
+        "1단계 (초등 실로 타원 그리기): 도화지에 압정 2개를 꽂고 길이가 10cm인 실을 걸어 연필로 팽팽하게 그릴 때 두 거리의 합이 늘 10cm임을 확인",
+        "2단계 (초등 꼭짓점 직각삼각형): 연필이 맨 위 꼭짓점 $(0, b)$에 올 때 양쪽 실의 길이가 $a$로 같아져 직각삼각형 $a^2 = b^2 + c^2$이 됨을 관찰",
+        "3단계 (방정식과 접선 번역): 타원의 표준형 $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$과 기울기 $m$인 접선 $y = mx \\pm \\sqrt{a^2m^2+b^2}$ 적용"
+      ],
+      "whatIfNotMutation": "만약 [원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+      "min7014Query": "이차곡선·원뿔곡선",
+      "searchKeyword": "이차곡선"
+    },
+    {
+      "id": "creative-min-MIN-KB-0011",
+      "domain": "유클리드 평면기하",
+      "title": "[삼각형을 꼭짓점을 중심으로 회전(Rotate a triangle around its vertex)] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+      "originalProblem": "[삼각형을 꼭짓점을 중심으로 회전] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
+      "constructivePrompt": "5지선다 보기에 의존하지 않고, '삼각형을 꼭짓점을 중심으로 회전(Rotate a triangle around its vertex)'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+      "multiPathApproaches": [
+        "1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
+        "2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
+        "3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 $\\frac{1}{2}$이고 지름에 대한 원주각은 $90^\\circ$임을 기호로 정리"
+      ],
+      "whatIfNotMutation": "만약 [삼각형을 꼭짓점을 중심으로 회전(Rotate a triangle around its vertex)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
       "min7014Query": "유클리드 평면기하",
       "searchKeyword": "유클리드"
     }
