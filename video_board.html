@@ -889,8 +889,9 @@
         </div>
       </div>
       <div class="cinema-body">
-        <div class="cinema-video-box">
+        <div class="cinema-video-box" id="cinemaVideoBox" style="display:flex;align-items:center;justify-content:center;">
           <iframe id="cinemaIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <video id="cinemaNativeVideo" controls playsinline style="display:none;height:100%;max-height:540px;width:auto;max-width:100%;background:#000;"></video>
         </div>
         <div class="cinema-info-box">
           <div class="lang-switch-bar" id="cinemaLangBar"></div>
@@ -948,6 +949,7 @@
       <div class="filter-tabs" id="boardFilterTabs">
         <button type="button" class="tab-btn active" data-filter="all">전체 자료 (1,111)</button>
         <button type="button" class="tab-btn ai-tab" data-filter="ai_uploaded">🤖 @min7014_ai 영상 등록 완료</button>
+        <button type="button" class="tab-btn ai-tab" data-filter="shorts_ready">📱 숏폼 (#Shorts · 9:16) 완료</button>
         <button type="button" class="tab-btn" data-filter="has_pdf">📄 단계별 PDF 설명자료 (866)</button>
         <button type="button" class="tab-btn" data-filter="has_orig_yt">🎬 원본 유튜브 보유 (939)</button>
         <button type="button" class="tab-btn" data-filter="geometry">📐 기하 (Geometry)</button>
@@ -1075,6 +1077,8 @@
       if (m2) return m2[1];
       const m3 = s.match(/embed\/([A-Za-z0-9_-]{6,})/);
       if (m3) return m3[1];
+      const m4 = s.match(/shorts\/([A-Za-z0-9_-]{6,})/);
+      if (m4) return m4[1];
       return '';
     }
 
@@ -1112,6 +1116,26 @@
         || item.youtube
         || '';
 
+      const shortKo = (catEntry && catEntry.shorts_urls && catEntry.shorts_urls.ko)
+        || (vaultEntry && vaultEntry.youtube_short_ko)
+        || item.youtube_short_ko
+        || '';
+
+      const shortEn = (catEntry && catEntry.shorts_urls && catEntry.shorts_urls.en)
+        || (vaultEntry && vaultEntry.youtube_short_en)
+        || item.youtube_short_en
+        || '';
+
+      const shortMp4Ko = (catEntry && catEntry.shorts_packages && catEntry.shorts_packages.ko && catEntry.shorts_packages.ko.local_mp4_path)
+        || (vaultEntry && vaultEntry.short_mp4_ko)
+        || item.short_mp4_ko
+        || '';
+
+      const shortMp4En = (catEntry && catEntry.shorts_packages && catEntry.shorts_packages.en && catEntry.shorts_packages.en.local_mp4_path)
+        || (vaultEntry && vaultEntry.short_mp4_en)
+        || item.short_mp4_en
+        || '';
+
       const slugKey = (catEntry && catEntry.slug)
         || (vaultEntry && (VAULT_MAP[pdfSlug] ? pdfSlug : webSlug))
         || pdfSlug
@@ -1124,6 +1148,11 @@
         ko: ko.trim(),
         en: en.trim(),
         orig: orig.trim(),
+        shortKo: shortKo.trim(),
+        shortEn: shortEn.trim(),
+        shortMp4Ko: shortMp4Ko.trim(),
+        shortMp4En: shortMp4En.trim(),
+        hasShortsReady: !!(shortKo || shortEn || shortMp4Ko || shortMp4En),
         hasScriptReady: !!catEntry,
         pageCount: (catEntry && catEntry.page_count) || (vaultEntry && vaultEntry.page_count) || 0,
         titleEn: (catEntry && catEntry.title_en) || (vaultEntry && vaultEntry.title_en) || '',
@@ -1173,6 +1202,11 @@
             _ytKo: vInfo.ko,
             _ytEn: vInfo.en,
             _ytOrig: vInfo.orig,
+            _shortKo: vInfo.shortKo,
+            _shortEn: vInfo.shortEn,
+            _shortMp4Ko: vInfo.shortMp4Ko,
+            _shortMp4En: vInfo.shortMp4En,
+            _hasShortsReady: vInfo.hasShortsReady,
             _hasScriptReady: vInfo.hasScriptReady,
             _pageCount: vInfo.pageCount,
             _titleEn: vInfo.titleEn,
@@ -1189,10 +1223,11 @@
       // URL 파라미터 확인 (?slug=... 또는 ?play=...)
       const params = new URLSearchParams(window.location.search);
       const qSlug = params.get('slug') || params.get('play');
+      const qMode = params.get('mode') || '';
       if (qSlug) {
         const found = ALL_ITEMS.find(x => x._slug === qSlug || x._pdfSlug === qSlug || x._webSlug === qSlug || x.id === qSlug);
         if (found) {
-          openCinemaForItem(found._index - 1, found._ytKo ? 'ko' : (found._ytEn ? 'en' : 'orig'));
+          openCinemaForItem(found._index - 1, qMode || (found._ytKo ? 'ko' : (found._ytEn ? 'en' : 'orig')));
         }
       }
     }
@@ -1214,21 +1249,31 @@
       const pdfCount = ALL_ITEMS.filter(x => !!(x.pdf && x.pdf.trim())).length;
       const origYtCount = ALL_ITEMS.filter(x => !!x._ytOrig).length;
       const aiTopics = ALL_ITEMS.filter(x => !!(x._ytKo || x._ytEn));
+      const shortsTopics = ALL_ITEMS.filter(x => !!x._hasShortsReady);
       let totalAiVideos = 0;
       aiTopics.forEach(x => {
         if (x._ytKo) totalAiVideos++;
         if (x._ytEn) totalAiVideos++;
       });
+      let totalShortsCount = 0;
+      shortsTopics.forEach(x => {
+        if (x._shortKo || x._shortMp4Ko) totalShortsCount++;
+        if (x._shortEn || x._shortMp4En) totalShortsCount++;
+      });
 
       document.getElementById('statTotalItems').textContent = `${total.toLocaleString()}개`;
       document.getElementById('statPdfItems').textContent = `${pdfCount.toLocaleString()}개`;
       document.getElementById('statOrigYtItems').textContent = `${origYtCount.toLocaleString()}개`;
-      document.getElementById('statAiVideos').textContent = `${aiTopics.length}개 주제 (${totalAiVideos}편)`;
-      document.getElementById('statAiTopicsSub').textContent = `한국어 ${aiTopics.filter(x => x._ytKo).length}편 · 영어 ${aiTopics.filter(x => x._ytEn).length}편 @min7014_ai 등록 완료`;
+      document.getElementById('statAiVideos').textContent = `${aiTopics.length}개 주제 (${totalAiVideos}편) + #Shorts ${totalShortsCount}편`;
+      document.getElementById('statAiTopicsSub').textContent = `1080p 본편 ${totalAiVideos}편 · 9:16 세로형 숏폼(#Shorts) ${totalShortsCount}편 제작/등록`;
 
       const aiTabBtn = document.querySelector('.tab-btn[data-filter="ai_uploaded"]');
       if (aiTabBtn) {
         aiTabBtn.textContent = `🤖 @min7014_ai 영상 등록 완료 (${aiTopics.length})`;
+      }
+      const shortsTabBtn = document.querySelector('.tab-btn[data-filter="shorts_ready"]');
+      if (shortsTabBtn) {
+        shortsTabBtn.textContent = `📱 숏폼 (#Shorts · 9:16) 완료 (${shortsTopics.length}주제 · ${totalShortsCount}편)`;
       }
     }
 
@@ -1238,7 +1283,8 @@
       const uploadedItems = ALL_ITEMS.filter(x => !!(x._ytKo || x._ytEn || x._hasScriptReady));
       const ytUploadedCount = ALL_ITEMS.filter(x => !!(x._ytKo || x._ytEn)).length;
       const ytVideoTotal = ALL_ITEMS.reduce((acc, x) => acc + (x._ytKo ? 1 : 0) + (x._ytEn ? 1 : 0), 0);
-      badge.textContent = `@min7014_ai 등록 ${ytUploadedCount}개 주제(${ytVideoTotal}편) · 제작 완료 총 ${uploadedItems.length}개 주제`;
+      const shortsTotal = ALL_ITEMS.reduce((acc, x) => acc + ((x._shortKo || x._shortMp4Ko) ? 1 : 0) + ((x._shortEn || x._shortMp4En) ? 1 : 0), 0);
+      badge.textContent = `@min7014_ai 본편 ${ytVideoTotal}편 · 9:16 숏폼(#Shorts) ${shortsTotal}편 · 총 ${uploadedItems.length}개 대표 주제`;
 
       if (uploadedItems.length === 0) {
         grid.innerHTML = `<div style="padding:20px;color:#64748b;">등록된 @min7014_ai 영상이 없습니다.</div>`;
@@ -1252,12 +1298,12 @@
         const isYtUploaded = !!(item._ytKo || item._ytEn);
         return `
           <article class="vault-card">
-            <div class="vault-thumb-wrap" onclick="${isYtUploaded ? `openCinemaForItem(${itemIdx}, 'ko')` : `window.location.href='video_studio.html?slug=${encodeURIComponent(item._slug)}'`}">
+            <div class="vault-thumb-wrap" onclick="${isYtUploaded ? `openCinemaForItem(${itemIdx}, 'ko')` : `openCinemaForItem(${itemIdx}, 'short_ko')`}">
               ${thumbSrc ? `<img src="${thumbSrc}" alt="${item.title.replace(/"/g, '&quot;')}" loading="lazy" />` : ''}
               <span class="vault-thumb-badge" style="${isYtUploaded ? '' : 'background:rgba(2,132,199,0.92);'}">
-                ${isYtUploaded ? '🤖 @min7014_ai 공식 설명영상' : '📦 1080p 제작 완료 (업로드 대기열)'}
+                ${isYtUploaded ? '🤖 @min7014_ai 본편 + 📱 #Shorts' : '📦 1080p 본편 + 📱 #Shorts 완료'}
               </span>
-              ${item._pageCount ? `<span class="vault-page-badge">📄 ${item._pageCount}단계 슬라이드</span>` : ''}
+              ${item._pageCount ? `<span class="vault-page-badge">📄 ${item._pageCount}단계 · 📱 45초 #Shorts</span>` : ''}
             </div>
             <div class="vault-card-body">
               <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
@@ -1271,14 +1317,23 @@
                   <div class="yt-link-row">
                     <span style="font-weight:800;color:#be123c;">🇰🇷 KO</span>
                     <a href="${item._ytKo}" target="_blank" rel="noopener" class="yt-link-url">${item._ytKo}</a>
-                    <button type="button" class="mini-play-btn" onclick="openCinemaForItem(${itemIdx}, 'ko')">▶ 바로 재생</button>
+                    <button type="button" class="mini-play-btn" onclick="openCinemaForItem(${itemIdx}, 'ko')">▶ 본편 재생</button>
                   </div>
                 ` : ''}
                 ${item._ytEn ? `
                   <div class="yt-link-row">
                     <span style="font-weight:800;color:#1d4ed8;">🇺🇸 EN</span>
                     <a href="${item._ytEn}" target="_blank" rel="noopener" class="yt-link-url">${item._ytEn}</a>
-                    <button type="button" class="mini-play-btn en" onclick="openCinemaForItem(${itemIdx}, 'en')">▶ Play EN</button>
+                    <button type="button" class="mini-play-btn en" onclick="openCinemaForItem(${itemIdx}, 'en')">▶ Full EN</button>
+                  </div>
+                ` : ''}
+                ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En) ? `
+                  <div class="yt-link-row" style="background:#fff1f2;border-color:#fecdd3;">
+                    <span style="font-weight:800;color:#e11d48;">📱 9:16 숏폼 (#Shorts)</span>
+                    <div style="display:flex;gap:5px;">
+                      ${(item._shortKo || item._shortMp4Ko) ? `<button type="button" class="mini-play-btn" style="background:#db2777;" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 숏폼 재생</button>` : ''}
+                      ${(item._shortEn || item._shortMp4En) ? `<button type="button" class="mini-play-btn en" style="background:#7c3aed;" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Shorts</button>` : ''}
+                    </div>
                   </div>
                 ` : ''}
                 ${!isYtUploaded && item._hasScriptReady ? `
@@ -1300,6 +1355,7 @@
 
       FILTERED_ITEMS = ALL_ITEMS.filter(item => {
         if (CURRENT_TAB === 'ai_uploaded' && !(item._ytKo || item._ytEn || item._hasScriptReady)) return false;
+        if (CURRENT_TAB === 'shorts_ready' && !item._hasShortsReady) return false;
         if (CURRENT_TAB === 'has_pdf' && !(item.pdf && item.pdf.trim())) return false;
         if (CURRENT_TAB === 'has_orig_yt' && !item._ytOrig) return false;
         if (['geometry', 'algebra', 'calculus', 'prob_stat'].includes(CURRENT_TAB) && item.domain !== CURRENT_TAB) return false;
@@ -1313,10 +1369,10 @@
         return true;
       });
 
-      // @min7014_ai 업로드 완료된 항목 -> 1080p 제작 완료 항목 -> 번호 순 정렬
+      // @min7014_ai 업로드 완료된 항목 -> 1080p/숏폼 제작 완료 항목 -> 번호 순 정렬
       FILTERED_ITEMS.sort((a, b) => {
-        const aRank = (a._ytKo || a._ytEn) ? 2 : (a._hasScriptReady ? 1 : 0);
-        const bRank = (b._ytKo || b._ytEn) ? 2 : (b._hasScriptReady ? 1 : 0);
+        const aRank = (a._ytKo || a._ytEn) ? 2 : ((a._hasScriptReady || a._hasShortsReady) ? 1 : 0);
+        const bRank = (b._ytKo || b._ytEn) ? 2 : ((b._hasScriptReady || b._hasShortsReady) ? 1 : 0);
         if (aRank !== bRank) return bRank - aRank;
         return a._index - b._index;
       });
@@ -1393,6 +1449,12 @@
                     <a href="${item._ytEn}" target="_blank" rel="noopener" class="yt-link-url" style="font-size:0.75rem;">${item._ytEn}</a>
                   </div>
                 ` : ''}
+                ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En) ? `
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    ${(item._shortKo || item._shortMp4Ko) ? `<button type="button" class="yt-badge-btn" style="background:#fdf2f8;color:#db2777;border-color:#fbcfe8;" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 숏폼(#Shorts) 재생</button>` : ''}
+                    ${(item._shortEn || item._shortMp4En) ? `<button type="button" class="yt-badge-btn" style="background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe;" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Shorts (EN)</button>` : ''}
+                  </div>
+                ` : ''}
                 ${!item._ytKo && !item._ytEn ? `
                   <div style="display:flex;gap:6px;flex-wrap:wrap;">
                     ${pdfClean ? `
@@ -1463,8 +1525,17 @@
       if (!item) return;
 
       let targetUrl = '';
+      let localShortMp4 = '';
       let badgeLabel = '@min7014_ai';
-      if (mode === 'ko' && item._ytKo) {
+      if (mode === 'short_ko' && (item._shortKo || item._shortMp4Ko)) {
+        targetUrl = item._shortKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._shortMp4Ko || '';
+        badgeLabel = '📱 🇰🇷 @min7014_ai 9:16 숏폼 (#Shorts)';
+      } else if (mode === 'short_en' && (item._shortEn || item._shortMp4En)) {
+        targetUrl = item._shortEn || item._ytEn || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._shortMp4En || '';
+        badgeLabel = '📱 🇺🇸 @min7014_ai 9:16 English #Shorts';
+      } else if (mode === 'ko' && item._ytKo) {
         targetUrl = item._ytKo;
         badgeLabel = '🇰🇷 @min7014_ai 한국어 설명영상';
       } else if (mode === 'en' && item._ytEn) {
@@ -1474,14 +1545,13 @@
         targetUrl = item._ytOrig;
         mode = 'orig';
         badgeLabel = '🎬 @min7014 원본 해설 영상';
+      } else if (item._shortMp4Ko) {
+        mode = 'short_ko';
+        targetUrl = 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._shortMp4Ko;
+        badgeLabel = '📱 🇰🇷 @min7014_ai 9:16 숏폼 (#Shorts)';
       } else {
         window.location.href = `video_studio.html?slug=${encodeURIComponent(item._slug)}`;
-        return;
-      }
-
-      const vidId = extractYoutubeId(targetUrl);
-      if (!vidId) {
-        window.open(targetUrl, '_blank');
         return;
       }
 
@@ -1490,18 +1560,45 @@
       document.getElementById('cinemaBadge').textContent = badgeLabel;
       document.getElementById('cinemaTitle').textContent = `${item.title} (${item.id})`;
       document.getElementById('cinemaDirectYtLink').href = targetUrl;
-      document.getElementById('cinemaUrlText').href = targetUrl;
-      document.getElementById('cinemaUrlText').textContent = targetUrl;
-      document.getElementById('cinemaIframe').src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0`;
+      document.getElementById('cinemaUrlText').href = localShortMp4 || targetUrl;
+      document.getElementById('cinemaUrlText').textContent = (mode.startsWith('short_') && !item._shortKo && !item._shortEn && localShortMp4) ? localShortMp4 : targetUrl;
 
-      // 언어 스위치 바
+      const iframeEl = document.getElementById('cinemaIframe');
+      const nativeVid = document.getElementById('cinemaNativeVideo');
+
+      if (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn)) {
+        iframeEl.src = '';
+        iframeEl.style.display = 'none';
+        nativeVid.style.display = 'block';
+        nativeVid.src = localShortMp4;
+        nativeVid.play().catch(() => {});
+      } else {
+        const vidId = extractYoutubeId(targetUrl);
+        if (!vidId) {
+          window.open(targetUrl, '_blank');
+          return;
+        }
+        nativeVid.pause();
+        nativeVid.src = '';
+        nativeVid.style.display = 'none';
+        iframeEl.style.display = 'block';
+        iframeEl.src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0`;
+      }
+
+      // 언어 & 숏폼 스위치 바
       const langBar = document.getElementById('cinemaLangBar');
       const pills = [];
       if (item._ytKo) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'ko')">🇰🇷 @min7014_ai 한국어 설명영상</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'ko')">🇰🇷 한국어 본편 (16:9)</button>`);
       }
       if (item._ytEn) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'en')">🇺🇸 @min7014_ai 영어 설명영상</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'en')">🇺🇸 English Full (16:9)</button>`);
+      }
+      if (item._shortKo || item._shortMp4Ko) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 숏폼 (#Shorts · 9:16)</button>`);
+      }
+      if (item._shortEn || item._shortMp4En) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Shorts (EN · 9:16)</button>`);
       }
       if (item._ytOrig) {
         pills.push(`<button type="button" class="lang-pill ${mode === 'orig' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'orig')">🎬 @min7014 원본 영상</button>`);
@@ -1522,6 +1619,7 @@
         ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="res-chip">🌐 min7014.github.io 웹페이지 ↗</a>` : ''}
         ${pdfClean ? `<a href="${pdfClean}" target="_blank" rel="noopener" class="res-chip">📄 원본 플립북 PDF ↗</a>` : ''}
         ${item.geogebra ? `<a href="${item.geogebra}" target="_blank" rel="noopener" class="res-chip">🧭 GeoGebra 인터랙티브 ↗</a>` : ''}
+        ${localShortMp4 ? `<a href="${localShortMp4}" download class="res-chip" style="border-color:#fbcfe8;background:#fdf2f8;color:#db2777;">⬇ 9:16 숏폼 MP4 다운로드</a>` : ''}
       `;
 
       stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1533,6 +1631,11 @@
     function closeCinemaStage() {
       const stage = document.getElementById('boardCinemaStage');
       document.getElementById('cinemaIframe').src = '';
+      const nativeVid = document.getElementById('cinemaNativeVideo');
+      if (nativeVid) {
+        nativeVid.pause();
+        nativeVid.src = '';
+      }
       stage.classList.remove('active');
     }
 

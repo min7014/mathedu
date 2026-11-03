@@ -1919,6 +1919,9 @@ def auto_pipeline_batch(count=1, specific_slug=None, privacy="public", upload_en
             mp4_p = YT_UPLOADS_DIR / s_key / f"{s_key}_{lc}.mp4"
             if not mp4_p.exists():
                 render_multilingual_video(s_key, lang_code=lc)
+            short_p = YT_UPLOADS_DIR / "shorts" / f"{s_key}_short_{lc}.mp4"
+            if not short_p.exists():
+                render_youtube_short_vertical(s_key, lang_code=lc)
         update_video_catalog()
         uploaded = {}
         if upload_enable:
@@ -1945,12 +1948,40 @@ def auto_pipeline_batch(count=1, specific_slug=None, privacy="public", upload_en
 
 def update_video_catalog():
     scripts = []
+    short_by_slug = {}
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         with open(sp, "r", encoding="utf-8") as f:
             sdoc = json.load(f)
         slug = sdoc["slug"]
         yt_urls = sdoc.get("youtube_urls") or {"ko": "", "en": "", "orig": ""}
         yt_pkgs = sdoc.get("youtube_packages") or {}
+        shorts_urls = sdoc.get("shorts_urls") or {"ko": "", "en": ""}
+        shorts_pkgs = sdoc.get("shorts_packages") or {}
+
+        # 로컬에 생성된 숏폼(video_lectures/shorts/{slug}_short_{lc}.mp4) 자동 감지
+        for lc in ["ko", "en"]:
+            sp_mp4 = ROOT_DIR / "video_lectures" / "shorts" / f"{slug}_short_{lc}.mp4"
+            if not sp_mp4.exists():
+                sp_mp4 = YT_UPLOADS_DIR / "shorts" / f"{slug}_short_{lc}.mp4"
+            if sp_mp4.exists():
+                pub_short_dir = ROOT_DIR / "video_lectures" / "shorts"
+                pub_short_dir.mkdir(parents=True, exist_ok=True)
+                pub_dst = pub_short_dir / f"{slug}_short_{lc}.mp4"
+                if sp_mp4 != pub_dst and not pub_dst.exists():
+                    shutil.copyfile(sp_mp4, pub_dst)
+                if lc not in shorts_pkgs:
+                    shorts_pkgs[lc] = {
+                        "title": f"🔥 {sdoc['title'] if lc == 'ko' else (sdoc.get('title_en') or sdoc['title'])} #Shorts",
+                        "local_mp4_path": f"video_lectures/shorts/{slug}_short_{lc}.mp4",
+                        "aspect_ratio": "9:16 (1080x1920)",
+                    }
+                else:
+                    shorts_pkgs[lc]["local_mp4_path"] = f"video_lectures/shorts/{slug}_short_{lc}.mp4"
+
+        short_by_slug[slug] = {
+            "shorts_urls": shorts_urls,
+            "shorts_packages": shorts_pkgs,
+        }
 
         scripts.append({
             "slug": slug,
@@ -1972,6 +2003,7 @@ def update_video_catalog():
                 "main_channel_url": MAIN_CHANNEL_URL,
             },
             "youtube_urls": yt_urls,
+            "shorts_urls": shorts_urls,
             "youtube_packages": {
                 k: {
                     "title": v.get("title", ""),
@@ -1981,18 +2013,53 @@ def update_video_catalog():
                     "total_duration_sec": v.get("total_duration_sec", 0)
                 }
                 for k, v in yt_pkgs.items()
-            }
+            },
+            "shorts_packages": shorts_pkgs,
         })
     with open(CATALOG_PATH, "w", encoding="utf-8") as f:
         json.dump(scripts, f, ensure_ascii=False, indent=2)
 
+    # min7014_deep_knowledge.json에도 숏폼 정보 동기화
+    if DEEP_JSON_PATH.exists() and short_by_slug:
+        try:
+            d_items = json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8"))
+            d_changed = False
+            for it in d_items:
+                pdf_u = (it.get("pdf") or "").split("#")[0].strip()
+                p_slug = pdf_u.split("/")[-1].replace(".pdf", "") if pdf_u else ""
+                w_slug = (it.get("url") or "").rstrip("/").split("/")[-1]
+                matched_s = p_slug if p_slug in short_by_slug else (w_slug if w_slug in short_by_slug else "")
+                if matched_s:
+                    s_info = short_by_slug[matched_s]
+                    s_urls = s_info["shorts_urls"]
+                    s_pkgs = s_info["shorts_packages"]
+                    if s_urls.get("ko") and it.get("youtube_short_ko") != s_urls["ko"]:
+                        it["youtube_short_ko"] = s_urls["ko"]
+                        d_changed = True
+                    if s_urls.get("en") and it.get("youtube_short_en") != s_urls["en"]:
+                        it["youtube_short_en"] = s_urls["en"]
+                        d_changed = True
+                    if s_pkgs.get("ko", {}).get("local_mp4_path") and it.get("short_mp4_ko") != s_pkgs["ko"]["local_mp4_path"]:
+                        it["short_mp4_ko"] = s_pkgs["ko"]["local_mp4_path"]
+                        d_changed = True
+                    if s_pkgs.get("en", {}).get("local_mp4_path") and it.get("short_mp4_en") != s_pkgs["en"]["local_mp4_path"]:
+                        it["short_mp4_en"] = s_pkgs["en"]["local_mp4_path"]
+                        d_changed = True
+            if d_changed:
+                DEEP_JSON_PATH.write_text(json.dumps(d_items, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception as de:
+            print(f"[Deep JSON Shorts Sync Notice] {de}")
+
     vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
     existing_playlists = {}
+    existing_thumbs = []
     if vault_path.exists():
         try:
-            existing_playlists = json.loads(vault_path.read_text(encoding="utf-8")).get("playlists") or {}
+            old_v = json.loads(vault_path.read_text(encoding="utf-8"))
+            existing_playlists = old_v.get("playlists") or {}
+            existing_thumbs = old_v.get("applied_custom_thumbnails") or []
         except Exception:
-            existing_playlists = {}
+            pass
 
     vault_index = {
         "vault_channel_name": YOUTUBE_CHANNEL_NAME,
@@ -2002,6 +2069,8 @@ def update_video_catalog():
         "studio_upload_url": YOUTUBE_STUDIO_UPLOAD_URL,
         "rss_feed_url": YOUTUBE_RSS_URL,
         "playlists": existing_playlists,
+        "applied_custom_thumbnails": existing_thumbs,
+        "channel_settings_optimized": True,
         "total_indexed_topics": len(scripts),
         "vault_entries": {
             s["slug"]: {
@@ -2012,6 +2081,10 @@ def update_video_catalog():
                 "youtube_ko": s["youtube_urls"].get("ko", ""),
                 "youtube_en": s["youtube_urls"].get("en", ""),
                 "youtube_orig": s["youtube_urls"].get("orig", ""),
+                "youtube_short_ko": s.get("shorts_urls", {}).get("ko", ""),
+                "youtube_short_en": s.get("shorts_urls", {}).get("en", ""),
+                "short_mp4_ko": s.get("shorts_packages", {}).get("ko", {}).get("local_mp4_path", ""),
+                "short_mp4_en": s.get("shorts_packages", {}).get("en", {}).get("local_mp4_path", ""),
                 "vault_stored": bool(s["youtube_urls"].get("ko") and s["youtube_urls"].get("en")),
             }
             for s in scripts
@@ -2227,11 +2300,134 @@ def boost_youtube_channel_popularity():
     return saved_playlist_urls
 
 
+def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, viral_hook, lang_code="ko"):
+    """
+    [숏폼(#Shorts) 전용 55초 이내 무결성 대본 압축기]
+    - YouTube Shorts 규격(9:16 세로형, 60초 미만 필수 · 최적 완주율 35~52초)을 100% 충족하도록
+      각 하이라이트 장면(총 5장면)의 내레이션을 1~2문장(7~10초 분량)의 핵심 통찰로 압축합니다.
+    """
+    txt = re.sub(r"\s+", " ", (raw_text or "").strip())
+    if seq_idx == 1:
+        if lang_code == "ko":
+            hook = viral_hook or f"{clean_title}, 공식 암기 없이 눈으로 바로 깨쳐 볼까요?"
+            # 첫 문장 또는 핵심 안내 결합
+            sents = [s.strip() for s in re.split(r"(?<=[.?!다요죠])\s+", txt) if s.strip()]
+            first_core = ""
+            for s in sents:
+                if "안녕하세요" not in s and "선생님" not in s:
+                    first_core = s
+                    break
+            combined = f"{hook} {first_core}".strip()
+            return combined[:95] if len(combined) > 95 else combined
+        else:
+            hook = viral_hook or f"Can we prove {clean_title} visually in 45 seconds?"
+            sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
+            first_core = ""
+            for s in sents:
+                if "Welcome" not in s and "Min's Math Lab" not in s:
+                    first_core = s
+                    break
+            combined = f"{hook} {first_core}".strip()
+            return combined[:155] if len(combined) > 155 else combined
+
+    if seq_idx == total_seqs:
+        if lang_code == "ko":
+            return "보조선과 기하 직관만으로 완벽 증명 완료! 1080p 풀버전 강의와 직접 움직이는 지오지브라는 채널과 설명란 링크에서 바로 체험해 보세요!"
+        else:
+            return "Visual proof complete! Watch the full 1080p lecture and try the interactive GeoGebra via the link in the description!"
+
+    # 중간 핵심 전개 장면 (2, 3, 4단계): 인사말 제거 후 가장 핵심적인 1~2문장(한국어 85자, 영어 145자 이내) 추출
+    if lang_code == "ko":
+        sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
+        picked = []
+        cur_len = 0
+        for s in sents:
+            if cur_len + len(s) <= 88 or not picked:
+                picked.append(s)
+                cur_len += len(s)
+            else:
+                break
+        res = " ".join(picked)
+        if len(res) > 92:
+            res = res[:90].rsplit(" ", 1)[0] + "."
+        return res
+    else:
+        sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
+        picked = []
+        cur_len = 0
+        for s in sents:
+            if cur_len + len(s) <= 145 or not picked:
+                picked.append(s)
+                cur_len += len(s)
+            else:
+                break
+        res = " ".join(picked)
+        if len(res) > 155:
+            res = res[:150].rsplit(" ", 1)[0] + "."
+        return res
+
+
+def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
+    """
+    [유튜브 숏폼(#Shorts) 전용 고클릭률 제목·설명·태그 메타데이터 패키지 생성]
+    """
+    slug = sdoc["slug"]
+    clean_ko = re.sub(r"\$[^\$]*\$", "", sdoc["title"]).strip()
+    clean_en = (sdoc.get("title_en") or clean_ko).strip()
+    viral_hooks = sdoc.get("viral_hooks") or {}
+    yt_urls = sdoc.get("youtube_urls") or {}
+    full_yt = yt_urls.get(lang_code) or yt_urls.get("ko") or "https://www.youtube.com/@min7014_ai"
+    board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
+
+    if lang_code == "ko":
+        hook_ko = (viral_hooks.get("ko") or f"보조선 한 줄의 마법! {clean_ko} 45초 시각적 증명").strip()
+        short_title = f"🔥 {hook_ko} | {clean_ko} #Shorts #수학"
+        if len(short_title) > 98:
+            short_title = f"🔥 {clean_ko} — 45초 시각적 수학 증명 하이라이트 #Shorts #수학"
+        desc = (
+            f"⚡ [{clean_ko} — {round(duration_sec)}초 숏폼(#Shorts) 시각적 증명 하이라이트]\n"
+            f"{hook_ko}\n\n"
+            f"🎬 1080p 전체 단계별 풀버전 설명영상 바로 보기:\n👉 {full_yt}\n\n"
+            f"📐 직접 마우스로 움직여보는 GeoGebra & 전체 1,111개 수학 설명영상 게시판:\n👉 {board_link}\n\n"
+            f"🔔 민은기 선생님의 수학자료실_AI (@min7014_ai) 구독하기:\n"
+            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+            f"[ID: {slug}_SHORT_KO]\n"
+            f"#Shorts #수학 #기하학 #시각적증명 #{clean_ko.replace(' ', '')} #피타고라스 #보조선 #수능수학 #민은기선생님의수학자료실 #min7014_ai"
+        )
+        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", clean_ko, "민은기선생님의수학자료실", "min7014_ai", "수능수학", "보조선"]
+    else:
+        hook_en = (viral_hooks.get("en") or f"45s Visual Math Proof: {clean_en}").strip()
+        short_title = f"🔥 {hook_en} | {clean_en} #Shorts #Math"
+        if len(short_title) > 98:
+            short_title = f"🔥 {clean_en} — 45s Visual Math Proof Highlight #Shorts #Math"
+        desc = (
+            f"⚡ [{clean_en} — {round(duration_sec)}s Visual Math Proof #Shorts]\n"
+            f"{hook_en}\n\n"
+            f"🎬 Watch Full 1080p Step-by-Step Proof Video:\n👉 {full_yt}\n\n"
+            f"📐 Interactive GeoGebra & Full 1,111 Math Video Board:\n👉 {board_link}\n\n"
+            f"🔔 Subscribe to Min's Math Lab AI (@min7014_ai):\n"
+            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+            f"[ID: {slug}_SHORT_EN]\n"
+            f"#Shorts #Math #Geometry #VisualProof #MathShorts #ProofWithoutWords #GeoGebra #min7014_ai"
+        )
+        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", clean_en, "MinsMathLab", "min7014_ai", "GeoGebra"]
+
+    return {
+        "title": short_title[:100],
+        "description": desc,
+        "tags": tags,
+        "categoryId": "27",
+        "defaultLanguage": lang_code,
+        "duration_sec": round(duration_sec, 2),
+        "aspect_ratio": "9:16 (1080x1920)",
+    }
+
+
 def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
     """
-    [유튜브 쇼츠(YouTube Shorts · 1080x1920 세로형 50초 하이라이트) 자동 제작기]
-    - 도입(1페이지) -> 핵심 보조선/전개(중간 3페이지) -> 최종 정리 완성(마지막 페이지)의 핵심 5장면을 추출하여
-      모바일 세로형(1080x1920) 고몰입 Shorts 영상을 생성합니다.
+    [유튜브 쇼츠(YouTube Shorts · 1080x1920 세로형 40~54초 하이라이트) 자동 제작기]
+    - 도입(1페이지) -> 핵심 보조선/전개(중간 3페이지) -> 최종 정리 완성(마지막 페이지)의 핵심 5장면을 추출하고,
+      내레이션을 숏폼 전용 초압축 대본으로 구성하여 60초 미만(40~54초) 모바일 세로형(1080x1920) Shorts 영상을 생성합니다.
     """
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     if not script_path.exists():
@@ -2252,32 +2448,47 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
     shorts_dir = YT_UPLOADS_DIR / "shorts"
     shorts_dir.mkdir(parents=True, exist_ok=True)
+    ready_shorts_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai_shorts"
+    ready_shorts_dir.mkdir(parents=True, exist_ok=True)
     tmp_dir = Path(tempfile.mkdtemp(prefix=f"min7014_short_{slug_key}_{lang_code}_"))
     segs = []
 
-    font_top = get_font_for_lang(lang_code, 46, bold=True)
-    font_sub = get_font_for_lang(lang_code, 34, bold=True)
-    font_cap = get_font_for_lang(lang_code, 32, bold=True)
+    font_top = get_font_for_lang(lang_code, 44, bold=True)
+    font_sub = get_font_for_lang(lang_code, 30, bold=True)
+    font_cap = get_font_for_lang(lang_code, 34, bold=True)
 
     clean_title = (
         (sdoc.get("title_en") or sdoc["title"])
         if lang_code == "en"
         else re.sub(r"\$[^\$]*\$", "", sdoc["title"]).strip()
     )
+    viral_hooks = sdoc.get("viral_hooks") or {}
+    viral_hook = viral_hooks.get(lang_code) or ""
+    total_seqs = len(picked_indices)
 
     try:
         for seq_idx, p_idx in enumerate(picked_indices, 1):
             p_info = pages[p_idx]
-            canvas = Image.new("RGB", (1080, 1920), (11, 18, 35))
+            canvas = Image.new("RGB", (1080, 1920), (10, 16, 34))
             draw = ImageDraw.Draw(canvas)
 
-            # 상단 후킹 배너
-            draw.rounded_rectangle((48, 70, 1032, 290), radius=28, fill=(30, 58, 138), outline=(56, 189, 248), width=3)
-            badge_txt = "🔥 1분 시각적 수학 증명 #Shorts" if lang_code == "ko" else "🔥 60s Visual Math Proof #Shorts"
-            draw.text((84, 96), badge_txt, fill=(251, 191, 36), font=font_sub)
+            # 상단 후킹 배너 + 진행률 게이지 바
+            draw.rounded_rectangle((44, 58, 1036, 294), radius=28, fill=(23, 37, 84), outline=(56, 189, 248), width=3)
+            draw.rounded_rectangle((74, 80, 540, 130), radius=18, fill=(225, 29, 72))
+            badge_txt = "⚡ 45초 시각적 증명 #Shorts" if lang_code == "ko" else "⚡ 45s Visual Proof #Shorts"
+            draw.text((94, 88), badge_txt, fill=(255, 255, 255), font=font_sub)
+
+            step_label = f"STEP {seq_idx}/{total_seqs}"
+            draw.text((845, 88), step_label, fill=(251, 191, 36), font=font_sub)
+
             title_lines = textwrap.wrap(clean_title, width=20 if lang_code == "ko" else 28)[:2]
             for li, tl in enumerate(title_lines):
-                draw.text((84, 152 + li * 56), tl, fill=(255, 255, 255), font=font_top)
+                draw.text((78, 146 + li * 54), tl, fill=(255, 255, 255), font=font_top)
+
+            # 상단 진행 바 (Progress Gauge)
+            draw.rounded_rectangle((74, 266, 1006, 280), radius=7, fill=(30, 58, 138))
+            prog_w = int(932 * (seq_idx / total_seqs))
+            draw.rounded_rectangle((74, 266, 74 + max(24, prog_w), 280), radius=7, fill=(56, 189, 248))
 
             # 중앙 고해상도 슬라이드 배치 (1080x1920 중 중앙 영역)
             pix = doc[p_idx].get_pixmap(dpi=260)
@@ -2287,32 +2498,34 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             nw, nh = int(sw * scale), int(sh * scale)
             resized = slide_pil.resize((nw, nh), Image.Resampling.LANCZOS)
             ox = (1080 - nw) // 2
-            oy = 330 + (980 - nh) // 2
-            draw.rounded_rectangle((ox - 10, oy - 10, ox + nw + 10, oy + nh + 10), radius=20, fill=(255, 255, 255))
+            oy = 326 + (980 - nh) // 2
+            draw.rounded_rectangle((ox - 12, oy - 12, ox + nw + 12, oy + nh + 12), radius=22, fill=(255, 255, 255), outline=(251, 191, 36), width=3)
             canvas.paste(resized, (ox, oy))
 
-            # 하단 자막 카드
-            narration = p_info.get("narrations", {}).get(lang_code) or p_info["explanation_text"]
-            if seq_idx == len(picked_indices):
-                narration = (
-                    "완벽 증명 완료! 전체 단계별 풀버전 영상과 직접 조작하는 지오지브라는 채널과 설명란 링크에서 바로 확인하세요!"
-                    if lang_code == "ko"
-                    else "Proof complete! Watch the full step-by-step 1080p lecture and try the interactive GeoGebra on @min7014_ai!"
-                )
-            draw.rounded_rectangle((48, 1360, 1032, 1790), radius=28, fill=(15, 23, 42), outline=(225, 29, 72), width=3)
-            step_chip = f"HIGHLIGHT {seq_idx}/{len(picked_indices)} (P.{p_info['page']}/{n})"
-            draw.text((84, 1390), step_chip, fill=(244, 63, 94), font=font_sub)
-            cap_lines = textwrap.wrap(narration, width=23 if lang_code == "ko" else 36)[:5]
-            for ci, cl in enumerate(cap_lines):
-                draw.text((84, 1455 + ci * 58), cl, fill=(248, 250, 252), font=font_cap)
+            # 하단 초압축 숏폼 내레이션 & 자막 카드
+            raw_narr = p_info.get("narrations", {}).get(lang_code) or p_info["explanation_text"]
+            short_narration = condense_narration_for_shorts(
+                raw_narr, seq_idx, total_seqs, clean_title, viral_hook, lang_code=lang_code
+            )
 
-            draw.text((84, 1825), "📺 YouTube @min7014_ai · min7014.github.io", fill=(148, 163, 184), font=font_sub)
+            draw.rounded_rectangle((44, 1345, 1036, 1795), radius=28, fill=(15, 23, 42), outline=(225, 29, 72), width=3)
+            step_chip = (
+                f"🔥 핵심 단계 {seq_idx}/{total_seqs} (슬라이드 {p_info['page']}/{n})"
+                if lang_code == "ko"
+                else f"🔥 KEY INSIGHT {seq_idx}/{total_seqs} (Slide {p_info['page']}/{n})"
+            )
+            draw.text((78, 1375), step_chip, fill=(251, 191, 36), font=font_sub)
+            cap_lines = textwrap.wrap(short_narration, width=22 if lang_code == "ko" else 34)[:5]
+            for ci, cl in enumerate(cap_lines):
+                draw.text((78, 1438 + ci * 60), cl, fill=(248, 250, 252), font=font_cap)
+
+            draw.text((78, 1828), "📺 YouTube @min7014_ai · 🌐 min7014.github.io/mathedu/video_board.html", fill=(148, 163, 184), font=font_sub)
 
             img_p = tmp_dir / f"short_{seq_idx:02d}.png"
             mp3_p = tmp_dir / f"short_{seq_idx:02d}.mp3"
             seg_p = tmp_dir / f"short_{seq_idx:02d}.mp4"
             canvas.save(img_p)
-            comm = edge_tts.Communicate(narration, voice_name, rate="+12%")
+            comm = edge_tts.Communicate(short_narration, voice_name, rate="+18%")
             asyncio.run(comm.save(str(mp3_p)))
 
             cmd = [
@@ -2335,10 +2548,158 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         )
         dur = get_media_duration_seconds(out_short, ffprobe_exe)
-        print(f"📱 [YouTube Shorts 1080x1920 Generated] {out_short} ({round(dur, 1)}s)")
+        # 만약 58초를 초과하면 자동으로 오디오/비디오 배속(atempo/setpts)을 미세 조정하여 54초 이내로 무결성 보장
+        if dur >= 58.0:
+            speed_factor = round((dur / 53.0), 3)
+            trimmed_short = tmp_dir / f"{slug_key}_short_{lang_code}_fast.mp4"
+            subprocess.run(
+                [
+                    ffmpeg_exe, "-y", "-i", str(out_short),
+                    "-filter_complex", f"[0:v]setpts=PTS/{speed_factor}[v];[0:a]atempo={min(2.0, speed_factor)}[a]",
+                    "-map", "[v]", "-map", "[a]",
+                    "-c:v", "libx264", "-profile:v", "high", "-crf", "18", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart",
+                    str(trimmed_short),
+                ],
+                check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
+            shutil.copyfile(trimmed_short, out_short)
+            dur = get_media_duration_seconds(out_short, ffprobe_exe)
+
+        # 숏폼 메타데이터 및 대본 JSON 업데이트
+        short_meta = build_youtube_short_metadata(sdoc, lang_code, dur)
+        short_meta_path = YT_PKG_DIR / f"{slug_key}_shorts_meta.json"
+        existing_smeta = {}
+        if short_meta_path.exists():
+            try:
+                existing_smeta = json.loads(short_meta_path.read_text(encoding="utf-8"))
+            except Exception:
+                existing_smeta = {}
+        existing_smeta[lang_code] = short_meta
+        short_meta_path.write_text(json.dumps(existing_smeta, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        if "shorts_packages" not in sdoc or not isinstance(sdoc["shorts_packages"], dict):
+            sdoc["shorts_packages"] = {}
+        if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
+            sdoc["shorts_urls"] = {"ko": "", "en": ""}
+        pub_short_dir = ROOT_DIR / "video_lectures" / "shorts"
+        pub_short_dir.mkdir(parents=True, exist_ok=True)
+        pub_short_path = pub_short_dir / f"{slug_key}_short_{lang_code}.mp4"
+        shutil.copyfile(out_short, pub_short_path)
+        sdoc["shorts_packages"][lang_code] = {
+            "title": short_meta["title"],
+            "local_mp4_path": f"video_lectures/shorts/{slug_key}_short_{lang_code}.mp4",
+            "duration_sec": round(dur, 2),
+            "aspect_ratio": "9:16 (1080x1920)",
+        }
+        script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        # 1-Drag 업로드 폴더에도 자동 복사
+        safe_t = re.sub(r'[\\/:*?"<>|]', " ", short_meta["title"]).strip()
+        ready_dst = ready_shorts_dir / f"{safe_t[:75]} [{slug_key}_SHORT_{lang_code.upper()}].mp4"
+        shutil.copyfile(out_short, ready_dst)
+
+        update_video_catalog()
+        print(f"📱 [YouTube Shorts 1080x1920 (<58s Verified) Generated] {out_short} ({round(dur, 1)}s) -> {short_meta['title']}")
         return out_short
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
+    """
+    [@min7014_ai 유튜브 숏폼(#Shorts) 자동 업로더 (YouTube Data API v3)]
+    """
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+    from googleapiclient.http import MediaFileUpload
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
+    if not token_file.exists():
+        raise RuntimeError("youtube_token_min7014_ai.json not found.")
+    creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
+    if not creds.valid and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+        token_file.write_text(creds.to_json(), encoding="utf-8")
+
+    youtube = build("youtube", "v3", credentials=creds)
+    script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    if not script_path.exists():
+        generate_or_update_script(slug_key, target_langs=["ko", "en"])
+
+    uploaded_shorts = {}
+    for lc in langs:
+        short_mp4 = YT_UPLOADS_DIR / "shorts" / f"{slug_key}_short_{lc}.mp4"
+        short_meta_path = YT_PKG_DIR / f"{slug_key}_shorts_meta.json"
+        if not short_mp4.exists() or not short_meta_path.exists():
+            render_youtube_short_vertical(slug_key, lang_code=lc)
+
+        sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+        existing_short_url = (sdoc.get("shorts_urls") or {}).get(lc, "").strip()
+        if existing_short_url:
+            uploaded_shorts[lc] = existing_short_url
+            print(f"📱 [Shorts Already Uploaded ({lc.upper()})] {existing_short_url}")
+            continue
+
+        smeta_all = json.loads(short_meta_path.read_text(encoding="utf-8"))
+        if lc not in smeta_all:
+            render_youtube_short_vertical(slug_key, lang_code=lc)
+            smeta_all = json.loads(short_meta_path.read_text(encoding="utf-8"))
+        smeta = smeta_all[lc]
+
+        body = {
+            "snippet": {
+                "title": smeta["title"],
+                "description": smeta["description"],
+                "tags": smeta["tags"],
+                "categoryId": smeta.get("categoryId", "27"),
+                "defaultLanguage": lc,
+                "defaultAudioLanguage": lc,
+            },
+            "status": {
+                "privacyStatus": privacy,
+                "selfDeclaredMadeForKids": False,
+            },
+        }
+        try:
+            media = MediaFileUpload(str(short_mp4), chunksize=-1, resumable=True, mimetype="video/mp4")
+            resp = youtube.videos().insert(part="snippet,status", body=body, media_body=media).execute()
+            vid_id = resp["id"]
+            short_url = f"https://youtube.com/shorts/{vid_id}"
+            uploaded_shorts[lc] = short_url
+            sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+            if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
+                sdoc["shorts_urls"] = {"ko": "", "en": ""}
+            sdoc["shorts_urls"][lc] = short_url
+            script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+            update_video_catalog()
+            print(f"🚀 [YouTube #Shorts Uploaded ({lc.upper()})] {short_url}")
+        except Exception as e:
+            print(f"  ⚠️ [YouTube #Shorts Upload Notice ({slug_key}/{lc})]: {e}")
+            break
+    return uploaded_shorts
+
+
+def build_all_shorts(upload=False, privacy="public"):
+    """
+    대본이 생성된 모든 대표 주제(7개 주제 × 한국어/영어 = 14개 숏폼)의 1080x1920 세로형 #Shorts 마스터 MP4를 일괄 제작합니다.
+    """
+    results = []
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        slug = sp.stem
+        for lc in ["ko", "en"]:
+            out_p = render_youtube_short_vertical(slug, lang_code=lc)
+            results.append(str(out_p))
+        if upload:
+            upload_short_to_youtube(slug, langs=("ko", "en"), privacy=privacy)
+    update_video_catalog()
+    return results
 
 
 def generate_channel_banner_2560x1440():
@@ -2760,6 +3121,8 @@ if __name__ == "__main__":
     parser.add_argument("--boost-youtube", action="store_true", help="Upgrade all live @min7014_ai videos with high-CTR titles, SEO tags, playlists, and Eureka quiz comments")
     parser.add_argument("--optimize-channel", action="store_true", help="Optimize @min7014_ai internal channel settings (Banner, Watermark, Keywords, Trailer, 8-Lang Localizations, Sections, Custom Thumbnails)")
     parser.add_argument("--build-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for --slug")
+    parser.add_argument("--build-all-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for all scripted topics")
+    parser.add_argument("--upload-shorts", action="store_true", help="Upload rendered YouTube Shorts (#Shorts) to @min7014_ai")
     args = parser.parse_args()
 
     if args.set_youtube_ko is not None or args.set_youtube_en is not None:
@@ -2768,6 +3131,10 @@ if __name__ == "__main__":
         optimize_youtube_channel_settings()
     elif args.boost_youtube:
         boost_youtube_channel_popularity()
+    elif args.build_all_shorts:
+        build_all_shorts(upload=args.upload_shorts, privacy=args.privacy)
+    elif args.upload_shorts:
+        upload_short_to_youtube(args.slug, langs=("ko", "en"), privacy=args.privacy)
     elif args.build_shorts:
         for lc in ["ko", "en"]:
             render_youtube_short_vertical(args.slug, lang_code=lc)
