@@ -207,6 +207,7 @@ def sync_pedagogy_counts_to_index_html():
 def run_continuous_foundation_loop(single_cycle=False):
     ensure_video_maker_hooked()
     import mathteacher
+    import pr
     import min7014_video_maker as vmaker
 
     print("=" * 78, flush=True)
@@ -216,6 +217,10 @@ def run_continuous_foundation_loop(single_cycle=False):
     mathteacher.expand_pedagogy_from_min7014_vault(max_add_per_category=5)
     mine_next_pedagogy_item_from_deep_knowledge()
     sync_pedagogy_counts_to_index_html()
+    try:
+        pr.run_autonomous_pr_cycle()
+    except Exception as pr_err:
+        print(f'[PR Agent Notice] {pr_err}', flush=True)
     write_daemon_heartbeat()
 
     if single_cycle:
