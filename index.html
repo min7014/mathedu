@@ -934,7 +934,7 @@ html.dark-theme .filter-tab-btn {
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">48대 법칙</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">50대 법칙</span>
               </div>
               <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
             </div>
@@ -3411,10 +3411,10 @@ window.openMathClinicModal = function() {
     <div class="p-3 px-5 border-b border-surface-container bg-white flex flex-wrap items-center justify-between gap-2">
       <div class="flex gap-1.5 flex-wrap" id="mtHubTabButtons">
         <button type="button" data-mt-tab="genealogy" onclick="switchMathTeacherHubTab('genealogy')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-secondary text-white">🌳 1. 초·중·고 수직 계통성 트리 (12)</button>
-        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (48)</button>
+        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (50)</button>
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
-        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (42)</button>
-        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (9)</button>
+        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (44)</button>
+        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (11)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
     </div>
@@ -4239,6 +4239,26 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "formulaBridge": "4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
       "min7014Query": "수학 특강·공학도구",
       "searchKeyword": "수학"
+    },
+    {
+      "id": "polya-min-MIN-KB-0033",
+      "domain": "수학 특강·공학도구",
+      "condition": "[2021학년도 아주대학교교육대학원 수학공학도구 특강(2021.12.30)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "복잡한 기하·미적분 문제의 조건이 잘 그려지지 않을 때는 특수한 수치(정삼각형, 직각이등변삼각형, 좌표 원점)를 먼저 대입해 도형의 경향성을 관찰하세요.",
+      "visualIntuition": "[2021학년도 아주대학교교육대학원 수학공학도구 특강] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 활용한 시각적 수학교육 공학도구 설계와 수학적 모델링.",
+      "formulaBridge": "4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
+      "min7014Query": "수학 특강·공학도구",
+      "searchKeyword": "수학"
+    },
+    {
+      "id": "polya-min-MIN-KB-0034",
+      "domain": "수학 특강·공학도구",
+      "condition": "[2021학년도 진해영재원 강의(2021.06.05~)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "복잡한 기하·미적분 문제의 조건이 잘 그려지지 않을 때는 특수한 수치(정삼각형, 직각이등변삼각형, 좌표 원점)를 먼저 대입해 도형의 경향성을 관찰하세요.",
+      "visualIntuition": "[2021학년도 진해영재원 강의(2021.06.05~)] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 활용한 시각적 수학교육 공학도구 설계와 수학적 모델링.",
+      "formulaBridge": "4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
+      "min7014Query": "수학 특강·공학도구",
+      "searchKeyword": "수학"
     }
   ],
   "misconceptionLab": [
@@ -4815,6 +4835,28 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "min7014Query": "지수·로그",
       "videoSlug": "2017031403",
       "quizKeyword": "지수"
+    },
+    {
+      "id": "lesson-auto-2017031701",
+      "gradeTarget": "중·고등 지수·로그 연계",
+      "topic": "[시각적 증명 탐구] ,  이 자연수일 때, (( ,  are natural numbers.) )",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 ',  이 자연수일 때, (( ,  are natural numbers.) )'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 ',  이 자연수일 때, (( ,  are natural numbers.) ) (2017031701)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "지수·로그",
+      "videoSlug": "2017031701",
+      "quizKeyword": "지수"
+    },
+    {
+      "id": "lesson-auto-2020022701",
+      "gradeTarget": "중·고등 지수·로그 연계",
+      "topic": "[시각적 증명 탐구] 거듭제곱(Power)",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 '거듭제곱(Power)'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 '거듭제곱(Power) (2020022701)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "지수·로그",
+      "videoSlug": "2020022701",
+      "quizKeyword": "지수"
     }
   ],
   "creativeConstructiveLab": [
@@ -4950,6 +4992,36 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
         "3단계 (기호와 내각 번역): 정$n$각형의 한 내각의 크기 공식 $\\frac{180^\\circ \\times (n-2)}{n}$을 적용하여 정칠각형(7각형)의 내각과 접는 각도 계산"
       ],
       "whatIfNotMutation": "만약 [정칠각형 매듭(Regular Heptagonal Knot)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
+    },
+    {
+      "id": "creative-min-MIN-KB-0002",
+      "domain": "유클리드 평면기하",
+      "title": "[정칠각형 매듭의 반사(Reflection of the Regular Heptagonal Knot)] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+      "originalProblem": "[정칠각형 매듭의 반사] 일정한 폭의 긴 직사각형 종이띠를 매듭지어 조였을 때, 평행선의 폭 보존과 엇각·동위각·선대칭 반사에 의해 완벽한 정칠각형(7각형)이 형성되는 기하학적 원리 규명.",
+      "constructivePrompt": "5지선다 보기에 의존하지 않고, '정칠각형 매듭의 반사(Reflection of the Regular Heptagonal Knot)'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+      "multiPathApproaches": [
+        "1단계 (초등 종이접기 직관): 폭이 일정한 긴 종이테이프를 묶어 납작하게 누를 때 생기는 다각형의 변 개수 세어 보기",
+        "2단계 (초등 평행선과 각도): 폭이 같은 두 종이띠가 겹칠 때 마름모·등변사다리꼴이 만들어지며 두 변의 길이가 같아짐을 확인",
+        "3단계 (기호와 내각 번역): 정$n$각형의 한 내각의 크기 공식 $\\frac{180^\\circ \\times (n-2)}{n}$을 적용하여 정칠각형(7각형)의 내각과 접는 각도 계산"
+      ],
+      "whatIfNotMutation": "만약 [정칠각형 매듭의 반사(Reflection of the Regular Heptagonal Knot)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
+    },
+    {
+      "id": "creative-min-MIN-KB-0003",
+      "domain": "유클리드 평면기하",
+      "title": "[팔각형 매듭(Octagonal Knot)] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+      "originalProblem": "[팔각형 매듭] 일정한 폭의 긴 직사각형 종이띠를 매듭지어 조였을 때, 평행선의 폭 보존과 엇각·동위각·선대칭 반사에 의해 완벽한 정팔각형(8각형)이 형성되는 기하학적 원리 규명.",
+      "constructivePrompt": "5지선다 보기에 의존하지 않고, '팔각형 매듭(Octagonal Knot)'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+      "multiPathApproaches": [
+        "1단계 (초등 종이접기 직관): 폭이 일정한 긴 종이테이프를 묶어 납작하게 누를 때 생기는 다각형의 변 개수 세어 보기",
+        "2단계 (초등 평행선과 각도): 폭이 같은 두 종이띠가 겹칠 때 마름모·등변사다리꼴이 만들어지며 두 변의 길이가 같아짐을 확인",
+        "3단계 (기호와 내각 번역): 정$n$각형의 한 내각의 크기 공식 $\\frac{180^\\circ \\times (n-2)}{n}$을 적용하여 정팔각형(8각형)의 내각과 접는 각도 계산"
+      ],
+      "whatIfNotMutation": "만약 [팔각형 매듭(Octagonal Knot)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
       "min7014Query": "유클리드 평면기하",
       "searchKeyword": "유클리드"
     }
