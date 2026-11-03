@@ -354,7 +354,114 @@ def clean_math_for_speech_en(text):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def auto_generate_page_explanations(doc, item_meta):
+def load_baze_api_key():
+    """환경변수 BAZE_API_KEY 또는 로컬 .baze_api_key 파일에서 BAZE AI Gateway 키를 로드합니다."""
+    env_k = os.environ.get("BAZE_API_KEY", "").strip()
+    if env_k:
+        return env_k
+    key_file = ROOT_DIR / ".baze_api_key"
+    if key_file.exists():
+        return key_file.read_text(encoding="utf-8").strip()
+    return ""
+
+
+def call_baze_vision_for_pdf_script(doc, item_meta):
+    """
+    [BAZE AI Gateway (claude-sonnet-4-6 Vision) 기반 초고품질 시각 대본 & 유튜브 인기 후킹 생성기]
+    - PDF 전 페이지를 한 장의 스토리보드 그리드 이미지로 합성하여 claude-sonnet-4-6 멀티모달 비전 모델에 전달합니다.
+    - 각 페이지의 실제 도형·보조선·수식 변화를 눈으로 판독하여 3Blue1Brown급 한·영 나레이션과 유튜브 고클릭률(CTR) 제목·훅·댓글 퀴즈를 생성합니다.
+    """
+    import base64
+    import io
+    import math
+
+    api_key = load_baze_api_key()
+    if not api_key:
+        return None
+
+    total_pages = len(doc)
+    cols = 3 if total_pages <= 15 else 4
+    rows = math.ceil(total_pages / cols)
+    cell_w, cell_h = 380, 260
+    sheet = Image.new("RGB", (cols * cell_w, rows * cell_h), (15, 23, 42))
+    draw = ImageDraw.Draw(sheet)
+    lbl_font = get_font_for_lang("en", 18, bold=True)
+
+    for idx in range(total_pages):
+        r, c = divmod(idx, cols)
+        pix = doc[idx].get_pixmap(dpi=72)
+        pil_p = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+        pil_p = pil_p.resize((cell_w - 12, cell_h - 32), Image.Resampling.LANCZOS)
+        ox = c * cell_w + 6
+        oy = r * cell_h + 26
+        draw.text((ox + 4, r * cell_h + 4), f"[Page {idx + 1}/{total_pages}]", fill=(56, 189, 248), font=lbl_font)
+        sheet.paste(pil_p, (ox, oy))
+
+    buf = io.BytesIO()
+    sheet.save(buf, format="JPEG", quality=82)
+    b64_img = base64.b64encode(buf.getvalue()).decode("ascii")
+
+    raw_title = (item_meta or {}).get("title") or "수학자료실 시각적 증명"
+    core_concept = (item_meta or {}).get("core_concept") or ""
+
+    prompt = (
+        f"당신은 3Blue1Brown 스타일의 수석 수학 유튜버이자 민은기 선생님의 수학자료실(@min7014_ai) 총괄 디렉터입니다.\n"
+        f"첨부된 스토리보드 이미지는 '{raw_title}' 플립북 PDF의 1페이지부터 {total_pages}페이지까지 전체 슬라이드입니다.\n"
+        f"참고 개념: {core_concept}\n\n"
+        f"각 페이지 슬라이드에 실제로 그려진 도형, 점/직선/원/다각형의 이름, 색깔(빨강·파랑·초록·보라 등), 수식 변화를 정밀하게 관찰하여 아래 JSON 형식으로만 응답하세요(마크다운 코드블록 없이 순수 JSON만 출력):\n"
+        f"{{\n"
+        f'  "title_en": "자연스러운 영어 수학 주제명",\n'
+        f'  "viral_title_ko": "유튜브 클릭률(CTR)을 극대화하는 한국어 제목 (이모지 포함, 85자 이내, 끝에 | @min7014_ai 포함)",\n'
+        f'  "viral_title_en": "High-CTR English YouTube title (3Blue1Brown style, <= 85 chars, ending with | @min7014_ai)",\n'
+        f'  "hook_ko": "유튜브 설명란 첫 2줄에 들어갈 강렬한 호기심 유발 질문과 핵심 통찰 (한국어 2문장)",\n'
+        f'  "hook_en": "2-sentence curiosity-driven hook for the top of the English YouTube description",\n'
+        f'  "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 시청자가 댓글로 몇 페이지인지 답하고 싶게 만드는 구체적 질문 1문장",\n'
+        f'  "quiz_en": "💬 [10-Second Eureka Quiz] Engaging question asking viewers to comment which step gave them the Eureka insight",\n'
+        f'  "pages_ko": ["1페이지입니다. ...", "2페이지입니다. ...", "... 총 {total_pages}개 문장 (수식 기호 없이 귀로 듣기만 해도 도형이 그려지도록 생생하고 친절하게 서술)"],\n'
+        f'  "pages_en": ["Step 1. ...", "Step 2. ...", "... exactly {total_pages} native English sentences matching each slide"]\n'
+        f"}}"
+    )
+
+    try:
+        payload = {
+            "model": "claude-sonnet-4-6",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64_img}"}},
+                        {"type": "text", "text": prompt},
+                    ],
+                }
+            ],
+            "max_tokens": 4096,
+            "temperature": 0.3,
+        }
+        req = urllib.request.Request(
+            "https://api.baze.co/v1/gateway/chat/completions",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+                "User-Agent": "Mozilla/5.0",
+            },
+        )
+        raw_resp = urllib.request.urlopen(req, timeout=60).read().decode("utf-8")
+        resp_obj = json.loads(raw_resp)
+        content = resp_obj["choices"][0]["message"]["content"].strip()
+        if content.startswith("```"):
+            content = re.sub(r"^```(?:json)?\s*", "", content)
+            content = re.sub(r"\s*```$", "", content)
+        parsed = json.loads(content)
+        if len(parsed.get("pages_ko", [])) == total_pages and len(parsed.get("pages_en", [])) == total_pages:
+            print(f"✨ [BAZE AI claude-sonnet-4-6 Vision Script Generated] ({total_pages} pages + Viral Hooks)")
+            return parsed
+    except Exception as e:
+        print(f"  [BAZE Vision Notice] Fallback to local analyzer: {e}")
+    return None
+
+
+def auto_generate_page_explanations(doc, item_meta, baze_result=None):
     """임의의 min7014.github.io PDF에 대해 페이지별 위치·색상 변화와 수학적 원리를 결합해 고품질 한·영 설명 대본을 생성합니다."""
     total_pages = len(doc)
     raw_title = (item_meta or {}).get("title") or "수학자료실 시각적 증명"
@@ -402,7 +509,11 @@ def auto_generate_page_explanations(doc, item_meta):
             elif cx < 0.46:
                 focus_desc = f"좌측 도형 작도 ({c_ko})"
 
-        if p_num == 1:
+        if baze_result and idx < len(baze_result.get("pages_ko", [])) and idx < len(baze_result.get("pages_en", [])):
+            exp_ko = clean_math_for_speech_ko(baze_result["pages_ko"][idx])
+            exp_en = clean_math_for_speech_en(baze_result["pages_en"][idx])
+            step_title = "도입 · 주제 및 목표" if p_num == 1 else ("완결 · 웹 탐구 안내" if p_num == total_pages else f"Step {p_num} · 시각적 작도 및 증명")
+        elif p_num == 1:
             step_title = "도입 · 주제 및 증명 목표"
             exp_ko = f"1페이지입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 {clean_title_ko}의 핵심 원리를 단계별로 증명해 봅시다. {core_ko}"
             exp_en = f"Step 1. Welcome to Min's Math Lab. In this step-by-step visual proof lecture, we explore {clean_title_en} and prove why this mathematical property holds."
@@ -510,6 +621,7 @@ def generate_or_update_script(slug_key, target_langs=None):
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     total_pages = len(doc)
 
+    baze_result = None
     if curated and len(curated["pages_ko"]) == total_pages:
         pages_data = []
         prev_pil = None
@@ -530,7 +642,10 @@ def generate_or_update_script(slug_key, target_langs=None):
                 "narrations": {"ko": exp_ko, "en": exp_en}
             })
     else:
-        pages_data = auto_generate_page_explanations(doc, item_meta)
+        baze_result = call_baze_vision_for_pdf_script(doc, item_meta)
+        if baze_result and baze_result.get("title_en"):
+            title_en = baze_result["title_en"]
+        pages_data = auto_generate_page_explanations(doc, item_meta, baze_result=baze_result)
 
     for p_obj in pages_data:
         base_ko = p_obj["explanation_text"]
@@ -542,6 +657,17 @@ def generate_or_update_script(slug_key, target_langs=None):
                 continue
             p_obj["narrations"][lang] = translate_text_google_gtx(base_ko, lang)
 
+    viral_hooks = VIRAL_HOOK_PRESETS.get(slug_key, {})
+    if baze_result:
+        viral_hooks = {
+            "title_ko": baze_result.get("viral_title_ko") or viral_hooks.get("title_ko", ""),
+            "title_en": baze_result.get("viral_title_en") or viral_hooks.get("title_en", ""),
+            "hook_ko": baze_result.get("hook_ko") or viral_hooks.get("hook_ko", ""),
+            "hook_en": baze_result.get("hook_en") or viral_hooks.get("hook_en", ""),
+            "quiz_ko": baze_result.get("quiz_ko") or viral_hooks.get("quiz_ko", ""),
+            "quiz_en": baze_result.get("quiz_en") or viral_hooks.get("quiz_en", ""),
+        }
+
     script_doc = {
         "slug": slug_key,
         "title": title,
@@ -551,7 +677,8 @@ def generate_or_update_script(slug_key, target_langs=None):
         "web_url": web_url,
         "page_count": total_pages,
         "base_language": "ko",
-        "quality_profile": "Broadcast Master 1080p (300 DPI Lanczos + H.264 High Profile CRF 16 + 48kHz/192kbps AAC)",
+        "quality_profile": "Broadcast Master 1080p (BAZE claude-sonnet-4-6 Vision Script + 300 DPI Lanczos + H.264 High Profile CRF 16)",
+        "viral_hooks": viral_hooks,
         "storage_policy": {
             "ko": "YouTube (한국어 강의 영상 유튜브 저장·스트리밍)",
             "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
@@ -838,7 +965,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     channel_id = "UCSlqQfOEtRfJuMPyGMLgFYA"
     studio_upload_url = f"https://studio.youtube.com/channel/{channel_id}/videos/upload?d=ud"
 
-    preset = VIRAL_HOOK_PRESETS.get(slug, {})
+    preset = script_doc.get("viral_hooks") or VIRAL_HOOK_PRESETS.get(slug, {})
 
     chapters = []
     for pt in page_timings:
