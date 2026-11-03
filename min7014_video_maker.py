@@ -3250,7 +3250,10 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
             update_video_catalog()
             print(f"🚀 [YouTube #Shorts Uploaded ({lc.upper()})] {short_url}")
         except Exception as e:
+            err_s = str(e)
             print(f"  ⚠️ [YouTube #Shorts Upload Notice ({slug_key}/{lc})]: {e}")
+            if "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s:
+                upload_short_to_youtube._backoff_until = time.time() + 1800
             break
     return uploaded_shorts
 
@@ -3426,24 +3429,43 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
 
             # 2) 10분마다 API 직접 업로드 재시도 (롤링 24시간 한도 해제 시 즉시 숏폼 & 본편 자동 업로드)
             now_ts = time.time()
-            if now_ts - last_api_upload_try >= 600:
+            if now_ts - last_api_upload_try >= 300:
                 last_api_upload_try = now_ts
-                for sp in sorted(SCRIPTS_DIR.glob("*.json")):
-                    sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                    yt_urls = sdoc.get("youtube_urls") or {}
-                    if not yt_urls.get("ko") or not yt_urls.get("en"):
-                        res_v = upload_slug_to_youtube(sdoc["slug"], langs=("ko", "en"), privacy="public", method="api")
-                        if not res_v:
-                            break
-                    s_urls = sdoc.get("shorts_urls") or {}
-                    if not s_urls.get("ko") or not s_urls.get("en"):
-                        res = upload_short_to_youtube(sdoc["slug"], langs=("ko", "en"), privacy="public")
-                        if not res:
+                # [Priority 1] 5대 대표 #Shorts 우선 업로드 보장
+                priority_5_shorts = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
+                quota_blocked = False
+                for p_slug in priority_5_shorts:
+                    sp_p = SCRIPTS_DIR / f"{p_slug}.json"
+                    if not sp_p.exists():
+                        continue
+                    sdoc_p = json.loads(sp_p.read_text(encoding="utf-8"))
+                    s_urls_p = sdoc_p.get("shorts_urls") or {}
+                    if not s_urls_p.get("ko"):
+                        res_p = upload_short_to_youtube(p_slug, langs=("ko",), privacy="public")
+                        if not res_p:
+                            quota_blocked = True
                             break
                         else:
                             subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
-                            subprocess.run(["git", "commit", "-m", f"chore(shorts): auto-upload {sdoc['slug']} #Shorts to @min7014_ai"], check=False)
+                            subprocess.run(["git", "commit", "-m", f"chore(shorts): auto-upload {p_slug} #Shorts to @min7014_ai"], check=False)
                             subprocess.run(["git", "push", "origin", "main"], check=False)
+                if not quota_blocked:
+                    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+                        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                        s_urls = sdoc.get("shorts_urls") or {}
+                        if not s_urls.get("ko") or not s_urls.get("en"):
+                            res = upload_short_to_youtube(sdoc["slug"], langs=("ko", "en"), privacy="public")
+                            if not res:
+                                break
+                            else:
+                                subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
+                                subprocess.run(["git", "commit", "-m", f"chore(shorts): auto-upload {sdoc['slug']} #Shorts to @min7014_ai"], check=False)
+                                subprocess.run(["git", "push", "origin", "main"], check=False)
+                        yt_urls = sdoc.get("youtube_urls") or {}
+                        if not yt_urls.get("ko") or not yt_urls.get("en"):
+                            res_v = upload_slug_to_youtube(sdoc["slug"], langs=("ko", "en"), privacy="public", method="api")
+                            if not res_v:
+                                break
 
             # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 다음 주제의 1080p 설명영상(KO/EN) + 9:16 숏폼(KO/EN) 연속 자동 제작!
             if not hasattr(run_shorts_and_video_upload_daemon, "_failed_slugs"):
