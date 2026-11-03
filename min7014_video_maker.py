@@ -781,16 +781,64 @@ async def synthesize_edge_tts_mp3(text, voice_name, out_mp3_path):
     await communicate.save(str(out_mp3_path))
 
 
+VIRAL_HOOK_PRESETS = {
+    "math20250130001": {
+        "title_ko": "🌳 피타고라스 나무가 무한히 자라나도 넓이 합이 일정한 이유! (11단계 시각적 증명) | @min7014_ai",
+        "title_en": "🌳 Why Does the Pythagoras Tree Preserve Area at Every Branch? (Visual Proof) | @min7014_ai",
+        "hook_ko": "정사각형 위에 직각삼각형과 두 정사각형 가지를 계속 뻗어나가면 넓이의 합은 어떻게 될까요? 놀랍게도 매 단계 넓이가 완벽히 보존되는 프랙탈 기하학의 비밀을 11단계로 눈앞에서 증명합니다!",
+        "hook_en": "What happens to the total area when a square branches into two smaller squares on a right triangle forever? Watch how the Pythagorean Theorem guarantees exact area conservation at every stage!",
+        "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 몇 번째 페이지에서 두 작은 정사각형의 넓이 합(a²+b²)이 아래 큰 정사각형 넓이(c²)와 같아진다는 결정적 단서가 등장했나요? 댓글로 페이지 번호를 남겨주세요!",
+        "quiz_en": "💬 [10-Second Eureka Quiz] On which step did you see that the two smaller branch squares have the exact same combined area as the trunk square? Drop the step number in the comments!"
+    },
+    "2014111902": {
+        "title_ko": "📐 [수능·경시 필수 도형] 체바의 정리, 삼각형 넓이 비 하나로 4분 만에 완벽 증명! | @min7014_ai",
+        "title_en": "📐 Ceva's Theorem Visualized: A Stunning Proof Using Only Triangle Area Ratios! | @min7014_ai",
+        "hook_ko": "삼각형의 세 꼭짓점에서 그은 세 선분이 한 점(교점)에서 만날 조건! 복잡해 보이는 체바의 정리 공식을 '높이가 같은 삼각형의 넓이 비' 하나로 명쾌하게 증명합니다.",
+        "hook_en": "Why do three concurrent cevians in a triangle always multiply to 1 around the perimeter? Discover the most intuitive visual proof using only triangle area ratios!",
+        "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 세 분수의 곱이 전부 약분되어 '1'이 되는 순간은 몇 페이지인가요? 영상을 보며 찾은 번호를 댓글로 남겨주세요!",
+        "quiz_en": "💬 [10-Second Eureka Quiz] At which step do the three area ratios cancel out to 1? Leave the step number in the comments below!"
+    },
+    "2017090101": {
+        "title_ko": "🔥 [눈으로 보는 증명] 피타고라스 정리(a²+b²=c²), 정사각형 넓이 분할 25단계 완전 정복! | @min7014_ai",
+        "title_en": "🔥 The Pythagorean Theorem (a²+b²=c²): 25-Step Visual Area Partition Proof! | @min7014_ai",
+        "hook_ko": "공식만 외우던 피타고라스 정리(a²+b²=c²), 왜 항상 성립할까요? 한 변이 (a+b)인 큰 정사각형을 직각삼각형 4개와 가운데 정사각형으로 분할하여 누구나 100% 이해할 수 있게 증명합니다!",
+        "hook_en": "Don't just memorize a² + b² = c²—see why it must be true! Watch a square of side (a+b) partition into four congruent right triangles and a tilted inner square of area c².",
+        "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 양변에서 똑같이 소거되는 네 직각삼각형의 넓이 합은 얼마인가요? (힌트: 2ab) 댓글로 정답을 남겨보세요!",
+        "quiz_en": "💬 [10-Second Eureka Quiz] Why are all four interior angles of the central quadrilateral guaranteed to be 90 degrees? Share your insight in the comments!"
+    },
+    "2014111901": {
+        "title_ko": "✨ [보조선 한 줄의 마법] 메넬라우스의 정리, 평행선 하나로 끝내는 20단계 시각 증명! | @min7014_ai",
+        "title_en": "✨ Menelaus' Theorem: How One Parallel Auxiliary Line Unlocks the Proof! | @min7014_ai",
+        "hook_ko": "어려운 기하 문제의 숨은 열쇠 '메넬라우스의 정리'! 꼭짓점 C를 지나며 할선에 평행한 보조선 단 한 줄을 그어 닮음비로 깔끔하게 약분되는 전율을 경험해 보세요.",
+        "hook_en": "Menelaus' Theorem looks mysterious until you draw ONE parallel auxiliary line through vertex C! Watch every segment ratio telescope and cancel to 1 step by step.",
+        "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 증명의 핵심 열쇠인 '평행 보조선 CD'가 처음 등장하는 결정적 순간은 몇 페이지인가요? 댓글로 알려주세요!",
+        "quiz_en": "💬 [10-Second Eureka Quiz] Which step introduces the parallel auxiliary line CD that unlocks the entire proof? Comment the step number below!"
+    },
+    "2025020101": {
+        "title_ko": "🌟 [신비한 기하학] 종이띠로 접는 정칠각형 매듭(Regular Heptagonal Knot) 11단계 원리! | @min7014_ai",
+        "title_en": "🌟 The Regular Heptagonal Knot: Hidden Euclidean Geometry in a Paper Strip! | @min7014_ai",
+        "hook_ko": "자와 컴퍼스만으로는 작도할 수 없는 정칠각형을 긴 종이띠 매듭 하나로 완벽하게 만드는 기하학적 원리! 대칭성과 평행선 성질을 11단계 플립북으로 생생하게 확인하세요.",
+        "hook_en": "A regular heptagon cannot be constructed with straightedge and compass alone—yet folding a simple paper strip into a knot forms a perfect regular heptagon! See the step-by-step geometry.",
+        "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 종이띠 매듭이 접히며 정칠각형의 대칭 윤곽이 완성되는 순간이 가장 인상 깊었던 페이지를 댓글로 남겨주세요!",
+        "quiz_en": "💬 [10-Second Eureka Quiz] Have you ever tried folding a paper strip into a polygonal knot? Tell us your favorite step in the comments!"
+    },
+}
+
+
 def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
-    """유튜브 저장용 제목, 타임스탬프(00:00) 챕터 설명문, 태그, SRT 자막을 생성합니다."""
+    """유튜브 알고리즘(클릭률 CTR, 시청 지속시간, 세션 연쇄 시청, 댓글 참여, 검색 SEO)에 최적화된 제목·설명·태그·자막을 생성합니다."""
     slug = script_doc["slug"]
     tot_p = script_doc["page_count"]
     pdf_url = script_doc["pdf_url"]
     web_url = script_doc.get("web_url") or "https://min7014.github.io/"
     studio_url = f"https://min7014.github.io/mathedu/video_studio.html?slug={slug}"
+    board_url = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
     channel_url = "https://www.youtube.com/@min7014_ai"
+    sub_url = "https://www.youtube.com/@min7014_ai?sub_confirmation=1"
     channel_id = "UCSlqQfOEtRfJuMPyGMLgFYA"
     studio_upload_url = f"https://studio.youtube.com/channel/{channel_id}/videos/upload?d=ud"
+
+    preset = VIRAL_HOOK_PRESETS.get(slug, {})
 
     chapters = []
     for pt in page_timings:
@@ -807,38 +855,82 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
 
     if lang_code == "en":
         clean_en_title = script_doc.get("title_en") or script_doc.get("title", slug)
-        yt_title = f"[Min's Math Lab AI @min7014_ai] {clean_en_title} (1080p Visual Proof)"
+        yt_title = preset.get("title_en") or f"✨ {clean_en_title} — Step-by-Step Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
         if len(yt_title) > 98:
             yt_title = yt_title[:95] + "..."
-        yt_desc = (
-            f"📐 Step-by-Step AI Visual Mathematical Proof Lecture ({tot_p} Flipbook Pages · 1080p Broadcast Quality)\n"
-            f"Topic: {clean_en_title} [ID: {slug}_EN]\n"
-            f"🤖 Official AI Lecture Channel: {channel_url}\n"
-            f"📺 Main Math Resource Channel: https://www.youtube.com/@min7014\n\n"
-            f"🔗 Interactive GeoGebra & Original Flipbook PDF: {web_url}\n"
-            f"📄 Direct PDF Link: {pdf_url}\n"
-            f"🎬 Multilingual Lecture Studio (20+ Languages): {studio_url}\n\n"
-            f"⏱️ [Step-by-Step Chapters]\n{chapters_block}\n\n"
-            f"#min7014_ai #min7014 #MathProof #Geometry #VisualMath #MinsMathLab #StepByStepMath #Mathematics"
+        hook_en = preset.get("hook_en") or (
+            f"Why does {clean_en_title} hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!"
         )
-        yt_tags = ["min7014_ai", "min7014", "Min's Math Lab", "Visual Math Proof", "Geometry Proof", "Mathematics", "GeoGebra", "Step by Step Math"]
+        quiz_en = preset.get("quiz_en") or (
+            f"💬 [10-Second Eureka Quiz] Which step (1 to {tot_p}) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!"
+        )
+        binge_en = (
+            "🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n"
+            "• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n"
+            "• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n"
+            "• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n"
+            "• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n"
+            "• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E"
+        )
+        yt_desc = (
+            f"{hook_en}\n"
+            f"📋 Full 1,111 Math Video Board & Interactive GeoGebra: {board_url}\n\n"
+            f"{quiz_en}\n\n"
+            f"{binge_en}\n\n"
+            f"🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: {sub_url}\n"
+            f"📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n"
+            f"🌐 Interactive GeoGebra & Flipbook Web Page: {web_url}\n"
+            f"📄 Original Step-by-Step PDF: {pdf_url}\n"
+            f"🎙️ 20+ Language AI Lecture Studio: {studio_url}\n"
+            f"Topic ID: [ID: {slug}_EN]\n\n"
+            f"⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n{chapters_block}\n\n"
+            f"#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014"
+        )
+        yt_tags = [
+            "Visual Math Proof", "Geometry Proof", "Proof Without Words", "Euclidean Geometry",
+            "Pythagorean Theorem", "Ceva Theorem", "Menelaus Theorem", "GeoGebra", "Math Animation",
+            "3Blue1Brown style math", "Step by Step Math", "High School Geometry", "Math Olympiad",
+            "AMC Math", "SAT Math", "Min's Math Lab", "min7014_ai", "min7014"
+        ]
     else:
         clean_ko_title = re.sub(r"\$[^\$]*\$", "", script_doc.get("title", slug)).strip()
-        yt_title = f"[민은기 선생님의 수학자료실_AI] {clean_ko_title} — 단계별 시각 증명 강의 (1080p)"
+        yt_title = preset.get("title_ko") or f"🔥 [시각적 증명] {clean_ko_title} — 눈으로 깨치는 {tot_p}단계 기하 직관 (1080p) | @min7014_ai"
         if len(yt_title) > 98:
             yt_title = yt_title[:95] + "..."
-        yt_desc = (
-            f"📐 민은기 선생님의 수학자료실(https://min7014.github.io/) AI 자동생성 단계별 플립북 PDF 해설 강의 (총 {tot_p}페이지 · 1080p 초고화질)\n"
-            f"주제: {clean_ko_title} [ID: {slug}_KO]\n"
-            f"🤖 AI 자동생성 강의 공식 채널: {channel_url}\n"
-            f"📺 본 채널: https://www.youtube.com/@min7014\n\n"
-            f"🔗 대화형 GeoGebra 실습 및 원문 보기: {web_url}\n"
-            f"📄 단계별 증명 PDF 원문: {pdf_url}\n"
-            f"🎬 전 세계 다국어 강의 영상 스튜디오: {studio_url}\n\n"
-            f"⏱️ [페이지별 단계 타임스탬프]\n{chapters_block}\n\n"
-            f"#min7014_ai #min7014 #민은기선생님의수학자료실 #수학증명 #기하학 #시각적증명 #수학교육 #GeoGebra #mathedu"
+        hook_ko = preset.get("hook_ko") or (
+            f"공식 암기 없이 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다."
         )
-        yt_tags = ["min7014_ai", "min7014", "민은기 선생님의 수학자료실_AI", "민은기 선생님의 수학자료실", "수학 증명", "기하 증명", "시각적 수학", "GeoGebra", "수능 수학", "mathedu"]
+        quiz_ko = preset.get("quiz_ko") or (
+            f"💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 {tot_p}페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!"
+        )
+        binge_ko = (
+            "🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n"
+            "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n"
+            "• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n"
+            "• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n"
+            "• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n"
+            "• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ"
+        )
+        yt_desc = (
+            f"{hook_ko}\n"
+            f"📋 전체 1,111개 수학자료 설명영상 게시판 & 직접 실습: {board_url}\n\n"
+            f"{quiz_ko}\n\n"
+            f"{binge_ko}\n\n"
+            f"🔔 [@min7014_ai 채널 구독하기]: {sub_url}\n"
+            f"📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n"
+            f"🌐 대화형 GeoGebra 직접 조작하기: {web_url}\n"
+            f"📄 단계별 플립북 증명 PDF 원문: {pdf_url}\n"
+            f"🎙️ 20개국어 AI 강의 스튜디오: {studio_url}\n"
+            f"식별 코드: [ID: {slug}_KO]\n\n"
+            f"⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n{chapters_block}\n\n"
+            f"#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014"
+        )
+        yt_tags = [
+            "수학", "기하학", "시각적 증명", "수능 수학", "도형 보조선", "피타고라스 정리",
+            "메넬라우스의 정리", "체바의 정리", "중학교 도형", "고등학교 수학", "수능 도형 킬러",
+            "영재고 수학", "KMO 기하", "GeoGebra", "알지오매스", "민은기 선생님의 수학자료실",
+            "민은기 선생님의 수학자료실_AI", "min7014_ai", "min7014", "수학 잘하는 법"
+        ]
 
     return {
         "lang": lang_code,
@@ -850,6 +942,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         "title": yt_title,
         "description": yt_desc,
         "tags": yt_tags,
+        "quiz_comment": quiz_en if lang_code == "en" else quiz_ko,
         "categoryId": "27",
         "defaultLanguage": lang_code,
         "chapters": chapters,
@@ -1766,6 +1859,14 @@ def update_video_catalog():
     with open(CATALOG_PATH, "w", encoding="utf-8") as f:
         json.dump(scripts, f, ensure_ascii=False, indent=2)
 
+    vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
+    existing_playlists = {}
+    if vault_path.exists():
+        try:
+            existing_playlists = json.loads(vault_path.read_text(encoding="utf-8")).get("playlists") or {}
+        except Exception:
+            existing_playlists = {}
+
     vault_index = {
         "vault_channel_name": YOUTUBE_CHANNEL_NAME,
         "vault_channel_handle": YOUTUBE_CHANNEL_HANDLE,
@@ -1773,6 +1874,7 @@ def update_video_catalog():
         "vault_channel_url": YOUTUBE_CHANNEL_URL,
         "studio_upload_url": YOUTUBE_STUDIO_UPLOAD_URL,
         "rss_feed_url": YOUTUBE_RSS_URL,
+        "playlists": existing_playlists,
         "total_indexed_topics": len(scripts),
         "vault_entries": {
             s["slug"]: {
@@ -1788,9 +1890,328 @@ def update_video_catalog():
             for s in scripts
         },
     }
-    vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
     vault_path.write_text(json.dumps(vault_index, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[Catalog & @min7014_ai Video Vault Updated] {CATALOG_PATH} / {vault_path} ({len(scripts)} topics)")
+
+
+def boost_youtube_channel_popularity():
+    """
+    [@min7014_ai 유튜브 인기 영상 부스터 (YouTube Algorithm SEO · CTR · Playlist · Interactive Quiz Comments)]
+    1) 이미 업로드된 모든 영상의 제목(고클릭률 훅), 설명문(정주행 추천 링크·00:00 챕터·유레카 퀴즈), 20+ 검색 태그를 최신화합니다.
+    2) @min7014_ai 채널에 한국어(KO) / 영어(EN) 공식 정주행 재생목록(Playlist)을 생성하고 모든 업로드 영상을 자동 편성합니다.
+    3) 각 영상에 시청자 댓글 참여를 유도하는 [오늘의 10초 유레카 퀴즈] 공식 첫 댓글을 자동 게시합니다.
+    """
+    refresh_all_youtube_metadata_packages()
+
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
+    if not token_file.exists():
+        raise RuntimeError("youtube_token_min7014_ai.json not found.")
+    creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
+    if not creds.valid and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+        token_file.write_text(creds.to_json(), encoding="utf-8")
+
+    youtube = build("youtube", "v3", credentials=creds)
+
+    ko_video_ids = []
+    en_video_ids = []
+
+    # 1. 업로드된 전체 영상 메타데이터(제목·설명·태그·언어) 최적화 업데이트 + 유레카 퀴즈 댓글 등록
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        slug = sdoc["slug"]
+        yt_urls = sdoc.get("youtube_urls") or {}
+        meta_path = YT_PKG_DIR / f"{slug}_youtube_meta.json"
+        if not meta_path.exists():
+            continue
+        meta_all = json.loads(meta_path.read_text(encoding="utf-8"))
+
+        for lc in ["ko", "en"]:
+            u = (yt_urls.get(lc) or "").strip()
+            if not u or lc not in meta_all:
+                continue
+            vid_id = u.split("/")[-1].split("?")[0].strip()
+            if not vid_id:
+                continue
+            if lc == "ko":
+                ko_video_ids.append((slug, vid_id))
+            else:
+                en_video_ids.append((slug, vid_id))
+
+            meta = meta_all[lc]
+            try:
+                youtube.videos().update(
+                    part="snippet",
+                    body={
+                        "id": vid_id,
+                        "snippet": {
+                            "title": meta["title"],
+                            "description": meta["description"],
+                            "tags": meta["tags"],
+                            "categoryId": meta.get("categoryId", "27"),
+                            "defaultLanguage": lc,
+                            "defaultAudioLanguage": lc,
+                        },
+                    },
+                ).execute()
+                print(f"✅ [SEO & High-CTR Updated ({lc.upper()})] {vid_id} -> {meta['title']}")
+            except Exception as e:
+                print(f"⚠️ [Video Update Notice ({vid_id})]: {e}")
+
+            # 시청자 참여 유도 첫 댓글 (중복 방지 확인)
+            quiz_comment = meta.get("quiz_comment") or ""
+            if quiz_comment:
+                try:
+                    existing_comments = youtube.commentThreads().list(
+                        part="snippet", videoId=vid_id, maxResults=10
+                    ).execute().get("items", [])
+                    already_posted = any(
+                        "유레카 퀴즈" in c["snippet"]["topLevelComment"]["snippet"].get("textOriginal", "")
+                        or "Eureka Quiz" in c["snippet"]["topLevelComment"]["snippet"].get("textOriginal", "")
+                        for c in existing_comments
+                    )
+                    if not already_posted:
+                        board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
+                        full_comment = (
+                            f"{quiz_comment}\n\n"
+                            f"📌 직접 움직여보는 GeoGebra & 전체 1,111개 수학 설명영상 게시판:\n👉 {board_link}"
+                            if lc == "ko"
+                            else f"{quiz_comment}\n\n"
+                            f"📌 Explore the Interactive GeoGebra & Full 1,111 Math Video Board:\n👉 {board_link}"
+                        )
+                        youtube.commentThreads().insert(
+                            part="snippet",
+                            body={
+                                "snippet": {
+                                    "videoId": vid_id,
+                                    "topLevelComment": {
+                                        "snippet": {
+                                            "textOriginal": full_comment
+                                        }
+                                    },
+                                }
+                            },
+                        ).execute()
+                        print(f"💬 [Interactive Eureka Quiz Comment Posted ({lc.upper()})] {vid_id}")
+                    else:
+                        print(f"💬 [Comment Already Active ({lc.upper()})] {vid_id}")
+                except Exception as ce:
+                    print(f"⚠️ [Comment Notice ({vid_id})]: {ce}")
+
+    # 2. 공식 정주행 재생목록(Playlists) 생성 및 영상 자동 편성
+    playlist_specs = {
+        "ko": {
+            "title": "🔥 [시각적 수학 증명] 보조선 한 줄로 깨치는 기하학 명작 정주행 (1080p) | 민은기 선생님의 수학자료실_AI",
+            "desc": (
+                "공식 암기 없이 눈으로 보고 직관적으로 깨치는 민은기 선생님의 수학자료실(https://min7014.github.io/) 단계별 시각적 증명 한국어 정주행 시리즈입니다.\n"
+                "전체 1,111개 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html"
+            ),
+            "videos": [vid for _, vid in ko_video_ids],
+        },
+        "en": {
+            "title": "✨ [Visual Math Proofs] Step-by-Step Euclidean Geometry & Fractal Masterclass (1080p) | Min's Math Lab AI",
+            "desc": (
+                "Step-by-step visual mathematical proofs from Min's Math Lab (https://min7014.github.io/). Watch auxiliary lines and geometric ratios come alive!\n"
+                "Full 1,111 Math Video Board: https://min7014.github.io/mathedu/video_board.html"
+            ),
+            "videos": [vid for _, vid in en_video_ids],
+        },
+    }
+
+    existing_pls = {}
+    try:
+        pl_resp = youtube.playlists().list(part="snippet", mine=True, maxResults=50).execute()
+        for it in pl_resp.get("items", []):
+            existing_pls[it["snippet"]["title"]] = it["id"]
+    except Exception as pe:
+        print(f"⚠️ [Playlist List Notice]: {pe}")
+
+    saved_playlist_urls = {}
+    for lc, pspec in playlist_specs.items():
+        pl_id = existing_pls.get(pspec["title"])
+        if not pl_id:
+            try:
+                created = youtube.playlists().insert(
+                    part="snippet,status",
+                    body={
+                        "snippet": {
+                            "title": pspec["title"],
+                            "description": pspec["desc"],
+                            "defaultLanguage": lc,
+                        },
+                        "status": {"privacyStatus": "public"},
+                    },
+                ).execute()
+                pl_id = created["id"]
+                print(f"📂 [Official Playlist Created ({lc.upper()})] https://www.youtube.com/playlist?list={pl_id}")
+            except Exception as ce:
+                print(f"⚠️ [Playlist Create Notice ({lc})]: {ce}")
+                continue
+        else:
+            print(f"📂 [Official Playlist Found ({lc.upper()})] https://www.youtube.com/playlist?list={pl_id}")
+
+        saved_playlist_urls[lc] = f"https://www.youtube.com/playlist?list={pl_id}"
+
+        # 재생목록 내부 기존 영상 확인 후 누락된 영상 추가
+        in_pl = set()
+        try:
+            pl_items = youtube.playlistItems().list(
+                part="snippet", playlistId=pl_id, maxResults=50
+            ).execute().get("items", [])
+            in_pl = {x["snippet"]["resourceId"]["videoId"] for x in pl_items}
+        except Exception:
+            in_pl = set()
+
+        for vid_id in pspec["videos"]:
+            if vid_id not in in_pl:
+                try:
+                    youtube.playlistItems().insert(
+                        part="snippet",
+                        body={
+                            "snippet": {
+                                "playlistId": pl_id,
+                                "resourceId": {
+                                    "kind": "youtube#video",
+                                    "videoId": vid_id,
+                                },
+                            }
+                        },
+                    ).execute()
+                    print(f"  ➕ Added video {vid_id} to {lc.upper()} Playlist ({pl_id})")
+                except Exception as ie:
+                    print(f"  ⚠️ [Playlist Insert Notice ({pl_id}/{vid_id})]: {ie}")
+
+    vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
+    if vault_path.exists():
+        vdata = json.loads(vault_path.read_text(encoding="utf-8"))
+        vdata["playlists"] = saved_playlist_urls
+        vault_path.write_text(json.dumps(vdata, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"✅ [Vault Index Playlists Saved] {saved_playlist_urls}")
+
+    return saved_playlist_urls
+
+
+def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
+    """
+    [유튜브 쇼츠(YouTube Shorts · 1080x1920 세로형 50초 하이라이트) 자동 제작기]
+    - 도입(1페이지) -> 핵심 보조선/전개(중간 3페이지) -> 최종 정리 완성(마지막 페이지)의 핵심 5장면을 추출하여
+      모바일 세로형(1080x1920) 고몰입 Shorts 영상을 생성합니다.
+    """
+    script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    if not script_path.exists():
+        generate_or_update_script(slug_key, target_langs=["ko", "en"])
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+    pages = sdoc["pages"]
+    n = len(pages)
+    if n <= 5:
+        picked_indices = list(range(n))
+    else:
+        picked_indices = sorted(list({0, max(1, n // 4), n // 2, min(n - 2, (3 * n) // 4), n - 1}))
+
+    pdf_bytes = urllib.request.urlopen(sdoc["pdf_url"]).read()
+    doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+    voice_name = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])["voice"]
+    ffmpeg_exe = shutil.which("ffmpeg")
+    ffprobe_exe = shutil.which("ffprobe")
+
+    shorts_dir = YT_UPLOADS_DIR / "shorts"
+    shorts_dir.mkdir(parents=True, exist_ok=True)
+    tmp_dir = Path(tempfile.mkdtemp(prefix=f"min7014_short_{slug_key}_{lang_code}_"))
+    segs = []
+
+    font_top = get_font_for_lang(lang_code, 46, bold=True)
+    font_sub = get_font_for_lang(lang_code, 34, bold=True)
+    font_cap = get_font_for_lang(lang_code, 32, bold=True)
+
+    clean_title = (
+        (sdoc.get("title_en") or sdoc["title"])
+        if lang_code == "en"
+        else re.sub(r"\$[^\$]*\$", "", sdoc["title"]).strip()
+    )
+
+    try:
+        for seq_idx, p_idx in enumerate(picked_indices, 1):
+            p_info = pages[p_idx]
+            canvas = Image.new("RGB", (1080, 1920), (11, 18, 35))
+            draw = ImageDraw.Draw(canvas)
+
+            # 상단 후킹 배너
+            draw.rounded_rectangle((48, 70, 1032, 290), radius=28, fill=(30, 58, 138), outline=(56, 189, 248), width=3)
+            badge_txt = "🔥 1분 시각적 수학 증명 #Shorts" if lang_code == "ko" else "🔥 60s Visual Math Proof #Shorts"
+            draw.text((84, 96), badge_txt, fill=(251, 191, 36), font=font_sub)
+            title_lines = textwrap.wrap(clean_title, width=20 if lang_code == "ko" else 28)[:2]
+            for li, tl in enumerate(title_lines):
+                draw.text((84, 152 + li * 56), tl, fill=(255, 255, 255), font=font_top)
+
+            # 중앙 고해상도 슬라이드 배치 (1080x1920 중 중앙 영역)
+            pix = doc[p_idx].get_pixmap(dpi=260)
+            slide_pil = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+            sw, sh = slide_pil.size
+            scale = min(984 / sw, 980 / sh)
+            nw, nh = int(sw * scale), int(sh * scale)
+            resized = slide_pil.resize((nw, nh), Image.Resampling.LANCZOS)
+            ox = (1080 - nw) // 2
+            oy = 330 + (980 - nh) // 2
+            draw.rounded_rectangle((ox - 10, oy - 10, ox + nw + 10, oy + nh + 10), radius=20, fill=(255, 255, 255))
+            canvas.paste(resized, (ox, oy))
+
+            # 하단 자막 카드
+            narration = p_info.get("narrations", {}).get(lang_code) or p_info["explanation_text"]
+            if seq_idx == len(picked_indices):
+                narration = (
+                    "완벽 증명 완료! 전체 단계별 풀버전 영상과 직접 조작하는 지오지브라는 채널과 설명란 링크에서 바로 확인하세요!"
+                    if lang_code == "ko"
+                    else "Proof complete! Watch the full step-by-step 1080p lecture and try the interactive GeoGebra on @min7014_ai!"
+                )
+            draw.rounded_rectangle((48, 1360, 1032, 1790), radius=28, fill=(15, 23, 42), outline=(225, 29, 72), width=3)
+            step_chip = f"HIGHLIGHT {seq_idx}/{len(picked_indices)} (P.{p_info['page']}/{n})"
+            draw.text((84, 1390), step_chip, fill=(244, 63, 94), font=font_sub)
+            cap_lines = textwrap.wrap(narration, width=23 if lang_code == "ko" else 36)[:5]
+            for ci, cl in enumerate(cap_lines):
+                draw.text((84, 1455 + ci * 58), cl, fill=(248, 250, 252), font=font_cap)
+
+            draw.text((84, 1825), "📺 YouTube @min7014_ai · min7014.github.io", fill=(148, 163, 184), font=font_sub)
+
+            img_p = tmp_dir / f"short_{seq_idx:02d}.png"
+            mp3_p = tmp_dir / f"short_{seq_idx:02d}.mp3"
+            seg_p = tmp_dir / f"short_{seq_idx:02d}.mp4"
+            canvas.save(img_p)
+            comm = edge_tts.Communicate(narration, voice_name, rate="+12%")
+            asyncio.run(comm.save(str(mp3_p)))
+
+            cmd = [
+                ffmpeg_exe, "-y",
+                "-loop", "1", "-framerate", "30", "-i", str(img_p),
+                "-i", str(mp3_p),
+                "-c:v", "libx264", "-profile:v", "high", "-crf", "17", "-pix_fmt", "yuv420p",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
+                "-shortest",
+                str(seg_p),
+            ]
+            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            segs.append(seg_p)
+
+        concat_p = tmp_dir / "concat.txt"
+        concat_p.write_text("\n".join(f"file '{s.as_posix()}'" for s in segs), encoding="utf-8")
+        out_short = shorts_dir / f"{slug_key}_short_{lang_code}.mp4"
+        subprocess.run(
+            [ffmpeg_exe, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_p), "-c", "copy", "-movflags", "+faststart", str(out_short)],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        dur = get_media_duration_seconds(out_short, ffprobe_exe)
+        print(f"📱 [YouTube Shorts 1080x1920 Generated] {out_short} ({round(dur, 1)}s)")
+        return out_short
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 def watch_for_client_secret_and_auto_upload(privacy="public", open_gcp=True):
@@ -1852,10 +2273,17 @@ if __name__ == "__main__":
     parser.add_argument("--open-studio", action="store_true", help="Open https://www.youtube.com/@min7014_ai YouTube Studio upload modal and local MP4 folder")
     parser.add_argument("--set-youtube-ko", type=str, default=None, help="Bind uploaded Korean YouTube URL for --slug")
     parser.add_argument("--set-youtube-en", type=str, default=None, help="Bind uploaded English YouTube URL for --slug")
+    parser.add_argument("--boost-youtube", action="store_true", help="Upgrade all live @min7014_ai videos with high-CTR titles, SEO tags, playlists, and Eureka quiz comments")
+    parser.add_argument("--build-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for --slug")
     args = parser.parse_args()
 
     if args.set_youtube_ko is not None or args.set_youtube_en is not None:
         set_youtube_urls_for_slug(args.slug, yt_ko=args.set_youtube_ko, yt_en=args.set_youtube_en)
+    elif args.boost_youtube:
+        boost_youtube_channel_popularity()
+    elif args.build_shorts:
+        for lc in ["ko", "en"]:
+            render_youtube_short_vertical(args.slug, lang_code=lc)
     elif args.watch_oauth:
         watch_for_client_secret_and_auto_upload(privacy=args.privacy, open_gcp=True)
     elif args.sync_channel:

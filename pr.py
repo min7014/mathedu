@@ -57,6 +57,21 @@ PR_CHANNELS = [
         "Explore interactive 3D mathematical monuments (Dandelin Spheres, Euler Spirals, Riemann Sums), use the built-in Descartes Scratchpad & Polya's 3-Step Deep Contemplation mode, and master calculus, geometry, and probability step by step — 100% free & open.\n"
         "👉 https://min7014.github.io/mathedu/",
     ),
+    (
+        "youtube",
+        "📺 @min7014_ai 유튜브 시각적 수학 증명 시리즈 바이럴 추천 키트",
+        "🔥 [공식 암기 없이 눈으로 깨치는 1080p 시각적 수학 증명 유튜브 채널 @min7014_ai]\n"
+        "보조선 한 줄이 그어지는 순간 왜 피타고라스·메넬라우스·체바의 정리가 성립하는지 한눈에 보입니다!\n"
+        "• 🌳 피타고라스 나무 넓이 보존 (11단계): https://youtu.be/bQO7fnT6aDU (EN: https://youtu.be/9JKLflqrtDU)\n"
+        "• 🔥 피타고라스 정리 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA (EN: https://youtu.be/n9zyKwXXsbA)\n"
+        "• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w (EN: https://youtu.be/ffNJhPRvh4Y)\n"
+        "• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg (EN: https://youtu.be/CjE2nyyzG2s)\n"
+        "• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ (EN: https://youtu.be/fXQJ8s1La-E)\n"
+        "📂 한국어 정주행 재생목록: https://www.youtube.com/playlist?list=PLQfKuD3IPx1c\n"
+        "📂 English Official Playlist: https://www.youtube.com/playlist?list=PLA4FYpQnYlJQ\n"
+        "📋 전체 1,111개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html\n"
+        "🔔 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1",
+    ),
 ]
 
 
