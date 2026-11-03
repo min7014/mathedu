@@ -2220,12 +2220,19 @@
             '<button type="button" class="acad-pill-btn" id="btnAcadVariation" onclick="window.toggleAcadDrawer(\'variation\')">' +
               bilingual('🔄 변이·전이 & 유레카 노트', '🔄 Variation & Eureka Note') +
             '</button>' +
+            '<button type="button" class="acad-pill-btn" id="btnAcadYoutube" onclick="window.toggleAcadDrawer(\'youtube\')" style="background:linear-gradient(135deg,#e11d48,#be123c);color:#ffffff;border-color:#e11d48">' +
+              bilingual('🎬 @min7014_ai 유튜브 시각 증명', '🎬 @min7014_ai YouTube Proof') +
+            '</button>' +
+            '<button type="button" class="acad-pill-btn" id="btnAcadYtShare" onclick="window.shareProblemWithYoutube()" style="background:#fef2f2;color:#be123c;border-color:#fda4af">' +
+              bilingual('📢 유튜브+문제 1초 홍보 공유', '📢 Share Video + Problem') +
+            '</button>' +
           '</div>' +
         '</div>' +
         '<div id="acadDrawerCpa" class="acad-drawer-panel"></div>' +
         '<div id="acadDrawerScratch" class="acad-drawer-panel"></div>' +
         '<div id="acadDrawerMetacog" class="acad-drawer-panel"></div>' +
-        '<div id="acadDrawerVariation" class="acad-drawer-panel"></div>';
+        '<div id="acadDrawerVariation" class="acad-drawer-panel"></div>' +
+        '<div id="acadDrawerYoutube" class="acad-drawer-panel"></div>';
 
       if (targetAnchor.parentNode) {
         targetAnchor.parentNode.insertBefore(wb, targetAnchor.nextSibling);
@@ -2507,12 +2514,104 @@
       } catch (e) {}
     };
 
+    function getMatchedYoutubeCoachItem() {
+      var title = (getProblemTitle() || '') + ' ' + (document.body ? document.body.textContent.slice(0, 600) : '');
+      var items = [
+        { slug: '0001', title: '메넬라우스의 정리 (20단계 평행보조선 시각 증명)', ytKo: '7zD66SWWceg', ytEn: 'CjE2nyyzG2s', kw: '메넬라우스|비율|할선|외분|내분' },
+        { slug: '0002', title: '체바의 정리 (17단계 삼각형 넓이 비 시각 증명)', ytKo: 'W_AWH-Gk89w', ytEn: 'ffNJhPRvh4Y', kw: '체바|무게중심|수심|내심|넓이 비' },
+        { slug: '0003', title: '피타고라스 정리 (25단계 넓이 분할·전단 이동 증명)', ytKo: 'k6LBYa5SCiA', ytEn: 'n9zyKwXXsbA', kw: '피타고라스|직각삼각형|빗변|코사인|사인|거리' },
+        { slug: '0004', title: '피타고라스 나무 (11단계 프랙탈 넓이 보존·등비급수)', ytKo: 'bQO7fnT6aDU', ytEn: '9JKLflqrtDU', kw: '등비|급수|수열|지수|거듭제곱|극한|프랙탈' },
+        { slug: '0005', title: '종이띠로 접는 정칠각형 매듭 원리 (11단계 대칭 작도)', ytKo: 'Mq6s2JLV9mQ', ytEn: 'fXQJ8s1La-E', kw: '다각형|원|접선|각도|대칭' }
+      ];
+      for (var i = 0; i < items.length; i++) {
+        if (new RegExp(items[i].kw).test(title)) return items[i];
+      }
+      return items[2];
+    }
+
+    function renderYoutubeCoachDrawer(customIdx, customLang) {
+      var drawer = document.getElementById('acadDrawerYoutube');
+      if (!drawer) return;
+      var list = [
+        { slug: '0003', title: '피타고라스 정리 (25단계 넓이 분할 증명)', ytKo: 'k6LBYa5SCiA', ytEn: 'n9zyKwXXsbA' },
+        { slug: '0004', title: '피타고라스 나무 (11단계 넓이 보존·수열·지수)', ytKo: 'bQO7fnT6aDU', ytEn: '9JKLflqrtDU' },
+        { slug: '0001', title: '메넬라우스의 정리 (20단계 평행보조선 증명)', ytKo: '7zD66SWWceg', ytEn: 'CjE2nyyzG2s' },
+        { slug: '0002', title: '체바의 정리 (17단계 삼각형 넓이 비 증명)', ytKo: 'W_AWH-Gk89w', ytEn: 'ffNJhPRvh4Y' },
+        { slug: '0005', title: '정칠각형 종이띠 매듭 (11단계 기하 작도)', ytKo: 'Mq6s2JLV9mQ', ytEn: 'fXQJ8s1La-E' }
+      ];
+      var matched = getMatchedYoutubeCoachItem();
+      var selIdx = (typeof customIdx === 'number') ? customIdx : list.findIndex(function(x){ return x.slug === matched.slug; });
+      if (selIdx < 0) selIdx = 0;
+      var cur = list[selIdx];
+      var lang = customLang || (isEnMode() ? 'en' : 'ko');
+      var vidId = (lang === 'en') ? cur.ytEn : cur.ytKo;
+      var isBoard = window.location.pathname.indexOf('/board/') !== -1 || window.location.pathname.indexOf('/offline/') !== -1;
+      var boardHref = (isBoard ? '../video_board.html' : 'video_board.html') + '?slug=' + cur.slug + '&from=quiz';
+      var topicBtns = list.map(function(it, i) {
+        var activeStyle = (i === selIdx) ? 'background:#e11d48;color:#fff;border-color:#e11d48' : 'background:#f8fafc;color:#334155;border-color:#cbd5e1';
+        return '<button type="button" onclick="window.switchAcadYoutubeCoach(' + i + ', \'' + lang + '\')" style="padding:5px 10px;border-radius:8px;border:1px solid;font-size:0.75rem;font-weight:800;cursor:pointer;' + activeStyle + '">🎬 ' + it.title + '</button>';
+      }).join('');
+      drawer.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">' +
+          '<div style="font-weight:900;color:#be123c;font-size:0.86rem">📺 @min7014_ai 유튜브 시각 증명 코치 × mathedu 양방향 학습 극장</div>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+            '<button type="button" onclick="window.switchAcadYoutubeCoach(' + selIdx + ', \'ko\')" style="padding:4px 10px;border-radius:999px;border:1px solid #e11d48;background:' + (lang==='ko'?'#e11d48':'#fff') + ';color:' + (lang==='ko'?'#fff':'#e11d48') + ';font-size:0.74rem;font-weight:800;cursor:pointer">🇰🇷 한국어 1080p</button>' +
+            '<button type="button" onclick="window.switchAcadYoutubeCoach(' + selIdx + ', \'en\')" style="padding:4px 10px;border-radius:999px;border:1px solid #2563eb;background:' + (lang==='en'?'#2563eb':'#fff') + ';color:' + (lang==='en'?'#fff':'#2563eb') + ';font-size:0.74rem;font-weight:800;cursor:pointer">🇺🇸 English 1080p</button>' +
+            '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="padding:4px 10px;border-radius:999px;background:#0f172a;color:#fff;font-size:0.74rem;font-weight:800;text-decoration:none">🔔 @min7014_ai 구독 ↗</a>' +
+            '<a href="' + boardHref + '" style="padding:4px 10px;border-radius:999px;background:#0284c7;color:#fff;font-size:0.74rem;font-weight:800;text-decoration:none">📋 1,113개 설명영상 게시판 ↗</a>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">' + topicBtns + '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:center">' +
+          '<div style="aspect-ratio:16/9;width:100%;background:#000;border-radius:10px;overflow:hidden;border:1.5px solid #fda4af">' +
+            '<iframe src="https://www.youtube-nocookie.com/embed/' + vidId + '?rel=0" style="width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+          '</div>' +
+          '<div style="padding:12px;border-radius:10px;background:linear-gradient(135deg,#fff1f2 0%,#f0f9ff 100%);border:1px solid #fecdd3;font-size:0.8rem;line-height:1.6;color:#1e293b">' +
+            '<div style="font-weight:900;color:#be123c;margin-bottom:4px">🚀 유튜브 영상 × 홈페이지 자생 성장 루프</div>' +
+            '• <b>1단계 (유튜브 시각 직관)</b>: 보조선이 그어지고 도형이 이동하는 1080p 플립북 영상으로 공식 암기 없이 원리를 깨칩니다.<br>' +
+            '• <b>2단계 (탈-5지선다 창의 구성)</b>: 깨달은 원리로 아래 디딤돌 단계에서 5지선다 찍기 없이 직접 식을 조립해 해결합니다.<br>' +
+            '• <b>3단계 (친구 도전장 & 홍보 공유)</b>: 이 문제와 @min7014_ai 유튜브 설명영상을 카톡·단톡방에 공유해 친구와 함께 도전하세요!' +
+            '<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">' +
+              '<button type="button" onclick="window.shareProblemWithYoutube()" style="padding:7px 13px;border-radius:8px;border:none;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;font-size:0.78rem;font-weight:900;cursor:pointer">📢 이 문제 + @min7014_ai 유튜브 영상 1초 공유 (+30 XP)</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    window.switchAcadYoutubeCoach = function(idx, lang) {
+      renderYoutubeCoachDrawer(idx, lang);
+    };
+
+    window.shareProblemWithYoutube = function() {
+      var matched = getMatchedYoutubeCoachItem();
+      var probTitle = getProblemTitle();
+      var shareUrl = window.location.href.split('#')[0];
+      var msg = [
+        '🔥 [민은기 선생님의 수학자료실 × @min7014_ai 시각 증명 & 탈-5지선다 창의 수학 도전장!]',
+        '📌 도전 문항: ' + probTitle,
+        '✍️ 5지선다 찍기 없이 스스로 수식을 조립해 푸는 창의 디딤돌 바로 도전:',
+        '👉 ' + shareUrl,
+        '',
+        '🎬 연관 시각적 수학 증명 1080p 유튜브 (@min7014_ai - ' + matched.title + '):',
+        '👉 https://youtu.be/' + matched.ytKo,
+        '📋 전체 1,113개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html'
+      ].join('\n');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(msg).catch(function(){});
+      }
+      if (window.MatheduGame && window.MatheduGame.addXP) {
+        window.MatheduGame.addXP(30, '📢 유튜브 영상 + 수학 문제 홍보 공유');
+      }
+      alert('📢 [유튜브 설명영상 + 현재 수학 문제] 단톡방·SNS 홍보 카드가 클립보드에 복사되었습니다! (+30 XP)\n\n' + msg);
+    };
+
     window.toggleAcadDrawer = function(which) {
       var map = {
         cpa: { id: 'acadDrawerCpa', btn: 'btnAcadCpa', init: function() { renderCpaDrawer('iconic'); } },
         scratch: { id: 'acadDrawerScratch', btn: 'btnAcadScratch', init: renderScratchDrawer },
         metacog: { id: 'acadDrawerMetacog', btn: 'btnAcadMetacog', init: renderMetacogDrawer },
-        variation: { id: 'acadDrawerVariation', btn: 'btnAcadVariation', init: renderVariationDrawer }
+        variation: { id: 'acadDrawerVariation', btn: 'btnAcadVariation', init: renderVariationDrawer },
+        youtube: { id: 'acadDrawerYoutube', btn: 'btnAcadYoutube', init: function() { renderYoutubeCoachDrawer(); } }
       };
       var item = map[which];
       if (!item) return;
@@ -2520,11 +2619,11 @@
       var btn = document.getElementById(item.btn);
       if (!el) return;
       var isOpen = el.classList.contains('open');
-      ['acadDrawerCpa', 'acadDrawerScratch', 'acadDrawerMetacog', 'acadDrawerVariation'].forEach(function(id) {
+      ['acadDrawerCpa', 'acadDrawerScratch', 'acadDrawerMetacog', 'acadDrawerVariation', 'acadDrawerYoutube'].forEach(function(id) {
         var d = document.getElementById(id);
         if (d) d.classList.remove('open');
       });
-      ['btnAcadCpa', 'btnAcadScratch', 'btnAcadMetacog', 'btnAcadVariation'].forEach(function(bid) {
+      ['btnAcadCpa', 'btnAcadScratch', 'btnAcadMetacog', 'btnAcadVariation', 'btnAcadYoutube'].forEach(function(bid) {
         var b = document.getElementById(bid);
         if (b) b.classList.remove('active');
       });

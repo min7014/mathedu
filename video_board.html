@@ -1354,6 +1354,10 @@
                     </div>
                   </div>
                 ` : ''}
+                <div class="yt-link-row" style="background:linear-gradient(135deg,#f0fdf4,#eff6ff);border-color:#86efac;">
+                  <a href="index.html?q=${encodeURIComponent((item.title || '').split('(')[0].trim())}&from=video_board" style="font-weight:800;color:#047857;text-decoration:none;font-size:0.75rem;">✍️ 탈-5지선다 관련 기출 도전 ➔</a>
+                  <button type="button" class="mini-play-btn" style="background:#059669;" onclick="copyTopicYoutubeWebsitePromo(${itemIdx})">📢 홍보 카드 복사</button>
+                </div>
               </div>
             </div>
           </article>
@@ -1646,10 +1650,14 @@
       `;
 
       const pdfClean = (item.pdf || '').split('#')[0].trim();
+      const cleanKw = (item.title || '').split('(')[0].trim();
       document.getElementById('cinemaResourceLinks').innerHTML = `
         ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="res-chip">🌐 min7014.github.io 웹페이지 ↗</a>` : ''}
         ${pdfClean ? `<a href="${pdfClean}" target="_blank" rel="noopener" class="res-chip">📄 원본 플립북 PDF ↗</a>` : ''}
         ${item.geogebra ? `<a href="${item.geogebra}" target="_blank" rel="noopener" class="res-chip">🧭 GeoGebra 인터랙티브 ↗</a>` : ''}
+        <a href="index.html?q=${encodeURIComponent(cleanKw)}&from=video_board" class="res-chip" style="border-color:#86efac;background:#f0fdf4;color:#047857;font-weight:800;">✍️ 이 개념 탈-5지선다 기출 풀기 ➔</a>
+        <a href="game.html" class="res-chip" style="border-color:#c7d2fe;background:#eef2ff;color:#4338ca;font-weight:800;">🎮 3D 수학 성소 보스 레이드 ➔</a>
+        <button type="button" onclick="copyTopicYoutubeWebsitePromo(${itemIdx})" class="res-chip" style="border-color:#fda4af;background:#fff1f2;color:#be123c;font-weight:800;cursor:pointer;">📢 이 영상+홈페이지 홍보 카드 복사</button>
         ${localShortMp4 ? `<a href="${localShortMp4}" download class="res-chip" style="border-color:#fbcfe8;background:#fdf2f8;color:#db2777;">⬇ 9:16 숏폼 MP4 다운로드</a>` : ''}
       `;
 
@@ -1670,18 +1678,35 @@
       stage.classList.remove('active');
     }
 
+    function copyTopicYoutubeWebsitePromo(itemIdx) {
+      const item = ALL_ITEMS[itemIdx];
+      if (!item) return;
+      const cleanKw = (item.title || '').split('(')[0].trim();
+      const ytUrl = item._ytKo || item._ytEn || 'https://www.youtube.com/@min7014_ai';
+      const shareText = [
+        `🔥 [눈으로 깨치는 단계별 시각적 수학 증명 × 탈-5지선다 창의 수학 실험실]`,
+        `📌 주제: ${item.title} (${item.id})`,
+        `🎬 1단계 · @min7014_ai 1080p 유튜브 시각 증명 바로 보기: ${ytUrl}`,
+        `📐 2단계 · 이 도형 GeoGebra 동적 조작 & 1,113개 영상 게시판: https://min7014.github.io/mathedu/video_board.html?slug=${encodeURIComponent(item._slug)}&from=share`,
+        `✍️ 3단계 · 5지선다 찍기 없이 스스로 식을 조립해 푸는 관련 기출 도전: https://min7014.github.io/mathedu/index.html?q=${encodeURIComponent(cleanKw)}&from=share`,
+        `🔔 @min7014_ai 채널 구독: https://www.youtube.com/@min7014_ai?sub_confirmation=1`
+      ].join('\n');
+      navigator.clipboard.writeText(shareText);
+      alert(`📢 [${item.title}] 유튜브 영상 + mathedu 홈페이지 양방향 홍보 카드가 클립보드에 복사되었습니다!\n\n${shareText}`);
+    }
+
     function copyCinemaUrl() {
       const u = document.getElementById('cinemaUrlText').textContent;
       const t = document.getElementById('cinemaTitle').textContent;
-      const shareText = `🔥 [눈으로 깨치는 단계별 시각적 수학 증명]\n📌 ${t}\n🎬 유튜브 바로 보기: ${u}\n📋 전체 1,111개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html\n🔔 @min7014_ai 구독: https://www.youtube.com/@min7014_ai?sub_confirmation=1`;
+      const shareText = `🔥 [눈으로 깨치는 단계별 시각적 수학 증명 × mathedu 창의 수학 플랫폼]\n📌 ${t}\n🎬 유튜브 바로 보기: ${u}\n✍️ 16,548문항 탈-5지선다 창의 수학 스튜디오: https://min7014.github.io/mathedu/\n📋 전체 1,113개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html\n🔔 @min7014_ai 구독: https://www.youtube.com/@min7014_ai?sub_confirmation=1`;
       navigator.clipboard.writeText(shareText);
-      alert(`카톡·단톡방·SNS 공유용 추천 문구와 유튜브 링크가 복사되었습니다!\n\n${shareText}`);
+      alert(`카톡·단톡방·SNS 공유용 추천 문구와 유튜브+홈페이지 링크가 복사되었습니다!\n\n${shareText}`);
     }
 
     function copyChannelViralShareKit() {
       const kitText = [
-        '🔥 [공식 암기 없이 눈으로 깨치는 시각적 수학 증명 유튜브 채널 @min7014_ai 추천!]',
-        '보조선 한 줄이 그어지는 순간 왜 피타고라스·메넬라우스·체바의 정리가 성립하는지 1080p 단계별 플립북으로 한눈에 보입니다!',
+        '🔥 [공식 암기 없이 눈으로 깨치는 @min7014_ai 유튜브 × 탈-5지선다 창의 수학 플랫폼 mathedu!]',
+        '보조선 한 줄이 그어지는 순간 왜 정리가 성립하는지 1080p 단계별 플립북으로 보고, 홈페이지에서 GeoGebra 조작과 탈-5지선다 수식 레고 조립으로 직접 해결해 보세요!',
         '',
         '🌳 피타고라스 나무 넓이 보존 (11단계): https://youtu.be/bQO7fnT6aDU',
         '🔥 피타고라스 정리 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA',
@@ -1689,20 +1714,21 @@
         '✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg',
         '🌟 종이띠로 접는 정칠각형 매듭 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ',
         '',
-        '📂 한국어 정주행 재생목록: https://www.youtube.com/playlist?list=PLQfKuD3IPx1c',
-        '📂 English Official Playlist: https://www.youtube.com/playlist?list=PLA4FYpQnYlJQ',
-        '📋 전체 1,111개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html',
-        '🔔 @min7014_ai 채널 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1'
+        '🌐 [1] 16,548문항 탈-5지선다 창의 수학 홈페이지: https://min7014.github.io/mathedu/',
+        '📋 [2] 전체 1,113개 수학 설명영상 & GeoGebra 게시판: https://min7014.github.io/mathedu/video_board.html',
+        '🎮 [3] 3D 수학 성소 보스 레이드 RPG: https://min7014.github.io/mathedu/game.html',
+        '📂 [4] 한국어 정주행 재생목록: https://www.youtube.com/playlist?list=PLQfKuD3IPx1c',
+        '🔔 [5] @min7014_ai 채널 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1'
       ].join('\n');
       if (navigator.share) {
         navigator.share({
-          title: '🔥 민은기 선생님의 수학자료실 (@min7014_ai) 시각적 수학 증명 시리즈',
+          title: '🔥 민은기 선생님의 수학자료실 (@min7014_ai) × mathedu 창의 수학 플랫폼',
           text: kitText,
           url: 'https://min7014.github.io/mathedu/video_board.html'
         }).catch(() => {});
       }
       navigator.clipboard.writeText(kitText);
-      alert('📣 카카오톡·단톡방·수험생/교사 커뮤니티 공유용 인기 홍보 문구가 클립보드에 복사되었습니다!');
+      alert('📣 카카오톡·단톡방·수험생/교사 커뮤니티 공유용 유튜브×홈페이지 통합 홍보 문구가 클립보드에 복사되었습니다!');
     }
 
     // 링크 수동 등록 모달

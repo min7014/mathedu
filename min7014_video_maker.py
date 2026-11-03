@@ -1054,10 +1054,15 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
         draw.text((48, y_cursor), line, fill=(254, 240, 138), font=font_sub)
         y_cursor += 40
 
-    if lang_code != "ko" and ko_ref_text:
-        font_ko_sub = get_font_for_lang("ko", 20, bold=False)
-        ko_one_line = ko_ref_text if len(ko_ref_text) <= 80 else (ko_ref_text[:80] + "...")
-        draw.text((48, 1036), f"[한국어 원문] {ko_one_line}", fill=(148, 163, 184), font=font_ko_sub)
+    # 하단 고정 홈페이지 유입 프로모션 바 (y: 1030 ~ 1072)
+    draw.rounded_rectangle([44, 1028, W - 44, 1070], radius=10, fill=(15, 23, 42), outline=(56, 189, 248), width=1)
+    font_cta = get_font_for_lang("ko", 20, bold=True)
+    if lang_code == "ko":
+        cta_left = "🌐 무료 동적 기하(GeoGebra) 조작 & 16,548문항 탈-5지선다 창의 퀴즈 👉 min7014.github.io/mathedu (설명란·고정댓글 클릭!)"
+    else:
+        cta_left = "🌐 Free Interactive GeoGebra & 16,548 Constructive Math Quizzes 👉 min7014.github.io/mathedu (Link in Description!)"
+    draw.text((62, 1037), cta_left, fill=(125, 211, 252), font=font_cta)
+    draw.text((W - 390, 1037), "📺 YouTube @min7014_ai", fill=(251, 191, 36), font=font_cta)
 
     return canvas
 
@@ -1279,13 +1284,17 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             "• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E"
         )
         yt_desc = (
-            f"{hook_en}\n"
-            f"📋 Full 1,111 Math Video Board & Interactive GeoGebra: {board_url}\n\n"
+            f"{hook_en}\n\n"
+            f"🚀 [Try It Yourself on the Free Interactive Math Platform (min7014.github.io/mathedu)]\n"
+            f"1️⃣ 📐 Interactive GeoGebra Applet & 1,113 Visual Proof Video Board:\n👉 {board_url}&from=yt\n"
+            f"2️⃣ ✍️ De-Multiple-Choice Constructive Math Studio (16,548 Step-by-Step Quizzes):\n👉 https://min7014.github.io/mathedu/?from=yt\n"
+            f"3️⃣ 🌱 Daily 3-Minute Math Eureka (10s Counterexample O/X & What-If-Not Problem Posing):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
+            f"4️⃣ 🎮 3D Math Sanctuary Boss Raid RPG (Free Browser Game):\n👉 https://min7014.github.io/mathedu/game.html\n"
+            f"5️⃣ 🏛️ Min's Math Lab Main Archive (3,400+ Dynamic Proofs):\n👉 {web_url}\n\n"
             f"{quiz_en}\n\n"
             f"{binge_en}\n\n"
             f"🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: {sub_url}\n"
             f"📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n"
-            f"🌐 Interactive GeoGebra & Flipbook Web Page: {web_url}\n"
             f"📄 Original Step-by-Step PDF: {pdf_url}\n"
             f"🎙️ 20+ Language AI Lecture Studio: {studio_url}\n"
             f"Topic ID: [ID: {slug}_EN]\n\n"
@@ -1318,13 +1327,17 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             "• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ"
         )
         yt_desc = (
-            f"{hook_ko}\n"
-            f"📋 전체 1,111개 수학자료 설명영상 게시판 & 직접 실습: {board_url}\n\n"
+            f"{hook_ko}\n\n"
+            f"🚀 [영상을 본 직후 1초 만에 내 실력으로 만드는 수학홈페이지(mathedu) 무료 실습 링크]\n"
+            f"1️⃣ 📐 방금 본 증명 도형 마우스로 직접 움직여보기 (GeoGebra & 1,113개 설명영상 게시판):\n👉 {board_url}&from=yt\n"
+            f"2️⃣ ✍️ [탈-5지선다 창의 구성 모드] 이 개념이 쓰인 수능·모평 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q={clean_ko_title.split()[0]}&from=yt\n"
+            f"3️⃣ 🌱 [오늘의 3분 수학 유레카] 10초 오개념 반례 O/X 퀴즈 & 나만의 변형 문제 발명:\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
+            f"4️⃣ 🎮 [수능 수학 100점 만점 3D 보스 레이드 게임] 설치 없이 브라우저에서 즉시 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n"
+            f"5️⃣ 🏛️ [민은기 선생님의 수학자료실 본관 (3,400+ 동적 기하 아카이브)]:\n👉 {web_url}\n\n"
             f"{quiz_ko}\n\n"
             f"{binge_ko}\n\n"
             f"🔔 [@min7014_ai 채널 구독하기]: {sub_url}\n"
             f"📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n"
-            f"🌐 대화형 GeoGebra 직접 조작하기: {web_url}\n"
             f"📄 단계별 플립북 증명 PDF 원문: {pdf_url}\n"
             f"🎙️ 20개국어 AI 강의 스튜디오: {studio_url}\n"
             f"식별 코드: [ID: {slug}_KO]\n\n"
@@ -2425,8 +2438,12 @@ def update_video_catalog():
                 pub_short_dir = ROOT_DIR / "video_lectures" / "shorts"
                 pub_short_dir.mkdir(parents=True, exist_ok=True)
                 pub_dst = pub_short_dir / f"{slug}_short_{lc}.mp4"
-                if sp_mp4 != pub_dst:
-                    shutil.copyfile(sp_mp4, pub_dst)
+                try:
+                    if sp_mp4.resolve() != pub_dst.resolve():
+                        if not pub_dst.exists() or sp_mp4.stat().st_size != pub_dst.stat().st_size:
+                            shutil.copyfile(sp_mp4, pub_dst)
+                except Exception:
+                    pass
                 if lc not in shorts_pkgs:
                     shorts_pkgs[lc] = {
                         "title": f"🔥 {sdoc['title'] if lc == 'ko' else (sdoc.get('title_en') or sdoc['title'])} #Shorts",
@@ -2858,8 +2875,13 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
         desc = (
             f"⚡ [{clean_ko} — {round(duration_sec)}초 숏폼(#Shorts) 시각적 증명 하이라이트]\n"
             f"{hook_ko}\n\n"
-            f"🎬 1080p 전체 단계별 풀버전 설명영상 바로 보기:\n👉 {full_yt}\n\n"
-            f"📐 직접 마우스로 움직여보는 GeoGebra & 전체 1,111개 수학 설명영상 게시판:\n👉 {board_link}\n\n"
+            f"🌐 [1초 클릭! 민은기 선생님의 수학홈페이지 무료 실습 & 퀴즈 바로가기]\n"
+            f"1️⃣ 방금 본 도형 마우스로 직접 움직여보기 (GeoGebra & 플립북 게시판):\n👉 {board_link}&from=yt_shorts\n"
+            f"2️⃣ 5지선다 보기를 가리고 수식 블록 조립! 16,548문항 수능·모평 디딤돌 퀴즈:\n👉 https://min7014.github.io/mathedu/?from=yt_shorts\n"
+            f"3️⃣ 오늘의 3분 수학 유레카 (10초 오개념 O/X & 나만의 문제 발명):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
+            f"4️⃣ 수능 수학 100점 만점 3D 보스 레이드 게임 무료 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n"
+            f"5️⃣ 민은기 선생님의 수학자료실 본관 (3,400+ 시각 증명):\n👉 https://min7014.github.io/\n\n"
+            f"🎬 1080p 전체 단계별 풀버전 설명영상 바로 보기:\n👉 {full_yt}\n"
             f"🔔 민은기 선생님의 수학자료실_AI (@min7014_ai) 구독하기:\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_KO]\n"
@@ -2999,7 +3021,13 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             for ci, cl in enumerate(cap_lines):
                 draw.text((78, 1438 + ci * 60), cl, fill=(248, 250, 252), font=font_cap)
 
-            draw.text((78, 1828), "📺 YouTube @min7014_ai · 🌐 min7014.github.io/mathedu/video_board.html", fill=(148, 163, 184), font=font_sub)
+            draw.rounded_rectangle((44, 1810, 1036, 1892), radius=20, fill=(30, 58, 138), outline=(251, 191, 36), width=3)
+            cta_short_txt = (
+                "👆 설명란·댓글 링크 ➔ 무료 GeoGebra 실습 & 기출 도전! (min7014.github.io/mathedu)"
+                if lang_code == "ko"
+                else "👆 Tap Description Link ➔ Free GeoGebra & Math Quizzes! (min7014.github.io/mathedu)"
+            )
+            draw.text((68, 1834), cta_short_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 24, bold=True))
 
             # 각 PDF 프레임을 1080x1920 캔버스 중앙에 합성하여 모션 시퀀스 생성
             per_f_dur = max(0.22, seg_audio_dur / max(1, len(doc_frames)))
