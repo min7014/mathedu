@@ -924,7 +924,7 @@ html.dark-theme .filter-tab-btn {
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">36대 법칙</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">38대 법칙</span>
               </div>
               <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
             </div>
@@ -3401,9 +3401,9 @@ window.openMathClinicModal = function() {
     <div class="p-3 px-5 border-b border-surface-container bg-white flex flex-wrap items-center justify-between gap-2">
       <div class="flex gap-1.5 flex-wrap" id="mtHubTabButtons">
         <button type="button" data-mt-tab="genealogy" onclick="switchMathTeacherHubTab('genealogy')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-secondary text-white">🌳 1. 초·중·고 수직 계통성 트리 (12)</button>
-        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (36)</button>
+        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (38)</button>
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
-        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (29)</button>
+        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (31)</button>
         <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (9)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
@@ -4109,6 +4109,26 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "formulaBridge": "4단계 (본문항 종합): 방정식 $f(x)=g(x)$의 실근의 개수를 두 함수 $y=f(x)$와 $y=g(x)$ 그래프의 교점 개수로 변환하여 미지수 $k$의 범위 확정",
       "min7014Query": "다항식·방정식·수체계",
       "searchKeyword": "다항식"
+    },
+    {
+      "id": "polya-min-MIN-KB-0021",
+      "domain": "다항식·방정식·수체계",
+      "condition": "[프렉탈 페아노 곡선(Fractal Peano Curve)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "무리방정식 $\\sqrt{f(x)} = g(x)$를 양변 제곱하여 풀었을 때는 $g(x) < 0$인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 $g(x) \\ge 0$ 조건을 먼저 걸어 걸러내세요!",
+      "visualIntuition": "[프렉탈 페아노 곡선] 유리수·순환소수·실수·복소수($i=\\sqrt{-1}$)로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘($A=BQ+R$), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
+      "formulaBridge": "4단계 (본문항 종합): 방정식 $f(x)=g(x)$의 실근의 개수를 두 함수 $y=f(x)$와 $y=g(x)$ 그래프의 교점 개수로 변환하여 미지수 $k$의 범위 확정",
+      "min7014Query": "다항식·방정식·수체계",
+      "searchKeyword": "다항식"
+    },
+    {
+      "id": "polya-min-MIN-KB-0022",
+      "domain": "다항식·방정식·수체계",
+      "condition": "[꽃잎차례(Petals turn)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "무리방정식 $\\sqrt{f(x)} = g(x)$를 양변 제곱하여 풀었을 때는 $g(x) < 0$인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 $g(x) \\ge 0$ 조건을 먼저 걸어 걸러내세요!",
+      "visualIntuition": "[꽃잎차례] 유리수·순환소수·실수·복소수($i=\\sqrt{-1}$)로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘($A=BQ+R$), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
+      "formulaBridge": "4단계 (본문항 종합): 방정식 $f(x)=g(x)$의 실근의 개수를 두 함수 $y=f(x)$와 $y=g(x)$ 그래프의 교점 개수로 변환하여 미지수 $k$의 범위 확정",
+      "min7014Query": "다항식·방정식·수체계",
+      "searchKeyword": "다항식"
     }
   ],
   "misconceptionLab": [
@@ -4541,6 +4561,28 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
       "min7014Query": "다항식·방정식·수체계",
       "videoSlug": "2025021201",
+      "quizKeyword": "다항식"
+    },
+    {
+      "id": "lesson-auto-2025021301",
+      "gradeTarget": "중·고등 다항식·방정식·수체계 연계",
+      "topic": "[시각적 증명 탐구] 프렉탈 코흐 눈송이(Fractal Koch Snowflake)",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 '프렉탈 코흐 눈송이(Fractal Koch Snowflake)'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 '프렉탈 코흐 눈송이(Fractal Koch Snowflake) (2025021301)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "다항식·방정식·수체계",
+      "videoSlug": "2025021301",
+      "quizKeyword": "다항식"
+    },
+    {
+      "id": "lesson-auto-2025021401",
+      "gradeTarget": "중·고등 다항식·방정식·수체계 연계",
+      "topic": "[시각적 증명 탐구] 프렉탈 페아노 곡선(Fractal Peano Curve)",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 '프렉탈 페아노 곡선(Fractal Peano Curve)'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 '프렉탈 페아노 곡선(Fractal Peano Curve) (2025021401)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "다항식·방정식·수체계",
+      "videoSlug": "2025021401",
       "quizKeyword": "다항식"
     }
   ],
