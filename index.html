@@ -830,7 +830,7 @@ html.dark-theme .filter-tab-btn {
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">18대 법칙</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">22대 법칙</span>
               </div>
               <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
             </div>
@@ -869,6 +869,98 @@ html.dark-theme .filter-tab-btn {
             </div>
             <div class="text-[#4338ca] font-extrabold text-[11px] pt-1">탈-5지선다 &amp; 문제 발명 열기 ➔</div>
           </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 🌱 살아 움직이는 수학홈페이지 · 오늘의 3분 유레카 & 자가 진화 성장 플라이휠 허브 -->
+    <div class="px-margin mt-space-sm" id="dailyGrowthFlywheelSection">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-emerald-500/30 flex flex-col gap-3">
+        <!-- Header & Live Growth Pulse -->
+        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-700 flex items-center justify-center font-bold text-base">🌱</span>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">오늘의 3분 수학 유레카 &amp; 실시간 성장 플라이휠</h2>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-badge text-[11px] font-extrabold" id="dailyEurekaDateBadge">📅 오늘의 미션</span>
+                <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 font-label-badge text-[11px] font-bold" id="daemonLivePulseBadge">🟢 24/7 자가 진화 데몬 가동 중</span>
+              </div>
+              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">매일 자정 자동 갱신되는 3분 수학 루틴(창의 기출 1문항 · 10초 오개념 O/X · 나만의 문제 발명)과 실시간 자료 증식 현황입니다.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-[11px] font-bold">
+            <span class="px-2.5 py-1 rounded-lg bg-surface-container-low text-on-surface border border-surface-variant">🔥 나의 일일 유레카 달성: <b id="dailyEurekaDoneCount" class="text-emerald-700">0 / 3</b></span>
+            <button type="button" onclick="shareDailyEurekaChallenge()" class="px-2.5 py-1 rounded-lg bg-secondary text-white border-0 cursor-pointer hover:opacity-95">🔗 오늘의 3분 챌린지 친구 공유</button>
+          </div>
+        </div>
+
+        <!-- 3 Daily Interactive Growth Missions -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <!-- Mission 1: Today's Constructive Exam Problem -->
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#f8fafc] to-[#eff6ff] border border-sky-200 flex flex-col justify-between gap-2">
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="px-2 py-0.5 rounded bg-sky-600 text-white font-extrabold text-[10.5px]">🎯 미션 1 · 오늘의 탈-5지선다 기출</span>
+                <span class="text-[11px] font-bold text-sky-800" id="dailyMission1Status">도전 대기</span>
+              </div>
+              <div class="font-extrabold text-[13.5px] text-slate-900 leading-snug" id="dailyMission1Title">[2025 수능·모평] 오늘의 핵심 추론 문항</div>
+              <div class="text-slate-600 leading-snug" id="dailyMission1Desc">5지선다 보기를 가리고 나만의 제1발상 스케치와 수식 레고 블록 조립으로 정답을 직접 구성해 보세요!</div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <a id="dailyMission1Link" href="board/archive.html?id=e25_26111851_01" onclick="markDailyMissionDone(1)" class="flex-1 py-1.5 px-3 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-center no-underline">✍️ 보기 가리고 도전하기 (+30 XP) ➔</a>
+              <button type="button" onclick="rotateDailyMissionProblem()" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-300 cursor-pointer" title="다른 추천 문항 보기">🎲</button>
+            </div>
+          </div>
+
+          <!-- Mission 2: Today's 10-Second Misconception O/X Vaccine -->
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#fff1f2] to-[#fffbeb] border border-rose-200 flex flex-col justify-between gap-2">
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="px-2 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10.5px]">⚡ 미션 2 · 오늘의 10초 오개념 O/X</span>
+                <span class="text-[11px] font-bold text-rose-800" id="dailyMission2Subject">수학II · 미분법</span>
+              </div>
+              <div class="font-extrabold text-[13px] text-slate-900 leading-snug" id="dailyMission2Myth">"미분계수 f'(a) = 0이면 x = a에서 무조건 극값을 갖는다?"</div>
+              <div id="dailyMission2Feedback" class="hidden p-2 rounded-lg bg-white/95 border border-rose-300 text-[11.5px] leading-snug text-slate-800"></div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1" id="dailyMission2BtnWrap">
+              <button type="button" onclick="answerDailyOxQuiz(true)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold border-0 cursor-pointer">⭕ 언제나 참 (O)</button>
+              <button type="button" onclick="answerDailyOxQuiz(false)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-extrabold border-0 cursor-pointer">❌ 거짓·반례 존재 (X)</button>
+              <button type="button" onclick="rotateDailyOxQuiz()" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-300 cursor-pointer" title="다음 O/X 퀴즈">🔄</button>
+            </div>
+          </div>
+
+          <!-- Mission 3: Today's Collective Problem Invention & Teacher/Student Contribution -->
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#eef2ff] to-[#f0fdf4] border border-indigo-200 flex flex-col justify-between gap-2">
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="px-2 py-0.5 rounded bg-indigo-600 text-white font-extrabold text-[10.5px]">🔀 미션 3 · 나만의 변형 문제 발명</span>
+                <span class="text-[11px] font-bold text-indigo-800">나의 발명 누적: <b id="dailyInventedTotalBadge">0</b>건</span>
+              </div>
+              <div class="font-extrabold text-[13px] text-slate-900 leading-snug" id="dailyMission3Prompt">오늘의 조건 변형(What-If-Not): 직각(90°)을 60°로 바꾸거나 차수를 1 올린 나만의 문제를 만들어 보세요!</div>
+              <div class="flex gap-1.5 mt-0.5">
+                <input type="text" id="quickInventProblemInput" placeholder="예: 만약 정삼각형이 아니라 정육각형 내부의 점 P라면 거리 합은?" class="flex-1 h-8 px-2.5 rounded-lg bg-white border border-indigo-200 text-xs text-slate-900 focus:outline-none focus:border-indigo-600" />
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <button type="button" onclick="submitQuickInventedProblem()" class="flex-1 py-1.5 px-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold border-0 cursor-pointer">💡 나만의 문제 등록 (+30 XP)</button>
+              <button type="button" onclick="openMathTeacherHubModal('creative')" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-indigo-50 text-indigo-800 font-bold border border-indigo-200 cursor-pointer">포트폴리오 ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5-Pillar Continuous Platform Growth Status Bar -->
+        <div class="pt-2 border-t border-surface-container flex items-center justify-between gap-2 flex-wrap text-[11.5px] text-on-surface-variant">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-extrabold text-on-surface">🚀 5대 지속 성장 플라이휠:</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">① min7014.github.io 신간 자동 흡수</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">② @min7014_ai v4.0 영상·숏폼 24h 생성</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">③ 탈-5지선다 창의 수식 블록 조립</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">④ 학생·교사 문제 발명 집단지성</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">⑤ SEO·AI 검색(llms.txt) 자동 인덱싱</span>
+          </div>
+          <a href="#quizRequestSection" class="text-secondary font-extrabold no-underline hover:underline">🙋 새 기출·개념 해설 신청하기 ➔</a>
         </div>
       </div>
     </div>
@@ -3215,10 +3307,10 @@ window.openMathClinicModal = function() {
     <div class="p-3 px-5 border-b border-surface-container bg-white flex flex-wrap items-center justify-between gap-2">
       <div class="flex gap-1.5 flex-wrap" id="mtHubTabButtons">
         <button type="button" data-mt-tab="genealogy" onclick="switchMathTeacherHubTab('genealogy')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-secondary text-white">🌳 1. 초·중·고 수직 계통성 트리 (12)</button>
-        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (18)</button>
+        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (22)</button>
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
-        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (10)</button>
-        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (8)</button>
+        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (12)</button>
+        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (9)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
     </div>
@@ -3743,6 +3835,46 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "formulaBridge": "4단계 (본문항 종합): 종이접기(선대칭 이동)에서 접히기 전후의 각과 변의 길이가 보존됨을 이용해 복합 도형의 길이 비 도출",
       "min7014Query": "유클리드 평면기하",
       "searchKeyword": "유클리드"
+    },
+    {
+      "id": "polya-min-MIN-KB-0003",
+      "domain": "유클리드 평면기하",
+      "condition": "[팔각형 매듭(Octagonal Knot)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "종이접기·매듭 기하 문제가 나오면 1) '접힌 각 = 원래 각(선대칭 합동)' 표시, 2) 평행한 종이띠의 '엇각이 같음'으로 이등변삼각형을 즉시 찾으세요.",
+      "visualIntuition": "[팔각형 매듭] 일정한 폭의 긴 직사각형 종이띠를 매듭지어 조였을 때, 평행선의 폭 보존과 엇각·동위각·선대칭 반사에 의해 완벽한 정팔각형(8각형)이 형성되는 기하학적 원리 규명.",
+      "formulaBridge": "4단계 (본문항 종합): 종이접기(선대칭 이동)에서 접히기 전후의 각과 변의 길이가 보존됨을 이용해 복합 도형의 길이 비 도출",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
+    },
+    {
+      "id": "polya-min-MIN-KB-0004",
+      "domain": "유클리드 평면기하",
+      "condition": "[피타고라스 나무(Pythagoras Tree)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "피타고라스 나무에서 각 단(Level)의 정사각형 넓이들을 모두 더하면 언제나 맨 처음 정사각형 넓이 $c^2$과 똑같습니다(면적 불변량).",
+      "visualIntuition": "[피타고라스 나무] 직각삼각형의 빗변 위 정사각형 넓이가 두 직각변 위 정사각형 넓이의 합($a^2+b^2=c^2$)과 같다는 성질이 무한 반복(재귀)될 때 나타나는 자기닮음(Self-similarity) 기하학.",
+      "formulaBridge": "4단계 (본문항 종합): 프랙탈 도형의 첫째항 $S_1$과 공비 $r^2$을 구해 무한등비급수 $\\frac{S_1}{1-r^2}$ 또는 단계별 넓이 합 완성",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
+    },
+    {
+      "id": "polya-min-MIN-KB-0005",
+      "domain": "벡터·공간도형",
+      "condition": "[Tetrahedron 5-Compound] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "공간도형 문제에서 가장 먼저 할 일은 '평면 밖의 한 점에서 평면에 내린 수선의 발 $H$'를 찍고 삼수선의 정리(수직 3개 세트)를 표시하는 것입니다.",
+      "visualIntuition": "[Tetrahedron 5-Compound] 3차원 공간에서 점·직선·평면·다면체·구의 기하학적 대칭과 수직 관계, 삼수선의 정리, 이면각 $\\theta$와 정사영 넓이 공식($S'=S\\cos\\theta$)의 입체 기하.",
+      "formulaBridge": "4단계 (본문항 종합): 삼수선의 정리로 숨겨진 수선의 발 위치를 찾고 직각삼각형 피타고라스 정리로 이면각의 $\\cos\\theta$와 정사영 넓이 계산",
+      "min7014Query": "벡터·공간도형",
+      "searchKeyword": "벡터"
+    },
+    {
+      "id": "polya-min-MIN-KB-0006",
+      "domain": "이차곡선·원뿔곡선",
+      "condition": "[타원에서의 빛 반사(Reflection of Light on a Ellipse)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "타원 위의 점 $P$가 주어지면 방정식에 대입하기 전에 무조건 두 초점 $F, F'$와 연결하여 한 변을 $k$, 다른 변을 $2a-k$로 세팅하세요.",
+      "visualIntuition": "[타원에서의 빛 반사] 평면 위의 두 정점(초점 $F, F'$)으로부터 거리의 합이 장축의 길이 $2a$로 일정한 점들의 자취($\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1, c^2=a^2-b^2$)와 접선·초점 반사 대칭성.",
+      "formulaBridge": "4단계 (본문항 종합): 두 초점을 공유하는 타원·쌍곡선 또는 초점을 지나는 직선에서 $\\overline{PF}=k$로 두고 $\\overline{PF'}=2a-k$로 치환하여 코사인법칙으로 해결",
+      "min7014Query": "이차곡선·원뿔곡선",
+      "searchKeyword": "이차곡선"
     }
   ],
   "misconceptionLab": [
@@ -3967,6 +4099,28 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "min7014Query": "유클리드 평면기하·작도·원주각",
       "videoSlug": "2025020101",
       "quizKeyword": "유클리드 평면기하"
+    },
+    {
+      "id": "lesson-auto-2022042501",
+      "gradeTarget": "중·고등 이차곡선·원뿔곡선 연계",
+      "topic": "[시각적 증명 탐구] 포물선에서의 빛 반사(Reflection of Light on a Parabola)",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 '포물선에서의 빛 반사(Reflection of Light on a Parabola)'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 '포물선에서의 빛 반사(Reflection of Light on a Parabola) (2022042501)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "이차곡선·원뿔곡선",
+      "videoSlug": "2022042501",
+      "quizKeyword": "이차곡선"
+    },
+    {
+      "id": "lesson-auto-2022101601",
+      "gradeTarget": "중·고등 이차곡선·원뿔곡선 연계",
+      "topic": "[시각적 증명 탐구] 원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone)",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 '원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone)'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 '원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone) (2022101601)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "이차곡선·원뿔곡선",
+      "videoSlug": "2022101601",
+      "quizKeyword": "이차곡선"
     }
   ],
   "creativeConstructiveLab": [
@@ -4089,6 +4243,21 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "whatIfNotMutation": "만약 검사를 한 번만 받는 것이 아니라 동일한 진단 키트로 '2회 연속 양성' 판정을 받았다면(What-If-Not), 실제 감염 확률은 어떻게 급격히 올라갈까?",
       "min7014Query": "확률과 통계",
       "searchKeyword": "조건부확률 표본공간"
+    },
+    {
+      "id": "creative-min-MIN-KB-0001",
+      "domain": "유클리드 평면기하",
+      "title": "[정칠각형 매듭(Regular Heptagonal Knot)] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+      "originalProblem": "[정칠각형 매듭] 일정한 폭의 긴 직사각형 종이띠를 매듭지어 조였을 때, 평행선의 폭 보존과 엇각·동위각·선대칭 반사에 의해 완벽한 정칠각형(7각형)이 형성되는 기하학적 원리 규명.",
+      "constructivePrompt": "5지선다 보기에 의존하지 않고, '정칠각형 매듭(Regular Heptagonal Knot)'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+      "multiPathApproaches": [
+        "1단계 (초등 종이접기 직관): 폭이 일정한 긴 종이테이프를 묶어 납작하게 누를 때 생기는 다각형의 변 개수 세어 보기",
+        "2단계 (초등 평행선과 각도): 폭이 같은 두 종이띠가 겹칠 때 마름모·등변사다리꼴이 만들어지며 두 변의 길이가 같아짐을 확인",
+        "3단계 (기호와 내각 번역): 정$n$각형의 한 내각의 크기 공식 $\\frac{180^\\circ \\times (n-2)}{n}$을 적용하여 정칠각형(7각형)의 내각과 접는 각도 계산"
+      ],
+      "whatIfNotMutation": "만약 [정칠각형 매듭(Regular Heptagonal Knot)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
     }
   ]
 };
@@ -4381,6 +4550,176 @@ window.renderMathTeacherHubContent = function() {
     window.MathJax.typesetPromise([container]).catch(function(){});
   }
 };
+
+// ══════════════════════════════════════════════════════════════════════════
+// 🌱 오늘의 3분 수학 유레카 & 자가 진화 성장 플라이휠 컨트롤러 (Daily Math Eureka 365)
+// ══════════════════════════════════════════════════════════════════════════
+(function initDailyGrowthFlywheel() {
+  var todayStr = new Date().toISOString().slice(0, 10);
+  var dateBadge = document.getElementById('dailyEurekaDateBadge');
+  if (dateBadge) dateBadge.textContent = '📅 ' + todayStr + ' 오늘의 유레카';
+
+  var seed = 0;
+  for (var i = 0; i < todayStr.length; i++) {
+    seed = ((seed << 5) - seed) + todayStr.charCodeAt(i);
+    seed |= 0;
+  }
+  seed = Math.abs(seed);
+
+  var CURATED_DAILY_PROBLEMS = [
+    { slug: 'e25_26111851_01', title: '[2026 수능 수학 1번] 거듭제곱근과 지수법칙의 창의적 결합', desc: '보기를 가리고 밑(Base)을 3으로 통일하여 지수 막대 블록을 직접 조립해 보세요!', isArchive: true },
+    { slug: '2025-suneung-common-22', title: '[수능 22번 킬러] 다항함수의 비율 관계와 미분가능성 추론', desc: '제1발상 스케치에서 변곡점 대칭과 차함수 인수정리를 직접 설계해 보세요!', isArchive: false },
+    { slug: '2025-suneung-geom-30', title: '[기하 30번 킬러] 이차곡선 초점 반사 성질과 벡터 내적 최대·최소', desc: '원의 중심 경유 벡터 분해(OP = OC + CP) 보조선으로 스스로 식을 세워 보세요!', isArchive: false },
+    { slug: '2025-suneung-calc-30', title: '[미적분 30번 킬러] 합성함수의 극값과 정적분으로 정의된 함수', desc: '치환 t = f(x)와 위끝=아래끝 대입·미분 2단계 사다리로 직접 답을 도출하세요!', isArchive: false },
+    { slug: '2025-suneung-prob-30', title: '[확률과 통계 30번] 중복조합(nHr)과 여사건 조건부확률 분할표', desc: '5지선다 없이 2×2 분할표와 격자 넓이 모델로 경우의 수를 직접 구성해 보세요!', isArchive: false }
+  ];
+
+  window._dailyProbIdx = seed % CURATED_DAILY_PROBLEMS.length;
+  window._dailyOxIdx = seed % 11;
+
+  function getDailyState() {
+    try {
+      var raw = localStorage.getItem('mathedu_daily_eureka_' + todayStr);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return { m1: false, m2: false, m3: false };
+  }
+
+  function saveDailyState(st) {
+    try {
+      localStorage.setItem('mathedu_daily_eureka_' + todayStr, JSON.stringify(st));
+    } catch (e) {}
+    updateDailyProgressUI();
+  }
+
+  function updateDailyProgressUI() {
+    var st = getDailyState();
+    var cnt = (st.m1 ? 1 : 0) + (st.m2 ? 1 : 0) + (st.m3 ? 1 : 0);
+    var cntEl = document.getElementById('dailyEurekaDoneCount');
+    if (cntEl) cntEl.textContent = cnt + ' / 3 완료' + (cnt === 3 ? ' 🎉' : '');
+    var m1St = document.getElementById('dailyMission1Status');
+    if (m1St) m1St.textContent = st.m1 ? '✅ 오늘 도전 완료!' : '🔥 오늘의 추천';
+
+    try {
+      var inv = JSON.parse(localStorage.getItem('mathedu_invented_problems_v1') || '[]');
+      var invBadge = document.getElementById('dailyInventedTotalBadge');
+      if (invBadge) invBadge.textContent = String(inv.length);
+    } catch (e) {}
+  }
+
+  window.renderDailyMission1 = function() {
+    var item = CURATED_DAILY_PROBLEMS[window._dailyProbIdx % CURATED_DAILY_PROBLEMS.length];
+    if (!item) return;
+    var tEl = document.getElementById('dailyMission1Title');
+    var dEl = document.getElementById('dailyMission1Desc');
+    var lEl = document.getElementById('dailyMission1Link');
+    if (tEl) tEl.textContent = item.title;
+    if (dEl) dEl.textContent = item.desc;
+    if (lEl) lEl.href = item.isArchive ? ('board/archive.html?id=' + item.slug) : ('board/' + item.slug + '.html');
+  };
+
+  window.rotateDailyMissionProblem = function() {
+    window._dailyProbIdx = (window._dailyProbIdx + 1) % CURATED_DAILY_PROBLEMS.length;
+    window.renderDailyMission1();
+  };
+
+  window.markDailyMissionDone = function(num) {
+    var st = getDailyState();
+    st['m' + num] = true;
+    saveDailyState(st);
+    if (window.MatheduGame && typeof window.MatheduGame.addXP === 'function') {
+      window.MatheduGame.addXP(25);
+    }
+  };
+
+  window.renderDailyOxQuiz = function() {
+    var vList = (window.MATHEDU_PEDAGOGY_ENGINE_DATA && window.MATHEDU_PEDAGOGY_ENGINE_DATA.misconceptionLab) || [];
+    if (!vList.length) return;
+    var v = vList[window._dailyOxIdx % vList.length];
+    var subjEl = document.getElementById('dailyMission2Subject');
+    var mythEl = document.getElementById('dailyMission2Myth');
+    var fbEl = document.getElementById('dailyMission2Feedback');
+    if (subjEl) subjEl.textContent = v.subject;
+    if (mythEl) mythEl.textContent = '❓ "' + v.myth + '"';
+    if (fbEl) {
+      fbEl.className = 'hidden p-2 rounded-lg bg-white/95 border border-rose-300 text-[11.5px] leading-snug text-slate-800';
+      fbEl.innerHTML = '';
+    }
+  };
+
+  window.answerDailyOxQuiz = function(userSaidTrue) {
+    var vList = (window.MATHEDU_PEDAGOGY_ENGINE_DATA && window.MATHEDU_PEDAGOGY_ENGINE_DATA.misconceptionLab) || [];
+    if (!vList.length) return;
+    var v = vList[window._dailyOxIdx % vList.length];
+    var fbEl = document.getElementById('dailyMission2Feedback');
+    if (!fbEl) return;
+    var isCorrect = (userSaidTrue === false);
+    fbEl.classList.remove('hidden');
+    fbEl.innerHTML =
+      '<div class="font-extrabold ' + (isCorrect ? 'text-emerald-700' : 'text-rose-700') + ' mb-1">' +
+        (isCorrect ? '🎉 정답입니다! (+20 유레카 XP) — ' + v.verdict : '💡 아깝습니다! 사실은 ' + v.verdict + ' 입니다.') +
+      '</div>' +
+      '<div class="text-rose-900 font-bold mb-0.5">💥 1초 반례: ' + v.counterexample + '</div>' +
+      '<div class="text-slate-700">✅ ' + v.correctRule + '</div>';
+    window.markDailyMissionDone(2);
+  };
+
+  window.rotateDailyOxQuiz = function() {
+    window._dailyOxIdx = (window._dailyOxIdx + 1) % 11;
+    window.renderDailyOxQuiz();
+  };
+
+  window.submitQuickInventedProblem = function() {
+    var inp = document.getElementById('quickInventProblemInput');
+    if (!inp || !inp.value.trim()) {
+      alert('조건을 바꾼 나만의 변형 문제나 질문을 한 줄로 입력해 주세요!');
+      if (inp) inp.focus();
+      return;
+    }
+    var txt = inp.value.trim();
+    try {
+      var arr = JSON.parse(localStorage.getItem('mathedu_invented_problems_v1') || '[]');
+      arr.unshift({
+        slug: 'daily_' + todayStr,
+        title: '오늘의 3분 유레카 나만의 문제 발명',
+        mutationType: 'What-If-Not 창의 조건 변형',
+        customQuestion: txt,
+        date: todayStr
+      });
+      localStorage.setItem('mathedu_invented_problems_v1', JSON.stringify(arr.slice(0, 100)));
+    } catch (e) {}
+    inp.value = '';
+    window.markDailyMissionDone(3);
+    alert('🌟 나만의 창의 변형 문제가 포트폴리오에 저장되었습니다! (+30 창의력 XP)');
+  };
+
+  window.shareDailyEurekaChallenge = function() {
+    var url = window.location.origin + window.location.pathname + '?daily_eureka=' + todayStr;
+    var shareTxt = '🌱 [mathedu 오늘의 3분 수학 유레카 챌린지 (' + todayStr + ')]
+5지선다 보기를 가리고 수식 블록 조립 + 10초 오개념 반례 퀴즈에 함께 도전해 보세요!
+👉 ' + url;
+    if (navigator.clipboard) navigator.clipboard.writeText(shareTxt);
+    alert('🔗 오늘의 3분 수학 유레카 챌린지 초대장이 복사되었습니다!
+친구나 학급 단톡방에 붙여넣어 함께 도전해 보세요.');
+  };
+
+  // Sync live daemon heartbeat badge
+  fetch('video_lectures/foundation_daemon_status.json?t=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(st) {
+      if (!st) return;
+      var pulse = document.getElementById('daemonLivePulseBadge');
+      if (pulse && st.total_rendered_video_topics) {
+        pulse.textContent = '🟢 24/7 자가 진화 중 · v4.0 영상 ' + st.total_rendered_video_topics + '편 · 교육모듈 확장 중';
+      }
+    })
+    .catch(function() {});
+
+  window.renderDailyMission1();
+  window.renderDailyOxQuiz();
+  updateDailyProgressUI();
+})();
+
 </script>
 
 </body>
