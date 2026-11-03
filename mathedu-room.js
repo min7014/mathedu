@@ -2184,6 +2184,7 @@
     (document.head || document.documentElement).appendChild(st);
   }
 
+  window.initAcademicPedagogyEngine = initAcademicPedagogyEngine;
   function initAcademicPedagogyEngine() {
     var qs = Array.from(document.querySelectorAll('.q'));
     if (qs.length === 0) return;
@@ -2207,8 +2208,8 @@
             '<button type="button" class="acad-pill-btn" id="btnAcadCpa" onclick="window.toggleAcadDrawer(\'cpa\')">' +
               bilingual('🎨 CPA 다중표상 대조', '🎨 CPA Multi-Representation') +
             '</button>' +
-            '<button type="button" class="acad-pill-btn' + (pState.retrievalBlindMode ? ' active' : '') + '" id="btnAcadRetrieval" onclick="window.toggleAcadRetrievalMode()">' +
-              bilingual('🧠 블라인드 능동인출 ' + (pState.retrievalBlindMode ? 'ON' : 'OFF'), '🧠 Blind Retrieval ' + (pState.retrievalBlindMode ? 'ON' : 'OFF')) +
+            '<button type="button" class="acad-pill-btn active" id="btnAcadRetrieval" onclick="window.toggleAcadRetrievalMode()">' +
+              bilingual('✍️ 탈-5지선다 창의 구성 모드 ON (기본)', '✍️ Creative Constructive Mode ON') +
             '</button>' +
             '<button type="button" class="acad-pill-btn" id="btnAcadScratch" onclick="window.toggleAcadDrawer(\'scratch\')">' +
               bilingual('✏️ 데카르트 연습장', '✏️ Math Scratchpad') +
@@ -2538,49 +2539,557 @@
       }
     };
 
-    // 5. Roediger 블라인드 능동 인출 모드 (선지 가리기 -> 스스로 먼저 생각 후 선지 열기)
+    // 5. ✍️ 탈-5지선다 창의적 구성주의 수학 풀이 엔진 (Creativity-First Constructive Math Solving Engine v2.0)
+    //    - 기본값(Default): 5지선다 객관식 보기(①~⑤)를 숨기고, 학생이 직접 발상(보조선)을 세운 뒤
+    //      수식 레고 블록 조립 또는 직접 수식/수치 입력으로 답을 구성하도록 유도하여 수학적 창의성을 극대화합니다.
+    function isCreativeConstructiveModeOn() {
+      try {
+        var saved = localStorage.getItem('mathedu_creative_mode_v2');
+        if (saved === 'off') return false;
+        return true; // 기본 ON (5지선다 찍기 방지 & 창의적 구성주의 기본 적용)
+      } catch (e) {
+        return true;
+      }
+    }
+
+    function setCreativeConstructiveMode(on) {
+      try {
+        localStorage.setItem('mathedu_creative_mode_v2', on ? 'on' : 'off');
+      } catch (e) {}
+    }
+
+    function stripHtmlAndSpanN(rawHtml) {
+      var s = String(rawHtml || '').replace(/<span class="n">\s*\d+\s*<\/span>/gi, '');
+      s = s.replace(/<[^>]+>/g, ' ');
+      s = s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+      return s.trim();
+    }
+
+    function extractPureOptionHtml(optEl) {
+      if (!optEl) return '';
+      var clone = optEl.cloneNode(true);
+      var nSpan = clone.querySelector('.n');
+      if (nSpan) nSpan.remove();
+      var mjxList = clone.querySelectorAll('mjx-container');
+      if (mjxList.length > 0 && optEl.dataset && optEl.dataset.rawTex) {
+        return optEl.dataset.rawTex;
+      }
+      return clone.innerHTML.trim();
+    }
+
+    function normalizeMathExpr(str) {
+      var s = String(str || '').trim();
+      if (!s) return '';
+      s = s.replace(/\$/g, '');
+      s = s.replace(/^=\s*/, '');
+      s = s.replace(/\\(?:displaystyle|textstyle|left|right|Big|big|quad|qquad|,|;|:|!)/g, '');
+      s = s.replace(/\\(?:d|t)?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, '(($1)/($2))');
+      s = s.replace(/\\(?:d|t)?frac\s*([0-9a-zA-Z])\s*([0-9a-zA-Z])/g, '(($1)/($2))');
+      s = s.replace(/\\sqrt\s*\{([^{}]*)\}/g, 'sqrt($1)');
+      s = s.replace(/\\sqrt\s*([0-9a-zA-Z]+)/g, 'sqrt($1)');
+      s = s.replace(/루트\s*\(?([0-9a-zA-Z]+)\)?/g, 'sqrt($1)');
+      s = s.replace(/√\s*\(?([0-9a-zA-Z]+)\)?/g, 'sqrt($1)');
+      s = s.replace(/([0-9]+)\s*분의\s*([0-9]+)/g, '(($2)/($1))');
+      s = s.replace(/\\times|×|\\cdot|·/g, '*');
+      s = s.replace(/\\div|÷/g, '/');
+      s = s.replace(/\\pi|파이|π/g, 'pi');
+      s = s.replace(/\^\{\\circ\}|\^\\circ|°|도|가지|개|번/g, '');
+      s = s.replace(/\^\{([^{}]+)\}/g, '^($1)');
+      s = s.replace(/_\{([^{}]+)\}/g, '_$1');
+      s = s.replace(/[{}]/g, '');
+      s = s.replace(/\s+/g, '');
+      return s.toLowerCase();
+    }
+
+    function tryEvalMathNumber(normStr) {
+      if (!normStr) return NaN;
+      var s = normStr;
+      s = s.replace(/([0-9])\s*(sqrt|pi|\()/g, '$1*$2');
+      s = s.replace(/(\))\s*([0-9a-zA-Z(])/g, '$1*$2');
+      s = s.replace(/sqrt\(([^()]+)\)/g, 'Math.sqrt($1)');
+      s = s.replace(/pi/g, 'Math.PI');
+      s = s.replace(/\^/g, '**');
+      if (!/^[0-9+\-*/().\sMathsqrtPI*]+$/.test(s)) return NaN;
+      try {
+        var v = Function('"use strict";return (' + s + ')')();
+        return (typeof v === 'number' && isFinite(v)) ? v : NaN;
+      } catch (e) {
+        return NaN;
+      }
+    }
+
+    function checkCreativeMathEquivalence(userInput, correctRaw, allOptsRaw) {
+      var uRaw = String(userInput || '').trim();
+      if (!uRaw) return { ok: false, reason: 'empty' };
+
+      var cClean = stripHtmlAndSpanN(correctRaw);
+      var uNorm = normalizeMathExpr(uRaw);
+      var cNorm = normalizeMathExpr(cClean);
+
+      if (uNorm && cNorm && uNorm === cNorm) {
+        return { ok: true, mode: 'exact_symbolic' };
+      }
+
+      // Check if correctRaw contains multi-step '=' like '= 3^0 = 1'
+      var eqParts = cClean.split('=').map(function(p) { return p.trim(); }).filter(Boolean);
+      for (var i = 0; i < eqParts.length; i++) {
+        var pNorm = normalizeMathExpr(eqParts[i]);
+        if (pNorm && uNorm === pNorm) {
+          return { ok: true, mode: 'step_equation_match' };
+        }
+        var uValPart = tryEvalMathNumber(uNorm);
+        var pValPart = tryEvalMathNumber(pNorm);
+        if (!isNaN(uValPart) && !isNaN(pValPart) && Math.abs(uValPart - pValPart) < 1e-6) {
+          return { ok: true, mode: 'numeric_equivalence' };
+        }
+      }
+
+      var uVal = tryEvalMathNumber(uNorm);
+      var cVal = tryEvalMathNumber(cNorm);
+      if (!isNaN(uVal) && !isNaN(cVal) && Math.abs(uVal - cVal) < 1e-6) {
+        return { ok: true, mode: 'numeric_equivalence' };
+      }
+
+      // Check without parentheses for simple expressions like 3^(1/2)*3^(-1/2)
+      var uFlat = uNorm.replace(/[()]/g, '');
+      var cFlat = cNorm.replace(/[()]/g, '');
+      if (uFlat && cFlat && uFlat === cFlat) {
+        return { ok: true, mode: 'structural_equivalence' };
+      }
+
+      // Partial insight analysis for Socratic Coaching
+      var matchedTokens = [];
+      var numMatches = cClean.match(/[0-9]+|[a-zA-Z]+/g) || [];
+      numMatches.forEach(function(tok) {
+        if (tok && uRaw.indexOf(tok) !== -1 && matchedTokens.indexOf(tok) === -1) {
+          matchedTokens.push(tok);
+        }
+      });
+
+      // Check if user accidentally typed another option's value
+      var matchedWrongOpt = -1;
+      if (Array.isArray(allOptsRaw)) {
+        for (var j = 0; j < allOptsRaw.length; j++) {
+          var oNorm = normalizeMathExpr(stripHtmlAndSpanN(allOptsRaw[j]));
+          if (oNorm && oNorm !== cNorm && uNorm === oNorm) {
+            matchedWrongOpt = j + 1;
+            break;
+          }
+        }
+      }
+
+      return {
+        ok: false,
+        matchedTokens: matchedTokens,
+        matchedWrongOpt: matchedWrongOpt,
+        uVal: uVal,
+        cVal: cVal
+      };
+    }
+
+    function buildCreativeLegoTokens(correctRaw, allOptsRaw, seedIdx) {
+      var cleanAns = stripHtmlAndSpanN(correctRaw).replace(/^\$|\$$/g, '').trim();
+      var tokens = [];
+
+      // Split expression into meaningful constructive chunks
+      var parts = cleanAns.split(/(\s*\\times\s*|\s*\+\s*|\s*-\s*|\s*=\s*)/).map(function(s) { return s.trim(); }).filter(Boolean);
+      if (parts.length >= 2 && parts.length <= 6) {
+        parts.forEach(function(p) {
+          tokens.push({ display: '$' + p + '$', insert: p, isTruePart: true });
+        });
+      } else {
+        tokens.push({ display: correctRaw, insert: cleanAns, isTruePart: true });
+      }
+
+      // Add distractor building blocks from other options so student must actively reason & construct
+      if (Array.isArray(allOptsRaw)) {
+        allOptsRaw.forEach(function(oRaw, j) {
+          var oClean = stripHtmlAndSpanN(oRaw).replace(/^\$|\$$/g, '').trim();
+          if (!oClean || oClean === cleanAns) return;
+          var oParts = oClean.split(/(\s*\\times\s*|\s*\+\s*|\s*-\s*|\s*=\s*)/).map(function(s) { return s.trim(); }).filter(Boolean);
+          if (oParts.length >= 2 && parts.length >= 2) {
+            oParts.forEach(function(op) {
+              if (!tokens.some(function(t) { return t.insert === op; }) && tokens.length < 7) {
+                tokens.push({ display: '$' + op + '$', insert: op, isTruePart: false });
+              }
+            });
+          } else if (!tokens.some(function(t) { return t.insert === oClean; }) && tokens.length < 6) {
+            tokens.push({ display: oRaw, insert: oClean, isTruePart: false });
+          }
+        });
+      }
+
+      // Deterministic shuffle based on seedIdx + string length
+      var out = tokens.slice();
+      for (var i = out.length - 1; i > 0; i--) {
+        var k = (i * 7 + (seedIdx + 3) * 13 + cleanAns.length) % (i + 1);
+        var tmp = out[i];
+        out[i] = out[k];
+        out[k] = tmp;
+      }
+      return out;
+    }
+
+    function getCreativeHeuristicsForStem(stemText) {
+      var s = String(stemText || '');
+      if (/지수|거듭제곱|로그|\log/.test(s)) {
+        return ['🔍 밑(Base)을 소수로 통일하기', '📐 분수·음수 지수로 변환하기', '🧪 작은 정수 대입해 규칙 확인', '🔗 앞 단계 결과식 대입하기'];
+      }
+      if (/삼각|sin|cos|tan|원|접선|타원|포물선|쌍곡선|벡터|넓이/.test(s)) {
+        return ['📐 원의 중심·초점과 교점 잇기(보조선)', '🔍 직각삼각형·피타고라스 관계 찾기', '🧭 단위원 대칭성·주기성 활용', '🔗 사인·코사인법칙 관계식 세우기'];
+      }
+      if (/수열|등차|등비|시그마|\sum|귀납/.test(s)) {
+        return ['🧪 n=1, 2, 3 차례대로 대입해 나열하기', '🔍 이웃한 두 항의 차(공차)·비(공비) 관찰', '🧱 부분분수·연쇄 상쇄 구조 만들기', '🔗 일반항 a_n과 합 S_n 관계식 세우기'];
+      }
+      if (/극한|연속|미분|도함수|접선|극대|극소|적분|\int|\lim/.test(s)) {
+        return ['🔍 0/0 꼴 공통인수 약분·인수분해', '📐 접점의 x좌표를 미지수 t로 설정', '📊 도함수 f′(x)=0 부호 변화 관찰', '🧭 그래프 대칭성·정적분 넓이 해석'];
+      }
+      if (/경우의 수|확률|조합|순열|정규분포|통계|독립|조건부/.test(s)) {
+        return ['🗂️ 빠짐없이 중복 없이 케이스 분류', '🔄 여사건(1 - 반대 확률) 활용하기', '📐 조건부확률 분모(표본공간) 축소', '📊 표준화(Z) 및 대칭 넓이 활용'];
+      }
+      return ['🧪 작은 숫자(1, 2)를 먼저 대입해 관찰', '🔍 구하려는 목표값을 미지수로 설정', '📐 주어진 조건을 등식·도형으로 번역', '🧱 앞 단계에서 구한 조각 결합하기'];
+    }
+
+    function applyOrigPaperCreativeMask() {
+      var origOpts = document.getElementById('examOrigOptsContent');
+      if (!origOpts) return;
+      var creativeOn = isCreativeConstructiveModeOn();
+      var mask = document.getElementById('examOrigCreativeBanner');
+      if (!creativeOn || origOpts.dataset.origRevealed === '1') {
+        origOpts.style.display = '';
+        if (mask) mask.remove();
+        return;
+      }
+      origOpts.style.display = 'none';
+      if (!mask) {
+        mask = document.createElement('div');
+        mask.id = 'examOrigCreativeBanner';
+        mask.style.cssText = 'margin-top:10px;padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%);border:1.5px dashed #059669;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.82rem;color:#065f46;font-weight:700';
+        mask.innerHTML =
+          '<span>✍️ <b>[탈-5지선다 창의적 구성 모드]</b>: 객관식 보기에 의존하지 않고 스스로 식을 세워 풀어보세요!</span>' +
+          '<button type="button" onclick="var el=document.getElementById(\'examOrigOptsContent\');if(el){el.dataset.origRevealed=\'1\';el.style.display=\'\';}this.parentElement.remove();" style="padding:4px 10px;border-radius:999px;border:1px solid #059669;background:#ffffff;color:#047857;font-size:0.75rem;font-weight:800;cursor:pointer">👁️ 원본 5지선다 보기 대조</button>';
+        origOpts.parentNode.insertBefore(mask, origOpts);
+      }
+    }
+
     function applyRetrievalBlindMode() {
-      var st = loadPedagogyState();
+      qs = Array.from(document.querySelectorAll('.q'));
+      var creativeOn = isCreativeConstructiveModeOn();
       var btn = document.getElementById('btnAcadRetrieval');
       if (btn) {
-        btn.classList.toggle('active', !!st.retrievalBlindMode);
-        btn.innerHTML = bilingual('🧠 블라인드 능동인출 ' + (st.retrievalBlindMode ? 'ON' : 'OFF'), '🧠 Blind Retrieval ' + (st.retrievalBlindMode ? 'ON' : 'OFF'));
+        btn.classList.toggle('active', creativeOn);
+        btn.innerHTML = bilingual(
+          '✍️ 탈-5지선다 창의 구성 모드 ' + (creativeOn ? 'ON (기본)' : 'OFF (5지선다)'),
+          '✍️ Creative Constructive Mode ' + (creativeOn ? 'ON' : 'OFF')
+        );
       }
+      applyOrigPaperCreativeMask();
+
       qs.forEach(function(q, idx) {
         var opts = q.querySelector('.opts');
         if (!opts) return;
-        var maskId = 'acadBlindMask_' + idx;
-        var existingMask = document.getElementById(maskId);
-        if (!st.retrievalBlindMode || q.classList.contains('done') || q.dataset.retrievalRevealed === '1') {
+        var optEls = Array.from(opts.querySelectorAll('.opt'));
+        optEls.forEach(function(oEl) {
+          if (!oEl.dataset.rawTex) {
+            oEl.dataset.rawTex = oEl.innerHTML.replace(/<span class="n">\s*\d+\s*<\/span>/i, '').trim();
+          }
+        });
+
+        var studioId = 'acadCreativeStudio_' + idx;
+        var existingStudio = document.getElementById(studioId);
+
+        if (!creativeOn) {
           opts.style.display = '';
-          if (existingMask) existingMask.remove();
+          if (existingStudio) existingStudio.style.display = 'none';
           return;
         }
+
+        if (q.classList.contains('done') || q.dataset.retrievalRevealed === '1') {
+          opts.style.display = '';
+          if (existingStudio) existingStudio.style.display = 'block';
+          return;
+        }
+
+        // Hide passive 5-choice options by default!
         opts.style.display = 'none';
-        if (!existingMask) {
-          var mask = document.createElement('div');
-          mask.id = maskId;
-          mask.className = 'acad-blind-mask';
-          mask.innerHTML =
-            '<div style="font-size:0.82rem;font-weight:800;color:#006398;margin-bottom:6px">' +
-              bilingual('🧠 [로디거(Roediger) 능동적 인출 훈련]: 보기를 먼저 보면 뇌가 수동적 인식에 머뭅니다. 먼저 머릿속이나 연습장에 식/답을 떠올린 뒤 선지를 여세요!', '🧠 [Roediger Active Retrieval]: Think of the expression or answer first before revealing the choices!') +
+
+        if (existingStudio) {
+          existingStudio.style.display = 'block';
+          return;
+        }
+
+        var ansNum = +(q.dataset.ans || 1);
+        var correctOptEl = optEls[ansNum - 1] || optEls[0];
+        var correctRaw = correctOptEl ? (correctOptEl.dataset.rawTex || extractPureOptionHtml(correctOptEl)) : '';
+        var allOptsRaw = optEls.map(function(oEl) { return oEl.dataset.rawTex || extractPureOptionHtml(oEl); });
+        var stemEl = q.querySelector('.stem');
+        var stemText = stemEl ? stemEl.textContent : '';
+        var heuristics = getCreativeHeuristicsForStem(stemText);
+        var legoTokens = buildCreativeLegoTokens(correctRaw, allOptsRaw, idx);
+
+        var studio = document.createElement('div');
+        studio.id = studioId;
+        studio.className = 'acad-creative-studio';
+        studio.style.cssText = 'margin-top:12px;padding:16px;border-radius:14px;background:linear-gradient(145deg,#ffffff 0%,#f0f9ff 55%,#f0fdf4 100%);border:1.5px solid #38bdf8;box-shadow:0 6px 20px rgba(0,99,152,0.08);text-align:left;';
+
+        var heurButtonsHtml = heuristics.map(function(h) {
+          return '<button type="button" class="creative-heur-chip" onclick="window.selectCreativeHeuristic(' + idx + ', this)" style="padding:5px 11px;border-radius:999px;border:1px solid #bae6fd;background:#ffffff;color:#0369a1;font-size:0.76rem;font-weight:700;cursor:pointer;transition:0.15s">' + h + '</button>';
+        }).join('');
+
+        var legoButtonsHtml = legoTokens.map(function(t) {
+          var safeInsert = String(t.insert || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+          return '<button type="button" class="creative-lego-chip" onclick="window.appendCreativeLegoToken(' + idx + ', \'' + safeInsert + '\')" style="padding:6px 12px;border-radius:10px;border:1.5px solid #c7d2fe;background:#ffffff;color:#1e293b;font-size:0.84rem;font-weight:800;cursor:pointer;box-shadow:0 2px 6px rgba(79,70,229,0.08);transition:transform 0.12s">' + t.display + '</button>';
+        }).join('');
+
+        var symQuickList = [
+          { lbl: '분수 a/b', val: '/' },
+          { lbl: '√(루트)', val: 'sqrt(' },
+          { lbl: '^ ( 거듭제곱 )', val: '^' },
+          { lbl: '×', val: '*' },
+          { lbl: '+', val: '+' },
+          { lbl: '-', val: '-' },
+          { lbl: '=', val: '=' },
+          { lbl: '(', val: '(' },
+          { lbl: ')', val: ')' },
+          { lbl: 'π', val: 'pi' }
+        ];
+        var symQuickHtml = symQuickList.map(function(sym) {
+          return '<button type="button" onclick="window.appendCreativeLegoToken(' + idx + ', \'' + sym.val + '\')" style="padding:3px 9px;border-radius:6px;border:1px solid #cbd5e1;background:#f8fafc;color:#334155;font-size:0.74rem;font-weight:800;cursor:pointer">' + sym.lbl + '</button>';
+        }).join('');
+
+        studio.innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #bae6fd">' +
+            '<div style="display:flex;align-items:center;gap:6px;font-size:0.84rem;font-weight:900;color:#006398">' +
+              '<span>✍️</span>' +
+              bilingual('탈-5지선다 창의적 구성주의 풀이 스튜디오 (스스로 발상·수식 조립)', 'Creativity-First Constructive Math Studio (No Multiple-Choice Guessing)') +
             '</div>' +
-            '<button type="button" class="acad-blind-btn" onclick="window.revealAcadRetrievalStep(' + idx + ')">' +
-              bilingual('👁️ 스스로 먼저 생각했습니다 — 5지선다 보기 열기 (+인출 보너스)', '👁️ I Thought It Through — Reveal Choices (+Bonus)') +
-            '</button>';
-          opts.parentNode.insertBefore(mask, opts);
+            '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
+              '<button type="button" onclick="window.toggleCreativeWhatIfLab(' + idx + ')" style="padding:4px 10px;border-radius:999px;border:1px solid #c084fc;background:#faf5ff;color:#6b21a8;font-size:0.74rem;font-weight:800;cursor:pointer">' +
+                bilingual('🔀 조건 바꿔 새 문제 발명 (What-If)', '🔀 What-If Problem Posing Lab') +
+              '</button>' +
+              '<button type="button" onclick="window.revealAcadRetrievalStep(' + idx + ')" style="padding:4px 10px;border-radius:999px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;font-size:0.74rem;font-weight:700;cursor:pointer">' +
+                bilingual('👁️ 막힐 때 5지선다 보기 열기', '👁️ Reveal 5 Choices') +
+              '</button>' +
+            '</div>' +
+          '</div>' +
+
+          // Step A: Creative Idea & Auxiliary-Line Sketcher
+          '<div style="margin-bottom:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.85);border:1px solid #e0f2fe">' +
+            '<div style="font-size:0.77rem;font-weight:800;color:#0369a1;margin-bottom:6px">' +
+              bilingual('🧭 [1단계 · 나만의 제1발상 & 보조선 설계]: 계산하기 전에 어떤 수학적 아이디어로 접근할지 선택하거나 적어보세요!', '🧭 [Step 1 · Creative Strategy Sketch]: Choose or write your mathematical approach before computing!') +
+            '</div>' +
+            '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">' + heurButtonsHtml + '</div>' +
+            '<input type="text" id="creativeIdeaInput_' + idx + '" placeholder="💭 나만의 풀이 발상·보조선·규칙을 자유롭게 한 줄로 스케치해 보세요 (선택 사항)" style="width:100%;padding:6px 10px;border-radius:8px;border:1px solid #cbd5e1;background:#ffffff;color:#1e293b;font-size:0.78rem;box-sizing:border-box">' +
+          '</div>' +
+
+          // Step B: Constructive Math Lego Blocks & Direct Expression Input
+          '<div style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.92);border:1px solid #c7d2fe">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:6px">' +
+              '<span style="font-size:0.78rem;font-weight:800;color:#3730a3">' +
+                bilingual('🧩 [2단계 · 수식 레고 블록 조립 또는 직접 입력]: 아래 수식 조각을 클릭해 조립하거나 키보드로 답을 직접 구성하세요!', '🧩 [Step 2 · Assemble Math Blocks or Type Directly]: Click math blocks below or type your answer!') +
+              '</span>' +
+              '<span style="font-size:0.72rem;color:#059669;font-weight:800">🌟 선지 안 보고 해결 시 +30 창의력 XP</span>' +
+            '</div>' +
+            '<div id="creativeLegoTray_' + idx + '" style="display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:8px;padding:8px;border-radius:8px;background:#f5f3ff;border:1px dashed #a5b4fc">' +
+              '<span style="font-size:0.73rem;font-weight:800;color:#4f46e5;margin-right:2px">🧩 수식 블록:</span>' +
+              legoButtonsHtml +
+            '</div>' +
+            '<div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:8px">' +
+              '<span style="font-size:0.72rem;font-weight:700;color:#64748b">⌨️ 기호 패드:</span>' +
+              symQuickHtml +
+            '</div>' +
+            '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
+              '<input type="text" id="creativeAnsInput_' + idx + '" onkeydown="if(event.key===\'Enter\')window.submitCreativeConstructiveAns(' + idx + ')" placeholder="정답 값 또는 조립한 수식을 입력하세요 (예: 2, 1/3, 루트3, (3^2)^(1/4)*3^(-1/2) 등)" style="flex:1;min-width:200px;padding:9px 12px;border-radius:10px;border:1.5px solid #6366f1;background:#ffffff;color:#0f172a;font-size:0.88rem;font-weight:800;outline:none;box-sizing:border-box">' +
+              '<button type="button" onclick="window.clearCreativeConstructiveAns(' + idx + ')" style="padding:9px 11px;border-radius:10px;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;font-size:0.78rem;font-weight:800;cursor:pointer" title="입력 초기화">🔄 지우기</button>' +
+              '<button type="button" onclick="window.submitCreativeConstructiveAns(' + idx + ')" style="padding:9px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#006398 0%,#4f46e5 100%);color:#ffffff;font-size:0.84rem;font-weight:900;cursor:pointer;box-shadow:0 4px 12px rgba(79,70,229,0.28)">' +
+                bilingual('✨ 창의 답안 제출 · 검증', '✨ Submit Answer') +
+              '</button>' +
+            '</div>' +
+            '<div id="creativeFeedbackBox_' + idx + '" style="display:none;margin-top:8px;padding:10px 12px;border-radius:10px;font-size:0.81rem;line-height:1.55"></div>' +
+          '</div>' +
+
+          // Step C: Brown & Walter What-If-Not Creative Problem Posing Lab
+          '<div id="creativeWhatIfLab_' + idx + '" style="display:none;margin-top:10px;padding:12px;border-radius:10px;background:linear-gradient(135deg,#faf5ff 0%,#fdf2f8 100%);border:1.5px solid #d8b4fe">' +
+            '<div style="font-size:0.8rem;font-weight:900;color:#6b21a8;margin-bottom:4px">' +
+              bilingual('🔀 [브라운 & 월터(Brown & Walter) What-If-Not 창의적 문제 변형·발명 실험실]', '🔀 [Brown & Walter What-If-Not Creative Problem Posing Lab]') +
+            '</div>' +
+            '<div style="font-size:0.76rem;color:#581c87;margin-bottom:8px;line-height:1.5">' +
+              bilingual(
+                '진짜 수학적 창의성은 주어진 문제를 푸는 것을 넘어 <b>"만약 문제의 숫자·지수·각도·조건을 바꾼다면 답이 어떻게 달라질까?"</b>를 스스로 질문하고 새 문제를 발명할 때 폭발합니다!',
+                'True mathematical creativity shines when you ask "What if this condition changes?" and invent your own variation!'
+              ) +
+            '</div>' +
+            '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+              '<input type="text" id="creativeWhatIfInput_' + idx + '" placeholder="예: 만약 밑 9를 27로 바꾸거나 지수 부호를 반대로 바꾸면 새로운 답은 얼마가 될까? (나만의 변형 문제 & 답 기록)" style="flex:1;min-width:220px;padding:7px 10px;border-radius:8px;border:1px solid #c084fc;background:#ffffff;color:#1e293b;font-size:0.78rem">' +
+              '<button type="button" onclick="window.saveCreativeWhatIfProblem(' + idx + ')" style="padding:7px 13px;border-radius:8px;border:none;background:#7e22ce;color:#ffffff;font-size:0.76rem;font-weight:800;cursor:pointer">💾 나만의 발명 문제 저장 (+25 XP)</button>' +
+            '</div>' +
+            '<div id="creativeWhatIfSaved_' + idx + '" style="font-size:0.74rem;color:#059669;font-weight:800;margin-top:5px"></div>' +
+          '</div>';
+
+        opts.parentNode.insertBefore(studio, opts);
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise([studio]).catch(function() {});
         }
       });
     }
 
+    window.selectCreativeHeuristic = function(idx, btnEl) {
+      if (!btnEl) return;
+      var parent = btnEl.parentNode;
+      if (parent) {
+        parent.querySelectorAll('.creative-heur-chip').forEach(function(b) {
+          b.style.background = '#ffffff';
+          b.style.color = '#0369a1';
+          b.style.borderColor = '#bae6fd';
+        });
+      }
+      btnEl.style.background = '#0284c7';
+      btnEl.style.color = '#ffffff';
+      btnEl.style.borderColor = '#0284c7';
+      var ideaInp = document.getElementById('creativeIdeaInput_' + idx);
+      if (ideaInp && !ideaInp.value) {
+        ideaInp.value = '나의 제1발상: ' + btnEl.textContent.trim();
+      }
+      if (window.MatheduGame && window.MatheduGame.addXP && !btnEl.dataset.xpAwarded) {
+        btnEl.dataset.xpAwarded = '1';
+        window.MatheduGame.addXP(10, '🧭 창의적 제1발상·보조선 설계');
+      }
+    };
+
+    window.appendCreativeLegoToken = function(idx, tokenStr) {
+      var inp = document.getElementById('creativeAnsInput_' + idx);
+      if (!inp) return;
+      var cur = inp.value || '';
+      if (cur && !/[+\-*/^=(]$/.test(cur) && !/^[+\-*/^=)]/.test(tokenStr)) {
+        inp.value = cur + ' ' + tokenStr;
+      } else {
+        inp.value = cur + tokenStr;
+      }
+      inp.focus();
+    };
+
+    window.clearCreativeConstructiveAns = function(idx) {
+      var inp = document.getElementById('creativeAnsInput_' + idx);
+      if (inp) {
+        inp.value = '';
+        inp.focus();
+      }
+      var fb = document.getElementById('creativeFeedbackBox_' + idx);
+      if (fb) fb.style.display = 'none';
+    };
+
+    window.toggleCreativeWhatIfLab = function(idx) {
+      var lab = document.getElementById('creativeWhatIfLab_' + idx);
+      if (!lab) return;
+      lab.style.display = (lab.style.display === 'none' || !lab.style.display) ? 'block' : 'none';
+    };
+
+    window.saveCreativeWhatIfProblem = function(idx) {
+      var inp = document.getElementById('creativeWhatIfInput_' + idx);
+      var msgEl = document.getElementById('creativeWhatIfSaved_' + idx);
+      if (!inp || !inp.value.trim()) return;
+      try {
+        var list = JSON.parse(localStorage.getItem('mathedu_invented_problems_v1') || '[]');
+        list.unshift({
+          slug: currentSlug,
+          title: getProblemTitle(),
+          step: idx + 1,
+          invented: inp.value.trim(),
+          createdAt: new Date().toISOString()
+        });
+        if (list.length > 100) list = list.slice(0, 100);
+        localStorage.setItem('mathedu_invented_problems_v1', JSON.stringify(list));
+        if (msgEl) msgEl.textContent = '✅ 내가 발명한 창의 변형 문제가 포트폴리오에 저장되었습니다! (+25 창의력 XP)';
+        if (window.MatheduGame && window.MatheduGame.addXP) {
+          window.MatheduGame.addXP(25, '🔀 What-If 창의적 변형 문제 발명');
+        }
+      } catch (e) {}
+    };
+
+    window.submitCreativeConstructiveAns = function(idx) {
+      qs = Array.from(document.querySelectorAll('.q'));
+      var q = qs[idx];
+      if (!q) return;
+      var inp = document.getElementById('creativeAnsInput_' + idx);
+      var fb = document.getElementById('creativeFeedbackBox_' + idx);
+      if (!inp || !fb) return;
+
+      var userVal = (inp.value || '').trim();
+      if (!userVal) {
+        fb.style.display = 'block';
+        fb.style.background = '#fefce8';
+        fb.style.border = '1px solid #fde047';
+        fb.style.color = '#713f12';
+        fb.innerHTML = '✍️ 먼저 생각한 값이나 수식을 입력하거나, 위의 <b>🧩 수식 블록</b>을 클릭해 조립해 보세요!';
+        return;
+      }
+
+      var opts = q.querySelectorAll('.opt');
+      var ansNum = +(q.dataset.ans || 1);
+      var correctOpt = opts[ansNum - 1] || opts[0];
+      var correctRaw = correctOpt ? (correctOpt.dataset.rawTex || extractPureOptionHtml(correctOpt)) : '';
+      var allOptsRaw = Array.from(opts).map(function(o) { return o.dataset.rawTex || extractPureOptionHtml(o); });
+
+      var res = checkCreativeMathEquivalence(userVal, correctRaw, allOptsRaw);
+      if (res.ok) {
+        fb.style.display = 'block';
+        fb.style.background = '#ecfdf5';
+        fb.style.border = '1.5px solid #10b981';
+        fb.style.color = '#065f46';
+        fb.innerHTML =
+          '🌟 <b>[탈-5지선다 창의적 자력 구성 성공!]</b> 객관식 보기에 의존하지 않고 스스로 <b>' + correctRaw + '</b>을(를) 완벽하게 구성하여 도출했습니다! (+30 창의력 XP)<br>' +
+          '<span style="font-size:0.76rem;color:#047857">💡 이제 아래 열린 <b>🔀 What-If 조건 변형 실험실</b>에서 조건을 살짝 바꿔 나만의 새 문제도 발명해 보세요!</span>';
+
+        var st = loadPedagogyState();
+        st.retrievalSuccess = (st.retrievalSuccess || 0) + 1;
+        savePedagogyState(st);
+        if (window.MatheduGame && window.MatheduGame.addXP) {
+          window.MatheduGame.addXP(30, '🌟 탈-5지선다 창의적 자력 구성 해결');
+        }
+
+        // Trigger the underlying correct option click so score, progress bar, explanation, and next-step unlock all fire seamlessly!
+        q.dataset.retrievalRevealed = '1';
+        opts.forEach(function(o) { o.style.display = ''; });
+        if (correctOpt && !q.classList.contains('done')) {
+          correctOpt.click();
+        }
+        var whatIfLab = document.getElementById('creativeWhatIfLab_' + idx);
+        if (whatIfLab) whatIfLab.style.display = 'block';
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise([fb]).catch(function() {});
+        }
+      } else {
+        // Socratic Partial-Insight Coaching (never locks out on constructive attempts!)
+        fb.style.display = 'block';
+        fb.style.background = '#fffbeb';
+        fb.style.border = '1.5px solid #f59e0b';
+        fb.style.color = '#92400e';
+        var partialMsg = '';
+        if (res.matchedTokens && res.matchedTokens.length > 0) {
+          partialMsg = '입력하신 식에서 핵심 요소(<b>' + res.matchedTokens.join(', ') + '</b>)를 정확히 포착했습니다! ';
+        }
+        if (res.matchedWrongOpt > 0) {
+          partialMsg += '다만 흔히 범하기 쉬운 함정 값(부호·지수·계수 착오)에 해당합니다. ';
+        }
+        fb.innerHTML =
+          '🧭 <b>[소크라테스식 창의 발문 코칭 · 재도전 가능]</b><br>' +
+          partialMsg +
+          '최종 부호(`+`/`-`), 지수 결합, 또는 약분 결과를 한 번만 더 점검해 볼까요?<br>' +
+          '<span style="font-size:0.75rem;color:#b45309">💡 팁: 위의 <b>🧩 수식 블록</b>을 조합해 보거나, 아래 <b>🪜 ZPD 단계 힌트</b>를 열어 스스로 완성해 보세요!</span>';
+      }
+    };
+
     window.toggleAcadRetrievalMode = function() {
+      var nextOn = !isCreativeConstructiveModeOn();
+      setCreativeConstructiveMode(nextOn);
       var st = loadPedagogyState();
-      st.retrievalBlindMode = !st.retrievalBlindMode;
+      st.retrievalBlindMode = nextOn;
       savePedagogyState(st);
       applyRetrievalBlindMode();
     };
 
     window.revealAcadRetrievalStep = function(idx) {
+      qs = Array.from(document.querySelectorAll('.q'));
       var q = qs[idx];
       if (!q) return;
       q.dataset.retrievalRevealed = '1';
@@ -2588,6 +3097,13 @@
       st.retrievalSuccess = (st.retrievalSuccess || 0) + 1;
       savePedagogyState(st);
       applyRetrievalBlindMode();
+    };
+
+    window.MatheduCreativeSolver = {
+      refreshAll: function() {
+        applyRetrievalBlindMode();
+      },
+      isCreativeOn: isCreativeConstructiveModeOn
     };
 
     applyRetrievalBlindMode();

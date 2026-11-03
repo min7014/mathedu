@@ -1136,6 +1136,11 @@
         || item.short_mp4_en
         || '';
 
+      const fullMp4Ko = (catEntry && catEntry.youtube_packages && catEntry.youtube_packages.ko && catEntry.youtube_packages.ko.local_mp4_path)
+        || '';
+      const fullMp4En = (catEntry && catEntry.youtube_packages && catEntry.youtube_packages.en && catEntry.youtube_packages.en.local_mp4_path)
+        || '';
+
       const slugKey = (catEntry && catEntry.slug)
         || (vaultEntry && (VAULT_MAP[pdfSlug] ? pdfSlug : webSlug))
         || pdfSlug
@@ -1152,6 +1157,8 @@
         shortEn: shortEn.trim(),
         shortMp4Ko: shortMp4Ko.trim(),
         shortMp4En: shortMp4En.trim(),
+        fullMp4Ko: fullMp4Ko.trim(),
+        fullMp4En: fullMp4En.trim(),
         hasShortsReady: !!(shortKo || shortEn || shortMp4Ko || shortMp4En),
         hasScriptReady: !!catEntry,
         pageCount: (catEntry && catEntry.page_count) || (vaultEntry && vaultEntry.page_count) || 0,
@@ -1206,6 +1213,8 @@
             _shortEn: vInfo.shortEn,
             _shortMp4Ko: vInfo.shortMp4Ko,
             _shortMp4En: vInfo.shortMp4En,
+            _fullMp4Ko: vInfo.fullMp4Ko,
+            _fullMp4En: vInfo.fullMp4En,
             _hasShortsReady: vInfo.hasShortsReady,
             _hasScriptReady: vInfo.hasScriptReady,
             _pageCount: vInfo.pageCount,
@@ -1338,8 +1347,11 @@
                 ` : ''}
                 ${!isYtUploaded && item._hasScriptReady ? `
                   <div class="yt-link-row">
-                    <span style="font-weight:800;color:#0369a1;">📦 KO/EN 1080p MP4 제작 완료</span>
-                    <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="mini-play-btn" style="background:#0284c7;text-decoration:none;">▶ 스튜디오 강의 재생</a>
+                    <span style="font-weight:800;color:#0369a1;">🎬 v4.0 1080p 본편 완료</span>
+                    <div style="display:flex;gap:5px;">
+                      ${item._fullMp4Ko ? `<button type="button" class="mini-play-btn" style="background:#0284c7;" onclick="openCinemaForItem(${itemIdx}, 'master_ko')">▶ 🇰🇷 1080p 재생</button>` : ''}
+                      ${item._fullMp4En ? `<button type="button" class="mini-play-btn en" style="background:#2563eb;" onclick="openCinemaForItem(${itemIdx}, 'master_en')">▶ 🇺🇸 1080p EN</button>` : ''}
+                    </div>
                   </div>
                 ` : ''}
               </div>
@@ -1527,20 +1539,33 @@
       let targetUrl = '';
       let localShortMp4 = '';
       let badgeLabel = '@min7014_ai';
-      if (mode === 'short_ko' && (item._shortKo || item._shortMp4Ko)) {
+      if (mode === 'master_ko' && item._fullMp4Ko) {
+        targetUrl = item._ytKo || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._fullMp4Ko;
+        badgeLabel = '🎬 🇰🇷 @min7014_ai v4.0 Viral Cinema 마스터 본편 (1080p)';
+      } else if (mode === 'master_en' && item._fullMp4En) {
+        targetUrl = item._ytEn || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._fullMp4En;
+        badgeLabel = '🎬 🇺🇸 @min7014_ai v4.0 Viral Cinema Master (1080p)';
+      } else if (mode === 'short_ko' && (item._shortKo || item._shortMp4Ko)) {
         targetUrl = item._shortKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
         localShortMp4 = item._shortMp4Ko || '';
-        badgeLabel = '📱 🇰🇷 @min7014_ai 9:16 숏폼 (#Shorts)';
+        badgeLabel = '📱 🇰🇷 @min7014_ai v4.0 9:16 숏폼 (#Shorts)';
       } else if (mode === 'short_en' && (item._shortEn || item._shortMp4En)) {
         targetUrl = item._shortEn || item._ytEn || 'https://www.youtube.com/@min7014_ai';
         localShortMp4 = item._shortMp4En || '';
-        badgeLabel = '📱 🇺🇸 @min7014_ai 9:16 English #Shorts';
+        badgeLabel = '📱 🇺🇸 @min7014_ai v4.0 9:16 English #Shorts';
       } else if (mode === 'ko' && item._ytKo) {
         targetUrl = item._ytKo;
-        badgeLabel = '🇰🇷 @min7014_ai 한국어 설명영상';
+        badgeLabel = '🇰🇷 @min7014_ai 한국어 설명영상 (YouTube)';
       } else if (mode === 'en' && item._ytEn) {
         targetUrl = item._ytEn;
-        badgeLabel = '🇺🇸 @min7014_ai English Explanation';
+        badgeLabel = '🇺🇸 @min7014_ai English Explanation (YouTube)';
+      } else if (item._fullMp4Ko) {
+        mode = 'master_ko';
+        targetUrl = 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._fullMp4Ko;
+        badgeLabel = '🎬 🇰🇷 @min7014_ai v4.0 Viral Cinema 마스터 본편 (1080p)';
       } else if (item._ytOrig) {
         targetUrl = item._ytOrig;
         mode = 'orig';
@@ -1549,7 +1574,7 @@
         mode = 'short_ko';
         targetUrl = 'https://www.youtube.com/@min7014_ai';
         localShortMp4 = item._shortMp4Ko;
-        badgeLabel = '📱 🇰🇷 @min7014_ai 9:16 숏폼 (#Shorts)';
+        badgeLabel = '📱 🇰🇷 @min7014_ai v4.0 9:16 숏폼 (#Shorts)';
       } else {
         window.location.href = `video_studio.html?slug=${encodeURIComponent(item._slug)}`;
         return;
@@ -1561,12 +1586,12 @@
       document.getElementById('cinemaTitle').textContent = `${item.title} (${item.id})`;
       document.getElementById('cinemaDirectYtLink').href = targetUrl;
       document.getElementById('cinemaUrlText').href = localShortMp4 || targetUrl;
-      document.getElementById('cinemaUrlText').textContent = (mode.startsWith('short_') && !item._shortKo && !item._shortEn && localShortMp4) ? localShortMp4 : targetUrl;
+      document.getElementById('cinemaUrlText').textContent = ((mode.startsWith('short_') || mode.startsWith('master_')) && localShortMp4) ? localShortMp4 : targetUrl;
 
       const iframeEl = document.getElementById('cinemaIframe');
       const nativeVid = document.getElementById('cinemaNativeVideo');
 
-      if (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn)) {
+      if ((mode.startsWith('master_') && localShortMp4) || (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn))) {
         iframeEl.src = '';
         iframeEl.style.display = 'none';
         nativeVid.style.display = 'block';
@@ -1589,16 +1614,22 @@
       const langBar = document.getElementById('cinemaLangBar');
       const pills = [];
       if (item._ytKo) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'ko')">🇰🇷 한국어 본편 (16:9)</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'ko')">🇰🇷 YouTube 본편 (16:9)</button>`);
       }
       if (item._ytEn) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'en')">🇺🇸 English Full (16:9)</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'en')">🇺🇸 YouTube Full (16:9)</button>`);
+      }
+      if (item._fullMp4Ko) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'master_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'master_ko')">🎬 🇰🇷 v4.0 마스터 (1080p)</button>`);
+      }
+      if (item._fullMp4En) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'master_en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'master_en')">🎬 🇺🇸 v4.0 Master (1080p)</button>`);
       }
       if (item._shortKo || item._shortMp4Ko) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'short_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 숏폼 (#Shorts · 9:16)</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 v4.0 숏폼 (#Shorts · 9:16)</button>`);
       }
       if (item._shortEn || item._shortMp4En) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'short_en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Shorts (EN · 9:16)</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 v4.0 Shorts (EN · 9:16)</button>`);
       }
       if (item._ytOrig) {
         pills.push(`<button type="button" class="lang-pill ${mode === 'orig' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'orig')">🎬 @min7014 원본 영상</button>`);

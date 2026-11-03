@@ -2072,8 +2072,8 @@ html.dark-theme select {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/archive.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="archive">
-<meta name="mathedu-offline-build-time" content="2026-11-03T16:19:13.627515+00:00">
-<meta name="mathedu-offline-hash" content="34e1d3d1">
+<meta name="mathedu-offline-build-time" content="2026-11-03T17:51:44.950928+00:00">
+<meta name="mathedu-offline-hash" content="88f70ea8">
 <meta name="mathedu-version-label" content="v2026.11.04">
 
 </head><body><div class="wrap">
@@ -2904,6 +2904,81 @@ if (!window.toggleMinGgb) {
 </script>
 <script src="../mathedu-room.js?v=20261027_stitch3"></script>
 <script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+function toggleExp(btn) {
+  var q = btn && btn.closest ? btn.closest('.q') : (btn ? btn.parentElement : null);
+  while (q && !q.classList.contains('q')) { q = q.parentElement; }
+  if (!q) return;
+  var exp = q.querySelector('.exp');
+  if (!exp) return;
+  var isEn = (document.documentElement.lang === 'en');
+  if (exp.classList.contains('show')) {
+    exp.classList.remove('show');
+    btn.textContent = isEn ? '💡 View Explanation' : '💡 해설 보기';
+  } else {
+    exp.classList.add('show');
+    btn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기';
+  }
+}
+
+function bindAllQuizEvents() {
+  var qs = document.querySelectorAll('.q');
+  var pts = 0;
+  var totEl = document.getElementById('tot');
+  if (totEl) totEl.textContent = qs.length;
+  var ptsEl = document.getElementById('pts');
+  if (ptsEl) ptsEl.textContent = '0';
+  var barEl = document.getElementById('bar');
+  if (barEl) barEl.style.width = '0%';
+  var pctEl = document.getElementById('pct');
+  if (pctEl) pctEl.textContent = '0%';
+
+  qs.forEach(function(q) {
+    var ans = +(q.dataset.ans || 1);
+    var exp = q.querySelector('.exp');
+    if (exp) exp.innerHTML = q.dataset.exp || '';
+    var opts = q.querySelectorAll('.opt');
+    opts.forEach(function(o, i) {
+      if (o.dataset.boundClick === '1') return;
+      o.dataset.boundClick = '1';
+      o.addEventListener('click', function() {
+        if (q.classList.contains('done')) return;
+        q.classList.add('done');
+        opts.forEach(function(oo, j) {
+          oo.classList.add('locked');
+          if (j + 1 === ans) oo.classList.add('correct');
+        });
+        if (i + 1 === ans) {
+          o.classList.add('correct');
+          q.classList.add('correct-q');
+          pts++;
+        } else {
+          o.classList.add('wrong');
+        }
+        if (exp) exp.classList.add('show');
+        var toggleBtn = q.querySelector('.exp-toggle-btn');
+        if (toggleBtn) {
+          var isEn = (document.documentElement.lang === 'en');
+          toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기';
+        }
+        var total = document.querySelectorAll('.q').length || 1;
+        var correctCnt = document.querySelectorAll('.q.correct-q').length;
+        var pct = Math.round(correctCnt / total * 100);
+        if (ptsEl) ptsEl.textContent = String(correctCnt);
+        if (barEl) barEl.style.width = pct + '%';
+        if (pctEl) pctEl.textContent = pct + '%';
+        if (typeof window.sendProgress === 'function') setTimeout(window.sendProgress, 50);
+      });
+    });
+  });
+
+  if (typeof window.initAcademicPedagogyEngine === 'function') {
+    window.initAcademicPedagogyEngine();
+  }
+  if (window.MatheduCreativeSolver && typeof window.MatheduCreativeSolver.refreshAll === 'function') {
+    window.MatheduCreativeSolver.refreshAll();
+  }
+}
+
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
@@ -3074,7 +3149,7 @@ function renderExamProblemToDom(prob) {
         '<span style="background:#0f172a;color:#ffffff;padding:2px 10px;border-radius:999px;font-size:0.78rem">문항 ' + prob.qNum + '번 (' + (prob.point || '3') + '점)</span>' +
       '</p>' +
       '<p style="margin:0 0 14px;color:#111827;font-size:0.97rem;line-height:1.85">' + prob.stem + '</p>' +
-      '<p style="margin:0;padding-top:10px;border-top:1px dashed #cbd5e1;font-size:0.92rem;line-height:1.7">' + origOpts + '</p>';
+      '<p id="examOrigOptsContent" style="margin:0;padding-top:10px;border-top:1px dashed #cbd5e1;font-size:0.92rem;line-height:1.7">' + origOpts + '</p>';
   }
 
   var topicEl = document.getElementById('examOrigTopicTitle');
@@ -3348,6 +3423,7 @@ function downloadCurrentExamOffline() {
 }
 
 (function initExamPlayer() {
+  bindAllQuizEvents();
   var params = new URLSearchParams(window.location.search);
   var id = params.get('id') || 'e25_26111851_01';
   var m = id.match(/^e(\d{2})_/);
@@ -3538,8 +3614,8 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'archive';
-window._offlineBuildTime = '2026-11-03T16:19:13.627515+00:00';
-window._offlineHash = '34e1d3d1';
+window._offlineBuildTime = '2026-11-03T17:51:44.950928+00:00';
+window._offlineHash = '88f70ea8';
 window._offlineVersion = 'v2026.11.04';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/archive.html';
 
@@ -3564,8 +3640,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'archive';
-  var localBuildTime = window._offlineBuildTime || '2026-11-03T16:19:13.627515+00:00';
-  var localHash = window._offlineHash || '34e1d3d1';
+  var localBuildTime = window._offlineBuildTime || '2026-11-03T17:51:44.950928+00:00';
+  var localHash = window._offlineHash || '88f70ea8';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/archive.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
