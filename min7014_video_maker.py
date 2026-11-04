@@ -49,13 +49,14 @@ ROOT_DIR = Path(__file__).resolve().parent
 # 🔑 Multi-Project YouTube API Quota Rotation Pool & Pre-Flight Guard
 # ==============================================================================
 _EXHAUSTED_TOKEN_FILES = {}  # token_path -> backoff_until_ts
+_LAST_UPLOAD_QUOTA_BLOCKED = False
 
 def get_available_youtube_upload_service():
     """
     워크스페이스 내의 모든 youtube_token_min7014_ai*.json 파일을 스캔하여,
     현재 일일 할당량(429 rateLimitExceeded)에 걸리지 않은 유효한 YouTube Data API v3 객체를 반환합니다.
-    여러 개의 GCP 프로젝트 토큰(youtube_token_min7014_ai.json, youtube_token_min7014_ai_2.json 등)을 두면
-    프로젝트당 하루 6개씩 합산하여 무중단 자동 로테이션 업로드가 가능합니다.
+    유튜브 고급 기능(Advanced Features) 승인 및 일일 한도 해제 시 연속 대량 업로드를 수행하며,
+    복수의 GCP 프로젝트 토큰이 존재할 경우 자동으로 로테이션합니다.
     """
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
@@ -82,10 +83,12 @@ def get_available_youtube_upload_service():
             print(f'⚠️ [Token Pool Skip ({t_file.name})]: {e}')
     return None, None
 
-def mark_token_quota_exhausted(token_path_str, seconds=3600):
+def mark_token_quota_exhausted(token_path_str, seconds=900):
+    global _LAST_UPLOAD_QUOTA_BLOCKED
+    _LAST_UPLOAD_QUOTA_BLOCKED = True
     if token_path_str:
         _EXHAUSTED_TOKEN_FILES[str(token_path_str)] = time.time() + seconds
-        print(f'🔄 [Quota Pool] {Path(token_path_str).name} 할당량 소진 감지 -> {seconds//60}분간 쿨다운 및 다음 프로젝트 토큰으로 자동 전환')
+        print(f'🔄 [Quota Pool] {Path(token_path_str).name} 업로드 한도 대기 감지 -> {seconds//60}분 쿨다운 후 자동 재시도 (고급 기능/일일 쿼터 해제 시 즉시 대량 업로드)')
 
 DEEP_JSON_PATH = ROOT_DIR / "assets" / "min7014_deep_knowledge.json"
 LOOKUP_JSON_PATH = ROOT_DIR / "assets" / "min7014_lookup.json"
@@ -1953,34 +1956,104 @@ def sync_youtube_channel_rss():
     return matched_count
 
 
-def prepare_ready_batch_folder(open_explorer=True):
+def prepare_ready_batch_folder(open_explorer=False):
     """
-    이미 로그인된 크롬 YouTube Studio 창에 마우스로 한 번에 전체 드래그 앤 드롭(최대 15개 동시 업로드)할 수 있도록
-    유튜브 제목과 고유 식별 태그([slug_KO], [slug_EN])가 파일명으로 지정된 마스터 MP4 모음 폴더를 생성합니다.
+    유튜브 고급 기능(Advanced Features)이 활성화된 YouTube Studio 창에 마우스로 한 번에 드래그 앤 드롭(최대 15개씩 연속 업로드)하거나
+    API가 순차 업로드할 수 있도록, 아직 업로드되지 않은 1080p 마스터 MP4를 고유 식별 태그([slug_KO], [slug_EN]) 파일명으로 정리합니다.
     """
     ready_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai"
     ready_dir.mkdir(parents=True, exist_ok=True)
+    # 이미 업로드 완료된 파일은 폴더에서 자동 정리
+    existing_files = list(ready_dir.glob("*.mp4"))
+    priority_slugs = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
+    all_sps = sorted(SCRIPTS_DIR.glob("*.json"), key=lambda x: (0 if x.stem in priority_slugs else 1, x.stem))
+    active_fnames = set()
     count = 0
-    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
-        sdoc = json.loads(sp.read_text(encoding="utf-8"))
-        slug = sdoc["slug"]
+    for sp in all_sps:
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        slug = sdoc.get("slug", sp.stem)
+        yt_urls = sdoc.get("youtube_urls") or {}
         meta_p = YT_PKG_DIR / f"{slug}_youtube_meta.json"
         if not meta_p.exists():
             continue
-        mdata = json.loads(meta_p.read_text(encoding="utf-8"))
+        try:
+            mdata = json.loads(meta_p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
         for lc in ["ko", "en"]:
+            if (yt_urls.get(lc) or "").strip():
+                continue
             src = YT_UPLOADS_DIR / slug / f"{slug}_{lc}.mp4"
             if src.exists() and lc in mdata:
                 raw_title = mdata[lc]["title"]
                 safe_title = re.sub(r'[\\/:*?"<>|]', " ", raw_title).strip()
-                fname = f"{safe_title[:78]} [{slug}_{lc.upper()}].mp4"
+                fname = f"{safe_title[:75]} [{slug}_{lc.upper()}].mp4"
+                active_fnames.add(fname)
                 dst = ready_dir / fname
-                shutil.copyfile(src, dst)
+                if not dst.exists() or dst.stat().st_size != src.stat().st_size:
+                    shutil.copyfile(src, dst)
                 count += 1
-                print(f"[Ready for 1-Drag Upload] {dst.name}")
+    for ef in existing_files:
+        if ef.name not in active_fnames:
+            try:
+                ef.unlink()
+            except Exception:
+                pass
     if open_explorer and os.name == "nt":
         os.startfile(str(ready_dir))
     return ready_dir
+
+
+def prepare_ready_shorts_batch_folder(open_explorer=False):
+    """
+    아직 @min7014_ai 채널에 업로드되지 않은 9:16 세로형 #Shorts MP4들을
+    유튜브 제목과 고유 식별 태그([slug_SHORT_KO], [slug_SHORT_EN]) 파일명으로 ready_for_min7014_ai_shorts 폴더에 최신 동기화합니다.
+    """
+    ready_shorts_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai_shorts"
+    ready_shorts_dir.mkdir(parents=True, exist_ok=True)
+    existing_files = list(ready_shorts_dir.glob("*.mp4"))
+    priority_slugs = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
+    all_sps = sorted(SCRIPTS_DIR.glob("*.json"), key=lambda x: (0 if x.stem in priority_slugs else 1, x.stem))
+    active_fnames = set()
+    for sp in all_sps:
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        slug = sdoc.get("slug", sp.stem)
+        s_urls = sdoc.get("shorts_urls") or {}
+        smeta_p = YT_PKG_DIR / f"{slug}_shorts_meta.json"
+        if not smeta_p.exists():
+            continue
+        try:
+            smeta_all = json.loads(smeta_p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for lc in ["ko", "en"]:
+            if (s_urls.get(lc) or "").strip():
+                continue
+            src = YT_UPLOADS_DIR / "shorts" / f"{slug}_short_{lc}.mp4"
+            if src.exists() and lc in smeta_all:
+                raw_title = smeta_all[lc]["title"]
+                safe_title = re.sub(r'[\\/:*?"<>|]', " ", raw_title).strip()
+                prefix = f"0{priority_slugs.index(slug)+1}_" if slug in priority_slugs else ""
+                fname = f"{prefix}{safe_title[:70]} [{slug}_SHORT_{lc.upper()}].mp4"
+                active_fnames.add(fname)
+                dst = ready_shorts_dir / fname
+                if not dst.exists() or dst.stat().st_size != src.stat().st_size:
+                    shutil.copyfile(src, dst)
+    for ef in existing_files:
+        if ef.name not in active_fnames:
+            try:
+                ef.unlink()
+            except Exception:
+                pass
+    if open_explorer and os.name == "nt":
+        os.startfile(str(ready_shorts_dir))
+    return ready_shorts_dir
 
 
 def open_youtube_studio_for_min7014(slug_key="math20250130001"):
@@ -2234,51 +2307,9 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
     https://www.youtube.com/@min7014_ai (UCSlqQfOEtRfJuMPyGMLgFYA) 채널에 한국어(ko)·영어(en) 영상을 자동 업로드합니다.
     - method='auto': client_secret.json이 있으면 YouTube Data API v3를 사용하고, 없으면 Playwright YouTube Studio 브라우저 자동 업로더를 실행합니다.
     """
+    global _LAST_UPLOAD_QUOTA_BLOCKED
+    _LAST_UPLOAD_QUOTA_BLOCKED = False
     ensure_topic_rendered_for_upload(slug_key, langs=langs)
-    secret_file = find_google_client_secret()
-
-    if method == "browser" or (method == "auto" and not secret_file):
-        print(f"[Auto-Upload Mode: YouTube Studio Browser Automation -> {YOUTUBE_CHANNEL_URL}]")
-        return upload_slug_via_studio_browser(slug_key, langs=langs, privacy=privacy)
-
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from google_auth_oauthlib.flow import InstalledAppFlow
-    from googleapiclient.discovery import build
-    from googleapiclient.http import MediaFileUpload
-
-    SCOPES = [
-        "https://www.googleapis.com/auth/youtube.upload",
-        "https://www.googleapis.com/auth/youtube.force-ssl",
-        "https://www.googleapis.com/auth/youtube.readonly",
-    ]
-
-    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
-    creds = None
-    if token_file.exists():
-        creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            print(f"[Google OAuth] 아래 인증 주소를 크롬에서 열어 {YOUTUBE_CHANNEL_URL} ({YOUTUBE_CHANNEL_NAME}) 계정을 선택해 허용해 주세요...", flush=True)
-            flow = InstalledAppFlow.from_client_secrets_file(str(secret_file), SCOPES)
-            creds = flow.run_local_server(port=8089, open_browser=False)
-        token_file.write_text(creds.to_json(), encoding="utf-8")
-
-    youtube = build("youtube", "v3", credentials=creds)
-    try:
-        ch_resp = youtube.channels().list(part="snippet", mine=True).execute()
-        ch_items = ch_resp.get("items", [])
-        if ch_items:
-            auth_ch_id = ch_items[0]["id"]
-            auth_ch_title = ch_items[0]["snippet"].get("title", "")
-            auth_custom = ch_items[0]["snippet"].get("customUrl", "")
-            print(f"[Authenticated YouTube Channel] {auth_ch_title} ({auth_custom}, ID={auth_ch_id})")
-            if auth_ch_id != YOUTUBE_CHANNEL_ID:
-                print(f"  [주의] 현재 로그인된 채널({auth_custom})이 목표 AI 채널({YOUTUBE_CHANNEL_HANDLE}: {YOUTUBE_CHANNEL_ID})과 다릅니다.")
-    except Exception as e:
-        print(f"[Channel Check Notice] {e}")
 
     uploaded_urls = {}
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
@@ -2289,12 +2320,30 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
         except Exception:
             existing_yt = {}
 
-    for lang_code in langs:
-        if existing_yt.get(lang_code):
-            uploaded_urls[lang_code] = existing_yt[lang_code]
-            print(f"[Already in @min7014_ai Vault ({lang_code.upper()})] {existing_yt[lang_code]}")
-            continue
+    missing_langs = []
+    for lc in langs:
+        if (existing_yt.get(lc) or "").strip():
+            uploaded_urls[lc] = existing_yt[lc].strip()
+        else:
+            missing_langs.append(lc)
 
+    if not missing_langs:
+        return uploaded_urls
+
+    secret_file = find_google_client_secret()
+    if method == "browser" or (method == "auto" and not secret_file):
+        print(f"[Auto-Upload Mode: YouTube Studio Browser Automation -> {YOUTUBE_CHANNEL_URL}]")
+        return upload_slug_via_studio_browser(slug_key, langs=missing_langs, privacy=privacy)
+
+    from googleapiclient.http import MediaFileUpload
+
+    youtube, active_token_path = get_available_youtube_upload_service()
+    if youtube is None:
+        _LAST_UPLOAD_QUOTA_BLOCKED = True
+        return uploaded_urls
+
+    newly_uploaded = {}
+    for lang_code in missing_langs:
         mp4_path = YT_UPLOADS_DIR / slug_key / f"{slug_key}_{lang_code}.mp4"
         if not mp4_path.exists():
             render_multilingual_video(slug_key, lang_code=lang_code)
@@ -2325,6 +2374,7 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
             vid_id = resp["id"]
             yt_url = f"https://youtu.be/{vid_id}"
             uploaded_urls[lang_code] = yt_url
+            newly_uploaded[lang_code] = yt_url
             print(f"[YouTube Uploaded to {YOUTUBE_CHANNEL_HANDLE} ({lang_code.upper()})] {yt_url}", flush=True)
             set_youtube_urls_for_slug(
                 slug_key,
@@ -2332,7 +2382,10 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
                 yt_en=yt_url if lang_code == "en" else None,
             )
         except Exception as up_err:
+            err_s = str(up_err)
             print(f"  [YouTube Upload API Notice ({slug_key} / {lang_code})] {up_err}", flush=True)
+            if "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s or "quotaExceeded" in err_s:
+                mark_token_quota_exhausted(active_token_path, 900)
             break
 
         thumb_path = YT_PKG_DIR / f"{slug_key}_{lang_code}_thumb.png"
@@ -2363,7 +2416,7 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
             except Exception as e:
                 print(f"  [Caption Warning] {e}")
 
-    if uploaded_urls:
+    if newly_uploaded:
         set_youtube_urls_for_slug(
             slug_key,
             yt_ko=uploaded_urls.get("ko"),
@@ -3216,43 +3269,39 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
     """
     [@min7014_ai 유튜브 숏폼(#Shorts) 자동 업로더 (YouTube Data API v3)]
+    - 유튜브 고급 기능(Advanced Features)의 외부 설명란 링크 활성화 및 첫 댓글 딥링크 퍼널을 동시 적용합니다.
     """
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from googleapiclient.discovery import build
+    global _LAST_UPLOAD_QUOTA_BLOCKED
+    _LAST_UPLOAD_QUOTA_BLOCKED = False
     from googleapiclient.http import MediaFileUpload
 
-    SCOPES = [
-        "https://www.googleapis.com/auth/youtube.upload",
-        "https://www.googleapis.com/auth/youtube.force-ssl",
-        "https://www.googleapis.com/auth/youtube.readonly",
-    ]
-    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
-    if not token_file.exists():
-        raise RuntimeError("youtube_token_min7014_ai.json not found.")
-    creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
-    if not creds.valid and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-        token_file.write_text(creds.to_json(), encoding="utf-8")
-
-    youtube = build("youtube", "v3", credentials=creds)
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     if not script_path.exists():
         generate_or_update_script(slug_key, target_langs=["ko", "en"])
 
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
     uploaded_shorts = {}
+    missing_langs = []
     for lc in langs:
+        existing_short_url = (sdoc.get("shorts_urls") or {}).get(lc, "").strip()
+        if existing_short_url:
+            uploaded_shorts[lc] = existing_short_url
+        else:
+            missing_langs.append(lc)
+
+    if not missing_langs:
+        return uploaded_shorts
+
+    youtube, active_token_path = get_available_youtube_upload_service()
+    if youtube is None:
+        _LAST_UPLOAD_QUOTA_BLOCKED = True
+        return uploaded_shorts
+
+    for lc in missing_langs:
         short_mp4 = YT_UPLOADS_DIR / "shorts" / f"{slug_key}_short_{lc}.mp4"
         short_meta_path = YT_PKG_DIR / f"{slug_key}_shorts_meta.json"
         if not short_mp4.exists() or not short_meta_path.exists():
             render_youtube_short_vertical(slug_key, lang_code=lc)
-
-        sdoc = json.loads(script_path.read_text(encoding="utf-8"))
-        existing_short_url = (sdoc.get("shorts_urls") or {}).get(lc, "").strip()
-        if existing_short_url:
-            uploaded_shorts[lc] = existing_short_url
-            print(f"📱 [Shorts Already Uploaded ({lc.upper()})] {existing_short_url}")
-            continue
 
         smeta_all = json.loads(short_meta_path.read_text(encoding="utf-8"))
         if lc not in smeta_all:
@@ -3286,12 +3335,29 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
             sdoc["shorts_urls"][lc] = short_url
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
-            print(f"🚀 [YouTube #Shorts Uploaded ({lc.upper()})] {short_url}")
+            print(f"🚀 [YouTube #Shorts Uploaded ({lc.upper()})] {short_url}", flush=True)
+            # Shorts 전용 첫 댓글(고급 기능 클릭 링크 유도) 자동 게시
+            try:
+                board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_shorts"
+                c_text = (
+                    f"📐 방금 본 기하 도형을 마우스로 직접 움직여보고 1080p 풀버전 증명을 확인해 보세요!\n"
+                    f"👉 {board_link}\n"
+                    f"🎮 수능 수학 100점 3D 보스 레이드 & 16,548문항 디딤돌: https://min7014.github.io/mathedu/"
+                    if lc == "ko"
+                    else f"📐 Drag this geometric figure yourself in GeoGebra & watch the full 1080p proof:\n"
+                         f"👉 {board_link}"
+                )
+                youtube.commentThreads().insert(
+                    part="snippet",
+                    body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": c_text}}}},
+                ).execute()
+            except Exception:
+                pass
         except Exception as e:
             err_s = str(e)
-            print(f"  ⚠️ [YouTube #Shorts Upload Notice ({slug_key}/{lc})]: {e}")
-            if "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s:
-                mark_token_quota_exhausted(active_token_path, 3600)
+            print(f"  ⚠️ [YouTube #Shorts Upload Notice ({slug_key}/{lc})]: {e}", flush=True)
+            if "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s or "quotaExceeded" in err_s:
+                mark_token_quota_exhausted(active_token_path, 900)
             break
     return uploaded_shorts
 
@@ -3605,7 +3671,7 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                 token_file.write_text(creds.to_json(), encoding="utf-8")
             youtube = build("youtube", "v3", credentials=creds)
 
-            # 1) 채널 업로드 재생목록(UUSlqQfOEtRfJuMPyGMLgFYA) 조회하여 새로 올라온 숏폼/본편 즉시 감지 & 메타데이터 완성
+            # 1) 채널 업로드 재생목록(UUSlqQfOEtRfJuMPyGMLgFYA) 조회하여 새로 올라온 숏폼(#Shorts) 및 1080p 본편 즉시 감지 & 메타데이터 완성
             pl_items = youtube.playlistItems().list(
                 part="snippet", playlistId=uploads_playlist_id, maxResults=50
             ).execute().get("items", [])
@@ -3617,7 +3683,7 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                 v_desc = item["snippet"].get("description", "")
                 blob = f"{v_title}\n{v_desc}"
 
-                # [slug_SHORT_KO] / [slug_SHORT_EN] / [slug_KO] / [slug_EN] 태그 자동 매칭
+                # A) [slug_SHORT_KO] / [slug_SHORT_EN] 숏폼 태그 자동 매칭
                 m_short = re.search(r"\[([A-Za-z0-9_]+)_SHORT_(KO|EN)\]", blob, re.IGNORECASE)
                 if m_short and vid_id not in enriched_video_ids:
                     s_slug = m_short.group(1)
@@ -3654,53 +3720,130 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                             sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
                             any_new_bound = True
                         enriched_video_ids.add(vid_id)
+                    continue
+
+                # B) [slug_KO] / [slug_EN] 1080p 본편 태그 자동 매칭 (YouTube Studio 고급 기능 대량 드래그 업로드 대응)
+                m_full = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+)_(KO|EN)\]", blob, re.IGNORECASE)
+                if m_full and vid_id not in enriched_video_ids:
+                    f_slug = m_full.group(1)
+                    if f_slug.upper().endswith("_SHORT"):
+                        continue
+                    f_lc = m_full.group(2).lower()
+                    sp = SCRIPTS_DIR / f"{f_slug}.json"
+                    fmeta_p = YT_PKG_DIR / f"{f_slug}_youtube_meta.json"
+                    if sp.exists() and fmeta_p.exists():
+                        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                        fmeta = json.loads(fmeta_p.read_text(encoding="utf-8")).get(f_lc)
+                        if fmeta and f"[ID: {f_slug}_{f_lc.upper()}]" not in v_desc:
+                            try:
+                                youtube.videos().update(
+                                    part="snippet",
+                                    body={
+                                        "id": vid_id,
+                                        "snippet": {
+                                            "title": fmeta["title"],
+                                            "description": fmeta["description"],
+                                            "tags": fmeta["tags"],
+                                            "categoryId": "27",
+                                            "defaultLanguage": f_lc,
+                                            "defaultAudioLanguage": f_lc,
+                                        },
+                                    },
+                                ).execute()
+                                thumb_p = YT_PKG_DIR / f"{f_slug}_{f_lc}_thumb.png"
+                                if thumb_p.exists():
+                                    from googleapiclient.http import MediaFileUpload
+                                    youtube.thumbnails().set(
+                                        videoId=vid_id,
+                                        media_body=MediaFileUpload(str(thumb_p), mimetype="image/png"),
+                                    ).execute()
+                                print(f"✨ [1080p Video Metadata & Thumbnail Auto-Enriched ({f_lc.upper()})] https://youtu.be/{vid_id}", flush=True)
+                            except Exception as fe:
+                                print(f"  [1080p Update Notice ({vid_id})]: {fe}", flush=True)
+                        full_url = f"https://youtu.be/{vid_id}"
+                        cur_yt = (sdoc.get("youtube_urls") or {}).get(f_lc, "")
+                        if cur_yt != full_url:
+                            set_youtube_urls_for_slug(
+                                f_slug,
+                                yt_ko=full_url if f_lc == "ko" else None,
+                                yt_en=full_url if f_lc == "en" else None,
+                            )
+                            any_new_bound = True
+                        enriched_video_ids.add(vid_id)
 
             if any_new_bound:
                 update_video_catalog()
+                prepare_ready_batch_folder(open_explorer=False)
+                prepare_ready_shorts_batch_folder(open_explorer=False)
                 subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
-                subprocess.run(["git", "commit", "-m", "chore(shorts): auto-bind uploaded @min7014_ai YouTube Shorts URLs"], check=False)
+                subprocess.run(["git", "commit", "-m", "chore(youtube): auto-bind newly uploaded @min7014_ai videos & Shorts"], check=False)
                 subprocess.run(["git", "push", "origin", "main"], check=False)
-                print("✅ [Git Auto-Push Complete] Newly uploaded #Shorts bound to video_board.html!", flush=True)
+                print("✅ [Git Auto-Push Complete] Newly uploaded @min7014_ai videos & #Shorts bound to video_board.html!", flush=True)
 
-            # 2) 10분마다 API 직접 업로드 재시도 (롤링 24시간 한도 해제 시 즉시 숏폼 & 본편 자동 업로드)
+            # 2) 5분마다 API 직접 업로드 재시도 (고급 기능 승인 및 롤링 24시간 한도 해제 시 대기 중인 #Shorts & 1080p 본편 대량 자동 업로드)
             now_ts = time.time()
             if now_ts - last_api_upload_try >= 300:
                 last_api_upload_try = now_ts
-                # [Priority 1] 5대 대표 #Shorts 우선 업로드 보장
                 priority_5_shorts = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
-                quota_blocked = False
+                newly_uploaded_batch = 0
+
+                # [Priority 1] 5대 대표 #Shorts 우선 업로드 보장
                 for p_slug in priority_5_shorts:
                     sp_p = SCRIPTS_DIR / f"{p_slug}.json"
                     if not sp_p.exists():
                         continue
                     sdoc_p = json.loads(sp_p.read_text(encoding="utf-8"))
                     s_urls_p = sdoc_p.get("shorts_urls") or {}
-                    if not s_urls_p.get("ko"):
-                        res_p = upload_short_to_youtube(p_slug, langs=("ko",), privacy="public")
-                        if not res_p:
-                            quota_blocked = True
+                    missing_p = [lc for lc in ("ko", "en") if not (s_urls_p.get(lc) or "").strip()]
+                    if missing_p:
+                        before_set = {lc: s_urls_p.get(lc) for lc in ("ko", "en")}
+                        res_p = upload_short_to_youtube(p_slug, langs=tuple(missing_p), privacy="public")
+                        after_set = {lc: res_p.get(lc) for lc in ("ko", "en")}
+                        if after_set != before_set:
+                            newly_uploaded_batch += 1
+                        if _LAST_UPLOAD_QUOTA_BLOCKED:
                             break
-                        else:
-                            subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
-                            subprocess.run(["git", "commit", "-m", f"chore(shorts): auto-upload {p_slug} #Shorts to @min7014_ai"], check=False)
-                            subprocess.run(["git", "push", "origin", "main"], check=False)
-                if not quota_blocked:
-                    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+
+                # [Priority 2] 전체 제작 완료된 #Shorts 및 1080p 설명영상 연속 대량 업로드 (고급 기능 해제 시 일괄 처리)
+                if not _LAST_UPLOAD_QUOTA_BLOCKED:
+                    all_sps = sorted(
+                        SCRIPTS_DIR.glob("*.json"),
+                        key=lambda x: (0 if x.stem in CURATED_PAGE_SCRIPTS else 1, x.stem)
+                    )
+                    for sp in all_sps:
                         sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                        slug_k = sdoc["slug"]
                         s_urls = sdoc.get("shorts_urls") or {}
-                        if not s_urls.get("ko") or not s_urls.get("en"):
-                            res = upload_short_to_youtube(sdoc["slug"], langs=("ko", "en"), privacy="public")
-                            if not res:
+                        missing_s = [lc for lc in ("ko", "en") if not (s_urls.get(lc) or "").strip()]
+                        if missing_s:
+                            before_s = dict(s_urls)
+                            res_s = upload_short_to_youtube(slug_k, langs=tuple(missing_s), privacy="public")
+                            if res_s != before_s:
+                                newly_uploaded_batch += 1
+                            if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
-                            else:
-                                subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
-                                subprocess.run(["git", "commit", "-m", f"chore(shorts): auto-upload {sdoc['slug']} #Shorts to @min7014_ai"], check=False)
-                                subprocess.run(["git", "push", "origin", "main"], check=False)
+
                         yt_urls = sdoc.get("youtube_urls") or {}
-                        if not yt_urls.get("ko") or not yt_urls.get("en"):
-                            res_v = upload_slug_to_youtube(sdoc["slug"], langs=("ko", "en"), privacy="public", method="api")
-                            if not res_v:
+                        missing_v = [lc for lc in ("ko", "en") if not (yt_urls.get(lc) or "").strip()]
+                        if missing_v:
+                            before_v = dict(yt_urls)
+                            res_v = upload_slug_to_youtube(slug_k, langs=tuple(missing_v), privacy="public", method="api")
+                            if res_v != before_v:
+                                newly_uploaded_batch += 1
+                            if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+
+                if newly_uploaded_batch > 0:
+                    try:
+                        boost_youtube_channel_popularity()
+                    except Exception as be:
+                        print(f"[Popularity Boost Notice] {be}", flush=True)
+                    update_video_catalog()
+                    prepare_ready_batch_folder(open_explorer=False)
+                    prepare_ready_shorts_batch_folder(open_explorer=False)
+                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
+                    subprocess.run(["git", "commit", "-m", f"chore(youtube): auto-upload batch ({newly_uploaded_batch} topics) to @min7014_ai"], check=False)
+                    subprocess.run(["git", "push", "origin", "main"], check=False)
 
             # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 다음 주제의 1080p 설명영상(KO/EN) + 9:16 숏폼(KO/EN) 연속 자동 제작!
             if not hasattr(run_shorts_and_video_upload_daemon, "_failed_slugs"):
@@ -3718,6 +3861,8 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         if not sh_p.exists():
                             render_youtube_short_vertical(next_slug, lang_code=lc)
                     update_video_catalog()
+                    prepare_ready_batch_folder(open_explorer=False)
+                    prepare_ready_shorts_batch_folder(open_explorer=False)
                     try:
                         import mathteacher
                         import mathedu_foundation_daemon as fdaemon

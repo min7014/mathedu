@@ -934,7 +934,7 @@ html.dark-theme .filter-tab-btn {
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">75대 법칙</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">76대 법칙</span>
               </div>
               <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
             </div>
@@ -3411,10 +3411,10 @@ window.openMathClinicModal = function() {
     <div class="p-3 px-5 border-b border-surface-container bg-white flex flex-wrap items-center justify-between gap-2">
       <div class="flex gap-1.5 flex-wrap" id="mtHubTabButtons">
         <button type="button" data-mt-tab="genealogy" onclick="switchMathTeacherHubTab('genealogy')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-secondary text-white">🌳 1. 초·중·고 수직 계통성 트리 (12)</button>
-        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (75)</button>
+        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (76)</button>
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
-        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (67)</button>
-        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (36)</button>
+        <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (68)</button>
+        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (37)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
     </div>
@@ -4509,6 +4509,16 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "formulaBridge": "4단계 (본문항 종합): 정규분포 곡선의 대칭축($x=m$) 넓이 보존과 표본평균의 표준편차 $\\sigma(\\bar{X})=\\frac{\\sigma}{\\sqrt{n}}$을 이용해 확률 및 신뢰구간 계산",
       "min7014Query": "확률과 통계",
       "searchKeyword": "확률과"
+    },
+    {
+      "id": "polya-min-MIN-KB-0060",
+      "domain": "다항식·방정식·수체계",
+      "condition": "[자연수의 사칙연산(Four basic operations of natural numbers)] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "무리방정식 $\\sqrt{f(x)} = g(x)$를 양변 제곱하여 풀었을 때는 $g(x) < 0$인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 $g(x) \\ge 0$ 조건을 먼저 걸어 걸러내세요!",
+      "visualIntuition": "[자연수의 사칙연산] 유리수·순환소수·실수·복소수($i=\\sqrt{-1}$)로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘($A=BQ+R$), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
+      "formulaBridge": "4단계 (본문항 종합): 방정식 $f(x)=g(x)$의 실근의 개수를 두 함수 $y=f(x)$와 $y=g(x)$ 그래프의 교점 개수로 변환하여 미지수 $k$의 범위 확정",
+      "min7014Query": "다항식·방정식·수체계",
+      "searchKeyword": "다항식"
     }
   ],
   "misconceptionLab": [
@@ -5360,6 +5370,17 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "min7014Query": "유클리드 평면기하",
       "videoSlug": "2019080801",
       "quizKeyword": "유클리드 평면기하"
+    },
+    {
+      "id": "lesson-auto-2019080908",
+      "gradeTarget": "중·고등 유클리드 평면기하 연계",
+      "topic": "[시각적 증명 탐구] 주어진 각과 크기가 같은 각을 작도하기(Construct an angle that is the same size as the given angle)",
+      "hookQuestion": "공식을 외우지 않고 보조선과 도형의 이동만으로 '주어진 각과 크기가 같은 각을 작도하기(Construct an angle that is the same size as the given angle)'이(가) 왜 언제나 성립하는지 단 1분 만에 설명할 수 있을까?",
+      "interactiveMission": "@min7014_ai의 '주어진 각과 크기가 같은 각을 작도하기(Construct an angle that is the same size as the given angle) (2019080908)' 1080p 단계별 설명영상 및 9:16 숏폼을 칠판에 재생하고 결정적 보조선이 등장하는 단계를 찾아보자!",
+      "groupDiscussion": "영상에서 새롭게 등장한 보조선이나 색칠된 도형 영역이 전체 증명 과정을 어떻게 단축시켰는지 모둠별로 토의해 보자.",
+      "min7014Query": "유클리드 평면기하",
+      "videoSlug": "2019080908",
+      "quizKeyword": "유클리드 평면기하"
     }
   ],
   "creativeConstructiveLab": [
@@ -5902,6 +5923,21 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "whatIfNotMutation": "만약 [제한된 범위에서 이차함수의 최댓값과 최솟값(Maximum and minimum values of a quadratic function in a limited range)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
       "min7014Query": "함수의 극한과 연속",
       "searchKeyword": "함수의"
+    },
+    {
+      "id": "creative-min-MIN-KB-0029",
+      "domain": "수학 특강·공학도구",
+      "title": "[2024학년도 강원과학고등학교 수학공학도구의 이해와 경사하강법이 적용된 페르마 포인트 접근에 관한 자료 제작을 통한 인공지능의 적용된 수학적 원리 이해하기 (2024.3.9)] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+      "originalProblem": "[2024학년도 강원과학고등학교 수학공학도구의 이해와 경사하강법이 적용된 페르마 포인트 접근에 관한 자료 제작을 통한 인공지능의 적용된 수학적 원리 이해하기] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 ",
+      "constructivePrompt": "5지선다 보기에 의존하지 않고, '2024학년도 강원과학고등학교 수학공학도구의 이해와 경사하강법이 적용된 페르마 포인트 접근에 관한 자료 제작을 통한 인공지능의 적용된 수학적 원리 이해하기 (2024.3.9)'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+      "multiPathApproaches": [
+        "1단계 (초등 규칙으로 그림 그리기): 거북이 로봇에게 '앞으로 10칸, 왼쪽으로 90도 돌기'를 4번 시켜 정사각형을 그리는 알고리즘 체험",
+        "2단계 (좌표와 각도 명령): 원의 중심 $(a, b)$와 반지름 $r$, 회전각 $\\theta$를 숫자로 지정해 원하는 위치에 정확한 도형 배치하기",
+        "3단계 (매개변수 반복문 번역): 각도나 시간을 조금씩 변화시키는 반복문(Loop)으로 수십 장의 연속 플립북 슬라이드 자동 생성"
+      ],
+      "whatIfNotMutation": "만약 [2024학년도 강원과학고등학교 수학공학도구의 이해와 경사하강법이 적용된 페르마 포인트 접근에 관한 자료 제작을 통한 인공지능의 적용된 수학적 원리 이해하기 (2024.3.9)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+      "min7014Query": "수학 특강·공학도구",
+      "searchKeyword": "수학"
     }
   ]
 };
