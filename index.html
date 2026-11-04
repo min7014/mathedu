@@ -934,7 +934,7 @@ html.dark-theme .filter-tab-btn {
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">63대 법칙</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">64대 법칙</span>
               </div>
               <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
             </div>
@@ -3411,10 +3411,10 @@ window.openMathClinicModal = function() {
     <div class="p-3 px-5 border-b border-surface-container bg-white flex flex-wrap items-center justify-between gap-2">
       <div class="flex gap-1.5 flex-wrap" id="mtHubTabButtons">
         <button type="button" data-mt-tab="genealogy" onclick="switchMathTeacherHubTab('genealogy')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-secondary text-white">🌳 1. 초·중·고 수직 계통성 트리 (12)</button>
-        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (63)</button>
+        <button type="button" data-mt-tab="polya" onclick="switchMathTeacherHubTab('polya')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🧭 2. 폴리아 조건➔보조선 사전 (64)</button>
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
         <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (59)</button>
-        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (24)</button>
+        <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (25)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
     </div>
@@ -4389,6 +4389,16 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "formulaBridge": "4단계 (본문항 종합): 방정식 $f(x)=g(x)$의 실근의 개수를 두 함수 $y=f(x)$와 $y=g(x)$ 그래프의 교점 개수로 변환하여 미지수 $k$의 범위 확정",
       "min7014Query": "다항식·방정식·수체계",
       "searchKeyword": "다항식"
+    },
+    {
+      "id": "polya-min-MIN-KB-0048",
+      "domain": "미분·도함수",
+      "condition": "[curve (x(t), y(t)) (ver. 20191005) : 직교좌표에서의 t에 대한 매개변수 곡선] 관련 도형·수식 구조가 문제에 등장할 때",
+      "firstAction": "매개변수 곡선에서 접선이 $x$축에 평행하려면 분자 $dy/dt = 0$ ($dx/dt \\neq 0$), $y$축에 평행(수직 접선)하려면 분모 $dx/dt = 0$ ($dy/dt \\neq 0$)인 시각 $t$를 찾으세요.",
+      "visualIntuition": "[curve (x(t), y(t)) (ver. 20191005) : 직교좌표에서의 t에 대한 매개변수 곡선] 평면 위 동점의 운동을 시각 $t$에 대한 매개변수 $(x(t), y(t))$ 또는 원점으로부터의 거리와 각도인 극좌표 $(r, \\theta)",
+      "formulaBridge": "4단계 (본문항 종합): 직교·매개변수 곡선의 길이 $L=\\int_a^b \\sqrt{(x'(t))^2+(y'(t))^2}\\,dt$ 및 극좌표 곡선 길이 $L=\\int_\\alpha^\\beta \\sqrt{r^2+(dr/",
+      "min7014Query": "미분·도함수",
+      "searchKeyword": "미분"
     }
   ],
   "misconceptionLab": [
@@ -5514,6 +5524,21 @@ window.MATHEDU_PEDAGOGY_ENGINE_DATA = {
       "whatIfNotMutation": "만약 [티 없이 아름다운 장미(A flawless and beautiful rose)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
       "min7014Query": "다항식·방정식·수체계",
       "searchKeyword": "다항식"
+    },
+    {
+      "id": "creative-min-MIN-KB-0017",
+      "domain": "유클리드 평면기하",
+      "title": "[삼각형의 오더리 탱클 I(Orderly Tangle I of Triangles)] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기",
+      "originalProblem": "[삼각형의 오더리 탱클 I] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
+      "constructivePrompt": "5지선다 보기에 의존하지 않고, '삼각형의 오더리 탱클 I(Orderly Tangle I of Triangles)'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요.",
+      "multiPathApproaches": [
+        "1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
+        "2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
+        "3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 $\\frac{1}{2}$이고 지름에 대한 원주각은 $90^\\circ$임을 기호로 정리"
+      ],
+      "whatIfNotMutation": "만약 [삼각형의 오더리 탱클 I(Orderly Tangle I of Triangles)]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?",
+      "min7014Query": "유클리드 평면기하",
+      "searchKeyword": "유클리드"
     }
   ]
 };
