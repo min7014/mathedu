@@ -284,7 +284,7 @@ def expand_pedagogy_from_min7014_vault(max_add_per_category=2):
                 vslug = v.get("slug", "")
                 if not vslug or vslug in existing_vslugs:
                     continue
-                vtitle = re.sub(r"\$[^\$]*\$", "", v.get("title", "")).strip()
+                vtitle = v.get("title", "").replace("$", "").strip()
                 sub_dom = v.get("sub_domain_ko") or "기하·대수 시각적 증명"
                 new_scen = {
                     "id": f"lesson-auto-{vslug}",

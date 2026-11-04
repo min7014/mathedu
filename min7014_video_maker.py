@@ -375,6 +375,23 @@ def compute_page_diff_and_color(prev_img, curr_img):
     return norm_bbox, color_tag
 
 
+
+def latex_to_unicode_title(text):
+    s = str(text or "")
+    s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
+    s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"(\1/\2)", s)
+    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"√(\1)", s)
+    s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"\1", s)
+    s = re.sub(r"\\triangle\s*", "△", s)
+    s = re.sub(r"\\angle\s*", "∠", s)
+    s = s.replace(r"\times", "×").replace(r"\div", "÷").replace(r"\cdot", "·")
+    s = s.replace(r"\pm", "±").replace(r"\le", "≤").replace(r"\ge", "≥").replace(r"\ne", "≠")
+    s = re.sub(r"\^\s*\{([^{}]+)\}", r"^(\1)", s)
+    s = s.replace("^2", "²").replace("^3", "³")
+    s = s.replace("$", "").replace("<", "＜").replace(">", "＞")
+    return re.sub(r"\s+", " ", s).strip()
+
+
 def clean_math_for_speech_ko(text):
     s = str(text or "")
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
@@ -898,7 +915,7 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     font_ribbon = get_font_for_lang("ko", 18, bold=True)
 
     header_title = script_doc.get("title_en") if lang_code == "en" and script_doc.get("title_en") else script_doc.get("title", "")
-    header_title = re.sub(r"\$[^\$]*\$", "", header_title).strip()
+    header_title = latex_to_unicode_title(header_title)
     sub_dom = (script_doc.get("sub_domain_ko") or "시각적 수학 증명").split("(")[0].strip()
 
     # 좌측 상단 기하 엠블럼 + 단원 배지 + 제목
@@ -3167,7 +3184,7 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
     [유튜브 숏폼(#Shorts) 전용 고클릭률 제목·설명·태그 메타데이터 패키지 생성]
     """
     slug = sdoc["slug"]
-    clean_ko = re.sub(r"\$[^\$]*\$", "", sdoc["title"]).strip()
+    clean_ko = latex_to_unicode_title(sdoc["title"])
     clean_en = (sdoc.get("title_en") or clean_ko).strip()
     viral_hooks = sdoc.get("viral_hooks") or {}
     yt_urls = sdoc.get("youtube_urls") or {}
@@ -3260,7 +3277,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
     clean_title = (
         (sdoc.get("title_en") or sdoc["title"])
         if lang_code == "en"
-        else re.sub(r"\$[^\$]*\$", "", sdoc["title"]).strip()
+        else latex_to_unicode_title(sdoc["title"])
     )
     viral_hooks = sdoc.get("viral_hooks") or {}
     viral_hook = viral_hooks.get(lang_code) or ""
@@ -3560,7 +3577,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
     clean_title = (
         (sdoc.get("title_en") or sdoc["title"])
         if lang_code == "en"
-        else re.sub(r"\$[^\$]*\$", "", sdoc["title"]).strip()
+        else latex_to_unicode_title(sdoc["title"])
     )
     total_seqs = len(picked_indices)
 
