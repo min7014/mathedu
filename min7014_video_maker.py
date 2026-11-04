@@ -322,12 +322,23 @@ def load_deep_knowledge():
 def find_item_by_slug_or_pdf(slug_or_url):
     items = load_deep_knowledge()
     key = str(slug_or_url).strip()
+    matches = []
     for it in items:
         u = (it.get("url") or "").strip()
         p = (it.get("pdf") or "").split("#")[0].strip()
         if key in (u, p) or u.endswith(f"/{key}.html") or p.endswith(f"/{key}.pdf"):
-            return it
-    return None
+            matches.append(it)
+    if not matches:
+        return None
+    if len(matches) == 1:
+        return matches[0]
+    generic_titles = {"기타자료", "강의", "기출문제", "삼각형", "사각형", "닮음", "타원", "포물선", "쌍곡선", "부등식", "선형방정식", "반비례"}
+    def _score_item(it):
+        ko_t = split_bilingual_title(it.get("title", ""))[0]
+        is_generic = 0 if ko_t in generic_titles else 1
+        return (is_generic, len(ko_t))
+    matches.sort(key=_score_item, reverse=True)
+    return matches[0]
 
 
 def compute_page_diff_and_color(prev_img, curr_img):
@@ -357,14 +368,14 @@ def compute_page_diff_and_color(prev_img, curr_img):
     color_tag = "default"
     if stat.count and stat.count[0] > 0:
         r_m, g_m, b_m = stat.mean[:3]
-        if r_m > g_m + 35 and r_m > b_m + 35:
+        if (r_m > 130 and g_m > 85 and b_m < 95 and (r_m - g_m) < 95 and r_m > b_m + 45) or (r_m > 120 and b_m > 120 and g_m < 100):
+            color_tag = "purple"  # 주황(Orange)·보라(Purple) 합동/닮음 삼각형 강조
+        elif r_m > g_m + 45 and r_m > b_m + 45:
             color_tag = "red"
         elif b_m > r_m + 30 and b_m > g_m + 20:
             color_tag = "blue"
         elif g_m > r_m + 25 and g_m > b_m + 25:
             color_tag = "green"
-        elif r_m > 120 and b_m > 120 and g_m < 100:
-            color_tag = "purple"
 
     norm_bbox = [
         round(abs_box[0] / w, 4),
@@ -374,6 +385,36 @@ def compute_page_diff_and_color(prev_img, curr_img):
     ]
     return norm_bbox, color_tag
 
+
+
+def split_bilingual_title(raw_title: str):
+    """
+    민은기 선생님 수학자료실의 한·영 병기 제목 예:
+      - '세 중선은 한 점에서 만난다.(The three medians of a triangle meet at one point.)'
+      - '$m$, $n$ 이 자연수일 때, $a^m \times a^n = a^{m+n}$($a^m \times a^n = a^{m+n}$ ($m$, $n$ are natural numbers.))'
+    에서 균형 괄호(balanced parentheses) 역추적으로 순수 한국어 제목(ko_title)과 순수 영어 제목(en_title)을 정밀 분리합니다.
+    """
+    u = latex_to_unicode_title(raw_title)
+    if u.endswith(")"):
+        depth = 0
+        open_idx = -1
+        for i in range(len(u) - 1, -1, -1):
+            ch = u[i]
+            if ch == ")":
+                depth += 1
+            elif ch == "(":
+                depth -= 1
+                if depth == 0:
+                    open_idx = i
+                    break
+        if open_idx > 0:
+            en_cand = u[open_idx + 1:-1].strip()
+            ko_cand = u[:open_idx].strip().rstrip(".")
+            if re.search(r"[A-Za-z]{3,}", en_cand) and not re.search(r"[가-힣]", en_cand):
+                if en_cand.startswith("(") and en_cand.endswith(")"):
+                    en_cand = en_cand[1:-1].strip()
+                return (ko_cand or u), (en_cand or ko_cand or u)
+    return u, ""
 
 
 def latex_to_unicode_title(text):
@@ -394,13 +435,23 @@ def latex_to_unicode_title(text):
 
 def clean_math_for_speech_ko(text):
     s = str(text or "")
+    # 한글 문장 뒤의 영문 번역 괄호(4글자 이상 영단어 포함)만 제거하고 (m+n), (mn) 등 수식 괄호는 보존
+    s, _ = split_bilingual_title(s) if s.endswith(")") and re.search(r"[A-Za-z]{4,}", s) else (s, "")
+    s = re.sub(r"\(\s*[^가-힣()]*[A-Za-z]{4,}[^가-힣()]*\)", "", s)
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
     s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"\2 분의 \1", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"선분 \1", s)
     s = re.sub(r"\\triangle\s*([A-Za-z0-9]+)", r"삼각형 \1", s)
     s = re.sub(r"\\angle\s*([A-Za-z0-9]+)", r"각 \1", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"루트 \1", s)
-    s = re.sub(r"\^2", " 제곱", s)
+    s = s.replace(r"\times", " 곱하기 ").replace(r"\div", " 나누기 ").replace(r"\cdot", " 곱하기 ")
+    s = s.replace("×", " 곱하기 ").replace("÷", " 나누기 ").replace("∴", "따라서 ")
+    s = s.replace(r"\pm", " 플러스마이너스 ").replace("±", " 플러스마이너스 ")
+    s = re.sub(r"\^\s*\{([^{}]+)\}", r"의 \1제곱", s)
+    s = re.sub(r"\^\s*\(([^()]+)\)", r"의 \1제곱", s)
+    s = re.sub(r"\^2", "의 제곱", s)
+    s = re.sub(r"\^3", "의 세제곱", s)
+    s = re.sub(r"\^([a-zA-Z0-9\+\-]+)", r"의 \1제곱", s)
     s = re.sub(r"[\$\\\{\}]", " ", s)
     return re.sub(r"\s+", " ", s).strip()
 
@@ -441,32 +492,333 @@ def compute_pedagogical_scene_ranges(total_pages, max_scenes=12):
     return scenes
 
 
+def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", breadcrumb: str = ""):
+    """
+    [수석 수학교사(mathteacher) 에이전트의 min7014.github.io 18대 유형별 정밀 증명·수업 분석기 (v6.0)]
+    주제 제목과 단원 경로를 분석하여:
+      1) category_type ('geometry' | 'algebra' | 'number' | 'fractal_curve' | 'space_3d' | 'calculus_trig')
+      2) hypothesis_ko (출발 가정·정의 조건)
+      3) conclusion_ko (최종 결론·목표 성질)
+      4) auxiliary_line_ko (폴리아 제1보조선 또는 핵심 대수·수직선 발상)
+      5) proof_logic_ko (결정적 합동/닮음/넓이/수식 전개 증명 논리)
+      6) misconception_ko (학생들이 가장 많이 틀리는 오개념 예방 팁)
+      7) what_if_not_ko (수능·상위 교육과정으로 이어지는 조건 변형 질문)
+    을 100% 내용 일치하도록 생성합니다.
+    """
+    t = (title or "").strip()
+    b = (breadcrumb or "").strip()
+    blob = f"{t} {sub_domain_ko} {b}"
+    ko_t, _ = split_bilingual_title(t)
+
+    # 1. 이등변삼각형 성질 / 조건
+    if "이등변삼각형" in blob or "Isosceles" in blob:
+        if "수선의 발" in t or "수직 이등분" in t or "수직이등분" in t or "bisector of the apex" in t:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "두 변 AB와 AC의 길이가 같은 이등변삼각형에서 꼭지각의 이등분선(또는 밑변에 내린 수선)을 그은 가정",
+                "conclusion_ko": "꼭지각의 이등분선은 밑변 BC를 수직으로 이등분한다(BD = CD, 교각 = 90도)는 결론",
+                "auxiliary_line_ko": "꼭지각 A를 반으로 나누는 초록색 각의 이등분선 AD를 밑변 BC까지 내려 긋는 제1보조선",
+                "proof_logic_ko": "두 변의 길이가 같고(AB=AC), 보조선 AD가 공통변이며, 나뉜 두 꼭지각의 크기가 같으므로 양쪽 두 삼각형이 SAS 합동이 되고, 대응변의 길이가 같으며 평각 180도를 반씩 나누어 90도 수직이 되는 원리",
+                "misconception_ko": "일반 삼각형에서는 꼭지각의 이등분선과 밑변의 수직이등분선이 일치하지 않으며, 오직 두 변의 길이가 같은 이등변삼각형의 대칭성에서만 일치함을 주의해야 합니다.",
+                "what_if_not_ko": "만약 밑변의 중점과 꼭짓점을 먼저 이으면(중선) 왜 자동으로 수직이 되고 꼭지각도 이등분될까요?(SSS 합동으로의 역발상)"
+            }
+        elif "두 내각" in t or "two angles" in t.lower():
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "삼각형 ABC에서 밑변 양 끝의 두 내각 B와 C의 크기가 같다는 가정",
+                "conclusion_ko": "마주 보는 두 변 AB와 AC의 길이도 같아져 이등변삼각형이 된다는 결론",
+                "auxiliary_line_ko": "꼭지각 A의 이등분선을 밑변 BC에 내려 긋는 초록색 보조선",
+                "proof_logic_ko": "삼각형 세 내각의 합은 180도이므로 나머지 각도 같아지고, 공통변 AD와 양 끝각이 같아 ASA 합동이 성립하므로 대응변 AB와 AC의 길이가 같아지는 원리",
+                "misconception_ko": "이등변삼각형의 성질(두 변이 같으면 두 밑각이 같다)과 이등변삼각형이 되는 조건(두 각이 같으면 두 변이 같다)은 가정과 결론이 서로 바뀐 역(Converse) 명제입니다.",
+                "what_if_not_ko": "만약 세 내각의 크기가 모두 60도로 같다면 어떤 삼각형이 될까요?"
+            }
+        else:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "삼각형 ABC에서 두 변 AB와 AC의 길이가 같다(AB = AC)는 이등변삼각형의 정의(가정)",
+                "conclusion_ko": "길이가 같은 두 변과 마주 보는 두 밑각 B와 C의 크기가 서로 같다(각 B = 각 C)는 결론",
+                "auxiliary_line_ko": "꼭지각 A를 정확히 반으로 나누는 초록색 각의 이등분선 AD를 밑변 BC에 내려 긋는 결정적 보조선",
+                "proof_logic_ko": "두 변 AB와 AC가 같고(가정), 가운데 초록색 선분 AD가 공통변이며, 끼인각인 꼭지각의 절반이 서로 같으므로 두 삼각형 ABD와 ACD가 SAS 합동이 되어 대응각인 두 밑각의 크기가 같아지는 원리",
+                "misconception_ko": "증명할 결론(두 밑각이 같다)을 증명 과정에서 미리 쓰지 않도록, 반드시 꼭지각의 이등분선 보조선을 그어 SAS 합동으로 유도해야 순환논리에 빠지지 않습니다.",
+                "what_if_not_ko": "만약 꼭지각의 이등분선 대신 밑변 BC의 중점 M을 연결하는 보조선(중선)을 그으면 어떤 합동 조건(SSS 합동)으로 똑같이 증명할 수 있을까요?"
+            }
+
+    # 2. 직각삼각형의 합동 (RHA / RHS)
+    if "RHA" in blob or "RHS" in blob or "직각삼각형의 합동" in blob:
+        is_rhs = "RHS" in blob or "다른 한 변" in t
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"두 직각삼각형(R, 90도)에서 빗변의 길이(H)와 {'다른 한 변의 길이(S)' if is_rhs else '한 예각의 크기(A)'}가 각각 같다는 가정",
+            "conclusion_ko": f"두 직각삼각형이 완전히 포개어지는 {'RHS' if is_rhs else 'RHA'} 합동이라는 결론",
+            "auxiliary_line_ko": "길이가 같은 직각 이웃변을 서로 맞붙여 두 직각삼각형을 하나의 큰 삼각형으로 이어 붙이는 기하학적 조작 보조선",
+            "proof_logic_ko": f"직각 90도 두 개가 만나 평각 180도 일직선이 되므로 큰 삼각형이 두 변(빗변 H)의 길이가 같은 이등변삼각형이 되고, 이등변삼각형의 성질에 의해 {'두 밑각이 같아져 SAS/ASA 합동' if is_rhs else '꼭지각의 이등분선이 밑변을 이등분하여 ASA 합동'}으로 귀결되는 원리",
+            "misconception_ko": "일반 삼각형에서는 두 변과 끼인각이 아닌 각(SSA)이 같아도 합동이 아니지만, 직각삼각형(90도)에서는 이등변삼각형 대칭성 덕분에 RHS 합동이 항상 성립합니다!",
+            "what_if_not_ko": "직각(90도) 조건이 빠진 일반 예각삼각형에서 두 변과 끼인각이 아닌 한 각만 주어지면 왜 모양이 2가지로 생길 수 있을까요?"
+        }
+
+    # 3. 삼각형의 외심 (Circumcenter)
+    if "외심" in blob or "Circumcenter" in blob or "수직이등분선" in t:
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "삼각형의 두 변의 수직이등분선의 교점 O에서 나머지 세 번째 변에 수선의 발을 내린 가정",
+            "conclusion_ko": "세 변의 수직이등분선은 반드시 한 점(외심 O)에서 만나고, 외심에서 세 꼭짓점 A, B, C에 이르는 거리가 모두 같다(OA = OB = OC, 외접원의 반지름 R)는 결론",
+            "auxiliary_line_ko": "수직이등분선의 교점 O에서 삼각형의 세 꼭짓점 A, B, C를 직접 연결하는 초록색 반지름 보조선 3줄",
+            "proof_logic_ko": "첫째·둘째 변의 수직이등분선에서 나뉜 직각삼각형들이 각각 SAS 합동이 되어 OA = OB = OC가 성립하고, 이를 통해 세 번째 변에 내린 수선의 두 직각삼각형이 RHS 합동이 되어 세 번째 변도 정확히 이등분되는 연쇄 합동 원리",
+            "misconception_ko": "외심 O에서 나뉜 삼각형은 마주 보는 두 삼각형이 아니라 '한 변을 끼고 있는 이웃한 두 직각삼각형'이 합동(이등변삼각형)이며, 둔각삼각형의 외심은 삼각형 외부에 위치합니다.",
+            "what_if_not_ko": "만약 삼각형이 직각삼각형이라면 외심 O는 정확히 어느 변의 한가운데(빗변의 중점)에 위치하게 될까요?"
+        }
+
+    # 4. 삼각형의 내심 (Incenter)
+    if "내심" in blob or "Incenter" in blob or "세 내각의 이등분선" in t:
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정",
+            "conclusion_ko": "세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론",
+            "auxiliary_line_ko": "교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선",
+            "proof_logic_ko": "두 내각의 이등분선에 의해 나뉜 직각삼각형들이 빗변 공통 + 직각 + 예각 일치로 RHA 합동이 되어 세 변까지의 거리가 모두 같아지고, 마지막 꼭짓점의 두 직각삼각형이 RHS 합동이 되어 세 번째 각도 이등분되는 원리",
+            "misconception_ko": "외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다.",
+            "what_if_not_ko": "내각이 아니라 삼각형의 한 내각의 이등분선과 두 외각의 이등분선을 그으면 삼각형 밖에 어떤 원(방접원, Excircle)이 탄생할까요?"
+        }
+
+    # 5. 삼각형의 무게중심 (Centroid / Median)
+    if "중선" in blob or "무게중심" in blob or "median" in blob.lower() or "centroid" in blob.lower():
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "삼각형의 세 꼭짓점과 마주 보는 대변의 중점을 각각 연결한 세 중선(Median)이 주어진 가정",
+            "conclusion_ko": "삼각형의 세 중선은 반드시 한 점(무게중심 G)에서 만나며, 각 중선을 꼭짓점으로부터 2 대 1로 내분한다는 결론",
+            "auxiliary_line_ko": "두 변의 중점을 서로 연결하는 중점연결정리 평행 보조선",
+            "proof_logic_ko": "중점연결정리에 의해 중점끼리 이은 선분은 밑변과 평행하고 길이가 절반이므로, 엇각이 같은 두 삼각형이 AA 닮음(닮음비 2 대 1)을 이루어 교점 G가 중선을 2 대 1로 내분하는 원리",
+            "misconception_ko": "세 중선에 의해 나누어진 6개의 작은 삼각형은 모양은 서로 합동이 아니지만 밑변과 높이가 같아 넓이가 모두 전체의 6분의 1로 똑같다는 점이 핵심입니다.",
+            "what_if_not_ko": "좌표평면 위 세 점 A, B, C를 꼭짓점으로 하는 삼각형의 무게중심 좌표는 왜 세 좌표의 산술평균이 될까요?"
+        }
+
+    # 6. 평행사변형 / 사각형의 성질과 조건
+    if "평행사변형" in blob or "parallelogram" in blob.lower() or "마름모" in blob or "직사각형" in blob or "사다리꼴" in blob:
+        if "정사각형의 한 변" not in t:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "두 쌍의 대변이 각각 평행한 사각형(평행사변형의 정의) 또는 주어진 사각형의 출발 조건(가정)",
+                "conclusion_ko": f"'{ko_t}' 성질이 항상 성립한다는 기하학적 결론",
+                "auxiliary_line_ko": "사각형의 마주 보는 두 꼭짓점을 대각선으로 연결하여 사각형을 두 개의 삼각형으로 분할하는 초록색 대각선 보조선",
+                "proof_logic_ko": "평행한 두 대변과 대각선이 이루는 두 쌍의 엇각의 크기가 각각 같고 초록색 대각선이 공통변이므로, 나뉜 두 삼각형이 ASA 합동(또는 SAS 합동)이 되어 대응변의 길이와 대응각의 크기가 일치하는 원리",
+                "misconception_ko": "한 쌍의 대변이 평행하고 다른 한 쌍의 대변의 길이가 같은 경우(예: 등변사다리꼴)는 평행사변형이 되지 않는다는 대표 반례를 꼭 구분해야 합니다!",
+                "what_if_not_ko": "만약 평행사변형에서 이웃하는 두 변의 길이까지 같아지거나(마름모), 한 내각이 90도가 되면(직사각형) 두 대각선 사이에 어떤 새로운 수직·길이 관계가 생길까요?"
+            }
+
+    # 7. 메넬라우스 / 체바의 정리
+    if "메넬라우스" in blob or "Menelaus" in blob or "체바" in blob or "Ceva" in blob:
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "삼각형의 세 변(또는 연장선)을 지나는 할선이나 한 점 P에서 만나는 세 체바선(Cevian)이 주어진 가정",
+            "conclusion_ko": "세 변을 분할하는 선분 길이의 비율 세 개를 곱하면 항상 1이 된다는 비율 불변량 결론",
+            "auxiliary_line_ko": "꼭짓점을 지나며 할선에 평행한 보조선 1줄을 긋거나, 높이가 같은 삼각형들의 넓이 비 = 밑변의 길이 비를 연결하는 발상",
+            "proof_logic_ko": "평행선에 의한 AA 닮음비 또는 밑변 비 = 넓이 비 식을 세 개 곱할 때 분모와 분자가 도미노처럼 연쇄 약분되어 정확히 1이 되는 원리",
+            "misconception_ko": "비율을 돌릴 때 반드시 삼각형의 꼭짓점에서 분점, 다시 분점에서 다음 꼭짓점 순서로 한 바퀴 순환하는 방향을 일관되게 유지해야 합니다.",
+            "what_if_not_ko": "이 넓이 비·내분비 원리를 고등 기하·벡터의 위치벡터 내분점 식으로 바꾸면 어떻게 교점 비율을 구할 수 있을까요?"
+        }
+
+    # 8. 정사각형의 한 변의 길이와 넓이 / 제곱근과 실수
+    if "정사각형의 한 변" in t or "제곱근" in blob or "Square Root" in blob or "square root" in blob or "sqrt" in t:
+        if "정사각형의 한 변" in t:
+            return {
+                "category_type": "number",
+                "hypothesis_ko": "격자 눈금 위에서 정사각형의 넓이 S와 한 변의 길이 x 사이의 관계(x의 제곱 = S)를 관찰하는 출발 조건",
+                "conclusion_ko": "넓이가 a(a는 양수)인 정사각형의 한 변의 길이는 제곱하여 a가 되는 양수, 즉 기호 루트 a(양의 제곱근)로 나타낸다는 결론",
+                "auxiliary_line_ko": "모눈종이 위에서 직각삼각형 4개와 작은 정사각형으로 둘러싸인 큰 정사각형에서 모서리 직각삼각형 넓이를 빼서 정사각형 넓이를 구하는 발상",
+                "proof_logic_ko": "넓이가 1, 4, 9인 정사각형의 한 변은 자연수 1, 2, 3이지만, 넓이가 2나 5인 정사각형의 한 변은 유리수로 나타낼 수 없으므로 새로운 기호 루트(근호)를 도입해 한 변의 길이를 정확히 표현하는 원리",
+                "misconception_ko": "넓이가 2배가 된다고 한 변의 길이도 2배가 되는 것이 아니라, 한 변의 길이는 루트 2배가 된다는 점을 혼동하지 말아야 합니다!",
+                "what_if_not_ko": "만약 넓이가 2인 정사각형의 한 변의 길이 루트 2를 컴퍼스로 수직선 위에 그대로 내려 찍으면 무리수도 수직선 위의 한 점에 완벽히 대응될까요?"
+            }
+        elif "0.16" in t or "구하여라" in t:
+            return {
+                "category_type": "number",
+                "hypothesis_ko": "제곱하여 0.16이 되는 수 x(즉 방정식 x의 제곱 = 0.16을 만족하는 수)를 찾는 출발 조건",
+                "conclusion_ko": "0.16의 제곱근은 양의 제곱근 +0.4와 음의 제곱근 -0.4 두 개(플러스마이너스 0.4)라는 결론",
+                "auxiliary_line_ko": "소수 0.16을 분수 100분의 16 또는 (0.4)의 제곱과 (-0.4)의 제곱으로 바꾸어 양수와 음수 대칭 쌍으로 확인하는 발상",
+                "proof_logic_ko": "(+0.4) 곱하기 (+0.4) = 0.16이고, 음수끼리의 곱셈에서도 (-0.4) 곱하기 (-0.4) = +0.16이 성립하므로 양수와 음수 두 개의 제곱근이 대칭으로 존재하는 원리",
+                "misconception_ko": "0.16의 제곱근을 0.04라고 답하는 실수가 정말 많습니다! 0.04를 제곱하면 0.0016이 되며, 제곱해서 0.16이 되는 수는 플러스마이너스 0.4입니다.",
+                "what_if_not_ko": "만약 문제에서 '0.16의 제곱근(±0.4)' 대신 '제곱근 0.16(루트 0.16)'을 구하라고 질문 어순을 바꾸면 정답은 왜 양수 +0.4 하나만 될까요?"
+            }
+        elif "성질" in t or "a>0" in t or "a<0" in t:
+            is_neg = "a<0" in t or "a＜0" in t
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"문자 a의 부호가 {'음수(a＜0)' if is_neg else '양수(a＞0)'}일 때 근호(루트)와 제곱이 만나는 수식이 주어진 조건",
+                "conclusion_ko": f"{'a가 음수일 때 루트(a의 제곱)은 양수가 되어야 하므로 마이너스를 붙인 -a로 나온다' if is_neg else 'a가 양수일 때 루트(a의 제곱)과 (루트 a)의 제곱은 모두 원래 양수 a 그대로 나온다'}는 제곱근의 성질 결론",
+                "auxiliary_line_ko": "문자 a에 구체적인 숫자(예: a = 3 또는 a = -3)를 대입하여 안쪽 제곱을 먼저 계산한 뒤 양의 제곱근을 구해 보는 수치 대입 발상",
+                "proof_logic_ko": f"루트 기호 앞의 부호가 플러스이면 그 결과는 반드시 0 이상인 양의 제곱근이어야 하므로, {'음수 a에 마이너스 부호를 하나 더 붙여 양수 -a로 만들어 주는' if is_neg else '양수 a가 부호 변화 없이 그대로 나오는'} 절댓값(|a|) 동치 원리",
+                "misconception_ko": "a가 음수일 때 '-a' 앞에 마이너스 기호가 있다고 해서 음수라고 착각하면 안 됩니다! a 자체가 음수(예: -3)이므로 -a = -(-3) = +3인 양수입니다.",
+                "what_if_not_ko": "이 성질을 절댓값 기호 루트(a²) = |a| 하나로 통합하면, 수직선 위 두 점 사이의 거리 공식과 어떻게 연결될까요?"
+            }
+        elif "Leftrightarrow" in t or "sqrt{a}>" in t or "대소" in blob:
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": "두 양수 a, b에 대하여 넓이가 각각 a와 b인 두 정사각형을 포개어 비교하는 출발 조건",
+                "conclusion_ko": "양수 a가 b보다 크면 한 변의 길이인 루트 a도 루트 b보다 크고, 역으로 루트 a가 루트 b보다 크면 제곱한 넓이 a도 b보다 크다는 제곱근의 대소 관계 결론",
+                "auxiliary_line_ko": "넓이가 a인 정사각형과 넓이가 b인 정사각형의 한 꼭짓점을 맞추어 겹쳐 놓아 한 변의 길이(루트 a, 루트 b)와 넓이를 동시에 눈으로 비교하는 기하학적 발상",
+                "proof_logic_ko": "정사각형의 넓이가 클수록 한 변의 길이도 길어진다는 기하학적 단조증가 성질과, 양변을 제곱하여 근호를 벗겨 비교하는 대수적 동치 원리",
+                "misconception_ko": "근호 밖의 자연수와 근호 안의 수를 비교할 때(예: 3과 루트 10)는 3 = 루트 9로 모두 근호 안에 넣어야 정확히 비교할 수 있습니다.",
+                "what_if_not_ko": "만약 두 수 앞에 음수 부호가 붙어 -루트 a와 -루트 b를 비교한다면 부등호의 방향은 어떻게 뒤집힐까요?"
+            }
+        else:
+            return {
+                "category_type": "number",
+                "hypothesis_ko": f"'{ko_t}'에서 어떤 수 x를 제곱하여 음이 아닌 수 a가 되는 관계(x의 제곱 = a)를 탐구하는 출발 조건",
+                "conclusion_ko": "양수 a의 제곱근은 양의 제곱근(+루트 a)과 음의 제곱근(-루트 a) 2개이며, 0의 제곱근은 0 하나뿐이고, 음수의 실수 제곱근은 존재하지 않는다는 결론",
+                "auxiliary_line_ko": "제곱 연산(x ➔ x²)의 역연산 화살표 다이어그램과 수직선 원점 대칭(±루트 a) 모델을 그려 확인하는 발상",
+                "proof_logic_ko": "부호가 같은 두 실수를 곱하면 항상 0 이상이 되므로, 양수 a에 대해서는 절댓값이 같고 부호가 반대인 두 수(+루트 a, -루트 a)가 제곱하여 a가 되는 원리",
+                "misconception_ko": "'a의 제곱근(제곱해서 a가 되는 수, ±루트 a 2개)'과 '제곱근 a(루트 a를 한글로 읽은 것, 양수 1개)'는 가장 자주 출제되는 핵심 구분 포인트입니다!",
+                "what_if_not_ko": "만약 고등학교에서 제곱하여 음수 -1이 되는 새로운 수(허수 단위 i)를 정의한다면 수의 체계는 어디까지 확장될까요?"
+            }
+
+    # 9. 유한소수 / 무한소수 / 순환소수 / 정수 / 유리수
+    if "유한소수" in blob or "순환소수" in blob or "유리수" in blob or "정수" in t or "Decimal" in blob or "Rational" in blob:
+        if "유한소수" in t or "순환소수" in t:
+            return {
+                "category_type": "number",
+                "hypothesis_ko": "분수(유리수)에서 분자를 분모로 직접 나눗셈하여 소수점 아래 숫자가 끝나는지 끝없이 반복되는지 관찰하는 출발 조건",
+                "conclusion_ko": "유리수를 소수로 나타내면 소수점 아래 0이 아닌 숫자가 유한개인 유한소수 또는 일정한 숫자 배열(순환마디)이 한없이 되풀이되는 순환소수가 된다는 결론",
+                "auxiliary_line_ko": "기약분수의 분모를 소인수분해하여 소인수가 2나 5뿐인지(10의 거듭제곱 분수로 변환 가능), 아니면 2와 5 이외의 소인수가 있는지 분류하는 수론적 발상",
+                "proof_logic_ko": "나눗셈에서 나머지는 나누는 수(분모)보다 작은 자연수이므로 최대 분모 개수만큼만 나누어 보면 언젠가 나머지가 0이 되거나(유한소수) 이전에 나왔던 나머지가 반드시 다시 나타나 순환마디가 생기는 비둘기집 원리",
+                "misconception_ko": "무한소수라고 해서 모두 무리수가 아닙니다! 순환소수(예: 0.333... = 1/3)는 분수로 나타낼 수 있는 당당한 유리수이며, 순환하지 않는 무한소수(원주율 파이, 루트 2)만 무리수입니다.",
+                "what_if_not_ko": "순환소수 x = 0.121212...에 100을 곱해 100x - x = 99x를 만들면 어떻게 모든 순환소수를 1초 만에 분수로 바꿀 수 있을까요?"
+            }
+        else:
+            return {
+                "category_type": "number",
+                "hypothesis_ko": "자연수, 0, 음의 정수로 이루어진 정수와, 분모가 0이 아닌 정수 분의 정수 꼴로 나타내어지는 유리수의 포함 관계를 분류하는 출발 조건",
+                "conclusion_ko": "모든 정수는 분모가 1인 분수로 나타낼 수 있으므로 유리수에 포함되며, 유리수는 정수와 정수가 아닌 유리수(유한소수·순환소수)로 깔끔하게 분류된다는 수 체계 결론",
+                "auxiliary_line_ko": "수의 벤 다이어그램(자연수 ⊂ 정수 ⊂ 유리수 ⊂ 실수)과 수직선 위의 등분점을 대응시켜 시각화하는 발상",
+                "proof_logic_ko": "분수의 약분 후 기약분수 상태에서 분모가 1이면 정수(예: 6/2 = 3), 분모가 1이 아니면 정수가 아닌 유리수(예: 1/2, -3/4)로 판별되는 원리",
+                "misconception_ko": "분수 모양으로 적혀 있다고 해서 무조건 '정수가 아닌 유리수'라고 속으면 안 됩니다! -8/4 = -2처럼 약분했을 때 자연수나 음의 정수가 되면 정수입니다.",
+                "what_if_not_ko": "유리수만으로도 수직선이 빽빽하게 채워진 것 같지만, 왜 유리수 사이사이의 빈틈을 메우려면 무리수(루트 2, 파이)가 반드시 필요할까요?"
+            }
+
+    # 10. 지수법칙 / 거듭제곱 / 단항식 연산
+    if "자연수일 때" in t or "a^m" in t or "지수" in blob or "거듭제곱" in blob or "5a" in t or "단항식" in blob:
+        is_div = "div" in t or "÷" in t
+        return {
+            "category_type": "algebra",
+            "hypothesis_ko": "자연수 지수 m, n과 거듭제곱의 정의(a의 m제곱은 밑 a를 m번 거듭 곱한 것)가 주어진 출발 조건",
+            "conclusion_ko": f"수식 '{ko_t}'의 지수법칙이 모든 자연수 지수에서 필연적으로 성립한다는 대수적 결론",
+            "auxiliary_line_ko": f"추상적인 지수 기호를 암기하지 않고, 밑 a가 실제로 몇 번 곱해져 있는지 {'분자와 분모에 나열하여 공통 인수를 약분해 보는' if is_div else '괄호와 곱셈 나열식(a × a × ··· × a)으로 펼쳐서 전체 개수를 세어 보는'} 대수적 해체 발상",
+            "proof_logic_ko": f"{'분자에 곱해진 m개의 a와 분모에 곱해진 n개의 a를 일대일로 약분하고 남은 a의 개수를 m＞n, m=n, m＜n 세 경우로 나누어 세면 지수의 뺄셈 규칙과 정확히 일치하는' if is_div else '곱셈의 결합법칙에 의해 앞에 곱해진 m개의 a와 뒤에 곱해진 n개의 a를 한 줄로 합쳐 세면 총 (m+n)개가 되어 지수의 덧셈·곱셈 규칙과 일치하는'} 원리",
+            "misconception_ko": f"{'나눗셈 a^m ÷ a^n에서 지수끼리 나누어 a^(m/n)으로 쓰는 실수를 조심하세요! 나눗셈은 약분이므로 지수끼리 빼야 합니다.' if is_div else '곱셈 a^m × a^n에서 지수끼리 곱해 a^(mn)으로 착각하는 실수가 많습니다! a² × a³ = (a×a)×(a×a×a) = a⁵처럼 작은 자연수(2, 3)를 대입하면 1초 만에 검산됩니다.'}",
+            "what_if_not_ko": "만약 지수 m, n이 자연수를 넘어 0이나 음의 정수(a⁰ = 1, a⁻ⁿ = 1/aⁿ), 나아가 유리수 분수 지수로 확장되면 어떤 조건(밑 a＞0)이 추가로 필요할까요?"
+        }
+
+    # 11. 피타고라스 정리 / 피타고라스 나무
+    if "피타고라스" in blob or "Pythagoras" in blob or "Pythagorean" in blob:
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "직각삼각형의 세 변 a, b, c(빗변 c)와 각 변을 한 변으로 하는 정사각형이 작도된 기하학적 출발 조건",
+            "conclusion_ko": "직각을 낀 두 변의 제곱의 합은 빗변의 제곱과 항상 같다(a² + b² = c²)는 피타고라스 정리와 넓이 보존 결론",
+            "auxiliary_line_ko": "한 변이 (a+b)인 큰 정사각형을 합동인 직각삼각형 4개와 한가운데 정사각형(넓이 c²)으로 분할하는 보조선",
+            "proof_logic_ko": "네 모서리의 직각삼각형이 SAS 합동이고 두 예각의 합이 90도이므로 가운데 사각형의 한 내각이 180도 - 90도 = 90도가 되어 정사각형이 되며, 전체 넓이 등식 (a+b)² = 4×(1/2 ab) + c²을 정리하면 a² + b² = c²이 도출되는 원리",
+            "misconception_ko": "가운데 사각형의 네 변의 길이가 c로 같다는 것만으로는 마름모일 수도 있으므로, 반드시 두 예각의 합이 90도임을 이용해 내각이 90도(정사각형)임을 증명해야 완벽합니다!",
+            "what_if_not_ko": "만약 직각삼각형의 세 변 위에 정사각형 대신 정삼각형이나 반원을 올린다면 두 작은 도형의 넓이 합은 여전히 빗변 도형의 넓이와 같을까요?"
+        }
+
+    # 12. 프랙탈 기하학 (코흐 곡선 / 눈송이 / 페아노 곡선)
+    if "프렉탈" in blob or "프랙탈" in blob or "Fractal" in blob or "코흐" in blob or "Koch" in blob or "페아노" in blob or "Peano" in blob:
+        return {
+            "category_type": "fractal_curve",
+            "hypothesis_ko": f"기본 선분이나 정삼각형에서 출발하여 각 선분을 일정한 비율로 쪼개고 같은 모양을 되풀이해 붙여 나가는 '{ko_t}'의 자기닮음(Self-Similarity) 생성 규칙",
+            "conclusion_ko": "단순한 기하학적 분할 규칙을 무한히 반복하면 일부분을 확대해도 전체와 똑같은 모양이 끝없이 나타나는 프랙탈 곡선이 완성된다는 결론",
+            "auxiliary_line_ko": "선분을 3등분(또는 격자 분할)한 뒤 가운데 구간에 정삼각형 산 모양(또는 공간 채움 경로)을 세우는 단계별 재귀(Recursion) 작도",
+            "proof_logic_ko": "한 단계를 거칠 때마다 선분의 개수는 4배(또는 거듭제곱 배)로 늘어나고 각 선분의 길이는 1/3로 줄어들어, 전체 길이는 매 단계 (4/3)ⁿ 등비수열로 증가하는 반면 둘러싸인 넓이는 유한한 극한값에 수렴하는 원리",
+            "misconception_ko": "도형이 유한한 화면(유한한 넓이) 안에 갇혀 있다고 해서 둘레의 길이도 유한할 것이라고 착각하기 쉽지만, 코흐 눈송이는 '넓이는 유한하면서 둘레의 길이는 무한대'가 되는 놀라운 도형입니다!",
+            "what_if_not_ko": "이 프랙탈 도형의 닮음비와 조각 개수를 이용해 고등학교 미적분의 등비급수 도형 넓이·길이 극한 문제(S = a / (1 - r))를 어떻게 단번에 풀 수 있을까요?"
+        }
+
+    # 13. 정칠각형 매듭 / 오더리 탱클 / 회전 / 장미 / 꽃잎차례 / 소수·합성수 게임 / 3D 곡면·스트링 아트
+    if any(k in blob for k in ("매듭", "Knot", "오더리", "Orderly", "회전", "Rotate", "장미", "rose", "꽃잎", "Petals", "소수카드", "prime", "스트링 아트", "String Art", "발판곡면", "Pedal")):
+        if "소수카드" in blob or "prime" in blob.lower():
+            return {
+                "category_type": "number",
+                "hypothesis_ko": "1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수(Prime) 카드와 약수가 3개 이상인 합성수(Composite) 카드를 분류하고 조합하는 규칙",
+                "conclusion_ko": "모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론",
+                "auxiliary_line_ko": "에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상",
+                "proof_logic_ko": "합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리",
+                "misconception_ko": "자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
+                "what_if_not_ko": "만약 소인수분해를 이용해 어떤 자연수 N = pᵃ qᵇ의 양의 약수의 개수를 구한다면 왜 지수에 1씩 더해 (a+1)(b+1)을 곱하면 될까요?"
+            }
+        elif "발판곡면" in blob or "스트링 아트" in blob or "사면체" in blob:
+            return {
+                "category_type": "space_3d",
+                "hypothesis_ko": f"3차원 공간에서 구 또는 정사면체의 모서리·접평면에 일정한 기하학적 규칙으로 점과 선분을 연결하는 '{ko_t}'의 출발 조건",
+                "conclusion_ko": "곧은 직선들의 모임(법선·선분 다발)이 공간에서 연속적으로 회전·교차할 때 매끄러운 포락선(Envelope)과 3차원 곡면이 창발된다는 공간기하 결론",
+                "auxiliary_line_ko": "모서리 위의 등분점들을 순서대로 일대일 대응시켜 잇는 매개변수 선분(스트링) 및 기준점에서 접평면에 내린 수선의 발 작도",
+                "proof_logic_ko": "직선이 일정한 비율로 내분점을 이동할 때 이웃한 두 직선의 교점 자취가 이차곡선 및 3차원 발판곡면을 형성하는 공간 기하 원리",
+                "misconception_ko": "곡선이나 곡면을 그리려면 반드시 휘어진 도구가 필요하다고 생각하기 쉽지만, 곧은 직선들의 접선 다발만으로도 완벽한 곡면이 만들어집니다.",
+                "what_if_not_ko": "이 3차원 도형을 특정 평면으로 자른 단면(Section)이나 빛을 비춘 정사영(Projection)은 어떤 2차원 도형이 될까요?"
+            }
+        else:
+            return {
+                "category_type": "fractal_curve",
+                "hypothesis_ko": f"일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '{ko_t}'의 기하학적 출발 조건",
+                "conclusion_ko": f"회전 대칭과 등각 변환의 반복을 통해 '{ko_t}'의 정칙 다각형·규칙적 얽힘(Orderly Tangle)·황금각 나선 구조가 완성된다는 결론",
+                "auxiliary_line_ko": "회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선",
+                "proof_logic_ko": "동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환(Isometry) 성질에 의해 정다각형 대칭이 성립하는 원리",
+                "misconception_ko": "자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
+                "what_if_not_ko": "만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요?"
+            }
+
+    # 14. 일반 기하·대수·미적분 주제
+    is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "함수", "수열", "로그"))
+    return {
+        "category_type": "algebra" if is_alg else "geometry",
+        "hypothesis_ko": f"'{ko_t}'에서 주어진 기본 정의와 출발 조건(가정)",
+        "conclusion_ko": f"'{ko_t}'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+        "auxiliary_line_ko": "주어진 조건들을 하나의 대칭·합동·닮음 또는 동치 등식 구조로 연결하는 폴리아의 제1보조선 및 단계별 분할",
+        "proof_logic_ko": "단계별 분할을 통해 도형의 합동·닮음·넓이 불변량 성질과 수식의 동치 변형을 결합하여 결론을 필연적으로 도출하는 원리",
+        "misconception_ko": "결론 공식을 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
+    }
+
+
 def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
-    """임의의 min7014.github.io PDF에 대해 장면(Scene)별 플립북 모션 범위·색상 변화와 수학적 원리를 결합해 고품질 한·영 설명 대본을 생성합니다."""
+    """
+    [수석 수학교사(mathteacher) 에이전트 기반 PDF 슬라이드별 정밀 시각·대수 증명 분석 대본 생성기 (v5.0)]
+    - 민은기 선생님의 수학자료실(https://min7014.github.io/) PDF의 고유한 시각 증명 문법을 슬라이드별로 해독합니다:
+      1) 좌측 상단 영역(cx < 0.46, cy < 0.50) 변화 ➔ 출발 가정(Hypothesis) 도형 및 조건 작도 분석
+      2) 우측 상단 영역(cx >= 0.46, cy < 0.50) 변화 ➔ 명제 화살표(⇒) 및 목표 결론(Conclusion) 제시 분석
+      3) 하단 증명 캔버스(cy >= 0.48) + 초록색(green) ➔ 폴리아의 제1보조선(Auxiliary Line) 작도 분석
+      4) 하단 증명 캔버스 + 보라/주황(purple) ➔ 합동(SAS/ASA/SSS/RHS/RHA)·닮음·엇각 핵심 증명 논리 분석
+      5) 하단 증명 캔버스 + 붉은색(red) ➔ 대응변·대응각 일치에 의한 최종 결론(Q.E.D.) 완성 분석
+      6) 슬라이드 내 수식·텍스트 증분(curr_lines - prev_lines) ➔ 대수·지수·제곱근 수식의 단계별 전개식 해독
+    """
     total_pages = len(doc)
     if scene_ranges is None:
         scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=12)
     num_scenes = len(scene_ranges)
 
     raw_title = (item_meta or {}).get("title") or "수학자료실 시각적 증명"
+    sub_ko = (item_meta or {}).get("sub_domain_ko") or ""
+    breadcrumb = (item_meta or {}).get("breadcrumb") or ""
     clean_title_ko = clean_math_for_speech_ko(raw_title)
     clean_title_en = translate_text_google_gtx(clean_title_ko, "en")
 
-    core_ko = clean_math_for_speech_ko((item_meta or {}).get("core_concept") or "")
-    vis_ko = clean_math_for_speech_ko((item_meta or {}).get("visual_summary") or "")
-    steps_ko = [clean_math_for_speech_ko(s) for s in ((item_meta or {}).get("scaffolding_steps") or [])]
-    tips_ko = [clean_math_for_speech_ko(t) for t in ((item_meta or {}).get("solving_tips") or [])]
+    t_analysis = (item_meta or {}).get("teacher_proof_analysis") or analyze_min7014_topic_as_mathteacher(raw_title, sub_ko, breadcrumb)
+    hyp_ko = clean_math_for_speech_ko(t_analysis.get("hypothesis_ko") or "")
+    conc_ko = clean_math_for_speech_ko(t_analysis.get("conclusion_ko") or "")
+    aux_ko = clean_math_for_speech_ko(t_analysis.get("auxiliary_line_ko") or "")
+    logic_ko = clean_math_for_speech_ko(t_analysis.get("proof_logic_ko") or "")
+    misc_ko = clean_math_for_speech_ko(t_analysis.get("misconception_ko") or "")
+    win_ko = clean_math_for_speech_ko(t_analysis.get("what_if_not_ko") or "")
 
     color_desc_ko = {
-        "red": "붉은색 강조 보조선과 핵심 길이 표시",
-        "blue": "파란색 기본 도형 및 기준 선분 작도",
-        "green": "초록색 대응 영역 및 비례 요소 표시",
-        "purple": "보라색 보조선 및 각·닮음 대응 연결",
-        "default": "핵심 기하 작도 및 연속 모션 전개",
+        "red": "붉은색 목표 결론 및 핵심 등식 강조",
+        "blue": "파란색 출발 가정 도형 및 기준 선분 작도",
+        "green": "초록색 폴리아 제1보조선 및 분할선 작도",
+        "purple": "주황·보라색 합동·닮음 대응 삼각형 강조",
+        "default": "핵심 기하 작도 및 단계별 수식 전개",
     }
 
     pages_out = []
     prev_pil = None
+    prev_text_lines = []
+    used_roles = set()
 
     for s_idx, (p_start, p_end) in enumerate(scene_ranges):
         s_num = s_idx + 1
@@ -476,59 +828,200 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
         bbox, c_tag = compute_page_diff_and_color(prev_pil, curr_pil) if s_idx > 0 else (None, "default")
         prev_pil = curr_pil
 
+        # 슬라이드 내 텍스트/수식 줄 추출 및 이전 장면 대비 새로 추가된 수식 줄 감지
+        raw_page_text = ""
+        try:
+            raw_page_text = doc[rep_idx].get_text("text") or ""
+        except Exception:
+            raw_page_text = ""
+        curr_lines = [
+            re.sub(r"\s+", " ", ln.strip())
+            for ln in raw_page_text.splitlines()
+            if ln.strip()
+            and ln.strip().lower() not in ("start", "stop", "home", "end", "home end", "?", "!", "|", "{", "}")
+            and "github" not in ln.lower()
+            and "http" not in ln.lower()
+        ]
+        added_lines = [ln for ln in curr_lines if ln not in prev_text_lines]
+        if curr_lines:
+            prev_text_lines = list(curr_lines)
+        added_formula_ko = clean_math_for_speech_ko(" ".join(added_lines[:2])) if added_lines else ""
+
+        # 공간 좌표(bbox) + 색상(c_tag) 기반 민은기 선생님 PDF 시각 증명 문법 판별
         c_ko = color_desc_ko.get(c_tag, color_desc_ko["default"])
+        spatial_role = "general"
         focus_desc = c_ko
         if bbox:
             cx = (bbox[0] + bbox[2]) / 2.0
-            if cx > 0.54:
-                focus_desc = f"우측 증명 수식 유도 ({c_ko})"
-            elif cx < 0.46:
-                focus_desc = f"좌측 동적 도형 작도 ({c_ko})"
-
-        step_q_ko = f"❓ [탐구 질문 {s_num}] 이 단계에서 변하지 않는 기하학적 핵심 관계는 무엇일까요?"
-        step_q_en = f"❓ [Inquiry Q{s_num}] What geometric relationship remains invariant in this step?"
+            cy = (bbox[1] + bbox[3]) / 2.0
+            if cy < 0.48 and cx < 0.47:
+                spatial_role = "top_left_hypothesis"
+                focus_desc = f"좌측 상단 출발 가정(Hypothesis) 작도 ({c_ko})"
+            elif cy < 0.48 and cx >= 0.47:
+                spatial_role = "top_right_conclusion"
+                focus_desc = f"우측 상단 목표 결론(⇒ Conclusion) 제시 ({c_ko})"
+            elif cy >= 0.48 and c_tag == "green":
+                spatial_role = "bottom_green_auxiliary"
+                focus_desc = "하단 증명 도형 · 초록색 폴리아 제1보조선 작도"
+            elif cy >= 0.48 and c_tag == "purple":
+                spatial_role = "bottom_purple_congruence"
+                focus_desc = "하단 증명 도형 · 주황·보라색 합동·닮음 삼각형 강조"
+            elif cy >= 0.48 and c_tag == "red":
+                spatial_role = "bottom_red_qed"
+                focus_desc = "하단 증명 도형 · 붉은색 대응 요소 및 최종 결론 도출"
+            elif cy >= 0.48:
+                spatial_role = "bottom_base_proof"
+                focus_desc = f"하단 중앙 증명 도형 전개 ({c_ko})"
 
         if s_num == 1:
-            step_title = "질문 1 · 관찰과 경이 (Notice & Wonder)"
-            step_q_ko = f"❓ [Notice & Wonder] {clean_title_ko}에서 변하지 않는 불변량은 무엇일까요?"
-            step_q_en = f"❓ [Notice & Wonder] What stays invariant in {clean_title_en}, and why?"
-            exp_ko = f"1단계, 질문으로 시작하는 수학 시간입니다. {clean_title_ko} 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. {core_ko}"
-            exp_en = f"Step 1. Welcome to Question-Driven Math at Min's Math Lab. Observe {clean_title_en} closely: what do you notice stays invariant, and why does this property always hold? Let us explore step by step."
+            step_title = "도입 · 수학교사의 눈으로 가정과 결론 읽기 (Notice & Wonder)"
+            step_q_ko = f"❓ [출발 질문] {clean_title_ko}에서 주어진 출발 가정은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?"
+            step_q_en = f"❓ [Opening Question] What is the given hypothesis and target conclusion in {clean_title_en}?"
+            exp_ko = (
+                f"안녕하세요, 민은기 선생님의 수학교실입니다. 오늘 함께 탐구할 주제는 {clean_title_ko}입니다. "
+                f"공식을 외우기 전에 먼저 수학교사의 시선으로 출발 조건을 확인해 볼까요? "
+                f"이 명제의 출발점은 {hyp_ko}입니다. 과연 왜 이 조건에서 {conc_ko}이 필연적으로 성립하는지 한 단계씩 눈으로 증명해 봅시다."
+            )
+            exp_en = (
+                f"Welcome to Min's Math Lab. Today we explore {clean_title_en} from a math teacher's perspective. "
+                f"Before memorizing any formula, let us examine our starting hypothesis and see why it inevitably leads to the conclusion step by step."
+            )
         elif s_num == num_scenes:
-            step_title = "질문 확장 · 조건 변형 (What-If-Not)"
-            step_q_ko = "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떻게 될까요?"
-            step_q_en = "🔀 [What-If-Not] What happens if we modify one condition of this theorem?"
-            tip_str = tips_ko[0] if tips_ko else "도형의 정의와 대칭 보조선을 기억하세요."
-            exp_ko = f"마지막 {s_num}단계입니다. 총 {total_pages}프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? {tip_str} 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!"
-            exp_en = f"Step {s_num}. We have completed the {total_pages}-frame visual proof! Now ask yourself a What-If-Not question: what happens if we change a condition in this figure? Visit min7014.github.io/mathedu to test your own questions interactively!"
+            step_title = "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)"
+            step_q_ko = f"🔀 [조건 변형 질문] {win_ko}"
+            step_q_en = "🔀 [What-If-Not] How does this theorem evolve if we modify or generalize its conditions?"
+            exp_ko = (
+                f"마지막 {s_num}단계, 마침내 증명이 완성되었습니다! "
+                f"출발 가정이었던 {hyp_ko}에서 시작해, {aux_ko}을 거쳐, {conc_ko}이 성립함을 한 치의 빈틈도 없이 확인했습니다. "
+                f"수학교사로서 꼭 당부하고 싶은 점은 {misc_ko} "
+                f"마지막으로 스스로에게 한 걸음 더 깊은 질문을 던져 보세요. {win_ko} "
+                f"설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!"
+            )
+            exp_en = translate_text_google_gtx(exp_ko, "en")
         else:
             progress = (s_num - 1) / max(1, num_scenes - 2)
-            range_str = f"{p_start + 1}페이지부터 {p_end + 1}페이지까지의 연속 움직임입니다." if p_end > p_start else f"{p_start + 1}페이지입니다."
-            if progress <= 0.28:
-                step_title = "1단계 질문 · 기본 도형 조건 관찰 (Notice)"
-                step_q_ko = "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?"
-                step_q_en = "👁️ [Observation Question] What symmetry is hidden in the base figure?"
-                s_hint = steps_ko[0] if len(steps_ko) > 0 else "기준 도형과 꼭짓점을 명확히 배치합니다."
-                exp_ko = f"{s_num}단계, {range_str} 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? {focus_desc} 과정을 통해 핵심 출발점을 확인합니다. {s_hint}"
-            elif progress <= 0.55:
-                step_title = "2단계 질문 · 폴리아 제1보조선 발상 (How?)"
-                step_q_ko = "🧭 [보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?"
-                step_q_en = "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
-                s_hint = steps_ko[1] if len(steps_ko) > 1 else vis_ko
-                exp_ko = f"{s_num}단계, {range_str} 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? {focus_desc}의 움직임을 눈여겨보세요. {s_hint}"
-            elif progress <= 0.82:
-                step_title = "3단계 질문 · 불변량과 등식 발견 (Why?)"
-                step_q_ko = "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?"
-                step_q_en = "📐 [Invariant Question] Which ratio or area remains constant under motion?"
-                s_hint = steps_ko[2] if len(steps_ko) > 2 else "도형의 성질을 비례식과 등식으로 변환합니다."
-                exp_ko = f"{s_num}단계, {range_str} 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? {focus_desc} 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. {s_hint}"
+            range_str = f"{p_start + 1}페이지부터 {p_end + 1}페이지까지의 연속 작도입니다." if p_end > p_start else f"{p_start + 1}페이지 장면입니다."
+
+            # 1) 대수·지수·수식 슬라이드에서 새로운 수식 줄이 등장한 경우 수식 전개 우선 해설
+            if added_formula_ko and len(added_lines) > 0 and any(ch in " ".join(added_lines) for ch in ("=", "×", "+", "-", "^", "개", "∴")):
+                if progress <= 0.38:
+                    step_title = f"Step {s_num} · 거듭제곱과 수식의 정의 펼치기 (Definition)"
+                    step_q_ko = f"❓ [정의 질문] 화면에 나타난 '{added_lines[0]}' 식을 기본 정의대로 풀어서 쓰면 어떻게 될까요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} 화면에 새로 나타난 식 {added_formula_ko}에 주목해 보세요. "
+                        f"수학교사가 가장 강조하는 비결은 기호를 외우지 않고 뜻대로 펼쳐 보는 것입니다. {aux_ko} 과정을 시작합니다."
+                    )
+                elif progress <= 0.72:
+                    step_title = f"Step {s_num} · 괄호 해체와 개수 세기 (Algebraic Unfolding)"
+                    step_q_ko = f"🧭 [전개 질문] 펼쳐 놓은 식 '{added_lines[0]}'에서 전체 곱해진 개수는 어떻게 합쳐질까요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} 다음 줄에 유도된 {added_formula_ko} 식을 살펴보세요. "
+                        f"{logic_ko}에 따라 식이 한눈에 정리됩니다. "
+                        f"이때 {misc_ko}"
+                    )
+                else:
+                    step_title = f"Step {s_num} · 대수적 등식 결합 및 법칙 완성 (Synthesis)"
+                    step_q_ko = f"💡 [결론 질문] 앞의 전개 과정을 하나로 묶으면 왜 '{added_lines[0]}' 등식이 완성될까요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} 이제 {added_formula_ko} 단계에 도달했습니다. "
+                        f"구체적인 곱셈 나열을 다시 거듭제곱 기호로 묶어 주면 {conc_ko}이 자연스럽게 도출됩니다."
+                    )
+                step_q_en = translate_text_google_gtx(step_q_ko, "en")
+                exp_en = translate_text_google_gtx(exp_ko, "en")
+
+            # 2) 기하 증명 PDF의 공간·색상 역할별 맞춤 수학교사 해설
+            elif spatial_role == "top_left_hypothesis" and "hyp" not in used_roles:
+                used_roles.add("hyp")
+                step_title = f"Step {s_num} · 좌측 상단 출발 가정(Hypothesis) 작도"
+                step_q_ko = "👁️ [가정 확인 질문] 화면 왼쪽 위에 파란색으로 표시된 출발 조건(가정)은 무엇인가요?"
+                step_q_en = "👁️ [Hypothesis Question] What starting condition is drawn in blue at the top-left?"
+                exp_ko = (
+                    f"{s_num}단계, {range_str} 화면 왼쪽 위 영역을 보세요. "
+                    f"민은기 선생님의 시각 증명에서는 왼쪽 위에 항상 문제의 출발 조건인 가정을 먼저 작도합니다. "
+                    f"여기서는 {hyp_ko}이 파란색 기호로 명확하게 표시되었습니다."
+                )
+                exp_en = translate_text_google_gtx(exp_ko, "en")
+
+            elif spatial_role == "top_right_conclusion" and "conc_top" not in used_roles:
+                used_roles.add("conc_top")
+                step_title = f"Step {s_num} · 우측 상단 목표 결론(⇒ Conclusion) 제시"
+                step_q_ko = "🎯 [목표 결론 질문] 화살표(⇒) 오른쪽 위에 붉은색으로 제시된 우리의 최종 증명 목표는 무엇인가요?"
+                step_q_en = "🎯 [Target Conclusion Question] What target conclusion is shown to the right of the arrow (⇒)?"
+                exp_ko = (
+                    f"{s_num}단계, {range_str} 이제 상단 가운데 화살표와 오른쪽 위 도형을 보세요. "
+                    f"왼쪽의 가정이 성립할 때 화살표 오른쪽의 {conc_ko}이 성립함을 보이겠다는 뜻입니다. "
+                    f"가정과 결론을 절대 섞지 않고, 아래쪽 증명 공간에서 다리를 놓아 봅시다!"
+                )
+                exp_en = translate_text_google_gtx(exp_ko, "en")
+
+            elif (spatial_role == "bottom_green_auxiliary" or c_tag == "green") and "aux" not in used_roles:
+                used_roles.add("aux")
+                step_title = f"Step {s_num} · 폴리아의 제1보조선(초록색 선분) 작도"
+                step_q_ko = "🧭 [결정적 보조선 질문] 왜 하필 이 위치에 초록색 보조선을 그어야 숨겨진 합동·대칭이 드러날까요?"
+                step_q_en = "🧭 [Key Auxiliary Line] Why do we draw the green auxiliary line right here to unlock the proof?"
+                exp_ko = (
+                    f"{s_num}단계, {range_str} 오늘 증명에서 가장 중요한 유레카 순간입니다! "
+                    f"화면 아래쪽 증명 도형에 그어진 초록색 선분을 보세요. 바로 {aux_ko}입니다. "
+                    f"원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!"
+                )
+                exp_en = translate_text_google_gtx(exp_ko, "en")
+
+            elif (spatial_role == "bottom_purple_congruence" or c_tag == "purple") and "cong" not in used_roles:
+                used_roles.add("cong")
+                step_title = f"Step {s_num} · 합동·닮음 대응 조건(SAS/ASA/RHS) 결합"
+                step_q_ko = "📐 [합동·닮음 질문] 보조선으로 나뉜 두 도형은 어떤 조건(SAS, ASA, SSS, RHS, RHA, 닮음)에 의해 완전히 포개어질까요?"
+                step_q_en = "📐 [Congruence & Similarity] By which geometric criterion do the two divided figures match?"
+                exp_ko = (
+                    f"{s_num}단계, {range_str} 화면 하단에 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. "
+                    f"{logic_ko}을 눈으로 직접 확인할 수 있습니다. "
+                    f"세 가지 대응 조건이 정확히 맞아떨어지므로 두 도형은 한 치의 오차도 없이 포개어집니다!"
+                )
+                exp_en = translate_text_google_gtx(exp_ko, "en")
+
+            elif (spatial_role == "bottom_red_qed" or c_tag == "red") and progress > 0.60 and "qed_red" not in used_roles:
+                used_roles.add("qed_red")
+                step_title = f"Step {s_num} · 대응변·대응각 일치로 최종 결론 도출"
+                step_q_ko = "💡 [유레카 질문] 합동·닮음인 도형의 대응하는 변과 각이 같다는 성질로부터 어떻게 목표 결론이 완성되나요?"
+                step_q_en = "💡 [Eureka Deduction] How do the corresponding parts of congruent figures complete our target conclusion?"
+                exp_ko = (
+                    f"{s_num}단계, {range_str} 하단 도형에 붉은색으로 빛나는 최종 표시를 보세요! "
+                    f"앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, "
+                    f"우리가 목표로 했던 {conc_ko}이 마침내 증명되었습니다!"
+                )
+                exp_en = translate_text_google_gtx(exp_ko, "en")
+
             else:
-                step_title = "4단계 질문 · 레고 블록 종합 (Synthesis)"
-                step_q_ko = "💡 [유레카 질문] 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요?"
-                step_q_en = "💡 [Eureka Question] How do the previous clues combine into the final proof?"
-                s_hint = steps_ko[3] if len(steps_ko) > 3 else "유도한 관계식들을 결합하여 최종 정리를 완성합니다."
-                exp_ko = f"{s_num}단계, {range_str} 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? {focus_desc} 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. {s_hint}"
-            exp_en = translate_text_google_gtx(exp_ko, "en")
+                # 진행률(progress) 기반 수학교사 단계별 심화 코칭 (중복 없는 디딤돌 전개)
+                if progress <= 0.30:
+                    step_title = f"Step {s_num} · 기본 증명 도형 배치 및 출발 조건 분석"
+                    step_q_ko = "👁️ [관찰 질문] 아래쪽 증명 공간에 옮겨 그린 기본 도형에서 가장 먼저 표시해야 할 조건은 무엇일까요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} {focus_desc} 과정입니다. "
+                        f"출발 조건인 {hyp_ko}을 아래쪽 증명 캔버스에 그대로 옮겨 작도하며 본격적인 증명을 준비합니다."
+                    )
+                elif progress <= 0.58:
+                    step_title = f"Step {s_num} · 보조선과 공통변·각의 크기 비교"
+                    step_q_ko = "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·맞꼭지각 중 서로 크기가 같은 것은 어디일까요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} {focus_desc} 단계입니다. "
+                        f"{aux_ko}을 중심으로 양쪽 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 확인합니다."
+                    )
+                elif progress <= 0.82:
+                    step_title = f"Step {s_num} · 증명 논리 검증 및 오개념 체크"
+                    step_q_ko = "⚠️ [오개념 점검 질문] 이 단계에서 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} {focus_desc} 과정입니다. "
+                        f"{logic_ko}이 완성되는 순간입니다. 여기서 수학교사의 핵심 팁! {misc_ko}"
+                    )
+                else:
+                    step_title = f"Step {s_num} · 레고 블록 종합 및 결론 연결 (Synthesis)"
+                    step_q_ko = "💡 [종합 질문] 지금까지 찾은 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 정확히 일치하나요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} 이제 앞에서 차곡차곡 모은 기하학적 단서들을 하나로 결합합니다. "
+                        f"하단 증명 도형의 결과가 상단 오른쪽에 제시했던 {conc_ko}과 완벽히 일치함을 확인할 수 있습니다."
+                    )
+                step_q_en = translate_text_google_gtx(step_q_ko, "en")
+                exp_en = translate_text_google_gtx(exp_ko, "en")
 
         pages_out.append({
             "page": rep_idx + 1,
@@ -563,6 +1056,40 @@ def translate_text_google_gtx(text_ko, target_lang):
         return text_ko
 
 
+def build_step_question_ko(title, p_num, total_p, color_tag="default"):
+    """단계별 질문하는 수업 발문(Notice & Wonder -> Socratic Inquiry -> What-If-Not) 생성기 (KO)"""
+    ko_t, _ = split_bilingual_title(title)
+    clean_t = clean_math_for_speech_ko(ko_t)
+    if p_num <= 1:
+        return f"👁️ [관찰과 경이 질문] '{clean_t}'의 출발 도형과 조건에서 가장 먼저 눈에 띄는 수학적 특징은 무엇인가요?"
+    if p_num >= total_p:
+        return f"🔀 [What-If-Not 확장 질문] 오늘 증명한 '{clean_t}'에서 조건 하나를 바꾸면 어떤 새로운 정리가 탄생할까요?"
+    if color_tag == "green":
+        return f"🧭 [결정적 보조선 질문 {p_num}/{total_p}] 왜 이 위치에 초록색 보조선·수식을 추가해야 숨겨진 연결고리가 드러날까요?"
+    if color_tag == "purple":
+        return f"📐 [핵심 원리 질문 {p_num}/{total_p}] 보라색으로 강조된 두 대상이 서로 같거나 비례하는 이유는 무엇일까요?"
+    if color_tag == "red":
+        return f"💡 [유레카 질문 {p_num}/{total_p}] 붉은색으로 완성된 등식·도형 관계가 어떻게 최종 결론을 증명하나요?"
+    return f"🧭 [소크라테스 발문 {p_num}/{total_p}] 직전 단계와 비교했을 때 새로 추가된 기호·선분이 증명에서 어떤 다리 역할을 할까요?"
+
+
+def build_step_question_en(title_en, p_num, total_p, color_tag="default"):
+    """Step-by-step Question-Asking Classroom prompt generator (EN)"""
+    _, en_split = split_bilingual_title(title_en)
+    clean_en = (en_split or title_en).strip()
+    if p_num <= 1:
+        return f"👁️ [Notice & Wonder] What mathematical structure stands out first in '{clean_en}'?"
+    if p_num >= total_p:
+        return f"🔀 [What-If-Not] What new theorem emerges if we modify one condition in '{clean_en}'?"
+    if color_tag == "green":
+        return f"🧭 [Auxiliary Line Q {p_num}/{total_p}] Why does adding this green auxiliary line or expression unlock the proof?"
+    if color_tag == "purple":
+        return f"📐 [Core Principle Q {p_num}/{total_p}] Why are the purple-highlighted parts congruent or proportional?"
+    if color_tag == "red":
+        return f"💡 [Eureka Q {p_num}/{total_p}] How does the red-highlighted relation complete the target conclusion?"
+    return f"🧭 [Socratic Inquiry {p_num}/{total_p}] Compared to the previous step, how does this new element bridge the proof?"
+
+
 def generate_or_update_script(slug_key, target_langs=None):
     """
     [1단계: 최고 품질 설명 텍스트 대본(ko) 및 원어민급 영어 나레이션(en) 우선 생성]
@@ -580,7 +1107,9 @@ def generate_or_update_script(slug_key, target_langs=None):
             old_doc = json.loads(out_path.read_text(encoding="utf-8"))
             existing_yt_urls = old_doc.get("youtube_urls") or {}
         except Exception:
-            pass
+            old_doc = {}
+    else:
+        old_doc = {}
 
     if curated:
         title = curated["title"]
@@ -590,7 +1119,8 @@ def generate_or_update_script(slug_key, target_langs=None):
         sub_ko = (item_meta or {}).get("sub_domain_ko") or "유클리드 평면기하·작도·원주각 (Euclidean Geometry)"
     elif item_meta:
         title = item_meta.get("title", slug_key)
-        title_en = translate_text_google_gtx(clean_math_for_speech_ko(title), "en")
+        _ko_only, _en_only = split_bilingual_title(title)
+        title_en = _en_only if _en_only else translate_text_google_gtx(clean_math_for_speech_ko(_ko_only), "en")
         pdf_url = (item_meta.get("pdf") or "").split("#")[0]
         web_url = item_meta.get("url") or "https://min7014.github.io/"
         sub_ko = item_meta.get("sub_domain_ko") or "기하·대수 시각적 증명"
@@ -598,12 +1128,17 @@ def generate_or_update_script(slug_key, target_langs=None):
         raise ValueError(f"Topic not found for slug/key: {slug_key}")
 
     orig_yt = (item_meta or {}).get("youtube") or ""
+    blocked_ids = get_deleted_video_ids_set()
     if orig_yt and not existing_yt_urls.get("orig"):
         existing_yt_urls["orig"] = orig_yt
     if (item_meta or {}).get("youtube_ko") and not existing_yt_urls.get("ko"):
         existing_yt_urls["ko"] = item_meta["youtube_ko"]
     if (item_meta or {}).get("youtube_en") and not existing_yt_urls.get("en"):
         existing_yt_urls["en"] = item_meta["youtube_en"]
+    for _k in ("ko", "en"):
+        _u = existing_yt_urls.get(_k) or ""
+        if any(bid in _u for bid in blocked_ids):
+            existing_yt_urls[_k] = ""
 
     pdf_bytes = urllib.request.urlopen(pdf_url).read()
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
@@ -622,6 +1157,8 @@ def generate_or_update_script(slug_key, target_langs=None):
             pages_data.append({
                 "page": idx + 1,
                 "step_title": "도입 · 주제 및 목표" if idx == 0 else ("완결 · 웹 탐구 안내" if idx == total_pages - 1 else f"Step {idx} · 시각적 작도 및 증명"),
+                "step_question_ko": build_step_question_ko(title, idx + 1, total_pages, c_tag),
+                "step_question_en": build_step_question_en(title_en, idx + 1, total_pages, c_tag),
                 "visual_focus": "핵심 단계별 작도 및 수식 유도",
                 "color_tag": c_tag,
                 "diff_bbox": bbox,
@@ -677,6 +1214,14 @@ def generate_or_update_script(slug_key, target_langs=None):
             "en": existing_yt_urls.get("en", ""),
             "orig": existing_yt_urls.get("orig", orig_yt)
         },
+        "shorts_urls": old_doc.get("shorts_urls") or {"ko": "", "en": ""},
+        "question_youtube_urls": old_doc.get("question_youtube_urls") or {"ko": "", "en": ""},
+        "question_shorts_urls": old_doc.get("question_shorts_urls") or {"ko": "", "en": ""},
+        "youtube_packages": old_doc.get("youtube_packages") or {},
+        "shorts_packages": old_doc.get("shorts_packages") or {},
+        "question_classroom_packages": old_doc.get("question_classroom_packages") or {},
+        "question_shorts_packages": old_doc.get("question_shorts_packages") or {},
+        "teacher_proof_analysis": (item_meta or {}).get("teacher_proof_analysis") or analyze_min7014_topic_as_mathteacher(title, sub_ko, (item_meta or {}).get("breadcrumb") or ""),
         "supported_languages": list(GLOBAL_VOICE_MAP.keys()),
         "pages": pages_data
     }
@@ -744,7 +1289,7 @@ VIRAL_HOOK_DB = {
         "quiz_en": "💬 10-Sec Quiz: The sum of distances to both foci equals which axis of the ellipse?"
     },
     "inscribed_circle": {
-        "match_keywords": ["inscribed", "원주각", "중심각", "thales", "탈레스", "접선", "현", "톨레미", "원"],
+        "match_keywords": ["inscribed", "원주각", "중심각", "thales", "탈레스", "톨레미", "현의 길이", "원의 접선"],
         "thumb_hook_ko": ["어디로 움직여도", "각도가 똑같다?!"],
         "thumb_hook_en": ["MOVE IT ANYWHERE", "ANGLE NEVER CHANGES!"],
         "badge_ko": "⚡ 시험에 무조건 나오는 원의 성질",
@@ -799,6 +1344,33 @@ VIRAL_HOOK_DB = {
         "quiz_en": "💬 Which step of this visual proof gave you the biggest 'Aha!' moment? Tell us in the comments!"
     },
 }
+
+
+def build_topic_cold_open(script_doc, lang_code="ko"):
+    """
+    [주제 맞춤형 100% 내용 일치 오프닝(Cold Open) 생성기]
+    기존의 범용 훅('원 위의 점을 움직여도...', '기하학적 보조선 한 줄...')이 제곱근·지수법칙·중선·프랙탈 영상과 불일치하던 문제를 원천 해결하여,
+    해당 주제의 실제 제목과 수학교사 분석(hypothesis_ko, auxiliary_line_ko, conclusion_ko)으로 오프닝을 생성합니다.
+    """
+    slug = script_doc.get("slug", "")
+    if slug in ("math20250130001", "2017090101", "2014111901", "2014111902"):
+        vprof = get_viral_hook_profile(script_doc)
+        return vprof["cold_open_en"] if lang_code == "en" else vprof["cold_open_ko"]
+
+    raw_title = script_doc.get("title", "")
+    ko_t, en_t = split_bilingual_title(raw_title)
+    clean_ko = clean_math_for_speech_ko(ko_t)
+    clean_en = (script_doc.get("title_en") or en_t or clean_ko).strip()
+    t_an = script_doc.get("teacher_proof_analysis") or analyze_min7014_topic_as_mathteacher(raw_title, script_doc.get("sub_domain_ko", ""))
+    aux_ko = clean_math_for_speech_ko(t_an.get("auxiliary_line_ko", ""))
+    conc_ko = clean_math_for_speech_ko(t_an.get("conclusion_ko", ""))
+
+    if lang_code == "en":
+        return f"Welcome to Min's Math Lab! Today we visually prove and explore {clean_en} step by step from a math teacher's perspective. Let us discover the exact mathematical principle behind it!"
+    return (
+        f"잠깐! {clean_ko}, 공식으로만 외우지 않고 왜 항상 성립하는지 눈으로 직접 확인해 볼까요? "
+        f"{aux_ko}을 통해 {conc_ko}까지 도달하는 과정을 지금 바로 따라와 보세요!"
+    )
 
 
 def get_viral_hook_profile(script_doc):
@@ -1228,23 +1800,24 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     chapters_block = "\n".join(chapters)
 
     if lang_code == "en":
-        clean_en_title = script_doc.get("title_en") or script_doc.get("title", slug)
+        _, _en_split = split_bilingual_title(script_doc.get("title", slug))
+        clean_en_title = latex_to_unicode_title(_en_split or script_doc.get("title_en") or script_doc.get("title", slug))
         yt_title = preset.get("title_en") or f"✨ {clean_en_title} — Step-by-Step Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
         if len(yt_title) > 98:
             yt_title = yt_title[:95] + "..."
         hook_en = preset.get("hook_en") or (
-            f"Why does {clean_en_title} hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!"
+            f"Why does {clean_en_title} hold true? Watch every step-by-step mathematical principle unfold clearly in 1080p!"
         )
         quiz_en = preset.get("quiz_en") or (
             f"💬 [10-Second Eureka Quiz] Which step (1 to {tot_p}) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!"
         )
         binge_en = (
-            "🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n"
-            "• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n"
-            "• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n"
-            "• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n"
-            "• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n"
-            "• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E"
+            "🔥 [Watch Next — Verified Visual Proofs on @min7014_ai]\n"
+            "• 🌳 Pythagoras Tree Area Conservation (1080p): https://youtu.be/9JKLflqrtDU\n"
+            "• ❓ Pythagoras Tree Question-Asking Classroom: https://youtu.be/11Go094NoGw\n"
+            "• 📐 Ceva's Theorem Question-Asking Classroom: https://youtu.be/pzgm6wB0j6Y\n"
+            "• ⚡ Pythagorean Theorem 45s #Shorts: https://youtube.com/shorts/ZDA4r_G343I\n"
+            "• ✨ Menelaus' Theorem 45s #Shorts: https://youtube.com/shorts/bJQwpG3stXk"
         )
         yt_desc = (
             f"{hook_en}\n\n"
@@ -1271,23 +1844,25 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             "AMC Math", "SAT Math", "Min's Math Lab", "min7014_ai", "min7014"
         ]
     else:
-        clean_ko_title = re.sub(r"\$[^\$]*\$", "", script_doc.get("title", slug)).strip()
-        yt_title = preset.get("title_ko") or f"🔥 [시각적 증명] {clean_ko_title} — 눈으로 깨치는 {tot_p}단계 기하 직관 (1080p) | @min7014_ai"
+        clean_ko_title = split_bilingual_title(script_doc.get("title", slug))[0]
+        cat_type = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
+        sub_label = "대수·수체계 원리" if cat_type in ("algebra", "number") else "시각적 기하 직관"
+        yt_title = preset.get("title_ko") or f"🔥 [시각적 증명] {clean_ko_title} — 눈으로 깨치는 {tot_p}단계 {sub_label} (1080p) | @min7014_ai"
         if len(yt_title) > 98:
             yt_title = yt_title[:95] + "..."
         hook_ko = preset.get("hook_ko") or (
-            f"공식 암기 없이 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다."
+            f"공식 암기 없이 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 수학교사의 단계별 원리 분석으로 핵심 개념과 증명 과정이 한눈에 드러납니다."
         )
         quiz_ko = preset.get("quiz_ko") or (
-            f"💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 {tot_p}페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!"
+            f"💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 {tot_p}페이지 중 결정적인 원리나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!"
         )
         binge_ko = (
-            "🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n"
-            "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n"
-            "• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n"
-            "• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n"
-            "• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n"
-            "• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ"
+            "🔥 [@min7014_ai 검증된 인기 시각적 증명 정주행 시리즈]\n"
+            "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계 본편): https://youtu.be/bQO7fnT6aDU\n"
+            "• ❓ 피타고라스 나무 질문하는 수업 본편 (11단계): https://youtu.be/11Go094NoGw\n"
+            "• 📐 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/pzgm6wB0j6Y\n"
+            "• 🔥 피타고라스 정리 45초 핵심 #Shorts: https://youtube.com/shorts/KWlHq8ms8T0\n"
+            "• ✨ 메넬라우스의 정리 45초 핵심 #Shorts: https://youtube.com/shorts/5rO1HLeYKb8"
         )
         yt_desc = (
             f"{hook_ko}\n\n"
@@ -1367,17 +1942,8 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
         raise RuntimeError("ffmpeg executable not found in PATH")
 
     pages_to_render = list(script_doc["pages"])
-    if len(pages_to_render) > 12 and not max_pages:
-        ranges = compute_pedagogical_scene_ranges(len(doc), max_scenes=12)
-        grouped = []
-        for s_idx, (f_start, f_end) in enumerate(ranges, 1):
-            # pick the representative page entry closest to f_end
-            rep = next((x for x in pages_to_render if x["page"] == f_end), pages_to_render[min(len(pages_to_render)-1, f_end-1)])
-            g_item = dict(rep)
-            g_item["scene_index"] = s_idx
-            g_item["frame_range"] = [f_start, f_end]
-            grouped.append(g_item)
-        pages_to_render = grouped
+    # Curated scripts (e.g. 2014111901, 2014111902, 2017090101, math20250130001) and mathteacher-generated scripts
+    # already have exact 1-based page ordering and frame_range. Never re-group with 0-based f_end-1!
     if max_pages:
         pages_to_render = pages_to_render[:max_pages]
 
@@ -1395,7 +1961,7 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
     try:
         # [v4.0 Climax-First 3-Second Cold Open (Segment 0)]
         # 시작 즉시 가장 완성된 클라이맥스 기하 도형을 먼저 보여주며 호기심 유발 질문으로 첫 3초 이탈을 원천 차단합니다!
-        cold_text = vprof["cold_open_en"] if lang_code == "en" else vprof["cold_open_ko"]
+        cold_text = build_topic_cold_open(script_doc, lang_code=lang_code)
         climax_doc_idx = max(0, len(doc) - 2)
         climax_info = dict(pages_to_render[-1])
         climax_info["page"] = climax_doc_idx + 1
@@ -1709,17 +2275,17 @@ def build_question_classroom_page_text(slug_key, p_info, idx, total_pages, scrip
         if idx == 0:
             return f"1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? {clean_q} {base_clean}"
         elif idx == total_pages - 1:
-            return f"마지막 {idx+1}단계, 조건 변형 질문입니다! {base_clean} 만약 여기서 도형의 조건을 하나 바꾼다면 어떤 새로운 정리가 탄생할지 직접 질문하고 실험해 보세요!"
+            return f"마지막 {idx+1}단계, 조건 변형 질문입니다! {base_clean} 만약 여기서 주어진 수나 조건을 하나 바꾼다면 어떤 새로운 법칙이 탄생할지 직접 질문하고 실험해 보세요!"
         else:
-            return f"{idx+1}단계 탐구 발문입니다! {clean_q} 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. {base_clean}"
+            return f"{idx+1}단계 탐구 발문입니다! {clean_q} 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. {base_clean}"
     else:
         base_clean = re.sub(r"^Step\s+\d+[.,]?\s*", "", base_narr, flags=re.I).strip()
         if idx == 0:
             return f"Step 1, Question-Asking Classroom! Let us ask first: {clean_q} {base_clean}"
         elif idx == total_pages - 1:
-            return f"Final Step {idx+1}, What-If-Not Challenge! {base_clean} What if we modify one condition of this figure? Pose your own question on mathedu!"
+            return f"Final Step {idx+1}, What-If-Not Challenge! {base_clean} What if we modify one condition here? Pose your own question on mathedu!"
         else:
-            return f"Step {idx+1} Socratic Question: {clean_q} Pause and observe the figure: {base_clean}"
+            return f"Step {idx+1} Socratic Question: {clean_q} Pause and observe the step carefully: {base_clean}"
 
 
 def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_code, q_narration, show_spotlight=True):
@@ -1799,18 +2365,14 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
     try:
         chime_wav = ensure_harmonic_chime_wav()
         ambient_wav = ensure_ambient_pad_wav()
-        clean_title_ko = re.sub(r"\$[^\$]*\$", "", script_doc.get("title", "")).strip()
+        clean_title_ko = clean_math_for_speech_ko(split_bilingual_title(script_doc.get("title", ""))[0])
         clean_title_en = (script_doc.get("title_en") or clean_title_ko).strip()
 
-        # 0. 질문하는 수업 전용 오프닝 (Notice & Wonder 발문 훅)
+        # 0. 질문하는 수업 전용 오프닝 (Notice & Wonder 발문 훅 — 주제 맞춤형)
         climax_doc_idx = max(0, len(doc) - 2)
         climax_info = dict(pages_to_render[-1])
         climax_info["page"] = climax_doc_idx + 1
-        cold_q_text = (
-            f"질문하는 수학 수업 시간입니다! 오늘의 주제는 {clean_title_ko}입니다. 공식을 외우기 전에 화면의 완성된 도형을 보며 스스로 질문해 보세요. 도형이 움직여도 절대 변하지 않는 불변량은 무엇일까요? 그리고 어떤 보조선 한 줄이 그 비밀을 풀어줄까요?"
-            if lang_code == "ko"
-            else f"Welcome to the Question-Asking Math Classroom! Today we explore {clean_title_en}. Before memorizing any formula, ask yourself: what stays invariant in this figure, and which single auxiliary line unlocks the proof?"
-        )
+        cold_q_text = build_topic_cold_open(script_doc, lang_code=lang_code)
         cold_img_1 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=False)
         cold_img_2 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=True)
         c_p1 = tmp_dir / "qcold_01.png"
@@ -2103,6 +2665,116 @@ def find_google_client_secret():
     return None
 
 
+def get_deleted_video_ids_set():
+    dq_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
+    if not dq_path.exists():
+        return set()
+    try:
+        data = json.loads(dq_path.read_text(encoding="utf-8"))
+        return set(data.get("pending_delete_video_ids") or []) | set(data.get("deleted_video_ids") or [])
+    except Exception:
+        return set()
+
+
+def process_youtube_delete_queue():
+    """
+    [불일치 영상 자동 삭제 엔진 (YouTube Data API v3)]
+    video_lectures/youtube_delete_queue.json의 pending_delete_video_ids에 등록된 불일치 영상들을
+    @min7014_ai 채널에서 즉시 삭제(youtube.videos().delete)합니다.
+    """
+    dq_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
+    if not dq_path.exists():
+        return 0
+    try:
+        dq = json.loads(dq_path.read_text(encoding="utf-8"))
+    except Exception:
+        return 0
+    pending = list(dq.get("pending_delete_video_ids") or [])
+    if not pending:
+        return 0
+
+    youtube, active_token_path = get_available_youtube_upload_service()
+    if youtube is None:
+        return 0
+
+    deleted_done = list(dq.get("deleted_video_ids") or [])
+    still_pending = []
+    deleted_now = 0
+    for idx, vid_id in enumerate(pending):
+        try:
+            youtube.videos().delete(id=vid_id).execute()
+            deleted_done.append(vid_id)
+            deleted_now += 1
+            print(f"🗑️ [YouTube Mismatched Video Deleted from @min7014_ai] {vid_id}", flush=True)
+        except Exception as e:
+            err_s = str(e)
+            if "videoNotFound" in err_s or "404" in err_s:
+                deleted_done.append(vid_id)
+            elif "quotaExceeded" in err_s or "rateLimitExceeded" in err_s:
+                mark_token_quota_exhausted(active_token_path, 900)
+                still_pending.extend(pending[idx:])
+                break
+            else:
+                still_pending.append(vid_id)
+
+    dq["pending_delete_video_ids"] = still_pending
+    dq["deleted_video_ids"] = sorted(list(set(deleted_done)))
+    dq_path.write_text(json.dumps(dq, ensure_ascii=False, indent=2), encoding="utf-8")
+    return deleted_now
+
+
+def verify_video_content_integrity(slug_key: str) -> dict:
+    r"""
+    [수석 수학교사(mathteacher) 영상-내용 일치 무결성 검증 게이트]
+    렌더링된 영상/대본/자막이 실제 PDF 주제 및 슬라이드 순서와 100% 일치하는지 검증합니다:
+      1) 제목에 빈 괄호 '()' 또는 미변환 LaTeX('$', '\times', '\div', '\sqrt')가 없는가?
+      2) 첫 번째 본문 장면(Scene 1)이 마지막 페이지('마지막', 'N페이지입니다')로 점프하지 않고 1단계/1페이지로 정상 시작하는가?
+      3) 대수·수체계(제곱근·지수·유리수·소수) 주제에 엉뚱한 원주각/원 위의 점/복소수/다항식 나눗셈 문구가 섞이지 않았는가?
+    """
+    sp = SCRIPTS_DIR / f"{slug_key}.json"
+    if not sp.exists():
+        return {"ok": False, "reason": "script_missing"}
+    sdoc = json.loads(sp.read_text(encoding="utf-8"))
+    pages = sdoc.get("pages") or []
+    if not pages:
+        return {"ok": False, "reason": "pages_empty"}
+
+    # 1) Scene 1 ordering check
+    p1 = pages[0]
+    if p1.get("page", 1) != 1:
+        return {"ok": False, "reason": f"scene_1_wrong_page:{p1.get('page')}"}
+
+    srt_ko = YT_PKG_DIR / f"{slug_key}_ko.srt"
+    if srt_ko.exists():
+        srt_txt = srt_ko.read_text(encoding="utf-8")
+        # Block 2 in SRT is Scene 1 (after Cold Open)
+        blocks = [b.strip() for b in srt_txt.strip().split("\n\n") if b.strip()]
+        if len(blocks) >= 2:
+            b2 = blocks[1]
+            if f"{len(pages)}페이지입니다" in b2 or f"마지막 {len(pages)}단계" in b2:
+                return {"ok": False, "reason": "srt_scene_1_narrates_last_page"}
+
+    # 2) Content domain alignment check
+    t_an = sdoc.get("teacher_proof_analysis") or {}
+    cat = t_an.get("category_type", "")
+    all_narr = " ".join(p.get("explanation_text", "") for p in pages)
+    if cat in ("algebra", "number"):
+        for forbidden in ("원 위의 점을 아무리", "한 호에 대한 원주각", "복소수", "다항식 나눗셈", "비스듬한 책받침"):
+            if forbidden in all_narr:
+                return {"ok": False, "reason": f"domain_mismatch:{forbidden}"}
+
+    # 3) Meta title check
+    meta_p = YT_PKG_DIR / f"{slug_key}_youtube_meta.json"
+    if meta_p.exists():
+        mdata = json.loads(meta_p.read_text(encoding="utf-8"))
+        for lc in ("ko", "en"):
+            mt = (mdata.get(lc) or {}).get("title", "")
+            if "()" in mt or "$" in mt or "<" in mt or ">" in mt:
+                return {"ok": False, "reason": f"invalid_meta_title_{lc}:{mt}"}
+
+    return {"ok": True, "reason": "verified"}
+
+
 def sync_youtube_channel_rss():
     """https://www.youtube.com/@min7014_ai (UCSlqQfOEtRfJuMPyGMLgFYA) 공개 RSS 피드를 조회하여 업로드된 한국어·영어 영상을 자동 매칭합니다."""
     import xml.etree.ElementTree as ET
@@ -2117,11 +2789,12 @@ def sync_youtube_channel_rss():
                 "yt": "http://www.youtube.com/xml/schemas/2015",
                 "media": "http://search.yahoo.com/mrss/",
             }
+            blocked_vids = get_deleted_video_ids_set()
             for entry in root.findall("atom:entry", ns):
                 vid_el = entry.find("yt:videoId", ns)
                 title_el = entry.find("atom:title", ns)
                 desc_el = entry.find("media:group/media:description", ns)
-                if vid_el is not None and title_el is not None:
+                if vid_el is not None and title_el is not None and vid_el.text.strip() not in blocked_vids:
                     entries.append({
                         "video_id": vid_el.text.strip(),
                         "title": (title_el.text or "").strip(),
@@ -2135,7 +2808,7 @@ def sync_youtube_channel_rss():
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         sdoc = json.loads(sp.read_text(encoding="utf-8"))
         slug = sdoc["slug"]
-        title_ko = re.sub(r"\$[^\$]*\$", "", sdoc.get("title", "")).strip()
+        title_ko = split_bilingual_title(sdoc.get("title", ""))[0]
         title_en = (sdoc.get("title_en") or "").strip()
         found_ko = None
         found_en = None
@@ -2750,6 +3423,7 @@ def auto_pipeline_batch(count=1, specific_slug=None, privacy="public", upload_en
 def update_video_catalog():
     scripts = []
     short_by_slug = {}
+    blocked_ids = get_deleted_video_ids_set()
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         with open(sp, "r", encoding="utf-8") as f:
             sdoc = json.load(f)
@@ -2758,6 +3432,19 @@ def update_video_catalog():
         yt_pkgs = sdoc.get("youtube_packages") or {}
         shorts_urls = sdoc.get("shorts_urls") or {"ko": "", "en": ""}
         shorts_pkgs = sdoc.get("shorts_packages") or {}
+        q_yt_urls = sdoc.get("question_youtube_urls") or {"ko": "", "en": ""}
+        q_shorts_urls = sdoc.get("question_shorts_urls") or {"ko": "", "en": ""}
+        q_pkgs = sdoc.get("question_classroom_packages") or {}
+        q_shorts_pkgs = sdoc.get("question_shorts_packages") or {}
+        sdoc_dirty = False
+        for d_map in (yt_urls, shorts_urls, q_yt_urls, q_shorts_urls):
+            for _lc in ("ko", "en"):
+                _val = d_map.get(_lc) or ""
+                if _val and any(bid in _val for bid in blocked_ids):
+                    d_map[_lc] = ""
+                    sdoc_dirty = True
+        if sdoc_dirty:
+            sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
 
         # 로컬에 생성된 숏폼(youtube_uploads/shorts -> video_lectures/shorts/{slug}_short_{lc}.mp4) 자동 동기화
         for lc in ["ko", "en"]:
@@ -2809,6 +3496,8 @@ def update_video_catalog():
             },
             "youtube_urls": yt_urls,
             "shorts_urls": shorts_urls,
+            "question_youtube_urls": q_yt_urls,
+            "question_shorts_urls": q_shorts_urls,
             "youtube_packages": {
                 k: {
                     "title": v.get("title", ""),
@@ -2820,6 +3509,8 @@ def update_video_catalog():
                 for k, v in yt_pkgs.items()
             },
             "shorts_packages": shorts_pkgs,
+            "question_classroom_packages": q_pkgs,
+            "question_shorts_packages": q_shorts_pkgs,
         })
     with open(CATALOG_PATH, "w", encoding="utf-8") as f:
         json.dump(scripts, f, ensure_ascii=False, indent=2)
@@ -3184,15 +3875,21 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
     [유튜브 숏폼(#Shorts) 전용 고클릭률 제목·설명·태그 메타데이터 패키지 생성]
     """
     slug = sdoc["slug"]
-    clean_ko = latex_to_unicode_title(sdoc["title"])
-    clean_en = (sdoc.get("title_en") or clean_ko).strip()
+    clean_ko = latex_to_unicode_title(split_bilingual_title(sdoc["title"])[0])
+    clean_en = latex_to_unicode_title((sdoc.get("title_en") or split_bilingual_title(sdoc["title"])[1] or clean_ko).strip())
     viral_hooks = sdoc.get("viral_hooks") or {}
     yt_urls = sdoc.get("youtube_urls") or {}
     full_yt = yt_urls.get(lang_code) or yt_urls.get("ko") or "https://www.youtube.com/@min7014_ai"
     board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
+    cat_type = (sdoc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
 
     if lang_code == "ko":
-        hook_ko = (viral_hooks.get("ko") or f"보조선 한 줄의 마법! {clean_ko} 45초 시각적 증명").strip()
+        default_hook_ko = (
+            f"수학교사의 단계별 원리 해부! {clean_ko} 45초 완성"
+            if cat_type in ("algebra", "number")
+            else f"보조선 한 줄의 마법! {clean_ko} 45초 시각적 증명"
+        )
+        hook_ko = (viral_hooks.get("ko") or default_hook_ko).strip()
         short_title = f"🔥 {hook_ko} | {clean_ko} #Shorts #수학"
         if len(short_title) > 98:
             short_title = f"🔥 {clean_ko} — 45초 시각적 수학 증명 하이라이트 #Shorts #수학"
@@ -3508,18 +4205,18 @@ def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs
       전체 5장면이 42~53초(<58초) 안에 완결되도록 구성합니다.
     """
     txt = re.sub(r"\s+", " ", (raw_narr or "")).strip()
-    q_clean = re.sub(r"\s+", " ", (step_q or "")).strip()
+    q_clean = re.sub(r"^[^\]]+\]\s*", "", re.sub(r"\s+", " ", (step_q or "")).strip()).strip()
     if lang_code == "ko":
         sents = [s.strip() for s in re.split(r"(?<=[.?!다요죠])\s+", txt) if s.strip()]
         core_ans = sents[-1] if sents else txt[:55]
         if len(core_ans) > 58:
             core_ans = core_ans[:56].rsplit(" ", 1)[0] + "."
         if seq_idx == 1:
-            q_short = f"잠깐! {clean_title}에서 무엇이 끝까지 변하지 않을까요?"
+            q_short = f"잠깐! {clean_title}, 왜 항상 성립할까요?"
         elif seq_idx == total_seqs:
-            q_short = "만약 이 도형의 조건을 바꾸면 어떤 새 정리가 탄생할까요?"
+            q_short = "만약 여기서 주어진 조건 하나를 바꾸면 어떤 새 법칙이 될까요?"
         else:
-            q_short = q_clean if len(q_clean) <= 44 else "여기서 떨어진 조건을 잇는 첫 보조선은 어디일까요?"
+            q_short = q_clean if len(q_clean) <= 48 else "직전 단계와 비교해 새로 추가된 핵심 단서는 무엇일까요?"
         return f"{q_short} ... 정답 단서! {core_ans}"
     else:
         sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
@@ -3527,11 +4224,11 @@ def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs
         if len(core_ans) > 90:
             core_ans = core_ans[:86].rsplit(" ", 1)[0] + "."
         if seq_idx == 1:
-            q_short = f"Wait! What stays invariant in {clean_title}?"
+            q_short = f"Wait! Why does {clean_title} always hold?"
         elif seq_idx == total_seqs:
-            q_short = "What if we change one condition of this figure?"
+            q_short = "What if we change one condition here?"
         else:
-            q_short = q_clean if len(q_clean) <= 65 else "Which auxiliary line connects these hidden clues?"
+            q_short = q_clean if len(q_clean) <= 68 else "What new mathematical clue bridges this step?"
         return f"{q_short} ... Visual clue! {core_ans}"
 
 
@@ -4498,6 +5195,8 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
             now_ts = time.time()
             if now_ts - last_api_upload_try >= 300:
                 last_api_upload_try = now_ts
+                # [Priority -1] 불일치 판정된 기존 유튜브 영상(youtube_delete_queue.json) 최우선 삭제!
+                process_youtube_delete_queue()
                 priority_5_shorts = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
                 newly_uploaded_batch = 0
 
@@ -4568,6 +5267,22 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
 
+                        q_yt_urls = sdoc.get("question_youtube_urls") or {}
+                        if not (q_yt_urls.get("ko") or "").strip() and (QUESTION_CLASSROOM_DIR / f"{slug_k}_q_ko.mp4").exists():
+                            res_qv2 = upload_question_classroom_to_youtube(slug_k, langs=("ko",), privacy="public")
+                            if res_qv2.get("ko"):
+                                newly_uploaded_batch += 1
+                            if _LAST_UPLOAD_QUOTA_BLOCKED:
+                                break
+
+                        q_sh_urls = sdoc.get("question_shorts_urls") or {}
+                        if not (q_sh_urls.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_q_ko.mp4").exists():
+                            res_qs2 = upload_question_short_to_youtube(slug_k, langs=("ko",), privacy="public")
+                            if res_qs2.get("ko"):
+                                newly_uploaded_batch += 1
+                            if _LAST_UPLOAD_QUOTA_BLOCKED:
+                                break
+
                 if newly_uploaded_batch > 0:
                     try:
                         boost_youtube_channel_popularity()
@@ -4617,6 +5332,9 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         sh_p = YT_UPLOADS_DIR / "shorts" / f"{next_slug}_short_{lc}.mp4"
                         if not sh_p.exists():
                             render_youtube_short_vertical(next_slug, lang_code=lc)
+                        qsh_p = ROOT_DIR / "video_lectures" / "shorts" / f"{next_slug}_short_q_{lc}.mp4"
+                        if not qsh_p.exists():
+                            render_question_short_vertical(next_slug, lang_code=lc)
                     update_video_catalog()
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)

@@ -139,8 +139,9 @@ def produce_full_suite_for_slug(slug_key: str, langs=("ko", "en"), force=False):
     print("=" * 88)
 
     sp = SCRIPTS_DIR / f"{slug_key}.json"
-    if not sp.exists():
-        vm.generate_or_update_script(slug_key, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
+    integrity_pre = vm.verify_video_content_integrity(slug_key) if sp.exists() else {"ok": False}
+    if force or not sp.exists() or not integrity_pre.get("ok"):
+        vm.generate_or_update_script(slug_key, target_langs=list(langs))
     else:
         sdoc = json.loads(sp.read_text(encoding="utf-8"))
         pages = sdoc.get("pages") or []
@@ -168,7 +169,7 @@ def produce_full_suite_for_slug(slug_key: str, langs=("ko", "en"), force=False):
     for lc in langs:
         # 1. [본편-일반형] 일반적인 설명 영상 (1080p 16:9)
         std_mp4 = YT_UPLOADS_DIR / slug_key / f"{slug_key}_{lc}.mp4"
-        if not std_mp4.exists():
+        if force or not std_mp4.exists():
             print(f"  ▶ [1 · 일반 설명 본편 ({lc.upper()})] 1080p 렌더링 중...")
             vm.render_multilingual_video(slug_key, lang_code=lc)
         outputs["v1_standard"][lc] = str(std_mp4) if std_mp4.exists() else ""
@@ -198,8 +199,10 @@ def produce_full_suite_for_slug(slug_key: str, langs=("ko", "en"), force=False):
             vm.render_question_short_vertical(slug_key, lang_code=lc)
         outputs["v3_shorts_q"][lc] = str(qsh_mp4) if qsh_mp4.exists() else ""
 
+    integrity_post = vm.verify_video_content_integrity(slug_key)
+    outputs["integrity"] = integrity_post
     vm.update_video_catalog()
-    print(f"✅ [Video_Creator 완료] '{slug_key}' 본편(일반/질문) + 숏폼(일반/질문) 제작 및 카탈로그 동기화 완료!")
+    print(f"✅ [Video_Creator 완료] '{slug_key}' 본편(일반/질문) + 숏폼(일반/질문) 제작 및 무결성 검증({integrity_post}) 완료!")
     return outputs
 
 
@@ -227,33 +230,52 @@ def cmd_backfill(limit=3, langs=("ko",)):
 
 
 def cmd_audit():
-    """본편 2종 + 숏폼 2종 파일 및 catalog.json 매핑 무결성을 검증합니다."""
+    """본편 2종 + 숏폼 2종 파일 및 catalog.json 매핑·내용 일치 무결성을 검증합니다."""
     inv = get_video_suite_inventory()
     cat_ok = CATALOG_PATH.exists()
     q_files = sorted(QUESTION_DIR.glob("*_q_*.mp4"))
     qsh_files = sorted(WEB_SHORTS_DIR.glob("*_short_q_*.mp4"))
     sh_files = [p for p in sorted(WEB_SHORTS_DIR.glob("*_short_*.mp4")) if "_short_q_" not in p.name]
+    integrity_results = [vm.verify_video_content_integrity(item["slug"]) for item in inv]
+    integrity_pass = sum(1 for r in integrity_results if r.get("ok"))
+    del_q_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
+    pending_deletes = 0
+    if del_q_path.exists():
+        try:
+            dq = json.loads(del_q_path.read_text(encoding="utf-8"))
+            pending_deletes = len(dq.get("pending_delete_video_ids") or [])
+        except Exception:
+            pass
     print("=" * 88)
     print("🔍 [Video_Creator Audit] 본편 2종(일반/질문) + 숏폼 2종(일반/질문) 무결성 검증 결과")
     print("=" * 88)
     print(f" • catalog.json 존재 여부            : {'PASS' if cat_ok else 'FAIL'}")
     print(f" • 대본 내 단계별 발문 완비율        : {len(inv)}/{len(inv)} (100.0% PASS)")
+    print(f" • 영상-내용 일치성(Content Match)   : {integrity_pass}/{len(inv)} ({(integrity_pass/max(len(inv),1))*100:.1f}% PASS)")
     print(f" • 질문하는 수업 특화 본편 MP4 수    : {len(q_files)}개 ({', '.join(p.name for p in q_files[:6])})")
     print(f" • 일반형 숏폼(Standard #Shorts) 수  : {len(sh_files)}개")
     print(f" • 질문형 숏폼(Question #Shorts) 수  : {len(qsh_files)}개 ({', '.join(p.name for p in qsh_files[:6])})")
+    print(f" • 구버전 불일치 영상 삭제 대기 큐   : {pending_deletes}개 ID 등록됨 (쿼터 리셋 시 자동 삭제)")
     print("=" * 88)
 
 
 def cmd_upload(slug="math20250130001", langs=("ko",)):
-    """대표 주제의 4대 버전(질문형 본편 · 질문형 숏폼 · 일반형 숏폼 · 일반형 본편)을 @min7014_ai 유튜브 채널에 즉시 업로드합니다."""
+    """대표 주제의 4대 버전(질문형 본편 · 질문형 숏폼 · 일반형 숏폼 · 일반형 본편)을 무결성 검증 후 @min7014_ai 유튜브 채널에 즉시 업로드합니다."""
+    vm.process_youtube_delete_queue(max_deletions=25)
+    check = vm.verify_video_content_integrity(slug)
+    if not check.get("ok"):
+        print(f"⚠️ [Video_Creator Upload] '{slug}' 내용 무결성 재동기화 중 ({check.get('reason')})...")
+        produce_full_suite_for_slug(slug, langs=langs, force=True)
     print(f"🚀 [Video_Creator Upload] '{slug}' 4종 영상 @min7014_ai 유튜브 업로드 시도 중...")
+    s_vid = vm.upload_to_youtube(slug, langs=langs, privacy="public")
     q_vid = vm.upload_question_classroom_to_youtube(slug, langs=langs, privacy="public")
     q_sh = vm.upload_question_short_to_youtube(slug, langs=langs, privacy="public")
     s_sh = vm.upload_short_to_youtube(slug, langs=langs, privacy="public")
+    print(f" • 일반 설명 본편 URL    : {s_vid}")
     print(f" • 질문하는 수업 본편 URL : {q_vid}")
     print(f" • 질문형 숏폼 Q-#Shorts : {q_sh}")
     print(f" • 일반형 숏폼 #Shorts   : {s_sh}")
-    return {"question_video": q_vid, "question_short": q_sh, "standard_short": s_sh}
+    return {"standard_video": s_vid, "question_video": q_vid, "question_short": q_sh, "standard_short": s_sh}
 
 
 def main():

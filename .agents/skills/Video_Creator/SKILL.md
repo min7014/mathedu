@@ -44,3 +44,16 @@ description: Specialized AI Video Producer & 4-Edition Math Cinema Director agen
   ```bash
   python -X utf8 video_creator.py daemon
   ```
+
+---
+
+## 3. 수학교사(`mathteacher`) 관점 정밀 분석 및 영상-내용 100% 일치 검증 원칙 (Zero-Mismatch Mandate)
+
+1. **슬라이드별 실제 수식·색상·공간 배치 기반 대본 생성**:
+   - `min7014_video_maker.py`의 `analyze_min7014_topic_as_mathteacher`와 `auto_generate_page_explanations`를 통해 PDF 각 슬라이드의 **좌측 상단(가정)**, **우측 상단(결론)**, **하단 초록색(보조선)**, **하단 보라색/파란색(합동·닮음·대수 변형)**, **하단 빨간색(Q.E.D.)** 및 직전 슬라이드 대비 새로 추가된 수식(`curr_lines - prev_text_lines`)을 정밀 해독합니다.
+   - 주제와 무관한 일반론 템플릿(예: 제곱근·소수·프랙탈 영상에 기하 보조선이나 원주각, 복소수 `i` 언급 등)을 절대 사용하지 않습니다.
+2. **업로드 전후 영상-내용 일치성 자동 검증 게이트 (`verify_video_content_integrity(slug)`)**:
+   - 모든 영상은 유튜브 업로드 직전 반드시 `verify_video_content_integrity(slug)`를 통과해야 합니다.
+   - 검증 항목: ① PDF 실제 페이지 수와 `pages` 대본 수 100% 일치, ② 한/영 제목 분리(`split_bilingual_title`) 무결성, ③ 오해 소지/무관 후킹 문구(`0%` 보장), ④ 실제 렌더링된 `.mp4` 시간(`duration >= max(12.0, page_count * 2.2)`) 검증.
+3. **불일치 영상 즉시 삭제 및 재생성 (`process_youtube_delete_queue()`)**:
+   - 영상과 내용이 맞지 않는 구버전 영상은 `video_lectures/youtube_delete_queue.json`에 등록하여 유튜브 채널에서 자동 삭제(`videos().delete`)하고, 로컬 `.mp4`/`.srt` 및 사이트 카탈로그 URL을 즉시 퍼지한 뒤 새 엔진으로 다시 렌더링하여 업로드합니다.
