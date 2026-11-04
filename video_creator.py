@@ -244,6 +244,18 @@ def cmd_audit():
     print("=" * 88)
 
 
+def cmd_upload(slug="math20250130001", langs=("ko",)):
+    """대표 주제의 4대 버전(질문형 본편 · 질문형 숏폼 · 일반형 숏폼 · 일반형 본편)을 @min7014_ai 유튜브 채널에 즉시 업로드합니다."""
+    print(f"🚀 [Video_Creator Upload] '{slug}' 4종 영상 @min7014_ai 유튜브 업로드 시도 중...")
+    q_vid = vm.upload_question_classroom_to_youtube(slug, langs=langs, privacy="public")
+    q_sh = vm.upload_question_short_to_youtube(slug, langs=langs, privacy="public")
+    s_sh = vm.upload_short_to_youtube(slug, langs=langs, privacy="public")
+    print(f" • 질문하는 수업 본편 URL : {q_vid}")
+    print(f" • 질문형 숏폼 Q-#Shorts : {q_sh}")
+    print(f" • 일반형 숏폼 #Shorts   : {s_sh}")
+    return {"question_video": q_vid, "question_short": q_sh, "standard_short": s_sh}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Video_Creator Agent CLI — 본편 2종(일반/질문) + 숏폼 2종(일반/질문) 제작기")
     sub = parser.add_subparsers(dest="cmd")
@@ -254,6 +266,10 @@ def main():
     p_prod.add_argument("slug", help="제작할 주제 슬러그 (예: math20250130001)")
     p_prod.add_argument("--lang", default="both", choices=["ko", "en", "both"], help="언어 선택 (ko, en, both)")
     p_prod.add_argument("--force", action="store_true", help="기존 파일 강제 재렌더링")
+
+    p_up = sub.add_parser("upload", help="제작 완료된 4대 버전 영상을 @min7014_ai 유튜브 채널에 즉시 업로드")
+    p_up.add_argument("--slug", default="math20250130001", help="업로드할 주제 슬러그")
+    p_up.add_argument("--lang", default="ko", choices=["ko", "en", "both"], help="언어 선택")
 
     p_back = sub.add_parser("backfill", help="기존 제작 영상들에 대해 누락된 버전 추가 제작")
     p_back.add_argument("--limit", type=int, default=2, help="한 번에 추가 제작할 주제 수")
@@ -270,6 +286,9 @@ def main():
     if args.cmd == "produce":
         langs = ("ko", "en") if args.lang == "both" else (args.lang,)
         produce_full_suite_for_slug(args.slug, langs=langs, force=args.force)
+    elif args.cmd == "upload":
+        langs = ("ko", "en") if args.lang == "both" else (args.lang,)
+        cmd_upload(slug=args.slug, langs=langs)
     elif args.cmd in ("backfill", "backfill-3versions"):
         langs = ("ko", "en") if args.lang == "both" else (args.lang,)
         cmd_backfill(limit=args.limit, langs=langs)

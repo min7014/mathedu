@@ -3884,6 +3884,180 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
             break
     return uploaded_shorts
 
+
+
+def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="public"):
+    """
+    [Edition 2: 질문하는 수업 특화 본편 (1080p 16:9) YouTube Data API v3 자동 업로더]
+    - video_lectures/question_classroom/{slug}_q_{lc}.mp4를 @min7014_ai에 업로드하고
+      question_youtube_urls[lc]에 바인딩합니다.
+    """
+    global _LAST_UPLOAD_QUOTA_BLOCKED
+    _LAST_UPLOAD_QUOTA_BLOCKED = False
+    from googleapiclient.http import MediaFileUpload
+
+    script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    if not script_path.exists():
+        generate_or_update_script(slug_key)
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+    uploaded_q = {}
+    missing_langs = []
+    for lc in langs:
+        existing_u = (sdoc.get("question_youtube_urls") or {}).get(lc, "").strip()
+        if existing_u:
+            uploaded_q[lc] = existing_u
+        else:
+            missing_langs.append(lc)
+    if not missing_langs:
+        return uploaded_q
+
+    youtube, active_token_path = get_available_youtube_upload_service()
+    if youtube is None:
+        _LAST_UPLOAD_QUOTA_BLOCKED = True
+        return uploaded_q
+
+    for lc in missing_langs:
+        q_mp4 = QUESTION_CLASSROOM_DIR / f"{slug_key}_q_{lc}.mp4"
+        if not q_mp4.exists():
+            render_question_classroom_video(slug_key, lang_code=lc)
+        title_base = sdoc.get("title") if lc == "ko" else (sdoc.get("title_en") or sdoc.get("title"))
+        clean_t = clean_math_for_speech_ko(title_base) if lc == "ko" else clean_math_for_speech_en(title_base)
+        q_title = (
+            f"❓ [질문하는 수학 수업] {clean_t[:42]} — 스스로 발문하고 발견하는 시각적 증명! | @min7014_ai"
+            if lc == "ko"
+            else f"❓ [Question-Asking Math] {clean_t[:42]} — Socratic Visual Proof! | @min7014_ai"
+        )[:98]
+        board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&mode=question"
+        q_desc = (
+            f"❓ [질문하는 수학 수업 (Question-Asking Classroom Edition)]\n"
+            f"주제: {title_base} [ID: {slug_key}_Q_{lc.upper()}]\n\n"
+            f"1단계(Phase 1): 핵심 발문과 사고 멈춤 시간(Thinking Pause)을 통해 먼저 스스로 보조선과 불변량을 추론합니다.\n"
+            f"2단계(Phase 2): 동적 기하 스포트라이트와 함께 왜 정리가 성립하는지 눈으로 확인합니다.\n\n"
+            f"👉 [수학홈페이지 질문하는 수업 인터랙티브 실험실 바로가기]: {board_link}\n"
+            f"👉 [민은기 선생님의 수학자료실 원본]: {sdoc.get('web_url', 'https://min7014.github.io/')}\n"
+            f"#질문하는수업 #수학증명 #기하학 #수능수학 #민은기선생님 #mathedu"
+        )
+        body = {
+            "snippet": {
+                "title": q_title,
+                "description": q_desc,
+                "tags": ["질문하는수업", "수학증명", "기하학", "소크라테스발문", "민은기선생님", "mathedu", slug_key],
+                "categoryId": "27",
+                "defaultLanguage": lc,
+                "defaultAudioLanguage": lc,
+            },
+            "status": {
+                "privacyStatus": privacy,
+                "selfDeclaredMadeForKids": False,
+            },
+        }
+        try:
+            media = MediaFileUpload(str(q_mp4), chunksize=-1, resumable=True, mimetype="video/mp4")
+            resp = youtube.videos().insert(part="snippet,status", body=body, media_body=media).execute()
+            vid_id = resp["id"]
+            q_url = f"https://youtu.be/{vid_id}"
+            uploaded_q[lc] = q_url
+            sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+            if "question_youtube_urls" not in sdoc or not isinstance(sdoc["question_youtube_urls"], dict):
+                sdoc["question_youtube_urls"] = {"ko": "", "en": ""}
+            sdoc["question_youtube_urls"][lc] = q_url
+            script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+            update_video_catalog()
+            print(f"🚀 [YouTube Question-Asking 1080p Uploaded ({lc.upper()})] {q_url}", flush=True)
+        except Exception as e:
+            err_s = str(e)
+            print(f"  ⚠️ [YouTube Question 1080p Upload Notice ({slug_key}/{lc})]: {e}", flush=True)
+            if "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s or "quotaExceeded" in err_s:
+                mark_token_quota_exhausted(active_token_path, 900)
+            break
+    return uploaded_q
+
+
+def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public"):
+    """
+    [Edition 3-B: 질문형 숏폼 (9:16 Q-#Shorts) YouTube Data API v3 자동 업로더]
+    - video_lectures/shorts/{slug}_short_q_{lc}.mp4를 @min7014_ai에 업로드하고
+      question_shorts_urls[lc]에 바인딩합니다.
+    """
+    global _LAST_UPLOAD_QUOTA_BLOCKED
+    _LAST_UPLOAD_QUOTA_BLOCKED = False
+    from googleapiclient.http import MediaFileUpload
+
+    script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    if not script_path.exists():
+        generate_or_update_script(slug_key)
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+    uploaded_qs = {}
+    missing_langs = []
+    for lc in langs:
+        existing_u = (sdoc.get("question_shorts_urls") or {}).get(lc, "").strip()
+        if existing_u:
+            uploaded_qs[lc] = existing_u
+        else:
+            missing_langs.append(lc)
+    if not missing_langs:
+        return uploaded_qs
+
+    youtube, active_token_path = get_available_youtube_upload_service()
+    if youtube is None:
+        _LAST_UPLOAD_QUOTA_BLOCKED = True
+        return uploaded_qs
+
+    for lc in missing_langs:
+        qsh_mp4 = ROOT_DIR / "video_lectures" / "shorts" / f"{slug_key}_short_q_{lc}.mp4"
+        if not qsh_mp4.exists():
+            render_question_short_vertical(slug_key, lang_code=lc)
+        title_base = sdoc.get("title") if lc == "ko" else (sdoc.get("title_en") or sdoc.get("title"))
+        clean_t = clean_math_for_speech_ko(title_base) if lc == "ko" else clean_math_for_speech_en(title_base)
+        qsh_title = (
+            f"❓ [질문형 숏폼] {clean_t[:36]} — 어디에 보조선을 그어야 할까? #Shorts | @min7014_ai"
+            if lc == "ko"
+            else f"❓ [Question #Shorts] {clean_t[:36]} — Where is the auxiliary line? #Shorts | @min7014_ai"
+        )[:98]
+        board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_qshorts"
+        qsh_desc = (
+            f"❓ [질문하는 수학 수업 숏폼 (Question-Asking #Shorts)] [ID: {slug_key}_SHORT_Q_{lc.upper()}]\n"
+            f"주제: {title_base}\n\n"
+            f"잠깐! 정답을 보기 전에 화면 상단의 질문 카드를 보고 어디에 보조선을 그어야 할지 3초만 생각해 보세요!\n"
+            f"👉 [1080p 질문하는 수업 풀버전 & GeoGebra 직접 조작하기]: {board_link}\n"
+            f"#Shorts #질문하는수업 #수학숏폼 #기하학 #보조선 #민은기선생님 #mathedu"
+        )
+        body = {
+            "snippet": {
+                "title": qsh_title,
+                "description": qsh_desc,
+                "tags": ["Shorts", "질문하는수업", "수학숏폼", "기하학", "민은기선생님", "mathedu", slug_key],
+                "categoryId": "27",
+                "defaultLanguage": lc,
+                "defaultAudioLanguage": lc,
+            },
+            "status": {
+                "privacyStatus": privacy,
+                "selfDeclaredMadeForKids": False,
+            },
+        }
+        try:
+            media = MediaFileUpload(str(qsh_mp4), chunksize=-1, resumable=True, mimetype="video/mp4")
+            resp = youtube.videos().insert(part="snippet,status", body=body, media_body=media).execute()
+            vid_id = resp["id"]
+            qsh_url = f"https://youtube.com/shorts/{vid_id}"
+            uploaded_qs[lc] = qsh_url
+            sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+            if "question_shorts_urls" not in sdoc or not isinstance(sdoc["question_shorts_urls"], dict):
+                sdoc["question_shorts_urls"] = {"ko": "", "en": ""}
+            sdoc["question_shorts_urls"][lc] = qsh_url
+            script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+            update_video_catalog()
+            print(f"🚀 [YouTube Question #Shorts Uploaded ({lc.upper()})] {qsh_url}", flush=True)
+        except Exception as e:
+            err_s = str(e)
+            print(f"  ⚠️ [YouTube Question #Shorts Upload Notice ({slug_key}/{lc})]: {e}", flush=True)
+            if "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s or "quotaExceeded" in err_s:
+                mark_token_quota_exhausted(active_token_path, 900)
+            break
+    return uploaded_qs
+
+
 def upload_shorts_via_studio_browser(slug_list=None, langs=("ko",), privacy="public"):
     """
     [Playwright 기반 @min7014_ai YouTube Studio 5대 #Shorts 무인 브라우저 업로더]
@@ -4309,6 +4483,27 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                 last_api_upload_try = now_ts
                 priority_5_shorts = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
                 newly_uploaded_batch = 0
+
+                # [Priority 0] 대표 질문하는 수업 본편(math20250130001_q_ko.mp4) 및 질문형 숏폼(math20250130001_short_q_ko.mp4) 최우선 업로드!
+                for q_prio_slug in ["math20250130001", "2014111902", "2014111901", "2017090101"]:
+                    sp_qp = SCRIPTS_DIR / f"{q_prio_slug}.json"
+                    if not sp_qp.exists():
+                        continue
+                    sdoc_qp = json.loads(sp_qp.read_text(encoding="utf-8"))
+                    q_yt_u = (sdoc_qp.get("question_youtube_urls") or {}).get("ko", "").strip()
+                    if not q_yt_u and (QUESTION_CLASSROOM_DIR / f"{q_prio_slug}_q_ko.mp4").exists():
+                        res_qv = upload_question_classroom_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
+                        if res_qv.get("ko"):
+                            newly_uploaded_batch += 1
+                        if _LAST_UPLOAD_QUOTA_BLOCKED:
+                            break
+                    q_sh_u = (sdoc_qp.get("question_shorts_urls") or {}).get("ko", "").strip()
+                    if not q_sh_u and (ROOT_DIR / "video_lectures" / "shorts" / f"{q_prio_slug}_short_q_ko.mp4").exists():
+                        res_qs = upload_question_short_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
+                        if res_qs.get("ko"):
+                            newly_uploaded_batch += 1
+                        if _LAST_UPLOAD_QUOTA_BLOCKED:
+                            break
 
                 # [Priority 1] 5대 대표 #Shorts 우선 업로드 보장
                 for p_slug in priority_5_shorts:

@@ -460,6 +460,26 @@ def cmd_philosophy(keyword: str = ""):
         print("-" * 84)
 
 
+
+def cmd_benchmark(keyword: str = ""):
+    ped = load_pedagogy_engine()
+    gba = ped.get("globalBenchmarkAcademy") or {}
+    print("=" * 88)
+    print(f"🌐 [mathteacher] {gba.get('title', '세계 5대 수학교육 플랫폼 벤치마킹 아카데미')}")
+    print("=" * 88)
+    for bp in gba.get("benchmarkedPlatforms", []):
+        if keyword and keyword.lower() not in str(bp).lower():
+            continue
+        print(f"■ [{bp['country']} · {bp['platform']}]")
+        print(f"  ⭐ 글로벌 강점 : {bp['coreStrength']}")
+        print(f"  🚀 mathedu 초월: {bp['matheduEvolution']}")
+        print("-" * 88)
+    print(f"🎢 [Desmos형 Marbleslides 함수 구슬 챌린지]: {len(gba.get('marbleslidesStages', []))}대 스테이지 탑재")
+    print(f"🧩 [Brilliant × NRICH형 낮은 문턱·높은 천장 퍼즐]: {len(gba.get('lowFloorHighCeilingTasks', []))}선 탑재")
+    print(f"🏛️ [Mathigon형 인류 수학사 타임라인]: {len(gba.get('mathematicianTimeline', []))}대 수학자 열전 탑재")
+    print("=" * 88)
+
+
 def cmd_question(keyword: str = ""):
     ped = load_pedagogy_engine()
     items = ped.get("questionAskingClassrooms", [])
@@ -570,6 +590,8 @@ def main():
         cmd_question(" ".join(sys.argv[2:]))
     elif sys.argv[1] == "philosophy":
         cmd_philosophy(" ".join(sys.argv[2:]))
+    elif sys.argv[1] == "benchmark":
+        cmd_benchmark(" ".join(sys.argv[2:]))
     elif sys.argv[1] == "expand":
         expand_pedagogy_from_min7014_vault(max_add_per_category=10)
         cmd_status()
