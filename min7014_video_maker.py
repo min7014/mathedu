@@ -2839,10 +2839,14 @@ def auto_pipeline_batch(count=1, specific_slug=None, privacy="public", upload_en
             q_mp4_p = ROOT_DIR / "video_lectures" / "question_classroom" / f"{s_key}_q_{lc}.mp4"
             if not q_mp4_p.exists():
                 render_question_classroom_video(s_key, lang_code=lc)
-            # [버전 3] 숏폼 영상 (9:16 #Shorts)
+            # [버전 3-A] 일반형 숏폼 영상 (9:16 Standard #Shorts)
             short_p = YT_UPLOADS_DIR / "shorts" / f"{s_key}_short_{lc}.mp4"
             if not short_p.exists():
                 render_youtube_short_vertical(s_key, lang_code=lc)
+            # [버전 3-B] 질문형 숏폼 영상 (9:16 Question-Asking #Shorts)
+            qshort_p = ROOT_DIR / "video_lectures" / "shorts" / f"{s_key}_short_q_{lc}.mp4"
+            if not qshort_p.exists():
+                render_question_short_vertical(s_key, lang_code=lc)
         update_video_catalog()
         uploaded = {}
         if upload_enable:
@@ -3412,7 +3416,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             # 상단 후킹 배너 + 진행률 게이지 바
             draw.rounded_rectangle((44, 58, 1036, 294), radius=28, fill=(23, 37, 84), outline=(56, 189, 248), width=3)
             draw.rounded_rectangle((74, 80, 610, 130), radius=18, fill=(225, 29, 72))
-            badge_txt = "❓ 질문하는 수학 · 45초 시각 증명 #Shorts" if lang_code == "ko" else "❓ Question-Driven Visual Proof #Shorts"
+            badge_txt = "⚡ 45초 시각적 수학 증명 #Shorts (일반형)" if lang_code == "ko" else "⚡ 45s Visual Math Proof #Shorts"
             draw.text((92, 88), badge_txt, fill=(255, 255, 255), font=font_sub)
 
             step_label = f"STEP {seq_idx}/{total_seqs}"
@@ -3455,16 +3459,10 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 doc_frames = sorted(list({doc_frames[int(round(k * step_df))] for k in range(6)}))
 
             draw.rounded_rectangle((44, 1345, 1036, 1795), radius=28, fill=(15, 23, 42), outline=(225, 29, 72), width=3)
-            if seq_idx == 1:
-                q_tag_ko, q_tag_en = "❓ 질문 1 · 관찰과 경이(Notice & Wonder)", "❓ Q1 · Notice & Wonder Hook"
-            elif seq_idx == total_seqs:
-                q_tag_ko, q_tag_en = "🔀 질문 확장 · 조건을 바꾸면?(What-If-Not)", "🔀 What-If-Not Inquiry Challenge"
-            else:
-                q_tag_ko, q_tag_en = f"🧭 발문 {seq_idx}/{total_seqs} · 어떤 보조선을 그을까?", f"🧭 Q{seq_idx}/{total_seqs} · Key Auxiliary Line"
             step_chip = (
-                f"{q_tag_ko} (p.{doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
+                f"💡 핵심 시각 증명 STEP {seq_idx}/{total_seqs} (PDF {doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
                 if lang_code == "ko"
-                else f"{q_tag_en} (p.{doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
+                else f"💡 Visual Proof STEP {seq_idx}/{total_seqs} (PDF {doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
             )
             draw.text((78, 1375), step_chip, fill=(251, 191, 36), font=font_sub)
             cap_lines = textwrap.wrap(short_narration, width=22 if lang_code == "ko" else 34)[:5]
@@ -3621,6 +3619,313 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
         update_video_catalog()
         print(f"📱 [YouTube Shorts 1080x1920 (<58s Verified) Generated] {out_short} ({round(dur, 1)}s) -> {short_meta['title']}")
         return out_short
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+
+
+def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs, clean_title, lang_code="ko"):
+    """
+    [질문형 숏폼(#Shorts) 전용 2-Beat 발문 ➔ 단서 내레이션 압축기]
+    - 각 장면을 '핵심 발문(Question) 제시 ➔ 직관적 단서(Visual Clue) 발견' 구조로 압축하여
+      전체 5장면이 42~53초(<58초) 안에 완결되도록 구성합니다.
+    """
+    txt = re.sub(r"\s+", " ", (raw_narr or "")).strip()
+    q_clean = re.sub(r"\s+", " ", (step_q or "")).strip()
+    if lang_code == "ko":
+        sents = [s.strip() for s in re.split(r"(?<=[.?!다요죠])\s+", txt) if s.strip()]
+        core_ans = sents[-1] if sents else txt[:55]
+        if len(core_ans) > 58:
+            core_ans = core_ans[:56].rsplit(" ", 1)[0] + "."
+        if seq_idx == 1:
+            q_short = f"잠깐! {clean_title}에서 무엇이 끝까지 변하지 않을까요?"
+        elif seq_idx == total_seqs:
+            q_short = "만약 이 도형의 조건을 바꾸면 어떤 새 정리가 탄생할까요?"
+        else:
+            q_short = q_clean if len(q_clean) <= 44 else "여기서 떨어진 조건을 잇는 첫 보조선은 어디일까요?"
+        return f"{q_short} ... 정답 단서! {core_ans}"
+    else:
+        sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
+        core_ans = sents[-1] if sents else txt[:85]
+        if len(core_ans) > 90:
+            core_ans = core_ans[:86].rsplit(" ", 1)[0] + "."
+        if seq_idx == 1:
+            q_short = f"Wait! What stays invariant in {clean_title}?"
+        elif seq_idx == total_seqs:
+            q_short = "What if we change one condition of this figure?"
+        else:
+            q_short = q_clean if len(q_clean) <= 65 else "Which auxiliary line connects these hidden clues?"
+        return f"{q_short} ... Visual clue! {core_ans}"
+
+
+def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
+    """
+    [질문형 유튜브 쇼츠 (Question-Asking #Shorts · 1080x1920 세로형 42~54초) 자동 제작기]
+    - 일반형 숏폼({slug}_short_{lang}.mp4)과 별도로 제작되는 '질문하는 수업 특화 숏폼'({slug}_short_q_{lang}.mp4)입니다.
+    - 상단 크림슨-골드 발문 카드(Notice & Wonder ➔ 소크라테스 보조선 발문 ➔ What-If-Not 조건 변형 질문)를 탑재하고,
+      각 스텝의 전반부 프레임에서는 '🙋 먼저 생각해 보세요!' 발문 배너를, 후반부 프레임에서는 '💡 시각적 단서 발견!'과
+      적색 보조선 스포트라이트를 제시합니다.
+    """
+    script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    if not script_path.exists():
+        generate_or_update_script(slug_key, target_langs=["ko", "en"])
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+    pages = sdoc["pages"]
+    n = len(pages)
+    if n <= 5:
+        picked_indices = list(range(n))
+    else:
+        picked_indices = sorted(list({0, max(1, n // 4), n // 2, min(n - 2, (3 * n) // 4), n - 1}))
+
+    pdf_bytes = urllib.request.urlopen(sdoc["pdf_url"]).read()
+    doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+    voice_name = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])["voice"]
+    ffmpeg_exe = shutil.which("ffmpeg")
+    ffprobe_exe = shutil.which("ffprobe")
+
+    shorts_dir = YT_UPLOADS_DIR / "shorts"
+    shorts_dir.mkdir(parents=True, exist_ok=True)
+    pub_short_dir = ROOT_DIR / "video_lectures" / "shorts"
+    pub_short_dir.mkdir(parents=True, exist_ok=True)
+    ready_shorts_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai_shorts"
+    ready_shorts_dir.mkdir(parents=True, exist_ok=True)
+    tmp_dir = Path(tempfile.mkdtemp(prefix=f"min7014_qshort_{slug_key}_{lang_code}_"))
+    segs = []
+
+    font_top = get_font_for_lang(lang_code, 42, bold=True)
+    font_sub = get_font_for_lang(lang_code, 28, bold=True)
+    font_q = get_font_for_lang(lang_code, 30, bold=True)
+    font_cap = get_font_for_lang(lang_code, 32, bold=True)
+
+    clean_title = (
+        (sdoc.get("title_en") or sdoc["title"])
+        if lang_code == "en"
+        else re.sub(r"\$[^\$]*\$", "", sdoc["title"]).strip()
+    )
+    total_seqs = len(picked_indices)
+
+    try:
+        for seq_idx, p_idx in enumerate(picked_indices, 1):
+            p_info = pages[p_idx]
+            p_num = p_info.get("page", p_idx + 1)
+            step_q = (
+                p_info.get("step_question_ko") or build_step_question_ko(clean_title, p_num, n)
+                if lang_code == "ko"
+                else p_info.get("step_question_en") or build_step_question_en(clean_title, p_num, n)
+            )
+
+            canvas = Image.new("RGB", (1080, 1920), (18, 12, 28))
+            draw = ImageDraw.Draw(canvas)
+
+            # 1) 상단 질문하는 수업 #Shorts 헤더 (y=48..268)
+            draw.rounded_rectangle((40, 48, 1040, 268), radius=26, fill=(76, 5, 25), outline=(251, 191, 36), width=3)
+            draw.rounded_rectangle((68, 68, 680, 116), radius=16, fill=(225, 29, 72))
+            badge_txt = "❓ 질문하는 수업 · 45초 발문 #Shorts" if lang_code == "ko" else "❓ Question-Asking Classroom #Shorts"
+            draw.text((86, 76), badge_txt, fill=(255, 255, 255), font=font_sub)
+
+            step_label = f"Q-STEP {seq_idx}/{total_seqs}"
+            draw.text((820, 76), step_label, fill=(254, 240, 138), font=font_sub)
+
+            title_lines = textwrap.wrap(clean_title, width=20 if lang_code == "ko" else 28)[:2]
+            for li, tl in enumerate(title_lines):
+                draw.text((72, 130 + li * 50), tl, fill=(255, 255, 255), font=font_top)
+
+            # 진행 게이지
+            draw.rounded_rectangle((68, 242, 1012, 254), radius=6, fill=(136, 19, 55))
+            prog_w = int(944 * (seq_idx / total_seqs))
+            draw.rounded_rectangle((68, 242, 68 + max(24, prog_w), 254), radius=6, fill=(251, 191, 36))
+
+            # 2) 상단-중앙 핵심 발문 플로팅 카드 (y=282..452)
+            draw.rounded_rectangle((40, 282, 1040, 452), radius=22, fill=(255, 241, 242), outline=(244, 63, 94), width=3)
+            if seq_idx == 1:
+                q_type_badge = "👁️ [1단계 관찰 질문 · Notice & Wonder]" if lang_code == "ko" else "👁️ [Stage 1 · Notice & Wonder Question]"
+            elif seq_idx == total_seqs:
+                q_type_badge = "🔀 [3단계 확장 질문 · What-If-Not 조건 변형]" if lang_code == "ko" else "🔀 [Stage 3 · What-If-Not Question]"
+            else:
+                q_type_badge = f"🧭 [2단계 보조선 발문 · Socratic Inquiry {seq_idx}/{total_seqs}]" if lang_code == "ko" else f"🧭 [Stage 2 · Socratic Auxiliary Line Q{seq_idx}]"
+            draw.text((68, 296), q_type_badge, fill=(190, 18, 60), font=font_sub)
+
+            q_lines = textwrap.wrap(step_q, width=25 if lang_code == "ko" else 36)[:2]
+            for qi, ql in enumerate(q_lines):
+                draw.text((68, 342 + qi * 44), ql, fill=(15, 23, 42), font=font_q)
+
+            # 3) 질문형 압축 내레이션 생성 및 음성 합성
+            raw_narr = p_info.get("narrations", {}).get(lang_code) or p_info["explanation_text"]
+            q_short_narr = condense_question_narration_for_shorts(
+                step_q, raw_narr, seq_idx, total_seqs, clean_title, lang_code=lang_code
+            )
+            mp3_p = tmp_dir / f"qshort_{seq_idx:02d}.mp3"
+            seg_p = tmp_dir / f"qshort_{seq_idx:02d}.mp4"
+            comm = edge_tts.Communicate(q_short_narr, voice_name, rate="+18%")
+            asyncio.run(comm.save(str(mp3_p)))
+            seg_audio_dur = get_media_duration_seconds(mp3_p, ffprobe_exe)
+
+            # 4) 플립북 프레임 시퀀스 추출
+            f_range = p_info.get("frame_range")
+            if seq_idx == 1 and len(doc) >= 3:
+                doc_frames = [0, min(len(doc) - 1, 1), max(0, len(doc) - 2)]
+            elif f_range and f_range[1] > f_range[0]:
+                doc_frames = list(range(max(0, int(f_range[0]) - 1), min(len(doc), int(f_range[1]))))
+            else:
+                prev_doc_p = 0 if seq_idx == 1 else max(0, pages[picked_indices[seq_idx - 2]]["page"] - 1)
+                curr_doc_p = min(len(doc) - 1, p_info["page"] - 1)
+                doc_frames = list(range(prev_doc_p, curr_doc_p + 1)) if curr_doc_p > prev_doc_p else [curr_doc_p]
+            if len(doc_frames) < 2:
+                doc_frames = [doc_frames[0], doc_frames[0]]
+            if len(doc_frames) > 6:
+                step_df = (len(doc_frames) - 1) / 5.0
+                doc_frames = sorted(list({doc_frames[int(round(k * step_df))] for k in range(6)}))
+
+            # 5) 하단 발문 & 단서 자막 카드 (y=1365..1795)
+            draw.rounded_rectangle((40, 1365, 1040, 1795), radius=26, fill=(15, 23, 42), outline=(251, 191, 36), width=3)
+            cap_lines = textwrap.wrap(q_short_narr, width=22 if lang_code == "ko" else 34)[:5]
+            for ci, cl in enumerate(cap_lines):
+                draw.text((74, 1445 + ci * 58), cl, fill=(248, 250, 252), font=font_cap)
+
+            draw.rounded_rectangle((40, 1810, 1040, 1892), radius=20, fill=(136, 19, 55), outline=(251, 191, 36), width=3)
+            cta_short_txt = (
+                "👆 내 질문 남기기 & 무료 GeoGebra 실습 ➔ min7014.github.io/mathedu"
+                if lang_code == "ko"
+                else "👆 Post Your Question & Try GeoGebra ➔ min7014.github.io/mathedu"
+            )
+            draw.text((68, 1834), cta_short_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 24, bold=True))
+
+            per_f_dur = max(0.22, seg_audio_dur / max(1, len(doc_frames)))
+            f_lines = []
+            last_fp = None
+            half_idx = max(1, len(doc_frames) // 2)
+            for fi_idx, doc_f_i in enumerate(doc_frames):
+                frame_canvas = canvas.copy()
+                f_draw = ImageDraw.Draw(frame_canvas)
+                is_think_phase = fi_idx < half_idx
+
+                # Phase 배지 (전반부: 🙋 먼저 생각해 보세요! / 후반부: 💡 시각적 단서 발견!)
+                if is_think_phase:
+                    f_draw.rounded_rectangle((70, 1382, 990, 1432), radius=14, fill=(225, 29, 72))
+                    p_lbl = "🙋 [Phase 1 · 발문 타임] 잠깐! 화면을 보고 먼저 스스로 추론해 보세요!" if lang_code == "ko" else "🙋 [Phase 1 · Inquiry] Pause & think about the question first!"
+                    f_draw.text((90, 1391), p_lbl, fill=(255, 255, 255), font=get_font_for_lang(lang_code, 24, bold=True))
+                else:
+                    f_draw.rounded_rectangle((70, 1382, 990, 1432), radius=14, fill=(5, 150, 105))
+                    p_lbl = "💡 [Phase 2 · 단서 발견!] 새로 연결된 보조선과 도형 관계에 주목하세요!" if lang_code == "ko" else "💡 [Phase 2 · Discovery!] Watch the highlighted geometric clue!"
+                    f_draw.text((90, 1391), p_lbl, fill=(255, 255, 255), font=get_font_for_lang(lang_code, 24, bold=True))
+
+                pix = doc[doc_f_i].get_pixmap(dpi=260)
+                slide_pil = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                sw, sh = slide_pil.size
+                scale = min(984 / sw, 860 / sh)
+                nw, nh = int(sw * scale), int(sh * scale)
+                resized = slide_pil.resize((nw, nh), Image.Resampling.LANCZOS)
+                ox = (1080 - nw) // 2
+                oy = 472 + (860 - nh) // 2
+                border_col = (244, 63, 94) if is_think_phase else (16, 185, 129)
+                f_draw.rounded_rectangle((ox - 10, oy - 10, ox + nw + 10, oy + nh + 10), radius=20, fill=(255, 255, 255), outline=border_col, width=4)
+                frame_canvas.paste(resized, (ox, oy))
+
+                bbox = p_info.get("diff_bbox")
+                if bbox and not is_think_phase and doc_f_i > 0:
+                    bx0 = max(ox + 4, ox + int(bbox[0] * nw) - 10)
+                    by0 = max(oy + 4, oy + int(bbox[1] * nh) - 10)
+                    bx1 = min(ox + nw - 4, ox + int(bbox[2] * nw) + 10)
+                    by1 = min(oy + nh - 4, oy + int(bbox[3] * nh) + 10)
+                    if (bx1 - bx0) > 24 and (by1 - by0) > 24:
+                        f_draw.rounded_rectangle((bx0, by0, bx1, by1), radius=10, outline=(225, 29, 72), width=6)
+
+                fp = tmp_dir / f"qshort_{seq_idx:02d}_f{fi_idx:02d}.png"
+                frame_canvas.save(fp)
+                f_lines.append(f"file '{fp.as_posix()}'")
+                f_lines.append(f"duration {per_f_dur:.4f}")
+                last_fp = fp
+            if last_fp:
+                f_lines.append(f"file '{last_fp.as_posix()}'")
+            f_txt = tmp_dir / f"qshort_fconcat_{seq_idx:02d}.txt"
+            f_txt.write_text("\n".join(f_lines), encoding="utf-8")
+
+            chime_wav = ensure_harmonic_chime_wav()
+            cmd = [
+                ffmpeg_exe, "-y",
+                "-f", "concat", "-safe", "0", "-i", str(f_txt),
+                "-i", str(mp3_p),
+                "-i", str(chime_wav),
+                "-filter_complex",
+                "[1:a]aformat=sample_rates=48000:channel_layouts=stereo[v];"
+                "[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.14[c];"
+                "[v][c]amix=inputs=2:duration=first:dropout_transition=0[aout]",
+                "-map", "0:v", "-map", "[aout]",
+                "-c:v", "libx264", "-profile:v", "high", "-crf", "17", "-pix_fmt", "yuv420p", "-r", "30",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
+                "-shortest",
+                str(seg_p),
+            ]
+            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            segs.append(seg_p)
+
+        concat_p = tmp_dir / "concat_qshort.txt"
+        concat_p.write_text("\n".join(f"file '{s.as_posix()}'" for s in segs), encoding="utf-8")
+        raw_short = tmp_dir / f"raw_qshort_{slug_key}_{lang_code}.mp4"
+        out_short = shorts_dir / f"{slug_key}_short_q_{lang_code}.mp4"
+        subprocess.run(
+            [ffmpeg_exe, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_p), "-c", "copy", str(raw_short)],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        ambient_wav = ensure_ambient_pad_wav()
+        subprocess.run(
+            [
+                ffmpeg_exe, "-y",
+                "-i", str(raw_short),
+                "-stream_loop", "-1", "-i", str(ambient_wav),
+                "-filter_complex",
+                "[0:a]aformat=sample_rates=48000:channel_layouts=stereo[v];"
+                "[1:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.14[bgm];"
+                "[v][bgm]amix=inputs=2:duration=first:dropout_transition=1[aout]",
+                "-map", "0:v", "-map", "[aout]",
+                "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest",
+                str(out_short),
+            ],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        dur = get_media_duration_seconds(out_short, ffprobe_exe)
+        if dur >= 58.0:
+            speed_factor = round((dur / 52.5), 3)
+            trimmed_short = tmp_dir / f"{slug_key}_short_q_{lang_code}_fast.mp4"
+            subprocess.run(
+                [
+                    ffmpeg_exe, "-y", "-i", str(out_short),
+                    "-filter_complex", f"[0:v]setpts=PTS/{speed_factor}[v];[0:a]atempo={min(2.0, speed_factor)}[a]",
+                    "-map", "[v]", "-map", "[a]",
+                    "-c:v", "libx264", "-profile:v", "high", "-crf", "18", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart",
+                    str(trimmed_short),
+                ],
+                check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
+            shutil.copyfile(trimmed_short, out_short)
+            dur = get_media_duration_seconds(out_short, ffprobe_exe)
+
+        pub_qshort_path = pub_short_dir / f"{slug_key}_short_q_{lang_code}.mp4"
+        shutil.copyfile(out_short, pub_qshort_path)
+
+        qshort_title = (
+            f"❓ [질문하는 수학 #Shorts] {clean_title} — 왜 이 보조선이 핵심일까?"
+            if lang_code == "ko"
+            else f"❓ [Question-Asking Math #Shorts] {clean_title} — Why This Auxiliary Line?"
+        )
+        sdoc.setdefault("question_shorts_packages", {})[lang_code] = {
+            "title": qshort_title[:100],
+            "local_mp4_path": f"video_lectures/shorts/{slug_key}_short_q_{lang_code}.mp4",
+            "duration_sec": round(dur, 2),
+            "aspect_ratio": "9:16 (1080x1920)",
+            "pedagogy_mode": "Question-Asking Short (Notice & Wonder -> Socratic -> What-If-Not)",
+        }
+        script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        safe_t = re.sub(r'[\\/:*?"<>|]', " ", qshort_title).strip()
+        ready_dst = ready_shorts_dir / f"{safe_t[:72]} [{slug_key}_QSHORT_{lang_code.upper()}].mp4"
+        shutil.copyfile(out_short, ready_dst)
+
+        update_video_catalog()
+        print(f"❓📱 [Question-Asking YouTube Shorts 1080x1920 (<58s Verified) Generated] {pub_qshort_path} ({round(dur, 1)}s)")
+        return pub_qshort_path
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
@@ -4221,11 +4526,14 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                 print(f"🎬 [Continuous Factory] 다음 주제 1080p 설명영상 + 9:16 #Shorts 자동 제작 시작: {next_slug}", flush=True)
                 try:
                     generate_or_update_script(next_slug, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
-                    # 3a) 기존 제작된 주제 중 아직 [버전 2 · 질문하는 수업 특화 영상]이 없는 주제 1건 우선 추가 제작
+                    # 3a) 기존 제작된 주제 중 아직 질문형 본편(_q_ko.mp4) 또는 질문형 숏폼(_short_q_ko.mp4)이 없는 주제 1건 우선 추가 제작
                     for q_sp in sorted(SCRIPTS_DIR.glob("*.json")):
                         q_check = ROOT_DIR / "video_lectures" / "question_classroom" / f"{q_sp.stem}_q_ko.mp4"
+                        qs_check = ROOT_DIR / "video_lectures" / "shorts" / f"{q_sp.stem}_short_q_ko.mp4"
                         if not q_check.exists():
                             render_question_classroom_video(q_sp.stem, lang_code="ko")
+                        if not qs_check.exists():
+                            render_question_short_vertical(q_sp.stem, lang_code="ko")
                             break
                     # 3b) 신규 주제에 대해 3가지 버전(1.일반 설명 영상 + 2.질문하는 수업 특화 영상 + 3.숏폼 영상) 동시 제작
                     for lc in ["ko", "en"]:

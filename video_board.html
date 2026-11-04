@@ -1357,12 +1357,14 @@
                     </div>
                   </div>
                 ` : ''}
-                ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En) ? `
-                  <div class="yt-link-row" style="background:#fff1f2;border-color:#fecdd3;">
-                    <span style="font-weight:800;color:#e11d48;">📱 9:16 숏폼 (#Shorts)</span>
-                    <div style="display:flex;gap:5px;">
-                      ${(item._shortKo || item._shortMp4Ko) ? `<button type="button" class="mini-play-btn" style="background:#db2777;" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 숏폼 재생</button>` : ''}
-                      ${(item._shortEn || item._shortMp4En) ? `<button type="button" class="mini-play-btn en" style="background:#7c3aed;" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Shorts</button>` : ''}
+                ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En || item._qShortMp4Ko || item._qShortMp4En) ? `
+                  <div class="yt-link-row" style="background:#fff1f2;border-color:#fecdd3;flex-wrap:wrap;gap:6px;">
+                    <span style="font-weight:800;color:#e11d48;">📱 9:16 숏폼 (일반형 · 질문형)</span>
+                    <div style="display:flex;gap:5px;flex-wrap:wrap;">
+                      ${(item._shortKo || item._shortMp4Ko) ? `<button type="button" class="mini-play-btn" style="background:#db2777;" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 일반 숏폼</button>` : ''}
+                      ${item._qShortMp4Ko ? `<button type="button" class="mini-play-btn" style="background:#be123c;" onclick="openCinemaForItem(${itemIdx}, 'short_q_ko')">❓📱 🇰🇷 질문 숏폼</button>` : ''}
+                      ${(item._shortEn || item._shortMp4En) ? `<button type="button" class="mini-play-btn en" style="background:#7c3aed;" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Std Shorts</button>` : ''}
+                      ${item._qShortMp4En ? `<button type="button" class="mini-play-btn en" style="background:#9f1239;" onclick="openCinemaForItem(${itemIdx}, 'short_q_en')">❓📱 🇺🇸 Q-Shorts</button>` : ''}
                     </div>
                   </div>
                 ` : ''}
@@ -1493,10 +1495,12 @@
                     ${item._qMp4En ? `<button type="button" class="yt-badge-btn" style="background:#fff1f2;color:#9f1239;border-color:#fda4af;font-weight:800;" onclick="openCinemaForItem(${itemIdx}, 'question_en')">❓ 🇺🇸 Question-Asking (EN)</button>` : ''}
                   </div>
                 ` : ''}
-                ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En) ? `
+                ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En || item._qShortMp4Ko || item._qShortMp4En) ? `
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                    ${(item._shortKo || item._shortMp4Ko) ? `<button type="button" class="yt-badge-btn" style="background:#fdf2f8;color:#db2777;border-color:#fbcfe8;" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 숏폼(#Shorts) 재생</button>` : ''}
-                    ${(item._shortEn || item._shortMp4En) ? `<button type="button" class="yt-badge-btn" style="background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe;" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Shorts (EN)</button>` : ''}
+                    ${(item._shortKo || item._shortMp4Ko) ? `<button type="button" class="yt-badge-btn" style="background:#fdf2f8;color:#db2777;border-color:#fbcfe8;" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 일반형 숏폼 재생</button>` : ''}
+                    ${item._qShortMp4Ko ? `<button type="button" class="yt-badge-btn" style="background:#fff1f2;color:#be123c;border-color:#fda4af;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'short_q_ko')">❓📱 🇰🇷 질문형 숏폼 재생</button>` : ''}
+                    ${(item._shortEn || item._shortMp4En) ? `<button type="button" class="yt-badge-btn" style="background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe;" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Std Shorts (EN)</button>` : ''}
+                    ${item._qShortMp4En ? `<button type="button" class="yt-badge-btn" style="background:#fff1f2;color:#9f1239;border-color:#fda4af;font-weight:800;" onclick="openCinemaForItem(${itemIdx}, 'short_q_en')">❓📱 🇺🇸 Question Shorts (EN)</button>` : ''}
                   </div>
                 ` : ''}
                 ${!item._ytKo && !item._ytEn ? `
@@ -1672,10 +1676,16 @@
         pills.push(`<button type="button" class="lang-pill ${mode === 'master_en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'master_en')">🎬 🇺🇸 v4.0 Master (1080p)</button>`);
       }
       if (item._shortKo || item._shortMp4Ko) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'short_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 v4.0 숏폼 (#Shorts · 9:16)</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 일반형 숏폼 (9:16)</button>`);
+      }
+      if (item._qShortMp4Ko) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_q_ko' ? 'active' : ''}" style="border-color:#e11d48;color:${mode==='short_q_ko'?'#fff':'#be123c'};background:${mode==='short_q_ko'?'#e11d48':'#fff1f2'};" onclick="openCinemaForItem(${itemIdx}, 'short_q_ko')">❓📱 🇰🇷 질문형 숏폼 (9:16)</button>`);
       }
       if (item._shortEn || item._shortMp4En) {
-        pills.push(`<button type="button" class="lang-pill ${mode === 'short_en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 v4.0 Shorts (EN · 9:16)</button>`);
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'short_en')">📱 🇺🇸 Standard Shorts (9:16)</button>`);
+      }
+      if (item._qShortMp4En) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'short_q_en' ? 'active' : ''}" style="border-color:#be123c;color:${mode==='short_q_en'?'#fff':'#be123c'};background:${mode==='short_q_en'?'#be123c':'#fff1f2'};" onclick="openCinemaForItem(${itemIdx}, 'short_q_en')">❓📱 🇺🇸 Question Shorts (9:16)</button>`);
       }
       if (item._ytOrig) {
         pills.push(`<button type="button" class="lang-pill ${mode === 'orig' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'orig')">🎬 @min7014 원본 영상</button>`);
