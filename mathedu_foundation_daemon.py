@@ -15,7 +15,7 @@ mathedu_foundation_daemon.py
 
 2. [Pillar 2: @min7014_ai v4.0 Viral Cinema 1080p 설명영상 & 9:16 숏폼(#Shorts) 무중단 제작]
    - min7014.github.io의 847개 시각적 증명 플립북 PDF를 순차적으로 스캔하여,
-     아직 제작되지 않은 주제의 8개국어 BAZE Vision(claude-sonnet-4-6) 대본,
+     아직 제작되지 않은 주제의 8개국어 PyMuPDF 기하·수식 분석 대본,
      v4.0 1080p 본편 영상(3초 클라이맥스 콜드오픈 + 플립북 모션 + -28dB 사색 앰비언트 패드 + 유레카 차임벨 + CTR 14%+ 4단어 임팩트 썸네일)과
      9:16 세로형 숏폼(#Shorts, 58초 미만 보장)을 한국어(KO)·영어(EN)로 지속 제작합니다.
 

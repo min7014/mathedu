@@ -401,17 +401,6 @@ def clean_math_for_speech_en(text):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def load_baze_api_key():
-    """환경변수 BAZE_API_KEY 또는 로컬 .baze_api_key 파일에서 BAZE AI Gateway 키를 로드합니다."""
-    env_k = os.environ.get("BAZE_API_KEY", "").strip()
-    if env_k:
-        return env_k
-    key_file = ROOT_DIR / ".baze_api_key"
-    if key_file.exists():
-        return key_file.read_text(encoding="utf-8").strip()
-    return ""
-
-
 def compute_pedagogical_scene_ranges(total_pages, max_scenes=12):
     """
     [스마트 플립북 모션 그룹핑 엔진 (v2.0)]
@@ -435,111 +424,7 @@ def compute_pedagogical_scene_ranges(total_pages, max_scenes=12):
     return scenes
 
 
-def call_baze_vision_for_pdf_script(doc, item_meta, scene_ranges=None):
-    """
-    [BAZE AI Gateway (claude-sonnet-4-6 Vision) 기반 초고품질 시각 대본 & 유튜브 인기 후킹 생성기 (v2.0 Keyframe Sampler)]
-    - 100페이지가 넘는 플립북 PDF도 최대 16개의 핵심 장면 대표 프레임(1520x1040 px 이내)으로 샘플링하여
-      Claude 8000px 이미지 제한(HTTP 400) 없이 100% 비전 판독에 성공합니다.
-    """
-    import base64
-    import io
-    import math
-
-    api_key = load_baze_api_key()
-    if not api_key:
-        return None
-
-    total_pages = len(doc)
-    if scene_ranges is None:
-        scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=12)
-    num_scenes = len(scene_ranges)
-
-    cols = 3 if num_scenes <= 12 else 4
-    rows = math.ceil(num_scenes / cols)
-    cell_w, cell_h = 380, 250
-    sheet = Image.new("RGB", (cols * cell_w, rows * cell_h), (15, 23, 42))
-    draw = ImageDraw.Draw(sheet)
-    lbl_font = get_font_for_lang("en", 17, bold=True)
-
-    for s_idx, (p_start, p_end) in enumerate(scene_ranges):
-        r, c = divmod(s_idx, cols)
-        rep_idx = (p_start + p_end) // 2
-        pix = doc[rep_idx].get_pixmap(dpi=72)
-        pil_p = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-        pil_p = pil_p.resize((cell_w - 12, cell_h - 32), Image.Resampling.LANCZOS)
-        ox = c * cell_w + 6
-        oy = r * cell_h + 26
-        lbl = f"[Scene {s_idx + 1}/{num_scenes} · p.{p_start + 1}]" if p_start == p_end else f"[Scene {s_idx + 1}/{num_scenes} · Motion p.{p_start + 1}-{p_end + 1}]"
-        draw.text((ox + 4, r * cell_h + 4), lbl, fill=(56, 189, 248), font=lbl_font)
-        sheet.paste(pil_p, (ox, oy))
-
-    buf = io.BytesIO()
-    sheet.save(buf, format="JPEG", quality=82)
-    b64_img = base64.b64encode(buf.getvalue()).decode("ascii")
-
-    raw_title = (item_meta or {}).get("title") or "수학자료실 시각적 증명"
-    core_concept = (item_meta or {}).get("core_concept") or ""
-
-    prompt = (
-        f"당신은 3Blue1Brown 스타일의 수석 수학 유튜버이자 민은기 선생님의 수학자료실(@min7014_ai) 총괄 디렉터입니다.\n"
-        f"첨부된 스토리보드 이미지는 '{raw_title}' (총 {total_pages}프레임 플립북 PDF)를 {num_scenes}개의 핵심 장면(Scene 1 ~ Scene {num_scenes})으로 정리한 화면입니다.\n"
-        f"참고 개념: {core_concept}\n\n"
-        f"각 장면 슬라이드에 실제로 그려진 도형, 점/직선/원/타원/포물선/다각형의 이름, 색깔(빨강·파랑·초록·보라 등), 동적 움직임과 수식 변화를 정밀하게 관찰하여 아래 JSON 형식으로만 응답하세요(마크다운 코드블록 없이 순수 JSON만 출력):\n"
-        f"{{\n"
-        f'  "title_en": "자연스러운 영어 수학 주제명",\n'
-        f'  "viral_title_ko": "유튜브 클릭률(CTR)을 극대화하는 한국어 제목 (이모지 포함, 85자 이내, 끝에 | @min7014_ai 포함)",\n'
-        f'  "viral_title_en": "High-CTR English YouTube title (3Blue1Brown style, <= 85 chars, ending with | @min7014_ai)",\n'
-        f'  "hook_ko": "유튜브 설명란 첫 2줄에 들어갈 강렬한 호기심 유발 질문과 핵심 통찰 (한국어 2문장)",\n'
-        f'  "hook_en": "2-sentence curiosity-driven hook for the top of the English YouTube description",\n'
-        f'  "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 시청자가 댓글로 몇 번째 단계인지 답하고 싶게 만드는 구체적 질문 1문장",\n'
-        f'  "quiz_en": "💬 [10-Second Eureka Quiz] Engaging question asking viewers to comment which step gave them the Eureka insight",\n'
-        f'  "pages_ko": ["1단계, 질문으로 시작해 볼까요? (Notice & Wonder 관찰·호기심 질문 도입)...", "2단계, 여기서 어떤 보조선을 그어야 할까요? (소크라테스식 발문 + 시각적 작도 설명)...", "... 마지막 단계는 만약 조건을 바꾸면 어떨까요?(What-If-Not 확장 질문) 포함 정확히 {num_scenes}개 문장"],\n'
-        f'  "pages_en": ["Step 1. Let us start with a question (Notice & Wonder inquiry hook)...", "Step 2. What auxiliary line unlocks this step? (Socratic question + visual explanation)...", "... ending with a What-If-Not question, exactly {num_scenes} native English sentences"]\n'
-        f"}}"
-    )
-
-    for baze_model in ("claude-sonnet-4-6", "claude-sonnet-5-5", "gemini-3.8-flash"):
-        try:
-            payload = {
-                "model": baze_model,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64_img}"}},
-                            {"type": "text", "text": prompt},
-                        ],
-                    }
-                ],
-                "max_tokens": 4096,
-                "temperature": 0.3,
-            }
-            req = urllib.request.Request(
-                "https://api.baze.co/v1/gateway/chat/completions",
-                data=json.dumps(payload).encode("utf-8"),
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "x-api-key": api_key,
-                    "Content-Type": "application/json",
-                    "User-Agent": "Mozilla/5.0",
-                },
-            )
-            raw_resp = urllib.request.urlopen(req, timeout=50).read().decode("utf-8")
-            resp_obj = json.loads(raw_resp)
-            content = resp_obj["choices"][0]["message"]["content"].strip()
-            if content.startswith("```"):
-                content = re.sub(r"^```(?:json)?\s*", "", content)
-                content = re.sub(r"\s*```$", "", content)
-            parsed = json.loads(content)
-            if len(parsed.get("pages_ko", [])) == num_scenes and len(parsed.get("pages_en", [])) == num_scenes:
-                print(f"✨ [BAZE AI {baze_model} Vision Script Generated] ({num_scenes} scenes from {total_pages} PDF frames + Viral Hooks)")
-                return parsed
-        except Exception as e:
-            print(f"  [BAZE Vision Notice ({baze_model})] {e}")
-    return None
-
-
-def auto_generate_page_explanations(doc, item_meta, baze_result=None, scene_ranges=None):
+def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
     """임의의 min7014.github.io PDF에 대해 장면(Scene)별 플립북 모션 범위·색상 변화와 수학적 원리를 결합해 고품질 한·영 설명 대본을 생성합니다."""
     total_pages = len(doc)
     if scene_ranges is None:
@@ -586,22 +471,7 @@ def auto_generate_page_explanations(doc, item_meta, baze_result=None, scene_rang
         step_q_ko = f"❓ [탐구 질문 {s_num}] 이 단계에서 변하지 않는 기하학적 핵심 관계는 무엇일까요?"
         step_q_en = f"❓ [Inquiry Q{s_num}] What geometric relationship remains invariant in this step?"
 
-        if baze_result and s_idx < len(baze_result.get("pages_ko", [])) and s_idx < len(baze_result.get("pages_en", [])):
-            exp_ko = clean_math_for_speech_ko(baze_result["pages_ko"][s_idx])
-            exp_en = clean_math_for_speech_en(baze_result["pages_en"][s_idx])
-            if s_num == 1:
-                step_title = "질문 1 · 관찰과 경이 (Notice & Wonder)"
-                step_q_ko = f"❓ [Notice & Wonder] {clean_title_ko}에서 움직여도 변하지 않는 것은 무엇일까요?"
-                step_q_en = f"❓ [Notice & Wonder] What stays invariant in {clean_title_en}?"
-            elif s_num == num_scenes:
-                step_title = "질문 확장 · 조건 변형 (What-If-Not)"
-                step_q_ko = "🔀 [What-If-Not] 만약 도형의 조건을 바꾸면 어떤 새로운 정리가 탄생할까요?"
-                step_q_en = "🔀 [What-If-Not] What if we change one condition of this figure?"
-            else:
-                step_title = f"Step {s_num} · 소크라테스 발문 & 보조선 탐구"
-                step_q_ko = f"🧭 [폴리아 발문 {s_num}] 왜 여기에 보조선을 그으면 숨은 관계가 한눈에 보일까요?"
-                step_q_en = f"🧭 [Pólya Inquiry {s_num}] Why does this auxiliary line unlock the proof?"
-        elif s_num == 1:
+        if s_num == 1:
             step_title = "질문 1 · 관찰과 경이 (Notice & Wonder)"
             step_q_ko = f"❓ [Notice & Wonder] {clean_title_ko}에서 변하지 않는 불변량은 무엇일까요?"
             step_q_en = f"❓ [Notice & Wonder] What stays invariant in {clean_title_en}, and why?"
@@ -722,7 +592,6 @@ def generate_or_update_script(slug_key, target_langs=None):
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     total_pages = len(doc)
 
-    baze_result = None
     if curated and len(curated["pages_ko"]) == total_pages:
         pages_data = []
         prev_pil = None
@@ -744,10 +613,7 @@ def generate_or_update_script(slug_key, target_langs=None):
             })
     else:
         scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=12)
-        baze_result = call_baze_vision_for_pdf_script(doc, item_meta, scene_ranges=scene_ranges)
-        if baze_result and baze_result.get("title_en"):
-            title_en = baze_result["title_en"]
-        pages_data = auto_generate_page_explanations(doc, item_meta, baze_result=baze_result, scene_ranges=scene_ranges)
+        pages_data = auto_generate_page_explanations(doc, item_meta, scene_ranges=scene_ranges)
 
     from concurrent.futures import ThreadPoolExecutor
     trans_jobs = []
@@ -770,15 +636,6 @@ def generate_or_update_script(slug_key, target_langs=None):
                     p_obj["narrations"][lc] = p_obj["explanation_text"]
 
     viral_hooks = VIRAL_HOOK_PRESETS.get(slug_key, {})
-    if baze_result:
-        viral_hooks = {
-            "title_ko": baze_result.get("viral_title_ko") or viral_hooks.get("title_ko", ""),
-            "title_en": baze_result.get("viral_title_en") or viral_hooks.get("title_en", ""),
-            "hook_ko": baze_result.get("hook_ko") or viral_hooks.get("hook_ko", ""),
-            "hook_en": baze_result.get("hook_en") or viral_hooks.get("hook_en", ""),
-            "quiz_ko": baze_result.get("quiz_ko") or viral_hooks.get("quiz_ko", ""),
-            "quiz_en": baze_result.get("quiz_en") or viral_hooks.get("quiz_en", ""),
-        }
 
     script_doc = {
         "slug": slug_key,
@@ -791,7 +648,7 @@ def generate_or_update_script(slug_key, target_langs=None):
         "web_url": web_url,
         "page_count": total_pages,
         "base_language": "ko",
-        "quality_profile": "Broadcast Master 1080p (BAZE claude-sonnet-4-6 Vision Script + 300 DPI Lanczos + H.264 High Profile CRF 16)",
+        "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
         "viral_hooks": viral_hooks,
         "storage_policy": {
             "ko": "YouTube (한국어 강의 영상 유튜브 저장·스트리밍)",
