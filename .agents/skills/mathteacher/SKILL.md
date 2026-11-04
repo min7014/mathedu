@@ -61,3 +61,25 @@ python mathteacher.py explain csat26_01
 # 4. 전체 퀴즈 전수 무결성 점검 실행
 python mathteacher.py audit
 ```
+
+---
+
+## 3. 질문하는 수학 수업 (Question-Asking Classroom) 5대 표준 프레임워크
+
+현대 수학교육 트렌드(2022 개정 교육과정, IB 탐구 학습, QFT, 하브루타)의 핵심은 **'정답을 맞히는 교실'에서 '학생 스스로 질문을 생성하는 교실'로의 전환**입니다. `mathteacher`는 모든 콘텐츠와 수업 시나리오를 다음 5단계 질문 생성 구조로 설계합니다:
+
+1. **Notice & Wonder (관찰과 경이의 질문 — NCTM)**:
+   - 수식보다 `min7014.github.io` 동적 기하 도형과 `@min7014_ai` 플립북 영상을 먼저 제시하고 *"무엇이 변하고 무엇이 변하지 않는가?(Notice)"*, *"왜 항상 그럴까?(Wonder)"*를 학생 스스로 질문하게 합니다.
+2. **QFT (Question Formulation Technique — 4단계 질문 생성 기법)**:
+   - 질문 초점(Q-Focus) 제시 ➔ 질문 쏟아내기 ➔ **닫힌 질문(단답형)을 열린 질문(원리·보조선·일반화형)으로 전환** ➔ 핵심 탐구 질문 선정.
+3. **소크라테스 산파술 & 폴리아(Pólya) 메타인지 자기질문**:
+   - 조건 해독 질문 ➔ 제1보조선 발상 질문(`polyaHeuristics`) ➔ 초등 눈높이 디딤돌 징검다리 질문 ➔ 반성·다중 해법 질문.
+4. **라카토스(Lakatos) '증명과 반박' 의심·반례 질문**:
+   - *"이 명제가 깨지는 1초 반례는 무엇인가?"*, *"어떤 전제 조건을 보강해야 참이 되는가?"*(`misconceptionLab`).
+5. **브라운 & 월터(Brown & Walter) 'What-If-Not' 조건 변형·문제 발명 질문**:
+   - 문제를 푼 직후 *"만약 이 조건이 바뀐다면?"*을 질문하며 학생 스스로 새 문제를 발명(`creativeConstructiveLab`).
+
+```powershell
+# 질문하는 수학 수업 5대 프레임워크 및 발문·학생 질문 예시 조회
+python mathteacher.py question
+```

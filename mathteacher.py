@@ -357,6 +357,7 @@ def cmd_status():
     print(f"• 🔬 오개념 백신 & 반례 실험실         : {len(ped.get('misconceptionLab', []))}대 빈출 오개념·반례 진단")
     print(f"• 👩‍🏫 교사용 5분 탐구 수업 런처        : {len(ped.get('teacherLessonScenarios', []))}종 교실 도입 발문 시나리오")
     print(f"• ✍️ 탈-5지선다 창의 구성 & 조건 변형 : {len(ped.get('creativeConstructiveLab', []))}대 열린 발상·What-If-Not 실험실")
+    print(f"• ❓ 질문하는 수학 수업 프레임워크     : {len(ped.get('questionAskingClassrooms', []))}대 학생 질문 생성(Notice&Wonder·QFT·What-If-Not) 모델")
     print("• 교육 설계 기준                       : 제0단계 기호 번역 + 1~5단계 초등 눈높이 디딤돌 + SVG 도형 + 도식화 흐름도 + min7014.github.io 상시 진화")
     print("=" * 76)
 
@@ -430,6 +431,28 @@ def cmd_lesson(keyword: str = ""):
         print("-" * 76)
 
 
+
+
+
+
+def cmd_question(keyword: str = ""):
+    ped = load_pedagogy_engine()
+    items = ped.get("questionAskingClassrooms", [])
+    print("=" * 76)
+    print("❓ [mathteacher] 트렌드 핵심: '질문하는 수학 수업 (Question-Asking Classroom)' 5대 프레임워크")
+    print("=" * 76)
+    for qm in items:
+        blob = json.dumps(qm, ensure_ascii=False).lower()
+        if keyword and keyword.lower() not in blob:
+            continue
+        print(f"■ {qm['framework']}")
+        print(f"  💡 핵심 원리: {qm['corePrinciple']}")
+        for tp in qm.get("teacherPrompts", []):
+            print(f"  👩‍🏫 교사 촉진 발문: {tp}")
+        for sq in qm.get("studentQuestionExamples", []):
+            print(f"  🙋 학생 생성 질문: \"{sq}\"")
+        print(f"  🔗 mathedu 연동 : {qm['min7014Integration']}")
+        print("-" * 76)
 
 
 def cmd_creative(keyword: str = ""):
@@ -518,6 +541,8 @@ def main():
         cmd_lesson(" ".join(sys.argv[2:]))
     elif sys.argv[1] == "creative":
         cmd_creative(" ".join(sys.argv[2:]))
+    elif sys.argv[1] == "question":
+        cmd_question(" ".join(sys.argv[2:]))
     elif sys.argv[1] == "expand":
         expand_pedagogy_from_min7014_vault(max_add_per_category=10)
         cmd_status()
