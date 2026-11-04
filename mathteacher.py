@@ -358,6 +358,7 @@ def cmd_status():
     print(f"• 👩‍🏫 교사용 5분 탐구 수업 런처        : {len(ped.get('teacherLessonScenarios', []))}종 교실 도입 발문 시나리오")
     print(f"• ✍️ 탈-5지선다 창의 구성 & 조건 변형 : {len(ped.get('creativeConstructiveLab', []))}대 열린 발상·What-If-Not 실험실")
     print(f"• ❓ 질문하는 수학 수업 프레임워크     : {len(ped.get('questionAskingClassrooms', []))}대 학생 질문 생성(Notice&Wonder·QFT·What-If-Not) 모델")
+    print(f"• 🏛️ 수학교육 철학 & 호기심 도감       : {len(ped.get('educationalPhilosophy', []))}대 교육철학 강령 · {len(ped.get('curiosityRealWorldAtlas', []))}대 자연·우주·AI 호기심 도감")
     print("• 교육 설계 기준                       : 제0단계 기호 번역 + 1~5단계 초등 눈높이 디딤돌 + SVG 도형 + 도식화 흐름도 + min7014.github.io 상시 진화")
     print("=" * 76)
 
@@ -433,6 +434,30 @@ def cmd_lesson(keyword: str = ""):
 
 
 
+
+
+def cmd_philosophy(keyword: str = ""):
+    ped = load_pedagogy_engine()
+    phils = ped.get("educationalPhilosophy", [])
+    atlas = ped.get("curiosityRealWorldAtlas", [])
+    print("=" * 84)
+    print("🏛️ [mathteacher] 민은기 선생님의 mathedu 5대 수학교육 철학 & 학생 호기심 점화 도감")
+    print("=" * 84)
+    for p_item in phils:
+        print(f"■ {p_item['title']}")
+        print(f"  ✨ 철학 모토 : \"{p_item['motto']}\"")
+        print(f"  🎓 사상 배경 : {p_item['thinkers']}")
+        print(f"  🚀 실제 구현 : {p_item['matheduPractice']}")
+        print("-" * 84)
+    print("🌍 [왜 이 수학을 배울까? — 자연·우주·AI·일상 속 수학 호기심 도감]")
+    print("-" * 84)
+    for c_item in atlas:
+        if keyword and keyword.lower() not in str(c_item).lower():
+            continue
+        print(f"■ [{c_item['domain']}] {c_item['studentWonderQuestion']}")
+        print(f"  📐 핵심 원리 : {c_item['mathCorePrinciple']}")
+        print(f"  🤔 사고 실험 : {c_item['miniThoughtExperiment']}")
+        print("-" * 84)
 
 
 def cmd_question(keyword: str = ""):
@@ -543,6 +568,8 @@ def main():
         cmd_creative(" ".join(sys.argv[2:]))
     elif sys.argv[1] == "question":
         cmd_question(" ".join(sys.argv[2:]))
+    elif sys.argv[1] == "philosophy":
+        cmd_philosophy(" ".join(sys.argv[2:]))
     elif sys.argv[1] == "expand":
         expand_pedagogy_from_min7014_vault(max_add_per_category=10)
         cmd_status()
