@@ -2832,21 +2832,51 @@
     function getCreativeHeuristicsForStem(stemText) {
       var s = String(stemText || '');
       if (/지수|거듭제곱|로그|\log/.test(s)) {
-        return ['🔍 밑(Base)을 소수로 통일하기', '📐 분수·음수 지수로 변환하기', '🧪 작은 정수 대입해 규칙 확인', '🔗 앞 단계 결과식 대입하기'];
+        return [
+          '❓ 밑(Base)을 같은 소수로 통일하면 지수끼리 어떻게 묶일까?',
+          '❓ 거듭제곱근을 분수·음수 지수로 바꾸면 어떤 약분이 일어날까?',
+          '❓ 진수 조건(>0)이나 작은 정수 대입에서 어떤 규칙이 보일까?',
+          '❓ 앞 단계에서 구한 조각을 대입하면 어떻게 간단해질까?'
+        ];
       }
       if (/삼각|sin|cos|tan|원|접선|타원|포물선|쌍곡선|벡터|넓이/.test(s)) {
-        return ['📐 원의 중심·초점과 교점 잇기(보조선)', '🔍 직각삼각형·피타고라스 관계 찾기', '🧭 단위원 대칭성·주기성 활용', '🔗 사인·코사인법칙 관계식 세우기'];
+        return [
+          '❓ 원의 중심·초점과 접점·교점을 이으면 어떤 직각/이등변삼각형이 생길까?',
+          '❓ 도형이 움직여도 변하지 않는 길이·각도(불변량)는 무엇일까?',
+          '❓ 단위원 대칭성·주기성을 쓰면 각도가 어떻게 단순해질까?',
+          '❓ 사인법칙(외접원)과 코사인법칙(세 변) 중 어떤 질문이 먼저일까?'
+        ];
       }
       if (/수열|등차|등비|시그마|\sum|귀납/.test(s)) {
-        return ['🧪 n=1, 2, 3 차례대로 대입해 나열하기', '🔍 이웃한 두 항의 차(공차)·비(공비) 관찰', '🧱 부분분수·연쇄 상쇄 구조 만들기', '🔗 일반항 a_n과 합 S_n 관계식 세우기'];
+        return [
+          '❓ n=1, 2, 3 작은 수를 직접 대입해 나열하면 어떤 규칙이 보일까?',
+          '❓ 이웃한 두 항의 차(공차)·비(공비)는 일정하게 유지될까?',
+          '❓ 분모를 쪼개면(부분분수) 도미노처럼 연쇄 상쇄가 일어날까?',
+          '❓ 알고 있는 뒤쪽 항에서 역추적 나뭇가지 트리를 그려볼까?'
+        ];
       }
       if (/극한|연속|미분|도함수|접선|극대|극소|적분|\int|\lim/.test(s)) {
-        return ['🔍 0/0 꼴 공통인수 약분·인수분해', '📐 접점의 x좌표를 미지수 t로 설정', '📊 도함수 f′(x)=0 부호 변화 관찰', '🧭 그래프 대칭성·정적분 넓이 해석'];
+        return [
+          '❓ 분모가 0에 가까워질 때 약분되어야 할 공통인수 (x-a)는 무엇일까?',
+          '❓ 접점의 x좌표를 미지수 t로 먼저 선언하면 어떤 식이 세워질까?',
+          '❓ 도함수 f′(x)=0 전후에서 부호가 바뀌는 극값 지점은 어디일까?',
+          '❓ 정적분 구간에 위끝=아래끝 대입과 양변 미분을 해보면 무엇이 나올까?'
+        ];
       }
       if (/경우의 수|확률|조합|순열|정규분포|통계|독립|조건부/.test(s)) {
-        return ['🗂️ 빠짐없이 중복 없이 케이스 분류', '🔄 여사건(1 - 반대 확률) 활용하기', '📐 조건부확률 분모(표본공간) 축소', '📊 표준화(Z) 및 대칭 넓이 활용'];
+        return [
+          '❓ 빠짐없고 중복 없이 나누는 기준(케이스 분류 질문)은 무엇일까?',
+          '❓ 직접 세는 것보다 전체에서 반대 경우(여사건)를 빼는 게 빠르지 않을까?',
+          '❓ 조건부확률에서 사건이 일어났을 때 분모(표본공간)는 어떻게 축소될까?',
+          '❓ 평균을 기준으로 정규분포 종 모양 대칭 넓이를 어떻게 활용할까?'
+        ];
       }
-      return ['🧪 작은 숫자(1, 2)를 먼저 대입해 관찰', '🔍 구하려는 목표값을 미지수로 설정', '📐 주어진 조건을 등식·도형으로 번역', '🧱 앞 단계에서 구한 조각 결합하기'];
+      return [
+        '❓ [관찰 Notice] 주어진 조건에서 변하는 것과 변하지 않는 것은 무엇일까?',
+        '❓ [경이 Wonder] 작은 숫자(1, 2)를 먼저 넣어보면 어떤 규칙이 보일까?',
+        '❓ [보조선 Pólya] 구하려는 목표값을 어떤 등식이나 도형으로 번역할까?',
+        '❓ [연결 LEGO] 앞 단계에서 구한 조각들을 어떻게 결합하면 답이 될까?'
+      ];
     }
 
     function applyOrigPaperCreativeMask() {
@@ -2975,7 +3005,7 @@
           // Step A: Creative Idea & Auxiliary-Line Sketcher
           '<div style="margin-bottom:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.85);border:1px solid #e0f2fe">' +
             '<div style="font-size:0.77rem;font-weight:800;color:#0369a1;margin-bottom:6px">' +
-              bilingual('🧭 [1단계 · 나만의 제1발상 & 보조선 설계]: 계산하기 전에 어떤 수학적 아이디어로 접근할지 선택하거나 적어보세요!', '🧭 [Step 1 · Creative Strategy Sketch]: Choose or write your mathematical approach before computing!') +
+              bilingual('❓ [1단계 · 질문하는 수학 (Notice & Wonder 자기질문 & 제1보조선)]: 계산하기 전에 문제에게 먼저 핵심 질문을 던지고 나만의 발상을 선택해 보세요!', '❓ [Step 1 · Question-First Math (Notice & Wonder Self-Questioning)]: Ask a guiding mathematical question before computing!') +
             '</div>' +
             '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">' + heurButtonsHtml + '</div>' +
             '<input type="text" id="creativeIdeaInput_' + idx + '" placeholder="💭 나만의 풀이 발상·보조선·규칙을 자유롭게 한 줄로 스케치해 보세요 (선택 사항)" style="width:100%;padding:6px 10px;border-radius:8px;border:1px solid #cbd5e1;background:#ffffff;color:#1e293b;font-size:0.78rem;box-sizing:border-box">' +

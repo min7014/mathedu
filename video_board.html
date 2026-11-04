@@ -948,6 +948,7 @@
       <!-- 필터 탭 -->
       <div class="filter-tabs" id="boardFilterTabs">
         <button type="button" class="tab-btn active" data-filter="all">전체 자료 (1,111)</button>
+        <button type="button" class="tab-btn ai-tab" data-filter="question_ready" style="border-color:#fda4af;background:#fff1f2;color:#be123c;font-weight:900;">❓ 질문하는 수업 버전 완료</button>
         <button type="button" class="tab-btn ai-tab" data-filter="ai_uploaded">🤖 @min7014_ai 영상 등록 완료</button>
         <button type="button" class="tab-btn ai-tab" data-filter="shorts_ready">📱 숏폼 (#Shorts · 9:16) 완료</button>
         <button type="button" class="tab-btn" data-filter="has_pdf">📄 단계별 PDF 설명자료 (866)</button>
@@ -1140,6 +1141,10 @@
         || '';
       const fullMp4En = (catEntry && catEntry.youtube_packages && catEntry.youtube_packages.en && catEntry.youtube_packages.en.local_mp4_path)
         || '';
+      const qMp4Ko = (catEntry && catEntry.question_classroom_packages && catEntry.question_classroom_packages.ko && catEntry.question_classroom_packages.ko.local_mp4_path)
+        || '';
+      const qMp4En = (catEntry && catEntry.question_classroom_packages && catEntry.question_classroom_packages.en && catEntry.question_classroom_packages.en.local_mp4_path)
+        || '';
 
       const slugKey = (catEntry && catEntry.slug)
         || (vaultEntry && (VAULT_MAP[pdfSlug] ? pdfSlug : webSlug))
@@ -1159,6 +1164,8 @@
         shortMp4En: shortMp4En.trim(),
         fullMp4Ko: fullMp4Ko.trim(),
         fullMp4En: fullMp4En.trim(),
+        qMp4Ko: qMp4Ko.trim(),
+        qMp4En: qMp4En.trim(),
         hasShortsReady: !!(shortKo || shortEn || shortMp4Ko || shortMp4En),
         hasScriptReady: !!catEntry,
         pageCount: (catEntry && catEntry.page_count) || (vaultEntry && vaultEntry.page_count) || 0,
@@ -1215,6 +1222,8 @@
             _shortMp4En: vInfo.shortMp4En,
             _fullMp4Ko: vInfo.fullMp4Ko,
             _fullMp4En: vInfo.fullMp4En,
+            _qMp4Ko: vInfo.qMp4Ko,
+            _qMp4En: vInfo.qMp4En,
             _hasShortsReady: vInfo.hasShortsReady,
             _hasScriptReady: vInfo.hasScriptReady,
             _pageCount: vInfo.pageCount,
@@ -1280,6 +1289,9 @@
       if (aiTabBtn) {
         aiTabBtn.textContent = `🤖 @min7014_ai 영상 등록 완료 (${aiTopics.length})`;
       }
+      const qTabBtn = document.querySelector('.tab-btn[data-filter="question_ready"]');
+      const qReadyCount = ALL_ITEMS.filter(x => !!(x._qMp4Ko || x._qMp4En)).length;
+      if (qTabBtn) qTabBtn.textContent = `❓ 질문하는 수업 버전 (${qReadyCount}주제)`;
       const shortsTabBtn = document.querySelector('.tab-btn[data-filter="shorts_ready"]');
       if (shortsTabBtn) {
         shortsTabBtn.textContent = `📱 숏폼 (#Shorts · 9:16) 완료 (${shortsTopics.length}주제 · ${totalShortsCount}편)`;
@@ -1336,6 +1348,15 @@
                     <button type="button" class="mini-play-btn en" onclick="openCinemaForItem(${itemIdx}, 'en')">▶ Full EN</button>
                   </div>
                 ` : ''}
+                ${(item._qMp4Ko || item._qMp4En) ? `
+                  <div class="yt-link-row" style="background:linear-gradient(135deg,#fff1f2,#fef3c7);border-color:#fda4af;">
+                    <span style="font-weight:900;color:#be123c;">❓ 질문하는 수업 버전 (1080p)</span>
+                    <div style="display:flex;gap:5px;">
+                      ${item._qMp4Ko ? `<button type="button" class="mini-play-btn" style="background:#e11d48;" onclick="openCinemaForItem(${itemIdx}, 'question_ko')">❓ 🇰🇷 질문 수업 재생</button>` : ''}
+                      ${item._qMp4En ? `<button type="button" class="mini-play-btn en" style="background:#be123c;" onclick="openCinemaForItem(${itemIdx}, 'question_en')">❓ 🇺🇸 Inquiry EN</button>` : ''}
+                    </div>
+                  </div>
+                ` : ''}
                 ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En) ? `
                   <div class="yt-link-row" style="background:#fff1f2;border-color:#fecdd3;">
                     <span style="font-weight:800;color:#e11d48;">📱 9:16 숏폼 (#Shorts)</span>
@@ -1371,6 +1392,7 @@
 
       FILTERED_ITEMS = ALL_ITEMS.filter(item => {
         if (CURRENT_TAB === 'ai_uploaded' && !(item._ytKo || item._ytEn || item._hasScriptReady)) return false;
+        if (CURRENT_TAB === 'question_ready' && !(item._qMp4Ko || item._qMp4En)) return false;
         if (CURRENT_TAB === 'shorts_ready' && !item._hasShortsReady) return false;
         if (CURRENT_TAB === 'has_pdf' && !(item.pdf && item.pdf.trim())) return false;
         if (CURRENT_TAB === 'has_orig_yt' && !item._ytOrig) return false;
@@ -1465,6 +1487,12 @@
                     <a href="${item._ytEn}" target="_blank" rel="noopener" class="yt-link-url" style="font-size:0.75rem;">${item._ytEn}</a>
                   </div>
                 ` : ''}
+                ${(item._qMp4Ko || item._qMp4En) ? `
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    ${item._qMp4Ko ? `<button type="button" class="yt-badge-btn" style="background:#fff1f2;color:#be123c;border-color:#fda4af;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'question_ko')">❓ 🇰🇷 질문하는 수업 버전 (1080p) 재생</button>` : ''}
+                    ${item._qMp4En ? `<button type="button" class="yt-badge-btn" style="background:#fff1f2;color:#9f1239;border-color:#fda4af;font-weight:800;" onclick="openCinemaForItem(${itemIdx}, 'question_en')">❓ 🇺🇸 Question-Asking (EN)</button>` : ''}
+                  </div>
+                ` : ''}
                 ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En) ? `
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
                     ${(item._shortKo || item._shortMp4Ko) ? `<button type="button" class="yt-badge-btn" style="background:#fdf2f8;color:#db2777;border-color:#fbcfe8;" onclick="openCinemaForItem(${itemIdx}, 'short_ko')">📱 🇰🇷 숏폼(#Shorts) 재생</button>` : ''}
@@ -1543,7 +1571,15 @@
       let targetUrl = '';
       let localShortMp4 = '';
       let badgeLabel = '@min7014_ai';
-      if (mode === 'master_ko' && item._fullMp4Ko) {
+      if (mode === 'question_ko' && item._qMp4Ko) {
+        targetUrl = item._ytKo || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._qMp4Ko;
+        badgeLabel = '❓ 🇰🇷 [질문하는 수학 수업 버전] Notice & Wonder · What-If-Not (1080p)';
+      } else if (mode === 'question_en' && item._qMp4En) {
+        targetUrl = item._ytEn || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._qMp4En;
+        badgeLabel = '❓ 🇺🇸 [Question-Asking Classroom Edition] (1080p)';
+      } else if (mode === 'master_ko' && item._fullMp4Ko) {
         targetUrl = item._ytKo || 'https://www.youtube.com/@min7014_ai';
         localShortMp4 = item._fullMp4Ko;
         badgeLabel = '🎬 🇰🇷 @min7014_ai v4.0 Viral Cinema 마스터 본편 (1080p)';
@@ -1595,7 +1631,7 @@
       const iframeEl = document.getElementById('cinemaIframe');
       const nativeVid = document.getElementById('cinemaNativeVideo');
 
-      if ((mode.startsWith('master_') && localShortMp4) || (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn))) {
+      if (((mode.startsWith('master_') || mode.startsWith('question_')) && localShortMp4) || (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn))) {
         iframeEl.src = '';
         iframeEl.style.display = 'none';
         nativeVid.style.display = 'block';
@@ -1623,6 +1659,12 @@
       if (item._ytEn) {
         pills.push(`<button type="button" class="lang-pill ${mode === 'en' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'en')">🇺🇸 YouTube Full (16:9)</button>`);
       }
+      if (item._qMp4Ko) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'question_ko' ? 'active' : ''}" style="border-color:#e11d48;color:${mode==='question_ko'?'#fff':'#be123c'};background:${mode==='question_ko'?'#e11d48':'#fff1f2'};" onclick="openCinemaForItem(${itemIdx}, 'question_ko')">❓ 🇰🇷 질문하는 수업 버전 (1080p)</button>`);
+      }
+      if (item._qMp4En) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'question_en' ? 'active' : ''}" style="border-color:#be123c;color:${mode==='question_en'?'#fff':'#be123c'};background:${mode==='question_en'?'#be123c':'#fff1f2'};" onclick="openCinemaForItem(${itemIdx}, 'question_en')">❓ 🇺🇸 Question-Asking (1080p)</button>`);
+      }
       if (item._fullMp4Ko) {
         pills.push(`<button type="button" class="lang-pill ${mode === 'master_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'master_ko')">🎬 🇰🇷 v4.0 마스터 (1080p)</button>`);
       }
@@ -1641,9 +1683,22 @@
       pills.push(`<a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="lang-pill">🎙️ 20개국어 AI 강의 스튜디오</a>`);
       langBar.innerHTML = pills.join('');
 
-      // 개념 요약 및 디딤돌
+      // 개념 요약, 디딤돌 및 '질문하는 수학 수업(Notice ➔ Why ➔ What-If-Not)' 3단계 발문 스튜디오
       const stepsHtml = (item.scaffolding_steps || []).map(s => `<li style="margin-bottom:4px;">${s}</li>`).join('');
+      const cleanTopicTitle = (item.title || '').replace(/\$[^\$]*\$/g, '').trim();
       document.getElementById('cinemaConceptBox').innerHTML = `
+        <div style="padding:10px 12px;border-radius:10px;background:linear-gradient(135deg,#fff1f2,#fef3c7);border:1.5px solid #fda4af;margin-bottom:10px;">
+          <div style="font-weight:900;color:#9f1239;margin-bottom:6px;font-size:0.84rem;">❓ [질문하는 수학 수업] 영상을 보며 스스로 던지는 3단계 질문</div>
+          <div style="font-size:0.78rem;color:#1e293b;line-height:1.55;">
+            <div>👁️ <b>1단계 관찰 질문 (Notice):</b> <i>"${cleanTopicTitle}"</i> 도형이 움직일 때 모양이 변하는 것과 끝까지 변하지 않는 것(불변량)은 무엇인가요?</div>
+            <div style="margin-top:3px;">🧭 <b>2단계 보조선 질문 (Why &amp; How):</b> 몇 번째 단계에서 등장한 보조선이 떨어진 조건들을 하나로 연결했나요?</div>
+            <div style="margin-top:3px;">🔀 <b>3단계 조건 변형 질문 (What-If-Not):</b> 만약 이 도형의 조건(점의 위치·각도·대칭성)을 하나 바꾼다면 어떤 새로운 정리가 탄생할까요?</div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+            <input type="text" id="vbCinemaStudentQuestionInput" placeholder="🙋 영상을 보며 떠오른 나만의 '왜(Why)?' 또는 '만약(What-If)?' 질문을 적어보세요!" style="flex:1;min-width:210px;padding:6px 10px;border-radius:8px;border:1px solid #fda4af;font-size:0.76rem;background:#fff;" />
+            <button type="button" onclick="saveVideoBoardStudentQuestion('${cleanTopicTitle.replace(/'/g, "\'")}')" style="padding:6px 12px;border-radius:8px;border:none;background:#e11d48;color:#fff;font-size:0.75rem;font-weight:800;cursor:pointer;">💾 내 질문 저장</button>
+          </div>
+        </div>
         <div style="font-weight:800;color:#0f172a;margin-bottom:6px;">💡 핵심 수학 원리</div>
         <div style="margin-bottom:10px;">${item.core_concept || ''}</div>
         ${stepsHtml ? `<div style="font-weight:800;color:#0f172a;margin-bottom:4px;">🪜 단계별 시각 증명 디딤돌</div><ul style="margin:0;padding-left:18px;font-size:0.8rem;color:#334155;">${stepsHtml}</ul>` : ''}
@@ -1665,6 +1720,26 @@
       if (window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise([stage]).catch(() => {});
       }
+    }
+
+    
+    function saveVideoBoardStudentQuestion(topicTitle) {
+      const inp = document.getElementById('vbCinemaStudentQuestionInput');
+      if (!inp || !inp.value.trim()) {
+        alert('영상을 보며 떠오른 나만의 수학 질문을 입력해 주세요!');
+        return;
+      }
+      let list = [];
+      try { list = JSON.parse(localStorage.getItem('mathedu_student_questions_v1') || '[]'); } catch (e) {}
+      list.unshift({
+        notice: '[' + topicTitle + ' 영상 탐구]',
+        wonder: inp.value.trim(),
+        whatIf: 'GeoGebra 조건 변형 실험 연동',
+        date: new Date().toLocaleDateString()
+      });
+      try { localStorage.setItem('mathedu_student_questions_v1', JSON.stringify(list.slice(0, 50))); } catch (e) {}
+      alert('🙋 나만의 수학 질문이 질문 포트폴리오에 저장되었습니다!\n\n❓ ' + inp.value.trim());
+      inp.value = '';
     }
 
     function closeCinemaStage() {

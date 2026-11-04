@@ -493,8 +493,8 @@ def call_baze_vision_for_pdf_script(doc, item_meta, scene_ranges=None):
         f'  "hook_en": "2-sentence curiosity-driven hook for the top of the English YouTube description",\n'
         f'  "quiz_ko": "💬 [오늘의 10초 유레카 퀴즈] 시청자가 댓글로 몇 번째 단계인지 답하고 싶게 만드는 구체적 질문 1문장",\n'
         f'  "quiz_en": "💬 [10-Second Eureka Quiz] Engaging question asking viewers to comment which step gave them the Eureka insight",\n'
-        f'  "pages_ko": ["1단계입니다. ...", "2단계입니다. ...", "... 정확히 {num_scenes}개 문장 (수식 기호 없이 귀로 듣기만 해도 도형과 움직임이 그려지도록 생생하고 친절하게 서술)"],\n'
-        f'  "pages_en": ["Step 1. ...", "Step 2. ...", "... exactly {num_scenes} native English sentences matching each scene"]\n'
+        f'  "pages_ko": ["1단계, 질문으로 시작해 볼까요? (Notice & Wonder 관찰·호기심 질문 도입)...", "2단계, 여기서 어떤 보조선을 그어야 할까요? (소크라테스식 발문 + 시각적 작도 설명)...", "... 마지막 단계는 만약 조건을 바꾸면 어떨까요?(What-If-Not 확장 질문) 포함 정확히 {num_scenes}개 문장"],\n'
+        f'  "pages_en": ["Step 1. Let us start with a question (Notice & Wonder inquiry hook)...", "Step 2. What auxiliary line unlocks this step? (Socratic question + visual explanation)...", "... ending with a What-If-Not question, exactly {num_scenes} native English sentences"]\n'
         f"}}"
     )
 
@@ -581,38 +581,64 @@ def auto_generate_page_explanations(doc, item_meta, baze_result=None, scene_rang
             elif cx < 0.46:
                 focus_desc = f"좌측 동적 도형 작도 ({c_ko})"
 
+        step_q_ko = f"❓ [탐구 질문 {s_num}] 이 단계에서 변하지 않는 기하학적 핵심 관계는 무엇일까요?"
+        step_q_en = f"❓ [Inquiry Q{s_num}] What geometric relationship remains invariant in this step?"
+
         if baze_result and s_idx < len(baze_result.get("pages_ko", [])) and s_idx < len(baze_result.get("pages_en", [])):
             exp_ko = clean_math_for_speech_ko(baze_result["pages_ko"][s_idx])
             exp_en = clean_math_for_speech_en(baze_result["pages_en"][s_idx])
-            step_title = "도입 · 주제 및 목표" if s_num == 1 else ("완결 · 웹 탐구 안내" if s_num == num_scenes else f"Step {s_num} · 동적 플립북 증명")
+            if s_num == 1:
+                step_title = "질문 1 · 관찰과 경이 (Notice & Wonder)"
+                step_q_ko = f"❓ [Notice & Wonder] {clean_title_ko}에서 움직여도 변하지 않는 것은 무엇일까요?"
+                step_q_en = f"❓ [Notice & Wonder] What stays invariant in {clean_title_en}?"
+            elif s_num == num_scenes:
+                step_title = "질문 확장 · 조건 변형 (What-If-Not)"
+                step_q_ko = "🔀 [What-If-Not] 만약 도형의 조건을 바꾸면 어떤 새로운 정리가 탄생할까요?"
+                step_q_en = "🔀 [What-If-Not] What if we change one condition of this figure?"
+            else:
+                step_title = f"Step {s_num} · 소크라테스 발문 & 보조선 탐구"
+                step_q_ko = f"🧭 [폴리아 발문 {s_num}] 왜 여기에 보조선을 그으면 숨은 관계가 한눈에 보일까요?"
+                step_q_en = f"🧭 [Pólya Inquiry {s_num}] Why does this auxiliary line unlock the proof?"
         elif s_num == 1:
-            step_title = "도입 · 주제 및 증명 목표"
-            exp_ko = f"1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 {clean_title_ko}의 핵심 원리를 동적 플립북으로 증명해 봅시다. {core_ko}"
-            exp_en = f"Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore {clean_title_en} and see why this mathematical property holds."
+            step_title = "질문 1 · 관찰과 경이 (Notice & Wonder)"
+            step_q_ko = f"❓ [Notice & Wonder] {clean_title_ko}에서 변하지 않는 불변량은 무엇일까요?"
+            step_q_en = f"❓ [Notice & Wonder] What stays invariant in {clean_title_en}, and why?"
+            exp_ko = f"1단계, 질문으로 시작하는 수학 시간입니다. {clean_title_ko} 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. {core_ko}"
+            exp_en = f"Step 1. Welcome to Question-Driven Math at Min's Math Lab. Observe {clean_title_en} closely: what do you notice stays invariant, and why does this property always hold? Let us explore step by step."
         elif s_num == num_scenes:
-            step_title = "완결 · 실전 적용 및 웹 탐구 안내"
+            step_title = "질문 확장 · 조건 변형 (What-If-Not)"
+            step_q_ko = "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떻게 될까요?"
+            step_q_en = "🔀 [What-If-Not] What happens if we modify one condition of this theorem?"
             tip_str = tips_ko[0] if tips_ko else "도형의 정의와 대칭 보조선을 기억하세요."
-            exp_ko = f"마지막 {s_num}단계입니다. 지금까지 총 {total_pages}프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, {tip_str}"
-            exp_en = f"Step {s_num}. We have completed the entire {total_pages}-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself."
+            exp_ko = f"마지막 {s_num}단계입니다. 총 {total_pages}프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? {tip_str} 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!"
+            exp_en = f"Step {s_num}. We have completed the {total_pages}-frame visual proof! Now ask yourself a What-If-Not question: what happens if we change a condition in this figure? Visit min7014.github.io/mathedu to test your own questions interactively!"
         else:
             progress = (s_num - 1) / max(1, num_scenes - 2)
             range_str = f"{p_start + 1}페이지부터 {p_end + 1}페이지까지의 연속 움직임입니다." if p_end > p_start else f"{p_start + 1}페이지입니다."
             if progress <= 0.28:
-                step_title = "1단계 · 기본 도형 및 기준점 작도"
+                step_title = "1단계 질문 · 기본 도형 조건 관찰 (Notice)"
+                step_q_ko = "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?"
+                step_q_en = "👁️ [Observation Question] What symmetry is hidden in the base figure?"
                 s_hint = steps_ko[0] if len(steps_ko) > 0 else "기준 도형과 꼭짓점을 명확히 배치합니다."
-                exp_ko = f"{s_num}단계, {range_str} {focus_desc} 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. {s_hint}"
+                exp_ko = f"{s_num}단계, {range_str} 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? {focus_desc} 과정을 통해 핵심 출발점을 확인합니다. {s_hint}"
             elif progress <= 0.55:
-                step_title = "2단계 · 핵심 보조선 및 동적 대칭 관찰"
+                step_title = "2단계 질문 · 폴리아 제1보조선 발상 (How?)"
+                step_q_ko = "🧭 [보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?"
+                step_q_en = "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
                 s_hint = steps_ko[1] if len(steps_ko) > 1 else vis_ko
-                exp_ko = f"{s_num}단계, {range_str} {focus_desc} 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. {s_hint}"
+                exp_ko = f"{s_num}단계, {range_str} 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? {focus_desc}의 움직임을 눈여겨보세요. {s_hint}"
             elif progress <= 0.82:
-                step_title = "3단계 · 불변량 및 대수적 등식 도출"
+                step_title = "3단계 질문 · 불변량과 등식 발견 (Why?)"
+                step_q_ko = "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?"
+                step_q_en = "📐 [Invariant Question] Which ratio or area remains constant under motion?"
                 s_hint = steps_ko[2] if len(steps_ko) > 2 else "도형의 성질을 비례식과 등식으로 변환합니다."
-                exp_ko = f"{s_num}단계, {range_str} {focus_desc} 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. {s_hint}"
+                exp_ko = f"{s_num}단계, {range_str} 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? {focus_desc} 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. {s_hint}"
             else:
-                step_title = "4단계 · 수식 결합 및 정리 완성"
+                step_title = "4단계 질문 · 레고 블록 종합 (Synthesis)"
+                step_q_ko = "💡 [유레카 질문] 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요?"
+                step_q_en = "💡 [Eureka Question] How do the previous clues combine into the final proof?"
                 s_hint = steps_ko[3] if len(steps_ko) > 3 else "유도한 관계식들을 결합하여 최종 정리를 완성합니다."
-                exp_ko = f"{s_num}단계, {range_str} {focus_desc} 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. {s_hint}"
+                exp_ko = f"{s_num}단계, {range_str} 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? {focus_desc} 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. {s_hint}"
             exp_en = translate_text_google_gtx(exp_ko, "en")
 
         pages_out.append({
@@ -620,6 +646,8 @@ def auto_generate_page_explanations(doc, item_meta, baze_result=None, scene_rang
             "scene_index": s_num,
             "frame_range": [p_start + 1, p_end + 1],
             "step_title": step_title,
+            "step_question_ko": step_q_ko,
+            "step_question_en": step_q_en,
             "visual_focus": focus_desc,
             "color_tag": c_tag,
             "diff_bbox": bbox,
@@ -1078,10 +1106,22 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     if len(tip_raw) > 58:
         tip_raw = tip_raw[:58] + "..."
 
-    left_rib = f"🪜 [{step_title_str}]  {vis_focus_str}" if lang_code != "en" else f"🪜 [Step {scene_idx} Focus]  Dynamic Visual Proof & Geometric Invariant"
-    draw.text((48, 829), left_rib[:68], fill=(56, 189, 248), font=font_ribbon)
-    if tip_raw and lang_code == "ko":
-        draw.text((W - 760, 829), f"💡 핵심 원리: {tip_raw}", fill=(251, 191, 36), font=font_ribbon)
+    step_q_display = (
+        page_info.get("step_question_en")
+        if lang_code == "en"
+        else page_info.get("step_question_ko")
+    )
+    if not step_q_display:
+        if scene_idx == 1:
+            step_q_display = "❓ [Notice & Wonder] What stays invariant in this figure?" if lang_code == "en" else "❓ [관찰과 경이 질문] 이 도형에서 움직여도 변하지 않는 불변량은 무엇일까요?"
+        elif p_num == tot_p:
+            step_q_display = "🔀 [What-If-Not] What if we change one condition of this figure?" if lang_code == "en" else "🔀 [What-If-Not 확장 질문] 만약 도형의 조건을 바꾸면 어떤 새로운 정리가 될까요?"
+        else:
+            step_q_display = f"🧭 [Socratic Inquiry Step {scene_idx}] Why does this auxiliary line unlock the proof?" if lang_code == "en" else f"🧭 [소크라테스 발문 {scene_idx}단계] 왜 이 보조선과 도형 관계가 증명의 열쇠일까요?"
+
+    left_rib = f"🪜 [{step_title_str}]" if lang_code != "en" else f"🪜 [Step {scene_idx} Inquiry]"
+    draw.text((44, 829), left_rib[:34], fill=(56, 189, 248), font=font_ribbon)
+    draw.text((470, 829), step_q_display[:76], fill=(251, 191, 36), font=font_ribbon)
 
     # 5. 하단 방송급 자막 스튜디오 바 (y: 860 ~ 1080)
     draw.rectangle([0, 860, W, H], fill=(7, 11, 24))
@@ -1731,6 +1771,313 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
 
         print(f"[Broadcast Master MP4 & YouTube Package] {out_mp4} ({out_mp4.stat().st_size // 1024} KB, {round(cursor_sec, 1)}s)")
         return out_mp4
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+
+
+# ==============================================================================
+# ❓ Question-Asking Classroom Video Edition Engine (질문하는 수학 수업 전용 버전 제작기)
+# ==============================================================================
+QUESTION_CLASSROOM_DIR = ROOT_DIR / "video_lectures" / "question_classroom"
+QUESTION_CLASSROOM_DIR.mkdir(parents=True, exist_ok=True)
+
+CURATED_QUESTION_CLASSROOM_SCRIPTS = {
+    "math20250130001": {
+        "ko": [
+            "1단계, 질문으로 시작하는 수학 수업입니다! 화면의 피타고라스 나무를 자세히 관찰해 보세요. 나뭇가지가 끝없이 갈라지는데, 과연 무엇이 변하고 무엇이 끝까지 변하지 않을까요? 스스로 첫 번째 질문을 던져 보세요!",
+            "2단계 질문입니다. 빈 칠판에서 이 프랙탈 나무를 피워내려면 가장 먼저 어떤 기본 도형 두 개를 준비해야 할까요? 맞습니다, 기둥이 될 정사각형과 가지를 나눌 직각삼각형입니다.",
+            "3단계 핵심 발문입니다! 정사각형의 윗변 위에 왜 하필 반원을 그렸을까요? 반원 위의 아무 점이나 잡아서 삼각형을 만들면 그 각도는 항상 몇 도가 될까요? 네, 원의 지름에 대한 원주각은 언제나 90도 직각이 됩니다!",
+            "4단계 질문입니다! 직각삼각형의 두 직각변 위에 새로 피어난 두 정사각형의 넓이를 합치면, 맨 아래 기둥 정사각형의 넓이와 어떤 관계가 될까요? 피타고라스 정리에 의해 두 넓이의 합은 기둥 하나와 정확히 일치합니다!",
+            "5단계 질문입니다. 그렇다면 그 위에 다시 직각삼각형을 올리고 네 개의 정사각형 가지를 피워내면 넓이의 총합은 커질까요, 줄어들까요, 아니면 그대로일까요? 놀랍게도 네 개를 모두 더해도 여전히 처음 기둥 하나의 넓이와 똑같습니다!",
+            "6단계 질문입니다. 이제 여덟 개의 정사각형 가지가 뻗어 나갑니다. 가지의 개수는 매 단계 두 배씩 늘어나는데, 왜 각 층의 넓이 합은 단 1제곱센티미터도 변하지 않을까요? 한 쌍의 가지가 항상 바로 아래 가지 하나와 넓이가 같기 때문입니다!",
+            "7단계 질문입니다! 열여섯 개의 가지가 만들어졌습니다. 만약 오른쪽 기준 직각삼각형에서 꼭짓점의 위치를 옆으로 옮기면 나무의 모양은 어떻게 달라질까요? 예각의 크기에 따라 나무가 바람에 휘어지는 방향이 결정됩니다!",
+            "8단계 질문입니다. 서른두 개의 잎사귀가 돋아난 작은 나뭇가지 하나를 돋보기로 확대해 보면 어떤 모양이 보일까요? 일부분이 전체와 똑같이 닮아 있는 자기닮음 프랙탈 구조가 나타납니다!",
+            "9단계 질문입니다. 예순네 개의 정사각형이 풍성한 숲을 이룹니다. 오직 직각삼각형과 피타고라스 정리라는 단순한 규칙의 반복만으로 어떻게 자연 속 브로콜리나 나뭇가지 모양이 탄생할까요?",
+            "10단계 열린 질문입니다. 완성된 피타고라스 나무를 보며 답이 얼마인가라는 닫힌 질문 대신, 고전 기하학의 넓이 보존과 현대 프랙탈 기하학이 어떻게 만나는지 나만의 질문을 만들어 보세요!",
+            "마지막 11단계, 여러분이 출제자가 될 차례입니다! 만약 직각삼각형이 아니라 예각삼각형이나 둔각삼각형을 올린다면 넓이의 합은 커질까요, 작아질까요? 지금 설명란 링크의 수학홈페이지에서 직접 꼭짓점을 드래그하며 나만의 질문을 실험해 보세요!"
+        ],
+        "en": [
+            "Step 1. Welcome to the Question-Asking Math Classroom! Look closely at the Pythagoras Tree: as its branches split endlessly, what changes and what stays strictly invariant? Ask your first question now!",
+            "Step 2 Question: Starting from a blank canvas, which two fundamental geometric shapes do we need to grow this fractal tree? Exactly: a base square and a right triangle.",
+            "Step 3 Key Question: Why did we draw a semicircle on top of the trunk square? If we pick any point on that semicircle, what angle is formed? By Thales' theorem, the inscribed angle facing a diameter is always ninety degrees!",
+            "Step 4 Question: When two new squares sprout on the legs of the right triangle, how does their combined area compare to the trunk square below? By the Pythagorean Theorem, their sum equals the trunk square!",
+            "Step 5 Question: What happens when four branch squares bloom in the next generation? Does the total area grow, shrink, or stay constant? Remarkably, the sum of all four squares still equals the single trunk square!",
+            "Step 6 Question: Now eight squares branch out. The number of squares doubles at every level, yet why does the total area per level never change? Because every pair of child squares equals its parent square!",
+            "Step 7 Question: Sixteen branches now appear. What if we slide the vertex of the generating right triangle along the semicircle? That single acute angle controls the tilt and curvature of the entire tree!",
+            "Step 8 Question: With thirty-two leaves blooming, what do you notice if you zoom into a single small branch? You see an exact miniature copy of the whole tree—the hallmark of self-similar fractal geometry!",
+            "Step 9 Question: Sixty-four squares form a lush canopy. How can the simple repetition of the Pythagorean Theorem reproduce organic branching patterns found in nature?",
+            "Step 10 Open Question: Instead of asking a closed question, ask an open question: how do classical area conservation and modern fractal geometry unite in this figure?",
+            "Step 11 What-If-Not Challenge: Now it is your turn to pose a new problem! What if the generating triangle is acute or obtuse instead of a right triangle? Visit min7014.github.io/mathedu to drag the vertex and test your own question!"
+        ]
+    }
+}
+
+
+def build_question_classroom_page_text(slug_key, p_info, idx, total_pages, script_doc, lang_code="ko"):
+    curated_q = CURATED_QUESTION_CLASSROOM_SCRIPTS.get(slug_key, {}).get(lang_code)
+    if curated_q and idx < len(curated_q):
+        return curated_q[idx]
+
+    base_narr = p_info.get("narrations", {}).get(lang_code) or p_info.get("explanation_text", "")
+    step_q = (
+        p_info.get("step_question_en")
+        if lang_code == "en"
+        else p_info.get("step_question_ko")
+    ) or ""
+    clean_q = re.sub(r"^[^\]]+\]\s*", "", step_q).strip()
+
+    if lang_code == "ko":
+        base_clean = re.sub(r"^\d+단계(?:입니다)?[.,]?\s*", "", base_narr).strip()
+        if idx == 0:
+            return f"1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? {clean_q} {base_clean}"
+        elif idx == total_pages - 1:
+            return f"마지막 {idx+1}단계, 조건 변형 질문입니다! {base_clean} 만약 여기서 도형의 조건을 하나 바꾼다면 어떤 새로운 정리가 탄생할지 직접 질문하고 실험해 보세요!"
+        else:
+            return f"{idx+1}단계 탐구 발문입니다! {clean_q} 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. {base_clean}"
+    else:
+        base_clean = re.sub(r"^Step\s+\d+[.,]?\s*", "", base_narr, flags=re.I).strip()
+        if idx == 0:
+            return f"Step 1, Question-Asking Classroom! Let us ask first: {clean_q} {base_clean}"
+        elif idx == total_pages - 1:
+            return f"Final Step {idx+1}, What-If-Not Challenge! {base_clean} What if we modify one condition of this figure? Pose your own question on mathedu!"
+        else:
+            return f"Step {idx+1} Socratic Question: {clean_q} Pause and observe the figure: {base_clean}"
+
+
+def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_code, q_narration, show_spotlight=True):
+    """
+    [v5.0 질문하는 수학 수업 전용 1080p 방송 프레임]
+    - 상단 배지: ❓ 질문하는 수학 수업 (Question-Asking Classroom Edition)
+    - Phase 1 (show_spotlight=False): 슬라이드 상단에 '🙋 잠깐! 스스로 먼저 질문해 보세요 (Think & Ask First)' 발문 배너 강조
+    - Phase 2 (show_spotlight=True): 스포트라이트 하이라이트로 발문에 대한 기하학적 해답(보조선·불변량) 제시
+    """
+    p_copy = dict(page_info)
+    p_copy["narrations"] = dict(page_info.get("narrations") or {})
+    p_copy["narrations"][lang_code] = q_narration
+    canvas = render_slide_frame_1080p(pdf_page, p_copy, script_doc, lang_code, show_spotlight=show_spotlight)
+    draw = ImageDraw.Draw(canvas)
+
+    W, H = 1920, 1080
+    font_q_badge = get_font_for_lang("ko", 19, bold=True)
+    font_q_banner = get_font_for_lang("ko", 23, bold=True)
+
+    # 우측 상단 배지를 '❓ 질문하는 수학 수업 버전'으로 오버라이드
+    scene_idx = page_info.get("scene_index") or page_info["page"]
+    tot_scenes = len(script_doc.get("pages") or []) or script_doc["page_count"]
+    q_right_badge = (
+        f"❓ QUESTION CLASSROOM · STEP {scene_idx}/{tot_scenes} [{lang_code.upper()}]"
+        if lang_code == "en"
+        else f"❓ [질문하는 수업 버전] STEP {scene_idx}/{tot_scenes} · Notice & Wonder"
+    )
+    draw.rounded_rectangle([W - 565, 14, W - 24, 58], radius=12, fill=(190, 18, 60), outline=(254, 240, 138), width=2)
+    draw.text((W - 548, 23), q_right_badge, fill=(255, 255, 255), font=font_q_badge)
+
+    step_q_display = (
+        page_info.get("step_question_en")
+        if lang_code == "en"
+        else page_info.get("step_question_ko")
+    ) or ("❓ What stays invariant here?" if lang_code == "en" else "❓ 이 단계에서 변하지 않는 핵심 관계는 무엇일까요?")
+
+    # 슬라이드 상단 플로팅 발문 카드 표시
+    banner_bg = (159, 18, 57) if not show_spotlight else (15, 23, 42)
+    banner_outline = (250, 204, 21) if not show_spotlight else (56, 189, 248)
+    draw.rounded_rectangle([140, 88, W - 140, 138], radius=14, fill=banner_bg, outline=banner_outline, width=2)
+    prefix = ("🙋 [발문 · 먼저 생각해 보세요!] " if not show_spotlight else "💡 [시각적 단서 발견!] ") if lang_code != "en" else ("🙋 [Ask First!] " if not show_spotlight else "💡 [Visual Discovery!] ")
+    draw.text((164, 99), (prefix + step_q_display)[:82], fill=(254, 240, 138), font=font_q_banner)
+
+    return canvas
+
+
+def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
+    """
+    기존 및 신규 주제에 대해 '질문하는 수학 수업(Question-Asking Classroom)' 전용 1080p 설명영상(_q_ko.mp4, _q_en.mp4)과
+    전용 9:16 숏폼(_short_q_ko.mp4)을 제작하고 카탈로그에 등록합니다.
+    """
+    script_path = SCRIPTS_DIR / f"{slug_key}.json"
+    if not script_path.exists():
+        script_doc = generate_or_update_script(slug_key, target_langs=[lang_code, "en"])
+    else:
+        script_doc = json.loads(script_path.read_text(encoding="utf-8"))
+
+    voice_info = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])
+    voice_name = voice_info["voice"]
+
+    pdf_bytes = urllib.request.urlopen(script_doc["pdf_url"]).read()
+    doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+    pages_to_render = script_doc["pages"]
+    n_pages = len(pages_to_render)
+
+    ffmpeg_exe = shutil.which("ffmpeg")
+    ffprobe_exe = shutil.which("ffprobe")
+    topic_upload_dir = YT_UPLOADS_DIR / slug_key
+    topic_upload_dir.mkdir(parents=True, exist_ok=True)
+    QUESTION_CLASSROOM_DIR.mkdir(parents=True, exist_ok=True)
+
+    tmp_dir = Path(tempfile.mkdtemp(prefix=f"min7014_qvideo_{slug_key}_{lang_code}_"))
+    segment_files = []
+    page_timings = []
+    cursor_sec = 0.0
+
+    try:
+        chime_wav = ensure_harmonic_chime_wav()
+        ambient_wav = ensure_ambient_pad_wav()
+        clean_title_ko = re.sub(r"\$[^\$]*\$", "", script_doc.get("title", "")).strip()
+        clean_title_en = (script_doc.get("title_en") or clean_title_ko).strip()
+
+        # 0. 질문하는 수업 전용 오프닝 (Notice & Wonder 발문 훅)
+        climax_doc_idx = max(0, len(doc) - 2)
+        climax_info = dict(pages_to_render[-1])
+        climax_info["page"] = climax_doc_idx + 1
+        cold_q_text = (
+            f"질문하는 수학 수업 시간입니다! 오늘의 주제는 {clean_title_ko}입니다. 공식을 외우기 전에 화면의 완성된 도형을 보며 스스로 질문해 보세요. 도형이 움직여도 절대 변하지 않는 불변량은 무엇일까요? 그리고 어떤 보조선 한 줄이 그 비밀을 풀어줄까요?"
+            if lang_code == "ko"
+            else f"Welcome to the Question-Asking Math Classroom! Today we explore {clean_title_en}. Before memorizing any formula, ask yourself: what stays invariant in this figure, and which single auxiliary line unlocks the proof?"
+        )
+        cold_img_1 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=False)
+        cold_img_2 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=True)
+        c_p1 = tmp_dir / "qcold_01.png"
+        c_p2 = tmp_dir / "qcold_02.png"
+        cold_img_1.save(c_p1, compress_level=1)
+        cold_img_2.save(c_p2, compress_level=1)
+
+        cold_mp3 = tmp_dir / "qcold_audio.mp3"
+        cold_seg = tmp_dir / "qseg_cold_000.mp4"
+        comm_cold = edge_tts.Communicate(cold_q_text, voice_name, rate="+6%")
+        asyncio.run(comm_cold.save(str(cold_mp3)))
+        cold_dur = get_media_duration_seconds(cold_mp3, ffprobe_exe) + 0.65
+        cd1 = round(cold_dur * 0.45, 3)
+        cd2 = round(cold_dur - cd1, 3)
+        cold_concat = tmp_dir / "qcold_concat.txt"
+        cold_concat.write_text(
+            f"file '{c_p1.as_posix()}'\nduration {cd1}\nfile '{c_p2.as_posix()}'\nduration {cd2}\nfile '{c_p2.as_posix()}'\n",
+            encoding="utf-8",
+        )
+        subprocess.run([
+            ffmpeg_exe, "-y",
+            "-f", "concat", "-safe", "0", "-i", str(cold_concat),
+            "-i", str(cold_mp3), "-i", str(chime_wav),
+            "-filter_complex",
+            "[1:a]aformat=sample_rates=48000:channel_layouts=stereo,apad=pad_dur=0.55[v];"
+            "[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.18[c];"
+            "[v][c]amix=inputs=2:duration=first:dropout_transition=0[aout]",
+            "-map", "0:v", "-map", "[aout]",
+            "-c:v", "libx264", "-profile:v", "high", "-level:v", "4.2",
+            "-preset", "veryfast", "-tune", "stillimage", "-crf", "16", "-pix_fmt", "yuv420p", "-r", "30",
+            "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-shortest",
+            str(cold_seg),
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        c_seg_dur = get_media_duration_seconds(cold_seg, ffprobe_exe)
+        page_timings.append({"page": 0, "start": 0.0, "end": round(c_seg_dur, 3), "duration": round(c_seg_dur, 3), "text": cold_q_text})
+        cursor_sec += c_seg_dur
+        segment_files.append(cold_seg)
+
+        for seg_idx, p_info in enumerate(pages_to_render):
+            p_idx = min(len(doc) - 1, max(0, p_info["page"] - 1))
+            q_narr = build_question_classroom_page_text(slug_key, p_info, seg_idx, n_pages, script_doc, lang_code=lang_code)
+            p_info.setdefault("question_narrations", {})[lang_code] = q_narr
+
+            mp3_path = tmp_dir / f"qaudio_{seg_idx:03d}.mp3"
+            seg_path = tmp_dir / f"qseg_{seg_idx:03d}.mp4"
+            asyncio.run(synthesize_edge_tts_mp3(q_narr, voice_name, mp3_path))
+            tts_dur = get_media_duration_seconds(mp3_path, ffprobe_exe)
+            # 질문 후 학생이 스스로 생각할 수 있는 사색 호흡(Pre 0.45s + Post 0.85s) 부여
+            total_seg_dur = tts_dur + 1.3
+
+            img_ask = render_question_classroom_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, q_narr, show_spotlight=False)
+            img_ans = render_question_classroom_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, q_narr, show_spotlight=True)
+            p_ask = tmp_dir / f"qslide_{seg_idx:03d}_ask.png"
+            p_ans = tmp_dir / f"qslide_{seg_idx:03d}_ans.png"
+            img_ask.save(p_ask, compress_level=1)
+            img_ans.save(p_ans, compress_level=1)
+
+            d1 = max(1.0, round(total_seg_dur * 0.36, 3))
+            d2 = max(1.0, round(total_seg_dur - d1, 3))
+            f_concat_txt = tmp_dir / f"qfconcat_{seg_idx:03d}.txt"
+            f_concat_txt.write_text(
+                f"file '{p_ask.as_posix()}'\nduration {d1}\nfile '{p_ans.as_posix()}'\nduration {d2}\nfile '{p_ans.as_posix()}'\n",
+                encoding="utf-8",
+            )
+            subprocess.run([
+                ffmpeg_exe, "-y",
+                "-f", "concat", "-safe", "0", "-i", str(f_concat_txt),
+                "-i", str(mp3_path), "-i", str(chime_wav),
+                "-filter_complex",
+                "[1:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay=450|450,apad=pad_dur=0.85[voice];"
+                "[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.12[chime];"
+                "[voice][chime]amix=inputs=2:duration=first:dropout_transition=0[aout]",
+                "-map", "0:v", "-map", "[aout]",
+                "-c:v", "libx264", "-profile:v", "high", "-level:v", "4.2",
+                "-preset", "veryfast", "-tune", "stillimage", "-crf", "16", "-pix_fmt", "yuv420p", "-r", "30",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-shortest",
+                str(seg_path),
+            ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+            seg_dur = get_media_duration_seconds(seg_path, ffprobe_exe)
+            page_timings.append({
+                "page": p_info["page"],
+                "start": round(cursor_sec, 3),
+                "end": round(cursor_sec + seg_dur, 3),
+                "duration": round(seg_dur, 3),
+                "text": q_narr,
+            })
+            cursor_sec += seg_dur
+            segment_files.append(seg_path)
+
+        concat_txt = tmp_dir / "qconcat_list.txt"
+        concat_txt.write_text("\n".join(f"file '{s.as_posix()}'" for s in segment_files), encoding="utf-8")
+        raw_concat_mp4 = tmp_dir / f"raw_q_{slug_key}_{lang_code}.mp4"
+        out_mp4 = topic_upload_dir / f"{slug_key}_q_{lang_code}.mp4"
+        web_mp4 = QUESTION_CLASSROOM_DIR / f"{slug_key}_q_{lang_code}.mp4"
+
+        subprocess.run([
+            ffmpeg_exe, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_txt), "-c", "copy", str(raw_concat_mp4)
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        raw_dur = get_media_duration_seconds(raw_concat_mp4, ffprobe_exe)
+        subprocess.run([
+            ffmpeg_exe, "-y",
+            "-i", str(raw_concat_mp4),
+            "-stream_loop", "-1", "-i", str(ambient_wav),
+            "-filter_complex",
+            "[0:a]aformat=sample_rates=48000:channel_layouts=stereo[voice];"
+            "[1:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.12[bgm];"
+            "[voice][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]",
+            "-map", "0:v", "-map", "[aout]",
+            "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
+            "-movflags", "+faststart", "-t", f"{raw_dur:.2f}",
+            str(out_mp4),
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        shutil.copyfile(out_mp4, web_mp4)
+
+        srt_lines = []
+        for idx_s, pt in enumerate(page_timings, 1):
+            srt_lines.append(str(idx_s))
+            srt_lines.append(f"{format_srt_timestamp(pt['start'])} --> {format_srt_timestamp(pt['end'])}")
+            srt_lines.append(pt["text"])
+            srt_lines.append("")
+        srt_pkg_path = YT_PKG_DIR / f"{slug_key}_q_{lang_code}.srt"
+        srt_pkg_path.write_text("\n".join(srt_lines), encoding="utf-8")
+
+        q_meta = {
+            "title": (
+                f"❓ [질문하는 수학 수업] {clean_title_ko} — 왜 항상 성립할까? (Notice & Wonder · What-If-Not 탐구) | @min7014_ai"
+                if lang_code == "ko"
+                else f"❓ [Question-Asking Math] {clean_title_en} — Notice & Wonder Visual Inquiry | @min7014_ai"
+            )[:100],
+            "local_mp4_path": f"video_lectures/question_classroom/{web_mp4.name}",
+            "upload_mp4_path": f"youtube_uploads/{slug_key}/{out_mp4.name}",
+            "srt_url": f"video_lectures/youtube_packages/{srt_pkg_path.name}",
+            "duration_sec": round(cursor_sec, 1),
+        }
+        script_doc.setdefault("question_classroom_packages", {})[lang_code] = q_meta
+        script_path.write_text(json.dumps(script_doc, ensure_ascii=False, indent=2), encoding="utf-8")
+        update_video_catalog()
+        print(f"❓ [Question-Asking Classroom 1080p Video Generated ({lang_code.upper()})] {web_mp4} ({web_mp4.stat().st_size // 1024} KB, {round(cursor_sec, 1)}s)", flush=True)
+        return web_mp4
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
@@ -2484,9 +2831,15 @@ def auto_pipeline_batch(count=1, specific_slug=None, privacy="public", upload_en
         print("=" * 72)
         generate_or_update_script(s_key, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
         for lc in ["ko", "en"]:
+            # [버전 1] 일반적인 설명 영상 (1080p 16:9)
             mp4_p = YT_UPLOADS_DIR / s_key / f"{s_key}_{lc}.mp4"
             if not mp4_p.exists():
                 render_multilingual_video(s_key, lang_code=lc)
+            # [버전 2] 질문하는 수업 특화 영상 (1080p 16:9)
+            q_mp4_p = ROOT_DIR / "video_lectures" / "question_classroom" / f"{s_key}_q_{lc}.mp4"
+            if not q_mp4_p.exists():
+                render_question_classroom_video(s_key, lang_code=lc)
+            # [버전 3] 숏폼 영상 (9:16 #Shorts)
             short_p = YT_UPLOADS_DIR / "shorts" / f"{s_key}_short_{lc}.mp4"
             if not short_p.exists():
                 render_youtube_short_vertical(s_key, lang_code=lc)
@@ -2911,9 +3264,9 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
 
     if seq_idx == total_seqs:
         if lang_code == "ko":
-            return "보조선과 기하 직관만으로 완벽 증명 완료! 1080p 풀버전 강의와 직접 움직이는 지오지브라는 채널과 설명란 링크에서 바로 체험해 보세요!"
+            return "기하 직관으로 증명 완료! 그렇다면 만약 이 도형의 조건을 조금 바꾸면 어떻게 될까요? 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 나만의 질문을 실험해 보세요!"
         else:
-            return "Visual proof complete! Watch the full 1080p lecture and try the interactive GeoGebra via the link in the description!"
+            return "Visual proof complete! Now ask: what if we change one condition of this figure? Tap the description link to test your own What-If-Not question in GeoGebra!"
 
     # 중간 핵심 전개 장면 (2, 3, 4단계): 인사말 제거 후 가장 핵심적인 1~2문장(한국어 85자, 영어 145자 이내) 추출
     if lang_code == "ko":
@@ -3058,9 +3411,9 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
             # 상단 후킹 배너 + 진행률 게이지 바
             draw.rounded_rectangle((44, 58, 1036, 294), radius=28, fill=(23, 37, 84), outline=(56, 189, 248), width=3)
-            draw.rounded_rectangle((74, 80, 540, 130), radius=18, fill=(225, 29, 72))
-            badge_txt = "⚡ 45초 시각적 증명 #Shorts" if lang_code == "ko" else "⚡ 45s Visual Proof #Shorts"
-            draw.text((94, 88), badge_txt, fill=(255, 255, 255), font=font_sub)
+            draw.rounded_rectangle((74, 80, 610, 130), radius=18, fill=(225, 29, 72))
+            badge_txt = "❓ 질문하는 수학 · 45초 시각 증명 #Shorts" if lang_code == "ko" else "❓ Question-Driven Visual Proof #Shorts"
+            draw.text((92, 88), badge_txt, fill=(255, 255, 255), font=font_sub)
 
             step_label = f"STEP {seq_idx}/{total_seqs}"
             draw.text((845, 88), step_label, fill=(251, 191, 36), font=font_sub)
@@ -3102,10 +3455,16 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 doc_frames = sorted(list({doc_frames[int(round(k * step_df))] for k in range(6)}))
 
             draw.rounded_rectangle((44, 1345, 1036, 1795), radius=28, fill=(15, 23, 42), outline=(225, 29, 72), width=3)
+            if seq_idx == 1:
+                q_tag_ko, q_tag_en = "❓ 질문 1 · 관찰과 경이(Notice & Wonder)", "❓ Q1 · Notice & Wonder Hook"
+            elif seq_idx == total_seqs:
+                q_tag_ko, q_tag_en = "🔀 질문 확장 · 조건을 바꾸면?(What-If-Not)", "🔀 What-If-Not Inquiry Challenge"
+            else:
+                q_tag_ko, q_tag_en = f"🧭 발문 {seq_idx}/{total_seqs} · 어떤 보조선을 그을까?", f"🧭 Q{seq_idx}/{total_seqs} · Key Auxiliary Line"
             step_chip = (
-                f"🔥 핵심 단계 {seq_idx}/{total_seqs} · 동적 플립북 (p.{doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
+                f"{q_tag_ko} (p.{doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
                 if lang_code == "ko"
-                else f"🔥 KEY INSIGHT {seq_idx}/{total_seqs} · Flipbook Motion (p.{doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
+                else f"{q_tag_en} (p.{doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
             )
             draw.text((78, 1375), step_chip, fill=(251, 191, 36), font=font_sub)
             cap_lines = textwrap.wrap(short_narration, width=22 if lang_code == "ko" else 34)[:5]
@@ -3838,6 +4197,15 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         boost_youtube_channel_popularity()
                     except Exception as be:
                         print(f"[Popularity Boost Notice] {be}", flush=True)
+                    for q_sp in sorted(SCRIPTS_DIR.glob("*.json"), key=lambda x: (0 if x.stem in CURATED_PAGE_SCRIPTS else 1, x.stem)):
+                        q_doc = json.loads(q_sp.read_text(encoding="utf-8"))
+                        q_pkgs = q_doc.get("question_classroom_packages") or {}
+                        q_mp4_p = QUESTION_CLASSROOM_DIR / f"{q_sp.stem}_q_ko.mp4"
+                        if not q_pkgs.get("ko") or not q_mp4_p.exists():
+                            print(f"❓ [Question-Asking Classroom Upgrade] 기존 영상의 질문하는 수업 버전 추가 제작: {q_sp.stem}", flush=True)
+                            render_question_classroom_video(q_sp.stem, lang_code="ko")
+                            render_youtube_short_vertical(q_sp.stem, lang_code="ko")
+                            break
                     update_video_catalog()
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)
@@ -3853,10 +4221,20 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                 print(f"🎬 [Continuous Factory] 다음 주제 1080p 설명영상 + 9:16 #Shorts 자동 제작 시작: {next_slug}", flush=True)
                 try:
                     generate_or_update_script(next_slug, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
+                    # 3a) 기존 제작된 주제 중 아직 [버전 2 · 질문하는 수업 특화 영상]이 없는 주제 1건 우선 추가 제작
+                    for q_sp in sorted(SCRIPTS_DIR.glob("*.json")):
+                        q_check = ROOT_DIR / "video_lectures" / "question_classroom" / f"{q_sp.stem}_q_ko.mp4"
+                        if not q_check.exists():
+                            render_question_classroom_video(q_sp.stem, lang_code="ko")
+                            break
+                    # 3b) 신규 주제에 대해 3가지 버전(1.일반 설명 영상 + 2.질문하는 수업 특화 영상 + 3.숏폼 영상) 동시 제작
                     for lc in ["ko", "en"]:
                         mp4_p = YT_UPLOADS_DIR / next_slug / f"{next_slug}_{lc}.mp4"
                         if not mp4_p.exists():
                             render_multilingual_video(next_slug, lang_code=lc)
+                        q_mp4_p = ROOT_DIR / "video_lectures" / "question_classroom" / f"{next_slug}_q_{lc}.mp4"
+                        if not q_mp4_p.exists():
+                            render_question_classroom_video(next_slug, lang_code=lc)
                         sh_p = YT_UPLOADS_DIR / "shorts" / f"{next_slug}_short_{lc}.mp4"
                         if not sh_p.exists():
                             render_youtube_short_vertical(next_slug, lang_code=lc)
@@ -3872,7 +4250,7 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         fdaemon.write_daemon_heartbeat(last_completed_slug=next_slug)
                     except Exception as pe_err:
                         print(f"[Pedagogy Sync Notice] {pe_err}", flush=True)
-                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "assets/min7014_deep_knowledge.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
+                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
                     subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v4.0 video/shorts & mathteacher pedagogy evolution ({next_slug})"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
                     print(f"✅ [Continuous Factory & Pedagogy Evolution Complete] {next_slug} (1080p KO/EN + #Shorts KO/EN + 수학교육 모듈 동기화 완료!)", flush=True)

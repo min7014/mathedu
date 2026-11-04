@@ -915,7 +915,10 @@ html.dark-theme .filter-tab-btn {
               <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">초등 기초 직관부터 중등 기하·대수 시각 증명(`min7014.github.io`), 고등 수능 100점 킬러까지 단절 없는 학습 사다리를 제공합니다.</p>
             </div>
           </div>
-          <button type="button" onclick="openMathTeacherHubModal('genealogy')" class="h-8 px-3 rounded-lg bg-secondary text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95">🎓 전체 수학교육 발전 스튜디오 열기 ➔</button>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button type="button" onclick="openMathTeacherHubModal('question')" class="h-8 px-3 rounded-lg bg-[#e11d48] text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95 shadow-sm">❓ 트렌드 핵심: 질문하는 수학 수업 스튜디오 열기 ➔</button>
+            <button type="button" onclick="openMathTeacherHubModal('genealogy')" class="h-8 px-3 rounded-lg bg-secondary text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95">🎓 전체 수학교육 발전 스튜디오 열기 ➔</button>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 text-xs">
@@ -3415,6 +3418,7 @@ window.openMathClinicModal = function() {
         <button type="button" data-mt-tab="vaccine" onclick="switchMathTeacherHubTab('vaccine')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">🔬 3. 오개념 백신 &amp; 반례 실험실 (11)</button>
         <button type="button" data-mt-tab="lesson" onclick="switchMathTeacherHubTab('lesson')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-surface-variant bg-surface-container-low text-on-surface">👩‍🏫 4. 교사용 5분 탐구 수업 런처 (70)</button>
         <button type="button" data-mt-tab="creative" onclick="switchMathTeacherHubTab('creative')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#6366f1] bg-[#eef2ff] text-[#4338ca]">✍️ 5. 탈-5지선다 창의 구성 &amp; 문제 발명 (41)</button>
+        <button type="button" data-mt-tab="question" onclick="switchMathTeacherHubTab(\'question\')" class="px-3 py-1.5 rounded-xl font-bold text-xs cursor-pointer border border-[#e11d48] bg-[#fff1f2] text-[#be123c]">❓ 6. 질문하는 수학 수업 (Notice &amp; Wonder · QFT)</button>
       </div>
       <input type="text" id="mtHubSearchInput" oninput="renderMathTeacherHubContent()" placeholder="🔍 개념·조건·반례·단원 키워드 검색..." class="h-8 px-3 rounded-lg bg-surface-container-low border border-surface-variant text-xs text-on-surface min-w-[210px] focus:outline-none focus:border-secondary" />
     </div>
@@ -6205,6 +6209,38 @@ window.jumpToMin7014FromMtHub = function(query) {
   }
 };
 
+
+window.saveStudentGeneratedQuestion = function() {
+  var n = (document.getElementById('mtQNoticeInput')?.value || '').trim();
+  var w = (document.getElementById('mtQWonderInput')?.value || '').trim();
+  var wi = (document.getElementById('mtQWhatIfInput')?.value || '').trim();
+  if (!n && !w && !wi) {
+    alert('관찰(Notice), 원리 질문(Wonder), 또는 조건 변형 질문(What-If-Not) 중 하나 이상을 입력해 주세요!');
+    return;
+  }
+  var list = [];
+  try { list = JSON.parse(localStorage.getItem('mathedu_student_questions_v1') || '[]'); } catch (e) {}
+  list.unshift({ notice: n, wonder: w, whatIf: wi, date: new Date().toLocaleDateString() });
+  try { localStorage.setItem('mathedu_student_questions_v1', JSON.stringify(list.slice(0, 50))); } catch (e) {}
+  renderMathTeacherHubContent();
+};
+
+window.copyQuestionClassroomModel = function(qIdx) {
+  var list = (window.MATHEDU_PEDAGOGY_ENGINE_DATA && window.MATHEDU_PEDAGOGY_ENGINE_DATA.questionAskingClassrooms) || [];
+  var qm = list[qIdx];
+  if (!qm) return;
+  var txt = [
+    '❓ [mathedu 질문하는 수학 수업 프레임워크] ' + qm.framework,
+    '💡 핵심 원리: ' + qm.corePrinciple,
+    '👩‍🏫 교사 촉진 발문:\n- ' + (qm.teacherPrompts || []).join('\n- '),
+    '🙋 학생 생성 질문 예시:\n- ' + (qm.studentQuestionExamples || []).join('\n- '),
+    '🔗 mathedu 연동: ' + qm.min7014Integration,
+    '🌐 바로가기: https://min7014.github.io/mathedu/'
+  ].join('\n\n');
+  if (navigator.clipboard) navigator.clipboard.writeText(txt);
+  alert('📋 질문하는 수학 수업 발문 시나리오가 클립보드에 복사되었습니다!\n\n' + txt);
+};
+
 window.copyTeacherLessonScenario = function(idx) {
   var list = (window.MATHEDU_PEDAGOGY_ENGINE_DATA && window.MATHEDU_PEDAGOGY_ENGINE_DATA.teacherLessonScenarios) || [];
   var item = list[idx];
@@ -6416,6 +6452,68 @@ window.renderMathTeacherHubContent = function() {
           '<button type="button" onclick="jumpToQuizFromMtHub(\'' + c.searchKeyword + '\')" class="flex-1 py-1.5 px-2.5 rounded-lg bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold text-[11px] border-0 cursor-pointer">✍️ 탈-5지선다 모드로 실전 기출 풀기 (' + c.searchKeyword + ') ➔</button>' +
           '<button type="button" onclick="jumpToMin7014FromMtHub(\'' + c.min7014Query + '\')" class="py-1.5 px-2.5 rounded-lg bg-sky-600 text-white font-bold text-[11px] border-0 cursor-pointer">📐 시각 증명 ➔</button>' +
         '</div>' +
+      '</div>';
+    });
+    html += '</div>';
+  } else if (tab === 'question') {
+    var qModels = (data.questionAskingClassrooms || []);
+    var myQuestions = [];
+    try {
+      myQuestions = JSON.parse(localStorage.getItem('mathedu_student_questions_v1') || '[]');
+    } catch (e) {}
+
+    html += '<div class="p-4 rounded-xl bg-gradient-to-r from-[#fff1f2] to-[#fef3c7] border-2 border-[#e11d48] text-xs text-slate-900 flex flex-col gap-2">' +
+      '<div class="flex items-center justify-between gap-2 flex-wrap">' +
+        '<div class="font-extrabold text-sm text-[#9f1239]">❓ 질문하는 수학 수업 (Question-Asking Classroom — 2022 개정 교육과정 &amp; IB 탐구 핵심 트렌드)</div>' +
+        '<a href="video_board.html" class="px-2.5 py-1 rounded-full bg-[#e11d48] text-white font-extrabold text-[11px] no-underline">🎬 @min7014_ai 질문형 설명영상 게시판 ➔</a>' +
+      '</div>' +
+      '<div class="text-slate-800 leading-relaxed">' +
+        '정답만 빠르게 찍는 수업에서 벗어나, 학생이 <b>[1단계: 관찰과 경이(Notice &amp; Wonder) ➔ 2단계: 열린 질문 전환(QFT) ➔ 3단계: 폴리아 제1보조선 자기질문 ➔ 4단계: 라카토스 반례 의심 질문 ➔ 5단계: What-If-Not 조건 변형 질문]</b>을 스스로 던지며 깨우치는 수업 스튜디오입니다.' +
+      '</div>' +
+    '</div>';
+
+    html += '<div class="p-4 rounded-xl bg-white border-2 border-sky-400 shadow-sm flex flex-col gap-2.5 text-xs">' +
+      '<div class="font-extrabold text-sm text-sky-900">🙋 [실시간 질문 생성 실습] 나만의 수학 질문 만들기 (Notice ➔ Wonder ➔ What-If-Not)</div>' +
+      '<div class="grid grid-cols-1 md:grid-cols-3 gap-2">' +
+        '<input type="text" id="mtQNoticeInput" placeholder="👁️ 1. 관찰(Notice): 도형·수식에서 변하지 않는 것은?" class="p-2 rounded-lg border border-slate-300 text-xs" />' +
+        '<input type="text" id="mtQWonderInput" placeholder="❓ 2. 원리 질문(Wonder): 왜 항상 그럴까? 어떤 보조선을 그을까?" class="p-2 rounded-lg border border-slate-300 text-xs" />' +
+        '<input type="text" id="mtQWhatIfInput" placeholder="🔀 3. 확장 질문(What-If-Not): 만약 조건을 바꾸면 어떨까?" class="p-2 rounded-lg border border-slate-300 text-xs" />' +
+      '</div>' +
+      '<div class="flex items-center justify-between gap-2 flex-wrap">' +
+        '<span class="text-[11px] text-slate-600">💡 좋은 수학 질문 1개가 백 문제 암기보다 강력한 수학적 통찰(Eureka)을 만듭니다!</span>' +
+        '<button type="button" onclick="saveStudentGeneratedQuestion()" class="px-3.5 py-1.5 rounded-lg bg-[#e11d48] hover:bg-[#be123c] text-white font-extrabold text-xs border-0 cursor-pointer">💾 나만의 수학 질문 카드 저장 (+30 XP)</button>' +
+      '</div>';
+
+    if (myQuestions.length > 0) {
+      html += '<div class="mt-1 pt-2 border-t border-slate-200 flex flex-col gap-1.5">' +
+        '<div class="font-extrabold text-rose-900">📚 내가 생성한 수학 질문 포트폴리오 (' + myQuestions.length + '건)</div>' +
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-2">';
+      myQuestions.slice(0, 4).forEach(function(mq) {
+        html += '<div class="p-2.5 rounded-lg bg-rose-50/70 border border-rose-200 flex flex-col gap-1">' +
+          '<div class="text-[11px] font-bold text-rose-800">👁️ 관찰: ' + (mq.notice || '-') + '</div>' +
+          '<div class="font-extrabold text-slate-900">❓ 질문: ' + (mq.wonder || '-') + '</div>' +
+          '<div class="text-[11px] text-indigo-900 font-semibold">🔀 확장: ' + (mq.whatIf || '-') + '</div>' +
+        '</div>';
+      });
+      html += '</div></div>';
+    }
+    html += '</div>';
+
+    html += '<div class="grid grid-cols-1 gap-3 text-xs">';
+    qModels.forEach(function(qm, qIdx) {
+      var tpHtml = (qm.teacherPrompts || []).map(function(tp) { return '<li class="text-slate-800 font-semibold">' + tp + '</li>'; }).join('');
+      var sqHtml = (qm.studentQuestionExamples || []).map(function(sq) { return '<li class="text-rose-950 font-bold">"' + sq + '"</li>'; }).join('');
+      html += '<div class="rounded-xl bg-white border border-surface-variant p-4 shadow-sm flex flex-col gap-2">' +
+        '<div class="flex items-center justify-between gap-2 flex-wrap">' +
+          '<h3 class="text-sm font-extrabold text-slate-900 m-0">' + qm.framework + '</h3>' +
+          '<button type="button" onclick="copyQuestionClassroomModel(' + qIdx + ')" class="px-2.5 py-1 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-900 font-extrabold text-[11px] border-0 cursor-pointer">📋 교실 발문 시나리오 복사</button>' +
+        '</div>' +
+        '<div class="text-slate-600 leading-relaxed">' + qm.corePrinciple + '</div>' +
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">' +
+          '<div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200"><div class="font-extrabold text-amber-900 mb-1">👩‍🏫 교사 촉진 발문 (Teacher Prompts)</div><ul class="m-0 pl-4 flex flex-col gap-1">' + tpHtml + '</ul></div>' +
+          '<div class="p-2.5 rounded-lg bg-rose-50 border border-rose-200"><div class="font-extrabold text-rose-900 mb-1">🙋 학생 생성 질문 예시 (Student Questions)</div><ul class="m-0 pl-4 flex flex-col gap-1">' + sqHtml + '</ul></div>' +
+        '</div>' +
+        '<div class="p-2 rounded-lg bg-sky-50 border border-sky-200 text-sky-950 font-semibold">🔗 <b>mathedu × @min7014_ai 수업 연동:</b> ' + qm.min7014Integration + '</div>' +
       '</div>';
     });
     html += '</div>';
