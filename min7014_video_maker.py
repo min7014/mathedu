@@ -498,42 +498,44 @@ def call_baze_vision_for_pdf_script(doc, item_meta, scene_ranges=None):
         f"}}"
     )
 
-    try:
-        payload = {
-            "model": "claude-sonnet-4-6",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64_img}"}},
-                        {"type": "text", "text": prompt},
-                    ],
-                }
-            ],
-            "max_tokens": 4096,
-            "temperature": 0.3,
-        }
-        req = urllib.request.Request(
-            "https://api.baze.co/v1/gateway/chat/completions",
-            data=json.dumps(payload).encode("utf-8"),
-            headers={
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-                "User-Agent": "Mozilla/5.0",
-            },
-        )
-        raw_resp = urllib.request.urlopen(req, timeout=22).read().decode("utf-8")
-        resp_obj = json.loads(raw_resp)
-        content = resp_obj["choices"][0]["message"]["content"].strip()
-        if content.startswith("```"):
-            content = re.sub(r"^```(?:json)?\s*", "", content)
-            content = re.sub(r"\s*```$", "", content)
-        parsed = json.loads(content)
-        if len(parsed.get("pages_ko", [])) == num_scenes and len(parsed.get("pages_en", [])) == num_scenes:
-            print(f"✨ [BAZE AI claude-sonnet-4-6 Vision Script Generated] ({num_scenes} scenes from {total_pages} PDF frames + Viral Hooks)")
-            return parsed
-    except Exception as e:
-        print(f"  [BAZE Vision Notice] Fallback to local analyzer: {e}")
+    for baze_model in ("claude-sonnet-4-6", "claude-sonnet-5-5", "gemini-3.8-flash"):
+        try:
+            payload = {
+                "model": baze_model,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64_img}"}},
+                            {"type": "text", "text": prompt},
+                        ],
+                    }
+                ],
+                "max_tokens": 4096,
+                "temperature": 0.3,
+            }
+            req = urllib.request.Request(
+                "https://api.baze.co/v1/gateway/chat/completions",
+                data=json.dumps(payload).encode("utf-8"),
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "x-api-key": api_key,
+                    "Content-Type": "application/json",
+                    "User-Agent": "Mozilla/5.0",
+                },
+            )
+            raw_resp = urllib.request.urlopen(req, timeout=50).read().decode("utf-8")
+            resp_obj = json.loads(raw_resp)
+            content = resp_obj["choices"][0]["message"]["content"].strip()
+            if content.startswith("```"):
+                content = re.sub(r"^```(?:json)?\s*", "", content)
+                content = re.sub(r"\s*```$", "", content)
+            parsed = json.loads(content)
+            if len(parsed.get("pages_ko", [])) == num_scenes and len(parsed.get("pages_en", [])) == num_scenes:
+                print(f"✨ [BAZE AI {baze_model} Vision Script Generated] ({num_scenes} scenes from {total_pages} PDF frames + Viral Hooks)")
+                return parsed
+        except Exception as e:
+            print(f"  [BAZE Vision Notice ({baze_model})] {e}")
     return None
 
 
