@@ -166,6 +166,11 @@ def produce_full_suite_for_slug(slug_key: str, langs=("ko", "en"), force=False):
         "v3_shorts_q": {},
     }
 
+    if force:
+        vm.queue_and_delete_existing_youtube_videos_for_slug(
+            slug_key, editions=("standard", "question", "shorts_std", "shorts_q"), langs=langs, execute_delete_now=True
+        )
+
     for lc in langs:
         # 1. [본편-일반형] 일반적인 설명 영상 (1080p 16:9)
         std_mp4 = YT_UPLOADS_DIR / slug_key / f"{slug_key}_{lc}.mp4"
@@ -207,17 +212,18 @@ def produce_full_suite_for_slug(slug_key: str, langs=("ko", "en"), force=False):
 
 
 def cmd_backfill(limit=3, langs=("ko",)):
-    """기존에 제작된 영상 주제들에 대해 누락된 질문형 본편·일반형 숏폼·질문형 숏폼을 순차적으로 추가 제작합니다."""
+    """기존에 제작된 영상 주제들에 대해 누락된 일반형 본편·질문형 본편·일반형 숏폼·질문형 숏폼을 순차적으로 추가 제작합니다."""
     inv = get_video_suite_inventory()
     completed = 0
     for item in inv:
         slug = item["slug"]
         needs_work = False
         for lc in langs:
+            std_mp4 = YT_UPLOADS_DIR / slug / f"{slug}_{lc}.mp4"
             q_mp4 = QUESTION_DIR / f"{slug}_q_{lc}.mp4"
             sh_mp4 = YT_UPLOADS_DIR / "shorts" / f"{slug}_short_{lc}.mp4"
             qsh_mp4 = WEB_SHORTS_DIR / f"{slug}_short_q_{lc}.mp4"
-            if not q_mp4.exists() or not sh_mp4.exists() or not qsh_mp4.exists():
+            if not std_mp4.exists() or not q_mp4.exists() or not sh_mp4.exists() or not qsh_mp4.exists():
                 needs_work = True
                 break
         if not needs_work:
@@ -259,18 +265,23 @@ def cmd_audit():
     print("=" * 88)
 
 
-def cmd_upload(slug="math20250130001", langs=("ko",)):
-    """대표 주제의 4대 버전(질문형 본편 · 질문형 숏폼 · 일반형 숏폼 · 일반형 본편)을 무결성 검증 후 @min7014_ai 유튜브 채널에 즉시 업로드합니다."""
+def cmd_upload(slug="math20250130001", langs=("ko",), replace_existing=True):
+    """대표 주제의 4대 버전(질문형 본편 · 질문형 숏폼 · 일반형 숏폼 · 일반형 본편)을 기존 구버전 유튜브 영상 삭제 후 @min7014_ai 채널에 즉시 업로드합니다."""
+    vm.scan_rss_and_queue_outdated_channel_videos(execute_delete_now=True)
+    if replace_existing:
+        vm.queue_and_delete_existing_youtube_videos_for_slug(
+            slug, editions=("standard", "question", "shorts_std", "shorts_q"), langs=langs, execute_delete_now=True
+        )
     vm.process_youtube_delete_queue(max_deletions=25)
     check = vm.verify_video_content_integrity(slug)
     if not check.get("ok"):
         print(f"⚠️ [Video_Creator Upload] '{slug}' 내용 무결성 재동기화 중 ({check.get('reason')})...")
         produce_full_suite_for_slug(slug, langs=langs, force=True)
-    print(f"🚀 [Video_Creator Upload] '{slug}' 4종 영상 @min7014_ai 유튜브 업로드 시도 중...")
-    s_vid = vm.upload_to_youtube(slug, langs=langs, privacy="public")
-    q_vid = vm.upload_question_classroom_to_youtube(slug, langs=langs, privacy="public")
-    q_sh = vm.upload_question_short_to_youtube(slug, langs=langs, privacy="public")
-    s_sh = vm.upload_short_to_youtube(slug, langs=langs, privacy="public")
+    print(f"🚀 [Video_Creator Upload] '{slug}' 기존 영상 삭제 완료 확인 후 4종 새 영상 @min7014_ai 유튜브 업로드 시도 중...")
+    s_vid = vm.upload_slug_to_youtube(slug, langs=langs, privacy="public", method="api", replace_existing=replace_existing)
+    q_vid = vm.upload_question_classroom_to_youtube(slug, langs=langs, privacy="public", replace_existing=replace_existing)
+    q_sh = vm.upload_question_short_to_youtube(slug, langs=langs, privacy="public", replace_existing=replace_existing)
+    s_sh = vm.upload_short_to_youtube(slug, langs=langs, privacy="public", replace_existing=replace_existing)
     print(f" • 일반 설명 본편 URL    : {s_vid}")
     print(f" • 질문하는 수업 본편 URL : {q_vid}")
     print(f" • 질문형 숏폼 Q-#Shorts : {q_sh}")

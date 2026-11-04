@@ -2392,9 +2392,14 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
 
             for p_obj, pt in zip(script_doc["pages"], page_timings):
                 p_obj.setdefault("durations", {})[lang_code] = pt["duration"]
+            yt_meta["needs_youtube_upload"] = True
+            yt_meta["updated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             script_doc.setdefault("youtube_packages", {})[lang_code] = yt_meta
             with open(script_path, "w", encoding="utf-8") as f:
                 json.dump(script_doc, f, ensure_ascii=False, indent=2)
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("standard_1080p",), langs=(lang_code,), execute_delete=False
+            )
 
         print(f"[Broadcast Master MP4 & YouTube Package] {out_mp4} ({out_mp4.stat().st_size // 1024} KB, {round(cursor_sec, 1)}s)")
         return out_mp4
@@ -2695,9 +2700,14 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
             "upload_mp4_path": f"youtube_uploads/{slug_key}/{out_mp4.name}",
             "srt_url": f"video_lectures/youtube_packages/{srt_pkg_path.name}",
             "duration_sec": round(cursor_sec, 1),
+            "needs_youtube_upload": True,
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         }
         script_doc.setdefault("question_classroom_packages", {})[lang_code] = q_meta
         script_path.write_text(json.dumps(script_doc, ensure_ascii=False, indent=2), encoding="utf-8")
+        queue_and_delete_existing_youtube_videos_for_slug(
+            slug_key, editions=("question_1080p",), langs=(lang_code,), execute_delete=False
+        )
         update_video_catalog()
         print(f"❓ [Question-Asking Classroom 1080p Video Generated ({lang_code.upper()})] {web_mp4} ({web_mp4.stat().st_size // 1024} KB, {round(cursor_sec, 1)}s)", flush=True)
         return web_mp4
@@ -2751,12 +2761,28 @@ def refresh_all_youtube_metadata_packages():
     update_video_catalog()
 
 
+def extract_youtube_video_id(url_or_id: str) -> str:
+    """YouTube URL 또는 11자리 영상 ID 문자열에서 정확한 11자리 video_id를 추출합니다."""
+    if not url_or_id:
+        return ""
+    s = str(url_or_id).strip()
+    if re.fullmatch(r"[A-Za-z0-9_-]{11}", s):
+        return s
+    m = re.search(r"(?:youtu\.be/|youtube\.com/(?:shorts/|watch\?v=|embed/))([A-Za-z0-9_-]{11})", s)
+    return m.group(1) if m else ""
+
+
 def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=False):
     """
     업로드 완료된 한국어(ko) 및 영어(en) 유튜브 URL을 @min7014_ai 영상저장고 인덱스(vault_index.json),
-    스크립트, 카탈로그, 심층 지식 DB에 일괄 저장하고, 두 언어 모두 유튜브 저장고에 올라간 경우
-    로컬 임시 MP4를 자동 정리하여 @min7014_ai를 영구 클라우드 영상저장고로 활용합니다.
+    스크립트, 카탈로그, 심층 지식 DB에 일괄 저장하고, 삭제 큐(blocked_ids)에 있는 구버전 URL은 절대 재등록하지 않습니다.
     """
+    blocked_ids = get_deleted_video_ids_set()
+    if yt_ko is not None and extract_youtube_video_id(yt_ko) in blocked_ids:
+        yt_ko = ""
+    if yt_en is not None and extract_youtube_video_id(yt_en) in blocked_ids:
+        yt_en = ""
+
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     final_ko = ""
     final_en = ""
@@ -2765,8 +2791,14 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
         yt_urls = sdoc.setdefault("youtube_urls", {"ko": "", "en": "", "orig": ""})
         if yt_ko is not None:
             yt_urls["ko"] = yt_ko.strip()
+            if yt_ko.strip() and "youtube_packages" in sdoc and "ko" in sdoc["youtube_packages"]:
+                sdoc["youtube_packages"]["ko"]["needs_youtube_upload"] = False
+                sdoc["youtube_packages"]["ko"]["uploaded_video_id"] = extract_youtube_video_id(yt_ko)
         if yt_en is not None:
             yt_urls["en"] = yt_en.strip()
+            if yt_en.strip() and "youtube_packages" in sdoc and "en" in sdoc["youtube_packages"]:
+                sdoc["youtube_packages"]["en"]["needs_youtube_upload"] = False
+                sdoc["youtube_packages"]["en"]["uploaded_video_id"] = extract_youtube_video_id(yt_en)
         final_ko = yt_urls.get("ko", "")
         final_en = yt_urls.get("en", "")
         script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -2804,7 +2836,6 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
         if l_changed:
             LOOKUP_JSON_PATH.write_text(json.dumps(lmap, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
-    # 한국어(ko)와 영어(en) 모두 @min7014_ai 영상저장고에 업로드 완료되면 로컬 MP4 용량 자동 회수
     if purge_local_mp4 and final_ko and final_en:
         up_dir = YT_UPLOADS_DIR / slug_key
         if up_dir.exists():
@@ -2861,12 +2892,209 @@ def get_deleted_video_ids_set():
         return set()
 
 
+def fetch_channel_rss_entries():
+    """@min7014_ai 유튜브 채널 공개 RSS 피드를 조회하여 현재 채널에 게시된 영상 목록을 반환합니다 (API 쿼터 소모 0)."""
+    import xml.etree.ElementTree as ET
+    entries = []
+    try:
+        req = urllib.request.Request(YOUTUBE_RSS_URL, headers={"User-Agent": "Mozilla/5.0"})
+        raw = urllib.request.urlopen(req, timeout=15).read()
+        root = ET.fromstring(raw)
+        ns = {
+            "atom": "http://www.w3.org/2005/Atom",
+            "yt": "http://www.youtube.com/xml/schemas/2015",
+            "media": "http://search.yahoo.com/mrss/",
+        }
+        for entry in root.findall("atom:entry", ns):
+            vid_el = entry.find("yt:videoId", ns)
+            title_el = entry.find("atom:title", ns)
+            pub_el = entry.find("atom:published", ns)
+            desc_el = entry.find("media:group/media:description", ns)
+            if vid_el is not None and title_el is not None:
+                vid_id = vid_el.text.strip()
+                entries.append({
+                    "video_id": vid_id,
+                    "title": (title_el.text or "").strip(),
+                    "published": (pub_el.text or "").strip() if pub_el is not None else "",
+                    "description": (desc_el.text or "").strip() if desc_el is not None else "",
+                    "url": f"https://youtu.be/{vid_id}",
+                })
+    except Exception:
+        pass
+    return entries
+
+
+def queue_and_delete_existing_youtube_videos_for_slug(
+    slug_key: str,
+    editions=None,
+    langs=("ko", "en"),
+    execute_delete=True,
+    execute_delete_now=None,
+    exclude_video_ids=None,
+):
+    """
+    [업데이트된 영상의 기존 유튜브 채널 영상 자동 삭제 & 교체 큐 등록 엔진]
+    특정 주제(slug_key)의 영상이 새로 렌더링/업데이트되거나 재업로드될 때:
+      1) 해당 주제의 기존 유튜브 URL(youtube_urls, question_youtube_urls, shorts_urls, question_shorts_urls),
+         vault_index.json, min7014_deep_knowledge.json, min7014_lookup.json 및 @min7014_ai 채널 RSS에서
+         기존 영상 ID를 모두 찾아냅니다.
+      2) 찾아낸 기존 영상 ID들을 youtube_delete_queue.json(pending_delete_video_ids) 최우선 순위에 등록하고
+         로컬 URL 바인딩을 초기화하여 새 영상이 즉시 업로드되도록 설정합니다.
+      3) execute_delete=True이면 즉시 YouTube Data API v3(videos.delete)를 호출하여 채널의 기존 영상을 삭제합니다.
+    """
+    if execute_delete_now is not None:
+        execute_delete = bool(execute_delete_now)
+    if editions is None:
+        editions = ("standard_1080p", "question_1080p", "standard_short", "question_short")
+    exclude_set = {extract_youtube_video_id(x) for x in (exclude_video_ids or []) if x}
+    edition_map = {
+        "standard_1080p": ("youtube_urls", "youtube_packages", ""),
+        "standard": ("youtube_urls", "youtube_packages", ""),
+        "question_1080p": ("question_youtube_urls", "question_classroom_packages", "_Q"),
+        "question": ("question_youtube_urls", "question_classroom_packages", "_Q"),
+        "standard_short": ("shorts_urls", "shorts_packages", "_SHORT"),
+        "shorts_std": ("shorts_urls", "shorts_packages", "_SHORT"),
+        "question_short": ("question_shorts_urls", "question_shorts_packages", "_SHORT_Q"),
+        "shorts_q": ("question_shorts_urls", "question_shorts_packages", "_SHORT_Q"),
+    }
+
+    found_old_ids = set()
+    sp = SCRIPTS_DIR / f"{slug_key}.json"
+    if sp.exists():
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+            sdoc_changed = False
+            for ed in editions:
+                if ed not in edition_map:
+                    continue
+                url_field, pkg_field, _ = edition_map[ed]
+                u_dict = sdoc.get(url_field) or {}
+                p_dict = sdoc.setdefault(pkg_field, {})
+                for lc in langs:
+                    old_u = (u_dict.get(lc) or "").strip()
+                    vid_id = extract_youtube_video_id(old_u)
+                    if vid_id and vid_id not in exclude_set:
+                        found_old_ids.add(vid_id)
+                        u_dict[lc] = ""
+                        sdoc_changed = True
+                    if lc in p_dict and isinstance(p_dict[lc], dict):
+                        old_pkg_vid = extract_youtube_video_id(p_dict[lc].get("uploaded_video_id", ""))
+                        if old_pkg_vid and old_pkg_vid not in exclude_set:
+                            found_old_ids.add(old_pkg_vid)
+                        p_dict[lc]["needs_youtube_upload"] = True
+                        sdoc_changed = True
+            if sdoc_changed:
+                sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception:
+            pass
+
+    # 채널 공개 RSS에서도 동일 slug + edition + lang에 해당하는 구버전 영상 ID 탐지
+    for ent in fetch_channel_rss_entries():
+        r_vid = ent["video_id"]
+        if r_vid in exclude_set:
+            continue
+        blob = f"{ent['title']}\n{ent['description']}"
+        for ed in editions:
+            if ed not in edition_map:
+                continue
+            _, _, tag_mid = edition_map[ed]
+            for lc in langs:
+                id_tag = f"{slug_key}{tag_mid}_{lc.upper()}"
+                if f"[ID: {id_tag}]" in blob or f"[{id_tag}]" in blob:
+                    found_old_ids.add(r_vid)
+
+    if found_old_ids:
+        dq_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
+        dq = {"keep_video_ids": [], "pending_delete_video_ids": [], "deleted_video_ids": []}
+        if dq_path.exists():
+            try:
+                dq = json.loads(dq_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+        deleted_done = set(dq.get("deleted_video_ids") or [])
+        pending_list = list(dq.get("pending_delete_video_ids") or [])
+        for oid in sorted(found_old_ids):
+            if oid not in deleted_done and oid not in pending_list:
+                pending_list.insert(0, oid)
+        dq["pending_delete_video_ids"] = pending_list
+        dq["keep_video_ids"] = [k for k in (dq.get("keep_video_ids") or []) if k not in found_old_ids]
+        dq["updated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        dq_path.write_text(json.dumps(dq, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"♻️ [Updated Video Replacement Queued] slug={slug_key} -> Old YouTube IDs queued for deletion: {sorted(found_old_ids)}", flush=True)
+
+    if execute_delete:
+        process_youtube_delete_queue(max_deletions=25)
+    return sorted(found_old_ids)
+
+
+def scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False):
+    """
+    [@min7014_ai 채널 RSS 기반 구버전/불일치 영상 자동 감지 및 삭제 큐 등록 (쿼터 소모 0)]
+    현재 채널에 올라와 있는 영상 중:
+      - 제목이나 설명에 '민은기', "Min's Math Lab", 빈 괄호 '()', 미변환 LaTeX('$', 'times', 'div')가 포함된 영상
+      - 로컬에서 새로 업데이트되어 needs_youtube_upload=True로 표시된 주제의 구버전 영상
+    을 자동으로 탐지하여 youtube_delete_queue.json(pending_delete_video_ids)에 등록합니다.
+    """
+    entries = fetch_channel_rss_entries()
+    if not entries:
+        return []
+    dq_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
+    dq = {"keep_video_ids": [], "pending_delete_video_ids": [], "deleted_video_ids": []}
+    if dq_path.exists():
+        try:
+            dq = json.loads(dq_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    pending = list(dq.get("pending_delete_video_ids") or [])
+    deleted_done = set(dq.get("deleted_video_ids") or [])
+    newly_queued = []
+
+    for ent in entries:
+        vid_id = ent["video_id"]
+        if vid_id in pending or vid_id in deleted_done:
+            continue
+        blob = f"{ent['title']}\n{ent['description']}"
+        is_outdated = False
+        if any(bad in blob for bad in ("민은기", "Min's Math Lab", "MinsMathLab", "()", "a^m div a^n", "a^m times a^n")):
+            is_outdated = True
+        m_tag = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+?)_(?:(SHORT_Q|SHORT|Q)_)?(KO|EN)\]", blob, re.IGNORECASE)
+        if m_tag:
+            s_slug = m_tag.group(1)
+            sp = SCRIPTS_DIR / f"{s_slug}.json"
+            if sp.exists():
+                try:
+                    sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                    active_urls = []
+                    for uf in ("youtube_urls", "question_youtube_urls", "shorts_urls", "question_shorts_urls"):
+                        for uval in (sdoc.get(uf) or {}).values():
+                            if uval:
+                                active_urls.append(extract_youtube_video_id(uval))
+                    if vid_id not in active_urls:
+                        is_outdated = True
+                except Exception:
+                    pass
+        if is_outdated:
+            pending.insert(0, vid_id)
+            newly_queued.append(vid_id)
+
+    if newly_queued:
+        dq["pending_delete_video_ids"] = pending
+        dq["keep_video_ids"] = [k for k in (dq.get("keep_video_ids") or []) if k not in newly_queued]
+        dq["updated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        dq_path.write_text(json.dumps(dq, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"🔍 [RSS Outdated Video Detector] Queued {len(newly_queued)} outdated channel videos for deletion: {newly_queued}", flush=True)
+    if execute_delete_now and pending:
+        process_youtube_delete_queue(max_deletions=25)
+    return newly_queued
+
+
 def process_youtube_delete_queue(max_deletions=25):
     """
-    [불일치 영상 자동 삭제 엔진 (YouTube Data API v3)]
-    video_lectures/youtube_delete_queue.json의 pending_delete_video_ids에 등록된 불일치 영상들을
+    [불일치 및 구버전 영상 자동 삭제 엔진 (YouTube Data API v3)]
+    video_lectures/youtube_delete_queue.json의 pending_delete_video_ids에 등록된 구버전·불일치 영상들을
     @min7014_ai 채널에서 즉시 삭제(youtube.videos().delete)합니다.
     """
+    scan_rss_and_queue_outdated_channel_videos()
     dq_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
     if not dq_path.exists():
         return 0
@@ -2893,7 +3121,7 @@ def process_youtube_delete_queue(max_deletions=25):
             youtube.videos().delete(id=vid_id).execute()
             deleted_done.append(vid_id)
             deleted_now += 1
-            print(f"🗑️ [YouTube Mismatched Video Deleted from @min7014_ai] {vid_id}", flush=True)
+            print(f"🗑️ [YouTube Old/Updated Video Deleted from @min7014_ai] {vid_id}", flush=True)
         except Exception as e:
             err_s = str(e)
             if "videoNotFound" in err_s or "404" in err_s:
@@ -2907,7 +3135,10 @@ def process_youtube_delete_queue(max_deletions=25):
 
     dq["pending_delete_video_ids"] = still_pending
     dq["deleted_video_ids"] = sorted(list(set(deleted_done)))
+    dq["keep_video_ids"] = [k for k in (dq.get("keep_video_ids") or []) if k not in set(deleted_done) and k not in set(still_pending)]
     dq_path.write_text(json.dumps(dq, ensure_ascii=False, indent=2), encoding="utf-8")
+    if deleted_now > 0:
+        update_video_catalog()
     return deleted_now
 
 
@@ -3414,28 +3645,50 @@ def upload_slug_via_studio_browser(slug_key, langs=("ko", "en"), privacy="public
     return uploaded_urls
 
 
-def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", method="auto"):
+def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", method="auto", replace_existing=False):
     """
     https://www.youtube.com/@min7014_ai (UCSlqQfOEtRfJuMPyGMLgFYA) 채널에 한국어(ko)·영어(en) 영상을 자동 업로드합니다.
+    - 업데이트된 영상(needs_youtube_upload=True 또는 replace_existing=True)인 경우 유튜브 채널의 기존 영상을 먼저 삭제(videos.delete)한 뒤 새 영상을 올립니다.
     - method='auto': client_secret.json이 있으면 YouTube Data API v3를 사용하고, 없으면 Playwright YouTube Studio 브라우저 자동 업로더를 실행합니다.
     """
     global _LAST_UPLOAD_QUOTA_BLOCKED
     _LAST_UPLOAD_QUOTA_BLOCKED = False
+    process_youtube_delete_queue(max_deletions=25)
     ensure_topic_rendered_for_upload(slug_key, langs=langs)
+
+    integrity = verify_video_content_integrity(slug_key)
+    if not integrity.get("ok"):
+        print(f"⚠️ [Pre-Upload Mathteacher Audit ({slug_key})] Rebuilding due to {integrity.get('reason')}...", flush=True)
+        generate_or_update_script(slug_key, target_langs=["ko", "en"])
+        for _lc in langs:
+            render_multilingual_video(slug_key, lang_code=_lc)
 
     uploaded_urls = {}
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     existing_yt = {}
+    yt_pkgs = {}
+    blocked_ids = get_deleted_video_ids_set()
     if script_path.exists():
         try:
-            existing_yt = json.loads(script_path.read_text(encoding="utf-8")).get("youtube_urls") or {}
+            sdoc_tmp = json.loads(script_path.read_text(encoding="utf-8"))
+            existing_yt = sdoc_tmp.get("youtube_urls") or {}
+            yt_pkgs = sdoc_tmp.get("youtube_packages") or {}
         except Exception:
             existing_yt = {}
+            yt_pkgs = {}
 
     missing_langs = []
     for lc in langs:
-        if (existing_yt.get(lc) or "").strip():
-            uploaded_urls[lc] = existing_yt[lc].strip()
+        cur_u = (existing_yt.get(lc) or "").strip()
+        cur_vid = extract_youtube_video_id(cur_u)
+        needs_up = bool((yt_pkgs.get(lc) or {}).get("needs_youtube_upload"))
+        if cur_u and (replace_existing or needs_up or cur_vid in blocked_ids):
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("standard_1080p",), langs=(lc,), execute_delete=True
+            )
+            cur_u = ""
+        if cur_u:
+            uploaded_urls[lc] = cur_u
         else:
             missing_langs.append(lc)
 
@@ -3456,6 +3709,10 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
 
     newly_uploaded = {}
     for lang_code in missing_langs:
+        # 업로드 직전 동일 주제·언어의 기존 채널 영상이 남아있으면 삭제 큐 등록 및 즉시 삭제
+        queue_and_delete_existing_youtube_videos_for_slug(
+            slug_key, editions=("standard_1080p",), langs=(lang_code,), execute_delete=True
+        )
         mp4_path = YT_UPLOADS_DIR / slug_key / f"{slug_key}_{lang_code}.mp4"
         if not mp4_path.exists():
             render_multilingual_video(slug_key, lang_code=lang_code)
@@ -3488,6 +3745,9 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
             uploaded_urls[lang_code] = yt_url
             newly_uploaded[lang_code] = yt_url
             print(f"[YouTube Uploaded to {YOUTUBE_CHANNEL_HANDLE} ({lang_code.upper()})] {yt_url}", flush=True)
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("standard_1080p",), langs=(lang_code,), execute_delete=True, exclude_video_ids=[vid_id]
+            )
             set_youtube_urls_for_slug(
                 slug_key,
                 yt_ko=yt_url if lang_code == "ko" else None,
@@ -3734,12 +3994,17 @@ def update_video_catalog():
     with open(CATALOG_PATH, "w", encoding="utf-8") as f:
         json.dump(scripts, f, ensure_ascii=False, indent=2)
 
-    # min7014_deep_knowledge.json에도 숏폼 정보 동기화
-    if DEEP_JSON_PATH.exists() and short_by_slug:
+    # min7014_deep_knowledge.json 및 min7014_lookup.json에서도 삭제 큐(blocked_ids) URL 정리 및 최신 숏폼 정보 동기화
+    if DEEP_JSON_PATH.exists():
         try:
             d_items = json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8"))
             d_changed = False
             for it in d_items:
+                for u_field in ("youtube", "youtube_ko", "youtube_en", "youtube_short_ko", "youtube_short_en"):
+                    u_val = (it.get(u_field) or "").strip()
+                    if u_val and extract_youtube_video_id(u_val) in blocked_ids:
+                        it[u_field] = ""
+                        d_changed = True
                 pdf_u = (it.get("pdf") or "").split("#")[0].strip()
                 p_slug = pdf_u.split("/")[-1].replace(".pdf", "") if pdf_u else ""
                 w_slug = (it.get("url") or "").rstrip("/").split("/")[-1]
@@ -3764,6 +4029,23 @@ def update_video_catalog():
                 DEEP_JSON_PATH.write_text(json.dumps(d_items, ensure_ascii=False, indent=2), encoding="utf-8")
         except Exception as de:
             print(f"[Deep JSON Shorts Sync Notice] {de}")
+
+    if LOOKUP_JSON_PATH.exists():
+        try:
+            lmap = json.loads(LOOKUP_JSON_PATH.read_text(encoding="utf-8"))
+            l_changed = False
+            for k_cand, v_obj in lmap.items():
+                if not isinstance(v_obj, dict):
+                    continue
+                for lk_field in ("y", "yk", "ye", "youtube", "youtube_ko", "youtube_en"):
+                    l_val = (v_obj.get(lk_field) or "").strip()
+                    if l_val and extract_youtube_video_id(l_val) in blocked_ids:
+                        v_obj[lk_field] = ""
+                        l_changed = True
+            if l_changed:
+                LOOKUP_JSON_PATH.write_text(json.dumps(lmap, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        except Exception as le:
+            print(f"[Lookup JSON Clean Notice] {le}")
 
     vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
     existing_playlists = {}
@@ -4388,6 +4670,15 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
         existing_smeta[lang_code] = short_meta
         short_meta_path.write_text(json.dumps(existing_smeta, ensure_ascii=False, indent=2), encoding="utf-8")
 
+        # [자동 교체 원칙] 숏폼 영상이 새로 렌더링/업데이트되면 기존 채널의 구버전 숏폼을 삭제 큐에 등록 및 삭제
+        try:
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("shorts_std",), langs=(lang_code,), execute_delete_now=True
+            )
+            sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
         if "shorts_packages" not in sdoc or not isinstance(sdoc["shorts_packages"], dict):
             sdoc["shorts_packages"] = {}
         if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
@@ -4401,6 +4692,8 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             "local_mp4_path": f"video_lectures/shorts/{slug_key}_short_{lang_code}.mp4",
             "duration_sec": round(dur, 2),
             "aspect_ratio": "9:16 (1080x1920)",
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "needs_youtube_upload": True,
         }
         script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -4699,6 +4992,15 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
         pub_qshort_path = pub_short_dir / f"{slug_key}_short_q_{lang_code}.mp4"
         shutil.copyfile(out_short, pub_qshort_path)
 
+        # [자동 교체 원칙] 질문형 숏폼이 새로 제작/업데이트되면 기존 채널의 구버전 질문형 숏폼 삭제 큐 등록 및 삭제
+        try:
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("shorts_q",), langs=(lang_code,), execute_delete_now=True
+            )
+            sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
         qshort_title = (
             f"❓ [질문하는 수학 #Shorts] {clean_title} — 왜 이 보조선이 핵심일까?"
             if lang_code == "ko"
@@ -4710,6 +5012,8 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             "duration_sec": round(dur, 2),
             "aspect_ratio": "9:16 (1080x1920)",
             "pedagogy_mode": "Question-Asking Short (Notice & Wonder -> Socratic -> What-If-Not)",
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "needs_youtube_upload": True,
         }
         script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -4724,10 +5028,11 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
-def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
+def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", replace_existing=False):
     """
     [@min7014_ai 유튜브 숏폼(#Shorts) 자동 업로더 (YouTube Data API v3)]
     - 유튜브 고급 기능(Advanced Features)의 외부 설명란 링크 활성화 및 첫 댓글 딥링크 퍼널을 동시 적용합니다.
+    - 업데이트된 숏폼(needs_youtube_upload 또는 replace_existing=True)인 경우 기존 채널의 구버전 숏폼을 먼저 삭제한 뒤 새 숏폼을 업로드합니다.
     """
     global _LAST_UPLOAD_QUOTA_BLOCKED
     _LAST_UPLOAD_QUOTA_BLOCKED = False
@@ -4738,11 +5043,20 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
         generate_or_update_script(slug_key, target_langs=["ko", "en"])
 
     sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+    shorts_pkgs = sdoc.get("shorts_packages") or {}
+    for lc in langs:
+        pkg_lc = shorts_pkgs.get(lc) if isinstance(shorts_pkgs.get(lc), dict) else {}
+        if replace_existing or pkg_lc.get("needs_youtube_upload"):
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("shorts_std",), langs=(lc,), execute_delete_now=True
+            )
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+
     uploaded_shorts = {}
     missing_langs = []
     for lc in langs:
         existing_short_url = (sdoc.get("shorts_urls") or {}).get(lc, "").strip()
-        if existing_short_url:
+        if existing_short_url and not replace_existing:
             uploaded_shorts[lc] = existing_short_url
         else:
             missing_langs.append(lc)
@@ -4750,6 +5064,7 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
     if not missing_langs:
         return uploaded_shorts
 
+    process_youtube_delete_queue(max_deletions=20)
     youtube, active_token_path = get_available_youtube_upload_service()
     if youtube is None:
         _LAST_UPLOAD_QUOTA_BLOCKED = True
@@ -4782,6 +5097,9 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
             },
         }
         try:
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("shorts_std",), langs=(lc,), execute_delete_now=True
+            )
             media = MediaFileUpload(str(short_mp4), chunksize=-1, resumable=True, mimetype="video/mp4")
             resp = youtube.videos().insert(part="snippet,status", body=body, media_body=media).execute()
             vid_id = resp["id"]
@@ -4791,6 +5109,9 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
             if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
                 sdoc["shorts_urls"] = {"ko": "", "en": ""}
             sdoc["shorts_urls"][lc] = short_url
+            if isinstance((sdoc.get("shorts_packages") or {}).get(lc), dict):
+                sdoc["shorts_packages"][lc]["needs_youtube_upload"] = False
+                sdoc["shorts_packages"][lc]["uploaded_video_id"] = vid_id
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
             print(f"🚀 [YouTube #Shorts Uploaded ({lc.upper()})] {short_url}", flush=True)
@@ -4821,11 +5142,12 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public"):
 
 
 
-def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="public"):
+def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="public", replace_existing=False):
     """
     [Edition 2: 질문하는 수업 특화 본편 (1080p 16:9) YouTube Data API v3 자동 업로더]
     - video_lectures/question_classroom/{slug}_q_{lc}.mp4를 @min7014_ai에 업로드하고
       question_youtube_urls[lc]에 바인딩합니다.
+    - 업데이트된 질문하는 수업 영상인 경우 기존 채널의 구버전 영상을 먼저 삭제하고 새 영상을 업로드합니다.
     """
     global _LAST_UPLOAD_QUOTA_BLOCKED
     _LAST_UPLOAD_QUOTA_BLOCKED = False
@@ -4835,17 +5157,27 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
     if not script_path.exists():
         generate_or_update_script(slug_key)
     sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+    q_pkgs = sdoc.get("question_classroom_packages") or {}
+    for lc in langs:
+        pkg_lc = q_pkgs.get(lc) if isinstance(q_pkgs.get(lc), dict) else {}
+        if replace_existing or pkg_lc.get("needs_youtube_upload"):
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("question",), langs=(lc,), execute_delete_now=True
+            )
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+
     uploaded_q = {}
     missing_langs = []
     for lc in langs:
         existing_u = (sdoc.get("question_youtube_urls") or {}).get(lc, "").strip()
-        if existing_u:
+        if existing_u and not replace_existing:
             uploaded_q[lc] = existing_u
         else:
             missing_langs.append(lc)
     if not missing_langs:
         return uploaded_q
 
+    process_youtube_delete_queue(max_deletions=20)
     youtube, active_token_path = get_available_youtube_upload_service()
     if youtube is None:
         _LAST_UPLOAD_QUOTA_BLOCKED = True
@@ -4887,6 +5219,9 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
             },
         }
         try:
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("question",), langs=(lc,), execute_delete_now=True
+            )
             media = MediaFileUpload(str(q_mp4), chunksize=-1, resumable=True, mimetype="video/mp4")
             resp = youtube.videos().insert(part="snippet,status", body=body, media_body=media).execute()
             vid_id = resp["id"]
@@ -4896,6 +5231,9 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
             if "question_youtube_urls" not in sdoc or not isinstance(sdoc["question_youtube_urls"], dict):
                 sdoc["question_youtube_urls"] = {"ko": "", "en": ""}
             sdoc["question_youtube_urls"][lc] = q_url
+            if isinstance((sdoc.get("question_classroom_packages") or {}).get(lc), dict):
+                sdoc["question_classroom_packages"][lc]["needs_youtube_upload"] = False
+                sdoc["question_classroom_packages"][lc]["uploaded_video_id"] = vid_id
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
             print(f"🚀 [YouTube Question-Asking 1080p Uploaded ({lc.upper()})] {q_url}", flush=True)
@@ -4908,11 +5246,12 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
     return uploaded_q
 
 
-def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public"):
+def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public", replace_existing=False):
     """
     [Edition 3-B: 질문형 숏폼 (9:16 Q-#Shorts) YouTube Data API v3 자동 업로더]
     - video_lectures/shorts/{slug}_short_q_{lc}.mp4를 @min7014_ai에 업로드하고
       question_shorts_urls[lc]에 바인딩합니다.
+    - 업데이트된 질문형 숏폼인 경우 기존 채널의 구버전 영상을 먼저 삭제하고 새 영상을 업로드합니다.
     """
     global _LAST_UPLOAD_QUOTA_BLOCKED
     _LAST_UPLOAD_QUOTA_BLOCKED = False
@@ -4922,17 +5261,27 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public"):
     if not script_path.exists():
         generate_or_update_script(slug_key)
     sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+    qs_pkgs = sdoc.get("question_shorts_packages") or {}
+    for lc in langs:
+        pkg_lc = qs_pkgs.get(lc) if isinstance(qs_pkgs.get(lc), dict) else {}
+        if replace_existing or pkg_lc.get("needs_youtube_upload"):
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("shorts_q",), langs=(lc,), execute_delete_now=True
+            )
+    sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+
     uploaded_qs = {}
     missing_langs = []
     for lc in langs:
         existing_u = (sdoc.get("question_shorts_urls") or {}).get(lc, "").strip()
-        if existing_u:
+        if existing_u and not replace_existing:
             uploaded_qs[lc] = existing_u
         else:
             missing_langs.append(lc)
     if not missing_langs:
         return uploaded_qs
 
+    process_youtube_delete_queue(max_deletions=20)
     youtube, active_token_path = get_available_youtube_upload_service()
     if youtube is None:
         _LAST_UPLOAD_QUOTA_BLOCKED = True
@@ -4972,6 +5321,9 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public"):
             },
         }
         try:
+            queue_and_delete_existing_youtube_videos_for_slug(
+                slug_key, editions=("shorts_q",), langs=(lc,), execute_delete_now=True
+            )
             media = MediaFileUpload(str(qsh_mp4), chunksize=-1, resumable=True, mimetype="video/mp4")
             resp = youtube.videos().insert(part="snippet,status", body=body, media_body=media).execute()
             vid_id = resp["id"]
@@ -4981,6 +5333,9 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public"):
             if "question_shorts_urls" not in sdoc or not isinstance(sdoc["question_shorts_urls"], dict):
                 sdoc["question_shorts_urls"] = {"ko": "", "en": ""}
             sdoc["question_shorts_urls"][lc] = qsh_url
+            if isinstance((sdoc.get("question_shorts_packages") or {}).get(lc), dict):
+                sdoc["question_shorts_packages"][lc]["needs_youtube_upload"] = False
+                sdoc["question_shorts_packages"][lc]["uploaded_video_id"] = vid_id
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
             print(f"🚀 [YouTube Question #Shorts Uploaded ({lc.upper()})] {qsh_url}", flush=True)
@@ -5209,10 +5564,23 @@ def build_all_shorts(upload=False, privacy="public"):
 
 def get_next_unrendered_topic_slug(failed_slugs=None):
     """
-    min7014_deep_knowledge.json의 847개 PDF 주제 중 아직 1080p 본편(_ko/_en.mp4) 또는 9:16 숏폼(_short_ko/_short_en.mp4)이
-    제작되지 않은 다음 주제를 우선순위에 따라 반환합니다.
+    1) 먼저 이미 스크립트가 생성된 주제(video_lectures/scripts/*.json) 중 4대 에디션(일반 1080p, 질문수업 1080p, 일반 #Shorts, 질문 #Shorts)이
+       하나라도 누락된 주제를 최우선 반환합니다.
+    2) 그 다음 min7014_deep_knowledge.json의 847개 PDF 주제 중 아직 4대 에디션이 제작되지 않은 다음 주제를 우선순위에 따라 반환합니다.
     """
     failed_slugs = failed_slugs or set()
+    # 0순위: 기존 스크립트 보유 주제 중 4대 에디션(KO) 미완성 주제 우선 완성
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        s = sp.stem
+        if s in failed_slugs:
+            continue
+        mp4_ko = YT_UPLOADS_DIR / s / f"{s}_ko.mp4"
+        q_ko = QUESTION_CLASSROOM_DIR / f"{s}_q_ko.mp4"
+        sh_ko = YT_UPLOADS_DIR / "shorts" / f"{s}_short_ko.mp4"
+        qsh_ko = ROOT_DIR / "video_lectures" / "shorts" / f"{s}_short_q_ko.mp4"
+        if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
+            return s
+
     flagship_priority = [
         "2022051507", "2022042501", "2022101601", "2022101602", "2022101603",
         "2023081301", "2024122501", "2024120301", "2025012801", "2025012601",
@@ -5234,40 +5602,25 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
     for slug in candidates:
         if slug in failed_slugs:
             continue
-        sp = SCRIPTS_DIR / f"{slug}.json"
-        has_yt_both = False
-        if sp.exists():
-            try:
-                sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                yt_u = sdoc.get("youtube_urls") or {}
-                has_yt_both = bool(yt_u.get("ko") and yt_u.get("en"))
-            except Exception:
-                pass
         mp4_ko = YT_UPLOADS_DIR / slug / f"{slug}_ko.mp4"
-        mp4_en = YT_UPLOADS_DIR / slug / f"{slug}_en.mp4"
+        q_ko = QUESTION_CLASSROOM_DIR / f"{slug}_q_ko.mp4"
         sh_ko = YT_UPLOADS_DIR / "shorts" / f"{slug}_short_ko.mp4"
-        sh_en = YT_UPLOADS_DIR / "shorts" / f"{slug}_short_en.mp4"
-        need_1080p = (not has_yt_both) and (not mp4_ko.exists() or not mp4_en.exists())
-        need_shorts = (not sh_ko.exists() or not sh_en.exists())
-        if need_1080p or need_shorts:
+        qsh_ko = ROOT_DIR / "video_lectures" / "shorts" / f"{slug}_short_q_ko.mp4"
+        if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
             return slug
     return None
 
 
 def run_shorts_and_video_upload_daemon(open_studio_now=False):
     """
-    [@min7014_ai 숏폼(#Shorts) & 본편 무인 업로드·동기화 데몬]
-    1) 즉시 YouTube Studio 업로드 창과 14개 숏폼 폴더(ready_for_min7014_ai_shorts)를 열어,
-       사용자가 마우스로 드래그 앤 드롭하거나 3단계 고급 기능을 켜면 즉시 감지합니다.
-    2) 채널에 새 숏폼/영상이 올라오는 즉시 API(videos.update)로 설명문·태그·유레카 댓글을 자동 완성하고
-       video_board.html에 링크를 실시간 등록 및 Git Push 합니다.
-    3) 동시에 롤링 24시간 업로드 제한이 풀리는 즉시 대기 중인 14개 숏폼과 미업로드 본편을 API로 자동 업로드합니다.
+    [@min7014_ai 숏폼(#Shorts) & 본편 무인 교체(기존 영상 삭제 ➔ 새 영상 업로드)·동기화 데몬]
+    1) 업데이트된 로컬 영상이 있는 주제의 기존 유튜브 채널 영상을 RSS 및 로컬 인덱스에서 자동 탐지하여
+       youtube_delete_queue.json에 등록하고 최우선 삭제(videos.delete)합니다.
+    2) 삭제 대기열에 있는 구버전 영상은 절대 재바인딩하지 않으며, 쿼터가 열려 있을 때만 API 삭제·업로드·동기화를 수행합니다.
+    3) 업로드 대기 중에도 쉬지 않고 4대 에디션(일반 본편 · 질문수업 본편 · 일반 #Shorts · 질문 #Shorts)을 연속 제작합니다.
     """
     import time
     import webbrowser
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from googleapiclient.discovery import build
 
     ready_shorts_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai_shorts"
     if open_studio_now:
@@ -5278,16 +5631,10 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
         except Exception:
             pass
 
-    SCOPES = [
-        "https://www.googleapis.com/auth/youtube.upload",
-        "https://www.googleapis.com/auth/youtube.force-ssl",
-        "https://www.googleapis.com/auth/youtube.readonly",
-    ]
-    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
     uploads_playlist_id = "UU" + YOUTUBE_CHANNEL_ID[2:]  # UUSlqQfOEtRfJuMPyGMLgFYA
 
     print("=" * 76, flush=True)
-    print("🤖 [@min7014_ai 숏폼(#Shorts) 14편 자동 업로드 & 실시간 감지 데몬 가동 중]", flush=True)
+    print("🤖 [@min7014_ai 4대 에디션 자동 교체(기존 영상 삭제 ➔ 새 영상 업로드) & 제작 데몬 가동 중]", flush=True)
     print(f"📂 숏폼 마스터 폴더: {ready_shorts_dir}", flush=True)
     print(f"📺 YouTube Studio: {YOUTUBE_STUDIO_UPLOAD_URL}", flush=True)
     print("=" * 76, flush=True)
@@ -5297,169 +5644,147 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
 
     while True:
         try:
-            creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
-            if not creds.valid and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-                token_file.write_text(creds.to_json(), encoding="utf-8")
-            youtube = build("youtube", "v3", credentials=creds)
-
-            # 1) 채널 업로드 재생목록(UUSlqQfOEtRfJuMPyGMLgFYA) 조회하여 새로 올라온 숏폼(#Shorts) 및 1080p 본편 즉시 감지 & 메타데이터 완성
-            pl_items = youtube.playlistItems().list(
-                part="snippet", playlistId=uploads_playlist_id, maxResults=50
-            ).execute().get("items", [])
-
-            any_new_bound = False
-            for item in pl_items:
-                vid_id = item["snippet"]["resourceId"]["videoId"]
-                v_title = item["snippet"].get("title", "")
-                v_desc = item["snippet"].get("description", "")
-                blob = f"{v_title}\n{v_desc}"
-
-                # A) [slug_SHORT_KO] / [slug_SHORT_EN] 숏폼 태그 자동 매칭
-                m_short = re.search(r"\[([A-Za-z0-9_]+)_SHORT_(KO|EN)\]", blob, re.IGNORECASE)
-                if m_short and vid_id not in enriched_video_ids:
-                    s_slug = m_short.group(1)
-                    s_lc = m_short.group(2).lower()
-                    sp = SCRIPTS_DIR / f"{s_slug}.json"
-                    smeta_p = YT_PKG_DIR / f"{s_slug}_shorts_meta.json"
-                    if sp.exists() and smeta_p.exists():
-                        sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                        smeta = json.loads(smeta_p.read_text(encoding="utf-8")).get(s_lc)
-                        if smeta:
-                            try:
-                                youtube.videos().update(
-                                    part="snippet",
-                                    body={
-                                        "id": vid_id,
-                                        "snippet": {
-                                            "title": smeta["title"],
-                                            "description": smeta["description"],
-                                            "tags": smeta["tags"],
-                                            "categoryId": "27",
-                                            "defaultLanguage": s_lc,
-                                            "defaultAudioLanguage": s_lc,
-                                        },
-                                    },
-                                ).execute()
-                                print(f"✨ [Shorts Metadata Auto-Enriched ({s_lc.upper()})] https://youtube.com/shorts/{vid_id}", flush=True)
-                            except Exception as ue:
-                                print(f"  [Shorts Update Notice ({vid_id})]: {ue}", flush=True)
-                        if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
-                            sdoc["shorts_urls"] = {"ko": "", "en": ""}
-                        short_url = f"https://youtube.com/shorts/{vid_id}"
-                        if sdoc["shorts_urls"].get(s_lc) != short_url:
-                            sdoc["shorts_urls"][s_lc] = short_url
-                            sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
-                            any_new_bound = True
-                        enriched_video_ids.add(vid_id)
-                    continue
-
-                # B) [slug_KO] / [slug_EN] 1080p 본편 태그 자동 매칭 (YouTube Studio 고급 기능 대량 드래그 업로드 대응)
-                m_full = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+)_(KO|EN)\]", blob, re.IGNORECASE)
-                if m_full and vid_id not in enriched_video_ids:
-                    f_slug = m_full.group(1)
-                    if f_slug.upper().endswith("_SHORT"):
-                        continue
-                    f_lc = m_full.group(2).lower()
-                    sp = SCRIPTS_DIR / f"{f_slug}.json"
-                    fmeta_p = YT_PKG_DIR / f"{f_slug}_youtube_meta.json"
-                    if sp.exists() and fmeta_p.exists():
-                        sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                        fmeta = json.loads(fmeta_p.read_text(encoding="utf-8")).get(f_lc)
-                        if fmeta and f"[ID: {f_slug}_{f_lc.upper()}]" not in v_desc:
-                            try:
-                                youtube.videos().update(
-                                    part="snippet",
-                                    body={
-                                        "id": vid_id,
-                                        "snippet": {
-                                            "title": fmeta["title"],
-                                            "description": fmeta["description"],
-                                            "tags": fmeta["tags"],
-                                            "categoryId": "27",
-                                            "defaultLanguage": f_lc,
-                                            "defaultAudioLanguage": f_lc,
-                                        },
-                                    },
-                                ).execute()
-                                thumb_p = YT_PKG_DIR / f"{f_slug}_{f_lc}_thumb.png"
-                                if thumb_p.exists():
-                                    from googleapiclient.http import MediaFileUpload
-                                    youtube.thumbnails().set(
-                                        videoId=vid_id,
-                                        media_body=MediaFileUpload(str(thumb_p), mimetype="image/png"),
-                                    ).execute()
-                                print(f"✨ [1080p Video Metadata & Thumbnail Auto-Enriched ({f_lc.upper()})] https://youtu.be/{vid_id}", flush=True)
-                            except Exception as fe:
-                                print(f"  [1080p Update Notice ({vid_id})]: {fe}", flush=True)
-                        full_url = f"https://youtu.be/{vid_id}"
-                        cur_yt = (sdoc.get("youtube_urls") or {}).get(f_lc, "")
-                        if cur_yt != full_url:
-                            set_youtube_urls_for_slug(
-                                f_slug,
-                                yt_ko=full_url if f_lc == "ko" else None,
-                                yt_en=full_url if f_lc == "en" else None,
-                            )
-                            any_new_bound = True
-                        enriched_video_ids.add(vid_id)
-
-            if any_new_bound:
-                update_video_catalog()
-                prepare_ready_batch_folder(open_explorer=False)
-                prepare_ready_shorts_batch_folder(open_explorer=False)
-                subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
-                subprocess.run(["git", "commit", "-m", "chore(youtube): auto-bind newly uploaded @min7014_ai videos & Shorts"], check=False)
-                subprocess.run(["git", "push", "origin", "main"], check=False)
-                print("✅ [Git Auto-Push Complete] Newly uploaded @min7014_ai videos & #Shorts bound to video_board.html!", flush=True)
-
-            # 2) 5분마다 API 직접 업로드 재시도 (고급 기능 승인 및 롤링 24시간 한도 해제 시 대기 중인 #Shorts & 1080p 본편 대량 자동 업로드)
             now_ts = time.time()
+            # 1) 5분 주기로 RSS 스캔 ➔ 기존 구버전 영상 최우선 삭제 ➔ 신규/업데이트 영상 업로드 ➔ 채널 동기화 수행
             if now_ts - last_api_upload_try >= 300:
                 last_api_upload_try = now_ts
-                # [Priority -1] 불일치 판정된 기존 유튜브 영상(youtube_delete_queue.json) 최우선 삭제!
-                process_youtube_delete_queue()
+
+                # [Step 1-A] 공개 RSS 피드(무쿼터)를 스캔하여 로컬 업데이트된 주제의 구버전 채널 영상을 삭제 큐에 자동 등록
+                scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False)
+
+                # [Step 1-B] 삭제 대기열(youtube_delete_queue.json) 최우선 처리 (기존 영상 삭제)
+                process_youtube_delete_queue(max_deletions=50)
+
+                youtube, active_token_path = get_available_youtube_upload_service()
+                blocked_vid_ids = get_deleted_video_ids_set()
+
+                # [Step 1-C] YouTube Studio 수동 드래그 업로드분 감지 (단, 삭제 큐에 있는 구버전 영상은 절대 재바인딩 금지!)
+                any_new_bound = False
+                if youtube is not None:
+                    try:
+                        pl_items = youtube.playlistItems().list(
+                            part="snippet", playlistId=uploads_playlist_id, maxResults=50
+                        ).execute().get("items", [])
+                    except Exception as ple:
+                        err_pl = str(ple)
+                        if "quotaExceeded" in err_pl or "rateLimitExceeded" in err_pl:
+                            mark_token_quota_exhausted(active_token_path, 900)
+                        pl_items = []
+
+                    for item in pl_items:
+                        vid_id = item["snippet"]["resourceId"]["videoId"]
+                        if vid_id in blocked_vid_ids:
+                            continue
+                        v_title = item["snippet"].get("title", "")
+                        v_desc = item["snippet"].get("description", "")
+                        blob = f"{v_title}\n{v_desc}"
+
+                        # A) [slug_SHORT_KO] / [slug_SHORT_EN] 숏폼 태그 자동 매칭
+                        m_short = re.search(r"\[([A-Za-z0-9_]+)_SHORT_(KO|EN)\]", blob, re.IGNORECASE)
+                        if m_short and vid_id not in enriched_video_ids:
+                            s_slug = m_short.group(1)
+                            s_lc = m_short.group(2).lower()
+                            sp = SCRIPTS_DIR / f"{s_slug}.json"
+                            if sp.exists():
+                                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                                pkg_s = (sdoc.get("shorts_packages") or {}).get(s_lc) or {}
+                                # 만약 로컬에서 새로 업데이트되어 업로드 대기 중인데 이전 영상이면 삭제 큐로 보냄
+                                if pkg_s.get("needs_youtube_upload") and pkg_s.get("uploaded_video_id") != vid_id:
+                                    queue_and_delete_existing_youtube_videos_for_slug(
+                                        s_slug, editions=("shorts_std",), langs=(s_lc,), execute_delete_now=True
+                                    )
+                                    continue
+                                if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
+                                    sdoc["shorts_urls"] = {"ko": "", "en": ""}
+                                short_url = f"https://youtube.com/shorts/{vid_id}"
+                                if sdoc["shorts_urls"].get(s_lc) != short_url:
+                                    sdoc["shorts_urls"][s_lc] = short_url
+                                    sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+                                    any_new_bound = True
+                                enriched_video_ids.add(vid_id)
+                            continue
+
+                        # B) [slug_KO] / [slug_EN] 1080p 본편 태그 자동 매칭
+                        m_full = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+)_(KO|EN)\]", blob, re.IGNORECASE)
+                        if m_full and vid_id not in enriched_video_ids:
+                            f_slug = m_full.group(1)
+                            if f_slug.upper().endswith("_SHORT") or f_slug.upper().endswith("_Q"):
+                                continue
+                            f_lc = m_full.group(2).lower()
+                            sp = SCRIPTS_DIR / f"{f_slug}.json"
+                            if sp.exists():
+                                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                                pkg_f = (sdoc.get("youtube_packages") or {}).get(f_lc) or {}
+                                if pkg_f.get("needs_youtube_upload") and pkg_f.get("uploaded_video_id") != vid_id:
+                                    queue_and_delete_existing_youtube_videos_for_slug(
+                                        f_slug, editions=("standard",), langs=(f_lc,), execute_delete_now=True
+                                    )
+                                    continue
+                                full_url = f"https://youtu.be/{vid_id}"
+                                cur_yt = (sdoc.get("youtube_urls") or {}).get(f_lc, "")
+                                if cur_yt != full_url:
+                                    set_youtube_urls_for_slug(
+                                        f_slug,
+                                        yt_ko=full_url if f_lc == "ko" else None,
+                                        yt_en=full_url if f_lc == "en" else None,
+                                    )
+                                    any_new_bound = True
+                                enriched_video_ids.add(vid_id)
+
+                if any_new_bound:
+                    update_video_catalog()
+                    prepare_ready_batch_folder(open_explorer=False)
+                    prepare_ready_shorts_batch_folder(open_explorer=False)
+                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json"], check=False)
+                    subprocess.run(["git", "commit", "-m", "chore(youtube): auto-bind newly uploaded @min7014_ai videos & Shorts"], check=False)
+                    subprocess.run(["git", "push", "origin", "main"], check=False)
+
+                # [Step 1-D] 업데이트된 영상 및 미업로드 영상 API 자동 업로드 (기존 영상 삭제 후 새 영상 업로드)
                 priority_5_shorts = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
                 newly_uploaded_batch = 0
 
-                # [Priority 0] 대표 질문하는 수업 본편(math20250130001_q_ko.mp4) 및 질문형 숏폼(math20250130001_short_q_ko.mp4) 최우선 업로드!
                 for q_prio_slug in ["math20250130001", "2014111902", "2014111901", "2017090101"]:
                     sp_qp = SCRIPTS_DIR / f"{q_prio_slug}.json"
                     if not sp_qp.exists():
                         continue
                     sdoc_qp = json.loads(sp_qp.read_text(encoding="utf-8"))
                     q_yt_u = (sdoc_qp.get("question_youtube_urls") or {}).get("ko", "").strip()
-                    if not q_yt_u and (QUESTION_CLASSROOM_DIR / f"{q_prio_slug}_q_ko.mp4").exists():
+                    q_pkg_ko = ((sdoc_qp.get("question_classroom_packages") or {}).get("ko") or {})
+                    if (not q_yt_u or q_pkg_ko.get("needs_youtube_upload")) and (QUESTION_CLASSROOM_DIR / f"{q_prio_slug}_q_ko.mp4").exists():
                         res_qv = upload_question_classroom_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
-                        if res_qv.get("ko"):
+                        if res_qv.get("ko") and res_qv.get("ko") != q_yt_u:
                             newly_uploaded_batch += 1
                         if _LAST_UPLOAD_QUOTA_BLOCKED:
                             break
                     q_sh_u = (sdoc_qp.get("question_shorts_urls") or {}).get("ko", "").strip()
-                    if not q_sh_u and (ROOT_DIR / "video_lectures" / "shorts" / f"{q_prio_slug}_short_q_ko.mp4").exists():
+                    qs_pkg_ko = ((sdoc_qp.get("question_shorts_packages") or {}).get("ko") or {})
+                    if (not q_sh_u or qs_pkg_ko.get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "shorts" / f"{q_prio_slug}_short_q_ko.mp4").exists():
                         res_qs = upload_question_short_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
-                        if res_qs.get("ko"):
+                        if res_qs.get("ko") and res_qs.get("ko") != q_sh_u:
                             newly_uploaded_batch += 1
                         if _LAST_UPLOAD_QUOTA_BLOCKED:
                             break
 
-                # [Priority 1] 5대 대표 #Shorts 우선 업로드 보장
-                for p_slug in priority_5_shorts:
-                    sp_p = SCRIPTS_DIR / f"{p_slug}.json"
-                    if not sp_p.exists():
-                        continue
-                    sdoc_p = json.loads(sp_p.read_text(encoding="utf-8"))
-                    s_urls_p = sdoc_p.get("shorts_urls") or {}
-                    missing_p = [lc for lc in ("ko", "en") if not (s_urls_p.get(lc) or "").strip()]
-                    if missing_p:
-                        before_set = {lc: s_urls_p.get(lc) for lc in ("ko", "en")}
-                        res_p = upload_short_to_youtube(p_slug, langs=tuple(missing_p), privacy="public")
-                        after_set = {lc: res_p.get(lc) for lc in ("ko", "en")}
-                        if after_set != before_set:
-                            newly_uploaded_batch += 1
-                        if _LAST_UPLOAD_QUOTA_BLOCKED:
-                            break
+                if not _LAST_UPLOAD_QUOTA_BLOCKED:
+                    for p_slug in priority_5_shorts:
+                        sp_p = SCRIPTS_DIR / f"{p_slug}.json"
+                        if not sp_p.exists():
+                            continue
+                        sdoc_p = json.loads(sp_p.read_text(encoding="utf-8"))
+                        s_urls_p = sdoc_p.get("shorts_urls") or {}
+                        s_pkgs_p = sdoc_p.get("shorts_packages") or {}
+                        missing_p = [
+                            lc for lc in ("ko", "en")
+                            if not (s_urls_p.get(lc) or "").strip() or (s_pkgs_p.get(lc) or {}).get("needs_youtube_upload")
+                        ]
+                        if missing_p:
+                            before_set = {lc: (s_urls_p.get(lc) or "").strip() for lc in missing_p}
+                            res_p = upload_short_to_youtube(p_slug, langs=tuple(missing_p), privacy="public")
+                            if any(res_p.get(lc) and res_p.get(lc) != before_set.get(lc) for lc in missing_p):
+                                newly_uploaded_batch += 1
+                            if _LAST_UPLOAD_QUOTA_BLOCKED:
+                                break
 
-                # [Priority 2] 전체 제작 완료된 #Shorts 및 1080p 설명영상 연속 대량 업로드 (고급 기능 해제 시 일괄 처리)
                 if not _LAST_UPLOAD_QUOTA_BLOCKED:
                     all_sps = sorted(
                         SCRIPTS_DIR.glob("*.json"),
@@ -5469,37 +5794,49 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         sdoc = json.loads(sp.read_text(encoding="utf-8"))
                         slug_k = sdoc["slug"]
                         s_urls = sdoc.get("shorts_urls") or {}
-                        missing_s = [lc for lc in ("ko", "en") if not (s_urls.get(lc) or "").strip()]
+                        s_pkgs = sdoc.get("shorts_packages") or {}
+                        missing_s = [
+                            lc for lc in ("ko", "en")
+                            if not (s_urls.get(lc) or "").strip() or (s_pkgs.get(lc) or {}).get("needs_youtube_upload")
+                        ]
                         if missing_s:
-                            before_s = dict(s_urls)
+                            before_s = {lc: (s_urls.get(lc) or "").strip() for lc in missing_s}
                             res_s = upload_short_to_youtube(slug_k, langs=tuple(missing_s), privacy="public")
-                            if res_s != before_s:
+                            if any(res_s.get(lc) and res_s.get(lc) != before_s.get(lc) for lc in missing_s):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
 
                         yt_urls = sdoc.get("youtube_urls") or {}
-                        missing_v = [lc for lc in ("ko", "en") if not (yt_urls.get(lc) or "").strip()]
+                        yt_pkgs = sdoc.get("youtube_packages") or {}
+                        missing_v = [
+                            lc for lc in ("ko", "en")
+                            if not (yt_urls.get(lc) or "").strip() or (yt_pkgs.get(lc) or {}).get("needs_youtube_upload")
+                        ]
                         if missing_v:
-                            before_v = dict(yt_urls)
+                            before_v = {lc: (yt_urls.get(lc) or "").strip() for lc in missing_v}
                             res_v = upload_slug_to_youtube(slug_k, langs=tuple(missing_v), privacy="public", method="api")
-                            if res_v != before_v:
+                            if any(res_v.get(lc) and res_v.get(lc) != before_v.get(lc) for lc in missing_v):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
 
                         q_yt_urls = sdoc.get("question_youtube_urls") or {}
-                        if not (q_yt_urls.get("ko") or "").strip() and (QUESTION_CLASSROOM_DIR / f"{slug_k}_q_ko.mp4").exists():
+                        q_yt_pkgs = sdoc.get("question_classroom_packages") or {}
+                        q_before = (q_yt_urls.get("ko") or "").strip()
+                        if (not q_before or (q_yt_pkgs.get("ko") or {}).get("needs_youtube_upload")) and (QUESTION_CLASSROOM_DIR / f"{slug_k}_q_ko.mp4").exists():
                             res_qv2 = upload_question_classroom_to_youtube(slug_k, langs=("ko",), privacy="public")
-                            if res_qv2.get("ko"):
+                            if res_qv2.get("ko") and res_qv2.get("ko") != q_before:
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
 
                         q_sh_urls = sdoc.get("question_shorts_urls") or {}
-                        if not (q_sh_urls.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_q_ko.mp4").exists():
+                        q_sh_pkgs = sdoc.get("question_shorts_packages") or {}
+                        qs_before = (q_sh_urls.get("ko") or "").strip()
+                        if (not qs_before or (q_sh_pkgs.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_q_ko.mp4").exists():
                             res_qs2 = upload_question_short_to_youtube(slug_k, langs=("ko",), privacy="public")
-                            if res_qs2.get("ko"):
+                            if res_qs2.get("ko") and res_qs2.get("ko") != qs_before:
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
@@ -5509,40 +5846,21 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         boost_youtube_channel_popularity()
                     except Exception as be:
                         print(f"[Popularity Boost Notice] {be}", flush=True)
-                    for q_sp in sorted(SCRIPTS_DIR.glob("*.json"), key=lambda x: (0 if x.stem in CURATED_PAGE_SCRIPTS else 1, x.stem)):
-                        q_doc = json.loads(q_sp.read_text(encoding="utf-8"))
-                        q_pkgs = q_doc.get("question_classroom_packages") or {}
-                        q_mp4_p = QUESTION_CLASSROOM_DIR / f"{q_sp.stem}_q_ko.mp4"
-                        if not q_pkgs.get("ko") or not q_mp4_p.exists():
-                            print(f"❓ [Question-Asking Classroom Upgrade] 기존 영상의 질문하는 수업 버전 추가 제작: {q_sp.stem}", flush=True)
-                            render_question_classroom_video(q_sp.stem, lang_code="ko")
-                            render_youtube_short_vertical(q_sp.stem, lang_code="ko")
-                            break
                     update_video_catalog()
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)
-                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json"], check=False)
-                    subprocess.run(["git", "commit", "-m", f"chore(youtube): auto-upload batch ({newly_uploaded_batch} topics) to @min7014_ai"], check=False)
+                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json"], check=False)
+                    subprocess.run(["git", "commit", "-m", f"chore(youtube): replace old videos & auto-upload batch ({newly_uploaded_batch} topics) to @min7014_ai"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
 
-            # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 다음 주제의 1080p 설명영상(KO/EN) + 9:16 숏폼(KO/EN) 연속 자동 제작!
+            # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 다음 주제의 4대 에디션 연속 자동 제작!
             if not hasattr(run_shorts_and_video_upload_daemon, "_failed_slugs"):
                 run_shorts_and_video_upload_daemon._failed_slugs = set()
             next_slug = get_next_unrendered_topic_slug(run_shorts_and_video_upload_daemon._failed_slugs)
             if next_slug:
-                print(f"🎬 [Continuous Factory] 다음 주제 1080p 설명영상 + 9:16 #Shorts 자동 제작 시작: {next_slug}", flush=True)
+                print(f"🎬 [Continuous Factory] 다음 주제 4대 에디션(일반 본편 + 질문수업 본편 + 일반 #Shorts + 질문 #Shorts) 자동 제작 시작: {next_slug}", flush=True)
                 try:
                     generate_or_update_script(next_slug, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
-                    # 3a) 기존 제작된 주제 중 아직 질문형 본편(_q_ko.mp4) 또는 질문형 숏폼(_short_q_ko.mp4)이 없는 주제 1건 우선 추가 제작
-                    for q_sp in sorted(SCRIPTS_DIR.glob("*.json")):
-                        q_check = ROOT_DIR / "video_lectures" / "question_classroom" / f"{q_sp.stem}_q_ko.mp4"
-                        qs_check = ROOT_DIR / "video_lectures" / "shorts" / f"{q_sp.stem}_short_q_ko.mp4"
-                        if not q_check.exists():
-                            render_question_classroom_video(q_sp.stem, lang_code="ko")
-                        if not qs_check.exists():
-                            render_question_short_vertical(q_sp.stem, lang_code="ko")
-                            break
-                    # 3b) 신규 주제에 대해 3가지 버전(1.일반 설명 영상 + 2.질문하는 수업 특화 영상 + 3.숏폼 영상) 동시 제작
                     for lc in ["ko", "en"]:
                         mp4_p = YT_UPLOADS_DIR / next_slug / f"{next_slug}_{lc}.mp4"
                         if not mp4_p.exists():
@@ -5568,10 +5886,10 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         fdaemon.write_daemon_heartbeat(last_completed_slug=next_slug)
                     except Exception as pe_err:
                         print(f"[Pedagogy Sync Notice] {pe_err}", flush=True)
-                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
-                    subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v4.0 video/shorts & mathteacher pedagogy evolution ({next_slug})"], check=False)
+                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
+                    subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v4.0 4-edition video suite & mathteacher pedagogy evolution ({next_slug})"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
-                    print(f"✅ [Continuous Factory & Pedagogy Evolution Complete] {next_slug} (1080p KO/EN + #Shorts KO/EN + 수학교육 모듈 동기화 완료!)", flush=True)
+                    print(f"✅ [Continuous Factory & Pedagogy Evolution Complete] {next_slug} (4-Edition KO/EN + 수학교육 모듈 동기화 완료!)", flush=True)
                 except Exception as prod_err:
                     print(f"⚠️ [Continuous Factory Skip ({next_slug})]: {prod_err}", flush=True)
                     run_shorts_and_video_upload_daemon._failed_slugs.add(next_slug)
