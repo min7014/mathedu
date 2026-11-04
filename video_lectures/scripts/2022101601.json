@@ -3,11 +3,12 @@
   "title": "원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone)",
   "title_en": "Derive the definition of an ellipse from a cone",
   "sub_domain_ko": "이차곡선·원뿔곡선",
-  "core_concept": "[원뿔로부터 타원의 정의 유도하기] 3차원 직원뿔을 평면으로 절단할 때 내접하는 단델린 구(Dandelin Spheres)와 절단면의 접점이 2차원 이차곡선의 초점(Focus)이 되며, 구 밖의 한 점에서 그은 두 접선 길이가 같다는 성질로부터 이차곡선의 거리 정의가 필연적으로 도출됨을 규명.",
-  "solving_tip": "공간에서 구와 평면·원뿔이 접하면 반드시 '구 밖의 한 점에서 구에 그은 모든 접선의 길이는 같다'는 등식부터 세우세요.",
+  "core_concept": "초점(Focus)과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건 ➔ '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론",
+  "solving_tip": "곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도",
   "pdf_url": "https://min7014.github.io/2022/2022101601.pdf",
   "web_url": "https://min7014.github.io/math20221016001.html",
   "page_count": 34,
+  "scene_count": 12,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/BCGf_f_y5-s"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "geometry",
+    "hypothesis_ko": "초점(Focus)과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건",
+    "conclusion_ko": "'원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론",
+    "auxiliary_line_ko": "곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도",
+    "proof_logic_ko": "이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리",
+    "misconception_ko": "이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+    "what_if_not_ko": "만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,27 +81,17 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 원뿔로부터 타원의 정의 유도하기에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in Derive the definition of an ellipse from a cone?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [원뿔로부터 타원의 정의 유도하기] 3차원 직원뿔을 평면으로 절단할 때 내접하는 단델린 구(Dandelin Spheres)와 절단면의 접점이 2차원 이차곡선의 초점(Focus)이 되며, 구 밖의 한 점에서 그은 두 접선 길이가 같다는 성질로부터 이차곡선의 거리 정의가 필연적으로 도출됨을 규명.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 원뿔로부터 타원의 정의 유도하기입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건입니다. 왜 이 조건에서 '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [원뿔로부터 타원의 정의 유도하기] 3차원 직원뿔을 평면으로 절단할 때 내접하는 단델린 구(Dandelin Spheres)와 절단면의 접점이 2차원 이차곡선의 초점(Focus)이 되며, 구 밖의 한 점에서 그은 두 접선 길이가 같다는 성질로부터 이차곡선의 거리 정의가 필연적으로 도출됨을 규명.",
-        "en": "Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore Derive the definition of an ellipse from a cone and see why this mathematical property holds.",
-        "ja": "1段階です。ミン・ウンギ先生の数学資料室段階別視覚証明講義です。今回は、円錐から楕円の定義を導く（Derive the definition of an ellipse from a cone）の核心原理を動的フリップブックとして証明しましょう。 [円錐から楕円の定義を導く] 3次元従業員角を平面に切断する際に内接するダンデリン球(Dandelin Spheres)と切断面の接点が2次元二次曲線の焦点(Focus)となり、球外の一点で彼は2つの接線長さが同じという性質から二次曲線の距離定義がある。",
-        "zh-CN": "这是第一步。这是 Eunki Min 老师数学资源室的分步视觉证明讲座。在本课中，让我们用动态翻页书来证明从圆锥推导出椭圆定义的核心原理。 【从圆锥推导出椭圆的定义】将3D右手圆锥剖成平面时，内接丹德林球与剖切面的接触点成为2D二次曲线的焦点，二次曲线距离的定义不可避免地由从球外一点引出的两条切线长度相同的性质推导出来。",
-        "es": "Este es el paso 1. Esta es una conferencia de prueba visual paso a paso de la sala de recursos de matemáticas del maestro Eunki Min. En esta lección, demostraremos el principio básico de Derivar la definición de una elipse a partir de un cono con un flipbook dinámico. [Derivando la definición de una elipse a partir de un cono] Al cortar un cono derecho 3D en un plano, el punto de contacto entre las esferas de diente de león inscritas y la superficie cortada se convierte en el foco de la curva cuadrática 2D, y la definición de la distancia de la curva cuadrática se deriva inevitablemente de la propiedad de que las longitudes de las dos tangentes dibujadas desde un punto fuera de la esfera son las mismas.",
-        "fr": "Il s'agit de l'étape 1. Il s'agit d'une démonstration visuelle étape par étape de la salle de ressources mathématiques du professeur Eunki Min. Dans cette leçon, prouvons le principe de base de Dériver la définition d'une ellipse à partir d'un cône avec un flipbook dynamique. [Dérivation de la définition d'une ellipse à partir d'un cône] Lors de la découpe d'un cône droit 3D dans un plan, le point de contact entre les sphères de Dandelin inscrites et la surface coupée devient le centre de la courbe quadratique 2D, et la définition de la distance de la courbe quadratique est inévitablement dérivée de la propriété selon laquelle les longueurs des deux tangentes tirées d'un point extérieur à la sphère sont les mêmes.",
-        "de": "Dies ist Schritt 1. Dies ist eine schrittweise visuelle Beweisvorlesung aus dem Mathe-Ressourcenraum der Lehrerin Eunki Min. In dieser Lektion beweisen wir das Kernprinzip von Leiten Sie die Definition einer Ellipse von einem Kegel mit einem dynamischen Daumenkino ab. [Ableitung der Definition einer Ellipse von einem Kegel] Beim Schneiden eines rechten 3D-Kegels in eine Ebene wird der Kontaktpunkt zwischen den eingeschriebenen Dandelin-Kugeln und der Schnittfläche zum Mittelpunkt der quadratischen 2D-Kurve, und die Definition des Abstands der quadratischen Kurve ergibt sich zwangsläufig aus der Eigenschaft, dass die Längen der beiden Tangenten, die von einem Punkt außerhalb der Kugel gezogen werden, gleich sind.",
-        "vi": "Đây là bước 1. Đây là bài giảng chứng minh trực quan từng bước từ phòng tài liệu toán của giáo viên Eunki Min. Trong bài học này, chúng ta hãy chứng minh nguyên tắc cốt lõi của Suy ra định nghĩa hình elip từ hình nón bằng sách lật động. [Suy ra định nghĩa của một hình elip từ một hình nón] Khi cắt một hình nón bên phải 3D thành một mặt phẳng, điểm tiếp xúc giữa các Quả cầu Bồ công anh nội tiếp và bề mặt cắt trở thành tiêu điểm của đường cong bậc hai 2D và định nghĩa về khoảng cách của đường cong bậc hai chắc chắn bắt nguồn từ tính chất là độ dài của hai tiếp tuyến được vẽ từ một điểm bên ngoài hình cầu là như nhau."
-      },
-      "durations": {
-        "ko": 14.034,
-        "en": 10.218
-      },
-      "step_question_ko": "❓ [Notice & Wonder] 원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone)에서 움직여도 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in Derive the definition of an ellipse from a cone, and why?"
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 원뿔로부터 타원의 정의 유도하기입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건입니다. 왜 이 조건에서 '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore Derive the definition of an ellipse from a cone through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
+      }
     },
     {
       "page": 3,
@@ -76,8 +100,10 @@
         2,
         4
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 2 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Derive the definition of an ellipse from a cone?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.0764,
@@ -85,23 +111,11 @@
         0.907,
         0.9091
       ],
-      "explanation_text": "2단계, 2페이지부터 4페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 고깔모자와 공): 아이스크림 고깔(원뿔) 안에 탱탱볼(구)을 넣으면 공이 고깔 벽을 둥근 띠(원) 모양으로 딱 스치며 닿는 모습 상상하기",
+      "explanation_text": "2단계, 2페이지부터 4페이지까지의 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "2단계, 2페이지부터 4페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 고깔모자와 공): 아이스크림 고깔(원뿔) 안에 탱탱볼(구)을 넣으면 공이 고깔 벽을 둥근 띠(원) 모양으로 딱 스치며 닿는 모습 상상하기",
-        "en": "Step 2, continuous movement from pages 2 to 4. In the process of drawing blue basic shapes and reference line segments, check the basic shapes and reference points shown on the screen. Step 1 (Elementary cone hat and ball): Imagine that if you put a bouncy ball (sphere) inside an ice cream cone (cone), the ball will just pass by the wall of the cone in the shape of a round band (circle).",
-        "ja": "2段階、2ページから4ページまでの連続動きです。青の基本図形と基準線分作成プロセスで、画面に表示される基本図形と基準点を確認します。ステップ1（初等の高さの帽子とボール）：アイスクリームの鍋（円錐）の中にタンタンボール（球）を入れると、ボールが鼓壁を丸い帯（円）の形にぴったりと叩いて触れる様子を想像する",
-        "zh-CN": "步骤2，从第2页连续移动到第4页。在绘制蓝色基本形状和参考线段的过程中，检查屏幕上显示的基本形状和参考点。第 1 步（基本圆锥帽和球）：想象一下，如果您将一个弹力球（球体）放入一个冰淇淋蛋筒（圆锥体）内，则该球将以圆带（圆圈）的形状穿过圆锥体壁。",
-        "es": "Paso 2, movimiento continuo de las páginas 2 a 4. En el proceso de dibujar formas básicas azules y segmentos de línea de referencia, verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (sombrero de cono y pelota de primaria): Imagina que si pones una pelota que rebota (esfera) dentro de un cono de helado (cono), la pelota simplemente pasará por la pared del cono en forma de una banda redonda (círculo).",
-        "fr": "Étape 2, mouvement continu des pages 2 à 4. Lors du dessin des formes de base bleues et des segments de ligne de référence, vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Chapeau et balle élémentaires) : Imaginez que si vous placez une balle rebondissante (sphère) à l'intérieur d'un cornet de glace (cornet), la balle passera simplement par la paroi du cône en forme de bande ronde (cercle).",
-        "de": "Schritt 2, kontinuierlicher Übergang von Seite 2 bis 4. Überprüfen Sie beim Zeichnen blauer Grundformen und Referenzliniensegmente die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Grundschule: Tüte und Ball): Stellen Sie sich vor, wenn Sie einen Hüpfball (Kugel) in eine Eistüte (Kegel) stecken, fliegt der Ball in Form eines runden Bandes (Kreis) einfach an der Wand der Tüte vorbei.",
-        "vi": "Bước 2, chuyển động liên tục từ trang 2 đến trang 4. Trong quá trình vẽ các hình cơ bản màu xanh và các đoạn đường tham chiếu, hãy kiểm tra các hình cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Mũ nón và quả bóng cơ bản): Hãy tưởng tượng rằng nếu bạn đặt một quả bóng nảy (quả cầu) vào bên trong một cây kem ốc quế (hình nón), quả bóng sẽ đi qua thành nón theo hình vòng tròn (hình tròn)."
-      },
-      "durations": {
-        "ko": 41.2,
-        "en": 14.464
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "2단계, 2페이지부터 4페이지까지의 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 2 (Page 2). We construct the base figure for Derive the definition of an ellipse from a cone and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 6,
@@ -110,8 +124,10 @@
         5,
         7
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 3 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Derive the definition of an ellipse from a cone?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0888,
@@ -119,23 +135,11 @@
         0.905,
         0.8347
       ],
-      "explanation_text": "3단계, 5페이지부터 7페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 고깔모자와 공): 아이스크림 고깔(원뿔) 안에 탱탱볼(구)을 넣으면 공이 고깔 벽을 둥근 띠(원) 모양으로 딱 스치며 닿는 모습 상상하기",
+      "explanation_text": "3단계, 5페이지부터 7페이지까지의 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "3단계, 5페이지부터 7페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 고깔모자와 공): 아이스크림 고깔(원뿔) 안에 탱탱볼(구)을 넣으면 공이 고깔 벽을 둥근 띠(원) 모양으로 딱 스치며 닿는 모습 상상하기",
-        "en": "Step 3, continuous movement from pages 5 to 7. This is a process of core geometric construction and continuous motion development, checking the basic shapes and reference points shown on the screen. Step 1 (Elementary cone hat and ball): Imagine that if you put a bouncy ball (sphere) inside an ice cream cone (cone), the ball will just pass by the wall of the cone in the shape of a round band (circle).",
-        "ja": "3段階、5ページから7ページまでの連続動きです。コアジオメトリ作図と連続モーション展開プロセスで、画面に表示される基本図形と基準点を確認します。ステップ1（初等の高さの帽子とボール）：アイスクリームの鍋（円錐）の中にタンタンボール（球）を入れると、ボールが鼓壁を丸い帯（円）の形にぴったりと叩いて触れる様子を想像する",
-        "zh-CN": "步骤3，从第5页到第7页的连续运动。这是一个核心几何构造和连续运动发展的过程，检查屏幕上显示的基本形状和参考点。第 1 步（基本圆锥帽和球）：想象一下，如果您将一个弹力球（球体）放入一个冰淇淋蛋筒（圆锥体）内，则该球将以圆带（圆圈）的形状穿过圆锥体壁。",
-        "es": "Paso 3, movimiento continuo de las páginas 5 a 7. Este es un proceso de construcción geométrica central y desarrollo de movimiento continuo, verificando las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (sombrero de cono y pelota de primaria): Imagina que si pones una pelota que rebota (esfera) dentro de un cono de helado (cono), la pelota simplemente pasará por la pared del cono en forma de una banda redonda (círculo).",
-        "fr": "Étape 3, mouvement continu des pages 5 à 7. Il s'agit d'un processus de construction géométrique de base et de développement de mouvement continu, vérifiant les formes de base et les points de référence affichés à l'écran. Étape 1 (Chapeau et balle élémentaires) : Imaginez que si vous placez une balle rebondissante (sphère) à l'intérieur d'un cornet de glace (cornet), la balle passera simplement par la paroi du cône en forme de bande ronde (cercle).",
-        "de": "Schritt 3, kontinuierliche Bewegung von Seite 5 bis 7. Dies ist ein Prozess der grundlegenden geometrischen Konstruktion und kontinuierlichen Bewegungsentwicklung, bei dem die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte überprüft werden. Schritt 1 (Grundschule: Tüte und Ball): Stellen Sie sich vor, wenn Sie einen Hüpfball (Kugel) in eine Eistüte (Kegel) stecken, fliegt der Ball in Form eines runden Bandes (Kreis) einfach an der Wand der Tüte vorbei.",
-        "vi": "Bước 3, chuyển động liên tục từ trang 5 đến trang 7. Đây là quá trình xây dựng hình học cốt lõi và phát triển chuyển động liên tục, kiểm tra các hình dạng cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Mũ nón và quả bóng cơ bản): Hãy tưởng tượng rằng nếu bạn đặt một quả bóng nảy (quả cầu) vào bên trong một cây kem ốc quế (hình nón), quả bóng sẽ đi qua thành nón theo hình vòng tròn (hình tròn)."
-      },
-      "durations": {
-        "ko": 26.992,
-        "en": 26.704
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "3단계, 5페이지부터 7페이지까지의 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 3 (Page 5). We construct the base figure for Derive the definition of an ellipse from a cone and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 9,
@@ -144,8 +148,10 @@
         8,
         11
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "초록색 대응 영역 및 비례 요소 표시",
+      "step_title": "Step 4 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Derive the definition of an ellipse from a cone?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.4236,
@@ -153,23 +159,11 @@
         0.5723,
         0.4904
       ],
-      "explanation_text": "4단계, 8페이지부터 11페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 접선 길이 같음): 공 바깥의 한 점에서 공 표면에 팽팽하게 실을 대면 어느 쪽으로 대든 접점까지의 실 길이가 똑같음을 확인",
+      "explanation_text": "4단계, 8페이지부터 11페이지까지의 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "4단계, 8페이지부터 11페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 접선 길이 같음): 공 바깥의 한 점에서 공 표면에 팽팽하게 실을 대면 어느 쪽으로 대든 접점까지의 실 길이가 똑같음을 확인",
-        "en": "Step 4, continuous movement from pages 8 to 11. This is the green corresponding area and proportional element display step. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Equal tangent length): If you place a taut thread on the surface of the ball from a point outside the ball, check that the length of the thread to the point of contact is the same no matter which side you place it on.",
-        "ja": "4段階、8ページから11ページまでの連続動きです。緑色の対応領域と比例要素の表示段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初接線の長さに等しい）：ボールの外側の一点でボールの表面にしっかりと糸を当てると、どちら側にも接点までの糸の長さが等しいことを確認します。",
-        "zh-CN": "第四步，从第8页连续移动到第11页。这是绿色对应区域和比例元素显示步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（等切线长度）：如果将拉紧的螺纹从球外的一点放置在球的表面上，请检查无论放置在哪一侧，螺纹到接触点的长度是否相同。",
-        "es": "Paso 4, movimiento continuo de las páginas 8 a 11. Este es el área verde correspondiente y el paso de visualización del elemento proporcional. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (longitud tangente igual): si coloca un hilo tenso en la superficie de la bola desde un punto fuera de la bola, verifique que la longitud del hilo hasta el punto de contacto sea la misma sin importar de qué lado lo coloque.",
-        "fr": "Étape 4, mouvement continu des pages 8 à 11. C'est l'étape d'affichage de la zone verte correspondante et de l'élément proportionnel. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (longueur tangente égale) : Si vous placez un fil tendu sur la surface de la balle à partir d'un point extérieur à la balle, vérifiez que la longueur du fil jusqu'au point de contact est la même quel que soit le côté sur lequel vous le placez.",
-        "de": "Schritt 4, kontinuierlicher Übergang von Seite 8 bis 11. Dies ist der grüne entsprechende Bereich und der Anzeigeschritt für proportionale Elemente. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Gleiche Tangentenlänge): Wenn Sie einen gespannten Faden von einem Punkt außerhalb des Balls auf die Oberfläche des Balls legen, prüfen Sie, dass die Länge des Fadens bis zum Kontaktpunkt gleich ist, egal auf welcher Seite Sie ihn platzieren.",
-        "vi": "Bước 4, chuyển động liên tục từ trang 8 đến trang 11. Đây là bước hiển thị vùng tương ứng và phần tử tỷ lệ màu xanh lá cây. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Độ dài tiếp tuyến bằng nhau): Nếu bạn đặt một sợi dây căng trên bề mặt quả bóng từ một điểm bên ngoài quả bóng, hãy kiểm tra xem độ dài của sợi dây đến điểm tiếp xúc có bằng nhau cho dù bạn đặt nó ở phía nào đi chăng nữa."
-      },
-      "durations": {
-        "ko": 27.352,
-        "en": 27.616
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "4단계, 8페이지부터 11페이지까지의 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 4 (Page 8). We construct the base figure for Derive the definition of an ellipse from a cone and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 13,
@@ -178,8 +172,10 @@
         12,
         14
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "초록색 대응 영역 및 비례 요소 표시",
+      "step_title": "Step 5 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.3884,
@@ -187,23 +183,11 @@
         0.624,
         0.7713
       ],
-      "explanation_text": "5단계, 12페이지부터 14페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 접선 길이 같음): 공 바깥의 한 점에서 공 표면에 팽팽하게 실을 대면 어느 쪽으로 대든 접점까지의 실 길이가 똑같음을 확인",
+      "explanation_text": "5단계, 12페이지부터 14페이지까지의 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "5단계, 12페이지부터 14페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 접선 길이 같음): 공 바깥의 한 점에서 공 표면에 팽팽하게 실을 대면 어느 쪽으로 대든 접점까지의 실 길이가 똑같음을 확인",
-        "en": "Step 5, continuous movement from pages 12 to 14. This is the green corresponding area and proportional element display step. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Equal tangent length): If you place a taut thread on the surface of the ball from a point outside the ball, check that the length of the thread to the point of contact is the same no matter which side you place it on.",
-        "ja": "5段階、12ページから14ページまでの連続動きです。緑色の対応領域と比例要素の表示段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初接線の長さに等しい）：ボールの外側の一点でボールの表面にしっかりと糸を当てると、どちら側にも接点までの糸の長さが等しいことを確認します。",
-        "zh-CN": "步骤5，从第12页连续移动到第14页。这是绿色对应区域和比例元素显示步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（等切线长度）：如果将拉紧的螺纹从球外的一点放置在球的表面上，请检查无论放置在哪一侧，螺纹到接触点的长度是否相同。",
-        "es": "Paso 5, movimiento continuo de las páginas 12 a 14. Este es el área verde correspondiente y el paso de visualización del elemento proporcional. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (longitud tangente igual): si coloca un hilo tenso en la superficie de la bola desde un punto fuera de la bola, verifique que la longitud del hilo hasta el punto de contacto sea la misma sin importar de qué lado lo coloque.",
-        "fr": "Étape 5, déplacement continu des pages 12 à 14. C'est l'étape d'affichage de la zone verte correspondante et de l'élément proportionnel. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (longueur tangente égale) : Si vous placez un fil tendu sur la surface de la balle à partir d'un point extérieur à la balle, vérifiez que la longueur du fil jusqu'au point de contact est la même quel que soit le côté sur lequel vous le placez.",
-        "de": "Schritt 5, kontinuierlicher Übergang von den Seiten 12 bis 14. Dies ist der grüne Anzeigeschritt für den entsprechenden Bereich und das proportionale Element. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Gleiche Tangentenlänge): Wenn Sie einen gespannten Faden von einem Punkt außerhalb des Balls auf die Oberfläche des Balls legen, prüfen Sie, dass die Länge des Fadens bis zum Kontaktpunkt gleich ist, egal auf welcher Seite Sie ihn platzieren.",
-        "vi": "Bước 5, chuyển động liên tục từ trang 12 đến trang 14. Đây là bước hiển thị vùng tương ứng và phần tử tỷ lệ màu xanh lá cây. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Độ dài tiếp tuyến bằng nhau): Nếu bạn đặt một sợi dây căng trên bề mặt quả bóng từ một điểm bên ngoài quả bóng, hãy kiểm tra xem độ dài của sợi dây đến điểm tiếp xúc có bằng nhau cho dù bạn đặt nó ở phía nào đi chăng nữa."
-      },
-      "durations": {
-        "ko": 27.184,
-        "en": 31.36
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "5단계, 12페이지부터 14페이지까지의 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 5 (Page 12). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 16,
@@ -212,8 +196,10 @@
         15,
         17
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 6 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.4711,
@@ -221,23 +207,11 @@
         0.6198,
         0.5592
       ],
-      "explanation_text": "6단계, 15페이지부터 17페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 접선 길이 같음): 공 바깥의 한 점에서 공 표면에 팽팽하게 실을 대면 어느 쪽으로 대든 접점까지의 실 길이가 똑같음을 확인",
+      "explanation_text": "6단계, 15페이지부터 17페이지까지의 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "6단계, 15페이지부터 17페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 접선 길이 같음): 공 바깥의 한 점에서 공 표면에 팽팽하게 실을 대면 어느 쪽으로 대든 접점까지의 실 길이가 똑같음을 확인",
-        "en": "Step 6, continuous movement from pages 15 to 17. This is the step of deriving the right proof formula (constructing core geometry and developing continuous motion). Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Equal tangent length): If you place a taut thread on the surface of the ball from a point outside the ball, check that the length of the thread to the point of contact is the same no matter which side you place it on.",
-        "ja": "6段階、15ページから17ページまでの連続動きです。右証明式は、誘導（核心幾何作図と連続モーション展開）段階です。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初接線の長さに等しい）：ボールの外側の一点でボールの表面にしっかりと糸を当てると、どちら側にも接点までの糸の長さが等しいことを確認します。",
-        "zh-CN": "第6步，从第15页到第17页的连续运动。这是导出正确证明公式的步骤（构建核心几何结构并开发连续运动）。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（等切线长度）：如果将拉紧的螺纹从球外的一点放置在球的表面上，请检查无论放置在哪一侧，螺纹到接触点的长度是否相同。",
-        "es": "Paso 6, movimiento continuo de las páginas 15 a 17. Este es el paso para derivar la fórmula de prueba correcta (construir la geometría central y desarrollar el movimiento continuo). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (longitud tangente igual): si coloca un hilo tenso en la superficie de la bola desde un punto fuera de la bola, verifique que la longitud del hilo hasta el punto de contacto sea la misma sin importar de qué lado lo coloque.",
-        "fr": "Étape 6, mouvement continu des pages 15 à 17. C'est l'étape consistant à dériver la bonne formule de preuve (construction de la géométrie de base et développement du mouvement continu). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (longueur tangente égale) : Si vous placez un fil tendu sur la surface de la balle à partir d'un point extérieur à la balle, vérifiez que la longueur du fil jusqu'au point de contact est la même quel que soit le côté sur lequel vous le placez.",
-        "de": "Schritt 6, kontinuierliche Bewegung von den Seiten 15 bis 17. Dies ist der Schritt zur Ableitung der richtigen Beweisformel (Konstruktion der Kerngeometrie und Entwicklung kontinuierlicher Bewegung). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Gleiche Tangentenlänge): Wenn Sie einen gespannten Faden von einem Punkt außerhalb des Balls auf die Oberfläche des Balls legen, prüfen Sie, dass die Länge des Fadens bis zum Kontaktpunkt gleich ist, egal auf welcher Seite Sie ihn platzieren.",
-        "vi": "Bước 6, chuyển động liên tục từ trang 15 đến trang 17. Đây là bước rút ra công thức chứng minh đúng (xây dựng hình học lõi và phát triển chuyển động liên tục). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Độ dài tiếp tuyến bằng nhau): Nếu bạn đặt một sợi dây căng trên bề mặt quả bóng từ một điểm bên ngoài quả bóng, hãy kiểm tra xem độ dài của sợi dây đến điểm tiếp xúc có bằng nhau cho dù bạn đặt nó ở phía nào đi chăng nữa."
-      },
-      "durations": {
-        "ko": 27.304,
-        "en": 32.2
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "6단계, 15페이지부터 17페이지까지의 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 6 (Page 15). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 19,
@@ -246,8 +220,10 @@
         18,
         20
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 7 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.4835,
@@ -255,23 +231,11 @@
         0.6198,
         0.5592
       ],
-      "explanation_text": "7단계, 18페이지부터 20페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (모선 길이 합 번역): 절단면 위 점 P 에서 두 초점까지의 거리 합 PF_1 + PF_2 가 원뿔 모선 위 두 선분의 합으로 바뀌어 항상 일정함을 유도",
+      "explanation_text": "7단계, 18페이지부터 20페이지까지의 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
       "narrations": {
-        "ko": "7단계, 18페이지부터 20페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (모선 길이 합 번역): 절단면 위 점 P 에서 두 초점까지의 거리 합 PF_1 + PF_2 가 원뿔 모선 위 두 선분의 합으로 바뀌어 항상 일정함을 유도",
-        "en": "Step 7, continuous movement from pages 18 to 20. This is the process of deriving the right proof formula (constructing core geometry and developing continuous motion). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of the sum of generatic lengths): The sum of the distances PF_1 + PF_2 from point P on the cutting plane to the two foci is converted to the sum of the two segments on the conical generatrix, so that it is always constant.",
-        "ja": "7段階、18ページから20ページまでの連続動きです。右証明式は、誘導（核心幾何作図と連続モーション展開）プロセスです。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（母線長和翻訳）：切断面上点Pから2焦点までの距離合計PF_1 + PF_2が円錐母線上の2線分の合計に変わり、常に一定になる",
-        "zh-CN": "第7步，从第18页到第20页的连续运动。这是推导正确证明公式的过程（构建核心几何结构并发展连续运动）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（母长之和的平移）：将剖切面上点P到两个焦点的距离PF_1 + PF_2之和转换为圆锥母线上的两条线段之和，使其始终恒定。",
-        "es": "Paso 7, movimiento continuo de las páginas 18 a 20. Este es el proceso de derivar la fórmula de prueba correcta (construir la geometría central y desarrollar el movimiento continuo). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de la suma de longitudes generativas): La suma de las distancias PF_1 + PF_2 desde el punto P en el plano de corte hasta los dos focos se convierte en la suma de los dos segmentos en la generatriz cónica, de modo que siempre sea constante.",
-        "fr": "Étape 7, mouvement continu des pages 18 à 20. Il s'agit du processus permettant de dériver la bonne formule de preuve (construction de la géométrie de base et développement du mouvement continu). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Etape 3 (Traduction de la somme des longueurs génériques) : La somme des distances PF_1 + PF_2 du point P du plan coupant aux deux foyers est convertie en somme des deux segments sur la génératrice conique, pour qu'elle soit toujours constante.",
-        "de": "Schritt 7, kontinuierliche Bewegung von Seite 18 bis 20. Dies ist der Prozess der Ableitung der richtigen Beweisformel (Konstruktion der Kerngeometrie und Entwicklung kontinuierlicher Bewegung). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung der Summe der Mantellinienlängen): Die Summe der Abstände PF_1 + PF_2 vom Punkt P auf der Schnittebene zu den beiden Brennpunkten wird in die Summe der beiden Segmente auf der konischen Mantellinie umgerechnet, sodass sie immer konstant ist.",
-        "vi": "Bước 7, chuyển động liên tục từ trang 18 đến trang 20. Đây là quá trình suy ra công thức chứng minh đúng (xây dựng hình học lõi và phát triển chuyển động liên tục). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch tổng chiều dài sinh): Tổng khoảng cách PF_1 + PF_2 từ điểm P trên mặt phẳng cắt đến hai tiêu điểm được chuyển thành tổng của hai đoạn trên ma trận sinh hình nón, sao cho luôn không đổi."
-      },
-      "durations": {
-        "ko": 29.368,
-        "en": 35.467
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "7단계, 18페이지부터 20페이지까지의 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+        "en": "Step 7 (Page 18). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 22,
@@ -280,8 +244,10 @@
         21,
         23
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "초록색 대응 영역 및 비례 요소 표시",
+      "step_title": "Step 8 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.4566,
@@ -289,23 +255,11 @@
         0.5702,
         0.5317
       ],
-      "explanation_text": "8단계, 21페이지부터 23페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (모선 길이 합 번역): 절단면 위 점 P 에서 두 초점까지의 거리 합 PF_1 + PF_2 가 원뿔 모선 위 두 선분의 합으로 바뀌어 항상 일정함을 유도",
+      "explanation_text": "8단계, 21페이지부터 23페이지까지의 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
       "narrations": {
-        "ko": "8단계, 21페이지부터 23페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (모선 길이 합 번역): 절단면 위 점 P 에서 두 초점까지의 거리 합 PF_1 + PF_2 가 원뿔 모선 위 두 선분의 합으로 바뀌어 항상 일정함을 유도",
-        "en": "Step 8, continuous movement from pages 21 to 23. This is the green corresponding area and proportional element display process. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of the sum of generatic lengths): The sum of the distances PF_1 + PF_2 from point P on the cutting plane to the two foci is converted to the sum of the two segments on the conical generatrix, so that it is always constant.",
-        "ja": "8段階、21ページから23ページまでの連続動きです。緑色対応領域と比例要素表示処理です。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（母線長和翻訳）：切断面上点Pから2焦点までの距離合計PF_1 + PF_2が円錐母線上の2線分の合計に変わり、常に一定になる",
-        "zh-CN": "第8步，从第21页连续移动到第23页。这就是绿色对应区域和比例元素的显示过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（母长之和的平移）：将剖切面上点P到两个焦点的距离PF_1 + PF_2之和转换为圆锥母线上的两条线段之和，使其始终恒定。",
-        "es": "Paso 8, movimiento continuo de las páginas 21 a 23. Este es el área verde correspondiente y el proceso de visualización del elemento proporcional. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de la suma de longitudes generativas): La suma de las distancias PF_1 + PF_2 desde el punto P en el plano de corte hasta los dos focos se convierte en la suma de los dos segmentos en la generatriz cónica, de modo que siempre sea constante.",
-        "fr": "Étape 8, mouvement continu des pages 21 à 23. Il s'agit du processus d'affichage de la zone verte correspondante et de l'élément proportionnel. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Etape 3 (Traduction de la somme des longueurs génériques) : La somme des distances PF_1 + PF_2 du point P du plan coupant aux deux foyers est convertie en somme des deux segments sur la génératrice conique, pour qu'elle soit toujours constante.",
-        "de": "Schritt 8, kontinuierlicher Übergang von Seite 21 bis 23. Dies ist der Anzeigevorgang für den grünen entsprechenden Bereich und das proportionale Element. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung der Summe der Mantellinienlängen): Die Summe der Abstände PF_1 + PF_2 vom Punkt P auf der Schnittebene zu den beiden Brennpunkten wird in die Summe der beiden Segmente auf der konischen Mantellinie umgerechnet, sodass sie immer konstant ist.",
-        "vi": "Bước 8, chuyển động liên tục từ trang 21 đến trang 23. Đây là phần màu xanh lá cây tương ứng với quá trình hiển thị phần tử tỷ lệ. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch tổng chiều dài sinh): Tổng khoảng cách PF_1 + PF_2 từ điểm P trên mặt phẳng cắt đến hai tiêu điểm được chuyển thành tổng của hai đoạn trên ma trận sinh hình nón, sao cho luôn không đổi."
-      },
-      "durations": {
-        "ko": 33.2,
-        "en": 43.0
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "8단계, 21페이지부터 23페이지까지의 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+        "en": "Step 8 (Page 21). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 25,
@@ -314,8 +268,10 @@
         24,
         27
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 9 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.3946,
@@ -323,23 +279,11 @@
         0.5124,
         0.5455
       ],
-      "explanation_text": "9단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (모선 길이 합 번역): 절단면 위 점 P 에서 두 초점까지의 거리 합 PF_1 + PF_2 가 원뿔 모선 위 두 선분의 합으로 바뀌어 항상 일정함을 유도",
+      "explanation_text": "9단계, 24페이지부터 27페이지까지의 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
       "narrations": {
-        "ko": "9단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (모선 길이 합 번역): 절단면 위 점 P 에서 두 초점까지의 거리 합 PF_1 + PF_2 가 원뿔 모선 위 두 선분의 합으로 바뀌어 항상 일정함을 유도",
-        "en": "Step 9, continuous movement from pages 24 to 27. This is the process of drawing the left dynamic shape (drawing core geometry and developing continuous motion). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of the sum of generatic lengths): The sum of the distances PF_1 + PF_2 from point P on the cutting plane to the two foci is converted to the sum of the two segments on the conical generatrix, so that it is always constant.",
-        "ja": "9段階、24ページから27ページまでの連続動きです。左ダイナミック図形作図(核心幾何作図と連続モーション展開)プロセスです.図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（母線長和翻訳）：切断面上点Pから2焦点までの距離合計PF_1 + PF_2が円錐母線上の2線分の合計に変わり、常に一定になる",
-        "zh-CN": "第9步，从第24页到第27页的连续运动。这是绘制左侧动态形状的过程（绘制核心几何体并发展连续运动）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（母长之和的平移）：将剖切面上点P到两个焦点的距离PF_1 + PF_2之和转换为圆锥母线上的两条线段之和，使其始终恒定。",
-        "es": "Paso 9, movimiento continuo de las páginas 24 a 27. Este es el proceso de dibujar la forma dinámica izquierda (dibujar la geometría central y desarrollar el movimiento continuo). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de la suma de longitudes generativas): La suma de las distancias PF_1 + PF_2 desde el punto P en el plano de corte hasta los dos focos se convierte en la suma de los dos segmentos en la generatriz cónica, de modo que siempre sea constante.",
-        "fr": "Étape 9, mouvement continu des pages 24 à 27. Il s'agit du processus de dessin de la forme dynamique gauche (dessiner la géométrie de base et développer un mouvement continu). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Etape 3 (Traduction de la somme des longueurs génériques) : La somme des distances PF_1 + PF_2 du point P du plan coupant aux deux foyers est convertie en somme des deux segments sur la génératrice conique, pour qu'elle soit toujours constante.",
-        "de": "Schritt 9, kontinuierliche Bewegung von Seite 24 bis 27. Dies ist der Prozess des Zeichnens der linken dynamischen Form (Kerngeometrie zeichnen und kontinuierliche Bewegung entwickeln). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung der Summe der Mantellinienlängen): Die Summe der Abstände PF_1 + PF_2 vom Punkt P auf der Schnittebene zu den beiden Brennpunkten wird in die Summe der beiden Segmente auf der konischen Mantellinie umgerechnet, sodass sie immer konstant ist.",
-        "vi": "Bước 9, chuyển động liên tục từ trang 24 đến trang 27. Đây là quá trình vẽ hình động bên trái (vẽ hình học lõi và phát triển chuyển động liên tục). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch tổng chiều dài sinh): Tổng khoảng cách PF_1 + PF_2 từ điểm P trên mặt phẳng cắt đến hai tiêu điểm được chuyển thành tổng của hai đoạn trên ma trận sinh hình nón, sao cho luôn không đổi."
-      },
-      "durations": {
-        "ko": 31.133,
-        "en": 40.2
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "9단계, 24페이지부터 27페이지까지의 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+        "en": "Step 9 (Page 24). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 29,
@@ -348,8 +292,10 @@
         28,
         30
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 10 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Derive the definition of an ellipse from a cone?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.3946,
@@ -357,23 +303,11 @@
         0.5145,
         0.5813
       ],
-      "explanation_text": "10단계, 28페이지부터 30페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원뿔의 모선 각도 alpha 와 절단면 기울기 각 beta 의 관계로부터 이심률 e = cos alpha 분의 cos beta 및 초점 거리 계산",
+      "explanation_text": "10단계, 28페이지부터 30페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "10단계, 28페이지부터 30페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원뿔의 모선 각도 alpha 와 절단면 기울기 각 beta 의 관계로부터 이심률 e = cos alpha 분의 cos beta 및 초점 거리 계산",
-        "en": "10 steps, continuous movement from pages 28 to 30. This is the final stage of drawing the left dynamic shape (drawing core geometry and developing continuous motion). The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): Calculate the eccentricity e = cos beta of cos alpha and focal length from the relationship between the cone's generatrix angle alpha and the cutting plane inclination angle beta.",
-        "ja": "10段階、28ページから30ページまでの連続動きです。左動的図形作図(核心幾何作図と連続モーション展開)仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本文総合）：円錐の母線角度αと切断面傾斜角βの関係からの離心率e = cos alpha分のcosβと焦点距離の計算",
-        "zh-CN": "10个步骤，从第28页到第30页的连续运动。这是绘制左侧动态形状的最后阶段（绘制核心几何形状并发展连续运动）。将前面步骤中的各个部分组合起来得出最终结论。步骤4（正文总结）：根据圆锥母线角α与剖切面倾角β之间的关系，计算出cos α的偏心率e = cos beta 和焦距。",
-        "es": "10 pasos, movimiento continuo de las páginas 28 a 30. Esta es la etapa final para dibujar la forma dinámica izquierda (dibujar la geometría central y desarrollar el movimiento continuo). Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): Calcule la excentricidad e = cos beta de cos alfa y la distancia focal a partir de la relación entre el ángulo generatriz alfa del cono y el ángulo de inclinación beta del plano de corte.",
-        "fr": "10 étapes, mouvement continu des pages 28 à 30. Il s'agit de l'étape finale du dessin de la forme dynamique gauche (dessiner la géométrie de base et développer un mouvement continu). Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Calculez l'excentricité e = cos bêta du cos alpha et la distance focale à partir de la relation entre l'angle génératrice alpha du cône et l'angle d'inclinaison bêta du plan de coupe.",
-        "de": "10 Schritte, kontinuierliche Bewegung von Seite 28 bis 30. Dies ist die letzte Phase des Zeichnens der linken dynamischen Form (Kerngeometrie zeichnen und kontinuierliche Bewegung entwickeln). Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Berechnen Sie die Exzentrizität e = cos beta von cos alpha und der Brennweite aus der Beziehung zwischen dem Erzeugendenwinkel alpha des Kegels und dem Neigungswinkel beta der Schnittebene.",
-        "vi": "10 bước, chuyển động liên tục từ trang 28 đến 30. Đây là giai đoạn cuối cùng của việc vẽ hình động bên trái (vẽ hình học lõi và phát triển chuyển động liên tục). Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Tính độ lệch tâm e = cos beta của cos alpha và tiêu cự từ mối quan hệ giữa góc sinh alpha của hình nón và góc nghiêng mặt phẳng cắt beta."
-      },
-      "durations": {
-        "ko": 33.088,
-        "en": 39.664
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "10단계, 28페이지부터 30페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 10 (Page 28). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Derive the definition of an ellipse from a cone."
+      }
     },
     {
       "page": 32,
@@ -382,8 +316,10 @@
         31,
         33
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 11 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Derive the definition of an ellipse from a cone?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.4649,
@@ -391,23 +327,11 @@
         0.5682,
         0.5813
       ],
-      "explanation_text": "11단계, 31페이지부터 33페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원뿔의 모선 각도 alpha 와 절단면 기울기 각 beta 의 관계로부터 이심률 e = cos alpha 분의 cos beta 및 초점 거리 계산",
+      "explanation_text": "11단계, 31페이지부터 33페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "11단계, 31페이지부터 33페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원뿔의 모선 각도 alpha 와 절단면 기울기 각 beta 의 관계로부터 이심률 e = cos alpha 분의 cos beta 및 초점 거리 계산",
-        "en": "Step 11, continuous movement from pages 31 to 33. This is the final stage of drawing core geometry and developing continuous motion. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): Calculate the eccentricity e = cos beta of cos alpha and focal length from the relationship between the cone's generatrix angle alpha and the cutting plane inclination angle beta.",
-        "ja": "11段階、31ページから33ページまでの連続動きです。コア幾何作図と連続モーション展開仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本文総合）：円錐の母線角度αと切断面傾斜角βの関係からの離心率e = cos alpha分のcosβと焦点距離の計算",
-        "zh-CN": "第11步，从第31页到第33页的连续运动。这是绘制核心几何形状和发展连续运动的最后阶段。将前面步骤中的各个部分组合起来得出最终结论。步骤4（正文总结）：根据圆锥母线角α与剖切面倾角β之间的关系，计算出cos α的偏心率e = cos beta 和焦距。",
-        "es": "Paso 11, movimiento continuo de las páginas 31 a 33. Esta es la etapa final para dibujar la geometría central y desarrollar el movimiento continuo. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): Calcule la excentricidad e = cos beta de cos alfa y la distancia focal a partir de la relación entre el ángulo generatriz alfa del cono y el ángulo de inclinación beta del plano de corte.",
-        "fr": "Étape 11, mouvement continu des pages 31 à 33. Il s'agit de la dernière étape du dessin de la géométrie de base et du développement du mouvement continu. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Calculez l'excentricité e = cos bêta du cos alpha et la distance focale à partir de la relation entre l'angle génératrice alpha du cône et l'angle d'inclinaison bêta du plan de coupe.",
-        "de": "Schritt 11, kontinuierliche Bewegung von den Seiten 31 bis 33. Dies ist die letzte Phase des Zeichnens der Kerngeometrie und der Entwicklung kontinuierlicher Bewegung. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Berechnen Sie die Exzentrizität e = cos beta von cos alpha und der Brennweite aus der Beziehung zwischen dem Erzeugendenwinkel alpha des Kegels und dem Neigungswinkel beta der Schnittebene.",
-        "vi": "Bước 11, chuyển động liên tục từ trang 31 đến 33. Đây là giai đoạn cuối cùng của việc vẽ hình học lõi và phát triển chuyển động liên tục. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Tính độ lệch tâm e = cos beta của cos alpha và tiêu cự từ mối quan hệ giữa góc sinh alpha của hình nón và góc nghiêng mặt phẳng cắt beta."
-      },
-      "durations": {
-        "ko": 29.824,
-        "en": 33.133
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "11단계, 31페이지부터 33페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 11 (Page 31). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Derive the definition of an ellipse from a cone."
+      }
     },
     {
       "page": 34,
@@ -416,8 +340,10 @@
         34,
         34
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요?",
+      "step_question_en": "🔀 [What-If-Not] How does Derive the definition of an ellipse from a cone evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -425,148 +351,11 @@
         0.9628,
         0.9091
       ],
-      "explanation_text": "마지막 12단계입니다. 지금까지 총 34프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 공간에서 구와 평면·원뿔이 접하면 반드시 '구 밖의 한 점에서 구에 그은 모든 접선의 길이는 같다'는 등식부터 세우세요.",
+      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건에서 시작해, 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 거쳐, '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 12단계입니다. 지금까지 총 34프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 공간에서 구와 평면·원뿔이 접하면 반드시 '구 밖의 한 점에서 구에 그은 모든 접선의 길이는 같다'는 등식부터 세우세요.",
-        "en": "Step 12. We have completed the entire 34-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself.",
-        "ja": "最後の12段階です。これまでに合計34フレームのフリップブック作図を通じて整理を完全に証明しました。実戦のヒントで、空間で球と平面・円錐が接したら必ず「球の外の一点で球に描いたすべての接線の長さは同じ」という式から立ててください。",
-        "zh-CN": "这是最后 12 个步骤。至此，我们已经通过总共34帧的翻页图画完整地证明了该定理。作为实用提示，当球体接触空间中的平面或圆锥体时，请务必首先建立“从球体外部的一点到球体所画的所有切线长度相同”的方程。",
-        "es": "Estos son los últimos 12 pasos. Hasta ahora hemos demostrado completamente el teorema mediante un dibujo en formato flipbook de un total de 34 fotogramas. Como consejo práctico, cuando una esfera toca un plano o un cono en el espacio, asegúrese de establecer primero la ecuación de que \"todas las líneas tangentes trazadas desde un punto fuera de la esfera a la esfera tienen la misma longitud\".",
-        "fr": "Ce sont les 12 dernières étapes. Jusqu’à présent, nous avons complètement prouvé le théorème à travers un dessin flipbook d’un total de 34 images. À titre de conseil pratique, lorsqu'une sphère touche un plan ou un cône dans l'espace, assurez-vous d'abord d'établir l'équation selon laquelle « toutes les lignes tangentes tracées depuis un point extérieur à la sphère jusqu'à la sphère ont la même longueur ».",
-        "de": "Dies sind die letzten 12 Schritte. Bisher haben wir das Theorem durch eine Daumenkino-Zeichnung von insgesamt 34 Bildern vollständig bewiesen. Als praktischer Tipp: Wenn eine Kugel eine Ebene oder einen Kegel im Raum berührt, stellen Sie zunächst die Gleichung auf, dass „alle Tangenten, die von einem Punkt außerhalb der Kugel zur Kugel gezogen werden, gleich lang sind“.",
-        "vi": "Đây là 12 bước cuối cùng. Cho đến nay, chúng ta đã chứng minh được hoàn toàn định lý thông qua một bản vẽ flipbook có tổng cộng 34 khung hình. Một mẹo thực tế, khi một hình cầu chạm vào một mặt phẳng hoặc hình nón trong không gian, trước tiên hãy đảm bảo thiết lập phương trình 'tất cả các đường tiếp tuyến vẽ từ một điểm bên ngoài hình cầu đến hình cầu đều có cùng độ dài'."
-      },
-      "durations": {
-        "ko": 28.096,
-        "en": 31.0
-      },
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떤 새로운 정리가 탄생할까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this figure?"
+        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원뿔로부터 타원의 정의 유도하기'의 기하학적 출발 조건에서 시작해, 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 거쳐, '원뿔로부터 타원의 정의 유도하기'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 12. The visual proof of Derive the definition of an ellipse from a cone is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
+      }
     }
-  ],
-  "youtube_packages": {
-    "ko": {
-      "lang": "ko",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "🔥 [시각적 증명] 원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone) — 눈으로 깨치는 34단계 기하...",
-      "description": "공식 암기 없이 눈으로 보고 직관적으로 깨치는 [원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone)] 34단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다.\n\n🚀 [영상을 본 직후 1초 만에 내 실력으로 만드는 수학홈페이지(mathedu) 무료 실습 링크]\n1️⃣ 📐 방금 본 증명 도형 마우스로 직접 움직여보기 (GeoGebra & 1,113개 설명영상 게시판):\n👉 https://min7014.github.io/mathedu/video_board.html?slug=2022101601&from=yt\n2️⃣ ✍️ [탈-5지선다 창의 구성 모드] 이 개념이 쓰인 수능·모평 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q=원뿔로부터&from=yt\n3️⃣ 🌱 [오늘의 3분 수학 유레카] 10초 오개념 반례 O/X 퀴즈 & 나만의 변형 문제 발명:\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n4️⃣ 🎮 [수능 수학 100점 만점 3D 보스 레이드 게임] 설치 없이 브라우저에서 즉시 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n5️⃣ 🏛️ [민은기 선생님의 수학자료실 본관 (3,400+ 동적 기하 아카이브)]:\n👉 https://min7014.github.io/math20221016001.html\n\n💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 34페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!\n\n🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ\n\n🔔 [@min7014_ai 채널 구독하기]: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n📄 단계별 플립북 증명 PDF 원문: https://min7014.github.io/2022/2022101601.pdf\n🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html?slug=2022101601\n식별 코드: [ID: 2022101601_KO]\n\n⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n00:00 1페이지/34 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원뿔로부터 타원의 정의 유...\n00:14 3페이지/34 — 2단계, 2페이지부터 4페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 ...\n00:55 6페이지/34 — 3단계, 5페이지부터 7페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나...\n01:22 9페이지/34 — 4단계, 8페이지부터 11페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속...\n01:49 13페이지/34 — 5단계, 12페이지부터 14페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연...\n02:16 16페이지/34 — 6단계, 15페이지부터 17페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션...\n02:44 19페이지/34 — 7단계, 18페이지부터 20페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션...\n03:13 22페이지/34 — 8단계, 21페이지부터 23페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도...\n03:46 25페이지/34 — 9단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...\n04:17 29페이지/34 — 10단계, 28페이지부터 30페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모...\n04:50 32페이지/34 — 11단계, 31페이지부터 33페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니...\n05:20 34페이지/34 — 마지막 12단계입니다. 지금까지 총 34프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ...\n\n#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014",
-      "tags": [
-        "수학",
-        "기하학",
-        "시각적 증명",
-        "수능 수학",
-        "도형 보조선",
-        "피타고라스 정리",
-        "메넬라우스의 정리",
-        "체바의 정리",
-        "중학교 도형",
-        "고등학교 수학",
-        "수능 도형 킬러",
-        "영재고 수학",
-        "KMO 기하",
-        "GeoGebra",
-        "알지오매스",
-        "민은기 선생님의 수학자료실",
-        "민은기 선생님의 수학자료실_AI",
-        "min7014_ai",
-        "min7014",
-        "수학 잘하는 법"
-      ],
-      "quiz_comment": "💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 34페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!",
-      "categoryId": "27",
-      "defaultLanguage": "ko",
-      "chapters": [
-        "00:00 1페이지/34 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원뿔로부터 타원의 정의 유...",
-        "00:14 3페이지/34 — 2단계, 2페이지부터 4페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 ...",
-        "00:55 6페이지/34 — 3단계, 5페이지부터 7페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나...",
-        "01:22 9페이지/34 — 4단계, 8페이지부터 11페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속...",
-        "01:49 13페이지/34 — 5단계, 12페이지부터 14페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연...",
-        "02:16 16페이지/34 — 6단계, 15페이지부터 17페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션...",
-        "02:44 19페이지/34 — 7단계, 18페이지부터 20페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션...",
-        "03:13 22페이지/34 — 8단계, 21페이지부터 23페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도...",
-        "03:46 25페이지/34 — 9단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...",
-        "04:17 29페이지/34 — 10단계, 28페이지부터 30페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모...",
-        "04:50 32페이지/34 — 11단계, 31페이지부터 33페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니...",
-        "05:20 34페이지/34 — 마지막 12단계입니다. 지금까지 총 34프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ..."
-      ],
-      "total_duration_sec": 348.77,
-      "srt_url": "video_lectures/youtube_packages/2022101601_ko.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2022101601_ko_thumb.png",
-      "local_mp4_path": "youtube_uploads/2022101601/2022101601_ko.mp4"
-    },
-    "en": {
-      "lang": "en",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "✨ Derive the definition of an ellipse from a cone — Step-by-Step Visual Math Proof (34 Steps · ...",
-      "description": "Why does Derive the definition of an ellipse from a cone hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!\n\n🚀 [Try It Yourself on the Free Interactive Math Platform (min7014.github.io/mathedu)]\n1️⃣ 📐 Interactive GeoGebra Applet & 1,113 Visual Proof Video Board:\n👉 https://min7014.github.io/mathedu/video_board.html?slug=2022101601&from=yt\n2️⃣ ✍️ De-Multiple-Choice Constructive Math Studio (16,548 Step-by-Step Quizzes):\n👉 https://min7014.github.io/mathedu/?from=yt\n3️⃣ 🌱 Daily 3-Minute Math Eureka (10s Counterexample O/X & What-If-Not Problem Posing):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n4️⃣ 🎮 3D Math Sanctuary Boss Raid RPG (Free Browser Game):\n👉 https://min7014.github.io/mathedu/game.html\n5️⃣ 🏛️ Min's Math Lab Main Archive (3,400+ Dynamic Proofs):\n👉 https://min7014.github.io/math20221016001.html\n\n💬 [10-Second Eureka Quiz] Which step (1 to 34) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!\n\n🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E\n\n🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n📄 Original Step-by-Step PDF: https://min7014.github.io/2022/2022101601.pdf\n🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html?slug=2022101601\nTopic ID: [ID: 2022101601_EN]\n\n⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n00:00 Step 1/34 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...\n00:10 Step 3/34 — Step 2, continuous movement from pages 2 to 4. In the process ...\n00:24 Step 6/34 — Step 3, continuous movement from pages 5 to 7. This is a proce...\n00:51 Step 9/34 — Step 4, continuous movement from pages 8 to 11. This is the gr...\n01:19 Step 13/34 — Step 5, continuous movement from pages 12 to 14. This is the g...\n01:50 Step 16/34 — Step 6, continuous movement from pages 15 to 17. This is the s...\n02:22 Step 19/34 — Step 7, continuous movement from pages 18 to 20. This is the p...\n02:58 Step 22/34 — Step 8, continuous movement from pages 21 to 23. This is the g...\n03:41 Step 25/34 — Step 9, continuous movement from pages 24 to 27. This is the p...\n04:21 Step 29/34 — 10 steps, continuous movement from pages 28 to 30. This is the...\n05:00 Step 32/34 — Step 11, continuous movement from pages 31 to 33. This is the ...\n05:34 Step 34/34 — Step 12. We have completed the entire 34-frame visual proof! V...\n\n#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014",
-      "tags": [
-        "Visual Math Proof",
-        "Geometry Proof",
-        "Proof Without Words",
-        "Euclidean Geometry",
-        "Pythagorean Theorem",
-        "Ceva Theorem",
-        "Menelaus Theorem",
-        "GeoGebra",
-        "Math Animation",
-        "3Blue1Brown style math",
-        "Step by Step Math",
-        "High School Geometry",
-        "Math Olympiad",
-        "AMC Math",
-        "SAT Math",
-        "Min's Math Lab",
-        "min7014_ai",
-        "min7014"
-      ],
-      "quiz_comment": "💬 [10-Second Eureka Quiz] Which step (1 to 34) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!",
-      "categoryId": "27",
-      "defaultLanguage": "en",
-      "chapters": [
-        "00:00 Step 1/34 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...",
-        "00:10 Step 3/34 — Step 2, continuous movement from pages 2 to 4. In the process ...",
-        "00:24 Step 6/34 — Step 3, continuous movement from pages 5 to 7. This is a proce...",
-        "00:51 Step 9/34 — Step 4, continuous movement from pages 8 to 11. This is the gr...",
-        "01:19 Step 13/34 — Step 5, continuous movement from pages 12 to 14. This is the g...",
-        "01:50 Step 16/34 — Step 6, continuous movement from pages 15 to 17. This is the s...",
-        "02:22 Step 19/34 — Step 7, continuous movement from pages 18 to 20. This is the p...",
-        "02:58 Step 22/34 — Step 8, continuous movement from pages 21 to 23. This is the g...",
-        "03:41 Step 25/34 — Step 9, continuous movement from pages 24 to 27. This is the p...",
-        "04:21 Step 29/34 — 10 steps, continuous movement from pages 28 to 30. This is the...",
-        "05:00 Step 32/34 — Step 11, continuous movement from pages 31 to 33. This is the ...",
-        "05:34 Step 34/34 — Step 12. We have completed the entire 34-frame visual proof! V..."
-      ],
-      "total_duration_sec": 365.03,
-      "srt_url": "video_lectures/youtube_packages/2022101601_en.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2022101601_en_thumb.png",
-      "local_mp4_path": "youtube_uploads/2022101601/2022101601_en.mp4"
-    }
-  },
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 원뿔로부터 타원의 정의 유도하기(Derive the definition of an ellipse from a cone) — 45초 시각적 수학 증명 하이라이트 #Shorts #",
-      "local_mp4_path": "video_lectures/shorts/2022101601_short_ko.mp4",
-      "duration_sec": 48.56,
-      "aspect_ratio": "9:16 (1080x1920)"
-    },
-    "en": {
-      "title": "🔥 Derive the definition of an ellipse from a cone — 45s Visual Math Proof Highlight #Shorts #Math",
-      "local_mp4_path": "video_lectures/shorts/2022101601_short_en.mp4",
-      "duration_sec": 30.11,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  },
-  "pedagogy_style": "v5.0 Question-Asking Classroom (Notice & Wonder -> Socratic Pólya -> What-If-Not)"
+  ]
 }

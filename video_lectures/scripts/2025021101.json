@@ -3,11 +3,12 @@
   "title": "삼각형의 오더리 탱클 II(Orderly Tangle II of Triangles)",
   "title_en": "Orderly Tangle II of Triangles",
   "sub_domain_ko": "유클리드 평면기하",
-  "core_concept": "[삼각형의 오더리 탱클 II] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
-  "solving_tip": "원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선($90^\\circ$)을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요.",
+  "core_concept": "일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건 ➔ 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘(Orderly Tangle)·황금각 나선 구조가 완성된다는 결론",
+  "solving_tip": "회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선",
   "pdf_url": "https://min7014.github.io/2025/2025021101.pdf",
   "web_url": "https://min7014.github.io/math20250211001.html",
   "page_count": 14,
+  "scene_count": 14,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/tPZIFN67BD4"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "fractal_curve",
+    "hypothesis_ko": "일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건",
+    "conclusion_ko": "회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘(Orderly Tangle)·황금각 나선 구조가 완성된다는 결론",
+    "auxiliary_line_ko": "회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선",
+    "proof_logic_ko": "동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환(Isometry) 성질에 의해 정다각형 대칭이 성립하는 원리",
+    "misconception_ko": "자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
+    "what_if_not_ko": "만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,27 +81,17 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 삼각형의 오더리 탱클 II에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in Orderly Tangle II of Triangles?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 삼각형의 오더리 탱클 II(Orderly Tangle II of Triangles)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [삼각형의 오더리 탱클 II] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 삼각형의 오더리 탱클 II입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건입니다. 왜 이 조건에서 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 삼각형의 오더리 탱클 II(Orderly Tangle II of Triangles)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [삼각형의 오더리 탱클 II] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
-        "en": "Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore Orderly Tangle II of Triangles and see why this mathematical property holds.",
-        "ja": "1段階です。ミン・ウンギ先生の数学資料室段階別視覚証明講義です。今回は、三角形のオーダーリータンクル（Orderly Tangle II of Triangles）の核心原理を動的フリップブックとして証明しましょう。 [三角形のオーダリータンクII] 目盛りのない者（直線延長）とコンパス（距離移動・円）のみを使用するユークリッド共準基盤の作図原理および円・三角形・四角形の合同・似・等的変形・円周角不変量究明。",
-        "zh-CN": "这是第一步。这是 Eunki Min 老师数学资源室的分步视觉证明讲座。这次，让我们用动态翻页书来演示《Orderly Tangle II of Triangles》的核心原理。 【三角形有序缠结II】仅使用尺子（直线延伸）和圆规（距离移动、圆）基于欧几里得假设的构造原理，并识别圆、三角形和正方形的全等、相似、等距变换和圆周角不变量。",
-        "es": "Este es el paso 1. Esta es una conferencia de prueba visual paso a paso de la sala de recursos de matemáticas del maestro Eunki Min. Esta vez, demostremos los principios básicos de Orderly Tangle II of Triangles con un flipbook dinámico. [Triangle Orderly Tangle II] Construcción de principios basados ​​en postulados euclidianos usando solo reglas (extensión de línea recta) y compás (movimiento a distancia, círculos), e identificación de congruencia, similitud, transformación isométrica e invariantes de ángulo circunferencial de círculos, triángulos y cuadrados.",
-        "fr": "Il s'agit de l'étape 1. Il s'agit d'une démonstration visuelle étape par étape de la salle de ressources mathématiques du professeur Eunki Min. Cette fois, prouvons les principes fondamentaux de Orderly Tangle II of Triangles avec un flipbook dynamique. [Triangle Orderly Tangle II] Construction de principes basés sur des postulats euclidiens en utilisant uniquement des règles (extension de ligne droite) et des compas (mouvement de distance, cercles), et identification de la congruence, de la similarité, de la transformation isométrique et des invariants d'angle circonférentiel des cercles, des triangles et des carrés.",
-        "de": "Dies ist Schritt 1. Dies ist eine schrittweise visuelle Beweisvorlesung aus dem Mathe-Ressourcenraum der Lehrerin Eunki Min. Lassen Sie uns dieses Mal die Grundprinzipien von Orderly Tangle II of Triangles mit einem dynamischen Daumenkino demonstrieren. [Triangle Orderly Tangle II] Konstruieren von Prinzipien auf der Grundlage euklidischer Postulate, bei denen nur Lineale (gerade Linienverlängerung) und Zirkel (Entfernungsbewegung, Kreise) verwendet werden, und Identifizierung von Kongruenz, Ähnlichkeit, isometrischer Transformation und Umfangswinkelinvarianten von Kreisen, Dreiecken und Quadraten.",
-        "vi": "Đây là bước 1. Đây là bài giảng chứng minh trực quan từng bước từ phòng tài liệu toán của giáo viên Eunki Min. Lần này, chúng ta hãy thể hiện các nguyên tắc cốt lõi của Orderly Tangle II of Triangles bằng một cuốn sách lật động. [Tam giác có trật tự rối II] Xây dựng nguyên tắc dựa trên các định đề Euclide chỉ sử dụng thước đo (kéo dài đường thẳng) và compa (di chuyển khoảng cách, đường tròn) và xác định sự đồng dạng, tương tự, biến đổi đẳng cự và bất biến góc chu vi của hình tròn, hình tam giác và hình vuông."
-      },
-      "durations": {
-        "ko": 13.17,
-        "en": 10.29
-      },
-      "step_question_ko": "❓ [Notice & Wonder] 삼각형의 오더리 탱클 II(Orderly Tangle II of Triangles)에서 움직여도 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in Orderly Tangle II of Triangles, and why?"
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 삼각형의 오더리 탱클 II입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건입니다. 왜 이 조건에서 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore Orderly Tangle II of Triangles through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
+      }
     },
     {
       "page": 2,
@@ -76,8 +100,10 @@
         2,
         2
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 2 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Orderly Tangle II of Triangles?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -85,23 +111,11 @@
         0.469,
         0.5041
       ],
-      "explanation_text": "2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
+      "explanation_text": "2단계, 2페이지 단계입니다. 출발 조건인 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
-        "en": "Step 2, page 2. In the left dynamic shape construction (core geometry construction and continuous motion development) process, check the basic shapes and reference points shown on the screen. Step 1 (Elementary Compass and Ruler Intuition): Confirm by drawing that a compass is a ‘tool for moving the same distance’ and a ruler without scales is a ‘tool for connecting two points straight’.",
-        "ja": "ステップ2、2ページです。左のダイナミック図形作図（核心幾何作図と連続モーション展開）プロセスで、画面に表示される基本図形と基準点を確認します。ステップ1（初等コンパスと自直観）：コンパスは「同じ距離を移動する道具」であり、目立たない者は「二点をまっすぐにつなぐ道具」であることを直接描いてみて確認",
-        "zh-CN": "第 2 页，步骤 2。在左侧动态形状构建（核心几何构建和连续运动发展）过程中，检查屏幕上显示的基本形状和参考点。第1步（初级指南针和直尺直觉）：通过绘图确认指南针是“移动相同距离的工具”，无刻度的直尺是“直线连接两点的工具”。",
-        "es": "Paso 2, página 2. En el proceso de construcción de formas dinámicas de la izquierda (construcción de geometría central y desarrollo de movimiento continuo), verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Intuición elemental de brújula y regla): Confirma dibujando que una brújula es una “herramienta para moverse la misma distancia” y una regla sin escalas es una “herramienta para conectar dos puntos en línea recta”.",
-        "fr": "Étape 2, page 2. Dans le processus de construction de forme dynamique gauche (construction de la géométrie de base et développement de mouvement continu), vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Intuition élémentaire de la boussole et de la règle) : Confirmez en dessinant qu'une boussole est un « outil pour parcourir la même distance » et qu'une règle sans échelle est un « outil pour relier deux points droits ».",
-        "de": "Schritt 2, Seite 2. Überprüfen Sie im linken dynamischen Formkonstruktionsprozess (Kerngeometriekonstruktion und kontinuierliche Bewegungsentwicklung) die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Grundlegende Kompass- und Lineal-Intuition): Bestätigen Sie durch Zeichnen, dass ein Kompass ein „Werkzeug zum Verschieben derselben Distanz“ und ein Lineal ohne Skalen ein „Werkzeug zum geraden Verbinden zweier Punkte“ ist.",
-        "vi": "Bước 2, trang 2. Trong quy trình xây dựng hình dạng động bên trái (xây dựng hình học lõi và phát triển chuyển động liên tục), hãy kiểm tra các hình dạng cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Trực quan la bàn và thước kẻ cơ bản): Xác nhận bằng cách vẽ rằng la bàn là 'công cụ để di chuyển cùng một khoảng cách' và thước kẻ không có thang đo là 'công cụ để nối thẳng hai điểm'."
-      },
-      "durations": {
-        "ko": 24.976,
-        "en": 14.224
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "2단계, 2페이지 단계입니다. 출발 조건인 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 2 (Page 2). We construct the base figure for Orderly Tangle II of Triangles and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 3,
@@ -110,8 +124,10 @@
         3,
         3
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 3 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Orderly Tangle II of Triangles?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.281,
@@ -119,23 +135,11 @@
         0.7087,
         0.8512
       ],
-      "explanation_text": "3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
+      "explanation_text": "3단계, 3페이지 단계입니다. 출발 조건인 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
-        "en": "Step 3, page 3. In the process of drawing blue basic shapes and reference line segments, check the basic shapes and reference points shown on the screen. Step 1 (Elementary Compass and Ruler Intuition): Confirm by drawing that a compass is a ‘tool for moving the same distance’ and a ruler without scales is a ‘tool for connecting two points straight’.",
-        "ja": "ステップ3、3ページです。青の基本図形と基準線分作成プロセスで、画面に表示される基本図形と基準点を確認します。ステップ1（初等コンパスと自直観）：コンパスは「同じ距離を移動する道具」であり、目立たない者は「二点をまっすぐにつなぐ道具」であることを直接描いてみて確認",
-        "zh-CN": "第 3 页，步骤 3。 在绘制蓝色基本形状和参考线段的过程中，检查屏幕上显示的基本形状和参考点。第1步（初级指南针和直尺直觉）：通过绘图确认指南针是“移动相同距离的工具”，无刻度的直尺是“直线连接两点的工具”。",
-        "es": "Paso 3, página 3. En el proceso de dibujar formas básicas azules y segmentos de línea de referencia, verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Intuición elemental de brújula y regla): Confirma dibujando que una brújula es una “herramienta para moverse la misma distancia” y una regla sin escalas es una “herramienta para conectar dos puntos en línea recta”.",
-        "fr": "Étape 3, page 3. Lors du processus de dessin de formes de base bleues et de segments de ligne de référence, vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Intuition élémentaire de la boussole et de la règle) : Confirmez en dessinant qu'une boussole est un « outil pour parcourir la même distance » et qu'une règle sans échelle est un « outil pour relier deux points droits ».",
-        "de": "Schritt 3, Seite 3. Überprüfen Sie beim Zeichnen blauer Grundformen und Referenzliniensegmente die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Grundlegende Kompass- und Lineal-Intuition): Bestätigen Sie durch Zeichnen, dass ein Kompass ein „Werkzeug zum Verschieben derselben Distanz“ und ein Lineal ohne Skalen ein „Werkzeug zum geraden Verbinden zweier Punkte“ ist.",
-        "vi": "Bước 3, trang 3. Trong quá trình vẽ các hình cơ bản màu xanh và các đoạn đường tham chiếu, hãy kiểm tra các hình cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Trực quan la bàn và thước kẻ cơ bản): Xác nhận bằng cách vẽ rằng la bàn là 'công cụ để di chuyển cùng một khoảng cách' và thước kẻ không có thang đo là 'công cụ để nối thẳng hai điểm'."
-      },
-      "durations": {
-        "ko": 32.152,
-        "en": 13.984
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "3단계, 3페이지 단계입니다. 출발 조건인 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 3 (Page 3). We construct the base figure for Orderly Tangle II of Triangles and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 4,
@@ -144,8 +148,10 @@
         4,
         4
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 4 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Orderly Tangle II of Triangles?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2727,
@@ -153,23 +159,11 @@
         0.7169,
         0.854
       ],
-      "explanation_text": "4단계, 4페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
+      "explanation_text": "4단계, 4페이지 단계입니다. 출발 조건인 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "4단계, 4페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
-        "en": "Step 4, page 4. In the process of drawing blue basic shapes and reference line segments, check the basic shapes and reference points shown on the screen. Step 1 (Elementary Compass and Ruler Intuition): Confirm by drawing that a compass is a ‘tool for moving the same distance’ and a ruler without scales is a ‘tool for connecting two points straight’.",
-        "ja": "ステップ4、4ページです。青の基本図形と基準線分作成プロセスで、画面に表示される基本図形と基準点を確認します。ステップ1（初等コンパスと自直観）：コンパスは「同じ距離を移動する道具」であり、目立たない者は「二点をまっすぐにつなぐ道具」であることを直接描いてみて確認",
-        "zh-CN": "第 4 页，步骤 4。 在绘制蓝色基本形状和参考线段的过程中，检查屏幕上显示的基本形状和参考点。第1步（初级指南针和直尺直觉）：通过绘图确认指南针是“移动相同距离的工具”，无刻度的直尺是“直线连接两点的工具”。",
-        "es": "Paso 4, página 4. En el proceso de dibujar formas básicas azules y segmentos de línea de referencia, verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Intuición elemental de brújula y regla): Confirma dibujando que una brújula es una “herramienta para moverse la misma distancia” y una regla sin escalas es una “herramienta para conectar dos puntos en línea recta”.",
-        "fr": "Étape 4, page 4. Lors du processus de dessin de formes de base bleues et de segments de ligne de référence, vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Intuition élémentaire de la boussole et de la règle) : Confirmez en dessinant qu'une boussole est un « outil pour parcourir la même distance » et qu'une règle sans échelle est un « outil pour relier deux points droits ».",
-        "de": "Schritt 4, Seite 4. Überprüfen Sie beim Zeichnen blauer Grundformen und Referenzliniensegmente die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Grundlegende Kompass- und Lineal-Intuition): Bestätigen Sie durch Zeichnen, dass ein Kompass ein „Werkzeug zum Verschieben derselben Distanz“ und ein Lineal ohne Skalen ein „Werkzeug zum geraden Verbinden zweier Punkte“ ist.",
-        "vi": "Bước 4, trang 4. Trong quá trình vẽ các hình cơ bản màu xanh và các đoạn đường tham chiếu, hãy kiểm tra các hình cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Trực quan la bàn và thước kẻ cơ bản): Xác nhận bằng cách vẽ rằng la bàn là 'công cụ để di chuyển cùng một khoảng cách' và thước kẻ không có thang đo là 'công cụ để nối thẳng hai điểm'."
-      },
-      "durations": {
-        "ko": 24.664,
-        "en": 26.608
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "4단계, 4페이지 단계입니다. 출발 조건인 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 4 (Page 4). We construct the base figure for Orderly Tangle II of Triangles and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 5,
@@ -178,8 +172,10 @@
         5,
         5
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 5 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2686,
@@ -187,23 +183,11 @@
         0.719,
         0.854
       ],
-      "explanation_text": "5단계, 5페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
+      "explanation_text": "5단계, 5페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "5단계, 5페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
-        "en": "Step 5, page 5. This is the step of constructing the blue basic shape and reference line segment. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Finding elementary congruent triangles): Observe that if you connect the intersection of two circles, the lengths of the three sides become the same (SSS congruent) and the angle or line segment is exactly divided in half.",
-        "ja": "ステップ5、5ページです。青の基本図形と基準線分作図段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等合同三角形を探す）：二つの円が出会う交点をつなぐと三辺の長さが同じになり（SSS合同）角度や線分が正確に半分に分かれることを観察",
-        "zh-CN": "第 5 页，第 5 步。这是构建蓝色基本形状和参考线段的步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（找到基本全等三角形）：观察到，如果连接两个圆的交点，三条边的长度变得相同（SSS 全等），并且角度或线段正好被分成两半。",
-        "es": "Paso 5, página 5. Este es el paso para construir la forma básica azul y el segmento de línea de referencia. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Encontrar triángulos elementales congruentes): Observa que si conectas la intersección de dos círculos, las longitudes de los tres lados se vuelven iguales (SSS congruentes) y el ángulo o segmento de línea se divide exactamente por la mitad.",
-        "fr": "Étape 5, page 5. Il s'agit de l'étape de construction de la forme de base bleue et du segment de ligne de référence. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Trouver des triangles congrus élémentaires) : Observez que si vous connectez l'intersection de deux cercles, les longueurs des trois côtés deviennent les mêmes (SSS congruents) et l'angle ou le segment de droite est exactement divisé en deux.",
-        "de": "Schritt 5, Seite 5. Dies ist der Schritt zum Konstruieren der blauen Grundform und des Referenzliniensegments. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Elementarkongruente Dreiecke finden): Beachten Sie, dass, wenn Sie den Schnittpunkt zweier Kreise verbinden, die Längen der drei Seiten gleich werden (SSS-kongruent) und der Winkel oder das Liniensegment genau in zwei Hälften geteilt wird.",
-        "vi": "Bước 5, trang 5. Đây là bước xây dựng hình cơ bản màu xanh và đoạn đường tham chiếu. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Tìm các tam giác đồng dạng cơ bản): Quan sát rằng nếu nối giao điểm của hai đường tròn thì độ dài ba cạnh bằng nhau (đồng dạng SSS) và góc hoặc đoạn thẳng được chia chính xác làm đôi."
-      },
-      "durations": {
-        "ko": 22.624,
-        "en": 23.92
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "5단계, 5페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 5 (Page 5). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 6,
@@ -212,8 +196,10 @@
         6,
         6
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 6 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2686,
@@ -221,23 +207,11 @@
         0.719,
         0.854
       ],
-      "explanation_text": "6단계, 6페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
+      "explanation_text": "6단계, 6페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "6단계, 6페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
-        "en": "Step 6, page 6. This is the step of constructing the blue basic shape and reference line segment. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Finding elementary congruent triangles): Observe that if you connect the intersection of two circles, the lengths of the three sides become the same (SSS congruent) and the angle or line segment is exactly divided in half.",
-        "ja": "ステップ6、6ページです。青の基本図形と基準線分作図段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等合同三角形を探す）：二つの円が出会う交点をつなぐと三辺の長さが同じになり（SSS合同）角度や線分が正確に半分に分かれることを観察",
-        "zh-CN": "第 6 页，第 6 页。这是构建蓝色基本形状和参考线段的步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（找到基本全等三角形）：观察到，如果连接两个圆的交点，三条边的长度变得相同（SSS 全等），并且角度或线段正好被分成两半。",
-        "es": "Paso 6, página 6. Este es el paso para construir la forma básica azul y el segmento de línea de referencia. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Encontrar triángulos elementales congruentes): Observa que si conectas la intersección de dos círculos, las longitudes de los tres lados se vuelven iguales (SSS congruentes) y el ángulo o segmento de línea se divide exactamente por la mitad.",
-        "fr": "Étape 6, page 6. Il s'agit de l'étape de construction de la forme de base bleue et du segment de ligne de référence. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Trouver des triangles congrus élémentaires) : Observez que si vous connectez l'intersection de deux cercles, les longueurs des trois côtés deviennent les mêmes (SSS congruents) et l'angle ou le segment de droite est exactement divisé en deux.",
-        "de": "Schritt 6, Seite 6. Dies ist der Schritt zum Konstruieren der blauen Grundform und des Referenzliniensegments. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Elementarkongruente Dreiecke finden): Beachten Sie, dass, wenn Sie den Schnittpunkt zweier Kreise verbinden, die Längen der drei Seiten gleich werden (SSS-kongruent) und der Winkel oder das Liniensegment genau in zwei Hälften geteilt wird.",
-        "vi": "Bước 6, trang 6. Đây là bước xây dựng hình cơ bản màu xanh và đoạn đường tham chiếu. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Tìm các tam giác đồng dạng cơ bản): Quan sát rằng nếu nối giao điểm của hai đường tròn thì độ dài ba cạnh bằng nhau (đồng dạng SSS) và góc hoặc đoạn thẳng được chia chính xác làm đôi."
-      },
-      "durations": {
-        "ko": 22.576,
-        "en": 23.944
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "6단계, 6페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 6 (Page 6). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 7,
@@ -246,8 +220,10 @@
         7,
         7
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 7 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2727,
@@ -255,23 +231,11 @@
         0.7169,
         0.854
       ],
-      "explanation_text": "7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
+      "explanation_text": "7단계, 7페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
-        "en": "Step 7, page 7. This is the step of constructing the blue basic shape and reference line segment. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Finding elementary congruent triangles): Observe that if you connect the intersection of two circles, the lengths of the three sides become the same (SSS congruent) and the angle or line segment is exactly divided in half.",
-        "ja": "ステップ7、7ページです。青の基本図形と基準線分作図段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等合同三角形を探す）：二つの円が出会う交点をつなぐと三辺の長さが同じになり（SSS合同）角度や線分が正確に半分に分かれることを観察",
-        "zh-CN": "第 7 页，第 7 步。这是构建蓝色基本形状和参考线段的步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（找到基本全等三角形）：观察到，如果连接两个圆的交点，三条边的长度变得相同（SSS 全等），并且角度或线段正好被分成两半。",
-        "es": "Paso 7, página 7. Este es el paso para construir la forma básica azul y el segmento de línea de referencia. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Encontrar triángulos elementales congruentes): Observa que si conectas la intersección de dos círculos, las longitudes de los tres lados se vuelven iguales (SSS congruentes) y el ángulo o segmento de línea se divide exactamente por la mitad.",
-        "fr": "Étape 7, page 7. Il s'agit de l'étape de construction de la forme de base bleue et du segment de ligne de référence. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Trouver des triangles congrus élémentaires) : Observez que si vous connectez l'intersection de deux cercles, les longueurs des trois côtés deviennent les mêmes (SSS congruents) et l'angle ou le segment de droite est exactement divisé en deux.",
-        "de": "Schritt 7, Seite 7. Dies ist der Schritt zum Konstruieren der blauen Grundform und des Referenzliniensegments. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Elementarkongruente Dreiecke finden): Beachten Sie, dass, wenn Sie den Schnittpunkt zweier Kreise verbinden, die Längen der drei Seiten gleich werden (SSS-kongruent) und der Winkel oder das Liniensegment genau in zwei Hälften geteilt wird.",
-        "vi": "Bước 7, trang 7. Đây là bước xây dựng hình cơ bản màu xanh và đoạn đường tham chiếu. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Tìm các tam giác đồng dạng cơ bản): Quan sát rằng nếu nối giao điểm của hai đường tròn thì độ dài ba cạnh bằng nhau (đồng dạng SSS) và góc hoặc đoạn thẳng được chia chính xác làm đôi."
-      },
-      "durations": {
-        "ko": 25.672,
-        "en": 31.48
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "7단계, 7페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 7 (Page 7). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 8,
@@ -280,8 +244,10 @@
         8,
         8
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 8 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.281,
@@ -289,23 +255,11 @@
         0.7087,
         0.8512
       ],
-      "explanation_text": "8단계, 8페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
+      "explanation_text": "8단계, 8페이지 단계입니다. 동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환 성질에 의해 정다각형 대칭이 성립하는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
       "narrations": {
-        "ko": "8단계, 8페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
-        "en": "Step 8, page 8. This is the process of drawing basic blue shapes and reference line segments. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Circular angle, central angle, similarity translation): The circumferential angle for an arc is 1/2 of the central angle, and the circumferential angle for the diameter is 90^ circ.",
-        "ja": "ステップ8、8ページです。青の基本図形と基準線分作図プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。 3段階（円周角・中心角・似翻訳）：一号に対する円周角は中心角の2分の1で、直径に対する円周角は90^ circであることを記号で整理",
-        "zh-CN": "第 8 页，步骤 8。这是绘制基本蓝色形状和参考线段的过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（圆角、圆心角、相似平移）：圆弧的圆周角是圆心角的1/2，直径的圆周角是90^circ。",
-        "es": "Paso 8, página 8. Este es el proceso de dibujar formas azules básicas y segmentos de línea de referencia. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (ángulo circular, ángulo central, traslación de similitud): el ángulo circunferencial de un arco es la mitad del ángulo central y el ángulo circunferencial del diámetro es 90^ circ.",
-        "fr": "Étape 8, page 8. Il s'agit du processus de dessin de formes bleues de base et de segments de ligne de référence. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (angle circulaire, angle central, traduction de similarité) : L'angle circonférentiel d'un arc est la moitié de l'angle central et l'angle circonférentiel du diamètre est de 90 ^ circ.",
-        "de": "Schritt 8, Seite 8. Dies ist der Prozess des Zeichnens grundlegender blauer Formen und Referenzliniensegmente. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Kreiswinkel, Zentralwinkel, Ähnlichkeitsübersetzung): Der Umfangswinkel für einen Bogen beträgt die Hälfte des Zentralwinkels und der Umfangswinkel für den Durchmesser beträgt 90° Kreis.",
-        "vi": "Bước 8, trang 8. Đây là quá trình vẽ các hình màu xanh cơ bản và các đoạn thẳng tham chiếu. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Góc tròn, góc ở tâm, dịch tương tự): Góc chu vi của một cung bằng 1/2 góc ở tâm, góc chu vi của đường kính là 90^c."
-      },
-      "durations": {
-        "ko": 25.816,
-        "en": 31.528
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "8단계, 8페이지 단계입니다. 동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환 성질에 의해 정다각형 대칭이 성립하는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
+        "en": "Step 8 (Page 8). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 9,
@@ -314,8 +268,10 @@
         9,
         9
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 9 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.281,
@@ -323,23 +279,11 @@
         0.7087,
         0.8485
       ],
-      "explanation_text": "9단계, 9페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
+      "explanation_text": "9단계, 9페이지 단계입니다. 동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환 성질에 의해 정다각형 대칭이 성립하는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
       "narrations": {
-        "ko": "9단계, 9페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
-        "en": "Step 9, page 9. This is the process of drawing basic blue shapes and reference line segments. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Circular angle, central angle, similarity translation): The circumferential angle for an arc is 1/2 of the central angle, and the circumferential angle for the diameter is 90^ circ.",
-        "ja": "ステップ9、9ページです。青の基本図形と基準線分作図プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。 3段階（円周角・中心角・似翻訳）：一号に対する円周角は中心角の2分の1で、直径に対する円周角は90^ circであることを記号で整理",
-        "zh-CN": "第 9 页，步骤 9。这是绘制基本蓝色形状和参考线段的过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（圆角、圆心角、相似平移）：圆弧的圆周角是圆心角的1/2，直径的圆周角是90^circ。",
-        "es": "Paso 9, página 9. Este es el proceso de dibujar formas azules básicas y segmentos de línea de referencia. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (ángulo circular, ángulo central, traslación de similitud): el ángulo circunferencial de un arco es la mitad del ángulo central y el ángulo circunferencial del diámetro es 90^ circ.",
-        "fr": "Étape 9, page 9. Il s'agit du processus de dessin de formes bleues de base et de segments de ligne de référence. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (angle circulaire, angle central, traduction de similarité) : L'angle circonférentiel d'un arc est la moitié de l'angle central et l'angle circonférentiel du diamètre est de 90 ^ circ.",
-        "de": "Schritt 9, Seite 9. Dies ist der Prozess des Zeichnens grundlegender blauer Formen und Referenzliniensegmente. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Kreiswinkel, Zentralwinkel, Ähnlichkeitsübersetzung): Der Umfangswinkel für einen Bogen beträgt die Hälfte des Zentralwinkels und der Umfangswinkel für den Durchmesser beträgt 90° Kreis.",
-        "vi": "Bước 9, trang 9. Đây là quá trình vẽ các hình màu xanh cơ bản và các đoạn thẳng tham chiếu. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Góc tròn, góc ở tâm, dịch tương tự): Góc chu vi của một cung bằng 1/2 góc ở tâm, góc chu vi của đường kính là 90^c."
-      },
-      "durations": {
-        "ko": 25.792,
-        "en": 31.408
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "9단계, 9페이지 단계입니다. 동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환 성질에 의해 정다각형 대칭이 성립하는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
+        "en": "Step 9 (Page 9). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 10,
@@ -348,8 +292,10 @@
         10,
         10
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 10 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2727,
@@ -357,23 +303,11 @@
         0.7169,
         0.8402
       ],
-      "explanation_text": "10단계, 10페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
+      "explanation_text": "10단계, 10페이지 단계입니다. 동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환 성질에 의해 정다각형 대칭이 성립하는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
       "narrations": {
-        "ko": "10단계, 10페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
-        "en": "10 steps, 10 pages. This is the process of drawing basic blue shapes and reference line segments. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Circular angle, central angle, similarity translation): The circumferential angle for an arc is 1/2 of the central angle, and the circumferential angle for the diameter is 90^ circ.",
-        "ja": "ステップ10、10ページです。青の基本図形と基準線分作図プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。 3段階（円周角・中心角・似翻訳）：一号に対する円周角は中心角の2分の1で、直径に対する円周角は90^ circであることを記号で整理",
-        "zh-CN": "10 个步骤，10 页。这是绘制基本蓝色形状和参考线段的过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（圆角、圆心角、相似平移）：圆弧的圆周角是圆心角的1/2，直径的圆周角是90^circ。",
-        "es": "10 pasos, 10 páginas. Este es el proceso de dibujar formas azules básicas y segmentos de línea de referencia. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (ángulo circular, ángulo central, traslación de similitud): el ángulo circunferencial de un arco es la mitad del ángulo central y el ángulo circunferencial del diámetro es 90^ circ.",
-        "fr": "10 étapes, 10 pages. Il s’agit du processus de dessin de formes bleues de base et de segments de ligne de référence. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (angle circulaire, angle central, traduction de similarité) : L'angle circonférentiel d'un arc est la moitié de l'angle central et l'angle circonférentiel du diamètre est de 90 ^ circ.",
-        "de": "10 Schritte, 10 Seiten. Dies ist der Prozess des Zeichnens grundlegender blauer Formen und Referenzliniensegmente. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Kreiswinkel, Zentralwinkel, Ähnlichkeitsübersetzung): Der Umfangswinkel für einen Bogen beträgt die Hälfte des Zentralwinkels und der Umfangswinkel für den Durchmesser beträgt 90° Kreis.",
-        "vi": "10 bước, 10 trang. Đây là quá trình vẽ các hình màu xanh cơ bản và các đoạn đường tham chiếu. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Góc tròn, góc ở tâm, dịch tương tự): Góc chu vi của một cung bằng 1/2 góc ở tâm, góc chu vi của đường kính là 90^c."
-      },
-      "durations": {
-        "ko": 26.848,
-        "en": 31.144
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "10단계, 10페이지 단계입니다. 동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환 성질에 의해 정다각형 대칭이 성립하는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
+        "en": "Step 10 (Page 10). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 11,
@@ -382,8 +316,10 @@
         11,
         11
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 11 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Orderly Tangle II of Triangles?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2686,
@@ -391,23 +327,11 @@
         0.719,
         0.832
       ],
-      "explanation_text": "11단계, 11페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
+      "explanation_text": "11단계, 11페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "11단계, 11페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
-        "en": "Step 11, page 11. This is the final stage of drawing the blue basic shape and reference line segment. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Comprehensive text): Solve difficult geometry problems by combining the tangent vertical radius of the circle (90^ circ), circumferential angle movement, and secant/tangent proportion (PA cdot PB = PT squared)",
-        "ja": "ステップ11、11ページです。青の基本図形と基準線分作図仕上げ段階。前のステップの部分を組み合わせて最終的な結論を導きます。 4段階(本文項総合):円の接線垂直半径(90^ circ)、円周角移動、割線・接線比例(PA cdot PB = PT二乗)を結合して高難度図形問題解決",
-        "zh-CN": "第 11 页，第 11 步。这是绘制蓝色基本形状和参考线段的最后阶段。将前面步骤中的各个部分组合起来得出最终结论。第四步（综合课文）：结合圆的切线垂直半径（90^circ）、圆周角移动以及正割/正切比例（PA cdot PB = PT 平方）解决几何难题",
-        "es": "Paso 11, página 11. Esta es la etapa final para dibujar la forma básica azul y el segmento de línea de referencia. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (texto completo): resuelva problemas de geometría difíciles combinando el radio vertical tangente del círculo (90^ circ), el movimiento del ángulo circunferencial y la proporción secante/tangente (PA cdot PB = PT al cuadrado)",
-        "fr": "Étape 11, page 11. Il s'agit de la dernière étape du dessin de la forme de base bleue et du segment de ligne de référence. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (texte complet) : résolvez des problèmes de géométrie difficiles en combinant le rayon vertical tangent du cercle (90 ^ circ), le mouvement de l'angle circonférentiel et la proportion sécante/tangente (PA cdot PB = PT au carré)",
-        "de": "Schritt 11, Seite 11. Dies ist der letzte Schritt beim Zeichnen der blauen Grundform und des Referenzliniensegments. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Umfassender Text): Lösen Sie schwierige Geometrieprobleme, indem Sie den tangentialen vertikalen Radius des Kreises (90^ Kreis), die Bewegung des Umfangswinkels und das Sekanten-/Tangentenverhältnis (PA cdot PB = PT zum Quadrat) kombinieren.",
-        "vi": "Bước 11, trang 11. Đây là giai đoạn cuối cùng của việc vẽ hình cơ bản màu xanh lam và đoạn đường tham chiếu. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Văn bản toàn diện): Giải các bài toán hình học khó bằng cách kết hợp bán kính thẳng đứng tiếp tuyến của hình tròn (90^cung tròn), chuyển động của góc chu vi và tỷ lệ cát tuyến/tiếp tuyến (PA cdot PB = PT bình phương)"
-      },
-      "durations": {
-        "ko": 26.776,
-        "en": 31.432
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "11단계, 11페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 11 (Page 11). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Orderly Tangle II of Triangles."
+      }
     },
     {
       "page": 12,
@@ -416,8 +340,10 @@
         12,
         12
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 12 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Orderly Tangle II of Triangles?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2686,
@@ -425,23 +351,11 @@
         0.719,
         0.832
       ],
-      "explanation_text": "12단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
+      "explanation_text": "12단계, 12페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "12단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
-        "en": "Step 12, page 12. This is the final stage of drawing the blue basic shape and reference line segment. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Comprehensive text): Solve difficult geometry problems by combining the tangent vertical radius of the circle (90^ circ), circumferential angle movement, and secant/tangent proportion (PA cdot PB = PT squared)",
-        "ja": "ステップ12、12ページです。青の基本図形と基準線分作図仕上げ段階。前のステップの部分を組み合わせて最終的な結論を導きます。 4段階(本文項総合):円の接線垂直半径(90^ circ)、円周角移動、割線・接線比例(PA cdot PB = PT二乗)を結合して高難度図形問題解決",
-        "zh-CN": "第 12 页，第 12 步。这是绘制蓝色基本形状和参考线段的最后阶段。将前面步骤中的各个部分组合起来得出最终结论。第四步（综合课文）：结合圆的切线垂直半径（90^circ）、圆周角移动以及正割/正切比例（PA cdot PB = PT 平方）解决几何难题",
-        "es": "Paso 12, página 12. Esta es la etapa final para dibujar la forma básica azul y el segmento de línea de referencia. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (texto completo): resuelva problemas de geometría difíciles combinando el radio vertical tangente del círculo (90^ circ), el movimiento del ángulo circunferencial y la proporción secante/tangente (PA cdot PB = PT al cuadrado)",
-        "fr": "Étape 12, page 12. Il s'agit de la dernière étape du dessin de la forme de base bleue et du segment de ligne de référence. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (texte complet) : résolvez des problèmes de géométrie difficiles en combinant le rayon vertical tangent du cercle (90 ^ circ), le mouvement de l'angle circonférentiel et la proportion sécante/tangente (PA cdot PB = PT au carré)",
-        "de": "Schritt 12, Seite 12. Dies ist der letzte Schritt beim Zeichnen der blauen Grundform und des Referenzliniensegments. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Umfassender Text): Lösen Sie schwierige Geometrieprobleme, indem Sie den tangentialen vertikalen Radius des Kreises (90^ Kreis), die Bewegung des Umfangswinkels und das Sekanten-/Tangentenverhältnis (PA cdot PB = PT zum Quadrat) kombinieren.",
-        "vi": "Bước 12, trang 12. Đây là giai đoạn cuối cùng của việc vẽ hình cơ bản màu xanh lam và đoạn đường tham chiếu. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Văn bản toàn diện): Giải các bài toán hình học khó bằng cách kết hợp bán kính thẳng đứng tiếp tuyến của hình tròn (90^cung tròn), chuyển động của góc chu vi và tỷ lệ cát tuyến/tiếp tuyến (PA cdot PB = PT bình phương)"
-      },
-      "durations": {
-        "ko": 26.848,
-        "en": 31.408
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "12단계, 12페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 12 (Page 12). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Orderly Tangle II of Triangles."
+      }
     },
     {
       "page": 13,
@@ -450,8 +364,10 @@
         13,
         13
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 13 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Orderly Tangle II of Triangles?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2727,
@@ -459,23 +375,11 @@
         0.7169,
         0.8402
       ],
-      "explanation_text": "13단계, 13페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
+      "explanation_text": "13단계, 13페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "13단계, 13페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
-        "en": "Step 13, page 13. This is the final stage of drawing the blue basic shape and reference line segment. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Comprehensive text): Solve difficult geometry problems by combining the tangent vertical radius of the circle (90^ circ), circumferential angle movement, and secant/tangent proportion (PA cdot PB = PT squared)",
-        "ja": "ステップ13、13ページです。青の基本図形と基準線分作図仕上げ段階。前のステップの部分を組み合わせて最終的な結論を導きます。 4段階(本文項総合):円の接線垂直半径(90^ circ)、円周角移動、割線・接線比例(PA cdot PB = PT二乗)を結合して高難度図形問題解決",
-        "zh-CN": "第 13 页，第 13 步。这是绘制蓝色基本形状和参考线段的最后阶段。将前面步骤中的各个部分组合起来得出最终结论。第四步（综合课文）：结合圆的切线垂直半径（90^circ）、圆周角移动以及正割/正切比例（PA cdot PB = PT 平方）解决几何难题",
-        "es": "Paso 13, página 13. Esta es la etapa final para dibujar la forma básica azul y el segmento de línea de referencia. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (texto completo): resuelva problemas de geometría difíciles combinando el radio vertical tangente del círculo (90^ circ), el movimiento del ángulo circunferencial y la proporción secante/tangente (PA cdot PB = PT al cuadrado)",
-        "fr": "Étape 13, page 13. Il s'agit de la dernière étape du dessin de la forme de base bleue et du segment de ligne de référence. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (texte complet) : résolvez des problèmes de géométrie difficiles en combinant le rayon vertical tangent du cercle (90 ^ circ), le mouvement de l'angle circonférentiel et la proportion sécante/tangente (PA cdot PB = PT au carré)",
-        "de": "Schritt 13, Seite 13. Dies ist der letzte Schritt beim Zeichnen der blauen Grundform und des Referenzliniensegments. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Umfassender Text): Lösen Sie schwierige Geometrieprobleme, indem Sie den tangentialen vertikalen Radius des Kreises (90^ Kreis), die Bewegung des Umfangswinkels und das Sekanten-/Tangentenverhältnis (PA cdot PB = PT zum Quadrat) kombinieren.",
-        "vi": "Bước 13, trang 13. Đây là giai đoạn cuối cùng của việc vẽ hình cơ bản màu xanh lam và đoạn đường tham chiếu. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Văn bản toàn diện): Giải các bài toán hình học khó bằng cách kết hợp bán kính thẳng đứng tiếp tuyến của hình tròn (90^cung tròn), chuyển động của góc chu vi và tỷ lệ cát tuyến/tiếp tuyến (PA cdot PB = PT bình phương)"
-      },
-      "durations": {
-        "ko": 27.064,
-        "en": 30.376
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "13단계, 13페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 13 (Page 13). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Orderly Tangle II of Triangles."
+      }
     },
     {
       "page": 14,
@@ -484,8 +388,10 @@
         14,
         14
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요?",
+      "step_question_en": "🔀 [What-If-Not] How does Orderly Tangle II of Triangles evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -493,154 +399,11 @@
         0.9628,
         0.8402
       ],
-      "explanation_text": "마지막 14단계입니다. 지금까지 총 14프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선( 90^ circ )을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요.",
+      "explanation_text": "마지막 14단계, 증명이 완성되었습니다! 출발 조건이었던 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건에서 시작해, 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 거쳐, 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 14단계입니다. 지금까지 총 14프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선( 90^ circ )을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요.",
-        "en": "Step 14. We have completed the entire 14-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself.",
-        "ja": "最後の14段階です。これまで、合計14フレームのフリップブック作図を通じて整理を完全に証明しました。実戦のヒントとして、円が登場するすべての幾何問題の第1原則：「円の中心から接点には修理（90^ circ）を、県には垂直二等分線を、円上の点には半径補助線」を描きます。",
-        "zh-CN": "这是最后 14 个步骤。至此，我们已经通过总共14帧的翻页图画完整地证明了该定理。作为一个实用的技巧，所有涉及圆的几何问题的第一条规则是：“从圆的中心，画一条到接触点的垂直线（90^circ），画一条垂直平分线到弦，画一条径向辅助线到圆上的点。”",
-        "es": "Estos son los últimos 14 pasos. Hasta ahora hemos demostrado completamente el teorema mediante un dibujo en formato flipbook de un total de 14 fotogramas. Como consejo práctico, la primera regla de todos los problemas geométricos que involucran círculos es: \"Desde el centro del círculo, dibuje una línea perpendicular (90^ circ) hasta el punto de contacto, una bisectriz perpendicular a la cuerda y una línea auxiliar radial hasta el punto del círculo\".",
-        "fr": "Ce sont les 14 dernières étapes. Jusqu’à présent, nous avons complètement prouvé le théorème à travers un dessin flipbook d’un total de 14 images. À titre pratique, la première règle de tous les problèmes géométriques impliquant des cercles est la suivante : « À partir du centre du cercle, tracez une ligne perpendiculaire (90 ^ circ) jusqu'au point de contact, une médiatrice perpendiculaire à la corde et une ligne auxiliaire radiale jusqu'au point du cercle. »",
-        "de": "Dies sind die letzten 14 Schritte. Bisher haben wir den Satz durch eine Daumenkino-Zeichnung von insgesamt 14 Bildern vollständig bewiesen. Als praktischer Tipp lautet die erste Regel aller geometrischen Probleme mit Kreisen: „Zeichne vom Mittelpunkt des Kreises eine senkrechte Linie (90° Kreis) zum Berührungspunkt, eine senkrechte Winkelhalbierende zur Sehne und eine radiale Hilfslinie zum Punkt auf dem Kreis.“",
-        "vi": "Đây là 14 bước cuối cùng. Cho đến nay, chúng ta đã chứng minh hoàn toàn định lý thông qua một bản vẽ flipbook có tổng cộng 14 khung hình. Là một mẹo thực tế, quy tắc đầu tiên của tất cả các bài toán hình học liên quan đến đường tròn là: 'Từ tâm đường tròn, vẽ một đường vuông góc (90^c) đến điểm tiếp xúc, một đường phân giác vuông góc với dây cung và một đường phụ hướng tâm đến điểm trên đường tròn.'"
-      },
-      "durations": {
-        "ko": 27.04,
-        "en": 30.496
-      },
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떤 새로운 정리가 탄생할까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this figure?"
+        "ko": "마지막 14단계, 증명이 완성되었습니다! 출발 조건이었던 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '삼각형의 오더리 탱클 II'의 기하학적 출발 조건에서 시작해, 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 거쳐, 회전 대칭과 등각 변환의 반복을 통해 '삼각형의 오더리 탱클 II'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 14. The visual proof of Orderly Tangle II of Triangles is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
+      }
     }
-  ],
-  "youtube_packages": {
-    "ko": {
-      "lang": "ko",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "🔥 [시각적 증명] 삼각형의 오더리 탱클 II(Orderly Tangle II of Triangles) — 눈으로 깨치는 14단계 기하 직관 (1080p) | @min70...",
-      "description": "공식 암기 없이 눈으로 보고 직관적으로 깨치는 [삼각형의 오더리 탱클 II(Orderly Tangle II of Triangles)] 14단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다.\n📋 전체 1,111개 수학자료 설명영상 게시판 & 직접 실습: https://min7014.github.io/mathedu/video_board.html?slug=2025021101\n\n💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 14페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!\n\n🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ\n\n🔔 [@min7014_ai 채널 구독하기]: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n🌐 대화형 GeoGebra 직접 조작하기: https://min7014.github.io/math20250211001.html\n📄 단계별 플립북 증명 PDF 원문: https://min7014.github.io/2025/2025021101.pdf\n🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html?slug=2025021101\n식별 코드: [ID: 2025021101_KO]\n\n⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n00:00 0페이지/14 — 원 위의 점을 아무리 이리저리 움직여도 이 각도와 비례 관계는 단 1도조차 흔들리지 않습니다! 중심과 꼭짓점을 ...\n00:13 14페이지/14 — 마지막 14단계입니다. 지금까지 총 14프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ...\n00:38 1페이지/14 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 삼각형의 오더리 탱클 II...\n01:10 2페이지/14 — 2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 ...\n01:34 3페이지/14 — 3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확...\n01:57 4페이지/14 — 4단계, 4페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확...\n02:20 5페이지/14 — 5단계, 5페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분...\n02:45 6페이지/14 — 6단계, 6페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분...\n03:11 7페이지/14 — 7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분...\n03:37 8페이지/14 — 8단계, 8페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...\n04:04 9페이지/14 — 9단계, 9페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...\n04:31 10페이지/14 — 10단계, 10페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하...\n04:57 11페이지/14 — 11단계, 11페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해...\n05:24 12페이지/14 — 12단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해...\n05:52 13페이지/14 — 13단계, 13페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해...\n\n#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014",
-      "tags": [
-        "수학",
-        "기하학",
-        "시각적 증명",
-        "수능 수학",
-        "도형 보조선",
-        "피타고라스 정리",
-        "메넬라우스의 정리",
-        "체바의 정리",
-        "중학교 도형",
-        "고등학교 수학",
-        "수능 도형 킬러",
-        "영재고 수학",
-        "KMO 기하",
-        "GeoGebra",
-        "알지오매스",
-        "민은기 선생님의 수학자료실",
-        "민은기 선생님의 수학자료실_AI",
-        "min7014_ai",
-        "min7014",
-        "수학 잘하는 법"
-      ],
-      "quiz_comment": "💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 14페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!",
-      "categoryId": "27",
-      "defaultLanguage": "ko",
-      "chapters": [
-        "00:00 0페이지/14 — 원 위의 점을 아무리 이리저리 움직여도 이 각도와 비례 관계는 단 1도조차 흔들리지 않습니다! 중심과 꼭짓점을 ...",
-        "00:13 14페이지/14 — 마지막 14단계입니다. 지금까지 총 14프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ...",
-        "00:38 1페이지/14 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 삼각형의 오더리 탱클 II...",
-        "01:10 2페이지/14 — 2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 ...",
-        "01:34 3페이지/14 — 3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확...",
-        "01:57 4페이지/14 — 4단계, 4페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확...",
-        "02:20 5페이지/14 — 5단계, 5페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분...",
-        "02:45 6페이지/14 — 6단계, 6페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분...",
-        "03:11 7페이지/14 — 7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분...",
-        "03:37 8페이지/14 — 8단계, 8페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...",
-        "04:04 9페이지/14 — 9단계, 9페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...",
-        "04:31 10페이지/14 — 10단계, 10페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하...",
-        "04:57 11페이지/14 — 11단계, 11페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해...",
-        "05:24 12페이지/14 — 12단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해...",
-        "05:52 13페이지/14 — 13단계, 13페이지입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해..."
-      ],
-      "total_duration_sec": 379.23,
-      "srt_url": "video_lectures/youtube_packages/2025021101_ko.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2025021101_ko_thumb.png",
-      "local_mp4_path": "youtube_uploads/2025021101/2025021101_ko.mp4"
-    },
-    "en": {
-      "lang": "en",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "✨ Orderly Tangle II of Triangles — Step-by-Step Visual Math Proof (14 Steps · 1080p) | @min7014_ai",
-      "description": "Why does Orderly Tangle II of Triangles hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!\n📋 Full 1,111 Math Video Board & Interactive GeoGebra: https://min7014.github.io/mathedu/video_board.html?slug=2025021101\n\n💬 [10-Second Eureka Quiz] Which step (1 to 14) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!\n\n🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E\n\n🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n🌐 Interactive GeoGebra & Flipbook Web Page: https://min7014.github.io/math20250211001.html\n📄 Original Step-by-Step PDF: https://min7014.github.io/2025/2025021101.pdf\n🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html?slug=2025021101\nTopic ID: [ID: 2025021101_EN]\n\n⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n00:00 Step 0/14 — No matter where you drag this point along the circle, the geom...\n00:10 Step 14/14 — Step 14. We have completed the entire 14-frame visual proof! V...\n00:24 Step 1/14 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...\n00:38 Step 2/14 — Step 2, page 2. In the left dynamic shape construction (core g...\n01:05 Step 3/14 — Step 3, page 3. In the process of drawing blue basic shapes an...\n01:29 Step 4/14 — Step 4, page 4. In the process of drawing blue basic shapes an...\n01:52 Step 5/14 — Step 5, page 5. This is the step of constructing the blue basi...\n02:24 Step 6/14 — Step 6, page 6. This is the step of constructing the blue basi...\n02:55 Step 7/14 — Step 7, page 7. This is the step of constructing the blue basi...\n03:27 Step 8/14 — Step 8, page 8. This is the process of drawing basic blue shap...\n03:58 Step 9/14 — Step 9, page 9. This is the process of drawing basic blue shap...\n04:29 Step 10/14 — 10 steps, 10 pages. This is the process of drawing basic blue ...\n05:01 Step 11/14 — Step 11, page 11. This is the final stage of drawing the blue ...\n05:31 Step 12/14 — Step 12, page 12. This is the final stage of drawing the blue ...\n06:02 Step 13/14 — Step 13, page 13. This is the final stage of drawing the blue ...\n\n#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014",
-      "tags": [
-        "Visual Math Proof",
-        "Geometry Proof",
-        "Proof Without Words",
-        "Euclidean Geometry",
-        "Pythagorean Theorem",
-        "Ceva Theorem",
-        "Menelaus Theorem",
-        "GeoGebra",
-        "Math Animation",
-        "3Blue1Brown style math",
-        "Step by Step Math",
-        "High School Geometry",
-        "Math Olympiad",
-        "AMC Math",
-        "SAT Math",
-        "Min's Math Lab",
-        "min7014_ai",
-        "min7014"
-      ],
-      "quiz_comment": "💬 [10-Second Eureka Quiz] Which step (1 to 14) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!",
-      "categoryId": "27",
-      "defaultLanguage": "en",
-      "chapters": [
-        "00:00 Step 0/14 — No matter where you drag this point along the circle, the geom...",
-        "00:10 Step 14/14 — Step 14. We have completed the entire 14-frame visual proof! V...",
-        "00:24 Step 1/14 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...",
-        "00:38 Step 2/14 — Step 2, page 2. In the left dynamic shape construction (core g...",
-        "01:05 Step 3/14 — Step 3, page 3. In the process of drawing blue basic shapes an...",
-        "01:29 Step 4/14 — Step 4, page 4. In the process of drawing blue basic shapes an...",
-        "01:52 Step 5/14 — Step 5, page 5. This is the step of constructing the blue basi...",
-        "02:24 Step 6/14 — Step 6, page 6. This is the step of constructing the blue basi...",
-        "02:55 Step 7/14 — Step 7, page 7. This is the step of constructing the blue basi...",
-        "03:27 Step 8/14 — Step 8, page 8. This is the process of drawing basic blue shap...",
-        "03:58 Step 9/14 — Step 9, page 9. This is the process of drawing basic blue shap...",
-        "04:29 Step 10/14 — 10 steps, 10 pages. This is the process of drawing basic blue ...",
-        "05:01 Step 11/14 — Step 11, page 11. This is the final stage of drawing the blue ...",
-        "05:31 Step 12/14 — Step 12, page 12. This is the final stage of drawing the blue ...",
-        "06:02 Step 13/14 — Step 13, page 13. This is the final stage of drawing the blue ..."
-      ],
-      "total_duration_sec": 393.03,
-      "srt_url": "video_lectures/youtube_packages/2025021101_en.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2025021101_en_thumb.png",
-      "local_mp4_path": "youtube_uploads/2025021101/2025021101_en.mp4"
-    }
-  },
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 삼각형의 오더리 탱클 II(Orderly Tangle II of Triangles) — 45초 시각적 수학 증명 하이라이트 #Shorts #수학",
-      "local_mp4_path": "video_lectures/shorts/2025021101_short_ko.mp4",
-      "duration_sec": 44.52,
-      "aspect_ratio": "9:16 (1080x1920)"
-    },
-    "en": {
-      "title": "🔥 Orderly Tangle II of Triangles — 45s Visual Math Proof Highlight #Shorts #Math",
-      "local_mp4_path": "video_lectures/shorts/2025021101_short_en.mp4",
-      "duration_sec": 28.77,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  },
-  "pedagogy_style": "v5.0 Question-Asking Classroom (Notice & Wonder -> Socratic Pólya -> What-If-Not)"
+  ]
 }

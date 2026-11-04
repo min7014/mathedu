@@ -3,11 +3,12 @@
   "title": "$y=x^2+q$",
   "title_en": "y=x squared+q",
   "sub_domain_ko": "함수·집합·그래프",
-  "core_concept": "[$y=x^2+q$] 원소와 집합의 포함·연산 관계(교집합·합집합·여집합·드모르간 법칙) 및 정의역에서 공역으로의 대응인 함수(일차·이차·유리·무리함수)를 수식·표·그래프·언어의 4가지 다중 표상으로 통합 이해.",
-  "solving_tip": "이차함수가 등장하면 모든 성질의 출발점은 '대칭축 $x = -\\frac{b}{2a}$'입니다! 두 함숫값이 같다는 조건 $f(\\alpha)=f(\\beta)$가 보이면 즉시 대칭축 $x = \\frac{\\alpha+\\beta}{2}$를 적으세요.",
+  "core_concept": "'y=x²+q'에서 주어진 기본 정의와 출발 조건(가정) ➔ 'y=x²+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+  "solving_tip": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
   "pdf_url": "https://min7014.github.io/2020/2020011102.pdf",
   "web_url": "https://min7014.github.io/math20200111001.html",
   "page_count": 28,
+  "scene_count": 12,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/gCPhuzY46qo"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "algebra",
+    "hypothesis_ko": "'y=x²+q'에서 주어진 기본 정의와 출발 조건(가정)",
+    "conclusion_ko": "'y=x²+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+    "auxiliary_line_ko": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
+    "proof_logic_ko": "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리",
+    "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+    "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,25 +81,16 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "step_question_ko": "❓ [Notice & Wonder] y=x 제곱+q에서 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in y=x squared+q, and why?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] y=x의 제곱+q에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in y=x squared+q?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계, 질문으로 시작하는 수학 시간입니다. y=x 제곱+q 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. [ y=x 제곱+q ] 원소와 집합의 포함·연산 관계(교집합·합집합·여집합·드모르간 법칙) 및 정의역에서 공역으로의 대응인 함수(일차·이차·유리·무리함수)를 수식·표·그래프·언어의 4가지 다중 표상으로 통합 이해.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 y=x의 제곱+q입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)입니다. 왜 이 조건에서 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계, 질문으로 시작하는 수학 시간입니다. y=x 제곱+q 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. [ y=x 제곱+q ] 원소와 집합의 포함·연산 관계(교집합·합집합·여집합·드모르간 법칙) 및 정의역에서 공역으로의 대응인 함수(일차·이차·유리·무리함수)를 수식·표·그래프·언어의 4가지 다중 표상으로 통합 이해.",
-        "en": "Step 1. Welcome to Question-Driven Math at Min's Math Lab. Observe y=x squared+q closely: what do you notice stays invariant, and why does this property always hold? Let us explore step by step.",
-        "ja": "ステップ1、質問で始まる数学時間です。 y = x 2乗+q図形を詳しく観察してください。点や線が動いても絶対に変わらない関係が見えますか？果たしてなぜいつもそうなのか動的フリップブックで自分で質問を投げながら探求してみましょう。 [ y=x 二乗+q ] 元素と集合の包含・演算関係（交集合・合集合・余集合・ドモルガン法則）および正義域から空域への対応である関数（一次・二次・ガラス・無理関数）を数式・表・グラフ・言語の4つの多重表象に統合理解。",
-        "zh-CN": "第 1 步：数学课以问题开始。仔细观察 y=x 的平方+q 形状。你是否看到一种即使点或线移动也不会改变的关系？让我们用一本动态翻书问自己一些问题，来探讨为什么总是这样。 [ y =",
-        "es": "Paso 1: la clase de matemáticas comienza con preguntas. Observa de cerca la forma y=x al cuadrado+q. ¿Ves una relación que nunca cambia incluso si los puntos o las líneas se mueven? Exploremos por qué esto siempre es así haciéndonos preguntas con un libro animado dinámico. [ y =",
-        "fr": "Étape 1 : Le cours de mathématiques commence par des questions. Regardez attentivement la forme y=x au carré+q. Voyez-vous une relation qui ne change jamais même si les points ou les lignes bougent ? Explorons pourquoi c'est toujours le cas en nous posant des questions avec un flip book dynamique. [ y =",
-        "de": "Schritt 1: Der Mathematikunterricht beginnt mit Fragen. Schauen Sie sich die Form y=x im Quadrat+q genau an. Sehen Sie eine Beziehung, die sich nie ändert, selbst wenn sich die Punkte oder Linien verschieben? Lassen Sie uns herausfinden, warum dies immer der Fall ist, indem wir uns mit einem dynamischen Daumenkino Fragen stellen. [ y =",
-        "vi": "Bước 1: Lớp Toán bắt đầu bằng các câu hỏi. Hãy nhìn kỹ vào hình dạng y=x bình phương+q. Bạn có thấy một mối quan hệ không bao giờ thay đổi ngay cả khi các dấu chấm hoặc đường di chuyển không? Hãy cùng khám phá lý do tại sao điều này luôn xảy ra bằng cách tự đặt câu hỏi với một cuốn sách lật động. [ y ="
-      },
-      "question_narrations": {
-        "ko": "1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? y=x 제곱+q에서 변하지 않는 불변량은 무엇일까요? 질문으로 시작하는 수학 시간입니다. y=x 제곱+q 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. [ y=x 제곱+q ] 원소와 집합의 포함·연산 관계(교집합·합집합·여집합·드모르간 법칙) 및 정의역에서 공역으로의 대응인 함수(일차·이차·유리·무리함수)를 수식·표·그래프·언어의 4가지 다중 표상으로 통합 이해."
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 y=x의 제곱+q입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)입니다. 왜 이 조건에서 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore y=x squared+q through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
       }
     },
     {
@@ -75,10 +100,10 @@
         2,
         4
       ],
-      "step_title": "1단계 질문 · 기본 도형 조건 관찰 (Notice)",
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?",
-      "visual_focus": "좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도)",
+      "step_title": "Step 2 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] y=x의 제곱+q를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove y=x squared+q?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.0764,
@@ -86,19 +111,10 @@
         0.7128,
         0.9091
       ],
-      "explanation_text": "2단계, 2페이지부터 4페이지까지의 연속 움직임입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 상자 규칙 찾기와 벤다이어그램): 숫자를 넣으면 2배 해서 1을 더해 나오는 마법 상자( y=2x+1 )와 두 동아리 모임의 겹치는 인원 세기",
+      "explanation_text": "2단계, 2페이지부터 4페이지까지의 단계입니다. 먼저 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "2단계, 2페이지부터 4페이지까지의 연속 움직임입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 상자 규칙 찾기와 벤다이어그램): 숫자를 넣으면 2배 해서 1을 더해 나오는 마법 상자( y=2x+1 )와 두 동아리 모임의 겹치는 인원 세기",
-        "en": "Step 2, continuous movement from pages 2 to 4. Let’s ask ourselves a question first. What conditions are hidden between the basic shapes and reference points on the screen? Identify key starting points through the process of drawing left dynamic shapes (drawing blue basic shapes and reference segments). Step 1 (Finding elementary box rules and Venn diagram): When you input a number, a magic box that doubles and adds 1 (y=2x+1) and counting the overlapping number of people in two club meetings",
-        "ja": "2段階、2ページから4ページまでの連続動きです。まず、自分で質問してみましょうか？画面の基本図形と基準点の間にどのような条件が隠されていますか？左のダイナミック図形作図(青の基本図形と基準線分の作図)プロセスを介してコアの出発点を確認します.ステップ1（初等ボックスルール探しとベンダイアグラム）：数字を入れると2倍して1を加えてくる魔法ボックス(y=2x+1)と二つの集まりの重なる人数世紀",
-        "zh-CN": "步骤2，从第2页连续移动到第4页。让我们先问自己一个问题。屏幕上的基本形状和参考点之间隐藏着哪些条件？通过绘制左侧动态形状（绘制蓝色基本形状和参考段）的过程来确定关键起点。第1步（求基本盒子规则和维恩图）：当你输入一个数字时，一个神奇的盒子会加一倍并加1（y=2x+1）并计算两次俱乐部会议中重叠的人数",
-        "es": "Paso 2, movimiento continuo de las páginas 2 a 4. Primero hagámonos una pregunta. ¿Qué condiciones se esconden entre las formas básicas y los puntos de referencia en la pantalla? Identifique puntos de partida clave a través del proceso de dibujar formas dinámicas izquierdas (dibujar formas básicas azules y segmentos de referencia). Paso 1 (Encontrar reglas de caja elementales y diagrama de Venn): Cuando ingresas un número, se crea una caja mágica que duplica y suma 1 (y=2x+1) y cuenta el número superpuesto de personas en dos reuniones del club.",
-        "fr": "Étape 2, déplacement continu des pages 2 à 4. Posons-nous d’abord une question. Quelles conditions sont cachées entre les formes de base et les points de référence à l'écran ? Identifiez les points de départ clés grâce au processus de dessin de formes dynamiques à gauche (dessin de formes de base bleues et de segments de référence). Étape 1 (Trouver les règles élémentaires de la boîte et le diagramme de Venn) : Lorsque vous saisissez un nombre, une boîte magique qui double et ajoute 1 (y=2x+1) et compte le nombre de personnes qui se chevauchent dans deux réunions de club",
-        "de": "Schritt 2, kontinuierlicher Übergang von Seite 2 bis 4. Stellen wir uns zunächst eine Frage. Welche Bedingungen verbergen sich zwischen den Grundformen und Bezugspunkten auf dem Bildschirm? Identifizieren Sie wichtige Ausgangspunkte beim Zeichnen linker dynamischer Formen (Zeichnen blauer Grundformen und Referenzsegmente). Schritt 1 (Ermitteln grundlegender Boxregeln und Venn-Diagramm): Wenn Sie eine Zahl eingeben, entsteht eine magische Box, die sich verdoppelt und 1 hinzufügt (y=2x+1) und die sich überschneidende Anzahl von Personen in zwei Clubtreffen zählt",
-        "vi": "Bước 2, chuyển tiếp liên tục từ trang 2 đến trang 4. Trước tiên chúng ta hãy tự hỏi mình một câu hỏi. Những điều kiện nào ẩn giữa các hình cơ bản và các điểm tham chiếu trên màn hình? Xác định các điểm khởi đầu chính thông qua quá trình vẽ các hình động bên trái (vẽ các hình cơ bản màu xanh và các đoạn tham chiếu). Bước 1 (Tìm quy tắc hộp cơ bản và sơ đồ Venn): Khi nhập số, hộp thần kỳ nhân đôi rồi cộng 1 (y=2x+1) và đếm số người trùng nhau trong 2 buổi họp câu lạc bộ"
-      },
-      "question_narrations": {
-        "ko": "2단계 탐구 발문입니다! 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 2페이지부터 4페이지까지의 연속 움직임입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 상자 규칙 찾기와 벤다이어그램): 숫자를 넣으면 2배 해서 1을 더해 나오는 마법 상자( y=2x+1 )와 두 동아리 모임의 겹치는 인원 세기"
+        "ko": "2단계, 2페이지부터 4페이지까지의 단계입니다. 먼저 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 2 (Page 2). First, we set up the fundamental definition for y=x squared+q before performing any algebraic manipulation."
       }
     },
     {
@@ -108,10 +124,10 @@
         5,
         6
       ],
-      "step_title": "1단계 질문 · 기본 도형 조건 관찰 (Notice)",
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?",
-      "visual_focus": "우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 3 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] y=x의 제곱+q를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove y=x squared+q?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "green",
       "diff_bbox": [
         0.5331,
@@ -119,19 +135,10 @@
         0.5475,
         0.5785
       ],
-      "explanation_text": "3단계, 5페이지부터 6페이지까지의 연속 움직임입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 상자 규칙 찾기와 벤다이어그램): 숫자를 넣으면 2배 해서 1을 더해 나오는 마법 상자( y=2x+1 )와 두 동아리 모임의 겹치는 인원 세기",
+      "explanation_text": "3단계, 5페이지부터 6페이지까지의 단계입니다. 먼저 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "3단계, 5페이지부터 6페이지까지의 연속 움직임입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 상자 규칙 찾기와 벤다이어그램): 숫자를 넣으면 2배 해서 1을 더해 나오는 마법 상자( y=2x+1 )와 두 동아리 모임의 겹치는 인원 세기",
-        "en": "Step 3, continuous movement from page 5 to page 6. Let’s ask ourselves a question first. What conditions are hidden between the basic shapes and reference points on the screen? The key starting points are identified through the derivation of the right-side proof formula (green corresponding areas and proportional elements are shown). Step 1 (Finding elementary box rules and Venn diagram): When you input a number, a magic box that doubles and adds 1 (y=2x+1) and counting the overlapping number of people in two club meetings",
-        "ja": "3段階、5ページから6ページまでの連続動きです。まず、自分で質問してみましょうか？画面の基本図形と基準点の間にどのような条件が隠されていますか？右証明式の導出（緑色の対応領域と比例要素の表示）プロセスを介してコアの出発点を確認します。ステップ1（初等ボックスルール探しとベンダイアグラム）：数字を入れると2倍して1を加えてくる魔法ボックス(y=2x+1)と二つの集まりの重なる人数世紀",
-        "zh-CN": "第三步，从第5页连续移动到第6页。我们先问自己一个问题。屏幕上的基本形状和参考点之间隐藏着哪些条件？通过右侧证明公式的推导来确定关键起点（显示绿色对应区域和比例元素）。第1步（求基本盒子规则和维恩图）：当你输入一个数字时，一个神奇的盒子会加一倍并加1（y=2x+1）并计算两次俱乐部会议中重叠的人数",
-        "es": "Paso 3, movimiento continuo de la página 5 a la página 6. Primero hagámonos una pregunta. ¿Qué condiciones se esconden entre las formas básicas y los puntos de referencia en la pantalla? Los puntos de partida clave se identifican mediante la derivación de la fórmula de prueba del lado derecho (se muestran las áreas verdes correspondientes y los elementos proporcionales). Paso 1 (Encontrar reglas de caja elementales y diagrama de Venn): Cuando ingresas un número, se crea una caja mágica que duplica y suma 1 (y=2x+1) y cuenta el número superpuesto de personas en dos reuniones del club.",
-        "fr": "Étape 3, déplacement continu de la page 5 à la page 6. Posons-nous d’abord une question. Quelles conditions sont cachées entre les formes de base et les points de référence à l'écran ? Les points de départ clés sont identifiés grâce à la dérivation de la formule de preuve du côté droit (les zones vertes correspondantes et les éléments proportionnels sont affichés). Étape 1 (Trouver les règles élémentaires de la boîte et le diagramme de Venn) : Lorsque vous saisissez un nombre, une boîte magique qui double et ajoute 1 (y=2x+1) et compte le nombre de personnes qui se chevauchent dans deux réunions de club",
-        "de": "Schritt 3, kontinuierlicher Übergang von Seite 5 zu Seite 6. Stellen wir uns zunächst eine Frage. Welche Bedingungen verbergen sich zwischen den Grundformen und Bezugspunkten auf dem Bildschirm? Die wichtigsten Ausgangspunkte werden durch die Ableitung der rechtsseitigen Beweisformel identifiziert (grüne entsprechende Flächen und proportionale Elemente werden angezeigt). Schritt 1 (Ermitteln grundlegender Boxregeln und Venn-Diagramm): Wenn Sie eine Zahl eingeben, entsteht eine magische Box, die sich verdoppelt und 1 hinzufügt (y=2x+1) und die sich überschneidende Anzahl von Personen in zwei Clubtreffen zählt",
-        "vi": "Bước 3, chuyển động liên tục từ trang 5 đến trang 6. Trước tiên chúng ta hãy tự hỏi mình một câu hỏi. Những điều kiện nào ẩn giữa các hình cơ bản và các điểm tham chiếu trên màn hình? Các điểm khởi đầu quan trọng được xác định thông qua việc suy ra công thức chứng minh vế phải (các diện tích tương ứng màu xanh lá cây và các phần tử tỷ lệ được hiển thị). Bước 1 (Tìm quy tắc hộp cơ bản và sơ đồ Venn): Khi nhập số, hộp thần kỳ nhân đôi rồi cộng 1 (y=2x+1) và đếm số người trùng nhau trong 2 buổi họp câu lạc bộ"
-      },
-      "question_narrations": {
-        "ko": "3단계 탐구 발문입니다! 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 5페이지부터 6페이지까지의 연속 움직임입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 상자 규칙 찾기와 벤다이어그램): 숫자를 넣으면 2배 해서 1을 더해 나오는 마법 상자( y=2x+1 )와 두 동아리 모임의 겹치는 인원 세기"
+        "ko": "3단계, 5페이지부터 6페이지까지의 단계입니다. 먼저 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 3 (Page 5). First, we set up the fundamental definition for y=x squared+q before performing any algebraic manipulation."
       }
     },
     {
@@ -141,10 +148,10 @@
         7,
         9
       ],
-      "step_title": "2단계 질문 · 폴리아 제1보조선 발상 (How?)",
-      "step_question_ko": "🧭 [보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 4 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] y=x의 제곱+q를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove y=x squared+q?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.3678,
@@ -152,19 +159,10 @@
         0.7066,
         0.584
       ],
-      "explanation_text": "4단계, 7페이지부터 9페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인",
+      "explanation_text": "4단계, 7페이지부터 9페이지까지의 단계입니다. 먼저 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "4단계, 7페이지부터 9페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인",
-        "en": "Step 4, continuous movement from pages 7 to 9. This is the crucial question! Where should the auxiliary lines be drawn to reveal hidden angles and symmetrical relationships at a glance? Keep an eye on the movement of key geometric constructions and continuous motion developments. Step 2 (Elementary ordered pair dot marking): Print (1, 3), (2, 5), (3, 7) on graph paper and connect them with a ruler to make a straight line, and check that when you go 1 space, you go up 2 spaces (slope).",
-        "ja": "4段階、7ページから9ページまでの連続動きです。ここで決定的な質問です！どこに補助線を描かなければ隠された角度と対称関係が一目でわかりますか？コアジオメトリ作図と連続モーション展開の動きに注目してください。 2段階（初等順対点撮り）：（1、3）、（2、5）、（3、7）をグリッドペーパーに撮ってジャロであれば、まっすぐな直線になり、1マス行くと2マスアップ（チルト）を確認",
-        "zh-CN": "第四步，从第7页连续移动到第9页。这是关键问题！辅助线应该画在哪里，才能让隐藏的角度和对称关系一目了然？密切关注关键几何结构的运动和连续运动的发展。步骤2（基本有序双点标记）：在方格纸上打印（1, 3），（2, 5），（3, 7），并用尺子将它们连接成一条直线，并检查当你走1格时，你就走2格（斜率）。",
-        "es": "Paso 4, movimiento continuo de las páginas 7 a 9. ¡Esta es la pregunta crucial! ¿Dónde deberían dibujarse las líneas auxiliares para revelar ángulos ocultos y relaciones simétricas de un vistazo? Esté atento al movimiento de construcciones geométricas clave y a los desarrollos de movimiento continuo. Paso 2 (marcado de puntos de pares ordenados de primaria): Imprime (1, 3), (2, 5), (3, 7) en papel cuadriculado y conéctalos con una regla para formar una línea recta, y comprueba que cuando avanzas 1 espacio, subes 2 espacios (pendiente).",
-        "fr": "Étape 4, déplacement continu des pages 7 à 9. C'est la question cruciale ! Où faut-il tracer les lignes auxiliaires pour révéler d’un seul coup d’œil les angles cachés et les relations symétriques ? Gardez un œil sur le mouvement des constructions géométriques clés et sur les développements de mouvements continus. Étape 2 (Marquage de points par paires ordonnées élémentaires) : Imprimez (1, 3), (2, 5), (3, 7) sur du papier millimétré et reliez-les avec une règle pour former une ligne droite, et vérifiez que lorsque vous montez d'1 espace, vous montez de 2 espaces (pente).",
-        "de": "Schritt 4, kontinuierlicher Übergang von Seite 7 bis 9. Das ist die entscheidende Frage! Wo sollen die Hilfslinien eingezeichnet werden, um verborgene Winkel und symmetrische Zusammenhänge auf einen Blick sichtbar zu machen? Behalten Sie die Bewegung wichtiger geometrischer Konstruktionen und kontinuierlicher Bewegungsentwicklungen im Auge. Schritt 2 (Grundlegende geordnete Paarpunktmarkierung): Drucken Sie (1, 3), (2, 5), (3, 7) auf Millimeterpapier und verbinden Sie sie mit einem Lineal, um eine gerade Linie zu erstellen. Überprüfen Sie, ob Sie um 1 Feld weitergehen und um 2 Felder nach oben gehen (Steigung).",
-        "vi": "Bước 4, chuyển tiếp từ trang 7 đến trang 9. Đây là câu hỏi quan trọng! Các đường phụ nên vẽ ở đâu để bộc lộ nhanh các góc ẩn và mối quan hệ đối xứng? Theo dõi chuyển động của các công trình hình học quan trọng và sự phát triển chuyển động liên tục. Bước 2 (Đánh dấu chấm theo cặp theo thứ tự cơ bản): In (1, 3), (2, 5), (3, 7) lên giấy kẻ ô và nối chúng bằng thước kẻ để tạo thành một đường thẳng, kiểm tra xem khi đi lên 1 khoảng trống thì bạn đi lên 2 khoảng trống (độ dốc)."
-      },
-      "question_narrations": {
-        "ko": "4단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 7페이지부터 9페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인"
+        "ko": "4단계, 7페이지부터 9페이지까지의 단계입니다. 먼저 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 4 (Page 7). First, we set up the fundamental definition for y=x squared+q before performing any algebraic manipulation."
       }
     },
     {
@@ -174,10 +172,10 @@
         10,
         11
       ],
-      "step_title": "2단계 질문 · 폴리아 제1보조선 발상 (How?)",
-      "step_question_ko": "🧭 [보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 5 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Algebraic Bridge Q] What algebraic transformation or visual model bridges our starting expression to the target?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.3678,
@@ -185,19 +183,10 @@
         0.7066,
         0.584
       ],
-      "explanation_text": "5단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인",
+      "explanation_text": "5단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "5단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인",
-        "en": "Step 5, continuous movement from pages 10 to 11. This is the crucial question! Where should the auxiliary lines be drawn to reveal hidden angles and symmetrical relationships at a glance? Keep an eye on the movement of key geometric constructions and continuous motion developments. Step 2 (Elementary ordered pair dot marking): Print (1, 3), (2, 5), (3, 7) on graph paper and connect them with a ruler to make a straight line, and check that when you go 1 space, you go up 2 spaces (slope).",
-        "ja": "5段階、10ページから11ページまでの連続動きです。ここで決定的な質問です！どこに補助線を描かなければ隠された角度と対称関係が一目でわかりますか？コアジオメトリ作図と連続モーション展開の動きに注目してください。 2段階（初等順対点撮り）：（1、3）、（2、5）、（3、7）をグリッドペーパーに撮ってジャロであれば、まっすぐな直線になり、1マス行くと2マスアップ（チルト）を確認",
-        "zh-CN": "第五步，从第10页连续移动到第11页。这是关键问题！辅助线应该画在哪里，才能让隐藏的角度和对称关系一目了然？密切关注关键几何结构的运动和连续运动的发展。步骤2（基本有序双点标记）：在方格纸上打印（1, 3），（2, 5），（3, 7），并用尺子将它们连接成一条直线，并检查当你走1格时，你就走2格（斜率）。",
-        "es": "Paso 5, movimiento continuo de las páginas 10 a 11. ¡Esta es la pregunta crucial! ¿Dónde deberían dibujarse las líneas auxiliares para revelar ángulos ocultos y relaciones simétricas de un vistazo? Esté atento al movimiento de construcciones geométricas clave y a los desarrollos de movimiento continuo. Paso 2 (marcado de puntos de pares ordenados de primaria): Imprime (1, 3), (2, 5), (3, 7) en papel cuadriculado y conéctalos con una regla para formar una línea recta, y comprueba que cuando avanzas 1 espacio, subes 2 espacios (pendiente).",
-        "fr": "Étape 5, déplacement continu des pages 10 à 11. C’est la question cruciale ! Où faut-il tracer les lignes auxiliaires pour révéler d’un seul coup d’œil les angles cachés et les relations symétriques ? Gardez un œil sur le mouvement des constructions géométriques clés et sur les développements de mouvements continus. Étape 2 (Marquage de points par paires ordonnées élémentaires) : Imprimez (1, 3), (2, 5), (3, 7) sur du papier millimétré et reliez-les avec une règle pour former une ligne droite, et vérifiez que lorsque vous montez d'1 espace, vous montez de 2 espaces (pente).",
-        "de": "Schritt 5, kontinuierlicher Wechsel von Seite 10 zu Seite 11. Das ist die entscheidende Frage! Wo sollen die Hilfslinien eingezeichnet werden, um verborgene Winkel und symmetrische Zusammenhänge auf einen Blick sichtbar zu machen? Behalten Sie die Bewegung wichtiger geometrischer Konstruktionen und kontinuierlicher Bewegungsentwicklungen im Auge. Schritt 2 (Grundlegende geordnete Paarpunktmarkierung): Drucken Sie (1, 3), (2, 5), (3, 7) auf Millimeterpapier und verbinden Sie sie mit einem Lineal, um eine gerade Linie zu erstellen. Überprüfen Sie, ob Sie um 1 Feld weitergehen und um 2 Felder nach oben gehen (Steigung).",
-        "vi": "Bước 5, chuyển động liên tục từ trang 10 đến trang 11. Đây là câu hỏi quan trọng! Các đường phụ nên vẽ ở đâu để bộc lộ nhanh các góc ẩn và mối quan hệ đối xứng? Theo dõi chuyển động của các công trình hình học quan trọng và sự phát triển chuyển động liên tục. Bước 2 (Đánh dấu chấm theo cặp theo thứ tự cơ bản): In (1, 3), (2, 5), (3, 7) lên giấy kẻ ô và nối chúng bằng thước kẻ để tạo thành một đường thẳng, kiểm tra xem khi đi lên 1 khoảng trống thì bạn đi lên 2 khoảng trống (độ dốc)."
-      },
-      "question_narrations": {
-        "ko": "5단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 10페이지부터 11페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인"
+        "ko": "5단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 5 (Page 10). Now we apply the key algebraic transformation, turning the expression into familiar fundamental operations."
       }
     },
     {
@@ -207,10 +196,10 @@
         12,
         14
       ],
-      "step_title": "2단계 질문 · 폴리아 제1보조선 발상 (How?)",
-      "step_question_ko": "🧭 [보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 6 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Algebraic Bridge Q] What algebraic transformation or visual model bridges our starting expression to the target?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.3843,
@@ -218,19 +207,10 @@
         0.6798,
         0.4628
       ],
-      "explanation_text": "6단계, 12페이지부터 14페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인",
+      "explanation_text": "6단계, 12페이지부터 14페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "6단계, 12페이지부터 14페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인",
-        "en": "Step 6, continuous movement from pages 12 to 14. This is the crucial question! Where should the auxiliary lines be drawn to reveal hidden angles and symmetrical relationships at a glance? Keep an eye on the movement of key geometric constructions and continuous motion developments. Step 2 (Elementary ordered pair dot marking): Print (1, 3), (2, 5), (3, 7) on graph paper and connect them with a ruler to make a straight line, and check that when you go 1 space, you go up 2 spaces (slope).",
-        "ja": "6段階、12ページから14ページまでの連続動きです。ここで決定的な質問です！どこに補助線を描かなければ隠された角度と対称関係が一目でわかりますか？コアジオメトリ作図と連続モーション展開の動きに注目してください。 2段階（初等順対点撮り）：（1、3）、（2、5）、（3、7）をグリッドペーパーに撮ってジャロであれば、まっすぐな直線になり、1マス行くと2マスアップ（チルト）を確認",
-        "zh-CN": "第六步，从第12页连续移动到第14页。这是关键问题！辅助线应该画在哪里，才能让隐藏的角度和对称关系一目了然？密切关注关键几何结构的运动和连续运动的发展。步骤2（基本有序双点标记）：在方格纸上打印（1, 3），（2, 5），（3, 7），并用尺子将它们连接成一条直线，并检查当你走1格时，你就走2格（斜率）。",
-        "es": "Paso 6, movimiento continuo de las páginas 12 a 14. ¡Esta es la pregunta crucial! ¿Dónde deberían dibujarse las líneas auxiliares para revelar ángulos ocultos y relaciones simétricas de un vistazo? Esté atento al movimiento de construcciones geométricas clave y a los desarrollos de movimiento continuo. Paso 2 (marcado de puntos de pares ordenados de primaria): Imprime (1, 3), (2, 5), (3, 7) en papel cuadriculado y conéctalos con una regla para formar una línea recta, y comprueba que cuando avanzas 1 espacio, subes 2 espacios (pendiente).",
-        "fr": "Étape 6, déplacement continu des pages 12 à 14. C'est la question cruciale ! Où faut-il tracer les lignes auxiliaires pour révéler d’un seul coup d’œil les angles cachés et les relations symétriques ? Gardez un œil sur le mouvement des constructions géométriques clés et sur les développements de mouvements continus. Étape 2 (Marquage de points par paires ordonnées élémentaires) : Imprimez (1, 3), (2, 5), (3, 7) sur du papier millimétré et reliez-les avec une règle pour former une ligne droite, et vérifiez que lorsque vous montez d'1 espace, vous montez de 2 espaces (pente).",
-        "de": "Schritt 6, fortlaufender Übergang von Seite 12 bis 14. Das ist die entscheidende Frage! Wo sollen die Hilfslinien eingezeichnet werden, um verborgene Winkel und symmetrische Zusammenhänge auf einen Blick sichtbar zu machen? Behalten Sie die Bewegung wichtiger geometrischer Konstruktionen und kontinuierlicher Bewegungsentwicklungen im Auge. Schritt 2 (Grundlegende geordnete Paarpunktmarkierung): Drucken Sie (1, 3), (2, 5), (3, 7) auf Millimeterpapier und verbinden Sie sie mit einem Lineal, um eine gerade Linie zu erstellen. Überprüfen Sie, ob Sie um 1 Feld weitergehen und um 2 Felder nach oben gehen (Steigung).",
-        "vi": "Bước 6, chuyển tiếp từ trang 12 đến trang 14. Đây là câu hỏi then chốt! Các đường phụ nên vẽ ở đâu để bộc lộ nhanh các góc ẩn và mối quan hệ đối xứng? Theo dõi chuyển động của các công trình hình học quan trọng và sự phát triển chuyển động liên tục. Bước 2 (Đánh dấu chấm theo cặp theo thứ tự cơ bản): In (1, 3), (2, 5), (3, 7) lên giấy kẻ ô và nối chúng bằng thước kẻ để tạo thành một đường thẳng, kiểm tra xem khi đi lên 1 khoảng trống thì bạn đi lên 2 khoảng trống (độ dốc)."
-      },
-      "question_narrations": {
-        "ko": "6단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 12페이지부터 14페이지까지의 연속 움직임입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 핵심 기하 작도 및 연속 모션 전개의 움직임을 눈여겨보세요. 2단계 (초등 순서쌍 점 찍기): (1, 3), (2, 5), (3, 7) 을 모눈종이에 찍어 자로 이으면 반듯한 직선이 되고 1칸 갈 때 2칸 올라감(기울기)을 확인"
+        "ko": "6단계, 12페이지부터 14페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 6 (Page 12). Now we apply the key algebraic transformation, turning the expression into familiar fundamental operations."
       }
     },
     {
@@ -240,10 +220,10 @@
         15,
         17
       ],
-      "step_title": "3단계 질문 · 불변량과 등식 발견 (Why?)",
-      "step_question_ko": "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?",
-      "step_question_en": "📐 [Invariant Question] Which ratio or area remains constant under motion?",
-      "visual_focus": "우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 7 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.405,
@@ -251,19 +231,10 @@
         0.6798,
         0.3444
       ],
-      "explanation_text": "7단계, 15페이지부터 17페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기",
+      "explanation_text": "7단계, 15페이지부터 17페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
       "narrations": {
-        "ko": "7단계, 15페이지부터 17페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기",
-        "en": "Step 7, continuous movement from pages 15 to 17. What remains constant and unchanged when a shape moves? Find the answer to how the congruence, similarity, and distance relationships lead to equations in the process of deriving the right-side proof equation (constructing core geometry and developing continuous motion). Step 3 (Perfect square equation and vertex translation): Bind the quadratic function y=ax squared+bx+c to y=a(x-p) squared+q to find vertex (p, q) and axis of symmetry x=p.",
-        "ja": "7段階、15ページから17ページまでの連続動きです。図形が移動すると、何が変わらずに一定に保存されますか？右証明式の誘導（核心幾何作図および連続モーション展開）の過程で合同・似・距離関係がどのように等式につながるのか答えを探してみてください。ステップ3（完全二乗式と頂点翻訳）：二次関数y = ax平方+ bx + cをy = a（x - p）平方+ qで囲み、頂点（p、q）と対称軸x = pを検索する",
-        "zh-CN": "第 7 步，第 15 页至第 17 页的连续移动。当形状移动时，什么保持不变？在推导右侧证明方程（构建核心几何和发展连续运动）的过程中，找到同余、相似和距离关系如何导出方程的答案。步骤 3（完全平方方程和顶点平移）：将二次函数 y=ax squared+bx+c 绑定到 y=a(x-p) squared+q 以找到顶点 (p, q) 和对称轴 x=p。",
-        "es": "Paso 7, movimiento continuo de las páginas 15 a 17. ¿Qué permanece constante y sin cambios cuando una forma se mueve? Encuentre la respuesta a cómo las relaciones de congruencia, similitud y distancia conducen a ecuaciones en el proceso de derivar la ecuación de prueba del lado derecho (construcción de geometría central y desarrollo de movimiento continuo). Paso 3 (Ecuación cuadrática perfecta y traducción de vértices): Une la función cuadrática y=ax al cuadrado+bx+c a y=a(x-p) al cuadrado+q para encontrar el vértice (p, q) y el eje de simetría x=p.",
-        "fr": "Étape 7, mouvement continu des pages 15 à 17. Qu'est-ce qui reste constant et inchangé lorsqu'une forme bouge ? Trouvez la réponse à la façon dont les relations de congruence, de similarité et de distance conduisent à des équations dans le processus de dérivation de l'équation de preuve du côté droit (construction de la géométrie de base et développement d'un mouvement continu). Étape 3 (Équation du carré parfait et translation de sommet) : Liez la fonction quadratique y=ax au carré+bx+c à y=a(x-p) au carré+q pour trouver le sommet (p, q) et l'axe de symétrie x=p.",
-        "de": "Schritt 7, kontinuierliche Bewegung von Seite 15 bis 17. Was bleibt konstant und unverändert, wenn sich eine Form bewegt? Finden Sie die Antwort darauf, wie die Kongruenz-, Ähnlichkeits- und Distanzbeziehungen zu Gleichungen führen, während Sie die rechtsseitige Beweisgleichung ableiten (Konstruktion der Kerngeometrie und Entwicklung kontinuierlicher Bewegung). Schritt 3 (Perfekte quadratische Gleichung und Scheitelpunktübersetzung): Binden Sie die quadratische Funktion y=ax im Quadrat+bx+c an y=a(x-p) im Quadrat+q, um den Scheitelpunkt (p, q) und die Symmetrieachse x=p zu finden.",
-        "vi": "Bước 7, chuyển động liên tục từ trang 15 đến trang 17. Điều gì không đổi và không thay đổi khi một hình chuyển động? Tìm câu trả lời cho mối quan hệ đồng đẳng, tương tự và khoảng cách dẫn đến các phương trình trong quá trình suy ra phương trình chứng minh vế phải (xây dựng hình học lõi và phát triển chuyển động liên tục). Bước 3 (Phương trình bình phương hoàn hảo và dịch đỉnh): Liên kết hàm bậc hai y=ax bình phương+bx+c với y=a(x-p) bình phương+q để tìm đỉnh (p, q) và trục đối xứng x=p."
-      },
-      "question_narrations": {
-        "ko": "7단계 탐구 발문입니다! 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 15페이지부터 17페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기"
+        "ko": "7단계, 15페이지부터 17페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 7 (Page 15). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
       }
     },
     {
@@ -273,10 +244,10 @@
         18,
         19
       ],
-      "step_title": "3단계 질문 · 불변량과 등식 발견 (Why?)",
-      "step_question_ko": "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?",
-      "step_question_en": "📐 [Invariant Question] Which ratio or area remains constant under motion?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 8 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.3843,
@@ -284,19 +255,10 @@
         0.6798,
         0.4628
       ],
-      "explanation_text": "8단계, 18페이지부터 19페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 핵심 기하 작도 및 연속 모션 전개 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기",
+      "explanation_text": "8단계, 18페이지부터 19페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
       "narrations": {
-        "ko": "8단계, 18페이지부터 19페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 핵심 기하 작도 및 연속 모션 전개 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기",
-        "en": "Step 8, continuous movement from pages 18 to 19. What remains constant and unchanged when a shape moves? Find answers to how congruence, similarity, and distance relationships lead to equations in the process of constructing core geometry and developing continuous motion. Step 3 (Perfect square equation and vertex translation): Bind the quadratic function y=ax squared+bx+c to y=a(x-p) squared+q to find vertex (p, q) and axis of symmetry x=p.",
-        "ja": "8段階、18ページから19ページまでの連続動きです。図形が移動すると、何が変わらずに一定に保存されますか？コア幾何作図および連続モーション展開過程で合同・似・距離関係がどのように等式につながるのか答えを見つけてください。ステップ3（完全二乗式と頂点翻訳）：二次関数y = ax平方+ bx + cをy = a（x - p）平方+ qで囲み、頂点（p、q）と対称軸x = pを検索する",
-        "zh-CN": "第 8 步，第 18 页至第 19 页的连续移动。当形状移动时，什么保持不变？寻找在构建核心几何和发展连续运动的过程中同余、相似和距离关系如何产生方程的答案。步骤 3（完全平方方程和顶点平移）：将二次函数 y=ax squared+bx+c 绑定到 y=a(x-p) squared+q 以找到顶点 (p, q) 和对称轴 x=p。",
-        "es": "Paso 8, movimiento continuo de las páginas 18 a 19. ¿Qué permanece constante y sin cambios cuando una forma se mueve? Encuentre respuestas sobre cómo las relaciones de congruencia, similitud y distancia conducen a ecuaciones en el proceso de construcción de la geometría central y desarrollo del movimiento continuo. Paso 3 (Ecuación cuadrática perfecta y traducción de vértices): Une la función cuadrática y=ax al cuadrado+bx+c a y=a(x-p) al cuadrado+q para encontrar el vértice (p, q) y el eje de simetría x=p.",
-        "fr": "Étape 8, mouvement continu des pages 18 à 19. Qu'est-ce qui reste constant et inchangé lorsqu'une forme bouge ? Trouvez des réponses à la manière dont les relations de congruence, de similarité et de distance conduisent à des équations dans le processus de construction de la géométrie de base et de développement d'un mouvement continu. Étape 3 (Équation du carré parfait et translation de sommet) : Liez la fonction quadratique y=ax au carré+bx+c à y=a(x-p) au carré+q pour trouver le sommet (p, q) et l'axe de symétrie x=p.",
-        "de": "Schritt 8, kontinuierliche Bewegung von Seite 18 bis 19. Was bleibt konstant und unverändert, wenn sich eine Form bewegt? Finden Sie Antworten darauf, wie Kongruenz, Ähnlichkeit und Abstandsbeziehungen zu Gleichungen im Prozess der Konstruktion der Kerngeometrie und der Entwicklung kontinuierlicher Bewegung führen. Schritt 3 (Perfekte quadratische Gleichung und Scheitelpunktübersetzung): Binden Sie die quadratische Funktion y=ax im Quadrat+bx+c an y=a(x-p) im Quadrat+q, um den Scheitelpunkt (p, q) und die Symmetrieachse x=p zu finden.",
-        "vi": "Bước 8, chuyển động liên tục từ trang 18 đến trang 19. Điều gì không đổi và không thay đổi khi một hình chuyển động? Tìm câu trả lời cho mối quan hệ đồng đẳng, tương tự và khoảng cách dẫn đến các phương trình trong quá trình xây dựng hình học lõi và phát triển chuyển động liên tục. Bước 3 (Phương trình bình phương hoàn hảo và dịch đỉnh): Liên kết hàm bậc hai y=ax bình phương+bx+c với y=a(x-p) bình phương+q để tìm đỉnh (p, q) và trục đối xứng x=p."
-      },
-      "question_narrations": {
-        "ko": "8단계 탐구 발문입니다! 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 18페이지부터 19페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 핵심 기하 작도 및 연속 모션 전개 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기"
+        "ko": "8단계, 18페이지부터 19페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 8 (Page 18). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
       }
     },
     {
@@ -306,10 +268,10 @@
         20,
         22
       ],
-      "step_title": "3단계 질문 · 불변량과 등식 발견 (Why?)",
-      "step_question_ko": "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?",
-      "step_question_en": "📐 [Invariant Question] Which ratio or area remains constant under motion?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 9 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.3595,
@@ -317,19 +279,10 @@
         0.7066,
         0.6446
       ],
-      "explanation_text": "9단계, 20페이지부터 22페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 핵심 기하 작도 및 연속 모션 전개 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기",
+      "explanation_text": "9단계, 20페이지부터 22페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
       "narrations": {
-        "ko": "9단계, 20페이지부터 22페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 핵심 기하 작도 및 연속 모션 전개 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기",
-        "en": "Step 9, continuous movement from pages 20 to 22. What remains constant and unchanged when a shape moves? Find answers to how congruence, similarity, and distance relationships lead to equations in the process of constructing core geometry and developing continuous motion. Step 3 (Perfect square equation and vertex translation): Bind the quadratic function y=ax squared+bx+c to y=a(x-p) squared+q to find vertex (p, q) and axis of symmetry x=p.",
-        "ja": "9段階、20ページから22ページまでの連続動きです。図形が移動すると、何が変わらずに一定に保存されますか？コア幾何作図および連続モーション展開過程で合同・似・距離関係がどのように等式につながるのか答えを見つけてください。ステップ3（完全二乗式と頂点翻訳）：二次関数y = ax平方+ bx + cをy = a（x - p）平方+ qで囲み、頂点（p、q）と対称軸x = pを検索する",
-        "zh-CN": "第 9 步，第 20 页到第 22 页的连续移动。当形状移动时，什么保持不变？寻找在构建核心几何和发展连续运动的过程中同余、相似和距离关系如何产生方程的答案。步骤 3（完全平方方程和顶点平移）：将二次函数 y=ax squared+bx+c 绑定到 y=a(x-p) squared+q 以找到顶点 (p, q) 和对称轴 x=p。",
-        "es": "Paso 9, movimiento continuo de las páginas 20 a 22. ¿Qué permanece constante y sin cambios cuando una forma se mueve? Encuentre respuestas sobre cómo las relaciones de congruencia, similitud y distancia conducen a ecuaciones en el proceso de construcción de la geometría central y desarrollo del movimiento continuo. Paso 3 (Ecuación cuadrática perfecta y traducción de vértices): Une la función cuadrática y=ax al cuadrado+bx+c a y=a(x-p) al cuadrado+q para encontrar el vértice (p, q) y el eje de simetría x=p.",
-        "fr": "Étape 9, mouvement continu des pages 20 à 22. Qu'est-ce qui reste constant et inchangé lorsqu'une forme bouge ? Trouvez des réponses à la manière dont les relations de congruence, de similarité et de distance conduisent à des équations dans le processus de construction de la géométrie de base et de développement d'un mouvement continu. Étape 3 (Équation du carré parfait et translation de sommet) : Liez la fonction quadratique y=ax au carré+bx+c à y=a(x-p) au carré+q pour trouver le sommet (p, q) et l'axe de symétrie x=p.",
-        "de": "Schritt 9, fortlaufende Bewegung von Seite 20 bis 22. Was bleibt konstant und unverändert, wenn sich eine Form bewegt? Finden Sie Antworten darauf, wie Kongruenz, Ähnlichkeit und Abstandsbeziehungen zu Gleichungen im Prozess der Konstruktion der Kerngeometrie und der Entwicklung kontinuierlicher Bewegung führen. Schritt 3 (Perfekte quadratische Gleichung und Scheitelpunktübersetzung): Binden Sie die quadratische Funktion y=ax im Quadrat+bx+c an y=a(x-p) im Quadrat+q, um den Scheitelpunkt (p, q) und die Symmetrieachse x=p zu finden.",
-        "vi": "Bước 9, chuyển động liên tục từ trang 20 đến trang 22. Điều gì không đổi và không đổi khi một hình chuyển động? Tìm câu trả lời cho mối quan hệ đồng đẳng, tương tự và khoảng cách dẫn đến các phương trình trong quá trình xây dựng hình học lõi và phát triển chuyển động liên tục. Bước 3 (Phương trình bình phương hoàn hảo và dịch đỉnh): Liên kết hàm bậc hai y=ax bình phương+bx+c với y=a(x-p) bình phương+q để tìm đỉnh (p, q) và trục đối xứng x=p."
-      },
-      "question_narrations": {
-        "ko": "9단계 탐구 발문입니다! 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 20페이지부터 22페이지까지의 연속 움직임입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 핵심 기하 작도 및 연속 모션 전개 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (완전제곱식과 꼭짓점 번역): 이차함수 y=ax 제곱+bx+c 를 y=a(x-p) 제곱+q 로 묶어 꼭짓점 (p, q) 와 대칭축 x=p 찾기"
+        "ko": "9단계, 20페이지부터 22페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 9 (Page 20). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
       }
     },
     {
@@ -339,10 +292,10 @@
         23,
         24
       ],
-      "step_title": "4단계 질문 · 레고 블록 종합 (Synthesis)",
-      "step_question_ko": "💡 [유레카 질문] 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요?",
-      "step_question_en": "💡 [Eureka Question] How do the previous clues combine into the final proof?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 10 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Synthesis Q] How does combining our derived equations complete y=x squared+q?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.345,
@@ -350,19 +303,10 @@
         0.7066,
         0.7631
       ],
-      "explanation_text": "10단계, 23페이지부터 24페이지까지의 연속 움직임입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 핵심 기하 작도 및 연속 모션 전개 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 정의역이 제한된 이차함수의 최대·최소, 일대일대응 조건, 역함수( y=x 대칭) 교점 성질을 결합하여 4점 문항 해결",
+      "explanation_text": "10단계, 23페이지부터 24페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "10단계, 23페이지부터 24페이지까지의 연속 움직임입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 핵심 기하 작도 및 연속 모션 전개 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 정의역이 제한된 이차함수의 최대·최소, 일대일대응 조건, 역함수( y=x 대칭) 교점 성질을 결합하여 4점 문항 해결",
-        "en": "Step 10, continuous movement from pages 23 to 24. Now, shall we combine the answers to the questions we asked earlier? The final conclusion is clearly completed through the core geometry construction and continuous motion development finalization process. Step 4 (Comprehensive question): Solve a 4-point question by combining the maximum/minimum, one-to-one correspondence conditions, and intersection properties of the inverse function (y=x symmetry) of a quadratic function with a limited domain.",
-        "ja": "10段階、23ページから24ページまでの連続動きです。今、私たちが投げた質問の答えを一つにまとめてみましょうか？コアジオメトリ作図と連続モーション展開仕上げプロセスにより、最終的な結論が明確に完了します。 4段階(本文項総合):正義域が制限された二次関数の最大・最小、一対一対応条件、逆関数(y=x対称)交点性質を組み合わせて4点問合せ解決",
-        "zh-CN": "第10步，从第23页连续移动到第24页。现在，我们是否可以将之前提出的问题的答案结合起来？最终的结论是通过核心几何构造和持续运动发展定型过程明确完成的。步骤4（综合题）：结合有限域二次函数的反函数（y=x对称性）的最大/最小值、一一对应条件和交集性质，解答4点题。",
-        "es": "Paso 10, movimiento continuo de las páginas 23 a 24. Ahora, ¿combinamos las respuestas a las preguntas que hicimos anteriormente? La conclusión final se completa claramente a través de la construcción de la geometría central y el proceso de finalización del desarrollo del movimiento continuo. Paso 4 (Pregunta completa): Resuelva una pregunta de 4 puntos combinando el máximo/mínimo, las condiciones de correspondencia uno a uno y las propiedades de intersección de la función inversa (simetría y=x) de una función cuadrática con un dominio limitado.",
-        "fr": "Étape 10, déplacement continu des pages 23 à 24. Maintenant, allons-nous combiner les réponses aux questions que nous avons posées plus tôt ? La conclusion finale est clairement complétée par la construction de la géométrie de base et le processus de finalisation du développement du mouvement continu. Étape 4 (Question complète) : Résolvez une question en 4 points en combinant les conditions de correspondance maximum/minimum, un à un et les propriétés d'intersection de la fonction inverse (symétrie y=x) d'une fonction quadratique avec un domaine limité.",
-        "de": "Schritt 10, fortlaufender Übergang von Seite 23 bis 24. Sollen wir nun die Antworten auf die Fragen, die wir zuvor gestellt haben, zusammenfassen? Die endgültige Schlussfolgerung wird eindeutig durch den Abschlussprozess der Kerngeometriekonstruktion und der kontinuierlichen Bewegungsentwicklung vervollständigt. Schritt 4 (Umfassende Frage): Lösen Sie eine 4-Punkte-Frage, indem Sie die Maximum/Minimum-, Eins-zu-eins-Korrespondenzbedingungen und Schnitteigenschaften der Umkehrfunktion (y=x-Symmetrie) einer quadratischen Funktion mit einem begrenzten Bereich kombinieren.",
-        "vi": "Bước 10, chuyển tiếp từ trang 23 đến trang 24. Bây giờ, chúng ta kết hợp các câu trả lời cho những câu hỏi đã hỏi trước đó nhé? Kết luận cuối cùng được hoàn thiện rõ ràng thông qua quá trình xây dựng hình học lõi và quá trình hoàn thiện phát triển chuyển động liên tục. Bước 4 (Câu hỏi tổng hợp): Giải câu hỏi 4 điểm bằng cách kết hợp các điều kiện tương ứng một-một tối đa/tối thiểu và các thuộc tính giao của hàm nghịch đảo (đối xứng y=x) của hàm bậc hai với miền giới hạn."
-      },
-      "question_narrations": {
-        "ko": "10단계 탐구 발문입니다! 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 23페이지부터 24페이지까지의 연속 움직임입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 핵심 기하 작도 및 연속 모션 전개 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 정의역이 제한된 이차함수의 최대·최소, 일대일대응 조건, 역함수( y=x 대칭) 교점 성질을 결합하여 4점 문항 해결"
+        "ko": "10단계, 23페이지부터 24페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 10 (Page 23). Combining the simplified expressions from the previous steps directly yields our target identity for y=x squared+q."
       }
     },
     {
@@ -372,10 +316,10 @@
         25,
         27
       ],
-      "step_title": "4단계 질문 · 레고 블록 종합 (Synthesis)",
-      "step_question_ko": "💡 [유레카 질문] 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요?",
-      "step_question_en": "💡 [Eureka Question] How do the previous clues combine into the final proof?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 11 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Synthesis Q] How does combining our derived equations complete y=x squared+q?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.345,
@@ -383,19 +327,10 @@
         0.7066,
         0.7631
       ],
-      "explanation_text": "11단계, 25페이지부터 27페이지까지의 연속 움직임입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 핵심 기하 작도 및 연속 모션 전개 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 정의역이 제한된 이차함수의 최대·최소, 일대일대응 조건, 역함수( y=x 대칭) 교점 성질을 결합하여 4점 문항 해결",
+      "explanation_text": "11단계, 25페이지부터 27페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "11단계, 25페이지부터 27페이지까지의 연속 움직임입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 핵심 기하 작도 및 연속 모션 전개 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 정의역이 제한된 이차함수의 최대·최소, 일대일대응 조건, 역함수( y=x 대칭) 교점 성질을 결합하여 4점 문항 해결",
-        "en": "Step 11, continuous movement from pages 25 to 27. Now, shall we combine the answers to the questions we asked earlier? The final conclusion is clearly completed through the core geometry construction and continuous motion development finalization process. Step 4 (Comprehensive question): Solve a 4-point question by combining the maximum/minimum, one-to-one correspondence conditions, and intersection properties of the inverse function (y=x symmetry) of a quadratic function with a limited domain.",
-        "ja": "11段階、25ページから27ページまでの連続動きです。今、私たちが投げた質問の答えを一つにまとめてみましょうか？コアジオメトリ作図と連続モーション展開仕上げプロセスにより、最終的な結論が明確に完了します。 4段階(本文項総合):正義域が制限された二次関数の最大・最小、一対一対応条件、逆関数(y=x対称)交点性質を組み合わせて4点問合せ解決",
-        "zh-CN": "第11步，从第25页连续移动到第27页。现在，我们是否可以将之前提出的问题的答案结合起来？最终的结论是通过核心几何构造和持续运动发展定型过程明确完成的。步骤4（综合题）：结合有限域二次函数的反函数（y=x对称性）的最大/最小值、一一对应条件和交集性质，解答4点题。",
-        "es": "Paso 11, movimiento continuo de las páginas 25 a 27. Ahora, ¿combinamos las respuestas a las preguntas que hicimos anteriormente? La conclusión final se completa claramente a través de la construcción de la geometría central y el proceso de finalización del desarrollo del movimiento continuo. Paso 4 (Pregunta completa): Resuelva una pregunta de 4 puntos combinando el máximo/mínimo, las condiciones de correspondencia uno a uno y las propiedades de intersección de la función inversa (simetría y=x) de una función cuadrática con un dominio limitado.",
-        "fr": "Étape 11, déplacement continu des pages 25 à 27. Maintenant, allons-nous combiner les réponses aux questions que nous avons posées plus tôt ? La conclusion finale est clairement complétée par la construction de la géométrie de base et le processus de finalisation du développement du mouvement continu. Étape 4 (Question complète) : Résolvez une question en 4 points en combinant les conditions de correspondance maximum/minimum, un à un et les propriétés d'intersection de la fonction inverse (symétrie y=x) d'une fonction quadratique avec un domaine limité.",
-        "de": "Schritt 11, kontinuierlicher Übergang von Seite 25 bis 27. Sollen wir nun die Antworten auf die Fragen, die wir zuvor gestellt haben, zusammenfassen? Die endgültige Schlussfolgerung wird eindeutig durch den Abschlussprozess der Kerngeometriekonstruktion und der kontinuierlichen Bewegungsentwicklung vervollständigt. Schritt 4 (Umfassende Frage): Lösen Sie eine 4-Punkte-Frage, indem Sie die Maximum/Minimum-, Eins-zu-eins-Korrespondenzbedingungen und Schnitteigenschaften der Umkehrfunktion (y=x-Symmetrie) einer quadratischen Funktion mit einem begrenzten Bereich kombinieren.",
-        "vi": "Bước 11, chuyển tiếp từ trang 25 đến trang 27. Bây giờ, chúng ta kết hợp các câu trả lời cho những câu hỏi đã hỏi trước đó nhé? Kết luận cuối cùng được hoàn thiện rõ ràng thông qua quá trình xây dựng hình học lõi và quá trình hoàn thiện phát triển chuyển động liên tục. Bước 4 (Câu hỏi tổng hợp): Giải câu hỏi 4 điểm bằng cách kết hợp các điều kiện tương ứng một-một tối đa/tối thiểu và các thuộc tính giao của hàm nghịch đảo (đối xứng y=x) của hàm bậc hai với miền giới hạn."
-      },
-      "question_narrations": {
-        "ko": "11단계 탐구 발문입니다! 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 25페이지부터 27페이지까지의 연속 움직임입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 핵심 기하 작도 및 연속 모션 전개 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 정의역이 제한된 이차함수의 최대·최소, 일대일대응 조건, 역함수( y=x 대칭) 교점 성질을 결합하여 4점 문항 해결"
+        "ko": "11단계, 25페이지부터 27페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 11 (Page 25). Combining the simplified expressions from the previous steps directly yields our target identity for y=x squared+q."
       }
     },
     {
@@ -405,10 +340,10 @@
         28,
         28
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떻게 될까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this theorem?",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?",
+      "step_question_en": "🔀 [What-If-Not] How does y=x squared+q evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.0847,
@@ -416,41 +351,11 @@
         0.9153,
         0.9091
       ],
-      "explanation_text": "마지막 12단계입니다. 총 28프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? 이차함수가 등장하면 모든 성질의 출발점은 '대칭축 x = -2a 분의 b '입니다! 두 함숫값이 같다는 조건 f( alpha)=f( beta) 가 보이면 즉시 대칭축 x = 2 분의 alpha+ beta 를 적으세요. 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!",
+      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)에서 시작해, 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 거쳐, 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 12단계입니다. 총 28프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? 이차함수가 등장하면 모든 성질의 출발점은 '대칭축 x = -2a 분의 b '입니다! 두 함숫값이 같다는 조건 f( alpha)=f( beta) 가 보이면 즉시 대칭축 x = 2 분의 alpha+ beta 를 적으세요. 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!",
-        "en": "Step 12. We have completed the 28-frame visual proof! Now ask yourself a What-If-Not question: what happens if we change a condition in this figure? Visit min7014.github.io/mathedu to test your own questions interactively!",
-        "ja": "最後の12段階です。合計28フレームのフリップブック作図で整理を完全に証明しました！今、あなたは新しい質問を投げる番です。この図形の条件を変更するとどうなりますか？二次関数が登場すると、すべての性質の出発点は「対称軸x = -2a分のb」です！ 2つの関数が同じであるという条件f（alpha）= f（beta）が表示されたら、すぐに対称軸x = 2分のalpha + betaを書きます。説明欄リンクの数学ホームページで直接図形を動かして実験してみてください！",
-        "zh-CN": "这是最后 12 个步骤。这个定理被一张总共 28 帧的翻页图画完美地证明了！现在轮到你提出一个新问题了。如果改变这个形状的条件会发生什么？当二次函数出现时，所有性质的起点都是‘b over symmetry axis x = -2a’！如果您看到条件 f( alpha)=f( beta) 两个函数值相同，请立即在对称轴 x = 2 上写下 alpha+ beta。通过直接在说明中的链接中的数学主页上移动形状进行实验！",
-        "es": "Estos son los últimos 12 pasos. ¡El teorema quedó perfectamente demostrado con un dibujo de flipbook de un total de 28 fotogramas! Ahora te toca a ti hacer una nueva pregunta. ¿Qué pasaría si se cambiaran las condiciones de esta forma? Cuando aparece una función cuadrática, el punto de partida de todas las propiedades es 'b sobre el eje de simetría x = -2a'. Si ve la condición f( alfa)=f( beta) de que los dos valores de la función son iguales, escriba inmediatamente alfa+ beta sobre el eje de simetría x = 2. ¡Experimente moviendo las formas directamente en la página de inicio de matemáticas en el enlace de la descripción!",
-        "fr": "Ce sont les 12 dernières étapes. Le théorème a été parfaitement prouvé avec un dessin flipbook d'un total de 28 images ! C'est maintenant à votre tour de poser une nouvelle question. Que se passerait-il si les conditions de cette forme étaient modifiées ? Lorsqu'une fonction quadratique apparaît, le point de départ de toutes les propriétés est « b sur l'axe de symétrie x = -2a » ! Si vous voyez la condition f( alpha)=f( beta) selon laquelle les deux valeurs de fonction sont identiques, notez immédiatement alpha+ beta sur l'axe de symétrie x = 2. Expérimentez en déplaçant les formes directement sur la page d'accueil mathématique dans le lien dans la description !",
-        "de": "Dies sind die letzten 12 Schritte. Der Satz wurde mit einer Daumenkino-Zeichnung von insgesamt 28 Bildern perfekt bewiesen! Jetzt sind Sie an der Reihe, eine neue Frage zu stellen. Was würde passieren, wenn die Bedingungen dieser Form geändert würden? Beim Auftreten einer quadratischen Funktion ist der Ausgangspunkt aller Eigenschaften 'b über Symmetrieachse x = -2a'! Wenn Sie die Bedingung f( alpha)=f( beta) sehen, dass die beiden Funktionswerte gleich sind, notieren Sie sofort Alpha+Beta über der Symmetrieachse x = 2. Experimentieren Sie, indem Sie die Formen direkt auf der Mathe-Homepage im Link in der Beschreibung verschieben!",
-        "vi": "Đây là 12 bước cuối cùng. Định lý đã được chứng minh một cách hoàn hảo bằng một bản vẽ sách lật có tổng cộng 28 khung hình! Bây giờ đến lượt bạn đặt một câu hỏi mới. Điều gì sẽ xảy ra nếu các điều kiện của hình dạng này bị thay đổi? Khi hàm bậc hai xuất hiện, điểm bắt đầu của tất cả các thuộc tính là 'b trên trục đối xứng x = -2a'! Nếu thấy điều kiện f(alpha)=f(beta) là hai giá trị hàm số bằng nhau thì ghi ngay alpha+beta lên trục đối xứng x = 2. Thí nghiệm bằng cách di chuyển các hình trực tiếp trên trang chủ toán học theo link trong phần mô tả!"
-      },
-      "question_narrations": {
-        "ko": "마지막 12단계, 조건 변형 질문입니다! 마지막 12단계입니다. 총 28프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? 이차함수가 등장하면 모든 성질의 출발점은 '대칭축 x = -2a 분의 b '입니다! 두 함숫값이 같다는 조건 f( alpha)=f( beta) 가 보이면 즉시 대칭축 x = 2 분의 alpha+ beta 를 적으세요. 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요! 만약 여기서 도형의 조건을 하나 바꾼다면 어떤 새로운 정리가 탄생할지 직접 질문하고 실험해 보세요!"
+        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 'y=x의 제곱+q'에서 주어진 기본 정의와 출발 조건(가정)에서 시작해, 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 거쳐, 'y=x의 제곱+q'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 12. The visual proof of y=x squared+q is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
       }
     }
-  ],
-  "question_classroom_packages": {
-    "ko": {
-      "title": "❓ [질문하는 수학 수업]  — 왜 항상 성립할까? (Notice & Wonder · What-If-Not 탐구) | @min7014_ai",
-      "local_mp4_path": "video_lectures/question_classroom/2020011102_q_ko.mp4",
-      "upload_mp4_path": "youtube_uploads/2020011102/2020011102_q_ko.mp4",
-      "srt_url": "video_lectures/youtube_packages/2020011102_q_ko.srt",
-      "duration_sec": 676.9
-    }
-  },
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 보조선 한 줄의 마법!  45초 시각적 증명 |  #Shorts #수학",
-      "local_mp4_path": "video_lectures/shorts/2020011102_short_ko.mp4",
-      "duration_sec": 49.22,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  }
+  ]
 }

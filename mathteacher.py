@@ -568,6 +568,56 @@ def cmd_audit():
     subprocess.run([sys.executable, os.path.join(BASE_DIR, "audit_full_mathedu.py")], check=True)
 
 
+def cmd_audit_videos():
+    """
+    [mathteacher v7.0 수학 강의 영상 대본·자막·메타데이터 전수 수학적 무결성 검수]
+    1) 영상 내 '민은기 선생님', '민은기', 'Min\'s Math Lab' 등 개인 호칭 완전 배제 여부 검사
+    2) 각 주제의 수학적 영역(geometry vs algebra/number) 및 세부 개념(역수 나눗셈 vs 분모의 유리화 vs 제곱근 정의 vs 지수법칙) 정확성 검사
+    3) 미변환 LaTeX 기호(\times, \div, \sqrt, \leq, \geq, \neq, \Leftrightarrow) 및 기계적 레이아웃 안내 잔존 여부 검사
+    """
+    import min7014_video_maker as vm
+
+    scripts_dir = os.path.join(BASE_DIR, "video_lectures", "scripts")
+    if not os.path.exists(scripts_dir):
+        print("video_lectures/scripts directory not found.")
+        return
+
+    files = sorted([f[:-5] for f in os.listdir(scripts_dir) if f.endswith(".json")])
+    passed = 0
+    failed = []
+    cat_counts = {}
+    for slug in files:
+        res = vm.verify_video_content_integrity(slug)
+        sp = os.path.join(scripts_dir, f"{slug}.json")
+        try:
+            sdoc = json.load(open(sp, "r", encoding="utf-8"))
+            cat = (sdoc.get("teacher_proof_analysis") or {}).get("category_type", "unknown")
+            cat_counts[cat] = cat_counts.get(cat, 0) + 1
+        except Exception:
+            pass
+        if res.get("ok"):
+            passed += 1
+        else:
+            failed.append((slug, res.get("reason")))
+
+    print("=" * 84)
+    print("👩‍🏫 [mathteacher v7.0] 수학 강의 영상(대본·자막·메타데이터) 전수 수학적 무결성 감사 보고서")
+    print("=" * 84)
+    print(f"• 전체 검수 대상 영상 주제 수 : {len(files)}개 주제")
+    print(f"• 수학적 정확성 & 무결성 통과 : {passed}/{len(files)} (100% 기준)")
+    print(f"• 영역별 분포                 : {cat_counts}")
+    print("• 핵심 검증 항목              : ① 개인 호칭('민은기 선생님' 등) 0건, ② 역수 나눗셈/유리화/제곱근/지수법칙 정밀 구분, ③ 수식 발음 변환 100%, ④ 기계적 위치 메타 문구 0건")
+    if failed:
+        print(f"⚠️ 미통과 항목 ({len(failed)}건):")
+        for s, r in failed[:20]:
+            print(f"   - {s}: {r}")
+        sys.exit(1)
+    else:
+        print("✅ 전수 검수 결과: 모든 영상 대본·자막·메타데이터가 수학적으로 정확하며 개인 호칭이 완전히 배제되었습니다!")
+    print("=" * 84)
+
+
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] == "status":
         cmd_status()
@@ -597,6 +647,8 @@ def main():
         cmd_status()
     elif sys.argv[1] == "audit":
         cmd_audit()
+    elif sys.argv[1] in ("audit-videos", "audit_videos"):
+        cmd_audit_videos()
     else:
         cmd_status()
 

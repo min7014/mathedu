@@ -3,11 +3,12 @@
   "title": "꽃잎차례(Petals turn)",
   "title_en": "Petals turn",
   "sub_domain_ko": "다항식·방정식·수체계",
-  "core_concept": "[꽃잎차례] 유리수·순환소수·실수·복소수($i=\\sqrt{-1}$)로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘($A=BQ+R$), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
-  "solving_tip": "무리방정식 $\\sqrt{f(x)} = g(x)$를 양변 제곱하여 풀었을 때는 $g(x) < 0$인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 $g(x) \\ge 0$ 조건을 먼저 걸어 걸러내세요!",
+  "core_concept": "일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '꽃잎차례'의 기하학적 출발 조건 ➔ 회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘(Orderly Tangle)·황금각 나선 구조가 완성된다는 결론",
+  "solving_tip": "회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선",
   "pdf_url": "https://min7014.github.io/2025/2025021501.pdf",
   "web_url": "https://min7014.github.io/math20250215001.html",
   "page_count": 4,
+  "scene_count": 4,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/lpE3vnxnhxM"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "fractal_curve",
+    "hypothesis_ko": "일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '꽃잎차례'의 기하학적 출발 조건",
+    "conclusion_ko": "회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘(Orderly Tangle)·황금각 나선 구조가 완성된다는 결론",
+    "auxiliary_line_ko": "회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선",
+    "proof_logic_ko": "동일한 도형을 일정한 각도로 회전 이동하면 중심으로부터의 거리와 내각이 보존되는 합동 변환(Isometry) 성질에 의해 정다각형 대칭이 성립하는 원리",
+    "misconception_ko": "자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다.",
+    "what_if_not_ko": "만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,27 +81,17 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 꽃잎차례에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in Petals turn?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 꽃잎차례(Petals turn)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [꽃잎차례] 유리수·순환소수·실수·복소수( i=루트 -1 )로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘( A=BQ+R ), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 꽃잎차례입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '꽃잎차례'의 기하학적 출발 조건입니다. 왜 이 조건에서 회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 꽃잎차례(Petals turn)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [꽃잎차례] 유리수·순환소수·실수·복소수( i=루트 -1 )로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘( A=BQ+R ), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
-        "en": "Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore Petals turn and see why this mathematical property holds.",
-        "ja": "1段階です。ミン・ウンギ先生の数学資料室段階別視覚証明講義です。今回は花びらターン（Petals turn）の核心原理を動的フリップブックとして証明しましょう。 [花弁順] 遊離数・循環素数・実数・複素数（i=ルート-1）につながる水体系の完成性と多項式の除算アルゴリズム（A=BQ+R）、因数分解、二次・三次・噴水・無理方程式の代数的解法。",
-        "zh-CN": "这是第一步。这是 Eunki Min 老师数学资源室的分步视觉证明讲座。这次，我们用动态翻页书来证明花瓣转动的核心原理。 [花瓣阶]全面掌握有理数、循环小数、实数和复数（i=根-1）的数系，多项式除法算法（A=BQ+R），因式分解，以及二次、三次、分数和群方程的代数解法。",
-        "es": "Este es el paso 1. Esta es una conferencia de prueba visual paso a paso de la sala de recursos de matemáticas del maestro Eunki Min. Esta vez, probemos el principio básico del giro de los pétalos con un flipbook dinámico. [Orden de los pétalos] Integralidad del sistema numérico que conduce a números racionales, decimales recurrentes, números reales y números complejos (i=raíz -1), algoritmo de división de polinomios (A=BQ+R), factorización y solución algebraica de ecuaciones cuadráticas, cúbicas, fraccionarias y de grupo.",
-        "fr": "Il s'agit de l'étape 1. Il s'agit d'une démonstration visuelle étape par étape de la salle de ressources mathématiques du professeur Eunki Min. Cette fois, prouvons le principe de base du tour des pétales avec un flipbook dynamique. [Ordre des pétales] exhaustivité du système numérique menant aux nombres rationnels, décimales récurrentes, nombres réels et nombres complexes (i=racine -1), algorithme de division de polynômes (A=BQ+R), factorisation et solution algébrique d'équations quadratiques, cubiques, fractionnaires et de groupe.",
-        "de": "Dies ist Schritt 1. Dies ist eine schrittweise visuelle Beweisvorlesung aus dem Mathe-Ressourcenraum der Lehrerin Eunki Min. Lassen Sie uns dieses Mal das Grundprinzip des Blütenblätterdrehens mit einem dynamischen Daumenkino beweisen. [Blütenblattordnung] Vollständigkeit des Zahlensystems, das zu rationalen Zahlen, wiederkehrenden Dezimalzahlen, reellen Zahlen und komplexen Zahlen (i=Wurzel -1), Divisionsalgorithmus von Polynomen (A=BQ+R), Faktorisierung und algebraischer Lösung quadratischer, kubischer, Bruch- und Gruppengleichungen führt.",
-        "vi": "Đây là bước 1. Đây là bài giảng chứng minh trực quan từng bước từ phòng tài liệu toán của giáo viên Eunki Min. Lần này, chúng ta hãy chứng minh nguyên tắc cốt lõi của việc xoay cánh hoa bằng một cuốn sách lật động. [Thứ tự cánh hoa] Tính toàn diện của hệ thống số dẫn đến số hữu tỷ, số thập phân tuần hoàn, số thực và số phức (i=root -1), thuật toán chia đa thức (A=BQ+R), phân tích nhân tử và giải đại số của phương trình bậc hai, bậc ba, phân số và nhóm."
-      },
-      "durations": {
-        "ko": 13.41,
-        "en": 9.162
-      },
-      "step_question_ko": "❓ [Notice & Wonder] 꽃잎차례(Petals turn)에서 움직여도 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in Petals turn, and why?"
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 꽃잎차례입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '꽃잎차례'의 기하학적 출발 조건입니다. 왜 이 조건에서 회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore Petals turn through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
+      }
     },
     {
       "page": 2,
@@ -76,8 +100,10 @@
         2,
         2
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 2 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -85,23 +111,11 @@
         0.2293,
         0.5014
       ],
-      "explanation_text": "2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
+      "explanation_text": "2단계, 2페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
-        "en": "Step 2, page 2. This is the left dynamic geometry construction (core geometry construction and continuous motion development) stage. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Balancing an elementary two-arm scale): Find the unknown x by using the fact that the scale remains horizontal (equal sign = ) even if you add, subtract, or divide the same number on both sides.",
-        "ja": "ステップ2、2ページです。左ダイナミック図形作図(核心幾何作図と連続モーション展開)段階です.連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等両腕天びんバランスを合わせる）：天びんの両側に同じ数を加えたり減算しても水平（等号＝）が維持されることを利用して未知数×を求める",
-        "zh-CN": "第 2 页，第 2 步。这是左侧动态几何构造（核心几何构造和连续运动开发）阶段。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（平衡基本双臂秤）：即使在两侧添加、减去或除以相同的数字，秤仍保持水平（等号 = ），从而找到未知 x。",
-        "es": "Paso 2, página 2. Esta es la etapa de construcción de la geometría dinámica izquierda (construcción de la geometría central y desarrollo del movimiento continuo). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Equilibrio de una escala elemental de dos brazos): Encuentra la x desconocida aprovechando el hecho de que la escala permanece horizontal (signo igual = ) incluso si sumas, restas o divides el mismo número en ambos lados.",
-        "fr": "Étape 2, page 2. Il s'agit de l'étape gauche de construction de la géométrie dynamique (construction de la géométrie de base et développement du mouvement continu). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Équilibrer une échelle élémentaire à deux bras) : Trouvez l'inconnu x en utilisant le fait que l'échelle reste horizontale (signe égal = ) même si vous ajoutez, soustrayez ou divisez le même nombre des deux côtés.",
-        "de": "Schritt 2, Seite 2. Dies ist die linke Phase der dynamischen Geometriekonstruktion (Kerngeometriekonstruktion und kontinuierliche Bewegungsentwicklung). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Ausbalancieren einer elementaren zweiarmigen Skala): Finden Sie das unbekannte x, indem Sie die Tatsache nutzen, dass die Skala horizontal bleibt (Gleichheitszeichen = ), selbst wenn Sie auf beiden Seiten dieselbe Zahl addieren, subtrahieren oder dividieren.",
-        "vi": "Bước 2, trang 2. Đây là giai đoạn xây dựng hình học động bên trái (xây dựng hình học lõi và phát triển chuyển động liên tục). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Cân thang đo cơ bản hai nhánh): Tìm x chưa biết bằng cách sử dụng thực tế là thang đo vẫn nằm ngang (dấu bằng = ) ngay cả khi bạn cộng, trừ hoặc chia cùng một số ở cả hai vế."
-      },
-      "durations": {
-        "ko": 30.568,
-        "en": 12.64
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "2단계, 2페이지 단계입니다. 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 2 (Page 2). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 3,
@@ -110,8 +124,10 @@
         3,
         3
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 3 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Petals turn?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.2107,
@@ -119,23 +135,11 @@
         0.7893,
         0.9036
       ],
-      "explanation_text": "3단계, 3페이지입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정",
+      "explanation_text": "3단계, 3페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "3단계, 3페이지입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정",
-        "en": "Step 3, page 3. This is the final stage of drawing core geometry and developing continuous motion. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): Convert the number of real roots of the equation f(x)=g(x) to the number of intersections of the graphs of the two functions y=f(x) and y=g(x) to determine the range of the unknown k.",
-        "ja": "ステップ3、3ページです。コア幾何作図と連続モーション展開仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本項総合）：方程式f(x)=g(x)の実根の個数を二つの関数y=f(x)とy=g(x)グラフの交点個数に変換して未知数kの範囲確定",
-        "zh-CN": "第 3 页，第 3 步。这是绘制核心几何形状和开发连续运动的最后阶段。将前面步骤中的各个部分组合起来得出最终结论。步骤4（正文摘要）：将方程f(x)=g(x)的实根数转换为两个函数y=f(x)和y=g(x)的图的交点数，以确定未知k的范围。",
-        "es": "Paso 3, página 3. Esta es la etapa final para dibujar la geometría del núcleo y desarrollar el movimiento continuo. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): Convierta el número de raíces reales de la ecuación f(x)=g(x) al número de intersecciones de las gráficas de las dos funciones y=f(x) e y=g(x) para determinar el rango de la incógnita k.",
-        "fr": "Étape 3, page 3. Il s'agit de la dernière étape du dessin de la géométrie de base et du développement du mouvement continu. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Convertissez le nombre de racines réelles de l'équation f(x)=g(x) en nombre d'intersections des graphiques des deux fonctions y=f(x) et y=g(x) pour déterminer l'étendue de l'inconnue k.",
-        "de": "Schritt 3, Seite 3. Dies ist die letzte Phase des Zeichnens der Kerngeometrie und der Entwicklung einer kontinuierlichen Bewegung. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Konvertieren Sie die Anzahl der reellen Wurzeln der Gleichung f(x)=g(x) in die Anzahl der Schnittpunkte der Graphen der beiden Funktionen y=f(x) und y=g(x), um den Bereich der Unbekannten k zu bestimmen.",
-        "vi": "Bước 3, trang 3. Đây là giai đoạn cuối cùng của việc vẽ hình học lõi và phát triển chuyển động liên tục. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Chuyển đổi số nghiệm thực của phương trình f(x)=g(x) thành số giao điểm của đồ thị của hai hàm số y=f(x) và y=g(x) để xác định phạm vi của ẩn số k."
-      },
-      "durations": {
-        "ko": 27.352,
-        "en": 33.976
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "3단계, 3페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 3 (Page 3). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Petals turn."
+      }
     },
     {
       "page": 4,
@@ -144,8 +148,10 @@
         4,
         4
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요?",
+      "step_question_en": "🔀 [What-If-Not] How does Petals turn evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -153,134 +159,11 @@
         0.9628,
         0.9036
       ],
-      "explanation_text": "마지막 4단계입니다. 지금까지 총 4프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 무리방정식 루트 f(x) = g(x) 를 양변 제곱하여 풀었을 때는 g(x) < 0 인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 g(x) ge 0 조건을 먼저 걸어 걸러내세요!",
+      "explanation_text": "마지막 4단계, 증명이 완성되었습니다! 출발 조건이었던 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '꽃잎차례'의 기하학적 출발 조건에서 시작해, 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 거쳐, 회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 4단계입니다. 지금까지 총 4프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 무리방정식 루트 f(x) = g(x) 를 양변 제곱하여 풀었을 때는 g(x) < 0 인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 g(x) ge 0 조건을 먼저 걸어 걸러내세요!",
-        "en": "Step 4. We have completed the entire 4-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself.",
-        "ja": "最後の4段階です。これまでに合計4フレームのフリップブック作図を通じて整理を完全に証明しました。実戦チップで、無理方程式ルート f(x) = g(x) を両辺二乗して解いた時は g(x) < 0 の「無煙根 (偽根)」が混じって入ってくるので、必ず右辺 g(x) ge 0 条件を先に掛けろう！",
-        "zh-CN": "这是最后 4 个步骤。至此，我们已经通过总共4帧的翻页图画完整地证明了该定理。实用提示，在通过两边平方求解无理方程根 f(x) = g(x) 时，会混入 g(x) < 0 的“假根”，因此请务必先在右侧应用条件 g(x) ge 0 将其过滤掉！",
-        "es": "Estos son los últimos 4 pasos. Hasta ahora, hemos demostrado completamente el teorema mediante un dibujo en formato flipbook de un total de 4 fotogramas. Como consejo práctico, al resolver la raíz de ecuación irrazonable f(x) = g(x) elevando al cuadrado ambos lados, se mezclan 'raíces falsas' con g(x) < 0, así que asegúrese de filtrarlas aplicando primero la condición g(x) ge 0 en el lado derecho.",
-        "fr": "Ce sont les 4 dernières étapes. Jusqu’à présent, nous avons complètement prouvé le théorème à travers un dessin flipbook d’un total de 4 images. À titre pratique, lors de la résolution de l'équation déraisonnable racine f(x) = g(x) en mettant au carré les deux côtés, des « fausses racines » avec g(x) < 0 sont mélangées, alors assurez-vous de les filtrer en appliquant d'abord la condition g(x) ge 0 sur le côté droit !",
-        "de": "Dies sind die letzten 4 Schritte. Bisher haben wir den Satz durch eine Daumenkino-Zeichnung von insgesamt 4 Bildern vollständig bewiesen. Als praktischer Tipp: Wenn Sie die unvernünftige Gleichung Wurzel f(x) = g(x) durch Quadrieren beider Seiten lösen, werden „falsche Wurzeln“ mit g(x) < 0 eingemischt. Filtern Sie diese also unbedingt heraus, indem Sie zuerst die Bedingung g(x) ge 0 auf der rechten Seite anwenden!",
-        "vi": "Đây là 4 bước cuối cùng. Cho đến nay, chúng ta đã chứng minh được hoàn toàn định lý thông qua một bản vẽ flipbook có tổng cộng 4 khung hình. Là một mẹo thực tế, khi giải nghiệm nghiệm bất hợp lý của phương trình f(x) = g(x) bằng cách bình phương cả hai vế, 'căn giả' với g(x) < 0 sẽ được trộn vào, vì vậy hãy nhớ lọc chúng ra bằng cách trước tiên áp dụng điều kiện g(x) ge 0 ở vế phải!"
-      },
-      "durations": {
-        "ko": 28.792,
-        "en": 32.104
-      },
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떤 새로운 정리가 탄생할까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this figure?"
+        "ko": "마지막 4단계, 증명이 완성되었습니다! 출발 조건이었던 일정한 중심각 회전과 대칭 이동 규칙에 따라 선분·삼각형·종이띠를 배열하는 '꽃잎차례'의 기하학적 출발 조건에서 시작해, 회전 중심점과 각 도형의 대응 꼭짓점을 연결하여 회전각과 대칭축(평행선·등변사다리꼴)을 표시하는 보조선을 거쳐, 회전 대칭과 등각 변환의 반복을 통해 '꽃잎차례'의 정칙 다각형·규칙적 얽힘·황금각 나선 구조가 완성된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 자와 컴퍼스만으로는 정칠각형을 작도할 수 없지만, 종이띠 매듭(종이접기 공리)을 이용하면 3차 방정식의 해가 기하학적으로 구현되어 정칠각형이 정확히 만들어집니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 4. The visual proof of Petals turn is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
+      }
     }
-  ],
-  "youtube_packages": {
-    "ko": {
-      "lang": "ko",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "🔥 [시각적 증명] 꽃잎차례(Petals turn) — 눈으로 깨치는 4단계 기하 직관 (1080p) | @min7014_ai",
-      "description": "공식 암기 없이 눈으로 보고 직관적으로 깨치는 [꽃잎차례(Petals turn)] 4단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다.\n📋 전체 1,111개 수학자료 설명영상 게시판 & 직접 실습: https://min7014.github.io/mathedu/video_board.html?slug=2025021501\n\n💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 4페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!\n\n🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ\n\n🔔 [@min7014_ai 채널 구독하기]: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n🌐 대화형 GeoGebra 직접 조작하기: https://min7014.github.io/math20250215001.html\n📄 단계별 플립북 증명 PDF 원문: https://min7014.github.io/2025/2025021501.pdf\n🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html?slug=2025021501\n식별 코드: [ID: 2025021501_KO]\n\n⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n00:00 0페이지/4 — 교과서에서는 복잡한 수식으로 길게 설명하지만, 기하학적 보조선 한 줄을 긋는 순간 단 30초 만에 눈으로 완벽히...\n00:13 1페이지/4 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 꽃잎차례(Petals tu...\n00:43 2페이지/4 — 2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움...\n01:11 3페이지/4 — 3단계, 3페이지입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종...\n01:40 4페이지/4 — 마지막 4단계입니다. 지금까지 총 4프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 무리...\n\n#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014",
-      "tags": [
-        "수학",
-        "기하학",
-        "시각적 증명",
-        "수능 수학",
-        "도형 보조선",
-        "피타고라스 정리",
-        "메넬라우스의 정리",
-        "체바의 정리",
-        "중학교 도형",
-        "고등학교 수학",
-        "수능 도형 킬러",
-        "영재고 수학",
-        "KMO 기하",
-        "GeoGebra",
-        "알지오매스",
-        "민은기 선생님의 수학자료실",
-        "민은기 선생님의 수학자료실_AI",
-        "min7014_ai",
-        "min7014",
-        "수학 잘하는 법"
-      ],
-      "quiz_comment": "💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 4페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!",
-      "categoryId": "27",
-      "defaultLanguage": "ko",
-      "chapters": [
-        "00:00 0페이지/4 — 교과서에서는 복잡한 수식으로 길게 설명하지만, 기하학적 보조선 한 줄을 긋는 순간 단 30초 만에 눈으로 완벽히...",
-        "00:13 1페이지/4 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 꽃잎차례(Petals tu...",
-        "00:43 2페이지/4 — 2단계, 2페이지입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움...",
-        "01:11 3페이지/4 — 3단계, 3페이지입니다. 핵심 기하 작도 및 연속 모션 전개 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종...",
-        "01:40 4페이지/4 — 마지막 4단계입니다. 지금까지 총 4프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 무리..."
-      ],
-      "total_duration_sec": 127.45,
-      "srt_url": "video_lectures/youtube_packages/2025021501_ko.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2025021501_ko_thumb.png",
-      "local_mp4_path": "youtube_uploads/2025021501/2025021501_ko.mp4"
-    },
-    "en": {
-      "lang": "en",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "✨ Petals turn — Step-by-Step Visual Math Proof (4 Steps · 1080p) | @min7014_ai",
-      "description": "Why does Petals turn hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!\n📋 Full 1,111 Math Video Board & Interactive GeoGebra: https://min7014.github.io/mathedu/video_board.html?slug=2025021501\n\n💬 [10-Second Eureka Quiz] Which step (1 to 4) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!\n\n🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E\n\n🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n🌐 Interactive GeoGebra & Flipbook Web Page: https://min7014.github.io/math20250215001.html\n📄 Original Step-by-Step PDF: https://min7014.github.io/2025/2025021501.pdf\n🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html?slug=2025021501\nTopic ID: [ID: 2025021501_EN]\n\n⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n00:00 Step 0/4 — Textbooks bury this in pages of dry algebra, but with one clev...\n00:09 Step 1/4 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...\n00:21 Step 2/4 — Step 2, page 2. This is the left dynamic geometry construction...\n00:55 Step 3/4 — Step 3, page 3. This is the final stage of drawing core geomet...\n01:27 Step 4/4 — Step 4. We have completed the entire 4-frame visual proof! Vis...\n\n#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014",
-      "tags": [
-        "Visual Math Proof",
-        "Geometry Proof",
-        "Proof Without Words",
-        "Euclidean Geometry",
-        "Pythagorean Theorem",
-        "Ceva Theorem",
-        "Menelaus Theorem",
-        "GeoGebra",
-        "Math Animation",
-        "3Blue1Brown style math",
-        "Step by Step Math",
-        "High School Geometry",
-        "Math Olympiad",
-        "AMC Math",
-        "SAT Math",
-        "Min's Math Lab",
-        "min7014_ai",
-        "min7014"
-      ],
-      "quiz_comment": "💬 [10-Second Eureka Quiz] Which step (1 to 4) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!",
-      "categoryId": "27",
-      "defaultLanguage": "en",
-      "chapters": [
-        "00:00 Step 0/4 — Textbooks bury this in pages of dry algebra, but with one clev...",
-        "00:09 Step 1/4 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...",
-        "00:21 Step 2/4 — Step 2, page 2. This is the left dynamic geometry construction...",
-        "00:55 Step 3/4 — Step 3, page 3. This is the final stage of drawing core geomet...",
-        "01:27 Step 4/4 — Step 4. We have completed the entire 4-frame visual proof! Vis..."
-      ],
-      "total_duration_sec": 101.67,
-      "srt_url": "video_lectures/youtube_packages/2025021501_en.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2025021501_en_thumb.png",
-      "local_mp4_path": "youtube_uploads/2025021501/2025021501_en.mp4"
-    }
-  },
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 보조선 한 줄의 마법! 꽃잎차례(Petals turn) 45초 시각적 증명 | 꽃잎차례(Petals turn) #Shorts #수학",
-      "local_mp4_path": "video_lectures/shorts/2025021501_short_ko.mp4",
-      "duration_sec": 34.73,
-      "aspect_ratio": "9:16 (1080x1920)"
-    },
-    "en": {
-      "title": "🔥 45s Visual Math Proof: Petals turn | Petals turn #Shorts #Math",
-      "local_mp4_path": "video_lectures/shorts/2025021501_short_en.mp4",
-      "duration_sec": 28.34,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  },
-  "pedagogy_style": "v5.0 Question-Asking Classroom (Notice & Wonder -> Socratic Pólya -> What-If-Not)"
+  ]
 }

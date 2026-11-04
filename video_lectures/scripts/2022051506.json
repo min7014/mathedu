@@ -3,11 +3,12 @@
   "title": "원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)",
   "title_en": "Draw a circle that passes through the two points in the circle and touches this circle.",
   "sub_domain_ko": "이차곡선·원뿔곡선",
-  "core_concept": "[원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.] 평면 위의 두 정점(초점 $F, F'$)으로부터 거리의 합이 장축의 길이 $2a$로 일정한 점들의 자취($\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1, c^2=a^2-b^2$)와 접선·초점 반사 대칭성.",
-  "solving_tip": "타원 위의 점 $P$가 주어지면 방정식에 대입하기 전에 무조건 두 초점 $F, F'$와 연결하여 한 변을 $k$, 다른 변을 $2a-k$로 세팅하세요.",
+  "core_concept": "초점(Focus)과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건 ➔ '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론",
+  "solving_tip": "곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도",
   "pdf_url": "https://min7014.github.io/2022/2022051506.pdf",
   "web_url": "https://min7014.github.io/math20220515006.html",
   "page_count": 11,
+  "scene_count": 11,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/dy72bD2IRrw"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "geometry",
+    "hypothesis_ko": "초점(Focus)과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건",
+    "conclusion_ko": "'원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론",
+    "auxiliary_line_ko": "곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도",
+    "proof_logic_ko": "이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리",
+    "misconception_ko": "이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+    "what_if_not_ko": "만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,27 +81,17 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in Draw a circle that passes through the two points in the circle and touches this circle.?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.] 평면 위의 두 정점(초점 F, F' )으로부터 거리의 합이 장축의 길이 2a 로 일정한 점들의 자취( a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1, c 제곱=a 제곱-b 제곱 )와 접선·초점 반사 대칭성.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건입니다. 왜 이 조건에서 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.] 평면 위의 두 정점(초점 F, F' )으로부터 거리의 합이 장축의 길이 2a 로 일정한 점들의 자취( a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1, c 제곱=a 제곱-b 제곱 )와 접선·초점 반사 대칭성.",
-        "en": "Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore (Draw a circle that passes through the two points in the circle and touches this circle.) and see why this mathematical property holds.",
-        "ja": "1段階です。ミン・ウンギ先生の数学資料室段階別視覚証明講義です。今回は、円の中にある2点を過ぎて、この円に内接する円を作図しましょう。 [円の中にある2点を過ぎながらこの円に内接する円を作図しなさい。] 平面上の2つの頂点（焦点F、F'）から距離の和が長軸の長さ2aで一定の点の跡（a二乗分のx平方+b平方分のy平方=1、c平方=a平方-b平方）。",
-        "zh-CN": "这是第一步。这是 Eunki Min 老师数学资源室的分步视觉证明讲座。本课我们来证明画圆的核心原理，即经过圆内的两点并与这个圆相切。与动态翻页书。 [通过圆中的两点构造一个内切于该圆的圆。] 平面上两个顶点（焦点 F，F'）的距离总和恒定，长轴长度为 2a（x 平方在 a 平方 + y 平方在 b 平方 = 1，c 平方 = a 平方 - b 平方）且切向/焦点反射对称的点的迹线。",
-        "es": "Este es el paso 1. Esta es una conferencia de prueba visual paso a paso de la sala de recursos de matemáticas del maestro Eunki Min. En esta lección, demostraremos el principio básico de Dibujar un círculo que pase por los dos puntos del círculo y toque este círculo. con un flipbook dinámico. [Construya un círculo inscrito en este círculo pasando por dos puntos en el círculo.] Rastros de puntos donde la suma de las distancias desde dos vértices (foco F, F') en el plano es constante con la longitud del eje mayor siendo 2a (x al cuadrado sobre a al cuadrado + y al cuadrado sobre b al cuadrado = 1, c al cuadrado = a al cuadrado - b al cuadrado) y simetría de reflexión tangencial/focal.",
-        "fr": "Il s'agit de l'étape 1. Il s'agit d'une démonstration visuelle étape par étape de la salle de ressources mathématiques du professeur Eunki Min. Dans cette leçon, démontrons le principe de base de Tracer un cercle qui passe par les deux points du cercle et touche ce cercle. avec un flipbook dynamique. [Construire un cercle inscrit dans ce cercle en passant par deux points du cercle.] Traces de points où la somme des distances de deux sommets (foyer F, F') sur le plan est constante avec la longueur du grand axe étant 2a (x au carré sur a au carré + y au carré sur b au carré = 1, c au carré = a au carré - b au carré) et symétrie de réflexion tangentielle/focale.",
-        "de": "Dies ist Schritt 1. Dies ist eine schrittweise visuelle Beweisvorlesung aus dem Mathe-Ressourcenraum der Lehrerin Eunki Min. In dieser Lektion beweisen wir das Kernprinzip des Zeichnens eines Kreises, der durch die beiden Punkte im Kreis verläuft und diesen Kreis berührt. mit einem dynamischen Daumenkino. [Konstruieren Sie einen in diesen Kreis eingeschriebenen Kreis, indem Sie durch zwei Punkte im Kreis gehen.] Spuren von Punkten, bei denen die Summe der Abstände von zwei Eckpunkten (Fokus F, F') auf der Ebene konstant ist, wobei die Länge der Hauptachse 2a beträgt (x im Quadrat über a im Quadrat + y im Quadrat über b im Quadrat = 1, c im Quadrat = a im Quadrat - b im Quadrat) und tangentiale/fokale Reflexionssymmetrie.",
-        "vi": "Đây là bước 1. Đây là bài giảng chứng minh trực quan từng bước từ phòng tài liệu toán của giáo viên Eunki Min. Trong bài học này chúng ta cùng chứng minh nguyên lý cốt lõi của Vẽ đường tròn đi qua hai điểm trong đường tròn và tiếp xúc với đường tròn này. với một cuốn sách lật động. [Dựng đường tròn nội tiếp đường tròn này bằng cách đi qua hai điểm trong đường tròn.] Dấu vết của các điểm trong đó tổng khoảng cách từ hai đỉnh (tiêu điểm F, F') trên mặt phẳng không đổi với độ dài của trục chính là 2a (x bình trên a bình + y bình trên b bình = 1, c bình = a bình - b bình) và đối xứng phản xạ tiếp tuyến/tiêu điểm."
-      },
-      "durations": {
-        "ko": 14.034,
-        "en": 10.218
-      },
-      "step_question_ko": "❓ [Notice & Wonder] 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)에서 움직여도 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in (Draw a circle that passes through the two points in the circle and touches this circle.), and why?"
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건입니다. 왜 이 조건에서 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore Draw a circle that passes through the two points in the circle and touches this circle. through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
+      }
     },
     {
       "page": 2,
@@ -76,8 +100,10 @@
         2,
         2
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 2 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Draw a circle that passes through the two points in the circle and touches this circle.?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -85,23 +111,11 @@
         0.8884,
         0.6116
       ],
-      "explanation_text": "2단계, 2페이지입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 실로 타원 그리기): 도화지에 압정 2개를 꽂고 길이가 10cm인 실을 걸어 연필로 팽팽하게 그릴 때 두 거리의 합이 늘 10cm임을 확인",
+      "explanation_text": "2단계, 2페이지 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "2단계, 2페이지입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 실로 타원 그리기): 도화지에 압정 2개를 꽂고 길이가 10cm인 실을 걸어 연필로 팽팽하게 그릴 때 두 거리의 합이 늘 10cm임을 확인",
-        "en": "Step 2, page 2. This is a process of core geometric construction and continuous motion development, checking the basic shapes and reference points shown on the screen. Step 1 (Drawing an oval with elementary thread): Insert two thumbtacks on drawing paper, hang a 10cm long thread, and check that when drawing tautly with a pencil, the sum of the two distances is always 10cm.",
-        "ja": "ステップ2、2ページです。コアジオメトリ作図と連続モーション展開プロセスで、画面に表示される基本図形と基準点を確認します。 1段階（初等糸で楕円を描く）：絵画紙にタック2本を差し込み、長さ10cmの糸を掛けて鉛筆でしっかりと描くとき、​​2つの距離の合計が常に10cmであることを確認",
-        "zh-CN": "第 2 页，第 2 步。这是核心几何构造和连续运动开发的过程，检查屏幕上显示的基本形状和参考点。步骤一（用基本线画椭圆）：在画纸上插两个图钉，挂一根10厘米长的线，用铅笔拉紧画时，检查两个距离之和是否始终为10厘米。",
-        "es": "Paso 2, página 2. Este es un proceso de construcción geométrica central y desarrollo de movimiento continuo, verificando las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Dibujar un óvalo con hilo elemental): Inserta dos chinchetas en papel de dibujo, cuelga un hilo de 10 cm de largo y comprueba que al dibujar tenso con un lápiz, la suma de las dos distancias sea siempre de 10 cm.",
-        "fr": "Étape 2, page 2. Il s'agit d'un processus de construction géométrique de base et de développement de mouvements continus, vérifiant les formes de base et les points de référence affichés à l'écran. Étape 1 (Dessiner un ovale avec du fil élémentaire) : Insérez deux punaises sur du papier à dessin, accrochez un fil de 10 cm de long, et vérifiez qu'en dessinant bien tendu avec un crayon, la somme des deux distances est toujours de 10 cm.",
-        "de": "Schritt 2, Seite 2. Dies ist ein Prozess der grundlegenden geometrischen Konstruktion und der kontinuierlichen Bewegungsentwicklung, bei dem die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte überprüft werden. Schritt 1 (Zeichnen eines Ovals mit Elementarfaden): Stecken Sie zwei Reißzwecken auf Zeichenpapier, hängen Sie einen 10 cm langen Faden auf und achten Sie darauf, dass beim straffen Zeichnen mit einem Bleistift die Summe der beiden Abstände immer 10 cm beträgt.",
-        "vi": "Bước 2, trang 2. Đây là quá trình xây dựng hình học lõi và phát triển chuyển động liên tục, kiểm tra các hình dạng cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Vẽ hình bầu dục bằng chỉ sơ cấp): Chèn hai chiếc đinh bấm vào giấy vẽ, treo một sợi chỉ dài 10 cm và kiểm tra xem khi vẽ căng bằng bút chì thì tổng hai khoảng cách luôn bằng 10 cm."
-      },
-      "durations": {
-        "ko": 46.333,
-        "en": 16.48
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "2단계, 2페이지 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 2 (Page 2). We construct the base figure for Draw a circle that passes through the two points in the circle and touches this circle. and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 3,
@@ -110,8 +124,10 @@
         3,
         3
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 3 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Draw a circle that passes through the two points in the circle and touches this circle.?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.2748,
@@ -119,23 +135,11 @@
         0.7459,
         0.8871
       ],
-      "explanation_text": "3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 실로 타원 그리기): 도화지에 압정 2개를 꽂고 길이가 10cm인 실을 걸어 연필로 팽팽하게 그릴 때 두 거리의 합이 늘 10cm임을 확인",
+      "explanation_text": "3단계, 3페이지 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 실로 타원 그리기): 도화지에 압정 2개를 꽂고 길이가 10cm인 실을 걸어 연필로 팽팽하게 그릴 때 두 거리의 합이 늘 10cm임을 확인",
-        "en": "Step 3, page 3. In the process of drawing blue basic shapes and reference line segments, check the basic shapes and reference points shown on the screen. Step 1 (Drawing an oval with elementary thread): Insert two thumbtacks on drawing paper, hang a 10cm long thread, and check that when drawing tautly with a pencil, the sum of the two distances is always 10cm.",
-        "ja": "ステップ3、3ページです。青の基本図形と基準線分作成プロセスで、画面に表示される基本図形と基準点を確認します。 1段階（初等糸で楕円を描く）：絵画紙にタック2本を差し込み、長さ10cmの糸を掛けて鉛筆でしっかりと描くとき、​​2つの距離の合計が常に10cmであることを確認",
-        "zh-CN": "第 3 页，步骤 3。 在绘制蓝色基本形状和参考线段的过程中，检查屏幕上显示的基本形状和参考点。步骤一（用基本线画椭圆）：在画纸上插两个图钉，挂一根10厘米长的线，用铅笔拉紧画时，检查两个距离之和是否始终为10厘米。",
-        "es": "Paso 3, página 3. En el proceso de dibujar formas básicas azules y segmentos de línea de referencia, verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Dibujar un óvalo con hilo elemental): Inserta dos chinchetas en papel de dibujo, cuelga un hilo de 10 cm de largo y comprueba que al dibujar tenso con un lápiz, la suma de las dos distancias sea siempre de 10 cm.",
-        "fr": "Étape 3, page 3. Lors du processus de dessin de formes de base bleues et de segments de ligne de référence, vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Dessiner un ovale avec du fil élémentaire) : Insérez deux punaises sur du papier à dessin, accrochez un fil de 10 cm de long, et vérifiez qu'en dessinant bien tendu avec un crayon, la somme des deux distances est toujours de 10 cm.",
-        "de": "Schritt 3, Seite 3. Überprüfen Sie beim Zeichnen blauer Grundformen und Referenzliniensegmente die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Zeichnen eines Ovals mit Elementarfaden): Stecken Sie zwei Reißzwecken auf Zeichenpapier, hängen Sie einen 10 cm langen Faden auf und achten Sie darauf, dass beim straffen Zeichnen mit einem Bleistift die Summe der beiden Abstände immer 10 cm beträgt.",
-        "vi": "Bước 3, trang 3. Trong quá trình vẽ các hình cơ bản màu xanh và các đoạn đường tham chiếu, hãy kiểm tra các hình cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Vẽ hình bầu dục bằng chỉ sơ cấp): Chèn hai chiếc đinh bấm vào giấy vẽ, treo một sợi chỉ dài 10 cm và kiểm tra xem khi vẽ căng bằng bút chì thì tổng hai khoảng cách luôn bằng 10 cm."
-      },
-      "durations": {
-        "ko": 23.536,
-        "en": 27.256
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "3단계, 3페이지 단계입니다. 출발 조건인 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 3 (Page 3). We construct the base figure for Draw a circle that passes through the two points in the circle and touches this circle. and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 4,
@@ -144,8 +148,10 @@
         4,
         4
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 4 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.3884,
@@ -153,23 +159,11 @@
         0.4525,
         0.6501
       ],
-      "explanation_text": "4단계, 4페이지입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 꼭짓점 직각삼각형): 연필이 맨 위 꼭짓점 (0, b) 에 올 때 양쪽 실의 길이가 a 로 같아져 직각삼각형 a 제곱 = b 제곱 + c 제곱 이 됨을 관찰",
+      "explanation_text": "4단계, 4페이지 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "4단계, 4페이지입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 꼭짓점 직각삼각형): 연필이 맨 위 꼭짓점 (0, b) 에 올 때 양쪽 실의 길이가 a 로 같아져 직각삼각형 a 제곱 = b 제곱 + c 제곱 이 됨을 관찰",
-        "en": "Step 4, page 4. This is the stage of drawing the left dynamic shape (displaying green corresponding areas and proportional elements). Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Elementary Vertex Right Triangle): Observe that when the pencil comes to the top vertex (0, b), the length of both threads becomes the same as a, resulting in a right triangle a squared = b squared + c squared.",
-        "ja": "ステップ4、4ページです。左ダイナミック図形作図（緑色対応領域と比例要素の表示）ステップ。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等頂点直角三角形）：鉛筆が一番上の頂点（0、b）に入ると、両方の糸の長さがaに等しくなり、直角三角形a平方= b平方+ c平方になることを観察します。",
-        "zh-CN": "第4页第4步。这是绘制左侧动态形状的阶段（显示绿色对应区域和比例元素）。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤2（基本顶点直角三角形）：观察当铅笔到达顶部顶点（0，b）时，两条线的长度变得与a相同，从而形成直角三角形a的平方=b的平方+c的平方。",
-        "es": "Paso 4, página 4. Esta es la etapa de dibujar la forma dinámica izquierda (mostrando las áreas verdes correspondientes y los elementos proporcionales). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Triángulo rectángulo de vértice elemental): Observe que cuando el lápiz llega al vértice superior (0, b), la longitud de ambos hilos se vuelve igual a a, lo que da como resultado un triángulo rectángulo a al cuadrado = b al cuadrado + c al cuadrado.",
-        "fr": "Étape 4, page 4. Il s'agit de l'étape de dessin de la forme dynamique de gauche (affichant les zones vertes correspondantes et les éléments proportionnels). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Triangle rectangle du sommet élémentaire) : Observez que lorsque le crayon arrive au sommet supérieur (0, b), la longueur des deux fils devient la même que a, ce qui donne un triangle rectangle a au carré = b au carré + c au carré.",
-        "de": "Schritt 4, Seite 4. Dies ist die Phase des Zeichnens der linken dynamischen Form (Anzeige grüner entsprechender Bereiche und proportionaler Elemente). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (rechtwinkliges Dreieck mit elementarem Scheitelpunkt): Beachten Sie, dass, wenn der Bleistift den oberen Scheitelpunkt (0, b) erreicht, die Länge beider Fäden gleich a wird, was zu einem rechtwinkligen Dreieck a im Quadrat = b im Quadrat + c im Quadrat führt.",
-        "vi": "Bước 4, trang 4. Đây là giai đoạn vẽ hình động bên trái (hiển thị màu xanh lục các vùng tương ứng và các phần tử tỷ lệ). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Tam giác vuông đỉnh cơ bản): Quan sát thấy khi bút chì đi đến đỉnh trên cùng (0, b), độ dài của cả hai sợi dây bằng a, thu được một tam giác vuông a bình phương = b bình phương + c bình phương."
-      },
-      "durations": {
-        "ko": 23.656,
-        "en": 26.464
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "4단계, 4페이지 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 4 (Page 4). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 5,
@@ -178,8 +172,10 @@
         5,
         5
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "초록색 대응 영역 및 비례 요소 표시",
+      "step_title": "Step 5 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.2417,
@@ -187,23 +183,11 @@
         0.7521,
         0.7521
       ],
-      "explanation_text": "5단계, 5페이지입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 꼭짓점 직각삼각형): 연필이 맨 위 꼭짓점 (0, b) 에 올 때 양쪽 실의 길이가 a 로 같아져 직각삼각형 a 제곱 = b 제곱 + c 제곱 이 됨을 관찰",
+      "explanation_text": "5단계, 5페이지 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "5단계, 5페이지입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 꼭짓점 직각삼각형): 연필이 맨 위 꼭짓점 (0, b) 에 올 때 양쪽 실의 길이가 a 로 같아져 직각삼각형 a 제곱 = b 제곱 + c 제곱 이 됨을 관찰",
-        "en": "Step 5, page 5. This is the green corresponding area and proportional element display step. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Elementary Vertex Right Triangle): Observe that when the pencil comes to the top vertex (0, b), the length of both threads becomes the same as a, resulting in a right triangle a squared = b squared + c squared.",
-        "ja": "ステップ5、5ページです。緑色の対応領域と比例要素の表示段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等頂点直角三角形）：鉛筆が一番上の頂点（0、b）に入ると、両方の糸の長さがaに等しくなり、直角三角形a平方= b平方+ c平方になることを観察します。",
-        "zh-CN": "第5页第5步。这是绿色对应区域和比例元素显示步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤2（基本顶点直角三角形）：观察当铅笔到达顶部顶点（0，b）时，两条线的长度变得与a相同，从而形成直角三角形a的平方=b的平方+c的平方。",
-        "es": "Paso 5, página 5. Este es el área verde correspondiente y el paso de visualización del elemento proporcional. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Triángulo rectángulo de vértice elemental): Observe que cuando el lápiz llega al vértice superior (0, b), la longitud de ambos hilos se vuelve igual a a, lo que da como resultado un triángulo rectángulo a al cuadrado = b al cuadrado + c al cuadrado.",
-        "fr": "Étape 5, page 5. Il s'agit de l'étape d'affichage de la zone verte correspondante et de l'élément proportionnel. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Triangle rectangle du sommet élémentaire) : Observez que lorsque le crayon arrive au sommet supérieur (0, b), la longueur des deux fils devient la même que a, ce qui donne un triangle rectangle a au carré = b au carré + c au carré.",
-        "de": "Schritt 5, Seite 5. Dies ist der Anzeigeschritt für den grünen entsprechenden Bereich und das proportionale Element. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (rechtwinkliges Dreieck mit elementarem Scheitelpunkt): Beachten Sie, dass, wenn der Bleistift den oberen Scheitelpunkt (0, b) erreicht, die Länge beider Fäden gleich a wird, was zu einem rechtwinkligen Dreieck a im Quadrat = b im Quadrat + c im Quadrat führt.",
-        "vi": "Bước 5, trang 5. Đây là bước hiển thị vùng tương ứng và phần tử tỷ lệ màu xanh lá cây. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Tam giác vuông đỉnh cơ bản): Quan sát thấy khi bút chì đi đến đỉnh trên cùng (0, b), độ dài của cả hai sợi dây bằng a, thu được một tam giác vuông a bình phương = b bình phương + c bình phương."
-      },
-      "durations": {
-        "ko": 29.992,
-        "en": 34.6
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "5단계, 5페이지 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 5 (Page 5). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 6,
@@ -212,8 +196,10 @@
         6,
         6
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 6 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.5145,
@@ -221,23 +207,11 @@
         0.6467,
         0.5647
       ],
-      "explanation_text": "6단계, 6페이지입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (방정식과 접선 번역): 타원의 표준형 a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1 과 기울기 m 인 접선 y = mx pm 루트 a 제곱m 제곱+b 제곱 적용",
+      "explanation_text": "6단계, 6페이지 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "6단계, 6페이지입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (방정식과 접선 번역): 타원의 표준형 a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1 과 기울기 m 인 접선 y = mx pm 루트 a 제곱m 제곱+b 제곱 적용",
-        "en": "Step 6, page 6. This is the process of deriving the right proof formula (green corresponding area and proportional elements indicated). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of equations and tangents): Apply the standard form of an ellipse:",
-        "ja": "ステップ6、6ページです。右証明式の導出（緑色対応領域と比例要素の表示）プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（方程式と接線翻訳）：楕円の標準形a平方分のx平方+ b平方分のy平方= 1と勾配mの接線y = mx pmルートa平方m平方+ b平方適用",
-        "zh-CN": "第 6 页第 6 步。这是推导正确证明公式的过程（指示绿色对应区域和比例元素）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（方程和切线的平移）：应用椭圆的标准形式：",
-        "es": "Paso 6, página 6. Este es el proceso de derivar la fórmula de prueba correcta (área correspondiente en verde y elementos proporcionales indicados). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de ecuaciones y tangentes): Aplicar la forma estándar de una elipse:",
-        "fr": "Étape 6, page 6. Il s'agit du processus permettant de dériver la bonne formule de preuve (zone verte correspondante et éléments proportionnels indiqués). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction des équations et des tangentes) : Appliquer la forme standard d'une ellipse :",
-        "de": "Schritt 6, Seite 6. Dies ist der Prozess zur Ableitung der richtigen Beweisformel (grüne entsprechende Fläche und proportionale Elemente angezeigt). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung von Gleichungen und Tangenten): Wenden Sie die Standardform einer Ellipse an:",
-        "vi": "Bước 6, trang 6. Đây là quá trình suy ra công thức chứng minh đúng (diện tích tương ứng màu xanh lá cây và các phần tử tỷ lệ được chỉ định). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch phương trình và tiếp tuyến): Áp dụng dạng chuẩn của elip:"
-      },
-      "durations": {
-        "ko": 27.688,
-        "en": 32.296
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "6단계, 6페이지 단계입니다. 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 6 (Page 6). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 7,
@@ -246,8 +220,10 @@
         7,
         7
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 7 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.4483,
@@ -255,23 +231,11 @@
         0.5062,
         0.5675
       ],
-      "explanation_text": "7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (방정식과 접선 번역): 타원의 표준형 a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1 과 기울기 m 인 접선 y = mx pm 루트 a 제곱m 제곱+b 제곱 적용",
+      "explanation_text": "7단계, 7페이지 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
       "narrations": {
-        "ko": "7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (방정식과 접선 번역): 타원의 표준형 a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1 과 기울기 m 인 접선 y = mx pm 루트 a 제곱m 제곱+b 제곱 적용",
-        "en": "Step 7, page 7. This is the process of drawing basic blue shapes and reference line segments. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of equations and tangents): Apply the standard form of an ellipse:",
-        "ja": "ステップ7、7ページです。青の基本図形と基準線分作図プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（方程式と接線翻訳）：楕円の標準形a平方分のx平方+ b平方分のy平方= 1と勾配mの接線y = mx pmルートa平方m平方+ b平方適用",
-        "zh-CN": "第 7 页，步骤 7。这是绘制基本蓝色形状和参考线段的过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（方程和切线的平移）：应用椭圆的标准形式：",
-        "es": "Paso 7, página 7. Este es el proceso de dibujar formas azules básicas y segmentos de línea de referencia. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de ecuaciones y tangentes): Aplicar la forma estándar de una elipse:",
-        "fr": "Étape 7, page 7. Il s'agit du processus de dessin de formes bleues de base et de segments de ligne de référence. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction des équations et des tangentes) : Appliquer la forme standard d'une ellipse :",
-        "de": "Schritt 7, Seite 7. Dies ist der Prozess des Zeichnens grundlegender blauer Formen und Referenzliniensegmente. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung von Gleichungen und Tangenten): Wenden Sie die Standardform einer Ellipse an:",
-        "vi": "Bước 7, trang 7. Đây là quá trình vẽ các hình màu xanh cơ bản và các đoạn thẳng tham chiếu. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch phương trình và tiếp tuyến): Áp dụng dạng chuẩn của elip:"
-      },
-      "durations": {
-        "ko": 31.312,
-        "en": 26.896
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "7단계, 7페이지 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+        "en": "Step 7 (Page 7). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 8,
@@ -280,8 +244,10 @@
         8,
         8
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "초록색 대응 영역 및 비례 요소 표시",
+      "step_title": "Step 8 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.3616,
@@ -289,23 +255,11 @@
         0.5909,
         0.6832
       ],
-      "explanation_text": "8단계, 8페이지입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (방정식과 접선 번역): 타원의 표준형 a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1 과 기울기 m 인 접선 y = mx pm 루트 a 제곱m 제곱+b 제곱 적용",
+      "explanation_text": "8단계, 8페이지 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
       "narrations": {
-        "ko": "8단계, 8페이지입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (방정식과 접선 번역): 타원의 표준형 a 제곱 분의 x 제곱+b 제곱 분의 y 제곱=1 과 기울기 m 인 접선 y = mx pm 루트 a 제곱m 제곱+b 제곱 적용",
-        "en": "Step 8, page 8. This is the green corresponding area and proportional element display process. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of equations and tangents): Apply the standard form of an ellipse:",
-        "ja": "ステップ8、8ページです。緑色対応領域と比例要素表示処理です。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（方程式と接線翻訳）：楕円の標準形a平方分のx平方+ b平方分のy平方= 1と勾配mの接線y = mx pmルートa平方m平方+ b平方適用",
-        "zh-CN": "第8页第8步。这是绿色对应区域和比例元素的显示过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（方程和切线的平移）：应用椭圆的标准形式：",
-        "es": "Paso 8, página 8. Este es el área verde correspondiente y el proceso de visualización del elemento proporcional. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de ecuaciones y tangentes): Aplicar la forma estándar de una elipse:",
-        "fr": "Étape 8, page 8. Il s'agit du processus d'affichage de la zone verte correspondante et de l'élément proportionnel. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction des équations et des tangentes) : Appliquer la forme standard d'une ellipse :",
-        "de": "Schritt 8, Seite 8. Dies ist der Anzeigevorgang für den grünen entsprechenden Bereich und das proportionale Element. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung von Gleichungen und Tangenten): Wenden Sie die Standardform einer Ellipse an:",
-        "vi": "Bước 8, trang 8. Đây là quá trình hiển thị phần tử tỷ lệ và diện tích tương ứng màu xanh lá cây. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch phương trình và tiếp tuyến): Áp dụng dạng chuẩn của elip:"
-      },
-      "durations": {
-        "ko": 29.296,
-        "en": 23.968
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "8단계, 8페이지 단계입니다. 이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+        "en": "Step 8 (Page 8). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 9,
@@ -314,8 +268,10 @@
         9,
         9
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "붉은색 강조 보조선과 핵심 길이 표시",
+      "step_title": "Step 9 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Draw a circle that passes through the two points in the circle and touches this circle.?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "red",
       "diff_bbox": [
         0.3554,
@@ -323,23 +279,11 @@
         0.5682,
         0.6529
       ],
-      "explanation_text": "9단계, 9페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 두 초점을 공유하는 타원·쌍곡선 또는 초점을 지나는 직선에서 선분 PF=k 로 두고 선분 PF'=2a-k 로 치환하여 코사인법칙으로 해결",
+      "explanation_text": "9단계, 9페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "9단계, 9페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 두 초점을 공유하는 타원·쌍곡선 또는 초점을 지나는 직선에서 선분 PF=k 로 두고 선분 PF'=2a-k 로 치환하여 코사인법칙으로 해결",
-        "en": "Step 9, page 9. This is the final step of marking the red highlighted auxiliary lines and key lengths. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): In an ellipse, hyperbola that shares two foci, or a straight line passing through the foci, set the line segment PF=k and substitute the line segment PF'=2a-k to solve using the law of cosines.",
-        "ja": "ステップ9、9ページです。赤色の強調補助線とコアの長さを表示仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本項総合）：2つの焦点を共有する楕円・双曲線または焦点を通る直線で線分PF=kで置き、線分PF'=2a-kで置き換えてコサイン法則で解決",
-        "zh-CN": "第 9 页，步骤 9。这是标记红色突出显示的辅助线和键长度的最后一步。将前面步骤中的各个部分组合起来得出最终结论。步骤4（正文摘要）：在共享两个焦点的椭圆、双曲线或通过焦点的直线中，设线段PF=k，代入线段PF'=2a-k，利用余弦定理求解。",
-        "es": "Paso 9, página 9. Este es el paso final para marcar las líneas auxiliares resaltadas en rojo y las longitudes de las claves. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): En una elipse, hipérbola que comparte dos focos, o una línea recta que pasa por los focos, establece el segmento de línea PF=k y sustituye el segmento de línea PF'=2a-k para resolver usando la ley de los cosenos.",
-        "fr": "Étape 9, page 9. Il s'agit de la dernière étape consistant à marquer les lignes auxiliaires et les longueurs de clé surlignées en rouge. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Dans une ellipse, une hyperbole qui partage deux foyers, ou une ligne droite passant par les foyers, définissez le segment de droite PF=k et remplacez le segment de droite PF'=2a-k pour résoudre en utilisant la loi des cosinus.",
-        "de": "Schritt 9, Seite 9. Dies ist der letzte Schritt zum Markieren der rot hervorgehobenen Hilfslinien und Schlüssellängen. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Setzen Sie in einer Ellipse, einer Hyperbel, die zwei Brennpunkte teilt, oder einer geraden Linie, die durch die Brennpunkte verläuft, das Liniensegment PF=k und ersetzen Sie es durch das Liniensegment PF'=2a-k, um die Lösung mithilfe des Kosinusgesetzes zu lösen.",
-        "vi": "Bước 9, trang 9. Đây là bước cuối cùng trong việc đánh dấu các đường phụ và độ dài phím được tô sáng màu đỏ. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Trong một hình elip, hyperbol có chung hai tiêu điểm hoặc một đường thẳng đi qua tiêu điểm, đặt đoạn thẳng PF=k và thay đoạn thẳng PF'=2a-k để giải bằng định lý cosin."
-      },
-      "durations": {
-        "ko": 29.344,
-        "en": 24.016
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "9단계, 9페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 9 (Page 9). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Draw a circle that passes through the two points in the circle and touches this circle.."
+      }
     },
     {
       "page": 10,
@@ -348,8 +292,10 @@
         10,
         10
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "붉은색 강조 보조선과 핵심 길이 표시",
+      "step_title": "Step 10 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Draw a circle that passes through the two points in the circle and touches this circle.?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "red",
       "diff_bbox": [
         0.2769,
@@ -357,23 +303,11 @@
         0.7231,
         0.8623
       ],
-      "explanation_text": "10단계, 10페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 두 초점을 공유하는 타원·쌍곡선 또는 초점을 지나는 직선에서 선분 PF=k 로 두고 선분 PF'=2a-k 로 치환하여 코사인법칙으로 해결",
+      "explanation_text": "10단계, 10페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "10단계, 10페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 두 초점을 공유하는 타원·쌍곡선 또는 초점을 지나는 직선에서 선분 PF=k 로 두고 선분 PF'=2a-k 로 치환하여 코사인법칙으로 해결",
-        "en": "10 steps, 10 pages. This is the final step of marking the red highlighted auxiliary lines and key lengths. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): In an ellipse, hyperbola that shares two foci, or a straight line passing through the foci, set the line segment PF=k and substitute the line segment PF'=2a-k to solve using the law of cosines.",
-        "ja": "ステップ10、10ページです。赤色の強調補助線とコアの長さを表示仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本項総合）：2つの焦点を共有する楕円・双曲線または焦点を通る直線で線分PF=kで置き、線分PF'=2a-kで置き換えてコサイン法則で解決",
-        "zh-CN": "10 个步骤，10 页。这是标记红色突出显示的辅助线和键长度的最后一步。将前面步骤中的各个部分组合起来得出最终结论。步骤4（正文摘要）：在共享两个焦点的椭圆、双曲线或通过焦点的直线中，设线段PF=k，代入线段PF'=2a-k，利用余弦定理求解。",
-        "es": "10 pasos, 10 páginas. Este es el paso final para marcar las líneas auxiliares resaltadas en rojo y las longitudes de las claves. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): En una elipse, hipérbola que comparte dos focos, o una línea recta que pasa por los focos, establece el segmento de línea PF=k y sustituye el segmento de línea PF'=2a-k para resolver usando la ley de los cosenos.",
-        "fr": "10 étapes, 10 pages. Il s'agit de la dernière étape du marquage des lignes auxiliaires et des longueurs de clé surlignées en rouge. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Dans une ellipse, une hyperbole qui partage deux foyers, ou une ligne droite passant par les foyers, définissez le segment de droite PF=k et remplacez le segment de droite PF'=2a-k pour résoudre en utilisant la loi des cosinus.",
-        "de": "10 Schritte, 10 Seiten. Dies ist der letzte Schritt zum Markieren der rot hervorgehobenen Hilfslinien und Schlüssellängen. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Setzen Sie in einer Ellipse, einer Hyperbel, die zwei Brennpunkte teilt, oder einer geraden Linie, die durch die Brennpunkte verläuft, das Liniensegment PF=k und ersetzen Sie es durch das Liniensegment PF'=2a-k, um die Lösung mithilfe des Kosinusgesetzes zu lösen.",
-        "vi": "10 bước, 10 trang. Đây là bước cuối cùng để đánh dấu các đường phụ và độ dài phím được đánh dấu màu đỏ. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Trong một hình elip, hyperbol có chung hai tiêu điểm hoặc một đường thẳng đi qua tiêu điểm, đặt đoạn thẳng PF=k và thay đoạn thẳng PF'=2a-k để giải bằng định lý cosin."
-      },
-      "durations": {
-        "ko": 25.96,
-        "en": 31.168
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "10단계, 10페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 10 (Page 10). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Draw a circle that passes through the two points in the circle and touches this circle.."
+      }
     },
     {
       "page": 11,
@@ -382,8 +316,10 @@
         11,
         11
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요?",
+      "step_question_en": "🔀 [What-If-Not] How does Draw a circle that passes through the two points in the circle and touches this circle. evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.0764,
@@ -391,148 +327,11 @@
         0.9628,
         0.8871
       ],
-      "explanation_text": "마지막 11단계입니다. 지금까지 총 11프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 타원 위의 점 P 가 주어지면 방정식에 대입하기 전에 무조건 두 초점 F, F' 와 연결하여 한 변을 k , 다른 변을 2a-k 로 세팅하세요.",
+      "explanation_text": "마지막 11단계, 증명이 완성되었습니다! 출발 조건이었던 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건에서 시작해, 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 거쳐, '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 11단계입니다. 지금까지 총 11프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 타원 위의 점 P 가 주어지면 방정식에 대입하기 전에 무조건 두 초점 F, F' 와 연결하여 한 변을 k , 다른 변을 2a-k 로 세팅하세요.",
-        "en": "Step 11. We have completed the entire 11-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself.",
-        "ja": "最後の11段階です。これまで、合計11フレームのフリップブック作図を通じて整理を完全に証明しました。実践のヒントとして、楕円の上の点Pが与えられたら、方程式に代入する前に、無条件に2つの焦点F、F 'に接続して、一方の辺をk、もう一方の辺を2a-kに設定します。",
-        "zh-CN": "这是最后 11 个步骤。至此，我们已经通过总共11帧的翻页图画完全证明了该定理。作为实用提示，如果给定椭圆上的点 P，在将其代入方程之前，请务必将其与两个焦点 F 和 F' 连接，并将一侧设置为 k，另一侧设置为 2a-k。",
-        "es": "Estos son los últimos 11 pasos. Hasta ahora hemos demostrado completamente el teorema mediante un dibujo en formato flipbook de un total de 11 fotogramas. Como consejo práctico, si te dan un punto P en una elipse, antes de sustituirlo en la ecuación, asegúrate de conectarlo con los dos focos F y F' y establecer un lado en k y el otro en 2a-k.",
-        "fr": "Ce sont les 11 dernières étapes. Jusqu’à présent, nous avons complètement prouvé le théorème à travers un dessin flipbook d’un total de 11 images. À titre pratique, si on vous donne un point P sur une ellipse, avant de le substituer dans l'équation, assurez-vous de le connecter aux deux foyers F et F' et définissez un côté sur k et l'autre côté sur 2a-k.",
-        "de": "Dies sind die letzten 11 Schritte. Bisher haben wir den Satz durch eine Daumenkino-Zeichnung von insgesamt 11 Bildern vollständig bewiesen. Als praktischer Tipp: Wenn Sie einen Punkt P auf einer Ellipse erhalten, stellen Sie vor dem Einsetzen in die Gleichung sicher, dass Sie ihn mit den beiden Brennpunkten F und F' verbinden und eine Seite auf k und die andere Seite auf 2a-k setzen.",
-        "vi": "Đây là 11 bước cuối cùng. Cho đến nay, chúng ta đã chứng minh được hoàn toàn định lý thông qua một bản vẽ flipbook có tổng cộng 11 khung hình. Một mẹo thực tế, nếu bạn được cho một điểm P trên một hình elip, trước khi thay nó vào phương trình, hãy đảm bảo kết nối nó với hai tiêu điểm F và F' và đặt một bên là k và bên kia là 2a-k."
-      },
-      "durations": {
-        "ko": 26.032,
-        "en": 31.144
-      },
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떤 새로운 정리가 탄생할까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this figure?"
+        "ko": "마지막 11단계, 증명이 완성되었습니다! 출발 조건이었던 초점과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'의 기하학적 출발 조건에서 시작해, 곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도을 거쳐, '원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 11. The visual proof of Draw a circle that passes through the two points in the circle and touches this circle. is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
+      }
     }
-  ],
-  "youtube_packages": {
-    "ko": {
-      "lang": "ko",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "🔥 [시각적 증명] 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two poin...",
-      "description": "공식 암기 없이 눈으로 보고 직관적으로 깨치는 [원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circle and touches this circle.)] 11단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다.\n📋 전체 1,111개 수학자료 설명영상 게시판 & 직접 실습: https://min7014.github.io/mathedu/video_board.html?slug=2022051506\n\n💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 11페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!\n\n🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ\n\n🔔 [@min7014_ai 채널 구독하기]: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n🌐 대화형 GeoGebra 직접 조작하기: https://min7014.github.io/math20220515006.html\n📄 단계별 플립북 증명 PDF 원문: https://min7014.github.io/2022/2022051506.pdf\n🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html?slug=2022051506\n식별 코드: [ID: 2022051506_KO]\n\n⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n00:00 0페이지/11 — 한 초점에서 쏜 빛은 어느 방향으로 날아가든 곡면에 반사된 뒤 반드시 다른 초점 한 곳으로 모입니다! 접선 대칭...\n00:14 1페이지/11 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원 안에 있는 두 점을 지...\n01:00 2페이지/11 — 2단계, 2페이지입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인...\n01:23 3페이지/11 — 3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확...\n01:47 4페이지/11 — 4단계, 4페이지입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 단계입니다. 연속적으로 ...\n02:17 5페이지/11 — 5단계, 5페이지입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분...\n02:45 6페이지/11 — 6단계, 6페이지입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직...\n03:16 7페이지/11 — 7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...\n03:45 8페이지/11 — 8단계, 8페이지입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...\n04:15 9페이지/11 — 9단계, 9페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해 최...\n04:41 10페이지/11 — 10단계, 10페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해...\n05:07 11페이지/11 — 마지막 11단계입니다. 지금까지 총 11프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ...\n\n#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014",
-      "tags": [
-        "수학",
-        "기하학",
-        "시각적 증명",
-        "수능 수학",
-        "도형 보조선",
-        "피타고라스 정리",
-        "메넬라우스의 정리",
-        "체바의 정리",
-        "중학교 도형",
-        "고등학교 수학",
-        "수능 도형 킬러",
-        "영재고 수학",
-        "KMO 기하",
-        "GeoGebra",
-        "알지오매스",
-        "민은기 선생님의 수학자료실",
-        "민은기 선생님의 수학자료실_AI",
-        "min7014_ai",
-        "min7014",
-        "수학 잘하는 법"
-      ],
-      "quiz_comment": "💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 11페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!",
-      "categoryId": "27",
-      "defaultLanguage": "ko",
-      "chapters": [
-        "00:00 0페이지/11 — 한 초점에서 쏜 빛은 어느 방향으로 날아가든 곡면에 반사된 뒤 반드시 다른 초점 한 곳으로 모입니다! 접선 대칭...",
-        "00:14 1페이지/11 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 원 안에 있는 두 점을 지...",
-        "01:00 2페이지/11 — 2단계, 2페이지입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인...",
-        "01:23 3페이지/11 — 3단계, 3페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확...",
-        "01:47 4페이지/11 — 4단계, 4페이지입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 단계입니다. 연속적으로 ...",
-        "02:17 5페이지/11 — 5단계, 5페이지입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분...",
-        "02:45 6페이지/11 — 6단계, 6페이지입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직...",
-        "03:16 7페이지/11 — 7단계, 7페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...",
-        "03:45 8페이지/11 — 8단계, 8페이지입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 ...",
-        "04:15 9페이지/11 — 9단계, 9페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해 최...",
-        "04:41 10페이지/11 — 10단계, 10페이지입니다. 붉은색 강조 보조선과 핵심 길이 표시 마무리 단계입니다. 앞 단계의 조각들을 결합해...",
-        "05:07 11페이지/11 — 마지막 11단계입니다. 지금까지 총 11프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ..."
-      ],
-      "total_duration_sec": 329.69,
-      "srt_url": "video_lectures/youtube_packages/2022051506_ko.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2022051506_ko_thumb.png",
-      "local_mp4_path": "youtube_uploads/2022051506/2022051506_ko.mp4"
-    },
-    "en": {
-      "lang": "en",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "✨ (Draw a circle that passes through the two points in the circle and touches this circle.) — S...",
-      "description": "Why does (Draw a circle that passes through the two points in the circle and touches this circle.) hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!\n📋 Full 1,111 Math Video Board & Interactive GeoGebra: https://min7014.github.io/mathedu/video_board.html?slug=2022051506\n\n💬 [10-Second Eureka Quiz] Which step (1 to 11) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!\n\n🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E\n\n🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n🌐 Interactive GeoGebra & Flipbook Web Page: https://min7014.github.io/math20220515006.html\n📄 Original Step-by-Step PDF: https://min7014.github.io/2022/2022051506.pdf\n🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html?slug=2022051506\nTopic ID: [ID: 2022051506_EN]\n\n⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n00:00 Step 0/11 — Every ray of light shot from one focus reflects off the curve ...\n00:10 Step 1/11 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...\n00:26 Step 2/11 — Step 2, page 2. This is a process of core geometric constructi...\n00:53 Step 3/11 — Step 3, page 3. In the process of drawing blue basic shapes an...\n01:20 Step 4/11 — Step 4, page 4. This is the stage of drawing the left dynamic ...\n01:55 Step 5/11 — Step 5, page 5. This is the green corresponding area and propo...\n02:27 Step 6/11 — Step 6, page 6. This is the process of deriving the right proo...\n02:54 Step 7/11 — Step 7, page 7. This is the process of drawing basic blue shap...\n03:18 Step 8/11 — Step 8, page 8. This is the green corresponding area and propo...\n03:42 Step 9/11 — Step 9, page 9. This is the final step of marking the red high...\n04:13 Step 10/11 — 10 steps, 10 pages. This is the final step of marking the red ...\n04:44 Step 11/11 — Step 11. We have completed the entire 11-frame visual proof! V...\n\n#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014",
-      "tags": [
-        "Visual Math Proof",
-        "Geometry Proof",
-        "Proof Without Words",
-        "Euclidean Geometry",
-        "Pythagorean Theorem",
-        "Ceva Theorem",
-        "Menelaus Theorem",
-        "GeoGebra",
-        "Math Animation",
-        "3Blue1Brown style math",
-        "Step by Step Math",
-        "High School Geometry",
-        "Math Olympiad",
-        "AMC Math",
-        "SAT Math",
-        "Min's Math Lab",
-        "min7014_ai",
-        "min7014"
-      ],
-      "quiz_comment": "💬 [10-Second Eureka Quiz] Which step (1 to 11) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!",
-      "categoryId": "27",
-      "defaultLanguage": "en",
-      "chapters": [
-        "00:00 Step 0/11 — Every ray of light shot from one focus reflects off the curve ...",
-        "00:10 Step 1/11 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...",
-        "00:26 Step 2/11 — Step 2, page 2. This is a process of core geometric constructi...",
-        "00:53 Step 3/11 — Step 3, page 3. In the process of drawing blue basic shapes an...",
-        "01:20 Step 4/11 — Step 4, page 4. This is the stage of drawing the left dynamic ...",
-        "01:55 Step 5/11 — Step 5, page 5. This is the green corresponding area and propo...",
-        "02:27 Step 6/11 — Step 6, page 6. This is the process of deriving the right proo...",
-        "02:54 Step 7/11 — Step 7, page 7. This is the process of drawing basic blue shap...",
-        "03:18 Step 8/11 — Step 8, page 8. This is the green corresponding area and propo...",
-        "03:42 Step 9/11 — Step 9, page 9. This is the final step of marking the red high...",
-        "04:13 Step 10/11 — 10 steps, 10 pages. This is the final step of marking the red ...",
-        "04:44 Step 11/11 — Step 11. We have completed the entire 11-frame visual proof! V..."
-      ],
-      "total_duration_sec": 298.39,
-      "srt_url": "video_lectures/youtube_packages/2022051506_en.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2022051506_en_thumb.png",
-      "local_mp4_path": "youtube_uploads/2022051506/2022051506_en.mp4"
-    }
-  },
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을 작도하여라.(Draw a circle that passes through the two points in the circ",
-      "local_mp4_path": "video_lectures/shorts/2022051506_short_ko.mp4",
-      "duration_sec": 45.12,
-      "aspect_ratio": "9:16 (1080x1920)"
-    },
-    "en": {
-      "title": "🔥 (Draw a circle that passes through the two points in the circle and touches this circle.) — 45s Vi",
-      "local_mp4_path": "video_lectures/shorts/2022051506_short_en.mp4",
-      "duration_sec": 33.93,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  },
-  "pedagogy_style": "v5.0 Question-Asking Classroom (Notice & Wonder -> Socratic Pólya -> What-If-Not)"
+  ]
 }

@@ -3,11 +3,12 @@
   "title": "$(a+b)(c+d)=ab+ac+bc+bd$",
   "title_en": "(a+b)(c+d)=ab+ac+bc+bd",
   "sub_domain_ko": "다항식·방정식·수체계",
-  "core_concept": "[$(a+b)(c+d)=ab+ac+bc+bd$] 유리수·순환소수·실수·복소수($i=\\sqrt{-1}$)로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘($A=BQ+R$), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
-  "solving_tip": "무리방정식 $\\sqrt{f(x)} = g(x)$를 양변 제곱하여 풀었을 때는 $g(x) < 0$인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 $g(x) \\ge 0$ 조건을 먼저 걸어 걸러내세요!",
+  "core_concept": "'(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정) ➔ '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+  "solving_tip": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
   "pdf_url": "https://min7014.github.io/2019/2019082002.pdf",
   "web_url": "https://min7014.github.io/math20190820001.html",
   "page_count": 21,
+  "scene_count": 12,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/ZD6GrL_fKT4"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "algebra",
+    "hypothesis_ko": "'(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)",
+    "conclusion_ko": "'(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+    "auxiliary_line_ko": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
+    "proof_logic_ko": "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리",
+    "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+    "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,28 +81,16 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] (a+b)(c+d)=ab+ac+bc+bd에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in (a+b)(c+d)=ab+ac+bc+bd?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 (a+b)(c+d)=ab+ac+bc+bd의 핵심 원리를 동적 플립북으로 증명해 봅시다. [ (a+b)(c+d)=ab+ac+bc+bd ] 유리수·순환소수·실수·복소수( i=루트 -1 )로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘( A=BQ+R ), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 (a+b)(c+d)=ab+ac+bc+bd입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)입니다. 왜 이 조건에서 '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 (a+b)(c+d)=ab+ac+bc+bd의 핵심 원리를 동적 플립북으로 증명해 봅시다. [ (a+b)(c+d)=ab+ac+bc+bd ] 유리수·순환소수·실수·복소수( i=루트 -1 )로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘( A=BQ+R ), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법.",
-        "en": "Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore (a+b)(c+d)=ab+ac+bc+bd and see why this mathematical property holds.",
-        "ja": "1段階です。ミン・ウンギ先生の数学資料室段階別視覚証明講義です。今回は(a+b)(c+d)=ab+ac+bc+bdの核心原理を動的フリップブックとして証明しましょう。 [(a+b)(c+d)=ab+ac+bc+bd] 有理数・循環素数・実数・複素数(i=ルート-1)につながる水体系の完成性と多項式の除算アルゴリズム(A=BQ+R)、因数分解、二次・三次・分数・無理方程式。",
-        "zh-CN": "这是第一步。这是 Eunki Min 老师数学资源室的分步视觉证明讲座。这次我们用动态翻书来证明(a+b)(c+d)=ab+ac+bc+bd的核心原理。 [ (a+b)(c+d)=ab+ac+bc+bd] 数字系统的完整性导致有理数、循环小数、实数和复数 (i=root -1)、多项式除法算法 (A=BQ+R)、因式分解以及二次、三次、分数和群方程的代数解。",
-        "es": "Este es el paso 1. Esta es una conferencia de prueba visual paso a paso de la sala de recursos de matemáticas del maestro Eunki Min. Esta vez, demostremos el principio básico de (a+b)(c+d)=ab+ac+bc+bd con un flipbook dinámico. [ (a+b)(c+d)=ab+ac+bc+bd] Completitud del sistema numérico que conduce a números racionales, decimales periódicos, números reales y números complejos (i=raíz -1), algoritmo de división de polinomios (A=BQ+R), factorización y soluciones algebraicas para ecuaciones cuadráticas, cúbicas, fraccionarias y de grupo.",
-        "fr": "Il s'agit de l'étape 1. Il s'agit d'une démonstration visuelle étape par étape de la salle de ressources mathématiques du professeur Eunki Min. Cette fois, prouvons le principe de base de (a+b)(c+d)=ab+ac+bc+bd avec un flipbook dynamique. [ (a+b)(c+d)=ab+ac+bc+bd] Complétude du système numérique menant aux nombres rationnels, aux décimales répétitives, aux nombres réels et aux nombres complexes (i=racine -1), à l'algorithme de division pour les polynômes (A=BQ+R), à la factorisation et aux solutions algébriques pour les équations quadratiques, cubiques, fractionnaires et de groupe.",
-        "de": "Dies ist Schritt 1. Dies ist eine schrittweise visuelle Beweisvorlesung aus dem Mathe-Ressourcenraum der Lehrerin Eunki Min. Lassen Sie uns dieses Mal das Kernprinzip von (a+b)(c+d)=ab+ac+bc+bd mit einem dynamischen Daumenkino beweisen. [ (a+b)(c+d)=ab+ac+bc+bd] Vollständigkeit des Zahlensystems, das zu rationalen Zahlen, sich wiederholenden Dezimalzahlen, reellen Zahlen und komplexen Zahlen (i=Wurzel -1), Divisionsalgorithmus für Polynome (A=BQ+R), Faktorisierung und algebraischen Lösungen für quadratische, kubische, Bruch- und Gruppengleichungen führt.",
-        "vi": "Đây là bước 1. Đây là bài giảng chứng minh trực quan từng bước từ phòng tài liệu toán của giáo viên Eunki Min. Lần này, chúng ta hãy chứng minh nguyên tắc cốt lõi của (a+b)(c+d)=ab+ac+bc+bd bằng một cuốn sách lật động. [ (a+b)(c+d)=ab+ac+bc+bd] Tính hoàn chỉnh của hệ thống số dẫn đến số hữu tỷ, số thập phân lặp lại, số thực và số phức (i=root -1), thuật toán chia cho đa thức (A=BQ+R), phân tích nhân tử và giải đại số cho phương trình bậc hai, bậc ba, phân số và nhóm."
-      },
-      "durations": {
-        "en": 9.162
-      },
-      "step_question_ko": "❓ [Notice & Wonder] 에서 움직여도 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in (a+b)(c+d)=ab+ac+bc+bd, and why?",
-      "question_narrations": {
-        "ko": "1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? 에서 움직여도 변하지 않는 불변량은 무엇일까요? 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 (a+b)(c+d)=ab+ac+bc+bd의 핵심 원리를 동적 플립북으로 증명해 봅시다. [ (a+b)(c+d)=ab+ac+bc+bd ] 유리수·순환소수·실수·복소수( i=루트 -1 )로 이어지는 수체계의 완비성과 다항식의 나눗셈 알고리즘( A=BQ+R ), 인수분해, 이차·삼차·분수·무리방정식의 대수적 해법."
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 (a+b)(c+d)=ab+ac+bc+bd입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)입니다. 왜 이 조건에서 '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore (a+b)(c+d)=ab+ac+bc+bd through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
       }
     },
     {
@@ -78,8 +100,10 @@
         2,
         3
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 2 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] (a+b)(c+d)=ab+ac+bc+bd를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove (a+b)(c+d)=ab+ac+bc+bd?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.0806,
@@ -87,24 +111,10 @@
         0.7624,
         0.4931
       ],
-      "explanation_text": "2단계, 2페이지부터 3페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 나눗셈 검산식과 넓이 타일): 17 div 5 = 3 cdots 2 를 검산식 17 = 5 times 3 + 2 로 쓰는 원리와 직사각형 타일 넓이 합치기",
+      "explanation_text": "2단계, 2페이지부터 3페이지까지의 단계입니다. 먼저 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "2단계, 2페이지부터 3페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 나눗셈 검산식과 넓이 타일): 17 div 5 = 3 cdots 2 를 검산식 17 = 5 times 3 + 2 로 쓰는 원리와 직사각형 타일 넓이 합치기",
-        "en": "Step 2, continuous movement from page 2 to page 3. In the left dynamic shape construction (core geometry construction and continuous motion development) process, check the basic shapes and reference points shown on the screen. Step 1 (Elementary division calculation and area tiles): The principle of writing 17 div 5 = 3 cdots 2 as the calculation 17 = 5 times 3 + 2 and combining the areas of rectangular tiles",
-        "ja": "2段階、2ページから3ページまでの連続動きです。左のダイナミック図形作図（核心幾何作図と連続モーション展開）プロセスで、画面に表示される基本図形と基準点を確認します。ステップ 1 (初等除算検算式と幅タイル): 17 div 5 = 3 cdots 2 を検算式 17 = 5 times 3 + 2 とする原理と長方形タイル幅を合わせる",
-        "zh-CN": "步骤2，从第2页连续移动到第3页。在左侧动态形状构建（核心几何构建和连续运动发展）过程中，检查屏幕上显示的基本形状和参考点。步骤1（初等划分计算和面积图块）：将17 div 5 = 3 cdots 2 写为计算17 = 5 × 3 + 2 并合并矩形图块面积的原理",
-        "es": "Paso 2, movimiento continuo de la página 2 a la página 3. En el proceso de construcción de formas dinámicas izquierda (construcción de geometría central y desarrollo de movimiento continuo), verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Cálculo de división elemental y mosaicos de área): El principio de escribir 17 div 5 = 3 cdots 2 como cálculo 17 = 5 por 3 + 2 y combinar las áreas de mosaicos rectangulares",
-        "fr": "Étape 2, mouvement continu de la page 2 à la page 3. Dans le processus de construction de forme dynamique gauche (construction de la géométrie de base et développement du mouvement continu), vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Calcul de division élémentaire et tuiles de surface) : Le principe d'écrire 17 div 5 = 3 cdots 2 comme le calcul 17 = 5 fois 3 + 2 et de combiner les surfaces des tuiles rectangulaires",
-        "de": "Schritt 2, kontinuierliche Bewegung von Seite 2 zu Seite 3. Überprüfen Sie im linken dynamischen Formkonstruktionsprozess (Kerngeometriekonstruktion und kontinuierliche Bewegungsentwicklung) die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Elementare Divisionsberechnung und Flächenkacheln): Das Prinzip, 17 div 5 = 3 cdots 2 als Berechnung 17 = 5 mal 3 + 2 zu schreiben und die Flächen rechteckiger Kacheln zu kombinieren",
-        "vi": "Bước 2, chuyển động liên tục từ trang 2 đến trang 3. Trong quá trình xây dựng hình dạng động bên trái (xây dựng hình học lõi và phát triển chuyển động liên tục), hãy kiểm tra các hình dạng cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Tính toán chia cơ bản và diện tích ô): Nguyên tắc viết 17 div 5 = 3 cdots 2 dưới dạng phép tính 17 = 5 nhân 3 + 2 và gộp diện tích các ô hình chữ nhật"
-      },
-      "durations": {
-        "en": 17.32
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?",
-      "question_narrations": {
-        "ko": "2단계 탐구 발문입니다! 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 2페이지부터 3페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 나눗셈 검산식과 넓이 타일): 17 div 5 = 3 cdots 2 를 검산식 17 = 5 times 3 + 2 로 쓰는 원리와 직사각형 타일 넓이 합치기"
+        "ko": "2단계, 2페이지부터 3페이지까지의 단계입니다. 먼저 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 2 (Page 2). First, we set up the fundamental definition for (a+b)(c+d)=ab+ac+bc+bd before performing any algebraic manipulation."
       }
     },
     {
@@ -114,8 +124,10 @@
         4,
         5
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 3 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] (a+b)(c+d)=ab+ac+bc+bd를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove (a+b)(c+d)=ab+ac+bc+bd?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.2293,
@@ -123,24 +135,10 @@
         0.8037,
         0.7218
       ],
-      "explanation_text": "3단계, 4페이지부터 5페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 나눗셈 검산식과 넓이 타일): 17 div 5 = 3 cdots 2 를 검산식 17 = 5 times 3 + 2 로 쓰는 원리와 직사각형 타일 넓이 합치기",
+      "explanation_text": "3단계, 4페이지부터 5페이지까지의 단계입니다. 먼저 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "3단계, 4페이지부터 5페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 나눗셈 검산식과 넓이 타일): 17 div 5 = 3 cdots 2 를 검산식 17 = 5 times 3 + 2 로 쓰는 원리와 직사각형 타일 넓이 합치기",
-        "en": "Step 3, continuous movement from page 4 to page 5. In the process of drawing blue basic shapes and reference line segments, check the basic shapes and reference points shown on the screen. Step 1 (Elementary division calculation and area tiles): The principle of writing 17 div 5 = 3 cdots 2 as the calculation 17 = 5 times 3 + 2 and combining the areas of rectangular tiles",
-        "ja": "3段階、4ページから5ページまでの連続動きです。青の基本図形と基準線分作成プロセスで、画面に表示される基本図形と基準点を確認します。ステップ 1 (初等除算検算式と幅タイル): 17 div 5 = 3 cdots 2 を検算式 17 = 5 times 3 + 2 とする原理と長方形タイル幅を合わせる",
-        "zh-CN": "步骤3，从第4页连续移动到第5页。在绘制蓝色基本形状和参考线段的过程中，检查屏幕上显示的基本形状和参考点。步骤1（初等划分计算和面积图块）：将17 div 5 = 3 cdots 2 写为计算17 = 5 × 3 + 2 并合并矩形图块面积的原理",
-        "es": "Paso 3, movimiento continuo de la página 4 a la página 5. En el proceso de dibujar formas básicas azules y segmentos de línea de referencia, verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Cálculo de división elemental y mosaicos de área): El principio de escribir 17 div 5 = 3 cdots 2 como cálculo 17 = 5 por 3 + 2 y combinar las áreas de mosaicos rectangulares",
-        "fr": "Étape 3, mouvement continu de la page 4 à la page 5. Lors du processus de dessin des formes de base bleues et des segments de ligne de référence, vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Calcul de division élémentaire et tuiles de surface) : Le principe d'écrire 17 div 5 = 3 cdots 2 comme le calcul 17 = 5 fois 3 + 2 et de combiner les surfaces des tuiles rectangulaires",
-        "de": "Schritt 3, kontinuierlicher Übergang von Seite 4 zu Seite 5. Überprüfen Sie beim Zeichnen blauer Grundformen und Referenzliniensegmente die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Elementare Divisionsberechnung und Flächenkacheln): Das Prinzip, 17 div 5 = 3 cdots 2 als Berechnung 17 = 5 mal 3 + 2 zu schreiben und die Flächen rechteckiger Kacheln zu kombinieren",
-        "vi": "Bước 3, chuyển động liên tục từ trang 4 đến trang 5. Trong quá trình vẽ các hình cơ bản màu xanh và các đoạn đường tham chiếu, hãy kiểm tra các hình cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Tính toán chia cơ bản và diện tích ô): Nguyên tắc viết 17 div 5 = 3 cdots 2 dưới dạng phép tính 17 = 5 nhân 3 + 2 và gộp diện tích các ô hình chữ nhật"
-      },
-      "durations": {
-        "en": 38.933
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?",
-      "question_narrations": {
-        "ko": "3단계 탐구 발문입니다! 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 4페이지부터 5페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 나눗셈 검산식과 넓이 타일): 17 div 5 = 3 cdots 2 를 검산식 17 = 5 times 3 + 2 로 쓰는 원리와 직사각형 타일 넓이 합치기"
+        "ko": "3단계, 4페이지부터 5페이지까지의 단계입니다. 먼저 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 3 (Page 4). First, we set up the fundamental definition for (a+b)(c+d)=ab+ac+bc+bd before performing any algebraic manipulation."
       }
     },
     {
@@ -150,8 +148,10 @@
         6,
         7
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)",
+      "step_title": "Step 4 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] (a+b)(c+d)=ab+ac+bc+bd를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove (a+b)(c+d)=ab+ac+bc+bd?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.2397,
@@ -159,24 +159,10 @@
         0.8574,
         0.7961
       ],
-      "explanation_text": "4단계, 6페이지부터 7페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
+      "explanation_text": "4단계, 6페이지부터 7페이지까지의 단계입니다. 먼저 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "4단계, 6페이지부터 7페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
-        "en": "Step 4, continuous movement from pages 6 to 7. This is the step of deriving the right proof formula (drawing blue basic shapes and reference line segments). Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Balancing an elementary two-arm scale): Find the unknown x by using the fact that the scale remains horizontal (equal sign = ) even if you add, subtract, or divide the same number on both sides.",
-        "ja": "4段階、6ページから7ページまでの連続動きです。右証明式の導出（青の基本図形と基準線分の作図）ステップ。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等両腕天びんバランスを合わせる）：天びんの両側に同じ数を加えたり減算しても水平（等号＝）が維持されることを利用して未知数×を求める",
-        "zh-CN": "第四步，从第6页连续移动到第7页。这是推导正确证明公式的步骤（绘制蓝色基本形状和参考线段）。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（平衡基本双臂秤）：即使在两侧添加、减去或除以相同的数字，秤仍保持水平（等号 = ），从而找到未知 x。",
-        "es": "Paso 4, movimiento continuo de las páginas 6 a 7. Este es el paso para derivar la fórmula de prueba correcta (dibujar formas básicas azules y segmentos de línea de referencia). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Equilibrio de una escala elemental de dos brazos): Encuentra la x desconocida aprovechando el hecho de que la escala permanece horizontal (signo igual = ) incluso si sumas, restas o divides el mismo número en ambos lados.",
-        "fr": "Étape 4, mouvement continu des pages 6 à 7. C'est l'étape de dérivation de la bonne formule de preuve (dessiner des formes de base bleues et des segments de ligne de référence). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Équilibrer une échelle élémentaire à deux bras) : Trouvez l'inconnu x en utilisant le fait que l'échelle reste horizontale (signe égal = ) même si vous ajoutez, soustrayez ou divisez le même nombre des deux côtés.",
-        "de": "Schritt 4, kontinuierlicher Übergang von Seite 6 bis 7. Dies ist der Schritt zur Ableitung der richtigen Beweisformel (Zeichnen blauer Grundformen und Referenzliniensegmente). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Ausbalancieren einer elementaren zweiarmigen Skala): Finden Sie das unbekannte x, indem Sie die Tatsache nutzen, dass die Skala horizontal bleibt (Gleichheitszeichen = ), selbst wenn Sie auf beiden Seiten dieselbe Zahl addieren, subtrahieren oder dividieren.",
-        "vi": "Bước 4, chuyển động liên tục từ trang 6 đến trang 7. Đây là bước rút ra công thức chứng minh đúng (vẽ các hình cơ bản màu xanh và các đoạn thẳng tham chiếu). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Cân thang đo cơ bản hai nhánh): Tìm x chưa biết bằng cách sử dụng thực tế là thang đo vẫn nằm ngang (dấu bằng = ) ngay cả khi bạn cộng, trừ hoặc chia cùng một số ở cả hai vế."
-      },
-      "durations": {
-        "en": 34.933
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?",
-      "question_narrations": {
-        "ko": "4단계 탐구 발문입니다! 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 6페이지부터 7페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기"
+        "ko": "4단계, 6페이지부터 7페이지까지의 단계입니다. 먼저 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 4 (Page 6). First, we set up the fundamental definition for (a+b)(c+d)=ab+ac+bc+bd before performing any algebraic manipulation."
       }
     },
     {
@@ -186,8 +172,10 @@
         8,
         9
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도)",
+      "step_title": "Step 5 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Algebraic Bridge Q] What algebraic transformation or visual model bridges our starting expression to the target?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.1281,
@@ -195,24 +183,10 @@
         0.5207,
         0.7107
       ],
-      "explanation_text": "5단계, 8페이지부터 9페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
+      "explanation_text": "5단계, 8페이지부터 9페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "5단계, 8페이지부터 9페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
-        "en": "Step 5, continuous movement from pages 8 to 9. This is the stage of drawing the left dynamic shape (drawing the blue basic shape and reference line segment). Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Balancing an elementary two-arm scale): Find the unknown x by using the fact that the scale remains horizontal (equal sign = ) even if you add, subtract, or divide the same number on both sides.",
-        "ja": "5段階、8ページから9ページまでの連続動きです。左ダイナミック図形作図（青の基本図形と基準線分の作図）ステップ。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等両腕天びんバランスを合わせる）：天びんの両側に同じ数を加えたり減算しても水平（等号＝）が維持されることを利用して未知数×を求める",
-        "zh-CN": "步骤5，从第8页连续移动到第9页。这是绘制左侧动态形状的阶段（绘制蓝色基本形状和参考线段）。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（平衡基本双臂秤）：即使在两侧添加、减去或除以相同的数字，秤仍保持水平（等号 = ），从而找到未知 x。",
-        "es": "Paso 5, movimiento continuo de las páginas 8 a 9. Esta es la etapa de dibujar la forma dinámica izquierda (dibujar la forma básica azul y el segmento de línea de referencia). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Equilibrio de una escala elemental de dos brazos): Encuentra la x desconocida aprovechando el hecho de que la escala permanece horizontal (signo igual = ) incluso si sumas, restas o divides el mismo número en ambos lados.",
-        "fr": "Étape 5, mouvement continu des pages 8 à 9. C'est l'étape de dessin de la forme dynamique gauche (dessin de la forme de base bleue et du segment de ligne de référence). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Équilibrer une échelle élémentaire à deux bras) : Trouvez l'inconnu x en utilisant le fait que l'échelle reste horizontale (signe égal = ) même si vous ajoutez, soustrayez ou divisez le même nombre des deux côtés.",
-        "de": "Schritt 5, kontinuierlicher Übergang von Seite 8 bis 9. Dies ist die Phase des Zeichnens der linken dynamischen Form (Zeichnen der blauen Grundform und des Referenzliniensegments). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Ausbalancieren einer elementaren zweiarmigen Skala): Finden Sie das unbekannte x, indem Sie die Tatsache nutzen, dass die Skala horizontal bleibt (Gleichheitszeichen = ), selbst wenn Sie auf beiden Seiten dieselbe Zahl addieren, subtrahieren oder dividieren.",
-        "vi": "Bước 5, chuyển động liên tục từ trang 8 đến trang 9. Đây là công đoạn vẽ hình động bên trái (vẽ hình cơ bản màu xanh và đoạn đường tham chiếu). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Cân thang đo cơ bản hai nhánh): Tìm x chưa biết bằng cách sử dụng thực tế là thang đo vẫn nằm ngang (dấu bằng = ) ngay cả khi bạn cộng, trừ hoặc chia cùng một số ở cả hai vế."
-      },
-      "durations": {
-        "en": 42.467
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "question_narrations": {
-        "ko": "5단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 8페이지부터 9페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기"
+        "ko": "5단계, 8페이지부터 9페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 5 (Page 8). Now we apply the key algebraic transformation, turning the expression into familiar fundamental operations."
       }
     },
     {
@@ -222,8 +196,10 @@
         10,
         11
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "초록색 대응 영역 및 비례 요소 표시",
+      "step_title": "Step 6 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Algebraic Bridge Q] What algebraic transformation or visual model bridges our starting expression to the target?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "green",
       "diff_bbox": [
         0.2293,
@@ -231,24 +207,10 @@
         0.7955,
         0.7218
       ],
-      "explanation_text": "6단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
+      "explanation_text": "6단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "6단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기",
-        "en": "Step 6, continuous movement from pages 10 to 11. This is the green corresponding area and proportional element display step. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Balancing an elementary two-arm scale): Find the unknown x by using the fact that the scale remains horizontal (equal sign = ) even if you add, subtract, or divide the same number on both sides.",
-        "ja": "6段階、10ページから11ページまでの連続動きです。緑色の対応領域と比例要素の表示段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等両腕天びんバランスを合わせる）：天びんの両側に同じ数を加えたり減算しても水平（等号＝）が維持されることを利用して未知数×を求める",
-        "zh-CN": "第六步，从第10页连续移动到第11页。这是绿色对应区域和比例元素显示步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（平衡基本双臂秤）：即使在两侧添加、减去或除以相同的数字，秤仍保持水平（等号 = ），从而找到未知 x。",
-        "es": "Paso 6, movimiento continuo de las páginas 10 a 11. Este es el área verde correspondiente y el paso de visualización del elemento proporcional. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (Equilibrio de una escala elemental de dos brazos): Encuentra la x desconocida aprovechando el hecho de que la escala permanece horizontal (signo igual = ) incluso si sumas, restas o divides el mismo número en ambos lados.",
-        "fr": "Étape 6, déplacement continu des pages 10 à 11. C'est l'étape d'affichage de la zone verte correspondante et de l'élément proportionnel. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Équilibrer une échelle élémentaire à deux bras) : Trouvez l'inconnu x en utilisant le fait que l'échelle reste horizontale (signe égal = ) même si vous ajoutez, soustrayez ou divisez le même nombre des deux côtés.",
-        "de": "Schritt 6, kontinuierlicher Übergang von Seite 10 zu Seite 11. Dies ist der grüne Anzeigeschritt für den entsprechenden Bereich und das proportionale Element. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Ausbalancieren einer elementaren zweiarmigen Skala): Finden Sie das unbekannte x, indem Sie die Tatsache nutzen, dass die Skala horizontal bleibt (Gleichheitszeichen = ), selbst wenn Sie auf beiden Seiten dieselbe Zahl addieren, subtrahieren oder dividieren.",
-        "vi": "Bước 6, chuyển động liên tục từ trang 10 đến trang 11. Đây là bước hiển thị vùng tương ứng và phần tử tỷ lệ màu xanh lá cây. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Cân thang đo cơ bản hai nhánh): Tìm x chưa biết bằng cách sử dụng thực tế là thang đo vẫn nằm ngang (dấu bằng = ) ngay cả khi bạn cộng, trừ hoặc chia cùng một số ở cả hai vế."
-      },
-      "durations": {
-        "en": 42.0
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "question_narrations": {
-        "ko": "6단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 10페이지부터 11페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 양팔저울 균형 맞추기): 저울 양쪽에 똑같은 수를 더하거나 빼고 나누어도 수평(등호 = )이 유지됨을 이용해 미지수 x 구하기"
+        "ko": "6단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 6 (Page 10). Now we apply the key algebraic transformation, turning the expression into familiar fundamental operations."
       }
     },
     {
@@ -258,8 +220,10 @@
         12,
         12
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 7 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "green",
       "diff_bbox": [
         0.3409,
@@ -267,24 +231,10 @@
         0.4566,
         0.4711
       ],
-      "explanation_text": "7단계, 12페이지입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도",
+      "explanation_text": "7단계, 12페이지 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
       "narrations": {
-        "ko": "7단계, 12페이지입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도",
-        "en": "Step 7, page 12. This is the process of drawing the left dynamic shape (displaying green corresponding area and proportional elements). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Factorization and root formula translation): Polynomial division f(x)=(x-a)Q(x)+R to R=f(a) (remainder theorem) and derivation of the quadratic discriminant D=b squared-4ac",
-        "ja": "ステップ7、12ページです。左ダイナミック図形作図（緑色対応領域と比例要素を表示）プロセスです。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（因数分解と根の公式翻訳）：多項式除算f（x）=（x-a）Q（x）+ RからR = f（a）（残りの定理）と二次方程式判別式D = b平方-4ac誘導",
-        "zh-CN": "第12页第7步。这是绘制左侧动态形状的过程（显示绿色相应区域和比例元素）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（因式分解和根公式转换）：多项式除法 f(x)=(x-a)Q(x)+R 到 R=f(a)（余数定理）以及二次判别式 D=b squared-4ac 的推导",
-        "es": "Paso 7, página 12. Este es el proceso de dibujar la forma dinámica izquierda (mostrando el área correspondiente en verde y los elementos proporcionales). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Factorización y traducción de fórmulas raíz): División polinómica f(x)=(x-a)Q(x)+R a R=f(a) (teorema del resto) y derivación del discriminante cuadrático D=b al cuadrado-4ac",
-        "fr": "Étape 7, page 12. Il s'agit du processus de dessin de la forme dynamique de gauche (affichant la zone verte correspondante et les éléments proportionnels). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Factorisation et traduction de la formule racine) : Division polynomiale f(x)=(x-a)Q(x)+R à R=f(a) (théorème du reste) et dérivation du discriminant quadratique D=b squared-4ac",
-        "de": "Schritt 7, Seite 12. Dies ist der Prozess des Zeichnens der linken dynamischen Form (Anzeige der grünen entsprechenden Fläche und proportionaler Elemente). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Faktorisierung und Übersetzung der Wurzelformel): Polynomdivision f(x)=(x-a)Q(x)+R zu R=f(a) (Restsatz) und Ableitung der quadratischen Diskriminante D=b quadrat-4ac",
-        "vi": "Bước 7, trang 12. Đây là quá trình vẽ hình động bên trái (hiển thị màu xanh lục có diện tích tương ứng và các phần tử tỷ lệ). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Xác định nhân tử và dịch công thức nghiệm): Phép chia đa thức f(x)=(x-a)Q(x)+R thành R=f(a) (định lý số dư) và suy ra phân thức bậc hai D=b bình phương-4ac"
-      },
-      "durations": {
-        "en": 39.6
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "question_narrations": {
-        "ko": "7단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 12페이지입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도"
+        "ko": "7단계, 12페이지 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 7 (Page 12). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
       }
     },
     {
@@ -294,8 +244,10 @@
         13,
         14
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 8 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "green",
       "diff_bbox": [
         0.624,
@@ -303,24 +255,10 @@
         0.6777,
         0.4793
       ],
-      "explanation_text": "8단계, 13페이지부터 14페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도",
+      "explanation_text": "8단계, 13페이지부터 14페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
       "narrations": {
-        "ko": "8단계, 13페이지부터 14페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도",
-        "en": "Step 8, continuous movement from pages 13 to 14. This is the process of deriving the right proof formula (green corresponding area and proportional elements indicated). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Factorization and root formula translation): Polynomial division f(x)=(x-a)Q(x)+R to R=f(a) (remainder theorem) and derivation of the quadratic discriminant D=b squared-4ac",
-        "ja": "8段階、13ページから14ページまでの連続動きです。右証明式の導出（緑色対応領域と比例要素の表示）プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（因数分解と根の公式翻訳）：多項式除算f（x）=（x-a）Q（x）+ RからR = f（a）（残りの定理）と二次方程式判別式D = b平方-4ac誘導",
-        "zh-CN": "步骤8，从第13页连续移动到第14页。这是推导正确证明公式的过程（绿色对应面积和比例元素表示）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（因式分解和根公式转换）：多项式除法 f(x)=(x-a)Q(x)+R 到 R=f(a)（余数定理）以及二次判别式 D=b squared-4ac 的推导",
-        "es": "Paso 8, movimiento continuo de las páginas 13 a 14. Este es el proceso de derivar la fórmula de prueba correcta (área correspondiente en verde y elementos proporcionales indicados). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Factorización y traducción de fórmulas raíz): División polinómica f(x)=(x-a)Q(x)+R a R=f(a) (teorema del resto) y derivación del discriminante cuadrático D=b al cuadrado-4ac",
-        "fr": "Étape 8, mouvement continu des pages 13 à 14. Il s'agit du processus de dérivation de la bonne formule de preuve (zone verte correspondante et éléments proportionnels indiqués). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Factorisation et traduction de la formule racine) : Division polynomiale f(x)=(x-a)Q(x)+R à R=f(a) (théorème du reste) et dérivation du discriminant quadratique D=b squared-4ac",
-        "de": "Schritt 8, kontinuierlicher Übergang von Seite 13 bis 14. Dies ist der Prozess der Ableitung der richtigen Beweisformel (grüne entsprechende Fläche und proportionale Elemente angezeigt). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Faktorisierung und Übersetzung der Wurzelformel): Polynomdivision f(x)=(x-a)Q(x)+R zu R=f(a) (Restsatz) und Ableitung der quadratischen Diskriminante D=b quadrat-4ac",
-        "vi": "Bước 8, chuyển tiếp từ trang 13 đến trang 14. Đây là quá trình suy ra công thức chứng minh đúng (diện tích tương ứng màu xanh lá cây và các phần tử tỷ lệ được chỉ định). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Xác định nhân tử và dịch công thức nghiệm): Phép chia đa thức f(x)=(x-a)Q(x)+R thành R=f(a) (định lý số dư) và suy ra phân thức bậc hai D=b bình phương-4ac"
-      },
-      "durations": {
-        "en": 38.267
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?",
-      "question_narrations": {
-        "ko": "8단계 탐구 발문입니다! 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 13페이지부터 14페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도"
+        "ko": "8단계, 13페이지부터 14페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 8 (Page 13). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
       }
     },
     {
@@ -330,8 +268,10 @@
         15,
         16
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "초록색 대응 영역 및 비례 요소 표시",
+      "step_title": "Step 9 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "green",
       "diff_bbox": [
         0.3409,
@@ -339,24 +279,10 @@
         0.7293,
         0.6446
       ],
-      "explanation_text": "9단계, 15페이지부터 16페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도",
+      "explanation_text": "9단계, 15페이지부터 16페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
       "narrations": {
-        "ko": "9단계, 15페이지부터 16페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도",
-        "en": "Step 9, continuous movement from pages 15 to 16. This is the green corresponding area and proportional element display process. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Factorization and root formula translation): Polynomial division f(x)=(x-a)Q(x)+R to R=f(a) (remainder theorem) and derivation of the quadratic discriminant D=b squared-4ac",
-        "ja": "9段階、15ページから16ページまでの連続動きです。緑色対応領域と比例要素表示処理です。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（因数分解と根の公式翻訳）：多項式除算f（x）=（x-a）Q（x）+ RからR = f（a）（残りの定理）と二次方程式判別式D = b平方-4ac誘導",
-        "zh-CN": "步骤9、从第15页连续移动到第16页。这就是绿色对应区域和比例元素的显示过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（因式分解和根公式转换）：多项式除法 f(x)=(x-a)Q(x)+R 到 R=f(a)（余数定理）以及二次判别式 D=b squared-4ac 的推导",
-        "es": "Paso 9, movimiento continuo de las páginas 15 a 16. Este es el área verde correspondiente y el proceso de visualización del elemento proporcional. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Factorización y traducción de fórmulas raíz): División polinómica f(x)=(x-a)Q(x)+R a R=f(a) (teorema del resto) y derivación del discriminante cuadrático D=b al cuadrado-4ac",
-        "fr": "Étape 9, mouvement continu des pages 15 à 16. Il s'agit du processus d'affichage de la zone verte correspondante et de l'élément proportionnel. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Factorisation et traduction de la formule racine) : Division polynomiale f(x)=(x-a)Q(x)+R à R=f(a) (théorème du reste) et dérivation du discriminant quadratique D=b squared-4ac",
-        "de": "Schritt 9, kontinuierlicher Übergang von Seite 15 bis 16. Dies ist der Anzeigevorgang für den grünen entsprechenden Bereich und das proportionale Element. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Faktorisierung und Übersetzung der Wurzelformel): Polynomdivision f(x)=(x-a)Q(x)+R zu R=f(a) (Restsatz) und Ableitung der quadratischen Diskriminante D=b quadrat-4ac",
-        "vi": "Bước 9, chuyển động liên tục từ trang 15 đến trang 16. Đây là phần màu xanh lá cây tương ứng với quá trình hiển thị phần tử tỷ lệ. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Xác định nhân tử và dịch công thức nghiệm): Phép chia đa thức f(x)=(x-a)Q(x)+R thành R=f(a) (định lý số dư) và suy ra phân thức bậc hai D=b bình phương-4ac"
-      },
-      "durations": {
-        "en": 50.0
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?",
-      "question_narrations": {
-        "ko": "9단계 탐구 발문입니다! 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 15페이지부터 16페이지까지의 연속 움직임입니다. 초록색 대응 영역 및 비례 요소 표시 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (인수분해와 근의 공식 번역): 다항식 나눗셈 f(x)=(x-a)Q(x)+R 에서 R=f(a) (나머지정리) 및 이차방정식 판별식 D=b 제곱-4ac 유도"
+        "ko": "9단계, 15페이지부터 16페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 9 (Page 15). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
       }
     },
     {
@@ -366,8 +292,10 @@
         17,
         18
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 10 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Synthesis Q] How does combining our derived equations complete (a+b)(c+d)=ab+ac+bc+bd?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "green",
       "diff_bbox": [
         0.4091,
@@ -375,24 +303,10 @@
         0.6798,
         0.6474
       ],
-      "explanation_text": "10단계, 17페이지부터 18페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정",
+      "explanation_text": "10단계, 17페이지부터 18페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "10단계, 17페이지부터 18페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정",
-        "en": "Step 10, continuous movement from pages 17 to 18. This is the final step in deriving the right-side proof formula (green corresponding area and proportional elements are indicated). The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): Convert the number of real roots of the equation f(x)=g(x) to the number of intersections of the graphs of the two functions y=f(x) and y=g(x) to determine the range of the unknown k.",
-        "ja": "10段階、17ページから18ページまでの連続動きです。右証明式の導出（緑色対応領域と比例要素表示）仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本項総合）：方程式f(x)=g(x)の実根の個数を二つの関数y=f(x)とy=g(x)グラフの交点個数に変換して未知数kの範囲確定",
-        "zh-CN": "第10步，从第17页连续移动到第18页。这是推导右侧证明公式的最后一步（绿色对应面积和比例元素标出）。将前面步骤中的各个部分组合起来得出最终结论。步骤4（正文摘要）：将方程f(x)=g(x)的实根数转换为两个函数y=f(x)和y=g(x)的图的交点数，以确定未知k的范围。",
-        "es": "Paso 10, movimiento continuo de las páginas 17 a 18. Este es el paso final para derivar la fórmula de prueba del lado derecho (se indican en verde el área correspondiente y los elementos proporcionales). Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): Convierta el número de raíces reales de la ecuación f(x)=g(x) al número de intersecciones de las gráficas de las dos funciones y=f(x) e y=g(x) para determinar el rango de la incógnita k.",
-        "fr": "Étape 10, mouvement continu des pages 17 à 18. C'est la dernière étape dans la dérivation de la formule de preuve du côté droit (la zone verte correspondante et les éléments proportionnels sont indiqués). Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Convertissez le nombre de racines réelles de l'équation f(x)=g(x) en nombre d'intersections des graphiques des deux fonctions y=f(x) et y=g(x) pour déterminer l'étendue de l'inconnue k.",
-        "de": "Schritt 10, fortlaufender Übergang von Seite 17 bis 18. Dies ist der letzte Schritt bei der Ableitung der rechtsseitigen Beweisformel (grüne entsprechende Flächen- und Proportionalelemente sind angezeigt). Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Konvertieren Sie die Anzahl der reellen Wurzeln der Gleichung f(x)=g(x) in die Anzahl der Schnittpunkte der Graphen der beiden Funktionen y=f(x) und y=g(x), um den Bereich der Unbekannten k zu bestimmen.",
-        "vi": "Bước 10, chuyển động liên tục từ trang 17 đến trang 18. Đây là bước cuối cùng để rút ra công thức chứng minh vế phải (biểu thị diện tích tương ứng màu xanh lá cây và các phần tử tỷ lệ). Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Chuyển đổi số nghiệm thực của phương trình f(x)=g(x) thành số giao điểm của đồ thị của hai hàm số y=f(x) và y=g(x) để xác định phạm vi của ẩn số k."
-      },
-      "durations": {
-        "en": 46.267
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?",
-      "question_narrations": {
-        "ko": "10단계 탐구 발문입니다! 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 17페이지부터 18페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정"
+        "ko": "10단계, 17페이지부터 18페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 10 (Page 17). Combining the simplified expressions from the previous steps directly yields our target identity for (a+b)(c+d)=ab+ac+bc+bd."
       }
     },
     {
@@ -402,8 +316,10 @@
         19,
         20
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 11 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Synthesis Q] How does combining our derived equations complete (a+b)(c+d)=ab+ac+bc+bd?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "green",
       "diff_bbox": [
         0.3967,
@@ -411,24 +327,10 @@
         0.7335,
         0.6474
       ],
-      "explanation_text": "11단계, 19페이지부터 20페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정",
+      "explanation_text": "11단계, 19페이지부터 20페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "11단계, 19페이지부터 20페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정",
-        "en": "Step 11, continuous movement from pages 19 to 20. This is the final step in deriving the right-side proof formula (green corresponding area and proportional elements are indicated). The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): Convert the number of real roots of the equation f(x)=g(x) to the number of intersections of the graphs of the two functions y=f(x) and y=g(x) to determine the range of the unknown k.",
-        "ja": "11段階、19ページから20ページまでの連続動きです。右証明式の導出（緑色対応領域と比例要素表示）仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本項総合）：方程式f(x)=g(x)の実根の個数を二つの関数y=f(x)とy=g(x)グラフの交点個数に変換して未知数kの範囲確定",
-        "zh-CN": "第11步，从第19页连续移动到第20页。这是推导右侧证明公式的最后一步（绿色对应面积和比例元素标出）。将前面步骤中的各个部分组合起来得出最终结论。步骤4（正文摘要）：将方程f(x)=g(x)的实根数转换为两个函数y=f(x)和y=g(x)的图的交点数，以确定未知k的范围。",
-        "es": "Paso 11, movimiento continuo de las páginas 19 a 20. Este es el paso final para derivar la fórmula de prueba del lado derecho (se indican en verde el área correspondiente y los elementos proporcionales). Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): Convierta el número de raíces reales de la ecuación f(x)=g(x) al número de intersecciones de las gráficas de las dos funciones y=f(x) e y=g(x) para determinar el rango de la incógnita k.",
-        "fr": "Étape 11, mouvement continu des pages 19 à 20. C'est la dernière étape dans la dérivation de la formule de preuve du côté droit (la zone verte correspondante et les éléments proportionnels sont indiqués). Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Convertissez le nombre de racines réelles de l'équation f(x)=g(x) en nombre d'intersections des graphiques des deux fonctions y=f(x) et y=g(x) pour déterminer l'étendue de l'inconnue k.",
-        "de": "Schritt 11, kontinuierlicher Übergang von Seite 19 zu Seite 20. Dies ist der letzte Schritt bei der Ableitung der rechtsseitigen Beweisformel (grüne entsprechende Flächen- und Proportionalelemente sind angezeigt). Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Konvertieren Sie die Anzahl der reellen Wurzeln der Gleichung f(x)=g(x) in die Anzahl der Schnittpunkte der Graphen der beiden Funktionen y=f(x) und y=g(x), um den Bereich der Unbekannten k zu bestimmen.",
-        "vi": "Bước 11, chuyển động liên tục từ trang 19 đến trang 20. Đây là bước cuối cùng để rút ra công thức chứng minh vế phải (biểu thị diện tích tương ứng màu xanh lá cây và các phần tử tỷ lệ). Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Chuyển đổi số nghiệm thực của phương trình f(x)=g(x) thành số giao điểm của đồ thị của hai hàm số y=f(x) và y=g(x) để xác định phạm vi của ẩn số k."
-      },
-      "durations": {
-        "en": 45.667
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?",
-      "question_narrations": {
-        "ko": "11단계 탐구 발문입니다! 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 19페이지부터 20페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (초록색 대응 영역 및 비례 요소 표시) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 방정식 f(x)=g(x) 의 실근의 개수를 두 함수 y=f(x) 와 y=g(x) 그래프의 교점 개수로 변환하여 미지수 k 의 범위 확정"
+        "ko": "11단계, 19페이지부터 20페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 11 (Page 19). Combining the simplified expressions from the previous steps directly yields our target identity for (a+b)(c+d)=ab+ac+bc+bd."
       }
     },
     {
@@ -438,8 +340,10 @@
         21,
         21
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?",
+      "step_question_en": "🔀 [What-If-Not] How does (a+b)(c+d)=ab+ac+bc+bd evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.0847,
@@ -447,107 +351,11 @@
         0.9153,
         0.7961
       ],
-      "explanation_text": "마지막 12단계입니다. 지금까지 총 21프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 무리방정식 루트 f(x) = g(x) 를 양변 제곱하여 풀었을 때는 g(x) < 0 인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 g(x) ge 0 조건을 먼저 걸어 걸러내세요!",
+      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)에서 시작해, 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 거쳐, '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 12단계입니다. 지금까지 총 21프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 무리방정식 루트 f(x) = g(x) 를 양변 제곱하여 풀었을 때는 g(x) < 0 인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 g(x) ge 0 조건을 먼저 걸어 걸러내세요!",
-        "en": "Step 12. We have completed the entire 21-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself.",
-        "ja": "最後の12段階です。これまでに合計21フレームのフリップブック作図を通じて整理を完全に証明しました。実戦チップで、無理方程式ルート f(x) = g(x) を両辺二乗して解いた時は g(x) < 0 の「無煙根 (偽根)」が混じって入ってくるので、必ず右辺 g(x) ge 0 条件を先に掛けろう！",
-        "zh-CN": "这是最后 12 个步骤。至此，我们已经通过总共21帧的翻页图画完全证明了该定理。实用提示，在通过两边平方求解无理方程根 f(x) = g(x) 时，会混入 g(x) < 0 的“假根”，因此请务必先在右侧应用条件 g(x) ge 0 将其过滤掉！",
-        "es": "Estos son los últimos 12 pasos. Hasta ahora hemos demostrado completamente el teorema mediante un dibujo en formato flipbook de un total de 21 fotogramas. Como consejo práctico, al resolver la raíz de ecuación irrazonable f(x) = g(x) elevando al cuadrado ambos lados, se mezclan 'raíces falsas' con g(x) < 0, así que asegúrese de filtrarlas aplicando primero la condición g(x) ge 0 en el lado derecho.",
-        "fr": "Ce sont les 12 dernières étapes. Jusqu’à présent, nous avons complètement prouvé le théorème à travers un dessin flipbook d’un total de 21 images. À titre pratique, lors de la résolution de l'équation déraisonnable racine f(x) = g(x) en mettant au carré les deux côtés, des « fausses racines » avec g(x) < 0 sont mélangées, alors assurez-vous de les filtrer en appliquant d'abord la condition g(x) ge 0 sur le côté droit !",
-        "de": "Dies sind die letzten 12 Schritte. Bisher haben wir den Satz durch eine Daumenkino-Zeichnung von insgesamt 21 Bildern vollständig bewiesen. Als praktischer Tipp: Wenn Sie die unvernünftige Gleichung Wurzel f(x) = g(x) durch Quadrieren beider Seiten lösen, werden „falsche Wurzeln“ mit g(x) < 0 eingemischt. Filtern Sie diese also unbedingt heraus, indem Sie zuerst die Bedingung g(x) ge 0 auf der rechten Seite anwenden!",
-        "vi": "Đây là 12 bước cuối cùng. Cho đến nay, chúng ta đã chứng minh hoàn toàn định lý thông qua một bản vẽ flipbook có tổng cộng 21 khung hình. Như một mẹo thực tế, khi giải nghiệm nghiệm bất hợp lý của phương trình f(x) = g(x) bằng cách bình phương cả hai vế, 'căn giả' với g(x) < 0 sẽ được trộn vào, vì vậy hãy nhớ lọc chúng ra bằng cách trước tiên áp dụng điều kiện g(x) ge 0 ở vế phải!"
-      },
-      "durations": {
-        "en": 45.533
-      },
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떤 새로운 정리가 탄생할까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this figure?",
-      "question_narrations": {
-        "ko": "마지막 12단계, 조건 변형 질문입니다! 마지막 12단계입니다. 지금까지 총 21프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 무리방정식 루트 f(x) = g(x) 를 양변 제곱하여 풀었을 때는 g(x) < 0 인 '무연근(가짜 근)'이 섞여 들어오므로, 반드시 우변 g(x) ge 0 조건을 먼저 걸어 걸러내세요! 만약 여기서 도형의 조건을 하나 바꾼다면 어떤 새로운 정리가 탄생할지 직접 질문하고 실험해 보세요!"
+        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 '(a+b)(c+d)=ab+ac+bc+bd'에서 주어진 기본 정의와 출발 조건(가정)에서 시작해, 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 거쳐, '(a+b)(c+d)=ab+ac+bc+bd'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 12. The visual proof of (a+b)(c+d)=ab+ac+bc+bd is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
       }
     }
-  ],
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 보조선 한 줄의 마법!  45초 시각적 증명 |  #Shorts #수학",
-      "local_mp4_path": "video_lectures/shorts/2019082002_short_ko.mp4",
-      "duration_sec": 45.66,
-      "aspect_ratio": "9:16 (1080x1920)"
-    },
-    "en": {
-      "title": "🔥 45s Visual Math Proof: (a+b)(c+d)=ab+ac+bc+bd | (a+b)(c+d)=ab+ac+bc+bd #Shorts #Math",
-      "local_mp4_path": "video_lectures/shorts/2019082002_short_en.mp4",
-      "duration_sec": 32.78,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  },
-  "youtube_packages": {
-    "en": {
-      "lang": "en",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "✨ (a+b)(c+d)=ab+ac+bc+bd — Step-by-Step Visual Math Proof (21 Steps · 1080p) | @min7014_ai",
-      "description": "Why does (a+b)(c+d)=ab+ac+bc+bd hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!\n\n🚀 [Try It Yourself on the Free Interactive Math Platform (min7014.github.io/mathedu)]\n1️⃣ 📐 Interactive GeoGebra Applet & 1,113 Visual Proof Video Board:\n👉 https://min7014.github.io/mathedu/video_board.html?slug=2019082002&from=yt\n2️⃣ ✍️ De-Multiple-Choice Constructive Math Studio (16,548 Step-by-Step Quizzes):\n👉 https://min7014.github.io/mathedu/?from=yt\n3️⃣ 🌱 Daily 3-Minute Math Eureka (10s Counterexample O/X & What-If-Not Problem Posing):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n4️⃣ 🎮 3D Math Sanctuary Boss Raid RPG (Free Browser Game):\n👉 https://min7014.github.io/mathedu/game.html\n5️⃣ 🏛️ Min's Math Lab Main Archive (3,400+ Dynamic Proofs):\n👉 https://min7014.github.io/math20190820001.html\n\n💬 [10-Second Eureka Quiz] Which step (1 to 21) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!\n\n🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E\n\n🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n📄 Original Step-by-Step PDF: https://min7014.github.io/2019/2019082002.pdf\n🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html?slug=2019082002\nTopic ID: [ID: 2019082002_EN]\n\n⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n00:00 Step 0/21 — Textbooks bury this in pages of dry algebra, but with one clev...\n00:09 Step 1/21 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...\n00:26 Step 2/21 — Step 2, continuous movement from page 2 to page 3. In the left...\n01:05 Step 4/21 — Step 3, continuous movement from page 4 to page 5. In the proc...\n01:40 Step 6/21 — Step 4, continuous movement from pages 6 to 7. This is the ste...\n02:22 Step 8/21 — Step 5, continuous movement from pages 8 to 9. This is the sta...\n03:04 Step 10/21 — Step 6, continuous movement from pages 10 to 11. This is the g...\n03:44 Step 12/21 — Step 7, page 12. This is the process of drawing the left dynam...\n04:22 Step 13/21 — Step 8, continuous movement from pages 13 to 14. This is the p...\n05:12 Step 15/21 — Step 9, continuous movement from pages 15 to 16. This is the g...\n05:58 Step 17/21 — Step 10, continuous movement from pages 17 to 18. This is the ...\n06:44 Step 19/21 — Step 11, continuous movement from pages 19 to 20. This is the ...\n07:30 Step 21/21 — Step 12. We have completed the entire 21-frame visual proof! V...\n\n#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014",
-      "tags": [
-        "Visual Math Proof",
-        "Geometry Proof",
-        "Proof Without Words",
-        "Euclidean Geometry",
-        "Pythagorean Theorem",
-        "Ceva Theorem",
-        "Menelaus Theorem",
-        "GeoGebra",
-        "Math Animation",
-        "3Blue1Brown style math",
-        "Step by Step Math",
-        "High School Geometry",
-        "Math Olympiad",
-        "AMC Math",
-        "SAT Math",
-        "Min's Math Lab",
-        "min7014_ai",
-        "min7014"
-      ],
-      "quiz_comment": "💬 [10-Second Eureka Quiz] Which step (1 to 21) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!",
-      "categoryId": "27",
-      "defaultLanguage": "en",
-      "chapters": [
-        "00:00 Step 0/21 — Textbooks bury this in pages of dry algebra, but with one clev...",
-        "00:09 Step 1/21 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...",
-        "00:26 Step 2/21 — Step 2, continuous movement from page 2 to page 3. In the left...",
-        "01:05 Step 4/21 — Step 3, continuous movement from page 4 to page 5. In the proc...",
-        "01:40 Step 6/21 — Step 4, continuous movement from pages 6 to 7. This is the ste...",
-        "02:22 Step 8/21 — Step 5, continuous movement from pages 8 to 9. This is the sta...",
-        "03:04 Step 10/21 — Step 6, continuous movement from pages 10 to 11. This is the g...",
-        "03:44 Step 12/21 — Step 7, page 12. This is the process of drawing the left dynam...",
-        "04:22 Step 13/21 — Step 8, continuous movement from pages 13 to 14. This is the p...",
-        "05:12 Step 15/21 — Step 9, continuous movement from pages 15 to 16. This is the g...",
-        "05:58 Step 17/21 — Step 10, continuous movement from pages 17 to 18. This is the ...",
-        "06:44 Step 19/21 — Step 11, continuous movement from pages 19 to 20. This is the ...",
-        "07:30 Step 21/21 — Step 12. We have completed the entire 21-frame visual proof! V..."
-      ],
-      "total_duration_sec": 464.25,
-      "srt_url": "video_lectures/youtube_packages/2019082002_en.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2019082002_en_thumb.png",
-      "local_mp4_path": "youtube_uploads/2019082002/2019082002_en.mp4"
-    }
-  },
-  "pedagogy_style": "v5.0 Question-Asking Classroom (Notice & Wonder -> Socratic Pólya -> What-If-Not)",
-  "question_classroom_packages": {
-    "ko": {
-      "title": "❓ [질문하는 수학 수업]  — 왜 항상 성립할까? (Notice & Wonder · What-If-Not 탐구) | @min7014_ai",
-      "local_mp4_path": "video_lectures/question_classroom/2019082002_q_ko.mp4",
-      "upload_mp4_path": "youtube_uploads/2019082002/2019082002_q_ko.mp4",
-      "srt_url": "video_lectures/youtube_packages/2019082002_q_ko.srt",
-      "duration_sec": 615.0
-    }
-  }
+  ]
 }

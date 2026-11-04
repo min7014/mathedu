@@ -129,7 +129,7 @@ CURATED_PAGE_SCRIPTS = {
         "pdf_url": "https://min7014.github.io/2025/2025013001.pdf",
         "web_url": "https://min7014.github.io/math20250130001.html",
         "pages_ko": [
-            "1페이지입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 직각삼각형과 정사각형이 무한히 가지를 뻗어 나가는 피타고라스 나무의 기하학적 원리와 넓이 보존 법칙을 한 단계씩 탐구해 봅시다.",
+            "1페이지입니다. 단계별 시각적 수학 증명 강의입니다. 직각삼각형과 정사각형이 무한히 가지를 뻗어 나가는 피타고라스 나무의 기하학적 원리와 넓이 보존 법칙을 한 단계씩 탐구해 봅시다.",
             "2페이지입니다. 이제 빈 칠판 위에서 첫 번째 기준 정사각형과 직각삼각형부터 차례대로 작도를 시작합니다.",
             "3페이지입니다. 가장 아래에 나무의 기둥이 되는 첫 번째 정사각형을 그리고, 그 윗변을 지름으로 하는 반원 위에 한 점을 잡아 직각삼각형을 올립니다. 원의 지름에 대한 원주각은 항상 90도이므로 완벽한 직각삼각형이 만들어집니다.",
             "4페이지입니다. 직각삼각형의 나머지 두 직각변 위에 각각 새로운 정사각형 두 개를 작도합니다. 피타고라스 정리에 의해, 새로 피어난 두 정사각형의 넓이 합은 아래 기둥 정사각형의 넓이와 정확히 일치합니다.",
@@ -139,10 +139,10 @@ CURATED_PAGE_SCRIPTS = {
             "8페이지입니다. 32개의 정사각형 잎사귀가 돋아납니다. 작은 나뭇가지 하나를 확대해 보아도 나무 전체의 모양과 똑같이 닮아 있는 자기닮음 프랙탈 기하학의 구조가 선명하게 드러납니다.",
             "9페이지입니다. 64개의 정사각형이 풍성한 나무 수관을 이룹니다. 오직 직각삼각형과 피타고라스 정리라는 단순한 규칙의 반복만으로 자연 속 브로콜리나 나뭇가지와 닮은 생명력 있는 형태가 탄생합니다.",
             "10페이지입니다. 마지막 단계까지 완성된 피타고라스 나무의 전체 모습입니다. 유클리드 기하학의 넓이 보존 법칙과 현대 프랙탈 기하학이 만나는 아름다운 수학적 조화를 감상해 보세요.",
-            "11페이지입니다. 민은기 선생님의 수학자료실 웹페이지에서 반원 위의 꼭짓점을 마우스로 직접 드래그하며, 나만의 피타고라스 나무가 바람에 흔들리듯 변화하는 모습을 실험해 보세요!"
+            "11페이지입니다. 수학홈페이지의 동적 기하 웹페이지에서 반원 위의 꼭짓점을 마우스로 직접 드래그하며, 나만의 피타고라스 나무가 바람에 흔들리듯 변화하는 모습을 실험해 보세요!"
         ],
         "pages_en": [
-            "Step 1. Welcome to Min's Math Lab. In this step-by-step visual proof lecture, we explore the Pythagoras Tree, where right triangles and squares branch out infinitely while preserving total area.",
+            "Step 1. In this step-by-step visual proof lecture, we explore the Pythagoras Tree, where right triangles and squares branch out infinitely while preserving total area.",
             "Step 2. Starting from a clean canvas, let us construct the base square and the generating right triangle one step at a time.",
             "Step 3. First, we draw the trunk square at the bottom, and place a right triangle on its top edge using a semicircle. By Thales' theorem, any angle inscribed in a semicircle is always a ninety-degree right angle.",
             "Step 4. Next, we construct two smaller squares on the two legs of the right triangle. By the Pythagorean Theorem, the sum of the areas of these two new squares is exactly equal to the area of the trunk square below.",
@@ -152,7 +152,7 @@ CURATED_PAGE_SCRIPTS = {
             "Step 8. Thirty-two squares bloom across the sixth level. Zooming into any single branch reveals an exact miniature copy of the whole structure, demonstrating the self-similarity of fractal geometry.",
             "Step 9. Sixty-four squares now create a lush canopy. Through the simple recursive repetition of the Pythagorean Theorem, pure geometry reproduces the organic branching patterns found in nature.",
             "Step 10. Here is the fully grown Pythagoras Tree at the eighth stage. Take a moment to appreciate how classical area conservation and modern fractal geometry unite in visual harmony.",
-            "Step 11. Visit Min's Math Lab at min7014.github.io to drag the vertex along the semicircle yourself and watch the Pythagoras Tree transform dynamically in real time!"
+            "Step 11. Visit the interactive geometry lab at min7014.github.io to drag the vertex along the semicircle yourself and watch the Pythagoras Tree transform dynamically in real time!"
         ]
     },
     "2014111902": {
@@ -161,7 +161,7 @@ CURATED_PAGE_SCRIPTS = {
         "pdf_url": "https://min7014.github.io/2020/2014111902.pdf",
         "web_url": "https://min7014.github.io/math20200228001.html",
         "pages_ko": [
-            "1페이지입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 삼각형의 세 꼭짓점과 한 교점을 지나는 세 직선이 마주 보는 변을 나누는 길이 비의 곱이 항상 1이 된다는 체바의 정리를 눈으로 보며 증명해 봅시다.",
+            "1페이지입니다. 단계별 시각적 수학 증명 강의입니다. 삼각형의 세 꼭짓점과 한 교점을 지나는 세 직선이 마주 보는 변을 나누는 길이 비의 곱이 항상 1이 된다는 체바의 정리를 눈으로 보며 증명해 봅시다.",
             "2페이지입니다. 빈 칠판 위에서 기준 삼각형과 교점을 차례대로 작도하며 증명을 시작합니다.",
             "3페이지입니다. 먼저 평면 위에 기준이 되는 삼각형 A B C를 작도합니다.",
             "4페이지입니다. 삼각형 A B C의 세 변을 포함하는 직선을 점선으로 연장하여 직선들의 위치 관계를 명확히 나타냅니다.",
@@ -177,10 +177,10 @@ CURATED_PAGE_SCRIPTS = {
             "14페이지입니다. 왜 이 세 비율의 곱이 항상 1이 될까요? 선분 CO를 공통 밑변으로 하는 두 삼각형을 살펴보면, 밑변 AF 대 FB의 길이 비는 곧 삼각형 AOC의 넓이 대 삼각형 COB의 넓이 비와 같습니다.",
             "15페이지입니다. 똑같은 원리로 선분 AO를 공통 밑변으로 보면, 밑변 BD 대 DC의 길이 비는 삼각형 BOA의 넓이 대 삼각형 AOC의 넓이 비와 정확히 같습니다.",
             "16페이지입니다. 또한 선분 BO를 공통 밑변으로 보면, 선분 CE 대 EA의 길이 비는 삼각형 COB의 넓이 대 삼각형 BOA의 넓이 비와 같습니다. 이제 우변의 세 넓이 분수를 모두 곱하면 분모와 분자의 삼각형 AOC, COB, BOA 넓이가 완벽히 약분되어 1이 증명됩니다!",
-            "17페이지입니다. 민은기 선생님의 수학자료실 웹페이지에서 교점 O의 위치를 삼각형 안팎으로 직접 움직여 보며 체바의 정리가 언제나 성립함을 확인해 보세요!"
+            "17페이지입니다. 수학홈페이지의 동적 기하 웹페이지에서 교점 O의 위치를 삼각형 안팎으로 직접 움직여 보며 체바의 정리가 언제나 성립함을 확인해 보세요!"
         ],
         "pages_en": [
-            "Step 1. Welcome to Min's Math Lab. In this step-by-step visual proof, we will prove Ceva's Theorem, showing why three concurrent lines from the vertices of a triangle divide the opposite sides into ratios whose product is always 1.",
+            "Step 1. In this step-by-step visual proof, we will prove Ceva's Theorem, showing why three concurrent lines from the vertices of a triangle divide the opposite sides into ratios whose product is always 1.",
             "Step 2. Starting on a clean board, we will construct our reference triangle and its interior intersection point step by step.",
             "Step 3. First, we construct a general reference triangle A B C on the plane.",
             "Step 4. We extend the three sides of triangle A B C with dashed lines to clearly visualize the lines containing each side.",
@@ -205,7 +205,7 @@ CURATED_PAGE_SCRIPTS = {
         "pdf_url": "https://min7014.github.io/2020/2017090101.pdf",
         "web_url": "https://min7014.github.io/math20200113001.html",
         "pages_ko": [
-            "1페이지입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 직각삼각형에서 빗변의 제곱이 두 직각변의 제곱의 합과 같다는 피타고라스 정리를 정사각형 넓이 분할로 한 단계씩 명확하게 증명해 봅시다.",
+            "1페이지입니다. 단계별 시각적 수학 증명 강의입니다. 직각삼각형에서 빗변의 제곱이 두 직각변의 제곱의 합과 같다는 피타고라스 정리를 정사각형 넓이 분할로 한 단계씩 명확하게 증명해 봅시다.",
             "2페이지입니다. 빈 칠판 위에서 기준이 되는 직각삼각형 하나를 작도하는 것부터 시작합니다.",
             "3페이지입니다. 평면 위에 기준 삼각형 A B C를 그립니다.",
             "4페이지입니다. 꼭짓점 C의 내각이 90도인 직각삼각형임을 직각 기호로 명확히 표시합니다.",
@@ -229,10 +229,10 @@ CURATED_PAGE_SCRIPTS = {
             "22페이지입니다. 한 변의 길이가 a 더하기 b인 전체 큰 정사각형의 넓이, 즉 괄호 a 더하기 b의 전체 제곱을 우변에 적어 넓이 등식을 완성합니다.",
             "23페이지입니다. 등식의 좌변과 우변을 각각 전개하여 정리하면, 좌변은 2ab 더하기 c 제곱이 되고 우변은 a 제곱 더하기 2ab 더하기 b 제곱이 됩니다.",
             "24페이지입니다. 이제 양변에 똑같이 들어 있는 네 직각삼각형의 넓이 2ab를 동시에 소거하면, 마침내 c 제곱은 a 제곱 더하기 b 제곱이라는 피타고라스 정리가 완성됩니다!",
-            "25페이지입니다. 민은기 선생님의 수학자료실 웹페이지에 접속하여 직각삼각형의 변의 길이를 직접 조절하며 피타고라스 정리의 시각적 증명을 실험해 보세요!"
+            "25페이지입니다. 수학홈페이지의 동적 기하 웹페이지에 접속하여 직각삼각형의 변의 길이를 직접 조절하며 피타고라스 정리의 시각적 증명을 실험해 보세요!"
         ],
         "pages_en": [
-            "Step 1. Welcome to Min's Math Lab. In this step-by-step visual lecture, we prove the Pythagorean Theorem, c squared equals a squared plus b squared, by partitioning the area of a square.",
+            "Step 1. In this step-by-step visual lecture, we prove the Pythagorean Theorem, c squared equals a squared plus b squared, by partitioning the area of a square.",
             "Step 2. Starting on a blank board, we begin by constructing a single right triangle.",
             "Step 3. First, we draw our reference triangle A B C.",
             "Step 4. We mark the interior angle at vertex C as a ninety-degree right angle.",
@@ -265,7 +265,7 @@ CURATED_PAGE_SCRIPTS = {
         "pdf_url": "https://min7014.github.io/2020/2014111901.pdf",
         "web_url": "https://min7014.github.io/math20200225001.html",
         "pages_ko": [
-            "1페이지입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 삼각형의 세 변 또는 그 연장선과 만나는 한 직선이 만드는 길이 비의 곱이 항상 1이 된다는 메넬라우스의 정리를 단계별로 증명해 봅시다.",
+            "1페이지입니다. 단계별 시각적 수학 증명 강의입니다. 삼각형의 세 변 또는 그 연장선과 만나는 한 직선이 만드는 길이 비의 곱이 항상 1이 된다는 메넬라우스의 정리를 단계별로 증명해 봅시다.",
             "2페이지입니다. 빈 칠판 위에서 기준 삼각형과 할선을 차례대로 작도하며 시작합니다.",
             "3페이지입니다. 먼저 평면 위에 기준이 되는 삼각형 A B C를 작도합니다.",
             "4페이지입니다. 삼각형 A B C의 세 변을 포함하는 직선을 점선으로 길게 연장합니다.",
@@ -284,10 +284,10 @@ CURATED_PAGE_SCRIPTS = {
             "17페이지입니다. 이번에는 삼각형 ARQ를 봅니다. 선분 DC와 선분 RQ가 평행하므로, 역시 평행선과 선분의 길이 비에 의해 QA 분의 CQ는 AR 분의 RD와 같습니다.",
             "18페이지입니다. 이를 정리하면 QA 분의 CQ 곱하기 RD 분의 AR도 1이 됩니다.",
             "19페이지입니다. 이제 원래의 메넬라우스 식에 PC 분의 BP 대신 DR 분의 RB를, QA 분의 CQ 대신 AR 분의 RD를 대입하면, 분모와 분자의 AR, RB, DR이 모두 깨끗하게 약분되어 1이 증명됩니다!",
-            "20페이지입니다. 민은기 선생님의 수학자료실 웹페이지에서 할선의 기울기와 위치를 직접 움직이며 메넬라우스의 정리를 탐구해 보세요!"
+            "20페이지입니다. 수학홈페이지의 동적 기하 웹페이지에서 할선의 기울기와 위치를 직접 움직이며 메넬라우스의 정리를 탐구해 보세요!"
         ],
         "pages_en": [
-            "Step 1. Welcome to Min's Math Lab. In this step-by-step visual lecture, we will prove Menelaus' Theorem, showing how any transversal line cutting across a triangle creates three directed segment ratios whose product equals 1.",
+            "Step 1. In this step-by-step visual lecture, we will prove Menelaus' Theorem, showing how any transversal line cutting across a triangle creates three directed segment ratios whose product equals 1.",
             "Step 2. Starting from a blank canvas, let us construct triangle A B C and the transversal line step by step.",
             "Step 3. First, we draw a reference triangle A B C on the plane.",
             "Step 4. We extend all three sides of triangle A B C with dashed lines so that external intersections can be seen clearly.",
@@ -425,10 +425,13 @@ def latex_to_unicode_title(text):
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\triangle\s*", "△", s)
     s = re.sub(r"\\angle\s*", "∠", s)
+    s = s.replace(r"\Leftrightarrow", "⇔").replace(r"\Rightarrow", "⇒").replace(r"\Leftarrow", "⇐")
     s = s.replace(r"\times", "×").replace(r"\div", "÷").replace(r"\cdot", "·")
-    s = s.replace(r"\pm", "±").replace(r"\le", "≤").replace(r"\ge", "≥").replace(r"\ne", "≠")
+    s = s.replace(r"\pm", "±").replace(r"\leq", "≤").replace(r"\geq", "≥").replace(r"\neq", "≠")
+    s = s.replace(r"\le", "≤").replace(r"\ge", "≥").replace(r"\ne", "≠")
     s = re.sub(r"\^\s*\{([^{}]+)\}", r"^(\1)", s)
     s = s.replace("^2", "²").replace("^3", "³")
+    s = re.sub(r"\\[,;:!\s]", " ", s)
     s = s.replace("$", "").replace("<", "＜").replace(">", "＞")
     return re.sub(r"\s+", " ", s).strip()
 
@@ -444,27 +447,48 @@ def clean_math_for_speech_ko(text):
     s = re.sub(r"\\triangle\s*([A-Za-z0-9]+)", r"삼각형 \1", s)
     s = re.sub(r"\\angle\s*([A-Za-z0-9]+)", r"각 \1", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"루트 \1", s)
+    s = s.replace("√(", "루트 ").replace("√", "루트 ")
+    s = s.replace(r"\Leftrightarrow", " 필요충분조건 ").replace("⇔", " 필요충분조건 ")
+    s = s.replace(r"\Rightarrow", " 이면 ").replace("⇒", " 이면 ")
     s = s.replace(r"\times", " 곱하기 ").replace(r"\div", " 나누기 ").replace(r"\cdot", " 곱하기 ")
     s = s.replace("×", " 곱하기 ").replace("÷", " 나누기 ").replace("∴", "따라서 ")
+    s = s.replace(r"\neq", " 같지 않다 ").replace(r"\ne", " 같지 않다 ").replace("≠", " 같지 않다 ")
+    s = s.replace(r"\leq", " 이하 ").replace(r"\le", " 이하 ").replace("≤", " 이하 ")
+    s = s.replace(r"\geq", " 이상 ").replace(r"\ge", " 이상 ").replace("≥", " 이상 ")
     s = s.replace(r"\pm", " 플러스마이너스 ").replace("±", " 플러스마이너스 ")
     s = re.sub(r"\^\s*\{([^{}]+)\}", r"의 \1제곱", s)
     s = re.sub(r"\^\s*\(([^()]+)\)", r"의 \1제곱", s)
     s = re.sub(r"\^2", "의 제곱", s)
     s = re.sub(r"\^3", "의 세제곱", s)
+    s = s.replace("²", "의 제곱").replace("³", "의 세제곱")
     s = re.sub(r"\^([a-zA-Z0-9\+\-]+)", r"의 \1제곱", s)
+    s = s.replace("^", " ")
     s = re.sub(r"[\$\\\{\}]", " ", s)
     return re.sub(r"\s+", " ", s).strip()
 
 
 def clean_math_for_speech_en(text):
     s = str(text or "")
+    _, en_split = split_bilingual_title(s)
+    if en_split:
+        s = en_split
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
     s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"\1 over \2", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"segment \1", s)
     s = re.sub(r"\\triangle\s*([A-Za-z0-9]+)", r"triangle \1", s)
     s = re.sub(r"\\angle\s*([A-Za-z0-9]+)", r"angle \1", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"square root of \1", s)
+    s = s.replace("√(", "square root of ").replace("√", "square root of ")
+    s = s.replace(r"\Leftrightarrow", " if and only if ").replace("⇔", " if and only if ")
+    s = s.replace(r"\times", " times ").replace("×", " times ")
+    s = s.replace(r"\div", " divided by ").replace("÷", " divided by ")
+    s = s.replace(r"\neq", " not equal to ").replace(r"\ne", " not equal to ").replace("≠", " not equal to ")
+    s = s.replace(r"\pm", " plus or minus ").replace("±", " plus or minus ")
+    s = re.sub(r"\^\s*\{([^{}]+)\}", r" to the power of \1", s)
+    s = re.sub(r"\^\s*\(([^()]+)\)", r" to the power of \1", s)
     s = re.sub(r"\^2", " squared", s)
+    s = re.sub(r"\^3", " cubed", s)
+    s = s.replace("²", " squared").replace("³", " cubed").replace("^", " ")
     s = re.sub(r"[\$\\\{\}]", " ", s)
     return re.sub(r"\s+", " ", s).strip()
 
@@ -494,7 +518,7 @@ def compute_pedagogical_scene_ranges(total_pages, max_scenes=12):
 
 def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", breadcrumb: str = ""):
     """
-    [수석 수학교사(mathteacher) 에이전트의 min7014.github.io 18대 유형별 정밀 증명·수업 분석기 (v6.0)]
+    [수석 수학교사(mathteacher) 에이전트의 24대 유형별 정밀 증명·수업 분석기 (v7.0)]
     주제 제목과 단원 경로를 분석하여:
       1) category_type ('geometry' | 'algebra' | 'number' | 'fractal_curve' | 'space_3d' | 'calculus_trig')
       2) hypothesis_ko (출발 가정·정의 조건)
@@ -617,8 +641,32 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "이 넓이 비·내분비 원리를 고등 기하·벡터의 위치벡터 내분점 식으로 바꾸면 어떻게 교점 비율을 구할 수 있을까요?"
         }
 
-    # 8. 정사각형의 한 변의 길이와 넓이 / 제곱근과 실수
-    if "정사각형의 한 변" in t or "제곱근" in blob or "Square Root" in blob or "square root" in blob or "sqrt" in t:
+    # 8-A. 나눗셈과 역수의 곱셈 (a ÷ b = a × 1/b) — 지수법칙·제곱근보다 먼저 정확히 판별!
+    if ("\\div" in t or "÷" in t or "나눗셈" in blob) and ("\\frac{1}" in t or "1/b" in t or "역수" in blob) and "a^m" not in t:
+        return {
+            "category_type": "number",
+            "hypothesis_ko": "양수 b에 대하여 어떤 수 a를 b로 나누는 나눗셈 식(a 나누기 b)이 주어진 출발 조건",
+            "conclusion_ko": "a 나누기 b는 나누는 수 b의 역수인 b 분의 1을 곱한 것(a 곱하기 b 분의 1)과 항상 같다는 나눗셈과 역수의 관계 결론",
+            "auxiliary_line_ko": "단위 막대나 직사각형 넓이 모델을 b등분하여 'b로 나눈 몫 하나'가 곧 'b 분의 1배를 곱한 크기'와 일치함을 대응시키는 시각적 발상",
+            "proof_logic_ko": "나눗셈 a 나누기 b의 몫은 b를 곱해 a가 되는 수이므로, 양변에 b의 역수인 b 분의 1을 곱하면 몫이 정확히 a 곱하기 b 분의 1로 결정되는 곱셈의 역원 원리",
+            "misconception_ko": "나눗셈을 곱셈으로 바꿀 때 앞의 나누어지는 수 a까지 뒤집는 실수를 조심하세요! 반드시 뒤의 나누는 수 b만 역수(b 분의 1)로 바꾸어야 합니다.",
+            "what_if_not_ko": "만약 나누는 수 b가 자연수가 아니라 분수(예: c 분의 d)라면 왜 분모와 분자를 뒤집은 역수(d 분의 c)를 곱하면 될까요?"
+        }
+
+    # 8-B. 분모의 유리화 (Rationalizing the Denominator)
+    if "유리화" in blob or "Rationaliz" in blob or ("분모" in t and ("sqrt" in t or "√" in t)):
+        return {
+            "category_type": "algebra",
+            "hypothesis_ko": "분모에 근호(루트 a, 단 a는 양수)가 포함된 무리수 분수 식이 주어진 출발 조건",
+            "conclusion_ko": "분모와 분자에 똑같이 루트 a를 곱하면 분모가 근호 없는 유리수 a로 바뀌어 a 분의 b 루트 a가 된다는 분모의 유리화 결론",
+            "auxiliary_line_ko": "분수의 크기를 바꾸지 않는 1(즉 루트 a 분의 루트 a)을 분모와 분자에 동시에 곱하여 분모를 (루트 a)의 제곱 = a로 만드는 대수적 발상",
+            "proof_logic_ko": "0이 아닌 같은 수를 분모와 분자에 곱해도 분수의 값은 일정하다는 분수의 기본 성질과, 양수 a에 대하여 루트 a 곱하기 루트 a는 유리수 a가 된다는 제곱근의 정의를 결합하는 원리",
+            "misconception_ko": "분모에만 루트 a를 곱하고 분자에 곱하는 것을 잊거나, 루트 a 곱하기 루트 a를 2 루트 a로 착각하지 않도록 주의해야 합니다!",
+            "what_if_not_ko": "만약 분모가 단항식 루트 a가 아니라 '루트 a 더하기 루트 b'처럼 두 항의 합으로 되어 있다면 합차공식을 이용해 분모와 분자에 무엇을 곱해야 유리화될까요?"
+        }
+
+    # 8-C. 정사각형의 한 변의 길이와 넓이 / 제곱근과 실수
+    if "정사각형의 한 변" in t or "제곱근" in blob or "Square Root" in blob or "square root" in blob or "sqrt" in t or "√" in t:
         if "정사각형의 한 변" in t:
             return {
                 "category_type": "number",
@@ -639,18 +687,7 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "misconception_ko": "0.16의 제곱근을 0.04라고 답하는 실수가 정말 많습니다! 0.04를 제곱하면 0.0016이 되며, 제곱해서 0.16이 되는 수는 플러스마이너스 0.4입니다.",
                 "what_if_not_ko": "만약 문제에서 '0.16의 제곱근(±0.4)' 대신 '제곱근 0.16(루트 0.16)'을 구하라고 질문 어순을 바꾸면 정답은 왜 양수 +0.4 하나만 될까요?"
             }
-        elif "성질" in t or "a>0" in t or "a<0" in t:
-            is_neg = "a<0" in t or "a＜0" in t
-            return {
-                "category_type": "algebra",
-                "hypothesis_ko": f"문자 a의 부호가 {'음수(a＜0)' if is_neg else '양수(a＞0)'}일 때 근호(루트)와 제곱이 만나는 수식이 주어진 조건",
-                "conclusion_ko": f"{'a가 음수일 때 루트(a의 제곱)은 양수가 되어야 하므로 마이너스를 붙인 -a로 나온다' if is_neg else 'a가 양수일 때 루트(a의 제곱)과 (루트 a)의 제곱은 모두 원래 양수 a 그대로 나온다'}는 제곱근의 성질 결론",
-                "auxiliary_line_ko": "문자 a에 구체적인 숫자(예: a = 3 또는 a = -3)를 대입하여 안쪽 제곱을 먼저 계산한 뒤 양의 제곱근을 구해 보는 수치 대입 발상",
-                "proof_logic_ko": f"루트 기호 앞의 부호가 플러스이면 그 결과는 반드시 0 이상인 양의 제곱근이어야 하므로, {'음수 a에 마이너스 부호를 하나 더 붙여 양수 -a로 만들어 주는' if is_neg else '양수 a가 부호 변화 없이 그대로 나오는'} 절댓값(|a|) 동치 원리",
-                "misconception_ko": "a가 음수일 때 '-a' 앞에 마이너스 기호가 있다고 해서 음수라고 착각하면 안 됩니다! a 자체가 음수(예: -3)이므로 -a = -(-3) = +3인 양수입니다.",
-                "what_if_not_ko": "이 성질을 절댓값 기호 루트(a²) = |a| 하나로 통합하면, 수직선 위 두 점 사이의 거리 공식과 어떻게 연결될까요?"
-            }
-        elif "Leftrightarrow" in t or "sqrt{a}>" in t or "대소" in blob:
+        elif "Leftrightarrow" in t or "⇔" in t or "sqrt{a}>" in t or "대소" in blob:
             return {
                 "category_type": "algebra",
                 "hypothesis_ko": "두 양수 a, b에 대하여 넓이가 각각 a와 b인 두 정사각형을 포개어 비교하는 출발 조건",
@@ -660,14 +697,25 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "misconception_ko": "근호 밖의 자연수와 근호 안의 수를 비교할 때(예: 3과 루트 10)는 3 = 루트 9로 모두 근호 안에 넣어야 정확히 비교할 수 있습니다.",
                 "what_if_not_ko": "만약 두 수 앞에 음수 부호가 붙어 -루트 a와 -루트 b를 비교한다면 부등호의 방향은 어떻게 뒤집힐까요?"
             }
+        elif "성질" in t or "a<0" in t or "a＜0" in t or ("a>0" in t and "b>0" not in t) or ("a＞0" in t and "b＞0" not in t):
+            is_neg = "a<0" in t or "a＜0" in t
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"문자 a의 부호가 {'음수(a＜0)' if is_neg else '양수(a＞0)'}일 때 근호(루트)와 제곱이 만나는 수식이 주어진 조건",
+                "conclusion_ko": f"{'a가 음수일 때 루트(a의 제곱)은 양수가 되어야 하므로 마이너스를 붙인 -a로 나온다' if is_neg else 'a가 양수일 때 루트(a의 제곱)과 (루트 a)의 제곱은 모두 원래 양수 a 그대로 나온다'}는 제곱근의 성질 결론",
+                "auxiliary_line_ko": "문자 a에 구체적인 숫자(예: a = 3 또는 a = -3)를 대입하여 안쪽 제곱을 먼저 계산한 뒤 양의 제곱근을 구해 보는 수치 대입 발상",
+                "proof_logic_ko": f"루트 기호 앞의 부호가 플러스이면 그 결과는 반드시 0 이상인 양의 제곱근이어야 하므로, {'음수 a에 마이너스 부호를 하나 더 붙여 양수 -a로 만들어 주는' if is_neg else '양수 a가 부호 변화 없이 그대로 나오는'} 절댓값(|a|) 동치 원리",
+                "misconception_ko": "a가 음수일 때 '-a' 앞에 마이너스 기호가 있다고 해서 음수라고 착각하면 안 됩니다! a 자체가 음수(예: -3)이므로 -a = -(-3) = +3인 양수입니다.",
+                "what_if_not_ko": "이 성질을 절댓값 기호 루트(a의 제곱) = |a| 하나로 통합하면, 수직선 위 두 점 사이의 거리 공식과 어떻게 연결될까요?"
+            }
         else:
             return {
                 "category_type": "number",
                 "hypothesis_ko": f"'{ko_t}'에서 어떤 수 x를 제곱하여 음이 아닌 수 a가 되는 관계(x의 제곱 = a)를 탐구하는 출발 조건",
                 "conclusion_ko": "양수 a의 제곱근은 양의 제곱근(+루트 a)과 음의 제곱근(-루트 a) 2개이며, 0의 제곱근은 0 하나뿐이고, 음수의 실수 제곱근은 존재하지 않는다는 결론",
-                "auxiliary_line_ko": "제곱 연산(x ➔ x²)의 역연산 화살표 다이어그램과 수직선 원점 대칭(±루트 a) 모델을 그려 확인하는 발상",
+                "auxiliary_line_ko": "제곱 연산(x에서 x의 제곱)의 역연산 화살표 다이어그램과 수직선 원점 대칭(플러스마이너스 루트 a) 모델을 그려 확인하는 발상",
                 "proof_logic_ko": "부호가 같은 두 실수를 곱하면 항상 0 이상이 되므로, 양수 a에 대해서는 절댓값이 같고 부호가 반대인 두 수(+루트 a, -루트 a)가 제곱하여 a가 되는 원리",
-                "misconception_ko": "'a의 제곱근(제곱해서 a가 되는 수, ±루트 a 2개)'과 '제곱근 a(루트 a를 한글로 읽은 것, 양수 1개)'는 가장 자주 출제되는 핵심 구분 포인트입니다!",
+                "misconception_ko": "'a의 제곱근(제곱해서 a가 되는 수, 플러스마이너스 루트 a 2개)'과 '제곱근 a(루트 a를 한글로 읽은 것, 양수 1개)'는 가장 자주 출제되는 핵심 구분 포인트입니다!",
                 "what_if_not_ko": "만약 고등학교에서 제곱하여 음수 -1이 되는 새로운 수(허수 단위 i)를 정의한다면 수의 체계는 어디까지 확장될까요?"
             }
 
@@ -680,7 +728,7 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "conclusion_ko": "유리수를 소수로 나타내면 소수점 아래 0이 아닌 숫자가 유한개인 유한소수 또는 일정한 숫자 배열(순환마디)이 한없이 되풀이되는 순환소수가 된다는 결론",
                 "auxiliary_line_ko": "기약분수의 분모를 소인수분해하여 소인수가 2나 5뿐인지(10의 거듭제곱 분수로 변환 가능), 아니면 2와 5 이외의 소인수가 있는지 분류하는 수론적 발상",
                 "proof_logic_ko": "나눗셈에서 나머지는 나누는 수(분모)보다 작은 자연수이므로 최대 분모 개수만큼만 나누어 보면 언젠가 나머지가 0이 되거나(유한소수) 이전에 나왔던 나머지가 반드시 다시 나타나 순환마디가 생기는 비둘기집 원리",
-                "misconception_ko": "무한소수라고 해서 모두 무리수가 아닙니다! 순환소수(예: 0.333... = 1/3)는 분수로 나타낼 수 있는 당당한 유리수이며, 순환하지 않는 무한소수(원주율 파이, 루트 2)만 무리수입니다.",
+                "misconception_ko": "무한소수라고 해서 모두 무리수가 아닙니다! 순환소수(예: 0.333... = 3분의 1)는 분수로 나타낼 수 있는 당당한 유리수이며, 순환하지 않는 무한소수(원주율 파이, 루트 2)만 무리수입니다.",
                 "what_if_not_ko": "순환소수 x = 0.121212...에 100을 곱해 100x - x = 99x를 만들면 어떻게 모든 순환소수를 1초 만에 분수로 바꿀 수 있을까요?"
             }
         else:
@@ -688,23 +736,41 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "category_type": "number",
                 "hypothesis_ko": "자연수, 0, 음의 정수로 이루어진 정수와, 분모가 0이 아닌 정수 분의 정수 꼴로 나타내어지는 유리수의 포함 관계를 분류하는 출발 조건",
                 "conclusion_ko": "모든 정수는 분모가 1인 분수로 나타낼 수 있으므로 유리수에 포함되며, 유리수는 정수와 정수가 아닌 유리수(유한소수·순환소수)로 깔끔하게 분류된다는 수 체계 결론",
-                "auxiliary_line_ko": "수의 벤 다이어그램(자연수 ⊂ 정수 ⊂ 유리수 ⊂ 실수)과 수직선 위의 등분점을 대응시켜 시각화하는 발상",
-                "proof_logic_ko": "분수의 약분 후 기약분수 상태에서 분모가 1이면 정수(예: 6/2 = 3), 분모가 1이 아니면 정수가 아닌 유리수(예: 1/2, -3/4)로 판별되는 원리",
-                "misconception_ko": "분수 모양으로 적혀 있다고 해서 무조건 '정수가 아닌 유리수'라고 속으면 안 됩니다! -8/4 = -2처럼 약분했을 때 자연수나 음의 정수가 되면 정수입니다.",
+                "auxiliary_line_ko": "수의 벤 다이어그램(자연수, 정수, 유리수, 실수)과 수직선 위의 등분점을 대응시켜 시각화하는 발상",
+                "proof_logic_ko": "분수의 약분 후 기약분수 상태에서 분모가 1이면 정수(예: 2분의 6 = 3), 분모가 1이 아니면 정수가 아닌 유리수(예: 2분의 1, 마이너스 4분의 3)로 판별되는 원리",
+                "misconception_ko": "분수 모양으로 적혀 있다고 해서 무조건 '정수가 아닌 유리수'라고 속으면 안 됩니다! 마이너스 4분의 8 = -2처럼 약분했을 때 자연수나 음의 정수가 되면 정수입니다.",
                 "what_if_not_ko": "유리수만으로도 수직선이 빽빽하게 채워진 것 같지만, 왜 유리수 사이사이의 빈틈을 메우려면 무리수(루트 2, 파이)가 반드시 필요할까요?"
             }
 
     # 10. 지수법칙 / 거듭제곱 / 단항식 연산
     if "자연수일 때" in t or "a^m" in t or "지수" in blob or "거듭제곱" in blob or "5a" in t or "단항식" in blob:
         is_div = "div" in t or "÷" in t
+        is_pow_pow = "(a^m)^n" in t or "(a^(m))^(n)" in ko_t
+        is_prod_pow = "(ab)^n" in t or "ab" in t or "\\frac{a}{b}" in t or "(a/b)" in ko_t
+        if is_pow_pow:
+            aux_s = "괄호 전체 (a의 m제곱)이 n번 거듭 곱해진 식을 펼쳐, m개씩 묶인 a 묶음이 총 n줄 나열되는 구조를 세어 보는 대수적 해체 발상"
+            logic_s = "m개씩 들어 있는 a의 묶음을 n번 더하면 m 더하기 m 더하기 ... (n번) = m 곱하기 n개가 되어 지수끼리의 곱셈(a의 mn제곱)이 성립하는 원리"
+            misc_s = "(a의 m제곱)의 n제곱과 a의 m제곱 곱하기 a의 n제곱을 혼동하지 마세요! 괄호 밖의 거듭제곱은 지수끼리 곱하고(mn), 밑이 같은 거듭제곱의 곱셈은 지수끼리 더합니다(m+n)."
+        elif is_prod_pow:
+            aux_s = "괄호 안의 곱(ab) 또는 분수(b 분의 a) 전체를 n번 나열한 뒤, 곱셈의 교환법칙과 결합법칙으로 a끼리 n개, b끼리 n개 모아 묶어 주는 발상"
+            logic_s = "(ab)를 n번 곱한 식에서 a만 모으면 n개(a의 n제곱), b만 모으면 n개(b의 n제곱)가 되어 괄호 밖의 지수 n이 각각의 인수에 분배되는 원리"
+            misc_s = "분수의 거듭제곱 (b 분의 a)의 n제곱에서는 분자 a뿐만 아니라 분모 b에도 똑같이 n제곱을 적용해 b의 n제곱 분의 a의 n제곱으로 나타내야 합니다."
+        elif is_div:
+            aux_s = "나눗셈을 분수 꼴(a의 n제곱 분의 a의 m제곱)로 바꾼 뒤, 분자에 곱해진 m개의 a와 분모에 곱해진 n개의 a를 일대일로 약분해 보는 대수적 해체 발상"
+            logic_s = "분자와 분모에서 공통인 a를 약분하고 남은 개수를 m이 n보다 클 때(분자에 m-n개), 같을 때(모두 약분되어 1), 작을 때(분모에 n-m개)로 나누어 확인하는 원리"
+            misc_s = "나눗셈 a의 m제곱 나누기 a의 n제곱에서 지수끼리 나누어 m 나누기 n으로 쓰는 실수를 조심하세요! 약분은 개수가 줄어드는 것이므로 지수끼리 빼야 하며, m과 n이 같을 때는 0이 아니라 1이 됩니다."
+        else:
+            aux_s = "추상적인 지수 기호를 암기하지 않고, 밑 a가 실제로 몇 번 곱해져 있는지 괄호와 곱셈 나열식(a 곱하기 a 곱하기 ...)으로 펼쳐서 전체 개수를 세어 보는 대수적 해체 발상"
+            logic_s = "곱셈의 결합법칙에 의해 앞에 곱해진 m개의 a와 뒤에 곱해진 n개의 a를 한 줄로 합쳐 세면 총 (m 더하기 n)개가 되어 지수의 덧셈 규칙과 일치하는 원리"
+            misc_s = "곱셈 a의 m제곱 곱하기 a의 n제곱에서 지수끼리 곱해 a의 mn제곱으로 착각하는 실수가 많습니다! a의 제곱 곱하기 a의 세제곱은 a가 총 5번 곱해진 a의 5제곱임을 떠올리면 즉시 검산됩니다."
         return {
             "category_type": "algebra",
             "hypothesis_ko": "자연수 지수 m, n과 거듭제곱의 정의(a의 m제곱은 밑 a를 m번 거듭 곱한 것)가 주어진 출발 조건",
             "conclusion_ko": f"수식 '{ko_t}'의 지수법칙이 모든 자연수 지수에서 필연적으로 성립한다는 대수적 결론",
-            "auxiliary_line_ko": f"추상적인 지수 기호를 암기하지 않고, 밑 a가 실제로 몇 번 곱해져 있는지 {'분자와 분모에 나열하여 공통 인수를 약분해 보는' if is_div else '괄호와 곱셈 나열식(a × a × ··· × a)으로 펼쳐서 전체 개수를 세어 보는'} 대수적 해체 발상",
-            "proof_logic_ko": f"{'분자에 곱해진 m개의 a와 분모에 곱해진 n개의 a를 일대일로 약분하고 남은 a의 개수를 m＞n, m=n, m＜n 세 경우로 나누어 세면 지수의 뺄셈 규칙과 정확히 일치하는' if is_div else '곱셈의 결합법칙에 의해 앞에 곱해진 m개의 a와 뒤에 곱해진 n개의 a를 한 줄로 합쳐 세면 총 (m+n)개가 되어 지수의 덧셈·곱셈 규칙과 일치하는'} 원리",
-            "misconception_ko": f"{'나눗셈 a^m ÷ a^n에서 지수끼리 나누어 a^(m/n)으로 쓰는 실수를 조심하세요! 나눗셈은 약분이므로 지수끼리 빼야 합니다.' if is_div else '곱셈 a^m × a^n에서 지수끼리 곱해 a^(mn)으로 착각하는 실수가 많습니다! a² × a³ = (a×a)×(a×a×a) = a⁵처럼 작은 자연수(2, 3)를 대입하면 1초 만에 검산됩니다.'}",
-            "what_if_not_ko": "만약 지수 m, n이 자연수를 넘어 0이나 음의 정수(a⁰ = 1, a⁻ⁿ = 1/aⁿ), 나아가 유리수 분수 지수로 확장되면 어떤 조건(밑 a＞0)이 추가로 필요할까요?"
+            "auxiliary_line_ko": aux_s,
+            "proof_logic_ko": logic_s,
+            "misconception_ko": misc_s,
+            "what_if_not_ko": "만약 지수 m, n이 자연수를 넘어 0이나 음의 정수(a의 0제곱 = 1, a의 마이너스 n제곱 = a의 n제곱 분의 1), 나아가 유리수 지수로 확장되면 어떤 조건(밑 a＞0)이 추가로 필요할까요?"
         }
 
     # 11. 피타고라스 정리 / 피타고라스 나무
@@ -712,9 +778,9 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
         return {
             "category_type": "geometry",
             "hypothesis_ko": "직각삼각형의 세 변 a, b, c(빗변 c)와 각 변을 한 변으로 하는 정사각형이 작도된 기하학적 출발 조건",
-            "conclusion_ko": "직각을 낀 두 변의 제곱의 합은 빗변의 제곱과 항상 같다(a² + b² = c²)는 피타고라스 정리와 넓이 보존 결론",
-            "auxiliary_line_ko": "한 변이 (a+b)인 큰 정사각형을 합동인 직각삼각형 4개와 한가운데 정사각형(넓이 c²)으로 분할하는 보조선",
-            "proof_logic_ko": "네 모서리의 직각삼각형이 SAS 합동이고 두 예각의 합이 90도이므로 가운데 사각형의 한 내각이 180도 - 90도 = 90도가 되어 정사각형이 되며, 전체 넓이 등식 (a+b)² = 4×(1/2 ab) + c²을 정리하면 a² + b² = c²이 도출되는 원리",
+            "conclusion_ko": "직각을 낀 두 변의 제곱의 합은 빗변의 제곱과 항상 같다(a의 제곱 더하기 b의 제곱 = c의 제곱)는 피타고라스 정리와 넓이 보존 결론",
+            "auxiliary_line_ko": "한 변이 (a+b)인 큰 정사각형을 합동인 직각삼각형 4개와 한가운데 정사각형(넓이 c의 제곱)으로 분할하는 보조선",
+            "proof_logic_ko": "네 모서리의 직각삼각형이 SAS 합동이고 두 예각의 합이 90도이므로 가운데 사각형의 한 내각이 180도 빼기 90도 = 90도가 되어 정사각형이 되며, 전체 넓이 등식을 정리하면 a의 제곱 더하기 b의 제곱 = c의 제곱이 도출되는 원리",
             "misconception_ko": "가운데 사각형의 네 변의 길이가 c로 같다는 것만으로는 마름모일 수도 있으므로, 반드시 두 예각의 합이 90도임을 이용해 내각이 90도(정사각형)임을 증명해야 완벽합니다!",
             "what_if_not_ko": "만약 직각삼각형의 세 변 위에 정사각형 대신 정삼각형이나 반원을 올린다면 두 작은 도형의 넓이 합은 여전히 빗변 도형의 넓이와 같을까요?"
         }
@@ -726,9 +792,9 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "hypothesis_ko": f"기본 선분이나 정삼각형에서 출발하여 각 선분을 일정한 비율로 쪼개고 같은 모양을 되풀이해 붙여 나가는 '{ko_t}'의 자기닮음(Self-Similarity) 생성 규칙",
             "conclusion_ko": "단순한 기하학적 분할 규칙을 무한히 반복하면 일부분을 확대해도 전체와 똑같은 모양이 끝없이 나타나는 프랙탈 곡선이 완성된다는 결론",
             "auxiliary_line_ko": "선분을 3등분(또는 격자 분할)한 뒤 가운데 구간에 정삼각형 산 모양(또는 공간 채움 경로)을 세우는 단계별 재귀(Recursion) 작도",
-            "proof_logic_ko": "한 단계를 거칠 때마다 선분의 개수는 4배(또는 거듭제곱 배)로 늘어나고 각 선분의 길이는 1/3로 줄어들어, 전체 길이는 매 단계 (4/3)ⁿ 등비수열로 증가하는 반면 둘러싸인 넓이는 유한한 극한값에 수렴하는 원리",
+            "proof_logic_ko": "한 단계를 거칠 때마다 선분의 개수는 4배(또는 거듭제곱 배)로 늘어나고 각 선분의 길이는 3분의 1로 줄어들어, 전체 길이는 매 단계 3분의 4의 거듭제곱 등비수열로 증가하는 반면 둘러싸인 넓이는 유한한 극한값에 수렴하는 원리",
             "misconception_ko": "도형이 유한한 화면(유한한 넓이) 안에 갇혀 있다고 해서 둘레의 길이도 유한할 것이라고 착각하기 쉽지만, 코흐 눈송이는 '넓이는 유한하면서 둘레의 길이는 무한대'가 되는 놀라운 도형입니다!",
-            "what_if_not_ko": "이 프랙탈 도형의 닮음비와 조각 개수를 이용해 고등학교 미적분의 등비급수 도형 넓이·길이 극한 문제(S = a / (1 - r))를 어떻게 단번에 풀 수 있을까요?"
+            "what_if_not_ko": "이 프랙탈 도형의 닮음비와 조각 개수를 이용해 고등학교 미적분의 등비급수 도형 넓이·길이 극한 문제를 어떻게 단번에 풀 수 있을까요?"
         }
 
     # 13. 정칠각형 매듭 / 오더리 탱클 / 회전 / 장미 / 꽃잎차례 / 소수·합성수 게임 / 3D 곡면·스트링 아트
@@ -741,7 +807,7 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "auxiliary_line_ko": "에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상",
                 "proof_logic_ko": "합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리",
                 "misconception_ko": "자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
-                "what_if_not_ko": "만약 소인수분해를 이용해 어떤 자연수 N = pᵃ qᵇ의 양의 약수의 개수를 구한다면 왜 지수에 1씩 더해 (a+1)(b+1)을 곱하면 될까요?"
+                "what_if_not_ko": "만약 소인수분해를 이용해 어떤 자연수의 양의 약수의 개수를 구한다면 왜 각 소인수의 지수에 1씩 더해 곱하면 될까요?"
             }
         elif "발판곡면" in blob or "스트링 아트" in blob or "사면체" in blob:
             return {
@@ -764,42 +830,95 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "what_if_not_ko": "만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요?"
             }
 
-    # 14. 일반 기하·대수·미적분 주제
-    is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "함수", "수열", "로그"))
+    # 14. 이차곡선 (포물선 / 타원 / 쌍곡선 / 단델린 구)
+    if any(k in blob for k in ("포물선", "타원", "쌍곡선", "이차곡선", "단델린", "Parabola", "Ellipse", "Hyperbola", "Dandelin", "초점", "준선")):
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"초점(Focus)과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '{ko_t}'의 기하학적 출발 조건",
+            "conclusion_ko": f"'{ko_t}'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론",
+            "auxiliary_line_ko": "곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도",
+            "proof_logic_ko": "이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리",
+            "misconception_ko": "이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
+            "what_if_not_ko": "만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요?"
+        }
+
+    # 15. 원의 성질 (원주각 / 중심각 / 접선 / 할선 / 톨레미 / 내접사각형)
+    if any(k in blob for k in ("원주각", "중심각", "접선", "현의", "톨레미", "Ptolemy", "내접", "할선", "방멱")):
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"원 위의 점들과 현·접선·중심이 이루는 '{ko_t}'의 기하학적 출발 조건",
+            "conclusion_ko": f"'{ko_t}'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론",
+            "auxiliary_line_ko": "원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용",
+            "proof_logic_ko": "반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리",
+            "misconception_ko": "원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
+            "what_if_not_ko": "만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?"
+        }
+
+    # 16. 일반 기하·대수·미적분 주제
+    is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "함수", "수열", "로그", "공식", "덧셈", "뺄셈", "곱셈", "나눗셈"))
     return {
         "category_type": "algebra" if is_alg else "geometry",
         "hypothesis_ko": f"'{ko_t}'에서 주어진 기본 정의와 출발 조건(가정)",
         "conclusion_ko": f"'{ko_t}'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
-        "auxiliary_line_ko": "주어진 조건들을 하나의 대칭·합동·닮음 또는 동치 등식 구조로 연결하는 폴리아의 제1보조선 및 단계별 분할",
-        "proof_logic_ko": "단계별 분할을 통해 도형의 합동·닮음·넓이 불변량 성질과 수식의 동치 변형을 결합하여 결론을 필연적으로 도출하는 원리",
-        "misconception_ko": "결론 공식을 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "auxiliary_line_ko": (
+            "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상"
+            if is_alg
+            else "주어진 조건들을 하나의 대칭·합동·닮음 구조로 연결하는 폴리아의 제1보조선 및 단계별 분할"
+        ),
+        "proof_logic_ko": (
+            "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리"
+            if is_alg
+            else "단계별 작도를 통해 도형의 합동·닮음·넓이 불변량 성질로부터 결론을 필연적으로 도출하는 원리"
+        ),
+        "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
         "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
     }
 
 
+def _normalize_pdf_line_for_speech(line_str: str) -> str:
+    """PDF에서 추출된 수식 텍스트 조각(예: 'am × an =', '= 2')을 정제하고 불완전 조각은 걸러냅니다."""
+    s = (line_str or "").strip()
+    if not s:
+        return ""
+    # 단일 기호나 불완전 파편(예: '= 2', 'am ×', 'an =', 'm개', 'n개') 필터링
+    if len(s) <= 3 or re.match(r"^[=\+\-\×\÷\s0-9\.]+$", s):
+        return ""
+    if s.endswith(("×", "÷", "+", "-", "=")) and len(s) < 10:
+        return ""
+    # PDF 수식에서 지수가 아래로 내려온 형태(am, an, am+n, am-n, an-m) 교정
+    s = re.sub(r"\ba\s*m\s*\+\s*n\b", "a의 (m+n)제곱", s)
+    s = re.sub(r"\ba\s*m\s*-\s*n\b", "a의 (m-n)제곱", s)
+    s = re.sub(r"\ba\s*n\s*-\s*m\b", "a의 (n-m)제곱", s)
+    s = re.sub(r"\ba\s*m\s*n\b", "a의 mn제곱", s)
+    s = re.sub(r"\ba\s*m\b", "a의 m제곱", s)
+    s = re.sub(r"\ba\s*n\b", "a의 n제곱", s)
+    s = re.sub(r"\bb\s*n\b", "b의 n제곱", s)
+    return clean_math_for_speech_ko(s)
+
+
 def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
     """
-    [수석 수학교사(mathteacher) 에이전트 기반 PDF 슬라이드별 정밀 시각·대수 증명 분석 대본 생성기 (v5.0)]
-    - 민은기 선생님의 수학자료실(https://min7014.github.io/) PDF의 고유한 시각 증명 문법을 슬라이드별로 해독합니다:
-      1) 좌측 상단 영역(cx < 0.46, cy < 0.50) 변화 ➔ 출발 가정(Hypothesis) 도형 및 조건 작도 분석
-      2) 우측 상단 영역(cx >= 0.46, cy < 0.50) 변화 ➔ 명제 화살표(⇒) 및 목표 결론(Conclusion) 제시 분석
-      3) 하단 증명 캔버스(cy >= 0.48) + 초록색(green) ➔ 폴리아의 제1보조선(Auxiliary Line) 작도 분석
-      4) 하단 증명 캔버스 + 보라/주황(purple) ➔ 합동(SAS/ASA/SSS/RHS/RHA)·닮음·엇각 핵심 증명 논리 분석
-      5) 하단 증명 캔버스 + 붉은색(red) ➔ 대응변·대응각 일치에 의한 최종 결론(Q.E.D.) 완성 분석
-      6) 슬라이드 내 수식·텍스트 증분(curr_lines - prev_lines) ➔ 대수·지수·제곱근 수식의 단계별 전개식 해독
+    [수석 수학교사(mathteacher) 에이전트 기반 PDF 슬라이드별 정밀 시각·대수 증명 분석 대본 생성기 (v7.0)]
+    - 인물 명칭 언급 없이 오직 순수한 수학적 논리와 직관적 발문으로만 구성합니다.
+    - 대수/수체계(algebra/number)와 기하/프랙탈(geometry/fractal_curve)을 엄격히 분리하여,
+      대수 영상에 기하 합동/보조선 문구가 섞이거나 기계적인 레이아웃 메타 설명이 낭독되지 않도록 합니다.
     """
     total_pages = len(doc)
     if scene_ranges is None:
         scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=12)
     num_scenes = len(scene_ranges)
 
-    raw_title = (item_meta or {}).get("title") or "수학자료실 시각적 증명"
+    raw_title = (item_meta or {}).get("title") or "단계별 시각적 수학 증명"
     sub_ko = (item_meta or {}).get("sub_domain_ko") or ""
     breadcrumb = (item_meta or {}).get("breadcrumb") or ""
     clean_title_ko = clean_math_for_speech_ko(raw_title)
-    clean_title_en = translate_text_google_gtx(clean_title_ko, "en")
+    _, _en_from_title = split_bilingual_title(raw_title)
+    clean_title_en = clean_math_for_speech_en(_en_from_title) if _en_from_title else translate_text_google_gtx(clean_title_ko, "en")
 
-    t_analysis = (item_meta or {}).get("teacher_proof_analysis") or analyze_min7014_topic_as_mathteacher(raw_title, sub_ko, breadcrumb)
+    # 항상 최신 v7.0 수학교사 분석기를 직접 호출하여 캐시 오염 원천 차단
+    t_analysis = analyze_min7014_topic_as_mathteacher(raw_title, sub_ko, breadcrumb)
+    cat_type = t_analysis.get("category_type", "geometry")
+    is_alg_num = cat_type in ("algebra", "number")
     hyp_ko = clean_math_for_speech_ko(t_analysis.get("hypothesis_ko") or "")
     conc_ko = clean_math_for_speech_ko(t_analysis.get("conclusion_ko") or "")
     aux_ko = clean_math_for_speech_ko(t_analysis.get("auxiliary_line_ko") or "")
@@ -809,10 +928,10 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
 
     color_desc_ko = {
         "red": "붉은색 목표 결론 및 핵심 등식 강조",
-        "blue": "파란색 출발 가정 도형 및 기준 선분 작도",
-        "green": "초록색 폴리아 제1보조선 및 분할선 작도",
-        "purple": "주황·보라색 합동·닮음 대응 삼각형 강조",
-        "default": "핵심 기하 작도 및 단계별 수식 전개",
+        "blue": "파란색 출발 가정 및 기준 조건 제시",
+        "green": "초록색 핵심 연결 고리 및 분할 과정",
+        "purple": "주황·보라색 핵심 대응 관계 강조",
+        "default": "단계별 수학적 추론 및 증명 전개",
     }
 
     pages_out = []
@@ -828,7 +947,6 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
         bbox, c_tag = compute_page_diff_and_color(prev_pil, curr_pil) if s_idx > 0 else (None, "default")
         prev_pil = curr_pil
 
-        # 슬라이드 내 텍스트/수식 줄 추출 및 이전 장면 대비 새로 추가된 수식 줄 감지
         raw_page_text = ""
         try:
             raw_page_text = doc[rep_idx].get_text("text") or ""
@@ -845,112 +963,123 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
         added_lines = [ln for ln in curr_lines if ln not in prev_text_lines]
         if curr_lines:
             prev_text_lines = list(curr_lines)
-        added_formula_ko = clean_math_for_speech_ko(" ".join(added_lines[:2])) if added_lines else ""
+        meaningful_added = [_normalize_pdf_line_for_speech(ln) for ln in added_lines]
+        meaningful_added = [m for m in meaningful_added if len(m) >= 5]
+        added_formula_ko = meaningful_added[0] if meaningful_added else ""
 
-        # 공간 좌표(bbox) + 색상(c_tag) 기반 민은기 선생님 PDF 시각 증명 문법 판별
         c_ko = color_desc_ko.get(c_tag, color_desc_ko["default"])
         spatial_role = "general"
         focus_desc = c_ko
-        if bbox:
+        if bbox and not is_alg_num:
             cx = (bbox[0] + bbox[2]) / 2.0
             cy = (bbox[1] + bbox[3]) / 2.0
             if cy < 0.48 and cx < 0.47:
                 spatial_role = "top_left_hypothesis"
-                focus_desc = f"좌측 상단 출발 가정(Hypothesis) 작도 ({c_ko})"
+                focus_desc = f"좌측 상단 출발 가정(Hypothesis) 제시 ({c_ko})"
             elif cy < 0.48 and cx >= 0.47:
                 spatial_role = "top_right_conclusion"
                 focus_desc = f"우측 상단 목표 결론(⇒ Conclusion) 제시 ({c_ko})"
             elif cy >= 0.48 and c_tag == "green":
                 spatial_role = "bottom_green_auxiliary"
-                focus_desc = "하단 증명 도형 · 초록색 폴리아 제1보조선 작도"
+                focus_desc = "초록색 폴리아 제1보조선 작도"
             elif cy >= 0.48 and c_tag == "purple":
                 spatial_role = "bottom_purple_congruence"
-                focus_desc = "하단 증명 도형 · 주황·보라색 합동·닮음 삼각형 강조"
+                focus_desc = "주황·보라색 합동·닮음 삼각형 비교"
             elif cy >= 0.48 and c_tag == "red":
                 spatial_role = "bottom_red_qed"
-                focus_desc = "하단 증명 도형 · 붉은색 대응 요소 및 최종 결론 도출"
+                focus_desc = "붉은색 대응 요소 및 최종 결론 도출"
             elif cy >= 0.48:
                 spatial_role = "bottom_base_proof"
-                focus_desc = f"하단 중앙 증명 도형 전개 ({c_ko})"
+                focus_desc = f"증명 도형 단계별 작도 ({c_ko})"
 
         if s_num == 1:
-            step_title = "도입 · 수학교사의 눈으로 가정과 결론 읽기 (Notice & Wonder)"
-            step_q_ko = f"❓ [출발 질문] {clean_title_ko}에서 주어진 출발 가정은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?"
-            step_q_en = f"❓ [Opening Question] What is the given hypothesis and target conclusion in {clean_title_en}?"
+            step_title = "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)"
+            step_q_ko = f"❓ [출발 질문] {clean_title_ko}에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?"
+            step_q_en = f"❓ [Opening Question] What is the starting condition and target conclusion in {clean_title_en}?"
             exp_ko = (
-                f"안녕하세요, 민은기 선생님의 수학교실입니다. 오늘 함께 탐구할 주제는 {clean_title_ko}입니다. "
-                f"공식을 외우기 전에 먼저 수학교사의 시선으로 출발 조건을 확인해 볼까요? "
-                f"이 명제의 출발점은 {hyp_ko}입니다. 과연 왜 이 조건에서 {conc_ko}이 필연적으로 성립하는지 한 단계씩 눈으로 증명해 봅시다."
+                f"1단계입니다. 오늘 함께 탐구할 주제는 {clean_title_ko}입니다. "
+                f"결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? "
+                f"이 주제의 출발점은 {hyp_ko}입니다. 왜 이 조건에서 {conc_ko}이 필연적으로 성립하는지 한 단계씩 증명해 봅시다."
             )
             exp_en = (
-                f"Welcome to Min's Math Lab. Today we explore {clean_title_en} from a math teacher's perspective. "
-                f"Before memorizing any formula, let us examine our starting hypothesis and see why it inevitably leads to the conclusion step by step."
+                f"Step 1. Today we explore {clean_title_en} through a step-by-step visual proof. "
+                f"Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
             )
         elif s_num == num_scenes:
             step_title = "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)"
             step_q_ko = f"🔀 [조건 변형 질문] {win_ko}"
-            step_q_en = "🔀 [What-If-Not] How does this theorem evolve if we modify or generalize its conditions?"
+            step_q_en = "🔀 [What-If-Not] How does this mathematical principle evolve if we modify or generalize its conditions?"
             exp_ko = (
-                f"마지막 {s_num}단계, 마침내 증명이 완성되었습니다! "
-                f"출발 가정이었던 {hyp_ko}에서 시작해, {aux_ko}을 거쳐, {conc_ko}이 성립함을 한 치의 빈틈도 없이 확인했습니다. "
-                f"수학교사로서 꼭 당부하고 싶은 점은 {misc_ko} "
-                f"마지막으로 스스로에게 한 걸음 더 깊은 질문을 던져 보세요. {win_ko} "
-                f"설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!"
+                f"마지막 {s_num}단계, 증명이 완성되었습니다! "
+                f"출발 조건이었던 {hyp_ko}에서 시작해, {aux_ko}을 거쳐, {conc_ko}이 성립함을 명확하게 확인했습니다. "
+                f"여기서 꼭 기억해야 할 핵심 포인트는, {misc_ko} "
+                f"마지막으로 한 걸음 더 깊이 질문해 보세요. {win_ko} "
+                f"설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!"
             )
             exp_en = translate_text_google_gtx(exp_ko, "en")
         else:
             progress = (s_num - 1) / max(1, num_scenes - 2)
-            range_str = f"{p_start + 1}페이지부터 {p_end + 1}페이지까지의 연속 작도입니다." if p_end > p_start else f"{p_start + 1}페이지 장면입니다."
+            range_str = f"{p_start + 1}페이지부터 {p_end + 1}페이지까지의 단계입니다." if p_end > p_start else f"{p_start + 1}페이지 단계입니다."
 
-            # 1) 대수·지수·수식 슬라이드에서 새로운 수식 줄이 등장한 경우 수식 전개 우선 해설
-            if added_formula_ko and len(added_lines) > 0 and any(ch in " ".join(added_lines) for ch in ("=", "×", "+", "-", "^", "개", "∴")):
-                if progress <= 0.38:
-                    step_title = f"Step {s_num} · 거듭제곱과 수식의 정의 펼치기 (Definition)"
-                    step_q_ko = f"❓ [정의 질문] 화면에 나타난 '{added_lines[0]}' 식을 기본 정의대로 풀어서 쓰면 어떻게 될까요?"
+            # A) 대수·수체계(algebra / number) 전용 단계별 논리 전개 (기하 합동/보조선 문구 완전 배제)
+            if is_alg_num:
+                formula_mention = f"화면에 제시된 {added_formula_ko} 관계를 살펴보세요. " if added_formula_ko else ""
+                if progress <= 0.30:
+                    step_title = f"Step {s_num} · 기본 정의 확인 및 출발 식 세우기 (Definition)"
+                    step_q_ko = f"❓ [정의 질문] {clean_title_ko}를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} 화면에 새로 나타난 식 {added_formula_ko}에 주목해 보세요. "
-                        f"수학교사가 가장 강조하는 비결은 기호를 외우지 않고 뜻대로 펼쳐 보는 것입니다. {aux_ko} 과정을 시작합니다."
+                        f"{s_num}단계, {range_str} {formula_mention}"
+                        f"먼저 {hyp_ko}을 바탕으로 식의 기본 정의를 정확히 세웁니다. "
+                        f"기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다."
                     )
-                elif progress <= 0.72:
-                    step_title = f"Step {s_num} · 괄호 해체와 개수 세기 (Algebraic Unfolding)"
-                    step_q_ko = f"🧭 [전개 질문] 펼쳐 놓은 식 '{added_lines[0]}'에서 전체 곱해진 개수는 어떻게 합쳐질까요?"
+                elif progress <= 0.56:
+                    step_title = f"Step {s_num} · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)"
+                    step_q_ko = "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} 다음 줄에 유도된 {added_formula_ko} 식을 살펴보세요. "
-                        f"{logic_ko}에 따라 식이 한눈에 정리됩니다. "
-                        f"이때 {misc_ko}"
+                        f"{s_num}단계, {range_str} {formula_mention}"
+                        f"이제 증명의 핵심 열쇠인 {aux_ko}을 적용합니다. "
+                        f"이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다."
+                    )
+                elif progress <= 0.80:
+                    step_title = f"Step {s_num} · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)"
+                    step_q_ko = "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?"
+                    exp_ko = (
+                        f"{s_num}단계, {range_str} {formula_mention}"
+                        f"{logic_ko}에 따라 식이 빈틈없이 유도됩니다. "
+                        f"이 단계에서 특히 주의할 점은, {misc_ko}"
                     )
                 else:
-                    step_title = f"Step {s_num} · 대수적 등식 결합 및 법칙 완성 (Synthesis)"
-                    step_q_ko = f"💡 [결론 질문] 앞의 전개 과정을 하나로 묶으면 왜 '{added_lines[0]}' 등식이 완성될까요?"
+                    step_title = f"Step {s_num} · 대수적 등식 결합 및 성질 완성 (Synthesis)"
+                    step_q_ko = "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} 이제 {added_formula_ko} 단계에 도달했습니다. "
-                        f"구체적인 곱셈 나열을 다시 거듭제곱 기호로 묶어 주면 {conc_ko}이 자연스럽게 도출됩니다."
+                        f"{s_num}단계, {range_str} {formula_mention}"
+                        f"앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 {conc_ko}이 자연스럽게 도출됩니다!"
                     )
                 step_q_en = translate_text_google_gtx(step_q_ko, "en")
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
-            # 2) 기하 증명 PDF의 공간·색상 역할별 맞춤 수학교사 해설
+            # B) 기하·프랙탈 증명 PDF의 공간·색상 역할별 맞춤 해설
             elif spatial_role == "top_left_hypothesis" and "hyp" not in used_roles:
                 used_roles.add("hyp")
-                step_title = f"Step {s_num} · 좌측 상단 출발 가정(Hypothesis) 작도"
+                step_title = f"Step {s_num} · 출발 가정(Hypothesis) 도형과 조건 확인"
                 step_q_ko = "👁️ [가정 확인 질문] 화면 왼쪽 위에 파란색으로 표시된 출발 조건(가정)은 무엇인가요?"
                 step_q_en = "👁️ [Hypothesis Question] What starting condition is drawn in blue at the top-left?"
                 exp_ko = (
                     f"{s_num}단계, {range_str} 화면 왼쪽 위 영역을 보세요. "
-                    f"민은기 선생님의 시각 증명에서는 왼쪽 위에 항상 문제의 출발 조건인 가정을 먼저 작도합니다. "
-                    f"여기서는 {hyp_ko}이 파란색 기호로 명확하게 표시되었습니다."
+                    f"증명을 시작할 때는 먼저 문제에서 주어진 출발 조건인 가정을 도형 위에 명확히 표시합니다. "
+                    f"여기서는 {hyp_ko}이 파란색 기호로 작도되었습니다."
                 )
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
             elif spatial_role == "top_right_conclusion" and "conc_top" not in used_roles:
                 used_roles.add("conc_top")
-                step_title = f"Step {s_num} · 우측 상단 목표 결론(⇒ Conclusion) 제시"
-                step_q_ko = "🎯 [목표 결론 질문] 화살표(⇒) 오른쪽 위에 붉은색으로 제시된 우리의 최종 증명 목표는 무엇인가요?"
+                step_title = f"Step {s_num} · 목표 결론(⇒ Conclusion) 확인"
+                step_q_ko = "🎯 [목표 결론 질문] 화살표(⇒) 오른쪽에 제시된 우리의 최종 증명 목표는 무엇인가요?"
                 step_q_en = "🎯 [Target Conclusion Question] What target conclusion is shown to the right of the arrow (⇒)?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 이제 상단 가운데 화살표와 오른쪽 위 도형을 보세요. "
-                    f"왼쪽의 가정이 성립할 때 화살표 오른쪽의 {conc_ko}이 성립함을 보이겠다는 뜻입니다. "
-                    f"가정과 결론을 절대 섞지 않고, 아래쪽 증명 공간에서 다리를 놓아 봅시다!"
+                    f"{s_num}단계, {range_str} 상단 화살표 오른쪽의 목표 도형을 확인해 보세요. "
+                    f"왼쪽의 출발 가정이 주어졌을 때 화살표 오른쪽의 {conc_ko}이 왜 항상 성립하는지 보이겠다는 뜻입니다. "
+                    f"가정과 결론을 절대 섞지 않고, 이제 아래쪽 증명 도형에서 논리적 다리를 놓아 봅시다!"
                 )
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
@@ -960,21 +1089,21 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_ko = "🧭 [결정적 보조선 질문] 왜 하필 이 위치에 초록색 보조선을 그어야 숨겨진 합동·대칭이 드러날까요?"
                 step_q_en = "🧭 [Key Auxiliary Line] Why do we draw the green auxiliary line right here to unlock the proof?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 오늘 증명에서 가장 중요한 유레카 순간입니다! "
-                    f"화면 아래쪽 증명 도형에 그어진 초록색 선분을 보세요. 바로 {aux_ko}입니다. "
+                    f"{s_num}단계, {range_str} 이 증명에서 가장 중요한 유레카 순간입니다! "
+                    f"도형에 새로 그어진 초록색 선분을 보세요. 바로 {aux_ko}입니다. "
                     f"원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!"
                 )
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
             elif (spatial_role == "bottom_purple_congruence" or c_tag == "purple") and "cong" not in used_roles:
                 used_roles.add("cong")
-                step_title = f"Step {s_num} · 합동·닮음 대응 조건(SAS/ASA/RHS) 결합"
-                step_q_ko = "📐 [합동·닮음 질문] 보조선으로 나뉜 두 도형은 어떤 조건(SAS, ASA, SSS, RHS, RHA, 닮음)에 의해 완전히 포개어질까요?"
+                step_title = f"Step {s_num} · 합동·닮음 대응 조건 결합"
+                step_q_ko = "📐 [합동·닮음 질문] 나뉜 두 도형은 어떤 조건(SAS, ASA, SSS, RHS, RHA, 닮음)에 의해 완전히 포개어질까요?"
                 step_q_en = "📐 [Congruence & Similarity] By which geometric criterion do the two divided figures match?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 화면 하단에 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. "
+                    f"{s_num}단계, {range_str} 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. "
                     f"{logic_ko}을 눈으로 직접 확인할 수 있습니다. "
-                    f"세 가지 대응 조건이 정확히 맞아떨어지므로 두 도형은 한 치의 오차도 없이 포개어집니다!"
+                    f"대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!"
                 )
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
@@ -984,41 +1113,40 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_ko = "💡 [유레카 질문] 합동·닮음인 도형의 대응하는 변과 각이 같다는 성질로부터 어떻게 목표 결론이 완성되나요?"
                 step_q_en = "💡 [Eureka Deduction] How do the corresponding parts of congruent figures complete our target conclusion?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 하단 도형에 붉은색으로 빛나는 최종 표시를 보세요! "
+                    f"{s_num}단계, {range_str} 도형에 붉은색으로 강조된 최종 표시를 보세요! "
                     f"앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, "
                     f"우리가 목표로 했던 {conc_ko}이 마침내 증명되었습니다!"
                 )
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
             else:
-                # 진행률(progress) 기반 수학교사 단계별 심화 코칭 (중복 없는 디딤돌 전개)
                 if progress <= 0.30:
-                    step_title = f"Step {s_num} · 기본 증명 도형 배치 및 출발 조건 분석"
-                    step_q_ko = "👁️ [관찰 질문] 아래쪽 증명 공간에 옮겨 그린 기본 도형에서 가장 먼저 표시해야 할 조건은 무엇일까요?"
+                    step_title = f"Step {s_num} · 기본 증명 도형 작도 및 조건 표시"
+                    step_q_ko = "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} {focus_desc} 과정입니다. "
-                        f"출발 조건인 {hyp_ko}을 아래쪽 증명 캔버스에 그대로 옮겨 작도하며 본격적인 증명을 준비합니다."
+                        f"{s_num}단계, {range_str} "
+                        f"출발 조건인 {hyp_ko}을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다."
                     )
                 elif progress <= 0.58:
-                    step_title = f"Step {s_num} · 보조선과 공통변·각의 크기 비교"
-                    step_q_ko = "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·맞꼭지각 중 서로 크기가 같은 것은 어디일까요?"
+                    step_title = f"Step {s_num} · 보조선 연결과 변·각의 크기 비교"
+                    step_q_ko = "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} {focus_desc} 단계입니다. "
-                        f"{aux_ko}을 중심으로 양쪽 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 확인합니다."
+                        f"{s_num}단계, {range_str} "
+                        f"{aux_ko}을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다."
                     )
                 elif progress <= 0.82:
-                    step_title = f"Step {s_num} · 증명 논리 검증 및 오개념 체크"
-                    step_q_ko = "⚠️ [오개념 점검 질문] 이 단계에서 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?"
+                    step_title = f"Step {s_num} · 핵심 증명 논리 완성 및 오개념 점검"
+                    step_q_ko = "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} {focus_desc} 과정입니다. "
-                        f"{logic_ko}이 완성되는 순간입니다. 여기서 수학교사의 핵심 팁! {misc_ko}"
+                        f"{s_num}단계, {range_str} "
+                        f"{logic_ko}이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, {misc_ko}"
                     )
                 else:
-                    step_title = f"Step {s_num} · 레고 블록 종합 및 결론 연결 (Synthesis)"
-                    step_q_ko = "💡 [종합 질문] 지금까지 찾은 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 정확히 일치하나요?"
+                    step_title = f"Step {s_num} · 기하학적 단서 종합 및 결론 연결 (Synthesis)"
+                    step_q_ko = "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} 이제 앞에서 차곡차곡 모은 기하학적 단서들을 하나로 결합합니다. "
-                        f"하단 증명 도형의 결과가 상단 오른쪽에 제시했던 {conc_ko}과 완벽히 일치함을 확인할 수 있습니다."
+                        f"{s_num}단계, {range_str} 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. "
+                        f"도형의 대응 관계로부터 우리가 증명하고자 했던 {conc_ko}이 필연적으로 성립함을 확인할 수 있습니다."
                     )
                 step_q_en = translate_text_google_gtx(step_q_ko, "en")
                 exp_en = translate_text_google_gtx(exp_ko, "en")
@@ -1221,7 +1349,7 @@ def generate_or_update_script(slug_key, target_langs=None):
         "shorts_packages": old_doc.get("shorts_packages") or {},
         "question_classroom_packages": old_doc.get("question_classroom_packages") or {},
         "question_shorts_packages": old_doc.get("question_shorts_packages") or {},
-        "teacher_proof_analysis": (item_meta or {}).get("teacher_proof_analysis") or analyze_min7014_topic_as_mathteacher(title, sub_ko, (item_meta or {}).get("breadcrumb") or ""),
+        "teacher_proof_analysis": analyze_min7014_topic_as_mathteacher(title, sub_ko, (item_meta or {}).get("breadcrumb") or ""),
         "supported_languages": list(GLOBAL_VOICE_MAP.keys()),
         "pages": pages_data
     }
@@ -1231,6 +1359,62 @@ def generate_or_update_script(slug_key, target_langs=None):
 
     print(f"[High-Quality Script Generated] {out_path} ({total_pages} pages, langs={target_langs})")
     return script_doc
+
+
+_ORIG_PIL_DRAW_TEXT = ImageDraw.ImageDraw.text
+_PIL_EMOJI_MAP = {
+    "⚡": "★",
+    "🎬": "▶",
+    "📐": "◈",
+    "🪜": "■",
+    "❓": "[Q]",
+    "🙋": "[발문]",
+    "💡": "[핵심]",
+    "🧭": "[탐구]",
+    "👁️": "[관찰]",
+    "👁": "[관찰]",
+    "🔀": "[확장]",
+    "⚠️": "[주의]",
+    "⚠": "[주의]",
+    "🎯": "[목표]",
+    "🌐": "▶",
+    "📺": "▶",
+    "👉": "→",
+    "👆": "→",
+    "🔥": "★",
+    "✨": "★",
+    "🌳": "◈",
+    "🌟": "★",
+    "🤖": "◈",
+}
+
+
+def _sanitize_pil_text(txt):
+    if not isinstance(txt, str):
+        return txt
+    s = txt
+    for k, v in _PIL_EMOJI_MAP.items():
+        if k in s:
+            s = s.replace(k, v)
+    # Remove any remaining astral-plane emoji characters (> U+FFFF) or variation selectors so malgun.ttf never draws '□'
+    s = "".join(ch for ch in s if ord(ch) <= 0xFFFF and ch != "\ufe0f")
+    return s
+
+
+def _patched_pil_draw_text(self, xy, text, fill=None, font=None, anchor=None, *args, **kwargs):
+    return _ORIG_PIL_DRAW_TEXT(self, xy, _sanitize_pil_text(text), fill=fill, font=font, anchor=anchor, *args, **kwargs)
+
+
+ImageDraw.ImageDraw.text = _patched_pil_draw_text
+
+
+def _mask_pdf_bottom_author_bar(pil_img):
+    """PDF 하단 블랙 바의 영문 성명 표기 영역(하단 3.6%)을 깔끔한 다크 네이비 바로 마스킹합니다."""
+    w, h = pil_img.size
+    bar_h = max(10, int(h * 0.038))
+    d = ImageDraw.Draw(pil_img)
+    d.rectangle([0, h - bar_h, w, h], fill=(15, 23, 42))
+    return pil_img
 
 
 def get_font_for_lang(lang_code, size, bold=False):
@@ -1360,13 +1544,13 @@ def build_topic_cold_open(script_doc, lang_code="ko"):
     raw_title = script_doc.get("title", "")
     ko_t, en_t = split_bilingual_title(raw_title)
     clean_ko = clean_math_for_speech_ko(ko_t)
-    clean_en = (script_doc.get("title_en") or en_t or clean_ko).strip()
-    t_an = script_doc.get("teacher_proof_analysis") or analyze_min7014_topic_as_mathteacher(raw_title, script_doc.get("sub_domain_ko", ""))
+    clean_en = clean_math_for_speech_en((script_doc.get("title_en") or en_t or clean_ko).strip())
+    t_an = analyze_min7014_topic_as_mathteacher(raw_title, script_doc.get("sub_domain_ko", ""))
     aux_ko = clean_math_for_speech_ko(t_an.get("auxiliary_line_ko", ""))
     conc_ko = clean_math_for_speech_ko(t_an.get("conclusion_ko", ""))
 
     if lang_code == "en":
-        return f"Welcome to Min's Math Lab! Today we visually prove and explore {clean_en} step by step from a math teacher's perspective. Let us discover the exact mathematical principle behind it!"
+        return f"Wait! Why does {clean_en} always hold true? Let us visually prove and explore the exact mathematical principle behind it step by step!"
     return (
         f"잠깐! {clean_ko}, 공식으로만 외우지 않고 왜 항상 성립하는지 눈으로 직접 확인해 볼까요? "
         f"{aux_ko}을 통해 {conc_ko}까지 도달하는 과정을 지금 바로 따라와 보세요!"
@@ -1513,7 +1697,7 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
 
     # 2. 중앙 PDF 페이지 300 DPI 초고해상도 렌더링 + Lanczos 리샘플링 (y: 86 ~ 822)
     pix = pdf_page.get_pixmap(dpi=300)
-    pdf_img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+    pdf_img = _mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
 
     max_pw, max_ph = 1760, 724
     scale = min(max_pw / pdf_img.width, max_ph / pdf_img.height)
@@ -1624,7 +1808,7 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     # 우측 클라이맥스 슬라이드 배치
     key_idx = max(0, len(doc) - 2)
     pix = doc[key_idx].get_pixmap(dpi=250)
-    slide_img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+    slide_img = _mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
     scale = min(640 / slide_img.width, 590 / slide_img.height)
     sw, sh = int(slide_img.width * scale), int(slide_img.height * scale)
     slide_resized = slide_img.resize((sw, sh), Image.Resampling.LANCZOS)
@@ -1665,9 +1849,9 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
         y_h += 84
 
     # 중간 주제명 박스
-    raw_ko_title = re.sub(r"\$[^\$]*\$", "", script_doc.get("title", "")).strip()
-    ko_main_part = raw_ko_title.split("(")[0].strip() or raw_ko_title
-    en_main_part = (script_doc.get("title_en") or raw_ko_title).split("—")[0].strip()
+    ko_split_t, en_split_t = split_bilingual_title(script_doc.get("title", ""))
+    ko_main_part = latex_to_unicode_title(ko_split_t).strip()
+    en_main_part = latex_to_unicode_title((script_doc.get("title_en") or en_split_t or ko_main_part).split("—")[0].strip())
     main_title = en_main_part if is_en else ko_main_part
     wrapped_t = textwrap.wrap(main_title, width=22 if is_en else 15)[:2]
 
@@ -1685,7 +1869,8 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     )
     draw.text((42, 528), sub_line, fill=(254, 240, 138), font=get_font_for_lang("ko", 25, bold=True))
     draw.rounded_rectangle([38, 586, 520, 646], radius=14, fill=(0, 99, 152))
-    draw.text((58, 601), "📐 @min7014_ai · 민은기 선생님의 수학자료실", fill=(255, 255, 255), font=get_font_for_lang("ko", 22, bold=True))
+    footer_brand = "📐 @min7014_ai · Visual Math Proofs" if is_en else "📐 @min7014_ai · 단계별 시각적 수학 증명"
+    draw.text((58, 601), footer_brand, fill=(255, 255, 255), font=get_font_for_lang("ko", 22, bold=True))
 
     thumb.save(out_png_path, quality=98)
     return out_png_path
@@ -1826,7 +2011,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"2️⃣ ✍️ De-Multiple-Choice Constructive Math Studio (16,548 Step-by-Step Quizzes):\n👉 https://min7014.github.io/mathedu/?from=yt\n"
             f"3️⃣ 🌱 Daily 3-Minute Math Eureka (10s Counterexample O/X & What-If-Not Problem Posing):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
             f"4️⃣ 🎮 3D Math Sanctuary Boss Raid RPG (Free Browser Game):\n👉 https://min7014.github.io/mathedu/game.html\n"
-            f"5️⃣ 🏛️ Min's Math Lab Main Archive (3,400+ Dynamic Proofs):\n👉 {web_url}\n\n"
+            f"5️⃣ 🏛️ Interactive Visual Math Archive (3,400+ Dynamic Proofs):\n👉 {web_url}\n\n"
             f"{quiz_en}\n\n"
             f"{binge_en}\n\n"
             f"🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: {sub_url}\n"
@@ -1841,7 +2026,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             "Visual Math Proof", "Geometry Proof", "Proof Without Words", "Euclidean Geometry",
             "Pythagorean Theorem", "Ceva Theorem", "Menelaus Theorem", "GeoGebra", "Math Animation",
             "3Blue1Brown style math", "Step by Step Math", "High School Geometry", "Math Olympiad",
-            "AMC Math", "SAT Math", "Min's Math Lab", "min7014_ai", "min7014"
+            "AMC Math", "SAT Math", "Visual Math Archive", "min7014_ai", "min7014"
         ]
     else:
         clean_ko_title = split_bilingual_title(script_doc.get("title", slug))[0]
@@ -1871,28 +2056,28 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"2️⃣ ✍️ [탈-5지선다 창의 구성 모드] 이 개념이 쓰인 수능·모평 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q={clean_ko_title.split()[0]}&from=yt\n"
             f"3️⃣ 🌱 [오늘의 3분 수학 유레카] 10초 오개념 반례 O/X 퀴즈 & 나만의 변형 문제 발명:\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
             f"4️⃣ 🎮 [수능 수학 100점 만점 3D 보스 레이드 게임] 설치 없이 브라우저에서 즉시 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n"
-            f"5️⃣ 🏛️ [민은기 선생님의 수학자료실 본관 (3,400+ 동적 기하 아카이브)]:\n👉 {web_url}\n\n"
+            f"5️⃣ 🏛️ [수학자료실 본관 (3,400+ 동적 기하 아카이브)]:\n👉 {web_url}\n\n"
             f"{quiz_ko}\n\n"
             f"{binge_ko}\n\n"
             f"🔔 [@min7014_ai 채널 구독하기]: {sub_url}\n"
-            f"📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n"
+            f"📺 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n"
             f"📄 단계별 플립북 증명 PDF 원문: {pdf_url}\n"
             f"🎙️ 20개국어 AI 강의 스튜디오: {studio_url}\n"
             f"식별 코드: [ID: {slug}_KO]\n\n"
             f"⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n{chapters_block}\n\n"
-            f"#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014"
+            f"#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #수학자료실 #min7014_ai #min7014"
         )
         yt_tags = [
             "수학", "기하학", "시각적 증명", "수능 수학", "도형 보조선", "피타고라스 정리",
             "메넬라우스의 정리", "체바의 정리", "중학교 도형", "고등학교 수학", "수능 도형 킬러",
-            "영재고 수학", "KMO 기하", "GeoGebra", "알지오매스", "민은기 선생님의 수학자료실",
-            "민은기 선생님의 수학자료실_AI", "min7014_ai", "min7014", "수학 잘하는 법"
+            "영재고 수학", "KMO 기하", "GeoGebra", "알지오매스", "단계별 수학 증명",
+            "시각적 수학 증명_AI", "min7014_ai", "min7014", "수학 잘하는 법"
         ]
 
     return {
         "lang": lang_code,
         "channel_handle": "@min7014_ai",
-        "channel_name": "민은기 선생님의 수학자료실_AI",
+        "channel_name": "단계별 시각적 수학 증명_AI",
         "channel_id": channel_id,
         "channel_url": channel_url,
         "studio_upload_url": studio_upload_url,
@@ -2635,7 +2820,7 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
 
 
 YOUTUBE_CHANNEL_HANDLE = "@min7014_ai"
-YOUTUBE_CHANNEL_NAME = "민은기 선생님의 수학자료실_AI"
+YOUTUBE_CHANNEL_NAME = "단계별 시각적 수학 증명_AI"
 YOUTUBE_CHANNEL_ID = "UCSlqQfOEtRfJuMPyGMLgFYA"
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@min7014_ai"
 YOUTUBE_STUDIO_UPLOAD_URL = f"https://studio.youtube.com/channel/{YOUTUBE_CHANNEL_ID}/videos/upload?d=ud"
@@ -2676,7 +2861,7 @@ def get_deleted_video_ids_set():
         return set()
 
 
-def process_youtube_delete_queue():
+def process_youtube_delete_queue(max_deletions=25):
     """
     [불일치 영상 자동 삭제 엔진 (YouTube Data API v3)]
     video_lectures/youtube_delete_queue.json의 pending_delete_video_ids에 등록된 불일치 영상들을
@@ -2701,6 +2886,9 @@ def process_youtube_delete_queue():
     still_pending = []
     deleted_now = 0
     for idx, vid_id in enumerate(pending):
+        if deleted_now >= max_deletions:
+            still_pending.extend(pending[idx:])
+            break
         try:
             youtube.videos().delete(id=vid_id).execute()
             deleted_done.append(vid_id)
@@ -2725,52 +2913,80 @@ def process_youtube_delete_queue():
 
 def verify_video_content_integrity(slug_key: str) -> dict:
     r"""
-    [수석 수학교사(mathteacher) 영상-내용 일치 무결성 검증 게이트]
+    [수석 수학교사(mathteacher v7.0) 영상-내용 일치 및 무결성 검증 게이트]
     렌더링된 영상/대본/자막이 실제 PDF 주제 및 슬라이드 순서와 100% 일치하는지 검증합니다:
-      1) 제목에 빈 괄호 '()' 또는 미변환 LaTeX('$', '\times', '\div', '\sqrt')가 없는가?
-      2) 첫 번째 본문 장면(Scene 1)이 마지막 페이지('마지막', 'N페이지입니다')로 점프하지 않고 1단계/1페이지로 정상 시작하는가?
-      3) 대수·수체계(제곱근·지수·유리수·소수) 주제에 엉뚱한 원주각/원 위의 점/복소수/다항식 나눗셈 문구가 섞이지 않았는가?
+      1) '민은기 선생님', '민은기', 'Min's Math Lab', 'Min Eunki' 등 개인 성명/호칭이 대본·자막·메타데이터에 단 1회도 포함되지 않았는가?
+      2) 제목·내레이션에 빈 괄호 '()' 또는 미변환 LaTeX('$', '\times', '\div', '\sqrt', '\leq', '\geq', '\neq', '\Leftrightarrow')가 없는가?
+      3) 첫 번째 본문 장면(Scene 1)이 마지막 페이지('마지막', 'N페이지입니다')로 점프하지 않고 1단계/1페이지로 정상 시작하는가?
+      4) 대수·수체계(제곱근·지수·유리화·나눗셈) 주제에 엉뚱한 기하 보조선/원주각/복소수/다항식 나눗셈 문구나 기계적 레이아웃 안내가 섞이지 않았는가?
+      5) 역수의 곱셈 나눗셈(a ÷ b = a × 1/b)과 분모의 유리화가 혼동되지 않았는가?
     """
     sp = SCRIPTS_DIR / f"{slug_key}.json"
     if not sp.exists():
         return {"ok": False, "reason": "script_missing"}
-    sdoc = json.loads(sp.read_text(encoding="utf-8"))
+    raw_script_txt = sp.read_text(encoding="utf-8")
+    sdoc = json.loads(raw_script_txt)
     pages = sdoc.get("pages") or []
     if not pages:
         return {"ok": False, "reason": "pages_empty"}
 
-    # 1) Scene 1 ordering check
+    # 1) Persona / Name Prohibition Check ("민은기 선생님" 등 원천 차단)
+    forbidden_personas = ("민은기", "Min's Math Lab", "MinsMathLab", "Min Eunki")
+    for fp in forbidden_personas:
+        if fp in raw_script_txt:
+            return {"ok": False, "reason": f"forbidden_persona_in_script:{fp}"}
+
+    # 2) Scene 1 ordering check
     p1 = pages[0]
     if p1.get("page", 1) != 1:
         return {"ok": False, "reason": f"scene_1_wrong_page:{p1.get('page')}"}
 
-    srt_ko = YT_PKG_DIR / f"{slug_key}_ko.srt"
-    if srt_ko.exists():
-        srt_txt = srt_ko.read_text(encoding="utf-8")
-        # Block 2 in SRT is Scene 1 (after Cold Open)
-        blocks = [b.strip() for b in srt_txt.strip().split("\n\n") if b.strip()]
-        if len(blocks) >= 2:
-            b2 = blocks[1]
-            if f"{len(pages)}페이지입니다" in b2 or f"마지막 {len(pages)}단계" in b2:
-                return {"ok": False, "reason": "srt_scene_1_narrates_last_page"}
+    for srt_file in [YT_PKG_DIR / f"{slug_key}_ko.srt", YT_PKG_DIR / f"{slug_key}_en.srt", YT_PKG_DIR / f"{slug_key}_q_ko.srt"]:
+        if srt_file.exists():
+            srt_txt = srt_file.read_text(encoding="utf-8")
+            for fp in forbidden_personas:
+                if fp in srt_txt:
+                    return {"ok": False, "reason": f"forbidden_persona_in_srt:{srt_file.name}:{fp}"}
+            if srt_file.name.endswith("_ko.srt") and not srt_file.name.endswith("_q_ko.srt"):
+                blocks = [b.strip() for b in srt_txt.strip().split("\n\n") if b.strip()]
+                if len(blocks) >= 2:
+                    b2 = blocks[1]
+                    if f"{len(pages)}페이지입니다" in b2 or f"마지막 {len(pages)}단계" in b2:
+                        return {"ok": False, "reason": "srt_scene_1_narrates_last_page"}
 
-    # 2) Content domain alignment check
+    # 3) Content domain & mathematical accuracy check
     t_an = sdoc.get("teacher_proof_analysis") or {}
     cat = t_an.get("category_type", "")
-    all_narr = " ".join(p.get("explanation_text", "") for p in pages)
+    title_str = sdoc.get("title", "")
+    all_narr_ko = " ".join(p.get("explanation_text", "") for p in pages)
+    all_narr_en = " ".join((p.get("narrations") or {}).get("en", "") for p in pages)
+
+    for raw_tex in ("\\times", "\\div", "\\sqrt", "\\frac", "\\leq", "\\geq", "\\neq", "\\Leftrightarrow", "화면의 상단", "화면의 좌측", "영역에 새로운 보조선"):
+        if raw_tex in all_narr_ko or raw_tex in all_narr_en:
+            return {"ok": False, "reason": f"raw_latex_or_robotic_meta:{raw_tex}"}
+
     if cat in ("algebra", "number"):
-        for forbidden in ("원 위의 점을 아무리", "한 호에 대한 원주각", "복소수", "다항식 나눗셈", "비스듬한 책받침"):
-            if forbidden in all_narr:
+        for forbidden in ("원 위의 점을 아무리", "한 호에 대한 원주각", "복소수", "다항식 나눗셈", "비스듬한 책받침", "보조선과 기하 관계를"):
+            if forbidden in all_narr_ko:
                 return {"ok": False, "reason": f"domain_mismatch:{forbidden}"}
 
-    # 3) Meta title check
-    meta_p = YT_PKG_DIR / f"{slug_key}_youtube_meta.json"
-    if meta_p.exists():
-        mdata = json.loads(meta_p.read_text(encoding="utf-8"))
-        for lc in ("ko", "en"):
-            mt = (mdata.get(lc) or {}).get("title", "")
-            if "()" in mt or "$" in mt or "<" in mt or ">" in mt:
-                return {"ok": False, "reason": f"invalid_meta_title_{lc}:{mt}"}
+    # 역수 나눗셈(a ÷ b = a × 1/b)에 분모의 유리화 오분류 방지
+    if ("div" in title_str or "÷" in title_str or "frac{1}{b}" in title_str) and "유리화" not in title_str and "sqrt" not in title_str:
+        if "분모의 유리화" in all_narr_ko or "분모에 무리수가" in all_narr_ko:
+            return {"ok": False, "reason": "math_mismatch:division_misclassified_as_rationalization"}
+
+    # 4) Meta title & description check
+    for meta_p in [YT_PKG_DIR / f"{slug_key}_youtube_meta.json", YT_PKG_DIR / f"{slug_key}_shorts_meta.json"]:
+        if meta_p.exists():
+            m_txt = meta_p.read_text(encoding="utf-8")
+            for fp in forbidden_personas:
+                if fp in m_txt:
+                    return {"ok": False, "reason": f"forbidden_persona_in_meta:{meta_p.name}:{fp}"}
+            mdata = json.loads(m_txt)
+            for lc in ("ko", "en"):
+                mt = (mdata.get(lc) or {}).get("title", "")
+                if "()" in mt or "$" in mt or "<" in mt or ">" in mt:
+                    return {"ok": False, "reason": f"invalid_meta_title_{lc}:{mt}"}
 
     return {"ok": True, "reason": "verified"}
 
@@ -3321,6 +3537,9 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
     return uploaded_urls
 
 
+upload_to_youtube = upload_slug_to_youtube
+
+
 def get_next_pending_slugs(count=1):
     """
     866개 전체 PDF 자료 중 아직 @min7014_ai 유튜브 URL(ko/en)이 등록되지 않은 주제를 우선순위대로 반환합니다.
@@ -3713,17 +3932,17 @@ def boost_youtube_channel_popularity():
     # 2. 공식 정주행 재생목록(Playlists) 생성 및 영상 자동 편성
     playlist_specs = {
         "ko": {
-            "title": "🔥 [시각적 수학 증명] 보조선 한 줄로 깨치는 기하학 명작 정주행 (1080p) | 민은기 선생님의 수학자료실_AI",
+            "title": "🔥 [시각적 수학 증명] 보조선과 원리로 깨치는 수학 명작 정주행 (1080p) | @min7014_ai",
             "desc": (
-                "공식 암기 없이 눈으로 보고 직관적으로 깨치는 민은기 선생님의 수학자료실(https://min7014.github.io/) 단계별 시각적 증명 한국어 정주행 시리즈입니다.\n"
+                "공식 암기 없이 눈으로 보고 직관적으로 깨치는 수학자료실(https://min7014.github.io/) 단계별 시각적 증명 한국어 정주행 시리즈입니다.\n"
                 "전체 1,111개 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html"
             ),
             "videos": [vid for _, vid in ko_video_ids],
         },
         "en": {
-            "title": "✨ [Visual Math Proofs] Step-by-Step Euclidean Geometry & Fractal Masterclass (1080p) | Min's Math Lab AI",
+            "title": "✨ [Visual Math Proofs] Step-by-Step Euclidean Geometry & Algebra Masterclass (1080p) | @min7014_ai",
             "desc": (
-                "Step-by-step visual mathematical proofs from Min's Math Lab (https://min7014.github.io/). Watch auxiliary lines and geometric ratios come alive!\n"
+                "Step-by-step visual mathematical proofs from https://min7014.github.io/. Watch auxiliary lines and mathematical principles come alive!\n"
                 "Full 1,111 Math Video Board: https://min7014.github.io/mathedu/video_board.html"
             ),
             "videos": [vid for _, vid in en_video_ids],
@@ -3896,19 +4115,19 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
         desc = (
             f"⚡ [{clean_ko} — {round(duration_sec)}초 숏폼(#Shorts) 시각적 증명 하이라이트]\n"
             f"{hook_ko}\n\n"
-            f"🌐 [1초 클릭! 민은기 선생님의 수학홈페이지 무료 실습 & 퀴즈 바로가기]\n"
+            f"🌐 [1초 클릭! 수학홈페이지 무료 실습 & 퀴즈 바로가기]\n"
             f"1️⃣ 방금 본 도형 마우스로 직접 움직여보기 (GeoGebra & 플립북 게시판):\n👉 {board_link}&from=yt_shorts\n"
             f"2️⃣ 5지선다 보기를 가리고 수식 블록 조립! 16,548문항 수능·모평 디딤돌 퀴즈:\n👉 https://min7014.github.io/mathedu/?from=yt_shorts\n"
             f"3️⃣ 오늘의 3분 수학 유레카 (10초 오개념 O/X & 나만의 문제 발명):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
             f"4️⃣ 수능 수학 100점 만점 3D 보스 레이드 게임 무료 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n"
-            f"5️⃣ 민은기 선생님의 수학자료실 본관 (3,400+ 시각 증명):\n👉 https://min7014.github.io/\n\n"
+            f"5️⃣ 수학자료실 본관 (3,400+ 시각 증명):\n👉 https://min7014.github.io/\n\n"
             f"🎬 1080p 전체 단계별 풀버전 설명영상 바로 보기:\n👉 {full_yt}\n"
-            f"🔔 민은기 선생님의 수학자료실_AI (@min7014_ai) 구독하기:\n"
+            f"🔔 단계별 시각적 수학 증명_AI (@min7014_ai) 구독하기:\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_KO]\n"
-            f"#Shorts #수학 #기하학 #시각적증명 #{clean_ko.replace(' ', '')} #피타고라스 #보조선 #수능수학 #민은기선생님의수학자료실 #min7014_ai"
+            f"#Shorts #수학 #기하학 #시각적증명 #{clean_ko.replace(' ', '')} #피타고라스 #보조선 #수능수학 #수학자료실 #min7014_ai"
         )
-        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", clean_ko, "민은기선생님의수학자료실", "min7014_ai", "수능수학", "보조선"]
+        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", clean_ko, "수학자료실", "min7014_ai", "수능수학", "보조선"]
     else:
         hook_en = (viral_hooks.get("en") or f"45s Visual Math Proof: {clean_en}").strip()
         short_title = f"🔥 {hook_en} | {clean_en} #Shorts #Math"
@@ -3919,12 +4138,12 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
             f"{hook_en}\n\n"
             f"🎬 Watch Full 1080p Step-by-Step Proof Video:\n👉 {full_yt}\n\n"
             f"📐 Interactive GeoGebra & Full 1,111 Math Video Board:\n👉 {board_link}\n\n"
-            f"🔔 Subscribe to Min's Math Lab AI (@min7014_ai):\n"
+            f"🔔 Subscribe to Visual Math Proofs AI (@min7014_ai):\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_EN]\n"
             f"#Shorts #Math #Geometry #VisualProof #MathShorts #ProofWithoutWords #GeoGebra #min7014_ai"
         )
-        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", clean_en, "MinsMathLab", "min7014_ai", "GeoGebra"]
+        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", clean_en, "VisualMathArchive", "min7014_ai", "GeoGebra"]
 
     return {
         "title": short_title[:100],
@@ -3971,10 +4190,11 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
     font_sub = get_font_for_lang(lang_code, 30, bold=True)
     font_cap = get_font_for_lang(lang_code, 34, bold=True)
 
+    _ko_t, _en_t = split_bilingual_title(sdoc["title"])
     clean_title = (
-        (sdoc.get("title_en") or sdoc["title"])
+        latex_to_unicode_title(_en_t or sdoc.get("title_en") or _ko_t)
         if lang_code == "en"
-        else latex_to_unicode_title(sdoc["title"])
+        else latex_to_unicode_title(_ko_t)
     )
     viral_hooks = sdoc.get("viral_hooks") or {}
     viral_hook = viral_hooks.get(lang_code) or ""
@@ -4058,7 +4278,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 frame_canvas = canvas.copy()
                 f_draw = ImageDraw.Draw(frame_canvas)
                 pix = doc[doc_f_i].get_pixmap(dpi=260)
-                slide_pil = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                slide_pil = _mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
                 sw, sh = slide_pil.size
                 scale = min(984 / sw, 980 / sh)
                 nw, nh = int(sw * scale), int(sh * scale)
@@ -4271,10 +4491,11 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
     font_q = get_font_for_lang(lang_code, 30, bold=True)
     font_cap = get_font_for_lang(lang_code, 32, bold=True)
 
+    _ko_t, _en_t = split_bilingual_title(sdoc["title"])
     clean_title = (
-        (sdoc.get("title_en") or sdoc["title"])
+        latex_to_unicode_title(_en_t or sdoc.get("title_en") or _ko_t)
         if lang_code == "en"
-        else latex_to_unicode_title(sdoc["title"])
+        else latex_to_unicode_title(_ko_t)
     )
     total_seqs = len(picked_indices)
 
@@ -4384,7 +4605,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
                     f_draw.text((90, 1391), p_lbl, fill=(255, 255, 255), font=get_font_for_lang(lang_code, 24, bold=True))
 
                 pix = doc[doc_f_i].get_pixmap(dpi=260)
-                slide_pil = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                slide_pil = _mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
                 sw, sh = slide_pil.size
                 scale = min(984 / sw, 860 / sh)
                 nw, nh = int(sw * scale), int(sh * scale)
@@ -4645,17 +4866,17 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
         q_desc = (
             f"❓ [질문하는 수학 수업 (Question-Asking Classroom Edition)]\n"
             f"주제: {title_base} [ID: {slug_key}_Q_{lc.upper()}]\n\n"
-            f"1단계(Phase 1): 핵심 발문과 사고 멈춤 시간(Thinking Pause)을 통해 먼저 스스로 보조선과 불변량을 추론합니다.\n"
-            f"2단계(Phase 2): 동적 기하 스포트라이트와 함께 왜 정리가 성립하는지 눈으로 확인합니다.\n\n"
+            f"1단계(Phase 1): 핵심 발문과 사고 멈춤 시간(Thinking Pause)을 통해 먼저 스스로 원리와 불변량을 추론합니다.\n"
+            f"2단계(Phase 2): 동적 시각 스포트라이트와 함께 왜 정리가 성립하는지 눈으로 확인합니다.\n\n"
             f"👉 [수학홈페이지 질문하는 수업 인터랙티브 실험실 바로가기]: {board_link}\n"
-            f"👉 [민은기 선생님의 수학자료실 원본]: {sdoc.get('web_url', 'https://min7014.github.io/')}\n"
-            f"#질문하는수업 #수학증명 #기하학 #수능수학 #민은기선생님 #mathedu"
+            f"👉 [수학자료실 원본]: {sdoc.get('web_url', 'https://min7014.github.io/')}\n"
+            f"#질문하는수업 #수학증명 #기하학 #수능수학 #시각적증명 #mathedu"
         )
         body = {
             "snippet": {
                 "title": q_title,
                 "description": q_desc,
-                "tags": ["질문하는수업", "수학증명", "기하학", "소크라테스발문", "민은기선생님", "mathedu", slug_key],
+                "tags": ["질문하는수업", "수학증명", "기하학", "소크라테스발문", "시각적증명", "mathedu", slug_key],
                 "categoryId": "27",
                 "defaultLanguage": lc,
                 "defaultAudioLanguage": lc,
@@ -4732,15 +4953,15 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public"):
         qsh_desc = (
             f"❓ [질문하는 수학 수업 숏폼 (Question-Asking #Shorts)] [ID: {slug_key}_SHORT_Q_{lc.upper()}]\n"
             f"주제: {title_base}\n\n"
-            f"잠깐! 정답을 보기 전에 화면 상단의 질문 카드를 보고 어디에 보조선을 그어야 할지 3초만 생각해 보세요!\n"
+            f"잠깐! 정답을 보기 전에 화면 상단의 질문 카드를 보고 어떤 수학적 원리가 쓰였을지 3초만 생각해 보세요!\n"
             f"👉 [1080p 질문하는 수업 풀버전 & GeoGebra 직접 조작하기]: {board_link}\n"
-            f"#Shorts #질문하는수업 #수학숏폼 #기하학 #보조선 #민은기선생님 #mathedu"
+            f"#Shorts #질문하는수업 #수학숏폼 #기하학 #시각적증명 #mathedu"
         )
         body = {
             "snippet": {
                 "title": qsh_title,
                 "description": qsh_desc,
-                "tags": ["Shorts", "질문하는수업", "수학숏폼", "기하학", "민은기선생님", "mathedu", slug_key],
+                "tags": ["Shorts", "질문하는수업", "수학숏폼", "기하학", "시각적증명", "mathedu", slug_key],
                 "categoryId": "27",
                 "defaultLanguage": lc,
                 "defaultAudioLanguage": lc,
@@ -5412,8 +5633,8 @@ def generate_channel_banner_2560x1440():
     draw.rounded_rectangle((900, 538, 1660, 588), radius=24, fill=(225, 29, 72))
     draw.text((932, 548), "🤖 VISUAL MATH PROOF VAULT · @min7014_ai", fill=(255, 255, 255), font=f_badge)
 
-    draw.text((895, 612), "민은기 선생님의 수학자료실_AI", fill=(255, 255, 255), font=f_title)
-    draw.text((895, 688), "Min's Math Lab AI · 1080p Visual Proofs", fill=(56, 189, 248), font=f_sub)
+    draw.text((895, 612), "단계별 시각적 수학 증명_AI", fill=(255, 255, 255), font=f_title)
+    draw.text((895, 688), "Visual Math Proofs AI · 1080p Step-by-Step", fill=(56, 189, 248), font=f_sub)
     draw.text((895, 742), "📐 눈으로 깨치는 단계별 기하·대수·미적분 증명 (KO / EN)", fill=(251, 191, 36), font=f_info)
     draw.text((895, 786), "🌐 https://min7014.github.io/ · 1,111+ Math Topics", fill=(203, 213, 225), font=f_info)
 
@@ -5488,18 +5709,18 @@ def optimize_youtube_channel_settings():
 
     # 2. 채널 내부 브랜딩·키워드·대표 예고편·8개국어 다국어 프로필 업데이트
     ch_desc_ko = (
-        "📐 [민은기 선생님의 수학자료실_AI (@min7014_ai)]\n"
+        "📐 [단계별 시각적 수학 증명_AI (@min7014_ai)]\n"
         "공식 암기 없이 눈으로 보고 직관적으로 깨치는 1080p 단계별 시각적 수학 증명(Visual Math Proof) 공식 AI 채널입니다.\n"
-        "민은기 선생님의 수학자료실(https://min7014.github.io/)의 3,400+ 동적 기하(GeoGebra)와 866개 단계별 플립북 증명 PDF를 한국어(KO)·영어(EN) 강의로 제공합니다.\n\n"
+        "수학자료실(https://min7014.github.io/)의 3,400+ 동적 기하(GeoGebra)와 866개 단계별 플립북 증명 PDF를 한국어(KO)·영어(EN) 강의로 제공합니다.\n\n"
         "📋 전체 1,111개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html\n"
         "🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html\n"
         "🌐 수학자료실 본관: https://min7014.github.io/\n"
         "📺 본 채널(@min7014): https://www.youtube.com/@min7014\n\n"
-        "✨ [Min's Math Lab AI — Step-by-Step Visual Math Proofs]\n"
+        "✨ [Visual Math Proofs AI — Step-by-Step Visual Math Proofs]\n"
         "Discover why Euclidean geometry, calculus, and algebra theorems hold true through step-by-step 1080p visual flipbook proofs and interactive GeoGebra applets!"
     )
     ch_keywords = (
-        '수학 기하학 "시각적 증명" "민은기 선생님의 수학자료실" min7014 min7014_ai '
+        '수학 기하학 "시각적 증명" "수학자료실" min7014 min7014_ai '
         '"피타고라스 정리" "메넬라우스의 정리" "체바의 정리" "수능 수학" "중등 기하" '
         '"고등 수학" "영재고 수학" GeoGebra 알지오매스 "Visual Proof" "Geometry Proof" '
         'Mathematics "Euclidean Geometry" "Proof Without Words" mathedu'
@@ -5507,13 +5728,13 @@ def optimize_youtube_channel_settings():
 
     localizations = {
         "ko": {
-            "title": "민은기 선생님의 수학자료실_AI",
+            "title": "단계별 시각적 수학 증명_AI",
             "description": ch_desc_ko,
         },
         "en": {
-            "title": "Min's Math Lab AI (@min7014_ai)",
+            "title": "Visual Math Proofs AI (@min7014_ai)",
             "description": (
-                "📐 Welcome to Min's Math Lab AI (@min7014_ai) — Official 1080p Step-by-Step Visual Mathematical Proofs Channel!\n"
+                "📐 Welcome to Visual Math Proofs AI (@min7014_ai) — Official 1080p Step-by-Step Visual Mathematical Proofs Channel!\n"
                 "We transform 3,400+ interactive GeoGebra geometry constructions and 866 step-by-step flipbook proof PDFs from https://min7014.github.io/ into crystal-clear visual lectures.\n\n"
                 "📋 Full 1,111 Math Video Board: https://min7014.github.io/mathedu/video_board.html\n"
                 "🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html\n"
@@ -5521,27 +5742,27 @@ def optimize_youtube_channel_settings():
             ),
         },
         "ja": {
-            "title": "ミン・ウンギ先生の数学資料室_AI (@min7014_ai)",
+            "title": "視覚的数学証明_AI (@min7014_ai)",
             "description": "公式の暗記ではなく、目で見て直感的に理解するステップバイステップの視覚的数学証明チャンネルです。https://min7014.github.io/mathedu/video_board.html",
         },
         "zh-CN": {
-            "title": "闵恩基老师的数学资料室_AI (@min7014_ai)",
+            "title": "分步视觉数学证明_AI (@min7014_ai)",
             "description": "无需死记硬背公式，通过分步翻页视觉动画直观理解欧几里得几何与数学定理证明！https://min7014.github.io/mathedu/video_board.html",
         },
         "es": {
-            "title": "Laboratorio de Matemáticas de Min AI (@min7014_ai)",
+            "title": "Demostraciones Matemáticas Visuales AI (@min7014_ai)",
             "description": "¡Demostraciones matemáticas visuales paso a paso en 1080p con GeoGebra y flipbooks interactivos! https://min7014.github.io/mathedu/video_board.html",
         },
         "fr": {
-            "title": "Laboratoire de Maths de Min AI (@min7014_ai)",
+            "title": "Preuves Mathématiques Visuelles AI (@min7014_ai)",
             "description": "Preuves mathématiques visuelles étape par étape en 1080p (Géométrie euclidienne, Pythagore, Ceva, Ménélaüs). https://min7014.github.io/mathedu/video_board.html",
         },
         "de": {
-            "title": "Mins Mathe-Labor AI (@min7014_ai)",
+            "title": "Visuelle Mathematische Beweise AI (@min7014_ai)",
             "description": "Visuelle mathematische Beweise Schritt für Schritt in 1080p verstehen! https://min7014.github.io/mathedu/video_board.html",
         },
         "vi": {
-            "title": "Phòng Thí Nghiệm Toán Học Min AI (@min7014_ai)",
+            "title": "Chứng Minh Toán Học Trực Quan AI (@min7014_ai)",
             "description": "Chứng minh toán học trực quan từng bước chất lượng 1080p kết hợp GeoGebra! https://min7014.github.io/mathedu/video_board.html",
         },
     }
@@ -5550,7 +5771,7 @@ def optimize_youtube_channel_settings():
         "id": YOUTUBE_CHANNEL_ID,
         "brandingSettings": {
             "channel": {
-                "title": "민은기 선생님의 수학자료실_AI",
+                "title": "단계별 시각적 수학 증명_AI",
                 "description": ch_desc_ko,
                 "keywords": ch_keywords,
                 "defaultLanguage": "ko",

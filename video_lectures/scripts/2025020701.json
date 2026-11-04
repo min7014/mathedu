@@ -3,11 +3,12 @@
   "title": "소수카드와 합성수 카드를 활용한 게임(A game using prime and composite cards)",
   "title_en": "A game using prime and composite cards",
   "sub_domain_ko": "수학 특강·공학도구",
-  "core_concept": "[소수카드와 합성수 카드를 활용한 게임] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 활용한 시각적 수학교육 공학도구 설계와 수학적 모델링.",
-  "solving_tip": "복잡한 기하·미적분 문제의 조건이 잘 그려지지 않을 때는 특수한 수치(정삼각형, 직각이등변삼각형, 좌표 원점)를 먼저 대입해 도형의 경향성을 관찰하세요.",
+  "core_concept": "1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수(Prime) 카드와 약수가 3개 이상인 합성수(Composite) 카드를 분류하고 조합하는 규칙 ➔ 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론",
+  "solving_tip": "에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상",
   "pdf_url": "https://min7014.github.io/2025/2025020701.pdf",
   "web_url": "https://min7014.github.io/math20250207001.html",
   "page_count": 21,
+  "scene_count": 12,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/M-ZSIFUKxzc"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "number",
+    "hypothesis_ko": "1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수(Prime) 카드와 약수가 3개 이상인 합성수(Composite) 카드를 분류하고 조합하는 규칙",
+    "conclusion_ko": "모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론",
+    "auxiliary_line_ko": "에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상",
+    "proof_logic_ko": "합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리",
+    "misconception_ko": "자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
+    "what_if_not_ko": "만약 소인수분해를 이용해 어떤 자연수의 양의 약수의 개수를 구한다면 왜 각 소인수의 지수에 1씩 더해 곱하면 될까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,27 +81,17 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 소수카드와 합성수 카드를 활용한 게임에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in A game using prime and composite cards?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 소수카드와 합성수 카드를 활용한 게임(A game using prime and composite cards)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [소수카드와 합성수 카드를 활용한 게임] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 활용한 시각적 수학교육 공학도구 설계와 수학적 모델링.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 소수카드와 합성수 카드를 활용한 게임입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙입니다. 왜 이 조건에서 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 소수카드와 합성수 카드를 활용한 게임(A game using prime and composite cards)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [소수카드와 합성수 카드를 활용한 게임] 민은기 선생님의 수학 현장연구 특강 및 Python·TikZ·GeoGebra·AlgeoMath·Jupyter Notebook을 활용한 시각적 수학교육 공학도구 설계와 수학적 모델링.",
-        "en": "Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore A game using prime and composite cards and see why this mathematical property holds.",
-        "ja": "1段階です。ミン・ウンギ先生の数学資料室段階別視覚証明講義です。今回は、小数カードと合成水カードを活用したゲーム（A game using prime and composite cards）の核心原理を動的フリップブックとして証明しましょう。 [小数カードと合成水カードを活用したゲーム]ミン・ウンギ先生の数学現場研究特講およびPython・TikZ・GeoGebra・AlgeoMath・Jupyter Notebookを活用した視覚的数学教育工学ツール設計と数学モデリング。",
-        "zh-CN": "这是第一步。这是 Eunki Min 老师数学资源室的分步视觉证明讲座。这次，让我们通过动态翻书来演示使用质卡和复合卡的游戏的核心原理。 [使用质数和合数卡的游戏] 闵恩基教授关于数学领域研究以及使用Python、TikZ、GeoGebra、AlgeoMath和Jupyter Notebook进行可视化数学教育工程工具和数学建模设计的特别讲座。",
-        "es": "Este es el paso 1. Esta es una conferencia de prueba visual paso a paso de la sala de recursos de matemáticas del maestro Eunki Min. Esta vez, demostremos los principios básicos de un juego que utiliza cartas principales y compuestas utilizando un libro animado dinámico. [Juego que utiliza tarjetas de números primos y compuestos] Conferencia especial sobre investigación de campo de las matemáticas a cargo del profesor Min Eun-ki y diseño de herramientas de ingeniería de educación matemática visual y modelado matemático utilizando Python, TikZ, GeoGebra, AlgeoMath y Jupyter Notebook.",
-        "fr": "Il s'agit de l'étape 1. Il s'agit d'une démonstration visuelle étape par étape de la salle de ressources mathématiques du professeur Eunki Min. Cette fois, démontrons les principes fondamentaux d'un jeu utilisant des cartes principales et composites à l'aide d'un flip book dynamique. [Jeu utilisant des cartes à nombres premiers et composites] Conférence spéciale sur la recherche sur le terrain en mathématiques par le professeur Min Eun-ki et la conception d'outils d'ingénierie pour l'enseignement des mathématiques visuelles et la modélisation mathématique à l'aide de Python, TikZ, GeoGebra, AlgeoMath et Jupyter Notebook.",
-        "de": "Dies ist Schritt 1. Dies ist eine schrittweise visuelle Beweisvorlesung aus dem Mathe-Ressourcenraum der Lehrerin Eunki Min. Lassen Sie uns dieses Mal die Grundprinzipien eines Spiels mit erstklassigen und zusammengesetzten Karten anhand eines dynamischen Daumenkinos demonstrieren. [Spiel mit Primzahl- und zusammengesetzten Zahlenkarten] Sondervorlesung über Mathematik-Feldforschung von Professor Min Eun-ki und Design visueller technischer Werkzeuge für den Mathematikunterricht und mathematischer Modellierung mit Python, TikZ, GeoGebra, AlgeoMath und Jupyter Notebook.",
-        "vi": "Đây là bước 1. Đây là bài giảng chứng minh trực quan từng bước từ phòng tài liệu toán của giáo viên Eunki Min. Lần này, chúng ta hãy trình bày các nguyên tắc cốt lõi của trò chơi sử dụng thẻ nguyên tố và thẻ tổng hợp bằng sách lật động. [Trò chơi sử dụng thẻ số nguyên tố và số tổng hợp] Bài giảng đặc biệt về nghiên cứu lĩnh vực toán học của Giáo sư Min Eun-ki và thiết kế các công cụ kỹ thuật giáo dục toán học trực quan và mô hình toán học bằng Python, TikZ, GeoGebra, AlgeoMath và Jupyter Notebook."
-      },
-      "durations": {
-        "ko": 13.17,
-        "en": 10.29
-      },
-      "step_question_ko": "❓ [Notice & Wonder] 소수카드와 합성수 카드를 활용한 게임(A game using prime and composite cards)에서 움직여도 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in A game using prime and composite cards, and why?"
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 소수카드와 합성수 카드를 활용한 게임입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙입니다. 왜 이 조건에서 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore A game using prime and composite cards through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
+      }
     },
     {
       "page": 2,
@@ -76,8 +100,10 @@
         2,
         3
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 2 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] 소수카드와 합성수 카드를 활용한 게임를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove A game using prime and composite cards?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -85,23 +111,11 @@
         0.7128,
         0.5041
       ],
-      "explanation_text": "2단계, 2페이지부터 3페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 규칙으로 그림 그리기): 거북이 로봇에게 '앞으로 10칸, 왼쪽으로 90도 돌기'를 4번 시켜 정사각형을 그리는 알고리즘 체험",
+      "explanation_text": "2단계, 2페이지부터 3페이지까지의 단계입니다. 먼저 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "2단계, 2페이지부터 3페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 규칙으로 그림 그리기): 거북이 로봇에게 '앞으로 10칸, 왼쪽으로 90도 돌기'를 4번 시켜 정사각형을 그리는 알고리즘 체험",
-        "en": "Step 2, continuous movement from page 2 to page 3. In the left dynamic shape construction (core geometry construction and continuous motion development) process, check the basic shapes and reference points shown on the screen. Step 1 (Drawing with elementary rules): Experience the algorithm of drawing a square by asking the turtle robot to move 'forward 10 spaces and turn 90 degrees to the left' 4 times.",
-        "ja": "2段階、2ページから3ページまでの連続動きです。左のダイナミック図形作図（核心幾何作図と連続モーション展開）プロセスで、画面に表示される基本図形と基準点を確認します。 1段階（初等ルールで絵を描く）：カメロボットに「前方10マス、左に90度突起」を4回させて正方形を描くアルゴリズム体験",
-        "zh-CN": "步骤2，从第2页连续移动到第3页。在左侧动态形状构建（核心几何构建和连续运动发展）过程中，检查屏幕上显示的基本形状和参考点。第1步（用基本规则绘图）：通过让乌龟机器人“向前移动10格并向左转90度”4次来体验绘制正方形的算法。",
-        "es": "Paso 2, movimiento continuo de la página 2 a la página 3. En el proceso de construcción de formas dinámicas izquierda (construcción de geometría central y desarrollo de movimiento continuo), verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Dibujar con reglas elementales): Experimente el algoritmo de dibujar un cuadrado pidiéndole al robot tortuga que avance '10 espacios hacia adelante y gire 90 grados a la izquierda' 4 veces.",
-        "fr": "Étape 2, mouvement continu de la page 2 à la page 3. Dans le processus de construction de forme dynamique gauche (construction de la géométrie de base et développement du mouvement continu), vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Dessiner avec des règles élémentaires) : Expérimentez l'algorithme de dessin d'un carré en demandant au robot tortue d'avancer de 10 cases et de tourner de 90 degrés vers la gauche 4 fois.",
-        "de": "Schritt 2, kontinuierliche Bewegung von Seite 2 zu Seite 3. Überprüfen Sie im linken dynamischen Formkonstruktionsprozess (Kerngeometriekonstruktion und kontinuierliche Bewegungsentwicklung) die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Zeichnen mit Grundregeln): Erleben Sie den Algorithmus zum Zeichnen eines Quadrats, indem Sie den Schildkrötenroboter bitten, sich viermal „10 Felder vorwärts und um 90 Grad nach links zu drehen“.",
-        "vi": "Bước 2, chuyển động liên tục từ trang 2 đến trang 3. Trong quá trình xây dựng hình dạng động bên trái (xây dựng hình học lõi và phát triển chuyển động liên tục), hãy kiểm tra các hình dạng cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Vẽ theo quy tắc cơ bản): Trải nghiệm thuật toán vẽ hình vuông bằng cách yêu cầu robot rùa di chuyển “tiến lên 10 ô và quay 90 độ sang trái” 4 lần."
-      },
-      "durations": {
-        "ko": 32.2,
-        "en": 14.248
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "2단계, 2페이지부터 3페이지까지의 단계입니다. 먼저 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 2 (Page 2). First, we set up the fundamental definition for A game using prime and composite cards before performing any algebraic manipulation."
+      }
     },
     {
       "page": 4,
@@ -110,8 +124,10 @@
         4,
         5
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 3 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] 소수카드와 합성수 카드를 활용한 게임를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove A game using prime and composite cards?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.1012,
@@ -119,23 +135,11 @@
         0.9091,
         0.7548
       ],
-      "explanation_text": "3단계, 4페이지부터 5페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 규칙으로 그림 그리기): 거북이 로봇에게 '앞으로 10칸, 왼쪽으로 90도 돌기'를 4번 시켜 정사각형을 그리는 알고리즘 체험",
+      "explanation_text": "3단계, 4페이지부터 5페이지까지의 단계입니다. 먼저 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "3단계, 4페이지부터 5페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 규칙으로 그림 그리기): 거북이 로봇에게 '앞으로 10칸, 왼쪽으로 90도 돌기'를 4번 시켜 정사각형을 그리는 알고리즘 체험",
-        "en": "Step 3, continuous movement from page 4 to page 5. In the process of drawing blue basic shapes and reference line segments, check the basic shapes and reference points shown on the screen. Step 1 (Drawing with elementary rules): Experience the algorithm of drawing a square by asking the turtle robot to move 'forward 10 spaces and turn 90 degrees to the left' 4 times.",
-        "ja": "3段階、4ページから5ページまでの連続動きです。青の基本図形と基準線分作成プロセスで、画面に表示される基本図形と基準点を確認します。 1段階（初等ルールで絵を描く）：カメロボットに「前方10マス、左に90度突起」を4回させて正方形を描くアルゴリズム体験",
-        "zh-CN": "步骤3，从第4页连续移动到第5页。在绘制蓝色基本形状和参考线段的过程中，检查屏幕上显示的基本形状和参考点。第1步（用基本规则绘图）：通过让乌龟机器人“向前移动10格并向左转90度”4次来体验绘制正方形的算法。",
-        "es": "Paso 3, movimiento continuo de la página 4 a la página 5. En el proceso de dibujar formas básicas azules y segmentos de línea de referencia, verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Dibujar con reglas elementales): Experimente el algoritmo de dibujar un cuadrado pidiéndole al robot tortuga que avance '10 espacios hacia adelante y gire 90 grados a la izquierda' 4 veces.",
-        "fr": "Étape 3, mouvement continu de la page 4 à la page 5. Lors du processus de dessin des formes de base bleues et des segments de ligne de référence, vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Dessiner avec des règles élémentaires) : Expérimentez l'algorithme de dessin d'un carré en demandant au robot tortue d'avancer de 10 cases et de tourner de 90 degrés vers la gauche 4 fois.",
-        "de": "Schritt 3, kontinuierlicher Übergang von Seite 4 zu Seite 5. Überprüfen Sie beim Zeichnen blauer Grundformen und Referenzliniensegmente die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Zeichnen mit Grundregeln): Erleben Sie den Algorithmus zum Zeichnen eines Quadrats, indem Sie den Schildkrötenroboter bitten, sich viermal „10 Felder vorwärts und um 90 Grad nach links zu drehen“.",
-        "vi": "Bước 3, chuyển động liên tục từ trang 4 đến trang 5. Trong quá trình vẽ các hình cơ bản màu xanh và các đoạn đường tham chiếu, hãy kiểm tra các hình cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Vẽ theo quy tắc cơ bản): Trải nghiệm thuật toán vẽ hình vuông bằng cách yêu cầu robot rùa di chuyển “tiến lên 10 ô và quay 90 độ sang trái” 4 lần."
-      },
-      "durations": {
-        "ko": 30.8,
-        "en": 33.333
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "3단계, 4페이지부터 5페이지까지의 단계입니다. 먼저 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 3 (Page 4). First, we set up the fundamental definition for A game using prime and composite cards before performing any algebraic manipulation."
+      }
     },
     {
       "page": 6,
@@ -144,8 +148,10 @@
         6,
         7
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 4 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] 소수카드와 합성수 카드를 활용한 게임를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Q] Which fundamental definition should we apply first to prove A game using prime and composite cards?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.3244,
@@ -153,23 +159,11 @@
         0.6798,
         0.7548
       ],
-      "explanation_text": "4단계, 6페이지부터 7페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (좌표와 각도 명령): 원의 중심 (a, b) 와 반지름 r , 회전각 theta 를 숫자로 지정해 원하는 위치에 정확한 도형 배치하기",
+      "explanation_text": "4단계, 6페이지부터 7페이지까지의 단계입니다. 먼저 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "4단계, 6페이지부터 7페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (좌표와 각도 명령): 원의 중심 (a, b) 와 반지름 r , 회전각 theta 를 숫자로 지정해 원하는 위치에 정확한 도형 배치하기",
-        "en": "Step 4, continuous movement from pages 6 to 7. This is the step of constructing the blue basic shape and reference line segment. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Coordinates and Angle Command): Place the exact shape at the desired location by specifying the circle's center (a, b), radius r, and rotation angle theta as numbers.",
-        "ja": "4段階、6ページから7ページまでの連続動きです。青の基本図形と基準線分作図段階。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（座標と角度コマンド）：円の中心（a、b）と半径r、回転角thetaを数値で指定し、目的の位置に正確な図形を配置する",
-        "zh-CN": "步骤4，从第6页连续移动到第7页。这是构建蓝色基本形状和参考线段的步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（坐标和角度命令）：通过将圆的中心 (a、b)、半径 r 和旋转角度 theta 指定为数字，将精确的形状放置在所需位置。",
-        "es": "Paso 4, movimiento continuo de las páginas 6 a 7. Este es el paso de construir la forma básica azul y el segmento de línea de referencia. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (comando Coordenadas y ángulo): Coloque la forma exacta en la ubicación deseada especificando el centro del círculo (a, b), el radio r y el ángulo de rotación theta como números.",
-        "fr": "Étape 4, mouvement continu des pages 6 à 7. C'est l'étape de construction de la forme de base bleue et du segment de ligne de référence. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Coordonnées et commande d'angle) : placez la forme exacte à l'emplacement souhaité en spécifiant le centre du cercle (a, b), le rayon r et l'angle de rotation thêta sous forme de nombres.",
-        "de": "Schritt 4, kontinuierlicher Übergang von Seite 6 bis 7. Dies ist der Schritt zum Konstruieren der blauen Grundform und des Referenzliniensegments. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Koordinaten- und Winkelbefehl): Platzieren Sie die exakte Form an der gewünschten Stelle, indem Sie den Kreismittelpunkt (a, b), den Radius r und den Drehwinkel Theta als Zahlen angeben.",
-        "vi": "Bước 4, chuyển động liên tục từ trang 6 đến trang 7. Đây là bước xây dựng hình cơ bản màu xanh và đoạn đường tham chiếu. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Lệnh Tọa độ và Góc): Đặt hình chính xác tại vị trí mong muốn bằng cách chỉ định tâm đường tròn (a, b), bán kính r và góc quay theta dưới dạng số."
-      },
-      "durations": {
-        "ko": 27.6,
-        "en": 29.333
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "4단계, 6페이지부터 7페이지까지의 단계입니다. 먼저 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 4 (Page 6). First, we set up the fundamental definition for A game using prime and composite cards before performing any algebraic manipulation."
+      }
     },
     {
       "page": 8,
@@ -178,8 +172,10 @@
         8,
         9
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 5 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Algebraic Bridge Q] What algebraic transformation or visual model bridges our starting expression to the target?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "default",
       "diff_bbox": [
         0.3657,
@@ -187,23 +183,11 @@
         0.7769,
         0.7135
       ],
-      "explanation_text": "5단계, 8페이지부터 9페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (좌표와 각도 명령): 원의 중심 (a, b) 와 반지름 r , 회전각 theta 를 숫자로 지정해 원하는 위치에 정확한 도형 배치하기",
+      "explanation_text": "5단계, 8페이지부터 9페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "5단계, 8페이지부터 9페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (좌표와 각도 명령): 원의 중심 (a, b) 와 반지름 r , 회전각 theta 를 숫자로 지정해 원하는 위치에 정확한 도형 배치하기",
-        "en": "Step 5, continuous movement from pages 8 to 9. This is the step of deriving the right proof formula (constructing core geometry and developing continuous motion). Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Coordinates and Angle Command): Place the exact shape at the desired location by specifying the circle's center (a, b), radius r, and rotation angle theta as numbers.",
-        "ja": "5段階、8ページから9ページまでの連続動きです。右証明式は、誘導（核心幾何作図と連続モーション展開）段階です。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（座標と角度コマンド）：円の中心（a、b）と半径r、回転角thetaを数値で指定し、目的の位置に正確な図形を配置する",
-        "zh-CN": "第5步，从第8页到第9页的连续运动。这是导出正确证明公式的步骤（构建核心几何结构并开发连续运动）。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（坐标和角度命令）：通过将圆的中心 (a、b)、半径 r 和旋转角度 theta 指定为数字，将精确的形状放置在所需位置。",
-        "es": "Paso 5, movimiento continuo de las páginas 8 a 9. Este es el paso para derivar la fórmula de prueba correcta (construir la geometría central y desarrollar el movimiento continuo). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (comando Coordenadas y ángulo): Coloque la forma exacta en la ubicación deseada especificando el centro del círculo (a, b), el radio r y el ángulo de rotación theta como números.",
-        "fr": "Étape 5, mouvement continu des pages 8 à 9. C'est l'étape consistant à dériver la bonne formule de preuve (construction de la géométrie de base et développement du mouvement continu). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Coordonnées et commande d'angle) : placez la forme exacte à l'emplacement souhaité en spécifiant le centre du cercle (a, b), le rayon r et l'angle de rotation thêta sous forme de nombres.",
-        "de": "Schritt 5, kontinuierliche Bewegung von Seite 8 bis 9. Dies ist der Schritt zur Ableitung der richtigen Beweisformel (Konstruktion der Kerngeometrie und Entwicklung kontinuierlicher Bewegung). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Befehl „Koordinaten und Winkel“): Platzieren Sie die exakte Form an der gewünschten Stelle, indem Sie den Kreismittelpunkt (a, b), den Radius r und den Drehwinkel Theta als Zahlen angeben.",
-        "vi": "Bước 5, chuyển động liên tục từ trang 8 đến trang 9. Đây là bước rút ra công thức chứng minh đúng (xây dựng hình học lõi và phát triển chuyển động liên tục). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Lệnh Tọa độ và Góc): Đặt hình chính xác tại vị trí mong muốn bằng cách chỉ định tâm đường tròn (a, b), bán kính r và góc quay theta dưới dạng số."
-      },
-      "durations": {
-        "ko": 32.467,
-        "en": 36.067
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "5단계, 8페이지부터 9페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 5 (Page 8). Now we apply the key algebraic transformation, turning the expression into familiar fundamental operations."
+      }
     },
     {
       "page": 10,
@@ -212,8 +196,10 @@
         10,
         11
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)",
+      "step_title": "Step 6 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Algebraic Bridge Q] What algebraic transformation or visual model bridges our starting expression to the target?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.3223,
@@ -221,23 +207,11 @@
         0.781,
         0.7135
       ],
-      "explanation_text": "6단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (좌표와 각도 명령): 원의 중심 (a, b) 와 반지름 r , 회전각 theta 를 숫자로 지정해 원하는 위치에 정확한 도형 배치하기",
+      "explanation_text": "6단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "6단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (좌표와 각도 명령): 원의 중심 (a, b) 와 반지름 r , 회전각 theta 를 숫자로 지정해 원하는 위치에 정확한 도형 배치하기",
-        "en": "Step 6, continuous movement from pages 10 to 11. This is the step of deriving the right proof formula (drawing blue basic shapes and reference line segments). Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (Coordinates and Angle Command): Place the exact shape at the desired location by specifying the circle's center (a, b), radius r, and rotation angle theta as numbers.",
-        "ja": "6段階、10ページから11ページまでの連続動きです。右証明式の導出（青の基本図形と基準線分の作図）ステップ。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（座標と角度コマンド）：円の中心（a、b）と半径r、回転角thetaを数値で指定し、目的の位置に正確な図形を配置する",
-        "zh-CN": "第6步，从第10页连续移动到第11页。这是推导正确证明公式的步骤（绘制蓝色基本形状和参考线段）。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（坐标和角度命令）：通过将圆的中心 (a、b)、半径 r 和旋转角度 theta 指定为数字，将精确的形状放置在所需位置。",
-        "es": "Paso 6, movimiento continuo de las páginas 10 a 11. Este es el paso para derivar la fórmula de prueba correcta (dibujar formas básicas azules y segmentos de línea de referencia). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (comando Coordenadas y ángulo): Coloque la forma exacta en la ubicación deseada especificando el centro del círculo (a, b), el radio r y el ángulo de rotación theta como números.",
-        "fr": "Étape 6, mouvement continu des pages 10 à 11. C'est l'étape consistant à dériver la bonne formule de preuve (dessiner des formes de base bleues et des segments de ligne de référence). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (Coordonnées et commande d'angle) : placez la forme exacte à l'emplacement souhaité en spécifiant le centre du cercle (a, b), le rayon r et l'angle de rotation thêta sous forme de nombres.",
-        "de": "Schritt 6, kontinuierlicher Übergang von Seite 10 zu Seite 11. Dies ist der Schritt zur Ableitung der richtigen Beweisformel (Zeichnen blauer Grundformen und Referenzliniensegmente). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (Koordinaten- und Winkelbefehl): Platzieren Sie die exakte Form an der gewünschten Stelle, indem Sie den Kreismittelpunkt (a, b), den Radius r und den Drehwinkel Theta als Zahlen angeben.",
-        "vi": "Bước 6, chuyển động liên tục từ trang 10 đến trang 11. Đây là bước rút ra công thức chứng minh đúng (vẽ các hình cơ bản màu xanh và các đoạn thẳng tham chiếu). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Lệnh Tọa độ và Góc): Đặt hình chính xác tại vị trí mong muốn bằng cách chỉ định tâm đường tròn (a, b), bán kính r và góc quay theta dưới dạng số."
-      },
-      "durations": {
-        "ko": 35.333,
-        "en": 39.867
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "6단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 6 (Page 10). Now we apply the key algebraic transformation, turning the expression into familiar fundamental operations."
+      }
     },
     {
       "page": 12,
@@ -246,8 +220,10 @@
         12,
         12
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 7 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.3223,
@@ -255,23 +231,11 @@
         0.7376,
         0.7548
       ],
-      "explanation_text": "7단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (매개변수 반복문 번역): 각도나 시간을 조금씩 변화시키는 반복문(Loop)으로 수십 장의 연속 플립북 슬라이드 자동 생성",
+      "explanation_text": "7단계, 12페이지 단계입니다. 합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
       "narrations": {
-        "ko": "7단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (매개변수 반복문 번역): 각도나 시간을 조금씩 변화시키는 반복문(Loop)으로 수십 장의 연속 플립북 슬라이드 자동 생성",
-        "en": "Step 7, page 12. This is the process of drawing basic blue shapes and reference line segments. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Parameter loop translation): Automatically generate dozens of continuous flipbook slides using a loop that changes the angle or time little by little.",
-        "ja": "ステップ7、12ページです。青の基本図形と基準線分作図プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（パラメータ繰り返し文翻訳）：角度や時間を少しずつ変化させる繰り返し文（Loop）で数十枚の連続フリップブックスライドを自動生成",
-        "zh-CN": "第 7 步，第 12 页。这是绘制基本蓝色形状和参考线段的过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（参数循环翻译）：使用逐渐改变角度或时间的循环自动生成数十张连续的翻页幻灯片。",
-        "es": "Paso 7, página 12. Este es el proceso de dibujar formas azules básicas y segmentos de línea de referencia. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción en bucle de parámetros): genere automáticamente docenas de diapositivas continuas de flipbook utilizando un bucle que cambia el ángulo o el tiempo poco a poco.",
-        "fr": "Étape 7, page 12. Il s'agit du processus de dessin de formes bleues de base et de segments de ligne de référence. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction de la boucle de paramètres) : Générez automatiquement des dizaines de diapositives de flipbook continues à l'aide d'une boucle qui modifie progressivement l'angle ou le temps.",
-        "de": "Schritt 7, Seite 12. Dies ist der Prozess des Zeichnens grundlegender blauer Formen und Referenzliniensegmente. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Parameterschleifenübersetzung): Generieren Sie automatisch Dutzende fortlaufender Flipbook-Folien mithilfe einer Schleife, die den Winkel oder die Zeit nach und nach ändert.",
-        "vi": "Bước 7, trang 12. Đây là quá trình vẽ các hình màu xanh cơ bản và các đoạn thẳng tham chiếu. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch vòng lặp tham số): Tự động tạo ra hàng tá slide sách lật liên tục bằng cách sử dụng vòng lặp thay đổi góc hoặc thời gian từng chút một."
-      },
-      "durations": {
-        "ko": 35.6,
-        "en": 39.333
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "7단계, 12페이지 단계입니다. 합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
+        "en": "Step 7 (Page 12). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
+      }
     },
     {
       "page": 13,
@@ -280,8 +244,10 @@
         13,
         14
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 8 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.3244,
@@ -289,23 +255,11 @@
         0.6983,
         0.7548
       ],
-      "explanation_text": "8단계, 13페이지부터 14페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (매개변수 반복문 번역): 각도나 시간을 조금씩 변화시키는 반복문(Loop)으로 수십 장의 연속 플립북 슬라이드 자동 생성",
+      "explanation_text": "8단계, 13페이지부터 14페이지까지의 단계입니다. 합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
       "narrations": {
-        "ko": "8단계, 13페이지부터 14페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (매개변수 반복문 번역): 각도나 시간을 조금씩 변화시키는 반복문(Loop)으로 수십 장의 연속 플립북 슬라이드 자동 생성",
-        "en": "Step 8, continuous movement from pages 13 to 14. This is the process of drawing basic blue shapes and reference line segments. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Parameter loop translation): Automatically generate dozens of continuous flipbook slides using a loop that changes the angle or time little by little.",
-        "ja": "8段階、13ページから14ページまでの連続動きです。青の基本図形と基準線分作図プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（パラメータ繰り返し文翻訳）：角度や時間を少しずつ変化させる繰り返し文（Loop）で数十枚の連続フリップブックスライドを自動生成",
-        "zh-CN": "步骤8，从第13页连续移动到第14页。这是绘制基本蓝色形状和参考线段的过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（参数循环翻译）：使用逐渐改变角度或时间的循环自动生成数十张连续的翻页幻灯片。",
-        "es": "Paso 8, movimiento continuo de las páginas 13 a 14. Este es el proceso de dibujar formas azules básicas y segmentos de línea de referencia. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción en bucle de parámetros): genere automáticamente docenas de diapositivas continuas de flipbook utilizando un bucle que cambia el ángulo o el tiempo poco a poco.",
-        "fr": "Étape 8, mouvement continu des pages 13 à 14. Il s'agit du processus de dessin de formes bleues de base et de segments de ligne de référence. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction de la boucle de paramètres) : Générez automatiquement des dizaines de diapositives de flipbook continues à l'aide d'une boucle qui modifie progressivement l'angle ou le temps.",
-        "de": "Schritt 8, kontinuierlicher Übergang von Seite 13 bis 14. Dies ist der Prozess des Zeichnens grundlegender blauer Formen und Referenzliniensegmente. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Parameterschleifenübersetzung): Generieren Sie automatisch Dutzende fortlaufender Flipbook-Folien mithilfe einer Schleife, die den Winkel oder die Zeit nach und nach ändert.",
-        "vi": "Bước 8, chuyển động liên tục từ trang 13 đến trang 14. Đây là quá trình vẽ các hình màu xanh cơ bản và các đoạn thẳng tham chiếu. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch vòng lặp tham số): Tự động tạo ra hàng tá slide sách lật liên tục bằng cách sử dụng vòng lặp thay đổi góc hoặc thời gian từng chút một."
-      },
-      "durations": {
-        "ko": 26.8,
-        "en": 28.096
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "8단계, 13페이지부터 14페이지까지의 단계입니다. 합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
+        "en": "Step 8 (Page 13). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
+      }
     },
     {
       "page": 15,
@@ -314,8 +268,10 @@
         15,
         16
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 9 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception Check] What common sign or domain pitfall must we watch out for in this operation?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.3223,
@@ -323,23 +279,11 @@
         0.6983,
         0.7135
       ],
-      "explanation_text": "9단계, 15페이지부터 16페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (매개변수 반복문 번역): 각도나 시간을 조금씩 변화시키는 반복문(Loop)으로 수십 장의 연속 플립북 슬라이드 자동 생성",
+      "explanation_text": "9단계, 15페이지부터 16페이지까지의 단계입니다. 합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
       "narrations": {
-        "ko": "9단계, 15페이지부터 16페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (매개변수 반복문 번역): 각도나 시간을 조금씩 변화시키는 반복문(Loop)으로 수십 장의 연속 플립북 슬라이드 자동 생성",
-        "en": "Step 9, continuous movement from pages 15 to 16. This is the process of drawing basic blue shapes and reference line segments. The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Parameter loop translation): Automatically generate dozens of continuous flipbook slides using a loop that changes the angle or time little by little.",
-        "ja": "9段階、15ページから16ページまでの連続動きです。青の基本図形と基準線分作図プロセス。図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（パラメータ繰り返し文翻訳）：角度や時間を少しずつ変化させる繰り返し文（Loop）で数十枚の連続フリップブックスライドを自動生成",
-        "zh-CN": "第9步，从第15页连续移动到第16页。这是绘制基本蓝色形状和参考线段的过程。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤 3（参数循环翻译）：使用逐渐改变角度或时间的循环自动生成数十张连续的翻页幻灯片。",
-        "es": "Paso 9, movimiento continuo de las páginas 15 a 16. Este es el proceso de dibujar formas azules básicas y segmentos de línea de referencia. Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción en bucle de parámetros): genere automáticamente docenas de diapositivas continuas de flipbook utilizando un bucle que cambia el ángulo o el tiempo poco a poco.",
-        "fr": "Étape 9, mouvement continu des pages 15 à 16. Il s'agit du processus de dessin de formes bleues de base et de segments de ligne de référence. Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction de la boucle de paramètres) : Générez automatiquement des dizaines de diapositives de flipbook continues à l'aide d'une boucle qui modifie progressivement l'angle ou le temps.",
-        "de": "Schritt 9, kontinuierlicher Übergang von Seite 15 bis 16. Dies ist der Prozess des Zeichnens grundlegender blauer Formen und Referenzliniensegmente. Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Parameterschleifenübersetzung): Generieren Sie automatisch Dutzende fortlaufender Flipbook-Folien mithilfe einer Schleife, die den Winkel oder die Zeit nach und nach ändert.",
-        "vi": "Bước 9, chuyển động liên tục từ trang 15 đến trang 16. Đây là quá trình vẽ các hình màu xanh cơ bản và các đoạn thẳng tham chiếu. Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch vòng lặp tham số): Tự động tạo ra hàng tá slide sách lật liên tục bằng cách sử dụng vòng lặp thay đổi góc hoặc thời gian từng chút một."
-      },
-      "durations": {
-        "ko": 34.133,
-        "en": 35.267
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "9단계, 15페이지부터 16페이지까지의 단계입니다. 합성수는 반드시 자기 자신의 제곱근 이하의 소인수를 적어도 하나 가진다는 성질을 이용해 소수 카드와 합성수 카드를 정확히 판별하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다.",
+        "en": "Step 9 (Page 15). Following the laws of arithmetic and algebra, each term simplifies cleanly while avoiding common sign or domain errors."
+      }
     },
     {
       "page": 17,
@@ -348,8 +292,10 @@
         17,
         18
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 10 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Synthesis Q] How does combining our derived equations complete A game using prime and composite cards?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.3223,
@@ -357,23 +303,11 @@
         0.624,
         0.7135
       ],
-      "explanation_text": "10단계, 17페이지부터 18페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
+      "explanation_text": "10단계, 17페이지부터 18페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "10단계, 17페이지부터 18페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
-        "en": "Step 10, continuous movement from pages 17 to 18. This is the final stage of drawing the blue basic shape and reference line segment. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (In-depth investigation synthesis): Going beyond simply memorizing mathematical theorems, conducting R&E exploration by directly manipulating variables with engineering tools and discovering new geometric properties.",
-        "ja": "10段階、17ページから18ページまでの連続動きです。青の基本図形と基準線分作図仕上げ段階。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（深化探求の総合）：数学の整理を単に覚えることを超えて、工学ツールで直接変数を操作し、新しい幾何学的性質を発見するR&E探求を行う",
-        "zh-CN": "第10步，从第17页连续移动到第18页。这是绘制蓝色基本形状和参考线段的最后阶段。将前面步骤中的各个部分组合起来得出最终结论。步骤4（深入研究综合）：超越简单地记忆数学定理，通过利用工程工具直接操纵变量来进行R&E探索，发现新的几何性质。",
-        "es": "Paso 10, movimiento continuo de las páginas 17 a 18. Esta es la etapa final para dibujar la forma básica azul y el segmento de línea de referencia. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Síntesis de investigación en profundidad): ir más allá de la simple memorización de teoremas matemáticos, realizar exploración de I+E manipulando directamente variables con herramientas de ingeniería y descubriendo nuevas propiedades geométricas.",
-        "fr": "Étape 10, mouvement continu des pages 17 à 18. C'est la dernière étape du dessin de la forme de base bleue et du segment de ligne de référence. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Synthèse d'investigation approfondie) : Aller au-delà de la simple mémorisation de théorèmes mathématiques, mener une exploration R&E en manipulant directement des variables avec des outils d'ingénierie et découvrir de nouvelles propriétés géométriques.",
-        "de": "Schritt 10, kontinuierlicher Übergang von Seite 17 bis 18. Dies ist der letzte Schritt beim Zeichnen der blauen Grundform und des Referenzliniensegments. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Eingehende Untersuchungssynthese): Gehen Sie über das bloße Auswendiglernen mathematischer Theoreme hinaus und führen Sie Forschungs- und Entwicklungsuntersuchungen durch, indem Sie Variablen direkt mit technischen Werkzeugen manipulieren und neue geometrische Eigenschaften entdecken.",
-        "vi": "Bước 10, chuyển động liên tục từ trang 17 đến trang 18. Đây là giai đoạn cuối cùng của việc vẽ hình cơ bản màu xanh lam và đoạn đường tham chiếu. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tổng hợp điều tra chuyên sâu): Vượt ra ngoài việc chỉ ghi nhớ các định lý toán học, tiến hành khám phá R&E bằng cách thao tác trực tiếp các biến bằng các công cụ kỹ thuật và khám phá các tính chất hình học mới."
-      },
-      "durations": {
-        "ko": 33.867,
-        "en": 35.267
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "10단계, 17페이지부터 18페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 10 (Page 17). Combining the simplified expressions from the previous steps directly yields our target identity for A game using prime and composite cards."
+      }
     },
     {
       "page": 19,
@@ -382,8 +316,10 @@
         19,
         20
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 11 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Synthesis Q] How does combining our derived equations complete A game using prime and composite cards?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.3223,
@@ -391,23 +327,11 @@
         0.7397,
         0.7135
       ],
-      "explanation_text": "11단계, 19페이지부터 20페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
+      "explanation_text": "11단계, 19페이지부터 20페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "11단계, 19페이지부터 20페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (심화 탐구 종합): 수학 정리를 단순히 외우는 것을 넘어, 공학도구로 직접 변수를 조작하고 새로운 기하학적 성질을 발견하는 R&E 탐구 수행",
-        "en": "Step 11, continuous movement from pages 19 to 20. This is the final stage of drawing the blue basic shape and reference line segment. The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (In-depth investigation synthesis): Going beyond simply memorizing mathematical theorems, conducting R&E exploration by directly manipulating variables with engineering tools and discovering new geometric properties.",
-        "ja": "11段階、19ページから20ページまでの連続動きです。青の基本図形と基準線分作図仕上げ段階。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（深化探求の総合）：数学の整理を単に覚えることを超えて、工学ツールで直接変数を操作し、新しい幾何学的性質を発見するR&E探求を行う",
-        "zh-CN": "第11步，从第19页连续移动到第20页。这是绘制蓝色基本形状和参考线段的最后阶段。将前面步骤中的各个部分组合起来得出最终结论。步骤4（深入研究综合）：超越简单地记忆数学定理，通过利用工程工具直接操纵变量来进行R&E探索，发现新的几何性质。",
-        "es": "Paso 11, movimiento continuo de las páginas 19 a 20. Esta es la etapa final para dibujar la forma básica azul y el segmento de línea de referencia. Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Síntesis de investigación en profundidad): ir más allá de la simple memorización de teoremas matemáticos, realizar exploración de I+E manipulando directamente variables con herramientas de ingeniería y descubriendo nuevas propiedades geométricas.",
-        "fr": "Étape 11, mouvement continu des pages 19 à 20. C'est la dernière étape du dessin de la forme de base bleue et du segment de ligne de référence. Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Synthèse d'investigation approfondie) : Aller au-delà de la simple mémorisation de théorèmes mathématiques, mener une exploration R&E en manipulant directement des variables avec des outils d'ingénierie et découvrir de nouvelles propriétés géométriques.",
-        "de": "Schritt 11, kontinuierlicher Übergang von Seite 19 bis 20. Dies ist der letzte Schritt beim Zeichnen der blauen Grundform und des Referenzliniensegments. Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (eingehende Untersuchungssynthese): Gehen Sie über das bloße Auswendiglernen mathematischer Theoreme hinaus und führen Sie Forschungs- und Entwicklungsuntersuchungen durch, indem Sie Variablen direkt mit technischen Werkzeugen manipulieren und neue geometrische Eigenschaften entdecken.",
-        "vi": "Bước 11, chuyển động liên tục từ trang 19 đến trang 20. Đây là giai đoạn cuối cùng của việc vẽ hình cơ bản màu xanh lam và đoạn đường tham chiếu. Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tổng hợp điều tra chuyên sâu): Vượt ra ngoài việc chỉ ghi nhớ các định lý toán học, tiến hành khám phá R&E bằng cách thao tác trực tiếp các biến bằng các công cụ kỹ thuật và khám phá các tính chất hình học mới."
-      },
-      "durations": {
-        "ko": 32.0,
-        "en": 36.8
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "11단계, 19페이지부터 20페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 11 (Page 19). Combining the simplified expressions from the previous steps directly yields our target identity for A game using prime and composite cards."
+      }
     },
     {
       "page": 21,
@@ -416,8 +340,10 @@
         21,
         21
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 소인수분해를 이용해 어떤 자연수의 양의 약수의 개수를 구한다면 왜 각 소인수의 지수에 1씩 더해 곱하면 될까요?",
+      "step_question_en": "🔀 [What-If-Not] How does A game using prime and composite cards evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 수식 및 원리 전개",
       "color_tag": "blue",
       "diff_bbox": [
         0.0764,
@@ -425,150 +351,11 @@
         0.9628,
         0.7548
       ],
-      "explanation_text": "마지막 12단계입니다. 지금까지 총 21프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 복잡한 기하·미적분 문제의 조건이 잘 그려지지 않을 때는 특수한 수치(정삼각형, 직각이등변삼각형, 좌표 원점)를 먼저 대입해 도형의 경향성을 관찰하세요.",
+      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙에서 시작해, 에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상을 거쳐, 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 소인수분해를 이용해 어떤 자연수의 양의 약수의 개수를 구한다면 왜 각 소인수의 지수에 1씩 더해 곱하면 될까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 12단계입니다. 지금까지 총 21프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 복잡한 기하·미적분 문제의 조건이 잘 그려지지 않을 때는 특수한 수치(정삼각형, 직각이등변삼각형, 좌표 원점)를 먼저 대입해 도형의 경향성을 관찰하세요.",
-        "en": "Step 12. We have completed the entire 21-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself.",
-        "ja": "最後の12段階です。これまでに合計21フレームのフリップブック作図を通じて整理を完全に証明しました。実戦チップで、複雑な幾何・微積分問題の条件がうまく描かれないときは、特殊な数値（正三角形、直角二等辺三角形、座標原点）を先に代入して図形の傾向性を観察してください。",
-        "zh-CN": "这是最后 12 个步骤。至此，我们已经通过总共21帧的翻页图画完全证明了该定理。作为一个实用技巧，当复杂几何或微积分问题的条件不能很好地绘制时，首先代入特殊值（等边三角形、直角等腰三角形、坐标原点）并观察形状的趋势。",
-        "es": "Estos son los últimos 12 pasos. Hasta ahora hemos demostrado completamente el teorema mediante un dibujo en formato flipbook de un total de 21 fotogramas. Como consejo práctico, cuando las condiciones de un problema complejo de geometría o cálculo no se pueden dibujar bien, primero sustituya valores especiales (triángulo equilátero, triángulo rectángulo isósceles, origen de coordenadas) y observe la tendencia de la forma.",
-        "fr": "Ce sont les 12 dernières étapes. Jusqu’à présent, nous avons complètement prouvé le théorème à travers un dessin flipbook d’un total de 21 images. À titre de conseil pratique, lorsque les conditions d'un problème de géométrie complexe ou de calcul ne peuvent pas être bien dessinées, remplacez d'abord des valeurs spéciales (triangle équilatéral, triangle isocèle rectangle, origine des coordonnées) et observez la tendance de la forme.",
-        "de": "Dies sind die letzten 12 Schritte. Bisher haben wir den Satz durch eine Daumenkino-Zeichnung von insgesamt 21 Bildern vollständig bewiesen. Als praktischer Tipp: Wenn die Bedingungen einer komplexen Geometrie oder eines Rechenproblems nicht gut dargestellt werden können, ersetzen Sie zunächst spezielle Werte (gleichseitiges Dreieck, rechtwinkliges gleichschenkliges Dreieck, Koordinatenursprung) und beobachten Sie die Tendenz der Form.",
-        "vi": "Đây là 12 bước cuối cùng. Cho đến nay, chúng ta đã chứng minh hoàn toàn định lý thông qua một bản vẽ flipbook có tổng cộng 21 khung hình. Như một mẹo thực tế, khi không thể vẽ tốt các điều kiện của một hình học phức tạp hoặc một bài toán tính toán, trước tiên hãy thay thế các giá trị đặc biệt (tam giác đều, tam giác cân bên phải, gốc tọa độ) và quan sát xu hướng của hình dạng."
-      },
-      "durations": {
-        "ko": 32.067,
-        "en": 36.667
-      },
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떤 새로운 정리가 탄생할까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this figure?"
+        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 1보다 큰 자연수 중 약수가 1과 자기 자신뿐인 소수 카드와 약수가 3개 이상인 합성수 카드를 분류하고 조합하는 규칙에서 시작해, 에라토스테네스의 체 원리로 작은 소수(2, 3, 5, 7...)의 배수들을 단계별로 지워 나가며 소수와 합성수의 구조를 시각화하는 발상을 거쳐, 모든 합성수는 소수들의 곱으로 유일하게 소인수분해된다는 산술의 기본정리를 게임을 통해 직관적으로 깨닫는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 자연수 1은 소수도 아니고 합성수도 아닙니다! 또한 2는 모든 소수 중 유일한 짝수 소수임을 꼭 기억해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 소인수분해를 이용해 어떤 자연수의 양의 약수의 개수를 구한다면 왜 각 소인수의 지수에 1씩 더해 곱하면 될까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 12. The visual proof of A game using prime and composite cards is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
+      }
     }
-  ],
-  "youtube_packages": {
-    "ko": {
-      "lang": "ko",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "🔥 [시각적 증명] 소수카드와 합성수 카드를 활용한 게임(A game using prime and composite cards) — 눈으로 깨치는 21단계 기하 직관 (1...",
-      "description": "공식 암기 없이 눈으로 보고 직관적으로 깨치는 [소수카드와 합성수 카드를 활용한 게임(A game using prime and composite cards)] 21단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다.\n📋 전체 1,111개 수학자료 설명영상 게시판 & 직접 실습: https://min7014.github.io/mathedu/video_board.html?slug=2025020701\n\n💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 21페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!\n\n🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ\n\n🔔 [@min7014_ai 채널 구독하기]: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n🌐 대화형 GeoGebra 직접 조작하기: https://min7014.github.io/math20250207001.html\n📄 단계별 플립북 증명 PDF 원문: https://min7014.github.io/2025/2025020701.pdf\n🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html?slug=2025020701\n식별 코드: [ID: 2025020701_KO]\n\n⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n00:00 0페이지/21 — 원 위의 점을 아무리 이리저리 움직여도 이 각도와 비례 관계는 단 1도조차 흔들리지 않습니다! 중심과 꼭짓점을 ...\n00:13 1페이지/21 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 소수카드와 합성수 카드를 ...\n00:45 2페이지/21 — 2단계, 2페이지부터 3페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전...\n01:16 4페이지/21 — 3단계, 4페이지부터 5페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 ...\n01:43 6페이지/21 — 4단계, 6페이지부터 7페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적...\n02:16 8페이지/21 — 5단계, 8페이지부터 9페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전...\n02:51 10페이지/21 — 6단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선...\n03:27 12페이지/21 — 7단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게...\n03:53 13페이지/21 — 8단계, 13페이지부터 14페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도...\n04:28 15페이지/21 — 9단계, 15페이지부터 16페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도...\n05:01 17페이지/21 — 10단계, 17페이지부터 18페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입...\n05:33 19페이지/21 — 11단계, 19페이지부터 20페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입...\n06:06 21페이지/21 — 마지막 12단계입니다. 지금까지 총 21프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ...\n\n#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014",
-      "tags": [
-        "수학",
-        "기하학",
-        "시각적 증명",
-        "수능 수학",
-        "도형 보조선",
-        "피타고라스 정리",
-        "메넬라우스의 정리",
-        "체바의 정리",
-        "중학교 도형",
-        "고등학교 수학",
-        "수능 도형 킬러",
-        "영재고 수학",
-        "KMO 기하",
-        "GeoGebra",
-        "알지오매스",
-        "민은기 선생님의 수학자료실",
-        "민은기 선생님의 수학자료실_AI",
-        "min7014_ai",
-        "min7014",
-        "수학 잘하는 법"
-      ],
-      "quiz_comment": "💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 21페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!",
-      "categoryId": "27",
-      "defaultLanguage": "ko",
-      "chapters": [
-        "00:00 0페이지/21 — 원 위의 점을 아무리 이리저리 움직여도 이 각도와 비례 관계는 단 1도조차 흔들리지 않습니다! 중심과 꼭짓점을 ...",
-        "00:13 1페이지/21 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 소수카드와 합성수 카드를 ...",
-        "00:45 2페이지/21 — 2단계, 2페이지부터 3페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전...",
-        "01:16 4페이지/21 — 3단계, 4페이지부터 5페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정으로, 화면에 ...",
-        "01:43 6페이지/21 — 4단계, 6페이지부터 7페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 단계입니다. 연속적...",
-        "02:16 8페이지/21 — 5단계, 8페이지부터 9페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전...",
-        "02:51 10페이지/21 — 6단계, 10페이지부터 11페이지까지의 연속 움직임입니다. 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선...",
-        "03:27 12페이지/21 — 7단계, 12페이지입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도형의 움직임 속에서 항상 일정하게...",
-        "03:53 13페이지/21 — 8단계, 13페이지부터 14페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도...",
-        "04:28 15페이지/21 — 9단계, 15페이지부터 16페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 과정입니다. 도...",
-        "05:01 17페이지/21 — 10단계, 17페이지부터 18페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입...",
-        "05:33 19페이지/21 — 11단계, 19페이지부터 20페이지까지의 연속 움직임입니다. 파란색 기본 도형 및 기준 선분 작도 마무리 단계입...",
-        "06:06 21페이지/21 — 마지막 12단계입니다. 지금까지 총 21프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ..."
-      ],
-      "total_duration_sec": 390.92,
-      "srt_url": "video_lectures/youtube_packages/2025020701_ko.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2025020701_ko_thumb.png",
-      "local_mp4_path": "youtube_uploads/2025020701/2025020701_ko.mp4"
-    },
-    "en": {
-      "lang": "en",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "✨ A game using prime and composite cards — Step-by-Step Visual Math Proof (21 Steps · 1080p) | ...",
-      "description": "Why does A game using prime and composite cards hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!\n📋 Full 1,111 Math Video Board & Interactive GeoGebra: https://min7014.github.io/mathedu/video_board.html?slug=2025020701\n\n💬 [10-Second Eureka Quiz] Which step (1 to 21) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!\n\n🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E\n\n🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n🌐 Interactive GeoGebra & Flipbook Web Page: https://min7014.github.io/math20250207001.html\n📄 Original Step-by-Step PDF: https://min7014.github.io/2025/2025020701.pdf\n🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html?slug=2025020701\nTopic ID: [ID: 2025020701_EN]\n\n⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n00:00 Step 0/21 — No matter where you drag this point along the circle, the geom...\n00:10 Step 1/21 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...\n00:24 Step 2/21 — Step 2, continuous movement from page 2 to page 3. In the left...\n00:57 Step 4/21 — Step 3, continuous movement from page 4 to page 5. In the proc...\n01:27 Step 6/21 — Step 4, continuous movement from pages 6 to 7. This is the ste...\n02:03 Step 8/21 — Step 5, continuous movement from pages 8 to 9. This is the ste...\n02:43 Step 10/21 — Step 6, continuous movement from pages 10 to 11. This is the s...\n03:22 Step 12/21 — Step 7, page 12. This is the process of drawing basic blue sha...\n03:50 Step 13/21 — Step 8, continuous movement from pages 13 to 14. This is the p...\n04:25 Step 15/21 — Step 9, continuous movement from pages 15 to 16. This is the p...\n05:01 Step 17/21 — Step 10, continuous movement from pages 17 to 18. This is the ...\n05:37 Step 19/21 — Step 11, continuous movement from pages 19 to 20. This is the ...\n06:14 Step 21/21 — Step 12. We have completed the entire 21-frame visual proof! V...\n\n#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014",
-      "tags": [
-        "Visual Math Proof",
-        "Geometry Proof",
-        "Proof Without Words",
-        "Euclidean Geometry",
-        "Pythagorean Theorem",
-        "Ceva Theorem",
-        "Menelaus Theorem",
-        "GeoGebra",
-        "Math Animation",
-        "3Blue1Brown style math",
-        "Step by Step Math",
-        "High School Geometry",
-        "Math Olympiad",
-        "AMC Math",
-        "SAT Math",
-        "Min's Math Lab",
-        "min7014_ai",
-        "min7014"
-      ],
-      "quiz_comment": "💬 [10-Second Eureka Quiz] Which step (1 to 21) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!",
-      "categoryId": "27",
-      "defaultLanguage": "en",
-      "chapters": [
-        "00:00 Step 0/21 — No matter where you drag this point along the circle, the geom...",
-        "00:10 Step 1/21 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...",
-        "00:24 Step 2/21 — Step 2, continuous movement from page 2 to page 3. In the left...",
-        "00:57 Step 4/21 — Step 3, continuous movement from page 4 to page 5. In the proc...",
-        "01:27 Step 6/21 — Step 4, continuous movement from pages 6 to 7. This is the ste...",
-        "02:03 Step 8/21 — Step 5, continuous movement from pages 8 to 9. This is the ste...",
-        "02:43 Step 10/21 — Step 6, continuous movement from pages 10 to 11. This is the s...",
-        "03:22 Step 12/21 — Step 7, page 12. This is the process of drawing basic blue sha...",
-        "03:50 Step 13/21 — Step 8, continuous movement from pages 13 to 14. This is the p...",
-        "04:25 Step 15/21 — Step 9, continuous movement from pages 15 to 16. This is the p...",
-        "05:01 Step 17/21 — Step 10, continuous movement from pages 17 to 18. This is the ...",
-        "05:37 Step 19/21 — Step 11, continuous movement from pages 19 to 20. This is the ...",
-        "06:14 Step 21/21 — Step 12. We have completed the entire 21-frame visual proof! V..."
-      ],
-      "total_duration_sec": 388.67,
-      "srt_url": "video_lectures/youtube_packages/2025020701_en.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2025020701_en_thumb.png",
-      "local_mp4_path": "youtube_uploads/2025020701/2025020701_en.mp4"
-    }
-  },
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 소수카드와 합성수 카드를 활용한 게임(A game using prime and composite cards) — 45초 시각적 수학 증명 하이라이트 #Shorts #수학",
-      "local_mp4_path": "video_lectures/shorts/2025020701_short_ko.mp4",
-      "duration_sec": 43.11,
-      "aspect_ratio": "9:16 (1080x1920)"
-    },
-    "en": {
-      "title": "🔥 A game using prime and composite cards — 45s Visual Math Proof Highlight #Shorts #Math",
-      "local_mp4_path": "video_lectures/shorts/2025020701_short_en.mp4",
-      "duration_sec": 36.69,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  },
-  "pedagogy_style": "v5.0 Question-Asking Classroom (Notice & Wonder -> Socratic Pólya -> What-If-Not)"
+  ]
 }

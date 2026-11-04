@@ -3,11 +3,12 @@
   "title": "접선에 접근하는 할선들(Secant lines approaching the tangent line)",
   "title_en": "Secant lines approaching the tangent line",
   "sub_domain_ko": "미분·도함수",
-  "core_concept": "[접선에 접근하는 할선들] 곡선 위의 두 점을 잇는 할선(평균변화율 $\\frac{\\Delta y}{\\Delta x}$)이 한 점에서의 접선(순간변화율 $f'(a)$)으로 수렴하는 미분의 기하학적 본질과, 평균변화율과 같은 순간변화율 지점이 구간 내부에 존재함을 보장하는 평균값·코시 평균값 정리.",
-  "solving_tip": "절댓값 함수 $|f(x)-t|$가 $x=a$($f(a)=t$인 교점)에서 미분가능하려면 그래프가 $y=t$를 뚫고 지나갈 때 접선의 기울기가 $f'(a)=0$이어야 합니다(중근 또는 삼중근).",
+  "core_concept": "원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건 ➔ '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론",
+  "solving_tip": "원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용",
   "pdf_url": "https://min7014.github.io/2023/2023081301.pdf",
   "web_url": "https://min7014.github.io/math20230813001.html",
   "page_count": 46,
+  "scene_count": 12,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/aiT4cVw99Do"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "geometry",
+    "hypothesis_ko": "원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건",
+    "conclusion_ko": "'접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론",
+    "auxiliary_line_ko": "원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용",
+    "proof_logic_ko": "반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리",
+    "misconception_ko": "원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
+    "what_if_not_ko": "만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,27 +81,17 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 접선에 접근하는 할선들에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in Secant lines approaching the tangent line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 접선에 접근하는 할선들(Secant lines approaching the tangent line)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [접선에 접근하는 할선들] 곡선 위의 두 점을 잇는 할선(평균변화율 Delta x 분의 Delta y )이 한 점에서의 접선(순간변화율 f'(a) )으로 수렴하는 미분의 기하학적 본질과, 평균변화율과 같은 순간변화율 지점이 구간 내부에 존재함을 보장하는 평균값·코시 평균값 정리.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 접선에 접근하는 할선들입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건입니다. 왜 이 조건에서 '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 접선에 접근하는 할선들(Secant lines approaching the tangent line)의 핵심 원리를 동적 플립북으로 증명해 봅시다. [접선에 접근하는 할선들] 곡선 위의 두 점을 잇는 할선(평균변화율 Delta x 분의 Delta y )이 한 점에서의 접선(순간변화율 f'(a) )으로 수렴하는 미분의 기하학적 본질과, 평균변화율과 같은 순간변화율 지점이 구간 내부에 존재함을 보장하는 평균값·코시 평균값 정리.",
-        "en": "Step 1. Welcome to Min's Math Lab. In this dynamic visual proof lecture, we explore Secant lines approaching the tangent line and see why this mathematical property holds.",
-        "ja": "1段階です。ミン・ウンギ先生の数学資料室段階別視覚証明講義です。今回は、接線に接近する割線（Secant lines approaching the tangent line）の核心原理を動的フリップブックとして証明しましょう。 [接線に近づく割線]曲線上の2点をつなぐ割線(平均変化率Delta x分のDelta y)が一点での接線(瞬時変化率f'(a))に収束する微分の幾何学的本質と、平均変化率と同じ瞬間変化率点が区間内部に存在することを保証する平均値。",
-        "zh-CN": "这是第一步。这是 Eunki Min 老师数学资源室的分步视觉证明讲座。在本课中，我们用动态翻书来证明割线逼近切线的核心原理。 [接近切线的割线] 微分的几何本质，其中连接曲线上两点的割线（Delta y 超过平均变化率 Delta）",
-        "es": "Este es el paso 1. Esta es una conferencia de prueba visual paso a paso de la sala de recursos de matemáticas del maestro Eunki Min. En esta lección, demostraremos el principio básico de las líneas secantes que se aproximan a la línea tangente con un libro animado dinámico. [Rectas de sección que se acercan a una tangente] La esencia geométrica de la diferenciación en la que una secante que conecta dos puntos en una curva (Delta y sobre la tasa de cambio promedio Delta",
-        "fr": "Il s'agit de l'étape 1. Il s'agit d'une démonstration visuelle étape par étape de la salle de ressources mathématiques du professeur Eunki Min. Dans cette leçon, démontrons le principe de base des lignes sécantes s'approchant de la ligne tangente avec un flipbook dynamique. [Lignes de secte s'approchant d'une tangente] L'essence géométrique de la différenciation dans laquelle une sécante reliant deux points sur une courbe (Delta y sur le taux de changement moyen Delta",
-        "de": "Dies ist Schritt 1. Dies ist eine schrittweise visuelle Beweisvorlesung aus dem Mathe-Ressourcenraum der Lehrerin Eunki Min. In dieser Lektion beweisen wir mit einem dynamischen Daumenkino das Kernprinzip der Annäherung von Sekantenlinien an die Tangentenlinie. [Sektenlinien, die sich einer Tangente nähern] Die geometrische Essenz der Differenzierung, bei der eine Sekante zwei Punkte auf einer Kurve verbindet (Delta y über der durchschnittlichen Änderungsrate Delta",
-        "vi": "Đây là bước 1. Đây là bài giảng chứng minh trực quan từng bước từ phòng tài liệu toán của giáo viên Eunki Min. Trong bài học này, chúng ta hãy chứng minh nguyên lý cốt lõi của các đường cát tuyến tiếp cận đường tiếp tuyến bằng một cuốn sách lật động. [Các đường phân đoạn tiếp cận một tiếp tuyến] Bản chất hình học của vi phân trong đó một cát tuyến nối hai điểm trên một đường cong (Delta y trên tốc độ thay đổi trung bình Delta"
-      },
-      "durations": {
-        "ko": 13.17,
-        "en": 10.29
-      },
-      "step_question_ko": "❓ [Notice & Wonder] 접선에 접근하는 할선들(Secant lines approaching the tangent line)에서 움직여도 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in Secant lines approaching the tangent line, and why?"
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 접선에 접근하는 할선들입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건입니다. 왜 이 조건에서 '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore Secant lines approaching the tangent line through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
+      }
     },
     {
       "page": 3,
@@ -76,8 +100,10 @@
         2,
         5
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 2 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Secant lines approaching the tangent line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0764,
@@ -85,23 +111,11 @@
         0.8657,
         0.9091
       ],
-      "explanation_text": "2단계, 2페이지부터 5페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 평균 속력과 자동차 계기판): 2시간 동안 100km를 달린 평균 시속(50km/h)과, 그사이 어느 순간 실제 계기판 바늘이 정확히 50을 가리키는 순간 비교",
+      "explanation_text": "2단계, 2페이지부터 5페이지까지의 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "2단계, 2페이지부터 5페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 평균 속력과 자동차 계기판): 2시간 동안 100km를 달린 평균 시속(50km/h)과, 그사이 어느 순간 실제 계기판 바늘이 정확히 50을 가리키는 순간 비교",
-        "en": "Step 2, continuous movement from pages 2 to 5. This is a process of core geometric construction and continuous motion development, checking the basic shapes and reference points shown on the screen. Step 1 (Early average speed and car dashboard): Compare the average speed (50 km/h) of running 100 km in 2 hours and the moment when the actual dashboard needle points to exactly 50 at some point in the meantime.",
-        "ja": "2段階、2ページから5ページまでの連続動きです。コアジオメトリ作図と連続モーション展開プロセスで、画面に表示される基本図形と基準点を確認します。 1段階（初等平均速力と自動車計器盤）：2時間100kmを走った平均時速（50km/h）と、その間のある瞬間実際の計器板針が正確に50を指す瞬間比較",
-        "zh-CN": "步骤2，从第2页到第5页的连续运动。这是一个核心几何构造和连续运动发展的过程，检查屏幕上显示的基本形状和参考点。步骤1（早期平均速度和汽车仪表盘）：比较2小时内跑完100公里的平均速度（50公里/小时）和同时实际仪表盘指针恰好指向50的时刻。",
-        "es": "Paso 2, movimiento continuo de las páginas 2 a 5. Este es un proceso de construcción geométrica central y desarrollo de movimiento continuo, verificando las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Velocidad promedio inicial y tablero del automóvil): Compare la velocidad promedio (50 km/h) de correr 100 km en 2 horas y el momento en que la aguja del tablero real señala exactamente 50 en algún momento mientras tanto.",
-        "fr": "Étape 2, mouvement continu des pages 2 à 5. Il s'agit d'un processus de construction géométrique de base et de développement de mouvement continu, vérifiant les formes de base et les points de référence affichés à l'écran. Étape 1 (Vitesse moyenne initiale et tableau de bord de la voiture) : Comparez la vitesse moyenne (50 km/h) d'une course de 100 km en 2 heures et le moment où l'aiguille du tableau de bord indique exactement 50 à un moment donné entre-temps.",
-        "de": "Schritt 2, kontinuierliche Bewegung von Seite 2 bis 5. Dies ist ein Prozess der grundlegenden geometrischen Konstruktion und kontinuierlichen Bewegungsentwicklung, bei dem die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte überprüft werden. Schritt 1 (Frühe Durchschnittsgeschwindigkeit und Armaturenbrett des Autos): Vergleichen Sie die Durchschnittsgeschwindigkeit (50 km/h) beim Laufen von 100 km in 2 Stunden und den Moment, in dem die tatsächliche Nadel des Armaturenbretts irgendwann in der Zwischenzeit genau 50 anzeigt.",
-        "vi": "Bước 2, chuyển động liên tục từ trang 2 đến trang 5. Đây là quá trình xây dựng hình học cốt lõi và phát triển chuyển động liên tục, kiểm tra các hình dạng cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Tốc độ trung bình ban đầu và bảng đồng hồ ô tô): So sánh tốc độ trung bình (50 km/h) khi chạy 100 km trong 2 giờ và thời điểm kim bảng đồng hồ thực tế chỉ đúng 50 tại một thời điểm nào đó."
-      },
-      "durations": {
-        "ko": 39.067,
-        "en": 14.272
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "2단계, 2페이지부터 5페이지까지의 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 2 (Page 2). We construct the base figure for Secant lines approaching the tangent line and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 8,
@@ -110,8 +124,10 @@
         6,
         10
       ],
-      "step_title": "1단계 · 기본 도형 및 기준점 작도",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 3 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Secant lines approaching the tangent line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.155,
@@ -119,23 +135,11 @@
         0.7128,
         0.8182
       ],
-      "explanation_text": "3단계, 6페이지부터 10페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 평균 속력과 자동차 계기판): 2시간 동안 100km를 달린 평균 시속(50km/h)과, 그사이 어느 순간 실제 계기판 바늘이 정확히 50을 가리키는 순간 비교",
+      "explanation_text": "3단계, 6페이지부터 10페이지까지의 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "3단계, 6페이지부터 10페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정으로, 화면에 나타난 기본 도형과 기준점을 확인합니다. 1단계 (초등 평균 속력과 자동차 계기판): 2시간 동안 100km를 달린 평균 시속(50km/h)과, 그사이 어느 순간 실제 계기판 바늘이 정확히 50을 가리키는 순간 비교",
-        "en": "Step 3, continuous movement from pages 6 to 10. In the left dynamic shape construction (core geometry construction and continuous motion development) process, check the basic shapes and reference points shown on the screen. Step 1 (Early average speed and car dashboard): Compare the average speed (50 km/h) of running 100 km in 2 hours and the moment when the actual dashboard needle points to exactly 50 at some point in the meantime.",
-        "ja": "3段階、6ページから10ページまでの連続動きです。左のダイナミック図形作図（核心幾何作図と連続モーション展開）プロセスで、画面に表示される基本図形と基準点を確認します。 1段階（初等平均速力と自動車計器盤）：2時間100kmを走った平均時速（50km/h）と、その間のある瞬間実際の計器板針が正確に50を指す瞬間比較",
-        "zh-CN": "步骤3，从第6页到第10页的连续运动。在左侧动态形状构建（核心几何构建和连续运动发展）过程中，检查屏幕上显示的基本形状和参考点。步骤1（早期平均速度和汽车仪表盘）：比较2小时内跑完100公里的平均速度（50公里/小时）和同时实际仪表盘指针恰好指向50的时刻。",
-        "es": "Paso 3, movimiento continuo de las páginas 6 a 10. En el proceso de construcción de formas dinámicas izquierda (construcción de geometría central y desarrollo de movimiento continuo), verifique las formas básicas y los puntos de referencia que se muestran en la pantalla. Paso 1 (Velocidad promedio inicial y tablero del automóvil): Compare la velocidad promedio (50 km/h) de correr 100 km en 2 horas y el momento en que la aguja del tablero real señala exactamente 50 en algún momento mientras tanto.",
-        "fr": "Étape 3, mouvement continu des pages 6 à 10. Dans le processus de construction de forme dynamique gauche (construction de la géométrie de base et développement du mouvement continu), vérifiez les formes de base et les points de référence affichés à l'écran. Étape 1 (Vitesse moyenne initiale et tableau de bord de la voiture) : Comparez la vitesse moyenne (50 km/h) d'une course de 100 km en 2 heures et le moment où l'aiguille du tableau de bord indique exactement 50 à un moment donné entre-temps.",
-        "de": "Schritt 3, kontinuierliche Bewegung von den Seiten 6 bis 10. Überprüfen Sie im linken dynamischen Formkonstruktionsprozess (Kerngeometriekonstruktion und kontinuierliche Bewegungsentwicklung) die auf dem Bildschirm angezeigten Grundformen und Referenzpunkte. Schritt 1 (Frühe Durchschnittsgeschwindigkeit und Armaturenbrett des Autos): Vergleichen Sie die Durchschnittsgeschwindigkeit (50 km/h) beim Laufen von 100 km in 2 Stunden und den Moment, in dem die tatsächliche Nadel des Armaturenbretts irgendwann in der Zwischenzeit genau 50 anzeigt.",
-        "vi": "Bước 3, chuyển động liên tục từ trang 6 đến trang 10. Trong quá trình xây dựng hình dạng động bên trái (xây dựng hình học lõi và phát triển chuyển động liên tục), hãy kiểm tra các hình dạng cơ bản và các điểm tham chiếu hiển thị trên màn hình. Bước 1 (Tốc độ trung bình ban đầu và bảng đồng hồ ô tô): So sánh tốc độ trung bình (50 km/h) khi chạy 100 km trong 2 giờ và thời điểm kim bảng đồng hồ thực tế chỉ đúng 50 tại một thời điểm nào đó."
-      },
-      "durations": {
-        "ko": 28.72,
-        "en": 30.064
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "3단계, 6페이지부터 10페이지까지의 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 3 (Page 6). We construct the base figure for Secant lines approaching the tangent line and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 12,
@@ -144,8 +148,10 @@
         11,
         14
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 4 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Secant lines approaching the tangent line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.157,
@@ -153,23 +159,11 @@
         0.6632,
         0.9091
       ],
-      "explanation_text": "4단계, 11페이지부터 14페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 두 점 잇기에서 스치는 선으로): 곡선 위의 두 점을 잇는 막대기(할선)의 한쪽 끝을 다른 끝으로 점점 가까이 붙이면 곡선에 딱 스치는 선(접선)이 됨을 관찰",
+      "explanation_text": "4단계, 11페이지부터 14페이지까지의 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "4단계, 11페이지부터 14페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 두 점 잇기에서 스치는 선으로): 곡선 위의 두 점을 잇는 막대기(할선)의 한쪽 끝을 다른 끝으로 점점 가까이 붙이면 곡선에 딱 스치는 선(접선)이 됨을 관찰",
-        "en": "Step 4, continuous movement from pages 11 to 14. This is the stage of drawing the left dynamic shape (displaying green corresponding areas and proportional elements). Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (From connecting two points on a curve to a line that just touches the curve): Observe that if you bring one end of a stick (secant line) connecting two points on a curve closer to the other end, it becomes a line (tangent line) that just grazes the curve.",
-        "ja": "4段階、11ページから14ページまでの連続動きです。左ダイナミック図形作図（緑色対応領域と比例要素の表示）ステップ。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等二点綴じから痩せる線へ）：曲線上の二点をつなぐ棒（割線）の一方の端をもう一方の端にますます近づければ、曲線にぴったり痩せる線（接線）になることを観察",
-        "zh-CN": "第四步，从第11页连续移动到第14页。这是绘制左侧动态形状的阶段（显示绿色对应区域和比例元素）。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（从连接曲线上的两点到一条刚好接触曲线的直线）：观察一下，如果将连接曲线上两点的一根棍子（割线）的一端靠近另一端，它就会变成一条刚好擦过曲线的线（切线）。",
-        "es": "Paso 4, movimiento continuo de las páginas 11 a 14. Esta es la etapa de dibujar la forma dinámica izquierda (mostrando las áreas verdes correspondientes y los elementos proporcionales). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (De conectar dos puntos en una curva a una línea que simplemente toca la curva): Observe que si acerca un extremo de un palo (línea secante) que conecta dos puntos en una curva al otro extremo, se convierte en una línea (línea tangente) que simplemente roza la curva.",
-        "fr": "Étape 4, mouvement continu des pages 11 à 14. C'est l'étape de dessin de la forme dynamique gauche (affichant les zones vertes correspondantes et les éléments proportionnels). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (De la connexion de deux points sur une courbe à une ligne qui touche juste la courbe) : Observez que si vous rapprochez une extrémité d'un bâton (ligne sécante) reliant deux points sur une courbe de l'autre extrémité, cela devient une ligne (ligne tangente) qui effleure simplement la courbe.",
-        "de": "Schritt 4, kontinuierlicher Übergang von Seite 11 bis 14. Dies ist die Phase des Zeichnens der linken dynamischen Form (Anzeige grüner entsprechender Bereiche und proportionaler Elemente). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (vom Verbinden zweier Punkte auf einer Kurve mit einer Linie, die die Kurve gerade berührt): Beachten Sie, dass, wenn Sie ein Ende eines Stabes (Sekantenlinie), der zwei Punkte auf einer Kurve verbindet, näher an das andere Ende bringen, dieser zu einer Linie (Tangente) wird, die die Kurve gerade streift.",
-        "vi": "Bước 4, chuyển động liên tục từ trang 11 đến trang 14. Đây là công đoạn vẽ hình động bên trái (hiển thị màu xanh lục các vùng tương ứng và các phần tử tỷ lệ). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Từ nối hai điểm trên đường cong đến đường thẳng vừa tiếp xúc với đường cong): Quan sát rằng nếu đưa một đầu của que (đường cát tuyến) nối hai điểm trên đường cong lại gần đầu kia thì nó sẽ trở thành một đường thẳng (đường tiếp tuyến) vừa sượt qua đường cong."
-      },
-      "durations": {
-        "ko": 30.88,
-        "en": 31.96
-      },
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?"
+        "ko": "4단계, 11페이지부터 14페이지까지의 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 4 (Page 11). We construct the base figure for Secant lines approaching the tangent line and mark the given geometric conditions clearly."
+      }
     },
     {
       "page": 17,
@@ -178,8 +172,10 @@
         15,
         19
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 5 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.1756,
@@ -187,23 +183,11 @@
         0.6612,
         0.9091
       ],
-      "explanation_text": "5단계, 15페이지부터 19페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 두 점 잇기에서 스치는 선으로): 곡선 위의 두 점을 잇는 막대기(할선)의 한쪽 끝을 다른 끝으로 점점 가까이 붙이면 곡선에 딱 스치는 선(접선)이 됨을 관찰",
+      "explanation_text": "5단계, 15페이지부터 19페이지까지의 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "5단계, 15페이지부터 19페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 두 점 잇기에서 스치는 선으로): 곡선 위의 두 점을 잇는 막대기(할선)의 한쪽 끝을 다른 끝으로 점점 가까이 붙이면 곡선에 딱 스치는 선(접선)이 됨을 관찰",
-        "en": "Step 5, continuous movement from pages 15 to 19. This is the left dynamic geometry construction (core geometry construction and continuous motion development) stage. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (From connecting two points on a curve to a line that just touches the curve): Observe that if you bring one end of a stick (secant line) connecting two points on a curve closer to the other end, it becomes a line (tangent line) that just grazes the curve.",
-        "ja": "5段階、15ページから19ページまでの連続動きです。左ダイナミック図形作図(核心幾何作図と連続モーション展開)段階です.連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等二点綴じから痩せる線へ）：曲線上の二点をつなぐ棒（割線）の一方の端をもう一方の端にますます近づければ、曲線にぴったり痩せる線（接線）になることを観察",
-        "zh-CN": "第5步，从第15页到第19页的连续运动。这是左动态几何构造（核心几何构造和连续运动发展）阶段。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（从连接曲线上的两点到一条刚好接触曲线的直线）：观察一下，如果将连接曲线上两点的一根棍子（割线）的一端靠近另一端，它就会变成一条刚好擦过曲线的线（切线）。",
-        "es": "Paso 5, movimiento continuo de las páginas 15 a 19. Esta es la etapa de construcción de la geometría dinámica izquierda (construcción de la geometría central y desarrollo del movimiento continuo). Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (De conectar dos puntos en una curva a una línea que simplemente toca la curva): Observe que si acerca un extremo de un palo (línea secante) que conecta dos puntos en una curva al otro extremo, se convierte en una línea (línea tangente) que simplemente roza la curva.",
-        "fr": "Étape 5, mouvement continu des pages 15 à 19. Il s'agit de l'étape gauche de construction de la géométrie dynamique (construction de la géométrie de base et développement du mouvement continu). Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (De la connexion de deux points sur une courbe à une ligne qui touche juste la courbe) : Observez que si vous rapprochez une extrémité d'un bâton (ligne sécante) reliant deux points sur une courbe de l'autre extrémité, cela devient une ligne (ligne tangente) qui effleure simplement la courbe.",
-        "de": "Schritt 5, kontinuierliche Bewegung von den Seiten 15 bis 19. Dies ist die linke Stufe der dynamischen Geometriekonstruktion (Kerngeometriekonstruktion und kontinuierliche Bewegungsentwicklung). Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (vom Verbinden zweier Punkte auf einer Kurve mit einer Linie, die die Kurve gerade berührt): Beachten Sie, dass, wenn Sie ein Ende eines Stabes (Sekantenlinie), der zwei Punkte auf einer Kurve verbindet, näher an das andere Ende bringen, dieser zu einer Linie (Tangente) wird, die die Kurve gerade streift.",
-        "vi": "Bước 5, chuyển động liên tục từ trang 15 đến 19. Đây là giai đoạn xây dựng hình học động bên trái (xây dựng hình học lõi và phát triển chuyển động liên tục). Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Từ nối hai điểm trên đường cong đến đường thẳng vừa tiếp xúc với đường cong): Quan sát rằng nếu đưa một đầu của que (đường cát tuyến) nối hai điểm trên đường cong lại gần đầu kia thì nó sẽ trở thành một đường thẳng (đường tiếp tuyến) vừa sượt qua đường cong."
-      },
-      "durations": {
-        "ko": 33.088,
-        "en": 37.336
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "5단계, 15페이지부터 19페이지까지의 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 5 (Page 15). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 21,
@@ -212,8 +196,10 @@
         20,
         23
       ],
-      "step_title": "2단계 · 핵심 보조선 및 동적 대칭 관찰",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "Step 6 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.1612,
@@ -221,23 +207,11 @@
         0.8099,
         0.9091
       ],
-      "explanation_text": "6단계, 20페이지부터 23페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 두 점 잇기에서 스치는 선으로): 곡선 위의 두 점을 잇는 막대기(할선)의 한쪽 끝을 다른 끝으로 점점 가까이 붙이면 곡선에 딱 스치는 선(접선)이 됨을 관찰",
+      "explanation_text": "6단계, 20페이지부터 23페이지까지의 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "6단계, 20페이지부터 23페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 단계입니다. 연속적으로 움직이는 보조선과 각·선분의 대칭 관계를 눈여겨보세요. 2단계 (초등 두 점 잇기에서 스치는 선으로): 곡선 위의 두 점을 잇는 막대기(할선)의 한쪽 끝을 다른 끝으로 점점 가까이 붙이면 곡선에 딱 스치는 선(접선)이 됨을 관찰",
-        "en": "Step 6, continuous movement from pages 20 to 23. These are the core geometry construction and continuous motion development steps. Pay attention to the continuously moving auxiliary lines and the symmetrical relationships between angles and line segments. Step 2 (From connecting two points on a curve to a line that just touches the curve): Observe that if you bring one end of a stick (secant line) connecting two points on a curve closer to the other end, it becomes a line (tangent line) that just grazes the curve.",
-        "ja": "6段階、20ページから23ページまでの連続動きです。コア幾何作図と連続モーション展開段階です。連続的に動く補助線と角・線分の対称関係を見てみましょう。ステップ2（初等二点綴じから痩せる線へ）：曲線上の二点をつなぐ棒（割線）の一方の端をもう一方の端にますます近づければ、曲線にぴったり痩せる線（接線）になることを観察",
-        "zh-CN": "第6步，从第20页到第23页的连续运动。这些是核心几何结构和连续运动发展步骤。注意不断移动的辅助线以及角度和线段之间的对称关系。步骤 2（从连接曲线上的两点到一条刚好接触曲线的直线）：观察一下，如果将连接曲线上两点的一根棍子（割线）的一端靠近另一端，它就会变成一条刚好擦过曲线的线（切线）。",
-        "es": "Paso 6, movimiento continuo de las páginas 20 a 23. Estos son los pasos de construcción de la geometría central y desarrollo del movimiento continuo. Preste atención a las líneas auxiliares que se mueven continuamente y a las relaciones simétricas entre ángulos y segmentos de línea. Paso 2 (De conectar dos puntos en una curva a una línea que simplemente toca la curva): Observe que si acerca un extremo de un palo (línea secante) que conecta dos puntos en una curva al otro extremo, se convierte en una línea (línea tangente) que simplemente roza la curva.",
-        "fr": "Étape 6, mouvement continu des pages 20 à 23. Ce sont les étapes de construction de la géométrie de base et de développement du mouvement continu. Faites attention aux lignes auxiliaires en mouvement continu et aux relations symétriques entre les angles et les segments de ligne. Étape 2 (De la connexion de deux points sur une courbe à une ligne qui touche juste la courbe) : Observez que si vous rapprochez une extrémité d'un bâton (ligne sécante) reliant deux points sur une courbe de l'autre extrémité, cela devient une ligne (ligne tangente) qui effleure simplement la courbe.",
-        "de": "Schritt 6, kontinuierliche Bewegung von den Seiten 20 bis 23. Dies sind die Kerngeometriekonstruktions- und kontinuierlichen Bewegungsentwicklungsschritte. Achten Sie auf die sich ständig bewegenden Hilfslinien und die symmetrischen Beziehungen zwischen Winkeln und Liniensegmenten. Schritt 2 (vom Verbinden zweier Punkte auf einer Kurve mit einer Linie, die die Kurve gerade berührt): Beachten Sie, dass, wenn Sie ein Ende eines Stabes (Sekantenlinie), der zwei Punkte auf einer Kurve verbindet, näher an das andere Ende bringen, dieser zu einer Linie (Tangente) wird, die die Kurve gerade streift.",
-        "vi": "Bước 6, chuyển động liên tục từ trang 20 đến trang 23. Đây là các bước xây dựng hình học cốt lõi và phát triển chuyển động liên tục. Hãy chú ý đến các đường phụ chuyển động liên tục và mối quan hệ đối xứng giữa các góc và đoạn thẳng. Bước 2 (Từ nối hai điểm trên đường cong đến đường thẳng vừa tiếp xúc với đường cong): Quan sát rằng nếu đưa một đầu của que (đường cát tuyến) nối hai điểm trên đường cong lại gần đầu kia thì nó sẽ trở thành một đường thẳng (đường tiếp tuyến) vừa sượt qua đường cong."
-      },
-      "durations": {
-        "ko": 32.92,
-        "en": 37.816
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "6단계, 20페이지부터 23페이지까지의 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 6 (Page 20). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
+      }
     },
     {
       "page": 25,
@@ -246,8 +220,10 @@
         24,
         27
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 7 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.1632,
@@ -255,23 +231,11 @@
         0.6921,
         0.9091
       ],
-      "explanation_text": "7단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (미분계수와 도함수 번역): f'(a)= lim_ h to 0 h 분의 f(a+h)-f(a) 정의와 다항함수 미분 공식 (x^n)'=nx^ n-1 유도",
+      "explanation_text": "7단계, 24페이지부터 27페이지까지의 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
       "narrations": {
-        "ko": "7단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (미분계수와 도함수 번역): f'(a)= lim_ h to 0 h 분의 f(a+h)-f(a) 정의와 다항함수 미분 공식 (x^n)'=nx^ n-1 유도",
-        "en": "Step 7, continuous movement from pages 24 to 27. This is the process of drawing the left dynamic shape (drawing core geometry and developing continuous motion). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of differential coefficients and derivatives): Define f(a+h)-f(a) for f'(a)= lim_ h to 0 h and derive the polynomial function differentiation formula (x^n)'=nx^ n-1",
-        "ja": "7段階、24ページから27ページまでの連続動きです。左ダイナミック図形作図(核心幾何作図と連続モーション展開)プロセスです.図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（微分係数と導関数の翻訳）：f'（a）= lim_ h to 0 h分のf（a + h）-f（a）定義と多項関数微分式（x ^ n）' = nx ^ n-1誘導",
-        "zh-CN": "第7步，从第24页到第27页的连续运动。这是绘制左侧动态形状的过程（绘制核心几何体并发展连续运动）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（微分系数和导数的翻译）：定义f(a+h)-f(a)，对于f'(a)= lim_ h 到0 h，推导出多项式函数微分公式(x^n)'=nx^ n-1",
-        "es": "Paso 7, movimiento continuo de las páginas 24 a 27. Este es el proceso de dibujar la forma dinámica izquierda (dibujar la geometría central y desarrollar el movimiento continuo). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de coeficientes diferenciales y derivadas): Defina f(a+h)-f(a) para f'(a)= lim_ h a 0 h y derive la fórmula de diferenciación de funciones polinómicas (x^n)'=nx^ n-1",
-        "fr": "Étape 7, mouvement continu des pages 24 à 27. Il s'agit du processus de dessin de la forme dynamique gauche (dessiner la géométrie de base et développer un mouvement continu). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction des coefficients différentiels et des dérivées) : Définir f(a+h)-f(a) pour f'(a)= lim_ h à 0 h et dériver la formule de différenciation de la fonction polynomiale (x^n)'=nx^ n-1",
-        "de": "Schritt 7, kontinuierliche Bewegung von den Seiten 24 bis 27. Dies ist der Prozess des Zeichnens der linken dynamischen Form (Kerngeometrie zeichnen und kontinuierliche Bewegung entwickeln). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung von Differentialkoeffizienten und Ableitungen): Definieren Sie f(a+h)-f(a) für f'(a)= lim_ h bis 0 h und leiten Sie die Polynomfunktionsdifferenzierungsformel (x^n)'=nx^ n-1 ab",
-        "vi": "Bước 7, chuyển động liên tục từ trang 24 đến trang 27. Đây là quá trình vẽ hình động bên trái (vẽ hình học lõi và phát triển chuyển động liên tục). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch hệ số vi phân và đạo hàm): Xác định f(a+h)-f(a) cho f'(a)= lim_ h đến 0 h và suy ra công thức vi phân hàm đa thức (x^n)'=nx^ n-1"
-      },
-      "durations": {
-        "ko": 30.808,
-        "en": 35.128
-      },
-      "step_question_ko": "🧭 [폴리아 보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?"
+        "ko": "7단계, 24페이지부터 27페이지까지의 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
+        "en": "Step 7 (Page 24). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 30,
@@ -280,8 +244,10 @@
         28,
         32
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 8 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.1715,
@@ -289,23 +255,11 @@
         0.657,
         0.9091
       ],
-      "explanation_text": "8단계, 28페이지부터 32페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (미분계수와 도함수 번역): f'(a)= lim_ h to 0 h 분의 f(a+h)-f(a) 정의와 다항함수 미분 공식 (x^n)'=nx^ n-1 유도",
+      "explanation_text": "8단계, 28페이지부터 32페이지까지의 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
       "narrations": {
-        "ko": "8단계, 28페이지부터 32페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (미분계수와 도함수 번역): f'(a)= lim_ h to 0 h 분의 f(a+h)-f(a) 정의와 다항함수 미분 공식 (x^n)'=nx^ n-1 유도",
-        "en": "Step 8, continuous movement from pages 28 to 32. This is the process of drawing the left dynamic shape (drawing core geometry and developing continuous motion). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of differential coefficients and derivatives): Define f(a+h)-f(a) for f'(a)= lim_ h to 0 h and derive the polynomial function differentiation formula (x^n)'=nx^ n-1",
-        "ja": "8段階、28ページから32ページまでの連続動きです。左ダイナミック図形作図(核心幾何作図と連続モーション展開)プロセスです.図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（微分係数と導関数の翻訳）：f'（a）= lim_ h to 0 h分のf（a + h）-f（a）定義と多項関数微分式（x ^ n）' = nx ^ n-1誘導",
-        "zh-CN": "第8步，从第28页到第32页的连续运动。这是绘制左侧动态形状的过程（绘制核心几何体并发展连续运动）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（微分系数和导数的翻译）：定义f(a+h)-f(a)，对于f'(a)= lim_ h 到0 h，推导出多项式函数微分公式(x^n)'=nx^ n-1",
-        "es": "Paso 8, movimiento continuo de las páginas 28 a 32. Este es el proceso de dibujar la forma dinámica izquierda (dibujar la geometría central y desarrollar el movimiento continuo). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de coeficientes diferenciales y derivadas): Defina f(a+h)-f(a) para f'(a)= lim_ h a 0 h y derive la fórmula de diferenciación de funciones polinómicas (x^n)'=nx^ n-1",
-        "fr": "Étape 8, mouvement continu des pages 28 à 32. Il s'agit du processus de dessin de la forme dynamique gauche (dessiner la géométrie de base et développer un mouvement continu). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction des coefficients différentiels et des dérivées) : Définir f(a+h)-f(a) pour f'(a)= lim_ h à 0 h et dériver la formule de différenciation de la fonction polynomiale (x^n)'=nx^ n-1",
-        "de": "Schritt 8, kontinuierliche Bewegung von Seite 28 bis 32. Dies ist der Prozess des Zeichnens der linken dynamischen Form (Kerngeometrie zeichnen und kontinuierliche Bewegung entwickeln). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung von Differentialkoeffizienten und Ableitungen): Definieren Sie f(a+h)-f(a) für f'(a)= lim_ h bis 0 h und leiten Sie die Polynomfunktionsdifferenzierungsformel (x^n)'=nx^ n-1 ab",
-        "vi": "Bước 8, chuyển động liên tục từ trang 28 đến trang 32. Đây là quá trình vẽ hình động bên trái (vẽ hình học lõi và phát triển chuyển động liên tục). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch hệ số vi phân và đạo hàm): Xác định f(a+h)-f(a) cho f'(a)= lim_ h đến 0 h và suy ra công thức vi phân hàm đa thức (x^n)'=nx^ n-1"
-      },
-      "durations": {
-        "ko": 35.2,
-        "en": 42.067
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "8단계, 28페이지부터 32페이지까지의 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
+        "en": "Step 8 (Page 28). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 34,
@@ -314,8 +268,10 @@
         33,
         36
       ],
-      "step_title": "3단계 · 불변량 및 대수적 등식 도출",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 9 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.1818,
@@ -323,23 +279,11 @@
         0.6095,
         0.9091
       ],
-      "explanation_text": "9단계, 33페이지부터 36페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (미분계수와 도함수 번역): f'(a)= lim_ h to 0 h 분의 f(a+h)-f(a) 정의와 다항함수 미분 공식 (x^n)'=nx^ n-1 유도",
+      "explanation_text": "9단계, 33페이지부터 36페이지까지의 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
       "narrations": {
-        "ko": "9단계, 33페이지부터 36페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정입니다. 도형의 움직임 속에서 항상 일정하게 유지되는 합동·닮음·거리 관계를 수식으로 연결합니다. 3단계 (미분계수와 도함수 번역): f'(a)= lim_ h to 0 h 분의 f(a+h)-f(a) 정의와 다항함수 미분 공식 (x^n)'=nx^ n-1 유도",
-        "en": "Step 9, continuous movement from pages 33 to 36. This is the process of drawing the left dynamic shape (drawing core geometry and developing continuous motion). The congruence, similarity, and distance relationships that always remain constant during the movement of shapes are connected using formulas. Step 3 (Translation of differential coefficients and derivatives): Define f(a+h)-f(a) for f'(a)= lim_ h to 0 h and derive the polynomial function differentiation formula (x^n)'=nx^ n-1",
-        "ja": "9段階、33ページから36ページまでの連続動きです。左ダイナミック図形作図(核心幾何作図と連続モーション展開)プロセスです.図形の動きの中で常に一定に保たれる合同・似・距離関係を数式で連結します。ステップ3（微分係数と導関数の翻訳）：f'（a）= lim_ h to 0 h分のf（a + h）-f（a）定義と多項関数微分式（x ^ n）' = nx ^ n-1誘導",
-        "zh-CN": "步骤9，从第33页到第36页的连续运动。这是绘制左侧动态形状的过程（绘制核心几何体并发展连续运动）。形状运动过程中始终保持不变的同余、相似和距离关系通过公式联系起来。步骤3（微分系数和导数的翻译）：定义f(a+h)-f(a)，对于f'(a)= lim_ h 到0 h，推导出多项式函数微分公式(x^n)'=nx^ n-1",
-        "es": "Paso 9, movimiento continuo de las páginas 33 a 36. Este es el proceso de dibujar la forma dinámica izquierda (dibujar la geometría central y desarrollar el movimiento continuo). Las relaciones de congruencia, similitud y distancia que siempre permanecen constantes durante el movimiento de las formas se conectan mediante fórmulas. Paso 3 (Traducción de coeficientes diferenciales y derivadas): Defina f(a+h)-f(a) para f'(a)= lim_ h a 0 h y derive la fórmula de diferenciación de funciones polinómicas (x^n)'=nx^ n-1",
-        "fr": "Étape 9, mouvement continu des pages 33 à 36. Il s'agit du processus de dessin de la forme dynamique gauche (dessiner la géométrie de base et développer un mouvement continu). Les relations de congruence, de similarité et de distance qui restent toujours constantes lors du mouvement des formes sont reliées à l'aide de formules. Étape 3 (Traduction des coefficients différentiels et des dérivées) : Définir f(a+h)-f(a) pour f'(a)= lim_ h à 0 h et dériver la formule de différenciation de la fonction polynomiale (x^n)'=nx^ n-1",
-        "de": "Schritt 9, kontinuierliche Bewegung von den Seiten 33 bis 36. Dies ist der Prozess des Zeichnens der linken dynamischen Form (Kerngeometrie zeichnen und kontinuierliche Bewegung entwickeln). Die bei der Bewegung von Formen stets konstanten Kongruenz-, Ähnlichkeits- und Distanzbeziehungen werden durch Formeln verknüpft. Schritt 3 (Übersetzung von Differentialkoeffizienten und Ableitungen): Definieren Sie f(a+h)-f(a) für f'(a)= lim_ h bis 0 h und leiten Sie die Polynomfunktionsdifferenzierungsformel (x^n)'=nx^ n-1 ab",
-        "vi": "Bước 9, chuyển động liên tục từ trang 33 đến trang 36. Đây là quá trình vẽ hình động bên trái (vẽ hình học lõi và phát triển chuyển động liên tục). Các mối quan hệ đồng đẳng, tương đồng, khoảng cách luôn không đổi trong quá trình chuyển động của các hình được kết nối bằng các công thức. Bước 3 (Dịch hệ số vi phân và đạo hàm): Xác định f(a+h)-f(a) cho f'(a)= lim_ h đến 0 h và suy ra công thức vi phân hàm đa thức (x^n)'=nx^ n-1"
-      },
-      "durations": {
-        "ko": 35.008,
-        "en": 41.344
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "9단계, 33페이지부터 36페이지까지의 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
+        "en": "Step 9 (Page 33). This completes the core geometric deduction while avoiding circular reasoning."
+      }
     },
     {
       "page": 39,
@@ -348,8 +292,10 @@
         37,
         41
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 10 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Secant lines approaching the tangent line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.1901,
@@ -357,23 +303,11 @@
         0.5723,
         0.9091
       ],
-      "explanation_text": "10단계, 37페이지부터 41페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 도함수 f'(x) 의 부호 변화( + to - 극대, - to + 극소)와 절댓값 함수 |f(x)-k| 의 첨점 소거 조건( f'(a)=0 )으로 킬러 문항 해결",
+      "explanation_text": "10단계, 37페이지부터 41페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "10단계, 37페이지부터 41페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 도함수 f'(x) 의 부호 변화( + to - 극대, - to + 극소)와 절댓값 함수 |f(x)-k| 의 첨점 소거 조건( f'(a)=0 )으로 킬러 문항 해결",
-        "en": "Step 10, continuous movement from pages 37 to 41. This is the final stage of drawing the left dynamic shape (drawing core geometry and developing continuous motion). The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): Sign change of derivative f'(x) (+ to - maximum, - to + minimum) and absolute value function |f(x)-k| Solve the killer question with the cusp cancellation condition (f'(a)=0)",
-        "ja": "10段階、37ページから41ページまでの連続動きです。左動的図形作図(核心幾何作図と連続モーション展開)仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本文全体）：導関数f'（x）の符号変化（+ to - 極大、 - to +極小）と絶対値関数| f（x）-k |の添点消去条件( f'(a)=0 )でキラー問題を解決",
-        "zh-CN": "第10步，从第37页到第41页的连续运动。这是绘制左侧动态形状的最后阶段（绘制核心几何形状并发展连续运动）。将前面步骤中的各个部分组合起来得出最终结论。步骤 4（正文摘要）：导数 f'(x) 的符号变化（+ 到 - 最大值，- 到 + 最小值）和绝对值函数 |f(x)-k|用尖点抵消条件 (f'(a)=0) 解决杀手问题",
-        "es": "Paso 10, movimiento continuo de las páginas 37 a 41. Esta es la etapa final para dibujar la forma dinámica izquierda (dibujar la geometría central y desarrollar el movimiento continuo). Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): Cambio de signo de la derivada f'(x) (+ a - máximo, - a + mínimo) y la función de valor absoluto |f(x)-k| Resuelva la pregunta asesina con la condición de cancelación de la cúspide (f'(a)=0)",
-        "fr": "Étape 10, mouvement continu des pages 37 à 41. Il s'agit de l'étape finale du dessin de la forme dynamique gauche (dessiner la géométrie de base et développer un mouvement continu). Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Changement de signe de la dérivée f'(x) (+ à - maximum, - à + minimum) et de la fonction valeur absolue |f(x)-k| Résolvez la question cruciale avec la condition d'annulation de cuspide (f'(a)=0)",
-        "de": "Schritt 10, kontinuierliche Bewegung von den Seiten 37 bis 41. Dies ist die letzte Phase des Zeichnens der linken dynamischen Form (Kerngeometrie zeichnen und kontinuierliche Bewegung entwickeln). Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Vorzeichenwechsel der Ableitung f'(x) (+ zu - Maximum, - zu + Minimum) und Absolutwertfunktion |f(x)-k| Lösen Sie die Killerfrage mit der Spitzenaufhebungsbedingung (f'(a)=0)",
-        "vi": "Bước 10, chuyển động liên tục từ trang 37 đến 41. Đây là giai đoạn cuối cùng của việc vẽ hình động bên trái (vẽ hình học lõi và phát triển chuyển động liên tục). Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Đổi dấu đạo hàm f'(x) (+ to - max, - to + min) và hàm giá trị tuyệt đối |f(x)-k| Giải câu hỏi hóc búa với điều kiện triệt tiêu đỉnh (f'(a)=0)"
-      },
-      "durations": {
-        "ko": 35.08,
-        "en": 41.933
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "10단계, 37페이지부터 41페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 10 (Page 37). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Secant lines approaching the tangent line."
+      }
     },
     {
       "page": 43,
@@ -382,8 +316,10 @@
         42,
         45
       ],
-      "step_title": "4단계 · 수식 결합 및 정리 완성",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 11 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Secant lines approaching the tangent line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.1983,
@@ -391,23 +327,11 @@
         0.5227,
         0.9091
       ],
-      "explanation_text": "11단계, 42페이지부터 45페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 도함수 f'(x) 의 부호 변화( + to - 극대, - to + 극소)와 절댓값 함수 |f(x)-k| 의 첨점 소거 조건( f'(a)=0 )으로 킬러 문항 해결",
+      "explanation_text": "11단계, 42페이지부터 45페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "11단계, 42페이지부터 45페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 마무리 단계입니다. 앞 단계의 조각들을 결합해 최종 결론을 도출합니다. 4단계 (본문항 종합): 도함수 f'(x) 의 부호 변화( + to - 극대, - to + 극소)와 절댓값 함수 |f(x)-k| 의 첨점 소거 조건( f'(a)=0 )으로 킬러 문항 해결",
-        "en": "Step 11, continuous movement from pages 42 to 45. This is the final stage of drawing the left dynamic shape (drawing core geometry and developing continuous motion). The pieces from the previous steps are combined to arrive at the final conclusion. Step 4 (Summary of main text): Sign change of derivative f'(x) (+ to - maximum, - to + minimum) and absolute value function |f(x)-k| Solve the killer question with the cusp cancellation condition (f'(a)=0)",
-        "ja": "11段階、42ページから45ページまでの連続動きです。左動的図形作図(核心幾何作図と連続モーション展開)仕上げ段階です。前のステップの部分を組み合わせて最終的な結論を導きます。ステップ4（本文全体）：導関数f'（x）の符号変化（+ to - 極大、 - to +極小）と絶対値関数| f（x）-k |の添点消去条件( f'(a)=0 )でキラー問題を解決",
-        "zh-CN": "第11步，从第42页到第45页的连续运动。这是绘制左侧动态形状的最后阶段（绘制核心几何形状并发展连续运动）。将前面步骤中的各个部分组合起来得出最终结论。步骤 4（正文摘要）：导数 f'(x) 的符号变化（+ 到 - 最大值，- 到 + 最小值）和绝对值函数 |f(x)-k|用尖点抵消条件 (f'(a)=0) 解决杀手问题",
-        "es": "Paso 11, movimiento continuo de las páginas 42 a 45. Esta es la etapa final para dibujar la forma dinámica izquierda (dibujar la geometría central y desarrollar el movimiento continuo). Las piezas de los pasos anteriores se combinan para llegar a la conclusión final. Paso 4 (Resumen del texto principal): Cambio de signo de la derivada f'(x) (+ a - máximo, - a + mínimo) y la función de valor absoluto |f(x)-k| Resuelva la pregunta asesina con la condición de cancelación de la cúspide (f'(a)=0)",
-        "fr": "Étape 11, mouvement continu des pages 42 à 45. Il s'agit de la dernière étape du dessin de la forme dynamique gauche (dessiner la géométrie de base et développer un mouvement continu). Les éléments des étapes précédentes sont combinés pour arriver à la conclusion finale. Étape 4 (Résumé du texte principal) : Changement de signe de la dérivée f'(x) (+ à - maximum, - à + minimum) et de la fonction valeur absolue |f(x)-k| Résolvez la question cruciale avec la condition d'annulation de cuspide (f'(a)=0)",
-        "de": "Schritt 11, kontinuierliche Bewegung von den Seiten 42 bis 45. Dies ist die letzte Phase des Zeichnens der linken dynamischen Form (Kerngeometrie zeichnen und kontinuierliche Bewegung entwickeln). Die Teile aus den vorherigen Schritten werden kombiniert, um zum endgültigen Ergebnis zu gelangen. Schritt 4 (Zusammenfassung des Haupttextes): Vorzeichenwechsel der Ableitung f'(x) (+ zu - Maximum, - zu + Minimum) und Absolutwertfunktion |f(x)-k| Lösen Sie die Killerfrage mit der Spitzenaufhebungsbedingung (f'(a)=0)",
-        "vi": "Bước 11, chuyển động liên tục từ trang 42 đến 45. Đây là giai đoạn cuối cùng của việc vẽ hình động bên trái (vẽ hình học lõi và phát triển chuyển động liên tục). Các phần từ các bước trước được kết hợp lại để đi đến kết luận cuối cùng. Bước 4 (Tóm tắt nội dung chính): Đổi dấu đạo hàm f'(x) (+ to - max, - to + min) và hàm giá trị tuyệt đối |f(x)-k| Giải câu hỏi hóc búa với điều kiện triệt tiêu đỉnh (f'(a)=0)"
-      },
-      "durations": {
-        "ko": 35.344,
-        "en": 35.32
-      },
-      "step_question_ko": "📐 [불변량·유레카 질문] 앞 단계의 단서들을 결합하면 왜 이 등식이 필연적으로 성립할까요?",
-      "step_question_en": "📐 [Eureka Question] How do the geometric clues combine into the final proof?"
+        "ko": "11단계, 42페이지부터 45페이지까지의 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 11 (Page 42). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Secant lines approaching the tangent line."
+      }
     },
     {
       "page": 46,
@@ -416,8 +340,10 @@
         46,
         46
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?",
+      "step_question_en": "🔀 [What-If-Not] How does Secant lines approaching the tangent line evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.0764,
@@ -425,148 +351,11 @@
         0.9628,
         0.9091
       ],
-      "explanation_text": "마지막 12단계입니다. 지금까지 총 46프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 절댓값 함수 |f(x)-t| 가 x=a ( f(a)=t 인 교점)에서 미분가능하려면 그래프가 y=t 를 뚫고 지나갈 때 접선의 기울기가 f'(a)=0 이어야 합니다(중근 또는 삼중근).",
+      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건에서 시작해, 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 거쳐, '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 12단계입니다. 지금까지 총 46프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, 절댓값 함수 |f(x)-t| 가 x=a ( f(a)=t 인 교점)에서 미분가능하려면 그래프가 y=t 를 뚫고 지나갈 때 접선의 기울기가 f'(a)=0 이어야 합니다(중근 또는 삼중근).",
-        "en": "Step 12. We have completed the entire 46-frame visual proof! Visit min7014.github.io to interact with the dynamic figure yourself.",
-        "ja": "最後の12段階です。これまでに合計46フレームのフリップブック作図を通じて整理を完全に証明しました。実践のヒントとして、絶対値関数|f(x)-t|がx = a（f（a）= tの交点）で微分可能にするには、グラフがy = tを通過して通過するときの接線の傾きはf '（a）= 0でなければなりません（中根または三重根）。",
-        "zh-CN": "这是最后 12 个步骤。至此，我们已经通过总共46帧的翻页图画完全证明了该定理。作为实用技巧，绝对值函数 |f(x)-t|因为要在 x=a（f(a)=t 的交点）处可微，图通过 y=t 时切线的斜率必须为 f'(a)=0（中根或三重根）。",
-        "es": "Estos son los últimos 12 pasos. Hasta ahora hemos demostrado completamente el teorema mediante un dibujo en formato flipbook de un total de 46 fotogramas. Como consejo práctico, la función de valor absoluto |f(x)-t| Para que sea diferenciable en x=a (la intersección en la que f(a)=t), la pendiente de la recta tangente cuando la gráfica pasa por y=t debe ser f'(a)=0 (raíz media o triple).",
-        "fr": "Ce sont les 12 dernières étapes. Jusqu’à présent, nous avons complètement prouvé le théorème à travers un dessin flipbook d’un total de 46 images. À titre pratique, la fonction valeur absolue |f(x)-t| Car doit être dérivable en x=a (l'intersection à laquelle f(a)=t), la pente de la ligne tangente lorsque le graphique passe par y=t doit être f'(a)=0 (racine moyenne ou triple).",
-        "de": "Dies sind die letzten 12 Schritte. Bisher haben wir das Theorem durch eine Daumenkino-Zeichnung von insgesamt 46 Bildern vollständig bewiesen. Als Praxistipp dient die Absolutwertfunktion |f(x)-t| Um bei x=a (dem Schnittpunkt mit f(a)=t) differenzierbar zu sein, muss die Steigung der Tangente beim Durchgang des Graphen durch y=t f'(a)=0 (mittlere oder dreifache Wurzel) sein.",
-        "vi": "Đây là 12 bước cuối cùng. Cho đến nay, chúng ta đã chứng minh hoàn toàn định lý thông qua một bản vẽ flipbook có tổng cộng 46 khung hình. Là một mẹo thực tế, hàm giá trị tuyệt đối |f(x)-t| Để khả vi tại x=a (giao điểm tại đó f(a)=t), hệ số góc của tiếp tuyến khi đồ thị đi qua y=t phải là f'(a)=0 (căn giữa hoặc căn bậc ba)."
-      },
-      "durations": {
-        "ko": 35.248,
-        "en": 35.32
-      },
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떤 새로운 정리가 탄생할까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this figure?"
+        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 원 위의 점들과 현·접선·중심이 이루는 '접선에 접근하는 할선들'의 기하학적 출발 조건에서 시작해, 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 거쳐, '접선에 접근하는 할선들'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 12. The visual proof of Secant lines approaching the tangent line is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
+      }
     }
-  ],
-  "youtube_packages": {
-    "ko": {
-      "lang": "ko",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "🔥 [시각적 증명] 접선에 접근하는 할선들(Secant lines approaching the tangent line) — 눈으로 깨치는 46단계 기하 직관 (1080p)...",
-      "description": "공식 암기 없이 눈으로 보고 직관적으로 깨치는 [접선에 접근하는 할선들(Secant lines approaching the tangent line)] 46단계 시각적 증명! 보조선이 그어지는 순간 숨겨진 기하학적 대칭과 비례식이 한눈에 드러납니다.\n\n🚀 [영상을 본 직후 1초 만에 내 실력으로 만드는 수학홈페이지(mathedu) 무료 실습 링크]\n1️⃣ 📐 방금 본 증명 도형 마우스로 직접 움직여보기 (GeoGebra & 1,113개 설명영상 게시판):\n👉 https://min7014.github.io/mathedu/video_board.html?slug=2023081301&from=yt\n2️⃣ ✍️ [탈-5지선다 창의 구성 모드] 이 개념이 쓰인 수능·모평 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q=접선에&from=yt\n3️⃣ 🌱 [오늘의 3분 수학 유레카] 10초 오개념 반례 O/X 퀴즈 & 나만의 변형 문제 발명:\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n4️⃣ 🎮 [수능 수학 100점 만점 3D 보스 레이드 게임] 설치 없이 브라우저에서 즉시 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n5️⃣ 🏛️ [민은기 선생님의 수학자료실 본관 (3,400+ 동적 기하 아카이브)]:\n👉 https://min7014.github.io/math20230813001.html\n\n💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 46페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!\n\n🔥 [@min7014_ai 인기 시각적 증명 정주행 시리즈]\n• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계): https://youtu.be/bQO7fnT6aDU\n• 🔥 피타고라스 정리(a²+b²=c²) 넓이 분할 증명 (25단계): https://youtu.be/k6LBYa5SCiA\n• 📐 체바의 정리 삼각형 넓이 비 증명 (17단계): https://youtu.be/W_AWH-Gk89w\n• ✨ 메넬라우스의 정리 평행보조선 증명 (20단계): https://youtu.be/7zD66SWWceg\n• 🌟 정칠각형 종이띠 매듭 기하 원리 (11단계): https://youtu.be/Mq6s2JLV9mQ\n\n🔔 [@min7014_ai 채널 구독하기]: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 민은기 선생님의 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n📄 단계별 플립북 증명 PDF 원문: https://min7014.github.io/2023/2023081301.pdf\n🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html?slug=2023081301\n식별 코드: [ID: 2023081301_KO]\n\n⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n00:00 1페이지/46 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 접선에 접근하는 할선들(S...\n00:13 3페이지/46 — 2단계, 2페이지부터 5페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나...\n00:52 8페이지/46 — 3단계, 6페이지부터 10페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 ...\n01:20 12페이지/46 — 4단계, 11페이지부터 14페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요...\n01:51 17페이지/46 — 5단계, 15페이지부터 19페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...\n02:24 21페이지/46 — 6단계, 20페이지부터 23페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 단계입니다. 연속...\n02:57 25페이지/46 — 7단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...\n03:28 30페이지/46 — 8단계, 28페이지부터 32페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...\n04:03 34페이지/46 — 9단계, 33페이지부터 36페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...\n04:38 39페이지/46 — 10단계, 37페이지부터 41페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모...\n05:13 43페이지/46 — 11단계, 42페이지부터 45페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모...\n05:49 46페이지/46 — 마지막 12단계입니다. 지금까지 총 46프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ...\n\n#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #민은기선생님의수학자료실 #min7014_ai #min7014",
-      "tags": [
-        "수학",
-        "기하학",
-        "시각적 증명",
-        "수능 수학",
-        "도형 보조선",
-        "피타고라스 정리",
-        "메넬라우스의 정리",
-        "체바의 정리",
-        "중학교 도형",
-        "고등학교 수학",
-        "수능 도형 킬러",
-        "영재고 수학",
-        "KMO 기하",
-        "GeoGebra",
-        "알지오매스",
-        "민은기 선생님의 수학자료실",
-        "민은기 선생님의 수학자료실_AI",
-        "min7014_ai",
-        "min7014",
-        "수학 잘하는 법"
-      ],
-      "quiz_comment": "💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 46페이지 중 결정적인 보조선이나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!",
-      "categoryId": "27",
-      "defaultLanguage": "ko",
-      "chapters": [
-        "00:00 1페이지/46 — 1단계입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 시간에는 접선에 접근하는 할선들(S...",
-        "00:13 3페이지/46 — 2단계, 2페이지부터 5페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 과정으로, 화면에 나...",
-        "00:52 8페이지/46 — 3단계, 6페이지부터 10페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 ...",
-        "01:20 12페이지/46 — 4단계, 11페이지부터 14페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요...",
-        "01:51 17페이지/46 — 5단계, 15페이지부터 19페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...",
-        "02:24 21페이지/46 — 6단계, 20페이지부터 23페이지까지의 연속 움직임입니다. 핵심 기하 작도 및 연속 모션 전개 단계입니다. 연속...",
-        "02:57 25페이지/46 — 7단계, 24페이지부터 27페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...",
-        "03:28 30페이지/46 — 8단계, 28페이지부터 32페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...",
-        "04:03 34페이지/46 — 9단계, 33페이지부터 36페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션...",
-        "04:38 39페이지/46 — 10단계, 37페이지부터 41페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모...",
-        "05:13 43페이지/46 — 11단계, 42페이지부터 45페이지까지의 연속 움직임입니다. 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모...",
-        "05:49 46페이지/46 — 마지막 12단계입니다. 지금까지 총 46프레임의 플립북 작도를 통해 정리를 완벽히 증명했습니다. 실전 팁으로, ..."
-      ],
-      "total_duration_sec": 384.53,
-      "srt_url": "video_lectures/youtube_packages/2023081301_ko.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2023081301_ko_thumb.png",
-      "local_mp4_path": "youtube_uploads/2023081301/2023081301_ko.mp4"
-    },
-    "en": {
-      "lang": "en",
-      "channel_handle": "@min7014_ai",
-      "channel_name": "민은기 선생님의 수학자료실_AI",
-      "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
-      "channel_url": "https://www.youtube.com/@min7014_ai",
-      "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
-      "title": "✨ Secant lines approaching the tangent line — Step-by-Step Visual Math Proof (46 Steps · 1080p)...",
-      "description": "Why does Secant lines approaching the tangent line hold true? Watch every auxiliary line, angle, and algebraic cancellation unfold step by step in 1080p!\n\n🚀 [Try It Yourself on the Free Interactive Math Platform (min7014.github.io/mathedu)]\n1️⃣ 📐 Interactive GeoGebra Applet & 1,113 Visual Proof Video Board:\n👉 https://min7014.github.io/mathedu/video_board.html?slug=2023081301&from=yt\n2️⃣ ✍️ De-Multiple-Choice Constructive Math Studio (16,548 Step-by-Step Quizzes):\n👉 https://min7014.github.io/mathedu/?from=yt\n3️⃣ 🌱 Daily 3-Minute Math Eureka (10s Counterexample O/X & What-If-Not Problem Posing):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n4️⃣ 🎮 3D Math Sanctuary Boss Raid RPG (Free Browser Game):\n👉 https://min7014.github.io/mathedu/game.html\n5️⃣ 🏛️ Min's Math Lab Main Archive (3,400+ Dynamic Proofs):\n👉 https://min7014.github.io/math20230813001.html\n\n💬 [10-Second Eureka Quiz] Which step (1 to 46) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!\n\n🔥 [Watch Next — Popular Visual Proofs on @min7014_ai]\n• 🌳 Pythagoras Tree Area Conservation: https://youtu.be/9JKLflqrtDU\n• 🔥 Pythagorean Theorem (25-Step Area Proof): https://youtu.be/n9zyKwXXsbA\n• 📐 Ceva's Theorem via Area Ratios: https://youtu.be/ffNJhPRvh4Y\n• ✨ Menelaus' Theorem Parallel Line Proof: https://youtu.be/CjE2nyyzG2s\n• 🌟 Regular Heptagonal Knot Geometry: https://youtu.be/fXQJ8s1La-E\n\n🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n📄 Original Step-by-Step PDF: https://min7014.github.io/2023/2023081301.pdf\n🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html?slug=2023081301\nTopic ID: [ID: 2023081301_EN]\n\n⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n00:00 Step 1/46 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...\n00:10 Step 3/46 — Step 2, continuous movement from pages 2 to 5. This is a proce...\n00:24 Step 8/46 — Step 3, continuous movement from pages 6 to 10. In the left dy...\n00:54 Step 12/46 — Step 4, continuous movement from pages 11 to 14. This is the s...\n01:26 Step 17/46 — Step 5, continuous movement from pages 15 to 19. This is the l...\n02:03 Step 21/46 — Step 6, continuous movement from pages 20 to 23. These are the...\n02:41 Step 25/46 — Step 7, continuous movement from pages 24 to 27. This is the p...\n03:16 Step 30/46 — Step 8, continuous movement from pages 28 to 32. This is the p...\n03:58 Step 34/46 — Step 9, continuous movement from pages 33 to 36. This is the p...\n04:40 Step 39/46 — Step 10, continuous movement from pages 37 to 41. This is the ...\n05:22 Step 43/46 — Step 11, continuous movement from pages 42 to 45. This is the ...\n05:57 Step 46/46 — Step 12. We have completed the entire 46-frame visual proof! V...\n\n#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014",
-      "tags": [
-        "Visual Math Proof",
-        "Geometry Proof",
-        "Proof Without Words",
-        "Euclidean Geometry",
-        "Pythagorean Theorem",
-        "Ceva Theorem",
-        "Menelaus Theorem",
-        "GeoGebra",
-        "Math Animation",
-        "3Blue1Brown style math",
-        "Step by Step Math",
-        "High School Geometry",
-        "Math Olympiad",
-        "AMC Math",
-        "SAT Math",
-        "Min's Math Lab",
-        "min7014_ai",
-        "min7014"
-      ],
-      "quiz_comment": "💬 [10-Second Eureka Quiz] Which step (1 to 46) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!",
-      "categoryId": "27",
-      "defaultLanguage": "en",
-      "chapters": [
-        "00:00 Step 1/46 — Step 1. Welcome to Min's Math Lab. In this dynamic visual proo...",
-        "00:10 Step 3/46 — Step 2, continuous movement from pages 2 to 5. This is a proce...",
-        "00:24 Step 8/46 — Step 3, continuous movement from pages 6 to 10. In the left dy...",
-        "00:54 Step 12/46 — Step 4, continuous movement from pages 11 to 14. This is the s...",
-        "01:26 Step 17/46 — Step 5, continuous movement from pages 15 to 19. This is the l...",
-        "02:03 Step 21/46 — Step 6, continuous movement from pages 20 to 23. These are the...",
-        "02:41 Step 25/46 — Step 7, continuous movement from pages 24 to 27. This is the p...",
-        "03:16 Step 30/46 — Step 8, continuous movement from pages 28 to 32. This is the p...",
-        "03:58 Step 34/46 — Step 9, continuous movement from pages 33 to 36. This is the p...",
-        "04:40 Step 39/46 — Step 10, continuous movement from pages 37 to 41. This is the ...",
-        "05:22 Step 43/46 — Step 11, continuous movement from pages 42 to 45. This is the ...",
-        "05:57 Step 46/46 — Step 12. We have completed the entire 46-frame visual proof! V..."
-      ],
-      "total_duration_sec": 392.85,
-      "srt_url": "video_lectures/youtube_packages/2023081301_en.srt",
-      "thumbnail_url": "video_lectures/youtube_packages/2023081301_en_thumb.png",
-      "local_mp4_path": "youtube_uploads/2023081301/2023081301_en.mp4"
-    }
-  },
-  "shorts_packages": {
-    "ko": {
-      "title": "🔥 접선에 접근하는 할선들(Secant lines approaching the tangent line) — 45초 시각적 수학 증명 하이라이트 #Shorts #수학",
-      "local_mp4_path": "video_lectures/shorts/2023081301_short_ko.mp4",
-      "duration_sec": 50.89,
-      "aspect_ratio": "9:16 (1080x1920)"
-    },
-    "en": {
-      "title": "🔥 Secant lines approaching the tangent line — 45s Visual Math Proof Highlight #Shorts #Math",
-      "local_mp4_path": "video_lectures/shorts/2023081301_short_en.mp4",
-      "duration_sec": 26.54,
-      "aspect_ratio": "9:16 (1080x1920)"
-    }
-  },
-  "shorts_urls": {
-    "ko": "",
-    "en": ""
-  },
-  "pedagogy_style": "v5.0 Question-Asking Classroom (Notice & Wonder -> Socratic Pólya -> What-If-Not)"
+  ]
 }

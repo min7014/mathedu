@@ -879,27 +879,27 @@
       var enTitle = currentScriptDoc.title_en || currentScriptDoc.title || slug;
       return (
         '=== [YouTube EN Title] ===\n' +
-        '[Min\'s Math Lab] ' + enTitle + ' | Step-by-Step Visual Math Proof (EN)\n\n' +
+        '✨ ' + enTitle + ' | Step-by-Step Visual Math Proof (1080p) | @min7014_ai\n\n' +
         '=== [YouTube EN Description & Chapters] ===\n' +
         '📐 Step-by-Step Visual Mathematical Proof Lecture (' + totP + ' Flipbook Pages)\n' +
         '🔗 Interactive GeoGebra & Original PDF: ' + webUrl + '\n' +
         '📄 Direct PDF: ' + pdfUrl + '\n' +
         '🎬 Multilingual Lecture Studio: ' + studioUrl + '\n\n' +
         '⏱️ [Step-by-Step Chapters]\n' + chapters + '\n\n' +
-        '#MathProof #Geometry #VisualMath #MinsMathLab #StepByStepMath'
+        '#MathProof #Geometry #VisualMath #StepByStepMath #min7014_ai'
       );
     }
     var koTitle = (currentScriptDoc.title || slug).replace(/\$[^\$]*\$/g, '').trim();
     return (
       '=== [유튜브 한국어 제목] ===\n' +
-      '[민은기 선생님의 수학자료실] ' + koTitle + ' — 페이지별 단계 설명 강의 (KR)\n\n' +
+      '🔥 [시각적 증명] ' + koTitle + ' — 단계별 수학 원리 강의 (1080p) | @min7014_ai\n\n' +
       '=== [유튜브 한국어 설명문 & 타임스탬프] ===\n' +
-      '📐 민은기 선생님의 수학자료실(https://min7014.github.io/) 단계별 플립북 PDF 해설 강의 (총 ' + totP + '페이지)\n' +
+      '📐 단계별 플립북 PDF 해설 강의 (총 ' + totP + '페이지)\n' +
       '🔗 대화형 GeoGebra 실습 및 원문: ' + webUrl + '\n' +
       '📄 단계별 증명 PDF 원문: ' + pdfUrl + '\n' +
       '🎬 다국어 강의 영상 스튜디오: ' + studioUrl + '\n\n' +
       '⏱️ [페이지별 단계 타임스탬프]\n' + chapters + '\n\n' +
-      '#민은기선생님의수학자료실 #수학증명 #기하학 #시각적증명 #수학교육 #GeoGebra'
+      '#수학증명 #기하학 #시각적증명 #수학교육 #GeoGebra #min7014_ai'
     );
   }
 
@@ -1101,7 +1101,7 @@
       var expKo = '';
       if (i === 1) {
         stepTitle = '도입 · 주제 및 증명 목표 안내';
-        expKo = '1페이지입니다. 민은기 선생님의 수학자료실 단계별 시각 증명 강의입니다. 이번 주제는 ' + rawTitle + '이며, ' + core;
+        expKo = '1페이지입니다. 이번 시각적 수학 탐구 주제는 ' + rawTitle + '이며, ' + core;
       } else if (i === numPages) {
         stepTitle = '완결 · 실전 보조선 팁 및 마무리';
         var tipStr = tips[0] ? tips[0].replace(/\$[^\$]*\$/g, '') : '도형의 정의와 보조선을 기억하세요.';
@@ -1354,7 +1354,7 @@
       ctx.lineTo(W, 52);
       ctx.stroke();
 
-      var titleStr = '📐 민은기 선생님의 수학자료실 · ' + ((currentScriptDoc && currentScriptDoc.title) || '');
+      var titleStr = '📐 단계별 시각적 수학 증명 · ' + ((currentScriptDoc && currentScriptDoc.title) || '');
       if (titleStr.length > 48) titleStr = titleStr.slice(0, 48) + '...';
       ctx.fillStyle = '#f8fafc';
       ctx.font = 'bold 18px Pretendard, sans-serif';

@@ -3,11 +3,12 @@
   "title": "내심의 이해(Understanding of Triangle Incenter)",
   "title_en": "Understanding of Triangle Incenter",
   "sub_domain_ko": "유클리드 평면기하",
-  "core_concept": "[내심의 이해] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
-  "solving_tip": "원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선($90^\\circ$)을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요.",
+  "core_concept": "삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정 ➔ 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론",
+  "solving_tip": "교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선",
   "pdf_url": "https://min7014.github.io/2019/2017091807.pdf",
   "web_url": "https://min7014.github.io/math20191204001.html",
   "page_count": 11,
+  "scene_count": 11,
   "base_language": "ko",
   "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
   "viral_hooks": {},
@@ -16,10 +17,43 @@
     "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
     "other_languages": "Script-First Real-Time TTS & Studio Rendering"
   },
+  "youtube_channel": {
+    "handle": "@min7014_ai",
+    "name": "단계별 시각적 수학 증명_AI",
+    "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
+    "channel_url": "https://www.youtube.com/@min7014_ai",
+    "studio_upload_url": "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/videos/upload?d=ud",
+    "main_channel_url": "https://www.youtube.com/@min7014"
+  },
   "youtube_urls": {
     "ko": "",
     "en": "",
     "orig": "https://youtu.be/0g2QXGcEM0U"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "geometry",
+    "hypothesis_ko": "삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정",
+    "conclusion_ko": "세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론",
+    "auxiliary_line_ko": "교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선",
+    "proof_logic_ko": "두 내각의 이등분선에 의해 나뉜 직각삼각형들이 빗변 공통 + 직각 + 예각 일치로 RHA 합동이 되어 세 변까지의 거리가 모두 같아지고, 마지막 꼭짓점의 두 직각삼각형이 RHS 합동이 되어 세 번째 각도 이등분되는 원리",
+    "misconception_ko": "외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다.",
+    "what_if_not_ko": "내각이 아니라 삼각형의 한 내각의 이등분선과 두 외각의 이등분선을 그으면 삼각형 밖에 어떤 원(방접원, Excircle)이 탄생할까요?"
   },
   "supported_languages": [
     "ko",
@@ -47,25 +81,16 @@
         1,
         1
       ],
-      "step_title": "질문 1 · 관찰과 경이 (Notice & Wonder)",
-      "step_question_ko": "❓ [Notice & Wonder] 내심의 이해(Understanding of Triangle Incenter)에서 변하지 않는 불변량은 무엇일까요?",
-      "step_question_en": "❓ [Notice & Wonder] What stays invariant in Understanding of Triangle Incenter, and why?",
-      "visual_focus": "핵심 기하 작도 및 연속 모션 전개",
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 내심의 이해에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in Understanding of Triangle Incenter?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계, 질문으로 시작하는 수학 시간입니다. 내심의 이해(Understanding of Triangle Incenter) 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. [내심의 이해] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 내심의 이해입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정입니다. 왜 이 조건에서 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계, 질문으로 시작하는 수학 시간입니다. 내심의 이해(Understanding of Triangle Incenter) 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. [내심의 이해] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명.",
-        "en": "Step 1. Welcome to Question-Driven Math at Min's Math Lab. Observe Understanding of Triangle Incenter closely: what do you notice stays invariant, and why does this property always hold? Let us explore step by step.",
-        "ja": "ステップ1、質問で始まる数学時間です。内心の理解（Understanding of Triangle Incenter）図形を詳しく見てみましょう。点や線が動いても絶対に変わらない関係が見えますか？果たしてなぜいつもそうなのか動的フリップブックで自分で質問を投げながら探求してみましょう。 [内心の理解] 目立たない者（直線延長）とコンパス（距離移動・円）のみを使用するユークリッド共準基盤の作図原理および円・三角形・四角形の合同・似・等的変形・円周角不変量究明。",
-        "zh-CN": "第 1 步：数学课以问题开始。三角形内心的理解 仔细观察形状。你是否看到一种即使点或线移动也不会改变的关系？让我们用一本动态翻书问自己一些问题，来探讨为什么总是这样。 【理解内心】仅使用尺子（直线延伸）和圆规（距离移动、圆），基于欧几里得假设的构造原理，识别圆、三角形、正方形的全等、相似、等距变换和圆周角不变量。",
-        "es": "Paso 1: la clase de matemáticas comienza con preguntas. Comprensión del incentro del triángulo Observa atentamente la forma. ¿Ves una relación que nunca cambia incluso si los puntos o las líneas se mueven? Exploremos por qué esto siempre es así haciéndonos preguntas con un libro animado dinámico. [Comprender la mente interior] Construir principios basados ​​en postulados euclidianos usando solo una regla (extensión de línea recta) y un compás (movimiento a distancia, círculos), e identificación de congruencia, similitud, transformación isométrica e invariantes de ángulo circunferencial de círculos, triángulos y cuadrados.",
-        "fr": "Étape 1 : Le cours de mathématiques commence par des questions. Compréhension du Triangle Incenter Regardez attentivement la forme. Voyez-vous une relation qui ne change jamais même si les points ou les lignes bougent ? Explorons pourquoi c'est toujours le cas en nous posant des questions avec un flip book dynamique. [Comprendre l'esprit intérieur] Construire des principes basés sur des postulats euclidiens en utilisant uniquement une règle (extension de ligne droite) et une boussole (mouvement à distance, cercles), et identification de la congruence, de la similarité, de la transformation isométrique et des invariants d'angle circonférentiel des cercles, des triangles et des carrés.",
-        "de": "Schritt 1: Der Mathematikunterricht beginnt mit Fragen. Verständnis des Dreiecks in der Mitte Schauen Sie sich die Form genau an. Sehen Sie eine Beziehung, die sich nie ändert, selbst wenn sich die Punkte oder Linien verschieben? Lassen Sie uns herausfinden, warum dies immer der Fall ist, indem wir uns mit einem dynamischen Daumenkino Fragen stellen. [Den inneren Geist verstehen] Konstruieren von Prinzipien auf der Grundlage euklidischer Postulate, wobei nur ein Lineal (Verlängerung einer geraden Linie) und ein Zirkel (Entfernungsbewegung, Kreise) verwendet werden, und Identifizierung von Kongruenz, Ähnlichkeit, isometrischer Transformation und Umfangswinkelinvarianten von Kreisen, Dreiecken und Quadraten.",
-        "vi": "Bước 1: Lớp Toán bắt đầu bằng các câu hỏi. Hiểu biết về Triangle Incenter Nhìn kỹ vào hình dạng. Bạn có thấy một mối quan hệ không bao giờ thay đổi ngay cả khi các dấu chấm hoặc đường di chuyển không? Hãy cùng khám phá lý do tại sao điều này luôn xảy ra bằng cách tự đặt câu hỏi với một cuốn sách lật động. [Hiểu được nội tâm] Xây dựng nguyên lý dựa trên các định đề Euclide chỉ sử dụng thước đo (kéo dài đường thẳng) và la bàn (di chuyển khoảng cách, đường tròn) và xác định sự đồng dạng, tương tự, phép biến đổi đẳng cự và bất biến góc chu vi của hình tròn, hình tam giác và hình vuông."
-      },
-      "question_narrations": {
-        "ko": "1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? 내심의 이해(Understanding of Triangle Incenter)에서 변하지 않는 불변량은 무엇일까요? 질문으로 시작하는 수학 시간입니다. 내심의 이해(Understanding of Triangle Incenter) 도형을 자세히 관찰해 보세요. 점이나 선이 움직여도 절대 변하지 않는 관계가 보이나요? 과연 왜 항상 그럴지 동적 플립북으로 스스로 질문을 던지며 탐구해 봅시다. [내심의 이해] 눈금 없는 자(직선 연장)와 컴퍼스(거리 이동·원)만을 사용하는 유클리드 공준 기반의 작도 원리 및 원·삼각형·사각형의 합동·닮음·등적변형·원주각 불변량 규명."
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 내심의 이해입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정입니다. 왜 이 조건에서 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore Understanding of Triangle Incenter through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
       }
     },
     {
@@ -75,10 +100,10 @@
         2,
         2
       ],
-      "step_title": "1단계 질문 · 기본 도형 조건 관찰 (Notice)",
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?",
-      "visual_focus": "좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 2 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Understanding of Triangle Incenter?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.0785,
@@ -86,19 +111,10 @@
         0.5207,
         0.5179
       ],
-      "explanation_text": "2단계, 2페이지입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
+      "explanation_text": "2단계, 2페이지 단계입니다. 출발 조건인 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "2단계, 2페이지입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
-        "en": "Step 2, page 2. Let’s ask ourselves a question first. What conditions are hidden between the basic shapes and reference points on the screen? Key starting points are identified through the process of left dynamic geometry construction (construction of key geometry and continuous motion development). Step 1 (Elementary Compass and Ruler Intuition): Confirm by drawing that a compass is a ‘tool for moving the same distance’ and a ruler without scales is a ‘tool for connecting two points straight’.",
-        "ja": "ステップ2、2ページです。まず、自分で質問してみましょうか？画面の基本図形と基準点の間にどのような条件が隠されていますか？左のダイナミック図形作図(核心幾何作図と連続モーション展開)の過程でコアの出発点を確認します.ステップ1（初等コンパスと自直観）：コンパスは「同じ距離を移動する道具」であり、目立たない者は「二点をまっすぐにつなぐ道具」であることを直接描いてみて確認",
-        "zh-CN": "第 2 步，第 2 页。让我们先问自己一个问题。屏幕上的基本形状和参考点之间隐藏着哪些条件？通过左动态几何构造（关键几何构造和连续运动开发）的过程来确定关键起点。第1步（初级指南针和直尺直觉）：通过绘图确认指南针是“移动相同距离的工具”，无刻度的直尺是“直线连接两点的工具”。",
-        "es": "Paso 2, página 2. Primero hagámonos una pregunta. ¿Qué condiciones se esconden entre las formas básicas y los puntos de referencia en la pantalla? Los puntos de partida clave se identifican mediante el proceso de construcción de geometría dinámica izquierda (construcción de geometría clave y desarrollo de movimiento continuo). Paso 1 (Intuición elemental de brújula y regla): Confirma dibujando que una brújula es una “herramienta para moverse la misma distancia” y una regla sin escalas es una “herramienta para conectar dos puntos en línea recta”.",
-        "fr": "Étape 2, page 2. Posons-nous d’abord une question. Quelles conditions sont cachées entre les formes de base et les points de référence à l'écran ? Les points de départ clés sont identifiés grâce au processus de construction de la géométrie dynamique gauche (construction de la géométrie clé et développement du mouvement continu). Étape 1 (Intuition élémentaire de la boussole et de la règle) : Confirmez en dessinant qu'une boussole est un « outil pour parcourir la même distance » et qu'une règle sans échelle est un « outil pour relier deux points droits ».",
-        "de": "Schritt 2, Seite 2. Stellen wir uns zunächst eine Frage. Welche Bedingungen verbergen sich zwischen den Grundformen und Bezugspunkten auf dem Bildschirm? Wichtige Ausgangspunkte werden durch den Prozess der linksdynamischen Geometriekonstruktion (Konstruktion der Schlüsselgeometrie und kontinuierliche Bewegungsentwicklung) identifiziert. Schritt 1 (Grundlegende Kompass- und Lineal-Intuition): Bestätigen Sie durch Zeichnen, dass ein Kompass ein „Werkzeug zum Verschieben derselben Distanz“ und ein Lineal ohne Skalen ein „Werkzeug zum geraden Verbinden zweier Punkte“ ist.",
-        "vi": "Bước 2, trang 2. Trước tiên chúng ta hãy tự hỏi mình một câu hỏi. Những điều kiện nào ẩn giữa các hình cơ bản và các điểm tham chiếu trên màn hình? Điểm khởi đầu chính được xác định thông qua quá trình xây dựng hình học động bên trái (xây dựng hình học chính và phát triển chuyển động liên tục). Bước 1 (Trực quan la bàn và thước kẻ cơ bản): Xác nhận bằng cách vẽ rằng la bàn là 'công cụ để di chuyển cùng một khoảng cách' và thước kẻ không có thang đo là 'công cụ để nối thẳng hai điểm'."
-      },
-      "question_narrations": {
-        "ko": "2단계 탐구 발문입니다! 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 2페이지입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 좌측 동적 도형 작도 (핵심 기하 작도 및 연속 모션 전개) 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인"
+        "ko": "2단계, 2페이지 단계입니다. 출발 조건인 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 2 (Page 2). We construct the base figure for Understanding of Triangle Incenter and mark the given geometric conditions clearly."
       }
     },
     {
@@ -108,10 +124,10 @@
         3,
         3
       ],
-      "step_title": "1단계 질문 · 기본 도형 조건 관찰 (Notice)",
-      "step_question_ko": "👁️ [관찰 질문] 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요?",
-      "step_question_en": "👁️ [Observation Question] What symmetry is hidden in the base figure?",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 3 · 기본 증명 도형 작도 및 조건 표시",
+      "step_question_ko": "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?",
+      "step_question_en": "👁️ [Observation Q] Which given condition should we mark first on the base figure for Understanding of Triangle Incenter?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.1012,
@@ -119,19 +135,10 @@
         0.9008,
         0.8705
       ],
-      "explanation_text": "3단계, 3페이지입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 파란색 기본 도형 및 기준 선분 작도 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
+      "explanation_text": "3단계, 3페이지 단계입니다. 출발 조건인 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "3단계, 3페이지입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 파란색 기본 도형 및 기준 선분 작도 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인",
-        "en": "Step 3, page 3. Let’s ask ourselves a question first. What conditions are hidden between the basic shapes and reference points on the screen? Identify key starting points through the process of drawing basic blue shapes and reference lines. Step 1 (Elementary Compass and Ruler Intuition): Confirm by drawing that a compass is a ‘tool for moving the same distance’ and a ruler without scales is a ‘tool for connecting two points straight’.",
-        "ja": "ステップ3、3ページです。まず、自分で質問してみましょうか？画面の基本図形と基準点の間にどのような条件が隠されていますか？青の基本図形と基準線分の作図プロセスで、コアの出発点を確認します。ステップ1（初等コンパスと自直観）：コンパスは「同じ距離を移動する道具」であり、目立たない者は「二点をまっすぐにつなぐ道具」であることを直接描いてみて確認",
-        "zh-CN": "第 3 页，第 3 步。让我们先问自己一个问题。屏幕上的基本形状和参考点之间隐藏着哪些条件？通过绘制基本蓝色形状和参考线的过程来确定关键起点。第1步（初级指南针和直尺直觉）：通过绘图确认指南针是“移动相同距离的工具”，无刻度的直尺是“直线连接两点的工具”。",
-        "es": "Paso 3, página 3. Primero hagámonos una pregunta. ¿Qué condiciones se esconden entre las formas básicas y los puntos de referencia en la pantalla? Identifique puntos de partida clave a través del proceso de dibujar formas azules básicas y líneas de referencia. Paso 1 (Intuición elemental de brújula y regla): Confirma dibujando que una brújula es una “herramienta para moverse la misma distancia” y una regla sin escalas es una “herramienta para conectar dos puntos en línea recta”.",
-        "fr": "Étape 3, page 3. Posons-nous d’abord une question. Quelles conditions sont cachées entre les formes de base et les points de référence à l'écran ? Identifiez les points de départ clés grâce au processus de dessin de formes bleues de base et de lignes de référence. Étape 1 (Intuition élémentaire de la boussole et de la règle) : Confirmez en dessinant qu'une boussole est un « outil pour parcourir la même distance » et qu'une règle sans échelle est un « outil pour relier deux points droits ».",
-        "de": "Schritt 3, Seite 3. Stellen wir uns zunächst eine Frage. Welche Bedingungen verbergen sich zwischen den Grundformen und Bezugspunkten auf dem Bildschirm? Identifizieren Sie wichtige Ausgangspunkte durch das Zeichnen grundlegender blauer Formen und Referenzlinien. Schritt 1 (Grundlegende Kompass- und Lineal-Intuition): Bestätigen Sie durch Zeichnen, dass ein Kompass ein „Werkzeug zum Bewegen derselben Distanz“ und ein Lineal ohne Skalen ein „Werkzeug zum geraden Verbinden zweier Punkte“ ist.",
-        "vi": "Bước 3, trang 3. Trước tiên chúng ta hãy tự hỏi mình một câu hỏi. Những điều kiện nào ẩn giữa các hình cơ bản và các điểm tham chiếu trên màn hình? Xác định các điểm khởi đầu chính thông qua quá trình vẽ các hình và đường tham chiếu màu xanh cơ bản. Bước 1 (Trực quan la bàn và thước kẻ cơ bản): Xác nhận bằng cách vẽ rằng la bàn là 'công cụ để di chuyển cùng một khoảng cách' và thước kẻ không có thang đo là 'công cụ để nối thẳng hai điểm'."
-      },
-      "question_narrations": {
-        "ko": "3단계 탐구 발문입니다! 주어진 기본 도형과 기준점 사이에 어떤 대칭 조건이 숨어 있을까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 3페이지입니다. 먼저 스스로 질문해 볼까요? 화면의 기본 도형과 기준점 사이에 어떤 조건이 숨어 있을까요? 파란색 기본 도형 및 기준 선분 작도 과정을 통해 핵심 출발점을 확인합니다. 1단계 (초등 컴퍼스와 자 직관): 컴퍼스는 '같은 거리를 옮기는 도구'이고 눈금 없는 자는 '두 점을 곧게 잇는 도구'임을 직접 그려보며 확인"
+        "ko": "3단계, 3페이지 단계입니다. 출발 조건인 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "Step 3 (Page 3). We construct the base figure for Understanding of Triangle Incenter and mark the given geometric conditions clearly."
       }
     },
     {
@@ -141,10 +148,10 @@
         4,
         4
       ],
-      "step_title": "2단계 질문 · 폴리아 제1보조선 발상 (How?)",
-      "step_question_ko": "🧭 [보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "visual_focus": "우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)",
+      "step_title": "Step 4 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.4483,
@@ -152,19 +159,10 @@
         0.8264,
         0.8072
       ],
-      "explanation_text": "4단계, 4페이지입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)의 움직임을 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
+      "explanation_text": "4단계, 4페이지 단계입니다. 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "4단계, 4페이지입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)의 움직임을 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
-        "en": "Step 4, page 4. This is the crucial question! Where should the auxiliary lines be drawn to reveal hidden angles and symmetrical relationships at a glance? Pay attention to the movement of the proof formula derivation on the right (blue basic shape and reference line segment construction). Step 2 (Finding elementary congruent triangles): Observe that if you connect the intersection of two circles, the lengths of the three sides become the same (SSS congruent) and the angle or line segment is exactly divided in half.",
-        "ja": "ステップ4、4ページです。ここで決定的な質問です！どこに補助線を描かなければ隠された角度と対称関係が一目でわかりますか？右の証明書式の導出（青の基本図形と基準線分の作図）の動きを見てみましょう。ステップ2（初等合同三角形を探す）：二つの円が出会う交点をつなぐと三辺の長さが同じになり（SSS合同）角度や線分が正確に半分に分かれることを観察",
-        "zh-CN": "第4步，第4页。这是关键问题！辅助线应该画在哪里，才能让隐藏的角度和对称关系一目了然？注意右边证明公式推导的动向（蓝色基本形状和参考线段构造）。步骤 2（找到基本全等三角形）：观察到，如果连接两个圆的交点，三条边的长度变得相同（SSS 全等），并且角度或线段正好被分成两半。",
-        "es": "Paso 4, página 4. ¡Esta es la pregunta crucial! ¿Dónde deberían dibujarse las líneas auxiliares para revelar ángulos ocultos y relaciones simétricas de un vistazo? Preste atención al movimiento de la derivación de la fórmula de prueba a la derecha (forma básica azul y construcción del segmento de línea de referencia). Paso 2 (Encontrar triángulos elementales congruentes): Observa que si conectas la intersección de dos círculos, las longitudes de los tres lados se vuelven iguales (SSS congruentes) y el ángulo o segmento de línea se divide exactamente por la mitad.",
-        "fr": "Étape 4, page 4. C’est la question cruciale ! Où faut-il tracer les lignes auxiliaires pour révéler d’un seul coup d’œil les angles cachés et les relations symétriques ? Faites attention au mouvement de la dérivation de la formule de preuve à droite (forme de base bleue et construction du segment de ligne de référence). Étape 2 (Trouver des triangles congrus élémentaires) : Observez que si vous connectez l'intersection de deux cercles, les longueurs des trois côtés deviennent les mêmes (SSS congruents) et l'angle ou le segment de droite est exactement divisé en deux.",
-        "de": "Schritt 4, Seite 4. Das ist die entscheidende Frage! Wo sollen die Hilfslinien eingezeichnet werden, um verborgene Winkel und symmetrische Zusammenhänge auf einen Blick sichtbar zu machen? Achten Sie auf die Bewegung der Beweisformelableitung auf der rechten Seite (blaue Grundform und Referenzliniensegmentkonstruktion). Schritt 2 (Elementarkongruente Dreiecke finden): Beachten Sie, dass, wenn Sie den Schnittpunkt zweier Kreise verbinden, die Längen der drei Seiten gleich werden (SSS-kongruent) und der Winkel oder das Liniensegment genau in zwei Hälften geteilt wird.",
-        "vi": "Bước 4, trang 4. Đây là câu hỏi quan trọng! Các đường phụ nên vẽ ở đâu để bộc lộ nhanh các góc ẩn và mối quan hệ đối xứng? Hãy chú ý đến chuyển động của công thức chứng minh ở bên phải (hình cơ bản màu xanh lam và cấu trúc đoạn đường tham chiếu). Bước 2 (Tìm các tam giác đồng dạng cơ bản): Quan sát rằng nếu nối giao điểm của hai đường tròn thì độ dài ba cạnh bằng nhau (đồng dạng SSS) và góc hoặc đoạn thẳng được chia chính xác làm đôi."
-      },
-      "question_narrations": {
-        "ko": "4단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 4페이지입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)의 움직임을 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰"
+        "ko": "4단계, 4페이지 단계입니다. 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 4 (Page 4). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
       }
     },
     {
@@ -174,10 +172,10 @@
         5,
         5
       ],
-      "step_title": "2단계 질문 · 폴리아 제1보조선 발상 (How?)",
-      "step_question_ko": "🧭 [보조선 질문] 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요?",
-      "step_question_en": "🧭 [Auxiliary Line Question] Where should we draw a line to connect the conditions?",
-      "visual_focus": "우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)",
+      "step_title": "Step 5 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.626,
@@ -185,19 +183,10 @@
         0.6488,
         0.573
       ],
-      "explanation_text": "5단계, 5페이지입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)의 움직임을 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
+      "explanation_text": "5단계, 5페이지 단계입니다. 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "5단계, 5페이지입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)의 움직임을 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰",
-        "en": "Step 5, page 5. This is the crucial question! Where should the auxiliary lines be drawn to reveal hidden angles and symmetrical relationships at a glance? Pay attention to the movement of the proof formula derivation on the right (blue basic shape and reference line segment construction). Step 2 (Finding elementary congruent triangles): Observe that if you connect the intersection of two circles, the lengths of the three sides become the same (SSS congruent) and the angle or line segment is exactly divided in half.",
-        "ja": "ステップ5、5ページです。ここで決定的な質問です！どこに補助線を描かなければ隠された角度と対称関係が一目でわかりますか？右の証明書式の導出（青の基本図形と基準線分の作図）の動きを見てみましょう。ステップ2（初等合同三角形を探す）：二つの円が出会う交点をつなぐと三辺の長さが同じになり（SSS合同）角度や線分が正確に半分に分かれることを観察",
-        "zh-CN": "第5步，第5页。这是关键问题！辅助线应该画在哪里，才能让隐藏的角度和对称关系一目了然？注意右边证明公式推导的动向（蓝色基本形状和参考线段构造）。步骤 2（找到基本全等三角形）：观察到，如果连接两个圆的交点，三条边的长度变得相同（SSS 全等），并且角度或线段正好被分成两半。",
-        "es": "Paso 5, página 5. ¡Esta es la pregunta crucial! ¿Dónde deberían dibujarse las líneas auxiliares para revelar ángulos ocultos y relaciones simétricas de un vistazo? Preste atención al movimiento de la derivación de la fórmula de prueba a la derecha (forma básica azul y construcción del segmento de línea de referencia). Paso 2 (Encontrar triángulos elementales congruentes): Observa que si conectas la intersección de dos círculos, las longitudes de los tres lados se vuelven iguales (SSS congruentes) y el ángulo o segmento de línea se divide exactamente por la mitad.",
-        "fr": "Étape 5, page 5. C’est la question cruciale ! Où faut-il tracer les lignes auxiliaires pour révéler d’un seul coup d’œil les angles cachés et les relations symétriques ? Faites attention au mouvement de la dérivation de la formule de preuve à droite (forme de base bleue et construction du segment de ligne de référence). Étape 2 (Trouver des triangles congrus élémentaires) : Observez que si vous connectez l'intersection de deux cercles, les longueurs des trois côtés deviennent les mêmes (SSS congruents) et l'angle ou le segment de droite est exactement divisé en deux.",
-        "de": "Schritt 5, Seite 5. Das ist die entscheidende Frage! Wo sollen die Hilfslinien eingezeichnet werden, um verborgene Winkel und symmetrische Zusammenhänge auf einen Blick sichtbar zu machen? Achten Sie auf die Bewegung der Beweisformelableitung auf der rechten Seite (blaue Grundform und Referenzliniensegmentkonstruktion). Schritt 2 (Elementarkongruente Dreiecke finden): Beachten Sie, dass, wenn Sie den Schnittpunkt zweier Kreise verbinden, die Längen der drei Seiten gleich werden (SSS-kongruent) und der Winkel oder das Liniensegment genau in zwei Hälften geteilt wird.",
-        "vi": "Bước 5, trang 5. Đây là câu hỏi quan trọng! Các đường phụ nên vẽ ở đâu để bộc lộ nhanh các góc ẩn và mối quan hệ đối xứng? Hãy chú ý đến chuyển động của công thức chứng minh ở bên phải (hình cơ bản màu xanh lam và cấu trúc đoạn đường tham chiếu). Bước 2 (Tìm các tam giác đồng dạng cơ bản): Quan sát rằng nếu nối giao điểm của hai đường tròn thì độ dài ba cạnh bằng nhau (đồng dạng SSS) và góc hoặc đoạn thẳng được chia chính xác làm đôi."
-      },
-      "question_narrations": {
-        "ko": "5단계 탐구 발문입니다! 어디에 보조선을 한 줄 그어야 떨어진 조건들이 하나로 연결될까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 5페이지입니다. 여기서 결정적 질문입니다! 어디에 보조선을 그어야 숨겨진 각도와 대칭 관계가 한눈에 드러날까요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)의 움직임을 눈여겨보세요. 2단계 (초등 합동 삼각형 찾기): 두 원이 만나는 교점을 이으면 세 변의 길이가 같아져(SSS 합동) 각이나 선분이 정확히 반으로 나뉨을 관찰"
+        "ko": "5단계, 5페이지 단계입니다. 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 5 (Page 5). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
       }
     },
     {
@@ -207,10 +196,10 @@
         6,
         6
       ],
-      "step_title": "3단계 질문 · 불변량과 등식 발견 (Why?)",
-      "step_question_ko": "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?",
-      "step_question_en": "📐 [Invariant Question] Which ratio or area remains constant under motion?",
-      "visual_focus": "우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도)",
+      "step_title": "Step 6 · 보조선 연결과 변·각의 크기 비교",
+      "step_question_ko": "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?",
+      "step_question_en": "🧭 [Auxiliary Line Q] Which segments or angles become equal once we introduce the key auxiliary line?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.5207,
@@ -218,19 +207,10 @@
         0.8285,
         0.8182
       ],
-      "explanation_text": "6단계, 6페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
+      "explanation_text": "6단계, 6페이지 단계입니다. 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "6단계, 6페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
-        "en": "Step 6, page 6. What remains constant and unchanged when a shape moves? Find the answer to how the congruence, similarity, and distance relationships lead to equations in the process of deriving the right proof formula (drawing the blue basic shape and reference line segment). Step 3 (Circular angle, central angle, similarity translation): The circumferential angle for an arc is 1/2 of the central angle, and the circumferential angle for the diameter is 90^ circ.",
-        "ja": "ステップ6、6ページです。図形が移動すると、何が変わらずに一定に保存されますか？右証明式の誘導（青の基本図形と基準線分作図）の過程で、合同・似・距離関係がどのように等式につながるのか答えを見つけてください。 3段階（円周角・中心角・似翻訳）：一号に対する円周角は中心角の2分の1で、直径に対する円周角は90^ circであることを記号で整理",
-        "zh-CN": "第 6 页，第 6 步。当形状移动时，什么保持不变？在推导正确证明公式（画出蓝色基本形状和参考线段）的过程中，找到同余、相似、距离关系如何导出方程的答案。步骤3（圆角、圆心角、相似平移）：圆弧的圆周角是圆心角的1/2，直径的圆周角是90^circ。",
-        "es": "Paso 6, página 6. ¿Qué permanece constante y sin cambios cuando una figura se mueve? Encuentre la respuesta a cómo las relaciones de congruencia, similitud y distancia conducen a ecuaciones en el proceso de derivar la fórmula de prueba correcta (dibujando la forma básica azul y el segmento de línea de referencia). Paso 3 (ángulo circular, ángulo central, traslación de similitud): el ángulo circunferencial de un arco es la mitad del ángulo central y el ángulo circunferencial del diámetro es 90^ circ.",
-        "fr": "Étape 6, page 6. Qu'est-ce qui reste constant et inchangé lorsqu'une forme se déplace ? Trouvez la réponse à la façon dont les relations de congruence, de similarité et de distance conduisent à des équations dans le processus de dérivation de la bonne formule de preuve (en dessinant la forme de base bleue et le segment de ligne de référence). Étape 3 (angle circulaire, angle central, traduction de similarité) : L'angle circonférentiel d'un arc est la moitié de l'angle central et l'angle circonférentiel du diamètre est de 90 ^ circ.",
-        "de": "Schritt 6, Seite 6. Was bleibt konstant und unverändert, wenn sich eine Form bewegt? Finden Sie die Antwort darauf, wie die Kongruenz-, Ähnlichkeits- und Distanzbeziehungen zu Gleichungen führen, während Sie die richtige Beweisformel ableiten (Zeichnen der blauen Grundform und des Referenzliniensegments). Schritt 3 (Kreiswinkel, Zentralwinkel, Ähnlichkeitsübersetzung): Der Umfangswinkel für einen Bogen beträgt die Hälfte des Zentralwinkels und der Umfangswinkel für den Durchmesser beträgt 90° Kreis.",
-        "vi": "Bước 6, trang 6. Cái gì không đổi khi một hình chuyển động? Tìm câu trả lời cho mối quan hệ đồng đẳng, tương tự và khoảng cách dẫn đến các phương trình như thế nào trong quá trình suy ra công thức chứng minh phù hợp (vẽ hình cơ bản màu xanh lam và đoạn đường tham chiếu). Bước 3 (Góc tròn, góc ở tâm, dịch tương tự): Góc chu vi của một cung bằng 1/2 góc ở tâm, góc chu vi của đường kính là 90^c."
-      },
-      "question_narrations": {
-        "ko": "6단계 탐구 발문입니다! 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 6페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (파란색 기본 도형 및 기준 선분 작도) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리"
+        "ko": "6단계, 6페이지 단계입니다. 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 6 (Page 6). Using the key auxiliary line, we pair up and compare corresponding segments and angles in the figure."
       }
     },
     {
@@ -240,10 +220,10 @@
         7,
         7
       ],
-      "step_title": "3단계 질문 · 불변량과 등식 발견 (Why?)",
-      "step_question_ko": "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?",
-      "step_question_en": "📐 [Invariant Question] Which ratio or area remains constant under motion?",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "Step 7 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.1219,
@@ -251,19 +231,10 @@
         0.8843,
         0.8485
       ],
-      "explanation_text": "7단계, 7페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 파란색 기본 도형 및 기준 선분 작도 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
+      "explanation_text": "7단계, 7페이지 단계입니다. 두 내각의 이등분선에 의해 나뉜 직각삼각형들이 빗변 공통 + 직각 + 예각 일치로 RHA 합동이 되어 세 변까지의 거리가 모두 같아지고, 마지막 꼭짓점의 두 직각삼각형이 RHS 합동이 되어 세 번째 각도 이등분되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다.",
       "narrations": {
-        "ko": "7단계, 7페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 파란색 기본 도형 및 기준 선분 작도 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
-        "en": "Step 7, page 7. What remains constant and unchanged when a shape moves? Find answers to how congruence, similarity, and distance relationships lead to equations in the process of drawing blue basic shapes and reference line segments. Step 3 (Circular angle, central angle, similarity translation): The circumferential angle for an arc is 1/2 of the central angle, and the circumferential angle for the diameter is 90^ circ.",
-        "ja": "ステップ7、7ページです。図形が移動すると、何が変わらずに一定に保存されますか？青の基本図形や基準線分作図過程で合同・似・距離関係がどのように等式につながるのか答えを探してみてください。 3段階（円周角・中心角・似翻訳）：一号に対する円周角は中心角の2分の1で、直径に対する円周角は90^ circであることを記号で整理",
-        "zh-CN": "第 7 页，步骤 7。当形状移动时，什么保持不变？寻找在绘制蓝色基本形状和参考线段的过程中同余、相似和距离关系如何导出方程的答案。步骤3（圆角、圆心角、相似平移）：圆弧的圆周角是圆心角的1/2，直径的圆周角是90^circ。",
-        "es": "Paso 7, página 7. ¿Qué permanece constante y sin cambios cuando una figura se mueve? Encuentre respuestas sobre cómo las relaciones de congruencia, similitud y distancia conducen a ecuaciones en el proceso de dibujar formas básicas azules y segmentos de línea de referencia. Paso 3 (ángulo circular, ángulo central, traslación de similitud): el ángulo circunferencial de un arco es la mitad del ángulo central y el ángulo circunferencial del diámetro es 90^ circ.",
-        "fr": "Étape 7, page 7. Qu'est-ce qui reste constant et inchangé lorsqu'une forme se déplace ? Trouvez des réponses à la manière dont les relations de congruence, de similarité et de distance conduisent à des équations lors du dessin de formes de base bleues et de segments de ligne de référence. Étape 3 (angle circulaire, angle central, traduction de similarité) : L'angle circonférentiel d'un arc est la moitié de l'angle central et l'angle circonférentiel du diamètre est de 90 ^ circ.",
-        "de": "Schritt 7, Seite 7. Was bleibt konstant und unverändert, wenn sich eine Form bewegt? Finden Sie Antworten darauf, wie Kongruenz, Ähnlichkeit und Distanzbeziehungen beim Zeichnen blauer Grundformen und Referenzliniensegmente zu Gleichungen führen. Schritt 3 (Kreiswinkel, Zentralwinkel, Ähnlichkeitsübersetzung): Der Umfangswinkel für einen Bogen beträgt die Hälfte des Zentralwinkels und der Umfangswinkel für den Durchmesser beträgt 90° Kreis.",
-        "vi": "Bước 7, trang 7. Cái gì không đổi khi một hình chuyển động? Tìm câu trả lời cho mối quan hệ đồng dạng, tương tự và khoảng cách dẫn đến các phương trình trong quá trình vẽ các hình cơ bản màu xanh lam và các đoạn đường tham chiếu. Bước 3 (Góc tròn, góc ở tâm, dịch tương tự): Góc chu vi của một cung bằng 1/2 góc ở tâm, góc chu vi của đường kính là 90^c."
-      },
-      "question_narrations": {
-        "ko": "7단계 탐구 발문입니다! 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 7페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 파란색 기본 도형 및 기준 선분 작도 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리"
+        "ko": "7단계, 7페이지 단계입니다. 두 내각의 이등분선에 의해 나뉜 직각삼각형들이 빗변 공통 + 직각 + 예각 일치로 RHA 합동이 되어 세 변까지의 거리가 모두 같아지고, 마지막 꼭짓점의 두 직각삼각형이 RHS 합동이 되어 세 번째 각도 이등분되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다.",
+        "en": "Step 7 (Page 7). This completes the core geometric deduction while avoiding circular reasoning."
       }
     },
     {
@@ -273,10 +244,10 @@
         8,
         8
       ],
-      "step_title": "3단계 질문 · 불변량과 등식 발견 (Why?)",
-      "step_question_ko": "📐 [불변량 질문] 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요?",
-      "step_question_en": "📐 [Invariant Question] Which ratio or area remains constant under motion?",
-      "visual_focus": "우측 증명 수식 유도 (붉은색 강조 보조선과 핵심 길이 표시)",
+      "step_title": "Step 8 · 핵심 증명 논리 완성 및 오개념 점검",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?",
+      "step_question_en": "⚠️ [Proof Logic Q] How do we verify congruence or similarity here without circular reasoning?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "red",
       "diff_bbox": [
         0.6818,
@@ -284,19 +255,10 @@
         0.7748,
         0.2782
       ],
-      "explanation_text": "8단계, 8페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (붉은색 강조 보조선과 핵심 길이 표시) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
+      "explanation_text": "8단계, 8페이지 단계입니다. 두 내각의 이등분선에 의해 나뉜 직각삼각형들이 빗변 공통 + 직각 + 예각 일치로 RHA 합동이 되어 세 변까지의 거리가 모두 같아지고, 마지막 꼭짓점의 두 직각삼각형이 RHS 합동이 되어 세 번째 각도 이등분되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다.",
       "narrations": {
-        "ko": "8단계, 8페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (붉은색 강조 보조선과 핵심 길이 표시) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리",
-        "en": "Step 8, page 8. What remains constant and unchanged when a shape moves? Find the answer to how the congruence, similarity, and distance relationships lead to equations in the process of deriving the proof formula on the right (red highlighted auxiliary lines and key lengths shown). Step 3 (Circular angle, central angle, similarity translation): The circumferential angle for an arc is 1/2 of the central angle, and the circumferential angle for the diameter is 90^ circ.",
-        "ja": "ステップ8、8ページです。図形が移動すると、何が変わらずに一定に保存されますか？右証明式の誘導（赤色の強調補助線とコアの長さ表示）の過程で合同・似・距離関係がどのように等式につながるのか答えを探してみてください。 3段階（円周角・中心角・似翻訳）：一号に対する円周角は中心角の2分の1で、直径に対する円周角は90^ circであることを記号で整理",
-        "zh-CN": "第 8 页，步骤 8。当形状移动时，什么保持不变？在推导右侧证明公式的过程中找到同余、相似和距离关系如何导出方程的答案（红色突出显示的辅助线和密钥长度所示）。步骤3（圆角、圆心角、相似平移）：圆弧的圆周角是圆心角的1/2，直径的圆周角是90^circ。",
-        "es": "Paso 8, página 8. ¿Qué permanece constante y sin cambios cuando una figura se mueve? Encuentre la respuesta a cómo las relaciones de congruencia, similitud y distancia conducen a ecuaciones en el proceso de derivar la fórmula de prueba a la derecha (se muestran líneas auxiliares resaltadas en rojo y longitudes de clave). Paso 3 (ángulo circular, ángulo central, traslación de similitud): el ángulo circunferencial de un arco es la mitad del ángulo central y el ángulo circunferencial del diámetro es 90^ circ.",
-        "fr": "Étape 8, page 8. Qu'est-ce qui reste constant et inchangé lorsqu'une forme se déplace ? Trouvez la réponse à la façon dont les relations de congruence, de similarité et de distance conduisent à des équations dans le processus de dérivation de la formule de preuve à droite (lignes auxiliaires surlignées en rouge et longueurs de clé indiquées). Étape 3 (angle circulaire, angle central, traduction de similarité) : L'angle circonférentiel d'un arc est la moitié de l'angle central et l'angle circonférentiel du diamètre est de 90 ^ circ.",
-        "de": "Schritt 8, Seite 8. Was bleibt konstant und unverändert, wenn sich eine Form bewegt? Finden Sie die Antwort darauf, wie die Kongruenz-, Ähnlichkeits- und Distanzbeziehungen zu Gleichungen im Prozess der Ableitung der Beweisformel auf der rechten Seite führen (rot hervorgehobene Hilfslinien und Schlüssellängen dargestellt). Schritt 3 (Kreiswinkel, Zentralwinkel, Ähnlichkeitsübersetzung): Der Umfangswinkel für einen Bogen beträgt die Hälfte des Zentralwinkels und der Umfangswinkel für den Durchmesser beträgt 90° Kreis.",
-        "vi": "Bước 8, trang 8. Cái gì không đổi khi một hình chuyển động? Tìm câu trả lời cho mối quan hệ đồng đẳng, tương tự và khoảng cách dẫn đến các phương trình như thế nào trong quá trình suy ra công thức chứng minh ở bên phải (các đường phụ được đánh dấu màu đỏ và độ dài khóa được hiển thị). Bước 3 (Góc tròn, góc ở tâm, dịch tương tự): Góc chu vi của một cung bằng 1/2 góc ở tâm, góc chu vi của đường kính là 90^c."
-      },
-      "question_narrations": {
-        "ko": "8단계 탐구 발문입니다! 도형이 움직여도 끝까지 일정하게 유지되는 넓이·비례 관계는 무엇일까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 8페이지입니다. 도형이 이동할 때 무엇이 변하지 않고 일정하게 보존되나요? 우측 증명 수식 유도 (붉은색 강조 보조선과 핵심 길이 표시) 과정에서 합동·닮음·거리 관계가 어떻게 등식으로 이어지는지 답을 찾아보세요. 3단계 (원주각·중심각·닮음 번역): 한 호에 대한 원주각은 중심각의 2 분의 1 이고 지름에 대한 원주각은 90^ circ 임을 기호로 정리"
+        "ko": "8단계, 8페이지 단계입니다. 두 내각의 이등분선에 의해 나뉜 직각삼각형들이 빗변 공통 + 직각 + 예각 일치로 RHA 합동이 되어 세 변까지의 거리가 모두 같아지고, 마지막 꼭짓점의 두 직각삼각형이 RHS 합동이 되어 세 번째 각도 이등분되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다.",
+        "en": "Step 8 (Page 8). This completes the core geometric deduction while avoiding circular reasoning."
       }
     },
     {
@@ -306,10 +268,10 @@
         9,
         9
       ],
-      "step_title": "4단계 질문 · 레고 블록 종합 (Synthesis)",
-      "step_question_ko": "💡 [유레카 질문] 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요?",
-      "step_question_en": "💡 [Eureka Question] How do the previous clues combine into the final proof?",
-      "visual_focus": "좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시)",
+      "step_title": "Step 9 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Understanding of Triangle Incenter?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "green",
       "diff_bbox": [
         0.1632,
@@ -317,19 +279,10 @@
         0.1942,
         0.7273
       ],
-      "explanation_text": "9단계, 9페이지입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
+      "explanation_text": "9단계, 9페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "9단계, 9페이지입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
-        "en": "Step 9, page 9. Now, shall we combine the answers to the questions we asked earlier? The final conclusion is clearly completed through the finishing process of the left dynamic figure drawing (green corresponding area and proportional elements indicated). Step 4 (Comprehensive text): Solve difficult geometry problems by combining the tangent vertical radius of the circle (90^ circ), circumferential angle movement, and secant/tangent proportion (PA cdot PB = PT squared)",
-        "ja": "ステップ9、9ページです。今、私たちが投げた質問の答えを一つにまとめてみましょうか？左のダイナミック図形作図（緑色の対応領域と比例要素の表示）の仕上げプロセスにより、最終的な結論が明確に完了します。 4段階(本文項総合):円の接線垂直半径(90^ circ)、円周角移動、割線・接線比例(PA cdot PB = PT二乗)を結合して高難度図形問題解決",
-        "zh-CN": "第 9 页，第 9 步。现在，我们可以将之前提出的问题的答案合并起来吗？通过左侧动态图的整理过程（绿色对应区域和比例元素表示），清晰地完成了最终的结论。第四步（综合课文）：结合圆的切线垂直半径（90^circ）、圆周角移动以及正割/正切比例（PA cdot PB = PT 平方）解决几何难题",
-        "es": "Paso 9, página 9. Ahora, ¿deberíamos combinar las respuestas a las preguntas que hicimos anteriormente? La conclusión final se completa claramente a través del proceso de acabado del dibujo de la figura dinámica izquierda (área correspondiente en verde y elementos proporcionales indicados). Paso 4 (texto completo): resuelva problemas de geometría difíciles combinando el radio vertical tangente del círculo (90^ circ), el movimiento del ángulo circunferencial y la proporción secante/tangente (PA cdot PB = PT al cuadrado)",
-        "fr": "Étape 9, page 9. Maintenant, allons-nous combiner les réponses aux questions que nous avons posées plus tôt ? La conclusion finale est clairement complétée par le processus de finition du dessin de la figure dynamique de gauche (zone verte correspondante et éléments proportionnels indiqués). Étape 4 (texte complet) : résolvez des problèmes de géométrie difficiles en combinant le rayon vertical tangent du cercle (90 ^ circ), le mouvement de l'angle circonférentiel et la proportion sécante/tangente (PA cdot PB = PT au carré)",
-        "de": "Schritt 9, Seite 9. Sollen wir nun die Antworten auf die Fragen, die wir zuvor gestellt haben, zusammenfassen? Die endgültige Schlussfolgerung wird eindeutig durch den Endbearbeitungsprozess der linken dynamischen Figurenzeichnung vervollständigt (grüner entsprechender Bereich und proportionale Elemente angezeigt). Schritt 4 (Umfassender Text): Lösen Sie schwierige Geometrieprobleme, indem Sie den tangentialen vertikalen Radius des Kreises (90^ Kreis), die Bewegung des Umfangswinkels und das Sekanten-/Tangentenverhältnis (PA cdot PB = PT zum Quadrat) kombinieren.",
-        "vi": "Bước 9, trang 9. Bây giờ, chúng ta sẽ kết hợp các câu trả lời cho những câu hỏi mà chúng ta đã hỏi trước đó? Kết luận cuối cùng được hoàn thành rõ ràng thông qua quá trình hoàn thiện bản vẽ hình động bên trái (diện tích tương ứng màu xanh lá cây và các yếu tố tỷ lệ được chỉ định). Bước 4 (Văn bản toàn diện): Giải các bài toán hình học khó bằng cách kết hợp bán kính thẳng đứng tiếp tuyến của hình tròn (90^cung tròn), chuyển động của góc chu vi và tỷ lệ cát tuyến/tiếp tuyến (PA cdot PB = PT bình phương)"
-      },
-      "question_narrations": {
-        "ko": "9단계 탐구 발문입니다! 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 9페이지입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 좌측 동적 도형 작도 (초록색 대응 영역 및 비례 요소 표시) 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결"
+        "ko": "9단계, 9페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 9 (Page 9). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Understanding of Triangle Incenter."
       }
     },
     {
@@ -339,10 +292,10 @@
         10,
         10
       ],
-      "step_title": "4단계 질문 · 레고 블록 종합 (Synthesis)",
-      "step_question_ko": "💡 [유레카 질문] 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요?",
-      "step_question_en": "💡 [Eureka Question] How do the previous clues combine into the final proof?",
-      "visual_focus": "우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개)",
+      "step_title": "Step 10 · 기하학적 단서 종합 및 결론 연결 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?",
+      "step_question_en": "💡 [Synthesis Q] How do all the geometric clues combine to establish Understanding of Triangle Incenter?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "default",
       "diff_bbox": [
         0.8099,
@@ -350,19 +303,10 @@
         0.8802,
         0.8512
       ],
-      "explanation_text": "10단계, 10페이지입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
+      "explanation_text": "10단계, 10페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "10단계, 10페이지입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결",
-        "en": "10 steps, 10 pages. Now, shall we combine the answers to the questions we asked earlier? The final conclusion is clearly completed through the final process of deriving the right proof formula (constructing the core geometry and developing continuous motion). Step 4 (Comprehensive text): Solve difficult geometry problems by combining the tangent vertical radius of the circle (90^ circ), circumferential angle movement, and secant/tangent proportion (PA cdot PB = PT squared)",
-        "ja": "ステップ10、10ページです。今、私たちが投げた質問の答えを一つにまとめてみましょうか？右証明式の導出（核心幾何作図と連続モーション展開）の仕上げプロセスにより、最終的な結論が明確に完了します。 4段階(本文項総合):円の接線垂直半径(90^ circ)、円周角移動、割線・接線比例(PA cdot PB = PT二乗)を結合して高難度図形問題解決",
-        "zh-CN": "10 个步骤，10 页。现在，我们可以结合之前提出的问题的答案吗？最终的结论显然是通过推导正确的证明公式（构建核心几何结构和发展连续运动）的最终过程来完成的。第四步（综合课文）：结合圆的切线垂直半径（90^circ）、圆周角移动以及正割/正切比例（PA cdot PB = PT 平方）解决几何难题",
-        "es": "10 pasos, 10 páginas. Ahora, ¿combinamos las respuestas a las preguntas que hicimos antes? La conclusión final se completa claramente a través del proceso final de derivar la fórmula de prueba correcta (construcción de la geometría central y desarrollo del movimiento continuo). Paso 4 (texto completo): resuelva problemas de geometría difíciles combinando el radio vertical tangente del círculo (90^ circ), el movimiento del ángulo circunferencial y la proporción secante/tangente (PA cdot PB = PT al cuadrado)",
-        "fr": "10 étapes, 10 pages. Maintenant, allons-nous combiner les réponses aux questions que nous avons posées plus tôt ? La conclusion finale est clairement complétée par le processus final consistant à dériver la bonne formule de preuve (construction de la géométrie de base et développement d'un mouvement continu). Étape 4 (texte complet) : résolvez des problèmes de géométrie difficiles en combinant le rayon vertical tangent du cercle (90 ^ circ), le mouvement de l'angle circonférentiel et la proportion sécante/tangente (PA cdot PB = PT au carré)",
-        "de": "10 Schritte, 10 Seiten. Sollen wir nun die Antworten auf die Fragen, die wir zuvor gestellt haben, zusammenfassen? Die endgültige Schlussfolgerung wird eindeutig durch den letzten Prozess der Ableitung der richtigen Beweisformel (Aufbau der Kerngeometrie und Entwicklung kontinuierlicher Bewegung) vervollständigt. Schritt 4 (Umfassender Text): Lösen Sie schwierige Geometrieprobleme, indem Sie den tangentialen vertikalen Radius des Kreises (90^ Kreis), die Bewegung des Umfangswinkels und das Sekanten-/Tangentenverhältnis (PA cdot PB = PT zum Quadrat) kombinieren.",
-        "vi": "10 bước, 10 trang. Bây giờ, chúng ta sẽ kết hợp các câu trả lời cho những câu hỏi mà chúng ta đã hỏi trước đó nhé? Kết luận cuối cùng được hoàn thiện rõ ràng thông qua quá trình cuối cùng rút ra công thức chứng minh đúng (xây dựng hình học lõi và phát triển chuyển động liên tục). Bước 4 (Văn bản toàn diện): Giải các bài toán hình học khó bằng cách kết hợp bán kính thẳng đứng tiếp tuyến của hình tròn (90^cung tròn), chuyển động của góc chu vi và tỷ lệ cát tuyến/tiếp tuyến (PA cdot PB = PT bình phương)"
-      },
-      "question_narrations": {
-        "ko": "10단계 탐구 발문입니다! 앞 단계에서 찾은 단서들을 합치면 왜 최종 정리가 필연적으로 성립할까요? 잠시 화면의 도형을 보며 생각한 뒤 확인해 보세요. 10페이지입니다. 이제 앞에서 우리가 던진 질문들의 답을 하나로 합쳐 볼까요? 우측 증명 수식 유도 (핵심 기하 작도 및 연속 모션 전개) 마무리 과정을 통해 최종 결론이 명쾌하게 완성됩니다. 4단계 (본문항 종합): 원의 접선 수직 반지름( 90^ circ ), 원주각 이동, 할선·접선 비례( PA cdot PB = PT 제곱 )를 결합해 고난도 도형 문제 해결"
+        "ko": "10단계, 10페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 10 (Page 10). Bringing together the corresponding parts of the figure directly establishes our target conclusion for Understanding of Triangle Incenter."
       }
     },
     {
@@ -372,10 +316,10 @@
         11,
         11
       ],
-      "step_title": "질문 확장 · 조건 변형 (What-If-Not)",
-      "step_question_ko": "🔀 [What-If-Not] 만약 도형의 조건이나 점의 위치를 바꾸면 어떻게 될까요?",
-      "step_question_en": "🔀 [What-If-Not] What happens if we modify one condition of this theorem?",
-      "visual_focus": "파란색 기본 도형 및 기준 선분 작도",
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 내각이 아니라 삼각형의 한 내각의 이등분선과 두 외각의 이등분선을 그으면 삼각형 밖에 어떤 원(방접원, Excircle)이 탄생할까요?",
+      "step_question_en": "🔀 [What-If-Not] How does Understanding of Triangle Incenter evolve if we modify or generalize its conditions?",
+      "visual_focus": "핵심 단계별 작도 및 기하 추론",
       "color_tag": "blue",
       "diff_bbox": [
         0.0847,
@@ -383,29 +327,11 @@
         0.9153,
         0.8705
       ],
-      "explanation_text": "마지막 11단계입니다. 총 11프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? 원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선( 90^ circ )을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요. 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!",
+      "explanation_text": "마지막 11단계, 증명이 완성되었습니다! 출발 조건이었던 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정에서 시작해, 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 거쳐, 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 내각이 아니라 삼각형의 한 내각의 이등분선과 두 외각의 이등분선을 그으면 삼각형 밖에 어떤 원(방접원, Excircle)이 탄생할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 11단계입니다. 총 11프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? 원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선( 90^ circ )을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요. 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요!",
-        "en": "Step 11. We have completed the 11-frame visual proof! Now ask yourself a What-If-Not question: what happens if we change a condition in this figure? Visit min7014.github.io/mathedu to test your own questions interactively!",
-        "ja": "最後の11段階です。合計11フレームのフリップブック作図で整理を完全に証明しました！今、あなたは新しい質問を投げる番です。この図形の条件を変更するとどうなりますか？円が登場するすべての幾何問題の第1原則：「円の中心から接点には修理（90^ circ）を、県には垂直二等分線を、円上の点には半径補助線」を描きます。説明欄リンクの数学ホームページで直接図形を動かして実験してみてください！",
-        "zh-CN": "这是最后 11 个步骤。该定理通过总共 11 帧的翻页画得到了完美证明！现在轮到你提出一个新问题了。如果改变这个形状的条件会发生什么？所有涉及圆的几何问题的第一条规则：“从圆心画一条到接触点的垂直线（90^circ），画一条垂直平分线到弦，画一条径向辅助线到圆上的点。”通过直接在描述中的链接中的数学主页上移动形状来进行实验！",
-        "es": "Estos son los últimos 11 pasos. ¡El teorema quedó perfectamente demostrado con un dibujo en flipbook de un total de 11 fotogramas! Ahora te toca a ti hacer una nueva pregunta. ¿Qué pasaría si se cambiaran las condiciones de esta forma? La primera regla de todos los problemas geométricos que involucran círculos: \"Desde el centro del círculo, traza una línea perpendicular (90^ circ) hasta el punto de contacto, una bisectriz perpendicular a la cuerda y una línea auxiliar radial hasta el punto del círculo\". ¡Experimente moviendo las formas directamente en la página de inicio de matemáticas en el enlace de la descripción!",
-        "fr": "Ce sont les 11 dernières étapes. Le théorème a été parfaitement prouvé avec un dessin flipbook d'un total de 11 images ! C'est maintenant à votre tour de poser une nouvelle question. Que se passerait-il si les conditions de cette forme étaient modifiées ? La première règle de tous les problèmes géométriques impliquant des cercles : « Depuis le centre du cercle, tracez une ligne perpendiculaire (90^ circ) jusqu'au point de contact, une médiatrice perpendiculaire à la corde et une ligne auxiliaire radiale jusqu'au point du cercle. » Expérimentez en déplaçant les formes directement sur la page d'accueil des mathématiques dans le lien dans la description !",
-        "de": "Dies sind die letzten 11 Schritte. Der Satz wurde mit einer Daumenkino-Zeichnung von insgesamt 11 Bildern perfekt bewiesen! Jetzt sind Sie an der Reihe, eine neue Frage zu stellen. Was würde passieren, wenn die Bedingungen dieser Form geändert würden? Die erste Regel aller geometrischen Probleme mit Kreisen: „Zeichne vom Mittelpunkt des Kreises eine senkrechte Linie (90° Kreis) zum Berührungspunkt, eine senkrechte Winkelhalbierende zur Sehne und eine radiale Hilfslinie zum Punkt auf dem Kreis.“ Experimentieren Sie, indem Sie die Formen direkt auf der Mathe-Homepage im Link in der Beschreibung verschieben!",
-        "vi": "Đây là 11 bước cuối cùng. Định lý đã được chứng minh một cách hoàn hảo bằng một bản vẽ sách lật có tổng cộng 11 khung hình! Bây giờ đến lượt bạn đặt một câu hỏi mới. Điều gì sẽ xảy ra nếu các điều kiện của hình dạng này bị thay đổi? Quy tắc đầu tiên của mọi bài toán hình học liên quan đến đường tròn: 'Từ tâm đường tròn vẽ một đường vuông góc (90^c) đến điểm tiếp xúc, một đường phân giác vuông góc với dây cung và một đường phụ hướng tâm đến điểm trên đường tròn.' Hãy thử nghiệm bằng cách di chuyển các hình trực tiếp trên trang chủ toán học ở link trong phần mô tả nhé!"
-      },
-      "question_narrations": {
-        "ko": "마지막 11단계, 조건 변형 질문입니다! 마지막 11단계입니다. 총 11프레임의 플립북 작도로 정리를 완벽히 증명했습니다! 이제 여러분이 새로운 질문을 던질 차례입니다. 만약 이 도형의 조건을 바꾸면 어떻게 될까요? 원이 등장하는 모든 기하 문제의 제1원칙: '원의 중심에서 접점에는 수선( 90^ circ )을, 현에는 수직이등분선을, 원 위의 점에는 반지름 보조선'을 그으세요. 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 실험해 보세요! 만약 여기서 도형의 조건을 하나 바꾼다면 어떤 새로운 정리가 탄생할지 직접 질문하고 실험해 보세요!"
+        "ko": "마지막 11단계, 증명이 완성되었습니다! 출발 조건이었던 삼각형의 두 내각의 이등분선의 교점 I에서 세 변에 각각 수선의 발을 내린 가정에서 시작해, 교점 I에서 삼각형의 세 변에 수직으로 내린 3개의 초록색 수선(내접원 반지름)과 세 번째 꼭짓점을 잇는 보조선을 거쳐, 세 내각의 이등분선은 한 점(내심 I)에서 만나고, 내심에서 세 변에 이르는 수직 거리가 모두 같다(내접원의 반지름 r)는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 외심은 '세 꼭짓점'까지의 거리가 같고(OA=OB=OC), 내심은 '세 변에 내린 수선의 발'까지의 거리가 같습니다(ID=IE=IF=r). 또한 삼각형 넓이 S = 1/2·r·(a+b+c) 공식으로 직결됩니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 내각이 아니라 삼각형의 한 내각의 이등분선과 두 외각의 이등분선을 그으면 삼각형 밖에 어떤 원(방접원, Excircle)이 탄생할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "Final Step 11. The visual proof of Understanding of Triangle Incenter is now complete! Starting from the initial hypothesis and applying our key mathematical bridge, we have verified why the conclusion holds true. Try modifying the conditions yourself in the interactive lab linked in the description!"
       }
     }
-  ],
-  "question_classroom_packages": {
-    "ko": {
-      "title": "❓ [질문하는 수학 수업] 내심의 이해(Understanding of Triangle Incenter) — 왜 항상 성립할까? (Notice & Wonder · What-If-No",
-      "local_mp4_path": "video_lectures/question_classroom/2017091807_q_ko.mp4",
-      "upload_mp4_path": "youtube_uploads/2017091807/2017091807_q_ko.mp4",
-      "srt_url": "video_lectures/youtube_packages/2017091807_q_ko.srt",
-      "duration_sec": 565.7
-    }
-  }
+  ]
 }

@@ -57,3 +57,6 @@ description: Specialized AI Video Producer & 4-Edition Math Cinema Director agen
    - 검증 항목: ① PDF 실제 페이지 수와 `pages` 대본 수 100% 일치, ② 한/영 제목 분리(`split_bilingual_title`) 무결성, ③ 오해 소지/무관 후킹 문구(`0%` 보장), ④ 실제 렌더링된 `.mp4` 시간(`duration >= max(12.0, page_count * 2.2)`) 검증.
 3. **불일치 영상 즉시 삭제 및 재생성 (`process_youtube_delete_queue()`)**:
    - 영상과 내용이 맞지 않는 구버전 영상은 `video_lectures/youtube_delete_queue.json`에 등록하여 유튜브 채널에서 자동 삭제(`videos().delete`)하고, 로컬 `.mp4`/`.srt` 및 사이트 카탈로그 URL을 즉시 퍼지한 뒤 새 엔진으로 다시 렌더링하여 업로드합니다.
+4. **영상 내 개인 호칭(`"민은기 선생님"` 등) 의도적 배제 및 순수 수학 강의 원칙**:
+   - 모든 수학 강의 영상의 내레이션, 자막(`.srt`), 슬라이드 상·하단 오버레이, 1280×720 썸네일, 유튜브 제목·설명·태그에서 `"민은기 선생님"`, `"민은기"`, `"Min's Math Lab"`, `"Min Eunki"` 등의 인물 호칭을 의도적으로 절대 사용하지 않으며, 오직 순수한 수학 개념·정의·증명 논리만 전달합니다.
+   - 렌더링 전후 `python -X utf8 mathteacher.py audit-videos` 및 `python -X utf8 video_creator.py audit`를 통해 전수 검증합니다.
