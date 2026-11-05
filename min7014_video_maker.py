@@ -991,8 +991,20 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?"
         }
 
+    # 15-B. 복소수와 허수 단위 i / 켤레복소수 (Complex Numbers & Imaginary Unit)
+    if any(k in blob for k in ("복소수", "허수", "켤레", "Complex", "complex", "Imaginary")):
+        return {
+            "category_type": "number",
+            "hypothesis_ko": f"제곱하여 -1이 되는 새로운 수인 허수 단위 i(i의 제곱 = -1)와 실수 a, b로 이루어진 복소수 a+bi의 '{ko_t}' 출발 조건",
+            "conclusion_ko": f"복소수의 실수부분과 허수부분을 분리하고 i의 제곱 = -1 정의를 적용하면 '{ko_t}' 성질과 연산 법칙이 항상 성립한다는 결론",
+            "auxiliary_line_ko": "복소수 z = a + bi를 실수부분(a)과 허수부분(b)으로 명확히 나누고, 허수부의 부호만 바꾼 켤레복소수(a - bi)와의 합·곱이 항상 실수가 되는 대칭 구조를 활용하는 대수적 발상",
+            "proof_logic_ko": "문자와 식의 사칙연산처럼 분배법칙으로 전개한 뒤 i의 제곱 자리에 -1을 대입하여 실수부분끼리, 허수부분끼리 동류항 정리하는 원리",
+            "misconception_ko": "복소수 a+bi에서 허수부분은 bi가 아니라 i 앞에 곱해진 실수 b입니다! 또한 허수는 수직선 위에 나타낼 수 없으므로 대소 관계(크고 작음)를 비교할 수 없다는 점을 꼭 기억하세요.",
+            "what_if_not_ko": "만약 복소수 a+bi를 가로축이 실수축, 세로축이 허수축인 좌표평면(복소평면) 위의 점 (a, b)로 나타낸다면, i를 곱하는 연산은 기하학적으로 몇 도 회전 변환이 될까요?"
+        }
+
     # 16. 일반 기하·대수·미적분 주제
-    is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "함수", "수열", "로그", "공식", "덧셈", "뺄셈", "곱셈", "나눗셈"))
+    is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "함수", "수열", "로그", "공식", "덧셈", "뺄셈", "곱셈", "나눗셈", "복소수", "허수", "켤레", "실수", "유리수", "무리수", "연립", "완전제곱", "근의"))
     return {
         "category_type": "algebra" if is_alg else "geometry",
         "hypothesis_ko": f"'{ko_t}'에서 주어진 기본 정의와 출발 조건(가정)",
@@ -3861,9 +3873,13 @@ def verify_video_content_integrity(slug_key: str) -> dict:
             return {"ok": False, "reason": f"raw_latex_or_robotic_meta:{raw_tex}"}
 
     if cat in ("algebra", "number"):
-        for forbidden in ("원 위의 점을 아무리", "한 호에 대한 원주각", "복소수", "다항식 나눗셈", "비스듬한 책받침", "보조선과 기하 관계를"):
+        for forbidden in ("원 위의 점을 아무리", "한 호에 대한 원주각", "비스듬한 책받침", "보조선과 기하 관계를"):
             if forbidden in all_narr_ko:
                 return {"ok": False, "reason": f"domain_mismatch:{forbidden}"}
+        if "복소수" in all_narr_ko and not any(k in title_str for k in ("복소수", "허수", "켤레", "Complex", "complex")):
+            return {"ok": False, "reason": "domain_mismatch:복소수"}
+        if "다항식 나눗셈" in all_narr_ko and not any(k in title_str for k in ("다항식", "나눗셈", "나머지", "인수", "Polynomial")):
+            return {"ok": False, "reason": "domain_mismatch:다항식 나눗셈"}
 
     # 역수 나눗셈(a ÷ b = a × 1/b)에 분모의 유리화 오분류 방지
     if ("div" in title_str or "÷" in title_str or "frac{1}{b}" in title_str) and "유리화" not in title_str and "sqrt" not in title_str:

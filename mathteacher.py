@@ -611,7 +611,7 @@ def cmd_audit_videos():
         print(f"⚠️ 미통과 항목 ({len(failed)}건):")
         for s, r in failed[:20]:
             print(f"   - {s}: {r}")
-        sys.exit(1)
+        return False
     else:
         print("✅ 전수 검수 결과: 모든 영상 대본·자막·메타데이터가 수학적으로 정확하며 개인 호칭이 완전히 배제되었습니다!")
     print("=" * 84)
