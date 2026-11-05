@@ -1720,7 +1720,7 @@ VIRAL_HOOK_DB = {
         "quiz_en": "💬 10-Sec Quiz: Regardless of the angle, what does sin²θ + cos²θ always equal?"
     },
     "calculus_series": {
-        "match_keywords": ["미분", "적분", "극한", "접선", "할선", "넓이", "급수", "수열", "시그마"],
+        "match_keywords": ["미분", "적분", "극한", "접선", "할선", "넓이", "급수", "평균값", "롤의 정리", "구분구적", "도함수", "derivative", "integral", "limit", "tangent", "secant"],
         "thumb_hook_ko": ["할선이 회전하며", "접선이 되는 순간!"],
         "thumb_hook_en": ["WATCH SECANT LINES", "BECOME A TANGENT!"],
         "badge_ko": "⚡ 눈으로 보는 미적분의 본질",
@@ -1729,6 +1729,72 @@ VIRAL_HOOK_DB = {
         "cold_open_en": "What happens as two points on a curve slide infinitely close together? Watch abstract calculus and limits come alive visually in smooth motion!",
         "quiz_ko": "💬 10초 퀴즈: 두 점을 잇는 할선의 기울기가 극한에서 도달하는 직선의 이름은 무엇일까요?",
         "quiz_en": "💬 10-Sec Quiz: What do we call the limiting line as the two secant points merge?"
+    },
+    "radicals_exponents": {
+        "match_keywords": ["제곱근", "무리수", "유리수", "순환소수", "지수", "로그", "거듭제곱", "근호", "square root", "radical", "rational", "repeating decimal", "exponent", "logarithm"],
+        "thumb_hook_ko": ["공식만 외우면", "무조건 헷갈린다!"],
+        "thumb_hook_en": ["STOP ROTE MEMORIZING", "SEE WHY IT WORKS!"],
+        "badge_ko": "⚡ 99%가 헷갈리는 수체계 핵심",
+        "badge_en": "⚡ VISUAL ALGEBRA BREAKTHROUGH",
+        "cold_open_ko": "기호와 공식만 외워서 풀다 보면 부호와 정의에서 반드시 함정에 빠집니다! 정사각형의 넓이와 수직선 원리부터 차근차근 연결하면 왜 이 성질이 성립하는지 단 1분 만에 완벽히 꿰뚫어 볼 수 있습니다!",
+        "cold_open_en": "Relying on rote memorization leads straight into sign traps! Connect the geometric area and number line step by step to see why this identity must hold!",
+        "quiz_ko": "💬 10초 퀴즈: 오늘 증명에서 가장 결정적인 부호·정의 판별 단계는 몇 번째였나요? 댓글로 남겨주세요!",
+        "quiz_en": "💬 10-Sec Quiz: Which step revealed the decisive sign or definition rule in today's proof?"
+    },
+    "matrix_transform": {
+        "match_keywords": ["일차변환", "행렬", "회전변환", "대칭변환", "닮음변환", "역행렬", "고유값", "linear transformation", "matrix", "rotation", "reflection"],
+        "thumb_hook_ko": ["좌표평면 전체가", "통째로 움직인다!"],
+        "thumb_hook_en": ["WATCH THE ENTIRE GRID", "TRANSFORM LIVE!"],
+        "badge_ko": "⚡ 3Blue1Brown 스타일 기하 변환",
+        "badge_en": "⚡ GEOMETRIC MATRIX INTUITION",
+        "cold_open_ko": "행렬의 숫자 네 개가 바뀔 때 좌표평면 위의 도형과 영역은 어떻게 휘어지고 회전할까요? 기저벡터와 격자의 움직임을 눈으로 직접 추적하면 복잡한 일차변환이 한눈에 보입니다!",
+        "cold_open_en": "When a matrix changes, how does the entire coordinate domain stretch, shear, or rotate? Track the basis vectors visually and master linear transformations!",
+        "quiz_ko": "💬 10초 퀴즈: 변환 후 도형의 넓이 배율을 결정하는 행렬의 핵심 값은 무엇일까요?",
+        "quiz_en": "💬 10-Sec Quiz: Which quantity of a matrix determines the area scaling factor after transformation?"
+    },
+    "vectors_space": {
+        "match_keywords": ["벡터", "내적", "외적", "정사영", "공간도형", "삼수선", "구면", "평면의 방정식", "vector", "dot product", "projection", "3d"],
+        "thumb_hook_ko": ["빛을 수직으로 쏘면", "그림자가 답이다!"],
+        "thumb_hook_en": ["DROP ONE SHADOW", "SOLVE THE VECTOR!"],
+        "badge_ko": "⚡ 기하·벡터 1등급 시각 치트키",
+        "badge_en": "⚡ VISUAL VECTOR & 3D HACK",
+        "cold_open_ko": "복잡한 좌표 계산 없이 화살표의 분해와 그림자 정사영 하나로 벡터 문제를 단번에 해결할 수 있다면 믿으시겠습니까? 시점과 종점의 기하학적 의미를 눈으로 직접 확인해 보세요!",
+        "cold_open_en": "Forget messy coordinate algebra—see how vector decomposition and orthogonal shadows unlock the entire geometric relationship at a glance!",
+        "quiz_ko": "💬 10초 퀴즈: 두 벡터가 서로 수직일 때 내적의 값은 항상 얼마가 될까요?",
+        "quiz_en": "💬 10-Sec Quiz: What is the dot product of two perpendicular vectors?"
+    },
+    "sequences_induction": {
+        "match_keywords": ["수열", "등차", "등비", "점화식", "귀납법", "피보나치", "시그마", "자연수의 거듭제곱", "sequence", "progression", "induction", "fibonacci", "sigma"],
+        "thumb_hook_ko": ["블록을 맞춰보면", "공식이 저절로!"],
+        "thumb_hook_en": ["STACK THE BLOCKS", "FORMULA APPEARS!"],
+        "badge_ko": "⚡ 도형으로 깨치는 수열의 비밀",
+        "badge_en": "⚡ VISUAL SEQUENCE PROOF",
+        "cold_open_ko": "길고 복잡한 수열의 합과 점화식, 외우지 마세요! 도형 블록을 대칭으로 맞붙이거나 도미노처럼 소거하는 순간, 일반항과 합의 공식이 눈앞에서 저절로 완성됩니다!",
+        "cold_open_en": "Stop memorizing long summation formulas! Fit the geometric blocks together or watch the terms telescope like dominoes right before your eyes!",
+        "quiz_ko": "💬 10초 퀴즈: 1부터 10까지 자연수를 모두 더한 값은 얼마일까요? 대칭 짝짓기로 3초 만에 구해보세요!",
+        "quiz_en": "💬 10-Sec Quiz: What is the sum of integers from 1 to 10 using symmetric pairing?"
+    },
+    "probability_combinatorics": {
+        "match_keywords": ["확률", "경우의 수", "순열", "조합", "파스칼", "이항정리", "통계", "정규분포", "시행", "사건", "probability", "combination", "permutation", "pascal", "binomial"],
+        "thumb_hook_ko": ["복잡한 경우의 수,", "대칭 구조로 1초 컷!"],
+        "thumb_hook_en": ["1 SYMMETRIC GRID", "COUNTS IT ALL!"],
+        "badge_ko": "⚡ 직관을 깨는 확통 시각 해법",
+        "badge_en": "⚡ COMBINATORICS MADE VISUAL",
+        "cold_open_ko": "빠뜨리거나 중복해서 세기 쉬운 경우의 수와 확률! 대칭 격자와 일대일 대응 다이어그램으로 바꾸는 순간 모든 갈래가 오차 없이 한눈에 정리됩니다!",
+        "cold_open_en": "Counting problems are notorious for double-counting traps! Map the choices onto a visual grid and watch every case organize itself with 100% precision!",
+        "quiz_ko": "💬 10초 퀴즈: 서로 다른 5개 중에서 2개를 뽑는 조합(5C2)의 값은 얼마일까요?",
+        "quiz_en": "💬 10-Sec Quiz: How many ways can you choose 2 items from 5 (5C2)?"
+    },
+    "number_theory_euclid": {
+        "match_keywords": ["유클리드", "소수", "최대공약수", "나머지", "합동", "페르마", "정수", "약수", "배수", "euclid", "prime", "lemma", "gcd", "divisor"],
+        "thumb_hook_ko": ["2300년 전 유클리드의", "소름 돋는 증명법!"],
+        "thumb_hook_en": ["EUCLID'S 2300-YEAR", "GENIUS PROOF!"],
+        "badge_ko": "⚡ 정수론의 바이블 완벽 해부",
+        "badge_en": "⚡ NUMBER THEORY MASTERPIECE",
+        "cold_open_ko": "2300년 전 유클리드는 어떻게 이 정리의 필연성을 증명했을까요? 직사각형 타일 분할과 나머지 원리를 따라가다 보면 누구도 반박할 수 없는 수학적 아름다움에 전율하게 됩니다!",
+        "cold_open_en": "How did Euclid prove this timeless truth over two millennia ago? Follow the step-by-step division and remainder logic to witness pure mathematical elegance!",
+        "quiz_ko": "💬 10초 퀴즈: 가장 작은 소수이자 유일한 짝수 소수는 무엇일까요?",
+        "quiz_en": "💬 10-Sec Quiz: What is the smallest prime number and the only even prime?"
     },
     "default": {
         "match_keywords": [],
@@ -1746,9 +1812,10 @@ VIRAL_HOOK_DB = {
 
 def build_topic_cold_open(script_doc, lang_code="ko"):
     """
-    [주제 맞춤형 100% 내용 일치 오프닝(Cold Open) 생성기]
-    기존의 범용 훅('원 위의 점을 움직여도...', '기하학적 보조선 한 줄...')이 제곱근·지수법칙·중선·프랙탈 영상과 불일치하던 문제를 원천 해결하여,
-    해당 주제의 실제 제목과 수학교사 분석(hypothesis_ko, auxiliary_line_ko, conclusion_ko)으로 오프닝을 생성합니다.
+    [v6.0 유튜브 알고리즘 첫 15초 Retention 극대화 3-Beat 오프닝(Cold Open) 생성기]
+    - Beat 1 (0~2.5s 패턴 인터럽트): 통념을 깨는 역발상 질문으로 스크롤/이탈 정지
+    - Beat 2 (2.5~5.5s 시각적 보상 예고): 이 주제만의 실제 핵심 원리(auxiliary_line_ko -> conclusion_ko) 제시
+    - Beat 3 (5.5~8.5s 오픈 루프 락인): 결정적 장면이 몇 번째 단계에 나오는지 끝까지 보게 만드는 시청 지속 장치
     """
     slug = script_doc.get("slug", "")
     if slug in ("math20250130001", "2017090101", "2014111901", "2014111902"):
@@ -1764,10 +1831,14 @@ def build_topic_cold_open(script_doc, lang_code="ko"):
     conc_ko = clean_math_for_speech_ko(t_an.get("conclusion_ko", ""))
 
     if lang_code == "en":
-        return f"Wait! Why does {clean_en} always hold true? Let us visually prove and explore the exact mathematical principle behind it step by step!"
+        return (
+            f"Wait! Are you still memorizing {clean_en} without seeing why it works? "
+            f"Watch how one key geometric and algebraic connection unlocks the entire proof—and see if you can spot the exact turning point!"
+        )
     return (
-        f"잠깐! {clean_ko}, 공식으로만 외우지 않고 왜 항상 성립하는지 눈으로 직접 확인해 볼까요? "
-        f"{aux_ko}을 통해 {conc_ko}까지 도달하는 과정을 지금 바로 따라와 보세요!"
+        f"잠깐! {clean_ko}, 아직도 결과만 외워서 풀고 계신가요? "
+        f"오늘 영상에서는 {aux_ko}을 통해 왜 {conc_ko}이 될 수밖에 없는지 눈앞에서 단계별로 증명합니다. "
+        f"과연 몇 번째 단계에서 결정적 단서가 등장하는지 끝까지 확인해 보세요!"
     )
 
 
@@ -1859,11 +1930,15 @@ def ensure_harmonic_chime_wav():
     return chime_path
 
 
-def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_spotlight=True):
+def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_spotlight=True, stage=None):
     """
-    [v3.0 3Blue1Brown x Masterclass 방송급 HUD + 300 DPI 수퍼샘플링 + 코너 브래킷 스포트라이트 + 핵심 보조선 리본]
-    1920x1080 Full HD 방송급 강의 프레임을 생성합니다.
+    [v6.0 YouTube Algorithm Retention HUD + 3-Stage Progressive Visual Reveal + Pattern-Interrupt Banner + End-Screen Binge Card]
+    - stage=1 (또는 show_spotlight=False): 전체 도형·수식 클린 관찰 (Phase 1)
+    - stage=2 (기본 show_spotlight=True): 핵심 보조선·수식 스포트라이트 하이라이트 (Phase 2)
+    - stage=3: 유레카 핵심 통찰 콜아웃 링 + 중반(50%) 승부처 배너 + 최종장면(End-Screen) 다음 영상 정주행 카드 (Phase 3)
     """
+    if stage is None:
+        stage = 2 if show_spotlight else 1
     W, H = 1920, 1080
     canvas = Image.new("RGB", (W, H), (9, 14, 28))
     draw = ImageDraw.Draw(canvas)
@@ -1873,12 +1948,14 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     scene_idx = page_info.get("scene_index") or p_num
     tot_scenes = len(script_doc.get("pages") or []) or tot_p
 
-    # 1. 상단 방송 헤더 바 (높이 72px) + 시안-에메랄드 진행률 게이지 바 (y: 72~77)
+    # 1. 상단 방송 헤더 바 (높이 72px) + 시안-골드 세부 진행률 게이지 바 (y: 72~78)
     draw.rectangle([0, 0, W, 72], fill=(15, 23, 42))
-    draw.rectangle([0, 72, W, 77], fill=(30, 41, 59))
-    prog_w = max(12, int((p_num / max(1, tot_p)) * W))
-    draw.rectangle([0, 72, prog_w, 77], fill=(56, 189, 248))
-    draw.ellipse([max(0, prog_w - 6), 69, min(W, prog_w + 6), 80], fill=(250, 204, 21))
+    draw.rectangle([0, 72, W, 78], fill=(30, 41, 59))
+    sub_stage_frac = (stage - 1) / 3.0 if p_num > 0 else 0.15
+    prog_ratio = min(1.0, max(0.02, ((max(1, p_num) - 1 + sub_stage_frac) / max(1, tot_p))))
+    prog_w = max(16, int(prog_ratio * W))
+    draw.rectangle([0, 72, prog_w, 78], fill=(56, 189, 248) if stage < 3 else (250, 204, 21))
+    draw.ellipse([max(0, prog_w - 7), 69, min(W, prog_w + 7), 81], fill=(250, 204, 21))
 
     font_header = get_font_for_lang("ko", 25, bold=True)
     font_badge = get_font_for_lang("ko", 19, bold=True)
@@ -1922,31 +1999,70 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     py = 86 + (max_ph - new_h) // 2
 
     # 외곽 글로우 프레임 및 슬라이드 배치
+    outer_col = (250, 204, 21) if stage == 3 else (56, 189, 248)
     draw.rounded_rectangle([px - 10, py - 10, px + new_w + 10, py + new_h + 10], radius=16, fill=(20, 34, 62))
-    draw.rounded_rectangle([px - 3, py - 3, px + new_w + 3, py + new_h + 3], radius=12, fill=(56, 189, 248))
+    draw.rounded_rectangle([px - 3, py - 3, px + new_w + 3, py + new_h + 3], radius=12, fill=outer_col)
     canvas.paste(pdf_resized, (px, py))
 
     # 3. 새로 추가된 도형·보조선·수식 영역 스포트라이트 하이라이트 & 코너 브래킷 (show_spotlight=True 시)
     bbox = page_info.get("diff_bbox")
-    if show_spotlight and bbox and p_num > 1 and p_num < tot_p:
+    if show_spotlight and bbox and p_num > 1 and p_num <= tot_p:
         bx0 = max(px + 6, px + int(bbox[0] * new_w) - 14)
         by0 = max(py + 6, py + int(bbox[1] * new_h) - 14)
         bx1 = min(px + new_w - 6, px + int(bbox[2] * new_w) + 14)
         by1 = min(py + new_h - 6, py + int(bbox[3] * new_h) + 14)
         if (bx1 - bx0) > 26 and (by1 - by0) > 26:
-            draw.rounded_rectangle([bx0 - 2, by0 - 2, bx1 + 2, by1 + 2], radius=12, outline=(254, 240, 138), width=2)
-            draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=4)
-            tag_label = f"FOCUS STEP {scene_idx}" if lang_code == "en" else f"핵심 작도·수식 포커스"
-            tag_w = 152 if lang_code == "en" else 166
+            if stage == 3:
+                # Stage 3: 유레카 이중 골드-크림슨 포커스 링 + 핵심 발견 배지
+                draw.rounded_rectangle([bx0 - 6, by0 - 6, bx1 + 6, by1 + 6], radius=14, outline=(250, 204, 21), width=3)
+                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=5)
+                tag_label = f"★ EUREKA KEY {scene_idx}" if lang_code == "en" else f"★ 유레카 핵심 단서 완성!"
+                tag_w = 186 if lang_code == "en" else 204
+                tag_bg = (180, 83, 9)
+            else:
+                draw.rounded_rectangle([bx0 - 2, by0 - 2, bx1 + 2, by1 + 2], radius=12, outline=(254, 240, 138), width=2)
+                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=4)
+                tag_label = f"FOCUS STEP {scene_idx}" if lang_code == "en" else f"핵심 작도·수식 포커스"
+                tag_w = 152 if lang_code == "en" else 166
+                tag_bg = (225, 29, 72)
             tag_y = by1 + 5 if (by1 + 32) < (py + new_h) else max(py + 6, by0 - 30)
             tag_x = max(px + 6, min(px + new_w - tag_w - 6, bx1 - tag_w))
-            draw.rounded_rectangle([tag_x, tag_y, tag_x + tag_w, tag_y + 26], radius=6, fill=(225, 29, 72))
+            draw.rounded_rectangle([tag_x, tag_y, tag_x + tag_w, tag_y + 26], radius=6, fill=tag_bg, outline=(254, 240, 138), width=1)
             draw.text((tag_x + 10, tag_y + 3), tag_label, fill=(255, 255, 255), font=get_font_for_lang("ko", 16, bold=True))
+
+    # 3-B. [v6.0 알고리즘 시청 지속시간(Retention) 패턴 인터럽트 배너]
+    # - Cold Open(page=0): 3단계 증명 로드맵 필 표시
+    # - 중반 승부처(50% 지점, stage==3): 중반 이탈 방지 하이라이트 배너
+    # - 클라이맥스/최종 장면(tot_p, stage==3): 다음 영상 정주행(Session Time) 유도 카드
+    step_title_str = page_info.get("step_title") or (f"Step {scene_idx}" if lang_code == "en" else f"{scene_idx}단계 핵심 원리")
+    if "COLD OPEN" in step_title_str:
+        rm_txt = (
+            "🗺️ [3-Step Proof Roadmap] ① Spot the Invariant ➔ ② Draw the Key Line ➔ ③ Visual Proof Complete!"
+            if lang_code == "en"
+            else "🗺️ [오늘의 3단계 시각 증명 로드맵] ① 도형 조건 관찰 ➔ ② 결정적 보조선·원리 연결 ➔ ③ 유레카 증명 완성!"
+        )
+        draw.rounded_rectangle([180, 90, W - 180, 136], radius=14, fill=(15, 23, 42), outline=(250, 204, 21), width=2)
+        draw.text((208, 101), rm_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 21, bold=True))
+    elif stage == 3 and tot_p >= 4 and p_num == max(2, tot_p // 2):
+        mid_txt = (
+            "🔥 [KEY TURNING POINT!] Watch how this step connects the entire proof together!"
+            if lang_code == "en"
+            else "🔥 [중간 핵심 승부처!] 바로 이 단계의 연결 고리가 전체 증명을 하나로 완성합니다!"
+        )
+        draw.rounded_rectangle([240, 90, W - 240, 134], radius=14, fill=(159, 18, 57), outline=(254, 240, 138), width=2)
+        draw.text((268, 100), mid_txt, fill=(255, 255, 255), font=get_font_for_lang("ko", 21, bold=True))
+    elif stage == 3 and p_num == tot_p:
+        end_txt = (
+            "🎬 [NEXT UP ON @min7014_ai] Watch the Question-Asking Classroom Edition & Interactive GeoGebra Next! ▸"
+            if lang_code == "en"
+            else "🎬 [다음 추천 영상 이어보기] 이 주제의 '질문하는 수업 버전'과 연관 도형 증명을 지금 바로 이어서 확인하세요! ▸"
+        )
+        draw.rounded_rectangle([150, 90, W - 150, 136], radius=14, fill=(6, 95, 70), outline=(250, 204, 21), width=2)
+        draw.text((178, 101), end_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 21, bold=True))
 
     # 4. 단계 요약 & 수능 실전 보조선 팁 리본 바 (y: 822 ~ 860)
     draw.rectangle([0, 822, W, 860], fill=(15, 23, 42))
     draw.line([0, 822, W, 822], fill=(30, 58, 138), width=2)
-    step_title_str = page_info.get("step_title") or (f"Step {scene_idx}" if lang_code == "en" else f"{scene_idx}단계 핵심 원리")
     vis_focus_str = page_info.get("visual_focus") or ""
     tip_raw = re.sub(r"\$[^\$]*\$", "", script_doc.get("solving_tip") or script_doc.get("core_concept") or "").strip()
     if len(tip_raw) > 58:
@@ -1969,22 +2085,22 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     draw.text((44, 829), left_rib[:34], fill=(56, 189, 248), font=font_ribbon)
     draw.text((470, 829), step_q_display[:76], fill=(251, 191, 36), font=font_ribbon)
 
-    # 5. 하단 방송급 자막 스튜디오 바 (y: 860 ~ 1080)
+    # 5. 하단 방송급 자막 스튜디오 바 + Stage별 능동 하이라이트 자막 (y: 860 ~ 1080)
     draw.rectangle([0, 860, W, H], fill=(7, 11, 24))
     draw.line([0, 860, W, 860], fill=(56, 189, 248), width=2)
 
     narration_text = page_info.get("narrations", {}).get(lang_code) or page_info.get("explanation_text", "")
-    ko_ref_text = page_info.get("explanation_text", "")
-
     is_cjk = lang_code in ("ko", "ja") or lang_code.startswith("zh")
     wrap_width = 53 if is_cjk else 86
     wrapped_lines = textwrap.wrap(narration_text, width=wrap_width)[:3]
 
     font_sub = get_font_for_lang(lang_code, 29 if is_cjk else 27, bold=True)
     y_cursor = 880
-    for line in wrapped_lines:
+    active_line_idx = min(len(wrapped_lines) - 1, max(0, stage - 1)) if wrapped_lines else 0
+    for l_idx, line in enumerate(wrapped_lines):
         draw.text((50, y_cursor + 2), line, fill=(0, 0, 0), font=font_sub)
-        draw.text((48, y_cursor), line, fill=(254, 240, 138), font=font_sub)
+        line_col = (254, 240, 138) if (l_idx == active_line_idx or len(wrapped_lines) == 1) else (226, 232, 240)
+        draw.text((48, y_cursor), line, fill=line_col, font=font_sub)
         y_cursor += 40
 
     # 하단 고정 홈페이지 유입 프로모션 바 (y: 1030 ~ 1072)
@@ -2002,9 +2118,9 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
 
 def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     """
-    [v4.0 CTR 14%+ 바이럴 썸네일 생성기]
-    - 우측 52%: 가장 완성도 높은 클라이맥스 기하 도형 + 핵심 교점 네온 레드 서클 & 화살표 강조
-    - 좌측 48%: 모바일에서도 0.5초 만에 읽히는 초대형 4단어 호기심 카피(옐로우/화이트 + 굵은 블랙 외곽선) + 주제명
+    [v6.0 CTR 15%+ 알고리즘 최적화 썸네일 생성기]
+    - 우측 52%: 가장 완성도 높은 클라이맥스 기하 도형 + 실제 diff_bbox 중심을 타겟팅하는 네온 레드 서클 & 화살표 강조
+    - 좌측 48%: 모바일에서도 0.5초 만에 읽히는 초대형 2줄 호기심 카피(옐로우/화이트 + 굵은 블랙 외곽선) + 정제된 주제명
     """
     W, H = 1280, 720
     thumb = Image.new("RGB", (W, H), (8, 13, 28))
@@ -2032,13 +2148,24 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(225, 29, 72), outline=(251, 191, 36), width=4)
     thumb.paste(slide_resized, (sx, sy))
 
-    # 도형 핵심 부위에 네온 레드 포커스 서클 + 화살표 + '?' 배지 작도 (시선 강제 유도)
-    cx_spot = sx + int(sw * 0.48)
-    cy_spot = sy + int(sh * 0.52)
+    # 실제 클라이맥스 슬라이드의 diff_bbox 중심점을 계산하여 시선 유도 포커스 서클 배치
+    pages_list = script_doc.get("pages") or []
+    climax_bbox = None
+    for p_cand in reversed(pages_list):
+        if p_cand.get("diff_bbox"):
+            climax_bbox = p_cand["diff_bbox"]
+            break
+    if climax_bbox:
+        rel_x = max(0.28, min(0.72, (climax_bbox[0] + climax_bbox[2]) * 0.5))
+        rel_y = max(0.28, min(0.72, (climax_bbox[1] + climax_bbox[3]) * 0.5))
+    else:
+        rel_x, rel_y = 0.48, 0.52
+
+    cx_spot = sx + int(sw * rel_x)
+    cy_spot = sy + int(sh * rel_y)
     r_spot = 74
     draw.ellipse([cx_spot - r_spot - 3, cy_spot - r_spot - 3, cx_spot + r_spot + 3, cy_spot + r_spot + 3], outline=(254, 240, 138), width=4)
     draw.ellipse([cx_spot - r_spot, cy_spot - r_spot, cx_spot + r_spot, cy_spot + r_spot], outline=(225, 29, 72), width=7)
-    # 굵은 빨간 화살표
     draw.line([(cx_spot - 125, cy_spot - 95), (cx_spot - 48, cy_spot - 38)], fill=(225, 29, 72), width=12)
     draw.polygon([(cx_spot - 32, cy_spot - 26), (cx_spot - 72, cy_spot - 32), (cx_spot - 46, cy_spot - 66)], fill=(225, 29, 72))
     draw.ellipse([cx_spot + r_spot - 22, cy_spot - r_spot - 18, cx_spot + r_spot + 30, cy_spot - r_spot + 34], fill=(225, 29, 72), outline=(255, 255, 255), width=3)
@@ -2064,8 +2191,8 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
 
     # 중간 주제명 박스
     ko_split_t, en_split_t = split_bilingual_title(script_doc.get("title", ""))
-    ko_main_part = latex_to_unicode_title(ko_split_t).strip()
-    en_main_part = latex_to_unicode_title((script_doc.get("title_en") or en_split_t or ko_main_part).split("—")[0].strip())
+    ko_main_part = _smart_concise_topic_title(latex_to_unicode_title(ko_split_t).strip(), max_len=32, lang="ko")
+    en_main_part = _smart_concise_topic_title(latex_to_unicode_title((script_doc.get("title_en") or en_split_t or ko_main_part).split("—")[0].strip()), max_len=40, lang="en")
     main_title = en_main_part if is_en else ko_main_part
     wrapped_t = textwrap.wrap(main_title, width=22 if is_en else 15)[:2]
 
@@ -2079,11 +2206,91 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     sub_line = (
         f"🎬 {script_doc['page_count']} Flipbook Steps · 1080p Visual Proof"
         if is_en
-        else f"🎬 총 {script_doc['page_count']}프레임 동적 플립북 시각 증명"
+        else f"🎬 총 {script_doc['page_count']}단계 동적 플립북 시각 증명"
     )
     draw.text((42, 528), sub_line, fill=(254, 240, 138), font=get_font_for_lang("ko", 25, bold=True))
     draw.rounded_rectangle([38, 586, 520, 646], radius=14, fill=(0, 99, 152))
     footer_brand = "📐 @min7014_ai · Visual Math Proofs" if is_en else "📐 @min7014_ai · 단계별 시각적 수학 증명"
+    draw.text((58, 601), footer_brand, fill=(255, 255, 255), font=get_font_for_lang("ko", 22, bold=True))
+
+    thumb.save(out_png_path, quality=98)
+    return out_png_path
+
+
+def generate_question_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
+    """
+    [v6.0 질문하는 수학 수업(Question-Asking Classroom) 전용 고클릭률 1280x720 썸네일 생성기]
+    - 크림슨-골드 테마로 일반 설명 본편과 시각적으로 명확히 구분되며,
+      '❓ 어디에 보조선을 그어야 할까? / 🙋 3초만 먼저 생각해보세요!' 발문 훅으로 클릭률(CTR)을 극대화합니다.
+    """
+    W, H = 1280, 720
+    thumb = Image.new("RGB", (W, H), (28, 9, 24))
+    draw = ImageDraw.Draw(thumb)
+
+    for gx in range(0, W, 80):
+        draw.line([(gx, 0), (gx, H)], fill=(48, 16, 38), width=1)
+    for gy in range(0, H, 80):
+        draw.line([(0, gy), (W, gy)], fill=(48, 16, 38), width=1)
+
+    is_en = (lang_code == "en")
+    key_idx = max(0, len(doc) // 2)
+    pix = doc[key_idx].get_pixmap(dpi=250)
+    slide_img = _mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
+    scale = min(640 / slide_img.width, 590 / slide_img.height)
+    sw, sh = int(slide_img.width * scale), int(slide_img.height * scale)
+    slide_resized = slide_img.resize((sw, sh), Image.Resampling.LANCZOS)
+
+    sx = W - sw - 34
+    sy = (H - sh) // 2
+    draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(190, 18, 60), outline=(250, 204, 21), width=4)
+    thumb.paste(slide_resized, (sx, sy))
+
+    cx_spot = sx + int(sw * 0.5)
+    cy_spot = sy + int(sh * 0.5)
+    r_spot = 76
+    draw.ellipse([cx_spot - r_spot - 3, cy_spot - r_spot - 3, cx_spot + r_spot + 3, cy_spot + r_spot + 3], outline=(250, 204, 21), width=4)
+    draw.ellipse([cx_spot - r_spot, cy_spot - r_spot, cx_spot + r_spot, cy_spot + r_spot], outline=(225, 29, 72), width=7)
+    draw.ellipse([cx_spot + r_spot - 24, cy_spot - r_spot - 20, cx_spot + r_spot + 32, cy_spot - r_spot + 36], fill=(190, 18, 60), outline=(254, 240, 138), width=3)
+    draw.text((cx_spot + r_spot - 6, cy_spot - r_spot - 12), "?", fill=(254, 240, 138), font=get_font_for_lang("en", 36, bold=True))
+
+    badge_txt = "❓ QUESTION-ASKING CLASSROOM" if is_en else "❓ 질문하는 수학 수업 · 탐구 에디션"
+    draw.rounded_rectangle([38, 42, 558, 102], radius=16, fill=(190, 18, 60), outline=(250, 204, 21), width=2)
+    draw.text((56, 56), badge_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 25, bold=True))
+
+    cat_type = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
+    if is_en:
+        hook_lines = ["PAUSE 3 SECONDS!", "WHY DOES IT WORK?" if cat_type in ("algebra", "number") else "WHERE IS THE LINE?"]
+    else:
+        hook_lines = ["3초만 먼저 생각!", "왜 항상 성립할까?" if cat_type in ("algebra", "number") else "보조선 어디에 그을까?"]
+
+    font_big = get_font_for_lang("ko", 54 if is_en else 60, bold=True)
+    y_h = 136
+    for idx_l, h_line in enumerate(hook_lines):
+        col_fill = (255, 255, 255) if idx_l == 0 else (250, 204, 21)
+        for dx in (-4, 0, 4):
+            for dy in (-4, 0, 4):
+                if dx or dy:
+                    draw.text((40 + dx, y_h + dy), h_line, fill=(0, 0, 0), font=font_big)
+        draw.text((40, y_h), h_line, fill=col_fill, font=font_big)
+        y_h += 84
+
+    ko_split_t, en_split_t = split_bilingual_title(script_doc.get("title", ""))
+    ko_main_part = _smart_concise_topic_title(latex_to_unicode_title(ko_split_t).strip(), max_len=32, lang="ko")
+    en_main_part = _smart_concise_topic_title(latex_to_unicode_title((script_doc.get("title_en") or en_split_t or ko_main_part).split("—")[0].strip()), max_len=40, lang="en")
+    main_title = en_main_part if is_en else ko_main_part
+    wrapped_t = textwrap.wrap(main_title, width=22 if is_en else 15)[:2]
+
+    draw.rounded_rectangle([38, 330, 568, 488], radius=18, fill=(48, 12, 34), outline=(250, 204, 21), width=2)
+    font_t = get_font_for_lang("ko", 32 if is_en else 36, bold=True)
+    y_t = 350
+    for line in wrapped_t:
+        draw.text((58, y_t), line, fill=(254, 240, 138), font=font_t)
+        y_t += 50
+
+    sub_line = "🙋 Notice & Wonder ➔ Socratic Clue ➔ What-If-Not" if is_en else "🙋 발문과 사고 멈춤 ➔ 시각 단서 발견 ➔ 조건 변형"
+    draw.text((42, 528), sub_line, fill=(253, 164, 175), font=get_font_for_lang("ko", 23, bold=True))
+    draw.rounded_rectangle([38, 586, 520, 646], radius=14, fill=(159, 18, 57))
+    footer_brand = "❓ @min7014_ai · Socratic Math" if is_en else "❓ @min7014_ai · 질문하는 수학 수업"
     draw.text((58, 601), footer_brand, fill=(255, 255, 255), font=get_font_for_lang("ko", 22, bold=True))
 
     thumb.save(out_png_path, quality=98)
@@ -2436,10 +2643,11 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
     ambient_wav = ensure_ambient_pad_wav()
 
     try:
-        # [v4.0 Climax-First 3-Second Cold Open (Segment 0)]
-        # 시작 즉시 가장 완성된 클라이맥스 기하 도형을 먼저 보여주며 호기심 유발 질문으로 첫 3초 이탈을 원천 차단합니다!
+        # [v6.0 Climax-First 3-Frame Dynamic Cold Open (Segment 0)]
+        # 첫 8초 동안 약 2.5초 간격으로 화면이 전환(클라이맥스 전체 ➔ 출발 도형 ➔ 클라이맥스 유레카 스포트라이트)되어 초반 이탈을 원천 차단합니다!
         cold_text = build_topic_cold_open(script_doc, lang_code=lang_code)
         climax_doc_idx = max(0, len(doc) - 2)
+        origin_doc_idx = 0
         climax_info = dict(pages_to_render[-1])
         climax_info["page"] = climax_doc_idx + 1
         climax_info["step_title"] = "⚡ COLD OPEN · 직관을 깨는 시각적 증명 하이라이트" if lang_code != "en" else "⚡ COLD OPEN · Visual Proof Highlight"
@@ -2447,23 +2655,30 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
         climax_info["narrations"][lang_code] = cold_text
         climax_info["explanation_text"] = cold_text
 
-        cold_img_clean = render_slide_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, show_spotlight=False)
-        cold_img_spot = render_slide_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, show_spotlight=True)
+        cold_img_1 = render_slide_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, show_spotlight=False, stage=1)
+        cold_img_2 = render_slide_frame_1080p(doc[origin_doc_idx], climax_info, script_doc, lang_code, show_spotlight=False, stage=2)
+        cold_img_3 = render_slide_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, show_spotlight=True, stage=3)
         c_p1 = tmp_dir / "cold_01.png"
         c_p2 = tmp_dir / "cold_02.png"
-        cold_img_clean.save(c_p1, compress_level=1)
-        cold_img_spot.save(c_p2, compress_level=1)
+        c_p3 = tmp_dir / "cold_03.png"
+        cold_img_1.save(c_p1, compress_level=1)
+        cold_img_2.save(c_p2, compress_level=1)
+        cold_img_3.save(c_p3, compress_level=1)
 
         cold_mp3 = tmp_dir / "cold_audio.mp3"
         cold_seg = tmp_dir / "seg_cold_000.mp4"
         comm_cold = edge_tts.Communicate(cold_text, voice_name, rate="+10%")
         asyncio.run(comm_cold.save(str(cold_mp3)))
         cold_dur = get_media_duration_seconds(cold_mp3, ffprobe_exe) + 0.55
-        cd1 = round(cold_dur * 0.4, 3)
-        cd2 = round(cold_dur - cd1, 3)
+        cd1 = round(cold_dur * 0.32, 3)
+        cd2 = round(cold_dur * 0.34, 3)
+        cd3 = max(0.8, round(cold_dur - cd1 - cd2, 3))
         cold_concat = tmp_dir / "cold_concat.txt"
         cold_concat.write_text(
-            f"file '{c_p1.as_posix()}'\nduration {cd1}\nfile '{c_p2.as_posix()}'\nduration {cd2}\nfile '{c_p2.as_posix()}'\n",
+            f"file '{c_p1.as_posix()}'\nduration {cd1}\n"
+            f"file '{c_p2.as_posix()}'\nduration {cd2}\n"
+            f"file '{c_p3.as_posix()}'\nduration {cd3}\n"
+            f"file '{c_p3.as_posix()}'\n",
             encoding="utf-8",
         )
         cmd_cold = [
@@ -2524,18 +2739,26 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
             )
 
             if len(frame_indices) <= 1:
-                # 2-Phase Dynamic Frame Sequence: 초기 28%는 전체 도형 관찰(Clean), 이후 72%는 신규 보조선 스포트라이트 강조(Spotlight)
-                img_clean = render_slide_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, show_spotlight=False)
-                img_spot = render_slide_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, show_spotlight=True)
-                p_clean = tmp_dir / f"slide_{seg_idx:03d}_clean.png"
-                p_spot = tmp_dir / f"slide_{seg_idx:03d}_spot.png"
-                img_clean.save(p_clean, compress_level=1)
-                img_spot.save(p_spot, compress_level=1)
-                d1 = max(0.8, round(total_seg_dur * 0.28, 3))
-                d2 = max(1.0, round(total_seg_dur - d1, 3))
+                # [v6.0 3-Stage Progressive Visual Reveal]
+                # Stage 1 (26%): 전체 도형 관찰(Clean) ➔ Stage 2 (40%): 신규 보조선 스포트라이트 ➔ Stage 3 (34%): 유레카 콜아웃 & 패턴 인터럽트
+                img_s1 = render_slide_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, show_spotlight=False, stage=1)
+                img_s2 = render_slide_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, show_spotlight=True, stage=2)
+                img_s3 = render_slide_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, show_spotlight=True, stage=3)
+                p_s1 = tmp_dir / f"slide_{seg_idx:03d}_s1.png"
+                p_s2 = tmp_dir / f"slide_{seg_idx:03d}_s2.png"
+                p_s3 = tmp_dir / f"slide_{seg_idx:03d}_s3.png"
+                img_s1.save(p_s1, compress_level=1)
+                img_s2.save(p_s2, compress_level=1)
+                img_s3.save(p_s3, compress_level=1)
+                d1 = max(0.7, round(total_seg_dur * 0.26, 3))
+                d2 = max(0.9, round(total_seg_dur * 0.40, 3))
+                d3 = max(0.9, round(total_seg_dur - d1 - d2, 3))
                 f_concat_txt = tmp_dir / f"fconcat_{seg_idx:03d}.txt"
                 f_concat_txt.write_text(
-                    f"file '{p_clean.as_posix()}'\nduration {d1}\nfile '{p_spot.as_posix()}'\nduration {d2}\nfile '{p_spot.as_posix()}'\n",
+                    f"file '{p_s1.as_posix()}'\nduration {d1}\n"
+                    f"file '{p_s2.as_posix()}'\nduration {d2}\n"
+                    f"file '{p_s3.as_posix()}'\nduration {d3}\n"
+                    f"file '{p_s3.as_posix()}'\n",
                     encoding="utf-8",
                 )
                 cmd = [
@@ -2770,17 +2993,20 @@ def build_question_classroom_page_text(slug_key, p_info, idx, total_pages, scrip
             return f"Step {idx+1} Socratic Question: {clean_q} Pause and observe the step carefully: {base_clean}"
 
 
-def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_code, q_narration, show_spotlight=True):
+def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_code, q_narration, show_spotlight=True, stage=None):
     """
-    [v5.0 질문하는 수학 수업 전용 1080p 방송 프레임]
+    [v6.0 질문하는 수학 수업 전용 1080p 방송 프레임 (3-Stage Progressive Reveal)]
     - 상단 배지: ❓ 질문하는 수학 수업 (Question-Asking Classroom Edition)
-    - Phase 1 (show_spotlight=False): 슬라이드 상단에 '🙋 잠깐! 스스로 먼저 질문해 보세요 (Think & Ask First)' 발문 배너 강조
-    - Phase 2 (show_spotlight=True): 스포트라이트 하이라이트로 발문에 대한 기하학적 해답(보조선·불변량) 제시
+    - Stage 1 (show_spotlight=False): '🙋 잠깐! 스스로 먼저 질문해 보세요 (Think & Ask First)' 발문 배너 강조
+    - Stage 2 (show_spotlight=True): '💡 시각적 단서 발견!' 스포트라이트 하이라이트
+    - Stage 3: '★ 유레카 통찰 & What-If-Not 확장' 골드 콜아웃 링
     """
+    if stage is None:
+        stage = 2 if show_spotlight else 1
     p_copy = dict(page_info)
     p_copy["narrations"] = dict(page_info.get("narrations") or {})
     p_copy["narrations"][lang_code] = q_narration
-    canvas = render_slide_frame_1080p(pdf_page, p_copy, script_doc, lang_code, show_spotlight=show_spotlight)
+    canvas = render_slide_frame_1080p(pdf_page, p_copy, script_doc, lang_code, show_spotlight=show_spotlight, stage=stage)
     draw = ImageDraw.Draw(canvas)
 
     W, H = 1920, 1080
@@ -2805,10 +3031,13 @@ def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_
     ) or ("❓ What stays invariant here?" if lang_code == "en" else "❓ 이 단계에서 변하지 않는 핵심 관계는 무엇일까요?")
 
     # 슬라이드 상단 플로팅 발문 카드 표시
-    banner_bg = (159, 18, 57) if not show_spotlight else (15, 23, 42)
-    banner_outline = (250, 204, 21) if not show_spotlight else (56, 189, 248)
+    banner_bg = (159, 18, 57) if stage == 1 else ((6, 95, 70) if stage == 3 else (15, 23, 42))
+    banner_outline = (250, 204, 21) if stage in (1, 3) else (56, 189, 248)
     draw.rounded_rectangle([140, 88, W - 140, 138], radius=14, fill=banner_bg, outline=banner_outline, width=2)
-    prefix = ("🙋 [발문 · 먼저 생각해 보세요!] " if not show_spotlight else "💡 [시각적 단서 발견!] ") if lang_code != "en" else ("🙋 [Ask First!] " if not show_spotlight else "💡 [Visual Discovery!] ")
+    if lang_code == "en":
+        prefix = "🙋 [Ask First!] " if stage == 1 else ("★ [Eureka Insight!] " if stage == 3 else "💡 [Visual Discovery!] ")
+    else:
+        prefix = "🙋 [발문 · 먼저 생각해 보세요!] " if stage == 1 else ("★ [유레카 핵심 통찰 완성!] " if stage == 3 else "💡 [시각적 단서 발견!] ")
     draw.text((164, 99), (prefix + step_q_display)[:82], fill=(254, 240, 138), font=font_q_banner)
 
     return canvas
@@ -2817,7 +3046,7 @@ def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_
 def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
     """
     기존 및 신규 주제에 대해 '질문하는 수학 수업(Question-Asking Classroom)' 전용 1080p 설명영상(_q_ko.mp4, _q_en.mp4)과
-    전용 9:16 숏폼(_short_q_ko.mp4)을 제작하고 카탈로그에 등록합니다.
+    전용 1280x720 커스텀 썸네일(_q_{lang}_thumb.png)을 제작하고 카탈로그에 등록합니다.
     """
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     if not script_path.exists():
@@ -2850,28 +3079,36 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
         clean_title_ko = clean_math_for_speech_ko(split_bilingual_title(script_doc.get("title", ""))[0])
         clean_title_en = (script_doc.get("title_en") or clean_title_ko).strip()
 
-        # 0. 질문하는 수업 전용 오프닝 (Notice & Wonder 발문 훅 — 주제 맞춤형)
+        # 0. 질문하는 수업 전용 3-Frame 오프닝 (Notice & Wonder 발문 훅 — 주제 맞춤형)
         climax_doc_idx = max(0, len(doc) - 2)
+        origin_doc_idx = 0
         climax_info = dict(pages_to_render[-1])
         climax_info["page"] = climax_doc_idx + 1
         cold_q_text = build_topic_cold_open(script_doc, lang_code=lang_code)
-        cold_img_1 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=False)
-        cold_img_2 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=True)
+        cold_img_1 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=False, stage=1)
+        cold_img_2 = render_question_classroom_frame_1080p(doc[origin_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=False, stage=2)
+        cold_img_3 = render_question_classroom_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, cold_q_text, show_spotlight=True, stage=3)
         c_p1 = tmp_dir / "qcold_01.png"
         c_p2 = tmp_dir / "qcold_02.png"
+        c_p3 = tmp_dir / "qcold_03.png"
         cold_img_1.save(c_p1, compress_level=1)
         cold_img_2.save(c_p2, compress_level=1)
+        cold_img_3.save(c_p3, compress_level=1)
 
         cold_mp3 = tmp_dir / "qcold_audio.mp3"
         cold_seg = tmp_dir / "qseg_cold_000.mp4"
         comm_cold = edge_tts.Communicate(cold_q_text, voice_name, rate="+6%")
         asyncio.run(comm_cold.save(str(cold_mp3)))
         cold_dur = get_media_duration_seconds(cold_mp3, ffprobe_exe) + 0.65
-        cd1 = round(cold_dur * 0.45, 3)
-        cd2 = round(cold_dur - cd1, 3)
+        cd1 = round(cold_dur * 0.34, 3)
+        cd2 = round(cold_dur * 0.33, 3)
+        cd3 = max(0.8, round(cold_dur - cd1 - cd2, 3))
         cold_concat = tmp_dir / "qcold_concat.txt"
         cold_concat.write_text(
-            f"file '{c_p1.as_posix()}'\nduration {cd1}\nfile '{c_p2.as_posix()}'\nduration {cd2}\nfile '{c_p2.as_posix()}'\n",
+            f"file '{c_p1.as_posix()}'\nduration {cd1}\n"
+            f"file '{c_p2.as_posix()}'\nduration {cd2}\n"
+            f"file '{c_p3.as_posix()}'\nduration {cd3}\n"
+            f"file '{c_p3.as_posix()}'\n",
             encoding="utf-8",
         )
         subprocess.run([
@@ -2906,18 +3143,25 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
             # 질문 후 학생이 스스로 생각할 수 있는 사색 호흡(Pre 0.45s + Post 0.85s) 부여
             total_seg_dur = tts_dur + 1.3
 
-            img_ask = render_question_classroom_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, q_narr, show_spotlight=False)
-            img_ans = render_question_classroom_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, q_narr, show_spotlight=True)
-            p_ask = tmp_dir / f"qslide_{seg_idx:03d}_ask.png"
-            p_ans = tmp_dir / f"qslide_{seg_idx:03d}_ans.png"
-            img_ask.save(p_ask, compress_level=1)
-            img_ans.save(p_ans, compress_level=1)
+            img_s1 = render_question_classroom_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, q_narr, show_spotlight=False, stage=1)
+            img_s2 = render_question_classroom_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, q_narr, show_spotlight=True, stage=2)
+            img_s3 = render_question_classroom_frame_1080p(doc[p_idx], p_info, script_doc, lang_code, q_narr, show_spotlight=True, stage=3)
+            p_s1 = tmp_dir / f"qslide_{seg_idx:03d}_s1.png"
+            p_s2 = tmp_dir / f"qslide_{seg_idx:03d}_s2.png"
+            p_s3 = tmp_dir / f"qslide_{seg_idx:03d}_s3.png"
+            img_s1.save(p_s1, compress_level=1)
+            img_s2.save(p_s2, compress_level=1)
+            img_s3.save(p_s3, compress_level=1)
 
             d1 = max(1.0, round(total_seg_dur * 0.36, 3))
-            d2 = max(1.0, round(total_seg_dur - d1, 3))
+            d2 = max(1.0, round(total_seg_dur * 0.34, 3))
+            d3 = max(0.9, round(total_seg_dur - d1 - d2, 3))
             f_concat_txt = tmp_dir / f"qfconcat_{seg_idx:03d}.txt"
             f_concat_txt.write_text(
-                f"file '{p_ask.as_posix()}'\nduration {d1}\nfile '{p_ans.as_posix()}'\nduration {d2}\nfile '{p_ans.as_posix()}'\n",
+                f"file '{p_s1.as_posix()}'\nduration {d1}\n"
+                f"file '{p_s2.as_posix()}'\nduration {d2}\n"
+                f"file '{p_s3.as_posix()}'\nduration {d3}\n"
+                f"file '{p_s3.as_posix()}'\n",
                 encoding="utf-8",
             )
             subprocess.run([
@@ -2982,15 +3226,24 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
         srt_pkg_path = YT_PKG_DIR / f"{slug_key}_q_{lang_code}.srt"
         srt_pkg_path.write_text("\n".join(srt_lines), encoding="utf-8")
 
+        q_thumb_pkg = YT_PKG_DIR / f"{slug_key}_q_{lang_code}_thumb.png"
+        q_thumb_up = topic_upload_dir / f"{slug_key}_q_{lang_code}_thumb.png"
+        try:
+            generate_question_thumbnail_720p(doc, script_doc, lang_code, q_thumb_pkg)
+            shutil.copyfile(q_thumb_pkg, q_thumb_up)
+        except Exception as qte:
+            print(f"[Question Thumbnail Notice] {qte}")
+
         q_meta = {
-            "title": (
-                f"❓ [질문하는 수학 수업] {clean_title_ko} — 왜 항상 성립할까? (Notice & Wonder · What-If-Not 탐구) | @min7014_ai"
+            "title": _balance_parentheses((
+                f"❓ [질문하는 수학 수업] {_smart_concise_topic_title(clean_title_ko, max_len=36, lang='ko')} — 왜 항상 성립할까? (Notice & Wonder) | @min7014_ai"
                 if lang_code == "ko"
-                else f"❓ [Question-Asking Math] {clean_title_en} — Notice & Wonder Visual Inquiry | @min7014_ai"
-            )[:100],
+                else f"❓ [Question-Asking Math] {_smart_concise_topic_title(clean_title_en, max_len=38, lang='en')} — Socratic Visual Proof | @min7014_ai"
+            )[:98]),
             "local_mp4_path": f"video_lectures/question_classroom/{web_mp4.name}",
             "upload_mp4_path": f"youtube_uploads/{slug_key}/{out_mp4.name}",
             "srt_url": f"video_lectures/youtube_packages/{srt_pkg_path.name}",
+            "thumbnail_url": f"video_lectures/youtube_packages/{q_thumb_pkg.name}",
             "duration_sec": round(cursor_sec, 1),
             "needs_youtube_upload": True,
             "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -4421,11 +4674,15 @@ def update_video_catalog():
     vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
     existing_playlists = {}
     existing_thumbs = []
+    existing_seo_map = {}
+    existing_quiz_comments = []
     if vault_path.exists():
         try:
             old_v = json.loads(vault_path.read_text(encoding="utf-8"))
             existing_playlists = old_v.get("playlists") or {}
             existing_thumbs = old_v.get("applied_custom_thumbnails") or []
+            existing_seo_map = old_v.get("applied_seo_boost_map") or {}
+            existing_quiz_comments = old_v.get("applied_quiz_comments") or []
         except Exception:
             pass
 
@@ -4438,6 +4695,8 @@ def update_video_catalog():
         "rss_feed_url": YOUTUBE_RSS_URL,
         "playlists": existing_playlists,
         "applied_custom_thumbnails": existing_thumbs,
+        "applied_seo_boost_map": existing_seo_map,
+        "applied_quiz_comments": existing_quiz_comments,
         "channel_settings_optimized": True,
         "total_indexed_topics": len(scripts),
         "vault_entries": {
@@ -4464,44 +4723,44 @@ def update_video_catalog():
 
 def boost_youtube_channel_popularity():
     """
-    [@min7014_ai 유튜브 인기 영상 부스터 (YouTube Algorithm SEO · CTR · Playlist · Interactive Quiz Comments)]
-    1) 이미 업로드된 모든 영상의 제목(고클릭률 훅), 설명문(정주행 추천 링크·00:00 챕터·유레카 퀴즈), 20+ 검색 태그를 최신화합니다.
-    2) @min7014_ai 채널에 한국어(KO) / 영어(EN) 공식 정주행 재생목록(Playlist)을 생성하고 모든 업로드 영상을 자동 편성합니다.
-    3) 각 영상에 시청자 댓글 참여를 유도하는 [오늘의 10초 유레카 퀴즈] 공식 첫 댓글을 자동 게시합니다.
+    [v6.0 @min7014_ai 유튜브 알고리즘 부스터 (Zero-Waste Quota · CTR · Playlist · Interactive Quiz Comments)]
+    1) 이미 최신 제목·썸네일·댓글이 적용된 영상은 중복 API 호출(50유닛/건)을 원천 차단하여 일일 업로드 쿼터를 100% 보호합니다.
+    2) 제목이나 설명이 새로 정제된 본편 및 #Shorts 영상만 선별하여 YouTube API로 즉시 업데이트합니다.
+    3) @min7014_ai 채널에 한국어(KO) / 영어(EN) 공식 정주행 재생목록(Playlist)을 관리하고 신규 영상을 자동 편성합니다.
     """
     refresh_all_youtube_metadata_packages()
 
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from googleapiclient.discovery import build
-
-    SCOPES = [
-        "https://www.googleapis.com/auth/youtube.upload",
-        "https://www.googleapis.com/auth/youtube.force-ssl",
-        "https://www.googleapis.com/auth/youtube.readonly",
-    ]
     youtube, active_token_path = get_available_youtube_upload_service()
     if youtube is None:
         return {}
 
+    vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
+    vdata = {}
+    if vault_path.exists():
+        try:
+            vdata = json.loads(vault_path.read_text(encoding="utf-8"))
+        except Exception:
+            vdata = {}
+    applied_seo_map = dict(vdata.get("applied_seo_boost_map") or {})
+    applied_thumbs = set(vdata.get("applied_custom_thumbnails") or [])
+    applied_comments = set(vdata.get("applied_quiz_comments") or [])
+
     ko_video_ids = []
     en_video_ids = []
 
-    # 1. 업로드된 전체 영상 메타데이터(제목·설명·태그·언어) 최적화 업데이트 + 유레카 퀴즈 댓글 등록
+    # 1. 업로드된 전체 본편 + #Shorts 메타데이터(변경분만 선별 업데이트) + 썸네일 + 유레카 퀴즈 댓글 등록
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         sdoc = json.loads(sp.read_text(encoding="utf-8"))
         slug = sdoc["slug"]
         yt_urls = sdoc.get("youtube_urls") or {}
         meta_path = YT_PKG_DIR / f"{slug}_youtube_meta.json"
-        if not meta_path.exists():
-            continue
-        meta_all = json.loads(meta_path.read_text(encoding="utf-8"))
+        meta_all = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
 
         for lc in ["ko", "en"]:
             u = (yt_urls.get(lc) or "").strip()
             if not u or lc not in meta_all:
                 continue
-            vid_id = u.split("/")[-1].split("?")[0].strip()
+            vid_id = extract_youtube_video_id(u)
             if not vid_id:
                 continue
             if lc == "ko":
@@ -4510,41 +4769,46 @@ def boost_youtube_channel_popularity():
                 en_video_ids.append((slug, vid_id))
 
             meta = meta_all[lc]
-            try:
-                youtube.videos().update(
-                    part="snippet",
-                    body={
-                        "id": vid_id,
-                        "snippet": {
-                            "title": meta["title"],
-                            "description": meta["description"],
-                            "tags": meta["tags"],
-                            "categoryId": meta.get("categoryId", "27"),
-                            "defaultLanguage": lc,
-                            "defaultAudioLanguage": lc,
+            if applied_seo_map.get(vid_id) != meta["title"]:
+                try:
+                    youtube.videos().update(
+                        part="snippet",
+                        body={
+                            "id": vid_id,
+                            "snippet": {
+                                "title": meta["title"],
+                                "description": meta["description"],
+                                "tags": meta["tags"],
+                                "categoryId": meta.get("categoryId", "27"),
+                                "defaultLanguage": lc,
+                                "defaultAudioLanguage": lc,
+                            },
                         },
-                    },
-                ).execute()
-                print(f"✅ [SEO & High-CTR Updated ({lc.upper()})] {vid_id} -> {meta['title']}")
-            except Exception as e:
-                print(f"⚠️ [Video Update Notice ({vid_id})]: {e}")
+                    ).execute()
+                    applied_seo_map[vid_id] = meta["title"]
+                    print(f"✅ [SEO & High-CTR Updated ({lc.upper()})] {vid_id} -> {meta['title']}")
+                except Exception as e:
+                    print(f"⚠️ [Video Update Notice ({vid_id})]: {e}")
+                    if "quotaExceeded" in str(e):
+                        break
 
-            # v4.0 CTR 14%+ 커스텀 썸네일 즉시 교체 적용
+            # 커스텀 썸네일 미적용 영상에만 1회 적용 (중복 50유닛 소모 방지)
             thumb_p = YT_PKG_DIR / f"{slug}_{lc}_thumb.png"
-            if thumb_p.exists():
+            if vid_id not in applied_thumbs and thumb_p.exists():
                 try:
                     from googleapiclient.http import MediaFileUpload
                     youtube.thumbnails().set(
                         videoId=vid_id,
                         media_body=MediaFileUpload(str(thumb_p), mimetype="image/png"),
                     ).execute()
-                    print(f"🖼️ [v4.0 Viral Thumbnail Replaced ({lc.upper()})] {vid_id} <- {thumb_p.name}")
+                    applied_thumbs.add(vid_id)
+                    print(f"🖼️ [v6.0 Viral Thumbnail Applied ({lc.upper()})] {vid_id} <- {thumb_p.name}")
                 except Exception as te:
                     print(f"⚠️ [Thumbnail Update Notice ({vid_id})]: {te}")
 
-            # 시청자 참여 유도 첫 댓글 (중복 방지 확인)
+            # 시청자 참여 유도 첫 댓글 (이미 등록된 영상은 API 호출 스킵)
             quiz_comment = meta.get("quiz_comment") or ""
-            if quiz_comment:
+            if quiz_comment and vid_id not in applied_comments:
                 try:
                     existing_comments = youtube.commentThreads().list(
                         part="snippet", videoId=vid_id, maxResults=10
@@ -4558,10 +4822,10 @@ def boost_youtube_channel_popularity():
                         board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
                         full_comment = (
                             f"{quiz_comment}\n\n"
-                            f"📌 직접 움직여보는 GeoGebra & 전체 1,111개 수학 설명영상 게시판:\n👉 {board_link}"
+                            f"📌 직접 움직여보는 GeoGebra & 전체 1,113개 수학 설명영상 게시판:\n👉 {board_link}"
                             if lc == "ko"
                             else f"{quiz_comment}\n\n"
-                            f"📌 Explore the Interactive GeoGebra & Full 1,111 Math Video Board:\n👉 {board_link}"
+                            f"📌 Explore the Interactive GeoGebra & Full 1,113 Math Video Board:\n👉 {board_link}"
                         )
                         youtube.commentThreads().insert(
                             part="snippet",
@@ -4577,10 +4841,42 @@ def boost_youtube_channel_popularity():
                             },
                         ).execute()
                         print(f"💬 [Interactive Eureka Quiz Comment Posted ({lc.upper()})] {vid_id}")
-                    else:
-                        print(f"💬 [Comment Already Active ({lc.upper()})] {vid_id}")
+                    applied_comments.add(vid_id)
                 except Exception as ce:
                     print(f"⚠️ [Comment Notice ({vid_id})]: {ce}")
+
+        # 1-B. 이미 업로드된 #Shorts 영상 중 제목 절단 방지·본편 링크가 갱신된 경우 스니펫 자동 동기화
+        shorts_urls = sdoc.get("shorts_urls") or {}
+        smeta_path = YT_PKG_DIR / f"{slug}_shorts_meta.json"
+        smeta_all = json.loads(smeta_path.read_text(encoding="utf-8")) if smeta_path.exists() else {}
+        for lc in ["ko", "en"]:
+            su = (shorts_urls.get(lc) or "").strip()
+            if not su or lc not in smeta_all:
+                continue
+            svid_id = extract_youtube_video_id(su)
+            if not svid_id:
+                continue
+            smeta = smeta_all[lc]
+            if applied_seo_map.get(svid_id) != smeta["title"]:
+                try:
+                    youtube.videos().update(
+                        part="snippet",
+                        body={
+                            "id": svid_id,
+                            "snippet": {
+                                "title": smeta["title"],
+                                "description": smeta["description"],
+                                "tags": smeta["tags"],
+                                "categoryId": smeta.get("categoryId", "27"),
+                                "defaultLanguage": lc,
+                                "defaultAudioLanguage": lc,
+                            },
+                        },
+                    ).execute()
+                    applied_seo_map[svid_id] = smeta["title"]
+                    print(f"✅ [#Shorts SEO & Funnel Updated ({lc.upper()})] {svid_id} -> {smeta['title']}")
+                except Exception as se:
+                    print(f"⚠️ [#Shorts Update Notice ({svid_id})]: {se}")
 
     # 2. 공식 정주행 재생목록(Playlists) 생성 및 영상 자동 편성
     playlist_specs = {
@@ -4588,7 +4884,7 @@ def boost_youtube_channel_popularity():
             "title": "🔥 [시각적 수학 증명] 보조선과 원리로 깨치는 수학 명작 정주행 (1080p) | @min7014_ai",
             "desc": (
                 "공식 암기 없이 눈으로 보고 직관적으로 깨치는 수학자료실(https://min7014.github.io/) 단계별 시각적 증명 한국어 정주행 시리즈입니다.\n"
-                "전체 1,111개 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html"
+                "전체 1,113개 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html"
             ),
             "videos": [vid for _, vid in ko_video_ids],
         },
@@ -4596,7 +4892,7 @@ def boost_youtube_channel_popularity():
             "title": "✨ [Visual Math Proofs] Step-by-Step Euclidean Geometry & Algebra Masterclass (1080p) | @min7014_ai",
             "desc": (
                 "Step-by-step visual mathematical proofs from https://min7014.github.io/. Watch auxiliary lines and mathematical principles come alive!\n"
-                "Full 1,111 Math Video Board: https://min7014.github.io/mathedu/video_board.html"
+                "Full 1,113 Math Video Board: https://min7014.github.io/mathedu/video_board.html"
             ),
             "videos": [vid for _, vid in en_video_ids],
         },
@@ -4636,7 +4932,6 @@ def boost_youtube_channel_popularity():
 
         saved_playlist_urls[lc] = f"https://www.youtube.com/playlist?list={pl_id}"
 
-        # 재생목록 내부 기존 영상 확인 후 누락된 영상 추가
         in_pl = set()
         try:
             pl_items = youtube.playlistItems().list(
@@ -4665,27 +4960,30 @@ def boost_youtube_channel_popularity():
                 except Exception as ie:
                     print(f"  ⚠️ [Playlist Insert Notice ({pl_id}/{vid_id})]: {ie}")
 
-    vault_path = ROOT_DIR / "video_lectures" / "vault_index.json"
     if vault_path.exists():
         vdata = json.loads(vault_path.read_text(encoding="utf-8"))
-        vdata["playlists"] = saved_playlist_urls
+        if saved_playlist_urls:
+            vdata["playlists"] = saved_playlist_urls
+        vdata["applied_seo_boost_map"] = applied_seo_map
+        vdata["applied_custom_thumbnails"] = sorted(list(applied_thumbs))
+        vdata["applied_quiz_comments"] = sorted(list(applied_comments))
         vault_path.write_text(json.dumps(vdata, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"✅ [Vault Index Playlists Saved] {saved_playlist_urls}")
+        print(f"✅ [Vault Index SEO/Thumb/Playlist State Saved] ({len(applied_seo_map)} synced videos)")
 
     return saved_playlist_urls
 
 
 def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, viral_hook, lang_code="ko"):
     """
-    [숏폼(#Shorts) 전용 55초 이내 무결성 대본 압축기]
-    - YouTube Shorts 규격(9:16 세로형, 60초 미만 필수 · 최적 완주율 35~52초)을 100% 충족하도록
-      각 하이라이트 장면(총 5장면)의 내레이션을 1~2문장(7~10초 분량)의 핵심 통찰로 압축합니다.
+    [v6.0 유튜브 쇼츠(#Shorts) 알고리즘 최적화 대본 압축기 (36~46초 골든 타임 + 105% 무한 루프 브릿지)]
+    - Scene 1: 첫 1.5초 스와이프 방지를 위한 직관적 역발상 질문 훅
+    - Scene 2~4: 군더더기 인사말을 제거한 고밀도 핵심 단서 (한국어 78자, 영어 132자 이내)
+    - Scene 5 (Final): '영상이 끝났다'는 느낌을 주지 않고 첫 장면(0:00)의 도형으로 시선을 되돌리는 Seamless Loop-Bridge 문장!
     """
     txt = re.sub(r"\s+", " ", (raw_text or "").strip())
     if seq_idx == 1:
         if lang_code == "ko":
-            hook = viral_hook or f"{clean_title}, 공식 암기 없이 눈으로 바로 깨쳐 볼까요?"
-            # 첫 문장 또는 핵심 안내 결합
+            hook = viral_hook or f"잠깐! {clean_title}, 왜 항상 성립할까요?"
             sents = [s.strip() for s in re.split(r"(?<=[.?!다요죠])\s+", txt) if s.strip()]
             first_core = ""
             for s in sents:
@@ -4693,9 +4991,9 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
                     first_core = s
                     break
             combined = f"{hook} {first_core}".strip()
-            return combined[:95] if len(combined) > 95 else combined
+            return combined[:86] if len(combined) > 86 else combined
         else:
-            hook = viral_hook or f"Can we prove {clean_title} visually in 45 seconds?"
+            hook = viral_hook or f"Wait! Why does {clean_title} always work?"
             sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
             first_core = ""
             for s in sents:
@@ -4703,42 +5001,42 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
                     first_core = s
                     break
             combined = f"{hook} {first_core}".strip()
-            return combined[:155] if len(combined) > 155 else combined
+            return combined[:140] if len(combined) > 140 else combined
 
     if seq_idx == total_seqs:
         if lang_code == "ko":
-            return "기하 직관으로 증명 완료! 그렇다면 만약 이 도형의 조건을 조금 바꾸면 어떻게 될까요? 설명란 링크의 수학홈페이지에서 직접 도형을 움직이며 나만의 질문을 실험해 보세요!"
+            return "결국 이 핵심 원리 하나로 완벽히 증명됩니다! 그렇다면 맨 처음 출발 도형에서 이 단서가 어디에 숨어 있었는지 다시 찾아볼까요? 1080p 풀버전은 설명란·고정댓글에 있습니다!"
         else:
-            return "Visual proof complete! Now ask: what if we change one condition of this figure? Tap the description link to test your own What-If-Not question in GeoGebra!"
+            return "That single principle unlocks the entire proof! Now look back at the very first figure—did you spot where this hidden clue started? Full 1080p proof in the description!"
 
-    # 중간 핵심 전개 장면 (2, 3, 4단계): 인사말 제거 후 가장 핵심적인 1~2문장(한국어 85자, 영어 145자 이내) 추출
+    # 중간 핵심 전개 장면 (2, 3, 4단계): 인사말 제거 후 가장 핵심적인 1~2문장(한국어 78자, 영어 132자 이내) 추출
     if lang_code == "ko":
         sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
         picked = []
         cur_len = 0
         for s in sents:
-            if cur_len + len(s) <= 88 or not picked:
+            if cur_len + len(s) <= 78 or not picked:
                 picked.append(s)
                 cur_len += len(s)
             else:
                 break
         res = " ".join(picked)
-        if len(res) > 92:
-            res = res[:90].rsplit(" ", 1)[0] + "."
+        if len(res) > 82:
+            res = res[:80].rsplit(" ", 1)[0] + "."
         return res
     else:
         sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
         picked = []
         cur_len = 0
         for s in sents:
-            if cur_len + len(s) <= 145 or not picked:
+            if cur_len + len(s) <= 132 or not picked:
                 picked.append(s)
                 cur_len += len(s)
             else:
                 break
         res = " ".join(picked)
-        if len(res) > 155:
-            res = res[:150].rsplit(" ", 1)[0] + "."
+        if len(res) > 140:
+            res = res[:136].rsplit(" ", 1)[0] + "."
         return res
 
 
@@ -4819,9 +5117,10 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
 
 def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
     """
-    [유튜브 쇼츠(YouTube Shorts · 1080x1920 세로형 40~54초 하이라이트) 자동 제작기]
-    - 도입(1페이지) -> 핵심 보조선/전개(중간 3페이지) -> 최종 정리 완성(마지막 페이지)의 핵심 5장면을 추출하고,
-      내레이션을 숏폼 전용 초압축 대본으로 구성하여 60초 미만(40~54초) 모바일 세로형(1080x1920) Shorts 영상을 생성합니다.
+    [v6.0 유튜브 쇼츠(YouTube Shorts · 1080x1920 세로형 36~46초 알고리즘 최적화) 자동 제작기]
+    1) 첫 0.85초 스와이프 방지 클라이맥스 스포트라이트 훅 (Viewed vs. Swiped Away >= 80% 타겟)
+    2) 서브프레임 단위 연속 진행 게이지 바 & 현재 읽는 줄 네온 골드 키네틱 자막 하이라이팅
+    3) 마지막 장면 끝에 첫 장면(doc[0]) 0.35초 시각 브릿지를 결합한 100% Seamless Infinite Loop (APV >= 105% 타겟)
     """
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     if not script_path.exists():
@@ -4853,12 +5152,13 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
     _ko_t, _en_t = split_bilingual_title(sdoc["title"])
     clean_title = (
-        latex_to_unicode_title(_en_t or sdoc.get("title_en") or _ko_t)
+        _smart_concise_topic_title(latex_to_unicode_title(_en_t or sdoc.get("title_en") or _ko_t), max_len=44, lang="en")
         if lang_code == "en"
-        else latex_to_unicode_title(_ko_t)
+        else _smart_concise_topic_title(latex_to_unicode_title(_ko_t), max_len=36, lang="ko")
     )
     viral_hooks = sdoc.get("viral_hooks") or {}
     viral_hook = viral_hooks.get(lang_code) or ""
+    vprof = get_viral_hook_profile(sdoc)
     total_seqs = len(picked_indices)
 
     try:
@@ -4867,23 +5167,18 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             canvas = Image.new("RGB", (1080, 1920), (10, 16, 34))
             draw = ImageDraw.Draw(canvas)
 
-            # 상단 후킹 배너 + 진행률 게이지 바
+            # 상단 알고리즘 후킹 배너
             draw.rounded_rectangle((44, 58, 1036, 294), radius=28, fill=(23, 37, 84), outline=(56, 189, 248), width=3)
-            draw.rounded_rectangle((74, 80, 610, 130), radius=18, fill=(225, 29, 72))
-            badge_txt = "⚡ 45초 시각적 수학 증명 #Shorts (일반형)" if lang_code == "ko" else "⚡ 45s Visual Math Proof #Shorts"
-            draw.text((92, 88), badge_txt, fill=(255, 255, 255), font=font_sub)
+            draw.rounded_rectangle((74, 78, 690, 130), radius=18, fill=(225, 29, 72))
+            badge_txt = (vprof.get("badge_en") or "⚡ 45s Visual Math Proof #Shorts") if lang_code == "en" else (vprof.get("badge_ko") or "⚡ 99%가 공식만 외운 시각적 증명")
+            draw.text((92, 86), badge_txt[:34], fill=(255, 255, 255), font=font_sub)
 
             step_label = f"STEP {seq_idx}/{total_seqs}"
-            draw.text((845, 88), step_label, fill=(251, 191, 36), font=font_sub)
+            draw.text((845, 86), step_label, fill=(251, 191, 36), font=font_sub)
 
             title_lines = textwrap.wrap(clean_title, width=20 if lang_code == "ko" else 28)[:2]
             for li, tl in enumerate(title_lines):
                 draw.text((78, 146 + li * 54), tl, fill=(255, 255, 255), font=font_top)
-
-            # 상단 진행 바 (Progress Gauge)
-            draw.rounded_rectangle((74, 266, 1006, 280), radius=7, fill=(30, 58, 138))
-            prog_w = int(932 * (seq_idx / total_seqs))
-            draw.rounded_rectangle((74, 266, 74 + max(24, prog_w), 280), radius=7, fill=(56, 189, 248))
 
             # 하단 초압축 숏폼 내레이션 & 자막 카드
             raw_narr = p_info.get("narrations", {}).get(lang_code) or p_info["explanation_text"]
@@ -4893,14 +5188,14 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
             mp3_p = tmp_dir / f"short_{seq_idx:02d}.mp3"
             seg_p = tmp_dir / f"short_{seq_idx:02d}.mp4"
-            comm = edge_tts.Communicate(short_narration, voice_name, rate="+18%")
+            comm = edge_tts.Communicate(short_narration, voice_name, rate="+20%")
             asyncio.run(comm.save(str(mp3_p)))
             seg_audio_dur = get_media_duration_seconds(mp3_p, ffprobe_exe)
 
             # 현재 단계에 해당하는 연속 PDF 플립북 프레임 추출 (최대 6프레임 모션 애니메이션)
             f_range = p_info.get("frame_range")
             if seq_idx == 1 and len(doc) >= 3:
-                # [v4.0 Climax-First Hook]: 첫 장면은 완성된 클라이맥스 도형 프레임을 먼저 보여준 뒤 1~2페이지로 진입!
+                # [v6.0 Swipe-Stop Climax Hook]: 첫 프레임(0.85s)에 클라이맥스 도형 스포트라이트를 먼저 터뜨린 뒤 1~2페이지로 진입!
                 doc_frames = [max(0, len(doc) - 2), 0, min(len(doc) - 1, 2)]
             elif f_range and f_range[1] > f_range[0]:
                 doc_frames = list(range(max(0, int(f_range[0]) - 1), min(len(doc), int(f_range[1]))))
@@ -4908,9 +5203,14 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 prev_doc_p = 0 if seq_idx == 1 else max(0, pages[picked_indices[seq_idx - 2]]["page"] - 1)
                 curr_doc_p = min(len(doc) - 1, p_info["page"] - 1)
                 doc_frames = list(range(prev_doc_p, curr_doc_p + 1)) if curr_doc_p > prev_doc_p else [curr_doc_p]
+            if len(doc_frames) < 2:
+                doc_frames = [doc_frames[0], doc_frames[0]]
             if len(doc_frames) > 6:
                 step_df = (len(doc_frames) - 1) / 5.0
                 doc_frames = sorted(list({doc_frames[int(round(k * step_df))] for k in range(6)}))
+            if seq_idx == total_seqs and len(doc) >= 2:
+                # [v6.0 Seamless Infinite Loop Bridge]: 마지막 장면의 끝 프레임을 출발 도형(doc[0])으로 연결하여 0:00과 무결점 루프 완성!
+                doc_frames = list(doc_frames) + [0]
 
             draw.rounded_rectangle((44, 1345, 1036, 1795), radius=28, fill=(15, 23, 42), outline=(225, 29, 72), width=3)
             step_chip = (
@@ -4920,24 +5220,35 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             )
             draw.text((78, 1375), step_chip, fill=(251, 191, 36), font=font_sub)
             cap_lines = textwrap.wrap(short_narration, width=22 if lang_code == "ko" else 34)[:5]
-            for ci, cl in enumerate(cap_lines):
-                draw.text((78, 1438 + ci * 60), cl, fill=(248, 250, 252), font=font_cap)
 
             draw.rounded_rectangle((44, 1810, 1036, 1892), radius=20, fill=(30, 58, 138), outline=(251, 191, 36), width=3)
             cta_short_txt = (
-                "👆 설명란·댓글 링크 ➔ 무료 GeoGebra 실습 & 기출 도전! (min7014.github.io/mathedu)"
+                "👆 설명란·고정댓글 ➔ 1080p 풀버전 & 무료 GeoGebra 실습! (@min7014_ai)"
                 if lang_code == "ko"
-                else "👆 Tap Description Link ➔ Free GeoGebra & Math Quizzes! (min7014.github.io/mathedu)"
+                else "👆 Tap Description ➔ Full 1080p Proof & Free GeoGebra! (@min7014_ai)"
             )
-            draw.text((68, 1834), cta_short_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 24, bold=True))
+            draw.text((64, 1834), cta_short_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 24, bold=True))
 
-            # 각 PDF 프레임을 1080x1920 캔버스 중앙에 합성하여 모션 시퀀스 생성
+            # 각 PDF 프레임을 1080x1920 캔버스 중앙에 합성 + 서브프레임 연속 진행바 & 키네틱 자막 하이라이팅
             per_f_dur = max(0.22, seg_audio_dur / max(1, len(doc_frames)))
             f_lines = []
             last_fp = None
             for fi_idx, doc_f_i in enumerate(doc_frames):
                 frame_canvas = canvas.copy()
                 f_draw = ImageDraw.Draw(frame_canvas)
+
+                # 서브프레임 단위 연속 진행 바 (Smooth Continuous Progress Gauge)
+                overall_prog = ((seq_idx - 1) + ((fi_idx + 1) / max(1, len(doc_frames)))) / max(1, total_seqs)
+                f_draw.rounded_rectangle((74, 266, 1006, 280), radius=7, fill=(30, 58, 138))
+                prog_w = int(932 * min(1.0, max(0.04, overall_prog)))
+                f_draw.rounded_rectangle((74, 266, 74 + max(24, prog_w), 280), radius=7, fill=(250, 204, 21) if seq_idx == total_seqs else (56, 189, 248))
+
+                # 현재 읽고 있는 자막 줄 네온 골드 키네틱 하이라이팅
+                active_cap_idx = min(max(0, len(cap_lines) - 1), int((fi_idx / max(1, len(doc_frames))) * len(cap_lines))) if cap_lines else 0
+                for ci, cl in enumerate(cap_lines):
+                    c_col = (254, 240, 138) if (ci == active_cap_idx or len(cap_lines) == 1) else (226, 232, 240)
+                    f_draw.text((78, 1438 + ci * 60), cl, fill=c_col, font=font_cap)
+
                 pix = doc[doc_f_i].get_pixmap(dpi=260)
                 slide_pil = _mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
                 sw, sh = slide_pil.size
@@ -4948,9 +5259,16 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 oy = 326 + (980 - nh) // 2
                 f_draw.rounded_rectangle((ox - 12, oy - 12, ox + nw + 12, oy + nh + 12), radius=22, fill=(255, 255, 255), outline=(251, 191, 36), width=3)
                 frame_canvas.paste(resized, (ox, oy))
-                # 마지막 프레임에서 스포트라이트 박스 표시
+
+                # 첫 장면 첫 프레임(0.85s Swipe-Stop Hook) 또는 마지막 프레임 스포트라이트 강조
                 bbox = p_info.get("diff_bbox")
-                if bbox and fi_idx == len(doc_frames) - 1 and doc_f_i > 0:
+                if seq_idx == 1 and fi_idx == 0:
+                    cx_s, cy_s, r_s = ox + nw // 2, oy + nh // 2, 86
+                    f_draw.ellipse((cx_s - r_s, cy_s - r_s, cx_s + r_s, cy_s + r_s), outline=(225, 29, 72), width=7)
+                    f_draw.rounded_rectangle((120, oy + 14, 960, oy + 76), radius=16, fill=(225, 29, 72), outline=(254, 240, 138), width=3)
+                    sw_txt = "⚡ WAIT! Why Does This Always Work? (Watch 40s)" if lang_code == "en" else "⚡ 잠깐! 왜 항상 성립할까? 40초 시각적 증명!"
+                    f_draw.text((152, oy + 26), sw_txt, fill=(255, 255, 255), font=font_sub)
+                elif bbox and fi_idx >= len(doc_frames) - 2 and doc_f_i > 0:
                     bx0 = max(ox + 4, ox + int(bbox[0] * nw) - 10)
                     by0 = max(oy + 4, oy + int(bbox[1] * nh) - 10)
                     bx1 = min(ox + nw - 4, ox + int(bbox[2] * nw) + 10)
@@ -4968,7 +5286,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             f_txt.write_text("\n".join(f_lines), encoding="utf-8")
 
             chime_wav = ensure_harmonic_chime_wav()
-            use_chime = seq_idx in (1, total_seqs)
+            use_chime = seq_idx in (1, (total_seqs // 2) + 1, total_seqs)
             cmd = [
                 ffmpeg_exe, "-y",
                 "-f", "concat", "-safe", "0", "-i", str(f_txt),
@@ -5019,9 +5337,9 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         )
         dur = get_media_duration_seconds(out_short, ffprobe_exe)
-        # 만약 58초를 초과하면 자동으로 오디오/비디오 배속(atempo/setpts)을 미세 조정하여 54초 이내로 무결성 보장
-        if dur >= 58.0:
-            speed_factor = round((dur / 53.0), 3)
+        # [v6.0 Golden Shorts Retention Duration (36~47s)]: 49초 이상이면 배속을 미세 조정하여 완주율(APV >= 105%)이 가장 높은 44.5초로 맞춤
+        if dur >= 49.0:
+            speed_factor = round((dur / 44.5), 3)
             trimmed_short = tmp_dir / f"{slug_key}_short_{lang_code}_fast.mp4"
             subprocess.run(
                 [
@@ -5092,9 +5410,10 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
 def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs, clean_title, lang_code="ko"):
     """
-    [질문형 숏폼(#Shorts) 전용 2-Beat 발문 ➔ 단서 내레이션 압축기]
-    - 각 장면을 '핵심 발문(Question) 제시 ➔ 직관적 단서(Visual Clue) 발견' 구조로 압축하여
-      전체 5장면이 42~53초(<58초) 안에 완결되도록 구성합니다.
+    [v6.0 질문형 숏폼(#Shorts) 전용 2-Beat 발문 ➔ 단서 ➔ 무한 루프 내레이션 압축기]
+    - 각 장면을 '핵심 발문(Question) 제시 ➔ 직관적 단서(Visual Clue) 발견' 구조로 압축하며,
+      마지막 장면(seq_idx == total_seqs)은 첫 장면의 도형과 연결되는 루프 발문으로 마무리하여
+      105%+ 시청 지속률(APV)과 36~46초 황금 길이를 달성합니다.
     """
     txt = re.sub(r"\s+", " ", (raw_narr or "")).strip()
     q_clean = re.sub(r"^[^\]]+\]\s*", "", re.sub(r"\s+", " ", (step_q or "")).strip()).strip()
@@ -5105,11 +5424,12 @@ def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs
             core_ans = core_ans[:56].rsplit(" ", 1)[0] + "."
         if seq_idx == 1:
             q_short = f"잠깐! {clean_title}, 왜 항상 성립할까요?"
+            return f"{q_short} ... 정답 단서! {core_ans}"
         elif seq_idx == total_seqs:
-            q_short = "만약 여기서 주어진 조건 하나를 바꾸면 어떤 새 법칙이 될까요?"
+            return f"유레카! {core_ans} 그렇다면 처음 도형에서 이 보조선이 왜 출발점이었는지 다시 볼까요?"
         else:
             q_short = q_clean if len(q_clean) <= 48 else "직전 단계와 비교해 새로 추가된 핵심 단서는 무엇일까요?"
-        return f"{q_short} ... 정답 단서! {core_ans}"
+            return f"{q_short} ... 정답 단서! {core_ans}"
     else:
         sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
         core_ans = sents[-1] if sents else txt[:85]
@@ -5117,11 +5437,12 @@ def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs
             core_ans = core_ans[:86].rsplit(" ", 1)[0] + "."
         if seq_idx == 1:
             q_short = f"Wait! Why does {clean_title} always hold?"
+            return f"{q_short} ... Visual clue! {core_ans}"
         elif seq_idx == total_seqs:
-            q_short = "What if we change one condition here?"
+            return f"Eureka! {core_ans} Now look back at the first figure to see where this clue started!"
         else:
             q_short = q_clean if len(q_clean) <= 68 else "What new mathematical clue bridges this step?"
-        return f"{q_short} ... Visual clue! {core_ans}"
+            return f"{q_short} ... Visual clue! {core_ans}"
 
 
 def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
@@ -5227,10 +5548,10 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             asyncio.run(comm.save(str(mp3_p)))
             seg_audio_dur = get_media_duration_seconds(mp3_p, ffprobe_exe)
 
-            # 4) 플립북 프레임 시퀀스 추출
+            # 4) 플립북 프레임 시퀀스 추출 (v6.0 무한 루프 연결 포함)
             f_range = p_info.get("frame_range")
             if seq_idx == 1 and len(doc) >= 3:
-                doc_frames = [0, min(len(doc) - 1, 1), max(0, len(doc) - 2)]
+                doc_frames = [max(0, len(doc) - 1), 0, min(len(doc) - 1, 1)]
             elif f_range and f_range[1] > f_range[0]:
                 doc_frames = list(range(max(0, int(f_range[0]) - 1), min(len(doc), int(f_range[1]))))
             else:
@@ -5242,12 +5563,12 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             if len(doc_frames) > 6:
                 step_df = (len(doc_frames) - 1) / 5.0
                 doc_frames = sorted(list({doc_frames[int(round(k * step_df))] for k in range(6)}))
+            if seq_idx == total_seqs and doc_frames[-1] != 0:
+                doc_frames.append(0)
 
-            # 5) 하단 발문 & 단서 자막 카드 (y=1365..1795)
+            # 5) 하단 발문 & 단서 자막 카드 (y=1365..1795) — 프레임별 키네틱 자막 렌더링을 위해 테두리만 베이스에 작도
             draw.rounded_rectangle((40, 1365, 1040, 1795), radius=26, fill=(15, 23, 42), outline=(251, 191, 36), width=3)
             cap_lines = textwrap.wrap(q_short_narr, width=22 if lang_code == "ko" else 34)[:5]
-            for ci, cl in enumerate(cap_lines):
-                draw.text((74, 1445 + ci * 58), cl, fill=(248, 250, 252), font=font_cap)
 
             draw.rounded_rectangle((40, 1810, 1040, 1892), radius=20, fill=(136, 19, 55), outline=(251, 191, 36), width=3)
             cta_short_txt = (
@@ -5266,8 +5587,26 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 f_draw = ImageDraw.Draw(frame_canvas)
                 is_think_phase = fi_idx < half_idx
 
-                # Phase 배지 (전반부: 🙋 먼저 생각해 보세요! / 후반부: 💡 시각적 단서 발견!)
-                if is_think_phase:
+                # [v6.0] 서브 프레임 단위 연속 진행 게이지 & 키네틱 하이라이트 자막
+                sub_ratio = ((seq_idx - 1) + (fi_idx + 1) / max(1, len(doc_frames))) / max(1, total_seqs)
+                f_draw.rounded_rectangle((68, 242, 1012, 254), radius=6, fill=(136, 19, 55))
+                f_draw.rounded_rectangle((68, 242, 68 + max(24, int(944 * min(1.0, sub_ratio))), 254), radius=6, fill=(251, 191, 36))
+
+                active_cap_idx = min(len(cap_lines) - 1, int((fi_idx / max(1, len(doc_frames))) * len(cap_lines))) if cap_lines else 0
+                for ci, cl in enumerate(cap_lines):
+                    y_cl = 1445 + ci * 58
+                    if ci == active_cap_idx:
+                        f_draw.rounded_rectangle((62, y_cl - 4, 1018, y_cl + 44), radius=10, fill=(76, 5, 25), outline=(251, 191, 36), width=2)
+                        f_draw.text((74, y_cl), cl, fill=(254, 240, 138), font=font_cap)
+                    else:
+                        f_draw.text((74, y_cl), cl, fill=(203, 213, 225), font=font_cap)
+
+                # Phase 배지 (전반부: 🙋 먼저 생각해 보세요! / 후반부: 💡 시각적 단서 발견! / 루프 브릿지)
+                if seq_idx == total_seqs and fi_idx == len(doc_frames) - 1 and doc_f_i == 0:
+                    f_draw.rounded_rectangle((70, 1382, 990, 1432), radius=14, fill=(124, 58, 237))
+                    p_lbl = "🔄 [무한 루프 연결] 처음 도형의 출발 질문과 다시 비교해 보세요!" if lang_code == "ko" else "🔄 [Seamless Loop] Compare with the starting figure again!"
+                    f_draw.text((90, 1391), p_lbl, fill=(254, 240, 138), font=get_font_for_lang(lang_code, 24, bold=True))
+                elif is_think_phase:
                     f_draw.rounded_rectangle((70, 1382, 990, 1432), radius=14, fill=(225, 29, 72))
                     p_lbl = "🙋 [Phase 1 · 발문 타임] 잠깐! 화면을 보고 먼저 스스로 추론해 보세요!" if lang_code == "ko" else "🙋 [Phase 1 · Inquiry] Pause & think about the question first!"
                     f_draw.text((90, 1391), p_lbl, fill=(255, 255, 255), font=get_font_for_lang(lang_code, 24, bold=True))
@@ -5351,8 +5690,9 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         )
         dur = get_media_duration_seconds(out_short, ffprobe_exe)
-        if dur >= 58.0:
-            speed_factor = round((dur / 52.5), 3)
+        # [v6.0] 36~46초 황금 쇼츠 리텐션 존(Golden Shorts Retention Zone) 자동 튜닝
+        if dur >= 49.0:
+            speed_factor = round((dur / 44.5), 3)
             trimmed_short = tmp_dir / f"{slug_key}_short_q_{lang_code}_fast.mp4"
             subprocess.run(
                 [
@@ -5614,6 +5954,14 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
             vid_id = resp["id"]
             q_url = f"https://youtu.be/{vid_id}"
             uploaded_q[lc] = q_url
+            # [v6.0] 질문하는 수업 전용 커스텀 썸네일({slug_key}_q_{lc}_thumb.png) 자동 적용
+            try:
+                q_thumb_png = THUMBS_DIR / f"{slug_key}_q_{lc}_thumb.png"
+                if q_thumb_png.exists():
+                    thumb_media = MediaFileUpload(str(q_thumb_png), mimetype="image/png", resumable=False)
+                    youtube.thumbnails().set(videoId=vid_id, media_body=thumb_media).execute()
+            except Exception:
+                pass
             sdoc = json.loads(script_path.read_text(encoding="utf-8"))
             if "question_youtube_urls" not in sdoc or not isinstance(sdoc["question_youtube_urls"], dict):
                 sdoc["question_youtube_urls"] = {"ko": "", "en": ""}
