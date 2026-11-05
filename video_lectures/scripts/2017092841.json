@@ -185,12 +185,12 @@
   },
   "teacher_proof_analysis": {
     "category_type": "geometry",
-    "hypothesis_ko": "원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건",
-    "conclusion_ko": "'원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론",
-    "auxiliary_line_ko": "원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용",
-    "proof_logic_ko": "반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리",
-    "misconception_ko": "원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
-    "what_if_not_ko": "만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?"
+    "hypothesis_ko": "원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건",
+    "conclusion_ko": "원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론",
+    "auxiliary_line_ko": "고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분",
+    "proof_logic_ko": "선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리",
+    "misconception_ko": "허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다!",
+    "what_if_not_ko": "만약 현 AB를 원의 바깥쪽으로 평행이동시켜 두 끝점 A, B가 한 점 T에서 하나로 합쳐져 접선이 된다면, 현의 수직이등분선은 '접점을 지나는 접선의 수선'으로 어떻게 자연스럽게 이어질까요?"
   },
   "supported_languages": [
     "ko",
@@ -219,21 +219,15 @@
         1
       ],
       "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
-      "step_question_ko": "❓ [출발 질문] 원에서 현의 수직이분선은 그 원의 중심을 지난다에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_ko": "❓ [출발 질문] 원에서 현의 수직이등분선은 그 원의 중심을 지난다에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
       "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in The perpendicular bisector of chord passes through the center of the circle.?",
       "visual_focus": "단계별 수학적 추론 및 증명 전개",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 원에서 현의 수직이분선은 그 원의 중심을 지난다입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건입니다. 왜 이 조건에서 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 원에서 현의 수직이등분선은 그 원의 중심을 지난다입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건입니다. 왜 이 조건에서 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 원에서 현의 수직이분선은 그 원의 중심을 지난다입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건입니다. 왜 이 조건에서 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 원에서 현의 수직이등분선은 그 원의 중심을 지난다입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건입니다. 왜 이 조건에서 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
         "en": "Step 1. Today we explore The perpendicular bisector of chord passes through the center of the circle. through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
-      },
-      "durations": {
-        "ko": 35.3
-      },
-      "question_narrations": {
-        "ko": "1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? 원에서 현의 수직이분선은 그 원의 중심을 지난다에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요? 오늘 함께 탐구할 주제는 원에서 현의 수직이분선은 그 원의 중심을 지난다입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건입니다. 왜 이 조건에서 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다."
       }
     },
     {
@@ -254,16 +248,10 @@
         0.905,
         0.595
       ],
-      "explanation_text": "2단계, 2페이지 단계입니다. 상단 화살표 오른쪽의 목표 도형을 확인해 보세요. 왼쪽의 출발 가정이 주어졌을 때 화살표 오른쪽의 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 왜 항상 성립하는지 보이겠다는 뜻입니다. 가정과 결론을 절대 섞지 않고, 이제 아래쪽 증명 도형에서 논리적 다리를 놓아 봅시다!",
+      "explanation_text": "2단계, 2페이지 단계입니다. 상단 화살표 오른쪽의 목표 도형을 확인해 보세요. 왼쪽의 출발 가정이 주어졌을 때 화살표 오른쪽의 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 왜 항상 성립하는지 보이겠다는 뜻입니다. 가정과 결론을 절대 섞지 않고, 이제 아래쪽 증명 도형에서 논리적 다리를 놓아 봅시다!",
       "narrations": {
-        "ko": "2단계, 2페이지 단계입니다. 상단 화살표 오른쪽의 목표 도형을 확인해 보세요. 왼쪽의 출발 가정이 주어졌을 때 화살표 오른쪽의 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 왜 항상 성립하는지 보이겠다는 뜻입니다. 가정과 결론을 절대 섞지 않고, 이제 아래쪽 증명 도형에서 논리적 다리를 놓아 봅시다!",
-        "en": "This is step 2, page 2. Check the target shape to the right of the top arrow. This means that given the starting assumption on the left, we will show why the conclusion that the angle/length product invariant of ‘the perpendicular bisector of the chord in a circle passes through the center of the circle’ on the right of the arrow always holds regardless of the position on the circle. Never mix assumptions and conclusions, and now let's build a logical bridge in the proof diagram below!"
-      },
-      "durations": {
-        "ko": 41.933
-      },
-      "question_narrations": {
-        "ko": "2단계 탐구 발문입니다! 화살표(⇒) 오른쪽에 제시된 우리의 최종 증명 목표는 무엇인가요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 2페이지 단계입니다. 상단 화살표 오른쪽의 목표 도형을 확인해 보세요. 왼쪽의 출발 가정이 주어졌을 때 화살표 오른쪽의 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 왜 항상 성립하는지 보이겠다는 뜻입니다. 가정과 결론을 절대 섞지 않고, 이제 아래쪽 증명 도형에서 논리적 다리를 놓아 봅시다!"
+        "ko": "2단계, 2페이지 단계입니다. 상단 화살표 오른쪽의 목표 도형을 확인해 보세요. 왼쪽의 출발 가정이 주어졌을 때 화살표 오른쪽의 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 왜 항상 성립하는지 보이겠다는 뜻입니다. 가정과 결론을 절대 섞지 않고, 이제 아래쪽 증명 도형에서 논리적 다리를 놓아 봅시다!",
+        "en": "This is step 2, page 2. Check the target shape to the right of the top arrow. This means that given the starting assumption on the left, we will show why the conclusion that the perpendicular bisector of the chord in the circle to the right of the arrow necessarily passes through the center O of the circle (conversely, the perpendicular line drawn from the center of the circle to the chord bisects the chord) is always true. Never mix assumptions and conclusions, and now let's build a logical bridge in the proof diagram below!"
       }
     },
     {
@@ -284,16 +272,10 @@
         0.3843,
         0.5317
       ],
-      "explanation_text": "3단계, 3페이지 단계입니다. 화면 왼쪽 위 영역을 보세요. 증명을 시작할 때는 먼저 문제에서 주어진 출발 조건인 가정을 도형 위에 명확히 표시합니다. 여기서는 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건이 파란색 기호로 작도되었습니다.",
+      "explanation_text": "3단계, 3페이지 단계입니다. 화면 왼쪽 위 영역을 보세요. 증명을 시작할 때는 먼저 문제에서 주어진 출발 조건인 가정을 도형 위에 명확히 표시합니다. 여기서는 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건이 파란색 기호로 작도되었습니다.",
       "narrations": {
-        "ko": "3단계, 3페이지 단계입니다. 화면 왼쪽 위 영역을 보세요. 증명을 시작할 때는 먼저 문제에서 주어진 출발 조건인 가정을 도형 위에 명확히 표시합니다. 여기서는 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건이 파란색 기호로 작도되었습니다.",
-        "en": "This is step 3, page 3. Look at the upper left area of ​​the screen. When starting a proof, first clearly indicate the assumptions, which are the starting conditions given in the problem, on the diagram. Here, the geometric starting condition of 'the perpendicular bisector of the chord in a circle passes through the center of the circle' formed by the points on the circle, chord, tangent, and center is drawn with a blue symbol."
-      },
-      "durations": {
-        "ko": 33.2
-      },
-      "question_narrations": {
-        "ko": "3단계 탐구 발문입니다! 화면 왼쪽 위에 파란색으로 표시된 출발 조건(가정)은 무엇인가요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 3페이지 단계입니다. 화면 왼쪽 위 영역을 보세요. 증명을 시작할 때는 먼저 문제에서 주어진 출발 조건인 가정을 도형 위에 명확히 표시합니다. 여기서는 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건이 파란색 기호로 작도되었습니다."
+        "ko": "3단계, 3페이지 단계입니다. 화면 왼쪽 위 영역을 보세요. 증명을 시작할 때는 먼저 문제에서 주어진 출발 조건인 가정을 도형 위에 명확히 표시합니다. 여기서는 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건이 파란색 기호로 작도되었습니다.",
+        "en": "This is step 3, page 3. Look at the upper left area of ​​the screen. When starting a proof, first clearly indicate the assumptions, which are the starting conditions given in the problem, on the diagram. Here, the starting conditions given by the chord AB of the circle and the perpendicular bisector passing through its midpoint M (AM = BM) and perpendicular to chord AB are plotted with blue symbols."
       }
     },
     {
@@ -314,16 +296,10 @@
         0.3471,
         0.4848
       ],
-      "explanation_text": "4단계, 4페이지 단계입니다. 이 증명에서 가장 중요한 유레카 순간입니다! 도형에 새로 그어진 초록색 선분을 보세요. 바로 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용입니다. 원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!",
+      "explanation_text": "4단계, 4페이지 단계입니다. 이 증명에서 가장 중요한 유레카 순간입니다! 도형에 새로 그어진 초록색 선분을 보세요. 바로 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분입니다. 원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!",
       "narrations": {
-        "ko": "4단계, 4페이지 단계입니다. 이 증명에서 가장 중요한 유레카 순간입니다! 도형에 새로 그어진 초록색 선분을 보세요. 바로 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용입니다. 원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!",
-        "en": "This is step 4, page 4. This is the most important eureka moment in this proof! Look at the new green line segment drawn on the shape. This is the use of the auxiliary line with the radius (the same length R) connecting the center O of the circle and the vertex on the circle and the exterior angle properties of the isosceles triangle. A relationship that was not visible through the original shape alone is divided into two comparable shapes by this single green auxiliary line!"
-      },
-      "durations": {
-        "ko": 25.912
-      },
-      "question_narrations": {
-        "ko": "4단계 탐구 발문입니다! 왜 하필 이 위치에 초록색 보조선을 그어야 숨겨진 합동·대칭이 드러날까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 4페이지 단계입니다. 이 증명에서 가장 중요한 유레카 순간입니다! 도형에 새로 그어진 초록색 선분을 보세요. 바로 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용입니다. 원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!"
+        "ko": "4단계, 4페이지 단계입니다. 이 증명에서 가장 중요한 유레카 순간입니다! 도형에 새로 그어진 초록색 선분을 보세요. 바로 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분입니다. 원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!",
+        "en": "This is step 4, page 4. This is the most important eureka moment in this proof! Look at the new green line segment drawn on the shape. It is a line segment connecting A and B at the point on the two radii OA and OB (OA = OB = radius R) auxiliary line and perpendicular bisector that directly connect the center O of the isolated circle and the end points A and B of the chord. A relationship that was not visible through the original shape alone is divided into two comparable shapes by this single green auxiliary line!"
       }
     },
     {
@@ -344,16 +320,10 @@
         0.345,
         0.5758
       ],
-      "explanation_text": "5단계, 5페이지 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+      "explanation_text": "5단계, 5페이지 단계입니다. 출발 조건인 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
       "narrations": {
-        "ko": "5단계, 5페이지 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
-        "en": "This is step 5, page 5. The geometric starting conditions of 'the perpendicular bisector of the chord in a circle passes through the center of the circle' formed by the points on the circle, chord, tangent, and center, which are the starting conditions, are drawn in order on the proof figure, clearly establishing the positional relationship between each point and line segment."
-      },
-      "durations": {
-        "ko": 31.333
-      },
-      "question_narrations": {
-        "ko": "5단계 탐구 발문입니다! 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 5페이지 단계입니다. 출발 조건인 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다."
+        "ko": "5단계, 5페이지 단계입니다. 출발 조건인 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다.",
+        "en": "This is step 5, page 5. The starting conditions, which are the chord AB of the circle and the perpendicular bisector that passes through its midpoint M (AM = BM) and are perpendicular to the chord AB, are drawn in order on the proof figure, clearly establishing the positional relationship between each point and line segment."
       }
     },
     {
@@ -374,16 +344,10 @@
         0.5289,
         0.3912
       ],
-      "explanation_text": "6단계, 6페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+      "explanation_text": "6단계, 6페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "6단계, 6페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
-        "en": "This is step 6, page 6. Focusing on utilizing the properties of auxiliary lines and exterior angles of isosceles triangles, the radii connecting the center O of the circle and the vertices on the circle (all with the same length R) compare sides of the same length and angles of the same size one by one."
-      },
-      "durations": {
-        "ko": 19.24
-      },
-      "question_narrations": {
-        "ko": "6단계 탐구 발문입니다! 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 6페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다."
+        "ko": "6단계, 6페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "This is step 6, page 6. The two radii OA and OB (OA = OB = radius R) that directly connect the center O of the isolated circle and the end points A and B of the chord (OA = OB = radius R) center on the line segment connecting A and B at the point on the auxiliary line and perpendicular bisector. Compare sides of the same length and angles of the same size one by one in the figure."
       }
     },
     {
@@ -404,16 +368,10 @@
         0.8616,
         0.5758
       ],
-      "explanation_text": "7단계, 7페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+      "explanation_text": "7단계, 7페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "7단계, 7페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
-        "en": "This is step 7, page 7. Focusing on utilizing the properties of auxiliary lines and exterior angles of isosceles triangles, the radii connecting the center O of the circle and the vertices on the circle (all with the same length R) compare sides of the same length and angles of the same size one by one."
-      },
-      "durations": {
-        "ko": 18.88
-      },
-      "question_narrations": {
-        "ko": "7단계 탐구 발문입니다! 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 7페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다."
+        "ko": "7단계, 7페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "This is step 7, page 7. The two radii OA and OB (OA = OB = radius R) that directly connect the center O of the isolated circle and the end points A and B of the chord (OA = OB = radius R) center on the line segment connecting A and B at the point on the auxiliary line and perpendicular bisector. Compare sides of the same length and angles of the same size one by one in the figure."
       }
     },
     {
@@ -434,16 +392,10 @@
         0.8264,
         0.4353
       ],
-      "explanation_text": "8단계, 8페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+      "explanation_text": "8단계, 8페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "8단계, 8페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
-        "en": "This is step 8, 8 pages. Focusing on utilizing the properties of auxiliary lines and exterior angles of isosceles triangles, the radii connecting the center O of the circle and the vertices on the circle (all with the same length R) compare sides of the same length and angles of the same size one by one."
-      },
-      "durations": {
-        "ko": 18.928
-      },
-      "question_narrations": {
-        "ko": "8단계 탐구 발문입니다! 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 8페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다."
+        "ko": "8단계, 8페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "This is step 8, 8 pages. The two radii OA and OB (OA = OB = radius R) that directly connect the center O of the isolated circle and the end points A and B of the chord (OA = OB = radius R) center on the line segment connecting A and B at the point on the auxiliary line and perpendicular bisector. Compare sides of the same length and angles of the same size one by one in the figure."
       }
     },
     {
@@ -464,16 +416,10 @@
         0.624,
         0.8347
       ],
-      "explanation_text": "9단계, 9페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+      "explanation_text": "9단계, 9페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
       "narrations": {
-        "ko": "9단계, 9페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
-        "en": "Step 9, page 9. Focusing on utilizing the properties of auxiliary lines and exterior angles of isosceles triangles, the radii connecting the center O of the circle and the vertices on the circle (all with the same length R) compare sides of the same length and angles of the same size one by one."
-      },
-      "durations": {
-        "ko": 18.928
-      },
-      "question_narrations": {
-        "ko": "9단계 탐구 발문입니다! 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 9페이지 단계입니다. 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다."
+        "ko": "9단계, 9페이지 단계입니다. 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다.",
+        "en": "Step 9, page 9. The two radii OA and OB (OA = OB = radius R) that directly connect the center O of the isolated circle and the end points A and B of the chord (OA = OB = radius R) center on the line segment connecting A and B at the point on the auxiliary line and perpendicular bisector. Compare sides of the same length and angles of the same size one by one in the figure."
       }
     },
     {
@@ -494,16 +440,10 @@
         0.5868,
         0.7879
       ],
-      "explanation_text": "10단계, 10페이지 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
+      "explanation_text": "10단계, 10페이지 단계입니다. 선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리가 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다!",
       "narrations": {
-        "ko": "10단계, 10페이지 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
-        "en": "This is a 10-step, 10-page step. This is the stage in which the principle of deriving the central angle, circumferential angle, and similarity proportional formula is completed by the two base angles of isosceles triangles where the radii are all the same length, and the exterior angle theorem (sum of the two interior angles) of the triangle. What you must remember at this time is that the first hidden condition to check when you get stuck in a circle problem is that 'the line segment drawn from the center of the circle to all points on the circle has the same length as the radius!'"
-      },
-      "durations": {
-        "ko": 18.808
-      },
-      "question_narrations": {
-        "ko": "10단계 탐구 발문입니다! 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 10페이지 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!"
+        "ko": "10단계, 10페이지 단계입니다. 선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리가 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다!",
+        "en": "This is a 10-step, 10-page step. All points on the perpendicular bisector of the line segment are the same distance from both end points A and B (triangles PAM and PBM are congruent in SAS), and the center O of the circle also has the same length of the two radii OA and OB, so the principle that center O must lie on the perpendicular bisector of the current AB is completed. What you must remember at this time is that the inevitable bridge that connects the center O of the circle in the air and the chord AB is the very definition of a circle: 'The radii drawn from the center to points A and B on the circle are the same (isosceles triangle)'!"
       }
     },
     {
@@ -524,16 +464,10 @@
         0.5434,
         0.8815
       ],
-      "explanation_text": "11단계, 11페이지 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
+      "explanation_text": "11단계, 11페이지 단계입니다. 선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리가 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다!",
       "narrations": {
-        "ko": "11단계, 11페이지 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!",
-        "en": "Step 11, page 11. This is the stage in which the principle of deriving the central angle, circumferential angle, and similarity proportional formula is completed by the two base angles of isosceles triangles where the radii are all the same length, and the exterior angle theorem (sum of the two interior angles) of the triangle. What you must remember at this time is that the first hidden condition to check when you get stuck in a circle problem is that 'the line segment drawn from the center of the circle to all points on the circle has the same length as the radius!'"
-      },
-      "durations": {
-        "ko": 31.0
-      },
-      "question_narrations": {
-        "ko": "11단계 탐구 발문입니다! 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 11페이지 단계입니다. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다!"
+        "ko": "11단계, 11페이지 단계입니다. 선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리가 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, 허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다!",
+        "en": "Step 11, page 11. All points on the perpendicular bisector of the line segment are the same distance from both end points A and B (triangles PAM and PBM are congruent in SAS), and the center O of the circle also has the same length of the two radii OA and OB, so the principle that center O must lie on the perpendicular bisector of the current AB is completed. What you must remember at this time is that the inevitable bridge that connects the center O of the circle in the air and the chord AB is the very definition of a circle: 'The radii drawn from the center to points A and B on the circle are the same (isosceles triangle)'!"
       }
     },
     {
@@ -554,16 +488,10 @@
         0.5744,
         0.5482
       ],
-      "explanation_text": "12단계, 12페이지 단계입니다. 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리을 눈으로 직접 확인할 수 있습니다. 대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!",
+      "explanation_text": "12단계, 12페이지 단계입니다. 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. 선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리를 눈으로 직접 확인할 수 있습니다. 대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!",
       "narrations": {
-        "ko": "12단계, 12페이지 단계입니다. 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리을 눈으로 직접 확인할 수 있습니다. 대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!",
-        "en": "12 steps, 12 pages. Compare the two areas highlighted in orange and purple. You can see with your own eyes the principle by which the central angle, circumferential angle, and similarity proportional formula are derived by the two base angles of isosceles triangles where all radii are the same length, and the exterior angle theorem (sum of the two interior angles) of a triangle. Since the conditions for corresponding sides and angles are exactly met, the two shapes are perfectly congruent (or similar)!"
-      },
-      "durations": {
-        "ko": 31.4
-      },
-      "question_narrations": {
-        "ko": "12단계 탐구 발문입니다! 나뉜 두 도형은 어떤 조건(SAS, ASA, SSS, RHS, RHA, 닮음)에 의해 완전히 포개어질까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 12페이지 단계입니다. 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. 반지름의 길이가 모두 같아 만들어지는 이등변삼각형들의 두 밑각과 삼각형의 외각 정리(두 내각의 합)에 의해 중심각과 원주각·닮음 비례식이 유도되는 원리을 눈으로 직접 확인할 수 있습니다. 대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!"
+        "ko": "12단계, 12페이지 단계입니다. 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. 선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리를 눈으로 직접 확인할 수 있습니다. 대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!",
+        "en": "12 steps, 12 pages. Compare the two areas highlighted in orange and purple. All points on the perpendicular bisector of a line segment are the same distance from both end points A and B (triangles PAM and PBM are congruent in SAS), and since the center O of the circle also has the same length of the two radii OA and OB, you can directly confirm the principle that the center O must lie on the perpendicular bisector of the current AB. Since the conditions for corresponding sides and angles are exactly met, the two shapes are perfectly congruent (or similar)!"
       }
     },
     {
@@ -584,16 +512,10 @@
         0.5868,
         0.7879
       ],
-      "explanation_text": "13단계, 13페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+      "explanation_text": "13단계, 13페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "13단계, 13페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
-        "en": "Step 13, page 13. Now, combine the geometric clues we checked earlier into one. From the correspondence between shapes, we can confirm that the conclusion that we were trying to prove, 'the perpendicular bisector of a chord in a circle passes through the center of the circle', which is an angle-length product invariant, always holds regardless of the position on the circle, is inevitably established."
-      },
-      "durations": {
-        "ko": 33.0
-      },
-      "question_narrations": {
-        "ko": "13단계 탐구 발문입니다! 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 13페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다."
+        "ko": "13단계, 13페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 13, page 13. Now, combine the geometric clues we checked earlier into one. From the correspondence relationship between shapes, we can confirm that the conclusion that the perpendicular bisector of the chord in the circle we were trying to prove necessarily passes through the center O of the circle (conversely, the perpendicular line drawn from the center of the circle to the chord bisects the chord) is inevitably established."
       }
     },
     {
@@ -614,16 +536,10 @@
         0.6591,
         0.7245
       ],
-      "explanation_text": "14단계, 14페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+      "explanation_text": "14단계, 14페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
       "narrations": {
-        "ko": "14단계, 14페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
-        "en": "Step 14, page 14. Now, combine the geometric clues we checked earlier into one. From the correspondence between shapes, we can confirm that the conclusion that we were trying to prove, 'the perpendicular bisector of a chord in a circle passes through the center of the circle', which is an angle-length product invariant, always holds regardless of the position on the circle, is inevitably established."
-      },
-      "durations": {
-        "ko": 26.104
-      },
-      "question_narrations": {
-        "ko": "14단계 탐구 발문입니다! 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 14페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 필연적으로 성립함을 확인할 수 있습니다."
+        "ko": "14단계, 14페이지 단계입니다. 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. 도형의 대응 관계로부터 우리가 증명하고자 했던 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 필연적으로 성립함을 확인할 수 있습니다.",
+        "en": "Step 14, page 14. Now, combine the geometric clues we checked earlier into one. From the correspondence relationship between shapes, we can confirm that the conclusion that the perpendicular bisector of the chord in the circle we were trying to prove necessarily passes through the center O of the circle (conversely, the perpendicular line drawn from the center of the circle to the chord bisects the chord) is inevitably established."
       }
     },
     {
@@ -644,16 +560,10 @@
         0.5062,
         0.6777
       ],
-      "explanation_text": "15단계, 15페이지 단계입니다. 도형에 붉은색으로 강조된 최종 표시를 보세요! 앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, 우리가 목표로 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 마침내 증명되었습니다!",
+      "explanation_text": "15단계, 15페이지 단계입니다. 도형에 붉은색으로 강조된 최종 표시를 보세요! 앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, 우리가 목표로 했던 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 마침내 증명되었습니다!",
       "narrations": {
-        "ko": "15단계, 15페이지 단계입니다. 도형에 붉은색으로 강조된 최종 표시를 보세요! 앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, 우리가 목표로 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 마침내 증명되었습니다!",
-        "en": "This is step 15, page 15. Look at the final mark highlighted in red on the shape! Since the size of the corresponding parts becomes the same due to the congruence and symmetry properties of the shapes proven in the previous step, the conclusion that we were aiming for, 'the perpendicular bisector of the chord in a circle passes through the center of the circle', is finally proven to always hold regardless of the position on the circle!"
-      },
-      "durations": {
-        "ko": 26.128
-      },
-      "question_narrations": {
-        "ko": "15단계 탐구 발문입니다! 합동·닮음인 도형의 대응하는 변과 각이 같다는 성질로부터 어떻게 목표 결론이 완성되나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 15페이지 단계입니다. 도형에 붉은색으로 강조된 최종 표시를 보세요! 앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, 우리가 목표로 했던 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 마침내 증명되었습니다!"
+        "ko": "15단계, 15페이지 단계입니다. 도형에 붉은색으로 강조된 최종 표시를 보세요! 앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, 우리가 목표로 했던 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 마침내 증명되었습니다!",
+        "en": "This is step 15, page 15. Look at the final mark highlighted in red on the shape! Since the size of the corresponding parts becomes the same due to the congruence and symmetry properties of the shapes proven in the previous step, the conclusion that the perpendicular bisector of the chord in the circle we were aiming for must pass through the center O of the circle (conversely, the perpendicular line drawn from the center of the circle to the chord bisects the chord) has finally been proven!"
       }
     },
     {
@@ -664,7 +574,7 @@
         16
       ],
       "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
-      "step_question_ko": "🔀 [조건 변형 질문] 만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 현 AB를 원의 바깥쪽으로 평행이동시켜 두 끝점 A, B가 한 점 T에서 하나로 합쳐져 접선이 된다면, 현의 수직이등분선은 '접점을 지나는 접선의 수선'으로 어떻게 자연스럽게 이어질까요?",
       "step_question_en": "🔀 [What-If-Not] How does this mathematical principle evolve if we modify or generalize its conditions?",
       "visual_focus": "증명 도형 단계별 작도 (파란색 출발 가정 및 기준 조건 제시)",
       "color_tag": "blue",
@@ -674,16 +584,10 @@
         0.9153,
         0.8815
       ],
-      "explanation_text": "마지막 16단계, 증명이 완성되었습니다! 출발 조건이었던 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건에서 시작해, 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 거쳐, '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+      "explanation_text": "마지막 16단계, 증명이 완성되었습니다! 출발 조건이었던 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건에서 시작해, 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 거쳐, 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 현 AB를 원의 바깥쪽으로 평행이동시켜 두 끝점 A, B가 한 점 T에서 하나로 합쳐져 접선이 된다면, 현의 수직이등분선은 '접점을 지나는 접선의 수선'으로 어떻게 자연스럽게 이어질까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
       "narrations": {
-        "ko": "마지막 16단계, 증명이 완성되었습니다! 출발 조건이었던 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건에서 시작해, 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 거쳐, '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
-        "en": "The last 16 steps, the proof is complete! Starting from the geometric starting condition of 'the perpendicular bisector of the chord in a circle passes through the center of the circle' formed by the points on the circle and the chord, tangent, and center, which was the starting condition, through the use of the auxiliary line of the radius (all of the same length R) connecting the center O of the circle and the vertex on the circle and the exterior angle property of an isosceles triangle, the angle/length product invariant of 'the perpendicular bisector of the chord in a circle passes through the center of the circle' is obtained. We have clearly confirmed that the above conclusion always holds, regardless of location. The key point to remember here is that when you get stuck in a circle problem, the first hidden condition to check is that 'the line segment drawn from the center of the circle to all points on the circle has the same length as the radius!' Finally, ask a deeper question. If one point on a circle gets infinitely close to another point and the secant turns into a tangent, how will the circumferential angle be preserved as the angle formed by the tangent and the chord? Experiment by changing the values ​​and shapes directly on the math homepage in the link in the description!"
-      },
-      "durations": {
-        "ko": 26.752
-      },
-      "question_narrations": {
-        "ko": "마지막 16단계, 조건 변형 질문입니다! 마지막 16단계, 증명이 완성되었습니다! 출발 조건이었던 원 위의 점들과 현·접선·중심이 이루는 '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 기하학적 출발 조건에서 시작해, 원의 중심 O와 원 위의 꼭짓점을 잇는 반지름(길이 R로 모두 같음) 보조선과 이등변삼각형의 외각 성질 활용을 거쳐, '원에서 현의 수직이분선은 그 원의 중심을 지난다'의 각도·길이 곱 불변량이 원 위의 위치에 관계없이 항상 성립한다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 원 문제에서 막힐 때 가장 먼저 확인해야 할 숨은 조건은 '원의 중심에서 원 위의 모든 점에 그은 선분은 반지름으로 길이가 같다'는 사실입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요! 만약 여기서 주어진 수나 조건을 하나 바꾼다면 어떤 새로운 법칙이 탄생할지 직접 질문하고 실험해 보세요!"
+        "ko": "마지막 16단계, 증명이 완성되었습니다! 출발 조건이었던 원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건에서 시작해, 고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분을 거쳐, 원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 현 AB를 원의 바깥쪽으로 평행이동시켜 두 끝점 A, B가 한 점 T에서 하나로 합쳐져 접선이 된다면, 현의 수직이등분선은 '접점을 지나는 접선의 수선'으로 어떻게 자연스럽게 이어질까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "The last 16 steps, the proof is complete! Starting from the starting conditions given by the chord AB of the circle, which was the starting condition, and the perpendicular bisector perpendicular to chord AB, passing through the midpoint M (AM = BM), the two radii OA, OB (OA = OB = radius R) directly connecting the center O of the isolated circle and both end points A and B of the chord, passing through the line segment connecting A and B at the point on the auxiliary line and the perpendicular bisector, the perpendicular bisector of the chord in the circle must be at the center O of the circle. It was clearly confirmed that the conclusion holds that the perpendicular line drawn from the center of the circle to the chord bisects the chord. The key point to remember here is that the inevitable bridge that connects the center O of the circle in the air and the string AB is the very definition of a circle: 'The radii drawn from the center to points A and B on the circle are the same (isosceles triangle)'! Finally, ask a deeper question. If the string AB is moved parallel to the outside of the circle and the two end points A and B merge into one point T to become a tangent line, how will the perpendicular bisector of the string naturally lead to the 'perpendicular line of the tangent line passing through the point of contact'? Experiment by changing the values ​​and shapes directly on the math homepage in the link in the description!"
       }
     }
   ]

@@ -467,7 +467,7 @@ def split_bilingual_title(raw_title: str):
 
 def latex_to_unicode_title(text):
     s = str(text or "")
-    s = s.replace("Equationss", "Equations")
+    s = s.replace("Equationss", "Equations").replace("수직이분선", "수직이등분선")
     s = (
         s.replace(r"\mathbb{R}", "ℝ")
         .replace(r"\mathbb{N}", "ℕ")
@@ -487,22 +487,35 @@ def latex_to_unicode_title(text):
     s = re.sub(r"\\angle\s*", "∠", s)
     s = s.replace(r"\Leftrightarrow", "⇔").replace(r"\Rightarrow", "⇒").replace(r"\Leftarrow", "⇐")
     s = s.replace(r"\in", "∈").replace(r"\subset", "⊂").replace(r"\infty", "∞")
+    s = s.replace(r"\cdots", "⋯").replace(r"\ldots", "⋯").replace(r"\dots", "⋯")
     s = s.replace(r"\times", "×").replace(r"\div", "÷").replace(r"\cdot", "·")
     s = s.replace(r"\pm", "±").replace(r"\leq", "≤").replace(r"\geq", "≥").replace(r"\neq", "≠")
     s = s.replace(r"\le", "≤").replace(r"\ge", "≥").replace(r"\ne", "≠")
+    _sub_map = str.maketrans("0123456789+-=()nkijm", "₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₙₖᵢⱼₘ")
+    s = re.sub(
+        r"_\s*\{([0-9+\-=()nkijm]+)\}|_([0-9]+)",
+        lambda m: (m.group(1) or m.group(2)).translate(_sub_map),
+        s,
+    )
+    s = re.sub(r"_\s*\{([^{}]+)\}", r"(\1)", s)
     s = re.sub(r"\^\s*\{([^{}]+)\}", r"^(\1)", s)
     s = s.replace("^2", "²").replace("^3", "³")
     s = re.sub(r"\\[,;:!\s]+", " ", s)
-    s = s.replace("$", "").replace("<", "＜").replace(">", "＞").replace("\\", " ")
+    s = s.replace("$", "").replace("<", "＜").replace(">", "＞").replace("{", "(").replace("}", ")").replace("\\", " ")
     s = _balance_parentheses(re.sub(r"\s+", " ", s).strip())
     return s
 
 
 def clean_math_for_speech_ko(text):
     s = str(text or "")
+    s = s.replace("수직이분선", "수직이등분선")
     # 한글 문장 뒤의 영문 번역 괄호(4글자 이상 영단어 포함)만 제거하고 (m+n), (mn) 등 수식 괄호는 보존
     s, _ = split_bilingual_title(s) if s.endswith(")") and re.search(r"[A-Za-z]{4,}", s) else (s, "")
     s = re.sub(r"\(\s*[^가-힣()]*[A-Za-z]{4,}[^가-힣()]*\)", "", s)
+    for _ch, _d in zip("₀₁₂₃₄₅₆₇₈₉ₙₖᵢⱼₘ", "0123456789nkijm"):
+        s = s.replace(_ch, _d)
+    s = s.replace(r"\cdots", " 점점점 ").replace(r"\ldots", " 점점점 ").replace("⋯", " 점점점 ")
+    s = re.sub(r"_\s*\{([^{}]+)\}", r" \1", s)
     s = (
         s.replace(r"\mathbb{R}", "실수 집합")
         .replace("ℝ", "실수 집합")
@@ -928,6 +941,44 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요?"
         }
 
+    # 14-A. 원에서 현의 수직이등분선과 중심의 성질 (Perpendicular Bisector of a Chord)
+    if ("수직이등분선" in blob or "수직이분선" in blob) and ("현" in blob or "원" in blob or "chord" in blob.lower()):
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "원의 현 AB와 그 중점 M(AM = BM)을 지나고 현 AB에 수직인 수직이등분선이 주어진 출발 조건",
+            "conclusion_ko": "원에서 현의 수직이등분선은 반드시 그 원의 중심 O를 지난다(역으로 원의 중심에서 현에 내린 수선은 그 현을 이등분한다)는 결론",
+            "auxiliary_line_ko": "고립된 원의 중심 O와 현의 양 끝점 A, B를 직접 연결하는 두 반지름 OA, OB(OA = OB = 반지름 R) 보조선과 수직이등분선 위의 점에서 A, B를 잇는 선분",
+            "proof_logic_ko": "선분의 수직이등분선 위의 모든 점은 양 끝점 A, B로부터 거리가 같고(삼각형 PAM과 PBM이 SAS 합동), 원의 중심 O 역시 두 반지름 OA와 OB의 길이가 같으므로 중심 O는 반드시 현 AB의 수직이등분선 위에 놓이는 원리",
+            "misconception_ko": "허공에 떨어져 있는 원의 중심 O와 현 AB를 연결하는 필연적 다리는 '중심에서 원 위의 점 A, B까지 그은 반지름의 길이가 같다(이등변삼각형)'는 원의 정의 자체입니다!",
+            "what_if_not_ko": "만약 현 AB를 원의 바깥쪽으로 평행이동시켜 두 끝점 A, B가 한 점 T에서 하나로 합쳐져 접선이 된다면, 현의 수직이등분선은 '접점을 지나는 접선의 수선'으로 어떻게 자연스럽게 이어질까요?"
+        }
+
+    # 14-B. 일차변환과 영역 / 2×2 행렬 기저 변환 (Linear Transformation & Matrix Basis)
+    if any(k in blob for k in ("일차변환", "선형변환", "Linear Transformation", "linear transformation")):
+        comp_desc = "2×2 행렬의 네 성분(a₁₁, a₁₂, a₂₁, a₂₂)"
+        role_desc = "단위정사각형의 두 기준 화살표(기저벡터 e₁=(1,0), e₂=(0,1))를 행렬의 두 열벡터 위치로 이동시켜 평행사변형 영역으로 변환하는"
+        if "11" in t or "₁₁" in t:
+            comp_desc = "1열 기저벡터 e₁(1,0)의 x성분인 a₁₁"
+            role_desc = "세로 축은 고정한 채 도형 영역을 가로(x축) 방향으로 늘이거나 줄이는 가로 신축(Horizontal Scaling) 및 y축 대칭 반사(a₁₁＜0)를 만드는"
+        elif "12" in t or "₁₂" in t:
+            comp_desc = "2열 기저벡터 e₂(0,1)의 x성분인 a₁₂"
+            role_desc = "세로 높이는 그대로 유지한 채 도형의 윗변을 가로 방향으로 비스듬히 밀어 평행사변형을 만드는 가로 층밀림 변환(Horizontal Shear, 카발리에리 등적변형)을 수행하는"
+        elif "21" in t or "₂₁" in t:
+            comp_desc = "1열 기저벡터 e₁(1,0)의 y성분인 a₂₁"
+            role_desc = "가로 폭은 그대로 유지한 채 도형의 오른쪽 변을 세로 방향으로 비스듬히 밀어 올리는 세로 층밀림 변환(Vertical Shear)을 수행하는"
+        elif "22" in t or "₂₂" in t:
+            comp_desc = "2열 기저벡터 e₂(0,1)의 y성분인 a₂₂"
+            role_desc = "가로 축은 고정한 채 도형 영역을 세로(y축) 방향으로 늘이거나 줄이는 세로 신축(Vertical Scaling) 및 x축 대칭 반사(a₂₂＜0)를 만드는"
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"좌표평면의 단위정사각형 영역에 행렬의 {comp_desc}을 변화시키는 일차변환을 적용한 출발 조건",
+            "conclusion_ko": f"행렬 성분 {comp_desc}의 값에 따라 단위정사각형 격자가 {role_desc} 기하학적 변환 법칙이 성립한다는 결론",
+            "auxiliary_line_ko": "영역 내부의 무수히 많은 점을 일일이 대입하는 대신, 가로 기준 화살표 e₁=(1,0)과 세로 기준 화살표 e₂=(0,1) 단 두 개의 기저벡터가 어느 좌표로 이동하는지 추적하는 기저 화살표 보조선",
+            "proof_logic_ko": f"일차변환은 직선의 평행성과 등간격 격자를 항상 보존하므로, 두 기저벡터의 도착점인 행렬의 첫째 열벡터와 둘째 열벡터가 곧 변환된 평행사변형의 두 이웃변이 되어 {role_desc} 원리",
+            "misconception_ko": "일차변환 문제를 복잡한 연립방정식 대입으로만 풀려고 하면 길을 잃기 쉽습니다! 항상 (1,0)이 1열로, (0,1)이 2열로 이사 간다는 기하학적 기저 이동으로 먼저 관찰하세요.",
+            "what_if_not_ko": "만약 행렬의 두 열벡터가 한 직선 위에 놓여 평행사변형이 납작한 선분으로 찌그러진다면(행렬식 a₁₁a₂₂ - a₁₂a₂₁ = 0), 왜 역변환(역행렬)이 존재할 수 없을까요?"
+        }
+
     # 15. 원의 성질 (원주각 / 중심각 / 접선 / 할선 / 톨레미 / 내접사각형)
     if any(k in blob for k in ("원주각", "중심각", "접선", "현의", "톨레미", "Ptolemy", "내접", "할선", "방멱")):
         return {
@@ -1188,7 +1239,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_en = "📐 [Congruence & Similarity] By which geometric criterion do the two divided figures match?"
                 exp_ko = (
                     f"{s_num}단계, {range_str} 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. "
-                    f"{logic_ko}을 눈으로 직접 확인할 수 있습니다. "
+                    f"{logic_ko}를 눈으로 직접 확인할 수 있습니다. "
                     f"대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!"
                 )
                 exp_en = translate_text_google_gtx(exp_ko, "en")
@@ -1225,7 +1276,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                     step_q_ko = "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?"
                     exp_ko = (
                         f"{s_num}단계, {range_str} "
-                        f"{logic_ko}이 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, {misc_ko}"
+                        f"{logic_ko}가 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, {misc_ko}"
                     )
                 else:
                     step_title = f"Step {s_num} · 기하학적 단서 종합 및 결론 연결 (Synthesis)"
