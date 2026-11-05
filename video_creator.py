@@ -289,6 +289,213 @@ def cmd_upload(slug="math20250130001", langs=("ko",), replace_existing=True):
     return {"standard_video": s_vid, "question_video": q_vid, "question_short": q_sh, "standard_short": s_sh}
 
 
+MASTERCLASS_COURSES = {
+    "masterclass_parallelogram": {
+        "title_ko": "🎓 [평행사변형 완전정복 마스터클래스] 성질과 판정조건 5대 시각적 증명 총정리 (1080p 연속강의) | @min7014_ai",
+        "title_en": "🎓 [Parallelogram Visual Proofs Masterclass] 5 Complete Euclidean Geometry Proofs (1080p Full Course) | @min7014_ai",
+        "slugs": ["2017092803", "2017092805", "2017092807", "2017092809"],
+        "domain_ko": "유클리드 평면기하 (사각형의 성질)",
+    },
+    "masterclass_radicals": {
+        "title_ko": "🎓 [제곱근과 무리수 완전정복 마스터클래스] 제곱근의 뜻·대소·곱셈·나눗셈·유리화·수직선 작도 총정리 (1080p) | @min7014_ai",
+        "title_en": "🎓 [Square Roots & Radicals Masterclass] Complete Visual Algebra & Number Line Constructions (1080p) | @min7014_ai",
+        "slugs": ["2017030205", "2017031201", "2017031601", "2017032101", "2017032701", "2017040101"],
+        "domain_ko": "실수와 제곱근·무리수 작도",
+    },
+    "masterclass_exponents": {
+        "title_ko": "🎓 [지수법칙과 단항식 마스터클래스] 거듭제곱의 곱셈·나눗셈·분배법칙 시각적 원리 총정리 (1080p) | @min7014_ai",
+        "title_en": "🎓 [Laws of Exponents Masterclass] Step-by-Step Visual Algebra Proofs Full Course (1080p) | @min7014_ai",
+        "slugs": ["2017031403", "2017031501", "2017031701", "2017031702", "2017031901", "2017032001"],
+        "domain_ko": "지수법칙과 다항식 연산",
+    },
+    "masterclass_geometry_flagship": {
+        "title_ko": "🎓 [기하학 4대 명작 마스터클래스] 피타고라스 나무·피타고라스 정리·체바·메넬라우스 시각적 증명 (1080p) | @min7014_ai",
+        "title_en": "🎓 [4 Legendary Geometry Proofs Masterclass] Pythagoras Tree, Pythagorean, Ceva & Menelaus Theorems (1080p) | @min7014_ai",
+        "slugs": ["math20250130001", "2017090101", "2014111902", "2014111901"],
+        "domain_ko": "유클리드 평면기하 대표 특강",
+    },
+}
+
+
+def build_all_ready_masterclasses(langs=("ko", "en")):
+    """
+    [월 1,000만 원 광고수익 핵심 엔진: 8분+ (480초+) 미드롤 광고(Mid-Roll Ads) 활성화 단원별 마스터클래스 합본 제작기]
+    유튜브 롱폼 영상은 8분(480초) 이상일 때 중간 광고(Mid-Roll Ads)가 활성화되어 RPM이 2.5~3.5배 상승합니다.
+    이미 렌더링된 단원별 1080p 본편 영상들을 무손실 고속 결합(ffmpeg concat copy)하여 12~35분 분량의
+    챕터형 마스터클래스 합본 MP4와 미드롤 광고 타임스탬프 패키지를 생성합니다.
+    """
+    import subprocess
+    import tempfile
+
+    ffmpeg_exe = shutil.which("ffmpeg")
+    ffprobe_exe = shutil.which("ffprobe")
+    if not ffmpeg_exe:
+        return []
+
+    mc_dir = YT_UPLOADS_DIR / "masterclasses"
+    mc_dir.mkdir(parents=True, exist_ok=True)
+    pkg_dir = ROOT_DIR / "video_lectures" / "youtube_packages"
+    pkg_dir.mkdir(parents=True, exist_ok=True)
+    built = []
+
+    for mc_id, cfg in MASTERCLASS_COURSES.items():
+        meta_path = pkg_dir / f"{mc_id}_masterclass_meta.json"
+        meta_obj = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
+        for lc in langs:
+            seg_paths = []
+            chapters = []
+            cursor_sec = 0.0
+            for s in cfg["slugs"]:
+                q_cand = QUESTION_DIR / f"{s}_q_{lc}.mp4"
+                std_cand = YT_UPLOADS_DIR / s / f"{s}_{lc}.mp4"
+                chosen = q_cand if q_cand.exists() else (std_cand if std_cand.exists() else None)
+                if chosen is None:
+                    seg_paths = []
+                    break
+                dur = vm.get_media_duration_seconds(chosen, ffprobe_exe)
+                sp = SCRIPTS_DIR / f"{s}.json"
+                sdoc = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else {}
+                ko_t, en_t = vm.split_bilingual_title(sdoc.get("title", s))
+                ch_title = vm.latex_to_unicode_title((en_t or sdoc.get("title_en") or ko_t) if lc == "en" else ko_t)
+                mm = int(cursor_sec) // 60
+                ss = int(cursor_sec) % 60
+                chapters.append(f"{mm:02d}:{ss:02d} [{s}] {ch_title}")
+                cursor_sec += dur
+                seg_paths.append(chosen)
+
+            if len(seg_paths) < 3 or cursor_sec < 480.0:
+                continue
+
+            out_mp4 = mc_dir / f"{mc_id}_{lc}.mp4"
+            if not out_mp4.exists() or out_mp4.stat().st_size < 1000000:
+                with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as tf:
+                    for p in seg_paths:
+                        tf.write(f"file '{p.resolve().as_posix()}'\n")
+                    concat_list = tf.name
+                try:
+                    subprocess.run(
+                        [ffmpeg_exe, "-y", "-f", "concat", "-safe", "0", "-i", concat_list, "-c", "copy", "-movflags", "+faststart", str(out_mp4)],
+                        check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                    )
+                finally:
+                    Path(concat_list).unlink(missing_ok=True)
+
+            # 4분(240초) 간격 미드롤 광고 최적 삽입 지점 계산
+            midrolls = [round(t, 1) for t in range(240, int(cursor_sec) - 90, 240)]
+            ch_block = "\n".join(chapters)
+            title_str = cfg["title_en"] if lc == "en" else cfg["title_ko"]
+            desc_str = (
+                f"{title_str}\n\n"
+                f"⏱️ [00:00 Masterclass Chapters & Mid-Roll Study Guide ({round(cursor_sec/60, 1)} mins)]\n"
+                f"{ch_block}\n\n"
+                f"🚀 [Interactive GeoGebra & 16,548 Step-by-Step Quizzes (100% Free)]\n"
+                f"👉 https://min7014.github.io/mathedu/video_board.html?from=yt_masterclass\n"
+                f"👉 https://min7014.github.io/mathedu/?from=yt_masterclass\n"
+                f"👉 https://min7014.github.io/\n\n"
+                f"[ID: {mc_id.upper()}_{lc.upper()}]\n"
+                f"#VisualProof #MathMasterclass #Geometry #Algebra #SATMath #APCalculus #수능수학 #시각적증명 #min7014_ai"
+            )
+            meta_obj[lc] = {
+                "course_id": mc_id,
+                "lang": lc,
+                "title": title_str[:98],
+                "description": desc_str,
+                "duration_sec": round(cursor_sec, 1),
+                "duration_min": round(cursor_sec / 60.0, 2),
+                "midroll_eligible_8min_plus": cursor_sec >= 480.0,
+                "recommended_midroll_ad_breaks_sec": midrolls,
+                "local_mp4_path": f"youtube_uploads/masterclasses/{out_mp4.name}",
+                "included_slugs": cfg["slugs"],
+            }
+            built.append((mc_id, lc, round(cursor_sec / 60.0, 1)))
+        if meta_obj:
+            meta_path.write_text(json.dumps(meta_obj, ensure_ascii=False, indent=2), encoding="utf-8")
+    return built
+
+
+def cmd_revenue():
+    """
+    [@min7014_ai 유튜브 채널 월 1,000만 원+ (₩10,000,000+/month) 광고수익 달성 관제 & 미드롤 마스터클래스 리포트]
+    """
+    built_mc = build_all_ready_masterclasses(langs=("ko", "en"))
+    inv = get_video_suite_inventory()
+    dk_path = ROOT_DIR / "assets" / "min7014_deep_knowledge.json"
+    total_dk = len(json.loads(dk_path.read_text(encoding="utf-8"))) if dk_path.exists() else 1113
+
+    # 8분(480초) 이상 미드롤 광고 적격 본편 수 집계
+    midroll_8min_count = 0
+    for sp in SCRIPTS_DIR.glob("*.json"):
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+            for pkg_field in ("youtube_packages", "question_classroom_packages"):
+                for lc, pkg in (sdoc.get(pkg_field) or {}).items():
+                    if isinstance(pkg, dict) and float(pkg.get("duration_sec") or 0) >= 480.0:
+                        midroll_8min_count += 1
+        except Exception:
+            pass
+
+    mc_files = list((YT_UPLOADS_DIR / "masterclasses").glob("*.mp4")) if (YT_UPLOADS_DIR / "masterclasses").exists() else []
+
+    roadmap = {
+        "target_monthly_revenue_krw": 10000000,
+        "target_monthly_revenue_usd": 7500,
+        "channel_handle": "@min7014_ai",
+        "total_min7014_source_topics": total_dk,
+        "scripted_topics_count": len(inv),
+        "four_edition_complete_ko": sum(1 for x in inv if x["all_suite_ko_ready"]),
+        "midroll_eligible_8min_plus_videos": midroll_8min_count + len(mc_files),
+        "masterclass_compilations_count": len(mc_files),
+        "revenue_streams_model": {
+            "1_global_english_longform_and_masterclass": {
+                "target_monthly_views": 400000,
+                "estimated_rpm_krw": 12000,
+                "projected_monthly_revenue_krw": 4800000,
+                "strategy": "Tier-1 (US/UK/CA/AU/SG) SAT/AP/AMC/IB/Olympiad English 1080p & 8min+ Mid-Roll Masterclasses",
+            },
+            "2_korean_longform_and_question_classroom": {
+                "target_monthly_views": 600000,
+                "estimated_rpm_krw": 5500,
+                "projected_monthly_revenue_krw": 3300000,
+                "strategy": "중·고등 내신·수능·2022 개정 질문하는 수업 8분+ 미드롤 본편 및 단원 완결 마스터클래스",
+            },
+            "3_viral_shorts_and_q_shorts_funnel": {
+                "target_monthly_views": 5000000,
+                "estimated_rpm_krw": 120,
+                "projected_monthly_revenue_krw": 600000,
+                "strategy": "일 8~12편 한·영 #Shorts & Q-#Shorts 노출 ➔ 8분+ 본편 및 홈페이지 전환 퍼널",
+            },
+            "4_website_adsense_adfit_and_rewarded_chest": {
+                "target_monthly_sessions": 180000,
+                "estimated_rpm_krw": 8500,
+                "projected_monthly_revenue_krw": 1530000,
+                "strategy": "유튜브 설명란·고정댓글 5단 딥링크 ➔ min7014.github.io/mathedu GeoGebra 실습 & 3D 게임 보상형 광고",
+            },
+        },
+        "total_projected_monthly_revenue_krw": 10230000,
+    }
+    roadmap_path = ROOT_DIR / "video_lectures" / "revenue_roadmap.json"
+    roadmap_path.write_text(json.dumps(roadmap, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    print("=" * 92)
+    print("💰 [@min7014_ai × mathedu] 월 1,000만 원+ (₩10,230,000/월) 광고수익 달성 엔진 & 자산 현황")
+    print("=" * 92)
+    print(f" • 전체 min7014.github.io 원천 자료 수      : {total_dk:,}개 (PDF 845개 + 웹/GeoGebra/AlgeoMath 268개)")
+    print(f" • 현재 대본·메타데이터 구축 완료 주제       : {len(inv):,}개 주제 (16대 단원 라운드로빈 연속 확장 중)")
+    print(f" • 8분+(480초+) 미드롤 광고 적격 고수익 영상 : {midroll_8min_count + len(mc_files)}편 (단원 마스터클래스 합본 {len(mc_files)}편 포함)")
+    if built_mc:
+        print(f" • 방금 빌드된 10분+ 미드롤 마스터클래스 합본: {', '.join(f'{m[0]}({m[1]}:{m[2]}분)' for m in built_mc)}")
+    print("-" * 92)
+    print(" 📈 [4대 수익 파이프라인 합산 월 1,023만 원 포트폴리오]")
+    print("   1) 🇺🇸 글로벌 영어 1080p & 마스터클래스 (RPM ₩12,000 × 월 40만 뷰) = ₩4,800,000 / 월")
+    print("   2) 🇰🇷 한국어 1080p 본편 & 질문수업     (RPM  ₩5,500 × 월 60만 뷰) = ₩3,300,000 / 월")
+    print("   3) 📱 한·영 바이럴 #Shorts & Q-#Shorts (RPM    ₩120 × 월 500만 뷰) =   ₩600,000 / 월 (+본편 유입)")
+    print("   4) 🌐 유튜브➔수학홈페이지 애드센스/보상형 (RPM  ₩8,500 × 월 18만 세션) = ₩1,530,000 / 월")
+    print("   -----------------------------------------------------------------------------------------")
+    print("   🏆 월간 목표 합산 광고수익 : ₩10,230,000 / 월 (목표 1,000만 원 대비 102.3% 설계 완료)")
+    print("=" * 92)
+    return roadmap
+
+
 def main():
     parser = argparse.ArgumentParser(description="Video_Creator Agent CLI — 본편 2종(일반/질문) + 숏폼 2종(일반/질문) 제작기")
     sub = parser.add_subparsers(dest="cmd")
@@ -313,6 +520,7 @@ def main():
     p_back3.add_argument("--lang", default="ko", choices=["ko", "en", "both"], help="언어 선택")
 
     sub.add_parser("audit", help="본편 2종 + 숏폼 2종 및 카탈로그 무결성 감사")
+    sub.add_parser("revenue", help="월 1,000만 원+ 유튜브 광고수익 로드맵 및 8분+ 미드롤 마스터클래스 합본 빌드")
     sub.add_parser("daemon", help="24/7 자동 제작 및 @min7014_ai 업로드 데몬 실행")
 
     args = parser.parse_args()
@@ -327,6 +535,8 @@ def main():
         cmd_backfill(limit=args.limit, langs=langs)
     elif args.cmd == "audit":
         cmd_audit()
+    elif args.cmd == "revenue":
+        cmd_revenue()
     elif args.cmd == "daemon":
         vm.run_shorts_and_video_upload_daemon()
     else:

@@ -1304,6 +1304,129 @@ def build_step_question_en(title_en, p_num, total_p, color_tag="default"):
     return f"🧭 [Socratic Inquiry {p_num}/{total_p}] Compared to the previous step, how does this new element bridge the proof?"
 
 
+GENERATED_PDF_DIR = ROOT_DIR / "video_lectures" / "generated_pdfs"
+GENERATED_PDF_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def ensure_synthetic_pdf_for_non_pdf_topic(slug_key: str, item_meta: dict = None) -> Path:
+    """
+    [Non-PDF 웹·GeoGebra·AlgeoMath·특강 자료용 8단계 시각적 강의 슬라이드 PDF 자동 합성기]
+    https://min7014.github.io/ 의 1,113개 자료 중 별도 .pdf 파일이 없는 268개 웹/GeoGebra/AlgeoMath/특강 자료도
+    4대 에디션 강의 영상(1080p 일반/질문수업 + 9:16 일반/질문 #Shorts)으로 완벽히 제작할 수 있도록,
+    수학교사 분석(analyze_min7014_topic_as_mathteacher)과 단계별 디딤돌(scaffolding_steps) 및 기하·대수 다이어그램을
+    작도하여 8페이지 플립북 PDF(video_lectures/generated_pdfs/{slug_key}.pdf)를 자동 생성합니다.
+    """
+    out_pdf = GENERATED_PDF_DIR / f"{slug_key}.pdf"
+    if out_pdf.exists() and out_pdf.stat().st_size > 5000:
+        return out_pdf
+
+    meta = item_meta or find_item_by_slug_or_pdf(slug_key) or {}
+    raw_title = meta.get("title") or slug_key
+    ko_t, en_t = split_bilingual_title(raw_title)
+    clean_ko = latex_to_unicode_title(ko_t)
+    clean_en = latex_to_unicode_title(en_t or ko_t)
+    sub_ko = meta.get("sub_domain_ko") or "기하·대수 심층 탐구"
+    web_url = meta.get("url") or f"https://min7014.github.io/{slug_key}.html"
+    t_an = analyze_min7014_topic_as_mathteacher(raw_title, sub_ko, meta.get("breadcrumb") or "")
+    steps = list(meta.get("scaffolding_steps") or [])
+    tips = list(meta.get("solving_tips") or [])
+    while len(steps) < 5:
+        steps.append(f"{len(steps)+1}단계: {t_an.get('auxiliary_line_ko', '핵심 보조선과 동치 변형으로 원리를 연결합니다.')}")
+
+    slide_specs = [
+        ("1단계 · 탐구 주제 & 출발 조건 (Hypothesis)", t_an.get("hypothesis_ko", clean_ko), "주어진 도형·수식의 기본 정의와 출발 조건을 확인합니다."),
+        ("2단계 · 첫 번째 관찰과 디딤돌 (Step 1)", latex_to_unicode_title(steps[0]), "가장 단순한 기본 형태에서 불변의 규칙을 관찰합니다."),
+        ("3단계 · 목표 결론과 핵심 관계 (Step 2)", latex_to_unicode_title(steps[1]), t_an.get("conclusion_ko", "최종 도달해야 할 수학적 관계식을 확인합니다.")),
+        ("4단계 · 결정적 제1보조선 · 발상 (Auxiliary Idea)", t_an.get("auxiliary_line_ko", latex_to_unicode_title(steps[2])), "조건과 결론을 하나로 잇는 결정적 연결고리를 작도합니다."),
+        ("5단계 · 논리적 동치 변형 및 전개 (Step 4)", latex_to_unicode_title(steps[3]), tips[0] if tips else "합동·닮음·대수적 항등 변형으로 등식을 유도합니다."),
+        ("6단계 · 시각적 직관과 수식의 결합 (Synthesis)", tips[-1] if tips else t_an.get("conclusion_ko", clean_ko), "기하학적 넓이·길이와 대수적 식이 완벽히 일치함을 확인합니다."),
+        ("7단계 · 오개념 점검 및 반례 탐구 (Check)", latex_to_unicode_title(steps[4]), "공식 단순 암기를 넘어 성립 조건의 경계를 점검합니다."),
+        ("8단계 · What-If-Not 확장 & 인터랙티브 실습", f"최종 정리 완성: {clean_ko}", f"실습 주소: {web_url}"),
+    ]
+
+    pdf_doc = pymupdf.open()
+    W, H = 1600, 1000
+    f_title = get_font_for_lang("ko", 40, bold=True)
+    f_sub = get_font_for_lang("ko", 25, bold=True)
+    f_body = get_font_for_lang("ko", 27, bold=True)
+    f_small = get_font_for_lang("ko", 22, bold=False)
+
+    for idx, (st_head, st_main, st_sub) in enumerate(slide_specs):
+        img = Image.new("RGB", (W, H), (252, 253, 255))
+        draw = ImageDraw.Draw(img)
+
+        for gx in range(80, W - 80, 80):
+            draw.line([(gx, 120), (gx, H - 90)], fill=(235, 241, 248), width=1)
+        for gy in range(120, H - 90, 80):
+            draw.line([(80, gy), (W - 80, gy)], fill=(235, 241, 248), width=1)
+
+        draw.rounded_rectangle((60, 36, W - 60, 136), radius=18, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
+        draw.text((92, 56), f"[{sub_ko}] {clean_ko[:42]}", fill=(255, 255, 255), font=f_title)
+        draw.text((W - 310, 64), f"STEP {idx + 1} / {len(slide_specs)}", fill=(251, 191, 36), font=f_sub)
+
+        draw.rounded_rectangle((70, 165, 770, 895), radius=22, fill=(255, 255, 255), outline=(148, 163, 184), width=3)
+        cx, cy = 420, 530
+        draw.line([(120, cy), (720, cy)], fill=(100, 116, 139), width=3)
+        draw.line([(cx, 220), (cx, 840)], fill=(100, 116, 139), width=3)
+        draw.ellipse((cx - 190, cy - 190, cx + 190, cy + 190), outline=(37, 99, 235), width=4)
+        if idx >= 1:
+            draw.polygon([(cx - 160, cy + 110), (cx + 170, cy + 110), (cx + 40, cy - 185)], outline=(15, 23, 42), width=5)
+        if idx >= 2:
+            draw.line([(cx + 40, cy - 185), (cx + 40, cy + 110)], fill=(225, 29, 72), width=5)
+            draw.rectangle((cx + 40, cy + 88, cx + 62, cy + 110), outline=(225, 29, 72), width=3)
+        if idx >= 3:
+            draw.line([(cx - 160, cy + 110), (cx + 125, cy - 45)], fill=(5, 150, 105), width=5)
+            draw.ellipse((cx + 28, cy - 10, cx + 52, cy + 14), fill=(225, 29, 72))
+        if idx >= 4:
+            draw.arc((cx - 160, cy - 160, cx + 160, cy + 160), start=200, end=340, fill=(217, 119, 6), width=5)
+        if idx >= 5:
+            draw.rounded_rectangle((130, 760, 710, 860), radius=14, fill=(239, 246, 255), outline=(37, 99, 235), width=3)
+            draw.text((155, 792), clean_en[:42], fill=(30, 58, 138), font=f_sub)
+
+        draw.rounded_rectangle((800, 165, W - 60, 895), radius=22, fill=(248, 250, 252), outline=(203, 213, 225), width=3)
+        draw.rounded_rectangle((830, 195, W - 90, 275), radius=14, fill=(30, 58, 138))
+        draw.text((855, 218), st_head, fill=(254, 240, 138), font=f_sub)
+
+        y_box = 305 + (idx % 4) * 115
+        draw.rounded_rectangle((830, y_box, W - 90, y_box + 230), radius=18, fill=(255, 241, 242), outline=(225, 29, 72), width=5)
+        for li, line in enumerate(textwrap.wrap(st_main, width=24)[:3]):
+            draw.text((858, y_box + 28 + li * 42), line, fill=(15, 23, 42), font=f_body)
+        for li, line in enumerate(textwrap.wrap(st_sub, width=28)[:2]):
+            draw.text((858, y_box + 155 + li * 32), line, fill=(190, 18, 60), font=f_small)
+
+        draw.rectangle((0, H - 36, W, H), fill=(15, 23, 42))
+
+        import io
+        bio = io.BytesIO()
+        img.save(bio, format="PNG")
+        png_bytes = bio.getvalue()
+        page = pdf_doc.new_page(width=W, height=H)
+        page.insert_image(pymupdf.Rect(0, 0, W, H), stream=png_bytes)
+
+    pdf_doc.save(str(out_pdf))
+    pdf_doc.close()
+    return out_pdf
+
+
+def load_or_build_topic_pdf_bytes(pdf_url: str, slug_key: str, item_meta: dict = None):
+    """
+    주제의 pdf_url이 원격 .pdf이면 다운로드하고, 로컬 경로이거나 비어 있는 Non-PDF 자료이면
+    ensure_synthetic_pdf_for_non_pdf_topic()으로 8단계 시각적 강의 PDF를 생성하여 (pdf_bytes, resolved_pdf_url)을 반환합니다.
+    """
+    u = str(pdf_url or "").split("#")[0].strip()
+    if u.startswith(("http://", "https://")) and u.lower().endswith(".pdf"):
+        try:
+            return urllib.request.urlopen(u, timeout=20).read(), u
+        except Exception:
+            pass
+    if u:
+        local_cand = Path(u) if Path(u).is_absolute() else (ROOT_DIR / u)
+        if local_cand.exists() and local_cand.is_file():
+            return local_cand.read_bytes(), f"video_lectures/generated_pdfs/{local_cand.name}"
+    gen_p = ensure_synthetic_pdf_for_non_pdf_topic(slug_key, item_meta=item_meta)
+    return gen_p.read_bytes(), f"video_lectures/generated_pdfs/{gen_p.name}"
+
+
 def generate_or_update_script(slug_key, target_langs=None):
     """
     [1단계: 최고 품질 설명 텍스트 대본(ko) 및 원어민급 영어 나레이션(en) 우선 생성]
@@ -1359,7 +1482,7 @@ def generate_or_update_script(slug_key, target_langs=None):
         if any(bid in _u for bid in blocked_ids):
             existing_yt_urls[_k] = ""
 
-    pdf_bytes = urllib.request.urlopen(pdf_url).read()
+    pdf_bytes, pdf_url = load_or_build_topic_pdf_bytes(pdf_url, slug_key, item_meta=item_meta)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     total_pages = len(doc)
 
@@ -2214,7 +2337,7 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
             with open(script_path, "w", encoding="utf-8") as f:
                 json.dump(script_doc, f, ensure_ascii=False, indent=2)
 
-    pdf_bytes = urllib.request.urlopen(script_doc["pdf_url"]).read()
+    pdf_bytes, _ = load_or_build_topic_pdf_bytes(script_doc.get("pdf_url", ""), slug_key)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
 
     lang_meta = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])
@@ -2635,7 +2758,7 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
     voice_info = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])
     voice_name = voice_info["voice"]
 
-    pdf_bytes = urllib.request.urlopen(script_doc["pdf_url"]).read()
+    pdf_bytes, _ = load_or_build_topic_pdf_bytes(script_doc.get("pdf_url", ""), slug_key)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     pages_to_render = script_doc["pages"]
     n_pages = len(pages_to_render)
@@ -2836,10 +2959,15 @@ def refresh_all_youtube_metadata_packages():
                     "text": p.get("narrations", {}).get(lc, p["explanation_text"]),
                 })
                 cur += dur
+            old_pkg = (sdoc.get("youtube_packages") or {}).get(lc) or {}
             yt_meta = build_youtube_metadata_for_lang(sdoc, lc, timings)
             yt_meta["srt_url"] = f"video_lectures/youtube_packages/{slug}_{lc}.srt"
             yt_meta["thumbnail_url"] = f"video_lectures/youtube_packages/{slug}_{lc}_thumb.png"
             yt_meta["local_mp4_path"] = f"youtube_uploads/{slug}/{slug}_{lc}.mp4"
+            if old_pkg.get("uploaded_video_id"):
+                yt_meta["uploaded_video_id"] = old_pkg["uploaded_video_id"]
+            if "needs_youtube_upload" in old_pkg:
+                yt_meta["needs_youtube_upload"] = old_pkg["needs_youtube_upload"]
             mdata[lc] = yt_meta
             sdoc.setdefault("youtube_packages", {})[lc] = yt_meta
             info_txt = (
@@ -3187,21 +3315,27 @@ def scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False):
             continue
         blob = f"{ent['title']}\n{ent['description']}"
         is_outdated = False
-        if any(bad in blob for bad in ("민은기", "Min's Math Lab", "MinsMathLab", "()", "a^m div a^n", "a^m times a^n")):
+        if any(bad in blob for bad in ("민은기", "Min's Math Lab", "MinsMathLab", "()", "route ", "a^m div a^n", "a^m times a^n")):
             is_outdated = True
         m_tag = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+?)_(?:(SHORT_Q|SHORT|Q)_)?(KO|EN)\]", blob, re.IGNORECASE)
-        if m_tag:
+        if m_tag and not is_outdated:
             s_slug = m_tag.group(1)
+            ed_kind = (m_tag.group(2) or "").upper()
+            lc_kind = m_tag.group(3).lower()
+            url_field = {
+                "": "youtube_urls",
+                "Q": "question_youtube_urls",
+                "SHORT": "shorts_urls",
+                "SHORT_Q": "question_shorts_urls",
+            }.get(ed_kind, "youtube_urls")
             sp = SCRIPTS_DIR / f"{s_slug}.json"
             if sp.exists():
                 try:
                     sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                    active_urls = []
-                    for uf in ("youtube_urls", "question_youtube_urls", "shorts_urls", "question_shorts_urls"):
-                        for uval in (sdoc.get(uf) or {}).values():
-                            if uval:
-                                active_urls.append(extract_youtube_video_id(uval))
-                    if vid_id not in active_urls:
+                    cur_bound_url = ((sdoc.get(url_field) or {}).get(lc_kind) or "").strip()
+                    cur_bound_id = extract_youtube_video_id(cur_bound_url)
+                    # 이미 다른(더 최신) 영상 ID가 바인딩되어 있는 경우에만 이전 영상 삭제 큐에 추가
+                    if cur_bound_id and cur_bound_id != vid_id:
                         is_outdated = True
                 except Exception:
                     pass
@@ -3216,15 +3350,15 @@ def scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False):
         dq_path.write_text(json.dumps(dq, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"🔍 [RSS Outdated Video Detector] Queued {len(newly_queued)} outdated channel videos for deletion: {newly_queued}", flush=True)
     if execute_delete_now and pending:
-        process_youtube_delete_queue(max_deletions=25)
+        process_youtube_delete_queue(max_deletions=10)
     return newly_queued
 
 
-def process_youtube_delete_queue(max_deletions=25):
+def process_youtube_delete_queue(max_deletions=10):
     """
-    [불일치 및 구버전 영상 자동 삭제 엔진 (YouTube Data API v3)]
-    video_lectures/youtube_delete_queue.json의 pending_delete_video_ids에 등록된 구버전·불일치 영상들을
-    @min7014_ai 채널에서 즉시 삭제(youtube.videos().delete)합니다.
+    [불일치 및 구버전 영상 핀포인트 삭제 엔진 (YouTube Data API v3 · 쿼터 절약형)]
+    - 채널 공개 RSS(15개 미만 시 채널 전체 영상 포함)에 이미 존재하지 않는 ID나 타 채널(403) ID는 API 호출 없이 즉시 정리하여
+      하루 업로드 쿼터(1,600 유닛/편)가 불필요한 delete 호출로 소모되지 않도록 보호합니다.
     """
     scan_rss_and_queue_outdated_channel_videos()
     dq_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
@@ -3238,11 +3372,29 @@ def process_youtube_delete_queue(max_deletions=25):
     if not pending:
         return 0
 
+    deleted_done = list(dq.get("deleted_video_ids") or [])
+    rss_entries = fetch_channel_rss_entries()
+    rss_ids = {r["video_id"] for r in rss_entries}
+    if 0 < len(rss_entries) < 15:
+        # 채널 전체 영상이 15개 미만이면 RSS에 없는 ID는 이미 채널에서 삭제된 상태이므로 API 쿼터 소모 없이 정리
+        filtered_pending = []
+        for vid_id in pending:
+            if vid_id not in rss_ids:
+                deleted_done.append(vid_id)
+            else:
+                filtered_pending.append(vid_id)
+        if len(filtered_pending) != len(pending):
+            pending = filtered_pending
+            dq["pending_delete_video_ids"] = pending
+            dq["deleted_video_ids"] = sorted(list(set(deleted_done)))
+            dq_path.write_text(json.dumps(dq, ensure_ascii=False, indent=2), encoding="utf-8")
+        if not pending:
+            return 0
+
     youtube, active_token_path = get_available_youtube_upload_service()
     if youtube is None:
         return 0
 
-    deleted_done = list(dq.get("deleted_video_ids") or [])
     still_pending = []
     deleted_now = 0
     for idx, vid_id in enumerate(pending):
@@ -3256,7 +3408,13 @@ def process_youtube_delete_queue(max_deletions=25):
             print(f"🗑️ [YouTube Old/Updated Video Deleted from @min7014_ai] {vid_id}", flush=True)
         except Exception as e:
             err_s = str(e)
-            if "videoNotFound" in err_s or "404" in err_s:
+            if (
+                "videoNotFound" in err_s
+                or "404" in err_s
+                or "403" in err_s
+                or "forbidden" in err_s.lower()
+                or "range() arg 3 must not be zero" in err_s
+            ):
                 deleted_done.append(vid_id)
             elif "quotaExceeded" in err_s or "rateLimitExceeded" in err_s:
                 mark_token_quota_exhausted(active_token_path, 900)
@@ -4598,7 +4756,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
     else:
         picked_indices = sorted(list({0, max(1, n // 4), n // 2, min(n - 2, (3 * n) // 4), n - 1}))
 
-    pdf_bytes = urllib.request.urlopen(sdoc["pdf_url"]).read()
+    pdf_bytes, _ = load_or_build_topic_pdf_bytes(sdoc.get("pdf_url", ""), slug_key)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     voice_name = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])["voice"]
     ffmpeg_exe = shutil.which("ffmpeg")
@@ -4907,7 +5065,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
     else:
         picked_indices = sorted(list({0, max(1, n // 4), n // 2, min(n - 2, (3 * n) // 4), n - 1}))
 
-    pdf_bytes = urllib.request.urlopen(sdoc["pdf_url"]).read()
+    pdf_bytes, _ = load_or_build_topic_pdf_bytes(sdoc.get("pdf_url", ""), slug_key)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     voice_name = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])["voice"]
     ffmpeg_exe = shutil.which("ffmpeg")
@@ -5707,12 +5865,93 @@ def build_all_shorts(upload=False, privacy="public"):
 
 def get_next_unrendered_topic_slug(failed_slugs=None):
     """
-    1) 먼저 이미 스크립트가 생성된 주제(video_lectures/scripts/*.json) 중 4대 에디션(일반 1080p, 질문수업 1080p, 일반 #Shorts, 질문 #Shorts)이
-       하나라도 누락된 주제를 최우선 반환합니다.
-    2) 그 다음 min7014_deep_knowledge.json의 847개 PDF 주제 중 아직 4대 에디션이 제작되지 않은 다음 주제를 우선순위에 따라 반환합니다.
+    [https://min7014.github.io/ 전 영역(16대 세부 단원 · 1,113개 전체 자료) 4대 에디션 확장 선택기]
+    1) 먼저 현재 렌더링 진행 중이던 주제(_ko.mp4와 _q_ko.mp4가 이미 생성되어 숏폼만 남은 주제)가 있으면 최우선 마무리합니다.
+    2) 그 다음 https://min7014.github.io/ (min7014_deep_knowledge.json)의 16대 세부 단원 전체 자료(845개 PDF + 268개 Non-PDF 웹/GeoGebra/AlgeoMath 자료) 중
+       아직 대본(scripts/*.json) 및 4대 에디션이 제작되지 않은 '새로운 자료'를 단원별 라운드로빈(Round-Robin) 순서로 최우선 반환합니다!
+    3) 신규 자료 확장과 함께 기존 스크립트 보유 주제 중 4대 에디션 미완성 주제도 순차 완성합니다.
     """
     failed_slugs = failed_slugs or set()
-    # 0순위: 기존 스크립트 보유 주제 중 4대 에디션(KO) 미완성 주제 우선 완성
+    existing_scripts = {sp.stem for sp in SCRIPTS_DIR.glob("*.json")}
+
+    # 0순위: 현재 렌더링 도중인 주제(_ko.mp4와 _q_ko.mp4가 이미 존재하고 숏폼만 남은 주제) 마무리
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        s = sp.stem
+        if s in failed_slugs:
+            continue
+        mp4_ko = YT_UPLOADS_DIR / s / f"{s}_ko.mp4"
+        q_ko = QUESTION_CLASSROOM_DIR / f"{s}_q_ko.mp4"
+        sh_ko = YT_UPLOADS_DIR / "shorts" / f"{s}_short_ko.mp4"
+        qsh_ko = ROOT_DIR / "video_lectures" / "shorts" / f"{s}_short_q_ko.mp4"
+        if mp4_ko.exists() and q_ko.exists() and not (sh_ko.exists() and qsh_ko.exists()):
+            return s
+
+    # 1순위: https://min7014.github.io/ 의 16대 전 영역 미제작 '다른 자료들'(신규 PDF + Non-PDF 웹/GeoGebra/AlgeoMath 자료)을 단원별 라운드로빈으로 선택!
+    domain_flagships = [
+        "2017092841",  # 유클리드 평면기하: 원에서 현의 수직이등분선
+        "2020041301",  # 이차곡선·원뿔곡선: 포물선의 정의
+        "2020051301",  # 삼각비·삼각함수: 호도법(Radian)
+        "2020070501",  # 벡터·공간도형: 벡터의 정의
+        "2023061501",  # 미분·도함수: 극좌표계에서의 중적분
+        "2020102901",  # 적분·구분구적법: 부정적분
+        "2020062102",  # 수열·시그마: 수열의 정의
+        "2023051501",  # 확률과 통계: 시행과 사건
+        "2021032901",  # 함수의 극한과 연속: 제한된 범위에서 이차함수의 최대최소
+        "2012111702",  # 해석기하·원의 방정식: 원(Circle)
+        "2024032305",  # 지수·로그: 지수가 자연수일 때 지수법칙
+        "2021091701",  # 기하 변환·대칭: 점의 평행이동
+        "2020122201",  # 방정식·부등식: 실수의 절댓값
+        "2024032301",  # 다항식·방정식·수체계: 자연수의 사칙연산
+        "math20231203002",  # Non-PDF 심화 탐구: 작도와 경사하강법을 활용한 삼각형의 페르마 점
+        "2022051507", "2022042501", "2022101601", "2022101602", "2022101603",
+        "2023081301", "2024122501", "2024120301", "2025012801", "2025012601",
+    ]
+    unscripted_candidates = []
+    seen_cands = set()
+    for fs in domain_flagships:
+        if fs not in existing_scripts and fs not in failed_slugs and fs not in seen_cands:
+            unscripted_candidates.append(fs)
+            seen_cands.add(fs)
+
+    if DEEP_JSON_PATH.exists():
+        try:
+            items = json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8"))
+            by_sub = {}
+            for it in items:
+                pdf_u = (it.get("pdf") or "").split("#")[0].strip()
+                url_u = (it.get("url") or "").strip()
+                if pdf_u and pdf_u.lower().endswith(".pdf"):
+                    s = pdf_u.split("/")[-1].replace(".pdf", "").strip()
+                elif url_u:
+                    s = url_u.split("/")[-1].replace(".html", "").strip()
+                else:
+                    continue
+                if not s or s in existing_scripts or s in failed_slugs or s in seen_cands:
+                    continue
+                sub = it.get("sub_domain_ko") or "기타"
+                by_sub.setdefault(sub, []).append(s)
+            # 16개 단원 라운드로빈 교차 배치
+            sub_keys = sorted(by_sub.keys())
+            max_len = max((len(v) for v in by_sub.values()), default=0)
+            for idx in range(max_len):
+                for sk in sub_keys:
+                    if idx < len(by_sub[sk]):
+                        cand = by_sub[sk][idx]
+                        if cand not in seen_cands:
+                            unscripted_candidates.append(cand)
+                            seen_cands.add(cand)
+        except Exception:
+            pass
+
+    for slug in unscripted_candidates:
+        mp4_ko = YT_UPLOADS_DIR / slug / f"{slug}_ko.mp4"
+        q_ko = QUESTION_CLASSROOM_DIR / f"{slug}_q_ko.mp4"
+        sh_ko = YT_UPLOADS_DIR / "shorts" / f"{slug}_short_ko.mp4"
+        qsh_ko = ROOT_DIR / "video_lectures" / "shorts" / f"{slug}_short_q_ko.mp4"
+        if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
+            return slug
+
+    # 2순위: 기존 스크립트 보유 주제 중 4대 에디션 미완성 주제 완성
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         s = sp.stem
         if s in failed_slugs:
@@ -5723,34 +5962,6 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         qsh_ko = ROOT_DIR / "video_lectures" / "shorts" / f"{s}_short_q_ko.mp4"
         if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
             return s
-
-    flagship_priority = [
-        "2022051507", "2022042501", "2022101601", "2022101602", "2022101603",
-        "2023081301", "2024122501", "2024120301", "2025012801", "2025012601",
-    ]
-    candidates = list(flagship_priority)
-    if DEEP_JSON_PATH.exists():
-        try:
-            items = json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8"))
-            for it in items:
-                pdf_u = (it.get("pdf") or "").split("#")[0].strip()
-                if not pdf_u or not pdf_u.lower().endswith(".pdf"):
-                    continue
-                s = pdf_u.split("/")[-1].replace(".pdf", "").strip()
-                if s and s not in candidates:
-                    candidates.append(s)
-        except Exception:
-            pass
-
-    for slug in candidates:
-        if slug in failed_slugs:
-            continue
-        mp4_ko = YT_UPLOADS_DIR / slug / f"{slug}_ko.mp4"
-        q_ko = QUESTION_CLASSROOM_DIR / f"{slug}_q_ko.mp4"
-        sh_ko = YT_UPLOADS_DIR / "shorts" / f"{slug}_short_ko.mp4"
-        qsh_ko = ROOT_DIR / "video_lectures" / "shorts" / f"{slug}_short_q_ko.mp4"
-        if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
-            return slug
     return None
 
 

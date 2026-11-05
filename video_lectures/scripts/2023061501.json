@@ -1,0 +1,352 @@
+{
+  "slug": "2023061501",
+  "title": "극좌표계에서의 중적분(Double Integrals in Polar Coordinates)",
+  "title_en": "Double Integrals in Polar Coordinates",
+  "sub_domain_ko": "미분·도함수",
+  "core_concept": "'극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정) ➔ '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+  "solving_tip": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
+  "pdf_url": "https://min7014.github.io/2023/2023061501.pdf",
+  "web_url": "https://min7014.github.io/math20230615001.html",
+  "page_count": 28,
+  "base_language": "ko",
+  "quality_profile": "Broadcast Master 1080p (PyMuPDF Geometric Script Engine + 300 DPI Lanczos + H.264 High Profile CRF 16)",
+  "viral_hooks": {},
+  "storage_policy": {
+    "ko": "YouTube (한국어 강의 영상 유튜브 저장·스트리밍)",
+    "en": "YouTube (English Lecture Video Stored & Streamed on YouTube)",
+    "other_languages": "Script-First Real-Time TTS & Studio Rendering"
+  },
+  "youtube_urls": {
+    "ko": "",
+    "en": "",
+    "orig": "https://youtu.be/cEwOKx6LHjQ"
+  },
+  "shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_youtube_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "question_shorts_urls": {
+    "ko": "",
+    "en": ""
+  },
+  "youtube_packages": {},
+  "shorts_packages": {},
+  "question_classroom_packages": {},
+  "question_shorts_packages": {},
+  "teacher_proof_analysis": {
+    "category_type": "algebra",
+    "hypothesis_ko": "'극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)",
+    "conclusion_ko": "'극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+    "auxiliary_line_ko": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
+    "proof_logic_ko": "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리",
+    "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+    "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
+  },
+  "supported_languages": [
+    "ko",
+    "en",
+    "ja",
+    "zh-CN",
+    "es",
+    "fr",
+    "de",
+    "vi",
+    "pt",
+    "ru",
+    "ar",
+    "hi",
+    "id",
+    "tr",
+    "th",
+    "it"
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "scene_index": 1,
+      "frame_range": [
+        1,
+        1
+      ],
+      "step_title": "도입 · 출발 조건(가정)과 목표 결론 읽기 (Notice & Wonder)",
+      "step_question_ko": "❓ [출발 질문] 극좌표계에서의 중적분에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요?",
+      "step_question_en": "❓ [Opening Question] What is the starting condition and target conclusion in Double Integrals in Polar Coordinates?",
+      "visual_focus": "단계별 수학적 추론 및 증명 전개",
+      "color_tag": "default",
+      "diff_bbox": null,
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 극좌표계에서의 중적분입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)입니다. 왜 이 조건에서 '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+      "narrations": {
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 극좌표계에서의 중적분입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)입니다. 왜 이 조건에서 '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "en": "Step 1. Today we explore Double Integrals in Polar Coordinates through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
+      }
+    },
+    {
+      "page": 3,
+      "scene_index": 2,
+      "frame_range": [
+        2,
+        4
+      ],
+      "step_title": "Step 2 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] 극좌표계에서의 중적분를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Question] What basic definition should we apply first to prove double integrals in polar coordinates?",
+      "visual_focus": "단계별 수학적 추론 및 증명 전개",
+      "color_tag": "default",
+      "diff_bbox": [
+        0.0764,
+        0.1405,
+        0.5599,
+        0.6033
+      ],
+      "explanation_text": "2단계, 2페이지부터 4페이지까지의 단계입니다. 먼저 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+      "narrations": {
+        "ko": "2단계, 2페이지부터 4페이지까지의 단계입니다. 먼저 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 2, pages 2 to 4. First, accurately establish the basic definition of the equation based on the basic definition and starting conditions (assumptions) given in 'Double Integration in Polar Coordinates'. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol."
+      }
+    },
+    {
+      "page": 5,
+      "scene_index": 3,
+      "frame_range": [
+        5,
+        6
+      ],
+      "step_title": "Step 3 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] 극좌표계에서의 중적분를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Question] What basic definition should we apply first to prove double integrals in polar coordinates?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.155,
+        0.4656,
+        0.4855,
+        0.5813
+      ],
+      "explanation_text": "3단계, 5페이지부터 6페이지까지의 단계입니다. 먼저 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+      "narrations": {
+        "ko": "3단계, 5페이지부터 6페이지까지의 단계입니다. 먼저 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 3, pages 5 to 6. First, accurately establish the basic definition of the equation based on the basic definition and starting conditions (assumptions) given in 'Double Integration in Polar Coordinates'. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol."
+      }
+    },
+    {
+      "page": 8,
+      "scene_index": 4,
+      "frame_range": [
+        7,
+        9
+      ],
+      "step_title": "Step 4 · 기본 정의 확인 및 출발 식 세우기 (Definition)",
+      "step_question_ko": "❓ [정의 질문] 극좌표계에서의 중적분를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?",
+      "step_question_en": "❓ [Definition Question] What basic definition should we apply first to prove double integrals in polar coordinates?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.1529,
+        0.2755,
+        0.4132,
+        0.5702
+      ],
+      "explanation_text": "4단계, 7페이지부터 9페이지까지의 단계입니다. 먼저 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+      "narrations": {
+        "ko": "4단계, 7페이지부터 9페이지까지의 단계입니다. 먼저 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "en": "Step 4, pages 7 through 9. First, accurately establish the basic definition of the equation based on the basic definition and starting conditions (assumptions) given in 'Double Integration in Polar Coordinates'. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol."
+      }
+    },
+    {
+      "page": 10,
+      "scene_index": 5,
+      "frame_range": [
+        10,
+        11
+      ],
+      "step_title": "Step 5 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Key Idea Question] What algebraic transformation or model do you use to connect the starting equation to the target conclusion?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.2851,
+        0.3388,
+        0.4091,
+        0.5124
+      ],
+      "explanation_text": "5단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+      "narrations": {
+        "ko": "5단계, 10페이지부터 11페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 5, pages 10 to 11. Now, we expand the given equation, which is the key to the proof, term by term according to the basic definition, and apply the algebraic idea of ​​symmetrically grouping similar terms and common factors. After this conversion, the structure of an expression that seemed complex can be clearly solved using basic operations that we already know."
+      }
+    },
+    {
+      "page": 13,
+      "scene_index": 6,
+      "frame_range": [
+        12,
+        14
+      ],
+      "step_title": "Step 6 · 핵심 대수적 발상 및 식의 변환 (Algebraic Bridge)",
+      "step_question_ko": "🧭 [핵심 발상 질문] 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요?",
+      "step_question_en": "🧭 [Key Idea Question] What algebraic transformation or model do you use to connect the starting equation to the target conclusion?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.155,
+        0.3444,
+        0.407,
+        0.5895
+      ],
+      "explanation_text": "6단계, 12페이지부터 14페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+      "narrations": {
+        "ko": "6단계, 12페이지부터 14페이지까지의 단계입니다. 이제 증명의 핵심 열쇠인 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "en": "Step 6, pages 12 to 14. Now, we expand the given equation, which is the key to the proof, term by term according to the basic definition, and apply the algebraic idea of ​​symmetrically grouping similar terms and common factors. After this conversion, the structure of an expression that seemed complex can be clearly solved using basic operations that we already know."
+      }
+    },
+    {
+      "page": 16,
+      "scene_index": 7,
+      "frame_range": [
+        15,
+        17
+      ],
+      "step_title": "Step 7 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception check question] In this calculation process, what is the most common pitfall due to signs or conditions?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.2872,
+        0.2342,
+        0.7438,
+        0.5179
+      ],
+      "explanation_text": "7단계, 15페이지부터 17페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+      "narrations": {
+        "ko": "7단계, 15페이지부터 17페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 7, pages 15 to 17. The equation is derived flawlessly according to the principle of inevitably deriving the right side from the left side by applying the properties of the equation and the laws of operation (laws of exchange, combination, and distribution) step by step. One thing to be especially careful about at this stage is that if you simply memorize the conclusion formula, it cannot be applied even if the conditions are slightly modified, so you must first check what definition and initial idea you started from."
+      }
+    },
+    {
+      "page": 18,
+      "scene_index": 8,
+      "frame_range": [
+        18,
+        19
+      ],
+      "step_title": "Step 8 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception check question] In this calculation process, what is the most common pitfall due to signs or conditions?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.4752,
+        0.3058,
+        0.6839,
+        0.3719
+      ],
+      "explanation_text": "8단계, 18페이지부터 19페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+      "narrations": {
+        "ko": "8단계, 18페이지부터 19페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 8, pages 18 to 19. The equation is derived flawlessly according to the principle of inevitably deriving the right side from the left side by applying the properties of the equation and the laws of operation (laws of exchange, combination, and distribution) step by step. One thing to be especially careful about at this stage is that if you simply memorize the conclusion formula, it cannot be applied even if the conditions are slightly modified, so you must first check what definition and initial idea you started from."
+      }
+    },
+    {
+      "page": 21,
+      "scene_index": 9,
+      "frame_range": [
+        20,
+        22
+      ],
+      "step_title": "Step 9 · 단계별 연산 법칙 적용 및 오개념 예방 (Verification)",
+      "step_question_ko": "⚠️ [오개념 점검 질문] 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요?",
+      "step_question_en": "⚠️ [Misconception check question] In this calculation process, what is the most common pitfall due to signs or conditions?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.4793,
+        0.3802,
+        0.8037,
+        0.5372
+      ],
+      "explanation_text": "9단계, 20페이지부터 22페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+      "narrations": {
+        "ko": "9단계, 20페이지부터 22페이지까지의 단계입니다. 등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
+        "en": "Step 9, pages 20 to 22. The equation is derived flawlessly according to the principle of inevitably deriving the right side from the left side by applying the properties of the equation and the laws of operation (laws of exchange, combination, and distribution) step by step. One thing to be especially careful about at this stage is that if you simply memorize the conclusion formula, it cannot be applied even if the conditions are slightly modified, so you must first check what definition and initial idea you started from."
+      }
+    },
+    {
+      "page": 23,
+      "scene_index": 10,
+      "frame_range": [
+        23,
+        24
+      ],
+      "step_title": "Step 10 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Comprehensive question] How can the final law be completed by condensing the equations derived so far into one?",
+      "visual_focus": "붉은색 목표 결론 및 핵심 등식 강조",
+      "color_tag": "red",
+      "diff_bbox": [
+        0.4773,
+        0.5399,
+        0.6322,
+        0.6033
+      ],
+      "explanation_text": "10단계, 23페이지부터 24페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+      "narrations": {
+        "ko": "10단계, 23페이지부터 24페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 10, pages 23 to 24. If we combine the formulas organized in the previous step into one, the final conclusion is naturally drawn that the key theorems and relations of 'double integral in polar coordinates', which we were aiming for, always hold true!"
+      }
+    },
+    {
+      "page": 26,
+      "scene_index": 11,
+      "frame_range": [
+        25,
+        27
+      ],
+      "step_title": "Step 11 · 대수적 등식 결합 및 성질 완성 (Synthesis)",
+      "step_question_ko": "💡 [종합 질문] 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요?",
+      "step_question_en": "💡 [Comprehensive question] How can the final law be completed by condensing the equations derived so far into one?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.1921,
+        0.5399,
+        0.6942,
+        0.8264
+      ],
+      "explanation_text": "11단계, 25페이지부터 27페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+      "narrations": {
+        "ko": "11단계, 25페이지부터 27페이지까지의 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 자연스럽게 도출됩니다!",
+        "en": "Step 11, pages 25 to 27. If we combine the formulas organized in the previous step into one, the final conclusion is naturally drawn that the key theorems and relations of 'double integral in polar coordinates', which we were aiming for, always hold true!"
+      }
+    },
+    {
+      "page": 28,
+      "scene_index": 12,
+      "frame_range": [
+        28,
+        28
+      ],
+      "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?",
+      "step_question_en": "🔀 [What-If-Not] How does this mathematical principle evolve if we modify or generalize its conditions?",
+      "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
+      "color_tag": "blue",
+      "diff_bbox": [
+        0.0764,
+        0.1405,
+        0.9628,
+        0.8264
+      ],
+      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)에서 시작해, 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 거쳐, '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+      "narrations": {
+        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 '극좌표계에서의 중적분'에서 주어진 기본 정의와 출발 조건(가정)에서 시작해, 주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상을 거쳐, '극좌표계에서의 중적분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다. 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요? 설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!",
+        "en": "The last 12 steps, the proof, are complete! Starting from the basic definitions and starting conditions (assumptions) given in 'Double Integration in Polar Coordinates', which were the starting conditions, and going through the algebraic idea of ​​developing the given equation term by term according to the basic definition and symmetrically grouping cognate terms and common factors, it was clearly confirmed that the final conclusion that the core theorem and relational expressions of 'Double Integration in Polar Coordinates' always hold true is established. The key point to remember here is that if you simply memorize the conclusion formula, it cannot be applied even if the conditions are slightly modified, so you must first check what definition and initial idea you started from. Finally, ask a deeper question. If the conditions or order of this theorem are generalized one level, what kind of advanced problem will it develop into in the high school CSAT exam? Experiment by changing the values ​​and shapes directly on the math homepage in the link in the description!"
+      }
+    }
+  ]
+}
