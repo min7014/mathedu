@@ -46,90 +46,99 @@ SITEMAP_XML = ROOT_DIR / "sitemap.xml"
 
 FLAGSHIP_YT_TOPICS = [
     {
-        "slug": "0003",
+        "slug": "2017090101",
         "id": "MIN-KB-0003",
         "title": "피타고라스 정리 (25단계 넓이 분할·전단 이동 시각 증명)",
         "title_en": "Pythagorean Theorem (25-Step Area Dissection & Shear Proof)",
         "keyword": "피타고라스",
         "domain": "기하 · 직각삼각형 · 넓이 보존",
         "hook_ko": "a²+b²=c² 공식을 외우기 전에, 두 정사각형 조각이 빗변 정사각형으로 빈틈없이 미끄러져 들어가는 25단계 시각 증명을 눈으로 확인해 보세요!",
-        "yt_ko": "https://youtu.be/k6LBYa5SCiA",
-        "yt_en": "https://youtu.be/n9zyKwXXsbA",
-        "yt_id_ko": "k6LBYa5SCiA",
-        "yt_id_en": "n9zyKwXXsbA",
-        "short_mp4": "video_lectures/shorts/0003_short_ko.mp4",
+        "yt_ko": "https://youtu.be/7RcvUpfGM6s",
+        "yt_en": "https://youtu.be/yZER1pGb2J8",
+        "yt_q_ko": "https://youtu.be/E7x3OZdC14U",
+        "yt_short_ko": "https://youtube.com/shorts/1RKQ4Uxu4Uw",
+        "yt_id_ko": "7RcvUpfGM6s",
+        "yt_id_en": "yZER1pGb2J8",
+        "short_mp4": "video_lectures/shorts/2017090101_short_ko.mp4",
         "thumb": "video_lectures/youtube_packages/2017090101_ko_thumb.png",
         "steps": 25,
     },
     {
-        "slug": "0001",
+        "slug": "2014111901",
         "id": "MIN-KB-0001",
         "title": "메넬라우스의 정리 (20단계 평행보조선 시각 증명)",
         "title_en": "Menelaus' Theorem (20-Step Parallel Auxiliary Line Proof)",
         "keyword": "메넬라우스",
         "domain": "기하 · 닮음비 · 보조선",
         "hook_ko": "복잡한 삼각형 할선 비율 공식, 단 1줄의 평행보조선만 그으면 중학교 닮음비로 3초 만에 증명이 끝납니다!",
-        "yt_ko": "https://youtu.be/7zD66SWWceg",
-        "yt_en": "https://youtu.be/CjE2nyyzG2s",
-        "yt_id_ko": "7zD66SWWceg",
-        "yt_id_en": "CjE2nyyzG2s",
-        "short_mp4": "video_lectures/shorts/0001_short_ko.mp4",
+        "yt_ko": "https://youtu.be/CshN2d86plg",
+        "yt_en": "https://youtu.be/d0yl3hSHDgE",
+        "yt_q_ko": "https://youtu.be/pXjyHgxYzGQ",
+        "yt_short_ko": "https://youtube.com/shorts/9uWcbayRrgo",
+        "yt_id_ko": "CshN2d86plg",
+        "yt_id_en": "d0yl3hSHDgE",
+        "short_mp4": "video_lectures/shorts/2014111901_short_ko.mp4",
         "thumb": "video_lectures/youtube_packages/2014111901_ko_thumb.png",
         "steps": 20,
     },
     {
-        "slug": "0002",
+        "slug": "2014111902",
         "id": "MIN-KB-0002",
         "title": "체바의 정리 (17단계 삼각형 넓이 비 시각 증명)",
         "title_en": "Ceva's Theorem (17-Step Triangle Area Ratio Proof)",
         "keyword": "체바",
         "domain": "기하 · 삼각형 공점선 · 넓이 비",
         "hook_ko": "세 체바선이 한 점에서 만날 조건, 밑변의 길이 비를 색칠된 삼각형의 넓이 비로 바꾸면 순환 약분으로 깔끔하게 1이 됩니다!",
-        "yt_ko": "https://youtu.be/W_AWH-Gk89w",
-        "yt_en": "https://youtu.be/ffNJhPRvh4Y",
-        "yt_id_ko": "W_AWH-Gk89w",
-        "yt_id_en": "ffNJhPRvh4Y",
-        "short_mp4": "video_lectures/shorts/0002_short_ko.mp4",
+        "yt_ko": "https://youtu.be/oq_CJWJ-Zrg",
+        "yt_en": "https://youtu.be/aKmG-iKoieQ",
+        "yt_q_ko": "https://youtu.be/zvRgbIKm0jc",
+        "yt_short_ko": "https://youtube.com/shorts/mIjeGSQ3Ors",
+        "yt_id_ko": "oq_CJWJ-Zrg",
+        "yt_id_en": "aKmG-iKoieQ",
+        "short_mp4": "video_lectures/shorts/2014111902_short_ko.mp4",
         "thumb": "video_lectures/youtube_packages/2014111902_ko_thumb.png",
         "steps": 17,
     },
     {
-        "slug": "0004",
+        "slug": "math20250130001",
         "id": "MIN-KB-0004",
         "title": "피타고라스 나무 (11단계 프랙탈 넓이 보존 & 무한등비급수)",
         "title_en": "Pythagoras Tree (11-Step Fractal Area Conservation)",
         "keyword": "등비급수",
         "domain": "수열 · 미적분 · 프랙탈 기하",
         "hook_ko": "가지가 무한히 뻗어나가는 피타고라스 나무에서 각 단계 정사각형 넓이의 합이 왜 항상 일정한지 11단계 플립북으로 확인하세요!",
-        "yt_ko": "https://youtu.be/bQO7fnT6aDU",
-        "yt_en": "https://youtu.be/9JKLflqrtDU",
-        "yt_id_ko": "bQO7fnT6aDU",
-        "yt_id_en": "9JKLflqrtDU",
-        "short_mp4": "video_lectures/shorts/0004_short_ko.mp4",
-        "thumb": "video_lectures/youtube_packages/2014111902_ko_thumb.png",
+        "yt_ko": "https://youtu.be/DSgUHigl82o",
+        "yt_en": "https://youtu.be/3ik6yQ-0fP8",
+        "yt_q_ko": "https://youtu.be/GS9Qj-g-oVo",
+        "yt_short_ko": "https://youtube.com/shorts/wSOzehSfEbY",
+        "yt_id_ko": "DSgUHigl82o",
+        "yt_id_en": "3ik6yQ-0fP8",
+        "short_mp4": "video_lectures/shorts/math20250130001_short_ko.mp4",
+        "thumb": "video_lectures/youtube_packages/math20250130001_ko_thumb.png",
         "steps": 11,
     },
     {
-        "slug": "0005",
+        "slug": "2025020101",
         "id": "MIN-KB-0005",
         "title": "종이띠로 접는 정칠각형 매듭 원리 (11단계 대칭 작도)",
         "title_en": "Regular Heptagon Paper-Strip Knot Construction (11 Steps)",
         "keyword": "다각형",
         "domain": "기하 · 정다각형 작도 · 대칭성",
         "hook_ko": "자와 컴퍼스만으로는 작도할 수 없는 정칠각형이 긴 종이띠 매듭 하나로 완벽하게 접히는 수학적 비밀을 공개합니다!",
-        "yt_ko": "https://youtu.be/Mq6s2JLV9mQ",
-        "yt_en": "https://youtu.be/fXQJ8s1La-E",
-        "yt_id_ko": "Mq6s2JLV9mQ",
-        "yt_id_en": "fXQJ8s1La-E",
-        "short_mp4": "video_lectures/shorts/0005_short_ko.mp4",
-        "thumb": "video_lectures/youtube_packages/2022051507_ko_thumb.png",
+        "yt_ko": "https://youtube.com/shorts/OiCRDRdOI_g",
+        "yt_en": "https://youtube.com/shorts/iiO39hbWzhs",
+        "yt_short_ko": "https://youtube.com/shorts/OiCRDRdOI_g",
+        "yt_id_ko": "OiCRDRdOI_g",
+        "yt_id_en": "iiO39hbWzhs",
+        "short_mp4": "video_lectures/shorts/2025020101_short_ko.mp4",
+        "thumb": "video_lectures/youtube_packages/2025020101_ko_thumb.png",
         "steps": 11,
     },
 ]
 
 
 def build_7channel_messages_for_topic(topic: dict) -> dict:
-    slug = topic.get("slug", "0003")
+    slug = topic.get("slug", "2017090101")
     title = topic.get("title", "시각적 수학 증명")
     title_en = topic.get("title_en", "Visual Math Proof")
     kw = topic.get("keyword", "기하")
@@ -146,7 +155,7 @@ def build_7channel_messages_for_topic(topic: dict) -> dict:
 
     return {
         "youtube_pinned": (
-            f"📌 [민은기 선생님의 수학자료실 × @min7014_ai 공식 학습 & 실습 링크]\n"
+            f"📌 [단계별 시각적 수학 증명_AI (@min7014_ai) × mathedu 공식 학습 & 실습 링크]\n"
             f"{hook}\n\n"
             f"방금 영상으로 본 [{title}] 원리를 지금 바로 홈페이지에서 내 손으로 조작하고 문제로 풀어보세요! (100% 무료)\n"
             f"📐 1단계 · 이 도형 GeoGebra로 직접 움직여보기: {url_board}\n"
@@ -169,7 +178,7 @@ def build_7channel_messages_for_topic(topic: dict) -> dict:
         "student_community": (
             f"📌 [수학 공부법/무료 사이트 추천] 공식 통암기 멈추고 '보조선 플립북 영상 + 탈-5지선다 수식 조립'으로 수학 깨치는 법 ({title})\n\n"
             f"문제 풀다가 막히면 해설지 첫 줄('보조선을 긋는다')을 왜 그어야 하는지 몰라서 좌절하곤 했는데,\n"
-            f"민은기 선생님의 수학자료실 유튜브(@min7014_ai)와 연계된 mathedu 홈페이지를 같이 쓰니까 원리가 완전히 다르게 보입니다.\n\n"
+            f"단계별 시각적 수학 증명 유튜브(@min7014_ai)와 연계된 mathedu 홈페이지를 같이 쓰니까 원리가 완전히 다르게 보입니다.\n\n"
             f"✅ 1단계 (시각적 직관): {yt_ko}\n"
             f"➔ [{title}]이 왜 성립하는지 {steps}단계 1080p 플립북 모션으로 보조선이 그어지는 과정을 한눈에 보여줍니다.\n\n"
             f"✅ 2단계 (탈-5지선다 창의 구성 풀이): {url_quiz}\n"
@@ -197,7 +206,7 @@ def build_7channel_messages_for_topic(topic: dict) -> dict:
         ),
         "parent_cafe": (
             f"💡 [무료 수학교육 사이트 & 유튜브 정보] 사교육·선행 없이 초등 눈높이 디딤돌부터 고등 수능 기출까지 스스로 깨치는 곳\n\n"
-            f"아이들이 수학 공식을 뜻도 모른 채 외우거나 객관식 5지선다 찍기에 익숙해져서 고민이신 학부모님들께 현직 수학교사 민은기 선생님의 무료 수학 플랫폼을 공유합니다.\n\n"
+            f"아이들이 수학 공식을 뜻도 모른 채 외우거나 객관식 5지선다 찍기에 익숙해져서 고민이신 학부모님들께 무료 시각 증명 수학 플랫폼을 공유합니다.\n\n"
             f"1️⃣ 눈으로 이해하는 1080p 시각적 수학 증명 유튜브 (@min7014_ai)\n"
             f"• 예: [{title}] ➔ {yt_ko}\n"
             f"• 도형이 움직이고 보조선이 그어지는 과정을 한 단계씩 보여주어 아이가 '아! 이래서 공식이 나오는구나!' 하고 스스로 유레카를 외칩니다.\n\n"
@@ -327,8 +336,8 @@ def build_pr_growth_engine_data() -> dict:
                 "hook_ko": f"[{clean_title}] 공식 암기 없이 {c.get('page_count', 12)}단계 플립북 모션으로 보조선과 원리를 한눈에 깨쳐 보세요!",
                 "yt_ko": yt_ko or "https://www.youtube.com/@min7014_ai",
                 "yt_en": yt_en or "https://www.youtube.com/@min7014_ai",
-                "yt_id_ko": yt_ko.split("/")[-1] if "youtu.be/" in yt_ko else "k6LBYa5SCiA",
-                "yt_id_en": yt_en.split("/")[-1] if "youtu.be/" in yt_en else "n9zyKwXXsbA",
+                "yt_id_ko": yt_ko.split("/")[-1] if "youtu.be/" in yt_ko else "7RcvUpfGM6s",
+                "yt_id_en": yt_en.split("/")[-1] if "youtu.be/" in yt_en else "yZER1pGb2J8",
                 "short_mp4": f"video_lectures/shorts/{slug}_short_ko.mp4",
                 "thumb": f"video_lectures/youtube_packages/{slug}_ko_thumb.png",
                 "steps": c.get("page_count", 12),
@@ -341,7 +350,7 @@ def build_pr_growth_engine_data() -> dict:
         msgs = build_7channel_messages_for_topic(t)
         card_rel = f"assets/pr_cards/pr_card_{slug}.png"
         if not (ROOT_DIR / card_rel).exists():
-            card_rel = "assets/pr_cards/pr_card_0003.png"
+            card_rel = "assets/pr_cards/pr_card_2017090101.png"
         campaigns.append({
             **t,
             "pr_card_url": card_rel,

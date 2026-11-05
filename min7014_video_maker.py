@@ -2170,6 +2170,62 @@ VIRAL_HOOK_PRESETS = {
 }
 
 
+CONCISE_TITLE_REWRITES_KO = {
+    "두 선분의 교점이 없을 때 두 선분의 연장선의 교점에서 각각의 선분의 끝점에서 교점까지의 거리의 곱이 같으면 선분의 끝점은 한 원 위에 있다": "네 점이 한 원 위에 있을 조건 (방멱정리의 역)",
+    "두 선분의 교점이 있을 때 교점에서 각각의 선분의 끝점까지의 거리의 곱이 같으면 선분의 끝점은 한 원 위에 있다": "두 현의 교점과 네 점이 한 원 위에 있을 조건 (방멱정리의 역)",
+    "원 밖의 한 점에서 그 원에 그은 두 접선의 길이는 같다": "원 밖의 한 점에서 그은 두 접선의 길이",
+    "원에서 현의 수직이등분선은 그 원의 중심을 지난다": "원에서 현의 수직이등분선과 원의 중심",
+    "원의 중심에서 현에 내린 수선은 그 현을 이등분한다": "원의 중심에서 현에 내린 수선의 성질",
+    "제한된 범위에서 이차함수의 최대최소": "제한된 범위의 이차함수 최대·최소",
+    "작도와 경사하강법을 활용한 삼각형의 페르마 점": "삼각형의 페르마 점 (작도와 경사하강법)",
+}
+
+CONCISE_TITLE_REWRITES_EN = {
+    "When there is an intersection on the extension of two line segments, if the products of the distances from the intersection to the endpoints of each segment are equal, thefour endpoints lie on a circle": "Converse of Power of a Point (4 Concyclic Points)",
+    "When there is an intersection on the extension of two line segments": "Converse of Power of a Point (Secant Lines)",
+    "The Length and Width of one Side of a Square": "Side Length and Area of a Square",
+    "The Ratio of the Length of the Line Segments between Parallel Lines": "Segment Ratios Between Parallel Lines",
+    "Positive and Negative Square Root": "Positive & Negative Square Roots",
+    "Maximum and minimum of a quadratic function in a restricted range": "Max & Min of a Quadratic Function",
+    "Fermat Point of a Triangle using Construction and Gradient Descent": "Fermat Point of a Triangle",
+}
+
+
+def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "ko") -> str:
+    """
+    [단어 중간 절단(Mid-Word Cutoff) 원천 방지 & 고클릭률(CTR) 핵심 수학 개념 압축기]
+    - 'Positive and Negative Square R', 'one Si', 'Proof vi', '선분의 끝' 같은 글자수 단순 슬라이싱 절단을 100% 방지합니다.
+    """
+    t = re.sub(r"\s+", " ", (raw_title or "")).strip()
+    if " — " in t:
+        t = t.split(" — ")[0].strip()
+    if lang == "en":
+        for k, v in CONCISE_TITLE_REWRITES_EN.items():
+            if t.lower().startswith(k.lower()[:28]):
+                t = v
+                break
+    else:
+        for k, v in CONCISE_TITLE_REWRITES_KO.items():
+            if t.startswith(k[:18]):
+                t = v
+                break
+    t = _balance_parentheses(t)
+    if len(t) <= max_len:
+        return t
+    # 단어 경계(Word Boundary)에서만 절단하고 끝에 남은 전치사/관사/조사 제거
+    cut = t[:max_len].rsplit(" ", 1)[0].strip() if " " in t[:max_len] else t[:max_len].strip()
+    if lang == "en":
+        while True:
+            m_tail = re.search(r"\b(of|the|and|in|on|when|with|from|to|a|an|by|via|for|at|is|are|that|if)\s*$", cut, re.IGNORECASE)
+            if m_tail and len(cut[:m_tail.start()].strip()) >= 10:
+                cut = cut[:m_tail.start()].strip()
+            else:
+                break
+    else:
+        cut = re.sub(r"\s+(의|에|에서|할|때|와|과|은|는|이|가|을|를|각각의|교점에서)\s*$", "", cut).strip()
+    return _balance_parentheses(cut)
+
+
 def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     """유튜브 알고리즘(클릭률 CTR, 시청 지속시간, 세션 연쇄 시청, 댓글 참여, 검색 SEO)에 최적화된 제목·설명·태그·자막을 생성합니다."""
     slug = script_doc["slug"]
@@ -2201,13 +2257,20 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     if lang_code == "en":
         _, _en_split = split_bilingual_title(script_doc.get("title", slug))
         clean_en_title = latex_to_unicode_title(_en_split or script_doc.get("title_en") or script_doc.get("title", slug))
-        suffix_en = f" — Step-by-Step Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
+        concise_en = _smart_concise_topic_title(clean_en_title, max_len=44, lang="en")
         if preset.get("title_en"):
             yt_title = _balance_parentheses(preset["title_en"][:98])
         else:
-            max_en_len = max(18, 98 - len("✨ ") - len(suffix_en))
-            short_en_t = _balance_parentheses(clean_en_title[:max_en_len].strip()) if len(clean_en_title) > max_en_len else clean_en_title
-            yt_title = f"✨ {short_en_t}{suffix_en}"
+            full_suffix_en = f" — Step-by-Step Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
+            compact_suffix_en = f" — Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
+            if len(f"✨ {concise_en}{full_suffix_en}") <= 98:
+                yt_title = f"✨ {concise_en}{full_suffix_en}"
+            elif len(f"✨ {concise_en}{compact_suffix_en}") <= 98:
+                yt_title = f"✨ {concise_en}{compact_suffix_en}"
+            else:
+                max_en_len = max(18, 98 - len("✨ ") - len(compact_suffix_en))
+                short_en_t = _smart_concise_topic_title(concise_en, max_len=max_en_len, lang="en")
+                yt_title = f"✨ {short_en_t}{compact_suffix_en}"
         hook_en = preset.get("hook_en") or (
             f"Why does {clean_en_title} hold true? Watch every step-by-step mathematical principle unfold clearly in 1080p!"
         )
@@ -2215,12 +2278,12 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"💬 [10-Second Eureka Quiz] Which step (1 to {tot_p}) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!"
         )
         binge_en = (
-            "🔥 [Watch Next — Verified Visual Proofs on @min7014_ai]\n"
-            "• 🌳 Pythagoras Tree Area Conservation (1080p): https://youtu.be/9JKLflqrtDU\n"
-            "• ❓ Pythagoras Tree Question-Asking Classroom: https://youtu.be/11Go094NoGw\n"
-            "• 📐 Ceva's Theorem Question-Asking Classroom: https://youtu.be/pzgm6wB0j6Y\n"
-            "• ⚡ Pythagorean Theorem 45s #Shorts: https://youtube.com/shorts/ZDA4r_G343I\n"
-            "• ✨ Menelaus' Theorem 45s #Shorts: https://youtube.com/shorts/bJQwpG3stXk"
+            "🔥 [Watch Next — Top Visual Proofs on @min7014_ai]\n"
+            "• 🌳 Pythagoras Tree Area Conservation (1080p): https://youtu.be/3ik6yQ-0fP8\n"
+            "• 🔥 Pythagorean Theorem 25-Step Visual Proof (1080p): https://youtu.be/yZER1pGb2J8\n"
+            "• 📐 Ceva's Theorem Visualized (1080p): https://youtu.be/aKmG-iKoieQ\n"
+            "• ⚡ Pythagoras Tree 45s #Shorts: https://youtube.com/shorts/5qmEJcY_VBM\n"
+            "• ✨ Ceva's Theorem 45s #Shorts: https://youtube.com/shorts/dAJFCz19c0M"
         )
         yt_desc = (
             f"{hook_en}\n\n"
@@ -2248,15 +2311,22 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         ]
     else:
         clean_ko_title = split_bilingual_title(script_doc.get("title", slug))[0]
+        concise_ko = _smart_concise_topic_title(clean_ko_title, max_len=36, lang="ko")
         cat_type = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
         sub_label = "대수·수체계 원리" if cat_type in ("algebra", "number") else "시각적 기하 직관"
-        suffix_ko = f" — 눈으로 깨치는 {tot_p}단계 {sub_label} (1080p) | @min7014_ai"
         if preset.get("title_ko"):
             yt_title = _balance_parentheses(preset["title_ko"][:98])
         else:
-            max_ko_len = max(16, 98 - len("🔥 [시각적 증명] ") - len(suffix_ko))
-            short_ko_t = _balance_parentheses(clean_ko_title[:max_ko_len].strip()) if len(clean_ko_title) > max_ko_len else clean_ko_title
-            yt_title = f"🔥 [시각적 증명] {short_ko_t}{suffix_ko}"
+            full_suffix_ko = f" — 눈으로 깨치는 {tot_p}단계 {sub_label} (1080p) | @min7014_ai"
+            compact_suffix_ko = f" ({tot_p}단계 {sub_label} · 1080p) | @min7014_ai"
+            if len(f"🔥 [시각적 증명] {concise_ko}{full_suffix_ko}") <= 98:
+                yt_title = f"🔥 [시각적 증명] {concise_ko}{full_suffix_ko}"
+            elif len(f"🔥 [시각적 증명] {concise_ko}{compact_suffix_ko}") <= 98:
+                yt_title = f"🔥 [시각적 증명] {concise_ko}{compact_suffix_ko}"
+            else:
+                max_ko_len = max(16, 98 - len("🔥 [시각적 증명] ") - len(compact_suffix_ko))
+                short_ko_t = _smart_concise_topic_title(concise_ko, max_len=max_ko_len, lang="ko")
+                yt_title = f"🔥 [시각적 증명] {short_ko_t}{compact_suffix_ko}"
         hook_ko = preset.get("hook_ko") or (
             f"공식 암기 없이 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 수학교사의 단계별 원리 분석으로 핵심 개념과 증명 과정이 한눈에 드러납니다."
         )
@@ -2265,11 +2335,11 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         )
         binge_ko = (
             "🔥 [@min7014_ai 검증된 인기 시각적 증명 정주행 시리즈]\n"
-            "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계 본편): https://youtu.be/bQO7fnT6aDU\n"
-            "• ❓ 피타고라스 나무 질문하는 수업 본편 (11단계): https://youtu.be/11Go094NoGw\n"
-            "• 📐 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/pzgm6wB0j6Y\n"
-            "• 🔥 피타고라스 정리 45초 핵심 #Shorts: https://youtube.com/shorts/KWlHq8ms8T0\n"
-            "• ✨ 메넬라우스의 정리 45초 핵심 #Shorts: https://youtube.com/shorts/5rO1HLeYKb8"
+            "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계 본편): https://youtu.be/DSgUHigl82o\n"
+            "• ❓ 피타고라스 정리 질문하는 수업 본편 (25단계): https://youtu.be/E7x3OZdC14U\n"
+            "• 📐 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/zvRgbIKm0jc\n"
+            "• 🔥 피타고라스 정리 45초 핵심 #Shorts (인기 1위): https://youtube.com/shorts/1RKQ4Uxu4Uw\n"
+            "• ✨ 피타고라스 나무 45초 핵심 #Shorts (인기 2위): https://youtube.com/shorts/wSOzehSfEbY"
         )
         yt_desc = (
             f"{hook_ko}\n\n"
@@ -3315,7 +3385,7 @@ def scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False):
             continue
         blob = f"{ent['title']}\n{ent['description']}"
         is_outdated = False
-        if any(bad in blob for bad in ("민은기", "Min's Math Lab", "MinsMathLab", "()", "route ", "a^m div a^n", "a^m times a^n")):
+        if any(bad in blob for bad in ("민은기", "Min's Math Lab", "MinsMathLab", "()", "route ", "a^m div a^n", "a^m times a^n", "Square R —", "one Si —", "Proof vi —", "of the —", "When there is an intersection —", "선분의 끝 —", "끝점에서 교 —", "extensio —")):
             is_outdated = True
         m_tag = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+?)_(?:(SHORT_Q|SHORT|Q)_)?(KO|EN)\]", blob, re.IGNORECASE)
         if m_tag and not is_outdated:
@@ -4675,58 +4745,66 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
 def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
     """
     [유튜브 숏폼(#Shorts) 전용 고클릭률 제목·설명·태그 메타데이터 패키지 생성]
+    - 단어 중간 절단 원천 차단 (_smart_concise_topic_title)
+    - 1080p 본편 및 질문하는 수업 본편 직결 퍼널 링크 내장
     """
     slug = sdoc["slug"]
     clean_ko = latex_to_unicode_title(split_bilingual_title(sdoc["title"])[0])
     clean_en = latex_to_unicode_title((sdoc.get("title_en") or split_bilingual_title(sdoc["title"])[1] or clean_ko).strip())
+    concise_ko = _smart_concise_topic_title(clean_ko, max_len=34, lang="ko")
+    concise_en = _smart_concise_topic_title(clean_en, max_len=38, lang="en")
     viral_hooks = sdoc.get("viral_hooks") or {}
     yt_urls = sdoc.get("youtube_urls") or {}
+    q_yt_urls = sdoc.get("question_youtube_urls") or {}
     full_yt = yt_urls.get(lang_code) or yt_urls.get("ko") or "https://www.youtube.com/@min7014_ai"
+    full_q_yt = q_yt_urls.get(lang_code) or q_yt_urls.get("ko") or full_yt
     board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
     cat_type = (sdoc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
 
     if lang_code == "ko":
         default_hook_ko = (
-            f"수학교사의 단계별 원리 해부! {clean_ko} 45초 완성"
+            f"수학교사의 단계별 원리 해부! {concise_ko} 45초 완성"
             if cat_type in ("algebra", "number")
-            else f"보조선 한 줄의 마법! {clean_ko} 45초 시각적 증명"
+            else f"보조선 한 줄의 마법! {concise_ko} 45초 시각적 증명"
         )
-        hook_ko = (viral_hooks.get("ko") or default_hook_ko).strip()
-        short_title = f"🔥 {hook_ko} | {clean_ko} #Shorts #수학"
+        hook_ko = _smart_concise_topic_title(viral_hooks.get("ko") or default_hook_ko, max_len=48, lang="ko")
+        short_title = f"🔥 {hook_ko} | {concise_ko} #Shorts #수학"
         if len(short_title) > 98:
-            short_title = f"🔥 {_balance_parentheses(clean_ko[:45])} — 45초 시각적 수학 증명 #Shorts #수학"
+            short_title = f"🔥 {concise_ko} — 45초 시각적 수학 증명 #Shorts #수학"
         desc = (
             f"⚡ [{clean_ko} — {round(duration_sec)}초 숏폼(#Shorts) 시각적 증명 하이라이트]\n"
             f"{hook_ko}\n\n"
+            f"🎬 1080p 전체 단계별 풀버전 설명영상 바로 보기:\n👉 {full_yt}\n"
+            f"❓ 1080p 질문하는 수학 수업 풀버전 바로 보기:\n👉 {full_q_yt}\n\n"
             f"🌐 [1초 클릭! 수학홈페이지 무료 실습 & 퀴즈 바로가기]\n"
             f"1️⃣ 방금 본 도형 마우스로 직접 움직여보기 (GeoGebra & 플립북 게시판):\n👉 {board_link}&from=yt_shorts\n"
             f"2️⃣ 5지선다 보기를 가리고 수식 블록 조립! 16,548문항 수능·모평 디딤돌 퀴즈:\n👉 https://min7014.github.io/mathedu/?from=yt_shorts\n"
             f"3️⃣ 오늘의 3분 수학 유레카 (10초 오개념 O/X & 나만의 문제 발명):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
             f"4️⃣ 수능 수학 100점 만점 3D 보스 레이드 게임 무료 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n"
             f"5️⃣ 수학자료실 본관 (3,400+ 시각 증명):\n👉 https://min7014.github.io/\n\n"
-            f"🎬 1080p 전체 단계별 풀버전 설명영상 바로 보기:\n👉 {full_yt}\n"
             f"🔔 단계별 시각적 수학 증명_AI (@min7014_ai) 구독하기:\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_KO]\n"
-            f"#Shorts #수학 #기하학 #시각적증명 #{clean_ko.replace(' ', '')} #피타고라스 #보조선 #수능수학 #수학자료실 #min7014_ai"
+            f"#Shorts #수학 #기하학 #시각적증명 #{concise_ko.replace(' ', '')} #피타고라스 #보조선 #수능수학 #수학자료실 #min7014_ai"
         )
-        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", clean_ko, "수학자료실", "min7014_ai", "수능수학", "보조선"]
+        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", concise_ko, "수학자료실", "min7014_ai", "수능수학", "보조선"]
     else:
-        hook_en = (viral_hooks.get("en") or f"45s Visual Math Proof: {clean_en}").strip()
-        short_title = f"🔥 {hook_en} | {clean_en} #Shorts #Math"
+        hook_en = _smart_concise_topic_title(viral_hooks.get("en") or f"45s Visual Math Proof: {concise_en}", max_len=50, lang="en")
+        short_title = f"🔥 {hook_en} | {concise_en} #Shorts #Math"
         if len(short_title) > 98:
-            short_title = f"🔥 {_balance_parentheses(clean_en[:45])} — 45s Visual Math Proof #Shorts #Math"
+            short_title = f"🔥 {concise_en} — 45s Visual Math Proof #Shorts #Math"
         desc = (
             f"⚡ [{clean_en} — {round(duration_sec)}s Visual Math Proof #Shorts]\n"
             f"{hook_en}\n\n"
-            f"🎬 Watch Full 1080p Step-by-Step Proof Video:\n👉 {full_yt}\n\n"
-            f"📐 Interactive GeoGebra & Full 1,111 Math Video Board:\n👉 {board_link}\n\n"
+            f"🎬 Watch Full 1080p Step-by-Step Proof Video:\n👉 {full_yt}\n"
+            f"❓ Watch 1080p Question-Asking Classroom Edition:\n👉 {full_q_yt}\n\n"
+            f"📐 Interactive GeoGebra & Full 1,113 Math Video Board:\n👉 {board_link}\n\n"
             f"🔔 Subscribe to Visual Math Proofs AI (@min7014_ai):\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_EN]\n"
             f"#Shorts #Math #Geometry #VisualProof #MathShorts #ProofWithoutWords #GeoGebra #min7014_ai"
         )
-        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", clean_en, "VisualMathArchive", "min7014_ai", "GeoGebra"]
+        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", concise_en, "VisualMathArchive", "min7014_ai", "GeoGebra"]
 
     return {
         "title": _balance_parentheses(short_title[:98]),
@@ -5377,11 +5455,15 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", repl
         if not short_mp4.exists() or not short_meta_path.exists():
             render_youtube_short_vertical(slug_key, lang_code=lc)
 
+        sdoc = json.loads(script_path.read_text(encoding="utf-8"))
         smeta_all = json.loads(short_meta_path.read_text(encoding="utf-8"))
         if lc not in smeta_all:
             render_youtube_short_vertical(slug_key, lang_code=lc)
             smeta_all = json.loads(short_meta_path.read_text(encoding="utf-8"))
-        smeta = smeta_all[lc]
+        # 업로드 직전 최신 1080p 본편 URL(youtube_urls / question_youtube_urls)을 반영하여 메타데이터 재빌드
+        smeta = build_youtube_short_metadata(sdoc, lc, smeta_all[lc].get("duration_sec", 45.0))
+        smeta_all[lc] = smeta
+        short_meta_path.write_text(json.dumps(smeta_all, ensure_ascii=False, indent=2), encoding="utf-8")
 
         body = {
             "snippet": {
@@ -5416,16 +5498,17 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", repl
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
             print(f"🚀 [YouTube #Shorts Uploaded ({lc.upper()})] {short_url}", flush=True)
-            # Shorts 전용 첫 댓글(고급 기능 클릭 링크 유도) 자동 게시
+            # Shorts 전용 첫 댓글(1080p 본편 직결 + 홈페이지 링크 유도) 자동 게시
             try:
                 board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_shorts"
+                full_yt_u = (sdoc.get("youtube_urls") or {}).get(lc) or (sdoc.get("youtube_urls") or {}).get("ko") or "https://www.youtube.com/@min7014_ai"
                 c_text = (
-                    f"📐 방금 본 기하 도형을 마우스로 직접 움직여보고 1080p 풀버전 증명을 확인해 보세요!\n"
-                    f"👉 {board_link}\n"
+                    f"🎬 방금 본 증명 1080p 전체 단계별 풀버전 바로 보기:\n👉 {full_yt_u}\n"
+                    f"📐 도형을 마우스로 직접 움직여보기 (GeoGebra): {board_link}\n"
                     f"🎮 수능 수학 100점 3D 보스 레이드 & 16,548문항 디딤돌: https://min7014.github.io/mathedu/"
                     if lc == "ko"
-                    else f"📐 Drag this geometric figure yourself in GeoGebra & watch the full 1080p proof:\n"
-                         f"👉 {board_link}"
+                    else f"🎬 Watch the full 1080p step-by-step proof video:\n👉 {full_yt_u}\n"
+                         f"📐 Drag this geometric figure yourself in GeoGebra: {board_link}"
                 )
                 youtube.commentThreads().insert(
                     part="snippet",
@@ -5488,26 +5571,29 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
         q_mp4 = QUESTION_CLASSROOM_DIR / f"{slug_key}_q_{lc}.mp4"
         if not q_mp4.exists():
             render_question_classroom_video(slug_key, lang_code=lc)
-        title_base = sdoc.get("title") if lc == "ko" else (sdoc.get("title_en") or sdoc.get("title"))
-        clean_t = clean_math_for_speech_ko(title_base) if lc == "ko" else clean_math_for_speech_en(title_base)
+        _ko_t, _en_t = split_bilingual_title(sdoc.get("title", slug_key))
+        title_base = _ko_t if lc == "ko" else (sdoc.get("title_en") or _en_t or _ko_t)
+        clean_t = _smart_concise_topic_title(latex_to_unicode_title(title_base), max_len=36, lang=lc)
         q_title = (
-            f"❓ [질문하는 수학 수업] {clean_t[:42]} — 스스로 발문하고 발견하는 시각적 증명! | @min7014_ai"
+            f"❓ [질문하는 수학 수업] {clean_t} — 스스로 발문하고 발견하는 시각적 증명! | @min7014_ai"
             if lc == "ko"
-            else f"❓ [Question-Asking Math] {clean_t[:42]} — Socratic Visual Proof! | @min7014_ai"
+            else f"❓ [Question-Asking Math] {clean_t} — Socratic Visual Proof! | @min7014_ai"
         )[:98]
         board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&mode=question"
+        std_yt_u = (sdoc.get("youtube_urls") or {}).get(lc) or (sdoc.get("youtube_urls") or {}).get("ko") or "https://www.youtube.com/@min7014_ai"
         q_desc = (
             f"❓ [질문하는 수학 수업 (Question-Asking Classroom Edition)]\n"
-            f"주제: {title_base} [ID: {slug_key}_Q_{lc.upper()}]\n\n"
+            f"주제: {latex_to_unicode_title(title_base)} [ID: {slug_key}_Q_{lc.upper()}]\n\n"
             f"1단계(Phase 1): 핵심 발문과 사고 멈춤 시간(Thinking Pause)을 통해 먼저 스스로 원리와 불변량을 추론합니다.\n"
             f"2단계(Phase 2): 동적 시각 스포트라이트와 함께 왜 정리가 성립하는지 눈으로 확인합니다.\n\n"
+            f"🎬 [일반 설명 본편(1080p) 바로 보기]: {std_yt_u}\n"
             f"👉 [수학홈페이지 질문하는 수업 인터랙티브 실험실 바로가기]: {board_link}\n"
             f"👉 [수학자료실 원본]: {sdoc.get('web_url', 'https://min7014.github.io/')}\n"
             f"#질문하는수업 #수학증명 #기하학 #수능수학 #시각적증명 #mathedu"
         )
         body = {
             "snippet": {
-                "title": q_title,
+                "title": _balance_parentheses(q_title),
                 "description": q_desc,
                 "tags": ["질문하는수업", "수학증명", "기하학", "소크라테스발문", "시각적증명", "mathedu", slug_key],
                 "categoryId": "27",
@@ -5592,19 +5678,28 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public", 
         qsh_mp4 = ROOT_DIR / "video_lectures" / "shorts" / f"{slug_key}_short_q_{lc}.mp4"
         if not qsh_mp4.exists():
             render_question_short_vertical(slug_key, lang_code=lc)
-        title_base = sdoc.get("title") if lc == "ko" else (sdoc.get("title_en") or sdoc.get("title"))
-        clean_t = clean_math_for_speech_ko(title_base) if lc == "ko" else clean_math_for_speech_en(title_base)
+        sdoc = json.loads(script_path.read_text(encoding="utf-8"))
+        _ko_t, _en_t = split_bilingual_title(sdoc.get("title", slug_key))
+        title_base = _ko_t if lc == "ko" else (sdoc.get("title_en") or _en_t or _ko_t)
+        clean_t = _smart_concise_topic_title(latex_to_unicode_title(title_base), max_len=32, lang=lc)
+        cat_type = (sdoc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
+        q_hook_ko = "왜 이 원리가 성립할까?" if cat_type in ("algebra", "number") else "어디에 보조선을 그어야 할까?"
+        q_hook_en = "Why does this hold true?" if cat_type in ("algebra", "number") else "Where is the auxiliary line?"
         qsh_title = (
-            f"❓ [질문형 숏폼] {clean_t[:36]} — 어디에 보조선을 그어야 할까? #Shorts | @min7014_ai"
+            f"❓ [질문형 숏폼] {clean_t} — {q_hook_ko} #Shorts | @min7014_ai"
             if lc == "ko"
-            else f"❓ [Question #Shorts] {clean_t[:36]} — Where is the auxiliary line? #Shorts | @min7014_ai"
+            else f"❓ [Question #Shorts] {clean_t} — {q_hook_en} #Shorts | @min7014_ai"
         )[:98]
         board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_qshorts"
+        q_yt_u = (sdoc.get("question_youtube_urls") or {}).get(lc) or (sdoc.get("youtube_urls") or {}).get(lc) or "https://www.youtube.com/@min7014_ai"
+        std_yt_u = (sdoc.get("youtube_urls") or {}).get(lc) or q_yt_u
         qsh_desc = (
             f"❓ [질문하는 수학 수업 숏폼 (Question-Asking #Shorts)] [ID: {slug_key}_SHORT_Q_{lc.upper()}]\n"
-            f"주제: {title_base}\n\n"
+            f"주제: {latex_to_unicode_title(title_base)}\n\n"
             f"잠깐! 정답을 보기 전에 화면 상단의 질문 카드를 보고 어떤 수학적 원리가 쓰였을지 3초만 생각해 보세요!\n"
-            f"👉 [1080p 질문하는 수업 풀버전 & GeoGebra 직접 조작하기]: {board_link}\n"
+            f"❓ [1080p 질문하는 수업 풀버전 바로 보기]: {q_yt_u}\n"
+            f"🎬 [1080p 일반 설명 본편 바로 보기]: {std_yt_u}\n"
+            f"👉 [GeoGebra 직접 조작 & 수학홈페이지 실험실]: {board_link}\n"
             f"#Shorts #질문하는수업 #수학숏폼 #기하학 #시각적증명 #mathedu"
         )
         body = {
@@ -6140,27 +6235,25 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 break
 
                 if not _LAST_UPLOAD_QUOTA_BLOCKED:
-                    all_sps = sorted(
-                        SCRIPTS_DIR.glob("*.json"),
-                        key=lambda x: (0 if x.stem in CURATED_PAGE_SCRIPTS else 1, x.stem)
-                    )
+                    high_visual_priority_slugs = {
+                        "2017092841", "2020041301", "2020051301", "2020070501", "2023061501",
+                        "2020102901", "2020062102", "2023051501", "2021032901", "2021091701",
+                        "math20231203002", "2024122501", "2020030404", "2021101201",
+                    }
+                    def _upload_prio_key(sp_path):
+                        st = sp_path.stem
+                        if st in CURATED_PAGE_SCRIPTS:
+                            return (0, st)
+                        if st in high_visual_priority_slugs or st.startswith("201709") or st.startswith("math"):
+                            return (1, st)
+                        return (2, st)
+
+                    all_sps = sorted(SCRIPTS_DIR.glob("*.json"), key=_upload_prio_key)
                     for sp in all_sps:
                         sdoc = json.loads(sp.read_text(encoding="utf-8"))
                         slug_k = sdoc["slug"]
-                        s_urls = sdoc.get("shorts_urls") or {}
-                        s_pkgs = sdoc.get("shorts_packages") or {}
-                        missing_s = [
-                            lc for lc in ("ko", "en")
-                            if not (s_urls.get(lc) or "").strip() or (s_pkgs.get(lc) or {}).get("needs_youtube_upload")
-                        ]
-                        if missing_s:
-                            before_s = {lc: (s_urls.get(lc) or "").strip() for lc in missing_s}
-                            res_s = upload_short_to_youtube(slug_k, langs=tuple(missing_s), privacy="public")
-                            if any(res_s.get(lc) and res_s.get(lc) != before_s.get(lc) for lc in missing_s):
-                                newly_uploaded_batch += 1
-                            if _LAST_UPLOAD_QUOTA_BLOCKED:
-                                break
 
+                        # 1순위: 1080p 일반 본편 먼저 업로드 (이후 업로드되는 #Shorts 설명란·댓글에 본편 직결 URL이 자동 삽입되도록 보장!)
                         yt_urls = sdoc.get("youtube_urls") or {}
                         yt_pkgs = sdoc.get("youtube_packages") or {}
                         missing_v = [
@@ -6174,7 +6267,9 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+                            sdoc = json.loads(sp.read_text(encoding="utf-8"))
 
+                        # 2순위: 1080p 질문하는 수업 본편 업로드 (8분+ 미드롤 고수익 에디션)
                         q_yt_urls = sdoc.get("question_youtube_urls") or {}
                         q_yt_pkgs = sdoc.get("question_classroom_packages") or {}
                         q_before = (q_yt_urls.get("ko") or "").strip()
@@ -6184,7 +6279,25 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+                            sdoc = json.loads(sp.read_text(encoding="utf-8"))
 
+                        # 3순위: 9:16 일반 #Shorts 업로드 (방금 업로드된 1080p 본편 URL을 설명란·댓글에 자동 바인딩)
+                        s_urls = sdoc.get("shorts_urls") or {}
+                        s_pkgs = sdoc.get("shorts_packages") or {}
+                        missing_s = [
+                            lc for lc in ("ko", "en")
+                            if not (s_urls.get(lc) or "").strip() or (s_pkgs.get(lc) or {}).get("needs_youtube_upload")
+                        ]
+                        if missing_s:
+                            before_s = {lc: (s_urls.get(lc) or "").strip() for lc in missing_s}
+                            res_s = upload_short_to_youtube(slug_k, langs=tuple(missing_s), privacy="public")
+                            if any(res_s.get(lc) and res_s.get(lc) != before_s.get(lc) for lc in missing_s):
+                                newly_uploaded_batch += 1
+                            if _LAST_UPLOAD_QUOTA_BLOCKED:
+                                break
+                            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+
+                        # 4순위: 9:16 질문형 Q-#Shorts 업로드
                         q_sh_urls = sdoc.get("question_shorts_urls") or {}
                         q_sh_pkgs = sdoc.get("question_shorts_packages") or {}
                         qs_before = (q_sh_urls.get("ko") or "").strip()
@@ -6448,7 +6561,7 @@ def optimize_youtube_channel_settings():
                 "keywords": ch_keywords,
                 "defaultLanguage": "ko",
                 "country": "KR",
-                "unsubscribedTrailer": "bQO7fnT6aDU",
+                "unsubscribedTrailer": "DSgUHigl82o",
             }
         },
     }
@@ -6547,7 +6660,7 @@ def optimize_youtube_channel_settings():
             {
                 "snippet": {
                     "type": "multipleChannels",
-                    "title": "📺 민은기 선생님의 수학자료실 본 채널 (@min7014)",
+                    "title": "📺 수학자료실 본 채널 (@min7014)",
                     "position": 4,
                 },
                 "contentDetails": {"channels": [MAIN_CHANNEL_ID]},
