@@ -387,14 +387,63 @@ def compute_page_diff_and_color(prev_img, curr_img):
 
 
 
+def _strip_outer_balanced_parens(s: str) -> str:
+    s = s.strip()
+    while s.startswith("(") and s.endswith(")"):
+        depth = 0
+        closed_early = False
+        for i, ch in enumerate(s):
+            if ch == "(":
+                depth += 1
+            elif ch == ")":
+                depth -= 1
+                if depth == 0 and i < len(s) - 1:
+                    closed_early = True
+                    break
+        if not closed_early and depth == 0:
+            s = s[1:-1].strip()
+        else:
+            break
+    return s
+
+
+def _balance_parentheses(s: str) -> str:
+    s = re.sub(r"(?:[,\s\+\-×÷]*√?\(\s*)+$", "", str(s or "").strip())
+    out = []
+    depth = 0
+    for ch in s:
+        if ch == "(":
+            depth += 1
+            out.append(ch)
+        elif ch == ")":
+            if depth > 0:
+                depth -= 1
+                out.append(ch)
+        else:
+            out.append(ch)
+    if depth > 0:
+        out.extend(")" * depth)
+    res = "".join(out)
+    res = re.sub(r"√?\(\s*\)", "", res)
+    res = re.sub(r",\s*\)", ")", res)
+    while "((" in res and "))" in res:
+        collapsed = re.sub(r"\(\(([^()]+)\)\)", r"(\1)", res)
+        if collapsed == res:
+            break
+        res = collapsed
+    return res.strip()
+
+
 def split_bilingual_title(raw_title: str):
     """
     민은기 선생님 수학자료실의 한·영 병기 제목 예:
       - '세 중선은 한 점에서 만난다.(The three medians of a triangle meet at one point.)'
-      - '$m$, $n$ 이 자연수일 때, $a^m \times a^n = a^{m+n}$($a^m \times a^n = a^{m+n}$ ($m$, $n$ are natural numbers.))'
+      - '$m$, $n$ 이 자연수일 때, $a^m \\times a^n = a^{m+n}$($a^m \\times a^n = a^{m+n}$ ($m$, $n$ are natural numbers.))'
     에서 균형 괄호(balanced parentheses) 역추적으로 순수 한국어 제목(ko_title)과 순수 영어 제목(en_title)을 정밀 분리합니다.
     """
-    u = latex_to_unicode_title(raw_title)
+    raw_s = str(raw_title or "").strip()
+    # 원본 한영 병기 경계 ')(' 또는 한글 뒤 '(' 역추적
+    u = latex_to_unicode_title(raw_s)
     if u.endswith(")"):
         depth = 0
         open_idx = -1
@@ -408,32 +457,45 @@ def split_bilingual_title(raw_title: str):
                     open_idx = i
                     break
         if open_idx > 0:
-            en_cand = u[open_idx + 1:-1].strip()
-            ko_cand = u[:open_idx].strip().rstrip(".")
+            en_cand = _strip_outer_balanced_parens(u[open_idx + 1:-1].strip())
+            ko_cand = _balance_parentheses(u[:open_idx].strip().rstrip("."))
             if re.search(r"[A-Za-z]{3,}", en_cand) and not re.search(r"[가-힣]", en_cand):
-                if en_cand.startswith("(") and en_cand.endswith(")"):
-                    en_cand = en_cand[1:-1].strip()
+                en_cand = _balance_parentheses(en_cand)
                 return (ko_cand or u), (en_cand or ko_cand or u)
     return u, ""
 
 
 def latex_to_unicode_title(text):
     s = str(text or "")
+    s = s.replace("Equationss", "Equations")
+    s = (
+        s.replace(r"\mathbb{R}", "ℝ")
+        .replace(r"\mathbb{N}", "ℕ")
+        .replace(r"\mathbb{Z}", "ℤ")
+        .replace(r"\mathbb{Q}", "ℚ")
+        .replace(r"\mathbb{C}", "ℂ")
+    )
+    s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
+    s = re.sub(r"\^\s*\{\\circ\}|\^\s*\\circ", "°", s)
+    s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"\1", s)
+    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"√(\1)", s)
     s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"(\1/\2)", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"√(\1)", s)
-    s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"\1", s)
+    s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"(\1/\2)", s)
     s = re.sub(r"\\triangle\s*", "△", s)
     s = re.sub(r"\\angle\s*", "∠", s)
     s = s.replace(r"\Leftrightarrow", "⇔").replace(r"\Rightarrow", "⇒").replace(r"\Leftarrow", "⇐")
+    s = s.replace(r"\in", "∈").replace(r"\subset", "⊂").replace(r"\infty", "∞")
     s = s.replace(r"\times", "×").replace(r"\div", "÷").replace(r"\cdot", "·")
     s = s.replace(r"\pm", "±").replace(r"\leq", "≤").replace(r"\geq", "≥").replace(r"\neq", "≠")
     s = s.replace(r"\le", "≤").replace(r"\ge", "≥").replace(r"\ne", "≠")
     s = re.sub(r"\^\s*\{([^{}]+)\}", r"^(\1)", s)
     s = s.replace("^2", "²").replace("^3", "³")
-    s = re.sub(r"\\[,;:!\s]", " ", s)
-    s = s.replace("$", "").replace("<", "＜").replace(">", "＞")
-    return re.sub(r"\s+", " ", s).strip()
+    s = re.sub(r"\\[,;:!\s]+", " ", s)
+    s = s.replace("$", "").replace("<", "＜").replace(">", "＞").replace("\\", " ")
+    s = _balance_parentheses(re.sub(r"\s+", " ", s).strip())
+    return s
 
 
 def clean_math_for_speech_ko(text):
@@ -441,12 +503,24 @@ def clean_math_for_speech_ko(text):
     # 한글 문장 뒤의 영문 번역 괄호(4글자 이상 영단어 포함)만 제거하고 (m+n), (mn) 등 수식 괄호는 보존
     s, _ = split_bilingual_title(s) if s.endswith(")") and re.search(r"[A-Za-z]{4,}", s) else (s, "")
     s = re.sub(r"\(\s*[^가-힣()]*[A-Za-z]{4,}[^가-힣()]*\)", "", s)
+    s = (
+        s.replace(r"\mathbb{R}", "실수 집합")
+        .replace("ℝ", "실수 집합")
+        .replace(r"\mathbb{N}", "자연수 집합")
+        .replace("ℕ", "자연수 집합")
+        .replace(r"\in", " 원소 ")
+        .replace("∈", " 원소 ")
+    )
+    s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
-    s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"\2 분의 \1", s)
+    s = re.sub(r"\^\s*\{\\circ\}|\^\s*\\circ|°", "도", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"선분 \1", s)
+    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"루트 \1", s)
+    s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"\2 분의 \1", s)
+    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"루트 \1", s)
     s = re.sub(r"\\triangle\s*([A-Za-z0-9]+)", r"삼각형 \1", s)
     s = re.sub(r"\\angle\s*([A-Za-z0-9]+)", r"각 \1", s)
-    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"루트 \1", s)
+    s = re.sub(r"√\(([^()]+)\)", r"루트 \1", s)
     s = s.replace("√(", "루트 ").replace("√", "루트 ")
     s = s.replace(r"\Leftrightarrow", " 필요충분조건 ").replace("⇔", " 필요충분조건 ")
     s = s.replace(r"\Rightarrow", " 이면 ").replace("⇒", " 이면 ")
@@ -464,7 +538,7 @@ def clean_math_for_speech_ko(text):
     s = re.sub(r"\^([a-zA-Z0-9\+\-]+)", r"의 \1제곱", s)
     s = s.replace("^", " ")
     s = re.sub(r"[\$\\\{\}]", " ", s)
-    return re.sub(r"\s+", " ", s).strip()
+    return _balance_parentheses(re.sub(r"\s+", " ", s).strip())
 
 
 def clean_math_for_speech_en(text):
@@ -472,12 +546,24 @@ def clean_math_for_speech_en(text):
     _, en_split = split_bilingual_title(s)
     if en_split:
         s = en_split
+    s = (
+        s.replace(r"\mathbb{R}", "the real numbers")
+        .replace("ℝ", "the real numbers")
+        .replace(r"\mathbb{N}", "the natural numbers")
+        .replace("ℕ", "the natural numbers")
+        .replace(r"\in", " in ")
+        .replace("∈", " in ")
+    )
+    s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
-    s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"\1 over \2", s)
+    s = re.sub(r"\^\s*\{\\circ\}|\^\s*\\circ|°", " degrees", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"segment \1", s)
+    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"square root of \1", s)
+    s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"\1 over \2", s)
+    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"square root of \1", s)
     s = re.sub(r"\\triangle\s*([A-Za-z0-9]+)", r"triangle \1", s)
     s = re.sub(r"\\angle\s*([A-Za-z0-9]+)", r"angle \1", s)
-    s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"square root of \1", s)
+    s = re.sub(r"√\(([^()]+)\)", r"square root of \1", s)
     s = s.replace("√(", "square root of ").replace("√", "square root of ")
     s = s.replace(r"\Leftrightarrow", " if and only if ").replace("⇔", " if and only if ")
     s = s.replace(r"\times", " times ").replace("×", " times ")
@@ -490,7 +576,7 @@ def clean_math_for_speech_en(text):
     s = re.sub(r"\^3", " cubed", s)
     s = s.replace("²", " squared").replace("³", " cubed").replace("^", " ")
     s = re.sub(r"[\$\\\{\}]", " ", s)
-    return re.sub(r"\s+", " ", s).strip()
+    return _balance_parentheses(re.sub(r"\s+", " ", s).strip())
 
 
 def compute_pedagogical_scene_ranges(total_pages, max_scenes=12):
@@ -1248,7 +1334,12 @@ def generate_or_update_script(slug_key, target_langs=None):
     elif item_meta:
         title = item_meta.get("title", slug_key)
         _ko_only, _en_only = split_bilingual_title(title)
-        title_en = _en_only if _en_only else translate_text_google_gtx(clean_math_for_speech_ko(_ko_only), "en")
+        if _en_only:
+            title_en = _en_only
+        elif not re.search(r"[가-힣]", _ko_only):
+            title_en = latex_to_unicode_title(_ko_only)
+        else:
+            title_en = _balance_parentheses(translate_text_google_gtx(clean_math_for_speech_ko(_ko_only), "en"))
         pdf_url = (item_meta.get("pdf") or "").split("#")[0]
         web_url = item_meta.get("url") or "https://min7014.github.io/"
         sub_ko = item_meta.get("sub_domain_ko") or "기하·대수 시각적 증명"
@@ -1987,9 +2078,13 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     if lang_code == "en":
         _, _en_split = split_bilingual_title(script_doc.get("title", slug))
         clean_en_title = latex_to_unicode_title(_en_split or script_doc.get("title_en") or script_doc.get("title", slug))
-        yt_title = preset.get("title_en") or f"✨ {clean_en_title} — Step-by-Step Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
-        if len(yt_title) > 98:
-            yt_title = yt_title[:95] + "..."
+        suffix_en = f" — Step-by-Step Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
+        if preset.get("title_en"):
+            yt_title = _balance_parentheses(preset["title_en"][:98])
+        else:
+            max_en_len = max(18, 98 - len("✨ ") - len(suffix_en))
+            short_en_t = _balance_parentheses(clean_en_title[:max_en_len].strip()) if len(clean_en_title) > max_en_len else clean_en_title
+            yt_title = f"✨ {short_en_t}{suffix_en}"
         hook_en = preset.get("hook_en") or (
             f"Why does {clean_en_title} hold true? Watch every step-by-step mathematical principle unfold clearly in 1080p!"
         )
@@ -2032,9 +2127,13 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         clean_ko_title = split_bilingual_title(script_doc.get("title", slug))[0]
         cat_type = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
         sub_label = "대수·수체계 원리" if cat_type in ("algebra", "number") else "시각적 기하 직관"
-        yt_title = preset.get("title_ko") or f"🔥 [시각적 증명] {clean_ko_title} — 눈으로 깨치는 {tot_p}단계 {sub_label} (1080p) | @min7014_ai"
-        if len(yt_title) > 98:
-            yt_title = yt_title[:95] + "..."
+        suffix_ko = f" — 눈으로 깨치는 {tot_p}단계 {sub_label} (1080p) | @min7014_ai"
+        if preset.get("title_ko"):
+            yt_title = _balance_parentheses(preset["title_ko"][:98])
+        else:
+            max_ko_len = max(16, 98 - len("🔥 [시각적 증명] ") - len(suffix_ko))
+            short_ko_t = _balance_parentheses(clean_ko_title[:max_ko_len].strip()) if len(clean_ko_title) > max_ko_len else clean_ko_title
+            yt_title = f"🔥 [시각적 증명] {short_ko_t}{suffix_ko}"
         hook_ko = preset.get("hook_ko") or (
             f"공식 암기 없이 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 수학교사의 단계별 원리 분석으로 핵심 개념과 증명 과정이 한눈에 드러납니다."
         )
@@ -2757,6 +2856,39 @@ def refresh_all_youtube_metadata_packages():
             (up_dir / f"{slug}_{lc}_youtube_info.txt").write_text(info_txt, encoding="utf-8")
         mp.write_text(json.dumps(mdata, ensure_ascii=False, indent=2), encoding="utf-8")
         (up_dir / f"{slug}_youtube_meta.json").write_text(json.dumps(mdata, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        # Shorts meta & question classroom package titles refresh
+        smp = YT_PKG_DIR / f"{slug}_shorts_meta.json"
+        if smp.exists() or sdoc.get("shorts_packages"):
+            smeta_all = json.loads(smp.read_text(encoding="utf-8")) if smp.exists() else {}
+            for lc in ["ko", "en"]:
+                dur_s = (sdoc.get("shorts_packages", {}).get(lc) or {}).get("duration_sec") or (smeta_all.get(lc) or {}).get("duration_sec") or 45.0
+                new_sm = build_youtube_short_metadata(sdoc, lc, dur_s)
+                smeta_all[lc] = new_sm
+                if isinstance((sdoc.get("shorts_packages") or {}).get(lc), dict):
+                    sdoc["shorts_packages"][lc]["title"] = new_sm["title"]
+            smp.write_text(json.dumps(smeta_all, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        _ko_t, _en_t = split_bilingual_title(sdoc.get("title", slug))
+        _clean_ko_t = latex_to_unicode_title(_ko_t)
+        _clean_en_t = latex_to_unicode_title(_en_t or sdoc.get("title_en") or _ko_t)
+        if isinstance(sdoc.get("question_classroom_packages"), dict):
+            for lc in ["ko", "en"]:
+                if isinstance(sdoc["question_classroom_packages"].get(lc), dict):
+                    sdoc["question_classroom_packages"][lc]["title"] = _balance_parentheses((
+                        f"❓ [질문하는 수학 수업] {_clean_ko_t[:38]} — 왜 항상 성립할까? (Notice & Wonder) | @min7014_ai"
+                        if lc == "ko"
+                        else f"❓ [Question-Asking Math] {_clean_en_t[:38]} — Notice & Wonder Visual Inquiry | @min7014_ai"
+                    )[:98])
+        if isinstance(sdoc.get("question_shorts_packages"), dict):
+            for lc in ["ko", "en"]:
+                if isinstance(sdoc["question_shorts_packages"].get(lc), dict):
+                    sdoc["question_shorts_packages"][lc]["title"] = _balance_parentheses((
+                        f"❓ [질문하는 수학 #Shorts] {_clean_ko_t[:42]} — 왜 이 보조선이 핵심일까?"
+                        if lc == "ko"
+                        else f"❓ [Question-Asking Math #Shorts] {_clean_en_t[:42]} — Why This Auxiliary Line?"
+                    )[:98])
+
         sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
     update_video_catalog()
 
@@ -3206,7 +3338,11 @@ def verify_video_content_integrity(slug_key: str) -> dict:
         if "분모의 유리화" in all_narr_ko or "분모에 무리수가" in all_narr_ko:
             return {"ok": False, "reason": "math_mismatch:division_misclassified_as_rationalization"}
 
-    # 4) Meta title & description check
+    # 4) Meta title & description check + script title_en integrity check
+    t_en = str(sdoc.get("title_en") or "")
+    if t_en.count("(") != t_en.count(")") or "route " in t_en.lower() or "\\" in t_en or "{" in t_en:
+        return {"ok": False, "reason": f"malformed_title_en:{t_en}"}
+
     for meta_p in [YT_PKG_DIR / f"{slug_key}_youtube_meta.json", YT_PKG_DIR / f"{slug_key}_shorts_meta.json"]:
         if meta_p.exists():
             m_txt = meta_p.read_text(encoding="utf-8")
@@ -3216,7 +3352,14 @@ def verify_video_content_integrity(slug_key: str) -> dict:
             mdata = json.loads(m_txt)
             for lc in ("ko", "en"):
                 mt = (mdata.get(lc) or {}).get("title", "")
-                if "()" in mt or "$" in mt or "<" in mt or ">" in mt:
+                if (
+                    "()" in mt
+                    or "$" in mt
+                    or "<" in mt
+                    or ">" in mt
+                    or mt.count("(") != mt.count(")")
+                    or "route " in mt.lower()
+                ):
                     return {"ok": False, "reason": f"invalid_meta_title_{lc}:{mt}"}
 
     return {"ok": True, "reason": "verified"}
@@ -4393,7 +4536,7 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
         hook_ko = (viral_hooks.get("ko") or default_hook_ko).strip()
         short_title = f"🔥 {hook_ko} | {clean_ko} #Shorts #수학"
         if len(short_title) > 98:
-            short_title = f"🔥 {clean_ko} — 45초 시각적 수학 증명 하이라이트 #Shorts #수학"
+            short_title = f"🔥 {_balance_parentheses(clean_ko[:45])} — 45초 시각적 수학 증명 #Shorts #수학"
         desc = (
             f"⚡ [{clean_ko} — {round(duration_sec)}초 숏폼(#Shorts) 시각적 증명 하이라이트]\n"
             f"{hook_ko}\n\n"
@@ -4414,7 +4557,7 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
         hook_en = (viral_hooks.get("en") or f"45s Visual Math Proof: {clean_en}").strip()
         short_title = f"🔥 {hook_en} | {clean_en} #Shorts #Math"
         if len(short_title) > 98:
-            short_title = f"🔥 {clean_en} — 45s Visual Math Proof Highlight #Shorts #Math"
+            short_title = f"🔥 {_balance_parentheses(clean_en[:45])} — 45s Visual Math Proof #Shorts #Math"
         desc = (
             f"⚡ [{clean_en} — {round(duration_sec)}s Visual Math Proof #Shorts]\n"
             f"{hook_en}\n\n"
@@ -4428,7 +4571,7 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
         tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", clean_en, "VisualMathArchive", "min7014_ai", "GeoGebra"]
 
     return {
-        "title": short_title[:100],
+        "title": _balance_parentheses(short_title[:98]),
         "description": desc,
         "tags": tags,
         "categoryId": "27",
