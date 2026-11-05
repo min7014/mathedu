@@ -4305,6 +4305,12 @@ def upload_slug_via_studio_browser(slug_key, langs=("ko", "en"), privacy="public
             if yt_url:
                 uploaded_urls[lang_code] = yt_url
                 print(f"  [5/5] YouTube URL 확보 완료 ({lang_code.upper()}): {yt_url}")
+                notify_telegram_youtube_upload(
+                    slug_key=slug_key,
+                    edition_label=f"🎬 1080p 일반 설명 본편 ({lang_code.upper()})",
+                    video_title=meta.get("title", slug_key),
+                    youtube_url=yt_url,
+                )
             time.sleep(2.0)
 
         browser_ctx.close()
@@ -4318,6 +4324,44 @@ def upload_slug_via_studio_browser(slug_key, langs=("ko", "en"), privacy="public
     else:
         sync_youtube_channel_rss()
     return uploaded_urls
+
+
+def notify_telegram_video_event(message_text: str) -> bool:
+    """
+    [텔레그램(@anti7014_bot) 영상 업로드 실시간 알림 발송기]
+    영상이 유튜브(@min7014_ai) 또는 수학홈페이지(GitHub Pages)에 업로드될 때마다
+    즉시 인터넷 주소를 포함하여 선생님 텔레그램으로 전송합니다.
+    """
+    if not message_text:
+        return False
+    try:
+        import mathedu_telegram_bridge as tg_bridge
+        cfg = tg_bridge.load_env_config()
+        token = cfg.get("TELEGRAM_BOT_TOKEN", "").strip()
+        chat_id = cfg.get("TELEGRAM_CHAT_ID", "").strip() or tg_bridge.load_offset_state().get("chat_id", "")
+        if token and chat_id:
+            tg_bridge.send_msg(token, chat_id, message_text)
+            print("📱 [Telegram Notification Sent] 영상 인터넷 주소 텔레그램 발송 완료!", flush=True)
+            return True
+    except Exception as tg_err:
+        print(f"  [Telegram Notification Notice] {tg_err}", flush=True)
+    return False
+
+
+def notify_telegram_youtube_upload(slug_key: str, edition_label: str, video_title: str, youtube_url: str) -> bool:
+    """유튜브(@min7014_ai)에 새 영상이 업로드되는 즉시 텔레그램으로 인터넷 주소를 전송합니다."""
+    board_url = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}"
+    q_board_url = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&mode=question"
+    msg = (
+        f"🚀 [유튜브 신규 영상 업로드 완료 알림]\n"
+        f"• 구분: {edition_label}\n"
+        f"• 주제 ID: {slug_key}\n"
+        f"• 제목: {video_title}\n\n"
+        f"📺 유튜브 인터넷 주소:\n{youtube_url}\n\n"
+        f"🌐 수학홈페이지 영상 주소:\n{board_url}\n"
+        f"❓ 질문하는 수업 실험실:\n{q_board_url}"
+    )
+    return notify_telegram_video_event(msg)
 
 
 def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", method="auto", replace_existing=False):
@@ -4420,6 +4464,12 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
             uploaded_urls[lang_code] = yt_url
             newly_uploaded[lang_code] = yt_url
             print(f"[YouTube Uploaded to {YOUTUBE_CHANNEL_HANDLE} ({lang_code.upper()})] {yt_url}", flush=True)
+            notify_telegram_youtube_upload(
+                slug_key=slug_key,
+                edition_label=f"🎬 1080p 일반 설명 본편 ({lang_code.upper()})",
+                video_title=meta.get("title", slug_key),
+                youtube_url=yt_url,
+            )
             queue_and_delete_existing_youtube_videos_for_slug(
                 slug_key, editions=("standard_1080p",), langs=(lang_code,), execute_delete=True, exclude_video_ids=[vid_id]
             )
@@ -5889,6 +5939,12 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", repl
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
             print(f"🚀 [YouTube #Shorts Uploaded ({lc.upper()})] {short_url}", flush=True)
+            notify_telegram_youtube_upload(
+                slug_key=slug_key,
+                edition_label=f"📱 9:16 일반형 #Shorts ({lc.upper()})",
+                video_title=smeta.get("title", slug_key),
+                youtube_url=short_url,
+            )
             # Shorts 전용 첫 댓글(1080p 본편 직결 + 홈페이지 링크 유도) 자동 게시
             try:
                 board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_shorts"
@@ -6023,6 +6079,12 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
             print(f"🚀 [YouTube Question-Asking 1080p Uploaded ({lc.upper()})] {q_url}", flush=True)
+            notify_telegram_youtube_upload(
+                slug_key=slug_key,
+                edition_label=f"❓ 1080p 질문하는 수업 본편 ({lc.upper()})",
+                video_title=_balance_parentheses(q_title),
+                youtube_url=q_url,
+            )
         except Exception as e:
             err_s = str(e)
             print(f"  ⚠️ [YouTube Question 1080p Upload Notice ({slug_key}/{lc})]: {e}", flush=True)
@@ -6134,6 +6196,12 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public", 
             script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
             update_video_catalog()
             print(f"🚀 [YouTube Question #Shorts Uploaded ({lc.upper()})] {qsh_url}", flush=True)
+            notify_telegram_youtube_upload(
+                slug_key=slug_key,
+                edition_label=f"❓📱 9:16 질문형 Q-#Shorts ({lc.upper()})",
+                video_title=qsh_title,
+                youtube_url=qsh_url,
+            )
         except Exception as e:
             err_s = str(e)
             print(f"  ⚠️ [YouTube Question #Shorts Upload Notice ({slug_key}/{lc})]: {e}", flush=True)
@@ -6753,8 +6821,27 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                     except Exception as pe_err:
                         print(f"[Pedagogy Sync Notice] {pe_err}", flush=True)
                     subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
-                    subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v4.0 4-edition video suite & mathteacher pedagogy evolution ({next_slug})"], check=False)
+                    subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v6.0 4-edition video suite & mathteacher pedagogy evolution ({next_slug})"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
+                    try:
+                        _sp_done = SCRIPTS_DIR / f"{next_slug}.json"
+                        _sdoc_done = json.loads(_sp_done.read_text(encoding="utf-8")) if _sp_done.exists() else {}
+                        _t_ko, _ = split_bilingual_title(_sdoc_done.get("title", next_slug))
+                        _clean_t = latex_to_unicode_title(_t_ko or next_slug)
+                        _yt_ko = (_sdoc_done.get("youtube_urls") or {}).get("ko") or "일일 쿼터 리셋 즉시 자동 업로드 대기"
+                        _sh_ko = (_sdoc_done.get("shorts_urls") or {}).get("ko") or f"https://min7014.github.io/mathedu/video_lectures/shorts/{next_slug}_short_ko.mp4"
+                        _qsh_ko = (_sdoc_done.get("question_shorts_urls") or {}).get("ko") or f"https://min7014.github.io/mathedu/video_lectures/shorts/{next_slug}_short_q_ko.mp4"
+                        notify_telegram_video_event(
+                            f"🎬 [신규 4대 에디션 수학 영상 제작 & 웹 게시 완료]\n"
+                            f"• 주제: {_clean_t} ({next_slug})\n\n"
+                            f"🌐 수학홈페이지 영상 플레이어:\nhttps://min7014.github.io/mathedu/video_board.html?slug={next_slug}\n"
+                            f"❓ 질문하는 수업 플레이어:\nhttps://min7014.github.io/mathedu/video_board.html?slug={next_slug}&mode=question\n"
+                            f"📱 일반형 #Shorts 인터넷 주소:\n{_sh_ko}\n"
+                            f"❓📱 질문형 Q-#Shorts 인터넷 주소:\n{_qsh_ko}\n"
+                            f"📺 유튜브 본편 상태: {_yt_ko}"
+                        )
+                    except Exception as _tg_e:
+                        print(f"[Telegram Factory Notice] {_tg_e}", flush=True)
                     print(f"✅ [Continuous Factory & Pedagogy Evolution Complete] {next_slug} (4-Edition KO/EN + 수학교육 모듈 동기화 완료!)", flush=True)
                 except Exception as prod_err:
                     print(f"⚠️ [Continuous Factory Skip ({next_slug})]: {prod_err}", flush=True)
