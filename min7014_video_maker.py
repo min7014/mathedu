@@ -6397,6 +6397,12 @@ def upload_shorts_via_studio_browser(slug_list=None, langs=("ko",), privacy="pub
                     script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
                     update_video_catalog()
                     print(f"  [4/4] 🎉 #Shorts 게시 완료! -> {short_url}", flush=True)
+                    notify_telegram_youtube_upload(
+                        slug_key=slug_key,
+                        edition_label=f"📱 9:16 일반형 #Shorts ({lc.upper()})",
+                        video_title=smeta.get("title", slug_key),
+                        youtube_url=short_url,
+                    )
                 try:
                     close_btn = page.locator('ytcp-button#close-button, #close-icon-button').first
                     if close_btn.is_visible():
@@ -6823,25 +6829,6 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                     subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
                     subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v6.0 4-edition video suite & mathteacher pedagogy evolution ({next_slug})"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
-                    try:
-                        _sp_done = SCRIPTS_DIR / f"{next_slug}.json"
-                        _sdoc_done = json.loads(_sp_done.read_text(encoding="utf-8")) if _sp_done.exists() else {}
-                        _t_ko, _ = split_bilingual_title(_sdoc_done.get("title", next_slug))
-                        _clean_t = latex_to_unicode_title(_t_ko or next_slug)
-                        _yt_ko = (_sdoc_done.get("youtube_urls") or {}).get("ko") or "일일 쿼터 리셋 즉시 자동 업로드 대기"
-                        _sh_ko = (_sdoc_done.get("shorts_urls") or {}).get("ko") or f"https://min7014.github.io/mathedu/video_lectures/shorts/{next_slug}_short_ko.mp4"
-                        _qsh_ko = (_sdoc_done.get("question_shorts_urls") or {}).get("ko") or f"https://min7014.github.io/mathedu/video_lectures/shorts/{next_slug}_short_q_ko.mp4"
-                        notify_telegram_video_event(
-                            f"🎬 [신규 4대 에디션 수학 영상 제작 & 웹 게시 완료]\n"
-                            f"• 주제: {_clean_t} ({next_slug})\n\n"
-                            f"🌐 수학홈페이지 영상 플레이어:\nhttps://min7014.github.io/mathedu/video_board.html?slug={next_slug}\n"
-                            f"❓ 질문하는 수업 플레이어:\nhttps://min7014.github.io/mathedu/video_board.html?slug={next_slug}&mode=question\n"
-                            f"📱 일반형 #Shorts 인터넷 주소:\n{_sh_ko}\n"
-                            f"❓📱 질문형 Q-#Shorts 인터넷 주소:\n{_qsh_ko}\n"
-                            f"📺 유튜브 본편 상태: {_yt_ko}"
-                        )
-                    except Exception as _tg_e:
-                        print(f"[Telegram Factory Notice] {_tg_e}", flush=True)
                     print(f"✅ [Continuous Factory & Pedagogy Evolution Complete] {next_slug} (4-Edition KO/EN + 수학교육 모듈 동기화 완료!)", flush=True)
                 except Exception as prod_err:
                     print(f"⚠️ [Continuous Factory Skip ({next_slug})]: {prod_err}", flush=True)
