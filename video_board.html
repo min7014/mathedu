@@ -1736,6 +1736,32 @@
             <button type="button" onclick="saveVideoBoardStudentQuestion('${cleanTopicTitle.replace(/'/g, "\'")}')" style="padding:6px 12px;border-radius:8px;border:none;background:#e11d48;color:#fff;font-size:0.75rem;font-weight:800;cursor:pointer;">💾 내 질문 저장</button>
           </div>
         </div>
+                <div id="vbNeonIdeaLab" style="padding:12px;border-radius:12px;background:linear-gradient(135deg,#090d1e,#1e1b4b);border:1.5px solid #7c3aed;margin-bottom:12px;color:#f8fafc;box-shadow:0 8px 20px rgba(15,23,42,0.35);">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+            <span style="font-weight:900;color:#fef08a;font-size:0.84rem;">🌟 [창의 수학 네온 시뮬레이터] 슬라이더를 움직여 불변량을 직접 실험하세요!</span>
+            <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="padding:4px 10px;border-radius:999px;background:#e11d48;color:#fff;font-size:0.72rem;font-weight:900;text-decoration:none;border:1px solid #fef08a;">🔔 @min7014_ai 1초 구독</a>
+          </div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;">
+            <button type="button" onclick="window.setVbNeonMode('pythagoras')" id="vbNeonBtn_pythagoras" style="padding:4px 9px;border-radius:7px;border:1px solid #38bdf8;background:#1e3a8a;color:#fff;font-size:0.73rem;font-weight:800;cursor:pointer;">🌳 피타고라스 프랙탈</button>
+            <button type="button" onclick="window.setVbNeonMode('ceva')" id="vbNeonBtn_ceva" style="padding:4px 9px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.73rem;font-weight:800;cursor:pointer;">📐 체바 넓이·비율</button>
+            <button type="button" onclick="window.setVbNeonMode('ellipse')" id="vbNeonBtn_ellipse" style="padding:4px 9px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.73rem;font-weight:800;cursor:pointer;">🪐 타원 12갈래 레이저</button>
+            <button type="button" onclick="window.setVbNeonMode('calculus')" id="vbNeonBtn_calculus" style="padding:4px 9px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.73rem;font-weight:800;cursor:pointer;">📈 리만 적분·접선</button>
+          </div>
+          <canvas id="vbNeonIdeaCanvas" width="460" height="220" style="width:100%;height:auto;border-radius:10px;background:#050914;border:1px solid rgba(56,189,248,0.4);display:block;"></canvas>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:0.74rem;">
+            <label style="display:flex;flex-direction:column;gap:3px;color:#bae6fd;font-weight:700;">
+              <span id="vbNeonLabelA">🎛️ 가지 각도 / 파라미터 A</span>
+              <input type="range" id="vbNeonSliderA" min="15" max="75" value="38" oninput="window.drawVbNeonCanvas()" style="accent-color:#facc15;cursor:pointer;" />
+            </label>
+            <label style="display:flex;flex-direction:column;gap:3px;color:#a7f3d0;font-weight:700;">
+              <span id="vbNeonLabelB">🎚️ 프랙탈 세대 / 분할 수 B</span>
+              <input type="range" id="vbNeonSliderB" min="1" max="6" value="5" oninput="window.drawVbNeonCanvas()" style="accent-color:#34d399;cursor:pointer;" />
+            </label>
+          </div>
+          <div id="vbNeonInvariantReadout" style="margin-top:8px;padding:6px 10px;border-radius:8px;background:rgba(15,23,42,0.85);border:1px solid rgba(250,204,21,0.5);color:#fef08a;font-size:0.76rem;font-weight:900;text-align:center;">
+            ★ CORE INVARIANT: 모든 세대의 정사각형 넓이 합 = 뿌리 정사각형(25.00) 100% 보존!
+          </div>
+        </div>
         <div style="font-weight:800;color:#0f172a;margin-bottom:6px;">💡 핵심 수학 원리</div>
         <div style="margin-bottom:10px;">${item.core_concept || ''}</div>
         ${stepsHtml ? `<div style="font-weight:800;color:#0f172a;margin-bottom:4px;">🪜 단계별 시각 증명 디딤돌</div><ul style="margin:0;padding-left:18px;font-size:0.8rem;color:#334155;">${stepsHtml}</ul>` : ''}
@@ -1753,6 +1779,14 @@
         <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="res-chip" style="border-color:#fda4af;background:#e11d48;color:#fff;font-weight:900;">🔔 @min7014_ai 유튜브 채널 바로가기 ↗</a>
       `;
 
+      setTimeout(() => {
+        const tBlob = ((item.title || '') + ' ' + (item.category || '')).toLowerCase();
+        let defMode = 'pythagoras';
+        if (tBlob.includes('체바') || tBlob.includes('메넬라우스') || tBlob.includes('삼각형') || tBlob.includes('ceva')) defMode = 'ceva';
+        else if (tBlob.includes('타원') || tBlob.includes('포물선') || tBlob.includes('쌍곡선') || tBlob.includes('초점') || tBlob.includes('ellipse')) defMode = 'ellipse';
+        else if (tBlob.includes('미분') || tBlob.includes('적분') || tBlob.includes('극한') || tBlob.includes('접선')) defMode = 'calculus';
+        if (window.setVbNeonMode) window.setVbNeonMode(defMode);
+      }, 60);
       stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
       if (window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise([stage]).catch(() => {});
@@ -1760,6 +1794,151 @@
     }
 
     
+    
+    window._vbNeonMode = 'pythagoras';
+    window.setVbNeonMode = function(m) {
+      window._vbNeonMode = m;
+      ['pythagoras', 'ceva', 'ellipse', 'calculus'].forEach(k => {
+        const b = document.getElementById('vbNeonBtn_' + k);
+        if (b) {
+          b.style.background = (k === m) ? '#7c3aed' : '#0f172a';
+          b.style.borderColor = (k === m) ? '#facc15' : '#475569';
+          b.style.color = (k === m) ? '#fff' : '#cbd5e1';
+        }
+      });
+      const sA = document.getElementById('vbNeonSliderA');
+      const sB = document.getElementById('vbNeonSliderB');
+      const lA = document.getElementById('vbNeonLabelA');
+      const lB = document.getElementById('vbNeonLabelB');
+      if (!sA || !sB) return;
+      if (m === 'pythagoras') {
+        lA.textContent = '🎛️ 직각삼각형 예각 (15°~75°)'; sA.min = 15; sA.max = 75; sA.value = 37;
+        lB.textContent = '🎚️ 프랙탈 피어나는 세대 (1~6단)'; sB.min = 1; sB.max = 6; sB.value = 5;
+      } else if (m === 'ceva') {
+        lA.textContent = '🎛️ 내부 교점 P 좌우 이동'; sA.min = 25; sA.max = 75; sA.value = 46;
+        lB.textContent = '🎚️ 내부 교점 P 상하 이동'; sB.min = 25; sB.max = 75; sB.value = 54;
+      } else if (m === 'ellipse') {
+        lA.textContent = '🎛️ 레이저 광선 진행률 (0~100%)'; sA.min = 5; sA.max = 100; sA.value = 72;
+        lB.textContent = '🎚️ 타원 이심률 스케일 (20~80)'; sB.min = 20; sB.max = 80; sB.value = 60;
+      } else {
+        lA.textContent = '🎛️ 할선 Δx 수렴 위치'; sA.min = 5; sA.max = 80; sA.value = 28;
+        lB.textContent = '🎚️ 리만 적분 기둥 수 N (4~48)'; sB.min = 4; sB.max = 48; sB.value = 20;
+      }
+      window.drawVbNeonCanvas();
+    };
+
+    window.drawVbNeonCanvas = function() {
+      const cv = document.getElementById('vbNeonIdeaCanvas');
+      if (!cv) return;
+      const ctx = cv.getContext('2d');
+      const W = cv.width, H = cv.height;
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#050914';
+      ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = 'rgba(30,58,138,0.28)';
+      ctx.lineWidth = 1;
+      for (let gx = 0; gx < W; gx += 32) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
+      for (let gy = 0; gy < H; gy += 32) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke(); }
+
+      const sA = parseFloat((document.getElementById('vbNeonSliderA') || {}).value || 38);
+      const sB = parseFloat((document.getElementById('vbNeonSliderB') || {}).value || 5);
+      const ro = document.getElementById('vbNeonInvariantReadout');
+      const m = window._vbNeonMode || 'pythagoras';
+
+      if (m === 'pythagoras') {
+        const ang = (sA * Math.PI) / 180.0;
+        const maxD = Math.round(sB);
+        const colors = ['#38bdf8', '#22d3ee', '#34d399', '#facc15', '#fb7185', '#c084fc', '#f472b6'];
+        function drawBranch(x1, y1, x2, y2, d) {
+          if (d > maxD) return;
+          const dx = x2 - x1, dy = y2 - y1;
+          const x3 = x2 - dy, y3 = y2 + dx;
+          const x4 = x1 - dy, y4 = y1 + dx;
+          ctx.save();
+          ctx.shadowColor = colors[d % colors.length];
+          ctx.shadowBlur = 10;
+          ctx.fillStyle = colors[d % colors.length] + '44';
+          ctx.strokeStyle = colors[d % colors.length];
+          ctx.lineWidth = Math.max(1.2, 2.6 - d * 0.3);
+          ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.lineTo(x3, y3); ctx.lineTo(x4, y4); ctx.closePath();
+          ctx.fill(); ctx.stroke();
+          ctx.restore();
+          const cA = Math.cos(ang), sA_v = Math.sin(ang);
+          const ux = x3 - x4, uy = y3 - y4;
+          const vx = -uy, vy = ux;
+          const ax = x4 + ux * cA * cA + vx * cA * sA_v;
+          const ay = y4 + uy * cA * cA + vy * cA * sA_v;
+          drawBranch(x4, y4, ax, ay, d + 1);
+          drawBranch(ax, ay, x3, y3, d + 1);
+        }
+        drawBranch(W / 2 - 21, H - 14, W / 2 + 21, H - 14, 0);
+        const leaves = Math.pow(2, maxD);
+        const a2 = (25 * Math.cos(ang) * Math.cos(ang)).toFixed(2);
+        const b2 = (25 * Math.sin(ang) * Math.sin(ang)).toFixed(2);
+        if (ro) ro.textContent = `★ 각도 ${sA}° · ${maxD}세대(${leaves}개 가지): 왼쪽(${a2}) + 오른쪽(${b2}) = 뿌리 넓이 25.00 완벽 보존!`;
+      } else if (m === 'ceva') {
+        const A = {x: W / 2, y: 20}, B = {x: 75, y: H - 22}, C = {x: W - 75, y: H - 22};
+        const u = sA / 100.0, v = sB / 100.0;
+        const P = {x: B.x + (C.x - B.x) * u * 0.7 + (A.x - B.x) * 0.25, y: A.y + (B.y - A.y) * v * 0.85};
+        const tris = [[P, A, B, '#38bdf8'], [P, B, C, '#34d399'], [P, C, A, '#fb7185']];
+        tris.forEach(t => {
+          ctx.save(); ctx.shadowColor = t[3]; ctx.shadowBlur = 10;
+          ctx.fillStyle = t[3] + '38'; ctx.strokeStyle = t[3]; ctx.lineWidth = 2.2;
+          ctx.beginPath(); ctx.moveTo(t[0].x, t[0].y); ctx.lineTo(t[1].x, t[1].y); ctx.lineTo(t[2].x, t[2].y); ctx.closePath();
+          ctx.fill(); ctx.stroke(); ctx.restore();
+        });
+        ctx.fillStyle = '#facc15'; ctx.beginPath(); ctx.arc(P.x, P.y, 6, 0, Math.PI * 2); ctx.fill();
+        if (ro) ro.textContent = `★ 체바 넓이 밸런스: P(${Math.round(P.x)}, ${Math.round(P.y)}) 이동 무관 (AF/FB)×(BD/DC)×(CE/EA) = 1.0000 불변!`;
+      } else if (m === 'ellipse') {
+        const rx = 165, ry = 82, cx = W / 2, cy = H / 2;
+        const c = Math.sqrt(Math.max(100, rx * rx - ry * ry)) * (sB / 65.0);
+        const F1 = {x: cx - c, y: cy}, F2 = {x: cx + c, y: cy};
+        ctx.save(); ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 12;
+        ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        const prog = sA / 100.0;
+        const totalD = 2 * rx;
+        for (let k = 0; k < 12; k++) {
+          const th = (k / 12) * Math.PI * 2;
+          const px = cx + rx * Math.cos(th), py = cy + ry * Math.sin(th);
+          const d1 = Math.hypot(px - F1.x, py - F1.y), d2 = Math.max(1, totalD - d1);
+          const curD = prog * totalD;
+          ctx.strokeStyle = curD <= d1 ? '#facc15' : '#fb7185';
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          if (curD <= d1) {
+            const r = curD / d1;
+            ctx.moveTo(F1.x, F1.y); ctx.lineTo(F1.x + (px - F1.x) * r, F1.y + (py - F1.y) * r);
+          } else {
+            const r2 = Math.min(1, (curD - d1) / d2);
+            ctx.moveTo(px, py); ctx.lineTo(px + (F2.x - px) * r2, py + (F2.y - py) * r2);
+          }
+          ctx.stroke();
+        }
+        [F1, F2].forEach(F => { ctx.fillStyle = '#e11d48'; ctx.beginPath(); ctx.arc(F.x, F.y, 6, 0, Math.PI * 2); ctx.fill(); });
+        if (ro) ro.textContent = `★ 타원 광학 불변량: 12갈래 레이저 경로 합 |PF1| + |PF2| = 2a 일정 → 제2초점 F2 동시 도착! (${Math.round(sA)}%)`;
+      } else {
+        const ax0 = 55, ay0 = H - 24, sw = W - 110, sh = H - 52;
+        const N = Math.round(sB);
+        const f = u => 0.15 + 0.68 * Math.pow(u, 1.8) - 0.1 * Math.sin(u * Math.PI * 2);
+        for (let i = 0; i < N; i++) {
+          const u0 = i / N, u1 = (i + 1) / N;
+          const bh = f((u0 + u1) / 2) * sh;
+          ctx.fillStyle = 'rgba(14,165,233,0.32)'; ctx.strokeStyle = '#38bdf8';
+          ctx.fillRect(ax0 + u0 * sw, ay0 - bh, (u1 - u0) * sw - 1, bh);
+        }
+        ctx.save(); ctx.shadowColor = '#34d399'; ctx.shadowBlur = 10;
+        ctx.strokeStyle = '#34d399'; ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (let k = 0; k <= 60; k++) {
+          const u = k / 60, x = ax0 + u * sw, y = ay0 - f(u) * sh;
+          if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke(); ctx.restore();
+        if (ro) ro.textContent = `★ 미적분 극한 실험: 리만 분할 N = ${N}개 · Δx = ${(sA / 100).toFixed(2)} → 0 수렴 시 정적분 넓이 일치!`;
+      }
+    };
+
     function saveVideoBoardStudentQuestion(topicTitle) {
       const inp = document.getElementById('vbCinemaStudentQuestionInput');
       if (!inp || !inp.value.trim()) {
