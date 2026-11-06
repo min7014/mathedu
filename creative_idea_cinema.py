@@ -76,6 +76,11 @@ def sanitize_glyphs(text: str) -> str:
         "👆": "→",
         "🔍": "▶",
         "✨": "★",
+        "lim( theta arrow 0) ( sin theta/": "lim(θ→0) (sinθ/θ) = 1",
+        "theta arrow 0": "θ→0",
+        "sin theta": "sinθ",
+        "cos theta": "cosθ",
+        "tan theta": "tanθ",
     }
     out = str(text)
     for k, v in repl.items():
@@ -93,6 +98,12 @@ def detect_visual_archetype(sdoc: dict) -> str:
 
     if any(k in blob for k in ["피타고라스", "pythagor", "직각삼각형", "right triangle", "넓이 보존", "정사각형"]):
         return "pythagoras_fractal"
+    if any(k in blob for k in ["황금비", "피보나치", "golden", "fibonacci", "나선", "정오각형", "pentagon"]):
+        return "fibonacci_golden"
+    if any(k in blob for k in ["sin", "cos", "tan", "삼각함수", "삼각비", "사인", "코사인", "탄젠트", "호도법", "단위원"]):
+        return "trig_harmonic"
+    if any(k in blob for k in ["확률", "정규분포", "이항분포", "통계", "주사위", "독립시행", "normal", "binomial", "probability", "조합"]):
+        return "prob_galton"
     if any(k in blob for k in ["체바", "메넬라우스", "ceva", "menelaus", "무게중심", "내분", "선분 비", "평행선", "삼각형", "triangle", "비비아니", "viviani", "나폴레옹", "몰리"]):
         return "ceva_menelaus"
     if any(k in blob for k in ["타원", "포물선", "쌍곡선", "단델린", "초점", "준선", "이차곡선", "ellipse", "parabola", "hyperbola", "dandelin", "conic", "사이클로이드", "cycloid"]):
@@ -104,10 +115,10 @@ def detect_visual_archetype(sdoc: dict) -> str:
 
 def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
     ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", sdoc.get("slug", "")))
-    clean_ko = vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=38, lang="ko")
-    clean_en = vmaker._smart_concise_topic_title(
+    clean_ko = sanitize_glyphs(vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=38, lang="ko"))
+    clean_en = sanitize_glyphs(vmaker._smart_concise_topic_title(
         vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=46, lang="en"
-    )
+    ))
     t_title = clean_ko if lang_code == "ko" else clean_en
     tpa = sdoc.get("teacher_proof_analysis") or {}
     archetype = detect_visual_archetype(sdoc)
@@ -777,6 +788,83 @@ def render_pure_procedural_scene(
             c_draw.ellipse((pt_c[0] - 9, pt_c[1] - 9, pt_c[0] + 9, pt_c[1] + 9), fill=(244, 63, 94, 255), outline=(255, 255, 255, 255), width=3)
         c_draw.text((int(cx - 180), int(ay0 + 22)), f"Δx = {ub - ua:.3f} → 0  |  리만 분할 N = {n_bars}", fill=(250, 204, 21, 255), font=f_big)
 
+    elif archetype == "trig_harmonic":
+        # 단위원 페이저 회전 + 실시간 사인·탄젠트 파동 생성기 & 부채꼴 샌드위치 정리(sin θ < θ < tan θ)
+        R = int(scale_ref * (0.22 if not is_vertical else 0.25))
+        ucx = cx - int(scale_ref * (0.18 if not is_vertical else 0.0))
+        ucy = cy - int(scale_ref * (0.04 if not is_vertical else 0.12))
+        g_draw.ellipse((ucx - R, ucy - R, ucx + R, ucy + R), fill=(15, 23, 42, 110), outline=(56, 189, 248, 255), width=6)
+        c_draw.ellipse((ucx - R, ucy - R, ucx + R, ucy + R), outline=(255, 255, 255, 240), width=2)
+        c_draw.line([(ucx - R - 20, ucy), (ucx + R + 280, ucy)], fill=(148, 163, 184, 180), width=2)
+        c_draw.line([(ucx, ucy - R - 20), (ucx, ucy + R + 20)], fill=(148, 163, 184, 180), width=2)
+
+        theta = (0.18 + 0.62 * (0.5 - 0.5 * math.cos(t_raw * math.pi * 2))) * (math.pi / 2.2)
+        px = ucx + R * math.cos(theta)
+        py = ucy - R * math.sin(theta)
+        tx = ucx + R
+        ty = ucy - R * math.tan(theta)
+
+        # 삼각형 OAP, 부채꼴 OAB, 접선 삼각형 OAT 샌드위치 비교
+        g_draw.polygon([(ucx, ucy), (ucx + R, ucy), (tx, ty)], fill=(250, 204, 21, 65), outline=(250, 204, 21, 235), width=4)
+        g_draw.polygon([(ucx, ucy), (ucx + R, ucy), (px, py)], fill=(16, 185, 129, 95), outline=(52, 211, 153, 255), width=5)
+        g_draw.line([(px, py), (px, ucy)], fill=(244, 63, 94, 255), width=7)
+        c_draw.line([(px, py), (px, ucy)], fill=(255, 255, 255, 255), width=3)
+
+        # 우측 사인파 진행 궤적
+        wx0 = ucx + R + 40
+        wave_w = int(scale_ref * 0.28)
+        w_pts = []
+        for k in range(60):
+            u_k = k / 59.0
+            ang_k = theta + u_k * math.pi * 2.0
+            w_pts.append((wx0 + u_k * wave_w, ucy - R * math.sin(ang_k) * 0.85))
+        g_draw.line(w_pts, fill=(52, 211, 153, 235), width=6)
+        c_draw.line(w_pts, fill=(255, 255, 255, 240), width=2)
+        g_draw.line([(px, py), w_pts[0]], fill=(250, 204, 21, 180), width=3)
+        c_draw.text((int(cx - 210), int(ucy + R + 32)), f"sin θ ({math.sin(theta):.3f}) < θ ({theta:.3f}) < tan θ ({math.tan(theta):.3f})", fill=(254, 240, 138, 255), font=f_big)
+
+    elif archetype == "fibonacci_golden":
+        # 황금비 해바라기 필로탁시스(Phyllotaxis) 144개 네온 씨앗 나선
+        golden_ang = math.radians(137.507764)
+        max_seeds = int(24 + 120 * t)
+        spread = scale_ref * 0.025
+        for n in range(1, max_seeds + 1):
+            r_n = spread * math.sqrt(n)
+            a_n = n * golden_ang + t_raw * 0.8
+            sx = cx + r_n * math.cos(a_n)
+            sy = cy + r_n * math.sin(a_n)
+            pal = GOLDEN_PALETTE[n % len(GOLDEN_PALETTE)]
+            rad_s = max(4, int(9 - n * 0.03))
+            g_draw.ellipse((sx - rad_s - 2, sy - rad_s - 2, sx + rad_s + 2, sy + rad_s + 2), fill=(pal[1][0], pal[1][1], pal[1][2], 210))
+            c_draw.ellipse((sx - rad_s + 1, sy - rad_s + 1, sx + rad_s - 1, sy + rad_s - 1), fill=(255, 255, 255, 235))
+        c_draw.text((int(cx - 195), int(cy + scale_ref * 0.34)), "황금각 137.508° · φ = (1 + √5)/2 ≈ 1.618034", fill=(250, 204, 21, 255), font=f_big)
+
+    elif archetype == "prob_galton":
+        # 이항분포 갈톤 보드(Galton Board) -> 정규분포 가우시안 벨 커브 수렴
+        span_w = int(scale_ref * 0.66)
+        span_h = int(scale_ref * 0.42)
+        ax0 = cx - span_w // 2
+        ay0 = cy + span_h // 2
+        n_bins = 16
+        bin_w = span_w / n_bins
+        for k in range(n_bins):
+            z = (k - (n_bins - 1) / 2.0) / (n_bins / 5.2)
+            bell = math.exp(-0.5 * z * z)
+            bh = int(bell * span_h * (0.35 + 0.65 * t))
+            bx0 = ax0 + int(k * bin_w) + 3
+            bx1 = ax0 + int((k + 1) * bin_w) - 3
+            g_draw.rectangle((bx0, ay0 - bh, bx1, ay0), fill=(56, 189, 248, 125), outline=(125, 211, 252, 240), width=3)
+            c_draw.rectangle((bx0, ay0 - bh, bx1, ay0), fill=(14, 165, 233, 95), outline=(255, 255, 255, 220), width=1)
+        curve_pts = []
+        for i in range(81):
+            u = i / 80.0
+            z = (u - 0.5) * 5.2
+            bell = math.exp(-0.5 * z * z)
+            curve_pts.append((ax0 + u * span_w, ay0 - bell * span_h))
+        g_draw.line(curve_pts, fill=(250, 204, 21, 255), width=8)
+        c_draw.line(curve_pts, fill=(255, 255, 255, 255), width=3)
+        c_draw.text((int(cx - 190), int(ay0 + 22)), "이항분포 B(n, p) → 정규분포 N(μ, σ²) 수렴!", fill=(254, 240, 138, 255), font=f_big)
+
     else:
         # 원주각·중심각 불변량 & 보조선 반지름 동적 레이더
         R = int(scale_ref * (0.31 if not is_vertical else 0.33))
@@ -1232,10 +1320,18 @@ def render_creative_idea_short_vertical(slug_key: str = "math20250130001", lang_
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
-def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code: str = "ko", privacy: str = "public") -> dict:
+def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code: str = "ko", langs=None, privacy: str = "public") -> dict:
     """
     [Edition 5-A: 🌟 창의 아이디어 시네마 1080p 본편 유튜브 업로드 + 썸네일 + 다국어 + 자동 댓글 + 텔레그램 알림]
     """
+    if langs is not None:
+        out_all = {}
+        for lc in langs:
+            try:
+                out_all[lc] = upload_creative_idea_to_youtube(slug_key, lang_code=lc, privacy=privacy)
+            except Exception:
+                break
+        return out_all
     from googleapiclient.http import MediaFileUpload
 
     mp4_path = CREATIVE_IDEA_DIR / f"{slug_key}_idea_{lang_code}.mp4"
@@ -1363,10 +1459,18 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
     return {"video_id": vid_id, "youtube_url": yt_url, "title": title}
 
 
-def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lang_code: str = "ko", privacy: str = "public") -> dict:
+def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lang_code: str = "ko", langs=None, privacy: str = "public") -> dict:
     """
     [Edition 5-B: 🌟📱 창의 아이디어 숏폼 9:16 (Idea-#Shorts) 유튜브 업로드 + 자동 댓글 + 텔레그램 알림]
     """
+    if langs is not None:
+        out_all = {}
+        for lc in langs:
+            try:
+                out_all[lc] = upload_creative_idea_short_to_youtube(slug_key, lang_code=lc, privacy=privacy)
+            except Exception:
+                break
+        return out_all
     from googleapiclient.http import MediaFileUpload
 
     short_path = ROOT_DIR / "video_lectures" / "shorts" / f"{slug_key}_short_idea_{lang_code}.mp4"
@@ -1504,14 +1608,50 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
 def build_flagship_creative_idea_suite(slugs=None, langs=("ko", "en")) -> list:
     """주요 수학 주제들에 대해 Edition 5 v2.0 (순수 네온 블룸 창의 아이디어 시네마 1080p + Idea-#Shorts 9:16) 일괄 제작"""
     if not slugs:
-        slugs = ["math20250130001", "2014111902", "2022051507"]
+        slugs = ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"]
     results = []
     for slug in slugs:
         for lg in langs:
-            p_cinema = render_creative_idea_cinema_video(slug, lang_code=lg)
-            p_short = render_creative_idea_short_vertical(slug, lang_code=lg)
+            c_mp4 = CREATIVE_IDEA_DIR / f"{slug}_idea_{lg}.mp4"
+            s_mp4 = ROOT_DIR / "video_lectures" / "shorts" / f"{slug}_short_idea_{lg}.mp4"
+            p_cinema = render_creative_idea_cinema_video(slug, lang_code=lg) if not c_mp4.exists() else c_mp4
+            p_short = render_creative_idea_short_vertical(slug, lang_code=lg) if not s_mp4.exists() else s_mp4
             results.append({"slug": slug, "lang": lg, "cinema": str(p_cinema), "short": str(p_short)})
     return results
+
+
+def build_creative_idea_masterclass_compilation(langs=("ko", "en")) -> list:
+    """
+    [월 1,000만 원 핵심 엔진: 🌟 10분+ 미드롤(Mid-Roll) 순수 네온 블룸 창의 수학 시네마 마스터클래스 합본 제작]
+    - PDF 캡처가 전혀 없는 6편의 순수 네온 블룸 시네마(피타고라스 나무, 체바의 정리, 타원 빛 반사, 메넬라우스 정리, 삼각함수 극한 sin θ/θ, 포물선 빛 반사)를
+      하나의 10~12분+ 정주행 마스터클래스로 결합하여 미드롤 광고 슬롯 4개와 시청 지속시간(Watch Time)을 극대화합니다.
+    """
+    slugs = ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"]
+    build_flagship_creative_idea_suite(slugs=slugs, langs=langs)
+
+    mc_dir = ROOT_DIR / "video_lectures" / "masterclasses"
+    mc_dir.mkdir(parents=True, exist_ok=True)
+    ffmpeg_exe = shutil.which("ffmpeg")
+    ffprobe_exe = shutil.which("ffprobe")
+    compiled = []
+
+    for lg in langs:
+        mp4_list = [CREATIVE_IDEA_DIR / f"{sl}_idea_{lg}.mp4" for sl in slugs if (CREATIVE_IDEA_DIR / f"{sl}_idea_{lg}.mp4").exists()]
+        if len(mp4_list) < 3:
+            continue
+        out_id = f"masterclass_neon_idea_vol1" if lg == "ko" else f"masterclass_neon_idea_vol1_en"
+        out_mp4 = mc_dir / f"{out_id}.mp4"
+        concat_txt = mc_dir / f"concat_{out_id}.txt"
+        concat_txt.write_text("\n".join(f"file '{p.as_posix()}'" for p in mp4_list), encoding="utf-8")
+        subprocess.run(
+            [ffmpeg_exe, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_txt), "-c", "copy", "-movflags", "+faststart", str(out_mp4)],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        concat_txt.unlink(missing_ok=True)
+        dur = vmaker.get_media_duration_seconds(out_mp4, ffprobe_exe)
+        compiled.append({"id": out_id, "lang": lg, "path": str(out_mp4), "duration_sec": round(dur, 1), "chapters": len(mp4_list)})
+        print(f"🌟🏆 [10-Min+ Mid-Roll Neon-Bloom Cinema Masterclass Compiled] {out_mp4} ({round(dur / 60, 1)} min)")
+    return compiled
 
 
 if __name__ == "__main__":
@@ -1521,10 +1661,14 @@ if __name__ == "__main__":
     parser.add_argument("--slug", default="math20250130001", help="Topic slug")
     parser.add_argument("--lang", default="ko", help="Language code (ko/en)")
     parser.add_argument("--batch", action="store_true", help="Build flagship suite")
+    parser.add_argument("--masterclass", action="store_true", help="Build 10-min+ Neon-Bloom Masterclass compilation")
     parser.add_argument("--upload", action="store_true", help="Upload to YouTube if quota permits")
     args = parser.parse_args()
 
-    if args.batch:
+    if args.masterclass:
+        res = build_creative_idea_masterclass_compilation()
+        print(json.dumps(res, ensure_ascii=False, indent=2))
+    elif args.batch:
         res = build_flagship_creative_idea_suite()
         print(json.dumps(res, ensure_ascii=False, indent=2))
     else:

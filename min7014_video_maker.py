@@ -7183,7 +7183,7 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         fdaemon.write_daemon_heartbeat(last_completed_slug=next_slug)
                     except Exception as pe_err:
                         print(f"[Pedagogy Sync Notice] {pe_err}", flush=True)
-                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/foundation_daemon_status.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/mathteacher_pedagogy_engine.json", "assets/finance_revenue_engine.json", "index.html", "video_board.html"], check=False)
+                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/foundation_daemon_status.json", "video_lectures/scripts/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/mathteacher_pedagogy_engine.json", "assets/finance_revenue_engine.json", "index.html", "video_board.html"], check=False)
                     subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v6.0 4-edition video suite, mathteacher pedagogy & finance v5.0 evolution ({next_slug})"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
                     print(f"✅ [Continuous Factory, Pedagogy & Finance 10M Engine Complete] {next_slug} (4-Edition KO/EN + 수학교육 모듈 + 수익 엔진 동기화 완료!)", flush=True)

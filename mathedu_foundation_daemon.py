@@ -57,7 +57,7 @@ def ensure_video_maker_hooked():
                         fdaemon.write_daemon_heartbeat(last_completed_slug=next_slug)
                     except Exception as pe_err:
                         print(f"[Pedagogy Sync Notice] {pe_err}", flush=True)
-                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "assets/min7014_deep_knowledge.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
+                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "assets/min7014_deep_knowledge.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
                     subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v6.0 video/shorts & mathteacher pedagogy evolution ({next_slug})"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
                     print(f"✅ [Continuous Factory & Pedagogy Evolution Complete] {next_slug} (1080p KO/EN + #Shorts KO/EN + 수학교육 모듈 동기화 완료!)", flush=True)'''

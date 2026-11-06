@@ -160,7 +160,9 @@ def _render_masterclass_custom_thumbnail(mc_slug: str, title_text: str, duration
         from PIL import Image, ImageDraw, ImageFont
         base_img = None
         for ls in (lead_slugs or []):
-            cand = YT_PKG_DIR / f"{ls}_{lang_code}_thumb.png"
+            cand = YT_PKG_DIR / f"{ls}_idea_{lang_code}_thumb.png" if "neon_idea" in mc_slug else YT_PKG_DIR / f"{ls}_{lang_code}_thumb.png"
+            if not cand.exists():
+                cand = YT_PKG_DIR / f"{ls}_{lang_code}_thumb.png"
             if not cand.exists():
                 cand = YT_PKG_DIR / f"{ls}_ko_thumb.png"
             if cand.exists():
@@ -205,6 +207,22 @@ def build_ypp_watchtime_masterclasses() -> list:
         return []
 
     suites = [
+        {
+            "mc_slug": "masterclass_neon_idea_vol1",
+            "title_ko": "🌟 [창의 수학 네온 시네마 마스터클래스 Vol.1] 공식 암기 없이 눈으로 깨치는 6대 핵심 아이디어 (1080p 정주행) | @min7014_ai",
+            "title_en": "🌟 [Creative Math Neon Cinema Masterclass Vol.1] 6 Visual Ideas That Explain Everything Without Formulas (1080p) | @min7014_ai",
+            "slugs": ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol1_en",
+            "title_ko": "🌟 [Global Creative Math Cinema Masterclass Vol.1] 6 Pure Visual Proofs Without Memorizing Formulas (1080p) | @min7014_ai",
+            "title_en": "🌟 [Creative Math Neon Cinema Masterclass Vol.1] 6 Visual Ideas That Explain Everything (1080p) | @min7014_ai",
+            "slugs": ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
         {
             "mc_slug": "masterclass_euclidean_geometry_vol1",
             "title_ko": "🔥 [기하학 시각적 증명 마스터클래스 Vol.1] 피타고라스·메넬라우스·체바·원주각·포물선 총정리 (1080p 정주행) | @min7014_ai",
@@ -306,6 +324,7 @@ def build_ypp_watchtime_masterclasses() -> list:
     for spec in suites:
         mc_slug = spec["mc_slug"]
         use_q = spec.get("use_question_edition", False)
+        use_idea = spec.get("use_creative_idea_edition", False)
         lang_code = spec.get("lang", "ko")
         out_mp4 = MASTERCLASS_DIR / f"{mc_slug}.mp4" if mc_slug.endswith("_en") else MASTERCLASS_DIR / f"{mc_slug}_ko.mp4"
         out_meta = MASTERCLASS_DIR / f"{mc_slug}_meta.json"
@@ -315,7 +334,9 @@ def build_ypp_watchtime_masterclasses() -> list:
         cum_sec = 0.0
 
         for s_key in spec["slugs"]:
-            if use_q:
+            if use_idea:
+                mp4_cand = ROOT_DIR / "video_lectures" / "creative_idea" / f"{s_key}_idea_{lang_code}.mp4"
+            elif use_q:
                 mp4_cand = QUESTION_DIR / f"{s_key}_q_{lang_code}.mp4"
             else:
                 mp4_cand = YT_UPLOADS_DIR / s_key / f"{s_key}_{lang_code}.mp4"
