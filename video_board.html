@@ -1149,7 +1149,13 @@
         || '';
       const qMp4Ko = (catEntry && catEntry.question_classroom_packages && catEntry.question_classroom_packages.ko && catEntry.question_classroom_packages.ko.local_mp4_path)
         || '';
-      const qMp4En = (catEntry && catEntry.question_classroom_packages && catEntry.question_classroom_packages.en && catEntry.question_classroom_packages.en.local_mp4_path)
+      const qMp4En = (catEntry && catEntry.question_classroom_packages && catEntry.question_classroom_packages.en && catEntry.question_classroom_packages.en.local_mp4_path) || '';
+      const ideaMp4Ko = (catEntry && catEntry.creative_idea_packages && catEntry.creative_idea_packages.ko && catEntry.creative_idea_packages.ko.local_mp4_path) || '';
+      const ideaMp4En = (catEntry && catEntry.creative_idea_packages && catEntry.creative_idea_packages.en && catEntry.creative_idea_packages.en.local_mp4_path) || '';
+      const ideaYtKo = (catEntry && catEntry.creative_idea_youtube_urls && catEntry.creative_idea_youtube_urls.ko) || '';
+      const ideaYtEn = (catEntry && catEntry.creative_idea_youtube_urls && catEntry.creative_idea_youtube_urls.en) || '';
+      const ideaShortMp4Ko = (catEntry && catEntry.creative_idea_shorts_packages && catEntry.creative_idea_shorts_packages.ko && catEntry.creative_idea_shorts_packages.ko.local_mp4_path) || '';
+      const ideaShortMp4En = (catEntry && catEntry.creative_idea_shorts_packages && catEntry.creative_idea_shorts_packages.en && catEntry.creative_idea_shorts_packages.en.local_mp4_path)
         || '';
 
       const slugKey = (catEntry && catEntry.slug)
@@ -1172,6 +1178,12 @@
         fullMp4En: fullMp4En.trim(),
         qMp4Ko: qMp4Ko.trim(),
         qMp4En: qMp4En.trim(),
+        ideaMp4Ko: ideaMp4Ko.trim(),
+        ideaMp4En: ideaMp4En.trim(),
+        ideaYtKo: ideaYtKo.trim(),
+        ideaYtEn: ideaYtEn.trim(),
+        ideaShortMp4Ko: ideaShortMp4Ko.trim(),
+        ideaShortMp4En: ideaShortMp4En.trim(),
         hasShortsReady: !!(shortKo || shortEn || shortMp4Ko || shortMp4En),
         hasScriptReady: !!catEntry,
         pageCount: (catEntry && catEntry.page_count) || (vaultEntry && vaultEntry.page_count) || 0,
@@ -1230,6 +1242,12 @@
             _fullMp4En: vInfo.fullMp4En,
             _qMp4Ko: vInfo.qMp4Ko,
             _qMp4En: vInfo.qMp4En,
+            _ideaMp4Ko: vInfo.ideaMp4Ko,
+            _ideaMp4En: vInfo.ideaMp4En,
+            _ideaYtKo: vInfo.ideaYtKo,
+            _ideaYtEn: vInfo.ideaYtEn,
+            _ideaShortMp4Ko: vInfo.ideaShortMp4Ko,
+            _ideaShortMp4En: vInfo.ideaShortMp4En,
             _hasShortsReady: vInfo.hasShortsReady,
             _hasScriptReady: vInfo.hasScriptReady,
             _pageCount: vInfo.pageCount,
@@ -1360,6 +1378,8 @@
                     <div style="display:flex;gap:5px;">
                       ${item._qMp4Ko ? `<button type="button" class="mini-play-btn" style="background:#e11d48;" onclick="openCinemaForItem(${itemIdx}, 'question_ko')">❓ 🇰🇷 질문 수업 재생</button>` : ''}
                       ${item._qMp4En ? `<button type="button" class="mini-play-btn en" style="background:#be123c;" onclick="openCinemaForItem(${itemIdx}, 'question_en')">❓ 🇺🇸 Inquiry EN</button>` : ''}
+                      ${item._ideaMp4Ko ? `<button type="button" class="mini-play-btn" style="background:#7c3aed;" onclick="openCinemaForItem(${itemIdx}, 'idea_ko')">🌟 🇰🇷 창의 아이디어 시네마</button>` : ''}
+                      ${item._ideaShortMp4Ko ? `<button type="button" class="mini-play-btn" style="background:#6d28d9;" onclick="openCinemaForItem(${itemIdx}, 'idea_short_ko')">🌟📱 아이디어 숏폼</button>` : ''}
                     </div>
                   </div>
                 ` : ''}
@@ -1499,6 +1519,8 @@
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
                     ${item._qMp4Ko ? `<button type="button" class="yt-badge-btn" style="background:#fff1f2;color:#be123c;border-color:#fda4af;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'question_ko')">❓ 🇰🇷 질문하는 수업 버전 (1080p) 재생</button>` : ''}
                     ${item._qMp4En ? `<button type="button" class="yt-badge-btn" style="background:#fff1f2;color:#9f1239;border-color:#fda4af;font-weight:800;" onclick="openCinemaForItem(${itemIdx}, 'question_en')">❓ 🇺🇸 Question-Asking (EN)</button>` : ''}
+                    ${item._ideaMp4Ko ? `<button type="button" class="yt-badge-btn" style="background:#f5f3ff;color:#6d28d9;border-color:#c4b5fd;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'idea_ko')">🌟 🇰🇷 창의 아이디어 시네마 (Beyond PDF · 1080p)</button>` : ''}
+                    ${item._ideaShortMp4Ko ? `<button type="button" class="yt-badge-btn" style="background:#faf5ff;color:#7e22ce;border-color:#d8b4fe;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'idea_short_ko')">🌟📱 🇰🇷 창의 아이디어 숏폼 (9:16)</button>` : ''}
                   </div>
                 ` : ''}
                 ${(item._shortKo || item._shortMp4Ko || item._shortEn || item._shortMp4En || item._qShortMp4Ko || item._qShortMp4En) ? `
@@ -1581,7 +1603,19 @@
       let targetUrl = '';
       let localShortMp4 = '';
       let badgeLabel = '@min7014_ai';
-      if (mode === 'question_ko' && item._qMp4Ko) {
+      if (mode === 'idea_ko' && item._ideaMp4Ko) {
+        targetUrl = item._ideaYtKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._ideaMp4Ko;
+        badgeLabel = '🌟 🇰🇷 [창의 아이디어 시네마 · Beyond PDF] 5막 스토리텔링 & 절차적 애니메이션 (1080p)';
+      } else if (mode === 'idea_en' && item._ideaMp4En) {
+        targetUrl = item._ideaYtEn || item._ytEn || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._ideaMp4En;
+        badgeLabel = '🌟 🇺🇸 [Creative Idea Math Cinema · Beyond PDF] (1080p)';
+      } else if (mode === 'idea_short_ko' && item._ideaShortMp4Ko) {
+        targetUrl = item._ideaYtKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
+        localShortMp4 = item._ideaShortMp4Ko;
+        badgeLabel = '🌟📱 🇰🇷 [창의 아이디어 숏폼 · Idea-#Shorts] (9:16)';
+      } else if (mode === 'question_ko' && item._qMp4Ko) {
         targetUrl = item._ytKo || 'https://www.youtube.com/@min7014_ai';
         localShortMp4 = item._qMp4Ko;
         badgeLabel = '❓ 🇰🇷 [질문하는 수학 수업 버전] Notice & Wonder · What-If-Not (1080p)';
@@ -1641,7 +1675,7 @@
       const iframeEl = document.getElementById('cinemaIframe');
       const nativeVid = document.getElementById('cinemaNativeVideo');
 
-      if (((mode.startsWith('master_') || mode.startsWith('question_')) && localShortMp4) || (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn))) {
+      if (((mode.startsWith('master_') || mode.startsWith('question_') || mode.startsWith('idea_')) && localShortMp4) || (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn))) {
         iframeEl.src = '';
         iframeEl.style.display = 'none';
         nativeVid.style.display = 'block';
@@ -1674,6 +1708,12 @@
       }
       if (item._qMp4En) {
         pills.push(`<button type="button" class="lang-pill ${mode === 'question_en' ? 'active' : ''}" style="border-color:#be123c;color:${mode==='question_en'?'#fff':'#be123c'};background:${mode==='question_en'?'#be123c':'#fff1f2'};" onclick="openCinemaForItem(${itemIdx}, 'question_en')">❓ 🇺🇸 Question-Asking (1080p)</button>`);
+      }
+      if (item._ideaMp4Ko) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'idea_ko' ? 'active' : ''}" style="border-color:#7c3aed;color:${mode==='idea_ko'?'#fff':'#6d28d9'};background:${mode==='idea_ko'?'#7c3aed':'#f5f3ff'};" onclick="openCinemaForItem(${itemIdx}, 'idea_ko')">🌟 🇰🇷 창의 아이디어 시네마 (1080p)</button>`);
+      }
+      if (item._ideaShortMp4Ko) {
+        pills.push(`<button type="button" class="lang-pill ${mode === 'idea_short_ko' ? 'active' : ''}" style="border-color:#6d28d9;color:${mode==='idea_short_ko'?'#fff':'#6d28d9'};background:${mode==='idea_short_ko'?'#6d28d9':'#faf5ff'};" onclick="openCinemaForItem(${itemIdx}, 'idea_short_ko')">🌟📱 🇰🇷 창의 아이디어 숏폼 (9:16)</button>`);
       }
       if (item._fullMp4Ko) {
         pills.push(`<button type="button" class="lang-pill ${mode === 'master_ko' ? 'active' : ''}" onclick="openCinemaForItem(${itemIdx}, 'master_ko')">🎬 🇰🇷 v4.0 마스터 (1080p)</button>`);
