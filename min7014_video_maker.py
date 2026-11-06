@@ -90,6 +90,107 @@ def mark_token_quota_exhausted(token_path_str, seconds=900):
         _EXHAUSTED_TOKEN_FILES[str(token_path_str)] = time.time() + seconds
         print(f'🔄 [Quota Pool] {Path(token_path_str).name} 업로드 한도 대기 감지 -> {seconds//60}분 쿨다운 후 자동 재시도 (고급 기능/일일 쿼터 해제 시 즉시 대량 업로드)')
 
+
+def register_new_youtube_quota_project(client_secret_path=None, open_gcp_help=True):
+    """
+    [멀티 GCP 프로젝트 쿼터 N배 증설 등록기 (프로젝트당 +10,000 유닛/일 추가)]
+    - Google Cloud의 10,000 유닛/일 쿼터는 '채널'이 아니라 'GCP 프로젝트(OAuth Client ID)' 단위로 부여됩니다.
+    - 새 GCP 프로젝트에서 발급받은 client_secret*.json을 지정하거나 Downloads 폴더에 내려받으면,
+      기존 토큰들과 겹치지 않는 새 슬롯(youtube_token_min7014_ai_2.json, _3.json ...)으로 자동 인증·등록하여
+      일일 업로드 한도를 즉시 2배, 3배, 5배로 증설합니다!
+    """
+    import webbrowser
+    from google_auth_oauthlib.flow import InstalledAppFlow
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+
+    existing_tokens = sorted(ROOT_DIR.glob("youtube_token_min7014_ai*.json"))
+    registered_client_ids = set()
+    for tf in existing_tokens:
+        try:
+            td = json.loads(tf.read_text(encoding="utf-8"))
+            cid = (td.get("client_id") or "").strip()
+            if cid:
+                registered_client_ids.add(cid)
+        except Exception:
+            pass
+
+    def _extract_client_id(cs_file: Path) -> str:
+        try:
+            raw = json.loads(cs_file.read_text(encoding="utf-8"))
+            block = raw.get("installed") or raw.get("web") or {}
+            return (block.get("client_id") or "").strip()
+        except Exception:
+            return ""
+
+    target_secret = Path(client_secret_path) if client_secret_path else None
+    if target_secret and not target_secret.exists():
+        target_secret = None
+
+    if target_secret is None:
+        search_dirs = [ROOT_DIR, Path.home() / "Downloads", Path.home() / "Desktop"]
+        for sdir in search_dirs:
+            if not sdir.exists():
+                continue
+            for cand in sorted(sdir.glob("*client_secret*.json"), key=lambda x: x.stat().st_mtime, reverse=True):
+                cid = _extract_client_id(cand)
+                if cid and cid not in registered_client_ids:
+                    target_secret = cand
+                    break
+            if target_secret:
+                break
+
+    if target_secret is None and open_gcp_help:
+        print("=" * 76, flush=True)
+        print("🚀 [유튜브 일일 API 쿼터 N배 증설 마법사 (+10,000 유닛/프로젝트)]", flush=True)
+        print(f"• 현재 등록된 GCP 쿼터 프로젝트 수: {len(existing_tokens)}개 (일일 {len(existing_tokens)*10000:,} 유닛)", flush=True)
+        print("1) 방금 열리는 Google Cloud Console에서 [새 프로젝트 만들기] 클릭", flush=True)
+        print("2) [YouTube Data API v3 사용 설정] -> [사용자 인증 정보 -> OAuth 클라이언트 ID(데스크톱 앱)] 생성", flush=True)
+        print("3) [JSON 다운로드]를 누르면 Downloads 폴더에서 즉시 자동 감지하여 새 쿼터 슬롯으로 등록합니다!", flush=True)
+        print("=" * 76, flush=True)
+        webbrowser.open("https://console.cloud.google.com/projectcreate")
+        webbrowser.open("https://console.cloud.google.com/apis/library/youtube.googleapis.com")
+        for _ in range(180):
+            for sdir in [Path.home() / "Downloads", ROOT_DIR, Path.home() / "Desktop"]:
+                if not sdir.exists():
+                    continue
+                for cand in sorted(sdir.glob("*client_secret*.json"), key=lambda x: x.stat().st_mtime, reverse=True):
+                    cid = _extract_client_id(cand)
+                    if cid and cid not in registered_client_ids:
+                        target_secret = cand
+                        break
+                if target_secret:
+                    break
+            if target_secret:
+                break
+            time.sleep(3.0)
+
+    if target_secret is None:
+        print("⚠️ 새로운 GCP 프로젝트의 client_secret*.json 파일을 찾지 못했습니다.", flush=True)
+        return None
+
+    next_idx = len(existing_tokens) + 1
+    new_secret_dst = ROOT_DIR / f"youtube_client_secret_{next_idx}.json"
+    if target_secret.resolve() != new_secret_dst.resolve():
+        shutil.copyfile(target_secret, new_secret_dst)
+
+    print(f"🔐 새 GCP 프로젝트 OAuth 인증 창을 엽니다 ({new_secret_dst.name}) -> @min7014_ai 채널을 선택해 주세요...", flush=True)
+    flow = InstalledAppFlow.from_client_secrets_file(str(new_secret_dst), SCOPES)
+    creds = flow.run_local_server(port=0)
+    new_token_path = ROOT_DIR / f"youtube_token_min7014_ai_{next_idx}.json"
+    new_token_path.write_text(creds.to_json(), encoding="utf-8")
+    total_projects = len(list(ROOT_DIR.glob("youtube_token_min7014_ai*.json")))
+    print(
+        f"🎉 [쿼터 슬롯 #{next_idx} 등록 완료!] {new_token_path.name} 저장됨 -> "
+        f"총 {total_projects}개 프로젝트 풀 가동 (일일 {total_projects * 10000:,} 유닛 / 하루 약 {total_projects * 6}편 자동 업로드!)",
+        flush=True,
+    )
+    return new_token_path
+
 DEEP_JSON_PATH = ROOT_DIR / "assets" / "min7014_deep_knowledge.json"
 LOOKUP_JSON_PATH = ROOT_DIR / "assets" / "min7014_lookup.json"
 SCRIPTS_DIR = ROOT_DIR / "video_lectures" / "scripts"
@@ -7263,9 +7364,13 @@ if __name__ == "__main__":
     parser.add_argument("--build-all-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for all scripted topics")
     parser.add_argument("--upload-shorts", action="store_true", help="Upload rendered YouTube Shorts (#Shorts) to @min7014_ai")
     parser.add_argument("--daemon-shorts", action="store_true", help="Run background daemon to auto-upload & auto-enrich YouTube #Shorts on @min7014_ai")
+    parser.add_argument("--add-quota-project", type=str, nargs="?", const="AUTO", default=None, help="Register an additional GCP OAuth client_secret.json to multiply daily YouTube API quota (+10,000 units/project)")
     args = parser.parse_args()
 
-    if args.set_youtube_ko is not None or args.set_youtube_en is not None:
+    if args.add_quota_project is not None:
+        cs_arg = None if args.add_quota_project == "AUTO" else args.add_quota_project
+        register_new_youtube_quota_project(client_secret_path=cs_arg, open_gcp_help=True)
+    elif args.set_youtube_ko is not None or args.set_youtube_en is not None:
         set_youtube_urls_for_slug(args.slug, yt_ko=args.set_youtube_ko, yt_en=args.set_youtube_en)
     elif args.daemon_shorts:
         run_shorts_and_video_upload_daemon(open_studio_now=False)
