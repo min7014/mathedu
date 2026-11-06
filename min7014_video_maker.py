@@ -3717,6 +3717,8 @@ def queue_and_delete_existing_youtube_videos_for_slug(
         "shorts_std": ("shorts_urls", "shorts_packages", "_SHORT"),
         "question_short": ("question_shorts_urls", "question_shorts_packages", "_SHORT_Q"),
         "shorts_q": ("question_shorts_urls", "question_shorts_packages", "_SHORT_Q"),
+        "idea_cinema": ("creative_idea_youtube_urls", "creative_idea_packages", "_IDEA"),
+        "idea_short": ("creative_idea_shorts_urls", "creative_idea_shorts_packages", "_SHORT_IDEA"),
     }
 
     found_old_ids = set()
@@ -4859,6 +4861,10 @@ def update_video_catalog():
             "shorts_packages": shorts_pkgs,
             "question_classroom_packages": q_pkgs,
             "question_shorts_packages": q_shorts_pkgs,
+            "creative_idea_youtube_urls": sdoc.get("creative_idea_youtube_urls", {"ko": "", "en": ""}),
+            "creative_idea_shorts_urls": sdoc.get("creative_idea_shorts_urls", {"ko": "", "en": ""}),
+            "creative_idea_packages": sdoc.get("creative_idea_packages", {}),
+            "creative_idea_shorts_packages": sdoc.get("creative_idea_shorts_packages", {}),
         })
     with open(CATALOG_PATH, "w", encoding="utf-8") as f:
         json.dump(scripts, f, ensure_ascii=False, indent=2)
@@ -6920,6 +6926,21 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+                        # 5순위: 🌟 Edition 5 창의 아이디어 확장 시네마 본편(1080p) & Idea-#Shorts(9:16) 자동 업로드
+                        try:
+                            import creative_idea_cinema as cidea
+                            idea_u = sdoc.get("creative_idea_youtube_urls") or {}
+                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{slug_k}_idea_ko.mp4").exists():
+                                r_ic = cidea.upload_creative_idea_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_ic:
+                                    newly_uploaded_batch += 1
+                            idea_su = sdoc.get("creative_idea_shorts_urls") or {}
+                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_idea_ko.mp4").exists():
+                                r_is = cidea.upload_creative_idea_short_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_is:
+                                    newly_uploaded_batch += 1
+                        except Exception:
+                            pass
 
                 if not _LAST_UPLOAD_QUOTA_BLOCKED:
                     high_visual_priority_slugs = {
@@ -6964,6 +6985,21 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+                        # 5순위: 🌟 Edition 5 창의 아이디어 확장 시네마 본편(1080p) & Idea-#Shorts(9:16) 자동 업로드
+                        try:
+                            import creative_idea_cinema as cidea
+                            idea_u = sdoc.get("creative_idea_youtube_urls") or {}
+                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{slug_k}_idea_ko.mp4").exists():
+                                r_ic = cidea.upload_creative_idea_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_ic:
+                                    newly_uploaded_batch += 1
+                            idea_su = sdoc.get("creative_idea_shorts_urls") or {}
+                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_idea_ko.mp4").exists():
+                                r_is = cidea.upload_creative_idea_short_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_is:
+                                    newly_uploaded_batch += 1
+                        except Exception:
+                            pass
                             sdoc = json.loads(sp.read_text(encoding="utf-8"))
 
                         # 2순위: 1080p 질문하는 수업 본편 업로드 (8분+ 미드롤 고수익 에디션)
@@ -6976,6 +7012,21 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+                        # 5순위: 🌟 Edition 5 창의 아이디어 확장 시네마 본편(1080p) & Idea-#Shorts(9:16) 자동 업로드
+                        try:
+                            import creative_idea_cinema as cidea
+                            idea_u = sdoc.get("creative_idea_youtube_urls") or {}
+                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{slug_k}_idea_ko.mp4").exists():
+                                r_ic = cidea.upload_creative_idea_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_ic:
+                                    newly_uploaded_batch += 1
+                            idea_su = sdoc.get("creative_idea_shorts_urls") or {}
+                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_idea_ko.mp4").exists():
+                                r_is = cidea.upload_creative_idea_short_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_is:
+                                    newly_uploaded_batch += 1
+                        except Exception:
+                            pass
                             sdoc = json.loads(sp.read_text(encoding="utf-8"))
 
                         # 3순위: 9:16 일반 #Shorts 업로드 (방금 업로드된 1080p 본편 URL을 설명란·댓글에 자동 바인딩)
@@ -6992,6 +7043,21 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+                        # 5순위: 🌟 Edition 5 창의 아이디어 확장 시네마 본편(1080p) & Idea-#Shorts(9:16) 자동 업로드
+                        try:
+                            import creative_idea_cinema as cidea
+                            idea_u = sdoc.get("creative_idea_youtube_urls") or {}
+                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{slug_k}_idea_ko.mp4").exists():
+                                r_ic = cidea.upload_creative_idea_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_ic:
+                                    newly_uploaded_batch += 1
+                            idea_su = sdoc.get("creative_idea_shorts_urls") or {}
+                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_idea_ko.mp4").exists():
+                                r_is = cidea.upload_creative_idea_short_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_is:
+                                    newly_uploaded_batch += 1
+                        except Exception:
+                            pass
                             sdoc = json.loads(sp.read_text(encoding="utf-8"))
 
                         # 4순위: 9:16 질문형 Q-#Shorts 업로드
@@ -7004,6 +7070,21 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
+                        # 5순위: 🌟 Edition 5 창의 아이디어 확장 시네마 본편(1080p) & Idea-#Shorts(9:16) 자동 업로드
+                        try:
+                            import creative_idea_cinema as cidea
+                            idea_u = sdoc.get("creative_idea_youtube_urls") or {}
+                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{slug_k}_idea_ko.mp4").exists():
+                                r_ic = cidea.upload_creative_idea_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_ic:
+                                    newly_uploaded_batch += 1
+                            idea_su = sdoc.get("creative_idea_shorts_urls") or {}
+                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_idea_ko.mp4").exists():
+                                r_is = cidea.upload_creative_idea_short_to_youtube(slug_k, langs=("ko", "en"))
+                                if r_is:
+                                    newly_uploaded_batch += 1
+                        except Exception:
+                            pass
 
                 if newly_uploaded_batch > 0:
                     try:
@@ -7038,6 +7119,16 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         qsh_p = ROOT_DIR / "video_lectures" / "shorts" / f"{next_slug}_short_q_{lc}.mp4"
                         if not qsh_p.exists():
                             render_question_short_vertical(next_slug, lang_code=lc)
+                        try:
+                            import creative_idea_cinema as cidea
+                            idea_p = ROOT_DIR / "video_lectures" / "creative_idea" / f"{next_slug}_idea_{lc}.mp4"
+                            if not idea_p.exists():
+                                cidea.render_creative_idea_cinema_video(next_slug, lang_code=lc)
+                            ish_p = ROOT_DIR / "video_lectures" / "shorts" / f"{next_slug}_short_idea_{lc}.mp4"
+                            if not ish_p.exists():
+                                cidea.render_creative_idea_short_vertical(next_slug, lang_code=lc)
+                        except Exception as ie_err:
+                            print(f"[Creative Idea Cinema Notice] {ie_err}", flush=True)
                     update_video_catalog()
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)
