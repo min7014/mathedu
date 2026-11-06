@@ -1094,8 +1094,20 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?"
         }
 
-    # 15-B. 복소수와 허수 단위 i / 켤레복소수 (Complex Numbers & Imaginary Unit)
-    if any(k in blob for k in ("복소수", "허수", "켤레", "Complex", "complex", "Imaginary")):
+    # 15-B. 공간도형 (평면의 결정 조건 · 직선과 평면의 위치 관계 · 삼수선의 정리 · 정사영)
+    if any(k in t for k in ("평면", "직선 위에 있지 않은", "삼수선", "이면각", "정사영", "꼬인 위치", "교선", "평행한 두 직선")):
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"3차원 공간에서 점, 직선, 평면의 기본 공리와 위치 관계가 주어진 '{ko_t}'의 출발 조건",
+            "conclusion_ko": f"공간기하의 공리와 평면 결정 조건에 의해 '{ko_t}' 성질이 유일하고 필연적으로 성립한다는 기하학적 결론",
+            "auxiliary_line_ko": "주어진 점들과 직선을 포함하는 기준 평면을 설정하고, 교선과 수선의 발을 내려 공간 관계를 평면 위의 합동·평행 관계로 환원하는 보조선",
+            "proof_logic_ko": "한 직선 위에 있지 않은 서로 다른 세 점은 단 하나의 평면을 결정한다는 기본 공리로부터 두 직선의 교점·평행선 및 수직 관계를 단계별로 연역하는 원리",
+            "misconception_ko": "평면기하에서는 만나지 않는 두 직선이 무조건 평행하지만, 3차원 공간에서는 만나지도 않고 평행하지도 않은 '꼬인 위치(Skew lines)'가 존재하므로 반드시 한 평면 위에 있는지 먼저 확인해야 합니다!",
+            "what_if_not_ko": "이 공간에서의 직선과 평면의 수직 조건을 확장하면 고등학교 기하의 핵심인 '삼수선의 정리'와 '정사영의 넓이(S' = S cos θ)' 공식으로 어떻게 연결될까요?"
+        }
+
+    # 15-C. 복소수와 허수 단위 i / 켤레복소수 (Complex Numbers & Imaginary Unit)
+    if any(k in t for k in ("복소수", "허수", "켤레", "Complex", "complex", "Imaginary")):
         return {
             "category_type": "number",
             "hypothesis_ko": f"제곱하여 -1이 되는 새로운 수인 허수 단위 i(i의 제곱 = -1)와 실수 a, b로 이루어진 복소수 a+bi의 '{ko_t}' 출발 조건",
