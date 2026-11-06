@@ -3794,7 +3794,11 @@ def process_youtube_delete_queue(max_deletions=10):
             print(f"🗑️ [YouTube Old/Updated Video Deleted from @min7014_ai] {vid_id}", flush=True)
         except Exception as e:
             err_s = str(e)
-            if (
+            if "quotaExceeded" in err_s or "rateLimitExceeded" in err_s:
+                mark_token_quota_exhausted(active_token_path, 900)
+                still_pending.extend(pending[idx:])
+                break
+            elif (
                 "videoNotFound" in err_s
                 or "404" in err_s
                 or "403" in err_s
@@ -3802,10 +3806,6 @@ def process_youtube_delete_queue(max_deletions=10):
                 or "range() arg 3 must not be zero" in err_s
             ):
                 deleted_done.append(vid_id)
-            elif "quotaExceeded" in err_s or "rateLimitExceeded" in err_s:
-                mark_token_quota_exhausted(active_token_path, 900)
-                still_pending.extend(pending[idx:])
-                break
             else:
                 still_pending.append(vid_id)
 
@@ -4509,25 +4509,11 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
                     media_body=MediaFileUpload(str(thumb_path), mimetype="image/png")
                 ).execute()
             except Exception as e:
+                err_t = str(e)
                 print(f"  [Thumbnail Warning] {e}")
-
-        srt_path = YT_PKG_DIR / f"{slug_key}_{lang_code}.srt"
-        if srt_path.exists():
-            try:
-                youtube.captions().insert(
-                    part="snippet",
-                    body={
-                        "snippet": {
-                            "videoId": vid_id,
-                            "language": lang_code,
-                            "name": "Korean Step-by-Step" if lang_code == "ko" else "English Step-by-Step",
-                            "isDraft": False,
-                        }
-                    },
-                    media_body=MediaFileUpload(str(srt_path), mimetype="application/octet-stream")
-                ).execute()
-            except Exception as e:
-                print(f"  [Caption Warning] {e}")
+                if "quotaExceeded" in err_t or "rateLimitExceeded" in err_t:
+                    mark_token_quota_exhausted(active_token_path, 900)
+                    break
 
     if newly_uploaded:
         set_youtube_urls_for_slug(
