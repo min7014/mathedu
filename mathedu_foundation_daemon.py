@@ -365,6 +365,11 @@ def run_continuous_foundation_loop(single_cycle=False):
         pr.run_autonomous_pr_cycle()
     except Exception as pr_err:
         print(f"[PR Agent Notice] {pr_err}", flush=True)
+    try:
+        import finance
+        finance.run_autonomous_finance_cycle()
+    except Exception as fin_err:
+        print(f"[Finance Agent Notice] {fin_err}", flush=True)
     write_daemon_heartbeat()
 
     if single_cycle:

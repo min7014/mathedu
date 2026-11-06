@@ -568,6 +568,8 @@ def split_bilingual_title(raw_title: str):
 
 def latex_to_unicode_title(text):
     s = str(text or "")
+    for _bad_name in ("민은기 선생님의 ", "민은기 선생님의", "민은기 선생님 ", "민은기 선생님", "민은기의 ", "민은기 ", "민은기", "Min Eun-ki's ", "Min Eun-ki's", "Min Eunki's ", "Min's Math Lab"):
+        s = s.replace(_bad_name, "")
     s = s.replace("Equationss", "Equations").replace("수직이분선", "수직이등분선")
     s = (
         s.replace(r"\mathbb{R}", "ℝ")
@@ -6587,30 +6589,38 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
     if DEEP_JSON_PATH.exists():
         try:
             items = json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8"))
-            by_sub = {}
+            by_sub_pdf = {}
+            by_sub_web = {}
+            _non_math_skip = (
+                "원노트", "OneNote", "체크박스", "Checkbox", "checkbox", "mathapk", "학습자료 링크",
+                "이벤트 만들기", "텍스트 만들기", "사용법", "설치", "블로그", "민은기",
+            )
             for it in items:
+                t_raw = str(it.get("title") or "")
+                sub = it.get("sub_domain_ko") or "기타"
+                if sub == "기타" or any(bad_k in t_raw for bad_k in _non_math_skip):
+                    continue
                 pdf_u = (it.get("pdf") or "").split("#")[0].strip()
                 url_u = (it.get("url") or "").strip()
                 if pdf_u and pdf_u.lower().endswith(".pdf"):
                     s = pdf_u.split("/")[-1].replace(".pdf", "").strip()
+                    if s and s not in existing_scripts and s not in failed_slugs and s not in seen_cands:
+                        by_sub_pdf.setdefault(sub, []).append(s)
                 elif url_u:
                     s = url_u.split("/")[-1].replace(".html", "").strip()
-                else:
-                    continue
-                if not s or s in existing_scripts or s in failed_slugs or s in seen_cands:
-                    continue
-                sub = it.get("sub_domain_ko") or "기타"
-                by_sub.setdefault(sub, []).append(s)
-            # 16개 단원 라운드로빈 교차 배치
-            sub_keys = sorted(by_sub.keys())
-            max_len = max((len(v) for v in by_sub.values()), default=0)
-            for idx in range(max_len):
-                for sk in sub_keys:
-                    if idx < len(by_sub[sk]):
-                        cand = by_sub[sk][idx]
-                        if cand not in seen_cands:
-                            unscripted_candidates.append(cand)
-                            seen_cands.add(cand)
+                    if s and s not in existing_scripts and s not in failed_slugs and s not in seen_cands:
+                        by_sub_web.setdefault(sub, []).append(s)
+            # 16개 단원 라운드로빈 교차 배치 (1순위: 정통 시각 증명 PDF 자료 ➔ 2순위: 순수 수학 웹 탐구 자료)
+            for bucket_map in (by_sub_pdf, by_sub_web):
+                sub_keys = sorted(bucket_map.keys())
+                max_len = max((len(v) for v in bucket_map.values()), default=0)
+                for idx in range(max_len):
+                    for sk in sub_keys:
+                        if idx < len(bucket_map[sk]):
+                            cand = bucket_map[sk][idx]
+                            if cand not in seen_cands:
+                                unscripted_candidates.append(cand)
+                                seen_cands.add(cand)
         except Exception:
             pass
 
