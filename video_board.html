@@ -1133,30 +1133,18 @@
         || item.youtube_short_en
         || '';
 
-      const shortMp4Ko = (catEntry && catEntry.shorts_packages && catEntry.shorts_packages.ko && catEntry.shorts_packages.ko.local_mp4_path)
-        || (vaultEntry && vaultEntry.short_mp4_ko)
-        || item.short_mp4_ko
-        || '';
-
-      const shortMp4En = (catEntry && catEntry.shorts_packages && catEntry.shorts_packages.en && catEntry.shorts_packages.en.local_mp4_path)
-        || (vaultEntry && vaultEntry.short_mp4_en)
-        || item.short_mp4_en
-        || '';
-
-      const fullMp4Ko = (catEntry && catEntry.youtube_packages && catEntry.youtube_packages.ko && catEntry.youtube_packages.ko.local_mp4_path)
-        || '';
-      const fullMp4En = (catEntry && catEntry.youtube_packages && catEntry.youtube_packages.en && catEntry.youtube_packages.en.local_mp4_path)
-        || '';
-      const qMp4Ko = (catEntry && catEntry.question_classroom_packages && catEntry.question_classroom_packages.ko && catEntry.question_classroom_packages.ko.local_mp4_path)
-        || '';
-      const qMp4En = (catEntry && catEntry.question_classroom_packages && catEntry.question_classroom_packages.en && catEntry.question_classroom_packages.en.local_mp4_path) || '';
-      const ideaMp4Ko = (catEntry && catEntry.creative_idea_packages && catEntry.creative_idea_packages.ko && catEntry.creative_idea_packages.ko.local_mp4_path) || '';
-      const ideaMp4En = (catEntry && catEntry.creative_idea_packages && catEntry.creative_idea_packages.en && catEntry.creative_idea_packages.en.local_mp4_path) || '';
+      const shortMp4Ko = '';
+      const shortMp4En = '';
+      const fullMp4Ko = '';
+      const fullMp4En = '';
+      const qMp4Ko = (catEntry && catEntry.question_youtube_urls && catEntry.question_youtube_urls.ko) || '';
+      const qMp4En = (catEntry && catEntry.question_youtube_urls && catEntry.question_youtube_urls.en) || '';
+      const ideaMp4Ko = (catEntry && catEntry.creative_idea_youtube_urls && catEntry.creative_idea_youtube_urls.ko) || '';
+      const ideaMp4En = (catEntry && catEntry.creative_idea_youtube_urls && catEntry.creative_idea_youtube_urls.en) || '';
       const ideaYtKo = (catEntry && catEntry.creative_idea_youtube_urls && catEntry.creative_idea_youtube_urls.ko) || '';
       const ideaYtEn = (catEntry && catEntry.creative_idea_youtube_urls && catEntry.creative_idea_youtube_urls.en) || '';
-      const ideaShortMp4Ko = (catEntry && catEntry.creative_idea_shorts_packages && catEntry.creative_idea_shorts_packages.ko && catEntry.creative_idea_shorts_packages.ko.local_mp4_path) || '';
-      const ideaShortMp4En = (catEntry && catEntry.creative_idea_shorts_packages && catEntry.creative_idea_shorts_packages.en && catEntry.creative_idea_shorts_packages.en.local_mp4_path)
-        || '';
+      const ideaShortMp4Ko = (catEntry && catEntry.creative_idea_shorts_urls && catEntry.creative_idea_shorts_urls.ko) || '';
+      const ideaShortMp4En = (catEntry && catEntry.creative_idea_shorts_urls && catEntry.creative_idea_shorts_urls.en) || '';
 
       const slugKey = (catEntry && catEntry.slug)
         || (vaultEntry && (VAULT_MAP[pdfSlug] ? pdfSlug : webSlug))
@@ -1188,7 +1176,7 @@
         hasScriptReady: !!catEntry,
         pageCount: (catEntry && catEntry.page_count) || (vaultEntry && vaultEntry.page_count) || 0,
         titleEn: (catEntry && catEntry.title_en) || (vaultEntry && vaultEntry.title_en) || '',
-        thumbKo: (catEntry && catEntry.youtube_packages && catEntry.youtube_packages.ko && catEntry.youtube_packages.ko.thumbnail_url) || ''
+        thumbKo: ''
       };
     }
 
@@ -1669,30 +1657,23 @@
       document.getElementById('cinemaBadge').textContent = badgeLabel;
       document.getElementById('cinemaTitle').textContent = `${item.title} (${item.id})`;
       document.getElementById('cinemaDirectYtLink').href = targetUrl;
-      document.getElementById('cinemaUrlText').href = localShortMp4 || targetUrl;
-      document.getElementById('cinemaUrlText').textContent = ((mode.startsWith('short_') || mode.startsWith('master_')) && localShortMp4) ? localShortMp4 : targetUrl;
+      document.getElementById('cinemaUrlText').href = targetUrl;
+      document.getElementById('cinemaUrlText').textContent = targetUrl;
 
       const iframeEl = document.getElementById('cinemaIframe');
       const nativeVid = document.getElementById('cinemaNativeVideo');
-
-      if (((mode.startsWith('master_') || mode.startsWith('question_') || mode.startsWith('idea_')) && localShortMp4) || (mode.startsWith('short_') && localShortMp4 && !(mode === 'short_ko' ? item._shortKo : item._shortEn))) {
-        iframeEl.src = '';
-        iframeEl.style.display = 'none';
-        nativeVid.style.display = 'block';
-        nativeVid.src = localShortMp4;
-        nativeVid.play().catch(() => {});
-      } else {
-        const vidId = extractYoutubeId(targetUrl);
-        if (!vidId) {
-          window.open(targetUrl, '_blank');
-          return;
-        }
+      if (nativeVid) {
         nativeVid.pause();
         nativeVid.src = '';
         nativeVid.style.display = 'none';
-        iframeEl.style.display = 'block';
-        iframeEl.src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0`;
       }
+      const vidId = extractYoutubeId(targetUrl);
+      if (!vidId) {
+        window.open(targetUrl, '_blank');
+        return;
+      }
+      iframeEl.style.display = 'block';
+      iframeEl.src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0`;
 
       // 언어 & 숏폼 스위치 바
       const langBar = document.getElementById('cinemaLangBar');
@@ -1769,7 +1750,7 @@
         <a href="index.html?q=${encodeURIComponent(cleanKw)}&from=video_board" class="res-chip" style="border-color:#86efac;background:#f0fdf4;color:#047857;font-weight:800;">✍️ 이 개념 탈-5지선다 기출 풀기 ➔</a>
         <a href="game.html" class="res-chip" style="border-color:#c7d2fe;background:#eef2ff;color:#4338ca;font-weight:800;">🎮 3D 수학 성소 보스 레이드 ➔</a>
         <button type="button" onclick="copyTopicYoutubeWebsitePromo(${itemIdx})" class="res-chip" style="border-color:#fda4af;background:#fff1f2;color:#be123c;font-weight:800;cursor:pointer;">📢 이 영상+홈페이지 홍보 카드 복사</button>
-        ${localShortMp4 ? `<a href="${localShortMp4}" download class="res-chip" style="border-color:#fbcfe8;background:#fdf2f8;color:#db2777;">⬇ 9:16 숏폼 MP4 다운로드</a>` : ''}
+        <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="res-chip" style="border-color:#fda4af;background:#e11d48;color:#fff;font-weight:900;">🔔 @min7014_ai 유튜브 채널 바로가기 ↗</a>
       `;
 
       stage.scrollIntoView({ behavior: 'smooth', block: 'start' });

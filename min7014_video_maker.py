@@ -4851,20 +4851,54 @@ def update_video_catalog():
             "youtube_packages": {
                 k: {
                     "title": v.get("title", ""),
-                    "srt_url": v.get("srt_url", ""),
-                    "thumbnail_url": v.get("thumbnail_url", ""),
-                    "local_mp4_path": v.get("local_mp4_path", ""),
-                    "total_duration_sec": v.get("total_duration_sec", 0)
+                    "youtube_url": yt_urls.get(k, ""),
+                    "total_duration_sec": v.get("total_duration_sec", 0),
                 }
                 for k, v in yt_pkgs.items()
             },
-            "shorts_packages": shorts_pkgs,
-            "question_classroom_packages": q_pkgs,
-            "question_shorts_packages": q_shorts_pkgs,
+            "shorts_packages": {
+                k: {
+                    "title": v.get("title", ""),
+                    "youtube_url": shorts_urls.get(k, ""),
+                    "aspect_ratio": v.get("aspect_ratio", "9:16 (1080x1920)"),
+                }
+                for k, v in shorts_pkgs.items()
+            },
+            "question_classroom_packages": {
+                k: {
+                    "title": v.get("title", ""),
+                    "youtube_url": q_yt_urls.get(k, ""),
+                }
+                for k, v in q_pkgs.items()
+            },
+            "question_shorts_packages": {
+                k: {
+                    "title": v.get("title", ""),
+                    "youtube_url": q_shorts_urls.get(k, ""),
+                    "aspect_ratio": v.get("aspect_ratio", "9:16 (1080x1920)"),
+                }
+                for k, v in q_shorts_pkgs.items()
+            },
             "creative_idea_youtube_urls": sdoc.get("creative_idea_youtube_urls", {"ko": "", "en": ""}),
             "creative_idea_shorts_urls": sdoc.get("creative_idea_shorts_urls", {"ko": "", "en": ""}),
-            "creative_idea_packages": sdoc.get("creative_idea_packages", {}),
-            "creative_idea_shorts_packages": sdoc.get("creative_idea_shorts_packages", {}),
+            "creative_idea_packages": {
+                k: {
+                    "title": v.get("title", ""),
+                    "youtube_url": (sdoc.get("creative_idea_youtube_urls") or {}).get(k, ""),
+                    "duration_sec": v.get("duration_sec", 0),
+                    "edition_mode": v.get("edition_mode", ""),
+                }
+                for k, v in (sdoc.get("creative_idea_packages") or {}).items()
+            },
+            "creative_idea_shorts_packages": {
+                k: {
+                    "title": v.get("title", ""),
+                    "youtube_url": (sdoc.get("creative_idea_shorts_urls") or {}).get(k, ""),
+                    "duration_sec": v.get("duration_sec", 0),
+                    "aspect_ratio": v.get("aspect_ratio", "9:16 (1080x1920)"),
+                }
+                for k, v in (sdoc.get("creative_idea_shorts_packages") or {}).items()
+            },
         })
     with open(CATALOG_PATH, "w", encoding="utf-8") as f:
         json.dump(scripts, f, ensure_ascii=False, indent=2)
@@ -4894,11 +4928,9 @@ def update_video_catalog():
                     if s_urls.get("en") and it.get("youtube_short_en") != s_urls["en"]:
                         it["youtube_short_en"] = s_urls["en"]
                         d_changed = True
-                    if s_pkgs.get("ko", {}).get("local_mp4_path") and it.get("short_mp4_ko") != s_pkgs["ko"]["local_mp4_path"]:
-                        it["short_mp4_ko"] = s_pkgs["ko"]["local_mp4_path"]
-                        d_changed = True
-                    if s_pkgs.get("en", {}).get("local_mp4_path") and it.get("short_mp4_en") != s_pkgs["en"]["local_mp4_path"]:
-                        it["short_mp4_en"] = s_pkgs["en"]["local_mp4_path"]
+                for rm_k in ("short_mp4_ko", "short_mp4_en"):
+                    if rm_k in it:
+                        del it[rm_k]
                         d_changed = True
             if d_changed:
                 DEEP_JSON_PATH.write_text(json.dumps(d_items, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -4961,8 +4993,14 @@ def update_video_catalog():
                 "youtube_orig": s["youtube_urls"].get("orig", ""),
                 "youtube_short_ko": s.get("shorts_urls", {}).get("ko", ""),
                 "youtube_short_en": s.get("shorts_urls", {}).get("en", ""),
-                "short_mp4_ko": s.get("shorts_packages", {}).get("ko", {}).get("local_mp4_path", ""),
-                "short_mp4_en": s.get("shorts_packages", {}).get("en", {}).get("local_mp4_path", ""),
+                "question_youtube_ko": s.get("question_youtube_urls", {}).get("ko", ""),
+                "question_youtube_en": s.get("question_youtube_urls", {}).get("en", ""),
+                "question_short_ko": s.get("question_shorts_urls", {}).get("ko", ""),
+                "question_short_en": s.get("question_shorts_urls", {}).get("en", ""),
+                "creative_idea_youtube_ko": s.get("creative_idea_youtube_urls", {}).get("ko", ""),
+                "creative_idea_youtube_en": s.get("creative_idea_youtube_urls", {}).get("en", ""),
+                "creative_idea_short_ko": s.get("creative_idea_shorts_urls", {}).get("ko", ""),
+                "creative_idea_short_en": s.get("creative_idea_shorts_urls", {}).get("en", ""),
                 "vault_stored": bool(s["youtube_urls"].get("ko") and s["youtube_urls"].get("en")),
             }
             for s in scripts

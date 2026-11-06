@@ -1253,15 +1253,6 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
         else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=44, lang="en")
     )
 
-    yt = vmaker.get_youtube_service()
-    existing_url = (sdoc.get("creative_idea_youtube_urls") or {}).get(lang_code, "")
-    old_vid = vmaker._extract_youtube_id(existing_url)
-    if old_vid:
-        try:
-            yt.videos().delete(id=old_vid).execute()
-        except Exception:
-            pass
-
     title = idea_pkg.get("title") or (
         f"🌟 [창의 수학 시네마] {clean_t} — 공식 암기 없이 단 1개의 아이디어로 깨치는 비밀! | @min7014_ai"
         if lang_code == "ko"
@@ -1296,11 +1287,31 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
             "selfDeclaredMadeForKids": False,
         },
     }
+
     media = MediaFileUpload(str(mp4_path), mimetype="video/mp4", resumable=True, chunksize=4 * 1024 * 1024)
-    req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
     resp = None
-    while resp is None:
-        _, resp = req.next_chunk()
+    yt = None
+    last_err = None
+    while True:
+        yt, t_path = vmaker.get_available_youtube_upload_service()
+        if yt is None:
+            raise RuntimeError(f"All YouTube tokens exhausted: {last_err}")
+        try:
+            existing_url = (sdoc.get("creative_idea_youtube_urls") or {}).get(lang_code, "")
+            old_vid = vmaker.extract_youtube_video_id(existing_url)
+            if old_vid:
+                try:
+                    yt.videos().delete(id=old_vid).execute()
+                except Exception:
+                    pass
+            req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
+            while resp is None:
+                _, resp = req.next_chunk()
+            break
+        except Exception as e:
+            last_err = e
+            vmaker._EXHAUSTED_TOKEN_FILES[t_path] = time.time() + 1800
+            continue
 
     vid_id = resp["id"]
     yt_url = f"https://youtu.be/{vid_id}"
@@ -1343,12 +1354,11 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
     script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
     vmaker.update_video_catalog()
 
-    vmaker._notify_youtube_upload_telegram(
-        edition_label=f"🌟 [창의 아이디어 시네마 1080p ({lang_code.upper()})]",
+    vmaker.notify_telegram_youtube_upload(
         slug_key=slug_key,
-        title=title,
-        yt_url=yt_url,
-        lang_code=lang_code,
+        edition_label=f"🌟 [창의 아이디어 시네마 1080p ({lang_code.upper()})]",
+        video_title=title,
+        youtube_url=yt_url,
     )
     return {"video_id": vid_id, "youtube_url": yt_url, "title": title}
 
@@ -1374,9 +1384,11 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=38, lang="en")
     )
 
-    yt = vmaker.get_youtube_service()
+    yt, _ = vmaker.get_available_youtube_upload_service()
+    if yt is None:
+        raise RuntimeError("No available YouTube upload service / quota exhausted")
     existing_url = (sdoc.get("creative_idea_shorts_urls") or {}).get(lang_code, "")
-    old_vid = vmaker._extract_youtube_id(existing_url)
+    old_vid = vmaker.extract_youtube_video_id(existing_url)
     if old_vid:
         try:
             yt.videos().delete(id=old_vid).execute()
@@ -1422,10 +1434,29 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         },
     }
     media = MediaFileUpload(str(short_path), mimetype="video/mp4", resumable=True, chunksize=4 * 1024 * 1024)
-    req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
     resp = None
-    while resp is None:
-        _, resp = req.next_chunk()
+    yt = None
+    last_err = None
+    while True:
+        yt, t_path = vmaker.get_available_youtube_upload_service()
+        if yt is None:
+            raise RuntimeError(f"All YouTube tokens exhausted: {last_err}")
+        try:
+            existing_url = (sdoc.get("creative_idea_shorts_urls") or {}).get(lang_code, "")
+            old_vid = vmaker.extract_youtube_video_id(existing_url)
+            if old_vid:
+                try:
+                    yt.videos().delete(id=old_vid).execute()
+                except Exception:
+                    pass
+            req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
+            while resp is None:
+                _, resp = req.next_chunk()
+            break
+        except Exception as e:
+            last_err = e
+            vmaker._EXHAUSTED_TOKEN_FILES[t_path] = time.time() + 1800
+            continue
 
     vid_id = resp["id"]
     yt_url = f"https://youtube.com/shorts/{vid_id}"
@@ -1461,12 +1492,11 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
     script_path.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
     vmaker.update_video_catalog()
 
-    vmaker._notify_youtube_upload_telegram(
-        edition_label=f"🌟📱 [창의 아이디어 #Shorts ({lang_code.upper()})]",
+    vmaker.notify_telegram_youtube_upload(
         slug_key=slug_key,
-        title=title,
-        yt_url=yt_url,
-        lang_code=lang_code,
+        edition_label=f"🌟📱 [창의 아이디어 #Shorts ({lang_code.upper()})]",
+        video_title=title,
+        youtube_url=yt_url,
     )
     return {"video_id": vid_id, "youtube_url": yt_url, "title": title}
 

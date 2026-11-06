@@ -62,3 +62,7 @@ description: Specialized AI Video Producer & 4-Edition Math Cinema Director agen
 4. **영상 내 개인 호칭(`"민은기 선생님"` 등) 의도적 배제 및 순수 수학 강의 원칙**:
    - 모든 수학 강의 영상의 내레이션, 자막(`.srt`), 슬라이드 상·하단 오버레이, 1280×720 썸네일, 유튜브 제목·설명·태그에서 `"민은기 선생님"`, `"민은기"`, `"Min's Math Lab"`, `"Min Eunki"` 등의 인물 호칭을 의도적으로 절대 사용하지 않으며, 오직 순수한 수학 개념·정의·증명 논리만 전달합니다.
    - 렌더링 전후 `python -X utf8 mathteacher.py audit-videos` 및 `python -X utf8 video_creator.py audit`를 통해 전수 검증합니다.
+
+5. **유튜브 채널(`@min7014_ai`) 전용 연결 및 GitHub 영상 용량 ZERO 원칙 (YouTube-Only Linking & Zero GitHub Storage Mandate)**:
+   - 모든 영상(`.mp4`, `.webm`, `.mov`, `.wav`, `.mp3`, `video_lectures/youtube_packages/`)은 **절대 Git / GitHub 저장소에 커밋하거나 푸시하지 않으며, GitHub의 용량을 단 1바이트도 영상 파일에 쓰지 않습니다** (`.gitignore`로 영구 차단).
+   - 로컬에 생성된 `.mp4` 및 썸네일은 오직 `@min7014_ai` 유튜브 채널 업로드용으로만 사용하고, 수학홈페이지(`video_board.html`, `index.html`, `catalog.json`, `vault_index.json`, `min7014_deep_knowledge.json`)에는 **무조건 유튜브 채널 인터넷 주소(`https://youtu.be/...`, `https://youtube.com/shorts/...`, `https://www.youtube.com/@min7014_ai`) 링크만** 제공합니다.
