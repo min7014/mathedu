@@ -3821,6 +3821,14 @@
         window.MatheduVoiceTeacher.speakFullProblemTour(vTopBtn);
       };
       pillRow.insertBefore(vTopBtn, pillRow.firstChild);
+      var ytSubTopBtn = document.createElement('a');
+      ytSubTopBtn.href = 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
+      ytSubTopBtn.target = '_blank';
+      ytSubTopBtn.rel = 'noopener';
+      ytSubTopBtn.className = 'mathedu-voice-btn';
+      ytSubTopBtn.style.cssText = 'background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-color:#fda4af;';
+      ytSubTopBtn.innerHTML = bilingual('🔔 @min7014_ai 유튜브 1초 무료 구독', '🔔 Subscribe @min7014_ai (Free)');
+      pillRow.insertBefore(ytSubTopBtn, pillRow.firstChild);
     }
 
     // Add step-level voice button to every .q
@@ -3852,6 +3860,14 @@
         '<button type="button" class="mathedu-voice-btn" onclick="window.MatheduVoiceTeacher.speakFinalSolution(this)">' +
           bilingual('🔊 완결 풀이 전체 음성으로 듣기', '🔊 Listen to Full Solution') +
         '</button>';
+      var subSolBtn = document.createElement('a');
+      subSolBtn.href = 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
+      subSolBtn.target = '_blank';
+      subSolBtn.rel = 'noopener';
+      subSolBtn.className = 'mathedu-voice-btn';
+      subSolBtn.style.cssText = 'background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-color:#fda4af;';
+      subSolBtn.innerHTML = bilingual('🔔 @min7014_ai 시각 증명 유튜브 1초 무료 구독 ↗', '🔔 Subscribe @min7014_ai Visual Proofs ↗');
+      solBar.appendChild(subSolBtn);
       solBox.insertBefore(solBar, solBox.firstChild);
     }
 
@@ -3930,6 +3946,16 @@
               window.MatheduVoiceTeacher.speakRaw(voiceScript, '민은기 선생님 자료 도슨트', docentBtn);
             };
             actDiv.insertBefore(docentBtn, actDiv.firstChild);
+            if (!actDiv.querySelector('.min-yt-sub-btn')) {
+              var subItemBtn = document.createElement('a');
+              subItemBtn.href = 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
+              subItemBtn.target = '_blank';
+              subItemBtn.rel = 'noopener';
+              subItemBtn.className = 'mathedu-voice-btn min-yt-sub-btn';
+              subItemBtn.style.cssText = 'background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-color:#fda4af;';
+              subItemBtn.innerHTML = bilingual('🔔 @min7014_ai 1초 구독', '🔔 Subscribe @min7014_ai');
+              actDiv.insertBefore(subItemBtn, actDiv.firstChild);
+            }
           }
         });
       }

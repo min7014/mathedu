@@ -5065,11 +5065,14 @@ def boost_youtube_channel_popularity():
                     )
                     if not already_posted:
                         board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
+                        sub_link = "https://www.youtube.com/@min7014_ai?sub_confirmation=1"
                         full_comment = (
                             f"{quiz_comment}\n\n"
+                            f"🔔 @min7014_ai 채널 1초 무료 구독하기 (매일 새로운 시각적 수학 증명 업데이트!):\n👉 {sub_link}\n"
                             f"📌 직접 움직여보는 GeoGebra & 전체 1,113개 수학 설명영상 게시판:\n👉 {board_link}"
                             if lc == "ko"
                             else f"{quiz_comment}\n\n"
+                            f"🔔 Subscribe to @min7014_ai in 1 Click (Daily Visual Math Proofs!):\n👉 {sub_link}\n"
                             f"📌 Explore the Interactive GeoGebra & Full 1,113 Math Video Board:\n👉 {board_link}"
                         )
                         youtube.commentThreads().insert(
@@ -5467,9 +5470,16 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             cap_lines = textwrap.wrap(short_narration, width=22 if lang_code == "ko" else 34)[:5]
 
             draw.rounded_rectangle((44, 1810, 1036, 1892), radius=20, fill=(30, 58, 138), outline=(251, 191, 36), width=3)
+            draw.rounded_rectangle((754, 1364, 1014, 1416), radius=16, fill=(225, 29, 72), outline=(254, 240, 138), width=2)
+            sub_pill_txt = "🔔 SUBSCRIBE" if lang_code == "en" else "🔔 구독 @min7014_ai"
+            draw.text((774, 1375), sub_pill_txt, fill=(255, 255, 255), font=get_font_for_lang("ko", 23, bold=True))
             cta_short_txt = (
-                "👆 설명란·고정댓글 ➔ 1080p 풀버전 & 무료 GeoGebra 실습! (@min7014_ai)"
+                "🔔 [구독] 누르고 매일 40초 시각 증명 받기! 👆 고정댓글에 1080p 풀버전"
+                if (lang_code == "ko" and seq_idx == total_seqs)
+                else "👆 설명란·고정댓글 ➔ 1080p 풀버전 & 무료 GeoGebra 실습! (@min7014_ai)"
                 if lang_code == "ko"
+                else "🔔 Tap [SUBSCRIBE] for Daily Visual Proofs! 👆 Full 1080p in Pinned Comment"
+                if seq_idx == total_seqs
                 else "👆 Tap Description ➔ Full 1080p Proof & Free GeoGebra! (@min7014_ai)"
             )
             draw.text((64, 1834), cta_short_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 24, bold=True))
@@ -5817,9 +5827,13 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
             draw.rounded_rectangle((40, 1810, 1040, 1892), radius=20, fill=(136, 19, 55), outline=(251, 191, 36), width=3)
             cta_short_txt = (
-                "👆 내 질문 남기기 & 무료 GeoGebra 실습 ➔ min7014.github.io/mathedu"
+                "🔔 [구독]하고 매일 질문하는 수학 #Shorts 받기! 👆 댓글에 내 추론 남기기"
+                if (lang_code == "ko" and seq_idx == total_seqs)
+                else "👆 내 질문 남기기 & 무료 GeoGebra 실습 ➔ @min7014_ai 구독!"
                 if lang_code == "ko"
-                else "👆 Post Your Question & Try GeoGebra ➔ min7014.github.io/mathedu"
+                else "🔔 [SUBSCRIBE] for Daily Socratic Math #Shorts! 👆 Comment Your Answer"
+                if seq_idx == total_seqs
+                else "👆 Post Your Question & Try GeoGebra ➔ Subscribe @min7014_ai"
             )
             draw.text((68, 1834), cta_short_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 24, bold=True))
 
@@ -6093,17 +6107,24 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", repl
                 video_title=smeta.get("title", slug_key),
                 youtube_url=short_url,
             )
-            # Shorts 전용 첫 댓글(1080p 본편 직결 + 홈페이지 링크 유도) 자동 게시
+            # Shorts 전용 첫 댓글(10초 유레카 퀴즈 + 1초 무료 구독 링크 + 1080p 본편 직결 + 홈페이지 링크) 자동 게시
             try:
                 board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_shorts"
+                sub_link = "https://www.youtube.com/@min7014_ai?sub_confirmation=1"
                 full_yt_u = (sdoc.get("youtube_urls") or {}).get(lc) or (sdoc.get("youtube_urls") or {}).get("ko") or "https://www.youtube.com/@min7014_ai"
+                vprof_c = get_viral_hook_profile(sdoc)
+                quiz_line = vprof_c.get("quiz_ko" if lc == "ko" else "quiz_en", "")
                 c_text = (
+                    f"{quiz_line}\n\n"
+                    f"🔔 공식 암기 없는 시각적 수학 증명! @min7014_ai 1초 무료 구독하기:\n👉 {sub_link}\n"
                     f"🎬 방금 본 증명 1080p 전체 단계별 풀버전 바로 보기:\n👉 {full_yt_u}\n"
                     f"📐 도형을 마우스로 직접 움직여보기 (GeoGebra): {board_link}\n"
                     f"🎮 수능 수학 100점 3D 보스 레이드 & 16,548문항 디딤돌: https://min7014.github.io/mathedu/"
                     if lc == "ko"
-                    else f"🎬 Watch the full 1080p step-by-step proof video:\n👉 {full_yt_u}\n"
-                         f"📐 Drag this geometric figure yourself in GeoGebra: {board_link}"
+                    else f"{quiz_line}\n\n"
+                    f"🔔 Subscribe in 1 Click for Daily Visual Math Proofs (@min7014_ai):\n👉 {sub_link}\n"
+                    f"🎬 Watch the full 1080p step-by-step proof video:\n👉 {full_yt_u}\n"
+                    f"📐 Drag this geometric figure yourself in GeoGebra: {board_link}"
                 )
                 youtube.commentThreads().insert(
                     part="snippet",
@@ -6350,6 +6371,26 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public", 
                 video_title=qsh_title,
                 youtube_url=qsh_url,
             )
+            # Q-#Shorts 전용 첫 댓글(질문 참여 유도 + 1초 무료 구독 링크 + 질문하는 수업 1080p 본편 링크) 자동 게시
+            try:
+                sub_link = "https://www.youtube.com/@min7014_ai?sub_confirmation=1"
+                qc_text = (
+                    f"🙋 [오늘의 발문 챌린지] 여러분은 어떤 보조선이나 원리를 먼저 떠올리셨나요? 댓글로 나만의 발상을 남겨보세요!\n\n"
+                    f"🔔 스스로 질문하고 깨치는 수학! @min7014_ai 1초 무료 구독하기:\n👉 {sub_link}\n"
+                    f"❓ 1080p 질문하는 수업 풀버전 바로 보기:\n👉 {q_yt_u}\n"
+                    f"📐 GeoGebra 직접 조작 & 질문 실험실: {board_link}"
+                    if lc == "ko"
+                    else f"🙋 [Socratic Inquiry Challenge] Which auxiliary line or invariant did you spot first? Share your thought in the comments!\n\n"
+                    f"🔔 Subscribe in 1 Click for Socratic Visual Math Proofs (@min7014_ai):\n👉 {sub_link}\n"
+                    f"❓ Watch the Full 1080p Question-Asking Proof:\n👉 {q_yt_u}\n"
+                    f"📐 Try the Interactive GeoGebra Lab: {board_link}"
+                )
+                youtube.commentThreads().insert(
+                    part="snippet",
+                    body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": qc_text}}}},
+                ).execute()
+            except Exception:
+                pass
         except Exception as e:
             err_s = str(e)
             print(f"  ⚠️ [YouTube Question #Shorts Upload Notice ({slug_key}/{lc})]: {e}", flush=True)

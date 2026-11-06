@@ -147,6 +147,50 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
     return changed
 
 
+def _render_masterclass_custom_thumbnail(mc_slug: str, title_text: str, duration_min: float, lead_slugs: list, lang_code: str) -> str:
+    """
+    [Designer × Video_Creator × Finance 협업]
+    30~45분 장편 마스터클래스 전용 고클릭률(High-CTR) 1280x720 HD 커스텀 썸네일을 자동 생성합니다.
+    원본 min7014.github.io 기하 작도 썸네일에 황금빛 'FULL MASTERCLASS (40+ MIN)' 배지를 합성합니다.
+    """
+    out_thumb = MASTERCLASS_DIR / f"{mc_slug}_thumb.png"
+    if out_thumb.exists():
+        return str(out_thumb.relative_to(ROOT_DIR)).replace("\\", "/")
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+        base_img = None
+        for ls in (lead_slugs or []):
+            cand = YT_PKG_DIR / f"{ls}_{lang_code}_thumb.png"
+            if not cand.exists():
+                cand = YT_PKG_DIR / f"{ls}_ko_thumb.png"
+            if cand.exists():
+                base_img = Image.open(cand).convert("RGB").resize((1280, 720))
+                break
+        if base_img is None:
+            base_img = Image.new("RGB", (1280, 720), (11, 17, 32))
+        draw = ImageDraw.Draw(base_img)
+        font_b = ImageFont.load_default()
+        for fp in ("C:/Windows/Fonts/malgunbd.ttf", "C:/Windows/Fonts/arialbd.ttf"):
+            if Path(fp).exists():
+                try:
+                    font_b = ImageFont.truetype(fp, 30)
+                    break
+                except Exception:
+                    pass
+        # 상단 골드 리본 배지
+        draw.rounded_rectangle((28, 22, 640, 86), radius=14, fill=(15, 23, 42), outline=(251, 191, 36), width=4)
+        badge_txt = (
+            f"FULL MASTERCLASS ({duration_min} MIN) | 5 PROOFS"
+            if lang_code == "en"
+            else f"정주행 마스터클래스 ({duration_min}분 연속강의)"
+        )
+        draw.text((48, 36), badge_txt, font=font_b, fill=(251, 191, 36))
+        base_img.save(out_thumb)
+        return str(out_thumb.relative_to(ROOT_DIR)).replace("\\", "/")
+    except Exception:
+        return ""
+
+
 def build_ypp_watchtime_masterclasses() -> list:
     """
     [YPP 시청 시간 4,000시간(240,000분) 최단기 돌파 & 8분+ 미드롤 광고 극대화 엔진]
@@ -247,6 +291,15 @@ def build_ypp_watchtime_masterclasses() -> list:
             "slugs": chunk,
             "lang": "en",
         })
+        if all((QUESTION_DIR / f"{ck}_q_ko.mp4").exists() for ck in chunk[:4]):
+            suites.append({
+                "mc_slug": f"masterclass_question_vol{vol_num}",
+                "title_ko": f"❓ [질문하는 수학 수업 마스터클래스 Vol.{vol_num}] {lead_title_ko} 외 스스로 보조선을 발견하는 심층 탐구 (1080p) | @min7014_ai",
+                "title_en": f"❓ [Question-Asking Math Masterclass Vol.{vol_num}] {lead_title_en} & Socratic Visual Proofs (1080p) | @min7014_ai",
+                "slugs": chunk[:4],
+                "use_question_edition": True,
+                "lang": "ko",
+            })
 
     built_list = []
     newly_concat_this_cycle = 0
@@ -332,6 +385,13 @@ def build_ypp_watchtime_masterclasses() -> list:
                     prev_yt_url = (json.loads(out_meta.read_text(encoding="utf-8")).get("youtube_url") or "").strip()
                 except Exception:
                     prev_yt_url = ""
+            thumb_rel = _render_masterclass_custom_thumbnail(
+                mc_slug=mc_slug,
+                title_text=spec["title_en" if lang_code == "en" else "title_ko"],
+                duration_min=round(cum_sec / 60.0, 1),
+                lead_slugs=spec["slugs"],
+                lang_code=lang_code,
+            )
             meta_obj = {
                 "mc_slug": mc_slug,
                 "title_ko": spec["title_ko"],
@@ -339,6 +399,7 @@ def build_ypp_watchtime_masterclasses() -> list:
                 "lang": lang_code,
                 "slugs": spec["slugs"],
                 "mp4_path": str(out_mp4.relative_to(ROOT_DIR)).replace("\\", "/"),
+                "thumb_path": thumb_rel,
                 "duration_sec": round(cum_sec, 1),
                 "duration_min": round(cum_sec / 60.0, 1),
                 "chapters": chapters,
@@ -443,6 +504,24 @@ def upload_pending_masterclass_to_youtube(max_uploads: int = 1) -> int:
                     video_title=v_title,
                     youtube_url=yt_url,
                 )
+                try:
+                    sub_link = "https://www.youtube.com/@min7014_ai?sub_confirmation=1"
+                    ch_lines = "\n".join(mdoc.get("chapters") or [])
+                    mc_comment = (
+                        f"⏱️ [마스터클래스 챕터 타임스탬프 — 원하는 단원을 눌러 바로 이동하세요!]\n{ch_lines}\n\n"
+                        f"🔔 공식 암기 없는 시각적 수학 증명! @min7014_ai 1초 무료 구독하기:\n👉 {sub_link}\n"
+                        f"📐 전체 1,113개 설명영상 & 무료 GeoGebra 실습 게시판:\n👉 https://min7014.github.io/mathedu/video_board.html"
+                        if lang_code == "ko"
+                        else f"⏱️ [Masterclass Chapter Timestamps — Jump to Any Proof!]\n{ch_lines}\n\n"
+                        f"🔔 Subscribe to @min7014_ai in 1 Click (Daily Visual Math Proofs!):\n👉 {sub_link}\n"
+                        f"📐 Explore All 1,113 Interactive Proofs & GeoGebra Labs:\n👉 https://min7014.github.io/mathedu/video_board.html"
+                    )
+                    youtube.commentThreads().insert(
+                        part="snippet",
+                        body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": mc_comment}}}},
+                    ).execute()
+                except Exception:
+                    pass
         except Exception as e:
             err_s = str(e)
             if "quotaExceeded" in err_s or "rateLimitExceeded" in err_s or "uploadLimitExceeded" in err_s:
@@ -720,6 +799,14 @@ def analyze_revenue_pipeline() -> dict:
             "daily_api_quota_units": daily_api_quota_units,
             "daily_auto_uploads_per_reset": daily_api_uploads_capacity,
             "quota_reset_time_kst": "매일 오후 5시 정각 (17:00 KST / 00:00 PST)",
+            "google_official_quota_extension_audit": {
+                "status": "SUBMITTED & IN GOOGLE REVIEW QUEUE",
+                "ticket_id": "0edugoayq1erg1n",
+                "official_sender": "youtube-disputes+0edugoayq1erg1n@google.com",
+                "project_number": "711696878912",
+                "requested_daily_quota_units": 500000,
+                "requested_videos_insert_units": 400000,
+            },
         },
     }
 
