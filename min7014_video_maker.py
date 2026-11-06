@@ -4554,6 +4554,10 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
 
     youtube, active_token_path = get_available_youtube_upload_service()
     if youtube is None:
+        studio_prof = ROOT_DIR / ".yt_studio_profile_min7014_ai"
+        if studio_prof.exists():
+            print(f"⚡ [API Quota Exhausted -> Zero-Quota YouTube Studio Browser Fallback ({slug_key})]", flush=True)
+            return upload_slug_via_studio_browser(slug_key, langs=missing_langs, privacy=privacy)
         _LAST_UPLOAD_QUOTA_BLOCKED = True
         return uploaded_urls
 
@@ -4571,6 +4575,25 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
         meta_all = json.loads(meta_path.read_text(encoding="utf-8"))
         meta = meta_all[lang_code]
 
+        # [Google/YouTube Global 8-Language Algorithm Engine]
+        # 추가 API 쿼터 소모(0 unit 추가) 없이 videos.insert 호출 시 8개국어(ko, en, ja, zh-CN, es, fr, de, vi)
+        # localizations(다국어 제목·설명)를 함께 주입하여 전 세계 검색·추천 알고리즘 노출 및 글로벌 고단가 RPM을 극대화합니다.
+        video_localizations = {}
+        try:
+            sdoc_loc = json.loads(script_path.read_text(encoding="utf-8")) if script_path.exists() else {}
+            t_trans = sdoc_loc.get("title_translations") or {}
+            for loc_code in ("ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"):
+                if loc_code in meta_all and isinstance(meta_all[loc_code], dict):
+                    loc_t = str(meta_all[loc_code].get("title") or meta["title"])[:100]
+                    loc_d = str(meta_all[loc_code].get("description") or meta["description"])[:4900]
+                else:
+                    raw_t = str(t_trans.get(loc_code) or sdoc_loc.get("title_en") or sdoc_loc.get("title") or slug_key).strip()
+                    loc_t = f"📐 {raw_t} — Step-by-Step Visual Math Proof (1080p) | @min7014_ai"[:100]
+                    loc_d = str(meta_all.get("en", meta).get("description") or meta["description"])[:4900]
+                video_localizations[loc_code] = {"title": loc_t, "description": loc_d}
+        except Exception:
+            video_localizations = {}
+
         body = {
             "snippet": {
                 "title": meta["title"],
@@ -4585,10 +4608,14 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
                 "selfDeclaredMadeForKids": False,
             },
         }
+        insert_parts = "snippet,status"
+        if video_localizations:
+            body["localizations"] = video_localizations
+            insert_parts = "snippet,status,localizations"
 
         try:
             media = MediaFileUpload(str(mp4_path), chunksize=-1, resumable=True, mimetype="video/mp4")
-            req = youtube.videos().insert(part="snippet,status", body=body, media_body=media)
+            req = youtube.videos().insert(part=insert_parts, body=body, media_body=media)
             resp = req.execute()
             vid_id = resp["id"]
             yt_url = f"https://youtu.be/{vid_id}"
@@ -6004,6 +6031,10 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", repl
     process_youtube_delete_queue(max_deletions=20)
     youtube, active_token_path = get_available_youtube_upload_service()
     if youtube is None:
+        studio_prof = ROOT_DIR / ".yt_studio_profile_min7014_ai"
+        if studio_prof.exists():
+            print(f"⚡ [API Quota Exhausted -> Zero-Quota YouTube Studio Shorts Browser Fallback ({slug_key})]", flush=True)
+            return upload_short_via_studio_browser(slug_key, langs=missing_langs, privacy=privacy)
         _LAST_UPLOAD_QUOTA_BLOCKED = True
         return uploaded_shorts
 
@@ -6607,6 +6638,14 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
                 "원노트", "OneNote", "체크박스", "Checkbox", "checkbox", "mathapk", "학습자료 링크",
                 "이벤트 만들기", "텍스트 만들기", "사용법", "설치", "블로그", "민은기",
             )
+            # 유튜브 알고리즘에서 폭발적 조회수(High CTR & Global Viral)를 기록하는 독창적·창의적 시각 증명 키워드 최우선 추출
+            _viral_creative_keywords = (
+                "피타고라스", "테셀레이션", "황금비", "오각형", "단델린", "사이클로이드", "아르키메데스",
+                "페르마", "오일러", "구점원", "나폴레옹", "몰리", "톨레미", "파스칼", "브리앙숑",
+                "아폴로니우스", "스튜어트", "헤론", "파푸스", "메넬라우스", "체바", "구분구적",
+                "코시", "산술", "포물선", "타원", "쌍곡선", "작도", "프랙탈", "원주각", "접선", "정다면체",
+            )
+            viral_gem_slugs = []
             for it in items:
                 t_raw = str(it.get("title") or "")
                 sub = it.get("sub_domain_ko") or "기타"
@@ -6617,11 +6656,20 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
                 if pdf_u and pdf_u.lower().endswith(".pdf"):
                     s = pdf_u.split("/")[-1].replace(".pdf", "").strip()
                     if s and s not in existing_scripts and s not in failed_slugs and s not in seen_cands:
+                        if any(vk in t_raw for vk in _viral_creative_keywords):
+                            viral_gem_slugs.append(s)
                         by_sub_pdf.setdefault(sub, []).append(s)
                 elif url_u:
                     s = url_u.split("/")[-1].replace(".html", "").strip()
                     if s and s not in existing_scripts and s not in failed_slugs and s not in seen_cands:
+                        if any(vk in t_raw for vk in _viral_creative_keywords):
+                            viral_gem_slugs.append(s)
                         by_sub_web.setdefault(sub, []).append(s)
+            # 0순위: 유튜브 바이럴 잠재력이 가장 높은 독창적 시각 기하·창의 증명 자료 먼저 배치
+            for vg in viral_gem_slugs:
+                if vg not in seen_cands:
+                    unscripted_candidates.append(vg)
+                    seen_cands.add(vg)
             # 16개 단원 라운드로빈 교차 배치 (1순위: 정통 시각 증명 PDF 자료 ➔ 2순위: 순수 수학 웹 탐구 자료)
             for bucket_map in (by_sub_pdf, by_sub_web):
                 sub_keys = sorted(bucket_map.keys())
@@ -6846,6 +6894,16 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                             return (1, st)
                         return (2, st)
 
+                    try:
+                        import importlib
+                        import finance
+                        importlib.reload(finance)
+                        mc_up = finance.upload_pending_masterclass_to_youtube(max_uploads=1)
+                        if mc_up > 0:
+                            newly_uploaded_batch += mc_up
+                    except Exception as mc_err:
+                        print(f"[Masterclass Upload Notice] {mc_err}", flush=True)
+
                     all_sps = sorted(SCRIPTS_DIR.glob("*.json"), key=_upload_prio_key)
                     for sp in all_sps:
                         sdoc = json.loads(sp.read_text(encoding="utf-8"))
@@ -6943,18 +7001,22 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)
                     try:
+                        import importlib
                         import mathteacher
+                        import finance
                         import mathedu_foundation_daemon as fdaemon
+                        importlib.reload(finance)
+                        importlib.reload(fdaemon)
                         mathteacher.expand_pedagogy_from_min7014_vault(max_add_per_category=2)
                         fdaemon.mine_next_pedagogy_item_from_deep_knowledge()
                         fdaemon.sync_pedagogy_counts_to_index_html()
                         fdaemon.write_daemon_heartbeat(last_completed_slug=next_slug)
                     except Exception as pe_err:
                         print(f"[Pedagogy Sync Notice] {pe_err}", flush=True)
-                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/mathteacher_pedagogy_engine.json", "index.html"], check=False)
-                    subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v6.0 4-edition video suite & mathteacher pedagogy evolution ({next_slug})"], check=False)
+                    subprocess.run(["git", "add", "video_lectures/catalog.json", "video_lectures/vault_index.json", "video_lectures/foundation_daemon_status.json", "video_lectures/scripts/", "video_lectures/youtube_packages/", "video_lectures/shorts/", "video_lectures/question_classroom/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/mathteacher_pedagogy_engine.json", "assets/finance_revenue_engine.json", "index.html", "video_board.html"], check=False)
+                    subprocess.run(["git", "commit", "-m", f"chore(foundation): continuous v6.0 4-edition video suite, mathteacher pedagogy & finance v5.0 evolution ({next_slug})"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
-                    print(f"✅ [Continuous Factory & Pedagogy Evolution Complete] {next_slug} (4-Edition KO/EN + 수학교육 모듈 동기화 완료!)", flush=True)
+                    print(f"✅ [Continuous Factory, Pedagogy & Finance 10M Engine Complete] {next_slug} (4-Edition KO/EN + 수학교육 모듈 + 수익 엔진 동기화 완료!)", flush=True)
                 except Exception as prod_err:
                     print(f"⚠️ [Continuous Factory Skip ({next_slug})]: {prod_err}", flush=True)
                     run_shorts_and_video_upload_daemon._failed_slugs.add(next_slug)

@@ -68,12 +68,22 @@ def ensure_video_maker_hooked():
 
 def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_audit_passed=0):
     try:
+        import importlib
+        import finance
+        importlib.reload(finance)
+        finance.run_autonomous_finance_cycle()
+    except Exception as fin_hb_err:
+        print(f"[Finance Heartbeat Notice] {fin_hb_err}", flush=True)
+    try:
         ped = json.loads(PEDAGOGY_JSON.read_text(encoding="utf-8")) if PEDAGOGY_JSON.exists() else {}
         cat_p = ROOT_DIR / "video_lectures" / "catalog.json"
         cat = json.loads(cat_p.read_text(encoding="utf-8")) if cat_p.exists() else []
+        fin_p = ROOT_DIR / "assets" / "finance_revenue_engine.json"
+        fin_doc = json.loads(fin_p.read_text(encoding="utf-8")) if fin_p.exists() else {}
+        fin_inv = fin_doc.get("asset_inventory") or {}
         STATUS_JSON.parent.mkdir(parents=True, exist_ok=True)
         STATUS_JSON.write_text(json.dumps({
-            "daemon": "mathedu_foundation_daemon (24/7 Continuous Evolution + mathteacher v8.0 Active)",
+            "daemon": "mathedu_foundation_daemon (24/7 Continuous Evolution + mathteacher v8.0 + finance v5.0 Active)",
             "updated_at": datetime.now().isoformat(),
             "last_completed_slug": last_completed_slug,
             "total_rendered_video_topics": len(cat),
@@ -81,6 +91,13 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
                 "audited_topics": last_audited_videos or len(cat),
                 "passed_topics": last_audit_passed or len(cat),
                 "personal_name_zero_verified": True,
+            },
+            "finance_10m_krw_engine": {
+                "monthly_target_krw": 10000000,
+                "total_rendered_mp4_files": fin_inv.get("total_rendered_mp4_files", 0),
+                "single_videos_over_8min_midroll": fin_inv.get("single_videos_over_8min_midroll", 0),
+                "built_longform_masterclass_mp4s": len(fin_inv.get("built_longform_masterclass_mp4s") or []),
+                "youtube_bound_urls_count": fin_inv.get("youtube_bound_urls_count", 0),
             },
             "pedagogy_counts": {
                 "verticalGenealogy": len(ped.get("verticalGenealogy", [])),
