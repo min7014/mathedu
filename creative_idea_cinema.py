@@ -1913,11 +1913,20 @@ def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_c
     return (base[: 98 - len(short_suffix)].rstrip(" —|-:") + short_suffix)[:98]
 
 
-def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: str = "") -> str:
+def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: str = "", sdoc: dict = None) -> str:
     """
-    [유튜브 알고리즘 댓글 참여율(Engagement Velocity) 10배 증폭 엔진]
-    누구나 5초 만에 암산하여 숫자/단어로 즉시 댓글을 달 수 있는 아키타입별 '5초 직관 퀴즈'를 생성합니다.
+    [유튜브 알고리즘 댓글 참여율(Engagement Velocity) 10배 증폭 엔진 — 100% https://min7014.github.io/ 원문 자료 기반]
+    https://min7014.github.io/ 수록 자료(sdoc)의 실제 핵심 아이디어·보조선·불변량과 아키타입별 5초 암산 퍼즐을 결합합니다.
     """
+    sdoc = sdoc or {}
+    slug_k = sdoc.get("slug", "math20250130001")
+    tot_p = sdoc.get("page_count") or len(sdoc.get("pages") or []) or 11
+    pdf_u = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_k}.pdf"
+    web_u = sdoc.get("web_url") or ggb_url or "https://min7014.github.io/"
+    ko_raw, en_raw = vmaker.split_bilingual_title(sdoc.get("title", slug_k))
+    topic_ko = vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_raw), max_len=36, lang="ko") if ko_raw else ""
+    topic_en = vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_raw or sdoc.get("title_en") or ko_raw), max_len=44, lang="en") if (en_raw or ko_raw) else ""
+
     puzzles_ko = {
         "pythagoras_fractal": "🧠 [5초 암산 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n직각삼각형의 두 작은 정사각형 넓이가 각각 9와 16일 때, 가장 큰 정사각형의 넓이는 얼마일까요? (루트 계산 없이 1초 만에 맞히셨다면 댓글로 숫자를 남겨주세요!)",
         "conic_reflection": "🧠 [5초 직관 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n포물선 위의 점 P에서 준선까지의 거리가 7일 때, 초점 F까지의 거리 PF는 얼마일까요? 1초 만에 보인다면 댓글로 정답을 남겨주세요!",
@@ -1940,21 +1949,37 @@ def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: s
     }
     if lang_code == "ko":
         q_txt = puzzles_ko.get(archetype, puzzles_ko["pythagoras_fractal"])
+        src_line = f"🏛️ [원본 수학 아이디어 출처: https://min7014.github.io/ — '{topic_ko}' ({tot_p}단계 시각적 증명)]\n" if topic_ko else "🏛️ [원본 수학 아이디어 출처: https://min7014.github.io/]\n"
         return (
-            f"{q_txt}\n\n"
-            f"🔔 [매일 새로운 창의 수학 시네마 받아보기 — 1초 구독]\n"
-            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-            f"📐 [직접 마우스로 움직여보는 60fps 인터랙티브 셰이더 & GeoGebra]\n"
-            f"👉 {ggb_url}"
+            f"{src_line}"
+            f"{q_txt}\n"
+            f"⚡ [Wordle × Chess.com 스타일 1초 댓글 등급표 — 정답 숫자와 함께 이모지를 남겨보세요!]\n"
+            f"🟩 3초 컷 (상위 1% 직관) | 🟨 10초 컷 | 🟦 영상 보조선 보고 유레카!\n\n"
+            f"📄 [이 영상의 모태가 된 https://min7014.github.io/ 단계별 증명 PDF & 동적 기하 원문]:\n"
+            f"👉 원문 아카이브: {web_u}\n"
+            f"👉 단계별 증명 PDF: {pdf_u}\n"
+            f"👉 인터랙티브 실습 보드: {ggb_url}\n\n"
+            f"🎬 [Netflix 스타일 연속 정주행 — 8분+ 네온 시네마 마스터클래스 본편 바로 보기]\n"
+            f"👉 https://youtu.be/_5LE_BfLA5w\n\n"
+            f"🔔 [매일 1개 두올링고(Duolingo)처럼 수학 직관 스트릭 쌓기 — 1초 무료 구독]\n"
+            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1"
         )
     else:
         q_txt = puzzles_en.get(archetype, puzzles_en["pythagoras_fractal"])
+        src_line = f"🏛️ [Original Mathematical Idea from https://min7014.github.io/ — '{topic_en}' ({tot_p}-Step Proof)]\n" if topic_en else "🏛️ [Original Mathematical Idea from https://min7014.github.io/]\n"
         return (
-            f"{q_txt}\n\n"
-            f"🔔 [1-Click Subscribe to @min7014_ai for Daily Visual Math]:\n"
-            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-            f"📐 [Interactive 60fps Shader & GeoGebra Applet]:\n"
-            f"👉 {ggb_url}"
+            f"{src_line}"
+            f"{q_txt}\n"
+            f"⚡ [Wordle × Chess.com Speed Tier — Reply with Your Emoji + Answer!]\n"
+            f"🟩 Solved in <3s (Top 1%) | 🟨 Solved in <10s | 🟦 Needed the Visual Clue!\n\n"
+            f"📄 [Original Step-by-Step Proof PDF & Interactive Archive on https://min7014.github.io/]:\n"
+            f"👉 Archive: {web_u}\n"
+            f"👉 Step-by-Step PDF: {pdf_u}\n"
+            f"👉 Interactive Board: {ggb_url}\n\n"
+            f"🎬 [Binge-Watch Next — 8-Min Pure Neon Geometry Masterclass (1080p)]\n"
+            f"👉 https://youtu.be/9EL8pgqJtkY\n\n"
+            f"🔔 [Build Your Daily Math Intuition Streak — 1-Click Subscribe to @min7014_ai]:\n"
+            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1"
         )
 
 
@@ -2443,18 +2468,24 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
     archetype = detect_visual_archetype(sdoc)
     title = build_viral_curiosity_youtube_title(clean_t, archetype, lang_code=lang_code, is_short=False)
     std_url = (sdoc.get("youtube_urls") or {}).get(lang_code) or f"https://www.youtube.com/results?search_query=min7014_ai+{slug_key}"
-    ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or f"https://min7014.github.io/{slug_key}/"
+    ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
+    pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_key}.pdf"
+    web_url = sdoc.get("web_url") or "https://min7014.github.io/"
 
     desc = (
-        f"🌟 [Edition 5: 창의 수학 아이디어 시네마 (Pure Procedural Neon-Bloom Math Cinema)]\n"
-        f"정적인 슬라이드 캡처를 완전히 벗어나, 수학적 본질 아이디어가 네온 블룸 프랙탈과 동적 기하 셰이더로 살아 움직이는 5막 스토리텔링 시네마입니다!\n\n"
+        f"🌟 [Edition 5: https://min7014.github.io/ 원문 자료 기반 창의 수학 아이디어 시네마 (Pure Procedural Neon-Bloom Math Cinema)]\n"
+        f"본 영상은 https://min7014.github.io/ 의 단계별 시각 증명 자료('{clean_t}')에 담긴 핵심 수학적 아이디어와 보조선 원리를 바탕으로, 네온 블룸 프랙탈과 동적 기하 셰이더로 구현한 5막 스토리텔링 시네마입니다!\n\n"
+        f"🏛️ [기본 아이디어 원문 자료 (https://min7014.github.io/)]\n"
+        f"• 단계별 시각 증명 원본 PDF: {pdf_url}\n"
+        f"• 수학자료실 원문 아카이브: {web_url}\n"
+        f"• GeoGebra 인터랙티브 직접 조작: {ggb_url}\n\n"
         f"🔔 [지금 바로 @min7014_ai 채널 1초 구독하기]:\n"
         f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
         f"🎬 [함께 보면 200% 시너지가 나는 연계 콘텐츠]\n"
+        f"• 8분+ 네온 시네마 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
         f"• 단계별 시각 증명 본편: {std_url}\n"
-        f"• GeoGebra 인터랙티브 직접 조작: {ggb_url}\n"
-        f"• mathedu 16,548문항 무료 문제은행: https://min7014.github.io/mathedu/video_board.html\n\n"
-        f"#창의수학 #시각적증명 #{clean_t.replace(' ', '')} #수학아이디어 #수능수학 #기하학 #VisualProof #MathAnimation"
+        f"• mathedu 16,548문항 무료 문제은행: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n\n"
+        f"#창의수학 #시각적증명 #{clean_t.replace(' ', '')} #수학아이디어 #수능수학 #기하학 #VisualProof #MathAnimation #min7014_ai"
     )
 
     body = {
@@ -2508,7 +2539,7 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
             pass
 
     try:
-        comment_txt = build_viral_comment_puzzle(archetype, lang_code=lang_code, ggb_url=ggb_url)
+        comment_txt = build_viral_comment_puzzle(archetype, lang_code=lang_code, ggb_url=ggb_url, sdoc=sdoc)
         yt.commentThreads().insert(
             part="snippet",
             body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": comment_txt}}}},
@@ -2580,18 +2611,23 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         or (sdoc.get("youtube_urls") or {}).get(lang_code)
         or f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&mode=idea"
     )
-    ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or f"https://min7014.github.io/{slug_key}/"
+    ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
+    pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_key}.pdf"
+    web_url = sdoc.get("web_url") or "https://min7014.github.io/"
 
     desc = (
-        f"🌟📱 [Edition 5-B: 창의 수학 아이디어 #Shorts]\n"
+        f"🎬 [1080p 창의 시네마 풀버전 & 8분+ 마스터클래스 바로 보기]\n"
+        f"👉 1080p 본편: {idea_full_url}\n"
+        f"👉 8분 마스터클래스 총정리: {'https://youtu.be/_5LE_BfLA5w' if lang_code == 'ko' else 'https://youtu.be/9EL8pgqJtkY'}\n\n"
+        f"🏛️ [기본 아이디어 출처: https://min7014.github.io/ ('{clean_t}')]\n"
+        f"• 단계별 증명 원본 PDF: {pdf_url}\n"
+        f"• 수학자료실 원문 아카이브: {web_url}\n"
+        f"• 직접 조작하는 GeoGebra: {ggb_url}\n\n"
+        f"🌟📱 [Edition 5-B: https://min7014.github.io/ 원문 기반 창의 수학 아이디어 #Shorts]\n"
         f"단 45초 만에 '{clean_t}'의 핵심 불변량 아이디어를 순수 네온 블룸 애니메이션으로 직관화합니다!\n\n"
         f"🔔 [지금 @min7014_ai 1초 구독하기]:\n"
         f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-        f"🎬 [1080p 창의 아이디어 시네마 풀버전 보기]:\n"
-        f"👉 {idea_full_url}\n\n"
-        f"📐 [직접 조작하는 GeoGebra]:\n"
-        f"👉 {ggb_url}\n\n"
-        f"#Shorts #창의수학 #시각적증명 #수학쇼츠 #MathShorts #VisualProof"
+        f"#Shorts #창의수학 #시각적증명 #수학쇼츠 #MathShorts #VisualProof #min7014_ai"
     )
 
     body = {
@@ -2637,7 +2673,7 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
     yt_url = f"https://youtube.com/shorts/{vid_id}"
 
     try:
-        comment_txt = build_viral_comment_puzzle(archetype, lang_code=lang_code, ggb_url=idea_full_url)
+        comment_txt = build_viral_comment_puzzle(archetype, lang_code=lang_code, ggb_url=idea_full_url, sdoc=sdoc)
         yt.commentThreads().insert(
             part="snippet",
             body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": comment_txt}}}},

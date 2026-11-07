@@ -2349,6 +2349,11 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     draw.ellipse([cx_spot + r_spot - 22, cy_spot - r_spot - 18, cx_spot + r_spot + 30, cy_spot - r_spot + 34], fill=(225, 29, 72), outline=(255, 255, 255), width=3)
     draw.text((cx_spot + r_spot - 6, cy_spot - r_spot - 12), "?", fill=(255, 255, 255), font=get_font_for_lang("en", 34, bold=True))
 
+    # [MindYourDecisions × Andy Math × 깨봉수학 벤치마킹]: 우측 도형 상단 코너에 직관 챌린지 콜아웃 배지 부착
+    chal_txt = "⚡ 5-SEC VISUAL HACK!" if is_en else "⚡ 공식 없이 5초 직관 해법!"
+    draw.rounded_rectangle([sx + 14, sy + 14, sx + (318 if is_en else 348), sy + 64], radius=14, fill=(15, 23, 42), outline=(250, 204, 21), width=3)
+    draw.text((sx + 28, sy + 24), chal_txt, fill=(250, 204, 21), font=get_font_for_lang("ko", 22, bold=True))
+
     # 좌측 상단 후킹 배지
     badge_txt = vprof["badge_en"] if is_en else vprof["badge_ko"]
     draw.rounded_rectangle([38, 42, 548, 102], radius=16, fill=(225, 29, 72), outline=(254, 240, 138), width=2)
@@ -2802,27 +2807,42 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         _, _en_split = split_bilingual_title(script_doc.get("title", slug))
         clean_en_title = latex_to_unicode_title(_en_split or script_doc.get("title_en") or script_doc.get("title", slug))
         concise_en = _smart_concise_topic_title(clean_en_title, max_len=44, lang="en")
+        cat_type_en = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
+        pat_idx_en = sum(ord(c) for c in str(slug)) % 4
         if preset.get("title_en"):
             yt_title = _balance_parentheses(preset["title_en"][:98])
         else:
-            full_suffix_en = f" — Step-by-Step Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
-            compact_suffix_en = f" — Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
-            if len(f"✨ {concise_en}{full_suffix_en}") <= 98:
-                yt_title = f"✨ {concise_en}{full_suffix_en}"
-            elif len(f"✨ {concise_en}{compact_suffix_en}") <= 98:
-                yt_title = f"✨ {concise_en}{compact_suffix_en}"
+            # [5대 인기 수학 채널 벤치마킹 (3Blue1Brown · MindYourDecisions · Andy Math · Mathologer · 깨봉수학)]
+            # 모바일 첫 25글자에 호기심 공백(Curiosity-Gap) 훅을 배치하고 단어 중간 절단을 100% 방지합니다.
+            if pat_idx_en == 0:
+                cand_en = f"🔥 Don't Memorize Formulas! Why {concise_en} Works Visually ({tot_p} Steps) | @min7014_ai"
+            elif pat_idx_en == 1:
+                cand_en = f"❓ 99% Memorize This Without Seeing Why! {concise_en} Visual Proof | @min7014_ai"
+            elif pat_idx_en == 2:
+                prefix_en = "⚡ 1 Visual Idea Proves It!" if cat_type_en in ("algebra", "number") else "⚡ Just 1 Hidden Line!"
+                cand_en = f"{prefix_en} {concise_en} — Step-by-Step Visual Proof | @min7014_ai"
             else:
-                max_en_len = max(18, 98 - len("✨ ") - len(compact_suffix_en))
-                short_en_t = _smart_concise_topic_title(concise_en, max_len=max_en_len, lang="en")
-                yt_title = f"✨ {short_en_t}{compact_suffix_en}"
+                cand_en = f"✨ The Hidden Visual Secret Behind {concise_en} ({tot_p} Steps · 1080p) | @min7014_ai"
+
+            if len(cand_en) <= 98:
+                yt_title = _balance_parentheses(cand_en)
+            else:
+                compact_suffix_en = f" — Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
+                if len(f"🔥 {concise_en}{compact_suffix_en}") <= 98:
+                    yt_title = _balance_parentheses(f"🔥 {concise_en}{compact_suffix_en}")
+                else:
+                    max_en_len = max(18, 98 - len("🔥 ") - len(compact_suffix_en))
+                    short_en_t = _smart_concise_topic_title(concise_en, max_len=max_en_len, lang="en")
+                    yt_title = _balance_parentheses(f"🔥 {short_en_t}{compact_suffix_en}")
         hook_en = preset.get("hook_en") or (
-            f"Why does {clean_en_title} hold true? Watch every step-by-step mathematical principle unfold clearly in 1080p!"
+            f"Stop memorizing formulas by rote! Watch why {clean_en_title} must hold true through a crystal-clear {tot_p}-step visual proof in 1080p."
         )
         quiz_en = preset.get("quiz_en") or (
-            f"💬 [10-Second Eureka Quiz] Which step (1 to {tot_p}) gave you the biggest 'Aha!' moment? Drop the step number in the comments below!"
+            f"💬 [5-Second Eureka Challenge] Pause at Step {max(1, tot_p // 2)}! Can you spot why this relationship holds before the final step? Drop the step number that gave you the biggest 'Aha!' moment in the comments!"
         )
         binge_en = (
-            "🔥 [Watch Next — Top Visual Proofs on @min7014_ai]\n"
+            "🔥 [Watch Next — Top Visual Proofs & 8-Min Masterclasses on @min7014_ai]\n"
+            "• 🎬 [8-Min Masterclass] 6 Legendary Geometry Visual Proofs Compilation (1080p): https://youtu.be/9EL8pgqJtkY\n"
             "• 🌳 Pythagoras Tree Area Conservation (1080p): https://youtu.be/3ik6yQ-0fP8\n"
             "• 🔥 Pythagorean Theorem 25-Step Visual Proof (1080p): https://youtu.be/yZER1pGb2J8\n"
             "• 📐 Ceva's Theorem Visualized (1080p): https://youtu.be/aKmG-iKoieQ\n"
@@ -2830,6 +2850,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             "• ✨ Ceva's Theorem 45s #Shorts: https://youtube.com/shorts/dAJFCz19c0M"
         )
         yt_desc = (
+            f"🎬 [8-Min Masterclass Compilation (1080p)] 👉 https://youtu.be/9EL8pgqJtkY\n"
             f"{hook_en}\n\n"
             f"🚀 [Try It Yourself on the Free Interactive Math Platform (min7014.github.io/mathedu)]\n"
             f"1️⃣ 📐 Interactive GeoGebra Applet & 1,113 Visual Proof Video Board:\n👉 {board_url}&from=yt\n"
@@ -2850,42 +2871,57 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         yt_tags = [
             "Visual Math Proof", "Geometry Proof", "Proof Without Words", "Euclidean Geometry",
             "Pythagorean Theorem", "Ceva Theorem", "Menelaus Theorem", "GeoGebra", "Math Animation",
-            "3Blue1Brown style math", "Step by Step Math", "High School Geometry", "Math Olympiad",
-            "AMC Math", "SAT Math", "Visual Math Archive", "min7014_ai", "min7014"
+            "3Blue1Brown style math", "MindYourDecisions math", "Andy Math geometry", "Step by Step Math",
+            "High School Geometry", "Math Olympiad", "AMC Math", "SAT Math", "min7014_ai", "min7014"
         ]
     else:
         clean_ko_title = split_bilingual_title(script_doc.get("title", slug))[0]
         concise_ko = _smart_concise_topic_title(clean_ko_title, max_len=36, lang="ko")
         cat_type = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
         sub_label = "대수·수체계 원리" if cat_type in ("algebra", "number") else "시각적 기하 직관"
+        pat_idx_ko = sum(ord(c) for c in str(slug)) % 4
         if preset.get("title_ko"):
             yt_title = _balance_parentheses(preset["title_ko"][:98])
         else:
-            full_suffix_ko = f" — 눈으로 깨치는 {tot_p}단계 {sub_label} (1080p) | @min7014_ai"
-            compact_suffix_ko = f" ({tot_p}단계 {sub_label} · 1080p) | @min7014_ai"
-            if len(f"🔥 [시각적 증명] {concise_ko}{full_suffix_ko}") <= 98:
-                yt_title = f"🔥 [시각적 증명] {concise_ko}{full_suffix_ko}"
-            elif len(f"🔥 [시각적 증명] {concise_ko}{compact_suffix_ko}") <= 98:
-                yt_title = f"🔥 [시각적 증명] {concise_ko}{compact_suffix_ko}"
+            # [5대 인기 수학 채널 벤치마킹 (깨봉수학 · 3Blue1Brown · MindYourDecisions · Andy Math · Mathologer)]
+            # 천편일률적인 '[시각적 증명]' 접두사를 탈피하고 모바일 첫 25글자에 강력한 호기심 공백 훅을 배치합니다.
+            if pat_idx_ko == 0:
+                cand_ko = f"🔥 공식 외우지 마세요! {concise_ko}, 눈으로 깨치는 {tot_p}단계 시각 증명 | @min7014_ai"
+            elif pat_idx_ko == 1:
+                cand_ko = f"❓ 99%가 공식만 외우다 놓치는 {concise_ko}! {tot_p}단계 원리 해부 | @min7014_ai"
+            elif pat_idx_ko == 2:
+                prefix_ko = "⚡ 원리 딱 1개면 끝!" if cat_type in ("algebra", "number") else "⚡ 보조선 딱 1줄이면 끝!"
+                cand_ko = f"{prefix_ko} {concise_ko} ({tot_p}단계 {sub_label}) | @min7014_ai"
             else:
-                max_ko_len = max(16, 98 - len("🔥 [시각적 증명] ") - len(compact_suffix_ko))
-                short_ko_t = _smart_concise_topic_title(concise_ko, max_len=max_ko_len, lang="ko")
-                yt_title = f"🔥 [시각적 증명] {short_ko_t}{compact_suffix_ko}"
+                cand_ko = f"✨ 왜 항상 성립할까? {concise_ko} — 수식 없이 보는 {tot_p}단계 증명 | @min7014_ai"
+
+            if len(cand_ko) <= 98:
+                yt_title = _balance_parentheses(cand_ko)
+            else:
+                compact_suffix_ko = f" ({tot_p}단계 {sub_label} · 1080p) | @min7014_ai"
+                if len(f"🔥 {concise_ko}{compact_suffix_ko}") <= 98:
+                    yt_title = _balance_parentheses(f"🔥 {concise_ko}{compact_suffix_ko}")
+                else:
+                    max_ko_len = max(16, 98 - len("🔥 ") - len(compact_suffix_ko))
+                    short_ko_t = _smart_concise_topic_title(concise_ko, max_len=max_ko_len, lang="ko")
+                    yt_title = _balance_parentheses(f"🔥 {short_ko_t}{compact_suffix_ko}")
         hook_ko = preset.get("hook_ko") or (
-            f"공식 암기 없이 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 수학교사의 단계별 원리 분석으로 핵심 개념과 증명 과정이 한눈에 드러납니다."
+            f"무작정 공식을 외우지 마세요! 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 단계별 도형·수식 원리 분석으로 핵심 개념과 증명 과정이 한눈에 드러납니다."
         )
         quiz_ko = preset.get("quiz_ko") or (
-            f"💬 [오늘의 10초 유레카 퀴즈] 1페이지부터 {tot_p}페이지 중 결정적인 원리나 핵심 아이디어가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!"
+            f"💬 [오늘의 5초 유레카 퀴즈] 영상을 멈추고 생각해 보세요! 1페이지부터 {tot_p}페이지 중 증명 전체의 열쇠가 되는 결정적 원리가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!"
         )
         binge_ko = (
-            "🔥 [@min7014_ai 검증된 인기 시각적 증명 정주행 시리즈]\n"
+            "🔥 [@min7014_ai 검증된 인기 시각적 증명 & 8분+ 마스터클래스 정주행 시리즈]\n"
+            "• 🎬 [8분 마스터클래스] 공식 암기 끝! 보조선과 시각 직관으로 깨치는 6대 기하 증명 총정리: https://youtu.be/_5LE_BfLA5w\n"
             "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계 본편): https://youtu.be/DSgUHigl82o\n"
-            "• ❓ 피타고라스 정리 질문하는 수업 본편 (25단계): https://youtu.be/E7x3OZdC14U\n"
+            "• 🔥 피타고라스 정리 정사각형 넓이 분할 (25단계 본편): https://youtu.be/7a3e3rA-bfU\n"
             "• 📐 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/zvRgbIKm0jc\n"
-            "• 🔥 피타고라스 정리 45초 핵심 #Shorts (인기 1위): https://youtube.com/shorts/1RKQ4Uxu4Uw\n"
+            "• ⚡ 피타고라스 정리 45초 핵심 #Shorts (인기 1위): https://youtube.com/shorts/1RKQ4Uxu4Uw\n"
             "• ✨ 피타고라스 나무 45초 핵심 #Shorts (인기 2위): https://youtube.com/shorts/wSOzehSfEbY"
         )
         yt_desc = (
+            f"🎬 [8분+ 네온 시네마 마스터클래스 총정리 바로 보기] 👉 https://youtu.be/_5LE_BfLA5w\n"
             f"{hook_ko}\n\n"
             f"🚀 [영상을 본 직후 1초 만에 내 실력으로 만드는 수학홈페이지(mathedu) 무료 실습 링크]\n"
             f"1️⃣ 📐 방금 본 증명 도형 마우스로 직접 움직여보기 (GeoGebra & 1,113개 설명영상 게시판):\n👉 {board_url}&from=yt\n"
@@ -2907,7 +2943,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             "수학", "기하학", "시각적 증명", "수능 수학", "도형 보조선", "피타고라스 정리",
             "메넬라우스의 정리", "체바의 정리", "중학교 도형", "고등학교 수학", "수능 도형 킬러",
             "영재고 수학", "KMO 기하", "GeoGebra", "알지오매스", "단계별 수학 증명",
-            "시각적 수학 증명_AI", "min7014_ai", "min7014", "수학 잘하는 법"
+            "깨봉수학 스타일 직관 수학", "3Blue1Brown 한국어", "min7014_ai", "min7014", "수학 잘하는 법"
         ]
 
     return {
@@ -3664,17 +3700,17 @@ def refresh_all_youtube_metadata_packages():
             for lc in ["ko", "en"]:
                 if isinstance(sdoc["question_classroom_packages"].get(lc), dict):
                     sdoc["question_classroom_packages"][lc]["title"] = _balance_parentheses((
-                        f"❓ [질문하는 수학 수업] {_clean_ko_t} — 왜 항상 성립할까? (Notice & Wonder) | @min7014_ai"
+                        f"❓ 잠깐! 왜 항상 성립할까? {_clean_ko_t} — 질문하는 수학 수업 (Notice & Wonder) | @min7014_ai"
                         if lc == "ko"
-                        else f"❓ [Question-Asking Math] {_clean_en_t} — Notice & Wonder Visual Inquiry | @min7014_ai"
+                        else f"❓ Pause 3 Seconds! Why Does {_clean_en_t} Always Hold? (Socratic Math) | @min7014_ai"
                     )[:98])
         if isinstance(sdoc.get("question_shorts_packages"), dict):
             for lc in ["ko", "en"]:
                 if isinstance(sdoc["question_shorts_packages"].get(lc), dict):
                     sdoc["question_shorts_packages"][lc]["title"] = _balance_parentheses((
-                        f"❓ [질문하는 수학 #Shorts] {_clean_ko_t} — 왜 이 원리가 성립할까? #Shorts"
+                        f"❓ 3초만 먼저 생각! {_clean_ko_t} — 왜 이 원리가 성립할까? #Shorts"
                         if lc == "ko"
-                        else f"❓ [Question-Asking Math #Shorts] {_clean_en_t} — Visual Math Inquiry #Shorts"
+                        else f"❓ Can You Spot the Clue in 3s? {_clean_en_t} #Shorts #Math"
                     )[:98])
 
         sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -5519,19 +5555,23 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
 
     if lang_code == "ko":
         default_hook_ko = (
-            f"수학교사의 단계별 원리 해부! {concise_ko} 45초 완성"
+            f"공식 외우지 마세요! {concise_ko} 45초 원리 완성"
             if cat_type in ("algebra", "number")
-            else f"보조선 한 줄의 마법! {concise_ko} 45초 시각적 증명"
+            else f"보조선 딱 1줄의 마법! {concise_ko} 45초 시각 증명"
         )
         hook_ko = _smart_concise_topic_title(viral_hooks.get("ko") or default_hook_ko, max_len=48, lang="ko")
         short_title = f"🔥 {hook_ko} | {concise_ko} #Shorts #수학"
         if len(short_title) > 98:
+            short_title = f"🔥 공식 외우지 마세요! {concise_ko} 45초 시각 증명 #Shorts #수학"
+        if len(short_title) > 98:
             short_title = f"🔥 {concise_ko} — 45초 시각적 수학 증명 #Shorts #수학"
         desc = (
+            f"🎬 [1080p 전체 단계별 본편 & 8분 마스터클래스 바로 보기]\n"
+            f"👉 1080p 본편: {full_yt}\n"
+            f"👉 8분 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
+            f"👉 질문하는 수학 수업 본편: {full_q_yt}\n\n"
             f"⚡ [{clean_ko} — {round(duration_sec)}초 숏폼(#Shorts) 시각적 증명 하이라이트]\n"
             f"{hook_ko}\n\n"
-            f"🎬 1080p 전체 단계별 풀버전 설명영상 바로 보기:\n👉 {full_yt}\n"
-            f"❓ 1080p 질문하는 수학 수업 풀버전 바로 보기:\n👉 {full_q_yt}\n\n"
             f"🌐 [1초 클릭! 수학홈페이지 무료 실습 & 퀴즈 바로가기]\n"
             f"1️⃣ 방금 본 도형 마우스로 직접 움직여보기 (GeoGebra & 플립북 게시판):\n👉 {board_link}&from=yt_shorts\n"
             f"2️⃣ 5지선다 보기를 가리고 수식 블록 조립! 16,548문항 수능·모평 디딤돌 퀴즈:\n👉 https://min7014.github.io/mathedu/?from=yt_shorts\n"
@@ -5543,24 +5583,28 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
             f"[ID: {slug}_SHORT_KO]\n"
             f"#Shorts #수학 #기하학 #시각적증명 #{concise_ko.replace(' ', '')} #피타고라스 #보조선 #수능수학 #수학자료실 #min7014_ai"
         )
-        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", concise_ko, "수학자료실", "min7014_ai", "수능수학", "보조선"]
+        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", concise_ko, "깨봉수학 스타일", "min7014_ai", "수능수학", "보조선"]
     else:
-        hook_en = _smart_concise_topic_title(viral_hooks.get("en") or f"45s Visual Math Proof: {concise_en}", max_len=50, lang="en")
+        hook_en = _smart_concise_topic_title(viral_hooks.get("en") or f"Don't Memorize! {concise_en} in 45s", max_len=50, lang="en")
         short_title = f"🔥 {hook_en} | {concise_en} #Shorts #Math"
+        if len(short_title) > 98:
+            short_title = f"🔥 Don't Memorize! {concise_en} 45s Visual Proof #Shorts #Math"
         if len(short_title) > 98:
             short_title = f"🔥 {concise_en} — 45s Visual Math Proof #Shorts #Math"
         desc = (
+            f"🎬 [Watch Full 1080p Proof & 8-Min Masterclass Compilation]\n"
+            f"👉 Full 1080p Step-by-Step Video: {full_yt}\n"
+            f"👉 8-Min Geometry Masterclass: https://youtu.be/9EL8pgqJtkY\n"
+            f"👉 1080p Socratic Question Edition: {full_q_yt}\n\n"
             f"⚡ [{clean_en} — {round(duration_sec)}s Visual Math Proof #Shorts]\n"
             f"{hook_en}\n\n"
-            f"🎬 Watch Full 1080p Step-by-Step Proof Video:\n👉 {full_yt}\n"
-            f"❓ Watch 1080p Question-Asking Classroom Edition:\n👉 {full_q_yt}\n\n"
             f"📐 Interactive GeoGebra & Full 1,113 Math Video Board:\n👉 {board_link}\n\n"
             f"🔔 Subscribe to Visual Math Proofs AI (@min7014_ai):\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_EN]\n"
             f"#Shorts #Math #Geometry #VisualProof #MathShorts #ProofWithoutWords #GeoGebra #min7014_ai"
         )
-        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", concise_en, "VisualMathArchive", "min7014_ai", "GeoGebra"]
+        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", concise_en, "Andy Math style", "3Blue1Brown style", "min7014_ai", "GeoGebra"]
 
     return {
         "title": _balance_parentheses(short_title[:98]),

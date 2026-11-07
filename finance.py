@@ -794,6 +794,31 @@ def analyze_revenue_pipeline() -> dict:
             },
         },
         "monthly_target_krw": MONTHLY_REVENUE_TARGET_KRW,
+        "global_math_ed_reinvestment_flywheel": {
+            "core_mission": "https://min7014.github.io/ 원문 아이디어 기반 유튜브 수익 창출 ➔ 제미나이 울트라(Gemini Ultra) 및 AI 수학교육 R&D 비용 자급자족 ➔ 수학교육 자료의 질적·양적 폭발적 확장 ➔ 전 세계 최고 수학교육 플랫폼 구축",
+            "stage_1_gemini_ultra_self_sufficiency": {
+                "target_krw": 500_000,
+                "target_usd": 360,
+                "purpose": "제미나이 울트라(Gemini Ultra) 구독료 및 고성능 AI 수학교육 콘텐츠 제작 비용 100% 자급자족 (최소 필수 달성선)",
+                "required_daily_longform_views": 1_350,
+                "required_monthly_longform_views": 40_000,
+                "key_driver": "8분+ 네온 시네마 마스터클래스(미드롤 광고 3슬롯) + 북미·유럽 영어권(EN RPM ~$12.50) 동시 발행으로 일 조회수 1,350회만 돌파하면 즉시 달성",
+            },
+            "stage_2_qualitative_quantitative_math_rd_expansion": {
+                "target_krw": 3_000_000,
+                "target_usd": 2_200,
+                "purpose": "https://min7014.github.io/ 수학교육 자료의 질적·양적 대확장 (1,113개 전 주제 5대 에디션 + 인터랙티브 60fps 기하 셰이더 + 다국어 글로벌 확장)",
+                "required_daily_longform_views": 10_500,
+                "required_monthly_longform_views": 315_000,
+            },
+            "stage_3_world_leading_global_math_platform": {
+                "target_krw": 10_000_000,
+                "target_usd": 7_500,
+                "purpose": "전 세계 학생·교사가 무료로 배우는 글로벌 No.1 시각적 수학 증명 & 창의 구성주의 수학교육 사이트(min7014.github.io × mathedu × @min7014_ai) 완성",
+                "required_daily_longform_views": 32_000,
+                "required_monthly_longform_views": 950_000,
+            },
+        },
         "revenue_streams_blueprint": {
             "stream_1_youtube_longform": {
                 "target_krw": 6_500_000,
