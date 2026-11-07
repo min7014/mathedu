@@ -100,20 +100,48 @@
 
 ## 🎬 Part II. 공식 유튜브 채널 (`@min7014_ai`) 운영 정책
 
-### 정책 1. 전 주제 멀티 에디션(본편 + 숏폼, 한국어 KO + 영어 EN) 제작 체계 (`Video_Creator`)
-`min7014.github.io`의 모든 수학 개념 주제(847+ 단계별 시각 증명 PDF / 1,113개 전체 주제)에 대해 **한국어(`ko`)와 글로벌 영어(`en`) 이중 언어**로 다음 멀티 에디션 영상 세트를 제작·유지·동기화합니다.
+> [!IMPORTANT]
+> **👑 유튜브 채널(`@min7014_ai`) 운영의 최우선 절대 목표는 『월 1,000만 원(연 1.2억 원 이상) 지속 수익 달성』입니다.**
+> 모든 영상 기획(`Video_Creator`), 대본 및 발문 설계(`mathteacher`), 고클릭률 썸네일·시각 연출(`designer`), 외부 커뮤니티 바이럴(`pr`), 그리고 고단가 메타데이터·미드롤 편성(`finance`)은 **학생과 교사에게 100% 무료 교육을 제공하면서도 유튜브 알고리즘과 글로벌 광고 시장을 통해 월 1,000만 원 이상의 수익을 창출하는 것**을 최우선 기준으로 작동합니다.
 
-| 에디션 구분 | 로컬 작업 경로 규칙 (Git 추적 제외) | 해상도 / 비율 | 교육적 목적 및 핵심 연출 구조 |
+### 정책 1. [최우선 정책] 월 1,000만 원 수익 달성 마스터 전략 (`finance` × `Video_Creator` 총괄)
+
+#### 1.1 [1단계 관문] 유튜브 파트너 프로그램(YPP) 수익창출 승인 조건 최단기 돌파 및 심사 100% 통과
+1. **조건 A — 구독자 500명(얼리 액세스) ➔ 1,000명(정식 광고 수익창출) 최단기 돌파**:
+   - 전 영상 설명란 최상단, 고정댓글, 아웃트로 화면 및 수학홈페이지(`video_board.html`, `index.html`) 히어로 영역에 **1-클릭 구독 확인 링크(`https://www.youtube.com/@min7014_ai?sub_confirmation=1`)**를 상시 배치하여 시청자의 구독 전환율을 극대화합니다.
+2. **조건 B-1 — 롱폼 유효 공개 시청 시간 3,000시간 ➔ 4,000시간(240,000분) 돌파**:
+   - 개별 개념 영상(2~5분) 시청 후 이탈을 막기 위해 20~35분 분량의 **「단원별 시각적 증명 완전정복 마스터클래스 합본(1080p Long-Form Watch-Time Booster)」**(`python -X utf8 finance.py build-masterclass`)을 자동 생성·발행합니다.
+   - 시청자 1명당 평균 체류 시간을 4분에서 **25분 이상으로 6배 증폭**시키고, 공식 정주행 재생목록(Playlist) 연속 재생으로 연결합니다.
+3. **조건 B-2 — Shorts 유효 공개 조회수 300만 ➔ 1,000만 회 트랙 동시 가동**:
+   - 첫 3초 완성 도형 후킹과 36~46초 무한 루프(시청 지속률 APV **105%+** 타겟)로 설계된 일반형 `#Shorts`, 질문형 `Q-#Shorts`, 창의 아이디어 `Idea-#Shorts`를 대량 발행하여 알고리즘 쇼츠 피드를 선점합니다.
+4. **조건 C — YPP 인간 심사('반복적인 콘텐츠 / 재사용된 콘텐츠' 거절) 100% 원천 예방**:
+   - 단순 PDF 캡처 나열이나 기계적 반복 템플릿을 철저히 배제하고, `mathteacher`의 슬라이드별 고유 수식·교육학적 발문 해설 + `Video_Creator`의 동적 보조선 스포트라이트 + 탈-PDF 절차적 네온 블룸 시네마(`creative_idea_cinema.py`)로 독창적 교육 가치를 입증합니다.
+   - 수학 본질과 무관한 구형 소프트웨어 사용법(체크박스, 원노트 등) 대본은 자동 영구 퍼지(`_purge_non_math_tutorial_topics()`)하여 순수 수학 전문 채널 정체성을 유지합니다.
+   - `video_board.html`에 `<link rel="me" href="https://www.youtube.com/@min7014_ai">` 및 Schema.org `EducationalOrganization` `sameAs` 양방향 도메인 인증을 탑재하여 원저작자 공식 채널임을 증명합니다.
+
+#### 1.2 [2단계 본궤도] 월 1,000만 원(연 1.2억 원+) 3-Track 수익 포트폴리오 및 고단가 RPM 극대화
+| 수익 트랙 | 월 목표 수익 (비중) | 핵심 수익화 메커니즘 및 알고리즘 공략 정책 |
+| :--- | :--- | :--- |
+| **📺 Track 1.<br>유튜브 1080p 롱폼 &<br>8분+ 미드롤 광고** | **월 650만 원**<br>*(65%)* | • **한/영 이중 언어(KO + Global Tier-1 EN) 전 주제 동시 발행**: 한국어 수능·기하 강의(RPM ~4,500원)뿐만 아니라 광고 단가가 3배 이상 높은 북미·영국·호주·싱가포르 영어권(**RPM ~12,500원**) 영상을 동시 업로드하여 글로벌 달러($) 수익 극대화<br>• **8분+(480초 이상) 미드롤(Mid-Roll) 광고 활성화**: 질문하는 수업 본편 및 단원별 마스터클래스 합본을 8분 이상으로 편성하여 프리롤+미드롤+포스트롤 다중 광고 삽입(일반 영상 대비 **RPM 2.2배** 증폭)<br>• **고단가(High-RPM) SEO 키워드 자동 주입**:<br>  - `[KO]`: `수능수학`, `수학개념원리`, `기하학증명`, `수학공부법`, `고등수학`, `시각적증명`, `창의사고력수학`, `수능킬러문항`<br>  - `[EN]`: `SAT Math Prep`, `AP Calculus`, `AMC Math`, `Euclidean Geometry Proof`, `Visual Math Proof`, `STEM Education`, `3Blue1Brown Style` |
+| **📱 Track 2.<br>유튜브 9:16 `#Shorts`<br>피드 수익 & 본편 퍼널** | **월 150만 원**<br>*(15%)* | • **3종 바이럴 숏폼(일반형 · 질문형 · 창의 아이디어형) 대량 노출**: 모바일 쇼츠 피드에서 수백만 조회수를 확보하여 Shorts 피드 광고 수익 창출<br>• **Shorts ➔ 1080p 고수익 롱폼 직행 퍼널**: 쇼츠 하단 관련 동영상 링크, 고정댓글, 설명란을 통해 쇼츠 시청자를 RPM이 높은 1080p 본편 및 8분+ 마스터클래스로 즉시 유입 |
+| **🌐 Track 3.<br>유튜브 발 홈페이지 유입<br>웹 광고 & 보상형 상자** | **월 200만 원**<br>*(20%)* | • **유튜브 설명란 5대 딥링크 트래픽 회수**: 영상 시청 후 동적 GeoGebra 조작 및 16,548문항 기출 풀이를 위해 홈페이지(`min7014.github.io/mathedu`)로 유입된 트래픽을 Google AdSense, Kakao AdFit(`ads.txt` 인증), 3D 게임 보상형 스폰서 상자(`Rewarded Sponsor Chest`) 수익으로 전환 |
+
+---
+
+### 정책 2. 전 주제 멀티 에디션(본편 + 숏폼, 한국어 KO + 영어 EN) 제작 체계 (`Video_Creator`)
+월 1,000만 원 수익 포트폴리오를 뒷받침하기 위해, `min7014.github.io`의 모든 수학 개념 주제(847+ 단계별 시각 증명 PDF / 1,113개 전체 주제)에 대해 **한국어(`ko`)와 글로벌 영어(`en`) 이중 언어**로 다음 멀티 에디션 영상 세트를 제작·유지·동기화합니다.
+
+| 에디션 구분 | 로컬 작업 경로 규칙 (Git 추적 제외) | 해상도 / 비율 | 교육적 목적 및 수익·연출 구조 |
 | :--- | :--- | :--- | :--- |
-| **① [본편-일반형]**<br>일반적인 설명 영상<br>*(Standard Visual Proof)* | `youtube_uploads/{slug}/{slug}_ko.mp4`<br>`youtube_uploads/{slug}/{slug}_en.mp4` | `1920×1080`<br>(16:9) | • **목적**: 누구나 눈으로 보고 직관적으로 개념과 증명을 이해하는 표준 시각 증명 본편<br>• **구조**: 3초 완성 도형 클라이맥스 프리뷰 ➔ 단계별 플립북 도형 변화 & 친절한 내레이션 ➔ `-28dB` 사색 앰비언트 패드 & 유레카 차임벨 ➔ 요약 아웃트로 |
-| **② [본편-질문형]**<br>질문하는 수업 특화 영상<br>*(Question-Asking Classroom)* | `video_lectures/question_classroom/{slug}_q_ko.mp4`<br>`video_lectures/question_classroom/{slug}_q_en.mp4` | `1920×1080`<br>(16:9) | • **목적**: 2022 개정 교육과정 '질문하는 학교/수업' 및 학생 자기주도 탐구 수업에 즉시 활용하는 발문 중심 본편<br>• **구조**: 매 스텝을 **Phase 1 (36% · `🙋 [발문 · 먼저 생각해 보세요!]` 질문 배너 + 사고 멈춤 여유 타임)**과 **Phase 2 (64% · `💡 [시각적 단서 발견!]` 보조선 스포트라이트 + 원리 발견)**로 분리 렌더링 |
-| **③-A [숏폼-일반형]**<br>일반형 숏폼 영상<br>*(Standard Viral `#Shorts`)* | `video_lectures/shorts/{slug}_short_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_en.mp4` | `1080×1920`<br>(9:16, `<58s`) | • **목적**: 모바일 환경에서 45초 만에 핵심 시각 증명을 직관적으로 보여주는 일반형 숏폼<br>• **구조**: 3초 클라이맥스 프리뷰 ➔ 핵심 5단계 초고속 플립북 ➔ 상단 `⚡ 45초 시각적 수학 증명 #Shorts` HUD |
-| **③-B [숏폼-질문형]**<br>질문형 숏폼 영상<br>*(Question-Asking `Q-#Shorts`)* | `video_lectures/shorts/{slug}_short_q_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_q_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_q_en.mp4` | `1080×1920`<br>(9:16, `<58s`) | • **목적**: 모바일 숏폼에서도 학생에게 먼저 핵심 질문을 던지고 스스로 생각하게 만든 뒤 단서를 공개하는 질문형 숏폼<br>• **구조**: 상단 크림슨-골드 플로팅 발문 카드(`Notice & Wonder` ➔ `소크라테스 보조선 발문` ➔ `What-If-Not 조건 변형 질문`) + 각 장면 전반부(`🙋 Phase 1 발문`)와 후반부(`💡 Phase 2 단서 발견!`) 2단 구성 |
-| **④-A [본편-창의확장형]**<br>탈-PDF 창의 아이디어 시네마<br>*(Pure Procedural Idea Cinema)* | `video_lectures/creative_idea/{slug}_idea_ko.mp4`<br>`video_lectures/creative_idea/{slug}_idea_en.mp4` | `1920×1080`<br>(16:9) | • **목적**: PDF 캡처 이미지를 단 1픽셀도 쓰지 않고 주제의 핵심 수학적 아이디어만을 추출해 풀스크린 다크 벨벳 네온 블룸 절차적 벡터 애니메이션으로 구현한 5막 시네마 (`creative_idea_cinema.py`)<br>• **5막 구조**: ① 직관 역설 ➔ ② 라이브 숫자·도형 실험 ➔ ③ 단 한 줄 보조선 아이디어 ➔ ④ What-If-Not 조건 변형 확장 ➔ ⑤ 수능·경시 10초 통찰 |
-| **④-B [숏폼-창의확장형]**<br>창의 아이디어 숏폼<br>*(Creative `Idea-#Shorts`)* | `video_lectures/shorts/{slug}_short_idea_ko.mp4`<br>`video_lectures/shorts/{slug}_short_idea_en.mp4` | `1080×1920`<br>(9:16, `<58s`) | • **목적**: PDF 페이지 넘김 없이 다크 벨벳 네온 블룸 동적 시뮬레이션과 핵심 아이디어 4막을 44초 안에 보여주는 바이럴 아이디어 숏폼 (`creative_idea_cinema.py`) |
-| **⑤ [마스터클래스 합본]**<br>단원별 8분+ 심층 합본<br>*(8-Min+ Masterclass)* | `video_lectures/masterclasses/` | `1920×1080`<br>(16:9, `480s+`) | • **목적**: 단원별 연계 주제를 심층 통합하여 완결성 높은 마스터클래스 학습과 유튜브 미드롤(Mid-Roll) 최적화를 동시에 달성 |
+| **① [본편-일반형]**<br>일반적인 설명 영상<br>*(Standard Visual Proof)* | `youtube_uploads/{slug}/{slug}_ko.mp4`<br>`youtube_uploads/{slug}/{slug}_en.mp4` | `1920×1080`<br>(16:9) | • **목적**: 누구나 눈으로 보고 직관적으로 개념과 증명을 이해하는 표준 시각 증명 본편 (KO/EN 기본 롱폼 광고 수익원)<br>• **구조**: 3초 완성 도형 클라이맥스 프리뷰 ➔ 단계별 플립북 도형 변화 & 친절한 내레이션 ➔ `-28dB` 사색 앰비언트 패드 & 유레카 차임벨 ➔ 요약 아웃트로 |
+| **② [본편-질문형]**<br>질문하는 수업 특화 영상<br>*(Question-Asking Classroom)* | `video_lectures/question_classroom/{slug}_q_ko.mp4`<br>`video_lectures/question_classroom/{slug}_q_en.mp4` | `1920×1080`<br>(16:9) | • **목적**: '질문하는 학교/수업' 및 자기주도 탐구용 발문 중심 본편 (사고 멈춤 타임으로 평균 시청 지속 시간 극대화)<br>• **구조**: 매 스텝을 **Phase 1 (36% · `🙋 [발문 · 먼저 생각해 보세요!]` 질문 배너 + 사고 멈춤 여유 타임)**과 **Phase 2 (64% · `💡 [시각적 단서 발견!]` 보조선 스포트라이트 + 원리 발견)**로 분리 렌더링 |
+| **③-A [숏폼-일반형]**<br>일반형 숏폼 영상<br>*(Standard Viral `#Shorts`)* | `video_lectures/shorts/{slug}_short_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_en.mp4` | `1080×1920`<br>(9:16, `<58s`) | • **목적**: 모바일 환경에서 45초 만에 핵심 시각 증명을 직관적으로 보여주는 일반형 숏폼 (대규모 신규 구독자 유입 엔진)<br>• **구조**: 3초 클라이맥스 프리뷰 ➔ 핵심 5단계 초고속 플립북 ➔ 상단 `⚡ 45초 시각적 수학 증명 #Shorts` HUD |
+| **③-B [숏폼-질문형]**<br>질문형 숏폼 영상<br>*(Question-Asking `Q-#Shorts`)* | `video_lectures/shorts/{slug}_short_q_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_q_ko.mp4`<br>`youtube_uploads/shorts/{slug}_short_q_en.mp4` | `1080×1920`<br>(9:16, `<58s`) | • **목적**: 모바일 숏폼에서 먼저 핵심 질문을 던져 댓글 참여와 재시청률(APV 105%+)을 폭발시키는 질문형 숏폼<br>• **구조**: 상단 크림슨-골드 플로팅 발문 카드(`Notice & Wonder` ➔ `소크라테스 보조선 발문` ➔ `What-If-Not 조건 변형 질문`) + 전반부(`🙋 Phase 1 발문`)와 후반부(`💡 Phase 2 단서 발견!`) 2단 구성 |
+| **④-A [본편-창의확장형]**<br>탈-PDF 창의 아이디어 시네마<br>*(Pure Procedural Idea Cinema)* | `video_lectures/creative_idea/{slug}_idea_ko.mp4`<br>`video_lectures/creative_idea/{slug}_idea_en.mp4` | `1920×1080`<br>(16:9) | • **목적**: PDF 캡처 이미지를 단 1픽셀도 쓰지 않고 주제의 핵심 수학적 아이디어만을 추출해 풀스크린 다크 벨벳 네온 블룸 절차적 벡터 애니메이션으로 구현한 5막 시네마 (`creative_idea_cinema.py` · 글로벌 `3Blue1Brown` 타겟 고단가 EN 주력 에디션)<br>• **5막 구조**: ① 직관 역설 ➔ ② 라이브 숫자·도형 실험 ➔ ③ 단 한 줄 보조선 아이디어 ➔ ④ What-If-Not 조건 변형 확장 ➔ ⑤ 수능·경시 10초 통찰 |
+| **④-B [숏폼-창의확장형]**<br>창의 아이디어 숏폼<br>*(Creative `Idea-#Shorts`)* | `video_lectures/shorts/{slug}_short_idea_ko.mp4`<br>`video_lectures/shorts/{slug}_short_idea_en.mp4` | `1080×1920`<br>(9:16, `<58s`) | • **목적**: PDF 페이지 넘김 없이 다크 벨벳 네온 블룸 동적 시뮬레이션과 핵심 아이디어 4막을 44초 안에 보여주는 고지속률 바이럴 아이디어 숏폼 (`creative_idea_cinema.py`) |
+| **⑤ [마스터클래스 합본]**<br>단원별 8분+ 심층 합본<br>*(8-Min+ Masterclass)* | `youtube_uploads/masterclasses/`<br>`video_lectures/masterclasses/` | `1920×1080`<br>(16:9, `480s+`) | • **목적**: 단원별 연계 주제를 8분~35분 분량으로 심층 통합하여 **YPP 4,000시간 시청 시간 조기 달성 및 미드롤(Mid-Roll) 광고 수익 2.2배 극대화** |
 
-### 정책 2. 수학교사(`mathteacher`) 관점 영상-내용 100% 일치 검증 정책 (Zero-Mismatch Mandate)
+### 정책 3. 수학교사(`mathteacher`) 관점 영상-내용 100% 일치 검증 정책 (Zero-Mismatch Mandate)
 1. **슬라이드별 실제 수식·색상·공간 배치 기반 정밀 대본 생성**:
    - `min7014_video_maker.py`의 `analyze_min7014_topic_as_mathteacher` 및 `auto_generate_page_explanations`를 통해 PDF 각 슬라이드의 **좌측 상단(가정)**, **우측 상단(결론)**, **하단 초록색(보조선)**, **하단 보라색/파란색(합동·닮음·대수 변형)**, **하단 빨간색(Q.E.D.)** 및 직전 슬라이드 대비 새로 추가된 수식(`curr_lines - prev_text_lines`)을 정밀 해독합니다.
 2. **수학적 영역 및 세부 개념의 엄밀한 분리**:
@@ -125,43 +153,38 @@
    - 모든 영상은 유튜브 업로드 직전 ① PDF 실제 페이지 수와 대본 페이지 수 100% 일치, ② 한/영 제목 분리(`split_bilingual_title`) 무결성, ③ 무관 후킹 문구 `0%`, ④ 최소 재생 시간(`duration >= max(12.0, page_count * 2.2)`)을 검증합니다.
    - 기준 미달 또는 구버전 영상은 `video_lectures/youtube_delete_queue.json`에 등록하여 유튜브 채널에서 자동 삭제(`videos().delete`)하고 새 엔진으로 재렌더링하여 교체 업로드합니다.
 
-### 정책 3. 영상 내 개인 호칭(`"민은기 선생님"` 등) 의도적 배제 및 순수 수학 강의 원칙
+### 정책 4. 영상 내 개인 호칭(`"민은기 선생님"` 등) 의도적 배제 및 순수 수학 강의 원칙
 1. **인물 호칭 `0건` 절대 원칙**:
    - 모든 수학 강의 영상의 음성 내레이션(TTS), 자막(`.srt`), 슬라이드 상·하단 오버레이, 1280×720 썸네일, 유튜브 제목·설명·태그에서 **`"민은기 선생님"`, `"민은기"`, `"Min's Math Lab"`, `"Min Eunki"` 등의 인물 호칭을 의도적으로 절대 사용하지 않습니다**.
 2. **순수 수학 본질 집중 및 전수 감사**:
    - 영상은 오직 순수한 수학 개념·정의·시각적 증명 논리만 전달하며, 렌더링 전후 `python -X utf8 mathteacher.py audit-videos` 및 `python -X utf8 video_creator.py audit`를 통해 개인 호칭 `0건`을 상시 검증합니다.
 
-### 정책 4. 유튜브 채널(`@min7014_ai`) 전용 연결 및 GitHub 영상 용량 ZERO 정책 (Zero GitHub Storage Mandate)
+### 정책 5. 유튜브 채널(`@min7014_ai`) 전용 연결 및 GitHub 영상 용량 ZERO 정책 (Zero GitHub Storage Mandate)
 1. **Git / GitHub 영상 파일 커밋 영구 금지**:
    - 모든 영상 및 오디오 파일(`*.mp4`, `*.webm`, `*.mov`, `*.mkv`, `*.wav`, `*.mp3`, `youtube_uploads/`, `video_lectures/videos/`, `video_lectures/shorts/`, `video_lectures/question_classroom/`, `video_lectures/creative_idea/`, `video_lectures/masterclasses/`, `video_lectures/youtube_packages/`)과 유튜브 인증 토큰(`youtube_client_secret.json`, `youtube_token*.json`)은 `.gitignore`로 영구 차단하며, **GitHub 저장소 용량을 단 1바이트도 영상 파일에 사용하지 않습니다**.
 2. **홈페이지 내 100% 유튜브 인터넷 주소 링크 연결**:
    - 로컬에 생성된 `.mp4` 파일은 오직 `@min7014_ai` 유튜브 채널 업로드용으로만 사용합니다.
-   - 수학홈페이지(`video_board.html`, `index.html`, `video_lectures/catalog.json`, `video_lectures/vault_index.json`, `assets/min7014_deep_knowledge.json`)에는 로컬 파일 경로가 아닌 **유튜브 채널 인터넷 주소(`https://youtu.be/...`, `https://youtube.com/shorts/...`, `https://www.youtube.com/@min7014_ai`)만** 연결하여 빠르고 쾌적한 스트리밍을 보장합니다.
+   - 수학홈페이지(`video_board.html`, `index.html`, `video_lectures/catalog.json`, `video_lectures/vault_index.json`, `assets/min7014_deep_knowledge.json`)에는 로컬 파일 경로가 아닌 **유튜브 채널 인터넷 주소(`https://youtu.be/...`, `https://youtube.com/shorts/...`, `https://www.youtube.com/@min7014_ai`)만** 연결하여 빠르고 쾌적한 스트리밍과 유튜브 조회수·광고 수익 집중을 동시에 달성합니다.
 
 ---
 
-## 🚀 Part III. 유튜브 ↔ 홈페이지 양방향 홍보(`pr`) 및 지속 가능 수익화(`finance`) 정책
+## 🚀 Part III. 유튜브 ↔ 홈페이지 양방향 바이럴 홍보(`pr`) 및 웹 수익 연동 정책
 
-### 정책 1. 유튜브(`@min7014_ai`) ↔ 수학홈페이지(`mathedu`) 양방향 바이럴 퍼널 정책 (`pr`)
+### 정책 1. 유튜브(`@min7014_ai`) ↔ 수학홈페이지(`mathedu`) 양방향 트래픽·수익 증폭 퍼널 (`pr`)
 1. **유튜브 ➔ 홈페이지 유입 퍼널 의무화**:
    - 모든 1080p 본편 및 9:16 `#Shorts` 영상 하단 바에 홈페이지 주소(`min7014.github.io/mathedu`)를 상시 각인합니다.
    - 모든 유튜브 영상 설명란 최상단 및 고정댓글에 **5대 홈페이지 직행 딥링크**(① 단계별 시각 증명 보드 `video_board.html?slug=...`, ② GeoGebra/AlgeoMath 동적 조작, ③ 탈-5지선다 연계 기출 퀴즈 `index.html?q=...`, ④ 질문하는 수업 워크시트, ⑤ 3D 수학 보스 레이드 도전장 `?challenge=...`)를 자동 삽입합니다.
-2. **홈페이지 ➔ 유튜브 유입 퍼널 의무화**:
-   - 홈페이지 메인 화면, `video_board.html`, 그리고 16,548문항 모든 풀이 화면 상단에 `🎬 @min7014_ai 유튜브 시각 증명` 직행 버튼과 `📢 유튜브+문제 1초 홍보 공유` 스튜디오(`#homePrAgentStudioBox`)를 상시 배치합니다.
+2. **홈페이지 ➔ 유튜브 구독·시청 유입 퍼널 의무화**:
+   - 홈페이지 메인 화면, `video_board.html`, 그리고 16,548문항 모든 풀이 화면 상단에 `🎬 @min7014_ai 유튜브 시각 증명` 직행 버튼, `🔔 1초 구독하기(?sub_confirmation=1)`, `📢 유튜브+문제 1초 홍보 공유` 스튜디오(`#homePrAgentStudioBox`)를 상시 배치하여 홈페이지 방문자를 유튜브 구독자 및 시청 시간으로 전환합니다.
 3. **7대 외부 채널 맞춤형 캠페인 및 SEO/GEO 자동 동기화**:
    - 새 영상·자료가 추가될 때마다 ① 유튜브 고정댓글, ② 카카오톡 단톡방 1초 도전장, ③ 수험생 커뮤니티(수만휘·오르비 등), ④ 전국 수학교사 커뮤니티(인디스쿨 등), ⑤ 인스타그램·블로그 `#공스타그램`, ⑥ 학부모 교육 카페, ⑦ 글로벌 EdTech(Reddit `r/learnmath` 등) 맞춤형 홍보 문구와 1200×630 고대비 오픈그래프 배너(`assets/pr_cards/pr_card_*.png`)를 자동 생성합니다.
    - 구글·네이버 검색엔진(`sitemap.xml`, Schema.org) 및 생성형 AI 검색엔진(`llms.txt`) 메타데이터를 최신 상태로 자동 유지합니다.
 
-### 정책 2. 100% 무료 교육 보장 기반 월 1,000만 원+ 통합 광고 수익화 정책 (`finance`)
-학생과 교사에게는 모든 콘텐츠를 **평생 100% 무료**로 제공하면서, 플랫폼의 지속 가능한 운영과 확장을 위해 **3-Track 클린 교육 광고 수익 모델(목표: 월 1,000만 원 / 연 1.2억 원 이상)**을 운영합니다.
-1. **📺 Track 1: 유튜브 1080p 롱폼 광고 수익 (목표: 월 650만 원 · 비중 65%)**:
-   - **한/영 이중 언어(KO + Global Tier-1 EN) 고단가 타겟팅**: 한국어 수능·기하 강의(RPM ~4,500원)와 함께 광고 단가가 3배 이상 높은 북미·영국·호주·싱가포르 영어권(RPM ~12,500원, `SAT Math`, `AP Calculus`, `Euclidean Geometry Proof`, `3Blue1Brown Style Visual Math`) 영상을 전 주제 동시 발행합니다.
-   - **8분+(480초 이상) 미드롤(Mid-Roll) 광고 활성화**: 질문하는 수업 본편 및 단원별 마스터클래스 합본을 8분 이상으로 편성하여 조회당 수익(RPM)을 2.2배 극대화합니다.
-2. **📱 Track 2: 유튜브 9:16 `#Shorts` 피드 수익 & 본편 유입 퍼널 (목표: 월 150만 원 · 비중 15%)**:
-   - 일반형 `#Shorts` + 질문형 `Q-#Shorts` + 창의 아이디어 `Idea-#Shorts`(36~46초 루프 설계, 시청 지속률 105%+ 타겟)로 대규모 노출을 확보하고 시청자를 고수익 1080p 본편 및 홈페이지로 유입시킵니다.
-3. **🌐 Track 3: 수학홈페이지 웹 애드센스 · 애드핏 & 인게임 보상형 상자 (목표: 월 200만 원 · 비중 20%)**:
-   - `ads.txt` 무결성 유지 및 학습 흐름을 방해하지 않는 클린 네이티브 배너 슬롯(Google AdSense / Kakao AdFit)을 운영합니다.
-   - 3D 수학 게임 내 자율 선택형 **보상형 스폰서 상자(`Rewarded Sponsor Chest`)**를 통해 학습 몰입도를 해치지 않으면서 추가 교육 수익을 창출합니다.
+### 정책 2. 수학홈페이지 클린 웹 광고 및 인게임 보상형 수익 연동 (`finance`)
+1. **100% 무료 학습 보장 원칙**: 학생과 교사에게는 모든 강의·자료·16,548문항·3D 게임을 유료 결제 장벽 없이 평생 무료로 제공합니다.
+2. **클린 네이티브 배너 및 보상형 상자 운영**:
+   - `ads.txt` 무결성을 유지하며 학습 흐름을 방해하지 않는 네이티브 배너 슬롯(Google AdSense / Kakao AdFit)을 운영합니다.
+   - 3D 수학 게임 내 자율 선택형 **보상형 스폰서 상자(`Rewarded Sponsor Chest`)**를 통해 학습 몰입도를 해치지 않으면서 Part II의 월 1,000만 원 수익 목표 중 웹 트랙(월 200만 원)을 뒷받침합니다.
 
 ---
 
@@ -198,3 +221,4 @@ python -X utf8 build_offline_quizzes.py
 python -X utf8 audit_engine.py
 python -X utf8 audit_full_mathedu.py
 ```
+
