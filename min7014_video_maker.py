@@ -2563,6 +2563,18 @@ CONCISE_TITLE_REWRITES_KO = {
     "원의 중심에서 현에 내린 수선은 그 현을 이등분한다": "원의 중심에서 현에 내린 수선의 성질",
     "제한된 범위에서 이차함수의 최대최소": "제한된 범위의 이차함수 최대·최소",
     "작도와 경사하강법을 활용한 삼각형의 페르마 점": "삼각형의 페르마 점 (작도와 경사하강법)",
+    "삼각형의 세 내각의 이등분선은 한 점(내심)에서 만나고": "삼각형의 내심과 세 내각의 이등분선 정리",
+    "삼각형의 세 변의 수직이등분선은 한 점(외심)에서 만나고": "삼각형의 외심과 세 변의 수직이등분선 정리",
+    "RHS 합동 : 두 직각삼각형의 빗변의 길이와 다른 한 변의": "직각삼각형의 RHS 합동 조건과 시각적 증명",
+    "RHA 합동 : 직각삼각형의 빗변의 길이와 한 예각의": "직각삼각형의 RHA 합동 조건과 시각적 증명",
+    "삼각형의 두 내각의 크기가 같으면 이등변 삼각형이다": "이등변삼각형이 되는 조건 (두 내각의 크기)",
+    "이등변삼각형의 꼭지각의 이등분선은 밑변을 수직 이등분한다": "이등변삼각형 꼭지각의 이등분선과 밑변 수직이등분",
+    "이등변삼각형의 두 밑각의 크기는 같다": "이등변삼각형의 두 밑각의 크기가 같은 이유",
+    "원에서 한 호에 대한 원주각은 중심각의 크기의 반이다": "원주각과 중심각의 크기 관계 (원주각 = ½ 중심각)",
+    "원의 접선과 그 접점을 지나는 현이 이루는 각의 크기는": "접선과 현이 이루는 각의 정리 (접현각 = 원주각)",
+    "주어진 원의 중심과 원 밖의 한 점을 지름의 양 끝점으로": "원 밖의 한 점에서 원에 그은 접선의 작도 원리",
+    "평행선 사이의 선분의 길이의 비": "평행선 사이의 선분의 길이의 비 정리",
+    "정사각형의 한 변의 길이와 넓이": "정사각형의 한 변의 길이와 넓이 (제곱근의 기하학)",
 }
 
 CONCISE_TITLE_REWRITES_EN = {
@@ -2573,6 +2585,20 @@ CONCISE_TITLE_REWRITES_EN = {
     "Positive and Negative Square Root": "Positive & Negative Square Roots",
     "Maximum and minimum of a quadratic function in a restricted range": "Max & Min of a Quadratic Function",
     "Fermat Point of a Triangle using Construction and Gradient Descent": "Fermat Point of a Triangle",
+    "The bisector of three angles of a triangle": "Triangle Incenter & Angle Bisectors Theorem",
+    "Understanding of Triangle Circumcenter": "Triangle Circumcenter Visual Proof",
+    "Understanding of Triangle Incenter": "Triangle Incenter Visual Proof",
+    "The vertical bisector of the three sides": "Triangle Circumcenter & Perpendicular Bisectors",
+    "The Area of 6-5-4 Length Triangles": "Area of a 6-5-4 Triangle Without Heron's Formula",
+    "RHS Congruent : If two right-angled": "RHS Right Triangle Congruence Theorem",
+    "RHA Congruent : If two right-angled": "RHA Right Triangle Congruence Theorem",
+    "If a triangle has 2 conguent angles": "Isosceles Triangle Converse Theorem",
+    "If a triangle has 2 congruent angles": "Isosceles Triangle Converse Theorem",
+    "The bisector of the apex angle": "Isosceles Triangle Apex Angle Bisector Theorem",
+    "The base angles of an isosceles": "Base Angles of an Isosceles Triangle Theorem",
+    "In any circle, a circumferential angle is half": "Inscribed Angle Theorem (Half the Central Angle)",
+    "An angle between a chord and a tangent": "Alternate Segment Theorem (Chord-Tangent Angle)",
+    "For a circle with the center of a given circle": "Constructing Tangents to a Circle (Thales' Circle)",
 }
 
 
@@ -2584,30 +2610,54 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
     t = re.sub(r"\s+", " ", (raw_title or "")).strip()
     if " — " in t:
         t = t.split(" — ")[0].strip()
+    exact_formula_map_ko = {
+        "y=x²": "이차함수 y=x² 그래프의 대칭과 원리",
+        "y=ax²": "이차함수 y=ax² 그래프 폭과 계수 a의 비밀",
+        "y=(x-p)²": "이차함수 y=(x-p)² x축 평행이동 부호의 비밀",
+        "y=x² V.S. y=(x-2)²": "이차함수 y=x² vs y=(x-2)² 평행이동 완전 비교",
+        "y=ax²+q": "이차함수 y=ax²+q y축 평행이동의 원리",
+    }
+    exact_formula_map_en = {
+        "y=x²": "Parabola y=x² Symmetry & Vertex Visual Proof",
+        "y=ax²": "How Coefficient 'a' Shapes Parabola y=ax²",
+        "y=(x-p)²": "Why Parabola y=(x-p)² Shifts Horizontally",
+        "y=x² V.S. y=(x-2)²": "Parabola Shift y=x² vs y=(x-2)² Visualized",
+        "y=ax²+q": "Vertical Shift of Parabola y=ax²+q Visualized",
+    }
+    if lang == "en" and t in exact_formula_map_en:
+        return exact_formula_map_en[t]
+    if lang != "en" and t in exact_formula_map_ko:
+        return exact_formula_map_ko[t]
+
     if lang == "en":
         for k, v in CONCISE_TITLE_REWRITES_EN.items():
-            if t.lower().startswith(k.lower()[:28]):
+            if t.lower().startswith(k.lower()[:24]):
                 t = v
                 break
     else:
         for k, v in CONCISE_TITLE_REWRITES_KO.items():
-            if t.startswith(k[:18]):
+            if t.startswith(k[:15]):
                 t = v
                 break
     t = _balance_parentheses(t)
     if len(t) <= max_len:
         return t
-    # 단어 경계(Word Boundary)에서만 절단하고 끝에 남은 전치사/관사/조사 제거
+    # 단어 경계(Word Boundary)에서만 절단하고 끝에 남은 전치사/관사/조사/연결어미 제거
     cut = t[:max_len].rsplit(" ", 1)[0].strip() if " " in t[:max_len] else t[:max_len].strip()
     if lang == "en":
         while True:
-            m_tail = re.search(r"\b(of|the|and|in|on|when|with|from|to|a|an|by|via|for|at|is|are|that|if)\s*$", cut, re.IGNORECASE)
+            m_tail = re.search(r"\b(of|the|and|in|on|when|with|from|to|a|an|by|via|for|at|is|are|that|if|has|two|one|three)\s*$", cut, re.IGNORECASE)
             if m_tail and len(cut[:m_tail.start()].strip()) >= 10:
                 cut = cut[:m_tail.start()].strip()
             else:
                 break
     else:
-        cut = re.sub(r"\s+(의|에|에서|할|때|와|과|은|는|이|가|을|를|각각의|교점에서)\s*$", "", cut).strip()
+        while True:
+            m_tail_ko = re.search(r"\s+(의|에|에서|할|때|와|과|은|는|이|가|을|를|각각의|교점에서|만나고|이고|이면|같으면|길이가|크기가|각각|같을|다른|한|두|세|변의|예각의|내각의|점\(외심\)에|점\(내심\)에|선분의|끝점에서|끝)\s*$", cut)
+            if m_tail_ko and len(cut[:m_tail_ko.start()].strip()) >= 6:
+                cut = cut[:m_tail_ko.start()].strip()
+            else:
+                break
     return _balance_parentheses(cut)
 
 
@@ -6922,6 +6972,60 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                 # [Step 1-D] 업데이트된 영상 및 미업로드 영상 API 자동 업로드 (기존 영상 삭제 후 새 영상 업로드)
                 priority_5_shorts = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
                 newly_uploaded_batch = 0
+
+                # [최우선 0순위]: 🌟 10분+ 미드롤 순수 네온 마스터클래스 & 탈-PDF 창의 아이디어 시네마 12대 대표작 우선 업로드!
+                try:
+                    import importlib
+                    import finance
+                    import creative_idea_cinema as cidea
+                    importlib.reload(finance)
+                    importlib.reload(cidea)
+                    # 잔여 8개 라이브 영상 잘린 제목 자동 복구 (쿼터 리셋 즉시 1회 완결)
+                    yt_rep, _ = get_available_youtube_upload_service()
+                    if yt_rep is not None:
+                        rem_fixes = {
+                            "_o7WXc7zCO4": "✨ Intersecting Secants Theorem (PA·PB = PC·PD Power of a Point) — Visual Proof (24 Steps · 1080p) | @min7014_ai",
+                            "0bun91jq5_o": "🔥 Intersecting Secants Theorem (PA·PB = PC·PD) — 45s Visual Math Proof #Shorts #Math",
+                            "srRZdzClEzk": "🔥 원 외부 할선의 정리 (PA·PB = PC·PD) — 연장선의 교점 45초 시각적 수학 증명 #Shorts #수학",
+                            "uSBjCl_ozqo": "✨ Parallel Lines & Proportional Line Segments Theorem — Visual Math Proof (52 Steps · 1080p) | @min7014_ai",
+                            "YJVDlEYH5Bg": "🔥 Parallel Lines & Proportional Segments Theorem — 45s Visual Math Proof #Shorts #Math",
+                            "as-VfnFEVSg": "🔥 Menelaus' Theorem: One Parallel Line Unlocks It! — 45s Visual Math Proof #Shorts #Math",
+                            "dAJFCz19c0M": "🔥 Ceva's Theorem: Area Ratio Visual Proof in 45 Seconds! #Shorts #Math #Geometry",
+                            "7Ywal5oTbyU": "🔥 The Pythagorean Theorem (a²+b²=c²) — 45s Visual Area Proof #Shorts #Math",
+                        }
+                        try:
+                            vr = yt_rep.videos().list(part="snippet", id=",".join(rem_fixes.keys())).execute()
+                            for vit in vr.get("items", []):
+                                vid_r = vit["id"]
+                                sn_r = vit["snippet"]
+                                if sn_r.get("title") != rem_fixes[vid_r]:
+                                    sn_r["title"] = rem_fixes[vid_r][:100]
+                                    yt_rep.videos().update(part="snippet", body={"id": vid_r, "snippet": sn_r}).execute()
+                        except Exception:
+                            pass
+                    mc_up0 = finance.upload_pending_masterclass_to_youtube(max_uploads=1)
+                    if mc_up0 > 0:
+                        newly_uploaded_batch += mc_up0
+                    for idea_prio_slug in ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"]:
+                        sp_id = SCRIPTS_DIR / f"{idea_prio_slug}.json"
+                        if not sp_id.exists():
+                            continue
+                        sdoc_id = json.loads(sp_id.read_text(encoding="utf-8"))
+                        iu_map = sdoc_id.get("creative_idea_youtube_urls") or {}
+                        ip_map = sdoc_id.get("creative_idea_packages") or {}
+                        if (not (iu_map.get("ko") or "").strip() or (ip_map.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{idea_prio_slug}_idea_ko.mp4").exists():
+                            r_ic0 = cidea.upload_creative_idea_to_youtube(idea_prio_slug, langs=("ko", "en"))
+                            if r_ic0:
+                                newly_uploaded_batch += 1
+                        isu_map = sdoc_id.get("creative_idea_shorts_urls") or {}
+                        isp_map = sdoc_id.get("creative_idea_shorts_packages") or {}
+                        if (not (isu_map.get("ko") or "").strip() or (isp_map.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "shorts" / f"{idea_prio_slug}_short_idea_ko.mp4").exists():
+                            r_is0 = cidea.upload_creative_idea_short_to_youtube(idea_prio_slug, langs=("ko", "en"))
+                            if r_is0:
+                                newly_uploaded_batch += 1
+                except Exception as idea0_err:
+                    if "Quota exceeded" not in str(idea0_err) and "exhausted" not in str(idea0_err):
+                        print(f"[Priority 0 Neon-Bloom Upload Notice] {idea0_err}", flush=True)
 
                 for q_prio_slug in ["math20250130001", "2014111902", "2014111901", "2017090101"]:
                     sp_qp = SCRIPTS_DIR / f"{q_prio_slug}.json"

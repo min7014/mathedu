@@ -1874,6 +1874,45 @@ def render_pure_procedural_scene(
     return _composite_neon_bloom(base_rgb, glow_rgba, crisp_rgba)
 
 
+def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_code: str = "ko", is_short: bool = False) -> str:
+    """
+    [월 1,000만 원 CTR 극대화 엔진]
+    첫 25글자(모바일 화면 노출 구간)에 브래킷 라벨 대신 강렬한 호기심 공백(Curiosity Gap) 훅과
+    핵심 수학 키워드를 직결하여 클릭률(CTR)을 극대화합니다.
+    """
+    hooks_ko = {
+        "pythagoras_fractal": f"🔥 공식 암기는 그만! {clean_title}, 넓이가 영원히 보존되는 단 1가지 이유",
+        "conic_reflection": f"🔥 왜 모든 빛은 반드시 한 점(초점)에 모일까? | {clean_title}",
+        "trig_harmonic": f"🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | {clean_title}",
+        "fibonacci_golden": f"🔥 해바라기와 은하 나선에 숨겨진 137.5° 황금비의 비밀! | {clean_title}",
+        "prob_galton": f"🔥 무작위 우연이 수천 번 쌓이면 왜 완벽한 종 모양이 될까? | {clean_title}",
+        "calculus_motion": f"🔥 멈춰 있는 그래프가 살아 움직이는 순간! | {clean_title}",
+        "ceva_menelaus": f"🔥 복잡한 보조선 없이 넓이 비 하나로 단번에 증명되는 이유! | {clean_title}",
+        "circle_invariants": f"🔥 점이 원 위를 아무리 움직여도 각도가 절대 안 변하는 이유! | {clean_title}",
+    }
+    hooks_en = {
+        "pythagoras_fractal": f"🔥 Stop Memorizing! Why {clean_title} Preserves Area Forever",
+        "conic_reflection": f"🔥 Why Every Light Ray Bounces to One Exact Focus! | {clean_title}",
+        "trig_harmonic": f"🔥 How a Rotating Circle Creates Every Wave in the Universe! | {clean_title}",
+        "fibonacci_golden": f"🔥 Why Nature Chose the Golden Angle (137.5°)! | {clean_title}",
+        "prob_galton": f"🔥 How Pure Randomness Always Forms a Perfect Bell Curve! | {clean_title}",
+        "calculus_motion": f"🔥 The Exact Moment Secant Becomes Tangent! | {clean_title}",
+        "ceva_menelaus": f"🔥 How 1 Area Ratio Trick Proves {clean_title} Instantly!",
+        "circle_invariants": f"🔥 Why Moving the Vertex Never Changes the Angle! | {clean_title}",
+    }
+    if lang_code == "ko":
+        base = hooks_ko.get(archetype, f"🔥 공식 암기 없이 단 1개의 아이디어로 깨치는 {clean_title}!")
+        suffix = " #Shorts #창의수학 | @min7014_ai" if is_short else " | 창의 수학 시네마 @min7014_ai"
+    else:
+        base = hooks_en.get(archetype, f"🔥 The 1 Visual Idea That Explains {clean_title}!")
+        suffix = " #Shorts #Math | @min7014_ai" if is_short else " | Visual Math Cinema @min7014_ai"
+
+    if len(base) + len(suffix) <= 98:
+        return base + suffix
+    short_suffix = " #Shorts #Math" if is_short else " | @min7014_ai"
+    return (base[: 98 - len(short_suffix)].rstrip(" —|-:") + short_suffix)[:98]
+
+
 def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
     """PDF 캡처 없이 100% 네온 블룸 프랙탈·기하 셰이더로 제작하는 1280x720 시네마 썸네일"""
     slug_key = sdoc["slug"]
@@ -2084,11 +2123,7 @@ def render_creative_idea_cinema_video(slug_key: str = "math20250130001", lang_co
         dur = vmaker.get_media_duration_seconds(out_mp4, ffprobe_exe)
         thumb_path = render_creative_idea_thumbnail(sdoc, lang_code=lang_code)
 
-        idea_title = (
-            f"🌟 [창의 수학 시네마] {clean_title} — 공식 암기 없이 단 1개의 아이디어로 깨치는 비밀! | @min7014_ai"
-            if lang_code == "ko"
-            else f"🌟 [Creative Math Cinema] {clean_title} — The 1 Visual Idea That Explains It All! | @min7014_ai"
-        )[:98]
+        idea_title = build_viral_curiosity_youtube_title(clean_title, archetype, lang_code=lang_code, is_short=False)
 
         sdoc = json.loads(script_path.read_text(encoding="utf-8"))
         sdoc.setdefault("creative_idea_packages", {})[lang_code] = {
@@ -2280,11 +2315,7 @@ def render_creative_idea_short_vertical(slug_key: str = "math20250130001", lang_
             shutil.copyfile(trimmed, out_short)
             dur = vmaker.get_media_duration_seconds(out_short, ffprobe_exe)
 
-        ishort_title = (
-            f"🌟 [창의 아이디어 #Shorts] {clean_title} — 공식 없이 깨치는 단 하나의 원리! | @min7014_ai"
-            if lang_code == "ko"
-            else f"🌟 [Creative Math Idea #Shorts] {clean_title} — 1 Visual Idea Explains All! | @min7014_ai"
-        )[:98]
+        ishort_title = build_viral_curiosity_youtube_title(clean_title, archetype, lang_code=lang_code, is_short=True)
 
         sdoc = json.loads(script_path.read_text(encoding="utf-8"))
         sdoc.setdefault("creative_idea_shorts_packages", {})[lang_code] = {
@@ -2334,11 +2365,8 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
         else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=44, lang="en")
     )
 
-    title = idea_pkg.get("title") or (
-        f"🌟 [창의 수학 시네마] {clean_t} — 공식 암기 없이 단 1개의 아이디어로 깨치는 비밀! | @min7014_ai"
-        if lang_code == "ko"
-        else f"🌟 [Creative Math Cinema] {clean_t} — The 1 Visual Idea That Explains It All! | @min7014_ai"
-    )
+    archetype = detect_visual_archetype(sdoc)
+    title = build_viral_curiosity_youtube_title(clean_t, archetype, lang_code=lang_code, is_short=False)
     std_url = (sdoc.get("youtube_urls") or {}).get(lang_code) or f"https://www.youtube.com/results?search_query=min7014_ai+{slug_key}"
     ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or f"https://min7014.github.io/{slug_key}/"
 
@@ -2484,11 +2512,8 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         except Exception:
             pass
 
-    title = spkg.get("title") or (
-        f"🌟 [창의 아이디어 #Shorts] {clean_t} — 공식 없이 깨치는 단 하나의 원리! | @min7014_ai"
-        if lang_code == "ko"
-        else f"🌟 [Creative Math Idea #Shorts] {clean_t} — 1 Visual Idea Explains All! | @min7014_ai"
-    )
+    archetype = detect_visual_archetype(sdoc)
+    title = build_viral_curiosity_youtube_title(clean_t, archetype, lang_code=lang_code, is_short=True)
     idea_full_url = (
         (sdoc.get("creative_idea_youtube_urls") or {}).get(lang_code)
         or (sdoc.get("youtube_urls") or {}).get(lang_code)
@@ -2588,6 +2613,41 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         youtube_url=yt_url,
     )
     return {"video_id": vid_id, "youtube_url": yt_url, "title": title}
+
+
+def upgrade_all_creative_idea_titles() -> int:
+    """기존에 생성된 모든 창의 시네마 패키지(JSON)의 제목을 고클릭률(High-CTR) 바이럴 호기심 훅 제목으로 일괄 업그레이드합니다."""
+    cnt = 0
+    for p in sorted(SCRIPTS_DIR.glob("*.json")):
+        try:
+            sdoc = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if "creative_idea_packages" not in sdoc and "creative_idea_shorts_packages" not in sdoc:
+            continue
+        arch = detect_visual_archetype(sdoc)
+        ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", p.stem))
+        changed = False
+        for lg in ("ko", "en"):
+            raw_t = ko_t if lg == "ko" else (en_t or sdoc.get("title_en") or ko_t)
+            ct_long = sanitize_glyphs(vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(raw_t), max_len=36 if lg == "ko" else 44, lang=lg))
+            ct_short = sanitize_glyphs(vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(raw_t), max_len=30 if lg == "ko" else 38, lang=lg))
+            if lg in sdoc.get("creative_idea_packages", {}):
+                new_t = build_viral_curiosity_youtube_title(ct_long, arch, lang_code=lg, is_short=False)
+                if sdoc["creative_idea_packages"][lg].get("title") != new_t:
+                    sdoc["creative_idea_packages"][lg]["title"] = new_t
+                    changed = True
+            if lg in sdoc.get("creative_idea_shorts_packages", {}):
+                new_st = build_viral_curiosity_youtube_title(ct_short, arch, lang_code=lg, is_short=True)
+                if sdoc["creative_idea_shorts_packages"][lg].get("title") != new_st:
+                    sdoc["creative_idea_shorts_packages"][lg]["title"] = new_st
+                    changed = True
+        if changed:
+            p.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+            cnt += 1
+    if cnt:
+        vmaker.update_video_catalog()
+    return cnt
 
 
 def build_flagship_creative_idea_suite(slugs=None, langs=("ko", "en")) -> list:
