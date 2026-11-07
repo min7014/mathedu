@@ -2060,6 +2060,9 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_en = translate_text_google_gtx(step_q_ko, "en")
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
+        step_q_en = internationalize_math_english_text(step_q_en)
+        exp_en = internationalize_math_english_text(exp_en)
+
         pages_out.append({
             "page": rep_idx + 1,
             "scene_index": s_num,
@@ -2087,8 +2090,10 @@ def translate_text_google_gtx(text_ko, target_lang):
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=8) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            translated = "".join(seg[0] for seg in data[0] if seg and seg[0])
-            return translated.strip() or text_ko
+            translated = "".join(seg[0] for seg in data[0] if seg and seg[0]).strip()
+            if target_lang == "en" and translated:
+                translated = internationalize_math_english_text(translated)
+            return translated or text_ko
     except Exception:
         return text_ko
 
