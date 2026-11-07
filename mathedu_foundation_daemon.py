@@ -182,6 +182,27 @@ def auto_sync_policies_to_plan_min():
         if "### 정책 11. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성" not in plan_txt and "## 🚀 Part III." in plan_txt:
             plan_txt = plan_txt.replace("## 🚀 Part III.", policy11_block, 1)
 
+        policy12_block = (
+            "### 정책 12. 국제적으로 통용되는 표준 수학 영어(International Standard Mathematical English) 품질 및 한·영 완전 대칭 무결성 정책 (`Rule 20`)\n"
+            "1. **영미권·국제 수학계(IMO · AP/IB · AoPS · MIT OCW · 3Blue1Brown) 표준 영문 용어 100% 준수**:\n"
+            "   - 전 세계 시청자가 보는 영어 버전(`en`) 영상·제목·설명란·썸네일·내레이션·자막·고정댓글에는 한국어 직역투(Konglish)나 기계번역 오류를 절대 허용하지 않으며, **`internationalize_math_english_text()` 및 `audit_international_english_scripts()`를 통해 국제 표준 수학 영어로 100% 정화**합니다:\n"
+            "     - `원주각`: `inscribed angle` (`circumferential angle` 금지)\n"
+            "     - `수직이등분선`: `perpendicular bisector` (`vertical bisector` 금지)\n"
+            "     - `사각형(일반)`: `quadrilateral` (`rectangle` 오역 금지)\n"
+            "     - `꼬인 위치의 두 직선`: `skew lines` (`twisted position` 금지)\n"
+            "     - `엇각 · 동위각`: `alternate interior angles · corresponding angles` (`offset angles / co-position angles` 금지)\n"
+            "     - `삼각형의 외심 · 내심 · 무게중심 · 수심`: `circumcenter · incenter · centroid · orthocenter` (`outer diameter / center of gravity` 금지)\n"
+            "     - `삼수선의 정리`: `Theorem of Three Perpendiculars` (`Trinumber Line Theorem` 금지)\n"
+            "     - `유한소수 · 순환소수`: `terminating decimals · repeating decimals` (`finite decimals` 금지)\n"
+            "2. **영어 정리명 중간 절단 ZERO 및 한·영 설명란·태그·TTS 완전 대칭**:\n"
+            "   - 영어 유튜브 제목(`build_viral_curiosity_youtube_title`, `_smart_concise_topic_title`)에서 `\"Cauchy's Mean Value Theorem\"`, `\"Reflection of Light on a Parabola\"`, `\"Reflection of Light on an Ellipse\"`, `\"Inscribed Angle Theorem\"` 등 핵심 정리명이 중간에서 잘리는 현상을 원천 차단합니다.\n"
+            "   - 영어 영상 업로드 및 라이브 메타데이터 동기화(`build_creative_idea_youtube_description_and_tags`) 시 `lang_code == \"en\"`이면 설명란과 SEO 태그까지 100% 국제 표준 영어로 생성합니다.\n"
+            "   - 영어 TTS(`en-US-AriaNeural`) 합성 시 `clean_english_math_for_tts` 및 `clean_math_for_speech_en`을 통해 수식 기호(`|PF| = |PH|`, `△PFH`, `CK ∥ AB`, `f'(c)/g'(c)`, `(f⁻¹)'(y) = 1/f'(x)`)를 원어민 수학교사의 자연스러운 수식 독법으로 발음하고, 화면 자막에는 깔끔한 유니코드 수학 기호를 표시합니다.\n\n---\n\n"
+            "## 🚀 Part III."
+        )
+        if "### 정책 12. 국제적으로 통용되는 표준 수학 영어" not in plan_txt and "## 🚀 Part III." in plan_txt:
+            plan_txt = plan_txt.replace("## 🚀 Part III.", policy12_block, 1)
+
         if marker_start in plan_txt and marker_end in plan_txt:
             updated_txt = re.sub(
                 re.escape(marker_start) + r"[\s\S]*?" + re.escape(marker_end),

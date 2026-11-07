@@ -257,6 +257,24 @@
 
 ---
 
+### 정책 12. 국제적으로 통용되는 표준 수학 영어(International Standard Mathematical English) 품질 및 한·영 완전 대칭 무결성 정책 (`Rule 20`)
+1. **영미권·국제 수학계(IMO · AP/IB · AoPS · MIT OCW · 3Blue1Brown) 표준 영문 용어 100% 준수**:
+   - 전 세계 시청자가 보는 영어 버전(`en`) 영상·제목·설명란·썸네일·내레이션·자막·고정댓글에는 한국어 직역투(Konglish)나 기계번역 오류를 절대 허용하지 않으며, **`internationalize_math_english_text()` 및 `audit_international_english_scripts()`를 통해 국제 표준 수학 영어로 100% 정화**합니다:
+     - `원주각`: `inscribed angle` (`circumferential angle` 금지)
+     - `수직이등분선`: `perpendicular bisector` (`vertical bisector` 금지)
+     - `사각형(일반)`: `quadrilateral` (`rectangle` 오역 금지)
+     - `꼬인 위치의 두 직선`: `skew lines` (`twisted position` 금지)
+     - `엇각 · 동위각`: `alternate interior angles · corresponding angles` (`offset angles / co-position angles` 금지)
+     - `삼각형의 외심 · 내심 · 무게중심 · 수심`: `circumcenter · incenter · centroid · orthocenter` (`outer diameter / center of gravity` 금지)
+     - `삼수선의 정리`: `Theorem of Three Perpendiculars` (`Trinumber Line Theorem` 금지)
+     - `유한소수 · 순환소수`: `terminating decimals · repeating decimals` (`finite decimals` 금지)
+2. **영어 정리명 중간 절단 ZERO 및 한·영 설명란·태그·TTS 완전 대칭**:
+   - 영어 유튜브 제목(`build_viral_curiosity_youtube_title`, `_smart_concise_topic_title`)에서 `"Cauchy's Mean Value Theorem"`, `"Reflection of Light on a Parabola"`, `"Reflection of Light on an Ellipse"`, `"Inscribed Angle Theorem"` 등 핵심 정리명이 중간에서 잘리는 현상을 원천 차단합니다.
+   - 영어 영상 업로드 및 라이브 메타데이터 동기화(`build_creative_idea_youtube_description_and_tags`) 시 `lang_code == "en"`이면 설명란과 SEO 태그까지 100% 국제 표준 영어로 생성합니다.
+   - 영어 TTS(`en-US-AriaNeural`) 합성 시 `clean_english_math_for_tts` 및 `clean_math_for_speech_en`을 통해 수식 기호(`|PF| = |PH|`, `△PFH`, `CK ∥ AB`, `f'(c)/g'(c)`, `(f⁻¹)'(y) = 1/f'(x)`)를 원어민 수학교사의 자연스러운 수식 독법으로 발음하고, 화면 자막에는 깔끔한 유니코드 수학 기호를 표시합니다.
+
+---
+
 ## 🚀 Part III. 유튜브 ↔ 홈페이지 양방향 바이럴 홍보(`pr`) 및 교실 확산 정책
 
 ### 정책 1. 유튜브(`@min7014_ai`) ↔ 수학홈페이지(`mathedu`) 양방향 트래픽·구독 증폭 퍼널 (`pr`)
@@ -313,6 +331,7 @@ python -X utf8 pr.py status
 - ✅ **17. 유튜브 파트너 프로그램(YPP) 수익창출 조건(구독자 1,000명 + 시청시간 4,000시간 / Shorts 1,000만 뷰) 최단기 달성 5대 가속 원칙**
 - ✅ **18. 실시간 알고리즘 폭발 검증된 '4대 바이럴 클러스터 동시 발행(Simultaneous 4-Asset Cluster Drop)' 상시 원칙**
 - ✅ **19. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성 및 수식·증명 무결성 필수 검증 원칙 (Mandatory 100% Mathematical Accuracy & Source Fidelity Guard)**
+- ✅ **20. 국제적으로 통용되는 표준 수학 영어(International Standard Mathematical English) 품질 및 한·영 완전 대칭 무결성 원칙**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->

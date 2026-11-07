@@ -563,6 +563,12 @@ def split_bilingual_title(raw_title: str):
             if re.search(r"[A-Za-z]{3,}", en_cand) and not re.search(r"[가-힣]", en_cand):
                 en_cand = _balance_parentheses(en_cand)
                 return (ko_cand or u), (en_cand or ko_cand or u)
+    # 괄호 없이 '한글 문장. English sentence...' 또는 '한글 문장 English sentence...' 형태로 결합된 경우 분리
+    m_no_paren = re.match(r"^(.*[가-힣][^\nA-Za-z]*?)\s+([A-Z|][A-Za-z0-9\s,\.\-\+\=\(\)\/\|\′\'\′″°θπ√≤≥≠×÷²³₀₁₂₃₄₅₆₇₈₉→⇔⇒△∠∥⊥]{8,})$", u)
+    if m_no_paren and not re.search(r"[가-힣]", m_no_paren.group(2)):
+        ko_cand = _balance_parentheses(m_no_paren.group(1).strip().rstrip("."))
+        en_cand = _balance_parentheses(m_no_paren.group(2).strip())
+        return ko_cand, en_cand
     return u, ""
 
 
@@ -678,6 +684,8 @@ def clean_math_for_speech_en(text):
     _, en_split = split_bilingual_title(s)
     if en_split:
         s = en_split
+    for _ch, _d in zip("₀₁₂₃₄₅₆₇₈₉ₙₖᵢⱼₘ", "0123456789nkijm"):
+        s = s.replace(_ch, _d)
     s = (
         s.replace(r"\mathbb{R}", "the real numbers")
         .replace("ℝ", "the real numbers")
@@ -695,19 +703,28 @@ def clean_math_for_speech_en(text):
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"square root of \1", s)
     s = re.sub(r"\\triangle\s*([A-Za-z0-9]+)", r"triangle \1", s)
     s = re.sub(r"\\angle\s*([A-Za-z0-9]+)", r"angle \1", s)
+    s = s.replace("△", "triangle ").replace("∠", "angle ")
+    s = s.replace("∥", " is parallel to ").replace("⊥", " is perpendicular to ")
+    s = s.replace("≅", " is congruent to ").replace("∼", " is similar to ").replace("≡", " is congruent to ")
+    s = re.sub(r"\|([A-Za-z0-9₁₂₃_]+)\|", r"length \1", s)
     s = re.sub(r"√\(([^()]+)\)", r"square root of \1", s)
     s = s.replace("√(", "square root of ").replace("√", "square root of ")
     s = s.replace(r"\Leftrightarrow", " if and only if ").replace("⇔", " if and only if ")
-    s = s.replace(r"\times", " times ").replace("×", " times ")
+    s = s.replace(r"\Rightarrow", " implies ").replace("⇒", " implies ").replace("→", " approaches ")
+    s = s.replace(r"\times", " times ").replace("×", " times ").replace("·", " times ")
     s = s.replace(r"\div", " divided by ").replace("÷", " divided by ")
     s = s.replace(r"\neq", " not equal to ").replace(r"\ne", " not equal to ").replace("≠", " not equal to ")
+    s = s.replace(r"\leq", " less than or equal to ").replace(r"\le", " less than or equal to ").replace("≤", " less than or equal to ")
+    s = s.replace(r"\geq", " greater than or equal to ").replace(r"\ge", " greater than or equal to ").replace("≥", " greater than or equal to ")
     s = s.replace(r"\pm", " plus or minus ").replace("±", " plus or minus ")
+    s = s.replace("⁻¹", " inverse ").replace("f'(x)", "f prime of x").replace("f'(c)", "f prime of c").replace("g'(c)", "g prime of c")
     s = re.sub(r"\^\s*\{([^{}]+)\}", r" to the power of \1", s)
     s = re.sub(r"\^\s*\(([^()]+)\)", r" to the power of \1", s)
     s = re.sub(r"\^2", " squared", s)
     s = re.sub(r"\^3", " cubed", s)
     s = s.replace("²", " squared").replace("³", " cubed").replace("^", " ")
     s = re.sub(r"[\$\\\{\}]", " ", s)
+    s = internationalize_math_english_text(s) if "internationalize_math_english_text" in globals() else s
     return _balance_parentheses(re.sub(r"\s+", " ", s).strip())
 
 
@@ -734,7 +751,7 @@ def compute_pedagogical_scene_ranges(total_pages, max_scenes=12):
     return scenes
 
 
-def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", breadcrumb: str = ""):
+def _analyze_min7014_topic_as_mathteacher_core(title: str, sub_domain_ko: str = "", breadcrumb: str = ""):
     """
     [수석 수학교사(mathteacher) 에이전트의 24대 유형별 정밀 증명·수업 분석기 (v7.0)]
     주제 제목과 단원 경로를 분석하여:
@@ -1406,6 +1423,364 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
         ),
         "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 보조선·발상에서 출발했는지 먼저 확인해야 합니다.",
         "what_if_not_ko": "만약 이 정리의 조건이나 차원을 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
+    }
+
+
+def internationalize_math_english_text(text: str) -> str:
+    """
+    [국제 표준 수학교육 영어(International Standard Mathematical English) 정화·교정 엔진]
+    한국어 직역투(Konglish)나 기계번역 오류를 영미권 교과서(AoPS, AMC/AIME/IMO, MIT OCW, 3Blue1Brown)에서
+    국제적으로 통용되는 정확한 수학 전문 용어로 일괄 표준화합니다.
+    """
+    s = str(text or "").replace("\u200b", "").replace("\ufeff", "").strip()
+    if not s:
+        return s
+    replacements = [
+        ("when the center is at a displacement of the circumferential angle", "when the center lies on one side of the inscribed angle"),
+        ("When the center is inside the circumference", "when the center lies inside the inscribed angle"),
+        ("when the center is inside the circumference", "when the center lies inside the inscribed angle"),
+        ("When the center is outside the circumference", "when the center lies outside the inscribed angle"),
+        ("when the center is outside the circumference", "when the center lies outside the inscribed angle"),
+        ("circumferential angle", "inscribed angle"),
+        ("Circumferential angle", "Inscribed angle"),
+        ("Circumferential Angle", "Inscribed Angle"),
+        ("vertical bisectors", "perpendicular bisectors"),
+        ("vertical bisector", "perpendicular bisector"),
+        ("Vertical bisector", "Perpendicular bisector"),
+        ("Vertical Bisector", "Perpendicular Bisector"),
+        ("divides the base vertically", "bisects the base perpendicularly"),
+        ("The rectangle with the same length of two pairs of opposite sides is a parallelogram", "A quadrilateral with two pairs of equal opposite sides is a parallelogram"),
+        ("The rectangle with the same measure of two pairs of opposite angles is a parallelogram", "A quadrilateral with two pairs of equal opposite angles is a parallelogram"),
+        ("A rectangle with the same length of two pairs of parallel and opposite sides is a parallelogram", "A quadrilateral with one pair of parallel and equal opposite sides is a parallelogram"),
+        ("The diagonal lines of a rectangle are parallelograms when they are bisected", "A quadrilateral whose diagonals bisect each other is a parallelogram"),
+        ("two straight lines in a twisted position", "two skew lines in 3D space"),
+        ("in a twisted position", "in skew position (skew lines)"),
+        ("there is a 'twisted position' that neither meets nor is parallel", "there are 'skew lines' that neither intersect nor are parallel"),
+        ("'twisted position'", "'skew lines'"),
+        ("twisted position", "skew lines"),
+        ("offset angles, and co-position angles", "alternate interior angles and corresponding angles"),
+        ("offset angles", "alternate interior angles"),
+        ("co-position angles", "corresponding angles"),
+        ("Trinumber Line Theorem", "Theorem of Three Perpendiculars"),
+        ("center of gravity and outer diameter", "centroid and circumcenter"),
+        ("outer diameter", "circumcenter"),
+        ("Outer diameter", "Circumcenter"),
+        ("center of gravity", "centroid"),
+        ("Center of gravity", "Centroid"),
+        ("from entroid", "from the centroid"),
+        ("from vertice of opposite angle", "from the vertex opposite"),
+        ("from vertice", "from the vertex"),
+        ("2 conguent angles", "two congruent angles"),
+        ("conguent", "congruent"),
+        ("Conguent", "Congruent"),
+        ("Constructing a isosceles", "Constructing an isosceles"),
+        ("a isosceles", "an isosceles"),
+        ("thefour", "the four"),
+        ("Equationss", "Equations"),
+        ("finite decimals", "terminating decimals"),
+        ("Finite decimals", "Terminating decimals"),
+        ("is the center of the base", "is the midpoint of the base"),
+        ("center of the base", "midpoint of the base"),
+        ("lim( theta arrow 0) ( sin theta/ theta)=1", "lim(θ→0) (sin θ / θ) = 1"),
+        ("lim(xarrow 0) (x²/x)=0", "lim(x→0) (x² / x) = 0"),
+        ("exists f'(a) ⇒ lim(x arrow a)(f(x))=f(a)", "If f'(a) exists, then lim(x→a) f(x) = f(a) (Differentiability Implies Continuity)"),
+        ("0＜ theta＜( pi/2)", "sin θ < θ < tan θ for 0 < θ < π/2"),
+        ("0 ≤ theta ≤ pi", "Parametric Curve (3cos θ, 3sin θ) for 0 ≤ θ ≤ π"),
+    ]
+    for old_k, new_v in replacements:
+        if old_k in s:
+            s = s.replace(old_k, new_v)
+    # Fix awkward machine-translated step headers in narrations
+    s = re.sub(r"\bThis is step\s+(\d+),\s*(\d+)\s+pages\.", r"Step \1 (Page \2).", s, flags=re.I)
+    s = re.sub(r"\bThis is step\s+(\d+),\s*page\s+(\d+)\.", r"Step \1 (Page \2).", s, flags=re.I)
+    s = re.sub(r"\bThe (?:last|final)\s+(?:step\s+)?(\d+)(?:\s+steps)?,\s*the proof,?\s*(?:are|is) complete!", r"Step \1 (Final Step): The visual proof is complete!", s, flags=re.I)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", breadcrumb: str = ""):
+    """
+    [한·영 국제 표준 수학교사 증명 분석기 (v8.0 Bilingual Global Edition)]
+    _analyze_min7014_topic_as_mathteacher_core의 한국어 분석 결과에 더해,
+    영미권·국제 수학 올림피아드(IMO)·AP/IB 표준에 완벽히 부합하는 영어 분석 필드
+    (hypothesis_en, conclusion_en, auxiliary_line_en, proof_logic_en, misconception_en, what_if_not_en)를 함께 반환합니다.
+    """
+    res = _analyze_min7014_topic_as_mathteacher_core(title, sub_domain_ko, breadcrumb)
+    blob = f"{title} {sub_domain_ko} {breadcrumb}"
+    blob_l = blob.lower()
+    ko_t, en_t = split_bilingual_title(title or "")
+    en_topic = internationalize_math_english_text(en_t or ko_t or "this theorem")
+
+    if "직각이등변삼각형" in blob or "isosceles right triangle" in blob_l or "45도" in blob:
+        en_fields = {
+            "hypothesis_en": "An isosceles right triangle ABC with ∠C = 90° and equal legs AC = BC = a (obtained by drawing one diagonal of a square)",
+            "conclusion_en": "Acute angles ∠A = ∠B = 45° and exact side ratio 1 : 1 : √2 (so sin 45° = cos 45° = 1/√2 = √2/2, tan 45° = 1)",
+            "auxiliary_line_en": "Construct a square of side length a and draw its diagonal AB to partition it into two congruent isosceles right triangles",
+            "proof_logic_en": "Since the two legs are equal (a = a), the base angles are 90° ÷ 2 = 45°; by the Pythagorean Theorem, AB = √(a² + a²) = √2·a, establishing the invariant ratio 1 : 1 : √2",
+            "misconception_en": "Never confuse the hypotenuse ratio √2 with 2—always verify that (1)² + (1)² = (√2)²",
+            "what_if_not_en": "What side ratio emerges when we bisect an equilateral triangle instead of a square?"
+        }
+    elif "30-60-90" in blob or "정삼각형의 높이" in blob or "30도" in blob or "60도" in blob:
+        en_fields = {
+            "hypothesis_en": "A 30°-60°-90° right triangle formed by dropping an altitude from one vertex of an equilateral triangle of side length 2a",
+            "conclusion_en": "Exact side ratio opposite 30°, 60°, and 90° is 1 : √3 : 2 (so sin 30° = 1/2, cos 30° = √3/2, tan 30° = 1/√3)",
+            "auxiliary_line_en": "Reflect the 30°-60°-90° right triangle across its altitude (or bisect an equilateral triangle of side 2a with its perpendicular altitude AH)",
+            "proof_logic_en": "The altitude bisects the base of length 2a into BH = a; applying the Pythagorean Theorem gives height AH = √((2a)² - a²) = √3·a, proving 1 : √3 : 2 without rote memorization",
+            "misconception_en": "Remember that 2 is the hypotenuse (longest side), while √3 ≈ 1.732 is the leg opposite the 60° angle",
+            "what_if_not_en": "How do these exact ratios extend to all four quadrants on the unit circle in trigonometry?"
+        }
+    elif "메넬라우스" in blob or "menelaus" in blob_l:
+        en_fields = {
+            "hypothesis_en": "A transversal line intersects the sides (or extended sides) AB, BC, and CA of △ABC at points F, D, and E respectively",
+            "conclusion_en": "The cyclic product of directed segment ratios around the triangle satisfies (AF/FB) × (BD/DC) × (CE/EA) = 1",
+            "auxiliary_line_en": "Draw an auxiliary line through vertex C parallel to side AB (or parallel to the transversal line), meeting the transversal at point K",
+            "proof_logic_en": "Using AA similarity of the two pairs of triangles formed by the parallel auxiliary line, express the ratios in terms of segment CK so that every intermediate term telescopes and cancels to 1",
+            "misconception_en": "Do not confuse Menelaus' Theorem (collinear points on a transversal line, proven via a parallel auxiliary line) with Ceva's Theorem (concurrent lines meeting at a point P, proven via triangle area ratios)",
+            "what_if_not_en": "How does the converse of Menelaus' Theorem prove that three points in a geometric configuration are collinear?"
+        }
+    elif "체바" in blob or "ceva" in blob_l:
+        en_fields = {
+            "hypothesis_en": "Three cevians AD, BE, and CF drawn from the vertices of △ABC intersect at a single interior point P",
+            "conclusion_en": "The cyclic product of segment ratios around the perimeter satisfies (AF/FB) × (BD/DC) × (CE/EA) = 1",
+            "auxiliary_line_en": "Partition △ABC around concurrency point P into three sub-triangles △PAB, △PBC, and △PCA, comparing triangles that share a common cevian base",
+            "proof_logic_en": "Because triangles with the same altitude have areas proportional to their bases, AF/FB = Area(△PCA)/Area(△PBC), BD/DC = Area(△PAB)/Area(△PCA), and CE/EA = Area(△PBC)/Area(△PAB), whose product cancels to 1",
+            "misconception_en": "Always alternate vertex → division point → vertex in a single cyclic direction around the perimeter",
+            "what_if_not_en": "How does Ceva's Theorem immediately prove the concurrency of a triangle's medians (centroid), altitudes (orthocenter), and angle bisectors (incenter)?"
+        }
+    elif "포물선" in blob or "parabola" in blob_l:
+        en_fields = {
+            "hypothesis_en": "A parabola defined as the locus of points P equidistant from focus F(p, 0) and directrix x = -p (|PF| = |PH|)",
+            "conclusion_en": "The parabola equation y² = 4px and its optical reflection property: every ray parallel to the axis of symmetry reflects off the parabola directly through the focus F",
+            "auxiliary_line_en": "Drop perpendicular PH from point P to the directrix l and connect PF to form isosceles triangle △PFH (|PF| = |PH|)",
+            "proof_logic_en": "The tangent line at P is the perpendicular bisector of segment FH and bisects ∠FPH; by vertical angles, the angle of incidence equals the angle of reflection toward focus F",
+            "misconception_en": "A parabola has ONE focus F and ONE directrix l (|PF| = |PH|)—never confuse it with an ellipse, which has two foci F₁ and F₂ (|PF₁| + |PF₂| = 2a)",
+            "what_if_not_en": "Why do two tangent lines drawn to a parabola from any point on its directrix always intersect at a 90° right angle (orthoptic property)?"
+        }
+    elif "타원" in blob or "ellipse" in blob_l:
+        en_fields = {
+            "hypothesis_en": "An ellipse defined as the locus of points P where the sum of distances to two foci F₁ and F₂ is constant: |PF₁| + |PF₂| = 2a",
+            "conclusion_en": "Standard ellipse equation x²/a² + y²/b² = 1 (b² = a² - c²) and its optical property: any ray emitted from focus F₁ reflects off the ellipse directly to focus F₂",
+            "auxiliary_line_en": "Reflect focus F₁ across the tangent line l at point P to obtain F₁', and connect the straight segment F₁'–P–F₂",
+            "proof_logic_en": "Since the tangent line minimizes total path length |QF₁| + |QF₂| = |QF₁'| + |QF₂|, points F₁', P, and F₂ are collinear, proving that the tangent makes equal angles with PF₁ and PF₂",
+            "misconception_en": "In an ellipse, the semi-major axis a, semi-minor axis b, and focal distance c satisfy a² = b² + c² (so a is the hypotenuse of the characteristic right triangle)",
+            "what_if_not_en": "What happens to the locus if the difference of distances ||PF₁| - |PF₂|| = 2a is kept constant instead of the sum?"
+        }
+    elif "코시" in blob and "평균값" in blob or "cauchy" in blob_l and "mean" in blob_l:
+        en_fields = {
+            "hypothesis_en": "Two functions f(x) and g(x) are continuous on [a, b], differentiable on (a, b), with g'(x) ≠ 0",
+            "conclusion_en": "There exists c in (a, b) such that [f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c) (Cauchy's Mean Value Theorem)",
+            "auxiliary_line_en": "Construct Rolle's auxiliary linear combination h(x) = [f(b) - f(a)]g(x) - [g(b) - g(a)]f(x), or view (g(t), f(t)) as a parametric curve",
+            "proof_logic_en": "Since h(a) = h(b), Rolle's Theorem guarantees h'(c) = 0 for some c in (a, b), which rearranges immediately to [f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)",
+            "misconception_en": "Do not apply the standard Mean Value Theorem separately to f and g (which gives different points c₁ ≠ c₂); h(x) ensures the exact same parameter c in numerator and denominator",
+            "what_if_not_en": "How does Cauchy's Mean Value Theorem provide the rigorous proof of L'Hôpital's Rule for 0/0 indeterminate limits?"
+        }
+    elif "역함수" in blob or "inverse" in blob_l and "deriv" in blob_l:
+        en_fields = {
+            "hypothesis_en": "A differentiable, one-to-one function y = f(x) with f'(x) ≠ 0 and its inverse function x = f⁻¹(y)",
+            "conclusion_en": "The derivative of the inverse function is the reciprocal of the original derivative: (f⁻¹)'(y) = dx/dy = 1 / f'(x)",
+            "auxiliary_line_en": "Reflect the curve y = f(x) and its tangent slope triangle (Δx, Δy) across the line y = x",
+            "proof_logic_en": "Reflection across y = x swaps horizontal run Δx and vertical rise Δy, inverting the secant ratio Δx/Δy = 1 / (Δy/Δx); taking the limit yields (f⁻¹)'(y) = 1 / f'(x)",
+            "misconception_en": "Never confuse the inverse function f⁻¹(y) with the algebraic reciprocal [f(x)]⁻¹ = 1/f(x), and always evaluate f'(x) at the corresponding pre-image x = f⁻¹(y)",
+            "what_if_not_en": "How does this rule derive (ln x)' = 1/x from (e^y)' = e^y and (arcsin x)' = 1/√(1-x²) from (sin y)' = cos y?"
+        }
+    elif "sin" in blob_l and ("lim" in blob_l or "tan" in blob_l):
+        en_fields = {
+            "hypothesis_en": "In a unit circle of radius R = 1 with acute central angle θ (0 < θ < π/2 radians), compare inscribed △OAB, sector OAB, and tangent △OAT",
+            "conclusion_en": "Area inequality sin θ < θ < tan θ and the fundamental trigonometric limit lim(θ→0) (sin θ / θ) = 1",
+            "auxiliary_line_en": "Bound circular sector OAB (area ½θ) between inner triangle △OAB (area ½ sin θ) and outer right triangle △OAT (area ½ tan θ)",
+            "proof_logic_en": "From ½ sin θ < ½ θ < ½ tan θ, dividing by ½ sin θ and taking reciprocals gives cos θ < (sin θ)/θ < 1; as θ → 0, cos θ → 1, so the Squeeze Theorem forces (sin θ)/θ → 1",
+            "misconception_en": "The angle θ MUST be measured in radians so that the sector area is ½r²θ = ½θ; in degrees, a scaling factor of π/180 appears",
+            "what_if_not_en": "How does lim(θ→0) (sin θ / θ) = 1 directly prove that the derivative of sin x is cos x?"
+        }
+    elif "원주각" in blob or "inscribed angle" in blob_l or "circumferential" in blob_l:
+        en_fields = {
+            "hypothesis_en": "In a circle with center O, central angle ∠AOB and inscribed angle ∠APB subtend the same arc AB",
+            "conclusion_en": "The inscribed angle is always half the central angle: ∠APB = ½ ∠AOB (and any angle inscribed in a semicircle is 90°)",
+            "auxiliary_line_en": "Draw the diameter PQ through vertex P and center O, splitting the figure into isosceles triangles △OPA and △OPB (OA = OB = OP = R)",
+            "proof_logic_en": "Since OA = OP = R, base angles ∠OPA and ∠OAP are equal; by the Exterior Angle Theorem, the central angle equals 2∠OPA, proving ∠APB = ½ ∠AOB in all cases",
+            "misconception_en": "Whether center O lies on a side of ∠APB, inside ∠APB (sum of two halves), or outside ∠APB (difference of two halves), the radius auxiliary line PO reduces every case to isosceles triangles",
+            "what_if_not_en": "What happens to the sum of opposite angles ∠P + ∠Q when point Q lies on the complementary arc (cyclic quadrilateral)?"
+        }
+    elif "피타고라스" in blob or "pythagor" in blob_l:
+        en_fields = {
+            "hypothesis_en": "A right triangle with legs a, b and hypotenuse c, with squares constructed outward on all three sides",
+            "conclusion_en": "The sum of the areas of the two leg squares equals the area of the hypotenuse square: a² + b² = c²",
+            "auxiliary_line_en": "Partition a bounding square of side (a + b) into four congruent right triangles of area ½ab and an inner tilted square of area c² (or drop altitude CH to hypotenuse AB)",
+            "proof_logic_en": "By area conservation, subtracting the four congruent right triangles (total area 2ab) from (a + b)² in two different arrangements proves a² + b² = c² visually",
+            "misconception_en": "Before claiming the inner figure has area c², verify that its four interior angles are 90° using the fact that the two acute angles of a right triangle sum to 90°",
+            "what_if_not_en": "If we replace the squares on the three sides with any tiga similar shapes (semicircles, equilateral triangles), does the area sum still hold?"
+        }
+    else:
+        en_fields = {
+            "hypothesis_en": f"Given geometric and algebraic definitions and starting conditions for '{en_topic}'",
+            "conclusion_en": f"The core mathematical invariant and theorem of '{en_topic}' holds universally",
+            "auxiliary_line_en": "Introduce Pólya's key auxiliary line or symmetric algebraic decomposition to bridge the given hypothesis and target conclusion",
+            "proof_logic_en": "Apply step-by-step congruence, similarity, area conservation, or algebraic equivalence to deduce the conclusion rigorously",
+            "misconception_en": "Rote memorization of the final formula breaks down when conditions change—always trace the proof from the fundamental definition and first auxiliary line",
+            "what_if_not_en": "What new theorem emerges if we generalize one condition or extend this result to higher dimensions?"
+        }
+
+    res.update(en_fields)
+    return res
+
+
+def upgrade_all_international_english_scripts() -> dict:
+    """
+    [Rule 20 국제 표준 수학 영어(International Standard Mathematical English) 전수 정화·업그레이드 엔진]
+    video_lectures/scripts/*.json 의 전체 수학 주제에 대해:
+    1) 비수학 유틸리티 슬러그(math20250321001 'mathapk' 등) 영구 제거
+    2) title_en 및 title의 콩글리시/직역 표현을 국제 수학 표준 영문으로 교정 (한국어 단독 제목 3종 영문 제목 보강 포함)
+    3) teacher_proof_analysis v8.0 한·영 완전 대칭 재산출
+    4) pages[].narrations.en, question_narrations.en, step_question_en 전수 정화
+    5) youtube_packages, question_youtube_packages, shorts_packages, question_shorts_packages 한·영 제목 업그레이드
+    """
+    scripts_dir = ROOT_DIR / "video_lectures" / "scripts"
+    for bad_slug in ("20250322001", "math20250322001", "20250321001", "math20250321001"):
+        bp = scripts_dir / f"{bad_slug}.json"
+        if bp.exists():
+            bp.unlink()
+
+    special_en_titles = {
+        "math20220515003": "Locus of Points Equidistant from a Circle and an Interior Point (Ellipse Construction 1)",
+        "math20220515004": "Locus of Midpoints via Auxiliary Circle and Secant (Ellipse Construction 2)",
+        "math20220515005": "Tangent Construction to an Ellipse via Director Circle (Ellipse Construction 3)",
+    }
+
+    updated_scripts = 0
+    updated_narrs = 0
+    for p in sorted(scripts_dir.glob("*.json")):
+        try:
+            sdoc = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        slug = sdoc.get("slug", p.stem)
+        ko_t, en_t = split_bilingual_title(sdoc.get("title", slug))
+        if slug in special_en_titles:
+            en_t = special_en_titles[slug]
+            sdoc["title"] = f"{ko_t} {en_t}"
+        elif not en_t or re.search(r"[가-힣]", en_t):
+            en_t = sdoc.get("title_en") or ko_t
+
+        clean_en = internationalize_math_english_text(latex_to_unicode_title(en_t))
+        concise_en_full = _smart_concise_topic_title(clean_en, max_len=92, lang="en")
+        sdoc["title_en"] = concise_en_full
+        if ko_t and concise_en_full and not re.search(r"[가-힣]", concise_en_full):
+            sdoc["title"] = f"{ko_t}({concise_en_full})"
+
+        tpa = analyze_min7014_topic_as_mathteacher(
+            sdoc.get("title", slug),
+            sdoc.get("sub_domain_ko", ""),
+            sdoc.get("breadcrumb", ""),
+        )
+        sdoc["teacher_proof_analysis"] = tpa
+
+        for pg in (sdoc.get("pages") or []):
+            narrs = pg.get("narrations") or {}
+            if "en" in narrs and narrs["en"]:
+                old_en = narrs["en"]
+                new_en = internationalize_math_english_text(old_en)
+                if new_en != old_en:
+                    narrs["en"] = new_en
+                    updated_narrs += 1
+            qnarrs = pg.get("question_narrations") or {}
+            if "en" in qnarrs and qnarrs["en"]:
+                qnarrs["en"] = internationalize_math_english_text(qnarrs["en"])
+            if pg.get("step_question_en"):
+                pg["step_question_en"] = internationalize_math_english_text(pg["step_question_en"])
+
+        ct_ko_long = _smart_concise_topic_title(latex_to_unicode_title(ko_t), max_len=42, lang="ko")
+        ct_en_long = _smart_concise_topic_title(concise_en_full, max_len=48, lang="en")
+        ct_ko_short = _smart_concise_topic_title(latex_to_unicode_title(ko_t), max_len=34, lang="ko")
+        ct_en_short = _smart_concise_topic_title(concise_en_full, max_len=40, lang="en")
+
+        if "youtube_packages" in sdoc:
+            if "ko" in sdoc["youtube_packages"]:
+                sdoc["youtube_packages"]["ko"]["title"] = f"🔥 공식 외우지 마세요! 눈으로 보자마자 깨치는 {ct_ko_long} | 시각적 증명 @min7014_ai"[:98]
+            if "en" in sdoc["youtube_packages"]:
+                sdoc["youtube_packages"]["en"]["title"] = f"🔥 Stop Memorizing Formulas! {ct_en_long} Visual Proof | @min7014_ai"[:98]
+        if "question_youtube_packages" in sdoc:
+            if "ko" in sdoc["question_youtube_packages"]:
+                sdoc["question_youtube_packages"]["ko"]["title"] = f"❓ 99%가 공식만 외우다 놓치는 진짜 이유! 왜 성립할까? | {ct_ko_long} @min7014_ai"[:98]
+            if "en" in sdoc["question_youtube_packages"]:
+                sdoc["question_youtube_packages"]["en"]["title"] = f"❓ Why Does This Hold? Pause & Think Before the Formula! | {ct_en_long} @min7014_ai"[:98]
+        if "shorts_packages" in sdoc:
+            if "ko" in sdoc["shorts_packages"]:
+                sdoc["shorts_packages"]["ko"]["title"] = f"⚡ 공식 암기 끝! {ct_ko_short} 1분 시각 직관 해법 #Shorts #수학 | @min7014_ai"[:98]
+            if "en" in sdoc["shorts_packages"]:
+                sdoc["shorts_packages"]["en"]["title"] = f"⚡ No Memorization! {ct_en_short} Visual Proof #Shorts #Math | @min7014_ai"[:98]
+        if "question_shorts_packages" in sdoc:
+            if "ko" in sdoc["question_shorts_packages"]:
+                sdoc["question_shorts_packages"]["ko"]["title"] = f"❓ 공식 쓰기 전 3초만 멈춰보세요! {ct_ko_short} #Shorts #질문수학 | @min7014_ai"[:98]
+            if "en" in sdoc["question_shorts_packages"]:
+                sdoc["question_shorts_packages"]["en"]["title"] = f"❓ Pause 3 Seconds! Why Does {ct_en_short} Hold? #Shorts #Math | @min7014_ai"[:98]
+
+        p.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+        updated_scripts += 1
+
+    return {"updated_scripts": updated_scripts, "updated_narrs": updated_narrs}
+
+
+def audit_international_english_scripts() -> dict:
+    """
+    [Rule 5 Step 2 & Rule 20 기계적 전수 스캔 엔진]
+    전체 video_lectures/scripts/*.json 의 영문 제목(title_en, 6대 에디션 패키지), 영문 내레이션,
+    그리고 창의 아이디어 시네마 수학적 정합성을 전수 검사하여 이상 항목이 0건인지 검증합니다.
+    """
+    import creative_idea_cinema as cic
+
+    scripts_dir = ROOT_DIR / "video_lectures" / "scripts"
+    bad_terms = re.compile(
+        r"\b(circumferential angle|vertical bisector|twisted position|outer diameter|conguent|entroid|This is step \d+,\s*\d+\s*pages|The last \d+ steps,\s*the proof,\s*are complete)\b",
+        re.I,
+    )
+    title_issues = []
+    narr_issues = []
+    fidelity_issues = []
+    scripts = sorted(scripts_dir.glob("*.json"))
+    for p in scripts:
+        sdoc = json.loads(p.read_text(encoding="utf-8"))
+        slug = sdoc.get("slug", p.stem)
+        t_en = sdoc.get("title_en", "")
+        if bad_terms.search(t_en) or re.search(r"[가-힣]", t_en) or len(t_en) < 6:
+            title_issues.append((slug, "title_en", t_en))
+        for pkg_k in (
+            "youtube_packages",
+            "question_youtube_packages",
+            "shorts_packages",
+            "question_shorts_packages",
+            "creative_idea_packages",
+            "creative_idea_shorts_packages",
+        ):
+            en_pkg = (sdoc.get(pkg_k) or {}).get("en") or {}
+            pt = en_pkg.get("title", "")
+            if pt and (
+                bad_terms.search(pt)
+                or re.search(r"[가-힣]", pt)
+                or "(Half)" in pt
+                or "Cauchy's Mean |" in pt
+                or "Reflection of Light |" in pt
+            ):
+                title_issues.append((slug, pkg_k, pt))
+        for idx, pg in enumerate(sdoc.get("pages") or []):
+            ne = (pg.get("narrations") or {}).get("en", "")
+            if bad_terms.search(ne):
+                narr_issues.append((slug, idx + 1, ne[:90]))
+        arch = cic.detect_visual_archetype(sdoc)
+        acts = cic.build_creative_idea_acts(sdoc, lang_code="en")
+        c_en = (sdoc.get("creative_idea_packages") or {}).get("en", {}).get("title") or cic.build_viral_curiosity_youtube_title(
+            t_en, arch, lang_code="en", is_short=False
+        )
+        puz_en = cic.build_viral_comment_puzzle(arch, lang_code="en", sdoc=sdoc)
+        chk = cic.verify_creative_idea_math_fidelity(sdoc, acts, c_en, puz_en)
+        if not chk["ok"]:
+            fidelity_issues.append((slug, chk["errors"]))
+    return {
+        "total_scripts": len(scripts),
+        "title_issues_count": len(title_issues),
+        "title_issues": title_issues[:10],
+        "narr_issues_count": len(narr_issues),
+        "narr_issues": narr_issues[:10],
+        "fidelity_issues_count": len(fidelity_issues),
+        "fidelity_issues": fidelity_issues[:10],
     }
 
 
@@ -2937,6 +3312,25 @@ CONCISE_TITLE_REWRITES_EN = {
     "Two straight lines perpendicular to a plane": "Two Lines Perpendicular to a Plane Are Parallel",
     "Two planes perpendicular to a straight line": "Two Planes Perpendicular to a Line Are Parallel",
     "Question 30 in the math section of the National": "CSAT Killer Problem #30 Step-by-Step Visual Solution",
+    "The length of the arc for the same circumferential": "Equal Inscribed Angles Subtend Equal Arcs",
+    "The length of the arc for the same inscribed": "Equal Inscribed Angles Subtend Equal Arcs",
+    "The rectangle with the same measure of two pairs": "Parallelogram Theorem: Equal Opposite Angles",
+    "The diagonal lines of a rectangle are parallelograms": "Parallelogram Theorem: Diagonals Bisect Each Other",
+    "The angle formed by two straight lines in a twisted": "Angle Between Two Skew Lines in 3D Space",
+    "The angle formed by two skew lines": "Angle Between Two Skew Lines in 3D Space",
+    "Construct a triangle when given a vertex and center of gravity": "Constructing a Triangle from Vertex, Centroid & Circumcenter",
+    "Construct a triangle when given a vertex and centroid": "Constructing a Triangle from Vertex, Centroid & Circumcenter",
+    "Constructing a triangle given the three distances from entroid": "Constructing a Triangle from Centroid-to-Vertex Distances",
+    "Constructing a triangle given the three distances from centroid to each vertex": "Constructing a Triangle from Centroid-to-Vertex Distances",
+    "Constructing a triangle given the three distances from centroid to each midpoint": "Constructing a Triangle from Centroid-to-Midpoint Distances",
+    "Fractions that can be expressed as finite decimals": "Terminating Decimals (Prime Factors 2 & 5 Only)",
+    "Fractions that can be expressed as terminating decimals": "Terminating Decimals (Prime Factors 2 & 5 Only)",
+    "The rational approximations to pi": "Rational Approximations to π (Archimedes & Continued Fractions)",
+    "Application of Trigonometric Ratio(Right Triangle": "Finding Side Lengths Using 30° Right Triangle Ratios",
+    "Application of Trigonometric Ratio(AB=5": "Area & Side Lengths of a Triangle Using 60° Trig Ratios",
+    "타원상의 한 점에서 접선이 있을 때 이 접선과 수직인 타원의 접선을 작도": "Constructing a Perpendicular Tangent to an Ellipse",
+    "타원상의 한 점에서 접선이 있을 때 초점에서 접선의 수선의 발의 자취는": "Pedal Circle of an Ellipse (Auxiliary Circle Proof)",
+    "타원이 주어졌을 때 초점과 두 초첨에서 떨어진 거리를 작도": "Constructing the Foci & Focal Radii of an Ellipse",
 }
 
 
@@ -2946,6 +3340,8 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
     - 'Positive and Negative Square R', 'one Si', 'Proof vi', '선분의 끝' 같은 글자수 단순 슬라이싱 절단을 100% 방지합니다.
     """
     t = re.sub(r"\s+", " ", (raw_title or "")).strip()
+    if lang == "en":
+        t = internationalize_math_english_text(t)
     if " — " in t:
         t = t.split(" — ")[0].strip()
     exact_formula_map_ko = {
@@ -2954,12 +3350,20 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
         "y=(x-p)²": "이차함수 y=(x-p)² x축 평행이동 부호의 비밀",
         "y=x² V.S. y=(x-2)²": "이차함수 y=x² vs y=(x-2)² 평행이동 완전 비교",
         "y=ax²+q": "이차함수 y=ax²+q y축 평행이동의 원리",
+        "y=x²+q": "이차함수 y=x²+q y축 평행이동의 원리",
         "√(2)": "무리수 √2의 기하학적 작도와 수직선 표현",
+        "√(2)+n": "무리수 √2+n의 수직선 작도와 평행이동",
         "√(n)": "제곱근 √n의 기하학적 나선 작도 (테오도로스 나선)",
         "ax=b": "일차방정식 ax=b의 해와 부정·불능 조건",
-        "E": "이차곡선의 이심률(Eccentricity)과 초점·준선 비율",
-        "k alpha": "이차곡선의 이심률(Eccentricity)과 초점·준선 비율",
-        "kl alpha": "원뿔곡선의 이심률과 준선·초점 기하 변환",
+        "a mid b": "정수의 약수와 배수 (a | b 나누어떨어짐의 정의)",
+        "mod c": "합동식 a ≡ b (mod c)와 나머지 연산의 원리",
+        "z²=w ( w∈ℂ)": "복소수 방정식 z² = w의 해와 복소평면 작도",
+        "|3x+2|＞5": "절댓값 부등식 |3x+2| > 5의 수직선 거리 해법",
+        "E": "기본행연산(Elementary Row Operation)과 가우스 소거법",
+        "k alpha": "기본행연산 E_k(α)와 가우스 소거법 행 상수배 원리",
+        "kl alpha": "기본행연산 E_kl(α)와 연립방정식 행 소거 원리",
+        "E(kα)": "기본행연산 E_k(α)와 가우스 소거법 행 상수배 원리",
+        "E(klα)": "기본행연산 E_kl(α)와 연립방정식 행 소거 원리",
         "고차미분": "고계도함수(Higher Derivatives)와 다중 미분의 원리",
         "연쇄법칙": "합성함수의 미분법 (연쇄법칙 Chain Rule 시각 증명)",
         "도함수": "도함수(Derivative)의 정의와 순간변화율 기하 직관",
@@ -2986,12 +3390,29 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
         "y=(x-p)²": "Why Parabola y=(x-p)² Shifts Horizontally",
         "y=x² V.S. y=(x-2)²": "Parabola Shift y=x² vs y=(x-2)² Visualized",
         "y=ax²+q": "Vertical Shift of Parabola y=ax²+q Visualized",
+        "y=x²+q": "Vertical Shift of Parabola y=x²+q Visualized",
         "√(2)": "Geometric Construction of Irrational Number √2",
+        "√(2)+n": "Constructing Irrational Number √2 + n on the Number Line",
         "√(n)": "Spiral of Theodorus: Constructing √n Geometrically",
         "ax=b": "Linear Equation ax=b: Unique, Infinite & No Solution",
-        "E": "Conic Section Eccentricity (Focus-to-Directrix Ratio)",
-        "k alpha": "Conic Section Eccentricity (Focus-to-Directrix Ratio)",
-        "kl alpha": "Conic Section Eccentricity & Directrix Geometry",
+        "a mid b": "Divisibility Relation a | b in Number Theory",
+        "mod c": "Modular Arithmetic & Congruence a ≡ b (mod c)",
+        "z²=w ( w∈ℂ)": "Complex Square Roots: Solving z² = w Geometrically",
+        "|3x+2|＞5": "Absolute Value Inequality |3x+2| > 5 on Number Line",
+        "0＜ theta＜( pi/2)": "Unit Circle Area Proof: sin θ < θ < tan θ",
+        "sin θ < θ < tan θ for 0 < θ < π/2": "Unit Circle Area Proof: sin θ < θ < tan θ",
+        "0 ≤ theta ≤ pi": "Parametric Semicircle (3cos θ, 3sin θ) Visualized",
+        "Parametric Curve (3cos θ, 3sin θ) for 0 ≤ θ ≤ π": "Parametric Semicircle (3cos θ, 3sin θ) Visualized",
+        "lim(θ→0) (sin θ / θ) = 1": "Squeeze Theorem Proof of lim(θ→0) (sin θ / θ) = 1",
+        "lim(x→0) (x² / x) = 0": "Visualizing the Limit lim(x→0) (x² / x) = 0",
+        "If f'(a) exists, then lim(x→a) f(x) = f(a) (Differentiability Implies Continuity)": "Why Differentiability Implies Continuity",
+        "E": "Elementary Row Operations & Gaussian Elimination",
+        "k alpha": "Elementary Row Operation E_k(α): Row Scaling",
+        "kl alpha": "Elementary Row Operation E_kl(α): Row Elimination",
+        "E(kα)": "Elementary Row Operation E_k(α): Row Scaling",
+        "E(klα)": "Elementary Row Operation E_kl(α): Row Elimination",
+        "Petals turn": "Fibonacci Spiral & Golden Angle in Flower Petals",
+        "Fractional Equation": "Solving Rational (Fractional) Equations Visually",
         "AlgeoMath": "Constructing Parallel & Perpendicular Lines on a Segment",
         "Power": "Exponents & Powers: Visual Laws of Exponentiation",
         "Radian": "What Is a Radian? Arc Length & Circle Radius Visualized",
@@ -3019,8 +3440,20 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
     t = _balance_parentheses(t)
     if len(t) <= max_len:
         return t
+    # 괄호 안 부연 설명(예: "(Half the Central Angle)", "(미분가능 ➔ 연속)") 때문에 max_len을 초과한다면
+    # 괄호 중간을 잘라 "(Half)"처럼 만들지 말고 후행 괄호 부연 설명 전체를 깔끔하게 제거
+    t_no_trailing_paren = re.sub(r"\s*\([^()]{6,}\)\s*$", "", t).strip()
+    if t_no_trailing_paren and len(t_no_trailing_paren) >= 8 and len(t_no_trailing_paren) <= max_len:
+        return _balance_parentheses(t_no_trailing_paren)
+    if t_no_trailing_paren and len(t_no_trailing_paren) >= 12:
+        t = t_no_trailing_paren
     # 단어 경계(Word Boundary)에서만 절단하고 끝에 남은 전치사/관사/조사/연결어미 제거
     cut = t[:max_len].rsplit(" ", 1)[0].strip() if " " in t[:max_len] else t[:max_len].strip()
+    # 만약 절단 지점이 열린 괄호 '(' 내부라면 열린 괄호부터 끝까지 제거하여 반쪽짜리 괄호 원천 차단
+    if cut.count("(") > cut.count(")"):
+        last_open = cut.rfind("(")
+        if last_open >= 8:
+            cut = cut[:last_open].strip()
     if lang == "en":
         while True:
             m_tail = re.search(

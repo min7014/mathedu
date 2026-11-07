@@ -126,6 +126,23 @@
   3. **[삼각함수 극한·미분 vs 코시 평균값 정리 vs 역함수 미분법 엄격 분리]**: $\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$ (`trig_harmonic`, 단위원 부채꼴 넓이 샌드위치 $\frac{1}{2}\sin\theta < \frac{1}{2}\theta < \frac{1}{2}\tan\theta$), $\frac{d}{dx}(\sin x)=\cos x$ (`trig_deriv_sin`), 코시 평균값 정리(`cauchy_mvt`, 롤의 정리 보조함수 $h(x)$와 매개변수 곡선 $(g(t), f(t))$ 접선 기울기), 역함수 미분법(`inverse_deriv`, $y=x$ 대칭 직각삼각형 $\Delta x \leftrightarrow \Delta y$ 역수)을 각각 독립된 시각 증명으로 정확히 구현합니다.
   4. **[특수 직각삼각형($1:1:\sqrt{2}$, $1:\sqrt{3}:2$) 및 제곱근 기하 작도 엄격 분리]**: `30-60-90도 삼각형`·`직각이등변삼각형`(`special_triangles`, 정삼각형 이등분 및 정사각형 대각선)과 `제곱근의 정의`(`square_root_geometry`, 넓이 $a$인 정사각형의 한 변 $\sqrt{a}$ 및 수직선 회전 작도)를 정확히 분리합니다.
 - **렌더링·업로드 전 기계적+수학적 정합성 이중 검증 게이트(`verify_creative_idea_math_fidelity`) 상시 의무화**:
-  - 모든 영상 생성(`render_creative_idea_cinema_video`, `render_creative_idea_short_vertical`) 및 유튜브 업로드 전 반드시 `verify_creative_idea_math_fidelity(sdoc, acts, title, comment_txt)`와 `analyze_min7014_topic_as_mathteacher` 전수 검증(374개 주제 × 2개 언어 = 748개 검증 항목 에러 0건)을 통과해야만 렌더링 및 업로드가 실행되도록 하드 가드(Hard Guard)를 상시 작동시킵니다.
+  - 모든 영상 생성(`render_creative_idea_cinema_video`, `render_creative_idea_short_vertical`) 및 유튜브 업로드 전 반드시 `verify_creative_idea_math_fidelity(sdoc, acts, title, comment_txt)`와 `analyze_min7014_topic_as_mathteacher` 전수 검증(375개 주제 × 2개 언어 = 750개 검증 항목 에러 0건)을 통과해야만 렌더링 및 업로드가 실행되도록 하드 가드(Hard Guard)를 상시 작동시킵니다.
+
+## 20. 국제적으로 통용되는 표준 수학 영어(International Standard Mathematical English) 품질 및 한·영 완전 대칭 무결성 원칙
+- **영미권·국제 수학계(IMO · AP/IB · AoPS · MIT OCW · 3Blue1Brown) 표준 영문 용어 100% 준수**:
+  - 전 세계 시청자가 보는 영어 버전(`en`) 영상·제목·설명란·썸네일·내레이션·자막·고정댓글에는 한국어 직역투(Konglish)나 기계번역 오류를 절대 허용하지 않으며, **`internationalize_math_english_text()` 및 `audit_international_english_scripts()`를 통해 국제 표준 수학 영어로 100% 정화**합니다:
+    - `원주각`: `inscribed angle` (`circumferential angle` 금지)
+    - `수직이등분선`: `perpendicular bisector` (`vertical bisector` 금지)
+    - `사각형(일반)`: `quadrilateral` (`rectangle` 오역 금지)
+    - `꼬인 위치의 두 직선`: `skew lines` (`twisted position` 금지)
+    - `엇각 · 동위각`: `alternate interior angles · corresponding angles` (`offset angles / co-position angles` 금지)
+    - `삼각형의 외심 · 내심 · 무게중심 · 수심`: `circumcenter · incenter · centroid · orthocenter` (`outer diameter / center of gravity` 금지)
+    - `삼수선의 정리`: `Theorem of Three Perpendiculars` (`Trinumber Line Theorem` 금지)
+    - `유한소수 · 순환소수`: `terminating decimals · repeating decimals` (`finite decimals` 금지)
+- **영어 정리명 중간 절단 ZERO 및 한·영 설명란·태그·TTS 완전 대칭**:
+  1. 영어 유튜브 제목(`build_viral_curiosity_youtube_title`, `_smart_concise_topic_title`)에서 `"Cauchy's Mean Value Theorem"`, `"Reflection of Light on a Parabola"`, `"Reflection of Light on an Ellipse"`, `"Inscribed Angle Theorem"` 등 핵심 정리명이 `"Cauchy's Mean"`, `"Reflection of Light"`, `"Inscribed Angle Theorem (Half)"`처럼 중간에서 잘리는 현상을 원천 차단합니다.
+  2. 영어 영상 업로드 및 라이브 메타데이터 동기화(`build_creative_idea_youtube_description_and_tags`) 시 `lang_code == "en"`이면 설명란과 SEO 태그까지 100% 국제 표준 영어로 생성합니다.
+  3. 영어 TTS(`en-US-AriaNeural`) 합성 시 `clean_english_math_for_tts` 및 `clean_math_for_speech_en`을 통해 수식 기호(`|PF| = |PH|`, `△PFH`, `CK ∥ AB`, `f'(c)/g'(c)`, `(f⁻¹)'(y) = 1/f'(x)`)를 원어민 수학교사의 자연스러운 수식 독법으로 발음하고, 화면 자막에는 깔끔한 유니코드 수학 기호를 표시합니다.
+
 
 

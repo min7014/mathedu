@@ -98,6 +98,67 @@ def sanitize_glyphs(text: str) -> str:
     return out
 
 
+def clean_english_math_for_tts(text: str) -> str:
+    """
+    [국제 표준 영어 수학 TTS 발음 최적화기 (Native English Mathematical Speech Engine)]
+    화면(HUD) 자막에는 기호(|PF| = |PH|, △PFH, CK ∥ AB, f'(c)/g'(c))를 선명하게 표시하되,
+    영어 음성(en-US-AriaNeural) 합성 시에는 영미권 수학 강의에서 자연스럽게 읽는 표준 영어 수식 발음으로 변환합니다.
+    """
+    s = vmaker.internationalize_math_english_text(str(text or ""))
+    tts_repl = [
+        ("|PF₁| + |PF₂| = 2a", "the sum of distances P F 1 and P F 2 equals 2 a"),
+        ("PF₁ + PF₂ = 2a", "P F 1 plus P F 2 equals 2 a"),
+        ("|PF| = |PH|", "the distance P F equals the distance P H"),
+        ("PF = PH", "P F equals P H"),
+        ("(AF/FB) × (BD/DC) × (CE/EA) = 1", "A F over F B, times B D over D C, times C E over E A, equals 1"),
+        ("[f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)", "f of b minus f of a, over g of b minus g of a, equals f prime of c over g prime of c"),
+        ("(f⁻¹)'(y) = 1 / f'(x)", "the derivative of f inverse at y equals 1 over f prime of x"),
+        ("(f^-1)'(y) = 1 / f'(x)", "the derivative of f inverse at y equals 1 over f prime of x"),
+        ("1 : √3 : 2", "1 to square root of 3 to 2"),
+        ("1 : 1 : √2", "1 to 1 to square root of 2"),
+        ("lim(θ→0) (sin θ)/θ = 1", "the limit as theta approaches 0 of sine theta over theta equals 1"),
+        ("lim(θ→0) (sin θ/θ) = 1", "the limit as theta approaches 0 of sine theta over theta equals 1"),
+        ("cos θ < (sin θ)/θ < 1", "cosine theta is less than sine theta over theta, which is less than 1"),
+        ("1/2·sin θ < 1/2·θ < 1/2·tan θ", "one half sine theta is less than one half theta, which is less than one half tangent theta"),
+        ("∠APB = ½ ∠AOB", "angle A P B equals one half of angle A O B"),
+        ("∠APB = 1/2 ∠AOB", "angle A P B equals one half of angle A O B"),
+        ("CK ∥ AB", "line C K parallel to A B"),
+        ("l ∥ m ∥ n", "parallel lines l, m, and n"),
+        ("△PFH", "triangle P F H"),
+        ("△ABC", "triangle A B C"),
+        ("△PAB", "triangle P A B"),
+        ("△PBC", "triangle P B C"),
+        ("△PCA", "triangle P C A"),
+        ("∠FPT = ∠HPT", "angle F P T equals angle H P T"),
+        ("a² + b² = c²", "a squared plus b squared equals c squared"),
+        ("y² = 4px", "y squared equals 4 p x"),
+        ("x² = 4py", "x squared equals 4 p y"),
+        ("dx/dθ = r(1 - cos θ) ≥ 0", "d x over d theta equals r times 1 minus cosine theta, which is greater than or equal to 0"),
+        ("F₁'", "F 1 prime"),
+        ("F₁", "F 1"),
+        ("F₂", "F 2"),
+        ("S₁", "S 1"),
+        ("S₂", "S 2"),
+        ("S₃", "S 3"),
+        ("√3", "square root of 3"),
+        ("√2", "square root of 2"),
+        ("√a", "square root of a"),
+        ("θ", " theta "),
+        ("π", " pi "),
+        ("∠", " angle "),
+        ("△", " triangle "),
+        ("∥", " parallel to "),
+        ("≥", " is greater than or equal to "),
+        ("≤", " is less than or equal to "),
+        ("≠", " is not equal to "),
+        ("→", " approaches "),
+    ]
+    for k, v in tts_repl:
+        if k in s:
+            s = s.replace(k, v)
+    return re.sub(r"\s+", " ", s).strip()
+
+
 def detect_visual_archetype(sdoc: dict) -> str:
     raw_t = f"{sdoc.get('title', '')} {sdoc.get('title_en', '')}".lower()
     blob = " ".join([
@@ -2777,20 +2838,20 @@ def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_c
             "special_triangles": f"🔥 Stop Memorizing! Derive {ct} in 5 Seconds With 1 Line",
             "square_root_geometry": f"🔥 The 1 Square Area Idea That Explains {ct} Instantly!",
             "cycloid_kinematics": f"🔥 Why a Rolling Circle's Path Never Loops Back! | {ct}",
-            "conic_parabola": f"🔥 Why Every Parallel Ray Reflects to One Focus on a Parabola! | {ct}",
-            "conic_reflection": f"🔥 Why Every Ray From Focus F₁ Converges at Focus F₂! | {ct}",
+            "conic_parabola": f"🔥 Why Parallel Rays Reflect to One Focus! | {ct}",
+            "conic_reflection": f"🔥 Why Every Ray From Focus F₁ Meets at F₂! | {ct}",
             "trig_harmonic": (
-                f"🔥 Why Does sin θ Become Equal to Arc θ as θ → 0? | {ct}"
+                f"🔥 Why Does sin θ Equal Arc θ as θ → 0? | {ct}"
                 if ("lim" in ct_low or "tan" in ct_low)
-                else f"🔥 How a Rotating Circle Creates Every Wave in the Universe! | {ct}"
+                else f"🔥 How a Rotating Circle Creates Every Wave! | {ct}"
             ),
             "trig_deriv_sin": f"🔥 Why Is the Derivative of sin x Exactly cos x? | {ct}",
             "fibonacci_golden": f"🔥 Why Nature Chose the Golden Angle (137.5°)! | {ct}",
-            "prob_galton": f"🔥 How Pure Randomness Always Forms a Perfect Bell Curve! | {ct}",
-            "cauchy_mvt": f"🔥 Where Two Functions' Secant Ratio Matches Their Derivative Ratio! | {ct}",
+            "prob_galton": f"🔥 How Pure Randomness Forms a Perfect Bell Curve! | {ct}",
+            "cauchy_mvt": f"🔥 Where Secant Slopes Match Derivative Ratios! | {ct}",
             "inverse_deriv": f"🔥 How 1 Reflection Across y=x Proves {ct} Instantly!",
             "calculus_motion": f"🔥 The Exact Moment Secant Becomes Tangent! | {ct}",
-            "menelaus_theorem": f"🔥 Just 1 Parallel Line! Why the 3 Ratios Multiply to 1 | {ct}",
+            "menelaus_theorem": f"🔥 Just 1 Parallel Line! Why 3 Ratios Multiply to 1 | {ct}",
             "ceva_menelaus": f"🔥 How 1 Area Ratio Trick Proves {ct} Instantly!",
             "parallel_similarity": f"🔥 How 1 Parallel Line Proves {ct} Instantly!",
             "circle_invariants": f"🔥 Why Moving the Vertex Never Changes the Angle! | {ct}",
@@ -2814,15 +2875,17 @@ def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_c
     if len(base) + len(short_suffix) <= 98:
         return base + short_suffix
 
-    # 만약 여전히 길다면 괄호 부연 설명을 먼저 제거하거나 단어 경계에서 정밀 축약 (중간 단어 절단 원천 차단)
+    # 괄호 부연 설명(예: "(Half the Central Angle)")이 있으면 먼저 제거하여 본 정리명이 절대 잘리지 않게 보장
     ct_no_paren = re.sub(r"\s*\([^)]*\)", "", clean_title).strip()
     if ct_no_paren and ct_no_paren != clean_title:
         b2 = _make_base(ct_no_paren)
+        if len(b2) + len(suffix) <= 98:
+            return b2 + suffix
         if len(b2) + len(short_suffix) <= 98:
             return b2 + short_suffix
 
     budget_ct = max(14, len(clean_title) - ((len(base) + len(short_suffix)) - 98))
-    ct_short = vmaker._smart_concise_topic_title(clean_title, max_len=budget_ct, lang=lang_code)
+    ct_short = vmaker._smart_concise_topic_title(ct_no_paren or clean_title, max_len=budget_ct, lang=lang_code)
     b3 = _make_base(ct_short)
     if len(b3) + len(short_suffix) <= 98:
         return b3 + short_suffix
@@ -3115,9 +3178,10 @@ def render_creative_idea_cinema_video(slug_key: str = "math20250130001", lang_co
         for act_info in acts:
             act_num = act_info["act"]
             narr = act_info["narration"]
+            tts_narr = clean_english_math_for_tts(narr) if lang_code == "en" else narr
             mp3_p = tmp_dir / f"idea_act_{act_num:02d}.mp3"
             seg_p = tmp_dir / f"idea_act_{act_num:02d}.mp4"
-            comm = edge_tts.Communicate(narr, voice_name, rate="+8%")
+            comm = edge_tts.Communicate(tts_narr, voice_name, rate="+8%")
             asyncio.run(comm.save(str(mp3_p)))
             dur_s = max(4.0, vmaker.get_media_duration_seconds(mp3_p, ffprobe_exe))
 
@@ -3304,7 +3368,8 @@ def render_creative_idea_short_vertical(slug_key: str = "math20250130001", lang_
 
             mp3_p = tmp_dir / f"ishort_{idx:02d}.mp3"
             seg_p = tmp_dir / f"ishort_{idx:02d}.mp4"
-            comm = edge_tts.Communicate(short_narr, voice_name, rate="+22%")
+            tts_short_narr = clean_english_math_for_tts(short_narr) if lang_code == "en" else short_narr
+            comm = edge_tts.Communicate(tts_short_narr, voice_name, rate="+22%")
             asyncio.run(comm.save(str(mp3_p)))
             seg_dur = max(2.5, vmaker.get_media_duration_seconds(mp3_p, ffprobe_exe))
 
@@ -3450,6 +3515,112 @@ def render_creative_idea_short_vertical(slug_key: str = "math20250130001", lang_
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
+def build_creative_idea_youtube_description_and_tags(
+    sdoc: dict,
+    slug_key: str,
+    clean_t: str,
+    lang_code: str = "ko",
+    is_short: bool = False,
+    idea_full_url: str = "",
+    std_url: str = "",
+) -> tuple:
+    """
+    [한·영 국제 표준 유튜브 설명란(Description) & 글로벌 SEO 태그 생성기]
+    - lang_code == 'en'일 때 100% 영미권·국제 수학 표준 용어(IMO/AP/IB/3Blue1Brown 스타일)로 작성된
+      영어 설명란과 고단가 Tier-1 영어 SEO 태그를 반환합니다.
+    """
+    ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
+    pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_key}.pdf"
+    web_url = sdoc.get("web_url") or "https://min7014.github.io/"
+    tpa = sdoc.get("teacher_proof_analysis") or {}
+    core_eq = (tpa.get("conclusion_ko") if lang_code == "ko" else (tpa.get("conclusion_en") or tpa.get("conclusion_ko"))) or ""
+    aux_line = (tpa.get("auxiliary_line_ko") if lang_code == "ko" else (tpa.get("auxiliary_line_en") or tpa.get("auxiliary_line_ko"))) or ""
+    logic_str = (tpa.get("proof_logic_ko") if lang_code == "ko" else (tpa.get("proof_logic_en") or tpa.get("proof_logic_ko"))) or ""
+
+    if lang_code == "en":
+        if is_short:
+            desc = (
+                f"🎬 [Watch the Full 1080p Visual Proof Cinema & 8-Min+ Masterclass]\n"
+                f"👉 Full 1080p Cinema: {idea_full_url}\n"
+                f"👉 9-Min Pure Neon Geometry Masterclass Vol.1: https://youtu.be/eUeFybOs4t0\n"
+                f"👉 37-Min Circle Theorems Masterclass: https://youtu.be/9EL8pgqJtkY\n\n"
+                f"🏛️ [100% Verified Mathematical Proof from https://min7014.github.io/ — '{clean_t}']\n"
+                f"• Core Theorem & Invariant: {core_eq}\n"
+                f"• Key Auxiliary Line / Idea: {aux_line}\n"
+                f"• Original Step-by-Step Proof PDF: {pdf_url}\n"
+                f"• Interactive Archive: {web_url}\n"
+                f"• Hands-On GeoGebra Applet: {ggb_url}\n\n"
+                f"🔔 [Subscribe to @min7014_ai for Daily Visual Math Proofs]:\n"
+                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                f"#Shorts #MathShorts #VisualProof #Geometry #Calculus #Mathematics #3Blue1BrownStyle #OlympiadMath #STEM #min7014_ai"
+            )
+            tags = ["Shorts", "MathShorts", "VisualProof", "MathAnimation", clean_t, "Geometry", "Calculus", "OlympiadMath", "STEM", "min7014_ai"]
+        else:
+            desc = (
+                f"🌟 [Edition 5: Pure Procedural Neon-Bloom Visual Math Cinema — '{clean_t}']\n"
+                f"Built 100% on the step-by-step visual proof from https://min7014.github.io/, this 5-act procedural animation reveals the exact auxiliary line and geometric invariant behind '{clean_t}' without rote memorization.\n\n"
+                f"📐 [Mathematical Proof Summary]\n"
+                f"• Core Theorem & Invariant: {core_eq}\n"
+                f"• Key Auxiliary Line / Construction: {aux_line}\n"
+                f"• Deductive Proof Logic: {logic_str}\n\n"
+                f"🏛️ [Original Source Materials on https://min7014.github.io/]\n"
+                f"• Step-by-Step Proof PDF: {pdf_url}\n"
+                f"• Math Archive Page: {web_url}\n"
+                f"• Interactive GeoGebra Exploration: {ggb_url}\n\n"
+                f"🔔 [Subscribe to @min7014_ai in 1 Click]:\n"
+                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                f"🎬 [Binge-Watch Our Full-Length 1080p Masterclasses]\n"
+                f"• Pure Neon Geometry Masterclass Vol.1 (EN): https://youtu.be/eUeFybOs4t0\n"
+                f"• Circle Theorems Complete Masterclass (EN): https://youtu.be/9EL8pgqJtkY\n"
+                f"• Step-by-Step Flipbook Proof: {std_url}\n"
+                f"• 16,548 Free Constructive Math Problems: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n\n"
+                f"#VisualProof #MathAnimation #Geometry #Calculus #Mathematics #3Blue1BrownStyle #OlympiadMath #STEM #min7014_ai"
+            )
+            tags = ["VisualProof", "MathAnimation", "MathCinema", clean_t, "Geometry", "Calculus", "OlympiadMath", "GeoGebra", "STEM", "min7014_ai"]
+    else:
+        if is_short:
+            desc = (
+                f"🎬 [1080p 창의 시네마 풀버전 & 8분+ 마스터클래스 바로 보기]\n"
+                f"👉 1080p 본편: {idea_full_url}\n"
+                f"👉 12분 네온 시네마 마스터클래스 Vol.1: https://youtu.be/KvHmXDuU8jY\n"
+                f"👉 37분 원의 성질 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n\n"
+                f"🏛️ [기본 아이디어 출처: https://min7014.github.io/ ('{clean_t}')]\n"
+                f"• 핵심 수학 불변량: {core_eq}\n"
+                f"• 핵심 보조선·아이디어: {aux_line}\n"
+                f"• 단계별 증명 원본 PDF: {pdf_url}\n"
+                f"• 수학자료실 원문 아카이브: {web_url}\n"
+                f"• 직접 조작하는 GeoGebra: {ggb_url}\n\n"
+                f"🔔 [지금 @min7014_ai 1초 구독하기]:\n"
+                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                f"#Shorts #창의수학 #시각적증명 #수학쇼츠 #MathShorts #VisualProof #min7014_ai"
+            )
+            tags = ["Shorts", "창의수학", "수학쇼츠", "시각적증명", clean_t, "MathShorts", "VisualProof", "min7014_ai"]
+        else:
+            desc = (
+                f"🌟 [Edition 5: https://min7014.github.io/ 원문 자료 100% 수학적 검증 기반 창의 아이디어 시네마]\n"
+                f"• 주제: {clean_t}\n"
+                f"• 핵심 수학 정리·불변량: {core_eq}\n"
+                f"• 핵심 보조선·아이디어: {aux_line}\n"
+                f"• 증명 논리: {logic_str}\n\n"
+                f"🏛️ [기본 아이디어 원문 자료 (https://min7014.github.io/)]\n"
+                f"• 단계별 시각 증명 원본 PDF: {pdf_url}\n"
+                f"• 수학자료실 원문 아카이브: {web_url}\n"
+                f"• GeoGebra 인터랙티브 직접 조작: {ggb_url}\n\n"
+                f"🔔 [지금 바로 @min7014_ai 채널 1초 구독하기]:\n"
+                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                f"🎬 [함께 보면 200% 시너지가 나는 연계 콘텐츠]\n"
+                f"• 12분 네온 시네마 마스터클래스 Vol.1: https://youtu.be/KvHmXDuU8jY\n"
+                f"• 37분 원의 성질 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
+                f"• 단계별 시각 증명 본편: {std_url}\n"
+                f"• mathedu 16,548문항 무료 문제은행: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n\n"
+                f"#창의수학 #시각적증명 #수학아이디어 #수능수학 #기하학 #VisualProof #MathAnimation #min7014_ai"
+            )
+            tags = ["창의수학", "시각적증명", "수학아이디어", clean_t, "VisualProof", "MathCinema", "GeoGebra", "min7014_ai"]
+
+    desc = desc.replace("<", "＜").replace(">", "＞")
+    return desc, tags
+
+
 def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code: str = "ko", langs=None, privacy: str = "public") -> dict:
     """
     [Edition 5-A: 🌟 창의 아이디어 시네마 1080p 본편 유튜브 업로드 + 썸네일 + 다국어 + 자동 댓글 + 텔레그램 알림]
@@ -3483,30 +3654,15 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
     title = build_viral_curiosity_youtube_title(clean_t, archetype, lang_code=lang_code, is_short=False)
     std_url = (sdoc.get("youtube_urls") or {}).get(lang_code) or f"https://www.youtube.com/results?search_query=min7014_ai+{slug_key}"
     ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
-    pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_key}.pdf"
-    web_url = sdoc.get("web_url") or "https://min7014.github.io/"
-
-    desc = (
-        f"🌟 [Edition 5: https://min7014.github.io/ 원문 자료 기반 창의 수학 아이디어 시네마 (Pure Procedural Neon-Bloom Math Cinema)]\n"
-        f"본 영상은 https://min7014.github.io/ 의 단계별 시각 증명 자료('{clean_t}')에 담긴 핵심 수학적 아이디어와 보조선 원리를 바탕으로, 네온 블룸 프랙탈과 동적 기하 셰이더로 구현한 5막 스토리텔링 시네마입니다!\n\n"
-        f"🏛️ [기본 아이디어 원문 자료 (https://min7014.github.io/)]\n"
-        f"• 단계별 시각 증명 원본 PDF: {pdf_url}\n"
-        f"• 수학자료실 원문 아카이브: {web_url}\n"
-        f"• GeoGebra 인터랙티브 직접 조작: {ggb_url}\n\n"
-        f"🔔 [지금 바로 @min7014_ai 채널 1초 구독하기]:\n"
-        f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-        f"🎬 [함께 보면 200% 시너지가 나는 연계 콘텐츠]\n"
-        f"• 8분+ 네온 시네마 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
-        f"• 단계별 시각 증명 본편: {std_url}\n"
-        f"• mathedu 16,548문항 무료 문제은행: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n\n"
-        f"#창의수학 #시각적증명 #{clean_t.replace(' ', '')} #수학아이디어 #수능수학 #기하학 #VisualProof #MathAnimation #min7014_ai"
+    desc, tags = build_creative_idea_youtube_description_and_tags(
+        sdoc, slug_key, clean_t, lang_code=lang_code, is_short=False, std_url=std_url
     )
 
     body = {
         "snippet": {
-            "title": title[:100],
+            "title": title[:100].replace("<", "＜").replace(">", "＞"),
             "description": desc[:4900],
-            "tags": ["창의수학", "시각적증명", "수학아이디어", clean_t, "VisualProof", "MathCinema", "GeoGebra", "min7014_ai"],
+            "tags": tags,
             "categoryId": "27",
             "defaultLanguage": lang_code,
             "defaultAudioLanguage": lang_code,
@@ -3618,30 +3774,19 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         or (sdoc.get("youtube_urls") or {}).get(lang_code)
         or f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&mode=idea"
     )
-    ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
-    pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_key}.pdf"
-    web_url = sdoc.get("web_url") or "https://min7014.github.io/"
-
-    desc = (
-        f"🎬 [1080p 창의 시네마 풀버전 & 8분+ 마스터클래스 바로 보기]\n"
-        f"👉 1080p 본편: {idea_full_url}\n"
-        f"👉 8분 마스터클래스 총정리: {'https://youtu.be/_5LE_BfLA5w' if lang_code == 'ko' else 'https://youtu.be/9EL8pgqJtkY'}\n\n"
-        f"🏛️ [기본 아이디어 출처: https://min7014.github.io/ ('{clean_t}')]\n"
-        f"• 단계별 증명 원본 PDF: {pdf_url}\n"
-        f"• 수학자료실 원문 아카이브: {web_url}\n"
-        f"• 직접 조작하는 GeoGebra: {ggb_url}\n\n"
-        f"🌟📱 [Edition 5-B: https://min7014.github.io/ 원문 기반 창의 수학 아이디어 #Shorts]\n"
-        f"단 45초 만에 '{clean_t}'의 핵심 불변량 아이디어를 순수 네온 블룸 애니메이션으로 직관화합니다!\n\n"
-        f"🔔 [지금 @min7014_ai 1초 구독하기]:\n"
-        f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-        f"#Shorts #창의수학 #시각적증명 #수학쇼츠 #MathShorts #VisualProof #min7014_ai"
+    desc, tags = build_creative_idea_youtube_description_and_tags(
+        sdoc=sdoc,
+        clean_t=clean_t,
+        lang_code=lang_code,
+        is_short=True,
+        idea_full_url=idea_full_url,
     )
 
     body = {
         "snippet": {
-            "title": title[:100],
+            "title": title[:100].replace("<", "＜").replace(">", "＞"),
             "description": desc[:4900],
-            "tags": ["Shorts", "창의수학", "수학쇼츠", "시각적증명", clean_t, "MathShorts", "VisualProof", "min7014_ai"],
+            "tags": tags,
             "categoryId": "27",
             "defaultLanguage": lang_code,
             "defaultAudioLanguage": lang_code,
@@ -3788,25 +3933,12 @@ def sync_live_creative_idea_youtube_metadata(target_slugs=None) -> list:
             vid_id = vmaker.extract_youtube_video_id(long_url)
             if vid_id:
                 new_title = build_viral_curiosity_youtube_title(ct_long, arch, lang_code=lg, is_short=False)
-                std_url = (sdoc.get("youtube_urls") or {}).get(lg) or f"https://www.youtube.com/results?search_query=min7014_ai+{slug}"
-                desc = (
-                    f"🌟 [Edition 5: https://min7014.github.io/ 원문 자료 100% 수학적 검증 기반 창의 아이디어 시네마]\n"
-                    f"• 주제: {ct_long}\n"
-                    f"• 핵심 수학 정리·불변량: {core_eq}\n"
-                    f"• 핵심 보조선·아이디어: {aux_line}\n\n"
-                    f"🏛️ [기본 아이디어 원문 자료 (https://min7014.github.io/)]\n"
-                    f"• 단계별 시각 증명 원본 PDF: {pdf_url}\n"
-                    f"• 수학자료실 원문 아카이브: {web_url}\n"
-                    f"• GeoGebra 인터랙티브 직접 조작: {ggb_url}\n\n"
-                    f"🔔 [지금 바로 @min7014_ai 채널 1초 구독하기]:\n"
-                    f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                    f"🎬 [함께 보면 200% 시너지가 나는 연계 콘텐츠]\n"
-                    f"• 8분+ 네온 시네마 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
-                    f"• 단계별 시각 증명 본편: {std_url}\n"
-                    f"• mathedu 16,548문항 무료 문제은행: https://min7014.github.io/mathedu/video_board.html?slug={slug}\n\n"
-                    f"#창의수학 #시각적증명 #수학아이디어 #수능수학 #기하학 #VisualProof #MathAnimation #min7014_ai"
+                desc, tags = build_creative_idea_youtube_description_and_tags(
+                    sdoc=sdoc,
+                    clean_t=ct_long,
+                    lang_code=lg,
+                    is_short=False,
                 )
-                desc = desc.replace("<", "＜").replace(">", "＞")
                 try:
                     yt.videos().update(
                         part="snippet",
@@ -3815,7 +3947,7 @@ def sync_live_creative_idea_youtube_metadata(target_slugs=None) -> list:
                             "snippet": {
                                 "title": new_title[:100].replace("<", "＜").replace(">", "＞"),
                                 "description": desc[:4900],
-                                "tags": ["창의수학", "시각적증명", "수학아이디어", ct_long, "VisualProof", "MathCinema", "GeoGebra", "min7014_ai"],
+                                "tags": tags,
                                 "categoryId": "27",
                                 "defaultLanguage": lg,
                                 "defaultAudioLanguage": lg,
@@ -3840,21 +3972,13 @@ def sync_live_creative_idea_youtube_metadata(target_slugs=None) -> list:
             if svid_id:
                 new_stitle = build_viral_curiosity_youtube_title(ct_short, arch, lang_code=lg, is_short=True)
                 idea_full_url = long_url or (sdoc.get("youtube_urls") or {}).get(lg) or f"https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=idea"
-                mc_url = "https://youtu.be/_5LE_BfLA5w" if lg == "ko" else "https://youtu.be/9EL8pgqJtkY"
-                sdesc = (
-                    f"🎬 [1080p 창의 시네마 풀버전 & 8분+ 마스터클래스 바로 보기]\n"
-                    f"👉 1080p 본편: {idea_full_url}\n"
-                    f"👉 8분 마스터클래스 총정리: {mc_url}\n\n"
-                    f"🏛️ [기본 아이디어 출처: https://min7014.github.io/ ('{ct_short}')]\n"
-                    f"• 핵심 수학 불변량: {core_eq}\n"
-                    f"• 단계별 증명 원본 PDF: {pdf_url}\n"
-                    f"• 수학자료실 원문 아카이브: {web_url}\n"
-                    f"• 직접 조작하는 GeoGebra: {ggb_url}\n\n"
-                    f"🔔 [지금 @min7014_ai 1초 구독하기]:\n"
-                    f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                    f"#Shorts #창의수학 #시각적증명 #수학쇼츠 #MathShorts #VisualProof #min7014_ai"
+                sdesc, stags = build_creative_idea_youtube_description_and_tags(
+                    sdoc=sdoc,
+                    clean_t=ct_short,
+                    lang_code=lg,
+                    is_short=True,
+                    idea_full_url=idea_full_url,
                 )
-                sdesc = sdesc.replace("<", "＜").replace(">", "＞")
                 try:
                     yt.videos().update(
                         part="snippet",
@@ -3863,7 +3987,7 @@ def sync_live_creative_idea_youtube_metadata(target_slugs=None) -> list:
                             "snippet": {
                                 "title": new_stitle[:100].replace("<", "＜").replace(">", "＞"),
                                 "description": sdesc[:4900],
-                                "tags": ["Shorts", "창의수학", "수학쇼츠", "시각적증명", ct_short, "MathShorts", "VisualProof", "min7014_ai"],
+                                "tags": stags,
                                 "categoryId": "27",
                                 "defaultLanguage": lg,
                                 "defaultAudioLanguage": lg,
