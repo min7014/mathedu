@@ -102,10 +102,24 @@ def auto_sync_policies_to_plan_min():
             "   - 확보된 수익을 바탕으로 `https://min7014.github.io/`의 모든 기하·대수·미적분·확률통계 아이디어를 1080p 시각 증명, 60fps 인터랙티브 셰이더, 탈-5지선다 창의 구성 디딤돌 문항으로 질적·양적 고도화합니다.\n"
             "3. **[3단계 최종 비전 — 월 1,000만 원+ 달성 및 전 세계적(Global No.1) 수학교육 사이트 구축 (`~$7,500+/월`)]**:\n"
             "   - 한국어·영어·일본어·스페인어 등 20개국어 다국어 확장과 글로벌 Tier-1 트래픽을 결합하여, 전 세계 학생과 교사가 무료로 수학의 본질을 깨우치는 세계 최고의 수학교육 플랫폼(`min7014.github.io` × `mathedu` × `@min7014_ai`)을 완성합니다.\n\n---\n\n"
+            "### 정책 9. 유튜브 파트너 프로그램(YPP) 수익창출 조건(구독자 1,000명 + 시청시간 4,000시간 / Shorts 1,000만 뷰) 최단기 달성 5대 가속 정책\n"
+            "1. **[구독자 500명 ➔ 1,000명 돌파 — 전 영상 음성+시각 동시 연재 구독 트리거]**:\n"
+            "   - 모든 1080p 본편, 창의 시네마, 9:16 `#Shorts`의 유레카 결론 직후 **\"1,113개 시각적 수학 증명 시리즈를 놓치지 않으려면 지금 바로 구독을 눌러 두세요!\"** 음성 멘트와 하단 `🔔 구독 @min7014_ai` 시각 배지를 동시 송출하여 조회수 대비 구독 전환율을 `0.17% ➔ 2.5%+`로 증폭합니다.\n"
+            "2. **[시청시간 4,000시간(240,000분) 절대 보존 법칙 — 불필요한 영상 삭제 금지 및 In-Place 업데이트]**:\n"
+            "   - 공개 영상을 삭제(`videos().delete`)하면 해당 영상이 쌓은 공개 시청시간이 영구 차감되므로, 단순 제목·설명·썸네일 개선은 절대 삭제하지 않고 **`videos().update(part=\"snippet,localizations\")` 및 `thumbnails().set()`으로 제자리 수정**하여 누적 시청시간을 100% 보존합니다.\n"
+            "3. **[시청시간 15배 증폭 — 12~37분 장편 마스터클래스 119편 최우선 업로드 & 채널 예고편 지정]**:\n"
+            "   - Shorts 시청시간은 4,000시간에 합산되지 않으므로, 이미 제작 완료된 **119편의 12~37분 1080p 가로형 마스터클래스(`https://youtu.be/_5LE_BfLA5w` [37.5분 KO], `https://youtu.be/9EL8pgqJtkY` [37.3분 EN], `masterclass_neon_idea_vol1..3`, `masterclass_euclidean_geometry_vol1`)**를 Priority #0으로 지속 업로드하고 채널 대표 예고편(`unsubscribedTrailer`)으로 설정하여 약 8,000~12,000 정주행 뷰만으로 4,000시간(240,000분)을 돌파합니다.\n"
+            "4. **[웹사이트(`index.html` · `video_board.html` · `mathedu-room.js`) ➔ 유튜브 직통 전환 허브 & 깨진 링크 ZERO 보장]**:\n"
+            "   - 홈페이지와 16,548문항 퀴즈 내 모든 유튜브 링크를 100% 라이브 영상 ID로 자동 동기화(`finance.ensure_ypp_website_ownership_and_sub_funnel`)하고, `🔔 1초 무료 구독 응원(?sub_confirmation=1)` 및 `🎬 37분 마스터클래스 정주행` 버튼을 상시 배치합니다.\n"
+            "5. **[YPP 인간 심사('반복적 콘텐츠') 100% 통과 방어막]**:\n"
+            "   - `https://min7014.github.io/` 양방향 `<link rel=\"me\">` 도메인 소유권 증명, `mathteacher` 고유 소크라테스 발문·보조선 해설, 프로시저럴 네온 시네마, 창작 교육 콘텐츠 선언문으로 YPP 심사를 단번에 통과합니다.\n\n---\n\n"
             "## 🚀 Part III."
         )
         if "### 정책 8." not in plan_txt and "## 🚀 Part III." in plan_txt:
             plan_txt = plan_txt.replace("## 🚀 Part III.", policy8_block, 1)
+        elif "### 정책 9." not in plan_txt and "## 🚀 Part III." in plan_txt:
+            policy9_only = "### 정책 9." + policy8_block.split("### 정책 9.")[1]
+            plan_txt = plan_txt.replace("## 🚀 Part III.", policy9_only, 1)
 
         policy6_block = (
             "### 정책 6. 세계 5대 인기 수학 유튜브 채널(`3Blue1Brown` · `MindYourDecisions` · `Andy Math` · `Mathologer` · `깨봉수학`) 벤치마킹 상시 적용 정책\n"

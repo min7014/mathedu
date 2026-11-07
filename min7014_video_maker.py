@@ -1278,7 +1278,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 f"출발 조건이었던 {hyp_ko}에서 시작해, {aux_ko}을 거쳐, {conc_ko}이 성립함을 명확하게 확인했습니다. "
                 f"여기서 꼭 기억해야 할 핵심 포인트는, {misc_ko} "
                 f"마지막으로 한 걸음 더 깊이 질문해 보세요. {win_ko} "
-                f"설명란 링크의 수학홈페이지에서 직접 값과 도형을 바꾸며 실험해 보세요!"
+                f"오늘 시각적 증명으로 공식 암기 없이 원리를 깨우치셨다면 지금 바로 구독과 좋아요를 눌러 1,113개 시각적 수학 증명 시리즈를 놓치지 마세요! 설명란의 수학자료실 원문과 연속 정주행 마스터클래스도 이어서 확인해 보세요!"
             )
             exp_en = translate_text_google_gtx(exp_ko, "en")
         else:
@@ -2913,12 +2913,12 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         )
         binge_ko = (
             "🔥 [@min7014_ai 검증된 인기 시각적 증명 & 8분+ 마스터클래스 정주행 시리즈]\n"
-            "• 🎬 [8분 마스터클래스] 공식 암기 끝! 보조선과 시각 직관으로 깨치는 6대 기하 증명 총정리: https://youtu.be/_5LE_BfLA5w\n"
+            "• 🎬 [37분 마스터클래스] 공식 암기 끝! 보조선과 시각 직관으로 깨치는 기하 증명 총정리: https://youtu.be/_5LE_BfLA5w\n"
             "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계 본편): https://youtu.be/DSgUHigl82o\n"
-            "• 🔥 피타고라스 정리 정사각형 넓이 분할 (25단계 본편): https://youtu.be/7a3e3rA-bfU\n"
+            "• 🔥 피타고라스 정리 정사각형 넓이 분할 (25단계 본편): https://youtu.be/7RcvUpfGM6s\n"
             "• 📐 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/zvRgbIKm0jc\n"
             "• ⚡ 피타고라스 정리 45초 핵심 #Shorts (인기 1위): https://youtube.com/shorts/1RKQ4Uxu4Uw\n"
-            "• ✨ 피타고라스 나무 45초 핵심 #Shorts (인기 2위): https://youtube.com/shorts/wSOzehSfEbY"
+            "• ✨ 피타고라스 나무 45초 핵심 #Shorts (인기 2위): https://youtube.com/shorts/maGFOifE-2E"
         )
         yt_desc = (
             f"🎬 [8분+ 네온 시네마 마스터클래스 총정리 바로 보기] 👉 https://youtu.be/_5LE_BfLA5w\n"
@@ -4013,7 +4013,8 @@ def scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False):
             continue
         blob = f"{ent['title']}\n{ent['description']}"
         is_outdated = False
-        if any(bad in blob for bad in ("민은기", "Min's Math Lab", "MinsMathLab", "()", "route ", "a^m div a^n", "a^m times a^n", "Square R —", "one Si —", "Proof vi —", "of the —", "When there is an intersection —", "선분의 끝 —", "끝점에서 교 —", "extensio —")):
+        # [YPP 시청시간 보존 법칙]: 단순 제목 줄임/메타데이터 보완 대상은 절대 삭제(videos.delete)하지 않고 videos().update로 제자리 수정하여 누적 공개 시청시간(4,000시간)을 100% 보존합니다.
+        if any(bad in blob for bad in ("민은기", "Min's Math Lab", "MinsMathLab", "()", "route ", "a^m div a^n", "a^m times a^n")):
             is_outdated = True
         m_tag = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+?)_(?:(SHORT_Q|SHORT|Q)_)?(KO|EN)\]", blob, re.IGNORECASE)
         if m_tag and not is_outdated:
@@ -5499,9 +5500,9 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
 
     if seq_idx == total_seqs:
         if lang_code == "ko":
-            return "결국 이 핵심 원리 하나로 완벽히 증명됩니다! 그렇다면 맨 처음 출발 도형에서 이 단서가 어디에 숨어 있었는지 다시 찾아볼까요? 1080p 풀버전은 설명란·고정댓글에 있습니다!"
+            return "결국 이 원리 하나로 완벽히 증명됩니다! 매일 올라오는 1,113개 시각 증명 시리즈를 놓치지 않으려면 지금 바로 구독을 누르고, 맨 처음 도형의 단서와 설명란 1080p 본편도 확인해 보세요!"
         else:
-            return "That single principle unlocks the entire proof! Now look back at the very first figure—did you spot where this hidden clue started? Full 1080p proof in the description!"
+            return "That single principle unlocks the entire proof! Hit Subscribe right now for our daily 1,113 visual proof series, and check the full 1080p proof in the description—now look back at the first figure!"
 
     # 중간 핵심 전개 장면 (2, 3, 4단계): 인사말 제거 후 가장 핵심적인 1~2문장(한국어 78자, 영어 132자 이내) 추출
     if lang_code == "ko":
@@ -5935,7 +5936,7 @@ def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs
             q_short = f"잠깐! {clean_title}, 왜 항상 성립할까요?"
             return f"{q_short} ... 정답 단서! {core_ans}"
         elif seq_idx == total_seqs:
-            return f"유레카! {core_ans} 그렇다면 처음 도형에서 이 보조선이 왜 출발점이었는지 다시 볼까요?"
+            return f"유레카! {core_ans} 매일 올라오는 시각 증명 시리즈를 놓치지 않으려면 지금 구독을 누르고, 처음 도형에서 이 보조선이 왜 출발점이었는지 다시 볼까요?"
         else:
             q_short = q_clean if len(q_clean) <= 48 else "직전 단계와 비교해 새로 추가된 핵심 단서는 무엇일까요?"
             return f"{q_short} ... 정답 단서! {core_ans}"
@@ -5948,7 +5949,7 @@ def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs
             q_short = f"Wait! Why does {clean_title} always hold?"
             return f"{q_short} ... Visual clue! {core_ans}"
         elif seq_idx == total_seqs:
-            return f"Eureka! {core_ans} Now look back at the first figure to see where this clue started!"
+            return f"Eureka! {core_ans} Hit Subscribe right now for our daily visual proofs, and look back at the first figure to see where this clue started!"
         else:
             q_short = q_clean if len(q_clean) <= 68 else "What new mathematical clue bridges this step?"
             return f"{q_short} ... Visual clue! {core_ans}"
@@ -7154,6 +7155,20 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                             "7Ywal5oTbyU": "🔥 The Pythagorean Theorem (a²+b²=c²) — 45s Visual Area Proof #Shorts #Math",
                         }
                         try:
+                            ch_r = yt_rep.channels().list(part="brandingSettings", id=YOUTUBE_CHANNEL_ID).execute().get("items", [])
+                            if ch_r:
+                                b_set = ch_r[0].get("brandingSettings", {})
+                                ch_cfg = b_set.get("channel", {})
+                                if "민은기" in (ch_cfg.get("title") or "") or ch_cfg.get("unsubscribedTrailer") != "_5LE_BfLA5w":
+                                    ch_cfg["title"] = "단계별 시각적 수학 증명_AI"
+                                    ch_cfg["unsubscribedTrailer"] = "_5LE_BfLA5w"
+                                    b_set["channel"] = ch_cfg
+                                    if "image" in b_set:
+                                        del b_set["image"]
+                                    yt_rep.channels().update(part="brandingSettings", body={"id": YOUTUBE_CHANNEL_ID, "brandingSettings": b_set}).execute()
+                        except Exception:
+                            pass
+                        try:
                             vr = yt_rep.videos().list(part="snippet", id=",".join(rem_fixes.keys())).execute()
                             for vit in vr.get("items", []):
                                 vid_r = vit["id"]
@@ -7630,7 +7645,7 @@ def optimize_youtube_channel_settings():
             part="brandingSettings",
             body=branding_only_body,
         ).execute()
-        print("✅ [Channel Branding, Keywords, Country(KR), Trailer(bQO7fnT6aDU) & Banner Applied!]")
+        print("✅ [Channel Branding, Keywords, Country(KR), Trailer(_5LE_BfLA5w) & Banner Applied!]")
     except Exception as e:
         print(f"⚠️ [Channel Branding Update Notice]: {e}")
         if "image" in branding_only_body["brandingSettings"]:
@@ -7745,10 +7760,7 @@ def optimize_youtube_channel_settings():
             vdata = json.loads(vault_path.read_text(encoding="utf-8"))
         except Exception:
             vdata = {}
-    applied_thumbs = set(vdata.get("applied_custom_thumbnails") or [
-        "7zD66SWWceg", "CjE2nyyzG2s", "W_AWH-Gk89w", "ffNJhPRvh4Y",
-        "k6LBYa5SCiA", "n9zyKwXXsbA", "Mq6s2JLV9mQ", "fXQJ8s1La-E", "bQO7fnT6aDU"
-    ])
+    applied_thumbs = set(vdata.get("applied_custom_thumbnails") or [])
 
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         sdoc = json.loads(sp.read_text(encoding="utf-8"))

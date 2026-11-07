@@ -2517,11 +2517,11 @@
     function getMatchedYoutubeCoachItem() {
       var title = (getProblemTitle() || '') + ' ' + (document.body ? document.body.textContent.slice(0, 600) : '');
       var items = [
-        { slug: '0001', title: '메넬라우스의 정리 (20단계 평행보조선 시각 증명)', ytKo: '7zD66SWWceg', ytEn: 'CjE2nyyzG2s', kw: '메넬라우스|비율|할선|외분|내분' },
-        { slug: '0002', title: '체바의 정리 (17단계 삼각형 넓이 비 시각 증명)', ytKo: 'W_AWH-Gk89w', ytEn: 'ffNJhPRvh4Y', kw: '체바|무게중심|수심|내심|넓이 비' },
-        { slug: '0003', title: '피타고라스 정리 (25단계 넓이 분할·전단 이동 증명)', ytKo: 'k6LBYa5SCiA', ytEn: 'n9zyKwXXsbA', kw: '피타고라스|직각삼각형|빗변|코사인|사인|거리' },
-        { slug: '0004', title: '피타고라스 나무 (11단계 프랙탈 넓이 보존·등비급수)', ytKo: 'bQO7fnT6aDU', ytEn: '9JKLflqrtDU', kw: '등비|급수|수열|지수|거듭제곱|극한|프랙탈' },
-        { slug: '0005', title: '종이띠로 접는 정칠각형 매듭 원리 (11단계 대칭 작도)', ytKo: 'Mq6s2JLV9mQ', ytEn: 'fXQJ8s1La-E', kw: '다각형|원|접선|각도|대칭' }
+        { slug: '0001', title: '메넬라우스의 정리 (20단계 평행보조선 시각 증명)', ytKo: 'CshN2d86plg', ytEn: 'd0yl3hSHDgE', kw: '메넬라우스|비율|할선|외분|내분' },
+        { slug: '0002', title: '체바의 정리 (17단계 삼각형 넓이 비 시각 증명)', ytKo: 'oq_CJWJ-Zrg', ytEn: 'aKmG-iKoieQ', kw: '체바|무게중심|수심|내심|넓이 비' },
+        { slug: '0003', title: '피타고라스 정리 (25단계 넓이 분할·전단 이동 증명)', ytKo: '7RcvUpfGM6s', ytEn: 'yZER1pGb2J8', kw: '피타고라스|직각삼각형|빗변|코사인|사인|거리' },
+        { slug: '0004', title: '피타고라스 나무 (11단계 프랙탈 넓이 보존·등비급수)', ytKo: 'DSgUHigl82o', ytEn: '3ik6yQ-0fP8', kw: '등비|급수|수열|지수|거듭제곱|극한|프랙탈' },
+        { slug: '0005', title: '종이띠로 접는 정칠각형 매듭 원리 (11단계 대칭 작도)', ytKo: '_5LE_BfLA5w', ytEn: '9EL8pgqJtkY', kw: '다각형|원|접선|각도|대칭' }
       ];
       for (var i = 0; i < items.length; i++) {
         if (new RegExp(items[i].kw).test(title)) return items[i];
@@ -2533,11 +2533,11 @@
       var drawer = document.getElementById('acadDrawerYoutube');
       if (!drawer) return;
       var list = [
-        { slug: '0003', title: '피타고라스 정리 (25단계 넓이 분할 증명)', ytKo: 'k6LBYa5SCiA', ytEn: 'n9zyKwXXsbA' },
-        { slug: '0004', title: '피타고라스 나무 (11단계 넓이 보존·수열·지수)', ytKo: 'bQO7fnT6aDU', ytEn: '9JKLflqrtDU' },
-        { slug: '0001', title: '메넬라우스의 정리 (20단계 평행보조선 증명)', ytKo: '7zD66SWWceg', ytEn: 'CjE2nyyzG2s' },
-        { slug: '0002', title: '체바의 정리 (17단계 삼각형 넓이 비 증명)', ytKo: 'W_AWH-Gk89w', ytEn: 'ffNJhPRvh4Y' },
-        { slug: '0005', title: '정칠각형 종이띠 매듭 (11단계 기하 작도)', ytKo: 'Mq6s2JLV9mQ', ytEn: 'fXQJ8s1La-E' }
+        { slug: '0003', title: '피타고라스 정리 (25단계 넓이 분할 증명)', ytKo: '7RcvUpfGM6s', ytEn: 'yZER1pGb2J8' },
+        { slug: '0004', title: '피타고라스 나무 (11단계 넓이 보존·수열·지수)', ytKo: 'DSgUHigl82o', ytEn: '3ik6yQ-0fP8' },
+        { slug: '0001', title: '메넬라우스의 정리 (20단계 평행보조선 증명)', ytKo: 'CshN2d86plg', ytEn: 'd0yl3hSHDgE' },
+        { slug: '0002', title: '체바의 정리 (17단계 삼각형 넓이 비 증명)', ytKo: 'oq_CJWJ-Zrg', ytEn: 'aKmG-iKoieQ' },
+        { slug: '0005', title: '정칠각형 종이띠 매듭 (11단계 기하 작도)', ytKo: '_5LE_BfLA5w', ytEn: '9EL8pgqJtkY' }
       ];
       var matched = getMatchedYoutubeCoachItem();
       var selIdx = (typeof customIdx === 'number') ? customIdx : list.findIndex(function(x){ return x.slug === matched.slug; });

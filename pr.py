@@ -110,7 +110,7 @@ FLAGSHIP_YT_TOPICS = [
         "yt_ko": "https://youtu.be/DSgUHigl82o",
         "yt_en": "https://youtu.be/3ik6yQ-0fP8",
         "yt_q_ko": "https://youtu.be/GS9Qj-g-oVo",
-        "yt_short_ko": "https://youtube.com/shorts/wSOzehSfEbY",
+        "yt_short_ko": "https://youtube.com/shorts/maGFOifE-2E",
         "yt_id_ko": "DSgUHigl82o",
         "yt_id_en": "3ik6yQ-0fP8",
         "short_mp4": "video_lectures/shorts/math20250130001_short_ko.mp4",

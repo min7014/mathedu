@@ -239,6 +239,7 @@ python -X utf8 pr.py status
 - ✅ **14. 세계 5대 인기 수학 유튜브 채널(`3Blue1Brown` · `MindYourDecisions` · `Andy Math` · `Mathologer` · `깨봉수학`) 벤치마킹 상시 적용 원칙**
 - ✅ **15. 비수학 글로벌 인기 플랫폼 & 메가 채널(`Veritasium` · `Kurzgesagt` · `Duolingo` · `Wordle` · `Chess.com` · `Netflix`) 메커니즘 상시 이식 및 `https://min7014.github.io/` 기본 아이디어 100% 기반 절대 원칙**
 - ✅ **16. 유튜브 수익 ➔ 제미나이 울트라(Gemini Ultra) 자급자족 ➔ 수학교육 자료 질적·양적 대확장 ➔ 전 세계적 수학교육 사이트 구축 선순환(Flywheel) 원칙**
+- ✅ **17. 유튜브 파트너 프로그램(YPP) 수익창출 조건(구독자 1,000명 + 시청시간 4,000시간 / Shorts 1,000만 뷰) 최단기 달성 5대 가속 원칙**
 - ✅ **17. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **18. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
