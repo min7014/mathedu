@@ -1535,6 +1535,7 @@
                   <button type="button" onclick="openLinkModal(${itemIdx})" style="border:none;background:none;color:#64748b;font-size:0.73rem;font-weight:700;cursor:pointer;padding:0;text-decoration:underline;">
                     🔗 유튜브 링크 직접 등록/수정
                   </button>
+                  <button type="button" onclick="window.printClassroomQrWorksheet(${itemIdx})" style="margin-left:8px;padding:3px 9px;border-radius:6px;border:1px solid #facc15;background:#fef9c3;color:#854d0e;font-size:0.72rem;font-weight:900;cursor:pointer;">🖨️ 교실 QR 활동지 인쇄</button>
                 </div>
               </div>
             </td>
@@ -1738,14 +1739,21 @@
         </div>
                 <div id="vbNeonIdeaLab" style="padding:12px;border-radius:12px;background:linear-gradient(135deg,#090d1e,#1e1b4b);border:1.5px solid #7c3aed;margin-bottom:12px;color:#f8fafc;box-shadow:0 8px 20px rgba(15,23,42,0.35);">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
-            <span style="font-weight:900;color:#fef08a;font-size:0.84rem;">🌟 [창의 수학 네온 시뮬레이터] 슬라이더를 움직여 불변량을 직접 실험하세요!</span>
-            <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="padding:4px 10px;border-radius:999px;background:#e11d48;color:#fff;font-size:0.72rem;font-weight:900;text-decoration:none;border:1px solid #fef08a;">🔔 @min7014_ai 1초 구독</a>
+            <span style="font-weight:900;color:#fef08a;font-size:0.84rem;">🌟 [8대 창의 수학 네온 시뮬레이터] 슬라이더를 움직여 불변량을 직접 실험하세요!</span>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;">
+              <button type="button" onclick="window.printClassroomQrWorksheet(${itemIdx})" style="padding:4px 10px;border-radius:999px;background:#facc15;color:#0f172a;font-size:0.72rem;font-weight:900;border:1px solid #fef08a;cursor:pointer;">🖨️ 교실 QR 탐구 활동지 인쇄</button>
+              <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="padding:4px 10px;border-radius:999px;background:#e11d48;color:#fff;font-size:0.72rem;font-weight:900;text-decoration:none;border:1px solid #fef08a;">🔔 @min7014_ai 1초 구독</a>
+            </div>
           </div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;">
-            <button type="button" onclick="window.setVbNeonMode('pythagoras')" id="vbNeonBtn_pythagoras" style="padding:4px 9px;border-radius:7px;border:1px solid #38bdf8;background:#1e3a8a;color:#fff;font-size:0.73rem;font-weight:800;cursor:pointer;">🌳 피타고라스 프랙탈</button>
-            <button type="button" onclick="window.setVbNeonMode('ceva')" id="vbNeonBtn_ceva" style="padding:4px 9px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.73rem;font-weight:800;cursor:pointer;">📐 체바 넓이·비율</button>
-            <button type="button" onclick="window.setVbNeonMode('ellipse')" id="vbNeonBtn_ellipse" style="padding:4px 9px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.73rem;font-weight:800;cursor:pointer;">🪐 타원 12갈래 레이저</button>
-            <button type="button" onclick="window.setVbNeonMode('calculus')" id="vbNeonBtn_calculus" style="padding:4px 9px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.73rem;font-weight:800;cursor:pointer;">📈 리만 적분·접선</button>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;">
+            <button type="button" onclick="window.setVbNeonMode('pythagoras')" id="vbNeonBtn_pythagoras" style="padding:4px 8px;border-radius:7px;border:1px solid #38bdf8;background:#1e3a8a;color:#fff;font-size:0.71rem;font-weight:800;cursor:pointer;">🌳 피타고라스</button>
+            <button type="button" onclick="window.setVbNeonMode('ceva')" id="vbNeonBtn_ceva" style="padding:4px 8px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.71rem;font-weight:800;cursor:pointer;">📐 체바·메넬라우스</button>
+            <button type="button" onclick="window.setVbNeonMode('ellipse')" id="vbNeonBtn_ellipse" style="padding:4px 8px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.71rem;font-weight:800;cursor:pointer;">🪐 타원 레이저</button>
+            <button type="button" onclick="window.setVbNeonMode('calculus')" id="vbNeonBtn_calculus" style="padding:4px 8px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.71rem;font-weight:800;cursor:pointer;">📈 미적분·리만</button>
+            <button type="button" onclick="window.setVbNeonMode('trig')" id="vbNeonBtn_trig" style="padding:4px 8px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.71rem;font-weight:800;cursor:pointer;">🌊 단위원 사인파</button>
+            <button type="button" onclick="window.setVbNeonMode('fibonacci')" id="vbNeonBtn_fibonacci" style="padding:4px 8px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.71rem;font-weight:800;cursor:pointer;">🌻 황금비 나선</button>
+            <button type="button" onclick="window.setVbNeonMode('galton')" id="vbNeonBtn_galton" style="padding:4px 8px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.71rem;font-weight:800;cursor:pointer;">🎲 갈톤 정규분포</button>
+            <button type="button" onclick="window.setVbNeonMode('circle')" id="vbNeonBtn_circle" style="padding:4px 8px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:0.71rem;font-weight:800;cursor:pointer;">⭕ 원주각·방멱</button>
           </div>
           <canvas id="vbNeonIdeaCanvas" width="460" height="220" style="width:100%;height:auto;border-radius:10px;background:#050914;border:1px solid rgba(56,189,248,0.4);display:block;"></canvas>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:0.74rem;">
@@ -1773,6 +1781,7 @@
         ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="res-chip">🌐 min7014.github.io 웹페이지 ↗</a>` : ''}
         ${pdfClean ? `<a href="${pdfClean}" target="_blank" rel="noopener" class="res-chip">📄 원본 플립북 PDF ↗</a>` : ''}
         ${item.geogebra ? `<a href="${item.geogebra}" target="_blank" rel="noopener" class="res-chip">🧭 GeoGebra 인터랙티브 ↗</a>` : ''}
+        <button type="button" onclick="window.printClassroomQrWorksheet(${itemIdx})" class="res-chip" style="border-color:#facc15;background:#fef9c3;color:#854d0e;font-weight:900;cursor:pointer;">🖨️ 교실 배포용 QR 탐구 활동지 인쇄 (학생 30명 구독 연동)</button>
         <a href="index.html?q=${encodeURIComponent(cleanKw)}&from=video_board" class="res-chip" style="border-color:#86efac;background:#f0fdf4;color:#047857;font-weight:800;">✍️ 이 개념 탈-5지선다 기출 풀기 ➔</a>
         <a href="game.html" class="res-chip" style="border-color:#c7d2fe;background:#eef2ff;color:#4338ca;font-weight:800;">🎮 3D 수학 성소 보스 레이드 ➔</a>
         <button type="button" onclick="copyTopicYoutubeWebsitePromo(${itemIdx})" class="res-chip" style="border-color:#fda4af;background:#fff1f2;color:#be123c;font-weight:800;cursor:pointer;">📢 이 영상+홈페이지 홍보 카드 복사</button>
@@ -1781,10 +1790,14 @@
 
       setTimeout(() => {
         const tBlob = ((item.title || '') + ' ' + (item.category || '')).toLowerCase();
-        let defMode = 'pythagoras';
-        if (tBlob.includes('체바') || tBlob.includes('메넬라우스') || tBlob.includes('삼각형') || tBlob.includes('ceva')) defMode = 'ceva';
-        else if (tBlob.includes('타원') || tBlob.includes('포물선') || tBlob.includes('쌍곡선') || tBlob.includes('초점') || tBlob.includes('ellipse')) defMode = 'ellipse';
-        else if (tBlob.includes('미분') || tBlob.includes('적분') || tBlob.includes('극한') || tBlob.includes('접선')) defMode = 'calculus';
+        let defMode = 'circle';
+        if (tBlob.includes('피타고라스') || tBlob.includes('직각삼각형') || tBlob.includes('pythagor')) defMode = 'pythagoras';
+        else if (tBlob.includes('타원') || tBlob.includes('포물선') || tBlob.includes('쌍곡선') || tBlob.includes('초점') || tBlob.includes('사이클로이드')) defMode = 'ellipse';
+        else if (tBlob.includes('황금') || tBlob.includes('피보나치') || tBlob.includes('오각형') || tBlob.includes('수열') || tBlob.includes('제곱근')) defMode = 'fibonacci';
+        else if (tBlob.includes('확률') || tBlob.includes('정규분포') || tBlob.includes('이항') || tBlob.includes('통계') || tBlob.includes('조합')) defMode = 'galton';
+        else if (tBlob.includes('삼각함수') || tBlob.includes('사인') || tBlob.includes('코사인') || tBlob.includes('탄젠트') || tBlob.includes('sin')) defMode = 'trig';
+        else if (tBlob.includes('미분') || tBlob.includes('적분') || tBlob.includes('극한') || tBlob.includes('평균값')) defMode = 'calculus';
+        else if (tBlob.includes('체바') || tBlob.includes('메넬라우스') || tBlob.includes('평행선') || tBlob.includes('삼각형')) defMode = 'ceva';
         if (window.setVbNeonMode) window.setVbNeonMode(defMode);
       }, 60);
       stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1793,12 +1806,10 @@
       }
     }
 
-    
-    
     window._vbNeonMode = 'pythagoras';
     window.setVbNeonMode = function(m) {
       window._vbNeonMode = m;
-      ['pythagoras', 'ceva', 'ellipse', 'calculus'].forEach(k => {
+      ['pythagoras', 'ceva', 'ellipse', 'calculus', 'trig', 'fibonacci', 'galton', 'circle'].forEach(k => {
         const b = document.getElementById('vbNeonBtn_' + k);
         if (b) {
           b.style.background = (k === m) ? '#7c3aed' : '#0f172a';
@@ -1820,9 +1831,21 @@
       } else if (m === 'ellipse') {
         lA.textContent = '🎛️ 레이저 광선 진행률 (0~100%)'; sA.min = 5; sA.max = 100; sA.value = 72;
         lB.textContent = '🎚️ 타원 이심률 스케일 (20~80)'; sB.min = 20; sB.max = 80; sB.value = 60;
-      } else {
+      } else if (m === 'calculus') {
         lA.textContent = '🎛️ 할선 Δx 수렴 위치'; sA.min = 5; sA.max = 80; sA.value = 28;
         lB.textContent = '🎚️ 리만 적분 기둥 수 N (4~48)'; sB.min = 4; sB.max = 48; sB.value = 20;
+      } else if (m === 'trig') {
+        lA.textContent = '🎛️ 단위원 각도 θ (2°~75°)'; sA.min = 2; sA.max = 75; sA.value = 18;
+        lB.textContent = '🎚️ 파동 주파수 배율 (1~4배)'; sB.min = 1; sB.max = 4; sB.value = 2;
+      } else if (m === 'fibonacci') {
+        lA.textContent = '🎛️ 해바라기 씨앗 수 (20~144개)'; sA.min = 20; sA.max = 144; sA.value = 110;
+        lB.textContent = '🎚️ 회전각 (135°~140°)'; sB.min = 135; sB.max = 140; sB.step = 0.1; sB.value = 137.5;
+      } else if (m === 'galton') {
+        lA.textContent = '🎛️ 낙하 구슬 진행률 (10~100%)'; sA.min = 10; sA.max = 100; sA.value = 85;
+        lB.textContent = '🎚️ 이항분포 층수 n (4~10층)'; sB.min = 4; sB.max = 10; sB.step = 1; sB.value = 8;
+      } else {
+        lA.textContent = '🎛️ 원주 위 점 P 회전각 (15°~165°)'; sA.min = 15; sA.max = 165; sA.value = 82;
+        lB.textContent = '🎚️ 호 AB 중심각 크기 (40°~160°)'; sB.min = 40; sB.max = 160; sB.step = 1; sB.value = 110;
       }
       window.drawVbNeonCanvas();
     };
@@ -1917,7 +1940,7 @@
         }
         [F1, F2].forEach(F => { ctx.fillStyle = '#e11d48'; ctx.beginPath(); ctx.arc(F.x, F.y, 6, 0, Math.PI * 2); ctx.fill(); });
         if (ro) ro.textContent = `★ 타원 광학 불변량: 12갈래 레이저 경로 합 |PF1| + |PF2| = 2a 일정 → 제2초점 F2 동시 도착! (${Math.round(sA)}%)`;
-      } else {
+      } else if (m === 'calculus') {
         const ax0 = 55, ay0 = H - 24, sw = W - 110, sh = H - 52;
         const N = Math.round(sB);
         const f = u => 0.15 + 0.68 * Math.pow(u, 1.8) - 0.1 * Math.sin(u * Math.PI * 2);
@@ -1936,7 +1959,163 @@
         }
         ctx.stroke(); ctx.restore();
         if (ro) ro.textContent = `★ 미적분 극한 실험: 리만 분할 N = ${N}개 · Δx = ${(sA / 100).toFixed(2)} → 0 수렴 시 정적분 넓이 일치!`;
+      } else if (m === 'trig') {
+        const th = (sA * Math.PI) / 180.0;
+        const freq = sB;
+        const r = 74, cx = 105, cy = H / 2;
+        ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.2;
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+        const px = cx + r * Math.cos(th), py = cy - r * Math.sin(th);
+        ctx.fillStyle = 'rgba(52,211,153,0.28)';
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, -th, 0); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = '#facc15'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, py); ctx.lineTo(px, cy); ctx.closePath(); ctx.stroke();
+        ctx.strokeStyle = '#34d399'; ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let k = 0; k <= 90; k++) {
+          const u = k / 90, wx = 205 + u * 235;
+          const wy = cy - r * Math.sin(th + u * Math.PI * 2 * (freq * 0.5));
+          if (k === 0) ctx.moveTo(wx, wy); else ctx.lineTo(wx, wy);
+        }
+        ctx.stroke();
+        const sv = Math.sin(th).toFixed(4), tv = th.toFixed(4), tanv = Math.tan(th).toFixed(4);
+        const ratio = (Math.sin(th) / th).toFixed(4);
+        if (ro) ro.textContent = `★ sin θ(${sv}) < θ(${tv}) < tan θ(${tanv})  ⇒  sin θ / θ = ${ratio} (θ→0 수렴: 1.0000!)`;
+      } else if (m === 'fibonacci') {
+        const count = Math.round(sA);
+        const gAng = (sB * Math.PI) / 180.0;
+        const cx = W / 2, cy = H / 2;
+        for (let i = 1; i <= count; i++) {
+          const r = 7.2 * Math.sqrt(i);
+          const a = i * gAng;
+          const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+          ctx.fillStyle = (i % 8 === 0) ? '#facc15' : ((i % 5 === 0) ? '#34d399' : '#38bdf8');
+          ctx.beginPath(); ctx.arc(x, y, Math.max(2, 4.2 - i * 0.015), 0, Math.PI * 2); ctx.fill();
+        }
+        if (ro) ro.textContent = `★ 황금비 φ = 1.618034 · 회전각 ${sB.toFixed(1)}° (황금각 137.5°에서 ${count}개 씨앗 무충돌 나선 배열!)`;
+      } else if (m === 'galton') {
+        const rows = Math.round(sB);
+        const prog = sA / 100.0;
+        const cx = W / 2;
+        function nCr(n, r) {
+          let res = 1;
+          for (let i = 1; i <= r; i++) res = (res * (n - i + 1)) / i;
+          return res;
+        }
+        const maxC = nCr(rows, Math.floor(rows / 2));
+        const bw = Math.min(34, 280 / (rows + 1));
+        for (let k = 0; k <= rows; k++) {
+          const c = nCr(rows, k);
+          const bh = (c / maxC) * 125 * prog;
+          const bx = cx + (k - rows / 2) * (bw + 4) - bw / 2;
+          ctx.fillStyle = 'rgba(56,189,248,0.45)'; ctx.strokeStyle = '#38bdf8';
+          ctx.fillRect(bx, H - 22 - bh, bw, bh); ctx.strokeRect(bx, H - 22 - bh, bw, bh);
+        }
+        ctx.strokeStyle = '#facc15'; ctx.lineWidth = 2.6; ctx.beginPath();
+        for (let x = 70; x <= W - 70; x += 4) {
+          const z = (x - cx) / (bw * Math.sqrt(rows) * 0.55);
+          const y = H - 22 - 125 * prog * Math.exp(-0.5 * z * z);
+          if (x === 70) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        if (ro) ro.textContent = `★ 갈톤 보드 중심극한정리: ${rows}단 이항분포 B(${rows}, 0.5) → 가우스 정규분포 종 곡선 100% 수렴!`;
+      } else {
+        const cx = W / 2, cy = H / 2 + 6, r = 82;
+        ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.4;
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+        const halfC = ((sB / 2) * Math.PI) / 180.0;
+        const A = {x: cx - r * Math.sin(halfC), y: cy + r * Math.cos(halfC)};
+        const B = {x: cx + r * Math.sin(halfC), y: cy + r * Math.cos(halfC)};
+        const pAng = -Math.PI + ((sA / 180.0) * Math.PI);
+        const P = {x: cx + r * Math.cos(pAng), y: cy + r * Math.sin(pAng)};
+        ctx.strokeStyle = 'rgba(251,113,133,0.85)'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(cx, cy); ctx.lineTo(B.x, B.y); ctx.stroke();
+        ctx.strokeStyle = '#facc15'; ctx.lineWidth = 2.6;
+        ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(P.x, P.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+        [A, B, P, {x: cx, y: cy}].forEach((pt, i) => {
+          ctx.fillStyle = i === 2 ? '#34d399' : '#facc15';
+          ctx.beginPath(); ctx.arc(pt.x, pt.y, 5, 0, Math.PI * 2); ctx.fill();
+        });
+        if (ro) ro.textContent = `★ 원주각 불변량: 점 P가 원주 위 어디로 움직여도(각 ${Math.round(sA)}°) 원주각 ∠APB = ${(sB / 2).toFixed(1)}° (중심각 ${Math.round(sB)}°의 절반!)`;
       }
+    };
+
+    window.printClassroomQrWorksheet = function(itemIdx) {
+      const item = ALL_ITEMS[itemIdx] || ALL_ITEMS[0] || { title: '시각적 수학 증명', id: '0001', _slug: 'math20250130001' };
+      const ytUrl = item._ytIdeaKo || item._ytKo || item._ytEn || 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
+      const subUrl = 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
+      const webUrl = 'https://min7014.github.io/mathedu/video_board.html?slug=' + encodeURIComponent(item._slug || '');
+      const qrYt = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(ytUrl);
+      const qrSub = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(subUrl);
+      const w = window.open('', '_blank', 'width=900,height=1050');
+      if (!w) { alert('팝업 차단을 해제해 주세요!'); return; }
+      w.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>[교실 배포용 QR 탐구 활동지] ${item.title}</title>
+      <style>
+        @page { size: A4; margin: 12mm; }
+        body { font-family: 'Malgun Gothic', sans-serif; color: #0f172a; margin: 0; padding: 16px; line-height: 1.5; }
+        .hdr { border: 2.5px solid #1e3a8a; border-radius: 14px; padding: 14px 18px; background: #f8fafc; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .badge { display: inline-block; background: #e11d48; color: #fff; font-weight: 900; font-size: 12px; padding: 3px 10px; border-radius: 999px; margin-bottom: 6px; }
+        .qr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .qr-card { border: 2px solid #7c3aed; border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 14px; background: #faf5ff; }
+        .qr-card img { width: 92px; height: 92px; border: 2px solid #fff; border-radius: 8px; }
+        .sec { border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; }
+        .sec h3 { margin: 0 0 8px 0; font-size: 15px; color: #1e3a8a; }
+        .grid-box { height: 185px; border: 1.5px dashed #64748b; border-radius: 10px; background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 18px 18px; margin-top: 8px; }
+        .line-box { height: 78px; border-bottom: 1px solid #cbd5e1; margin-top: 6px; }
+        .no-print { text-align: right; margin-bottom: 10px; }
+        @media print { .no-print { display: none; } }
+      </style></head><body>
+      <div class="no-print">
+        <button onclick="window.print()" style="padding:8px 18px;border-radius:8px;background:#e11d48;color:#fff;font-weight:900;border:none;cursor:pointer;font-size:14px;">🖨️ A4 활동지 바로 인쇄하기</button>
+      </div>
+      <div class="hdr">
+        <div>
+          <div class="badge">📐 질문하는 수학 수업 × @min7014_ai 창의 수학 시네마 탐구 활동지</div>
+          <div style="font-size:20px;font-weight:900;color:#0f172a;">${item.title}</div>
+          <div style="font-size:12px;color:#475569;margin-top:4px;">단원: ${item.category || '기하·대수 시각적 증명'} | 자료 번호: #${item.id || ''} (${item._slug || ''})</div>
+        </div>
+        <div style="text-align:right;font-size:13px;font-weight:700;">
+          <div>학교/학년/반: ______________________</div>
+          <div style="margin-top:6px;">이름: ______________________________</div>
+        </div>
+      </div>
+      <div class="qr-row">
+        <div class="qr-card">
+          <img src="${qrYt}" alt="YouTube QR" />
+          <div>
+            <div style="font-weight:900;color:#be123c;font-size:14px;">🎬 [QR 1] 1080p 창의 수학 시네마 영상 보기</div>
+            <div style="font-size:12px;color:#334155;margin-top:4px;">스마트폰 카메라로 스캔하면 공식 암기 없이 눈으로 깨치는 <b>@min7014_ai 유튜브 영상</b>이 바로 재생됩니다!</div>
+            <div style="font-size:11px;color:#64748b;margin-top:3px;">${ytUrl}</div>
+          </div>
+        </div>
+        <div class="qr-card" style="border-color:#0284c7;background:#f0f9ff;">
+          <img src="${qrSub}" alt="Subscribe QR" />
+          <div>
+            <div style="font-weight:900;color:#0369a1;font-size:14px;">🔔 [QR 2] @min7014_ai 구독 & 60fps 실험실</div>
+            <div style="font-size:12px;color:#334155;margin-top:4px;">채널 <b>[구독]</b>을 누르고 매일 업로드되는 1,113개 시각 증명 시네마와 동적 시뮬레이터를 만나보세요!</div>
+            <div style="font-size:11px;color:#64748b;margin-top:3px;">${webUrl}</div>
+          </div>
+        </div>
+      </div>
+      <div class="sec">
+        <h3>👁️ [1단계 · 관찰과 발견 (Notice & Wonder)] 도형이 움직여도 절대 변하지 않는 '불변량(Invariant)'은 무엇인가요?</h3>
+        <div style="font-size:12.5px;color:#475569;">💡 핵심 단서: ${item.core_concept || '점과 선분이 움직일 때 서로 상쇄되거나 일정하게 보존되는 넓이·길이·각도 관계를 찾아 적어 보세요.'}</div>
+        <div class="line-box"></div>
+      </div>
+      <div class="sec">
+        <h3>🧭 [2단계 · 폴리아 제1보조선 작도 실험실] 정리를 단 한 줄로 증명하는 '황금 보조선'을 직접 그려 보세요!</h3>
+        <div style="font-size:12.5px;color:#475569;">아래 점선 모눈 위에 핵심 도형을 그리고, 흩어진 조건들을 하나로 연결하는 결정적 보조선(수선·평행선·대칭점·반지름)을 색연필로 표시해 보세요.</div>
+        <div class="grid-box"></div>
+      </div>
+      <div class="sec">
+        <h3>🔀 [3단계 · What-If-Not 나만의 문제 발명] 조건을 하나 바꾸면(점이 밖으로 나가거나 각도가 바뀌면) 어떻게 될까요?</h3>
+        <div class="line-box"></div>
+      </div>
+      <div style="text-align:center;font-size:11.5px;color:#64748b;margin-top:8px;">
+        🌐 수학자료실 & 창의 수학 플랫폼: <b>https://min7014.github.io/mathedu/video_board.html</b> · 📺 유튜브 <b>@min7014_ai</b>
+      </div>
+      </body></html>`);
+      w.document.close();
     };
 
     function saveVideoBoardStudentQuestion(topicTitle) {

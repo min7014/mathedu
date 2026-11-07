@@ -224,6 +224,22 @@ def build_ypp_watchtime_masterclasses() -> list:
             "lang": "en",
         },
         {
+            "mc_slug": "masterclass_neon_idea_vol2",
+            "title_ko": "🌟 [창의 수학 네온 시네마 마스터클래스 Vol.2] 피타고라스·코시평균값·원주각·사이클로이드·평행선비·황금나선 (1080p 정주행) | @min7014_ai",
+            "title_en": "🌟 [Creative Math Neon Cinema Masterclass Vol.2] Pythagoras, Cauchy MVT, Inscribed Angle, Cycloid & Golden Spiral (1080p) | @min7014_ai",
+            "slugs": ["2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol2_en",
+            "title_ko": "🌟 [Global Creative Math Cinema Masterclass Vol.2] Pythagoras, Cauchy MVT, Inscribed Angle, Cycloid & Golden Spiral (1080p) | @min7014_ai",
+            "title_en": "🌟 [Creative Math Neon Cinema Masterclass Vol.2] 6 Pure Procedural Math Proofs Full Course (1080p) | @min7014_ai",
+            "slugs": ["2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
+        {
             "mc_slug": "masterclass_euclidean_geometry_vol1",
             "title_ko": "🔥 [기하학 시각적 증명 마스터클래스 Vol.1] 피타고라스·메넬라우스·체바·원주각·포물선 총정리 (1080p 정주행) | @min7014_ai",
             "title_en": "🔥 [Visual Geometry Masterclass Vol.1] Pythagoras, Menelaus, Ceva, Circle & Parabola Full Compilation (1080p) | @min7014_ai",

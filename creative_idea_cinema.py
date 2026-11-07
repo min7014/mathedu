@@ -96,20 +96,20 @@ def detect_visual_archetype(sdoc: dict) -> str:
         str((sdoc.get("teacher_proof_analysis") or {}).get("category_type", "")),
     ]).lower()
 
-    if any(k in blob for k in ["피타고라스", "pythagor", "직각삼각형", "right triangle", "넓이 보존", "정사각형"]):
+    if any(k in blob for k in ["피타고라스", "pythagor", "직각삼각형", "right triangle", "넓이 보존", "정사각형의 한 변"]):
         return "pythagoras_fractal"
-    if any(k in blob for k in ["황금비", "피보나치", "golden", "fibonacci", "나선", "정오각형", "pentagon"]):
-        return "fibonacci_golden"
-    if any(k in blob for k in ["sin", "cos", "tan", "삼각함수", "삼각비", "사인", "코사인", "탄젠트", "호도법", "단위원"]):
-        return "trig_harmonic"
-    if any(k in blob for k in ["확률", "정규분포", "이항분포", "통계", "주사위", "독립시행", "normal", "binomial", "probability", "조합"]):
-        return "prob_galton"
-    if any(k in blob for k in ["체바", "메넬라우스", "ceva", "menelaus", "무게중심", "내분", "선분 비", "평행선", "삼각형", "triangle", "비비아니", "viviani", "나폴레옹", "몰리"]):
-        return "ceva_menelaus"
     if any(k in blob for k in ["타원", "포물선", "쌍곡선", "단델린", "초점", "준선", "이차곡선", "ellipse", "parabola", "hyperbola", "dandelin", "conic", "사이클로이드", "cycloid"]):
         return "conic_reflection"
-    if any(k in blob for k in ["미분", "적분", "극한", "도함수", "평균값", "롤의", "코시", "접선", "할선", "구분구적", "급수", "derivative", "integral", "limit", "tangent", "cauchy", "rolle"]):
+    if any(k in blob for k in ["황금비", "피보나치", "golden", "fibonacci", "나선", "정오각형", "pentagon", "연분수", "등비", "수열", "제곱근", "무리수"]):
+        return "fibonacci_golden"
+    if any(k in blob for k in ["확률", "정규분포", "이항", "통계", "주사위", "독립시행", "binomial", "probability", "조합", "순열", "파스칼", "경우의 수", "표준편차", "분산"]):
+        return "prob_galton"
+    if any(k in blob for k in ["삼각함수", "삼각비", "사인", "코사인", "탄젠트", "호도법", "단위원", "trigon", "sin(", "cos(", "tan(", "sin ", "cos ", "tan ", "\\sin", "\\cos", "\\tan"]):
+        return "trig_harmonic"
+    if any(k in blob for k in ["미분", "적분", "극한", "도함수", "평균값", "롤의", "구분구적", "급수", "derivative", "integral", "limit", "mean value", "rolle"]):
         return "calculus_motion"
+    if any(k in blob for k in ["체바", "메넬라우스", "ceva", "menelaus", "무게중심", "내분", "외분", "선분의 길이의 비", "평행선", "비비아니", "viviani", "나폴레옹", "몰리", "삼각형", "triangle"]):
+        return "ceva_menelaus"
     return "circle_invariants"
 
 
@@ -296,7 +296,980 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                 },
             ]
 
-    # 기하 / 이차곡선 / 미적분 / 원 / 대수 범용 5막 시네마 대본
+    if archetype == "conic_reflection":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 12채널 레이저 광학 미스터리",
+                    "headline": f"360도 어느 방향으로 쏜 빛이든 단 하나의 초점으로 모인다! ({t_title})",
+                    "key_formula": "PF₁ + PF₂ = 2a (Constant Optical Path)",
+                    "narration": (
+                        f"어두운 우주 공간에서 제1초점 F1이 열두 가닥의 네온 레이저 광선을 사방으로 발사합니다. "
+                        f"놀랍게도 [{t_title}]에서는 어느 각도로 날아간 빛이든 곡선 내벽에 반사되는 순간, 단 하나의 오차도 없이 제2초점 F2로 정확히 모입니다! "
+                        f"속삭이는 회랑과 천체 망원경이 사용하는 이 완벽한 광학 집속의 비밀은 무엇일까요?"
+                    ),
+                    "hud_notes": [
+                        "12채널 레이저 발사: 모든 방향의 광선이 반사 후 한 점에 집속!",
+                        "핵심 불변량: 두 초점까지의 거리 합 PF₁ + PF₂ = 2a 일정!",
+                        "질문: 왜 곡선의 모든 점에서 입사각과 반사각이 정확히 같아질까?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 팽팽한 황금 실의 길이가 만드는 궤적",
+                    "headline": "한쪽이 길어지면 다른 쪽이 정확히 그만큼 줄어드는 거리 합 불변량!",
+                    "key_formula": "Δ(PF₁) + Δ(PF₂) = 0  →  PF₁ + PF₂ = 2a",
+                    "narration": (
+                        f"곡선 위를 달리는 점 P를 따라 두 초점과 연결된 두 선분의 길이를 실시간으로 측정해 보세요. "
+                        f"점 P가 오른쪽으로 이동해 F1에서 멀어지는 순간, F2까지의 거리가 정확히 똑같은 길이만큼 짧아집니다. "
+                        f"마치 길이가 2a로 고정된 팽팽한 황금 실에 연필을 걸고 돌리는 것처럼, 거리 합이 영원히 보존됩니다."
+                    ),
+                    "hud_notes": [
+                        "실시간 거리 측정: PF₁이 +Δ만큼 늘어나면 PF₂는 -Δ만큼 감소!",
+                        "광학적 의미: 모든 광선이 F₁에서 F₂까지 이동하는 총 시간과 거리가 동일!",
+                        "동시 도착 원리: 12개 파동이 제2초점에 동시에 도착하여 보강 간섭!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · 페르마의 최단 경로와 대칭점 보조선",
+                    "headline": "접선 너머로 초점을 대칭이동하면 꺾인 빛의 경로가 일직선으로 펴진다!",
+                    "key_formula": "min(PF₁ + PF₂) = Straight Line F₁ — P — F₂'  (θ₁ = θ₂)",
+                    "narration": (
+                        f"왜 곡선 위의 접선이 두 초점과 이루는 입사각과 반사각을 완벽히 이등분할까요? "
+                        f"접선 너머로 초점 F2를 대칭이동해 가상의 점 F2 프라임을 찍는 황금 보조선을 그어 보세요! "
+                        f"꺾여 있던 두 선분의 합이 일직선으로 펴지는 바로 그 점 P에서 거리가 최소가 되며, 맞꼭지각과 대칭 성질에 의해 입사각과 반사각이 일치합니다."
+                    ),
+                    "hud_notes": [
+                        "결정적 보조선: 접선에 대해 한 초점을 대칭이동하여 일직선 연결!",
+                        "페르마의 원리: 빛은 거울 접선 위에서 이동 거리가 최소인 점 P를 선택!",
+                        "맞꼭지각 + 이등변삼각형 성질 → 입사각(θ₁) = 반사각(θ₂) 1초 증명!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (이심률 e의 연속 변형)",
+                    "headline": "초점 하나를 무한대 저편으로 보내면 타원이 포물선과 쌍곡선으로 진화한다!",
+                    "key_formula": "e = 0 (원) → 0<e<1 (타원) → e = 1 (포물선) → e > 1 (쌍곡선)",
+                    "narration": (
+                        f"이제 타원의 한계를 넘어 이심률을 연속적으로 바꿔 봅시다! "
+                        f"제2초점을 무한히 먼 곳으로 밀어내면, 제2초점으로 향하던 광선들이 모두 축에 나란한 평행 광선으로 바뀌며 타원이 포물선으로 변신합니다! "
+                        f"자동차 전조등과 전파망원경, 나아가 케플러의 행성 궤도까지 모두 이 하나의 광학 아이디어로 통합됩니다."
+                    ),
+                    "hud_notes": [
+                        "조건 변형 1: 두 초점이 합쳐지면(e=0) 중심에서 반사되는 '원'",
+                        "조건 변형 2: 한 초점이 무한대로 가면(e=1) 평행광을 모으는 '포물선'",
+                        "조건 변형 3: 거리 차가 일정하면(e>1) 제임스 웹 망원경의 '쌍곡선'",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수능·올림피아드 이차곡선 10초 해법",
+                    "headline": "이차곡선 위에 점이 찍히는 순간 두 초점과 연결하는 보조선부터 그어라!",
+                    "key_formula": "Rule #1: Spot Point P on Conic → Connect Both Foci F₁ & F₂!",
+                    "narration": (
+                        f"수능과 수리논술에서 타원, 포물선, 쌍곡선 문제가 나올 때 복잡한 방정식에 대입하는 것은 가장 느린 길입니다. "
+                        f"곡선 위의 점을 보자마자 두 초점 또는 준선으로 황금 보조선을 긋고, 거리 합과 입사·반사 대칭성을 쓰면 10초 만에 풀립니다. "
+                        f"설명란의 인터랙티브 광학 실험실에서 직접 레이저를 쏘아 보고, 지금 바로 @min7014_ai 채널을 구독하세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 제1원칙: 이차곡선 문제 = 정의(초점·준선 거리) 보조선이 90% 해결!",
+                        "접선 문제: 초점 대칭이동 & 입사각=반사각 각이등분선 성질 즉시 적용!",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 12-CHANNEL LASER OPTICS MYSTERY",
+                    "headline": f"Every Laser Beam Fired From Focus F₁ Converges Exactly at F₂! ({t_title})",
+                    "key_formula": "PF₁ + PF₂ = 2a (Constant Optical Path)",
+                    "narration": (
+                        f"Twelve glowing neon laser beams fire in every direction from the first focus F1 across the dark cosmos. "
+                        f"In [{t_title}], every single beam reflects off the curved boundary and converges with zero error at the second focus F2! "
+                        f"What geometric law makes this whispering gallery and telescope reflection work?"
+                    ),
+                    "hud_notes": [
+                        "12-Channel Ray Tracing: All reflected rays lock onto Focus F₂!",
+                        "Core Invariant: Sum of focal distances PF₁ + PF₂ = 2a is constant!",
+                        "Question: Why does the curve bisect every incident and reflected angle?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · THE TAUT GOLDEN STRING INVARIANT",
+                    "headline": "As One Focal Segment Stretches, the Other Shrinks by the Exact Same Amount!",
+                    "key_formula": "Δ(PF₁) + Δ(PF₂) = 0  →  PF₁ + PF₂ = 2a",
+                    "narration": (
+                        f"Track point P as it glides along the curve. "
+                        f"Whenever PF1 stretches by delta, PF2 compresses by the exact same delta, keeping the total path length strictly constant. "
+                        f"Because every light wave travels the exact same distance 2a, all twelve waves arrive at F2 in perfect phase!"
+                    ),
+                    "hud_notes": [
+                        "Live Telemetry: +Δ on PF₁ is canceled by -Δ on PF₂!",
+                        "Equal Travel Time: All 12 light rays arrive at F₂ simultaneously!",
+                        "Constructive Interference: Geometry creates a natural optical lens.",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · FERMAT'S SHORTEST PATH & REFLECTION LINE",
+                    "headline": "Reflecting Focus F₂ Across the Tangent Straightens the Light Path!",
+                    "key_formula": "min(PF₁ + PF₂) = Straight Line F₁ — P — F₂'  (θ₁ = θ₂)",
+                    "narration": (
+                        f"Why does the tangent line form equal angles with both focal segments? "
+                        f"Reflect focus F2 across the tangent line to create virtual focus F2 prime! "
+                        f"The shortest path between F1 and F2 prime is a straight line intersecting at P, instantly proving the angle of incidence equals the angle of reflection!"
+                    ),
+                    "hud_notes": [
+                        "Golden Auxiliary Line: Reflect F₂ across the tangent line to F₂'",
+                        "Fermat's Principle: Light chooses point P that minimizes total distance",
+                        "Vertical Angles + Symmetry → Incident Angle θ₁ = Reflected Angle θ₂!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · MORPHING ECCENTRICITY TO INFINITY",
+                    "headline": "Push One Focus to Infinity and the Ellipse Morphs Into a Parabola!",
+                    "key_formula": "e = 0 (Circle) → 0<e<1 (Ellipse) → e = 1 (Parabola) → e > 1 (Hyperbola)",
+                    "narration": (
+                        f"What if we push focus F2 all the way to infinity? "
+                        f"The rays heading toward F2 become parallel beams, and our ellipse seamlessly transforms into a parabolic satellite dish! "
+                        f"Circles, ellipses, parabolas, and hyperbolas are all one family governed by eccentricity."
+                    ),
+                    "hud_notes": [
+                        "e = 0: Both foci merge at the center → Circle",
+                        "e = 1: Second focus at infinity → Parabolic Satellite Dish",
+                        "e > 1: Difference of distances constant → Cassegrain Hyperbola",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND OLYMPIAD CONIC STRATEGY",
+                    "headline": "Never Brute-Force Equations—Connect Both Foci the Instant You See P!",
+                    "key_formula": "Rule #1: Spot Point P on Conic → Connect Both Foci F₁ & F₂!",
+                    "narration": (
+                        f"Whenever a point lies on a conic section in an exam, draw segments to both foci before writing any coordinate algebra. "
+                        f"Try our live 60fps ray-tracing simulator in the description and subscribe to @min7014_ai right now!"
+                    ),
+                    "hud_notes": [
+                        "Instant Trigger: Point on Conic → Draw Focal Radii PF₁ & PF₂!",
+                        "Tangent Problem → Use Equal Reflection Angle Property!",
+                        "Subscribe to @min7014_ai for daily visual math cinema!",
+                    ],
+                },
+            ]
+
+    if archetype == "trig_harmonic":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 단위원 회전과 파동의 탄생",
+                    "headline": f"원의 등속 회전이 시간 축을 만나 아름다운 사인파로 펼쳐진다! ({t_title})",
+                    "key_formula": "e^(iθ) = cos θ + i·sin θ  |  lim(θ→0) (sin θ / θ) = 1",
+                    "narration": (
+                        f"밤하늘의 단위원 위를 도는 점 하나가 오른쪽 시간 축으로 흔적을 남기며 나아갑니다. "
+                        f"원을 맴도는 회전 운동이 수평으로 펼쳐지는 순간, 소리와 빛, 전자기파를 지배하는 사인파가 탄생합니다! "
+                        f"그리고 각도 세타가 0으로 한없이 가까워질 때, [{t_title}]에서 사인 세타와 호의 길이 세타의 비율은 왜 정확히 1로 수렴할까요?"
+                    ),
+                    "hud_notes": [
+                        "단위원 페이저(Phaser): 회전하는 점의 높이가 실시간 사인파(sin θ)를 생성!",
+                        "핵심 극한: 각도 θ → 0 일 때 (현의 높이 sin θ) / (호의 길이 θ) → 1.000!",
+                        "질문: 곡선인 호의 길이와 직선인 높이가 어떻게 똑같아질 수 있을까?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 실시간 수치 게이지로 보는 극한의 수렴",
+                    "headline": "세타가 작아질수록 sin θ, θ, tan θ 세 숫자가 하나로 포개진다!",
+                    "key_formula": "sin(0.05) = 0.04998 < θ = 0.05000 < tan(0.05) = 0.05004",
+                    "narration": (
+                        f"단위원 아래쪽의 실시간 수치 계기판을 주목해 보세요! "
+                        f"각도가 클 때는 사인 세타보다 호의 길이 세타가 길고, 바깥쪽 접선 탄젠트 세타가 가장 깁니다. "
+                        f"하지만 각도를 점점 좁혀 나가면 세 숫자의 소수점 첫째, 둘째, 셋째 자리가 차례대로 완전히 일치하며 비율이 1.000으로 잠깁니다!"
+                    ),
+                    "hud_notes": [
+                        "관찰 1: 모든 예각에서 항상 sin θ < θ < tan θ 대소 관계 성립!",
+                        "관찰 2: θ를 줄일수록 곡선 호(θ)가 직선 수선(sin θ)과 구분 불가능해짐!",
+                        "수치 검증: θ = 0.1 rad 일 때 이미 sin θ / θ = 0.9983 (99.8% 일치!)",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · 에메랄드 부채꼴과 두 삼각형의 넓이 샌드위치",
+                    "headline": "내접 삼각형 < 부채꼴 < 외접 직각삼각형 넓이 비교 한 줄로 증명 끝!",
+                    "key_formula": "½·sinθ·cosθ < ½·θ < ½·tanθ  ⇒  cosθ < (sinθ / θ) < 1",
+                    "narration": (
+                        f"이 극한을 증명하는 최고의 시각적 아이디어는 길이가 아니라 '넓이'를 비교하는 것입니다! "
+                        f"화면의 에메랄드빛 부채꼴을 보세요. 안쪽 삼각형보다는 부채꼴이 넓고, 바깥쪽 접선 직각삼각형보다는 부채꼴이 작습니다. "
+                        f"이 넓이 부등식을 사인 세타로 나누어 뒤집으면, 사인 세타 나누기 세타가 코사인 세타와 1 사이에 갇히는 완벽한 샌드위치 정리가 완성됩니다!"
+                    ),
+                    "hud_notes": [
+                        "결정적 아이디어: 곡선 호의 길이를 직접 재는 대신 3개 도형의 넓이 비교!",
+                        "넓이 부등식: S(내접삼각형) < S(부채꼴 ½r²θ) < S(외접접선삼각형)",
+                        "양변 정리 후 θ→0 극한: cos 0 (=1) ≤ lim(sinθ/θ) ≤ 1 → 정답 1!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (미분과 테일러 급수로의 도약)",
+                    "headline": "이 단 하나의 극한에서 모든 삼각함수의 미분과 원주율 공식이 탄생한다!",
+                    "key_formula": "(sin x)' = cos x  |  sin θ ≈ θ - θ³/6 + θ⁵/120",
+                    "narration": (
+                        f"만약 사인 세타 나누기 세타가 1로 수렴하지 않았다면 현대 미적분학은 어떻게 되었을까요? "
+                        f"사인 함수를 미분하면 코사인이 된다는 아름다운 공식도, 물리학의 단진자 운동 방정식도 모두 이 극한이 1이기 때문에 성립합니다! "
+                        f"나아가 도형이 쪼개지는 차수를 분석하면 사인 세타가 세타로 근사되고, 코사인 세타는 1 빼기 2분의 세타 제곱으로 근사됨을 눈으로 읽을 수 있습니다."
+                    ),
+                    "hud_notes": [
+                        "확장 1: 호도법(Radian)을 쓰는 진짜 이유 → (sin x)' = cos x 계수가 1!",
+                        "확장 2: 1 - cos θ ≈ ½·θ² (반각 넓이 차이를 이용한 2차 근사!)",
+                        "확장 3: 정다각형 극한을 통한 아르키메데스의 원주율(π) 계산과 직결!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수능 미적분 도형 극한 3초 근사 해법",
+                    "headline": "도형 극한 킬러 문항은 sin θ → θ, tan θ → θ, 1-cos θ → ½θ²으로 즉시 치환하라!",
+                    "key_formula": "θ → 0 :  sin θ ~ θ ,  tan θ ~ θ ,  1 - cos θ ~ ½·θ²",
+                    "narration": (
+                        f"수능 미적분 도형 극한 문제에서 복잡한 삼각비 식을 세우고 약분하느라 시간을 쏟지 마세요. "
+                        f"오늘 본 단위원 그림처럼 세타가 0으로 갈 때 호와 현과 접선은 모두 세타와 같아지므로, 도형 위에서 바로 세타의 차수만 읽어내면 10초 만에 답이 나옵니다! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 모든 수학 정리를 눈으로 마스터하세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 3초 공식: 현의 길이 ≈ 호의 길이(rθ) ≈ 접선 높이(r·tanθ)",
+                        "높이 차(화살표 길이): r(1 - cosθ) ≈ ½·r·θ² 으로 즉시 면적 계산!",
+                        "지금 [@min7014_ai 구독] 누르고 최고 화질 수학 시네마를 만나보세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · UNIT CIRCLE PHASER & WAVE GENESIS",
+                    "headline": f"Circular Rotation Unfolds Into a Pure Harmonic Sine Wave! ({t_title})",
+                    "key_formula": "e^(iθ) = cos θ + i·sin θ  |  lim(θ→0) (sin θ / θ) = 1",
+                    "narration": (
+                        f"Watch a glowing point orbit the unit circle while projecting its height across time to generate a harmonic sine wave. "
+                        f"As angle theta shrinks toward zero in [{t_title}], why does the ratio of vertical height sin theta to curved arc length theta lock onto exactly 1?"
+                    ),
+                    "hud_notes": [
+                        "Unit Circle Phaser: Circular rotation projects into a live sine wave!",
+                        "Core Limit: As θ → 0, (Chord Height sin θ) / (Arc Length θ) → 1.000!",
+                        "Question: How can we rigorously compare a curved arc with straight lines?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · LIVE NUMERICAL SQUEEZE TELEMETRY",
+                    "headline": "Watch sin θ, Arc θ, and tan θ Converge Digit by Digit!",
+                    "key_formula": "sin(0.05) = 0.04998 < θ = 0.05000 < tan(0.05) = 0.05004",
+                    "narration": (
+                        f"Observe the live telemetry below the unit circle. "
+                        f"For any positive acute angle, sin theta is strictly smaller than arc theta, which is strictly smaller than tangent theta. "
+                        f"Yet as the angle narrows, all three numbers squeeze together until their ratio becomes indistinguishable from 1!"
+                    ),
+                    "hud_notes": [
+                        "Geometric Ordering: sin θ < θ < tan θ holds for every acute angle!",
+                        "Visual Zoom: Zooming into the circle makes the arc look perfectly flat!",
+                        "At θ = 0.1 rad, sin θ / θ is already 0.9983 (99.8% identical!)",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · THE EMERALD SECTOR AREA SANDWICH",
+                    "headline": "Inner Triangle < Circular Sector < Outer Tangent Triangle!",
+                    "key_formula": "½·sinθ·cosθ < ½·θ < ½·tanθ  ⇒  cosθ < (sinθ / θ) < 1",
+                    "narration": (
+                        f"The master stroke is comparing areas instead of lengths! "
+                        f"The emerald circular sector has area one-half theta, trapped between the inner triangle and the outer tangent right triangle. "
+                        f"Dividing by sin theta traps our ratio between cos theta and 1—proving the limit by the Squeeze Theorem in one glance!"
+                    ),
+                    "hud_notes": [
+                        "Key Idea: Compare 2D areas to bound the 1D curved arc length!",
+                        "Area Inequality: ½·sinθ·cosθ < ½·θ < ½·tanθ",
+                        "Squeeze Limit as θ→0: cos(0)=1 ≤ lim(sinθ/θ) ≤ 1 → Strictly 1!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · CALCULUS DERIVATIVES & TAYLOR SERIES",
+                    "headline": "Why Radian Measure Makes the Derivative of Sine Equal Cosine!",
+                    "key_formula": "(sin x)' = cos x  |  1 - cos θ ≈ ½·θ²",
+                    "narration": (
+                        f"This single geometric limit is the foundation of all trigonometric calculus. "
+                        f"Because sin theta over theta approaches 1 in radians, the derivative of sin x is cleanly cos x without any messy scaling constant!"
+                    ),
+                    "hud_notes": [
+                        "Why Radians Matter: Makes lim(sinθ/θ) = 1 and (sin x)' = cos x!",
+                        "Second-Order Approximation: 1 - cos θ ≈ ½·θ²",
+                        "Connects Archimedes' polygon exhaustion to modern physics!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 3-SECOND GEOMETRIC LIMIT SHORTCUT",
+                    "headline": "Replace sin θ and tan θ With θ Directly Inside Small-Angle Diagrams!",
+                    "key_formula": "θ → 0 :  sin θ ~ θ ,  tan θ ~ θ ,  1 - cos θ ~ ½·θ²",
+                    "narration": (
+                        f"In small-angle geometry limits, replace chords, arcs, and tangents directly with theta to find the answer in 3 seconds! "
+                        f"Try our live 60fps simulator in the description and subscribe to @min7014_ai right now!"
+                    ),
+                    "hud_notes": [
+                        "3-Sec Shortcut: Chord ≈ Arc (rθ) ≈ Tangent (r·tanθ) as θ→0",
+                        "Sagitta Height: r(1 - cosθ) ≈ ½·r·θ²",
+                        "Subscribe to @min7014_ai for daily visual math cinema!",
+                    ],
+                },
+            ]
+
+    if archetype == "fibonacci_golden":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 자연과 우주가 선택한 황금 나선",
+                    "headline": f"144개의 해바라기 씨앗이 빈틈없이 피어나는 황금각의 비밀! ({t_title})",
+                    "key_formula": "φ = (1 + √5) / 2 ≈ 1.618034  |  Golden Angle = 137.508°",
+                    "narration": (
+                        f"밤하늘의 중심에서 144개의 황금빛 씨앗이 정확히 137.5도씩 회전하며 바깥으로 뻗어나갑니다. "
+                        f"놀랍게도 [{t_title}]의 규칙을 따르면 씨앗들이 서로 겹치지 않고 시계 방향과 반시계 방향으로 피보나치 수만큼의 나선 팔을 만들어냅니다! "
+                        f"단순한 덧셈 수열이 어떻게 가장 완벽한 기하학적 대칭을 창조할까요?"
+                    ),
+                    "hud_notes": [
+                        "황금각(137.508°): 360° ÷ φ² — 자연계에서 가장 조밀한 씨앗 배열 각도!",
+                        "피보나치 나선: 좌우 나선 개수가 항상 8, 13, 21, 34, 55개로 일치!",
+                        "핵심 불변량: φ² = φ + 1  ⇔  1/φ = φ - 1 (자기닮음 황금비!)",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 정사각형을 잘라내도 똑같은 직사각형이 남는다!",
+                    "headline": "황금 직사각형 안에서 끝없이 되풀이되는 자기닮음(Self-Similarity)",
+                    "key_formula": "φ : 1 = 1 : (φ - 1)  ⇒  φ² - φ - 1 = 0",
+                    "narration": (
+                        f"화면 아래쪽의 황금 직사각형을 보세요. 긴 변과 짧은 변의 비가 파이 대 1인 직사각형에서 한 변이 1인 정사각형을 잘라내면, 남은 작은 직사각형의 비율도 다시 정확히 파이 대 1이 됩니다! "
+                        f"정사각형을 영원히 잘라내도 처음과 완전히 닮은 직사각형이 무한히 재생산됩니다."
+                    ),
+                    "hud_notes": [
+                        "자기닮음 비례식: (긴 변 : 짧은 변) = (짧은 변 : 남은 변)",
+                        "이차방정식 도출: φ : 1 = 1 : (φ - 1)  →  φ² - φ - 1 = 0",
+                        "피보나치 비의 수렴: 1/1, 2/1, 3/2, 5/3, 8/5, 13/8, 21/13 → 1.618034!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · 정오각형 대각선과 이등변삼각형 보조선",
+                    "headline": "정오각형의 대각선 한 줄이 만드는 36° · 72° · 72° 황금 삼각형!",
+                    "key_formula": "Diagonal / Side = 2·cos(36°) = φ ≈ 1.618",
+                    "narration": (
+                        f"기하학에서 황금비를 단 한 줄의 보조선으로 찾는 곳은 바로 정오각형입니다! "
+                        f"정오각형의 대각선을 그으면 꼭지각이 36도이고 두 밑각이 72도인 황금 이등변삼각형이 나타납니다. "
+                        f"밑각 72도를 이등분하는 황금 보조선 한 줄만 그으면, 큰 삼각형과 작은 삼각형이 닮음이 되면서 대각선 길이가 정확히 황금비 파이가 됨이 증명됩니다!"
+                    ),
+                    "hud_notes": [
+                        "결정적 보조선: 36°-72°-72° 이등변삼각형의 밑각(72°) 이등분선 작도!",
+                        "닮음비 연쇄: 큰 삼각형 ∽ 작은 삼각형 → x : 1 = 1 : (x - 1)",
+                        "삼각비 연결: cos 36° = φ / 2 = (1 + √5) / 4 , sin 18° = (√5 - 1) / 4",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (연분수와 차수 강하 마법)",
+                    "headline": "φ² = φ + 1 식 하나로 고차 거듭제곱을 1차식으로 단번에 낮춘다!",
+                    "key_formula": "φⁿ = Fₙ·φ + Fₙ₋₁  (Degree Reduction via Fibonacci!)",
+                    "narration": (
+                        f"황금비의 대수적 마법은 파이 제곱이 파이 더하기 1이라는 식에 있습니다! "
+                        f"제곱을 1차식으로 바꿀 수 있기 때문에, 파이의 3제곱, 4제곱, n제곱도 복잡한 무리수 계산 없이 피보나치 수를 계수로 갖는 1차식으로 단번에 줄어듭니다!"
+                    ),
+                    "hud_notes": [
+                        "차수 강하 공식: φ² = φ + 1 , φ³ = 2φ + 1 , φ⁴ = 3φ + 2 , φ⁵ = 5φ + 3!",
+                        "계수의 비밀: 거듭제곱 계수가 그대로 피보나치 수열(1, 1, 2, 3, 5, 8...)!",
+                        "가장 아름다운 연분수: φ = 1 + 1 / (1 + 1 / (1 + 1 / ...))",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 경시·수능 황금비 & 점화식 10초 통찰",
+                    "headline": "닮음 도형이 반복되거나 36°·72°가 보이면 즉시 자기닮음 비례식을 세워라!",
+                    "key_formula": "Self-Similar Split → x = 1 + 1/x → Golden Ratio φ!",
+                    "narration": (
+                        f"도형 문제에서 정오각형이나 36도, 혹은 똑같은 모양이 반복해서 잘려 나가는 프랙탈 구조를 만났다면, 전체를 x로 놓고 부분과의 닮음비를 세우세요! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 자연과 우주의 수학 시네마를 이어서 감상하세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 포인트 1: 36°·72°·108° 등장 시 밑각 이등분선 보조선 즉시 작도!",
+                        "실전 포인트 2: φ² = φ + 1 을 이용해 고차식을 1차식으로 즉시 차수 강하!",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · THE GOLDEN SPIRAL OF NATURE",
+                    "headline": f"144 Sunflower Seeds Pack Perfectly Using the 137.5° Golden Angle! ({t_title})",
+                    "key_formula": "φ = (1 + √5) / 2 ≈ 1.618034  |  Golden Angle = 137.508°",
+                    "narration": (
+                        f"Watch 144 glowing seeds spiral outward at the exact golden angle of 137.5 degrees. "
+                        f"In [{t_title}], this irrational rotation prevents seeds from ever stacking in radial lines, generating Fibonacci spiral arms in both directions!"
+                    ),
+                    "hud_notes": [
+                        "Golden Angle (137.508°): 360° ÷ φ² achieves optimal packing density!",
+                        "Fibonacci Spiral Arms: Left & right spirals always match Fibonacci numbers!",
+                        "Core Identity: φ² = φ + 1  ⇔  1/φ = φ - 1",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · INFINITE SELF-SIMILAR GOLDEN RECTANGLES",
+                    "headline": "Slice Off a Square and the Remaining Rectangle Keeps the Exact Same Ratio!",
+                    "key_formula": "φ : 1 = 1 : (φ - 1)  ⇒  φ² - φ - 1 = 0",
+                    "narration": (
+                        f"Remove a 1 by 1 square from a golden rectangle of length phi, and the remaining smaller rectangle has sides 1 and phi minus 1—preserving the exact golden ratio forever!"
+                    ),
+                    "hud_notes": [
+                        "Self-Similarity: Long : Short = Short : Remainder",
+                        "Algebraic Equation: φ : 1 = 1 : (φ - 1)  →  φ² - φ - 1 = 0",
+                        "Fibonacci Ratios: 1/1, 2/1, 3/2, 5/3, 8/5, 13/8 → 1.618034!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · THE 36°-72°-72° GOLDEN TRIANGLE AUXILIARY LINE",
+                    "headline": "One Angle Bisector Inside a Regular Pentagon Proves the Golden Ratio!",
+                    "key_formula": "Diagonal / Side = 2·cos(36°) = φ ≈ 1.618",
+                    "narration": (
+                        f"Draw the diagonals of a regular pentagon to form a 36-72-72 degree golden triangle. "
+                        f"Bisecting one 72-degree base angle creates a smaller similar golden triangle, proving that the diagonal-to-side ratio is strictly phi!"
+                    ),
+                    "hud_notes": [
+                        "Golden Auxiliary Line: Bisect the 72° base angle of the 36°-72°-72° triangle",
+                        "Similar Triangles: Whole Triangle ∽ Smaller Triangle → φ² - φ - 1 = 0",
+                        "Exact Trig Values: cos 36° = φ / 2 = (1 + √5) / 4",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · FIBONACCI POWER REDUCTION MAGIC",
+                    "headline": "Reduce Any Power φⁿ to a Linear Fibonacci Expression Instantly!",
+                    "key_formula": "φⁿ = Fₙ·φ + Fₙ₋₁  (since φ² = φ + 1)",
+                    "narration": (
+                        f"Because phi squared equals phi plus 1, every higher power of phi collapses into a linear combination of phi and 1 with Fibonacci coefficients!"
+                    ),
+                    "hud_notes": [
+                        "Power Reduction: φ² = φ+1, φ³ = 2φ+1, φ⁴ = 3φ+2, φ⁵ = 5φ+3!",
+                        "Coefficients are the exact Fibonacci sequence Fₙ and Fₙ₋₁!",
+                        "Simplest Continued Fraction: φ = 1 + 1/(1 + 1/(1 + ...))",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND OLYMPIAD TAKEAWAY",
+                    "headline": "Spot Self-Similarity or 36° Angles and Set Up the Golden Ratio Immediately!",
+                    "key_formula": "Self-Similar Split → x = 1 + 1/x → Golden Ratio φ!",
+                    "narration": (
+                        f"Whenever a geometry or recurrence problem repeats self-similarly, use phi squared equals phi plus 1 to solve it in seconds! "
+                        f"Subscribe to @min7014_ai right now for daily visual math cinema!"
+                    ),
+                    "hud_notes": [
+                        "Instant Trigger: 36°/72° Pentagon → Draw 72° Angle Bisector!",
+                        "Algebraic Trigger: x² = x + 1 → Reduce high powers via Fibonacci!",
+                        "Subscribe to @min7014_ai & try the interactive simulator below!",
+                    ],
+                },
+            ]
+
+    if archetype == "prob_galton":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 우연 속에서 피어나는 필연의 종 모양 곡선",
+                    "headline": f"무작위로 떨어지는 구슬들이 왜 언제나 완벽한 정규분포 곡선을 만들까? ({t_title})",
+                    "key_formula": "B(n, p)  —(n→∞)→  N(np, npq)  (Central Limit Theorem)",
+                    "narration": (
+                        f"수백 개의 빛나는 입자가 갈톤 보드의 핀들과 부딪히며 왼쪽 또는 오른쪽으로 무작위 낙하합니다. "
+                        f"공 하나하나의 경로는 예측할 수 없는 우연이지만, 바닥에 쌓인 막대그래프는 놀랍게도 [{t_title}]의 황금빛 가우스 정규분포 종 곡선과 정확히 일치합니다! "
+                        f"혼돈 속에서 어떻게 이런 완벽한 대칭 질서가 탄생할까요?"
+                    ),
+                    "hud_notes": [
+                        "갈톤 보드(Galton Board): 매 층마다 좌/우 50% 확률로 독립 분기!",
+                        "기적의 수렴: 무작위 시행이 쌓일수록 완벽한 좌우 대칭 종 모양 완성!",
+                        "핵심 원리: 파스칼의 삼각형 조합(nCr) → 이항분포 → 정규분포!",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 파스칼의 삼각형 경로 세기와 이항계수",
+                    "headline": "양 끝으로 가는 길은 단 1가지, 정중앙으로 모이는 길은 폭발적으로 많다!",
+                    "key_formula": "P(X = k) = ₙCₖ · pᵏ · (1 - p)ⁿ⁻ᵏ",
+                    "narration": (
+                        f"왜 구슬들이 양 끝보다 정중앙 칸에 압도적으로 많이 모일까요? "
+                        f"8층의 핀을 통과할 때 맨 왼쪽 끝으로 가려면 여덟 번 연속 왼쪽으로만 가야 하므로 경로가 단 한 가지뿐입니다. "
+                        f"반면 왼쪽 네 번, 오른쪽 네 번이 섞이는 정중앙 칸으로 가는 경로는 8콤비네이션 4, 무려 일흔 가지나 되기 때문입니다!"
+                    ),
+                    "hud_notes": [
+                        "경로 개수 비교 (8단 기준): 양 끝 칸 = ₈C₀ = 1가지 vs 중앙 칸 = ₈C₄ = 70가지!",
+                        "이항계수 합: 1 + 8 + 28 + 56 + 70 + 56 + 28 + 8 + 1 = 2⁸ = 256",
+                        "각 칸에 쌓이는 높이는 정확히 그 칸으로 도달하는 조합 경로의 수에 비례!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · 대칭성과 기대값·분산의 선형 결합 아이디어",
+                    "headline": "복잡한 시그마 계산 대신 1회 시행의 평균과 분산을 n배로 확장하라!",
+                    "key_formula": "E(X) = n·p  ,  Var(X) = n·p·(1 - p)  ,  σ = √(npq)",
+                    "narration": (
+                        f"이항분포의 평균과 분산을 구할 때 복잡한 시그마 조합 식을 직접 전개할 필요가 전혀 없습니다! "
+                        f"단 한 번의 핀 충돌을 0과 1의 베르누이 시행으로 보면 평균은 p, 분산은 p 곱하기 q입니다. "
+                        f"독립인 n번의 충돌을 더하면 평균도 정확히 n배, 분산도 정확히 n배가 된다는 선형성 아이디어 하나로 1초 만에 증명됩니다!"
+                    ),
+                    "hud_notes": [
+                        "결정적 아이디어: X = X₁ + X₂ + ... + Xₙ (독립 지시확률변수의 합!)",
+                        "1회 시행: E(Xᵢ) = p , Var(Xᵢ) = pq  →  n회 합산: E(X) = np , Var(X) = npq!",
+                        "표준편차(퍼짐 정도)는 시행 횟수의 제곱근 √n 에 비례하여 성장!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (드무아브르-라플라스 & 중심극한정리)",
+                    "headline": "단수를 무한히 늘리면 계단 모양 막대가 매끄러운 가우스 적분 곡선이 된다!",
+                    "key_formula": "Z = (X - np) / √(npq)  →  f(z) = (1/√(2π))·e^(-z²/2)",
+                    "narration": (
+                        f"만약 갈톤 보드의 핀 층수를 8층에서 수백 층, 수만 층으로 늘리고 칸의 간격을 좁히면 어떻게 될까요? "
+                        f"불연속적이던 계단형 이항분포 막대들이 매끄러운 곡선으로 녹아들며 자연상수 e와 원주율 파이가 결합된 표준정규분포 함수가 탄생합니다! "
+                        f"이것이 바로 통계학 최고의 정리인 중심극한정리입니다."
+                    ),
+                    "hud_notes": [
+                        "표준화 변환: 평균 np를 0으로, 표준편차 √(npq)를 1로 맞추는 Z-스케일링!",
+                        "68 - 95 - 99.7 법칙: 평균 ±1σ 안에 68%, ±2σ 안에 95.4%가 항상 수렴!",
+                        "이산수학(조합 nCr)과 연속미적분(e^(-z²/2) 넓이)이 하나로 만나는 다리!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수능 확률과 통계 10초 해법",
+                    "headline": "독립시행이 반복되면 주저 없이 B(n,p) → N(np, npq) 표준화 넓이로 풀어라!",
+                    "key_formula": "Spot Repeated Independent Trials → Standardize Z = (X - m)/σ!",
+                    "narration": (
+                        f"수능과 모의고사에서 주사위나 동전을 수백 번 던지는 확률 문제를 만나면, 개별 확률을 더하는 대신 즉시 정규분포 종 곡선의 대칭 넓이로 바꾸어 10초 만에 해결하세요! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 살아 움직이는 수학 시네마를 정주행하세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 1단계: 시행 횟수 n과 성공 확률 p를 찾아 평균 m=np, 표준편차 σ=√(npq) 계산",
+                        "실전 2단계: Z = (X - m)/σ 표준화 후 대칭 종 곡선 넓이표로 즉시 정답 도출!",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 만나보세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · ORDER EMERGING FROM PURE CHAOS",
+                    "headline": f"Randomly Bouncing Beads Always Sculpt a Perfect Bell Curve! ({t_title})",
+                    "key_formula": "B(n, p)  —(n→∞)→  N(np, npq)  (Central Limit Theorem)",
+                    "narration": (
+                        f"Hundreds of glowing particles bounce randomly left and right through the pegs of a Galton board. "
+                        f"While each individual bead's path is unpredictable, the stacked columns at the bottom always converge to the golden Gaussian bell curve of [{t_title}]!"
+                    ),
+                    "hud_notes": [
+                        "Galton Board: Every peg bounce is an independent 50/50 Bernoulli trial!",
+                        "Emergent Symmetry: Randomness aggregates into a deterministic bell curve!",
+                        "Core Bridge: Pascal's Triangle (nCr) → Binomial → Normal Distribution!",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · PASCAL'S TRIANGLE & PATH COMBINATORICS",
+                    "headline": "Only 1 Path Reaches the Extreme Edge, While 70 Paths Feed the Center!",
+                    "key_formula": "P(X = k) = ₙCₖ · pᵏ · (1 - p)ⁿ⁻ᵏ",
+                    "narration": (
+                        f"Why do beads pile up in the center? "
+                        f"Across 8 rows of pegs, reaching the far left requires 8 consecutive left bounces—just 1 path. "
+                        f"Reaching the center allows any arrangement of 4 lefts and 4 rights, giving 8 choose 4 equals 70 distinct paths!"
+                    ),
+                    "hud_notes": [
+                        "Path Count (8 Rows): Edge Bin = ₈C₀ = 1 Path vs Center Bin = ₈C₄ = 70 Paths!",
+                        "Sum of Binomial Coefficients: 1+8+28+56+70+56+28+8+1 = 2⁸ = 256",
+                        "Column heights directly visualize combinations ₙCₖ!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · LINEARITY OF EXPECTATION & VARIANCE",
+                    "headline": "Decompose n Bounces Into n Simple 0-or-1 Indicator Variables!",
+                    "key_formula": "E(X) = n·p  ,  Var(X) = n·p·(1 - p)  ,  σ = √(npq)",
+                    "narration": (
+                        f"Never expand messy sigma factorials to find the mean and variance! "
+                        f"Because X is the sum of n independent single-peg indicator variables, the mean is simply n times p and the variance is n times p times q!"
+                    ),
+                    "hud_notes": [
+                        "Key Decomposition: X = X₁ + X₂ + ... + Xₙ (Independent Indicators)",
+                        "Single Peg: E(Xᵢ)=p, Var(Xᵢ)=pq  ⇒  n Pegs: E(X)=np, Var(X)=npq!",
+                        "Spread grows with the square root of trials: σ = √(npq)",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · THE CENTRAL LIMIT THEOREM IN ACTION",
+                    "headline": "As Peg Rows Approach Infinity, Discrete Bars Melt Into e^(-z²/2)!",
+                    "key_formula": "Z = (X - np) / √(npq)  →  f(z) = (1/√(2π))·e^(-z²/2)",
+                    "narration": (
+                        f"Increase the rows to infinity and standardize by subtracting the mean and dividing by sigma. "
+                        f"The discrete binomial steps morph smoothly into the universal Gaussian bell curve linking e and pi!"
+                    ),
+                    "hud_notes": [
+                        "Z-Score Standardization: Centers mean at 0 and unit standard deviation at 1",
+                        "68 - 95 - 99.7 Rule governs all natural measurement errors!",
+                        "Unifies discrete combinatorics with continuous calculus integrals!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND PROBABILITY EXAM STRATEGY",
+                    "headline": "Convert Large Binomial Sums Into Symmetric Bell Curve Areas Instantly!",
+                    "key_formula": "Spot Repeated Independent Trials → Standardize Z = (X - m)/σ!",
+                    "narration": (
+                        f"When facing hundreds of independent trials on an exam, standardize to Z and read the symmetric bell curve area in 10 seconds! "
+                        f"Subscribe to @min7014_ai right now for daily visual math cinema!"
+                    ),
+                    "hud_notes": [
+                        "Step 1: Compute m = np and σ = √(npq) from the trial count",
+                        "Step 2: Transform to Z = (X - m)/σ and use symmetry of the normal curve!",
+                        "Subscribe to @min7014_ai & explore our live 60fps simulator!",
+                    ],
+                },
+            ]
+
+    if archetype == "calculus_motion":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 평균 속도와 순간 속도가 일치하는 찰나",
+                    "headline": f"출발점과 도착점을 잇는 할선과 완전히 평행한 접선이 반드시 존재한다! ({t_title})",
+                    "key_formula": "(f(b) - f(a)) / (b - a) = f'(c)  (c ∈ (a, b))",
+                    "narration": (
+                        f"매끄러운 곡선 위를 달리는 점이 출발점 A에서 도착점 B까지 가속과 감속을 반복하며 이동합니다. "
+                        f"놀랍게도 [{t_title}]에 의하면, 전체 구간의 평균 기울기인 할선과 완벽히 평행한 순간 접선 기울기를 갖는 지점 c가 구간 안에 반드시 하나 이상 존재합니다! "
+                        f"과속 단속 카메라가 순간 속도계 없이도 과속을 잡아내는 이 미적분의 원리를 눈으로 확인해 봅시다."
+                    ),
+                    "hud_notes": [
+                        "할선(Secant Line): 두 끝점 A, B를 잇는 전체 구간의 평균 변화율",
+                        "접선(Tangent Line): 곡선 위 점 c에서의 순간 변화율 f'(c)",
+                        "핵심 정리: 매끄러운 곡선에는 할선과 평행한 접선이 반드시 존재!",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 평행선 스캔으로 찾는 최대 이격점 c",
+                    "headline": "할선을 평행이동해 곡선과 가장 멀어지는 꼭대기에서 접선이 탄생한다!",
+                    "key_formula": "max |f(x) - L(x)| at x = c  ⇒  f'(c) = L'(c)",
+                    "narration": (
+                        f"할선을 그대로 들어 올려 곡선 위쪽으로 평행이동시켜 보세요! "
+                        f"곡선과 할선 사이의 수직 거리가 가장 멀어지는 바로 그 정상 지점에서, 평행이동한 직선이 곡선에 스치듯 접하게 됩니다! "
+                        f"차이 함수의 높이가 극대가 되는 점에서 미분계수가 0이 된다는 롤의 정리가 눈앞에서 직관적으로 확인됩니다."
+                    ),
+                    "hud_notes": [
+                        "1단계 관찰: 할선 L(x)에서 곡선 f(x)까지의 수직 거리 h(x) 측정",
+                        "2단계 관찰: 수직 거리 h(x)가 최대인 점 c에서 접선이 할선과 평행!",
+                        "핵심 브릿지: 기울어진 평균값 정리 = 회전시킨 롤의 정리(f'(c)=0)!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · 할선의 두 점이 합쳐지는 극한과 리만 합",
+                    "headline": "Δx가 0으로 수렴할 때 할선은 접선이 되고, 막대 넓이는 정적분이 된다!",
+                    "key_formula": "lim(Δx→0) Δy/Δx = dy/dx  |  lim Σ f(xₖ)Δx = ∫ f(x)dx",
+                    "narration": (
+                        f"이제 두 점 사이의 간격 델타 x를 0으로 좁혀 보세요. 두 점을 잇던 할선이 한 점에서의 접선으로 수렴합니다! "
+                        f"반대로 곡선 아래를 잘게 쪼갠 네온 직사각형 기둥들을 무한히 더하면, 미분의 역연산인 정적분 넓이로 정확히 수렴합니다."
+                    ),
+                    "hud_notes": [
+                        "미분의 기하학: 두 점의 할선 기울기가 한 점의 접선 기울기로 수렴!",
+                        "적분의 기하학: 구분구적 직사각형 넓이 합이 곡선 아래 정적분으로 수렴!",
+                        "미적분학의 기본정리: 순간 변화율(접선)을 누적하면 전체 변화량(넓이)!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (코시의 평균값 정리와 로피탈)",
+                    "headline": "시간 t를 매개변수로 둔 두 함수 f(t), g(t)의 궤적에서도 평행 접선이 성립한다!",
+                    "key_formula": "(g(b) - g(a)) / (f(b) - f(a)) = g'(c) / f'(c)",
+                    "narration": (
+                        f"만약 x축과 y축이 모두 시간에 따라 움직이는 매개변수 곡선이라면 어떻게 될까요? "
+                        f"가로 변화량과 세로 변화량의 비율 역시 어느 한 순간 c에서의 미분계수 비율과 정확히 일치합니다! "
+                        f"이 코시의 평균값 정리에서 바로 0분의 0 꼴 극한을 단번에 계산하는 로피탈의 정리와 테일러 급수가 탄생합니다."
+                    ),
+                    "hud_notes": [
+                        "확장 1: 코시의 평균값 정리 → 매개변수 평면 운동(x=f(t), y=g(t))의 평행 접선!",
+                        "확장 2: 0/0 부정형 극한에서 할선 비를 접선 비 f'(c)/g'(c)로 바꾼 로피탈 정리!",
+                        "확장 3: 미분불가능한 뾰족점(첨점)에서는 평행 접선이 존재하지 않는 반례 확인!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수능 미적분·수II 킬러 10초 통찰",
+                    "headline": "두 함숫값의 차이 f(b)-f(a)가 보이면 즉시 평균변화율과 접선 기울기로 번역하라!",
+                    "key_formula": "f(b) - f(a) = f'(c)·(b - a)  (Instant MVT Translation!)",
+                    "narration": (
+                        f"수능과 수리논술에서 두 점의 함숫값 차이나 평균변화율 부등식이 등장하면, 식을 전개하지 말고 그래프 위에서 할선과 평행한 접선의 위치부터 찾으세요! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 미적분의 모든 시각적 아이디어를 마스터하세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 제1원칙: (f(b)-f(a))/(b-a) 등장 시 즉시 f'(c) 접선 기울기로 해석!",
+                        "차이 함수 h(x) = f(x) - L(x)를 세우면 교점과 접점의 관계가 1초에 해결!",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · SECANT VELOCITY MEETS TANGENT VELOCITY",
+                    "headline": f"Every Smooth Journey Guarantees an Instant Where Tangent Parallels Secant! ({t_title})",
+                    "key_formula": "(f(b) - f(a)) / (b - a) = f'(c)  (c ∈ (a, b))",
+                    "narration": (
+                        f"As a glowing point travels along a smooth curve from A to B, its instantaneous speed fluctuates. "
+                        f"Yet [{t_title}] guarantees at least one interior point c where the instantaneous tangent line is strictly parallel to the overall secant line!"
+                    ),
+                    "hud_notes": [
+                        "Secant Line: Average rate of change across the interval [a, b]",
+                        "Tangent Line: Instantaneous derivative f'(c) at point c",
+                        "Core Law: Smoothness forces instantaneous slope to match average slope!",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · PARALLEL SECANT SWEEP TO MAXIMUM GAP",
+                    "headline": "Slide the Secant Line Until It Kisses the Peak of Maximum Vertical Gap!",
+                    "key_formula": "max |f(x) - L(x)| at x = c  ⇒  f'(c) = L'(c)",
+                    "narration": (
+                        f"Translate the secant line upward until it just touches the curve at the point of maximum vertical separation. "
+                        f"At that exact peak c, the vertical gap stops growing, forcing the tangent slope to equal the secant slope!"
+                    ),
+                    "hud_notes": [
+                        "Step 1: Measure vertical gap h(x) = f(x) - L(x) between curve and secant",
+                        "Step 2: At maximum gap x = c, h'(c) = 0 ⇒ f'(c) = secant slope!",
+                        "Mean Value Theorem is simply Rolle's Theorem tilted at an angle!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · SECANT-TO-TANGENT LIMIT & RIEMANN SUMS",
+                    "headline": "As Δx → 0, Secants Become Tangents and Riemann Bars Become Integrals!",
+                    "key_formula": "lim(Δx→0) Δy/Δx = dy/dx  |  lim Σ f(xₖ)Δx = ∫ f(x)dx",
+                    "narration": (
+                        f"Watch the two secant points merge into a single tangent line while the glowing Riemann rectangles underneath fuse into the exact definite integral area!"
+                    ),
+                    "hud_notes": [
+                        "Derivative: Limit of secant slopes as Δx shrinks to zero",
+                        "Definite Integral: Limit of Riemann rectangle areas under the curve",
+                        "Fundamental Theorem: Differentiation and integration are exact inverses!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · CAUCHY'S MVT & PARAMETRIC MOTION",
+                    "headline": "Generalizing to Parametric Curves (f(t), g(t)) and L'Hôpital's Rule!",
+                    "key_formula": "(g(b) - g(a)) / (f(b) - f(a)) = g'(c) / f'(c)",
+                    "narration": (
+                        f"When both x and y evolve with time t, Cauchy's Mean Value Theorem guarantees a point where the ratio of derivatives matches the overall chord slope!"
+                    ),
+                    "hud_notes": [
+                        "Cauchy's MVT: Parametric path (f(t), g(t)) has a parallel tangent vector!",
+                        "Direct Foundation of L'Hôpital's Rule for 0/0 indeterminate limits",
+                        "Sharp corners (cusps) break differentiability and void the guarantee!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND CALCULUS EXAM STRATEGY",
+                    "headline": "Spot f(b) - f(a) and Immediately Translate It Into Tangent Slope f'(c)!",
+                    "key_formula": "f(b) - f(a) = f'(c)·(b - a)  (Instant MVT Translation!)",
+                    "narration": (
+                        f"Whenever f of b minus f of a appears in a calculus problem, translate it into a parallel tangent line to solve it visually in seconds! "
+                        f"Subscribe to @min7014_ai right now for daily visual math cinema!"
+                    ),
+                    "hud_notes": [
+                        "Instant Trigger: Replace difference quotients with derivative f'(c)!",
+                        "Construct difference function h(x) = f(x) - L(x) for tangent intersections",
+                        "Subscribe to @min7014_ai & try the interactive 60fps lab below!",
+                    ],
+                },
+            ]
+
+    if archetype == "ceva_menelaus":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 삼각형 비율의 완벽한 균형 미스터리",
+                    "headline": f"교점이 어디로 움직여도 세 비율의 곱은 언제나 1.000이다! ({t_title})",
+                    "key_formula": "(BD / DC) × (CE / EA) × (AF / FB) = 1.000",
+                    "narration": (
+                        f"밤하늘의 삼각형 내부에서 세 체바 직선이 만나는 교점 P가 쉼 없이 움직입니다. "
+                        f"점 P가 움직일 때마다 세 변을 나누는 여섯 개 조각의 길이는 모두 달라지지만, 놀랍게도 [{t_title}]에서 세 비율을 곱한 값은 언제나 정확히 1.000으로 고정됩니다! "
+                        f"길이조차 모르는 일반 삼각형에서 어떻게 이 비율의 곱이 영원히 보존될까요?"
+                    ),
+                    "hud_notes": [
+                        "역동적 관찰: 교점 P가 어디로 이동해도 3개 비율의 곱은 항상 1.000!",
+                        "핵심 불변량: 시계 방향으로 한 바퀴 돌며 만든 분수 3개의 연쇄 상쇄!",
+                        "질문: 선분의 길이 비를 무엇으로 바꾸어야 약분이 일어날까?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 무게중심 대칭 실험과 지렛대 시소 원리",
+                    "headline": "정중앙 1×1×1=1 에서 출발해 비대칭 역수 상쇄를 눈으로 확인하라!",
+                    "key_formula": "Symmetric Center: (1/1) × (1/1) × (1/1) = 1.000",
+                    "narration": (
+                        f"먼저 교점 P를 삼각형의 정중앙 무게중심에 놓아 봅시다. 세 변이 모두 1 대 1로 이등분되어 1 곱하기 1 곱하기 1은 당연히 1입니다. "
+                        f"이제 점 P를 한쪽 꼭짓점으로 당기면 한 변의 비율이 2배로 커지지만, 나머지 두 변의 비율 곱이 정확히 2분의 1로 줄어들며 완벽한 시소 균형을 이룹니다!"
+                    ),
+                    "hud_notes": [
+                        "1단계 대칭점: 무게중심에서 1 : 1 내분 → 1 × 1 × 1 = 1 즉시 성립!",
+                        "2단계 시소 균형: 한 비율이 k배 커지면 인접 비율 곱이 1/k배로 자동 보정!",
+                        "아르키메데스의 지렛대: 각 꼭짓점에 질량을 놓으면 교점 P가 질량중심!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · 밑변 비를 넓이 비로 바꾸는 황금 수선 아이디어",
+                    "headline": "높이가 같은 두 삼각형의 넓이 비 S₁ : S₂ : S₃ 도미노 연쇄 약분!",
+                    "key_formula": "(S₃ / S₂) × (S₁ / S₃) × (S₂ / S₁) = 1",
+                    "narration": (
+                        f"이 정리를 단 10초 만에 증명하는 천재적 아이디어는 '선분의 길이 비'를 '삼각형의 넓이 비'로 번역하는 것입니다! "
+                        f"화면의 세 색깔 삼각형 S1, S2, S3를 보세요. 밑변 BD 대 DC의 길이 비는 꼭짓점 P를 공유하는 두 삼각형 S3 대 S2의 넓이 비와 같습니다! "
+                        f"세 비율을 넓이 분수로 바꾸어 곱하는 순간, 분자와 분모의 S1, S2, S3가 도미노처럼 모두 약분되어 사라지고 숫자 1만 남습니다!"
+                    ),
+                    "hud_notes": [
+                        "결정적 번역: 밑변 길이 비 BD : DC = 넓이 비 S(△PAB) : S(△PAC)!",
+                        "도미노 약분: (S₃ / S₂) × (S₁ / S₃) × (S₂ / S₁) = 1.000!",
+                        "또는 한 꼭짓점에서 평행 보조선 1줄 작도 → 닮음 삼각형 2쌍으로 증명!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (메넬라우스 할선과 외분 확장)",
+                    "headline": "교점이 삼각형 밖으로 나가거나 직선 하나가 삼각형을 관통할 때도 성립!",
+                    "key_formula": "Ceva (3 Concurrent Lines)  ↔  Menelaus (3 Collinear Points)",
+                    "narration": (
+                        f"만약 교점 P가 삼각형 바깥으로 나가거나, 직선 하나가 삼각형의 세 변과 연장선을 뚫고 지나가는 메넬라우스 구조가 되면 어떨까요? "
+                        f"꼭짓점에서 직선으로 내린 세 수선의 높이 비나 평행 보조선 한 줄을 그으면, 똑같이 세 비율의 곱이 1이라는 황금 불변량이 그대로 유지됩니다!"
+                    ),
+                    "hud_notes": [
+                        "쌍대성(Duality): 세 직선이 한 점에 모임(체바) ↔ 세 점이 한 직선에 놓임(메넬라우스)",
+                        "외부 확장: 교점이 삼각형 외부에 있어도 외분비의 곱은 여전히 1.000!",
+                        "3차원 사영기하와 구면삼각형까지 그대로 확장되는 불변 구조!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수능·올림피아드 기하 10초 해법",
+                    "headline": "삼각형 내부에 교차 선분과 내분비가 보이면 한 바퀴 회전 곱 = 1을 즉시 써라!",
+                    "key_formula": "Vertex → Divide Point → Vertex (1 Full Loop Product = 1)",
+                    "narration": (
+                        f"기하 문제에서 삼각형을 가로지르는 직선들과 선분 비율이 주어졌을 때 연립방정식을 세우지 마세요. "
+                        f"꼭짓점에서 분점으로, 분점에서 다음 꼭짓점으로 한 바퀴 도는 도미노 분수 곱을 세우면 단 10초 만에 미지수가 풀립니다! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 모든 기하 아이디어를 눈으로 깨쳐 보세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 암기 제로 팁: (꼭짓점→분점)/(분점→꼭짓점) 3번 징검다리 점프 = 1!",
+                        "넓이 비 질문 시: S₁ : S₂ : S₃ 질량중심(지렛대) 비율로 3초 계산!",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · THE TRIANGLE RATIO MYSTERY",
+                    "headline": f"No Matter Where Point P Moves, the Product of Three Ratios Is Strictly 1! ({t_title})",
+                    "key_formula": "(BD / DC) × (CE / EA) × (AF / FB) = 1.000",
+                    "narration": (
+                        f"Watch the intersection point P glide freely across the triangle. "
+                        f"Every individual segment length changes continuously, yet in [{t_title}], the cyclic product of the three division ratios stays locked at 1.000!"
+                    ),
+                    "hud_notes": [
+                        "Dynamic Observation: As P moves, all 6 segment lengths change live!",
+                        "Core Invariant: Cyclic product around the perimeter is always 1.000!",
+                        "Question: What hidden quantity cancels all three fractions like dominoes?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · CENTROID EQUILIBRIUM & LEVER BALANCE",
+                    "headline": "Start at the 1×1×1 = 1 Centroid and Watch Inverse Ratios Balance Live!",
+                    "key_formula": "Symmetric Center: (1/1) × (1/1) × (1/1) = 1.000",
+                    "narration": (
+                        f"At the symmetric centroid, every side is bisected 1 to 1, giving 1 times 1 times 1 equals 1. "
+                        f"Pulling P toward any vertex stretches one ratio by factor k while compressing the remaining two ratios by 1 over k!"
+                    ),
+                    "hud_notes": [
+                        "Symmetric Baseline: Midpoints give (1/1)×(1/1)×(1/1) = 1",
+                        "Archimedes' Lever Law: Point P acts as the center of mass of the vertices!",
+                        "Every stretch is balanced by an inverse compression.",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · TRANSLATING LENGTH RATIOS INTO AREA RATIOS",
+                    "headline": "Replace Segment Ratios With Triangle Areas S₁, S₂, S₃ for Domino Cancellation!",
+                    "key_formula": "(S₃ / S₂) × (S₁ / S₃) × (S₂ / S₁) = 1",
+                    "narration": (
+                        f"The master stroke is translating 1D segment ratios into 2D triangle areas S1, S2, and S3! "
+                        f"Because triangles sharing the same altitude have areas proportional to their bases, the three ratios become S3 over S2, S1 over S3, and S2 over S1—canceling out like dominoes to leave 1!"
+                    ),
+                    "hud_notes": [
+                        "Key Translation: Base Ratio BD : DC = Area Ratio S₃ : S₂!",
+                        "Domino Cancellation: (S₃/S₂) × (S₁/S₃) × (S₂/S₁) = 1.000!",
+                        "Alternative Proof: 1 parallel auxiliary line creates 2 pairs of similar triangles!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · DUALITY WITH MENELAUS & EXTERIOR POINTS",
+                    "headline": "3 Concurrent Lines (Ceva) ↔ 3 Collinear Points (Menelaus)!",
+                    "key_formula": "Ceva (Concurrent Lines)  ↔  Menelaus (Transversal Line)",
+                    "narration": (
+                        f"What if point P moves outside the triangle, or a single transversal line slices across all three sides? "
+                        f"Dropping three perpendicular altitudes to the transversal line proves Menelaus' Theorem with the exact same domino cancellation!"
+                    ),
+                    "hud_notes": [
+                        "Projective Duality: Ceva (concurrency) and Menelaus (collinearity)",
+                        "Works identically when intersection P lies outside the triangle!",
+                        "One parallel auxiliary line solves every triangle ratio problem.",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND OLYMPIAD GEOMETRY STRATEGY",
+                    "headline": "Walk Around the Triangle Vertex-to-Divider-to-Vertex and Set Product = 1!",
+                    "key_formula": "Vertex → Divider → Vertex (1 Full Loop Product = 1)",
+                    "narration": (
+                        f"Whenever cevians or transversals appear on an exam, write the cyclic Vertex-to-Divider-to-Vertex product equals 1 to solve it in 10 seconds! "
+                        f"Subscribe to @min7014_ai right now for daily visual math cinema!"
+                    ),
+                    "hud_notes": [
+                        "Memory Trick: Hop Vertex → Divider → Next Vertex around the loop!",
+                        "Use Mass Points (Lever Principle) for instant 3-second ratio mental math",
+                        "Subscribe to @min7014_ai & try the interactive 60fps lab below!",
+                    ],
+                },
+            ]
+
+    # 원주각 / 원의 방멱 / 기하 불변량 5막 시네마 대본
     if lang_code == "ko":
         return [
             {
@@ -1622,12 +2595,16 @@ def build_flagship_creative_idea_suite(slugs=None, langs=("ko", "en")) -> list:
 
 def build_creative_idea_masterclass_compilation(langs=("ko", "en")) -> list:
     """
-    [월 1,000만 원 핵심 엔진: 🌟 10분+ 미드롤(Mid-Roll) 순수 네온 블룸 창의 수학 시네마 마스터클래스 합본 제작]
-    - PDF 캡처가 전혀 없는 6편의 순수 네온 블룸 시네마(피타고라스 나무, 체바의 정리, 타원 빛 반사, 메넬라우스 정리, 삼각함수 극한 sin θ/θ, 포물선 빛 반사)를
-      하나의 10~12분+ 정주행 마스터클래스로 결합하여 미드롤 광고 슬롯 4개와 시청 지속시간(Watch Time)을 극대화합니다.
+    [월 1,000만 원 핵심 엔진: 🌟 10분+ 미드롤(Mid-Roll) 순수 네온 블룸 창의 수학 시네마 마스터클래스 합본 Vol.1 & Vol.2 제작]
+    - PDF 캡처가 전혀 없는 12편의 순수 네온 블룸 시네마(Vol.1 6편 + Vol.2 6편)를
+      각각 10~13분+ 정주행 마스터클래스로 결합하여 미드롤 광고 슬롯 3~4개와 시청 지속시간(Watch Time)을 극대화합니다.
     """
-    slugs = ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"]
-    build_flagship_creative_idea_suite(slugs=slugs, langs=langs)
+    vol_suites = [
+        ("masterclass_neon_idea_vol1", ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"]),
+        ("masterclass_neon_idea_vol2", ["2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"]),
+    ]
+    for _, v_slugs in vol_suites:
+        build_flagship_creative_idea_suite(slugs=v_slugs, langs=langs)
 
     mc_dir = ROOT_DIR / "video_lectures" / "masterclasses"
     mc_dir.mkdir(parents=True, exist_ok=True)
@@ -1635,22 +2612,23 @@ def build_creative_idea_masterclass_compilation(langs=("ko", "en")) -> list:
     ffprobe_exe = shutil.which("ffprobe")
     compiled = []
 
-    for lg in langs:
-        mp4_list = [CREATIVE_IDEA_DIR / f"{sl}_idea_{lg}.mp4" for sl in slugs if (CREATIVE_IDEA_DIR / f"{sl}_idea_{lg}.mp4").exists()]
-        if len(mp4_list) < 3:
-            continue
-        out_id = f"masterclass_neon_idea_vol1" if lg == "ko" else f"masterclass_neon_idea_vol1_en"
-        out_mp4 = mc_dir / f"{out_id}.mp4"
-        concat_txt = mc_dir / f"concat_{out_id}.txt"
-        concat_txt.write_text("\n".join(f"file '{p.as_posix()}'" for p in mp4_list), encoding="utf-8")
-        subprocess.run(
-            [ffmpeg_exe, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_txt), "-c", "copy", "-movflags", "+faststart", str(out_mp4)],
-            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-        )
-        concat_txt.unlink(missing_ok=True)
-        dur = vmaker.get_media_duration_seconds(out_mp4, ffprobe_exe)
-        compiled.append({"id": out_id, "lang": lg, "path": str(out_mp4), "duration_sec": round(dur, 1), "chapters": len(mp4_list)})
-        print(f"🌟🏆 [10-Min+ Mid-Roll Neon-Bloom Cinema Masterclass Compiled] {out_mp4} ({round(dur / 60, 1)} min)")
+    for base_id, v_slugs in vol_suites:
+        for lg in langs:
+            mp4_list = [CREATIVE_IDEA_DIR / f"{sl}_idea_{lg}.mp4" for sl in v_slugs if (CREATIVE_IDEA_DIR / f"{sl}_idea_{lg}.mp4").exists()]
+            if len(mp4_list) < 3:
+                continue
+            out_id = base_id if lg == "ko" else f"{base_id}_en"
+            out_mp4 = mc_dir / f"{out_id}.mp4"
+            concat_txt = mc_dir / f"concat_{out_id}.txt"
+            concat_txt.write_text("\n".join(f"file '{p.as_posix()}'" for p in mp4_list), encoding="utf-8")
+            subprocess.run(
+                [ffmpeg_exe, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_txt), "-c", "copy", "-movflags", "+faststart", str(out_mp4)],
+                check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
+            concat_txt.unlink(missing_ok=True)
+            dur = vmaker.get_media_duration_seconds(out_mp4, ffprobe_exe)
+            compiled.append({"id": out_id, "lang": lg, "path": str(out_mp4), "duration_sec": round(dur, 1), "chapters": len(mp4_list)})
+            print(f"🌟🏆 [10-Min+ Mid-Roll Neon-Bloom Cinema Masterclass Compiled] {out_mp4} ({round(dur / 60, 1)} min)")
     return compiled
 
 
