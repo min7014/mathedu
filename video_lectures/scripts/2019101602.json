@@ -204,13 +204,13 @@
     }
   },
   "teacher_proof_analysis": {
-    "category_type": "algebra",
-    "hypothesis_ko": "'역함수의 미분'에서 주어진 기본 정의와 출발 조건(가정)",
-    "conclusion_ko": "'역함수의 미분'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
-    "auxiliary_line_ko": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
-    "proof_logic_ko": "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리",
-    "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
-    "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
+    "category_type": "geometry",
+    "hypothesis_ko": "미분가능한 함수 y = f(x)의 역함수 x = f⁻¹(y)가 존재하고 직선 y = x 에 대하여 대칭인 두 그래프와 접선이 주어진 출발 조건",
+    "conclusion_ko": "역함수의 미분계수는 원래 함수의 대응점에서의 미분계수의 역수와 같다((f⁻¹)'(b) = 1 / f'(a), 즉 dx/dy = 1 / (dy/dx))는 결론",
+    "auxiliary_line_ko": "직선 y = x 대칭축에 대하여 점 (a, b)에서의 접선 기울기 직각삼각형(가로 Δx, 세로 Δy)을 대칭이동하여 점 (b, a)에서의 직각삼각형(가로 Δy, 세로 Δx)과 비교하는 기하학적 보조선",
+    "proof_logic_ko": "항등식 f(f⁻¹(y)) = y 의 양변을 미분하거나 증분 비 Δx/Δy = 1 / (Δy/Δx) 에서 Δy → 0 일 때 연속성에 의해 Δx → 0 이 되므로, 직선 y = x 대칭에서 가로 변화량과 세로 변화량의 역할이 뒤바뀌어 접선 기울기가 서로 역수가 되는 원리",
+    "misconception_ko": "(f⁻¹)'(b)를 구할 때 분모 f'(x) 자리에 b를 그대로 대입해 1 / f'(b)로 쓰는 실수가 가장 많습니다! 반드시 f(a) = b 가 되는 원래 함수의 x좌표 a를 찾아 1 / f'(a)를 대입해야 합니다.",
+    "what_if_not_ko": "만약 원래 함수의 그래프에서 접선이 수평(f'(a) = 0)이 되는 극점에서는 역함수 그래프의 접선이 수직선이 되어 왜 미분불가능해질까요?"
   },
   "supported_languages": [
     "ko",
@@ -685,7 +685,7 @@
   ],
   "creative_idea_packages": {
     "ko": {
-      "title": "🔥 멈춰 있는 그래프가 살아 움직이는 순간! | 역함수의 미분 | 창의 수학 시네마 @min7014_ai",
+      "title": "🔥 직선 y=x 대칭 뒤집기 한 번으로 끝나는 역함수의 미분 완벽 증명! | 창의 수학 시네마 @min7014_ai",
       "local_mp4_path": "video_lectures/creative_idea/2019101602_idea_ko.mp4",
       "thumbnail_path": "video_lectures/youtube_packages/2019101602_idea_ko_thumb.png",
       "duration_sec": 103.15,
@@ -694,7 +694,7 @@
       "needs_youtube_upload": true
     },
     "en": {
-      "title": "🔥 The Exact Moment Secant Becomes Tangent! | Derivative of inverse function | @min7014_ai",
+      "title": "🔥 How 1 Reflection Across y=x Proves Derivative of inverse function Instantly! | @min7014_ai",
       "local_mp4_path": "video_lectures/creative_idea/2019101602_idea_en.mp4",
       "thumbnail_path": "video_lectures/youtube_packages/2019101602_idea_en_thumb.png",
       "duration_sec": 60.87,
@@ -709,7 +709,7 @@
   },
   "creative_idea_shorts_packages": {
     "ko": {
-      "title": "🔥 멈춰 있는 그래프가 살아 움직이는 순간! | 역함수의 미분 #Shorts #창의수학 | @min7014_ai",
+      "title": "🔥 직선 y=x 대칭 뒤집기 한 번으로 끝나는 역함수의 미분 완벽 증명! #Shorts #창의수학 | @min7014_ai",
       "local_mp4_path": "video_lectures/shorts/2019101602_short_idea_ko.mp4",
       "duration_sec": 43.58,
       "aspect_ratio": "9:16 (1080x1920)",
@@ -718,7 +718,7 @@
       "needs_youtube_upload": true
     },
     "en": {
-      "title": "🔥 The Exact Moment Secant Becomes Tangent! | Derivative of inverse function #Shorts #Math",
+      "title": "🔥 How 1 Reflection Across y=x Proves Derivative of inverse function Instantly! #Shorts #Math",
       "local_mp4_path": "video_lectures/shorts/2019101602_short_idea_en.mp4",
       "duration_sec": 45.06,
       "aspect_ratio": "9:16 (1080x1920)",

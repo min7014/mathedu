@@ -204,13 +204,13 @@
     }
   },
   "teacher_proof_analysis": {
-    "category_type": "algebra",
-    "hypothesis_ko": "'(d/dx)( sin x)= cos x'에서 주어진 기본 정의와 출발 조건(가정)",
-    "conclusion_ko": "'(d/dx)( sin x)= cos x'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
-    "auxiliary_line_ko": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
-    "proof_logic_ko": "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리",
-    "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
-    "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
+    "category_type": "geometry",
+    "hypothesis_ko": "도함수의 정의 lim(h→0) [sin(x+h) - sin x] / h 와 단위원 위에서 회전각 x가 미소량 h만큼 증가할 때의 높이 변화율을 관찰하는 출발 조건",
+    "conclusion_ko": "사인함수 y = sin x를 x에 대하여 미분한 도함수는 모든 실수 x에서 정확히 코사인함수 cos x가 된다(d/dx(sin x) = cos x)는 결론",
+    "auxiliary_line_ko": "삼각함수의 덧셈정리 sin(x+h) = sin x cos h + cos x sin h 로 분자를 전개하고 기본 극한 lim(h→0) (sin h / h) = 1 과 lim(h→0) [(cos h - 1) / h] = 0 으로 묶어 내는 발상",
+    "proof_logic_ko": "평균변화율 식을 sin x · [(cos h - 1)/h] + cos x · [sin h / h] 로 분리한 뒤 h → 0 극한을 취하면 앞항은 0으로 사라지고 뒤항은 cos x × 1 = cos x 만 남게 되는 원리",
+    "misconception_ko": "삼각함수의 미분 공식 d/dx(sin x) = cos x 가 성립하려면 각도 x의 단위가 반드시 60분법(도, °)이 아니라 호도법(라디안, rad)이어야만 비례상수 1이 유지됩니다!",
+    "what_if_not_ko": "만약 각도 단위를 라디안 대신 도(°)로 쓴다면 sin(x°)를 미분했을 때 왜 앞에 파이/180 이라는 상수가 곱해지게 될까요?"
   },
   "supported_languages": [
     "ko",
@@ -685,7 +685,7 @@
   ],
   "creative_idea_packages": {
     "ko": {
-      "title": "🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | (d/dx)( sin x)= cos x | 창의 수학 시네마 @min7014_ai",
+      "title": "🔥 사인(sin x)을 미분하면 왜 정확히 코사인(cos x)이 될까? | (d/dx)(sin x)=cos x | 창의 수학 시네마 @min7014_ai",
       "local_mp4_path": "video_lectures/creative_idea/2016040701_idea_ko.mp4",
       "thumbnail_path": "video_lectures/youtube_packages/2016040701_idea_ko_thumb.png",
       "duration_sec": 122.94,
@@ -694,7 +694,7 @@
       "needs_youtube_upload": true
     },
     "en": {
-      "title": "🔥 How a Rotating Circle Creates Every Wave in the Universe! | (d/dx)( sin x)= cos x | @min7014_ai",
+      "title": "🔥 Why Is the Derivative of sin x Exactly cos x? | (d/dx)( sin x)= cos x | @min7014_ai",
       "local_mp4_path": "video_lectures/creative_idea/2016040701_idea_en.mp4",
       "thumbnail_path": "video_lectures/youtube_packages/2016040701_idea_en_thumb.png",
       "duration_sec": 83.22,
@@ -709,7 +709,7 @@
   },
   "creative_idea_shorts_packages": {
     "ko": {
-      "title": "🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | (d/dx)( sin x)= cos x #Shorts #창의수학 | @min7014_ai",
+      "title": "🔥 사인(sin x)을 미분하면 왜 정확히 코사인(cos x)이 될까? | (d/dx)(sin x)=cos x #Shorts #창의수학 | @min7014_ai",
       "local_mp4_path": "video_lectures/shorts/2016040701_short_idea_ko.mp4",
       "duration_sec": 48.31,
       "aspect_ratio": "9:16 (1080x1920)",
@@ -718,7 +718,7 @@
       "needs_youtube_upload": true
     },
     "en": {
-      "title": "🔥 How a Rotating Circle Creates Every Wave in the Universe! | (d/dx)( sin x)= cos x #Shorts #Math",
+      "title": "🔥 Why Is the Derivative of sin x Exactly cos x? | (d/dx)( sin x)= cos x #Shorts #Math",
       "local_mp4_path": "video_lectures/shorts/2016040701_short_idea_en.mp4",
       "duration_sec": 43.57,
       "aspect_ratio": "9:16 (1080x1920)",

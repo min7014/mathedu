@@ -204,13 +204,13 @@
     }
   },
   "teacher_proof_analysis": {
-    "category_type": "algebra",
-    "hypothesis_ko": "'코시의 평균값 정리'에서 주어진 기본 정의와 출발 조건(가정)",
-    "conclusion_ko": "'코시의 평균값 정리'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
-    "auxiliary_line_ko": "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상",
-    "proof_logic_ko": "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리",
-    "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
-    "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
+    "category_type": "geometry",
+    "hypothesis_ko": "두 함수 f(x), g(x)가 닫힌구간 [a, b]에서 연속이고 열린구간 (a, b)에서 미분가능하며 g'(x) ≠ 0 인 출발 조건",
+    "conclusion_ko": "구간 (a, b) 안에 [f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c) 를 만족하는 점 c가 적어도 하나 존재한다는 코시의 평균값 정리 결론",
+    "auxiliary_line_ko": "양 끝점 (g(a), f(a))와 (g(b), f(b))를 잇는 할선과 곡선 (g(x), f(x)) 사이의 차이를 나타내는 보조함수 h(x) = [f(b) - f(a)]g(x) - [g(b) - g(a)]f(x) 를 설정하는 발상",
+    "proof_logic_ko": "보조함수 h(x)에 x=a와 x=b를 대입하면 h(a) = h(b)가 되어 롤의 정리(Rolle's Theorem) 조건을 만족하므로, 열린구간 (a, b) 안에 h'(c) = [f(b)-f(a)]g'(c) - [g(b)-g(a)]f'(c) = 0 인 점 c가 존재하여 [f(b)-f(a)]/[g(b)-g(a)] = f'(c)/g'(c) 가 증명되는 원리",
+    "misconception_ko": "코시의 평균값 정리를 증명할 때 분모와 분자에 일반 평균값 정리를 각각 적용해 f'(c₁)/g'(c₂)로 나누면 c₁과 c₂가 서로 다른 점이 될 수 있어 증명되지 않습니다! 반드시 보조함수 h(x) 하나로 묶어 동일한 점 c를 찾아야 합니다.",
+    "what_if_not_ko": "만약 코시의 평균값 정리에서 g(x) = x 로 놓으면 일반 평균값 정리가 되고, a → b 극한을 취하면 왜 0/0 꼴 극한을 푸는 로피탈의 정리(L'Hôpital's Rule)가 탄생할까요?"
   },
   "supported_languages": [
     "ko",
@@ -685,7 +685,7 @@
   ],
   "creative_idea_packages": {
     "ko": {
-      "title": "🔥 멈춰 있는 그래프가 살아 움직이는 순간! | 코시의 평균값 정리 | 창의 수학 시네마 @min7014_ai",
+      "title": "🔥 두 함수의 평균변화율 비와 미분계수 비가 일치하는 순간! | 코시의 평균값 정리 | 창의 수학 시네마 @min7014_ai",
       "local_mp4_path": "video_lectures/creative_idea/2016012801_idea_ko.mp4",
       "thumbnail_path": "video_lectures/youtube_packages/2016012801_idea_ko_thumb.png",
       "duration_sec": 103.46,
@@ -695,7 +695,7 @@
       "youtube_url": "https://youtu.be/QuyYY0CYtuU"
     },
     "en": {
-      "title": "🔥 The Exact Moment Secant Becomes Tangent! | Cauchy's Mean Value Theorem | @min7014_ai",
+      "title": "🔥 Where Two Functions' Secant Ratio Matches Their Derivative Ratio! | Cauchy's Mean | @min7014_ai",
       "local_mp4_path": "video_lectures/creative_idea/2016012801_idea_en.mp4",
       "thumbnail_path": "video_lectures/youtube_packages/2016012801_idea_en_thumb.png",
       "duration_sec": 60.84,
@@ -711,7 +711,7 @@
   },
   "creative_idea_shorts_packages": {
     "ko": {
-      "title": "🔥 멈춰 있는 그래프가 살아 움직이는 순간! | 코시의 평균값 정리 #Shorts #창의수학 | @min7014_ai",
+      "title": "🔥 두 함수의 평균변화율 비와 미분계수 비가 일치하는 순간! | 코시의 평균값 정리 #Shorts #창의수학 | @min7014_ai",
       "local_mp4_path": "video_lectures/shorts/2016012801_short_idea_ko.mp4",
       "duration_sec": 43.58,
       "aspect_ratio": "9:16 (1080x1920)",
@@ -721,7 +721,7 @@
       "youtube_url": "https://youtube.com/shorts/RnP_dJizC4I"
     },
     "en": {
-      "title": "🔥 The Exact Moment Secant Becomes Tangent! | Cauchy's Mean Value Theorem #Shorts #Math",
+      "title": "🔥 Where Two Functions' Secant Ratio Matches Their Derivative Ratio! | Cauchy's Mean #Shorts #Math",
       "local_mp4_path": "video_lectures/shorts/2016012801_short_idea_en.mp4",
       "duration_sec": 45.06,
       "aspect_ratio": "9:16 (1080x1920)",
