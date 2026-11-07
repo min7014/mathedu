@@ -73,7 +73,7 @@ def _purge_non_math_tutorial_topics() -> list:
     bad_slugs = {
         "math20190921002", "math20191102002", "math20191001002",
         "math20190918001", "math20190914001", "math20190914002", "math20190912002",
-        "math20190810021",
+        "math20190810021", "math20191222001", "2025021601", "2022052701",
     }
     for sp in list(SCRIPTS_DIR.glob("*.json")):
         slug = sp.stem
