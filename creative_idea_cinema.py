@@ -76,6 +76,11 @@ def sanitize_glyphs(text: str) -> str:
         "👆": "→",
         "🔍": "▶",
         "✨": "★",
+        "≈": "=",
+        "∈": "in",
+        "⇒": "→",
+        "⇔": "↔",
+        "∽": "~",
         "lim( theta arrow 0) ( sin theta/": "lim(θ→0) (sinθ/θ) = 1",
         "theta arrow 0": "θ→0",
         "sin theta": "sinθ",
@@ -1798,6 +1803,13 @@ def render_pure_procedural_scene(
 
     elif archetype == "fibonacci_golden":
         # 황금비 해바라기 필로탁시스(Phyllotaxis) 144개 네온 씨앗 나선
+        seed_palette = [
+            (56, 189, 248),
+            (52, 211, 153),
+            (250, 204, 21),
+            (251, 113, 133),
+            (192, 132, 252),
+        ]
         golden_ang = math.radians(137.507764)
         max_seeds = int(24 + 120 * t)
         spread = scale_ref * 0.025
@@ -1806,11 +1818,11 @@ def render_pure_procedural_scene(
             a_n = n * golden_ang + t_raw * 0.8
             sx = cx + r_n * math.cos(a_n)
             sy = cy + r_n * math.sin(a_n)
-            pal = GOLDEN_PALETTE[n % len(GOLDEN_PALETTE)]
+            col_s = seed_palette[n % len(seed_palette)]
             rad_s = max(4, int(9 - n * 0.03))
-            g_draw.ellipse((sx - rad_s - 2, sy - rad_s - 2, sx + rad_s + 2, sy + rad_s + 2), fill=(pal[1][0], pal[1][1], pal[1][2], 210))
+            g_draw.ellipse((sx - rad_s - 2, sy - rad_s - 2, sx + rad_s + 2, sy + rad_s + 2), fill=(col_s[0], col_s[1], col_s[2], 210))
             c_draw.ellipse((sx - rad_s + 1, sy - rad_s + 1, sx + rad_s - 1, sy + rad_s - 1), fill=(255, 255, 255, 235))
-        c_draw.text((int(cx - 195), int(cy + scale_ref * 0.34)), "황금각 137.508° · φ = (1 + √5)/2 ≈ 1.618034", fill=(250, 204, 21, 255), font=f_big)
+        c_draw.text((int(cx - 195), int(cy - scale_ref * 0.36)), "황금각 137.508° · φ = (1 + √5)/2 = 1.618034", fill=(250, 204, 21, 255), font=f_big)
 
     elif archetype == "prob_galton":
         # 이항분포 갈톤 보드(Galton Board) -> 정규분포 가우시안 벨 커브 수렴
