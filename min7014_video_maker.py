@@ -580,6 +580,22 @@ def latex_to_unicode_title(text):
     )
     s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
+    s = (
+        s.replace(r"\rightarrow", "→")
+        .replace(r"\leftarrow", "←")
+        .replace(r"\to", "→")
+        .replace(r"\theta", "θ")
+        .replace(r"\pi", "π")
+        .replace(r"\alpha", "α")
+        .replace(r"\beta", "β")
+        .replace(r"\gamma", "γ")
+        .replace(r"\lim", "lim")
+        .replace(r"\sin", "sin")
+        .replace(r"\cos", "cos")
+        .replace(r"\tan", "tan")
+        .replace(r"\log", "log")
+        .replace(r"\ln", "ln")
+    )
     s = re.sub(r"\^\s*\{\\circ\}|\^\s*\\circ", "°", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"√(\1)", s)
@@ -736,8 +752,31 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
     blob = f"{t} {sub_domain_ko} {b}"
     ko_t, _ = split_bilingual_title(t)
 
+    # 0. 특수 직각삼각형 (직각이등변삼각형 1:1:√2 및 30-60-90도 삼각형 1:√3:2)
+    if "직각이등변삼각형" in blob or "Isosceles Right Triangle" in blob or "45도 삼각비" in blob or "45 degree" in blob.lower():
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "직각(90도)을 낀 두 변의 길이가 a로 같고 두 예각이 각각 45도인 직각이등변삼각형(또는 정사각형을 대각선으로 이등분한 삼각형)이 주어진 출발 조건",
+            "conclusion_ko": "직각이등변삼각형의 세 변의 길이의 비는 항상 1 대 1 대 루트 2가 되며, sin 45도 = 루트 2 분의 1, cos 45도 = 루트 2 분의 1, tan 45도 = 1이 성립한다는 결론",
+            "auxiliary_line_ko": "한 변의 길이가 a인 정사각형에 대각선 보조선 1줄을 그어 두 변이 a, a이고 두 밑각이 45도인 합동 직각이등변삼각형 2개로 분할하는 발상",
+            "proof_logic_ko": "이등변삼각형의 두 밑각이 같으므로 (180도 - 90도) 나누기 2 = 45도가 되고, 피타고라스 정리(a의 제곱 더하기 a의 제곱 = 2a의 제곱)에 의해 빗변의 길이가 루트 2 a로 결정되는 원리",
+            "misconception_ko": "빗변의 길이를 두 변의 합인 2a로 착각하면 안 됩니다! 제곱의 합이 2a의 제곱이므로 양의 제곱근을 씌운 루트 2 a가 정확한 빗변의 길이입니다.",
+            "what_if_not_ko": "만약 정사각형 대신 정삼각형을 꼭짓점 수선으로 반으로 자르면 30도, 60도, 90도를 가지는 직각삼각형의 세 변의 비(1 대 루트 3 대 2)는 어떻게 유도될까요?"
+        }
+
+    if "30-60-90" in blob or "30도 삼각비" in blob or "60도 삼각비" in blob or "30 degree" in blob.lower() or "60 degree" in blob.lower() or "예각 30도" in blob:
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "세 내각이 30도, 60도, 90도인 특수 직각삼각형(한 변의 길이가 2a인 정삼각형을 꼭짓점 수선으로 이등분한 직각삼각형)이 주어진 출발 조건",
+            "conclusion_ko": "30도, 60도, 90도 직각삼각형에서 30도 대변(밑변) 대 60도 대변(높이) 대 90도 대변(빗변)의 길이의 비는 항상 1 대 루트 3 대 2가 된다는 결론",
+            "auxiliary_line_ko": "한 변의 길이가 2a인 정삼각형 ABC의 꼭짓점 A에서 밑변 BC에 수선의 발 H를 내려 합동인 두 직각삼각형으로 이등분하는 수선 보조선(또는 30-60-90 삼각형 2개를 맞붙여 정삼각형 복원)",
+            "proof_logic_ko": "정삼각형의 꼭지각(60도)의 이등분선은 밑변(2a)을 수직이등분하므로 밑변 조각 BH = a가 되고, 피타고라스 정리((2a)의 제곱 - a의 제곱 = 3a의 제곱)에 의해 높이 AH = 루트 3 a가 되어 1 대 루트 3 대 2가 증명되는 원리",
+            "misconception_ko": "1 대 2 대 루트 3에서 가장 긴 변은 루트 3(약 1.732)이 아니라 빗변인 2입니다! 반드시 90도와 마주 보는 빗변에 2를 대응시켜야 합니다.",
+            "what_if_not_ko": "이 1 대 루트 3 대 2 비율을 반지름이 1인 단위원 위에 올리면 고등학교 삼각함수의 일반각(120도, 150도, 210도, 300도) 좌표로 어떻게 즉시 확장될까요?"
+        }
+
     # 1. 이등변삼각형 성질 / 조건
-    if "이등변삼각형" in blob or "Isosceles" in blob:
+    if "이등변삼각형" in blob or "이등변 삼각형" in blob or "Isosceles" in blob or "2 conguent angles" in blob.lower():
         if "수선의 발" in t or "수직 이등분" in t or "수직이등분" in t or "bisector of the apex" in t:
             return {
                 "category_type": "geometry",
@@ -748,7 +787,7 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "misconception_ko": "일반 삼각형에서는 꼭지각의 이등분선과 밑변의 수직이등분선이 일치하지 않으며, 오직 두 변의 길이가 같은 이등변삼각형의 대칭성에서만 일치함을 주의해야 합니다.",
                 "what_if_not_ko": "만약 밑변의 중점과 꼭짓점을 먼저 이으면(중선) 왜 자동으로 수직이 되고 꼭지각도 이등분될까요?(SSS 합동으로의 역발상)"
             }
-        elif "두 내각" in t or "two angles" in t.lower():
+        elif "두 내각" in t or "two angles" in t.lower() or "2 conguent angles" in t.lower():
             return {
                 "category_type": "geometry",
                 "hypothesis_ko": "삼각형 ABC에서 밑변 양 끝의 두 내각 B와 C의 크기가 같다는 가정",
@@ -831,16 +870,28 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "what_if_not_ko": "만약 평행사변형에서 이웃하는 두 변의 길이까지 같아지거나(마름모), 한 내각이 90도가 되면(직사각형) 두 대각선 사이에 어떤 새로운 수직·길이 관계가 생길까요?"
             }
 
-    # 7. 메넬라우스 / 체바의 정리
-    if "메넬라우스" in blob or "Menelaus" in blob or "체바" in blob or "Ceva" in blob:
+    # 7-A. 메넬라우스의 정리 (Menelaus' Theorem — 할선과 평행 보조선 AA 닮음 약분)
+    if "메넬라우스" in blob or "Menelaus" in blob:
         return {
             "category_type": "geometry",
-            "hypothesis_ko": "삼각형의 세 변(또는 연장선)을 지나는 할선이나 한 점 P에서 만나는 세 체바선(Cevian)이 주어진 가정",
-            "conclusion_ko": "세 변을 분할하는 선분 길이의 비율 세 개를 곱하면 항상 1이 된다는 비율 불변량 결론",
-            "auxiliary_line_ko": "꼭짓점을 지나며 할선에 평행한 보조선 1줄을 긋거나, 높이가 같은 삼각형들의 넓이 비 = 밑변의 길이 비를 연결하는 발상",
-            "proof_logic_ko": "평행선에 의한 AA 닮음비 또는 밑변 비 = 넓이 비 식을 세 개 곱할 때 분모와 분자가 도미노처럼 연쇄 약분되어 정확히 1이 되는 원리",
+            "hypothesis_ko": "삼각형 ABC의 세 변(두 변과 나머지 한 변의 연장선)과 한 직선(할선, Transversal line)이 일직선 위의 세 점 D, E, F에서 만나는 가정",
+            "conclusion_ko": "할선이 삼각형의 세 변을 분할하는 선분 길이의 비율 세 개를 순환하여 곱하면 (AF/FB) × (BD/DC) × (CE/EA) = 1 이 항상 성립한다는 메넬라우스 비율 불변량 결론",
+            "auxiliary_line_ko": "삼각형의 한 꼭짓점 C를 지나고 변 AB(또는 할선 DEF)에 평행한 보조선 CK 1줄을 그어 두 쌍의 AA 닮음 삼각형을 만드는 결정적 발상",
+            "proof_logic_ko": "평행 보조선 CK에 의해 생기는 두 쌍의 AA 닮음 삼각형(△BDF ∽ △BCK 및 △AEF ∽ △CEK)에서 선분 비례식을 세워 대입하면 분모와 분자의 보조선 길이 CK와 선분 조각들이 도미노처럼 연쇄 약분되어 정확히 1이 되는 원리",
+            "misconception_ko": "연장선 위의 외분점 D를 지날 때는 반드시 '꼭짓점 B → 외분점 D → 다음 꼭짓점 C' 순서(BD/DC)로 갔다 돌아오는 징검다리 방향을 지켜야 합니다!",
+            "what_if_not_ko": "만약 세 점이 한 직선 위에 있는 메넬라우스의 정리와 반대로, 세 직선이 한 점 P에서 만나는 쌍대 정리(체바의 정리)에서는 넓이 비로 어떻게 똑같이 1이 증명될까요?"
+        }
+
+    # 7-B. 체바의 정리 (Ceva's Theorem — 세 체바선의 공점성과 삼각형 넓이 비 연쇄 약분)
+    if "체바" in blob or "Ceva" in blob:
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": "삼각형 ABC의 세 꼭짓점과 내부(또는 외부)의 한 교점 P를 지나는 세 체바선(Cevian) AD, BE, CF가 마주 보는 변과 만나는 가정",
+            "conclusion_ko": "세 체바선이 마주 보는 변을 내분하는 비율 세 개를 순환하여 곱하면 (AF/FB) × (BD/DC) × (CE/EA) = 1 이 항상 성립한다는 체바 비율 불변량 결론",
+            "auxiliary_line_ko": "교점 P로 분할된 세 삼각형 PAB(넓이 S₃), PBC(넓이 S₁), PCA(넓이 S₂)에서 높이가 같은 삼각형들의 '밑변의 길이 비 = 넓이 비' 성질을 연결하는 발상",
+            "proof_logic_ko": "높이가 같은 삼각형 넓이 비에 의해 AF/FB = S₃/S₂, BD/DC = S₁/S₃, CE/EA = S₂/S₁ 이 성립하므로, 세 비율을 곱하면 넓이 S₁, S₂, S₃가 분모·분자에서 도미노처럼 연쇄 약분되어 정확히 1이 되는 원리",
             "misconception_ko": "비율을 돌릴 때 반드시 삼각형의 꼭짓점에서 분점, 다시 분점에서 다음 꼭짓점 순서로 한 바퀴 순환하는 방향을 일관되게 유지해야 합니다.",
-            "what_if_not_ko": "이 넓이 비·내분비 원리를 고등 기하·벡터의 위치벡터 내분점 식으로 바꾸면 어떻게 교점 비율을 구할 수 있을까요?"
+            "what_if_not_ko": "이 넓이 비·내분비 원리를 고등 기하·벡터의 위치벡터 내분점 식이나 아르키메데스의 지렛대 질량중심 원리로 바꾸면 어떻게 세 넓이 비 S₁ : S₂ : S₃를 3초 만에 구할 수 있을까요?"
         }
 
     # 8-A. 나눗셈과 역수의 곱셈 (a ÷ b = a × 1/b) — 지수법칙·제곱근보다 먼저 정확히 판별!
@@ -1032,17 +1083,38 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
                 "what_if_not_ko": "만약 회전하는 각도를 360도의 유리수 등분이 아니라 황금비에 따른 황금각(약 137.5도)으로 바꾸면 해바라기 씨앗 배열처럼 어떻게 빈틈없는 꽃잎차례가 만들어질까요?"
             }
 
-    # 14. 이차곡선 (포물선 / 타원 / 쌍곡선 / 단델린 구)
+    # 14. 이차곡선 (포물선 / 타원 / 쌍곡선 / 단델린 구 — 각각 엄밀히 분리!)
     if any(k in blob for k in ("포물선", "타원", "쌍곡선", "이차곡선", "단델린", "Parabola", "Ellipse", "Hyperbola", "Dandelin", "초점", "준선")):
-        return {
-            "category_type": "geometry",
-            "hypothesis_ko": f"초점(Focus)과 준선 또는 두 초점으로부터의 거리 관계로 정의된 '{ko_t}'의 기하학적 출발 조건",
-            "conclusion_ko": f"'{ko_t}'에서 거리 합·차 불변량과 접선의 빛 반사 대칭 성질이 항상 성립한다는 이차곡선 결론",
-            "auxiliary_line_ko": "곡선 위의 한 점에서 초점과 준선(또는 두 초점)에 이르는 보조선 및 접선에 대한 대칭점 작도",
-            "proof_logic_ko": "이등변삼각형의 대칭성과 수직이등분선 성질(또는 구에 그은 두 접선의 길이 같음)에 의해 초점 거리 관계와 입사각·반사각 일치가 증명되는 원리",
-            "misconception_ko": "이차곡선 문제는 곧바로 복잡한 방정식에 대입하기보다, 먼저 이차곡선의 기하학적 정의(초점과 준선까지의 거리)를 보조선으로 표시해야 식이 3줄 이내로 풀립니다!",
-            "what_if_not_ko": "만약 원뿔을 자르는 평면의 기울기를 조금씩 변화시키면 단면이 원에서 타원, 포물선, 쌍곡선으로 어떻게 연속적으로 바뀔까요?"
-        }
+        if "포물선" in blob or "Parabola" in blob or "parabola" in blob or ("준선" in blob and "타원" not in blob and "쌍곡선" not in blob):
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": f"평면 위의 한 정점(초점 F)과 한 정직선(준선 l)에 이르는 거리가 같은 점들의 자취(PF = PH)로 정의된 '{ko_t}'의 기하학적 출발 조건",
+                "conclusion_ko": f"'{ko_t}'에서 초점 거리와 준선 거리의 일치(PF = PH) 및 이등변삼각형 대칭에 의한 접선·빛 반사 성질이 항상 성립한다는 포물선 결론",
+                "auxiliary_line_ko": "포물선 위의 점 P에서 초점 F를 잇는 선분 PF와 준선 l에 내린 수선 PH를 작도하여 이등변삼각형 PFH(PF = PH)와 밑변 FH의 수직이등분선(접선)을 연결하는 보조선",
+                "proof_logic_ko": "포물선의 정의에 의해 PF = PH인 이등변삼각형 PFH가 만들어지고, 포물선의 접선은 선분 FH의 수직이등분선이자 꼭지각 ∠FPH의 이등분선이므로 축에 평행하게 들어온 빛이 반사되어 정확히 초점 F로 모이는 원리",
+                "misconception_ko": "타원은 두 초점 거리의 합(PF₁+PF₂=2a)이지만, 포물선은 초점 1개와 준선 1개에 대해 '초점까지의 거리 PF = 준선까지의 수직 거리 PH'라는 점을 절대 혼동하면 안 됩니다!",
+                "what_if_not_ko": "만약 포물선의 준선 위의 한 점에서 포물선에 두 개의 접선을 그으면 왜 두 접선은 항상 수직(90도)으로 만나고 두 접점을 잇는 극선은 반드시 초점 F를 지날까요?"
+            }
+        elif "쌍곡선" in blob or "Hyperbola" in blob or "hyperbola" in blob:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": f"평면 위의 서로 다른 두 초점 F₁, F₂로부터 거리의 차가 주축의 길이 2a로 일정한 점들의 자취(|PF₁ - PF₂| = 2a)로 정의된 '{ko_t}'의 기하학적 출발 조건",
+                "conclusion_ko": f"'{ko_t}'에서 두 초점 거리의 차 불변량(|PF₁ - PF₂| = 2a)과 점근선·접선 반사 성질이 항상 성립한다는 쌍곡선 결론",
+                "auxiliary_line_ko": "쌍곡선 위의 점 P와 두 초점 F₁, F₂를 잇는 초점 반경 보조선 및 중심에서 점근선에 내린 수선 작도",
+                "proof_logic_ko": "쌍곡선의 정의(|PF₁ - PF₂| = 2a)와 접선에 대한 대칭성을 이용하여 접선이 두 초점 반경 F₁P, F₂P가 이루는 내각을 이등분함을 증명하는 원리",
+                "misconception_ko": "쌍곡선 방정식 x²/a² - y²/b² = 1에서 초점 좌표 c는 타원(c²=a²-b²)과 달리 c² = a² + b²으로 구한다는 부호 차이를 꼭 구분해야 합니다!",
+                "what_if_not_ko": "쌍곡선 위의 한 점에서 두 점근선에 평행하게 그은 선분들로 만들어지는 평행사변형의 넓이는 점 P가 어디로 움직이든 왜 항상 일정할까요?"
+            }
+        else:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": f"평면 위의 서로 다른 두 초점 F₁, F₂로부터 거리의 합이 장축의 길이 2a로 일정한 점들의 자취(PF₁ + PF₂ = 2a)로 정의된 '{ko_t}'의 기하학적 출발 조건",
+                "conclusion_ko": f"'{ko_t}'에서 두 초점 거리의 합 불변량(PF₁ + PF₂ = 2a)과 접선에 대한 입사각·반사각 일치 및 보조원 성질이 항상 성립한다는 타원 결론",
+                "auxiliary_line_ko": "타원 위의 점 P와 두 초점 F₁, F₂를 잇는 두 초점 반경 보조선 및 한 초점 F₂를 접선에 대하여 대칭이동한 점 F₂' 작도",
+                "proof_logic_ko": "타원의 정의(PF₁ + PF₂ = 2a)와 접선에 대한 초점 대칭이동에 의해 F₁-P-F₂'가 일직선(최단거리 2a)을 이루며, 합동인 직각삼각형과 맞꼭지각 성질로 입사각과 반사각이 일치하고 초점에서 접선에 내린 수선의 발이 장축을 지름으로 하는 원 위에 놓이는 원리",
+                "misconception_ko": "타원 문제를 복잡한 방정식 연립으로만 풀려고 하지 말고, 타원 위의 점이 보이면 즉시 두 초점 F₁, F₂와 이어 PF₁ + PF₂ = 2a 정의부터 적용해야 식이 3줄 이내로 풀립니다!",
+                "what_if_not_ko": "만약 원기둥이나 원뿔 안에 두 개의 구(단델린의 구)를 내접시키면 평면과 만나는 접점이 왜 정확히 타원의 두 초점 F₁, F₂가 될까요?"
+            }
 
     # 14-A. 원에서 현의 수직이등분선과 중심의 성질 (Perpendicular Bisector of a Chord)
     if ("수직이등분선" in blob or "수직이분선" in blob) and ("현" in blob or "원" in blob or "chord" in blob.lower()):
@@ -1082,8 +1154,18 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "만약 행렬의 두 열벡터가 한 직선 위에 놓여 평행사변형이 납작한 선분으로 찌그러진다면(행렬식 a₁₁a₂₂ - a₁₂a₂₁ = 0), 왜 역변환(역행렬)이 존재할 수 없을까요?"
         }
 
-    # 15. 원의 성질 (원주각 / 중심각 / 접선 / 할선 / 톨레미 / 내접사각형)
-    if any(k in blob for k in ("원주각", "중심각", "접선", "현의", "톨레미", "Ptolemy", "내접", "할선", "방멱")):
+    # 15. 원의 성질 (원주각 / 중심각 / 접선 / 할선 / 톨레미 / 내접사각형 / 아폴로니우스의 원)
+    if any(k in blob for k in ("원주각", "중심각", "접선", "현의", "톨레미", "Ptolemy", "내접", "할선", "방멱", "아폴로니우스", "Apollonius", "원의 여러가지", "두 원의 위치", "원 밖의 한 점", "거리가 같은" if "원" in blob else "__none__")):
+        if "아폴로니우스" in blob or "Apollonius" in blob:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "평면 위의 두 정점 A, B로부터 거리의 비가 m 대 n(단 m ≠ n, m＞0, n＞0)으로 일정한 점 P의 자취를 찾는 출발 조건",
+                "conclusion_ko": "점 P의 자취는 선분 AB를 m 대 n으로 내분하는 점 D와 외분하는 점 E를 지름의 양 끝점으로 하는 원(아폴로니우스의 원)이 된다는 결론",
+                "auxiliary_line_ko": "삼각형 PAB에서 내각 ∠APB의 이등분선 PD(내분점 D)와 외각의 이등분선 PE(외분점 E)를 동시에 작도하는 보조선",
+                "proof_logic_ko": "내각의 이등분선 정리(PA:PB = AD:DB = m:n)와 외각의 이등분선 정리(PA:PB = AE:EB = m:n)가 성립하고, 평각 180도의 절반씩을 더한 ∠DPE = 90도(직각)가 항상 유지되므로 탈레스의 원주각 역정리에 의해 점 P는 선분 DE를 지름으로 하는 원 위를 움직이는 원리",
+                "misconception_ko": "만약 거리의 비가 m = n(즉 1 대 1)이면 원이 아니라 선분 AB의 수직이등분선(직선)이 된다는 특수 경우를 꼭 기억해야 합니다!",
+                "what_if_not_ko": "아폴로니우스의 원에서 삼각형 PAB의 넓이가 최대가 되는 순간은 점 P가 원의 어느 위치(지름 DE의 수직이등분선 위 꼭대기)에 있을 때일까요?"
+            }
         return {
             "category_type": "geometry",
             "hypothesis_ko": f"원 위의 점들과 현·접선·중심이 이루는 '{ko_t}'의 기하학적 출발 조건",
@@ -1094,20 +1176,20 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "만약 원 위의 한 점이 다른 한 점에 한없이 가까워져 할선이 접선으로 변한다면 원주각은 접선과 현이 이루는 각으로 어떻게 그대로 보존될까요?"
         }
 
-    # 15-B. 공간도형 (평면의 결정 조건 · 직선과 평면의 위치 관계 · 삼수선의 정리 · 정사영)
-    if any(k in t for k in ("평면", "직선 위에 있지 않은", "삼수선", "이면각", "정사영", "꼬인 위치", "교선", "평행한 두 직선")):
+    # 15-B. 공간도형 (평면의 결정 조건 · 직선과 평면의 위치 관계 · 삼수선의 정리 · 정사영 · 다면체·원뿔·각뿔·직육면체)
+    if any(k in blob for k in ("평면", "직선 위에 있지 않은", "삼수선", "이면각", "정사영", "꼬인 위치", "교선", "평행한 두 직선", "직육면체", "원뿔의 높이", "정사각뿔", "Tetrahedron", "Cube 5-Compound", "Three-Dimensional")):
         return {
             "category_type": "geometry",
-            "hypothesis_ko": f"3차원 공간에서 점, 직선, 평면의 기본 공리와 위치 관계가 주어진 '{ko_t}'의 출발 조건",
-            "conclusion_ko": f"공간기하의 공리와 평면 결정 조건에 의해 '{ko_t}' 성질이 유일하고 필연적으로 성립한다는 기하학적 결론",
-            "auxiliary_line_ko": "주어진 점들과 직선을 포함하는 기준 평면을 설정하고, 교선과 수선의 발을 내려 공간 관계를 평면 위의 합동·평행 관계로 환원하는 보조선",
-            "proof_logic_ko": "한 직선 위에 있지 않은 서로 다른 세 점은 단 하나의 평면을 결정한다는 기본 공리로부터 두 직선의 교점·평행선 및 수직 관계를 단계별로 연역하는 원리",
+            "hypothesis_ko": f"3차원 공간에서 점, 직선, 평면 및 입체도형의 위치·길이 관계가 주어진 '{ko_t}'의 출발 조건",
+            "conclusion_ko": f"공간기하의 공리와 직각삼각형 단면 분해에 의해 '{ko_t}' 성질과 길이·각도 관계가 필연적으로 성립한다는 기하학적 결론",
+            "auxiliary_line_ko": "입체도형의 꼭짓점에서 밑면에 수선의 발(높이 h)을 내리고 밑면 대각선과 연결하여 3차원 공간 문제를 2차원 직각삼각형 단면으로 환원하는 보조선",
+            "proof_logic_ko": "한 직선 위에 있지 않은 세 점이 결정하는 기준 평면과 수직 조건을 통해 밑면에서의 피타고라스 정리와 공간 수직 단면에서의 피타고라스 정리를 2단계로 연쇄 적용하는 원리",
             "misconception_ko": "평면기하에서는 만나지 않는 두 직선이 무조건 평행하지만, 3차원 공간에서는 만나지도 않고 평행하지도 않은 '꼬인 위치(Skew lines)'가 존재하므로 반드시 한 평면 위에 있는지 먼저 확인해야 합니다!",
             "what_if_not_ko": "이 공간에서의 직선과 평면의 수직 조건을 확장하면 고등학교 기하의 핵심인 '삼수선의 정리'와 '정사영의 넓이(S' = S cos θ)' 공식으로 어떻게 연결될까요?"
         }
 
     # 15-C. 복소수와 허수 단위 i / 켤레복소수 (Complex Numbers & Imaginary Unit)
-    if any(k in t for k in ("복소수", "허수", "켤레", "Complex", "complex", "Imaginary")):
+    if any(k in blob for k in ("복소수", "허수", "켤레", "Complex", "complex", "Imaginary", "mathbb{C}")):
         return {
             "category_type": "number",
             "hypothesis_ko": f"제곱하여 -1이 되는 새로운 수인 허수 단위 i(i의 제곱 = -1)와 실수 a, b로 이루어진 복소수 a+bi의 '{ko_t}' 출발 조건",
@@ -1118,24 +1200,212 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "만약 복소수 a+bi를 가로축이 실수축, 세로축이 허수축인 좌표평면(복소평면) 위의 점 (a, b)로 나타낸다면, i를 곱하는 연산은 기하학적으로 몇 도 회전 변환이 될까요?"
         }
 
+    # 15-D. 삼각함수의 극한과 미분 (lim sin θ / θ = 1, θ < tan θ, d/dx(sin x) = cos x)
+    if ("sin" in t or "tan" in t) and ("lim" in t or "theta" in t or "\\frac{d}{dx}" in t or "미분" in blob):
+        if "\\frac{d}{dx}" in t or "d/dx" in t:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "도함수의 정의 lim(h→0) [sin(x+h) - sin x] / h 와 단위원 위에서 회전각 x가 미소량 h만큼 증가할 때의 높이 변화율을 관찰하는 출발 조건",
+                "conclusion_ko": "사인함수 y = sin x를 x에 대하여 미분한 도함수는 모든 실수 x에서 정확히 코사인함수 cos x가 된다(d/dx(sin x) = cos x)는 결론",
+                "auxiliary_line_ko": "삼각함수의 덧셈정리 sin(x+h) = sin x cos h + cos x sin h 로 분자를 전개하고 기본 극한 lim(h→0) (sin h / h) = 1 과 lim(h→0) [(cos h - 1) / h] = 0 으로 묶어 내는 발상",
+                "proof_logic_ko": "평균변화율 식을 sin x · [(cos h - 1)/h] + cos x · [sin h / h] 로 분리한 뒤 h → 0 극한을 취하면 앞항은 0으로 사라지고 뒤항은 cos x × 1 = cos x 만 남게 되는 원리",
+                "misconception_ko": "삼각함수의 미분 공식 d/dx(sin x) = cos x 가 성립하려면 각도 x의 단위가 반드시 60분법(도, °)이 아니라 호도법(라디안, rad)이어야만 비례상수 1이 유지됩니다!",
+                "what_if_not_ko": "만약 각도 단위를 라디안 대신 도(°)로 쓴다면 sin(x°)를 미분했을 때 왜 앞에 파이/180 이라는 상수가 곱해지게 될까요?"
+            }
+        else:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "반지름의 길이가 1인 단위원에서 중심각 θ(단 0 < θ < π/2, 라디안)를 공유하는 내접 삼각형 OAB, 부채꼴 OAB, 접선 직각삼각형 OAT가 작도된 기하학적 출발 조건",
+                "conclusion_ko": "0 < θ < π/2 에서 sin θ < θ < tan θ 넓이 부등식이 성립하며, 양변을 sin θ로 나누고 θ → 0 극한을 취하면 lim(θ→0) (sin θ / θ) = 1 이 된다는 결론",
+                "auxiliary_line_ko": "단위원 위의 점 B(cos θ, sin θ)에서 x축에 내린 수선(높이 sin θ)과 점 A(1, 0)에서 그은 단위원의 접선(높이 tan θ)을 동시에 작도하여 세 도형의 포함 관계를 비교하는 보조선",
+                "proof_logic_ko": "세 도형의 넓이 대소 관계인 삼각형 OAB 넓이(1/2 sin θ) < 부채꼴 OAB 넓이(1/2 θ) < 직각삼각형 OAT 넓이(1/2 tan θ)에서 2를 곱해 sin θ < θ < tan θ를 얻고, 역수를 취해 cos θ < (sin θ)/θ < 1 로 만든 뒤 θ → 0 일 때 cos θ → 1 이므로 조임 정리(샌드위치 정리)에 의해 극한값 1이 증명되는 원리",
+                "misconception_ko": "lim(θ→0) (sin θ / θ) = 1 증명에 로피탈의 정리(분모·분자 미분)를 쓰면 순환논리에 빠집니다! 사인함수의 미분 공식 자체가 바로 이 넓이 부등식 극한에서 유도되기 때문입니다.",
+                "what_if_not_ko": "이 기본 극한 lim(θ→0) (sin θ / θ) = 1 을 이용하면 왜 lim(θ→0) [(1 - cos θ) / θ²] 의 극한값은 정확히 1/2 이 될까요?"
+            }
+
+    # 15-E. 미적분 핵심 정리 (코시의 평균값 정리 · 역함수의 미분 · 연쇄법칙 · 매개변수 미분 · 평균/순간변화율 · 도함수 · 상합과 하합 · 극좌표 중적분 · 함수의 극한)
+    if any(k in blob for k in ("코시의 평균값", "Cauchy's Mean Value", "역함수의 미분", "inverse function", "연쇄법칙", "Chain Rule", "매개변수", "parametric", "Parameter", "도함수", "Derivative", "derivative", "미분", "평균 변화율", "순간속도", "상합과 하합", "Upper Sum", "중적분", "Double Integral", "극값정리", "Extreme Value", "최댓값과 최솟값", "Slope Fields", "Euler's Method", "\\Delta y", "\\lim", "극한")):
+        if "코시의 평균값" in blob or "Cauchy's Mean Value" in blob:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "두 함수 f(x), g(x)가 닫힌구간 [a, b]에서 연속이고 열린구간 (a, b)에서 미분가능하며 g'(x) ≠ 0 인 출발 조건",
+                "conclusion_ko": "구간 (a, b) 안에 [f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c) 를 만족하는 점 c가 적어도 하나 존재한다는 코시의 평균값 정리 결론",
+                "auxiliary_line_ko": "양 끝점 (g(a), f(a))와 (g(b), f(b))를 잇는 할선과 곡선 (g(x), f(x)) 사이의 차이를 나타내는 보조함수 h(x) = [f(b) - f(a)]g(x) - [g(b) - g(a)]f(x) 를 설정하는 발상",
+                "proof_logic_ko": "보조함수 h(x)에 x=a와 x=b를 대입하면 h(a) = h(b)가 되어 롤의 정리(Rolle's Theorem) 조건을 만족하므로, 열린구간 (a, b) 안에 h'(c) = [f(b)-f(a)]g'(c) - [g(b)-g(a)]f'(c) = 0 인 점 c가 존재하여 [f(b)-f(a)]/[g(b)-g(a)] = f'(c)/g'(c) 가 증명되는 원리",
+                "misconception_ko": "코시의 평균값 정리를 증명할 때 분모와 분자에 일반 평균값 정리를 각각 적용해 f'(c₁)/g'(c₂)로 나누면 c₁과 c₂가 서로 다른 점이 될 수 있어 증명되지 않습니다! 반드시 보조함수 h(x) 하나로 묶어 동일한 점 c를 찾아야 합니다.",
+                "what_if_not_ko": "만약 코시의 평균값 정리에서 g(x) = x 로 놓으면 일반 평균값 정리가 되고, a → b 극한을 취하면 왜 0/0 꼴 극한을 푸는 로피탈의 정리(L'Hôpital's Rule)가 탄생할까요?"
+            }
+        elif "역함수의 미분" in blob or "Derivative of inverse" in blob:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "미분가능한 함수 y = f(x)의 역함수 x = f⁻¹(y)가 존재하고 직선 y = x 에 대하여 대칭인 두 그래프와 접선이 주어진 출발 조건",
+                "conclusion_ko": "역함수의 미분계수는 원래 함수의 대응점에서의 미분계수의 역수와 같다((f⁻¹)'(b) = 1 / f'(a), 즉 dx/dy = 1 / (dy/dx))는 결론",
+                "auxiliary_line_ko": "직선 y = x 대칭축에 대하여 점 (a, b)에서의 접선 기울기 직각삼각형(가로 Δx, 세로 Δy)을 대칭이동하여 점 (b, a)에서의 직각삼각형(가로 Δy, 세로 Δx)과 비교하는 기하학적 보조선",
+                "proof_logic_ko": "항등식 f(f⁻¹(y)) = y 의 양변을 미분하거나 증분 비 Δx/Δy = 1 / (Δy/Δx) 에서 Δy → 0 일 때 연속성에 의해 Δx → 0 이 되므로, 직선 y = x 대칭에서 가로 변화량과 세로 변화량의 역할이 뒤바뀌어 접선 기울기가 서로 역수가 되는 원리",
+                "misconception_ko": "(f⁻¹)'(b)를 구할 때 분모 f'(x) 자리에 b를 그대로 대입해 1 / f'(b)로 쓰는 실수가 가장 많습니다! 반드시 f(a) = b 가 되는 원래 함수의 x좌표 a를 찾아 1 / f'(a)를 대입해야 합니다.",
+                "what_if_not_ko": "만약 원래 함수의 그래프에서 접선이 수평(f'(a) = 0)이 되는 극점에서는 역함수 그래프의 접선이 수직선이 되어 왜 미분불가능해질까요?"
+            }
+        elif "연쇄법칙" in blob or "Chain Rule" in blob:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "두 미분가능한 함수 y = f(u)와 u = g(x)로 이루어진 합성함수 y = f(g(x))의 변화율을 구하는 출발 조건",
+                "conclusion_ko": "합성함수의 도함수는 바깥 함수의 미분계수 f'(g(x))와 안쪽 함수의 미분계수 g'(x)의 곱과 같다(dy/dx = (dy/du) · (du/dx) = f'(g(x))g'(x))는 연쇄법칙 결론",
+                "auxiliary_line_ko": "x의 변화량 Δx가 중간 변수 u의 변화량 Δu를 거쳐 최종 y의 변화량 Δy를 만드는 3단 톱니바퀴 변화율 다이어그램(Δy/Δx = (Δy/Δu) × (Δu/Δx))을 연결하는 발상",
+                "proof_logic_ko": "평균변화율 Δy/Δx 에 중간 변화량 Δu를 분모·분자에 곱해 (Δy/Δu)·(Δu/Δx) 로 분리한 뒤 Δx → 0 극한을 취하면 연속성에 의해 Δu → 0 이 되어 두 미분계수의 곱 f'(u)·g'(x) 로 수렴하는 원리",
+                "misconception_ko": "합성함수 f(g(x))를 미분할 때 겉미분 f'(g(x))만 하고 속미분 g'(x)를 곱하는 것을 잊지 마세요! 속미분 g'(x)는 내부 변수가 움직이는 속도 배율입니다.",
+                "what_if_not_ko": "이 연쇄법칙을 적분의 역과정으로 거꾸로 되돌리면 고등학교 미적분의 핵심인 '치환적분법' 공식이 어떻게 바로 유도될까요?"
+            }
+        else:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": f"좌표평면 위의 곡선에서 할선의 기울기(평균변화율) 또는 분할 직사각형 넓이 합을 극한으로 관찰하는 '{ko_t}'의 출발 조건",
+                "conclusion_ko": f"극한 과정을 통해 '{ko_t}'에서의 순간 변화율(접선의 기울기)과 정적분 넓이 관계가 엄밀하게 성립한다는 미적분 결론",
+                "auxiliary_line_ko": "곡선 위의 두 점을 잇는 할선과 직각삼각형(Δx, Δy) 또는 구간을 n등분한 내접·외접 직사각형 기둥을 작도하는 기하학적 보조선",
+                "proof_logic_ko": "간격 Δx → 0 일 때 두 점을 잇던 할선이 한 점에서의 접선(미분계수)으로 수렴하고, 분할 수 n → ∞ 일 때 상합과 하합의 차이가 0으로 수렴하며 정적분 넓이가 결정되는 극한 원리",
+                "misconception_ko": "함수가 한 점에서 연속이라고 해서 항상 미분가능한 것은 아닙니다! 절댓값 그래프의 뾰족점(첨점)처럼 좌미분계수와 우미분계수가 다르면 연속이어도 접선이 하나로 정해지지 않아 미분불가능합니다.",
+                "what_if_not_ko": "미분(접선의 기울기)과 적분(곡선 아래 넓이)이라는 전혀 달라 보이는 두 기하학적 문제가 '미적분학의 기본정리' 하나로 어떻게 완벽한 역연산 관계가 될까요?"
+            }
+
+    # 15-F. 삼각비·예각의 삼각비·호도법·원의 넓이 (Trigonometric Ratios & Radian & Circle Area)
+    if any(k in blob for k in ("삼각비", "Trigonometric", "호도법", "Radian", "예각삼각형의 넓이", "6-5-4", "원의 넓이", "환의 넓이", "Annular")):
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"직각삼각형의 닮음비 또는 반지름이 r인 원·부채꼴에서 길이와 각도·넓이 관계를 탐구하는 '{ko_t}'의 기하학적 출발 조건",
+            "conclusion_ko": f"도형의 크기와 상관없이 각도에 의해 비율과 넓이 공식이 유일하게 결정되는 '{ko_t}'의 결론",
+            "auxiliary_line_ko": "꼭짓점에서 밑변에 수선의 발(높이 h = b sin A)을 내리거나 반지름이 1인 사분원(단위원) 및 동심원 분할 보조선을 작도하는 발상",
+            "proof_logic_ko": "한 예각의 크기가 같은 모든 직각삼각형은 AA 닮음이므로 세 변의 비율(사인·코사인·탄젠트)이 일정하며, 이를 이용해 삼각형의 높이(b sin A)와 부채꼴 호의 길이(l = rθ)·넓이를 유도하는 원리",
+            "misconception_ko": "삼각비의 값은 직각삼각형의 크기가 2배, 3배 커져도 닮음비에 의해 약분되므로 오직 '각의 크기'에만 의존하는 불변량입니다!",
+            "what_if_not_ko": "예각에 대해서만 정의되던 직각삼각형의 삼각비를 좌표평면의 단위원(x²+y²=1) 위의 동경 좌표 (cos θ, sin θ)로 옮기면 둔각과 음수 각도까지 어떻게 무한히 확장될까요?"
+        }
+
+    # 15-G. 평행선과 선분의 길이의 비 · 중점연결정리 · 도형의 닮음 · 데자르그 정리 · 페르마 점 · 사이클로이드 · 기본 작도
+    if any(k in blob for k in ("평행선", "선분의 길이의 비", "중점연결정리", "닮음", "Similarity", "데자르그", "Desargues", "페르마", "Fermat", "사이클로이드", "cycloid", "작도", "Construct", "수선의 발은 그 변 위에", "연장선의 교점", "Coxeter")):
+        if "사이클로이드" in blob or "cycloid" in blob.lower():
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "반지름이 r인 원이 직선 바닥 위를 미끄러지지 않고 굴러갈 때 원주 위의 한 점 P가 그리는 사이클로이드(Cycloid) 궤적의 출발 조건",
+                "conclusion_ko": "미끄러짐 없이 구르는 원에서 굴러간 호의 길이(rθ)와 원의 중심이 전진한 수평 거리(rθ)가 정확히 같으므로, 점 P의 수평 속도가 절대 음수가 되지 않아 곡선이 뒤로 꼬이지(루프를 만들지) 않는다는 결론",
+                "auxiliary_line_ko": "원의 중심 C가 이동한 수평 선분(길이 rθ)과 원이 바닥에 닿은 접점 T에서 점 P까지의 호의 길이(rθ) 및 회전 반지름 CP의 수평 성분(r sin θ)을 비교하는 보조선",
+                "proof_logic_ko": "점 P의 x좌표가 x(θ) = rθ - r sin θ = r(θ - sin θ) 로 표현되고, 이를 θ에 대해 미분한 수평 속도 dx/dθ = r(1 - cos θ) ≥ 0 이 항상 0 이상이므로 점 P는 바닥에 닿는 순간(θ=2nπ) 잠깐 멈출 뿐 절대 뒤로 후진하지 않아 곡선이 꼬이지 않는 원리",
+                "misconception_ko": "만약 굴러가는 원의 바깥쪽에 찍힌 점(연장 사이클로이드, d > r)이라면 바닥 근처에서 dx/dθ = r - d cos θ < 0 인 구간이 생겨 실제로 뒤로 감기는 고리(루프) 모양이 만들어집니다!",
+                "what_if_not_ko": "갈릴레이와 베르누이가 탐구했던 이 사이클로이드 곡선을 거꾸로 뒤집어 공을 굴리면 왜 직선 경사로보다 더 빨리 내려오는 '최단강하곡선(Brachistochrone)'이 될까요?"
+            }
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"평행선·중점·닮음의 중심 또는 자와 컴퍼스 작도 규칙이 주어진 '{ko_t}'의 기하학적 출발 조건",
+            "conclusion_ko": f"평행선의 동위각·엇각 성질과 삼각형의 합동·닮음에 의해 '{ko_t}'의 비례식과 기하학적 성질이 항상 성립한다는 결론",
+            "auxiliary_line_ko": "주어진 직선에 평행한 보조선 1줄을 그어 평행사변형(대변의 길이 같음)과 AA/SAS 닮음 삼각형을 동시에 만드는 폴리아의 제1보조선",
+            "proof_logic_ko": "평행선이 만드는 동위각·엇각 일치로 AA 닮음(또는 SAS 합동·닮음)을 유도하여 대응변의 길이의 비가 일정함을 단계별로 증명하는 원리",
+            "misconception_ko": "평행선과 삼각형의 변의 비를 적용할 때는 '작은 삼각형의 옆변 비(a : a+b) = 밑변의 비'와 '양쪽 조각의 비(a : b = a' : b')'를 혼동하지 않도록 전체 변의 길이인지 부분 조각인지 꼭 표시해야 합니다!",
+            "what_if_not_ko": "이 평면 위의 닮음과 평행선 비례 원리를 3차원 공간의 평행한 세 평면이나 사영기하의 원근투시도(데자르그의 정리)로 확장하면 어떤 불변량이 유지될까요?"
+        }
+
+    # 15-H. 산술·기하·조화평균 부등식 · 코시-슈바르츠 부등식 · 절댓값 함수와 부등식
+    if any(k in blob for k in ("산술평균", "기하평균", "조화평균", "Arithmetic Mean", "코시 슈바르츠", "Cauchy Schwarz", "절댓값", "Absolute Value", "|x|", "|3x", "부등식", "Inequalit")):
+        if "산술" in blob or "기하평균" in blob or "조화평균" in blob or "Arithmetic Mean" in blob:
+            return {
+                "category_type": "geometry",
+                "hypothesis_ko": "두 양수 a, b를 이어 붙인 길이 (a+b)를 지름으로 하는 반원을 그리고, 두 선분의 경계점에서 반원에 수선을 올린 기하학적 출발 조건",
+                "conclusion_ko": "임의의 두 양수 a, b에 대하여 항상 산술평균 (a+b)/2 ≥ 기하평균 √(ab) ≥ 조화평균 2ab/(a+b) 부등식이 성립하며, 등호는 a = b 일 때만 성립한다는 결론",
+                "auxiliary_line_ko": "반원의 중심 O와 반원 위의 교점 P를 잇는 반지름 OP(산술평균 (a+b)/2), 수선의 높이 PH(기하평균 √(ab)), 그리고 H에서 OP에 내린 수선(조화평균 조각)으로 직각삼각형을 만드는 보조선",
+                "proof_logic_ko": "지름에 대한 원주각은 90도이므로 닮음비에 의해 수선 높이 PH = √(ab)가 되고, 직각삼각형 OPH에서 빗변(반지름 (a+b)/2)은 항상 직각변(높이 √(ab)) 이상이라는 기하학적 직관으로 절대부등식이 한눈에 증명되는 원리",
+                "misconception_ko": "산술·기하평균 부등식으로 최솟값을 구할 때는 두 수가 모두 '양수'인지 확인하고, 반드시 등호 성립 조건(두 항이 서로 같을 때)을 만족하는 실수 x가 존재하는지 검증해야 합니다!",
+                "what_if_not_ko": "만약 두 양수가 아니라 세 양수 a, b, c에 대한 산술·기하평균 부등식 (a+b+c)/3 ≥ ³√(abc) 는 3차원 직육면체 부피와 정육면체의 대칭성으로 어떻게 이해할 수 있을까요?"
+            }
+        elif "코시" in blob or "Cauchy Schwarz" in blob:
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": "실수 a, b, x, y에 대하여 제곱의 합의 곱 (a² + b²)(x² + y²)과 곱의 합의 제곱 (ax + by)²의 크기를 비교하는 출발 조건",
+                "conclusion_ko": "모든 실수 a, b, x, y에 대하여 (a² + b²)(x² + y²) ≥ (ax + by)² 이 항상 성립하며, 등호는 ay = bx (즉 a:b = x:y) 일 때 성립한다는 코시-슈바르츠 부등식 결론",
+                "auxiliary_line_ko": "좌변에서 우변을 뺀 차이 식을 전개하여 공통항 a²x², b²y²을 소거하고 남은 항들을 완전제곱식 (ay - bx)²으로 묶어 내거나 직사각형 넓이 분할 모델을 작도하는 발상",
+                "proof_logic_ko": "(a² + b²)(x² + y²) - (ax + by)² = a²y² - 2abxy + b²x² = (ay - bx)² 이고 실수의 제곱은 항상 0 이상이므로 부등식이 성립하며, ay - bx = 0 일 때 등호가 성립하는 원리",
+                "misconception_ko": "등호 성립 조건을 ax = by 로 잘못 외우는 실수가 많습니다! 완전제곱식 안의 항이 (ay - bx)² 이므로 엇갈려 곱한 ay = bx (즉 x/a = y/b) 일 때 등호가 성립합니다.",
+                "what_if_not_ko": "두 벡터 u = (a, b)와 v = (x, y)의 내적 u·v = |u||v|cos θ 를 양변 제곱하면 왜 cos²θ ≤ 1 성질로부터 코시-슈바르츠 부등식이 1초 만에 기하학적으로 증명될까요?"
+            }
+        else:
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '{ko_t}'의 출발 조건",
+                "conclusion_ko": f"절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '{ko_t}'의 그래프와 해집합이 정확히 결정된다는 결론",
+                "auxiliary_line_ko": "절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상",
+                "proof_logic_ko": "x ≥ 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k ⇔ X < -k 또는 X > k)으로 깔끔하게 풀리는 원리",
+                "misconception_ko": "식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x ≥ 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+                "what_if_not_ko": "절댓값 기호가 두 개 이상 포함된 함수 y = |x - a| + |x - b| 의 그래프는 왜 구간 [a, b] 사이에서 바닥이 평평한 양동이 모양으로 최솟값 |b - a|를 가질까요?"
+            }
+
+    # 15-I. 일차함수·이차함수 그래프와 도형의 평행이동·대칭이동·확대축소
+    if any(k in blob for k in ("평행이동", "대칭이동", "Shift", "Reflection", "확대와 축소", "Scale of", "변환", "Transformation", "y=x^2", "y=ax^2", "y=(x-", "y=ax+b", "y= ax+b", "절편", "intercept", "일차함수", "이차함수의 최대최소", "반비례", "y=\\displaystyle\\frac{1}{x}", "f(x)=g(x)")):
+        return {
+            "category_type": "geometry",
+            "hypothesis_ko": f"좌표평면 위의 점 (x, y)와 함수·도형의 방정식에서 기울기·절편 또는 평행이동·대칭이동을 탐구하는 '{ko_t}'의 출발 조건",
+            "conclusion_ko": f"좌표 변환 규칙과 그래프의 기하학적 이동 원리에 의해 '{ko_t}'의 방정식과 그래프 성질이 정확히 일치한다는 결론",
+            "auxiliary_line_ko": "원래 그래프 위의 대표점(꼭짓점, 원점, 절편)에서 이동한 새 점 (x', y')까지의 이동 화살표를 그리고 x = x' - p, y = y' - q 관계식을 원래 방정식에 대입하는 발상",
+            "proof_logic_ko": "점 (x, y)를 x축 방향으로 p, y축 방향으로 q만큼 옮긴 새 점 (x', y')에 대하여 원래 좌표 x = x'-p, y = y'-q 가 f(x, y) = 0 을 만족하므로 도형의 방정식은 f(x-p, y-q) = 0 이 되며, 대칭이동은 수직이등분선과 중점 조건으로 부호가 반전되는 원리",
+            "misconception_ko": "점의 평행이동은 (x+p, y+q)처럼 부호 그대로 더하지만, 도형의 방정식 f(x, y) = 0 의 평행이동은 원래 좌표 자리에 역변환 (x-p, y-q)를 대입하므로 마이너스 부호가 붙는다는 차이를 꼭 이해해야 합니다!",
+            "what_if_not_ko": "만약 제한된 구간 [α, β]에서 이차함수의 최댓값과 최솟값을 구할 때, 왜 양 끝점뿐만 아니라 대칭축(꼭짓점 x = p)이 구간 안에 포함되는지 여부를 가장 먼저 확인해야 할까요?"
+        }
+
+    # 15-J. 다항식의 곱셈공식·인수분해·나머지정리·방정식(근의 공식·판별식·근과 계수의 관계·분수방정식·무리방정식)·행렬 소거법·정수론·확률과 통계
+    if any(k in blob for k in ("(a+b)", "(a-b)", "(x+y+z)", "ma+mb", "다항식", "Polynomial", "인수분해", "Factorization", "factorization", "완전제곱", "이차방정식", "Quadratic", "Qudratic", "근의 공식", "근의공식", "판별", "Discriminant", "근과 계수의 관계", "Vieta", "분수방정식", "Fractional Equation", "무리방정식", "Irrational Equation", "연립방정식", "선형방정식", "ax=b", "가우스 조던", "Gauss-Jordan", "E_{k", "a\\mid b", "Euclid's Lemma", "정규표현", "mod", "수열", "벡터", "사칙연산", "시행과 사건", "Experiment", "확률")):
+        if any(k in blob for k in ("(a+b)", "(a-b)", "(x+y+z)", "ma+mb", "인수분해", "Factorization", "factorization")):
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"분배법칙과 직사각형·정사각형·정육면체의 가로·세로·높이 분할 모델이 주어진 '{ko_t}'의 출발 조건",
+                "conclusion_ko": f"전체 도형의 넓이(또는 부피)는 분할된 각 조각들의 넓이(부피) 합과 항상 같으므로 '{ko_t}'의 곱셈공식과 인수분해 항등식이 성립한다는 결론",
+                "auxiliary_line_ko": "한 변의 길이가 (a+b)인 정사각형(또는 정육면체)을 가로·세로 길이 a와 b로 나누는 분할선을 그어 각 조각의 넓이 a², ab, b²을 시각적으로 대응시키는 발상",
+                "proof_logic_ko": "대수적으로는 곱셈의 분배법칙으로 전개한 뒤 동류항끼리 묶어 정리하고, 기하학적으로는 전체 직사각형 넓이와 부분 조각 넓이들의 합이 같다는 넓이 보존 원리로 증명하는 과정",
+                "misconception_ko": "(a+b)²을 전개할 때 가운데 교차 직사각형 2개의 넓이인 2ab를 빼먹고 a²+b²으로 쓰거나, (a-b)²에서 마지막 (-b)²을 -b²으로 쓰는 부호 실수를 가장 조심해야 합니다!",
+                "what_if_not_ko": "곱셈공식 (a+b)² = a²+2ab+b² 과 (a-b)² = a²-2ab+b² 두 식을 변끼리 빼면 왜 합과 곱만으로 차의 제곱을 구하는 변형 공식 (a-b)² = (a+b)² - 4ab 가 즉시 탄생할까요?"
+            }
+        elif any(k in blob for k in ("근의 공식", "근의공식", "판별", "Discriminant", "근과 계수의 관계", "Vieta", "이차방정식", "완전제곱")):
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"이차방정식 ax² + bx + c = 0 (단 a ≠ 0)에서 최고차항의 계수 a로 나누고 완전제곱식으로 변형하는 '{ko_t}'의 출발 조건",
+                "conclusion_ko": f"완전제곱식 해법과 인수분해 항등식 비교를 통해 '{ko_t}'의 근의 공식, 판별식 D = b² - 4ac, 그리고 근과 계수의 관계(α+β = -b/a, αβ = c/a)가 필연적으로 도출된다는 결론",
+                "auxiliary_line_ko": "일차항 계수의 절반의 제곱인 (b/2a)²을 양변에 똑같이 더하여 좌변을 완전제곱식 (x + b/2a)²으로 묶어 내는 대수적 보조선(정사각형 빈 모서리 채우기)",
+                "proof_logic_ko": "(x + b/2a)² = (b² - 4ac) / 4a² 에서 제곱근의 정의를 적용하면 x = (-b ± √(b² - 4ac)) / 2a 가 유도되며, 근호 안의 식 D = b² - 4ac 의 부호에 따라 서로 다른 두 실근(D＞0), 중근(D=0), 서로 다른 두 허근(D＜0)이 판별되는 원리",
+                "misconception_ko": "판별식 D = b² - 4ac 로 실근과 허근의 개수를 판별하는 성질은 방정식의 계수 a, b, c가 모두 '실수'일 때만 성립합니다! 계수에 허수 i가 섞여 있으면 판별식의 대소 비교를 쓸 수 없습니다.",
+                "what_if_not_ko": "이차방정식의 근과 계수의 관계(합 -b/a, 곱 c/a)를 삼차방정식 a(x-α)(x-β)(x-γ) = 0 으로 확장하면 세 근의 합, 두 근끼리의 곱의 합, 세 근의 곱 부호는 왜 (+, -, +)가 아니라 (-, +, -) 순서로 교대할까요?"
+            }
+        elif any(k in blob for k in ("분수방정식", "Fractional Equation", "무리방정식", "Irrational Equation")):
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"분모에 미지수 x가 포함된 분수방정식 또는 근호 안에 미지수가 포함된 무리방정식인 '{ko_t}'의 출발 조건",
+                "conclusion_ko": f"양변에 분모의 최소공배수를 곱하거나 양변을 제곱하여 다항방정식으로 고쳐 푼 뒤, 무연근(Extraneous root)을 반드시 제외해야 정확한 해가 구해진다는 '{ko_t}'의 결론",
+                "auxiliary_line_ko": "공통부분 치환, 부분분수 분리(1/AB = 1/(B-A)(1/A - 1/B)), 또는 근호 항만 한 변에 남기고 이항한 뒤 양변을 제곱하여 다항방정식으로 환원하는 대수적 발상",
+                "proof_logic_ko": "A = B ⇒ A² = B² 또는 A = B ⇒ P(x)A = P(x)B 변환 과정에서 원래 방정식에는 없던 가짜 해(분모를 0으로 만드는 값이나 A = -B를 만족하는 값)인 무연근이 섞여 들어올 수 있으므로 마지막에 원래 방정식과 그래프 교점으로 검산하는 원리",
+                "misconception_ko": "다항방정식으로 고쳐서 구한 근을 모두 정답으로 쓰면 감점됩니다! 분수방정식에서는 '분모 ≠ 0' 조건을, 무리방정식에서는 '근호 안 ≥ 0 및 우변 부호 ≥ 0' 조건을 반드시 확인해 무연근을 걸러내야 합니다.",
+                "what_if_not_ko": "무리방정식 √(f(x)) = g(x) 의 실근의 개수를 구할 때, 양변 제곱 대신 무리함수 y = √(f(x))의 반포물선 그래프와 직선 y = g(x)의 교점으로 해석하면 왜 무연근이 생기는 이유가 한눈에 보일까요?"
+            }
+        else:
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"수식과 연산의 기본 정의 및 등식의 성질이 주어진 '{ko_t}'의 출발 조건",
+                "conclusion_ko": f"정의와 기본 연산 법칙으로부터 '{ko_t}'의 핵심 정리와 해법이 엄밀하게 성립한다는 대수적 결론",
+                "auxiliary_line_ko": "주어진 식을 기본 정의(나눗셈 정리 f(x) = (x-a)Q(x) + R, 기본행연산, 약수·배수 정의 등)로 다시 쓰고 공통 구조로 묶어 내는 발상",
+                "proof_logic_ko": "항등식의 수치대입법·계수비교법 및 동치 변형을 단계별로 적용하여 복잡한 식을 가장 단순한 표준형으로 소거·정리하는 원리",
+                "misconception_ko": "양변을 미지수나 문자 a로 나눌 때는 반드시 나누는 값 a가 0이 아닌 경우(a ≠ 0)와 0인 경우(a = 0)를 나누어 따져야 해를 놓치지 않습니다!",
+                "what_if_not_ko": "이 대수적 소거와 동치 변형 원리를 고등학교와 대학 선형대수학의 행렬 가우스-조던 소거법(Gauss-Jordan Elimination)으로 확장하면 수백 개의 연립방정식도 어떻게 알고리즘으로 풀 수 있을까요?"
+            }
+
     # 16. 일반 기하·대수·미적분 주제
-    is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "함수", "수열", "로그", "공식", "덧셈", "뺄셈", "곱셈", "나눗셈", "복소수", "허수", "켤레", "실수", "유리수", "무리수", "연립", "완전제곱", "근의"))
+    is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "수열", "로그", "덧셈", "뺄셈", "곱셈", "나눗셈", "복소수", "허수", "켤레", "유리수", "무리수", "연립", "완전제곱", "근의")) and not any(k in blob for k in ("삼각형", "원", "기하", "평행", "각", "도형", "작도", "선분", "사이클로이드", "데자르그", "페르마", "타원", "포물선", "쌍곡선"))
     return {
         "category_type": "algebra" if is_alg else "geometry",
-        "hypothesis_ko": f"'{ko_t}'에서 주어진 기본 정의와 출발 조건(가정)",
-        "conclusion_ko": f"'{ko_t}'의 핵심 정리와 관계식이 항상 성립한다는 최종 결론",
+        "hypothesis_ko": f"'{ko_t}'에서 주어진 기하·대수적 정의와 출발 조건",
+        "conclusion_ko": f"'{ko_t}'의 핵심 불변량과 관계식이 항상 성립한다는 결론",
         "auxiliary_line_ko": (
             "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상"
             if is_alg
-            else "주어진 조건들을 하나의 대칭·합동·닮음 구조로 연결하는 폴리아의 제1보조선 및 단계별 분할"
+            else "주어진 도형의 대칭·합동·닮음 구조를 하나로 연결하는 폴리아의 제1보조선 및 단계별 분할"
         ),
         "proof_logic_ko": (
             "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리"
             if is_alg
             else "단계별 작도를 통해 도형의 합동·닮음·넓이 불변량 성질로부터 결론을 필연적으로 도출하는 원리"
         ),
-        "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 발상에서 출발했는지 먼저 확인해야 합니다.",
-        "what_if_not_ko": "만약 이 정리의 조건이나 차수를 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
+        "misconception_ko": "결론 공식만 단순 암기하면 조건이 조금만 변형되어도 적용할 수 없으므로, 반드시 어떤 정의와 첫 보조선·발상에서 출발했는지 먼저 확인해야 합니다.",
+        "what_if_not_ko": "만약 이 정리의 조건이나 차원을 한 단계 일반화하면 고등학교 수능 기출에서 어떤 심화 문제로 발전할까요?"
     }
 
 

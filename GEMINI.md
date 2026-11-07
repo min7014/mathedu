@@ -118,3 +118,14 @@
 - **라이브 데이터로 입증된 실시간 트래픽 폭발 공식**: `https://min7014.github.io/`의 핵심 주제를 업로드할 때 단편 하나만 올리는 대신, **① 44초 순수 네온 블룸 `Idea-#Shorts` (KO/EN) + ② 1080p 순수 네온 블룸 `창의 수학 시네마 본편` (KO/EN) + ③ 8~48분 `정주행 마스터클래스` 합본 + ④ 5초 암산 퍼즐 & Wordle 이모지 등급 고정댓글(`build_viral_comment_puzzle`)**을 한 세트로 묶어 동시 발행합니다 (`qMhzACnRAeE`·`jBsgIj5HhDk`·`sK5J8tlgMZY`·`wR7yITollp8` 등 업로드 직후 30분 만에 실시간 조회수 급증 입증).
 - **조회수 급증 핵심 트리거 4요소**: ① 첫 18글자 호기심 역설 질문(`🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까?`, `🔥 왜 모든 빛은 반드시 한 점(초점)에 모일까?`), ② 정적 PDF 여백이 없는 100% 풀스크린 다크 벨벳 네온 블룸 애니메이션(스와이프 이탈 방어), ③ 44초 무한 루프 + 고정댓글 5초 암산 퍼즐(댓글 읽는 동안 배경 루프 재생으로 APV 105%+ 달성), ④ Shorts 설명란 첫 줄 & 고정댓글의 1080p 본편·마스터클래스 직통 연결.
 
+## 19. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성 및 수식·증명 무결성 필수 검증 원칙 (Mandatory 100% Mathematical Accuracy & Source Fidelity Guard)
+- **수학적 정확성의 절대 최우선 원칙**: 유튜브 영상(`@min7014_ai`)은 수많은 학생·교사·대중에게 노출되어 교육적 파급력이 매우 크므로, 조회수를 높이기 위한 바이럴 제목·네온 시네마·5초 암산 퍼즐을 적용하더라도 **영상 속 도형, 보조선, 수식, 내레이션, 자막, 썸네일, 고정댓글 퍼즐의 모든 수학적 내용은 반드시 `https://min7014.github.io/` 원문 자료의 실제 수학 정리·증명 논리와 100% 정확히 일치**해야 합니다.
+- **유사 정리·인접 단원 간 혼동(Conflation) 절대 금지 (17대 정밀 수학 아키타입 엄격 분리)**:
+  1. **[포물선 vs 타원 vs 쌍곡선 vs 사이클로이드 엄격 분리]**: 포물선(`conic_parabola`, 단일 초점 $F$와 준선 $l$에 대해 $|PF|=|PH|$, 이등변삼각형 $\triangle PFH$와 접선 각의 이등분 성질)과 타원(`conic_reflection`, 두 초점 $F_1, F_2$에 대해 $|PF_1|+|PF_2|=2a$)과 사이클로이드(`cycloid_kinematics`, 굴러가는 원 위의 점 $x=r(\theta-\sin\theta), y=r(1-\cos\theta)$)를 절대 혼용하지 않습니다.
+  2. **[메넬라우스의 정리 vs 체바의 정리 vs 평행선 선분 비 엄격 분리]**: 메넬라우스의 정리(`menelaus_theorem`, 삼각형을 가로지르는 할선 $D\text{-}E\text{-}F$와 꼭짓점 $C$를 지나는 평행보조선 $CK \parallel AB$의 AA 닮음비 소거)와 체바의 정리(`ceva_menelaus`, 한 점 $P$에서 만나는 세 체바선과 밑변 공유 삼각형 넓이 비 $\frac{S_3}{S_2}\cdot\frac{S_1}{S_3}\cdot\frac{S_2}{S_1}=1$) 및 평행선 선분 비(`parallel_similarity`)를 엄격히 구분하여 각각의 정확한 보조선을 작도합니다.
+  3. **[삼각함수 극한·미분 vs 코시 평균값 정리 vs 역함수 미분법 엄격 분리]**: $\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$ (`trig_harmonic`, 단위원 부채꼴 넓이 샌드위치 $\frac{1}{2}\sin\theta < \frac{1}{2}\theta < \frac{1}{2}\tan\theta$), $\frac{d}{dx}(\sin x)=\cos x$ (`trig_deriv_sin`), 코시 평균값 정리(`cauchy_mvt`, 롤의 정리 보조함수 $h(x)$와 매개변수 곡선 $(g(t), f(t))$ 접선 기울기), 역함수 미분법(`inverse_deriv`, $y=x$ 대칭 직각삼각형 $\Delta x \leftrightarrow \Delta y$ 역수)을 각각 독립된 시각 증명으로 정확히 구현합니다.
+  4. **[특수 직각삼각형($1:1:\sqrt{2}$, $1:\sqrt{3}:2$) 및 제곱근 기하 작도 엄격 분리]**: `30-60-90도 삼각형`·`직각이등변삼각형`(`special_triangles`, 정삼각형 이등분 및 정사각형 대각선)과 `제곱근의 정의`(`square_root_geometry`, 넓이 $a$인 정사각형의 한 변 $\sqrt{a}$ 및 수직선 회전 작도)를 정확히 분리합니다.
+- **렌더링·업로드 전 기계적+수학적 정합성 이중 검증 게이트(`verify_creative_idea_math_fidelity`) 상시 의무화**:
+  - 모든 영상 생성(`render_creative_idea_cinema_video`, `render_creative_idea_short_vertical`) 및 유튜브 업로드 전 반드시 `verify_creative_idea_math_fidelity(sdoc, acts, title, comment_txt)`와 `analyze_min7014_topic_as_mathteacher` 전수 검증(374개 주제 × 2개 언어 = 748개 검증 항목 에러 0건)을 통과해야만 렌더링 및 업로드가 실행되도록 하드 가드(Hard Guard)를 상시 작동시킵니다.
+
+

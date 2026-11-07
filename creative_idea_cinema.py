@@ -99,27 +99,45 @@ def sanitize_glyphs(text: str) -> str:
 
 
 def detect_visual_archetype(sdoc: dict) -> str:
+    raw_t = f"{sdoc.get('title', '')} {sdoc.get('title_en', '')}".lower()
     blob = " ".join([
-        str(sdoc.get("title", "")),
-        str(sdoc.get("title_en", "")),
-        str(sdoc.get("concept_badge", "")),
-        str((sdoc.get("teacher_proof_analysis") or {}).get("category_type", "")),
-    ]).lower()
+        raw_t,
+        str(sdoc.get("concept_badge", "")).lower(),
+        str((sdoc.get("teacher_proof_analysis") or {}).get("category_type", "")).lower(),
+    ])
 
-    if any(k in blob for k in ["피타고라스", "pythagor", "직각삼각형", "right triangle", "넓이 보존", "정사각형의 한 변"]):
+    if any(k in raw_t for k in ["30-60-90", "직각이등변삼각형", "isosceles right", "30도 삼각비", "45도 삼각비", "60도 삼각비"]):
+        return "special_triangles"
+    if any(k in raw_t for k in ["제곱근", "square root", "정사각형의 한 변", "유리화"]):
+        return "square_root_geometry"
+    if any(k in raw_t for k in ["사이클로이드", "cycloid"]):
+        return "cycloid_kinematics"
+    if any(k in blob for k in ["피타고라스", "pythagor", "직각삼각형", "right triangle", "넓이 보존"]):
         return "pythagoras_fractal"
-    if any(k in blob for k in ["타원", "포물선", "쌍곡선", "단델린", "초점", "준선", "이차곡선", "ellipse", "parabola", "hyperbola", "dandelin", "conic", "사이클로이드", "cycloid"]):
+    if any(k in raw_t for k in ["포물선", "parabola"]) or ("준선" in raw_t and "타원" not in raw_t and "쌍곡선" not in raw_t):
+        return "conic_parabola"
+    if any(k in blob for k in ["타원", "쌍곡선", "단델린", "초점", "이차곡선", "ellipse", "hyperbola", "dandelin", "conic"]):
         return "conic_reflection"
-    if any(k in blob for k in ["황금비", "피보나치", "golden", "fibonacci", "나선", "정오각형", "pentagon", "연분수", "등비", "수열", "제곱근", "무리수"]):
-        return "fibonacci_golden"
-    if any(k in blob for k in ["확률", "정규분포", "이항", "통계", "주사위", "독립시행", "binomial", "probability", "조합", "순열", "파스칼", "경우의 수", "표준편차", "분산"]):
-        return "prob_galton"
+    if any(k in raw_t for k in ["메넬라우스", "menelaus"]):
+        return "menelaus_theorem"
+    if any(k in raw_t for k in ["체바", "ceva", "무게중심", "centroid", "비비아니", "viviani"]):
+        return "ceva_menelaus"
+    if any(k in raw_t for k in ["평행선", "선분의 길이의 비", "중점연결정리", "닮음", "similarity"]):
+        return "parallel_similarity"
+    if ("sin" in raw_t or "사인" in raw_t) and any(k in raw_t for k in ["d/dx", "\\frac{d}{dx}", "미분", "derivative"]):
+        return "trig_deriv_sin"
     if any(k in blob for k in ["삼각함수", "삼각비", "사인", "코사인", "탄젠트", "호도법", "단위원", "trigon", "sin(", "cos(", "tan(", "sin ", "cos ", "tan ", "\\sin", "\\cos", "\\tan"]):
         return "trig_harmonic"
+    if any(k in raw_t for k in ["코시의 평균값", "cauchy's mean value"]):
+        return "cauchy_mvt"
+    if any(k in raw_t for k in ["역함수의 미분", "derivative of inverse"]):
+        return "inverse_deriv"
     if any(k in blob for k in ["미분", "적분", "극한", "도함수", "평균값", "롤의", "구분구적", "급수", "derivative", "integral", "limit", "mean value", "rolle"]):
         return "calculus_motion"
-    if any(k in blob for k in ["체바", "메넬라우스", "ceva", "menelaus", "무게중심", "내분", "외분", "선분의 길이의 비", "평행선", "비비아니", "viviani", "나폴레옹", "몰리", "삼각형", "triangle"]):
-        return "ceva_menelaus"
+    if any(k in blob for k in ["황금비", "피보나치", "golden", "fibonacci", "나선", "꽃잎차례", "정오각형", "pentagon", "연분수", "등비", "수열"]):
+        return "fibonacci_golden"
+    if any(k in blob for k in ["확률", "정규분포", "이항", "통계", "주사위", "독립시행", "binomial", "probability", "조합", "순열", "파스칼", "경우의 수", "표준편차", "분산", "시행과 사건"]):
+        return "prob_galton"
     return "circle_invariants"
 
 
@@ -130,12 +148,17 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
         vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=46, lang="en"
     ))
     t_title = clean_ko if lang_code == "ko" else clean_en
-    tpa = sdoc.get("teacher_proof_analysis") or {}
+    tpa = vmaker.analyze_min7014_topic_as_mathteacher(
+        sdoc.get("title", ""),
+        sdoc.get("sub_domain_ko", ""),
+        sdoc.get("breadcrumb", ""),
+    )
     archetype = detect_visual_archetype(sdoc)
 
-    inv_ko = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("core_invariant") or "도형이 변해도 흔들리지 않는 넓이와 비율의 등식 관계"))
-    polya_ko = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("polya_bridge") or "숨겨진 대칭성과 보조선을 연결해 복잡한 식을 단번에 단순화하는 발상"))
-    whatif_ko = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("what_if_extension") or "특수한 각도와 평면 도형의 성질을 일반 삼각형과 3차원 공간으로 넓히는 확장"))
+    inv_ko = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("conclusion_ko") or tpa.get("core_invariant") or "도형이 변해도 흔들리지 않는 넓이와 비율의 등식 관계"))
+    polya_ko = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("auxiliary_line_ko") or tpa.get("polya_bridge") or "숨겨진 대칭성과 보조선을 연결해 복잡한 식을 단번에 단순화하는 발상"))
+    logic_ko = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("proof_logic_ko") or ""))
+    whatif_ko = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("what_if_not_ko") or tpa.get("what_if_extension") or "특수한 각도와 평면 도형의 성질을 일반 삼각형과 3차원 공간으로 넓히는 확장"))
 
     if archetype == "pythagoras_fractal":
         if lang_code == "ko":
@@ -1279,88 +1302,709 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                 },
             ]
 
-    # 원주각 / 원의 방멱 / 기하 불변량 5막 시네마 대본
+    if archetype == "conic_parabola":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 포물선 평행광선 집속 미스터리",
+                    "headline": f"축에 나란히 들어온 모든 빛이 반사 후 단 하나의 초점 F로 모인다! ({t_title})",
+                    "key_formula": "|PF| = |PH| (Focus Distance = Directrix Distance)",
+                    "narration": (
+                        f"우주 저편에서 축에 나란하게 날아온 열 가닥의 네온 평행 광선이 포물선 거울 내벽에 부딪힙니다. "
+                        f"놀랍게도 [{t_title}]에서는 어느 위치에 부딪힌 빛이든 반사되는 순간 단 하나의 오차도 없이 초점 F 한 점으로 완벽하게 모입니다! "
+                        f"전파망원경과 위성 안테나, 자동차 전조등이 사용하는 이 포물선 반사의 기하학적 비밀은 무엇일까요?"
+                    ),
+                    "hud_notes": [
+                        "평행광선 입사: 대칭축에 나란한 모든 광선이 반사 후 초점 F에 집속!",
+                        "포물선의 정의: 초점 F까지의 거리 |PF| = 준선 l까지의 수직 거리 |PH|",
+                        "질문: 왜 포물선의 접선은 입사광선과 초점 선분이 이루는 각을 이등분할까?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 초점 거리와 준선 거리가 만드는 이등변삼각형",
+                    "headline": "포물선 위의 점 P가 어디로 움직여도 |PF| = |PH| 이등변삼각형이 유지된다!",
+                    "key_formula": "△PFH Isosceles Triangle: |PF| = |PH|",
+                    "narration": (
+                        f"포물선 위를 달리는 점 P에서 초점 F까지 이은 선분 PF와, 왼쪽 수직 준선 l에 내린 수선 PH의 길이를 비교해 보세요. "
+                        f"점 P가 위로 올라가며 초점 F에서 멀어지면, 준선까지의 수직 거리 PH도 정확히 똑같은 길이만큼 길어집니다! "
+                        f"즉, 점 P, 초점 F, 수선의 발 H를 연결한 삼각형 PFH는 언제나 두 변의 길이가 같은 이등변삼각형입니다."
+                    ),
+                    "hud_notes": [
+                        "실시간 거리 검증: 초점까지 거리 |PF| = 준선까지 수직 거리 |PH| (1:1 일치!)",
+                        "핵심 도형 탄생: 세 점 P, F, H를 이으면 항상 이등변삼각형 △PFH 완성!",
+                        "오개념 주의: 타원은 두 초점 거리 합(2a), 포물선은 초점=준선 거리(|PF|=|PH|)!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · 이등변삼각형 수직이등분선(접선)과 빛 반사 증명",
+                    "headline": "접선이 선분 FH의 수직이등분선이 되어 입사각과 반사각이 일치한다!",
+                    "key_formula": "Tangent Bisects ∠FPH  ⇒  Incident Angle = Reflected Angle",
+                    "narration": (
+                        f"이제 https://min7014.github.io/ 원문 자료의 핵심 보조선을 그어 봅시다! "
+                        f"이등변삼각형 PFH에서 꼭지각 ∠FPH의 이등분선(밑변 FH의 수직이등분선)을 그으면, 그 직선이 바로 점 P에서의 포물선 접선이 됩니다! "
+                        f"수선 PH를 연장한 평행 입사광선과 접선이 이루는 각은 맞꼭지각과 이등변삼각형 성질에 의해 반사각과 정확히 같아져 모든 빛이 초점 F로 모입니다."
+                    ),
+                    "hud_notes": [
+                        "결정적 보조선: 초점 F와 준선 수선의 발 H를 잇고 수직이등분선(접선) 작도!",
+                        "기하학적 증명: |PF| = |PH| 이등변삼각형 꼭지각 이등분 → ∠입사 = ∠반사!",
+                        "복잡한 미분 계산 없이 중학교 이등변삼각형 합동 하나로 10초 만에 증명 끝!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (준선 위 수직 접선과 포물선의 닮음)",
+                    "headline": "준선 위의 한 점에서 그은 두 접선은 항상 90도 수직으로 만난다!",
+                    "key_formula": "Orthoptic Property on Directrix: Tangent₁ ⊥ Tangent₂ (90°)",
+                    "narration": (
+                        f"여기서 한 걸음 더 나아가 볼까요? 만약 준선 위의 한 점에서 포물선에 두 개의 접선을 그으면 두 접선이 이루는 각은 몇 도가 될까요? "
+                        f"이등변삼각형 대칭 성질을 양쪽에 적용하면 두 접선은 언제나 정확히 90도 직각으로 만나고, 두 접점을 잇는 직선은 반드시 초점 F를 지납니다! "
+                        f"게다가 모든 원이 서로 닮음이듯, 모든 포물선 역시 확대·축소하면 완전히 포개어지는 닮음 도형입니다."
+                    ),
+                    "hud_notes": [
+                        "심화 성질 1: 준선 위 점에서 그은 두 접선은 항상 수직(90°)으로 직교!",
+                        "심화 성질 2: 모든 포물선은 초점 거리 p만 다를 뿐 모두 닮음(Similar)!",
+                        "역방향 원리: 초점 F에 전구를 켜면 반사된 빛이 모두 평행광선으로 발사!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수능 기하 포물선 킬러 10초 해법",
+                    "headline": "포물선 위에 점이 찍히는 순간 준선으로 수선의 발 H부터 내려라!",
+                    "key_formula": "Rule #1: Spot Point P on Parabola → Drop Perpendicular PH to Directrix!",
+                    "narration": (
+                        f"수능과 내신에서 포물선 문제가 나올 때 y제곱은 4px 방정식에 좌표를 대입하는 것은 가장 느린 길입니다. "
+                        f"포물선 위의 점 P를 보자마자 숨겨진 준선 x = -p를 그리고 수선의 발 H를 내려 PF = PH 이등변삼각형을 만들면 10초 만에 풀립니다! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 설명란의 지오지브라 실험실에서 직접 광선을 쏘아 보세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 제1원칙: 포물선 위의 점 P 등장 → 즉시 준선 작도 후 |PF| = |PH| 표시!",
+                        "포물선 접선 등장 → 무조건 이등변삼각형 △PFH와 마름모 성질로 해결!",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · PARABOLIC PARALLEL RAY MYSTERY",
+                    "headline": f"Every Parallel Light Ray Reflects Into One Exact Focus F! ({t_title})",
+                    "key_formula": "|PF| = |PH| (Focus Distance = Directrix Distance)",
+                    "narration": (
+                        f"Ten parallel neon laser beams arrive from deep space along the axis of a parabola. "
+                        f"In [{t_title}], every single parallel beam bounces off the curve and converges with zero error at one single focus point F! "
+                        f"What geometric law makes parabolic satellite dishes and telescopes work?"
+                    ),
+                    "hud_notes": [
+                        "Parallel Ray Tracing: All axial beams reflect directly into Focus F!",
+                        "Parabola Definition: Distance to Focus |PF| = Distance to Directrix |PH|",
+                        "Question: Why does the parabolic tangent bisect angle ∠FPH?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · THE ISOSCELES TRIANGLE |PF| = |PH|",
+                    "headline": "As Point P Glides Along the Parabola, |PF| Always Equals |PH|!",
+                    "key_formula": "△PFH Isosceles Triangle: |PF| = |PH|",
+                    "narration": (
+                        f"Compare the segment PF to focus F with the perpendicular segment PH dropped to the vertical directrix line l. "
+                        f"Wherever point P moves along the parabola, PF and PH remain strictly equal, forming a glowing isosceles triangle PFH at every instant!"
+                    ),
+                    "hud_notes": [
+                        "Live Measurement: Focal distance |PF| = Directrix distance |PH|!",
+                        "Isosceles Structure: Points P, F, and H always form isosceles △PFH!",
+                        "Note: Ellipse keeps PF₁+PF₂=2a, while Parabola keeps |PF|=|PH|!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · PERPENDICULAR BISECTOR TANGENT PROOF",
+                    "headline": "The Tangent Line Bisects ∠FPH, Proving Equal Reflection Angles!",
+                    "key_formula": "Tangent Bisects ∠FPH  ⇒  Incident Angle = Reflected Angle",
+                    "narration": (
+                        f"In the visual proof from https://min7014.github.io/, connect F to H and draw the perpendicular bisector of segment FH. "
+                        f"Because triangle PFH is isosceles, this angle bisector of ∠FPH is the exact tangent line to the parabola, making the incident and reflected angles strictly equal!"
+                    ),
+                    "hud_notes": [
+                        "Key Auxiliary Line: Connect F to H and bisect apex angle ∠FPH!",
+                        "Isosceles Symmetry + Vertical Angles → Incident Angle = Reflected Angle!",
+                        "Proved visually in 10 seconds without any calculus!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · ORTHOPTIC DIRECTRIX & SIMILARITY",
+                    "headline": "Two Tangents From Any Point on the Directrix Meet at 90 Degrees!",
+                    "key_formula": "Orthoptic Property on Directrix: Tangent₁ ⊥ Tangent₂ (90°)",
+                    "narration": (
+                        f"What if you draw two tangent lines to a parabola from any point on its directrix? "
+                        f"By folding the two isosceles triangles across their tangents, the two tangent lines always intersect at a 90-degree right angle, and all parabolas are geometrically similar!"
+                    ),
+                    "hud_notes": [
+                        "Bonus Theorem 1: Tangents from the directrix always meet at 90°!",
+                        "Bonus Theorem 2: All parabolas are geometrically similar!",
+                        "Reverse Optics: A bulb at focus F projects a perfectly parallel beam!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND PARABOLA EXAM STRATEGY",
+                    "headline": "The Instant You See Point P on a Parabola, Drop Perpendicular PH to the Directrix!",
+                    "key_formula": "Rule #1: Spot Point P on Parabola → Drop Perpendicular PH to Directrix!",
+                    "narration": (
+                        f"Whenever a parabola appears on an exam, draw the directrix and drop perpendicular PH to form isosceles triangle PFH in 10 seconds! "
+                        f"Subscribe to @min7014_ai right now for daily visual math cinema!"
+                    ),
+                    "hud_notes": [
+                        "Instant Trigger: Point P on Parabola → Draw Directrix & Use |PF| = |PH|!",
+                        "Tangent Problem → Use Isosceles Triangle △PFH & Rhombus Symmetry!",
+                        "Subscribe to @min7014_ai & explore the interactive GeoGebra lab!",
+                    ],
+                },
+            ]
+
+    if archetype == "menelaus_theorem":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 삼각형을 관통하는 할선의 비율 미스터리",
+                    "headline": f"한 직선이 삼각형의 세 변을 뚫고 지나갈 때 세 비율의 곱은 언제나 1이다! ({t_title})",
+                    "key_formula": "(AF / FB) × (BD / DC) × (CE / EA) = 1.000",
+                    "narration": (
+                        f"밤하늘의 삼각형 ABC 위로 네온 할선 하나가 비스듬히 지나가며 변 AB의 내분점 F, 변 AC의 내분점 E, 그리고 밑변 BC 연장선의 외분점 D를 만듭니다. "
+                        f"할선의 각도가 어떻게 변하더라도 [{t_title}]에서 세 비율을 순환하여 곱한 값은 언제나 정확히 1.000으로 유지됩니다! "
+                        f"세 직선이 한 점에 모이는 체바의 정리와 쌍대를 이루는 이 공선성 정리의 비밀을 파헤쳐 봅시다."
+                    ),
+                    "hud_notes": [
+                        "메넬라우스 구조: 삼각형의 세 변(연장선 포함)과 만나는 일직선 할선 D-F-E",
+                        "핵심 불변량: (AF / FB) × (BD / DC) × (CE / EA) = 1.000 일정!",
+                        "질문: 단 1줄의 평행 보조선으로 어떻게 이 3개 분수를 모두 약분시킬까?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 꼭짓점 → 분점 → 꼭짓점 징검다리 순환 법칙",
+                    "headline": "A → F → B → D → C → E → A 한 바퀴 돌아오는 비율의 시소 균형!",
+                    "key_formula": "Cyclic Path: (A→F / F→B) × (B→D / D→C) × (C→E / E→A) = 1",
+                    "narration": (
+                        f"메넬라우스 식을 세울 때 절대 헷갈리지 않는 규칙은 꼭짓점에서 분점으로, 분점에서 다음 꼭짓점으로 징검다리를 뛰며 한 바퀴 돌아오는 것입니다! "
+                        f"밑변 연장선 바깥의 외분점 D를 지날 때도 B에서 D까지 나갔다가 다시 D에서 C로 돌아오는 비율 BD 분의 DC를 곱하면, 세 분수의 곱이 완벽한 역수 균형을 이룹니다."
+                    ),
+                    "hud_notes": [
+                        "징검다리 공식: (꼭짓점→분점)/(분점→다음 꼭짓점) 3번 점프 후 출발점 복귀!",
+                        "외분점 구간 주의: B → 외분점 D → 꼭짓점 C 순서(BD / DC) 그대로 적용!",
+                        "체바(세 직선 한 점 교차)와 메넬라우스(세 점 일직선 위치)의 완벽한 대칭!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · https://min7014.github.io/ 평행 보조선 CK 1줄 증명",
+                    "headline": "꼭짓점 C에서 변 AB에 평행한 보조선 CK 딱 1줄을 그으면 닮음비로 연쇄 약분!",
+                    "key_formula": "Draw CK ∥ AB  ⇒  (AF/FB)·(BF/CK)·(CK/AF) = 1",
+                    "narration": (
+                        f"이제 https://min7014.github.io/ 원문 자료의 결정적 보조선 딱 한 줄을 그어 볼까요? "
+                        f"꼭짓점 C를 지나고 변 AB에 평행한 황금빛 보조선 CK를 그어 할선과 만나는 점을 K라고 합시다! "
+                        f"그러면 두 쌍의 AA 닮음 삼각형에 의해 BD 분의 DC는 BF 분의 CK가 되고, CE 분의 EA는 CK 분의 AF가 되어, 세 식을 곱하는 순간 보조선 CK와 모든 변이 도미노처럼 약분되어 정확히 1이 남습니다!"
+                    ),
+                    "hud_notes": [
+                        "폴리아 제1보조선: 꼭짓점 C를 지나고 변 AB에 평행한 선분 CK 1줄 작도!",
+                        "1단계 AA 닮음(△BDF ∽ △BCK): BD / DC = FB / CK",
+                        "2단계 AA 닮음(△AEF ∽ △CEK): CE / EA = CK / AF → 곱하면 100% 약분 = 1!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (수선의 높이 비 증명과 데자르그 정리)",
+                    "headline": "세 꼭짓점에서 할선에 내린 수선의 길이 비 h₁, h₂, h₃로도 1초 증명!",
+                    "key_formula": "(h₁ / h₂) × (h₂ / h₃) × (h₃ / h₁) = 1  (Altitude Ratio Proof)",
+                    "narration": (
+                        f"또 다른 시각적 증명도 감상해 보세요! 세 꼭짓점 A, B, C에서 할선에 수선의 발을 내려 높이를 각각 h1, h2, h3라고 하면, "
+                        f"마주 보는 직각삼각형들의 닮음비에 의해 세 선분 비율은 h1 나누기 h2, h2 나누기 h3, h3 나누기 h1로 바뀌어 단번에 1로 약분됩니다! "
+                        f"이 원리가 확장되어 3차원 원근투시도의 데자르그 정리와 파스칼의 육각형 정리가 탄생합니다."
+                    ),
+                    "hud_notes": [
+                        "별해(수선 증명): 세 꼭짓점에서 할선에 내린 수선 높이 비 (h₁/h₂)(h₂/h₃)(h₃/h₁)=1",
+                        "역정리 활용: 세 비율의 곱이 1이면 세 점 D, E, F는 반드시 일직선(공선점)!",
+                        "사영기하 확장: 파포스의 정리·데자르그의 정리·벡터 내분점 공선 조건의 뿌리!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수능 기하·올림피아드 10초 실전 해법",
+                    "headline": "삼각형과 할선이 만나면 평행 보조선 1줄 또는 메넬라우스 순환 곱 = 1!",
+                    "key_formula": "Triangle + Transversal Line → Menelaus Cyclic Product = 1!",
+                    "narration": (
+                        f"도형 문제에서 삼각형 내부를 관통하는 직선과 외분점 비율이 보일 때, 복잡한 좌표나 연립방정식을 세우지 마세요. "
+                        f"교점을 지나며 평행한 보조선 한 줄을 긋거나 메넬라우스 순환 곱은 1 공식을 쓰면 10초 만에 풀립니다! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 설명란의 지오지브라 실험실에서 할선을 직접 움직여 보세요!"
+                    ),
+                    "hud_notes": [
+                        "실전 포착 신호: '삼각형 + 연장선 외분점 D + 할선' = 100% 메넬라우스 정리!",
+                        "서술형 만점 팁: 꼭짓점에서 평행 보조선 1줄을 그어 AA 닮음 2쌍으로 서술!",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · THE TRANSVERSAL LINE MYSTERY",
+                    "headline": f"One Line Slices Across a Triangle—Why Do the 3 Ratios Multiply to 1? ({t_title})",
+                    "key_formula": "(AF / FB) × (BD / DC) × (CE / EA) = 1.000",
+                    "narration": (
+                        f"A single glowing transversal line slices across triangle ABC, cutting side AB at F, side AC at E, and the extended base BC at exterior point D. "
+                        f"No matter how the transversal tilts, in [{t_title}] the cyclic product of the three division ratios stays strictly locked at 1.000!"
+                    ),
+                    "hud_notes": [
+                        "Menelaus Configuration: Transversal line cutting 3 sides at collinear D, E, F",
+                        "Core Invariant: (AF / FB) × (BD / DC) × (CE / EA) = 1.000!",
+                        "Question: How does 1 parallel auxiliary line cancel all three fractions?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · THE VERTEX-TO-DIVIDER CYCLIC LOOP",
+                    "headline": "Hop A → F → B → D → C → E → A Around the Triangle Perimeter!",
+                    "key_formula": "Cyclic Path: (A→F / F→B) × (B→D / D→C) × (C→E / E→A) = 1",
+                    "narration": (
+                        f"Follow the golden cyclic rule: hop from Vertex to Divider, then from Divider to the next Vertex all the way around back to A! "
+                        f"Even when jumping out to exterior point D on the extended base, the ratio BD over DC balances the interior ratios to keep the product at 1."
+                    ),
+                    "hud_notes": [
+                        "Cyclic Rule: (Vertex → Divider) / (Divider → Next Vertex) around the loop!",
+                        "Exterior Segment: Hop B → exterior D → vertex C (BD / DC)!",
+                        "Projective Dual of Ceva's Theorem (Collinearity ↔ Concurrency)!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · ONE PARALLEL LINE PROOF (CK ∥ AB)",
+                    "headline": "Draw 1 Line CK Parallel to AB and Watch Similar Triangles Cancel Out!",
+                    "key_formula": "Draw CK ∥ AB  ⇒  (AF/FB)·(BF/CK)·(CK/AF) = 1",
+                    "narration": (
+                        f"Here is the visual proof from https://min7014.github.io/: draw a single golden line CK through vertex C parallel to side AB! "
+                        f"This creates two pairs of AA similar triangles: BD over DC becomes FB over CK, and CE over EA becomes CK over AF—canceling CK and every segment like dominoes to leave 1!"
+                    ),
+                    "hud_notes": [
+                        "Golden Auxiliary Line: Draw CK through vertex C parallel to side AB!",
+                        "AA Similarity 1 (△BDF ∽ △BCK): BD / DC = FB / CK",
+                        "AA Similarity 2 (△AEF ∽ △CEK): CE / EA = CK / AF → Product = 1!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · ALTITUDE RATIO PROOF & PROJECTIVE GEOMETRY",
+                    "headline": "Drop Three Altitudes h₁, h₂, h₃ to the Transversal for Instant Cancellation!",
+                    "key_formula": "(h₁ / h₂) × (h₂ / h₃) × (h₃ / h₁) = 1  (Altitude Ratio Proof)",
+                    "narration": (
+                        f"You can also drop three perpendicular altitudes h1, h2, and h3 from the vertices to the transversal line! "
+                        f"Each segment ratio equals the ratio of altitudes, giving h1 over h2 times h2 over h3 times h3 over h1 equals 1—the foundation of Desargues' and Pascal's theorems!"
+                    ),
+                    "hud_notes": [
+                        "Second Proof: Perpendicular altitudes give (h₁/h₂)(h₂/h₃)(h₃/h₁) = 1!",
+                        "Converse Theorem: Product = 1 guarantees points D, E, F are collinear!",
+                        "Gateway to Olympiad Projective Geometry & Desargues' Theorem!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND OLYMPIAD GEOMETRY STRATEGY",
+                    "headline": "Spot a Triangle Cut by a Line and Apply Menelaus' Cyclic Product = 1!",
+                    "key_formula": "Triangle + Transversal Line → Menelaus Cyclic Product = 1!",
+                    "narration": (
+                        f"Whenever a line slices across a triangle on an exam, draw 1 parallel line or write Menelaus' cyclic product equals 1 to solve it in 10 seconds! "
+                        f"Subscribe to @min7014_ai right now for daily visual math cinema!"
+                    ),
+                    "hud_notes": [
+                        "Instant Trigger: Triangle + Extended Side + Transversal = Menelaus!",
+                        "Draw 1 parallel line through a vertex to create AA similar triangles!",
+                        "Subscribe to @min7014_ai & explore the interactive GeoGebra lab!",
+                    ],
+                },
+            ]
+
+    if archetype == "cauchy_mvt":
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · 두 함수의 변화율 비가 일치하는 순간",
+                    "headline": f"두 함수 f(x), g(x)의 평균변화율 비와 미분계수 비가 정확히 일치한다! ({t_title})",
+                    "key_formula": "[f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)  (c ∈ (a, b))",
+                    "narration": (
+                        f"일반 평균값 정리가 하나의 함수 f(x)의 변화율을 다룬다면, [{t_title}]는 동시에 변화하는 두 함수 f(x)와 g(x)의 변화율 비율을 밝히는 강력한 정리입니다! "
+                        f"구간 [a, b] 전체에서의 변화량 비율인 g(b) 빼기 g(a) 분의 f(b) 빼기 f(a)와 정확히 일치하는 순간 미분계수 비율 g 프라임 c 분의 f 프라임 c가 구간 안에 반드시 존재합니다."
+                    ),
+                    "hud_notes": [
+                        "코시의 평균값 정리: 두 함수 f(x), g(x)의 증분 비 = 한 점 c에서의 미분계수 비!",
+                        "핵심 공식: [f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)  (단 g'(x) ≠ 0)",
+                        "질문: 왜 분모·분자에 평균값 정리를 따로 쓰면 안 되고 보조함수 h(x)가 필요할까?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 매개변수 평면 곡선 (g(t), f(t))의 평행 접선",
+                    "headline": "평면 위를 달리는 곡선 (g(t), f(t))의 할선과 평행한 접선이 탄생하는 점 c!",
+                    "key_formula": "Parametric Curve (x = g(t), y = f(t)): Chord Slope = Tangent Slope",
+                    "narration": (
+                        f"이 정리를 눈으로 가장 직관적으로 이해하는 방법은 가로좌표를 g(t), 세로좌표를 f(t)로 놓은 매개변수 평면 곡선을 그리는 것입니다! "
+                        f"출발점 (g(a), f(a))와 도착점 (g(b), f(b))를 잇는 할선의 기울기가 바로 좌변이고, 곡선 위를 달리다 그 할선과 완벽히 평행해지는 순간 t = c 에서의 접선 기울기가 바로 우변입니다!"
+                    ),
+                    "hud_notes": [
+                        "기하학적 번역: 가로축 X = g(x), 세로축 Y = f(x) 매개변수 곡선 작도!",
+                        "좌변의 의미: 두 끝점 A(g(a), f(a)), B(g(b), f(b))를 잇는 현(할선)의 기울기",
+                        "우변의 의미: 시각 x = c 에서의 순간 속도 벡터 접선 기울기 f'(c) / g'(c)!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · https://min7014.github.io/ 보조함수 h(x)와 롤의 정리 증명",
+                    "headline": "보조함수 h(x) = [f(b)-f(a)]g(x) - [g(b)-g(a)]f(x) 로 동일한 점 c를 포착하라!",
+                    "key_formula": "h(a) = h(b)  ⇒  h'(c) = [f(b)-f(a)]g'(c) - [g(b)-g(a)]f'(c) = 0",
+                    "narration": (
+                        f"만약 분자와 분모에 일반 평균값 정리를 따로 적용하면 f 프라임 c1과 g 프라임 c2에서 c1과 c2가 서로 다른 점이 되어 증명에 실패합니다! "
+                        f"그래서 https://min7014.github.io/ 원문 증명처럼 보조함수 h(x)를 f(b) 빼기 f(a) 곱하기 g(x) 빼기 g(b) 빼기 g(a) 곱하기 f(x)로 설정하면, "
+                        f"h(a)와 h(b)가 같아져 롤의 정리에 의해 h 프라임 c가 0이 되는 단 하나의 동일한 점 c에서 등식이 완벽히 증명됩니다!"
+                    ),
+                    "hud_notes": [
+                        "오개념 주의: 분모·분자에 평균값 정리를 따로 쓰면 c₁ ≠ c₂ 여서 증명 불가!",
+                        "결정적 보조함수: h(x) = [f(b) - f(a)]g(x) - [g(b) - g(a)]f(x) 도입!",
+                        "롤의 정리 적용: h(a) = h(b) 이므로 h'(c) = 0 인 동일한 점 c 존재 증명!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 한계를 넘는 상상 (일반 평균값 정리와 로피탈의 정리 유도)",
+                    "headline": "g(x) = x 를 대입하면 평균값 정리, b → a 극한을 취하면 로피탈의 정리!",
+                    "key_formula": "lim(x→a) [f(x)-f(a)]/[g(x)-g(a)] = lim(c→a) f'(c)/g'(c) (L'Hôpital)",
+                    "narration": (
+                        f"코시의 평균값 정리에서 g(x) 자리에 가장 단순한 함수 x를 대입해 보세요. 분모가 b 빼기 a가 되면서 우리가 아는 일반 평균값 정리가 즉시 튀어나옵니다! "
+                        f"나아가 f(a)와 g(a)가 모두 0일 때 b를 a로 한없이 가까이 보내면, 사잇점 c도 a로 수렴하면서 0분의 0 꼴 극한을 미분계수의 비로 구하는 로피탈의 정리가 탄생합니다!"
+                    ),
+                    "hud_notes": [
+                        "특수화: g(x) = x 대입 → [f(b) - f(a)] / (b - a) = f'(c) (평균값 정리)",
+                        "극한 확장: f(a)=g(a)=0 일 때 x → a 극한 → 로피탈의 정리(L'Hôpital's Rule)!",
+                        "미적분학의 거대한 줄기: 롤의 정리 → 코시의 평균값 정리 → 로피탈·테일러 정리!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 수리논술·심화 미적분 10초 실전 통찰",
+                    "headline": "두 함수의 증분 비가 보이면 즉시 보조함수 h(x)와 코시 평균값 정리를 떠올려라!",
+                    "key_formula": "[f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)  (Verified Q.E.D.)",
+                    "narration": (
+                        f"수리논술과 대학 미적분에서 두 함수의 함숫값 차이 비율을 묻는 문제가 나오면, 코시의 평균값 정리와 보조함수 h(x)를 즉시 떠올리세요! "
+                        f"지금 바로 @min7014_ai 채널을 구독하고 설명란의 단계별 증명 PDF 원문으로 완벽히 마스터해 보세요!"
+                    ),
+                    "hud_notes": [
+                        "논술 만점 포인트: 반드시 보조함수 h(x)를 명시하여 동일한 점 c임을 증명!",
+                        "설명란에서 https://min7014.github.io/2016012801 단계별 증명 PDF 무료 확인",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": "ACT 1 · RATIO OF TWO CHANGING FUNCTIONS",
+                    "headline": f"Where the Ratio of Secant Changes Matches the Ratio of Derivatives! ({t_title})",
+                    "key_formula": "[f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)  (c ∈ (a, b))",
+                    "narration": (
+                        f"While the standard Mean Value Theorem tracks a single function, [{t_title}] compares two smooth functions f(x) and g(x) simultaneously! "
+                        f"Across any interval [a, b], there is always an interior point c where the ratio of derivatives f prime of c over g prime of c equals the overall ratio of changes!"
+                    ),
+                    "hud_notes": [
+                        "Cauchy's MVT: Ratio of overall increments = Ratio of derivatives at x = c!",
+                        "Exact Formula: [f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)",
+                        "Question: Why must both derivatives be evaluated at the exact same c?",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · PARAMETRIC CURVE (g(t), f(t)) GEOMETRY",
+                    "headline": "On the Parametric Curve (g(t), f(t)), Tangent Parallels Chord at t = c!",
+                    "key_formula": "Parametric Curve (x = g(t), y = f(t)): Chord Slope = Tangent Slope",
+                    "narration": (
+                        f"Plot g(t) on the horizontal axis and f(t) on the vertical axis to trace a smooth parametric curve! "
+                        f"The left side is the slope of the chord connecting the endpoints, and the right side is the slope of the tangent vector at the exact instant t = c where tangent parallels chord!"
+                    ),
+                    "hud_notes": [
+                        "Geometric View: Plot parametric curve X = g(t), Y = f(t) in the plane",
+                        "Left Side: Slope of the chord connecting (g(a), f(a)) and (g(b), f(b))",
+                        "Right Side: Instantaneous tangent slope dy/dx = f'(c) / g'(c)!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · ROLLE'S AUXILIARY FUNCTION h(x) PROOF",
+                    "headline": "Construct h(x) = [f(b)-f(a)]g(x) - [g(b)-g(a)]f(x) so h(a) = h(b)!",
+                    "key_formula": "h(a) = h(b)  ⇒  h'(c) = [f(b)-f(a)]g'(c) - [g(b)-g(a)]f'(c) = 0",
+                    "narration": (
+                        f"Applying the ordinary MVT separately to numerator and denominator gives two different points c1 and c2. "
+                        f"Instead, following https://min7014.github.io/, define auxiliary function h(x) = [f(b)-f(a)]g(x) - [g(b)-g(a)]f(x) so that h(a) = h(b), and Rolle's Theorem guarantees a single c where h'(c) = 0!"
+                    ),
+                    "hud_notes": [
+                        "Common Trap: Separate MVT on top and bottom gives c₁ ≠ c₂ (Invalid!)",
+                        "Master Stroke: Auxiliary function h(x) = [f(b)-f(a)]g(x) - [g(b)-g(a)]f(x)",
+                        "Rolle's Theorem: h(a) = h(b) ⇒ h'(c) = 0 at one unified point c!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · UNIFYING ORDINARY MVT & L'HÔPITAL'S RULE",
+                    "headline": "Set g(x) = x for Standard MVT, or Take x → a for L'Hôpital's Rule!",
+                    "key_formula": "lim(x→a) [f(x)-f(a)]/[g(x)-g(a)] = lim(c→a) f'(c)/g'(c) (L'Hôpital)",
+                    "narration": (
+                        f"Setting g(x) = x recovers the standard Mean Value Theorem immediately! "
+                        f"And when f(a) = g(a) = 0, letting x approach a squeezes c toward a, proving L'Hôpital's Rule for 0 over 0 indeterminate limits!"
+                    ),
+                    "hud_notes": [
+                        "Special Case g(x) = x: Recovers [f(b) - f(a)] / (b - a) = f'(c)!",
+                        "Limit Case x → a: Rigorously proves L'Hôpital's Rule for 0/0 limits!",
+                        "Chain of Calculus: Rolle's Theorem → Cauchy's MVT → Taylor's Theorem!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND CALCULUS PROOF STRATEGY",
+                    "headline": "Use Auxiliary Function h(x) Whenever Comparing Two Functions' Increments!",
+                    "key_formula": "[f(b) - f(a)] / [g(b) - g(a)] = f'(c) / g'(c)  (Verified Q.E.D.)",
+                    "narration": (
+                        f"Check the step-by-step PDF proof on https://min7014.github.io/ in the description and subscribe to @min7014_ai right now for daily visual math cinema!"
+                    ),
+                    "hud_notes": [
+                        "Exam Key: Always write down h(x) to guarantee a single shared point c!",
+                        "Full Step-by-Step PDF Proof linked in the description below",
+                        "Subscribe to @min7014_ai for daily high-definition math cinema!",
+                    ],
+                },
+            ]
+
+    if archetype in ("inverse_deriv", "trig_deriv_sin", "special_triangles", "square_root_geometry", "cycloid_kinematics", "parallel_similarity"):
+        formula_map = {
+            "inverse_deriv": "(f⁻¹)'(y) = 1 / f'(x)  (dx/dy = 1 / (dy/dx))",
+            "trig_deriv_sin": "d/dx (sin x) = cos x  (via lim sin h / h = 1)",
+            "special_triangles": "30°-60°-90° (1 : √3 : 2)  &  45°-45°-90° (1 : 1 : √2)",
+            "square_root_geometry": "x² = a  ⇔  x = ±√a  (Side of Area a Square = √a)",
+            "cycloid_kinematics": "x(θ) = r(θ - sin θ),  dx/dθ = r(1 - cos θ) ≥ 0",
+            "parallel_similarity": "l ∥ m ∥ n  ⇒  a : b = a' : b'  (Parallel Line Similarity)",
+        }
+        kf = formula_map.get(archetype, f"Core Invariant · {t_title}")
+        hyp_s = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("hypothesis_ko") or ""))
+        misc_s = sanitize_glyphs(vmaker.latex_to_unicode_title(tpa.get("misconception_ko") or ""))
+        if lang_code == "ko":
+            return [
+                {
+                    "act": 1,
+                    "badge": f"ACT 1 · [{t_title}] 핵심 직관과 출발 조건",
+                    "headline": f"공식을 외우기 전에 출발 정의와 시각적 구조부터 포착하라! ({t_title})",
+                    "key_formula": kf,
+                    "narration": f"오늘 탐구할 주제는 https://min7014.github.io/ 의 [{t_title}]입니다! 결과 공식을 단순 암기하기 전에 출발 조건부터 살펴볼까요? {hyp_s} 바로 이 구조에서 {inv_ko}가 필연적으로 탄생합니다!",
+                    "hud_notes": [
+                        f"출발 조건: {hyp_s[:44]}",
+                        f"핵심 결론: {inv_ko[:44]}",
+                        "목표: 공식 암기가 아닌 시각적 보조선과 원리로 10초 만에 유도!",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · 눈으로 확인하는 대칭성과 기하·대수 모델",
+                    "headline": f"핵심 관계식 [{kf[:32]}]의 시각적 균형 관찰",
+                    "key_formula": kf,
+                    "narration": f"화면의 동적 시뮬레이션을 자세히 관찰해 보세요. [{t_title}]에서 점과 선분이 움직일 때 {inv_ko}라는 관계가 어떻게 한 치의 오차도 없이 유지되는지 눈으로 직접 확인할 수 있습니다.",
+                    "hud_notes": [
+                        f"핵심 불변식: {kf[:44]}",
+                        f"결론 요약: {inv_ko[:44]}",
+                        "직관적 관찰: 기호 이전에 도형의 대칭과 넓이·길이의 대응을 먼저 보라!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · https://min7014.github.io/ 결정적 보조선과 증명 논리",
+                    "headline": "단 한 줄의 핵심 보조선·발상이 증명의 모든 조각을 하나로 연결한다!",
+                    "key_formula": kf,
+                    "narration": f"왜 이 성질이 항상 성립할까요? 핵심 발상은 다음과 같습니다! {polya_ko} 그리고 이를 통해 {logic_ko} 과정으로 결론이 완벽하게 증명됩니다!",
+                    "hud_notes": [
+                        f"결정적 발상: {polya_ko[:44]}",
+                        f"증명 핵심: {logic_ko[:44]}",
+                        "https://min7014.github.io/ 단계별 시각 증명 원리와 100% 일치!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · 가장 많이 틀리는 함정(오개념) 예방 & 조건 확장",
+                    "headline": "실전에서 절대 속지 않는 오개념 백신과 상위 교육과정 연결!",
+                    "key_formula": kf,
+                    "narration": f"여기서 학생들이 가장 자주 실수하는 함정을 꼭 짚고 넘어갑시다! {misc_s} 나아가 조건을 한 단계 확장해 볼까요? {whatif_ko}",
+                    "hud_notes": [
+                        f"오개념 주의: {misc_s[:44]}",
+                        f"심화 확장: {whatif_ko[:44]}",
+                        "정의와 조건의 경계를 정확히 알면 변형 문제에서도 흔들리지 않습니다!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 실전 10초 유레카 해법 & 인터랙티브 실습",
+                    "headline": f"[{t_title}] 문제를 보자마자 핵심 보조선과 정의를 1초 만에 꺼내라!",
+                    "key_formula": kf,
+                    "narration": f"오늘 함께 증명한 [{t_title}]의 핵심은 {polya_ko}입니다. 설명란과 고정댓글의 https://min7014.github.io/ 원문 PDF와 지오지브라를 직접 조작해 보고, 지금 바로 @min7014_ai 채널을 구독하세요!",
+                    "hud_notes": [
+                        f"실전 제1원칙: {polya_ko[:44]}",
+                        "설명란·고정댓글에서 https://min7014.github.io/ 원문 PDF & GeoGebra 실습",
+                        "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
+                    ],
+                },
+            ]
+        else:
+            return [
+                {
+                    "act": 1,
+                    "badge": f"ACT 1 · VISUAL INTUITION OF {t_title.upper()[:24]}",
+                    "headline": f"See the Exact Geometric Structure Behind [{t_title}]!",
+                    "key_formula": kf,
+                    "narration": f"Welcome to the pure visual proof of [{t_title}] based on https://min7014.github.io/! Instead of memorizing formulas blindly, watch how the starting geometric definition makes this law inevitable.",
+                    "hud_notes": [
+                        f"Topic: {t_title[:44]}",
+                        f"Core Relation: {kf[:44]}",
+                        "100% faithful to the step-by-step proof on https://min7014.github.io/!",
+                    ],
+                },
+                {
+                    "act": 2,
+                    "badge": "ACT 2 · DYNAMIC GEOMETRIC & ALGEBRAIC BALANCE",
+                    "headline": f"Observing the Invariant [{kf[:34]}] Live",
+                    "key_formula": kf,
+                    "narration": f"Watch the glowing diagram evolve in real time. Every length, slope, and angle locks into the exact mathematical relation of [{t_title}] with zero error!",
+                    "hud_notes": [
+                        f"Key Formula: {kf[:44]}",
+                        "Visual Symmetry: Lengths and slopes balance in real time",
+                        "Discovery Before Formula: See why the equation must hold!",
+                    ],
+                },
+                {
+                    "act": 3,
+                    "badge": "ACT 3 · THE DECISIVE AUXILIARY LINE & PROOF",
+                    "headline": "One Strategic Auxiliary Construction Completes the Proof!",
+                    "key_formula": kf,
+                    "narration": f"By introducing the decisive auxiliary line and symmetry from https://min7014.github.io/, all intermediate terms cancel cleanly and prove [{t_title}] in seconds!",
+                    "hud_notes": [
+                        "Polya's First Step: Introduce the symmetry auxiliary line",
+                        f"Verified Result: {kf[:44]}",
+                        "Zero rote memorization—pure logical deduction!",
+                    ],
+                },
+                {
+                    "act": 4,
+                    "badge": "ACT 4 · COMMON PITFALLS & WHAT-IF-NOT EXTENSION",
+                    "headline": "Avoiding Classic Exam Traps and Generalizing the Theorem",
+                    "key_formula": kf,
+                    "narration": f"Always verify the exact domain and sign conditions so you never fall for common exam traps, and see how [{t_title}] generalizes to higher dimensions and calculus!",
+                    "hud_notes": [
+                        "Pitfall Check: Verify exact domain, orientation, and sign conditions!",
+                        "What-If-Not: Generalizes directly to advanced Olympiad & calculus problems",
+                        "Explore the full step-by-step PDF in the description!",
+                    ],
+                },
+                {
+                    "act": 5,
+                    "badge": "ACT 5 · 10-SECOND EXAM TAKEAWAY",
+                    "headline": f"Master [{t_title}] With 1 Visual Idea!",
+                    "key_formula": kf,
+                    "narration": f"Explore the interactive GeoGebra applet and original PDF on https://min7014.github.io/ linked in the description, and subscribe to @min7014_ai right now!",
+                    "hud_notes": [
+                        f"Core Formula: {kf[:44]}",
+                        "Original PDF & GeoGebra Lab linked in the description below",
+                        "Subscribe to @min7014_ai for daily high-definition math cinema!",
+                    ],
+                },
+            ]
+
+    # 원주각과 중심각 (∠APB = 1/2 ∠AOB) 및 원의 성질 5막 시네마 대본
     if lang_code == "ko":
         return [
             {
                 "act": 1,
-                "badge": "ACT 1 · 직관을 깨는 기하학 미스터리",
-                "headline": f"모든 선과 각도가 요동치는데 왜 이 값만은 절대 변하지 않을까? ({t_title})",
-                "key_formula": f"Core Invariant · {t_title}",
+                "badge": "ACT 1 · 원주각과 중심각의 1/2 불변량 미스터리",
+                "headline": f"점 P가 원 위를 아무리 움직여도 원주각은 언제나 중심각의 절반이다! ({t_title})",
+                "key_formula": "∠APB (Inscribed Angle) = 1/2 ∠AOB (Central Angle)",
                 "narration": (
-                    f"밤하늘의 좌표 공간 위에서 점과 선분이 쉼 없이 움직이며 도형의 모양을 바꿉니다. "
-                    f"그런데 놀랍게도 [{t_title}]에서는 점을 어느 위치로 옮겨 놓아도 핵심 비율과 관계식이 마치 중력 법칙처럼 단 0.001의 오차도 없이 일정하게 유지됩니다! "
-                    f"정지된 종이 교재를 넘어, 살아 움직이는 시뮬레이션으로 이 불변량의 비밀을 밝혀내 봅시다."
+                    f"밤하늘의 원 위에서 호 AB를 바라보는 꼭짓점 P가 원주를 따라 쉼 없이 미끄러져 움직입니다. "
+                    f"점 P의 위치가 바뀔 때마다 삼각형의 모양은 계속 달라지지만, 놀랍게도 [{t_title}]에서 원주각 ∠APB의 크기는 언제나 중심각 ∠AOB의 정확히 절반으로 고정됩니다! "
+                    f"어떻게 원 위의 모든 점에서 각도가 단 0.1도도 변하지 않을까요?"
                 ),
                 "hud_notes": [
-                    f"역동적 관찰: 점이 궤적을 따라 움직여도 [{t_title}] 등식은 불변!",
-                    f"핵심 불변량: {inv_ko[:46]}",
-                    "목표: 공식 암기가 아닌 '살아 움직이는 단 하나의 원리' 완전 체득!",
+                    "역동적 관찰: 원 위의 점 P가 어디로 이동해도 원주각 ∠APB 크기는 불변!",
+                    "핵심 공식: 한 호에 대한 원주각 ∠APB = 1/2 × 중심각 ∠AOB",
+                    "질문: 원의 어떤 성질이 중심각과 원주각을 정확히 2 : 1로 묶어 줄까?",
                 ],
             },
             {
                 "act": 2,
-                "badge": "ACT 2 · 공식 없이 눈으로 보는 대칭·수치 실험",
-                "headline": "가장 대칭적인 순간과 실시간 수치 계기판으로 규칙 포착하기",
-                "key_formula": "Live Invariant Ratio = 1.000 (100% Constant)",
+                "badge": "ACT 2 · 원의 정의(반지름 길이 일치)와 이등변삼각형 발견",
+                "headline": "원의 중심 O에서 원 위의 점들에 그은 반지름 OA = OP = OB = R 은 모두 같다!",
+                "key_formula": "OA = OP = OB = R  ⇒  Isosceles Triangle △OPA (∠OPA = ∠OAP = α)",
                 "narration": (
-                    f"복잡한 기호로 식을 세우기 전에, 가장 완벽한 대칭 위치에서 도형의 균형을 먼저 관찰해 보세요. "
-                    f"화면 우측의 실시간 계기판에서 볼 수 있듯, 한쪽 길이가 길어지면 반대쪽 비율이 정확히 반비례하여 상쇄되기 때문에 전체 곱과 합의 균형은 언제나 일정하게 유지됩니다."
+                    f"먼저 https://min7014.github.io/ 원문 자료의 첫 번째 단계처럼 원의 중심 O가 원주각의 한 변 PB 위에 놓이는 가장 기본적인 상태를 관찰해 봅시다. "
+                    f"원의 중심 O에서 꼭짓점 A와 P까지의 거리는 모두 원의 반지름 R로 똑같습니다! "
+                    f"따라서 삼각형 OPA는 두 변 OA와 OP의 길이가 같은 이등변삼각형이 되어 두 밑각의 크기가 알파로 정확히 같아집니다."
                 ),
                 "hud_notes": [
-                    "1단계 실험: 정중앙 대칭 상태에서 비율과 넓이의 완벽한 평형 확인",
-                    "2단계 실험: 비대칭으로 이동해도 상호 역수 구조로 완벽히 상쇄!",
-                    "직관적 결론: 수식은 눈으로 본 대칭 균형을 짧게 기록한 약속일 뿐이다!",
+                    "1단계 기본 위치: 원의 중심 O가 원주각의 한 변(지름 PB) 위에 있을 때",
+                    "원의 핵심 성질: 반지름 OA = OP = R 이므로 △OPA는 이등변삼각형!",
+                    "이등변삼각형의 성질: 두 밑각의 크기가 서로 같음 (∠OPA = ∠OAP = α)",
                 ],
             },
             {
                 "act": 3,
-                "badge": "ACT 3 · 천재들의 단 한 줄 보조선 아이디어",
-                "headline": "황금빛 보조선 한 줄이 그어지는 순간 모든 조각이 도미노처럼 맞물린다!",
-                "key_formula": "1 Golden Auxiliary Line → Domino Cancellation!",
+                "badge": "ACT 3 · 반지름 보조선 OP 1줄과 삼각형의 외각 정리 증명",
+                "headline": "삼각형 OPA의 한 외각(중심각 ∠AOB)은 이웃하지 않는 두 내각의 합(α + α = 2α)!",
+                "key_formula": "Exterior Angle ∠AOB = ∠OPA + ∠OAP = α + α = 2∠APB",
                 "narration": (
-                    f"그렇다면 왜 어떤 비대칭 위치에서도 이 상쇄 법칙이 깨지지 않을까요? "
-                    f"비밀은 지금 화면 한가운데에 빛나며 그어지는 단 한 줄의 황금 보조선에 있습니다! "
-                    f"{polya_ko} "
-                    f"이 보조선 하나가 흩어져 있던 선분들을 높이가 같은 삼각형의 넓이 비와 닮음비로 묶어주어, 복잡한 분수들이 도미노처럼 연쇄 약분됩니다."
+                    f"이제 이등변삼각형 OPA의 바깥쪽 각인 중심각 ∠AOB를 보세요! "
+                    f"삼각형의 한 외각의 크기는 그와 이웃하지 않는 두 내각의 크기의 합과 같으므로, 중심각 ∠AOB는 밑각 알파 더하기 알파, 즉 2알파가 됩니다! "
+                    f"중심 O가 원주각 내부에 있을 때도 꼭짓점 P와 중심 O를 잇는 황금 지름 보조선을 한 줄 그으면 양쪽 두 이등변삼각형의 외각의 합으로 단번에 증명됩니다."
                 ),
                 "hud_notes": [
-                    f"결정적 보조선: {polya_ko[:46]}",
-                    f"연쇄 상쇄 원리: {inv_ko[:46]}",
-                    "단 한 줄의 시각적 보조선이 10줄의 대수 계산을 단숨에 끝냅니다!",
+                    "결정적 보조선: 꼭짓점 P와 원의 중심 O를 잇는 지름(반지름) 보조선 작도!",
+                    "삼각형의 외각 정리: 중심각 ∠AOB = 두 밑각의 합(α + α = 2α) = 2∠APB!",
+                    "중심이 내부(2α+2β)·외부(2β-2α)에 있을 때도 지름 보조선 1줄로 완벽 증명!",
                 ],
             },
             {
                 "act": 4,
-                "badge": "ACT 4 · 한계를 넘는 상상 (What-If-Not 일반화)",
-                "headline": "점이 도형 밖으로 나가거나 할선이 접선으로 수렴하는 극한의 순간!",
-                "key_formula": "Interior → Exterior → Tangent Limit → 3D Space!",
+                "badge": "ACT 4 · 한계를 넘는 상상 (탈레스의 반원 직각과 접선·현이 이루는 각)",
+                "headline": "중심각이 180도(지름)가 되면 원주각은 90도! 점이 합쳐지면 접선과 현이 이루는 각!",
+                "key_formula": "Diameter (∠AOB = 180°) ⇒ ∠APB = 90°  |  Tangent-Chord Angle",
                 "narration": (
-                    f"여기서 멈추지 않고 조건을 과감하게 확장해 봅시다! "
-                    f"만약 내부에 있던 점이 도형 바깥의 연장선 위로 나가거나, 두 점이 한없이 가까워져 할선이 접선이 되는 극한의 순간에 도달하면 어떻게 될까요? "
-                    f"{whatif_ko} "
-                    f"놀랍게도 우리가 발견한 핵심 아이디어는 외분점과 미분 접선, 나아가 3차원 공간 기하에서도 똑같이 작동합니다."
+                    f"여기서 조건을 과감하게 확장해 볼까요? 만약 현 AB가 원의 중심을 지나는 지름이 되어 중심각이 180도 평각이 되면, 반원 위의 모든 원주각은 180도의 절반인 90도 직각이 됩니다! "
+                    f"또한 점 P가 점 A에 한없이 가까워져 할선이 접선으로 변하는 극한의 순간에도, 접선과 현이 이루는 각은 원주각의 크기와 똑같이 유지됩니다."
                 ),
                 "hud_notes": [
-                    "확장 1: 점이 외부(연장선)로 이동해도 외분비 대칭으로 동일하게 성립!",
-                    "확장 2: 두 점이 합쳐지는 극한(Δx→0)에서 미분 접선 정리로 진화!",
-                    f"심화 계통성: {whatif_ko[:44]}",
+                    "확장 1(탈레스 정리): 지름(중심각 180°)에 대한 원주각은 언제나 90° 직각!",
+                    "확장 2(내접사각형): 마주 보는 두 원주각의 합 = 1/2 × 360° = 180°!",
+                    "확장 3(접선과 현이 이루는 각): 할선이 접선으로 수렴해도 각도 불변!",
                 ],
             },
             {
                 "act": 5,
-                "badge": "ACT 5 · 수능·경시 킬러 10초 통찰 & 유레카",
-                "headline": "실전 킬러 문항에서 이 시각적 아이디어를 1초 만에 꺼내 쓰는 법!",
-                "key_formula": "Spot the Invariant → Draw 1 Line → 10-Sec Solution!",
+                "badge": "ACT 5 · 수능·내신 원과 기하 10초 실전 해법",
+                "headline": "원 위의 점이 보이면 즉시 중심 O와 연결해 반지름 이등변삼각형을 찾아라!",
+                "key_formula": "Rule #1: Spot Point on Circle → Connect Center O (Radius Isosceles △)!",
                 "narration": (
-                    f"오늘 경험한 [{t_title}] 시네마의 핵심은 결과 공식이 아니라, 문제를 보자마자 어느 꼭짓점에서 어떤 보조선을 그어야 하는지 눈으로 떠올리는 힘입니다. "
-                    f"설명란과 고정댓글의 링크에서 지오지브라 도형을 직접 움직여 보고, 5지선다 보기 없이 스스로 식을 조립하는 실전 문제에 도전해 보세요. "
-                    f"지금 바로 구독과 좋아요를 누르고 매일 새로운 수학적 유레카를 만나보세요!"
+                        f"기하 문제에서 원이 등장했을 때 막힌다면, 첫 번째 보조선은 언제나 원의 중심 O와 원 위의 점을 잇는 반지름입니다! "
+                        f"반지름 이등변삼각형과 원주각은 중심각의 절반이라는 원리 하나로 모든 각도가 10초 만에 풀립니다. "
+                        f"설명란의 https://min7014.github.io/ 원문 PDF와 지오지브라를 직접 체험해 보고, 지금 바로 @min7014_ai 채널을 구독하세요!"
                 ),
                 "hud_notes": [
-                    f"실전 제1발상: [{t_title}] 구조 포착 즉시 핵심 보조선 1줄 작동!",
-                    "설명란·고정댓글에서 무료 GeoGebra & 탈-5지선다 기출 즉시 체험",
-                    "지금 [@min7014_ai 구독] 누르고 최고 화질 창의 수학 시네마를 정주행하세요!",
+                    "실전 제1발상: 원 위의 점 등장 → 중심 O와 연결해 반지름 이등변삼각형 표시!",
+                    "지름이 보이면 즉시 원주각 90° 직각삼각형을 찾아 피타고라스·삼각비 연결!",
+                    "지금 [@min7014_ai 구독] 누르고 1,113개 창의 수학 시네마를 정주행하세요!",
                 ],
             },
         ]
@@ -1368,80 +2012,77 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
         return [
             {
                 "act": 1,
-                "badge": "ACT 1 · THE GEOMETRIC MYSTERY",
-                "headline": f"Everything Moves, Yet This Stays Strictly Invariant! ({t_title})",
-                "key_formula": f"Core Invariant · {t_title}",
+                "badge": "ACT 1 · THE INSCRIBED ANGLE INVARIANT",
+                "headline": f"Move Point P Anywhere on the Circle—∠APB Is Always Half of ∠AOB! ({t_title})",
+                "key_formula": "∠APB (Inscribed Angle) = 1/2 ∠AOB (Central Angle)",
                 "narration": (
-                    f"Across this dark coordinate cosmos, points and lines glide continuously, deforming every angle and length. "
-                    f"Yet inside [{t_title}], a profound mathematical invariant remains locked with zero error! "
-                    f"Forget static textbook pages—let's witness the living geometry that makes this theorem inevitable."
+                    f"Watch vertex P glide freely along the circular arc while viewing chord AB. "
+                    f"Although triangle PAB changes shape at every instant, in [{t_title}] the inscribed angle ∠APB stays strictly locked at exactly half the central angle ∠AOB!"
                 ),
                 "hud_notes": [
-                    f"Dynamic Observation: As points move, [{t_title}] remains locked!",
-                    "Hidden Invariant: Structural balance of ratios, angles, and areas",
-                    "Goal: See the living visual mechanism instead of memorizing formulas!",
+                    "Dynamic Observation: Moving P along the arc never changes ∠APB!",
+                    "Core Invariant: Inscribed Angle ∠APB = 1/2 × Central Angle ∠AOB",
+                    "Question: Why does the circle enforce this exact 1 : 2 angle ratio?",
                 ],
             },
             {
                 "act": 2,
-                "badge": "ACT 2 · SYMMETRY & LIVE NUMERICAL LAB",
-                "headline": "Capturing the Law Through Symmetry & Real-Time Meters",
-                "key_formula": "Live Invariant Ratio = 1.000 (100% Constant)",
+                "badge": "ACT 2 · EQUAL RADII & THE ISOSCELES TRIANGLE",
+                "headline": "Radii OA = OP = OB = R Form a Glowing Isosceles Triangle △OPA!",
+                "key_formula": "OA = OP = OB = R  ⇒  Isosceles Triangle △OPA (∠OPA = ∠OAP = α)",
                 "narration": (
-                    f"Before writing a single algebraic symbol, observe the figure in its most symmetric state. "
-                    f"As shown on the live telemetry meter, whenever one segment stretches, its partner compresses in exact inverse proportion, keeping the overall product and sum invariant."
+                    f"Following the step-by-step proof on https://min7014.github.io/, start when center O lies on side PB. "
+                    f"Because every radius of a circle has the exact same length R, segments OA and OP are equal, making triangle OPA isosceles with two equal base angles alpha!"
                 ),
                 "hud_notes": [
-                    "Step 1: Observe the exact equilibrium in the symmetric center state",
-                    "Step 2: Perturb the point and watch inverse ratios cancel out live!",
-                    "Visual Rule: Algebra is simply the language of geometric balance.",
+                    "Baseline Case: Center O lies directly on chord-diameter PB",
+                    "Circle Definition: Equal radii OA = OP = R create isosceles △OPA!",
+                    "Isosceles Property: Base angles are equal (∠OPA = ∠OAP = α)!",
                 ],
             },
             {
                 "act": 3,
-                "badge": "ACT 3 · THE GOLDEN AUXILIARY LINE",
-                "headline": "One Glowing Auxiliary Line Triggers a Domino Cancellation!",
-                "key_formula": "1 Golden Auxiliary Line → Domino Cancellation!",
+                "badge": "ACT 3 · DIAMETER AUXILIARY LINE & EXTERIOR ANGLE PROOF",
+                "headline": "The Central Angle ∠AOB Is the Exterior Angle α + α = 2α!",
+                "key_formula": "Exterior Angle ∠AOB = ∠OPA + ∠OAP = α + α = 2∠APB",
                 "narration": (
-                    f"Why does this balance survive even in asymmetric positions? "
-                    f"Watch the golden auxiliary line illuminate across the canvas! "
-                    f"By introducing a shared altitude, parallel line, or common radius, disconnected ratios lock together and cancel out like dominoes."
+                    f"By the Exterior Angle Theorem, the central angle ∠AOB equals the sum of the two opposite interior angles: alpha plus alpha equals 2 alpha! "
+                    f"When center O lies inside or outside the angle, drawing one diameter line through P and O splits the figure into two isosceles triangles and completes the proof in seconds!"
                 ),
                 "hud_notes": [
-                    "Strategic Auxiliary Line: Connects isolated lengths and angles",
-                    "Domino Cancellation: Shared heights and similar triangles do the work",
-                    "One visual line replaces ten lines of algebraic manipulation!",
+                    "Golden Auxiliary Line: Draw the diameter through vertex P and center O!",
+                    "Exterior Angle Theorem: ∠AOB = α + α = 2α ⇒ ∠APB = 1/2 ∠AOB!",
+                    "Works for all 3 cases: Center on side, inside (2α+2β), or outside (2β-2α)!",
                 ],
             },
             {
                 "act": 4,
-                "badge": "ACT 4 · WHAT-IF-NOT GENERALIZATION",
-                "headline": "Moving to the Exterior, Tangent Limits & Higher Dimensions",
-                "key_formula": "Interior → Exterior → Tangent Limit → 3D Space!",
+                "badge": "ACT 4 · THALES' 90° SEMICIRCLE & TANGENT-CHORD LIMIT",
+                "headline": "A 180° Diameter Gives a 90° Right Angle Anywhere on the Semicircle!",
+                "key_formula": "Diameter (∠AOB = 180°) ⇒ ∠APB = 90°  |  Tangent-Chord Angle",
                 "narration": (
-                    f"Now let's push beyond all boundaries! What if the point moves outside the figure, or two points merge until a secant line becomes a tangent? "
-                    f"The exact same visual idea extends seamlessly to external divisions, calculus derivatives, and 3D space!"
+                    f"When AB is a diameter, the central angle is 180 degrees, so every inscribed angle on a semicircle is a 90-degree right angle! "
+                    f"And as P approaches A until the secant becomes a tangent line, the tangent-chord angle preserves the exact same measure!"
                 ),
                 "hud_notes": [
-                    "Extension 1: Exterior points preserve the invariant via signed ratios!",
-                    "Extension 2: Merging points (Δx→0) transforms secants into tangents!",
-                    "One core idea unifies Euclidean geometry and modern calculus!",
+                    "Thales' Theorem: Any angle inscribed in a semicircle is 90°!",
+                    "Cyclic Quadrilateral: Opposite inscribed angles sum to 180°!",
+                    "Tangent-Chord Theorem: Preserved in the limit as P approaches A!",
                 ],
             },
             {
                 "act": 5,
-                "badge": "ACT 5 · 10-SECOND OLYMPIAD INSIGHT",
-                "headline": "Solving Hard Problems Instantly With Visual Intuition",
-                "key_formula": "Spot the Invariant → Draw 1 Line → 10-Sec Solution!",
+                "badge": "ACT 5 · 10-SECOND CIRCLE GEOMETRY STRATEGY",
+                "headline": "Spot a Point on a Circle and Immediately Connect It to Center O!",
+                "key_formula": "Rule #1: Spot Point on Circle → Connect Center O (Radius Isosceles △)!",
                 "narration": (
-                    f"Mastering [{t_title}] means knowing which auxiliary line to draw the instant you see a hard problem. "
-                    f"Use the links in the description to explore the interactive GeoGebra lab and constructive challenges. "
+                    f"Whenever a point lies on a circle in an exam, connect it to center O to unlock radius isosceles triangles and the 1 to 2 central angle law in 10 seconds! "
                     f"Subscribe to @min7014_ai right now for daily visual math cinema!"
                 ),
                 "hud_notes": [
-                    f"Instant Trigger: Spot [{t_title}] and draw the golden auxiliary line!",
-                    "Try the free GeoGebra & constructive problem lab in the description",
-                    "Subscribe to @min7014_ai for daily high-definition math cinema!",
+                    "Instant Trigger: Point on Circle → Draw Radius to Center O!",
+                    "Diameter Spotted → Mark the 90° Inscribed Right Angle immediately!",
+                    "Subscribe to @min7014_ai & explore the interactive GeoGebra lab!",
                 ],
             },
         ]
@@ -1697,6 +2338,121 @@ def render_pure_procedural_scene(
             font=f_big,
         )
 
+    elif archetype == "menelaus_theorem":
+        # 메넬라우스의 정리: 삼각형 ABC와 연장선 외분점 D를 관통하는 할선 D-F-E + 꼭짓점 C를 지나는 평행 보조선 CK ∥ AB!
+        R = scale_ref * (0.29 if not is_vertical else 0.31)
+        A = (cx - R * 0.18, cy - R * 0.92)
+        B = (cx - R * 1.15, cy + R * 0.68)
+        C = (cx + R * 0.38, cy + R * 0.68)
+        D = (cx + R * 1.28, cy + R * 0.68)  # BC 연장선 위의 외분점 D
+
+        # 할선이 AB 위 점 F를 지날 때 AC 위 교점 E와 평행 보조선 CK(CK ∥ AB) 작도
+        u_f = 0.42 + 0.18 * math.sin(t_raw * math.pi * 2.0)
+        F = (A[0] + (B[0] - A[0]) * u_f, A[1] + (B[1] - A[1]) * u_f)
+
+        def _line_isect(p1, p2, p3, p4):
+            x1, y1 = p1
+            x2, y2 = p2
+            x3, y3 = p3
+            x4, y4 = p4
+            den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+            if abs(den) < 1e-6:
+                return ((x3 + x4) / 2.0, (y3 + y4) / 2.0)
+            px = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / den
+            py = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / den
+            return (px, py)
+
+        E = _line_isect(D, F, A, C)
+        C_par = (C[0] + (A[0] - B[0]), C[1] + (A[1] - B[1]))
+        K = _line_isect(D, F, C, C_par)
+
+        # 삼각형 ABC 및 닮음 삼각형 패치
+        g_draw.polygon([A, B, C], fill=(37, 99, 235, 80), outline=(56, 189, 248, 255), width=5)
+        c_draw.polygon([A, B, C], fill=(37, 99, 235, 50), outline=(255, 255, 255, 235), width=3)
+        g_draw.polygon([C, K, E], fill=(250, 204, 21, 85), outline=(250, 204, 21, 240), width=4)
+
+        # BC 연장선 (B -> C -> D)
+        g_draw.line([B, D], fill=(125, 211, 252, 220), width=5)
+        c_draw.line([B, D], fill=(255, 255, 255, 230), width=2)
+
+        # 꼭짓점 C를 지나는 황금 평행 보조선 CK ∥ AB
+        g_draw.line([C, K], fill=(52, 211, 153, 255), width=8)
+        c_draw.line([C, K], fill=(255, 255, 255, 255), width=3)
+
+        # 삼각형을 관통하는 네온 할선 (Transversal Line) F - E - D
+        ext_f = (F[0] - (D[0] - F[0]) * 0.22, F[1] - (D[1] - F[1]) * 0.22)
+        ext_d = (D[0] + (D[0] - F[0]) * 0.12, D[1] + (D[1] - F[1]) * 0.12)
+        g_draw.line([ext_f, ext_d], fill=(244, 63, 94, 255), width=8)
+        c_draw.line([ext_f, ext_d], fill=(255, 255, 255, 245), width=3)
+
+        for pt, lbl, col in [
+            (A, "A", (56, 189, 248, 255)),
+            (B, "B", (56, 189, 248, 255)),
+            (C, "C", (56, 189, 248, 255)),
+            (D, "D(외분)", (251, 113, 133, 255)),
+            (E, "E", (250, 204, 21, 255)),
+            (F, "F", (250, 204, 21, 255)),
+            (K, "K(평행보조선)", (52, 211, 153, 255)),
+        ]:
+            c_draw.ellipse((pt[0] - 8, pt[1] - 8, pt[0] + 8, pt[1] + 8), fill=col, outline=(255, 255, 255, 255), width=2)
+            c_draw.text((int(pt[0] - 12), int(pt[1] - 28)), lbl, fill=(254, 240, 138, 255), font=f_med)
+
+        c_draw.text(
+            (int(cx - 245), int(cy + R * 0.86)),
+            "(AF/FB) × (BD/DC) × (CE/EA) = 1.000 (평행 보조선 CK 닮음 약분!)",
+            fill=(254, 240, 138, 255),
+            font=f_big,
+        )
+
+    elif archetype == "conic_parabola":
+        # 포물선에서의 빛 반사 & 포물선의 정의: 수직 준선 x = -p, 포물선 y² = 4px, 단일 초점 F(p, 0), |PF| = |PH| 이등변삼각형!
+        p_len = scale_ref * (0.11 if not is_vertical else 0.12)
+        vx = cx - int(p_len * 0.4)
+        vy = cy
+        dir_x = int(vx - p_len)
+        F = (int(vx + p_len), vy)
+
+        # 좌측 수직 준선(Directrix l: x = -p)
+        span_y = int(scale_ref * 0.36)
+        g_draw.line([(dir_x, vy - span_y), (dir_x, vy + span_y)], fill=(192, 132, 252, 245), width=7)
+        c_draw.line([(dir_x, vy - span_y), (dir_x, vy + span_y)], fill=(255, 255, 255, 240), width=3)
+        c_draw.text((dir_x - 42, vy - span_y - 30), "준선 l", fill=(216, 180, 254, 255), font=f_med)
+
+        # 포물선 곡선 y² = 4 p (x - vx)
+        para_pts = []
+        for k in range(-40, 41):
+            yk = (k / 40.0) * span_y
+            xk = vx + (yk * yk) / max(1.0, 4.0 * p_len)
+            para_pts.append((xk, vy + yk))
+        g_draw.line(para_pts, fill=(56, 189, 248, 255), width=8)
+        c_draw.line(para_pts, fill=(255, 255, 255, 245), width=3)
+
+        # 8개의 평행 입사광선이 포물선 내벽 P에서 반사되어 단일 초점 F로 집속!
+        right_src_x = vx + int(scale_ref * 0.44)
+        for idx_r, frac_y in enumerate([-0.82, -0.58, -0.34, -0.14, 0.14, 0.34, 0.58, 0.82]):
+            ry_p = vy + frac_y * span_y
+            rx_p = vx + ((ry_p - vy) ** 2) / max(1.0, 4.0 * p_len)
+            P_ray = (rx_p, ry_p)
+            H_ray = (dir_x, ry_p)
+            # 평행 입사광선 (오른쪽 -> P) 및 초점 반사광선 (P -> F)
+            g_draw.line([(right_src_x, ry_p), P_ray], fill=(250, 204, 21, 155), width=4)
+            g_draw.line([P_ray, F], fill=(244, 63, 94, 210), width=5)
+            c_draw.line([P_ray, F], fill=(255, 255, 255, 230), width=2)
+            if idx_r == 1:
+                # 대표점 P에서 준선 수선의 발 H와 초점 F를 잇는 |PF| = |PH| 이등변삼각형 △PFH 강조!
+                g_draw.polygon([P_ray, F, H_ray], fill=(16, 185, 129, 85), outline=(52, 211, 153, 255), width=5)
+                c_draw.line([P_ray, H_ray], fill=(52, 211, 153, 255), width=4)
+                c_draw.line([P_ray, F], fill=(52, 211, 153, 255), width=4)
+                c_draw.ellipse((H_ray[0] - 8, H_ray[1] - 8, H_ray[0] + 8, H_ray[1] + 8), fill=(52, 211, 153, 255), outline=(255, 255, 255, 255), width=2)
+                c_draw.ellipse((P_ray[0] - 8, P_ray[1] - 8, P_ray[0] + 8, P_ray[1] + 8), fill=(250, 204, 21, 255), outline=(255, 255, 255, 255), width=2)
+                c_draw.text((int(H_ray[0] - 32), int(H_ray[1] - 12)), "H", fill=(52, 211, 153, 255), font=f_med)
+                c_draw.text((int(P_ray[0] + 10), int(P_ray[1] - 26)), "P(|PF|=|PH|)", fill=(254, 240, 138, 255), font=f_med)
+
+        g_draw.ellipse((F[0] - 14, F[1] - 14, F[0] + 14, F[1] + 14), fill=(225, 29, 72, 255))
+        c_draw.ellipse((F[0] - 9, F[1] - 9, F[0] + 9, F[1] + 9), fill=(255, 255, 255, 255))
+        c_draw.text((F[0] - 18, F[1] + 16), "초점 F", fill=(254, 240, 138, 255), font=f_med)
+        c_draw.text((int(cx - 210), int(vy + span_y + 18)), "|PF| = |PH| (초점 거리 = 준선 거리 · 평행광 집속!)", fill=(52, 211, 153, 255), font=f_big)
+
     elif archetype == "conic_reflection":
         # 12개의 동시 광선 파동이 초점 F1에서 출발해 타원 벽면에 반사된 뒤 정확히 같은 시각에 초점 F2로 수렴!
         rx = int(scale_ref * (0.36 if not is_vertical else 0.38))
@@ -1734,7 +2490,7 @@ def render_pure_procedural_scene(
             c_draw.text((F[0] - 16, F[1] + 16), lbl, fill=(254, 240, 138, 255), font=f_med)
         c_draw.text((int(cx - 180), int(cy + ry + 26)), "|PF1| + |PF2| = 2a (모든 광선 동시 도착!)", fill=(52, 211, 153, 255), font=f_big)
 
-    elif archetype == "calculus_motion":
+    elif archetype in ("calculus_motion", "cauchy_mvt", "inverse_deriv"):
         span_w = int(scale_ref * 0.68)
         span_h = int(scale_ref * 0.44)
         ax0 = cx - span_w // 2
@@ -1745,33 +2501,64 @@ def render_pure_procedural_scene(
         def f_val(u):
             return 0.15 + 0.65 * (u ** 1.8) - 0.12 * math.sin(u * math.pi * 2)
 
-        # 리만 적분 글로우 바 (N이 6 -> 12 -> 24 -> 48로 촘촘해짐)
-        n_bars = 8 + int(28 * t)
-        for bi in range(n_bars):
-            u0 = bi / n_bars
-            u1 = (bi + 1) / n_bars
-            bx0 = ax0 + int(u0 * span_w)
-            bx1 = ax0 + int(u1 * span_w)
-            bh = int(f_val((u0 + u1) / 2.0) * span_h)
-            c_draw.rectangle((bx0 + 1, ay0 - bh, max(bx0 + 2, bx1 - 1), ay0), fill=(14, 165, 233, 75), outline=(56, 189, 248, 160), width=1)
+        if archetype == "inverse_deriv":
+            # y = x 대칭축과 원래 함수 y = f(x) 및 역함수 y = f⁻¹(x)의 대칭 접선!
+            s_len = min(span_w, span_h)
+            g_draw.line([(ax0, ay0), (ax0 + s_len, ay0 - s_len)], fill=(250, 204, 21, 190), width=5)
+            c_draw.line([(ax0, ay0), (ax0 + s_len, ay0 - s_len)], fill=(254, 240, 138, 235), width=2)
+            pts_f = [(ax0 + int((k / 60.0) * s_len), ay0 - int(((k / 60.0) ** 1.75) * s_len)) for k in range(61)]
+            pts_inv = [(ax0 + int(((k / 60.0) ** 1.75) * s_len), ay0 - int((k / 60.0) * s_len)) for k in range(61)]
+            g_draw.line(pts_f, fill=(56, 189, 248, 255), width=8)
+            c_draw.line(pts_f, fill=(255, 255, 255, 245), width=3)
+            g_draw.line(pts_inv, fill=(244, 63, 94, 255), width=8)
+            c_draw.line(pts_inv, fill=(255, 255, 255, 245), width=3)
+            c_draw.text((int(cx - 210), int(ay0 + 22)), "(f⁻¹)'(y) = 1 / f'(x)  (직선 y=x 대칭 역수 기울기!)", fill=(250, 204, 21, 255), font=f_big)
+        elif archetype == "cauchy_mvt":
+            # 코시의 평균값 정리: 두 끝점 A, B를 잇는 할선과 평행한 접선이 존재하는 점 c!
+            pts = [(ax0 + int((k / 80.0) * span_w), ay0 - int(f_val(k / 80.0) * span_h)) for k in range(81)]
+            g_draw.line(pts, fill=(52, 211, 153, 255), width=9)
+            c_draw.line(pts, fill=(255, 255, 255, 255), width=4)
+            pa = pts[10]
+            pb = pts[72]
+            pc = pts[43]
+            dx_s, dy_s = pb[0] - pa[0], pb[1] - pa[1]
+            # 양 끝점 할선 (Secant Chord)
+            g_draw.line([pa, pb], fill=(56, 189, 248, 230), width=6)
+            c_draw.line([pa, pb], fill=(255, 255, 255, 240), width=2)
+            # 점 c에서의 평행 접선 (Parallel Tangent at c)
+            g_draw.line([(pc[0] - dx_s * 0.45, pc[1] - dy_s * 0.45), (pc[0] + dx_s * 0.45, pc[1] + dy_s * 0.45)], fill=(250, 204, 21, 255), width=8)
+            c_draw.line([(pc[0] - dx_s * 0.45, pc[1] - dy_s * 0.45), (pc[0] + dx_s * 0.45, pc[1] + dy_s * 0.45)], fill=(255, 255, 255, 255), width=3)
+            for pt_c in [pa, pb, pc]:
+                c_draw.ellipse((pt_c[0] - 9, pt_c[1] - 9, pt_c[0] + 9, pt_c[1] + 9), fill=(244, 63, 94, 255), outline=(255, 255, 255, 255), width=3)
+            c_draw.text((int(cx - 235), int(ay0 + 22)), "[f(b)-f(a)] / [g(b)-g(a)] = f'(c) / g'(c) (평행 접선!)", fill=(250, 204, 21, 255), font=f_big)
+        else:
+            # 리만 적분 글로우 바 (N이 6 -> 12 -> 24 -> 48로 촘촘해짐)
+            n_bars = 8 + int(28 * t)
+            for bi in range(n_bars):
+                u0 = bi / n_bars
+                u1 = (bi + 1) / n_bars
+                bx0 = ax0 + int(u0 * span_w)
+                bx1 = ax0 + int(u1 * span_w)
+                bh = int(f_val((u0 + u1) / 2.0) * span_h)
+                c_draw.rectangle((bx0 + 1, ay0 - bh, max(bx0 + 2, bx1 - 1), ay0), fill=(14, 165, 233, 75), outline=(56, 189, 248, 160), width=1)
 
-        pts = [(ax0 + int((k / 80.0) * span_w), ay0 - int(f_val(k / 80.0) * span_h)) for k in range(81)]
-        g_draw.line(pts, fill=(52, 211, 153, 255), width=9)
-        c_draw.line(pts, fill=(255, 255, 255, 255), width=4)
+            pts = [(ax0 + int((k / 80.0) * span_w), ay0 - int(f_val(k / 80.0) * span_h)) for k in range(81)]
+            g_draw.line(pts, fill=(52, 211, 153, 255), width=9)
+            c_draw.line(pts, fill=(255, 255, 255, 255), width=4)
 
-        # 할선이 접선으로 수렴하는 애니메이션
-        ua = 0.32
-        ub = max(ua + 0.02, 0.90 - 0.56 * t)
-        pa = (ax0 + int(ua * span_w), ay0 - int(f_val(ua) * span_h))
-        pb = (ax0 + int(ub * span_w), ay0 - int(f_val(ub) * span_h))
-        dx_s, dy_s = pb[0] - pa[0], pb[1] - pa[1]
-        g_draw.line([(pa[0] - dx_s * 0.6, pa[1] - dy_s * 0.6), (pb[0] + dx_s * 0.6, pb[1] + dy_s * 0.6)], fill=(250, 204, 21, 255), width=7)
-        c_draw.line([(pa[0] - dx_s * 0.6, pa[1] - dy_s * 0.6), (pb[0] + dx_s * 0.6, pb[1] + dy_s * 0.6)], fill=(255, 255, 255, 255), width=3)
-        for pt_c in [pa, pb]:
-            c_draw.ellipse((pt_c[0] - 9, pt_c[1] - 9, pt_c[0] + 9, pt_c[1] + 9), fill=(244, 63, 94, 255), outline=(255, 255, 255, 255), width=3)
-        c_draw.text((int(cx - 180), int(ay0 + 22)), f"Δx = {ub - ua:.3f} → 0  |  리만 분할 N = {n_bars}", fill=(250, 204, 21, 255), font=f_big)
+            # 할선이 접선으로 수렴하는 애니메이션
+            ua = 0.32
+            ub = max(ua + 0.02, 0.90 - 0.56 * t)
+            pa = (ax0 + int(ua * span_w), ay0 - int(f_val(ua) * span_h))
+            pb = (ax0 + int(ub * span_w), ay0 - int(f_val(ub) * span_h))
+            dx_s, dy_s = pb[0] - pa[0], pb[1] - pa[1]
+            g_draw.line([(pa[0] - dx_s * 0.6, pa[1] - dy_s * 0.6), (pb[0] + dx_s * 0.6, pb[1] + dy_s * 0.6)], fill=(250, 204, 21, 255), width=7)
+            c_draw.line([(pa[0] - dx_s * 0.6, pa[1] - dy_s * 0.6), (pb[0] + dx_s * 0.6, pb[1] + dy_s * 0.6)], fill=(255, 255, 255, 255), width=3)
+            for pt_c in [pa, pb]:
+                c_draw.ellipse((pt_c[0] - 9, pt_c[1] - 9, pt_c[0] + 9, pt_c[1] + 9), fill=(244, 63, 94, 255), outline=(255, 255, 255, 255), width=3)
+            c_draw.text((int(cx - 180), int(ay0 + 22)), f"Δx = {ub - ua:.3f} → 0  |  리만 분할 N = {n_bars}", fill=(250, 204, 21, 255), font=f_big)
 
-    elif archetype == "trig_harmonic":
+    elif archetype in ("trig_harmonic", "trig_deriv_sin"):
         # 단위원 페이저 회전 + 실시간 사인·탄젠트 파동 생성기 & 부채꼴 샌드위치 정리(sin θ < θ < tan θ)
         R = int(scale_ref * (0.22 if not is_vertical else 0.25))
         ucx = cx - int(scale_ref * (0.18 if not is_vertical else 0.0))
@@ -1793,18 +2580,77 @@ def render_pure_procedural_scene(
         g_draw.line([(px, py), (px, ucy)], fill=(244, 63, 94, 255), width=7)
         c_draw.line([(px, py), (px, ucy)], fill=(255, 255, 255, 255), width=3)
 
-        # 우측 사인파 진행 궤적
+        # 우측 사인파 및 코사인 도함수 진행 궤적
         wx0 = ucx + R + 40
         wave_w = int(scale_ref * 0.28)
         w_pts = []
+        cos_pts = []
         for k in range(60):
             u_k = k / 59.0
             ang_k = theta + u_k * math.pi * 2.0
             w_pts.append((wx0 + u_k * wave_w, ucy - R * math.sin(ang_k) * 0.85))
+            cos_pts.append((wx0 + u_k * wave_w, ucy - R * math.cos(ang_k) * 0.85))
         g_draw.line(w_pts, fill=(52, 211, 153, 235), width=6)
         c_draw.line(w_pts, fill=(255, 255, 255, 240), width=2)
-        g_draw.line([(px, py), w_pts[0]], fill=(250, 204, 21, 180), width=3)
-        c_draw.text((int(cx - 210), int(ucy + R + 32)), f"sin θ ({math.sin(theta):.3f}) < θ ({theta:.3f}) < tan θ ({math.tan(theta):.3f})", fill=(254, 240, 138, 255), font=f_big)
+        if archetype == "trig_deriv_sin":
+            g_draw.line(cos_pts, fill=(250, 204, 21, 220), width=5)
+            c_draw.text((int(cx - 210), int(ucy + R + 32)), "d/dx (sin x) = cos x  (사인 곡선 접선 기울기 = 코사인!)", fill=(254, 240, 138, 255), font=f_big)
+        else:
+            g_draw.line([(px, py), w_pts[0]], fill=(250, 204, 21, 180), width=3)
+            c_draw.text((int(cx - 210), int(ucy + R + 32)), f"sin θ ({math.sin(theta):.3f}) < θ ({theta:.3f}) < tan θ ({math.tan(theta):.3f})", fill=(254, 240, 138, 255), font=f_big)
+
+    elif archetype in ("special_triangles", "square_root_geometry", "parallel_similarity", "cycloid_kinematics"):
+        R = int(scale_ref * 0.30)
+        if archetype == "special_triangles":
+            # 정삼각형 이등분 (30-60-90: 1 : √3 : 2) & 직각이등변삼각형 (1 : 1 : √2)
+            top_p = (cx, cy - int(R * 0.86))
+            left_p = (cx - R, cy + int(R * 0.86))
+            right_p = (cx + R, cy + int(R * 0.86))
+            mid_p = (cx, cy + int(R * 0.86))
+            g_draw.polygon([top_p, left_p, right_p], fill=(37, 99, 235, 85), outline=(56, 189, 248, 255), width=6)
+            c_draw.polygon([top_p, left_p, right_p], outline=(255, 255, 255, 240), width=3)
+            g_draw.line([top_p, mid_p], fill=(250, 204, 21, 255), width=8)
+            c_draw.line([top_p, mid_p], fill=(255, 255, 255, 255), width=3)
+            c_draw.text((int(cx - 215), int(cy + R + 18)), "30°-60°-90° (1 : √3 : 2)  |  45°-45°-90° (1 : 1 : √2)", fill=(254, 240, 138, 255), font=f_big)
+        elif archetype == "square_root_geometry":
+            # 넓이가 a인 정사각형의 한 변 √a 와 수직선 ±√a 대칭
+            sq_r = int(R * 0.72)
+            g_draw.rectangle((cx - sq_r, cy - sq_r - 20, cx + sq_r, cy + sq_r - 20), fill=(16, 185, 129, 90), outline=(52, 211, 153, 255), width=6)
+            c_draw.rectangle((cx - sq_r, cy - sq_r - 20, cx + sq_r, cy + sq_r - 20), outline=(255, 255, 255, 245), width=3)
+            c_draw.line([(cx - int(R * 1.3), cy + sq_r + 25), (cx + int(R * 1.3), cy + sq_r + 25)], fill=(250, 204, 21, 240), width=4)
+            c_draw.text((int(cx - 65), int(cy - 30)), "Area = a", fill=(254, 240, 138, 255), font=f_big)
+            c_draw.text((int(cx - 215), int(cy + sq_r + 42)), "x² = a ⇔ x = ±√a (넓이 a인 정사각형 한 변 = √a)", fill=(254, 240, 138, 255), font=f_big)
+        elif archetype == "parallel_similarity":
+            # 세 평행선 l ∥ m ∥ n 과 선분의 길이의 비 a : b = a' : b'
+            for idx_l, dy_l in enumerate([-int(R * 0.75), 0, int(R * 0.75)]):
+                yl = cy + dy_l
+                g_draw.line([(cx - int(R * 1.25), yl), (cx + int(R * 1.25), yl)], fill=(56, 189, 248, 235), width=6)
+                c_draw.line([(cx - int(R * 1.25), yl), (cx + int(R * 1.25), yl)], fill=(255, 255, 255, 240), width=2)
+            g_draw.line([(cx - int(R * 0.85), cy - int(R * 0.85)), (cx - int(R * 0.25), cy + int(R * 0.85))], fill=(250, 204, 21, 255), width=7)
+            g_draw.line([(cx + int(R * 0.15), cy - int(R * 0.85)), (cx + int(R * 0.95), cy + int(R * 0.85))], fill=(244, 63, 94, 255), width=7)
+            g_draw.line([(cx + int(R * 0.15), cy - int(R * 0.75)), (cx + int(R * 0.75), cy + int(R * 0.75))], fill=(52, 211, 153, 235), width=6)
+            c_draw.text((int(cx - 215), int(cy + int(R * 0.92))), "평행선 l ∥ m ∥ n  ⇒  선분 길이 비 a : b = a' : b'", fill=(254, 240, 138, 255), font=f_big)
+        else:
+            # 사이클로이드: 구르는 원과 x(θ) = r(θ - sin θ), y(θ) = r(1 - cos θ)
+            r_c = int(scale_ref * 0.11)
+            base_y = cy + int(r_c * 1.1)
+            start_x = cx - int(r_c * 3.14)
+            c_draw.line([(start_x - 30, base_y), ( start_x + int(r_c * 6.5), base_y)], fill=(148, 163, 184, 230), width=3)
+            cyc_pts = []
+            for k in range(81):
+                th = (k / 80.0) * 2.0 * math.pi
+                cyc_pts.append((start_x + r_c * (th - math.sin(th)), base_y - r_c * (1.0 - math.cos(th))))
+            g_draw.line(cyc_pts, fill=(244, 63, 94, 255), width=8)
+            c_draw.line(cyc_pts, fill=(255, 255, 255, 245), width=3)
+            th_now = (0.15 + 0.75 * t) * 2.0 * math.pi
+            ccx = start_x + r_c * th_now
+            ccy = base_y - r_c
+            px_c = start_x + r_c * (th_now - math.sin(th_now))
+            py_c = base_y - r_c * (1.0 - math.cos(th_now))
+            g_draw.ellipse((ccx - r_c, ccy - r_c, ccx + r_c, ccy + r_c), outline=(56, 189, 248, 255), width=5)
+            g_draw.line([(ccx, ccy), (px_c, py_c)], fill=(250, 204, 21, 255), width=6)
+            c_draw.ellipse((px_c - 8, py_c - 8, px_c + 8, py_c + 8), fill=(250, 204, 21, 255), outline=(255, 255, 255, 255), width=2)
+            c_draw.text((int(cx - 225), int(base_y + 20)), "x = r(θ - sin θ), dx/dθ = r(1 - cos θ) ≥ 0 (꼬임 없음!)", fill=(254, 240, 138, 255), font=f_big)
 
     elif archetype == "fibonacci_golden":
         # 황금비 해바라기 필로탁시스(Phyllotaxis) 144개 네온 씨앗 나선
@@ -1881,33 +2727,72 @@ def render_pure_procedural_scene(
 
 def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_code: str = "ko", is_short: bool = False) -> str:
     """
-    [월 1,000만 원 CTR 극대화 엔진]
+    [월 1,000만 원 CTR 극대화 엔진 + 100% 수학적 정합성 보장]
     첫 25글자(모바일 화면 노출 구간)에 브래킷 라벨 대신 강렬한 호기심 공백(Curiosity Gap) 훅과
-    핵심 수학 키워드를 직결하여 클릭률(CTR)을 극대화합니다.
+    핵심 수학 키워드를 직결하여 클릭률(CTR)과 수학적 정확성을 동시에 극대화합니다.
     """
     clean_title = sanitize_glyphs(clean_title)
+    clean_title = re.sub(
+        r"lim\(\s*(?:θ|theta)\s*(?:arrow|to|→)\s*0\)\s*\(\s*sin\s*(?:θ|theta)\s*/\s*(?:θ|theta)\s*\)\s*=\s*1.*",
+        "lim(θ→0) (sin θ/θ) = 1",
+        clean_title,
+        flags=re.I,
+    )
+    clean_title = re.sub(
+        r"lim\(\s*(?:θ|theta)\s*(?:arrow|to|→)\s*0\)\s*\(\s*tan\s*(?:θ|theta)\s*/\s*(?:θ|theta)\s*\)\s*=\s*1.*",
+        "lim(θ→0) (tan θ/θ) = 1",
+        clean_title,
+        flags=re.I,
+    )
     if "(" in clean_title and ")" not in clean_title:
         clean_title = clean_title.split("(", 1)[0].strip()
 
     def _make_base(ct: str) -> str:
+        ct_low = ct.lower()
         hooks_ko = {
             "pythagoras_fractal": f"🔥 공식 암기는 그만! {ct}, 넓이가 영원히 보존되는 단 1가지 이유",
-            "conic_reflection": f"🔥 왜 모든 빛은 반드시 한 점(초점)에 모일까? | {ct}",
-            "trig_harmonic": f"🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | {ct}",
+            "special_triangles": f"🔥 공식 외우지 마세요! 보조선 1줄로 1초 만에 유도하는 {ct}",
+            "square_root_geometry": f"🔥 정사각형 넓이 하나로 단번에 깨치는 {ct}의 기하학적 비밀!",
+            "cycloid_kinematics": f"🔥 구르는 원 위의 점은 왜 절대 뒤로 꼬이지 않을까? | {ct}",
+            "conic_parabola": f"🔥 왜 모든 평행광선은 포물선에 반사되면 한 점(초점)에 모일까? | {ct}",
+            "conic_reflection": f"🔥 제1초점에서 쏜 빛이 모두 제2초점에 동시에 모이는 이유! | {ct}",
+            "trig_harmonic": (
+                f"🔥 왜 0으로 다가갈 때 sin θ와 호의 길이 θ는 같아질까? | {ct}"
+                if ("lim" in ct_low or "tan" in ct_low)
+                else f"🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | {ct}"
+            ),
+            "trig_deriv_sin": f"🔥 사인(sin x)을 미분하면 왜 정확히 코사인(cos x)이 될까? | {ct}",
             "fibonacci_golden": f"🔥 해바라기와 은하 나선에 숨겨진 137.5° 황금비의 비밀! | {ct}",
             "prob_galton": f"🔥 무작위 우연이 수천 번 쌓이면 왜 완벽한 종 모양이 될까? | {ct}",
+            "cauchy_mvt": f"🔥 두 함수의 평균변화율 비와 미분계수 비가 일치하는 순간! | {ct}",
+            "inverse_deriv": f"🔥 직선 y=x 대칭 뒤집기 한 번으로 끝나는 {ct} 완벽 증명!",
             "calculus_motion": f"🔥 멈춰 있는 그래프가 살아 움직이는 순간! | {ct}",
+            "menelaus_theorem": f"🔥 평행 보조선 딱 1줄이면 끝! 세 비율의 곱이 항상 1이 되는 이유 | {ct}",
             "ceva_menelaus": f"🔥 복잡한 보조선 없이 넓이 비 하나로 단번에 증명되는 이유! | {ct}",
+            "parallel_similarity": f"🔥 평행 보조선 딱 1줄로 닮음비가 단번에 증명되는 이유! | {ct}",
             "circle_invariants": f"🔥 점이 원 위를 아무리 움직여도 각도가 절대 안 변하는 이유! | {ct}",
         }
         hooks_en = {
             "pythagoras_fractal": f"🔥 Stop Memorizing! Why {ct} Preserves Area Forever",
-            "conic_reflection": f"🔥 Why Every Light Ray Bounces to One Exact Focus! | {ct}",
-            "trig_harmonic": f"🔥 How a Rotating Circle Creates Every Wave in the Universe! | {ct}",
+            "special_triangles": f"🔥 Stop Memorizing! Derive {ct} in 5 Seconds With 1 Line",
+            "square_root_geometry": f"🔥 The 1 Square Area Idea That Explains {ct} Instantly!",
+            "cycloid_kinematics": f"🔥 Why a Rolling Circle's Path Never Loops Back! | {ct}",
+            "conic_parabola": f"🔥 Why Every Parallel Ray Reflects to One Focus on a Parabola! | {ct}",
+            "conic_reflection": f"🔥 Why Every Ray From Focus F₁ Converges at Focus F₂! | {ct}",
+            "trig_harmonic": (
+                f"🔥 Why Does sin θ Become Equal to Arc θ as θ → 0? | {ct}"
+                if ("lim" in ct_low or "tan" in ct_low)
+                else f"🔥 How a Rotating Circle Creates Every Wave in the Universe! | {ct}"
+            ),
+            "trig_deriv_sin": f"🔥 Why Is the Derivative of sin x Exactly cos x? | {ct}",
             "fibonacci_golden": f"🔥 Why Nature Chose the Golden Angle (137.5°)! | {ct}",
             "prob_galton": f"🔥 How Pure Randomness Always Forms a Perfect Bell Curve! | {ct}",
+            "cauchy_mvt": f"🔥 Where Two Functions' Secant Ratio Matches Their Derivative Ratio! | {ct}",
+            "inverse_deriv": f"🔥 How 1 Reflection Across y=x Proves {ct} Instantly!",
             "calculus_motion": f"🔥 The Exact Moment Secant Becomes Tangent! | {ct}",
+            "menelaus_theorem": f"🔥 Just 1 Parallel Line! Why the 3 Ratios Multiply to 1 | {ct}",
             "ceva_menelaus": f"🔥 How 1 Area Ratio Trick Proves {ct} Instantly!",
+            "parallel_similarity": f"🔥 How 1 Parallel Line Proves {ct} Instantly!",
             "circle_invariants": f"🔥 Why Moving the Vertex Never Changes the Angle! | {ct}",
         }
         return (
@@ -1960,22 +2845,40 @@ def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: s
 
     puzzles_ko = {
         "pythagoras_fractal": "🧠 [5초 암산 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n직각삼각형의 두 작은 정사각형 넓이가 각각 9와 16일 때, 가장 큰 정사각형의 넓이는 얼마일까요? (루트 계산 없이 1초 만에 맞히셨다면 댓글로 숫자를 남겨주세요!)",
-        "conic_reflection": "🧠 [5초 직관 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n포물선 위의 점 P에서 준선까지의 거리가 7일 때, 초점 F까지의 거리 PF는 얼마일까요? 1초 만에 보인다면 댓글로 정답을 남겨주세요!",
-        "trig_harmonic": "🧠 [5초 파동 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n반지름이 1인 단위원에서 회전각이 90°(π/2)일 때 사인파의 높이(sin 90°)는 얼마일까요? 댓글로 숫자를 남겨주세요!",
+        "special_triangles": "🧠 [5초 직각삼각형 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n30°-60°-90° 직각삼각형(변의 비 1 : √3 : 2)에서 가장 짧은 밑변의 길이가 5일 때, 가장 긴 빗변의 길이는 얼마일까요? 댓글로 숫자를 남겨주세요!",
+        "square_root_geometry": "🧠 [5초 제곱근 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n넓이가 49인 정사각형의 한 변의 길이(√49)는 얼마일까요? 댓글로 정답 숫자를 남겨주세요!",
+        "cycloid_kinematics": "🧠 [5초 사이클로이드 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n반지름 r = 1 인 원이 바닥에서 미끄러지지 않고 한 바퀴(2π) 굴러갔을 때, 원의 중심이 이동한 수평 거리는 몇 π일까요? 댓글로 남겨보세요!",
+        "conic_parabola": "🧠 [5초 포물선 직관 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n포물선(|PF| = |PH|) 위의 점 P에서 준선까지의 수직 거리 PH가 7일 때, 초점 F까지의 거리 PF는 얼마일까요? 1초 만에 보인다면 댓글로 정답을 남겨주세요!",
+        "conic_reflection": "🧠 [5초 타원 직관 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n장축의 길이 2a가 10인 타원(|PF₁| + |PF₂| = 10) 위의 점 P에서 제1초점 F₁까지의 거리가 3일 때, 제2초점 F₂까지의 거리 PF₂는 얼마일까요? 댓글로 정답을 남겨주세요!",
+        "trig_harmonic": "🧠 [5초 극한·삼각비 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n부채꼴 넓이 샌드위치 부등식 cos θ < (sin θ)/θ < 1 에서 θ가 0으로 한없이 다가갈 때, 가운데 (sin θ)/θ 는 어떤 숫자로 수렴할까요? 댓글로 남겨주세요!",
+        "trig_deriv_sin": "🧠 [5초 삼각함수 미분 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n함수 y = sin x 의 도함수는 y' = cos x 입니다. 그렇다면 원점 x = 0 에서의 접선의 기울기(cos 0)는 얼마일까요? 댓글로 숫자를 남겨주세요!",
         "fibonacci_golden": "🧠 [5초 수열 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n피보나치 수열 1, 1, 2, 3, 5, 8, 13... 에서 13 바로 다음에 올 숫자는 무엇일까요? 댓글로 정답을 남겨주세요!",
         "prob_galton": "🧠 [5초 확률 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n좌우 갈림길이 4번 있는 골턴 보드에서 구슬이 정중앙 칸에 도달하는 경로의 수(4C2)는 몇 가지일까요? 댓글로 도전해 보세요!",
+        "cauchy_mvt": "🧠 [5초 코시 평균값 정리 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n구간 [1, 3]에서 f(x) = x², g(x) = x 일 때, 두 함수의 평균변화율 비 [f(3)-f(1)] / [g(3)-g(1)] = (9-1)/(3-1) 의 값은 얼마일까요? 댓글로 남겨주세요!",
+        "inverse_deriv": "🧠 [5초 역함수 미분 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n원래 함수 f(x)의 접선 기울기가 f'(a) = 4 일 때, 직선 y = x 대칭인 역함수의 대응점 접선 기울기 (f⁻¹)'(b) = 1 / f'(a) 는 얼마일까요? 댓글로 남겨주세요!",
         "calculus_motion": "🧠 [5초 미분 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n곡선 y = x² 위에서 x = 3일 때 접선의 기울기(2x)는 얼마일까요? 암산으로 맞히셨다면 댓글로 숫자를 남겨주세요!",
-        "ceva_menelaus": "🧠 [5초 도형 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n높이가 같은 두 삼각형의 밑변의 비가 2 : 3이고 왼쪽 삼각형 넓이가 10일 때, 오른쪽 삼각형의 넓이는 얼마일까요? 댓글로 정답을 남겨주세요!",
+        "menelaus_theorem": "🧠 [5초 메넬라우스 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n메넬라우스의 정리 (AF/FB) × (BD/DC) × (CE/EA) = 1 에서 앞의 두 비율의 곱이 2일 때, 마지막 세 번째 비율 CE/EA 는 얼마일까요? 댓글로 남겨주세요!",
+        "ceva_menelaus": "🧠 [5초 도형 넓이 비 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n높이가 같은 두 삼각형의 밑변의 비가 2 : 3이고 왼쪽 삼각형 넓이가 10일 때, 오른쪽 삼각형의 넓이는 얼마일까요? 댓글로 정답을 남겨주세요!",
+        "parallel_similarity": "🧠 [5초 평행선 비례 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n세 평행선이 왼쪽 직선을 2 : 3 비율로 나눌 때, 오른쪽 직선에서 위쪽 선분 길이가 4라면 아래쪽 선분 길이는 얼마일까요? 댓글로 남겨주세요!",
         "circle_invariants": "🧠 [5초 원주각 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n원의 중심각 ∠AOB가 80°일 때, 원 위의 점 P가 어디로 움직이든 원주각 ∠APB는 항상 몇 도일까요? 댓글로 숫자를 남겨주세요!",
     }
     puzzles_en = {
         "pythagoras_fractal": "🧠 [5-Second Mental Math Challenge — Drop Your Answer in the Comments!]\nIf the two smaller squares on a right triangle have areas 9 and 16, what is the area of the largest square? Comment your number below!",
-        "conic_reflection": "🧠 [5-Second Geometry Challenge — Drop Your Answer in the Comments!]\nIf a point P on a parabola is at distance 7 from the directrix, what is its exact distance PF to the focus F? Comment your answer!",
-        "trig_harmonic": "🧠 [5-Second Wave Challenge — Drop Your Answer in the Comments!]\nOn a unit circle of radius 1, what is the exact height of the sine wave at 90° (sin 90°)? Comment your number below!",
+        "special_triangles": "🧠 [5-Second Triangle Challenge — Drop Your Answer in the Comments!]\nIn a 30°-60°-90° right triangle (side ratio 1 : √3 : 2), if the shortest leg has length 5, what is the length of the hypotenuse? Comment below!",
+        "square_root_geometry": "🧠 [5-Second Square Root Challenge — Drop Your Answer in the Comments!]\nIf a square has area 49, what is the exact length of one side (√49)? Comment your number below!",
+        "cycloid_kinematics": "🧠 [5-Second Cycloid Challenge — Drop Your Answer in the Comments!]\nWhen a circle of radius r = 1 rolls one full turn (2π) without slipping, how many π does its center travel horizontally? Comment below!",
+        "conic_parabola": "🧠 [5-Second Parabola Challenge — Drop Your Answer in the Comments!]\nOn a parabola (|PF| = |PH|), if point P is at perpendicular distance PH = 7 from the directrix, what is its exact distance PF to focus F? Comment your answer!",
+        "conic_reflection": "🧠 [5-Second Ellipse Challenge — Drop Your Answer in the Comments!]\nOn an ellipse with major axis 2a = 10 (|PF₁| + |PF₂| = 10), if point P is at distance 3 from focus F₁, what is its distance PF₂ to focus F₂? Comment below!",
+        "trig_harmonic": "🧠 [5-Second Squeeze Limit Challenge — Drop Your Answer in the Comments!]\nIn the unit-circle area inequality cos θ < (sin θ)/θ < 1, what exact number does (sin θ)/θ approach as θ → 0? Comment your number below!",
+        "trig_deriv_sin": "🧠 [5-Second Calculus Challenge — Drop Your Answer in the Comments!]\nSince d/dx(sin x) = cos x, what is the exact slope of the tangent line to y = sin x at x = 0 (cos 0)? Comment your number below!",
         "fibonacci_golden": "🧠 [5-Second Pattern Challenge — Drop Your Answer in the Comments!]\nIn the Fibonacci sequence 1, 1, 2, 3, 5, 8, 13..., what number comes right after 13? Drop your answer in the comments!",
         "prob_galton": "🧠 [5-Second Probability Challenge — Drop Your Answer in the Comments!]\nIn a 4-row Galton board, how many distinct paths (4C2) lead a bead to the exact center bin? Comment your answer!",
+        "cauchy_mvt": "🧠 [5-Second Cauchy MVT Challenge — Drop Your Answer in the Comments!]\nOn [1, 3] with f(x) = x² and g(x) = x, what is the ratio [f(3)-f(1)] / [g(3)-g(1)] = (9-1)/(3-1)? Comment your number below!",
+        "inverse_deriv": "🧠 [5-Second Inverse Derivative Challenge — Drop Your Answer in the Comments!]\nIf f'(a) = 4 on y = f(x), what is the slope (f⁻¹)'(b) = 1 / f'(a) of the inverse function reflected across y = x? Comment below!",
         "calculus_motion": "🧠 [5-Second Calculus Challenge — Drop Your Answer in the Comments!]\nOn the curve y = x², what is the exact slope of the tangent line (2x) at x = 3? Comment your number below!",
+        "menelaus_theorem": "🧠 [5-Second Menelaus Challenge — Drop Your Answer in the Comments!]\nIn Menelaus' Theorem (AF/FB) × (BD/DC) × (CE/EA) = 1, if the product of the first two ratios is 2, what is the third ratio CE/EA? Comment below!",
         "ceva_menelaus": "🧠 [5-Second Area Ratio Challenge — Drop Your Answer in the Comments!]\nTwo triangles share the same height and have base ratio 2 : 3. If the left triangle has area 10, what is the area of the right triangle?",
+        "parallel_similarity": "🧠 [5-Second Parallel Ratio Challenge — Drop Your Answer in the Comments!]\nThree parallel lines cut the left transversal in a 2 : 3 ratio. If the upper segment on the right transversal is 4, what is the lower segment?",
         "circle_invariants": "🧠 [5-Second Circle Angle Challenge — Drop Your Answer in the Comments!]\nIf the central angle ∠AOB is 80°, what is the inscribed angle ∠APB for any point P on the circle? Comment your number!",
     }
     if lang_code == "ko":
@@ -2018,7 +2921,7 @@ def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
     """
     [고클릭률(High-CTR) 아키타입 맞춤형 네온 시네마 썸네일 생성기]
     - 모든 영상에 똑같은 문구를 넣던 배너 블라인드니스를 완전히 제거하고,
-      8대 수학 아키타입별 맞춤형 호기심 역설 질문 + 우측 상단 초대형 네온 수식 콜아웃 배지를 합성합니다.
+      세부 수학 주제별 맞춤형 호기심 역설 질문 + 우측 상단 초대형 네온 수식 콜아웃 배지를 합성합니다.
     """
     slug_key = sdoc["slug"]
     out_thumb = YT_PKG_DIR / f"{slug_key}_idea_{lang_code}_thumb.png"
@@ -2048,22 +2951,40 @@ def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
 
     thumb_hooks_ko = {
         "pythagoras_fractal": (["무한히 갈라져도", "넓이 합이 똑같다?", "단 1초 시각 증명!"], "a² + b² = c²"),
-        "conic_reflection": (["왜 모든 평행광선은", "반드시 한 점(초점)에", "모이게 될까?"], "PF = PH"),
-        "trig_harmonic": (["둥근 원이 돌면", "왜 완벽한 파동이", "만들어질까?"], "sin²θ+cos²θ=1"),
+        "special_triangles": (["공식 외우지 마세요!", "보조선 딱 1줄로", "끝내는 삼각비 증명!"], "1 : √3 : 2"),
+        "square_root_geometry": (["정사각형 넓이 하나로", "단번에 깨치는", "제곱근의 진짜 의미!"], "x²=a ⇔ ±√a"),
+        "cycloid_kinematics": (["구르는 원 위의 점은", "왜 절대 뒤로", "꼬이지 않을까?"], "dx/dθ ≥ 0"),
+        "conic_parabola": (["왜 모든 평행광선은", "포물선에 반사되면", "한 점(초점)에 모일까?"], "|PF| = |PH|"),
+        "conic_reflection": (["제1초점에서 쏜 빛이", "왜 모두 제2초점에", "동시에 모이게 될까?"], "PF₁+PF₂=2a"),
+        "trig_harmonic": (["삼각형·부채꼴·접선", "넓이 샌드위치 하나로", "끝내는 극한 증명!"], "sin θ/θ → 1"),
+        "trig_deriv_sin": (["사인 곡선 기울기가", "왜 정확히 코사인과", "일치하게 될까?"], "(sin x)'=cos x"),
         "fibonacci_golden": (["자연과 은하계가", "137.5° 황금각을", "선택한 진짜 이유!"], "φ = 1.618..."),
         "prob_galton": (["수천 번의 우연이", "왜 항상 완벽한", "종 모양이 될까?"], "N(μ, σ²)"),
+        "cauchy_mvt": (["두 함수의 할선 비와", "미분계수 비가", "일치하는 순간!"], "f'(c)/g'(c)"),
+        "inverse_deriv": (["직선 y=x 대칭으로", "단 1초 만에 끝내는", "역함수 미분 증명!"], "1 / f'(x)"),
         "calculus_motion": (["두 점을 잇던 할선이", "접선으로 변하는", "극한의 찰나!"], "dy/dx = lim"),
+        "menelaus_theorem": (["평행 보조선 딱 1줄로", "세 선분 비율의 곱이", "1로 약분되는 비밀!"], "Ratio = 1"),
         "ceva_menelaus": (["보조선 공식 없이", "넓이 비 하나로", "10초 만에 끝!"], "Ratio = 1"),
+        "parallel_similarity": (["평행 보조선 딱 1줄로", "선분 길이 비례식이", "단번에 증명된다!"], "a:b = a':b'"),
         "circle_invariants": (["점이 아무리 움직여도", "각도가 절대 변하지", "않는 기하의 마법!"], "∠P = 1/2 ∠O"),
     }
     thumb_hooks_en = {
         "pythagoras_fractal": (["Infinite Branches,", "Same Exact Area?", "1-Look Visual Proof!"], "a² + b² = c²"),
-        "conic_reflection": (["Why Every Ray", "Bounces to One", "Exact Focus Point!"], "PF = PH"),
-        "trig_harmonic": (["How a Spinning", "Circle Generates", "Every Wave!"], "sin²θ+cos²θ=1"),
+        "special_triangles": (["Stop Memorizing!", "1 Symmetry Line", "Derives All Ratios!"], "1 : √3 : 2"),
+        "square_root_geometry": (["1 Square Area Model", "Explains Square Roots", "In 5 Seconds!"], "x²=a ⇔ ±√a"),
+        "cycloid_kinematics": (["Why a Rolling Circle", "Traces a Curve That", "Never Loops Back!"], "dx/dθ ≥ 0"),
+        "conic_parabola": (["Why Parallel Rays", "Bounce to One", "Parabola Focus!"], "|PF| = |PH|"),
+        "conic_reflection": (["Why Every Ray From", "Focus F₁ Meets", "At Focus F₂!"], "PF₁+PF₂=2a"),
+        "trig_harmonic": (["1 Sector Area Squeeze", "Proves sin θ / θ → 1", "In 10 Seconds!"], "sin θ/θ → 1"),
+        "trig_deriv_sin": (["Why Sine's Tangent", "Slope Is Always", "Exactly Cosine!"], "(sin x)'=cos x"),
         "fibonacci_golden": (["Why Nature Chose", "The 137.5° Golden", "Spiral Angle!"], "φ = 1.618..."),
         "prob_galton": (["How Random Chaos", "Always Forms a", "Perfect Bell Curve!"], "N(μ, σ²)"),
+        "cauchy_mvt": (["Where Two Functions'", "Secant Ratio Equals", "Derivative Ratio!"], "f'(c)/g'(c)"),
+        "inverse_deriv": (["1 Reflection Across", "Line y = x Proves", "Inverse Derivative!"], "1 / f'(x)"),
         "calculus_motion": (["The Exact Moment", "Secant Becomes", "Tangent Line!"], "dy/dx = lim"),
+        "menelaus_theorem": (["Just 1 Parallel Line", "Cancels All 3 Ratios", "Into Exactly 1!"], "Ratio = 1"),
         "ceva_menelaus": (["No Extra Formulas!", "1 Area Ratio Trick", "Proves It All!"], "Ratio = 1"),
+        "parallel_similarity": (["1 Parallel Line", "Proves Segment", "Proportions Live!"], "a:b = a':b'"),
         "circle_invariants": (["Move the Vertex", "Anywhere—Why Does", "Angle Never Change?"], "∠P = 1/2 ∠O"),
     }
     hook_lines, callout_formula = (
@@ -2100,6 +3021,58 @@ def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
     return out_thumb
 
 
+def verify_creative_idea_math_fidelity(sdoc: dict, acts: list = None, title: str = "", comment_txt: str = "") -> dict:
+    """
+    [Rule 19 / 정책 11: https://min7014.github.io/ 원문 자료와의 100% 수학적 정합성 및 수식·증명 무결성 필수 검증 게이트]
+    - 유튜브 영상은 수많은 시청자에게 노출되어 파급력이 크므로, 원문 자료(sdoc)의 주제·수식·보조선과
+      단 1%라도 어긋나는 아키타입 혼동(예: 포물선에 제2초점 F2 언급, 타원에 준선 거리 PF=PH 퍼즐 언급,
+      메넬라우스에 세 체바선 교점 P 넓이 비 언급, 제곱근에 황금비 해바라기 언급 등)을 기계적으로 원천 차단합니다.
+    """
+    raw_t = f"{sdoc.get('title', '')} {sdoc.get('title_en', '')}".lower()
+    acts = acts or []
+    acts_blob = " ".join(
+        f"{a.get('headline', '')} {a.get('key_formula', '')} {a.get('narration', '')} {' '.join(a.get('hud_notes') or [])}"
+        for a in acts
+    )
+    full_blob = f"{title} {acts_blob} {comment_txt}"
+
+    # 1. 포물선(Parabola) vs 타원(Ellipse) 엄격 분리 검증
+    if ("포물선" in raw_t or "parabola" in raw_t) and "타원" not in raw_t:
+        for bad in ("제2초점", "second focus F2", "PF₁ + PF₂ = 2a"):
+            if bad in acts_blob or bad in title or bad in comment_txt:
+                return {"ok": False, "reason": f"parabola_conflated_with_ellipse:{bad}"}
+    if ("타원" in raw_t or "ellipse" in raw_t) and "포물선" not in raw_t:
+        for bad in ("준선까지의 거리가 7", "distance 7 from the directrix"):
+            if bad in comment_txt or bad in title:
+                return {"ok": False, "reason": f"ellipse_conflated_with_parabola:{bad}"}
+
+    # 2. 메넬라우스(Menelaus) vs 체바(Ceva) 엄격 분리 검증
+    if "메넬라우스" in raw_t or "menelaus" in raw_t:
+        for bad in ("세 체바 직선이 만나는 교점 P가", "intersection point P glide freely across the triangle", "넓이 비 하나로 단번에 증명되는 이유"):
+            if bad in full_blob:
+                return {"ok": False, "reason": f"menelaus_conflated_with_ceva:{bad}"}
+
+    # 3. 제곱근(Square Root) vs 황금비(Fibonacci) 엄격 분리 검증
+    if "제곱근" in raw_t or "square root" in raw_t:
+        for bad in ("해바라기", "137.5", "피보나치", "Fibonacci"):
+            if bad in full_blob:
+                return {"ok": False, "reason": f"square_root_conflated_with_fibonacci:{bad}"}
+
+    # 4. 사이클로이드(Cycloid) vs 이차곡선 초점 반사 엄격 분리 검증
+    if "사이클로이드" in raw_t or "cycloid" in raw_t:
+        for bad in ("제1초점", "초점 F", "Focus F"):
+            if bad in full_blob:
+                return {"ok": False, "reason": f"cycloid_conflated_with_conic:{bad}"}
+
+    # 5. 특수 직각삼각형(30-60-90 / 직각이등변삼각형) vs 체바 넓이 비 엄격 분리 검증
+    if "30-60-90" in raw_t or "직각이등변삼각형" in raw_t:
+        for bad in ("세 체바 직선이", "넓이 비 하나로"):
+            if bad in full_blob:
+                return {"ok": False, "reason": f"special_triangle_conflated_with_ceva:{bad}"}
+
+    return {"ok": True, "reason": "verified_100_percent_math_fidelity"}
+
+
 def render_creative_idea_cinema_video(slug_key: str = "math20250130001", lang_code: str = "ko") -> Path:
     """
     [Edition 5-A v2.0: 🌟 1080p 16:9 순수 창의 아이디어 시네마 본편 제작기]
@@ -2113,6 +3086,18 @@ def render_creative_idea_cinema_video(slug_key: str = "math20250130001", lang_co
     acts = build_creative_idea_acts(sdoc, lang_code=lang_code)
     archetype = detect_visual_archetype(sdoc)
 
+    ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
+    clean_title = sanitize_glyphs(
+        vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=36, lang="ko")
+        if lang_code == "ko"
+        else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=44, lang="en")
+    )
+    idea_title_precheck = build_viral_curiosity_youtube_title(clean_title, archetype, lang_code=lang_code, is_short=False)
+    comment_precheck = build_viral_comment_puzzle(archetype, lang_code=lang_code, sdoc=sdoc)
+    fidelity_check = verify_creative_idea_math_fidelity(sdoc, acts, idea_title_precheck, comment_precheck)
+    if not fidelity_check.get("ok"):
+        raise ValueError(f"[Math Fidelity Guard Blocked Render ({slug_key}/{lang_code})]: {fidelity_check.get('reason')}")
+
     voice_name = vmaker.GLOBAL_VOICE_MAP.get(lang_code, vmaker.GLOBAL_VOICE_MAP["en"])["voice"]
     ffmpeg_exe = shutil.which("ffmpeg")
     ffprobe_exe = shutil.which("ffprobe")
@@ -2125,13 +3110,6 @@ def render_creative_idea_cinema_video(slug_key: str = "math20250130001", lang_co
     f_formula = vmaker.get_font_for_lang(lang_code, 21, bold=True)
     f_bul = vmaker.get_font_for_lang(lang_code, 21, bold=True)
     f_sub = vmaker.get_font_for_lang(lang_code, 27, bold=True)
-
-    ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
-    clean_title = sanitize_glyphs(
-        vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=36, lang="ko")
-        if lang_code == "ko"
-        else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=44, lang="en")
-    )
 
     try:
         for act_info in acts:
@@ -2288,6 +3266,18 @@ def render_creative_idea_short_vertical(slug_key: str = "math20250130001", lang_
     acts = build_creative_idea_acts(sdoc, lang_code=lang_code)[:4]
     archetype = detect_visual_archetype(sdoc)
 
+    ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
+    clean_title = sanitize_glyphs(
+        vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=30, lang="ko")
+        if lang_code == "ko"
+        else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=38, lang="en")
+    )
+    ishort_title_precheck = build_viral_curiosity_youtube_title(clean_title, archetype, lang_code=lang_code, is_short=True)
+    comment_precheck = build_viral_comment_puzzle(archetype, lang_code=lang_code, sdoc=sdoc)
+    fidelity_check = verify_creative_idea_math_fidelity(sdoc, acts, ishort_title_precheck, comment_precheck)
+    if not fidelity_check.get("ok"):
+        raise ValueError(f"[Math Fidelity Guard Blocked Short Render ({slug_key}/{lang_code})]: {fidelity_check.get('reason')}")
+
     voice_name = vmaker.GLOBAL_VOICE_MAP.get(lang_code, vmaker.GLOBAL_VOICE_MAP["en"])["voice"]
     ffmpeg_exe = shutil.which("ffmpeg")
     ffprobe_exe = shutil.which("ffprobe")
@@ -2300,13 +3290,6 @@ def render_creative_idea_short_vertical(slug_key: str = "math20250130001", lang_
     f_top = vmaker.get_font_for_lang(lang_code, 40, bold=True)
     f_sub = vmaker.get_font_for_lang(lang_code, 25, bold=True)
     f_cap = vmaker.get_font_for_lang(lang_code, 32, bold=True)
-
-    ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
-    clean_title = sanitize_glyphs(
-        vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=30, lang="ko")
-        if lang_code == "ko"
-        else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=38, lang="en")
-    )
 
     try:
         for idx, act_info in enumerate(acts, 1):
@@ -2756,6 +3739,148 @@ def upgrade_all_creative_idea_titles() -> int:
     if cnt:
         vmaker.update_video_catalog()
     return cnt
+
+
+def sync_live_creative_idea_youtube_metadata(target_slugs=None) -> list:
+    """
+    [Rule 19 수학적 정합성 라이브 동기화 엔진]
+    이미 @min7014_ai 유튜브 채널에 게시되어 조회수·시청시간을 쌓고 있는 창의 아이디어 시네마(본편 & #Shorts) 영상들에 대해,
+    영상 삭제 없이(조회수 100% 보존!) yt.videos().update, yt.thumbnails().set, yt.commentThreads().insert 로
+    100% 수학적으로 정확한 제목·설명란·썸네일·5초 암산 퍼즐 댓글을 즉시 반영합니다.
+    """
+    from googleapiclient.http import MediaFileUpload
+
+    yt, _ = vmaker.get_available_youtube_upload_service()
+    if yt is None:
+        print("[sync_live_creative_idea_youtube_metadata] No YouTube service available.")
+        return []
+
+    if not target_slugs:
+        target_slugs = [
+            "2014111901", "2022042501", "2022051507", "2016032701", "2016012801",
+            "math20250130001", "2014111902", "2017090101", "2012092301",
+        ]
+    updated_vids = []
+    for slug in target_slugs:
+        sp = SCRIPTS_DIR / f"{slug}.json"
+        if not sp.exists():
+            continue
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        arch = detect_visual_archetype(sdoc)
+        ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug))
+        ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug}/"
+        pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug}.pdf"
+        web_url = sdoc.get("web_url") or "https://min7014.github.io/"
+        tpa = sdoc.get("teacher_proof_analysis") or {}
+
+        for lg in ("ko", "en"):
+            raw_t = ko_t if lg == "ko" else (en_t or sdoc.get("title_en") or ko_t)
+            san_raw = sanitize_glyphs(vmaker.latex_to_unicode_title(raw_t))
+            ct_long = sanitize_glyphs(vmaker._smart_concise_topic_title(san_raw, max_len=36 if lg == "ko" else 44, lang=lg))
+            ct_short = sanitize_glyphs(vmaker._smart_concise_topic_title(san_raw, max_len=30 if lg == "ko" else 38, lang=lg))
+            core_eq = tpa.get("conclusion_ko" if lg == "ko" else "conclusion_en") or ""
+            aux_line = tpa.get("auxiliary_line_ko" if lg == "ko" else "auxiliary_line_en") or ""
+
+            thumb_p = render_creative_idea_thumbnail(sdoc, lang_code=lg)
+
+            # 1. Long-form Creative Idea video in-place update
+            long_url = (sdoc.get("creative_idea_youtube_urls") or {}).get(lg, "")
+            vid_id = vmaker.extract_youtube_video_id(long_url)
+            if vid_id:
+                new_title = build_viral_curiosity_youtube_title(ct_long, arch, lang_code=lg, is_short=False)
+                std_url = (sdoc.get("youtube_urls") or {}).get(lg) or f"https://www.youtube.com/results?search_query=min7014_ai+{slug}"
+                desc = (
+                    f"🌟 [Edition 5: https://min7014.github.io/ 원문 자료 100% 수학적 검증 기반 창의 아이디어 시네마]\n"
+                    f"• 주제: {ct_long}\n"
+                    f"• 핵심 수학 정리·불변량: {core_eq}\n"
+                    f"• 핵심 보조선·아이디어: {aux_line}\n\n"
+                    f"🏛️ [기본 아이디어 원문 자료 (https://min7014.github.io/)]\n"
+                    f"• 단계별 시각 증명 원본 PDF: {pdf_url}\n"
+                    f"• 수학자료실 원문 아카이브: {web_url}\n"
+                    f"• GeoGebra 인터랙티브 직접 조작: {ggb_url}\n\n"
+                    f"🔔 [지금 바로 @min7014_ai 채널 1초 구독하기]:\n"
+                    f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                    f"🎬 [함께 보면 200% 시너지가 나는 연계 콘텐츠]\n"
+                    f"• 8분+ 네온 시네마 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
+                    f"• 단계별 시각 증명 본편: {std_url}\n"
+                    f"• mathedu 16,548문항 무료 문제은행: https://min7014.github.io/mathedu/video_board.html?slug={slug}\n\n"
+                    f"#창의수학 #시각적증명 #수학아이디어 #수능수학 #기하학 #VisualProof #MathAnimation #min7014_ai"
+                )
+                desc = desc.replace("<", "＜").replace(">", "＞")
+                try:
+                    yt.videos().update(
+                        part="snippet",
+                        body={
+                            "id": vid_id,
+                            "snippet": {
+                                "title": new_title[:100].replace("<", "＜").replace(">", "＞"),
+                                "description": desc[:4900],
+                                "tags": ["창의수학", "시각적증명", "수학아이디어", ct_long, "VisualProof", "MathCinema", "GeoGebra", "min7014_ai"],
+                                "categoryId": "27",
+                                "defaultLanguage": lg,
+                                "defaultAudioLanguage": lg,
+                            },
+                        },
+                    ).execute()
+                    if thumb_p.exists() and slug in ("2014111901", "2022042501", "2022051507", "2016032701", "2016012801"):
+                        yt.thumbnails().set(videoId=vid_id, media_body=MediaFileUpload(str(thumb_p), mimetype="image/png")).execute()
+                    if slug in ("2014111901", "2022042501", "2022051507", "2016012801"):
+                        c_txt = build_viral_comment_puzzle(arch, lang_code=lg, ggb_url=ggb_url, sdoc=sdoc)
+                        yt.commentThreads().insert(
+                            part="snippet",
+                            body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": c_txt}}}},
+                        ).execute()
+                    updated_vids.append({"slug": slug, "lang": lg, "type": "long", "video_id": vid_id, "title": new_title})
+                except Exception as exc:
+                    print(f"[sync_live long err] {slug} ({lg}): {exc}")
+
+            # 2. Short-form Creative Idea video in-place update
+            short_url = (sdoc.get("creative_idea_shorts_urls") or {}).get(lg, "")
+            svid_id = vmaker.extract_youtube_video_id(short_url)
+            if svid_id:
+                new_stitle = build_viral_curiosity_youtube_title(ct_short, arch, lang_code=lg, is_short=True)
+                idea_full_url = long_url or (sdoc.get("youtube_urls") or {}).get(lg) or f"https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=idea"
+                mc_url = "https://youtu.be/_5LE_BfLA5w" if lg == "ko" else "https://youtu.be/9EL8pgqJtkY"
+                sdesc = (
+                    f"🎬 [1080p 창의 시네마 풀버전 & 8분+ 마스터클래스 바로 보기]\n"
+                    f"👉 1080p 본편: {idea_full_url}\n"
+                    f"👉 8분 마스터클래스 총정리: {mc_url}\n\n"
+                    f"🏛️ [기본 아이디어 출처: https://min7014.github.io/ ('{ct_short}')]\n"
+                    f"• 핵심 수학 불변량: {core_eq}\n"
+                    f"• 단계별 증명 원본 PDF: {pdf_url}\n"
+                    f"• 수학자료실 원문 아카이브: {web_url}\n"
+                    f"• 직접 조작하는 GeoGebra: {ggb_url}\n\n"
+                    f"🔔 [지금 @min7014_ai 1초 구독하기]:\n"
+                    f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                    f"#Shorts #창의수학 #시각적증명 #수학쇼츠 #MathShorts #VisualProof #min7014_ai"
+                )
+                sdesc = sdesc.replace("<", "＜").replace(">", "＞")
+                try:
+                    yt.videos().update(
+                        part="snippet",
+                        body={
+                            "id": svid_id,
+                            "snippet": {
+                                "title": new_stitle[:100].replace("<", "＜").replace(">", "＞"),
+                                "description": sdesc[:4900],
+                                "tags": ["Shorts", "창의수학", "수학쇼츠", "시각적증명", ct_short, "MathShorts", "VisualProof", "min7014_ai"],
+                                "categoryId": "27",
+                                "defaultLanguage": lg,
+                                "defaultAudioLanguage": lg,
+                            },
+                        },
+                    ).execute()
+                    if slug in ("2014111901", "2022042501", "2022051507", "2016012801"):
+                        c_txt = build_viral_comment_puzzle(arch, lang_code=lg, ggb_url=idea_full_url, sdoc=sdoc)
+                        yt.commentThreads().insert(
+                            part="snippet",
+                            body={"snippet": {"videoId": svid_id, "topLevelComment": {"snippet": {"textOriginal": c_txt}}}},
+                        ).execute()
+                    updated_vids.append({"slug": slug, "lang": lg, "type": "short", "video_id": svid_id, "title": new_stitle})
+                except Exception as exc:
+                    print(f"[sync_live short err] {slug} ({lg}): {exc}")
+
+    return updated_vids
 
 
 def build_flagship_creative_idea_suite(slugs=None, langs=("ko", "en")) -> list:

@@ -167,6 +167,21 @@ def auto_sync_policies_to_plan_min():
         if "### 정책 10. 라이브 데이터로 검증된" not in plan_txt and "## 🚀 Part III." in plan_txt:
             plan_txt = plan_txt.replace("## 🚀 Part III.", policy10_block, 1)
 
+        policy11_block = (
+            "### 정책 11. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성 및 수식·증명 무결성 필수 검증 정책 (`Rule 19`)\n"
+            "1. **수학적 정확성의 절대 최우선 원칙 (`mathteacher` × `Video_Creator`)**:\n"
+            "   - 유튜브 영상(`@min7014_ai`)은 수많은 학생·교사·대중에게 노출되어 파급력이 매우 크므로, 조회수를 높이기 위한 바이럴 제목·네온 시네마·5초 암산 퍼즐을 적용하더라도 **영상 속 도형, 보조선, 수식, 내레이션, 자막, 썸네일, 고정댓글 퍼즐의 모든 수학적 내용은 반드시 `https://min7014.github.io/` 원문 자료의 실제 수학 정리·증명 논리와 100% 정확히 일치**해야 합니다.\n"
+            "2. **유사 정리·인접 단원 간 혼동(Conflation) 절대 금지 (17대 정밀 수학 아키타입 엄격 분리)**:\n"
+            "   - **포물선(`conic_parabola`, 단일 초점 $F$·준선 $l$·$|PF|=|PH|$·접선 이등분)** vs **타원(`conic_reflection`, 두 초점 $|PF_1|+|PF_2|=2a$)** vs **사이클로이드(`cycloid_kinematics`, $x=r(\\theta-\\sin\\theta), y=r(1-\\cos\\theta)$)**를 엄격히 분리하여 작도·설명합니다.\n"
+            "   - **메넬라우스의 정리(`menelaus_theorem`, 할선 $D\\text{-}E\\text{-}F$ + 평행보조선 $CK \\parallel AB$ AA 닮음비 소거)** vs **체바의 정리(`ceva_menelaus`, 한 점 $P$에서 만나는 세 체바선 + 넓이 비 $\\frac{S_3}{S_2}\\cdot\\frac{S_1}{S_3}\\cdot\\frac{S_2}{S_1}=1$)** vs **평행선 선분 비(`parallel_similarity`)**를 절대 혼용하지 않습니다.\n"
+            "   - **삼각함수 극한(`trig_harmonic`, $\\lim_{\\theta\\to 0}\\frac{\\sin\\theta}{\\theta}=1$ 부채꼴 넓이 샌드위치)** vs **사인 함수 도함수(`trig_deriv_sin`, $\\frac{d}{dx}(\\sin x)=\\cos x$)** vs **코시 평균값 정리(`cauchy_mvt`, $\\frac{f(b)-f(a)}{g(b)-g(a)}=\\frac{f'(c)}{g'(c)}$)** vs **역함수 미분법(`inverse_deriv`, $(f^{-1})'(y)=\\frac{1}{f'(x)}$)** 및 **특수 직각삼각형(`special_triangles`, $1:1:\\sqrt{2}$, $1:\\sqrt{3}:2$)**·**제곱근 작도(`square_root_geometry`)**를 각각 독립된 시각 증명으로 정확히 구현합니다.\n"
+            "3. **렌더링·업로드 전 기계적+수학적 정합성 이중 검증 게이트(`verify_creative_idea_math_fidelity`) 상시 의무화**:\n"
+            "   - 모든 영상 생성 및 유튜브 업로드 전 반드시 `verify_creative_idea_math_fidelity(sdoc, acts, title, comment_txt)`와 `analyze_min7014_topic_as_mathteacher` 전수 검증(374개 주제 × 2개 언어 = 748개 항목 에러 0건)을 통과해야만 렌더링 및 업로드가 실행되도록 하드 가드(Hard Guard)를 상시 작동시킵니다.\n\n---\n\n"
+            "## 🚀 Part III."
+        )
+        if "### 정책 11. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성" not in plan_txt and "## 🚀 Part III." in plan_txt:
+            plan_txt = plan_txt.replace("## 🚀 Part III.", policy11_block, 1)
+
         if marker_start in plan_txt and marker_end in plan_txt:
             updated_txt = re.sub(
                 re.escape(marker_start) + r"[\s\S]*?" + re.escape(marker_end),

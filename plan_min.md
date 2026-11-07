@@ -245,6 +245,18 @@
 
 ---
 
+### 정책 11. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성 및 수식·증명 무결성 필수 검증 정책 (`Rule 19`)
+1. **수학적 정확성의 절대 최우선 원칙 (`mathteacher` × `Video_Creator`)**:
+   - 유튜브 영상(`@min7014_ai`)은 수많은 학생·교사·대중에게 노출되어 파급력이 매우 크므로, 조회수를 높이기 위한 바이럴 제목·네온 시네마·5초 암산 퍼즐을 적용하더라도 **영상 속 도형, 보조선, 수식, 내레이션, 자막, 썸네일, 고정댓글 퍼즐의 모든 수학적 내용은 반드시 `https://min7014.github.io/` 원문 자료의 실제 수학 정리·증명 논리와 100% 정확히 일치**해야 합니다.
+2. **유사 정리·인접 단원 간 혼동(Conflation) 절대 금지 (17대 정밀 수학 아키타입 엄격 분리)**:
+   - **포물선(`conic_parabola`, 단일 초점 $F$·준선 $l$·$|PF|=|PH|$·접선 이등분)** vs **타원(`conic_reflection`, 두 초점 $|PF_1|+|PF_2|=2a$)** vs **사이클로이드(`cycloid_kinematics`, $x=r(\theta-\sin\theta), y=r(1-\cos\theta)$)**를 엄격히 분리하여 작도·설명합니다.
+   - **메넬라우스의 정리(`menelaus_theorem`, 할선 $D\text{-}E\text{-}F$ + 평행보조선 $CK \parallel AB$ AA 닮음비 소거)** vs **체바의 정리(`ceva_menelaus`, 한 점 $P$에서 만나는 세 체바선 + 넓이 비 $\frac{S_3}{S_2}\cdot\frac{S_1}{S_3}\cdot\frac{S_2}{S_1}=1$)** vs **평행선 선분 비(`parallel_similarity`)**를 절대 혼용하지 않습니다.
+   - **삼각함수 극한(`trig_harmonic`, $\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$ 부채꼴 넓이 샌드위치)** vs **사인 함수 도함수(`trig_deriv_sin`, $\frac{d}{dx}(\sin x)=\cos x$)** vs **코시 평균값 정리(`cauchy_mvt`, $\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}$)** vs **역함수 미분법(`inverse_deriv`, $(f^{-1})'(y)=\frac{1}{f'(x)}$)** 및 **특수 직각삼각형(`special_triangles`, $1:1:\sqrt{2}$, $1:\sqrt{3}:2$)**·**제곱근 작도(`square_root_geometry`)**를 각각 독립된 시각 증명으로 정확히 구현합니다.
+3. **렌더링·업로드 전 기계적+수학적 정합성 이중 검증 게이트(`verify_creative_idea_math_fidelity`) 상시 의무화**:
+   - 모든 영상 생성 및 유튜브 업로드 전 반드시 `verify_creative_idea_math_fidelity(sdoc, acts, title, comment_txt)`와 `analyze_min7014_topic_as_mathteacher` 전수 검증(374개 주제 × 2개 언어 = 748개 항목 에러 0건)을 통과해야만 렌더링 및 업로드가 실행되도록 하드 가드(Hard Guard)를 상시 작동시킵니다.
+
+---
+
 ## 🚀 Part III. 유튜브 ↔ 홈페이지 양방향 바이럴 홍보(`pr`) 및 교실 확산 정책
 
 ### 정책 1. 유튜브(`@min7014_ai`) ↔ 수학홈페이지(`mathedu`) 양방향 트래픽·구독 증폭 퍼널 (`pr`)
@@ -300,6 +312,7 @@ python -X utf8 pr.py status
 - ✅ **16. 유튜브 수익 ➔ 제미나이 울트라(Gemini Ultra) 자급자족 ➔ 수학교육 자료 질적·양적 대확장 ➔ 전 세계적 수학교육 사이트 구축 선순환(Flywheel) 원칙**
 - ✅ **17. 유튜브 파트너 프로그램(YPP) 수익창출 조건(구독자 1,000명 + 시청시간 4,000시간 / Shorts 1,000만 뷰) 최단기 달성 5대 가속 원칙**
 - ✅ **18. 실시간 알고리즘 폭발 검증된 '4대 바이럴 클러스터 동시 발행(Simultaneous 4-Asset Cluster Drop)' 상시 원칙**
+- ✅ **19. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성 및 수식·증명 무결성 필수 검증 원칙 (Mandatory 100% Mathematical Accuracy & Source Fidelity Guard)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
