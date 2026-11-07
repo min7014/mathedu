@@ -193,6 +193,85 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
     html_norm = html.replace("\r\n", "\n")
     if prev_c3 in html_norm:
         html = html_norm.replace(prev_c3, new_c3, 1)
+        html_norm = html
+        changed = True
+
+    expanded_c3 = (
+        '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="flex:1 1 45%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;text-decoration:none;border-radius:9px;padding:8px 8px;font-weight:900;font-size:0.75rem;text-align:center;">\n'
+        '            🔔 1초 무료 구독 응원 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/KvHmXDuU8jY" target="_blank" rel="noopener" style="flex:1 1 45%;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;text-decoration:none;border-radius:9px;padding:8px 8px;font-weight:900;font-size:0.75rem;text-align:center;">\n'
+        '            🌟 네온 시네마 Vol.1 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/nHIpEC6ATek" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#6d28d9,#4338ca);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🌟 네온 Vol.2 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/F9DnGqAqILc" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#059669,#047857);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🌟 네온 Vol.3 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🇰🇷 37분 마스터 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/eUeFybOs4t0" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🇺🇸 EN Vol.1 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/W4YTn5eV2Zs" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#1d4ed8,#1e40af);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🇺🇸 EN Vol.2 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/DClYV5vw56g" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🇺🇸 EN Vol.3 ↗\n'
+        '          </a>'
+    )
+    if new_c3 in html_norm and "nHIpEC6ATek" not in html_norm:
+        html = html_norm.replace(new_c3, expanded_c3, 1)
+        html_norm = html
+        changed = True
+
+    nav_anchor = '<a href="index.html" class="nav-btn">🏠 메인 홈</a>'
+    lang_btn = '<button type="button" id="vbLangToggleBtn" onclick="toggleVideoBoardGlobalLang()" class="nav-btn" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;cursor:pointer;font-weight:900;">🇺🇸 English Mode (EN)</button>\n      '
+    if nav_anchor in html_norm and "vbLangToggleBtn" not in html_norm:
+        html = html_norm.replace(nav_anchor, lang_btn + nav_anchor, 1)
+        html_norm = html
+        changed = True
+
+    i18n_script = """
+    // === [Rule 20 International Standard Mathematical English Mode (?lang=en)] ===
+    window.VB_GLOBAL_LANG = (new URLSearchParams(window.location.search).get('lang') === 'en' || localStorage.getItem('mathedu_vb_lang') === 'en') ? 'en' : 'ko';
+    function applyVideoBoardGlobalLang(lang) {
+      window.VB_GLOBAL_LANG = (lang === 'en') ? 'en' : 'ko';
+      try { localStorage.setItem('mathedu_vb_lang', window.VB_GLOBAL_LANG); } catch (e) {}
+      const btn = document.getElementById('vbLangToggleBtn');
+      const heroTitle = document.querySelector('.hero-title');
+      const heroDesc = document.querySelector('.hero-desc');
+      const puzTitle = document.getElementById('vbDailyPuzzleTitle');
+      const puzStatus = document.getElementById('vbDailyPuzzleStatus');
+      if (window.VB_GLOBAL_LANG === 'en') {
+        if (btn) btn.textContent = '🇰🇷 한국어 모드 (KO)';
+        if (heroTitle) heroTitle.textContent = 'Step-by-Step Visual Math Proofs & 1080p Neon Cinema (@min7014_ai × min7014.github.io)';
+        if (heroDesc) heroDesc.innerHTML = 'Explore 1,111+ interactive visual proofs, GeoGebra applets, and 1080p Neon-Bloom Math Cinema lectures built from <a href="https://min7014.github.io/" target="_blank" rel="noopener">https://min7014.github.io/</a> and streamed on <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener">@min7014_ai</a>.';
+        if (puzTitle) puzTitle.textContent = '🧠 [5-Sec Mental Math Challenge] Two smaller squares on a right triangle have areas 9 and 16. What is the largest square area?';
+        if (puzStatus) puzStatus.textContent = 'Solved it without square roots? Click your speed tier below to copy your Wordle-style Math Proof Scorecard!';
+      } else {
+        if (btn) btn.textContent = '🇺🇸 English Mode (EN)';
+        if (heroTitle) heroTitle.textContent = '단계별 시각적 수학 증명 & 네온 시네마 영상 게시판 (@min7014_ai × min7014.github.io)';
+        if (puzTitle) puzTitle.textContent = '🧠 [오늘의 5초 암산] 직각삼각형 두 작은 정사각형 넓이가 9와 16일 때 큰 정사각형 넓이는?';
+        if (puzStatus) puzStatus.textContent = '루트 계산 없이 몇 초 만에 떠올랐나요? 등급 버튼을 눌러 이모지 전적 카드를 복사해 보세요!';
+      }
+      if (typeof applyFiltersAndRender === 'function') applyFiltersAndRender();
+    }
+    function toggleVideoBoardGlobalLang() {
+      applyVideoBoardGlobalLang(window.VB_GLOBAL_LANG === 'en' ? 'ko' : 'en');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.VB_GLOBAL_LANG === 'en') applyVideoBoardGlobalLang('en');
+    });
+"""
+    if "toggleVideoBoardGlobalLang" not in html_norm and "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);" in html_norm:
+        html = html_norm.replace(
+            "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);",
+            "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);\n" + i18n_script,
+            1,
+        )
         changed = True
 
     if changed:
@@ -310,7 +389,7 @@ def build_ypp_watchtime_masterclasses() -> list:
             "mc_slug": "masterclass_neon_idea_vol3",
             "title_ko": "🔥 왜 sin을 미분하면 cos이 될까? 원주각·사인미분·역함수미분·포물선·특수각 총정리 | 창의 수학 시네마 Vol.3",
             "title_en": "🔥 Why d/dx(sin x) = cos x? Inscribed Angle, Calculus & Parabola Focus (1080p Masterclass Vol.3)",
-            "slugs": ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501"],
+            "slugs": ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501", "2014111901"],
             "use_creative_idea_edition": True,
             "lang": "ko",
         },
@@ -318,7 +397,87 @@ def build_ypp_watchtime_masterclasses() -> list:
             "mc_slug": "masterclass_neon_idea_vol3_en",
             "title_ko": "🔥 Why d/dx(sin x) = cos x? Inscribed Angle, Calculus & Parabola Focus (1080p Masterclass Vol.3)",
             "title_en": "🔥 Why d/dx(sin x) = cos x? Inscribed Angle, Calculus & Parabola Focus (1080p Masterclass Vol.3)",
-            "slugs": ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501"],
+            "slugs": ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501", "2014111901"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol4",
+            "title_ko": "🔥 왜 포물선의 두 접선은 준선 위에서 항상 수직(90°)으로 만날까? 포물선 작도·방정식 총정리 | 창의 수학 시네마 Vol.4",
+            "title_en": "🔥 Why Do Two Parabola Tangents Meet at 90° on the Directrix? Parabola Visual Proofs (Masterclass Vol.4)",
+            "slugs": ["2020011801", "2020041601", "2022012301", "2022040401", "2022040501", "2022040601", "2022040801"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol4_en",
+            "title_ko": "🔥 Why Do Two Parabola Tangents Meet at 90° on the Directrix? Parabola Visual Proofs (Masterclass Vol.4)",
+            "title_en": "🔥 Why Do Two Parabola Tangents Meet at 90° on the Directrix? Parabola Visual Proofs (Masterclass Vol.4)",
+            "slugs": ["2020011801", "2020041601", "2022012301", "2022040401", "2022040501", "2022040601", "2022040801"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol5",
+            "title_ko": "🔥 미분 없이 이등변삼각형 대칭 하나로 끝내는 포물선 접선 공식(y²=4px, x²=4py) 총정리 | 창의 수학 시네마 Vol.5",
+            "title_en": "🔥 Derive Parabola Tangent Formulas Without Calculus Using 1 Isosceles Triangle! (Masterclass Vol.5)",
+            "slugs": ["2022030101", "2022031901", "2022032001", "2022032601", "2022032801", "2022041001", "2022042301"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol5_en",
+            "title_ko": "🔥 Derive Parabola Tangent Formulas Without Calculus Using 1 Isosceles Triangle! (Masterclass Vol.5)",
+            "title_en": "🔥 Derive Parabola Tangent Formulas Without Calculus Using 1 Isosceles Triangle! (Masterclass Vol.5)",
+            "slugs": ["2022030101", "2022031901", "2022032001", "2022032601", "2022032801", "2022041001", "2022042301"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol6",
+            "title_ko": "🔥 왜 두 초점까지의 거리 합(|PF₁|+|PF₂|=2a)만으로 타원 방정식이 완성될까? 타원 완전 정복 | 창의 수학 시네마 Vol.6",
+            "title_en": "🔥 How Constant Distance Sum |PF₁|+|PF₂|=2a Creates Every Ellipse Equation! (Masterclass Vol.6)",
+            "slugs": ["2020041901", "2020042201", "2020042301", "2020042401", "2020042701", "2022051501", "2022051507"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol6_en",
+            "title_ko": "🔥 How Constant Distance Sum |PF₁|+|PF₂|=2a Creates Every Ellipse Equation! (Masterclass Vol.6)",
+            "title_en": "🔥 How Constant Distance Sum |PF₁|+|PF₂|=2a Creates Every Ellipse Equation! (Masterclass Vol.6)",
+            "slugs": ["2020041901", "2020042201", "2020042301", "2020042401", "2020042701", "2022051501", "2022051507"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol7",
+            "title_ko": "🔥 제1초점에서 쏜 빛이 반드시 제2초점으로 모이는 이유! 타원 빛 반사·보조원·수선의 발 총정리 | 창의 수학 시네마 Vol.7",
+            "title_en": "🔥 Why Every Ray From Focus F₁ Reflects to F₂! Ellipse Reflection & Auxiliary Circle (Masterclass Vol.7)",
+            "slugs": ["2022050701", "2022050703", "2022050801", "2022050901", "math20220509002", "2022053101", "2014111902"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol7_en",
+            "title_ko": "🔥 Why Every Ray From Focus F₁ Reflects to F₂! Ellipse Reflection & Auxiliary Circle (Masterclass Vol.7)",
+            "title_en": "🔥 Why Every Ray From Focus F₁ Reflects to F₂! Ellipse Reflection & Auxiliary Circle (Masterclass Vol.7)",
+            "slugs": ["2022050701", "2022050703", "2022050801", "2022050901", "math20220509002", "2022053101", "2014111902"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol8",
+            "title_ko": "🔥 공식 암기 끝! 보조원과 준원으로 단번에 증명하는 타원 접선의 방정식 & 자취 작도 총정리 | 창의 수학 시네마 Vol.8",
+            "title_en": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
+            "slugs": ["2022051001", "2022051101", "math20220515003", "math20220515004", "math20220515005", "2025021601", "math20250130001"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol8_en",
+            "title_ko": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
+            "title_en": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
+            "slugs": ["2022051001", "2022051101", "math20220515003", "math20220515004", "math20220515005", "2025021601", "math20250130001"],
             "use_creative_idea_edition": True,
             "lang": "en",
         },
@@ -476,7 +635,7 @@ def build_ypp_watchtime_masterclasses() -> list:
                     dur_s = 240.0
             cum_sec += dur_s
 
-        if len(part_files) >= 3 and not out_mp4.exists() and newly_concat_this_cycle < 2:
+        if len(part_files) >= 3 and not out_mp4.exists() and (use_idea or newly_concat_this_cycle < 4):
             concat_txt = MASTERCLASS_DIR / f"{mc_slug}_concat.txt"
             concat_txt.write_text(
                 "\n".join(f"file '{p.resolve().as_posix()}'" for p in part_files),
@@ -491,9 +650,10 @@ def build_ypp_watchtime_masterclasses() -> list:
                 newly_concat_this_cycle += 1
 
         if out_mp4.exists():
+            dur_min = round(cum_sec / 60.0, 1)
             desc_ko = (
                 f"🏆 [{spec['title_ko']}]\n"
-                f"총 재생 시간: {round(cum_sec / 60.0, 1)}분 연속 정주행 마스터클래스!\n\n"
+                f"총 재생 시간: {dur_min}분 연속 정주행 마스터클래스!\n\n"
                 f"🔔 공식 채널 1초 구독하기 (매일 새로운 시각적 수학 증명 업데이트):\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                 f"⏱️ [마스터클래스 챕터 타임스탬프]\n"
@@ -505,7 +665,22 @@ def build_ypp_watchtime_masterclasses() -> list:
                 "본 영상은 수학자료실(https://min7014.github.io/)의 자체 제작 단계별 기하 작도 슬라이드와 "
                 "수학교육 전문 발문·보조선 분석 해설을 결합한 100% 창작 수학교육 콘텐츠입니다.\n"
                 f"[ID: {mc_slug}_KO] #수학증명 #기하학 #수능수학 #시각적증명 #피타고라스 #메넬라우스 #체바 #마스터클래스"
-            )
+            ).replace("<", "＜").replace(">", "＞")
+            desc_en = (
+                f"🏆 [{spec['title_en']}]\n"
+                f"Total Duration: {dur_min}-Minute Full Visual Math Proof Masterclass Compilation!\n\n"
+                f"🔔 Subscribe to @min7014_ai (Daily 1080p Visual Math Proofs & Interactive Geometry):\n"
+                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                f"⏱️ [Masterclass Chapter Timestamps]\n"
+                + "\n".join(chapters)
+                + "\n\n🌐 [Interactive GeoGebra Applet, PDF Proofs & 16,548 Free Math Problems (https://min7014.github.io/)]:\n"
+                "👉 https://min7014.github.io/mathedu/video_board.html?lang=en\n"
+                "👉 https://min7014.github.io/\n\n"
+                "📜 [Original Educational Content Statement]\n"
+                "This masterclass is 100% original mathematical education content built upon step-by-step geometric constructions, "
+                "Pólya auxiliary line heuristics, and visual proofs from https://min7014.github.io/.\n"
+                f"[ID: {mc_slug}_EN] #VisualProof #Mathematics #Geometry #Calculus #ConicSections #3Blue1BrownStyle #MathMasterclass #min7014_ai"
+            ).replace("<", "＜").replace(">", "＞")
             prev_yt_url = ""
             if out_meta.exists():
                 try:
@@ -515,7 +690,7 @@ def build_ypp_watchtime_masterclasses() -> list:
             thumb_rel = _render_masterclass_custom_thumbnail(
                 mc_slug=mc_slug,
                 title_text=spec["title_en" if lang_code == "en" else "title_ko"],
-                duration_min=round(cum_sec / 60.0, 1),
+                duration_min=dur_min,
                 lead_slugs=spec["slugs"],
                 lang_code=lang_code,
             )
@@ -528,9 +703,10 @@ def build_ypp_watchtime_masterclasses() -> list:
                 "mp4_path": str(out_mp4.relative_to(ROOT_DIR)).replace("\\", "/"),
                 "thumb_path": thumb_rel,
                 "duration_sec": round(cum_sec, 1),
-                "duration_min": round(cum_sec / 60.0, 1),
+                "duration_min": dur_min,
                 "chapters": chapters,
                 "description_ko": desc_ko,
+                "description_en": desc_en,
                 "youtube_url": prev_yt_url,
                 "ypp_watchtime_multiplier": f"{round(cum_sec / 240.0, 1)}x Watch-Time per Viewer",
             }
@@ -581,21 +757,23 @@ def upload_pending_masterclass_to_youtube(max_uploads: int = 1) -> int:
 
         lang_code = mdoc.get("lang") or ("en" if mdoc.get("mc_slug", "").endswith("_en") else "ko")
         v_title = mdoc.get("title_en" if lang_code == "en" else "title_ko") or mdoc.get("mc_slug")
-        v_desc = mdoc.get("description_ko") or ""
+        desc_ko_val = (mdoc.get("description_ko") or "").replace("<", "＜").replace(">", "＞")
+        desc_en_val = (mdoc.get("description_en") or desc_ko_val).replace("<", "＜").replace(">", "＞")
+        v_desc = desc_en_val if lang_code == "en" else desc_ko_val
         tags = HIGH_RPM_KEYWORDS_EN if lang_code == "en" else HIGH_RPM_KEYWORDS_KO
         mc_localizations = {
             "ko": {
-                "title": str(mdoc.get("title_ko") or v_title)[:100],
-                "description": v_desc[:4900],
+                "title": str(mdoc.get("title_ko") or v_title)[:100].replace("<", "＜").replace(">", "＞"),
+                "description": desc_ko_val[:4900],
             },
             "en": {
-                "title": str(mdoc.get("title_en") or v_title)[:100],
-                "description": v_desc[:4900],
+                "title": str(mdoc.get("title_en") or v_title)[:100].replace("<", "＜").replace(">", "＞"),
+                "description": desc_en_val[:4900],
             },
         }
         body = {
             "snippet": {
-                "title": v_title[:100],
+                "title": v_title[:100].replace("<", "＜").replace(">", "＞"),
                 "description": v_desc[:4900],
                 "tags": tags,
                 "categoryId": "27",

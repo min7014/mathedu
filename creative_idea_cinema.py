@@ -163,6 +163,7 @@ def detect_visual_archetype(sdoc: dict) -> str:
     raw_t = f"{sdoc.get('title', '')} {sdoc.get('title_en', '')}".lower()
     blob = " ".join([
         raw_t,
+        str(sdoc.get("sub_domain_ko", "")).lower(),
         str(sdoc.get("concept_badge", "")).lower(),
         str((sdoc.get("teacher_proof_analysis") or {}).get("category_type", "")).lower(),
     ])
@@ -175,9 +176,12 @@ def detect_visual_archetype(sdoc: dict) -> str:
         return "cycloid_kinematics"
     if any(k in blob for k in ["피타고라스", "pythagor", "직각삼각형", "right triangle", "넓이 보존"]):
         return "pythagoras_fractal"
-    if any(k in raw_t for k in ["포물선", "parabola"]) or ("준선" in raw_t and "타원" not in raw_t and "쌍곡선" not in raw_t):
+    if (
+        any(k in raw_t for k in ["포물선", "parabola", "y²=4px", "x²=4py", "y^2=4px", "x^2=4py", "점 f와 직선 l", "point f and a straight line l"])
+        or ("준선" in raw_t and "타원" not in raw_t and "쌍곡선" not in raw_t)
+    ):
         return "conic_parabola"
-    if any(k in blob for k in ["타원", "쌍곡선", "단델린", "초점", "이차곡선", "ellipse", "hyperbola", "dandelin", "conic"]):
+    if any(k in blob for k in ["타원", "쌍곡선", "단델린", "초점", "이차곡선", "원뿔곡선", "x²/a²", "x^2/a^2", "ellipse", "hyperbola", "dandelin", "conic"]):
         return "conic_reflection"
     if any(k in raw_t for k in ["메넬라우스", "menelaus"]):
         return "menelaus_theorem"
@@ -4032,6 +4036,11 @@ def build_creative_idea_masterclass_compilation(langs=("ko", "en")) -> list:
         ("masterclass_neon_idea_vol1", ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"]),
         ("masterclass_neon_idea_vol2", ["2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"]),
         ("masterclass_neon_idea_vol3", ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501", "2014111901"]),
+        ("masterclass_neon_idea_vol4", ["2020011801", "2020041601", "2022012301", "2022040401", "2022040501", "2022040601", "2022040801"]),
+        ("masterclass_neon_idea_vol5", ["2022030101", "2022031901", "2022032001", "2022032601", "2022032801", "2022041001", "2022042301"]),
+        ("masterclass_neon_idea_vol6", ["2020041901", "2020042201", "2020042301", "2020042401", "2020042701", "2022051501", "2022051507"]),
+        ("masterclass_neon_idea_vol7", ["2022050701", "2022050703", "2022050801", "2022050901", "math20220509002", "2022053101", "2014111902"]),
+        ("masterclass_neon_idea_vol8", ["2022051001", "2022051101", "math20220515003", "math20220515004", "math20220515005", "2025021601", "math20250130001"]),
     ]
     for _, v_slugs in vol_suites:
         build_flagship_creative_idea_suite(slugs=v_slugs, langs=langs)

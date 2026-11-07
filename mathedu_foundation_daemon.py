@@ -302,8 +302,15 @@ def mine_next_pedagogy_item_from_deep_knowledge(batch_size=3):
     existing_qclass_ids = {q.get("id") for q in q_class_list if q.get("id")}
 
     def _is_pure_math_topic(t_str: str) -> bool:
-        skip_words = ("학년도", "특강", "워크숍", "직무연수", "현장연구", "TikZ", "빠르게 배우기", "영재원 강의", "영재학급 강의", "융합교육", "STEAM교실")
+        skip_words = ("학년도", "특강", "워크숍", "직무연수", "현장연구", "TikZ", "빠르게 배우기", "영재원 강의", "영재학급 강의", "융합교육", "STEAM교실", "입력함", "mathapk")
         return not any(w in t_str for w in skip_words)
+
+    def _clean_pedagogy_title(raw_t: str) -> str:
+        import min7014_video_maker as vmaker
+        ko_t, en_t = vmaker.split_bilingual_title(raw_t or "")
+        u = vmaker.latex_to_unicode_title(ko_t or en_t or raw_t or "")
+        u = re.sub(r"\s*미분한식\s*입력함.*$", "", u).strip()
+        return vmaker._smart_concise_topic_title(u, max_len=64, lang="ko" if re.search(r"[가-힣]", u) else "en")
 
     changed = False
 
@@ -311,11 +318,11 @@ def mine_next_pedagogy_item_from_deep_knowledge(batch_size=3):
     added_gen = 0
     for it in deep_items:
         item_id = (it.get("id") or "").strip()
-        title = re.sub(r"\$[^\$]*\$", "", (it.get("title") or "")).strip()
+        title = _clean_pedagogy_title(it.get("title") or "")
         steps = it.get("scaffolding_steps") or []
         tips = it.get("solving_tips") or []
         sub_ko = (it.get("sub_domain_ko") or "기하·대수 탐구").split("(")[0].strip()
-        if not item_id or not title or len(title) < 4 or len(steps) < 3 or not _is_pure_math_topic(title):
+        if not item_id or not title or len(title) < 4 or len(steps) < 3 or not _is_pure_math_topic(it.get("title") or ""):
             continue
         gid = f"genealogy-min-{item_id}"
         if gid not in existing_gen_ids:
@@ -356,12 +363,12 @@ def mine_next_pedagogy_item_from_deep_knowledge(batch_size=3):
     added_polya = 0
     for it in deep_items:
         item_id = (it.get("id") or "").strip()
-        title = re.sub(r"\$[^\$]*\$", "", (it.get("title") or "")).strip()
+        title = _clean_pedagogy_title(it.get("title") or "")
         tips = it.get("solving_tips") or []
         steps = it.get("scaffolding_steps") or []
         sub_ko = (it.get("sub_domain_ko") or "기하·대수 탐구").split("(")[0].strip()
 
-        if not item_id or not title or len(title) < 4 or not _is_pure_math_topic(title):
+        if not item_id or not title or len(title) < 4 or not _is_pure_math_topic(it.get("title") or ""):
             continue
 
         polya_id = f"polya-min-{item_id}"
@@ -389,11 +396,11 @@ def mine_next_pedagogy_item_from_deep_knowledge(batch_size=3):
     added_vac = 0
     for it in deep_items:
         item_id = (it.get("id") or "").strip()
-        title = re.sub(r"\$[^\$]*\$", "", (it.get("title") or "")).strip()
+        title = _clean_pedagogy_title(it.get("title") or "")
         tips = it.get("solving_tips") or []
         steps = it.get("scaffolding_steps") or []
         sub_ko = (it.get("sub_domain_ko") or "기하·대수 탐구").split("(")[0].strip()
-        if not item_id or not title or len(title) < 4 or not tips or not _is_pure_math_topic(title):
+        if not item_id or not title or len(title) < 4 or not tips or not _is_pure_math_topic(it.get("title") or ""):
             continue
         vid = f"vaccine-min-{item_id}"
         if vid not in existing_vac_ids:
@@ -418,10 +425,10 @@ def mine_next_pedagogy_item_from_deep_knowledge(batch_size=3):
     added_cre = 0
     for it in deep_items:
         item_id = (it.get("id") or "").strip()
-        title = re.sub(r"\$[^\$]*\$", "", (it.get("title") or "")).strip()
+        title = _clean_pedagogy_title(it.get("title") or "")
         steps = it.get("scaffolding_steps") or []
         sub_ko = (it.get("sub_domain_ko") or "기하·대수 탐구").split("(")[0].strip()
-        if not item_id or not title or len(title) < 4 or not _is_pure_math_topic(title):
+        if not item_id or not title or len(title) < 4 or not _is_pure_math_topic(it.get("title") or ""):
             continue
         cid = f"creative-min-{item_id}"
         if cid not in existing_creative_ids and len(steps) >= 3:
@@ -454,7 +461,7 @@ def mine_next_pedagogy_item_from_deep_knowledge(batch_size=3):
                 continue
             try:
                 sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                t_ko = re.sub(r"\$[^\$]*\$", "", (sdoc.get("title") or slug)).split("(")[0].strip()
+                t_ko = _clean_pedagogy_title(sdoc.get("title") or slug)
                 pages = sdoc.get("pages") or []
                 if len(pages) < 2:
                     continue
@@ -484,6 +491,74 @@ def mine_next_pedagogy_item_from_deep_knowledge(batch_size=3):
     if changed:
         PEDAGOGY_JSON.write_text(json.dumps(ped, ensure_ascii=False, indent=2), encoding="utf-8")
     return changed
+
+
+def sanitize_existing_pedagogy_engine_json() -> int:
+    """
+    assets/mathteacher_pedagogy_engine.json 내의 기존 항목들 중 LaTeX 수식($...$)이 빈칸으로 제거되었던
+    제목('Tangent of  at  and', 'Parametric Curve of' 등)을 min7014_deep_knowledge.json 원문 수식으로 복원합니다.
+    """
+    if not PEDAGOGY_JSON.exists() or not DEEP_JSON.exists():
+        return 0
+    import min7014_video_maker as vmaker
+
+    ped = json.loads(PEDAGOGY_JSON.read_text(encoding="utf-8"))
+    deep_items = json.loads(DEEP_JSON.read_text(encoding="utf-8"))
+    id_to_clean = {}
+    for it in deep_items:
+        iid = (it.get("id") or "").strip()
+        raw_t = it.get("title") or ""
+        ko_t, en_t = vmaker.split_bilingual_title(raw_t)
+        u = vmaker.latex_to_unicode_title(ko_t or en_t or raw_t)
+        u = re.sub(r"\s*미분한식\s*입력함.*$", "", u).strip()
+        clean_t = vmaker._smart_concise_topic_title(u, max_len=64, lang="ko" if re.search(r"[가-힣]", u) else "en")
+        if iid and clean_t:
+            id_to_clean[iid] = clean_t
+
+    fixed = 0
+    for g in ped.get("verticalGenealogy", []):
+        gid = g.get("id", "")
+        iid = gid.replace("genealogy-min-", "")
+        if iid in id_to_clean:
+            ct = id_to_clean[iid]
+            new_title = f"[{ct}] 초등 직관에서 중등 시각 증명과 수능 킬러 발상까지"
+            if g.get("title") != new_title:
+                g["title"] = new_title
+                fixed += 1
+    for p in ped.get("polyaHeuristics", []):
+        pid = p.get("id", "")
+        iid = pid.replace("polya-min-", "")
+        if iid in id_to_clean:
+            ct = id_to_clean[iid]
+            new_cond = f"[{ct}] 관련 도형·수식 구조가 문제에 등장할 때"
+            if p.get("condition") != new_cond:
+                p["condition"] = new_cond
+                fixed += 1
+    for v in ped.get("misconceptionLab", []):
+        vid = v.get("id", "")
+        iid = vid.replace("vaccine-min-", "")
+        if iid in id_to_clean:
+            ct = id_to_clean[iid]
+            sub_ko = (v.get("subject") or "").split("·")[0].strip() or "기하·대수 탐구"
+            new_subj = f"{sub_ko} · {ct}"
+            if v.get("subject") != new_subj:
+                v["subject"] = new_subj
+                v["myth"] = f"'{ct}' 문제에서 전제 조건(정의역·보조선 수직/접선 조건·부호)을 확인하지 않고 결과 공식만 대입해도 항상 성립한다?"
+                fixed += 1
+    for c in ped.get("creativeConstructiveLab", []):
+        cid = c.get("id", "")
+        iid = cid.replace("creative-min-", "")
+        if iid in id_to_clean:
+            ct = id_to_clean[iid]
+            new_t = f"[{ct}] 보기를 가리고 스스로 보조선과 증명 경로 재발명하기"
+            if c.get("title") != new_t:
+                c["title"] = new_t
+                c["constructivePrompt"] = f"5지선다 보기에 의존하지 않고, '{ct}'의 핵심 보조선을 직접 그어 첫 번째 관계식을 구성해 보세요."
+                c["whatIfNotMutation"] = f"만약 [{ct}]에서 주어진 도형의 대칭 조건이나 각도·차수를 일반화한다면(What-If-Not) 어떤 새로운 정리가 탄생할까?"
+                fixed += 1
+    if fixed:
+        PEDAGOGY_JSON.write_text(json.dumps(ped, ensure_ascii=False, indent=2), encoding="utf-8")
+    return fixed
 
 
 def sync_pedagogy_counts_to_index_html():
