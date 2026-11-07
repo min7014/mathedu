@@ -150,9 +150,22 @@ def auto_sync_policies_to_plan_min():
         )
         if "제미나이 울트라(Gemini Ultra) 비용 충당" not in plan_txt and "## 🚀 Part III." in plan_txt:
             plan_txt = plan_txt.replace("## 🚀 Part III.", policy8_block, 1)
-        elif "유튜브 파트너 프로그램(YPP) 수익창출 조건" not in plan_txt and "## 🚀 Part III." in plan_txt:
+        elif "### 정책 9. 유튜브 파트너 프로그램" not in plan_txt and "## 🚀 Part III." in plan_txt:
             policy9_only = "### 정책 9." + policy8_block.split("### 정책 9.")[1]
             plan_txt = plan_txt.replace("## 🚀 Part III.", policy9_only, 1)
+
+        policy10_block = (
+            "### 정책 10. 라이브 데이터로 검증된 '4대 바이럴 클러스터 동시 발행(Simultaneous 4-Asset Cluster Drop)' 알고리즘 폭발 공식\n"
+            "1. **실시간 조회수 급증을 일으킨 4대 클러스터 동시 발행 법칙 (`creative_idea_cinema.py` × `finance.py`)**:\n"
+            "   - `https://min7014.github.io/` 원문 주제를 업로드할 때 단편 영상만 단독 발행하지 않고, **① 44초 순수 네온 블룸 `Idea-#Shorts` (KO/EN) + ② 1080p 순수 네온 블룸 `창의 수학 시네마 본편` (KO/EN) + ③ 8~48분 `정주행 마스터클래스` 합본 + ④ 5초 암산 챌린지 & Wordle 이모지 등급 고정댓글(`build_viral_comment_puzzle`)**을 한 세트로 묶어 동시 발행합니다.\n"
+            "2. **유튜브 알고리즘 추천(Shorts Feed & Browse) 즉시 점화 4요소**:\n"
+            "   - **첫 18글자 호기심 역설 질문**: `🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까?` (`qMhzACnRAeE`), `🔥 왜 모든 빛은 반드시 한 점(초점)에 모일까?` (`jBsgIj5HhDk`), `🔥 복잡한 보조선 없이 넓이 비 하나로 단번에 증명되는 이유!` (`sK5J8tlgMZY`), `🔥 공식 암기는 그만! 피타고라스 나무` (`wR7yITollp8`) 등 교과서식 제목 대신 시각적 역설 질문을 전면에 배치합니다.\n"
+            "   - **탈-PDF 100% 풀스크린 다크 벨벳 네온 블룸 화면**: 첫 0.1초부터 움직이는 네온 기하 셰이더가 시청자의 스와이프 이탈을 막고 시청 지속률(APV 105%+)을 달성합니다.\n"
+            "   - **고정댓글 5초 암산 퍼즐 체류시간 부스터**: 시청자가 고정댓글의 5초 암산 문제를 읽고 생각하는 동안 배경의 44초 쇼츠가 1.5~2회 루프 재생되어 유튜브 알고리즘이 해당 영상을 즉시 상위 추천 풀로 밀어 올립니다.\n\n---\n\n"
+            "## 🚀 Part III."
+        )
+        if "### 정책 10. 라이브 데이터로 검증된" not in plan_txt and "## 🚀 Part III." in plan_txt:
+            plan_txt = plan_txt.replace("## 🚀 Part III.", policy10_block, 1)
 
         if marker_start in plan_txt and marker_end in plan_txt:
             updated_txt = re.sub(
