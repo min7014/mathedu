@@ -236,4 +236,6 @@ python -X utf8 pr.py status
 - ✅ **11. 탈-5지선다 창의적 구성주의 수학 풀이 원칙 (De-Multiple-Choice Creativity-First Constructive Solving Principle)**
 - ✅ **12. 모든 정책의 `plan_min.md` 자동 저장 및 동기화 원칙 (Mandatory Auto-Save of All Policies to `plan_min.md`)**
 - ✅ **13. `@min7014_ai` 유튜브 채널 월 1,000만 원+ 직접 수익 및 영상 무결성 절대 원칙**
+- ✅ **14. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
+- ✅ **15. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->

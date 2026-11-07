@@ -2558,7 +2558,7 @@ VIRAL_HOOK_PRESETS = {
 CONCISE_TITLE_REWRITES_KO = {
     "두 선분의 교점이 없을 때 두 선분의 연장선의 교점에서 각각의 선분의 끝점에서 교점까지의 거리의 곱이 같으면 선분의 끝점은 한 원 위에 있다": "네 점이 한 원 위에 있을 조건 (방멱정리의 역)",
     "두 선분의 교점이 있을 때 교점에서 각각의 선분의 끝점까지의 거리의 곱이 같으면 선분의 끝점은 한 원 위에 있다": "두 현의 교점과 네 점이 한 원 위에 있을 조건 (방멱정리의 역)",
-    "원 밖의 한 점에서 그 원에 그은 두 접선의 길이는 같다": "원 밖의 한 점에서 그은 두 접선의 길이",
+    "원 밖의 한 점에서 그 원에 그은 두 접선의 길이는 같다": "원 밖의 한 점에서 그은 두 접선의 길이 정리",
     "원에서 현의 수직이등분선은 그 원의 중심을 지난다": "원에서 현의 수직이등분선과 원의 중심",
     "원의 중심에서 현에 내린 수선은 그 현을 이등분한다": "원의 중심에서 현에 내린 수선의 성질",
     "제한된 범위에서 이차함수의 최대최소": "제한된 범위의 이차함수 최대·최소",
@@ -2570,14 +2570,43 @@ CONCISE_TITLE_REWRITES_KO = {
     "삼각형의 두 내각의 크기가 같으면 이등변 삼각형이다": "이등변삼각형이 되는 조건 (두 내각의 크기)",
     "이등변삼각형의 꼭지각의 이등분선은 밑변을 수직 이등분한다": "이등변삼각형 꼭지각의 이등분선과 밑변 수직이등분",
     "이등변삼각형의 두 밑각의 크기는 같다": "이등변삼각형의 두 밑각의 크기가 같은 이유",
+    "이등변삼각형의 꼭짓점에서 밑변에 내린 수선의 발은": "이등변삼각형 꼭짓점에서 내린 수선의 발과 중점",
     "원에서 한 호에 대한 원주각은 중심각의 크기의 반이다": "원주각과 중심각의 크기 관계 (원주각 = ½ 중심각)",
     "원의 접선과 그 접점을 지나는 현이 이루는 각의 크기는": "접선과 현이 이루는 각의 정리 (접현각 = 원주각)",
     "주어진 원의 중심과 원 밖의 한 점을 지름의 양 끝점으로": "원 밖의 한 점에서 원에 그은 접선의 작도 원리",
     "평행선 사이의 선분의 길이의 비": "평행선 사이의 선분의 길이의 비 정리",
     "정사각형의 한 변의 길이와 넓이": "정사각형의 한 변의 길이와 넓이 (제곱근의 기하학)",
+    "한 쌍의 대변이 평행하고 그 길기가 같은 사각형은": "평행사변형이 되는 조건 (한 쌍의 대변 평행·등장)",
+    "중점연결정리 : 삼각형의 두 변의 중점을 연결한 선분은": "삼각형의 중점연결정리 (MN ∥ BC, MN = ½BC)",
+    "삼각형의 가장 긴 변의 대각의 꼭지점에서 그 변에 수선의": "삼각형의 가장 긴 변에 내린 수선의 발 위치 증명",
+    "준선이 x=-p 이고 초점이 (p,0) 일 때, 포물선의 방정식을": "포물선의 방정식 y²=4px 기하학적 유도",
+    "준선이 y=-p 이고 초점이 (0,p) 일 때, 포물선의 방정식을": "포물선의 방정식 x²=4py 기하학적 유도",
+    "준선이 x=-p 이고 초점이 (p,0) 일 때, 포물선 상의 점": "포물선 위의 점 (x₁,y₁)에서의 접선의 방정식 유도",
+    "준선이 y=-p 이고 초점이 (0,p) 일 때, 포물선 상의 점": "포물선 x²=4py 위의 점에서의 접선의 방정식 유도",
+    "준선이 x=-p 이고 초점이 (p,0) 일 때, 포물선에서의 기울기가": "기울기가 m인 포물선 접선의 방정식 기하학적 증명",
+    "준선이 y=-p 이고 초점이 (0,p) 일 때, 포물선에서의 기울기가": "기울기가 m인 포물선 x²=4py 접선의 방정식 증명",
+    "포물선의 준선 상의 점에서 포물선에 그은 두 개의 접선은": "포물선의 준선에서 그은 두 접선의 직교(90°) 증명",
+    "대칭축, 초점, 포물선 상의 한 점이 주어졌을 때, 포물선의": "포물선의 초점과 대칭축으로 준선 작도하기",
+    "원 안에 있는 두 점을 지나면서 이 원에 내접하는 원을": "원 내부의 두 점을 지나고 내접하는 원의 작도",
+    "주어진 선분과 주어진 직선 상의 한 점으로 이등변삼각형": "선분과 직선 위의 점으로 이등변삼각형 작도하기",
+    "무게중심에서 각 변의 중점까지 이르는 세 거리가 주어 졌을": "무게중심에서 세 변의 중점까지 거리로 삼각형 작도",
+    "순환소수로 나타낼 수 있는 분수 : 분모에 2나 5 이외의": "유한소수와 순환소수의 판별법 (분모의 소인수 2와 5)",
+    "2024학년도 강원과학고등학교 수학공학도구의 이해와": "페르마 포인트(Fermat Point)와 AI 경사하강법 원리",
+    "한 직선 위에 있지 않은 서로 다른 세 점을 지나는 평면은": "평면의 결정조건 (한 직선 위에 있지 않은 세 점)",
+    "두 직선이 평행하고 어떤 평면에 대하여 한 직선은 포함되고": "공간에서 직선과 평면이 평행할 조건 증명",
+    "한 직선이 한 평면과 평행일 때 주어진 직선을 포함하는": "직선과 평면의 평행 및 평면 교선의 평행 정리",
+    "한 평면에 위에 있지 않은 세 직선 a b c 가 a와 b가": "공간에서 평행한 세 직선의 추이성 (a∥b, b∥c ⟹ a∥c)",
+    "주어진 평면 위에 있지 않은 점을 지나 주어진 평면에 평행한": "평면 밖의 한 점을 지나고 평행한 평면의 유일성",
+    "한 점에서 만나는 두 직선과 다른 한 점에서 두 직선과": "공간에서 평행한 두 쌍의 직선이 이루는 각의 크기",
+    "평면 위의 평행하지 않은 두 직선에 수직인 직선은 평면과": "직선과 평면의 수직 정리 (평면 위 두 직선과 수직)",
+    "직선이 평면과 수직일 때 이 직선을 포함하는 모든 평면은": "수직인 직선을 포함하는 평면과 밑평면의 수직 정리",
+    "선분과 직선 위의 한 점을 가지고": "선분과 직선 위의 점을 이용한 평행선·수선 작도",
+    "준선과 초점이 있고 준선 상의 한 점을 지나는 수직선이": "초점과 준선을 이용한 포물선 위의 점 작도하기",
 }
 
 CONCISE_TITLE_REWRITES_EN = {
+    "The rectangle with the same length of two pairs": "Parallelogram Theorem: Equal Opposite Sides",
+    "With a directrix and a focus when a perpendicular": "Constructing a Point on a Parabola from Focus & Directrix",
     "When there is an intersection on the extension of two line segments, if the products of the distances from the intersection to the endpoints of each segment are equal, thefour endpoints lie on a circle": "Converse of Power of a Point (4 Concyclic Points)",
     "When there is an intersection on the extension of two line segments": "Converse of Power of a Point (Secant Lines)",
     "The Length and Width of one Side of a Square": "Side Length and Area of a Square",
@@ -2589,7 +2618,8 @@ CONCISE_TITLE_REWRITES_EN = {
     "Understanding of Triangle Circumcenter": "Triangle Circumcenter Visual Proof",
     "Understanding of Triangle Incenter": "Triangle Incenter Visual Proof",
     "The vertical bisector of the three sides": "Triangle Circumcenter & Perpendicular Bisectors",
-    "The Area of 6-5-4 Length Triangles": "Area of a 6-5-4 Triangle Without Heron's Formula",
+    "The Area of 6-5-4 Length Triangles": "Area of a 6-5-4 Triangle Visual Proof",
+    "The length of the space diagonal of 6-3-5": "Space Diagonal of a 6-3-5 Rectangular Prism",
     "RHS Congruent : If two right-angled": "RHS Right Triangle Congruence Theorem",
     "RHA Congruent : If two right-angled": "RHA Right Triangle Congruence Theorem",
     "If a triangle has 2 conguent angles": "Isosceles Triangle Converse Theorem",
@@ -2599,6 +2629,39 @@ CONCISE_TITLE_REWRITES_EN = {
     "In any circle, a circumferential angle is half": "Inscribed Angle Theorem (Half the Central Angle)",
     "An angle between a chord and a tangent": "Alternate Segment Theorem (Chord-Tangent Angle)",
     "For a circle with the center of a given circle": "Constructing Tangents to a Circle (Thales' Circle)",
+    "Cauchy Schwarz inequality in R": "Cauchy-Schwarz Inequality Visual Proof",
+    "A rectangle with the same length of two pairs": "Parallelogram Theorem: Parallel & Equal Opposite Sides",
+    "Midpoint Theorem : The line segment connecting": "Triangle Midpoint Theorem (MN ∥ BC, MN = ½BC)",
+    "Segments of two tangents to a circle": "Two Tangent Segments to a Circle Are Equal",
+    "Foot of Perpendicular at the base of the isosceles": "Isosceles Triangle Altitude Bisects the Base",
+    "The foot of the perpendicular from vertice": "Altitude to the Longest Side of a Triangle Proof",
+    "When a directrix is x=-p and a focus is (p,0), find the equation of the parabola": "Deriving the Parabola Equation y²=4px",
+    "When a directrix is y=-p and a focus is (0,p), find the equation of the parabola": "Deriving the Parabola Equation x²=4py",
+    "When a directrix is x=-p and a focus is (p,0), find the equation for the tangent line to the parabola": "Tangent Line at Point (x₁,y₁) on Parabola y²=4px",
+    "When a directrix is y=-p and a focus is (0,p), find the equation for the tangent line to the parabola": "Tangent Line at Point (x₁,y₁) on Parabola x²=4py",
+    "When a directrix is x=-p and a focus is (p,0), find the equation for the tangent line having slope m": "Parabola Tangent Line with Slope m (Geometric Proof)",
+    "When a directrix is y=-p and a focus is (0,p), find the equation for the tangent line having slope m": "Parabola x²=4py Tangent Line with Slope m Proof",
+    "Demonstrate that the two tangent lines of a parabola": "Why Two Parabola Tangents from Directrix Meet at 90°",
+    "With a axis of symmetry and a focus and a point": "Constructing the Directrix of a Parabola",
+    "Draw a circle that passes through the two points": "Apollonius Problem: Circle Tangent to Circle & 2 Points",
+    "Constructing a right triangle given a line segment": "Constructing a Right Triangle from Segment & Line",
+    "Constructing a isosceles triangle given a line segment": "Constructing an Isosceles Triangle from Segment & Line",
+    "Constructing a triangle given the three distances": "Constructing a Triangle from Centroid-to-Midpoint Distances",
+    "Fractions that can be expressed as repeating decimals": "Repeating vs. Terminating Decimals (Prime Factors 2 & 5)",
+    "2024 Gangwon Science High School Understand": "Fermat Point & Gradient Descent Optimization in AI",
+    "There is only one plane that passes through three": "Plane Determination Theorem (3 Non-Collinear Points)",
+    "There is only one plane that passes through a point": "Unique Plane Perpendicular to a Line Through a Point",
+    "If two straight lines are parallel and one line": "Line Parallel to a Plane Theorem in 3D Space",
+    "When a straight line is parallel to a plane": "Intersection Line of Plane Parallel to a Given Line",
+    "Three straight lines a b c that do not lie": "Transitivity of Parallel Lines in 3D Space (a∥b, b∥c)",
+    "There exists a plane parallel to a given plane": "Existence of a Parallel Plane Through an External Point",
+    "There is only one plane parallel to a given plane": "Uniqueness of a Parallel Plane Through an External Point",
+    "When two straight lines intersect at one point": "Equal Angles Between Parallel Line Pairs in 3D Space",
+    "A straight line perpendicular to two non-parallel": "Line Perpendicular to a Plane Theorem (2 Intersecting Lines)",
+    "When a straight line is perpendicular to a plane": "Perpendicular Planes Theorem in 3D Geometry",
+    "Two straight lines perpendicular to a plane": "Two Lines Perpendicular to a Plane Are Parallel",
+    "Two planes perpendicular to a straight line": "Two Planes Perpendicular to a Line Are Parallel",
+    "Question 30 in the math section of the National": "CSAT Killer Problem #30 Step-by-Step Visual Solution",
 }
 
 
@@ -2616,6 +2679,31 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
         "y=(x-p)²": "이차함수 y=(x-p)² x축 평행이동 부호의 비밀",
         "y=x² V.S. y=(x-2)²": "이차함수 y=x² vs y=(x-2)² 평행이동 완전 비교",
         "y=ax²+q": "이차함수 y=ax²+q y축 평행이동의 원리",
+        "√(2)": "무리수 √2의 기하학적 작도와 수직선 표현",
+        "√(n)": "제곱근 √n의 기하학적 나선 작도 (테오도로스 나선)",
+        "ax=b": "일차방정식 ax=b의 해와 부정·불능 조건",
+        "E": "이차곡선의 이심률(Eccentricity)과 초점·준선 비율",
+        "k alpha": "이차곡선의 이심률(Eccentricity)과 초점·준선 비율",
+        "kl alpha": "원뿔곡선의 이심률과 준선·초점 기하 변환",
+        "고차미분": "고계도함수(Higher Derivatives)와 다중 미분의 원리",
+        "연쇄법칙": "합성함수의 미분법 (연쇄법칙 Chain Rule 시각 증명)",
+        "도함수": "도함수(Derivative)의 정의와 순간변화율 기하 직관",
+        "삼각비": "직각삼각형의 삼각비(sin, cos, tan) 기본 원리",
+        "반비례": "반비례 함수 y=a/x 그래프와 쌍곡선 대칭 원리",
+        "평행사변형": "평행사변형의 정의와 대변·대각·대각선 성질 증명",
+        "거듭제곱": "거듭제곱과 지수법칙의 시각적 원리",
+        "인수분해": "다항식의 인수분해 공식과 도형 넓이 분할 증명",
+        "호도법": "호도법(Radian): 반지름과 호의 길이로 정의하는 각도",
+        "허수단위": "허수단위 i (i²=-1)의 탄생과 복소평면 90° 회전",
+        "복소수": "복소수(a+bi)의 사칙연산과 복소평면 기하학적 의미",
+        "선형방정식": "일차방정식(선형방정식)의 그래프와 해의 기하학",
+        "분수방정식": "분수방정식의 해법과 무연근 판별 원리",
+        "무리방정식": "무리방정식의 해법과 그래프 교점 시각적 이해",
+        "회전이동": "좌표평면의 회전이동 변환과 삼각함수 덧셈정리",
+        "미분공식표": "핵심 미분공식 총정리와 도함수 유도 원리",
+        "극값정리": "함수의 극대·극소와 페르마의 극값 정리(f'(c)=0)",
+        "실수": "실수(Real Numbers)의 완비성과 수직선 연속성 원리",
+        "기출문제": "수능 수학 고난도 킬러 30번 문항 단계별 시각 해법",
     }
     exact_formula_map_en = {
         "y=x²": "Parabola y=x² Symmetry & Vertex Visual Proof",
@@ -2623,6 +2711,19 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
         "y=(x-p)²": "Why Parabola y=(x-p)² Shifts Horizontally",
         "y=x² V.S. y=(x-2)²": "Parabola Shift y=x² vs y=(x-2)² Visualized",
         "y=ax²+q": "Vertical Shift of Parabola y=ax²+q Visualized",
+        "√(2)": "Geometric Construction of Irrational Number √2",
+        "√(n)": "Spiral of Theodorus: Constructing √n Geometrically",
+        "ax=b": "Linear Equation ax=b: Unique, Infinite & No Solution",
+        "E": "Conic Section Eccentricity (Focus-to-Directrix Ratio)",
+        "k alpha": "Conic Section Eccentricity (Focus-to-Directrix Ratio)",
+        "kl alpha": "Conic Section Eccentricity & Directrix Geometry",
+        "AlgeoMath": "Constructing Parallel & Perpendicular Lines on a Segment",
+        "Power": "Exponents & Powers: Visual Laws of Exponentiation",
+        "Radian": "What Is a Radian? Arc Length & Circle Radius Visualized",
+        "Factorization": "Algebraic Factorization via Geometric Area Models",
+        "Inverse Proportion": "Inverse Proportion y=a/x & Hyperbola Symmetry",
+        "Parallelogram": "Parallelogram Properties & Diagonal Visual Proof",
+        "Trigonometric Ratio": "Trigonometric Ratios (sin, cos, tan) Visualized",
     }
     if lang == "en" and t in exact_formula_map_en:
         return exact_formula_map_en[t]
@@ -2630,13 +2731,14 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
         return exact_formula_map_ko[t]
 
     if lang == "en":
-        for k, v in CONCISE_TITLE_REWRITES_EN.items():
-            if t.lower().startswith(k.lower()[:24]):
+        # 긴 키부터 우선 매칭하여 부분 접두사 충돌 방지
+        for k, v in sorted(CONCISE_TITLE_REWRITES_EN.items(), key=lambda x: -len(x[0])):
+            if t.lower().startswith(k.lower()[:34]):
                 t = v
                 break
     else:
-        for k, v in CONCISE_TITLE_REWRITES_KO.items():
-            if t.startswith(k[:15]):
+        for k, v in sorted(CONCISE_TITLE_REWRITES_KO.items(), key=lambda x: -len(x[0])):
+            if t.startswith(k[:18]):
                 t = v
                 break
     t = _balance_parentheses(t)
@@ -2646,14 +2748,21 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
     cut = t[:max_len].rsplit(" ", 1)[0].strip() if " " in t[:max_len] else t[:max_len].strip()
     if lang == "en":
         while True:
-            m_tail = re.search(r"\b(of|the|and|in|on|when|with|from|to|a|an|by|via|for|at|is|are|that|if|has|two|one|three)\s*$", cut, re.IGNORECASE)
+            m_tail = re.search(
+                r"\b(of|the|and|in|on|when|with|from|to|a|an|by|via|for|at|is|are|that|if|has|two|one|three|passes|parallel|perpendicular|straight|given|do|not|without|heron's)\s*$",
+                cut,
+                re.IGNORECASE,
+            )
             if m_tail and len(cut[:m_tail.start()].strip()) >= 10:
                 cut = cut[:m_tail.start()].strip()
             else:
                 break
     else:
         while True:
-            m_tail_ko = re.search(r"\s+(의|에|에서|할|때|와|과|은|는|이|가|을|를|각각의|교점에서|만나고|이고|이면|같으면|길이가|크기가|각각|같을|다른|한|두|세|변의|예각의|내각의|점\(외심\)에|점\(내심\)에|선분의|끝점에서|끝)\s*$", cut)
+            m_tail_ko = re.search(
+                r"(\s+(의|에|에서|할|때|와|과|은|는|이|가|을|를|각각의|교점에서|만나고|이고|이면|같으면|길이가|크기가|각각|같을|다른|한|두|세|변의|예각의|내각의|점\(외심\)에|점\(내심\)에|선분의|끝점에서|끝|밑변의|수선의|포물선의|포물선에서의|사각형은|직선은|평면은|평면과|이등변삼각형|원을|주어|졌을)|(은|는|이|가|을|를|의|와|과|고|면))\s*$",
+                cut,
+            )
             if m_tail_ko and len(cut[:m_tail_ko.start()].strip()) >= 6:
                 cut = cut[:m_tail_ko.start()].strip()
             else:
@@ -3549,23 +3658,23 @@ def refresh_all_youtube_metadata_packages():
             smp.write_text(json.dumps(smeta_all, ensure_ascii=False, indent=2), encoding="utf-8")
 
         _ko_t, _en_t = split_bilingual_title(sdoc.get("title", slug))
-        _clean_ko_t = latex_to_unicode_title(_ko_t)
-        _clean_en_t = latex_to_unicode_title(_en_t or sdoc.get("title_en") or _ko_t)
+        _clean_ko_t = _smart_concise_topic_title(latex_to_unicode_title(_ko_t), max_len=36, lang="ko")
+        _clean_en_t = _smart_concise_topic_title(latex_to_unicode_title(_en_t or sdoc.get("title_en") or _ko_t), max_len=38, lang="en")
         if isinstance(sdoc.get("question_classroom_packages"), dict):
             for lc in ["ko", "en"]:
                 if isinstance(sdoc["question_classroom_packages"].get(lc), dict):
                     sdoc["question_classroom_packages"][lc]["title"] = _balance_parentheses((
-                        f"❓ [질문하는 수학 수업] {_clean_ko_t[:38]} — 왜 항상 성립할까? (Notice & Wonder) | @min7014_ai"
+                        f"❓ [질문하는 수학 수업] {_clean_ko_t} — 왜 항상 성립할까? (Notice & Wonder) | @min7014_ai"
                         if lc == "ko"
-                        else f"❓ [Question-Asking Math] {_clean_en_t[:38]} — Notice & Wonder Visual Inquiry | @min7014_ai"
+                        else f"❓ [Question-Asking Math] {_clean_en_t} — Notice & Wonder Visual Inquiry | @min7014_ai"
                     )[:98])
         if isinstance(sdoc.get("question_shorts_packages"), dict):
             for lc in ["ko", "en"]:
                 if isinstance(sdoc["question_shorts_packages"].get(lc), dict):
                     sdoc["question_shorts_packages"][lc]["title"] = _balance_parentheses((
-                        f"❓ [질문하는 수학 #Shorts] {_clean_ko_t[:42]} — 왜 이 보조선이 핵심일까?"
+                        f"❓ [질문하는 수학 #Shorts] {_clean_ko_t} — 왜 이 원리가 성립할까? #Shorts"
                         if lc == "ko"
-                        else f"❓ [Question-Asking Math #Shorts] {_clean_en_t[:42]} — Why This Auxiliary Line?"
+                        else f"❓ [Question-Asking Math #Shorts] {_clean_en_t} — Visual Math Inquiry #Shorts"
                     )[:98])
 
         sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -4824,6 +4933,13 @@ def update_video_catalog():
     scripts = []
     short_by_slug = {}
     blocked_ids = get_deleted_video_ids_set()
+    for non_math_slug in ("math20191222001", "2025021601", "2022052701"):
+        nm_p = SCRIPTS_DIR / f"{non_math_slug}.json"
+        if nm_p.exists():
+            try:
+                nm_p.unlink()
+            except Exception:
+                pass
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         with open(sp, "r", encoding="utf-8") as f:
             sdoc = json.load(f)
@@ -7006,7 +7122,7 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                     mc_up0 = finance.upload_pending_masterclass_to_youtube(max_uploads=1)
                     if mc_up0 > 0:
                         newly_uploaded_batch += mc_up0
-                    for idea_prio_slug in ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"]:
+                    for idea_prio_slug in ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206", "2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501"]:
                         sp_id = SCRIPTS_DIR / f"{idea_prio_slug}.json"
                         if not sp_id.exists():
                             continue

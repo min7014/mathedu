@@ -1913,8 +1913,57 @@ def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_c
     return (base[: 98 - len(short_suffix)].rstrip(" —|-:") + short_suffix)[:98]
 
 
+def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: str = "") -> str:
+    """
+    [유튜브 알고리즘 댓글 참여율(Engagement Velocity) 10배 증폭 엔진]
+    누구나 5초 만에 암산하여 숫자/단어로 즉시 댓글을 달 수 있는 아키타입별 '5초 직관 퀴즈'를 생성합니다.
+    """
+    puzzles_ko = {
+        "pythagoras_fractal": "🧠 [5초 암산 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n직각삼각형의 두 작은 정사각형 넓이가 각각 9와 16일 때, 가장 큰 정사각형의 넓이는 얼마일까요? (루트 계산 없이 1초 만에 맞히셨다면 댓글로 숫자를 남겨주세요!)",
+        "conic_reflection": "🧠 [5초 직관 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n포물선 위의 점 P에서 준선까지의 거리가 7일 때, 초점 F까지의 거리 PF는 얼마일까요? 1초 만에 보인다면 댓글로 정답을 남겨주세요!",
+        "trig_harmonic": "🧠 [5초 파동 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n반지름이 1인 단위원에서 회전각이 90°(π/2)일 때 사인파의 높이(sin 90°)는 얼마일까요? 댓글로 숫자를 남겨주세요!",
+        "fibonacci_golden": "🧠 [5초 수열 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n피보나치 수열 1, 1, 2, 3, 5, 8, 13... 에서 13 바로 다음에 올 숫자는 무엇일까요? 댓글로 정답을 남겨주세요!",
+        "prob_galton": "🧠 [5초 확률 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n좌우 갈림길이 4번 있는 골턴 보드에서 구슬이 정중앙 칸에 도달하는 경로의 수(4C2)는 몇 가지일까요? 댓글로 도전해 보세요!",
+        "calculus_motion": "🧠 [5초 미분 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n곡선 y = x² 위에서 x = 3일 때 접선의 기울기(2x)는 얼마일까요? 암산으로 맞히셨다면 댓글로 숫자를 남겨주세요!",
+        "ceva_menelaus": "🧠 [5초 도형 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n높이가 같은 두 삼각형의 밑변의 비가 2 : 3이고 왼쪽 삼각형 넓이가 10일 때, 오른쪽 삼각형의 넓이는 얼마일까요? 댓글로 정답을 남겨주세요!",
+        "circle_invariants": "🧠 [5초 원주각 챌린지 — 댓글에 정답 숫자를 남겨보세요!]\n원의 중심각 ∠AOB가 80°일 때, 원 위의 점 P가 어디로 움직이든 원주각 ∠APB는 항상 몇 도일까요? 댓글로 숫자를 남겨주세요!",
+    }
+    puzzles_en = {
+        "pythagoras_fractal": "🧠 [5-Second Mental Math Challenge — Drop Your Answer in the Comments!]\nIf the two smaller squares on a right triangle have areas 9 and 16, what is the area of the largest square? Comment your number below!",
+        "conic_reflection": "🧠 [5-Second Geometry Challenge — Drop Your Answer in the Comments!]\nIf a point P on a parabola is at distance 7 from the directrix, what is its exact distance PF to the focus F? Comment your answer!",
+        "trig_harmonic": "🧠 [5-Second Wave Challenge — Drop Your Answer in the Comments!]\nOn a unit circle of radius 1, what is the exact height of the sine wave at 90° (sin 90°)? Comment your number below!",
+        "fibonacci_golden": "🧠 [5-Second Pattern Challenge — Drop Your Answer in the Comments!]\nIn the Fibonacci sequence 1, 1, 2, 3, 5, 8, 13..., what number comes right after 13? Drop your answer in the comments!",
+        "prob_galton": "🧠 [5-Second Probability Challenge — Drop Your Answer in the Comments!]\nIn a 4-row Galton board, how many distinct paths (4C2) lead a bead to the exact center bin? Comment your answer!",
+        "calculus_motion": "🧠 [5-Second Calculus Challenge — Drop Your Answer in the Comments!]\nOn the curve y = x², what is the exact slope of the tangent line (2x) at x = 3? Comment your number below!",
+        "ceva_menelaus": "🧠 [5-Second Area Ratio Challenge — Drop Your Answer in the Comments!]\nTwo triangles share the same height and have base ratio 2 : 3. If the left triangle has area 10, what is the area of the right triangle?",
+        "circle_invariants": "🧠 [5-Second Circle Angle Challenge — Drop Your Answer in the Comments!]\nIf the central angle ∠AOB is 80°, what is the inscribed angle ∠APB for any point P on the circle? Comment your number!",
+    }
+    if lang_code == "ko":
+        q_txt = puzzles_ko.get(archetype, puzzles_ko["pythagoras_fractal"])
+        return (
+            f"{q_txt}\n\n"
+            f"🔔 [매일 새로운 창의 수학 시네마 받아보기 — 1초 구독]\n"
+            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+            f"📐 [직접 마우스로 움직여보는 60fps 인터랙티브 셰이더 & GeoGebra]\n"
+            f"👉 {ggb_url}"
+        )
+    else:
+        q_txt = puzzles_en.get(archetype, puzzles_en["pythagoras_fractal"])
+        return (
+            f"{q_txt}\n\n"
+            f"🔔 [1-Click Subscribe to @min7014_ai for Daily Visual Math]:\n"
+            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+            f"📐 [Interactive 60fps Shader & GeoGebra Applet]:\n"
+            f"👉 {ggb_url}"
+        )
+
+
 def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
-    """PDF 캡처 없이 100% 네온 블룸 프랙탈·기하 셰이더로 제작하는 1280x720 시네마 썸네일"""
+    """
+    [고클릭률(High-CTR) 아키타입 맞춤형 네온 시네마 썸네일 생성기]
+    - 모든 영상에 똑같은 문구를 넣던 배너 블라인드니스를 완전히 제거하고,
+      8대 수학 아키타입별 맞춤형 호기심 역설 질문 + 우측 상단 초대형 네온 수식 콜아웃 배지를 합성합니다.
+    """
     slug_key = sdoc["slug"]
     out_thumb = YT_PKG_DIR / f"{slug_key}_idea_{lang_code}_thumb.png"
     ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
@@ -1927,28 +1976,49 @@ def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
 
     # 전체 1280x720 배경에 네온 블룸 기하 씬을 렌더링한 뒤 좌측 글래스모피즘 타이포그래피 오버레이 합성
     scene_img = render_pure_procedural_scene(1280, 720, archetype, 1, 0.88, lang_code=lang_code)
-    # 기하 아트가 우측에 빛나도록 우측 시프트 합성
     shifted = Image.new("RGB", (1280, 720), (5, 9, 20))
     shifted.paste(scene_img, (355, 8))
 
     ov = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
     draw = ImageDraw.Draw(ov)
 
-    draw.rounded_rectangle((28, 32, 560, 688), radius=28, fill=(9, 15, 32, 228), outline=(250, 204, 21, 255), width=4)
+    draw.rounded_rectangle((28, 32, 560, 688), radius=28, fill=(9, 15, 32, 232), outline=(250, 204, 21, 255), width=4)
     draw.rounded_rectangle((52, 58, 536, 118), radius=16, fill=(124, 58, 237, 255), outline=(254, 240, 138, 255), width=2)
 
     f_badge = vmaker.get_font_for_lang(lang_code, 22, bold=True)
-    f_hero = vmaker.get_font_for_lang(lang_code, 46, bold=True)
+    f_hero = vmaker.get_font_for_lang(lang_code, 44, bold=True)
     f_sub = vmaker.get_font_for_lang(lang_code, 28, bold=True)
+    f_call = vmaker.get_font_for_lang("en", 34, bold=True)
+
+    thumb_hooks_ko = {
+        "pythagoras_fractal": (["무한히 갈라져도", "넓이 합이 똑같다?", "단 1초 시각 증명!"], "a² + b² = c²"),
+        "conic_reflection": (["왜 모든 평행광선은", "반드시 한 점(초점)에", "모이게 될까?"], "PF = PH"),
+        "trig_harmonic": (["둥근 원이 돌면", "왜 완벽한 파동이", "만들어질까?"], "sin²θ+cos²θ=1"),
+        "fibonacci_golden": (["자연과 은하계가", "137.5° 황금각을", "선택한 진짜 이유!"], "φ = 1.618..."),
+        "prob_galton": (["수천 번의 우연이", "왜 항상 완벽한", "종 모양이 될까?"], "N(μ, σ²)"),
+        "calculus_motion": (["두 점을 잇던 할선이", "접선으로 변하는", "극한의 찰나!"], "dy/dx = lim"),
+        "ceva_menelaus": (["보조선 공식 없이", "넓이 비 하나로", "10초 만에 끝!"], "Ratio = 1"),
+        "circle_invariants": (["점이 아무리 움직여도", "각도가 절대 변하지", "않는 기하의 마법!"], "∠P = 1/2 ∠O"),
+    }
+    thumb_hooks_en = {
+        "pythagoras_fractal": (["Infinite Branches,", "Same Exact Area?", "1-Look Visual Proof!"], "a² + b² = c²"),
+        "conic_reflection": (["Why Every Ray", "Bounces to One", "Exact Focus Point!"], "PF = PH"),
+        "trig_harmonic": (["How a Spinning", "Circle Generates", "Every Wave!"], "sin²θ+cos²θ=1"),
+        "fibonacci_golden": (["Why Nature Chose", "The 137.5° Golden", "Spiral Angle!"], "φ = 1.618..."),
+        "prob_galton": (["How Random Chaos", "Always Forms a", "Perfect Bell Curve!"], "N(μ, σ²)"),
+        "calculus_motion": (["The Exact Moment", "Secant Becomes", "Tangent Line!"], "dy/dx = lim"),
+        "ceva_menelaus": (["No Extra Formulas!", "1 Area Ratio Trick", "Proves It All!"], "Ratio = 1"),
+        "circle_invariants": (["Move the Vertex", "Anywhere—Why Does", "Angle Never Change?"], "∠P = 1/2 ∠O"),
+    }
+    hook_lines, callout_formula = (
+        thumb_hooks_ko.get(archetype, (["공식 암기 멈추세요!", "단 1개의 아이디어로", "끝내는 시각적 비밀!"], "Q.E.D."))
+        if lang_code == "ko"
+        else thumb_hooks_en.get(archetype, (["STOP MEMORIZING!", "1 Core Visual Idea", "Explains It All!"], "Q.E.D."))
+    )
 
     b_txt = "★ 창의 수학 시네마 (Pure Visual)" if lang_code == "ko" else "★ CREATIVE MATH CINEMA"
     draw.text((70, 73), b_txt, fill=(254, 240, 138, 255), font=f_badge)
 
-    hook_lines = (
-        ["공식 암기 멈추세요!", "단 1개의 아이디어로", "끝내는 시각적 비밀!"]
-        if lang_code == "ko"
-        else ["STOP MEMORIZING!", "1 Core Visual Idea", "Explains It All!"]
-    )
     for i, hl in enumerate(hook_lines):
         col = (250, 204, 21, 255) if i == 1 else (255, 255, 255, 255)
         draw.text((54, 152 + i * 68), hl, fill=col, font=f_hero)
@@ -1964,6 +2034,11 @@ def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
         fill=(255, 255, 255, 255),
         font=f_badge,
     )
+
+    # 우측 상단 기하 아트 위에 시선을 사로잡는 네온 수식 콜아웃 배지 배치
+    draw.rounded_rectangle((965, 32, 1252, 108), radius=18, fill=(15, 23, 42, 230), outline=(56, 189, 248, 255), width=3)
+    draw.text((990, 48), sanitize_glyphs(callout_formula), fill=(250, 204, 21, 255), font=f_call)
+
     final_rgb = Image.alpha_composite(shifted.convert("RGBA"), ov).convert("RGB")
     final_rgb.save(out_thumb)
     return out_thumb
@@ -2433,21 +2508,7 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
             pass
 
     try:
-        comment_txt = (
-            f"🌟 [창의 수학 아이디어 시네마 — 10초 생각 챌린지!]\n"
-            f"오늘 영상의 제4막 'What-If-Not (조건 비틀기)'에서 발견한 불변량 법칙을 댓글로 남겨 보세요!\n\n"
-            f"🔔 [매일 새로운 창의 수학 시네마 받아보기 — 1초 구독]\n"
-            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-            f"📐 [직접 움직여보는 GeoGebra & 단계별 시각 증명]\n"
-            f"👉 {ggb_url}"
-            if lang_code == "ko"
-            else f"🌟 [Creative Math Idea Challenge!]\n"
-                 f"Share your insight from Act IV (What-If-Not Generalization) in the comments!\n\n"
-                 f"🔔 [1-Click Subscribe to @min7014_ai]:\n"
-                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                 f"📐 [Interactive GeoGebra Applet]:\n"
-                 f"👉 {ggb_url}"
-        )
+        comment_txt = build_viral_comment_puzzle(archetype, lang_code=lang_code, ggb_url=ggb_url)
         yt.commentThreads().insert(
             part="snippet",
             body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": comment_txt}}}},
@@ -2576,21 +2637,7 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
     yt_url = f"https://youtube.com/shorts/{vid_id}"
 
     try:
-        comment_txt = (
-            f"🌟 [45초 창의 수학 아이디어 퀴즈!]\n"
-            f"공식을 외우지 않고도 넓이와 비율이 보존되는 이유가 한눈에 보이셨나요?\n\n"
-            f"🔔 [매일 1분 수학 직관 업그레이드 — 1초 구독하기]\n"
-            f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-            f"🎬 [1080p 창의 시네마 5막 풀버전 바로 보기]\n"
-            f"👉 {idea_full_url}"
-            if lang_code == "ko"
-            else f"🌟 [45-Second Creative Math Idea!]\n"
-                 f"Did you see why the invariant holds without memorizing formulas?\n\n"
-                 f"🔔 [1-Click Subscribe to @min7014_ai]:\n"
-                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                 f"🎬 [Watch Full 1080p Creative Math Cinema]:\n"
-                 f"👉 {idea_full_url}"
-        )
+        comment_txt = build_viral_comment_puzzle(archetype, lang_code=lang_code, ggb_url=idea_full_url)
         yt.commentThreads().insert(
             part="snippet",
             body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": comment_txt}}}},
@@ -2674,6 +2721,7 @@ def build_creative_idea_masterclass_compilation(langs=("ko", "en")) -> list:
     vol_suites = [
         ("masterclass_neon_idea_vol1", ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"]),
         ("masterclass_neon_idea_vol2", ["2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"]),
+        ("masterclass_neon_idea_vol3", ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501"]),
     ]
     for _, v_slugs in vol_suites:
         build_flagship_creative_idea_suite(slugs=v_slugs, langs=langs)
