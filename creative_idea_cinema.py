@@ -81,11 +81,16 @@ def sanitize_glyphs(text: str) -> str:
         "⇒": "→",
         "⇔": "↔",
         "∽": "~",
+        "lim( theta arrow 0) ( sin theta/theta)=1": "lim(θ→0) (sinθ/θ) = 1",
+        "lim( theta arrow 0) ( sin theta/)": "lim(θ→0) (sinθ/θ) = 1",
         "lim( theta arrow 0) ( sin theta/": "lim(θ→0) (sinθ/θ) = 1",
+        "lim( theta arrow 0) ( sin)": "lim(θ→0) (sinθ/θ) = 1",
+        "lim( theta arrow 0) (": "lim(θ→0) (sinθ/θ) = 1",
         "theta arrow 0": "θ→0",
         "sin theta": "sinθ",
         "cos theta": "cosθ",
         "tan theta": "tanθ",
+        "Reflection of Light on a Ellipse": "Reflection of Light on an Ellipse",
     }
     out = str(text)
     for k, v in repl.items():
@@ -1880,37 +1885,63 @@ def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_c
     첫 25글자(모바일 화면 노출 구간)에 브래킷 라벨 대신 강렬한 호기심 공백(Curiosity Gap) 훅과
     핵심 수학 키워드를 직결하여 클릭률(CTR)을 극대화합니다.
     """
-    hooks_ko = {
-        "pythagoras_fractal": f"🔥 공식 암기는 그만! {clean_title}, 넓이가 영원히 보존되는 단 1가지 이유",
-        "conic_reflection": f"🔥 왜 모든 빛은 반드시 한 점(초점)에 모일까? | {clean_title}",
-        "trig_harmonic": f"🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | {clean_title}",
-        "fibonacci_golden": f"🔥 해바라기와 은하 나선에 숨겨진 137.5° 황금비의 비밀! | {clean_title}",
-        "prob_galton": f"🔥 무작위 우연이 수천 번 쌓이면 왜 완벽한 종 모양이 될까? | {clean_title}",
-        "calculus_motion": f"🔥 멈춰 있는 그래프가 살아 움직이는 순간! | {clean_title}",
-        "ceva_menelaus": f"🔥 복잡한 보조선 없이 넓이 비 하나로 단번에 증명되는 이유! | {clean_title}",
-        "circle_invariants": f"🔥 점이 원 위를 아무리 움직여도 각도가 절대 안 변하는 이유! | {clean_title}",
-    }
-    hooks_en = {
-        "pythagoras_fractal": f"🔥 Stop Memorizing! Why {clean_title} Preserves Area Forever",
-        "conic_reflection": f"🔥 Why Every Light Ray Bounces to One Exact Focus! | {clean_title}",
-        "trig_harmonic": f"🔥 How a Rotating Circle Creates Every Wave in the Universe! | {clean_title}",
-        "fibonacci_golden": f"🔥 Why Nature Chose the Golden Angle (137.5°)! | {clean_title}",
-        "prob_galton": f"🔥 How Pure Randomness Always Forms a Perfect Bell Curve! | {clean_title}",
-        "calculus_motion": f"🔥 The Exact Moment Secant Becomes Tangent! | {clean_title}",
-        "ceva_menelaus": f"🔥 How 1 Area Ratio Trick Proves {clean_title} Instantly!",
-        "circle_invariants": f"🔥 Why Moving the Vertex Never Changes the Angle! | {clean_title}",
-    }
-    if lang_code == "ko":
-        base = hooks_ko.get(archetype, f"🔥 공식 암기 없이 단 1개의 아이디어로 깨치는 {clean_title}!")
-        suffix = " #Shorts #창의수학 | @min7014_ai" if is_short else " | 창의 수학 시네마 @min7014_ai"
-    else:
-        base = hooks_en.get(archetype, f"🔥 The 1 Visual Idea That Explains {clean_title}!")
-        suffix = " #Shorts #Math | @min7014_ai" if is_short else " | Visual Math Cinema @min7014_ai"
+    clean_title = sanitize_glyphs(clean_title)
+    if "(" in clean_title and ")" not in clean_title:
+        clean_title = clean_title.split("(", 1)[0].strip()
 
+    def _make_base(ct: str) -> str:
+        hooks_ko = {
+            "pythagoras_fractal": f"🔥 공식 암기는 그만! {ct}, 넓이가 영원히 보존되는 단 1가지 이유",
+            "conic_reflection": f"🔥 왜 모든 빛은 반드시 한 점(초점)에 모일까? | {ct}",
+            "trig_harmonic": f"🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | {ct}",
+            "fibonacci_golden": f"🔥 해바라기와 은하 나선에 숨겨진 137.5° 황금비의 비밀! | {ct}",
+            "prob_galton": f"🔥 무작위 우연이 수천 번 쌓이면 왜 완벽한 종 모양이 될까? | {ct}",
+            "calculus_motion": f"🔥 멈춰 있는 그래프가 살아 움직이는 순간! | {ct}",
+            "ceva_menelaus": f"🔥 복잡한 보조선 없이 넓이 비 하나로 단번에 증명되는 이유! | {ct}",
+            "circle_invariants": f"🔥 점이 원 위를 아무리 움직여도 각도가 절대 안 변하는 이유! | {ct}",
+        }
+        hooks_en = {
+            "pythagoras_fractal": f"🔥 Stop Memorizing! Why {ct} Preserves Area Forever",
+            "conic_reflection": f"🔥 Why Every Light Ray Bounces to One Exact Focus! | {ct}",
+            "trig_harmonic": f"🔥 How a Rotating Circle Creates Every Wave in the Universe! | {ct}",
+            "fibonacci_golden": f"🔥 Why Nature Chose the Golden Angle (137.5°)! | {ct}",
+            "prob_galton": f"🔥 How Pure Randomness Always Forms a Perfect Bell Curve! | {ct}",
+            "calculus_motion": f"🔥 The Exact Moment Secant Becomes Tangent! | {ct}",
+            "ceva_menelaus": f"🔥 How 1 Area Ratio Trick Proves {ct} Instantly!",
+            "circle_invariants": f"🔥 Why Moving the Vertex Never Changes the Angle! | {ct}",
+        }
+        return (
+            hooks_ko.get(archetype, f"🔥 공식 암기 없이 단 1개의 아이디어로 깨치는 {ct}!")
+            if lang_code == "ko"
+            else hooks_en.get(archetype, f"🔥 The 1 Visual Idea That Explains {ct}!")
+        )
+
+    suffix = (
+        (" #Shorts #창의수학 | @min7014_ai" if is_short else " | 창의 수학 시네마 @min7014_ai")
+        if lang_code == "ko"
+        else (" #Shorts #Math | @min7014_ai" if is_short else " | Visual Math Cinema @min7014_ai")
+    )
+    base = _make_base(clean_title)
     if len(base) + len(suffix) <= 98:
         return base + suffix
+
     short_suffix = " #Shorts #Math" if is_short else " | @min7014_ai"
-    return (base[: 98 - len(short_suffix)].rstrip(" —|-:") + short_suffix)[:98]
+    if len(base) + len(short_suffix) <= 98:
+        return base + short_suffix
+
+    # 만약 여전히 길다면 괄호 부연 설명을 먼저 제거하거나 단어 경계에서 정밀 축약 (중간 단어 절단 원천 차단)
+    ct_no_paren = re.sub(r"\s*\([^)]*\)", "", clean_title).strip()
+    if ct_no_paren and ct_no_paren != clean_title:
+        b2 = _make_base(ct_no_paren)
+        if len(b2) + len(short_suffix) <= 98:
+            return b2 + short_suffix
+
+    budget_ct = max(14, len(clean_title) - ((len(base) + len(short_suffix)) - 98))
+    ct_short = vmaker._smart_concise_topic_title(clean_title, max_len=budget_ct, lang=lang_code)
+    b3 = _make_base(ct_short)
+    if len(b3) + len(short_suffix) <= 98:
+        return b3 + short_suffix
+    return (b3[: 98 - len(short_suffix)].rsplit(" ", 1)[0].rstrip(" —|-:,") + short_suffix)[:98]
 
 
 def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: str = "", sdoc: dict = None) -> str:
@@ -2459,10 +2490,10 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
     idea_pkg = (sdoc.get("creative_idea_packages") or {}).get(lang_code, {})
 
     ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
-    clean_t = (
-        vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=36, lang="ko")
+    clean_t = sanitize_glyphs(
+        vmaker._smart_concise_topic_title(sanitize_glyphs(vmaker.latex_to_unicode_title(ko_t)), max_len=36, lang="ko")
         if lang_code == "ko"
-        else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=44, lang="en")
+        else vmaker._smart_concise_topic_title(sanitize_glyphs(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t)), max_len=44, lang="en")
     )
 
     archetype = detect_visual_archetype(sdoc)
@@ -2587,22 +2618,15 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
     spkg = (sdoc.get("creative_idea_shorts_packages") or {}).get(lang_code, {})
 
     ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
-    clean_t = (
-        vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_t), max_len=30, lang="ko")
+    clean_t = sanitize_glyphs(
+        vmaker._smart_concise_topic_title(sanitize_glyphs(vmaker.latex_to_unicode_title(ko_t)), max_len=30, lang="ko")
         if lang_code == "ko"
-        else vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t), max_len=38, lang="en")
+        else vmaker._smart_concise_topic_title(sanitize_glyphs(vmaker.latex_to_unicode_title(en_t or sdoc.get("title_en") or ko_t)), max_len=38, lang="en")
     )
 
     yt, _ = vmaker.get_available_youtube_upload_service()
     if yt is None:
         raise RuntimeError("No available YouTube upload service / quota exhausted")
-    existing_url = (sdoc.get("creative_idea_shorts_urls") or {}).get(lang_code, "")
-    old_vid = vmaker.extract_youtube_video_id(existing_url)
-    if old_vid:
-        try:
-            yt.videos().delete(id=old_vid).execute()
-        except Exception:
-            pass
 
     archetype = detect_visual_archetype(sdoc)
     title = build_viral_curiosity_youtube_title(clean_t, archetype, lang_code=lang_code, is_short=True)
@@ -2713,8 +2737,9 @@ def upgrade_all_creative_idea_titles() -> int:
         changed = False
         for lg in ("ko", "en"):
             raw_t = ko_t if lg == "ko" else (en_t or sdoc.get("title_en") or ko_t)
-            ct_long = sanitize_glyphs(vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(raw_t), max_len=36 if lg == "ko" else 44, lang=lg))
-            ct_short = sanitize_glyphs(vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(raw_t), max_len=30 if lg == "ko" else 38, lang=lg))
+            san_raw = sanitize_glyphs(vmaker.latex_to_unicode_title(raw_t))
+            ct_long = sanitize_glyphs(vmaker._smart_concise_topic_title(san_raw, max_len=36 if lg == "ko" else 44, lang=lg))
+            ct_short = sanitize_glyphs(vmaker._smart_concise_topic_title(san_raw, max_len=30 if lg == "ko" else 38, lang=lg))
             if lg in sdoc.get("creative_idea_packages", {}):
                 new_t = build_viral_curiosity_youtube_title(ct_long, arch, lang_code=lg, is_short=False)
                 if sdoc["creative_idea_packages"][lg].get("title") != new_t:

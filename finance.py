@@ -162,15 +162,7 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
             html = html.replace(target_block, new_block, 1)
             changed = True
 
-    old_c3 = (
-        '<a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-radius:9px;padding:9px 10px;font-weight:900;font-size:0.78rem;text-align:center;">\n'
-        '            🇰🇷 8분 마스터클래스 재생 ↗\n'
-        '          </a>\n'
-        '          <a href="https://youtu.be/9EL8pgqJtkY" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;text-decoration:none;border-radius:9px;padding:9px 10px;font-weight:900;font-size:0.78rem;text-align:center;">\n'
-        '            🇺🇸 8-Min Masterclass ↗\n'
-        '          </a>'
-    )
-    new_c3 = (
+    prev_c3 = (
         '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;text-decoration:none;border-radius:9px;padding:9px 8px;font-weight:900;font-size:0.76rem;text-align:center;">\n'
         '            🔔 1초 무료 구독 응원 ↗\n'
         '          </a>\n'
@@ -181,13 +173,44 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
         '            🇺🇸 37-Min EN Course ↗\n'
         '          </a>'
     )
+    new_c3 = (
+        '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="flex:1 1 45%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;text-decoration:none;border-radius:9px;padding:8px 8px;font-weight:900;font-size:0.75rem;text-align:center;">\n'
+        '            🔔 1초 무료 구독 응원 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/KvHmXDuU8jY" target="_blank" rel="noopener" style="flex:1 1 45%;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;text-decoration:none;border-radius:9px;padding:8px 8px;font-weight:900;font-size:0.75rem;text-align:center;">\n'
+        '            🌟 12분 네온 시네마 Vol.1 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/_NRQ5QO3PEY" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#059669,#047857);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            📐 29분 기하 총정리 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🇰🇷 37분 마스터클래스 ↗\n'
+        '          </a>\n'
+        '          <a href="https://youtu.be/eUeFybOs4t0" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🇺🇸 Neon Vol.1 (EN) ↗\n'
+        '          </a>'
+    )
     html_norm = html.replace("\r\n", "\n")
-    if old_c3 in html_norm:
-        html = html_norm.replace(old_c3, new_c3, 1)
+    if prev_c3 in html_norm:
+        html = html_norm.replace(prev_c3, new_c3, 1)
         changed = True
 
     if changed:
         VIDEO_BOARD_HTML.write_text(html, encoding="utf-8")
+
+    idx_p = ROOT_DIR / "index.html"
+    if idx_p.exists():
+        idx_html = idx_p.read_text(encoding="utf-8")
+        old_idx_btn = '<a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ffe4e6] text-[#be123c] font-bold no-underline hover:underline">🇰🇷 37분 마스터클래스 정주행 ↗</a>'
+        new_idx_btn = (
+            '<a href="https://youtu.be/KvHmXDuU8jY" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ede9fe] text-[#6d28d9] font-bold no-underline hover:underline">🌟 12분 네온 시네마 Vol.1 ↗</a>\n'
+            '              <a href="https://youtu.be/_NRQ5QO3PEY" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#d1fae5] text-[#047857] font-bold no-underline hover:underline">📐 29분 기하 총정리 ↗</a>\n'
+            '              ' + old_idx_btn
+        )
+        if old_idx_btn in idx_html and "KvHmXDuU8jY" not in idx_html:
+            idx_p.write_text(idx_html.replace(old_idx_btn, new_idx_btn, 1), encoding="utf-8")
+            changed = True
+
     return changed
 
 
@@ -840,6 +863,17 @@ def analyze_revenue_pipeline() -> dict:
                 "subscribers_live": 4,
                 "long_uploads_status": "allowed (15분+ 장편 업로드 활성화 완료)",
                 "uploaded_longform_masterclasses_live": [
+                    "https://youtu.be/KvHmXDuU8jY (12.5분 KO 창의 수학 시네마 마스터클래스 Vol.1)",
+                    "https://youtu.be/eUeFybOs4t0 (8.9분 EN Visual Math Ideas Masterclass Vol.1)",
+                    "https://youtu.be/nHIpEC6ATek (11.8분 KO 창의 수학 시네마 마스터클래스 Vol.2)",
+                    "https://youtu.be/W4YTn5eV2Zs (8.1분 EN Visual Math Ideas Masterclass Vol.2)",
+                    "https://youtu.be/F9DnGqAqILc (12.1분 KO 창의 수학 시네마 마스터클래스 Vol.3)",
+                    "https://youtu.be/DClYV5vw56g (8.4분 EN Visual Math Ideas Masterclass Vol.3)",
+                    "https://youtu.be/_NRQ5QO3PEY (29.0분 KO 유클리드 기하학 마스터클래스 Vol.1)",
+                    "https://youtu.be/mYIh_SpCYic (13.0분 EN Euclidean Geometry Masterclass Vol.1)",
+                    "https://youtu.be/BTBn9mcwTDg (32.9분 KO 질문하는 수학 수업 마스터클래스 Vol.1)",
+                    "https://youtu.be/Ku9TYjIOzGE (48.6분 KO 질문하는 수학 수업 마스터클래스 Vol.10)",
+                    "https://youtu.be/hgsJGCcaLgc (34.4분 KO 질문하는 수학 수업 마스터클래스 Vol.11)",
                     "https://youtu.be/_5LE_BfLA5w (37.5분 KO 원의 성질 마스터클래스)",
                     "https://youtu.be/9EL8pgqJtkY (37.3분 EN Circle Theorems Masterclass)",
                 ],
@@ -988,6 +1022,102 @@ def analyze_revenue_pipeline() -> dict:
     FINANCE_ENGINE_JSON.parent.mkdir(parents=True, exist_ok=True)
     FINANCE_ENGINE_JSON.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     return report
+
+
+def execute_live_channel_and_video_repairs_now() -> dict:
+    """
+    [쿼터 리셋 즉시 실행 — 라이브 채널 다국어 브랜딩 정화 & 잔여 8개 영상 제목 복구 & 네온 마스터클래스 최우선 업로드]
+    """
+    import min7014_video_maker as vmaker
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+
+    results = {"channel_updated": False, "repaired_videos": [], "uploaded_masterclasses": 0, "uploaded_ideas": []}
+    tok_p = ROOT_DIR / "youtube_token_min7014_ai.json"
+    if not tok_p.exists():
+        return results
+    try:
+        creds = Credentials.from_authorized_user_file(str(tok_p))
+        yt = build("youtube", "v3", credentials=creds)
+
+        # 1) 라이브 영상 잘린 제목 제자리 복구 (시청시간 보존, 100자 이내 엄수)
+        rem_fixes = {
+            "_o7WXc7zCO4": "✨ Intersecting Secants Theorem (PA·PB = PC·PD) — Visual Proof (24 Steps · 1080p) | @min7014_ai",
+            "0bun91jq5_o": "🔥 Intersecting Secants Theorem (PA·PB = PC·PD) — 45s Visual Math Proof #Shorts #Math",
+            "srRZdzClEzk": "🔥 원 외부 할선의 정리 (PA·PB = PC·PD) — 연장선의 교점 45초 시각적 수학 증명 #Shorts #수학",
+            "uSBjCl_ozqo": "✨ Parallel Lines & Proportional Segments — Visual Math Proof (52 Steps · 1080p) | @min7014_ai",
+            "YJVDlEYH5Bg": "🔥 Parallel Lines & Proportional Segments Theorem — 45s Visual Math Proof #Shorts #Math",
+            "as-VfnFEVSg": "🔥 Menelaus' Theorem: One Parallel Line Unlocks It! — 45s Visual Math Proof #Shorts #Math",
+            "dAJFCz19c0M": "🔥 Ceva's Theorem: Area Ratio Visual Proof in 45 Seconds! #Shorts #Math #Geometry",
+            "7Ywal5oTbyU": "🔥 The Pythagorean Theorem (a²+b²=c²) — 45s Visual Area Proof #Shorts #Math",
+            "JLhEkPER4-A": "🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | lim(θ→0) (sinθ/θ) = 1 | 창의 수학 시네마 @min7014_ai",
+            "QfDNOC3gHXc": "🔥 How a Rotating Circle Creates Every Wave! | lim(θ→0) (sinθ/θ) = 1 | @min7014_ai",
+            "qMhzACnRAeE": "🔥 왜 둥근 원이 회전하면 완벽한 물결 파동이 될까? | lim(θ→0) (sinθ/θ) = 1 #Shorts #창의수학 | @min7014_ai",
+            "sVfOxekR-hM": "🔥 How a Rotating Circle Creates Every Wave! | lim(θ→0) (sinθ/θ) = 1 #Shorts #Math",
+            "pEjcq30Un3U": "🔥 Why Every Light Ray Bounces to One Exact Focus! | Parabola Focus Reflection | @min7014_ai",
+            "E5jj0Z4-_Cs": "🔥 Why Every Light Ray Bounces to One Exact Focus! | Parabola Reflection #Shorts #Math",
+            "PlFreh4M8Jc": "🔥 Why Every Light Ray Bounces to One Exact Focus! | Ellipse Focus Reflection #Shorts #Math",
+            "e2azpNAPf7s": "🔥 Why Moving the Vertex Never Changes the Angle! | Inscribed Angle Theorem | @min7014_ai",
+            "twzRpREFFeA": "🔥 Why Moving the Vertex Never Changes the Angle! | Inscribed Angle Theorem #Shorts #Math",
+        }
+        vr = yt.videos().list(part="snippet", id=",".join(rem_fixes.keys())).execute()
+        for vit in vr.get("items", []):
+            vid_r = vit["id"]
+            sn_r = vit["snippet"]
+            if sn_r.get("title") != rem_fixes[vid_r]:
+                sn_r["title"] = rem_fixes[vid_r][:100]
+                yt.videos().update(part="snippet", body={"id": vid_r, "snippet": sn_r}).execute()
+                results["repaired_videos"].append(vid_r)
+                print(f"✅ [Live Video Title Repaired] {vid_r} -> {sn_r['title']}", flush=True)
+
+        # 2) 라이브 채널 brandingSettings에서 개인 호칭 완전 정화 (brandingSettings는 단독 part로만 호출)
+        ch_b = yt.channels().list(part="brandingSettings", id="UCSlqQfOEtRfJuMPyGMLgFYA").execute()["items"][0]
+        b_set = ch_b.get("brandingSettings", {})
+        ch_cfg = b_set.get("channel", {})
+        if ch_cfg.get("title") != "단계별 시각적 수학 증명_AI" or ch_cfg.get("unsubscribedTrailer") != "KvHmXDuU8jY":
+            ch_cfg["title"] = "단계별 시각적 수학 증명_AI"
+            ch_cfg["unsubscribedTrailer"] = "KvHmXDuU8jY"
+            b_set["channel"] = ch_cfg
+            if "image" in b_set:
+                del b_set["image"]
+            yt.channels().update(
+                part="brandingSettings",
+                body={"id": "UCSlqQfOEtRfJuMPyGMLgFYA", "brandingSettings": b_set},
+            ).execute()
+        results["channel_updated"] = True
+        print("✅ [Live Channel Branding & Trailer Updated!]", flush=True)
+    except Exception as e:
+        print(f"[Live Channel/Video Update Notice] {e}", flush=True)
+
+    # 3) 최우선 순위 장편 네온 마스터클래스 & 창의 아이디어 시네마 즉시 업로드
+    try:
+        mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=6)
+        results["uploaded_masterclasses"] = mc_cnt
+    except Exception as me:
+        print(f"[Masterclass Upload Notice] {me}", flush=True)
+
+    try:
+        import creative_idea_cinema as cidea
+        for s_id in ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301"]:
+            sp = SCRIPTS_DIR / f"{s_id}.json"
+            if sp.exists():
+                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                iu = sdoc.get("creative_idea_youtube_urls") or {}
+                if not (iu.get("ko") or "").strip():
+                    r_u = cidea.upload_creative_idea_to_youtube(s_id, langs=("ko", "en"))
+                    if r_u:
+                        results["uploaded_ideas"].append((s_id, r_u))
+                    else:
+                        break
+                isu = sdoc.get("creative_idea_shorts_urls") or {}
+                if not (isu.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{s_id}_short_idea_ko.mp4").exists():
+                    r_su = cidea.upload_creative_idea_short_to_youtube(s_id, langs=("ko", "en"))
+                    if r_su:
+                        results["uploaded_ideas"].append((f"{s_id}_short", r_su))
+    except Exception as ie:
+        print(f"[Creative Idea Upload Notice] {ie}", flush=True)
+
+    return results
 
 
 def run_autonomous_finance_cycle() -> dict:

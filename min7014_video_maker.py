@@ -7145,10 +7145,10 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                     yt_rep, _ = get_available_youtube_upload_service()
                     if yt_rep is not None:
                         rem_fixes = {
-                            "_o7WXc7zCO4": "✨ Intersecting Secants Theorem (PA·PB = PC·PD Power of a Point) — Visual Proof (24 Steps · 1080p) | @min7014_ai",
+                            "_o7WXc7zCO4": "✨ Intersecting Secants Theorem (PA·PB = PC·PD) — Visual Proof (24 Steps · 1080p) | @min7014_ai",
                             "0bun91jq5_o": "🔥 Intersecting Secants Theorem (PA·PB = PC·PD) — 45s Visual Math Proof #Shorts #Math",
                             "srRZdzClEzk": "🔥 원 외부 할선의 정리 (PA·PB = PC·PD) — 연장선의 교점 45초 시각적 수학 증명 #Shorts #수학",
-                            "uSBjCl_ozqo": "✨ Parallel Lines & Proportional Line Segments Theorem — Visual Math Proof (52 Steps · 1080p) | @min7014_ai",
+                            "uSBjCl_ozqo": "✨ Parallel Lines & Proportional Segments — Visual Math Proof (52 Steps · 1080p) | @min7014_ai",
                             "YJVDlEYH5Bg": "🔥 Parallel Lines & Proportional Segments Theorem — 45s Visual Math Proof #Shorts #Math",
                             "as-VfnFEVSg": "🔥 Menelaus' Theorem: One Parallel Line Unlocks It! — 45s Visual Math Proof #Shorts #Math",
                             "dAJFCz19c0M": "🔥 Ceva's Theorem: Area Ratio Visual Proof in 45 Seconds! #Shorts #Math #Geometry",

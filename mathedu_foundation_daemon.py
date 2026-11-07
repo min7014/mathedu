@@ -77,7 +77,8 @@ def auto_sync_policies_to_plan_min():
     if not plan_p.exists() or not gemini_p.exists():
         return False
     try:
-        plan_txt = plan_p.read_text(encoding="utf-8")
+        orig_plan_txt = plan_p.read_text(encoding="utf-8")
+        plan_txt = orig_plan_txt
         gem_txt = gemini_p.read_text(encoding="utf-8")
         # GEMINI.md의 모든 '## N. ...' 정책 헤더를 추출하여 plan_min.md 하단 자동 동기화 레지스트리에 반영
         gem_headers = re.findall(r"^##\s+(\d+\.\s+.+)$", gem_txt, flags=re.M)
@@ -89,10 +90,42 @@ def auto_sync_policies_to_plan_min():
         ]
         for h in gem_headers:
             registry_lines.append(f"- ✅ **{h.strip()}**")
-        registry_lines.append("- ✅ **17. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**")
-        registry_lines.append("- ✅ **18. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**")
+        registry_lines.append("- ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**")
+        registry_lines.append("- ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**")
         registry_lines.append(marker_end)
         new_block = "\n".join(registry_lines)
+
+        policy6_block = (
+            "### 정책 6. 세계 5대 인기 수학 유튜브 채널(`3Blue1Brown` · `MindYourDecisions` · `Andy Math` · `Mathologer` · `깨봉수학`) 벤치마킹 상시 적용 정책\n"
+            "1. **`깨봉수학 (Quebon Math)` 스타일 — 한국어 암기 타파 & 직관 해체 바이럴 제목**:\n"
+            "   - 기존의 정형화된 `[시각적 증명] ...` 접두사를 폐지하고, 모바일 첫 25글자 이내에 **`\"🔥 공식 외우지 마세요!\"`**, **`\"❓ 99%가 공식만 외우다 놓치는...\"`**, **`\"⚡ 보조선 딱 1줄이면 끝!\"`**, **`\"✨ 왜 항상 성립할까?\"`** 4대 호기심 공백(Curiosity-Gap) 훅을 주제별로 자동 순환 적용합니다.\n"
+            "2. **`3Blue1Brown` & `Mathologer` 스타일 — 다크 벨벳 네온 블룸 시네마 & \"Discovery Before Formula\"**:\n"
+            "   - `creative_idea_cinema.py`를 통해 PDF 정적 슬라이드의 한계를 넘어선 100% 풀스크린 프로시저럴 네온 기하 애니메이션(8대 수학 아키타입), `-28dB` Cmaj9 사색 앰비언트 사운드스케이프, 528Hz 유레카 하모닉 차임벨을 결합합니다.\n"
+            "3. **`MindYourDecisions` & `Andy Math` 스타일 — 5초 직관 챌린지 썸네일 & 댓글 암산 퍼즐 & Shorts 최상단 본편 퍼널**:\n"
+            "   - 모든 1280×720 썸네일 우측 기하 도형 위에 **`\"?\"` 타겟 포커스 링 + `\"⚡ 공식 없이 5초 직관 해법!\"` (`\"⚡ 5-SEC VISUAL HACK!\"`)** 배지를 작도하고, 8대 아키타입별 고유 후킹 문구로 배너 블라인드니스를 원천 차단합니다.\n"
+            "   - 모든 영상 고정댓글에 시청자가 5초 만에 암산하여 답을 달 수 있는 **구체적 수치 퍼즐(`build_viral_comment_puzzle`)**을 게시하여 댓글 작성 중 영상이 계속 재생되는 알고리즘 부스트(APV 100%+)를 유도합니다.\n"
+            "   - 모든 Shorts 설명란 **첫 번째 줄(더보기 클릭 전 노출 영역)**에 **1080p 전체 본편 및 8분+ 미드롤 마스터클래스 직통 링크(`https://youtu.be/KvHmXDuU8jY`, `https://youtu.be/eUeFybOs4t0`, `https://youtu.be/_5LE_BfLA5w`)**를 배치하여 숏폼 조회수를 고단가 장편 수익으로 직결합니다.\n\n---\n\n"
+            "### 정책 7. 비수학 글로벌 인기 사이트 & 메가 채널(`Veritasium` · `Kurzgesagt` · `Duolingo` · `Wordle` · `Chess.com` · `Netflix`) 핵심 메커니즘 이식 및 `https://min7014.github.io/` 기본 아이디어 100% 기반 절대 정책\n"
+            "0. **[절대 대전제] 기본 아이디어의 100% `https://min7014.github.io/` 자료 기반 원칙**:\n"
+            "   - 수학·비수학 인기 채널이나 글로벌 플랫폼의 패키징·리텐션·바이럴 기법을 벤치마킹하더라도, **모든 영상·창의 시네마·숏폼·5초 암산 퍼즐·일일 스트릭의 기본 수학적 아이디어와 증명 논리는 반드시 100% `https://min7014.github.io/`에 수록된 실제 수학 자료(847+ 단계별 시각 증명 PDF, GeoGebra, AlgeoMath, 작도 원리)에서 출발**해야 하며, 설명란·고정댓글·게시판에 해당 `https://min7014.github.io/` 원문 자료 링크를 직접 명시합니다.\n"
+            "1. **`Veritasium` & `Kurzgesagt` (오개념 탐정 서사 & 썸네일-제목 상호보완 법칙)**:\n"
+            "   - 제목 문구를 썸네일에 그대로 중복 표기하지 않고, 썸네일에는 직관적 기하 역설과 핵심 불변식(`a²+b²=c²`, `PF=PH` 등)을, 제목에는 통념 타파 호기심 공백을 배치하여 클릭률을 극대화합니다.\n"
+            "   - 모든 영상을 **\"통념/오개념 제시(But) ➔ 시각적 실험·작도(Therefore) ➔ 유레카 원리 증명\"**의 탐정 추리 서사로 구성합니다.\n"
+            "2. **`Wordle` & `Chess.com` (1초 무마찰 이모지 속도 등급 댓글 & 전적 공유 카드)**:\n"
+            "   - 유튜브 고정댓글과 `video_board.html`에 시청자가 1초 만에 풀이 속도를 자랑할 수 있는 **이모지 등급표(`🟩 3초 컷 상위 1% | 🟨 10초 컷 | 🟦 보조선 힌트 유레카!`)** 및 **1클릭 이모지 그리드 공유 카드**를 탑재하여 댓글 반응 속도(Comment Velocity)와 바이럴 공유를 폭발시킵니다.\n"
+            "3. **`Duolingo` & `Netflix` (일일 수학 직관 스트릭 · 스트릭 보호권 & 5초 자동 다음 편 정주행 극장)**:\n"
+            "   - `video_board.html` 상단에 **Duolingo 스타일 일일 시각 직관 스트릭(`🔥 N일 연속 탐구` + `🛡️ 스트릭 보호권`)**과 **Netflix 스타일 8분+ 마스터클래스 연속 정주행 극장(`🎬 5초 후 다음 시각 증명 자동 재생`)**을 상시 가동하여 일일 재방문율(DAU)과 1인당 평균 시청시간(Session Watch Time)을 극대화합니다.\n\n---\n\n"
+            "## 🚀 Part III."
+        )
+        if "### 정책 6. 세계 5대 인기 수학 유튜브 채널" not in plan_txt:
+            policy6_only = policy6_block.split("### 정책 7.")[0]
+            if "### 정책 7. 비수학 글로벌 인기 사이트" in plan_txt:
+                plan_txt = plan_txt.replace("### 정책 7. 비수학 글로벌 인기 사이트", policy6_only + "### 정책 7. 비수학 글로벌 인기 사이트", 1)
+            elif "## 🚀 Part III." in plan_txt:
+                plan_txt = plan_txt.replace("## 🚀 Part III.", policy6_block, 1)
+        elif "### 정책 7. 비수학 글로벌 인기 사이트" not in plan_txt and "## 🚀 Part III." in plan_txt:
+            policy7_only = policy6_block.split("### 정책 7.")[1]
+            plan_txt = plan_txt.replace("## 🚀 Part III.", "### 정책 7." + policy7_only, 1)
 
         policy8_block = (
             "### 정책 8. 유튜브 수익 ➔ 제미나이 울트라(Gemini Ultra) 비용 충당 ➔ 수학교육 자료 질적·양적 대확장 ➔ 전 세계적 수학교육 사이트 구축 선순환(Flywheel) 정책\n"
@@ -107,47 +140,19 @@ def auto_sync_policies_to_plan_min():
             "   - 모든 1080p 본편, 창의 시네마, 9:16 `#Shorts`의 유레카 결론 직후 **\"1,113개 시각적 수학 증명 시리즈를 놓치지 않으려면 지금 바로 구독을 눌러 두세요!\"** 음성 멘트와 하단 `🔔 구독 @min7014_ai` 시각 배지를 동시 송출하여 조회수 대비 구독 전환율을 `0.17% ➔ 2.5%+`로 증폭합니다.\n"
             "2. **[시청시간 4,000시간(240,000분) 절대 보존 법칙 — 불필요한 영상 삭제 금지 및 In-Place 업데이트]**:\n"
             "   - 공개 영상을 삭제(`videos().delete`)하면 해당 영상이 쌓은 공개 시청시간이 영구 차감되므로, 단순 제목·설명·썸네일 개선은 절대 삭제하지 않고 **`videos().update(part=\"snippet,localizations\")` 및 `thumbnails().set()`으로 제자리 수정**하여 누적 시청시간을 100% 보존합니다.\n"
-            "3. **[시청시간 15배 증폭 — 12~37분 장편 마스터클래스 119편 최우선 업로드 & 채널 예고편 지정]**:\n"
-            "   - Shorts 시청시간은 4,000시간에 합산되지 않으므로, 이미 제작 완료된 **119편의 12~37분 1080p 가로형 마스터클래스(`https://youtu.be/_5LE_BfLA5w` [37.5분 KO], `https://youtu.be/9EL8pgqJtkY` [37.3분 EN], `masterclass_neon_idea_vol1..3`, `masterclass_euclidean_geometry_vol1`)**를 Priority #0으로 지속 업로드하고 채널 대표 예고편(`unsubscribedTrailer`)으로 설정하여 약 8,000~12,000 정주행 뷰만으로 4,000시간(240,000분)을 돌파합니다.\n"
+            "3. **[시청시간 15배 증폭 — 8~48분 장편 마스터클래스 최우선 업로드 & 채널 예고편 지정]**:\n"
+            "   - Shorts 시청시간은 4,000시간에 합산되지 않으므로, 이미 제작 완료된 **119편의 장편 1080p 가로형 마스터클래스(`https://youtu.be/KvHmXDuU8jY` [12.5분 네온 Vol.1 KO], `https://youtu.be/eUeFybOs4t0` [8.9분 네온 Vol.1 EN], `https://youtu.be/nHIpEC6ATek` [11.8분 네온 Vol.2 KO], `https://youtu.be/W4YTn5eV2Zs` [8.1분 네온 Vol.2 EN], `https://youtu.be/F9DnGqAqILc` [12.1분 네온 Vol.3 KO], `https://youtu.be/DClYV5vw56g` [8.4분 네온 Vol.3 EN], `https://youtu.be/_NRQ5QO3PEY` [29.0분 유클리드 기하 KO], `https://youtu.be/mYIh_SpCYic` [13.0분 유클리드 기하 EN], `https://youtu.be/BTBn9mcwTDg` [32.9분 질문수업 Vol.1], `https://youtu.be/Ku9TYjIOzGE` [48.6분 질문수업 Vol.10], `https://youtu.be/hgsJGCcaLgc` [34.4분 질문수업 Vol.11], `https://youtu.be/mF8mqaWt-Do` [질문수업 Vol.12], `https://youtu.be/DsAbYxSy6uI` [질문수업 Vol.13], `https://youtu.be/_5LE_BfLA5w` [37.5분 원의 성질 KO], `https://youtu.be/9EL8pgqJtkY` [37.3분 원의 성질 EN])**를 Priority #0으로 지속 업로드하고 채널 대표 예고편(`unsubscribedTrailer = KvHmXDuU8jY`)으로 설정하여 약 8,000~12,000 정주행 뷰만으로 4,000시간(240,000분)을 돌파합니다.\n"
             "4. **[웹사이트(`index.html` · `video_board.html` · `mathedu-room.js`) ➔ 유튜브 직통 전환 허브 & 깨진 링크 ZERO 보장]**:\n"
-            "   - 홈페이지와 16,548문항 퀴즈 내 모든 유튜브 링크를 100% 라이브 영상 ID로 자동 동기화(`finance.ensure_ypp_website_ownership_and_sub_funnel`)하고, `🔔 1초 무료 구독 응원(?sub_confirmation=1)` 및 `🎬 37분 마스터클래스 정주행` 버튼을 상시 배치합니다.\n"
+            "   - 홈페이지와 16,548문항 퀴즈 내 모든 유튜브 링크를 100% 라이브 영상 ID로 자동 동기화(`finance.ensure_ypp_website_ownership_and_sub_funnel`)하고, `🔔 1초 무료 구독 응원(?sub_confirmation=1)` 및 `🌟 12분 네온 시네마 Vol.1 / 📐 29분 기하 총정리 / 🎬 37분 마스터클래스 정주행` 버튼을 상시 배치합니다.\n"
             "5. **[YPP 인간 심사('반복적 콘텐츠') 100% 통과 방어막]**:\n"
             "   - `https://min7014.github.io/` 양방향 `<link rel=\"me\">` 도메인 소유권 증명, `mathteacher` 고유 소크라테스 발문·보조선 해설, 프로시저럴 네온 시네마, 창작 교육 콘텐츠 선언문으로 YPP 심사를 단번에 통과합니다.\n\n---\n\n"
             "## 🚀 Part III."
         )
-        if "### 정책 8." not in plan_txt and "## 🚀 Part III." in plan_txt:
+        if "제미나이 울트라(Gemini Ultra) 비용 충당" not in plan_txt and "## 🚀 Part III." in plan_txt:
             plan_txt = plan_txt.replace("## 🚀 Part III.", policy8_block, 1)
-        elif "### 정책 9." not in plan_txt and "## 🚀 Part III." in plan_txt:
+        elif "유튜브 파트너 프로그램(YPP) 수익창출 조건" not in plan_txt and "## 🚀 Part III." in plan_txt:
             policy9_only = "### 정책 9." + policy8_block.split("### 정책 9.")[1]
             plan_txt = plan_txt.replace("## 🚀 Part III.", policy9_only, 1)
-
-        policy6_block = (
-            "### 정책 6. 세계 5대 인기 수학 유튜브 채널(`3Blue1Brown` · `MindYourDecisions` · `Andy Math` · `Mathologer` · `깨봉수학`) 벤치마킹 상시 적용 정책\n"
-            "1. **`깨봉수학 (Quebon Math)` 스타일 — 한국어 암기 타파 & 직관 해체 바이럴 제목**:\n"
-            "   - 기존의 정형화된 `[시각적 증명] ...` 접두사를 폐지하고, 모바일 첫 25글자 이내에 **`\"🔥 공식 외우지 마세요!\"`**, **`\"❓ 99%가 공식만 외우다 놓치는...\"`**, **`\"⚡ 보조선 딱 1줄이면 끝!\"`**, **`\"✨ 왜 항상 성립할까?\"`** 4대 호기심 공백(Curiosity-Gap) 훅을 주제별로 자동 순환 적용합니다.\n"
-            "2. **`3Blue1Brown` & `Mathologer` 스타일 — 다크 벨벳 네온 블룸 시네마 & \"Discovery Before Formula\"**:\n"
-            "   - `creative_idea_cinema.py`를 통해 PDF 정적 슬라이드의 한계를 넘어선 100% 풀스크린 프로시저럴 네온 기하 애니메이션(8대 수학 아키타입), `-28dB` Cmaj9 사색 앰비언트 사운드스케이프, 528Hz 유레카 하모닉 차임벨을 결합합니다.\n"
-            "3. **`MindYourDecisions` & `Andy Math` 스타일 — 5초 직관 챌린지 썸네일 & 댓글 암산 퍼즐 & Shorts 최상단 본편 퍼널**:\n"
-            "   - 모든 1280×720 썸네일 우측 기하 도형 위에 **`\"?\"` 타겟 포커스 링 + `\"⚡ 공식 없이 5초 직관 해법!\"` (`\"⚡ 5-SEC VISUAL HACK!\"`)** 배지를 작도하고, 8대 아키타입별 고유 후킹 문구로 배너 블라인드니스를 원천 차단합니다.\n"
-            "   - 모든 영상 고정댓글에 시청자가 5초 만에 암산하여 답을 달 수 있는 **구체적 수치 퍼즐(`build_viral_comment_puzzle`)**을 게시하여 댓글 작성 중 영상이 계속 재생되는 알고리즘 부스트(APV 100%+)를 유도합니다.\n"
-            "   - 모든 Shorts 설명란 **첫 번째 줄(더보기 클릭 전 노출 영역)**에 **1080p 전체 본편 및 8분+ 미드롤 마스터클래스 직통 링크(`https://youtu.be/_5LE_BfLA5w`, `https://youtu.be/9EL8pgqJtkY`)**를 배치하여 숏폼 조회수를 고단가 장편 수익으로 직결합니다.\n\n---\n\n"
-            "### 정책 7. 비수학 글로벌 인기 사이트 & 메가 채널(`Veritasium` · `Kurzgesagt` · `Duolingo` · `Wordle` · `Chess.com` · `Netflix`) 핵심 메커니즘 이식 및 `https://min7014.github.io/` 기본 아이디어 100% 기반 절대 정책\n"
-            "0. **[절대 대전제] 기본 아이디어의 100% `https://min7014.github.io/` 자료 기반 원칙**:\n"
-            "   - 수학·비수학 인기 채널이나 글로벌 플랫폼의 패키징·리텐션·바이럴 기법을 벤치마킹하더라도, **모든 영상·창의 시네마·숏폼·5초 암산 퍼즐·일일 스트릭의 기본 수학적 아이디어와 증명 논리는 반드시 100% `https://min7014.github.io/`에 수록된 실제 수학 자료(847+ 단계별 시각 증명 PDF, GeoGebra, AlgeoMath, 작도 원리)에서 출발**해야 하며, 설명란·고정댓글·게시판에 해당 `https://min7014.github.io/` 원문 자료 링크를 직접 명시합니다.\n"
-            "1. **`Veritasium` & `Kurzgesagt` (오개념 탐정 서사 & 썸네일-제목 상호보완 법칙)**:\n"
-            "   - 제목 문구를 썸네일에 그대로 중복 표기하지 않고, 썸네일에는 직관적 기하 역설과 핵심 불변식(`a²+b²=c²`, `PF=PH` 등)을, 제목에는 통념 타파 호기심 공백을 배치하여 클릭률을 극대화합니다.\n"
-            "   - 모든 영상을 **\"통념/오개념 제시(But) ➔ 시각적 실험·작도(Therefore) ➔ 유레카 원리 증명\"**의 탐정 추리 서사로 구성합니다.\n"
-            "2. **`Wordle` & `Chess.com` (1초 무마찰 이모지 속도 등급 댓글 & 전적 공유 카드)**:\n"
-            "   - 유튜브 고정댓글과 `video_board.html`에 시청자가 1초 만에 풀이 속도를 자랑할 수 있는 **이모지 등급표(`🟩 3초 컷 상위 1% | 🟨 10초 컷 | 🟦 보조선 힌트 유레카!`)** 및 **1클릭 이모지 그리드 공유 카드**를 탑재하여 댓글 반응 속도(Comment Velocity)와 바이럴 공유를 폭발시킵니다.\n"
-            "3. **`Duolingo` & `Netflix` (일일 수학 직관 스트릭 · 스트릭 보호권 & 5초 자동 다음 편 정주행 극장)**:\n"
-            "   - `video_board.html` 상단에 **Duolingo 스타일 일일 시각 직관 스트릭(`🔥 N일 연속 탐구` + `🛡️ 스트릭 보호권`)**과 **Netflix 스타일 8분+ 마스터클래스 연속 정주행 극장(`🎬 5초 후 다음 시각 증명 자동 재생`)**을 상시 가동하여 일일 재방문율(DAU)과 1인당 평균 시청시간(Session Watch Time)을 극대화합니다.\n\n---\n\n"
-            "## 🚀 Part III."
-        )
-        if "### 정책 6." not in plan_txt and "## 🚀 Part III." in plan_txt:
-            plan_txt = plan_txt.replace("## 🚀 Part III.", policy6_block, 1)
-        elif "### 정책 7." not in plan_txt and "## 🚀 Part III." in plan_txt:
-            policy7_only = policy6_block.split("### 정책 7.")[1]
-            plan_txt = plan_txt.replace("## 🚀 Part III.", "### 정책 7." + policy7_only, 1)
 
         if marker_start in plan_txt and marker_end in plan_txt:
             updated_txt = re.sub(
@@ -158,7 +163,7 @@ def auto_sync_policies_to_plan_min():
         else:
             updated_txt = plan_txt.rstrip() + "\n\n---\n\n" + new_block + "\n"
 
-        if updated_txt != plan_txt:
+        if updated_txt != orig_plan_txt:
             plan_p.write_text(updated_txt, encoding="utf-8")
             return True
     except Exception as exc:
