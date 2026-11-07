@@ -334,4 +334,5 @@ python -X utf8 pr.py status
 - ✅ **20. 국제적으로 통용되는 표준 수학 영어(International Standard Mathematical English) 품질 및 한·영 완전 대칭 무결성 원칙**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
+- ✅ **21. 전담 수석 비서실장 에이전트(secretary.py · .agents/skills/secretary/SKILL.md) 및 텔레그램(@anti7014_bot) 중복 폴링 방지(HTTP 409 Zero-Conflict) 실시간 통합 관제 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->

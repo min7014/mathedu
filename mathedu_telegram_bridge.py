@@ -38,6 +38,7 @@ OFFSET_FILE = ROOT_DIR / ".agents" / "telegram_offset.json"
 INBOX_FILE = ROOT_DIR / ".agents" / "telegram_inbox.jsonl"
 HISTORY_FILE = ROOT_DIR / ".agents" / "telegram_history.json"
 PID_FILE = ROOT_DIR / ".agents" / "telegram_daemon.pid"
+LISTENER_PID_FILE = ROOT_DIR / ".agents" / "telegram_listener.pid"
 
 
 def load_env_config() -> dict:
@@ -139,6 +140,18 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
     현재 열려 있는 Antigravity 대화 세션과 1:1로 연동하기 위한 단일 수신 리스너.
     메시지가 도착하면 즉시 콘솔에 출력하고 종료(code 0)하여 Antigravity의 Reactive Wakeup을 트리거합니다.
     """
+    # 기존 중복 리스너/데몬 PID 정리 (HTTP Error 409 Conflict 원천 차단)
+    for pf in (LISTENER_PID_FILE, PID_FILE):
+        if pf.exists():
+            try:
+                old_pid = int(pf.read_text(encoding="utf-8").strip())
+                if old_pid and old_pid != os.getpid():
+                    subprocess.run(["taskkill", "/F", "/PID", str(old_pid)], capture_output=True)
+            except Exception:
+                pass
+    LISTENER_PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LISTENER_PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
+
     state = load_offset_state()
     offset = int(state.get("offset", 0))
     if not allowed_chat_id and state.get("chat_id"):
