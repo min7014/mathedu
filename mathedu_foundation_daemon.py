@@ -66,7 +66,54 @@ def ensure_video_maker_hooked():
         p.write_text(s, encoding="utf-8")
 
 
+def auto_sync_policies_to_plan_min():
+    """
+    [Rule 12: 모든 정책의 plan_min.md 자동 저장·동기화 엔진]
+    GEMINI.md에 추가·변경된 정책 항목이나 핵심 수익·영상·교육 정책이 plan_min.md에 누락 없이
+    자동 반영되어 있는지 상시 점검하고 자동으로 동기화·저장합니다.
+    """
+    plan_p = ROOT_DIR / "plan_min.md"
+    gemini_p = ROOT_DIR / "GEMINI.md"
+    if not plan_p.exists() or not gemini_p.exists():
+        return False
+    try:
+        plan_txt = plan_p.read_text(encoding="utf-8")
+        gem_txt = gemini_p.read_text(encoding="utf-8")
+        # GEMINI.md의 모든 '## N. ...' 정책 헤더를 추출하여 plan_min.md 하단 자동 동기화 레지스트리에 반영
+        gem_headers = re.findall(r"^##\s+(\d+\.\s+.+)$", gem_txt, flags=re.M)
+        marker_start = "<!-- AUTO_SYNC_POLICY_REGISTRY_START -->"
+        marker_end = "<!-- AUTO_SYNC_POLICY_REGISTRY_END -->"
+        registry_lines = [
+            marker_start,
+            "### 📋 자동 동기화된 전역 워크스페이스 정책 레지스트리 (`GEMINI.md` ➔ `plan_min.md` 실시간 연동)",
+        ]
+        for h in gem_headers:
+            registry_lines.append(f"- ✅ **{h.strip()}**")
+        registry_lines.append(marker_end)
+        new_block = "\n".join(registry_lines)
+
+        if marker_start in plan_txt and marker_end in plan_txt:
+            updated_txt = re.sub(
+                re.escape(marker_start) + r"[\s\S]*?" + re.escape(marker_end),
+                new_block,
+                plan_txt,
+            )
+        else:
+            updated_txt = plan_txt.rstrip() + "\n\n---\n\n" + new_block + "\n"
+
+        if updated_txt != plan_txt:
+            plan_p.write_text(updated_txt, encoding="utf-8")
+            return True
+    except Exception as exc:
+        print(f"[plan_min.md Auto-Sync Notice] {exc}", flush=True)
+    return False
+
+
 def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_audit_passed=0):
+    try:
+        auto_sync_policies_to_plan_min()
+    except Exception:
+        pass
     try:
         import importlib
         import finance
