@@ -368,6 +368,13 @@ def build_ypp_watchtime_masterclasses() -> list:
         for s_key in spec["slugs"]:
             if use_idea:
                 mp4_cand = ROOT_DIR / "video_lectures" / "creative_idea" / f"{s_key}_idea_{lang_code}.mp4"
+                if not mp4_cand.exists():
+                    try:
+                        import creative_idea_cinema as cidea
+                        mp4_cand = cidea.render_creative_idea_cinema_video(s_key, lang_code=lang_code)
+                        cidea.render_creative_idea_short_vertical(s_key, lang_code=lang_code)
+                    except Exception:
+                        pass
             elif use_q:
                 mp4_cand = QUESTION_DIR / f"{s_key}_q_{lang_code}.mp4"
             else:
