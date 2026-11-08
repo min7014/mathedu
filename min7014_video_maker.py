@@ -1620,6 +1620,18 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
         }
 
     res.update(en_fields)
+    aux_ko = res.get("auxiliary_line_ko") or res.get("polya_bridge") or "핵심 보조선과 대칭 분할"
+    conc_ko = res.get("conclusion_ko") or res.get("core_invariant") or "불변 등식"
+    aux_en = res.get("auxiliary_line_en") or "key auxiliary construction"
+    conc_en = res.get("conclusion_en") or "core invariant equation"
+    res.update({
+        "duval_deconstruction_ko": f"[Duval(2006) 차원 해체 & 기호 변환] 2D 원문 도형에서 1D 보조선({aux_ko[:42]})을 분리하여 대수 불변식({conc_ko[:42]})과 1:1 동시 매핑",
+        "duval_deconstruction_en": f"[Duval(2006) Dimensional Deconstruction] Deconstruct 2D figure via 1D auxiliary line ({aux_en[:46]}) into symbolic invariant ({conc_en[:46]})",
+        "mariotti_invariance_ko": f"[Mariotti(2024) 동적 기하 불변성] 점과 각도가 연속적으로 변할 때(Variant) 절대 흔들리지 않는 불변 관계({conc_ko[:45]}) 포착",
+        "mariotti_invariance_en": f"[Mariotti(2024) Dynamic Dragging Invariance] Contrast moving geometric elements against the strict invariant ({conc_en[:48]})",
+        "hanna_explanatory_why_ko": f"[Hanna(2000) 설명적 증명 원리] 단순 결과 확인을 넘어 왜 '{aux_ko[:40]}'이 등식을 필연적으로 성립시키는지 생성 메커니즘 규명",
+        "hanna_explanatory_why_en": f"[Hanna(2000) Explanatory Proof] Reveal the generating mechanism of why '{aux_en[:44]}' makes the theorem inevitable",
+    })
     return res
 
 
@@ -2887,6 +2899,29 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
         )
         draw.rounded_rectangle([150, 90, W - 150, 136], radius=14, fill=(6, 95, 70), outline=(250, 204, 21), width=2)
         draw.text((178, 101), end_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 21, bold=True))
+    elif stage >= 2 and p_num > 1:
+        # [Rule 21: 세계 수학교육학·인지과학 논문(Duval 2006 · Mariotti 2024 · Hanna 2000 · Freudenthal 1991) × min7014 원문 융합 배지]
+        prog_frac = p_num / max(1, tot_p)
+        if prog_frac <= 0.34:
+            res_txt = (
+                "🔬 [Mariotti Dynamic Invariance × min7014] Observe what changes vs. what stays strictly invariant!"
+                if lang_code == "en"
+                else "🔬 [수학교육학 융합 · Mariotti 동적 불변성 × min7014 원문] 움직이는 도형 속 변하지 않는 불변량을 포착하세요!"
+            )
+        elif prog_frac <= 0.72:
+            res_txt = (
+                "📐 [Duval 2D→1D Deconstruction × Pólya Line] This auxiliary line bridges the figure and the equation!"
+                if lang_code == "en"
+                else "📐 [수학교육학 융합 · Duval 차원 해체(2D→1D) × Pólya 보조선] 이 보조선이 도형 직관과 수식을 하나로 잇습니다!"
+            )
+        else:
+            res_txt = (
+                "💡 [Hanna Explanatory Proof × Freudenthal Reinvention] Visual mechanism crystallizes into formal theorem!"
+                if lang_code == "en"
+                else "💡 [수학교육학 융합 · Hanna 설명적 증명 × Freudenthal 재발명] 시각적 필연성이 엄밀한 정리로 완성됩니다!"
+            )
+        draw.rounded_rectangle([210, 88, W - 210, 128], radius=12, fill=(15, 23, 42), outline=(56, 189, 248), width=2)
+        draw.text((236, 96), res_txt, fill=(186, 230, 253), font=get_font_for_lang("ko", 19, bold=True))
 
     # 4. 단계 요약 & 수능 실전 보조선 팁 리본 바 (y: 822 ~ 860)
     draw.rectangle([0, 822, W, 860], fill=(15, 23, 42))

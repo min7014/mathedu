@@ -145,4 +145,12 @@
   3. 영어 TTS(`en-US-AriaNeural`) 합성 시 `clean_english_math_for_tts` 및 `clean_math_for_speech_en`을 통해 수식 기호(`|PF| = |PH|`, `△PFH`, `CK ∥ AB`, `f'(c)/g'(c)`, `(f⁻¹)'(y) = 1/f'(x)`)를 원어민 수학교사의 자연스러운 수식 독법으로 발음하고, 화면 자막에는 깔끔한 유니코드 수학 기호를 표시합니다.
 
 
-
+## 21. 세계 수학교육학·인지과학 학술 논문 및 연구 성과의 min7014.github.io 원문 아이디어 융합 영상 고도화 원칙 (Global Math Education Research & Academic Paper Fusion Principle)
+- **학술 연구와 min7014.github.io 원문 아이디어의 화학적 융합 의무**: 모든 영상(일반 본편, 질문수업 본편, 창의 아이디어 네온 시네마, Shorts, 8분+ 마스터클래스)을 제작할 때 단순히 화면 효과만 높이는 데 그치지 않고, **세계 최고 권위의 수학교육학·인지과학·시각화 학술 논문 12대 핵심 이론(cademicResearchFusionAtlas)을 https://min7014.github.io/의 원문 작도·증명 아이디어 위에 결합**하여 교육적 깊이와 직관적 몰입도를 동시에 극대화합니다.
+- **12대 핵심 수학교육학·인지과학 논문 융합 체계**:
+  1. **Duval (1995, 2006, *Educational Studies in Mathematics*) 기호학적 표상 변환 & 차원 해체(Dimensional Deconstruction)**: min7014의 2D 도형(Figural Register)에서 1D 결정적 보조선을 분리·해체하고 대수 불변 등식(Symbolic Register)과 1:1 동시 매핑합니다.
+  2. **Bussi & Mariotti (2008, 2024) & Hollebrands et al. (2025/2026) 동적 기하(DGE) 기호학적 매개 & 드래그 불변성(Dragging Invariance)**: 점·각도가 움직일 때 변하는 요소(Variant)와 절대 흔들리지 않는 불변량(Invariant)을 화면에서 극명하게 대비시킵니다.
+  3. **Mayer (2021, *Multimedia Learning*) & Sweller (1988, 2024, *Cognitive Load Theory*) 시각 신호 강조(Signaling) & 시공간 근접성(Contiguity)**: 불필요한 텍스트(외재적 인지부하)를 제거하고 신규 보조선 스포트라이트와 핵심 수식을 시공간적으로 밀착 배치하여 본유적 인지부하를 극대화합니다.
+  4. **Gila Hanna (1990, 2000) & Stylianides (2016) 설명적 증명(Explanatory Proof)**: 단순 참/거짓 확인을 넘어 '왜 하필 그 보조선이 등식을 필연적으로 성립시키는가'라는 생성 메커니즘을 규명합니다.
+  5. **Tall (2013, *Three Worlds of Mathematics*) & Sfard (1991, *Reification*)**: 체화된 도형 감각(Embodied/Process) ➔ 기호·비율 조작(Symbolic) ➔ 형식적 증명과 대상화(Formal/Object)의 3단 사다리를 구현합니다.
+  6. **Kapur (2014, *Productive Failure*) · Muller (2008) · Pólya (1945) · Freudenthal (1991, *Guided Reinvention*) · Fischbein (1993) · Lakatos (1976) · Brown & Walter (1983) · Boaler (2016)**: 첫 8초 직관적 인지 갈등 유발 ➔ 폴리아 조건-보조선 1초 번역 ➔ 학습자 스스로의 안내된 재발명 ➔ What-If-Not 조건 변형 및 시각·기호 이중 뇌 회로 활성화를 전 영상 HUD와 한/영 내레이션에 상시 반영합니다.

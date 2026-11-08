@@ -3235,6 +3235,26 @@ def render_creative_idea_cinema_video(slug_key: str = "math20250130001", lang_co
                     for wl_i, wl in enumerate(b_wrapped):
                         draw.text((1326, by0 + 20 + wl_i * 38), wl, fill=(255, 255, 255, 255) if is_active_b else (148, 163, 184, 220), font=f_bul)
 
+                # [Rule 21: 세계 수학교육학·인지과학 논문(Duval · Mariotti · Hanna · Freudenthal) × min7014 원문 아이디어 융합 배지]
+                research_pills_ko = {
+                    1: "★ 연구 융합: Kapur 인지갈등 × Mariotti 동적불변성",
+                    2: "★ 연구 융합: Tall 체화직관 × Sfard 조작적 과정",
+                    3: "★ 연구 융합: Duval 차원해체 × Hanna 설명적 증명",
+                    4: "★ 연구 융합: Freudenthal 재발명 × What-If-Not",
+                    5: "★ 연구 융합: Polya 발견술 × Sweller 스키마 자동화",
+                }
+                research_pills_en = {
+                    1: "★ RESEARCH: Kapur Conflict × Mariotti Invariance",
+                    2: "★ RESEARCH: Tall Embodied × Sfard Process",
+                    3: "★ RESEARCH: Duval 2D→1D × Hanna Explanatory Proof",
+                    4: "★ RESEARCH: Freudenthal Reinvention × What-If-Not",
+                    5: "★ RESEARCH: Polya Heuristics × Sweller Schema",
+                }
+                r_pill_txt = (research_pills_en if lang_code == "en" else research_pills_ko).get(act_num, "")
+                if r_pill_txt:
+                    draw.rounded_rectangle((1304, 794, 1860, 834), radius=10, fill=(15, 23, 42, 235), outline=(56, 189, 248, 220), width=1)
+                    draw.text((1322, 802), sanitize_glyphs(r_pill_txt)[:44], fill=(125, 211, 252, 255), font=f_bul)
+
                 # 하단 시네마틱 키네틱 자막 바
                 draw.rounded_rectangle((36, 868, 1884, 1054), radius=20, fill=(8, 14, 28, 218), outline=(56, 189, 248, 210), width=2)
                 active_ci = min(len(cap_lines) - 1, int(t_raw * len(cap_lines))) if cap_lines else 0
