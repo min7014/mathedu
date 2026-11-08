@@ -730,18 +730,17 @@ def clean_math_for_speech_en(text):
     return _balance_parentheses(re.sub(r"\s+", " ", s).strip())
 
 
-def compute_pedagogical_scene_ranges(total_pages, max_scenes=24):
+def compute_pedagogical_scene_ranges(total_pages, max_scenes=60):
     """
-    [직접 PDF 한 땀 한 땀 단계별 설명 그룹핑 엔진 (v3.0)]
-    - 24페이지 이하의 단계별 증명 PDF는 1페이지 = 1장면으로 한 페이지도 건너뛰지 않고 직접 한 땀 한 땀 설명합니다.
-    - 25페이지 이상의 다중 프레임 플립북 애니메이션 PDF(예: 123페이지 타원 빛 반사, 97페이지 포물선 빛 반사)는
-      전체 프레임을 max_scenes개의 핵심 교육 장면(Scene)으로 분할하여 모든 프레임이 순서대로 재생되도록 합니다.
+    [오리지널 PDF 1페이지 = 1장면 한 땀 한 땀 직접 설명 엔진 (v4.0 — Original Material First)]
+    - 회장님(min7014)의 오리지널 단계별 증명 PDF는 모든 페이지가 고유한 작도·수식 단계를 담고 있으므로,
+      60페이지 이하의 모든 증명 PDF는 단 한 페이지도 묶거나 건너뛰지 않고 100% '1페이지 = 1장면'으로 한 땀 한 땀 직접 설명합니다.
     """
-    if total_pages <= 24:
+    if total_pages <= 60:
         return [(i, i) for i in range(total_pages)]
     scenes = [(0, 0)]
     mid_pages = list(range(1, total_pages - 1))
-    mid_slots = max_scenes - 2
+    mid_slots = max(24, max_scenes) - 2
     n_mid = len(mid_pages)
     for s_idx in range(mid_slots):
         start_i = int(round(s_idx * n_mid / mid_slots))
@@ -1845,7 +1844,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
     """
     total_pages = len(doc)
     if scene_ranges is None:
-        scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=12)
+        scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=60)
     num_scenes = len(scene_ranges)
 
     raw_title = (item_meta or {}).get("title") or "단계별 시각적 수학 증명"
@@ -2367,7 +2366,7 @@ def generate_or_update_script(slug_key, target_langs=None):
                 "narrations": {"ko": exp_ko, "en": exp_en}
             })
     else:
-        scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=12)
+        scene_ranges = compute_pedagogical_scene_ranges(total_pages, max_scenes=60)
         pages_data = auto_generate_page_explanations(doc, item_meta, scene_ranges=scene_ranges)
 
     from concurrent.futures import ThreadPoolExecutor
@@ -2863,7 +2862,7 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     draw.rounded_rectangle([px - 3, py - 3, px + new_w + 3, py + new_h + 3], radius=12, fill=outer_col)
     canvas.paste(pdf_resized, (px, py))
 
-    # 3. 새로 추가된 도형·보조선·수식 영역 스포트라이트 하이라이트 & 코너 브래킷 (show_spotlight=True 시)
+    # 3. 새로 추가된 도형·보조선·수식 영역 스포트라이트 하이라이트 (오리지널 PDF 텍스트·도형을 절대 가리지 않도록 깔끔한 외곽선만 표시)
     bbox = page_info.get("diff_bbox")
     if show_spotlight and bbox and p_num > 1 and p_num <= tot_p:
         bx0 = max(px + 6, px + int(bbox[0] * new_w) - 14)
@@ -2872,75 +2871,12 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
         by1 = min(py + new_h - 6, py + int(bbox[3] * new_h) + 14)
         if (bx1 - bx0) > 26 and (by1 - by0) > 26:
             if stage == 3:
-                # Stage 3: 유레카 이중 골드-크림슨 포커스 링 + 핵심 발견 배지
-                draw.rounded_rectangle([bx0 - 6, by0 - 6, bx1 + 6, by1 + 6], radius=14, outline=(250, 204, 21), width=3)
-                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=5)
-                tag_label = f"★ EUREKA KEY {scene_idx}" if lang_code == "en" else f"★ 유레카 핵심 단서 완성!"
-                tag_w = 186 if lang_code == "en" else 204
-                tag_bg = (180, 83, 9)
+                draw.rounded_rectangle([bx0 - 4, by0 - 4, bx1 + 4, by1 + 4], radius=12, outline=(250, 204, 21), width=2)
+                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=3)
             else:
-                draw.rounded_rectangle([bx0 - 2, by0 - 2, bx1 + 2, by1 + 2], radius=12, outline=(254, 240, 138), width=2)
-                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=4)
-                tag_label = f"FOCUS STEP {scene_idx}" if lang_code == "en" else f"핵심 작도·수식 포커스"
-                tag_w = 152 if lang_code == "en" else 166
-                tag_bg = (225, 29, 72)
-            tag_y = by1 + 5 if (by1 + 32) < (py + new_h) else max(py + 6, by0 - 30)
-            tag_x = max(px + 6, min(px + new_w - tag_w - 6, bx1 - tag_w))
-            draw.rounded_rectangle([tag_x, tag_y, tag_x + tag_w, tag_y + 26], radius=6, fill=tag_bg, outline=(254, 240, 138), width=1)
-            draw.text((tag_x + 10, tag_y + 3), tag_label, fill=(255, 255, 255), font=get_font_for_lang("ko", 16, bold=True))
+                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=3)
 
-    # 3-B. [v6.0 알고리즘 시청 지속시간(Retention) 패턴 인터럽트 배너]
-    # - Cold Open(page=0): 3단계 증명 로드맵 필 표시
-    # - 중반 승부처(50% 지점, stage==3): 중반 이탈 방지 하이라이트 배너
-    # - 클라이맥스/최종 장면(tot_p, stage==3): 다음 영상 정주행(Session Time) 유도 카드
     step_title_str = page_info.get("step_title") or (f"Step {scene_idx}" if lang_code == "en" else f"{scene_idx}단계 핵심 원리")
-    if "COLD OPEN" in step_title_str:
-        rm_txt = (
-            "🗺️ [3-Step Proof Roadmap] ① Spot the Invariant ➔ ② Draw the Key Line ➔ ③ Visual Proof Complete!"
-            if lang_code == "en"
-            else "🗺️ [오늘의 3단계 시각 증명 로드맵] ① 도형 조건 관찰 ➔ ② 결정적 보조선·원리 연결 ➔ ③ 유레카 증명 완성!"
-        )
-        draw.rounded_rectangle([180, 90, W - 180, 136], radius=14, fill=(15, 23, 42), outline=(250, 204, 21), width=2)
-        draw.text((208, 101), rm_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 21, bold=True))
-    elif stage == 3 and tot_p >= 4 and p_num == max(2, tot_p // 2):
-        mid_txt = (
-            "🔥 [KEY TURNING POINT!] Watch how this step connects the entire proof together!"
-            if lang_code == "en"
-            else "🔥 [중간 핵심 승부처!] 바로 이 단계의 연결 고리가 전체 증명을 하나로 완성합니다!"
-        )
-        draw.rounded_rectangle([240, 90, W - 240, 134], radius=14, fill=(159, 18, 57), outline=(254, 240, 138), width=2)
-        draw.text((268, 100), mid_txt, fill=(255, 255, 255), font=get_font_for_lang("ko", 21, bold=True))
-    elif stage == 3 and p_num == tot_p:
-        end_txt = (
-            "🎬 [NEXT UP ON @min7014_ai] Watch the Question-Asking Classroom Edition & Interactive GeoGebra Next! ▸"
-            if lang_code == "en"
-            else "🎬 [다음 추천 영상 이어보기] 이 주제의 '질문하는 수업 버전'과 연관 도형 증명을 지금 바로 이어서 확인하세요! ▸"
-        )
-        draw.rounded_rectangle([150, 90, W - 150, 136], radius=14, fill=(6, 95, 70), outline=(250, 204, 21), width=2)
-        draw.text((178, 101), end_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 21, bold=True))
-    elif stage >= 2 and p_num > 1:
-        # [Rule 21 & 저작권 100% 클린: 순수 수학교육 원리 × min7014 원문 융합 배지]
-        prog_frac = p_num / max(1, tot_p)
-        if prog_frac <= 0.34:
-            res_txt = (
-                "🔬 [Dynamic Geometric Invariance × min7014] Observe what changes vs. what stays strictly invariant!"
-                if lang_code == "en"
-                else "🔬 [동적 기하 불변성 원리 × min7014 원문] 움직이는 도형 속 절대 변하지 않는 불변량을 포착하세요!"
-            )
-        elif prog_frac <= 0.72:
-            res_txt = (
-                "📐 [2D→1D Deconstruction & Auxiliary Bridge] This auxiliary line connects the figure and equation!"
-                if lang_code == "en"
-                else "📐 [기하 차원 해체(2D→1D) & 핵심 보조선] 이 보조선이 도형 직관과 수식을 하나로 잇습니다!"
-            )
-        else:
-            res_txt = (
-                "💡 [Explanatory Visual Proof & Guided Discovery] Visual mechanism crystallizes into formal theorem!"
-                if lang_code == "en"
-                else "💡 [설명적 시각 증명 & 스스로 깨치는 원리] 시각적 필연성이 엄밀한 수학 정리로 완성됩니다!"
-            )
-        draw.rounded_rectangle([210, 88, W - 210, 128], radius=12, fill=(15, 23, 42), outline=(56, 189, 248), width=2)
-        draw.text((236, 96), res_txt, fill=(186, 230, 253), font=get_font_for_lang("ko", 19, bold=True))
 
     # 4. 단계 요약 & 수능 실전 보조선 팁 리본 바 (y: 822 ~ 860)
     draw.rectangle([0, 822, W, 860], fill=(15, 23, 42))
@@ -3611,20 +3547,23 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             "• ⚡ Pythagoras Tree 45s #Shorts: https://youtube.com/shorts/5qmEJcY_VBM\n"
             "• ✨ Ceva's Theorem 45s #Shorts: https://youtube.com/shorts/dAJFCz19c0M"
         )
+        orig_yt_url = ((script_doc.get("youtube_urls") or {}).get("orig") or "").strip()
+        orig_yt_line_en = f"🎬 Original Video (@min7014 Main Channel): {orig_yt_url}\n" if orig_yt_url else ""
         yt_desc = (
-            f"🎬 [8-Min Masterclass Compilation (1080p)] 👉 https://youtu.be/9EL8pgqJtkY\n"
+            f"🏛️ [Original Mathematical Source Materials (https://min7014.github.io/)]\n"
+            f"📄 Original Step-by-Step Visual Proof PDF: {pdf_url}\n"
+            f"📐 Original Interactive Geometry / Proof Page: {web_url}\n"
+            f"{orig_yt_line_en}"
+            f"🌐 Full 3,400+ Original Math Archive: https://min7014.github.io/\n\n"
             f"{hook_en}\n\n"
-            f"🚀 [Try It Yourself on the Free Interactive Math Platform (min7014.github.io/mathedu)]\n"
-            f"1️⃣ 📐 Interactive GeoGebra Applet & 1,113 Visual Proof Video Board:\n👉 {board_url}&from=yt\n"
+            f"🚀 [Interactive Practice & Step-by-Step Quizzes (min7014.github.io/mathedu)]\n"
+            f"1️⃣ 📐 Interactive Video Board & Original Flipbook Studio:\n👉 {board_url}&from=yt\n"
             f"2️⃣ ✍️ De-Multiple-Choice Constructive Math Studio (16,548 Step-by-Step Quizzes):\n👉 https://min7014.github.io/mathedu/?from=yt\n"
-            f"3️⃣ 🌱 Daily 3-Minute Math Eureka (10s Counterexample O/X & What-If-Not Problem Posing):\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
-            f"4️⃣ 🎮 3D Math Sanctuary Boss Raid RPG (Free Browser Game):\n👉 https://min7014.github.io/mathedu/game.html\n"
-            f"5️⃣ 🏛️ Interactive Visual Math Archive (3,400+ Dynamic Proofs):\n👉 {web_url}\n\n"
+            f"3️⃣ 🎬 37-Min Circle & Geometry Visual Proof Masterclass (1080p): https://youtu.be/9EL8pgqJtkY\n\n"
             f"{quiz_en}\n\n"
             f"{binge_en}\n\n"
             f"🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: {sub_url}\n"
             f"📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n"
-            f"📄 Original Step-by-Step PDF: {pdf_url}\n"
             f"🎙️ 20+ Language AI Lecture Studio: {studio_url}\n"
             f"Topic ID: [ID: {slug}_EN]\n\n"
             f"⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n{chapters_block}\n\n"
@@ -3645,8 +3584,6 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         if preset.get("title_ko"):
             yt_title = _balance_parentheses(preset["title_ko"][:98])
         else:
-            # [5대 인기 수학 채널 벤치마킹 (깨봉수학 · 3Blue1Brown · MindYourDecisions · Andy Math · Mathologer)]
-            # 천편일률적인 '[시각적 증명]' 접두사를 탈피하고 모바일 첫 25글자에 강력한 호기심 공백 훅을 배치합니다.
             if pat_idx_ko == 0:
                 cand_ko = f"🔥 공식 외우지 마세요! {concise_ko}, 눈으로 깨치는 {tot_p}단계 시각 증명 | @min7014_ai"
             elif pat_idx_ko == 1:
@@ -3668,34 +3605,37 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
                     short_ko_t = _smart_concise_topic_title(concise_ko, max_len=max_ko_len, lang="ko")
                     yt_title = _balance_parentheses(f"🔥 {short_ko_t}{compact_suffix_ko}")
         hook_ko = preset.get("hook_ko") or (
-            f"무작정 공식을 외우지 마세요! 눈으로 보고 직관적으로 깨치는 [{clean_ko_title}] {tot_p}단계 시각적 증명! 단계별 도형·수식 원리 분석으로 핵심 개념과 증명 과정이 한눈에 드러납니다."
+            f"무작정 공식을 외우지 마세요! 오리지널 수학자료실(https://min7014.github.io/) 원문 슬라이드를 1페이지부터 {tot_p}페이지까지 한 땀 한 땀 직접 짚어 설명하는 [{clean_ko_title}] {tot_p}단계 시각적 증명입니다."
         )
         quiz_ko = preset.get("quiz_ko") or (
             f"💬 [오늘의 5초 유레카 퀴즈] 영상을 멈추고 생각해 보세요! 1페이지부터 {tot_p}페이지 중 증명 전체의 열쇠가 되는 결정적 원리가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!"
         )
         binge_ko = (
-            "🔥 [@min7014_ai 검증된 인기 시각적 증명 & 8분+ 마스터클래스 정주행 시리즈]\n"
-            "• 🎬 [37분 마스터클래스] 공식 암기 끝! 보조선과 시각 직관으로 깨치는 기하 증명 총정리: https://youtu.be/_5LE_BfLA5w\n"
+            "🔥 [@min7014_ai 오리지널 PDF 단계별 시각 증명 정주행 시리즈]\n"
+            "• 🎬 [37분 마스터클래스] 원의 성질 & 수직이등분선 오리지널 PDF 정주행: https://youtu.be/_5LE_BfLA5w\n"
             "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계 본편): https://youtu.be/DSgUHigl82o\n"
             "• 🔥 피타고라스 정리 정사각형 넓이 분할 (25단계 본편): https://youtu.be/7RcvUpfGM6s\n"
             "• 📐 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/zvRgbIKm0jc\n"
-            "• ⚡ 피타고라스 정리 45초 핵심 #Shorts (인기 1위): https://youtube.com/shorts/1RKQ4Uxu4Uw\n"
-            "• ✨ 피타고라스 나무 45초 핵심 #Shorts (인기 2위): https://youtube.com/shorts/maGFOifE-2E"
+            "• ⚡ 피타고라스 정리 45초 핵심 #Shorts: https://youtube.com/shorts/1RKQ4Uxu4Uw\n"
+            "• ✨ 피타고라스 나무 45초 핵심 #Shorts: https://youtube.com/shorts/maGFOifE-2E"
         )
+        orig_yt_url = ((script_doc.get("youtube_urls") or {}).get("orig") or "").strip()
+        orig_yt_line_ko = f"🎬 오리지널 원문 영상 (@min7014 본 채널): {orig_yt_url}\n" if orig_yt_url else ""
         yt_desc = (
-            f"🎬 [8분+ 네온 시네마 마스터클래스 총정리 바로 보기] 👉 https://youtu.be/_5LE_BfLA5w\n"
+            f"🏛️ [오리지널 원문 수학자료실 (https://min7014.github.io/) 바로가기]\n"
+            f"📄 오리지널 단계별 시각 증명 PDF 원문: {pdf_url}\n"
+            f"📐 오리지널 동적 기하(GeoGebra / AlgeoMath) 원문 웹페이지: {web_url}\n"
+            f"{orig_yt_line_ko}"
+            f"🌐 수학자료실 본관 (3,400+ 오리지널 시각 증명 아카이브): https://min7014.github.io/\n\n"
             f"{hook_ko}\n\n"
-            f"🚀 [영상을 본 직후 1초 만에 내 실력으로 만드는 수학홈페이지(mathedu) 무료 실습 링크]\n"
-            f"1️⃣ 📐 방금 본 증명 도형 마우스로 직접 움직여보기 (GeoGebra & 1,113개 설명영상 게시판):\n👉 {board_url}&from=yt\n"
+            f"🚀 [영상을 본 직후 직접 실습하는 수학홈페이지(mathedu) 무료 링크]\n"
+            f"1️⃣ 📐 오리지널 PDF 슬라이드 넘겨보기 & 동적 기하 실습 게시판:\n👉 {board_url}&from=yt\n"
             f"2️⃣ ✍️ [탈-5지선다 창의 구성 모드] 이 개념이 쓰인 수능·모평 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q={clean_ko_title.split()[0]}&from=yt\n"
-            f"3️⃣ 🌱 [오늘의 3분 수학 유레카] 10초 오개념 반례 O/X 퀴즈 & 나만의 변형 문제 발명:\n👉 https://min7014.github.io/mathedu/#dailyGrowthFlywheelSection\n"
-            f"4️⃣ 🎮 [수능 수학 100점 만점 3D 보스 레이드 게임] 설치 없이 브라우저에서 즉시 플레이:\n👉 https://min7014.github.io/mathedu/game.html\n"
-            f"5️⃣ 🏛️ [수학자료실 본관 (3,400+ 동적 기하 아카이브)]:\n👉 {web_url}\n\n"
+            f"3️⃣ 🎬 [37분 마스터클래스 총정리 바로 보기]: https://youtu.be/_5LE_BfLA5w\n\n"
             f"{quiz_ko}\n\n"
             f"{binge_ko}\n\n"
             f"🔔 [@min7014_ai 채널 구독하기]: {sub_url}\n"
             f"📺 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n"
-            f"📄 단계별 플립북 증명 PDF 원문: {pdf_url}\n"
             f"🎙️ 20개국어 AI 강의 스튜디오: {studio_url}\n"
             f"식별 코드: [ID: {slug}_KO]\n\n"
             f"⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n{chapters_block}\n\n"
@@ -3728,9 +3668,9 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
 
 def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
     """
-    [초고품질 1080p MP4 렌더링 엔진]
+    [초고품질 1080p 오리지널 PDF 한 땀 한 땀 직강 MP4 렌더링 엔진]
+    - 오리지널 PDF 1페이지부터 마지막 페이지까지 단 한 페이지도 건너뛰지 않고 1페이지 = 1장면으로 직접 설명합니다.
     - 300 DPI Lanczos 슬라이드 + H.264 High Profile (CRF 16, 30fps) + 48kHz/192kbps Stereo AAC
-    - 슬라이드 전환 직후 0.35초 시각 관찰 호흡 + 설명 후 0.65초 숙고 여운 포함
     """
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     if not script_path.exists():
@@ -3738,19 +3678,24 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
     else:
         with open(script_path, "r", encoding="utf-8") as f:
             script_doc = json.load(f)
-        needs_save = False
-        for p_obj in script_doc["pages"]:
-            if lang_code not in p_obj.get("narrations", {}):
-                p_obj.setdefault("narrations", {})[lang_code] = translate_text_google_gtx(
-                    p_obj["explanation_text"], lang_code
-                )
-                needs_save = True
-        if needs_save:
-            with open(script_path, "w", encoding="utf-8") as f:
-                json.dump(script_doc, f, ensure_ascii=False, indent=2)
 
     pdf_bytes, _ = load_or_build_topic_pdf_bytes(script_doc.get("pdf_url", ""), slug_key)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+
+    # 만약 이전 버전에서 페이지가 묶여(예: 20페이지 PDF가 12장면으로 축약) 저장된 대본이라면 즉시 1페이지=1장면으로 재생성!
+    if len(doc) <= 60 and len(script_doc.get("pages") or []) != len(doc):
+        script_doc = generate_or_update_script(slug_key, target_langs=[lang_code, "en", "ko"])
+
+    needs_save = False
+    for p_obj in script_doc["pages"]:
+        if lang_code not in p_obj.get("narrations", {}):
+            p_obj.setdefault("narrations", {})[lang_code] = translate_text_google_gtx(
+                p_obj["explanation_text"], lang_code
+            )
+            needs_save = True
+    if needs_save:
+        with open(script_path, "w", encoding="utf-8") as f:
+            json.dump(script_doc, f, ensure_ascii=False, indent=2)
 
     lang_meta = GLOBAL_VOICE_MAP.get(lang_code, GLOBAL_VOICE_MAP["en"])
     voice_name = lang_meta["voice"]
@@ -3761,8 +3706,6 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
         raise RuntimeError("ffmpeg executable not found in PATH")
 
     pages_to_render = list(script_doc["pages"])
-    # Curated scripts (e.g. 2014111901, 2014111902, 2017090101, math20250130001) and mathteacher-generated scripts
-    # already have exact 1-based page ordering and frame_range. Never re-group with 0-based f_end-1!
     if max_pages:
         pages_to_render = pages_to_render[:max_pages]
 
@@ -3773,77 +3716,11 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
     segment_files = []
     page_timings = []
     cursor_sec = 0.0
-    vprof = get_viral_hook_profile(script_doc)
     chime_wav = ensure_harmonic_chime_wav()
     ambient_wav = ensure_ambient_pad_wav()
 
     try:
-        # [v6.0 Climax-First 3-Frame Dynamic Cold Open (Segment 0)]
-        # 첫 8초 동안 약 2.5초 간격으로 화면이 전환(클라이맥스 전체 ➔ 출발 도형 ➔ 클라이맥스 유레카 스포트라이트)되어 초반 이탈을 원천 차단합니다!
-        cold_text = build_topic_cold_open(script_doc, lang_code=lang_code)
-        climax_doc_idx = max(0, len(doc) - 2)
-        origin_doc_idx = 0
-        climax_info = dict(pages_to_render[-1])
-        climax_info["page"] = climax_doc_idx + 1
-        climax_info["step_title"] = "⚡ COLD OPEN · 직관을 깨는 시각적 증명 하이라이트" if lang_code != "en" else "⚡ COLD OPEN · Visual Proof Highlight"
-        climax_info["narrations"] = dict(climax_info.get("narrations") or {})
-        climax_info["narrations"][lang_code] = cold_text
-        climax_info["explanation_text"] = cold_text
-
-        cold_img_1 = render_slide_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, show_spotlight=False, stage=1)
-        cold_img_2 = render_slide_frame_1080p(doc[origin_doc_idx], climax_info, script_doc, lang_code, show_spotlight=False, stage=2)
-        cold_img_3 = render_slide_frame_1080p(doc[climax_doc_idx], climax_info, script_doc, lang_code, show_spotlight=True, stage=3)
-        c_p1 = tmp_dir / "cold_01.png"
-        c_p2 = tmp_dir / "cold_02.png"
-        c_p3 = tmp_dir / "cold_03.png"
-        cold_img_1.save(c_p1, compress_level=1)
-        cold_img_2.save(c_p2, compress_level=1)
-        cold_img_3.save(c_p3, compress_level=1)
-
-        cold_mp3 = tmp_dir / "cold_audio.mp3"
-        cold_seg = tmp_dir / "seg_cold_000.mp4"
-        comm_cold = edge_tts.Communicate(cold_text, voice_name, rate="+10%")
-        asyncio.run(comm_cold.save(str(cold_mp3)))
-        cold_dur = get_media_duration_seconds(cold_mp3, ffprobe_exe) + 0.55
-        cd1 = round(cold_dur * 0.32, 3)
-        cd2 = round(cold_dur * 0.34, 3)
-        cd3 = max(0.8, round(cold_dur - cd1 - cd2, 3))
-        cold_concat = tmp_dir / "cold_concat.txt"
-        cold_concat.write_text(
-            f"file '{c_p1.as_posix()}'\nduration {cd1}\n"
-            f"file '{c_p2.as_posix()}'\nduration {cd2}\n"
-            f"file '{c_p3.as_posix()}'\nduration {cd3}\n"
-            f"file '{c_p3.as_posix()}'\n",
-            encoding="utf-8",
-        )
-        cmd_cold = [
-            ffmpeg_exe, "-y",
-            "-f", "concat", "-safe", "0", "-i", str(cold_concat),
-            "-i", str(cold_mp3),
-            "-i", str(chime_wav),
-            "-filter_complex",
-            "[1:a]aformat=sample_rates=48000:channel_layouts=stereo,apad=pad_dur=0.45[v];"
-            "[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.18[c];"
-            "[v][c]amix=inputs=2:duration=first:dropout_transition=0[aout]",
-            "-map", "0:v", "-map", "[aout]",
-            "-c:v", "libx264", "-profile:v", "high", "-level:v", "4.2",
-            "-preset", "veryfast", "-tune", "stillimage",
-            "-crf", "16", "-pix_fmt", "yuv420p", "-r", "30",
-            "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
-            "-shortest",
-            str(cold_seg),
-        ]
-        subprocess.run(cmd_cold, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        c_seg_dur = get_media_duration_seconds(cold_seg, ffprobe_exe)
-        page_timings.append({
-            "page": 0,
-            "start": 0.0,
-            "end": round(c_seg_dur, 3),
-            "duration": round(c_seg_dur, 3),
-            "text": cold_text,
-        })
-        cursor_sec += c_seg_dur
-        segment_files.append(cold_seg)
+        # 오리지널 PDF의 1페이지(doc[0])부터 마지막 페이지까지 순서대로 한 땀 한 땀 직접 설명합니다 (순서 뒤섞는 Cold Open 제거)
         for seg_idx, p_info in enumerate(pages_to_render):
             p_idx = p_info["page"] - 1
             f_range = p_info.get("frame_range") or [p_info["page"], p_info["page"]]
@@ -4159,22 +4036,7 @@ def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_
     draw.rounded_rectangle([W - 565, 14, W - 24, 58], radius=12, fill=(190, 18, 60), outline=(254, 240, 138), width=2)
     draw.text((W - 548, 23), q_right_badge, fill=(255, 255, 255), font=font_q_badge)
 
-    step_q_display = (
-        page_info.get("step_question_en")
-        if lang_code == "en"
-        else page_info.get("step_question_ko")
-    ) or ("❓ What stays invariant here?" if lang_code == "en" else "❓ 이 단계에서 변하지 않는 핵심 관계는 무엇일까요?")
-
-    # 슬라이드 상단 플로팅 발문 카드 표시
-    banner_bg = (159, 18, 57) if stage == 1 else ((6, 95, 70) if stage == 3 else (15, 23, 42))
-    banner_outline = (250, 204, 21) if stage in (1, 3) else (56, 189, 248)
-    draw.rounded_rectangle([140, 88, W - 140, 138], radius=14, fill=banner_bg, outline=banner_outline, width=2)
-    if lang_code == "en":
-        prefix = "🙋 [Ask First!] " if stage == 1 else ("★ [Eureka Insight!] " if stage == 3 else "💡 [Visual Discovery!] ")
-    else:
-        prefix = "🙋 [발문 · 먼저 생각해 보세요!] " if stage == 1 else ("★ [유레카 핵심 통찰 완성!] " if stage == 3 else "💡 [시각적 단서 발견!] ")
-    draw.text((164, 99), (prefix + step_q_display)[:82], fill=(254, 240, 138), font=font_q_banner)
-
+    # 오리지널 PDF 슬라이드(y: 86~810)를 전혀 가리지 않도록 상단 플로팅 배너 제거 (하단 리본 바에 발문이 깔끔하게 표시됨)
     return canvas
 
 
@@ -4194,6 +4056,8 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
 
     pdf_bytes, _ = load_or_build_topic_pdf_bytes(script_doc.get("pdf_url", ""), slug_key)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+    if len(doc) <= 60 and len(script_doc.get("pages") or []) != len(doc):
+        script_doc = generate_or_update_script(slug_key, target_langs=[lang_code, "en", "ko"])
     pages_to_render = script_doc["pages"]
     n_pages = len(pages_to_render)
 
