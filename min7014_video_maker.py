@@ -1609,23 +1609,23 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "misconception_en": "Before claiming the inner figure has area c², verify that its four interior angles are 90° using the fact that the two acute angles of a right triangle sum to 90°",
             "what_if_not_en": "If we replace the squares on the three sides with any three similar shapes (semicircles, equilateral triangles), does the area sum still hold?"
         }
-    elif any(k in blob_l for k in ("algeomath", "알지오매스", "geogebra", "지오지브라", "공학도구", "체크박스", "이벤트 만들기", "텍스트 만들기", "경사하강법", "gradient descent", "slope field", "방향장")):
+    elif any(k in blob_l for k in ("mathlab", "algeomath", "알지오매스", "geogebra", "지오지브라", "공학도구", "체크박스", "이벤트 만들기", "텍스트 만들기", "경사하강법", "gradient descent", "slope field", "방향장")):
         res.update({
             "category_type": "math_engineering_tools",
-            "hypothesis_ko": f"[수학공학도구(GeoGebra·AlgeoMath) 실전 환경] '{ko_t or title}'의 수학적 대상(점·선분·원·함수·슬라이더·체크박스)과 초기 매개변수 설정",
-            "conclusion_ko": f"[도구적 발생(Artigue 2002) & 동적 시각화 완성] 공학도구 명령어와 동적 작도를 통해 '{ko_t or title}'의 기하학적 불변량·자취·최적화 해를 실시간 시뮬레이션으로 완성",
-            "auxiliary_line_ko": "슬라이더/체크박스 불리언 변수 연동, 수직이등분선·원·교점 도구 결합, 또는 방향장(SlopeField)/경사하강법 반복 벡터 작도",
-            "proof_logic_ko": "정적인 칠판 판서로는 볼 수 없는 매개변수 연속 변화(Dragging)와 단계별 조건부 표시(Condition to Show Object)를 결합하여 대수 수식과 기하 자취가 100% 일치함을 시각적으로 검증",
-            "misconception_ko": "눈대중으로 점을 찍어 어림잡아 그리지 말고, 반드시 '교점·수선·평행선·컴퍼스' 기하 구속 조건(Geometric Constraints)과 정확한 수식 명령어로 작도해야 드래그해도 도형이 깨지지 않습니다",
-            "what_if_not_ko": "슬라이더 범위나 초기 점의 위치를 실시간으로 드래그하여 바꾸면(What-If-Not) 자취와 수렴 경로가 어떻게 달라질까요?",
+            "hypothesis_ko": f"[보편적 수학공학도구 & 자체 제작 MathLab 실습 환경] 특정 프로그램에 얽매이지 않고 '{ko_t or title}'의 수학적 대상(점·선분·원·이차곡선·함수·매개변수)과 기하 구속 조건을 설정",
+            "conclusion_ko": f"[보편적 동적 기하 & 시뮬레이션 완성] 자체 제작 MathLab(min7014.github.io/2025/mathlab.html) 및 모든 수학공학도구에서 공통으로 작동하는 수학적 원리로 '{ko_t or title}'의 불변량·자취·최적화 해를 실시간 검증",
+            "auxiliary_line_ko": "기하 구속 조건(교점·수선·평행선·중점·각이등분선·초점 정의), 동적 매개변수 제어, 또는 방향장(SlopeField)/경사하강법 반복 벡터 작도",
+            "proof_logic_ko": "특정 프로그램의 메뉴 암기가 아니라 '자유점과 구속점의 관계, 매개변수 연속 변화(Dragging), 반복 수열과 자취 생성'이라는 보편적 수학공학 원리를 통해 대수 수식과 기하 자취가 100% 일치함을 시각적으로 규명",
+            "misconception_ko": "특정 소프트웨어 버튼 위치만 외우거나 눈대중으로 점을 찍지 말고, 어떤 수학공학도구(자체 MathLab, 오픈소스 JSXGraph/Python, 알지오매스, 지오지브라 등)에서도 동일하게 성립하는 '기하학적 정의와 구속 조건'으로 설계해야 드래그해도 도형이 깨지지 않습니다",
+            "what_if_not_ko": "매개변수 범위나 초기 점의 위치를 실시간으로 드래그하여 바꾸면(What-If-Not) 자취와 수렴 경로가 어떻게 달라질까요?",
         })
         en_fields = {
-            "hypothesis_en": f"[Dynamic Math Engineering Tool Lab] Initial geometric objects, algebraic expressions, and slider/checkbox parameters for '{en_topic}'",
-            "conclusion_en": f"[Dynamic Mathematical Simulation] Interactive construction and live verification of '{en_topic}' via exact geometric constraints and dynamic scripting",
-            "auxiliary_line_en": "Bind boolean checkboxes/sliders to step-by-step visibility conditions, intersect circles/lines via exact construction tools, or plot vector slope fields and gradient descent steps",
-            "proof_logic_en": "By encoding mathematical definitions as dynamic tool constraints, dragging any free point preserves the invariant theorem across all configurations",
-            "misconception_en": "Never place points by visual estimation—always use exact intersection, compass, perpendicular, or algebraic command bindings so the construction passes the Dragging Test",
-            "what_if_not_en": "What new locus or dynamical behavior emerges when we animate the slider parameter or generalize the differential/geometric condition?"
+            "hypothesis_en": f"[Universal Mathematical Engineering & MathLab Environment] Tool-agnostic geometric objects, algebraic expressions, and dynamic parameters for '{en_topic}'",
+            "conclusion_en": f"[Tool-Agnostic Dynamic Mathematical Simulation] Interactive construction and live verification of '{en_topic}' via universal geometric constraints and algorithmic scripting",
+            "auxiliary_line_en": "Apply universal geometric constraints (intersections, perpendiculars, parallels, conic foci), dynamic parameter sliders, or vector slope fields and gradient descent steps",
+            "proof_logic_en": "Rather than memorizing software-specific menus, encoding pure mathematical definitions as dynamic constraints ensures that dragging any free point preserves the invariant theorem across any math engineering tool (MathLab, JSXGraph, Python, AlgeoMath, or GeoGebra)",
+            "misconception_en": "Never place points by visual estimation—always use exact mathematical constraints (intersection, perpendicular, focus-directrix, or sequence expressions) so the construction passes the Dragging Test in any environment",
+            "what_if_not_en": "What new locus or dynamical behavior emerges when we animate the parameter or generalize the differential/geometric condition?"
         }
     else:
         en_fields = {
@@ -7661,8 +7661,9 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
 
     # 1순위: https://min7014.github.io/ 의 16대 전 영역 미제작 '다른 자료들'(신규 PDF + Non-PDF 웹/GeoGebra/AlgeoMath 자료)을 단원별 라운드로빈으로 선택!
     domain_flagships = [
-        # [수학공학도구 마스터 커리큘럼 (Stage 1~5: 기초 입문 ➔ 기하·함수 ➔ 확률·통계 시뮬레이션 ➔ 자취·창의탐구 ➔ 시험문제 제작·AI 수학)]
-        "2021042603",       # [Stage 1-1] GeoGebra 프로그램 설치 및 기초 시작 강의록 (ISBN 979-11-87541-13-4 제1장)
+        # [보편적 수학공학도구 & 자체 제작 MathLab 마스터 커리큘럼 (Stage 1~5: 특정 도구에 얽매이지 않는 동적 기하·함수·통계·자취·AI 수학)]
+        "mathlab",          # [Stage 1-0] 자체 제작 수학공학도구 MathLab(min7014.github.io/2025/mathlab.html)과 보편적 동적 기하 설계 원리
+        "2021042603",       # [Stage 1-1] 수학공학도구 기초 시작과 동적 기하 구속 조건 원리 (ISBN 979-11-87541-13-4 제1장)
         "math20190921001",  # [Stage 1-2] AlgeoMath 빠르게 배우기 (Learn AlgeoMath Quickly)
         "math20210424001",  # [Stage 1-3] TikZ by Min (LaTeX TikZ 수학교육 도형 코드 작도 기초)
         "math20210426002",  # [Stage 1-4] 수학교사와 학생을 위한 GeoGebra와 수학의 시각화 총론

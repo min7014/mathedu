@@ -241,55 +241,31 @@ def ensure_video_board_strategic_lab_features() -> bool:
         return;
       }
       labBox.style.display = 'block';
-      const ggbUrl = item.geogebra || 'https://www.geogebra.org/classic';
+      const ggbUrl = item.geogebra || '';
+      const mathlabUrl = 'https://min7014.github.io/2025/mathlab.html';
       labBox.innerHTML = `
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-          <div style="font-weight:900;font-size:0.95rem;color:#38bdf8;">🛠️ [수학공학도구 실시간 실습 스튜디오] 영상을 보며 직접 작도·코딩해 보세요! (ISBN 979-11-87541-13-4 연계)</div>
-          <div style="display:flex;gap:6px;">
-            <a href="${ggbUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#0284c7;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">🧭 GeoGebra 전체화면 ↗</a>
-            <a href="https://www.algeomath.kr/" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#059669;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">📐 AlgeoMath 실행 ↗</a>
+          <div style="font-weight:900;font-size:0.95rem;color:#38bdf8;">🛠️ [보편적 수학공학도구 실시간 실습 스튜디오 — 자체 제작 MathLab v1.3 탑재] 특정 도구에 얽매이지 않고 원리대로 직접 작도해 보세요!</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <a href="${mathlabUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#e11d48;color:#fff;font-size:0.78rem;font-weight:900;text-decoration:none;">🚀 자체 제작 MathLab 전체화면 ↗</a>
+            ${ggbUrl ? `<a href="${ggbUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#0284c7;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">🧭 원본 동적기하 자료 ↗</a>` : ''}
+            <a href="https://www.algeomath.kr/" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#059669;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">📐 공교육 알지오매스 ↗</a>
             <button type="button" onclick="document.getElementById('vbGeoGebraSplitLabBox').style.display='none'" style="padding:5px 10px;border-radius:8px;background:#334155;color:#fff;border:none;font-size:0.78rem;cursor:pointer;">닫기 ✕</button>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:12px;font-size:0.78rem;background:#1e293b;padding:12px;border-radius:12px;border:1px solid #334155;">
-          <div><strong style="color:#facc15;">📌 [Stage 1~2 기초·함수 명령어]</strong><br><code>Intersect(도형1, 도형2)</code> 교점 고정<br><code>Function(f(x), a, b)</code> 제한된 범위 함수<br><code>Slider(min, max, step)</code> 동적 매개변수</div>
-          <div><strong style="color:#34d399;">📌 [Stage 3~4 통계·자취·포락선]</strong><br><code>Locus(자취점 Q, 동점 P)</code> 자취 작도<br><code>Envelope(접선식, 동점 P)</code> 포락선<br><code>SlopeField(f(x,y))</code> 미분방정식 방향장</div>
-          <div><strong style="color:#f472b6;">📌 [Stage 5 리스트·스크립트 코딩]</strong><br><code>Sequence(식, 변수, 시작, 끝)</code> 수열·다중작도<br><code>CountIf(조건, 리스트)</code> 확률 시뮬레이션<br><code>Element(리스트, 번호)</code> / <code>Sort(리스트)</code></div>
+          <div><strong style="color:#facc15;">📌 [1. 자체 제작 MathLab (min7014.github.io/2025/mathlab.html)]</strong><br>• 기하 작도: 점(●)·선분(╱)·직선(↔)·평행선(∥)·수선(⊥)·중점(•)·각이등분선(∠)<br>• 이차곡선: 원(○)·포물선(∪, 초점+준선)·타원(⬭, 두 초점+점)·쌍곡선()(, 두 초점+점)<br>• 수식/함수: 빈 공간 1초 롱프레스(LaTeX 텍스트) / 클릭 후 1초 홀드(함수·음함수 그래프)</div>
+          <div><strong style="color:#34d399;">📌 [2. 보편적 동적 기하·시뮬레이션 설계 원리 (Tool-Agnostic)]</strong><br>• <code>구속 조건(Constraint)</code>: 눈대중 배치 금지, 반드시 교점·수선·평행선 정의로 결합<br>• <code>매개변수(Parameter)</code>: 구간 [a,b]·기울기·시행 횟수 n을 동적 변수로 제어<br>• <code>자취·포락선(Locus & Envelope)</code>: 동점 P에 종속된 점 Q와 접선군의 자취 추적</div>
+          <div><strong style="color:#f472b6;">📌 [3. 오픈소스 & 범용 수식 스크립트 문법 호환표]</strong><br>• 반복 생성: <code>Sequence(식, 변수, 시작, 끝)</code> / Python <code>[f(k) for k in range(a,b)]</code><br>• 조건부 집계: <code>CountIf(조건, 리스트)</code> / 통계 몬테카를로 확률 시뮬레이션<br>• 수치 최적화: <code>Newton-Raphson 투영</code> & <code>경사하강법(Gradient Descent)</code></div>
         </div>
-        <div style="background:#090d16;border:1px solid #334155;border-radius:12px;padding:14px;text-align:center;">
-          <div style="font-size:0.82rem;color:#94a3b8;margin-bottom:8px;">✨ <strong>Mathedu 100% 자체 제작 HTML5 동적 기하·자취 인터랙티브 캔버스</strong> (저작권 100% 자체 엔진 · 슬라이더나 마우스로 점 P의 각도를 움직여 자취와 불변량 |PF₁|+|PF₂|=2a를 실험하세요!)</div>
-          <canvas id="vbSelfHostedGeoCanvas" width="720" height="280" style="max-width:100%;background:#0f172a;border-radius:10px;border:1px solid #38bdf8;cursor:pointer;"></canvas>
-          <div style="margin-top:8px;"><input id="vbSelfGeoSlider" type="range" min="0" max="360" value="55" style="width:80%;accent-color:#38bdf8;" oninput="window.drawVbSelfGeoCanvas && window.drawVbSelfGeoCanvas(this.value)"></div>
-          <div style="margin-top:8px;font-size:0.76rem;color:#cbd5e1;">외부 공학도구 공식 사이트에서 직접 작도하려면 상단의 <strong>[🧭 GeoGebra 전체화면 ↗]</strong> 또는 <strong>[📐 AlgeoMath 실행 ↗]</strong> 새 창 링크를 클릭하세요.</div>
+        <div style="background:#090d16;border:1px solid #38bdf8;border-radius:12px;overflow:hidden;">
+          <div style="padding:8px 14px;background:#1e293b;font-size:0.8rem;color:#fef08a;font-weight:800;display:flex;justify-content:space-between;align-items:center;">
+            <span>✨ 100% 자체 제작 수학공학도구 <strong>MathLab v1.3</strong> (저작권 100% 자체 보유 · 점/직선/원/포물선/타원/쌍곡선/평행선/수선/각이등분선/학습모드 즉시 실습)</span>
+            <span style="color:#38bdf8;">KO / EN 지원</span>
+          </div>
+          <iframe src="${mathlabUrl}" style="width:100%;height:520px;border:none;background:#f8f9fa;" allowfullscreen></iframe>
         </div>
       `;
-      window.drawVbSelfGeoCanvas = function(degVal) {
-        const cv = document.getElementById('vbSelfHostedGeoCanvas');
-        if (!cv) return;
-        const ctx = cv.getContext('2d');
-        const W = cv.width, H = cv.height, cx = W / 2, cy = H / 2;
-        const a = 180, b = 105, c = Math.sqrt(a * a - b * b);
-        const rad = (parseFloat(degVal || 55) * Math.PI) / 180;
-        const px = cx + a * Math.cos(rad), py = cy - b * Math.sin(rad);
-        const f1x = cx - c, f1y = cy, f2x = cx + c, f2y = cy;
-        ctx.clearRect(0, 0, W, H);
-        ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke();
-        ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.5;
-        ctx.beginPath(); ctx.ellipse(cx, cy, a, b, 0, 0, Math.PI * 2); ctx.stroke();
-        ctx.strokeStyle = 'rgba(250,204,21,0.35)'; ctx.setLineDash([5, 5]);
-        ctx.beginPath(); ctx.arc(cx, cy, a, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
-        ctx.strokeStyle = '#f43f5e'; ctx.lineWidth = 2.2;
-        ctx.beginPath(); ctx.moveTo(f1x, f1y); ctx.lineTo(px, py); ctx.lineTo(f2x, f2y); ctx.stroke();
-        [{x:f1x,y:f1y,l:'F₁(-c,0)',col:'#facc15'},{x:f2x,y:f2y,l:'F₂(c,0)',col:'#facc15'},{x:px,y:py,l:'P(x,y)',col:'#34d399'}].forEach(pt => {
-          ctx.fillStyle = pt.col; ctx.beginPath(); ctx.arc(pt.x, pt.y, 6, 0, Math.PI * 2); ctx.fill();
-          ctx.font = 'bold 13px sans-serif'; ctx.fillText(pt.l, pt.x + 8, pt.y - 8);
-        });
-        const d1 = Math.hypot(px - f1x, py - f1y), d2 = Math.hypot(px - f2x, py - f2y);
-        ctx.fillStyle = '#e2e8f0'; ctx.font = 'bold 13px monospace';
-        ctx.fillText(`|PF₁| = ${(d1/36).toFixed(2)}  +  |PF₂| = ${(d2/36).toFixed(2)}  ⇒  |PF₁| + |PF₂| = ${((d1+d2)/36).toFixed(2)} = 2a (불변량 일정!)`, 18, 26);
-      };
-      setTimeout(() => window.drawVbSelfGeoCanvas(55), 50);
     };
     window.copyTeacherLessonRecordKit = function(itemIdx) {
       const item = ALL_ITEMS[itemIdx] || {};
