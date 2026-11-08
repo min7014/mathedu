@@ -625,15 +625,19 @@ def upload_pending_masterclass_to_youtube(max_uploads: int = 1) -> int:
 
     def _mc_priority_key(mp: Path):
         stem = mp.stem.replace("_meta", "")
-        if stem.startswith("masterclass_neon_idea_"):
-            return (0, stem)
+        dur_val = 0.0
+        try:
+            d_obj = json.loads(mp.read_text(encoding="utf-8"))
+            dur_val = float(d_obj.get("duration_sec") or 0.0)
+        except Exception:
+            pass
         if stem.startswith("masterclass_euclidean_geometry_"):
-            return (1, stem)
-        if stem.startswith("masterclass_question_asking_"):
-            return (2, stem)
-        if stem.startswith(("masterclass_radicals", "masterclass_exponents", "masterclass_parallelogram")):
-            return (3, stem)
-        return (4, stem)
+            return (0, -dur_val, stem)
+        if stem.startswith("masterclass_question_"):
+            return (1, -dur_val, stem)
+        if stem.startswith("masterclass_circle_theorems_"):
+            return (2, -dur_val, stem)
+        return (3, -dur_val, stem)
 
     uploaded_cnt = 0
     for meta_p in sorted(MASTERCLASS_DIR.glob("*_meta.json"), key=_mc_priority_key):
@@ -1217,15 +1221,23 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
     if yt_test is None:
         return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
 
-    ordered_slugs = []
+    slug_candidates = []
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         try:
             sdoc = json.loads(sp.read_text(encoding="utf-8"))
             pdf_u = str(sdoc.get("pdf_url") or "").lower()
             if pdf_u.endswith(".pdf") and "min7014.github.io" in pdf_u:
-                ordered_slugs.append(sp.stem)
+                ko_dur = float(((sdoc.get("youtube_packages") or {}).get("ko") or {}).get("total_duration_sec") or 0.0)
+                q_dur = float(((sdoc.get("question_classroom_packages") or {}).get("ko") or {}).get("duration_sec") or 0.0)
+                best_dur = max(ko_dur, q_dur)
+                p_cnt = int(sdoc.get("page_count") or len(sdoc.get("pages") or []))
+                is_midroll = 1 if best_dur >= 480.0 else 0
+                slug_candidates.append((is_midroll, best_dur, p_cnt, sp.stem))
         except Exception:
             continue
+    # [일일 6슬롯 수익·시청시간 극대화 정렬]: 8분+(480s+) 미드롤 광고 가능 & 다페이지 심층 오리지널 PDF 우선 업로드
+    slug_candidates.sort(key=lambda x: (-x[0], -x[1], -x[2], x[3]))
+    ordered_slugs = [x[3] for x in slug_candidates]
 
     uploaded_items = []
     total_uploaded = 0
