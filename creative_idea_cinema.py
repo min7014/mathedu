@@ -2954,15 +2954,15 @@ def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: s
         return (
             f"{src_line}"
             f"{q_txt}\n"
-            f"⚡ [Wordle × Chess.com 스타일 1초 댓글 등급표 — 정답 숫자와 함께 이모지를 남겨보세요!]\n"
+            f"⚡ [오늘의 1초 직관 댓글 등급표 — 정답 숫자와 함께 이모지를 남겨보세요!]\n"
             f"🟩 3초 컷 (상위 1% 직관) | 🟨 10초 컷 | 🟦 영상 보조선 보고 유레카!\n\n"
             f"📄 [이 영상의 모태가 된 https://min7014.github.io/ 단계별 증명 PDF & 동적 기하 원문]:\n"
             f"👉 원문 아카이브: {web_u}\n"
             f"👉 단계별 증명 PDF: {pdf_u}\n"
             f"👉 인터랙티브 실습 보드: {ggb_url}\n\n"
-            f"🎬 [Netflix 스타일 연속 정주행 — 8분+ 네온 시네마 마스터클래스 본편 바로 보기]\n"
+            f"🎬 [연속 정주행 — 8분+ 네온 시네마 마스터클래스 본편 바로 보기]\n"
             f"👉 https://youtu.be/_5LE_BfLA5w\n\n"
-            f"🔔 [매일 1개 두올링고(Duolingo)처럼 수학 직관 스트릭 쌓기 — 1초 무료 구독]\n"
+            f"🔔 [매일 1개 수학 직관 스트릭 쌓기 — 1초 무료 구독]\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1"
         )
     else:
@@ -2971,7 +2971,7 @@ def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: s
         return (
             f"{src_line}"
             f"{q_txt}\n"
-            f"⚡ [Wordle × Chess.com Speed Tier — Reply with Your Emoji + Answer!]\n"
+            f"⚡ [Visual Math Speed Tier — Reply with Your Emoji + Answer!]\n"
             f"🟩 Solved in <3s (Top 1%) | 🟨 Solved in <10s | 🟦 Needed the Visual Clue!\n\n"
             f"📄 [Original Step-by-Step Proof PDF & Interactive Archive on https://min7014.github.io/]:\n"
             f"👉 Archive: {web_u}\n"
@@ -3235,20 +3235,20 @@ def render_creative_idea_cinema_video(slug_key: str = "math20250130001", lang_co
                     for wl_i, wl in enumerate(b_wrapped):
                         draw.text((1326, by0 + 20 + wl_i * 38), wl, fill=(255, 255, 255, 255) if is_active_b else (148, 163, 184, 220), font=f_bul)
 
-                # [Rule 21: 세계 수학교육학·인지과학 논문(Duval · Mariotti · Hanna · Freudenthal) × min7014 원문 아이디어 융합 배지]
+                # [Rule 21 & 저작권 100% 클린: 순수 수학교육 원리 × min7014 원문 아이디어 융합 배지]
                 research_pills_ko = {
-                    1: "★ 연구 융합: Kapur 인지갈등 × Mariotti 동적불변성",
-                    2: "★ 연구 융합: Tall 체화직관 × Sfard 조작적 과정",
-                    3: "★ 연구 융합: Duval 차원해체 × Hanna 설명적 증명",
-                    4: "★ 연구 융합: Freudenthal 재발명 × What-If-Not",
-                    5: "★ 연구 융합: Polya 발견술 × Sweller 스키마 자동화",
+                    1: "★ 핵심 원리: 직관적 질문 × 동적 기하 불변성",
+                    2: "★ 핵심 원리: 시각적 조작 × 기호 관계 발견",
+                    3: "★ 핵심 원리: 차원 해체(2D→1D) × 설명적 증명",
+                    4: "★ 핵심 원리: 스스로 깨치는 재발명 × 조건 변형",
+                    5: "★ 핵심 원리: 보조선 발견술 × 개념 구조 완성",
                 }
                 research_pills_en = {
-                    1: "★ RESEARCH: Kapur Conflict × Mariotti Invariance",
-                    2: "★ RESEARCH: Tall Embodied × Sfard Process",
-                    3: "★ RESEARCH: Duval 2D→1D × Hanna Explanatory Proof",
-                    4: "★ RESEARCH: Freudenthal Reinvention × What-If-Not",
-                    5: "★ RESEARCH: Polya Heuristics × Sweller Schema",
+                    1: "★ PRINCIPLE: Visual Inquiry × Dynamic Invariance",
+                    2: "★ PRINCIPLE: Embodied Action × Symbolic Relation",
+                    3: "★ PRINCIPLE: 2D→1D Deconstruction × Visual Proof",
+                    4: "★ PRINCIPLE: Guided Discovery × Condition Variation",
+                    5: "★ PRINCIPLE: Auxiliary Line × Structural Mastery",
                 }
                 r_pill_txt = (research_pills_en if lang_code == "en" else research_pills_ko).get(act_num, "")
                 if r_pill_txt:
@@ -3576,7 +3576,7 @@ def build_creative_idea_youtube_description_and_tags(
                 f"• Hands-On GeoGebra Applet: {ggb_url}\n\n"
                 f"🔔 [Subscribe to @min7014_ai for Daily Visual Math Proofs]:\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                f"#Shorts #MathShorts #VisualProof #Geometry #Calculus #Mathematics #3Blue1BrownStyle #OlympiadMath #STEM #min7014_ai"
+                f"#Shorts #MathShorts #VisualProof #Geometry #Calculus #Mathematics #VisualMathCinema #OlympiadMath #STEM #min7014_ai"
             )
             tags = ["Shorts", "MathShorts", "VisualProof", "MathAnimation", clean_t, "Geometry", "Calculus", "OlympiadMath", "STEM", "min7014_ai"]
         else:
@@ -3590,7 +3590,7 @@ def build_creative_idea_youtube_description_and_tags(
                 f"🏛️ [Original Source Materials on https://min7014.github.io/]\n"
                 f"• Step-by-Step Proof PDF: {pdf_url}\n"
                 f"• Math Archive Page: {web_url}\n"
-                f"• Interactive GeoGebra Exploration: {ggb_url}\n\n"
+                f"• Interactive Dynamic Geometry Exploration: {ggb_url}\n\n"
                 f"🔔 [Subscribe to @min7014_ai in 1 Click]:\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                 f"🎬 [Binge-Watch Our Full-Length 1080p Masterclasses]\n"
@@ -3598,9 +3598,9 @@ def build_creative_idea_youtube_description_and_tags(
                 f"• Circle Theorems Complete Masterclass (EN): https://youtu.be/9EL8pgqJtkY\n"
                 f"• Step-by-Step Flipbook Proof: {std_url}\n"
                 f"• 16,548 Free Constructive Math Problems: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n\n"
-                f"#VisualProof #MathAnimation #Geometry #Calculus #Mathematics #3Blue1BrownStyle #OlympiadMath #STEM #min7014_ai"
+                f"#VisualProof #MathAnimation #Geometry #Calculus #Mathematics #VisualMathCinema #OlympiadMath #STEM #min7014_ai"
             )
-            tags = ["VisualProof", "MathAnimation", "MathCinema", clean_t, "Geometry", "Calculus", "OlympiadMath", "GeoGebra", "STEM", "min7014_ai"]
+            tags = ["VisualProof", "MathAnimation", "MathCinema", clean_t, "Geometry", "Calculus", "OlympiadMath", "DynamicGeometry", "STEM", "min7014_ai"]
     else:
         if is_short:
             desc = (

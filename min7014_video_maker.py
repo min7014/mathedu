@@ -1620,10 +1620,10 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "what_if_not_ko": "슬라이더 범위나 초기 점의 위치를 실시간으로 드래그하여 바꾸면(What-If-Not) 자취와 수렴 경로가 어떻게 달라질까요?",
         })
         en_fields = {
-            "hypothesis_en": f"[Dynamic Math Engineering Tool Lab (GeoGebra & AlgeoMath)] Initial geometric objects, algebraic expressions, and slider/checkbox parameters for '{en_topic}'",
-            "conclusion_en": f"[Instrumental Genesis (Artigue 2002) & Dynamic Simulation] Interactive construction and live verification of '{en_topic}' via exact geometric constraints and dynamic scripting",
+            "hypothesis_en": f"[Dynamic Math Engineering Tool Lab] Initial geometric objects, algebraic expressions, and slider/checkbox parameters for '{en_topic}'",
+            "conclusion_en": f"[Dynamic Mathematical Simulation] Interactive construction and live verification of '{en_topic}' via exact geometric constraints and dynamic scripting",
             "auxiliary_line_en": "Bind boolean checkboxes/sliders to step-by-step visibility conditions, intersect circles/lines via exact construction tools, or plot vector slope fields and gradient descent steps",
-            "proof_logic_en": "By encoding mathematical definitions as dynamic tool constraints (Bussi & Mariotti's Semiotic Mediation), dragging any free point preserves the invariant theorem across all configurations",
+            "proof_logic_en": "By encoding mathematical definitions as dynamic tool constraints, dragging any free point preserves the invariant theorem across all configurations",
             "misconception_en": "Never place points by visual estimation—always use exact intersection, compass, perpendicular, or algebraic command bindings so the construction passes the Dragging Test",
             "what_if_not_en": "What new locus or dynamical behavior emerges when we animate the slider parameter or generalize the differential/geometric condition?"
         }
@@ -1631,7 +1631,7 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
         en_fields = {
             "hypothesis_en": f"Given geometric and algebraic definitions and starting conditions for '{en_topic}'",
             "conclusion_en": f"The core mathematical invariant and theorem of '{en_topic}' holds universally",
-            "auxiliary_line_en": "Introduce Pólya's key auxiliary line or symmetric algebraic decomposition to bridge the given hypothesis and target conclusion",
+            "auxiliary_line_en": "Introduce a key auxiliary line or symmetric algebraic decomposition to bridge the given hypothesis and target conclusion",
             "proof_logic_en": "Apply step-by-step congruence, similarity, area conservation, or algebraic equivalence to deduce the conclusion rigorously",
             "misconception_en": "Rote memorization of the final formula breaks down when conditions change—always trace the proof from the fundamental definition and first auxiliary line",
             "what_if_not_en": "What new theorem emerges if we generalize one condition or extend this result to higher dimensions?"
@@ -1643,12 +1643,12 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
     aux_en = res.get("auxiliary_line_en") or "key auxiliary construction"
     conc_en = res.get("conclusion_en") or "core invariant equation"
     res.update({
-        "duval_deconstruction_ko": f"[Duval(2006) 차원 해체 & 기호 변환] 2D 원문 도형에서 1D 보조선({aux_ko[:42]})을 분리하여 대수 불변식({conc_ko[:42]})과 1:1 동시 매핑",
-        "duval_deconstruction_en": f"[Duval(2006) Dimensional Deconstruction] Deconstruct 2D figure via 1D auxiliary line ({aux_en[:46]}) into symbolic invariant ({conc_en[:46]})",
-        "mariotti_invariance_ko": f"[Mariotti(2024) 동적 기하 불변성] 점과 각도가 연속적으로 변할 때(Variant) 절대 흔들리지 않는 불변 관계({conc_ko[:45]}) 포착",
-        "mariotti_invariance_en": f"[Mariotti(2024) Dynamic Dragging Invariance] Contrast moving geometric elements against the strict invariant ({conc_en[:48]})",
-        "hanna_explanatory_why_ko": f"[Hanna(2000) 설명적 증명 원리] 단순 결과 확인을 넘어 왜 '{aux_ko[:40]}'이 등식을 필연적으로 성립시키는지 생성 메커니즘 규명",
-        "hanna_explanatory_why_en": f"[Hanna(2000) Explanatory Proof] Reveal the generating mechanism of why '{aux_en[:44]}' makes the theorem inevitable",
+        "duval_deconstruction_ko": f"[기하 차원 해체 & 대수 기호 변환] 2D 원문 도형에서 1D 보조선({aux_ko[:42]})을 분리하여 대수 불변식({conc_ko[:42]})과 1:1 동시 매핑",
+        "duval_deconstruction_en": f"[Dimensional Deconstruction] Deconstruct 2D figure via 1D auxiliary line ({aux_en[:46]}) into symbolic invariant ({conc_en[:46]})",
+        "mariotti_invariance_ko": f"[동적 기하 불변성 원리] 점과 각도가 연속적으로 변할 때(Variant) 절대 흔들리지 않는 불변 관계({conc_ko[:45]}) 포착",
+        "mariotti_invariance_en": f"[Dynamic Dragging Invariance] Contrast moving geometric elements against the strict invariant ({conc_en[:48]})",
+        "hanna_explanatory_why_ko": f"[설명적 시각 증명 원리] 단순 결과 확인을 넘어 왜 '{aux_ko[:40]}'이 등식을 필연적으로 성립시키는지 생성 메커니즘 규명",
+        "hanna_explanatory_why_en": f"[Explanatory Visual Proof] Reveal the generating mechanism of why '{aux_en[:44]}' makes the theorem inevitable",
     })
     return res
 
@@ -2918,25 +2918,25 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
         draw.rounded_rectangle([150, 90, W - 150, 136], radius=14, fill=(6, 95, 70), outline=(250, 204, 21), width=2)
         draw.text((178, 101), end_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 21, bold=True))
     elif stage >= 2 and p_num > 1:
-        # [Rule 21: 세계 수학교육학·인지과학 논문(Duval 2006 · Mariotti 2024 · Hanna 2000 · Freudenthal 1991) × min7014 원문 융합 배지]
+        # [Rule 21 & 저작권 100% 클린: 순수 수학교육 원리 × min7014 원문 융합 배지]
         prog_frac = p_num / max(1, tot_p)
         if prog_frac <= 0.34:
             res_txt = (
-                "🔬 [Mariotti Dynamic Invariance × min7014] Observe what changes vs. what stays strictly invariant!"
+                "🔬 [Dynamic Geometric Invariance × min7014] Observe what changes vs. what stays strictly invariant!"
                 if lang_code == "en"
-                else "🔬 [수학교육학 융합 · Mariotti 동적 불변성 × min7014 원문] 움직이는 도형 속 변하지 않는 불변량을 포착하세요!"
+                else "🔬 [동적 기하 불변성 원리 × min7014 원문] 움직이는 도형 속 절대 변하지 않는 불변량을 포착하세요!"
             )
         elif prog_frac <= 0.72:
             res_txt = (
-                "📐 [Duval 2D→1D Deconstruction × Pólya Line] This auxiliary line bridges the figure and the equation!"
+                "📐 [2D→1D Deconstruction & Auxiliary Bridge] This auxiliary line connects the figure and equation!"
                 if lang_code == "en"
-                else "📐 [수학교육학 융합 · Duval 차원 해체(2D→1D) × Pólya 보조선] 이 보조선이 도형 직관과 수식을 하나로 잇습니다!"
+                else "📐 [기하 차원 해체(2D→1D) & 핵심 보조선] 이 보조선이 도형 직관과 수식을 하나로 잇습니다!"
             )
         else:
             res_txt = (
-                "💡 [Hanna Explanatory Proof × Freudenthal Reinvention] Visual mechanism crystallizes into formal theorem!"
+                "💡 [Explanatory Visual Proof & Guided Discovery] Visual mechanism crystallizes into formal theorem!"
                 if lang_code == "en"
-                else "💡 [수학교육학 융합 · Hanna 설명적 증명 × Freudenthal 재발명] 시각적 필연성이 엄밀한 정리로 완성됩니다!"
+                else "💡 [설명적 시각 증명 & 스스로 깨치는 원리] 시각적 필연성이 엄밀한 수학 정리로 완성됩니다!"
             )
         draw.rounded_rectangle([210, 88, W - 210, 128], radius=12, fill=(15, 23, 42), outline=(56, 189, 248), width=2)
         draw.text((236, 96), res_txt, fill=(186, 230, 253), font=get_font_for_lang("ko", 19, bold=True))
@@ -3627,12 +3627,12 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"🎙️ 20+ Language AI Lecture Studio: {studio_url}\n"
             f"Topic ID: [ID: {slug}_EN]\n\n"
             f"⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n{chapters_block}\n\n"
-            f"#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #3Blue1BrownStyle #GeoGebra #EuclideanGeometry #MathOlympiad #min7014_ai #min7014"
+            f"#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #VisualMathCinema #DynamicGeometry #EuclideanGeometry #MathOlympiad #min7014_ai #min7014"
         )
         yt_tags = [
             "Visual Math Proof", "Geometry Proof", "Proof Without Words", "Euclidean Geometry",
-            "Pythagorean Theorem", "Ceva Theorem", "Menelaus Theorem", "GeoGebra", "Math Animation",
-            "3Blue1Brown style math", "MindYourDecisions math", "Andy Math geometry", "Step by Step Math",
+            "Pythagorean Theorem", "Ceva Theorem", "Menelaus Theorem", "Dynamic Geometry", "Math Animation",
+            "Visual Math Cinema", "Mathematical Intuition", "Auxiliary Line Geometry", "Step by Step Math",
             "High School Geometry", "Math Olympiad", "AMC Math", "SAT Math", "min7014_ai", "min7014"
         ]
     else:
@@ -3703,8 +3703,8 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         yt_tags = [
             "수학", "기하학", "시각적 증명", "수능 수학", "도형 보조선", "피타고라스 정리",
             "메넬라우스의 정리", "체바의 정리", "중학교 도형", "고등학교 수학", "수능 도형 킬러",
-            "영재고 수학", "KMO 기하", "GeoGebra", "알지오매스", "단계별 수학 증명",
-            "깨봉수학 스타일 직관 수학", "3Blue1Brown 한국어", "min7014_ai", "min7014", "수학 잘하는 법"
+            "영재고 수학", "KMO 기하", "동적기하", "수학공학도구", "단계별 수학 증명",
+            "직관 수학 증명", "시각적 수학 시네마", "min7014_ai", "min7014", "수학 잘하는 법"
         ]
 
     return {
@@ -6345,7 +6345,7 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
             f"[ID: {slug}_SHORT_KO]\n"
             f"#Shorts #수학 #기하학 #시각적증명 #{concise_ko.replace(' ', '')} #피타고라스 #보조선 #수능수학 #수학자료실 #min7014_ai"
         )
-        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", concise_ko, "깨봉수학 스타일", "min7014_ai", "수능수학", "보조선"]
+        tags = ["Shorts", "유튜브쇼츠", "수학", "기하학", "시각적증명", concise_ko, "직관수학", "min7014_ai", "수능수학", "보조선"]
     else:
         hook_en = _smart_concise_topic_title(viral_hooks.get("en") or f"Don't Memorize! {concise_en} in 45s", max_len=50, lang="en")
         short_title = f"🔥 {hook_en} | {concise_en} #Shorts #Math"
@@ -6360,13 +6360,13 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
             f"👉 1080p Socratic Question Edition: {full_q_yt}\n\n"
             f"⚡ [{clean_en} — {round(duration_sec)}s Visual Math Proof #Shorts]\n"
             f"{hook_en}\n\n"
-            f"📐 Interactive GeoGebra & Full 1,113 Math Video Board:\n👉 {board_link}\n\n"
+            f"📐 Interactive Dynamic Geometry & Full 1,113 Math Video Board:\n👉 {board_link}\n\n"
             f"🔔 Subscribe to Visual Math Proofs AI (@min7014_ai):\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_EN]\n"
-            f"#Shorts #Math #Geometry #VisualProof #MathShorts #ProofWithoutWords #GeoGebra #min7014_ai"
+            f"#Shorts #Math #Geometry #VisualProof #MathShorts #ProofWithoutWords #DynamicGeometry #min7014_ai"
         )
-        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", concise_en, "Andy Math style", "3Blue1Brown style", "min7014_ai", "GeoGebra"]
+        tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", concise_en, "VisualMathCinema", "ProofWithoutWords", "min7014_ai", "DynamicGeometry"]
 
     return {
         "title": _balance_parentheses(short_title[:98]),

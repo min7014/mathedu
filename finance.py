@@ -57,12 +57,12 @@ FINANCE_ENGINE_JSON = ROOT_DIR / "assets" / "finance_revenue_engine.json"
 MONTHLY_REVENUE_TARGET_KRW = 10_000_000
 
 HIGH_RPM_KEYWORDS_KO = [
-    "수능수학", "수학개념원리", "기하학증명", "수학공부법", "고등수학",
+    "수능수학", "수학원리증명", "기하학증명", "수학공부법", "고등수학",
     "중등수학", "시각적증명", "수학강의", "창의사고력수학", "수능킬러문항",
 ]
 HIGH_RPM_KEYWORDS_EN = [
     "SAT Math Prep", "AP Calculus", "AMC Math", "Euclidean Geometry Proof",
-    "Visual Math Proof", "STEM Education", "Interactive Geometry", "3Blue1Brown Style",
+    "Visual Math Proof", "STEM Education", "Interactive Geometry", "Visual Math Cinema",
     "Math Olympiad", "High School Geometry",
 ]
 
@@ -266,7 +266,7 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
         if (heroTitle) heroTitle.textContent = 'Step-by-Step Visual Math Proofs & 1080p Neon Cinema (@min7014_ai × min7014.github.io)';
         if (heroDesc) heroDesc.innerHTML = 'Explore 1,111+ interactive visual proofs, GeoGebra applets, and 1080p Neon-Bloom Math Cinema lectures built from <a href="https://min7014.github.io/" target="_blank" rel="noopener">https://min7014.github.io/</a> and streamed on <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener">@min7014_ai</a>.';
         if (puzTitle) puzTitle.textContent = '🧠 [5-Sec Mental Math Challenge] Two smaller squares on a right triangle have areas 9 and 16. What is the largest square area?';
-        if (puzStatus) puzStatus.textContent = 'Solved it without square roots? Click your speed tier below to copy your Wordle-style Math Proof Scorecard!';
+        if (puzStatus) puzStatus.textContent = 'Solved it without square roots? Click your speed tier below to copy your Visual Math Emoji Scorecard!';
       } else {
         if (btn) btn.textContent = '🇺🇸 English Mode (EN)';
         if (heroTitle) heroTitle.textContent = '단계별 시각적 수학 증명 & 네온 시네마 영상 게시판 (@min7014_ai × min7014.github.io)';
@@ -742,8 +742,8 @@ def build_ypp_watchtime_masterclasses() -> list:
                 "👉 https://min7014.github.io/\n\n"
                 "📜 [Original Educational Content Statement]\n"
                 "This masterclass is 100% original mathematical education content built upon step-by-step geometric constructions, "
-                "Pólya auxiliary line heuristics, and visual proofs from https://min7014.github.io/.\n"
-                f"[ID: {mc_slug}_EN] #VisualProof #Mathematics #Geometry #Calculus #ConicSections #3Blue1BrownStyle #MathMasterclass #min7014_ai"
+                "auxiliary line heuristics, and visual proofs from https://min7014.github.io/.\n"
+                f"[ID: {mc_slug}_EN] #VisualProof #Mathematics #Geometry #Calculus #ConicSections #VisualMathCinema #MathMasterclass #min7014_ai"
             ).replace("<", "＜").replace(">", "＞")
             prev_yt_url = ""
             if out_meta.exists():
