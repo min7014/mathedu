@@ -266,6 +266,21 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
                 "questionAskingClassrooms": len(ped.get("questionAskingClassrooms", [])),
             }
         }, ensure_ascii=False, indent=2), encoding="utf-8")
+        if last_completed_slug:
+            try:
+                last_chat_p = ROOT_DIR / ".agents" / "last_agent_chat_slug.txt"
+                prev_slug = last_chat_p.read_text(encoding="utf-8").strip() if last_chat_p.exists() else ""
+                if last_completed_slug != prev_slug:
+                    last_chat_p.parent.mkdir(parents=True, exist_ok=True)
+                    last_chat_p.write_text(last_completed_slug, encoding="utf-8")
+                    import importlib
+                    import secretary as _sec_live
+                    importlib.reload(_sec_live)
+                    live_msg = _sec_live.build_live_agent_boardroom_transcript(last_completed_slug)
+                    _sec_live.send_telegram_report(live_msg)
+                    print(f"📡 [Live Agent Boardroom Broadcast] Sent real-time 8-agent dialogue for {last_completed_slug} to Telegram!", flush=True)
+            except Exception as live_err:
+                print(f"[Live Agent Boardroom Notice] {live_err}", flush=True)
     except Exception:
         pass
 

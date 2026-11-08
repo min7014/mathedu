@@ -1339,6 +1339,16 @@ def _analyze_min7014_topic_as_mathteacher_core(title: str, sub_domain_ko: str = 
                 "misconception_ko": "등호 성립 조건을 ax = by 로 잘못 외우는 실수가 많습니다! 완전제곱식 안의 항이 (ay - bx)² 이므로 엇갈려 곱한 ay = bx (즉 x/a = y/b) 일 때 등호가 성립합니다.",
                 "what_if_not_ko": "두 벡터 u = (a, b)와 v = (x, y)의 내적 u·v = |u||v|cos θ 를 양변 제곱하면 왜 cos²θ ≤ 1 성질로부터 코시-슈바르츠 부등식이 1초 만에 기하학적으로 증명될까요?"
             }
+        elif any(k in blob for k in ("삼차부등식", "사차부등식", "고차부등식", "이차부등식", "연립부등식", "분수부등식", "무리부등식", "Cubic Inequality", "Quadratic Inequality", "Polynomial Inequality", "Inequality")) and "절댓값" not in blob and "절대값" not in blob and "Absolute Value" not in blob and "|" not in t:
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '{ko_t}'의 출발 조건",
+                "conclusion_ko": f"인수분해된 각 인수의 부호 변화표(Sign Chart)와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '{ko_t}'의 해집합이 결정된다는 결론",
+                "auxiliary_line_ko": "방정식 P(x) = 0의 실근 α, β, γ를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상",
+                "proof_logic_ko": "(x - α)(x - β)(x - γ) > 0 (단 α < β < γ)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 α < x < β 또는 x > γ 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리",
+                "misconception_ko": "완전제곱 인수 (x - α)²이 포함된 부등식에서는 x = α를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호(≥, ≤)가 있는지 없는지에 따라 한 점 x = α가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
+                "what_if_not_ko": "만약 삼차다항식 P(x)가 인수분해될 때 판별식 D < 0 인 이차식 인수 (x² + px + q)를 포함한다면, 왜 그 이차식 인수는 항상 양수이므로 부등식의 부호 변화에 영향을 주지 않을까요?"
+            }
         else:
             return {
                 "category_type": "algebra",
@@ -1608,6 +1618,15 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "proof_logic_en": "By area conservation, subtracting the four congruent right triangles (total area 2ab) from (a + b)² in two different arrangements proves a² + b² = c² visually",
             "misconception_en": "Before claiming the inner figure has area c², verify that its four interior angles are 90° using the fact that the two acute angles of a right triangle sum to 90°",
             "what_if_not_en": "If we replace the squares on the three sides with any three similar shapes (semicircles, equilateral triangles), does the area sum still hold?"
+        }
+    elif any(k in blob for k in ("삼차부등식", "사차부등식", "고차부등식", "이차부등식", "연립부등식", "분수부등식", "무리부등식", "Cubic Inequality", "Quadratic Inequality", "Polynomial Inequality")) and "절댓값" not in blob:
+        en_fields = {
+            "hypothesis_en": f"Factoring the polynomial P(x) into linear and irreducible quadratic factors and marking its real roots on the number line for '{en_topic}'",
+            "conclusion_en": f"The sign chart of the factored polynomial and the intervals where the graph y = P(x) lies above or below the x-axis determine the exact solution set of '{en_topic}'",
+            "auxiliary_line_en": "Plot the real roots α < β < γ on the real number line to partition it into sign intervals and sketch the continuous polynomial curve y = P(x) crossing or touching the x-axis",
+            "proof_logic_en": "For (x - α)(x - β)(x - γ) > 0 with α < β < γ, the product of signs alternates across simple roots, yielding α < x < β or x > γ where the cubic graph lies strictly above the x-axis",
+            "misconception_en": "At a repeated root of even multiplicity such as (x - α)², the polynomial touches the x-axis without changing sign—always check whether strict (<, >) or non-strict (≤, ≥) inequality includes x = α",
+            "what_if_not_en": "Why does an irreducible quadratic factor x² + px + q with negative discriminant (D = p² - 4q < 0) stay strictly positive for all real x and never flip the inequality sign?"
         }
     elif any(k in blob_l for k in ("mathlab", "algeomath", "알지오매스", "geogebra", "지오지브라", "공학도구", "체크박스", "이벤트 만들기", "텍스트 만들기", "경사하강법", "gradient descent", "slope field", "방향장")):
         res.update({

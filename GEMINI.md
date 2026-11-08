@@ -214,3 +214,12 @@
   3. **[유튜브 설명란·고정댓글·홈페이지 최상단(Line 1)에 오리지널 원문 자료 전면 배치]**: 모든 유튜브 영상 설명란의 첫째 줄(Line 1)에는 반드시 **`🏛️ [오리지널 원문 수학자료실 (https://min7014.github.io/) 바로가기]`** (① 오리지널 단계별 시각 증명 PDF 원문 `pdf_url`, ② 오리지널 동적 기하 원문 웹페이지 `web_url`, ③ 오리지널 `@min7014` 본 채널 원문 영상 `orig`, ④ 수학자료실 본관 `https://min7014.github.io/`)을 최우선 배치합니다.
   4. **[기존 축약 대본 자동 1:1 복원]**: 기존에 페이지가 묶여 저장되어 있던 대본(`len(pages) != len(doc)`)도 렌더링 시 자동으로 전체 페이지 1:1 대본으로 즉시 복원합니다.
 
+## 29. 업로드 속도보다 강의 품질 최우선 원칙 (Quality-Over-Speed Absolute Gate Principle)
+- **"급하게 올릴 필요는 없다. 중요한 것은 영상 강의의 품질이다" (`min7014` 회장님 핵심 지침)**:
+  1. **[Rule 28 이전 구버전 캐시 영상·마스터클래스 업로드 영구 보류]**: `Rule 28`(`2026-11-08 20:00:00`) 이전에 렌더링되어 플로팅 배너가 겹쳐 있거나 페이지가 축약된 구버전 MP4 및 구버전 마스터클래스는 일일 쿼터가 남아 있더라도 **절대 성급하게 업로드하지 않고 전량 재렌더링 대상(`Rule28-PreRebuild`)으로 격리**합니다(`min7014_video_maker.py`, `finance.py`).
+  2. **[4대 무결성 관문 통과 영상만 업로드]**: 오직 ① **원본 PDF 슬라이드 100% 무가림(Zero-Obstruction)**, ② **1페이지 = 1장면(`len(pages) == pdf_pages`) 1:1 순차 직강**, ③ **`mathteacher` 수학적·교육학적 무결성 검증(단원별 정확한 정리·인수분해·보조선 분석 일치)**, ④ **오리지널 썸네일 무가림**을 모두 통과한 최고 품질 강의만 `@min7014_ai` 채널에 업로드합니다.
+
+## 30. 8대 핵심 에이전트 실시간 회의 생중계 및 자기교정 원칙 (Live Inter-Agent Boardroom Broadcast & Real-Time Self-Correction Principle)
+- **실시간 에이전트 회의 생중계(`secretary.py --agent-chat` & 데몬 자동 브로드캐스트)**:
+  - `mathedu_foundation_daemon.py`가 새로운 주제의 4대 에디션을 제작·완성할 때마다, 산하 8대 핵심 에이전트(`secretary`, `mathteacher`, `Video_Creator`, `designer`, `MathLab_Developer`, `gamemaker`, `pr`, `finance`)가 해당 주제의 수학적 정확성, 오리지널 PDF 무가림, MathLab 프리셋, 썸네일 가독성, 수익화 전략을 점검하는 **실시간 에이전트 회의록(`build_live_agent_boardroom_transcript`)을 회장님의 텔레그램(`@anti7014_bot`, `Chat ID: 43453234`)으로 자동 생중계**합니다.
+  - 회의 중 `mathteacher`나 `Video_Creator`가 단원 분류나 수식 설명의 미세한 개선점이라도 발견하면 즉시 코드를 자가 교정(Self-Correction)하고 전수 스캔하여 강의 품질을 100%로 유지합니다.
