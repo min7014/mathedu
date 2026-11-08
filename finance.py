@@ -132,6 +132,20 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
         ("wSOzehSfEbY", "maGFOifE-2E"),
         ("https://www.youtube.com/playlist?list=PLQfKuD3IPx1c", "https://youtu.be/_5LE_BfLA5w"),
         ("https://www.youtube.com/playlist?list=PLA4FYpQnYlJQ", "https://youtu.be/9EL8pgqJtkY"),
+        ("https://youtu.be/KvHmXDuU8jY", "https://youtu.be/_NRQ5QO3PEY"),
+        ("https://youtu.be/nHIpEC6ATek", "https://youtu.be/BTBn9mcwTDg"),
+        ("https://youtu.be/F9DnGqAqILc", "https://youtu.be/Ku9TYjIOzGE"),
+        ("https://youtu.be/xXER3qQ1JIs", "https://youtu.be/hgsJGCcaLgc"),
+        ("https://youtu.be/eUeFybOs4t0", "https://youtu.be/mYIh_SpCYic"),
+        ("https://youtu.be/W4YTn5eV2Zs", "https://youtu.be/9EL8pgqJtkY"),
+        ("https://youtu.be/DClYV5vw56g", "https://youtu.be/maGFOifE-2E"),
+        ("🌟 네온 시네마 Vol.1 ↗", "📐 29분 기하 원본 PDF 정주행 ↗"),
+        ("🌟 12분 네온 시네마 Vol.1 ↗", "📐 29분 기하 원본 PDF 정주행 ↗"),
+        ("🌟 네온 Vol.2 ↗", "❓ 33분 질문수업 Vol.1 ↗"),
+        ("🌟 네온 Vol.3 ↗", "❓ 48분 질문수업 Vol.10 ↗"),
+        ("🌟 네온 Vol.4 ↗", "❓ 34분 질문수업 Vol.11 ↗"),
+        ("🇰🇷 네온 시네마 Vol.1 ↗", "📐 29분 기하 원본 PDF 정주행 ↗"),
+        ("🇺🇸 Neon Cinema (EN) ↗", "🇺🇸 13-Min Geometry (EN) ↗"),
         ("🇰🇷 한국어 재생목록 ↗", "🇰🇷 37분 마스터클래스 정주행 ↗"),
         ("🇺🇸 EN Playlist ↗", "🇺🇸 37-Min Masterclass ↗"),
     ]
@@ -925,19 +939,14 @@ def analyze_revenue_pipeline() -> dict:
                 "subscribers_live": 4,
                 "long_uploads_status": "allowed (15분+ 장편 업로드 활성화 완료)",
                 "uploaded_longform_masterclasses_live": [
-                    "https://youtu.be/KvHmXDuU8jY (12.5분 KO 창의 수학 시네마 마스터클래스 Vol.1)",
-                    "https://youtu.be/eUeFybOs4t0 (8.9분 EN Visual Math Ideas Masterclass Vol.1)",
-                    "https://youtu.be/nHIpEC6ATek (11.8분 KO 창의 수학 시네마 마스터클래스 Vol.2)",
-                    "https://youtu.be/W4YTn5eV2Zs (8.1분 EN Visual Math Ideas Masterclass Vol.2)",
-                    "https://youtu.be/F9DnGqAqILc (12.1분 KO 창의 수학 시네마 마스터클래스 Vol.3)",
-                    "https://youtu.be/DClYV5vw56g (8.4분 EN Visual Math Ideas Masterclass Vol.3)",
-                    "https://youtu.be/_NRQ5QO3PEY (29.0분 KO 유클리드 기하학 마스터클래스 Vol.1)",
-                    "https://youtu.be/mYIh_SpCYic (13.0분 EN Euclidean Geometry Masterclass Vol.1)",
-                    "https://youtu.be/BTBn9mcwTDg (32.9분 KO 질문하는 수학 수업 마스터클래스 Vol.1)",
-                    "https://youtu.be/Ku9TYjIOzGE (48.6분 KO 질문하는 수학 수업 마스터클래스 Vol.10)",
-                    "https://youtu.be/hgsJGCcaLgc (34.4분 KO 질문하는 수학 수업 마스터클래스 Vol.11)",
-                    "https://youtu.be/_5LE_BfLA5w (37.5분 KO 원의 성질 마스터클래스)",
-                    "https://youtu.be/9EL8pgqJtkY (37.3분 EN Circle Theorems Masterclass)",
+                    "https://youtu.be/_NRQ5QO3PEY (29.0분 KO 유클리드 기하학 원본 PDF 마스터클래스 Vol.1)",
+                    "https://youtu.be/mYIh_SpCYic (13.0분 EN Euclidean Geometry Original PDF Masterclass Vol.1)",
+                    "https://youtu.be/BTBn9mcwTDg (32.9분 KO 질문하는 수학 수업 원본 PDF 마스터클래스 Vol.1)",
+                    "https://youtu.be/Ku9TYjIOzGE (48.6분 KO 질문하는 수학 수업 원본 PDF 마스터클래스 Vol.10)",
+                    "https://youtu.be/hgsJGCcaLgc (34.4분 KO 질문하는 수학 수업 원본 PDF 마스터클래스 Vol.11)",
+                    "https://youtu.be/_5LE_BfLA5w (37.5분 KO 원의 성질 원본 PDF 마스터클래스)",
+                    "https://youtu.be/9EL8pgqJtkY (37.3분 EN Circle Theorems Original PDF Masterclass)",
+                    "https://youtu.be/maGFOifE-2E (12.0분 KO 거듭제곱과 지수법칙 원본 PDF 마스터클래스)",
                 ],
                 "ready_masterclass_mp4_inventory": len(built_masterclasses),
             },
@@ -1136,9 +1145,9 @@ def execute_live_channel_and_video_repairs_now() -> dict:
         ch_b = yt.channels().list(part="brandingSettings", id="UCSlqQfOEtRfJuMPyGMLgFYA").execute()["items"][0]
         b_set = ch_b.get("brandingSettings", {})
         ch_cfg = b_set.get("channel", {})
-        if ch_cfg.get("title") != "단계별 시각적 수학 증명_AI" or ch_cfg.get("unsubscribedTrailer") != "KvHmXDuU8jY":
+        if ch_cfg.get("title") != "단계별 시각적 수학 증명_AI" or ch_cfg.get("unsubscribedTrailer") != "_NRQ5QO3PEY":
             ch_cfg["title"] = "단계별 시각적 수학 증명_AI"
-            ch_cfg["unsubscribedTrailer"] = "KvHmXDuU8jY"
+            ch_cfg["unsubscribedTrailer"] = "_NRQ5QO3PEY"
             b_set["channel"] = ch_cfg
             if "image" in b_set:
                 del b_set["image"]

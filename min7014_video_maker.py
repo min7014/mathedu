@@ -2965,34 +2965,8 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     sy = (H - sh) // 2
     draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(225, 29, 72), outline=(251, 191, 36), width=4)
     thumb.paste(slide_resized, (sx, sy))
-
-    # 실제 클라이맥스 슬라이드의 diff_bbox 중심점을 계산하여 시선 유도 포커스 서클 배치
-    pages_list = script_doc.get("pages") or []
-    climax_bbox = None
-    for p_cand in reversed(pages_list):
-        if p_cand.get("diff_bbox"):
-            climax_bbox = p_cand["diff_bbox"]
-            break
-    if climax_bbox:
-        rel_x = max(0.28, min(0.72, (climax_bbox[0] + climax_bbox[2]) * 0.5))
-        rel_y = max(0.28, min(0.72, (climax_bbox[1] + climax_bbox[3]) * 0.5))
-    else:
-        rel_x, rel_y = 0.48, 0.52
-
-    cx_spot = sx + int(sw * rel_x)
-    cy_spot = sy + int(sh * rel_y)
-    r_spot = 74
-    draw.ellipse([cx_spot - r_spot - 3, cy_spot - r_spot - 3, cx_spot + r_spot + 3, cy_spot + r_spot + 3], outline=(254, 240, 138), width=4)
-    draw.ellipse([cx_spot - r_spot, cy_spot - r_spot, cx_spot + r_spot, cy_spot + r_spot], outline=(225, 29, 72), width=7)
-    draw.line([(cx_spot - 125, cy_spot - 95), (cx_spot - 48, cy_spot - 38)], fill=(225, 29, 72), width=12)
-    draw.polygon([(cx_spot - 32, cy_spot - 26), (cx_spot - 72, cy_spot - 32), (cx_spot - 46, cy_spot - 66)], fill=(225, 29, 72))
-    draw.ellipse([cx_spot + r_spot - 22, cy_spot - r_spot - 18, cx_spot + r_spot + 30, cy_spot - r_spot + 34], fill=(225, 29, 72), outline=(255, 255, 255), width=3)
-    draw.text((cx_spot + r_spot - 6, cy_spot - r_spot - 12), "?", fill=(255, 255, 255), font=get_font_for_lang("en", 34, bold=True))
-
-    # [MindYourDecisions × Andy Math × 깨봉수학 벤치마킹]: 우측 도형 상단 코너에 직관 챌린지 콜아웃 배지 부착
-    chal_txt = "⚡ 5-SEC VISUAL HACK!" if is_en else "⚡ 공식 없이 5초 직관 해법!"
-    draw.rounded_rectangle([sx + 14, sy + 14, sx + (318 if is_en else 348), sy + 64], radius=14, fill=(15, 23, 42), outline=(250, 204, 21), width=3)
-    draw.text((sx + 28, sy + 24), chal_txt, fill=(250, 204, 21), font=get_font_for_lang("ko", 22, bold=True))
+    # [Rule 28 — 오리지널 PDF 슬라이드 무결성 보존]: 썸네일 우측에 배치된 원문 PDF 작도 도형 위에는
+    # 원문 수식·도형을 가리는 불투명 배지나 붉은 원을 덧그리지 않고 오리지널 도형 원형 그대로 선명하게 노출합니다.
 
     # 좌측 상단 후킹 배지
     badge_txt = vprof["badge_en"] if is_en else vprof["badge_ko"]
@@ -3067,14 +3041,6 @@ def generate_question_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
     sy = (H - sh) // 2
     draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(190, 18, 60), outline=(250, 204, 21), width=4)
     thumb.paste(slide_resized, (sx, sy))
-
-    cx_spot = sx + int(sw * 0.5)
-    cy_spot = sy + int(sh * 0.5)
-    r_spot = 76
-    draw.ellipse([cx_spot - r_spot - 3, cy_spot - r_spot - 3, cx_spot + r_spot + 3, cy_spot + r_spot + 3], outline=(250, 204, 21), width=4)
-    draw.ellipse([cx_spot - r_spot, cy_spot - r_spot, cx_spot + r_spot, cy_spot + r_spot], outline=(225, 29, 72), width=7)
-    draw.ellipse([cx_spot + r_spot - 24, cy_spot - r_spot - 20, cx_spot + r_spot + 32, cy_spot - r_spot + 36], fill=(190, 18, 60), outline=(254, 240, 138), width=3)
-    draw.text((cx_spot + r_spot - 6, cy_spot - r_spot - 12), "?", fill=(254, 240, 138), font=get_font_for_lang("en", 36, bold=True))
 
     badge_txt = "❓ QUESTION-ASKING CLASSROOM" if is_en else "❓ 질문하는 수학 수업 · 탐구 에디션"
     draw.rounded_rectangle([38, 42, 558, 102], radius=16, fill=(190, 18, 60), outline=(250, 204, 21), width=2)
