@@ -35,7 +35,7 @@ def collect_live_workspace_metrics() -> dict:
     if vault_file.exists():
         try:
             vdata = json.loads(vault_file.read_text(encoding="utf-8"))
-            vault_topics = len(vdata.get("videos", vdata.get("items", vdata))) if isinstance(vdata, dict) else len(vdata)
+            vault_topics = len(vdata.get("topics", vdata.get("videos", vdata.get("items", vdata)))) if isinstance(vdata, dict) else len(vdata)
         except Exception:
             pass
 

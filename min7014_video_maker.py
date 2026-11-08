@@ -7849,61 +7849,80 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                     import creative_idea_cinema as cidea
                     importlib.reload(finance)
                     importlib.reload(cidea)
-                    # 잔여 8개 라이브 영상 잘린 제목 자동 복구 (쿼터 리셋 즉시 1회 완결)
-                    yt_rep, _ = get_available_youtube_upload_service()
-                    if yt_rep is not None:
-                        rem_fixes = {
-                            "_o7WXc7zCO4": "✨ Intersecting Secants Theorem (PA·PB = PC·PD) — Visual Proof (24 Steps · 1080p) | @min7014_ai",
-                            "0bun91jq5_o": "🔥 Intersecting Secants Theorem (PA·PB = PC·PD) — 45s Visual Math Proof #Shorts #Math",
-                            "srRZdzClEzk": "🔥 원 외부 할선의 정리 (PA·PB = PC·PD) — 연장선의 교점 45초 시각적 수학 증명 #Shorts #수학",
-                            "uSBjCl_ozqo": "✨ Parallel Lines & Proportional Segments — Visual Math Proof (52 Steps · 1080p) | @min7014_ai",
-                            "YJVDlEYH5Bg": "🔥 Parallel Lines & Proportional Segments Theorem — 45s Visual Math Proof #Shorts #Math",
-                            "as-VfnFEVSg": "🔥 Menelaus' Theorem: One Parallel Line Unlocks It! — 45s Visual Math Proof #Shorts #Math",
-                            "dAJFCz19c0M": "🔥 Ceva's Theorem: Area Ratio Visual Proof in 45 Seconds! #Shorts #Math #Geometry",
-                            "7Ywal5oTbyU": "🔥 The Pythagorean Theorem (a²+b²=c²) — 45s Visual Area Proof #Shorts #Math",
-                        }
-                        try:
-                            ch_r = yt_rep.channels().list(part="brandingSettings", id=YOUTUBE_CHANNEL_ID).execute().get("items", [])
-                            if ch_r:
-                                b_set = ch_r[0].get("brandingSettings", {})
-                                ch_cfg = b_set.get("channel", {})
-                                if "민은기" in (ch_cfg.get("title") or "") or ch_cfg.get("unsubscribedTrailer") != "_5LE_BfLA5w":
-                                    ch_cfg["title"] = "단계별 시각적 수학 증명_AI"
-                                    ch_cfg["unsubscribedTrailer"] = "_5LE_BfLA5w"
-                                    b_set["channel"] = ch_cfg
-                                    if "image" in b_set:
-                                        del b_set["image"]
-                                    yt_rep.channels().update(part="brandingSettings", body={"id": YOUTUBE_CHANNEL_ID, "brandingSettings": b_set}).execute()
-                        except Exception:
-                            pass
-                        try:
-                            vr = yt_rep.videos().list(part="snippet", id=",".join(rem_fixes.keys())).execute()
-                            for vit in vr.get("items", []):
-                                vid_r = vit["id"]
-                                sn_r = vit["snippet"]
-                                if sn_r.get("title") != rem_fixes[vid_r]:
-                                    sn_r["title"] = rem_fixes[vid_r][:100]
-                                    yt_rep.videos().update(part="snippet", body={"id": vid_r, "snippet": sn_r}).execute()
-                        except Exception:
-                            pass
-                    mc_up0 = finance.upload_pending_masterclass_to_youtube(max_uploads=1)
+                    # 잔여 8개 라이브 영상 잘린 제목 자동 복구 (프로세스당 1회만 확인하여 업로드 쿼터 100% 보존)
+                    if not getattr(run_shorts_and_video_upload_daemon, "_rem_branding_checked", False):
+                        yt_rep, _ = get_available_youtube_upload_service()
+                        if yt_rep is not None:
+                            run_shorts_and_video_upload_daemon._rem_branding_checked = True
+                            rem_fixes = {
+                                "_o7WXc7zCO4": "✨ Intersecting Secants Theorem (PA·PB = PC·PD) — Visual Proof (24 Steps · 1080p) | @min7014_ai",
+                                "0bun91jq5_o": "🔥 Intersecting Secants Theorem (PA·PB = PC·PD) — 45s Visual Math Proof #Shorts #Math",
+                                "srRZdzClEzk": "🔥 원 외부 할선의 정리 (PA·PB = PC·PD) — 연장선의 교점 45초 시각적 수학 증명 #Shorts #수학",
+                                "uSBjCl_ozqo": "✨ Parallel Lines & Proportional Segments — Visual Math Proof (52 Steps · 1080p) | @min7014_ai",
+                                "YJVDlEYH5Bg": "🔥 Parallel Lines & Proportional Segments Theorem — 45s Visual Math Proof #Shorts #Math",
+                                "as-VfnFEVSg": "🔥 Menelaus' Theorem: One Parallel Line Unlocks It! — 45s Visual Math Proof #Shorts #Math",
+                                "dAJFCz19c0M": "🔥 Ceva's Theorem: Area Ratio Visual Proof in 45 Seconds! #Shorts #Math #Geometry",
+                                "7Ywal5oTbyU": "🔥 The Pythagorean Theorem (a²+b²=c²) — 45s Visual Area Proof #Shorts #Math",
+                            }
+                            try:
+                                ch_r = yt_rep.channels().list(part="brandingSettings", id=YOUTUBE_CHANNEL_ID).execute().get("items", [])
+                                if ch_r:
+                                    b_set = ch_r[0].get("brandingSettings", {})
+                                    ch_cfg = b_set.get("channel", {})
+                                    if "민은기" in (ch_cfg.get("title") or "") or ch_cfg.get("unsubscribedTrailer") != "KvHmXDuU8jY":
+                                        ch_cfg["title"] = "단계별 시각적 수학 증명_AI"
+                                        ch_cfg["unsubscribedTrailer"] = "KvHmXDuU8jY"
+                                        b_set["channel"] = ch_cfg
+                                        if "image" in b_set:
+                                            del b_set["image"]
+                                        yt_rep.channels().update(part="brandingSettings", body={"id": YOUTUBE_CHANNEL_ID, "brandingSettings": b_set}).execute()
+                            except Exception:
+                                pass
+                            try:
+                                vr = yt_rep.videos().list(part="snippet", id=",".join(rem_fixes.keys())).execute()
+                                for vit in vr.get("items", []):
+                                    vid_r = vit["id"]
+                                    sn_r = vit["snippet"]
+                                    if sn_r.get("title") != rem_fixes[vid_r]:
+                                        sn_r["title"] = rem_fixes[vid_r][:100]
+                                        yt_rep.videos().update(part="snippet", body={"id": vid_r, "snippet": sn_r}).execute()
+                            except Exception:
+                                pass
+                    # [Priority #0-A] 8~18분+ 미드롤 광고 해금 순수 네온 시네마 마스터클래스 최우선 대량 업로드 (YPP 4,000시간 & 월 1,000만 원 직결)
+                    mc_up0 = finance.upload_pending_masterclass_to_youtube(max_uploads=4)
                     if mc_up0 > 0:
                         newly_uploaded_batch += mc_up0
-                    for idea_prio_slug in ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206", "2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501"]:
+                    # [Priority #0-B] 탈-PDF 창의 아이디어 시네마 한/영(KO & EN) 본편 + Shorts 전수 우선 업로드
+                    base_idea_prio = ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206", "2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501"]
+                    extra_idea_slugs = sorted({p.name.replace("_idea_ko.mp4", "").replace("_idea_en.mp4", "") for p in (ROOT_DIR / "video_lectures" / "creative_idea").glob("*_idea_*.mp4")}) if (ROOT_DIR / "video_lectures" / "creative_idea").exists() else []
+                    all_idea_slugs = base_idea_prio + [s for s in extra_idea_slugs if s not in base_idea_prio]
+                    for idea_prio_slug in all_idea_slugs:
+                        if _LAST_UPLOAD_QUOTA_BLOCKED:
+                            break
                         sp_id = SCRIPTS_DIR / f"{idea_prio_slug}.json"
                         if not sp_id.exists():
                             continue
                         sdoc_id = json.loads(sp_id.read_text(encoding="utf-8"))
                         iu_map = sdoc_id.get("creative_idea_youtube_urls") or {}
                         ip_map = sdoc_id.get("creative_idea_packages") or {}
-                        if (not (iu_map.get("ko") or "").strip() or (ip_map.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{idea_prio_slug}_idea_ko.mp4").exists():
-                            r_ic0 = cidea.upload_creative_idea_to_youtube(idea_prio_slug, langs=("ko", "en"))
+                        missing_ic_langs = tuple(
+                            lc for lc in ("ko", "en")
+                            if (not (iu_map.get(lc) or "").strip() or (ip_map.get(lc) or {}).get("needs_youtube_upload"))
+                            and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{idea_prio_slug}_idea_{lc}.mp4").exists()
+                        )
+                        if missing_ic_langs:
+                            r_ic0 = cidea.upload_creative_idea_to_youtube(idea_prio_slug, langs=missing_ic_langs)
                             if r_ic0:
                                 newly_uploaded_batch += 1
                         isu_map = sdoc_id.get("creative_idea_shorts_urls") or {}
                         isp_map = sdoc_id.get("creative_idea_shorts_packages") or {}
-                        if (not (isu_map.get("ko") or "").strip() or (isp_map.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "shorts" / f"{idea_prio_slug}_short_idea_ko.mp4").exists():
-                            r_is0 = cidea.upload_creative_idea_short_to_youtube(idea_prio_slug, langs=("ko", "en"))
+                        missing_is_langs = tuple(
+                            lc for lc in ("ko", "en")
+                            if (not (isu_map.get(lc) or "").strip() or (isp_map.get(lc) or {}).get("needs_youtube_upload"))
+                            and (ROOT_DIR / "video_lectures" / "shorts" / f"{idea_prio_slug}_short_idea_{lc}.mp4").exists()
+                        )
+                        if missing_is_langs:
+                            r_is0 = cidea.upload_creative_idea_short_to_youtube(idea_prio_slug, langs=missing_is_langs)
                             if r_is0:
                                 newly_uploaded_batch += 1
                 except Exception as idea0_err:
@@ -7954,14 +7973,14 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         # 5순위: 🌟 Edition 5 창의 아이디어 확장 시네마 본편(1080p) & Idea-#Shorts(9:16) 자동 업로드
                         try:
                             import creative_idea_cinema as cidea
-                            idea_u = sdoc.get("creative_idea_youtube_urls") or {}
-                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{slug_k}_idea_ko.mp4").exists():
-                                r_ic = cidea.upload_creative_idea_to_youtube(slug_k, langs=("ko", "en"))
+                            idea_u = sdoc_p.get("creative_idea_youtube_urls") or {}
+                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{p_slug}_idea_ko.mp4").exists():
+                                r_ic = cidea.upload_creative_idea_to_youtube(p_slug, langs=("ko", "en"))
                                 if r_ic:
                                     newly_uploaded_batch += 1
-                            idea_su = sdoc.get("creative_idea_shorts_urls") or {}
-                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_idea_ko.mp4").exists():
-                                r_is = cidea.upload_creative_idea_short_to_youtube(slug_k, langs=("ko", "en"))
+                            idea_su = sdoc_p.get("creative_idea_shorts_urls") or {}
+                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{p_slug}_short_idea_ko.mp4").exists():
+                                r_is = cidea.upload_creative_idea_short_to_youtube(p_slug, langs=("ko", "en"))
                                 if r_is:
                                     newly_uploaded_batch += 1
                         except Exception:

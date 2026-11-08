@@ -209,6 +209,9 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
         '          <a href="https://youtu.be/F9DnGqAqILc" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#059669,#047857);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
         '            🌟 네온 Vol.3 ↗\n'
         '          </a>\n'
+        '          <a href="https://youtu.be/xXER3qQ1JIs" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '            🌟 네온 Vol.4 ↗\n'
+        '          </a>\n'
         '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
         '            🇰🇷 37분 마스터 ↗\n'
         '          </a>\n'
@@ -224,6 +227,21 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
     )
     if new_c3 in html_norm and "nHIpEC6ATek" not in html_norm:
         html = html_norm.replace(new_c3, expanded_c3, 1)
+        html_norm = html
+        changed = True
+    elif "F9DnGqAqILc" in html_norm and "xXER3qQ1JIs" not in html_norm:
+        html = html_norm.replace(
+            '          <a href="https://youtu.be/F9DnGqAqILc" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#059669,#047857);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+            '            🌟 네온 Vol.3 ↗\n'
+            '          </a>',
+            '          <a href="https://youtu.be/F9DnGqAqILc" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#059669,#047857);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+            '            🌟 네온 Vol.3 ↗\n'
+            '          </a>\n'
+            '          <a href="https://youtu.be/xXER3qQ1JIs" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+            '            🌟 네온 Vol.4 ↗\n'
+            '          </a>',
+            1,
+        )
         html_norm = html
         changed = True
 
