@@ -730,15 +730,14 @@ def clean_math_for_speech_en(text):
     return _balance_parentheses(re.sub(r"\s+", " ", s).strip())
 
 
-def compute_pedagogical_scene_ranges(total_pages, max_scenes=12):
+def compute_pedagogical_scene_ranges(total_pages, max_scenes=24):
     """
-    [스마트 플립북 모션 그룹핑 엔진 (v2.0)]
-    - 16페이지 이하의 단계별 증명 PDF는 1페이지 = 1장면으로 구성합니다.
-    - 17페이지 이상의 다중 프레임 플립북 애니메이션 PDF(예: 123페이지 타원 빛 반사, 97페이지 포물선 빛 반사, 46페이지 할선 수렴)는
-      전체 프레임을 max_scenes(기본 12개)의 핵심 교육 장면(Scene)으로 분할하여,
-      각 장면 내레이션 동안 연속된 PDF 프레임들이 부드러운 3Blue1Brown 스타일 모션 애니메이션으로 재생되도록 합니다.
+    [직접 PDF 한 땀 한 땀 단계별 설명 그룹핑 엔진 (v3.0)]
+    - 24페이지 이하의 단계별 증명 PDF는 1페이지 = 1장면으로 한 페이지도 건너뛰지 않고 직접 한 땀 한 땀 설명합니다.
+    - 25페이지 이상의 다중 프레임 플립북 애니메이션 PDF(예: 123페이지 타원 빛 반사, 97페이지 포물선 빛 반사)는
+      전체 프레임을 max_scenes개의 핵심 교육 장면(Scene)으로 분할하여 모든 프레임이 순서대로 재생되도록 합니다.
     """
-    if total_pages <= 16:
+    if total_pages <= 24:
         return [(i, i) for i in range(total_pages)]
     scenes = [(0, 0)]
     mid_pages = list(range(1, total_pages - 1))
@@ -1961,10 +1960,10 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
         else:
             progress = (s_num - 1) / max(1, num_scenes - 2)
             range_str = f"{p_start + 1}페이지부터 {p_end + 1}페이지까지의 단계입니다." if p_end > p_start else f"{p_start + 1}페이지 단계입니다."
+            formula_mention = f"화면에 제시된 {added_formula_ko} 관계를 살펴보세요. " if added_formula_ko else ""
 
             # A) 대수·수체계(algebra / number) 전용 단계별 논리 전개 (기하 합동/보조선 문구 완전 배제)
             if is_alg_num:
-                formula_mention = f"화면에 제시된 {added_formula_ko} 관계를 살펴보세요. " if added_formula_ko else ""
                 if progress <= 0.30:
                     step_title = f"Step {s_num} · 기본 정의 확인 및 출발 식 세우기 (Definition)"
                     step_q_ko = f"❓ [정의 질문] {clean_title_ko}를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요?"
@@ -1999,14 +1998,14 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_en = translate_text_google_gtx(step_q_ko, "en")
                 exp_en = translate_text_google_gtx(exp_ko, "en")
 
-            # B) 기하·프랙탈 증명 PDF의 공간·색상 역할별 맞춤 해설
+            # B) 기하·프랙탈 증명 PDF의 공간·색상 역할별 맞춤 해설 (PDF 슬라이드 내 추가 수식·기호 직접 낭독 포함)
             elif spatial_role == "top_left_hypothesis" and "hyp" not in used_roles:
                 used_roles.add("hyp")
                 step_title = f"Step {s_num} · 출발 가정(Hypothesis) 도형과 조건 확인"
                 step_q_ko = "👁️ [가정 확인 질문] 화면 왼쪽 위에 파란색으로 표시된 출발 조건(가정)은 무엇인가요?"
                 step_q_en = "👁️ [Hypothesis Question] What starting condition is drawn in blue at the top-left?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 화면 왼쪽 위 영역을 보세요. "
+                    f"{s_num}단계, {range_str} {formula_mention}화면 왼쪽 위 영역을 보세요. "
                     f"증명을 시작할 때는 먼저 문제에서 주어진 출발 조건인 가정을 도형 위에 명확히 표시합니다. "
                     f"여기서는 {hyp_ko}이 파란색 기호로 작도되었습니다."
                 )
@@ -2018,7 +2017,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_ko = "🎯 [목표 결론 질문] 화살표(⇒) 오른쪽에 제시된 우리의 최종 증명 목표는 무엇인가요?"
                 step_q_en = "🎯 [Target Conclusion Question] What target conclusion is shown to the right of the arrow (⇒)?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 상단 화살표 오른쪽의 목표 도형을 확인해 보세요. "
+                    f"{s_num}단계, {range_str} {formula_mention}상단 화살표 오른쪽의 목표 도형을 확인해 보세요. "
                     f"왼쪽의 출발 가정이 주어졌을 때 화살표 오른쪽의 {conc_ko}이 왜 항상 성립하는지 보이겠다는 뜻입니다. "
                     f"가정과 결론을 절대 섞지 않고, 이제 아래쪽 증명 도형에서 논리적 다리를 놓아 봅시다!"
                 )
@@ -2030,7 +2029,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_ko = "🧭 [결정적 보조선 질문] 왜 하필 이 위치에 초록색 보조선을 그어야 숨겨진 합동·대칭이 드러날까요?"
                 step_q_en = "🧭 [Key Auxiliary Line] Why do we draw the green auxiliary line right here to unlock the proof?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 이 증명에서 가장 중요한 유레카 순간입니다! "
+                    f"{s_num}단계, {range_str} {formula_mention}이 증명에서 가장 중요한 유레카 순간입니다! "
                     f"도형에 새로 그어진 초록색 선분을 보세요. 바로 {aux_ko}입니다. "
                     f"원래 도형만으로는 보이지 않던 관계가 이 초록색 보조선 한 줄로 인해 두 개의 비교 가능한 도형으로 나뉩니다!"
                 )
@@ -2042,7 +2041,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_ko = "📐 [합동·닮음 질문] 나뉜 두 도형은 어떤 조건(SAS, ASA, SSS, RHS, RHA, 닮음)에 의해 완전히 포개어질까요?"
                 step_q_en = "📐 [Congruence & Similarity] By which geometric criterion do the two divided figures match?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 주황색과 보라색으로 강조된 두 영역을 비교해 보세요. "
+                    f"{s_num}단계, {range_str} {formula_mention}주황색과 보라색으로 강조된 두 영역을 비교해 보세요. "
                     f"{logic_ko}를 눈으로 직접 확인할 수 있습니다. "
                     f"대응하는 변과 각의 조건이 정확히 맞아떨어지므로 두 도형은 완벽하게 합동(또는 닮음)을 이룹니다!"
                 )
@@ -2054,7 +2053,7 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                 step_q_ko = "💡 [유레카 질문] 합동·닮음인 도형의 대응하는 변과 각이 같다는 성질로부터 어떻게 목표 결론이 완성되나요?"
                 step_q_en = "💡 [Eureka Deduction] How do the corresponding parts of congruent figures complete our target conclusion?"
                 exp_ko = (
-                    f"{s_num}단계, {range_str} 도형에 붉은색으로 강조된 최종 표시를 보세요! "
+                    f"{s_num}단계, {range_str} {formula_mention}도형에 붉은색으로 강조된 최종 표시를 보세요! "
                     f"앞 단계에서 증명한 도형의 합동·대칭 성질에 의해 대응하는 부분의 크기가 같아지므로, "
                     f"우리가 목표로 했던 {conc_ko}이 마침내 증명되었습니다!"
                 )
@@ -2065,28 +2064,28 @@ def auto_generate_page_explanations(doc, item_meta, scene_ranges=None):
                     step_title = f"Step {s_num} · 기본 증명 도형 작도 및 조건 표시"
                     step_q_ko = "👁️ [관찰 질문] 증명 공간에 그린 기본 도형에서 가장 먼저 표시해야 할 주어진 조건은 무엇일까요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} "
+                        f"{s_num}단계, {range_str} {formula_mention}"
                         f"출발 조건인 {hyp_ko}을 증명 도형 위에 차례대로 작도하며 각 점과 선분의 위치 관계를 명확히 세웁니다."
                     )
                 elif progress <= 0.58:
                     step_title = f"Step {s_num} · 보조선 연결과 변·각의 크기 비교"
                     step_q_ko = "🧭 [연결 질문] 보조선이 만들어 낸 공통변이나 엇각·동위각 중 서로 크기가 같은 것은 어디일까요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} "
+                        f"{s_num}단계, {range_str} {formula_mention}"
                         f"{aux_ko}을 중심으로 도형에서 서로 길이가 같은 변과 크기가 같은 각을 하나씩 짝지어 비교합니다."
                     )
                 elif progress <= 0.82:
                     step_title = f"Step {s_num} · 핵심 증명 논리 완성 및 오개념 점검"
                     step_q_ko = "⚠️ [오개념 점검 질문] 증명할 결론을 미리 가정으로 끌어다 쓰는 순환논리 실수를 피하려면 무엇을 확인해야 할까요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} "
+                        f"{s_num}단계, {range_str} {formula_mention}"
                         f"{logic_ko}가 완성되는 단계입니다. 이때 꼭 기억해야 할 점은, {misc_ko}"
                     )
                 else:
                     step_title = f"Step {s_num} · 기하학적 단서 종합 및 결론 연결 (Synthesis)"
                     step_q_ko = "💡 [종합 질문] 지금까지 찾은 기하학적 단서들을 하나로 합치면 처음에 세운 목표 결론과 어떻게 일치하나요?"
                     exp_ko = (
-                        f"{s_num}단계, {range_str} 이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. "
+                        f"{s_num}단계, {range_str} {formula_mention}이제 앞에서 차곡차곡 확인한 기하학적 단서들을 하나로 결합합니다. "
                         f"도형의 대응 관계로부터 우리가 증명하고자 했던 {conc_ko}이 필연적으로 성립함을 확인할 수 있습니다."
                     )
                 step_q_en = translate_text_google_gtx(step_q_ko, "en")
@@ -7640,19 +7639,30 @@ def build_all_shorts(upload=False, privacy="public"):
 
 def get_next_unrendered_topic_slug(failed_slugs=None):
     """
-    [https://min7014.github.io/ 전 영역(16대 세부 단원 · 1,113개 전체 자료) 4대 에디션 확장 선택기]
-    1) 먼저 현재 렌더링 진행 중이던 주제(_ko.mp4와 _q_ko.mp4가 이미 생성되어 숏폼만 남은 주제)가 있으면 최우선 마무리합니다.
-    2) 그 다음 https://min7014.github.io/ (min7014_deep_knowledge.json)의 16대 세부 단원 전체 자료(845개 PDF + 268개 Non-PDF 웹/GeoGebra/AlgeoMath 자료) 중
-       아직 대본(scripts/*.json) 및 4대 에디션이 제작되지 않은 '새로운 자료'를 단원별 라운드로빈(Round-Robin) 순서로 최우선 반환합니다!
-    3) 신규 자료 확장과 함께 기존 스크립트 보유 주제 중 4대 에디션 미완성 주제도 순차 완성합니다.
+    [https://min7014.github.io/ 원본 단계별 시각 증명 PDF (847+개) 100% 전용 4대 에디션 확장 선택기]
+    - 회장님 지침에 따라 임의 생성된 비-PDF(Non-PDF 합성 슬라이드/창의 시네마)를 전면 배제하고,
+      오직 https://min7014.github.io/ 에 실제 원본 .pdf 파일이 존재하는 정통 단계별 증명 자료만을
+      한 페이지씩 직접 설명하는 방식으로 제작합니다.
     """
     failed_slugs = failed_slugs or set()
     existing_scripts = {sp.stem for sp in SCRIPTS_DIR.glob("*.json")}
 
-    # 0순위: 현재 렌더링 도중인 주제(_ko.mp4와 _q_ko.mp4가 이미 존재하고 숏폼만 남은 주제) 마무리
+    valid_pdf_slugs = set()
+    if DEEP_JSON_PATH.exists():
+        try:
+            for it in json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8")):
+                pdf_u = (it.get("pdf") or "").split("#")[0].strip()
+                if pdf_u and pdf_u.lower().endswith(".pdf") and "min7014.github.io" in pdf_u.lower():
+                    s_cand = pdf_u.split("/")[-1].replace(".pdf", "").strip()
+                    if s_cand:
+                        valid_pdf_slugs.add(s_cand)
+        except Exception:
+            pass
+
+    # 0순위: 현재 렌더링 도중인 원본 PDF 주제(_ko.mp4와 _q_ko.mp4가 이미 존재하고 숏폼만 남은 주제) 마무리
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         s = sp.stem
-        if s in failed_slugs:
+        if s in failed_slugs or (valid_pdf_slugs and s not in valid_pdf_slugs):
             continue
         mp4_ko = YT_UPLOADS_DIR / s / f"{s}_ko.mp4"
         q_ko = QUESTION_CLASSROOM_DIR / f"{s}_q_ko.mp4"
@@ -7661,47 +7671,8 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         if mp4_ko.exists() and q_ko.exists() and not (sh_ko.exists() and qsh_ko.exists()):
             return s
 
-    # 1순위: https://min7014.github.io/ 의 16대 전 영역 미제작 '다른 자료들'(신규 PDF + Non-PDF 웹/GeoGebra/AlgeoMath 자료)을 단원별 라운드로빈으로 선택!
+    # 1순위: https://min7014.github.io/ 의 16대 전 영역 원본 PDF 자료만 단원별 라운드로빈으로 선택!
     domain_flagships = [
-        # [보편적 수학공학도구 & 자체 제작 MathLab 마스터 커리큘럼 (Stage 1~5: 특정 도구에 얽매이지 않는 동적 기하·함수·통계·자취·AI 수학)]
-        "mathlab",          # [Stage 1-0] 자체 제작 수학공학도구 MathLab(min7014.github.io/2025/mathlab.html)과 보편적 동적 기하 설계 원리
-        "2021042603",       # [Stage 1-1] 수학공학도구 기초 시작과 동적 기하 구속 조건 원리 (ISBN 979-11-87541-13-4 제1장)
-        "math20190921001",  # [Stage 1-2] AlgeoMath 빠르게 배우기 (Learn AlgeoMath Quickly)
-        "math20210424001",  # [Stage 1-3] TikZ by Min (LaTeX TikZ 수학교육 도형 코드 작도 기초)
-        "math20210426002",  # [Stage 1-4] 수학교사와 학생을 위한 GeoGebra와 수학의 시각화 총론
-        "2021042604",       # [Stage 2-1] GeoGebra 예각에 대한 사인법칙 시각화 강의록 (제2.1장)
-        "2021042605",       # [Stage 2-2] GeoGebra 제한된 범위에서 이차함수의 최댓값과 최솟값 강의록 (제2.2장)
-        "2021042606",       # [Stage 2-3] GeoGebra 탄젠트함수 그래프와 점근선 시각화 강의록 (제2.3장)
-        "2021042607",       # [Stage 3-1] GeoGebra 통계: 큰 수의 법칙 시뮬레이션 강의록 (제3.1장)
-        "2021042608",       # [Stage 3-2] GeoGebra 통계: 이항분포와 정규분포의 관계 강의록 (제3.2장)
-        "2021042609",       # [Stage 3-3] GeoGebra 통계: 독립시행의 확률 시뮬레이션 강의록 (제3.3장)
-        "2021042610",       # [Stage 3-4] GeoGebra 통계: 중심극한정리 시뮬레이션 강의록 (제3.4장)
-        "2021042611",       # [Stage 3-5] GeoGebra 통계: 뷔퐁의 바늘 문제(Buffon Needle) 확률 실험 강의록 (제3.5장)
-        "2021042612",       # [Stage 4-1] GeoGebra 문제탐구: 도형의 자취(Locus) 작도 강의록 (제4.1장)
-        "2021042613",       # [Stage 4-2] GeoGebra 문제탐구: 도형의 자취 문제의 변형과 심화 강의록 (제4.2장)
-        "2021042614",       # [Stage 4-3] GeoGebra 창의 탐구: 스트링 아트(String Art)와 포락선 작도 강의록 (제5.1장)
-        "2021042615",       # [Stage 4-4] GeoGebra 창의 탐구: 굴러가는 원과 사이클로이드(Cycloid) 작도 강의록 (제5.2장)
-        "2021042616",       # [Stage 4-5] GeoGebra 창의 탐구: 프랙탈 코흐 눈송이(Koch Snowflake) 작도 강의록 (제5.3장)
-        "2021042617",       # [Stage 5-1] GeoGebra 수학 시험문제 및 수업자료 고화질 도형 제작 강의록 (제6.0장)
-        "2021042618",       # [Stage 5-2] GeoGebra 심화 연구활동: 타원 내부에서의 포락선(Envelope) 작도 강의록 (제7.0장)
-        "2019062801",       # [Stage 5-3] 수학 프로그램을 활용한 수학탐구 직무연수 강의록
-        "2019072302",       # [Stage 5-4] 알지오매스(AlgeoMath)를 활용한 단계별 기하 작도 및 STEAM 탐구 강의록
-        "math20260519001",  # [Stage 5-5] 2026 경남과학고 수학과 현장연구: GeoGebra 리스트·스크립트 코딩 (Sequence, CountIf, Element)
-        "math20240308001",  # [Stage 5-6] 2024 강원과학고 수학공학도구의 이해와 경사하강법 페르마 포인트 AI 수학 원리
-        "math20231203002",  # Non-PDF 심화 탐구: 작도와 경사하강법을 활용한 삼각형의 페르마 점
-        "math20190810130",  # 수학공학도구: Slope Field of dy/dx = y - x 제작방법 (by GeoGebra)
-        "math20190810131",  # 수학공학도구: Slope Field of dy/dx = y - x (by AlgeoMath)
-        "math20190918001",  # 수학공학도구: AlgeoMath 체크박스 자동화 및 단계별 증명 제어
-        "math20190914002",  # 수학공학도구: All 과 Auto 체크박스와 연결된 이벤트 만들기
-        "math20190912002",  # 수학공학도구: AlgeoMath 에서 점의 상대적 위치에 따라가는 동적 텍스트 만들기
-        "math20190810063",  # 수학공학도구: [알지오매스로 수업하기] 주어진 선분의 중점 작도
-        "math20190810072",  # 수학공학도구: [알지오매스로 수업하기] 주어진 길이의 선분을 활용한 원의 정의 수업
-        "math20210308001",  # 수학공학도구: 분산, 표준편차 구하기 [GeoGebra 이용]
-        "math20230707001",  # 수학공학도구: 복원추출 표본평균의 표본분포 시뮬레이션 [GeoGebra 이용]
-        "2018092501",       # 수학공학도구: 예각에 대한 사인법칙 (AlgeoMath) 자료 제작 강의록
-        "math20211227001",  # 아주대 교육대학원 수학공학도구 특강
-        "math20220416001",  # 사천중학교 수학공학도구 특강
-        "math20231203001",  # 치악고 인공지능 융합교육 (경사하강법과 수학공학도구)
         "2017092841",  # 유클리드 평면기하: 원에서 현의 수직이등분선
         "2020041301",  # 이차곡선·원뿔곡선: 포물선의 정의
         "2020051301",  # 삼각비·삼각함수: 호도법(Radian)
@@ -7722,7 +7693,7 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
     unscripted_candidates = []
     seen_cands = set()
     for fs in domain_flagships:
-        if fs not in failed_slugs and fs not in seen_cands:
+        if fs not in failed_slugs and fs not in seen_cands and (not valid_pdf_slugs or fs in valid_pdf_slugs):
             unscripted_candidates.append(fs)
             seen_cands.add(fs)
 
@@ -7730,18 +7701,15 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         try:
             items = json.loads(DEEP_JSON_PATH.read_text(encoding="utf-8"))
             by_sub_pdf = {}
-            by_sub_web = {}
             _non_math_skip = (
                 "원노트", "OneNote", "mathapk", "학습자료 링크",
                 "설치", "블로그", "민은기",
             )
-            # 유튜브 알고리즘에서 폭발적 조회수(High CTR & Global Viral)를 기록하는 독창적·창의적 시각 증명 및 수학공학도구(GeoGebra·AlgeoMath) 키워드 최우선 추출
             _viral_creative_keywords = (
                 "피타고라스", "테셀레이션", "황금비", "오각형", "단델린", "사이클로이드", "아르키메데스",
                 "페르마", "오일러", "구점원", "나폴레옹", "몰리", "톨레미", "파스칼", "브리앙숑",
                 "아폴로니우스", "스튜어트", "헤론", "파푸스", "메넬라우스", "체바", "구분구적",
                 "코시", "산술", "포물선", "타원", "쌍곡선", "작도", "프랙탈", "원주각", "접선", "정다면체",
-                "지오지브라", "geogebra", "알지오매스", "algeomath", "공학도구", "경사하강법", "방향장", "체크박스",
             )
             viral_gem_slugs = []
             for it in items:
@@ -7750,35 +7718,25 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
                 if sub == "기타" or any(bad_k in t_raw for bad_k in _non_math_skip):
                     continue
                 pdf_u = (it.get("pdf") or "").split("#")[0].strip()
-                url_u = (it.get("url") or "").strip()
-                if pdf_u and pdf_u.lower().endswith(".pdf"):
+                if pdf_u and pdf_u.lower().endswith(".pdf") and "min7014.github.io" in pdf_u.lower():
                     s = pdf_u.split("/")[-1].replace(".pdf", "").strip()
                     if s and s not in existing_scripts and s not in failed_slugs and s not in seen_cands:
                         if any(vk in t_raw for vk in _viral_creative_keywords):
                             viral_gem_slugs.append(s)
                         by_sub_pdf.setdefault(sub, []).append(s)
-                elif url_u:
-                    s = url_u.split("/")[-1].replace(".html", "").strip()
-                    if s and s not in existing_scripts and s not in failed_slugs and s not in seen_cands:
-                        if any(vk in t_raw for vk in _viral_creative_keywords):
-                            viral_gem_slugs.append(s)
-                        by_sub_web.setdefault(sub, []).append(s)
-            # 0순위: 유튜브 바이럴 잠재력이 가장 높은 독창적 시각 기하·창의 증명 자료 먼저 배치
             for vg in viral_gem_slugs:
                 if vg not in seen_cands:
                     unscripted_candidates.append(vg)
                     seen_cands.add(vg)
-            # 16개 단원 라운드로빈 교차 배치 (1순위: 정통 시각 증명 PDF 자료 ➔ 2순위: 순수 수학 웹 탐구 자료)
-            for bucket_map in (by_sub_pdf, by_sub_web):
-                sub_keys = sorted(bucket_map.keys())
-                max_len = max((len(v) for v in bucket_map.values()), default=0)
-                for idx in range(max_len):
-                    for sk in sub_keys:
-                        if idx < len(bucket_map[sk]):
-                            cand = bucket_map[sk][idx]
-                            if cand not in seen_cands:
-                                unscripted_candidates.append(cand)
-                                seen_cands.add(cand)
+            sub_keys = sorted(by_sub_pdf.keys())
+            max_len = max((len(v) for v in by_sub_pdf.values()), default=0)
+            for idx in range(max_len):
+                for sk in sub_keys:
+                    if idx < len(by_sub_pdf[sk]):
+                        cand = by_sub_pdf[sk][idx]
+                        if cand not in seen_cands:
+                            unscripted_candidates.append(cand)
+                            seen_cands.add(cand)
         except Exception:
             pass
 
@@ -7790,10 +7748,10 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
             return slug
 
-    # 2순위: 기존 스크립트 보유 주제 중 4대 에디션 미완성 주제 완성
+    # 2순위: 기존 스크립트 보유 주제 중 원본 PDF가 존재하는 미완성 주제 완성
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         s = sp.stem
-        if s in failed_slugs:
+        if s in failed_slugs or (valid_pdf_slugs and s not in valid_pdf_slugs):
             continue
         mp4_ko = YT_UPLOADS_DIR / s / f"{s}_ko.mp4"
         q_ko = QUESTION_CLASSROOM_DIR / f"{s}_q_ko.mp4"
@@ -7884,9 +7842,7 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                 try:
                     import importlib
                     import finance
-                    import creative_idea_cinema as cidea
                     importlib.reload(finance)
-                    importlib.reload(cidea)
                     wave_res = finance.execute_youtube_cashflow_golden_wave(max_wave_uploads=8)
                     newly_uploaded_batch += int((wave_res or {}).get("total_uploaded", 0))
                 except Exception as idea0_err:
@@ -7894,7 +7850,7 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                         print(f"[Priority 0 Cash-Flow Wave Notice] {idea0_err}", flush=True)
 
                 if not _LAST_UPLOAD_QUOTA_BLOCKED:
-                    for q_prio_slug in ["mathlab", "math20250130001", "2014111902", "2014111901", "2017090101"]:
+                    for q_prio_slug in ["math20250130001", "2014111902", "2014111901", "2017090101", "2017092841", "2020041301"]:
                         sp_qp = SCRIPTS_DIR / f"{q_prio_slug}.json"
                         if not sp_qp.exists():
                             continue
@@ -7912,31 +7868,18 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)
                     subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/finance_revenue_engine.json"], check=False)
-                    subprocess.run(["git", "commit", "-m", f"chore(youtube-cashflow): auto-upload cash-flow wave ({newly_uploaded_batch} videos) to @min7014_ai"], check=False)
+                    subprocess.run(["git", "commit", "-m", f"chore(youtube-pdf): auto-upload step-by-step PDF videos ({newly_uploaded_batch} videos) to @min7014_ai"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
 
-            # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 다음 주제의 창의 네온 시네마 + 4대 에디션 연속 자동 제작!
+            # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 원본 PDF 주제의 4대 에디션(한 땀 한 땀 PDF 직접 설명) 연속 자동 제작!
             if not hasattr(run_shorts_and_video_upload_daemon, "_failed_slugs"):
                 run_shorts_and_video_upload_daemon._failed_slugs = set()
             next_slug = get_next_unrendered_topic_slug(run_shorts_and_video_upload_daemon._failed_slugs)
             if next_slug:
-                print(f"🎬 [Continuous Factory] 다음 주제 고수익 네온 시네마 + 4대 에디션 자동 제작 시작: {next_slug}", flush=True)
+                print(f"🎬 [Continuous PDF Factory] 다음 원본 PDF 주제 4대 에디션(한 땀 한 땀 단계별 설명) 자동 제작 시작: {next_slug}", flush=True)
                 try:
                     generate_or_update_script(next_slug, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
                     for lc in ["ko", "en"]:
-                        # 0순위: 실시간 조회수·구독자 폭발이 검증된 순수 네온 시네마 1080p & 44초 Idea-#Shorts 최우선 렌더링!
-                        try:
-                            import importlib
-                            import creative_idea_cinema as cidea
-                            importlib.reload(cidea)
-                            idea_p = ROOT_DIR / "video_lectures" / "creative_idea" / f"{next_slug}_idea_{lc}.mp4"
-                            if not idea_p.exists():
-                                cidea.render_creative_idea_cinema_video(next_slug, lang_code=lc)
-                            ish_p = ROOT_DIR / "video_lectures" / "shorts" / f"{next_slug}_short_idea_{lc}.mp4"
-                            if not ish_p.exists():
-                                cidea.render_creative_idea_short_vertical(next_slug, lang_code=lc)
-                        except Exception as ie_err:
-                            print(f"[Creative Idea Cinema Notice] {ie_err}", flush=True)
                         mp4_p = YT_UPLOADS_DIR / next_slug / f"{next_slug}_{lc}.mp4"
                         if not mp4_p.exists():
                             render_multilingual_video(next_slug, lang_code=lc)

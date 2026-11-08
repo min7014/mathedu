@@ -370,182 +370,6 @@ def build_ypp_watchtime_masterclasses() -> list:
 
     suites = [
         {
-            "mc_slug": "masterclass_neon_idea_vol1",
-            "title_ko": "🔥 공식 암기는 그만! 단 1개의 아이디어로 끝내는 6대 시각 증명 (12분 정주행) | 창의 수학 시네마 Vol.1",
-            "title_en": "🔥 Stop Memorizing Formulas! 6 Visual Math Ideas That Explain Everything (1080p Masterclass Vol.1)",
-            "slugs": ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol1_en",
-            "title_ko": "🔥 Stop Memorizing Formulas! 6 Visual Math Ideas That Explain Everything (1080p Masterclass Vol.1)",
-            "title_en": "🔥 Stop Memorizing Formulas! 6 Visual Math Ideas That Explain Everything (1080p Masterclass Vol.1)",
-            "slugs": ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol2",
-            "title_ko": "🔥 왜 모든 원리가 한 줄로 연결될까? 피타고라스·원주각·미분·황금나선 (12분 정주행) | 창의 수학 시네마 Vol.2",
-            "title_en": "🔥 How Pythagoras, Calculus, Circle Angles & Golden Spiral Connect! (1080p Masterclass Vol.2)",
-            "slugs": ["2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol2_en",
-            "title_ko": "🔥 How Pythagoras, Calculus, Circle Angles & Golden Spiral Connect! (1080p Masterclass Vol.2)",
-            "title_en": "🔥 How Pythagoras, Calculus, Circle Angles & Golden Spiral Connect! (1080p Masterclass Vol.2)",
-            "slugs": ["2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol3",
-            "title_ko": "🔥 왜 sin을 미분하면 cos이 될까? 원주각·사인미분·역함수미분·포물선·특수각 총정리 | 창의 수학 시네마 Vol.3",
-            "title_en": "🔥 Why d/dx(sin x) = cos x? Inscribed Angle, Calculus & Parabola Focus (1080p Masterclass Vol.3)",
-            "slugs": ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501", "2014111901"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol3_en",
-            "title_ko": "🔥 Why d/dx(sin x) = cos x? Inscribed Angle, Calculus & Parabola Focus (1080p Masterclass Vol.3)",
-            "title_en": "🔥 Why d/dx(sin x) = cos x? Inscribed Angle, Calculus & Parabola Focus (1080p Masterclass Vol.3)",
-            "slugs": ["2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501", "2014111901"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol4",
-            "title_ko": "🔥 왜 포물선의 두 접선은 준선 위에서 항상 수직(90°)으로 만날까? 포물선 작도·방정식 총정리 | 창의 수학 시네마 Vol.4",
-            "title_en": "🔥 Why Do Two Parabola Tangents Meet at 90° on the Directrix? Parabola Visual Proofs (Masterclass Vol.4)",
-            "slugs": ["2020011801", "2020041601", "2022012301", "2022040401", "2022040501", "2022040601", "2022040801"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol4_en",
-            "title_ko": "🔥 Why Do Two Parabola Tangents Meet at 90° on the Directrix? Parabola Visual Proofs (Masterclass Vol.4)",
-            "title_en": "🔥 Why Do Two Parabola Tangents Meet at 90° on the Directrix? Parabola Visual Proofs (Masterclass Vol.4)",
-            "slugs": ["2020011801", "2020041601", "2022012301", "2022040401", "2022040501", "2022040601", "2022040801"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol5",
-            "title_ko": "🔥 미분 없이 이등변삼각형 대칭 하나로 끝내는 포물선 접선 공식(y²=4px, x²=4py) 총정리 | 창의 수학 시네마 Vol.5",
-            "title_en": "🔥 Derive Parabola Tangent Formulas Without Calculus Using 1 Isosceles Triangle! (Masterclass Vol.5)",
-            "slugs": ["2022030101", "2022031901", "2022032001", "2022032601", "2022032801", "2022041001", "2022042301"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol5_en",
-            "title_ko": "🔥 Derive Parabola Tangent Formulas Without Calculus Using 1 Isosceles Triangle! (Masterclass Vol.5)",
-            "title_en": "🔥 Derive Parabola Tangent Formulas Without Calculus Using 1 Isosceles Triangle! (Masterclass Vol.5)",
-            "slugs": ["2022030101", "2022031901", "2022032001", "2022032601", "2022032801", "2022041001", "2022042301"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol6",
-            "title_ko": "🔥 왜 두 초점까지의 거리 합(|PF₁|+|PF₂|=2a)만으로 타원 방정식이 완성될까? 타원 완전 정복 | 창의 수학 시네마 Vol.6",
-            "title_en": "🔥 How Constant Distance Sum |PF₁|+|PF₂|=2a Creates Every Ellipse Equation! (Masterclass Vol.6)",
-            "slugs": ["2020041901", "2020042201", "2020042301", "2020042401", "2020042701", "2022051501", "2022051507"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol6_en",
-            "title_ko": "🔥 How Constant Distance Sum |PF₁|+|PF₂|=2a Creates Every Ellipse Equation! (Masterclass Vol.6)",
-            "title_en": "🔥 How Constant Distance Sum |PF₁|+|PF₂|=2a Creates Every Ellipse Equation! (Masterclass Vol.6)",
-            "slugs": ["2020041901", "2020042201", "2020042301", "2020042401", "2020042701", "2022051501", "2022051507"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol7",
-            "title_ko": "🔥 제1초점에서 쏜 빛이 반드시 제2초점으로 모이는 이유! 타원 빛 반사·보조원·수선의 발 총정리 | 창의 수학 시네마 Vol.7",
-            "title_en": "🔥 Why Every Ray From Focus F₁ Reflects to F₂! Ellipse Reflection & Auxiliary Circle (Masterclass Vol.7)",
-            "slugs": ["2022050701", "2022050703", "2022050801", "2022050901", "math20220509002", "2022053101", "2014111902"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol7_en",
-            "title_ko": "🔥 Why Every Ray From Focus F₁ Reflects to F₂! Ellipse Reflection & Auxiliary Circle (Masterclass Vol.7)",
-            "title_en": "🔥 Why Every Ray From Focus F₁ Reflects to F₂! Ellipse Reflection & Auxiliary Circle (Masterclass Vol.7)",
-            "slugs": ["2022050701", "2022050703", "2022050801", "2022050901", "math20220509002", "2022053101", "2014111902"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol8",
-            "title_ko": "🔥 공식 암기 끝! 보조원과 준원으로 단번에 증명하는 타원 접선의 방정식 & 자취 작도 총정리 | 창의 수학 시네마 Vol.8",
-            "title_en": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
-            "slugs": ["2022051001", "2022051101", "math20220515003", "math20220515004", "math20220515005", "2025021601", "math20250130001"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol8_en",
-            "title_ko": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
-            "title_en": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
-            "slugs": ["2022051001", "2022051101", "math20220515003", "math20220515004", "math20220515005", "2025021601", "math20250130001"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol9",
-            "title_ko": "🛠️ 수학공학도구 & 동적 수학 시각화 마스터클래스! 자체 MathLab·동적 기하 작도·방향장(dy/dx)·AI 경사하강법 페르마 점 (Vol.9)",
-            "title_en": "🛠️ Universal Math Engineering Tools Masterclass! MathLab, Dynamic Geometry, Slope Fields & Gradient Descent (Vol.9)",
-            "slugs": ["mathlab", "math20190921001", "math20210426002", "math20240308001", "math20231203002", "math20190810130", "math20190810131", "math20190810063"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_neon_idea_vol9_en",
-            "title_ko": "🛠️ Universal Math Engineering Tools Masterclass! MathLab, Dynamic Geometry, Slope Fields & Gradient Descent (Vol.9)",
-            "title_en": "🛠️ Universal Math Engineering Tools Masterclass! MathLab, Dynamic Geometry, Slope Fields & Gradient Descent (Vol.9)",
-            "slugs": ["mathlab", "math20190921001", "math20210426002", "math20240308001", "math20231203002", "math20190810130", "math20190810131", "math20190810063"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_geogebra_book_vol1",
-            "title_ko": "📘 [수학공학도구와 수학의 시각화 정주행 강좌 Vol.1] 특정 도구에 얽매이지 않는 기초 작도·사인법칙·이차함수·중심극한정리·뷔퐁의 바늘! (제1~3장)",
-            "title_en": "📘 [Dynamic Math Engineering & Visualization Full Course Vol.1] Universal Construction, Law of Sines, CLT & Buffon's Needle (Ch.1–3)",
-            "slugs": ["mathlab", "2021042603", "2021042604", "2021042605", "2021042606", "2021042607", "2021042608", "2021042610", "2021042611"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_geogebra_book_vol1_en",
-            "title_ko": "📘 [Dynamic Math Engineering & Visualization Full Course Vol.1] Universal Construction, Law of Sines, CLT & Buffon's Needle (Ch.1–3)",
-            "title_en": "📘 [Dynamic Math Engineering & Visualization Full Course Vol.1] Universal Construction, Law of Sines, CLT & Buffon's Needle (Ch.1–3)",
-            "slugs": ["mathlab", "2021042603", "2021042604", "2021042605", "2021042606", "2021042607", "2021042608", "2021042610", "2021042611"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
-            "mc_slug": "masterclass_geogebra_book_vol2",
-            "title_ko": "📗 [수학공학도구와 수학의 시각화 정주행 강좌 Vol.2] 도형의 자취·스트링아트·사이클로이드·코흐눈송이·시험문제 도형·타원 포락선 (제4~7장)",
-            "title_en": "📗 [Dynamic Math Engineering & Visualization Full Course Vol.2] Locus, String Art, Cycloid, Koch Snowflake & Envelopes (Ch.4–7)",
-            "slugs": ["2021042612", "2021042613", "2021042614", "2021042615", "2021042616", "2021042617", "2021042618", "math20260519001"],
-            "use_creative_idea_edition": True,
-            "lang": "ko",
-        },
-        {
-            "mc_slug": "masterclass_geogebra_book_vol2_en",
-            "title_ko": "📗 [Dynamic Math Engineering & Visualization Full Course Vol.2] Locus, String Art, Cycloid, Koch Snowflake & Envelopes (Ch.4–7)",
-            "title_en": "📗 [Dynamic Math Engineering & Visualization Full Course Vol.2] Locus, String Art, Cycloid, Koch Snowflake & Envelopes (Ch.4–7)",
-            "slugs": ["2021042612", "2021042613", "2021042614", "2021042615", "2021042616", "2021042617", "2021042618", "math20260519001"],
-            "use_creative_idea_edition": True,
-            "lang": "en",
-        },
-        {
             "mc_slug": "masterclass_euclidean_geometry_vol1",
             "title_ko": "🔥 [기하학 시각적 증명 마스터클래스 Vol.1] 피타고라스·메넬라우스·체바·원주각·포물선 총정리 (1080p 정주행) | @min7014_ai",
             "title_en": "🔥 [Visual Geometry Masterclass Vol.1] Pythagoras, Menelaus, Ceva, Circle & Parabola Full Compilation (1080p) | @min7014_ai",
@@ -583,9 +407,8 @@ def build_ypp_watchtime_masterclasses() -> list:
         },
     ]
 
-    # [v5.0 Autonomous Masterclass Volume Discovery]
-    # 렌더링 완료된 전체 1080p 자산(KO / EN / 질문수업 Q-KO)을 스캔하여
-    # 5개 주제씩 묶은 신규 마스터클래스 시리즈(Vol.3, Vol.4, ... Vol.N)를 매 사이클 최대 2편씩 자동 확장 빌드합니다.
+    # [v5.0 Autonomous Original-PDF Masterclass Volume Discovery]
+    # 오직 https://min7014.github.io/ 원본 .pdf 파일로 직접 제작된 1080p 영상만 5개씩 묶어 정주행 마스터클래스로 빌드합니다.
     used_slugs = set()
     for s_item in suites:
         for sk in s_item["slugs"]:
@@ -595,6 +418,13 @@ def build_ypp_watchtime_masterclasses() -> list:
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         sk = sp.stem
         if sk in used_slugs:
+            continue
+        try:
+            sdoc_chk = json.loads(sp.read_text(encoding="utf-8"))
+            pdf_u_chk = str(sdoc_chk.get("pdf_url") or "").lower()
+            if not (pdf_u_chk.endswith(".pdf") and "min7014.github.io" in pdf_u_chk):
+                continue
+        except Exception:
             continue
         if (YT_UPLOADS_DIR / sk / f"{sk}_ko.mp4").exists() and (YT_UPLOADS_DIR / sk / f"{sk}_en.mp4").exists():
             all_ko_candidates.append(sk)
@@ -646,7 +476,6 @@ def build_ypp_watchtime_masterclasses() -> list:
     for spec in suites:
         mc_slug = spec["mc_slug"]
         use_q = spec.get("use_question_edition", False)
-        use_idea = spec.get("use_creative_idea_edition", False)
         lang_code = spec.get("lang", "ko")
         out_mp4 = MASTERCLASS_DIR / f"{mc_slug}.mp4" if mc_slug.endswith("_en") else MASTERCLASS_DIR / f"{mc_slug}_ko.mp4"
         out_meta = MASTERCLASS_DIR / f"{mc_slug}_meta.json"
@@ -656,16 +485,7 @@ def build_ypp_watchtime_masterclasses() -> list:
         cum_sec = 0.0
 
         for s_key in spec["slugs"]:
-            if use_idea:
-                mp4_cand = ROOT_DIR / "video_lectures" / "creative_idea" / f"{s_key}_idea_{lang_code}.mp4"
-                if not mp4_cand.exists():
-                    try:
-                        import creative_idea_cinema as cidea
-                        mp4_cand = cidea.render_creative_idea_cinema_video(s_key, lang_code=lang_code)
-                        cidea.render_creative_idea_short_vertical(s_key, lang_code=lang_code)
-                    except Exception:
-                        pass
-            elif use_q:
+            if use_q:
                 mp4_cand = QUESTION_DIR / f"{s_key}_q_{lang_code}.mp4"
             else:
                 mp4_cand = YT_UPLOADS_DIR / s_key / f"{s_key}_{lang_code}.mp4"
@@ -699,7 +519,7 @@ def build_ypp_watchtime_masterclasses() -> list:
                     dur_s = 240.0
             cum_sec += dur_s
 
-        if len(part_files) >= 3 and not out_mp4.exists() and (use_idea or newly_concat_this_cycle < 4):
+        if len(part_files) >= 3 and not out_mp4.exists() and newly_concat_this_cycle < 4:
             concat_txt = MASTERCLASS_DIR / f"{mc_slug}_concat.txt"
             concat_txt.write_text(
                 "\n".join(f"file '{p.resolve().as_posix()}'" for p in part_files),
@@ -1331,33 +1151,12 @@ def execute_live_channel_and_video_repairs_now() -> dict:
     except Exception as e:
         print(f"[Live Channel/Video Update Notice] {e}", flush=True)
 
-    # 3) 최우선 순위 장편 네온 마스터클래스 & 창의 아이디어 시네마 즉시 업로드
+    # 3) 최우선 순위 100% 원본 PDF 한 땀 한 땀 직강 장편 마스터클래스 즉시 업로드
     try:
         mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=6)
         results["uploaded_masterclasses"] = mc_cnt
     except Exception as me:
         print(f"[Masterclass Upload Notice] {me}", flush=True)
-
-    try:
-        import creative_idea_cinema as cidea
-        for s_id in ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301"]:
-            sp = SCRIPTS_DIR / f"{s_id}.json"
-            if sp.exists():
-                sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                iu = sdoc.get("creative_idea_youtube_urls") or {}
-                if not (iu.get("ko") or "").strip():
-                    r_u = cidea.upload_creative_idea_to_youtube(s_id, langs=("ko", "en"))
-                    if r_u:
-                        results["uploaded_ideas"].append((s_id, r_u))
-                    else:
-                        break
-                isu = sdoc.get("creative_idea_shorts_urls") or {}
-                if not (isu.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{s_id}_short_idea_ko.mp4").exists():
-                    r_su = cidea.upload_creative_idea_short_to_youtube(s_id, langs=("ko", "en"))
-                    if r_su:
-                        results["uploaded_ideas"].append((f"{s_id}_short", r_su))
-    except Exception as ie:
-        print(f"[Creative Idea Upload Notice] {ie}", flush=True)
 
     return results
 
@@ -1376,8 +1175,6 @@ def clear_stale_upload_flags_on_live_videos() -> int:
             ("shorts_urls", "shorts_packages"),
             ("question_youtube_urls", "question_classroom_packages"),
             ("question_shorts_urls", "question_shorts_packages"),
-            ("creative_idea_youtube_urls", "creative_idea_packages"),
-            ("creative_idea_shorts_urls", "creative_idea_shorts_packages"),
         ]:
             umap = d.get(k_url) or {}
             pmap = d.get(k_pkg) or {}
@@ -1395,15 +1192,14 @@ def clear_stale_upload_flags_on_live_videos() -> int:
 
 def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
     """
-    [유튜브 채널 현금흐름 창출 황금비 업로드 엔진 (Golden Wave Cash-Flow Strike)]
-    일일 YouTube API 쿼터(10,000 유닛/프로젝트 · 매일 17:00 KST 리셋)를 비업로드 호출에 단 1유닛도 낭비하지 않고,
-    오직 현금흐름 직결 신규 영상 업로드에만 100% 투입합니다:
-      1) [시청시간 4,000h & 다중 미드롤 광고 엔진]: 10~35분 정주행 마스터클래스 (KO / 글로벌 EN) 1편 업로드
-      2) [구독자 500/1,000명 & 실시간 피드 폭발 엔진]: 44초 순수 네온 블룸 Idea-#Shorts (KO & EN) 업로드
-      3) [고단가 검색·탐색 장기 현금흐름 엔진]: 1080p 순수 네온 블룸 창의 시네마 본편 (KO & EN) 업로드
+    [유튜브 채널 현금흐름 창출 황금비 업로드 엔진 — 100% 원본 PDF 한 땀 한 땀 단계별 설명 방식]
+    회장님 지침에 따라 비-PDF 창의 시네마(creative_idea_cinema)를 전면 배제하고,
+    오직 https://min7014.github.io/ 원본 .pdf 파일을 직접 한 페이지씩 설명하는 정통 영상만 업로드합니다:
+      1) [시청시간 4,000h & 다중 미드롤 광고 엔진]: 원본 PDF 기반 20~35분 정주행 마스터클래스 (KO / EN) 1편 업로드
+      2) [구독자 500/1,000명 & 실시간 피드 엔진]: 원본 PDF 단계별 9:16 #Shorts (KO & EN) 업로드
+      3) [고단가 검색·탐색 장기 현금흐름 엔진]: 원본 PDF 1080p 단계별 본편 (KO & EN) 업로드
     """
     import min7014_video_maker as vmaker
-    import creative_idea_cinema as cidea
 
     clear_stale_upload_flags_on_live_videos()
     vmaker._LAST_UPLOAD_QUOTA_BLOCKED = False
@@ -1412,19 +1208,15 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
     if yt_test is None:
         return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
 
-    priority_cashflow_slugs = [
-        "mathlab",
-        "2011112501", "2012093001", "2016040701", "2017030206",
-        "2018021402", "2018021404", "2018021405", "2018021406",
-        "2016012901", "2016030901", "2019081052", "2019101602",
-        "2020041301", "2017090601", "2017090501", "2020011801",
-        "2020041601", "2022012301", "2022040401", "2022040501",
-    ]
-    extra_idea_slugs = sorted({
-        p.name.replace("_idea_ko.mp4", "").replace("_idea_en.mp4", "")
-        for p in (ROOT_DIR / "video_lectures" / "creative_idea").glob("*_idea_*.mp4")
-    }) if (ROOT_DIR / "video_lectures" / "creative_idea").exists() else []
-    ordered_slugs = priority_cashflow_slugs + [s for s in extra_idea_slugs if s not in priority_cashflow_slugs]
+    ordered_slugs = []
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+            pdf_u = str(sdoc.get("pdf_url") or "").lower()
+            if pdf_u.endswith(".pdf") and "min7014.github.io" in pdf_u:
+                ordered_slugs.append(sp.stem)
+        except Exception:
+            continue
 
     uploaded_items = []
     total_uploaded = 0
@@ -1433,15 +1225,15 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot A] 10~35분 미드롤 마스터클래스 1편 업로드 (시청시간 15~35배 가속 + 다중 중간광고)
+        # [Slot A] 원본 PDF 기반 20~35분 미드롤 마스터클래스 1편 업로드
         mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=1)
         if mc_cnt > 0:
             total_uploaded += mc_cnt
-            uploaded_items.append({"type": "masterclass", "count": mc_cnt})
+            uploaded_items.append({"type": "pdf_masterclass", "count": mc_cnt})
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot B] 44초 순수 네온 블룸 Idea-#Shorts (KO/EN) 1세트 업로드 (실시간 조회수 & 구독자 유입 폭발)
+        # [Slot B] 원본 PDF 단계별 9:16 #Shorts (KO/EN) 1세트 업로드
         for s_slug in ordered_slugs:
             if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                 break
@@ -1449,24 +1241,25 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
             if not sp.exists():
                 continue
             sdoc = json.loads(sp.read_text(encoding="utf-8"))
-            isu = sdoc.get("creative_idea_shorts_urls") or {}
+            su = sdoc.get("shorts_urls") or {}
             missing_sh = tuple(
                 lc for lc in ("ko", "en")
-                if not (isu.get(lc) or "").strip()
-                and (ROOT_DIR / "video_lectures" / "shorts" / f"{s_slug}_short_idea_{lc}.mp4").exists()
+                if not (su.get(lc) or "").strip()
+                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").exists()
             )
             if missing_sh:
-                res_sh = cidea.upload_creative_idea_short_to_youtube(s_slug, langs=missing_sh)
+                res_sh = vmaker.upload_short_to_youtube(s_slug, langs=missing_sh, privacy="public")
                 if res_sh:
-                    n_up = len(res_sh)
-                    total_uploaded += n_up
-                    uploaded_items.append({"type": "idea_short", "slug": s_slug, "langs": list(res_sh.keys())})
+                    n_up = len([k for k, v in res_sh.items() if v])
+                    if n_up > 0:
+                        total_uploaded += n_up
+                        uploaded_items.append({"type": "pdf_short", "slug": s_slug, "langs": list(res_sh.keys())})
                 break
 
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot C] 1080p 순수 네온 블룸 창의 시네마 본편 (KO/EN) 1세트 업로드 (고지속률 검색·탐색 수익)
+        # [Slot C] 원본 PDF 한 땀 한 땀 1080p 단계별 본편 (KO/EN) 1세트 업로드
         for c_slug in ordered_slugs:
             if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                 break
@@ -1474,18 +1267,19 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
             if not sp.exists():
                 continue
             sdoc = json.loads(sp.read_text(encoding="utf-8"))
-            iu = sdoc.get("creative_idea_youtube_urls") or {}
-            missing_ci = tuple(
+            yu = sdoc.get("youtube_urls") or {}
+            missing_std = tuple(
                 lc for lc in ("ko", "en")
-                if not (iu.get(lc) or "").strip()
-                and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{c_slug}_idea_{lc}.mp4").exists()
+                if not (yu.get(lc) or "").strip()
+                and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").exists()
             )
-            if missing_ci:
-                res_ci = cidea.upload_creative_idea_to_youtube(c_slug, langs=missing_ci)
-                if res_ci:
-                    n_up = len(res_ci)
-                    total_uploaded += n_up
-                    uploaded_items.append({"type": "idea_cinema_1080p", "slug": c_slug, "langs": list(res_ci.keys())})
+            if missing_std:
+                res_std = vmaker.upload_slug_to_youtube(c_slug, langs=missing_std, privacy="public")
+                if res_std:
+                    n_up = len([k for k, v in res_std.items() if v])
+                    if n_up > 0:
+                        total_uploaded += n_up
+                        uploaded_items.append({"type": "pdf_1080p", "slug": c_slug, "langs": list(res_std.keys())})
                 break
 
     if total_uploaded > 0:
