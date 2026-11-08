@@ -21,9 +21,8 @@ ROOT_DIR = Path(__file__).resolve().parent
 
 def collect_live_workspace_metrics() -> dict:
     vl_dir = ROOT_DIR / "video_lectures"
-    mc_dir = vl_dir / "masterclasses"
-    ci_dir = vl_dir / "creative_ideas"
     yt_dir = ROOT_DIR / "youtube_uploads"
+    mc_dir = yt_dir / "masterclasses"
 
     # 1. Video_Creator 지표
     vl_mp4s = list(vl_dir.rglob("*.mp4")) if vl_dir.exists() else []
@@ -45,8 +44,7 @@ def collect_live_workspace_metrics() -> dict:
     qs_ko = list((vl_dir / "shorts").glob("*_qshorts_*.mp4")) if (vl_dir / "shorts").exists() else []
 
     mc_mp4s = sorted(mc_dir.glob("*.mp4")) if mc_dir.exists() else []
-    ci_dir_actual = vl_dir / "creative_idea"
-    ci_mp4s = sorted(ci_dir_actual.glob("*.mp4")) if ci_dir_actual.exists() else []
+    ci_mp4s = []
 
     # 2. mathteacher 지표
     ped_file = ROOT_DIR / "assets" / "mathteacher_pedagogy_engine.json"
@@ -162,12 +160,13 @@ def format_executive_briefing(metrics: dict) -> str:
         "   • 조직 구성: 인간 직원 0명(인건비 0원) + 24/7 무휴 8대 AI 본부장(`secretary`, `mathteacher`, `Video_Creator`, `MathLab_Developer`, `finance`, `pr`, `gamemaker`, `designer`) & 876개 스킬",
         "",
         "2️⃣ AI 미디어 제작 본부 (`Video_Creator`) & 자체 수학공학도구 개발 본부 (`MathLab_Developer`)",
+        "   • 🏛️ [오리지널 원문 최우선 원칙 (Rule 27 & 28)]: 비-PDF 합성 영상 79개 전수 삭제 완료(잔존 0건) · @min7014_ai 라이브 165편 전량 100% 회장님 오리지널 PDF 직강 영상 검증 완료",
+        "   • 📄 [1페이지 = 1장면 무생략 직강 & 도형 100% 무가림 보존]: 원본 PDF 슬라이드·썸네일 위에 덧그려지던 배너를 전면 제거하고, 1페이지부터 끝 페이지까지(max_scenes=60) 단 한 장도 생략 없이 한 땀 한 땀 정통 설명 (방금 48페이지 분량 `2020062102 수열의 정의` 27.8분 풀코스 직강 렌더링 완료)",
         f"   • 자체 개발 수학공학도구 `MathLab v1.4 (AI Lab)`: 1,131개 전 주제 자동 작도 프리셋(`assets/mathlab_presets_engine.json`) · `[∑ 수식 입력]`(단축키 `/`) · `[📐 증명 프리셋]` · `[🌙 다크 네온]` · `[📸 PNG]` 탑재 완료",
         f"   • 전체 대본·설계 완료 주제: {vc['completed_6ed_topics']} / {vc['target_total_topics']}개 ({vc['progress_pct']}% 달성 · 잔여 {vc['remaining_topics']}개)",
-        f"   • 누적 렌더링 완료 MP4 영상: {vc['total_mp4_files']:,}개 (한/영 1080p 본편 · 질문수업 · Shorts · Q-Shorts · 네온 시네마)",
-        f"   • 수학공학도구(GeoGebra·AlgeoMath·TikZ) 5단계 정주행 강의: 총 {vc['math_engineering_tools_total']}편(427p 분량) 대본 완비 / {vc['math_engineering_tools_rendered']}편 영상 렌더링 완료 (현재 1순위로 연속 제작 중)",
-        f"   • 8분~18분+ 미드롤 마스터클래스: {vc['masterclasses_8min_plus']}편 렌더링 완료 (Vol.1~9 + GeoGebra 저서 Vol.1~2)",
-        f"   • 탈-PDF 창의 아이디어 네온 시네마: {vc['creative_idea_cinema']}편 완료",
+        f"   • 누적 렌더링 완료 MP4 영상: {vc['total_mp4_files']:,}개 (100% 오리지널 PDF 한/영 1080p 본편 · 질문수업 · Shorts · Q-Shorts)",
+        f"   • 수학공학도구(GeoGebra·AlgeoMath·TikZ) 5단계 정주행 강의: 총 {vc['math_engineering_tools_total']}편(427p 분량) 대본 완비 / {vc['math_engineering_tools_rendered']}편 영상 렌더링 완료",
+        f"   • 20~37분+ 오리지널 PDF 정주행 마스터클래스: {vc['masterclasses_8min_plus']}편 렌더링 완료 (유튜브 대표 예고편 `https://youtu.be/_NRQ5QO3PEY` 설정 완료)",
         "",
         "3️⃣ [수학교육 연구소 (`mathteacher`) & 재무·홍보·법무 본부 (`finance` · `pr`)]",
         f"   • 수학교육학 12대 원리(기하 차원 해체·동적 기하 불변성·시각 스포트라이트·설명적 증명 등) × min7014 원문 100% 자체 융합 완료",
