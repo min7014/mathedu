@@ -182,14 +182,100 @@ def format_executive_briefing(metrics: dict) -> str:
         "   • 유튜브 API 일일 업로드 쿼터 회복 즉시 8분~18분+ 미드롤 마스터클래스(Vol.1~9 및 GeoGebra Book Vol.1~2 한/영 합본)를 최우선 자동 업로드합니다.",
         "3️⃣ [오늘의 최우선 과제 3 — 전체 847개 주제 중 60%(510개+) 돌파]",
         f"   • 현재 {vc['completed_6ed_topics']}개({vc['progress_pct']}%)에서 멈추지 않고 남은 {vc['remaining_topics']}개 시각 증명 주제를 24시간 연속 제작하여 조속히 100% 전수 완결합니다.",
-        "4️⃣ [정례 보고 일정 — 매일 아침 07:00 정각 자동 브리핑]",
-        "   • 매일 오전 07:00 정각에 밤사이 제작·업로드된 성과와 당일 추진 계획을 회장님 텔레그램(@anti7014_bot)으로 정례 보고합니다.",
+        "",
+        "----------------------------------------------------------------------",
+        "💡 [III. 수석 비서실장 & 7대 AI 본부장 합동 추가 발전 방안 (Strategic Evolution Proposals)]",
+        "1️⃣ [글로벌 8개국어 현지화(Localizations) & 다국어 자막(.srt) 자동 주입 (`Video_Creator` × `finance`)]",
+        "   • 이미 구축된 8개국어(한·영·일·중·스페인·프랑스·독일·베트남어) 대본을 활용해 유튜브 영상 업로드 시 8개국어 다국어 제목·설명란(localizations)과 자막을 자동 탑재하여 스페인어권(5억 명)·인도·일본·유럽 시청시간을 단일 채널에서 3~5배 증폭시킵니다.",
+        "2️⃣ [유튜브 영상 × GeoGebra/AlgeoMath '좌우 분할 실습 스튜디오(Split-Screen Lab)' (`mathteacher` × `designer`)]",
+        "   • 수학공학도구 강의를 보며 즉시 따라 작도할 수 있도록 `video_board.html`에서 좌측에는 유튜브 강의 영상, 우측에는 실시간 GeoGebra/AlgeoMath 실습 창과 명령어 치트시트(`Sequence`, `CountIf`, `Locus`, `Envelope`)가 나란히 열리는 실습 환경을 제공합니다.",
+        "3️⃣ [저서 《GeoGebra와 수학의 시각화 (ISBN 979-11-87541-13-4)》 글로벌 IB Math / 과학고 R&E 패키지화 (`finance`)]",
+        "   • 회장님의 저서 16개 챕터(2021042603~18)와 2026 경남과학고 스크립트 코딩 강의를 국제바칼로레아(IB Math AA/AI IA 탐구보고서) 및 영재고·과학고 R&E 표준 레퍼런스로 영문 패키징하여 글로벌 최고 단가(RPM $15~$25) 교육 트래픽을 흡수합니다.",
+        "4️⃣ ['수능 킬러 문항 × 1줄 보조선 시각 증명' 브릿지 Shorts 시리즈 (`mathteacher` × `Video_Creator`)]",
+        "   • 16,548문항 기출 DB의 고난도 기하·미적분·이차곡선 문항과 min7014.github.io의 847개 시각 증명을 1:1 결합하여 '수식을 10줄 쓰는 대신 보조선 1줄로 10초 만에 푸는 시각 해법' 쇼츠를 편성해 수험생·교사 구독자 1,000명 돌파를 앞당깁니다.",
+        "5️⃣ [전국 수학교사용 '5분 수업 런처 + QR 학습지 + 2022 개정 생기부 세특 문구' 자동 제공 (`pr` × `mathteacher`)]",
+        "   • 교사 1명이 수업에서 영상을 틀면 학생 30~150명이 동시 시청하므로, 각 영상마다 교사용 5분 발문·인쇄용 QR 학습지·탐구보고서 세특 예시를 원클릭 제공하여 전국 학교 교실 채택률을 극대화합니다.",
         "======================================================================",
     ]
     return "\n".join(lines)
 
 
 DAILY_REPORT_STATE_FILE = ROOT_DIR / ".agents" / "secretary_daily_report_state.json"
+
+
+def ensure_video_board_strategic_lab_features() -> bool:
+    """
+    [발전 방안 2 & 5 즉시 구현]
+    video_board.html에 ① GeoGebra·AlgeoMath 실시간 분할 실습 스튜디오(명령어 치트시트 내장) 및
+    ② 교사용 5분 수업 발문 & 2022 개정 생기부 세특 / IB Math IA 원클릭 복사 버튼을 보장합니다.
+    """
+    vb_path = ROOT_DIR / "video_board.html"
+    if not vb_path.exists():
+        return False
+    txt = vb_path.read_text(encoding="utf-8")
+    changed = False
+    t1 = '<button type="button" onclick="window.printClassroomQrWorksheet(${itemIdx})"'
+    r1 = (
+        '<button type="button" onclick="window.toggleGeoGebraSplitLab(${itemIdx})" class="res-chip" style="border-color:#38bdf8;background:#e0f2fe;color:#0369a1;font-weight:900;cursor:pointer;">🛠️ GeoGebra·AlgeoMath 실시간 실습 스튜디오 (명령어 치트시트)</button>\n'
+        '        <button type="button" onclick="window.copyTeacherLessonRecordKit(${itemIdx})" class="res-chip" style="border-color:#a78bfa;background:#f5f3ff;color:#5b21b6;font-weight:900;cursor:pointer;">🏫 교사용 5분 발문 & 생기부 세특·IB IA 문구 복사</button>\n'
+        '        ' + t1
+    )
+    if "toggleGeoGebraSplitLab" not in txt and t1 in txt:
+        txt = txt.replace(t1, r1, 1)
+        changed = True
+
+    t2 = "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);"
+    r2 = t2 + """
+    window.toggleGeoGebraSplitLab = function(itemIdx) {
+      const item = ALL_ITEMS[itemIdx] || {};
+      let labBox = document.getElementById('vbGeoGebraSplitLabBox');
+      if (!labBox) {
+        labBox = document.createElement('div');
+        labBox.id = 'vbGeoGebraSplitLabBox';
+        labBox.style.cssText = 'margin-top:14px;padding:16px;border-radius:16px;background:#0f172a;border:2px solid #38bdf8;color:#f8fafc;';
+        const linksEl = document.getElementById('cinemaResourceLinks');
+        if (linksEl && linksEl.parentNode) linksEl.parentNode.appendChild(labBox);
+      } else if (labBox.style.display !== 'none') {
+        labBox.style.display = 'none';
+        return;
+      }
+      labBox.style.display = 'block';
+      const ggbUrl = item.geogebra || 'https://www.geogebra.org/classic';
+      labBox.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+          <div style="font-weight:900;font-size:0.95rem;color:#38bdf8;">🛠️ [수학공학도구 실시간 실습 스튜디오] 영상을 보며 직접 작도·코딩해 보세요! (ISBN 979-11-87541-13-4 연계)</div>
+          <div style="display:flex;gap:6px;">
+            <a href="${ggbUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#0284c7;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">🧭 GeoGebra 전체화면 ↗</a>
+            <a href="https://www.algeomath.kr/" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#059669;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">📐 AlgeoMath 실행 ↗</a>
+            <button type="button" onclick="document.getElementById('vbGeoGebraSplitLabBox').style.display='none'" style="padding:5px 10px;border-radius:8px;background:#334155;color:#fff;border:none;font-size:0.78rem;cursor:pointer;">닫기 ✕</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:12px;font-size:0.78rem;background:#1e293b;padding:12px;border-radius:12px;border:1px solid #334155;">
+          <div><strong style="color:#facc15;">📌 [Stage 1~2 기초·함수 명령어]</strong><br><code>Intersect(도형1, 도형2)</code> 교점 고정<br><code>Function(f(x), a, b)</code> 제한된 범위 함수<br><code>Slider(min, max, step)</code> 동적 매개변수</div>
+          <div><strong style="color:#34d399;">📌 [Stage 3~4 통계·자취·포락선]</strong><br><code>Locus(자취점 Q, 동점 P)</code> 자취 작도<br><code>Envelope(접선식, 동점 P)</code> 포락선<br><code>SlopeField(f(x,y))</code> 미분방정식 방향장</div>
+          <div><strong style="color:#f472b6;">📌 [Stage 5 리스트·스크립트 코딩]</strong><br><code>Sequence(식, 변수, 시작, 끝)</code> 수열·다중작도<br><code>CountIf(조건, 리스트)</code> 확률 시뮬레이션<br><code>Element(리스트, 번호)</code> / <code>Sort(리스트)</code></div>
+        </div>
+        <iframe src="${ggbUrl}" style="width:100%;height:480px;border:none;border-radius:12px;background:#fff;" allowfullscreen></iframe>
+      `;
+    };
+    window.copyTeacherLessonRecordKit = function(itemIdx) {
+      const item = ALL_ITEMS[itemIdx] || {};
+      const titleKo = (item.title || '시각적 수학 증명').split('(')[0].trim();
+      const slug = getSlugForItem(item);
+      const boardUrl = `https://min7014.github.io/mathedu/video_board.html?slug=${slug}`;
+      const kitText = `[🏫 2022 개정 교육과정 5분 탐구 수업 런처 & 생기부 세부능력 및 특기사항(세특) / IB Math IA 가이드]\\n■ 단원/주제: ${titleKo}\\n■ 수업 도입 발문 (Notice & Wonder 3분):\\n  1) "공식을 먼저 쓰지 말고 화면의 도형에서 점이 움직일 때 변하는 것(Variant)과 절대 변하지 않는 것(Invariant)은 무엇인가요?"\\n  2) "어떤 보조선 한 줄(또는 대칭이동·넓이 분할)을 추가하면 두 양 사이의 등식이 눈으로 즉시 확인될까요?"\\n■ 공학도구 실습 및 시각 증명 링크: ${boardUrl}\\n■ 학교생활기록부 세부능력 및 특기사항(세특) 예시 문구:\\n  "${titleKo}의 성질을 단순 공식 암기에 그치지 않고, 동적 기하 소프트웨어(GeoGebra/AlgeoMath)의 구속 조건(교점·자취·슬라이더)을 활용해 직접 작도하고 드래그 불변성(Dragging Invariance)을 실험함. 특히 2차원 기하 도형에서 핵심 보조선을 분리해 대수적 등식으로 변환하는 기호학적 표상 변환(Duval) 과정을 논리적으로 발표하고, 조건을 일반화(What-If-Not)한 후속 탐구 문제를 스스로 발명하는 탁월한 수리적 탐구 역량을 보임."\\n■ Global IB Mathematics (AA/AI HL·SL) Internal Assessment (IA) Prompt:\\n  "Investigate the geometric invariance and locus properties of [${item.title || titleKo}] using Dynamic Geometry Environments (GeoGebra) and analytical proof."`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(kitText).then(() => {
+          alert('✅ [교사용 5분 수업 발문 + 생기부 세특 예시 문구 + IB Math IA 주제]가 클립보드에 복사되었습니다!\\n수업 지도안이나 학급 게시판에 바로 붙여넣어 활용하세요.');
+        }).catch(() => {});
+      }
+    };"""
+    if "window.toggleGeoGebraSplitLab" not in txt and t2 in txt:
+        txt = txt.replace(t2, r2, 1)
+        changed = True
+    if changed:
+        vb_path.write_text(txt, encoding="utf-8")
+    return changed
 
 
 def send_telegram_executive_report(prefix_header: str = "") -> bool:
