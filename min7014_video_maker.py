@@ -7834,6 +7834,13 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
 
     while True:
         try:
+            try:
+                import importlib
+                import secretary as _sec_mod
+                importlib.reload(_sec_mod)
+                _sec_mod.check_and_send_daily_7am_report()
+            except Exception:
+                pass
             now_ts = time.time()
             # 1) 5분 주기로 RSS 스캔 ➔ 기존 구버전 영상 최우선 삭제 ➔ 신규/업데이트 영상 업로드 ➔ 채널 동기화 수행
             if now_ts - last_api_upload_try >= 300:
