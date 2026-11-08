@@ -32,10 +32,11 @@ def collect_live_workspace_metrics() -> dict:
 
     vault_file = vl_dir / "vault_index.json"
     vault_topics = 0
+    scripts_cnt = len(list((vl_dir / "scripts").glob("*.json"))) if (vl_dir / "scripts").exists() else 0
     if vault_file.exists():
         try:
             vdata = json.loads(vault_file.read_text(encoding="utf-8"))
-            vault_topics = len(vdata.get("topics", vdata.get("videos", vdata.get("items", vdata)))) if isinstance(vdata, dict) else len(vdata)
+            vault_topics = int(vdata.get("total_topics") or len(vdata.get("topics", vdata.get("videos", [])))) if isinstance(vdata, dict) else len(vdata)
         except Exception:
             pass
 
@@ -57,7 +58,7 @@ def collect_live_workspace_metrics() -> dict:
         except Exception:
             pass
 
-    completed_topics = max(vault_topics, len(qs_ko))
+    completed_topics = max(vault_topics, scripts_cnt, len(qs_ko))
 
     # 3. finance 지표
     rev_file = yt_dir / "revenue_master_plan_10m_krw.json"
@@ -127,11 +128,15 @@ def format_executive_briefing(metrics: dict) -> str:
     dm = metrics.get("daemon", {})
     lines = [
         "======================================================================",
-        f"👔 [수석 비서실장(Chief AI Secretary) 실시간 통합 관제 브리핑] ({metrics['timestamp']})",
+        f"👔 [min7014 1인 회장 · 직원 0명 AI 수학교육 기업 — 수석 비서실장 통합 관제 브리핑] ({metrics['timestamp']})",
         "======================================================================",
+        "0️⃣ [기업 지배구조: Chairman `min7014` · 인간 직원 0명 · 24/7 AI 임원진 7대 본부 체제]",
+        "   • 회장(Chairman): 민은기 선생님 (`min7014` — 20년 수학 IP 1,113+ 주제 · 저서 ISBN 979-11-87541-13-4 · 16,548문항)",
+        "   • 인건비/고정비: 인간 직원 0명 (Zero Payroll) ➔ Gemini Ultra 비용 충당 후 순이익률 극대화 & 수학교육 선순환 재투자",
+        "",
         "1️⃣ [수석 비서실장(`secretary`) & 텔레그램 핫라인(`@anti7014_bot`)]",
         f"   • 직통 채널: 텔레그램 `{tg['bot_handle']}` (Chat ID: `{tg['chat_id']}`) ↔ 현재 대화창 1:1 실시간 연동",
-        "   • 지휘 체계: 산하 6대 전문 에이전트(`mathteacher`, `Video_Creator`, `finance`, `pr`, `gamemaker`, `designer`) 총괄",
+        "   • 지휘 체계: 산하 6대 AI 본부장(`mathteacher`, `Video_Creator`, `finance`, `pr`, `gamemaker`, `designer`) + 875개 스킬 총괄",
         "",
         "2️⃣ [영상 제작 & 글로벌 영어 엔진 (`Video_Creator`)]",
         f"   • 6종 마스터 스위트 완결 주제: {vc['completed_6ed_topics']} / {vc['target_total_topics']}개 ({vc['progress_pct']}%)",
