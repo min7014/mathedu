@@ -620,6 +620,12 @@ def run_continuous_foundation_loop(single_cycle=False):
         finance.run_autonomous_finance_cycle()
     except Exception as fin_err:
         print(f"[Finance Agent Notice] {fin_err}", flush=True)
+    try:
+        import mathlab_agent
+        ml_res = mathlab_agent.run_mathlab_evolution_step(batch_size=50)
+        print(f"🛠️ [MathLab_Developer Agent] MathLab v{ml_res.get('version')} 무결성={ml_res.get('audit_ok')} | 단원별 작도 프리셋 매핑={ml_res.get('total_mapped_slugs')}개 완료", flush=True)
+    except Exception as ml_err:
+        print(f"[MathLab_Developer Notice] {ml_err}", flush=True)
     write_daemon_heartbeat()
 
     if single_cycle:

@@ -191,6 +191,15 @@
   2. **2순위 퍼미시브 오픈소스 수학공학 도구 (MIT / BSD / Apache 2.0 / LGPL)**: 상업적 이용과 개작이 100% 자유로운 `JSXGraph`(동적 기하·자취), `Mafs` / `CindyJS`(웹 인터랙티브 수학), `SymPy` / `NumPy` / `SciPy`(파이썬 CAS·통계·최적화), `Manim Community`(MIT 수학 시네마), `Three.js`(3D 공간기하), `KaTeX`(MIT 수식 렌더링) 생태계를 결합합니다.
   3. **3순위 공교육·범용 도구 호환 (`AlgeoMath` · `GeoGebra` · `Desmos`)**: 학교 현장에서 쓰이는 알지오매스·지오지브라·데스모스는 특정 도구 종속 없이 언제든 교차 적용할 수 있는 범용 명령어 호환 사전으로 안내합니다.
 
+## 26. `MathLab_Developer` 전담 개발 에이전트 신설 및 자체 제작 수학공학도구 `MathLab` (`v1.3` ➔ `v1.4+`) 상시 진화 원칙
+- **전담 개발 본부장 에이전트(`MathLab_Developer`) 상시 가동**: 회장님께서 자체 개발하신 순수 HTML5 Canvas + KaTeX 동적 기하·대수 엔진 `MathLab`(`https://min7014.github.io/2025/mathlab.html` 및 로컬 `mathlab.html`)을 전담하여 지속적으로 업그레이드하는 제8대 AI 본부장 에이전트 **`MathLab_Developer`**(`.agents/skills/MathLab_Developer/SKILL.md`, `mathlab_agent.py`, `assets/mathlab_presets_engine.json`)를 상시 운영합니다.
+- **100% 하위 호환성 보장 및 `MathLab v1.4+` 핵심 진화 로드맵**:
+  1. **기존 `v1.3` 핵심 기능 100% 보존**: 점·선분·직선·원·포물선·타원·쌍곡선·평행선·수선·중점·각이등분선 작도, Marching Squares 음함수 그래프, Newton-Raphson 곡선 투영, 호도법($\frac{\pi}{2}$) 눈금, 8종 작도 학습모드, KO/EN 전환을 100% 무결하게 유지합니다.
+  2. **`[∑ 수식 입력]` 1클릭 버튼 및 `/` 단축키**: 모바일·PC 어디서나 1초 홀드 제스처 없이 भी 즉시 함수·이차곡선·음함수 방정식을 입력할 수 있는 1클릭 수식 입력 버튼을 제공합니다.
+  3. **`[📐 증명 프리셋]` & URL 딥링크(`?slug=...`, `?preset=...`, `?expr=...`) 자동 작도**: `min7014.github.io`의 1,131개 전 주제(`assets/mathlab_presets_engine.json`)와 연동되어, 강의나 문제에서 열면 해당 단원의 동적 기하 작도(포물선 초점·준선, 타원 두 초점, 쌍곡선 두 초점, 원주각 불변성, 삼각함수 라디안 파동, 이차곡선 외부 접선, 삼각형 외심·수선 등)와 동점 애니메이션이 즉시 자동 실행됩니다.
+  4. **`[🌙 네온]` 다크 벨벳 네온 시네마 테마 & `[📸 PNG]` 스냅샷 저장**: `@min7014_ai` 네온 시네마 영상과 완벽히 어우러지는 다크 벨벳 네온 블룸 테마와 1클릭 고해상도 PNG 작도 결과물 내보내기를 지원합니다.
+
+
 
 
 

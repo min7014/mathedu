@@ -2500,10 +2500,11 @@
       }
       labBox.style.display = 'block';
       const ggbUrl = item.geogebra || '';
-      const mathlabUrl = 'https://min7014.github.io/2025/mathlab.html';
+      const slug = getSlugForItem(item);
+      const mathlabUrl = 'mathlab.html?slug=' + encodeURIComponent(slug);
       labBox.innerHTML = `
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-          <div style="font-weight:900;font-size:0.95rem;color:#38bdf8;">🛠️ [보편적 수학공학도구 실시간 실습 스튜디오 — 자체 제작 MathLab v1.3 탑재] 특정 도구에 얽매이지 않고 원리대로 직접 작도해 보세요!</div>
+          <div style="font-weight:900;font-size:0.95rem;color:#38bdf8;">🛠️ [보편적 수학공학도구 실시간 실습 스튜디오 — 자체 제작 MathLab v1.4 AI Lab 탑재 (MathLab_Developer 전담)] 특정 도구에 얽매이지 않고 원리대로 직접 작도해 보세요!</div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
             <a href="${mathlabUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#e11d48;color:#fff;font-size:0.78rem;font-weight:900;text-decoration:none;">🚀 자체 제작 MathLab 전체화면 ↗</a>
             ${ggbUrl ? `<a href="${ggbUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#0284c7;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">🧭 원본 동적기하 자료 ↗</a>` : ''}
@@ -2518,7 +2519,7 @@
         </div>
         <div style="background:#090d16;border:1px solid #38bdf8;border-radius:12px;overflow:hidden;">
           <div style="padding:8px 14px;background:#1e293b;font-size:0.8rem;color:#fef08a;font-weight:800;display:flex;justify-content:space-between;align-items:center;">
-            <span>✨ 100% 자체 제작 수학공학도구 <strong>MathLab v1.3</strong> (저작권 100% 자체 보유 · 점/직선/원/포물선/타원/쌍곡선/평행선/수선/각이등분선/학습모드 즉시 실습)</span>
+            <span>✨ 100% 자체 제작 수학공학도구 <strong>MathLab v1.4 (AI Lab)</strong> — 단원별 자동 프리셋 로딩 · 1클릭 수식 입력(∑) · 다크 네온 테마 지원 (저작권 100% 자체 보유 · 점/직선/원/포물선/타원/쌍곡선/평행선/수선/각이등분선/학습모드 즉시 실습)</span>
             <span style="color:#38bdf8;">KO / EN 지원</span>
           </div>
           <iframe src="${mathlabUrl}" style="width:100%;height:520px;border:none;background:#f8f9fa;" allowfullscreen></iframe>
