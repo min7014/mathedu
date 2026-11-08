@@ -3541,21 +3541,24 @@ def render_creative_idea_short_vertical(slug_key: str = "math20250130001", lang_
 
 def build_creative_idea_youtube_description_and_tags(
     sdoc: dict,
-    slug_key: str,
-    clean_t: str,
+    slug_key: str = "",
+    clean_t: str = "",
     lang_code: str = "ko",
     is_short: bool = False,
     idea_full_url: str = "",
     std_url: str = "",
 ) -> tuple:
     """
-    [한·영 국제 표준 유튜브 설명란(Description) & 글로벌 SEO 태그 생성기]
-    - lang_code == 'en'일 때 100% 영미권·국제 수학 표준 용어(IMO/AP/IB/3Blue1Brown 스타일)로 작성된
+    [한·영 국제 표준 유튜브 설명란(Description) & 글로벌 SEO 태그 생성기 — 현금흐름 & 시청시간 극대화 퍼널]
+    - lang_code == 'en'일 때 100% 영미권·국제 수학 표준 용어(IMO/AP/IB 스타일)로 작성된
       영어 설명란과 고단가 Tier-1 영어 SEO 태그를 반환합니다.
     """
+    if not slug_key:
+        slug_key = str((sdoc or {}).get("slug") or "math20250130001")
     ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
     pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_key}.pdf"
     web_url = sdoc.get("web_url") or "https://min7014.github.io/"
+    mathlab_url = "https://min7014.github.io/2025/mathlab.html"
     tpa = sdoc.get("teacher_proof_analysis") or {}
     core_eq = (tpa.get("conclusion_ko") if lang_code == "ko" else (tpa.get("conclusion_en") or tpa.get("conclusion_ko"))) or ""
     aux_line = (tpa.get("auxiliary_line_ko") if lang_code == "ko" else (tpa.get("auxiliary_line_en") or tpa.get("auxiliary_line_ko"))) or ""
@@ -3564,17 +3567,19 @@ def build_creative_idea_youtube_description_and_tags(
     if lang_code == "en":
         if is_short:
             desc = (
-                f"🎬 [Watch the Full 1080p Visual Proof Cinema & 8-Min+ Masterclass]\n"
+                f"🎬 [Watch the Full 1080p Visual Proof Cinema & 10-Min+ Masterclass]\n"
                 f"👉 Full 1080p Cinema: {idea_full_url}\n"
                 f"👉 9-Min Pure Neon Geometry Masterclass Vol.1: https://youtu.be/eUeFybOs4t0\n"
                 f"👉 37-Min Circle Theorems Masterclass: https://youtu.be/9EL8pgqJtkY\n\n"
+                f"🛠️ [Free Interactive Math Engineering Lab (MathLab v1.3)]:\n"
+                f"👉 Construct & Experiment Live in Browser: {mathlab_url}\n\n"
                 f"🏛️ [100% Verified Mathematical Proof from https://min7014.github.io/ — '{clean_t}']\n"
                 f"• Core Theorem & Invariant: {core_eq}\n"
                 f"• Key Auxiliary Line / Idea: {aux_line}\n"
                 f"• Original Step-by-Step Proof PDF: {pdf_url}\n"
                 f"• Interactive Archive: {web_url}\n"
-                f"• Hands-On GeoGebra Applet: {ggb_url}\n\n"
-                f"🔔 [Subscribe to @min7014_ai for Daily Visual Math Proofs]:\n"
+                f"• Hands-On Dynamic Geometry Lab: {ggb_url}\n\n"
+                f"🔔 [Subscribe to @min7014_ai in 1 Click for Daily Visual Math Proofs]:\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                 f"#Shorts #MathShorts #VisualProof #Geometry #Calculus #Mathematics #VisualMathCinema #OlympiadMath #STEM #min7014_ai"
             )
@@ -3583,38 +3588,43 @@ def build_creative_idea_youtube_description_and_tags(
             desc = (
                 f"🌟 [Edition 5: Pure Procedural Neon-Bloom Visual Math Cinema — '{clean_t}']\n"
                 f"Built 100% on the step-by-step visual proof from https://min7014.github.io/, this 5-act procedural animation reveals the exact auxiliary line and geometric invariant behind '{clean_t}' without rote memorization.\n\n"
-                f"📐 [Mathematical Proof Summary]\n"
-                f"• Core Theorem & Invariant: {core_eq}\n"
-                f"• Key Auxiliary Line / Construction: {aux_line}\n"
-                f"• Deductive Proof Logic: {logic_str}\n\n"
-                f"🏛️ [Original Source Materials on https://min7014.github.io/]\n"
-                f"• Step-by-Step Proof PDF: {pdf_url}\n"
-                f"• Math Archive Page: {web_url}\n"
-                f"• Interactive Dynamic Geometry Exploration: {ggb_url}\n\n"
                 f"🔔 [Subscribe to @min7014_ai in 1 Click]:\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                 f"🎬 [Binge-Watch Our Full-Length 1080p Masterclasses]\n"
                 f"• Pure Neon Geometry Masterclass Vol.1 (EN): https://youtu.be/eUeFybOs4t0\n"
+                f"• Pure Neon Geometry Masterclass Vol.2 (EN): https://youtu.be/W4YTn5eV2Zs\n"
                 f"• Circle Theorems Complete Masterclass (EN): https://youtu.be/9EL8pgqJtkY\n"
-                f"• Step-by-Step Flipbook Proof: {std_url}\n"
-                f"• 16,548 Free Constructive Math Problems: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n\n"
+                f"• Step-by-Step Flipbook Proof: {std_url}\n\n"
+                f"🛠️ [Free Interactive Math Engineering Lab & 16,548 Problems]\n"
+                f"• Self-Built Dynamic Geometry Software (MathLab v1.3): {mathlab_url}\n"
+                f"• Split-Screen Video + MathLab Practice: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&lang=en\n\n"
+                f"📐 [Mathematical Proof Summary]\n"
+                f"• Core Theorem & Invariant: {core_eq}\n"
+                f"• Key Auxiliary Line / Construction: {aux_line}\n"
+                f"• Deductive Proof Logic: {logic_str}\n"
+                f"• Step-by-Step Proof PDF: {pdf_url}\n"
+                f"• Math Archive Page: {web_url}\n"
+                f"• Interactive Dynamic Geometry Exploration: {ggb_url}\n\n"
                 f"#VisualProof #MathAnimation #Geometry #Calculus #Mathematics #VisualMathCinema #OlympiadMath #STEM #min7014_ai"
             )
             tags = ["VisualProof", "MathAnimation", "MathCinema", clean_t, "Geometry", "Calculus", "OlympiadMath", "DynamicGeometry", "STEM", "min7014_ai"]
     else:
         if is_short:
             desc = (
-                f"🎬 [1080p 창의 시네마 풀버전 & 8분+ 마스터클래스 바로 보기]\n"
+                f"🎬 [1080p 창의 시네마 풀버전 & 12분+ 마스터클래스 바로 보기]\n"
                 f"👉 1080p 본편: {idea_full_url}\n"
                 f"👉 12분 네온 시네마 마스터클래스 Vol.1: https://youtu.be/KvHmXDuU8jY\n"
                 f"👉 37분 원의 성질 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n\n"
+                f"🛠️ [무료 수학공학 작도 실습실 (MathLab v1.3 직접 조작)]:\n"
+                f"👉 브라우저에서 바로 작도 실습하기: {mathlab_url}\n\n"
                 f"🏛️ [기본 아이디어 출처: https://min7014.github.io/ ('{clean_t}')]\n"
                 f"• 핵심 수학 불변량: {core_eq}\n"
                 f"• 핵심 보조선·아이디어: {aux_line}\n"
                 f"• 단계별 증명 원본 PDF: {pdf_url}\n"
                 f"• 수학자료실 원문 아카이브: {web_url}\n"
-                f"• 직접 조작하는 GeoGebra: {ggb_url}\n\n"
-                f"🔔 [지금 @min7014_ai 1초 구독하기]:\n"
+                f"• 직접 조작하는 동적 기하: {ggb_url}\n"
+                f"• 공식 출판 저서: 《수학교사와 학생을 위한 GeoGebra와 수학의 시각화》 (ISBN 979-11-87541-13-4)\n\n"
+                f"🔔 [지금 @min7014_ai 1초 무료 구독하기]:\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                 f"#Shorts #창의수학 #시각적증명 #수학쇼츠 #MathShorts #VisualProof #min7014_ai"
             )
@@ -3626,20 +3636,24 @@ def build_creative_idea_youtube_description_and_tags(
                 f"• 핵심 수학 정리·불변량: {core_eq}\n"
                 f"• 핵심 보조선·아이디어: {aux_line}\n"
                 f"• 증명 논리: {logic_str}\n\n"
+                f"🔔 [지금 바로 @min7014_ai 채널 1초 무료 구독하기]:\n"
+                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
+                f"🎬 [함께 보면 200% 시너지가 나는 정주행 마스터클래스]\n"
+                f"• 12분 네온 시네마 마스터클래스 Vol.1: https://youtu.be/KvHmXDuU8jY\n"
+                f"• 12분 네온 시네마 마스터클래스 Vol.2: https://youtu.be/nHIpEC6ATek\n"
+                f"• 37분 원의 성질 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
+                f"• 단계별 시각 증명 본편: {std_url}\n\n"
+                f"🛠️ [무료 수학공학도구 MathLab v1.3 실습 & 공식 출판 교재]\n"
+                f"• 자체 개발 수학공학 실습실 (MathLab v1.3): {mathlab_url}\n"
+                f"• 영상+실습 화면 분할 게시판 & 16,548문항 문제은행: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n"
+                f"• 공식 출판 저서: 《수학교사와 학생을 위한 GeoGebra와 수학의 시각화》 (ISBN 979-11-87541-13-4)\n\n"
                 f"🏛️ [기본 아이디어 원문 자료 (https://min7014.github.io/)]\n"
                 f"• 단계별 시각 증명 원본 PDF: {pdf_url}\n"
                 f"• 수학자료실 원문 아카이브: {web_url}\n"
-                f"• GeoGebra 인터랙티브 직접 조작: {ggb_url}\n\n"
-                f"🔔 [지금 바로 @min7014_ai 채널 1초 구독하기]:\n"
-                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                f"🎬 [함께 보면 200% 시너지가 나는 연계 콘텐츠]\n"
-                f"• 12분 네온 시네마 마스터클래스 Vol.1: https://youtu.be/KvHmXDuU8jY\n"
-                f"• 37분 원의 성질 마스터클래스 총정리: https://youtu.be/_5LE_BfLA5w\n"
-                f"• 단계별 시각 증명 본편: {std_url}\n"
-                f"• mathedu 16,548문항 무료 문제은행: https://min7014.github.io/mathedu/video_board.html?slug={slug_key}\n\n"
+                f"• 동적 기하 인터랙티브 직접 조작: {ggb_url}\n\n"
                 f"#창의수학 #시각적증명 #수학아이디어 #수능수학 #기하학 #VisualProof #MathAnimation #min7014_ai"
             )
-            tags = ["창의수학", "시각적증명", "수학아이디어", clean_t, "VisualProof", "MathCinema", "GeoGebra", "min7014_ai"]
+            tags = ["창의수학", "시각적증명", "수학아이디어", clean_t, "VisualProof", "MathCinema", "MathLab", "min7014_ai"]
 
     desc = desc.replace("<", "＜").replace(">", "＞")
     return desc, tags
@@ -3654,8 +3668,9 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
         for lc in langs:
             try:
                 out_all[lc] = upload_creative_idea_to_youtube(slug_key, lang_code=lc, privacy=privacy)
-            except Exception:
-                break
+            except Exception as e:
+                if "Quota" in str(e) or "exhausted" in str(e) or "uploadLimitExceeded" in str(e):
+                    break
         return out_all
     from googleapiclient.http import MediaFileUpload
 
@@ -3666,6 +3681,11 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     sdoc = json.loads(script_path.read_text(encoding="utf-8"))
     idea_pkg = (sdoc.get("creative_idea_packages") or {}).get(lang_code, {})
+    existing_url = ((sdoc.get("creative_idea_youtube_urls") or {}).get(lang_code) or "").strip()
+    old_vid = vmaker.extract_youtube_video_id(existing_url)
+    # 이미 라이브 업로드된 영상은 절대 삭제하거나 재업로드하여 쿼터·시청시간을 소모하지 않음 (Rule 17 시청시간 보존 법칙)
+    if old_vid and not idea_pkg.get("needs_youtube_upload"):
+        return {"video_id": old_vid, "youtube_url": existing_url, "title": idea_pkg.get("title", slug_key)}
 
     ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
     clean_t = sanitize_glyphs(
@@ -3679,7 +3699,7 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
     std_url = (sdoc.get("youtube_urls") or {}).get(lang_code) or f"https://www.youtube.com/results?search_query=min7014_ai+{slug_key}"
     ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
     desc, tags = build_creative_idea_youtube_description_and_tags(
-        sdoc, slug_key, clean_t, lang_code=lang_code, is_short=False, std_url=std_url
+        sdoc=sdoc, slug_key=slug_key, clean_t=clean_t, lang_code=lang_code, is_short=False, std_url=std_url
     )
 
     body = {
@@ -3706,20 +3726,13 @@ def upload_creative_idea_to_youtube(slug_key: str = "math20250130001", lang_code
         if yt is None:
             raise RuntimeError(f"All YouTube tokens exhausted: {last_err}")
         try:
-            existing_url = (sdoc.get("creative_idea_youtube_urls") or {}).get(lang_code, "")
-            old_vid = vmaker.extract_youtube_video_id(existing_url)
-            if old_vid:
-                try:
-                    yt.videos().delete(id=old_vid).execute()
-                except Exception:
-                    pass
             req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
             while resp is None:
                 _, resp = req.next_chunk()
             break
         except Exception as e:
             last_err = e
-            vmaker._EXHAUSTED_TOKEN_FILES[t_path] = time.time() + 1800
+            vmaker.mark_token_quota_exhausted(t_path, 900)
             continue
 
     vid_id = resp["id"]
@@ -3767,8 +3780,9 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         for lc in langs:
             try:
                 out_all[lc] = upload_creative_idea_short_to_youtube(slug_key, lang_code=lc, privacy=privacy)
-            except Exception:
-                break
+            except Exception as e:
+                if "Quota" in str(e) or "exhausted" in str(e) or "uploadLimitExceeded" in str(e):
+                    break
         return out_all
     from googleapiclient.http import MediaFileUpload
 
@@ -3779,6 +3793,11 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
     script_path = SCRIPTS_DIR / f"{slug_key}.json"
     sdoc = json.loads(script_path.read_text(encoding="utf-8"))
     spkg = (sdoc.get("creative_idea_shorts_packages") or {}).get(lang_code, {})
+    existing_url = ((sdoc.get("creative_idea_shorts_urls") or {}).get(lang_code) or "").strip()
+    old_vid = vmaker.extract_youtube_video_id(existing_url)
+    # 이미 라이브 업로드된 숏폼은 삭제하거나 재업로드하지 않음 (구독자 유입 및 조회수 100% 보존)
+    if old_vid and not spkg.get("needs_youtube_upload"):
+        return {"video_id": old_vid, "youtube_url": existing_url, "title": spkg.get("title", slug_key)}
 
     ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug_key))
     clean_t = sanitize_glyphs(
@@ -3800,6 +3819,7 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
     )
     desc, tags = build_creative_idea_youtube_description_and_tags(
         sdoc=sdoc,
+        slug_key=slug_key,
         clean_t=clean_t,
         lang_code=lang_code,
         is_short=True,
@@ -3829,20 +3849,13 @@ def upload_creative_idea_short_to_youtube(slug_key: str = "math20250130001", lan
         if yt is None:
             raise RuntimeError(f"All YouTube tokens exhausted: {last_err}")
         try:
-            existing_url = (sdoc.get("creative_idea_shorts_urls") or {}).get(lang_code, "")
-            old_vid = vmaker.extract_youtube_video_id(existing_url)
-            if old_vid:
-                try:
-                    yt.videos().delete(id=old_vid).execute()
-                except Exception:
-                    pass
             req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
             while resp is None:
                 _, resp = req.next_chunk()
             break
         except Exception as e:
             last_err = e
-            vmaker._EXHAUSTED_TOKEN_FILES[t_path] = time.time() + 1800
+            vmaker.mark_token_quota_exhausted(t_path, 900)
             continue
 
     vid_id = resp["id"]

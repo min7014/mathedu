@@ -1362,6 +1362,141 @@ def execute_live_channel_and_video_repairs_now() -> dict:
     return results
 
 
+def clear_stale_upload_flags_on_live_videos() -> int:
+    """이미 유튜브에 게시되어 시청시간·조회수를 쌓고 있는 라이브 영상이 중복 재업로드로 쿼터를 낭비하지 않도록 보호합니다."""
+    fixed = 0
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        try:
+            d = json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        changed = False
+        for k_url, k_pkg in [
+            ("youtube_urls", "youtube_packages"),
+            ("shorts_urls", "shorts_packages"),
+            ("question_youtube_urls", "question_classroom_packages"),
+            ("question_shorts_urls", "question_shorts_packages"),
+            ("creative_idea_youtube_urls", "creative_idea_packages"),
+            ("creative_idea_shorts_urls", "creative_idea_shorts_packages"),
+        ]:
+            umap = d.get(k_url) or {}
+            pmap = d.get(k_pkg) or {}
+            for lc in ("ko", "en"):
+                u = (umap.get(lc) or "").strip()
+                pkg = pmap.get(lc) or {}
+                if u and pkg.get("needs_youtube_upload"):
+                    pkg["needs_youtube_upload"] = False
+                    changed = True
+                    fixed += 1
+        if changed:
+            sp.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
+    return fixed
+
+
+def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
+    """
+    [유튜브 채널 현금흐름 창출 황금비 업로드 엔진 (Golden Wave Cash-Flow Strike)]
+    일일 YouTube API 쿼터(10,000 유닛/프로젝트 · 매일 17:00 KST 리셋)를 비업로드 호출에 단 1유닛도 낭비하지 않고,
+    오직 현금흐름 직결 신규 영상 업로드에만 100% 투입합니다:
+      1) [시청시간 4,000h & 다중 미드롤 광고 엔진]: 10~35분 정주행 마스터클래스 (KO / 글로벌 EN) 1편 업로드
+      2) [구독자 500/1,000명 & 실시간 피드 폭발 엔진]: 44초 순수 네온 블룸 Idea-#Shorts (KO & EN) 업로드
+      3) [고단가 검색·탐색 장기 현금흐름 엔진]: 1080p 순수 네온 블룸 창의 시네마 본편 (KO & EN) 업로드
+    """
+    import min7014_video_maker as vmaker
+    import creative_idea_cinema as cidea
+
+    clear_stale_upload_flags_on_live_videos()
+    vmaker._LAST_UPLOAD_QUOTA_BLOCKED = False
+
+    yt_test, _ = vmaker.get_available_youtube_upload_service()
+    if yt_test is None:
+        return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
+
+    priority_cashflow_slugs = [
+        "mathlab",
+        "2011112501", "2012093001", "2016040701", "2017030206",
+        "2018021402", "2018021404", "2018021405", "2018021406",
+        "2016012901", "2016030901", "2019081052", "2019101602",
+        "2020041301", "2017090601", "2017090501", "2020011801",
+        "2020041601", "2022012301", "2022040401", "2022040501",
+    ]
+    extra_idea_slugs = sorted({
+        p.name.replace("_idea_ko.mp4", "").replace("_idea_en.mp4", "")
+        for p in (ROOT_DIR / "video_lectures" / "creative_idea").glob("*_idea_*.mp4")
+    }) if (ROOT_DIR / "video_lectures" / "creative_idea").exists() else []
+    ordered_slugs = priority_cashflow_slugs + [s for s in extra_idea_slugs if s not in priority_cashflow_slugs]
+
+    uploaded_items = []
+    total_uploaded = 0
+
+    for _round in range(2):
+        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+            break
+
+        # [Slot A] 10~35분 미드롤 마스터클래스 1편 업로드 (시청시간 15~35배 가속 + 다중 중간광고)
+        mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=1)
+        if mc_cnt > 0:
+            total_uploaded += mc_cnt
+            uploaded_items.append({"type": "masterclass", "count": mc_cnt})
+        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+            break
+
+        # [Slot B] 44초 순수 네온 블룸 Idea-#Shorts (KO/EN) 1세트 업로드 (실시간 조회수 & 구독자 유입 폭발)
+        for s_slug in ordered_slugs:
+            if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                break
+            sp = SCRIPTS_DIR / f"{s_slug}.json"
+            if not sp.exists():
+                continue
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+            isu = sdoc.get("creative_idea_shorts_urls") or {}
+            missing_sh = tuple(
+                lc for lc in ("ko", "en")
+                if not (isu.get(lc) or "").strip()
+                and (ROOT_DIR / "video_lectures" / "shorts" / f"{s_slug}_short_idea_{lc}.mp4").exists()
+            )
+            if missing_sh:
+                res_sh = cidea.upload_creative_idea_short_to_youtube(s_slug, langs=missing_sh)
+                if res_sh:
+                    n_up = len(res_sh)
+                    total_uploaded += n_up
+                    uploaded_items.append({"type": "idea_short", "slug": s_slug, "langs": list(res_sh.keys())})
+                break
+
+        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+            break
+
+        # [Slot C] 1080p 순수 네온 블룸 창의 시네마 본편 (KO/EN) 1세트 업로드 (고지속률 검색·탐색 수익)
+        for c_slug in ordered_slugs:
+            if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                break
+            sp = SCRIPTS_DIR / f"{c_slug}.json"
+            if not sp.exists():
+                continue
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+            iu = sdoc.get("creative_idea_youtube_urls") or {}
+            missing_ci = tuple(
+                lc for lc in ("ko", "en")
+                if not (iu.get(lc) or "").strip()
+                and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{c_slug}_idea_{lc}.mp4").exists()
+            )
+            if missing_ci:
+                res_ci = cidea.upload_creative_idea_to_youtube(c_slug, langs=missing_ci)
+                if res_ci:
+                    n_up = len(res_ci)
+                    total_uploaded += n_up
+                    uploaded_items.append({"type": "idea_cinema_1080p", "slug": c_slug, "langs": list(res_ci.keys())})
+                break
+
+    if total_uploaded > 0:
+        analyze_revenue_pipeline()
+    return {
+        "status": "uploaded" if total_uploaded > 0 else "quota_wait",
+        "total_uploaded": total_uploaded,
+        "uploaded_items": uploaded_items,
+    }
+
+
 def run_autonomous_finance_cycle() -> dict:
     boosted_pkgs = inject_high_rpm_and_ypp_compliance_metadata()
     rep = analyze_revenue_pipeline()
@@ -1403,6 +1538,7 @@ def main():
     sub.add_parser("status")
     sub.add_parser("optimize")
     sub.add_parser("build-masterclass")
+    sub.add_parser("cashflow-wave")
 
     p_ads = sub.add_parser("set-adsense")
     p_ads.add_argument("--client", required=True)
@@ -1412,7 +1548,10 @@ def main():
     p_adf.add_argument("--unit", required=True)
 
     args = parser.parse_args()
-    if args.cmd in ("optimize", "build-masterclass"):
+    if args.cmd == "cashflow-wave":
+        res = execute_youtube_cashflow_golden_wave(max_wave_uploads=8)
+        print(json.dumps(res, ensure_ascii=False, indent=2))
+    elif args.cmd in ("optimize", "build-masterclass"):
         run_autonomous_finance_cycle()
     elif args.cmd == "set-adsense":
         cfg = json.loads(AD_CONFIG_JSON.read_text(encoding="utf-8")) if AD_CONFIG_JSON.exists() else {}

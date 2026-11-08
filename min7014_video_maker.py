@@ -58,6 +58,7 @@ def get_available_youtube_upload_service():
     유튜브 고급 기능(Advanced Features) 승인 및 일일 한도 해제 시 연속 대량 업로드를 수행하며,
     복수의 GCP 프로젝트 토큰이 존재할 경우 자동으로 로테이션합니다.
     """
+    global _LAST_UPLOAD_QUOTA_BLOCKED
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from googleapiclient.discovery import build
@@ -78,6 +79,7 @@ def get_available_youtube_upload_service():
             if not creds.valid and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
                 t_file.write_text(creds.to_json(), encoding='utf-8')
+            _LAST_UPLOAD_QUOTA_BLOCKED = False
             return build('youtube', 'v3', credentials=creds), str(t_file)
         except Exception as e:
             print(f'⚠️ [Token Pool Skip ({t_file.name})]: {e}')
@@ -7833,6 +7835,34 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
     last_api_upload_try = 0.0
     enriched_video_ids = set()
 
+    # [유튜브 현금흐름 최우선 전용 백그라운드 업로더 스레드]
+    # 20~30분 소요되는 FFmpeg 로컬 렌더링에 블로킹되지 않고, 3분(17:00 KST 쿼터 리셋 시간대에는 30초)마다
+    # 독립적으로 깨어나 쿼터가 열리는 즉시 황금비 수익 웨이브(장편 마스터클래스 + 44초 Idea-#Shorts + 1080p 네온 시네마)를 업로드합니다.
+    import threading
+    if not getattr(run_shorts_and_video_upload_daemon, "_cashflow_thread_started", False):
+        run_shorts_and_video_upload_daemon._cashflow_thread_started = True
+
+        def _dedicated_cashflow_upload_worker():
+            while True:
+                try:
+                    import importlib
+                    import finance as _fin_worker
+                    importlib.reload(_fin_worker)
+                    _fin_worker.execute_youtube_cashflow_golden_wave(max_wave_uploads=8)
+                except Exception as _cw_err:
+                    if "Quota exceeded" not in str(_cw_err) and "exhausted" not in str(_cw_err):
+                        print(f"[CashFlow Worker Notice] {_cw_err}", flush=True)
+                # 매일 17:00 KST (미국 태평양 자정 00:00 PST/PDT 일일 10,000유닛 리셋) 전후에는 30초 간격으로 즉시 감지
+                cur_hm = time.strftime("%H:%M")
+                if "16:58" <= cur_hm <= "17:15" or "15:58" <= cur_hm <= "16:15":
+                    time.sleep(30.0)
+                else:
+                    time.sleep(180.0)
+
+        t_cf = threading.Thread(target=_dedicated_cashflow_upload_worker, name="YouTubeCashFlowWaveUploader", daemon=True)
+        t_cf.start()
+        print("💰 [YouTube Cash-Flow Dedicated Uploader Thread Started] 100% 일일 쿼터를 신규 수익 영상 업로드에 전량 투입합니다!", flush=True)
+
     while True:
         try:
             try:
@@ -7843,386 +7873,58 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
             except Exception:
                 pass
             now_ts = time.time()
-            # 1) 5분 주기로 RSS 스캔 ➔ 기존 구버전 영상 최우선 삭제 ➔ 신규/업데이트 영상 업로드 ➔ 채널 동기화 수행
-            if now_ts - last_api_upload_try >= 300:
+            # 1) 3분 주기로 현금흐름 황금비 웨이브(10~35분 미드롤 마스터클래스 ➔ 44초 바이럴 Idea-#Shorts ➔ 1080p 네온 시네마) 즉시 업로드
+            #    (비업로드 API 호출[playlistItems.list, videos.delete, videos.update 일괄 루프]을 원천 차단하여 10,000유닛 전량을 신규 업로드에 투입!)
+            if now_ts - last_api_upload_try >= 180:
                 last_api_upload_try = now_ts
-
-                # [Step 1-A] 공개 RSS 피드(무쿼터)를 스캔하여 로컬 업데이트된 주제의 구버전 채널 영상을 삭제 큐에 자동 등록
-                scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False)
-
-                # [Step 1-B] 삭제 대기열(youtube_delete_queue.json) 최우선 처리 (기존 영상 삭제)
-                process_youtube_delete_queue(max_deletions=50)
-
-                youtube, active_token_path = get_available_youtube_upload_service()
-                blocked_vid_ids = get_deleted_video_ids_set()
-
-                # [Step 1-C] YouTube Studio 수동 드래그 업로드분 감지 (단, 삭제 큐에 있는 구버전 영상은 절대 재바인딩 금지!)
-                any_new_bound = False
-                if youtube is not None:
-                    try:
-                        pl_items = youtube.playlistItems().list(
-                            part="snippet", playlistId=uploads_playlist_id, maxResults=50
-                        ).execute().get("items", [])
-                    except Exception as ple:
-                        err_pl = str(ple)
-                        if "quotaExceeded" in err_pl or "rateLimitExceeded" in err_pl:
-                            mark_token_quota_exhausted(active_token_path, 900)
-                        pl_items = []
-
-                    for item in pl_items:
-                        vid_id = item["snippet"]["resourceId"]["videoId"]
-                        if vid_id in blocked_vid_ids:
-                            continue
-                        v_title = item["snippet"].get("title", "")
-                        v_desc = item["snippet"].get("description", "")
-                        blob = f"{v_title}\n{v_desc}"
-
-                        # A) [slug_SHORT_KO] / [slug_SHORT_EN] 숏폼 태그 자동 매칭
-                        m_short = re.search(r"\[([A-Za-z0-9_]+)_SHORT_(KO|EN)\]", blob, re.IGNORECASE)
-                        if m_short and vid_id not in enriched_video_ids:
-                            s_slug = m_short.group(1)
-                            s_lc = m_short.group(2).lower()
-                            sp = SCRIPTS_DIR / f"{s_slug}.json"
-                            if sp.exists():
-                                sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                                pkg_s = (sdoc.get("shorts_packages") or {}).get(s_lc) or {}
-                                # 만약 로컬에서 새로 업데이트되어 업로드 대기 중인데 이전 영상이면 삭제 큐로 보냄
-                                if pkg_s.get("needs_youtube_upload") and pkg_s.get("uploaded_video_id") != vid_id:
-                                    queue_and_delete_existing_youtube_videos_for_slug(
-                                        s_slug, editions=("shorts_std",), langs=(s_lc,), execute_delete_now=True
-                                    )
-                                    continue
-                                if "shorts_urls" not in sdoc or not isinstance(sdoc["shorts_urls"], dict):
-                                    sdoc["shorts_urls"] = {"ko": "", "en": ""}
-                                short_url = f"https://youtube.com/shorts/{vid_id}"
-                                if sdoc["shorts_urls"].get(s_lc) != short_url:
-                                    sdoc["shorts_urls"][s_lc] = short_url
-                                    sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
-                                    any_new_bound = True
-                                enriched_video_ids.add(vid_id)
-                            continue
-
-                        # B) [slug_KO] / [slug_EN] 1080p 본편 태그 자동 매칭
-                        m_full = re.search(r"\[(?:ID:\s*)?([A-Za-z0-9_]+)_(KO|EN)\]", blob, re.IGNORECASE)
-                        if m_full and vid_id not in enriched_video_ids:
-                            f_slug = m_full.group(1)
-                            if f_slug.upper().endswith("_SHORT") or f_slug.upper().endswith("_Q"):
-                                continue
-                            f_lc = m_full.group(2).lower()
-                            sp = SCRIPTS_DIR / f"{f_slug}.json"
-                            if sp.exists():
-                                sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                                pkg_f = (sdoc.get("youtube_packages") or {}).get(f_lc) or {}
-                                if pkg_f.get("needs_youtube_upload") and pkg_f.get("uploaded_video_id") != vid_id:
-                                    queue_and_delete_existing_youtube_videos_for_slug(
-                                        f_slug, editions=("standard",), langs=(f_lc,), execute_delete_now=True
-                                    )
-                                    continue
-                                full_url = f"https://youtu.be/{vid_id}"
-                                cur_yt = (sdoc.get("youtube_urls") or {}).get(f_lc, "")
-                                if cur_yt != full_url:
-                                    set_youtube_urls_for_slug(
-                                        f_slug,
-                                        yt_ko=full_url if f_lc == "ko" else None,
-                                        yt_en=full_url if f_lc == "en" else None,
-                                    )
-                                    any_new_bound = True
-                                enriched_video_ids.add(vid_id)
-
-                if any_new_bound:
-                    update_video_catalog()
-                    prepare_ready_batch_folder(open_explorer=False)
-                    prepare_ready_shorts_batch_folder(open_explorer=False)
-                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json"], check=False)
-                    subprocess.run(["git", "commit", "-m", "chore(youtube): auto-bind newly uploaded @min7014_ai videos & Shorts"], check=False)
-                    subprocess.run(["git", "push", "origin", "main"], check=False)
-
-                # [Step 1-D] 업데이트된 영상 및 미업로드 영상 API 자동 업로드 (기존 영상 삭제 후 새 영상 업로드)
-                priority_5_shorts = ["math20250130001", "2017090101", "2014111902", "2014111901", "2025020101"]
+                global _LAST_UPLOAD_QUOTA_BLOCKED
+                _LAST_UPLOAD_QUOTA_BLOCKED = False
                 newly_uploaded_batch = 0
 
-                # [최우선 0순위]: 🌟 10분+ 미드롤 순수 네온 마스터클래스 & 탈-PDF 창의 아이디어 시네마 12대 대표작 우선 업로드!
                 try:
                     import importlib
                     import finance
                     import creative_idea_cinema as cidea
                     importlib.reload(finance)
                     importlib.reload(cidea)
-                    # 잔여 8개 라이브 영상 잘린 제목 자동 복구 (프로세스당 1회만 확인하여 업로드 쿼터 100% 보존)
-                    if not getattr(run_shorts_and_video_upload_daemon, "_rem_branding_checked", False):
-                        yt_rep, _ = get_available_youtube_upload_service()
-                        if yt_rep is not None:
-                            run_shorts_and_video_upload_daemon._rem_branding_checked = True
-                            rem_fixes = {
-                                "_o7WXc7zCO4": "✨ Intersecting Secants Theorem (PA·PB = PC·PD) — Visual Proof (24 Steps · 1080p) | @min7014_ai",
-                                "0bun91jq5_o": "🔥 Intersecting Secants Theorem (PA·PB = PC·PD) — 45s Visual Math Proof #Shorts #Math",
-                                "srRZdzClEzk": "🔥 원 외부 할선의 정리 (PA·PB = PC·PD) — 연장선의 교점 45초 시각적 수학 증명 #Shorts #수학",
-                                "uSBjCl_ozqo": "✨ Parallel Lines & Proportional Segments — Visual Math Proof (52 Steps · 1080p) | @min7014_ai",
-                                "YJVDlEYH5Bg": "🔥 Parallel Lines & Proportional Segments Theorem — 45s Visual Math Proof #Shorts #Math",
-                                "as-VfnFEVSg": "🔥 Menelaus' Theorem: One Parallel Line Unlocks It! — 45s Visual Math Proof #Shorts #Math",
-                                "dAJFCz19c0M": "🔥 Ceva's Theorem: Area Ratio Visual Proof in 45 Seconds! #Shorts #Math #Geometry",
-                                "7Ywal5oTbyU": "🔥 The Pythagorean Theorem (a²+b²=c²) — 45s Visual Area Proof #Shorts #Math",
-                            }
-                            try:
-                                ch_r = yt_rep.channels().list(part="brandingSettings", id=YOUTUBE_CHANNEL_ID).execute().get("items", [])
-                                if ch_r:
-                                    b_set = ch_r[0].get("brandingSettings", {})
-                                    ch_cfg = b_set.get("channel", {})
-                                    if "민은기" in (ch_cfg.get("title") or "") or ch_cfg.get("unsubscribedTrailer") != "KvHmXDuU8jY":
-                                        ch_cfg["title"] = "단계별 시각적 수학 증명_AI"
-                                        ch_cfg["unsubscribedTrailer"] = "KvHmXDuU8jY"
-                                        b_set["channel"] = ch_cfg
-                                        if "image" in b_set:
-                                            del b_set["image"]
-                                        yt_rep.channels().update(part="brandingSettings", body={"id": YOUTUBE_CHANNEL_ID, "brandingSettings": b_set}).execute()
-                            except Exception:
-                                pass
-                            try:
-                                vr = yt_rep.videos().list(part="snippet", id=",".join(rem_fixes.keys())).execute()
-                                for vit in vr.get("items", []):
-                                    vid_r = vit["id"]
-                                    sn_r = vit["snippet"]
-                                    if sn_r.get("title") != rem_fixes[vid_r]:
-                                        sn_r["title"] = rem_fixes[vid_r][:100]
-                                        yt_rep.videos().update(part="snippet", body={"id": vid_r, "snippet": sn_r}).execute()
-                            except Exception:
-                                pass
-                    # [Priority #0-A] 8~18분+ 미드롤 광고 해금 순수 네온 시네마 마스터클래스 최우선 대량 업로드 (YPP 4,000시간 & 월 1,000만 원 직결)
-                    mc_up0 = finance.upload_pending_masterclass_to_youtube(max_uploads=4)
-                    if mc_up0 > 0:
-                        newly_uploaded_batch += mc_up0
-                    # [Priority #0-B] 탈-PDF 창의 아이디어 시네마 한/영(KO & EN) 본편 + Shorts 전수 우선 업로드
-                    base_idea_prio = ["math20250130001", "2014111902", "2022051507", "2014111901", "2016032701", "2022042501", "2017090101", "2016012801", "2012092301", "2019081052", "2011112501", "2017030206", "2012093001", "2016040701", "2019101602", "2020041301", "2017090601", "2017090501"]
-                    extra_idea_slugs = sorted({p.name.replace("_idea_ko.mp4", "").replace("_idea_en.mp4", "") for p in (ROOT_DIR / "video_lectures" / "creative_idea").glob("*_idea_*.mp4")}) if (ROOT_DIR / "video_lectures" / "creative_idea").exists() else []
-                    all_idea_slugs = base_idea_prio + [s for s in extra_idea_slugs if s not in base_idea_prio]
-                    for idea_prio_slug in all_idea_slugs:
-                        if _LAST_UPLOAD_QUOTA_BLOCKED:
-                            break
-                        sp_id = SCRIPTS_DIR / f"{idea_prio_slug}.json"
-                        if not sp_id.exists():
-                            continue
-                        sdoc_id = json.loads(sp_id.read_text(encoding="utf-8"))
-                        iu_map = sdoc_id.get("creative_idea_youtube_urls") or {}
-                        ip_map = sdoc_id.get("creative_idea_packages") or {}
-                        missing_ic_langs = tuple(
-                            lc for lc in ("ko", "en")
-                            if (not (iu_map.get(lc) or "").strip() or (ip_map.get(lc) or {}).get("needs_youtube_upload"))
-                            and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{idea_prio_slug}_idea_{lc}.mp4").exists()
-                        )
-                        if missing_ic_langs:
-                            r_ic0 = cidea.upload_creative_idea_to_youtube(idea_prio_slug, langs=missing_ic_langs)
-                            if r_ic0:
-                                newly_uploaded_batch += 1
-                        isu_map = sdoc_id.get("creative_idea_shorts_urls") or {}
-                        isp_map = sdoc_id.get("creative_idea_shorts_packages") or {}
-                        missing_is_langs = tuple(
-                            lc for lc in ("ko", "en")
-                            if (not (isu_map.get(lc) or "").strip() or (isp_map.get(lc) or {}).get("needs_youtube_upload"))
-                            and (ROOT_DIR / "video_lectures" / "shorts" / f"{idea_prio_slug}_short_idea_{lc}.mp4").exists()
-                        )
-                        if missing_is_langs:
-                            r_is0 = cidea.upload_creative_idea_short_to_youtube(idea_prio_slug, langs=missing_is_langs)
-                            if r_is0:
-                                newly_uploaded_batch += 1
+                    wave_res = finance.execute_youtube_cashflow_golden_wave(max_wave_uploads=8)
+                    newly_uploaded_batch += int((wave_res or {}).get("total_uploaded", 0))
                 except Exception as idea0_err:
                     if "Quota exceeded" not in str(idea0_err) and "exhausted" not in str(idea0_err):
-                        print(f"[Priority 0 Neon-Bloom Upload Notice] {idea0_err}", flush=True)
-
-                for q_prio_slug in ["math20250130001", "2014111902", "2014111901", "2017090101"]:
-                    sp_qp = SCRIPTS_DIR / f"{q_prio_slug}.json"
-                    if not sp_qp.exists():
-                        continue
-                    sdoc_qp = json.loads(sp_qp.read_text(encoding="utf-8"))
-                    q_yt_u = (sdoc_qp.get("question_youtube_urls") or {}).get("ko", "").strip()
-                    q_pkg_ko = ((sdoc_qp.get("question_classroom_packages") or {}).get("ko") or {})
-                    if (not q_yt_u or q_pkg_ko.get("needs_youtube_upload")) and (QUESTION_CLASSROOM_DIR / f"{q_prio_slug}_q_ko.mp4").exists():
-                        res_qv = upload_question_classroom_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
-                        if res_qv.get("ko") and res_qv.get("ko") != q_yt_u:
-                            newly_uploaded_batch += 1
-                        if _LAST_UPLOAD_QUOTA_BLOCKED:
-                            break
-                    q_sh_u = (sdoc_qp.get("question_shorts_urls") or {}).get("ko", "").strip()
-                    qs_pkg_ko = ((sdoc_qp.get("question_shorts_packages") or {}).get("ko") or {})
-                    if (not q_sh_u or qs_pkg_ko.get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "shorts" / f"{q_prio_slug}_short_q_ko.mp4").exists():
-                        res_qs = upload_question_short_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
-                        if res_qs.get("ko") and res_qs.get("ko") != q_sh_u:
-                            newly_uploaded_batch += 1
-                        if _LAST_UPLOAD_QUOTA_BLOCKED:
-                            break
+                        print(f"[Priority 0 Cash-Flow Wave Notice] {idea0_err}", flush=True)
 
                 if not _LAST_UPLOAD_QUOTA_BLOCKED:
-                    for p_slug in priority_5_shorts:
-                        sp_p = SCRIPTS_DIR / f"{p_slug}.json"
-                        if not sp_p.exists():
+                    for q_prio_slug in ["mathlab", "math20250130001", "2014111902", "2014111901", "2017090101"]:
+                        sp_qp = SCRIPTS_DIR / f"{q_prio_slug}.json"
+                        if not sp_qp.exists():
                             continue
-                        sdoc_p = json.loads(sp_p.read_text(encoding="utf-8"))
-                        s_urls_p = sdoc_p.get("shorts_urls") or {}
-                        s_pkgs_p = sdoc_p.get("shorts_packages") or {}
-                        missing_p = [
-                            lc for lc in ("ko", "en")
-                            if not (s_urls_p.get(lc) or "").strip() or (s_pkgs_p.get(lc) or {}).get("needs_youtube_upload")
-                        ]
-                        if missing_p:
-                            before_set = {lc: (s_urls_p.get(lc) or "").strip() for lc in missing_p}
-                            res_p = upload_short_to_youtube(p_slug, langs=tuple(missing_p), privacy="public")
-                            if any(res_p.get(lc) and res_p.get(lc) != before_set.get(lc) for lc in missing_p):
-                                newly_uploaded_batch += 1
-                            if _LAST_UPLOAD_QUOTA_BLOCKED:
-                                break
-                        # 5순위: 🌟 Edition 5 창의 아이디어 확장 시네마 본편(1080p) & Idea-#Shorts(9:16) 자동 업로드
-                        try:
-                            import creative_idea_cinema as cidea
-                            idea_u = sdoc_p.get("creative_idea_youtube_urls") or {}
-                            if not (idea_u.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{p_slug}_idea_ko.mp4").exists():
-                                r_ic = cidea.upload_creative_idea_to_youtube(p_slug, langs=("ko", "en"))
-                                if r_ic:
-                                    newly_uploaded_batch += 1
-                            idea_su = sdoc_p.get("creative_idea_shorts_urls") or {}
-                            if not (idea_su.get("ko") or "").strip() and (ROOT_DIR / "video_lectures" / "shorts" / f"{p_slug}_short_idea_ko.mp4").exists():
-                                r_is = cidea.upload_creative_idea_short_to_youtube(p_slug, langs=("ko", "en"))
-                                if r_is:
-                                    newly_uploaded_batch += 1
-                        except Exception:
-                            pass
-
-                if not _LAST_UPLOAD_QUOTA_BLOCKED:
-                    high_visual_priority_slugs = {
-                        "2017092841", "2020041301", "2020051301", "2020070501", "2023061501",
-                        "2020102901", "2020062102", "2023051501", "2021032901", "2021091701",
-                        "math20231203002", "2024122501", "2020030404", "2021101201",
-                    }
-                    def _upload_prio_key(sp_path):
-                        st = sp_path.stem
-                        if st in CURATED_PAGE_SCRIPTS:
-                            return (0, st)
-                        if st in high_visual_priority_slugs or st.startswith("201709") or st.startswith("math"):
-                            return (1, st)
-                        return (2, st)
-
-                    try:
-                        import importlib
-                        import finance
-                        importlib.reload(finance)
-                        mc_up = finance.upload_pending_masterclass_to_youtube(max_uploads=1)
-                        if mc_up > 0:
-                            newly_uploaded_batch += mc_up
-                    except Exception as mc_err:
-                        print(f"[Masterclass Upload Notice] {mc_err}", flush=True)
-
-                    all_sps = sorted(SCRIPTS_DIR.glob("*.json"), key=_upload_prio_key)
-                    for sp in all_sps:
-                        sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                        slug_k = sdoc["slug"]
-
-                        # 0순위(최우선): 🌟 Edition 5 탈-PDF 순수 창의 아이디어 시네마 본편(1080p) & Idea-#Shorts(9:16) 우선 업로드!
-                        try:
-                            import importlib
-                            import creative_idea_cinema as cidea
-                            importlib.reload(cidea)
-                            idea_u = sdoc.get("creative_idea_youtube_urls") or {}
-                            idea_pkgs = sdoc.get("creative_idea_packages") or {}
-                            if (not (idea_u.get("ko") or "").strip() or (idea_pkgs.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "creative_idea" / f"{slug_k}_idea_ko.mp4").exists():
-                                r_ic = cidea.upload_creative_idea_to_youtube(slug_k, langs=("ko", "en"))
-                                if r_ic:
-                                    newly_uploaded_batch += 1
-                            idea_su = sdoc.get("creative_idea_shorts_urls") or {}
-                            idea_spkgs = sdoc.get("creative_idea_shorts_packages") or {}
-                            if (not (idea_su.get("ko") or "").strip() or (idea_spkgs.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_idea_ko.mp4").exists():
-                                r_is = cidea.upload_creative_idea_short_to_youtube(slug_k, langs=("ko", "en"))
-                                if r_is:
-                                    newly_uploaded_batch += 1
-                            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-                        except Exception:
-                            pass
-
-                        # 1순위: 1080p 일반 본편 업로드 (이후 업로드되는 #Shorts 설명란·댓글에 본편 직결 URL이 자동 삽입되도록 보장!)
-                        yt_urls = sdoc.get("youtube_urls") or {}
-                        yt_pkgs = sdoc.get("youtube_packages") or {}
-                        missing_v = [
-                            lc for lc in ("ko", "en")
-                            if not (yt_urls.get(lc) or "").strip() or (yt_pkgs.get(lc) or {}).get("needs_youtube_upload")
-                        ]
-                        if missing_v:
-                            before_v = {lc: (yt_urls.get(lc) or "").strip() for lc in missing_v}
-                            res_v = upload_slug_to_youtube(slug_k, langs=tuple(missing_v), privacy="public", method="api")
-                            if any(res_v.get(lc) and res_v.get(lc) != before_v.get(lc) for lc in missing_v):
-                                newly_uploaded_batch += 1
-                            if _LAST_UPLOAD_QUOTA_BLOCKED:
-                                break
-                            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-
-                        # 2순위: 1080p 질문하는 수업 본편 업로드 (8분+ 미드롤 고수익 에디션)
-                        q_yt_urls = sdoc.get("question_youtube_urls") or {}
-                        q_yt_pkgs = sdoc.get("question_classroom_packages") or {}
-                        q_before = (q_yt_urls.get("ko") or "").strip()
-                        if (not q_before or (q_yt_pkgs.get("ko") or {}).get("needs_youtube_upload")) and (QUESTION_CLASSROOM_DIR / f"{slug_k}_q_ko.mp4").exists():
-                            res_qv2 = upload_question_classroom_to_youtube(slug_k, langs=("ko",), privacy="public")
-                            if res_qv2.get("ko") and res_qv2.get("ko") != q_before:
-                                newly_uploaded_batch += 1
-                            if _LAST_UPLOAD_QUOTA_BLOCKED:
-                                break
-                            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-
-                        # 3순위: 9:16 일반 #Shorts 업로드 (방금 업로드된 1080p 본편 URL을 설명란·댓글에 자동 바인딩)
-                        s_urls = sdoc.get("shorts_urls") or {}
-                        s_pkgs = sdoc.get("shorts_packages") or {}
-                        missing_s = [
-                            lc for lc in ("ko", "en")
-                            if not (s_urls.get(lc) or "").strip() or (s_pkgs.get(lc) or {}).get("needs_youtube_upload")
-                        ]
-                        if missing_s:
-                            before_s = {lc: (s_urls.get(lc) or "").strip() for lc in missing_s}
-                            res_s = upload_short_to_youtube(slug_k, langs=tuple(missing_s), privacy="public")
-                            if any(res_s.get(lc) and res_s.get(lc) != before_s.get(lc) for lc in missing_s):
-                                newly_uploaded_batch += 1
-                            if _LAST_UPLOAD_QUOTA_BLOCKED:
-                                break
-                            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-
-                        # 4순위: 9:16 질문형 Q-#Shorts 업로드
-                        q_sh_urls = sdoc.get("question_shorts_urls") or {}
-                        q_sh_pkgs = sdoc.get("question_shorts_packages") or {}
-                        qs_before = (q_sh_urls.get("ko") or "").strip()
-                        if (not qs_before or (q_sh_pkgs.get("ko") or {}).get("needs_youtube_upload")) and (ROOT_DIR / "video_lectures" / "shorts" / f"{slug_k}_short_q_ko.mp4").exists():
-                            res_qs2 = upload_question_short_to_youtube(slug_k, langs=("ko",), privacy="public")
-                            if res_qs2.get("ko") and res_qs2.get("ko") != qs_before:
+                        sdoc_qp = json.loads(sp_qp.read_text(encoding="utf-8"))
+                        q_yt_u = (sdoc_qp.get("question_youtube_urls") or {}).get("ko", "").strip()
+                        if not q_yt_u and (QUESTION_CLASSROOM_DIR / f"{q_prio_slug}_q_ko.mp4").exists():
+                            res_qv = upload_question_classroom_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
+                            if res_qv.get("ko") and res_qv.get("ko") != q_yt_u:
                                 newly_uploaded_batch += 1
                             if _LAST_UPLOAD_QUOTA_BLOCKED:
                                 break
 
                 if newly_uploaded_batch > 0:
-                    try:
-                        boost_youtube_channel_popularity()
-                    except Exception as be:
-                        print(f"[Popularity Boost Notice] {be}", flush=True)
                     update_video_catalog()
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)
-                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json"], check=False)
-                    subprocess.run(["git", "commit", "-m", f"chore(youtube): replace old videos & auto-upload batch ({newly_uploaded_batch} topics) to @min7014_ai"], check=False)
+                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/finance_revenue_engine.json"], check=False)
+                    subprocess.run(["git", "commit", "-m", f"chore(youtube-cashflow): auto-upload cash-flow wave ({newly_uploaded_batch} videos) to @min7014_ai"], check=False)
                     subprocess.run(["git", "push", "origin", "main"], check=False)
 
-            # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 다음 주제의 4대 에디션 연속 자동 제작!
+            # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 다음 주제의 창의 네온 시네마 + 4대 에디션 연속 자동 제작!
             if not hasattr(run_shorts_and_video_upload_daemon, "_failed_slugs"):
                 run_shorts_and_video_upload_daemon._failed_slugs = set()
             next_slug = get_next_unrendered_topic_slug(run_shorts_and_video_upload_daemon._failed_slugs)
             if next_slug:
-                print(f"🎬 [Continuous Factory] 다음 주제 4대 에디션(일반 본편 + 질문수업 본편 + 일반 #Shorts + 질문 #Shorts) 자동 제작 시작: {next_slug}", flush=True)
+                print(f"🎬 [Continuous Factory] 다음 주제 고수익 네온 시네마 + 4대 에디션 자동 제작 시작: {next_slug}", flush=True)
                 try:
                     generate_or_update_script(next_slug, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
                     for lc in ["ko", "en"]:
-                        mp4_p = YT_UPLOADS_DIR / next_slug / f"{next_slug}_{lc}.mp4"
-                        if not mp4_p.exists():
-                            render_multilingual_video(next_slug, lang_code=lc)
-                        q_mp4_p = ROOT_DIR / "video_lectures" / "question_classroom" / f"{next_slug}_q_{lc}.mp4"
-                        if not q_mp4_p.exists():
-                            render_question_classroom_video(next_slug, lang_code=lc)
-                        sh_p = YT_UPLOADS_DIR / "shorts" / f"{next_slug}_short_{lc}.mp4"
-                        if not sh_p.exists():
-                            render_youtube_short_vertical(next_slug, lang_code=lc)
-                        qsh_p = ROOT_DIR / "video_lectures" / "shorts" / f"{next_slug}_short_q_{lc}.mp4"
-                        if not qsh_p.exists():
-                            render_question_short_vertical(next_slug, lang_code=lc)
+                        # 0순위: 실시간 조회수·구독자 폭발이 검증된 순수 네온 시네마 1080p & 44초 Idea-#Shorts 최우선 렌더링!
                         try:
                             import importlib
                             import creative_idea_cinema as cidea
@@ -8235,6 +7937,18 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
                                 cidea.render_creative_idea_short_vertical(next_slug, lang_code=lc)
                         except Exception as ie_err:
                             print(f"[Creative Idea Cinema Notice] {ie_err}", flush=True)
+                        mp4_p = YT_UPLOADS_DIR / next_slug / f"{next_slug}_{lc}.mp4"
+                        if not mp4_p.exists():
+                            render_multilingual_video(next_slug, lang_code=lc)
+                        q_mp4_p = ROOT_DIR / "video_lectures" / "question_classroom" / f"{next_slug}_q_{lc}.mp4"
+                        if not q_mp4_p.exists():
+                            render_question_classroom_video(next_slug, lang_code=lc)
+                        sh_p = YT_UPLOADS_DIR / "shorts" / f"{next_slug}_short_{lc}.mp4"
+                        if not sh_p.exists():
+                            render_youtube_short_vertical(next_slug, lang_code=lc)
+                        qsh_p = ROOT_DIR / "video_lectures" / "shorts" / f"{next_slug}_short_q_{lc}.mp4"
+                        if not qsh_p.exists():
+                            render_question_short_vertical(next_slug, lang_code=lc)
                     update_video_catalog()
                     prepare_ready_batch_folder(open_explorer=False)
                     prepare_ready_shorts_batch_folder(open_explorer=False)
