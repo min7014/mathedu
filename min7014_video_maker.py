@@ -7661,6 +7661,44 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
 
     # 1순위: https://min7014.github.io/ 의 16대 전 영역 미제작 '다른 자료들'(신규 PDF + Non-PDF 웹/GeoGebra/AlgeoMath 자료)을 단원별 라운드로빈으로 선택!
     domain_flagships = [
+        # [수학공학도구 마스터 커리큘럼 (Stage 1~5: 기초 입문 ➔ 기하·함수 ➔ 확률·통계 시뮬레이션 ➔ 자취·창의탐구 ➔ 시험문제 제작·AI 수학)]
+        "2021042603",       # [Stage 1-1] GeoGebra 프로그램 설치 및 기초 시작 강의록 (ISBN 979-11-87541-13-4 제1장)
+        "math20190921001",  # [Stage 1-2] AlgeoMath 빠르게 배우기 (Learn AlgeoMath Quickly)
+        "math20210424001",  # [Stage 1-3] TikZ by Min (LaTeX TikZ 수학교육 도형 코드 작도 기초)
+        "math20210426002",  # [Stage 1-4] 수학교사와 학생을 위한 GeoGebra와 수학의 시각화 총론
+        "2021042604",       # [Stage 2-1] GeoGebra 예각에 대한 사인법칙 시각화 강의록 (제2.1장)
+        "2021042605",       # [Stage 2-2] GeoGebra 제한된 범위에서 이차함수의 최댓값과 최솟값 강의록 (제2.2장)
+        "2021042606",       # [Stage 2-3] GeoGebra 탄젠트함수 그래프와 점근선 시각화 강의록 (제2.3장)
+        "2021042607",       # [Stage 3-1] GeoGebra 통계: 큰 수의 법칙 시뮬레이션 강의록 (제3.1장)
+        "2021042608",       # [Stage 3-2] GeoGebra 통계: 이항분포와 정규분포의 관계 강의록 (제3.2장)
+        "2021042609",       # [Stage 3-3] GeoGebra 통계: 독립시행의 확률 시뮬레이션 강의록 (제3.3장)
+        "2021042610",       # [Stage 3-4] GeoGebra 통계: 중심극한정리 시뮬레이션 강의록 (제3.4장)
+        "2021042611",       # [Stage 3-5] GeoGebra 통계: 뷔퐁의 바늘 문제(Buffon Needle) 확률 실험 강의록 (제3.5장)
+        "2021042612",       # [Stage 4-1] GeoGebra 문제탐구: 도형의 자취(Locus) 작도 강의록 (제4.1장)
+        "2021042613",       # [Stage 4-2] GeoGebra 문제탐구: 도형의 자취 문제의 변형과 심화 강의록 (제4.2장)
+        "2021042614",       # [Stage 4-3] GeoGebra 창의 탐구: 스트링 아트(String Art)와 포락선 작도 강의록 (제5.1장)
+        "2021042615",       # [Stage 4-4] GeoGebra 창의 탐구: 굴러가는 원과 사이클로이드(Cycloid) 작도 강의록 (제5.2장)
+        "2021042616",       # [Stage 4-5] GeoGebra 창의 탐구: 프랙탈 코흐 눈송이(Koch Snowflake) 작도 강의록 (제5.3장)
+        "2021042617",       # [Stage 5-1] GeoGebra 수학 시험문제 및 수업자료 고화질 도형 제작 강의록 (제6.0장)
+        "2021042618",       # [Stage 5-2] GeoGebra 심화 연구활동: 타원 내부에서의 포락선(Envelope) 작도 강의록 (제7.0장)
+        "2019062801",       # [Stage 5-3] 수학 프로그램을 활용한 수학탐구 직무연수 강의록
+        "2019072302",       # [Stage 5-4] 알지오매스(AlgeoMath)를 활용한 단계별 기하 작도 및 STEAM 탐구 강의록
+        "math20260519001",  # [Stage 5-5] 2026 경남과학고 수학과 현장연구: GeoGebra 리스트·스크립트 코딩 (Sequence, CountIf, Element)
+        "math20240308001",  # [Stage 5-6] 2024 강원과학고 수학공학도구의 이해와 경사하강법 페르마 포인트 AI 수학 원리
+        "math20231203002",  # Non-PDF 심화 탐구: 작도와 경사하강법을 활용한 삼각형의 페르마 점
+        "math20190810130",  # 수학공학도구: Slope Field of dy/dx = y - x 제작방법 (by GeoGebra)
+        "math20190810131",  # 수학공학도구: Slope Field of dy/dx = y - x (by AlgeoMath)
+        "math20190918001",  # 수학공학도구: AlgeoMath 체크박스 자동화 및 단계별 증명 제어
+        "math20190914002",  # 수학공학도구: All 과 Auto 체크박스와 연결된 이벤트 만들기
+        "math20190912002",  # 수학공학도구: AlgeoMath 에서 점의 상대적 위치에 따라가는 동적 텍스트 만들기
+        "math20190810063",  # 수학공학도구: [알지오매스로 수업하기] 주어진 선분의 중점 작도
+        "math20190810072",  # 수학공학도구: [알지오매스로 수업하기] 주어진 길이의 선분을 활용한 원의 정의 수업
+        "math20210308001",  # 수학공학도구: 분산, 표준편차 구하기 [GeoGebra 이용]
+        "math20230707001",  # 수학공학도구: 복원추출 표본평균의 표본분포 시뮬레이션 [GeoGebra 이용]
+        "2018092501",       # 수학공학도구: 예각에 대한 사인법칙 (AlgeoMath) 자료 제작 강의록
+        "math20211227001",  # 아주대 교육대학원 수학공학도구 특강
+        "math20220416001",  # 사천중학교 수학공학도구 특강
+        "math20231203001",  # 치악고 인공지능 융합교육 (경사하강법과 수학공학도구)
         "2017092841",  # 유클리드 평면기하: 원에서 현의 수직이등분선
         "2020041301",  # 이차곡선·원뿔곡선: 포물선의 정의
         "2020051301",  # 삼각비·삼각함수: 호도법(Radian)
@@ -7675,27 +7713,13 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         "2021091701",  # 기하 변환·대칭: 점의 평행이동
         "2020122201",  # 방정식·부등식: 실수의 절댓값
         "2024032301",  # 다항식·방정식·수체계: 자연수의 사칙연산
-        "math20231203002",  # Non-PDF 심화 탐구: 작도와 경사하강법을 활용한 삼각형의 페르마 점
-        "math20190921001",  # 수학공학도구: AlgeoMath 빠르게 배우기 (Learn AlgeoMath Quickly)
-        "math20210426002",  # 수학공학도구: 수학교사와 학생을 위한 GeoGebra와 수학의 시각화
-        "math20240308001",  # 수학공학도구: 강원과학고 수학공학도구의 이해와 경사하강법 페르마 포인트 AI 수학 원리
-        "math20190810130",  # 수학공학도구: Slope Field of dy/dx = y - x 제작방법 (by GeoGebra)
-        "math20190810131",  # 수학공학도구: Slope Field of dy/dx = y - x (by AlgeoMath)
-        "math20190918001",  # 수학공학도구: AlgeoMath 체크박스 자동화 및 단계별 증명 제어
-        "math20190914002",  # 수학공학도구: All 과 Auto 체크박스와 연결된 이벤트 만들기
-        "math20190912002",  # 수학공학도구: AlgeoMath 에서 점의 상대적 위치에 따라가는 동적 텍스트 만들기
-        "math20190810063",  # 수학공학도구: [알지오매스로 수업하기] 주어진 선분의 중점 작도
-        "math20190810072",  # 수학공학도구: [알지오매스로 수업하기] 주어진 길이의 선분을 활용한 원의 정의 수업
-        "math20210308001",  # 수학공학도구: 분산, 표준편차 구하기 [GeoGebra 이용]
-        "math20230707001",  # 수학공학도구: 복원추출 표본평균의 표본분포 시뮬레이션 [GeoGebra 이용]
-        "2018092501",       # 수학공학도구: 예각에 대한 사인법칙 (AlgeoMath) 자료 제작 강의록
         "2022051507", "2022042501", "2022101601", "2022101602", "2022101603",
         "2023081301", "2024122501", "2024120301", "2025012801", "2025012601",
     ]
     unscripted_candidates = []
     seen_cands = set()
     for fs in domain_flagships:
-        if fs not in existing_scripts and fs not in failed_slugs and fs not in seen_cands:
+        if fs not in failed_slugs and fs not in seen_cands:
             unscripted_candidates.append(fs)
             seen_cands.add(fs)
 
