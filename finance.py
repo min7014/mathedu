@@ -498,12 +498,23 @@ def build_ypp_watchtime_masterclasses() -> list:
         chapters = []
         cum_sec = 0.0
 
+        rule28_cutoff_ts = datetime(2026, 11, 8, 20, 0, 0).timestamp()
+        if out_mp4.exists() and out_mp4.stat().st_mtime < rule28_cutoff_ts:
+            prev_u = ""
+            if out_meta.exists():
+                try:
+                    prev_u = (json.loads(out_meta.read_text(encoding="utf-8")).get("youtube_url") or "").strip()
+                except Exception:
+                    prev_u = ""
+            if not prev_u:
+                out_mp4.unlink(missing_ok=True)
+
         for s_key in spec["slugs"]:
             if use_q:
                 mp4_cand = QUESTION_DIR / f"{s_key}_q_{lang_code}.mp4"
             else:
                 mp4_cand = YT_UPLOADS_DIR / s_key / f"{s_key}_{lang_code}.mp4"
-            if not mp4_cand.exists():
+            if not mp4_cand.exists() or mp4_cand.stat().st_mtime < rule28_cutoff_ts:
                 continue
             sp = SCRIPTS_DIR / f"{s_key}.json"
             t_name = s_key
@@ -650,7 +661,8 @@ def upload_pending_masterclass_to_youtube(max_uploads: int = 1) -> int:
         if (mdoc.get("youtube_url") or "").strip():
             continue
         mp4_p = ROOT_DIR / str(mdoc.get("mp4_path") or "")
-        if not mp4_p.exists():
+        rule28_cutoff_ts = datetime(2026, 11, 8, 20, 0, 0).timestamp()
+        if not mp4_p.exists() or mp4_p.stat().st_mtime < rule28_cutoff_ts:
             continue
 
         youtube, active_token_path = vmaker.get_available_youtube_upload_service()
@@ -1267,6 +1279,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
                 lc for lc in ("ko", "en")
                 if not (su.get(lc) or "").strip()
                 and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").exists()
+                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
             )
             if missing_sh:
                 res_sh = vmaker.upload_short_to_youtube(s_slug, langs=missing_sh, privacy="public")
@@ -1293,6 +1306,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
                 lc for lc in ("ko", "en")
                 if not (yu.get(lc) or "").strip()
                 and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").exists()
+                and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
             )
             if missing_std:
                 res_std = vmaker.upload_slug_to_youtube(c_slug, langs=missing_std, privacy="public")

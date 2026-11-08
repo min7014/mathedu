@@ -4742,6 +4742,19 @@ def verify_video_content_integrity(slug_key: str) -> dict:
     if not pages:
         return {"ok": False, "reason": "pages_empty"}
 
+    # 0) [Rule 27, 28 & 29 — 오리지널 원문 PDF 100% 무결성 & 1페이지=1장면 & 무가림 최신 렌더링 품질 게이트]
+    pdf_u = str(sdoc.get("pdf_url") or "").lower()
+    if "generated_pdfs" in pdf_u or not (pdf_u.endswith(".pdf") and "min7014.github.io" in pdf_u):
+        return {"ok": False, "reason": f"non_original_pdf:{pdf_u}"}
+    total_pdf_pages = int(sdoc.get("page_count") or len(pages))
+    if 0 < total_pdf_pages <= 60 and len(pages) != total_pdf_pages:
+        return {"ok": False, "reason": f"grouped_pages_not_1to1:{len(pages)}/{total_pdf_pages}"}
+    rule28_cutoff_ts = datetime(2026, 11, 8, 20, 0, 0).timestamp()
+    for _lc_chk in ("ko", "en"):
+        mp4_chk = YT_UPLOADS_DIR / slug_key / f"{slug_key}_{_lc_chk}.mp4"
+        if mp4_chk.exists() and mp4_chk.stat().st_mtime < rule28_cutoff_ts:
+            return {"ok": False, "reason": f"pre_rule28_mp4_needs_clean_rerender:{_lc_chk}"}
+
     # 1) Persona / Name Prohibition Check ("민은기 선생님" 등 원천 차단)
     forbidden_personas = ("민은기", "Min's Math Lab", "MinsMathLab", "Min Eunki")
     for fp in forbidden_personas:
