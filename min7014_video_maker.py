@@ -1607,7 +1607,25 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "auxiliary_line_en": "Partition a bounding square of side (a + b) into four congruent right triangles of area ½ab and an inner tilted square of area c² (or drop altitude CH to hypotenuse AB)",
             "proof_logic_en": "By area conservation, subtracting the four congruent right triangles (total area 2ab) from (a + b)² in two different arrangements proves a² + b² = c² visually",
             "misconception_en": "Before claiming the inner figure has area c², verify that its four interior angles are 90° using the fact that the two acute angles of a right triangle sum to 90°",
-            "what_if_not_en": "If we replace the squares on the three sides with any tiga similar shapes (semicircles, equilateral triangles), does the area sum still hold?"
+            "what_if_not_en": "If we replace the squares on the three sides with any three similar shapes (semicircles, equilateral triangles), does the area sum still hold?"
+        }
+    elif any(k in blob_l for k in ("algeomath", "알지오매스", "geogebra", "지오지브라", "공학도구", "체크박스", "이벤트 만들기", "텍스트 만들기", "경사하강법", "gradient descent", "slope field", "방향장")):
+        res.update({
+            "category_type": "math_engineering_tools",
+            "hypothesis_ko": f"[수학공학도구(GeoGebra·AlgeoMath) 실전 환경] '{ko_t or title}'의 수학적 대상(점·선분·원·함수·슬라이더·체크박스)과 초기 매개변수 설정",
+            "conclusion_ko": f"[도구적 발생(Artigue 2002) & 동적 시각화 완성] 공학도구 명령어와 동적 작도를 통해 '{ko_t or title}'의 기하학적 불변량·자취·최적화 해를 실시간 시뮬레이션으로 완성",
+            "auxiliary_line_ko": "슬라이더/체크박스 불리언 변수 연동, 수직이등분선·원·교점 도구 결합, 또는 방향장(SlopeField)/경사하강법 반복 벡터 작도",
+            "proof_logic_ko": "정적인 칠판 판서로는 볼 수 없는 매개변수 연속 변화(Dragging)와 단계별 조건부 표시(Condition to Show Object)를 결합하여 대수 수식과 기하 자취가 100% 일치함을 시각적으로 검증",
+            "misconception_ko": "눈대중으로 점을 찍어 어림잡아 그리지 말고, 반드시 '교점·수선·평행선·컴퍼스' 기하 구속 조건(Geometric Constraints)과 정확한 수식 명령어로 작도해야 드래그해도 도형이 깨지지 않습니다",
+            "what_if_not_ko": "슬라이더 범위나 초기 점의 위치를 실시간으로 드래그하여 바꾸면(What-If-Not) 자취와 수렴 경로가 어떻게 달라질까요?",
+        })
+        en_fields = {
+            "hypothesis_en": f"[Dynamic Math Engineering Tool Lab (GeoGebra & AlgeoMath)] Initial geometric objects, algebraic expressions, and slider/checkbox parameters for '{en_topic}'",
+            "conclusion_en": f"[Instrumental Genesis (Artigue 2002) & Dynamic Simulation] Interactive construction and live verification of '{en_topic}' via exact geometric constraints and dynamic scripting",
+            "auxiliary_line_en": "Bind boolean checkboxes/sliders to step-by-step visibility conditions, intersect circles/lines via exact construction tools, or plot vector slope fields and gradient descent steps",
+            "proof_logic_en": "By encoding mathematical definitions as dynamic tool constraints (Bussi & Mariotti's Semiotic Mediation), dragging any free point preserves the invariant theorem across all configurations",
+            "misconception_en": "Never place points by visual estimation—always use exact intersection, compass, perpendicular, or algebraic command bindings so the construction passes the Dragging Test",
+            "what_if_not_en": "What new locus or dynamical behavior emerges when we animate the slider parameter or generalize the differential/geometric condition?"
         }
     else:
         en_fields = {
@@ -7658,6 +7676,19 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         "2020122201",  # 방정식·부등식: 실수의 절댓값
         "2024032301",  # 다항식·방정식·수체계: 자연수의 사칙연산
         "math20231203002",  # Non-PDF 심화 탐구: 작도와 경사하강법을 활용한 삼각형의 페르마 점
+        "math20190921001",  # 수학공학도구: AlgeoMath 빠르게 배우기 (Learn AlgeoMath Quickly)
+        "math20210426002",  # 수학공학도구: 수학교사와 학생을 위한 GeoGebra와 수학의 시각화
+        "math20240308001",  # 수학공학도구: 강원과학고 수학공학도구의 이해와 경사하강법 페르마 포인트 AI 수학 원리
+        "math20190810130",  # 수학공학도구: Slope Field of dy/dx = y - x 제작방법 (by GeoGebra)
+        "math20190810131",  # 수학공학도구: Slope Field of dy/dx = y - x (by AlgeoMath)
+        "math20190918001",  # 수학공학도구: AlgeoMath 체크박스 자동화 및 단계별 증명 제어
+        "math20190914002",  # 수학공학도구: All 과 Auto 체크박스와 연결된 이벤트 만들기
+        "math20190912002",  # 수학공학도구: AlgeoMath 에서 점의 상대적 위치에 따라가는 동적 텍스트 만들기
+        "math20190810063",  # 수학공학도구: [알지오매스로 수업하기] 주어진 선분의 중점 작도
+        "math20190810072",  # 수학공학도구: [알지오매스로 수업하기] 주어진 길이의 선분을 활용한 원의 정의 수업
+        "math20210308001",  # 수학공학도구: 분산, 표준편차 구하기 [GeoGebra 이용]
+        "math20230707001",  # 수학공학도구: 복원추출 표본평균의 표본분포 시뮬레이션 [GeoGebra 이용]
+        "2018092501",       # 수학공학도구: 예각에 대한 사인법칙 (AlgeoMath) 자료 제작 강의록
         "2022051507", "2022042501", "2022101601", "2022101602", "2022101603",
         "2023081301", "2024122501", "2024120301", "2025012801", "2025012601",
     ]
@@ -7674,15 +7705,16 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
             by_sub_pdf = {}
             by_sub_web = {}
             _non_math_skip = (
-                "원노트", "OneNote", "체크박스", "Checkbox", "checkbox", "mathapk", "학습자료 링크",
-                "이벤트 만들기", "텍스트 만들기", "사용법", "설치", "블로그", "민은기",
+                "원노트", "OneNote", "mathapk", "학습자료 링크",
+                "설치", "블로그", "민은기",
             )
-            # 유튜브 알고리즘에서 폭발적 조회수(High CTR & Global Viral)를 기록하는 독창적·창의적 시각 증명 키워드 최우선 추출
+            # 유튜브 알고리즘에서 폭발적 조회수(High CTR & Global Viral)를 기록하는 독창적·창의적 시각 증명 및 수학공학도구(GeoGebra·AlgeoMath) 키워드 최우선 추출
             _viral_creative_keywords = (
                 "피타고라스", "테셀레이션", "황금비", "오각형", "단델린", "사이클로이드", "아르키메데스",
                 "페르마", "오일러", "구점원", "나폴레옹", "몰리", "톨레미", "파스칼", "브리앙숑",
                 "아폴로니우스", "스튜어트", "헤론", "파푸스", "메넬라우스", "체바", "구분구적",
                 "코시", "산술", "포물선", "타원", "쌍곡선", "작도", "프랙탈", "원주각", "접선", "정다면체",
+                "지오지브라", "geogebra", "알지오매스", "algeomath", "공학도구", "경사하강법", "방향장", "체크박스",
             )
             viral_gem_slugs = []
             for it in items:

@@ -154,3 +154,8 @@
   4. **Gila Hanna (1990, 2000) & Stylianides (2016) 설명적 증명(Explanatory Proof)**: 단순 참/거짓 확인을 넘어 '왜 하필 그 보조선이 등식을 필연적으로 성립시키는가'라는 생성 메커니즘을 규명합니다.
   5. **Tall (2013, *Three Worlds of Mathematics*) & Sfard (1991, *Reification*)**: 체화된 도형 감각(Embodied/Process) ➔ 기호·비율 조작(Symbolic) ➔ 형식적 증명과 대상화(Formal/Object)의 3단 사다리를 구현합니다.
   6. **Kapur (2014, *Productive Failure*) · Muller (2008) · Pólya (1945) · Freudenthal (1991, *Guided Reinvention*) · Fischbein (1993) · Lakatos (1976) · Brown & Walter (1983) · Boaler (2016)**: 첫 8초 직관적 인지 갈등 유발 ➔ 폴리아 조건-보조선 1초 번역 ➔ 학습자 스스로의 안내된 재발명 ➔ What-If-Not 조건 변형 및 시각·기호 이중 뇌 회로 활성화를 전 영상 HUD와 한/영 내레이션에 상시 반영합니다.
+
+
+## 22. 수학공학도구(GeoGebra · AlgeoMath · 동적 기하 작도 · 방향장 · AI 경사하강법) 실전 강의 및 고단가 EdTech 마스터클래스 상시 제작 원칙
+- **수학공학도구 강의 트랙의 전략적·교육적 필수화**: https://min7014.github.io/에 수록된 404개 GeoGebra, 457개 AlgeoMath, 60개 동적 작도 및 수학공학도구 특강(AlgeoMath 빠르게 배우기, 수학교사와 학생을 위한 GeoGebra와 수학의 시각화, 작도와 경사하강법을 활용한 삼각형의 페르마 점(AI 수학 원리), 방향장 dy/dx 제작방법, 체크박스·슬라이더 이벤트 자동화, 표본분포 시뮬레이션 등 127개 주제)을 핵심 강의 트랙(category_type = math_engineering_tools)으로 상시 제작·편성합니다.
+- **도구적 발생(Artigue 2002, *Instrumental Genesis*) × 기호학적 매개(Mariotti 2024) 융합**: 단순 버튼 클릭 설명을 넘어, ① **정확한 기하 구속 조건(교점·컴퍼스·수선·평행선·슬라이더·조건부 표시)과 명령어 사용법**, ② **드래그 테스트(Dragging Test)를 통과하는 수학적 불변성 원리**, ③ **2022 개정 교육과정 수행평가·탐구보고서 및 글로벌 STEM EdTech 고단가(High-RPM) 수요**를 동시에 충족하도록 한·영(KO/EN) 본편, Shorts, 그리고 **네온 시네마 마스터클래스 Vol.9 (masterclass_neon_idea_vol9)**로 제작·배포합니다.

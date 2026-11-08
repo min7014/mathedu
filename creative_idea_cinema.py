@@ -4061,6 +4061,7 @@ def build_creative_idea_masterclass_compilation(langs=("ko", "en")) -> list:
         ("masterclass_neon_idea_vol6", ["2020041901", "2020042201", "2020042301", "2020042401", "2020042701", "2022051501", "2022051507"]),
         ("masterclass_neon_idea_vol7", ["2022050701", "2022050703", "2022050801", "2022050901", "math20220509002", "2022053101", "2014111902"]),
         ("masterclass_neon_idea_vol8", ["2022051001", "2022051101", "math20220515003", "math20220515004", "math20220515005", "2025021601", "math20250130001"]),
+        ("masterclass_neon_idea_vol9", ["math20190921001", "math20210426002", "math20240308001", "math20231203002", "math20190810130", "math20190810131", "math20190810063"]),
     ]
     for _, v_slugs in vol_suites:
         build_flagship_creative_idea_suite(slugs=v_slugs, langs=langs)

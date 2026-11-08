@@ -332,7 +332,8 @@ python -X utf8 pr.py status
 - ✅ **18. 실시간 알고리즘 폭발 검증된 '4대 바이럴 클러스터 동시 발행(Simultaneous 4-Asset Cluster Drop)' 상시 원칙**
 - ✅ **19. `https://min7014.github.io/` 원문 자료와의 100% 수학적 정합성 및 수식·증명 무결성 필수 검증 원칙 (Mandatory 100% Mathematical Accuracy & Source Fidelity Guard)**
 - ✅ **20. 국제적으로 통용되는 표준 수학 영어(International Standard Mathematical English) 품질 및 한·영 완전 대칭 무결성 원칙**
+- ✅ **21. 세계 수학교육학·인지과학 학술 논문 및 연구 성과의 min7014.github.io 원문 아이디어 융합 영상 고도화 원칙 (Global Math Education Research & Academic Paper Fusion Principle)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
-- ✅ **22. 세계 수학교육학·인지과학 12대 학술 논문(Duval · Mariotti · Mayer/Sweller · Hanna · Tall · Freudenthal 등) × min7014.github.io 원문 아이디어 융합 영상 고도화 정책(Rule 21)**
+- ✅ **23. 수학공학도구(GeoGebra · AlgeoMath · 동적 기하 작도 · 방향장 dy/dx · AI 경사하강법 페르마 점 · 체크박스/슬라이더 자동화) 실전 강의 트랙 및 마스터클래스 Vol.9 상시 제작 정책(Rule 22)**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->

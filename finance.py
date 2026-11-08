@@ -68,12 +68,10 @@ HIGH_RPM_KEYWORDS_EN = [
 
 
 def _purge_non_math_tutorial_topics() -> list:
-    """순수 수학 개념이 아닌 소프트웨어 사용법이나 개인 호칭 포함 대본을 즉시 정리합니다."""
+    """순수 목차/링크 페이지나 비수학 유틸리티(원노트·APK)만 정리하고, 수학공학도구(GeoGebra·AlgeoMath·체크박스·이벤트·작도) 강의는 보존합니다."""
     removed = []
     bad_slugs = {
-        "math20190921002", "math20191102002", "math20191001002",
-        "math20190918001", "math20190914001", "math20190914002", "math20190912002",
-        "math20190810021", "math20191222001", "2025021601", "2022052701",
+        "math20190921002", "math20190810021", "math20191222001", "2025021601", "2022052701",
     }
     for sp in list(SCRIPTS_DIR.glob("*.json")):
         slug = sp.stem
@@ -83,7 +81,7 @@ def _purge_non_math_tutorial_topics() -> list:
         except Exception:
             continue
         t_ko = str(sdoc.get("title") or "")
-        if slug in bad_slugs or any(k in t_ko for k in ("체크박스", "원노트", "학습자료 링크", "이벤트 만들기", "텍스트 만들기", "민은기")):
+        if slug in bad_slugs or any(k in t_ko for k in ("원노트", "학습자료 링크", "민은기")):
             try:
                 sp.unlink(missing_ok=True)
                 removed.append(slug)
@@ -496,6 +494,22 @@ def build_ypp_watchtime_masterclasses() -> list:
             "title_ko": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
             "title_en": "🔥 Stop Memorizing Ellipse Tangent Formulas! Auxiliary & Director Circle Visual Proofs (Masterclass Vol.8)",
             "slugs": ["2022051001", "2022051101", "math20220515003", "math20220515004", "math20220515005", "2025021601", "math20250130001"],
+            "use_creative_idea_edition": True,
+            "lang": "en",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol9",
+            "title_ko": "🛠️ 수학공학도구(GeoGebra·AlgeoMath) 실전 마스터클래스! 동적 기하 작도·방향장(dy/dx)·AI 경사하강법 페르마 점 (Vol.9)",
+            "title_en": "🛠️ GeoGebra & AlgeoMath Masterclass! Dynamic Geometry, Slope Fields (dy/dx) & Gradient Descent Fermat Point (Vol.9)",
+            "slugs": ["math20190921001", "math20210426002", "math20240308001", "math20231203002", "math20190810130", "math20190810131", "math20190810063"],
+            "use_creative_idea_edition": True,
+            "lang": "ko",
+        },
+        {
+            "mc_slug": "masterclass_neon_idea_vol9_en",
+            "title_ko": "🛠️ GeoGebra & AlgeoMath Masterclass! Dynamic Geometry, Slope Fields (dy/dx) & Gradient Descent Fermat Point (Vol.9)",
+            "title_en": "🛠️ GeoGebra & AlgeoMath Masterclass! Dynamic Geometry, Slope Fields (dy/dx) & Gradient Descent Fermat Point (Vol.9)",
+            "slugs": ["math20190921001", "math20210426002", "math20240308001", "math20231203002", "math20190810130", "math20190810131", "math20190810063"],
             "use_creative_idea_edition": True,
             "lang": "en",
         },
