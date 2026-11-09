@@ -1387,6 +1387,10 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
         engaged_comments = vmaker.auto_engage_youtube_community_comments(max_replies=10)
         if engaged_comments:
             print(f"💬 [YouTube Community Inbox Auto-Engaged] Replied to {len(engaged_comments)} viewer comments!", flush=True)
+        import youtube_community_controller as yt_comm_ctrl
+        comm_post_res = yt_comm_ctrl.publish_next_community_post_directly(headless=True)
+        if comm_post_res.get("ok"):
+            print(f"🗳️ [YouTube Channel Community Post Published] {comm_post_res}", flush=True)
     except Exception:
         engaged_comments = []
     if total_uploaded > 0:
