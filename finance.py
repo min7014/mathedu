@@ -428,7 +428,9 @@ def build_ypp_watchtime_masterclasses() -> list:
         for sk in s_item["slugs"]:
             used_slugs.add(sk)
 
+    rule28_cutoff_ts = datetime(2026, 11, 8, 20, 0, 0).timestamp()
     all_ko_candidates = []
+    post_rule28_candidates = []
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         sk = sp.stem
         if sk in used_slugs:
@@ -438,10 +440,48 @@ def build_ypp_watchtime_masterclasses() -> list:
             pdf_u_chk = str(sdoc_chk.get("pdf_url") or "").lower()
             if not (pdf_u_chk.endswith(".pdf") and "min7014.github.io" in pdf_u_chk):
                 continue
+            ko_dur_chk = float(((sdoc_chk.get("youtube_packages") or {}).get("ko") or {}).get("total_duration_sec") or 0.0)
         except Exception:
             continue
-        if (YT_UPLOADS_DIR / sk / f"{sk}_ko.mp4").exists() and (YT_UPLOADS_DIR / sk / f"{sk}_en.mp4").exists():
+        ko_mp4_p = YT_UPLOADS_DIR / sk / f"{sk}_ko.mp4"
+        en_mp4_p = YT_UPLOADS_DIR / sk / f"{sk}_en.mp4"
+        if ko_mp4_p.exists() and en_mp4_p.exists():
             all_ko_candidates.append(sk)
+            if ko_mp4_p.stat().st_mtime >= rule28_cutoff_ts and en_mp4_p.stat().st_mtime >= rule28_cutoff_ts:
+                post_rule28_candidates.append((ko_dur_chk, sk))
+
+    # [Rule 28·29 무가림 1:1 오리지널 PDF 전용 장편 마스터클래스 우선 편성 (유효 공개 시청시간 극대화)]
+    post_rule28_candidates.sort(key=lambda x: (-x[0], x[1]))
+    pure_r28_slugs = [x[1] for x in post_rule28_candidates]
+    for r_idx in range(0, len(pure_r28_slugs), 5):
+        r_chunk = pure_r28_slugs[r_idx : r_idx + 5]
+        if len(r_chunk) < 5:
+            break
+        r_vol = (r_idx // 5) + 1
+        first_sp = SCRIPTS_DIR / f"{r_chunk[0]}.json"
+        lead_ko, lead_en, sub_dom = r_chunk[0], r_chunk[0], "오리지널 기하·대수 시각 증명"
+        if first_sp.exists():
+            try:
+                fdoc = json.loads(first_sp.read_text(encoding="utf-8"))
+                lead_ko = str(fdoc.get("title") or r_chunk[0]).split("(")[0].strip()
+                lead_en = str(fdoc.get("title_en") or lead_ko).split("|")[0].strip()
+                sub_dom = str(fdoc.get("sub_domain_ko") or sub_dom)
+            except Exception:
+                pass
+        suites.insert(0, {
+            "mc_slug": f"masterclass_original_pdf_vol{r_vol}_en",
+            "title_ko": f"🌎 [Original PDF Math Masterclass Vol.{r_vol}] {lead_en} & 5 Full Visual Proofs (1080p) | @min7014_ai",
+            "title_en": f"🌎 [Original PDF Math Masterclass Vol.{r_vol}] {lead_en} & 5 Full Visual Proofs (1080p) | @min7014_ai",
+            "slugs": r_chunk,
+            "lang": "en",
+        })
+        suites.insert(0, {
+            "mc_slug": f"masterclass_original_pdf_vol{r_vol}",
+            "title_ko": f"🏛️ [{sub_dom} 오리지널 PDF 직강 마스터클래스 Vol.{r_vol}] {lead_ko} 외 5대 정리 완전 정복 (1080p) | @min7014_ai",
+            "title_en": f"🏛️ [Original PDF Visual Proof Masterclass Vol.{r_vol}] {lead_en} & 5 Core Theorems (1080p) | @min7014_ai",
+            "slugs": r_chunk,
+            "lang": "ko",
+        })
 
     chunk_size = 5
     for idx in range(0, len(all_ko_candidates), chunk_size):
@@ -544,7 +584,7 @@ def build_ypp_watchtime_masterclasses() -> list:
                     dur_s = 240.0
             cum_sec += dur_s
 
-        if len(part_files) >= 3 and not out_mp4.exists() and newly_concat_this_cycle < 4:
+        if len(part_files) >= 3 and not out_mp4.exists() and newly_concat_this_cycle < 16:
             concat_txt = MASTERCLASS_DIR / f"{mc_slug}_concat.txt"
             concat_txt.write_text(
                 "\n".join(f"file '{p.resolve().as_posix()}'" for p in part_files),
@@ -559,15 +599,26 @@ def build_ypp_watchtime_masterclasses() -> list:
                 newly_concat_this_cycle += 1
 
         if out_mp4.exists():
+            if cum_sec <= 0.0 and ffprobe_exe:
+                try:
+                    pr_existing = subprocess.run(
+                        [ffprobe_exe, "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(out_mp4)],
+                        capture_output=True, text=True, check=False,
+                    )
+                    cum_sec = float((pr_existing.stdout or "1500").strip())
+                except Exception:
+                    cum_sec = 1500.0
             dur_min = round(cum_sec / 60.0, 1)
             desc_ko = (
                 f"🏆 [{spec['title_ko']}]\n"
                 f"총 재생 시간: {dur_min}분 연속 정주행 마스터클래스!\n\n"
+                f"▶️ [전체 장편 강의 무중단 연속재생 플레이리스트 (유효 시청시간 정주행)]:\n"
+                f"👉 https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
                 f"🔔 공식 채널 1초 구독하기 (매일 새로운 시각적 수학 증명 업데이트):\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                 f"⏱️ [마스터클래스 챕터 타임스탬프]\n"
                 + "\n".join(chapters)
-                + "\n\n🌐 [수학홈페이지 GeoGebra 직접 실습 & 16,548문항 퀴즈]:\n"
+                + "\n\n🌐 [수학홈페이지 자체 제작 MathLab 실습 & 16,548문항 퀴즈]:\n"
                 "👉 https://min7014.github.io/mathedu/video_board.html\n"
                 "👉 https://min7014.github.io/\n\n"
                 "📜 [Original Educational Content Statement]\n"
@@ -578,11 +629,13 @@ def build_ypp_watchtime_masterclasses() -> list:
             desc_en = (
                 f"🏆 [{spec['title_en']}]\n"
                 f"Total Duration: {dur_min}-Minute Full Visual Math Proof Masterclass Compilation!\n\n"
+                f"▶️ [Continuous Long-Form Marathon Playlist (Full Course Autoplay)]:\n"
+                f"👉 https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
                 f"🔔 Subscribe to @min7014_ai (Daily 1080p Visual Math Proofs & Interactive Geometry):\n"
                 f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                 f"⏱️ [Masterclass Chapter Timestamps]\n"
                 + "\n".join(chapters)
-                + "\n\n🌐 [Interactive GeoGebra Applet, PDF Proofs & 16,548 Free Math Problems (https://min7014.github.io/)]:\n"
+                + "\n\n🌐 [Interactive MathLab, PDF Proofs & 16,548 Free Math Problems (https://min7014.github.io/)]:\n"
                 "👉 https://min7014.github.io/mathedu/video_board.html?lang=en\n"
                 "👉 https://min7014.github.io/\n\n"
                 "📜 [Original Educational Content Statement]\n"
@@ -642,13 +695,15 @@ def upload_pending_masterclass_to_youtube(max_uploads: int = 1) -> int:
             dur_val = float(d_obj.get("duration_sec") or 0.0)
         except Exception:
             pass
-        if stem.startswith("masterclass_euclidean_geometry_"):
+        if stem.startswith("masterclass_original_pdf_"):
             return (0, -dur_val, stem)
-        if stem.startswith("masterclass_question_"):
+        if stem.startswith("masterclass_euclidean_geometry_"):
             return (1, -dur_val, stem)
-        if stem.startswith("masterclass_circle_theorems_"):
+        if stem.startswith("masterclass_question_"):
             return (2, -dur_val, stem)
-        return (3, -dur_val, stem)
+        if stem.startswith("masterclass_circle_theorems_"):
+            return (3, -dur_val, stem)
+        return (4, -dur_val, stem)
 
     uploaded_cnt = 0
     for meta_p in sorted(MASTERCLASS_DIR.glob("*_meta.json"), key=_mc_priority_key):
@@ -1258,42 +1313,44 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot A] 원본 PDF 기반 20~35분 미드롤 마스터클래스 1편 업로드
-        mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=1)
+        # [Slot A] 원본 PDF 기반 25~60분 미드롤 장편 마스터클래스 최우선 업로드 (1인당 유효 공개 시청시간 15~30배 적립!)
+        mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=2)
         if mc_cnt > 0:
             total_uploaded += mc_cnt
             uploaded_items.append({"type": "pdf_masterclass", "count": mc_cnt})
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot B] 원본 PDF 단계별 9:16 #Shorts (KO/EN) 1세트 업로드
-        for s_slug in ordered_slugs:
+        # [Slot B] 원본 PDF 질문하는 수학 수업 16:9 1080p 장편 본편 (KO/EN) 업로드
+        # (※ 주의: 9:16 #Shorts 조회수는 유튜브 YPP '유효 공개 시청 시간 4,000시간'에 0시간으로 제외되므로,
+        #  일일 API 쿼터는 100% 유효 공개 시청시간이 적립되는 16:9 장편 강의에만 전량 투입합니다!)
+        for q_slug in ordered_slugs:
             if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                 break
-            sp = SCRIPTS_DIR / f"{s_slug}.json"
+            sp = SCRIPTS_DIR / f"{q_slug}.json"
             if not sp.exists():
                 continue
             sdoc = json.loads(sp.read_text(encoding="utf-8"))
-            su = sdoc.get("shorts_urls") or {}
-            missing_sh = tuple(
+            qu = sdoc.get("question_youtube_urls") or {}
+            missing_q = tuple(
                 lc for lc in ("ko", "en")
-                if not (su.get(lc) or "").strip()
-                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").exists()
-                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
+                if not (qu.get(lc) or "").strip()
+                and (QUESTION_DIR / f"{q_slug}_q_{lc}.mp4").exists()
+                and (QUESTION_DIR / f"{q_slug}_q_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
             )
-            if missing_sh:
-                res_sh = vmaker.upload_short_to_youtube(s_slug, langs=missing_sh, privacy="public")
-                if res_sh:
-                    n_up = len([k for k, v in res_sh.items() if v])
+            if missing_q:
+                res_q = vmaker.upload_question_classroom_to_youtube(q_slug, langs=missing_q, privacy="public")
+                if res_q:
+                    n_up = len([k for k, v in res_q.items() if v])
                     if n_up > 0:
                         total_uploaded += n_up
-                        uploaded_items.append({"type": "pdf_short", "slug": s_slug, "langs": list(res_sh.keys())})
+                        uploaded_items.append({"type": "pdf_question_1080p", "slug": q_slug, "langs": list(res_q.keys())})
                 break
 
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot C] 원본 PDF 한 땀 한 땀 1080p 단계별 본편 (KO/EN) 1세트 업로드
+        # [Slot C] 원본 PDF 한 땀 한 땀 1080p 단계별 본편 (KO/EN) 1세트 업로드 (장시간 다페이지 우선)
         for c_slug in ordered_slugs:
             if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                 break

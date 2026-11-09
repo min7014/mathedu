@@ -342,6 +342,7 @@ python -X utf8 pr.py status
 - ✅ **28. 회장님(`min7014`) 오리지널 자료(`https://min7014.github.io/`) 절대 중심(Original Material First) 4대 원칙**
 - ✅ **29. 업로드 속도보다 강의 품질 최우선 원칙 (Quality-Over-Speed Absolute Gate Principle)**
 - ✅ **30. 8대 핵심 에이전트 실시간 회의 생중계 및 자기교정 원칙 (Live Inter-Agent Boardroom Broadcast & Real-Time Self-Correction Principle)**
+- ✅ **31. 유튜브 유효 공개 시청 시간(Valid Public Watch Hours) 4,000시간 최단기 돌파 5대 철칙 (100% Long-Form Watch-Hour All-In Principle)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->

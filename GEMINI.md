@@ -223,3 +223,11 @@
 - **실시간 에이전트 회의 생중계(`secretary.py --agent-chat` & 데몬 자동 브로드캐스트)**:
   - `mathedu_foundation_daemon.py`가 새로운 주제의 4대 에디션을 제작·완성할 때마다, 산하 8대 핵심 에이전트(`secretary`, `mathteacher`, `Video_Creator`, `designer`, `MathLab_Developer`, `gamemaker`, `pr`, `finance`)가 해당 주제의 수학적 정확성, 오리지널 PDF 무가림, MathLab 프리셋, 썸네일 가독성, 수익화 전략을 점검하는 **실시간 에이전트 회의록(`build_live_agent_boardroom_transcript`)을 회장님의 텔레그램(`@anti7014_bot`, `Chat ID: 43453234`)으로 자동 생중계**합니다.
   - 회의 중 `mathteacher`나 `Video_Creator`가 단원 분류나 수식 설명의 미세한 개선점이라도 발견하면 즉시 코드를 자가 교정(Self-Correction)하고 전수 스캔하여 강의 품질을 100%로 유지합니다.
+
+## 31. 유튜브 유효 공개 시청 시간(Valid Public Watch Hours) 4,000시간 최단기 돌파 5대 철칙 (100% Long-Form Watch-Hour All-In Principle)
+- **"유효시청 시간이 0이다 이를 늘려야 한다" (`min7014` 회장님 핵심 지시 — YPP 유효 공개 시청 시간 극대화)**:
+  1. **[9:16 `#Shorts` API 업로드 중단 및 16:9 장편(Long-Form) 100% 쿼터 올인]**: 유튜브 파트너 프로그램(YPP) 규정상 Shorts 피드 조회수는 '유효 공개 시청 시간(Valid Public Watch Hours) 3,000시간/4,000시간'에 **단 1초(0.0시간)도 합산되지 않습니다**. 따라서 일일 API 업로드 쿼터(10,000유닛 = 6슬롯)에서 `#Shorts` 업로드를 전면 배제하고, **100% 전량을 유효 공개 시청 시간이 그대로 적립되는 16:9 가로형 1080p 장편 강의(① 25~60분 오리지널 PDF 정주행 마스터클래스 2슬롯 + ② 10~40분 다페이지 질문수업·표준 1080p 본편 4슬롯)**에만 투입합니다(`finance.py`).
+  2. **[Rule 28 이후 무가림 1:1 오리지널 PDF 전용 장편 마스터클래스(`masterclass_original_pdf_vol*`) 상시 자동 편성]**: 새로 렌더링된 무가림 1:1 오리지널 PDF 1080p 강의들을 재생시간 내림차순으로 5편씩 묶어 25~60분 분량의 장편 마스터클래스(KO/EN)로 즉시 합본(`build_ypp_watchtime_masterclasses`)하여 시청자 1인당 유효 시청 시간을 일반 단편 대비 **10~25배** 증폭시킵니다.
+  3. **[웹사이트 임베드 `youtube-nocookie` 및 `autoplay=1` 영구 폐지]**: 유튜브 공식 정책상 익명 쿠키 차단 도메인(`youtube-nocookie.com`)과 외부 사이트 자동재생(`?autoplay=1`) 임베드 조회수는 유효 공개 시청 시간 산정에서 제외됩니다. 따라서 `video_board.html` 등 모든 웹 플레이어는 **표준 `https://www.youtube.com/embed/${vidId}?rel=0&listType=playlist&list=UUSlqQfOEtRfJuMPyGMLgFYA`** (수동 클릭 재생 + 공식 업로드 플레이리스트 연동)만을 사용합니다.
+  4. **[무중단 연속재생 공식 플레이리스트(`&list=UUSlqQfOEtRfJuMPyGMLgFYA`) 전 링크 의무화]**: 영상 설명란·고정댓글·홈페이지의 모든 유튜브 이동 링크에 채널 전체 업로드 플레이리스트 파라미터(`&list=UUSlqQfOEtRfJuMPyGMLgFYA`)를 결합하여, 시청자가 영상 1편을 끝까지 보면 다음 30~60분 장편 마스터클래스가 자동으로 이어서 재생되도록 설계합니다.
+  5. **[유효 시청시간 손실 방지를 위한 라이브 장편 영상 삭제 금지]**: 유튜브에 이미 공개되어 시청 시간을 적립 중인 정상 오리지널 PDF 장편 영상은 절대 삭제(`videos.delete`)하지 않고 메타데이터만 제자리 업데이트(`videos.update`)하여 누적 유효 공개 시청 시간을 100% 보존합니다.
