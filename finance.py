@@ -1228,8 +1228,8 @@ def execute_live_channel_and_video_repairs_now() -> dict:
         ch_b = yt.channels().list(part="brandingSettings", id="UCSlqQfOEtRfJuMPyGMLgFYA").execute()["items"][0]
         b_set = ch_b.get("brandingSettings", {})
         ch_cfg = b_set.get("channel", {})
-        if ch_cfg.get("title") != "단계별 시각적 수학 증명_AI" or ch_cfg.get("unsubscribedTrailer") != "_NRQ5QO3PEY":
-            ch_cfg["title"] = "단계별 시각적 수학 증명_AI"
+        if ch_cfg.get("title") != "오리지널 단계별 시각적 수학 증명" or ch_cfg.get("unsubscribedTrailer") != "_NRQ5QO3PEY":
+            ch_cfg["title"] = "오리지널 단계별 시각적 수학 증명"
             ch_cfg["unsubscribedTrailer"] = "_NRQ5QO3PEY"
             b_set["channel"] = ch_cfg
             if "image" in b_set:
