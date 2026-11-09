@@ -376,6 +376,7 @@ def build_ypp_watchtime_masterclasses() -> list:
     개별 4~6분 영상을 넘어, 대표 기하·대수 1080p 마스터 영상들을 챕터 타임스탬프와 함께 하나로 묶은
     20~30분 분량의 「시각적 수학 증명 마스터클래스 정주행 합본 (1080p Full Compilation)」을 무손실 생성합니다.
     """
+    import min7014_video_maker as vmaker
     MASTERCLASS_DIR.mkdir(parents=True, exist_ok=True)
     ffmpeg_exe = shutil.which("ffmpeg")
     ffprobe_exe = shutil.which("ffprobe")
