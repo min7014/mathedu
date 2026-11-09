@@ -345,6 +345,8 @@ python -X utf8 pr.py status
 - ✅ **31. 유튜브 유효 공개 시청 시간(Valid Public Watch Hours) 4,000시간 최단기 돌파 5대 철칙 (100% Long-Form Watch-Hour All-In Principle)**
 - ✅ **32. 8대 본부장 에이전트 '입체적 다각도 교차 검증(Devil's Advocate & Second-Order Effect Pre-Audit)' 자율 판단 원칙**
 - ✅ **33. 무비판적 순응(Yes-Man) 절대 금지 · 비판적 직언(Red-Team) 및 선제적 역제안 의무 원칙**
+- ✅ **34. YouTube Creators 공식 라운드업(`B4M3VlMs3IU`) 핵심 기능 선별 채택 및 비판적 적용 원칙 (Rule 34)**
+- ✅ **35. 인간 고유의 깊은 수학적 통찰 & 직접 만든 오리지널 원문 자료 강조 원칙 (Human-Crafted Original Depth & Non-AI-Slop Authenticity Principle · Rule 35)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
@@ -359,3 +361,10 @@ python -X utf8 pr.py status
      - `B4M3VlMs3IU` 고정댓글(`Which update are you most excited to try 🤩` -> 댓글 6,981개 폭발)의 구조를 벤치마킹하여, 모든 1080p 본편 및 마스터클래스의 첫 댓글 1번 줄(`"자세히 보기"` 접힘 이전 노출 영역)에 **한 줄짜리 짧은 참여 질문(`💬 오늘 마스터클래스 단원 중 가장 명쾌하게 이해된 주제는 몇 강이었나요? 타임스탬프와 함께 댓글로 남겨주세요! 🤩`)**과 **무중단 연속재생 링크(`&list=UUSlqQfOEtRfJuMPyGMLgFYA`)**를 배치합니다.
   3. **[채택 3 — `Quad / Cube` 키프레임 이징 곡선(`cubic_keyframe_ease`)의 비침습적 UI 적용 (`Rule 28` 절대 준수)]**:
      - 원본 PDF 슬라이드 자체는 절대 확대·회전·왜곡하지 않되(`Rule 28`), 상·하단 여백의 진행 게이지 바 및 장면 전환 페이드에만 3차 곡선(`Cube` 이징: $1-(1-t)^3$)을 적용하여 시각적 피로도를 낮추고 시청 지속시간(APV)을 높입니다.
+
+
+## 35. 인간 고유의 깊은 수학적 통찰 & 직접 만든 오리지널 원문 자료 강조 원칙 (Human-Crafted Original Depth & Non-AI-Slop Authenticity Principle · Rule 35)
+- **핵심 철학 ("기본 아이디어는 직접 사람이 만든 깊이 있는 오리지널 자료이며, 모든 것이 AI에 의해 만들어진 것이 아니다")**:
+  - 최근 무분별한 AI 자동 생성물(환각·얕은 짜깁기 콘텐츠)의 범람으로 인해 시청자와 유튜브 YPP 심사관 모두 단순 AI 생성물에 강한 거부감을 갖습니다.
+  - 반면 `@min7014_ai`와 `mathedu`의 근간은 **사람(수학교육 연구자)이 오랜 세월 직접 고민하고 한 땀 한 땀 작도·설계한 깊이 있는 오리지널 수학자료실(`https://min7014.github.io/`, 847+ 단계별 시각 증명 PDF, 860+ 동적 기하)**입니다.
+  - 따라서 모든 영상 설명란 최상단(1번 문단), 고정댓글, 채널 소개글, `video_board.html`에서 **`"본 콘텐츠는 모든 것이 AI에 의해 만들어진 단순 생성물이 아닙니다. 기본 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 사람이 직접 연구하고 작도한 깊이 있는 오리지널 원문 자료(https://min7014.github.io/)로부터 탄생했으며, AI는 오직 이 깊은 수학적 통찰을 전 세계 학습자에게 전하기 위한 다국어 음성 전달 도구로만 활용되었습니다"`**라는 점을 한/영(`KO/EN`) 양국어로 항상 명확히 강조합니다.

@@ -3610,7 +3610,8 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         orig_yt_url = ((script_doc.get("youtube_urls") or {}).get("orig") or "").strip()
         orig_yt_line_en = f"🎬 Original Video (@min7014 Main Channel): {orig_yt_url}\n" if orig_yt_url else ""
         yt_desc = (
-            f"🏛️ [Original Mathematical Source Materials (https://min7014.github.io/)]\n"
+            f"🏛️ [Deep Human-Crafted Mathematical Insight — Built from Original Human Proofs (https://min7014.github.io/), Not AI-Generated Math]\n"
+            f"The fundamental mathematical ideas, auxiliary lines, and step-by-step proof slides are 100% crafted by a human educator with deep mathematical insight at https://min7014.github.io/ (not all by AI; AI assists voice narration only).\n"
             f"📄 Original Step-by-Step Visual Proof PDF: {pdf_url}\n"
             f"📐 Original Interactive Geometry / Proof Page: {web_url}\n"
             f"{orig_yt_line_en}"
@@ -3624,7 +3625,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"{binge_en}\n\n"
             f"🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: {sub_url}\n"
             f"📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n"
-            f"🎙️ 20+ Language AI Lecture Studio: {studio_url}\n"
+            f"📐 Original Human-Crafted Proof Studio: {studio_url}\n"
             f"Topic ID: [ID: {slug}_EN]\n\n"
             f"⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n{chapters_block}\n\n"
             f"#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #VisualMathCinema #DynamicGeometry #EuclideanGeometry #MathOlympiad #min7014_ai #min7014"
@@ -3682,7 +3683,8 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         orig_yt_url = ((script_doc.get("youtube_urls") or {}).get("orig") or "").strip()
         orig_yt_line_ko = f"🎬 오리지널 원문 영상 (@min7014 본 채널): {orig_yt_url}\n" if orig_yt_url else ""
         yt_desc = (
-            f"🏛️ [오리지널 원문 수학자료실 (https://min7014.github.io/) 바로가기]\n"
+            f"🏛️ [사람이 직접 설계·작도한 깊이 있는 오리지널 수학 자료 기반 (https://min7014.github.io/) — 단순 AI 생성물이 아닙니다]\n"
+            f"본 영상의 기본 수학 아이디어와 단계별 증명 슬라이드는 사람이 직접 깊이 있게 연구·작도한 오리지널 원문 자료이며, 모든 것이 AI에 의해 만들어진 것이 아닙니다(AI는 음성 전달만 보조).\n"
             f"📄 오리지널 단계별 시각 증명 PDF 원문: {pdf_url}\n"
             f"📐 오리지널 동적 기하(GeoGebra / AlgeoMath) 원문 웹페이지: {web_url}\n"
             f"{orig_yt_line_ko}"
@@ -3696,7 +3698,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"{binge_ko}\n\n"
             f"🔔 [@min7014_ai 채널 구독하기]: {sub_url}\n"
             f"📺 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n"
-            f"🎙️ 20개국어 AI 강의 스튜디오: {studio_url}\n"
+            f"📐 오리지널 원문 PDF 단계별 스튜디오: {studio_url}\n"
             f"식별 코드: [ID: {slug}_KO]\n\n"
             f"⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n{chapters_block}\n\n"
             f"#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #수학자료실 #min7014_ai #min7014"
@@ -5546,13 +5548,13 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
                     _c_body = (
                         f"💬 1페이지부터 {sdoc_loc.get('page_count', '')}페이지 중 몇 번째 페이지에서 증명 아이디어가 딱 풀렸나요? 가장 인상 깊었던 단계를 댓글로 알려주세요! 🤩\n"
                         f"▶️ 전 강의 무중단 연속 정주행: {_marathon_u}\n"
-                        f"📐 원본 PDF 슬라이드 & 동적 기하 직접 조작: {_board_u}"
+                        f"🏛️ [사람이 직접 만든 깊이 있는 오리지널 자료]: 기본 수학 아이디어와 도형·보조선은 인간 저작자가 직접 연구·작도한 오리지널 원문(https://min7014.github.io/)이며 단순 AI 생성물이 아닙니다.\n📐 원본 PDF & 동적 기하 직접 조작: {_board_u}"
                     )
                 else:
                     _c_body = (
                         f"💬 Which step (1 to {sdoc_loc.get('page_count', '')}) gave you the biggest 'Aha!' moment in this proof? Let us know below! 🤩\n"
                         f"▶️ Continuous Full-Course Marathon Playlist: {_marathon_u}\n"
-                        f"📐 Interactive Original PDF & Dynamic Geometry Lab: {_board_u}"
+                        f"🏛️ [Deep Human-Crafted Original Material]: The fundamental mathematical ideas and geometric proofs are crafted directly by a human educator at https://min7014.github.io/ — not AI-generated math.\n📐 Original PDF & Dynamic Geometry Lab: {_board_u}"
                     )
                 youtube.commentThreads().insert(
                     part="snippet",
@@ -6331,7 +6333,7 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
             f"⚡ [{clean_en} — {round(duration_sec)}s Visual Math Proof #Shorts]\n"
             f"{hook_en}\n\n"
             f"📐 Interactive Dynamic Geometry & Full 1,113 Math Video Board:\n👉 {board_link}\n\n"
-            f"🔔 Subscribe to Visual Math Proofs AI (@min7014_ai):\n"
+            f"🔔 Subscribe to Original Visual Math Proofs (@min7014_ai — Deep Human-Crafted Proofs from min7014.github.io):\n"
             f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
             f"[ID: {slug}_SHORT_EN]\n"
             f"#Shorts #Math #Geometry #VisualProof #MathShorts #ProofWithoutWords #DynamicGeometry #min7014_ai"

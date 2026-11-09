@@ -629,9 +629,8 @@ def build_ypp_watchtime_masterclasses() -> list:
                 + "\n\n🌐 [수학홈페이지 자체 제작 MathLab 실습 & 16,548문항 퀴즈]:\n"
                 "👉 https://min7014.github.io/mathedu/video_board.html\n"
                 "👉 https://min7014.github.io/\n\n"
-                "📜 [Original Educational Content Statement]\n"
-                "본 영상은 수학자료실(https://min7014.github.io/)의 자체 제작 단계별 기하 작도 슬라이드와 "
-                "수학교육 전문 발문·보조선 분석 해설을 결합한 100% 창작 수학교육 콘텐츠입니다.\n"
+                "🏛️ [사람이 직접 만든 깊이 있는 오리지널 수학 자료 선언 — Not All by AI]\n"
+                "본 영상의 기본 아이디어와 단계별 증명 슬라이드는 모든 것이 AI에 의해 만들어진 것이 아닙니다. 수학교육 연구자가 오랜 세월 직접 고민하고 작도한 깊이 있는 오리지널 원문 자료(https://min7014.github.io/)로부터 제작되었으며, AI는 음성 전달만 보조합니다.\n"
                 f"[ID: {mc_slug}_KO] #수학증명 #기하학 #수능수학 #시각적증명 #피타고라스 #메넬라우스 #체바 #마스터클래스"
             ).replace("<", "＜").replace(">", "＞")
             desc_en = (
@@ -646,9 +645,8 @@ def build_ypp_watchtime_masterclasses() -> list:
                 + "\n\n🌐 [Interactive MathLab, PDF Proofs & 16,548 Free Math Problems (https://min7014.github.io/)]:\n"
                 "👉 https://min7014.github.io/mathedu/video_board.html?lang=en\n"
                 "👉 https://min7014.github.io/\n\n"
-                "📜 [Original Educational Content Statement]\n"
-                "This masterclass is 100% original mathematical education content built upon step-by-step geometric constructions, "
-                "auxiliary line heuristics, and visual proofs from https://min7014.github.io/.\n"
+                "🏛️ [Deep Human-Crafted Original Mathematical Proof Statement — Not All by AI]\n"
+                "The fundamental mathematical ideas and step-by-step proof slides in this masterclass are crafted directly by a human educator with deep mathematical insight at https://min7014.github.io/ (not AI-generated math; AI assists voice narration only).\n"
                 f"[ID: {mc_slug}_EN] #VisualProof #Mathematics #Geometry #Calculus #ConicSections #VisualMathCinema #MathMasterclass #min7014_ai"
             ).replace("<", "＜").replace(">", "＞")
             prev_yt_url = ""
