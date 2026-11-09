@@ -178,7 +178,7 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
         '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;text-decoration:none;border-radius:9px;padding:9px 8px;font-weight:900;font-size:0.76rem;text-align:center;">\n'
         '            🔔 1초 무료 구독 응원 ↗\n'
         '          </a>\n'
-        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-radius:9px;padding:9px 8px;font-weight:900;font-size:0.76rem;text-align:center;">\n'
+        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;text-decoration:none;border-radius:9px;padding:9px 8px;font-weight:900;font-size:0.76rem;text-align:center;">\n'
         '            🇰🇷 37분 마스터클래스 ↗\n'
         '          </a>\n'
         '          <a href="https://youtu.be/9EL8pgqJtkY" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;text-decoration:none;border-radius:9px;padding:9px 8px;font-weight:900;font-size:0.76rem;text-align:center;">\n'
@@ -195,7 +195,7 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
         '          <a href="https://youtu.be/_NRQ5QO3PEY" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#059669,#047857);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
         '            📐 29분 기하 총정리 ↗\n'
         '          </a>\n'
-        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
         '            🇰🇷 37분 마스터클래스 ↗\n'
         '          </a>\n'
         '          <a href="https://youtu.be/eUeFybOs4t0" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
@@ -224,7 +224,7 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
         '          <a href="https://youtu.be/xXER3qQ1JIs" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
         '            🌟 네온 Vol.4 ↗\n'
         '          </a>\n'
-        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
+        '          <a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
         '            🇰🇷 37분 마스터 ↗\n'
         '          </a>\n'
         '          <a href="https://youtu.be/eUeFybOs4t0" target="_blank" rel="noopener" style="flex:1 1 30%;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;text-decoration:none;border-radius:9px;padding:8px 6px;font-weight:900;font-size:0.73rem;text-align:center;">\n'
@@ -315,7 +315,7 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
             re.DOTALL,
         )
         clean_mc_buttons = (
-            '\n              <a href="https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ffe4e6] text-[#be123c] font-bold no-underline hover:underline">🏛️ 88분 방정식·부등식 원본 PDF 직강 ↗</a>'
+            '\n              <a href="https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#e0f2fe] text-[#0369a1] font-bold no-underline hover:underline">🏛️ 88분 방정식·부등식 원본 PDF 직강 ↗</a>'
             '\n              <a href="https://www.youtube.com/watch?v=wc7UyYnA_Go&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ede9fe] text-[#6d28d9] font-bold no-underline hover:underline">📐 62분 벡터·기하 원본 PDF 직강 ↗</a>'
             '\n              <a href="https://www.youtube.com/watch?v=qZ53vyx90ig&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#dbeafe] text-[#1d4ed8] font-bold no-underline hover:underline">🇺🇸 67-Min Original PDF Masterclass (EN) ↗</a>'
             '\n              <a href="mathlab.html" class="px-2.5 py-1 rounded-md bg-[#d1fae5] text-[#047857] font-bold no-underline hover:underline">🛠️ 자체 제작 MathLab v1.4 AI Lab ↗</a>'

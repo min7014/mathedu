@@ -379,3 +379,12 @@ python -X utf8 pr.py status
   2. **[엔진 2 — 채널 커뮤니티 퀴즈·투표 게시물(`CREATOR_POST`) & 오리지널 도형 카드 팩 (`youtube_uploads/community_posts/` & `video_board.html`)]**:
      - **⚖️ 기술적 사실 직언(`Rule 33`)**: Google은 YouTube Data API v3에서 커뮤니티 게시물(`CREATOR_POST`) 생성 API를 공식 지원하지 않으므로(댓글 조회·답글 API만 지원), 커뮤니티 퀴즈·투표 게시물은 `youtube_uploads/community_posts/community_posts_pack.json` 및 `video_board.html`의 **`🗳️ 유튜브 커뮤니티 퀴즈·투표 게시물 복사`** 1-클릭 런처를 통해 생성·발행합니다.
      - 쇼츠와 달리 **유튜브 커뮤니티 투표·퀴즈 게시물 본문의 URL 링크(`https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA`)는 모바일 홈 피드에서 1번 터치로 즉시 클릭 가능**하므로, 모든 커뮤니티 퀴즈·투표 게시물에 51~88분 오리지널 PDF 마스터클래스 직통 링크를 결합하여 유효 공개 시청 시간을 극대화합니다.
+
+
+---
+
+## 37. 강렬한 적색(Red) 배제 및 사색적 블루·틸·인디고 색채 조화 원칙 (Rule 37 · 2026-11-10)
+- **수립 배경**: 회장님 지침(`"빨간색이 너무 강렬한데 이것이 거부감이 들수 있지 않을까?"`)에 따라, 오답 채점·경고·자극적 광고를 연상시키는 강렬한 크림슨/적색(`#e11d48`, `#be123c`, `#ffe4e6`, `RGB(225, 29, 72)`)을 전 영역에서 배제.
+- **전수 적용 내역**:
+  1. `video_board.html` (81건) 및 `index.html` (60건)의 적색/분홍색 배지·버튼·업로드 완료 행 배경(`row-ai-uploaded`)을 **유클리드 로열 블루(`#0284c7`, `#2563eb`) · 에메랄드 틸(`#059669`) · 소프트 아이스 블루(`#f0f9ff`)**로 전면 교체.
+  2. `min7014_video_maker.py` 및 `finance.py`의 썸네일 프레임·상단 배지·`#Shorts` 테두리·채널 배너·구독 워터마크의 `RGB(225, 29, 72)` / `RGB(190, 18, 60)`을 **유클리드 로열 블루 `RGB(2, 132, 199)` 및 딥 사파이어 블루 `RGB(30, 64, 175)`**로 교체하고 전체 썸네일 PNG를 일괄 정화.

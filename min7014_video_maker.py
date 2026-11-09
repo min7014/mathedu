@@ -2249,11 +2249,11 @@ def ensure_synthetic_pdf_for_non_pdf_topic(slug_key: str, item_meta: dict = None
         if idx >= 1:
             draw.polygon([(cx - 160, cy + 110), (cx + 170, cy + 110), (cx + 40, cy - 185)], outline=(15, 23, 42), width=5)
         if idx >= 2:
-            draw.line([(cx + 40, cy - 185), (cx + 40, cy + 110)], fill=(225, 29, 72), width=5)
-            draw.rectangle((cx + 40, cy + 88, cx + 62, cy + 110), outline=(225, 29, 72), width=3)
+            draw.line([(cx + 40, cy - 185), (cx + 40, cy + 110)], fill=(2, 132, 199), width=5)
+            draw.rectangle((cx + 40, cy + 88, cx + 62, cy + 110), outline=(2, 132, 199), width=3)
         if idx >= 3:
             draw.line([(cx - 160, cy + 110), (cx + 125, cy - 45)], fill=(5, 150, 105), width=5)
-            draw.ellipse((cx + 28, cy - 10, cx + 52, cy + 14), fill=(225, 29, 72))
+            draw.ellipse((cx + 28, cy - 10, cx + 52, cy + 14), fill=(2, 132, 199))
         if idx >= 4:
             draw.arc((cx - 160, cy - 160, cx + 160, cy + 160), start=200, end=340, fill=(217, 119, 6), width=5)
         if idx >= 5:
@@ -2265,11 +2265,11 @@ def ensure_synthetic_pdf_for_non_pdf_topic(slug_key: str, item_meta: dict = None
         draw.text((855, 218), st_head, fill=(254, 240, 138), font=f_sub)
 
         y_box = 305 + (idx % 4) * 115
-        draw.rounded_rectangle((830, y_box, W - 90, y_box + 230), radius=18, fill=(255, 241, 242), outline=(225, 29, 72), width=5)
+        draw.rounded_rectangle((830, y_box, W - 90, y_box + 230), radius=18, fill=(240, 249, 255), outline=(2, 132, 199), width=5)
         for li, line in enumerate(textwrap.wrap(st_main, width=24)[:3]):
             draw.text((858, y_box + 28 + li * 42), line, fill=(15, 23, 42), font=f_body)
         for li, line in enumerate(textwrap.wrap(st_sub, width=28)[:2]):
-            draw.text((858, y_box + 155 + li * 32), line, fill=(190, 18, 60), font=f_small)
+            draw.text((858, y_box + 155 + li * 32), line, fill=(30, 64, 175), font=f_small)
 
         draw.rectangle((0, H - 36, W, H), fill=(15, 23, 42))
 
@@ -2843,7 +2843,7 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     sub_dom = (script_doc.get("sub_domain_ko") or "시각적 수학 증명").split("(")[0].strip()
 
     # 좌측 상단 기하 엠블럼 + 단원 배지 + 제목
-    draw.polygon([(26, 48), (42, 20), (58, 48)], outline=(56, 189, 248), fill=(225, 29, 72))
+    draw.polygon([(26, 48), (42, 20), (58, 48)], outline=(56, 189, 248), fill=(2, 132, 199))
     dom_txt = f"[{sub_dom}]" if lang_code != "en" else "[Visual Proof]"
     draw.rounded_rectangle([70, 18, 70 + len(dom_txt) * 16 + 18, 54], radius=8, fill=(30, 58, 138), outline=(56, 189, 248), width=1)
     draw.text((79, 24), dom_txt, fill=(125, 211, 252), font=font_ribbon)
@@ -2891,9 +2891,9 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
         if (bx1 - bx0) > 26 and (by1 - by0) > 26:
             if stage == 3:
                 draw.rounded_rectangle([bx0 - 4, by0 - 4, bx1 + 4, by1 + 4], radius=12, outline=(250, 204, 21), width=2)
-                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=3)
+                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(2, 132, 199), width=3)
             else:
-                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(225, 29, 72), width=3)
+                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(2, 132, 199), width=3)
 
     step_title_str = page_info.get("step_title") or (f"Step {scene_idx}" if lang_code == "en" else f"{scene_idx}단계 핵심 원리")
 
@@ -2982,14 +2982,14 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
 
     sx = W - sw - 34
     sy = (H - sh) // 2
-    draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(225, 29, 72), outline=(251, 191, 36), width=4)
+    draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(2, 132, 199), outline=(251, 191, 36), width=4)
     thumb.paste(slide_resized, (sx, sy))
     # [Rule 28 — 오리지널 PDF 슬라이드 무결성 보존]: 썸네일 우측에 배치된 원문 PDF 작도 도형 위에는
     # 원문 수식·도형을 가리는 불투명 배지나 붉은 원을 덧그리지 않고 오리지널 도형 원형 그대로 선명하게 노출합니다.
 
     # 좌측 상단 후킹 배지
     badge_txt = vprof["badge_en"] if is_en else vprof["badge_ko"]
-    draw.rounded_rectangle([38, 42, 548, 102], radius=16, fill=(225, 29, 72), outline=(254, 240, 138), width=2)
+    draw.rounded_rectangle([38, 42, 548, 102], radius=16, fill=(2, 132, 199), outline=(254, 240, 138), width=2)
     draw.text((56, 56), badge_txt, fill=(255, 255, 255), font=get_font_for_lang("ko", 25, bold=True))
 
     # 좌측 초대형 2줄 바이럴 카피 (모바일 가독성 극대화)
@@ -3040,13 +3040,13 @@ def generate_question_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
       '❓ 어디에 보조선을 그어야 할까? / 🙋 3초만 먼저 생각해보세요!' 발문 훅으로 클릭률(CTR)을 극대화합니다.
     """
     W, H = 1280, 720
-    thumb = Image.new("RGB", (W, H), (28, 9, 24))
+    thumb = Image.new("RGB", (W, H), (15, 23, 42))
     draw = ImageDraw.Draw(thumb)
 
     for gx in range(0, W, 80):
-        draw.line([(gx, 0), (gx, H)], fill=(48, 16, 38), width=1)
+        draw.line([(gx, 0), (gx, H)], fill=(30, 41, 59), width=1)
     for gy in range(0, H, 80):
-        draw.line([(0, gy), (W, gy)], fill=(48, 16, 38), width=1)
+        draw.line([(0, gy), (W, gy)], fill=(30, 41, 59), width=1)
 
     is_en = (lang_code == "en")
     key_idx = max(0, len(doc) // 2)
@@ -3058,11 +3058,11 @@ def generate_question_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
 
     sx = W - sw - 34
     sy = (H - sh) // 2
-    draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(190, 18, 60), outline=(250, 204, 21), width=4)
+    draw.rounded_rectangle([sx - 12, sy - 12, sx + sw + 12, sy + sh + 12], radius=22, fill=(30, 64, 175), outline=(250, 204, 21), width=4)
     thumb.paste(slide_resized, (sx, sy))
 
     badge_txt = "❓ QUESTION-ASKING CLASSROOM" if is_en else "❓ 질문하는 수학 수업 · 탐구 에디션"
-    draw.rounded_rectangle([38, 42, 558, 102], radius=16, fill=(190, 18, 60), outline=(250, 204, 21), width=2)
+    draw.rounded_rectangle([38, 42, 558, 102], radius=16, fill=(30, 64, 175), outline=(250, 204, 21), width=2)
     draw.text((56, 56), badge_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 25, bold=True))
 
     cat_type = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
@@ -4095,7 +4095,7 @@ def render_question_classroom_frame_1080p(pdf_page, page_info, script_doc, lang_
         if lang_code == "en"
         else f"❓ [질문하는 수업 버전] STEP {scene_idx}/{tot_scenes} · Notice & Wonder"
     )
-    draw.rounded_rectangle([W - 565, 14, W - 24, 58], radius=12, fill=(190, 18, 60), outline=(254, 240, 138), width=2)
+    draw.rounded_rectangle([W - 565, 14, W - 24, 58], radius=12, fill=(30, 64, 175), outline=(254, 240, 138), width=2)
     draw.text((W - 548, 23), q_right_badge, fill=(255, 255, 255), font=font_q_badge)
 
     # 오리지널 PDF 슬라이드(y: 86~810)를 전혀 가리지 않도록 상단 플로팅 배너 제거 (하단 리본 바에 발문이 깔끔하게 표시됨)
@@ -6405,7 +6405,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
             # 상단 알고리즘 후킹 배너
             draw.rounded_rectangle((44, 58, 1036, 294), radius=28, fill=(23, 37, 84), outline=(56, 189, 248), width=3)
-            draw.rounded_rectangle((74, 78, 690, 130), radius=18, fill=(225, 29, 72))
+            draw.rounded_rectangle((74, 78, 690, 130), radius=18, fill=(2, 132, 199))
             badge_txt = (vprof.get("badge_en") or "⚡ 45s Visual Math Proof #Shorts") if lang_code == "en" else (vprof.get("badge_ko") or "⚡ 99%가 공식만 외운 시각적 증명")
             draw.text((92, 86), badge_txt[:34], fill=(255, 255, 255), font=font_sub)
 
@@ -6448,7 +6448,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 # [v6.0 Seamless Infinite Loop Bridge]: 마지막 장면의 끝 프레임을 출발 도형(doc[0])으로 연결하여 0:00과 무결점 루프 완성!
                 doc_frames = list(doc_frames) + [0]
 
-            draw.rounded_rectangle((44, 1345, 1036, 1795), radius=28, fill=(15, 23, 42), outline=(225, 29, 72), width=3)
+            draw.rounded_rectangle((44, 1345, 1036, 1795), radius=28, fill=(15, 23, 42), outline=(2, 132, 199), width=3)
             step_chip = (
                 f"💡 핵심 시각 증명 STEP {seq_idx}/{total_seqs} (PDF {doc_frames[0]+1}▸{doc_frames[-1]+1}/{len(doc)})"
                 if lang_code == "ko"
@@ -6458,7 +6458,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             cap_lines = textwrap.wrap(short_narration, width=22 if lang_code == "ko" else 34)[:5]
 
             draw.rounded_rectangle((44, 1810, 1036, 1892), radius=20, fill=(30, 58, 138), outline=(251, 191, 36), width=3)
-            draw.rounded_rectangle((754, 1364, 1014, 1416), radius=16, fill=(225, 29, 72), outline=(254, 240, 138), width=2)
+            draw.rounded_rectangle((754, 1364, 1014, 1416), radius=16, fill=(2, 132, 199), outline=(254, 240, 138), width=2)
             sub_pill_txt = "🔔 SUBSCRIBE" if lang_code == "en" else "🔔 구독 @min7014_ai"
             draw.text((774, 1375), sub_pill_txt, fill=(255, 255, 255), font=get_font_for_lang("ko", 23, bold=True))
             cta_short_txt = (
@@ -6507,8 +6507,8 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 bbox = p_info.get("diff_bbox")
                 if seq_idx == 1 and fi_idx == 0:
                     cx_s, cy_s, r_s = ox + nw // 2, oy + nh // 2, 86
-                    f_draw.ellipse((cx_s - r_s, cy_s - r_s, cx_s + r_s, cy_s + r_s), outline=(225, 29, 72), width=7)
-                    f_draw.rounded_rectangle((120, oy + 14, 960, oy + 76), radius=16, fill=(225, 29, 72), outline=(254, 240, 138), width=3)
+                    f_draw.ellipse((cx_s - r_s, cy_s - r_s, cx_s + r_s, cy_s + r_s), outline=(2, 132, 199), width=7)
+                    f_draw.rounded_rectangle((120, oy + 14, 960, oy + 76), radius=16, fill=(2, 132, 199), outline=(254, 240, 138), width=3)
                     sw_txt = "⚡ WAIT! Why Does This Always Work? (Watch 40s)" if lang_code == "en" else "⚡ 잠깐! 왜 항상 성립할까? 40초 시각적 증명!"
                     f_draw.text((152, oy + 26), sw_txt, fill=(255, 255, 255), font=font_sub)
                 elif bbox and fi_idx >= len(doc_frames) - 2 and doc_f_i > 0:
@@ -6517,7 +6517,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                     bx1 = min(ox + nw - 4, ox + int(bbox[2] * nw) + 10)
                     by1 = min(oy + nh - 4, oy + int(bbox[3] * nh) + 10)
                     if (bx1 - bx0) > 24 and (by1 - by0) > 24:
-                        f_draw.rounded_rectangle((bx0, by0, bx1, by1), radius=10, outline=(225, 29, 72), width=5)
+                        f_draw.rounded_rectangle((bx0, by0, bx1, by1), radius=10, outline=(2, 132, 199), width=5)
                 fp = tmp_dir / f"short_{seq_idx:02d}_f{fi_idx:02d}.png"
                 frame_canvas.save(fp)
                 f_lines.append(f"file '{fp.as_posix()}'")
@@ -6750,7 +6750,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
             # 1) 상단 질문하는 수업 #Shorts 헤더 (y=48..268)
             draw.rounded_rectangle((40, 48, 1040, 268), radius=26, fill=(76, 5, 25), outline=(251, 191, 36), width=3)
-            draw.rounded_rectangle((68, 68, 680, 116), radius=16, fill=(225, 29, 72))
+            draw.rounded_rectangle((68, 68, 680, 116), radius=16, fill=(2, 132, 199))
             badge_txt = "❓ 질문하는 수업 · 45초 발문 #Shorts" if lang_code == "ko" else "❓ Question-Asking Classroom #Shorts"
             draw.text((86, 76), badge_txt, fill=(255, 255, 255), font=font_sub)
 
@@ -6767,14 +6767,14 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             draw.rounded_rectangle((68, 242, 68 + max(24, prog_w), 254), radius=6, fill=(251, 191, 36))
 
             # 2) 상단-중앙 핵심 발문 플로팅 카드 (y=282..452)
-            draw.rounded_rectangle((40, 282, 1040, 452), radius=22, fill=(255, 241, 242), outline=(244, 63, 94), width=3)
+            draw.rounded_rectangle((40, 282, 1040, 452), radius=22, fill=(240, 249, 255), outline=(14, 165, 233), width=3)
             if seq_idx == 1:
                 q_type_badge = "👁️ [1단계 관찰 질문 · Notice & Wonder]" if lang_code == "ko" else "👁️ [Stage 1 · Notice & Wonder Question]"
             elif seq_idx == total_seqs:
                 q_type_badge = "🔀 [3단계 확장 질문 · What-If-Not 조건 변형]" if lang_code == "ko" else "🔀 [Stage 3 · What-If-Not Question]"
             else:
                 q_type_badge = f"🧭 [2단계 보조선 발문 · Socratic Inquiry {seq_idx}/{total_seqs}]" if lang_code == "ko" else f"🧭 [Stage 2 · Socratic Auxiliary Line Q{seq_idx}]"
-            draw.text((68, 296), q_type_badge, fill=(190, 18, 60), font=font_sub)
+            draw.text((68, 296), q_type_badge, fill=(30, 64, 175), font=font_sub)
 
             q_lines = textwrap.wrap(step_q, width=25 if lang_code == "ko" else 36)[:2]
             for qi, ql in enumerate(q_lines):
@@ -6854,7 +6854,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
                     p_lbl = "🔄 [무한 루프 연결] 처음 도형의 출발 질문과 다시 비교해 보세요!" if lang_code == "ko" else "🔄 [Seamless Loop] Compare with the starting figure again!"
                     f_draw.text((90, 1391), p_lbl, fill=(254, 240, 138), font=get_font_for_lang(lang_code, 24, bold=True))
                 elif is_think_phase:
-                    f_draw.rounded_rectangle((70, 1382, 990, 1432), radius=14, fill=(225, 29, 72))
+                    f_draw.rounded_rectangle((70, 1382, 990, 1432), radius=14, fill=(2, 132, 199))
                     p_lbl = "🙋 [Phase 1 · 발문 타임] 잠깐! 화면을 보고 먼저 스스로 추론해 보세요!" if lang_code == "ko" else "🙋 [Phase 1 · Inquiry] Pause & think about the question first!"
                     f_draw.text((90, 1391), p_lbl, fill=(255, 255, 255), font=get_font_for_lang(lang_code, 24, bold=True))
                 else:
@@ -6870,7 +6870,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 resized = slide_pil.resize((nw, nh), Image.Resampling.LANCZOS)
                 ox = (1080 - nw) // 2
                 oy = 472 + (860 - nh) // 2
-                border_col = (244, 63, 94) if is_think_phase else (16, 185, 129)
+                border_col = (14, 165, 233) if is_think_phase else (16, 185, 129)
                 f_draw.rounded_rectangle((ox - 10, oy - 10, ox + nw + 10, oy + nh + 10), radius=20, fill=(255, 255, 255), outline=border_col, width=4)
                 frame_canvas.paste(resized, (ox, oy))
 
@@ -6881,7 +6881,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
                     bx1 = min(ox + nw - 4, ox + int(bbox[2] * nw) + 10)
                     by1 = min(oy + nh - 4, oy + int(bbox[3] * nh) + 10)
                     if (bx1 - bx0) > 24 and (by1 - by0) > 24:
-                        f_draw.rounded_rectangle((bx0, by0, bx1, by1), radius=10, outline=(225, 29, 72), width=6)
+                        f_draw.rounded_rectangle((bx0, by0, bx1, by1), radius=10, outline=(2, 132, 199), width=6)
 
                 fp = tmp_dir / f"qshort_{seq_idx:02d}_f{fi_idx:02d}.png"
                 frame_canvas.save(fp)
@@ -7461,7 +7461,7 @@ def upload_shorts_via_studio_browser(slug_list=None, langs=("ko",), privacy="pub
                     try:
                         page.evaluate("""() => {
                             const b = document.createElement('div');
-                            b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:#e11d48;color:#fff;padding:16px 22px;font-size:18px;font-weight:bold;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:sans-serif;';
+                            b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:#0284c7;color:#fff;padding:16px 22px;font-size:18px;font-weight:bold;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:sans-serif;';
                             b.innerHTML = '🤖 [@min7014_ai 5대 #Shorts 자동 업로드 로봇] 이 창에서 딱 1번만 로그인해 주시면 지금 즉시 5개 #Shorts를 로봇이 자동으로 모두 업로드합니다!';
                             document.body.prepend(b);
                         }""")
@@ -7920,7 +7920,7 @@ def generate_channel_banner_2560x1440():
     # 데스크톱/모바일 안전 영역(Safe Zone: y=508..931, x=507..2053) 강조 카드
     draw.rectangle((0, 500, W, 940), fill=(15, 23, 42))
     draw.line([(0, 500), (W, 500)], fill=(56, 189, 248), width=4)
-    draw.line([(0, 940), (W, 940)], fill=(225, 29, 72), width=4)
+    draw.line([(0, 940), (W, 940)], fill=(2, 132, 199), width=4)
 
     # 좌·우측에 실제 대표 시각 증명 썸네일 카드 배치 (Safe Area 내부 좌우 날개)
     thumb_left = YT_PKG_DIR / "math20250130001_ko_thumb.png"
@@ -7935,7 +7935,7 @@ def generate_channel_banner_2560x1440():
     if thumb_right.exists():
         try:
             tr = Image.open(thumb_right).convert("RGB").resize((320, 180), Image.Resampling.LANCZOS)
-            draw.rounded_rectangle((1706, 624, 2034, 812), radius=14, fill=(225, 29, 72))
+            draw.rounded_rectangle((1706, 624, 2034, 812), radius=14, fill=(2, 132, 199))
             img.paste(tr, (1710, 628))
         except Exception:
             pass
@@ -7946,7 +7946,7 @@ def generate_channel_banner_2560x1440():
     f_info = get_font_for_lang("ko", 26, bold=True)
 
     # 중앙 안전 영역(x=880..1680) 핵심 타이포그래피
-    draw.rounded_rectangle((900, 538, 1660, 588), radius=24, fill=(225, 29, 72))
+    draw.rounded_rectangle((900, 538, 1660, 588), radius=24, fill=(2, 132, 199))
     draw.text((932, 548), "🤖 VISUAL MATH PROOF VAULT · @min7014_ai", fill=(255, 255, 255), font=f_badge)
 
     draw.text((895, 612), "오리지널 단계별 시각적 수학 증명", fill=(255, 255, 255), font=f_title)
@@ -7967,7 +7967,7 @@ def generate_channel_watermark_150x150():
     img = Image.new("RGBA", (150, 150), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    draw.rounded_rectangle((6, 6, 144, 144), radius=28, fill=(225, 29, 72, 235), outline=(255, 255, 255, 255), width=4)
+    draw.rounded_rectangle((6, 6, 144, 144), radius=28, fill=(2, 132, 199, 235), outline=(255, 255, 255, 255), width=4)
     f_top = get_font_for_lang("en", 22, bold=True)
     f_mid = get_font_for_lang("ko", 28, bold=True)
     f_bot = get_font_for_lang("en", 16, bold=True)
