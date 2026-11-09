@@ -884,7 +884,9 @@ def inject_high_rpm_and_ypp_compliance_metadata() -> int:
                 if "[공식 창작 교육 콘텐츠 안내]" not in desc and "[Original Educational Content]" not in desc and "_youtube_meta.json" in meta_file.name:
                     desc = desc + stmt
                     changed = True
-                mdata[lc]["description"] = desc
+                import min7014_video_maker as _vm_s
+                mdata[lc]["title"] = _vm_s.sanitize_youtube_title(mdata[lc].get("title", ""))
+                mdata[lc]["description"] = _vm_s.sanitize_youtube_description(desc)
 
                 if not mdata[lc].get("pinned_comment"):
                     if lc == "ko":
@@ -1317,73 +1319,67 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
     uploaded_items = []
     total_uploaded = 0
 
-    for _round in range(2):
-        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-            break
-
-        # [Slot A — 2슬롯 (33%)]: 원본 PDF 기반 36~231분 초장편 마스터클래스 최우선 업로드 (1인당 유효 공개 시청시간 10~58배 적립!)
+    # [Slot A — 2슬롯 (33%)]: 원본 PDF 기반 33~88분 황금구간 마스터클래스 2편(KO/EN) 업로드 (유효 공개 시청시간 10~22배 적립!)
+    if total_uploaded < max_wave_uploads and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
         mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=2)
         if mc_cnt > 0:
             total_uploaded += mc_cnt
             uploaded_items.append({"type": "pdf_masterclass", "count": mc_cnt})
-        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+
+    # [Slot B — 2슬롯 (33%)]: 원본 PDF 한 땀 한 땀 1080p 단계별 장편 본편 (KO/EN) 2편 선(先)업로드 (장시간 다페이지 우선)
+    slot_b_uploaded = 0
+    for c_slug in ordered_slugs:
+        if total_uploaded >= max_wave_uploads or slot_b_uploaded >= 2 or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
+        sp = SCRIPTS_DIR / f"{c_slug}.json"
+        if not sp.exists():
+            continue
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        yu = sdoc.get("youtube_urls") or {}
+        missing_std = tuple(
+            lc for lc in ("ko", "en")
+            if not (yu.get(lc) or "").strip()
+            and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").exists()
+            and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
+        )
+        if missing_std:
+            res_std = vmaker.upload_slug_to_youtube(c_slug, langs=missing_std, privacy="public")
+            if res_std:
+                n_up = len([k for k, v in res_std.items() if v])
+                if n_up > 0:
+                    total_uploaded += n_up
+                    slot_b_uploaded += n_up
+                    uploaded_items.append({"type": "pdf_1080p", "slug": c_slug, "langs": list(res_std.keys())})
 
-        # [Slot B — 2슬롯 (33%)]: 원본 PDF 한 땀 한 땀 1080p 단계별 장편 본편 (KO/EN) 선(先)업로드 (장시간 다페이지 우선)
-        for c_slug in ordered_slugs:
-            if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-                break
-            sp = SCRIPTS_DIR / f"{c_slug}.json"
-            if not sp.exists():
-                continue
-            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-            yu = sdoc.get("youtube_urls") or {}
-            missing_std = tuple(
-                lc for lc in ("ko", "en")
-                if not (yu.get(lc) or "").strip()
-                and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").exists()
-                and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
-            )
-            if missing_std:
-                res_std = vmaker.upload_slug_to_youtube(c_slug, langs=missing_std, privacy="public")
-                if res_std:
-                    n_up = len([k for k, v in res_std.items() if v])
-                    if n_up > 0:
-                        total_uploaded += n_up
-                        uploaded_items.append({"type": "pdf_1080p", "slug": c_slug, "langs": list(res_std.keys())})
-                break
-
-        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+    # [Slot C — 2슬롯 (33%)]: 채널 홍보 & 신규 구독자 1,000명 유입 메가폰 9:16 #Shorts (KO/EN) 2편 후(後)업로드!
+    # ★ 핵심 원칙(본편 선업로드 ➔ 직결 쇼츠 후업로드): 반드시 1080p 장편 본편(youtube_urls[lc])이 이미 유튜브에 게시되어 있는
+    #    주제의 #Shorts만 업로드하여, 쇼츠 유입 시청자를 설명란 1번 줄 & 고정댓글의 본편+정주행 플레이리스트(&list=UUSlqQfOEtRfJuMPyGMLgFYA)로
+    #    즉시 유입시켜 '채널 홍보(조회수·구독자)'와 '유효 공개 시청시간(4,000시간)' 두 마리 토끼를 동시에 잡습니다!
+    slot_c_uploaded = 0
+    for s_slug in ordered_slugs:
+        if total_uploaded >= max_wave_uploads or slot_c_uploaded >= 2 or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
-
-        # [Slot C — 2슬롯 (33%)]: 채널 홍보 & 신규 구독자 1,000명 유입 메가폰 9:16 #Shorts (KO/EN) 후(後)업로드!
-        # ★ 핵심 원칙(본편 선업로드 ➔ 직결 쇼츠 후업로드): 반드시 1080p 장편 본편(youtube_urls[lc])이 이미 유튜브에 게시되어 있는
-        #    주제의 #Shorts만 업로드하여, 쇼츠 유입 시청자를 설명란 1번 줄 & 고정댓글의 본편+정주행 플레이리스트(&list=UUSlqQfOEtRfJuMPyGMLgFYA)로
-        #    즉시 유입시켜 '채널 홍보(조회수·구독자)'와 '유효 공개 시청시간(4,000시간)' 두 마리 토끼를 동시에 잡습니다!
-        for s_slug in ordered_slugs:
-            if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-                break
-            sp = SCRIPTS_DIR / f"{s_slug}.json"
-            if not sp.exists():
-                continue
-            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-            yu = sdoc.get("youtube_urls") or {}
-            su = sdoc.get("shorts_urls") or {}
-            missing_sh = tuple(
-                lc for lc in ("ko", "en")
-                if not (su.get(lc) or "").strip()
-                and (yu.get(lc) or "").strip()
-                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").exists()
-                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
-            )
-            if missing_sh:
-                res_sh = vmaker.upload_short_to_youtube(s_slug, langs=missing_sh, privacy="public")
-                if res_sh:
-                    n_up = len([k for k, v in res_sh.items() if v])
-                    if n_up > 0:
-                        total_uploaded += n_up
-                        uploaded_items.append({"type": "pdf_promo_short_paired", "slug": s_slug, "langs": list(res_sh.keys())})
-                break
+        sp = SCRIPTS_DIR / f"{s_slug}.json"
+        if not sp.exists():
+            continue
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        yu = sdoc.get("youtube_urls") or {}
+        su = sdoc.get("shorts_urls") or {}
+        missing_sh = tuple(
+            lc for lc in ("ko", "en")
+            if not (su.get(lc) or "").strip()
+            and (yu.get(lc) or "").strip()
+            and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").exists()
+            and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
+        )
+        if missing_sh:
+            res_sh = vmaker.upload_short_to_youtube(s_slug, langs=missing_sh, privacy="public")
+            if res_sh:
+                n_up = len([k for k, v in res_sh.items() if v])
+                if n_up > 0:
+                    total_uploaded += n_up
+                    slot_c_uploaded += n_up
+                    uploaded_items.append({"type": "pdf_promo_short_paired", "slug": s_slug, "langs": list(res_sh.keys())})
 
     if total_uploaded > 0:
         analyze_revenue_pipeline()

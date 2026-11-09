@@ -3458,6 +3458,69 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
     return _balance_parentheses(cut)
 
 
+def sanitize_youtube_title(title: str, max_chars: int = 98) -> str:
+    """
+    [YouTube Data API v3 snippet.title 무결성 보장]
+    - YouTube API가 금지하는 부등호('<', '>')를 수학 유니코드 부등호('＜', '＞')로 자동 치환
+    - 최대 98자 및 최대 96 UTF-8 바이트 이내 보장
+    """
+    t = str(title or "").replace(" <= ", " ≤ ").replace(" >= ", " ≥ ").replace("<", "＜").replace(">", "＞").strip()
+    t = _balance_parentheses(t[:max_chars])
+    while len(t.encode("utf-8")) > 96 and len(t) > 10:
+        t = t[:-1].rstrip()
+    return _balance_parentheses(t)
+
+
+def sanitize_youtube_description(desc: str, max_utf8_bytes: int = 4750) -> str:
+    """
+    [YouTube Data API v3 snippet.description 무결성 보장 (Rule 5 전수 방어)]
+    1) YouTube API가 금지하는 '<', '>' 기호를 수학 전각 부등호('＜', '＞')로 100% 치환 (invalidDescription 원천 차단)
+    2) YouTube API의 5,000 UTF-8 바이트 한도를 절대 초과하지 않도록 줄 단위로 안전하게 압축 (00:00 첫 챕터 및 하단 해시태그 보존)
+    """
+    d = str(desc or "").replace(" <= ", " ≤ ").replace(" >= ", " ≥ ").replace("<", "＜").replace(">", "＞").strip()
+    if len(d.encode("utf-8")) <= max_utf8_bytes:
+        return d
+
+    lines = d.splitlines()
+    non_chap_head = []
+    chap_lines = []
+    non_chap_tail = []
+    in_chap = False
+    for ln in lines:
+        s_ln = ln.strip()
+        is_ts = bool(re.match(r"^\d{2}:\d{2}(?::\d{2})?\s+", s_ln))
+        if is_ts:
+            in_chap = True
+            if len(s_ln) > 48:
+                s_ln = s_ln[:45].rstrip() + "..."
+            chap_lines.append(s_ln)
+        elif not in_chap:
+            non_chap_head.append(ln)
+        else:
+            non_chap_tail.append(ln)
+
+    while len(chap_lines) > 12:
+        candidate = "\n".join(non_chap_head + chap_lines + non_chap_tail)
+        if len(candidate.encode("utf-8")) <= max_utf8_bytes:
+            return candidate
+        mid = chap_lines[1:-1:2]
+        chap_lines = [chap_lines[0]] + mid + [chap_lines[-1]]
+
+    rebuilt = "\n".join(non_chap_head + chap_lines + non_chap_tail)
+    if len(rebuilt.encode("utf-8")) <= max_utf8_bytes:
+        return rebuilt
+
+    out_lines = rebuilt.splitlines()
+    last_tag_line = out_lines[-1] if out_lines and out_lines[-1].strip().startswith("#") else ""
+    body_lines = out_lines[:-1] if last_tag_line else out_lines
+    while body_lines and len(("\n".join(body_lines + ([last_tag_line] if last_tag_line else []))).encode("utf-8")) > max_utf8_bytes:
+        body_lines.pop()
+    final_d = "\n".join(body_lines + ([last_tag_line] if last_tag_line else []))
+    while len(final_d.encode("utf-8")) > max_utf8_bytes and len(final_d) > 50:
+        final_d = final_d[:-10].rstrip()
+    return final_d
+
+
 def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     """유튜브 알고리즘(클릭률 CTR, 시청 지속시간, 세션 연쇄 시청, 댓글 참여, 검색 SEO)에 최적화된 제목·설명·태그·자막을 생성합니다."""
     slug = script_doc["slug"]
@@ -3640,8 +3703,8 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         "channel_id": channel_id,
         "channel_url": channel_url,
         "studio_upload_url": studio_upload_url,
-        "title": yt_title,
-        "description": yt_desc,
+        "title": sanitize_youtube_title(yt_title),
+        "description": sanitize_youtube_description(yt_desc),
         "tags": yt_tags,
         "quiz_comment": quiz_en if lang_code == "en" else quiz_ko,
         "categoryId": "27",
@@ -4498,7 +4561,11 @@ def queue_and_delete_existing_youtube_videos_for_slug(
     execute_delete=True,
     execute_delete_now=None,
     exclude_video_ids=None,
+    force_manual_delete=False,
 ):
+    # [Rule 31.5 유효 공개 시청시간 영구 보존 락]: 이미 라이브 중인 유튜브 영상의 URL을 지우거나 삭제 큐에 넣지 않음
+    if not force_manual_delete:
+        return []
     """
     [업데이트된 영상의 기존 유튜브 채널 영상 자동 삭제 & 교체 큐 등록 엔진]
     특정 주제(slug_key)의 영상이 새로 렌더링/업데이트되거나 재업로드될 때:
@@ -4666,10 +4733,10 @@ def scan_rss_and_queue_outdated_channel_videos(execute_delete_now=False):
 
 def process_youtube_delete_queue(max_deletions=10):
     """
-    [불일치 및 구버전 영상 핀포인트 삭제 엔진 (YouTube Data API v3 · 쿼터 절약형)]
-    - 채널 공개 RSS(15개 미만 시 채널 전체 영상 포함)에 이미 존재하지 않는 ID나 타 채널(403) ID는 API 호출 없이 즉시 정리하여
-      하루 업로드 쿼터(1,600 유닛/편)가 불필요한 delete 호출로 소모되지 않도록 보호합니다.
+    [Rule 31.5: 유효 공개 시청시간(Valid Public Watch Hours) 100% 보존을 위한 자동 삭제 영구 차단]
+    - 라이브 영상 삭제 시 누적 시청시간이 차감되고 쿼터(50유닛/건)가 소모되므로 자동 삭제 큐 실행을 비활성화합니다.
     """
+    return 0
     scan_rss_and_queue_outdated_channel_videos()
     dq_path = ROOT_DIR / "video_lectures" / "youtube_delete_queue.json"
     if not dq_path.exists():
@@ -4768,6 +4835,7 @@ def verify_video_content_integrity(slug_key: str) -> dict:
     total_pdf_pages = int(sdoc.get("page_count") or len(pages))
     if 0 < total_pdf_pages <= 60 and len(pages) != total_pdf_pages:
         return {"ok": False, "reason": f"grouped_pages_not_1to1:{len(pages)}/{total_pdf_pages}"}
+    from datetime import datetime
     rule28_cutoff_ts = datetime(2026, 11, 8, 20, 0, 0).timestamp()
     for _lc_chk in ("ko", "en"):
         mp4_chk = YT_UPLOADS_DIR / slug_key / f"{slug_key}_{_lc_chk}.mp4"
@@ -5412,14 +5480,14 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
                     raw_t = str(t_trans.get(loc_code) or sdoc_loc.get("title_en") or sdoc_loc.get("title") or slug_key).strip()
                     loc_t = f"📐 {raw_t} — Step-by-Step Visual Math Proof (1080p) | @min7014_ai"[:100]
                     loc_d = str(meta_all.get("en", meta).get("description") or meta["description"])[:4900]
-                video_localizations[loc_code] = {"title": loc_t, "description": loc_d}
+                video_localizations[loc_code] = {"title": sanitize_youtube_title(loc_t), "description": sanitize_youtube_description(loc_d)}
         except Exception:
             video_localizations = {}
 
         body = {
             "snippet": {
-                "title": meta["title"],
-                "description": meta["description"],
+                "title": sanitize_youtube_title(meta["title"]),
+                "description": sanitize_youtube_description(meta["description"]),
                 "tags": meta["tags"],
                 "categoryId": meta.get("categoryId", "27"),
                 "defaultLanguage": lang_code,
@@ -6237,8 +6305,8 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
         tags = ["Shorts", "MathShorts", "Math", "Geometry", "VisualProof", concise_en, "VisualMathCinema", "ProofWithoutWords", "min7014_ai", "DynamicGeometry"]
 
     return {
-        "title": _balance_parentheses(short_title[:98]),
-        "description": desc,
+        "title": sanitize_youtube_title(short_title),
+        "description": sanitize_youtube_description(desc),
         "tags": tags,
         "categoryId": "27",
         "defaultLanguage": lang_code,
@@ -6954,8 +7022,8 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", repl
 
         body = {
             "snippet": {
-                "title": smeta["title"],
-                "description": smeta["description"],
+                "title": sanitize_youtube_title(smeta["title"]),
+                "description": sanitize_youtube_description(smeta["description"]),
                 "tags": smeta["tags"],
                 "categoryId": smeta.get("categoryId", "27"),
                 "defaultLanguage": lc,
@@ -7098,8 +7166,8 @@ def upload_question_classroom_to_youtube(slug_key, langs=("ko",), privacy="publi
         )
         body = {
             "snippet": {
-                "title": _balance_parentheses(q_title),
-                "description": q_desc,
+                "title": sanitize_youtube_title(q_title),
+                "description": sanitize_youtube_description(q_desc),
                 "tags": ["질문하는수업", "수학증명", "기하학", "소크라테스발문", "시각적증명", "mathedu", slug_key],
                 "categoryId": "27",
                 "defaultLanguage": lc,
@@ -7223,8 +7291,8 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public", 
         )
         body = {
             "snippet": {
-                "title": qsh_title,
-                "description": qsh_desc,
+                "title": sanitize_youtube_title(qsh_title),
+                "description": sanitize_youtube_description(qsh_desc),
                 "tags": ["Shorts", "질문하는수업", "수학숏폼", "기하학", "시각적증명", "mathedu", slug_key],
                 "categoryId": "27",
                 "defaultLanguage": lc,
