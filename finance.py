@@ -448,7 +448,9 @@ def build_ypp_watchtime_masterclasses() -> list:
         en_mp4_p = YT_UPLOADS_DIR / sk / f"{sk}_en.mp4"
         if ko_mp4_p.exists() and en_mp4_p.exists():
             all_ko_candidates.append(sk)
-            if ko_mp4_p.stat().st_mtime >= rule28_cutoff_ts and en_mp4_p.stat().st_mtime >= rule28_cutoff_ts:
+            # [비판적 교정]: 이미 단독으로 20~48분인 초대형 단원(2021051401 등)은 단독 풀코스로 업로드하고,
+            # 마스터클래스 합본은 5~18분 단원들을 묶어 '시청 지속율(APV)과 클릭률(CTR)이 가장 높은 25~45분 골든존'으로 편성합니다!
+            if ko_mp4_p.stat().st_mtime >= rule28_cutoff_ts and en_mp4_p.stat().st_mtime >= rule28_cutoff_ts and 180.0 <= ko_dur_chk <= 1100.0:
                 post_rule28_candidates.append((ko_dur_chk, sk))
 
     # [Rule 28·29 무가림 1:1 오리지널 PDF 전용 장편 마스터클래스 우선 편성 (유효 공개 시청시간 극대화)]

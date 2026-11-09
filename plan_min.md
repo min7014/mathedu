@@ -344,6 +344,7 @@ python -X utf8 pr.py status
 - ✅ **30. 8대 핵심 에이전트 실시간 회의 생중계 및 자기교정 원칙 (Live Inter-Agent Boardroom Broadcast & Real-Time Self-Correction Principle)**
 - ✅ **31. 유튜브 유효 공개 시청 시간(Valid Public Watch Hours) 4,000시간 최단기 돌파 5대 철칙 (100% Long-Form Watch-Hour All-In Principle)**
 - ✅ **32. 8대 본부장 에이전트 '입체적 다각도 교차 검증(Devil's Advocate & Second-Order Effect Pre-Audit)' 자율 판단 원칙**
+- ✅ **33. 무비판적 순응(Yes-Man) 절대 금지 · 비판적 직언(Red-Team) 및 선제적 역제안 의무 원칙**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
