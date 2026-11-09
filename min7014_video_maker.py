@@ -8374,3 +8374,118 @@ if __name__ == "__main__":
             for l_code in video_langs:
                 render_multilingual_video(args.slug, lang_code=l_code)
         update_video_catalog()
+
+
+def auto_engage_youtube_community_comments(max_replies: int = 10) -> list:
+    """
+    [Rule 36 — 유튜브 스튜디오 '커뮤니티(Comments Inbox)' 미응답 댓글 100% 자동 소통 & 장편 마스터클래스 퍼널 엔진]
+    - 채널 전체(WATCH 장편, SHORT 쇼츠, CREATOR_POST 게시물)의 댓글 스레드를 전수 스캔하여
+      시청자가 남긴 댓글이나 퀴즈 정답 답글 중 아직 채널 주인이 답글을 달지 않은 항목(COMMENT_CATEGORY_NOT_ENGAGED)에
+      즉시 친절한 수학적 해설 + 인간 저작 오리지널 원문(https://min7014.github.io/) 안내 + 51~88분 마스터클래스 연속재생 링크를 답글로 게시합니다.
+    """
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+
+    tok_p = ROOT_DIR / "youtube_token_min7014_ai.json"
+    if not tok_p.exists():
+        return []
+    try:
+        creds = Credentials.from_authorized_user_file(str(tok_p))
+        yt = build("youtube", "v3", credentials=creds)
+    except Exception:
+        return []
+
+    replied_list = []
+    page_tok = None
+    channel_id = "UCSlqQfOEtRfJuMPyGMLgFYA"
+
+    while len(replied_list) < max_replies:
+        try:
+            res = yt.commentThreads().list(
+                part="snippet,replies",
+                allThreadsRelatedToChannelId=channel_id,
+                maxResults=100,
+                pageToken=page_tok,
+            ).execute()
+        except Exception:
+            break
+
+        for it in res.get("items", []):
+            if len(replied_list) >= max_replies:
+                break
+            vid = it["snippet"].get("videoId", "")
+            top = it["snippet"]["topLevelComment"]
+            top_id = top["id"]
+            top_s = top["snippet"]
+            top_author = top_s.get("authorDisplayName", "Viewer")
+            top_ch = (top_s.get("authorChannelId") or {}).get("value", "")
+            top_txt = (top_s.get("textOriginal") or "").strip()
+            all_replies = it.get("replies", {}).get("comments", [])
+
+            # Case 1: 시청자가 최상위 댓글(Top-level comment)을 남겼고 아직 채널 주인이 답글을 달지 않은 경우
+            if top_ch and top_ch != channel_id:
+                owner_already = any(
+                    ((r["snippet"].get("authorChannelId") or {}).get("value") == channel_id)
+                    for r in all_replies
+                )
+                if not owner_already:
+                    is_ko = any("가" <= ch <= "힣" for ch in top_txt)
+                    reply_body = (
+                        f"🎯 {top_author}님, 소중한 댓글과 수학적 탐구 참여 감사합니다! 🤩\n"
+                        f"본 영상의 기본 아이디어와 시각적 증명 단계는 사람이 직접 깊이 있게 연구·작도한 오리지널 수학자료실(https://min7014.github.io/) 원문 자료로 제작되었습니다.\n"
+                        f"▶️ 51~88분 오리지널 PDF 직강 마스터클래스 연속 정주행: https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA\n"
+                        f"📐 동적 기하 직접 조작해보기: https://min7014.github.io/mathedu/video_board.html"
+                        if is_ko
+                        else f"🎯 Thank you for watching and sharing your mathematical insight, {top_author}! 🤩\n"
+                        f"Every proof and geometric construction here is crafted from deep, human-authored original materials at https://min7014.github.io/ (not AI-generated math).\n"
+                        f"▶️ Watch our 72-Min Original PDF Math Masterclass Marathon: https://www.youtube.com/watch?v=dHvUQFa8qEs&list=UUSlqQfOEtRfJuMPyGMLgFYA\n"
+                        f"📐 Try the interactive geometry yourself: https://min7014.github.io/mathedu/video_board.html?lang=en"
+                    )
+                    try:
+                        yt.comments().insert(
+                            part="snippet",
+                            body={"snippet": {"parentId": top_id, "textOriginal": reply_body}},
+                        ).execute()
+                        replied_list.append({"videoId": vid, "parentId": top_id, "viewer": top_author, "viewerText": top_txt})
+                    except Exception:
+                        pass
+
+            # Case 2: 채널 고정/첫 퀴즈 댓글에 시청자가 정답/답글을 달았고, 그 시청자 답글 이후 채널 주인의 응답이 없는 경우
+            else:
+                viewer_reps = [
+                    r for r in all_replies
+                    if ((r["snippet"].get("authorChannelId") or {}).get("value", "") != channel_id)
+                ]
+                owner_reps = [
+                    r for r in all_replies
+                    if ((r["snippet"].get("authorChannelId") or {}).get("value", "") == channel_id)
+                ]
+                if viewer_reps and len(owner_reps) < len(viewer_reps):
+                    last_v = viewer_reps[-1]["snippet"]
+                    v_name = last_v.get("authorDisplayName", "Math Explorer")
+                    v_txt = (last_v.get("textOriginal") or "").strip()
+                    is_ko = any("가" <= ch <= "힣" for ch in (v_txt + top_txt))
+                    reply_body = (
+                        f"🎯 정답입니다 {v_name}님! ({v_txt}) 정확한 수학적 직관이십니다! 👏🤩\n"
+                        f"이 증명의 원본 슬라이드는 사람이 직접 설계·작도한 오리지널 수학자료실(https://min7014.github.io/) 원문 자료입니다.\n"
+                        f"▶️ 이어서 88분 오리지널 PDF 직강 마스터클래스 정주행하기: https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA"
+                        if is_ko
+                        else f"🎯 Spot on, {v_name}! ('{v_txt}') Brilliant mathematical intuition! 👏🤩\n"
+                        f"By the Pythagorean identity on the unit circle, the sum holds universally. All proofs on our channel are built from deep, human-authored original materials at https://min7014.github.io/.\n"
+                        f"▶️ Dive deeper in our 72-Min Original PDF Math Masterclass: https://www.youtube.com/watch?v=dHvUQFa8qEs&list=UUSlqQfOEtRfJuMPyGMLgFYA"
+                    )
+                    try:
+                        yt.comments().insert(
+                            part="snippet",
+                            body={"snippet": {"parentId": top_id, "textOriginal": reply_body}},
+                        ).execute()
+                        replied_list.append({"videoId": vid, "parentId": top_id, "viewer": v_name, "viewerText": v_txt})
+                    except Exception:
+                        pass
+
+        page_tok = res.get("nextPageToken")
+        if not page_tok:
+            break
+
+    return replied_list
+

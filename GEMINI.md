@@ -260,3 +260,13 @@
   - 최근 무분별한 AI 자동 생성물(환각·얕은 짜깁기 콘텐츠)의 범람으로 인해 시청자와 유튜브 YPP 심사관 모두 단순 AI 생성물에 강한 거부감을 갖습니다.
   - 반면 `@min7014_ai`와 `mathedu`의 근간은 **사람(수학교육 연구자)이 오랜 세월 직접 고민하고 한 땀 한 땀 작도·설계한 깊이 있는 오리지널 수학자료실(`https://min7014.github.io/`, 847+ 단계별 시각 증명 PDF, 860+ 동적 기하)**입니다.
   - 따라서 모든 영상 설명란 최상단(1번 문단), 고정댓글, 채널 소개글, `video_board.html`에서 **`"본 콘텐츠는 모든 것이 AI에 의해 만들어진 단순 생성물이 아닙니다. 기본 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 사람이 직접 연구하고 작도한 깊이 있는 오리지널 원문 자료(https://min7014.github.io/)로부터 탄생했으며, AI는 오직 이 깊은 수학적 통찰을 전 세계 학습자에게 전하기 위한 다국어 음성 전달 도구로만 활용되었습니다"`**라는 점을 한/영(`KO/EN`) 양국어로 항상 명확히 강조합니다.
+
+
+## 36. 유튜브 채널 커뮤니티 2대 엔진(스튜디오 댓글 소통함 자동 답글 & 채널 커뮤니티 퀴즈·투표 게시물) 상시 가동 원칙 (Rule 36)
+- **회장님 지시 반영 및 비판적·기술적 분석(`Rule 33` 연계)**: 유튜브 스튜디오의 **`커뮤니티(Comments Inbox: WATCH · SHORT · CREATOR_POST 미응답 댓글함)`**와 채널의 **`커뮤니티 게시물(Creator Posts: 퀴즈·투표·이미지 포스트)`**은 일일 영상 업로드 쿼터(6편 한도)를 소모하지 않으면서 비구독자 노출과 장편 마스터클래스 유입(`유효 공개 시청 시간 4,000시간`)을 동시에 증폭하는 핵심 엔진입니다.
+  1. **[엔진 1 — 스튜디오 커뮤니티 댓글함(`COMMENT_CATEGORY_NOT_ENGAGED`) 24시간 실시간 자동 답글 & 마스터클래스 역유입 (`auto_engage_youtube_community_comments`)]**:
+     - `min7014_video_maker.py`, `finance.py`, `mathedu_foundation_daemon.py`에서 YouTube Data API v3(`commentThreads.list` + `comments.insert`)를 통해 채널 전체(장편 `WATCH`, 숏폼 `SHORT`, 게시물 `CREATOR_POST`)에 달린 시청자 댓글 및 10초 퀴즈 정답 답글(예: `@oscarahlke5219`의 $\sin^2\theta+\cos^2\theta=1$ 정답 답글 등)을 자동 탐지합니다.
+     - 미응답 시청자 댓글 발견 즉시 **친절한 수학적 원리 칭찬·해설 + 인간이 직접 연구·작도한 오리지널 원문 자료(`https://min7014.github.io/`) 안내 + 51~88분 오리지널 PDF 마스터클래스 연속재생 링크(`&list=UUSlqQfOEtRfJuMPyGMLgFYA`)**를 답글로 자동 게시하여 시청자에게 유튜브 푸시 알림을 발송하고 재방문 시청 시간을 창출합니다.
+  2. **[엔진 2 — 채널 커뮤니티 퀴즈·투표 게시물(`CREATOR_POST`) & 오리지널 도형 카드 팩 (`youtube_uploads/community_posts/` & `video_board.html`)]**:
+     - **⚖️ 기술적 사실 직언(`Rule 33`)**: Google은 YouTube Data API v3에서 커뮤니티 게시물(`CREATOR_POST`) 생성 API를 공식 지원하지 않으므로(댓글 조회·답글 API만 지원), 커뮤니티 퀴즈·투표 게시물은 `youtube_uploads/community_posts/community_posts_pack.json` 및 `video_board.html`의 **`🗳️ 유튜브 커뮤니티 퀴즈·투표 게시물 복사`** 1-클릭 런처를 통해 생성·발행합니다.
+     - 쇼츠와 달리 **유튜브 커뮤니티 투표·퀴즈 게시물 본문의 URL 링크(`https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA`)는 모바일 홈 피드에서 1번 터치로 즉시 클릭 가능**하므로, 모든 커뮤니티 퀴즈·투표 게시물에 51~88분 오리지널 PDF 마스터클래스 직통 링크를 결합하여 유효 공개 시청 시간을 극대화합니다.

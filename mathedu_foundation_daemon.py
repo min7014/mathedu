@@ -228,8 +228,12 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
     try:
         import importlib
         import finance
+        import min7014_video_maker as vmaker
         importlib.reload(finance)
         finance.run_autonomous_finance_cycle()
+        replied = vmaker.auto_engage_youtube_community_comments(max_replies=5)
+        if replied:
+            print(f"💬 [24/7 YouTube Community Inbox Auto-Reply] Replied to {len(replied)} viewer comments!", flush=True)
     except Exception as fin_hb_err:
         print(f"[Finance Heartbeat Notice] {fin_hb_err}", flush=True)
     try:

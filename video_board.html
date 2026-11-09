@@ -1036,6 +1036,9 @@
           <button type="button" class="btn-action" style="background:#059669;color:#fff;" onclick="copyChannelViralShareKit()">
             📣 카톡·커뮤니티 인기 홍보문구 복사
           </button>
+          <button type="button" class="btn-action" style="background:#7c3aed;color:#fff;" onclick="copyYoutubeCommunityQuizPost()">
+            🗳️ 유튜브 커뮤니티 퀴즈·투표 게시물 복사
+          </button>
         </div>
       </div>
       <div class="vault-grid" id="vaultShowcaseGrid"></div>
@@ -2285,13 +2288,49 @@
       ].join('\n');
       if (navigator.share) {
         navigator.share({
-          title: '🔥 민은기 선생님의 수학자료실 (@min7014_ai) × mathedu 창의 수학 플랫폼',
+          title: '🔥 오리지널 단계별 시각적 수학 증명 (@min7014_ai) × mathedu 창의 수학 플랫폼',
           text: kitText,
           url: 'https://min7014.github.io/mathedu/video_board.html'
         }).catch(() => {});
       }
       navigator.clipboard.writeText(kitText);
       alert('📣 카카오톡·단톡방·수험생/교사 커뮤니티 공유용 유튜브×홈페이지 통합 홍보 문구가 클립보드에 복사되었습니다!');
+    }
+
+    function copyYoutubeCommunityQuizPost() {
+      const quizPosts = [
+        [
+          '🏛️ [사람이 직접 설계·작도한 오리지널 수학자료실(https://min7014.github.io/) 5초 직관 퀴즈!]',
+          '',
+          '❓ 이차함수 y = ax² + bx + c (단, a ＞ 0)의 그래프가 x축과 만나지 않을 때(판별식 D ＜ 0), 부등식 ax² + bx + c ＞ 0 의 해는 무엇일까요?',
+          '① 해가 없다 (No solution)',
+          '② 모든 실수 x (All real numbers)',
+          '③ x = -b / (2a) 한 점뿐이다',
+          '④ a의 값에 따라 달라진다',
+          '',
+          '공식을 무작정 외우지 말고 아래 88분 오리지널 PDF 직강 마스터클래스에서 포물선 그래프의 위치 관계로 1초 만에 확인해 보세요! 👇',
+          '🎬 [88분 방정식·부등식 오리지널 PDF 직강 마스터클래스 Vol.1 바로 보기]:',
+          '👉 https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA',
+          '📐 [오리지널 PDF & GeoGebra 직접 조작 실습실]:',
+          '👉 https://min7014.github.io/mathedu/video_board.html'
+        ].join('\n'),
+        [
+          '🏛️ [5-Second Visual Math Challenge — Built from Deep Human-Crafted Original Proofs at https://min7014.github.io/]',
+          '',
+          '❓ If two non-zero vectors u and v satisfy |u + v| = |u - v|, what is the exact angle θ between vector u and vector v?',
+          'A) 0° (Parallel)   B) 45°   C) 90° (Perpendicular)   D) 180°',
+          '',
+          'Think geometrically using the parallelogram diagonals before voting! Watch the full step-by-step original PDF proof in our Masterclass below 👇',
+          '🎬 [67-Min Original PDF Vectors & Geometry Masterclass (1080p)]:',
+          '👉 https://www.youtube.com/watch?v=qZ53vyx90ig&list=UUSlqQfOEtRfJuMPyGMLgFYA',
+          '📐 [Interactive Dynamic Geometry Lab]:',
+          '👉 https://min7014.github.io/mathedu/video_board.html?lang=en'
+        ].join('\n')
+      ];
+      const chosen = quizPosts[Math.floor(Math.random() * quizPosts.length)];
+      navigator.clipboard.writeText(chosen);
+      alert('🗳️ 유튜브 채널 커뮤니티(게시물/퀴즈/투표) 전용 오리지널 5초 퀴즈 원고와 88분 마스터클래스 직결 링크가 복사되었습니다! 열리는 유튜브 채널 게시물 탭에 붙여넣어 즉시 발행하실 수 있습니다.');
+      window.open('https://www.youtube.com/@min7014_ai/posts', '_blank', 'noopener');
     }
 
     // 링크 수동 등록 모달
