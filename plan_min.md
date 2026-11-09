@@ -347,6 +347,7 @@ python -X utf8 pr.py status
 - ✅ **33. 무비판적 순응(Yes-Man) 절대 금지 · 비판적 직언(Red-Team) 및 선제적 역제안 의무 원칙**
 - ✅ **34. YouTube Creators 공식 라운드업(`B4M3VlMs3IU`) 핵심 기능 선별 채택 및 비판적 적용 원칙 (Rule 34)**
 - ✅ **35. 인간 고유의 깊은 수학적 통찰 & 직접 만든 오리지널 원문 자료 강조 원칙 (Human-Crafted Original Depth & Non-AI-Slop Authenticity Principle · Rule 35)**
+- ✅ **36. 유튜브 채널 커뮤니티 2대 엔진(스튜디오 댓글 소통함 자동 답글 & 채널 커뮤니티 퀴즈·투표 게시물) 상시 가동 원칙 (Rule 36)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->

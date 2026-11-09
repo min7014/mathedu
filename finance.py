@@ -296,7 +296,7 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
       if (window.VB_GLOBAL_LANG === 'en') applyVideoBoardGlobalLang('en');
     });
 """
-    if "toggleVideoBoardGlobalLang" not in html_norm and "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);" in html_norm:
+    if "function toggleVideoBoardGlobalLang" not in html_norm and "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);" in html_norm:
         html = html_norm.replace(
             "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);",
             "document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);\n" + i18n_script,
@@ -310,15 +310,21 @@ def ensure_ypp_website_ownership_and_sub_funnel() -> bool:
     idx_p = ROOT_DIR / "index.html"
     if idx_p.exists():
         idx_html = idx_p.read_text(encoding="utf-8")
-        old_idx_btn = '<a href="https://youtu.be/_5LE_BfLA5w" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ffe4e6] text-[#be123c] font-bold no-underline hover:underline">🇰🇷 37분 마스터클래스 정주행 ↗</a>'
-        new_idx_btn = (
-            '<a href="https://youtu.be/KvHmXDuU8jY" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ede9fe] text-[#6d28d9] font-bold no-underline hover:underline">🌟 12분 네온 시네마 Vol.1 ↗</a>\n'
-            '              <a href="https://youtu.be/_NRQ5QO3PEY" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#d1fae5] text-[#047857] font-bold no-underline hover:underline">📐 29분 기하 총정리 ↗</a>\n'
-            '              ' + old_idx_btn
+        dup_pattern = re.compile(
+            r'(?:\s*<a href="https://youtu\.be/_NRQ5QO3PEY"[^>]*>.*?</a>)+',
+            re.DOTALL,
         )
-        if old_idx_btn in idx_html and "KvHmXDuU8jY" not in idx_html:
-            idx_p.write_text(idx_html.replace(old_idx_btn, new_idx_btn, 1), encoding="utf-8")
-            changed = True
+        clean_mc_buttons = (
+            '\n              <a href="https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ffe4e6] text-[#be123c] font-bold no-underline hover:underline">🏛️ 88분 방정식·부등식 원본 PDF 직강 ↗</a>'
+            '\n              <a href="https://www.youtube.com/watch?v=wc7UyYnA_Go&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ede9fe] text-[#6d28d9] font-bold no-underline hover:underline">📐 62분 벡터·기하 원본 PDF 직강 ↗</a>'
+            '\n              <a href="https://www.youtube.com/watch?v=qZ53vyx90ig&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#dbeafe] text-[#1d4ed8] font-bold no-underline hover:underline">🇺🇸 67-Min Original PDF Masterclass (EN) ↗</a>'
+            '\n              <a href="mathlab.html" class="px-2.5 py-1 rounded-md bg-[#d1fae5] text-[#047857] font-bold no-underline hover:underline">🛠️ 자체 제작 MathLab v1.4 AI Lab ↗</a>'
+        )
+        if idx_html.count("https://youtu.be/_NRQ5QO3PEY") > 2:
+            idx_html_fixed = dup_pattern.sub(clean_mc_buttons, idx_html, count=1)
+            if idx_html_fixed != idx_html:
+                idx_p.write_text(idx_html_fixed, encoding="utf-8")
+                changed = True
 
     return changed
 
@@ -577,7 +583,7 @@ def build_ypp_watchtime_masterclasses() -> list:
             mm = int((cum_sec % 3600) // 60)
             ss = int(cum_sec % 60)
             ts_str = f"{hh:02d}:{mm:02d}:{ss:02d}" if hh > 0 else f"{mm:02d}:{ss:02d}"
-            chapters.append(f"{ts_str} {t_name}")
+            chapters.append(f"{ts_str} | {t_name}")
             part_files.append(mp4_cand)
 
             dur_s = 240.0

@@ -1443,8 +1443,8 @@
                 <span class="code-badge">${item.id} · ${item._slug}</span>
                 <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="res-chip" style="color:#0284c7;border-color:#bae6fd;background:#f0f9ff;">🎙️ 20개국어 스튜디오</a>
               </div>
-              <h3 class="vault-card-title">${item.title}</h3>
-              ${item._titleEn ? `<p class="vault-card-sub">${item._titleEn}</p>` : ''}
+              <h3 class="vault-card-title">${(window.VB_GLOBAL_LANG === 'en' && item._titleEn) ? item._titleEn : item.title}</h3>
+              ${item._titleEn ? `<p class="vault-card-sub">${window.VB_GLOBAL_LANG === 'en' ? item.title : item._titleEn}</p>` : ''}
               <div class="vault-links-list">
                 ${item._ytKo ? `
                   <div class="yt-link-row">
@@ -1578,8 +1578,8 @@
               <div style="font-size:0.76rem;font-weight:700;color:#334155;margin-top:5px;">${item.category || ''}</div>
             </td>
             <td>
-              <a class="topic-title-link" onclick="openCinemaForItem(${itemIdx}, '${item._ytKo ? 'ko' : (item._ytEn ? 'en' : 'orig')}')">
-                ${item.title}
+              <a class="topic-title-link" onclick="openCinemaForItem(${itemIdx}, '${(window.VB_GLOBAL_LANG === 'en' && item._ytEn) ? 'en' : (item._ytKo ? 'ko' : (item._ytEn ? 'en' : 'orig'))}')">
+                ${(window.VB_GLOBAL_LANG === 'en' && item._titleEn) ? item._titleEn + ' <span style=\'font-size:0.78rem;color:#64748b;font-weight:600;\'>(' + item.title + ')</span>' : item.title}
               </a>
               <div class="topic-concept-preview">${item.core_concept || ''}</div>
               <div class="resource-chips">
@@ -2515,6 +2515,76 @@
       }
     }
     document.addEventListener('DOMContentLoaded', initGlobalViralBenchmarkHub);
+
+    // === [Rule 20 & Rule 35 Global Bilingual Engine (?lang=en & Smart Browser Auto-Detection)] ===
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get('lang');
+      const savedLang = localStorage.getItem('mathedu_vb_lang');
+      const browserIsKo = (navigator.language || 'ko').toLowerCase().startsWith('ko');
+      window.VB_GLOBAL_LANG = urlLang === 'en' ? 'en' : (urlLang === 'ko' ? 'ko' : (savedLang ? savedLang : (browserIsKo ? 'ko' : 'en')));
+    })();
+    function applyVideoBoardGlobalLang(lang) {
+      window.VB_GLOBAL_LANG = (lang === 'en') ? 'en' : 'ko';
+      try { localStorage.setItem('mathedu_vb_lang', window.VB_GLOBAL_LANG); } catch (e) {}
+      const btn = document.getElementById('vbLangToggleBtn');
+      const brandTitle = document.querySelector('.brand-title');
+      const heroTitle = document.querySelector('.hero-title');
+      const heroDesc = document.querySelector('.hero-desc');
+      const puzTitle = document.getElementById('vbDailyPuzzleTitle');
+      const puzStatus = document.getElementById('vbDailyPuzzleStatus');
+      const searchInput = document.getElementById('boardSearchInput');
+      const showcaseTitleSpan = document.querySelector('.showcase-section .section-title span:first-child');
+      const showcaseDesc = document.querySelector('.showcase-section .section-head p');
+      const boardSecTitle = document.querySelector('.board-section .section-title');
+      const ths = document.querySelectorAll('table.video-board-table thead th');
+      if (window.VB_GLOBAL_LANG === 'en') {
+        if (btn) btn.textContent = '🇰🇷 한국어 모드 (KO)';
+        if (brandTitle) brandTitle.textContent = '🏛️ Original Step-by-Step Visual Math Proofs & 1080p Cinema (@min7014_ai)';
+        if (heroTitle) heroTitle.textContent = 'Original Human-Crafted Step-by-Step Visual Math Proofs (@min7014_ai × min7014.github.io)';
+        if (heroDesc) heroDesc.innerHTML = '<strong>[Not All by AI — Deep Human Mathematical Insight]</strong> Every geometric construction, auxiliary line, and step-by-step proof PDF (1,111+ topics) at <a href="https://min7014.github.io/" target="_blank" rel="noopener">https://min7014.github.io/</a> is crafted directly by a human mathematics researcher and streamed in 1080p English & Korean on <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener">@min7014_ai</a>.';
+        if (puzTitle) puzTitle.textContent = '🧠 [5-Sec Visual Math Challenge] Two smaller squares on a right triangle have areas 9 and 16. What is the largest square area?';
+        if (puzStatus) puzStatus.textContent = 'Solved it without square roots? Click your speed tier below to copy your Visual Math Emoji Scorecard!';
+        if (searchInput) searchInput.placeholder = '🔍 Search theorem title, code (MIN-KB-0001), slug (2017090101), or concept (e.g. Pythagoras, Ceva, Menelaus, Ellipse, Derivative)...';
+        if (showcaseTitleSpan) showcaseTitleSpan.textContent = '🏛️ Human-Crafted Original Step-by-Step Visual Proof Lectures (@min7014_ai)';
+        if (showcaseDesc) showcaseDesc.innerHTML = '<strong>[Not All by AI — Crafted from Deep Human Mathematical Research]</strong> Every fundamental idea, auxiliary line construction, and step-by-step proof slide is directly designed by a human educator at <code>min7014.github.io</code>, presented in 1080p English (EN) & Korean (KO) video lectures.';
+        if (boardSecTitle) boardSecTitle.textContent = '📋 Complete Archive of 1,111 Original Visual Math Proof Resources (min7014.github.io)';
+        if (ths.length >= 5) {
+          ths[0].textContent = 'No. / Code';
+          ths[1].textContent = 'Domain · Category';
+          ths[2].textContent = 'Theorem Title · Core Concept · Original PDF & GeoGebra';
+          ths[3].textContent = '🤖 @min7014_ai Lecture Links (KO / EN)';
+          ths[4].textContent = '🎬 Original Video & Lab';
+        }
+      } else {
+        if (btn) btn.textContent = '🇺🇸 English Mode (EN)';
+        if (brandTitle) brandTitle.textContent = '🎬 단계별 시각적 수학 증명 & 네온 시네마 영상 게시판 (@min7014_ai)';
+        if (heroTitle) heroTitle.textContent = '단계별 시각적 수학 증명 & 네온 시네마 영상 게시판 (@min7014_ai × min7014.github.io)';
+        if (heroDesc) heroDesc.innerHTML = '<a href="https://min7014.github.io/" target="_blank" rel="noopener">https://min7014.github.io/</a> 의 모든 수학 개념·기하 작도·플립북 PDF 자료(총 1,111개)에 대한 단계별 설명 영상을 제작하여 공식 설명영상 채널인 <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener">https://www.youtube.com/@min7014_ai</a> 에 업로드하고, 그 유튜브 링크와 원본 해설 영상을 한눈에 시청·관리하는 게시판입니다.';
+        if (puzTitle) puzTitle.textContent = '🧠 [오늘의 5초 암산] 직각삼각형 두 작은 정사각형 넓이가 9와 16일 때 큰 정사각형 넓이는?';
+        if (puzStatus) puzStatus.textContent = '루트 계산 없이 몇 초 만에 떠올랐나요? 등급 버튼을 눌러 이모지 전적 카드를 복사해 보세요!';
+        if (searchInput) searchInput.placeholder = '🔍 자료 제목, 코드(MIN-KB-0001), 슬러그(2017090101), 단원명, 핵심 개념 검색 (예: 피타고라스, 체바, 매듭, 타원, 미분)...';
+        if (showcaseTitleSpan) showcaseTitleSpan.textContent = '🏛️ 사람이 직접 설계·작도한 오리지널 원문 기반 단계별 설명 영상 (@min7014_ai)';
+        if (showcaseDesc) showcaseDesc.innerHTML = '<strong>[모든 것이 AI로 만들어진 것이 아닙니다]</strong> 기본 수학 아이디어·보조선 발상·단계별 증명 슬라이드는 사람이 오랜 세월 직접 연구하고 작도한 깊이 있는 <code>min7014.github.io</code> 오리지널 원문 자료이며, 이 깊은 수학적 통찰을 전 세계에 전하기 위해 1080p 한국어(KO)·영어(EN) 설명 영상으로 제작한 정통 아카이브입니다.';
+        if (boardSecTitle) boardSecTitle.textContent = '📋 min7014.github.io 전체 자료 설명 영상 게시판 (1,111개 전체 목록)';
+        if (ths.length >= 5) {
+          ths[0].textContent = '번호 / 코드';
+          ths[1].textContent = '영역 · 단원 분류';
+          ths[2].textContent = '자료 제목 · 핵심 개념 · 원본 자료 링크';
+          ths[3].textContent = '🤖 @min7014_ai 설명 영상 링크 (KO / EN)';
+          ths[4].textContent = '🎬 @min7014 원본 & 제작';
+        }
+      }
+      if (typeof renderVaultShowcase === 'function' && typeof ALL_ITEMS !== 'undefined' && ALL_ITEMS.length) renderVaultShowcase();
+      if (typeof applyFiltersAndRender === 'function' && typeof ALL_ITEMS !== 'undefined' && ALL_ITEMS.length) applyFiltersAndRender();
+    }
+    function toggleVideoBoardGlobalLang() {
+      applyVideoBoardGlobalLang(window.VB_GLOBAL_LANG === 'en' ? 'ko' : 'en');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      applyVideoBoardGlobalLang(window.VB_GLOBAL_LANG);
+    });
+
     window.toggleGeoGebraSplitLab = function(itemIdx) {
       const item = ALL_ITEMS[itemIdx] || {};
       let labBox = document.getElementById('vbGeoGebraSplitLabBox');
@@ -2555,18 +2625,6 @@
           <iframe src="${mathlabUrl}" style="width:100%;height:520px;border:none;background:#f8f9fa;" allowfullscreen></iframe>
         </div>
       `;
-    };
-    window.copyTeacherLessonRecordKit = function(itemIdx) {
-      const item = ALL_ITEMS[itemIdx] || {};
-      const titleKo = (item.title || '시각적 수학 증명').split('(')[0].trim();
-      const slug = getSlugForItem(item);
-      const boardUrl = `https://min7014.github.io/mathedu/video_board.html?slug=${slug}`;
-      const kitText = `[🏫 2022 개정 교육과정 5분 탐구 수업 런처 & 생기부 세부능력 및 특기사항(세특) / 영문 수학 탐구 가이드]\n■ 단원/주제: ${titleKo}\n■ 수업 도입 발문 (Notice & Wonder 3분):\n  1) "공식을 먼저 쓰지 말고 화면의 도형에서 점이 움직일 때 변하는 것(Variant)과 절대 변하지 않는 것(Invariant)은 무엇인가요?"\n  2) "어떤 보조선 한 줄(또는 대칭이동·넓이 분할)을 추가하면 두 양 사이의 등식이 눈으로 즉시 확인될까요?"\n■ 공학도구 실습 및 시각 증명 링크: ${boardUrl}\n■ 학교생활기록부 세부능력 및 특기사항(세특) 예시 문구:\n  "${titleKo}의 성질을 단순 공식 암기에 그치지 않고, 동적 기하 공학도구의 구속 조건(교점·자취·슬라이더)을 활용해 직접 작도하고 드래그 불변성(Dragging Invariance)을 실험함. 특히 2차원 기하 도형에서 핵심 보조선을 분리해 대수적 등식으로 변환하는 기호학적 표상 변환 과정을 논리적으로 발표하고, 조건을 일반화(What-If-Not)한 후속 탐구 문제를 스스로 발명하는 탁월한 수리적 탐구 역량을 보임."\n■ Global High School Mathematics Exploration Prompt:\n  "Investigate the geometric invariance and locus properties of [${item.title || titleKo}] using dynamic geometric construction and analytical proof."`;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(kitText).then(() => {
-          alert('✅ [교사용 5분 수업 발문 + 생기부 세특 예시 문구 + 영문 탐구 주제]가 클립보드에 복사되었습니다!\n수업 지도안이나 학급 게시판에 바로 붙여넣어 활용하세요.');
-        }).catch(() => {});
-      }
     };
     window.copyTeacherLessonRecordKit = function(itemIdx) {
       const item = ALL_ITEMS[itemIdx] || {};
