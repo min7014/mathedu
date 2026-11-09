@@ -463,8 +463,9 @@ def build_ypp_watchtime_masterclasses() -> list:
         if first_sp.exists():
             try:
                 fdoc = json.loads(first_sp.read_text(encoding="utf-8"))
-                lead_ko = str(fdoc.get("title") or r_chunk[0]).split("(")[0].strip()
-                lead_en = str(fdoc.get("title_en") or lead_ko).split("|")[0].strip()
+                raw_ko, raw_en = vmaker.split_bilingual_title(str(fdoc.get("title") or r_chunk[0]))
+                lead_ko = vmaker.clean_latex_for_display(raw_ko or str(fdoc.get("title") or r_chunk[0])).strip()
+                lead_en = vmaker.clean_latex_for_display(str(fdoc.get("title_en") or raw_en or lead_ko).split("|")[0]).strip()
                 sub_dom = str(fdoc.get("sub_domain_ko") or sub_dom)
             except Exception:
                 pass
@@ -496,8 +497,9 @@ def build_ypp_watchtime_masterclasses() -> list:
         if first_sp.exists():
             try:
                 fdoc = json.loads(first_sp.read_text(encoding="utf-8"))
-                lead_title_ko = str(fdoc.get("title") or chunk[0]).split("(")[0].strip()
-                lead_title_en = str(fdoc.get("title_en") or lead_title_ko).split("|")[0].strip()
+                raw_ko, raw_en = vmaker.split_bilingual_title(str(fdoc.get("title") or chunk[0]))
+                lead_title_ko = vmaker.clean_latex_for_display(raw_ko or str(fdoc.get("title") or chunk[0])).strip()
+                lead_title_en = vmaker.clean_latex_for_display(str(fdoc.get("title_en") or raw_en or lead_title_ko).split("|")[0]).strip()
                 sub_dom_ko = str(fdoc.get("sub_domain_ko") or sub_dom_ko)
             except Exception:
                 pass
@@ -561,15 +563,18 @@ def build_ypp_watchtime_masterclasses() -> list:
             if sp.exists():
                 try:
                     sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                    raw_ko_c, raw_en_c = vmaker.split_bilingual_title(str(sdoc.get("title") or s_key))
                     if lang_code == "en":
-                        t_name = str(sdoc.get("title_en") or sdoc.get("title") or s_key).split("|")[0].strip()
+                        t_name = vmaker.clean_latex_for_display(str(sdoc.get("title_en") or raw_en_c or raw_ko_c or s_key).split("|")[0]).strip()
                     else:
-                        t_name = str(sdoc.get("title") or s_key).split("(")[0].strip()
+                        t_name = vmaker.clean_latex_for_display(raw_ko_c or str(sdoc.get("title") or s_key)).strip()
                 except Exception:
                     pass
-            mm = int(cum_sec // 60)
+            hh = int(cum_sec // 3600)
+            mm = int((cum_sec % 3600) // 60)
             ss = int(cum_sec % 60)
-            chapters.append(f"{mm:02d}:{ss:02d} {t_name}")
+            ts_str = f"{hh:02d}:{mm:02d}:{ss:02d}" if hh > 0 else f"{mm:02d}:{ss:02d}"
+            chapters.append(f"{ts_str} {t_name}")
             part_files.append(mp4_cand)
 
             dur_s = 240.0

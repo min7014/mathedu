@@ -2564,7 +2564,7 @@
         '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">' + topicBtns + '</div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:center">' +
           '<div style="aspect-ratio:16/9;width:100%;background:#000;border-radius:10px;overflow:hidden;border:1.5px solid #fda4af">' +
-            '<iframe src="https://www.youtube-nocookie.com/embed/' + vidId + '?rel=0" style="width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+            '<iframe src="https://www.youtube.com/embed/' + vidId + '?rel=0&listType=playlist&list=UUSlqQfOEtRfJuMPyGMLgFYA" style="width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
           '</div>' +
           '<div style="padding:12px;border-radius:10px;background:linear-gradient(135deg,#fff1f2 0%,#f0f9ff 100%);border:1px solid #fecdd3;font-size:0.8rem;line-height:1.6;color:#1e293b">' +
             '<div style="font-weight:900;color:#be123c;margin-bottom:4px">🚀 유튜브 영상 × 홈페이지 자생 성장 루프</div>' +
