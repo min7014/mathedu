@@ -816,13 +816,17 @@ def upload_pending_masterclass_to_youtube(max_uploads: int = 1) -> int:
                     sub_link = "https://www.youtube.com/@min7014_ai?sub_confirmation=1"
                     ch_lines = "\n".join(mdoc.get("chapters") or [])
                     mc_comment = (
-                        f"⏱️ [마스터클래스 챕터 타임스탬프 — 원하는 단원을 눌러 바로 이동하세요!]\n{ch_lines}\n\n"
-                        f"🔔 공식 암기 없는 시각적 수학 증명! @min7014_ai 1초 무료 구독하기:\n👉 {sub_link}\n"
-                        f"📐 전체 1,113개 설명영상 & 무료 GeoGebra 실습 게시판:\n👉 https://min7014.github.io/mathedu/video_board.html"
+                        f"💬 오늘 마스터클래스 단원 중 가장 명쾌하게 이해된 주제는 몇 강이었나요? 타임스탬프와 함께 댓글로 남겨주세요! 🤩\n"
+                        f"▶️ 전체 마스터클래스 무중단 연속재생: https://www.youtube.com/watch?v={vid_id}&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
+                        f"⏱️ [00:00 | 마스터클래스 챕터 타임스탬프 — 원하는 단원을 눌러 바로 이동하세요!]\n{ch_lines}\n\n"
+                        f"🔔 @min7014_ai 1초 무료 구독하기: {sub_link}\n"
+                        f"📐 전체 1,113개 설명영상 & 무료 GeoGebra 실습 게시판: https://min7014.github.io/mathedu/video_board.html"
                         if lang_code == "ko"
-                        else f"⏱️ [Masterclass Chapter Timestamps — Jump to Any Proof!]\n{ch_lines}\n\n"
-                        f"🔔 Subscribe to @min7014_ai in 1 Click (Daily Visual Math Proofs!):\n👉 {sub_link}\n"
-                        f"📐 Explore All 1,113 Interactive Proofs & GeoGebra Labs:\n👉 https://min7014.github.io/mathedu/video_board.html"
+                        else f"💬 Which part of this Masterclass gave you the biggest 'Aha!' moment? Drop the timestamp below! 🤩\n"
+                        f"▶️ Full Continuous Marathon Playlist: https://www.youtube.com/watch?v={vid_id}&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
+                        f"⏱️ [00:00 | Masterclass Chapter Timestamps — Jump to Any Proof!]\n{ch_lines}\n\n"
+                        f"🔔 Subscribe to @min7014_ai in 1 Click: {sub_link}\n"
+                        f"📐 Explore All 1,113 Interactive Proofs & GeoGebra Labs: https://min7014.github.io/mathedu/video_board.html?lang=en"
                     )
                     youtube.commentThreads().insert(
                         part="snippet",

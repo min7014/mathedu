@@ -3458,6 +3458,18 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
     return _balance_parentheses(cut)
 
 
+def cubic_keyframe_ease(t: float, curve: str = "cube") -> float:
+    """
+    [YouTube Creators Official Update (B4M3VlMs3IU) — Keyframes Quad/Cube Easing Curves]
+    - Rule 28에 따라 원본 PDF 슬라이드 자체는 절대 확대·왜곡하지 않으며,
+      상/하단 여백의 진행 게이지 바 및 장면 전환 페이드에만 부드러운 Quad/Cube 이징 곡선을 적용합니다.
+    """
+    x = max(0.0, min(1.0, float(t)))
+    if curve == "quad":
+        return 1.0 - (1.0 - x) ** 2
+    return 1.0 - (1.0 - x) ** 3
+
+
 def sanitize_youtube_title(title: str, max_chars: int = 98) -> str:
     """
     [YouTube Data API v3 snippet.title 무결성 보장]
@@ -3543,9 +3555,9 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         if len(short_exp) > 62:
             short_exp = short_exp[:62] + "..."
         if lang_code == "en":
-            chapters.append(f"{ts} Step {pt['page']}/{tot_p} — {short_exp}")
+            chapters.append(f"{ts} | Step {pt['page']}/{tot_p} — {short_exp}")
         else:
-            chapters.append(f"{ts} {pt['page']}페이지/{tot_p} — {short_exp}")
+            chapters.append(f"{ts} | {pt['page']}페이지/{tot_p} — {short_exp}")
 
     chapters_block = "\n".join(chapters)
 
@@ -5526,6 +5538,28 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
                 yt_ko=yt_url if lang_code == "ko" else None,
                 yt_en=yt_url if lang_code == "en" else None,
             )
+            # [YouTube Creators B4M3VlMs3IU 벤치마킹 — 1줄 핵심 질문 + 연속 정주행 링크 첫 댓글 자동 게시]
+            try:
+                _board_u = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_comment"
+                _marathon_u = f"https://www.youtube.com/watch?v={vid_id}&list=UUSlqQfOEtRfJuMPyGMLgFYA"
+                if lang_code == "ko":
+                    _c_body = (
+                        f"💬 1페이지부터 {sdoc_loc.get('page_count', '')}페이지 중 몇 번째 페이지에서 증명 아이디어가 딱 풀렸나요? 가장 인상 깊었던 단계를 댓글로 알려주세요! 🤩\n"
+                        f"▶️ 전 강의 무중단 연속 정주행: {_marathon_u}\n"
+                        f"📐 원본 PDF 슬라이드 & 동적 기하 직접 조작: {_board_u}"
+                    )
+                else:
+                    _c_body = (
+                        f"💬 Which step (1 to {sdoc_loc.get('page_count', '')}) gave you the biggest 'Aha!' moment in this proof? Let us know below! 🤩\n"
+                        f"▶️ Continuous Full-Course Marathon Playlist: {_marathon_u}\n"
+                        f"📐 Interactive Original PDF & Dynamic Geometry Lab: {_board_u}"
+                    )
+                youtube.commentThreads().insert(
+                    part="snippet",
+                    body={"snippet": {"videoId": vid_id, "topLevelComment": {"snippet": {"textOriginal": _c_body}}}},
+                ).execute()
+            except Exception:
+                pass
         except Exception as up_err:
             err_s = str(up_err)
             print(f"  [YouTube Upload API Notice ({slug_key} / {lang_code})] {up_err}", flush=True)
