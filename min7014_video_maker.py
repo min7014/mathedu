@@ -6173,7 +6173,12 @@ def build_youtube_short_metadata(sdoc, lang_code, duration_sec):
     viral_hooks = sdoc.get("viral_hooks") or {}
     yt_urls = sdoc.get("youtube_urls") or {}
     q_yt_urls = sdoc.get("question_youtube_urls") or {}
-    full_yt = yt_urls.get(lang_code) or yt_urls.get("ko") or "https://www.youtube.com/@min7014_ai"
+    raw_full_yt = yt_urls.get(lang_code) or yt_urls.get("ko") or ""
+    if "youtu.be/" in raw_full_yt:
+        _f_id = raw_full_yt.rstrip("/").split("/")[-1].split("?")[0]
+        full_yt = f"https://www.youtube.com/watch?v={_f_id}&list=UUSlqQfOEtRfJuMPyGMLgFYA"
+    else:
+        full_yt = raw_full_yt or "https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA"
     full_q_yt = q_yt_urls.get(lang_code) or q_yt_urls.get("ko") or full_yt
     board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
     cat_type = (sdoc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
@@ -6990,7 +6995,12 @@ def upload_short_to_youtube(slug_key, langs=("ko", "en"), privacy="public", repl
             try:
                 board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_shorts"
                 sub_link = "https://www.youtube.com/@min7014_ai?sub_confirmation=1"
-                full_yt_u = (sdoc.get("youtube_urls") or {}).get(lc) or (sdoc.get("youtube_urls") or {}).get("ko") or "https://www.youtube.com/@min7014_ai"
+                _raw_f_u = (sdoc.get("youtube_urls") or {}).get(lc) or (sdoc.get("youtube_urls") or {}).get("ko") or ""
+                if "youtu.be/" in _raw_f_u:
+                    _fid2 = _raw_f_u.rstrip("/").split("/")[-1].split("?")[0]
+                    full_yt_u = f"https://www.youtube.com/watch?v={_fid2}&list=UUSlqQfOEtRfJuMPyGMLgFYA"
+                else:
+                    full_yt_u = _raw_f_u or "https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA"
                 vprof_c = get_viral_hook_profile(sdoc)
                 quiz_line = vprof_c.get("quiz_ko" if lc == "ko" else "quiz_en", "")
                 c_text = (

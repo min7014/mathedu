@@ -1319,7 +1319,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot A] 원본 PDF 기반 25~60분 미드롤 장편 마스터클래스 최우선 업로드 (1인당 유효 공개 시청시간 15~30배 적립!)
+        # [Slot A — 2슬롯 (33%)]: 원본 PDF 기반 36~231분 초장편 마스터클래스 최우선 업로드 (1인당 유효 공개 시청시간 10~58배 적립!)
         mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=2)
         if mc_cnt > 0:
             total_uploaded += mc_cnt
@@ -1327,36 +1327,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
         if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
             break
 
-        # [Slot B] 원본 PDF 질문하는 수학 수업 16:9 1080p 장편 본편 (KO/EN) 업로드
-        # (※ 주의: 9:16 #Shorts 조회수는 유튜브 YPP '유효 공개 시청 시간 4,000시간'에 0시간으로 제외되므로,
-        #  일일 API 쿼터는 100% 유효 공개 시청시간이 적립되는 16:9 장편 강의에만 전량 투입합니다!)
-        for q_slug in ordered_slugs:
-            if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-                break
-            sp = SCRIPTS_DIR / f"{q_slug}.json"
-            if not sp.exists():
-                continue
-            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-            qu = sdoc.get("question_youtube_urls") or {}
-            missing_q = tuple(
-                lc for lc in ("ko", "en")
-                if not (qu.get(lc) or "").strip()
-                and (QUESTION_DIR / f"{q_slug}_q_{lc}.mp4").exists()
-                and (QUESTION_DIR / f"{q_slug}_q_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
-            )
-            if missing_q:
-                res_q = vmaker.upload_question_classroom_to_youtube(q_slug, langs=missing_q, privacy="public")
-                if res_q:
-                    n_up = len([k for k, v in res_q.items() if v])
-                    if n_up > 0:
-                        total_uploaded += n_up
-                        uploaded_items.append({"type": "pdf_question_1080p", "slug": q_slug, "langs": list(res_q.keys())})
-                break
-
-        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-            break
-
-        # [Slot C] 원본 PDF 한 땀 한 땀 1080p 단계별 본편 (KO/EN) 1세트 업로드 (장시간 다페이지 우선)
+        # [Slot B — 2슬롯 (33%)]: 원본 PDF 한 땀 한 땀 1080p 단계별 장편 본편 (KO/EN) 선(先)업로드 (장시간 다페이지 우선)
         for c_slug in ordered_slugs:
             if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                 break
@@ -1378,6 +1349,38 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
                     if n_up > 0:
                         total_uploaded += n_up
                         uploaded_items.append({"type": "pdf_1080p", "slug": c_slug, "langs": list(res_std.keys())})
+                break
+
+        if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+            break
+
+        # [Slot C — 2슬롯 (33%)]: 채널 홍보 & 신규 구독자 1,000명 유입 메가폰 9:16 #Shorts (KO/EN) 후(後)업로드!
+        # ★ 핵심 원칙(본편 선업로드 ➔ 직결 쇼츠 후업로드): 반드시 1080p 장편 본편(youtube_urls[lc])이 이미 유튜브에 게시되어 있는
+        #    주제의 #Shorts만 업로드하여, 쇼츠 유입 시청자를 설명란 1번 줄 & 고정댓글의 본편+정주행 플레이리스트(&list=UUSlqQfOEtRfJuMPyGMLgFYA)로
+        #    즉시 유입시켜 '채널 홍보(조회수·구독자)'와 '유효 공개 시청시간(4,000시간)' 두 마리 토끼를 동시에 잡습니다!
+        for s_slug in ordered_slugs:
+            if total_uploaded >= max_wave_uploads or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                break
+            sp = SCRIPTS_DIR / f"{s_slug}.json"
+            if not sp.exists():
+                continue
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+            yu = sdoc.get("youtube_urls") or {}
+            su = sdoc.get("shorts_urls") or {}
+            missing_sh = tuple(
+                lc for lc in ("ko", "en")
+                if not (su.get(lc) or "").strip()
+                and (yu.get(lc) or "").strip()
+                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").exists()
+                and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
+            )
+            if missing_sh:
+                res_sh = vmaker.upload_short_to_youtube(s_slug, langs=missing_sh, privacy="public")
+                if res_sh:
+                    n_up = len([k for k, v in res_sh.items() if v])
+                    if n_up > 0:
+                        total_uploaded += n_up
+                        uploaded_items.append({"type": "pdf_promo_short_paired", "slug": s_slug, "langs": list(res_sh.keys())})
                 break
 
     if total_uploaded > 0:
