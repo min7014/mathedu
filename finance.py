@@ -480,15 +480,15 @@ def build_ypp_watchtime_masterclasses() -> list:
                 pass
         suites.insert(0, {
             "mc_slug": f"masterclass_original_pdf_vol{r_vol}_en",
-            "title_ko": f"🌎 [Original PDF Math Masterclass Vol.{r_vol}] {lead_en} & 5 Full Visual Proofs (1080p) | @min7014_ai",
-            "title_en": f"🌎 [Original PDF Math Masterclass Vol.{r_vol}] {lead_en} & 5 Full Visual Proofs (1080p) | @min7014_ai",
+            "title_ko": f"{lead_en} & 5 Full Visual Proofs — Step-by-Step Course [Original PDF Masterclass Vol.{r_vol}]",
+            "title_en": f"{lead_en} & 5 Full Visual Proofs — Step-by-Step Course [Original PDF Masterclass Vol.{r_vol}]",
             "slugs": r_chunk,
             "lang": "en",
         })
         suites.insert(0, {
             "mc_slug": f"masterclass_original_pdf_vol{r_vol}",
-            "title_ko": f"🏛️ [{sub_dom} 오리지널 PDF 직강 마스터클래스 Vol.{r_vol}] {lead_ko} 외 5대 정리 완전 정복 (1080p) | @min7014_ai",
-            "title_en": f"🏛️ [Original PDF Visual Proof Masterclass Vol.{r_vol}] {lead_en} & 5 Core Theorems (1080p) | @min7014_ai",
+            "title_ko": f"{lead_ko} 외 5대 핵심 정리 완전 정복 — 오리지널 PDF 직강 [{sub_dom} 마스터클래스 Vol.{r_vol}]",
+            "title_en": f"{lead_en} & 5 Core Theorems — Step-by-Step Visual Proofs [Original PDF Masterclass Vol.{r_vol}]",
             "slugs": r_chunk,
             "lang": "ko",
         })
@@ -514,23 +514,23 @@ def build_ypp_watchtime_masterclasses() -> list:
                 pass
         suites.append({
             "mc_slug": f"masterclass_series_vol{vol_num}",
-            "title_ko": f"🔥 [{sub_dom_ko} 시각적 증명 마스터클래스 Vol.{vol_num}] {lead_title_ko} 외 5대 핵심 정리 (1080p 정주행) | @min7014_ai",
-            "title_en": f"🔥 [Visual Math Proof Masterclass Vol.{vol_num}] {lead_title_en} & 5 Core Theorems (1080p) | @min7014_ai",
+            "title_ko": f"{lead_title_ko} 외 5대 핵심 정리 (1080p 정주행) [{sub_dom_ko} 마스터클래스 Vol.{vol_num}]",
+            "title_en": f"{lead_title_en} & 5 Core Theorems — Step-by-Step Visual Proofs [Masterclass Vol.{vol_num}]",
             "slugs": chunk,
             "lang": "ko",
         })
         suites.append({
             "mc_slug": f"masterclass_series_vol{vol_num}_en",
-            "title_ko": f"🌎 [Global English Math Masterclass Vol.{vol_num}] {lead_title_en} & 5 Visual Proofs (1080p) | @min7014_ai",
-            "title_en": f"🌎 [Visual Math Proof Masterclass Vol.{vol_num}] {lead_title_en} & 5 Core Theorems Full Course (1080p) | @min7014_ai",
+            "title_ko": f"{lead_title_en} & 5 Visual Proofs Full Course [Global Math Masterclass Vol.{vol_num}]",
+            "title_en": f"{lead_title_en} & 5 Core Theorems Full Course [Visual Math Masterclass Vol.{vol_num}]",
             "slugs": chunk,
             "lang": "en",
         })
         if all((QUESTION_DIR / f"{ck}_q_ko.mp4").exists() for ck in chunk[:4]):
             suites.append({
                 "mc_slug": f"masterclass_question_vol{vol_num}",
-                "title_ko": f"❓ [질문하는 수학 수업 마스터클래스 Vol.{vol_num}] {lead_title_ko} 외 스스로 보조선을 발견하는 심층 탐구 (1080p) | @min7014_ai",
-                "title_en": f"❓ [Question-Asking Math Masterclass Vol.{vol_num}] {lead_title_en} & Socratic Visual Proofs (1080p) | @min7014_ai",
+                "title_ko": f"{lead_title_ko} 외 스스로 보조선을 발견하는 심층 탐구 [질문수업 마스터클래스 Vol.{vol_num}]",
+                "title_en": f"{lead_title_en} & Socratic Visual Proofs Full Course [Question Masterclass Vol.{vol_num}]",
                 "slugs": chunk[:4],
                 "use_question_edition": True,
                 "lang": "ko",
@@ -623,36 +623,35 @@ def build_ypp_watchtime_masterclasses() -> list:
                 except Exception:
                     cum_sec = 1500.0
             dur_min = round(cum_sec / 60.0, 1)
+            topic_names_line = " · ".join(c.split("|", 1)[-1].strip() for c in chapters[:5])
             desc_ko = (
-                f"🏆 [{spec['title_ko']}]\n"
-                f"총 재생 시간: {dur_min}분 연속 정주행 마스터클래스!\n\n"
-                f"▶️ [전체 장편 강의 무중단 연속재생 플레이리스트 (유효 시청시간 정주행)]:\n"
-                f"👉 https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
-                f"🔔 공식 채널 1초 구독하기 (매일 새로운 시각적 수학 증명 업데이트):\n"
-                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                f"⏱️ [마스터클래스 챕터 타임스탬프]\n"
+                f"📐 [{spec['title_ko']}] 수록 단원({dur_min}분): {topic_names_line}\n"
+                f"📄 오리지널 시각 증명 원문 아카이브: https://min7014.github.io/ | ▶️ 전 단원 무중단 연속재생: https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
+                f"💬 [오늘의 유레카 질문] 오늘 마스터클래스 수록 단원({topic_names_line}) 중 가장 명쾌하게 이해된 주제는 몇 강이었나요? 타임스탬프와 함께 댓글로 남겨주세요! 🤩\n\n"
+                f"⏱️ [00:00 | 마스터클래스 챕터 타임스탬프]\n"
                 + "\n".join(chapters)
-                + "\n\n🌐 [수학홈페이지 자체 제작 MathLab 실습 & 16,548문항 퀴즈]:\n"
+                + "\n\n🌐 [수학홈페이지 좌우 분할 MathLab v1.4 실습 & 16,548문항 퀴즈]:\n"
                 "👉 https://min7014.github.io/mathedu/video_board.html\n"
                 "👉 https://min7014.github.io/\n\n"
-                "🏛️ [사람이 직접 만든 깊이 있는 오리지널 수학 자료 선언 — Not All by AI]\n"
-                "본 영상의 기본 아이디어와 단계별 증명 슬라이드는 모든 것이 AI에 의해 만들어진 것이 아닙니다. 수학교육 연구자가 오랜 세월 직접 고민하고 작도한 깊이 있는 오리지널 원문 자료(https://min7014.github.io/)로부터 제작되었으며, AI는 음성 전달만 보조합니다.\n"
+                "🏛️ [민은기 선생님의 단계별 시각적 수학 증명 — 인간 고유의 깊은 수학적 통찰 (Not All by AI)]\n"
+                "본 영상의 기본 아이디어와 단계별 증명 슬라이드는 수학교육 연구자가 오랜 세월 직접 고민하고 작도한 깊이 있는 오리지널 원문 자료(https://min7014.github.io/)로부터 제작되었으며, AI는 다국어 음성 전달만 보조합니다.\n"
+                "📅 정기 업로드 일정: 매일 1080p 오리지널 PDF 단계별 시각 증명 본편·마스터클래스 및 핵심 #Shorts가 정기 연재됩니다.\n"
+                "🔔 공식 채널 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n"
                 f"[ID: {mc_slug}_KO] #수학증명 #기하학 #수능수학 #시각적증명 #피타고라스 #메넬라우스 #체바 #마스터클래스"
             ).replace("<", "＜").replace(">", "＞")
             desc_en = (
-                f"🏆 [{spec['title_en']}]\n"
-                f"Total Duration: {dur_min}-Minute Full Visual Math Proof Masterclass Compilation!\n\n"
-                f"▶️ [Continuous Long-Form Marathon Playlist (Full Course Autoplay)]:\n"
-                f"👉 https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
-                f"🔔 Subscribe to @min7014_ai (Daily 1080p Visual Math Proofs & Interactive Geometry):\n"
-                f"👉 https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                f"⏱️ [Masterclass Chapter Timestamps]\n"
+                f"📐 [{spec['title_en']}] Covered Theorems ({dur_min} min): {topic_names_line}\n"
+                f"📄 Original Visual Proof Archive: https://min7014.github.io/ | ▶️ Full Course Autoplay Playlist: https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
+                f"💬 [Quick Eureka Question] Which theorem in today's masterclass ({topic_names_line}) gave you the clearest visual insight? Share the timestamp in the comments! 🤩\n\n"
+                f"⏱️ [00:00 | Masterclass Chapter Timestamps]\n"
                 + "\n".join(chapters)
-                + "\n\n🌐 [Interactive MathLab, PDF Proofs & 16,548 Free Math Problems (https://min7014.github.io/)]:\n"
+                + "\n\n🌐 [Interactive MathLab v1.4, PDF Proofs & 16,548 Free Math Problems (https://min7014.github.io/)]:\n"
                 "👉 https://min7014.github.io/mathedu/video_board.html?lang=en\n"
                 "👉 https://min7014.github.io/\n\n"
-                "🏛️ [Deep Human-Crafted Original Mathematical Proof Statement — Not All by AI]\n"
-                "The fundamental mathematical ideas and step-by-step proof slides in this masterclass are crafted directly by a human educator with deep mathematical insight at https://min7014.github.io/ (not AI-generated math; AI assists voice narration only).\n"
+                "🏛️ [MIN EUN GI : Visual Math Proofs — Deep Human-Crafted Mathematical Insight]\n"
+                "The fundamental mathematical ideas and step-by-step proof slides in this masterclass are crafted directly by a human educator at https://min7014.github.io/ (AI assists multilingual voice narration only).\n"
+                "📅 Upload Schedule: New 1080p visual proofs & masterclasses published daily.\n"
+                "🔔 Subscribe to @min7014_ai: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n"
                 f"[ID: {mc_slug}_EN] #VisualProof #Mathematics #Geometry #Calculus #ConicSections #VisualMathCinema #MathMasterclass #min7014_ai"
             ).replace("<", "＜").replace(">", "＞")
             prev_yt_url = ""

@@ -3571,64 +3571,65 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         if preset.get("title_en"):
             yt_title = _balance_parentheses(preset["title_en"][:98])
         else:
-            # [5대 인기 수학 채널 벤치마킹 (3Blue1Brown · MindYourDecisions · Andy Math · Mathologer · 깨봉수학)]
-            # 모바일 첫 25글자에 호기심 공백(Curiosity-Gap) 훅을 배치하고 단어 중간 절단을 100% 방지합니다.
+            # [Rule 42 · YouTube 공식 크리에이터 팁(11616410 / 12340300) 적용]:
+            # 가장 중요한 검색 키워드(단원명)를 앞쪽에 배치하고 호기심 유도 문구와 결합하며, 과도한 이모지·브랜드 반복을 절제합니다.
             if pat_idx_en == 0:
-                cand_en = f"🔥 Don't Memorize Formulas! Why {concise_en} Works Visually ({tot_p} Steps) | @min7014_ai"
+                cand_en = f"{concise_en} — Why It Works Without Memorizing Formulas ({tot_p}-Step Visual Proof)"
             elif pat_idx_en == 1:
-                cand_en = f"❓ 99% Memorize This Without Seeing Why! {concise_en} Visual Proof | @min7014_ai"
+                cand_en = f"Why {concise_en} Always Holds — Step-by-Step Visual Math Proof ({tot_p} Steps)"
             elif pat_idx_en == 2:
-                prefix_en = "⚡ 1 Visual Idea Proves It!" if cat_type_en in ("algebra", "number") else "⚡ Just 1 Hidden Line!"
-                cand_en = f"{prefix_en} {concise_en} — Step-by-Step Visual Proof | @min7014_ai"
+                tag_en = "1 Visual Idea Proves It" if cat_type_en in ("algebra", "number") else "1 Auxiliary Line Proves It"
+                cand_en = f"{concise_en}: {tag_en} ({tot_p}-Step Visual Proof · 1080p)"
             else:
-                cand_en = f"✨ The Hidden Visual Secret Behind {concise_en} ({tot_p} Steps · 1080p) | @min7014_ai"
+                cand_en = f"{concise_en} Explained Visually — Deep Mathematical Intuition ({tot_p} Steps)"
 
             if len(cand_en) <= 98:
                 yt_title = _balance_parentheses(cand_en)
             else:
-                compact_suffix_en = f" — Visual Math Proof ({tot_p} Steps · 1080p) | @min7014_ai"
-                if len(f"🔥 {concise_en}{compact_suffix_en}") <= 98:
-                    yt_title = _balance_parentheses(f"🔥 {concise_en}{compact_suffix_en}")
+                compact_suffix_en = f" — Step-by-Step Visual Proof ({tot_p} Steps)"
+                if len(f"{concise_en}{compact_suffix_en}") <= 98:
+                    yt_title = _balance_parentheses(f"{concise_en}{compact_suffix_en}")
                 else:
-                    max_en_len = max(18, 98 - len("🔥 ") - len(compact_suffix_en))
+                    max_en_len = max(18, 98 - len(compact_suffix_en))
                     short_en_t = _smart_concise_topic_title(concise_en, max_len=max_en_len, lang="en")
-                    yt_title = _balance_parentheses(f"🔥 {short_en_t}{compact_suffix_en}")
+                    yt_title = _balance_parentheses(f"{short_en_t}{compact_suffix_en}")
+        t_an_en = script_doc.get("teacher_proof_analysis") or {}
+        hyp_en_short = (t_an_en.get("hypothesis_en") or f"the core setup of {clean_en_title}")[:95]
         hook_en = preset.get("hook_en") or (
-            f"Stop memorizing formulas by rote! Watch why {clean_en_title} must hold true through a crystal-clear {tot_p}-step visual proof in 1080p."
+            f"[{clean_en_title} — {tot_p}-Step Visual Proof] Starting from {hyp_en_short}, discover step by step why {clean_en_title} holds true without rote formula memorization."
         )
         quiz_en = preset.get("quiz_en") or (
-            f"💬 [5-Second Eureka Challenge] Pause at Step {max(1, tot_p // 2)}! Can you spot why this relationship holds before the final step? Drop the step number that gave you the biggest 'Aha!' moment in the comments!"
+            f"💬 [Quick Eureka Question] Which step (1 to {tot_p}) gave you the clearest 'Aha!' moment for {clean_en_title}? Share the step number or timestamp in the comments! 🤩"
         )
         binge_en = (
-            "🔥 [Watch Next — Top Visual Proofs & 8-Min Masterclasses on @min7014_ai]\n"
-            "• 🎬 [8-Min Masterclass] 6 Legendary Geometry Visual Proofs Compilation (1080p): https://youtu.be/9EL8pgqJtkY\n"
+            "🔥 [Next Step in Your Curriculum — Co-Watched Visual Proof Series]\n"
+            "• ▶️ Full Course Autoplay Playlist (All Long-Form Visual Proofs): https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n"
+            "• 🎬 [Masterclass] 6 Core Geometry Visual Proofs Compilation (1080p): https://youtu.be/9EL8pgqJtkY\n"
             "• 🌳 Pythagoras Tree Area Conservation (1080p): https://youtu.be/3ik6yQ-0fP8\n"
-            "• 🔥 Pythagorean Theorem 25-Step Visual Proof (1080p): https://youtu.be/yZER1pGb2J8\n"
-            "• 📐 Ceva's Theorem Visualized (1080p): https://youtu.be/aKmG-iKoieQ\n"
-            "• ⚡ Pythagoras Tree 45s #Shorts: https://youtube.com/shorts/5qmEJcY_VBM\n"
-            "• ✨ Ceva's Theorem 45s #Shorts: https://youtube.com/shorts/dAJFCz19c0M"
+            "• 📐 Pythagorean Theorem 25-Step Visual Proof (1080p): https://youtu.be/yZER1pGb2J8\n"
+            "• 🧭 Ceva's Theorem Visualized (1080p): https://youtu.be/aKmG-iKoieQ"
         )
         orig_yt_url = ((script_doc.get("youtube_urls") or {}).get("orig") or "").strip()
         orig_yt_line_en = f"🎬 Original Video (@min7014 Main Channel): {orig_yt_url}\n" if orig_yt_url else ""
+        # [Rule 42 · YouTube 공식 설명 팁(12948449) 적용]:
+        # Part 1 ('더보기' 클릭 전 처음 2~3줄): 동영상마다 100% 고유한 핵심 설명 + 주요 검색 키워드 + 원문 PDF 직통 링크 배치
+        # Part 2 ('더보기' 클릭 후): 챕터 타임스탬프, 연속 시청 브릿지, 인간 저작 오리지널 선언(Rule 35), 정기 업로드 일정(13616979) 배치
         yt_desc = (
-            f"🏛️ [Deep Human-Crafted Mathematical Insight — Built from Original Human Proofs (https://min7014.github.io/), Not AI-Generated Math]\n"
-            f"The fundamental mathematical ideas, auxiliary lines, and step-by-step proof slides are 100% crafted by a human educator with deep mathematical insight at https://min7014.github.io/ (not all by AI; AI assists voice narration only).\n"
-            f"📄 Original Step-by-Step Visual Proof PDF: {pdf_url}\n"
-            f"📐 Original Interactive Geometry / Proof Page: {web_url}\n"
-            f"{orig_yt_line_en}"
-            f"🌐 Full 3,400+ Original Math Archive: https://min7014.github.io/\n\n"
-            f"{hook_en}\n\n"
-            f"🚀 [Interactive Practice & Step-by-Step Quizzes (min7014.github.io/mathedu)]\n"
-            f"1️⃣ 📐 Interactive Video Board & Original Flipbook Studio:\n👉 {board_url}&from=yt\n"
-            f"2️⃣ ✍️ De-Multiple-Choice Constructive Math Studio (16,548 Step-by-Step Quizzes):\n👉 https://min7014.github.io/mathedu/?from=yt\n"
-            f"3️⃣ 🎬 37-Min Circle & Geometry Visual Proof Masterclass (1080p): https://youtu.be/9EL8pgqJtkY\n\n"
+            f"{hook_en}\n"
+            f"📄 Original Step-by-Step Visual Proof PDF ({clean_en_title}): {pdf_url} | ▶️ Full Course Playlist: https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
             f"{quiz_en}\n\n"
-            f"{binge_en}\n\n"
-            f"🔔 Subscribe to @min7014_ai for Daily Visual Math Proofs: {sub_url}\n"
-            f"📺 Main Channel (@min7014): https://www.youtube.com/@min7014\n"
-            f"📐 Original Human-Crafted Proof Studio: {studio_url}\n"
-            f"Topic ID: [ID: {slug}_EN]\n\n"
             f"⏱️ [00:00 Key Moments & Step-by-Step Chapters]\n{chapters_block}\n\n"
+            f"{binge_en}\n\n"
+            f"🚀 [Interactive MathLab Practice & 16,548 Step-by-Step Quizzes (min7014.github.io/mathedu)]\n"
+            f"1️⃣ 📐 Split-Screen Video Board & Interactive MathLab v1.4:\n👉 {board_url}&from=yt\n"
+            f"2️⃣ 🌐 Original Interactive Geometry / Proof Page: {web_url}\n"
+            f"{orig_yt_line_en}"
+            f"3️⃣ ✍️ Constructive Math Problem Solver (16,548 Problems): https://min7014.github.io/mathedu/?from=yt\n\n"
+            f"🏛️ [Human-Crafted Original Mathematical Insight — MIN EUN GI (https://min7014.github.io/)]\n"
+            f"The mathematical ideas, auxiliary lines, and step-by-step visual proof slides are crafted by a human mathematics educator at https://min7014.github.io/ (AI assists multilingual voice narration only).\n"
+            f"📅 Upload Schedule: New 1080p step-by-step visual proofs & masterclasses published daily.\n"
+            f"🔔 Subscribe to MIN EUN GI : Visual Math Proofs (@min7014_ai): {sub_url}\n"
+            f"Topic ID: [ID: {slug}_EN]\n\n"
             f"#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #VisualMathCinema #DynamicGeometry #EuclideanGeometry #MathOlympiad #min7014_ai #min7014"
         )
         yt_tags = [
@@ -3641,67 +3642,70 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
         clean_ko_title = split_bilingual_title(script_doc.get("title", slug))[0]
         concise_ko = _smart_concise_topic_title(clean_ko_title, max_len=36, lang="ko")
         cat_type = (script_doc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
-        sub_label = "대수·수체계 원리" if cat_type in ("algebra", "number") else "시각적 기하 직관"
+        sub_label = "대수·수체계 원리" if cat_type in ("algebra", "number") else "시각적 기하 증명"
         pat_idx_ko = sum(ord(c) for c in str(slug)) % 4
         if preset.get("title_ko"):
             yt_title = _balance_parentheses(preset["title_ko"][:98])
         else:
+            # [Rule 42 · YouTube 공식 크리에이터 팁(11616410 / 12340300) 적용]:
+            # 가장 중요한 검색어(수학 단원명 concise_ko)를 제목 맨 앞에 배치하고, 시리즈/단계 표시는 뒤쪽에 배치합니다.
             if pat_idx_ko == 0:
-                cand_ko = f"🔥 공식 외우지 마세요! {concise_ko}, 눈으로 깨치는 {tot_p}단계 시각 증명 | @min7014_ai"
+                cand_ko = f"{concise_ko} — 공식 암기 없이 눈으로 깨치는 {tot_p}단계 시각 증명"
             elif pat_idx_ko == 1:
-                cand_ko = f"❓ 99%가 공식만 외우다 놓치는 {concise_ko}! {tot_p}단계 원리 해부 | @min7014_ai"
+                cand_ko = f"{concise_ko}, 왜 항상 성립할까? 원리와 보조선 {tot_p}단계 완벽 해부"
             elif pat_idx_ko == 2:
-                prefix_ko = "⚡ 원리 딱 1개면 끝!" if cat_type in ("algebra", "number") else "⚡ 보조선 딱 1줄이면 끝!"
-                cand_ko = f"{prefix_ko} {concise_ko} ({tot_p}단계 {sub_label}) | @min7014_ai"
+                tag_ko = "핵심 원리 1개로 증명 끝!" if cat_type in ("algebra", "number") else "보조선 1줄로 증명 끝!"
+                cand_ko = f"{concise_ko} ({sub_label}) — {tag_ko} [{tot_p}단계 직강]"
             else:
-                cand_ko = f"✨ 왜 항상 성립할까? {concise_ko} — 수식 없이 보는 {tot_p}단계 증명 | @min7014_ai"
+                cand_ko = f"{concise_ko} 완전 정복 — 수식 너머의 직관적 {tot_p}단계 시각 증명"
 
             if len(cand_ko) <= 98:
                 yt_title = _balance_parentheses(cand_ko)
             else:
-                compact_suffix_ko = f" ({tot_p}단계 {sub_label} · 1080p) | @min7014_ai"
-                if len(f"🔥 {concise_ko}{compact_suffix_ko}") <= 98:
-                    yt_title = _balance_parentheses(f"🔥 {concise_ko}{compact_suffix_ko}")
+                compact_suffix_ko = f" — {tot_p}단계 {sub_label} (1080p)"
+                if len(f"{concise_ko}{compact_suffix_ko}") <= 98:
+                    yt_title = _balance_parentheses(f"{concise_ko}{compact_suffix_ko}")
                 else:
-                    max_ko_len = max(16, 98 - len("🔥 ") - len(compact_suffix_ko))
+                    max_ko_len = max(16, 98 - len(compact_suffix_ko))
                     short_ko_t = _smart_concise_topic_title(concise_ko, max_len=max_ko_len, lang="ko")
-                    yt_title = _balance_parentheses(f"🔥 {short_ko_t}{compact_suffix_ko}")
+                    yt_title = _balance_parentheses(f"{short_ko_t}{compact_suffix_ko}")
+        t_an_ko = script_doc.get("teacher_proof_analysis") or {}
+        hyp_ko_short = (t_an_ko.get("hypothesis_ko") or f"'{clean_ko_title}'의 출발 조건")[:68]
+        aux_ko_short = (t_an_ko.get("auxiliary_line_ko") or "핵심 보조선과 동치 변형")[:68]
         hook_ko = preset.get("hook_ko") or (
-            f"무작정 공식을 외우지 마세요! 오리지널 수학자료실(https://min7014.github.io/) 원문 슬라이드를 1페이지부터 {tot_p}페이지까지 한 땀 한 땀 직접 짚어 설명하는 [{clean_ko_title}] {tot_p}단계 시각적 증명입니다."
+            f"📐 [{clean_ko_title} ({tot_p}단계 시각 증명)] {hyp_ko_short}에서 출발하여 {aux_ko_short}을 통해 결론이 성립하는 이유를 1페이지부터 {tot_p}페이지까지 한 땀 한 땀 증명합니다."
         )
         quiz_ko = preset.get("quiz_ko") or (
-            f"💬 [오늘의 5초 유레카 퀴즈] 영상을 멈추고 생각해 보세요! 1페이지부터 {tot_p}페이지 중 증명 전체의 열쇠가 되는 결정적 원리가 등장한 페이지는 몇 번인가요? 댓글로 번호를 남겨주세요!"
+            f"💬 [오늘의 유레카 질문] '{clean_ko_title}'의 1~{tot_p}페이지 중 가장 명쾌하게 이해된 결정적 단계는 몇 페이지였나요? 타임스탬프와 함께 댓글로 남겨주세요! 🤩"
         )
         binge_ko = (
-            "🔥 [@min7014_ai 오리지널 PDF 단계별 시각 증명 정주행 시리즈]\n"
+            "🔥 [이 단원과 함께 보면 실력이 2배가 되는 연속 정주행 코스 (Co-Watch Series)]\n"
+            "• ▶️ 전 단원 장편 강의 무중단 연속재생 플레이리스트: https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n"
             "• 🎬 [37분 마스터클래스] 원의 성질 & 수직이등분선 오리지널 PDF 정주행: https://youtu.be/_5LE_BfLA5w\n"
             "• 🌳 피타고라스 나무 넓이 보존의 비밀 (11단계 본편): https://youtu.be/DSgUHigl82o\n"
-            "• 🔥 피타고라스 정리 정사각형 넓이 분할 (25단계 본편): https://youtu.be/7RcvUpfGM6s\n"
-            "• 📐 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/zvRgbIKm0jc\n"
-            "• ⚡ 피타고라스 정리 45초 핵심 #Shorts: https://youtube.com/shorts/1RKQ4Uxu4Uw\n"
-            "• ✨ 피타고라스 나무 45초 핵심 #Shorts: https://youtube.com/shorts/maGFOifE-2E"
+            "• 📐 피타고라스 정리 정사각형 넓이 분할 (25단계 본편): https://youtu.be/7RcvUpfGM6s\n"
+            "• 🧭 체바의 정리 질문하는 수업 본편 (17단계): https://youtu.be/zvRgbIKm0jc"
         )
         orig_yt_url = ((script_doc.get("youtube_urls") or {}).get("orig") or "").strip()
         orig_yt_line_ko = f"🎬 오리지널 원문 영상 (@min7014 본 채널): {orig_yt_url}\n" if orig_yt_url else ""
+        # [Rule 42 · YouTube 공식 설명 팁(12948449) 적용]:
+        # 첫 2줄('더보기' 클릭 전 영역)에 해당 영상만의 100% 고유한 수학적 설명(hook_ko) + 원문 PDF 직통 링크를 최우선 배치!
         yt_desc = (
-            f"🏛️ [사람이 직접 설계·작도한 깊이 있는 오리지널 수학 자료 기반 (https://min7014.github.io/) — 단순 AI 생성물이 아닙니다]\n"
-            f"본 영상의 기본 수학 아이디어와 단계별 증명 슬라이드는 사람이 직접 깊이 있게 연구·작도한 오리지널 원문 자료이며, 모든 것이 AI에 의해 만들어진 것이 아닙니다(AI는 음성 전달만 보조).\n"
-            f"📄 오리지널 단계별 시각 증명 PDF 원문: {pdf_url}\n"
-            f"📐 오리지널 동적 기하(GeoGebra / AlgeoMath) 원문 웹페이지: {web_url}\n"
-            f"{orig_yt_line_ko}"
-            f"🌐 수학자료실 본관 (3,400+ 오리지널 시각 증명 아카이브): https://min7014.github.io/\n\n"
-            f"{hook_ko}\n\n"
-            f"🚀 [영상을 본 직후 직접 실습하는 수학홈페이지(mathedu) 무료 링크]\n"
-            f"1️⃣ 📐 오리지널 PDF 슬라이드 넘겨보기 & 동적 기하 실습 게시판:\n👉 {board_url}&from=yt\n"
-            f"2️⃣ ✍️ [탈-5지선다 창의 구성 모드] 이 개념이 쓰인 수능·모평 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q={clean_ko_title.split()[0]}&from=yt\n"
-            f"3️⃣ 🎬 [37분 마스터클래스 총정리 바로 보기]: https://youtu.be/_5LE_BfLA5w\n\n"
+            f"{hook_ko}\n"
+            f"📄 [{clean_ko_title}] 오리지널 시각 증명 PDF 원문: {pdf_url} | ▶️ 연속 정주행: https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
             f"{quiz_ko}\n\n"
+            f"⏱️ [00:00 | 단계별 핵심 챕터 타임스탬프]\n{chapters_block}\n\n"
             f"{binge_ko}\n\n"
-            f"🔔 [@min7014_ai 채널 구독하기]: {sub_url}\n"
-            f"📺 수학자료실 본 채널(@min7014): https://www.youtube.com/@min7014\n"
-            f"📐 오리지널 원문 PDF 단계별 스튜디오: {studio_url}\n"
+            f"🚀 [영상을 본 직후 직접 작도·실습하는 수학홈페이지(mathedu) 무료 학습관]\n"
+            f"1️⃣ 📐 좌우 분할 실습 스튜디오 (유튜브 강의 × 자체 제작 MathLab v1.4 동시 작도):\n👉 {board_url}&from=yt\n"
+            f"2️⃣ 🌐 오리지널 동적 기하 원문 웹페이지: {web_url}\n"
+            f"{orig_yt_line_ko}"
+            f"3️⃣ ✍️ [탈-5지선다 창의 구성 모드] 관련 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q={clean_ko_title.split()[0]}&from=yt\n\n"
+            f"🏛️ [민은기 선생님의 단계별 시각적 수학 증명 — 인간 고유의 깊은 수학적 통찰 (https://min7014.github.io/)]\n"
+            f"본 영상의 기본 수학 아이디어와 단계별 증명 슬라이드는 사람이 직접 깊이 있게 연구·작도한 오리지널 원문 자료(3,400+ 아카이브)이며, 단순 AI 생성물이 아닙니다(AI는 다국어 음성 전달만 보조).\n"
+            f"📅 정기 업로드 일정: 매일 1080p 오리지널 PDF 단계별 시각 증명 본편·마스터클래스 및 핵심 #Shorts가 정기 연재됩니다.\n"
+            f"🔔 공식 채널 구독하기: {sub_url} | 📺 본 채널(@min7014): https://www.youtube.com/@min7014\n"
             f"식별 코드: [ID: {slug}_KO]\n\n"
-            f"⏱️ [00:00 단계별 핵심 챕터 타임스탬프]\n{chapters_block}\n\n"
             f"#수학 #기하학 #시각적증명 #수능수학 #피타고라스정리 #메넬라우스정리 #체바의정리 #중등기하 #고등수학 #영재고수학 #보조선 #GeoGebra #수학자료실 #min7014_ai #min7014"
         )
         yt_tags = [
