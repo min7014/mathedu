@@ -586,6 +586,12 @@ def latex_to_unicode_title(text):
     for _bad_name in ("민은기 선생님의 ", "민은기 선생님의", "민은기 선생님 ", "민은기 선생님", "민은기의 ", "민은기 ", "민은기", "Min Eun-ki's ", "Min Eun-ki's", "Min Eunki's ", "Min's Math Lab"):
         s = s.replace(_bad_name, "")
     s = s.replace("Equationss", "Equations").replace("수직이분선", "수직이등분선")
+    s = re.sub(r"\\begin\s*\{cases\}(.*?)\\end\s*\{cases\}", lambda m: m.group(1).replace(r"\\", ", "), s, flags=re.S)
+    s = re.sub(r"\bbegin\s*\(cases\)(.*?)\bend\s*\(cases\)", lambda m: m.group(1), s, flags=re.S)
+    # 시그마(∑) 상·하한 표기를 지수(^n) 변환보다 먼저 처리하여 '의 n제곱' 오변환 원천 차단
+    s = re.sub(r"\\sum\s*_\s*\{([^{}]+)\}\s*\^\s*\{([^{}]+)\}", r"∑(\1..\2) ", s)
+    s = re.sub(r"\\sum\s*_\s*\{([^{}]+)\}\s*\^\s*([a-zA-Z0-9]+)", r"∑(\1..\2) ", s)
+    s = s.replace(r"\sum", "∑")
     s = (
         s.replace(r"\mathbb{R}", "ℝ")
         .replace(r"\mathbb{N}", "ℕ")
@@ -595,6 +601,7 @@ def latex_to_unicode_title(text):
     )
     s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
+    s = re.sub(r"\\vec\s*\{([^{}]+)\}", r"\1⃗", s)
     s = (
         s.replace(r"\rightarrow", "→")
         .replace(r"\leftarrow", "←")
@@ -604,6 +611,9 @@ def latex_to_unicode_title(text):
         .replace(r"\alpha", "α")
         .replace(r"\beta", "β")
         .replace(r"\gamma", "γ")
+        .replace(r"\Delta", "Δ")
+        .replace(r"\forall", "∀")
+        .replace(r"\exists", "∃")
         .replace(r"\lim", "lim")
         .replace(r"\sin", "sin")
         .replace(r"\cos", "cos")
@@ -619,8 +629,11 @@ def latex_to_unicode_title(text):
     s = re.sub(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"(\1/\2)", s)
     s = re.sub(r"\\triangle\s*", "△", s)
     s = re.sub(r"\\angle\s*", "∠", s)
+    # 긴 매크로(\nRightarrow, \infty, \notin)를 짧은 매크로(\Rightarrow, \in)보다 반드시 먼저 치환 (∈fty 오변환 방지)
+    s = s.replace(r"\nRightarrow", "⇏").replace("nRightarrow", "⇏")
     s = s.replace(r"\Leftrightarrow", "⇔").replace(r"\Rightarrow", "⇒").replace(r"\Leftarrow", "⇐")
-    s = s.replace(r"\in", "∈").replace(r"\subset", "⊂").replace(r"\infty", "∞")
+    s = s.replace(r"\infty", "∞").replace("∈fty", "∞").replace(r"\notin", "∉").replace(r"\in", "∈").replace(r"\subset", "⊂")
+    s = s.replace(r"\equiv", "≡").replace(r"\mid", " | ")
     s = s.replace(r"\cdots", "⋯").replace(r"\ldots", "⋯").replace(r"\dots", "⋯")
     s = s.replace(r"\times", "×").replace(r"\div", "÷").replace(r"\cdot", "·")
     s = s.replace(r"\pm", "±").replace(r"\leq", "≤").replace(r"\geq", "≥").replace(r"\neq", "≠")
@@ -646,15 +659,48 @@ def clean_math_for_speech_ko(text):
     # 한글 문장 뒤의 영문 번역 괄호(4글자 이상 영단어 포함)만 제거하고 (m+n), (mn) 등 수식 괄호는 보존
     s, _ = split_bilingual_title(s) if s.endswith(")") and re.search(r"[A-Za-z]{4,}", s) else (s, "")
     s = re.sub(r"\(\s*[^가-힣()]*[A-Za-z]{4,}[^가-힣()]*\)", "", s)
-    for _ch, _d in zip("₀₁₂₃₄₅₆₇₈₉ₙₖᵢⱼₘ", "0123456789nkijm"):
+    # 1. 시그마(∑) 상·하한을 지수(^n)보다 먼저 한국어 수학교육 표준 발음으로 변환
+    s = re.sub(r"\\sum\s*_\s*\{([^{}]+)\}\s*\^\s*\{([^{}]+)\}", r"시그마 \1부터 \2까지 ", s)
+    s = re.sub(r"\\sum\s*_\s*\{([^{}]+)\}\s*\^\s*([a-zA-Z0-9]+)", r"시그마 \1부터 \2까지 ", s)
+    s = re.sub(r"∑\(([^().]+)\.\.([^().]+)\)", r"시그마 \1부터 \2까지 ", s)
+    s = re.sub(r"\bsum\s*([kijmn])\s*[=₌]\s*([0-9a-zA-Z]+)\s*(?:의\s*([0-9a-zA-Z]+)제곱|\^\s*([0-9a-zA-Z]+))", lambda m: f"시그마 {m.group(1)}는 {m.group(2)}부터 {m.group(3) or m.group(4)}까지 ", s)
+    s = s.replace(r"\sum", " 시그마 ").replace("∑", " 시그마 ").replace("sum 의 성질", "합의 기호 시그마의 성질")
+    # 2. 아래첨자 유니코드 복원 (₊₋₌₍₎ 포함) 및 첨자 표기 정화
+    for _ch, _d in zip("₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₙₖᵢⱼₘ", "0123456789+-=()nkijm"):
         s = s.replace(_ch, _d)
     s = s.replace(r"\cdots", " 점점점 ").replace(r"\ldots", " 점점점 ").replace("⋯", " 점점점 ")
+    s = re.sub(r"\\begin\s*\{cases\}(.*?)\\end\s*\{cases\}", r"연립방정식 \1", s, flags=re.S)
+    s = re.sub(r"\bbegin\s*\(?cases\)?(.*?)\bend\s*\(?cases\)?", r"매개변수 식 \1", s, flags=re.S)
+    s = re.sub(r"\\vec\s*\{([^{}]+)\}", r"벡터 \1", s)
+    s = re.sub(r"\bvec\s+([a-zA-Z])\b", r"벡터 \1", s)
     s = re.sub(r"_\s*\{([^{}]+)\}", r" \1", s)
+    s = re.sub(r"([a-zA-ZΔ])_([0-9nkijm]+)", r"\1 \2", s)
+    # 3. 집합·논리·무한대 기호 (긴 매크로 \infty, \notin, \nRightarrow 최우선 처리)
     s = (
-        s.replace(r"\mathbb{R}", "실수 집합")
+        s.replace(r"\infty", " 무한대 ")
+        .replace("∈fty", " 무한대 ")
+        .replace("원소 fty", " 무한대 ")
+        .replace("∞", " 무한대 ")
+        .replace(r"\notin", " 원소가 아닌 ")
+        .replace("∉", " 원소가 아닌 ")
+        .replace("notin", " 원소가 아닌 ")
+        .replace(r"\mathbb{R}", "실수 집합")
         .replace("ℝ", "실수 집합")
         .replace(r"\mathbb{N}", "자연수 집합")
         .replace("ℕ", "자연수 집합")
+        .replace(r"\mathbb{Z}", "정수 집합")
+        .replace("ℤ", "정수 집합")
+        .replace("mathbb Z", "정수 집합")
+        .replace(r"\mathbb{Q}", "유리수 집합")
+        .replace("ℚ", "유리수 집합")
+        .replace(r"\mathbb{C}", "복소수 집합")
+        .replace("ℂ", "복소수 집합")
+        .replace(r"\forall", "모든 ")
+        .replace("∀", "모든 ")
+        .replace("forall", "모든 ")
+        .replace(r"\exists", "존재하는 ")
+        .replace("∃", "존재하는 ")
+        .replace("exists", "존재하는 ")
         .replace(r"\in", " 원소 ")
         .replace("∈", " 원소 ")
     )
@@ -669,20 +715,37 @@ def clean_math_for_speech_ko(text):
     s = re.sub(r"\\angle\s*([A-Za-z0-9]+)", r"각 \1", s)
     s = re.sub(r"√\(([^()]+)\)", r"루트 \1", s)
     s = s.replace("√(", "루트 ").replace("√", "루트 ")
+    s = s.replace(r"\nRightarrow", " 이면 성립하지 않는 ").replace("⇏", " 이면 성립하지 않는 ").replace("nRightarrow", " 이면 성립하지 않는 ")
     s = s.replace(r"\Leftrightarrow", " 필요충분조건 ").replace("⇔", " 필요충분조건 ")
     s = s.replace(r"\Rightarrow", " 이면 ").replace("⇒", " 이면 ")
+    # 극한(lim) 및 화살표(→, arrow, harrow) 정밀 변환
+    s = re.sub(r"(?:\\lim|lim)\s*\(?\s*([a-zA-Zθ]+)\s*(?:\\to|\\rightarrow|→|arrow)\s*([^\)\s]+)\s*\)?", r"리미트 \1가 \2으로 갈 때 ", s)
+    s = re.sub(r"(?:\\lim|lim)\s*\(?\s*harrow\s*0\s*\)?", "리미트 h가 0으로 갈 때 ", s)
+    s = re.sub(r"(?:\\lim|lim)\s*\(?\s*xarrow\s*0\s*\)?", "리미트 x가 0으로 갈 때 ", s)
+    s = s.replace(r"\rightarrow", "에서 ").replace(r"\to", "에서 ").replace("→", "에서 ").replace(" arrow ", "가 ")
+    # 정수론 약수·배수 및 합동식
+    s = re.sub(r"\ba\s*(?:\\mid|mid)\s*b\b", "a가 b의 약수이다", s)
+    s = re.sub(r"\ba\s*(?:\\equiv|equiv)\s*b\b", "a와 b는 합동이다", s)
     s = s.replace(r"\times", " 곱하기 ").replace(r"\div", " 나누기 ").replace(r"\cdot", " 곱하기 ")
     s = s.replace("×", " 곱하기 ").replace("÷", " 나누기 ").replace("∴", "따라서 ")
     s = s.replace(r"\neq", " 같지 않다 ").replace(r"\ne", " 같지 않다 ").replace("≠", " 같지 않다 ")
     s = s.replace(r"\leq", " 이하 ").replace(r"\le", " 이하 ").replace("≤", " 이하 ")
     s = s.replace(r"\geq", " 이상 ").replace(r"\ge", " 이상 ").replace("≥", " 이상 ")
     s = s.replace(r"\pm", " 플러스마이너스 ").replace("±", " 플러스마이너스 ")
+    # 거듭제곱 변환: 중괄호/소괄호 지수는 내부 부호(+,-)를 허용하되, 괄호 없는 ^n+a 형태는 ^n만 매칭하여 'x의 n+a제곱' 오변환 원천 차단
     s = re.sub(r"\^\s*\{([^{}]+)\}", r"의 \1제곱", s)
     s = re.sub(r"\^\s*\(([^()]+)\)", r"의 \1제곱", s)
-    s = re.sub(r"\^2", "의 제곱", s)
-    s = re.sub(r"\^3", "의 세제곱", s)
+    s = re.sub(r"\^2\b", "의 제곱", s)
+    s = re.sub(r"\^3\b", "의 세제곱", s)
     s = s.replace("²", "의 제곱").replace("³", "의 세제곱")
-    s = re.sub(r"\^([a-zA-Z0-9\+\-]+)", r"의 \1제곱", s)
+    s = re.sub(r"\^([a-zA-Z0-9]+)", r"의 \1제곱", s)
+    # 그리스 문자 및 삼각함수·도함수 발음 정화
+    s = re.sub(r"(?:\\Delta|\bDelta\b|Δ)\s*([a-zA-Z0-9]*)", r"델타 \1", s)
+    s = re.sub(r"(?:\\alpha|\balpha\b|α)", "알파", s)
+    s = re.sub(r"(?:\\beta|\bbeta\b|β)", "베타", s)
+    s = re.sub(r"(?:\\gamma|\bgamma\b|γ)", "감마", s)
+    s = re.sub(r"(?:\\theta|\btheta\b|θ)", "세타", s)
+    s = re.sub(r"(?:\\pi|\bpi\b|π)", "파이", s)
     s = s.replace("^", " ")
     s = re.sub(r"[\$\\\{\}]", " ", s)
     return _balance_parentheses(re.sub(r"\s+", " ", s).strip())
@@ -693,13 +756,24 @@ def clean_math_for_speech_en(text):
     _, en_split = split_bilingual_title(s)
     if en_split:
         s = en_split
-    for _ch, _d in zip("₀₁₂₃₄₅₆₇₈₉ₙₖᵢⱼₘ", "0123456789nkijm"):
+    s = re.sub(r"\\sum\s*_\s*\{([^{}]+)\}\s*\^\s*\{([^{}]+)\}", r"the sum from \1 to \2 of ", s)
+    s = re.sub(r"\\sum\s*_\s*\{([^{}]+)\}\s*\^\s*([a-zA-Z0-9]+)", r"the sum from \1 to \2 of ", s)
+    s = re.sub(r"∑\(([^().]+)\.\.([^().]+)\)", r"the sum from \1 to \2 of ", s)
+    s = s.replace(r"\sum", " sigma ").replace("∑", " sigma ")
+    for _ch, _d in zip("₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₙₖᵢⱼₘ", "0123456789+-=()nkijm"):
         s = s.replace(_ch, _d)
     s = (
-        s.replace(r"\mathbb{R}", "the real numbers")
+        s.replace(r"\infty", " infinity ")
+        .replace("∈fty", " infinity ")
+        .replace("∞", " infinity ")
+        .replace(r"\notin", " not in ")
+        .replace("∉", " not in ")
+        .replace(r"\mathbb{R}", "the real numbers")
         .replace("ℝ", "the real numbers")
         .replace(r"\mathbb{N}", "the natural numbers")
         .replace("ℕ", "the natural numbers")
+        .replace(r"\mathbb{Z}", "the integers")
+        .replace("ℤ", "the integers")
         .replace(r"\in", " in ")
         .replace("∈", " in ")
     )
@@ -718,6 +792,7 @@ def clean_math_for_speech_en(text):
     s = re.sub(r"\|([A-Za-z0-9₁₂₃_]+)\|", r"length \1", s)
     s = re.sub(r"√\(([^()]+)\)", r"square root of \1", s)
     s = s.replace("√(", "square root of ").replace("√", "square root of ")
+    s = s.replace(r"\nRightarrow", " does not imply ").replace("⇏", " does not imply ").replace("nRightarrow", " does not imply ")
     s = s.replace(r"\Leftrightarrow", " if and only if ").replace("⇔", " if and only if ")
     s = s.replace(r"\Rightarrow", " implies ").replace("⇒", " implies ").replace("→", " approaches ")
     s = s.replace(r"\times", " times ").replace("×", " times ").replace("·", " times ")
@@ -729,9 +804,11 @@ def clean_math_for_speech_en(text):
     s = s.replace("⁻¹", " inverse ").replace("f'(x)", "f prime of x").replace("f'(c)", "f prime of c").replace("g'(c)", "g prime of c")
     s = re.sub(r"\^\s*\{([^{}]+)\}", r" to the power of \1", s)
     s = re.sub(r"\^\s*\(([^()]+)\)", r" to the power of \1", s)
-    s = re.sub(r"\^2", " squared", s)
-    s = re.sub(r"\^3", " cubed", s)
-    s = s.replace("²", " squared").replace("³", " cubed").replace("^", " ")
+    s = re.sub(r"\^2\b", " squared", s)
+    s = re.sub(r"\^3\b", " cubed", s)
+    s = s.replace("²", " squared").replace("³", " cubed")
+    s = re.sub(r"\^([a-zA-Z0-9]+)", r" to the power of \1", s)
+    s = s.replace("^", " ")
     s = re.sub(r"[\$\\\{\}]", " ", s)
     s = internationalize_math_english_text(s) if "internationalize_math_english_text" in globals() else s
     return _balance_parentheses(re.sub(r"\s+", " ", s).strip())
@@ -1224,8 +1301,8 @@ def _analyze_min7014_topic_as_mathteacher_core(title: str, sub_domain_ko: str = 
             "what_if_not_ko": "만약 복소수 a+bi를 가로축이 실수축, 세로축이 허수축인 좌표평면(복소평면) 위의 점 (a, b)로 나타낸다면, i를 곱하는 연산은 기하학적으로 몇 도 회전 변환이 될까요?"
         }
 
-    # 15-D. 삼각함수의 극한과 미분 (lim sin θ / θ = 1, θ < tan θ, d/dx(sin x) = cos x)
-    if ("sin" in t or "tan" in t) and ("lim" in t or "theta" in t or "\\frac{d}{dx}" in t or "미분" in blob):
+    # 15-D. 삼각함수의 극한과 미분 (lim sin θ / θ = 1, θ < tan θ, d/dx(sin x) = cos x) — 영단어 Instantaneous/increasing 부분문자열 오매칭 원천 차단
+    if re.search(r"(\\sin|\\tan|\bsin\b|\btan\b)", t, flags=re.I) and ("lim" in t or "theta" in t or "θ" in t or "\\frac{d}{dx}" in t or "d/dx" in t or "미분" in blob):
         if "\\frac{d}{dx}" in t or "d/dx" in t:
             return {
                 "category_type": "geometry",
@@ -1247,8 +1324,20 @@ def _analyze_min7014_topic_as_mathteacher_core(title: str, sub_domain_ko: str = 
                 "what_if_not_ko": "이 기본 극한 lim(θ→0) (sin θ / θ) = 1 을 이용하면 왜 lim(θ→0) [(1 - cos θ) / θ²] 의 극한값은 정확히 1/2 이 될까요?"
             }
 
+    # 15-D2. 수열의 극한과 급수·시그마 합의 기호 (Sequence Limits, Infinite Series & Sigma Summation)
+    if any(k in blob for k in ("수열", "등차", "등비", "\\sum", "∑", "시그마", "S_n")):
+        return {
+            "category_type": "algebra",
+            "hypothesis_ko": f"자연수 항 번호 n에 따라 규칙적으로 나열된 수열과 부분합·합의 기호(시그마)로 정의된 '{ko_t}'의 출발 조건",
+            "conclusion_ko": f"항 번호 n이 한없이 커질 때의 수렴·발산 원리 또는 시그마 합의 선형성과 축차대입(도미노 상쇄)·넓이 분할에 의해 '{ko_t}'의 관계식이 엄밀하게 성립한다는 결론",
+            "auxiliary_line_ko": "수열의 일반항을 좌표평면이나 넓이 블록으로 시각화하거나, 부분합을 나열해 이웃한 항들의 규칙적인 결합·상쇄 구조를 드러내는 대수·기하적 발상",
+            "proof_logic_ko": "n이 한없이 커질 때 1/n이나 (1/2)의 n제곱처럼 남는 오차 조각이 0으로 수렴함을 확인하거나, 시그마 기호를 항별로 풀어 써서 등차·등비·거듭제곱의 합 공식을 유도하는 원리",
+            "misconception_ko": "급수의 합을 구할 때는 반드시 제n항까지의 부분합을 먼저 구한 뒤 n이 무한대로 갈 때의 극한을 취해야 합니다! 일반항이 0으로 수렴한다고 해서 급수가 무조건 수렴하는 것은 아닙니다.",
+            "what_if_not_ko": "한 변의 길이가 1인 정사각형을 절반(1/2), 그 절반의 절반(1/4, 1/8, ...)으로 무한히 나누어 색칠하면 왜 계산 없이도 무한등비급수의 합이 1이 됨을 눈으로 즉시 확인할 수 있을까요?"
+        }
+
     # 15-E. 미적분 핵심 정리 (코시의 평균값 정리 · 역함수의 미분 · 연쇄법칙 · 매개변수 미분 · 평균/순간변화율 · 도함수 · 상합과 하합 · 극좌표 중적분 · 함수의 극한)
-    if any(k in blob for k in ("코시의 평균값", "Cauchy's Mean Value", "역함수의 미분", "inverse function", "연쇄법칙", "Chain Rule", "매개변수", "parametric", "Parameter", "도함수", "Derivative", "derivative", "미분", "평균 변화율", "순간속도", "상합과 하합", "Upper Sum", "중적분", "Double Integral", "극값정리", "Extreme Value", "최댓값과 최솟값", "Slope Fields", "Euler's Method", "\\Delta y", "\\lim", "극한")):
+    if any(k in blob for k in ("코시의 평균값", "Cauchy's Mean Value", "역함수의 미분", "inverse function", "연쇄법칙", "Chain Rule", "매개변수", "parametric", "Parameter", "도함수", "Derivative", "derivative", "미분", "평균 변화율", "순간변화율", "순간속도", "상합과 하합", "Upper Sum", "중적분", "Double Integral", "극값정리", "Extreme Value", "최댓값과 최솟값", "증가 또는 감소", "Slope Fields", "Euler's Method", "\\Delta y", "\\lim", "극한")):
         if "코시의 평균값" in blob or "Cauchy's Mean Value" in blob:
             return {
                 "category_type": "geometry",
@@ -1599,7 +1688,7 @@ def analyze_min7014_topic_as_mathteacher(title: str, sub_domain_ko: str = "", br
             "misconception_en": "Never confuse the inverse function f⁻¹(y) with the algebraic reciprocal [f(x)]⁻¹ = 1/f(x), and always evaluate f'(x) at the corresponding pre-image x = f⁻¹(y)",
             "what_if_not_en": "How does this rule derive (ln x)' = 1/x from (e^y)' = e^y and (arcsin x)' = 1/√(1-x²) from (sin y)' = cos y?"
         }
-    elif "sin" in blob_l and ("lim" in blob_l or "tan" in blob_l):
+    elif re.search(r"(\\sin|\bsin\b)", blob_l) and ("lim" in blob_l or re.search(r"(\\tan|\btan\b)", blob_l)):
         en_fields = {
             "hypothesis_en": "In a unit circle of radius R = 1 with acute central angle θ (0 < θ < π/2 radians), compare inscribed △OAB, sector OAB, and tangent △OAT",
             "conclusion_en": "Area inequality sin θ < θ < tan θ and the fundamental trigonometric limit lim(θ→0) (sin θ / θ) = 1",
@@ -1841,7 +1930,7 @@ def audit_international_english_scripts() -> dict:
 
 
 def _normalize_pdf_line_for_speech(line_str: str) -> str:
-    """PDF에서 추출된 수식 텍스트 조각(예: 'am × an =', '= 2')을 정제하고 불완전 조각은 걸러냅니다."""
+    """PDF에서 추출된 수식 텍스트 조각(예: 'am × an =', '= 2')을 정제하고 불완전 조각이나 순수 영문 번역 문장은 걸러냅니다."""
     s = (line_str or "").strip()
     if not s:
         return ""
@@ -1849,6 +1938,9 @@ def _normalize_pdf_line_for_speech(line_str: str) -> str:
     if len(s) <= 3 or re.match(r"^[=\+\-\×\÷\s0-9\.]+$", s):
         return ""
     if s.endswith(("×", "÷", "+", "-", "=")) and len(s) < 10:
+        return ""
+    # 한글이 전혀 없고 4글자 이상 영단어가 2개 이상 포함된 영문 병기 문장은 한국어 대본 삽입에서 제외
+    if not re.search(r"[가-힣]", s) and len(re.findall(r"[A-Za-z]{4,}", s)) >= 2:
         return ""
     # PDF 수식에서 지수가 아래로 내려온 형태(am, an, am+n, am-n, an-m) 교정
     s = re.sub(r"\ba\s*m\s*\+\s*n\b", "a의 (m+n)제곱", s)
