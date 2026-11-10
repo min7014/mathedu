@@ -2808,6 +2808,131 @@ def ensure_harmonic_chime_wav():
     return chime_path
 
 
+def draw_virtual_teacher_baton(canvas, pdf_resized, px, py, new_w, new_h, bbox, stage):
+    """
+    [Rule 43 — 민은기 선생님 오리지널 강의(2017090404.wmv) 계승 '무가림 정밀 가상 지휘봉(Virtual Baton)' 시스템]
+    - 사람이 화면에 직접 나오지 않더라도 선생님이 우측 하단에서 클래식 지휘봉으로 현재 설명하는 보조선·각도·수식을
+      직접 짚어주시는 현장감과 시선 유도(Mayer's Signaling Principle)를 구현합니다.
+    - Rule 28(원본 도형 100% 무가림)을 완벽히 준수하기 위해:
+      1) 큰 사각형 박스나 글자를 덮는 원을 그리지 않고, 변화 영역(bbox) 내 실제 잉크 픽셀의 좌/우(또는 상/하) 클러스터 하단 경계를 정밀 탐색합니다.
+      2) 지휘봉 끝점(Tip)이 실제 잉크에서 아래·오른쪽으로 9px 떨어져 가리키므로 원본 수식·도형을 단 1픽셀도 가리지 않습니다.
+      3) Stage 2에서는 제1포인트(좌측/상단 핵심 요소)를 짚고, Stage 3에서는 제2포인트(우측/하단 대응 요소)로 자연스럽게 이동합니다.
+    """
+    if not bbox or stage not in (2, 3):
+        return
+    import math
+    bx0 = max(8, int(bbox[0] * new_w))
+    by0 = max(int(new_h * 0.12), int(bbox[1] * new_h))
+    bx1 = min(new_w - 8, int(bbox[2] * new_w))
+    by1 = min(int(new_h * 0.88), int(bbox[3] * new_h))
+    if bx1 <= bx0 + 6 or by1 <= by0 + 6:
+        return
+
+    W_b = bx1 - bx0
+    H_b = by1 - by0
+    rgb_sub = pdf_resized.crop((bx0, by0, bx1, by1)).convert("RGB")
+    px_data = rgb_sub.load()
+    pts = []
+    step = max(1, int(max(W_b, H_b) / 64))
+    for yy in range(0, H_b, step):
+        for xx in range(0, W_b, step):
+            r, g, b = px_data[xx, yy]
+            if r < 235 or g < 235 or b < 235:
+                pts.append((bx0 + xx, by0 + yy))
+
+    if not pts:
+        tx_rel = (bx0 + bx1) // 2
+        ty_rel = by1
+        pref_deg = 22.0
+    elif H_b > W_b * 1.15:
+        # 세로형 보조선·도형(예: 이등변삼각형 꼭지각의 이등분선 AD):
+        # 도형 내부 선분을 가로지르지 않도록 Stage 2에서는 상단 시작점(꼭짓점 우측 외곽), Stage 3에서는 하단 끝점(수선의 발 하단)을 포인팅
+        if stage == 2:
+            top_band = [p for p in pts if p[1] <= by0 + max(18, H_b * 0.18)] or pts
+            tx_rel = int(max(p[0] for p in top_band))
+            ty_rel = int(min(p[1] for p in top_band)) + 4
+            pref_deg = 15.0
+        else:
+            bot_band = [p for p in pts if p[1] >= by1 - max(18, H_b * 0.18)] or pts
+            tx_rel = int(sum(p[0] for p in bot_band) / len(bot_band))
+            ty_rel = int(max(p[1] for p in bot_band))
+            pref_deg = 18.0
+    else:
+        # 가로형 수식·양측 대응 요소(예: SAS 합동 수식, 두 밑각 ∠B, ∠C):
+        mid_x = (bx0 + bx1) / 2.0
+        cluster = ([p for p in pts if p[0] <= mid_x] if stage == 2 else [p for p in pts if p[0] > mid_x]) or pts
+        cx = sum(p[0] for p in cluster) / len(cluster)
+        near_pts = [p[1] for p in cluster if abs(p[0] - cx) <= max(16, W_b * 0.22)] or [p[1] for p in cluster]
+        tx_rel = int(cx)
+        ty_rel = int(max(near_pts))
+        pref_deg = 22.0 if stage == 2 else 19.0
+
+    tx = px + tx_rel
+    ty = py + ty_rel
+
+    baton_len = 310.0
+    # 지휘봉 끝(손잡이)이 슬라이드 하단 밖으로 삐져나가지 않도록 각도 자동 클램핑
+    max_dy = max(24.0, (py + new_h - 16) - (ty + 8))
+    max_sin = min(0.50, max_dy / baton_len)
+    max_deg = math.degrees(math.asin(max(0.05, max_sin)))
+    angle_deg = min(pref_deg, max_deg)
+
+    b_draw = ImageDraw.Draw(canvas, "RGBA")
+    angle_rad = math.radians(angle_deg)
+    ux, uy = math.cos(angle_rad), math.sin(angle_rad)
+    nx, ny = -uy, ux
+
+    tip_x = tx + ux * 9.0
+    tip_y = ty + uy * 9.0
+    end_x = tip_x + ux * baton_len
+    end_y = tip_y + uy * baton_len
+
+    r_tip = 2.2
+    r_end = 6.8
+
+    # 1) 부드러운 입체 그림자
+    sh_dx, sh_dy = 4, 7
+    b_draw.polygon([
+        (tip_x - nx * r_tip + sh_dx, tip_y - ny * r_tip + sh_dy),
+        (end_x - nx * r_end + sh_dx, end_y - ny * r_end + sh_dy),
+        (end_x + nx * r_end + sh_dx, end_y + ny * r_end + sh_dy),
+        (tip_x + nx * r_tip + sh_dx, tip_y + ny * r_tip + sh_dy),
+    ], fill=(15, 23, 42, 65))
+
+    # 2) 클래식 메이플 우드 지휘봉 바디 (2017090404.wmv 오마주)
+    b_draw.polygon([
+        (tip_x - nx * r_tip, tip_y - ny * r_tip),
+        (end_x - nx * r_end, end_y - ny * r_end),
+        (end_x + nx * r_end, end_y + ny * r_end),
+        (tip_x + nx * r_tip, tip_y + ny * r_tip),
+    ], fill=(222, 184, 135, 244), outline=(92, 58, 28, 240))
+
+    # 3) 상단 우드 하이라이트 결
+    b_draw.polygon([
+        (tip_x - nx * (r_tip * 0.75), tip_y - ny * (r_tip * 0.75)),
+        (end_x - nx * (r_end * 0.75), end_y - ny * (r_end * 0.75)),
+        (end_x - nx * (r_end * 0.10), end_y - ny * (r_end * 0.10)),
+        (tip_x - nx * (r_tip * 0.10), tip_y - ny * (r_tip * 0.10)),
+    ], fill=(248, 232, 196, 215))
+
+    # 4) 우측 하단 손잡이 그립 (네이비 & 골드 마감)
+    grip_x = tip_x + ux * (baton_len - 72)
+    grip_y = tip_y + uy * (baton_len - 72)
+    r_grip = 5.8
+    b_draw.polygon([
+        (grip_x - nx * r_grip, grip_y - ny * r_grip),
+        (end_x - nx * (r_end + 0.6), end_y - ny * (r_end + 0.6)),
+        (end_x + nx * (r_end + 0.6), end_y + ny * (r_end + 0.6)),
+        (grip_x + nx * r_grip, grip_y + ny * r_grip),
+    ], fill=(30, 58, 138, 248), outline=(250, 204, 21, 255))
+
+    # 5) 지휘봉 끝 미세 포인터 팁 + 은은한 포인트 글로우 (원본 글자·도형을 전혀 가리지 않음)
+    glow_col = (56, 189, 248, 70) if stage == 2 else (250, 204, 21, 80)
+    tip_col = (2, 132, 199, 255) if stage == 2 else (217, 119, 6, 255)
+    b_draw.ellipse([tip_x - 8, tip_y - 8, tip_x + 8, tip_y + 8], fill=glow_col)
+    b_draw.ellipse([tip_x - 3.5, tip_y - 3.5, tip_x + 3.5, tip_y + 3.5], fill=tip_col, outline=(255, 255, 255, 240), width=1)
+
+
 def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_spotlight=True, stage=None):
     """
     [v6.0 YouTube Algorithm Retention HUD + 3-Stage Progressive Visual Reveal + Pattern-Interrupt Banner + End-Screen Binge Card]
@@ -2882,19 +3007,10 @@ def render_slide_frame_1080p(pdf_page, page_info, script_doc, lang_code, show_sp
     draw.rounded_rectangle([px - 3, py - 3, px + new_w + 3, py + new_h + 3], radius=12, fill=outer_col)
     canvas.paste(pdf_resized, (px, py))
 
-    # 3. 새로 추가된 도형·보조선·수식 영역 스포트라이트 하이라이트 (오리지널 PDF 텍스트·도형을 절대 가리지 않도록 깔끔한 외곽선만 표시)
+    # 3. [Rule 43] 새로 추가된 도형·보조선·수식을 가리키는 '무가림 정밀 가상 지휘봉(Virtual Baton)' (오리지널 PDF 텍스트·도형 100% 무가림)
     bbox = page_info.get("diff_bbox")
     if show_spotlight and bbox and p_num > 1 and p_num <= tot_p:
-        bx0 = max(px + 6, px + int(bbox[0] * new_w) - 14)
-        by0 = max(py + 6, py + int(bbox[1] * new_h) - 14)
-        bx1 = min(px + new_w - 6, px + int(bbox[2] * new_w) + 14)
-        by1 = min(py + new_h - 6, py + int(bbox[3] * new_h) + 14)
-        if (bx1 - bx0) > 26 and (by1 - by0) > 26:
-            if stage == 3:
-                draw.rounded_rectangle([bx0 - 4, by0 - 4, bx1 + 4, by1 + 4], radius=12, outline=(250, 204, 21), width=2)
-                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(2, 132, 199), width=3)
-            else:
-                draw.rounded_rectangle([bx0, by0, bx1, by1], radius=10, outline=(2, 132, 199), width=3)
+        draw_virtual_teacher_baton(canvas, pdf_resized, px, py, new_w, new_h, bbox, stage)
 
     step_title_str = page_info.get("step_title") or (f"Step {scene_idx}" if lang_code == "en" else f"{scene_idx}단계 핵심 원리")
 
@@ -6519,21 +6635,11 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 f_draw.rounded_rectangle((ox - 12, oy - 12, ox + nw + 12, oy + nh + 12), radius=22, fill=(255, 255, 255), outline=(251, 191, 36), width=3)
                 frame_canvas.paste(resized, (ox, oy))
 
-                # 첫 장면 첫 프레임(0.85s Swipe-Stop Hook) 또는 마지막 프레임 스포트라이트 강조
+                # [Rule 43] 숏폼에서도 원본 도형을 가리는 박스/원 대신 무가림 정밀 가상 지휘봉(Virtual Baton)으로 포인팅
                 bbox = p_info.get("diff_bbox")
-                if seq_idx == 1 and fi_idx == 0:
-                    cx_s, cy_s, r_s = ox + nw // 2, oy + nh // 2, 86
-                    f_draw.ellipse((cx_s - r_s, cy_s - r_s, cx_s + r_s, cy_s + r_s), outline=(2, 132, 199), width=7)
-                    f_draw.rounded_rectangle((120, oy + 14, 960, oy + 76), radius=16, fill=(2, 132, 199), outline=(254, 240, 138), width=3)
-                    sw_txt = "⚡ WAIT! Why Does This Always Work? (Watch 40s)" if lang_code == "en" else "⚡ 잠깐! 왜 항상 성립할까? 40초 시각적 증명!"
-                    f_draw.text((152, oy + 26), sw_txt, fill=(255, 255, 255), font=font_sub)
-                elif bbox and fi_idx >= len(doc_frames) - 2 and doc_f_i > 0:
-                    bx0 = max(ox + 4, ox + int(bbox[0] * nw) - 10)
-                    by0 = max(oy + 4, oy + int(bbox[1] * nh) - 10)
-                    bx1 = min(ox + nw - 4, ox + int(bbox[2] * nw) + 10)
-                    by1 = min(oy + nh - 4, oy + int(bbox[3] * nh) + 10)
-                    if (bx1 - bx0) > 24 and (by1 - by0) > 24:
-                        f_draw.rounded_rectangle((bx0, by0, bx1, by1), radius=10, outline=(2, 132, 199), width=5)
+                if bbox and fi_idx >= max(1, len(doc_frames) - 2) and doc_f_i > 0:
+                    st_short = 2 if fi_idx == max(1, len(doc_frames) - 2) else 3
+                    draw_virtual_teacher_baton(frame_canvas, resized, ox, oy, nw, nh, bbox, st_short)
                 fp = tmp_dir / f"short_{seq_idx:02d}_f{fi_idx:02d}.png"
                 frame_canvas.save(fp)
                 f_lines.append(f"file '{fp.as_posix()}'")
@@ -6892,12 +6998,8 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
                 bbox = p_info.get("diff_bbox")
                 if bbox and not is_think_phase and doc_f_i > 0:
-                    bx0 = max(ox + 4, ox + int(bbox[0] * nw) - 10)
-                    by0 = max(oy + 4, oy + int(bbox[1] * nh) - 10)
-                    bx1 = min(ox + nw - 4, ox + int(bbox[2] * nw) + 10)
-                    by1 = min(oy + nh - 4, oy + int(bbox[3] * nh) + 10)
-                    if (bx1 - bx0) > 24 and (by1 - by0) > 24:
-                        f_draw.rounded_rectangle((bx0, by0, bx1, by1), radius=10, outline=(2, 132, 199), width=6)
+                    st_qshort = 2 if fi_idx < len(doc_frames) - 1 else 3
+                    draw_virtual_teacher_baton(frame_canvas, resized, ox, oy, nw, nh, bbox, st_qshort)
 
                 fp = tmp_dir / f"qshort_{seq_idx:02d}_f{fi_idx:02d}.png"
                 frame_canvas.save(fp)
