@@ -2294,21 +2294,15 @@ def ensure_synthetic_pdf_for_non_pdf_topic(slug_key: str, item_meta: dict = None
 
 def load_or_build_topic_pdf_bytes(pdf_url: str, slug_key: str, item_meta: dict = None):
     """
-    주제의 pdf_url이 원격 .pdf이면 다운로드하고, 로컬 경로이거나 비어 있는 Non-PDF 자료이면
-    ensure_synthetic_pdf_for_non_pdf_topic()으로 8단계 시각적 강의 PDF를 생성하여 (pdf_bytes, resolved_pdf_url)을 반환합니다.
+    [Rule 27: 100% 원본 https://min7014.github.io/ PDF 파일만 사용 (가상 합성 PDF 영구 폐기)]
+    주제의 pdf_url이 원격 .pdf이면 다운로드하여 (pdf_bytes, resolved_pdf_url)을 반환하며,
+    원격 원본 PDF가 존재하지 않거나 404인 경우 합성 PDF를 만들지 않고 즉시 예외를 발생시켜 건너뜁니다.
     """
     u = str(pdf_url or "").split("#")[0].strip()
     if u.startswith(("http://", "https://")) and u.lower().endswith(".pdf"):
-        try:
-            return urllib.request.urlopen(u, timeout=20).read(), u
-        except Exception:
-            pass
-    if u:
-        local_cand = Path(u) if Path(u).is_absolute() else (ROOT_DIR / u)
-        if local_cand.exists() and local_cand.is_file():
-            return local_cand.read_bytes(), f"video_lectures/generated_pdfs/{local_cand.name}"
-    gen_p = ensure_synthetic_pdf_for_non_pdf_topic(slug_key, item_meta=item_meta)
-    return gen_p.read_bytes(), f"video_lectures/generated_pdfs/{gen_p.name}"
+        req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
+        return urllib.request.urlopen(req, timeout=20).read(), u
+    raise FileNotFoundError(f"[Rule 27 Guard] Non-original or unavailable PDF skipped: {slug_key} ({u})")
 
 
 def generate_or_update_script(slug_key, target_langs=None):
@@ -7666,10 +7660,8 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         "2023051501",  # 확률과 통계: 시행과 사건
         "2021032901",  # 함수의 극한과 연속: 제한된 범위에서 이차함수의 최대최소
         "2012111702",  # 해석기하·원의 방정식: 원(Circle)
-        "2024032305",  # 지수·로그: 지수가 자연수일 때 지수법칙
         "2021091701",  # 기하 변환·대칭: 점의 평행이동
         "2020122201",  # 방정식·부등식: 실수의 절댓값
-        "2024032301",  # 다항식·방정식·수체계: 자연수의 사칙연산
         "2022051507", "2022042501", "2022101601", "2022101602", "2022101603",
         "2023081301", "2024122501", "2024120301", "2025012801", "2025012601",
     ]
@@ -7731,7 +7723,9 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
             return slug
 
-    # 2순위: 기존 스크립트 보유 주제 중 원본 PDF가 존재하는 미완성 주제 완성
+    # 2순위: 기존 스크립트 보유 주제 중 원본 PDF가 존재하는 미완성 주제 또는 Rule 28 이전 구버전 MP4 리빌드
+    from datetime import datetime as _dt_r28
+    _r28_cut = _dt_r28(2026, 11, 8, 20, 0, 0).timestamp()
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         s = sp.stem
         if s in failed_slugs or (valid_pdf_slugs and s not in valid_pdf_slugs):
@@ -7741,6 +7735,13 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
         sh_ko = YT_UPLOADS_DIR / "shorts" / f"{s}_short_ko.mp4"
         qsh_ko = ROOT_DIR / "video_lectures" / "shorts" / f"{s}_short_q_ko.mp4"
         if not (mp4_ko.exists() and q_ko.exists() and sh_ko.exists() and qsh_ko.exists()):
+            return s
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        s = sp.stem
+        if s in failed_slugs or (valid_pdf_slugs and s not in valid_pdf_slugs):
+            continue
+        mp4_ko = YT_UPLOADS_DIR / s / f"{s}_ko.mp4"
+        if mp4_ko.exists() and mp4_ko.stat().st_mtime < _r28_cut:
             return s
     return None
 
@@ -7861,19 +7862,21 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
             if next_slug:
                 print(f"🎬 [Continuous PDF Factory] 다음 원본 PDF 주제 4대 에디션(한 땀 한 땀 단계별 설명) 자동 제작 시작: {next_slug}", flush=True)
                 try:
+                    from datetime import datetime as _dt_r28_loop
+                    _r28_loop_cut = _dt_r28_loop(2026, 11, 8, 20, 0, 0).timestamp()
                     generate_or_update_script(next_slug, target_langs=["ko", "en", "ja", "zh-CN", "es", "fr", "de", "vi"])
                     for lc in ["ko", "en"]:
                         mp4_p = YT_UPLOADS_DIR / next_slug / f"{next_slug}_{lc}.mp4"
-                        if not mp4_p.exists():
+                        if not mp4_p.exists() or mp4_p.stat().st_mtime < _r28_loop_cut:
                             render_multilingual_video(next_slug, lang_code=lc)
                         q_mp4_p = ROOT_DIR / "video_lectures" / "question_classroom" / f"{next_slug}_q_{lc}.mp4"
-                        if not q_mp4_p.exists():
+                        if not q_mp4_p.exists() or q_mp4_p.stat().st_mtime < _r28_loop_cut:
                             render_question_classroom_video(next_slug, lang_code=lc)
                         sh_p = YT_UPLOADS_DIR / "shorts" / f"{next_slug}_short_{lc}.mp4"
-                        if not sh_p.exists():
+                        if not sh_p.exists() or sh_p.stat().st_mtime < _r28_loop_cut:
                             render_youtube_short_vertical(next_slug, lang_code=lc)
                         qsh_p = ROOT_DIR / "video_lectures" / "shorts" / f"{next_slug}_short_q_{lc}.mp4"
-                        if not qsh_p.exists():
+                        if not qsh_p.exists() or qsh_p.stat().st_mtime < _r28_loop_cut:
                             render_question_short_vertical(next_slug, lang_code=lc)
                     update_video_catalog()
                     prepare_ready_batch_folder(open_explorer=False)

@@ -86,6 +86,21 @@ def collect_live_workspace_metrics() -> dict:
                 daemon_state["updated_at"] = fd_st.get("updated_at")
         except Exception:
             pass
+    if not daemon_state.get("last_topic"):
+        last_chat_p = ROOT_DIR / ".agents" / "last_agent_chat_slug.txt"
+        if last_chat_p.exists():
+            try:
+                s_val = last_chat_p.read_text(encoding="utf-8").strip()
+                if s_val:
+                    daemon_state["last_topic"] = s_val
+            except Exception:
+                pass
+    if not daemon_state.get("last_topic") and (vl_dir / "scripts").exists():
+        try:
+            newest_sp = max((vl_dir / "scripts").glob("*.json"), key=lambda p: p.stat().st_mtime)
+            daemon_state["last_topic"] = newest_sp.stem
+        except Exception:
+            pass
 
     # 수학공학도구(GeoGebra/AlgeoMath/TikZ) 5단계 커리큘럼 진행률 집계
     geogebra_book_slugs = [f"20210426{i:02d}" for i in range(3, 19)] + [
@@ -247,7 +262,7 @@ def ensure_video_board_strategic_lab_features() -> bool:
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
           <div style="font-weight:900;font-size:0.95rem;color:#38bdf8;">🛠️ [보편적 수학공학도구 실시간 실습 스튜디오 — 자체 제작 MathLab v1.3 탑재] 특정 도구에 얽매이지 않고 원리대로 직접 작도해 보세요!</div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            <a href="${mathlabUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#e11d48;color:#fff;font-size:0.78rem;font-weight:900;text-decoration:none;">🚀 자체 제작 MathLab 전체화면 ↗</a>
+            <a href="${mathlabUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#0284c7;color:#fff;font-size:0.78rem;font-weight:900;text-decoration:none;">🚀 자체 제작 MathLab 전체화면 ↗</a>
             ${ggbUrl ? `<a href="${ggbUrl}" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#0284c7;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">🧭 원본 동적기하 자료 ↗</a>` : ''}
             <a href="https://www.algeomath.kr/" target="_blank" rel="noopener" style="padding:5px 10px;border-radius:8px;background:#059669;color:#fff;font-size:0.78rem;font-weight:800;text-decoration:none;">📐 공교육 알지오매스 ↗</a>
             <button type="button" onclick="document.getElementById('vbGeoGebraSplitLabBox').style.display='none'" style="padding:5px 10px;border-radius:8px;background:#334155;color:#fff;border:none;font-size:0.78rem;cursor:pointer;">닫기 ✕</button>

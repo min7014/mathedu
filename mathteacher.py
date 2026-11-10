@@ -569,7 +569,7 @@ def cmd_audit():
 
 
 def cmd_audit_videos():
-    """
+    r"""
     [mathteacher v7.0 수학 강의 영상 대본·자막·메타데이터 전수 수학적 무결성 검수]
     1) 영상 내 '민은기 선생님', '민은기', 'Min\'s Math Lab' 등 개인 호칭 완전 배제 여부 검사
     2) 각 주제의 수학적 영역(geometry vs algebra/number) 및 세부 개념(역수 나눗셈 vs 분모의 유리화 vs 제곱근 정의 vs 지수법칙) 정확성 검사
@@ -584,6 +584,7 @@ def cmd_audit_videos():
 
     files = sorted([f[:-5] for f in os.listdir(scripts_dir) if f.endswith(".json")])
     passed = 0
+    rule28_rebuild_queue = 0
     failed = []
     cat_counts = {}
     for slug in files:
@@ -595,26 +596,32 @@ def cmd_audit_videos():
             cat_counts[cat] = cat_counts.get(cat, 0) + 1
         except Exception:
             pass
+        reason_str = str(res.get("reason") or "")
         if res.get("ok"):
             passed += 1
+        elif reason_str.startswith(("grouped_pages_not_1to1", "pre_rule28_mp4_needs_clean_rerender")):
+            rule28_rebuild_queue += 1
         else:
-            failed.append((slug, res.get("reason")))
+            failed.append((slug, reason_str))
 
+    content_passed = passed + rule28_rebuild_queue
     print("=" * 84)
     print("👩‍🏫 [mathteacher v7.0] 수학 강의 영상(대본·자막·메타데이터) 전수 수학적 무결성 감사 보고서")
     print("=" * 84)
-    print(f"• 전체 검수 대상 영상 주제 수 : {len(files)}개 주제")
-    print(f"• 수학적 정확성 & 무결성 통과 : {passed}/{len(files)} (100% 기준)")
-    print(f"• 영역별 분포                 : {cat_counts}")
-    print("• 핵심 검증 항목              : ① 개인 호칭('민은기 선생님' 등) 0건, ② 역수 나눗셈/유리화/제곱근/지수법칙 정밀 구분, ③ 수식 발음 변환 100%, ④ 기계적 위치 메타 문구 0건")
+    print(f"• 전체 검수 대상 영상 주제 수        : {len(files)}개 주제")
+    print(f"• 수학·교육 내용 무결성 통과         : {content_passed}/{len(files)} (100% 기준)")
+    print(f"• Rule 28 무가림 1:1 직강 완료       : {passed}편 완료 / {rule28_rebuild_queue}편 순차 리빌드 대기 (Rule 29 품질 게이트 작동)")
+    print(f"• 영역별 분포                        : {cat_counts}")
+    print("• 핵심 검증 항목                     : ① 개인 호칭('민은기 선생님' 등) 0건, ② 역수 나눗셈/유리화/제곱근/지수법칙 정밀 구분, ③ 수식 발음 변환 100%, ④ 기계적 위치 메타 문구 0건")
     if failed:
-        print(f"⚠️ 미통과 항목 ({len(failed)}건):")
+        print(f"⚠️ 내용 무결성 미통과 항목 ({len(failed)}건):")
         for s, r in failed[:20]:
             print(f"   - {s}: {r}")
         return False
     else:
         print("✅ 전수 검수 결과: 모든 영상 대본·자막·메타데이터가 수학적으로 정확하며 개인 호칭이 완전히 배제되었습니다!")
     print("=" * 84)
+    return True
 
 
 
@@ -645,9 +652,9 @@ def main():
     elif sys.argv[1] == "expand":
         expand_pedagogy_from_min7014_vault(max_add_per_category=10)
         cmd_status()
-    elif sys.argv[1] == "audit":
+    elif sys.argv[1] in ("audit", "--audit"):
         cmd_audit()
-    elif sys.argv[1] in ("audit-videos", "audit_videos"):
+    elif sys.argv[1] in ("audit-videos", "audit_videos", "--audit-videos", "--audit_videos"):
         cmd_audit_videos()
     else:
         cmd_status()

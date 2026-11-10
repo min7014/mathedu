@@ -265,10 +265,10 @@ def generate_pr_visual_cards():
 
         # Left side: Dark navy high-contrast promo copy
         draw.rectangle([0, 0, 1200, 630], fill=(10, 16, 34))
-        draw.rectangle([0, 0, 14, 630], fill=(225, 29, 72))
+        draw.rectangle([0, 0, 14, 630], fill=(2, 132, 199))
 
         # Top badge
-        draw.rounded_rectangle([42, 36, 560, 86], radius=14, fill=(225, 29, 72))
+        draw.rounded_rectangle([42, 36, 560, 86], radius=14, fill=(2, 132, 199))
         draw.text((60, 47), "▶ @min7014_ai × mathedu 시각 증명", font=load_f(26), fill=(255, 255, 255))
 
         # Main Headline
@@ -282,7 +282,7 @@ def generate_pr_visual_cards():
         draw.text((64, 336), "• [1단계] @min7014_ai 1080p 보조선 플립북 시청", font=load_f(23), fill=(226, 232, 240))
         draw.text((64, 378), "• [2단계] GeoGebra 동적 기하 슬라이더 직접 조작", font=load_f(23), fill=(167, 243, 208))
         draw.text((64, 420), "• [3단계] 16,548문항 탈-5지선다 수식 레고 조립", font=load_f(23), fill=(253, 230, 138))
-        draw.text((64, 460), f"▶ YouTube: {topic['yt_ko']}", font=load_f(20), fill=(251, 113, 133))
+        draw.text((64, 460), f"▶ YouTube: {topic['yt_ko']}", font=load_f(20), fill=(56, 189, 248))
 
         # Right side: Embed existing video thumbnail if available
         thumb_p = ROOT_DIR / topic.get("thumb", "")
@@ -300,7 +300,7 @@ def generate_pr_visual_cards():
         draw.text((772, 450), "min7014.github.io/mathedu", font=load_f(26), fill=(255, 255, 255))
 
         # Bottom CTA Bar
-        draw.rectangle([0, 545, 1200, 630], fill=(225, 29, 72))
+        draw.rectangle([0, 545, 1200, 630], fill=(30, 64, 175))
         draw.text(
             (44, 568),
             "▶ 지금 바로 접속 : https://min7014.github.io/mathedu  |  YouTube @min7014_ai",

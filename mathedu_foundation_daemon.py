@@ -249,6 +249,16 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
         fin_p = ROOT_DIR / "assets" / "finance_revenue_engine.json"
         fin_doc = json.loads(fin_p.read_text(encoding="utf-8")) if fin_p.exists() else {}
         fin_inv = fin_doc.get("asset_inventory") or {}
+        if not last_completed_slug and STATUS_JSON.exists():
+            try:
+                old_st = json.loads(STATUS_JSON.read_text(encoding="utf-8"))
+                last_completed_slug = old_st.get("last_completed_slug", "")
+            except Exception:
+                pass
+        if not last_completed_slug:
+            last_chat_p = ROOT_DIR / ".agents" / "last_agent_chat_slug.txt"
+            if last_chat_p.exists():
+                last_completed_slug = last_chat_p.read_text(encoding="utf-8").strip()
         STATUS_JSON.parent.mkdir(parents=True, exist_ok=True)
         STATUS_JSON.write_text(json.dumps({
             "daemon": "mathedu_foundation_daemon (24/7 Continuous Evolution + mathteacher v8.0 + finance v5.0 Active)",

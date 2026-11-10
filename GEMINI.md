@@ -80,7 +80,7 @@
   4. **[4단계: 브라운 & 월터(Brown & Walter) 'What-If-Not' 나만의 문제 발명 실험실]**: 정답 도출 후 문제의 조건을 변형·일반화·역발상하여 학생 스스로 새로운 문제를 발명하고 포트폴리오(`mathedu_invented_problems_v1`)에 저장하도록 지원합니다.
 
 ## 12. 모든 정책의 `plan_min.md` 자동 저장 및 동기화 원칙 (Mandatory Auto-Save of All Policies to `plan_min.md`)
-- 사용자의 지시, 대화, 또는 시스템 진화 과정에서 수립·추가·변경되는 **모든 정책(교육, 영상 제작, 유튜브 수익화, UI/UX, 홍보, 기술 아키텍처 등)은 사용자의 별도 요청이 없더라도 즉시 자동으로 `C:\Users\min\Desktop\mathedu\plan_min.md`에 반영·저장하고 Git에 커밋·동기화**합니다.
+- 사용자의 지시, 대화, 또는 시스템 진화 과정에서 수립·추가·변경되는 **모든 정책(교육, 영상 제작, 유튜브 수익화, UI/UX, 홍보, 기술 아키텍처 등)은 사용자의 별도 요청이 없더라도 즉시 자동으로 `D:\mathedu\plan_min.md`에 반영·저장하고 Git에 커밋·동기화**합니다.
 
 ## 13. `@min7014_ai` 유튜브 채널 월 1,000만 원+ 직접 수익 및 영상 무결성 절대 원칙
 - **최우선 수익 목표**: `@min7014_ai` 유튜브 채널 자체를 통해 **월 1,000만 원 이상(`~$7,500+/월`)의 직접 수익**을 달성하는 것을 최우선 목표로 삼고, ① **8분+(480초+) 미드롤(Mid-Roll) 광고 해금 순수 네온 시네마 마스터클래스(`Priority #0`)**, ② **한국어(`ko`) + 글로벌 고단가 영어권(`en`) 동시 발행**, ③ **모바일 첫 25글자 호기심 공백(Curiosity-Gap) 바이럴 제목(`build_viral_curiosity_youtube_title`) 및 잘린 제목 ZERO 보장**, ④ **Shorts 설명란 첫 줄 1080p 마스터클래스 직통 퍼널**을 상시 가동합니다.
@@ -291,7 +291,7 @@
 
 
 ## 39. 전 워크스페이스 및 대용량 영상·미디어 저장소의 D 드라이브(`D:\mathedu`) 통합 일원화 원칙 (Rule 39)
-- **워크스페이스 전체 물리적 이전 (`C:\Users\min\Desktop\mathedu` ➔ `D:\mathedu`)**:
+- **워크스페이스 전체 물리적 이전 (`D:\mathedu` ➔ `D:\mathedu`)**:
   - `C:` 드라이브 용량 고갈을 원천 차단하기 위해 `mathedu` 전체 프로젝트 폴더(`.git`, 소스코드, `assets`, `board`, `video_lectures`, `youtube_uploads` 포함 전 파일)를 1TB 용량의 **`D:\mathedu`**로 100% 통합 이전하여 운용합니다:
     1. 워크스페이스 루트(`ROOT_DIR`) ➔ **`D:\mathedu`**
     2. 유튜브 업로드 및 원본 MP4 저장소 ➔ **`D:\mathedu\youtube_uploads`**
