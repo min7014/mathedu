@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os, glob, time, subprocess
 
-base = r"C:\Users\min\Desktop\mathedu"
+base = r"D:\mathedu"
 
 def run(cmd, **kw):
     return subprocess.run(cmd, capture_output=True, text=True, **kw)

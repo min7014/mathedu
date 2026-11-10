@@ -21,7 +21,7 @@ if sys.stdout.encoding != 'utf-8':
     except Exception:
         pass
 
-BASE_DIR = r"C:\Users\min\Desktop\mathedu"
+BASE_DIR = r"D:\mathedu"
 BOARD_DIR = os.path.join(BASE_DIR, "board")
 OFFLINE_DIR = os.path.join(BASE_DIR, "offline")
 

@@ -172,8 +172,37 @@ def generate_architecture_and_user_flow_diagrams() -> dict:
     }
 
 
+def _force_show_chrome_windows():
+    """부모 프로세스의 SW_HIDE 상속으로 인해 크롬 창이 숨겨지는 현상을 방지하고 화면 최상단에 강제 표시합니다."""
+    if os.name != "nt":
+        return
+    try:
+        import ctypes
+        u32 = ctypes.windll.user32
+        WNDENUMPROC = ctypes.WINFUNCTYPE(ctypes.c_bool, ctypes.c_void_p, ctypes.c_void_p)
+        def _cb(hwnd, _lparam):
+            length = u32.GetWindowTextLengthW(hwnd)
+            if length > 0:
+                buf = ctypes.create_unicode_buffer(length + 1)
+                u32.GetWindowTextW(hwnd, buf, length + 1)
+                title = buf.value
+                if any(k in title for k in ("YouTube", "Google", "Chrome", "Audit and Quota")):
+                    u32.ShowWindow(hwnd, 9)  # SW_RESTORE
+                    u32.ShowWindow(hwnd, 5)  # SW_SHOW
+                    u32.SetForegroundWindow(hwnd)
+            return True
+        u32.EnumWindows(WNDENUMPROC(_cb), 0)
+    except Exception:
+        pass
+
+
 def _launch_sys_browser(p, headless=False):
-    args = ["--disable-blink-features=AutomationControlled", "--start-maximized"]
+    args = [
+        "--disable-blink-features=AutomationControlled",
+        "--start-maximized",
+        "--new-window",
+        "--remote-debugging-port=9233",
+    ]
     for ch in ("chrome", "msedge"):
         try:
             return p.chromium.launch(channel=ch, headless=headless, ignore_default_args=["--enable-automation"], args=args)
@@ -197,27 +226,28 @@ def capture_live_compliance_screenshots() -> dict:
     p_terms = EVIDENCE_DIR / "evidence_3_terms_of_service.png"
     p_embed = EVIDENCE_DIR / "evidence_4_player_upload_flow.png"
 
-    with sync_playwright() as p:
-        browser = _launch_sys_browser(p, headless=True)
-        page = browser.new_page(viewport={"width": 1440, "height": 960})
+    if not (p_priv.exists() and p_home.exists() and p_terms.exists() and p_embed.exists()):
+        with sync_playwright() as p:
+            browser = _launch_sys_browser(p, headless=True)
+            page = browser.new_page(viewport={"width": 1440, "height": 960})
 
-        page.goto(PRIVACY_HTML.resolve().as_uri(), wait_until="load")
-        time.sleep(0.5)
-        page.screenshot(path=str(p_priv), full_page=True)
+            page.goto(PRIVACY_HTML.resolve().as_uri(), wait_until="load")
+            time.sleep(0.5)
+            page.screenshot(path=str(p_priv), full_page=True)
 
-        page.goto(TERMS_HTML.resolve().as_uri(), wait_until="load")
-        time.sleep(0.5)
-        page.screenshot(path=str(p_terms), full_page=True)
+            page.goto(TERMS_HTML.resolve().as_uri(), wait_until="load")
+            time.sleep(0.5)
+            page.screenshot(path=str(p_terms), full_page=True)
 
-        page.goto(VIDEO_BOARD_HTML.resolve().as_uri(), wait_until="load")
-        time.sleep(1.2)
-        page.screenshot(path=str(p_home), full_page=False)
+            page.goto(VIDEO_BOARD_HTML.resolve().as_uri(), wait_until="load")
+            time.sleep(1.2)
+            page.screenshot(path=str(p_home), full_page=False)
 
-        page.evaluate("window.scrollBy(0, 520)")
-        time.sleep(0.8)
-        page.screenshot(path=str(p_embed), full_page=False)
+            page.evaluate("window.scrollBy(0, 520)")
+            time.sleep(0.8)
+            page.screenshot(path=str(p_embed), full_page=False)
 
-        browser.close()
+            browser.close()
 
     return {
         "upload_1_1": p_priv,
@@ -261,10 +291,19 @@ def fill_and_submit_youtube_quota_form(headless: bool = False) -> dict:
 
     with sync_playwright() as p:
         browser = _launch_sys_browser(p, headless=headless)
-        context = browser.new_context(viewport={"width": 1440, "height": 1000})
+        context = browser.new_context( no_viewport=True )
         page = context.new_page()
+        try:
+            page.bring_to_front()
+        except Exception:
+            pass
         print(f"🌐 [1/5] Google YouTube API 할당량 확장 신청서 접속 중: {form_url}", flush=True)
         page.goto(form_url, wait_until="networkidle", timeout=60000)
+        try:
+            page.bring_to_front()
+            _force_show_chrome_windows()
+        except Exception:
+            pass
         time.sleep(2.0)
 
         def check_box(sel):
@@ -428,27 +467,15 @@ def fill_and_submit_youtube_quota_form(headless: bool = False) -> dict:
         time.sleep(1.5)
         page.screenshot(path=str(EVIDENCE_DIR / "quota_form_before_submit.png"), full_page=False)
 
-        print("🚀 [5/5] Google YouTube API 할당량 확장 신청서 전 항목 및 첨부파일 6종 입력 완료! reCAPTCHA 및 Submit 처리 중...", flush=True)
+        print("🚀 [5/5] Google YouTube API 할당량 확장 신청서 전 항목 및 첨부파일 6종 입력 완료!", flush=True)
         try:
             submit_btn = page.locator('button.submit-button, input[type="submit"], button:has-text("Submit")').first
             if submit_btn.count() > 0:
                 submit_btn.scroll_into_view_if_needed(timeout=5000)
-            # reCAPTCHA iframe 체크박스 자동 클릭 시도
-            for frame in page.frames:
-                if "recaptcha" in (frame.url or ""):
-                    try:
-                        anchor = frame.locator("#recaptcha-anchor, .recaptcha-checkbox-border").first
-                        if anchor.count() > 0:
-                            anchor.click(timeout=5000)
-                            time.sleep(3.0)
-                            break
-                    except Exception:
-                        pass
-            if submit_btn.count() > 0:
-                submit_btn.click(timeout=10000)
-                time.sleep(4.0)
+                submit_btn.click(timeout=5000)
+                time.sleep(2.0)
         except Exception as se:
-            print(f"   ⚠️ Submit 클릭 안내: {se}", flush=True)
+            print(f"   ⚠️ 스크롤 안내: {se}", flush=True)
 
         body_txt = page.inner_text("body")
         if "Your email has been sent" not in body_txt and not headless:
@@ -458,6 +485,7 @@ def fill_and_submit_youtube_quota_form(headless: bool = False) -> dict:
                 b.innerHTML = '✅ [전 항목 + 증빙 파일 6종 100% 자동 입력 완료!] 화면 하단의 [로봇이 아닙니다(reCAPTCHA)] 체크 후 [Submit] 버튼만 눌러주시면 즉시 제출됩니다!';
                 document.body.prepend(b);
             }""")
+            _force_show_chrome_windows()
             print("⏳ [사용자 1클릭 대기 중] 열린 크롬 창 하단에서 reCAPTCHA 체크 후 [Submit]을 누르면 자동 감지 후 완료됩니다...", flush=True)
             for _ in range(300):
                 try:

@@ -139,7 +139,7 @@ def process_html(path: Path):
 
 
 if __name__ == '__main__':
-    board = Path(r'C:\Users\min\Desktop\mathedu\board')
+    board = Path(r'D:\mathedu\board')
     targets = list(board.glob('*.html'))
     if len(sys.argv) > 1:
         targets = [Path(sys.argv[1])]

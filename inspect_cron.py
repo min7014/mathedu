@@ -1,6 +1,6 @@
 import os, json, glob, time
 
-root = r'C:\Users\min\Desktop\mathedu'
+root = r'D:\mathedu'
 now = time.time()
 print("NOW epoch:", now)
 

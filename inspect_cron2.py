@@ -1,6 +1,6 @@
 import os, json, glob, time, hashlib
 
-root = r'C:\Users\min\Desktop\mathedu'
+root = r'D:\mathedu'
 now = time.time()
 print("NOW epoch:", now, "=", time.strftime("%Y-%m-%dT%H:%M:%S+00:00", time.gmtime(now)))
 
