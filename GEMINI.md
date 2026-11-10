@@ -290,10 +290,11 @@
   - 글로벌 영문 채널명은 **`MIN EUN GI : Visual Math Proofs (@min7014_ai)`**로 표준화합니다.
 
 
-## 39. 대용량 영상·미디어 저장소 및 임시 렌더링 폴더의 D 드라이브(`D:\mathedu_storage`) 일원화 원칙 (Rule 39)
-- **스토리지 물리적 이전 및 NTFS 디렉터리 정션(`mklink /J`) 무중단 연동**:
-  - `C:` 드라이브 용량 고갈을 원천 차단하기 위해 모든 대용량 영상 및 미디어 파일은 1TB 용량의 **`D:\mathedu_storage\`**에 저장합니다:
-    1. `C:\Users\min\Desktop\mathedu\youtube_uploads` ➔ **`D:\mathedu_storage\youtube_uploads`**
-    2. `C:\Users\min\Desktop\mathedu\video_lectures\{question_classroom,shorts,masterclasses,youtube_packages,generated_pdfs,creative_idea}` ➔ **`D:\mathedu_storage\video_lectures_media\{...}`**
-    3. 모든 영상 렌더링 임시 작업 폴더(`TEMP` / `TMP` / `tempfile.tempdir`) ➔ **`D:\mathedu_storage\temp`** (`min7014_video_maker.py`, `mathedu_foundation_daemon.py` 자동 설정)
-  - 동일 영상 파일 간 복사본은 `D:` 드라이브 내에서도 NTFS 하드링크(`os.link`)로 관리하여 디스크 중복 점유를 0바이트로 유지합니다.
+## 39. 전 워크스페이스 및 대용량 영상·미디어 저장소의 D 드라이브(`D:\mathedu`) 통합 일원화 원칙 (Rule 39)
+- **워크스페이스 전체 물리적 이전 (`C:\Users\min\Desktop\mathedu` ➔ `D:\mathedu`)**:
+  - `C:` 드라이브 용량 고갈을 원천 차단하기 위해 `mathedu` 전체 프로젝트 폴더(`.git`, 소스코드, `assets`, `board`, `video_lectures`, `youtube_uploads` 포함 전 파일)를 1TB 용량의 **`D:\mathedu`**로 100% 통합 이전하여 운용합니다:
+    1. 워크스페이스 루트(`ROOT_DIR`) ➔ **`D:\mathedu`**
+    2. 유튜브 업로드 및 원본 MP4 저장소 ➔ **`D:\mathedu\youtube_uploads`**
+    3. 강의 카탈로그·대본·6대 미디어 폴더 ➔ **`D:\mathedu\video_lectures`**
+    4. 모든 영상 렌더링 임시 작업 폴더(`TEMP` / `TMP` / `tempfile.tempdir`) ➔ **`D:\mathedu\.temp`** (`min7014_video_maker.py`, `mathedu_foundation_daemon.py` 자동 설정)
+  - 동일 영상 파일 간 복사본은 `D:\mathedu` 내에서도 NTFS 하드링크(`os.link`)로 관리하여 디스크 중복 점유를 0바이트로 유지합니다.

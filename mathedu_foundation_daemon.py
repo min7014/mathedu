@@ -36,9 +36,9 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT_DIR = Path(__file__).resolve().parent
-STORAGE_ROOT_DIR = Path("D:/mathedu_storage") if Path("D:/").exists() else ROOT_DIR
-if Path("D:/").exists():
-    _d_tmp = STORAGE_ROOT_DIR / "temp"
+STORAGE_ROOT_DIR = Path("D:/mathedu") if Path("D:/mathedu").exists() else ROOT_DIR
+if STORAGE_ROOT_DIR.exists():
+    _d_tmp = STORAGE_ROOT_DIR / ".temp"
     _d_tmp.mkdir(parents=True, exist_ok=True)
     os.environ["TEMP"] = str(_d_tmp)
     os.environ["TMP"] = str(_d_tmp)

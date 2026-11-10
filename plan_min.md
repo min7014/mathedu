@@ -350,7 +350,7 @@ python -X utf8 pr.py status
 - ✅ **36. 유튜브 채널 커뮤니티 2대 엔진(스튜디오 댓글 소통함 자동 답글 & 채널 커뮤니티 퀴즈·투표 게시물) 상시 가동 원칙 (Rule 36)**
 - ✅ **37. 강렬한 적색(Red) 배제 및 사색적 블루·틸·인디고 색채 조화 원칙 (Calm Intellectual Mathematical Color Harmony & Anti-Red-Aversion Principle)**
 - ✅ **38. 유튜브 채널 공식 명칭(`민은기 선생님의 단계별 시각적 수학 증명`) 및 영문 성함(`MIN EUN GI`) 표준 표기 원칙 (Rule 38)**
-- ✅ **39. 대용량 영상·미디어 저장소 및 임시 렌더링 폴더의 D 드라이브(`D:\mathedu_storage`) 일원화 원칙 (Rule 39)**
+- ✅ **39. 전 워크스페이스 및 대용량 영상·미디어 저장소의 D 드라이브(`D:\mathedu`) 통합 일원화 원칙 (Rule 39)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
