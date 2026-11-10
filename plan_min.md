@@ -436,3 +436,4 @@ python -X utf8 pr.py status
 - **금지**: mathedu 코드·크론·스킬에서 Hermes CLI(`hermes`), Hermes Python, Hermes 크론을 호출하거나 Hermes에 mathedu 작업을 등록하지 않음.
 - **2026-11-10 후속 (Hermes 에이전트 삭제 지시)**: mathedu 쪽 잔여물 `D:\mathedu\_hermes_legacy_archive_20261110\`(103개 파일) 영구 삭제 완료. Hermes 시스템 본체(`C:\Users\min\AppData\Local\hermes`, 약 9GB, 작업 스케줄러 `Hermes_Gateway`, 시작프로그램 `Hermes_Gateway.vbs`)는 비수학 영역(Rule 4)이고 되돌릴 수 없으므로 보류 후 회장님께 보고.
 - **2026-11-10 후속 2 (회장님 승인)**: `hermes uninstall --full`로 Hermes 본체(약 9GB 폴더·PATH·환경변수·시작프로그램·게이트웨이) 완전 삭제 완료. 작업 스케줄러 `Hermes_Gateway` 등록만 관리자 권한 필요로 잔존(실행 대상 파일 없음 → 무동작).
+- **2026-11-10 후속 3 (21:03)**: 회장님이 관리자 권한으로 작업 스케줄러 `Hermes_Gateway` 삭제 완료 → Hermes 예약작업·서비스·시작프로그램·프로세스·pip 패키지 잔존 0건 확인. `%LOCALAPPDATA%\Temp`의 Hermes 임시폴더 4개 삭제. `C:\Users\min\Desktop\Hermes`(트레이딩 프로젝트 데이터, 비수학 영역)는 Rule 2·4에 따라 보존. mathedu 텔레그램 브릿지(`@anti7014_bot`) 송수신 정상 확인(웹훅 없음·409 충돌 없음).
