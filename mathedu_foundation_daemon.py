@@ -212,7 +212,7 @@ def auto_sync_policies_to_plan_min():
         if marker_start in plan_txt and marker_end in plan_txt:
             updated_txt = re.sub(
                 re.escape(marker_start) + r"[\s\S]*?" + re.escape(marker_end),
-                new_block,
+                lambda _: new_block,
                 plan_txt,
             )
         else:
