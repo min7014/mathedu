@@ -3714,7 +3714,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     return {
         "lang": lang_code,
         "channel_handle": "@min7014_ai",
-        "channel_name": "민은기 선생님의 단계별 시각적 수학 증명",
+        "channel_name": YOUTUBE_CHANNEL_NAME_EN if lang_code == "en" else YOUTUBE_CHANNEL_NAME,
         "channel_id": channel_id,
         "channel_url": channel_url,
         "studio_upload_url": studio_upload_url,
@@ -4497,6 +4497,10 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
 
 YOUTUBE_CHANNEL_HANDLE = "@min7014_ai"
 YOUTUBE_CHANNEL_NAME = "민은기 선생님의 단계별 시각적 수학 증명"
+# [Rule 38] 글로벌 영문 채널 공식 명칭
+YOUTUBE_CHANNEL_NAME_EN = "MIN EUN GI : Visual Math Proofs (@min7014_ai)"
+# [Rule 38] 채널 식별용 공식 명칭은 허용 (개별 강의 내레이션·자막·제목·설명란의 개인 호칭 금지와 구분)
+OFFICIAL_CHANNEL_NAMES = (YOUTUBE_CHANNEL_NAME, "민은기 선생님의 수학자료실 : 단계별 시각 증명", YOUTUBE_CHANNEL_NAME_EN)
 YOUTUBE_CHANNEL_ID = "UCSlqQfOEtRfJuMPyGMLgFYA"
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@min7014_ai"
 YOUTUBE_STUDIO_UPLOAD_URL = f"https://studio.youtube.com/channel/{YOUTUBE_CHANNEL_ID}/videos/upload?d=ud"
@@ -4858,9 +4862,13 @@ def verify_video_content_integrity(slug_key: str) -> dict:
             return {"ok": False, "reason": f"pre_rule28_mp4_needs_clean_rerender:{_lc_chk}"}
 
     # 1) Persona / Name Prohibition Check ("민은기 선생님" 등 원천 차단)
+    #    [Rule 38] channel_name 필드의 공식 채널 명칭은 채널 식별 정보이므로 제외하고 검사
     forbidden_personas = ("민은기", "Min's Math Lab", "MinsMathLab", "Min Eunki")
+    persona_scan_txt = raw_script_txt
+    for _ocn in OFFICIAL_CHANNEL_NAMES:
+        persona_scan_txt = persona_scan_txt.replace(f'"channel_name": "{_ocn}"', '"channel_name": ""')
     for fp in forbidden_personas:
-        if fp in raw_script_txt:
+        if fp in persona_scan_txt:
             return {"ok": False, "reason": f"forbidden_persona_in_script:{fp}"}
 
     # 2) Scene 1 ordering check
@@ -4914,8 +4922,11 @@ def verify_video_content_integrity(slug_key: str) -> dict:
     for meta_p in [YT_PKG_DIR / f"{slug_key}_youtube_meta.json", YT_PKG_DIR / f"{slug_key}_shorts_meta.json"]:
         if meta_p.exists():
             m_txt = meta_p.read_text(encoding="utf-8")
+            m_scan_txt = m_txt
+            for _ocn in OFFICIAL_CHANNEL_NAMES:
+                m_scan_txt = m_scan_txt.replace(f'"channel_name": "{_ocn}"', '"channel_name": ""')
             for fp in forbidden_personas:
-                if fp in m_txt:
+                if fp in m_scan_txt:
                     return {"ok": False, "reason": f"forbidden_persona_in_meta:{meta_p.name}:{fp}"}
             mdata = json.loads(m_txt)
             for lc in ("ko", "en"):

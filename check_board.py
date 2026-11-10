@@ -1,7 +1,7 @@
 import os, glob
 
-board = '/c/Users/min/Desktop/mathedu/board'
-site = '/c/Users/min/Desktop/mathedu/__site_board_urls.txt'
+board = 'D:/mathedu/board'
+site = 'D:/mathedu/__site_board_urls.txt'
 
 site_files = set()
 with open(site) as f:
