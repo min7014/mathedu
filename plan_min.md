@@ -435,3 +435,4 @@ python -X utf8 pr.py status
 - **유지되는 것**: 텔레그램 봇은 이미 분리되어 있음(mathedu `@anti7014_bot`과 Hermes 봇은 서로 다른 토큰). 퀴즈 빌드·점검은 Antigravity 세션에서 `audit_engine.py`, `audit_full_mathedu.py`, `build_offline_quizzes.py`로 직접 수행함.
 - **금지**: mathedu 코드·크론·스킬에서 Hermes CLI(`hermes`), Hermes Python, Hermes 크론을 호출하거나 Hermes에 mathedu 작업을 등록하지 않음.
 - **2026-11-10 후속 (Hermes 에이전트 삭제 지시)**: mathedu 쪽 잔여물 `D:\mathedu\_hermes_legacy_archive_20261110\`(103개 파일) 영구 삭제 완료. Hermes 시스템 본체(`C:\Users\min\AppData\Local\hermes`, 약 9GB, 작업 스케줄러 `Hermes_Gateway`, 시작프로그램 `Hermes_Gateway.vbs`)는 비수학 영역(Rule 4)이고 되돌릴 수 없으므로 보류 후 회장님께 보고.
+- **2026-11-10 후속 2 (회장님 승인)**: `hermes uninstall --full`로 Hermes 본체(약 9GB 폴더·PATH·환경변수·시작프로그램·게이트웨이) 완전 삭제 완료. 작업 스케줄러 `Hermes_Gateway` 등록만 관리자 권한 필요로 잔존(실행 대상 파일 없음 → 무동작).
