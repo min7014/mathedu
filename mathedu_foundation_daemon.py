@@ -36,6 +36,12 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT_DIR = Path(__file__).resolve().parent
+STORAGE_ROOT_DIR = Path("D:/mathedu_storage") if Path("D:/").exists() else ROOT_DIR
+if Path("D:/").exists():
+    _d_tmp = STORAGE_ROOT_DIR / "temp"
+    _d_tmp.mkdir(parents=True, exist_ok=True)
+    os.environ["TEMP"] = str(_d_tmp)
+    os.environ["TMP"] = str(_d_tmp)
 PEDAGOGY_JSON = ROOT_DIR / "assets" / "mathteacher_pedagogy_engine.json"
 DEEP_JSON = ROOT_DIR / "assets" / "min7014_deep_knowledge.json"
 STATUS_JSON = ROOT_DIR / "video_lectures" / "foundation_daemon_status.json"

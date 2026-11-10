@@ -288,3 +288,12 @@
 - **영문 성함 및 글로벌 채널 공식 명칭**:
   - 영문 성함은 항상 대문자 **`MIN EUN GI`**로 통일하여 표기합니다 (`Min Eun-ki` 등 혼용 금지).
   - 글로벌 영문 채널명은 **`MIN EUN GI : Visual Math Proofs (@min7014_ai)`**로 표준화합니다.
+
+
+## 39. 대용량 영상·미디어 저장소 및 임시 렌더링 폴더의 D 드라이브(`D:\mathedu_storage`) 일원화 원칙 (Rule 39)
+- **스토리지 물리적 이전 및 NTFS 디렉터리 정션(`mklink /J`) 무중단 연동**:
+  - `C:` 드라이브 용량 고갈을 원천 차단하기 위해 모든 대용량 영상 및 미디어 파일은 1TB 용량의 **`D:\mathedu_storage\`**에 저장합니다:
+    1. `C:\Users\min\Desktop\mathedu\youtube_uploads` ➔ **`D:\mathedu_storage\youtube_uploads`**
+    2. `C:\Users\min\Desktop\mathedu\video_lectures\{question_classroom,shorts,masterclasses,youtube_packages,generated_pdfs,creative_idea}` ➔ **`D:\mathedu_storage\video_lectures_media\{...}`**
+    3. 모든 영상 렌더링 임시 작업 폴더(`TEMP` / `TMP` / `tempfile.tempdir`) ➔ **`D:\mathedu_storage\temp`** (`min7014_video_maker.py`, `mathedu_foundation_daemon.py` 자동 설정)
+  - 동일 영상 파일 간 복사본은 `D:` 드라이브 내에서도 NTFS 하드링크(`os.link`)로 관리하여 디스크 중복 점유를 0바이트로 유지합니다.

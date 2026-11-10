@@ -44,6 +44,13 @@ import pymupdf
 from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageStat
 
 ROOT_DIR = Path(__file__).resolve().parent
+STORAGE_ROOT_DIR = Path("D:/mathedu_storage") if Path("D:/").exists() else ROOT_DIR
+if Path("D:/").exists():
+    _d_tmp = STORAGE_ROOT_DIR / "temp"
+    _d_tmp.mkdir(parents=True, exist_ok=True)
+    os.environ["TEMP"] = str(_d_tmp)
+    os.environ["TMP"] = str(_d_tmp)
+    tempfile.tempdir = str(_d_tmp)
 
 # ==============================================================================
 # 🔑 Multi-Project YouTube API Quota Rotation Pool & Pre-Flight Guard
