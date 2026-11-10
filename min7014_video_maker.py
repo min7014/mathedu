@@ -3713,7 +3713,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
     return {
         "lang": lang_code,
         "channel_handle": "@min7014_ai",
-        "channel_name": "오리지널 단계별 시각적 수학 증명",
+        "channel_name": "민은기 선생님의 단계별 시각적 수학 증명",
         "channel_id": channel_id,
         "channel_url": channel_url,
         "studio_upload_url": studio_upload_url,
@@ -4495,7 +4495,7 @@ def set_youtube_urls_for_slug(slug_key, yt_ko=None, yt_en=None, purge_local_mp4=
 
 
 YOUTUBE_CHANNEL_HANDLE = "@min7014_ai"
-YOUTUBE_CHANNEL_NAME = "오리지널 단계별 시각적 수학 증명"
+YOUTUBE_CHANNEL_NAME = "민은기 선생님의 단계별 시각적 수학 증명"
 YOUTUBE_CHANNEL_ID = "UCSlqQfOEtRfJuMPyGMLgFYA"
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@min7014_ai"
 YOUTUBE_STUDIO_UPLOAD_URL = f"https://studio.youtube.com/channel/{YOUTUBE_CHANNEL_ID}/videos/upload?d=ud"
@@ -7947,10 +7947,10 @@ def generate_channel_banner_2560x1440():
 
     # 중앙 안전 영역(x=880..1680) 핵심 타이포그래피
     draw.rounded_rectangle((900, 538, 1660, 588), radius=24, fill=(2, 132, 199))
-    draw.text((932, 548), "🤖 VISUAL MATH PROOF VAULT · @min7014_ai", fill=(255, 255, 255), font=f_badge)
+    draw.text((932, 548), "📐 MIN EUN GI · VISUAL MATH PROOFS · @min7014_ai", fill=(255, 255, 255), font=f_badge)
 
-    draw.text((895, 612), "오리지널 단계별 시각적 수학 증명", fill=(255, 255, 255), font=f_title)
-    draw.text((895, 688), "Visual Math Proofs AI · 1080p Step-by-Step", fill=(56, 189, 248), font=f_sub)
+    draw.text((895, 612), "민은기 선생님의 단계별 시각적 수학 증명", fill=(255, 255, 255), font=f_title)
+    draw.text((895, 688), "MIN EUN GI : Visual Math Proofs · 1080p Step-by-Step", fill=(56, 189, 248), font=f_sub)
     draw.text((895, 742), "📐 눈으로 깨치는 단계별 기하·대수·미적분 증명 (KO / EN)", fill=(251, 191, 36), font=f_info)
     draw.text((895, 786), "🌐 https://min7014.github.io/ · 1,111+ Math Topics", fill=(203, 213, 225), font=f_info)
 
@@ -8044,11 +8044,11 @@ def optimize_youtube_channel_settings():
 
     localizations = {
         "ko": {
-            "title": "오리지널 단계별 시각적 수학 증명",
+            "title": "민은기 선생님의 단계별 시각적 수학 증명",
             "description": ch_desc_ko,
         },
         "en": {
-            "title": "Visual Math Proofs AI (@min7014_ai)",
+            "title": "MIN EUN GI : Visual Math Proofs (@min7014_ai)",
             "description": (
                 "📐 Welcome to Visual Math Proofs AI (@min7014_ai) — Official 1080p Step-by-Step Visual Mathematical Proofs Channel!\n"
                 "We transform 3,400+ interactive GeoGebra geometry constructions and 866 step-by-step flipbook proof PDFs from https://min7014.github.io/ into crystal-clear visual lectures.\n\n"
@@ -8087,7 +8087,7 @@ def optimize_youtube_channel_settings():
         "id": YOUTUBE_CHANNEL_ID,
         "brandingSettings": {
             "channel": {
-                "title": "오리지널 단계별 시각적 수학 증명",
+                "title": "민은기 선생님의 단계별 시각적 수학 증명",
                 "description": ch_desc_ko,
                 "keywords": ch_keywords,
                 "defaultLanguage": "ko",

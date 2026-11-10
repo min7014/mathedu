@@ -13,7 +13,7 @@ youtube_community_controller.py
 2. [YouTube Web/Studio 브라우저 로봇 직접 제어 (.yt_chrome_robot_profile — 로그인 완료 상태)]:
    - 채널 커뮤니티 탭(https://www.youtube.com/@min7014_ai/posts)에 한/영 5초 직관 퀴즈 & 51~88분 마스터클래스 카드 게시물 직접 자동 발행
    - 스튜디오 커뮤니티 댓글함(https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/comments/inbox) 직접 제어
-   - 스튜디오 프로필 채널명('오리지널 단계별 시각적 수학 증명') 유지 및 검증
+   - 스튜디오 프로필 채널명('민은기 선생님의 단계별 시각적 수학 증명' / 'MIN EUN GI : Visual Math Proofs') 유지 및 검증
 """
 
 import argparse
