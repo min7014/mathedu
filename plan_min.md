@@ -421,3 +421,16 @@ python -X utf8 pr.py status
   - `mathedu_foundation_daemon.py` 시작 시, `run_shorts_and_video_upload_daemon` 시작 시와 매 루프마다, 유튜브 업로드 스레드 매 주기마다 게이트를 확인하여 `Gemini 4 Argon` + `allowed=true`가 아니면 시작하지 않거나 종료함. 파일이 없거나 읽을 수 없으면 '중지'로 판정함.
   - 모델이 바뀌면 대화 세션 에이전트가 게이트 파일을 갱신함. (Claude Opus로 바뀌면 `allowed=false` + 데몬 프로세스 즉시 종료 / Gemini 4 Argon으로 바뀌면 `allowed=true` + 데몬 재가동)
 - **기술적 사실 (Rule 33)**: 영상 렌더링 파이프라인(`min7014_video_maker.py`)은 LLM을 호출하지 않음(대본 템플릿 + 구글 번역 `gtx` + `edge_tts` + `ffmpeg`). 데몬 프로세스는 채팅 모델을 스스로 감지할 수 없으므로, 모델 전환 확인과 게이트 갱신은 대화 세션 에이전트가 수행함. 텔레그램으로만 지시하는 경우에도 해당 세션의 모델 기준으로 판단함.
+
+
+---
+
+## 41. `mathedu` ↔ `Hermes` 완전 분리 원칙 (Rule 41 · 2026-11-10)
+- **회장님 지시**: `"Hermes 와는 분리할 것"`
+- **분리 이유**: Hermes는 트레이딩·암호화폐·개인 일정 등 비수학 크론을 함께 돌리는 외부 에이전트 시스템이므로, 수학교육과의 절대 분리 원칙(Rule 2)에 따라 mathedu와 연결 고리를 두지 않음. 또한 Hermes의 mathedu 크론 3개는 D: 이전 이후에도 옛 경로(`C:\Users\min\Desktop\mathedu`)를 보고 있어, 실제로는 빈 폴더를 점검하며 "ok"를 보고하고 있었음.
+- **분리 조치 (2026-11-10 20:39~20:41)**:
+  1. Hermes 크론잡 4개를 Hermes 공식 CLI(`hermes cron remove`)로 삭제: `mathedu-quiz-builder`(a10910600cae), `mathedu 정교화 스캔 (새벽)`(8311791b729b), `mathedu-quiz-checker`(f3efb8ee669e), `mathedu-report-auto-fix`(8ff06efd5ca9). 삭제 전 `jobs.json` 백업 보관.
+  2. Hermes 쪽 mathedu 스킬 9종(8개 폴더)과 mathedu용 크론 스크립트 3개(`_cron_check.py`, `_cron_report_fix.py`, `_regen_cron_runner.py`)를 Hermes가 읽지 않는 `C:\Users\min\AppData\Local\hermes\_archived_mathedu_20261110\`로 이동(삭제 아님, 복구 가능).
+  3. mathedu 쪽 Hermes 연동 파일 103개(`hermes -z` 호출 스크립트, Hermes 크론 상태 파일·점검 도구·로그)를 `D:\mathedu\_hermes_legacy_archive_20261110\`(git 제외)로 이동. 실제 퀴즈 스크립트(`_regen_48d0d98f.py`, `_regen_51908207.py`, `_regen_a33ab59b.py`, `_regen_data.py`)는 유지.
+- **유지되는 것**: 텔레그램 봇은 이미 분리되어 있음(mathedu `@anti7014_bot`과 Hermes 봇은 서로 다른 토큰). 퀴즈 빌드·점검은 Antigravity 세션에서 `audit_engine.py`, `audit_full_mathedu.py`, `build_offline_quizzes.py`로 직접 수행함.
+- **금지**: mathedu 코드·크론·스킬에서 Hermes CLI(`hermes`), Hermes Python, Hermes 크론을 호출하거나 Hermes에 mathedu 작업을 등록하지 않음.

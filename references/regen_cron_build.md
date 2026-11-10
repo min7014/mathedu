@@ -1,5 +1,8 @@
 # regen_cron_build.md
 
+> [!WARNING]
+> **폐기됨 (2026-11-10, Rule 41 — Hermes 완전 분리)**: 이 문서가 설명하는 Hermes 크론잡(`mathedu-quiz-builder` 등)은 삭제되었고, 관련 스크립트는 `_hermes_legacy_archive_20261110/`(로컬, git 제외)로 옮겨졌습니다. 퀴즈 빌드는 Antigravity 세션에서 `python build_offline_quizzes.py`로 직접 실행합니다. 아래 내용은 기록용으로만 남겨 둡니다.
+
 ## 개요
 이 크론잡은 `C:\Users\min\Desktop\mathedu`의 `_regen_*.py` 스크립트들을 감시하여, 새 스크립트 추가나 기존 스크립트 변경 시 빌드/업데이트를 실행한다.
 
