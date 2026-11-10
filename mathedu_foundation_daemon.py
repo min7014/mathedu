@@ -630,10 +630,13 @@ def sync_pedagogy_counts_to_index_html():
 
 
 def run_continuous_foundation_loop(single_cycle=False):
+    import min7014_video_maker as vmaker
+    if not vmaker.video_production_allowed():
+        print(f"⏸️ [Rule 40 Gate] 대화 모델이 {vmaker.VIDEO_PRODUCTION_REQUIRED_MODEL}이 아니므로 영상 제작 데몬을 시작하지 않습니다.", flush=True)
+        return
     ensure_video_maker_hooked()
     import mathteacher
     import pr
-    import min7014_video_maker as vmaker
 
     print("=" * 78, flush=True)
     print("🏛️ [mathedu Foundation Daemon] 수학홈페이지 근간(mathteacher 6대 수학교육 발전 + v6.0 4대 에디션 영상/숏폼) 상시 진화 가동!", flush=True)

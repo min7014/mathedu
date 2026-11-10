@@ -7746,6 +7746,25 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
     return None
 
 
+VIDEO_PRODUCTION_GATE_FILE = ROOT_DIR / ".agents" / "video_production_gate.json"
+VIDEO_PRODUCTION_REQUIRED_MODEL = "Gemini 4 Argon"
+
+
+def video_production_allowed() -> bool:
+    """
+    [Rule 40: 강의 영상 제작 전 과정 Gemini 4 Argon 전용 게이트]
+    대화 세션 에이전트가 기록한 .agents/video_production_gate.json의 session_model이
+    'Gemini 4 Argon'이고 allowed=true일 때만 영상 제작·업로드를 허용합니다.
+    파일이 없거나 읽을 수 없으면 안전하게 '중지'로 판정합니다.
+    """
+    try:
+        g = json.loads(VIDEO_PRODUCTION_GATE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return False
+    model = str(g.get("session_model") or "")
+    return bool(g.get("allowed")) and model.startswith(VIDEO_PRODUCTION_REQUIRED_MODEL)
+
+
 def run_shorts_and_video_upload_daemon(open_studio_now=False):
     """
     [@min7014_ai 숏폼(#Shorts) & 본편 무인 교체(기존 영상 삭제 ➔ 새 영상 업로드)·동기화 데몬]
@@ -7756,6 +7775,10 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
     """
     import time
     import webbrowser
+
+    if not video_production_allowed():
+        print(f"⏸️ [Rule 40 Gate] 대화 모델이 {VIDEO_PRODUCTION_REQUIRED_MODEL}이 아니므로 영상 제작·업로드를 시작하지 않습니다.", flush=True)
+        return
 
     ready_shorts_dir = YT_UPLOADS_DIR / "ready_for_min7014_ai_shorts"
     if open_studio_now:
@@ -7786,6 +7809,9 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
 
         def _dedicated_cashflow_upload_worker():
             while True:
+                if not video_production_allowed():
+                    time.sleep(30.0)
+                    continue
                 try:
                     import importlib
                     import finance as _fin_worker
@@ -7806,6 +7832,9 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
         print("💰 [YouTube Cash-Flow Dedicated Uploader Thread Started] 100% 일일 쿼터를 신규 수익 영상 업로드에 전량 투입합니다!", flush=True)
 
     while True:
+        if not video_production_allowed():
+            print(f"⏸️ [Rule 40 Gate] 대화 모델이 {VIDEO_PRODUCTION_REQUIRED_MODEL}이 아니게 되어 영상 제작 데몬을 종료합니다.", flush=True)
+            return
         try:
             try:
                 import importlib
