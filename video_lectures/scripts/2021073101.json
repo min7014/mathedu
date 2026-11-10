@@ -207,24 +207,24 @@
   },
   "teacher_proof_analysis": {
     "category_type": "algebra",
-    "hypothesis_ko": "수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건",
-    "conclusion_ko": "절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론",
-    "auxiliary_line_ko": "절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상",
-    "proof_logic_ko": "x ≥ 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k ⇔ X < -k 또는 X > k)으로 깔끔하게 풀리는 원리",
-    "misconception_ko": "식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x ≥ 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
-    "what_if_not_ko": "절댓값 기호가 두 개 이상 포함된 함수 y = |x - a| + |x - b| 의 그래프는 왜 구간 [a, b] 사이에서 바닥이 평평한 양동이 모양으로 최솟값 |b - a|를 가질까요?",
-    "hypothesis_en": "Given geometric and algebraic definitions and starting conditions for 'Basic Example of Quadratic Inequality'",
-    "conclusion_en": "The core mathematical invariant and theorem of 'Basic Example of Quadratic Inequality' holds universally",
-    "auxiliary_line_en": "Introduce a key auxiliary line or symmetric algebraic decomposition to bridge the given hypothesis and target conclusion",
-    "proof_logic_en": "Apply step-by-step congruence, similarity, area conservation, or algebraic equivalence to deduce the conclusion rigorously",
-    "misconception_en": "Rote memorization of the final formula breaks down when conditions change—always trace the proof from the fundamental definition and first auxiliary line",
-    "what_if_not_en": "What new theorem emerges if we generalize one condition or extend this result to higher dimensions?",
-    "duval_deconstruction_ko": "[기하 차원 해체 & 대수 기호 변환] 2D 원문 도형에서 1D 보조선(절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 )을 분리하여 대수 불변식(절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나)과 1:1 동시 매핑",
-    "duval_deconstruction_en": "[Dimensional Deconstruction] Deconstruct 2D figure via 1D auxiliary line (Introduce a key auxiliary line or symmetric al) into symbolic invariant (The core mathematical invariant and theorem of)",
-    "mariotti_invariance_ko": "[동적 기하 불변성 원리] 점과 각도가 연속적으로 변할 때(Variant) 절대 흔들리지 않는 불변 관계(절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 ) 포착",
-    "mariotti_invariance_en": "[Dynamic Dragging Invariance] Contrast moving geometric elements against the strict invariant (The core mathematical invariant and theorem of ')",
-    "hanna_explanatory_why_ko": "[설명적 시각 증명 원리] 단순 결과 확인을 넘어 왜 '절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)'이 등식을 필연적으로 성립시키는지 생성 메커니즘 규명",
-    "hanna_explanatory_why_en": "[Explanatory Visual Proof] Reveal the generating mechanism of why 'Introduce a key auxiliary line or symmetric ' makes the theorem inevitable"
+    "hypothesis_ko": "다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건",
+    "conclusion_ko": "인수분해된 각 인수의 부호 변화표(Sign Chart)와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론",
+    "auxiliary_line_ko": "방정식 P(x) = 0의 실근 α, β, γ를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상",
+    "proof_logic_ko": "(x - α)(x - β)(x - γ) > 0 (단 α < β < γ)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 α < x < β 또는 x > γ 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리",
+    "misconception_ko": "완전제곱 인수 (x - α)²이 포함된 부등식에서는 x = α를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호(≥, ≤)가 있는지 없는지에 따라 한 점 x = α가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
+    "what_if_not_ko": "만약 삼차다항식 P(x)가 인수분해될 때 판별식 D < 0 인 이차식 인수 (x² + px + q)를 포함한다면, 왜 그 이차식 인수는 항상 양수이므로 부등식의 부호 변화에 영향을 주지 않을까요?",
+    "hypothesis_en": "Factoring the polynomial P(x) into linear and irreducible quadratic factors and marking its real roots on the number line for 'Basic Example of Quadratic Inequality'",
+    "conclusion_en": "The sign chart of the factored polynomial and the intervals where the graph y = P(x) lies above or below the x-axis determine the exact solution set of 'Basic Example of Quadratic Inequality'",
+    "auxiliary_line_en": "Plot the real roots α < β < γ on the real number line to partition it into sign intervals and sketch the continuous polynomial curve y = P(x) crossing or touching the x-axis",
+    "proof_logic_en": "For (x - α)(x - β)(x - γ) > 0 with α < β < γ, the product of signs alternates across simple roots, yielding α < x < β or x > γ where the cubic graph lies strictly above the x-axis",
+    "misconception_en": "At a repeated root of even multiplicity such as (x - α)², the polynomial touches the x-axis without changing sign—always check whether strict (<, >) or non-strict (≤, ≥) inequality includes x = α",
+    "what_if_not_en": "Why does an irreducible quadratic factor x² + px + q with negative discriminant (D = p² - 4q < 0) stay strictly positive for all real x and never flip the inequality sign?",
+    "duval_deconstruction_ko": "[기하 차원 해체 & 대수 기호 변환] 2D 원문 도형에서 1D 보조선(방정식 P(x) = 0의 실근 α, β, γ를 수직선 위에 경계선으로 긋고,)을 분리하여 대수 불변식(인수분해된 각 인수의 부호 변화표(Sign Chart)와 다항함수 y = P)과 1:1 동시 매핑",
+    "duval_deconstruction_en": "[Dimensional Deconstruction] Deconstruct 2D figure via 1D auxiliary line (Plot the real roots α < β < γ on the real numb) into symbolic invariant (The sign chart of the factored polynomial and )",
+    "mariotti_invariance_ko": "[동적 기하 불변성 원리] 점과 각도가 연속적으로 변할 때(Variant) 절대 흔들리지 않는 불변 관계(인수분해된 각 인수의 부호 변화표(Sign Chart)와 다항함수 y = P(x)) 포착",
+    "mariotti_invariance_en": "[Dynamic Dragging Invariance] Contrast moving geometric elements against the strict invariant (The sign chart of the factored polynomial and th)",
+    "hanna_explanatory_why_ko": "[설명적 시각 증명 원리] 단순 결과 확인을 넘어 왜 '방정식 P(x) = 0의 실근 α, β, γ를 수직선 위에 경계선으로 긋'이 등식을 필연적으로 성립시키는지 생성 메커니즘 규명",
+    "hanna_explanatory_why_en": "[Explanatory Visual Proof] Reveal the generating mechanism of why 'Plot the real roots α < β < γ on the real nu' makes the theorem inevitable"
   },
   "supported_languages": [
     "ko",
@@ -258,9 +258,9 @@
       "visual_focus": "단계별 수학적 추론 및 증명 전개",
       "color_tag": "default",
       "diff_bbox": null,
-      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 사차부등식의 기본예제입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건입니다. 왜 이 조건에서 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+      "explanation_text": "1단계입니다. 오늘 함께 탐구할 주제는 사차부등식의 기본예제입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건입니다. 왜 이 조건에서 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
       "narrations": {
-        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 사차부등식의 기본예제입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건입니다. 왜 이 조건에서 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "ko": "1단계입니다. 오늘 함께 탐구할 주제는 사차부등식의 기본예제입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건입니다. 왜 이 조건에서 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
         "en": "Step 1. Today we explore Basic Example of Quadratic Inequality through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion.",
         "ja": "1段階です。今日一緒に探求する主題は四次不等式の基本例です。結果公式を最初に覚える前に出発条件から正確に調べてみましょうか？このトピックの出発点は、垂直線の上から原点（または基準点）からの距離として定義される絶対値記号と不等式を含む「斜差不等式の基本例」の出発条件です。なぜこの条件で絶対値内の式の符号が変わる境界点（０となる値）を基準に区間を分ければ、「四次不等式の基本例」のグラフと解集合が正確に決定されるという結論が必然的に成立するのか、一段階ずつ証明してみましょう。",
         "zh-CN": "这是第一步。今天我们要一起探讨的主题是四次不等式的基本示例。在记忆结果公式之前，我们是不是应该先明确起始条件呢？本主题的起点是“四次不等式的基本示例”的起始条件，其中包括绝对值符号和定义为数轴上距原点（或参考点）的距离的不等式。我们来逐步证明一下，为什么在这种条件下，以绝对值中表达式的符号发生变化的边界点（变为0的值）为基准来划分区间，必然会得出“四次不等式基本例”的图形和解集被准确确定的结论。",
@@ -274,7 +274,7 @@
         "en": 17.128
       },
       "question_narrations": {
-        "ko": "1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? 사차부등식의 기본예제에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요? 오늘 함께 탐구할 주제는 사차부등식의 기본예제입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건입니다. 왜 이 조건에서 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
+        "ko": "1단계, 질문으로 시작하는 수학 수업입니다! 먼저 스스로 질문해 볼까요? 사차부등식의 기본예제에서 주어진 출발 조건은 무엇이고, 우리가 증명할 목표 결론은 무엇일까요? 오늘 함께 탐구할 주제는 사차부등식의 기본예제입니다. 결과 공식을 먼저 외우기 전에 출발 조건부터 정확히 짚어 볼까요? 이 주제의 출발점은 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건입니다. 왜 이 조건에서 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 필연적으로 성립하는지 한 단계씩 증명해 봅시다.",
         "en": "Step 1, Question-Asking Classroom! Let us ask first: What is the starting condition and target conclusion in Basic Example of Quadratic Inequality? Today we explore Basic Example of Quadratic Inequality through a step-by-step visual proof. Before memorizing the final result, let us examine our starting condition and see why it inevitably leads to the conclusion."
       }
     },
@@ -296,9 +296,9 @@
         0.5661,
         0.5124
       ],
-      "explanation_text": "2단계, 2페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+      "explanation_text": "2단계, 2페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "2단계, 2페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "ko": "2단계, 2페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
         "en": "Step 2 (Page 2). First, accurately establish the basic definition of the expression based on the starting conditions of 'Basic Example of Quaternary Inequality', which includes absolute value symbols and inequalities defined as the distance from the origin (or reference point) on a vertical line. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol.",
         "ja": "ステップ2、2ページステップです。まず、垂直線の上から原点（または基準点）からの距離で定義される絶対値記号と不等式を含む「斜差不等式の基本例」の出発条件に基づいて式の基本定義を正確に立てます。記号を機械的に操作する前に、各記号が意味する本来の意味を先に思い出すのが第一歩です。",
         "zh-CN": "这是第2页第2步。首先，根据“四元不等式基本示例”的起始条件，准确建立表达式的基本定义，其中包括绝对值符号和定义为垂直线上距原点（或参考点）的距离的不等式。在机械地操作符号之前，第一步是回忆每个符号的原始含义。",
@@ -312,7 +312,7 @@
         "en": 27.496
       },
       "question_narrations": {
-        "ko": "2단계 탐구 발문입니다! 사차부등식의 기본예제를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 2페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "ko": "2단계 탐구 발문입니다! 사차부등식의 기본예제를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 2페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
         "en": "Step 2 Socratic Question: What basic definition should we apply first to prove the basic example of the quartic inequality? Pause and observe the step carefully: (Page 2). First, accurately establish the basic definition of the expression based on the starting conditions of 'Basic Example of Quaternary Inequality', which includes absolute value symbols and inequalities defined as the distance from the origin (or reference point) on a vertical line. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol."
       }
     },
@@ -334,9 +334,9 @@
         0.9194,
         0.4518
       ],
-      "explanation_text": "3단계, 3페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+      "explanation_text": "3단계, 3페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "3단계, 3페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "ko": "3단계, 3페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
         "en": "Step 3 (Page 3). First, accurately establish the basic definition of the expression based on the starting conditions of 'Basic Example of Quaternary Inequality', which includes absolute value symbols and inequalities defined as the distance from the origin (or reference point) on a vertical line. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol.",
         "ja": "ステップ3、3ページステップです。まず、垂直線の上から原点（または基準点）からの距離で定義される絶対値記号と不等式を含む「斜差不等式の基本例」の出発条件に基づいて式の基本定義を正確に立てます。記号を機械的に操作する前に、各記号が意味する本来の意味を先に思い出すのが第一歩です。",
         "zh-CN": "这是第 3 页的步骤 3。 首先，根据“四元不等式基本示例”的起始条件，准确建立表达式的基本定义，其中包括绝对值符号和定义为垂直线上距原点（或参考点）的距离的不等式。在机械地操作符号之前，第一步是回忆每个符号的原始含义。",
@@ -350,7 +350,7 @@
         "en": 27.52
       },
       "question_narrations": {
-        "ko": "3단계 탐구 발문입니다! 사차부등식의 기본예제를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 3페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "ko": "3단계 탐구 발문입니다! 사차부등식의 기본예제를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 3페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
         "en": "Step 3 Socratic Question: What basic definition should we apply first to prove the basic example of the quartic inequality? Pause and observe the step carefully: (Page 3). First, accurately establish the basic definition of the expression based on the starting conditions of 'Basic Example of Quaternary Inequality', which includes absolute value symbols and inequalities defined as the distance from the origin (or reference point) on a vertical line. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol."
       }
     },
@@ -372,9 +372,9 @@
         0.7645,
         0.5262
       ],
-      "explanation_text": "4단계, 4페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+      "explanation_text": "4단계, 4페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
       "narrations": {
-        "ko": "4단계, 4페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "ko": "4단계, 4페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
         "en": "Step 4 (Page 4). First, accurately establish the basic definition of the expression based on the starting conditions of 'Basic Example of Quaternary Inequality', which includes absolute value symbols and inequalities defined as the distance from the origin (or reference point) on a vertical line. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol.",
         "ja": "ステップ4、4ページステップです。まず、垂直線の上から原点（または基準点）からの距離で定義される絶対値記号と不等式を含む「斜差不等式の基本例」の出発条件に基づいて式の基本定義を正確に立てます。記号を機械的に操作する前に、各記号が意味する本来の意味を先に思い出すのが第一歩です。",
         "zh-CN": "这是第 4 页的第 4 步。 首先，根据“四元不等式基本示例”的起始条件，准确建立表达式的基本定义，其中包括绝对值符号和定义为垂直线上距原点（或参考点）的距离的不等式。在机械地操作符号之前，第一步是回忆每个符号的原始含义。",
@@ -388,7 +388,7 @@
         "en": 27.544
       },
       "question_narrations": {
-        "ko": "4단계 탐구 발문입니다! 사차부등식의 기본예제를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 4페이지 단계입니다. 먼저 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
+        "ko": "4단계 탐구 발문입니다! 사차부등식의 기본예제를 증명하기 위해 가장 먼저 어떤 기본 정의를 적용해야 할까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 4페이지 단계입니다. 먼저 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건을 바탕으로 식의 기본 정의를 정확히 세웁니다. 기호를 기계적으로 조작하기 전에 각 기호가 뜻하는 본래 의미를 먼저 떠올리는 것이 첫걸음입니다.",
         "en": "Step 4 Socratic Question: What basic definition should we apply first to prove the basic example of the quartic inequality? Pause and observe the step carefully: (Page 4). First, accurately establish the basic definition of the expression based on the starting conditions of 'Basic Example of Quaternary Inequality', which includes absolute value symbols and inequalities defined as the distance from the origin (or reference point) on a vertical line. Before mechanically manipulating symbols, the first step is to recall the original meaning of each symbol."
       }
     },
@@ -410,9 +410,9 @@
         0.7624,
         0.6226
       ],
-      "explanation_text": "5단계, 5페이지 단계입니다. 이제 증명의 핵심 열쇠인 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+      "explanation_text": "5단계, 5페이지 단계입니다. 이제 증명의 핵심 열쇠인 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "5단계, 5페이지 단계입니다. 이제 증명의 핵심 열쇠인 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "ko": "5단계, 5페이지 단계입니다. 이제 증명의 핵심 열쇠인 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
         "en": "Step 5 (Page 5). Now, we apply the idea of dividing the equation into positive and negative sections by marking the reference point (such as x = 0 or x = -2/3) where the expression in the absolute value becomes 0 as a boundary line on the vertical line and coordinate plane, which is the key to the proof. After this conversion, the structure of an expression that seemed complex can be clearly solved using basic operations that we already know.",
         "ja": "ステップ5、5ページステップです。これで、証明の鍵となる絶対値内の式がゼロになる基準点（x = 0またはx = -2/3など）を垂直線と座標平面に境界線で表示し、正の区間と負の区間に分割する発想を適用します。この変換を経ると、複雑に見えた式の構造が、私たちが既に知っている基本演算で鮮明に解けます。",
         "zh-CN": "这是第5页第5步。现在，我们应用将方程分为正负两部分的思想，通过将绝对值中的表达式变为0的参考点（例如x = 0或x = -2/3）标记为垂直线和坐标平面上的分界线，这是证明的关键。经过这种转换，看似复杂的表达式结构可以使用我们已知的基本运算清楚地解决。",
@@ -426,7 +426,7 @@
         "en": 32.933
       },
       "question_narrations": {
-        "ko": "5단계 탐구 발문입니다! 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 5페이지 단계입니다. 이제 증명의 핵심 열쇠인 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "ko": "5단계 탐구 발문입니다! 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 5페이지 단계입니다. 이제 증명의 핵심 열쇠인 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
         "en": "Step 5 Socratic Question: What algebraic transformation or model do you use to connect the starting equation to the target conclusion? Pause and observe the step carefully: (Page 5). Now, we apply the idea of dividing the equation into positive and negative sections by marking the reference point (such as x = 0 or x = -2/3) where the expression in the absolute value becomes 0 as a boundary line on the vertical line and coordinate plane, which is the key to the proof. After this conversion, the structure of an expression that seemed complex can be clearly solved using basic operations that we already know."
       }
     },
@@ -448,9 +448,9 @@
         0.9008,
         0.7163
       ],
-      "explanation_text": "6단계, 6페이지 단계입니다. 이제 증명의 핵심 열쇠인 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+      "explanation_text": "6단계, 6페이지 단계입니다. 이제 증명의 핵심 열쇠인 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
       "narrations": {
-        "ko": "6단계, 6페이지 단계입니다. 이제 증명의 핵심 열쇠인 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "ko": "6단계, 6페이지 단계입니다. 이제 증명의 핵심 열쇠인 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
         "en": "Step 6 (Page 6). Now, we apply the idea of dividing the equation into positive and negative sections by marking the reference point (such as x = 0 or x = -2/3) where the expression in the absolute value becomes 0 as a boundary line on the vertical line and coordinate plane, which is the key to the proof. After this conversion, the structure of an expression that seemed complex can be clearly solved using basic operations that we already know.",
         "ja": "ステップ6、6ページステップです。これで、証明の鍵となる絶対値内の式がゼロになる基準点（x = 0またはx = -2/3など）を垂直線と座標平面に境界線で表示し、正の区間と負の区間に分割する発想を適用します。この変換を経ると、複雑に見えた式の構造が、私たちが既に知っている基本演算で鮮明に解けます。",
         "zh-CN": "这是第6页第6步。现在，我们应用将方程分为正负部分的思想，通过将绝对值中的表达式变为0的参考点（例如x = 0或x = -2/3）标记为垂直线和坐标平面上的分界线，这是证明的关键。经过这种转换，看似复杂的表达式结构可以使用我们已知的基本运算清楚地解决。",
@@ -464,7 +464,7 @@
         "en": 33.0
       },
       "question_narrations": {
-        "ko": "6단계 탐구 발문입니다! 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 6페이지 단계입니다. 이제 증명의 핵심 열쇠인 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
+        "ko": "6단계 탐구 발문입니다! 출발 식을 목표 결론으로 연결하기 위해 어떤 대수적 변형이나 모델을 사용하나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 6페이지 단계입니다. 이제 증명의 핵심 열쇠인 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 적용합니다. 이 변환을 거치면 복잡해 보이던 식의 구조가 우리가 이미 알고 있는 기본 연산으로 선명하게 풀립니다.",
         "en": "Step 6 Socratic Question: What algebraic transformation or model do you use to connect the starting equation to the target conclusion? Pause and observe the step carefully: (Page 6). Now, we apply the idea of dividing the equation into positive and negative sections by marking the reference point (such as x = 0 or x = -2/3) where the expression in the absolute value becomes 0 as a boundary line on the vertical line and coordinate plane, which is the key to the proof. After this conversion, the structure of an expression that seemed complex can be clearly solved using basic operations that we already know."
       }
     },
@@ -486,9 +486,9 @@
         0.9587,
         0.9091
       ],
-      "explanation_text": "7단계, 7페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+      "explanation_text": "7단계, 7페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
       "narrations": {
-        "ko": "7단계, 7페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+        "ko": "7단계, 7페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
         "en": "Step 7 (Page 7). When x or more is 0, |x| = x and when x < 0 |x| If you substitute the definition of the absolute value = -x, the slope of the straight line changes in each section or the equation is derived without any gaps according to the principle of being neatly solved by the distance inequality from the origin (|X| > k necessary and sufficient condition X < -k or X > k). What to pay special attention to at this stage is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning!",
         "ja": "ステップ7、7ページステップです。 x以上0のとき|x| = x で x < 0 のとき |x| = -x という絶対値の定義を代入すると、各区間で直線の傾きが変化したり、原点からの距離不等式 (|X| > k 必要十分条件 X < -k または X > k) できれいに解ける原理に従って式がきちんと導かれます。この段階で特に注意すべき点は、式y = (a/2)(x + | x |)はx < 0 から x + (-x) = 0 になり、定数関数0になり、x以上0では ax となり、今日の人工知能ディープラーニングのコア活性化関数であるReLU関数とまったく同じ構造です！",
         "zh-CN": "这是第 7 页的步骤 7。当 x 或以上为 0 时，|x| = x 并且当 x < 0 |x| 时如果代入绝对值=-x的定义，则直线的斜率在各段发生变化，或者根据距原点的距离不等式整齐求解的原理（|X| > k充要条件X < -k或X > k），无间隙地导出方程。现阶段要特别注意的是，方程 y = (a/2)(x + |x|) 在 x < 0 时变为 x + (-x) = 0，使其成为 0 的常数函数，当 x 或以上为 0 时变为 ax，这与 ReLU 函数的结构完全相同，ReLU 函数是当今人工智能深度学习的核心激活函数！",
@@ -502,7 +502,7 @@
         "en": 61.8
       },
       "question_narrations": {
-        "ko": "7단계 탐구 발문입니다! 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 7페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+        "ko": "7단계 탐구 발문입니다! 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 7페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
         "en": "Step 7 Socratic Question: What is the most common pitfall in this calculation process due to signs or conditions? Pause and observe the step carefully: (Page 7). When x or more is 0, |x| = x and when x < 0 |x| If you substitute the definition of the absolute value = -x, the slope of the straight line changes in each section or the equation is derived without any gaps according to the principle of being neatly solved by the distance inequality from the origin (|X| > k necessary and sufficient condition X < -k or X > k). What to pay special attention to at this stage is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning!"
       }
     },
@@ -524,9 +524,9 @@
         0.9587,
         0.9091
       ],
-      "explanation_text": "8단계, 8페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+      "explanation_text": "8단계, 8페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
       "narrations": {
-        "ko": "8단계, 8페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+        "ko": "8단계, 8페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
         "en": "Step 8 (Page 8). When x or more is 0, |x| = x and when x < 0 |x| If you substitute the definition of the absolute value = -x, the slope of the straight line changes in each section or the equation is derived without any gaps according to the principle of being neatly solved by the distance inequality from the origin (|X| > k necessary and sufficient condition X < -k or X > k). What to pay special attention to at this stage is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning!",
         "ja": "ステップ8、8ページステップです。 x以上0のとき|x| = x で x < 0 のとき |x| = -x という絶対値の定義を代入すると、各区間で直線の傾きが変化したり、原点からの距離不等式 (|X| > k 必要十分条件 X < -k または X > k) できれいに解ける原理に従って式がきちんと導かれます。この段階で特に注意すべき点は、式y = (a/2)(x + | x |)はx < 0 から x + (-x) = 0 になり、定数関数0になり、x以上0では ax となり、今日の人工知能ディープラーニングのコア活性化関数であるReLU関数とまったく同じ構造です！",
         "zh-CN": "这是第 8 步，共 8 页。当x或更多为0时，|x| = x 并且当 x < 0 |x| 时如果代入绝对值=-x的定义，则直线的斜率在各段发生变化，或者根据距原点的距离不等式整齐求解的原理（|X| > k充要条件X < -k或X > k），无间隙地导出方程。现阶段要特别注意的是，方程 y = (a/2)(x + |x|) 在 x < 0 时变为 x + (-x) = 0，使其成为 0 的常数函数，当 x 或以上为 0 时变为 ax，这与 ReLU 函数的结构完全相同，ReLU 函数是当今人工智能深度学习的核心激活函数！",
@@ -540,7 +540,7 @@
         "en": 61.533
       },
       "question_narrations": {
-        "ko": "8단계 탐구 발문입니다! 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 8페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+        "ko": "8단계 탐구 발문입니다! 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 8페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
         "en": "Step 8 Socratic Question: What is the most common pitfall in this calculation process due to signs or conditions? Pause and observe the step carefully: (Page 8). When x or more is 0, |x| = x and when x < 0 |x| If you substitute the definition of the absolute value = -x, the slope of the straight line changes in each section or the equation is derived without any gaps according to the principle of being neatly solved by the distance inequality from the origin (|X| > k necessary and sufficient condition X < -k or X > k). What to pay special attention to at this stage is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning!"
       }
     },
@@ -562,9 +562,9 @@
         0.4153,
         0.8871
       ],
-      "explanation_text": "9단계, 9페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+      "explanation_text": "9단계, 9페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
       "narrations": {
-        "ko": "9단계, 9페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+        "ko": "9단계, 9페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
         "en": "Step 9, page 9. When x or more is 0, |x| = x and when x < 0 |x| If you substitute the definition of the absolute value = -x, the slope of the straight line changes in each section or the equation is derived without any gaps according to the principle of being neatly solved by the distance inequality from the origin (|X| > k necessary and sufficient condition X < -k or X > k). What to pay special attention to at this stage is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning!",
         "ja": "ステップ9、9ページステップです。 x以上0のとき|x| = x で x < 0 のとき |x| = -x という絶対値の定義を代入すると、各区間で直線の傾きが変化したり、原点からの距離不等式 (|X| > k 必要十分条件 X < -k または X > k) できれいに解ける原理に従って式がきちんと導かれます。この段階で特に注意すべき点は、式y = (a/2)(x + | x |)はx < 0 から x + (-x) = 0 になり、定数関数0になり、x以上0では ax となり、今日の人工知能ディープラーニングのコア活性化関数であるReLU関数とまったく同じ構造です！",
         "zh-CN": "第 9 页，步骤 9。当 x 或以上为 0 时，|x| = x 并且当 x < 0 |x| 时如果代入绝对值=-x的定义，则直线的斜率在各段发生变化，或者根据距原点的距离不等式整齐求解的原理（|X| > k充要条件X < -k或X > k），无间隙地导出方程。现阶段要特别注意的是，方程 y = (a/2)(x + |x|) 在 x < 0 时变为 x + (-x) = 0，使其成为 0 的常数函数，当 x 或以上为 0 时变为 ax，这与 ReLU 函数的结构完全相同，ReLU 函数是当今人工智能深度学习的核心激活函数！",
@@ -578,7 +578,7 @@
         "en": 61.867
       },
       "question_narrations": {
-        "ko": "9단계 탐구 발문입니다! 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 9페이지 단계입니다. x 이상 0 일 때 |x| = x 이고 x < 0 일 때 |x| = -x 라는 절댓값의 정의를 대입하면, 각 구간에서 직선의 기울기가 달라지거나 원점으로부터의 거리 부등식(|X| > k 필요충분조건 X < -k 또는 X > k)으로 깔끔하게 풀리는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다!",
+        "ko": "9단계 탐구 발문입니다! 이 연산 과정에서 부호나 조건 때문에 가장 실수하기 쉬운 함정은 무엇일까요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 9페이지 단계입니다. (x - 알파)(x - 베타)(x - 감마) > 0 (단 알파 < 베타 < 감마)에서 각 인수의 부호 곱이 양수가 되는 구간을 따지면 알파 < x < 베타 또는 x > 감마 가 되며, 이는 삼차함수 그래프가 x축(y = 0)보다 위쪽에 있는 x좌표의 범위와 1:1로 대응하는 원리에 따라 식이 빈틈없이 유도됩니다. 이 단계에서 특히 주의할 점은, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다!",
         "en": "Step 9 Socratic Question: What is the most common pitfall in this calculation process due to signs or conditions? Pause and observe the step carefully: page 9. When x or more is 0, |x| = x and when x < 0 |x| If you substitute the definition of the absolute value = -x, the slope of the straight line changes in each section or the equation is derived without any gaps according to the principle of being neatly solved by the distance inequality from the origin (|X| > k necessary and sufficient condition X < -k or X > k). What to pay special attention to at this stage is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning!"
       }
     },
@@ -600,9 +600,9 @@
         0.4029,
         0.3333
       ],
-      "explanation_text": "10단계, 10페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 자연스럽게 도출됩니다!",
+      "explanation_text": "10단계, 10페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "10단계, 10페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 자연스럽게 도출됩니다!",
+        "ko": "10단계, 10페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 자연스럽게 도출됩니다!",
         "en": "This is a 10-step, 10-page step. If we combine the formulas organized in the previous step into one, we can finally naturally conclude that by dividing the sections based on the boundary point (the value that becomes 0) where the sign of the expression in the absolute value we aimed for changes (the value that becomes 0), the graph and solution set of 'Basic example of quartic inequality' are accurately determined!",
         "ja": "ステップ10、10ページステップです。前のステップでまとめた数式をひとつにまとめてあげると、ついに私たちが目指した絶対値の中の式の符号が変わる境界点（０となる値）を基準に区間を分ければ、「四次不等式の基本例」のグラフと解集合が正確に決まるという結論が自然に導き出されます！",
         "zh-CN": "这是一个 10 个步骤、10 页的步骤。如果我们把上一步整理的公式合二为一，我们最终可以很自然地得出这样的结论：以我们所要的绝对值中表达式的符号发生变化（变为0的值）的边界点（变为0的值）为基础进行划分，就可以准确地确定“四次不等式的基本例子”的图形和解集！",
@@ -616,7 +616,7 @@
         "en": 27.232
       },
       "question_narrations": {
-        "ko": "10단계 탐구 발문입니다! 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 10페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 자연스럽게 도출됩니다!",
+        "ko": "10단계 탐구 발문입니다! 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 10페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 자연스럽게 도출됩니다!",
         "en": "Step 10 Socratic Question: How can the final law be completed by condensing the equations derived so far into one? Pause and observe the step carefully: This is a 10-step, 10-page step. If we combine the formulas organized in the previous step into one, we can finally naturally conclude that by dividing the sections based on the boundary point (the value that becomes 0) where the sign of the expression in the absolute value we aimed for changes (the value that becomes 0), the graph and solution set of 'Basic example of quartic inequality' are accurately determined!"
       }
     },
@@ -638,9 +638,9 @@
         0.7851,
         0.832
       ],
-      "explanation_text": "11단계, 11페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 자연스럽게 도출됩니다!",
+      "explanation_text": "11단계, 11페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 자연스럽게 도출됩니다!",
       "narrations": {
-        "ko": "11단계, 11페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 자연스럽게 도출됩니다!",
+        "ko": "11단계, 11페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 자연스럽게 도출됩니다!",
         "en": "Step 11, page 11. If we combine the formulas organized in the previous step into one, we can finally naturally conclude that by dividing the sections based on the boundary point (the value that becomes 0) where the sign of the expression in the absolute value we aimed for changes (the value that becomes 0), the graph and solution set of 'Basic example of quartic inequality' are accurately determined!",
         "ja": "ステップ11、11ページのステップです。前のステップでまとめた数式をひとつにまとめてあげると、ついに私たちが目指した絶対値の中の式の符号が変わる境界点（０となる値）を基準に区間を分ければ、「四次不等式の基本例」のグラフと解集合が正確に決まるという結論が自然に導き出されます！",
         "zh-CN": "第11页第11步。如果我们将上一步整理的公式合二为一，我们最终可以很自然地得出这样的结论：以我们所要的绝对值表达式的符号发生变化（变为0的值）的边界点（变为0的值）为基础进行划分，就可以准确地确定“四次不等式的基本例子”的图形和解集！",
@@ -654,7 +654,7 @@
         "en": 26.584
       },
       "question_narrations": {
-        "ko": "11단계 탐구 발문입니다! 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 11페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 자연스럽게 도출됩니다!",
+        "ko": "11단계 탐구 발문입니다! 지금까지 유도한 식을 하나로 정리하면 어떻게 최종 법칙이 완성되나요? 잠시 화면의 단계별 변화를 보며 생각한 뒤 확인해 보세요. 11페이지 단계입니다. 앞 단계에서 정리한 수식들을 하나로 묶어 주면, 마침내 우리가 목표로 했던 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 자연스럽게 도출됩니다!",
         "en": "Step 11 Socratic Question: How can the final law be completed by condensing the equations derived so far into one? Pause and observe the step carefully: page 11. If we combine the formulas organized in the previous step into one, we can finally naturally conclude that by dividing the sections based on the boundary point (the value that becomes 0) where the sign of the expression in the absolute value we aimed for changes (the value that becomes 0), the graph and solution set of 'Basic example of quartic inequality' are accurately determined!"
       }
     },
@@ -666,7 +666,7 @@
         12
       ],
       "step_title": "완결 · 증명 완성(Q.E.D.) 및 조건 변형 확장 (What-If-Not)",
-      "step_question_ko": "🔀 [조건 변형 질문] 절댓값 기호가 두 개 이상 포함된 함수 y = |x - a| + |x - b| 의 그래프는 왜 구간 [a, b] 사이에서 바닥이 평평한 양동이 모양으로 최솟값 |b - a|를 가질까요?",
+      "step_question_ko": "🔀 [조건 변형 질문] 만약 삼차다항식 P(x)가 인수분해될 때 판별식 D < 0 인 이차식 인수 (x의 제곱 + px + q)를 포함한다면, 왜 그 이차식 인수는 항상 양수이므로 부등식의 부호 변화에 영향을 주지 않을까요?",
       "step_question_en": "🔀 [What-If-Not] How does this mathematical principle evolve if we modify or generalize its conditions?",
       "visual_focus": "파란색 출발 가정 및 기준 조건 제시",
       "color_tag": "blue",
@@ -676,9 +676,9 @@
         0.9628,
         0.9091
       ],
-      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건에서 시작해, 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 거쳐, 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 절댓값 기호가 두 개 이상 포함된 함수 y = |x - a| + |x - b| 의 그래프는 왜 구간 [a, b] 사이에서 바닥이 평평한 양동이 모양으로 최솟값 |b - a|를 가질까요? 오늘 시각적 증명으로 공식 암기 없이 원리를 깨우치셨다면 지금 바로 구독과 좋아요를 눌러 1,113개 시각적 수학 증명 시리즈를 놓치지 마세요! 설명란의 수학자료실 원문과 연속 정주행 마스터클래스도 이어서 확인해 보세요!",
+      "explanation_text": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건에서 시작해, 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 거쳐, 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 삼차다항식 P(x)가 인수분해될 때 판별식 D < 0 인 이차식 인수 (x의 제곱 + px + q)를 포함한다면, 왜 그 이차식 인수는 항상 양수이므로 부등식의 부호 변화에 영향을 주지 않을까요? 오늘 시각적 증명으로 공식 암기 없이 원리를 깨우치셨다면 지금 바로 구독과 좋아요를 눌러 1,113개 시각적 수학 증명 시리즈를 놓치지 마세요! 설명란의 수학자료실 원문과 연속 정주행 마스터클래스도 이어서 확인해 보세요!",
       "narrations": {
-        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건에서 시작해, 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 거쳐, 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 절댓값 기호가 두 개 이상 포함된 함수 y = |x - a| + |x - b| 의 그래프는 왜 구간 [a, b] 사이에서 바닥이 평평한 양동이 모양으로 최솟값 |b - a|를 가질까요? 오늘 시각적 증명으로 공식 암기 없이 원리를 깨우치셨다면 지금 바로 구독과 좋아요를 눌러 1,113개 시각적 수학 증명 시리즈를 놓치지 마세요! 설명란의 수학자료실 원문과 연속 정주행 마스터클래스도 이어서 확인해 보세요!",
+        "ko": "마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건에서 시작해, 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 거쳐, 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 삼차다항식 P(x)가 인수분해될 때 판별식 D < 0 인 이차식 인수 (x의 제곱 + px + q)를 포함한다면, 왜 그 이차식 인수는 항상 양수이므로 부등식의 부호 변화에 영향을 주지 않을까요? 오늘 시각적 증명으로 공식 암기 없이 원리를 깨우치셨다면 지금 바로 구독과 좋아요를 눌러 1,113개 시각적 수학 증명 시리즈를 놓치지 마세요! 설명란의 수학자료실 원문과 연속 정주행 마스터클래스도 이어서 확인해 보세요!",
         "en": "Step 12 (Final Step): The visual proof is complete! Starting from the starting conditions of 'Basic Example of Quaternary Inequality', which includes an absolute value sign and inequality defined as the distance from the origin (or reference point) on a vertical line, which was the starting condition, the reference point (x = 0 or It was clearly confirmed that the graph and solution set of 'Basic Example of Quaternary Inequality' are accurately determined by dividing the section based on the boundary point (the value of 0). The key point to remember here is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning! Finally, ask a deeper question. Functions containing two or more absolute value symbols y = |x - a| + |x - b| Why does the graph of have the minimum value |b - a| in the shape of a flat-bottomed bucket in the interval [a, b]? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don't miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!",
         "ja": "最後の12段階、証明が完成しました！出発条件だった垂直線上で原点（または基準点）からの距離で定義される絶対値記号と不等式が含まれた「四次不等式の基本例」の出発条件から始まり、絶対値内の式が0となる基準点（x = 0またはx = -2/3など）を垂直線と座標平面に区分し、両数を境界線で表示し、絶対値内の式の符号が変わる境界点（0となる値）を基準に区間を分けると、「四次不等式の基本例」のグラフと解集合が正確に決定されるという結論が成立することを明確に確認しました。ここで必ず覚えておくべき重要なポイントは、式 y = (a/2)(x + |x|) は x < 0 で x + (-x) = 0 になり、定数関数 0 になり、x 以上 0 では ax となり、今日の人工知能ディープラーニングのコア活性化関数である ReLU 関数とまったく同じ構造です！最後に一歩もっと深く質問してみてください。 2つ以上の絶対値記号を含む関数y = | x - a | + |x - b|のグラフは、なぜ区間[a,b]の間で底が平らなバケツが形に最上値|b - a|を持つのでしょうか？今日の視覚的証明で公式の暗記なしに原則を覚醒したら、今すぐ購読といいねを押して1,113個の視覚的数学証明シリーズをお見逃しなく！説明欄の数学資料室の原文と連続定走マスタークラスも引き続き確認してみてください！",
         "zh-CN": "最后 12 个步骤，即证明，已完成！从《第四纪不等式的基本例》的起始条件开始，其中包括绝对值符号和定义为垂直线上距原点（或参考点）的距离的不等式，这是起始条件，参考点（x = 0或）清楚地确认了《第四纪不等式的基本例》的图形和解集是通过基于边界点（值为0）划分截面来准确确定的。这里要记住的关键点是方程y = (a/2)(x + |x|) 在 x < 0 时变为 x + (-x) = 0，使其成为 0 的常量函数，而当 x 或以上为 0 时变为 ax，这与 ReLU 函数完全相同，ReLU 函数是当今人工智能深度学习的核心激活函数！ |b - a| 区间[a, b]中的平底桶？如果今天通过视觉证明已经学会了原理，请立即订阅并点赞，以免错过1113视觉数学证明系列！",
@@ -692,7 +692,7 @@
         "en": 116.333
       },
       "question_narrations": {
-        "ko": "마지막 12단계, 조건 변형 질문입니다! 마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 수직선 위에서 원점(또는 기준점)으로부터의 거리로 정의되는 절댓값 기호와 부등식이 포함된 '사차부등식의 기본예제'의 출발 조건에서 시작해, 절댓값 안의 식이 0이 되는 기준점(x = 0 또는 x = -2/3 등)을 수직선과 좌표평면에 경계선으로 표시하여 양수 구간과 음수 구간으로 분할하는 발상을 거쳐, 절댓값 안의 식의 부호가 바뀌는 경계점(0이 되는 값)을 기준으로 구간을 나누면 '사차부등식의 기본예제'의 그래프와 해집합이 정확히 결정된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 식 y = (a/2)(x + |x|)는 x < 0 에서 x + (-x) = 0 이 되어 상수함수 0이 되고 x 이상 0 에서는 ax 가 되어, 오늘날 인공지능 딥러닝의 핵심 활성화 함수인 ReLU 함수와 정확히 같은 구조입니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 절댓값 기호가 두 개 이상 포함된 함수 y = |x - a| + |x - b| 의 그래프는 왜 구간 [a, b] 사이에서 바닥이 평평한 양동이 모양으로 최솟값 |b - a|를 가질까요? 오늘 시각적 증명으로 공식 암기 없이 원리를 깨우치셨다면 지금 바로 구독과 좋아요를 눌러 1,113개 시각적 수학 증명 시리즈를 놓치지 마세요! 설명란의 수학자료실 원문과 연속 정주행 마스터클래스도 이어서 확인해 보세요! 만약 여기서 주어진 수나 조건을 하나 바꾼다면 어떤 새로운 법칙이 탄생할지 직접 질문하고 실험해 보세요!",
+        "ko": "마지막 12단계, 조건 변형 질문입니다! 마지막 12단계, 증명이 완성되었습니다! 출발 조건이었던 다항식 P(x)를 일차·이차 인수의 곱으로 인수분해하고 방정식 P(x) = 0의 실근(경계점)을 수직선과 좌표평면에 배열하는 '사차부등식의 기본예제'의 출발 조건에서 시작해, 방정식 P(x) = 0의 실근 알파, 베타, 감마를 수직선 위에 경계선으로 긋고, 최고차항 부호와 각 근의 중복도(홀수 차수 통과 vs 짝수 차수 접함)에 따라 다항함수 개형을 그리는 발상을 거쳐, 인수분해된 각 인수의 부호 변화표와 다항함수 y = P(x) 그래프가 x축 위·아래에 놓이는 구간이 완벽히 일치하여 '사차부등식의 기본예제'의 해집합이 결정된다는 결론이 성립함을 명확하게 확인했습니다. 여기서 꼭 기억해야 할 핵심 포인트는, 완전제곱 인수 (x - 알파)의 제곱이 포함된 부등식에서는 x = 알파를 지날 때 부호가 바뀌지 않고 x축에 접하므로, 부등호에 등호( 이상 , 이하 )가 있는지 없는지에 따라 한 점 x = 알파가 해에 포함되거나 빠지는 것을 반드시 확인해야 합니다! 마지막으로 한 걸음 더 깊이 질문해 보세요. 만약 삼차다항식 P(x)가 인수분해될 때 판별식 D < 0 인 이차식 인수 (x의 제곱 + px + q)를 포함한다면, 왜 그 이차식 인수는 항상 양수이므로 부등식의 부호 변화에 영향을 주지 않을까요? 오늘 시각적 증명으로 공식 암기 없이 원리를 깨우치셨다면 지금 바로 구독과 좋아요를 눌러 1,113개 시각적 수학 증명 시리즈를 놓치지 마세요! 설명란의 수학자료실 원문과 연속 정주행 마스터클래스도 이어서 확인해 보세요! 만약 여기서 주어진 수나 조건을 하나 바꾼다면 어떤 새로운 법칙이 탄생할지 직접 질문하고 실험해 보세요!",
         "en": "Final Step 12, What-If-Not Challenge! (Final Step): The visual proof is complete! Starting from the starting conditions of 'Basic Example of Quaternary Inequality', which includes an absolute value sign and inequality defined as the distance from the origin (or reference point) on a vertical line, which was the starting condition, the reference point (x = 0 or It was clearly confirmed that the graph and solution set of 'Basic Example of Quaternary Inequality' are accurately determined by dividing the section based on the boundary point (the value of 0). The key point to remember here is that the equation y = (a/2)(x + |x|) becomes x + (-x) = 0 at x < 0, making it a constant function of 0, and becomes ax when x or more is 0, which is exactly the same structure as the ReLU function, which is the core activation function of today's artificial intelligence deep learning! Finally, ask a deeper question. Functions containing two or more absolute value symbols y = |x - a| + |x - b| Why does the graph of have the minimum value |b - a| in the shape of a flat-bottomed bucket in the interval [a, b]? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don't miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section! What if we modify one condition here? Pose your own question on mathedu!"
       }
     }
