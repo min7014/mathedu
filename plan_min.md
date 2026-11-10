@@ -421,6 +421,13 @@ python -X utf8 pr.py status
   - `mathedu_foundation_daemon.py` 시작 시, `run_shorts_and_video_upload_daemon` 시작 시와 매 루프마다, 유튜브 업로드 스레드 매 주기마다 게이트를 확인하여 `Gemini 4 Argon` + `allowed=true`가 아니면 시작하지 않거나 종료함. 파일이 없거나 읽을 수 없으면 '중지'로 판정함.
   - 모델이 바뀌면 대화 세션 에이전트가 게이트 파일을 갱신함. (Claude Opus로 바뀌면 `allowed=false` + 데몬 프로세스 즉시 종료 / Gemini 4 Argon으로 바뀌면 `allowed=true` + 데몬 재가동)
 - **기술적 사실 (Rule 33)**: 영상 렌더링 파이프라인(`min7014_video_maker.py`)은 LLM을 호출하지 않음(대본 템플릿 + 구글 번역 `gtx` + `edge_tts` + `ffmpeg`). 데몬 프로세스는 채팅 모델을 스스로 감지할 수 없으므로, 모델 전환 확인과 게이트 갱신은 대화 세션 에이전트가 수행함. 텔레그램으로만 지시하는 경우에도 해당 세션의 모델 기준으로 판단함.
+- **Rule 40-A 예외 — 이미 제작된 영상의 유튜브 API 업로드는 모델과 무관하게 허용 (2026-11-10 21:37)**:
+  - **회장님 지시**: `"이미 제작된 영상은 유튜브 채널 API 로 올리는 것 까지는 하자"`
+  - 허용 범위: 로컬에 **이미 렌더링이 끝난 `.mp4`**를 **YouTube Data API v3로 업로드**하고 대본 JSON에 URL을 연결하며, 카탈로그 갱신과 텔레그램 알림까지만 함. 대본 생성·렌더링·썸네일 재생성·Studio 브라우저 업로드는 계속 Gemini 4 Argon 세션에서만 함.
+  - 게이트: `.agents/video_production_gate.json`의 `upload_only_allowed=true` (`allowed`는 Argon 전용으로 유지).
+  - 실행: `python -X utf8 min7014_video_maker.py --upload-only-daemon` (`run_upload_only_api_daemon`). 단일 프로세스(PID 잠금 `.agents/upload_only_daemon.pid`)로만 돌려서 동시 업로더 때문에 같은 영상이 두 번 올라가는 일을 막음. 진행 상황은 `.agents/upload_only_state.json`에 기록.
+  - 안전장치: ① 업로드 직전 채널 업로드 목록의 `[ID: …]` 태그를 확인해서 이미 올라간 영상은 다시 올리지 않고 URL만 연결, ② `verify_video_content_integrity` 무결성 검사를 통과한 주제만 업로드, ③ Rule 28 기준 시각(2026-11-08 20:00) 이전에 렌더링된 파일은 제외, ④ ffprobe로 재생 길이를 확인해서 깨진 mp4는 제외, ⑤ 렌더링 함수와 브라우저 업로드 함수는 실행되지 않도록 막아 둠, ⑥ 쿼터가 바닥나면 20분 간격으로 다시 시도.
+  - 2026-11-10 21:41 기준 업로드 대기: 130개 주제, 936건 (무결성 검사 통과 925건, Rule 28 이전 렌더링 2개 주제는 제외).
 
 
 ---

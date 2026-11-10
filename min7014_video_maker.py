@@ -7776,6 +7776,340 @@ def video_production_allowed() -> bool:
     return bool(g.get("allowed")) and model.startswith(VIDEO_PRODUCTION_REQUIRED_MODEL)
 
 
+# ==============================================================================
+# [Rule 40-A] 이미 제작된 영상의 YouTube Data API 업로드 전용 모드 (2026-11-10)
+#   - 회장님 지시: "이미 제작된 영상은 유튜브 채널 API 로 올리는 것 까지는 하자"
+#   - 대본 생성·렌더링·썸네일 재생성은 Rule 40에 따라 Gemini 4 Argon 세션에서만 수행하고,
+#     이 모드는 로컬에 이미 렌더링이 끝난 .mp4를 YouTube Data API v3로 업로드·URL 바인딩만 합니다.
+#   - 브라우저(Studio) 업로드 대체 경로는 사용하지 않습니다 (API 전용).
+#   - 업로드 직전 채널 업로드 목록의 [ID: ...] 태그를 확인하여 이미 올라간 영상은 다시 올리지 않고 URL만 연결합니다.
+# ==============================================================================
+UPLOAD_ONLY_PID_FILE = ROOT_DIR / ".agents" / "upload_only_daemon.pid"
+UPLOAD_ONLY_STATE_FILE = ROOT_DIR / ".agents" / "upload_only_state.json"
+UPLOAD_ONLY_RULE28_CUTOFF = (2026, 11, 8, 20, 0, 0)
+
+# (URL 필드, 채널 ID 태그 중간 부분, 업로드 함수 이름, 업로드가 사용하는 mp4 경로 함수)
+UPLOAD_ONLY_EDITIONS = (
+    ("youtube_urls", "", "upload_slug_to_youtube", lambda s, lc: YT_UPLOADS_DIR / s / f"{s}_{lc}.mp4"),
+    ("shorts_urls", "_SHORT", "upload_short_to_youtube", lambda s, lc: YT_UPLOADS_DIR / "shorts" / f"{s}_short_{lc}.mp4"),
+    ("question_youtube_urls", "_Q", "upload_question_classroom_to_youtube", lambda s, lc: QUESTION_CLASSROOM_DIR / f"{s}_q_{lc}.mp4"),
+    ("question_shorts_urls", "_SHORT_Q", "upload_question_short_to_youtube", lambda s, lc: ROOT_DIR / "video_lectures" / "shorts" / f"{s}_short_q_{lc}.mp4"),
+)
+
+
+def video_upload_only_allowed() -> bool:
+    """Rule 40-A: Gemini 4 Argon 전체 허용이거나, 게이트 파일의 upload_only_allowed=true이면 업로드 전용 작업을 허용합니다."""
+    if video_production_allowed():
+        return True
+    try:
+        g = json.loads(VIDEO_PRODUCTION_GATE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return False
+    return bool(g.get("upload_only_allowed"))
+
+
+class UploadOnlyRenderBlocked(RuntimeError):
+    pass
+
+
+def _upload_only_block_factory(fn_name):
+    def _blocked(*_a, **_k):
+        raise UploadOnlyRenderBlocked(f"[Rule 40-A] 업로드 전용 모드에서는 {fn_name} 실행(대본 생성·렌더링·브라우저 업로드)이 금지됩니다.")
+    return _blocked
+
+
+_UPLOAD_ONLY_BLOCKED_FUNCS = (
+    "generate_or_update_script",
+    "render_multilingual_video",
+    "render_question_classroom_video",
+    "render_youtube_short_vertical",
+    "render_question_short_vertical",
+    "upload_slug_via_studio_browser",
+    "upload_short_via_studio_browser",
+    "upload_shorts_via_studio_browser",
+)
+
+
+def _install_upload_only_blockers():
+    g = globals()
+    saved = {}
+    for name in _UPLOAD_ONLY_BLOCKED_FUNCS:
+        if name in g:
+            saved[name] = g[name]
+            g[name] = _upload_only_block_factory(name)
+    return saved
+
+
+def _restore_upload_only_blockers(saved):
+    globals().update(saved)
+
+
+def fetch_channel_upload_id_tag_index(youtube) -> dict:
+    """채널 업로드 재생목록(playlistItems.list, 50개당 1유닛)을 읽어 '[ID: 태그]' -> video_id 사전을 만듭니다."""
+    exclude_ids = set()
+    try:
+        dup_doc = json.loads((ROOT_DIR / ".agents" / "youtube_duplicates_pending.json").read_text(encoding="utf-8"))
+        for it in dup_doc.get("items") or []:
+            for c in it.get("delete_candidates") or []:
+                if c.get("id"):
+                    exclude_ids.add(c["id"])
+    except Exception:
+        pass
+    tag_index = {}
+    page_token = None
+    uploads_pl = "UU" + YOUTUBE_CHANNEL_ID[2:]
+    while True:
+        resp = youtube.playlistItems().list(
+            part="snippet", playlistId=uploads_pl, maxResults=50, pageToken=page_token
+        ).execute()
+        for item in resp.get("items") or []:
+            sn = item.get("snippet") or {}
+            vid = (sn.get("resourceId") or {}).get("videoId")
+            if not vid or vid in exclude_ids:
+                continue
+            blob = f"{sn.get('title', '')}\n{sn.get('description', '')}"
+            for tag in re.findall(r"\[(?:ID:\s*)?([A-Za-z0-9]+(?:_SHORT_Q|_SHORT|_Q|_IDEA|_SHORT_IDEA)?_(?:KO|EN))\]", blob):
+                tag_index.setdefault(tag.upper(), vid)
+        page_token = resp.get("nextPageToken")
+        if not page_token:
+            break
+    return tag_index
+
+
+def collect_upload_only_pending_items() -> list:
+    """로컬에 렌더링이 끝났지만 유튜브 URL이 비어 있는 (slug, 에디션, 언어) 목록을 업로드 우선순위대로 반환합니다."""
+    from datetime import datetime
+    cutoff_ts = datetime(*UPLOAD_ONLY_RULE28_CUTOFF).timestamp()
+    per_slug = []
+    for sp in SCRIPTS_DIR.glob("*.json"):
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        slug = sp.stem
+        items = []
+        newest = 0.0
+        for url_field, tag_mid, fn_name, path_fn in UPLOAD_ONLY_EDITIONS:
+            for lc in ("ko", "en"):
+                mp4 = path_fn(slug, lc)
+                if not mp4.exists() or mp4.stat().st_size < 100_000:
+                    continue
+                if mp4.stat().st_mtime < cutoff_ts:
+                    continue  # Rule 28 이전 렌더링은 재렌더링 대상(Argon 세션)이므로 업로드하지 않음
+                if ((sdoc.get(url_field) or {}).get(lc) or "").strip():
+                    continue
+                newest = max(newest, mp4.stat().st_mtime)
+                items.append({
+                    "slug": slug, "url_field": url_field, "lang": lc, "fn": fn_name,
+                    "tag": f"{slug}{tag_mid}_{lc.upper()}", "mp4": str(mp4),
+                })
+        if items:
+            per_slug.append((newest, slug, items))
+    per_slug.sort(key=lambda x: (-x[0], x[1]))
+    return [it for _, _, items in per_slug for it in items]
+
+
+def _bind_existing_channel_url(item, vid):
+    sp = SCRIPTS_DIR / f"{item['slug']}.json"
+    sdoc = json.loads(sp.read_text(encoding="utf-8"))
+    is_short = "shorts" in item["url_field"]
+    url = f"https://youtube.com/shorts/{vid}" if is_short else f"https://youtu.be/{vid}"
+    sdoc.setdefault(item["url_field"], {"ko": "", "en": ""})
+    if not isinstance(sdoc[item["url_field"]], dict):
+        sdoc[item["url_field"]] = {"ko": "", "en": ""}
+    sdoc[item["url_field"]][item["lang"]] = url
+    sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+    return url
+
+
+def run_upload_only_api_daemon(privacy="public", max_uploads=0, once=False):
+    """
+    [Rule 40-A] 이미 렌더링된 영상만 YouTube Data API v3로 순차 업로드하는 단일 프로세스 데몬.
+    - 렌더링·대본 생성·브라우저 업로드 함수는 차단(UploadOnlyRenderBlocked)됩니다.
+    - mathteacher 무결성 게이트(verify_video_content_integrity)를 통과한 주제만 업로드합니다.
+    - 쿼터 소진 시 대기 후 재시도하며, 게이트 파일에서 upload_only_allowed=false가 되면 종료합니다.
+    """
+    global _LAST_UPLOAD_QUOTA_BLOCKED
+    if not video_upload_only_allowed():
+        print("⏸️ [Rule 40-A Gate] upload_only_allowed가 꺼져 있어 업로드 전용 데몬을 시작하지 않습니다.", flush=True)
+        return
+    # 단일 인스턴스 보장 (동시 업로더 경쟁으로 인한 중복 업로드 방지)
+    try:
+        if UPLOAD_ONLY_PID_FILE.exists():
+            old_pid = int(UPLOAD_ONLY_PID_FILE.read_text().strip() or 0)
+            if old_pid and old_pid != os.getpid():
+                chk = subprocess.run(["tasklist", "/FI", f"PID eq {old_pid}"], capture_output=True, text=True)
+                if str(old_pid) in (chk.stdout or ""):
+                    print(f"⏸️ [Rule 40-A] 업로드 전용 데몬이 이미 실행 중입니다 (PID {old_pid}).", flush=True)
+                    return
+    except Exception:
+        pass
+    UPLOAD_ONLY_PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
+
+    saved = _install_upload_only_blockers()
+    state = {"started_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "uploaded": [], "bound_existing": [], "skipped": {}}
+    tag_index, tag_index_ts = {}, 0.0
+    total_uploaded = 0
+    uncommitted = 0
+
+    def _save_state(status):
+        state["status"] = status
+        state["updated_at"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+        UPLOAD_ONLY_STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    def _commit(n):
+        try:
+            update_video_catalog()
+        except Exception as ce:
+            print(f"[Catalog Notice] {ce}", flush=True)
+        subprocess.run(["git", "add", "video_lectures/scripts/", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json"], check=False, cwd=str(ROOT_DIR))
+        subprocess.run(["git", "commit", "-m", f"chore(youtube-upload-only): Rule 40-A API upload of pre-rendered videos ({n} items) to @min7014_ai"], check=False, cwd=str(ROOT_DIR))
+        subprocess.run(["git", "push", "origin", "main"], check=False, cwd=str(ROOT_DIR))
+
+    try:
+        print("=" * 76, flush=True)
+        print("📤 [Rule 40-A] 이미 제작된 영상 YouTube Data API 업로드 전용 데몬 가동 (렌더링 없음)", flush=True)
+        print("=" * 76, flush=True)
+        while True:
+            if not video_upload_only_allowed():
+                print("⏸️ [Rule 40-A Gate] upload_only_allowed=false -> 업로드 전용 데몬 종료", flush=True)
+                break
+            pending = collect_upload_only_pending_items()
+            pending = [p for p in pending if p["tag"] not in state["skipped"]]
+            state["pending_count"] = len(pending)
+            print(f"📋 [Upload-Only Queue] 업로드 대기 {len(pending)}건", flush=True)
+            if not pending:
+                _save_state("idle_no_pending")
+                if once:
+                    break
+                time.sleep(1800)
+                continue
+
+            youtube, tok = get_available_youtube_upload_service()
+            if youtube is None:
+                _save_state("waiting_quota")
+                if once:
+                    break
+                time.sleep(1200)
+                continue
+            if time.time() - tag_index_ts > 1800:
+                try:
+                    tag_index = fetch_channel_upload_id_tag_index(youtube)
+                    tag_index_ts = time.time()
+                    print(f"🔎 [Channel Index] 채널 업로드 ID 태그 {len(tag_index)}개 확인", flush=True)
+                except Exception as ie:
+                    print(f"⚠️ [Channel Index Notice] {ie} -> 중복 방지를 위해 이번 주기 업로드 보류", flush=True)
+                    _save_state("waiting_channel_index")
+                    if once:
+                        break
+                    time.sleep(900)
+                    continue
+
+            quota_blocked = False
+            integrity_cache = {}
+            for item in pending:
+                if not video_upload_only_allowed():
+                    break
+                slug, lc, uf = item["slug"], item["lang"], item["url_field"]
+                # 1) 이미 채널에 올라간 영상이면 재업로드 없이 URL만 연결
+                existing_vid = tag_index.get(item["tag"].upper())
+                if existing_vid:
+                    url = _bind_existing_channel_url(item, existing_vid)
+                    state["bound_existing"].append({"tag": item["tag"], "url": url})
+                    uncommitted += 1
+                    print(f"🔗 [Already on Channel] {item['tag']} -> {url} (재업로드 생략)", flush=True)
+                    continue
+                # 2) mathteacher 무결성 게이트
+                if slug not in integrity_cache:
+                    try:
+                        integrity_cache[slug] = verify_video_content_integrity(slug)
+                    except Exception as ve:
+                        integrity_cache[slug] = {"ok": False, "reason": f"verify_error:{ve}"}
+                integ = integrity_cache[slug]
+                if not integ.get("ok"):
+                    state["skipped"][item["tag"]] = f"integrity:{integ.get('reason')}"
+                    print(f"⛔ [Integrity Skip] {item['tag']} ({integ.get('reason')}) -> Argon 세션 재렌더링 대상", flush=True)
+                    continue
+                # 2-b) 렌더링 중단으로 깨진(미완성) mp4 업로드 방지: ffprobe 재생 길이 확인
+                try:
+                    _pr = subprocess.run(
+                        ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", item["mp4"]],
+                        capture_output=True, text=True, timeout=60,
+                    )
+                    _dur = float((_pr.stdout or "0").strip() or 0)
+                except Exception:
+                    _dur = 0.0
+                if _dur < 10.0:
+                    state["skipped"][item["tag"]] = f"unplayable_mp4:{_dur}"
+                    print(f"⛔ [Broken MP4 Skip] {item['tag']} (duration={_dur}) -> Argon 세션 재렌더링 대상", flush=True)
+                    continue
+                # 3) API 업로드 (렌더링·브라우저 경로 차단 상태)
+                fn = globals()[item["fn"]]
+                try:
+                    _LAST_UPLOAD_QUOTA_BLOCKED = False
+                    if item["fn"] == "upload_slug_to_youtube":
+                        res = fn(slug, langs=(lc,), privacy=privacy, method="api")
+                    else:
+                        res = fn(slug, langs=(lc,), privacy=privacy)
+                except UploadOnlyRenderBlocked as be:
+                    state["skipped"][item["tag"]] = "needs_render_or_meta"
+                    print(f"⛔ [Render Required Skip] {item['tag']}: {be}", flush=True)
+                    continue
+                except Exception as ue:
+                    err_s = str(ue)
+                    print(f"⚠️ [Upload Notice] {item['tag']}: {ue}", flush=True)
+                    if "quota" in err_s.lower() or "uploadLimitExceeded" in err_s or "rateLimitExceeded" in err_s:
+                        quota_blocked = True
+                        break
+                    state["skipped"][item["tag"]] = f"error:{err_s[:120]}"
+                    continue
+                new_url = ((res or {}).get(lc) or "").strip()
+                if new_url:
+                    total_uploaded += 1
+                    uncommitted += 1
+                    tag_index[item["tag"].upper()] = extract_youtube_video_id(new_url)
+                    state["uploaded"].append({"tag": item["tag"], "url": new_url, "at": time.strftime("%Y-%m-%dT%H:%M:%S")})
+                    print(f"✅ [Upload-Only Uploaded #{total_uploaded}] {item['tag']} -> {new_url}", flush=True)
+                    _save_state("uploading")
+                    if uncommitted >= 5:
+                        _commit(uncommitted)
+                        uncommitted = 0
+                    if max_uploads and total_uploaded >= max_uploads:
+                        break
+                elif _LAST_UPLOAD_QUOTA_BLOCKED:
+                    quota_blocked = True
+                    break
+                else:
+                    state["skipped"][item["tag"]] = "upload_failed_no_url"
+                    print(f"⚠️ [Upload Failed] {item['tag']} -> 이번 데몬 세션에서는 건너뜀", flush=True)
+
+            if uncommitted:
+                _commit(uncommitted)
+                uncommitted = 0
+            if max_uploads and total_uploaded >= max_uploads:
+                _save_state("max_uploads_reached")
+                break
+            if once:
+                _save_state("once_done")
+                break
+            if quota_blocked:
+                _save_state("waiting_quota")
+                print("⏳ [Quota] 일일 업로드 한도 도달 -> 20분 후 재시도 (매일 17:00 KST 리셋)", flush=True)
+                time.sleep(1200)
+            else:
+                _save_state("cycle_done")
+                time.sleep(60)
+    finally:
+        _restore_upload_only_blockers(saved)
+        try:
+            if UPLOAD_ONLY_PID_FILE.exists() and UPLOAD_ONLY_PID_FILE.read_text().strip() == str(os.getpid()):
+                UPLOAD_ONLY_PID_FILE.unlink()
+        except Exception:
+            pass
+        if state.get("status") not in ("max_uploads_reached", "once_done", "idle_no_pending"):
+            _save_state("stopped")
+
+
 def run_shorts_and_video_upload_daemon(open_studio_now=False):
     """
     [@min7014_ai 숏폼(#Shorts) & 본편 무인 교체(기존 영상 삭제 ➔ 새 영상 업로드)·동기화 데몬]
@@ -8365,6 +8699,9 @@ if __name__ == "__main__":
     parser.add_argument("--build-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for --slug")
     parser.add_argument("--build-all-shorts", action="store_true", help="Generate 1080x1920 vertical YouTube Shorts (#Shorts) for all scripted topics")
     parser.add_argument("--upload-shorts", action="store_true", help="Upload rendered YouTube Shorts (#Shorts) to @min7014_ai")
+    parser.add_argument("--upload-only-daemon", action="store_true", help="[Rule 40-A] Upload already-rendered videos via YouTube Data API only (no rendering)")
+    parser.add_argument("--max-uploads", type=int, default=0, help="[Rule 40-A] Stop after N uploads (0 = unlimited)")
+    parser.add_argument("--once", action="store_true", help="[Rule 40-A] Run a single pass and exit")
     parser.add_argument("--daemon-shorts", action="store_true", help="Run background daemon to auto-upload & auto-enrich YouTube #Shorts on @min7014_ai")
     parser.add_argument("--add-quota-project", type=str, nargs="?", const="AUTO", default=None, help="Register an additional GCP OAuth client_secret.json to multiply daily YouTube API quota (+10,000 units/project)")
     args = parser.parse_args()
@@ -8374,6 +8711,8 @@ if __name__ == "__main__":
         register_new_youtube_quota_project(client_secret_path=cs_arg, open_gcp_help=True)
     elif args.set_youtube_ko is not None or args.set_youtube_en is not None:
         set_youtube_urls_for_slug(args.slug, yt_ko=args.set_youtube_ko, yt_en=args.set_youtube_en)
+    elif args.upload_only_daemon:
+        run_upload_only_api_daemon(privacy=args.privacy, max_uploads=args.max_uploads, once=args.once)
     elif args.daemon_shorts:
         run_shorts_and_video_upload_daemon(open_studio_now=False)
     elif args.optimize_channel:
