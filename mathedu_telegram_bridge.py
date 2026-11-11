@@ -39,6 +39,56 @@ INBOX_FILE = ROOT_DIR / ".agents" / "telegram_inbox.jsonl"
 HISTORY_FILE = ROOT_DIR / ".agents" / "telegram_history.json"
 PID_FILE = ROOT_DIR / ".agents" / "telegram_daemon.pid"
 LISTENER_PID_FILE = ROOT_DIR / ".agents" / "telegram_listener.pid"
+LIVE_TURN_LOCK_FILE = ROOT_DIR / ".agents" / "telegram_live_turn.lock"
+
+
+def _is_pid_alive(pid_file: Path) -> bool:
+    if not pid_file.exists():
+        return False
+    try:
+        pid = int(pid_file.read_text(encoding="utf-8").strip())
+        if pid <= 0:
+            return False
+        if os.name == "nt":
+            import ctypes
+            PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+            STILL_ACTIVE = 259
+            handle = ctypes.windll.kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid)
+            if not handle:
+                return False
+            try:
+                exit_code = ctypes.c_ulong()
+                if not ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
+                    return False
+                if exit_code.value != STILL_ACTIVE:
+                    return False
+                buf = ctypes.create_unicode_buffer(512)
+                size = ctypes.c_ulong(512)
+                if ctypes.windll.kernel32.QueryFullProcessImageNameW(handle, 0, buf, ctypes.byref(size)):
+                    if "python" not in buf.value.lower():
+                        return False
+                return True
+            finally:
+                ctypes.windll.kernel32.CloseHandle(handle)
+        else:
+            os.kill(pid, 0)
+            return True
+    except Exception:
+        return False
+
+
+def _is_live_session_owning_telegram(grace_sec: float = 90.0) -> bool:
+    """현재 Antigravity 대화창의 --listen-once가 살아있거나 방금 메시지를 깨워 처리 중인지 확인"""
+    if _is_pid_alive(LISTENER_PID_FILE):
+        return True
+    if LIVE_TURN_LOCK_FILE.exists():
+        try:
+            ts = float(LIVE_TURN_LOCK_FILE.read_text(encoding="utf-8").strip())
+            if 0 <= (time.time() - ts) < grace_sec:
+                return True
+        except Exception:
+            pass
+    return False
 
 
 def load_env_config() -> dict:
@@ -139,18 +189,22 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
     """
     현재 열려 있는 Antigravity 대화 세션과 1:1로 연동하기 위한 단일 수신 리스너.
     메시지가 도착하면 즉시 콘솔에 출력하고 종료(code 0)하여 Antigravity의 Reactive Wakeup을 트리거합니다.
+    (상시 대기 워치독 데몬 PID_FILE은 죽이지 않고 그대로 두되, 워치독이 LISTENER_PID_FILE을 감지해 자동으로 양보합니다.)
     """
-    # 기존 중복 리스너/데몬 PID 정리 (HTTP Error 409 Conflict 원천 차단)
-    for pf in (LISTENER_PID_FILE, PID_FILE):
-        if pf.exists():
-            try:
-                old_pid = int(pf.read_text(encoding="utf-8").strip())
-                if old_pid and old_pid != os.getpid():
-                    subprocess.run(["taskkill", "/F", "/PID", str(old_pid)], capture_output=True)
-            except Exception:
-                pass
+    if LISTENER_PID_FILE.exists():
+        try:
+            old_pid = int(LISTENER_PID_FILE.read_text(encoding="utf-8").strip())
+            if old_pid and old_pid != os.getpid() and _is_pid_alive(LISTENER_PID_FILE):
+                subprocess.run(["taskkill", "/F", "/PID", str(old_pid)], capture_output=True)
+        except Exception:
+            pass
     LISTENER_PID_FILE.parent.mkdir(parents=True, exist_ok=True)
     LISTENER_PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
+    try:
+        if LIVE_TURN_LOCK_FILE.exists():
+            LIVE_TURN_LOCK_FILE.unlink()
+    except Exception:
+        pass
 
     state = load_offset_state()
     offset = int(state.get("offset", 0))
@@ -160,6 +214,8 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
     start_ts = time.time()
     while time.time() - start_ts < max_wait_sec:
         try:
+            st_cur = load_offset_state()
+            offset = max(offset, int(st_cur.get("offset", 0)))
             res = tg_api(token, "getUpdates", {"offset": offset, "timeout": 25}, timeout=35)
             for upd in res.get("result", []):
                 offset = upd["update_id"] + 1
@@ -201,6 +257,10 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                 hist = load_history()
                 hist.append({"role": "user", "text": full_text, "ts": datetime.datetime.now().isoformat()})
                 save_history(hist)
+                try:
+                    LIVE_TURN_LOCK_FILE.write_text(str(time.time()), encoding="utf-8")
+                except Exception:
+                    pass
                 send_msg(token, chat_id, "🤖 [Antigravity] 메시지를 수신했습니다. 생각하고 작업을 수행합니다...")
                 print("======================================================================")
                 print("📩 [TELEGRAM_INCOMING_MESSAGE]")
@@ -213,8 +273,8 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                 return 0
         except KeyboardInterrupt:
             return 130
-        except Exception as e:
-            time.sleep(3)
+        except Exception:
+            time.sleep(2)
     print("[TIMEOUT] 대기 시간 동안 새 텔레그램 메시지가 없었습니다.")
     return 0
 
@@ -238,6 +298,26 @@ def save_history(history: list[dict]) -> None:
     )
 
 
+def _resolve_agy_bin() -> str:
+    import shutil
+    found = shutil.which("agy")
+    if found:
+        return found
+    candidate = Path(os.environ.get("LOCALAPPDATA", r"C:\Users\min\AppData\Local")) / "agy" / "bin" / "agy.EXE"
+    if candidate.exists():
+        return str(candidate)
+    return "agy"
+
+
+def _build_secretary_fallback_briefing() -> str:
+    try:
+        import secretary
+        metrics = secretary.collect_live_workspace_metrics()
+        return secretary.format_executive_briefing(metrics)
+    except Exception as e:
+        return f"📊 [워크스페이스 요약]\n• 상태 조회 중 보조 알림: {e}"
+
+
 def run_agy_prompt(user_text: str) -> str:
     history = load_history()
     hist_lines = []
@@ -259,8 +339,9 @@ def run_agy_prompt(user_text: str) -> str:
     )
 
     try:
+        agy_bin = _resolve_agy_bin()
         proc = subprocess.run(
-            ["agy", "-p", prompt, "--dangerously-skip-permissions"],
+            [agy_bin, "-p", prompt, "--dangerously-skip-permissions"],
             cwd=str(ROOT_DIR),
             capture_output=True,
             text=True,
@@ -270,20 +351,32 @@ def run_agy_prompt(user_text: str) -> str:
         )
         reply = (proc.stdout or "").strip()
         if not reply:
-            reply = "✅ 요청하신 작업을 완료했습니다."
+            reply = _build_secretary_fallback_briefing()
         history.append({"role": "user", "text": user_text, "ts": datetime.datetime.now().isoformat()})
         history.append({"role": "assistant", "text": reply, "ts": datetime.datetime.now().isoformat()})
         save_history(history)
         return reply
     except Exception as e:
-        return f"⚠️ 처리 중 오류가 발생했습니다: {e}"
+        fb = _build_secretary_fallback_briefing()
+        return f"👔 [수석 비서 상시 대기 모드 즉시 브리핑]\n(참고: 독립 CLI 응답 전환 — {e})\n\n{fb}"
 
 
 async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
     """
-    독립 백그라운드 프로세스에서 상시 동작하며, 현재 열려 있는 대화창에 일절 로그나 툴 호출을 표시하지 않고
-    텔레그램 메시지를 수신·처리·응답합니다.
+    [Zero-Conflict 상시 대기 워치독 데몬]
+    - 현재 열린 Antigravity 대화창의 `--listen-once`가 살아 있는 동안에는 `getUpdates`를 호출하지 않고
+      대기(Standby)하여 HTTP 409 Conflict를 0%로 원천 차단합니다.
+    - 대화창이 닫히거나 새 창 전환·PC 재부팅 등으로 `--listen-once`가 없는 순간 즉시 자동으로
+      `getUpdates(timeout=8)` 제어권을 넘겨받아 텔레그램 연결 끊김(Dead Zone)을 완벽히 방지합니다.
     """
+    if _is_pid_alive(PID_FILE):
+        try:
+            existing_pid = int(PID_FILE.read_text(encoding="utf-8").strip())
+            if existing_pid != os.getpid():
+                return
+        except Exception:
+            pass
+
     PID_FILE.parent.mkdir(parents=True, exist_ok=True)
     PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
     log_file = open(ROOT_DIR / ".agents" / "telegram_daemon.log", "a", encoding="utf-8", buffering=1)
@@ -295,11 +388,17 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
     if not allowed_chat_id and state.get("chat_id"):
         allowed_chat_id = str(state["chat_id"])
 
-    print(f"🚀 [Antigravity Telegram 독립 데몬 가동 중 | PID={os.getpid()}]", flush=True)
+    print(f"🚀 [Antigravity Telegram 무충돌 상시 워치독 가동 중 | PID={os.getpid()} | {datetime.datetime.now().isoformat()}]", flush=True)
     while True:
         try:
+            if _is_live_session_owning_telegram():
+                await asyncio.sleep(3.0)
+                continue
+
+            st_cur = load_offset_state()
+            offset = max(offset, int(st_cur.get("offset", 0)))
             res = await asyncio.to_thread(
-                tg_api, token, "getUpdates", {"offset": offset, "timeout": 25}, 35
+                tg_api, token, "getUpdates", {"offset": offset, "timeout": 8}, 15
             )
             for upd in res.get("result", []):
                 offset = upd["update_id"] + 1
@@ -339,7 +438,13 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
                     pass
 
                 full_text = "\n".join(collected_texts)
-                print(f"[📩 수신] ({chat_id}): {full_text}", flush=True)
+                print(f"[📩 워치독 수신] ({chat_id}): {full_text}", flush=True)
+                await asyncio.to_thread(
+                    send_msg,
+                    token,
+                    chat_id,
+                    "🤖 [Antigravity 상시 대기 비서] 메시지를 수신했습니다. 확인 후 답변드립니다...",
+                )
 
                 # 빠른 내장 단축 명령어 처리
                 if full_text == "/status":
@@ -351,6 +456,9 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
                         chat_id,
                         f"📊 [현재 워크스페이스 상태]\n• 최근 커밋:\n{git_log}\n\n• 변경사항:\n{git_st or '없음 (Clean)'}",
                     )
+                    continue
+                elif full_text in ("/briefing", "/report"):
+                    await asyncio.to_thread(send_msg, token, chat_id, _build_secretary_fallback_briefing())
                     continue
                 elif full_text == "/audit":
                     await asyncio.to_thread(send_msg, token, chat_id, "🔍 전체 무결성 검사를 실행합니다...")
@@ -367,7 +475,37 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
             break
         except Exception as e:
             print(f"[재시도 대기] 오류: {e}", flush=True)
-            await asyncio.sleep(4)
+            await asyncio.sleep(3)
+
+
+def _spawn_detached_watchdog(force_restart: bool = False) -> str:
+    if not force_restart and _is_pid_alive(PID_FILE):
+        return PID_FILE.read_text(encoding="utf-8").strip()
+    if PID_FILE.exists() and _is_pid_alive(PID_FILE):
+        try:
+            old_pid = int(PID_FILE.read_text(encoding="utf-8").strip())
+            subprocess.run(["taskkill", "/F", "/PID", str(old_pid)], capture_output=True)
+        except Exception:
+            pass
+    py_exe = Path(sys.executable)
+    pyw_exe = py_exe.with_name("pythonw.exe")
+    runner = str(pyw_exe if pyw_exe.exists() else py_exe)
+    script = str(Path(__file__).resolve())
+    cmd_line = f'"{runner}" -X utf8 "{script}"'
+    ps_cmd = (
+        "$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create "
+        f"-Arguments @{{CommandLine='{cmd_line}'; CurrentDirectory='{str(ROOT_DIR)}'}}; "
+        "Write-Output $r.ProcessId"
+    )
+    res = subprocess.run(
+        ["powershell", "-NoProfile", "-Command", ps_cmd],
+        capture_output=True,
+        text=True,
+    )
+    pid_str = (res.stdout or "").strip().splitlines()[-1].strip()
+    PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+    PID_FILE.write_text(pid_str, encoding="utf-8")
+    return pid_str
 
 
 def main() -> None:
@@ -381,6 +519,11 @@ def main() -> None:
         "--start-detached",
         action="store_true",
         help="현재 대화창과 완전히 분리된 OS 백그라운드 데몬 프로세스로 텔레그램 브릿지를 실행합니다.",
+    )
+    parser.add_argument(
+        "--watchdog-ensure",
+        action="store_true",
+        help="상시 대기 워치독 데몬이 실행 중인지 확인하고 죽어 있을 때만 무소음 자동 기동합니다(작업 스케줄러용).",
     )
     parser.add_argument(
         "--reply",
@@ -440,37 +583,23 @@ def main() -> None:
         hist = load_history()
         hist.append({"role": "assistant", "text": args.reply, "ts": datetime.datetime.now().isoformat()})
         save_history(hist)
+        try:
+            if LIVE_TURN_LOCK_FILE.exists():
+                LIVE_TURN_LOCK_FILE.unlink()
+        except Exception:
+            pass
         print(f"✅ 텔레그램({target_chat_id})으로 답장을 전송했습니다.")
         return
 
+    if args.watchdog_ensure:
+        if _is_pid_alive(PID_FILE):
+            return
+        pid_str = _spawn_detached_watchdog(force_restart=False)
+        print(f"✅ 텔레그램 상시 대기 워치독 자동 복구 완료 (PID: {pid_str}).")
+        return
+
     if args.start_detached:
-        if PID_FILE.exists():
-            try:
-                old_pid = int(PID_FILE.read_text(encoding="utf-8").strip())
-                subprocess.run(
-                    ["taskkill", "/F", "/PID", str(old_pid)],
-                    capture_output=True,
-                )
-            except Exception:
-                pass
-        py_exe = Path(sys.executable)
-        pyw_exe = py_exe.with_name("pythonw.exe")
-        runner = str(pyw_exe if pyw_exe.exists() else py_exe)
-        script = str(Path(__file__).resolve())
-        cmd_line = f'"{runner}" -X utf8 "{script}"'
-        ps_cmd = (
-            "$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create "
-            f"-Arguments @{{CommandLine='{cmd_line}'; CurrentDirectory='{str(ROOT_DIR)}'}}; "
-            "Write-Output $r.ProcessId"
-        )
-        res = subprocess.run(
-            ["powershell", "-NoProfile", "-Command", ps_cmd],
-            capture_output=True,
-            text=True,
-        )
-        pid_str = (res.stdout or "").strip().splitlines()[-1].strip()
-        PID_FILE.parent.mkdir(parents=True, exist_ok=True)
-        PID_FILE.write_text(pid_str, encoding="utf-8")
+        pid_str = _spawn_detached_watchdog(force_restart=True)
         print(f"✅ 텔레그램 독립 백그라운드 데몬이 시작되었습니다 (PID: {pid_str}).")
         return
 

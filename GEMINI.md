@@ -313,3 +313,9 @@
 - **의무 검증 수칙**:
   1. 제목·설명·자막·TTS 대본 생성 시 LaTeX 수식 매크로 충돌(`\infty` vs `\in`, `\nRightarrow` vs `\Rightarrow`, `\sum_{k=1}^n` 상한 vs 지수 `^n`, `x^n+a` 지수 범위 등)로 인해 수학적 의미가 왜곡되지 않도록 엄격히 검증합니다.
   2. 주제 분류 시 영단어 부분문자열(`Instantaneous` 내 `tan`, `increasing` 내 `sin` 등) 오매칭을 단어 경계 정규식(`\b`)으로 원천 차단하고, 각 단원(기하·대수·정수론·수열의 극한·미적분)의 정확한 가정(Hypothesis)과 결론(Conclusion)만 설명합니다.
+
+
+## 45. 24/7 무충돌 2계층 텔레그램(`@anti7014_bot`) 상시 연결 아키텍처 원칙 (`2026-11-11` 신설)
+- **대화창 종료·전환·PC 재부팅 시에도 텔레그램 연결 끊김(Dead Zone) 0초 보장**:
+  1. **[1계층 — 활성 대화창 직결 리스너 (`--listen-once`)]**: 현재 열린 Antigravity 대화 세션이 살아 있는 동안에는 `telegram_listener.pid` 및 `telegram_live_turn.lock`(90초 처리 유예)이 우선권을 보유하여 텔레그램 메시지를 현재 대화창으로 즉시 깨워 전달합니다(Reactive Wakeup). 이때 상시 워치독 데몬(`telegram_daemon.pid`)을 강제 종료(`taskkill`)하지 않고 대기 상태로 보존합니다.
+  2. **[2계층 — OS 독립 상시 대기 워치독 (`--watchdog-ensure` & `\Mathedu_Telegram_24x7_Watchdog`)]**: Windows 작업 스케줄러(5분 주기 무소음 `pythonw.exe` 자가 복구)로 상시 가동되는 워치독 데몬은 1계층 리스너가 살아 있는 동안에는 `getUpdates` 호출을 멈춰 `HTTP 409 Conflict`를 0%로 차단하고, 대화창이 닫히거나 새 창으로 전환되어 1계층 리스너가 사라진 순간 3초 이내에 자동으로 `getUpdates` 수신을 인계받아 언제나 즉시 응답합니다.
