@@ -507,30 +507,38 @@ def build_ypp_watchtime_masterclasses() -> list:
             try:
                 fdoc = json.loads(first_sp.read_text(encoding="utf-8"))
                 raw_ko, raw_en = vmaker.split_bilingual_title(str(fdoc.get("title") or chunk[0]))
-                lead_title_ko = vmaker.latex_to_unicode_title(raw_ko or str(fdoc.get("title") or chunk[0])).strip()
-                lead_title_en = vmaker.latex_to_unicode_title(str(fdoc.get("title_en") or raw_en or lead_title_ko).split("|")[0]).strip()
-                sub_dom_ko = str(fdoc.get("sub_domain_ko") or sub_dom_ko)
+                lead_title_ko = vmaker._smart_concise_topic_title(
+                    vmaker.latex_to_unicode_title(raw_ko or str(fdoc.get("title") or chunk[0])).strip(),
+                    max_len=34,
+                    lang="ko",
+                )
+                lead_title_en = vmaker._smart_concise_topic_title(
+                    vmaker.latex_to_unicode_title(str(fdoc.get("title_en") or raw_en or lead_title_ko).split("|")[0]).strip(),
+                    max_len=38,
+                    lang="en",
+                )
+                sub_dom_ko = str(fdoc.get("sub_domain_ko") or sub_dom_ko).split("(")[0].strip()
             except Exception:
                 pass
         suites.append({
             "mc_slug": f"masterclass_series_vol{vol_num}",
-            "title_ko": f"{lead_title_ko} 외 5대 핵심 정리 (1080p 정주행) [{sub_dom_ko} 마스터클래스 Vol.{vol_num}]",
-            "title_en": f"{lead_title_en} & 5 Core Theorems — Step-by-Step Visual Proofs [Masterclass Vol.{vol_num}]",
+            "title_ko": vmaker.sanitize_youtube_title(f"📐 {lead_title_ko} 외 5대 핵심 증명 총정리 (1080p 정주행) | {sub_dom_ko}", 95),
+            "title_en": vmaker.sanitize_youtube_title(f"📐 {lead_title_en} & 5 Core Visual Math Proofs — Step-by-Step Full Course", 95),
             "slugs": chunk,
             "lang": "ko",
         })
         suites.append({
             "mc_slug": f"masterclass_series_vol{vol_num}_en",
-            "title_ko": f"{lead_title_en} & 5 Visual Proofs Full Course [Global Math Masterclass Vol.{vol_num}]",
-            "title_en": f"{lead_title_en} & 5 Core Theorems Full Course [Visual Math Masterclass Vol.{vol_num}]",
+            "title_ko": vmaker.sanitize_youtube_title(f"📐 {lead_title_en} & 5 Visual Proofs Full Course (English Edition)", 95),
+            "title_en": vmaker.sanitize_youtube_title(f"📐 {lead_title_en} & 5 Core Visual Math Proofs — Step-by-Step Full Course", 95),
             "slugs": chunk,
             "lang": "en",
         })
         if all((QUESTION_DIR / f"{ck}_q_ko.mp4").exists() for ck in chunk[:4]):
             suites.append({
                 "mc_slug": f"masterclass_question_vol{vol_num}",
-                "title_ko": f"{lead_title_ko} 외 스스로 보조선을 발견하는 심층 탐구 [질문수업 마스터클래스 Vol.{vol_num}]",
-                "title_en": f"{lead_title_en} & Socratic Visual Proofs Full Course [Question Masterclass Vol.{vol_num}]",
+                "title_ko": vmaker.sanitize_youtube_title(f"❓ {lead_title_ko} — 왜 이 보조선일까? 스스로 깨치는 심층 증명 | {sub_dom_ko}", 95),
+                "title_en": vmaker.sanitize_youtube_title(f"❓ {lead_title_en} — Socratic Visual Math Proofs Full Course", 95),
                 "slugs": chunk[:4],
                 "use_question_edition": True,
                 "lang": "ko",
@@ -730,30 +738,43 @@ def upload_pending_masterclass_to_youtube(max_uploads: int = 1) -> int:
         rule28_cutoff_ts = datetime(2026, 11, 8, 20, 0, 0).timestamp()
         if not mp4_p.exists() or mp4_p.stat().st_mtime < rule28_cutoff_ts:
             continue
+        # 깨진 0초(P0D) 합본 업로드 원천 차단: ffprobe로 60초 이상 정상 스트림 확인
+        _, ffprobe_chk = vmaker.resolve_ffmpeg_binaries()
+        if ffprobe_chk:
+            try:
+                _pr_mc = subprocess.run(
+                    [ffprobe_chk, "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(mp4_p)],
+                    capture_output=True, text=True, timeout=30,
+                )
+                if float((_pr_mc.stdout or "0").strip() or 0.0) < 60.0:
+                    continue
+            except Exception:
+                continue
 
         youtube, active_token_path = vmaker.get_available_youtube_upload_service()
         if youtube is None:
             break
 
         lang_code = mdoc.get("lang") or ("en" if mdoc.get("mc_slug", "").endswith("_en") else "ko")
-        v_title = mdoc.get("title_en" if lang_code == "en" else "title_ko") or mdoc.get("mc_slug")
-        desc_ko_val = (mdoc.get("description_ko") or "").replace("<", "＜").replace(">", "＞")
-        desc_en_val = (mdoc.get("description_en") or desc_ko_val).replace("<", "＜").replace(">", "＞")
+        raw_v_title = mdoc.get("title_en" if lang_code == "en" else "title_ko") or mdoc.get("mc_slug")
+        v_title = vmaker.sanitize_youtube_title(raw_v_title, 96)
+        desc_ko_val = vmaker.sanitize_youtube_description(mdoc.get("description_ko") or "")
+        desc_en_val = vmaker.sanitize_youtube_description(mdoc.get("description_en") or desc_ko_val)
         v_desc = desc_en_val if lang_code == "en" else desc_ko_val
         tags = HIGH_RPM_KEYWORDS_EN if lang_code == "en" else HIGH_RPM_KEYWORDS_KO
         mc_localizations = {
             "ko": {
-                "title": str(mdoc.get("title_ko") or v_title)[:100].replace("<", "＜").replace(">", "＞"),
+                "title": vmaker.sanitize_youtube_title(str(mdoc.get("title_ko") or v_title), 96),
                 "description": desc_ko_val[:4900],
             },
             "en": {
-                "title": str(mdoc.get("title_en") or v_title)[:100].replace("<", "＜").replace(">", "＞"),
+                "title": vmaker.sanitize_youtube_title(str(mdoc.get("title_en") or v_title), 96),
                 "description": desc_en_val[:4900],
             },
         }
         body = {
             "snippet": {
-                "title": v_title[:100].replace("<", "＜").replace(">", "＞"),
+                "title": v_title,
                 "description": v_desc[:4900],
                 "tags": tags,
                 "categoryId": "27",
@@ -1021,10 +1042,16 @@ def analyze_revenue_pipeline() -> dict:
         "ypp_monetization_eligibility_gate": {
             "channel_id": "UCSlqQfOEtRfJuMPyGMLgFYA",
             "channel_handle": "@min7014_ai",
-            "live_channel_snapshot": {
-                "public_videos_live": max(155, yt_live_count),
-                "total_views_live": 2268,
-                "subscribers_live": 4,
+            "live_channel_snapshot": (lambda: (
+                json.loads((ROOT_DIR / ".agents" / "live_yt_stats.json").read_text(encoding="utf-8"))
+                if (ROOT_DIR / ".agents" / "live_yt_stats.json").exists()
+                else {
+                    "public_videos_live": max(448, yt_live_count),
+                    "total_views_live": 5264,
+                    "subscribers_live": 8,
+                    "long_uploads_status": "allowed (15분+ 장편 업로드 활성화 완료)",
+                }
+            ))() | {
                 "long_uploads_status": "allowed (15분+ 장편 업로드 활성화 완료)",
                 "uploaded_longform_masterclasses_live": [
                     "https://youtu.be/_NRQ5QO3PEY (29.0분 KO 유클리드 기하학 원본 PDF 마스터클래스 Vol.1)",
@@ -1287,124 +1314,481 @@ def clear_stale_upload_flags_on_live_videos() -> int:
     return fixed
 
 
-def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 8) -> dict:
+import threading as _fin_threading
+
+_CASHFLOW_WAVE_THREAD_LOCK = _fin_threading.Lock()
+UPLOAD_LOCK_FILE = ROOT_DIR / ".agents" / "youtube_upload.lock"
+DAILY_WAVE_BALANCE_FILE = ROOT_DIR / ".agents" / "daily_wave_balance.json"
+MIN_WAVE_SPACING_SEC = 3600  # 1시간 간격 분산 업로드로 유튜브 스팸 폭탄 페널티(노출 0회) 원천 방지
+
+
+def _current_youtube_quota_day_id() -> str:
+    """매일 17:00 KST (태평양 자정) 기준 쿼터 일자 키를 반환합니다."""
+    from datetime import timedelta
+    now_dt = datetime.now()
+    shifted = now_dt - timedelta(hours=17)
+    return shifted.strftime("%Y-%m-%d")
+
+
+def _load_daily_wave_balance() -> dict:
+    qday = _current_youtube_quota_day_id()
+    default_st = {"quota_day": qday, "mc": 0, "std": 0, "shorts": 0, "last_wave_ts": 0.0}
+    if DAILY_WAVE_BALANCE_FILE.exists():
+        try:
+            d = json.loads(DAILY_WAVE_BALANCE_FILE.read_text(encoding="utf-8"))
+            if d.get("quota_day") == qday:
+                for k, v in default_st.items():
+                    d.setdefault(k, v)
+                return d
+        except Exception:
+            pass
+    return default_st
+
+
+def _save_daily_wave_balance(st: dict) -> None:
+    DAILY_WAVE_BALANCE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    DAILY_WAVE_BALANCE_FILE.write_text(json.dumps(st, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+LIVE_REPAIR_STATE_FILE = ROOT_DIR / ".agents" / "live_title_repair_v1_done.json"
+LIVE_YT_STATS_FILE = ROOT_DIR / ".agents" / "live_yt_stats.json"
+
+_LONG_PROSE_KO_REPAIR_MAP = (
+    ("주어진 선분과 주어진 직선 상의 한 점으로 직각삼각형 작도하기", "선분과 직선 위의 점으로 직각삼각형 작도하기"),
+    ("주어진 길이가 있고 두 점과 한 직선이 주어진 상태에서", "직선 위의 점과 두 점까지의 거리 합 작도 원리"),
+    ("일정한 길이와 두 초점이 있고, 초점을 시작점으로 하는 반직선이 있을 때", "두 초점과 반직선으로 타원 위의 점 작도하기"),
+    ("주어진 원과 한 점이 있을 때 이 한 점을 지나면서 원과 수직으로 만나면서", "주어진 점을 지나며 원에 직교하는 원의 작도 원리"),
+    ("원 밖의 한 점에서 거리가 가장 긴 원 상의 점은 원의 중심과 연결한 반직선과의 교점 중 하나이다", "원 밖의 점에서 원 위의 점까지 최대 거리 증명"),
+    ("주어진 평면 위에 있지 않은 점을 지나 주어진 평면에 평행한 평면은 단 하나 존재한다", "평면 밖의 한 점을 지나 평행한 평면의 유일성 증명"),
+    ("평면에서 두 위치벡터에 대하여 한 위치 벡터의 종점이 원 위에 있을 때 두 위치벡터의 내적의 범위", "종점이 원 위에 있는 두 위치벡터의 내적 최대·최소"),
+    ("한 점에서 만나는 두 직선의 방향벡터를 이용하여 두 직선이 이루는 예각의 크기 구하기", "방향벡터 내적을 이용한 두 직선이 이루는 각 증명"),
+    ("직선이 평면과 수직일 때 이 직선을 포함하는 모든 평면은 주어진 평면과 수직이다", "직선과 수직인 평면과 그 직선을 포함하는 평면의 수직 증명"),
+    ("P가 평면 α밖의 점이고 직선 a가 평면 α 위에 있을 때", "삼수선의 정리 (평면 밖의 점과 수선의 발) 시각 증명"),
+    ("한 원에서 두 현의 교점이 있을 때 두 현 교점으로부터 각 현의 두 끝점까지의 거리의 곱은 같다", "원 내부 두 현의 교점과 할선 길이의 곱 정리 증명"),
+    ("한 평면에 위에 있지 않은 세 직선 a b c 가 a와 b가 평행하고 b와 c가 평행할 때", "공간에서 평행한 세 직선의 추이성 (a∥b, b∥c ⇒ a∥c)"),
+)
+
+
+def _clean_ko_repair_phrase(raw_ko: str, vmaker) -> str:
+    s = raw_ko.strip()
+    for pat, rep in _LONG_PROSE_KO_REPAIR_MAP:
+        if pat in s:
+            return rep
+    s, _ = vmaker.split_bilingual_title(s)
+    s = vmaker.latex_to_unicode_title(s)
+    if len(s) <= 44:
+        return s
+    return vmaker._smart_concise_topic_title(s, max_len=42, lang="ko")
+
+
+def _build_clean_repaired_live_title(v_obj: dict, vmaker) -> str | None:
+    sn = v_obj.get("snippet") or {}
+    old_t = sn.get("title", "")
+    dur = (v_obj.get("contentDetails") or {}).get("duration", "")
+    m_d = re.match(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", dur or "")
+    sec = (int(m_d.group(1) or 0) * 3600 + int(m_d.group(2) or 0) * 60 + int(m_d.group(3) or 0)) if m_d else 0
+    is_short_vid = (0 < sec <= 62)
+
+    has_issue = False
+    if "[" in old_t and old_t.rfind("[") > old_t.rfind("]"):
+        has_issue = True
+    if old_t.count("(") != old_t.count(")"):
+        has_issue = True
+    if any(k in old_t.lower() for k in ("circumference angle", "trinumber", "center of gravity", "continuation of function", "a inscribed", "& if ")):
+        has_issue = True
+    if "(0,0)관" in old_t or "((a+b+c)²=" in old_t or "((a+b)³" in old_t or "Algebra)l" in old_t:
+        has_issue = True
+    if old_t.rstrip().endswith(("|", "(", "[")):
+        has_issue = True
+    if re.search(r"\|\s*@(?:min7014(?:_a)?|min\d*|m)?$", old_t):
+        has_issue = True
+    if len(old_t) >= 99 and not old_t.endswith(("ai", "Math", "수학", "]", ")", "!", "?", "Steps", "Course")):
+        has_issue = True
+    if not has_issue:
+        return None
+
+    if "((a+b+c)²=" in old_t:
+        return "📐 (a+b+c)² = a²+b²+c²+2ab+2bc+2ca 넓이 분할 시각 증명 | 다항식 심층 특강"
+    if "((a+b)³" in old_t:
+        return "❓ (a+b)³ = a³+3a²b+3ab²+b³ 부피 분할 시각 증명 — 왜 성립할까? | 다항식 특강"
+    if "Circumference angles of arcs of equal" in old_t:
+        return "🔥 Don't Memorize! Equal Arcs Subtend Equal Inscribed Angles — 45s Visual Proof #Shorts #Math"
+    if "In any circle, a inscribed angle" in old_t:
+        if is_short_vid:
+            return "🔥 Don't Memorize! Inscribed Angle Theorem (½ Central Angle) — 45s Visual Proof #Shorts #Math"
+        return "✨ Inscribed Angle Theorem (½ Central Angle) — Step-by-Step Visual Math Proof (1080p)"
+
+    t = re.sub(r"\s*\|\s*@[A-Za-z0-9_]*$", "", old_t).strip()
+    t = re.sub(r"\s*\(108(?:0p?)?$", " (1080p)", t).strip()
+    t = t.replace("(0,0)관 관련된 점의 대칭", "원점 (0,0)에 대한 점의 대칭이동 원리")
+    t = t.replace("(Solving Quadratic Inequalities in Algebra)l", "")
+    t = t.replace("Solving Quadratic Inequalities in Algebra)l", "이차부등식의 대수적 해법")
+    t = t.replace("|3x+2|＞5 Absolute Value Inequality |3x+2| ＞ 5 on Number Line", "절댓값 부등식 |3x+2| ＞ 5의 수직선 해법")
+    t = t.replace("일차변환과 영역 a₁₂ Linear Transformation and Domain a₁₂", "일차변환 행렬 성분 a₁₂와 도형 영역의 변환")
+    t = re.sub(r"lim\(x→\s*a\)\s*f\(x\)=α\s*of\s*y=f\(x\)=\s*g\(x\).*?(?=\s+외\s+|\s+—\s+|$)", "조각함수(x≠a, x=a)에서 함수의 극한 lim(x→a) f(x)=α 원리", t)
+    t = re.sub(r"lim\(x→\s*0\)\s*f\(x\)=0\s*of\s*y=f\(x\)=\s*x.*?(?=\s+외\s+|\s+—\s+|$)", "조각함수에서 함수의 극한 lim(x→0) f(x)=0 시각 증명", t)
+    t = t.replace("[수학공학도구 6.0] 정밀 기하 작도를 활용한 수학 시험문제 및 수업자료 고화질 도형 제작법", "정밀 기하 작도를 활용한 시험·수업용 고화질 도형 제작법")
+    t = re.sub(r"\[수학공학도구\s*\d+\.\d+\]\s*(?:수학공학도구\s*)?", "", t)
+
+    has_ko = bool(re.search(r"[가-힣]", t))
+    if is_short_vid:
+        t_sh = re.sub(r"\s*\|\s*[^|]*$", "", t).strip() if t.endswith((")", "/", "|")) else t.rstrip(" |-—:")
+        if "#Shorts" not in t_sh:
+            t_sh = t_sh.rstrip(" |-—:") + (" #Shorts #수학" if has_ko else " #Shorts #Math")
+        clean_final = vmaker.sanitize_youtube_title(t_sh, 95)
+        return clean_final if clean_final != old_t else None
+
+    if has_ko and " 외 " in t:
+        left_p, right_p = t.split(" 외 ", 1)
+        left_p = re.sub(r"^[❓🏛️📐🔥✨]+\s*\[[^\]]+\]\s*", "", left_p).strip()
+        left_clean = _clean_ko_repair_phrase(left_p, vmaker)
+        if "스스로 보조선을 발견하는" in right_p:
+            t = f"❓ {left_clean} — 왜 이 보조선일까? 심층 시각 증명 (1080p)"
+        elif "5대" in right_p:
+            t = f"📐 {left_clean} 외 5대 핵심 수학 증명 총정리 (1080p 정주행)"
+        else:
+            t = f"📐 {left_clean} — 단계별 오리지널 시각 증명 특강 (1080p)"
+    elif t.startswith("❓ [질문하는 수학 수업 마스터클래스"):
+        core_q = re.sub(r"^❓\s*\[질문하는 수학 수업 마스터클래스\s*Vol\.\d+\]\s*", "", t).split(" 외 ")[0].strip()
+        left_clean = _clean_ko_repair_phrase(core_q, vmaker)
+        t = f"❓ {left_clean} — 왜 이 보조선일까? 심층 시각 증명 (1080p)"
+    elif not has_ko and (" & 5 " in t or t.startswith("🌎 [Original PDF Math Masterclass")):
+        left_p = re.sub(r"^🌎\s*\[Original PDF Math Masterclass\s*Vol\.\d+\]\s*", "", t)
+        left_p = left_p.split(" & 5 ")[0].split(" & ")[0].strip()
+        if "Two straight lines intersecting each other" in left_p:
+            left_p = "Plane Determined by Two Intersecting Lines"
+        elif "Through any three noncollinear points" in left_p:
+            left_p = "Plane Determined by Three Non-Collinear Points"
+        elif "The vector which has the initial po" in left_p:
+            left_p = "Position Vector & Directed Segment"
+        left_clean = vmaker._smart_concise_topic_title(vmaker.internationalize_math_english_text(left_p), max_len=54, lang="en")
+        t = f"📐 {left_clean} & 5 Visual Math Proofs — Full Course"
+    elif not has_ko and len(t) >= 96:
+        if "Visual Geometry Masterclass Vol.1" in t:
+            t = "📐 Euclidean Geometry Masterclass: Pythagoras, Menelaus, Ceva, Circle & Parabola (1080p)"
+        elif "longest distance from one point outside the circle" in t:
+            t = "📐 Maximum Distance from an External Point to a Circle — Visual Math Proof (1080p)"
+        elif t.startswith(("✨ ", "🔥 ", "📐 ")):
+            t = re.sub(r"\s*\(\d+\s*Steps\s*·\s*1080p\)$", " (1080p)", t)
+        else:
+            core_clean = vmaker._smart_concise_topic_title(vmaker.internationalize_math_english_text(t), max_len=56, lang="en")
+            t = f"📐 {core_clean} — Step-by-Step Visual Math Proof (1080p)"
+
+    clean_final = vmaker.sanitize_youtube_title(t, 95)
+    return clean_final if clean_final != old_t else None
+
+
+def refresh_live_channel_stats_and_repair(yt, vmaker, max_title_repairs: int = 8) -> dict:
     """
-    [유튜브 채널 현금흐름 창출 황금비 업로드 엔진 — 100% 원본 PDF 한 땀 한 땀 단계별 설명 방식]
-    회장님 지침에 따라 비-PDF 창의 시네마(creative_idea_cinema)를 전면 배제하고,
-    오직 https://min7014.github.io/ 원본 .pdf 파일을 직접 한 페이지씩 설명하는 정통 영상만 업로드합니다:
-      1) [시청시간 4,000h & 다중 미드롤 광고 엔진]: 원본 PDF 기반 20~35분 정주행 마스터클래스 (KO / EN) 1편 업로드
-      2) [구독자 500/1,000명 & 실시간 피드 엔진]: 원본 PDF 단계별 9:16 #Shorts (KO & EN) 업로드
-      3) [고단가 검색·탐색 장기 현금흐름 엔진]: 원본 PDF 1080p 단계별 본편 (KO & EN) 업로드
+    1) 채널 실시간 통계(구독자·조회수·영상수)를 1 API Unit으로 조회해 live_yt_stats.json에 저장합니다.
+    2) Rule 38 공식 채널 브랜딩(단독 part='brandingSettings' 및 part='localizations')이 미적용 상태면 1회 완결합니다.
+    3) 잔여 손상 라이브 제목(89편)을 신규 일일 업로드를 방해하지 않는 범위(웨이브당 최대 8편 = 400 Units)로 자동 복구합니다.
     """
+    st = {"branding_done": False, "localizations_done": False, "titles_all_clean": False, "repaired_ids": []}
+    if LIVE_REPAIR_STATE_FILE.exists():
+        try:
+            st.update(json.loads(LIVE_REPAIR_STATE_FILE.read_text(encoding="utf-8")))
+        except Exception:
+            pass
+
+    repaired_now = 0
+    try:
+        ch_resp = yt.channels().list(part="statistics,brandingSettings,localizations", id="UCSlqQfOEtRfJuMPyGMLgFYA").execute()
+        items = ch_resp.get("items") or []
+        if items:
+            ch_item = items[0]
+            stats = ch_item.get("statistics") or {}
+            prev_stats = {}
+            if LIVE_YT_STATS_FILE.exists():
+                try:
+                    prev_stats = json.loads(LIVE_YT_STATS_FILE.read_text(encoding="utf-8"))
+                except Exception:
+                    pass
+            prev_stats.update({
+                "public_videos_live": int(stats.get("videoCount", prev_stats.get("public_videos_live", 0))),
+                "total_views_live": int(stats.get("viewCount", prev_stats.get("total_views_live", 0))),
+                "subscribers_live": int(stats.get("subscriberCount", prev_stats.get("subscribers_live", 0))),
+                "checked_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            })
+            LIVE_YT_STATS_FILE.parent.mkdir(parents=True, exist_ok=True)
+            LIVE_YT_STATS_FILE.write_text(json.dumps(prev_stats, ensure_ascii=False, indent=2), encoding="utf-8")
+
+            if not st.get("branding_done"):
+                b_set = ch_item.get("brandingSettings") or {}
+                ch_cfg = b_set.get("channel") or {}
+                ch_cfg["title"] = "민은기 선생님의 단계별 시각적 수학 증명"
+                ch_cfg["defaultLanguage"] = "ko"
+                ch_cfg["unsubscribedTrailer"] = "_NRQ5QO3PEY"
+                b_set["channel"] = ch_cfg
+                b_set.pop("image", None)
+                yt.channels().update(
+                    part="brandingSettings",
+                    body={"id": "UCSlqQfOEtRfJuMPyGMLgFYA", "brandingSettings": b_set},
+                ).execute()
+                st["branding_done"] = True
+
+            if not st.get("localizations_done"):
+                locs = ch_item.get("localizations") or {}
+                ch_desc = ((ch_item.get("brandingSettings") or {}).get("channel") or {}).get(
+                    "description", "Step-by-step original visual math proofs from https://min7014.github.io/"
+                )
+                locs["en"] = {
+                    "title": "MIN EUN GI : Visual Math Proofs",
+                    "description": ch_desc,
+                }
+                yt.channels().update(
+                    part="localizations",
+                    body={"id": "UCSlqQfOEtRfJuMPyGMLgFYA", "localizations": locs},
+                ).execute()
+                st["localizations_done"] = True
+    except Exception as e:
+        if "quotaExceeded" in str(e):
+            return {"repaired_now": 0, "quota_exceeded": True}
+
+    if not st.get("titles_all_clean") and max_title_repairs > 0:
+        try:
+            vids = []
+            pt = None
+            while True:
+                r = yt.playlistItems().list(part="contentDetails", playlistId="UUSlqQfOEtRfJuMPyGMLgFYA", maxResults=50, pageToken=pt).execute()
+                for it in r.get("items", []):
+                    vx = it["contentDetails"]["videoId"]
+                    if vx not in vids:
+                        vids.append(vx)
+                pt = r.get("nextPageToken")
+                if not pt:
+                    break
+            all_v = []
+            for i in range(0, len(vids), 50):
+                vr = yt.videos().list(part="snippet,contentDetails,localizations", id=",".join(vids[i:i+50])).execute()
+                all_v.extend(vr.get("items", []))
+
+            pending_fixes = []
+            for v_obj in all_v:
+                new_t = _build_clean_repaired_live_title(v_obj, vmaker)
+                if new_t:
+                    pending_fixes.append((v_obj, new_t))
+
+            if not pending_fixes:
+                st["titles_all_clean"] = True
+            else:
+                for v_obj, new_t in pending_fixes[:max_title_repairs]:
+                    vid_u = v_obj["id"]
+                    sn_u = v_obj["snippet"]
+                    sn_u["title"] = new_t
+                    if not sn_u.get("categoryId"):
+                        sn_u["categoryId"] = "27"
+                    body_u = {"id": vid_u, "snippet": sn_u}
+                    if v_obj.get("localizations"):
+                        locs_v = v_obj["localizations"]
+                        has_ko_n = bool(re.search(r"[가-힣]", new_t))
+                        if has_ko_n and "ko" in locs_v:
+                            locs_v["ko"]["title"] = new_t
+                        elif not has_ko_n and "en" in locs_v:
+                            locs_v["en"]["title"] = new_t
+                        body_u["localizations"] = locs_v
+                        part_str = "snippet,localizations"
+                    else:
+                        part_str = "snippet"
+                    yt.videos().update(part=part_str, body=body_u).execute()
+                    repaired_now += 1
+                    if vid_u not in st["repaired_ids"]:
+                        st["repaired_ids"].append(vid_u)
+                if repaired_now == len(pending_fixes):
+                    st["titles_all_clean"] = True
+        except Exception:
+            pass
+
+    LIVE_REPAIR_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LIVE_REPAIR_STATE_FILE.write_text(json.dumps(st, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {"repaired_now": repaired_now, "titles_all_clean": st.get("titles_all_clean", False)}
+
+
+def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immediate: bool = False) -> dict:
+    """
+    [유튜브 채널 현금흐름 창출 4:2 황금비 & 안티-버스트 분산 업로드 엔진]
+    1) 단일 스레드+프로세스 락으로 동시 중복 업로드(쿼터 2배 소모)를 100% 차단합니다.
+    2) 30분 내 16편 연속 덤핑으로 인한 유튜브 노출 제한(0-View Spam Penalty)을 막기 위해
+       웨이브당 최대 2편씩 1시간 간격으로 분산 발행하며, 일일 6슬롯을 정확히:
+         - [장편 마스터클래스 2편 (시청시간 15배 증폭)]
+         - [검색 유입형 단일 주제 1080p 본편 2편 (내신·수능·AP·SAT 정확 매칭)]
+         - [본편 직결 9:16 #Shorts 2편 (구독자 1,000명 돌파 바이럴 확성기 — 채널 조회수 93.7% 견인)]
+       4 : 2 황금비로 교차 배분합니다.
+    """
+    import time as _t_mod
     import min7014_video_maker as vmaker
 
-    clear_stale_upload_flags_on_live_videos()
-    vmaker._LAST_UPLOAD_QUOTA_BLOCKED = False
-
-    yt_test, _ = vmaker.get_available_youtube_upload_service()
-    if yt_test is None:
-        return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
-
-    slug_candidates = []
-    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
-        try:
-            sdoc = json.loads(sp.read_text(encoding="utf-8"))
-            pdf_u = str(sdoc.get("pdf_url") or "").lower()
-            if pdf_u.endswith(".pdf") and "min7014.github.io" in pdf_u:
-                ko_dur = float(((sdoc.get("youtube_packages") or {}).get("ko") or {}).get("total_duration_sec") or 0.0)
-                q_dur = float(((sdoc.get("question_classroom_packages") or {}).get("ko") or {}).get("duration_sec") or 0.0)
-                best_dur = max(ko_dur, q_dur)
-                p_cnt = int(sdoc.get("page_count") or len(sdoc.get("pages") or []))
-                is_midroll = 1 if best_dur >= 480.0 else 0
-                slug_candidates.append((is_midroll, best_dur, p_cnt, sp.stem))
-        except Exception:
-            continue
-    # [일일 6슬롯 수익·시청시간 극대화 정렬]: 8분+(480s+) 미드롤 광고 가능 & 다페이지 심층 오리지널 PDF 우선 업로드
-    slug_candidates.sort(key=lambda x: (-x[0], -x[1], -x[2], x[3]))
-    ordered_slugs = [x[3] for x in slug_candidates]
-
-    uploaded_items = []
-    total_uploaded = 0
-
-    # [Slot A — 2슬롯 (33%)]: 원본 PDF 기반 33~88분 황금구간 마스터클래스 2편(KO/EN) 업로드 (유효 공개 시청시간 10~22배 적립!)
-    if total_uploaded < max_wave_uploads and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-        mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=2)
-        if mc_cnt > 0:
-            total_uploaded += mc_cnt
-            uploaded_items.append({"type": "pdf_masterclass", "count": mc_cnt})
-
-    # [Slot B — 2슬롯 (33%)]: 원본 PDF 한 땀 한 땀 1080p 단계별 장편 본편 (KO/EN) 2편 선(先)업로드 (장시간 다페이지 우선)
-    slot_b_uploaded = 0
-    for c_slug in ordered_slugs:
-        if total_uploaded >= max_wave_uploads or slot_b_uploaded >= 2 or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-            break
-        sp = SCRIPTS_DIR / f"{c_slug}.json"
-        if not sp.exists():
-            continue
-        sdoc = json.loads(sp.read_text(encoding="utf-8"))
-        yu = sdoc.get("youtube_urls") or {}
-        missing_std = tuple(
-            lc for lc in ("ko", "en")
-            if not (yu.get(lc) or "").strip()
-            and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").exists()
-            and (YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
-        )
-        if missing_std:
-            res_std = vmaker.upload_slug_to_youtube(c_slug, langs=missing_std, privacy="public")
-            if res_std:
-                n_up = len([k for k, v in res_std.items() if v])
-                if n_up > 0:
-                    total_uploaded += n_up
-                    slot_b_uploaded += n_up
-                    uploaded_items.append({"type": "pdf_1080p", "slug": c_slug, "langs": list(res_std.keys())})
-
-    # [Slot C — 2슬롯 (33%)]: 채널 홍보 & 신규 구독자 1,000명 유입 메가폰 9:16 #Shorts (KO/EN) 2편 후(後)업로드!
-    # ★ 핵심 원칙(본편 선업로드 ➔ 직결 쇼츠 후업로드): 반드시 1080p 장편 본편(youtube_urls[lc])이 이미 유튜브에 게시되어 있는
-    #    주제의 #Shorts만 업로드하여, 쇼츠 유입 시청자를 설명란 1번 줄 & 고정댓글의 본편+정주행 플레이리스트(&list=UUSlqQfOEtRfJuMPyGMLgFYA)로
-    #    즉시 유입시켜 '채널 홍보(조회수·구독자)'와 '유효 공개 시청시간(4,000시간)' 두 마리 토끼를 동시에 잡습니다!
-    slot_c_uploaded = 0
-    for s_slug in ordered_slugs:
-        if total_uploaded >= max_wave_uploads or slot_c_uploaded >= 2 or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
-            break
-        sp = SCRIPTS_DIR / f"{s_slug}.json"
-        if not sp.exists():
-            continue
-        sdoc = json.loads(sp.read_text(encoding="utf-8"))
-        yu = sdoc.get("youtube_urls") or {}
-        su = sdoc.get("shorts_urls") or {}
-        missing_sh = tuple(
-            lc for lc in ("ko", "en")
-            if not (su.get(lc) or "").strip()
-            and (yu.get(lc) or "").strip()
-            and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").exists()
-            and (YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4").stat().st_mtime >= datetime(2026, 11, 8, 20, 0, 0).timestamp()
-        )
-        if missing_sh:
-            res_sh = vmaker.upload_short_to_youtube(s_slug, langs=missing_sh, privacy="public")
-            if res_sh:
-                n_up = len([k for k, v in res_sh.items() if v])
-                if n_up > 0:
-                    total_uploaded += n_up
-                    slot_c_uploaded += n_up
-                    uploaded_items.append({"type": "pdf_promo_short_paired", "slug": s_slug, "langs": list(res_sh.keys())})
+    if not _CASHFLOW_WAVE_THREAD_LOCK.acquire(blocking=False):
+        return {"status": "locked_in_progress", "total_uploaded": 0, "uploaded_items": []}
 
     try:
-        engaged_comments = vmaker.auto_engage_youtube_community_comments(max_replies=10)
-        if engaged_comments:
-            print(f"💬 [YouTube Community Inbox Auto-Engaged] Replied to {len(engaged_comments)} viewer comments!", flush=True)
-        import youtube_community_controller as yt_comm_ctrl
-        comm_post_res = yt_comm_ctrl.publish_next_community_post_directly(headless=True)
-        if comm_post_res.get("ok"):
-            print(f"🗳️ [YouTube Channel Community Post Published] {comm_post_res}", flush=True)
-    except Exception:
-        engaged_comments = []
-    if total_uploaded > 0:
-        analyze_revenue_pipeline()
-    return {
-        "status": "uploaded" if total_uploaded > 0 else "quota_wait",
-        "total_uploaded": total_uploaded,
-        "uploaded_items": uploaded_items,
-    }
+        now_ts = _t_mod.time()
+        if UPLOAD_LOCK_FILE.exists():
+            try:
+                lk = json.loads(UPLOAD_LOCK_FILE.read_text(encoding="utf-8"))
+                if lk.get("pid") != __import__("os").getpid() and (now_ts - float(lk.get("ts", 0))) < 1500:
+                    return {"status": "process_locked", "total_uploaded": 0, "uploaded_items": []}
+            except Exception:
+                pass
+
+        bal = _load_daily_wave_balance()
+        if not force_immediate and (now_ts - float(bal.get("last_wave_ts") or 0.0)) < MIN_WAVE_SPACING_SEC:
+            return {"status": "pacing_wait", "total_uploaded": 0, "uploaded_items": [], "daily_balance": bal}
+
+        UPLOAD_LOCK_FILE.parent.mkdir(parents=True, exist_ok=True)
+        UPLOAD_LOCK_FILE.write_text(json.dumps({"pid": __import__("os").getpid(), "ts": now_ts}), encoding="utf-8")
+
+        clear_stale_upload_flags_on_live_videos()
+        vmaker._LAST_UPLOAD_QUOTA_BLOCKED = False
+
+        yt_test, _ = vmaker.get_available_youtube_upload_service()
+        if yt_test is None:
+            return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
+
+        # 검색 수요가 가장 폭발적인 중·고등 핵심 기하·미적분·대수 키워드 가중치 부여
+        high_search_terms = (
+            "피타고라스", "원주각", "접선", "이등변", "외심", "내심", "무게중심", "닮음", "메넬라우스", "체바",
+            "포물선", "타원", "쌍곡선", "코사인법칙", "사인법칙", "삼수선", "평균값", "중간값", "산술", "코시",
+            "극한", "미분", "정적분", "수열", "등차", "등비", "귀납법", "이차함수", "근의 공식",
+        )
+        slug_candidates = []
+        for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+            try:
+                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                pdf_u = str(sdoc.get("pdf_url") or "").lower()
+                if pdf_u.endswith(".pdf") and "min7014.github.io" in pdf_u:
+                    t_str = str(sdoc.get("title") or "")
+                    has_high_search = 1 if any(ht in t_str for ht in high_search_terms) else 0
+                    ko_dur = float(((sdoc.get("youtube_packages") or {}).get("ko") or {}).get("total_duration_sec") or 0.0)
+                    q_dur = float(((sdoc.get("question_classroom_packages") or {}).get("ko") or {}).get("duration_sec") or 0.0)
+                    best_dur = max(ko_dur, q_dur)
+                    p_cnt = int(sdoc.get("page_count") or len(sdoc.get("pages") or []))
+                    is_midroll = 1 if best_dur >= 480.0 else 0
+                    slug_candidates.append((has_high_search, is_midroll, best_dur, p_cnt, sp.stem))
+            except Exception:
+                continue
+        slug_candidates.sort(key=lambda x: (-x[0], -x[1], -x[2], -x[3], x[4]))
+        ordered_slugs = [x[4] for x in slug_candidates]
+
+        uploaded_items = []
+        total_uploaded = 0
+        eff_cap = max(1, min(int(max_wave_uploads), 3 if force_immediate else 2))
+        r28_cut = datetime(2026, 11, 8, 20, 0, 0).timestamp()
+
+        # ★ 4:2 황금비 교차 배분:
+        #   1순위: 오늘 아직 #Shorts가 부족(shorts < 2)하고 본편이 올라간 짝꿍 #Shorts가 있으면 1편 즉시 발행 (구독자·노출 점화!)
+        #   2순위: 검색 유입 단일 주제 1080p 본편 (std < 2) 1편 발행 (동시에 다음 웨이브의 짝꿍 #Shorts 해금!)
+        #   3순위: 장편 마스터클래스 (mc < 2) 1편 발행 (유효 공개 시청시간 15배 증폭!)
+
+        def _try_upload_one_std() -> int:
+            for c_slug in ordered_slugs:
+                if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                    break
+                sp = SCRIPTS_DIR / f"{c_slug}.json"
+                if not sp.exists():
+                    continue
+                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                yu = sdoc.get("youtube_urls") or {}
+                for lc in ("ko", "en"):
+                    mp4_f = YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4"
+                    if not (yu.get(lc) or "").strip() and mp4_f.exists() and mp4_f.stat().st_mtime >= r28_cut:
+                        res_std = vmaker.upload_slug_to_youtube(c_slug, langs=(lc,), privacy="public")
+                        if res_std and res_std.get(lc):
+                            uploaded_items.append({"type": "pdf_1080p", "slug": c_slug, "lang": lc, "url": res_std[lc]})
+                            return 1
+                        if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                            return 0
+            return 0
+
+        def _try_upload_one_paired_short() -> int:
+            for s_slug in ordered_slugs:
+                if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                    break
+                sp = SCRIPTS_DIR / f"{s_slug}.json"
+                if not sp.exists():
+                    continue
+                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                yu = sdoc.get("youtube_urls") or {}
+                su = sdoc.get("shorts_urls") or {}
+                for lc in ("ko", "en"):
+                    sh_f = YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4"
+                    if not (su.get(lc) or "").strip() and (yu.get(lc) or "").strip() and sh_f.exists() and sh_f.stat().st_mtime >= r28_cut:
+                        res_sh = vmaker.upload_short_to_youtube(s_slug, langs=(lc,), privacy="public")
+                        if res_sh and res_sh.get(lc):
+                            uploaded_items.append({"type": "pdf_promo_short_paired", "slug": s_slug, "lang": lc, "url": res_sh[lc]})
+                            return 1
+                        if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                            return 0
+            return 0
+
+        # Step 1: 단일 주제 검색형 1080p 본편 1편 선업로드 (std < 2일 때 우선하여 짝꿍 #Shorts 즉시 공급)
+        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["std"] < 2:
+            n_s = _try_upload_one_std()
+            if n_s > 0:
+                total_uploaded += n_s
+                bal["std"] += n_s
+
+        # Step 2: 본편 직결 홍보 #Shorts 1편 업로드 (shorts < 2)
+        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["shorts"] < 2:
+            n_sh = _try_upload_one_paired_short()
+            if n_sh > 0:
+                total_uploaded += n_sh
+                bal["shorts"] += n_sh
+
+        # Step 3: 장편 마스터클래스 1편 업로드 (mc < 2)
+        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["mc"] < 2:
+            mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=1)
+            if mc_cnt > 0:
+                total_uploaded += mc_cnt
+                bal["mc"] += mc_cnt
+                uploaded_items.append({"type": "pdf_masterclass", "count": mc_cnt})
+
+        # Step 4: 일일 기본 6슬롯(2+2+2) 달성 후 잔여 쿼터가 열려 있을 경우 4:2 비율 유지 추가 배분
+        if total_uploaded == 0 and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and (bal["std"] + bal["shorts"] + bal["mc"] >= 6):
+            n_extra_std = _try_upload_one_std()
+            if n_extra_std > 0:
+                total_uploaded += n_extra_std
+                bal["std"] += n_extra_std
+            if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                n_extra_sh = _try_upload_one_paired_short()
+                if n_extra_sh > 0:
+                    total_uploaded += n_extra_sh
+                    bal["shorts"] += n_extra_sh
+
+        if total_uploaded > 0:
+            bal["last_wave_ts"] = _t_mod.time()
+            _save_daily_wave_balance(bal)
+
+        if not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and yt_test is not None:
+            try:
+                rep_live = refresh_live_channel_stats_and_repair(yt_test, vmaker, max_title_repairs=8)
+                if rep_live.get("repaired_now", 0) > 0:
+                    print(f"✨ [Live Title Auto-Repair] Repaired {rep_live['repaired_now']} legacy live video titles cleanly!", flush=True)
+            except Exception:
+                pass
+
+        try:
+            engaged_comments = vmaker.auto_engage_youtube_community_comments(max_replies=6)
+            if engaged_comments:
+                print(f"💬 [YouTube Community Inbox Auto-Engaged] Replied to {len(engaged_comments)} viewer comments!", flush=True)
+        except Exception:
+            engaged_comments = []
+
+        if total_uploaded > 0:
+            analyze_revenue_pipeline()
+        return {
+            "status": "uploaded" if total_uploaded > 0 else "quota_wait",
+            "total_uploaded": total_uploaded,
+            "uploaded_items": uploaded_items,
+            "daily_balance": bal,
+        }
+    finally:
+        try:
+            if UPLOAD_LOCK_FILE.exists():
+                UPLOAD_LOCK_FILE.unlink()
+        except Exception:
+            pass
+        _CASHFLOW_WAVE_THREAD_LOCK.release()
 
 
 def run_autonomous_finance_cycle() -> dict:
@@ -1459,7 +1843,7 @@ def main():
 
     args = parser.parse_args()
     if args.cmd == "cashflow-wave":
-        res = execute_youtube_cashflow_golden_wave(max_wave_uploads=8)
+        res = execute_youtube_cashflow_golden_wave(max_wave_uploads=2, force_immediate=True)
         print(json.dumps(res, ensure_ascii=False, indent=2))
     elif args.cmd in ("optimize", "build-masterclass"):
         run_autonomous_finance_cycle()

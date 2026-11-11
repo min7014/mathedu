@@ -3865,9 +3865,17 @@
       subSolBtn.target = '_blank';
       subSolBtn.rel = 'noopener';
       subSolBtn.className = 'mathedu-voice-btn';
-      subSolBtn.style.cssText = 'background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-color:#fda4af;';
-      subSolBtn.innerHTML = bilingual('🔔 @min7014_ai 시각 증명 유튜브 1초 무료 구독 ↗', '🔔 Subscribe @min7014_ai Visual Proofs ↗');
+      subSolBtn.style.cssText = 'background:linear-gradient(135deg,#059669,#0d9488);color:#fff;text-decoration:none;border-color:#6ee7b7;';
+      subSolBtn.innerHTML = bilingual('🔔 민은기 선생님 시각 증명 유튜브 1초 구독 ↗', '🔔 Subscribe Visual Math Proofs ↗');
       solBar.appendChild(subSolBtn);
+      var bingeSolBtn = document.createElement('a');
+      bingeSolBtn.href = 'https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA';
+      bingeSolBtn.target = '_blank';
+      bingeSolBtn.rel = 'noopener';
+      bingeSolBtn.className = 'mathedu-voice-btn';
+      bingeSolBtn.style.cssText = 'background:linear-gradient(135deg,#0284c7,#2563eb);color:#fff;text-decoration:none;border-color:#7dd3fc;';
+      bingeSolBtn.innerHTML = bilingual('▶️ 핵심 시각 증명 연속 특강 보기 ↗', '▶️ Watch Visual Proof Marathon ↗');
+      solBar.appendChild(bingeSolBtn);
       solBox.insertBefore(solBar, solBox.firstChild);
     }
 
@@ -3930,11 +3938,18 @@
               var vaultBtn = document.createElement('button');
               vaultBtn.type = 'button';
               vaultBtn.className = 'mathedu-voice-btn min-yt-vault-btn';
-              vaultBtn.style.background = 'linear-gradient(135deg,#e11d48,#be123c)';
-              vaultBtn.innerHTML = bilingual('📺 @min7014_ai 영상저장고 재생', '📺 @min7014_ai Video Vault');
+              vaultBtn.style.background = 'linear-gradient(135deg,#0284c7,#2563eb)';
+              vaultBtn.style.color = '#fff';
+              vaultBtn.innerHTML = bilingual('📺 단계별 시각 증명 영상 재생', '📺 Watch Step-by-Step Proof');
               vaultBtn.onclick = function() {
                 var targetYt = (isEnMode() && info.ye) ? info.ye : (info.yk || info.ye);
-                window.open(targetYt || 'https://www.youtube.com/@min7014_ai', '_blank');
+                if (targetYt && targetYt.indexOf('youtu.be/') !== -1) {
+                  var vId = targetYt.split('youtu.be/')[1].split('?')[0];
+                  targetYt = 'https://www.youtube.com/watch?v=' + vId + '&list=UUSlqQfOEtRfJuMPyGMLgFYA';
+                } else if (targetYt && targetYt.indexOf('watch?v=') !== -1 && targetYt.indexOf('list=') === -1) {
+                  targetYt = targetYt + '&list=UUSlqQfOEtRfJuMPyGMLgFYA';
+                }
+                window.open(targetYt || 'https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA', '_blank');
               };
               actDiv.insertBefore(vaultBtn, actDiv.firstChild);
             }
@@ -3952,8 +3967,8 @@
               subItemBtn.target = '_blank';
               subItemBtn.rel = 'noopener';
               subItemBtn.className = 'mathedu-voice-btn min-yt-sub-btn';
-              subItemBtn.style.cssText = 'background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-decoration:none;border-color:#fda4af;';
-              subItemBtn.innerHTML = bilingual('🔔 @min7014_ai 1초 구독', '🔔 Subscribe @min7014_ai');
+              subItemBtn.style.cssText = 'background:linear-gradient(135deg,#059669,#0d9488);color:#fff;text-decoration:none;border-color:#6ee7b7;';
+              subItemBtn.innerHTML = bilingual('🔔 1초 구독 응원', '🔔 Subscribe');
               actDiv.insertBefore(subItemBtn, actDiv.firstChild);
             }
           }

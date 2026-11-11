@@ -569,6 +569,9 @@ def split_bilingual_title(raw_title: str):
         if open_idx > 0:
             en_cand = _strip_outer_balanced_parens(u[open_idx + 1:-1].strip())
             ko_cand = _balance_parentheses(u[:open_idx].strip().rstrip("."))
+            # 동일 수식 반복 괄호 예: '(a+b+c)²=... ((a+b+c)²=...)' 자동 중복 제거 및 분리
+            if ko_cand and en_cand and re.sub(r"\s+", "", ko_cand) == re.sub(r"\s+", "", en_cand):
+                return ko_cand, en_cand
             if re.search(r"[A-Za-z]{3,}", en_cand) and not re.search(r"[가-힣]", en_cand):
                 en_cand = _balance_parentheses(en_cand)
                 return (ko_cand or u), (en_cand or ko_cand or u)
@@ -585,8 +588,8 @@ def latex_to_unicode_title(text):
     s = str(text or "")
     for _bad_name in ("민은기 선생님의 ", "민은기 선생님의", "민은기 선생님 ", "민은기 선생님", "민은기의 ", "민은기 ", "민은기", "Min Eun-ki's ", "Min Eun-ki's", "Min Eunki's ", "Min's Math Lab"):
         s = s.replace(_bad_name, "")
-    s = s.replace("Equationss", "Equations").replace("수직이분선", "수직이등분선")
-    s = re.sub(r"\\begin\s*\{cases\}(.*?)\\end\s*\{cases\}", lambda m: m.group(1).replace(r"\\", ", "), s, flags=re.S)
+    s = s.replace("Equationss", "Equations").replace("수직이분선", "수직이등분선").replace("(0,0)관 관련된", "원점 (0,0)과 관련된")
+    s = re.sub(r"\\begin\s*\{cases\}(.*?)\\end\s*\{cases\}", lambda m: re.sub(r"\s*&\s*(?:\\text\s*\{if\s*\}|if\b)\s*", " (조건 ", m.group(1).replace(r"\\", "; ")) + ")", s, flags=re.S)
     s = re.sub(r"\bbegin\s*\(cases\)(.*?)\bend\s*\(cases\)", lambda m: m.group(1), s, flags=re.S)
     # 시그마(∑) 상·하한 표기를 지수(^n) 변환보다 먼저 처리하여 '의 n제곱' 오변환 원천 차단
     s = re.sub(r"\\sum\s*_\s*\{([^{}]+)\}\s*\^\s*\{([^{}]+)\}", r"∑(\1..\2) ", s)
@@ -658,8 +661,17 @@ def latex_to_unicode_title(text):
     s = s.replace("^2", "²").replace("^3", "³")
     s = re.sub(r"\\[,;:!\s]+", " ", s)
     s = s.replace("$", "").replace("<", "＜").replace(">", "＞").replace("{", "(").replace("}", ")").replace("\\", " ")
+    # 조각함수 LaTeX 잔재(', & if x≠ a , β, & if x= a') 및 동일 수식 다중 반복('A A(A)(A)') 정화
+    s = re.sub(r",\s*&\s*if\s*([^,;]+)\s*,\s*([^,&]+),\s*&\s*if\s*([^,;)]+)", r" (x=\3일 때 \2, \1)", s)
+    s = re.sub(r"\s*&\s*if\s*", " (조건: ", s)
     s = _balance_parentheses(re.sub(r"\s+", " ", s).strip())
-    return s
+    for _ in range(3):
+        m_dup_f = re.match(r"^(.{8,}?)\s*(?:\(\s*\1\s*\)|\1)+$", s)
+        if m_dup_f:
+            s = m_dup_f.group(1).strip()
+        else:
+            break
+    return _balance_parentheses(s)
 
 
 def clean_math_for_speech_ko(text):
@@ -3414,10 +3426,60 @@ def get_media_duration_seconds(media_path, ffprobe_exe):
         return 6.0
 
 
-async def synthesize_edge_tts_mp3(text, voice_name, out_mp3_path):
-    # 차분하고 또렷한 수석 교사 톤 (-2% rate)
-    communicate = edge_tts.Communicate(text, voice_name, rate="-2%")
-    await communicate.save(str(out_mp3_path))
+def _fallback_windows_sapi_mp3(text: str, voice_name: str, out_mp3_path) -> bool:
+    """Microsoft Edge ReadAloud 503 장애 시 Windows SAPI5 로컬 음성 + FFmpeg MP3로 무중단 폴백합니다."""
+    try:
+        import win32com.client
+        wav_tmp = Path(str(out_mp3_path) + ".sapi.wav")
+        speaker = win32com.client.Dispatch("SAPI.SpVoice")
+        want_en = str(voice_name or "").lower().startswith("en")
+        for v in speaker.GetVoices():
+            desc = str(v.GetDescription() or "").lower()
+            if (want_en and ("english" in desc or "zira" in desc or "david" in desc)) or (
+                not want_en and ("korean" in desc or "heami" in desc or "한국어" in desc)
+            ):
+                speaker.Voice = v
+                break
+        stream = win32com.client.Dispatch("SAPI.SpFileStream")
+        stream.Open(str(wav_tmp), 3)
+        speaker.AudioOutputStream = stream
+        speaker.Speak(str(text or ""))
+        stream.Close()
+        if wav_tmp.exists() and wav_tmp.stat().st_size > 200:
+            ffmpeg_exe, _ = resolve_ffmpeg_binaries()
+            subprocess.run(
+                [ffmpeg_exe or "ffmpeg", "-y", "-i", str(wav_tmp), "-codec:a", "libmp3lame", "-qscale:a", "3", str(out_mp3_path)],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False,
+            )
+            wav_tmp.unlink(missing_ok=True)
+            return Path(out_mp3_path).exists() and Path(out_mp3_path).stat().st_size > 200
+    except Exception:
+        pass
+    return False
+
+
+async def synthesize_edge_tts_mp3(text, voice_name, out_mp3_path, rate="-2%"):
+    # 차분하고 또렷한 수석 교사 톤 + Microsoft 503 일시 장애 지수 백오프 재시도 & 로컬 SAPI5 무중단 폴백
+    clean_t = str(text or "").strip() or ("Visual proof step." if str(voice_name).startswith("en") else "단계별 시각 증명입니다.")
+    last_err = None
+    for attempt, delay_s in enumerate((0.18, 1.5, 3.2, 6.5, 12.0, 20.0)):
+        if delay_s > 0:
+            await asyncio.sleep(delay_s)
+        try:
+            communicate = edge_tts.Communicate(clean_t, voice_name, rate=rate)
+            await communicate.save(str(out_mp3_path))
+            if Path(out_mp3_path).exists() and Path(out_mp3_path).stat().st_size > 150:
+                return
+        except Exception as e:
+            last_err = e
+    if _fallback_windows_sapi_mp3(clean_t, voice_name, out_mp3_path):
+        return
+    if last_err:
+        raise last_err
+
+
+def synthesize_tts_mp3_sync(text, voice_name, out_mp3_path, rate="-2%"):
+    asyncio.run(synthesize_edge_tts_mp3(text, voice_name, out_mp3_path, rate=rate))
 
 
 VIRAL_HOOK_PRESETS = {
@@ -3751,15 +3813,45 @@ def cubic_keyframe_ease(t: float, curve: str = "cube") -> float:
 
 def sanitize_youtube_title(title: str, max_chars: int = 98) -> str:
     """
-    [YouTube Data API v3 snippet.title 무결성 보장]
-    - YouTube API가 금지하는 부등호('<', '>')를 수학 유니코드 부등호('＜', '＞')로 자동 치환
-    - 최대 98자 및 최대 96 UTF-8 바이트 이내 보장
+    [YouTube Data API v3 snippet.title 무결성 보장 — 단어·괄호 중간 절단 ZERO & #Shorts 보존]
+    - YouTube API의 실제 한도는 '100 유니코드 글자(max_chars <= 100)'이며(96 UTF-8 바이트 오판으로 한글이 32글자에서 잘리던 결함 수정),
+      금지 부등호('<', '>')를 수학 유니코드('＜', '＞')로 자동 치환합니다.
+    - #Shorts 태그 보존, 미닫힘 대괄호/소괄호 제거, 끝부분 조사·구분자('|', '—', '-') 고아 절단 방지를 보장합니다.
     """
-    t = str(title or "").replace(" <= ", " ≤ ").replace(" >= ", " ≥ ").replace("<", "＜").replace(">", "＞").strip()
-    t = _balance_parentheses(t[:max_chars])
-    while len(t.encode("utf-8")) > 96 and len(t) > 10:
-        t = t[:-1].rstrip()
-    return _balance_parentheses(t)
+    t = str(title or "").replace(" <= ", " ≤ ").replace(" >= ", " ≥ ").replace("<", "＜").replace(">", "＞")
+    t = re.sub(r"\s+", " ", t).strip()
+    is_short = "#Shorts" in t or "#shorts" in t
+    limit = min(98, max(25, int(max_chars)))
+
+    if len(t) > limit:
+        suffix = ""
+        if is_short:
+            has_ko = bool(re.search(r"[가-힣]", t))
+            suffix = " #Shorts #수학" if has_ko else " #Shorts #Math"
+            t = re.sub(r"\s*#[Ss]horts\b.*$", "", t).strip()
+        head_budget = max(20, limit - len(suffix))
+        if len(t) > head_budget:
+            # 열린 대괄호 '[' 이후가 잘릴 경우 대괄호 블록 전체를 깔끔히 분리·축약
+            cand = t[:head_budget]
+            if "[" in cand and cand.rfind("[") > cand.rfind("]"):
+                before_br = cand[:cand.rfind("[")].strip()
+                if len(before_br) >= 18:
+                    cand = before_br
+            sp_idx = max(cand.rfind(" | "), cand.rfind(" — "), cand.rfind(" "))
+            if sp_idx >= 18:
+                cand = cand[:sp_idx].strip()
+            t = cand
+        t = (t + suffix).strip()
+
+    # 미닫힘 '[' 또는 '(' 정리 및 말미 구분자 정리
+    if "[" in t and t.rfind("[") > t.rfind("]"):
+        before_b = t[:t.rfind("[")].strip()
+        t = before_b if len(before_b) >= 15 else (t + "]")
+    t = _balance_parentheses(t)
+    t = re.sub(r"[\s\|\—\-\:\,\·]+$", "", t).strip()
+    if len(t) > 100:
+        t = _balance_parentheses(t[:99].rsplit(" ", 1)[0].strip())
+    return t
 
 
 def sanitize_youtube_description(desc: str, max_utf8_bytes: int = 4750) -> str:
@@ -4441,8 +4533,7 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
 
         cold_mp3 = tmp_dir / "qcold_audio.mp3"
         cold_seg = tmp_dir / "qseg_cold_000.mp4"
-        comm_cold = edge_tts.Communicate(cold_q_text, voice_name, rate="+6%")
-        asyncio.run(comm_cold.save(str(cold_mp3)))
+        synthesize_tts_mp3_sync(cold_q_text, voice_name, cold_mp3, rate="+6%")
         cold_dur = get_media_duration_seconds(cold_mp3, ffprobe_exe) + 0.65
         cd1 = round(cold_dur * 0.34, 3)
         cd2 = round(cold_dur * 0.33, 3)
@@ -5143,12 +5234,18 @@ def verify_video_content_integrity(slug_key: str) -> dict:
         if mp4_chk.exists() and mp4_chk.stat().st_mtime < rule28_cutoff_ts:
             return {"ok": False, "reason": f"pre_rule28_mp4_needs_clean_rerender:{_lc_chk}"}
 
-    # 1) Persona / Name Prohibition Check ("민은기 선생님" 등 원천 차단)
-    #    [Rule 38] channel_name 필드의 공식 채널 명칭은 채널 식별 정보이므로 제외하고 검사
+    # 1) Persona / Name Prohibition Check (개별 슬라이드 내레이션·자막 내 개인 호칭 원천 차단)
+    #    [Rule 38] 채널 공식 명칭('민은기 선생님의 단계별 시각적 수학 증명') 및 설명란 원문 아카이브 출처 표기는
+    #    Rule 38 의무 사항이므로 허용하되, 실제 음성 내레이션(pages) 및 영상 본문 제목에서는 개인 호칭을 차단합니다.
     forbidden_personas = ("민은기", "Min's Math Lab", "MinsMathLab", "Min Eunki")
-    persona_scan_txt = raw_script_txt
-    for _ocn in OFFICIAL_CHANNEL_NAMES:
-        persona_scan_txt = persona_scan_txt.replace(f'"channel_name": "{_ocn}"', '"channel_name": ""')
+    spoken_chunks = [str(sdoc.get("title") or ""), str(sdoc.get("title_en") or "")]
+    for _pg in pages:
+        spoken_chunks.append(str(_pg.get("explanation_text") or ""))
+        spoken_chunks.append(str(_pg.get("subtitle_text") or ""))
+        spoken_chunks.append(str(_pg.get("step_question_ko") or ""))
+        for _nv in (_pg.get("narrations") or {}).values():
+            spoken_chunks.append(str(_nv or ""))
+    persona_scan_txt = "\n".join(spoken_chunks)
     for fp in forbidden_personas:
         if fp in persona_scan_txt:
             return {"ok": False, "reason": f"forbidden_persona_in_script:{fp}"}
@@ -5204,15 +5301,12 @@ def verify_video_content_integrity(slug_key: str) -> dict:
     for meta_p in [YT_PKG_DIR / f"{slug_key}_youtube_meta.json", YT_PKG_DIR / f"{slug_key}_shorts_meta.json"]:
         if meta_p.exists():
             m_txt = meta_p.read_text(encoding="utf-8")
-            m_scan_txt = m_txt
-            for _ocn in OFFICIAL_CHANNEL_NAMES:
-                m_scan_txt = m_scan_txt.replace(f'"channel_name": "{_ocn}"', '"channel_name": ""')
-            for fp in forbidden_personas:
-                if fp in m_scan_txt:
-                    return {"ok": False, "reason": f"forbidden_persona_in_meta:{meta_p.name}:{fp}"}
             mdata = json.loads(m_txt)
             for lc in ("ko", "en"):
                 mt = (mdata.get(lc) or {}).get("title", "")
+                for fp in forbidden_personas:
+                    if fp in mt:
+                        return {"ok": False, "reason": f"forbidden_persona_in_meta:{meta_p.name}:{fp}"}
                 if (
                     "()" in mt
                     or "$" in mt
@@ -6718,8 +6812,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
             mp3_p = tmp_dir / f"short_{seq_idx:02d}.mp3"
             seg_p = tmp_dir / f"short_{seq_idx:02d}.mp4"
-            comm = edge_tts.Communicate(short_narration, voice_name, rate="+20%")
-            asyncio.run(comm.save(str(mp3_p)))
+            synthesize_tts_mp3_sync(short_narration, voice_name, mp3_p, rate="+20%")
             seg_audio_dur = get_media_duration_seconds(mp3_p, ffprobe_exe)
 
             # 현재 단계에 해당하는 연속 PDF 플립북 프레임 추출 (최대 6프레임 모션 애니메이션)
@@ -6756,13 +6849,13 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             sub_pill_txt = "🔔 SUBSCRIBE" if lang_code == "en" else "🔔 구독 @min7014_ai"
             draw.text((774, 1375), sub_pill_txt, fill=(255, 255, 255), font=get_font_for_lang("ko", 23, bold=True))
             cta_short_txt = (
-                "🔔 [구독] 누르고 매일 40초 시각 증명 받기! 👆 고정댓글에 1080p 풀버전"
+                "🔔 아래 [구독] 누르고 @min7014_ai 채널 홈 ➔ 1080p 전체 증명 정주행!"
                 if (lang_code == "ko" and seq_idx == total_seqs)
-                else "👆 설명란·고정댓글 ➔ 1080p 풀버전 & 무료 GeoGebra 실습! (@min7014_ai)"
+                else "👆 아래 @min7014_ai 터치 ➔ 1080p 풀버전 증명 & 구독 응원!"
                 if lang_code == "ko"
-                else "🔔 Tap [SUBSCRIBE] for Daily Visual Proofs! 👆 Full 1080p in Pinned Comment"
+                else "🔔 Tap [SUBSCRIBE] & @min7014_ai Below ➔ Watch Full 1080p Proof!"
                 if seq_idx == total_seqs
-                else "👆 Tap Description ➔ Full 1080p Proof & Free GeoGebra! (@min7014_ai)"
+                else "👆 Tap @min7014_ai Below ➔ Full 1080p Visual Proof & Subscribe!"
             )
             draw.text((64, 1834), cta_short_txt, fill=(254, 240, 138), font=get_font_for_lang("ko", 24, bold=True))
 
@@ -7071,8 +7164,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             )
             mp3_p = tmp_dir / f"qshort_{seq_idx:02d}.mp3"
             seg_p = tmp_dir / f"qshort_{seq_idx:02d}.mp4"
-            comm = edge_tts.Communicate(q_short_narr, voice_name, rate="+18%")
-            asyncio.run(comm.save(str(mp3_p)))
+            synthesize_tts_mp3_sync(q_short_narr, voice_name, mp3_p, rate="+18%")
             seg_audio_dur = get_media_duration_seconds(mp3_p, ffprobe_exe)
 
             # 4) 플립북 프레임 시퀀스 추출 (v6.0 무한 루프 연결 포함)
@@ -7097,11 +7189,11 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             draw.rounded_rectangle((40, 1365, 1040, 1795), radius=26, fill=(15, 23, 42), outline=(251, 191, 36), width=3)
             cap_lines = textwrap.wrap(q_short_narr, width=22 if lang_code == "ko" else 34)[:5]
 
-            draw.rounded_rectangle((40, 1810, 1040, 1892), radius=20, fill=(136, 19, 55), outline=(251, 191, 36), width=3)
+            draw.rounded_rectangle((40, 1810, 1040, 1892), radius=20, fill=(30, 58, 138), outline=(251, 191, 36), width=3)
             cta_short_txt = (
-                "🔔 [구독]하고 매일 질문하는 수학 #Shorts 받기! 👆 댓글에 내 추론 남기기"
+                "🔔 아래 [구독] 누르고 @min7014_ai 터치 ➔ 1080p 전체 증명 확인!"
                 if (lang_code == "ko" and seq_idx == total_seqs)
-                else "👆 내 질문 남기기 & 무료 GeoGebra 실습 ➔ @min7014_ai 구독!"
+                else "👆 내 추론 댓글 남기기 & 아래 @min7014_ai 구독 응원!"
                 if lang_code == "ko"
                 else "🔔 [SUBSCRIBE] for Daily Socratic Math #Shorts! 👆 Comment Your Answer"
                 if seq_idx == total_seqs
@@ -8457,45 +8549,14 @@ def run_shorts_and_video_upload_daemon(open_studio_now=False):
             except Exception:
                 pass
             now_ts = time.time()
-            # 1) 3분 주기로 현금흐름 황금비 웨이브(10~35분 미드롤 마스터클래스 ➔ 44초 바이럴 Idea-#Shorts ➔ 1080p 네온 시네마) 즉시 업로드
-            #    (비업로드 API 호출[playlistItems.list, videos.delete, videos.update 일괄 루프]을 원천 차단하여 10,000유닛 전량을 신규 업로드에 투입!)
-            if now_ts - last_api_upload_try >= 180:
+            # 1) 업로드는 전용 백그라운드 스레드(YouTubeCashFlowWaveUploader)가 단일 락(Single-Lock)으로 전담하여
+            #    동시 중복 업로드(쿼터 2배 소모)를 원천 차단하고, 메인 루프는 카탈로그/Git 동기화만 보조합니다.
+            if now_ts - last_api_upload_try >= 900:
                 last_api_upload_try = now_ts
-                global _LAST_UPLOAD_QUOTA_BLOCKED
-                _LAST_UPLOAD_QUOTA_BLOCKED = False
-                newly_uploaded_batch = 0
-
                 try:
-                    import importlib
-                    import finance
-                    importlib.reload(finance)
-                    wave_res = finance.execute_youtube_cashflow_golden_wave(max_wave_uploads=8)
-                    newly_uploaded_batch += int((wave_res or {}).get("total_uploaded", 0))
-                except Exception as idea0_err:
-                    if "Quota exceeded" not in str(idea0_err) and "exhausted" not in str(idea0_err):
-                        print(f"[Priority 0 Cash-Flow Wave Notice] {idea0_err}", flush=True)
-
-                if not _LAST_UPLOAD_QUOTA_BLOCKED:
-                    for q_prio_slug in ["math20250130001", "2014111902", "2014111901", "2017090101", "2017092841", "2020041301"]:
-                        sp_qp = SCRIPTS_DIR / f"{q_prio_slug}.json"
-                        if not sp_qp.exists():
-                            continue
-                        sdoc_qp = json.loads(sp_qp.read_text(encoding="utf-8"))
-                        q_yt_u = (sdoc_qp.get("question_youtube_urls") or {}).get("ko", "").strip()
-                        if not q_yt_u and (QUESTION_CLASSROOM_DIR / f"{q_prio_slug}_q_ko.mp4").exists():
-                            res_qv = upload_question_classroom_to_youtube(q_prio_slug, langs=("ko",), privacy="public")
-                            if res_qv.get("ko") and res_qv.get("ko") != q_yt_u:
-                                newly_uploaded_batch += 1
-                            if _LAST_UPLOAD_QUOTA_BLOCKED:
-                                break
-
-                if newly_uploaded_batch > 0:
                     update_video_catalog()
-                    prepare_ready_batch_folder(open_explorer=False)
-                    prepare_ready_shorts_batch_folder(open_explorer=False)
-                    subprocess.run(["git", "add", "video_lectures/", "assets/min7014_deep_knowledge.json", "assets/min7014_lookup.json", "assets/finance_revenue_engine.json"], check=False)
-                    subprocess.run(["git", "commit", "-m", f"chore(youtube-pdf): auto-upload step-by-step PDF videos ({newly_uploaded_batch} videos) to @min7014_ai"], check=False)
-                    subprocess.run(["git", "push", "origin", "main"], check=False)
+                except Exception:
+                    pass
 
             # 3) 업로드 대기 중에도 쉬지 않고 min7014.github.io 원본 PDF 주제의 4대 에디션(한 땀 한 땀 PDF 직접 설명) 연속 자동 제작!
             if not hasattr(run_shorts_and_video_upload_daemon, "_failed_slugs"):
