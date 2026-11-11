@@ -1862,7 +1862,7 @@
             '<div style="display:flex;align-items:center;gap:10px">' +
               '<span style="font-size:1.3rem">📋</span>' +
               '<div>' +
-                '<div>' + bilingual('커뮤니티 자랑용 텍스트 복사 (워들 포맷)', 'Copy Community Text (Wordle Format)') + '</div>' +
+                '<div>' + bilingual('커뮤니티 자랑용 텍스트 복사 (시각 이모지 포맷)', 'Copy Community Text (Visual Emoji Format)') + '</div>' +
                 '<div style="font-size:0.75rem;color:rgba(255,255,255,.85);font-weight:400">' + bilingual('수만휘, 오르비, 에타, 단톡방 1초 복붙', 'Paste in Reddit, Discord, or group chats') + '</div>' +
               '</div>' +
             '</div>' +

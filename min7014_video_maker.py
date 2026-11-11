@@ -600,17 +600,23 @@ def latex_to_unicode_title(text):
         .replace(r"\mathbb{C}", "ℂ")
     )
     s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
-    s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
     s = re.sub(r"\\vec\s*\{([^{}]+)\}", r"\1⃗", s)
+    # 화살표 매크로(\rightarrow, \leftarrow 등)를 \left, \right 구분자 제거보다 반드시 먼저 치환하여 'xarrow' 오변환 원천 차단
     s = (
-        s.replace(r"\rightarrow", "→")
+        s.replace(r"\longrightarrow", "→")
+        .replace(r"\longleftarrow", "←")
+        .replace(r"\leftrightarrow", "↔")
+        .replace(r"\rightarrow", "→")
         .replace(r"\leftarrow", "←")
+        .replace(r"\mapsto", "↦")
         .replace(r"\to", "→")
         .replace(r"\theta", "θ")
         .replace(r"\pi", "π")
         .replace(r"\alpha", "α")
         .replace(r"\beta", "β")
         .replace(r"\gamma", "γ")
+        .replace(r"\epsilon", "ε")
+        .replace(r"\delta", "δ")
         .replace(r"\Delta", "Δ")
         .replace(r"\forall", "∀")
         .replace(r"\exists", "∃")
@@ -621,6 +627,7 @@ def latex_to_unicode_title(text):
         .replace(r"\log", "log")
         .replace(r"\ln", "ln")
     )
+    s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left(?![a-zA-Z])|right(?![a-zA-Z]))", "", s)
     s = re.sub(r"\^\s*\{\\circ\}|\^\s*\\circ", "°", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"\1", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"√(\1)", s)
@@ -632,7 +639,9 @@ def latex_to_unicode_title(text):
     # 긴 매크로(\nRightarrow, \infty, \notin)를 짧은 매크로(\Rightarrow, \in)보다 반드시 먼저 치환 (∈fty 오변환 방지)
     s = s.replace(r"\nRightarrow", "⇏").replace("nRightarrow", "⇏")
     s = s.replace(r"\Leftrightarrow", "⇔").replace(r"\Rightarrow", "⇒").replace(r"\Leftarrow", "⇐")
-    s = s.replace(r"\infty", "∞").replace("∈fty", "∞").replace(r"\notin", "∉").replace(r"\in", "∈").replace(r"\subset", "⊂")
+    s = s.replace(r"\infty", "∞").replace("∈fty", "∞").replace(r"\notin", "∉").replace(" notin ", " ∉ ").replace(r"\in", "∈").replace(r"\subset", "⊂")
+    # 기존 손상된 'xarrow' / 'harrow' / 'θ arrow' 패턴도 자동 복원
+    s = re.sub(r"\b([xXhHθtTnN])\s*arrow\s*", r"\1→", s)
     s = s.replace(r"\equiv", "≡").replace(r"\mid", " | ")
     s = s.replace(r"\cdots", "⋯").replace(r"\ldots", "⋯").replace(r"\dots", "⋯")
     s = s.replace(r"\times", "×").replace(r"\div", "÷").replace(r"\cdot", "·")
@@ -705,7 +714,7 @@ def clean_math_for_speech_ko(text):
         .replace("∈", " 원소 ")
     )
     s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
-    s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
+    s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left(?![a-zA-Z])|right(?![a-zA-Z]))", "", s)
     s = re.sub(r"\^\s*\{\\circ\}|\^\s*\\circ|°", "도", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"선분 \1", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"루트 \1", s)
@@ -778,7 +787,7 @@ def clean_math_for_speech_en(text):
         .replace("∈", " in ")
     )
     s = re.sub(r"\\(?:mathrm|mathbf|mathit|text)\s*\{([^{}]+)\}", r"\1", s)
-    s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left|right)", "", s)
+    s = re.sub(r"\\(?:displaystyle|mathrm|mathbf|left(?![a-zA-Z])|right(?![a-zA-Z]))", "", s)
     s = re.sub(r"\^\s*\{\\circ\}|\^\s*\\circ|°", " degrees", s)
     s = re.sub(r"\\overline\s*\{([^{}]+)\}", r"segment \1", s)
     s = re.sub(r"\\sqrt\s*\{([^{}]+)\}", r"square root of \1", s)
@@ -1511,19 +1520,65 @@ def _analyze_min7014_topic_as_mathteacher_core(title: str, sub_domain_ko: str = 
                 "what_if_not_ko": "이 대수적 소거와 동치 변형 원리를 고등학교와 대학 선형대수학의 행렬 가우스-조던 소거법(Gauss-Jordan Elimination)으로 확장하면 수백 개의 연립방정식도 어떻게 알고리즘으로 풀 수 있을까요?"
             }
 
-    # 16. 일반 기하·대수·미적분 주제
+    # 15-B. 제한된 범위에서 이차함수의 최대·최소 및 포물선 그래프 이동
+    if "이차함수" in blob and ("최대" in blob or "최소" in blob or "최댓값" in blob or "최솟값" in blob or "limited range" in blob.lower()):
+        is_neg_a = "a<0" in blob.replace(" ", "") or "a＜0" in blob.replace(" ", "")
+        concavity_ko = "위로 볼록한(a＜0)" if is_neg_a else "아래로 볼록한(a＞0)"
+        return {
+            "category_type": "algebra",
+            "hypothesis_ko": f"닫힌구간 [α, β]로 정의역이 제한된 {concavity_ko} 이차함수 y = a(x - p)² + q 가 주어진 출발 조건",
+            "conclusion_ko": "구간의 양 끝값만 대입하는 것이 아니라, 대칭축 x = p 가 제한된 구간 [α, β] 안에 포함되는지 바깥에 있는지에 따라 꼭짓점과 양 끝점 함숫값 중 최댓값과 최솟값이 결정된다는 결론",
+            "auxiliary_line_ko": "이차식을 표준형 y = a(x - p)² + q 로 묶어 세로 대칭축 직선 x = p 를 작도하고, 제한 구간 [α, β]를 축 왼쪽·내부·오른쪽 3가지 위치 관계로 나누어 그래프의 실선 부분만 관찰하는 기하-대수 융합 발상",
+            "proof_logic_ko": f"{concavity_ko} 포물선은 대칭축 x = p 에서 꼭짓점을 가지며 대칭축에서 멀어질수록 함숫값이 단조변화하므로, 대칭축이 구간 내부에 있으면 꼭짓점이 {'최댓값' if is_neg_a else '최솟값'}이 되고 대칭축에서 더 먼 구간의 끝점이 {'최솟값' if is_neg_a else '최댓값'}이 되는 원리",
+            "misconception_ko": "가장 흔한 오답은 대칭축 x = p 가 제한 구간 [α, β] 안에 있는지 확인하지 않고 무조건 양 끝점 f(α), f(β)나 꼭짓점 q만 답으로 쓰는 것입니다! 반드시 '대칭축 위치 확인 ➔ 실선 그래프 표시' 순서를 지켜야 합니다.",
+            "what_if_not_ko": "만약 대칭축 x = p 또는 구간 [t, t+2] 자체가 문자 t에 따라 움직인다면 최댓값 함수 g(t)는 몇 개의 구간으로 나뉘어 정의될까요?"
+        }
+
+    # 15-C. 직육면체·정육면체의 공간 대각선 길이 (3차원 피타고라스 정리)
+    if ("직육면체" in blob or "정육면체" in blob or "rectangular prism" in blob.lower() or "hexahedron" in blob.lower()) and "대각선" in blob:
+        return {
+            "category_type": "space_3d",
+            "hypothesis_ko": "가로 a, 세로 b, 높이 c인 직육면체에서 서로 가장 멀리 떨어진 두 꼭짓점을 공간 내부로 잇는 공간 대각선이 주어진 출발 조건",
+            "conclusion_ko": f"직육면체의 공간 대각선의 길이는 세 모서리 제곱의 합의 제곱근인 √(a² + b² + c²) 로 구해진다는 '{ko_t}'의 결론",
+            "auxiliary_line_ko": "밑면 직사각형의 대각선을 먼저 연결하여 밑면 직각삼각형과 세로 높이를 포함하는 수직 단면 직각삼각형 2개를 연쇄 구성하는 공간 보조선",
+            "proof_logic_ko": "1단계로 밑면 직각삼각형에서 피타고라스 정리를 적용해 밑면 대각선 길이 √(a² + b²)을 구하고, 높이가 밑면의 모든 직선과 수직(삼수선·선면수직)이므로 2단계 수직 직각삼각형에서 다시 피타고라스 정리를 적용해 √((√(a²+b²))² + c²) = √(a² + b² + c²)을 도출하는 원리",
+            "misconception_ko": "겨냥도에서는 밑면 대각선과 높이 모서리가 비스듬해 보여도 실제 3차원 공간에서는 정확히 90° 직각을 이룬다는 사실을 공간 직관으로 파악해야 합니다.",
+            "what_if_not_ko": "이 3차원 피타고라스 정리를 공간좌표계의 두 점 A(x₁, y₁, z₁), B(x₂, y₂, z₂) 사이의 거리 공식과 공간벡터의 크기 |AB⃗|로 일반화하면 어떻게 표현될까요?"
+        }
+
+    # 16. 일반 기하·대수·미적분·삼각함수 주제 (세부 단원별 정밀 발상 분기)
+    if "미분" in sub_domain_ko or "극한" in sub_domain_ko or "적분" in sub_domain_ko:
+        return {
+            "category_type": "calculus_trig",
+            "hypothesis_ko": f"'{ko_t}'에서 주어진 함수의 연속·극한·변화율 정의와 출발 조건",
+            "conclusion_ko": f"극한 과정과 기하학적 기울기·넓이 해석으로부터 '{ko_t}'의 핵심 정리가 엄밀히 성립한다는 결론",
+            "auxiliary_line_ko": "좌표평면 위의 곡선에서 두 점을 잇는 할선의 기울기(평균변화율 Δy/Δx) 또는 상합·하합 직사각형 분할을 작도하고 극한 이동을 관찰하는 해석기하 발상",
+            "proof_logic_ko": "할선이 접선으로 수렴하거나 분할 간격이 0으로 다가갈 때 부등식 조임정리(Squeeze Theorem)와 극한의 기본 성질에 의해 목표 도함수·정적분 관계식이 필연적으로 유도되는 원리",
+            "misconception_ko": "극한 기호(lim)를 취하기 전의 식 변형에서는 분모가 0이 아닌 상태(Δx ≠ 0)에서 약분·정리가 이루어진다는 정의역 전제 조건을 항상 명확히 확인해야 합니다.",
+            "what_if_not_ko": "만약 함수가 뾰족점(첨점)을 갖거나 불연속인 지점이 포함된다면 좌미분계수와 우미분계수는 어떻게 달라질까요?"
+        }
+    if "삼각" in sub_domain_ko:
+        return {
+            "category_type": "calculus_trig",
+            "hypothesis_ko": f"직각삼각형의 변의 비 또는 반지름이 1인 단위원 위의 동경 각도가 주어진 '{ko_t}'의 출발 조건",
+            "conclusion_ko": f"특수각 직각삼각형 작도와 단위원 대칭성으로부터 '{ko_t}'의 삼각비·삼각함수 성질이 항상 성립한다는 결론",
+            "auxiliary_line_ko": "단위원 위의 점에서 x축에 수선의 발을 내려 직각삼각형을 만들거나 정삼각형·정사각형을 대칭 분할하는 기하 보조선",
+            "proof_logic_ko": "직각삼각형의 피타고라스 정리와 닮음비 불변성(도형의 크기가 달라도 각이 같으면 변의 비율은 일정함) 및 단위원 좌표 정의(cos θ, sin θ)로부터 관계식을 도출하는 원리",
+            "misconception_ko": "각의 기준이 바뀔 때 밑변(이웃변)과 높이(대변)의 위치가 서로 바뀐다는 점과 호도법(라디안) 단위를 혼동하지 않도록 주의해야 합니다.",
+            "what_if_not_ko": "예각(0°＜θ＜90°)에서 증명한 이 삼각비 성질을 단위원 위의 일반각(제2·3·4사분면)으로 확장하면 부호는 어떻게 결정될까요?"
+        }
     is_alg = any(k in blob for k in ("방정식", "부등식", "다항식", "인수분해", "수열", "로그", "덧셈", "뺄셈", "곱셈", "나눗셈", "복소수", "허수", "켤레", "유리수", "무리수", "연립", "완전제곱", "근의")) and not any(k in blob for k in ("삼각형", "원", "기하", "평행", "각", "도형", "작도", "선분", "사이클로이드", "데자르그", "페르마", "타원", "포물선", "쌍곡선"))
     return {
         "category_type": "algebra" if is_alg else "geometry",
         "hypothesis_ko": f"'{ko_t}'에서 주어진 기하·대수적 정의와 출발 조건",
         "conclusion_ko": f"'{ko_t}'의 핵심 불변량과 관계식이 항상 성립한다는 결론",
         "auxiliary_line_ko": (
-            "주어진 식을 기본 정의에 따라 항별로 전개하고 동류항과 공통 인수를 대칭적으로 묶어 내는 대수적 발상"
+            "주어진 식을 기본 정의에 따라 동치 변형하고 수직선·좌표평면 그래프의 교점·부호 구간과 대칭 구조로 연결하는 발상"
             if is_alg
             else "주어진 도형의 대칭·합동·닮음 구조를 하나로 연결하는 폴리아의 제1보조선 및 단계별 분할"
         ),
         "proof_logic_ko": (
-            "등식의 성질과 연산 법칙(교환·결합·분배법칙)을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리"
+            "등식·부등식의 동치 성질과 연산 법칙을 단계별로 적용해 좌변에서 우변을 필연적으로 도출하는 원리"
             if is_alg
             else "단계별 작도를 통해 도형의 합동·닮음·넓이 불변량 성질로부터 결론을 필연적으로 도출하는 원리"
         ),
@@ -1547,9 +1602,24 @@ def internationalize_math_english_text(text: str) -> str:
         ("when the center is inside the circumference", "when the center lies inside the inscribed angle"),
         ("When the center is outside the circumference", "when the center lies outside the inscribed angle"),
         ("when the center is outside the circumference", "when the center lies outside the inscribed angle"),
+        ("circumferential angles", "inscribed angles"),
+        ("Circumferential angles", "Inscribed angles"),
+        ("Circumferential Angles", "Inscribed Angles"),
         ("circumferential angle", "inscribed angle"),
         ("Circumferential angle", "Inscribed angle"),
         ("Circumferential Angle", "Inscribed Angle"),
+        ("Circumference angles", "Inscribed angles"),
+        ("circumference angles", "inscribed angles"),
+        ("Circumference Angle", "Inscribed Angle"),
+        ("Circumference angle", "Inscribed angle"),
+        ("circumference angle", "inscribed angle"),
+        ("a inscribed angle", "an inscribed angle"),
+        ("A inscribed angle", "An inscribed angle"),
+        ("Center of Gravity", "Centroid"),
+        ("Continuation of Function", "Continuity of a Function"),
+        ("Continuation in high school", "Continuity in High School Mathematics"),
+        ("Definiton of", "Definition of"),
+        ("Quadratic Equation n Real Numbers", "Quadratic Equation in Real Numbers"),
         ("vertical bisectors", "perpendicular bisectors"),
         ("vertical bisector", "perpendicular bisector"),
         ("Vertical bisector", "Perpendicular bisector"),
