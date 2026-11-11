@@ -629,17 +629,108 @@ def sync_pedagogy_counts_to_index_html():
         print(f"[Index Pedagogy Sync Notice] {e}", flush=True)
 
 
+FOUNDATION_PID_FILE = ROOT_DIR / ".agents" / "foundation_daemon.pid"
+FOUNDATION_LOG_FILE = ROOT_DIR / ".agents" / "foundation_daemon.log"
+UPLOAD_ONLY_PID_FILE = ROOT_DIR / ".agents" / "upload_only_daemon.pid"
+
+
+def _is_daemon_pid_alive(pid_file: Path) -> bool:
+    if not pid_file.exists():
+        return False
+    try:
+        pid = int(pid_file.read_text(encoding="utf-8").strip())
+        if pid <= 0:
+            return False
+        if os.name == "nt":
+            import ctypes
+            handle = ctypes.windll.kernel32.OpenProcess(0x1000, False, pid)
+            if not handle:
+                return False
+            try:
+                exit_code = ctypes.c_ulong()
+                if not ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
+                    return False
+                if exit_code.value != 259:
+                    return False
+                buf = ctypes.create_unicode_buffer(512)
+                size = ctypes.c_ulong(512)
+                if ctypes.windll.kernel32.QueryFullProcessImageNameW(handle, 0, buf, ctypes.byref(size)):
+                    if "python" not in buf.value.lower():
+                        return False
+                return True
+            finally:
+                ctypes.windll.kernel32.CloseHandle(handle)
+        else:
+            os.kill(pid, 0)
+            return True
+    except Exception:
+        return False
+
+
+def _stop_standalone_upload_only_daemon() -> None:
+    """통합 Foundation 데몬이 가동될 때 중복 업로드 충돌 방지를 위해 단독 upload-only 데몬을 정리합니다."""
+    if _is_daemon_pid_alive(UPLOAD_ONLY_PID_FILE):
+        try:
+            up_pid = int(UPLOAD_ONLY_PID_FILE.read_text(encoding="utf-8").strip())
+            if up_pid and up_pid != os.getpid():
+                subprocess.run(["taskkill", "/F", "/PID", str(up_pid)], capture_output=True)
+                print(f"🔄 [Unified Handover] 단독 업로드 전용 데몬(PID={up_pid})을 종료하고 통합 렌더링+업로드 데몬으로 일원화합니다.", flush=True)
+        except Exception:
+            pass
+    try:
+        if UPLOAD_ONLY_PID_FILE.exists():
+            UPLOAD_ONLY_PID_FILE.unlink()
+    except Exception:
+        pass
+
+
+def spawn_detached_foundation_daemon() -> str:
+    import min7014_video_maker as vmaker
+    if not vmaker.video_production_allowed():
+        return ""
+    if _is_daemon_pid_alive(FOUNDATION_PID_FILE):
+        return FOUNDATION_PID_FILE.read_text(encoding="utf-8").strip()
+    _stop_standalone_upload_only_daemon()
+    py_exe = Path(sys.executable)
+    pyw_exe = py_exe.with_name("pythonw.exe")
+    runner = str(pyw_exe if pyw_exe.exists() else py_exe)
+    script = str(Path(__file__).resolve())
+    cmd_line = f'"{runner}" -X utf8 "{script}" --detached-worker'
+    ps_cmd = (
+        "$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create "
+        f"-Arguments @{{CommandLine='{cmd_line}'; CurrentDirectory='{str(ROOT_DIR)}'}}; "
+        "Write-Output $r.ProcessId"
+    )
+    res = subprocess.run(["powershell", "-NoProfile", "-Command", ps_cmd], capture_output=True, text=True)
+    pid_str = (res.stdout or "").strip().splitlines()[-1].strip()
+    FOUNDATION_PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+    FOUNDATION_PID_FILE.write_text(pid_str, encoding="utf-8")
+    return pid_str
+
+
 def run_continuous_foundation_loop(single_cycle=False):
     import min7014_video_maker as vmaker
     if not vmaker.video_production_allowed():
-        print(f"⏸️ [Rule 40 Gate] 대화 모델이 {vmaker.VIDEO_PRODUCTION_REQUIRED_MODEL}이 아니므로 영상 제작 데몬을 시작하지 않습니다.", flush=True)
+        print(f"⏸️ [Rule 40 Gate] 대화 모델이 {vmaker.VIDEO_PRODUCTION_REQUIRED_MODEL} 계열이 아니거나 allowed=false이므로 영상 제작 데몬을 시작하지 않습니다.", flush=True)
         return
+    if not single_cycle:
+        if _is_daemon_pid_alive(FOUNDATION_PID_FILE):
+            try:
+                cur_owner = int(FOUNDATION_PID_FILE.read_text(encoding="utf-8").strip())
+                if cur_owner != os.getpid():
+                    print(f"ℹ️ [Single-Instance Lock] 이미 통합 렌더링 데몬(PID={cur_owner})이 실행 중입니다.", flush=True)
+                    return
+            except Exception:
+                pass
+        FOUNDATION_PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+        FOUNDATION_PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
+        _stop_standalone_upload_only_daemon()
     ensure_video_maker_hooked()
     import mathteacher
     import pr
 
     print("=" * 78, flush=True)
-    print("🏛️ [mathedu Foundation Daemon] 수학홈페이지 근간(mathteacher 6대 수학교육 발전 + v6.0 4대 에디션 영상/숏폼) 상시 진화 가동!", flush=True)
+    print(f"🏛️ [mathedu Foundation Daemon | PID={os.getpid()}] 수학홈페이지 근간(mathteacher 6대 수학교육 발전 + v6.0 4대 에디션 영상/숏폼) 상시 진화 가동!", flush=True)
     print("=" * 78, flush=True)
 
     mathteacher.expand_pedagogy_from_min7014_vault(max_add_per_category=5)
@@ -673,5 +764,15 @@ def run_continuous_foundation_loop(single_cycle=False):
 
 
 if __name__ == "__main__":
+    if "--daemon-ensure" in sys.argv:
+        pid_s = spawn_detached_foundation_daemon()
+        if pid_s:
+            print(f"✅ [Foundation Daemon Active] PID={pid_s}")
+        sys.exit(0)
+    if "--detached-worker" in sys.argv:
+        FOUNDATION_LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        _lf = open(FOUNDATION_LOG_FILE, "a", encoding="utf-8", buffering=1)
+        sys.stdout = _lf
+        sys.stderr = _lf
     is_once = "--once" in sys.argv
     run_continuous_foundation_loop(single_cycle=is_once)

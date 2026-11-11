@@ -8026,15 +8026,15 @@ def get_next_unrendered_topic_slug(failed_slugs=None):
 
 
 VIDEO_PRODUCTION_GATE_FILE = ROOT_DIR / ".agents" / "video_production_gate.json"
-VIDEO_PRODUCTION_REQUIRED_MODEL = "Gemini 4 Argon"
+VIDEO_PRODUCTION_REQUIRED_MODEL = "Gemini 4"
 
 
 def video_production_allowed() -> bool:
     """
-    [Rule 40: 강의 영상 제작 전 과정 Gemini 4 Argon 전용 게이트]
+    [Rule 40: 강의 영상 제작 Gemini 4 계열(Argon / Carbon) 전용 게이트]
     대화 세션 에이전트가 기록한 .agents/video_production_gate.json의 session_model이
-    'Gemini 4 Argon'이고 allowed=true일 때만 영상 제작·업로드를 허용합니다.
-    파일이 없거나 읽을 수 없으면 안전하게 '중지'로 판정합니다.
+    'Gemini 4'(Argon, Carbon 등)이고 allowed=true일 때 영상 제작·렌더링·업로드를 허용합니다.
+    (Claude Opus 등 비-Gemini 4 모델이거나 파일이 없으면 안전하게 '중지'로 판정합니다.)
     """
     try:
         g = json.loads(VIDEO_PRODUCTION_GATE_FILE.read_text(encoding="utf-8"))

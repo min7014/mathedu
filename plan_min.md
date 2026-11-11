@@ -518,3 +518,7 @@ python -X utf8 pr.py status
   3. **국제 표준 수학 영어(`Rule 20`) 잔존 Konglish 0건 달성**: 대본 54건 및 유튜브·마스터클래스 메타데이터에 남아 있던 `Trinumber Line Theorem` ➔ `Theorem of Three Perpendiculars`, `circumference angle` ➔ `inscribed angle`, `Center of Gravity` ➔ `Centroid`, `Continuation of Function` ➔ `Continuity of a Function`, `a inscribed angle` ➔ `an inscribed angle`, `Definiton`·`좌극학` 오타를 전수 정화함.
   4. **페다고지 엔진(`assets/mathteacher_pedagogy_engine.json`) 수식 구멍 66건 복원 및 `index.html` 동기화**: 수식이 빈칸으로 탈락했던 항목(`'의 뜻과 지수법칙`, `Tangent of  at`, `Slope Field of ` 등)과 이중 중괄호(`{{AB}}`) 634개 레코드를 원문 수식 유니코드로 완전 복원하고 `index.html`에 반영함.
   5. **공개 퀴즈 UI 상표권(`Rule 24`) 정화 및 오프라인 패키지 212개 재빌드**: `mathedu-room.js`의 공개 버튼 문구 `(워들 포맷 / Wordle Format)`을 `(시각 이모지 포맷 / Visual Emoji Format)`으로 교체하고 `build_offline_quizzes.py`로 212개 오프라인 단독 HTML을 일괄 재빌드함.
+- **2026-11-11 11:06 회장님 텔레그램 지시(`"렌더링 데몬도 가동해"`) 반영 — `Rule 40` 게이트 `Gemini 4` 계열 확장 및 24/7 무중단 렌더링 워치독 가동**:
+  1. `min7014_video_maker.py`의 `VIDEO_PRODUCTION_REQUIRED_MODEL`을 `"Gemini 4"` 접두어(`Argon` 및 `Carbon` 모두 허용, `Claude Opus` 등 타 계열은 계속 차단)로 확장하고 `.agents/video_production_gate.json`을 `allowed=true`로 활성화함.
+  2. 중복 유튜브 API 업로드 경합을 원천 방지하기 위해 `mathedu_foundation_daemon.py` 기동 시 기존 단독 `--upload-only-daemon` 프로세스를 자동 종료·흡수하고 단일 인스턴스 커널 락(`foundation_daemon.pid`)으로 일원화함.
+  3. 대화창 종료나 PC 재부팅 시에도 렌더링 데몬이 중단되지 않도록 `--daemon-ensure` 및 Windows 작업 스케줄러 `\Mathedu_Foundation_24x7_Watchdog`(5분 주기 `pythonw.exe` 무소음 자가 복구)를 등록 완료함.
