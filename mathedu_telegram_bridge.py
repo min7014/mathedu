@@ -335,14 +335,15 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
 
     if low in ("!도움말", "/help", "!help"):
         return (
-            "💡 [크레딧 소모 0원 즉시 명령어 안내]\n"
-            "아래 단축어를 입력하시면 AI 크레딧을 단 1원도 쓰지 않고 파이썬이 즉시 처리합니다:\n"
-            "• !수익 (또는 /revenue) : 실시간 유튜브 구독자·조회수·YPP 달성률·상위 영상 조회\n"
-            "• !현황 (또는 /status) : 데몬 가동 상태·대기 MP4 재고·최근 Git 커밋 확인\n"
-            "• !업로드 (또는 /wave) : 4:2 황금비 유튜브 업로드 웨이브 즉시 1회 실행\n"
+            "💡 [크레딧 소모 0원 · 유튜브 최우선 수익화 단축 명령어]\n"
+            "아래 단축어를 입력하시면 AI 크레딧 0원으로 파이썬이 즉시 처리합니다:\n"
+            "• !수익 (또는 /revenue) : 실시간 유튜브 구독자·조회수·YPP 1/2단계 달성 현황·쇼츠 본편 바인딩 수\n"
+            "• !쇼츠연결 (또는 /linkshorts) : [API 쿼터 0] 스튜디오에서 쇼츠 8편에 1080p 본편 '관련 동영상' 즉시 연결\n"
+            "• !커뮤니티 (또는 /community) : [API 쿼터 0] 채널 커뮤니티 탭에 5초 수학 퀴즈 게시물 즉시 발행\n"
+            "• !업로드 (또는 /wave) : 4:2 황금비(장편 4 + Q-#Shorts/#Shorts 2) 업로드 웨이브 1회 실행\n"
+            "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
             "• !점검 (또는 /audit) : 전 문항·전 시스템 무결성 고속 스캔\n"
-            "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n"
-            "• !애드센스 ca-pub-XXXX : 홈페이지 웹 애드센스 및 ads.txt 즉시 활성화\n\n"
+            "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n\n"
             "※ 일반 대화나 새로운 개발·수정 지시는 평소처럼 편하게 말씀하시면 AI가 즉시 깨어나 수행합니다."
         )
 
@@ -381,18 +382,30 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
                 "checked_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             }
             (ROOT_DIR / ".agents" / "live_yt_stats.json").write_text(json.dumps(snap, ensure_ascii=False, indent=2), encoding="utf-8")
-            ads_cfg = json.loads((ROOT_DIR / "ad_config.json").read_text(encoding="utf-8")) if (ROOT_DIR / "ad_config.json").exists() else {}
-            ads_on = bool((ads_cfg.get("adsense") or {}).get("enabled"))
+            rel_p = ROOT_DIR / ".agents" / "studio_shorts_related_linked.json"
+            rel_cnt = len((json.loads(rel_p.read_text(encoding="utf-8")).get("linked_short_ids") or [])) if rel_p.exists() else 0
+            comm_p = ROOT_DIR / "youtube_uploads" / "community_posts" / "published_community_state.json"
+            comm_cnt = len((json.loads(comm_p.read_text(encoding="utf-8")).get("published_ids") or [])) if comm_p.exists() else 0
             return (
-                "💰 [크레딧 0원 · 실시간 유튜브 & 웹 수익화 리포트]\n"
+                "🎬 [크레딧 0원 · @min7014_ai 유튜브 단독 수익화 리포트]\n"
                 f"• 채널명: {ch['snippet'].get('title')}\n"
-                f"• 구독자: {subs:,}명 (1차 YPP 500명까지 -{max(0, 500-subs):,}명 / 정식 광고 1,000명까지 -{max(0, 1000-subs):,}명)\n"
+                f"• 구독자: {subs:,}명\n"
+                f"  ├ 1단계 YPP(500명·3,000시간 · 슈퍼땡스/멤버십 개시): -{max(0, 500-subs):,}명\n"
+                f"  └ 2단계 정식 광고 YPP(1,000명·4,000시간): -{max(0, 1000-subs):,}명\n"
                 f"• 총 조회수: {views:,}회 | 공개 영상: {vcnt:,}편\n"
-                f"• 홈페이지 웹 애드센스: {'🟢 활성' if ads_on else '⚪ 미연결 (!애드센스 ca-pub-XXXX 입력 시 즉시 활성)'}\n"
-                "• 일일 API 업로드 엔진: 4:2 황금비(장편 4 + 짝꿍 #Shorts 2) 1시간 간격 자동 분산 가동 중"
+                f"• [0-쿼터 스튜디오 직결] 본편 연결 완료 쇼츠: {rel_cnt}편 / 커뮤니티 퀴즈: {comm_cnt}건\n"
+                "• 일일 업로드 엔진: 4:2 황금비(1080p/마스터클래스 4 + 질문형 Q-#Shorts/#Shorts 2) 1시간 간격 자동 가동 중"
             )
         except Exception as e:
             return f"⚠️ 실시간 유튜브 통계 조회 오류: {e}"
+
+    if low in ("!쇼츠연결", "/linkshorts", "!linkshorts"):
+        out = run_shell([sys.executable, "-X", "utf8", "youtube_community_controller.py", "--link-shorts", "8"], timeout=240)
+        return f"🔗 [크레딧 0원 · API 쿼터 0 · 스튜디오 쇼츠 관련 동영상 바인딩 완료]\n{out[-1800:]}"
+
+    if low in ("!커뮤니티", "/community", "!community"):
+        out = run_shell([sys.executable, "-X", "utf8", "youtube_community_controller.py", "--post-community"], timeout=180)
+        return f"🗳️ [크레딧 0원 · API 쿼터 0 · 유튜브 커뮤니티 5초 퀴즈 발행 결과]\n{out[-1500:]}"
 
     if low in ("!업로드", "/wave", "!wave"):
         out = run_shell([sys.executable, "-X", "utf8", "finance.py", "cashflow-wave"], timeout=300)

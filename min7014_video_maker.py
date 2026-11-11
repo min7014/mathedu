@@ -7125,9 +7125,9 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             canvas = Image.new("RGB", (1080, 1920), (18, 12, 28))
             draw = ImageDraw.Draw(canvas)
 
-            # 1) 상단 질문하는 수업 #Shorts 헤더 (y=48..268)
-            draw.rounded_rectangle((40, 48, 1040, 268), radius=26, fill=(76, 5, 25), outline=(251, 191, 36), width=3)
-            draw.rounded_rectangle((68, 68, 680, 116), radius=16, fill=(2, 132, 199))
+            # 1) 상단 질문하는 수업 #Shorts 헤더 (y=48..268) — Rule 37 Deep Royal Indigo & Emerald-Teal
+            draw.rounded_rectangle((40, 48, 1040, 268), radius=26, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
+            draw.rounded_rectangle((68, 68, 680, 116), radius=16, fill=(13, 148, 136))
             badge_txt = "❓ 질문하는 수업 · 45초 발문 #Shorts" if lang_code == "ko" else "❓ Question-Asking Classroom #Shorts"
             draw.text((86, 76), badge_txt, fill=(255, 255, 255), font=font_sub)
 
@@ -7139,9 +7139,9 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
                 draw.text((72, 130 + li * 50), tl, fill=(255, 255, 255), font=font_top)
 
             # 진행 게이지
-            draw.rounded_rectangle((68, 242, 1012, 254), radius=6, fill=(136, 19, 55))
+            draw.rounded_rectangle((68, 242, 1012, 254), radius=6, fill=(30, 58, 138))
             prog_w = int(944 * (seq_idx / total_seqs))
-            draw.rounded_rectangle((68, 242, 68 + max(24, prog_w), 254), radius=6, fill=(251, 191, 36))
+            draw.rounded_rectangle((68, 242, 68 + max(24, prog_w), 254), radius=6, fill=(56, 189, 248))
 
             # 2) 상단-중앙 핵심 발문 플로팅 카드 (y=282..452)
             draw.rounded_rectangle((40, 282, 1040, 452), radius=22, fill=(240, 249, 255), outline=(14, 165, 233), width=3)
@@ -7212,14 +7212,14 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
                 # [v6.0] 서브 프레임 단위 연속 진행 게이지 & 키네틱 하이라이트 자막
                 sub_ratio = ((seq_idx - 1) + (fi_idx + 1) / max(1, len(doc_frames))) / max(1, total_seqs)
-                f_draw.rounded_rectangle((68, 242, 1012, 254), radius=6, fill=(136, 19, 55))
-                f_draw.rounded_rectangle((68, 242, 68 + max(24, int(944 * min(1.0, sub_ratio))), 254), radius=6, fill=(251, 191, 36))
+                f_draw.rounded_rectangle((68, 242, 1012, 254), radius=6, fill=(30, 58, 138))
+                f_draw.rounded_rectangle((68, 242, 68 + max(24, int(944 * min(1.0, sub_ratio))), 254), radius=6, fill=(56, 189, 248))
 
                 active_cap_idx = min(len(cap_lines) - 1, int((fi_idx / max(1, len(doc_frames))) * len(cap_lines))) if cap_lines else 0
                 for ci, cl in enumerate(cap_lines):
                     y_cl = 1445 + ci * 58
                     if ci == active_cap_idx:
-                        f_draw.rounded_rectangle((62, y_cl - 4, 1018, y_cl + 44), radius=10, fill=(76, 5, 25), outline=(251, 191, 36), width=2)
+                        f_draw.rounded_rectangle((62, y_cl - 4, 1018, y_cl + 44), radius=10, fill=(30, 58, 138), outline=(56, 189, 248), width=2)
                         f_draw.text((74, y_cl), cl, fill=(254, 240, 138), font=font_cap)
                     else:
                         f_draw.text((74, y_cl), cl, fill=(203, 213, 225), font=font_cap)
@@ -7678,13 +7678,14 @@ def upload_question_short_to_youtube(slug_key, langs=("ko",), privacy="public", 
         title_base = _ko_t if lc == "ko" else (sdoc.get("title_en") or _en_t or _ko_t)
         clean_t = _smart_concise_topic_title(latex_to_unicode_title(title_base), max_len=32, lang=lc)
         cat_type = (sdoc.get("teacher_proof_analysis") or {}).get("category_type", "geometry")
-        q_hook_ko = "왜 이 원리가 성립할까?" if cat_type in ("algebra", "number") else "어디에 보조선을 그어야 할까?"
-        q_hook_en = "Why does this hold true?" if cat_type in ("algebra", "number") else "Where is the auxiliary line?"
-        qsh_title = (
-            f"❓ [질문형 숏폼] {clean_t} — {q_hook_ko} #Shorts | @min7014_ai"
+        q_hook_ko = "왜 이 공식이 항상 성립할까?" if cat_type in ("algebra", "number") else "보조선 딱 1줄, 어디에 그을까?"
+        q_hook_en = "Why does this always hold?" if cat_type in ("algebra", "number") else "Where does the 1 key line go?"
+        qsh_title = sanitize_youtube_title(
+            f"❓ 잠깐! {q_hook_ko} | {clean_t} #Shorts #수학"
             if lc == "ko"
-            else f"❓ [Question #Shorts] {clean_t} — {q_hook_en} #Shorts | @min7014_ai"
-        )[:98]
+            else f"❓ Wait! {q_hook_en} | {clean_t} #Shorts #Math",
+            95,
+        )
         board_link = f"https://min7014.github.io/mathedu/video_board.html?slug={slug_key}&from=yt_qshorts"
         q_yt_u = (sdoc.get("question_youtube_urls") or {}).get(lc) or (sdoc.get("youtube_urls") or {}).get(lc) or "https://www.youtube.com/@min7014_ai"
         std_yt_u = (sdoc.get("youtube_urls") or {}).get(lc) or q_yt_u

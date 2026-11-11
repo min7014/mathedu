@@ -1643,6 +1643,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
 
         yt_test, _ = vmaker.get_available_youtube_upload_service()
         if yt_test is None:
+            # [0-Quota Studio Engine] API 쿼터 대기 시간에도 스튜디오 '쇼츠 관련 동영상 바인딩' 및 '12시간 주기 커뮤니티 퀴즈'는 무중단 가동!
+            try:
+                import youtube_community_controller as _ycc
+                _ycc.run_zero_quota_studio_growth_cycle(max_related_links=6, allow_community_post=True)
+            except Exception:
+                pass
             return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
 
         # 검색 수요가 가장 폭발적인 중·고등 핵심 기하·미적분·대수 키워드 가중치 부여
@@ -1689,6 +1695,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                     continue
                 sdoc = json.loads(sp.read_text(encoding="utf-8"))
                 yu = sdoc.get("youtube_urls") or {}
+                qyu = sdoc.get("question_youtube_urls") or {}
                 for lc in ("ko", "en"):
                     mp4_f = YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4"
                     if not (yu.get(lc) or "").strip() and mp4_f.exists() and mp4_f.stat().st_mtime >= r28_cut:
@@ -1698,9 +1705,18 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                             return 1
                         if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                             return 0
+                    q_mp4_f = QUESTION_DIR / f"{c_slug}_q_{lc}.mp4"
+                    if not (qyu.get(lc) or "").strip() and q_mp4_f.exists() and q_mp4_f.stat().st_mtime >= r28_cut:
+                        res_q = vmaker.upload_question_slug_to_youtube(c_slug, langs=(lc,), privacy="public")
+                        if res_q and res_q.get(lc):
+                            uploaded_items.append({"type": "question_1080p", "slug": c_slug, "lang": lc, "url": res_q[lc]})
+                            return 1
+                        if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                            return 0
             return 0
 
         def _try_upload_one_paired_short() -> int:
+            # 1순위: 채널 최고 조회수(599뷰, 평균 대비 18배!) 검증 포맷인 '질문형 Q-#Shorts' 우선 발행 (본편 존재 시)
             for s_slug in ordered_slugs:
                 if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                     break
@@ -1709,13 +1725,38 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                     continue
                 sdoc = json.loads(sp.read_text(encoding="utf-8"))
                 yu = sdoc.get("youtube_urls") or {}
+                qyu = sdoc.get("question_youtube_urls") or {}
+                qsu = sdoc.get("question_shorts_urls") or {}
                 su = sdoc.get("shorts_urls") or {}
                 for lc in ("ko", "en"):
+                    has_long = bool((yu.get(lc) or "").strip() or (qyu.get(lc) or "").strip())
+                    if not has_long:
+                        continue
+                    qsh_f = ROOT_DIR / "video_lectures" / "shorts" / f"{s_slug}_short_q_{lc}.mp4"
+                    if not (qsu.get(lc) or "").strip() and qsh_f.exists() and qsh_f.stat().st_mtime >= r28_cut:
+                        res_qsh = vmaker.upload_question_short_to_youtube(s_slug, langs=(lc,), privacy="public")
+                        if res_qsh and res_qsh.get(lc):
+                            uploaded_items.append({"type": "question_short_paired", "slug": s_slug, "lang": lc, "url": res_qsh[lc]})
+                            try:
+                                import youtube_community_controller as _ycc
+                                _ycc.link_shorts_related_videos_in_studio(max_links=2, headless=True)
+                            except Exception:
+                                pass
+                            return 1
+                        if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                            return 0
                     sh_f = YT_UPLOADS_DIR / "shorts" / f"{s_slug}_short_{lc}.mp4"
-                    if not (su.get(lc) or "").strip() and (yu.get(lc) or "").strip() and sh_f.exists() and sh_f.stat().st_mtime >= r28_cut:
+                    if not sh_f.exists():
+                        sh_f = ROOT_DIR / "video_lectures" / "shorts" / f"{s_slug}_short_{lc}.mp4"
+                    if not (su.get(lc) or "").strip() and sh_f.exists() and sh_f.stat().st_mtime >= r28_cut:
                         res_sh = vmaker.upload_short_to_youtube(s_slug, langs=(lc,), privacy="public")
                         if res_sh and res_sh.get(lc):
                             uploaded_items.append({"type": "pdf_promo_short_paired", "slug": s_slug, "lang": lc, "url": res_sh[lc]})
+                            try:
+                                import youtube_community_controller as _ycc
+                                _ycc.link_shorts_related_videos_in_studio(max_links=2, headless=True)
+                            except Exception:
+                                pass
                             return 1
                         if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                             return 0
@@ -1773,6 +1814,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                 print(f"💬 [YouTube Community Inbox Auto-Engaged] Replied to {len(engaged_comments)} viewer comments!", flush=True)
         except Exception:
             engaged_comments = []
+
+        try:
+            import youtube_community_controller as _ycc
+            _ycc.run_zero_quota_studio_growth_cycle(max_related_links=6, allow_community_post=True)
+        except Exception:
+            pass
 
         if total_uploaded > 0:
             analyze_revenue_pipeline()
