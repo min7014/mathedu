@@ -46,6 +46,7 @@ FORBIDDEN_TRADEMARK_PATTERNS = [
     (r"\bIMO\b", "외부 경시 명칭 'IMO'"),
     (r"\bNano\s*Banana\b", "구글 내부 모델 브랜드명 'Nano Banana' 대외 노출"),
     (r"\b나노\s*바나나\b|\b나노바나나\b", "구글 모델 브랜드명 '나노바나나' 대외 노출"),
+    (r"\bGoogle\s*Flow\b|\b구글\s*플로우\b|\bVeo\s*3(?:\.\d+)?\b|\bGemini\s*Omni\b", "구글 내부 영상 도구명(Google Flow/Veo/Omni) 대외 노출"),
     (r"\b3Blue1Brown\b|\bVeritasium\b|\bKurzgesagt\b|\bMindYourDecisions\b|\bMathologer\b|\b깨봉수학\b", "타 유튜브 채널 상표 노출"),
     (r"\bDuolingo\b|\bWordle\b|\bNetflix\b", "타사 플랫폼 상표 노출"),
 ]
@@ -68,6 +69,7 @@ FORBIDDEN_TRADING_DOMAIN_RE = re.compile(
 PUBLIC_GENERATOR_MODULES = [
     "exam_hybrid_creator.py",
     "nano_banana_cinema_creator.py",
+    "google_flow_controller.py",
     "finance.py",
     "min7014_video_maker.py",
     "creative_idea_cinema.py",
@@ -89,6 +91,7 @@ def sanitize_and_gate_upload_payload(title: str, description: str, tags: list[st
 
     extra_subs = [
         (r"\bNano\s*Banana\b|나노\s*바나나|나노바나나", "시네마틱 기하"),
+        (r"\bGoogle\s*Flow\b|구글\s*플로우|\bVeo\s*3(?:\.\d+)?\b|\bGemini\s*Omni\b", "시네마틱 모션"),
         (r"\b3Blue1Brown\b|\bVeritasium\b|\bKurzgesagt\b|\bMindYourDecisions\b|\bMathologer\b|깨봉수학", ""),
         (r"\bDuolingo\b|\bWordle\b|\bNetflix\b", ""),
         (r"민은기\s*선생님의\s*수학자료실_AI|Min's\s*Math\s*Lab\s*AI", "@min7014_ai"),

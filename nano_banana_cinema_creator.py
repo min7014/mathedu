@@ -34,11 +34,13 @@ from PIL import Image, ImageChops, ImageDraw, ImageEnhance
 ROOT_DIR = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT_DIR / "video_lectures" / "scripts"
 NB_ASSETS_DIR = ROOT_DIR / "youtube_uploads" / "nano_banana_assets"
+FLOW_CLIPS_DIR = ROOT_DIR / "youtube_uploads" / "flow_clips"
 NB_OUT_DIR = ROOT_DIR / "youtube_uploads" / "nano_banana"
 WEEKLY_CAP_STATE_FILE = ROOT_DIR / ".agents" / "nano_banana_weekly_cap.json"
-# [Rule 52 회장님 확정 지침]: 구글 나노바나나는 전체 양산용이 아니라 '주 2~3편 대표 킬러 시리즈'에만 엄선 활용!
-MAX_NANO_BANANA_WEEKLY_EPISODES = 3
+# [Rule 52 Google Flow ULTRA 업그레이드 확정]: Antigravity 에이전트 쿼터 0소모(Google Flow ULTRA 직접 구동)로 주 2~3편 제한 전면 해제!
+MAX_NANO_BANANA_WEEKLY_EPISODES = 50
 NB_ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+FLOW_CLIPS_DIR.mkdir(parents=True, exist_ok=True)
 NB_OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # 2012100303 -> 2012100304(예각 접현각 증명) 에셋 호환 보장
@@ -118,6 +120,31 @@ NANO_BANANA_BLUEPRINTS = [
         "act3_en": "Because base ratios equal interior triangle area ratios around the center point, multiplying 2 over 3 times 3 over 4 times AF over FB equals 1—canceling 3 gives AF to FB equals 2 to 1 in five seconds! Subscribe now for daily visual proofs!",
         "comment_quiz_ko": "🧩 [5초 직관 암산] 만약 BD:DC = 1:2이고 CE:EA = 2:5일 때 세 직선이 한 점에서 만나려면 AF:FB는 몇 대 몇이어야 할까요? 댓글로 도전! 🤩👇",
         "comment_quiz_en": "🧩 [5-Sec Check] If BD:DC = 1:2 and CE:EA = 2:5, what ratio AF:FB makes the three beams meet at a single point? Comment below! 🤩👇",
+    },
+    {
+        "slug": "2012093001",
+        "art_file": "nb_2012093001_inscribed.png",
+        "flow_clip": "2012093001_flow.mp4",
+        "badge_ko": "★ 천체 원형 링 광학 미스터리 · 중심각과 원주각 2배 불변량",
+        "badge_en": "★ Sapphire Astrolabe Mystery · Inscribed vs Central Angle",
+        "thumb_hook_ko": ["중심각이 84°일 때", "지름 1줄로 3초 암산!"],
+        "thumb_hook_en": ["CENTRAL = 84°?", "1 DIAMETER = 3s!"],
+        "problem_label_ko": "원 중심에 모인 황금 빛줄기 각이 84°일 때, 원 꼭대기에 모인 초록 빛줄기 각 x는 몇 도일까요?",
+        "problem_label_en": "Two golden beams meet at the center at 84°. What is the emerald angle x at the top of the circle?",
+        "figure_caption_ko": "중심 황금각 = 84°  →  꼭대기 원주각 x = ?",
+        "figure_caption_en": "Central Beam = 84°  →  Top Inscribed Angle x = ?",
+        "answer_label_ko": "중심을 꿰뚫는 지름 보조선 1줄 → 이등변삼각형 외각 2배 원리!  x = 84° ÷ 2 = 42° (3초 완결!)",
+        "answer_label_en": "1 Diameter Through Center → Isosceles Exterior Angle Principle!  x = 84° ÷ 2 = 42°!",
+        "title_ko": "⚡ 원만 나오면 막히는 이유! 중심을 지나는 지름 보조선 1줄 3초 암산법 | 원주각과 중심각의 관계 시각적 증명",
+        "title_en": "⚡ Never Memorize Circle Rules Blindly! One Diameter Solves 84° in 3s | Inscribed Angle Visual Proof",
+        "short_title_ko": "❓ 원 중심 황금각이 84°일 때 꼭대기 초록각 x는? 지름 보조선 1줄 3초 해법! #Shorts",
+        "short_title_en": "❓ Stop Scrolling! Central Beam Is 84°—Spot Top Angle x in 3 Seconds! #Shorts",
+        "act1_ko": "잠깐! 사파이어 원의 같은 두 점에서 출발한 황금 빛줄기가 중심에서 84도를 이룰 때, 원 꼭대기에 모인 초록 빛줄기 각 x가 왜 언제나 정확히 절반이 되는지 지름 보조선 한 줄로 3초 만에 보이시나요?",
+        "act1_en": "Stop scrolling! When two golden light beams meet at the center of a sapphire circle at 84 degrees, can you see in three seconds—using just one diameter line—why the emerald angle x at the top is always exact half?",
+        "act3_ko": "원 꼭대기에서 중심을 꿰뚫는 지름 보조선 딱 한 줄을 그으면 반지름이 같은 두 이등변삼각형으로 쪼개지고 외각은 밑각의 두 배가 되므로, 중심각 84도의 절반인 정답 42도가 3초 만에 튀어나옵니다! 눈으로 깨치는 오리지널 기하 직관, 지금 바로 채널 구독을 눌러 두세요!",
+        "act3_en": "Drawing a single diameter from the top vertex through the center splits the figure into two isosceles triangles where each central exterior angle doubles its base angle—giving 84 divided by 2 equals 42 degrees in three seconds! Hit Subscribe right now for daily visual proofs!",
+        "comment_quiz_ko": "🧩 [3초 직관 암산] 만약 원 중심에서 만나는 황금 빛줄기 중심각이 114°라면, 같은 호에 대한 원주각 x는 몇 도일까요? 암산 정답을 댓글로 남겨보세요! 🤩👇",
+        "comment_quiz_en": "🧩 [3-Sec Check] If the central golden angle is 114°, what is the inscribed angle x subtending the same arc? Drop your mental-math answer in the comments! 🤩👇",
     },
 ]
 
@@ -212,6 +239,14 @@ def render_nano_banana_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -
     return out_png
 
 
+def _resolve_flow_clip(bp: dict) -> Path | None:
+    cand_name = bp.get("flow_clip") or f"{bp['slug']}_flow.mp4"
+    p = FLOW_CLIPS_DIR / cand_name
+    if p.exists() and p.stat().st_size > 150_000:
+        return p
+    return None
+
+
 def _encode_cinematic_art_card(
     art_img: Image.Image,
     hud_rgba: Image.Image,
@@ -221,19 +256,69 @@ def _encode_cinematic_art_card(
     ffprobe_exe: str,
     width: int = 1920,
     height: int = 1080,
+    flow_clip_mp4: Path | None = None,
 ):
     """
-    나노바나나 배경 오브제 레이어에만 부드러운 24fps 시네마틱 줌 드리프트(1.00x -> 1.045x)를 부여하고,
-    전면의 파이썬 정밀 수식·텍스트 HUD 레이어(RGBA)는 흔들림 없이 칼같이 선명하게 합성합니다.
+    [Google Flow ULTRA 실사 광학 모션 비디오 우선 합성 + 정적 줌 드리프트 폴백]:
+    - `flow_clip_mp4`(Veo 3.1 양단 키프레임 고정 8초 실사 모션 비디오)가 존재하면
+      실제 흐르는 광학 모션 클립을 무한 심리스 루프(`-stream_loop -1`)로 배경에 깔고,
+      전면의 파이썬 정밀 수식·텍스트 HUD 레이어(RGBA)를 흔들림 없이 칼같이 선명하게 합성합니다.
+    - 모션 클립이 아직 없을 경우 고해상도 정지 오브제에 부드러운 24fps 줌 드리프트를 부여합니다.
     """
     import min7014_video_maker as vmaker
 
     dur = max(3.8, vmaker.get_media_duration_seconds(mp3_path, ffprobe_exe) + 0.35)
+    hud_png = out_mp4.with_name(out_mp4.stem + "_hud.png")
+    hud_rgba.save(hud_png)
+
+    if flow_clip_mp4 is not None and flow_clip_mp4.exists():
+        if width == 1920 and height == 1080:
+            filt = (
+                f"[0:v]scale=1920:1080:flags=lanczos,setsar=1,fps=24[bg];"
+                f"[bg][1:v]overlay=0:0:format=auto,format=yuv420p[v]"
+            )
+            cmd = [
+                ffmpeg_exe, "-y",
+                "-stream_loop", "-1", "-t", f"{dur:.3f}", "-i", str(flow_clip_mp4),
+                "-loop", "1", "-t", f"{dur:.3f}", "-i", str(hud_png),
+                "-i", str(mp3_path),
+                "-filter_complex", filt,
+                "-map", "[v]", "-map", "2:a",
+                "-c:v", "libx264", "-preset", "ultrafast", "-crf", "19",
+                "-r", "24",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
+                "-shortest", str(out_mp4),
+            ]
+            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return dur
+        elif width == 1080 and height == 1920:
+            bg_png = out_mp4.with_name(out_mp4.stem + "_vbg.png")
+            Image.new("RGB", (1080, 1920), (10, 16, 34)).save(bg_png)
+            filt = (
+                f"[0:v]fps=24[base];"
+                f"[1:v]scale=1920:1080:flags=lanczos,crop=1320:1080:20:0,scale=1000:940:flags=lanczos,setsar=1,fps=24[mclip];"
+                f"[base][mclip]overlay=40:240:format=auto[mid];"
+                f"[mid][2:v]overlay=0:0:format=auto,format=yuv420p[v]"
+            )
+            cmd = [
+                ffmpeg_exe, "-y",
+                "-loop", "1", "-t", f"{dur:.3f}", "-i", str(bg_png),
+                "-stream_loop", "-1", "-t", f"{dur:.3f}", "-i", str(flow_clip_mp4),
+                "-loop", "1", "-t", f"{dur:.3f}", "-i", str(hud_png),
+                "-i", str(mp3_path),
+                "-filter_complex", filt,
+                "-map", "[v]", "-map", "3:a",
+                "-c:v", "libx264", "-preset", "ultrafast", "-crf", "19",
+                "-r", "24",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
+                "-shortest", str(out_mp4),
+            ]
+            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return dur
+
     n_frames = max(24, int(dur * 24) + 6)
     bg_png = out_mp4.with_name(out_mp4.stem + "_bg.png")
-    hud_png = out_mp4.with_name(out_mp4.stem + "_hud.png")
     art_img.resize((width, height), Image.Resampling.LANCZOS).save(bg_png)
-    hud_rgba.save(hud_png)
 
     filt = (
         f"[0:v]scale={int(width*1.12)}:{int(height*1.12)},"
@@ -313,6 +398,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
     pdf_bytes, _ = vmaker.load_or_build_topic_pdf_bytes(sdoc.get("pdf_url", ""), slug)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     art_16x9 = _load_master_art(bp)
+    flow_clip = _resolve_flow_clip(bp)
 
     ffmpeg_exe = shutil.which("ffmpeg")
     ffprobe_exe = shutil.which("ffprobe")
@@ -367,7 +453,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         act1_mp3 = tmp_dir / "long_act1.mp3"
         act1_seg = tmp_dir / "long_act1.mp4"
         vmaker.synthesize_tts_mp3_sync(bp["act1_en"] if is_en else bp["act1_ko"], voice_name, act1_mp3, rate="+8%")
-        _encode_cinematic_art_card(art_16x9, hud1, act1_mp3, act1_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080)
+        _encode_cinematic_art_card(art_16x9, hud1, act1_mp3, act1_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080, flow_clip_mp4=flow_clip)
         long_segs.append(act1_seg)
 
         # --- Act 2: min7014.github.io 오리지널 원문 PDF + Rule 43 메이플 가상 지휘봉 ---
@@ -448,7 +534,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         act3_mp3 = tmp_dir / "long_act3.mp3"
         act3_seg = tmp_dir / "long_act3.mp4"
         vmaker.synthesize_tts_mp3_sync(bp["act3_en"] if is_en else bp["act3_ko"], voice_name, act3_mp3, rate="+8%")
-        _encode_cinematic_art_card(art_16x9, hud3, act3_mp3, act3_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080)
+        _encode_cinematic_art_card(art_16x9, hud3, act3_mp3, act3_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080, flow_clip_mp4=flow_clip)
         long_segs.append(act3_seg)
 
         concat_long = tmp_dir / "concat_long.txt"
@@ -489,7 +575,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         sh1_mp3 = tmp_dir / "sh1.mp3"
         sh1_seg = tmp_dir / "sh1.mp4"
         vmaker.synthesize_tts_mp3_sync(bp["act1_en"] if is_en else bp["act1_ko"], voice_name, sh1_mp3, rate="+18%")
-        _encode_cinematic_art_card(s1_bg, s1_hud, sh1_mp3, sh1_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920)
+        _encode_cinematic_art_card(s1_bg, s1_hud, sh1_mp3, sh1_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920, flow_clip_mp4=flow_clip)
         sh_segs.append(sh1_seg)
 
         # Scene 2 & 3: 원본 min7014.github.io 핵심 슬라이드 2장
@@ -539,7 +625,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         sh4_mp3 = tmp_dir / "sh4.mp3"
         sh4_seg = tmp_dir / "sh4.mp4"
         vmaker.synthesize_tts_mp3_sync(bp["act3_en"] if is_en else bp["act3_ko"], voice_name, sh4_mp3, rate="+18%")
-        _encode_cinematic_art_card(s4_bg, s4_hud, sh4_mp3, sh4_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920)
+        _encode_cinematic_art_card(s4_bg, s4_hud, sh4_mp3, sh4_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920, flow_clip_mp4=flow_clip)
         sh_segs.append(sh4_seg)
 
         concat_sh = tmp_dir / "concat_sh.txt"
