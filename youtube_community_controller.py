@@ -70,9 +70,7 @@ def _release_robot_lock() -> None:
 def _launch_robot_context(p, headless: bool = True):
     ROBOT_PROFILE_DIR.mkdir(parents=True, exist_ok=True)
     extra_args = ["--disable-blink-features=AutomationControlled"]
-    if headless:
-        extra_args.extend(["--window-position=-32000,-32000", "--silent-launch", "--no-startup-window"])
-    else:
+    if not headless:
         extra_args.append("--start-maximized")
     for ch_name in ("chrome", "msedge"):
         try:

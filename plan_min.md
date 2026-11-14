@@ -356,6 +356,7 @@ python -X utf8 pr.py status
 - ✅ **45. 24/7 무충돌 2계층 텔레그램(`@anti7014_bot`) 상시 연결 아키텍처 원칙 (`2026-11-11` 신설)**
 - ✅ **46. AI 크레딧 비용 80%+ 절감 및 실질적 유튜브·웹 현금흐름 자생 아키텍처 원칙 (`2026-11-11` 신설)**
 - ✅ **47. 유튜브(`@min7014_ai`) 단독 최우선 수익 창출 및 0-쿼터 YouTube Studio 직결 성장 원칙 (`2026-11-11` 확정)**
+- ✅ **48. 백그라운드 프로세스 및 외부 도구 완전 무창(Zero-Popup / `CREATE_NO_WINDOW`) 실행 절대 원칙 (`2026-11-14` 확정)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
@@ -548,4 +549,7 @@ python -X utf8 pr.py status
   - `finance.py`의 4:2 황금비 엔진에 채널 내 최고 조회수(599뷰, 평균 대비 18배)가 입증된 **`질문형 Q-#Shorts`(1,065편 대기)** 및 **`질문하는 수업 1080p`(2,032편 대기)** 업로드를 최우선 순위로 해금함.
 - **[2026-11-14 추가 확정 · 정책 48] 전 시스템 백그라운드 완전 무창(Zero-Popup / `CREATE_NO_WINDOW`) 아키텍처 전환 완료**:
   - 원인 규명: `pythonw.exe`(콘솔 없는 GUI 프로세스)로 가동 중인 24/7 데몬이 하위 콘솔 도구(`ffmpeg`, `ffprobe`, `git`, `powershell`, Playwright `node.exe`)를 `CREATE_NO_WINDOW` 없이 호출할 때 Windows 커널이 새 콘솔 창을 순간 생성하던 현상 및 `\Mathedu_Chairman_7AM_Briefing` 스케줄러가 `python.exe`로 등록되어 있던 문제를 전수 적출함.
-  - 해결 조치: ① 전역 서브프로세스 무창 후킹 모듈(`silent_subprocess.py`) 구축 및 전체 17개 실행 스크립트 일괄 적용, ② `powershell.exe` 경유 없는 순수 `pythonw.exe` 직접 스폰 및 Win32 `TerminateProcess` 전환, ③ `\Mathedu_*` 3대 작업 스케줄러 전수 `pythonw.exe` + `Hidden=True` 적용 완료.
+  - 해결 조치: ① 전역 서브프로세스 무창 후킹 모듈(`silent_subprocess.py`) 구축 및 전체 17개 실행 스크립트 일괄 적용, ② `powershell.exe` 경유 없는 순수 `pythonw.exe` 직접 스폰 및 Win32 `TerminateProcess` 전환, ③ `\Mathedu_*` 3대 작업 스케줄러 전수 `pythonw.exe` + `Hidden=True` 적용 완료 (Playwright `launch_persistent_context`는 CDP 초기 타깃 블로킹 방지를 위해 `headless=True` + `CREATE_NO_WINDOW`로 구동).
+- **[2026-11-14 추가 확정 · 정책 49] YouTube Studio 실측 데이터 기반 `@min7014_ai` YPP 수익화 돌파 전략 v2.0 가동**:
+  - 개설 11.5일 차 전수 코호트(`455편`, API `6,638뷰`) 및 YouTube Studio 수익창출·분석 탭 실측치(`유효 시청시간 1시간`, `유효 Shorts 조회수 540회`, `YouTube 검색 유입 23.0%`, `계속 시청함 14.6% vs 이탈함 85.4%`) 정밀 진단 완료.
+  - 코드 즉시 반영 완료: ① 구독자 200명 달성 전 48분 합본 신규 업로드 일시 동결(`mc_daily_cap = 0`) 및 검색 완주 최적 구간인 **`3~10.5분(180~630초)` 핵심 본편(일 3편) + 한/영 `Q-#Shorts`(일 3편)** 집중 배분(`finance.py`), ② 쇼츠 `Scene 1` 첫 1.5초 긴 단원명 낭독 폐지 및 3초 직관 발문 훅 전면 배치(`min7014_video_maker.py`), ③ 고RPM 영어권 `q_short_en` 온디맨드 자동 렌더링·업로드 해금, ④ 썸네일 조사 절단(`"중심각의 크기의"`) 3줄 탄력 수렴 및 마스터클래스 상단 배지 좌표(`28, 34, 648, 108`) 수정 완료.

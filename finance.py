@@ -363,14 +363,14 @@ def _render_masterclass_custom_thumbnail(mc_slug: str, title_text: str, duration
                     break
                 except Exception:
                     pass
-        # 상단 골드 리본 배지
-        draw.rounded_rectangle((28, 22, 640, 86), radius=14, fill=(15, 23, 42), outline=(251, 191, 36), width=4)
+        # 상단 골드 리본 배지 (원본 썸네일의 [38, 42, 548, 102] 시안 배지를 완전히 덮어 이중 테두리 겹침 원천 차단)
+        draw.rounded_rectangle((28, 34, 648, 108), radius=16, fill=(15, 23, 42), outline=(251, 191, 36), width=4)
         badge_txt = (
             f"FULL MASTERCLASS ({duration_min} MIN) | 5 PROOFS"
             if lang_code == "en"
             else f"정주행 마스터클래스 ({duration_min}분 연속강의)"
         )
-        draw.text((48, 36), badge_txt, font=font_b, fill=(251, 191, 36))
+        draw.text((48, 52), badge_txt, font=font_b, fill=(251, 191, 36))
         base_img.save(out_thumb)
         return str(out_thumb.relative_to(ROOT_DIR)).replace("\\", "/")
     except Exception:
@@ -1671,8 +1671,11 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                     q_dur = float(((sdoc.get("question_classroom_packages") or {}).get("ko") or {}).get("duration_sec") or 0.0)
                     best_dur = max(ko_dur, q_dur)
                     p_cnt = int(sdoc.get("page_count") or len(sdoc.get("pages") or []))
-                    is_midroll = 1 if best_dur >= 480.0 else 0
-                    slug_candidates.append((has_high_search, is_midroll, best_dur, p_cnt, sp.stem))
+                    # [Rule 49 — YouTube Studio 실측 데이터 기반 정렬]:
+                    # 40분+ 과잉 장편 대신 검색 유입(23%)과 시청 지속률이 가장 높은 '3~10.5분(180~630초)' 핵심 증명을 최우선 배치!
+                    is_search_sweet_spot = 1 if 180.0 <= best_dur <= 630.0 else 0
+                    dist_from_ideal = abs(best_dur - 330.0) if best_dur > 0 else 9999.0
+                    slug_candidates.append((has_high_search, is_search_sweet_spot, -dist_from_ideal, p_cnt, sp.stem))
             except Exception:
                 continue
         slug_candidates.sort(key=lambda x: (-x[0], -x[1], -x[2], -x[3], x[4]))
@@ -1683,10 +1686,19 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
         eff_cap = max(1, min(int(max_wave_uploads), 3 if force_immediate else 2))
         r28_cut = datetime(2026, 11, 8, 20, 0, 0).timestamp()
 
-        # ★ 4:2 황금비 교차 배분:
-        #   1순위: 오늘 아직 #Shorts가 부족(shorts < 2)하고 본편이 올라간 짝꿍 #Shorts가 있으면 1편 즉시 발행 (구독자·노출 점화!)
-        #   2순위: 검색 유입 단일 주제 1080p 본편 (std < 2) 1편 발행 (동시에 다음 웨이브의 짝꿍 #Shorts 해금!)
-        #   3순위: 장편 마스터클래스 (mc < 2) 1편 발행 (유효 공개 시청시간 15배 증폭!)
+        # [Rule 49 — 구독자 200명 미만 구간 48분 합본 일시 동결 & 3:3 검색형 본편+한/영 Q-#Shorts 집중 전략]:
+        # 이미 채널에 152편의 마스터클래스가 게시된 상태이므로 초기 구독자 200명 달성 전에는 신규 합본 물량 희석을 멈추고,
+        # 검색 유입(23.0%)이 바로 유효 시청시간으로 쌓이는 '3~10분 본편(일 3편) + 짝꿍 한/영 Q-#Shorts(일 3편)'에 100% 집중!
+        subs_live = 0
+        try:
+            _aud_p = ROOT_DIR / "youtube_uploads" / "live_channel_audit.json"
+            if _aud_p.exists():
+                subs_live = int((json.loads(_aud_p.read_text(encoding="utf-8")).get("subscribers") or 0))
+        except Exception:
+            subs_live = 0
+        mc_daily_cap = 0 if subs_live < 200 else (1 if subs_live < 500 else 2)
+        std_daily_cap = 3 if mc_daily_cap == 0 else 2
+        shorts_daily_cap = 3 if mc_daily_cap == 0 else 2
 
         def _try_upload_one_std() -> int:
             for c_slug in ordered_slugs:
@@ -1718,7 +1730,8 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
             return 0
 
         def _try_upload_one_paired_short() -> int:
-            # 1순위: 채널 최고 조회수(599뷰, 평균 대비 18배!) 검증 포맷인 '질문형 Q-#Shorts' 우선 발행 (본편 존재 시)
+            # 1순위: 채널 최고 조회수(602뷰, 평균 40.3뷰 1위!) 포맷인 '질문형 Q-#Shorts'(한국어 + 고RPM 영어) 우선 발행
+            # 영어권 std_short_en 59편이 0뷰 0개(평균 39.1뷰)로 검증된 반면 q_short_en은 3편뿐이므로 미렌더 시 즉시 생성 후 업로드!
             for s_slug in ordered_slugs:
                 if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                     break
@@ -1735,6 +1748,11 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                     if not has_long:
                         continue
                     qsh_f = ROOT_DIR / "video_lectures" / "shorts" / f"{s_slug}_short_q_{lc}.mp4"
+                    if not (qsu.get(lc) or "").strip() and (not qsh_f.exists() or qsh_f.stat().st_mtime < r28_cut):
+                        try:
+                            vmaker.render_question_short_vertical(s_slug, lc)
+                        except Exception:
+                            pass
                     if not (qsu.get(lc) or "").strip() and qsh_f.exists() and qsh_f.stat().st_mtime >= r28_cut:
                         res_qsh = vmaker.upload_question_short_to_youtube(s_slug, langs=(lc,), privacy="public")
                         if res_qsh and res_qsh.get(lc):
@@ -1764,29 +1782,29 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                             return 0
             return 0
 
-        # Step 1: 단일 주제 검색형 1080p 본편 1편 선업로드 (std < 2일 때 우선하여 짝꿍 #Shorts 즉시 공급)
-        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["std"] < 2:
+        # Step 1: 단일 주제 검색형 3~10분 1080p 본편 1편 선업로드 (std < std_daily_cap)
+        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["std"] < std_daily_cap:
             n_s = _try_upload_one_std()
             if n_s > 0:
                 total_uploaded += n_s
                 bal["std"] += n_s
 
-        # Step 2: 본편 직결 홍보 #Shorts 1편 업로드 (shorts < 2)
-        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["shorts"] < 2:
+        # Step 2: 본편 직결 한/영 Q-#Shorts · #Shorts 1편 업로드 (shorts < shorts_daily_cap)
+        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["shorts"] < shorts_daily_cap:
             n_sh = _try_upload_one_paired_short()
             if n_sh > 0:
                 total_uploaded += n_sh
                 bal["shorts"] += n_sh
 
-        # Step 3: 장편 마스터클래스 1편 업로드 (mc < 2)
-        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["mc"] < 2:
+        # Step 3: 장편 마스터클래스 업로드 (구독자 200명 이상 달성 시에만 가동하여 초기 채널 CTR 보호!)
+        if mc_daily_cap > 0 and total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["mc"] < mc_daily_cap:
             mc_cnt = upload_pending_masterclass_to_youtube(max_uploads=1)
             if mc_cnt > 0:
                 total_uploaded += mc_cnt
                 bal["mc"] += mc_cnt
                 uploaded_items.append({"type": "pdf_masterclass", "count": mc_cnt})
 
-        # Step 4: 일일 기본 6슬롯(2+2+2) 달성 후 잔여 쿼터가 열려 있을 경우 4:2 비율 유지 추가 배분
+        # Step 4: 일일 기본 6슬롯 달성 후 잔여 쿼터가 열려 있을 경우 1:1(본편:쇼츠) 비율 유지 추가 배분
         if total_uploaded == 0 and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and (bal["std"] + bal["shorts"] + bal["mc"] >= 6):
             n_extra_std = _try_upload_one_std()
             if n_extra_std > 0:

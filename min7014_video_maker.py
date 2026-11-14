@@ -3297,19 +3297,25 @@ def generate_youtube_thumbnail_720p(doc, script_doc, lang_code, out_png_path):
         draw.text((40, y_h), h_line, fill=col_fill, font=font_big)
         y_h += 84
 
-    # 중간 주제명 박스
+    # 중간 주제명 박스 (절단 방지: 2줄 이내 자연 수렴 우선 + 3줄 발생 시 3줄 모두 표시하여 '중심각의 크기의' 같은 끝단 잘림 0% 보장)
     ko_split_t, en_split_t = split_bilingual_title(script_doc.get("title", ""))
-    ko_main_part = _smart_concise_topic_title(latex_to_unicode_title(ko_split_t).strip(), max_len=32, lang="ko")
-    en_main_part = _smart_concise_topic_title(latex_to_unicode_title((script_doc.get("title_en") or en_split_t or ko_main_part).split("—")[0].strip()), max_len=40, lang="en")
+    ko_main_part = _smart_concise_topic_title(latex_to_unicode_title(ko_split_t).strip(), max_len=28, lang="ko")
+    en_main_part = _smart_concise_topic_title(latex_to_unicode_title((script_doc.get("title_en") or en_split_t or ko_main_part).split("—")[0].strip()), max_len=38, lang="en")
     main_title = en_main_part if is_en else ko_main_part
-    wrapped_t = textwrap.wrap(main_title, width=22 if is_en else 15)[:2]
+    wrapped_t = textwrap.wrap(main_title, width=22 if is_en else 15)[:3]
 
-    draw.rounded_rectangle([38, 330, 568, 488], radius=18, fill=(17, 28, 56), outline=(56, 189, 248), width=2)
-    font_t = get_font_for_lang("ko", 32 if is_en else 36, bold=True)
-    y_t = 350
+    draw.rounded_rectangle([38, 326, 568, 496], radius=18, fill=(17, 28, 56), outline=(56, 189, 248), width=2)
+    if len(wrapped_t) <= 2:
+        font_t = get_font_for_lang("ko", 32 if is_en else 36, bold=True)
+        y_t = 352 if len(wrapped_t) == 2 else 378
+        step_t = 50
+    else:
+        font_t = get_font_for_lang("ko", 27 if is_en else 30, bold=True)
+        y_t = 340
+        step_t = 44
     for line in wrapped_t:
         draw.text((58, y_t), line, fill=(125, 211, 252), font=font_t)
-        y_t += 50
+        y_t += step_t
 
     sub_line = (
         f"🎬 {script_doc['page_count']} Flipbook Steps · 1080p Visual Proof"
@@ -3790,7 +3796,7 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
     else:
         while True:
             m_tail_ko = re.search(
-                r"(\s+(의|에|에서|할|때|와|과|은|는|이|가|을|를|각각의|교점에서|만나고|이고|이면|같으면|길이가|크기가|각각|같을|다른|한|두|세|변의|예각의|내각의|점\(외심\)에|점\(내심\)에|선분의|끝점에서|끝|밑변의|수선의|포물선의|포물선에서의|사각형은|직선은|평면은|평면과|이등변삼각형|원을|주어|졌을)|(은|는|이|가|을|를|의|와|과|고|면))\s*$",
+                r"(\s+(의|에|에서|대한|관한|위한|통한|따른|의한|크기의|길이의|넓이의|합의|차의|곱의|비의|할|때|와|과|은|는|이|가|을|를|각각의|교점에서|만나고|이고|이면|같으면|길이가|크기가|각각|같을|다른|한|두|세|변의|예각의|내각의|점\(외심\)에|점\(내심\)에|선분의|끝점에서|끝|밑변의|수선의|포물선의|포물선에서의|사각형은|직선은|평면은|평면과|이등변삼각형|원을|주어|졌을)|(은|는|이|가|을|를|의|와|과|고|면))\s*$",
                 cut,
             )
             if m_tail_ko and len(cut[:m_tail_ko.start()].strip()) >= 6:
@@ -6594,8 +6600,13 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
     """
     txt = re.sub(r"\s+", " ", (raw_text or "").strip())
     if seq_idx == 1:
+        short_subj = _smart_concise_topic_title(clean_title, max_len=18 if lang_code == "ko" else 30, lang=lang_code)
         if lang_code == "ko":
-            hook = viral_hook or f"잠깐! {clean_title}, 왜 항상 성립할까요?"
+            hook = (
+                viral_hook
+                if (viral_hook and len(viral_hook) <= 34)
+                else f"공식 암기 금지! {short_subj}, 눈으로 3초 만에 확인해 볼까요?"
+            )
             sents = [s.strip() for s in re.split(r"(?<=[.?!다요죠])\s+", txt) if s.strip()]
             first_core = ""
             for s in sents:
@@ -6603,9 +6614,13 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
                     first_core = s
                     break
             combined = f"{hook} {first_core}".strip()
-            return combined[:86] if len(combined) > 86 else combined
+            return combined[:82] if len(combined) > 82 else combined
         else:
-            hook = viral_hook or f"Wait! Why does {clean_title} always work?"
+            hook = (
+                viral_hook
+                if (viral_hook and len(viral_hook) <= 56)
+                else f"Don't memorize formulas! See why {short_subj} works in 3 seconds:"
+            )
             sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
             first_core = ""
             for s in sents:
@@ -6613,7 +6628,7 @@ def condense_narration_for_shorts(raw_text, seq_idx, total_seqs, clean_title, vi
                     first_core = s
                     break
             combined = f"{hook} {first_core}".strip()
-            return combined[:140] if len(combined) > 140 else combined
+            return combined[:132] if len(combined) > 132 else combined
 
     if seq_idx == total_seqs:
         if lang_code == "ko":
@@ -6801,7 +6816,8 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             step_label = f"STEP {seq_idx}/{total_seqs}"
             draw.text((845, 86), step_label, fill=(251, 191, 36), font=font_sub)
 
-            title_lines = textwrap.wrap(clean_title, width=20 if lang_code == "ko" else 28)[:2]
+            header_short_title = _smart_concise_topic_title(clean_title, max_len=34 if lang_code == "ko" else 50, lang=lang_code)
+            title_lines = textwrap.wrap(header_short_title, width=20 if lang_code == "ko" else 28)[:2]
             for li, tl in enumerate(title_lines):
                 draw.text((78, 146 + li * 54), tl, fill=(255, 255, 255), font=font_top)
 
@@ -7044,20 +7060,28 @@ def condense_question_narration_for_shorts(step_q, raw_narr, seq_idx, total_seqs
         if len(core_ans) > 58:
             core_ans = core_ans[:56].rsplit(" ", 1)[0] + "."
         if seq_idx == 1:
-            q_short = f"잠깐! {clean_title}, 왜 항상 성립할까요?"
+            short_subj = _smart_concise_topic_title(clean_title, max_len=16, lang="ko")
+            if q_clean and len(q_clean) <= 38:
+                q_short = f"잠깐! 3초 만에 보이시나요? {q_clean}"
+            else:
+                q_short = f"공식 외우지 마세요! {short_subj}, 보조선 한 줄을 어디에 그으면 풀릴까요?"
             return f"{q_short} ... 정답 단서! {core_ans}"
         elif seq_idx == total_seqs:
             return f"유레카! {core_ans} 매일 올라오는 시각 증명 시리즈를 놓치지 않으려면 지금 구독을 누르고, 처음 도형에서 이 보조선이 왜 출발점이었는지 다시 볼까요?"
         else:
-            q_short = q_clean if len(q_clean) <= 48 else "직전 단계와 비교해 새로 추가된 핵심 단서는 무엇일까요?"
+            q_short = q_clean if len(q_clean) <= 46 else "직전 단계와 비교해 새로 추가된 핵심 단서는 무엇일까요?"
             return f"{q_short} ... 정답 단서! {core_ans}"
     else:
         sents = [s.strip() for s in re.split(r"(?<=[.?!])\s+", txt) if s.strip()]
         core_ans = sents[-1] if sents else txt[:85]
-        if len(core_ans) > 90:
-            core_ans = core_ans[:86].rsplit(" ", 1)[0] + "."
+        if len(core_ans) > 86:
+            core_ans = core_ans[:82].rsplit(" ", 1)[0] + "."
         if seq_idx == 1:
-            q_short = f"Wait! Why does {clean_title} always hold?"
+            short_subj = _smart_concise_topic_title(clean_title, max_len=28, lang="en")
+            if q_clean and len(q_clean) <= 58:
+                q_short = f"Stop scrolling! Can you spot this in 3 seconds? {q_clean}"
+            else:
+                q_short = f"Don't memorize this! Where does one hidden line prove {short_subj}?"
             return f"{q_short} ... Visual clue! {core_ans}"
         elif seq_idx == total_seqs:
             return f"Eureka! {core_ans} Hit Subscribe right now for our daily visual proofs, and look back at the first figure to see where this clue started!"
@@ -7135,7 +7159,8 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             step_label = f"Q-STEP {seq_idx}/{total_seqs}"
             draw.text((820, 76), step_label, fill=(254, 240, 138), font=font_sub)
 
-            title_lines = textwrap.wrap(clean_title, width=20 if lang_code == "ko" else 28)[:2]
+            header_short_title = _smart_concise_topic_title(clean_title, max_len=34 if lang_code == "ko" else 50, lang=lang_code)
+            title_lines = textwrap.wrap(header_short_title, width=20 if lang_code == "ko" else 28)[:2]
             for li, tl in enumerate(title_lines):
                 draw.text((72, 130 + li * 50), tl, fill=(255, 255, 255), font=font_top)
 
