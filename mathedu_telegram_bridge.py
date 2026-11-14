@@ -366,7 +366,8 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !수익 (또는 /revenue) : 실시간 유튜브 구독자·조회수·YPP 1/2단계 달성 현황·쇼츠 본편 바인딩 수\n"
             "• !쇼츠연결 (또는 /linkshorts) : [API 쿼터 0] 스튜디오에서 쇼츠 8편에 1080p 본편 '관련 동영상' 즉시 연결\n"
             "• !커뮤니티 (또는 /community) : [API 쿼터 0] 채널 커뮤니티 탭에 5초 수학 퀴즈 게시물 즉시 발행\n"
-            "• !고품질화 (또는 /flow) : [크레딧 0] 기존 자료 Google Flow ULTRA 실사 모션 자동 고품질화 현황 조회\n"
+            "• !고품질화 (또는 /flow) : [크레딧 0] Google Flow ULTRA(95%) + 공간기하 3D 카메라(5%) 현황 조회\n"
+            "• !지니 (또는 !공간시네마 / /spatial) : [크레딧 0] 공간기하·원뿔곡선 1인칭 3D 카메라 마스터링(1080p 30fps) 현황\n"
             "• !고품질화실행 (또는 /retrofit) : [크레딧 0] 유휴 고품질화 1주제 백그라운드 즉시 실행\n"
             "• !업로드 (또는 /wave) : 전략 v2.0(실전함정·3~10분 본편 3 + 한/영 Q-#Shorts 3) 업로드 웨이브 즉시 실행\n"
             "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
@@ -382,6 +383,16 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         import _antigravity_report_watcher as _arw
         _arw.poll_and_notify_error_reports_once(send_telegram=False)
         return _arw.format_error_reports_summary()
+
+    if low in ("!수리", "!오류수리", "/autofix", "!autofix"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import _antigravity_report_watcher as _arw_fix
+        polled = _arw_fix.poll_and_notify_error_reports_once(send_telegram=False)
+        targets = polled.get("valid_autofix_targets") or []
+        if not targets:
+            return "✅ [크레딧 0원 확인] 현재 시트(gid=838754808)에 미처리 오류신고가 0건입니다! 모든 신고가 수리·배포 완료 상태입니다."
+        res = _arw_fix.run_autonomous_agy_autofix(targets, notify_telegram=False)
+        return f"🛠️ [오류신고 자율 수리 & 배포 실행 결과]\n• 상태: {res.get('status')}\n\n{res.get('summary', '')}"
 
     if low in ("!감사", "!저작권", "!상표권", "/copyright", "!copyright"):
         sys.path.insert(0, str(ROOT_DIR))
@@ -464,15 +475,30 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         out = run_shell([sys.executable, "-X", "utf8", "youtube_community_controller.py", "--post-community"], timeout=180)
         return f"🗳️ [크레딧 0원 · API 쿼터 0 · 유튜브 커뮤니티 5초 퀴즈 발행 결과]\n{out[-1500:]}"
 
+    if low in ("!지니", "!공간시네마", "/spatial", "!spatial", "/genie", "!genie"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import genie3_world_controller as gwc
+        sm = gwc.get_spatial_genie_status_summary()
+        sp_slugs = ", ".join(sm.get("spatial_slugs") or []) or "(생성 중)"
+        return (
+            "🌐 [크레딧 0원 · 공간기하·원뿔곡선 5% 선별 1인칭 3D 카메라 트랙 현황]\n"
+            f"• 아키텍처: 주력 평면·대수 95%(Google Flow 양단고정) + 공간기하·원뿔곡선 5%(1인칭 3D 카메라 Act 1/3 + 원문 PDF Act 2)\n"
+            f"• 1080p 30fps Lanczos+Unsharp 마스터링 완비: {sm.get('mastered_1080p30_spatial_clips', 0)}주제 ({sp_slugs})\n"
+            f"• Google Labs 월드 연동 상태: {sm.get('labs_access_status', 'ready')} (드롭인 720p 영상 자동 1080p 30fps 업스케일 지원)\n"
+            "• 기하 무결성 가드레일: 수식·텍스트 100% 파이썬 정밀 HUD 합성 + 대외 모델명 노출 0건 하드 게이트 가동 중"
+        )
+
     if low in ("!고품질화", "!플로우", "!업그레이드현황", "/flow", "!flow"):
         sys.path.insert(0, str(ROOT_DIR))
         import nano_banana_cinema_creator as nbcc
         sm = nbcc.get_flow_retrofit_status_summary()
         slugs_txt = ", ".join(sm.get("flow_motion_slugs") or []) or "(준비 중)"
+        sp_txt = ", ".join(sm.get("spatial_3d_slugs") or []) or "(준비 중)"
         return (
-            "🎬 [크레딧 0원 · Google Flow ULTRA 기존 자료 고품질화 현황]\n"
+            "🎬 [크레딧 0원 · Google Flow ULTRA(95%) + 공간 3D 카메라(5%) 고품질화 현황]\n"
             f"• 금일 자동 고품질화 완료: {sm.get('today_upgraded_count', 0)} / 일 최대 {sm.get('daily_cap', 8)}주제\n"
             f"• Veo 3.1 양단고정 실사 모션 클립 보유: {sm.get('total_flow_motion_clips', 0)}주제 ({slugs_txt})\n"
+            f"• 공간기하·원뿔곡선 1080p 30fps 3D 카메라 클립: {sm.get('total_spatial_3d_clips', 0)}주제 ({sp_txt})\n"
             f"• 하이브리드 본편·쇼츠 렌더링 완료: {sm.get('total_hybrid_rendered_slugs', 0)}주제\n"
             f"• 저조회(≤15뷰) 안전 교체 완료: {sm.get('safe_swapped_count', 0)}건\n"
             f"• 인기 영상(>15뷰 · 삭제 금지 보호 · 썸네일만 업그레이드): {sm.get('protected_high_view_count', 0)}건\n"
@@ -603,7 +629,10 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
                 try:
                     sys.path.insert(0, str(ROOT_DIR))
                     import _antigravity_report_watcher as _arw_wd
-                    await asyncio.to_thread(_arw_wd.poll_and_notify_error_reports_once, True)
+                    wd_rep = await asyncio.to_thread(_arw_wd.poll_and_notify_error_reports_once, True)
+                    wd_targets = wd_rep.get("valid_autofix_targets") or []
+                    if wd_targets:
+                        await asyncio.to_thread(_arw_wd.run_autonomous_agy_autofix, wd_targets, True)
                 except Exception:
                     pass
 
