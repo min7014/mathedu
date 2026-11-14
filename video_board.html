@@ -1501,6 +1501,9 @@
           </article>
         `;
       }).join('');
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([grid]).catch(() => {});
+      }
     }
 
     function applyFiltersAndRender() {
@@ -2669,5 +2672,6 @@
     };
 
   </script>
+  <script src="mathedu-report.js?v=20261114"></script>
 </body>
 </html>
