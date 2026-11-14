@@ -339,15 +339,27 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         return (
             "💡 [크레딧 소모 0원 · 유튜브 최우선 수익화 단축 명령어]\n"
             "아래 단축어를 입력하시면 AI 크레딧 0원으로 파이썬이 즉시 처리합니다:\n"
+            "• !추이 (또는 /trend) : [전략 v2.0 기준점 대비] 구독자·조회수·시청시간·쇼츠 유지율·신규 코호트 변화 추이\n"
+            "• !추이정밀 (또는 /trenddeep) : [API 쿼터 0] YouTube Studio 내부 시청시간·이탈률까지 실시간 정밀 실측\n"
             "• !수익 (또는 /revenue) : 실시간 유튜브 구독자·조회수·YPP 1/2단계 달성 현황·쇼츠 본편 바인딩 수\n"
             "• !쇼츠연결 (또는 /linkshorts) : [API 쿼터 0] 스튜디오에서 쇼츠 8편에 1080p 본편 '관련 동영상' 즉시 연결\n"
             "• !커뮤니티 (또는 /community) : [API 쿼터 0] 채널 커뮤니티 탭에 5초 수학 퀴즈 게시물 즉시 발행\n"
-            "• !업로드 (또는 /wave) : 4:2 황금비(장편 4 + Q-#Shorts/#Shorts 2) 업로드 웨이브 1회 실행\n"
+            "• !업로드 (또는 /wave) : 전략 v2.0(실전함정·3~10분 본편 3 + 한/영 Q-#Shorts 3) 업로드 웨이브 즉시 실행\n"
             "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
             "• !점검 (또는 /audit) : 전 문항·전 시스템 무결성 고속 스캔\n"
             "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n\n"
             "※ 일반 대화나 새로운 개발·수정 지시는 평소처럼 편하게 말씀하시면 AI가 즉시 깨어나 수행합니다."
         )
+
+    if low in ("!추이", "!트렌드", "/trend", "!trend"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import youtube_trend_tracker as ytt
+        return ytt.format_trend_report(include_studio=False)
+
+    if low in ("!추이정밀", "/trenddeep", "!trenddeep"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import youtube_trend_tracker as ytt
+        return ytt.format_trend_report(include_studio=True)
 
     if low in ("!현황", "/status", "!status"):
         f_alive = _is_pid_alive(ROOT_DIR / ".agents" / "foundation_daemon.pid")

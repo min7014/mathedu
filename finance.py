@@ -1701,6 +1701,17 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
         shorts_daily_cap = 3 if mc_daily_cap == 0 else 2
 
         def _try_upload_one_std() -> int:
+            # 0순위 [Strategy 4]: '실전 내신·수능/SAT 함정 1문제 ➔ min7014 보조선 1줄 5초 해체' 하이브리드 본편 최우선 발행 (구독 전환율 10배 엔진!)
+            try:
+                import exam_hybrid_creator as _ehc
+                eh_long = _ehc.try_upload_one_exam_hybrid("long")
+                if eh_long:
+                    uploaded_items.append(eh_long)
+                    return 1
+                if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                    return 0
+            except Exception:
+                pass
             for c_slug in ordered_slugs:
                 if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                     break
@@ -1730,6 +1741,17 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
             return 0
 
         def _try_upload_one_paired_short() -> int:
+            # 0순위 [Strategy 4]: 본편이 업로드된 '실전 시험 함정 x=? 3초 챌린지' Exam-Hybrid Q-#Shorts 최우선 발행 + 관련 동영상 바인딩!
+            try:
+                import exam_hybrid_creator as _ehc
+                eh_sh = _ehc.try_upload_one_exam_hybrid("short")
+                if eh_sh:
+                    uploaded_items.append(eh_sh)
+                    return 1
+                if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                    return 0
+            except Exception:
+                pass
             # 1순위: 채널 최고 조회수(602뷰, 평균 40.3뷰 1위!) 포맷인 '질문형 Q-#Shorts'(한국어 + 고RPM 영어) 우선 발행
             # 영어권 std_short_en 59편이 0뷰 0개(평균 39.1뷰)로 검증된 반면 q_short_en은 3편뿐이므로 미렌더 시 즉시 생성 후 업로드!
             for s_slug in ordered_slugs:
@@ -1838,6 +1860,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
         try:
             import youtube_community_controller as _ycc
             _ycc.run_zero_quota_studio_growth_cycle(max_related_links=6, allow_community_post=True)
+        except Exception:
+            pass
+
+        try:
+            import youtube_trend_tracker as _ytt
+            _ytt.capture_trend_snapshot(include_studio=False)
         except Exception:
             pass
 

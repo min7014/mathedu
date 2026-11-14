@@ -764,6 +764,18 @@ def run_continuous_foundation_loop(single_cycle=False):
     except Exception as fin_err:
         print(f"[Finance Agent Notice] {fin_err}", flush=True)
     try:
+        import exam_hybrid_creator
+        eh_built = exam_hybrid_creator.ensure_next_exam_hybrid_rendered(max_bundles=1)
+        if eh_built:
+            print(f"🎯 [Exam-Hybrid Creator] Rendered {len(eh_built)} exam-trap hybrid bundle(s): {[x.get('slug')+'_'+x.get('lang') for x in eh_built]}", flush=True)
+    except Exception as eh_err:
+        print(f"[Exam-Hybrid Creator Notice] {eh_err}", flush=True)
+    try:
+        import youtube_trend_tracker
+        youtube_trend_tracker.capture_trend_snapshot(include_studio=False)
+    except Exception as tr_err:
+        print(f"[Trend Tracker Notice] {tr_err}", flush=True)
+    try:
         import mathlab_agent
         ml_res = mathlab_agent.run_mathlab_evolution_step(batch_size=50)
         print(f"🛠️ [MathLab_Developer Agent] MathLab v{ml_res.get('version')} 무결성={ml_res.get('audit_ok')} | 단원별 작도 프리셋 매핑={ml_res.get('total_mapped_slugs')}개 완료", flush=True)

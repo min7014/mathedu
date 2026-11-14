@@ -814,6 +814,7 @@
       <a href="index.html" class="nav-btn">🏠 메인 홈</a>
       <a href="video_studio.html" class="nav-btn studio">🎙️ 20개국어 AI 강의 스튜디오</a>
       <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="nav-btn yt-ai">🔔 @min7014_ai 1초 무료 구독 ↗</a>
+      <button type="button" onclick="openVbSeedQrModal()" class="nav-btn" style="background:linear-gradient(135deg,#dc2626,#ea580c);color:#fff;border:none;cursor:pointer;font-weight:900;">🎓 교실 칠판 QR 구독카드</button>
       <a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" class="nav-btn">📺 @min7014_ai 공식 채널 ↗</a>
       <a href="https://www.youtube.com/@min7014" target="_blank" rel="noopener" class="nav-btn">🎬 @min7014 원본 채널 ↗</a>
       <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="nav-btn">📚 수학자료실 원본 ↗</a>
@@ -2637,6 +2638,34 @@
           alert('✅ [교사용 5분 수업 발문 + 생기부 세특 예시 문구 + 영문 탐구 주제]가 클립보드에 복사되었습니다!\n수업 지도안이나 학급 게시판에 바로 붙여넣어 활용하세요.');
         }).catch(() => {});
       }
+    };
+
+    window.openVbSeedQrModal = function() {
+      var existing = document.getElementById('vbSeedQrModal');
+      if (existing) { existing.style.display = 'flex'; return; }
+      var wrap = document.createElement('div');
+      wrap.id = 'vbSeedQrModal';
+      wrap.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,0.84);display:flex;align-items:center;justify-content:center;padding:16px;';
+      wrap.onclick = function(ev) { if (ev.target === wrap) wrap.style.display = 'none'; };
+      wrap.innerHTML = '<div style="background:#0f172a;border:2px solid #38bdf8;border-radius:20px;max-width:740px;width:100%;padding:24px;color:#f8fafc;box-shadow:0 24px 60px rgba(0,0,0,0.55);">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;">' +
+          '<div style="font-size:1.12rem;font-weight:900;color:#fef08a;">🎓 [교실 칠판·연구회 공유용] @min7014_ai 1초 QR 구독 &amp; 3분 대표작 완주 마중물</div>' +
+          '<button type="button" onclick="document.getElementById(\'vbSeedQrModal\').style.display=\'none\'" style="background:#334155;color:#fff;border:0;border-radius:8px;padding:6px 12px;font-weight:800;cursor:pointer;">닫기 ✕</button>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;align-items:center;">' +
+          '<div style="background:#fff;border-radius:16px;padding:16px;text-align:center;color:#0f172a;">' +
+            '<img src="assets/min7014_ai_subscribe_qr.svg" alt="@min7014_ai 구독 QR" style="width:210px;height:210px;margin:0 auto;display:block;" />' +
+            '<div style="margin-top:10px;font-weight:900;font-size:0.88rem;color:#0369a1;">📱 카메라로 스캔하면 즉시 구독 창 이동!</div>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;gap:10px;">' +
+            '<div style="font-size:0.86rem;color:#cbd5e1;line-height:1.55;">수업 현장의 학생·선생님 초기 진성 구독자 50~100명의 완주 시청은 유튜브 홈 추천(탐색 기능)을 여는 가장 강력한 방아쇠입니다!</div>' +
+            '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="padding:11px 14px;border-radius:10px;background:linear-gradient(135deg,#dc2626,#ea580c);color:#fff;font-weight:900;text-decoration:none;text-align:center;">🔔 1단계: @min7014_ai 1초 무료 구독 ↗</a>' +
+            '<a href="https://youtu.be/BkxSXat12V4" target="_blank" rel="noopener" style="padding:10px 14px;border-radius:10px;background:#0284c7;color:#fff;font-weight:800;text-decoration:none;text-align:center;">🎬 2단계: 4분 실전함정 5초 해체 대표작 완주 ↗</a>' +
+            '<a href="https://youtube.com/shorts/ZPx-zIC9w3I" target="_blank" rel="noopener" style="padding:10px 14px;border-radius:10px;background:#1e293b;border:1px solid #38bdf8;color:#fef08a;font-weight:800;text-decoration:none;text-align:center;">⚡ 3단계: 원주각 x=? 3초 챌린지 Q-#Shorts 보기 ↗</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+      document.body.appendChild(wrap);
     };
 
   </script>
