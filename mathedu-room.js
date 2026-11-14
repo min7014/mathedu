@@ -2673,8 +2673,45 @@
       if (mjxList.length > 0 && optEl.dataset && optEl.dataset.rawTex) {
         return optEl.dataset.rawTex;
       }
+      var txtWrap = clone.querySelector('.opt-txt');
+      if (txtWrap) {
+        return txtWrap.innerHTML.trim();
+      }
       return clone.innerHTML.trim();
     }
+
+    function normalizeAllOptionLayouts() {
+      if (typeof document === 'undefined') return;
+      if (!document.getElementById('mathedu-opt-txt-fix-css')) {
+        var st = document.createElement('style');
+        st.id = 'mathedu-opt-txt-fix-css';
+        st.textContent = '.opt{justify-content:flex-start;text-align:left;}.opt .opt-txt{flex:1 1 auto;min-width:0;text-align:left;line-height:1.58;word-break:keep-all;overflow-wrap:break-word;}.opts.opts-inline .opt{justify-content:center;}.opts.opts-inline .opt .opt-txt{flex:0 1 auto;text-align:center;}';
+        (document.head || document.documentElement).appendChild(st);
+      }
+      var allOpts = document.querySelectorAll('.opt');
+      allOpts.forEach(function(oEl) {
+        if (!oEl.dataset.rawTex) {
+          var existingTxt = oEl.querySelector('.opt-txt');
+          var rawSrc = existingTxt ? existingTxt.innerHTML : oEl.innerHTML.replace(/<span class="n">\s*\d+\s*<\/span>/i, '');
+          if (rawSrc.indexOf('mjx-container') === -1) {
+            oEl.dataset.rawTex = rawSrc.trim();
+          }
+        }
+        if (oEl.querySelector('.opt-txt')) return;
+        var nEl = oEl.querySelector(':scope > .n') || oEl.querySelector('.n');
+        if (!nEl) return;
+        var wrap = document.createElement('span');
+        wrap.className = 'opt-txt';
+        var nodesToMove = [];
+        for (var c = nEl.nextSibling; c; c = c.nextSibling) {
+          nodesToMove.push(c);
+        }
+        if (!nodesToMove.length) return;
+        nodesToMove.forEach(function(nd) { wrap.appendChild(nd); });
+        oEl.appendChild(wrap);
+      });
+    }
+    normalizeAllOptionLayouts();
 
     function normalizeMathExpr(str) {
       var s = String(str || '').trim();

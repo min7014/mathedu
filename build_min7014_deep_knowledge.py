@@ -33,7 +33,7 @@ def clean_text(s):
     if not s:
         return ''
     s = re.sub(r'<a[^>]*>\s*\[고유주소\]\s*</a>', '', s, flags=re.DOTALL | re.IGNORECASE)
-    s = re.sub(r'<[^>]+>', '', s)
+    s = re.sub(r'</?[a-zA-Z!][^>]*>', '', s)
     s = (
         s.replace('&nbsp;', ' ')
         .replace('&lt;', '<')
@@ -108,7 +108,7 @@ def parse_hub_page(hub_name, html):
             for am in a_matches:
                 href = am.group(1).strip()
                 txt = clean_text(am.group(2))
-                raw_txt = re.sub(r'<[^>]+>', '', am.group(2)).strip()
+                raw_txt = re.sub(r'</?[a-zA-Z!][^>]*>', '', am.group(2)).strip()
                 if '[고유주소]' in raw_txt and 'min7014.github.io/math' in href:
                     permalink_url = href
                 if not primary_url and ('min7014.github.io/math' in href or 'min7014.github.io/20' in href):

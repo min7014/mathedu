@@ -173,6 +173,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1312,6 +1316,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2080,7 +2096,7 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 <script>
 window.toggleMinGgb = function(btn, ggbUrl) {
   var item = btn.closest ? (btn.closest('.min-tip-item') || btn.closest('.min-item, .min-tip-item') || btn.closest('.min-visual-tip')) : btn.parentElement.parentElement;
@@ -2143,9 +2159,9 @@ window.shareProblem = function() {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/ac8dc374.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="ac8dc374">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="9ccdd5f2">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="7ceee42d">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -3088,11 +3104,11 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <div class="lvl"><span class="bilingual-ko">초등 곱셈성질 디딤돌 1</span><span class="bilingual-en">Elementary Multiplication Step 1</span></div>
 <div class="stem"><span class="bilingual-ko">초등학교 곱셈 직관: 최고차항 계수가 1인 삼차식 $f(x)$가 $f(x)=0$에서 서로 다른 실근을 오직 2개만 가질 때(하나는 중근), $f(x)$의 올바른 인수분해 형태는?</span><div class="bilingual-en">Elementary multiplication intuition: When monic cubic equation $f(x)=0$ has exactly 2 distinct real roots (one being a double root), what is its factorization?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span>$f(x) = (x - \alpha)(x - \beta)(x - \gamma)$</div>
-<div class="opt"><span class="n">2</span>$f(x) = (x - \alpha)^3$</div>
-<div class="opt"><span class="n">3</span>$f(x) = (x - \alpha)^2(x - \beta)$</div>
-<div class="opt"><span class="n">4</span>$f(x) = (x - \alpha)(x^2 + \beta x + \gamma)$</div>
-<div class="opt"><span class="n">5</span>$f(x) = x^3 - \alpha x^2 + \beta$</div>
+<div class="opt"><span class="n">1</span><span class="opt-txt">$f(x) = (x - \alpha)(x - \beta)(x - \gamma)$</span></div>
+<div class="opt"><span class="n">2</span><span class="opt-txt">$f(x) = (x - \alpha)^3$</span></div>
+<div class="opt"><span class="n">3</span><span class="opt-txt">$f(x) = (x - \alpha)^2(x - \beta)$</span></div>
+<div class="opt"><span class="n">4</span><span class="opt-txt">$f(x) = (x - \alpha)(x^2 + \beta x + \gamma)$</span></div>
+<div class="opt"><span class="n">5</span><span class="opt-txt">$f(x) = x^3 - \alpha x^2 + \beta$</span></div>
 </div>
 <div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
@@ -3135,11 +3151,11 @@ Because $\alpha \neq \beta$, the square of a non-zero real number is always <b>s
 <div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div>
 <div class="stem"><span class="bilingual-ko">삼차함수 $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$)의 도함수 $f'(x)$에 대하여, 관통 실근 $\beta$에서의 미분계수 $f'(\beta)$의 값과 부호는 무엇인가요?</span><div class="bilingual-en">For the cubic $f(x) = (x - \alpha)^2(x - \beta)$ ($\alpha \neq \beta$), what is the derivative value $f'(\beta)$ and its sign at the crossing root $\beta$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span>$f'(\beta) = 0$</div>
-<div class="opt"><span class="n">2</span>$f'(\beta) = -(\beta - \alpha)^2 &lt; 0$</div>
-<div class="opt"><span class="n">3</span>$f'(\beta) = (\beta - \alpha)^2 &gt; 0$</div>
-<div class="opt"><span class="n">4</span>$f'(\beta) = 2(\beta - \alpha)$ <span class="bilingual-ko">(부호 모름)</span><span class="bilingual-en">(Sign unknown)</span></div>
-<div class="opt"><span class="n">5</span>$f'(\beta) = 3(\beta - \alpha)^2$</div>
+<div class="opt"><span class="n">1</span><span class="opt-txt">$f'(\beta) = 0$</span></div>
+<div class="opt"><span class="n">2</span><span class="opt-txt">$f'(\beta) = -(\beta - \alpha)^2 &lt; 0$</span></div>
+<div class="opt"><span class="n">3</span><span class="opt-txt">$f'(\beta) = (\beta - \alpha)^2 &gt; 0$</span></div>
+<div class="opt"><span class="n">4</span><span class="opt-txt">$f'(\beta) = 2(\beta - \alpha)$ <span class="bilingual-ko">(부호 모름)</span><span class="bilingual-en">(Sign unknown)</span></span></div>
+<div class="opt"><span class="n">5</span><span class="opt-txt">$f'(\beta) = 3(\beta - \alpha)^2$</span></div>
 </div>
 <div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
@@ -3297,11 +3313,11 @@ This difference of $-8f'(\beta) \neq 0$ creates the unique sharp upward corner o
 <div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div>
 <div class="stem"><span class="bilingual-ko">$g(x)$가 유일하게 미분 불가능한 점 $x = \beta$에서, 우미분계수와 좌미분계수의 차이 $g'(\beta^+) - g'(\beta^-)$의 정확한 값은 얼마인가요?</span><div class="bilingual-en">At $x = \beta$ where $g(x)$ is non-differentiable, what is the exact difference between the right-hand and left-hand derivatives $g'(\beta^+) - g'(\beta^-)$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span>$0$ <span class="bilingual-ko">(미분가능)</span><span class="bilingual-en">(Differentiable)</span></div>
-<div class="opt"><span class="n">2</span>$-6f'(\beta)$</div>
-<div class="opt"><span class="n">3</span>$+6f'(\beta)$</div>
-<div class="opt"><span class="n">4</span>$-8f'(\beta)$</div>
-<div class="opt"><span class="n">5</span>$+8f'(\beta)$</div>
+<div class="opt"><span class="n">1</span><span class="opt-txt">$0$ <span class="bilingual-ko">(미분가능)</span><span class="bilingual-en">(Differentiable)</span></span></div>
+<div class="opt"><span class="n">2</span><span class="opt-txt">$-6f'(\beta)$</span></div>
+<div class="opt"><span class="n">3</span><span class="opt-txt">$+6f'(\beta)$</span></div>
+<div class="opt"><span class="n">4</span><span class="opt-txt">$-8f'(\beta)$</span></div>
+<div class="opt"><span class="n">5</span><span class="opt-txt">$+8f'(\beta)$</span></div>
 </div>
 <div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
@@ -3349,11 +3365,11 @@ $P(x) = (x - 1)(x - a)(x - 4 + a)$ has roots $1, a, 4 - a$.<br>
 <div class="lvl"><span class="bilingual-ko">심화 연계 디딤돌 4</span><span class="bilingual-en">Advanced Link Step 4</span></div>
 <div class="stem"><span class="bilingual-ko">함수 $|P(x)| = |(x - 1)(x - a)(x - 4 + a)|$가 오직 1개의 첨점만 갖도록 하는 $a$의 값들과, 각 경우의 유일한 첨점의 위치를 바르게 짝지은 것은?</span><div class="bilingual-en">Which choice correctly identifies the values of $a$ and the unique non-differentiable corner of $|P(x)|$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span><span class="bilingual-ko">$a = 1, 3$ 일 때 첨점 $x = 3$, 그리고 $a = 2$ 일 때 첨점 $x = 1$</span><span class="bilingual-en">When $a = 1, 3$, corner at $x = 3$; when $a = 2$, corner at $x = 1$</span></div>
-<div class="opt"><span class="n">2</span><span class="bilingual-ko">$a = 0, 4$ 일 때 첨점 $x = 2$, 그리고 $a = 1$ 일 때 첨점 $x = 3$</span><span class="bilingual-en">When $a = 0, 4$, corner at $x = 2$; when $a = 1$, corner at $x = 3$</span></div>
-<div class="opt"><span class="n">3</span><span class="bilingual-ko">$a = 1$ 일 때만 가능하며 첨점은 $x = 1$</span><span class="bilingual-en">Only possible when $a = 1$, with corner at $x = 1$</span></div>
-<div class="opt"><span class="n">4</span><span class="bilingual-ko">$a = 2$ 일 때만 가능하며 첨점은 $x = 2$</span><span class="bilingual-en">Only possible when $a = 2$, with corner at $x = 2$</span></div>
-<div class="opt"><span class="n">5</span><span class="bilingual-ko">모든 실수 $a$에 대해 항상 3개의 첨점을 가짐</span><span class="bilingual-en">Always has 3 corners for all real numbers $a$</span></div>
+<div class="opt"><span class="n">1</span><span class="opt-txt"><span class="bilingual-ko">$a = 1, 3$ 일 때 첨점 $x = 3$, 그리고 $a = 2$ 일 때 첨점 $x = 1$</span><span class="bilingual-en">When $a = 1, 3$, corner at $x = 3$; when $a = 2$, corner at $x = 1$</span></span></div>
+<div class="opt"><span class="n">2</span><span class="opt-txt"><span class="bilingual-ko">$a = 0, 4$ 일 때 첨점 $x = 2$, 그리고 $a = 1$ 일 때 첨점 $x = 3$</span><span class="bilingual-en">When $a = 0, 4$, corner at $x = 2$; when $a = 1$, corner at $x = 3$</span></span></div>
+<div class="opt"><span class="n">3</span><span class="opt-txt"><span class="bilingual-ko">$a = 1$ 일 때만 가능하며 첨점은 $x = 1$</span><span class="bilingual-en">Only possible when $a = 1$, with corner at $x = 1$</span></span></div>
+<div class="opt"><span class="n">4</span><span class="opt-txt"><span class="bilingual-ko">$a = 2$ 일 때만 가능하며 첨점은 $x = 2$</span><span class="bilingual-en">Only possible when $a = 2$, with corner at $x = 2$</span></span></div>
+<div class="opt"><span class="n">5</span><span class="opt-txt"><span class="bilingual-ko">모든 실수 $a$에 대해 항상 3개의 첨점을 가짐</span><span class="bilingual-en">Always has 3 corners for all real numbers $a$</span></span></div>
 </div>
 <div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
@@ -3406,11 +3422,11 @@ Evaluating $f(0) = (0 - \alpha)^2(0 - 3)$:<br>
 <div class="lvl"><span class="bilingual-ko">심화 연계 디딤돌 5</span><span class="bilingual-en">Advanced Link Step 5</span></div>
 <div class="stem"><span class="bilingual-ko">Case 1 ($a = 1$ 또는 $a = 3$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 1 ($a = 1$ or $a = 3$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span><span class="bilingual-ko">$\alpha = 1, 2$ 이고 $f(0) = -3, -6$</span><span class="bilingual-en">$\alpha = 1, 2$ and $f(0) = -3, -6$</span></div>
-<div class="opt"><span class="n">2</span><span class="bilingual-ko">$\alpha = 2, 4$ 이고 $f(0) = -12, -48$</span><span class="bilingual-en">$\alpha = 2, 4$ and $f(0) = -12, -48$</span></div>
-<div class="opt"><span class="n">3</span><span class="bilingual-ko">$\alpha = 3, 5$ 이고 $f(0) = 0, -24$</span><span class="bilingual-en">$\alpha = 3, 5$ and $f(0) = 0, -24$</span></div>
-<div class="opt"><span class="n">4</span><span class="bilingual-ko">$\alpha = -2, -4$ 이고 $f(0) = 12, 48$</span><span class="bilingual-en">$\alpha = -2, -4$ and $f(0) = 12, 48$</span></div>
-<div class="opt"><span class="n">5</span><span class="bilingual-ko">$\alpha = 1, 3$ 이고 $f(0) = -9, -27$</span><span class="bilingual-en">$\alpha = 1, 3$ and $f(0) = -9, -27$</span></div>
+<div class="opt"><span class="n">1</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = 1, 2$ 이고 $f(0) = -3, -6$</span><span class="bilingual-en">$\alpha = 1, 2$ and $f(0) = -3, -6$</span></span></div>
+<div class="opt"><span class="n">2</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = 2, 4$ 이고 $f(0) = -12, -48$</span><span class="bilingual-en">$\alpha = 2, 4$ and $f(0) = -12, -48$</span></span></div>
+<div class="opt"><span class="n">3</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = 3, 5$ 이고 $f(0) = 0, -24$</span><span class="bilingual-en">$\alpha = 3, 5$ and $f(0) = 0, -24$</span></span></div>
+<div class="opt"><span class="n">4</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = -2, -4$ 이고 $f(0) = 12, 48$</span><span class="bilingual-en">$\alpha = -2, -4$ and $f(0) = 12, 48$</span></span></div>
+<div class="opt"><span class="n">5</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = 1, 3$ 이고 $f(0) = -9, -27$</span><span class="bilingual-en">$\alpha = 1, 3$ and $f(0) = -9, -27$</span></span></div>
 </div>
 <div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
@@ -3463,11 +3479,11 @@ Evaluating $f(0) = (0 - \alpha)^2(0 - 1)$:<br>
 <div class="lvl"><span class="bilingual-ko">심화 연계 디딤돌 6</span><span class="bilingual-en">Advanced Link Step 6</span></div>
 <div class="stem"><span class="bilingual-ko">Case 2 ($a = 2$)에서 $h(x)$가 실수 전체에서 미분가능하도록 하는 $\alpha$의 가능한 값들과, 이에 따른 $f(0)$의 값으로 옳은 것은?</span><div class="bilingual-en">In Case 2 ($a = 2$), what are the possible values of $\alpha$ and the resulting values of $f(0)$?</div></div>
 <div class="opts">
-<div class="opt"><span class="n">1</span><span class="bilingual-ko">$\alpha = \frac{1}{2}, \frac{3}{2}$ 이고 $f(0) = -\frac{1}{4}, -\frac{9}{4}$</span><span class="bilingual-en">$\alpha = \frac{1}{2}, \frac{3}{2}$ and $f(0) = -\frac{1}{4}, -\frac{9}{4}$</span></div>
-<div class="opt"><span class="n">2</span><span class="bilingual-ko">$\alpha = 1, 2$ 이고 $f(0) = -1, -4$</span><span class="bilingual-en">$\alpha = 1, 2$ and $f(0) = -1, -4$</span></div>
-<div class="opt"><span class="n">3</span><span class="bilingual-ko">$\alpha = \frac{1}{4}, \frac{3}{4}$ 이고 $f(0) = -\frac{1}{16}, -\frac{9}{16}$</span><span class="bilingual-en">$\alpha = \frac{1}{4}, \frac{3}{4}$ and $f(0) = -\frac{1}{16}, -\frac{9}{16}$</span></div>
-<div class="opt"><span class="n">4</span><span class="bilingual-ko">$\alpha = 0, 1$ 이고 $f(0) = 0, -1$</span><span class="bilingual-en">$\alpha = 0, 1$ and $f(0) = 0, -1$</span></div>
-<div class="opt"><span class="n">5</span><span class="bilingual-ko">$\alpha = -\frac{1}{2}, -\frac{3}{2}$ 이고 $f(0) = \frac{1}{4}, \frac{9}{4}$</span><span class="bilingual-en">$\alpha = -\frac{1}{2}, -\frac{3}{2}$ and $f(0) = \frac{1}{4}, \frac{9}{4}$</span></div>
+<div class="opt"><span class="n">1</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = \frac{1}{2}, \frac{3}{2}$ 이고 $f(0) = -\frac{1}{4}, -\frac{9}{4}$</span><span class="bilingual-en">$\alpha = \frac{1}{2}, \frac{3}{2}$ and $f(0) = -\frac{1}{4}, -\frac{9}{4}$</span></span></div>
+<div class="opt"><span class="n">2</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = 1, 2$ 이고 $f(0) = -1, -4$</span><span class="bilingual-en">$\alpha = 1, 2$ and $f(0) = -1, -4$</span></span></div>
+<div class="opt"><span class="n">3</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = \frac{1}{4}, \frac{3}{4}$ 이고 $f(0) = -\frac{1}{16}, -\frac{9}{16}$</span><span class="bilingual-en">$\alpha = \frac{1}{4}, \frac{3}{4}$ and $f(0) = -\frac{1}{16}, -\frac{9}{16}$</span></span></div>
+<div class="opt"><span class="n">4</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = 0, 1$ 이고 $f(0) = 0, -1$</span><span class="bilingual-en">$\alpha = 0, 1$ and $f(0) = 0, -1$</span></span></div>
+<div class="opt"><span class="n">5</span><span class="opt-txt"><span class="bilingual-ko">$\alpha = -\frac{1}{2}, -\frac{3}{2}$ 이고 $f(0) = \frac{1}{4}, \frac{9}{4}$</span><span class="bilingual-en">$\alpha = -\frac{1}{2}, -\frac{3}{2}$ and $f(0) = \frac{1}{4}, \frac{9}{4}$</span></span></div>
 </div>
 <div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
@@ -4045,11 +4061,11 @@ Hence, the correct answer is &lt;b&gt;Option ② ($12$)&lt;/b&gt;.
 <div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div>
 <div class="stem"><span class="bilingual-ko">위 문제의 조건에 의해 도출되는 $f(0)$의 최댓값 $M$과 최솟값 $m$의 곱 $M \times m$의 값은 얼마인가요?</span><div class="bilingual-en">What is the product $M \times m$ of the maximum $M$ and minimum $m$ of $f(0)$ derived from the problem conditions?</div></div>
 <div class="opts opts-inline">
-<div class="opt"><span class="n">1</span>$6$</div>
-<div class="opt"><span class="n">2</span>$12$</div>
-<div class="opt"><span class="n">3</span>$24$</div>
-<div class="opt"><span class="n">4</span>$36$</div>
-<div class="opt"><span class="n">5</span>$48$</div>
+<div class="opt"><span class="n">1</span><span class="opt-txt">$6$</span></div>
+<div class="opt"><span class="n">2</span><span class="opt-txt">$12$</span></div>
+<div class="opt"><span class="n">3</span><span class="opt-txt">$24$</span></div>
+<div class="opt"><span class="n">4</span><span class="opt-txt">$36$</span></div>
+<div class="opt"><span class="n">5</span><span class="opt-txt">$48$</span></div>
 </div>
 <div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)"><span class="bilingual-ko">💡 해설 보기</span><span class="bilingual-en">💡 View Explanation</span></button></div>
 <div class="exp"></div>
@@ -4621,12 +4637,12 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
@@ -4701,8 +4717,8 @@ function setBoardLang(lang, isUserAction) {
   setBoardLang(saved, false);
 })();
 </script>
-<script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script>
+<script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script>
 
 <!-- 🔔 mathedu 오프라인 업데이트 안내 모달 -->
 <div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">
@@ -4876,9 +4892,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'ac8dc374';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = '9ccdd5f2';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = '7ceee42d';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/ac8dc374.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -4902,8 +4918,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'ac8dc374';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || '9ccdd5f2';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || '7ceee42d';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/ac8dc374.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

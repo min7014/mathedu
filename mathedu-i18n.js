@@ -22,7 +22,7 @@
         minHome: "🌐 자료실 홈"
       },
       hero: {
-        badgePill: "🏛️ 3,400+ 시각적 수학 증명과 직관 · 수학자료실",
+        badgePill: "3,400+ 시각적 수학 증명",
         mainTitleLab: "수학자료실",
         mainTitleHub: "mathedu",
         leadDesc: "3,400+ 시각적 기하 증명과 단델린 구의 통찰을 담은 <b>가입 없는 100% 영구 무료 인터랙티브 수학자료실</b>",
@@ -323,7 +323,7 @@
         minHome: "🌐 Archive Home"
       },
       hero: {
-        badgePill: "🏛️ 3,400+ Dynamic Visual Proofs & Geometric Intuition · Math Archive",
+        badgePill: "3,400+ Visual Math Proofs",
         mainTitleLab: "수학자료실",
         mainTitleHub: "mathedu",
         leadDesc: "Math Archive: Over 3,400 Dynamic Visual Proofs & Scaffolding Quizzes, <b>100% Freely Open</b>",

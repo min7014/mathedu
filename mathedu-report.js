@@ -113,6 +113,11 @@
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
         user-select: none !important;
       }
+      #mathedu-report-fab.mathedu-fab-bottom {
+        top: auto !important;
+        bottom: 18px !important;
+        right: 18px !important;
+      }
       #mathedu-report-fab:hover {
         background: rgba(28, 16, 26, 0.96) !important;
         border-color: rgba(255, 77, 79, 0.9) !important;
@@ -1001,15 +1006,22 @@
 
     var meta = getElementMeta(state.selectedTarget);
 
-    // 슬러그 추출
+    // 슬러그 추출 (쿼리 파라미터 ?slug= / ?play= 포함하여 정확한 자료 식별)
     var slug = '';
     var pathParts = window.location.pathname.split('/').filter(Boolean);
     var lastPart = pathParts.length ? pathParts[pathParts.length - 1] : '';
     if (lastPart.endsWith('.html')) {
       slug = lastPart.replace('.html', '');
     } else {
-      slug = lastPart || 'index';
+      slug = lastPart || 'mathedu';
     }
+    try {
+      var qParams = new URLSearchParams(window.location.search);
+      var subSlug = qParams.get('slug') || qParams.get('play') || '';
+      if (subSlug && slug.indexOf(subSlug) === -1) {
+        slug = slug + ':' + subSlug;
+      }
+    } catch(e){}
 
     // 포맷팅된 최종 리포트 본문
     var formattedReport = [
@@ -1033,19 +1045,6 @@
       text: formattedReport
     };
 
-    // 1) POST 전송 시도
-    var fetchPromise = null;
-    try {
-      fetchPromise = fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload),
-        mode: 'no-cors',
-        keepalive: true
-      });
-    } catch(e){}
-
-    // 2) Fallback: GET Beacon 전송 (Google Apps Script doGet 지원)
     var getUrl = apiUrl + '?action=report'
       + '&quiz=' + encodeURIComponent(slug)
       + '&q=' + encodeURIComponent(questionNum)
@@ -1053,10 +1052,31 @@
       + '&text=' + encodeURIComponent(formattedReport)
       + '&_t=' + Date.now();
 
+    function fireFallbackBeacon() {
+      try {
+        var beaconImg = new Image();
+        beaconImg.src = getUrl;
+      } catch(e){}
+    }
+
+    // 1) POST 단일 전송 시도 (네트워크 실패 시에만 GET Beacon 폴백 실행하여 중복 행 적재 원천 차단)
     try {
-      var beaconImg = new Image();
-      beaconImg.src = getUrl;
-    } catch(e){}
+      if (typeof fetch === 'function') {
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          mode: 'no-cors',
+          keepalive: true
+        }).catch(function() {
+          fireFallbackBeacon();
+        });
+      } else {
+        fireFallbackBeacon();
+      }
+    } catch(e) {
+      fireFallbackBeacon();
+    }
 
     setTimeout(function() {
       if (submitBtn) submitBtn.disabled = false;
@@ -1149,6 +1169,10 @@
   function init() {
     injectStyles();
     createElements();
+    var fabEl = document.getElementById('mathedu-report-fab');
+    if (fabEl && (document.getElementById('tr') || window.MathLabAPI || window.location.pathname.indexOf('mathlab') !== -1)) {
+      fabEl.classList.add('mathedu-fab-bottom');
+    }
 
     // 언어 변경 이벤트 청취
     window.addEventListener('mathedu:lang-changed', function() {

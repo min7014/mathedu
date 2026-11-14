@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,15 +2083,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/c2092102.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c2092102.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c2092102">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="d172e480">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="315f06a9">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2466,7 +2482,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$\sin(ax) = \dfrac{1}{2}$</b> — 직선 $y = 1$과의 교점을 구하기 위한 기본 삼각방정식</div><div><b>$\text{밑변 } AB = \dfrac{2\pi}{3a}$</b> — 대칭성을 이용한 교점 $A, B$ 사이의 가로 거리</div><div><b>$\text{높이 } h = 3$</b> — 직선 $y=1$과 최솟값 $y=-2$ 사이의 수직 거리 ($1 - (-2) = 3$)</div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 원운동이 파동 곡선으로 풀려나가는 <b>기하학적 전개 과정</b>을 한 프레임씩 보여줍니다.<br>• <b>[단위원의 동점]</b> 반지름 1인 원 위를 반시계 방향으로 회전하는 동점 $\mathrm{P}$의 회전각 $\theta$와 수직 투영 $y=\sin\theta$, 수평 투영 $x=\cos\theta$ 설정<br>• <b>[파동의 실시간 언래핑]</b> $\theta$가 증가함에 따라 각 좌표의 높낮이를 오른쪽 직교좌표계로 수평 이동시켜 사인·코사인 곡선의 마루와 골이 직조되는 과정<br>• <b>[주기의 필연성]</b> 한 바퀴($2\pi$) 회전하면 원점으로 귀환하는 원의 닫힌 궤적이 파동 함수의 무한 반복 주기성으로 승화되는 원리를 하단 자료에서 체득해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20200513001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 호도법 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Radian)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/cbabnkwd')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/cbabnkwd" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=e7ec6757932f11eaafa3020038980004" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2020/2020051301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/iLW0V7fDOkM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20200513001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20200515001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 호도법과 육십분법 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Radian and Degree)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/utvzjkz8')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/utvzjkz8" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=9f75d6f294da11eab70f020003750001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2020/2020051501.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/JlF4sVFkvf0" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20200515001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 제1단계 · [초등 진동과 주기] 삼각함수의 주기와 최솟값 구하기<span class="bilingual-en">🔰 Step 1 · [Elementary Wave & Period] Period and minimum value of trigonometric function</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 시소나 파도처럼 위아래로 똑같이 출렁이는 운동: $\sin$ 함수는 기본적으로 $-1$부터 $+1$까지 움직이므로, 앞에 2가 곱해지면 최댓값 $+2$, 가장 낮은 최솟값은 $-2$가 됩니다. 한 바퀴 도는 주기는 $\frac{2\pi}{a}$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Wave motion oscillating up and down: Since sine ranges from $-1$ to $+1$, multiplying by 2 yields maximum $+2$ and lowest minimum $-2$. The full period is $\frac{2\pi}{a}$.</div></div><div class="q" data-ans="2" data-exp="사인함수의 기본 주기는 $2\pi$이므로 $x$의 계수 $a$로 나누면 주기 $T = \frac{2\pi}{a}$입니다. 진폭이 $2$이므로 최댓값은 $2$, 최솟값 $m = -2$입니다." data-exp-en="The basic period of the sine function is $2\pi$, so dividing $x$ by the coefficient $a$ gives the period $T = \frac{2\pi}{a}$. Since the amplitude is $2$, the maximum is $2$ and the minimum is $m = -2$."><div class="lvl"><span class="bilingual-ko">초등 주기 진동 디딤돌 1</span><span class="bilingual-en">Elementary Period Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 시계와 최솟값 직관: 0을 기준으로 위로 2칸($+2$), 아래로 2칸($-2$) 진동하는 함수 $f(x) = 2\sin(ax)$ ($a > 0$)의 주기 $T$($\frac{2\pi}{a}$)와 가장 낮은 최솟값 $m$은?</span><div class="bilingual-en">Elementary period & minimum intuition: What are the period $T$ and lowest minimum $m$ of function $f(x) = 2\sin(ax)$ oscillating between $+2$ and $-2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$T = \frac{\pi}{a}, m = -2$</div><div class="opt"><span class="n">2</span>$T = \frac{2\pi}{a}, m = -2$</div><div class="opt"><span class="n">3</span>$T = \frac{2\pi}{a}, m = -1$</div><div class="opt"><span class="n">4</span>$T = 2\pi a, m = -2$</div><div class="opt"><span class="n">5</span>$T = \frac{2\pi}{a}, m = 0$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 제1단계 · [초등 진동과 주기] 삼각함수의 주기와 최솟값 구하기<span class="bilingual-en">🔰 Step 1 · [Elementary Wave & Period] Period and minimum value of trigonometric function</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 시소나 파도처럼 위아래로 똑같이 출렁이는 운동: $\sin$ 함수는 기본적으로 $-1$부터 $+1$까지 움직이므로, 앞에 2가 곱해지면 최댓값 $+2$, 가장 낮은 최솟값은 $-2$가 됩니다. 한 바퀴 도는 주기는 $\frac{2\pi}{a}$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Wave motion oscillating up and down: Since sine ranges from $-1$ to $+1$, multiplying by 2 yields maximum $+2$ and lowest minimum $-2$. The full period is $\frac{2\pi}{a}$.</div></div><div class="q" data-ans="2" data-exp="사인함수의 기본 주기는 $2\pi$이므로 $x$의 계수 $a$로 나누면 주기 $T = \frac{2\pi}{a}$입니다. 진폭이 $2$이므로 최댓값은 $2$, 최솟값 $m = -2$입니다." data-exp-en="The basic period of the sine function is $2\pi$, so dividing $x$ by the coefficient $a$ gives the period $T = \frac{2\pi}{a}$. Since the amplitude is $2$, the maximum is $2$ and the minimum is $m = -2$."><div class="lvl"><span class="bilingual-ko">초등 주기 진동 디딤돌 1</span><span class="bilingual-en">Elementary Period Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 시계와 최솟값 직관: 0을 기준으로 위로 2칸($+2$), 아래로 2칸($-2$) 진동하는 함수 $f(x) = 2\sin(ax)$ ($a > 0$)의 주기 $T$($\frac{2\pi}{a}$)와 가장 낮은 최솟값 $m$은?</span><div class="bilingual-en">Elementary period & minimum intuition: What are the period $T$ and lowest minimum $m$ of function $f(x) = 2\sin(ax)$ oscillating between $+2$ and $-2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$T = \frac{\pi}{a}, m = -2$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$T = \frac{2\pi}{a}, m = -2$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$T = \frac{2\pi}{a}, m = -1$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$T = 2\pi a, m = -2$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$T = \frac{2\pi}{a}, m = 0$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2481,7 +2497,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div><h2>🔰 제2단계 · 교점 $A, B$의 좌표와 밑변 $AB$의 길이 구하기<span class="bilingual-en">🔰 Step 2 · Find the coordinates of the intersection point $A, B$ and the length of the base $AB$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>방정식 $2\sin(ax) = 1$은 $\sin(ax) = \frac{1}{2}$로 변형됩니다.
-$0 \le ax \le 2\pi$ 범위에서 $\sin\theta = \frac{1}{2}$을 만족하는 $\theta$는 $\frac{\pi}{6}$와 $\frac{5\pi}{6}$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The equation $2\sin(ax) = 1$ is transformed into $\sin(ax) = \frac{1}{2}$. In the range of $0 \le ax \le 2\pi$, $\theta$ that satisfies $\sin\theta = \frac{1}{2}$ are $\frac{\pi}{6}$ and $\frac{5\pi}{6}$.</div></div><div class="q" data-ans="3" data-exp="$ax = \frac{\pi}{6} \implies x_A = \frac{\pi}{6a}$, $ax = \frac{5\pi}{6} \implies x_B = \frac{5\pi}{6a}$입니다.<br>따라서 선분 $AB = x_B - x_A = \frac{5\pi}{6a} - \frac{\pi}{6a} = \frac{4\pi}{6a} = \frac{2\pi}{3a}$입니다." data-exp-en="These are $ax = \frac{\pi}{6} \implies x_A = \frac{\pi}{6a}$ and $ax = \frac{5\pi}{6} \implies x_B = \frac{5\pi}{6a}$. &lt;br&gt; is therefore the line segment $AB = x_B - x_A = \frac{5\pi}{6a} - \frac{\pi}{6a} = \frac{4\pi}{6a} = \frac{2\pi}{3a}$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">두 교점 $A, B$의 $x$좌표 차이인 선분 $AB$의 밑변 길이는 얼마인가요?</span><div class="bilingual-en">What is the base length of the line segment $AB$ that is the difference between the coordinates of the two intersection points</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi}{3a}$</div><div class="opt"><span class="n">2</span>$\frac{\pi}{2a}$</div><div class="opt"><span class="n">3</span>$\frac{2\pi}{3a}$</div><div class="opt"><span class="n">4</span>$\frac{\pi}{a}$</div><div class="opt"><span class="n">5</span>$\frac{4\pi}{3a}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+$0 \le ax \le 2\pi$ 범위에서 $\sin\theta = \frac{1}{2}$을 만족하는 $\theta$는 $\frac{\pi}{6}$와 $\frac{5\pi}{6}$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The equation $2\sin(ax) = 1$ is transformed into $\sin(ax) = \frac{1}{2}$. In the range of $0 \le ax \le 2\pi$, $\theta$ that satisfies $\sin\theta = \frac{1}{2}$ are $\frac{\pi}{6}$ and $\frac{5\pi}{6}$.</div></div><div class="q" data-ans="3" data-exp="$ax = \frac{\pi}{6} \implies x_A = \frac{\pi}{6a}$, $ax = \frac{5\pi}{6} \implies x_B = \frac{5\pi}{6a}$입니다.<br>따라서 선분 $AB = x_B - x_A = \frac{5\pi}{6a} - \frac{\pi}{6a} = \frac{4\pi}{6a} = \frac{2\pi}{3a}$입니다." data-exp-en="These are $ax = \frac{\pi}{6} \implies x_A = \frac{\pi}{6a}$ and $ax = \frac{5\pi}{6} \implies x_B = \frac{5\pi}{6a}$. &lt;br&gt; is therefore the line segment $AB = x_B - x_A = \frac{5\pi}{6a} - \frac{\pi}{6a} = \frac{4\pi}{6a} = \frac{2\pi}{3a}$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">두 교점 $A, B$의 $x$좌표 차이인 선분 $AB$의 밑변 길이는 얼마인가요?</span><div class="bilingual-en">What is the base length of the line segment $AB$ that is the difference between the coordinates of the two intersection points</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$\frac{\pi}{3a}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$\frac{\pi}{2a}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$\frac{2\pi}{3a}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$\frac{\pi}{a}$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$\frac{4\pi}{3a}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2496,7 +2512,7 @@ $0 \le ax \le 2\pi$ 범위에서 $\sin\theta = \frac{1}{2}$을 만족하는 $\th
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div><h2>🔰 제3단계 · 점 $C$와 삼각형 $ABC$의 높이 $h$ 구하기<span class="bilingual-en">🔰 Step 3 · Find the height $h$ of the point $C$ and the triangle $ABC$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>선분 $AB$는 직선 $y = 1$ 위에 수평으로 놓여 있습니다.
-점 $C$는 $f(x)$가 최솟값 $-2$를 갖는 점이므로, 선분 $AB$에서 점 $C$까지의 수직 높이 $h$는 두 직선 사이의 거리와 같습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The line segment $AB$ lies horizontally on the line $y = 1$. Point $C$ is the point at which $f(x)$ has minimum value $-2$, so the vertical height from segment $AB$ to point</div></div><div class="q" data-ans="3" data-exp="점 $C$의 $y$좌표는 $f(x)$의 최솟값인 $-2$입니다.<br>따라서 $y = 1$과 $y = -2$ 사이의 수직 거리 $h = 1 - (-2) = 3$입니다." data-exp-en="The coordinates of point $y$ of point $C$ are $-2$, which is the minimum of &lt;br&gt; is therefore the vertical distance between $y = 1$ and $y = -2$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">직선 $y = 1$과 점 $C$의 $y$좌표 사이의 수직 높이 $h$는 얼마인가요?</span><div class="bilingual-en">What is the vertical height $h$ between the line $y = 1$ and the $y$ coordinates of point $C$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+점 $C$는 $f(x)$가 최솟값 $-2$를 갖는 점이므로, 선분 $AB$에서 점 $C$까지의 수직 높이 $h$는 두 직선 사이의 거리와 같습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The line segment $AB$ lies horizontally on the line $y = 1$. Point $C$ is the point at which $f(x)$ has minimum value $-2$, so the vertical height from segment $AB$ to point</div></div><div class="q" data-ans="3" data-exp="점 $C$의 $y$좌표는 $f(x)$의 최솟값인 $-2$입니다.<br>따라서 $y = 1$과 $y = -2$ 사이의 수직 거리 $h = 1 - (-2) = 3$입니다." data-exp-en="The coordinates of point $y$ of point $C$ are $-2$, which is the minimum of &lt;br&gt; is therefore the vertical distance between $y = 1$ and $y = -2$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">직선 $y = 1$과 점 $C$의 $y$좌표 사이의 수직 높이 $h$는 얼마인가요?</span><div class="bilingual-en">What is the vertical height $h$ between the line $y = 1$ and the $y$ coordinates of point $C$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$1$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$3$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$5$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2510,7 +2526,7 @@ $0 \le ax \le 2\pi$ 범위에서 $\sin\theta = \frac{1}{2}$을 만족하는 $\th
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🔰 제4단계 · 삼각형의 넓이 공식 유도 및 $a$의 값 도출<span class="bilingual-en">🔰 Step 4 · Derive the formula for the area of ​​the triangle and derive the value of $a$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑변이 $AB = \frac{2\pi}{3a}$이고 높이가 $h = 3$인 삼각형의 넓이는 $S = \frac{1}{2} \times \text{밑변} \times \text{높이}$로 계산됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The area of ​​a triangle with base $AB = \frac{2\pi}{3a}$ and height $h = 3$ is calculated as $S = \frac{1}{2} \times \text{밑변} \times \text{높이}$.</div></div><div class="q" data-ans="1" data-exp="삼각형의 넓이 $S = \frac{1}{2} \times \frac{2\pi}{3a} \times 3 = \frac{\pi}{a}$ 입니다.<br>넓이가 $6$이므로 $\frac{\pi}{a} = 6 \implies a = \frac{\pi}{6}$ 입니다." data-exp-en="The area of ​​the triangle is $S = \frac{1}{2} \times \frac{2\pi}{3a} \times 3 = \frac{\pi}{a}$. Since the area of ​​ &lt;br&gt; is $6$, it is $\frac{\pi}{a} = 6 \implies a = \frac{\pi}{6}$."><div class="lvl"><span class="bilingual-ko">심화 연계 디딤돌 4</span><span class="bilingual-en">Advanced Link Step 4</span></div><div class="stem"><span class="bilingual-ko">삼각형 $ABC$의 넓이가 $6$일 때, 양수 $a$의 값은?</span><div class="bilingual-en">If the area of ​​triangle $ABC$ is $6$, what is the value of the positive number $a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$\frac{\pi}{6}$</div><div class="opt"><span class="n">2</span>$\frac{\pi}{5}$</div><div class="opt"><span class="n">3</span>$\frac{\pi}{4}$</div><div class="opt"><span class="n">4</span>$\frac{\pi}{3}$</div><div class="opt"><span class="n">5</span>$\frac{\pi}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>🔰 제4단계 · 삼각형의 넓이 공식 유도 및 $a$의 값 도출<span class="bilingual-en">🔰 Step 4 · Derive the formula for the area of ​​the triangle and derive the value of $a$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑변이 $AB = \frac{2\pi}{3a}$이고 높이가 $h = 3$인 삼각형의 넓이는 $S = \frac{1}{2} \times \text{밑변} \times \text{높이}$로 계산됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The area of ​​a triangle with base $AB = \frac{2\pi}{3a}$ and height $h = 3$ is calculated as $S = \frac{1}{2} \times \text{밑변} \times \text{높이}$.</div></div><div class="q" data-ans="1" data-exp="삼각형의 넓이 $S = \frac{1}{2} \times \frac{2\pi}{3a} \times 3 = \frac{\pi}{a}$ 입니다.<br>넓이가 $6$이므로 $\frac{\pi}{a} = 6 \implies a = \frac{\pi}{6}$ 입니다." data-exp-en="The area of ​​the triangle is $S = \frac{1}{2} \times \frac{2\pi}{3a} \times 3 = \frac{\pi}{a}$. Since the area of ​​ &lt;br&gt; is $6$, it is $\frac{\pi}{a} = 6 \implies a = \frac{\pi}{6}$."><div class="lvl"><span class="bilingual-ko">심화 연계 디딤돌 4</span><span class="bilingual-en">Advanced Link Step 4</span></div><div class="stem"><span class="bilingual-ko">삼각형 $ABC$의 넓이가 $6$일 때, 양수 $a$의 값은?</span><div class="bilingual-en">If the area of ​​triangle $ABC$ is $6$, what is the value of the positive number $a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$\frac{\pi}{6}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$\frac{\pi}{5}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$\frac{\pi}{4}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$\frac{\pi}{3}$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$\frac{\pi}{2}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2838,7 +2854,7 @@ $0 \le ax \le 2\pi$ 범위에서 $\sin\theta = \frac{1}{2}$을 만족하는 $\th
   Therefore, the answer is &lt;b&gt;$\frac{\pi}{6}$&lt;/b&gt;.&lt;br&gt;
   💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Exploiting the fact that the horizontal distance between $\sin \theta = 1/2$ solutions is $\frac{2\pi}{3}$ allows immediate scaling by the frequency factor $\frac{1}{a}$.
 &lt;/p&gt;
-  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">양수 $a$에 대하여 함수 $f(x) = 2\sin(ax) \quad \left(0 \le x \le \frac{2\pi}{a}\right)$의 그래프가 직선 $y = 1$과 만나는 서로 다른 두 점을 각각 $A, B$라 하고, 함수 $f(x)$가 최솟값을 갖는 점을 $C$라 하자. 삼각형 $ABC$의 넓이가 $6$일 때, 양수 $a$의 값은? (단, $x_A &lt; x_B$)</span><div class="bilingual-en">For a positive number $a$, let's call the two different points where the graph of the function If the area of ​​triangle $ABC$ is $6$, what is the value of the positive number $a$? (However, $x_A &lt; x_B$)</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{\pi}{6}$</div><div class="opt"><span class="n">2</span>$\frac{\pi}{5}$</div><div class="opt"><span class="n">3</span>$\frac{\pi}{4}$</div><div class="opt"><span class="n">4</span>$\frac{\pi}{3}$</div><div class="opt"><span class="n">5</span>$\frac{\pi}{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">양수 $a$에 대하여 함수 $f(x) = 2\sin(ax) \quad \left(0 \le x \le \frac{2\pi}{a}\right)$의 그래프가 직선 $y = 1$과 만나는 서로 다른 두 점을 각각 $A, B$라 하고, 함수 $f(x)$가 최솟값을 갖는 점을 $C$라 하자. 삼각형 $ABC$의 넓이가 $6$일 때, 양수 $a$의 값은? (단, $x_A &lt; x_B$)</span><div class="bilingual-en">For a positive number $a$, let's call the two different points where the graph of the function If the area of ​​triangle $ABC$ is $6$, what is the value of the positive number $a$? (However, $x_A &lt; x_B$)</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$\frac{\pi}{6}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$\frac{\pi}{5}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$\frac{\pi}{4}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$\frac{\pi}{3}$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$\frac{\pi}{2}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -3189,17 +3205,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
@@ -3455,9 +3471,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c2092102';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = 'd172e480';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = '315f06a9';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c2092102.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3481,8 +3497,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c2092102';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || 'd172e480';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || '315f06a9';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c2092102.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

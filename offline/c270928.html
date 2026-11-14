@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,15 +2083,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/c270928.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270928.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270928">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="471205da">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="57311f5f">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2465,7 +2481,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$f'(k) = \dfrac{17}{26}$</b> — 음함수 미분법을 연립하여 구한 값</div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 페이지를 넘길 때마다 <b>미분계수가 탄생하는 극한의 전 과정이 생생하게 드러납니다.</b><br>• <b>[초기 상태]</b> 곡선 $y=f(x)$ 위의 고정점 $\mathrm{P}(a, f(a))$와 멀리 떨어진 동점 $\mathrm{Q}(x, f(x))$를 잇는 초록색 할선(Secant)의 평균변화율 $\frac{f(x)-f(a)}{x-a}$을 그립니다.<br>• <b>[프레임의 연속 이동]</b> $x \to a$로 접근함에 따라, 곡선을 타고 미끄러지는 동점 $\mathrm{Q}$와 함께 초록색 할선이 연속적으로 회전합니다.<br>• <b>[극한의 합일]</b> 마지막 순간, 초록색 할선이 빨간색 접선(Tangent)과 일치하며 순간변화율 $m = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}$에 도달합니다.<br>• <b>[수학적 의미]</b> 미분은 형식적인 수식 연산이 아니라, 두 점 사이의 할선이 한 점에서의 접선으로 녹아드는 기하학적 수렴 과정임을 하단 자료로 확인해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 접선에 접근하는 할선들 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Secant lines approaching the tangent line)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/dn5dqdxv')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/dn5dqdxv" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://min7014.github.io/2023/2023081301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/aiT4cVw99Do" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20230813001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 미분가능 함수 상의 한 점에서 접선과 법선 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Tangents and Normals at a Point on the Differential Function)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=adc5ced9d83511e989430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2019/2019091602.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/6kepWevEgpM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20190916001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 1단계 · [초등 도형 연계] 부채꼴 넓이 계수 직관<span class="bilingual-en">🔰 Step 1 · [Elementary Shape Connection] Intuition of sector area coefficient</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>부채꼴 넓이 공식 $\frac{1}{2} r^2 \theta$에서 반지름이 2이면 $r^2 = 4$입니다. 4의 절반은 $\frac{1}{2} \times 4 = 2$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the sector area formula $\frac{1}{2} r^2 \theta$, if the radius is 2, it is $r^2 = 4$. Half of 4 is $\frac{1}{2} \times 4 = 2$.</div></div><div class="q" data-ans="2" data-exp="$\frac{1}{2} \times 4 = 2$ 입니다." data-exp-en="This is $\frac{1}{2} \times 4 = 2$."><div class="lvl"><span class="bilingual-ko">초등 직관 디딤돌 1</span><span class="bilingual-en">Elementary Intuition Scaffolding Step 1</span></div><div class="stem"><span class="bilingual-ko">피자 4조각의 절반($\frac{1}{2}$)은 몇 조각일까요? ($\frac{1}{2} \times 4$)</span><div class="bilingual-en">How many slices are in half of 4 pizzas ($\frac{1}{2}$)? ($\frac{1}{2} \times 4$)</div></div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$3$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<h2>🔰 1단계 · [초등 도형 연계] 부채꼴 넓이 계수 직관<span class="bilingual-en">🔰 Step 1 · [Elementary Shape Connection] Intuition of sector area coefficient</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>부채꼴 넓이 공식 $\frac{1}{2} r^2 \theta$에서 반지름이 2이면 $r^2 = 4$입니다. 4의 절반은 $\frac{1}{2} \times 4 = 2$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the sector area formula $\frac{1}{2} r^2 \theta$, if the radius is 2, it is $r^2 = 4$. Half of 4 is $\frac{1}{2} \times 4 = 2$.</div></div><div class="q" data-ans="2" data-exp="$\frac{1}{2} \times 4 = 2$ 입니다." data-exp-en="This is $\frac{1}{2} \times 4 = 2$."><div class="lvl"><span class="bilingual-ko">초등 직관 디딤돌 1</span><span class="bilingual-en">Elementary Intuition Scaffolding Step 1</span></div><div class="stem"><span class="bilingual-ko">피자 4조각의 절반($\frac{1}{2}$)은 몇 조각일까요? ($\frac{1}{2} \times 4$)</span><div class="bilingual-en">How many slices are in half of 4 pizzas ($\frac{1}{2}$)? ($\frac{1}{2} \times 4$)</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$1$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$3$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$5$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2476,7 +2492,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [초등 나눗셈 연계] 직각삼각형 넓이 계수<span class="bilingual-en">🌿 Step 2 · [Elementary Division Connection] Right triangle area coefficient</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑변이 10이고 높이가 $\sin\theta$인 삼각형의 넓이는 $\frac{1}{2} \times 10 \times \sin\theta = 5\sin\theta$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The area of ​​a triangle with base 10 and height $\sin\theta$ is $\frac{1}{2} \times 10 \times \sin\theta = 5\sin\theta$.</div></div><div class="q" data-ans="3" data-exp="$10 \div 2 = 5$ 입니다." data-exp-en="This is $10 \div 2 = 5$."><div class="lvl"><span class="bilingual-ko">초등 나눗셈 디딤돌 2</span><span class="bilingual-en">Elementary Division Scaffolding Step 2</span></div><div class="stem"><span class="bilingual-ko">초등학교 나눗셈: 10의 절반 $10 \div 2$의 값은?</span><div class="bilingual-en">Elementary Division: Half of 10 What is the value of $10 \div 2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$3$</div><div class="opt"><span class="n">2</span>$4$</div><div class="opt"><span class="n">3</span>$5$</div><div class="opt"><span class="n">4</span>$6$</div><div class="opt"><span class="n">5</span>$7$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>🌿 2단계 · [초등 나눗셈 연계] 직각삼각형 넓이 계수<span class="bilingual-en">🌿 Step 2 · [Elementary Division Connection] Right triangle area coefficient</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑변이 10이고 높이가 $\sin\theta$인 삼각형의 넓이는 $\frac{1}{2} \times 10 \times \sin\theta = 5\sin\theta$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The area of ​​a triangle with base 10 and height $\sin\theta$ is $\frac{1}{2} \times 10 \times \sin\theta = 5\sin\theta$.</div></div><div class="q" data-ans="3" data-exp="$10 \div 2 = 5$ 입니다." data-exp-en="This is $10 \div 2 = 5$."><div class="lvl"><span class="bilingual-ko">초등 나눗셈 디딤돌 2</span><span class="bilingual-en">Elementary Division Scaffolding Step 2</span></div><div class="stem"><span class="bilingual-ko">초등학교 나눗셈: 10의 절반 $10 \div 2$의 값은?</span><div class="bilingual-en">Elementary Division: Half of 10 What is the value of $10 \div 2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$3$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$5$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$6$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$7$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2487,7 +2503,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [고등 연계] 미분계수 분수 확정<span class="bilingual-en">💡 Step 3 · [Advanced Linkage] Determination of derivative fraction</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>도형의 넓이 관계식 $t = 5\sin\theta - 2\theta$를 미분하여 대입하면 $f&#x27;(k) = \frac{17}{26}$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Differentiating and substituting $t = 5\sin\theta - 2\theta$, the area relational expression for shapes, gives $f&#x27;(k) = \frac{17}{26}$.</div></div><div class="q" data-ans="3" data-exp="분자 숫자는 $17$ 입니다. 정답은 ④ ($\frac{17}{26}$) 입니다." data-exp-en="The numerator number is $17$. The correct answer is ④ ($\frac{17}{26}$)."><div class="lvl"><span class="bilingual-ko">고등 완성 디딤돌 3</span><span class="bilingual-en">Scaffolding Step to Advanced Completion 3</span></div><div class="stem"><span class="bilingual-ko">도출된 분수 $\frac{17}{26}$의 분자 숫자는 얼마일까요?</span><div class="bilingual-en">What is the numerator of the derived fraction $\frac{17}{26}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$15$</div><div class="opt"><span class="n">2</span>$16$</div><div class="opt"><span class="n">3</span>$17$</div><div class="opt"><span class="n">4</span>$18$</div><div class="opt"><span class="n">5</span>$19$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>💡 3단계 · [고등 연계] 미분계수 분수 확정<span class="bilingual-en">💡 Step 3 · [Advanced Linkage] Determination of derivative fraction</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>도형의 넓이 관계식 $t = 5\sin\theta - 2\theta$를 미분하여 대입하면 $f&#x27;(k) = \frac{17}{26}$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Differentiating and substituting $t = 5\sin\theta - 2\theta$, the area relational expression for shapes, gives $f&#x27;(k) = \frac{17}{26}$.</div></div><div class="q" data-ans="3" data-exp="분자 숫자는 $17$ 입니다. 정답은 ④ ($\frac{17}{26}$) 입니다." data-exp-en="The numerator number is $17$. The correct answer is ④ ($\frac{17}{26}$)."><div class="lvl"><span class="bilingual-ko">고등 완성 디딤돌 3</span><span class="bilingual-en">Scaffolding Step to Advanced Completion 3</span></div><div class="stem"><span class="bilingual-ko">도출된 분수 $\frac{17}{26}$의 분자 숫자는 얼마일까요?</span><div class="bilingual-en">What is the numerator of the derived fraction $\frac{17}{26}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$15$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$16$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$17$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$18$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$19$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2746,7 +2762,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
   💡 &lt;b&gt;Key Tip&lt;/b&gt;: Apply the chain rule whenever differentiating terms containing $y$.
 &lt;/p&gt;
   
-  "><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f&#x27;(k)$ 의 값은?</span><div class="bilingual-en">What is the value of $f&#x27;(k)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\frac{7}{13}$</div><div class="opt"><span class="n">2</span>$\frac{15}{26}$</div><div class="opt"><span class="n">3</span>$\frac{8}{13}$</div><div class="opt"><span class="n">4</span>$\frac{17}{26}$</div><div class="opt"><span class="n">5</span>$\frac{9}{13}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+  "><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$f&#x27;(k)$ 의 값은?</span><div class="bilingual-en">What is the value of $f&#x27;(k)$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$\frac{7}{13}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$\frac{15}{26}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$\frac{8}{13}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$\frac{17}{26}$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$\frac{9}{13}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -3116,17 +3132,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
@@ -3382,9 +3398,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270928';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = '471205da';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = '57311f5f';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270928.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3408,8 +3424,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270928';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || '471205da';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || '57311f5f';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270928.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

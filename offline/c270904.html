@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,15 +2083,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/c270904.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270904.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270904">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="26a8621f">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="56f517d9">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2467,7 +2483,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols</span></h2><div class="sym"><div><b>$14 + a$</b> — x=2의 왼쪽 식 7x+a에 x=2를 대입한 높이<div class="bilingual-en">Left limit value obtained by substituting $x=2$ into $7x+a$.</div></div><div><b>$4 + 2a$</b> — x=2의 오른쪽 식 x^2+ax에 x=2를 대입한 높이<div class="bilingual-en">Right limit value obtained by substituting $x=2$ into $x^2+ax$.</div></div><div><b>$a = 10$</b> — 14+a = 4+2a를 풀어 결정된 상수 a<div class="bilingual-en">Constant $a$ determined by equating left and right limits: $14+a = 4+2a \implies a=10$.</div></div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 단순 결과가 아닌 <b>처음부터 끝까지 생각의 모든 과정이 투명하게 드러나는 단계별 시각적 증명</b>입니다.<br>하단의 <b>수학자료실</b> PDF 문서를 키보드 방향키나 마우스 휠로 넘겨가며, 각 페이지마다 변하는 요소와 보존되는 불변량의 수학적 의미를 깊이 있게 음미해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20200227001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 거듭제곱 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Power)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/b5rypfj7')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/b5rypfj7" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=42324275e6a311ea8d81d20d61592de0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2020/2020022701.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/L9YedbtAFY4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20200227001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> $m(a+b)=ma+mb$</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ckyaqb3y')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/ckyaqb3y" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=9a5ad111c22d11e989430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2019/2017040301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/5xB3nP5zGr8" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 1단계 · [초등 사칙연산] 7에 2를 곱하고 $a$ 더하기<span class="bilingual-en">🔰 Step 1 · [Elementary Arithmetic] Multiply 7 by 2 and add $a$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 사칙연산: 7에 2를 곱하면 $7 \times 2 = 14$가 되고, 여기에 $a$를 더하면 $14 + a$가 됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Elementary arithmetic: Multiplying 7 by 2 gives $7 \times 2 = 14$, and adding $a$ gives $14 + a$.</div></div><div class="q" data-ans="3" data-exp="$\lim_{x \to 2^-} (7x + a) = 7 \times 2 + a = 14 + a$ 입니다." data-exp-en="$\lim_{x \to 2^-} (7x + a) = 7 \times 2 + a = 14 + a$."><div class="lvl"><span class="bilingual-ko">초등 사칙연산 디딤돌 1</span><span class="bilingual-en">Elementary Arithmetic Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 사칙연산: 경계 $x=2$의 왼쪽 식 $7x + a$에 대하여 좌극한 $\lim_{x \to 2^-} f(x)$를 구한 식($7 \times 2 + a$)은?</span><div class="bilingual-en">Elementary arithmetic: For the expression $7x + a$ on the left of $x=2$, what is the left-hand limit ($7 \times 2 + a$)?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$7 + a$</div><div class="opt"><span class="n">2</span>$12 + a$</div><div class="opt"><span class="n">3</span>$14 + a$</div><div class="opt"><span class="n">4</span>$14 + 2a$</div><div class="opt"><span class="n">5</span>$28 + a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<h2>🔰 1단계 · [초등 사칙연산] 7에 2를 곱하고 $a$ 더하기<span class="bilingual-en">🔰 Step 1 · [Elementary Arithmetic] Multiply 7 by 2 and add $a$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 사칙연산: 7에 2를 곱하면 $7 \times 2 = 14$가 되고, 여기에 $a$를 더하면 $14 + a$가 됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Elementary arithmetic: Multiplying 7 by 2 gives $7 \times 2 = 14$, and adding $a$ gives $14 + a$.</div></div><div class="q" data-ans="3" data-exp="$\lim_{x \to 2^-} (7x + a) = 7 \times 2 + a = 14 + a$ 입니다." data-exp-en="$\lim_{x \to 2^-} (7x + a) = 7 \times 2 + a = 14 + a$."><div class="lvl"><span class="bilingual-ko">초등 사칙연산 디딤돌 1</span><span class="bilingual-en">Elementary Arithmetic Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 사칙연산: 경계 $x=2$의 왼쪽 식 $7x + a$에 대하여 좌극한 $\lim_{x \to 2^-} f(x)$를 구한 식($7 \times 2 + a$)은?</span><div class="bilingual-en">Elementary arithmetic: For the expression $7x + a$ on the left of $x=2$, what is the left-hand limit ($7 \times 2 + a$)?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$7 + a$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$12 + a$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$14 + a$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$14 + 2a$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$28 + a$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2478,7 +2494,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [우극한의 계산] 경계점 오른쪽에서의 접근<span class="bilingual-en">🌿 Step 2 · [Right-Hand Limit] Approaching Boundary $x=2$ from the Right</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x > 2$ 영역의 함수식은 $x^2 + ax$이므로, $x \to 2^+$일 때의 우극한은 $2^2 + a(2) = 4 + 2a$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the domain $x > 2$, the function is defined by $x^2 + ax$. Hence, the right-hand limit as $x \to 2^+$ is $2^2 + a(2) = 4 + 2a$.</div></div><div class="q" data-ans="4" data-exp="$\lim_{x \to 2^+} (x^2 + ax) = 2^2 + 2a = 4 + 2a$ 입니다." data-exp-en="$\lim_{x \to 2^+} (x^2 + ax) = 2^2 + 2a = 4 + 2a$."><div class="lvl"><span class="bilingual-ko">우극한 디딤돌 2</span><span class="bilingual-en">Extreme Scaffolding Step 2</span></div><div class="stem">경계 $x=2$의 오른쪽 식 $x^2 + ax$에 대하여 우극한 $\lim_{x \to 2^+} f(x)$를 구한 식은?<div class="bilingual-en">For the expression $x^2 + ax$ on the right of boundary $x=2$, what is the expression for the right-hand limit $\lim_{x \to 2^+} f(x)$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$2 + a$</div><div class="opt"><span class="n">2</span>$4 + a$</div><div class="opt"><span class="n">3</span>$2 + 2a$</div><div class="opt"><span class="n">4</span>$4 + 2a$</div><div class="opt"><span class="n">5</span>$4 + 4a$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>🌿 2단계 · [우극한의 계산] 경계점 오른쪽에서의 접근<span class="bilingual-en">🌿 Step 2 · [Right-Hand Limit] Approaching Boundary $x=2$ from the Right</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x > 2$ 영역의 함수식은 $x^2 + ax$이므로, $x \to 2^+$일 때의 우극한은 $2^2 + a(2) = 4 + 2a$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the domain $x > 2$, the function is defined by $x^2 + ax$. Hence, the right-hand limit as $x \to 2^+$ is $2^2 + a(2) = 4 + 2a$.</div></div><div class="q" data-ans="4" data-exp="$\lim_{x \to 2^+} (x^2 + ax) = 2^2 + 2a = 4 + 2a$ 입니다." data-exp-en="$\lim_{x \to 2^+} (x^2 + ax) = 2^2 + 2a = 4 + 2a$."><div class="lvl"><span class="bilingual-ko">우극한 디딤돌 2</span><span class="bilingual-en">Extreme Scaffolding Step 2</span></div><div class="stem">경계 $x=2$의 오른쪽 식 $x^2 + ax$에 대하여 우극한 $\lim_{x \to 2^+} f(x)$를 구한 식은?<div class="bilingual-en">For the expression $x^2 + ax$ on the right of boundary $x=2$, what is the expression for the right-hand limit $\lim_{x \to 2^+} f(x)$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2 + a$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$4 + a$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$2 + 2a$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$4 + 2a$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$4 + 4a$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2489,7 +2505,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [연속 조건의 적용] 좌우극한 일치 방정식 해결<span class="bilingual-en">💡 Step 3 · [Applying Continuity] Equating Left and Right Limits to Solve for $a$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수가 실수 전체에서 연속이려면 경계 $x=2$에서 좌극한과 우극한이 일치해야 합니다: $14 + a = 4 + 2a$. 이 일차방정식을 이항하여 풀면 $2a - a = 14 - 4 \implies a = 10$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For the function to be continuous everywhere, the left and right limits at boundary $x=2$ must match: $14 + a = 4 + 2a$. Transposing terms yields $2a - a = 14 - 4 \implies a = 10$.</div></div><div class="q" data-ans="3" data-exp="$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$ 입니다." data-exp-en="$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$."><div class="lvl"><span class="bilingual-ko">미정계수 결정 디딤돌 3</span><span class="bilingual-en">Scaffolding Step for Determining Undetermined Coefficients 3</span></div><div class="stem">좌우극한 일치 조건 $14 + a = 4 + 2a$를 만족하는 상수 $a$의 값은?<div class="bilingual-en">What is the value of constant $a$ satisfying the continuity condition $14 + a = 4 + 2a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$8$</div><div class="opt"><span class="n">2</span>$9$</div><div class="opt"><span class="n">3</span>$10$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>💡 3단계 · [연속 조건의 적용] 좌우극한 일치 방정식 해결<span class="bilingual-en">💡 Step 3 · [Applying Continuity] Equating Left and Right Limits to Solve for $a$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>함수가 실수 전체에서 연속이려면 경계 $x=2$에서 좌극한과 우극한이 일치해야 합니다: $14 + a = 4 + 2a$. 이 일차방정식을 이항하여 풀면 $2a - a = 14 - 4 \implies a = 10$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> For the function to be continuous everywhere, the left and right limits at boundary $x=2$ must match: $14 + a = 4 + 2a$. Transposing terms yields $2a - a = 14 - 4 \implies a = 10$.</div></div><div class="q" data-ans="3" data-exp="$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$ 입니다." data-exp-en="$14 + a = 4 + 2a \implies 2a - a = 14 - 4 \implies a = 10$."><div class="lvl"><span class="bilingual-ko">미정계수 결정 디딤돌 3</span><span class="bilingual-en">Scaffolding Step for Determining Undetermined Coefficients 3</span></div><div class="stem">좌우극한 일치 조건 $14 + a = 4 + 2a$를 만족하는 상수 $a$의 값은?<div class="bilingual-en">What is the value of constant $a$ satisfying the continuity condition $14 + a = 4 + 2a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$8$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$9$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$10$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$11$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$12$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2766,7 +2782,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
   Therefore, the correct choice is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
   💡 &lt;b&gt;Key Tip&lt;/b&gt;: Directly evaluating each piecewise formula at the transition point quickly sets up the linear equation.
 &lt;/p&gt;
-  "><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">함수 $f(x)$가 실수 전체에서 연속일 때, 상수 $a$의 값은?<div class="bilingual-en">Given that function $f(x)$ is continuous for all real numbers, what is the value of constant $a$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$9$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$11$</div><div class="opt"><span class="n">4</span>$12$</div><div class="opt"><span class="n">5</span>$13$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+  "><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">함수 $f(x)$가 실수 전체에서 연속일 때, 상수 $a$의 값은?<div class="bilingual-en">Given that function $f(x)$ is continuous for all real numbers, what is the value of constant $a$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$9$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$10$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$11$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$12$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$13$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -3144,17 +3160,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
@@ -3410,9 +3426,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270904';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = '26a8621f';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = '56f517d9';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270904.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3436,8 +3452,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270904';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || '26a8621f';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || '56f517d9';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270904.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

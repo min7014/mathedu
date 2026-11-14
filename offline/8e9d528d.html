@@ -154,6 +154,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1293,6 +1297,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2061,15 +2077,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/8e9d528d.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/8e9d528d.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="8e9d528d">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="3f862765">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="da7aba45">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2461,7 +2477,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 <!-- STITCH_EXPLORER_END -->
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols</span></h2><div class="sym"><div><b>$\log(xy)$</b> — $\log x + \log y$ (곱 → 합)</div><div><b>$\log(x^n)$</b> — $n\log x$ (지수 → 앞으로)</div></div>
-<h2>제1단계 · 소인수분해</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$12$를 소수의 곱으로 나타내면 $12 = 2^2 \times 3$.</div><div class="q" data-ans="2" data-exp="$12 = 4\times 3 = 2^2 \times 3$."><div class="lvl"><span class="bilingual-ko">🔰 1단계 · [초등 기초 직관·사칙연산 디딤돌]</span><span class="bilingual-en">🔰 Step 1 · [Elementary Intuition &amp; Arithmetic Scaffolding]</span></div><div class="stem">$12$의 소인수분해는?</div><div class="opts"><div class="opt"><span class="n">1</span>$2\times 6$</div><div class="opt"><span class="n">2</span>$2^2\times 3$</div><div class="opt"><span class="n">3</span>$3\times 4$</div><div class="opt"><span class="n">4</span>$2\times 2\times 2$</div><div class="opt"><span class="n">5</span>$4\times 3$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<h2>제1단계 · 소인수분해</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$12$를 소수의 곱으로 나타내면 $12 = 2^2 \times 3$.</div><div class="q" data-ans="2" data-exp="$12 = 4\times 3 = 2^2 \times 3$."><div class="lvl"><span class="bilingual-ko">🔰 1단계 · [초등 기초 직관·사칙연산 디딤돌]</span><span class="bilingual-en">🔰 Step 1 · [Elementary Intuition &amp; Arithmetic Scaffolding]</span></div><div class="stem">$12$의 소인수분해는?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2\times 6$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2^2\times 3$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$3\times 4$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$2\times 2\times 2$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$4\times 3$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2472,7 +2488,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 로그의 곱법칙</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log(ab)=\log a + \log b$.</div><div class="q" data-ans="2" data-exp="곱은 로그 합으로: $\log(2^2\cdot 3)=\log(2^2)+\log 3$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$\log(2^2\cdot 3)$을 펼치면?</div><div class="opts"><div class="opt"><span class="n">1</span>$\log 2^2 \cdot \log 3$</div><div class="opt"><span class="n">2</span>$\log(2^2)+\log 3$</div><div class="opt"><span class="n">3</span>$\log 2^2 / \log 3$</div><div class="opt"><span class="n">4</span>$(\log 2)^2 + \log 3$</div><div class="opt"><span class="n">5</span>$\log 2 + \log 3$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제2단계 · 로그의 곱법칙</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log(ab)=\log a + \log b$.</div><div class="q" data-ans="2" data-exp="곱은 로그 합으로: $\log(2^2\cdot 3)=\log(2^2)+\log 3$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$\log(2^2\cdot 3)$을 펼치면?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$\log 2^2 \cdot \log 3$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$\log(2^2)+\log 3$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$\log 2^2 / \log 3$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$(\log 2)^2 + \log 3$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$\log 2 + \log 3$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2483,7 +2499,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 로그의 지수법칙</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log(x^n)=n\log x$.</div><div class="q" data-ans="4" data-exp="$\log(2^2)=2\log 2=\log 4$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$\log(2^2)$는?</div><div class="opts"><div class="opt"><span class="n">1</span>$2\log 2$</div><div class="opt"><span class="n">2</span>$(\log 2)^2$</div><div class="opt"><span class="n">3</span>$\log 4$</div><div class="opt"><span class="n">4</span>$2\log 2$ 또는 $\log 4$</div><div class="opt"><span class="n">5</span>$(\log 2)/2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제3단계 · 로그의 지수법칙</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log(x^n)=n\log x$.</div><div class="q" data-ans="4" data-exp="$\log(2^2)=2\log 2=\log 4$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$\log(2^2)$는?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2\log 2$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$(\log 2)^2$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$\log 4$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$2\log 2$ 또는 $\log 4$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$(\log 2)/2$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2494,7 +2510,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제4단계 · 값 대입</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log 2 = a,\ \log 3 = b$를 대입.</div><div class="q" data-ans="1" data-exp="$2\log 2+\log 3 = 2a+b$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$2\log 2 + \log 3$에 대입하면?</div><div class="opts"><div class="opt"><span class="n">1</span>$2a+b$</div><div class="opt"><span class="n">2</span>$a^2+b$</div><div class="opt"><span class="n">3</span>$2a+3b$</div><div class="opt"><span class="n">4</span>$a+2b$</div><div class="opt"><span class="n">5</span>$ab$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제4단계 · 값 대입</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\log 2 = a,\ \log 3 = b$를 대입.</div><div class="q" data-ans="1" data-exp="$2\log 2+\log 3 = 2a+b$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$2\log 2 + \log 3$에 대입하면?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2a+b$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$a^2+b$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$2a+3b$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$a+2b$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$ab$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2505,7 +2521,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제5단계 · 검산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>근사값으로 확인. $\log 2\approx 0.3010,\ \log 3\approx 0.4771$.</div><div class="q" data-ans="1" data-exp="$2(0.3010)+0.4771 = 1.0791 \approx \log 12$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$2a+b$의 근사값은? ($\log 12\approx 1.0792$)</div><div class="opts"><div class="opt"><span class="n">1</span>$1.0791$</div><div class="opt"><span class="n">2</span>$0.6020$</div><div class="opt"><span class="n">3</span>$0.7781$</div><div class="opt"><span class="n">4</span>$1.0792$</div><div class="opt"><span class="n">5</span>$2.0792$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제5단계 · 검산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>근사값으로 확인. $\log 2\approx 0.3010,\ \log 3\approx 0.4771$.</div><div class="q" data-ans="1" data-exp="$2(0.3010)+0.4771 = 1.0791 \approx \log 12$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$2a+b$의 근사값은? ($\log 12\approx 1.0792$)</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$1.0791$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$0.6020$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$0.7781$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$1.0792$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$2.0792$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2640,7 +2656,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
     &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#b45309&quot; font-size=&quot;12&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: 2a+b&lt;/text&gt;
     
     &lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ Intentionally constructed geometric &amp; visual model illustrating the core mathematical relationships of &lt;b&gt;[8E9D528D]&lt;/b&gt;.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [At-a-Glance Schematic Solution Flowchart]&lt;/h4&gt;&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · Given Condition&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제1단계 · 소인수분해 ⇒ $2^2\times 3$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · Visual/Formula Transform&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제2단계 · 로그의 곱법칙 ⇒ $\log(2^2)+\log 3$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · Key Derivation&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제4단계 · 값 대입 ⇒ $2a+b$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 4 · Synthesis&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제5단계 · 검산 ⇒ $1.0791$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;🎯 최종 정답&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.98rem&quot;&gt;$2a+b$&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden&quot;&gt;&lt;thead&gt;&lt;tr style=&quot;background:#f1f5f9;color:#0f172a&quot;&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:14%&quot;&gt;Schematic Stage&lt;/th&gt;&lt;th style=&quot;padding:8px 12px;border:1px solid #cbd5e1&quot;&gt;Core Concept · Geometric Model · Formula&lt;/th&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:22%&quot;&gt;Derived Result&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 1&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제1단계 · 소인수분해 ⇒ $2^2\times 3$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 2&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제2단계 · 로그의 곱법칙 ⇒ $\log(2^2)+\log 3$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 3&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제3단계 · 로그의 지수법칙 ⇒ $2\log 2$ 또는 $\log 4$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 4&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제4단계 · 값 대입 ⇒ $2a+b$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 5&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제5단계 · 검산 ⇒ $1.0791$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;정답: $2a+b$&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/section&gt;
-&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;&lt;p&gt;This problem evaluates step-by-step mathematical reasoning and conceptual synthesis from fundamental rules to the final derivation.&lt;/p&gt;&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;&lt;p&gt;$\log 12 = \log(2^2\cdot 3)=2\log 2+\log 3=2a+b$.&lt;/p&gt;&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;&lt;p&gt;By combining the intermediate results derived in the preceding scaffolding steps, we obtain the exact final answer.&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">$\log 2 = a,\ \log 3 = b$ 일 때, $\log 12$를 $a,b$로 나타내시오.</div><div class="opts"><div class="opt"><span class="n">1</span>$a^2+b$</div><div class="opt"><span class="n">2</span>$2a+b$</div><div class="opt"><span class="n">3</span>$a+2b$</div><div class="opt"><span class="n">4</span>$ab$</div><div class="opt"><span class="n">5</span>$2a+3b$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;&lt;p&gt;This problem evaluates step-by-step mathematical reasoning and conceptual synthesis from fundamental rules to the final derivation.&lt;/p&gt;&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;&lt;p&gt;$\log 12 = \log(2^2\cdot 3)=2\log 2+\log 3=2a+b$.&lt;/p&gt;&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;&lt;p&gt;By combining the intermediate results derived in the preceding scaffolding steps, we obtain the exact final answer.&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">$\log 2 = a,\ \log 3 = b$ 일 때, $\log 12$를 $a,b$로 나타내시오.</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$a^2+b$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2a+b$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$a+2b$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$ab$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$2a+3b$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -3015,12 +3031,12 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
@@ -3106,7 +3122,7 @@ function setBoardLang(lang, isUserAction) {
   }
   setBoardLang(saved, false);
 })();
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script><script src="../mathedu-report.js?v=20261027_stitch3"></script>
+</script><script src="../mathedu-room.js?v=20261114"></script><script src="../mathedu-report.js?v=20261114"></script>
 <!-- 🔔 mathedu 오프라인 업데이트 안내 모달 -->
 <div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">
   <div class="mathedu-update-card">
@@ -3279,9 +3295,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = '8e9d528d';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = '3f862765';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = 'da7aba45';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/8e9d528d.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3305,8 +3321,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || '8e9d528d';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || '3f862765';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || 'da7aba45';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/8e9d528d.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

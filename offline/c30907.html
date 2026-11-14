@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,15 +2083,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/c30907.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c30907.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c30907">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="db32e598">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="0f2d14ee">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2465,7 +2481,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$\lim_{x \to 4^-} f(x) = \lim_{x \to 4^+} f(x) = f(4)$</b> — x=4에서 연속일 조건</div><div><b>$a_1 a_2 = \dfrac{c}{a}$</b> — 이차방정식 근과 계수의 관계</div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 단순 결과가 아닌 <b>처음부터 끝까지 생각의 모든 과정이 투명하게 드러나는 단계별 시각적 증명</b>입니다.<br>하단의 <b>수학자료실</b> PDF 문서를 키보드 방향키나 마우스 휠로 넘겨가며, 각 페이지마다 변하는 요소와 보존되는 불변량의 수학적 의미를 깊이 있게 음미해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20200227001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 거듭제곱 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Power)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/b5rypfj7')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/b5rypfj7" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=42324275e6a311ea8d81d20d61592de0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2020/2020022701.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/L9YedbtAFY4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20200227001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> $m(a+b)=ma+mb$</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ckyaqb3y')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/ckyaqb3y" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=9a5ad111c22d11e989430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2019/2017040301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/5xB3nP5zGr8" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 1단계 · [초등 사칙연산] 4를 대입하여 식 전개하기<span class="bilingual-en">🔰 Step 1 · [Elementary Arithmetic] Substituting 4 and expanding</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 사칙연산: $x$ 자리에 4를 넣으면 $(4-a)^2 = (4-a)(4-a) = 16 - 8a + a^2$이 됩니다. 내림차순으로 정리하면 $a^2 - 8a + 16$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Elementary arithmetic: Substituting $x=4$ gives $(4-a)^2 = 16 - 8a + a^2 = a^2 - 8a + 16$.</div></div><div class="q" data-ans="2" data-exp="$(4-a)^2 = 16 - 8a + a^2 = a^2 - 8a + 16$입니다." data-exp-en="This is $(4-a)^2 = 16 - 8a + a^2 = a^2 - 8a + 16$."><div class="lvl"><span class="bilingual-ko">초등 사칙연산 디딤돌 1</span><span class="bilingual-en">Elementary Arithmetic Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 대입과 사칙연산: $x$에 4를 넣은 극한식 $\lim_{x \to 4^-} (x-a)^2 = (4-a)^2$ 을 $a$에 대한 내림차순으로 전개한 식은?</span><div class="bilingual-en">Elementary substitution & arithmetic: What is $(4-a)^2$ expanded in descending powers of $a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$a^2 - 4a + 16$</div><div class="opt"><span class="n">2</span>$a^2 - 8a + 16$</div><div class="opt"><span class="n">3</span>$a^2 + 8a + 16$</div><div class="opt"><span class="n">4</span>$a^2 - 16$</div><div class="opt"><span class="n">5</span>$16 - a^2$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 1단계 · [초등 사칙연산] 4를 대입하여 식 전개하기<span class="bilingual-en">🔰 Step 1 · [Elementary Arithmetic] Substituting 4 and expanding</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 사칙연산: $x$ 자리에 4를 넣으면 $(4-a)^2 = (4-a)(4-a) = 16 - 8a + a^2$이 됩니다. 내림차순으로 정리하면 $a^2 - 8a + 16$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Elementary arithmetic: Substituting $x=4$ gives $(4-a)^2 = 16 - 8a + a^2 = a^2 - 8a + 16$.</div></div><div class="q" data-ans="2" data-exp="$(4-a)^2 = 16 - 8a + a^2 = a^2 - 8a + 16$입니다." data-exp-en="This is $(4-a)^2 = 16 - 8a + a^2 = a^2 - 8a + 16$."><div class="lvl"><span class="bilingual-ko">초등 사칙연산 디딤돌 1</span><span class="bilingual-en">Elementary Arithmetic Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 대입과 사칙연산: $x$에 4를 넣은 극한식 $\lim_{x \to 4^-} (x-a)^2 = (4-a)^2$ 을 $a$에 대한 내림차순으로 전개한 식은?</span><div class="bilingual-en">Elementary substitution & arithmetic: What is $(4-a)^2$ expanded in descending powers of $a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$a^2 - 4a + 16$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$a^2 - 8a + 16$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$a^2 + 8a + 16$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$a^2 - 16$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$16 - a^2$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2479,7 +2495,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $x=4$에서의 우극한 및 함숫값 구하기<span class="bilingual-en">Step 2 · Find right limit and function value in $x=4$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \ge 4$에서 $f(x) = 2x-4$이므로 $\lim_{x \to 4^+} f(x) = f(4) = 2(4)-4 = 4$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $x \ge 4$ to $f(x) = 2x-4$, so $\lim_{x \to 4^+} f(x) = f(4) = 2(4)-4 = 4$.</div></div><div class="q" data-ans="3" data-exp="$8 - 4 = 4$입니다." data-exp-en="This is $8 - 4 = 4$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">$f(4) = 2(4)-4$ 의 값은?</span><div class="bilingual-en">What is the value of $f(4) = 2(4)-4$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>0</div><div class="opt"><span class="n">2</span>2</div><div class="opt"><span class="n">3</span>4</div><div class="opt"><span class="n">4</span>6</div><div class="opt"><span class="n">5</span>8</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제2단계 · $x=4$에서의 우극한 및 함숫값 구하기<span class="bilingual-en">Step 2 · Find right limit and function value in $x=4$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x \ge 4$에서 $f(x) = 2x-4$이므로 $\lim_{x \to 4^+} f(x) = f(4) = 2(4)-4 = 4$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $x \ge 4$ to $f(x) = 2x-4$, so $\lim_{x \to 4^+} f(x) = f(4) = 2(4)-4 = 4$.</div></div><div class="q" data-ans="3" data-exp="$8 - 4 = 4$입니다." data-exp-en="This is $8 - 4 = 4$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">$f(4) = 2(4)-4$ 의 값은?</span><div class="bilingual-en">What is the value of $f(4) = 2(4)-4$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">0</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">2</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">4</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">6</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">8</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2493,7 +2509,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 연속 조건으로 $a$의 값의 곱 구하기<span class="bilingual-en">Step 3 · Find the product of the values ​​of $a$ with continuity conditions</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>연속이려면 $a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$. 근과 계수의 관계에 의해 두 근의 곱은 $\frac{12}{1} = 12$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> To be continuous, use $a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$. Due to the relationship between roots and coefficients, the product of two roots is $\frac{12}{1} = 12$.</div></div><div class="q" data-ans="3" data-exp="$(a-2)(a-6)=0$이므로 두 근은 $2, 6$이고 곱은 $2 \times 6 = 12$입니다." data-exp-en="Since $(a-2)(a-6)=0$, the two roots are $2, 6$ and the product is $2 \times 6 = 12$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">방정식 $a^2 - 8a + 12 = 0$을 만족시키는 모든 실수 $a$의 곱은?</span><div class="bilingual-en">What product of all real numbers $a$ satisfies the equation $a^2 - 8a + 12 = 0$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>12</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제3단계 · 연속 조건으로 $a$의 값의 곱 구하기<span class="bilingual-en">Step 3 · Find the product of the values ​​of $a$ with continuity conditions</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>연속이려면 $a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$. 근과 계수의 관계에 의해 두 근의 곱은 $\frac{12}{1} = 12$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> To be continuous, use $a^2 - 8a + 16 = 4 \implies a^2 - 8a + 12 = 0$. Due to the relationship between roots and coefficients, the product of two roots is $\frac{12}{1} = 12$.</div></div><div class="q" data-ans="3" data-exp="$(a-2)(a-6)=0$이므로 두 근은 $2, 6$이고 곱은 $2 \times 6 = 12$입니다." data-exp-en="Since $(a-2)(a-6)=0$, the two roots are $2, 6$ and the product is $2 \times 6 = 12$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">방정식 $a^2 - 8a + 12 = 0$을 만족시키는 모든 실수 $a$의 곱은?</span><div class="bilingual-en">What product of all real numbers $a$ satisfies the equation $a^2 - 8a + 12 = 0$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">6</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">8</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">12</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">16</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">18</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2795,7 +2811,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
   Therefore, the correct answer is &lt;b&gt;Option ③&lt;/b&gt;.&lt;br&gt;
   💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Vieta&#x27;s formulas provide instantaneous product solutions once real roots are confirmed via the discriminant ($D &gt; 0$).
 &lt;/p&gt;
-  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ 가 실수 전체의 집합에서 연속이 되도록 하는 모든 상수 $a$의 값의 곱은? [3점]</span><div class="bilingual-en">What product of the values ​​of all constants $a$ makes the function $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ continuous over the set of real numbers? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>6</div><div class="opt"><span class="n">2</span>8</div><div class="opt"><span class="n">3</span>12</div><div class="opt"><span class="n">4</span>16</div><div class="opt"><span class="n">5</span>18</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">함수 $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ 가 실수 전체의 집합에서 연속이 되도록 하는 모든 상수 $a$의 값의 곱은? [3점]</span><div class="bilingual-en">What product of the values ​​of all constants $a$ makes the function $f(x) = \begin{cases} (x-a)^2 &amp; (x &lt; 4) \\ 2x-4 &amp; (x \ge 4) \end{cases}$ continuous over the set of real numbers? [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">6</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">8</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">12</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">16</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">18</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -3146,17 +3162,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
@@ -3412,9 +3428,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c30907';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = 'db32e598';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = '0f2d14ee';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c30907.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3438,8 +3454,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c30907';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || 'db32e598';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || '0f2d14ee';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c30907.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

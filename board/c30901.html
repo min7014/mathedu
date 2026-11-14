@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,7 +2083,7 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 </head><body><div class="wrap">
 <!-- STITCH_HEADER_START -->
 <script>
@@ -2396,7 +2412,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$(a^m)^n = a^{mn}$</b> — 지수의 거듭제곱 법칙</div><div><b>$a^m \div a^n = a^{m-n}$</b> — 밑이 같은 지수의 나눗셈</div><div><b>$32 = 2^5, 4 = 2^2$</b> — 2의 거듭제곱으로 밑 통일</div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 지수가 자연수에서 정수, 유리수, 실수로 <b>수체계가 확장될 때 규칙이 어떻게 보존되는지</b>를 단계별로 증명합니다.<br>• <b>[곱셈의 누적]</b> $a^m \times a^n = a^{m+n}$의 자연수 지수법칙이 $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$의 역수 구조로 빈틈없이 확장되는 논리적 필연성<br>• <b>[거듭제곱근의 기하학]</b> $x^n = a$를 만족하는 실근의 개수가 지수 $n$의 홀·짝성과 밑 $a$의 부호에 따라 그래프 교점(1개, 2개, 0개)으로 갈라지는 시각적 대수 구조<br>• <b>[수학적 의미]</b> 규칙을 깨뜨리지 않고 지평을 넓혀가는 대수학적 확장의 위대함을 하단 자료의 단계별 증명 문서에서 확인해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20191231003.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 제곱근 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Square Root)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=c59c11ca557a11eaafa3020038980004" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2020/2020022901.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/K0Tyu7dS1lo" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20191231003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20190810078.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 제곱근의 대소</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=4417843d415811e989430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/math20190810078.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 1단계 · [초등 구구단 연계] 2의 거듭제곱과 밑 통일하기<span class="bilingual-en">🔰 Step 1 · [Elementary Multiplication Link] Powers of 2 and base unification</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 구구단에서 2를 거듭 곱하면 $2 \times 2 = 4$, $4 \times 2 = 8$, $8 \times 2 = 16$, $16 \times 2 = 32$가 됩니다. 즉 $32 = 2^5$이고, $n$제곱근 기호는 분수 지수 $\sqrt[n]{a} = a^{\frac{1}{n}}$로 번역합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In elementary math, multiplying 2 five times gives 32 ($32 = 2^5$). The $n$-th root is translated into a fractional exponent $\sqrt[n]{a} = a^{\frac{1}{n}}$.</div></div><div class="q" data-ans="2" data-exp="$32 = 2^5$이므로 $\sqrt[4]{32} = (2^5)^{\frac{1}{4}} = 2^{\frac{5}{4}}$입니다." data-exp-en="It&#x27;s $32 = 2^5$, so it&#x27;s $\sqrt[4]{32} = (2^5)^{\frac{1}{4}} = 2^{\frac{5}{4}}$."><div class="lvl"><span class="bilingual-ko">초등 구구단 디딤돌 1</span><span class="bilingual-en">Elementary Multiplication Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 구구단: $2 \times 2 \times 2 \times 2 \times 2 = 32$($32=2^5$)이므로 $\sqrt[4]{32}$를 밑이 2인 분수 지수 형태로 바꾼 것은?</span><div class="bilingual-en">Elementary multiplication: Since $32 = 2^5$, what is $\sqrt[4]{32}$ expressed as a base 2 fractional exponent?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$2^{\frac{1}{4}}$</div><div class="opt"><span class="n">2</span>$2^{\frac{5}{4}}$</div><div class="opt"><span class="n">3</span>$2^{\frac{4}{5}}$</div><div class="opt"><span class="n">4</span>$2^2$</div><div class="opt"><span class="n">5</span>$2^5$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 1단계 · [초등 구구단 연계] 2의 거듭제곱과 밑 통일하기<span class="bilingual-en">🔰 Step 1 · [Elementary Multiplication Link] Powers of 2 and base unification</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 구구단에서 2를 거듭 곱하면 $2 \times 2 = 4$, $4 \times 2 = 8$, $8 \times 2 = 16$, $16 \times 2 = 32$가 됩니다. 즉 $32 = 2^5$이고, $n$제곱근 기호는 분수 지수 $\sqrt[n]{a} = a^{\frac{1}{n}}$로 번역합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In elementary math, multiplying 2 five times gives 32 ($32 = 2^5$). The $n$-th root is translated into a fractional exponent $\sqrt[n]{a} = a^{\frac{1}{n}}$.</div></div><div class="q" data-ans="2" data-exp="$32 = 2^5$이므로 $\sqrt[4]{32} = (2^5)^{\frac{1}{4}} = 2^{\frac{5}{4}}$입니다." data-exp-en="It&#x27;s $32 = 2^5$, so it&#x27;s $\sqrt[4]{32} = (2^5)^{\frac{1}{4}} = 2^{\frac{5}{4}}$."><div class="lvl"><span class="bilingual-ko">초등 구구단 디딤돌 1</span><span class="bilingual-en">Elementary Multiplication Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 구구단: $2 \times 2 \times 2 \times 2 \times 2 = 32$($32=2^5$)이므로 $\sqrt[4]{32}$를 밑이 2인 분수 지수 형태로 바꾼 것은?</span><div class="bilingual-en">Elementary multiplication: Since $32 = 2^5$, what is $\sqrt[4]{32}$ expressed as a base 2 fractional exponent?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2^{\frac{1}{4}}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2^{\frac{5}{4}}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$2^{\frac{4}{5}}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$2^2$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$2^5$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2410,7 +2426,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 분모를 밑이 2인 지수로 통일하기<span class="bilingual-en">Step 2 Unify the denominator into a base 2 exponent</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$4 = 2^2$이므로 분모 $\sqrt[8]{4} = (2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Since it is $4 = 2^2$, the denominator is $\sqrt[8]{4} = (2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$.</div></div><div class="q" data-ans="2" data-exp="$(2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$입니다." data-exp-en="This is $(2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">$\sqrt[8]{4}$를 기약분수 지수로 나타낸 것은?</span><div class="bilingual-en">What is $\sqrt[8]{4}$ expressed as a reduced fraction exponent?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$2^{\frac{1}{8}}$</div><div class="opt"><span class="n">2</span>$2^{\frac{1}{4}}$</div><div class="opt"><span class="n">3</span>$2^{\frac{1}{2}}$</div><div class="opt"><span class="n">4</span>$2^2$</div><div class="opt"><span class="n">5</span>$4^{\frac{1}{4}}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제2단계 · 분모를 밑이 2인 지수로 통일하기<span class="bilingual-en">Step 2 Unify the denominator into a base 2 exponent</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$4 = 2^2$이므로 분모 $\sqrt[8]{4} = (2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Since it is $4 = 2^2$, the denominator is $\sqrt[8]{4} = (2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$.</div></div><div class="q" data-ans="2" data-exp="$(2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$입니다." data-exp-en="This is $(2^2)^{\frac{1}{8}} = 2^{\frac{2}{8}} = 2^{\frac{1}{4}}$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">$\sqrt[8]{4}$를 기약분수 지수로 나타낸 것은?</span><div class="bilingual-en">What is $\sqrt[8]{4}$ expressed as a reduced fraction exponent?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2^{\frac{1}{8}}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2^{\frac{1}{4}}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$2^{\frac{1}{2}}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$2^2$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$4^{\frac{1}{4}}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2424,7 +2440,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 지수의 나눗셈 법칙 적용하기<span class="bilingual-en">Step 3 Applying the division rules of exponents</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑이 같은 두 수의 나눗셈은 지수끼리 뺍니다: $\frac{2^{\frac{5}{4}}}{2^{\frac{1}{4}}} = 2^{\frac{5}{4} - \frac{1}{4}} = 2^1 = 2$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When dividing two numbers with the same base, the exponents are subtracted: $\frac{2^{\frac{5}{4}}}{2^{\frac{1}{4}}} = 2^{\frac{5}{4} - \frac{1}{4}} = 2^1 = 2$.</div></div><div class="q" data-ans="2" data-exp="$2^{\frac{5}{4} - \frac{1}{4}} = 2^{\frac{4}{4}} = 2^1 = 2$입니다." data-exp-en="This is $2^{\frac{5}{4} - \frac{1}{4}} = 2^{\frac{4}{4}} = 2^1 = 2$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">$2^{\frac{5}{4}} \div 2^{\frac{1}{4}}$ 의 계산 결과는?</span><div class="bilingual-en">What is the calculation result of $2^{\frac{5}{4}} \div 2^{\frac{1}{4}}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$1$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$\sqrt{2}$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$2\sqrt{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제3단계 · 지수의 나눗셈 법칙 적용하기<span class="bilingual-en">Step 3 Applying the division rules of exponents</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>밑이 같은 두 수의 나눗셈은 지수끼리 뺍니다: $\frac{2^{\frac{5}{4}}}{2^{\frac{1}{4}}} = 2^{\frac{5}{4} - \frac{1}{4}} = 2^1 = 2$.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> When dividing two numbers with the same base, the exponents are subtracted: $\frac{2^{\frac{5}{4}}}{2^{\frac{1}{4}}} = 2^{\frac{5}{4} - \frac{1}{4}} = 2^1 = 2$.</div></div><div class="q" data-ans="2" data-exp="$2^{\frac{5}{4} - \frac{1}{4}} = 2^{\frac{4}{4}} = 2^1 = 2$입니다." data-exp-en="This is $2^{\frac{5}{4} - \frac{1}{4}} = 2^{\frac{4}{4}} = 2^1 = 2$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">$2^{\frac{5}{4}} \div 2^{\frac{1}{4}}$ 의 계산 결과는?</span><div class="bilingual-en">What is the calculation result of $2^{\frac{5}{4}} \div 2^{\frac{1}{4}}$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$1$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$\sqrt{2}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$2\sqrt{2}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2696,7 +2712,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
   Therefore, the correct choice is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
   💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Always factor composite bases into prime factor powers immediately. Fractional exponents streamline radical arithmetic into straightforward linear calculations.
 &lt;/p&gt;
-  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$ 의 값은? [2점]</span><div class="bilingual-en">What is the value of $\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$? [2 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$\sqrt{2}$</div><div class="opt"><span class="n">2</span>$2$</div><div class="opt"><span class="n">3</span>$2\sqrt{2}$</div><div class="opt"><span class="n">4</span>$4$</div><div class="opt"><span class="n">5</span>$4\sqrt{2}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$ 의 값은? [2점]</span><div class="bilingual-en">What is the value of $\frac{\sqrt[4]{32}}{\sqrt[8]{4}}$? [2 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$\sqrt{2}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$2\sqrt{2}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$4\sqrt{2}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -3047,17 +3063,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');

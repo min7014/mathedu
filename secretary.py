@@ -215,6 +215,12 @@ def format_executive_briefing(metrics: dict) -> str:
     ]
     lines.append("----------------------------------------------------------------------")
     try:
+        import _antigravity_report_watcher as _arw_sec
+        lines.append(_arw_sec.format_error_reports_summary())
+        lines.append("----------------------------------------------------------------------")
+    except Exception:
+        pass
+    try:
         import auditor as _aud
         lines.append(_aud.build_telegram_audit_summary(check_live=False, auto_fix=True))
         lines.append("----------------------------------------------------------------------")

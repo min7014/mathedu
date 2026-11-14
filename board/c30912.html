@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,7 +2083,7 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 </head><body><div class="wrap">
 <!-- STITCH_HEADER_START -->
 <script>
@@ -2396,7 +2412,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$b_2 = a_1 - a_2 = -d$</b> — 인접한 두 항의 차와 공차의 관계</div><div><b>$b_{2n} = -nd$</b> — 짝수 번째 항들의 규칙</div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20230830001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 수열 $S_n=\frac{1}{2} + \cdots + \frac{1}{2^n}$의 극한 (The Limit of a Sequence $S_n=\frac{1}{2} + \cdots + \frac{1}{2^n}$)</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/qdchq6ey')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/qdchq6ey" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://min7014.github.io/2023/2023083001.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/PKwCmYbUGfE" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20230830001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20200621003.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 등차수열의 정의 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Definition of Arithmetic Sequence)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><a href="https://min7014.github.io/2020/2020062103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/11IevQTVhJw" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20200621003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 1단계 · [초등 규칙과 뺄셈] 앞 항과 뒤 항의 차이<span class="bilingual-en">🔰 Step 1 · [Elementary Pattern & Subtraction] Difference between consecutive terms</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 규칙 찾기: 등차수열은 일정하게 공차 $d$만큼 커지므로 2번째 수는 $a_1 + d$입니다. 따라서 $a_1 - a_2 = a_1 - (a_1+d) = -d$가 되며, $-d = -2$이면 $d = 2$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In arithmetic sequences, each step adds common difference $d$, so $a_2 = a_1 + d$. Thus $a_1 - a_2 = -d = -2$, giving $d = 2$.</div></div><div class="q" data-ans="4" data-exp="$a_2 - a_1 = d$이므로 $a_1 - a_2 = -d = -2 \implies d=2$입니다." data-exp-en="It&#x27;s $a_2 - a_1 = d$, so it&#x27;s $a_1 - a_2 = -d = -2 \implies d=2$."><div class="lvl"><span class="bilingual-ko">초등 규칙 뺄셈 디딤돌 1</span><span class="bilingual-en">Elementary Pattern Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 규칙 뺄셈: 등차수열에서 2번째 항이 $a_1+d$일 때 $a_1 - a_2 = -d = -2$로부터 공차 $d$의 값은?</span><div class="bilingual-en">Elementary pattern subtraction: In an arithmetic sequence with $a_1 - a_2 = -d = -2$, what is the common difference $d$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-2$</div><div class="opt"><span class="n">2</span>$-1$</div><div class="opt"><span class="n">3</span>$1$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 1단계 · [초등 규칙과 뺄셈] 앞 항과 뒤 항의 차이<span class="bilingual-en">🔰 Step 1 · [Elementary Pattern & Subtraction] Difference between consecutive terms</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 규칙 찾기: 등차수열은 일정하게 공차 $d$만큼 커지므로 2번째 수는 $a_1 + d$입니다. 따라서 $a_1 - a_2 = a_1 - (a_1+d) = -d$가 되며, $-d = -2$이면 $d = 2$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In arithmetic sequences, each step adds common difference $d$, so $a_2 = a_1 + d$. Thus $a_1 - a_2 = -d = -2$, giving $d = 2$.</div></div><div class="q" data-ans="4" data-exp="$a_2 - a_1 = d$이므로 $a_1 - a_2 = -d = -2 \implies d=2$입니다." data-exp-en="It&#x27;s $a_2 - a_1 = d$, so it&#x27;s $a_1 - a_2 = -d = -2 \implies d=2$."><div class="lvl"><span class="bilingual-ko">초등 규칙 뺄셈 디딤돌 1</span><span class="bilingual-en">Elementary Pattern Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 규칙 뺄셈: 등차수열에서 2번째 항이 $a_1+d$일 때 $a_1 - a_2 = -d = -2$로부터 공차 $d$의 값은?</span><div class="bilingual-en">Elementary pattern subtraction: In an arithmetic sequence with $a_1 - a_2 = -d = -2$, what is the common difference $d$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$-2$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$-1$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$1$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$4$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2410,7 +2426,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · $b_3 + b_7 = 0$ 조건으로 첫째항 $a_1$ 구하기<span class="bilingual-en">Step 2 · Find the first term $a_1$ based on the $b_3 + b_7 = 0$ condition</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$. $b_7 = -3d + a_7 = a_7 - 6$. 따라서 $b_3 + b_7 = a_3 + a_7 - 8 = (a_1+4) + (a_1+12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$. $b_7 = -3d + a_7 = a_7 - 6$. Hence $b_3 + b_7 = a_3 + a_7 - 8 = (a_1+4) + (a_1+12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$.</div></div><div class="q" data-ans="2" data-exp="$2a_1 = -8 \implies a_1 = -4$입니다." data-exp-en="This is $2a_1 = -8 \implies a_1 = -4$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">$2a_1 + 8 = 0$ 일 때 첫째항 $a_1$의 값은?</span><div class="bilingual-en">When $2a_1 + 8 = 0$, what is the value of the first term, $a_1$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-8$</div><div class="opt"><span class="n">2</span>$-4$</div><div class="opt"><span class="n">3</span>$-2$</div><div class="opt"><span class="n">4</span>$2$</div><div class="opt"><span class="n">5</span>$4$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제2단계 · $b_3 + b_7 = 0$ 조건으로 첫째항 $a_1$ 구하기<span class="bilingual-en">Step 2 · Find the first term $a_1$ based on the $b_3 + b_7 = 0$ condition</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>$b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$. $b_7 = -3d + a_7 = a_7 - 6$. 따라서 $b_3 + b_7 = a_3 + a_7 - 8 = (a_1+4) + (a_1+12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> $b_3 = (a_1 - a_2) + a_3 = -d + a_3 = a_3 - 2$. $b_7 = -3d + a_7 = a_7 - 6$. Hence $b_3 + b_7 = a_3 + a_7 - 8 = (a_1+4) + (a_1+12) - 8 = 2a_1 + 8 = 0 \implies a_1 = -4$.</div></div><div class="q" data-ans="2" data-exp="$2a_1 = -8 \implies a_1 = -4$입니다." data-exp-en="This is $2a_1 = -8 \implies a_1 = -4$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">$2a_1 + 8 = 0$ 일 때 첫째항 $a_1$의 값은?</span><div class="bilingual-en">When $2a_1 + 8 = 0$, what is the value of the first term, $a_1$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$-8$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$-4$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$-2$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$4$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2424,7 +2440,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · $b_1$부터 $b_9$까지의 값의 합 구하기<span class="bilingual-en">Step 3 · Find the sum of values ​​from $b_1$ to $b_9$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>짝수항: $b_2=-2, b_4=-4, b_6=-6, b_8=-8$, 합 = $-20$. 홀수항: $b_1=-4, b_3=-2, b_5=0, b_7=2, b_9=4$, 합 = $0$. 총합 = $0 + (-20) = -20$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Even term: $b_2=-2, b_4=-4, b_6=-6, b_8=-8$, sum = $-20$. Odd terms: $b_1=-4, b_3=-2, b_5=0, b_7=2, b_9=4$, sum = $0$. Total = $0 + (-20) = -20$.</div></div><div class="q" data-ans="3" data-exp="$-20 + 0 = -20$입니다." data-exp-en="This is $-20 + 0 = -20$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">짝수항의 합 $-20$과 홀수항의 합 $0$의 총합은?</span><div class="bilingual-en">What is the sum of the sum of the even terms, $-20$, and the sum of the odd terms, $0$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$-24$</div><div class="opt"><span class="n">2</span>$-22$</div><div class="opt"><span class="n">3</span>$-20$</div><div class="opt"><span class="n">4</span>$-18$</div><div class="opt"><span class="n">5</span>$-16$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>제3단계 · $b_1$부터 $b_9$까지의 값의 합 구하기<span class="bilingual-en">Step 3 · Find the sum of values ​​from $b_1$ to $b_9$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>짝수항: $b_2=-2, b_4=-4, b_6=-6, b_8=-8$, 합 = $-20$. 홀수항: $b_1=-4, b_3=-2, b_5=0, b_7=2, b_9=4$, 합 = $0$. 총합 = $0 + (-20) = -20$ 입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Even term: $b_2=-2, b_4=-4, b_6=-6, b_8=-8$, sum = $-20$. Odd terms: $b_1=-4, b_3=-2, b_5=0, b_7=2, b_9=4$, sum = $0$. Total = $0 + (-20) = -20$.</div></div><div class="q" data-ans="3" data-exp="$-20 + 0 = -20$입니다." data-exp-en="This is $-20 + 0 = -20$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">짝수항의 합 $-20$과 홀수항의 합 $0$의 총합은?</span><div class="bilingual-en">What is the sum of the sum of the even terms, $-20$, and the sum of the odd terms, $0$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$-24$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$-22$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$-20$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$-18$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$-16$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2758,7 +2774,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
   Therefore, the correct answer is &lt;b&gt;Option ②&lt;/b&gt;.&lt;br&gt;
   💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: Pairing alternating signs as $-d$ reduces alternating series to simple arithmetic steps, revealing useful symmetries around zero.
 &lt;/p&gt;
-  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</span><div class="bilingual-en">The sequence $\{a_n\}$ is an arithmetic sequence, and the sequence $\{b_n\}$ satisfies $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$ for all natural numbers $n$. When $b_2 = -2, b_3 + b_7 = 0$, what is the sum of the first to ninth terms of the sequence $\{b_n\}$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$-22$</div><div class="opt"><span class="n">2</span>$-20$</div><div class="opt"><span class="n">3</span>$-18$</div><div class="opt"><span class="n">4</span>$-16$</div><div class="opt"><span class="n">5</span>$-14$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">수열 $\{a_n\}$은 등차수열이고, 수열 $\{b_n\}$은 모든 자연수 $n$에 대하여 $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$를 만족시킨다. $b_2 = -2, b_3 + b_7 = 0$일 때, 수열 $\{b_n\}$의 첫째항부터 제9항까지의 합은? [4점]</span><div class="bilingual-en">The sequence $\{a_n\}$ is an arithmetic sequence, and the sequence $\{b_n\}$ satisfies $b_n = \sum_{k=1}^n (-1)^{k+1} a_k$ for all natural numbers $n$. When $b_2 = -2, b_3 + b_7 = 0$, what is the sum of the first to ninth terms of the sequence $\{b_n\}$? [4 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$-22$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$-20$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$-18$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$-16$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$-14$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -3109,17 +3125,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');

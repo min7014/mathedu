@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,15 +2083,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/c270929.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c270929.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c270929">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="844615cc">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="090761b3">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2465,7 +2481,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$(b_2)^2 = 36b_3$</b> — 조건식</div><div><b>$36 \times a_4 \times a_6 = 81$</b> — 최종 단답형 정답</div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 수열의 추상적 항들이 <b>좌표평면의 점과 도형의 면적으로 실체화되는 과정</b>을 한 장씩 보여줍니다.<br>• <b>[수열의 점진적 접근]</b> 항 번호 $n$이 커짐에 따라 수직선과 좌표평면에서 수열 $a_n$의 값들이 목표점(극한값)을 향해 촘촘히 포위해 들어가는 궤적 관찰<br>• <b>[무한급수의 공간 채우기]</b> 무한등비급수 $\sum \left(\frac{1}{2}\right)^n$이 정사각형 면적의 반을 채우고, 남은 반의 반을 채워나가며 결국 완전한 1의 넓이를 채워내는 프랙탈 기하학<br>• <b>[수학적 의미]</b> '무한히 더한다'는 개념이 공허한 상상이 아니라, 공간의 완전한 채움이라는 기하학적 실체임을 하단 자료에서 확인해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20230830001.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 수열 $S_n=\frac{1}{2} + \cdots + \frac{1}{2^n}$의 극한 (The Limit of a Sequence $S_n=\frac{1}{2} + \cdots + \frac{1}{2^n}$)</a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/qdchq6ey')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/qdchq6ey" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://min7014.github.io/2023/2023083001.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/PKwCmYbUGfE" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20230830001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20200710002.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 등비수열의 정의 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Definition of Geometric Sequence)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><a href="https://min7014.github.io/2020/2020071002.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/297mG0fUV8I" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20200710002.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 1단계 · [초등 분수 크기] 절반씩 줄어드는 조각의 비<span class="bilingual-en">🔰 Step 1 · [Elementary Fraction Size] Ratio shrinking by half</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 분수: 피자를 계속 절반($\frac{1}{2}$)씩 잘라 나가면 조각은 점점 0에 가까워집니다. 공비의 크기가 1보다 작아야($|r| < 1$) 무한히 더해도 합이 폭발하지 않습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Elementary fractions: Repeatedly cutting a pizza in half ($\frac{1}{2}$) makes pieces vanish toward 0. The ratio must be smaller than 1 ($|r| < 1$) for the infinite sum to stay finite.</div></div><div class="q" data-ans="1" data-exp="무한등비급수의 수렴 조건은 $|r| < 1$ ($-1 < r < 1$) 입니다." data-exp-en="The convergence condition for infinite geometric series is $|r| &lt; 1$ ($-1 &lt; r &lt; 1$)."><div class="lvl"><span class="bilingual-ko">초등 분수 직관 디딤돌 1</span><span class="bilingual-en">Elementary Fraction Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 분수 직관: 첫째항이 $0$이 아닌 무한등비급수가 유한한 값으로 수렴하기 위해 공비 $r$이 만족해야 하는 조건은? ($|r| < 1$)</span><div class="bilingual-en">Elementary fraction intuition: What condition must the common ratio $r$ satisfy for an infinite geometric series with $a \neq 0$ to converge to a finite value? ($|r| < 1$)</div></div><div class="opts"><div class="opt"><span class="n">1</span>$|r| < 1$</div><div class="opt"><span class="n">2</span>$|r| \le 1$</div><div class="opt"><span class="n">3</span>$r > 1$</div><div class="opt"><span class="n">4</span>$r = 1$</div><div class="opt"><span class="n">5</span><span class="bilingual-ko">모든 실수 $r$</span><span class="bilingual-en">All real numbers $r$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<h2>🔰 1단계 · [초등 분수 크기] 절반씩 줄어드는 조각의 비<span class="bilingual-en">🔰 Step 1 · [Elementary Fraction Size] Ratio shrinking by half</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 분수: 피자를 계속 절반($\frac{1}{2}$)씩 잘라 나가면 조각은 점점 0에 가까워집니다. 공비의 크기가 1보다 작아야($|r| < 1$) 무한히 더해도 합이 폭발하지 않습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Elementary fractions: Repeatedly cutting a pizza in half ($\frac{1}{2}$) makes pieces vanish toward 0. The ratio must be smaller than 1 ($|r| < 1$) for the infinite sum to stay finite.</div></div><div class="q" data-ans="1" data-exp="무한등비급수의 수렴 조건은 $|r| < 1$ ($-1 < r < 1$) 입니다." data-exp-en="The convergence condition for infinite geometric series is $|r| &lt; 1$ ($-1 &lt; r &lt; 1$)."><div class="lvl"><span class="bilingual-ko">초등 분수 직관 디딤돌 1</span><span class="bilingual-en">Elementary Fraction Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 분수 직관: 첫째항이 $0$이 아닌 무한등비급수가 유한한 값으로 수렴하기 위해 공비 $r$이 만족해야 하는 조건은? ($|r| < 1$)</span><div class="bilingual-en">Elementary fraction intuition: What condition must the common ratio $r$ satisfy for an infinite geometric series with $a \neq 0$ to converge to a finite value? ($|r| < 1$)</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$|r| < 1$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$|r| \le 1$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$r > 1$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$r = 1$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt"><span class="bilingual-ko">모든 실수 $r$</span><span class="bilingual-en">All real numbers $r$</span></span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2476,7 +2492,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🌿 2단계 · [수열의 관계식 분석] 첫째항과 공비의 연립<span class="bilingual-en">🌿 Step 2 · [Relational analysis of sequence] Synthesis of first term and common ratio</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>급수 조건으로부터 얻은 관계식 $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 \neq 0, r \neq 0$)에서 양변을 $b_1 r^2$으로 나누면 첫째항 $b_1 = 36$이 확정됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the relational expression $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 \neq 0, r \neq 0$) obtained from the series condition, dividing both sides by $b_1 r^2$ determines the first term $b_1 = 36$.</div></div><div class="q" data-ans="3" data-exp="$b_1^2 r^2 = 36 b_1 r^2$ 에서 양변을 $b_1 r^2$ 으로 나누면 $b_1 = 36$ 입니다." data-exp-en="If you divide both sides of $b_1^2 r^2 = 36 b_1 r^2$ by $b_1 r^2$, you get $b_1 = 36$."><div class="lvl"><span class="bilingual-ko">수열 관계식 디딤돌 2</span><span class="bilingual-en">Sequence relationship Scaffolding Step 2</span></div><div class="stem"><span class="bilingual-ko">수열 조건으로부터 얻은 방정식 $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 r \neq 0$)을 만족하는 첫째항 $b_1$의 값은?</span><div class="bilingual-en">What is the value of the first term, $b_1$, that satisfies the equation $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 r \neq 0$) obtained from the sequence condition?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$32$</div><div class="opt"><span class="n">2</span>$34$</div><div class="opt"><span class="n">3</span>$36$</div><div class="opt"><span class="n">4</span>$38$</div><div class="opt"><span class="n">5</span>$40$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>🌿 2단계 · [수열의 관계식 분석] 첫째항과 공비의 연립<span class="bilingual-en">🌿 Step 2 · [Relational analysis of sequence] Synthesis of first term and common ratio</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>급수 조건으로부터 얻은 관계식 $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 \neq 0, r \neq 0$)에서 양변을 $b_1 r^2$으로 나누면 첫째항 $b_1 = 36$이 확정됩니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> In the relational expression $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 \neq 0, r \neq 0$) obtained from the series condition, dividing both sides by $b_1 r^2$ determines the first term $b_1 = 36$.</div></div><div class="q" data-ans="3" data-exp="$b_1^2 r^2 = 36 b_1 r^2$ 에서 양변을 $b_1 r^2$ 으로 나누면 $b_1 = 36$ 입니다." data-exp-en="If you divide both sides of $b_1^2 r^2 = 36 b_1 r^2$ by $b_1 r^2$, you get $b_1 = 36$."><div class="lvl"><span class="bilingual-ko">수열 관계식 디딤돌 2</span><span class="bilingual-en">Sequence relationship Scaffolding Step 2</span></div><div class="stem"><span class="bilingual-ko">수열 조건으로부터 얻은 방정식 $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 r \neq 0$)을 만족하는 첫째항 $b_1$의 값은?</span><div class="bilingual-en">What is the value of the first term, $b_1$, that satisfies the equation $b_1^2 r^2 = 36 b_1 r^2$ ($b_1 r \neq 0$) obtained from the sequence condition?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$32$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$34$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$36$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$38$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$40$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2487,7 +2503,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>💡 3단계 · [등비중항과 거듭제곱] 최종 곱 $36 a_4 a_6$ 산출<span class="bilingual-en">💡 Step 3 · [Equal Proportions and Powers] Calculate the final product $36 a_4 a_6$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>등비수열의 성질 $a_4 a_6 = (a_5)^2$ 및 구한 수열의 값들을 대입하여 정리하면 $36 \times a_4 \times a_6 = 36 \times \left(\frac{3}{2}\right)^2 = 9 \times 9 = 81$을 얻습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> By substituting the properties of the geometric sequence $a_4 a_6 = (a_5)^2$ and the values ​​of the obtained sequence, we obtain $36 \times a_4 \times a_6 = 36 \times \left(\frac{3}{2}\right)^2 = 9 \times 9 = 81$.</div></div><div class="q" data-ans="3" data-exp="$36 \times a_4 \times a_6 = 9 \times 9 = 81$ 입니다." data-exp-en="This is $36 \times a_4 \times a_6 = 9 \times 9 = 81$."><div class="lvl"><span class="bilingual-ko">등비 거듭제곱 완성 디딤돌 3</span><span class="bilingual-en">Geometric power completion Scaffolding Step 3</span></div><div class="stem"><span class="bilingual-ko">구한 수열의 값들을 대입하여 계산한 $36 \times a_4 \times a_6 = 9 \times 9$의 최종 값은?</span><div class="bilingual-en">What is the final value of $36 \times a_4 \times a_6 = 9 \times 9$ calculated by substituting the values ​​of the obtained sequence?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$75$</div><div class="opt"><span class="n">2</span>$78$</div><div class="opt"><span class="n">3</span>$81$</div><div class="opt"><span class="n">4</span>$84$</div><div class="opt"><span class="n">5</span>$87$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>💡 3단계 · [등비중항과 거듭제곱] 최종 곱 $36 a_4 a_6$ 산출<span class="bilingual-en">💡 Step 3 · [Equal Proportions and Powers] Calculate the final product $36 a_4 a_6$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>등비수열의 성질 $a_4 a_6 = (a_5)^2$ 및 구한 수열의 값들을 대입하여 정리하면 $36 \times a_4 \times a_6 = 36 \times \left(\frac{3}{2}\right)^2 = 9 \times 9 = 81$을 얻습니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> By substituting the properties of the geometric sequence $a_4 a_6 = (a_5)^2$ and the values ​​of the obtained sequence, we obtain $36 \times a_4 \times a_6 = 36 \times \left(\frac{3}{2}\right)^2 = 9 \times 9 = 81$.</div></div><div class="q" data-ans="3" data-exp="$36 \times a_4 \times a_6 = 9 \times 9 = 81$ 입니다." data-exp-en="This is $36 \times a_4 \times a_6 = 9 \times 9 = 81$."><div class="lvl"><span class="bilingual-ko">등비 거듭제곱 완성 디딤돌 3</span><span class="bilingual-en">Geometric power completion Scaffolding Step 3</span></div><div class="stem"><span class="bilingual-ko">구한 수열의 값들을 대입하여 계산한 $36 \times a_4 \times a_6 = 9 \times 9$의 최종 값은?</span><div class="bilingual-en">What is the final value of $36 \times a_4 \times a_6 = 9 \times 9$ calculated by substituting the values ​​of the obtained sequence?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$75$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$78$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$81$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$84$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$87$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2762,7 +2778,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
   💡 &lt;b&gt;Key Tip&lt;/b&gt;: Pair telescoping cancellations systematically.
 &lt;/p&gt;
   
-  "><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$36 \times a_4 \times a_6$ 의 값으로 알맞은 것은?</span><div class="bilingual-en">What is the appropriate value for $36 \times a_4 \times a_6$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$75$</div><div class="opt"><span class="n">2</span>$78$</div><div class="opt"><span class="n">3</span>$81$</div><div class="opt"><span class="n">4</span>$84$</div><div class="opt"><span class="n">5</span>$87$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+  "><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">$36 \times a_4 \times a_6$ 의 값으로 알맞은 것은?</span><div class="bilingual-en">What is the appropriate value for $36 \times a_4 \times a_6$?</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$75$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$78$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$81$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$84$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$87$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -3132,17 +3148,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
@@ -3398,9 +3414,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c270929';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = '844615cc';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = '090761b3';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c270929.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3424,8 +3440,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c270929';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || '844615cc';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || '090761b3';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c270929.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

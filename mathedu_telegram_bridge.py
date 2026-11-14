@@ -221,8 +221,23 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
         allowed_chat_id = str(state["chat_id"])
 
     start_ts = time.time()
+    last_report_poll_ts = 0.0
     while time.time() - start_ts < max_wait_sec:
         try:
+            if time.time() - last_report_poll_ts >= 90.0:
+                last_report_poll_ts = time.time()
+                try:
+                    sys.path.insert(0, str(ROOT_DIR))
+                    import _antigravity_report_watcher as _arw
+                    rep_res = _arw.poll_and_notify_error_reports_once(send_telegram=True)
+                    if rep_res.get("newly_alerted"):
+                        print("======================================================================")
+                        print("🚨 [WEB_ERROR_REPORT_INCOMING] 홈페이지 신규 오류신고 감지 (Reactive Wakeup)")
+                        print(json.dumps(rep_res.get("newly_alerted"), ensure_ascii=False, indent=2))
+                        print("======================================================================")
+                        return 0
+                except Exception:
+                    pass
             st_cur = load_offset_state()
             offset = max(offset, int(st_cur.get("offset", 0)))
             res = tg_api(token, "getUpdates", {"offset": offset, "timeout": 25}, timeout=35)
@@ -355,11 +370,18 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !고품질화실행 (또는 /retrofit) : [크레딧 0] 유휴 고품질화 1주제 백그라운드 즉시 실행\n"
             "• !업로드 (또는 /wave) : 전략 v2.0(실전함정·3~10분 본편 3 + 한/영 Q-#Shorts 3) 업로드 웨이브 즉시 실행\n"
             "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
+            "• !신고 (또는 !오류신고 / /reports) : [크레딧 0] mathedu 홈페이지 실시간 오류신고 접수·수리 현황 조회\n"
             "• !감사 (또는 !저작권 / !상표권) : [크레딧 0] 독립 감사관(auditor) 7계층 저작권·상표권·라이브 유튜브 전수 감사\n"
             "• !점검 (또는 /audit) : 전 문항·전 시스템 무결성 고속 스캔\n"
             "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n\n"
             "※ 일반 대화나 새로운 개발·수정 지시는 평소처럼 편하게 말씀하시면 AI가 즉시 깨어나 수행합니다."
         )
+
+    if low in ("!신고", "!오류신고", "/reports", "!reports"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import _antigravity_report_watcher as _arw
+        _arw.poll_and_notify_error_reports_once(send_telegram=False)
+        return _arw.format_error_reports_summary()
 
     if low in ("!감사", "!저작권", "!상표권", "/copyright", "!copyright"):
         sys.path.insert(0, str(ROOT_DIR))
@@ -569,11 +591,21 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
         allowed_chat_id = str(state["chat_id"])
 
     print(f"🚀 [Antigravity Telegram 무충돌 상시 워치독 가동 중 | PID={os.getpid()} | {datetime.datetime.now().isoformat()}]", flush=True)
+    last_wd_report_poll = 0.0
     while True:
         try:
             if _is_live_session_owning_telegram():
                 await asyncio.sleep(3.0)
                 continue
+
+            if time.time() - last_wd_report_poll >= 90.0:
+                last_wd_report_poll = time.time()
+                try:
+                    sys.path.insert(0, str(ROOT_DIR))
+                    import _antigravity_report_watcher as _arw_wd
+                    await asyncio.to_thread(_arw_wd.poll_and_notify_error_reports_once, True)
+                except Exception:
+                    pass
 
             st_cur = load_offset_state()
             offset = max(offset, int(st_cur.get("offset", 0)))

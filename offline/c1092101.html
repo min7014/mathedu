@@ -160,6 +160,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1299,6 +1303,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2067,15 +2083,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261003_v3"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/c1092101.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c1092101.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c1092101">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="ac222b59">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="896c9978">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2466,7 +2482,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Level 0 · Mathematical symbols</span></h2><div class="sym"><div><b>$d = \dfrac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$</b> — 점 $(x_0, y_0)$과 직선 $ax+by+c=0$ 사이의 수직 거리 공식</div><div><b>$d + r$</b> — 원 위의 점에서 직선까지 이르는 거리의 최댓값 (중심거리 + 반지름)</div><div><b>$|k - 6| = 20$</b> — 절댓값 기호를 포함한 일차방정식 ($k - 6 = \pm 20$)</div></div>
 <div class="min-visual-tip">💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 원의 완벽한 대칭성과 <b>직선 사이의 위치 관계</b>를 기하학적 보조선으로 증명합니다.<br>• <b>[거리의 정의]</b> 중심 $(a, b)$에서 일정한 거리 $r$만큼 떨어진 점들의 자취로부터 피타고라스 정리를 통해 원의 방정식 $(x-a)^2 + (y-b)^2 = r^2$ 유도<br>• <b>[접선과 직각]</b> 원의 중심에서 접점에 내린 반지름은 접선과 언제나 수직($90^\circ$)을 이룬다는 유클리드 기하의 대원칙 확인<br>• <b>[판별식과 점과 직선 거리]</b> 대수적 판별식 $D=0$과 기하학적 점과 직선 사이 거리 $d=r$가 동일한 접선의 방정식으로 귀결되는 두 수학적 세계의 일치를 하단 자료에서 확인해 보세요.
 <div class="min-visual-links" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(124,196,255,.3);display:flex;flex-direction:column;gap:10px;"><div style="font-weight:700;color:#006398;font-size:.85rem;display:flex;align-items:center;gap:6px"><span>🔗 위 시각적 증명과 직결된 핵심 자료:</span></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20200324002.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 삼각형 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Triangle)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/wns6wmjh')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/wns6wmjh" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=4258c213f02511e889430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2019/2017091809.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/7CNgZjC4zfM" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20200324002.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div class="min-tip-item" style="background:#ffffff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><a href="https://min7014.github.io/math20191222003.html" target="_blank" rel="noopener" style="font-weight:700;color:#006398;text-decoration:none;font-size:.88rem;display:inline-flex;align-items:center;gap:6px"><span style="font-size:1rem">📌</span> 닮음 <span style="font-size:.76rem;color:#94a3b8;font-weight:400">(Similarity)</span></a><span style="font-size:.72rem;background:rgba(56,189,248,.18);color:#7dd3fc;padding:2px 8px;border-radius:6px;border:1px solid rgba(56,189,248,.35)">시각적 탐구</span></div><div class="min-item-actions" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/qscsz7vj')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button><a href="https://www.geogebra.org/m/qscsz7vj" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.9" title="GeoGebra Tube 새 창 열기">Tube ↗</a><a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=1e4ab838483211eaafa3020038980004" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a><a href="https://min7014.github.io/2020/2011112501.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a><a href="https://youtu.be/ZISS4ZBrFKQ" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a><a href="https://min7014.github.io/math20191222003.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a></div><div class="min-ggb-frame-wrap"></div></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:4px"><a href="#min7014-addon" style="color:#7cc4ff;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>👇</span> 하단 연계 심층 탐구 자료실 전체 보기 ➔</a><a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:#a78bfa;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><span>🌐</span> 수학자료실 메인 (3,400+ 주제) ↗</a></div></div></div>
-<h2>🔰 제1단계 · [초등 모눈종이 원] 원의 중심과 반지름 파악하기<span class="bilingual-en">🔰 Step 1 · [Elementary Grid Circle] Identify the center and radius of the circle</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 모눈종이에서 컴퍼스로 원을 그릴 때, 뾰족한 다리를 꽂는 중심점 $(a, b)$과 벌린 너비인 반지름 $r$을 정합니다. $(x - 2)^2 + (y - 3)^2 = 9$에서 $9 = 3^2$이므로 반지름은 3입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Drawing a circle with a compass on grid paper: Set the center $(a, b)$ and the open width as radius $r$. In $(x-2)^2+(y-3)^2=9$, $9=3^2$, so the radius is 3.</div></div><div class="q" data-ans="3" data-exp="원 $(x - 2)^2 + (y - 3)^2 = 3^2$ 이므로 중심은 $(2, 3)$이고 반지름 $r = \sqrt{9} = 3$입니다." data-exp-en="Since it is a circle $(x - 2)^2 + (y - 3)^2 = 3^2$, the center is $(2, 3)$ and the radius is $r = \sqrt{9} = 3$."><div class="lvl"><span class="bilingual-ko">초등 원과 중심 디딤돌 1</span><span class="bilingual-en">Elementary Circle Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 모눈종이 원: 중심 $(a, b)$에서 반지름 $r$만큼 떨어진 점들의 모임이 원입니다. $(x - 2)^2 + (y - 3)^2 = 3^2$ 에서 중심 좌표 $(a, b)$와 반지름 $r$은 무엇인가요?</span><div class="bilingual-en">Elementary grid circle: What are the center coordinates $(a, b)$ and radius $r$ of the circle $(x - 2)^2 + (y - 3)^2 = 3^2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="bilingual-ko">중심 $(2, 3)$, 반지름 $r = 9$</span><span class="bilingual-en">Center $(2, 3)$, radius $r = 9$</span></div><div class="opt"><span class="n">2</span><span class="bilingual-ko">중심 $(-2, -3)$, 반지름 $r = 3$</span><span class="bilingual-en">Center $(-2, -3)$, radius $r = 3$</span></div><div class="opt"><span class="n">3</span><span class="bilingual-ko">중심 $(2, 3)$, 반지름 $r = 3$</span><span class="bilingual-en">Center $(2, 3)$, radius $r = 3$</span></div><div class="opt"><span class="n">4</span><span class="bilingual-ko">중심 $(3, 2)$, 반지름 $r = 3$</span><span class="bilingual-en">Center $(3, 2)$, radius $r = 3$</span></div><div class="opt"><span class="n">5</span><span class="bilingual-ko">중심 $(2, 3)$, 반지름 $r = \sqrt{3}$</span><span class="bilingual-en">Center $(2, 3)$, radius $r = \sqrt{3}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+<h2>🔰 제1단계 · [초등 모눈종이 원] 원의 중심과 반지름 파악하기<span class="bilingual-en">🔰 Step 1 · [Elementary Grid Circle] Identify the center and radius of the circle</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>초등학교 모눈종이에서 컴퍼스로 원을 그릴 때, 뾰족한 다리를 꽂는 중심점 $(a, b)$과 벌린 너비인 반지름 $r$을 정합니다. $(x - 2)^2 + (y - 3)^2 = 9$에서 $9 = 3^2$이므로 반지름은 3입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Drawing a circle with a compass on grid paper: Set the center $(a, b)$ and the open width as radius $r$. In $(x-2)^2+(y-3)^2=9$, $9=3^2$, so the radius is 3.</div></div><div class="q" data-ans="3" data-exp="원 $(x - 2)^2 + (y - 3)^2 = 3^2$ 이므로 중심은 $(2, 3)$이고 반지름 $r = \sqrt{9} = 3$입니다." data-exp-en="Since it is a circle $(x - 2)^2 + (y - 3)^2 = 3^2$, the center is $(2, 3)$ and the radius is $r = \sqrt{9} = 3$."><div class="lvl"><span class="bilingual-ko">초등 원과 중심 디딤돌 1</span><span class="bilingual-en">Elementary Circle Step 1</span></div><div class="stem"><span class="bilingual-ko">초등학교 모눈종이 원: 중심 $(a, b)$에서 반지름 $r$만큼 떨어진 점들의 모임이 원입니다. $(x - 2)^2 + (y - 3)^2 = 3^2$ 에서 중심 좌표 $(a, b)$와 반지름 $r$은 무엇인가요?</span><div class="bilingual-en">Elementary grid circle: What are the center coordinates $(a, b)$ and radius $r$ of the circle $(x - 2)^2 + (y - 3)^2 = 3^2$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt"><span class="bilingual-ko">중심 $(2, 3)$, 반지름 $r = 9$</span><span class="bilingual-en">Center $(2, 3)$, radius $r = 9$</span></span></div><div class="opt"><span class="n">2</span><span class="opt-txt"><span class="bilingual-ko">중심 $(-2, -3)$, 반지름 $r = 3$</span><span class="bilingual-en">Center $(-2, -3)$, radius $r = 3$</span></span></div><div class="opt"><span class="n">3</span><span class="opt-txt"><span class="bilingual-ko">중심 $(2, 3)$, 반지름 $r = 3$</span><span class="bilingual-en">Center $(2, 3)$, radius $r = 3$</span></span></div><div class="opt"><span class="n">4</span><span class="opt-txt"><span class="bilingual-ko">중심 $(3, 2)$, 반지름 $r = 3$</span><span class="bilingual-en">Center $(3, 2)$, radius $r = 3$</span></span></div><div class="opt"><span class="n">5</span><span class="opt-txt"><span class="bilingual-ko">중심 $(2, 3)$, 반지름 $r = \sqrt{3}$</span><span class="bilingual-en">Center $(2, 3)$, radius $r = \sqrt{3}$</span></span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2480,7 +2496,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>🔰 제2단계 · 원의 중심과 직선 사이의 거리 $d$ 표현하기<span class="bilingual-en">🔰 Step 2 · Express the distance between the center of the circle and the straight line $d$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>좌표평면 위의 점 $(x_0, y_0)$에서 직선 $ax + by + c = 0$까지의 최단 거리 $d$는 공식 $d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}$로 구합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The shortest distance $d$ from point $(x_0, y_0)$ on the coordinate plane to line $ax + by + c = 0$ is found by the formula $d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}$.</div></div><div class="q" data-ans="1" data-exp="점 $(2, 3)$을 대입하면 분자는 $|3(2) - 4(3) + k| = |6 - 12 + k| = |k - 6|$이고, 분모는 $\sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$입니다. 따라서 $d = \frac{|k - 6|}{5}$입니다." data-exp-en="Substituting the point $(2, 3)$, the numerator is $|3(2) - 4(3) + k| = |6 - 12 + k| = |k - 6|$ and the denominator is $\sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$. Hence $d = \frac{|k - 6|}{5}$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">원의 중심 $(2, 3)$에서 직선 $3x - 4y + k = 0$까지의 거리 $d$를 $k$로 바르게 나타낸 것은?</span><div class="bilingual-en">What is the correct expression of $d$, the distance from the center of the circle $(2, 3)$ to the straight line</div></div><div class="opts"><div class="opt"><span class="n">1</span>$d = \frac{|k - 6|}{5}$</div><div class="opt"><span class="n">2</span>$d = \frac{|k + 6|}{5}$</div><div class="opt"><span class="n">3</span>$d = \frac{|k - 6|}{25}$</div><div class="opt"><span class="n">4</span>$d = \frac{|k - 18|}{5}$</div><div class="opt"><span class="n">5</span>$d = \frac{|k|}{5}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+</div></div><h2>🔰 제2단계 · 원의 중심과 직선 사이의 거리 $d$ 표현하기<span class="bilingual-en">🔰 Step 2 · Express the distance between the center of the circle and the straight line $d$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>좌표평면 위의 점 $(x_0, y_0)$에서 직선 $ax + by + c = 0$까지의 최단 거리 $d$는 공식 $d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}$로 구합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The shortest distance $d$ from point $(x_0, y_0)$ on the coordinate plane to line $ax + by + c = 0$ is found by the formula $d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}$.</div></div><div class="q" data-ans="1" data-exp="점 $(2, 3)$을 대입하면 분자는 $|3(2) - 4(3) + k| = |6 - 12 + k| = |k - 6|$이고, 분모는 $\sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$입니다. 따라서 $d = \frac{|k - 6|}{5}$입니다." data-exp-en="Substituting the point $(2, 3)$, the numerator is $|3(2) - 4(3) + k| = |6 - 12 + k| = |k - 6|$ and the denominator is $\sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$. Hence $d = \frac{|k - 6|}{5}$."><div class="lvl"><span class="bilingual-ko">개념 연결 디딤돌 2</span><span class="bilingual-en">Concept Link Step 2</span></div><div class="stem"><span class="bilingual-ko">원의 중심 $(2, 3)$에서 직선 $3x - 4y + k = 0$까지의 거리 $d$를 $k$로 바르게 나타낸 것은?</span><div class="bilingual-en">What is the correct expression of $d$, the distance from the center of the circle $(2, 3)$ to the straight line</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$d = \frac{|k - 6|}{5}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$d = \frac{|k + 6|}{5}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$d = \frac{|k - 6|}{25}$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$d = \frac{|k - 18|}{5}$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$d = \frac{|k|}{5}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2496,7 +2512,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div><h2>🔰 제3단계 · 원 위의 점에서 직선까지 거리의 최댓값 이해하기<span class="bilingual-en">🔰 Step 3 · Understand the maximum value of the distance from a point on a circle to a straight line</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>원 $C$ 위의 점 $P$에서 직선 $l$까지의 거리는 중심 $C$를 지나 직선에 수직인 직선과 원이 만나는 두 점에서 각각 최댓값과 최솟값을 갖습니다.
 • 거리의 최댓값: $M = d + r$
-• 거리의 최솟값: $m = d - r$ ($d \ge r$일 때)<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The distance from the point $P$ on the circle $C$ to the line • Maximum distance: $M = d + r$ • Minimum value of distance: $m = d - r$ (when $d \ge r$)</div></div><div class="q" data-ans="3" data-exp="최댓값 $M = d + r = d + 3 = 7$ 이므로 $d = 7 - 3 = 4$입니다." data-exp-en="The maximum value is $M = d + r = d + 3 = 7$, so it is $d = 7 - 3 = 4$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">반지름 $r = 3$인 원 위의 점에서 직선까지의 거리의 최댓값이 $7$일 때, 원의 중심에서 직선까지의 거리 $d$는 얼마인가요?</span><div class="bilingual-en">If the maximum distance from a point on a circle with radius $r = 3$ to a straight line is $7$, what is the distance from the center of the circle to the straight line, $d$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$2$</div><div class="opt"><span class="n">2</span>$3$</div><div class="opt"><span class="n">3</span>$4$</div><div class="opt"><span class="n">4</span>$5$</div><div class="opt"><span class="n">5</span>$10$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+• 거리의 최솟값: $m = d - r$ ($d \ge r$일 때)<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The distance from the point $P$ on the circle $C$ to the line • Maximum distance: $M = d + r$ • Minimum value of distance: $m = d - r$ (when $d \ge r$)</div></div><div class="q" data-ans="3" data-exp="최댓값 $M = d + r = d + 3 = 7$ 이므로 $d = 7 - 3 = 4$입니다." data-exp-en="The maximum value is $M = d + r = d + 3 = 7$, so it is $d = 7 - 3 = 4$."><div class="lvl"><span class="bilingual-ko">규칙 적용 디딤돌 3</span><span class="bilingual-en">Rule Application Step 3</span></div><div class="stem"><span class="bilingual-ko">반지름 $r = 3$인 원 위의 점에서 직선까지의 거리의 최댓값이 $7$일 때, 원의 중심에서 직선까지의 거리 $d$는 얼마인가요?</span><div class="bilingual-en">If the maximum distance from a point on a circle with radius $r = 3$ to a straight line is $7$, what is the distance from the center of the circle to the straight line, $d$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$3$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$5$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$10$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2511,7 +2527,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
 </div></div><h2>🔰 제4단계 · 절댓값 방정식 수립 및 양수 $k$ 결정<span class="bilingual-en">🔰 Step 4 · Establish absolute value equation and determine positive number $k$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>방정식 $|X| = c$ ($c > 0$)의 해는 $X = c$ 또는 $X = -c$입니다.
-문제에서 주어진 $k > 0$ 조건을 만족하는 값을 선택합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The solution to the equation $|X| = c$ ($c > 0$) is either $X = c$ or $X = -c$. Select a value that satisfies the $k > 0$ condition given in the problem.</div></div><div class="q" data-ans="4" data-exp="$|k - 6| = 20$ 이므로 $k - 6 = 20$ 또는 $k - 6 = -20$ 입니다.<br>따라서 $k = 26$ 또는 $k = -14$ 이며, $k$가 양수이므로 정답은 $26$입니다." data-exp-en="$|k - 6| = 20$, so either $k - 6 = 20$ or $k - 6 = -20$. &lt;br&gt; is therefore either $k = 26$ or $k = -14$, and since $k$ is positive, the correct answer is $26$."><div class="lvl"><span class="bilingual-ko">심화 연계 디딤돌 4</span><span class="bilingual-en">Advanced Link Step 4</span></div><div class="stem"><span class="bilingual-ko">중심거리 $d = \frac{|k - 6|}{5} = 4$ 를 만족하는 양수 $k$의 값은 얼마인가요?</span><div class="bilingual-en">What is the positive value of $k$ that satisfies the center distance $d = \frac{|k - 6|}{5} = 4$?</div></div><div class="opts"><div class="opt"><span class="n">1</span>$14$</div><div class="opt"><span class="n">2</span>$20$</div><div class="opt"><span class="n">3</span>$24$</div><div class="opt"><span class="n">4</span>$26$</div><div class="opt"><span class="n">5</span>$32$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+문제에서 주어진 $k > 0$ 조건을 만족하는 값을 선택합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The solution to the equation $|X| = c$ ($c > 0$) is either $X = c$ or $X = -c$. Select a value that satisfies the $k > 0$ condition given in the problem.</div></div><div class="q" data-ans="4" data-exp="$|k - 6| = 20$ 이므로 $k - 6 = 20$ 또는 $k - 6 = -20$ 입니다.<br>따라서 $k = 26$ 또는 $k = -14$ 이며, $k$가 양수이므로 정답은 $26$입니다." data-exp-en="$|k - 6| = 20$, so either $k - 6 = 20$ or $k - 6 = -20$. &lt;br&gt; is therefore either $k = 26$ or $k = -14$, and since $k$ is positive, the correct answer is $26$."><div class="lvl"><span class="bilingual-ko">심화 연계 디딤돌 4</span><span class="bilingual-en">Advanced Link Step 4</span></div><div class="stem"><span class="bilingual-ko">중심거리 $d = \frac{|k - 6|}{5} = 4$ 를 만족하는 양수 $k$의 값은 얼마인가요?</span><div class="bilingual-en">What is the positive value of $k$ that satisfies the center distance $d = \frac{|k - 6|}{5} = 4$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$14$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$20$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$24$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$26$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$32$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -2829,7 +2845,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
   Therefore, the answer is &lt;b&gt;26&lt;/b&gt;.&lt;br&gt;
   💡 &lt;b&gt;Strategy Tip&lt;/b&gt;: The geometric extrema between a circle and a line are strictly governed by $d \pm r$. Never parameterize individual points on the circle with trigonometric coordinates when the center distance suffices.
 &lt;/p&gt;
-  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">좌표평면 위의 원 $C: (x - 2)^2 + (y - 3)^2 = 9$ 와 직선 $l: 3x - 4y + k = 0$ 이 있다. 원 $C$ 위의 임의의 점 $P$ 와 직선 $l$ 사이의 거리의 최댓값이 $7$ 일 때, 양수 $k$ 의 값은?</span><div class="bilingual-en">There is a circle $C: (x - 2)^2 + (y - 3)^2 = 9$ and a straight line $l: 3x - 4y + k = 0$ on the coordinate plane. If the maximum distance between any point $P$ on the circle $C$ and the line $l$ is</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span>$22$</div><div class="opt"><span class="n">2</span>$24$</div><div class="opt"><span class="n">3</span>$26$</div><div class="opt"><span class="n">4</span>$28$</div><div class="opt"><span class="n">5</span>$30$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
+  "><div class="lvl"><span class="bilingual-ko">최종 수능 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">좌표평면 위의 원 $C: (x - 2)^2 + (y - 3)^2 = 9$ 와 직선 $l: 3x - 4y + k = 0$ 이 있다. 원 $C$ 위의 임의의 점 $P$ 와 직선 $l$ 사이의 거리의 최댓값이 $7$ 일 때, 양수 $k$ 의 값은?</span><div class="bilingual-en">There is a circle $C: (x - 2)^2 + (y - 3)^2 = 9$ and a straight line $l: 3x - 4y + k = 0$ on the coordinate plane. If the maximum distance between any point $P$ on the circle $C$ and the line $l$ is</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$22$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$24$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$26$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$28$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$30$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end">
   <button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button>
 </div>
 <div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
@@ -3181,17 +3197,17 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
-<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+</script><script src="../mathedu-room.js?v=20261114"></script>
+<script src="../mathedu-report.js?v=20261114"></script><script>
 function updateExplanations(lang) {
   var isEn = (lang === 'en');
   var qs = document.querySelectorAll('.q');
@@ -3447,9 +3463,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c1092101';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = 'ac222b59';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = '896c9978';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c1092101.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3473,8 +3489,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c1092101';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || 'ac222b59';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || '896c9978';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c1092101.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

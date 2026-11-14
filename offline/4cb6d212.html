@@ -154,6 +154,10 @@ body {
 }
 
 .stitch-brand-pill {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
@@ -1293,6 +1297,18 @@ code {
   color: var(--txt);
   font-family: 'Space Grotesk', sans-serif;
 }
+.opt .opt-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.58;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.opts.opts-inline .opt .opt-txt {
+  flex: 0 1 auto;
+  text-align: center;
+}
 
 .opt.correct {
   background: rgba(16, 185, 129, 0.12) !important;
@@ -2061,15 +2077,15 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js"></script>
+<script src="../mathedu-i18n.js?v=20261114"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/4cb6d212.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/4cb6d212.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="4cb6d212">
-<meta name="mathedu-offline-build-time" content="2026-11-11T12:10:12.497012+00:00">
-<meta name="mathedu-offline-hash" content="cf1c0474">
-<meta name="mathedu-version-label" content="v2026.11.11">
+<meta name="mathedu-offline-build-time" content="2026-11-14T13:34:57.145858+00:00">
+<meta name="mathedu-offline-hash" content="d42f85c2">
+<meta name="mathedu-version-label" content="v2026.11.14">
 
 </head><body><div class="wrap">
 
@@ -2461,7 +2477,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 <!-- STITCH_EXPLORER_END -->
 <h2>🔰 제0단계 · 수학 기호<span class="bilingual-en">🔰 Step 0 · Mathematical Symbols</span></h2><div class="sym"><div><b>$\binom{n}{k}$</b> — $n$개 중 $k$개를 고르는 조합</div><div><b>엄격 증가</b> — $x&lt;y&lt;z&lt;w$ 이므로 고른 4수의 순서는 자동 1가지</div></div>
-<h2>제1단계 · 사용 가능한 수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$3\le x,\dots,w\le 13$의 자연수는 3,4,...,13 → 모두 11개.</div><div class="q" data-ans="1" data-exp="$13-3+1 = 11$개."><div class="lvl"><span class="bilingual-ko">🔰 1단계 · [초등 기초 직관·사칙연산 디딤돌]</span><span class="bilingual-en">🔰 Step 1 · [Elementary Intuition &amp; Arithmetic Scaffolding]</span></div><div class="stem">사용 가능한 자연수의 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$11$</div><div class="opt"><span class="n">2</span>$10$</div><div class="opt"><span class="n">3</span>$13$</div><div class="opt"><span class="n">4</span>$7$</div><div class="opt"><span class="n">5</span>$12$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<h2>제1단계 · 사용 가능한 수</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$3\le x,\dots,w\le 13$의 자연수는 3,4,...,13 → 모두 11개.</div><div class="q" data-ans="1" data-exp="$13-3+1 = 11$개."><div class="lvl"><span class="bilingual-ko">🔰 1단계 · [초등 기초 직관·사칙연산 디딤돌]</span><span class="bilingual-en">🔰 Step 1 · [Elementary Intuition &amp; Arithmetic Scaffolding]</span></div><div class="stem">사용 가능한 자연수의 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$11$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$10$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$13$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$7$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$12$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2472,7 +2488,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제2단계 · 왜 조합인가</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x&lt;y&lt;z&lt;w$ 이므로 11개 중 4개를 &#x27;고르면&#x27; 순서는 자동 오름차순 1가지.</div><div class="q" data-ans="2" data-exp="엄격 증가이므로 고르기만 하면 순서 확정."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">4수를 정할 때 순서를 따로 정해야 하나?</div><div class="opts"><div class="opt"><span class="n">1</span>그렇다</div><div class="opt"><span class="n">2</span>아니오(자동 1가지)</div><div class="opt"><span class="n">3</span>2가지</div><div class="opt"><span class="n">4</span>4!가지</div><div class="opt"><span class="n">5</span>중요하지 않다</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제2단계 · 왜 조합인가</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$x&lt;y&lt;z&lt;w$ 이므로 11개 중 4개를 &#x27;고르면&#x27; 순서는 자동 오름차순 1가지.</div><div class="q" data-ans="2" data-exp="엄격 증가이므로 고르기만 하면 순서 확정."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">4수를 정할 때 순서를 따로 정해야 하나?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">그렇다</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">아니오(자동 1가지)</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">2가지</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">4!가지</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">중요하지 않다</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2483,7 +2499,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제3단계 · 조합 계산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\binom{11}{4}$.</div><div class="q" data-ans="1" data-exp="$11\cdot 10\cdot 9\cdot 8 / 24 = 330$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$\binom{11}{4}$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span>$330$</div><div class="opt"><span class="n">2</span>$7920$</div><div class="opt"><span class="n">3</span>$24$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$44$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제3단계 · 조합 계산</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$\binom{11}{4}$.</div><div class="q" data-ans="1" data-exp="$11\cdot 10\cdot 9\cdot 8 / 24 = 330$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$\binom{11}{4}$의 값은?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$330$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$7920$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$24$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$11$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$44$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2494,7 +2510,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제4단계 · 일반화</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a\le x_1&lt;\dots&lt;x_k\le b$ 형태는 (범위 원소 수)$\mathrm{C}k$.</div><div class="q" data-ans="1" data-exp="범위 10개 중 3개 고르기 → $\binom{10}{3}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$1\le x&lt;y&lt;z\le 10$이면?</div><div class="opts"><div class="opt"><span class="n">1</span>$\binom{10}{3}$</div><div class="opt"><span class="n">2</span>$\binom{9}{3}$</div><div class="opt"><span class="n">3</span>$10^3$</div><div class="opt"><span class="n">4</span>$\binom{10}{2}$</div><div class="opt"><span class="n">5</span>$3^{10}$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제4단계 · 일반화</h2><div class="know"><h3>먼저 알아야 할 지식</h3>$a\le x_1&lt;\dots&lt;x_k\le b$ 형태는 (범위 원소 수)$\mathrm{C}k$.</div><div class="q" data-ans="1" data-exp="범위 10개 중 3개 고르기 → $\binom{10}{3}$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">$1\le x&lt;y&lt;z\le 10$이면?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$\binom{10}{3}$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$\binom{9}{3}$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$10^3$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$\binom{10}{2}$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$3^{10}$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2505,7 +2521,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
 </div>
 </div>
 <div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
-</div></div><h2>제5단계 · 확인</h2><div class="know"><h3>먼저 알아야 할 지식</h3>원본 문제 이미지와 동일함을 LaTeX로 복원.</div><div class="q" data-ans="1" data-exp="$\binom{11}{4}=330$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">최종 답은?</div><div class="opts"><div class="opt"><span class="n">1</span>$330$</div><div class="opt"><span class="n">2</span>$7920$</div><div class="opt"><span class="n">3</span>$24$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$440$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+</div></div><h2>제5단계 · 확인</h2><div class="know"><h3>먼저 알아야 할 지식</h3>원본 문제 이미지와 동일함을 LaTeX로 복원.</div><div class="q" data-ans="1" data-exp="$\binom{11}{4}=330$."><div class="lvl"><span class="bilingual-ko">문항</span><span class="bilingual-en">Question</span></div><div class="stem">최종 답은?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$330$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$7920$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$24$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$11$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$440$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -2644,7 +2660,7 @@ document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
     &lt;text x=&quot;530&quot; y=&quot;255&quot; fill=&quot;#b45309&quot; font-size=&quot;12&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;🎯 최종 결론: 330&lt;/text&gt;
     
     &lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ Intentionally constructed geometric &amp; visual model illustrating the core mathematical relationships of &lt;b&gt;[4CB6D212]&lt;/b&gt;.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [At-a-Glance Schematic Solution Flowchart]&lt;/h4&gt;&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px;margin-bottom:12px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · Given Condition&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제1단계 · 사용 가능한 수 ⇒ $11$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · Visual/Formula Transform&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제2단계 · 왜 조합인가 ⇒ 아니오(자동 1가지)&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · Key Derivation&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제4단계 · 일반화 ⇒ $\binom{10}{3}$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;vertical-align:top;width:22%&quot;&gt;&lt;b style=&quot;color:#006398;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;STEP 4 · Synthesis&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.86rem;line-height:1.45&quot;&gt;제5단계 · 확인 ⇒ $330$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.1rem;padding:0 4px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 12px;vertical-align:middle;text-align:center;width:16%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.78rem;display:block;margin-bottom:4px&quot;&gt;🎯 최종 정답&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.98rem&quot;&gt;$330$&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:0.86rem;background:#ffffff;border-radius:8px;overflow:hidden&quot;&gt;&lt;thead&gt;&lt;tr style=&quot;background:#f1f5f9;color:#0f172a&quot;&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:14%&quot;&gt;Schematic Stage&lt;/th&gt;&lt;th style=&quot;padding:8px 12px;border:1px solid #cbd5e1&quot;&gt;Core Concept · Geometric Model · Formula&lt;/th&gt;&lt;th style=&quot;padding:8px 10px;border:1px solid #cbd5e1;width:22%&quot;&gt;Derived Result&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 1&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제1단계 · 사용 가능한 수 ⇒ $11$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 2&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제2단계 · 왜 조합인가 ⇒ 아니오(자동 1가지)&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 3&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제3단계 · 조합 계산 ⇒ $330$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 4&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제4단계 · 일반화 ⇒ $\binom{10}{3}$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;다음 단계 연결 ➔&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#006398;font-weight:700;text-align:center;white-space:nowrap&quot;&gt;Step 5&lt;/td&gt;&lt;td style=&quot;padding:7px 12px;border:1px solid #cbd5e1;color:#1e293b;line-height:1.5&quot;&gt;제5단계 · 확인 ⇒ $330$&lt;/td&gt;&lt;td style=&quot;padding:7px 10px;border:1px solid #cbd5e1;color:#059669;font-weight:700;text-align:center&quot;&gt;정답: $330$&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/section&gt;
-&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;&lt;p&gt;This problem evaluates step-by-step mathematical reasoning and conceptual synthesis from fundamental rules to the final derivation.&lt;/p&gt;&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;&lt;p&gt;범위 $3\sim 13$은 11개. $x&amp;lt;y&amp;lt;z&amp;lt;w$ 엄격 증가이므로 11개 중 4개 고르기 $= \binom{11}{4}=330$.&lt;/p&gt;&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;&lt;p&gt;By combining the intermediate results derived in the preceding scaffolding steps, we obtain the exact final answer.&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">$3\le x&lt;y&lt;z&lt;w\le 13$을 만족시키는 자연수 $x,y,z,w$의 모든 순서쌍 $(x,y,z,w)$의 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span>$24$</div><div class="opt"><span class="n">2</span>$330$</div><div class="opt"><span class="n">3</span>$7920$</div><div class="opt"><span class="n">4</span>$11$</div><div class="opt"><span class="n">5</span>$440$</div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+&lt;h4&gt;📋 [Problem Analysis &amp; Core Concepts]&lt;/h4&gt;&lt;p&gt;This problem evaluates step-by-step mathematical reasoning and conceptual synthesis from fundamental rules to the final derivation.&lt;/p&gt;&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;&lt;p&gt;범위 $3\sim 13$은 11개. $x&amp;lt;y&amp;lt;z&amp;lt;w$ 엄격 증가이므로 11개 중 4개 고르기 $= \binom{11}{4}=330$.&lt;/p&gt;&lt;h4&gt;✨ [Conclusion &amp; Key Takeaway]&lt;/h4&gt;&lt;p&gt;By combining the intermediate results derived in the preceding scaffolding steps, we obtain the exact final answer.&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem">$3\le x&lt;y&lt;z&lt;w\le 13$을 만족시키는 자연수 $x,y,z,w$의 모든 순서쌍 $(x,y,z,w)$의 개수는?</div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$24$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$330$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$7920$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$11$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$440$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
 <button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
 <div class="report-form" style="display:none;margin-top:10px;text-align:left">
 <div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
@@ -3019,12 +3035,12 @@ function submitReport(btn){
   var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
   var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
   try {
-    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){});
-  } catch(e){}
-  try {
-    var img=new Image();
-    img.src=reportUrl;
-  } catch(e){}
+    fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){
+      try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+    });
+  } catch(e){
+    try { var img=new Image(); img.src=reportUrl; } catch(e2){}
+  }
   wrap.querySelector('.report-form').style.display='none';
   wrap.querySelector('.report-msg').style.display='block';
 }
@@ -3110,7 +3126,7 @@ function setBoardLang(lang, isUserAction) {
   }
   setBoardLang(saved, false);
 })();
-</script><script src="../mathedu-room.js?v=20261027_stitch3"></script><script src="../mathedu-report.js?v=20261027_stitch3"></script>
+</script><script src="../mathedu-room.js?v=20261114"></script><script src="../mathedu-report.js?v=20261114"></script>
 <!-- 🔔 mathedu 오프라인 업데이트 안내 모달 -->
 <div id="matheduUpdateModal" class="mathedu-update-modal" style="display:none">
   <div class="mathedu-update-card">
@@ -3283,9 +3299,9 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = '4cb6d212';
-window._offlineBuildTime = '2026-11-11T12:10:12.497012+00:00';
-window._offlineHash = 'cf1c0474';
-window._offlineVersion = 'v2026.11.11';
+window._offlineBuildTime = '2026-11-14T13:34:57.145858+00:00';
+window._offlineHash = 'd42f85c2';
+window._offlineVersion = 'v2026.11.14';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/4cb6d212.html';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3309,8 +3325,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || '4cb6d212';
-  var localBuildTime = window._offlineBuildTime || '2026-11-11T12:10:12.497012+00:00';
-  var localHash = window._offlineHash || 'cf1c0474';
+  var localBuildTime = window._offlineBuildTime || '2026-11-14T13:34:57.145858+00:00';
+  var localHash = window._offlineHash || 'd42f85c2';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/4cb6d212.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

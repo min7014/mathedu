@@ -301,6 +301,11 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
                 "questionAskingClassrooms": len(ped.get("questionAskingClassrooms", [])),
             }
         }, ensure_ascii=False, indent=2), encoding="utf-8")
+        try:
+            import _antigravity_report_watcher as _arw_hb
+            _arw_hb.poll_and_notify_error_reports_once(send_telegram=True)
+        except Exception:
+            pass
         if last_completed_slug:
             try:
                 last_chat_p = ROOT_DIR / ".agents" / "last_agent_chat_slug.txt"
