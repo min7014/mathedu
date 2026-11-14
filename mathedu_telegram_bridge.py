@@ -394,6 +394,24 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         res = _arw_fix.run_autonomous_agy_autofix(targets, notify_telegram=False)
         return f"🛠️ [오류신고 자율 수리 & 배포 실행 결과]\n• 상태: {res.get('status')}\n\n{res.get('summary', '')}"
 
+    if low in ("!이슈", "!통찰", "!수학이슈", "/issue", "!issue"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import math_issue_insight_creator as _miic
+        return _miic.format_issue_insight_status_summary()
+
+    if low in ("!이슈제작", "!통찰제작", "/makeissue", "!makeissue"):
+        import silent_subprocess as _ss_mi
+        _ss_mi.spawn_windowless_background_python(
+            str(ROOT_DIR / "math_issue_insight_creator.py"),
+            extra_args=["render", "2"],
+            cwd=str(ROOT_DIR),
+        )
+        return (
+            "🧭 [크레딧 0원 · 수학 이슈 × 오리지널 수학교육 통찰 영상 백그라운드 제작 개시]\n"
+            "• 실시간 수학·수학교육 화두 레이더를 갱신하고 다음 우선순위 오리지널 증명(KO/EN 1080p + Q-#Shorts) 무창 렌더링을 시작했습니다.\n"
+            "• 약 2~3분 뒤 `!이슈` 명령으로 현황을 확인하실 수 있습니다."
+        )
+
     if low in ("!감사", "!저작권", "!상표권", "/copyright", "!copyright"):
         sys.path.insert(0, str(ROOT_DIR))
         import auditor

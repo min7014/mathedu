@@ -789,6 +789,13 @@ def run_continuous_foundation_loop(single_cycle=False):
     except Exception as eh_err:
         print(f"[Exam-Hybrid Creator Notice] {eh_err}", flush=True)
     try:
+        import math_issue_insight_creator
+        mi_built = math_issue_insight_creator.ensure_next_issue_insight_rendered(max_bundles=1)
+        if mi_built:
+            print(f"🧭 [Math Issue × Insight Creator] Rendered {len(mi_built)} math-ed insight bundle(s): {[x.get('slug')+'_'+x.get('lang') for x in mi_built]}", flush=True)
+    except Exception as mi_err:
+        print(f"[Math Issue Insight Notice] {mi_err}", flush=True)
+    try:
         import nano_banana_cinema_creator as _nbcc
         flow_ret = _nbcc.run_idle_flow_quality_retrofit_cycle(max_topics=1)
         print(f"🎬 [Flow ULTRA Idle Retrofit] status={flow_ret.get('status')} | upgraded={flow_ret.get('upgraded')}", flush=True)

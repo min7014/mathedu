@@ -6196,6 +6196,8 @@ def update_video_catalog():
             "shorts_urls": shorts_urls,
             "question_youtube_urls": q_yt_urls,
             "question_shorts_urls": q_shorts_urls,
+            "issue_insight_urls": sdoc.get("issue_insight_urls", {}),
+            "issue_insight_shorts_urls": sdoc.get("issue_insight_shorts_urls", {}),
             "youtube_packages": {
                 k: {
                     "title": v.get("title", ""),

@@ -221,6 +221,12 @@ def format_executive_briefing(metrics: dict) -> str:
     except Exception:
         pass
     try:
+        import math_issue_insight_creator as _miic_sec
+        lines.append(_miic_sec.format_issue_insight_status_summary())
+        lines.append("----------------------------------------------------------------------")
+    except Exception:
+        pass
+    try:
         import auditor as _aud
         lines.append(_aud.build_telegram_audit_summary(check_live=False, auto_fix=True))
         lines.append("----------------------------------------------------------------------")

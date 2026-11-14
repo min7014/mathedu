@@ -1739,6 +1739,17 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                     return 0
             except Exception:
                 pass
+            # 0-C순위 [Math Issue × Original Insight]: 수학 분야 실시간 이슈 × min7014 오리지널 수학교육 통찰 1080p 본편 자동 발행
+            try:
+                import math_issue_insight_creator as _miic
+                mi_long = _miic.try_upload_one_issue_insight("long")
+                if mi_long:
+                    uploaded_items.append(mi_long)
+                    return 1
+                if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                    return 0
+            except Exception:
+                pass
             for c_slug in ordered_slugs:
                 if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                     break
@@ -1790,6 +1801,17 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                 eh_sh = _ehc.try_upload_one_exam_hybrid("short")
                 if eh_sh:
                     uploaded_items.append(eh_sh)
+                    return 1
+                if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                    return 0
+            except Exception:
+                pass
+            # 0-C순위 [Math Issue × Original Insight]: 본편이 업로드된 수학교육 통찰 Q-#Shorts 발행 + 관련 동영상 바인딩!
+            try:
+                import math_issue_insight_creator as _miic
+                mi_sh = _miic.try_upload_one_issue_insight("short")
+                if mi_sh:
+                    uploaded_items.append(mi_sh)
                     return 1
                 if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                     return 0
