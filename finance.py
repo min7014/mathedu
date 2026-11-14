@@ -1635,6 +1635,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
 
         bal = _load_daily_wave_balance()
         if not force_immediate and (now_ts - float(bal.get("last_wave_ts") or 0.0)) < MIN_WAVE_SPACING_SEC:
+            # [Idle-Time Quality Retrofit] 업로드 간격 대기(Pacing) 유휴 시간을 활용해 기존 자료를 Google Flow ULTRA 모션으로 자동 고품질화!
+            try:
+                import nano_banana_cinema_creator as _nbcc
+                _nbcc.run_idle_flow_quality_retrofit_cycle(max_topics=1)
+            except Exception:
+                pass
             return {"status": "pacing_wait", "total_uploaded": 0, "uploaded_items": [], "daily_balance": bal}
 
         UPLOAD_LOCK_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -1645,10 +1651,15 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
 
         yt_test, _ = vmaker.get_available_youtube_upload_service()
         if yt_test is None:
-            # [0-Quota Studio Engine] API 쿼터 대기 시간에도 스튜디오 '쇼츠 관련 동영상 바인딩' 및 '12시간 주기 커뮤니티 퀴즈'는 무중단 가동!
+            # [0-Quota Studio + Idle Flow Retrofit Engine] API 쿼터 대기 시간에도 스튜디오 바인딩·커뮤니티 퀴즈 + 기존 자료 Flow 고품질화는 무중단 가동!
             try:
                 import youtube_community_controller as _ycc
                 _ycc.run_zero_quota_studio_growth_cycle(max_related_links=6, allow_community_post=True)
+            except Exception:
+                pass
+            try:
+                import nano_banana_cinema_creator as _nbcc
+                _nbcc.run_idle_flow_quality_retrofit_cycle(max_topics=1)
             except Exception:
                 pass
             return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}

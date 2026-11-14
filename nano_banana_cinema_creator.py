@@ -52,6 +52,8 @@ NANO_BANANA_BLUEPRINTS = [
     {
         "slug": "2017090101",
         "art_file": "nb_2017090101_pythagoras.png",
+        "flow_clip": "2017090101_flow.mp4",
+        "flow_motion_prompt": "Locked static top-down 90-degree orthographic camera. All three crystal square water basins and brass right triangle edges remain 100% stationary in exact position. Gentle luminous sapphire-blue, emerald-teal, and golden water ripples and light caustics shimmer softly inside the three square crystal basins on dark velvet. Zero camera zoom, zero rotation, zero deformation, zero text, zero numbers.",
         "badge_ko": "★ 실생활 기하 미스터리 · 정사각형 수조 넓이 보존",
         "badge_en": "★ Visual Geometry Mystery · Crystal Square Area Proof",
         "thumb_hook_ko": ["루트 계산 ZERO!", "수조 넓이 3초 암산!"],
@@ -76,6 +78,8 @@ NANO_BANANA_BLUEPRINTS = [
     {
         "slug": "2012100304",
         "art_file": "nb_2012100304_tangent.png",
+        "flow_clip": "2012100304_flow.mp4",
+        "flow_motion_prompt": "Locked static top-down 90-degree orthographic camera. Sapphire circle rim, crystal pins, golden bottom tangent beam, and emerald chords stay 100% stationary in exact position. Gentle warm golden and emerald-teal photonic light pulses shimmer smoothly along the tangent and chord beams on dark velvet. Zero camera zoom, zero rotation, zero deformation, zero text, zero numbers.",
         "badge_ko": "★ 천체 광학 기하 미스터리 · 원과 접선의 각도 불변량",
         "badge_en": "★ Optical Geometry Mystery · Tangent Light & Circle Angle",
         "thumb_hook_ko": ["접선 각도가 58°?", "지름 1줄로 5초 컷!"],
@@ -100,6 +104,8 @@ NANO_BANANA_BLUEPRINTS = [
     {
         "slug": "2014111902",
         "art_file": "nb_2014111902_ceva.png",
+        "flow_clip": "2014111902_flow.mp4",
+        "flow_motion_prompt": "Locked static top-down 90-degree orthographic camera. Triangular stained-glass skylight frame and three golden concurrent beams meeting at the center crystal point stay 100% stationary. Subtle sapphire, emerald, and warm golden sunlight caustics shimmer gently across the stained-glass panels on dark velvet. Zero camera zoom, zero rotation, zero deformation, zero text, zero numbers.",
         "badge_ko": "★ 유클리드 건축 기하 미스터리 · 삼각 천창의 균형점",
         "badge_en": "★ Architectural Geometry Mystery · Skylight Concurrency",
         "thumb_hook_ko": ["좌표·방정식 금지!", "넓이비로 5초 암산!"],
@@ -243,7 +249,13 @@ def _resolve_flow_clip(bp: dict) -> Path | None:
     cand_name = bp.get("flow_clip") or f"{bp['slug']}_flow.mp4"
     p = FLOW_CLIPS_DIR / cand_name
     if p.exists() and p.stat().st_size > 150_000:
-        return p
+        try:
+            with p.open("rb") as fh:
+                hdr = fh.read(12)
+            if len(hdr) >= 8 and hdr[4:8] == b"ftyp":
+                return p
+        except Exception:
+            pass
     return None
 
 
@@ -706,7 +718,7 @@ def try_upload_one_nano_banana_cinema(kind: str = "long", target_slug: str | Non
 
     lang_order = (target_lang,) if target_lang else ysee.preferred_lang_order_for_current_hour()
 
-    for bp in NANO_BANANA_BLUEPRINTS:
+    for bp in get_all_available_flow_blueprints():
         slug = bp["slug"]
         if target_slug and slug != target_slug:
             continue
@@ -877,6 +889,439 @@ def try_upload_one_nano_banana_cinema(kind: str = "long", target_slug: str | Non
     return None
 
 
+FLOW_RETROFIT_STATE_FILE = ROOT_DIR / ".agents" / "flow_retrofit_state.json"
+MIN_RETROFIT_INTERVAL_SEC = 2700  # 45분 주기 유휴시간 백그라운드 자동 고품질화
+MAX_DAILY_FLOW_RETROFITS = 8      # 일 최대 8주제 (= 최대 40 Flow 크레딧/일, Ultra 월 25,000 풀의 <5%, Antigravity 쿼터 0!)
+SAFE_SWAP_MAX_VIEWS = 15          # Rule 33: 15뷰 초과 인기 영상은 조회수·시청시간 보존을 위해 절대 삭제 금지!
+SAFE_SWAP_MIN_AGE_HOURS = 48.0    # 게시 후 최소 48시간 경과한 저조회 정적 구버전만 클린 교체
+
+
+def _clean_topic_core_ko(raw_title: str) -> str:
+    # 영어 병기 괄호만 제거하고 한국어 세부 구분 괄호(예: '(예각)', '(둔각)', '(내분)')는 유지해 중복 제목(L3) 원천 방지!
+    t = re.sub(r"\([A-Za-z0-9\s,'\-:;./]+\)", "", str(raw_title or "")).strip()
+    t = re.split(r"\s+[A-Za-z]{3,}", t)[0].strip(" .,-—:")
+    return t[:32] if len(t) > 32 else (t or "핵심 기하 정리")
+
+
+def _clean_topic_core_en(sdoc: dict) -> str:
+    te = str(sdoc.get("title_en") or "").strip()
+    if not te:
+        m = re.search(r"\(([A-Za-z][^)]{4,})\)", str(sdoc.get("title") or ""))
+        te = m.group(1).strip() if m else f"Visual Geometry #{str(sdoc.get('slug') or '')[-3:]}"
+    te = te.strip(" .,-—:")
+    return te[:40] if len(te) > 40 else te
+
+
+def _build_domain_flow_prompts(sdoc: dict) -> tuple[str, str]:
+    """
+    주제 도메인에 맞춰 수식·글자·숫자가 0%인 Google Flow ULTRA 스튜디오 오브제 키프레임 프롬프트와
+    양단 고정(시작=종료) 광학 파동 모션 프롬프트를 생성합니다 (Rule 44 기하 왜곡 ZERO).
+    """
+    t_all = f"{sdoc.get('title', '')} {sdoc.get('sub_domain_ko', '')} {sdoc.get('core_concept', '')}"
+    if any(k in t_all for k in ("원", "접선", "현", "원주각", "활꼴", "내접", "외접")):
+        img_p = (
+            "Strict top-down 90-degree orthographic architectural studio photograph on a deep midnight navy velvet table. "
+            "Positioned on the LEFT TWO-THIRDS of the 16:9 frame (leaving clean dark navy negative space on the right third): "
+            "a precision-machined circular sapphire glass ring rimmed in brushed brass, with emerald-teal crystal pins on the circle "
+            "connected by crisp emerald-teal and warm amber-gold laser chords and a subtle royal-blue dashed diameter line through the center. "
+            "Zero text, zero numbers, zero letters, zero mathematical symbols anywhere in the scene."
+        )
+        mot_p = (
+            "Locked static top-down 90-degree orthographic camera. All crystal pins, brass circle rim, and beam angles stay 100% stationary. "
+            "Gentle luminous emerald-teal and warm amber-gold photonic light pulses shimmer smoothly along the existing beams inside the sapphire ring. "
+            "Zero camera zoom, zero rotation, zero deformation, zero text, zero numbers."
+        )
+    elif any(k in t_all for k in ("포물선", "타원", "쌍곡선", "이차곡선", "초점", "준선")):
+        img_p = (
+            "Strict top-down 90-degree orthographic optical laboratory studio photograph on a deep midnight navy velvet table. "
+            "Positioned on the LEFT TWO-THIRDS of the 16:9 frame (leaving clean dark navy negative space on the right third): "
+            "a curved brushed-brass conic mirror resting on dark sapphire glass, reflecting crisp emerald-teal parallel laser beams "
+            "into a single glowing amber-gold crystal focal pin, with a royal-blue reference directrix bar. "
+            "Zero text, zero numbers, zero letters, zero mathematical symbols anywhere in the scene."
+        )
+        mot_p = (
+            "Locked static top-down 90-degree orthographic camera. Curved brass mirror, crystal focus pin, and beams stay 100% stationary. "
+            "Soft emerald-teal and golden light pulses travel gently along the reflected focal rays on dark velvet. "
+            "Zero camera zoom, zero rotation, zero deformation, zero text, zero numbers."
+        )
+    elif any(k in t_all for k in ("미분", "적분", "극한", "함수", "접선의 기울기", "평균값", "수열", "급수", "부등식")):
+        img_p = (
+            "Strict top-down 90-degree orthographic architectural sculpture photograph on a deep midnight navy velvet surface. "
+            "Positioned on the LEFT TWO-THIRDS of the 16:9 frame (leaving clean dark navy negative space on the right third): "
+            "translucent stepped sapphire-blue glass prisms beneath a smooth sweeping brushed-brass curve, illuminated by a single "
+            "razor-sharp emerald-teal tangent laser beam touching a glowing golden crystal point on the curve. "
+            "Zero text, zero numbers, zero letters, zero mathematical symbols anywhere in the scene."
+        )
+        mot_p = (
+            "Locked static top-down 90-degree orthographic camera. Sapphire glass prisms, brass curve, and tangent beam stay 100% stationary. "
+            "Subtle cyan and golden caustics shimmer gently through the translucent glass prisms on dark midnight velvet. "
+            "Zero camera zoom, zero rotation, zero deformation, zero text, zero numbers."
+        )
+    else:
+        img_p = (
+            "Strict top-down 90-degree orthographic architectural studio photograph on a deep midnight navy velvet table. "
+            "Positioned on the LEFT TWO-THIRDS of the 16:9 frame (leaving clean dark navy negative space on the right third): "
+            "a precision-crafted Euclidean triangle of brushed brass and translucent sapphire-emerald crystal segments, "
+            "with glowing amber-gold interior auxiliary light beams meeting cleanly at crystal vertex pins. "
+            "Zero text, zero numbers, zero letters, zero mathematical symbols anywhere in the scene."
+        )
+        mot_p = (
+            "Locked static top-down 90-degree orthographic camera. All brass triangle edges, crystal segments, and beams stay 100% stationary. "
+            "Gentle emerald-teal and warm golden photonic light waves shimmer smoothly along the geometric beams on dark velvet. "
+            "Zero camera zoom, zero rotation, zero deformation, zero text, zero numbers."
+        )
+    return img_p, mot_p
+
+
+def build_dynamic_flow_blueprint_from_script(slug: str) -> dict | None:
+    """
+    min7014.github.io 847+ 원문 스크립트(`{slug}.json`)로부터 Google Flow ULTRA 하이브리드 블루프린트를 자동 합성합니다.
+    """
+    for existing in NANO_BANANA_BLUEPRINTS:
+        if existing["slug"] == slug:
+            return existing
+
+    sp = SCRIPTS_DIR / f"{slug}.json"
+    if not sp.exists():
+        return None
+    try:
+        sdoc = json.loads(sp.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+    saved_bp = sdoc.get("flow_blueprint")
+    if isinstance(saved_bp, dict) and saved_bp.get("slug") == slug:
+        return saved_bp
+
+    pdf_u = str(sdoc.get("pdf_url") or "")
+    if "min7014.github.io" not in pdf_u.lower() or not (sdoc.get("pages") or []):
+        return None
+
+    core_ko = _clean_topic_core_ko(sdoc.get("title") or "")
+    core_en = _clean_topic_core_en(sdoc)
+    tpa = sdoc.get("teacher_proof_analysis") or {}
+    aux_ko = str(tpa.get("auxiliary_line_ko") or sdoc.get("solving_tip") or "핵심 보조선 한 줄과 대칭 불변량").strip()
+    aux_en = str(tpa.get("auxiliary_line_en") or "one strategic auxiliary line and geometric invariance").strip()
+    img_prompt, mot_prompt = _build_domain_flow_prompts(sdoc)
+
+    bp = {
+        "slug": slug,
+        "art_file": f"nb_{slug}_flow.png",
+        "flow_clip": f"{slug}_flow.mp4",
+        "flow_image_prompt": img_prompt,
+        "flow_motion_prompt": mot_prompt,
+        "badge_ko": f"★ 실사 광학 기하 미스터리 · {core_ko[:18]}",
+        "badge_en": f"★ Optical Geometry Mystery · {core_en[:24]}",
+        "thumb_hook_ko": ["공식 암기 ZERO!", "보조선 1줄 5초 해법!"],
+        "thumb_hook_en": ["ZERO ROTE RULES!", "1 LINE = 5s PROOF!"],
+        "problem_label_ko": f"공식을 외우지 않고도 '{core_ko}'가 왜 항상 성립하는지 숨은 보조선 한 줄이 3초 만에 보이시나요?",
+        "problem_label_en": f"Without memorizing formulas, can you spot in 3 seconds why {core_en} always holds?",
+        "figure_caption_ko": f"{core_ko[:16]}  →  결정적 단서 1줄은?",
+        "figure_caption_en": f"{core_en[:20]}  →  Spot the 1 Key Line!",
+        "answer_label_ko": f"핵심 열쇠: {aux_ko[:44]} → 눈으로 보는 즉시 증명 완결!",
+        "answer_label_en": f"Key Clue: {aux_en[:56]} → Visual Proof Complete!",
+        "title_ko": f"⚡ 공식 무조건 외우지 마세요! 보조선 1줄로 끝내는 {core_ko} | 단계별 시각적 증명",
+        "title_en": f"⚡ Stop Memorizing Blindly! One Line Unlocks {core_en} | Visual Math Proof",
+        "short_title_ko": f"❓ 공식 없이 3초 만에 보조선 단서가 보이시나요? {core_ko} 시각 해법! #Shorts",
+        "short_title_en": f"❓ Stop Scrolling! Spot the Hidden Line in 3s — {core_en} #Shorts",
+        "act1_ko": f"잠깐! 결과 공식부터 외우던 {core_ko}, 복잡한 계산 없이 단 한 줄의 시각적 단서만으로 왜 항상 성립하는지 3초 만에 보이시나요?",
+        "act1_en": f"Stop scrolling! Before memorizing any formula for {core_en}, can you spot in three seconds the single visual clue that makes it inevitable?",
+        "act3_ko": f"이제 원문 단계별 작도를 통해 {core_ko}가 필연적으로 성립하는 원리가 한눈에 보이시나요? 암기 대신 눈으로 깨치는 오리지널 수학 직관, 지금 바로 채널 구독을 눌러 매일 받아보세요!",
+        "act3_en": f"Now the step-by-step original geometric construction makes {core_en} crystal clear with zero rote memorization! Subscribe right now for daily visual math breakthroughs!",
+        "comment_quiz_ko": f"🧩 [3초 직관 체크] 오늘 살펴본 '{core_ko}'의 단계별 증명 중 가장 결정적인 유레카 순간은 몇 번째 단계였나요? 댓글로 남겨보세요! 🤩👇",
+        "comment_quiz_en": f"🧩 [3-Sec Visual Check] Which step in today's visual proof of {core_en} gave you the biggest 'Aha!' moment? Drop your answer below! 🤩👇",
+    }
+    return bp
+
+
+def get_all_available_flow_blueprints() -> list[dict]:
+    """수동 큐레이션 블루프린트 + 유휴시간 자동 고품질화로 생성된 블루프린트를 통합 반환합니다."""
+    out = list(NANO_BANANA_BLUEPRINTS)
+    seen = {b["slug"] for b in out}
+    for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+        if sp.stem in seen:
+            continue
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        fb = sdoc.get("flow_blueprint")
+        if isinstance(fb, dict) and fb.get("slug") == sp.stem:
+            out.append(fb)
+            seen.add(sp.stem)
+    return out
+
+
+def _load_retrofit_state() -> dict:
+    today = datetime.now().strftime("%Y-%m-%d")
+    st = {
+        "date": today,
+        "daily_count": 0,
+        "last_run_ts": 0.0,
+        "last_swap_ts": 0.0,
+        "upgraded_slugs": [],
+        "safe_swapped_videos": [],
+        "protected_high_view_videos": [],
+    }
+    if FLOW_RETROFIT_STATE_FILE.exists():
+        try:
+            saved = json.loads(FLOW_RETROFIT_STATE_FILE.read_text(encoding="utf-8"))
+            st.update(saved)
+            if st.get("date") != today:
+                st["date"] = today
+                st["daily_count"] = 0
+        except Exception:
+            pass
+    return st
+
+
+def _save_retrofit_state(st: dict) -> None:
+    FLOW_RETROFIT_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    FLOW_RETROFIT_STATE_FILE.write_text(json.dumps(st, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def get_flow_retrofit_status_summary() -> dict:
+    st = _load_retrofit_state()
+    flow_clips = sorted(
+        p.stem.replace("_flow", "")
+        for p in FLOW_CLIPS_DIR.glob("*_flow.mp4")
+        if p.stat().st_size > 150_000 and p.open("rb").read(12)[4:8] == b"ftyp"
+    )
+    nb_rendered = sorted({p.name.split("_nb_")[0] for p in NB_OUT_DIR.glob("*_nb_ko.mp4")})
+    return {
+        "today_upgraded_count": st.get("daily_count", 0),
+        "daily_cap": MAX_DAILY_FLOW_RETROFITS,
+        "total_flow_motion_clips": len(flow_clips),
+        "flow_motion_slugs": flow_clips,
+        "total_hybrid_rendered_slugs": len(nb_rendered),
+        "safe_swapped_count": len(st.get("safe_swapped_videos") or []),
+        "protected_high_view_count": len(st.get("protected_high_view_videos") or []),
+    }
+
+
+def _try_safe_swap_or_thumb_upgrade_on_live_channel(bp: dict, st: dict) -> dict | None:
+    """
+    [Rule 13.3 + Rule 33 스마트 교체 가드레일]:
+    - 이미 라이브 채널에 구버전 정적 영상이 올라가 있는 경우 실시간 조회수와 게시 경과 시간을 확인합니다.
+    - 조회수가 15뷰를 초과(`views > SAFE_SWAP_MAX_VIEWS`)한 인기 영상은 YPP 시청시간·알고리즘 보존을 위해 **절대 삭제하지 않고**
+      고클릭률 Flow 썸네일만 무손실 업데이트(`thumbnails().set`)한 뒤 보호 목록에 기록합니다.
+    - 조회수가 15뷰 이하이고 게시 후 48시간 이상 경과한 저조회 정적 영상만 12시간당 최대 1건씩
+      `videos().delete` 후 Flow 실사 광학 모션 본편으로 안전 교체합니다.
+    """
+    import min7014_video_maker as vmaker
+    from googleapiclient.http import MediaFileUpload
+
+    now_ts = datetime.now().timestamp()
+    if (now_ts - float(st.get("last_swap_ts") or 0.0)) < 12 * 3600:
+        return None
+    if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+        return None
+
+    slug = bp["slug"]
+    sp = SCRIPTS_DIR / f"{slug}.json"
+    if not sp.exists():
+        return None
+    sdoc = json.loads(sp.read_text(encoding="utf-8"))
+    nb_urls = sdoc.get("nano_banana_urls") or {}
+    yt_urls = sdoc.get("youtube_urls") or {}
+
+    yt, _ = vmaker.get_available_youtube_upload_service()
+    if yt is None:
+        return None
+
+    already_swapped = {x.get("old_vid") for x in (st.get("safe_swapped_videos") or [])}
+    already_protected = {x.get("vid") for x in (st.get("protected_high_view_videos") or [])}
+
+    for lc in ("ko", "en"):
+        if (nb_urls.get(lc) or "").strip():
+            # If Flow hybrid already live, ensure its thumbnail is up-to-date without touching video ID
+            continue
+        old_u = str(yt_urls.get(lc) or "").strip()
+        m = re.search(r"(?:v=|youtu\.be/)([A-Za-z0-9_-]{11})", old_u)
+        if not m:
+            continue
+        old_vid = m.group(1)
+        if old_vid in already_swapped or old_vid in already_protected:
+            continue
+
+        l_mp4 = NB_OUT_DIR / f"{slug}_nb_{lc}.mp4"
+        l_thumb = NB_OUT_DIR / f"{slug}_nb_{lc}_thumb.png"
+        if not l_mp4.exists():
+            continue
+
+        try:
+            vr = yt.videos().list(part="statistics,snippet", id=old_vid).execute()
+            items = vr.get("items") or []
+            if not items:
+                continue
+            views = int((items[0].get("statistics") or {}).get("viewCount") or 0)
+            pub_str = (items[0].get("snippet") or {}).get("publishedAt") or ""
+            age_h = 999.0
+            if pub_str:
+                pub_dt = datetime.fromisoformat(pub_str.replace("Z", "+00:00"))
+                age_h = (datetime.now(pub_dt.tzinfo) - pub_dt).total_seconds() / 3600.0
+
+            if views > SAFE_SWAP_MAX_VIEWS:
+                # Rule 33: Protect high-performing video! Upgrade thumbnail only (0 view loss!)
+                if l_thumb.exists():
+                    try:
+                        yt.thumbnails().set(videoId=old_vid, media_body=MediaFileUpload(str(l_thumb), mimetype="image/png")).execute()
+                    except Exception:
+                        pass
+                st.setdefault("protected_high_view_videos", []).append({"slug": slug, "lang": lc, "vid": old_vid, "views": views})
+                _save_retrofit_state(st)
+                return {"action": "protected_high_views_thumb_only", "slug": slug, "lang": lc, "vid": old_vid, "views": views}
+
+            if age_h >= SAFE_SWAP_MIN_AGE_HOURS and views <= SAFE_SWAP_MAX_VIEWS:
+                # Rule 13.3 Clean Swap: delete low-view static legacy video first, then upload Flow Motion Hybrid!
+                yt.videos().delete(id=old_vid).execute()
+                yt_urls[lc] = ""
+                sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+                up_res = try_upload_one_nano_banana_cinema(kind="long", target_slug=slug, target_lang=lc, notify_tg=True)
+                if up_res and up_res.get("url"):
+                    yt_urls[lc] = up_res["url"]
+                    sdoc_after = json.loads(sp.read_text(encoding="utf-8"))
+                    sdoc_after.setdefault("youtube_urls", {})[lc] = up_res["url"]
+                    sp.write_text(json.dumps(sdoc_after, ensure_ascii=False, indent=2), encoding="utf-8")
+                    st["last_swap_ts"] = now_ts
+                    st.setdefault("safe_swapped_videos", []).append(
+                        {"slug": slug, "lang": lc, "old_vid": old_vid, "old_views": views, "new_url": up_res["url"]}
+                    )
+                    _save_retrofit_state(st)
+                    return {"action": "clean_swapped_low_view", "slug": slug, "lang": lc, "old_vid": old_vid, "new_url": up_res["url"]}
+        except Exception:
+            continue
+    return None
+
+
+def run_idle_flow_quality_retrofit_cycle(
+    max_topics: int = 1,
+    force: bool = False,
+    allow_low_view_live_swap: bool = True,
+    target_slug: str | None = None,
+) -> dict:
+    """
+    [회장님 지시 — '이미 만든 자료들도 여유가 있을때 품질을 이 방식으로 높여주기 바란다']:
+    24/7 데몬의 유휴 시간마다 Antigravity 에이전트 쿼터 0원으로 구동되는 자동 고품질화(Flow Motion Retrofit) 사이클.
+    - Tier 1: 기존 정지 줌 에피소드(`2017090101`, `2012100304`, `2014111902` 등)에 실제 Veo 3.1 양단고정 광학 모션 클립 장착 및 재렌더링
+    - Tier 2: 기존에 만들어 둔 847+ 원문 스크립트(검색 핵심 단원 우선)에 Google Flow ULTRA 키프레임(0크레딧) + 양단고정 모션(5크레딧) 생성·합성
+    - Tier 3: 15뷰 이하 저조회 구버전 안전 교체(Rule 13.3) 및 15뷰 초과 인기 영상 보호(Rule 33)
+    """
+    import google_flow_controller as gfc
+
+    st = _load_retrofit_state()
+    now_ts = datetime.now().timestamp()
+    if not force:
+        if int(st.get("daily_count") or 0) >= MAX_DAILY_FLOW_RETROFITS:
+            return {"status": "daily_cap_reached", "summary": get_flow_retrofit_status_summary()}
+        if (now_ts - float(st.get("last_run_ts") or 0.0)) < MIN_RETROFIT_INTERVAL_SEC:
+            return {"status": "cooldown_wait", "summary": get_flow_retrofit_status_summary()}
+
+    upgraded_now = []
+
+    # Build candidate queue: Tier 1 (curated blueprints needing Flow motion clip or re-render) -> Tier 2 (high-search existing scripts)
+    candidates: list[dict] = []
+    for bp in NANO_BANANA_BLUEPRINTS:
+        if target_slug and bp["slug"] != target_slug:
+            continue
+        f_mp4 = _resolve_flow_clip(bp)
+        ko_mp4 = NB_OUT_DIR / f"{bp['slug']}_nb_ko.mp4"
+        needs_clip = f_mp4 is None
+        needs_rerender = (f_mp4 is not None) and ((not ko_mp4.exists()) or (ko_mp4.stat().st_mtime < f_mp4.stat().st_mtime))
+        if needs_clip or needs_rerender:
+            candidates.append(bp)
+
+    if len(candidates) < max_topics:
+        high_terms = ("피타고라스", "원주각", "접선", "이등변", "외심", "내심", "무게중심", "닮음", "메넬라우스", "체바", "포물선", "타원", "코사인", "미분", "정적분")
+        scored_slugs = []
+        for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+            slug = sp.stem
+            if target_slug and slug != target_slug:
+                continue
+            if any(c["slug"] == slug for c in candidates):
+                continue
+            if (FLOW_CLIPS_DIR / f"{slug}_flow.mp4").exists() and (NB_OUT_DIR / f"{slug}_nb_ko.mp4").exists():
+                continue
+            try:
+                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                pdf_u = str(sdoc.get("pdf_url") or "")
+                if "min7014.github.io" not in pdf_u.lower() or len(sdoc.get("pages") or []) < 4:
+                    continue
+                t_s = str(sdoc.get("title") or "")
+                hs = 1 if any(k in t_s for k in high_terms) else 0
+                not_yet_live = 1 if not ((sdoc.get("youtube_urls") or {}).get("ko") or "").strip() else 0
+                scored_slugs.append((-hs, -not_yet_live, slug))
+            except Exception:
+                continue
+        scored_slugs.sort()
+        for _, _, sl in scored_slugs[: max(4, max_topics * 2)]:
+            dyn_bp = build_dynamic_flow_blueprint_from_script(sl)
+            if dyn_bp:
+                candidates.append(dyn_bp)
+
+    for bp in candidates[:max_topics]:
+        slug = bp["slug"]
+        art_p = NB_ASSETS_DIR / bp["art_file"]
+        flow_p = FLOW_CLIPS_DIR / (bp.get("flow_clip") or f"{slug}_flow.mp4")
+
+        # Step 1: Generate Nano Banana 2.1 16:9 keyframe (0 credits) if missing
+        used_fresh_project_asset = False
+        if not art_p.exists():
+            img_prompt = bp.get("flow_image_prompt") or _build_domain_flow_prompts({"title": bp.get("title_ko", "")})[0]
+            gen_img = gfc.generate_flow_image_16x9(img_prompt, art_p, headless=True)
+            if not gen_img or not art_p.exists():
+                continue
+            used_fresh_project_asset = True
+
+        # Step 2: Generate Veo 3.1 Lite locked-keyframe 8s motion clip (5 credits) if missing or invalid MP4
+        if _resolve_flow_clip(bp) is None:
+            mot_prompt = bp.get("flow_motion_prompt") or gfc.DEFAULT_LOCKED_MOTION_PROMPT
+            gen_vid = gfc.generate_flow_locked_motion_clip(
+                art_p,
+                flow_p,
+                motion_prompt=mot_prompt,
+                lock_end_frame=True,
+                model_name="Veo 3.1 - Lite",
+                use_latest_project_asset=used_fresh_project_asset,
+                headless=True,
+            )
+            if not gen_vid or not flow_p.exists():
+                continue
+
+        # Persist dynamic blueprint into script JSON if dynamically generated
+        sp = SCRIPTS_DIR / f"{slug}.json"
+        if sp.exists() and slug not in {b["slug"] for b in NANO_BANANA_BLUEPRINTS}:
+            try:
+                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                sdoc["flow_blueprint"] = bp
+                sp.write_text(json.dumps(sdoc, ensure_ascii=False, indent=2), encoding="utf-8")
+            except Exception:
+                pass
+
+        # Step 3: Render KO & EN 1080p + 9:16 Q-#Shorts with the real Veo motion clip!
+        for lc in ("ko", "en"):
+            render_nano_banana_bundle(bp, lang_code=lc)
+
+        swap_info = None
+        if allow_low_view_live_swap:
+            swap_info = _try_safe_swap_or_thumb_upgrade_on_live_channel(bp, st)
+
+        st["last_run_ts"] = datetime.now().timestamp()
+        st["daily_count"] = int(st.get("daily_count") or 0) + 1
+        if slug not in (st.get("upgraded_slugs") or []):
+            st.setdefault("upgraded_slugs", []).append(slug)
+        _save_retrofit_state(st)
+        upgraded_now.append({"slug": slug, "flow_clip": flow_p.name, "swap_info": swap_info})
+
+    return {"status": "ok", "upgraded": upgraded_now, "summary": get_flow_retrofit_status_summary()}
+
+
 if __name__ == "__main__":
-    res = render_all_nano_banana_flagships(("ko", "en"))
-    print(json.dumps(res, ensure_ascii=False, indent=2))
+    import sys as _sys
+    if "--retrofit-once" in _sys.argv:
+        print(json.dumps(run_idle_flow_quality_retrofit_cycle(max_topics=1, force=True), ensure_ascii=False, indent=2))
+    elif "--retrofit-status" in _sys.argv:
+        print(json.dumps(get_flow_retrofit_status_summary(), ensure_ascii=False, indent=2))
+    else:
+        res = render_all_nano_banana_flagships(("ko", "en"))
+        print(json.dumps(res, ensure_ascii=False, indent=2))

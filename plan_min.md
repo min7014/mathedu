@@ -360,7 +360,7 @@ python -X utf8 pr.py status
 - ✅ **49. YouTube Studio 실측 데이터 기반 `@min7014_ai` YPP 수익화 돌파 전략 v2.0 (`2026-11-14` 신설)**
 - ✅ **50. AI 구독 고정비(월 11만 원) 엄수·30만 원 상향 유보 및 0-크레딧 다윈식 자율 진화 수익화 엔진 v3.0 (`2026-11-14` 신설)**
 - ✅ **51. 저작권 · 상표권 100% 무결성 절대 수호 확장 원칙 (`2026-11-14` 신설 · 최우선 법무 가드레일)**
-- ✅ **52. Google Nano Banana × `min7014.github.io` 실생활 시각 미스터리 시네마 하이브리드 및 기하 환각 ZERO 통제 원칙 (`2026-11-14` 신설)**
+- ✅ **52. Google Flow ULTRA (`Nano Banana 2.1` + `Veo 3.1`) × `min7014.github.io` 실사 광학 모션 하이브리드 및 기하 환각 ZERO 통제 원칙 (`2026-11-14` 고도화 확정)**
 - ✅ **53. 독립 저작권·상표권·YPP 정책 & 무결성 감사관 에이전트(`auditor`) 상시 가동 원칙 (`2026-11-14` 신설 · 7대 전문 에이전트 체제)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
@@ -580,3 +580,4 @@ python -X utf8 pr.py status
     1. **1위 주력 엔진**: `[min7014.github.io 847+ 오리지널 증명 설계도(Act 2 무크롭 PDF + 가상 지휘봉)]` × `[Google Flow ULTRA: Nano Banana 2.1(0크레딧 무결점 기하 키프레임) → Veo 3.1 - Lite(5크레딧, 시작=종료 양단 프레임 고정 심리스 루프 8초 실사 광학 모션 .mp4)]` × `[Python FFmpeg 칼핀트 수식 HUD·다국어 Neural TTS 합성]` — Antigravity 에이전트 쿼터 소모 **0원** 달성!
     2. **2위 보조 퍼널**: YouTube Studio 데스크톱 `관련 동영상` 바인딩으로 9:16 `Q-#Shorts` 시청자를 1080p 본편으로 무쿼터 직결.
     3. **비판적 배제 원칙(`Rule 33` & `Rule 44`)**: Veo/Flow 단독 통짜 생성 및 NotebookLM/Google Vids 단독 본편 생성은 다단계 보조선·수식 왜곡 위험으로 영구 배제하며, `auditor.py` L1 하드 게이트에 `Google Flow`·`Veo`·`Gemini Omni` 대외 노출 차단 규칙까지 추가 완료.
+    4. **기존 제작 자료 유휴시간 자동 고품질화(`Idle-Time Flow Motion Retrofit`) 가동 확정 (`2026-11-14`)**: 회장님 지시(`"확실히 품질이 높아졌다. 이미 만든 자료들도 여유가 있을때 품질을 이 방식으로 높여주기 바란다."`)에 따라 `nano_banana_cinema_creator.py`에 847+ 원문 스크립트 동적 Flow 블루프린트 생성기(`build_dynamic_flow_blueprint_from_script`) 및 유휴시간 자동 고품질화 엔진(`run_idle_flow_quality_retrofit_cycle`)을 구축하고 `finance.py` Pacing/Cooldown 유휴 구간·`mathedu_foundation_daemon.py`·텔레그램 0-크레딧 `!고품질화`/`!고품질화실행` 명령에 통합 완료. **Rule 33 조회수 보호 가드레일**: 조회수 `>15회` 인기 영상은 절대 삭제 금지(썸네일만 무손실 업그레이드), 게시 48시간 경과 `<=15회` 저조회 구버전만 12시간당 최대 1건 `Rule 13.3` 안전 교체 수행. 또한 `google_flow_controller.py`에서 `button.asset-item` 파일명 스템 정확 매칭 및 좌측 `동영상` 갤러리 필터링을 적용하여 타 단원 프레임 혼입을 0%로 원천 차단 완료.

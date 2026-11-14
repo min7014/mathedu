@@ -344,6 +344,8 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !수익 (또는 /revenue) : 실시간 유튜브 구독자·조회수·YPP 1/2단계 달성 현황·쇼츠 본편 바인딩 수\n"
             "• !쇼츠연결 (또는 /linkshorts) : [API 쿼터 0] 스튜디오에서 쇼츠 8편에 1080p 본편 '관련 동영상' 즉시 연결\n"
             "• !커뮤니티 (또는 /community) : [API 쿼터 0] 채널 커뮤니티 탭에 5초 수학 퀴즈 게시물 즉시 발행\n"
+            "• !고품질화 (또는 /flow) : [크레딧 0] 기존 자료 Google Flow ULTRA 실사 모션 자동 고품질화 현황 조회\n"
+            "• !고품질화실행 (또는 /retrofit) : [크레딧 0] 유휴 고품질화 1주제 백그라운드 즉시 실행\n"
             "• !업로드 (또는 /wave) : 전략 v2.0(실전함정·3~10분 본편 3 + 한/영 Q-#Shorts 3) 업로드 웨이브 즉시 실행\n"
             "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
             "• !감사 (또는 !저작권 / !상표권) : [크레딧 0] 독립 감사관(auditor) 7계층 저작권·상표권·라이브 유튜브 전수 감사\n"
@@ -432,6 +434,33 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
     if low in ("!커뮤니티", "/community", "!community"):
         out = run_shell([sys.executable, "-X", "utf8", "youtube_community_controller.py", "--post-community"], timeout=180)
         return f"🗳️ [크레딧 0원 · API 쿼터 0 · 유튜브 커뮤니티 5초 퀴즈 발행 결과]\n{out[-1500:]}"
+
+    if low in ("!고품질화", "!플로우", "!업그레이드현황", "/flow", "!flow"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import nano_banana_cinema_creator as nbcc
+        sm = nbcc.get_flow_retrofit_status_summary()
+        slugs_txt = ", ".join(sm.get("flow_motion_slugs") or []) or "(준비 중)"
+        return (
+            "🎬 [크레딧 0원 · Google Flow ULTRA 기존 자료 고품질화 현황]\n"
+            f"• 금일 자동 고품질화 완료: {sm.get('today_upgraded_count', 0)} / 일 최대 {sm.get('daily_cap', 8)}주제\n"
+            f"• Veo 3.1 양단고정 실사 모션 클립 보유: {sm.get('total_flow_motion_clips', 0)}주제 ({slugs_txt})\n"
+            f"• 하이브리드 본편·쇼츠 렌더링 완료: {sm.get('total_hybrid_rendered_slugs', 0)}주제\n"
+            f"• 저조회(≤15뷰) 안전 교체 완료: {sm.get('safe_swapped_count', 0)}건\n"
+            f"• 인기 영상(>15뷰 · 삭제 금지 보호 · 썸네일만 업그레이드): {sm.get('protected_high_view_count', 0)}건\n"
+            "• 작동 방식: 데몬 업로드 대기(Pacing/Cooldown) 유휴 시간마다 Antigravity 쿼터 0원으로 자동 수행"
+        )
+
+    if low in ("!고품질화실행", "!플로우실행", "/retrofit", "!retrofit"):
+        bg_pid = silent_subprocess.spawn_windowless_background_python(
+            str(ROOT_DIR / "nano_banana_cinema_creator.py"),
+            extra_args=["--retrofit-once"],
+            cwd=str(ROOT_DIR),
+        )
+        return (
+            f"🚀 [크레딧 0원 · 백그라운드 무창 고품질화 착수 (PID={bg_pid})]\n"
+            "• 다음 우선순위 기존 자료 1주제에 대해 Google Flow ULTRA 키프레임(0크레딧) + Veo 3.1 Lite 양단고정 8초 모션(5크레딧) 생성 및 KO/EN 본편·Q-#Shorts 고품질 렌더링을 시작했습니다.\n"
+            "• 약 2~3분 뒤 `!고품질화` 명령으로 완료 현황을 확인하실 수 있습니다."
+        )
 
     if low in ("!업로드", "/wave", "!wave"):
         out = run_shell([sys.executable, "-X", "utf8", "finance.py", "cashflow-wave"], timeout=300)

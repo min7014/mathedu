@@ -67,3 +67,6 @@ description: Specialized AI Video Producer & 4-Edition Math Cinema Director agen
 5. **유튜브 채널(`@min7014_ai`) 전용 연결 및 GitHub 영상 용량 ZERO 원칙 (YouTube-Only Linking & Zero GitHub Storage Mandate)**:
    - 모든 영상(`.mp4`, `.webm`, `.mov`, `.wav`, `.mp3`, `video_lectures/youtube_packages/`)은 **절대 Git / GitHub 저장소에 커밋하거나 푸시하지 않으며, GitHub의 용량을 단 1바이트도 영상 파일에 쓰지 않습니다** (`.gitignore`로 영구 차단).
    - 로컬에 생성된 `.mp4` 및 썸네일은 오직 `@min7014_ai` 유튜브 채널 업로드용으로만 사용하고, 수학홈페이지(`video_board.html`, `index.html`, `catalog.json`, `vault_index.json`, `min7014_deep_knowledge.json`)에는 **무조건 유튜브 채널 인터넷 주소(`https://youtu.be/...`, `https://youtube.com/shorts/...`, `https://www.youtube.com/@min7014_ai`) 링크만** 제공합니다.
+6. **Google Flow ULTRA 실사 광학 모션 하이브리드 및 기존 자료 유휴시간 자동 고품질화 (`Rule 52`, `google_flow_controller.py` + `nano_banana_cinema_creator.py`)**:
+   - `Nano Banana 2.1` (0 Flow 크레딧 · Antigravity 0쿼터) 무결점 기하 키프레임 + `Veo 3.1 - Lite` (5 Flow 크레딧 · `[시작=종료]` 양단 고정 8초 루프) 실사 광학 모션 클립을 `Act 1`(3초 호기심 미스터리)과 `Act 3`(5초 암산 완결) 배경에 배치하고, `Act 2`는 100% 무크롭 `min7014.github.io` 원문 PDF + 메이플 가상 지휘봉으로 직결합니다.
+   - 데몬 업로드 유휴 시간마다 `run_idle_flow_quality_retrofit_cycle()`이 기존 자료를 자동 업그레이드하며, 라이브 채널에서 `조회수 > 15회` 인기 영상은 절대 삭제하지 않고 썸네일만 무손실 업데이트(`Rule 33`)하고, 게시 48시간 경과 `<= 15회` 저조회 구버전만 `Rule 13.3`에 따라 안전 교체합니다.

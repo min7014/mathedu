@@ -266,9 +266,15 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
             last_chat_p = ROOT_DIR / ".agents" / "last_agent_chat_slug.txt"
             if last_chat_p.exists():
                 last_completed_slug = last_chat_p.read_text(encoding="utf-8").strip()
+        flow_summary = {}
+        try:
+            import nano_banana_cinema_creator as _nbcc_hb
+            flow_summary = _nbcc_hb.get_flow_retrofit_status_summary()
+        except Exception:
+            pass
         STATUS_JSON.parent.mkdir(parents=True, exist_ok=True)
         STATUS_JSON.write_text(json.dumps({
-            "daemon": "mathedu_foundation_daemon (24/7 Continuous Evolution + mathteacher v8.0 + finance v5.0 Active)",
+            "daemon": "mathedu_foundation_daemon (24/7 Continuous Evolution + mathteacher v8.0 + finance v5.0 + Flow ULTRA Retrofit Active)",
             "updated_at": datetime.now().isoformat(),
             "last_completed_slug": last_completed_slug,
             "total_rendered_video_topics": len(cat),
@@ -277,6 +283,7 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
                 "passed_topics": last_audit_passed or len(cat),
                 "personal_name_zero_verified": True,
             },
+            "flow_motion_retrofit": flow_summary,
             "finance_10m_krw_engine": {
                 "monthly_target_krw": 10000000,
                 "total_rendered_mp4_files": fin_inv.get("total_rendered_mp4_files", 0),
@@ -775,6 +782,12 @@ def run_continuous_foundation_loop(single_cycle=False):
             print(f"🎯 [Exam-Hybrid Creator] Rendered {len(eh_built)} exam-trap hybrid bundle(s): {[x.get('slug')+'_'+x.get('lang') for x in eh_built]}", flush=True)
     except Exception as eh_err:
         print(f"[Exam-Hybrid Creator Notice] {eh_err}", flush=True)
+    try:
+        import nano_banana_cinema_creator as _nbcc
+        flow_ret = _nbcc.run_idle_flow_quality_retrofit_cycle(max_topics=1)
+        print(f"🎬 [Flow ULTRA Idle Retrofit] status={flow_ret.get('status')} | upgraded={flow_ret.get('upgraded')}", flush=True)
+    except Exception as flow_err:
+        print(f"[Flow ULTRA Idle Retrofit Notice] {flow_err}", flush=True)
     try:
         import youtube_self_evolving_engine
         evo_res = youtube_self_evolving_engine.run_zero_credit_self_evolution_cycle()

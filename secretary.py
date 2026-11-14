@@ -221,6 +221,17 @@ def format_executive_briefing(metrics: dict) -> str:
     except Exception:
         pass
     try:
+        import nano_banana_cinema_creator as _nbcc_sec
+        _fs = _nbcc_sec.get_flow_retrofit_status_summary()
+        lines.append(
+            f"🎬 [Google Flow ULTRA 유휴시간 자동 고품질화 현황 (0-쿼터)]\n"
+            f"   • Veo 3.1 양단고정 모션 보유: {_fs.get('total_flow_motion_clips', 0)}주제 | 하이브리드 렌더: {_fs.get('total_hybrid_rendered_slugs', 0)}주제\n"
+            f"   • 금일 업그레이드: {_fs.get('today_upgraded_count', 0)}/{_fs.get('daily_cap', 8)} | 저조회 교체: {_fs.get('safe_swapped_count', 0)}건 | >15뷰 보호: {_fs.get('protected_high_view_count', 0)}건"
+        )
+        lines.append("----------------------------------------------------------------------")
+    except Exception:
+        pass
+    try:
         import youtube_trend_tracker as _ytt
         lines.append(_ytt.format_trend_report(include_studio=False))
     except Exception:

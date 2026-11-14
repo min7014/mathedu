@@ -45,13 +45,35 @@ STUDIO_COMMENTS_URL = "https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgF
 CHROME_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 
+def _is_pid_running(pid: int) -> bool:
+    if pid <= 0:
+        return False
+    if os.name == "nt":
+        try:
+            import ctypes
+            handle = ctypes.windll.kernel32.OpenProcess(0x1000, False, int(pid))
+            if not handle:
+                return False
+            try:
+                exit_code = ctypes.c_ulong(0)
+                if ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
+                    return exit_code.value == 259
+                return True
+            finally:
+                ctypes.windll.kernel32.CloseHandle(handle)
+        except Exception:
+            return False
+    return False
+
+
 def _acquire_robot_lock(max_age_sec: int = 420) -> bool:
     ROBOT_LOCK_FILE.parent.mkdir(parents=True, exist_ok=True)
     now = time.time()
     if ROBOT_LOCK_FILE.exists():
         try:
             d = json.loads(ROBOT_LOCK_FILE.read_text(encoding="utf-8"))
-            if d.get("pid") != os.getpid() and (now - float(d.get("ts", 0))) < max_age_sec:
+            owner_pid = int(d.get("pid") or 0)
+            if owner_pid != os.getpid() and _is_pid_running(owner_pid) and (now - float(d.get("ts", 0))) < max_age_sec:
                 return False
         except Exception:
             pass
