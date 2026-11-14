@@ -269,6 +269,7 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
         flow_summary = {}
         try:
             import nano_banana_cinema_creator as _nbcc_hb
+            _nbcc_hb.run_idle_flow_quality_retrofit_cycle(max_topics=1)
             flow_summary = _nbcc_hb.get_flow_retrofit_status_summary()
         except Exception:
             pass

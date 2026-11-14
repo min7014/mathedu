@@ -1321,7 +1321,7 @@ import threading as _fin_threading
 _CASHFLOW_WAVE_THREAD_LOCK = _fin_threading.Lock()
 UPLOAD_LOCK_FILE = ROOT_DIR / ".agents" / "youtube_upload.lock"
 DAILY_WAVE_BALANCE_FILE = ROOT_DIR / ".agents" / "daily_wave_balance.json"
-MIN_WAVE_SPACING_SEC = 3600  # 1시간 간격 분산 업로드로 유튜브 스팸 폭탄 페널티(노출 0회) 원천 방지
+MIN_WAVE_SPACING_SEC = 7200  # 2시간(120분) 간격 분산 업로드로 개별 쇼츠 시드 풀(Seed Pool) 독점 호흡 시간 보장 & 연속 업로드 잠식 방지
 
 
 def _current_youtube_quota_day_id() -> str:

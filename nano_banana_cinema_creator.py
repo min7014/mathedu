@@ -626,17 +626,24 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
             _encode_still_segment(sc_v, sh_m_mp3, sh_m_seg, ffmpeg_exe, ffprobe_exe)
             sh_segs.append(sh_m_seg)
 
-        # Scene 4: 나노바나나 유레카 정답 완결 + 관련 동영상 클릭 유도
+        # Scene 4: 유레카 즉시 정답 보상 + 본편([관련 동영상]) & 구독 전환 클리프행어 브릿지 (쇼츠 완결성 역설 해소!)
         s4_bg, s4_hud = _make_vertical_art_canvas(
-            "★ EUREKA! VISUAL MYSTERY SOLVED!" if is_en else "★ 유레카! 3초 시각 직관 해체 완료!",
+            "★ 3-SEC ANSWER! WHY ALWAYS TRUE?" if is_en else "★ 3초 정답 공개! 왜 예외 없이 성립할까?",
             (5, 150, 105),
             textwrap.wrap(bp["answer_label_en"] if is_en else bp["answer_label_ko"], width=30 if is_en else 20),
-            "■ ZERO ROTE FORMULAS!" if is_en else "■ 공식 암기 ZERO · 완벽 직관!",
-            cta_line="▶ Tap [Related Video] Full Proof & [Subscribe]!" if is_en else "▶ 아래 [관련 동영상] 본편 클릭 & [@min7014_ai 구독]!",
+            "■ FULL PROOF IN RELATED VIDEO ▼" if is_en else "■ 전체 단계별 증명은 아래 [관련 동영상] ▼",
+            cta_line="▶ Tap [Related Video] Below & Hit [Subscribe]!" if is_en else "▶ 바로 아래 [관련 동영상] 본편 클릭 & [구독]!",
         )
         sh4_mp3 = tmp_dir / "sh4.mp3"
         sh4_seg = tmp_dir / "sh4.mp4"
-        vmaker.synthesize_tts_mp3_sync(bp["act3_en"] if is_en else bp["act3_ko"], voice_name, sh4_mp3, rate="+18%")
+        sh4_script = (
+            bp.get("short_act4_en")
+            or f"{bp['act3_en']} Wait—why does this invariant never break even in extreme cases? Tap the Related Video right below to watch the full visual proof and hit Subscribe!"
+            if is_en
+            else bp.get("short_act4_ko")
+            or f"{bp['act3_ko']} 잠깐, 그런데 도형이 극단적으로 기울어져도 왜 예외 없이 똑같이 성립할까요? 바로 아래 관련 동영상 본편을 눌러 전체 단계별 시각 증명을 확인해 보세요!"
+        )
+        vmaker.synthesize_tts_mp3_sync(sh4_script, voice_name, sh4_mp3, rate="+18%")
         _encode_cinematic_art_card(s4_bg, s4_hud, sh4_mp3, sh4_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920, flow_clip_mp4=flow_clip)
         sh_segs.append(sh4_seg)
 
