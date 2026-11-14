@@ -158,12 +158,23 @@ EXAM_TRAP_BLUEPRINTS = [
 ]
 
 
-def _draw_exam_problem_diagram(draw: ImageDraw.ImageDraw, box: tuple, kind: str, solved: bool = False):
-    """Act 1(문제 제시) 및 Act 3(보조선 해체 완료)용 선명한 기하 다이어그램 렌더링"""
+def _draw_exam_problem_diagram(draw: ImageDraw.ImageDraw, box: tuple, kind: str, solved: bool = False, canvas_img: Image.Image | None = None, pdf_doc=None):
+    """Act 1(문제 제시) 및 Act 3(보조선 해체 완료)용 선명한 기하 다이어그램 렌더링 (원문 PDF 슬라이드 직접 매핑 지원)"""
     x0, y0, x1, y1 = box
     w, h = x1 - x0, y1 - y0
     cx, cy = (x0 + x1) // 2, (y0 + y1) // 2
     draw.rounded_rectangle(box, radius=24, fill=(12, 20, 42), outline=(56, 189, 248), width=3)
+
+    if kind == "pdf_native" and canvas_img is not None and pdf_doc is not None and len(pdf_doc) >= 1:
+        import min7014_video_maker as vmaker
+        idx_p = max(0, len(pdf_doc) - 2) if solved else 0
+        pix = pdf_doc[idx_p].get_pixmap(dpi=220)
+        sl = vmaker._mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
+        sc = min((w - 36) / sl.width, (h - 36) / sl.height)
+        nw, nh = int(sl.width * sc), int(sl.height * sc)
+        px, py = x0 + (w - nw) // 2, y0 + (h - nh) // 2
+        canvas_img.paste(sl.resize((nw, nh), Image.Resampling.LANCZOS), (px, py))
+        return
 
     cyan = (56, 189, 248)
     gold = (250, 204, 21)
@@ -374,7 +385,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         d1.text((88, 74), bp["exam_badge_en"] if is_en else bp["exam_badge_ko"], fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
         d1.text((1380, 78), "⏱️ 5-SEC CHALLENGE" if is_en else "⏱️ 실전 5초 챌린지!", fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
 
-        _draw_exam_problem_diagram(d1, (68, 196, 940, 880), bp["diagram_kind"], solved=False)
+        _draw_exam_problem_diagram(d1, (68, 196, 940, 880), bp["diagram_kind"], solved=False, canvas_img=act1_img, pdf_doc=doc)
         d1.rounded_rectangle((980, 196, 1852, 880), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
         p_lbl = bp["problem_label_en"] if is_en else bp["problem_label_ko"]
         y_txt = 248
@@ -424,7 +435,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         d3 = ImageDraw.Draw(act3_img)
         d3.rounded_rectangle((56, 44, 1864, 156), radius=22, fill=(5, 150, 105), outline=(250, 204, 21), width=4)
         d3.text((88, 74), "✅ SOLVED IN 5 SECONDS! (1-LINE VISUAL HACK)" if is_en else "✅ 보조선 1줄로 단 5초 만에 실전 해체 완료!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
-        _draw_exam_problem_diagram(d3, (68, 196, 940, 880), bp["diagram_kind"], solved=True)
+        _draw_exam_problem_diagram(d3, (68, 196, 940, 880), bp["diagram_kind"], solved=True, canvas_img=act3_img, pdf_doc=doc)
         d3.rounded_rectangle((980, 196, 1852, 880), radius=24, fill=(15, 23, 42), outline=(52, 211, 153), width=4)
         ans_lbl = bp["answer_label_en"] if is_en else bp["answer_label_ko"]
         ya = 256
@@ -457,7 +468,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         ds1 = ImageDraw.Draw(s1)
         ds1.rounded_rectangle((44, 68, 1036, 214), radius=24, fill=(190, 18, 60), outline=(250, 204, 21), width=4)
         ds1.text((78, 110), "⏱️ CAN YOU FIND x IN 3 SECONDS?" if is_en else "⏱️ 공식 없이 3초 안에 x가 보이시나요?", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
-        _draw_exam_problem_diagram(ds1, (56, 256, 1024, 1220), bp["diagram_kind"], solved=False)
+        _draw_exam_problem_diagram(ds1, (56, 256, 1024, 1220), bp["diagram_kind"], solved=False, canvas_img=s1, pdf_doc=doc)
         ds1.rounded_rectangle((56, 1260, 1024, 1520), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=4)
         ds1.text((92, 1305), bp["figure_caption_en"] if is_en else bp["figure_caption_ko"], fill=(250, 204, 21), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
         p_short_lines = textwrap.wrap(bp["problem_label_en"] if is_en else bp["problem_label_ko"], width=30 if is_en else 20)[:2]
@@ -506,7 +517,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         ds4 = ImageDraw.Draw(s4)
         ds4.rounded_rectangle((44, 68, 1036, 204), radius=24, fill=(5, 150, 105), outline=(250, 204, 21), width=4)
         ds4.text((78, 110), "🎯 BOOM! 5-SECOND EXAM PAYOFF!" if is_en else "🎯 유레카! 보조선 1줄로 5초 암산 끝!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 40, bold=True))
-        _draw_exam_problem_diagram(ds4, (56, 244, 1024, 1140), bp["diagram_kind"], solved=True)
+        _draw_exam_problem_diagram(ds4, (56, 244, 1024, 1140), bp["diagram_kind"], solved=True, canvas_img=s4, pdf_doc=doc)
         ds4.rounded_rectangle((44, 1180, 1036, 1590), radius=24, fill=(15, 23, 42), outline=(52, 211, 153), width=4)
         for li, al in enumerate(textwrap.wrap(bp["answer_label_en"] if is_en else bp["answer_label_ko"], width=28 if is_en else 19)[:3]):
             ds4.text((80, 1222 + li * 56), al, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 38, bold=True))
@@ -562,11 +573,88 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         doc.close()
 
 
+def get_all_ranked_exam_blueprints(max_dynamic: int = 120) -> list[dict]:
+    """
+    [0-크레딧 무한 확장 엔진]:
+    수동 설계 6대 블루프린트 완료 후에도 멈추지 않고, min7014.github.io 전체 847개 시각 증명 PDF 중
+    youtube_self_evolving_engine의 다윈식 승자 클러스터 가중치가 높은 핵심 주제들을 자동으로 실전 함정 블루프린트로 합성합니다.
+    """
+    curated_slugs = {b["slug"] for b in EXAM_TRAP_BLUEPRINTS}
+    result = list(EXAM_TRAP_BLUEPRINTS)
+
+    try:
+        import min7014_video_maker as vm
+        import youtube_self_evolving_engine as ysee
+
+        dyn_cands = []
+        for sp in sorted(SCRIPTS_DIR.glob("*.json")):
+            if sp.stem in curated_slugs:
+                continue
+            try:
+                sdoc = json.loads(sp.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            pdf_u = str(sdoc.get("pdf_url") or "")
+            if not (pdf_u.lower().endswith(".pdf") and "min7014.github.io" in pdf_u.lower()):
+                continue
+            pages = sdoc.get("pages") or []
+            if not (6 <= len(pages) <= 32):
+                continue
+            raw_t = str(sdoc.get("title") or "")
+            if any(skip in raw_t for skip in ("특강", "워크숍", "직무연수", "TikZ", "학년도")):
+                continue
+            boost = ysee.get_slug_cluster_boost(f"{raw_t} {sdoc.get('title_en', '')}")
+            dyn_cands.append((-boost, abs(len(pages) - 14), sp.stem, sdoc))
+
+        dyn_cands.sort(key=lambda x: (x[0], x[1], x[2]))
+        for _, _, slug, sdoc in dyn_cands[:max_dynamic]:
+            ko_t, en_t = vm.split_bilingual_title(sdoc.get("title", ""))
+            ko_c = vm._smart_concise_topic_title(vm.latex_to_unicode_title(ko_t).strip(), max_len=26, lang="ko")
+            en_c = vm._smart_concise_topic_title(vm.latex_to_unicode_title((sdoc.get("title_en") or en_t or ko_c).split("—")[0].strip()), max_len=38, lang="en")
+            p0 = (sdoc.get("pages") or [{}])[0]
+            p_last = (sdoc.get("pages") or [{}])[-1]
+            q0_ko = (p0.get("step_question_ko") or f"도형에서 어떤 보조선 한 줄이 {ko_c}을 즉시 증명할까요?").strip()
+            q0_en = (p0.get("step_question_en") or f"Which single auxiliary line unlocks {en_c} in seconds?").strip()
+            end_ko = re.sub(r"\s+", " ", (p_last.get("narrations") or {}).get("ko") or p_last.get("explanation_text") or "").strip()[:76]
+            end_en = re.sub(r"\s+", " ", (p_last.get("narrations") or {}).get("en") or "").strip()[:115]
+
+            result.append({
+                "slug": slug,
+                "diagram_kind": "pdf_native",
+                "exam_badge_ko": "🚨 내신·수능 빈출 시각 증명 해법",
+                "exam_badge_en": "🚨 High-Yield Exam Visual Hack",
+                "problem_label_ko": q0_ko[:68],
+                "problem_label_en": q0_en[:96],
+                "figure_caption_ko": f"핵심 원리: {ko_c}",
+                "figure_caption_en": f"Core Principle: {en_c}",
+                "answer_label_ko": end_ko or f"보조선 1줄 시각 불변량으로 [{ko_c}] 5초 완벽 해결!",
+                "answer_label_en": end_en or f"One visual auxiliary clue proves [{en_c}] in 5 seconds!",
+                "title_ko": f"🔥 공식 암기 금지! 시험장에서 5초 만에 꿰뚫는 보조선 직관 | {ko_c} 시각적 증명",
+                "title_en": f"🔥 Stop Memorizing Formulas! 5-Second Visual Exam Proof | {en_c}",
+                "short_title_ko": f"❓ 공식 없이 3초 만에 보이시나요? {ko_c} 보조선 해법! #Shorts",
+                "short_title_en": f"❓ Can You Spot Why {en_c} Works in 3 Seconds? #Shorts",
+                "act1_ko": f"잠깐! 시험장에서 {ko_c} 관련 문제가 나왔을 때 공식만 외우면 조금만 변형되어도 막힙니다. 도형에서 핵심 단서가 3초 만에 보이시나요?",
+                "act1_en": f"Stop! Memorizing {en_c} blindly fails whenever an exam twists the figure. Can you spot the visual invariant in three seconds?",
+                "act3_ko": f"결국 이 보조선 원리 하나로 {ko_c}이 눈앞에서 명쾌하게 해결됩니다! 내신과 수능 수학을 10초 눈풀이로 바꾸는 시각 증명, 지금 바로 채널 구독을 눌러 두세요!",
+                "act3_en": f"That single visual connection proves {en_c} effortlessly! Subscribe to @min7014_ai right now for daily 10-second exam breakthroughs!",
+                "comment_quiz_ko": f"🧩 [5초 개념 체크] 오늘 본 '{ko_c}' 증명에서 가장 결정적이었던 보조선·성질은 무엇이었나요? 한 줄로 댓글에 남겨 복습해 보세요! 👇",
+                "comment_quiz_en": f"🧩 [5-Sec Recap] Which visual step made '{en_c}' click for you? Share in the comments below! 👇",
+            })
+    except Exception:
+        pass
+    return result
+
+
 def ensure_next_exam_hybrid_rendered(max_bundles: int = 1) -> list[dict]:
     rendered = []
-    for bp in EXAM_TRAP_BLUEPRINTS:
+    try:
+        import youtube_self_evolving_engine as _ysee
+        lang_order = _ysee.preferred_lang_order_for_current_hour()
+    except Exception:
+        lang_order = ("ko", "en")
+    for bp in get_all_ranked_exam_blueprints():
         slug = bp["slug"]
-        for lc in ("ko", "en"):
+        for lc in lang_order:
             l_mp4 = EXAM_HYBRID_DIR / f"{slug}_exam_{lc}.mp4"
             s_mp4 = EXAM_HYBRID_DIR / f"{slug}_exam_short_{lc}.mp4"
             if not (l_mp4.exists() and s_mp4.exists()):
@@ -611,7 +699,13 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
     if yt is None:
         return None
 
-    for bp in EXAM_TRAP_BLUEPRINTS:
+    try:
+        import youtube_self_evolving_engine as _ysee
+        lang_order = _ysee.preferred_lang_order_for_current_hour()
+    except Exception:
+        lang_order = ("ko", "en")
+
+    for bp in get_all_ranked_exam_blueprints():
         slug = bp["slug"]
         sp = SCRIPTS_DIR / f"{slug}.json"
         if not sp.exists():
@@ -620,7 +714,7 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
         ex_urls = sdoc.setdefault("exam_hybrid_urls", {})
         ex_sh_urls = sdoc.setdefault("exam_hybrid_shorts_urls", {})
 
-        for lc in ("ko", "en"):
+        for lc in lang_order:
             is_en = lc == "en"
             l_mp4 = EXAM_HYBRID_DIR / f"{slug}_exam_{lc}.mp4"
             l_thumb = EXAM_HYBRID_DIR / f"{slug}_exam_{lc}_thumb.png"

@@ -180,8 +180,28 @@ def format_trend_report(include_studio: bool = False) -> str:
     d_rel = cur["related_shorts_linked"] - base["related_shorts_linked"]
     d_comm = cur["community_quizzes"] - base["community_quizzes"]
 
+    extra_evo = ""
+    roi_line = ""
+    try:
+        import youtube_self_evolving_engine as ysee
+        roi = ysee.evaluate_ai_subscription_roi_gate(
+            subscribers=int(cur["subscribers"]),
+            watch_hours=float(cur["studio_watch_hours"]),
+            valid_shorts_views=int(cur["studio_valid_shorts_views"]),
+        )
+        roi_line = f"\n{roi['verdict_badge']}"
+        cw_p = ROOT_DIR / "youtube_uploads" / "self_evolving_cluster_weights.json"
+        pl_p = ROOT_DIR / ".agents" / "playlist_synced_state.json"
+        loc_p = ROOT_DIR / ".agents" / "localized_videos_state.json"
+        top_c = ", ".join((json.loads(cw_p.read_text(encoding="utf-8")).get("top_3_clusters") or [])[:3]) if cw_p.exists() else "-"
+        pl_cnt = len((json.loads(pl_p.read_text(encoding="utf-8")).get("added_pairs") or [])) if pl_p.exists() else 0
+        loc_cnt = len((json.loads(loc_p.read_text(encoding="utf-8")).get("localized_ids") or [])) if loc_p.exists() else 0
+        extra_evo = f"\n• v3.0 자율진화: 인기 단원 1~3위[{top_c}] | 정주행 재생목록 편입 {pl_cnt}편 | 6개국어 글로벌 현지화 {loc_cnt}편"
+    except Exception:
+        pass
+
     return (
-        "📈 [@min7014_ai 전략 v2.0 전면 적용 추이 리포트 (기준점: 11/14 10:55 KST)]\n"
+        "📈 [@min7014_ai 전략 v2.0➔v3.0 전면 가동 추이 리포트 (기준점: 11/14 10:55 KST)]\n"
         f"• 구독자: {base['subscribers']}명 ➔ {cur['subscribers']}명 ({d_subs:+d}명 | 전환율 {cur['sub_conversion_pct']:.2f}%)\n"
         f"• 총 조회수: {base['total_views_api']:,}회 ➔ {cur['total_views_api']:,}회 ({d_views:+,}회)\n"
         f"• 공개 영상: {base['public_videos']}편 ➔ {cur['public_videos']}편 ({d_vids:+d}편)\n"
@@ -190,6 +210,7 @@ def format_trend_report(include_studio: bool = False) -> str:
         f"• 유입 구조: 검색 {cur['studio_search_pct']}% | 탐색(홈 추천) {cur['studio_browse_pct']}%\n"
         f"• v2.0 이후 신규 업로드 코호트: {cur['post_v2_videos_count']}편 (편당 평균 {cur['post_v2_avg_views']}뷰)\n"
         f"• 퍼널 가동 현황: 본편 연결 쇼츠 {cur['related_shorts_linked']}편({d_rel:+d}) | 커뮤니티 퀴즈 {cur['community_quizzes']}건({d_comm:+d}) | 실전함정 하이브리드 준비 {cur.get('exam_hybrid_mp4_ready', 0)}편"
+        f"{extra_evo}{roi_line}"
     )
 
 

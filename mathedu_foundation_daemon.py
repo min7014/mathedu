@@ -771,6 +771,12 @@ def run_continuous_foundation_loop(single_cycle=False):
     except Exception as eh_err:
         print(f"[Exam-Hybrid Creator Notice] {eh_err}", flush=True)
     try:
+        import youtube_self_evolving_engine
+        evo_res = youtube_self_evolving_engine.run_zero_credit_self_evolution_cycle()
+        print(f"🧬 [Self-Evolving Engine v3.0] TopClusters={evo_res.get('top_clusters')} | Playlists={evo_res.get('playlists')} | 6-Lang Localized=+{evo_res.get('localized_videos_now')}", flush=True)
+    except Exception as evo_err:
+        print(f"[Self-Evolving Engine Notice] {evo_err}", flush=True)
+    try:
         import youtube_trend_tracker
         youtube_trend_tracker.capture_trend_snapshot(include_studio=False)
     except Exception as tr_err:

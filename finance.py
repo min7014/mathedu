@@ -1671,15 +1671,20 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                     q_dur = float(((sdoc.get("question_classroom_packages") or {}).get("ko") or {}).get("duration_sec") or 0.0)
                     best_dur = max(ko_dur, q_dur)
                     p_cnt = int(sdoc.get("page_count") or len(sdoc.get("pages") or []))
-                    # [Rule 49 — YouTube Studio 실측 데이터 기반 정렬]:
-                    # 40분+ 과잉 장편 대신 검색 유입(23%)과 시청 지속률이 가장 높은 '3~10.5분(180~630초)' 핵심 증명을 최우선 배치!
+                    # [Rule 49 & 50 — YouTube Studio 실측 + 다윈식 승자 클러스터 가중치 기반 정렬]:
                     is_search_sweet_spot = 1 if 180.0 <= best_dur <= 630.0 else 0
                     dist_from_ideal = abs(best_dur - 330.0) if best_dur > 0 else 9999.0
-                    slug_candidates.append((has_high_search, is_search_sweet_spot, -dist_from_ideal, p_cnt, sp.stem))
+                    c_boost = 1.0
+                    try:
+                        import youtube_self_evolving_engine as _ysee_s
+                        c_boost = _ysee_s.get_slug_cluster_boost(f"{t_str} {sdoc.get('title_en', '')}")
+                    except Exception:
+                        pass
+                    slug_candidates.append((round(has_high_search * c_boost, 2), is_search_sweet_spot, c_boost, -dist_from_ideal, p_cnt, sp.stem))
             except Exception:
                 continue
-        slug_candidates.sort(key=lambda x: (-x[0], -x[1], -x[2], -x[3], x[4]))
-        ordered_slugs = [x[4] for x in slug_candidates]
+        slug_candidates.sort(key=lambda x: (-x[0], -x[1], -x[2], -x[3], -x[4], x[5]))
+        ordered_slugs = [x[5] for x in slug_candidates]
 
         uploaded_items = []
         total_uploaded = 0
@@ -1721,7 +1726,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                 sdoc = json.loads(sp.read_text(encoding="utf-8"))
                 yu = sdoc.get("youtube_urls") or {}
                 qyu = sdoc.get("question_youtube_urls") or {}
-                for lc in ("ko", "en"):
+                try:
+                    import youtube_self_evolving_engine as _ysee_l
+                    _l_ord = _ysee_l.preferred_lang_order_for_current_hour()
+                except Exception:
+                    _l_ord = ("ko", "en")
+                for lc in _l_ord:
                     mp4_f = YT_UPLOADS_DIR / c_slug / f"{c_slug}_{lc}.mp4"
                     if not (yu.get(lc) or "").strip() and mp4_f.exists() and mp4_f.stat().st_mtime >= r28_cut:
                         res_std = vmaker.upload_slug_to_youtube(c_slug, langs=(lc,), privacy="public")
@@ -1765,7 +1775,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                 qyu = sdoc.get("question_youtube_urls") or {}
                 qsu = sdoc.get("question_shorts_urls") or {}
                 su = sdoc.get("shorts_urls") or {}
-                for lc in ("ko", "en"):
+                try:
+                    import youtube_self_evolving_engine as _ysee_l2
+                    _l_ord2 = _ysee_l2.preferred_lang_order_for_current_hour()
+                except Exception:
+                    _l_ord2 = ("ko", "en")
+                for lc in _l_ord2:
                     has_long = bool((yu.get(lc) or "").strip() or (qyu.get(lc) or "").strip())
                     if not has_long:
                         continue
@@ -1860,6 +1875,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
         try:
             import youtube_community_controller as _ycc
             _ycc.run_zero_quota_studio_growth_cycle(max_related_links=6, allow_community_post=True)
+        except Exception:
+            pass
+
+        try:
+            import youtube_self_evolving_engine as _ysee_ev
+            _ysee_ev.run_zero_credit_self_evolution_cycle(yt_service=yt_test)
         except Exception:
             pass
 
