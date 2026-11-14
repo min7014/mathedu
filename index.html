@@ -1697,7 +1697,8 @@ function toggleMathStory() {
   if (d.style.display === 'none' || !d.style.display) {
     d.style.display = 'block';
     if (a) a.textContent = '▲';
-    if (window.MathJax && MathJax.typesetPromise) {
+    if (window.safeTypesetMath) { window.safeTypesetMath(d); }
+    else if (window.MathJax && MathJax.typesetPromise) {
       MathJax.typesetPromise([d]).catch(function(){});
     }
   } else {
@@ -2520,7 +2521,9 @@ function toggleMathStory() {
       updateTodayInlineIframe(_currentTodayInlineMode);
     }
     var cardWrap = document.getElementById('min7014DeepCurriculumSection');
-    if (cardWrap && window.MathJax && window.MathJax.typesetPromise) {
+    if (cardWrap && window.safeTypesetMath) {
+      window.safeTypesetMath(cardWrap);
+    } else if (cardWrap && window.MathJax && window.MathJax.typesetPromise) {
       window.MathJax.typesetPromise([cardWrap]).catch(function() {});
     }
   }
@@ -3269,7 +3272,9 @@ function toggleMathStory() {
     listEl.innerHTML = html;
 
     // 수식 렌더링
-    if (window.MathJax && MathJax.typesetPromise) {
+    if (window.safeTypesetMath) {
+      window.safeTypesetMath(listEl);
+    } else if (window.MathJax && MathJax.typesetPromise) {
       MathJax.typesetPromise([listEl]).catch(function(){});
     }
 
@@ -3507,7 +3512,9 @@ function toggleMathStory() {
         list.innerHTML = html;
         box.style.display = 'block';
 
-        if (window.MathJax && MathJax.typesetPromise) {
+        if (window.safeTypesetMath) {
+          window.safeTypesetMath(list);
+        } else if (window.MathJax && MathJax.typesetPromise) {
           MathJax.typesetPromise([list]).catch(function(){});
         }
       })
@@ -89757,7 +89764,9 @@ window.renderMathTeacherHubContent = function() {
   }
 
   container.innerHTML = html;
-  if (window.MathJax && window.MathJax.typesetPromise) {
+  if (window.safeTypesetMath) {
+    window.safeTypesetMath(container);
+  } else if (window.MathJax && window.MathJax.typesetPromise) {
     window.MathJax.typesetPromise([container]).catch(function(){});
   }
 };

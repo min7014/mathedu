@@ -1,13 +1,15 @@
 /*!
  * sw.js — mathedu & 수학의 성전 3D Official Service Worker (PWA & Google Play TWA)
- * Enables offline fallback, fast shell caching, and 100/100 PWABuilder / Google Play compliance.
+ * Network-first for HTML/JS/JSON so error-report fixes & live updates reflect immediately,
+ * with full offline fallback and 100/100 PWABuilder compliance.
  */
-const CACHE_NAME = 'mathedu-play-v20261101';
+const CACHE_NAME = 'mathedu-play-v20261114-r2';
 const CORE_ASSETS = [
   './',
   './index.html',
+  './video_board.html',
+  './mathlab.html',
   './game.html',
-  './play.html',
   './privacy.html',
   './manifest.json',
   './mathedu-auth.js',
@@ -15,6 +17,7 @@ const CORE_ASSETS = [
   './mathedu-quest-game.js',
   './mathedu-i18n.js',
   './mathedu-report.js',
+  './mathedu-room.js',
   './assets/app_icon_192.png',
   './assets/app_icon_512.png',
   './assets/favicon.png',
@@ -47,16 +50,27 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Network-first for HTML navigation, Stale-While-Revalidate for static assets
-  if (event.request.mode === 'navigate' || (event.request.headers.get('accept') || '').includes('text/html')) {
+  const isDynamicAsset =
+    event.request.mode === 'navigate' ||
+    (event.request.headers.get('accept') || '').includes('text/html') ||
+    /\.(html|js|json|css)$/i.test(url.pathname);
+
+  // Network-first for HTML/JS/JSON/CSS so homepage updates & bug fixes appear immediately
+  if (isDynamicAsset) {
     event.respondWith(
       fetch(event.request)
         .then((resp) => {
-          const copy = resp.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
+          if (resp && resp.status === 200) {
+            const copy = resp.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
+          }
           return resp;
         })
-        .catch(() => caches.match(event.request).then((r) => r || caches.match('./game.html') || caches.match('./index.html')))
+        .catch(() =>
+          caches.match(event.request).then((r) =>
+            r || (event.request.mode === 'navigate' ? (caches.match('./index.html') || caches.match('./game.html')) : undefined)
+          )
+        )
     );
     return;
   }

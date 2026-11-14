@@ -292,8 +292,8 @@ def format_error_reports_summary() -> str:
     unfixed = [r for r in all_reports if not r.get("fix_timestamp")]
     fixed_cnt = len(all_reports) - len(unfixed)
     lines = [
-        "🚨 [크레딧 0원 · mathedu 홈페이지 오류신고 실시간 관제 현황]",
-        f"• 누적 접수 총계: {len(all_reports)}건 (✅ 수리 완료 {fixed_cnt}건 / ⏳ 미처리 {len(unfixed)}건)",
+        "🚨 [크레딧 0원 · mathedu 홈페이지 오류신고 & 시트(gid=838754808) 실시간 관제 현황]",
+        f"• 연동 시트(reports 탭): 누적 {len(all_reports)}건 (✅ 수리·홈페이지 반영 완료 {fixed_cnt}건 / ⏳ 미처리 {len(unfixed)}건)",
         "• 적용 페이지: index.html · video_board.html · mathlab.html · video_studio.html · dashboard.html · create.html · game.html · board/*.html(212개) 전 페이지",
     ]
     if not unfixed:
