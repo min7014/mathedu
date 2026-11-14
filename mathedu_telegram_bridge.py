@@ -346,10 +346,16 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !커뮤니티 (또는 /community) : [API 쿼터 0] 채널 커뮤니티 탭에 5초 수학 퀴즈 게시물 즉시 발행\n"
             "• !업로드 (또는 /wave) : 전략 v2.0(실전함정·3~10분 본편 3 + 한/영 Q-#Shorts 3) 업로드 웨이브 즉시 실행\n"
             "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
+            "• !감사 (또는 !저작권 / !상표권) : [크레딧 0] 독립 감사관(auditor) 7계층 저작권·상표권·라이브 유튜브 전수 감사\n"
             "• !점검 (또는 /audit) : 전 문항·전 시스템 무결성 고속 스캔\n"
             "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n\n"
             "※ 일반 대화나 새로운 개발·수정 지시는 평소처럼 편하게 말씀하시면 AI가 즉시 깨어나 수행합니다."
         )
+
+    if low in ("!감사", "!저작권", "!상표권", "/copyright", "!copyright"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import auditor
+        return auditor.build_telegram_audit_summary(check_live=True, auto_fix=True)
 
     if low in ("!추이", "!트렌드", "/trend", "!trend"):
         sys.path.insert(0, str(ROOT_DIR))

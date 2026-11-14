@@ -77,6 +77,10 @@ def sanitize_copyright_and_trademark_text(text: str) -> str:
     return re.sub(r"\s{2,}", " ", s).strip()
 
 
+# Alias for cross-module callers (Rule 51)
+sanitize_trademark_free_text = sanitize_copyright_and_trademark_text
+
+
 def classify_text_cluster(text: str) -> str:
     low = (text or "").lower()
     for c_key, kws in TOPIC_CLUSTERS.items():
@@ -286,6 +290,9 @@ def sync_high_retention_binge_playlists(yt_service=None, max_items_to_add: int =
             if added_now >= max_items_to_add:
                 break
             urls_cand = []
+            nb_u = ((sdoc.get("nano_banana_urls") or {}).get(lc) or "").strip()
+            if nb_u:
+                urls_cand.append(nb_u)
             eh_u = ((sdoc.get("exam_hybrid_urls") or {}).get(lc) or "").strip()
             if eh_u:
                 urls_cand.append(eh_u)

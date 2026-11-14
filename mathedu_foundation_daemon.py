@@ -234,6 +234,11 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
     except Exception:
         pass
     try:
+        import auditor as _auditor
+        _auditor.run_full_audit(auto_fix=True, check_live_youtube=False)
+    except Exception:
+        pass
+    try:
         import importlib
         import finance
         import min7014_video_maker as vmaker

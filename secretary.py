@@ -215,6 +215,12 @@ def format_executive_briefing(metrics: dict) -> str:
     ]
     lines.append("----------------------------------------------------------------------")
     try:
+        import auditor as _aud
+        lines.append(_aud.build_telegram_audit_summary(check_live=False, auto_fix=True))
+        lines.append("----------------------------------------------------------------------")
+    except Exception:
+        pass
+    try:
         import youtube_trend_tracker as _ytt
         lines.append(_ytt.format_trend_report(include_studio=False))
     except Exception:
@@ -240,7 +246,7 @@ def ensure_video_board_strategic_lab_features() -> bool:
     t1 = '<button type="button" onclick="window.printClassroomQrWorksheet(${itemIdx})"'
     r1 = (
         '<button type="button" onclick="window.toggleGeoGebraSplitLab(${itemIdx})" class="res-chip" style="border-color:#38bdf8;background:#e0f2fe;color:#0369a1;font-weight:900;cursor:pointer;">🛠️ GeoGebra·AlgeoMath 실시간 실습 스튜디오 (명령어 치트시트)</button>\n'
-        '        <button type="button" onclick="window.copyTeacherLessonRecordKit(${itemIdx})" class="res-chip" style="border-color:#a78bfa;background:#f5f3ff;color:#5b21b6;font-weight:900;cursor:pointer;">🏫 교사용 5분 발문 & 생기부 세특·IB IA 문구 복사</button>\n'
+        '        <button type="button" onclick="window.copyTeacherLessonRecordKit(${itemIdx})" class="res-chip" style="border-color:#a78bfa;background:#f5f3ff;color:#5b21b6;font-weight:900;cursor:pointer;">🏫 교사용 5분 발문 & 생기부 세특·심화 탐구 문구 복사</button>\n'
         '        ' + t1
     )
     if "toggleGeoGebraSplitLab" not in txt and t1 in txt:

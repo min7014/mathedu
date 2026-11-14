@@ -18,7 +18,7 @@ EXAM_HYBRID_DIR = ROOT_DIR / "youtube_uploads" / "exam_hybrid"
 EXAM_HYBRID_DIR.mkdir(parents=True, exist_ok=True)
 
 # ==============================================================================
-# [Strategy 4 · Rule 49 & Rule 51] 100% 자체 창작 수치 문제 ➔ min7014 보조선 1줄 5초 해체 블루프린트
+# [Strategy 4 · Rule 49 & Rule 51] 100% 자체 창작 수치 문제 → min7014 보조선 1줄 5초 해체 블루프린트
 # - 저작권·상표권 100% 무결성 보장: 외부 기관 상표(SAT, AP, AMC, IB, Olympiad 등) 및 타 저작물 문항 복제 ZERO!
 # - Act 1 수치 예제와 도형은 100% 자체 창작이며, Act 2 시각 증명은 100% 자체 보유 IP(https://min7014.github.io/)입니다.
 # ==============================================================================
@@ -32,8 +32,8 @@ EXAM_TRAP_BLUEPRINTS = [
         "problem_label_en": "Given central angle ∠AOB = 84°, find x = ∠APB for point P on the circle!",
         "figure_caption_ko": "∠AOB = 84°,  ∠APB = x = ?",
         "figure_caption_en": "∠AOB = 84°,  ∠APB = x = ?",
-        "answer_label_ko": "보조선 PO 1줄 ➔ 이등변삼각형 2개!  x = 84° ÷ 2 = 42° (5초 컷!)",
-        "answer_label_en": "1 Line PO ➔ Two Isosceles Triangles!  x = 84° ÷ 2 = 42° (5s Solve!)",
+        "answer_label_ko": "보조선 PO 1줄 → 이등변삼각형 2개!  x = 84° ÷ 2 = 42° (5초 컷!)",
+        "answer_label_en": "1 Line PO → Two Isosceles Triangles!  x = 84° ÷ 2 = 42° (5s Solve!)",
         "title_ko": "🔥 시험장 90%가 3분 헤매는 원주각 함정, 보조선 1줄로 5초 컷! | 원주각과 중심각 시각적 증명",
         "title_en": "🔥 90% Waste 3 Minutes on This Circle Angle Trap—Solve x in 5 Seconds! | Inscribed Angle Proof",
         "short_title_ko": "❓ x가 몇 도인지 3초 만에 보이시나요? 원주각 함정 보조선 1줄 해법! #Shorts",
@@ -46,16 +46,16 @@ EXAM_TRAP_BLUEPRINTS = [
         "comment_quiz_en": "🧩 [5-Sec Exam Check] If central angle ∠AOB = 116°, what is angle x? Drop your mental-math answer in the comments! 👇",
     },
     {
-        "slug": "2012100303",
+        "slug": "2012100304",
         "diagram_kind": "tangent_chord",
-        "exam_badge_ko": "🚨 고1·수능 원과 접선 킬러 함정",
-        "exam_badge_en": "🚨 High-Yield Circle Tangent Trap",
+        "exam_badge_ko": "📐 고1·수능 원과 접선 핵심 해법",
+        "exam_badge_en": "📐 High-Yield Circle Tangent Proof",
         "problem_label_ko": "접선 AT와 현 AB가 이루는 각이 58°일 때, 원주 위 ∠ACB = x는?",
         "problem_label_en": "Tangent AT and chord AB form 58°. Find inscribed angle ∠ACB = x!",
         "figure_caption_ko": "접선각 ∠BAT = 58°,  ∠ACB = x = ?",
         "figure_caption_en": "Tangent ∠BAT = 58°,  ∠ACB = x = ?",
-        "answer_label_ko": "지름 보조선 AD 1줄 ➔ 90° 직각 대칭!  x = 58° 그대로 일치!",
-        "answer_label_en": "1 Diameter Line AD ➔ Right-Angle Match!  x = 58° Instantly!",
+        "answer_label_ko": "지름 보조선 AD 1줄 → 90° 직각 대칭!  x = 58° 그대로 일치!",
+        "answer_label_en": "1 Diameter Line AD → Right-Angle Match!  x = 58° Instantly!",
         "title_ko": "⚡ 접선만 나오면 막히는 이유! 지름 보조선 1줄로 x=58° 5초 해체 | 접현각의 정리 시각적 증명",
         "title_en": "⚡ Stuck on Circle Tangents? One Diameter Solves x in 5 Seconds! | Alternate Segment Theorem",
         "short_title_ko": "❓ 접선 각도가 58°일 때 저 위쪽 각 x는? 보조선 1줄 3초 해법! #Shorts",
@@ -74,18 +74,18 @@ EXAM_TRAP_BLUEPRINTS = [
         "exam_badge_en": "🚨 Classic Exam Area Trap",
         "problem_label_ko": "직각삼각형 두 변 위 정사각형 넓이가 9와 16일 때, 빗변 정사각형 넓이 x는?",
         "problem_label_en": "Two leg squares have areas 9 and 16. Find hypotenuse square area x!",
-        "figure_caption_ko": "넓이 S₁ = 9, S₂ = 16  ➔  빗변 정사각형 S₃ = x = ?",
-        "figure_caption_en": "Areas S₁ = 9, S₂ = 16  ➔  Hypotenuse Square x = ?",
-        "answer_label_ko": "루트 계산 ZERO! 등적변형 넓이 이동으로 x = 9 + 16 = 25 (3초 컷!)",
-        "answer_label_en": "Zero Square Roots Needed! Shear Area Shift ➔ x = 9 + 16 = 25!",
-        "title_ko": "🔥 루트 계산 쓰면 하수! 넓이 이동만으로 빗변 넓이 3초 암산법 | 피타고라스 정리 시각적 증명",
-        "title_en": "🔥 Stop Taking Square Roots! 3-Second Area Shift Trick | Pythagorean Theorem Visual Proof",
-        "short_title_ko": "❓ 루트 없이 3초 만에 넓이 x가 보이시나요? 피타고라스 넓이 이동 해법! #Shorts",
+        "figure_caption_ko": "넓이 S₁ = 9, S₂ = 16  →  빗변 정사각형 S₃ = x = ?",
+        "figure_caption_en": "Areas S₁ = 9, S₂ = 16  →  Hypotenuse Square x = ?",
+        "answer_label_ko": "루트 계산 ZERO! 합동 직각삼각형 4개 넓이 소거(c²=a²+b²)로 x = 9 + 16 = 25!",
+        "answer_label_en": "Zero Square Roots! Four-Triangle Square Proof (c²=a²+b²) → x = 9 + 16 = 25!",
+        "title_ko": "🔥 루트 계산 쓰면 하수! 넓이 보존만으로 빗변 넓이 3초 암산법 | 피타고라스 정리 시각적 증명",
+        "title_en": "🔥 Stop Taking Square Roots! 3-Second Square Area Trick | Pythagorean Theorem Visual Proof",
+        "short_title_ko": "❓ 루트 없이 3초 만에 넓이 x가 보이시나요? 피타고라스 넓이 보존 해법! #Shorts",
         "short_title_en": "❓ Can You Find Area x in 3 Seconds Without Roots? Visual Proof! #Shorts",
-        "act1_ko": "잠깐! 이 문제에서 변의 길이를 루트로 구한 뒤 다시 제곱하고 계신가요? 유클리드의 넓이 미끄럼틀 원리를 알면 루트 계산 없이 3초 만에 끝납니다!",
-        "act1_en": "Wait! Are you still computing side lengths and squaring them back? With Euclid's area-shearing proof, you can spot x in three seconds with zero square roots!",
-        "act3_ko": "두 작은 정사각형 넓이 9와 16이 수선을 기준으로 빗변 정사각형의 왼쪽과 오른쪽 직사각형으로 그대로 흘러 들어가므로 x는 9 더하기 16, 정답 25입니다! 공식 너머의 진짜 직관, 지금 바로 구독하고 매일 받아보세요!",
-        "act3_en": "Areas 9 and 16 shear directly into the two rectangles of the hypotenuse square—so x is simply 9 plus 16 equals 25! Subscribe now for daily visual math breakthroughs!",
+        "act1_ko": "잠깐! 이 문제에서 변의 길이를 루트로 구한 뒤 다시 제곱하고 계신가요? 큰 정사각형 넓이 소거 원리를 알면 루트 계산 없이 3초 만에 끝납니다!",
+        "act1_en": "Wait! Are you still computing side lengths and squaring them back? With the four-triangle square proof, you can spot x in three seconds with zero square roots!",
+        "act3_ko": "큰 정사각형 테두리에서 합동인 직각삼각형 네 개를 빼내면 두 작은 정사각형 넓이 9와 16의 합이 곧 빗변 정사각형 넓이가 되므로 x는 9 더하기 16, 정답 25입니다! 공식 너머의 진짜 직관, 지금 바로 구독하고 매일 받아보세요!",
+        "act3_en": "Subtracting the four congruent right triangles around the border leaves c squared equal to a squared plus b squared—so x is simply 9 plus 16 equals 25! Subscribe now for daily visual math breakthroughs!",
         "comment_quiz_ko": "🧩 [3초 암산] 빗변 정사각형 넓이가 40이고 한쪽 작은 정사각형 넓이가 13이면 나머지 정사각형 넓이는? 댓글로 남겨보세요! 👇",
         "comment_quiz_en": "🧩 [3-Sec Check] If the hypotenuse square has area 40 and one leg square is 13, what is the other leg square's area? 👇",
     },
@@ -96,10 +96,10 @@ EXAM_TRAP_BLUEPRINTS = [
         "exam_badge_en": "🚨 Exam Triangle Angle Trap",
         "problem_label_ko": "AB = AC인 삼각형에서 꼭지각 ∠A = 36°일 때, 밑각 ∠B = x는?",
         "problem_label_en": "In triangle ABC with AB = AC and ∠A = 36°, find base angle x = ∠B!",
-        "figure_caption_ko": "AB = AC,  ∠A = 36°  ➔  ∠B = x = ?",
-        "figure_caption_en": "AB = AC,  ∠A = 36°  ➔  ∠B = x = ?",
-        "answer_label_ko": "꼭지각 이등분선 1줄 ➔ 완벽 대칭 합동!  x = (180°-36°)÷2 = 72°!",
-        "answer_label_en": "1 Angle Bisector ➔ Mirror SAS Congruence!  x = (180°-36°)÷2 = 72°!",
+        "figure_caption_ko": "AB = AC,  ∠A = 36°  →  ∠B = x = ?",
+        "figure_caption_en": "AB = AC,  ∠A = 36°  →  ∠B = x = ?",
+        "answer_label_ko": "꼭지각 이등분선 1줄 → 완벽 대칭 합동!  x = (180°-36°)÷2 = 72°!",
+        "answer_label_en": "1 Angle Bisector → Mirror SAS Congruence!  x = (180°-36°)÷2 = 72°!",
         "title_ko": "⚡ 이등변삼각형 문제마다 쓰이는 '보조선 1줄'의 비밀! 황금삼각형 72° 5초 해법 | 시각적 증명",
         "title_en": "⚡ The One Auxiliary Line Behind Every Isosceles Exam Problem! | Base Angles Visual Proof",
         "short_title_ko": "❓ 꼭지각 36°일 때 밑각 x와 숨은 대칭선 1줄, 3초 만에 보이시나요? #Shorts",
@@ -118,10 +118,10 @@ EXAM_TRAP_BLUEPRINTS = [
         "exam_badge_en": "🚨 Advanced Triangle Ratio Trap",
         "problem_label_ko": "세 체바선이 한 점 P에서 만나고 BD:DC=2:3, CE:EA=3:4일 때 AF:FB = x : y는?",
         "problem_label_en": "Three cevians concur at P with BD:DC=2:3 and CE:EA=3:4. Find AF:FB!",
-        "figure_caption_ko": "BD:DC = 2:3, CE:EA = 3:4  ➔  AF:FB = ?",
-        "figure_caption_en": "BD:DC = 2:3, CE:EA = 3:4  ➔  AF:FB = ?",
-        "answer_label_ko": "삼각형 넓이비 순환 곱 = 1 ➔ (2/3)×(3/4)×(AF/FB)=1 ➔ AF:FB = 2:1 (5초 컷!)",
-        "answer_label_en": "Cyclic Area Ratio = 1 ➔ (2/3)×(3/4)×(AF/FB)=1 ➔ AF:FB = 2:1!",
+        "figure_caption_ko": "BD:DC = 2:3, CE:EA = 3:4  →  AF:FB = ?",
+        "figure_caption_en": "BD:DC = 2:3, CE:EA = 3:4  →  AF:FB = ?",
+        "answer_label_ko": "삼각형 넓이비 순환 곱 = 1 → (2/3)×(3/4)×(AF/FB)=1 → AF:FB = 2:1 (5초 컷!)",
+        "answer_label_en": "Cyclic Area Ratio = 1 → (2/3)×(3/4)×(AF/FB)=1 → AF:FB = 2:1!",
         "title_ko": "🔥 보조평행선 없이 5초 컷! 삼각형 선분비를 순식간에 끝내는 넓이비 원리 | 체바의 정리 시각 증명",
         "title_en": "🔥 Solve Triangle Ratio Traps in 5 Seconds via Area Ratios! | Ceva's Theorem Visual Proof",
         "short_title_ko": "❓ AF:FB 비율, 좌표 안 쓰고 5초 만에 암산되시나요? 체바 넓이비 해법! #Shorts",
@@ -140,10 +140,10 @@ EXAM_TRAP_BLUEPRINTS = [
         "exam_badge_en": "🚨 Geometry & Vector Ratio Essential",
         "problem_label_ko": "할선이 연장선 D(BC:CD=1:1)와 변 위 E(CE:EA=1:3)를 지날 때 AF:FB는?",
         "problem_label_en": "A line cuts BC extended at D (BC=CD) and AC at E (CE:EA=1:3). Find AF:FB!",
-        "figure_caption_ko": "BD:DC = 2:1, CE:EA = 1:3  ➔  AF:FB = ?",
-        "figure_caption_en": "BD:DC = 2:1, CE:EA = 1:3  ➔  AF:FB = ?",
-        "answer_label_ko": "평행보조선 1줄 닮음 고리! (2/1)×(1/3)×(AF/FB)=1 ➔ AF:FB = 3:2!",
-        "answer_label_en": "1 Parallel Line Similarity Loop! (2/1)×(1/3)×(AF/FB)=1 ➔ AF:FB = 3:2!",
+        "figure_caption_ko": "BD:DC = 2:1, CE:EA = 1:3  →  AF:FB = ?",
+        "figure_caption_en": "BD:DC = 2:1, CE:EA = 1:3  →  AF:FB = ?",
+        "answer_label_ko": "평행보조선 1줄 닮음 고리! (2/1)×(1/3)×(AF/FB)=1 → AF:FB = 3:2!",
+        "answer_label_en": "1 Parallel Line Similarity Loop! (2/1)×(1/3)×(AF/FB)=1 → AF:FB = 3:2!",
         "title_ko": "⚡ 헷갈리는 외분점 순서 실수 끝! 평행보조선 1줄로 꿰뚫는 5초 비율 해법 | 메넬라우스 정리 시각 증명",
         "title_en": "⚡ Never Mix Up Ratio Order Again! One Parallel Line Proves It | Menelaus' Theorem Visualized",
         "short_title_ko": "❓ 삼각형 가로지르는 직선 비율 문제, 평행선 1줄로 5초 컷! #Shorts",
@@ -178,7 +178,7 @@ def _draw_exam_problem_diagram(draw: ImageDraw.ImageDraw, box: tuple, kind: str,
 
     cyan = (56, 189, 248)
     gold = (250, 204, 21)
-    red_aux = (244, 63, 94)
+    red_aux = (245, 158, 11)  # Rule 37: warm amber-gold highlight instead of harsh red
     white = (248, 250, 252)
     green = (52, 211, 153)
 
@@ -256,12 +256,12 @@ def render_exam_hybrid_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -
     scale = min(620 / slide_img.width, 580 / slide_img.height)
     sw, sh = int(slide_img.width * scale), int(slide_img.height * scale)
     sx, sy = W - sw - 34, (H - sh) // 2
-    draw.rounded_rectangle((sx - 12, sy - 12, sx + sw + 12, sy + sh + 12), radius=22, fill=(244, 63, 94), outline=(250, 204, 21), width=4)
+    draw.rounded_rectangle((sx - 12, sy - 12, sx + sw + 12, sy + sh + 12), radius=22, fill=(2, 132, 199), outline=(250, 204, 21), width=4)
     img.paste(slide_img.resize((sw, sh), Image.Resampling.LANCZOS), (sx, sy))
 
-    # 좌측 상단 시험 킬러 배지
+    # 좌측 상단 시험 킬러 배지 (Rule 37: 유클리드 로열 블루 팔레트)
     badge = bp["exam_badge_en"] if is_en else bp["exam_badge_ko"]
-    draw.rounded_rectangle((36, 36, 586, 98), radius=16, fill=(190, 18, 60), outline=(254, 240, 138), width=3)
+    draw.rounded_rectangle((36, 36, 586, 98), radius=16, fill=(2, 132, 199), outline=(254, 240, 138), width=3)
     draw.text((56, 51), badge, fill=(255, 255, 255), font=vmaker.get_font_for_lang("ko", 26, bold=True))
 
     # 좌측 초대형 2줄 시험 함정 카피
@@ -341,7 +341,7 @@ def _encode_single_card_segment(frame_img: Image.Image, mp3_path: Path, out_mp4:
 def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
     """
     단일 블루프린트에 대해:
-    1) 1080p 16:9 '실전 문제 ➔ min7014 시각 증명 ➔ 5초 해체' 본편 (3~5분 스윗스팟) + 전용 썸네일
+    1) 1080p 16:9 '실전 문제 → min7014 시각 증명 → 5초 해체' 본편 (3~5분 스윗스팟) + 전용 썸네일
     2) 1080x1920 9:16 '실전 x=? 3초 챌린지 Q-#Shorts' (32~42초 스와이프 방어 포맷)
     두 가지를 한 번에 무창 렌더링합니다.
     """
@@ -381,7 +381,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         # Act 1: 실전 시험 문제 카드 (1920x1080)
         act1_img = Image.new("RGB", (1920, 1080), (8, 13, 28))
         d1 = ImageDraw.Draw(act1_img)
-        d1.rounded_rectangle((56, 44, 1864, 156), radius=22, fill=(190, 18, 60), outline=(250, 204, 21), width=4)
+        d1.rounded_rectangle((56, 44, 1864, 156), radius=22, fill=(30, 64, 175), outline=(250, 204, 21), width=4)
         d1.text((88, 74), bp["exam_badge_en"] if is_en else bp["exam_badge_ko"], fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
         d1.text((1380, 78), "⏱️ 5-SEC CHALLENGE" if is_en else "⏱️ 실전 5초 챌린지!", fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
 
@@ -466,7 +466,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         sh_segs = []
         s1 = Image.new("RGB", (1080, 1920), (8, 13, 28))
         ds1 = ImageDraw.Draw(s1)
-        ds1.rounded_rectangle((44, 68, 1036, 214), radius=24, fill=(190, 18, 60), outline=(250, 204, 21), width=4)
+        ds1.rounded_rectangle((44, 68, 1036, 214), radius=24, fill=(2, 132, 199), outline=(250, 204, 21), width=4)
         ds1.text((78, 110), "⏱️ CAN YOU FIND x IN 3 SECONDS?" if is_en else "⏱️ 공식 없이 3초 안에 x가 보이시나요?", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
         _draw_exam_problem_diagram(ds1, (56, 256, 1024, 1220), bp["diagram_kind"], solved=False, canvas_img=s1, pdf_doc=doc)
         ds1.rounded_rectangle((56, 1260, 1024, 1520), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=4)
@@ -725,9 +725,9 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
                     render_exam_hybrid_bundle(bp, lang_code=lc)
                 if not l_mp4.exists():
                     continue
-                title = vmaker.sanitize_youtube_title(bp["title_en"] if is_en else bp["title_ko"])
+                raw_title = bp["title_en"] if is_en else bp["title_ko"]
                 pdf_url = sdoc.get("pdf_url") or "https://min7014.github.io/"
-                desc = (
+                raw_desc = (
                     f"🔥 Solve this classic geometry & algebra trap in 5 seconds using visual intuition!\n"
                     f"📐 100% Original Visual Proof PDF: {pdf_url}\n"
                     f"🌐 Interactive Math Lab & Step-by-Step Archive: https://min7014.github.io/mathedu/\n"
@@ -740,11 +740,16 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
                     f"🔔 @min7014_ai 무료 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                     f"#시각적증명 #도형보조선 #기하학원리 #수학직관 #고등수학"
                 )
+                raw_tags = ["Visual Math Proof", "Geometry Proof", "Euclidean Geometry", "Math Intuition"] if is_en else ["시각적증명", "도형보조선", "기하학증명", "수학원리", "원주각"]
+                import auditor as _aud
+                gated = _aud.sanitize_and_gate_upload_payload(raw_title, raw_desc, raw_tags)
+                title = vmaker.sanitize_youtube_title(gated["title"])
+                desc = gated["description"]
                 body = {
                     "snippet": {
                         "title": title,
                         "description": desc,
-                        "tags": ["Visual Math Proof", "Geometry Proof", "Euclidean Geometry", "Math Intuition"] if is_en else ["시각적증명", "도형보조선", "기하학증명", "수학원리", "원주각"],
+                        "tags": gated["tags"],
                         "categoryId": "27",
                         "defaultLanguage": lc,
                         "defaultAudioLanguage": lc,
