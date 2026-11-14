@@ -18,16 +18,16 @@ EXAM_HYBRID_DIR = ROOT_DIR / "youtube_uploads" / "exam_hybrid"
 EXAM_HYBRID_DIR.mkdir(parents=True, exist_ok=True)
 
 # ==============================================================================
-# [Strategy 4 · Rule 49] 실전 내신·수능/SAT 함정 1문제 ➔ min7014 보조선 1줄 10초 해체 블루프린트
-# - 모든 증명의 수학적 원리는 100% https://min7014.github.io/ 원문 PDF 슬라이드(Act 2)에 기반합니다.
-# - Act 1(실전 수치 함정 문제 제시) ➔ Act 2(원문 플립북 시각 증명) ➔ Act 3(5초 암산 완결 & 구독 유도)
+# [Strategy 4 · Rule 49 & Rule 51] 100% 자체 창작 수치 문제 ➔ min7014 보조선 1줄 5초 해체 블루프린트
+# - 저작권·상표권 100% 무결성 보장: 외부 기관 상표(SAT, AP, AMC, IB, Olympiad 등) 및 타 저작물 문항 복제 ZERO!
+# - Act 1 수치 예제와 도형은 100% 자체 창작이며, Act 2 시각 증명은 100% 자체 보유 IP(https://min7014.github.io/)입니다.
 # ==============================================================================
 EXAM_TRAP_BLUEPRINTS = [
     {
         "slug": "2012093001",
         "diagram_kind": "circle_inscribed",
-        "exam_badge_ko": "🚨 내신·수능 도형 4점 단골 함정",
-        "exam_badge_en": "🚨 SAT & Geometry Exam Trap",
+        "exam_badge_ko": "🚨 원과 각도 단골 함정 해법",
+        "exam_badge_en": "🚨 High-Frequency Circle Angle Trap",
         "problem_label_ko": "중심각 ∠AOB = 84°일 때, 원 위를 움직이는 점 P에 대하여 x = ∠APB는?",
         "problem_label_en": "Given central angle ∠AOB = 84°, find x = ∠APB for point P on the circle!",
         "figure_caption_ko": "∠AOB = 84°,  ∠APB = x = ?",
@@ -114,22 +114,22 @@ EXAM_TRAP_BLUEPRINTS = [
     {
         "slug": "2014111902",
         "diagram_kind": "ceva_ratios",
-        "exam_badge_ko": "🚨 경시·특목·수능 도형 비율 킬러",
-        "exam_badge_en": "🚨 Olympiad & AMC Ratio Killer",
+        "exam_badge_ko": "🚨 심화 기하 삼각형 선분비 해법",
+        "exam_badge_en": "🚨 Advanced Triangle Ratio Trap",
         "problem_label_ko": "세 체바선이 한 점 P에서 만나고 BD:DC=2:3, CE:EA=3:4일 때 AF:FB = x : y는?",
         "problem_label_en": "Three cevians concur at P with BD:DC=2:3 and CE:EA=3:4. Find AF:FB!",
         "figure_caption_ko": "BD:DC = 2:3, CE:EA = 3:4  ➔  AF:FB = ?",
         "figure_caption_en": "BD:DC = 2:3, CE:EA = 3:4  ➔  AF:FB = ?",
         "answer_label_ko": "삼각형 넓이비 순환 곱 = 1 ➔ (2/3)×(3/4)×(AF/FB)=1 ➔ AF:FB = 2:1 (5초 컷!)",
         "answer_label_en": "Cyclic Area Ratio = 1 ➔ (2/3)×(3/4)×(AF/FB)=1 ➔ AF:FB = 2:1!",
-        "title_ko": "🔥 보조평행선 없이 5초 컷! 삼각형 선분비 킬러를 순식간에 끝내는 넓이비 원리 | 체바의 정리 시각 증명",
-        "title_en": "🔥 Solve Triangle Ratio Killers in 5 Seconds via Area Ratios! | Ceva's Theorem Visual Proof",
+        "title_ko": "🔥 보조평행선 없이 5초 컷! 삼각형 선분비를 순식간에 끝내는 넓이비 원리 | 체바의 정리 시각 증명",
+        "title_en": "🔥 Solve Triangle Ratio Traps in 5 Seconds via Area Ratios! | Ceva's Theorem Visual Proof",
         "short_title_ko": "❓ AF:FB 비율, 좌표 안 쓰고 5초 만에 암산되시나요? 체바 넓이비 해법! #Shorts",
         "short_title_en": "❓ Can You Find Ratio AF:FB in 5 Seconds Without Coordinates? Ceva Visual Trick! #Shorts",
         "act1_ko": "삼각형 내부 한 점에서 세 직선이 만날 때, 복잡한 연립방정식이나 좌표 없이 AF 대 FB의 비율을 단 5초 만에 암산할 수 있을까요?",
         "act1_en": "When three lines meet inside a triangle, can you find the missing side ratio AF to FB in five seconds flat without coordinates or messy algebra?",
         "act3_ko": "밑변의 비가 곧 내부 삼각형 넓이의 비라는 원리로 3분의 2 곱하기 4분의 3 곱하기 AF 대 FB가 1이 되므로, 3이 약분되어 정답 2 대 1이 5초 만에 완성됩니다! 상위 1% 도형 통찰, 지금 바로 구독해 두세요!",
-        "act3_en": "Since base ratios match area ratios around point P, two-thirds times three-fourths times AF over FB equals 1—canceling 3 gives AF to FB equals 2 to 1 in five seconds! Subscribe now for more Olympiad-grade visual shortcuts!",
+        "act3_en": "Since base ratios match area ratios around point P, two-thirds times three-fourths times AF over FB equals 1—canceling 3 gives AF to FB equals 2 to 1 in five seconds! Subscribe now for more advanced visual geometry shortcuts!",
         "comment_quiz_ko": "🧩 [5초 암산] BD:DC = 1:2, CE:EA = 2:5일 때 한 점에서 만나려면 AF:FB는 몇 대 몇일까요? 댓글로 도전! 👇",
         "comment_quiz_en": "🧩 [5-Sec Check] If BD:DC = 1:2 and CE:EA = 2:5, what ratio AF:FB makes the three lines concurrent? 👇",
     },
@@ -728,23 +728,23 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
                 title = vmaker.sanitize_youtube_title(bp["title_en"] if is_en else bp["title_ko"])
                 pdf_url = sdoc.get("pdf_url") or "https://min7014.github.io/"
                 desc = (
-                    f"🔥 Solve this high-frequency exam trap in 5 seconds using visual geometry!\n"
-                    f"📐 Original Visual Proof PDF: {pdf_url}\n"
-                    f"🌐 Interactive Math Lab & 16,548 Problems: https://min7014.github.io/mathedu/\n"
+                    f"🔥 Solve this classic geometry & algebra trap in 5 seconds using visual intuition!\n"
+                    f"📐 100% Original Visual Proof PDF: {pdf_url}\n"
+                    f"🌐 Interactive Math Lab & Step-by-Step Archive: https://min7014.github.io/mathedu/\n"
                     f"🔔 Subscribe to @min7014_ai: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                    f"#MathTrap #SATMath #VisualProof #GeometryHack #OlympiadMath"
+                    f"#VisualProof #EuclideanGeometry #MathIntuition #GeometryProof #Mathematics"
                     if is_en
-                    else f"🔥 시험장에서 90%가 방정식 세우다 시간 뺏기는 실전 함정 문항을 보조선 1줄 시각 증명으로 5초 만에 해체합니다!\n"
-                    f"📐 원문 단계별 시각 증명 PDF: {pdf_url}\n"
-                    f"🌐 16,548문항 기출 디딤돌 & 자체 제작 MathLab 실습: https://min7014.github.io/mathedu/\n"
+                    else f"🔥 방정식 세우다 시간 뺏기는 단골 도형·수식 함정 구조를 보조선 1줄 시각 증명으로 5초 만에 해체합니다!\n"
+                    f"📐 100% 자체 제작 단계별 시각 증명 PDF: {pdf_url}\n"
+                    f"🌐 단계별 디딤돌 & 자체 제작 MathLab 실습: https://min7014.github.io/mathedu/\n"
                     f"🔔 @min7014_ai 무료 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                    f"#수능수학 #내신도형 #시각적증명 #보조선해법 #수학잘하는법"
+                    f"#시각적증명 #도형보조선 #기하학원리 #수학직관 #고등수학"
                 )
                 body = {
                     "snippet": {
                         "title": title,
                         "description": desc,
-                        "tags": ["SAT Math", "Geometry Proof", "Visual Math", "Math Trick"] if is_en else ["수능수학", "내신수학", "도형보조선", "시각적증명", "원주각"],
+                        "tags": ["Visual Math Proof", "Geometry Proof", "Euclidean Geometry", "Math Intuition"] if is_en else ["시각적증명", "도형보조선", "기하학증명", "수학원리", "원주각"],
                         "categoryId": "27",
                         "defaultLanguage": lc,
                         "defaultAudioLanguage": lc,
@@ -787,17 +787,17 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
                 sh_title = vmaker.sanitize_youtube_title(bp["short_title_en"] if is_en else bp["short_title_ko"])
                 long_u = ex_urls[lc]
                 desc_sh = (
-                    f"🎬 Watch Full 5-Sec Exam Breakdown (1080p): {long_u}\n"
-                    f"🔔 Subscribe @min7014_ai for daily visual exam hacks!\n#Shorts #SATMath #GeometryTrick #MathPuzzle"
+                    f"🎬 Watch Full 5-Sec Visual Proof Breakdown (1080p): {long_u}\n"
+                    f"🔔 Subscribe @min7014_ai for daily original visual math proofs!\n#Shorts #VisualProof #GeometryProof #MathPuzzle"
                     if is_en
-                    else f"🎬 1080p 실전 5초 해체 풀버전 바로 보기: {long_u}\n"
-                    f"🔔 내신·수능 도형 10초 눈풀이 @min7014_ai 구독!\n#Shorts #수능수학 #도형보조선 #수학퀴즈"
+                    else f"🎬 1080p 5초 보조선 해체 풀버전 바로 보기: {long_u}\n"
+                    f"🔔 도형·미적분 10초 눈풀이 @min7014_ai 구독!\n#Shorts #시각적증명 #도형보조선 #수학퀴즈"
                 )
                 body_sh = {
                     "snippet": {
                         "title": sh_title,
                         "description": desc_sh,
-                        "tags": ["Shorts", "Math Puzzle", "SAT Math", "Geometry"] if is_en else ["Shorts", "수학쇼츠", "수능수학", "보조선"],
+                        "tags": ["Shorts", "Math Puzzle", "Visual Math", "Geometry Proof"] if is_en else ["Shorts", "수학쇼츠", "시각적증명", "보조선"],
                         "categoryId": "27",
                         "defaultLanguage": lc,
                         "defaultAudioLanguage": lc,

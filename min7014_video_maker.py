@@ -2721,8 +2721,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": ["체바", "메넬라우스", "ceva", "menelaus", "넓이 비", "평행선"],
         "thumb_hook_ko": ["보조선 딱 1줄로", "전부 약분된다?!"],
         "thumb_hook_en": ["1 HIDDEN LINE", "CANCELS IT ALL!"],
-        "badge_ko": "⚡ 상위 1% 도형 킬러 치트키",
-        "badge_en": "⚡ OLYMPIAD GEOMETRY SECRET",
+        "badge_ko": "⚡ 상위 1% 도형 원리 치트키",
+        "badge_en": "⚡ ADVANCED GEOMETRY SECRET",
         "cold_open_ko": "복잡하게 얽힌 삼각형 선분 비율의 곱이 왜 언제나 정확히 1이 될까요? 보조선 딱 한 줄과 넓이 비를 연결하는 순간 모든 분수가 도미노처럼 약분되는 소름 돋는 증명을 확인해 보세요!",
         "cold_open_en": "Why does the product of these triangle segment ratios always equal 1? Draw one auxiliary line and watch every fraction cancel out like dominoes!",
         "quiz_ko": "💬 10초 퀴즈: 세 분수가 도미노처럼 약분되어 1이 되는 결정적 단계는 몇 번째인가요?",
@@ -3818,14 +3818,36 @@ def cubic_keyframe_ease(t: float, curve: str = "cube") -> float:
     return 1.0 - (1.0 - x) ** 3
 
 
+def sanitize_trademark_free_text(raw: str) -> str:
+    """
+    [Rule 24 & Rule 51 — 외부 등록상표·시험기관 명칭 원천 배제 가드레일]
+    SAT, AP, AMC, AIME, IB, Olympiad 등 타 기관 등록상표를 순수 일반 수학 용어로 치환합니다.
+    """
+    s = str(raw or "")
+    for pat, rep in (
+        (r"\bSAT\s*Math\s*Prep\b", "High School Math Proof"),
+        (r"\bSAT\s*Math\b", "Visual Math"),
+        (r"\bSAT\b", "Geometry & Algebra"),
+        (r"\bAP\s*Calculus\b", "Calculus Visual Proof"),
+        (r"\bAMC\s*Math\b", "Deductive Geometry"),
+        (r"\bAIME\b", "Advanced Math"),
+        (r"\bIB\s*Math\b", "Advanced High School Math"),
+        (r"\bMath\s*Olympiad\b", "Advanced Geometry"),
+        (r"\bOLYMPIAD\s*GEOMETRY\b", "ADVANCED GEOMETRY"),
+        (r"\bOlympiad\b", "Advanced"),
+        (r"#SATMath\b", "#VisualMath"),
+        (r"#OlympiadMath\b", "#GeometryProof"),
+        (r"#MathOlympiad\b", "#EuclideanGeometry"),
+    ):
+        s = re.sub(pat, rep, s, flags=re.IGNORECASE)
+    return s
+
+
 def sanitize_youtube_title(title: str, max_chars: int = 98) -> str:
     """
-    [YouTube Data API v3 snippet.title 무결성 보장 — 단어·괄호 중간 절단 ZERO & #Shorts 보존]
-    - YouTube API의 실제 한도는 '100 유니코드 글자(max_chars <= 100)'이며(96 UTF-8 바이트 오판으로 한글이 32글자에서 잘리던 결함 수정),
-      금지 부등호('<', '>')를 수학 유니코드('＜', '＞')로 자동 치환합니다.
-    - #Shorts 태그 보존, 미닫힘 대괄호/소괄호 제거, 끝부분 조사·구분자('|', '—', '-') 고아 절단 방지를 보장합니다.
+    [YouTube Data API v3 snippet.title 무결성 보장 — 단어·괄호 중간 절단 ZERO & #Shorts 보존 & 등록상표 0% 보장]
     """
-    t = str(title or "").replace(" <= ", " ≤ ").replace(" >= ", " ≥ ").replace("<", "＜").replace(">", "＞")
+    t = sanitize_trademark_free_text(str(title or "")).replace(" <= ", " ≤ ").replace(" >= ", " ≥ ").replace("<", "＜").replace(">", "＞")
     t = re.sub(r"\s+", " ", t).strip()
     is_short = "#Shorts" in t or "#shorts" in t
     limit = min(98, max(25, int(max_chars)))
@@ -4005,15 +4027,15 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"🏛️ [Human-Crafted Original Mathematical Insight — MIN EUN GI (https://min7014.github.io/)]\n"
             f"The mathematical ideas, auxiliary lines, and step-by-step visual proof slides are crafted by a human mathematics educator at https://min7014.github.io/ (AI assists multilingual voice narration only).\n"
             f"📅 Upload Schedule: New 1080p step-by-step visual proofs & masterclasses published daily.\n"
-            f"🔔 Subscribe to MIN EUN GI : Visual Math Proofs (@min7014_ai): {sub_url}\n"
+            f"🔔 Subscribe to Visual Math Proofs (@min7014_ai): {sub_url}\n"
             f"Topic ID: [ID: {slug}_EN]\n\n"
-            f"#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #VisualMathCinema #DynamicGeometry #EuclideanGeometry #MathOlympiad #min7014_ai #min7014"
+            f"#VisualProof #Geometry #Mathematics #PythagoreanTheorem #MathAnimation #VisualMathCinema #DynamicGeometry #EuclideanGeometry #AdvancedGeometry #min7014_ai #min7014"
         )
         yt_tags = [
             "Visual Math Proof", "Geometry Proof", "Proof Without Words", "Euclidean Geometry",
             "Pythagorean Theorem", "Ceva Theorem", "Menelaus Theorem", "Dynamic Geometry", "Math Animation",
             "Visual Math Cinema", "Mathematical Intuition", "Auxiliary Line Geometry", "Step by Step Math",
-            "High School Geometry", "Math Olympiad", "AMC Math", "SAT Math", "min7014_ai", "min7014"
+            "High School Geometry", "Advanced Geometry", "Calculus Proof", "Algebraic Intuition", "min7014_ai", "min7014"
         ]
     else:
         clean_ko_title = split_bilingual_title(script_doc.get("title", slug))[0]

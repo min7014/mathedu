@@ -451,7 +451,7 @@ def cmd_revenue():
                 "target_monthly_views": 400000,
                 "estimated_rpm_krw": 12000,
                 "projected_monthly_revenue_krw": 4800000,
-                "strategy": "Tier-1 (US/UK/CA/AU/SG) SAT/AP/AMC/IB/Olympiad English 1080p & 8min+ Mid-Roll Masterclasses",
+                "strategy": "Tier-1 (US/UK/CA/AU/SG) Global STEM & Advanced Visual Math English 1080p & 8min+ Mid-Roll Masterclasses",
             },
             "2_korean_longform_and_question_classroom": {
                 "target_monthly_views": 600000,

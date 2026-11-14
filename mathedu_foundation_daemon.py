@@ -192,7 +192,7 @@ def auto_sync_policies_to_plan_min():
 
         policy12_block = (
             "### 정책 12. 국제적으로 통용되는 표준 수학 영어(International Standard Mathematical English) 품질 및 한·영 완전 대칭 무결성 정책 (`Rule 20`)\n"
-            "1. **영미권·국제 수학계(IMO · AP/IB · AoPS · MIT OCW · 3Blue1Brown) 표준 영문 용어 100% 준수**:\n"
+            "1. **영미권·국제 수학계(국제 표준 순수 수학 학술 표기) 표준 영문 용어 100% 준수**:\n"
             "   - 전 세계 시청자가 보는 영어 버전(`en`) 영상·제목·설명란·썸네일·내레이션·자막·고정댓글에는 한국어 직역투(Konglish)나 기계번역 오류를 절대 허용하지 않으며, **`internationalize_math_english_text()` 및 `audit_international_english_scripts()`를 통해 국제 표준 수학 영어로 100% 정화**합니다:\n"
             "     - `원주각`: `inscribed angle` (`circumferential angle` 금지)\n"
             "     - `수직이등분선`: `perpendicular bisector` (`vertical bisector` 금지)\n"

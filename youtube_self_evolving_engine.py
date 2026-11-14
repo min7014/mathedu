@@ -25,8 +25,8 @@ CURATED_PLAYLIST_SPECS = [
     {
         "key": "ko_exam_killer",
         "lang": "ko",
-        "title": "🎯 [내신·수능 4점 5초 컷] 실전 함정 도형·대수·미적분 보조선 해체 정주행 | @min7014_ai",
-        "desc": "시험장에서 방정식 세우다 3분 날리는 내신·수능 빈출 함정 문항을 min7014.github.io 단계별 보조선 시각 증명으로 5초 만에 해체하는 실전 정주행 재생목록입니다.",
+        "title": "🎯 [도형·미적분 5초 해법] 공식 암기 타파 보조선 1줄 시각적 증명 정주행 | @min7014_ai",
+        "desc": "방정식 세우다 시간 뺏기는 단골 도형·기하 함정 구조를 100% 자체 작도 보조선 시각 증명으로 5초 만에 꿰뚫는 정주행 재생목록입니다.",
         "match_clusters": ("circle_angles_tangent", "ceva_menelaus_ratios", "triangle_isosceles_congruence", "pythagoras_area_shear"),
     },
     {
@@ -37,13 +37,44 @@ CURATED_PLAYLIST_SPECS = [
         "match_clusters": ("quadratic_inequality_algebra", "sequences_induction", "calculus_limits_mvt", "conics_vectors"),
     },
     {
-        "key": "en_sat_olympiad",
+        "key": "en_visual_geometry",
         "lang": "en",
-        "title": "🔥 [SAT & Olympiad Math] 5-Second Visual Geometry & Calculus Proofs (1080p) | @min7014_ai",
-        "desc": "Stop memorizing formulas blindly! Master high-yield SAT, AMC, IB, and Olympiad geometry, algebra, and calculus theorems through step-by-step visual proofs.",
+        "title": "🔥 [Visual Geometry & Calculus] 5-Second Auxiliary Line Proofs (1080p) | @min7014_ai",
+        "desc": "Stop memorizing formulas blindly! Master essential geometry, algebra, and calculus theorems through 100% original step-by-step visual proofs (https://min7014.github.io/).",
         "match_clusters": tuple(TOPIC_CLUSTERS.keys()),
     },
 ]
+
+
+def sanitize_copyright_and_trademark_text(text: str) -> str:
+    """
+    [Rule 24 & Rule 51 — 저작권·상표권 무결성 기계적 가드레일]
+    College Board(SAT, AP), MAA(AMC, AIME), IBO(IB), IMO/Olympiad 및 타사 브랜드 상표를
+    100% 순수 일반 수학 학술 용어로 자동 치환합니다.
+    """
+    s = str(text or "")
+    replacements = [
+        (r"\[SAT\s*&\s*Olympiad\s*Math\]", "[Visual Geometry & Calculus]"),
+        (r"\bSAT\s*&\s*Olympiad\b", "Visual Geometry & Algebra"),
+        (r"\bSAT\s*Math\s*Prep\b", "High School Math Proof"),
+        (r"\bSAT\s*Math\b", "Visual Math"),
+        (r"\bSAT\b", "Geometry & Algebra"),
+        (r"\bAP\s*Calculus\b", "Calculus Visual Proof"),
+        (r"\bAMC\s*Math\b", "Problem Solving Math"),
+        (r"\bAIME\b", "Advanced Math"),
+        (r"\bAMC\b", "Deductive Math"),
+        (r"\bIB\s*Math\b", "Advanced High School Math"),
+        (r"\bMath\s*Olympiad\b", "Advanced Geometry"),
+        (r"\bOlympiad[- ]grade\b", "Advanced"),
+        (r"\bOlympiad\b", "Advanced"),
+        (r"\bIMO\b", "Advanced Geometry"),
+        (r"#SATMath\b", "#VisualMath"),
+        (r"#OlympiadMath\b", "#GeometryProof"),
+        (r"#MathOlympiad\b", "#EuclideanGeometry"),
+    ]
+    for pat, rep in replacements:
+        s = re.sub(pat, rep, s, flags=re.IGNORECASE)
+    return re.sub(r"\s{2,}", " ", s).strip()
 
 
 def classify_text_cluster(text: str) -> str:
@@ -181,20 +212,36 @@ def sync_high_retention_binge_playlists(yt_service=None, max_items_to_add: int =
         pid = pl["id"]
         snip = pl["snippet"]
         pt = snip.get("title", "")
-        # Rule 13.1 준수: 기존 재생목록 제목에 개인 호칭이 남아 있으면 즉시 정화!
-        if "민은기" in pt or "선생님" in pt:
-            clean_pt = re.sub(r"민은기\s*선생님의\s*수학자료실_AI", "@min7014_ai", pt)
-            clean_pt = re.sub(r"민은기\s*선생님[의]*", "", clean_pt).strip()
+        pd = snip.get("description", "")
+        clean_pt = sanitize_copyright_and_trademark_text(pt)
+        clean_pd = sanitize_copyright_and_trademark_text(pd)
+        # Rule 13.1 & Rule 51 준수: 개인 호칭 및 외부 시험 등록상표(SAT, Olympiad, AMC, IB 등) 즉시 정화!
+        clean_pt = re.sub(r"민은기\s*선생님의\s*수학자료실_AI|Min's\s*Math\s*Lab\s*AI", "@min7014_ai", clean_pt)
+        clean_pt = re.sub(r"민은기\s*선생님[의]*", "", clean_pt).strip()
+        clean_pd = re.sub(r"민은기\s*선생님의\s*수학자료실|Min's\s*Math\s*Lab", "@min7014_ai 시각적 수학 아카이브", clean_pd)
+        clean_pd = re.sub(r"민은기\s*선생님[의]*", "", clean_pd).strip()
+        if "SAT" in pt or "Olympiad" in pt or "내신·수능 4점" in pt:
+            if "[Visual Geometry" in clean_pt or "SAT" in pt:
+                clean_pt = "🔥 [Visual Geometry & Calculus] 5-Second Auxiliary Line Proofs (1080p) | @min7014_ai"
+                clean_pd = "Stop memorizing formulas blindly! Master essential geometry, algebra, and calculus theorems through 100% original step-by-step visual proofs (https://min7014.github.io/)."
+            elif "내신·수능 4점" in pt:
+                clean_pt = "🎯 [도형·미적분 5초 해법] 공식 암기 타파 보조선 1줄 시각적 증명 정주행 | @min7014_ai"
+                clean_pd = "방정식 세우다 시간 뺏기는 단골 도형·기하 함정 구조를 100% 자체 작도 보조선 시각 증명으로 5초 만에 꿰뚫는 정주행 재생목록입니다."
+        if clean_pt != pt or clean_pd != pd:
             try:
                 yt_service.playlists().update(
                     part="snippet",
-                    body={"id": pid, "snippet": {"title": clean_pt[:140], "description": snip.get("description", "")}},
+                    body={"id": pid, "snippet": {"title": clean_pt[:140], "description": clean_pd[:4000]}},
                 ).execute()
                 pt = clean_pt
                 sanitized_legacy += 1
             except Exception:
                 pass
         title_to_id[pt] = pid
+
+    # state 내 구 키(en_sat_olympiad) 자동 마이그레이션
+    if "en_sat_olympiad" in state.get("playlists", {}):
+        state["playlists"]["en_visual_geometry"] = state["playlists"].pop("en_sat_olympiad")
 
     for spec in CURATED_PLAYLIST_SPECS:
         k = spec["key"]

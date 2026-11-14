@@ -59,13 +59,13 @@ FINANCE_ENGINE_JSON = ROOT_DIR / "assets" / "finance_revenue_engine.json"
 MONTHLY_REVENUE_TARGET_KRW = 10_000_000
 
 HIGH_RPM_KEYWORDS_KO = [
-    "수능수학", "수학원리증명", "기하학증명", "수학공부법", "고등수학",
-    "중등수학", "시각적증명", "수학강의", "창의사고력수학", "수능킬러문항",
+    "수학원리증명", "기하학증명", "수학공부법", "고등수학",
+    "중등수학", "시각적증명", "수학강의", "창의사고력수학", "도형보조선", "미적분원리",
 ]
 HIGH_RPM_KEYWORDS_EN = [
-    "SAT Math Prep", "AP Calculus", "AMC Math", "Euclidean Geometry Proof",
-    "Visual Math Proof", "STEM Education", "Interactive Geometry", "Visual Math Cinema",
-    "Math Olympiad", "High School Geometry",
+    "Visual Math Proof", "Calculus Visual Proof", "Euclidean Geometry Proof", "Linear Algebra Intuition",
+    "Mathematical Proof", "STEM Education", "Interactive Geometry", "Visual Math Cinema",
+    "Advanced Geometry", "High School Geometry",
 ]
 
 
@@ -1175,7 +1175,7 @@ def analyze_revenue_pipeline() -> dict:
                 "status": f"ACTIVE — 8분+ 질문수업 본편 {len(midroll_eligible_topics)}편 + 20~33분 마스터클래스 {len(built_masterclasses)}편 가동",
             },
             "pillar_3_exam_seasonality_bidding": {
-                "title": "국내(수능·모의고사·내신) & 글로벌(SAT·AP Calculus·AMC) 시험 시즌 고단가 광고주 입찰 키워드 매칭",
+                "title": "국내(수능·모의고사·내신) & 글로벌(Calculus·Geometry·Algebra) 시험 시즌 고단가 광고주 입찰 키워드 매칭",
                 "status": "ACTIVE — 전 패키지 28개 고단가 EdTech 태그 자동 주입",
             },
             "pillar_4_shorts_to_longform_waterfall": {
@@ -1613,7 +1613,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
     2) 30분 내 16편 연속 덤핑으로 인한 유튜브 노출 제한(0-View Spam Penalty)을 막기 위해
        웨이브당 최대 2편씩 1시간 간격으로 분산 발행하며, 일일 6슬롯을 정확히:
          - [장편 마스터클래스 2편 (시청시간 15배 증폭)]
-         - [검색 유입형 단일 주제 1080p 본편 2편 (내신·수능·AP·SAT 정확 매칭)]
+         - [검색 유입형 단일 주제 1080p 본편 2편 (중·고등 기하·대수·미적분 정확 매칭)]
          - [본편 직결 9:16 #Shorts 2편 (구독자 1,000명 돌파 바이럴 확성기 — 채널 조회수 93.7% 견인)]
        4 : 2 황금비로 교차 배분합니다.
     """
@@ -1706,7 +1706,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
         shorts_daily_cap = 3 if mc_daily_cap == 0 else 2
 
         def _try_upload_one_std() -> int:
-            # 0순위 [Strategy 4]: '실전 내신·수능/SAT 함정 1문제 ➔ min7014 보조선 1줄 5초 해체' 하이브리드 본편 최우선 발행 (구독 전환율 10배 엔진!)
+            # 0순위 [Strategy 4]: '자체 창작 기하·대수 함정 1문제 ➔ min7014 보조선 1줄 5초 해체' 하이브리드 본편 최우선 발행 (구독 전환율 10배 엔진!)
             try:
                 import exam_hybrid_creator as _ehc
                 eh_long = _ehc.try_upload_one_exam_hybrid("long")

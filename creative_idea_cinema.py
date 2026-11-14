@@ -379,7 +379,7 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                 },
                 {
                     "act": 5,
-                    "badge": "ACT 5 · 10-SECOND OLYMPIAD TAKEAWAY",
+                    "badge": "ACT 5 · 10-SECOND VISUAL PROOF TAKEAWAY",
                     "headline": "Collapse Any N-Level Fractal Back to the Root in 10 Seconds!",
                     "key_formula": "SUM(All 64 Leaves at Level 6) = Root Square (25)",
                     "narration": (
@@ -547,7 +547,7 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                 },
                 {
                     "act": 5,
-                    "badge": "ACT 5 · 10-SECOND OLYMPIAD CONIC STRATEGY",
+                    "badge": "ACT 5 · 10-SECOND CONIC VISUAL STRATEGY",
                     "headline": "Never Brute-Force Equations—Connect Both Foci the Instant You See P!",
                     "key_formula": "Rule #1: Spot Point P on Conic → Connect Both Foci F₁ & F₂!",
                     "narration": (
@@ -870,7 +870,7 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                 },
                 {
                     "act": 5,
-                    "badge": "ACT 5 · 10-SECOND OLYMPIAD TAKEAWAY",
+                    "badge": "ACT 5 · 10-SECOND VISUAL PROOF TAKEAWAY",
                     "headline": "Spot Self-Similarity or 36° Angles and Set Up the Golden Ratio Immediately!",
                     "key_formula": "Self-Similar Split → x = 1 + 1/x → Golden Ratio φ!",
                     "narration": (
@@ -1353,7 +1353,7 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                 },
                 {
                     "act": 5,
-                    "badge": "ACT 5 · 10-SECOND OLYMPIAD GEOMETRY STRATEGY",
+                    "badge": "ACT 5 · 10-SECOND ADVANCED GEOMETRY STRATEGY",
                     "headline": "Walk Around the Triangle Vertex-to-Divider-to-Vertex and Set Product = 1!",
                     "key_formula": "Vertex → Divider → Vertex (1 Full Loop Product = 1)",
                     "narration": (
@@ -1674,12 +1674,12 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                     "hud_notes": [
                         "Second Proof: Perpendicular altitudes give (h₁/h₂)(h₂/h₃)(h₃/h₁) = 1!",
                         "Converse Theorem: Product = 1 guarantees points D, E, F are collinear!",
-                        "Gateway to Olympiad Projective Geometry & Desargues' Theorem!",
+                        "Gateway to Advanced Projective Geometry & Desargues' Theorem!",
                     ],
                 },
                 {
                     "act": 5,
-                    "badge": "ACT 5 · 10-SECOND OLYMPIAD GEOMETRY STRATEGY",
+                    "badge": "ACT 5 · 10-SECOND ADVANCED GEOMETRY STRATEGY",
                     "headline": "Spot a Triangle Cut by a Line and Apply Menelaus' Cyclic Product = 1!",
                     "key_formula": "Triangle + Transversal Line → Menelaus Cyclic Product = 1!",
                     "narration": (
