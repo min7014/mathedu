@@ -2905,7 +2905,7 @@ def build_viral_comment_puzzle(archetype: str, lang_code: str = "ko", ggb_url: s
     sdoc = sdoc or {}
     slug_k = sdoc.get("slug", "math20250130001")
     tot_p = sdoc.get("page_count") or len(sdoc.get("pages") or []) or 11
-    pdf_u = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_k}.pdf"
+    pdf_u = sdoc.get("pdf_url") or sdoc.get("web_url") or "https://min7014.github.io/"
     web_u = sdoc.get("web_url") or ggb_url or "https://min7014.github.io/"
     ko_raw, en_raw = vmaker.split_bilingual_title(sdoc.get("title", slug_k))
     topic_ko = vmaker._smart_concise_topic_title(vmaker.latex_to_unicode_title(ko_raw), max_len=36, lang="ko") if ko_raw else ""
@@ -3557,7 +3557,7 @@ def build_creative_idea_youtube_description_and_tags(
     if not slug_key:
         slug_key = str((sdoc or {}).get("slug") or "math20250130001")
     ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug_key}/"
-    pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug_key}.pdf"
+    pdf_url = sdoc.get("pdf_url") or sdoc.get("web_url") or "https://min7014.github.io/"
     web_url = sdoc.get("web_url") or "https://min7014.github.io/"
     mathlab_url = "https://min7014.github.io/2025/mathlab.html"
     tpa = sdoc.get("teacher_proof_analysis") or {}
@@ -3952,7 +3952,7 @@ def sync_live_creative_idea_youtube_metadata(target_slugs=None) -> list:
         arch = detect_visual_archetype(sdoc)
         ko_t, en_t = vmaker.split_bilingual_title(sdoc.get("title", slug))
         ggb_url = sdoc.get("geogebra_url") or sdoc.get("source_page_url") or sdoc.get("web_url") or f"https://min7014.github.io/{slug}/"
-        pdf_url = sdoc.get("pdf_url") or f"https://min7014.github.io/pdf/{slug}.pdf"
+        pdf_url = sdoc.get("pdf_url") or sdoc.get("web_url") or "https://min7014.github.io/"
         web_url = sdoc.get("web_url") or "https://min7014.github.io/"
         tpa = sdoc.get("teacher_proof_analysis") or {}
 

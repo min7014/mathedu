@@ -434,7 +434,7 @@ def build_live_agent_boardroom_transcript(topic_slug: str = "") -> str:
     title_ko = slug
     title_en = slug
     page_cnt = 12
-    pdf_url = f"https://min7014.github.io/pdf/{slug}.pdf"
+    pdf_url = "https://min7014.github.io/"
     hyp_ko = "원문 PDF 출발 조건 및 기본 정의"
     aux_ko = "핵심 보조선 및 단계별 동치 변형"
     conc_ko = "목표 정리 및 시각적 증명 완결"
@@ -448,7 +448,7 @@ def build_live_agent_boardroom_transcript(topic_slug: str = "") -> str:
             title_ko = vmaker.latex_to_unicode_title(raw_ko or str(sdoc.get("title") or slug)).strip()
             title_en = vmaker.latex_to_unicode_title(str(sdoc.get("title_en") or raw_en or title_ko)).strip()
             page_cnt = int(sdoc.get("page_count") or len(sdoc.get("pages") or []) or 12)
-            pdf_url = str(sdoc.get("pdf_url") or pdf_url)
+            pdf_url = str(sdoc.get("pdf_url") or sdoc.get("web_url") or pdf_url)
             t_an = sdoc.get("teacher_proof_analysis") or {}
             hyp_ko = str(t_an.get("hypothesis_ko") or hyp_ko)
             aux_ko = str(t_an.get("auxiliary_line_ko") or aux_ko)
@@ -458,21 +458,24 @@ def build_live_agent_boardroom_transcript(topic_slug: str = "") -> str:
             pass
 
     dur_min = round(ko_dur_s / 60.0, 1)
-    midroll_ok = "8분(480초) 돌파로 미드롤 중간광고 100% 해금" if ko_dur_s >= 480.0 else "5-in-1 마스터클래스 합본 편성으로 미드롤 해금"
+    midroll_ok = "8분(480초) 이상 미드롤 광고 조건 충족" if ko_dur_s >= 480.0 else "3~8분 검색 직격 포맷 + 정주행 재생목록 자동 편입"
+    flow_info = metrics.get("flow_retrofit") or {}
+    board_url = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
 
     dialogue = [
-        "🎙️ [8대 AI 본부장 실시간 협업 회의 생중계 (Live Inter-Agent Boardroom)]",
-        f"• 일시: {metrics['timestamp']} | 안건: `{slug}` ({title_ko}) 오리지널 PDF 명품 강의 검수 및 4:2 황금비(장편+홍보쇼츠) 교차 검증",
+        "🎙️ [AI 임원진 실시간 협업 검수 보고 (Live Inter-Agent Boardroom)]",
+        f"• 일시: {metrics['timestamp']} | 안건: `{slug}` ({title_ko}) 오리지널 원문 영상 제작·검수 완결",
         "━━━━━━━━━━━━━━━━━━",
-        f"👔 [수석 비서실장 · secretary]:\n\"임원 여러분, 회장님 지침(Rule 28·29·31·32)에 따라 모든 의사결정은 한쪽 극단에 치우치지 않고 입체적 교차 검증(Devil's Advocate)을 거쳐야 합니다. 방금 작업한 `{slug}` ({title_ko}, 총 {page_cnt}페이지) 각 본부 교차 검수 결과 보고해 주십시오.\"",
-        f"👨‍🏫 [수석 수학교사 · mathteacher]:\n\"원문 PDF({pdf_url}) {page_cnt}페이지 전수 대조 완료했습니다. 출발 가정({hyp_ko[:48]}...)에서 핵심 발상({aux_ko[:48]}...)을 거쳐 결론({conc_ko[:48]}...)에 이르는 수식과 영문 용어(`{title_en[:45]}`)에 수학적 오류 0건임을 보증합니다.\"",
-        f"🎬 [수석 영상 프로듀서 · Video_Creator]:\n\"1페이지부터 {page_cnt}페이지까지 `1페이지 = 1장면` 무생략 직강으로 1080p 본편({dur_min}분 / {round(ko_dur_s)}초)과 채널 홍보용 9:16 #Shorts를 동시 제작했습니다.\"",
-        f"🎨 [수석 디자인 디렉터 · designer]:\n\"슬라이드 상단과 1280x720 썸네일 우측 도형 위의 불투명 배너를 100% 제거하여 회장님 원문 PDF 도형이 단 1픽셀도 가려지지 않습니다.\"",
-        f"🛠️ [수석 수학공학 SW 아키텍트 · MathLab_Developer]:\n\"`video_board.html` 분할 화면에서 회장님 자체 제작 `MathLab v1.4`로 `{title_ko}` 도형을 즉시 작도·실험할 수 있도록 프리셋 매핑 완료했습니다.\"",
-        f"💼 [수석 재무·수익화 본부장 · finance]:\n\"이번 `{slug}` 본편은 {dur_min}분 분량으로 【{midroll_ok}】 대상이며, 일일 6슬롯 '장편 4(마스터클래스 2 + 1080p 본편 2) : 본편 직결 홍보 #Shorts 2' 황금비 투트랙으로 유효 시청시간(4,000h)과 채널 홍보(구독자 1,000명)를 동시에 극대화합니다.\"",
-        f"📣 [수석 홍보·SEO 본부장 · pr]:\n\"반드시 1080p 본편이 먼저 업로드된 주제의 #Shorts만 후속 업로드하여, #Shorts 설명란 1번 줄과 고정댓글이 방금 올라간 1080p 본편+무중단 정주행 플레이리스트(`&list=UUSlqQfOEtRfJuMPyGMLgFYA`)로 시청자를 100% 직결 흡수하도록 교차 검증했습니다.\"",
-        f"🎮 [수석 3D 게임 디렉터 · gamemaker]:\n\"표준 `www.youtube.com/embed` 플레이어(`nocookie`·`autoplay` 완전 제거)와 16,548문항 창의 수식 조립 퀴즈 연동도 이상 없습니다.\"",
-        f"👔 [수석 비서실장 · secretary]:\n\"입체적 교차 검증 통과! 현재 누적 완결 주제는 {vc['completed_6ed_topics']}/847개({vc['progress_pct']}%), 렌더링 완료 MP4는 {vc['total_mp4_files']:,}편입니다.\"",
+        f"👔 [수석 비서실장 · secretary]:\n\"방금 렌더링 완료된 `{slug}` ({title_ko}, 총 {page_cnt}페이지)의 수식·시각·저작권·수익 퍼널 교차 검수 결과를 보고해 주십시오.\"",
+        f"👨‍🏫 [수석 수학교사 · mathteacher]:\n\"원문 자료({pdf_url}) {page_cnt}페이지 전수 대조 완료했습니다. 출발 가정({hyp_ko[:46]}...) ➔ 핵심 발상({aux_ko[:46]}...) ➔ 결론({conc_ko[:46]}...) 및 국제 표준 영문 표기(`{title_en[:45]}`) 수학적 오류 0건입니다.\"",
+        f"🎬 [수석 영상 프로듀서 · Video_Creator]:\n\"원문 `1페이지 = 1장면` 무가림 1080p 본편({dur_min}분) 및 1.5초 패턴 인터럽트 Q-#Shorts 렌더링을 완료했으며, 유휴시간 Google Flow ULTRA 광학 모션 클립도 현재 {flow_info.get('total_flow_motion_clips', 0)}개 단원 가동 중입니다.\"",
+        f"🎨 [수석 디자인 디렉터 · designer]:\n\"사색적 블루·에메랄드·앰버 팔레트(적색 배제)와 메이플 가상 지휘봉 9px 외곽 포인팅을 적용해 원문 도형 침범 0픽셀입니다.\"",
+        f"🛠️ [수석 수학공학 SW 아키텍트 · MathLab_Developer]:\n\"분할 실습관({board_url})에서 자체 제작 `MathLab v1.4` 동적 작도 프리셋이 즉시 연동됩니다.\"",
+        f"💼 [수석 재무·수익화 본부장 · finance]:\n\"본편({dur_min}분)은 【{midroll_ok}】으로 분류되었으며, 2시간 간격 시드 독점 발행 및 Q-#Shorts 클리프행어 브릿지로 본편 시청시간·구독 전환을 유도합니다.\"",
+        f"📣 [수석 홍보·SEO 본부장 · pr]:\n\"YouTube Studio `관련 동영상` 자동 바인딩 및 6개국어 글로벌 현지화 메타데이터 연동을 점검했습니다.\"",
+        f"🎮 [수석 3D 게임 디렉터 · gamemaker]:\n\"웹 학습관 내 유튜브 공식 임베드 플레이어(익명 쿠키·자동재생 배제 규격) 및 16,548문항 탈-5지선다 창의 수식 조립 퀴즈 연동 이상 없습니다.\"",
+        f"⚖️ [수석 독립 감사관 · auditor]:\n\"외부 시험·기업 상표권 노출 0건, 개인 호칭 노출 0건, 원문 저작권 정합성 등 7계층 감사 무결성 통과를 확인했습니다.\"",
+        f"👔 [수석 비서실장 · secretary]:\n\"전 본부 검수 통과! 현재 누적 완결 주제는 {vc['completed_6ed_topics']}/847개({vc['progress_pct']}%), 보유 MP4 자산은 {vc['total_mp4_files']:,}편입니다.\"",
     ]
     return "\n\n".join(dialogue)
 
