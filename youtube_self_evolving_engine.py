@@ -71,6 +71,7 @@ def sanitize_copyright_and_trademark_text(text: str) -> str:
         (r"#SATMath\b", "#VisualMath"),
         (r"#OlympiadMath\b", "#GeometryProof"),
         (r"#MathOlympiad\b", "#EuclideanGeometry"),
+        (r"\bProject\s*Genie\b|\bGenie\s*3\b|\bGoogle\s*Genie\b|프로젝트\s*지니|\b지니\s*3\b", "Spatial Geometry Cinema"),
     ]
     for pat, rep in replacements:
         s = re.sub(pat, rep, s, flags=re.IGNORECASE)

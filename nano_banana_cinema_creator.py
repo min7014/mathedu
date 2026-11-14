@@ -35,12 +35,14 @@ ROOT_DIR = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT_DIR / "video_lectures" / "scripts"
 NB_ASSETS_DIR = ROOT_DIR / "youtube_uploads" / "nano_banana_assets"
 FLOW_CLIPS_DIR = ROOT_DIR / "youtube_uploads" / "flow_clips"
+GENIE_CLIPS_DIR = ROOT_DIR / "youtube_uploads" / "genie_clips"
 NB_OUT_DIR = ROOT_DIR / "youtube_uploads" / "nano_banana"
 WEEKLY_CAP_STATE_FILE = ROOT_DIR / ".agents" / "nano_banana_weekly_cap.json"
 # [Rule 52 Google Flow ULTRA 업그레이드 확정]: Antigravity 에이전트 쿼터 0소모(Google Flow ULTRA 직접 구동)로 주 2~3편 제한 전면 해제!
 MAX_NANO_BANANA_WEEKLY_EPISODES = 50
 NB_ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 FLOW_CLIPS_DIR.mkdir(parents=True, exist_ok=True)
+GENIE_CLIPS_DIR.mkdir(parents=True, exist_ok=True)
 NB_OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # 2012100303 -> 2012100304(예각 접현각 증명) 에셋 호환 보장
@@ -154,6 +156,93 @@ NANO_BANANA_BLUEPRINTS = [
     },
 ]
 
+# [5% 선별 공간기하·원뿔곡선 1인칭 3D 공간 카메라 워킹 특수 트랙 (Rule 54)]
+# - Act 1 / Act 3: 1080p 30fps Lanczos+Unsharp 1인칭 3D 공간 공전 카메라 B-Roll + 파이썬 정밀 수식 HUD
+# - Act 2: 100% 무가림 min7014.github.io 오리지널 원문 PDF + 메이플 가상 지휘봉 (Rule 43 & Rule 44)
+SPATIAL_GENIE3_BLUEPRINTS = [
+    {
+        "slug": "2023011401",
+        "spatial_track": True,
+        "spatial_archetype": "three_perpendiculars",
+        "art_file": "nb_2023011401_spatial.png",
+        "genie_clip": "2023011401_genie_1080p.mp4",
+        "badge_ko": "★ 3D 공간기하 미스터리 · 두 수선이 잠그는 세 번째 직각",
+        "badge_en": "★ 3D Spatial Geometry · Three Perpendiculars Mystery",
+        "thumb_hook_ko": ["공간 기둥 4·바닥 3?", "직각 90°로 3초 암산!"],
+        "thumb_hook_en": ["PILLAR 4 · FLOOR 3?", "LOCKED AT 90° IN 3s!"],
+        "problem_label_ko": "평면 밖 점 P에서 내린 수선 PM=4, 바닥 직선 a까지의 수선 MN=3일 때, 빗변 PN과 직선 a가 이루는 각도와 길이는?",
+        "problem_label_en": "Vertical pillar PM=4 meets plane α, and floor perpendicular MN=3 meets line a. Find angle(PN, a) and length PN!",
+        "figure_caption_ko": "PM = 4 (⊥α),  MN = 3 (⊥a)  →  PN과 직선 a의 각도는?",
+        "figure_caption_en": "PM = 4 (⊥α),  MN = 3 (⊥a)  →  Angle(PN, a) & PN = ?",
+        "answer_label_ko": "두 수선이 평면 PMN ⊥ a를 잠금! → PN ⊥ a (정확히 90°), 3-4-5 직각삼각형 PN = 5 즉시 완결!",
+        "answer_label_en": "Plane PMN ⊥ Line a Locks PN ⊥ a at Exact 90° → 3-4-5 Right Triangle Gives PN = 5!",
+        "title_ko": "🔥 입체도형만 나오면 막히는 이유! 수선 2개가 잠그는 직각 90°의 비밀 | 삼수선의 정리 18단계 시각적 증명",
+        "title_en": "🔥 Confused by 3D Space Geometry? Two Perpendiculars Lock 90° Instantly! | Three Perpendiculars Proof",
+        "short_title_ko": "❓ 공간 기둥이 4, 바닥 수선이 3일 때 빗변 PN과 직선 a의 각도는? 3초 입체 직관! #Shorts",
+        "short_title_en": "❓ Stop Scrolling! Pillar 4, Floor Line 3—What Angle Does PN Meet Line a? #Shorts",
+        "act1_ko": "잠깐! 바닥 평면 위로 수직 기둥 PM이 4만큼 솟아 있고 기둥 발끝에서 직선 a까지 수선 길이가 3일 때, 허공을 가로지르는 빗변 PN이 왜 바닥 직선 a와 정확히 90도로 만나는지 3초 만에 입체로 보이시나요?",
+        "act1_en": "Stop scrolling! When a vertical pillar of height 4 meets a floor perpendicular of length 3 to line a, can you see in three seconds in 3D space why the slanted beam PN must also meet line a at an exact 90-degree right angle?",
+        "act3_ko": "두 수선 PM과 MN이 만드는 세로 유리 평면 전체가 바닥 직선 a와 수직으로 잠기기 때문에, 그 평면 속 빗변 PN 역시 직선 a와 언제나 90도로 만나며 길이는 3 대 4 대 5로 5가 됩니다! 입체기하를 눈으로 꿰뚫는 오리지널 시각 증명, 지금 바로 구독을 눌러 두세요!",
+        "act3_en": "Because the two perpendiculars lock the entire vertical plane PMN orthogonal to line a, the slanted beam PN meets line a at an exact 90-degree angle with length 5! Hit Subscribe right now for daily 3D visual math breakthroughs!",
+        "comment_quiz_ko": "🧩 [3초 공간 암산] 만약 수직 기둥 PM = 12이고 바닥 수선 MN = 5라면, 바닥 직선 a까지의 공간 최단 거리 PN은 얼마일까요? 댓글로 남겨보세요! 🤩👇",
+        "comment_quiz_en": "🧩 [3-Sec Spatial Check] If vertical pillar PM = 12 and floor perpendicular MN = 5, what is the shortest spatial distance PN to line a? Comment below! 🤩👇",
+    },
+    {
+        "slug": "2023032801",
+        "spatial_track": True,
+        "spatial_archetype": "orthogonal_projection",
+        "art_file": "nb_2023032801_spatial.png",
+        "genie_clip": "2023032801_genie_1080p.mp4",
+        "badge_ko": "★ 3D 공간 광학 미스터리 · 기울어진 정사각형과 그림자 넓이",
+        "badge_en": "★ 3D Optical Projection · Tilted Crystal Square Shadow",
+        "thumb_hook_ko": ["정사영 공식 암기 끝!", "60° 그림자 3초 컷!"],
+        "thumb_hook_en": ["NO ROTE S·cosθ!", "60° SHADOW IN 3s!"],
+        "problem_label_ko": "넓이가 20인 에메랄드 정사각형을 바닥과 60° 각도로 기울인 채 수직 빛을 비추면 바닥 그림자 넓이 S'은?",
+        "problem_label_en": "An emerald crystal square of area 20 is tilted at 60° above a mirror floor. Find vertical shadow area S'!",
+        "figure_caption_ko": "원래 넓이 S = 20,  기울기 60°  →  바닥 그림자 S' = ?",
+        "figure_caption_en": "Square Area S = 20,  Tilt = 60°  →  Shadow S' = ?",
+        "answer_label_ko": "접선 축 가로는 불변, 경사 세로만 cos60°=1/2 축소! → S' = 20 × 1/2 = 10 (3초 완결!)",
+        "answer_label_en": "Hinge Width Unchanged, Slanted Height Scales by cos60°=1/2 → S' = 20 × 1/2 = 10!",
+        "title_ko": "⚡ 정사영 공식 외우지 마세요! 60° 기울인 정사각형 그림자 넓이 3초 해법 | 정사영의 넓이 13단계 시각적 증명",
+        "title_en": "⚡ Never Memorize S·cosθ Blindly! 60° Tilted Square Shadow Solved in 3s | Orthogonal Projection Proof",
+        "short_title_ko": "❓ 넓이 20인 정사각형을 60° 기울이면 바닥 그림자 넓이는 얼마일까? 3초 입체 해법! #Shorts",
+        "short_title_en": "❓ Stop Scrolling! Tilt an Area-20 Square by 60°—Spot the Shadow Area in 3s! #Shorts",
+        "act1_ko": "잠깐! 넓이가 20인 에메랄드 정사각형을 바닥 평면과 60도 각도로 비스듬히 세운 뒤 위에서 수직으로 빛을 비추면, 바닥에 맺히는 황금 그림자 넓이가 왜 정확히 절반으로 줄어드는지 3초 만에 입체로 보이시나요?",
+        "act1_en": "Stop scrolling! When an emerald square of area 20 is tilted 60 degrees above a sapphire floor under vertical light, can you see in 3D space why its golden shadow shrinks to exact half in three seconds?",
+        "act3_ko": "교선과 나란한 가로 변의 길이는 1밀리미터도 변하지 않고, 오직 위로 들려 올린 세로 변만 코사인 60도, 즉 2분의 1로 줄어들기 때문에 넓이 역시 20의 절반인 10이 3초 만에 완성됩니다! 공식을 눈으로 증명하는 공간 직관, 지금 바로 구독해 두세요!",
+        "act3_en": "Because the width parallel to the floor hinge stays 100 percent unchanged while only the slanted height scales by cosine 60 degrees—one half—the shadow area is simply half of 20, equal to 10! Subscribe right now for daily visual proofs!",
+        "comment_quiz_ko": "🧩 [3초 공간 암산] 만약 넓이가 36인 정사각형 판을 바닥과 60° 각도로 기울였다면 수직 그림자(정사영) 넓이는 얼마일까요? 댓글로 남겨보세요! 🤩👇",
+        "comment_quiz_en": "🧩 [3-Sec Spatial Check] If a crystal square of area 36 is tilted at 60° to the floor, what is its orthogonal shadow area? Drop your answer below! 🤩👇",
+    },
+    {
+        "slug": "2022101601",
+        "spatial_track": True,
+        "spatial_archetype": "dandelin_cone",
+        "art_file": "nb_2022101601_spatial.png",
+        "genie_clip": "2022101601_genie_1080p.mp4",
+        "badge_ko": "★ 3D 원뿔곡선 미스터리 · 원뿔 속 두 황금 구와 타원의 초점",
+        "badge_en": "★ 3D Conic Architecture · Cone & Two Tangent Spheres",
+        "thumb_hook_ko": ["원뿔을 비스듬히 자르면", "왜 거리 합이 일정할까?"],
+        "thumb_hook_en": ["SLICE A 3D CONE—", "WHY IS PF₁+PF₂ FIXED?"],
+        "problem_label_ko": "원뿔 단면 타원 위 점 P에서 두 황금 내접구 접점 F₁, F₂까지의 거리 합 PF₁+PF₂, 두 접선 원 사이 모선 길이가 12라면?",
+        "problem_label_en": "A plane slices a crystal cone with two tangent golden spheres (cone segment = 12). What is PF₁ + PF₂?",
+        "figure_caption_ko": "두 내접구 사이 원뿔 모선 = 12  →  PF₁ + PF₂ = ?",
+        "figure_caption_en": "Cone Segment Between Spheres = 12  →  PF₁ + PF₂ = ?",
+        "answer_label_ko": "한 점 P에서 구에 그은 접선 길이 일치! → PF₁+PF₂ = 모선 구간 합 = 12 (위치 무관 불변!)",
+        "answer_label_en": "Equal Tangents to Each Sphere Lock PF₁ + PF₂ = Cone Generatrix Segment = 12 Everywhere!",
+        "title_ko": "🔥 타원 방정식 외우기 전에 꼭 보세요! 원뿔 속 황금 구 2개가 밝히는 초점 거리 합의 비밀 | 타원의 정의 34단계 증명",
+        "title_en": "🔥 Why Is PF₁ + PF₂ Always Constant? Two Golden Spheres Prove It! | Ellipse Cone Visual Proof",
+        "short_title_ko": "❓ 원뿔을 비스듬히 자르면 왜 두 초점 거리 합이 항상 일정할까? 황금 구 2개의 비밀! #Shorts",
+        "short_title_en": "❓ Stop Scrolling! Slice a 3D Cone—Why Does PF₁ + PF₂ Never Change? #Shorts",
+        "act1_ko": "잠깐! 투명한 원뿔을 비스듬히 잘라 만든 타원 위에서 점 P가 어디로 움직이든 두 초점까지의 거리 합이 왜 한 치의 오차도 없이 똑같은지, 원뿔 속에 끼워 넣은 황금 구 두 개로 3초 만에 보이시나요?",
+        "act1_en": "Stop scrolling! When an inclined plane slices a crystal cone into an ellipse, can you see in three seconds—using two golden spheres nestled inside the cone—why the sum of distances PF1 plus PF2 never changes?",
+        "act3_ko": "공간 속 한 점 P에서 위아래 두 황금 구에 그은 접선 길이가 각각 정확히 같기 때문에, 두 초점 거리의 합 PF1 더하기 PF2는 언제나 두 구 사이 원뿔 모선 길이 12로 완벽히 고정됩니다! 천재적인 3차원 기하 통찰, 지금 바로 채널 구독을 눌러 두세요!",
+        "act3_en": "Because tangents from point P to each sphere have equal lengths, PF1 plus PF2 folds directly onto the fixed cone segment of length 12—proving the ellipse focal law with zero algebra! Subscribe right now for daily visual math masterpieces!",
+        "comment_quiz_ko": "🧩 [3초 공간 암산] 만약 원뿔 속 위·아래 두 내접구의 접선 원 사이 모선 길이가 18이라면, 단면 타원의 장축 길이(PF₁ + PF₂)는 얼마일까요? 댓글로 남겨보세요! 🤩👇",
+        "comment_quiz_en": "🧩 [3-Sec Spatial Check] If the cone segment between the two tangent spheres has length 18, what is the ellipse's constant focal sum PF₁ + PF₂? Comment below! 🤩👇",
+    },
+]
+
 
 def _load_master_art(bp: dict) -> Image.Image:
     p = NB_ASSETS_DIR / bp["art_file"]
@@ -204,20 +293,38 @@ def render_nano_banana_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -
     is_en = lang_code == "en"
 
     # 상단 로열 블루 배지 (Rule 37: 적색 배제, Malgun Gothic 완벽 지원 기호만 사용)
-    badge = "★ REAL-WORLD VISUAL PROOF" if is_en else "★ 실생활 기하 미스터리 × 시각 증명"
+    if bp.get("spatial_track"):
+        badge = "★ 3D SPATIAL VISUAL PROOF" if is_en else "★ 3D 입체 공간기하 × 시각 증명"
+    else:
+        badge = "★ REAL-WORLD VISUAL PROOF" if is_en else "★ 실생활 기하 미스터리 × 시각 증명"
     draw.rounded_rectangle((28, 26, 540, 86), radius=16, fill=(2, 132, 199), outline=(250, 204, 21), width=3)
     draw.text((48, 40), badge, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 25, bold=True))
 
-    # 좌하단 수치 질문 배지 (절단 ZERO 보장)
+    # 좌하단 수치 질문 배지 (픽셀 폭 자동 수렴 · 절단 ZERO 보장)
     cap = (bp["figure_caption_en"] if is_en else bp["figure_caption_ko"]).replace("→", "→")
     draw.rounded_rectangle((28, 592, 692, 690), radius=18, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
-    draw.text((46, 624), cap, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 26 if is_en else 27, bold=True))
+    f_cap = vmaker.get_font_for_lang(lang_code, 26 if is_en else 27, bold=True)
+    for fs_c in range(26 if is_en else 27, 17, -1):
+        cand_f = vmaker.get_font_for_lang(lang_code, fs_c, bold=True)
+        bb_c = draw.textbbox((0, 0), cap, font=cand_f)
+        if (bb_c[2] - bb_c[0]) <= 624:
+            f_cap = cand_f
+            break
+    bb_fin = draw.textbbox((0, 0), cap, font=f_cap)
+    cy_cap = 592 + max(14, (98 - (bb_fin[3] - bb_fin[1])) // 2 - bb_fin[1])
+    draw.text((46, cy_cap), cap, fill=(254, 240, 138), font=f_cap)
 
-    # 우측 상단 2줄 초대형 호기심 카피
+    # 우측 상단 2줄 초대형 호기심 카피 (우측 경계 x=1256 이내 자동 수렴)
     hooks = bp["thumb_hook_en"] if is_en else bp["thumb_hook_ko"]
-    f_big = vmaker.get_font_for_lang(lang_code, 46 if is_en else 50, bold=True)
     yh = 40
     for idx_h, hl in enumerate(hooks):
+        f_big = vmaker.get_font_for_lang(lang_code, 46 if is_en else 50, bold=True)
+        for fs_h in range(46 if is_en else 50, 31, -2):
+            cand_h = vmaker.get_font_for_lang(lang_code, fs_h, bold=True)
+            bb_h = draw.textbbox((0, 0), hl, font=cand_h)
+            if (bb_h[2] - bb_h[0]) <= 536:
+                f_big = cand_h
+                break
         c_fill = (255, 255, 255) if idx_h == 0 else (250, 204, 21)
         for dx in (-3, 0, 3):
             for dy in (-3, 0, 3):
@@ -246,6 +353,17 @@ def render_nano_banana_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -
 
 
 def _resolve_flow_clip(bp: dict) -> Path | None:
+    if bp.get("spatial_track") or bp.get("genie_clip"):
+        g_name = bp.get("genie_clip") or f"{bp['slug']}_genie_1080p.mp4"
+        gp = GENIE_CLIPS_DIR / g_name
+        if gp.exists() and gp.stat().st_size > 120_000:
+            try:
+                with gp.open("rb") as fh:
+                    hdr = fh.read(12)
+                if len(hdr) >= 8 and hdr[4:8] == b"ftyp":
+                    return gp
+            except Exception:
+                pass
     cand_name = bp.get("flow_clip") or f"{bp['slug']}_flow.mp4"
     p = FLOW_CLIPS_DIR / cand_name
     if p.exists() and p.stat().st_size > 150_000:
@@ -269,24 +387,26 @@ def _encode_cinematic_art_card(
     width: int = 1920,
     height: int = 1080,
     flow_clip_mp4: Path | None = None,
+    target_fps: int = 24,
 ):
     """
-    [Google Flow ULTRA 실사 광학 모션 비디오 우선 합성 + 정적 줌 드리프트 폴백]:
-    - `flow_clip_mp4`(Veo 3.1 양단 키프레임 고정 8초 실사 모션 비디오)가 존재하면
-      실제 흐르는 광학 모션 클립을 무한 심리스 루프(`-stream_loop -1`)로 배경에 깔고,
+    [Google Flow ULTRA 양단고정 실사 모션(95%) + 공간기하 1인칭 3D 카메라 워킹(5% · 30fps) 합성]:
+    - `flow_clip_mp4`(실사 Flow 모션 또는 1080p 30fps 마스터링된 3D 공간 카메라 클립)가 존재하면
+      실제 흐르는 모션 클립을 무한 심리스 루프(`-stream_loop -1`)로 배경에 깔고,
       전면의 파이썬 정밀 수식·텍스트 HUD 레이어(RGBA)를 흔들림 없이 칼같이 선명하게 합성합니다.
-    - 모션 클립이 아직 없을 경우 고해상도 정지 오브제에 부드러운 24fps 줌 드리프트를 부여합니다.
+    - 모션 클립이 아직 없을 경우 고해상도 정지 오브제에 부드러운 줌 드리프트를 부여합니다.
     """
     import min7014_video_maker as vmaker
 
     dur = max(3.8, vmaker.get_media_duration_seconds(mp3_path, ffprobe_exe) + 0.35)
     hud_png = out_mp4.with_name(out_mp4.stem + "_hud.png")
     hud_rgba.save(hud_png)
+    sharp_chain = ",unsharp=5:5:0.45:5:5:0.0" if target_fps >= 30 else ""
 
     if flow_clip_mp4 is not None and flow_clip_mp4.exists():
         if width == 1920 and height == 1080:
             filt = (
-                f"[0:v]scale=1920:1080:flags=lanczos,setsar=1,fps=24[bg];"
+                f"[0:v]scale=1920:1080:flags=lanczos{sharp_chain},setsar=1,fps={target_fps}[bg];"
                 f"[bg][1:v]overlay=0:0:format=auto,format=yuv420p[v]"
             )
             cmd = [
@@ -297,7 +417,7 @@ def _encode_cinematic_art_card(
                 "-filter_complex", filt,
                 "-map", "[v]", "-map", "2:a",
                 "-c:v", "libx264", "-preset", "ultrafast", "-crf", "19",
-                "-r", "24",
+                "-r", str(target_fps),
                 "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
                 "-shortest", str(out_mp4),
             ]
@@ -307,8 +427,8 @@ def _encode_cinematic_art_card(
             bg_png = out_mp4.with_name(out_mp4.stem + "_vbg.png")
             Image.new("RGB", (1080, 1920), (10, 16, 34)).save(bg_png)
             filt = (
-                f"[0:v]fps=24[base];"
-                f"[1:v]scale=1920:1080:flags=lanczos,crop=1320:1080:20:0,scale=1000:940:flags=lanczos,setsar=1,fps=24[mclip];"
+                f"[0:v]fps={target_fps}[base];"
+                f"[1:v]scale=1920:1080:flags=lanczos,crop=1320:1080:20:0,scale=1000:940:flags=lanczos{sharp_chain},setsar=1,fps={target_fps}[mclip];"
                 f"[base][mclip]overlay=40:240:format=auto[mid];"
                 f"[mid][2:v]overlay=0:0:format=auto,format=yuv420p[v]"
             )
@@ -321,20 +441,20 @@ def _encode_cinematic_art_card(
                 "-filter_complex", filt,
                 "-map", "[v]", "-map", "3:a",
                 "-c:v", "libx264", "-preset", "ultrafast", "-crf", "19",
-                "-r", "24",
+                "-r", str(target_fps),
                 "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
                 "-shortest", str(out_mp4),
             ]
             subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             return dur
 
-    n_frames = max(24, int(dur * 24) + 6)
+    n_frames = max(target_fps, int(dur * target_fps) + 6)
     bg_png = out_mp4.with_name(out_mp4.stem + "_bg.png")
     art_img.resize((width, height), Image.Resampling.LANCZOS).save(bg_png)
 
     filt = (
         f"[0:v]scale={int(width*1.12)}:{int(height*1.12)},"
-        f"zoompan=z='min(1.045,1.0+0.045*on/{n_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n_frames}:s={width}x{height}:fps=24[bg];"
+        f"zoompan=z='min(1.045,1.0+0.045*on/{n_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n_frames}:s={width}x{height}:fps={target_fps}[bg];"
         f"[bg][1:v]overlay=0:0:format=auto,format=yuv420p[v]"
     )
     cmd = [
@@ -345,7 +465,7 @@ def _encode_cinematic_art_card(
         "-filter_complex", filt,
         "-map", "[v]", "-map", "2:a",
         "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
-        "-r", "24",
+        "-r", str(target_fps),
         "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
         "-shortest", str(out_mp4),
     ]
@@ -353,7 +473,7 @@ def _encode_cinematic_art_card(
     return dur
 
 
-def _encode_still_segment(frame_img: Image.Image, mp3_path: Path, out_mp4: Path, ffmpeg_exe: str, ffprobe_exe: str):
+def _encode_still_segment(frame_img: Image.Image, mp3_path: Path, out_mp4: Path, ffmpeg_exe: str, ffprobe_exe: str, target_fps: int = 24):
     import min7014_video_maker as vmaker
 
     dur = max(3.4, vmaker.get_media_duration_seconds(mp3_path, ffprobe_exe) + 0.32)
@@ -364,7 +484,7 @@ def _encode_still_segment(frame_img: Image.Image, mp3_path: Path, out_mp4: Path,
         "-loop", "1", "-t", f"{dur:.3f}", "-i", str(png_p),
         "-i", str(mp3_path),
         "-c:v", "libx264", "-preset", "ultrafast", "-tune", "stillimage", "-crf", "20",
-        "-pix_fmt", "yuv420p", "-r", "24",
+        "-pix_fmt", "yuv420p", "-r", str(target_fps),
         "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
         "-shortest", str(out_mp4),
     ]
@@ -407,10 +527,15 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
     if not sp.exists():
         vmaker.generate_or_update_script(slug, target_langs=["ko", "en"])
     sdoc = json.loads(sp.read_text(encoding="utf-8"))
+    if bp.get("spatial_track") or bp.get("genie_clip"):
+        if not (NB_ASSETS_DIR / bp["art_file"]).exists() or _resolve_flow_clip(bp) is None:
+            import genie3_world_controller as _gwc
+            _gwc.ensure_spatial_3d_camera_assets(bp, try_live_labs=False, headless=True)
     pdf_bytes, _ = vmaker.load_or_build_topic_pdf_bytes(sdoc.get("pdf_url", ""), slug)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
     art_16x9 = _load_master_art(bp)
     flow_clip = _resolve_flow_clip(bp)
+    seg_fps = 30 if (bp.get("spatial_track") or bp.get("genie_clip")) else 24
 
     ffmpeg_exe = shutil.which("ffmpeg")
     ffprobe_exe = shutil.which("ffprobe")
@@ -465,7 +590,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         act1_mp3 = tmp_dir / "long_act1.mp3"
         act1_seg = tmp_dir / "long_act1.mp4"
         vmaker.synthesize_tts_mp3_sync(bp["act1_en"] if is_en else bp["act1_ko"], voice_name, act1_mp3, rate="+8%")
-        _encode_cinematic_art_card(art_16x9, hud1, act1_mp3, act1_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080, flow_clip_mp4=flow_clip)
+        _encode_cinematic_art_card(art_16x9, hud1, act1_mp3, act1_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080, flow_clip_mp4=flow_clip, target_fps=seg_fps)
         long_segs.append(act1_seg)
 
         # --- Act 2: min7014.github.io 오리지널 원문 PDF + Rule 43 메이플 가상 지휘봉 ---
@@ -508,7 +633,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
             s_mp3 = tmp_dir / f"long_step_{idx_s:02d}.mp3"
             s_mp4 = tmp_dir / f"long_step_{idx_s:02d}.mp4"
             vmaker.synthesize_tts_mp3_sync(raw_n, voice_name, s_mp3, rate="+8%")
-            _encode_still_segment(frame, s_mp3, s_mp4, ffmpeg_exe, ffprobe_exe)
+            _encode_still_segment(frame, s_mp3, s_mp4, ffmpeg_exe, ffprobe_exe, target_fps=seg_fps)
             long_segs.append(s_mp4)
 
         # --- Act 3: 나노바나나 유레카 완결 + 5초 암산 정리 & 구독 유도 ---
@@ -546,7 +671,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         act3_mp3 = tmp_dir / "long_act3.mp3"
         act3_seg = tmp_dir / "long_act3.mp4"
         vmaker.synthesize_tts_mp3_sync(bp["act3_en"] if is_en else bp["act3_ko"], voice_name, act3_mp3, rate="+8%")
-        _encode_cinematic_art_card(art_16x9, hud3, act3_mp3, act3_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080, flow_clip_mp4=flow_clip)
+        _encode_cinematic_art_card(art_16x9, hud3, act3_mp3, act3_seg, ffmpeg_exe, ffprobe_exe, 1920, 1080, flow_clip_mp4=flow_clip, target_fps=seg_fps)
         long_segs.append(act3_seg)
 
         concat_long = tmp_dir / "concat_long.txt"
@@ -587,7 +712,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         sh1_mp3 = tmp_dir / "sh1.mp3"
         sh1_seg = tmp_dir / "sh1.mp4"
         vmaker.synthesize_tts_mp3_sync(bp["act1_en"] if is_en else bp["act1_ko"], voice_name, sh1_mp3, rate="+18%")
-        _encode_cinematic_art_card(s1_bg, s1_hud, sh1_mp3, sh1_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920, flow_clip_mp4=flow_clip)
+        _encode_cinematic_art_card(s1_bg, s1_hud, sh1_mp3, sh1_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920, flow_clip_mp4=flow_clip, target_fps=seg_fps)
         sh_segs.append(sh1_seg)
 
         # Scene 2 & 3: 원본 min7014.github.io 핵심 슬라이드 2장
@@ -623,7 +748,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
             sh_m_mp3 = tmp_dir / f"sh_{si}.mp3"
             sh_m_seg = tmp_dir / f"sh_{si}.mp4"
             vmaker.synthesize_tts_mp3_sync(short_clue, voice_name, sh_m_mp3, rate="+18%")
-            _encode_still_segment(sc_v, sh_m_mp3, sh_m_seg, ffmpeg_exe, ffprobe_exe)
+            _encode_still_segment(sc_v, sh_m_mp3, sh_m_seg, ffmpeg_exe, ffprobe_exe, target_fps=seg_fps)
             sh_segs.append(sh_m_seg)
 
         # Scene 4: 유레카 즉시 정답 보상 + 본편([관련 동영상]) & 구독 전환 클리프행어 브릿지 (쇼츠 완결성 역설 해소!)
@@ -644,7 +769,7 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
             or f"{bp['act3_ko']} 잠깐, 그런데 도형이 극단적으로 기울어져도 왜 예외 없이 똑같이 성립할까요? 바로 아래 관련 동영상 본편을 눌러 전체 단계별 시각 증명을 확인해 보세요!"
         )
         vmaker.synthesize_tts_mp3_sync(sh4_script, voice_name, sh4_mp3, rate="+18%")
-        _encode_cinematic_art_card(s4_bg, s4_hud, sh4_mp3, sh4_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920, flow_clip_mp4=flow_clip)
+        _encode_cinematic_art_card(s4_bg, s4_hud, sh4_mp3, sh4_seg, ffmpeg_exe, ffprobe_exe, 1080, 1920, flow_clip_mp4=flow_clip, target_fps=seg_fps)
         sh_segs.append(sh4_seg)
 
         concat_sh = tmp_dir / "concat_sh.txt"
@@ -691,6 +816,16 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
 def render_all_nano_banana_flagships(langs: tuple[str, ...] = ("ko", "en")) -> list[dict]:
     out = []
     for bp in NANO_BANANA_BLUEPRINTS:
+        for lc in langs:
+            pkg = render_nano_banana_bundle(bp, lang_code=lc)
+            out.append({"slug": bp["slug"], "lang": lc, **pkg})
+    return out
+
+
+def render_all_spatial_genie3_flagships(langs: tuple[str, ...] = ("ko", "en")) -> list[dict]:
+    """공간기하·원뿔곡선 5% 선별 1인칭 3D 카메라 워킹 플래그십 시리즈를 일괄 렌더링합니다."""
+    out = []
+    for bp in SPATIAL_GENIE3_BLUEPRINTS:
         for lc in langs:
             pkg = render_nano_banana_bundle(bp, lang_code=lc)
             out.append({"slug": bp["slug"], "lang": lc, **pkg})
@@ -982,9 +1117,10 @@ def _build_domain_flow_prompts(sdoc: dict) -> tuple[str, str]:
 
 def build_dynamic_flow_blueprint_from_script(slug: str) -> dict | None:
     """
-    min7014.github.io 847+ 원문 스크립트(`{slug}.json`)로부터 Google Flow ULTRA 하이브리드 블루프린트를 자동 합성합니다.
+    min7014.github.io 847+ 원문 스크립트(`{slug}.json`)로부터 Google Flow ULTRA(95%) 또는
+    공간기하 1인칭 3D 카메라(5%) 하이브리드 블루프린트를 자동 합성합니다.
     """
-    for existing in NANO_BANANA_BLUEPRINTS:
+    for existing in (*NANO_BANANA_BLUEPRINTS, *SPATIAL_GENIE3_BLUEPRINTS):
         if existing["slug"] == slug:
             return existing
 
@@ -1010,15 +1146,20 @@ def build_dynamic_flow_blueprint_from_script(slug: str) -> dict | None:
     aux_ko = str(tpa.get("auxiliary_line_ko") or sdoc.get("solving_tip") or "핵심 보조선 한 줄과 대칭 불변량").strip()
     aux_en = str(tpa.get("auxiliary_line_en") or "one strategic auxiliary line and geometric invariance").strip()
     img_prompt, mot_prompt = _build_domain_flow_prompts(sdoc)
+    import genie3_world_controller as _gwc
+    is_spatial = _gwc.is_spatial_3d_topic(sdoc)
 
     bp = {
         "slug": slug,
-        "art_file": f"nb_{slug}_flow.png",
+        "spatial_track": is_spatial,
+        "spatial_archetype": _gwc.detect_spatial_archetype(sdoc) if is_spatial else "",
+        "art_file": f"nb_{slug}_spatial.png" if is_spatial else f"nb_{slug}_flow.png",
         "flow_clip": f"{slug}_flow.mp4",
+        "genie_clip": f"{slug}_genie_1080p.mp4" if is_spatial else "",
         "flow_image_prompt": img_prompt,
         "flow_motion_prompt": mot_prompt,
-        "badge_ko": f"★ 실사 광학 기하 미스터리 · {core_ko[:18]}",
-        "badge_en": f"★ Optical Geometry Mystery · {core_en[:24]}",
+        "badge_ko": f"★ {'3D 공간기하 미스터리' if is_spatial else '실사 광학 기하 미스터리'} · {core_ko[:18]}",
+        "badge_en": f"★ {'3D Spatial Geometry' if is_spatial else 'Optical Geometry Mystery'} · {core_en[:24]}",
         "thumb_hook_ko": ["공식 암기 ZERO!", "보조선 1줄 5초 해법!"],
         "thumb_hook_en": ["ZERO ROTE RULES!", "1 LINE = 5s PROOF!"],
         "problem_label_ko": f"공식을 외우지 않고도 '{core_ko}'가 왜 항상 성립하는지 숨은 보조선 한 줄이 3초 만에 보이시나요?",
@@ -1042,8 +1183,8 @@ def build_dynamic_flow_blueprint_from_script(slug: str) -> dict | None:
 
 
 def get_all_available_flow_blueprints() -> list[dict]:
-    """수동 큐레이션 블루프린트 + 유휴시간 자동 고품질화로 생성된 블루프린트를 통합 반환합니다."""
-    out = list(NANO_BANANA_BLUEPRINTS)
+    """수동 큐레이션(95% Flow + 5% Spatial 3D) 블루프린트 + 유휴시간 자동 고품질화 블루프린트를 통합 반환합니다."""
+    out = list(NANO_BANANA_BLUEPRINTS) + list(SPATIAL_GENIE3_BLUEPRINTS)
     seen = {b["slug"] for b in out}
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         if sp.stem in seen:
@@ -1094,12 +1235,19 @@ def get_flow_retrofit_status_summary() -> dict:
         for p in FLOW_CLIPS_DIR.glob("*_flow.mp4")
         if p.stat().st_size > 150_000 and p.open("rb").read(12)[4:8] == b"ftyp"
     )
+    genie_clips = sorted(
+        p.stem.replace("_genie_1080p", "")
+        for p in GENIE_CLIPS_DIR.glob("*_genie_1080p.mp4")
+        if p.stat().st_size > 120_000 and p.open("rb").read(12)[4:8] == b"ftyp"
+    )
     nb_rendered = sorted({p.name.split("_nb_")[0] for p in NB_OUT_DIR.glob("*_nb_ko.mp4")})
     return {
         "today_upgraded_count": st.get("daily_count", 0),
         "daily_cap": MAX_DAILY_FLOW_RETROFITS,
         "total_flow_motion_clips": len(flow_clips),
         "flow_motion_slugs": flow_clips,
+        "total_spatial_3d_clips": len(genie_clips),
+        "spatial_3d_slugs": genie_clips,
         "total_hybrid_rendered_slugs": len(nb_rendered),
         "safe_swapped_count": len(st.get("safe_swapped_videos") or []),
         "protected_high_view_count": len(st.get("protected_high_view_videos") or []),
@@ -1228,7 +1376,7 @@ def run_idle_flow_quality_retrofit_cycle(
 
     # Build candidate queue: Tier 1 (curated blueprints needing Flow motion clip or re-render) -> Tier 2 (high-search existing scripts)
     candidates: list[dict] = []
-    for bp in NANO_BANANA_BLUEPRINTS:
+    for bp in (*NANO_BANANA_BLUEPRINTS, *SPATIAL_GENIE3_BLUEPRINTS):
         if target_slug and bp["slug"] != target_slug:
             continue
         f_mp4 = _resolve_flow_clip(bp)
@@ -1271,33 +1419,41 @@ def run_idle_flow_quality_retrofit_cycle(
         art_p = NB_ASSETS_DIR / bp["art_file"]
         flow_p = FLOW_CLIPS_DIR / (bp.get("flow_clip") or f"{slug}_flow.mp4")
 
-        # Step 1: Generate Nano Banana 2.1 16:9 keyframe (0 credits) if missing
-        used_fresh_project_asset = False
-        if not art_p.exists():
-            img_prompt = bp.get("flow_image_prompt") or _build_domain_flow_prompts({"title": bp.get("title_ko", "")})[0]
-            gen_img = gfc.generate_flow_image_16x9(img_prompt, art_p, headless=True)
-            if not gen_img or not art_p.exists():
+        if bp.get("spatial_track"):
+            import genie3_world_controller as _gwc
+            sp_res = _gwc.ensure_spatial_3d_camera_assets(bp, try_live_labs=False, headless=True)
+            if not sp_res.get("ready"):
                 continue
-            used_fresh_project_asset = True
+            clip_label = Path(sp_res["genie_1080p_mp4"]).name
+        else:
+            # Step 1: Generate Nano Banana 2.1 16:9 keyframe (0 credits) if missing
+            used_fresh_project_asset = False
+            if not art_p.exists():
+                img_prompt = bp.get("flow_image_prompt") or _build_domain_flow_prompts({"title": bp.get("title_ko", "")})[0]
+                gen_img = gfc.generate_flow_image_16x9(img_prompt, art_p, headless=True)
+                if not gen_img or not art_p.exists():
+                    continue
+                used_fresh_project_asset = True
 
-        # Step 2: Generate Veo 3.1 Lite locked-keyframe 8s motion clip (5 credits) if missing or invalid MP4
-        if _resolve_flow_clip(bp) is None:
-            mot_prompt = bp.get("flow_motion_prompt") or gfc.DEFAULT_LOCKED_MOTION_PROMPT
-            gen_vid = gfc.generate_flow_locked_motion_clip(
-                art_p,
-                flow_p,
-                motion_prompt=mot_prompt,
-                lock_end_frame=True,
-                model_name="Veo 3.1 - Lite",
-                use_latest_project_asset=used_fresh_project_asset,
-                headless=True,
-            )
-            if not gen_vid or not flow_p.exists():
-                continue
+            # Step 2: Generate Veo 3.1 Lite locked-keyframe 8s motion clip (5 credits) if missing or invalid MP4
+            if _resolve_flow_clip(bp) is None:
+                mot_prompt = bp.get("flow_motion_prompt") or gfc.DEFAULT_LOCKED_MOTION_PROMPT
+                gen_vid = gfc.generate_flow_locked_motion_clip(
+                    art_p,
+                    flow_p,
+                    motion_prompt=mot_prompt,
+                    lock_end_frame=True,
+                    model_name="Veo 3.1 - Lite",
+                    use_latest_project_asset=used_fresh_project_asset,
+                    headless=True,
+                )
+                if not gen_vid or not flow_p.exists():
+                    continue
+            clip_label = flow_p.name
 
         # Persist dynamic blueprint into script JSON if dynamically generated
         sp = SCRIPTS_DIR / f"{slug}.json"
-        if sp.exists() and slug not in {b["slug"] for b in NANO_BANANA_BLUEPRINTS}:
+        if sp.exists() and slug not in {b["slug"] for b in (*NANO_BANANA_BLUEPRINTS, *SPATIAL_GENIE3_BLUEPRINTS)}:
             try:
                 sdoc = json.loads(sp.read_text(encoding="utf-8"))
                 sdoc["flow_blueprint"] = bp
@@ -1305,7 +1461,7 @@ def run_idle_flow_quality_retrofit_cycle(
             except Exception:
                 pass
 
-        # Step 3: Render KO & EN 1080p + 9:16 Q-#Shorts with the real Veo motion clip!
+        # Step 3: Render KO & EN 1080p + 9:16 Q-#Shorts with the real motion clip!
         for lc in ("ko", "en"):
             render_nano_banana_bundle(bp, lang_code=lc)
 
@@ -1318,7 +1474,7 @@ def run_idle_flow_quality_retrofit_cycle(
         if slug not in (st.get("upgraded_slugs") or []):
             st.setdefault("upgraded_slugs", []).append(slug)
         _save_retrofit_state(st)
-        upgraded_now.append({"slug": slug, "flow_clip": flow_p.name, "swap_info": swap_info})
+        upgraded_now.append({"slug": slug, "motion_clip": clip_label, "swap_info": swap_info})
 
     return {"status": "ok", "upgraded": upgraded_now, "summary": get_flow_retrofit_status_summary()}
 
@@ -1329,6 +1485,8 @@ if __name__ == "__main__":
         print(json.dumps(run_idle_flow_quality_retrofit_cycle(max_topics=1, force=True), ensure_ascii=False, indent=2))
     elif "--retrofit-status" in _sys.argv:
         print(json.dumps(get_flow_retrofit_status_summary(), ensure_ascii=False, indent=2))
+    elif "--render-spatial" in _sys.argv:
+        print(json.dumps(render_all_spatial_genie3_flagships(("ko", "en")), ensure_ascii=False, indent=2))
     else:
         res = render_all_nano_banana_flagships(("ko", "en"))
         print(json.dumps(res, ensure_ascii=False, indent=2))

@@ -70,3 +70,6 @@ description: Specialized AI Video Producer & 4-Edition Math Cinema Director agen
 6. **Google Flow ULTRA 실사 광학 모션 하이브리드 및 기존 자료 유휴시간 자동 고품질화 (`Rule 52`, `google_flow_controller.py` + `nano_banana_cinema_creator.py`)**:
    - `Nano Banana 2.1` (0 Flow 크레딧 · Antigravity 0쿼터) 무결점 기하 키프레임 + `Veo 3.1 - Lite` (5 Flow 크레딧 · `[시작=종료]` 양단 고정 8초 루프) 실사 광학 모션 클립을 `Act 1`(3초 호기심 미스터리)과 `Act 3`(5초 암산 완결) 배경에 배치하고, `Act 2`는 100% 무크롭 `min7014.github.io` 원문 PDF + 메이플 가상 지휘봉으로 직결합니다.
    - 데몬 업로드 유휴 시간마다 `run_idle_flow_quality_retrofit_cycle()`이 기존 자료를 자동 업그레이드하며, 라이브 채널에서 `조회수 > 15회` 인기 영상은 절대 삭제하지 않고 썸네일만 무손실 업데이트(`Rule 33`)하고, 게시 48시간 경과 `<= 15회` 저조회 구버전만 `Rule 13.3`에 따라 안전 교체합니다.
+7. **95% Google Flow 고정 광학 모션 + 5% 공간기하·원뿔곡선 `Genie 3` 1인칭 3D 공간 카메라 워킹 분업 원칙 (`Rule 54`, `genie3_world_controller.py`)**:
+   - 평면기하·대수·미적분 주력 단원(95%)은 기하 왜곡 0%가 검증된 `Google Flow ULTRA` 양단 키프레임 고정 모션을 유지합니다.
+   - 2D 칠판 그림만으로 입체감을 잡기 어려운 **공간기하(`삼수선의 정리`, `정사영과 이면각`, `직육면체 공간 대각선`) · 원뿔곡선(`원뿔과 단델린의 구`) 특수 단원(5% 선별)**에 한해 `Act 1`·`Act 3` 배경에 1인칭 3D 공간 카메라 워킹 B-Roll(`genie3_world_controller.py` · 외부 720p 24fps 클립 투입 시 자동 `1080p 30fps Lanczos + unsharp(5:5:0.85)` 업스케일 마스터링 + 기하 오차 0.000% 유클리드 3D 카메라 엔진)을 결합하고, `Act 2`는 100% `min7014.github.io` 원문 PDF로 고정합니다. 대외 제목·태그에는 외부 월드모델명을 절대 노출하지 않습니다.

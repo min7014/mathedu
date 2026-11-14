@@ -13,7 +13,7 @@ description: Specialized Chief Copyright, Trademark, YouTube YPP Compliance, Sec
 
 | 계층 | 감사 영역 | 핵심 점검 기준 (위반 허용치 `0건`) |
 | :--- | :--- | :--- |
-| **L1** | **등록상표권 감사 (`Rule 51`)** | `SAT®`, `AP®`(College Board), `AMC®`, `AIME®`(MAA), `IB®`(IBO), `Olympiad`/`IMO`, 타 유튜브 채널명, 외부 AI 모델·도구 브랜드명(`Nano Banana`, `Google Flow`, `Veo`, `Gemini Omni` 등) 대외 노출 전면 차단 |
+| **L1** | **등록상표권 감사 (`Rule 51`)** | `SAT®`, `AP®`(College Board), `AMC®`, `AIME®`(MAA), `IB®`(IBO), `Olympiad`/`IMO`, 타 유튜브 채널명, 외부 AI 모델·월드모델 브랜드명(`Nano Banana`, `Google Flow`, `Veo`, `Gemini Omni`, `Project Genie`, `Genie 3` 등) 대외 노출 전면 차단 |
 | **L2** | **저작권 & 원천 자산 순수성 (`Rule 15·51`)** | 전 영상 `pdf_url`의 `https://min7014.github.io/` 100% 일치 검증, 외부 교재·문제집(`쎈`, `블랙라벨`, `시대인재`, `EBS` 등) 복제 ZERO, 절차적 합성 BGM(`ensure_ambient_pad_wav`)만 허용 |
 | **L3** | **유튜브 YPP 심사 방어 (`Rule 35·46·49`)** | 중복 제목 ZERO, 100자 초과/조사 절단 제목 ZERO, `Rule 35` 인간 오리지널 연구 저작물 정통성 고지 포함, 1시간 안티-버스트 간격 준수 |
 | **L4** | **개인 호칭 배제 (`Rule 13.1·38`)** | 개별 강의 영상 제목·자막·설명·재생목록 내 금지된 개인 호칭 노출 차단 |

@@ -230,8 +230,8 @@ def format_executive_briefing(metrics: dict) -> str:
         import nano_banana_cinema_creator as _nbcc_sec
         _fs = _nbcc_sec.get_flow_retrofit_status_summary()
         lines.append(
-            f"🎬 [Google Flow ULTRA 유휴시간 자동 고품질화 현황 (0-쿼터)]\n"
-            f"   • Veo 3.1 양단고정 모션 보유: {_fs.get('total_flow_motion_clips', 0)}주제 | 하이브리드 렌더: {_fs.get('total_hybrid_rendered_slugs', 0)}주제\n"
+            f"🎬 [Google Flow ULTRA(95%) + 공간 3D 카메라(5%) 자동 고품질화 현황 (0-쿼터)]\n"
+            f"   • Veo 3.1 양단고정 모션: {_fs.get('total_flow_motion_clips', 0)}주제 | 공간 3D 카메라: {_fs.get('total_spatial_3d_clips', 0)}주제 | 하이브리드 렌더: {_fs.get('total_hybrid_rendered_slugs', 0)}주제\n"
             f"   • 금일 업그레이드: {_fs.get('today_upgraded_count', 0)}/{_fs.get('daily_cap', 8)} | 저조회 교체: {_fs.get('safe_swapped_count', 0)}건 | >15뷰 보호: {_fs.get('protected_high_view_count', 0)}건"
         )
         lines.append("----------------------------------------------------------------------")
@@ -474,7 +474,7 @@ def build_live_agent_boardroom_transcript(topic_slug: str = "") -> str:
         "━━━━━━━━━━━━━━━━━━",
         f"👔 [수석 비서실장 · secretary]:\n\"방금 렌더링 완료된 `{slug}` ({title_ko}, 총 {page_cnt}페이지)의 수식·시각·저작권·수익 퍼널 교차 검수 결과를 보고해 주십시오.\"",
         f"👨‍🏫 [수석 수학교사 · mathteacher]:\n\"원문 자료({pdf_url}) {page_cnt}페이지 전수 대조 완료했습니다. 출발 가정({hyp_ko[:46]}...) ➔ 핵심 발상({aux_ko[:46]}...) ➔ 결론({conc_ko[:46]}...) 및 국제 표준 영문 표기(`{title_en[:45]}`) 수학적 오류 0건입니다.\"",
-        f"🎬 [수석 영상 프로듀서 · Video_Creator]:\n\"원문 `1페이지 = 1장면` 무가림 1080p 본편({dur_min}분) 및 1.5초 패턴 인터럽트 Q-#Shorts 렌더링을 완료했으며, 유휴시간 Google Flow ULTRA 광학 모션 클립도 현재 {flow_info.get('total_flow_motion_clips', 0)}개 단원 가동 중입니다.\"",
+        f"🎬 [수석 영상 프로듀서 · Video_Creator]:\n\"원문 `1페이지 = 1장면` 무가림 1080p 본편({dur_min}분) 및 1.5초 패턴 인터럽트 Q-#Shorts 렌더링을 완료했으며, 평면 광학 모션 {flow_info.get('total_flow_motion_clips', 0)}주제·공간기하 3D 카메라 {flow_info.get('total_spatial_3d_clips', 0)}주제 하이브리드 트랙이 가동 중입니다.\"",
         f"🎨 [수석 디자인 디렉터 · designer]:\n\"사색적 블루·에메랄드·앰버 팔레트(적색 배제)와 메이플 가상 지휘봉 9px 외곽 포인팅을 적용해 원문 도형 침범 0픽셀입니다.\"",
         f"🛠️ [수석 수학공학 SW 아키텍트 · MathLab_Developer]:\n\"분할 실습관({board_url})에서 자체 제작 `MathLab v1.4` 동적 작도 프리셋이 즉시 연동됩니다.\"",
         f"💼 [수석 재무·수익화 본부장 · finance]:\n\"본편({dur_min}분)은 【{midroll_ok}】으로 분류되었으며, 2시간 간격 시드 독점 발행 및 Q-#Shorts 클리프행어 브릿지로 본편 시청시간·구독 전환을 유도합니다.\"",
