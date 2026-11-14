@@ -1246,6 +1246,10 @@
       const ideaYtEn = (catEntry && catEntry.creative_idea_youtube_urls && catEntry.creative_idea_youtube_urls.en) || '';
       const ideaShortMp4Ko = (catEntry && catEntry.creative_idea_shorts_urls && catEntry.creative_idea_shorts_urls.ko) || '';
       const ideaShortMp4En = (catEntry && catEntry.creative_idea_shorts_urls && catEntry.creative_idea_shorts_urls.en) || '';
+      const issueYtKo = (catEntry && catEntry.issue_insight_urls && catEntry.issue_insight_urls.ko) || '';
+      const issueYtEn = (catEntry && catEntry.issue_insight_urls && catEntry.issue_insight_urls.en) || '';
+      const issueShortKo = (catEntry && catEntry.issue_insight_shorts_urls && catEntry.issue_insight_shorts_urls.ko) || '';
+      const issueShortEn = (catEntry && catEntry.issue_insight_shorts_urls && catEntry.issue_insight_shorts_urls.en) || '';
 
       const slugKey = (catEntry && catEntry.slug)
         || (vaultEntry && (VAULT_MAP[pdfSlug] ? pdfSlug : webSlug))
@@ -1273,6 +1277,10 @@
         ideaYtEn: ideaYtEn.trim(),
         ideaShortMp4Ko: ideaShortMp4Ko.trim(),
         ideaShortMp4En: ideaShortMp4En.trim(),
+        issueYtKo: issueYtKo.trim(),
+        issueYtEn: issueYtEn.trim(),
+        issueShortKo: issueShortKo.trim(),
+        issueShortEn: issueShortEn.trim(),
         hasShortsReady: !!(shortKo || shortEn || shortMp4Ko || shortMp4En),
         hasScriptReady: !!catEntry,
         pageCount: (catEntry && catEntry.page_count) || (vaultEntry && vaultEntry.page_count) || 0,
@@ -1337,6 +1345,10 @@
             _ideaYtEn: vInfo.ideaYtEn,
             _ideaShortMp4Ko: vInfo.ideaShortMp4Ko,
             _ideaShortMp4En: vInfo.ideaShortMp4En,
+            _issueYtKo: vInfo.issueYtKo,
+            _issueYtEn: vInfo.issueYtEn,
+            _issueShortKo: vInfo.issueShortKo,
+            _issueShortEn: vInfo.issueShortEn,
             _hasShortsReady: vInfo.hasShortsReady,
             _hasScriptReady: vInfo.hasScriptReady,
             _pageCount: vInfo.pageCount,
@@ -1459,6 +1471,12 @@
                     <span style="font-weight:800;color:#1d4ed8;">🇺🇸 EN</span>
                     <a href="${item._ytEn}" target="_blank" rel="noopener" class="yt-link-url">${item._ytEn}</a>
                     <button type="button" class="mini-play-btn en" onclick="openCinemaForItem(${itemIdx}, 'en')">▶ Full EN</button>
+                  </div>
+                ` : ''}
+                ${(item._issueYtKo || item._issueYtEn) ? `
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    ${item._issueYtKo ? `<button type="button" class="yt-badge-btn" style="background:#ecfdf5;color:#047857;border-color:#6ee7b7;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'issue_ko')">🧭 🇰🇷 수학 이슈 × 수학교육 통찰 (1080p)</button>` : ''}
+                    ${item._issueYtEn ? `<button type="button" class="yt-badge-btn" style="background:#ecfdf5;color:#065f46;border-color:#6ee7b7;font-weight:800;" onclick="openCinemaForItem(${itemIdx}, 'issue_en')">🧭 🇺🇸 Math Issue × Insight (EN)</button>` : ''}
                   </div>
                 ` : ''}
                 ${(item._qMp4Ko || item._qMp4En) ? `
@@ -1607,6 +1625,12 @@
                     <a href="${item._ytEn}" target="_blank" rel="noopener" class="yt-link-url" style="font-size:0.75rem;">${item._ytEn}</a>
                   </div>
                 ` : ''}
+                ${(item._issueYtKo || item._issueYtEn) ? `
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    ${item._issueYtKo ? `<button type="button" class="yt-badge-btn" style="background:#ecfdf5;color:#047857;border-color:#6ee7b7;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'issue_ko')">🧭 🇰🇷 수학 이슈 × 수학교육 통찰 (1080p)</button>` : ''}
+                    ${item._issueYtEn ? `<button type="button" class="yt-badge-btn" style="background:#ecfdf5;color:#065f46;border-color:#6ee7b7;font-weight:800;" onclick="openCinemaForItem(${itemIdx}, 'issue_en')">🧭 🇺🇸 Math Issue × Insight (EN)</button>` : ''}
+                  </div>
+                ` : ''}
                 ${(item._qMp4Ko || item._qMp4En) ? `
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
                     ${item._qMp4Ko ? `<button type="button" class="yt-badge-btn" style="background:#f0f9ff;color:#0369a1;border-color:#7dd3fc;font-weight:900;" onclick="openCinemaForItem(${itemIdx}, 'question_ko')">❓ 🇰🇷 질문하는 수업 버전 (1080p) 재생</button>` : ''}
@@ -1698,7 +1722,13 @@
       let targetUrl = '';
       let localShortMp4 = '';
       let badgeLabel = '@min7014_ai';
-      if (mode === 'idea_ko' && item._ideaMp4Ko) {
+      if (mode === 'issue_ko' && item._issueYtKo) {
+        targetUrl = item._issueYtKo;
+        badgeLabel = '🧭 🇰🇷 [수학 분야 화두 × 오리지널 증명] 차별화된 수학교육 통찰 (1080p)';
+      } else if (mode === 'issue_en' && item._issueYtEn) {
+        targetUrl = item._issueYtEn;
+        badgeLabel = '🧭 🇺🇸 [Math Issue × Original Proof] Differentiated Math-Ed Insight (1080p)';
+      } else if (mode === 'idea_ko' && item._ideaMp4Ko) {
         targetUrl = item._ideaYtKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
         localShortMp4 = item._ideaMp4Ko;
         badgeLabel = '🌟 🇰🇷 [창의 아이디어 시네마 · Beyond PDF] 5막 스토리텔링 & 절차적 애니메이션 (1080p)';
