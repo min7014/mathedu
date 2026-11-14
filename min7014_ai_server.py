@@ -8,6 +8,7 @@ http://localhost:8765 에서 동작하는 @min7014_ai 전용 로컬 웹 대시�
 
 import json
 import subprocess
+import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 import sys
 import threading
 import time

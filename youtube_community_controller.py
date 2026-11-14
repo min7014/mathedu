@@ -27,6 +27,8 @@ import sys
 import time
 from pathlib import Path
 
+import silent_subprocess  # noqa: F401 — Playwright node.exe 및 하위 프로세스 완전 무창 강제
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -67,6 +69,11 @@ def _release_robot_lock() -> None:
 
 def _launch_robot_context(p, headless: bool = True):
     ROBOT_PROFILE_DIR.mkdir(parents=True, exist_ok=True)
+    extra_args = ["--disable-blink-features=AutomationControlled"]
+    if headless:
+        extra_args.extend(["--window-position=-32000,-32000", "--silent-launch", "--no-startup-window"])
+    else:
+        extra_args.append("--start-maximized")
     for ch_name in ("chrome", "msedge"):
         try:
             return p.chromium.launch_persistent_context(
@@ -76,7 +83,7 @@ def _launch_robot_context(p, headless: bool = True):
                 user_agent=CHROME_UA,
                 viewport={"width": 1440, "height": 960},
                 ignore_default_args=["--enable-automation"],
-                args=["--disable-blink-features=AutomationControlled", "--start-maximized"],
+                args=extra_args,
             )
         except Exception:
             continue
@@ -86,7 +93,7 @@ def _launch_robot_context(p, headless: bool = True):
         user_agent=CHROME_UA,
         viewport={"width": 1440, "height": 960},
         ignore_default_args=["--enable-automation"],
-        args=["--disable-blink-features=AutomationControlled"],
+        args=extra_args,
     )
 
 

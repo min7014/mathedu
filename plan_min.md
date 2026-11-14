@@ -355,6 +355,7 @@ python -X utf8 pr.py status
 - ✅ **44. 수익 창출보다 우선하는 제1원칙: 수학적 오류 ZERO 무결성 및 순수 수학교육 기여 절대 원칙 (`2026-11-11` 신설)**
 - ✅ **45. 24/7 무충돌 2계층 텔레그램(`@anti7014_bot`) 상시 연결 아키텍처 원칙 (`2026-11-11` 신설)**
 - ✅ **46. AI 크레딧 비용 80%+ 절감 및 실질적 유튜브·웹 현금흐름 자생 아키텍처 원칙 (`2026-11-11` 신설)**
+- ✅ **47. 유튜브(`@min7014_ai`) 단독 최우선 수익 창출 및 0-쿼터 YouTube Studio 직결 성장 원칙 (`2026-11-11` 확정)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
@@ -545,3 +546,6 @@ python -X utf8 pr.py status
   - 민은기 선생님의 확정 지시(`"난 그래도 유튜브에서 일단 수익을 얻도록 하겠다."`)에 따라 모든 수익화 역량을 **`@min7014_ai` 유튜브 채널 자체의 YPP 1단계(500명·3,000시간) ➔ 2단계(1,000명·4,000시간) 최단기 돌파**에 100% 집중함.
   - `youtube_community_controller.py` v2.0을 구축하여 YouTube Data API 쿼터를 단 1도 쓰지 않고 `.yt_chrome_robot_profile` 스튜디오 세션을 통해 **① 전 `#Shorts`·`Q-#Shorts` 하단 `관련 동영상(1080p 본편/마스터클래스)` 자동 바인딩(90분 주기)** 및 **② 무스포일러 소크라테스 5초 기하·대수 퀴즈 커뮤니티 포스트 자동 발행(12시간 주기)**을 상시 가동함.
   - `finance.py`의 4:2 황금비 엔진에 채널 내 최고 조회수(599뷰, 평균 대비 18배)가 입증된 **`질문형 Q-#Shorts`(1,065편 대기)** 및 **`질문하는 수업 1080p`(2,032편 대기)** 업로드를 최우선 순위로 해금함.
+- **[2026-11-14 추가 확정 · 정책 48] 전 시스템 백그라운드 완전 무창(Zero-Popup / `CREATE_NO_WINDOW`) 아키텍처 전환 완료**:
+  - 원인 규명: `pythonw.exe`(콘솔 없는 GUI 프로세스)로 가동 중인 24/7 데몬이 하위 콘솔 도구(`ffmpeg`, `ffprobe`, `git`, `powershell`, Playwright `node.exe`)를 `CREATE_NO_WINDOW` 없이 호출할 때 Windows 커널이 새 콘솔 창을 순간 생성하던 현상 및 `\Mathedu_Chairman_7AM_Briefing` 스케줄러가 `python.exe`로 등록되어 있던 문제를 전수 적출함.
+  - 해결 조치: ① 전역 서브프로세스 무창 후킹 모듈(`silent_subprocess.py`) 구축 및 전체 17개 실행 스크립트 일괄 적용, ② `powershell.exe` 경유 없는 순수 `pythonw.exe` 직접 스폰 및 Win32 `TerminateProcess` 전환, ③ `\Mathedu_*` 3대 작업 스케줄러 전수 `pythonw.exe` + `Hidden=True` 적용 완료.

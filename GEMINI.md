@@ -334,3 +334,10 @@
   1. **[스튜디오 독점 `관련 동영상(Related Video)` 100% 자동 바인딩 (`youtube_community_controller.py`, API 쿼터 소모 0)]**: 공식 Data API가 지원하지 않는 Shorts `관련 동영상` 기능을 `.yt_chrome_robot_profile` 브라우저 세션으로 직접 제어하여, 채널 조회수의 93.7%를 견인하는 모든 `#Shorts`·`Q-#Shorts` 하단에 해당 주제의 1080p 풀버전 본편 또는 25분+ 마스터클래스 바로가기 버튼을 90분 주기로 자동 연결합니다.
   2. **[최고 성과 포맷 `질문형 Q-#Shorts` (평균 대비 18배 조회수 검증) + `질문하는 수업 1080p` 전수 해금 (`finance.py`)]**: 실제 채널 데이터에서 최고 조회수(`9L_15T8bzS8`, 599뷰)를 기록한 소크라테스 발문형 `Q-#Shorts`(기제작 1,065편)와 `질문하는 수업 1080p`(기제작 2,032편)를 일일 4:2 황금비 업로드 엔진의 최우선 슬롯에 통합 가동합니다.
   3. **[비구독자 홈 피드 노출용 무스포일러 5초 수학 퀴즈 커뮤니티 자동 연재 (`@min7014_ai/posts`, API 쿼터 소모 0)]**: 보기 내 정답 스포일러(`✅`)를 제거하여 투표율·댓글 토론·마스터클래스 클릭을 동시에 끌어올리는 소크라테스 5초 시각 수학 퀴즈를 12시간 간격으로 자동 발행합니다.
+
+## 48. 백그라운드 프로세스 및 외부 도구 완전 무창(Zero-Popup / `CREATE_NO_WINDOW`) 실행 절대 원칙 (`2026-11-14` 확정)
+- **화면 깜빡임(실행창 팝업) ZERO 보장**: 사용자의 컴퓨터 화면에 0.1초라도 검은 콘솔 실행창(`cmd`, `powershell`, `python`, `ffmpeg`, `ffprobe`, `git`, `taskkill`, Playwright `node` 등)이 잠시 뜨거나 깜빡이는 현상을 절대 허용하지 않습니다.
+- **3중 무창 아키텍처 상시 의무 적용**:
+  1. **[전역 `silent_subprocess.py` 후킹 의무화]**: 모든 백그라운드 데몬 및 외부 명령 호출 파이썬 모듈 최상단에 `import silent_subprocess`를 적용하여, `subprocess.Popen`·`subprocess.run`·`os.system` 및 서드파티 라이브러리(Playwright `asyncio` 서브프로세스 등) 전 구간에 `CREATE_NO_WINDOW (0x08000000)` + `STARTUPINFO(STARTF_USESHOWWINDOW, SW_HIDE=0)`를 강제 주입합니다(MSDN 규격상 `CREATE_NO_WINDOW`를 무력화하는 `DETACHED_PROCESS` 및 `CREATE_NEW_CONSOLE` 플래그 자동 제거 포함).
+  2. **[Windows 작업 스케줄러 `\Mathedu_*` 전수 `pythonw.exe` + `Hidden=True` 고정]**: 모든 정기 스케줄러 작업(`\Mathedu_Foundation_24x7_Watchdog`, `\Mathedu_Telegram_24x7_Watchdog`, `\Mathedu_Chairman_7AM_Briefing`)은 콘솔 서브시스템(`python.exe`, `powershell.exe`, `cmd.exe`)을 절대 직접 호출하지 않고 반드시 GUI 서브시스템인 `pythonw.exe`와 `Hidden=True` 설정으로만 구동합니다.
+  3. **[데몬 기동·종료의 순수 Win32 API화 및 오프스크린 헤드리스 브라우저]**: 백그라운드 워커 기동 시 `powershell.exe` 중간 경유 없이 `pythonw.exe`를 직접 스폰(`spawn_windowless_background_python`)하고, 프로세스 종료는 `ctypes` Win32 `TerminateProcess`를 우선 사용하며, 헤드리스 브라우저 자동화 시 `--window-position=-32000,-32000 --silent-launch --no-startup-window`를 기본 적용합니다.

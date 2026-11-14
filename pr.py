@@ -28,6 +28,7 @@ import sys
 import json
 import re
 import subprocess
+import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 from datetime import datetime
 from pathlib import Path
 

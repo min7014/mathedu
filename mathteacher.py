@@ -17,6 +17,7 @@ import sys
 import re
 import json
 import subprocess
+import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 import urllib.request
 
 if hasattr(sys.stdout, "reconfigure"):

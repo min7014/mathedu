@@ -11,6 +11,7 @@ Google 본사 공식 「YouTube Data API v3 할당량 확장 감사 신청서 (Q
 import json
 import os
 import subprocess
+import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 import sys
 import time
 from pathlib import Path

@@ -10,6 +10,7 @@ mathedu 수석 게임 디렉터 에이전트 (GameMaker) CLI 및 관리 엔진.
 import os
 import sys
 import subprocess
+import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

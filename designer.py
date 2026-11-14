@@ -9,6 +9,7 @@ to elevate visual hierarchy, mathematical typography, theme skins, and cognitive
 import os
 import sys
 import subprocess
+import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 """
 Video_Creator (video_creator.py) — mathedu 수석 AI 수학 영상 프로듀서 & 4대 버전(본편 2종 + 숏폼 2종) 시네마 디렉터 에이전트
 ========================================================================================================================

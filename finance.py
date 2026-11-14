@@ -37,6 +37,8 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+import silent_subprocess  # noqa: F401 — ffmpeg/ffprobe 등 전 하위 프로세스 완전 무창(CREATE_NO_WINDOW) 강제
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -1707,7 +1709,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                             return 0
                     q_mp4_f = QUESTION_DIR / f"{c_slug}_q_{lc}.mp4"
                     if not (qyu.get(lc) or "").strip() and q_mp4_f.exists() and q_mp4_f.stat().st_mtime >= r28_cut:
-                        res_q = vmaker.upload_question_slug_to_youtube(c_slug, langs=(lc,), privacy="public")
+                        res_q = vmaker.upload_question_classroom_to_youtube(c_slug, langs=(lc,), privacy="public")
                         if res_q and res_q.get(lc):
                             uploaded_items.append({"type": "question_1080p", "slug": c_slug, "lang": lc, "url": res_q[lc]})
                             return 1

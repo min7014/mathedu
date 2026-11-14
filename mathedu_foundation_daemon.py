@@ -32,6 +32,8 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
+import silent_subprocess  # noqa: F401 — Windows 전 하위 프로세스 완전 무창(CREATE_NO_WINDOW) 강제
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -667,13 +669,30 @@ def _is_daemon_pid_alive(pid_file: Path) -> bool:
         return False
 
 
+def _terminate_pid_silently(pid: int) -> None:
+    if pid <= 0 or pid == os.getpid():
+        return
+    if os.name == "nt":
+        try:
+            import ctypes
+            PROCESS_TERMINATE = 0x0001
+            h = ctypes.windll.kernel32.OpenProcess(PROCESS_TERMINATE, False, int(pid))
+            if h:
+                ctypes.windll.kernel32.TerminateProcess(h, 0)
+                ctypes.windll.kernel32.CloseHandle(h)
+                return
+        except Exception:
+            pass
+    subprocess.run(["taskkill", "/F", "/PID", str(pid)], capture_output=True)
+
+
 def _stop_standalone_upload_only_daemon() -> None:
     """통합 Foundation 데몬이 가동될 때 중복 업로드 충돌 방지를 위해 단독 upload-only 데몬을 정리합니다."""
     if _is_daemon_pid_alive(UPLOAD_ONLY_PID_FILE):
         try:
             up_pid = int(UPLOAD_ONLY_PID_FILE.read_text(encoding="utf-8").strip())
             if up_pid and up_pid != os.getpid():
-                subprocess.run(["taskkill", "/F", "/PID", str(up_pid)], capture_output=True)
+                _terminate_pid_silently(up_pid)
                 print(f"🔄 [Unified Handover] 단독 업로드 전용 데몬(PID={up_pid})을 종료하고 통합 렌더링+업로드 데몬으로 일원화합니다.", flush=True)
         except Exception:
             pass
@@ -691,20 +710,15 @@ def spawn_detached_foundation_daemon() -> str:
     if _is_daemon_pid_alive(FOUNDATION_PID_FILE):
         return FOUNDATION_PID_FILE.read_text(encoding="utf-8").strip()
     _stop_standalone_upload_only_daemon()
-    py_exe = Path(sys.executable)
-    pyw_exe = py_exe.with_name("pythonw.exe")
-    runner = str(pyw_exe if pyw_exe.exists() else py_exe)
-    script = str(Path(__file__).resolve())
-    cmd_line = f'"{runner}" -X utf8 "{script}" --detached-worker'
-    ps_cmd = (
-        "$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create "
-        f"-Arguments @{{CommandLine='{cmd_line}'; CurrentDirectory='{str(ROOT_DIR)}'}}; "
-        "Write-Output $r.ProcessId"
+    new_pid = silent_subprocess.spawn_windowless_background_python(
+        str(Path(__file__).resolve()),
+        extra_args=["--detached-worker"],
+        cwd=str(ROOT_DIR),
     )
-    res = subprocess.run(["powershell", "-NoProfile", "-Command", ps_cmd], capture_output=True, text=True)
-    pid_str = (res.stdout or "").strip().splitlines()[-1].strip()
-    FOUNDATION_PID_FILE.parent.mkdir(parents=True, exist_ok=True)
-    FOUNDATION_PID_FILE.write_text(pid_str, encoding="utf-8")
+    pid_str = str(new_pid) if new_pid > 0 else ""
+    if pid_str:
+        FOUNDATION_PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+        FOUNDATION_PID_FILE.write_text(pid_str, encoding="utf-8")
     return pid_str
 
 

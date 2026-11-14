@@ -32,6 +32,8 @@ import time
 import urllib.request
 from pathlib import Path
 
+import silent_subprocess  # noqa: F401 — Windows 전 하위 프로세스 완전 무창(CREATE_NO_WINDOW) 강제
+
 ROOT_DIR = Path(__file__).resolve().parent
 ENV_FILE = ROOT_DIR / ".env.telegram"
 OFFSET_FILE = ROOT_DIR / ".agents" / "telegram_offset.json"
@@ -195,7 +197,7 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
         try:
             old_pid = int(LISTENER_PID_FILE.read_text(encoding="utf-8").strip())
             if old_pid and old_pid != os.getpid() and _is_pid_alive(LISTENER_PID_FILE):
-                subprocess.run(["taskkill", "/F", "/PID", str(old_pid)], capture_output=True)
+                _terminate_pid_silently(old_pid)
         except Exception:
             pass
     LISTENER_PID_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -588,33 +590,39 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
             await asyncio.sleep(3)
 
 
+def _terminate_pid_silently(pid: int) -> None:
+    if pid <= 0 or pid == os.getpid():
+        return
+    if os.name == "nt":
+        try:
+            import ctypes
+            h = ctypes.windll.kernel32.OpenProcess(0x0001, False, int(pid))
+            if h:
+                ctypes.windll.kernel32.TerminateProcess(h, 0)
+                ctypes.windll.kernel32.CloseHandle(h)
+                return
+        except Exception:
+            pass
+    subprocess.run(["taskkill", "/F", "/PID", str(pid)], capture_output=True)
+
+
 def _spawn_detached_watchdog(force_restart: bool = False) -> str:
     if not force_restart and _is_pid_alive(PID_FILE):
         return PID_FILE.read_text(encoding="utf-8").strip()
     if PID_FILE.exists() and _is_pid_alive(PID_FILE):
         try:
             old_pid = int(PID_FILE.read_text(encoding="utf-8").strip())
-            subprocess.run(["taskkill", "/F", "/PID", str(old_pid)], capture_output=True)
+            _terminate_pid_silently(old_pid)
         except Exception:
             pass
-    py_exe = Path(sys.executable)
-    pyw_exe = py_exe.with_name("pythonw.exe")
-    runner = str(pyw_exe if pyw_exe.exists() else py_exe)
-    script = str(Path(__file__).resolve())
-    cmd_line = f'"{runner}" -X utf8 "{script}"'
-    ps_cmd = (
-        "$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create "
-        f"-Arguments @{{CommandLine='{cmd_line}'; CurrentDirectory='{str(ROOT_DIR)}'}}; "
-        "Write-Output $r.ProcessId"
+    new_pid = silent_subprocess.spawn_windowless_background_python(
+        str(Path(__file__).resolve()),
+        cwd=str(ROOT_DIR),
     )
-    res = subprocess.run(
-        ["powershell", "-NoProfile", "-Command", ps_cmd],
-        capture_output=True,
-        text=True,
-    )
-    pid_str = (res.stdout or "").strip().splitlines()[-1].strip()
-    PID_FILE.parent.mkdir(parents=True, exist_ok=True)
-    PID_FILE.write_text(pid_str, encoding="utf-8")
+    pid_str = str(new_pid) if new_pid > 0 else ""
+    if pid_str:
+        PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+        PID_FILE.write_text(pid_str, encoding="utf-8")
     return pid_str
 
 
