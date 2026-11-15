@@ -81,6 +81,7 @@ PUBLIC_GENERATOR_MODULES = [
     "creative_idea_cinema.py",
     "video_creator.py",
     "secretary.py",
+    "build_min7014_bridge_cinema.py",
 ]
 
 
