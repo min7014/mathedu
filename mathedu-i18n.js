@@ -1324,20 +1324,176 @@
     "@min7014_ai 영어 URL (https://youtu.be/...)": "@min7014_ai English URL (https://youtu.be/...)",
     "상단 [전 페이지 나레이션 자동 생성] 버튼을 누르거나 직접 입력하세요.": "Click [Auto-Generate Full-Slide Narration] above or edit directly here.",
 
-    // offline/index.html Smart Search
+    // offline/index.html Smart Search & Page Titles & Tooltips & Auth/Cinema Modals
     "🔍 자연어 스마트 문제 검색 (예: \"9월 고3 확통 문제들\", \"10월 고3 미적분\", \"6월 기하 30번\", \"정규분포\")": "🔍 Smart Problem Search (e.g. \"Sep G12 Prob & Stats\", \"Oct G12 Calculus\", \"Jun Geometry #30\", \"normal distribution\")",
     "💡 원클릭 예시 검색:": "💡 Quick Filter Examples:",
     "✨ 9월 고3 확통 문제들": "✨ Sep G12 Prob & Stats",
     "📘 10월 고3 확통 문제들": "📘 Oct G12 Prob & Stats",
     "📐 9월 고3 미적분 문제들": "📐 Sep G12 Calculus",
-    "🧭 10월 고3 기하 문제들": "🧭 Oct G12 Geometry"
+    "🧭 10월 고3 기하 문제들": "🧭 Oct G12 Geometry",
+
+    // Exact Page <title> & Tooltip / Aria-Label Mappings
+    "수학의 성전 3D : 16,548 디딤돌 수학 퀘스트 · mathedu": "Sanctuary of Math 3D: 16,548 Stepping-Stone Math Quests · mathedu",
+    "새 문제 출제 & 퀴즈 생성 · mathedu": "Create New Math Problem & Quiz Builder · mathedu",
+    "mathedu · 수학자료실 · 오프라인 전체 문제 보관함": "mathedu · Math Archive · Complete Offline Quiz Vault",
+    "안티그래비티 AI 퀴즈 제작 대기실 · mathedu": "Antigravity AI Quiz Builder · mathedu",
+    "[전 연도·전 학년 수학 기출 통합 플레이어] 2006~2027학년도 고1·고2·고3 16,548문항 단계별 디딤돌 · mathedu 수학자료실": "[All-Years Official Math Exam Player] 2006–2027 Grade 10–12 16,548 Step-by-Step Problems · mathedu Math Archive",
+    "수학자료실(min7014.github.io) 다국어 PDF 강의 영상 스튜디오 · KO/EN 유튜브 저장 허브 | mathedu": "Math Archive (min7014.github.io) Multilingual PDF Video Studio · KO/EN YouTube Hub | mathedu",
+    "대상 학년": "Target Grade",
+    "시행월": "Exam Month",
+    "다크 벨벳 네온 시네마 테마 전환": "Toggle Dark Velvet Neon Cinema Theme",
+    "새로고침": "Refresh",
+    "맨 위로": "Back to Top",
+    "[2025학년도 고3 공통(수학I·II)] 기출 변형 퀴즈": "[2025 AY Grade 12 Math I·II] Adapted Exam Quiz",
+
+    // mathedu-auth.js Modals & Buttons
+    "또는 기타 로그인 방식": "Or sign in another way",
+    "아이디 또는 이메일": "Username or Email",
+    "비밀번호": "Password",
+    "비밀번호 입력": "Enter password",
+    "예: teacher 또는 이메일": "e.g. teacher or email",
+    "🔑 아이디 로그인": "🔑 ID Sign In",
+    "⚡ 교사 체험 계정": "⚡ Teacher Demo Account",
+    "🔑 로그인하기": "🔑 Sign In",
+    "🔐 mathedu 정식 회원 서비스": "🔐 mathedu Official Member Sign-In",
+    "🌐 Google 공식 인증 지원": "🌐 Official Google Sign-In",
+    "Google 계정으로 1초 가입 및 로그인": "1-Click Sign Up & Sign In with Google",
+    "별도의 비밀번호 없이 Google 계정으로 안전하게 정식 회원가입 및 즉시 로그인이 완료됩니다.": "Sign up and sign in securely with your Google account — no separate password needed.",
+    "🧑‍🎓 비회원 간편 식별": "🧑‍🎓 Quick Guest Access",
+    "학습자 이름 & 간편 비밀번호": "Learner Name & Quick PIN",
+    "이름과 간편 비밀번호(4자리)를 입력하시면 동일한 학습자로 인식되어, 풀이 기록이 보존되고 나중에 언제든 이어서 풀 수 있습니다.": "Enter your name and a 4-digit PIN to save and resume your problem-solving progress anytime.",
+    "이름 또는 닉네임": "Name or Nickname",
+    "예: 김철수": "e.g. Alex",
+    "간편 비밀번호 (4자리 권장)": "Quick PIN (4+ digits)",
+    "👤 학습자 확인 및 기록 불러오기": "👤 Verify Learner & Load Progress",
+    "🌐 Google 공식 인증 전환": "🌐 Upgrade with Google",
+    "Google 계정으로 정식 회원 전환": "Upgrade to Full Account with Google",
+    "Google 계정으로 정식 회원 전환 (기록 100% 승계)": "Upgrade with Google (Keep 100% of Progress)",
+    "회원 구분 선택": "Select Member Role",
+    "👩‍🏫 초·중·고 수학교사": "👩‍🏫 K-12 Math Teacher",
+    "🎓 학원·전문 수학강사": "🎓 Math Instructor / Tutor",
+    "🔬 수학교육 연구원": "🔬 Math Education Researcher",
+    "🧑‍🎓 예비교사·사범대생": "🧑‍🎓 Pre-Service Teacher",
+    "🌟 학생·수학 정회원": "🌟 Student / Learner",
+    "소속 학교 / 기관 (선택)": "School / Institution (Optional)",
+    "📦 오프라인 전체 문제 보관함": "📦 Complete Offline Problem Vault",
+    "🔒 개인정보처리방침": "🔒 Privacy Policy",
+    "🗑️ 내 학습 기록 전체 삭제": "🗑️ Clear All My Progress",
+
+    // video_board.html Cinema Stage, Active Thinking 4-Stage Workbench & 8 Neon Simulators
+    "🧭 🇰🇷 [수학 분야 화두 × 오리지널 증명] 차별화된 수학교육 통찰 (1080p)": "🧭 🇰🇷 [Math Issue × Original Proof] Deep Math-Ed Insight (1080p)",
+    "🌟 🇰🇷 [창의 아이디어 시네마 · Beyond PDF] 5막 스토리텔링 & 절차적 애니메이션 (1080p)": "🌟 🇰🇷 [Visual Idea Math Cinema · Beyond PDF] 5-Act Procedural Animation (1080p)",
+    "🌟📱 🇰🇷 [창의 아이디어 숏폼 · Idea-#Shorts] (9:16)": "🌟📱 🇰🇷 [Visual Idea #Shorts] (9:16)",
+    "❓ 🇰🇷 [질문하는 수학 수업 버전] Notice & Wonder · What-If-Not (1080p)": "❓ 🇰🇷 [Question-Asking Classroom Edition] Notice & Wonder · What-If-Not (1080p)",
+    "🎬 🇰🇷 @min7014_ai v4.0 Viral Cinema 마스터 본편 (1080p)": "🎬 🇰🇷 @min7014_ai v4.0 Visual Cinema Master (1080p)",
+    "📱 🇰🇷 @min7014_ai v4.0 9:16 숏폼 (#Shorts)": "📱 🇰🇷 @min7014_ai v4.0 9:16 #Shorts",
+    "🇰🇷 @min7014_ai 한국어 설명영상 (YouTube)": "🇰🇷 @min7014_ai Korean Explanation (YouTube)",
+    "🎬 @min7014 원본 해설 영상": "🎬 @min7014 Original Proof Video",
+    "🎬 @min7014 원본 영상": "🎬 @min7014 Original Video",
+    "🏛️ @min7014_ai 오리지널 PDF 정주행 마스터클래스 (YouTube 유효 시청시간 100% 적립)": "🏛️ @min7014_ai Original PDF Complete Masterclass",
+    "🇰🇷 YouTube 본편 (16:9)": "🇰🇷 YouTube Full (KO 16:9)",
+    "❓ 🇰🇷 질문하는 수업 버전 (1080p)": "❓ 🇰🇷 Inquiry Edition (KO 1080p)",
+    "🌟 🇰🇷 창의 아이디어 시네마 (1080p)": "🌟 🇰🇷 Idea Cinema (KO 1080p)",
+    "🎬 🇰🇷 v4.0 마스터 (1080p)": "🎬 🇰🇷 v4.0 Master (KO 1080p)",
+    "📱 🇰🇷 일반형 숏폼 (9:16)": "📱 🇰🇷 Standard Shorts (KO 9:16)",
+    "❓📱 🇰🇷 질문형 숏폼 (9:16)": "❓📱 🇰🇷 Question Shorts (KO 9:16)",
+    "🧠 [능동적 수학 사고 4단계 워크벤치] 그냥 보지 말고 내 손과 머리로 먼저 재발명하세요!": "🧠 [4-Stage Active Mathematical Thinking Workbench] Reinvent the proof before watching!",
+    "📐 MathLab에서 직접 움직여 보기 ↗": "📐 Explore Dynamically in MathLab ↗",
+    "영상을 매끄럽게 구경만 하면": "Passively watching a smooth video creates an ",
+    "'이해했다는 착각'": "'illusion of understanding'",
+    "에 빠집니다. 아래": ". Click ",
+    "1단계 예측": "Stage 1 Prediction",
+    "과": " and ",
+    "2단계 제1보조선 발상": "Stage 2 First Auxiliary Idea",
+    "을 먼저 클릭한 뒤 영상을 재생해 보세요!": " before pressing Play!",
+    "1️⃣ [재생 전 직관 예측 걸기]": "1️⃣ [Pre-Play Intuition Prediction] Key idea behind ",
+    "의 핵심 열쇠는 어디에 있을까요?": "?",
+    "🅰️ 복잡한 수식·공식 대입이 필수일 것 같다": "🅰️ Likely requires heavy algebraic substitution",
+    "🅱️ 보조선·대칭·불변량 하나로 단숨에 풀릴 것 같다": "🅱️ One auxiliary line, symmetry, or invariant unlocks it",
+    "🔍 특수한 경우(0·직각·중점)부터 실험해 보고 싶다": "🔍 Test a special case (0°, right angle, midpoint) first",
+    "2️⃣ [사고 정지 4초 구간 · 나만의 제1발상 선택] 여러분이라면 어떤 첫 아이디어를 쓰시겠습니까?": "2️⃣ [4-Sec Contemplation Pause · Pick Your 1st Auxiliary Idea] Which strategy would you try first?",
+    "🪞 대칭이동·거울점": "🪞 Reflection & Mirror Point",
+    "📐 수선·직각 분해": "📐 Altitude & Right-Triangle Split",
+    "📏 평행선·중점 연결": "📏 Parallel Line & Midpoint",
+    "🟩 넓이 보존·등적변형": "🟩 Area-Preserving Shear",
+    "🔢 나머지·차 불변량": "🔢 Difference / Remainder Invariant",
+    "📈 매개변수·그래프화": "📈 Parameter & Graph View",
+    "⚡": "⚡ ",
+    "3단계 반례·경계 점검 (Lakatos):": "Stage 3 Boundary & Counterexample Check (Lakatos):",
+    "어떤 전제 조건이 빠지면 이 정리가 깨질까요?": "Which missing hypothesis would break this theorem?",
+    "4단계 조건 변형 발명 (What-If-Not):": "Stage 4 Condition Variation (What-If-Not):",
+    "조건을 하나 바꾼 나만의 새 질문이나 발견을 아래에 남겨 보세요!": "Modify one condition and record your own new mathematical question below!",
+    "🙋 내가 먼저 떠올린 보조선이나 '만약 조건을 바꾸면(What-If-Not)?' 아이디어를 기록하세요!": "🙋 Record your auxiliary line idea or 'What-If-Not?' variation here!",
+    "💾 내 능동 사고 노트 저장": "💾 Save My Thinking Note",
+    "🌟 [8대 창의 수학 네온 시뮬레이터] 슬라이더를 움직여 불변량을 직접 실험하세요!": "🌟 [8 Interactive Neon Math Simulators] Drag the sliders to test invariants live!",
+    "🖨️ 교실 QR 탐구 활동지 인쇄": "🖨️ Print Classroom QR Worksheet",
+    "🔔 @min7014_ai 1초 구독": "🔔 Subscribe to @min7014_ai",
+    "🌳 피타고라스": "🌳 Pythagoras",
+    "📐 체바·메넬라우스": "📐 Ceva & Menelaus",
+    "🪐 타원 레이저": "🪐 Ellipse Optics",
+    "📈 미적분·리만": "📈 Calculus & Riemann",
+    "🌊 단위원 사인파": "🌊 Unit Circle Sine",
+    "🌻 황금비 나선": "🌻 Golden Spiral",
+    "🎲 갈톤 정규분포": "🎲 Galton Normal Bell",
+    "⭕ 원주각·방멱": "⭕ Inscribed Angle",
+    "🎛️ 가지 각도 / 파라미터 A": "🎛️ Branch Angle / Parameter A",
+    "🎚️ 프랙탈 세대 / 분할 수 B": "🎚️ Fractal Depth / Subdivisions B",
+    "🎛️ 직각삼각형 예각 (15°~75°)": "🎛️ Right-Triangle Acute Angle (15°–75°)",
+    "🎚️ 프랙탈 피어나는 세대 (1~6단)": "🎚️ Fractal Branch Depth (1–6)",
+    "🎛️ 내부 교점 P 좌우 이동": "🎛️ Interior Point P Horizontal Shift",
+    "🎚️ 내부 교점 P 상하 이동": "🎚️ Interior Point P Vertical Shift",
+    "🎛️ 레이저 광선 진행률 (0~100%)": "🎛️ Laser Ray Progress (0–100%)",
+    "🎚️ 타원 이심률 스케일 (20~80)": "🎚️ Ellipse Eccentricity Scale (20–80)",
+    "🎛️ 할선 Δx 수렴 위치": "🎛️ Secant Δx Convergence",
+    "🎚️ 리만 적분 기둥 수 N (4~48)": "🎚️ Riemann Rectangles N (4–48)",
+    "🎛️ 단위원 각도 θ (2°~75°)": "🎛️ Unit Circle Angle θ (2°–75°)",
+    "🎚️ 파동 주파수 배율 (1~4배)": "🎚️ Wave Frequency Multiplier (1–4×)",
+    "🎛️ 해바라기 씨앗 수 (20~144개)": "🎛️ Floret Count (20–144)",
+    "🎚️ 회전각 (135°~140°)": "🎚️ Divergence Angle (135°–140°)",
+    "🎛️ 낙하 구슬 진행률 (10~100%)": "🎛️ Bead Drop Progress (10–100%)",
+    "🎚️ 이항분포 층수 n (4~10층)": "🎚️ Galton Rows n (4–10)",
+    "🎛️ 원주 위 점 P 회전각 (15°~165°)": "🎛️ Point P Position on Circle (15°–165°)",
+    "🎚️ 호 AB 중심각 크기 (40°~160°)": "🎚️ Central Angle on Arc AB (40°–160°)",
+    "💡 핵심 수학 원리": "💡 Core Mathematical Principle",
+    "🪜 단계별 시각 증명 디딤돌": "🪜 Step-by-Step Visual Proof Scaffolding",
+    "🌐 min7014.github.io 웹페이지 ↗": "🌐 min7014.github.io Page ↗",
+    "📄 원본 플립북 PDF ↗": "📄 Original Flipbook PDF ↗",
+    "🧭 GeoGebra 인터랙티브 ↗": "🧭 Interactive GeoGebra ↗",
+    "🖨️ 교실 배포용 QR 탐구 활동지 인쇄 (학생 30명 구독 연동)": "🖨️ Print Classroom QR Inquiry Worksheet",
+    "✍️ 이 개념 탈-5지선다 기출 풀기 ➔": "✍️ Solve Constructive Exam Quizzes on This Topic ➔",
+    "🎮 3D 수학 성소 보스 레이드 ➔": "🎮 3D Sanctuary Boss Raid ➔",
+    "📢 이 영상+홈페이지 홍보 카드 복사": "📢 Copy Video + Website Share Card",
+    "🔔 @min7014_ai 유튜브 채널 바로가기 ↗": "🔔 Visit @min7014_ai YouTube Channel ↗",
+
+    // board/*.html SVG, Schematic, Visual Tip & Creative Solver Labels
+    "🎯 최종 정답": "🎯 Final Answer",
+    "다음 단계 연결 ➔": "Next Step ➔",
+    "밑(Base) 통일 & 지수·로그 막대 결합 도형": "Unifying Base & Combining Exponent/Log Bars",
+    "첫째 지수·로그 블록": "1st Exponent/Log Block",
+    "둘째 지수·로그 블록": "2nd Exponent/Log Block",
+    "결합된 전체 지수·로그 막대 (정수·유리수 완성!)": "Combined Total Exponent/Log Bar",
+    "곱셈·나눗셈을 막대 길이의 덧셈·뺄셈으로 시각화": "Multiplication/Division Visualized as Bar Addition/Subtraction",
+    "도식화 핵심 구조 및 수치": "Key Schematic Structure & Values",
+    "① 주어진 조건 · 기하 구조": "① Given Conditions & Structure",
+    "② 핵심 도형 성질 · 변환 공식": "② Core Property & Formula",
+    "③ 결정적 관계식 · 수치 도출": "③ Key Equation & Value",
+    "프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)": "Frame-by-Frame Visual Proof Analysis (PDF & GeoGebra)",
+    "의 역수 구조로 빈틈없이 확장되는 논리적 필연성": " — logical necessity of extending seamlessly to reciprocal exponents",
+    "🚨 이 문제에 이상이 있어요": "🚨 Report an Issue",
+    "어떤 부분이 이상한가요? 자세히 적어주세요.": "What looks wrong? Please describe the issue.",
+    "예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다.": "e.g. Option #3 seems incorrect / Ambiguous condition / Calculation typo.",
+    "신고 접수": "Submit Report",
+    "✅ 신고가 접수되었어요. 확인 후 고칠게요!": "✅ Report received! We will verify and fix it right away.",
+    "개념·증명·문제 통합 검색 (예: 피타고라스, 타원, 미적분 30번)...": "Search proofs, concepts & problems (e.g. Pythagoras, Ellipse, Calculus #30)...",
+    "통합 검색어 지우기": "Clear search query",
+    "통합 검색 실행": "Run global search"
   };
 
   // ══════════════════════════════════════════════════════════════════════════
   // Tier 3: Ordered Mathematical, Curriculum & Pedagogical Term Dictionary
   // Sorted longest-first at initialization so multi-word mathematical terms
   // always translate cleanly before shorter stems.
-  // Rules: Rule 38 (MIN EUN GI uppercase), Rule 51 (zero external trademarks).
+  // Rules: Rule 20 (Standard Math English), Rule 38 (MIN EUN GI), Rule 51.
   // ══════════════════════════════════════════════════════════════════════════
   var RAW_TERM_PAIRS = [
     // Brand & Author (Rule 38)
@@ -1350,6 +1506,7 @@
     ["안티그래비티 AI", "Antigravity AI"],
 
     // Exam & Curriculum Headers (Rule 51 compliant)
+    ["전 연도·전 학년 수학 기출 통합 플레이어", "All-Years Official Math Exam Player"],
     ["대학수학능력시험", "College Entrance Exam"],
     ["전국연합학력평가", "National Academic Assessment"],
     ["한국교육과정평가원", "Curriculum & Evaluation Institute"],
@@ -1406,7 +1563,7 @@
     ["수열·시그마", "Sequences & Sigma Notation"],
     ["내용순 배열", "Topic Tree"],
 
-    // Geometry & Conic Sections
+    // Geometry & Conic Sections (Rule 20 International Standard Mathematical English)
     ["단델린의 구", "Dandelin Spheres"],
     ["단델린 구", "Dandelin Spheres"],
     ["피타고라스 정리", "Pythagorean Theorem"],
@@ -1422,7 +1579,10 @@
     ["파푸스의 중선정리", "Pappus's Centroid Theorem"],
     ["중선정리", "Apollonius's Theorem"],
     ["아폴로니우스의 원", "Circle of Apollonius"],
-    ["삼수선의 정리", "Three Perpendiculars Theorem"],
+    ["삼수선의 정리", "Theorem of Three Perpendiculars"],
+    ["꼬인 위치", "Skew Lines"],
+    ["엇각", "Alternate Interior Angles"],
+    ["동위각", "Corresponding Angles"],
     ["사인법칙", "Law of Sines"],
     ["코사인법칙", "Law of Cosines"],
     ["원주각과 중심각", "Inscribed & Central Angles"],
@@ -1743,8 +1903,8 @@
     ["지수의 확장", "Extension of Exponents"],
     ["수체계", "Number System"],
     ["사칙연산", "Four Operations"],
-    ["유한소수", "Finite Decimal"],
-    ["무한소수", "Infinite Decimal"],
+    ["유한소수", "Terminating Decimal"],
+    ["무한소수", "Non-terminating Decimal"],
     ["순환소수", "Repeating Decimal"],
     ["발판곡면", "Pedal Surface"],
     ["스트링 아트", "String Art"],
@@ -1778,6 +1938,27 @@
     ["환의 넓이", "Annular Area"],
     ["어려운", "Challenging"],
     ["페이지", "Slide"],
+    ["역수 구조", "Reciprocal Structure"],
+    ["역수", "Reciprocal"],
+    ["논리적 필연성", "Logical Necessity"],
+    ["필연성", "Necessity"],
+    ["홀·짝성", "Parity (Odd/Even)"],
+    ["실근", "Real Root"],
+    ["허근", "Imaginary Root"],
+    ["중근", "Double Root"],
+    ["밑", "Base"],
+    ["지수", "Exponent"],
+    ["진수", "Argument"],
+    ["부호", "Sign"],
+    ["개수", "Number"],
+    ["확장", "Extension"],
+    ["보존", "Preservation"],
+    ["중심극한정리", "Central Limit Theorem"],
+    ["가우스", "Gaussian"],
+    ["종 곡선", "Bell Curve"],
+    ["단위원", "Unit Circle"],
+    ["이심률", "Eccentricity"],
+    ["방멱", "Power of a Point"],
   ];
 
   // Sort longest Korean phrase first so longer terms win over substrings
@@ -1953,10 +2134,25 @@
       }
     }
 
-    // 2. Mask LaTeX Math Segments ($...$, $$...$$, \(...\), \[...\])
+    // 2. Mask LaTeX Math Segments ($...$, $$...$$, \(...\), \[...\]) while translating Korean blank labels inside \text{...}
     var mathVault = [];
     var s = normCore.replace(/(\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\])/g, function(match) {
       var cleanedMath = match
+        .replace(/\\text\s*\{\s*\(가\)\s*\}/g, '\\text{(A)}')
+        .replace(/\\text\s*\{\s*\(나\)\s*\}/g, '\\text{(B)}')
+        .replace(/\\text\s*\{\s*\(다\)\s*\}/g, '\\text{(C)}')
+        .replace(/\\text\s*\{\s*\(라\)\s*\}/g, '\\text{(D)}')
+        .replace(/\\text\s*\{\s*가\s*\}/g, '\\text{A}')
+        .replace(/\\text\s*\{\s*나\s*\}/g, '\\text{B}')
+        .replace(/\\text\s*\{\s*다\s*\}/g, '\\text{C}')
+        .replace(/\\text\s*\{\s*라\s*\}/g, '\\text{D}')
+        .replace(/\(가\)/g, '(A)')
+        .replace(/\(나\)/g, '(B)')
+        .replace(/\(다\)/g, '(C)')
+        .replace(/\(라\)/g, '(D)')
+        .replace(/\[가\]/g, '[A]')
+        .replace(/\[나\]/g, '[B]')
+        .replace(/\[다\]/g, '[C]')
         .replace(/일정/g, 'const')
         .replace(/높이/g, 'height')
         .replace(/넓이/g, 'area')
@@ -1973,8 +2169,28 @@
       return lead + s + trail;
     }
 
-    // 3. Structured Dynamic Patterns (Exam Titles, Counters, Badges, Pagination)
+    // 3. Structured Dynamic Patterns (Exam Titles, Counters, Badges, Pagination, Simulators)
     s = s
+      // Korean Blank Labels & Exam Point Badges BEFORE generic word replacement
+      .replace(/\(가\)/g, '(A)')
+      .replace(/\(나\)/g, '(B)')
+      .replace(/\(다\)/g, '(C)')
+      .replace(/\(라\)/g, '(D)')
+      .replace(/\[\s*(\d+)\s*점\s*\]/g, '[$1 pts]')
+      .replace(/(\d+)\s*점짜리/g, '$1-point')
+      .replace(/(\d+)\s*점(?=\s|$|[)\].,·])/g, '$1 pts')
+      .replace(/🎯\s*최종\s*결론\s*:\s*/g, '🎯 Conclusion: ')
+      .replace(/정답\s*:\s*/g, 'Answer: ')
+      // Video Board Neon Simulator Readouts
+      .replace(/★\s*각도\s*([\d.]+)°\s*·\s*(\d+)세대\((\d+)개\s*가지\):\s*왼쪽\(([\d.]+)\)\s*\+\s*오른쪽\(([\d.]+)\)\s*=\s*뿌리\s*넓이\s*([\d.]+)\s*완벽\s*보존!/g, '★ Angle $1° · Depth $2 ($3 branches): Left ($4) + Right ($5) = Root Area $6 (100% Preserved!)')
+      .replace(/★\s*체바\s*넓이\s*밸런스:\s*P\(([^)]+)\)\s*이동\s*무관\s*\(AF\/FB\)×\(BD\/DC\)×\(CE\/EA\)\s*=\s*1\.0000\s*불변!/g, '★ Ceva Area Balance: For any P($1), (AF/FB)×(BD/DC)×(CE/EA) = 1.0000 Invariant!')
+      .replace(/★\s*타원\s*광학\s*불변량:\s*12갈래\s*레이저\s*경로\s*합\s*\|PF1\|\s*\+\s*\|PF2\|\s*=\s*2a\s*일정\s*→\s*제2초점\s*F2\s*동시\s*도착!\s*\((\d+)%\)/g, '★ Ellipse Optical Invariant: All 12 rays keep |PF1| + |PF2| = 2a → Simultaneous Focus at F2! ($1%)')
+      .replace(/★\s*미적분\s*극한\s*실험:\s*리만\s*분할\s*N\s*=\s*(\d+)개\s*·\s*Δx\s*=\s*([\d.]+)\s*→\s*0\s*수렴\s*시\s*정적분\s*넓이\s*일치!/g, '★ Calculus Limit Lab: Riemann N = $1 · As Δx = $2 → 0, Sum Converges to Definite Integral!')
+      .replace(/\(θ→0\s*수렴:\s*1\.0000!\)/g, '(Converges to 1.0000 as θ→0!)')
+      .replace(/★\s*황금비\s*φ\s*=\s*1\.618034\s*·\s*회전각\s*([\d.]+)°\s*\(황금각\s*137\.5°에서\s*(\d+)개\s*씨앗\s*무충돌\s*나선\s*배열!\)/g, '★ Golden Ratio φ = 1.618034 · Angle $1° (Collision-free spiral of $2 seeds at 137.5°!)')
+      .replace(/★\s*갈톤\s*보드\s*중심극한정리:\s*(\d+)단\s*이항분포\s*B\((\d+),\s*0\.5\)\s*→\s*가우스\s*정규분포\s*종\s*곡선\s*100%\s*수렴!/g, '★ Galton Board CLT: $1-Row Binomial B($2, 0.5) → Converges to Gaussian Normal Curve!')
+      .replace(/★\s*원주각\s*불변량:\s*점\s*P가\s*원주\s*위\s*어디로\s*움직여도\(각\s*(\d+)°\)\s*원주각\s*∠APB\s*=\s*([\d.]+)°\s*\(중심각\s*(\d+)°의\s*절반!\)/g, '★ Inscribed Angle Invariant: Wherever P moves ($1°), ∠APB = $2° (Half of Central Angle $3°!)')
+      .replace(/★\s*CORE\s*INVARIANT:\s*모든\s*세대의\s*정사각형\s*넓이\s*합\s*=\s*뿌리\s*정사각형\(([\d.]+)\)\s*100%\s*보존!/g, '★ CORE INVARIANT: Total Area of All Generation Squares = Root Square ($1) 100% Preserved!')
       // Video Board & Studio Dynamic Status Lines
       .replace(/검색\s*결과\s*([\d,]+)개\s*자료\s*\(페이지\s*(\d+)\s*\/\s*(\d+)\)/g, '$1 Topics Found (Page $2 / $3)')
       .replace(/전체\s*([\d,]+)개\s*중\s*([\d,~\-]+)번째\s*자료\s*표시/g, 'Showing $2 of $1 Topics')
@@ -2377,12 +2593,49 @@
         var wrapper = document.createElement(hasBlockChild ? 'div' : 'span');
         wrapper.className = 'bilingual-ko';
         wrapper.setAttribute('data-auto-biko', '1');
-        parent.insertBefore(wrapper, toWrap[0]);
+        if (toWrap[0] && toWrap[0].parentNode === parent) {
+          parent.insertBefore(wrapper, toWrap[0]);
+        } else {
+          parent.appendChild(wrapper);
+        }
         for (var w = 0; w < toWrap.length; w++) {
-          wrapper.appendChild(toWrap[w]);
+          if (toWrap[w] && toWrap[w].parentNode === parent) {
+            wrapper.appendChild(toWrap[w]);
+          }
         }
       }
       parent.setAttribute('data-biko-norm', '1');
+    }
+  }
+
+  function translateMathJaxKoreanBoxes(scope, lang) {
+    if (!scope || !scope.querySelectorAll) return;
+    var nodes = scope.querySelectorAll('mjx-utext, mtext');
+    var koToEnBlank = {
+      '가': 'A', '나': 'B', '다': 'C', '라': 'D',
+      '(가)': '(A)', '(나)': '(B)', '(다)': '(C)', '(라)': '(D)',
+      '[가]': '[A]', '[나]': '[B]', '[다]': '[C]', '[라]': '[D]'
+    };
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      var cur = (n.textContent || '').trim();
+      if (lang === 'en') {
+        if (cur && cur !== n._enMjx && /[가-힣]/.test(cur)) {
+          n._koMjx = n.textContent;
+        }
+        if (typeof n._koMjx === 'string') {
+          var rawTrim = n._koMjx.trim();
+          var rep = koToEnBlank[rawTrim] || toEnglishMathText(rawTrim);
+          if (rep) {
+            n._enMjx = rep;
+            if (n.textContent !== rep) n.textContent = rep;
+          }
+        }
+      } else {
+        if (typeof n._koMjx === 'string' && n.textContent !== n._koMjx) {
+          n.textContent = n._koMjx;
+        }
+      }
     }
   }
 
@@ -2430,6 +2683,30 @@
         }
       }
     }
+
+    // Translate pristine default value on text inputs (e.g., create.html preset title) without touching user edits
+    if ((el.tagName || '').toUpperCase() === 'INPUT') {
+      var tType = (el.getAttribute('type') || 'text').toLowerCase();
+      if (tType === 'text' || tType === 'button' || tType === 'submit') {
+        var curVal = el.value || '';
+        if (lang === 'en') {
+          if (curVal && curVal !== el._enInputVal && /[가-힣]/.test(curVal) && (tType !== 'text' || curVal === el.defaultValue)) {
+            el._koInputVal = curVal;
+          }
+          if (typeof el._koInputVal === 'string' && (curVal === el._koInputVal || curVal === el._enInputVal)) {
+            var trVal = toEnglishMathText(el._koInputVal);
+            if (trVal) {
+              el._enInputVal = trVal;
+              if (el.value !== trVal) el.value = trVal;
+            }
+          }
+        } else {
+          if (typeof el._koInputVal === 'string' && el.value === el._enInputVal) {
+            el.value = el._koInputVal;
+          }
+        }
+      }
+    }
   }
 
   function walkAndTranslateNode(node, lang) {
@@ -2437,7 +2714,7 @@
 
     if (node.nodeType === 3) {
       var val = node.nodeValue;
-      if (!val || !val.trim()) return;
+      if (!val || (!val.trim() && typeof node._koOrig !== 'string')) return;
       var pEl = node.parentNode;
       if (pEl && pEl.tagName === 'OPTION' && !pEl.hasAttribute('value')) {
         pEl.setAttribute('value', pEl.value);
@@ -2449,7 +2726,7 @@
         if (typeof node._koOrig === 'string') {
           var enText = toEnglishMathText(node._koOrig);
           node._enLast = enText;
-          if (enText && enText !== val) {
+          if (typeof enText === 'string' && enText !== val) {
             node.nodeValue = enText;
           }
         }
@@ -2527,7 +2804,11 @@
     if (headerHost) {
       btn.className = 'mathedu-global-lang-btn';
       btn.style.cssText = 'padding:5px 11px;border-radius:999px;border:1px solid rgba(56,189,248,0.45);background:rgba(15,23,42,0.85);color:#f8fafc;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px;';
-      headerHost.insertBefore(btn, headerHost.firstChild);
+      if (headerHost.firstChild && headerHost.firstChild.parentNode === headerHost) {
+        headerHost.insertBefore(btn, headerHost.firstChild);
+      } else {
+        headerHost.appendChild(btn);
+      }
     } else {
       btn.className = 'mathedu-global-lang-btn mathedu-floating-lang-pill';
       // On mathlab.html, place beside top-right controls without blocking toolbar
@@ -2659,6 +2940,7 @@
       var walkRoot = customRoot || document.body;
       if (walkRoot) {
         walkAndTranslateNode(walkRoot, currentLang);
+        translateMathJaxKoreanBoxes(walkRoot, currentLang);
       }
 
       // 8. Typeset MathJax if needed
@@ -2684,7 +2966,15 @@
         var target = m.target;
         if (!target) continue;
         var el = (target.nodeType === 1) ? target : target.parentElement;
-        if (!el || shouldSkipElementSubtree(el)) continue;
+        if (!el) continue;
+        // Catch late MathJax rendering (<mjx-container> inserting <mtext>(가)</mtext>)
+        var tagUpper = (el.tagName || '').toUpperCase();
+        if (tagUpper === 'MJX-CONTAINER' || (typeof el.className === 'string' && el.className.indexOf('mjx-') !== -1)) {
+          var mjxHost = el.closest ? (el.closest('mjx-container') || el) : el;
+          if (pendingRoots.indexOf(mjxHost) === -1) pendingRoots.push(mjxHost);
+          continue;
+        }
+        if (shouldSkipElementSubtree(el)) continue;
         if (pendingRoots.indexOf(el) === -1) {
           pendingRoots.push(el);
         }
@@ -2696,15 +2986,26 @@
           pendingRoots.length = 0;
           return;
         }
-        var batch = pendingRoots.slice(0, 60);
+        var batch = pendingRoots.slice();
         pendingRoots.length = 0;
         _isApplyingDom = true;
         try {
-          for (var j = 0; j < batch.length; j++) {
-            var rootEl = batch[j];
-            if (rootEl && rootEl.isConnected !== false) {
-              normalizeBilingualContainers(rootEl);
-              walkAndTranslateNode(rootEl, 'en');
+          if (batch.length > 60 && document.body) {
+            normalizeBilingualContainers(document.body);
+            walkAndTranslateNode(document.body, 'en');
+            translateMathJaxKoreanBoxes(document.body, 'en');
+          } else {
+            for (var j = 0; j < batch.length; j++) {
+              var rootEl = batch[j];
+              if (rootEl && rootEl.isConnected !== false) {
+                if ((rootEl.tagName || '').toUpperCase() === 'MJX-CONTAINER') {
+                  translateMathJaxKoreanBoxes(rootEl, 'en');
+                } else {
+                  normalizeBilingualContainers(rootEl);
+                  walkAndTranslateNode(rootEl, 'en');
+                  translateMathJaxKoreanBoxes(rootEl, 'en');
+                }
+              }
             }
           }
           updateLanguageButtonsUI('en');
