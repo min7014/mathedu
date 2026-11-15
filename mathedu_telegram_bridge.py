@@ -505,6 +505,34 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         out = run_shell([sys.executable, "-X", "utf8", "youtube_community_controller.py", "--post-community"], timeout=180)
         return f"🗳️ [크레딧 0원 · API 쿼터 0 · 유튜브 커뮤니티 5초 퀴즈 발행 결과]\n{out[-1500:]}"
 
+    if low in ("!구글도구", "!구글", "!구글생태계", "/google", "!google"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import google_ecosystem_orchestrator as geo
+        return geo.format_telegram_google_toolchain_briefing()
+
+    if low in ("!비디오사이트맵", "!사이트맵", "/videositemap", "!videositemap"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import google_ecosystem_orchestrator as geo
+        res = geo.build_google_video_sitemap()
+        return (
+            "🗺️ [크레딧 0원 · Google Video Sitemap 동기화 완료]\n"
+            f"• 사이트맵: https://min7014.github.io/mathedu/video-sitemap.xml\n"
+            f"• 색인 연결 단원: {res.get('indexed_slugs', 0)}주제 | 라이브 영상: {res.get('indexed_live_videos', 0)}편"
+        )
+
+    if low.startswith(("!썸네일테스트", "!ab썸네일", "/abthumb")):
+        parts = cmd.split()
+        target_slug = parts[1].strip() if len(parts) >= 2 else "2022101601"
+        sys.path.insert(0, str(ROOT_DIR))
+        import google_ecosystem_orchestrator as geo
+        ko_p = geo.generate_studio_ab_test_thumbnails(target_slug, lang_code="ko")
+        en_p = geo.generate_studio_ab_test_thumbnails(target_slug, lang_code="en")
+        return (
+            f"🎨 [크레딧 0원 · YouTube Studio A/B/C 테스트 썸네일 3종 세트 생성 완료 ({target_slug})]\n"
+            f"• KO 3종: {', '.join(Path(p).name for p in ko_p)}\n"
+            f"• EN 3종: {', '.join(Path(p).name for p in en_p)}"
+        )
+
     if low in ("!지니", "!공간시네마", "/spatial", "!spatial", "/genie", "!genie"):
         sys.path.insert(0, str(ROOT_DIR))
         import genie3_world_controller as gwc

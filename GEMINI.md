@@ -398,3 +398,24 @@
      - **[Stage 3 · 결론 직전 3초 자기 정당화 (`Pre-Climax Self-Explanation`)]**: Q.E.D. 직전 단계에서 왜 등식·평행·합동이 성립하는지 스스로 근거를 먼저 말하게 합니다.
      - **[Stage 4 · 라카토스 반례·경계 실험 & `What-If-Not` 조건 변형 전이]**: 증명 직후 곡선 차수·초점 위치·기수법 등 조건을 바꿨을 때 명제가 유지되는지 깨지는지 추론하게 하여 사고의 전이를 완성합니다.
   2. **[선형 영상 × 인터랙티브 웹(`video_board.html?slug={slug}&mode=active`) 2계층 결합]**: 모든 능동 사고 영상 설명란과 챕터 타임스탬프에서 `video_board.html?slug={slug}&mode=active`의 **`🧠 능동적 수학 사고 4단계 워크벤치`** 및 `MathLab` 동적 기하 작도실로 1클릭 연결하여, 눈으로 시작한 발상을 손으로 직접 검증·발명하게 합니다.
+
+## 57. 구글 전 생태계 도구 7계층 적재적소 통합 오케스트레이션 및 4대 무분별 남용 통제 원칙 (`2026-11-15` 신설 · `google_ecosystem_orchestrator.py`)
+- **회장님 핵심 지침 (`"가능하면 구글에서 제공하는 모든 도구를 적절하게 사용하여 수학영상을 만들도록 해라."`)**:
+  1. **[구글 7계층 수학영상 도구 적재적소 배분 (`google_ecosystem_orchestrator.py`)]**:
+     - **[L1 · 실시간 검색 수요 레이더 (0원 · 0쿼터)]**: `YouTube Search Autocomplete API`(`suggestqueries.google.com`, `ds=yt`, KO/EN) + `Google News RSS` + `Google Trends Daily RSS`를 결합하여 실제 학생·교사의 실시간 유튜브 검색어를 자동 추출(`auditor` 상표권 정화 후 태그·제작 우선순위 주입)합니다.
+     - **[L2 · 평면·대수 광학 모션 (주력 95%)]**: `Google Flow ULTRA`(`Nano Banana 2.1` 무문자 기하 키프레임 + `Veo 3.1 Lite` `[시작=종료]` 양단고정 8초 루프)를 `Act 1`·`Act 3` 배경에만 배치합니다.
+     - **[L3 · 공간기하·원뿔곡선 3D 카메라 (핀셋 5%)]**: `Google Labs` 공간 월드 트랙(`genie3_world_controller.py`, `720p24 → 1080p30 Lanczos+Unsharp` 마스터링)을 삼수선·정사영·단델린의 구 등 입체 단원 5%에만 선별 투입합니다.
+     - **[L4 · 오픈소스 수학 타이포그래피]**: `Google Fonts Noto Sans Math`(`NotoSansMath-Regular.ttf`, SIL OFL, `.temp/google_fonts/` 로컬 캐시)를 결합하여 유니코드 수학 기호(`∀, ∃, ∈, ≅, ≤, ≥, ∠, △, ⊥, ∥, ∑, ∫, →, ⇒`) 깨짐(`□`)을 0%로 차단합니다.
+     - **[L5 · 제로-과금 방화벽 GenAI SDK]**: 설치된 `google-genai` SDK는 무료 티어 키 명시 시에만 보조 검수로 허용하며, 유료 종량제 호출은 하드 차단(`Rule 50`)하고 기본값은 100% 자체 `mathteacher` 결정론 엔진으로 운용합니다.
+     - **[L6 · YouTube Data API v3 + YouTube Studio 무창 성장 엔진]**: 6개국어 `localizations` 주입, 쇼츠 `관련 동영상` 본편 직결, 커뮤니티 5초 퀴즈 발행, **YouTube Studio `썸네일 테스트 및 비교(Test & Compare)`용 3종 A/B/C HD 썸네일 자동 생성**, 일일 6편 업로드 완수 후에만 가동하는 **쿼터 보호형 `.srt` 자막 동기화**를 수행합니다.
+     - **[L7 · Google 웹 검색 동영상 색인 & 관제]**: 라이브 유튜브 전 영상을 매핑한 구글 공식 규격 **`video-sitemap.xml`** + `robots.txt` 자동 갱신으로 구글 동영상 검색·AI 개요 노출을 극대화하고, `Google Apps Script × Google Sheets`로 실시간 피드백을 관제합니다.
+  2. **[4대 무분별 사용 통제 경계선 (`Rule 33 · Rule 44 · Rule 50` 직언 반영)]**:
+     - **`Google Vids` / AI 통짜 증명 영상 생성 배제**: 보조선·수식 왜곡 방지를 위해 본 증명(`Act 2`)은 타협 없이 100% `min7014.github.io` 300 DPI 원문 PDF + 메이플 가상 지휘봉으로 고정합니다.
+     - **`NotebookLM` 2인 수다형 오디오 본편 배제**: 슬라이드·지휘봉과의 0.1초 시공간 일치를 해치므로 본편 내레이션에서는 배제하고 소크라테스 발문 구조만 `Rule 56`에 흡수합니다.
+     - **`Lyria / MusicFX` 화려한 AI 멜로디 BGM 배제**: 수식 발음 주파수 간섭 및 Content ID 리스크 차단을 위해 `-28dB` 순수 파형 합성 `Cmaj9` 사색 패드를 유지합니다.
+     - **유료 종량제 GCP API(`Vertex AI` / `Cloud TTS`) 및 무분별한 `captions.insert`(건당 400유닛) 호출 금지**: 월 11만 원 고정비 원칙과 일일 6편 업로드 슬롯을 철저히 보호하며, 대외 메타데이터에는 구글 내부 도구명(`Flow`, `Veo`, `Genie`, `Vids`, `NotebookLM` 등)을 절대 노출하지 않습니다(`auditor.py` L1 하드 게이트). 텔레그램 `!구글도구`(`!구글`) 명령으로 0-크레딧 실시간 관제합니다.
+
+## 58. 전 시스템 100% 무손실 양방향 영문(`EN ⇄ KO`) 현지화 원칙 (`2026-11-15` 신설 · `mathedu-i18n.js?v=20261115_en`)
+- **회장님 핵심 지침 (`"영어 버전으로도 모든 것이 나타날 수 있게 해주기 바란다."`)**:
+  1. **[전 페이지·모달·SVG·캔버스·오프라인 100% 영문 전환]**: `index.html`, `video_board.html`, `mathlab.html`, `video_studio.html`, `create.html`, `dashboard.html`, `game.html`, `live_board.html`, `privacy.html`, `404.html`, `offline/index.html`, `board/archive.html`, `board/*.html`(214개) 및 `offline/*.html`(212개 단독 패키지) 전 영역에서 `?lang=en` 또는 `🌐 EN` 토글 시 화면 내 모든 UI 텍스트, 드롭다운 옵션, `<textarea placeholder>`, `<svg>` 도형 라벨, `<canvas>` 렌더링 텍스트(`CanvasRenderingContext2D` 훅), 퀴즈 제목(`board/index.json` `title_en` 212/212 완비)이 한글 잔존 `0건`으로 완벽히 영문 출력되어야 합니다.
+  2. **[무손실 양방향 복원(`_koOrig` / `_enLast`) 및 수식 보호]**: `EN → KO → EN` 반복 전환 시에도 원본 한글 텍스트와 MathJax/KaTeX(`$...$`, `\(...\)`, `.mjx-container`, `.katex`) 수식이 100% 무손실 보존되며, `.bilingual-en` 형제 한글 노드는 자동으로 `.bilingual-ko`로 정규화(`normalizeBilingualContainers`)하여 CSS(`html[lang="en"] .bilingual-ko { display:none!important }`)로 즉시 제어합니다.

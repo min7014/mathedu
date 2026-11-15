@@ -908,6 +908,12 @@ def try_upload_one_nano_banana_cinema(kind: str = "long", target_slug: str | Non
                     f"#시각적증명 #도형보조선 #기하학원리 #수학직관 #피타고라스정리"
                 )
                 raw_tags = ["Visual Math Proof", "Euclidean Geometry", "Math Intuition", "Geometry Mystery"] if is_en else ["시각적증명", "도형보조선", "기하학증명", "수학원리", "수학교육"]
+                try:
+                    import google_ecosystem_orchestrator as _geo
+                    raw_tags = _geo.enrich_tags_with_google_youtube_suggest(slug, lang_code=lc, base_tags=raw_tags)
+                    _geo.generate_studio_ab_test_thumbnails(slug, lang_code=lc)
+                except Exception:
+                    pass
                 import auditor as _aud
                 gated = _aud.sanitize_and_gate_upload_payload(raw_title, raw_desc, raw_tags)
                 title = vmaker.sanitize_youtube_title(gated["title"])

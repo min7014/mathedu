@@ -818,6 +818,16 @@ def run_continuous_foundation_loop(single_cycle=False):
         print(f"🛠️ [MathLab_Developer Agent] MathLab v{ml_res.get('version')} 무결성={ml_res.get('audit_ok')} | 단원별 작도 프리셋 매핑={ml_res.get('total_mapped_slugs')}개 완료", flush=True)
     except Exception as ml_err:
         print(f"[MathLab_Developer Notice] {ml_err}", flush=True)
+    try:
+        import google_ecosystem_orchestrator as _geo_orch
+        sm_res = _geo_orch.build_google_video_sitemap()
+        cap_res = _geo_orch.smart_sync_youtube_captions_surplus_quota(max_tracks=2)
+        print(
+            f"🌐 [Google Ecosystem Orchestrator] video-sitemap={sm_res.get('indexed_live_videos')} live videos | captions={cap_res.get('status')}",
+            flush=True,
+        )
+    except Exception as geo_err:
+        print(f"[Google Ecosystem Notice] {geo_err}", flush=True)
     write_daemon_heartbeat()
 
     if single_cycle:

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="mathedu-i18n.js?v=20261115_en"></script>
     <style>
         :root {
             --p: #2c3e50;
@@ -76,6 +77,11 @@
             width: 100%;
             height: 100%;
             background: var(--bg);
+        }
+
+        #matheduReportFab, .mathedu-report-fab {
+            bottom: 66px !important;
+            right: 14px !important;
         }
 
         canvas {
@@ -4392,6 +4398,12 @@
                 exportSnapshotPNG,
                 clearCanvasState,
                 loadFromUrlParams
+            };
+
+            var prevMlLangCb = window.onMatheduLanguageChange;
+            window.onMatheduLanguageChange = function(lang) {
+                if (typeof prevMlLangCb === 'function') { try { prevMlLangCb(lang); } catch(e){} }
+                try { render(); } catch(e){}
             };
 
             setTimeout(loadFromUrlParams, 80);

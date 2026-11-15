@@ -89,7 +89,7 @@ window.safeTypesetMath = function(targetEl, attempt) {
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" async></script>
 <script src="mathedu-auth.js?v=20261114"></script>
 <script src="mathedu-gamification.js?v=20261114"></script>
-<script src="mathedu-i18n.js?v=20261114"></script>
+<script src="mathedu-i18n.js?v=20261115_en"></script>
 <script src="mathedu-report.js?v=20261115_fix"></script>
 <script>
 if ('serviceWorker' in navigator) {
@@ -594,7 +594,7 @@ html.dark-theme .filter-tab-btn {
         <span id="themeToggleGlobalIcon">🌙</span>
         <span id="themeToggleGlobalLabel" class="hidden sm:inline">다크</span>
       </button>
-      <button id="langToggleSingleBtn" onclick="var nextL=(window.MatheduI18n&&MatheduI18n.getLanguage()==='ko')?'en':'ko';MatheduI18n.setLanguage(nextL);this.textContent=nextL.toUpperCase();if(window.syncSiteThemeUI)window.syncSiteThemeUI();" aria-label="언어 설정 변경" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl px-2 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">KO</button>
+      <button id="langToggleSingleBtn" data-no-i18n="1" onclick="if(window.MatheduI18n)MatheduI18n.toggleLanguage();if(window.syncSiteThemeUI)window.syncSiteThemeUI();" aria-label="Switch Language (KO / EN)" class="min-w-[82px] min-h-[40px] flex items-center justify-center rounded-xl px-2.5 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button"><span style="color:#0284c7;font-weight:900">🇰🇷 KO</span><span style="margin:0 3px;opacity:0.35">|</span><span style="opacity:0.65;font-weight:700">EN</span></button>
       <!-- Hidden compatibility language switcher for i18n script -->
       <div id="langSwitcher" class="hidden">
         <button type="button" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">KO</button>
@@ -1659,7 +1659,7 @@ html.dark-theme .filter-tab-btn {
 </nav>
 
 <!-- 수업 모듈 로드 -->
-<script src="mathedu-room.js?v=20261003_v3"></script>
+<script src="mathedu-room.js?v=20261115_en"></script>
 
 <script>
 
@@ -1826,11 +1826,12 @@ function toggleMathStory() {
       for (var i = 0; i < fm.options.length; i++) {
         var opt = fm.options[i];
         if (!opt.value) opt.textContent = isEn ? 'All Exam Months' : '전체 시행월';
-        else if (opt.value === '11월') opt.textContent = isEn ? 'Nov Official CSAT' : '11월 수능 (대수능)';
+        else if (opt.value === '11월') opt.textContent = isEn ? 'Nov College Entrance Exam' : '11월 수능 (대수능)';
         else if (opt.value === '9월') opt.textContent = isEn ? 'Sep Official Mock' : '9월 모의평가 (평가원)';
         else if (opt.value === '6월') opt.textContent = isEn ? 'Jun Official Mock' : '6월 모의평가 (평가원)';
         else if (opt.value === '10월') opt.textContent = isEn ? 'Oct Academic Exam' : '10월 학력평가';
         else if (opt.value === '7월') opt.textContent = isEn ? 'Jul Academic Exam' : '7월 학력평가';
+        else if (opt.value === '5월') opt.textContent = isEn ? 'May Official Mock' : '5월 모평·학평';
         else if (opt.value === '4월') opt.textContent = isEn ? 'Apr Academic Exam' : '4월 학력평가';
         else if (opt.value === '3월') opt.textContent = isEn ? 'Mar Academic Exam' : '3월 학력평가';
       }
@@ -1846,6 +1847,9 @@ function toggleMathStory() {
         else if (opt.value === '미적분') opt.textContent = isEn ? 'Calculus' : '미적분';
         else if (opt.value === '기하') opt.textContent = isEn ? 'Geometry' : '기하';
         else if (opt.value === '확률과 통계') opt.textContent = isEn ? 'Probability & Statistics' : '확률과 통계';
+        else if (opt.value === '수학(가형)') opt.textContent = isEn ? 'Math Type Ga (STEM)' : '수학(가형)';
+        else if (opt.value === '수학(나형)') opt.textContent = isEn ? 'Math Type Na' : '수학(나형)';
+        else if (opt.value === '수학(고2)') opt.textContent = isEn ? 'Math (Grade 11)' : '수학(고2)';
         else if (opt.value === '공통수학') opt.textContent = isEn ? 'Common Math (Grade 10)' : '공통수학 (고1)';
       }
     }
@@ -2602,6 +2606,24 @@ function toggleMathStory() {
       try { prevLangCallback(lang); } catch(e){}
     }
     renderTodayGeoGebra();
+    if (typeof renderList === 'function') {
+      try { renderList(); } catch(e){}
+    }
+    if (typeof updateAopsEloBadge === 'function') {
+      try { updateAopsEloBadge(0); } catch(e){}
+    }
+    if (typeof selectMarbleStage === 'function') {
+      try { selectMarbleStage(window._marbleStageIdx || 0); } catch(e){}
+    }
+    if (typeof renderPolypadCanvas === 'function') {
+      try { renderPolypadCanvas(); } catch(e){}
+    }
+    if (typeof renderLfhcTask === 'function') {
+      try { renderLfhcTask(); } catch(e){}
+    }
+    if (typeof renderTimelineEra === 'function') {
+      try { renderTimelineEra(); } catch(e){}
+    }
   };
 
   renderTodayGeoGebra();
@@ -3137,7 +3159,8 @@ function toggleMathStory() {
     // 단일 문항 정확 매칭 시 상단 정밀 타겟 히어로 카드 표출
     if (filtered.length === 1 && hasActiveExamFilter) {
       var exactItem = filtered[0];
-      var exactTitle = escapeHtml(exactItem.title || exactItem.slug);
+      var exactRawTitle = (isEn && exactItem.title_en) ? exactItem.title_en : (isEn && window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(exactItem.title || exactItem.slug) : (exactItem.title || exactItem.slug));
+      var exactTitle = escapeHtml(exactRawTitle);
       var exactDesc = window.MatheduI18n ? window.MatheduI18n.formatProblemMeta(exactItem) : [exactItem.examYear ? exactItem.examYear + '학년도' : '', exactItem.month, exactItem.grade, exactItem.subject, exactItem.qNum ? exactItem.qNum + '번' : ''].filter(Boolean).join(' ');
       html += 
         '<div class="col-span-full bg-surface-container-lowest border-2 border-secondary rounded-2xl p-4 px-5 mb-2 flex items-center justify-between gap-3.5 flex-wrap shadow-md">' +
@@ -3168,7 +3191,8 @@ function toggleMathStory() {
       var item = filtered[i];
       var itemHref = item.url || ('board/' + encodeURIComponent(item.slug) + '.html');
       var itemOffHref = item.offlineUrl || ('offline/' + encodeURIComponent(item.slug) + '.html');
-      var title = escapeHtml(item.title || item.slug);
+      var rawCardTitle = (isEn && item.title_en) ? item.title_en : (isEn && window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(item.title || item.slug) : (item.title || item.slug));
+      var title = escapeHtml(rawCardTitle);
       var time = escapeHtml(item.time || '');
       var slug = escapeHtml(item.slug);
 
@@ -90482,7 +90506,14 @@ window.updateAopsEloBadge = function(delta) {
   var t = document.getElementById('aopsTierLabel');
   if (b) b.textContent = String(cur);
   if (t) {
-    t.textContent = cur >= 1600 ? '그랜드마스터 Grandmaster' : (cur >= 1400 ? '올림피아드 마스터 Master' : (cur >= 1300 ? '보조선 장인 Strategist' : '탐구자 Explorer'));
+    var isEnNow = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    t.textContent = cur >= 1600
+      ? (isEnNow ? 'Grandmaster' : '그랜드마스터 Grandmaster')
+      : (cur >= 1400
+          ? (isEnNow ? 'Grand Strategist Master' : '수석 전략가 Master')
+          : (cur >= 1300
+              ? (isEnNow ? 'Auxiliary Strategist' : '보조선 장인 Strategist')
+              : (isEnNow ? 'Math Explorer' : '탐구자 Explorer')));
   }
 };
 

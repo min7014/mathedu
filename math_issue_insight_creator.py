@@ -1147,6 +1147,12 @@ def try_upload_one_issue_insight(kind: str = "long", force_slug: str | None = No
                     if is_en
                     else ["수학교육", "능동적사고", "시각적증명", "수학적사고력", "기하직관", "질문하는수학수업"]
                 )
+                try:
+                    import google_ecosystem_orchestrator as _geo
+                    raw_tags = _geo.enrich_tags_with_google_youtube_suggest(slug, lang_code=lc, base_tags=raw_tags)
+                    _geo.generate_studio_ab_test_thumbnails(slug, lang_code=lc)
+                except Exception:
+                    pass
                 gated = _aud.sanitize_and_gate_upload_payload(raw_title, raw_desc, raw_tags)
                 title = vmaker.sanitize_youtube_title(gated["title"])
                 body = {

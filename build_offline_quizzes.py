@@ -664,6 +664,7 @@ def main():
         m = meta_by_slug.get(res['slug'], {})
         if m.get('title'):
             res['title'] = m['title']
+        res['title_en'] = m.get('title_en') or ''
         res['month'] = str(m.get('month') or '')
         res['grade'] = str(m.get('grade') or '')
         res['subject'] = str(m.get('subject') or '')
@@ -707,6 +708,7 @@ window.MathJax = {{
 }};
 </script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'"></script>
+<script src="../mathedu-i18n.js?v=20261115_en" onerror="void 0"></script>
 <style>
 :root {{
   --bg: #fcf8fa; --card: #ffffff; --card2: #f6f3f5; --line: #e4e2e4;
@@ -840,7 +842,7 @@ html[lang="en"] .bilingual-en {{ display: inline !important; }}
         index_html += f"""    <div class="card" data-slug="{r['slug']}" data-month="{r.get('month','')}" data-grade="{r.get('grade','')}" data-subject="{r.get('subject','')}" data-year="{r.get('examYear','')}" data-qnum="{r.get('qNum','')}" data-tags="{r.get('tags','')}">
       <div>
         <div style="font-size:0.76rem;font-weight:800;color:var(--accent);margin-bottom:4px">{badge_str}</div>
-        <a href="{r['filename']}" class="card-title">📘 {r['title']}</a>
+        <a href="{r['filename']}" class="card-title"><span class="bilingual-ko">📘 {r['title']}</span><span class="bilingual-en">📘 {r.get('title_en') or r['title']}</span></a>
         <div class="card-meta">
           <span><span class="txt-slug-prefix">고유 슬러그: </span><code>{r['slug']}</code></span> · 
           <a href="{r['original_online_url']}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline" class="link-online-text">온라인 원본 링크 ➔</a>
@@ -1047,6 +1049,13 @@ function setOfflineLang(lang, isUserAction) {{
   document.querySelectorAll('.btn-solve-text').forEach(function(el) {{ el.textContent = isEn ? 'Solve ➔' : '풀기 ➔'; }});
   document.querySelectorAll('.link-online-text').forEach(function(el) {{ el.textContent = isEn ? 'Online Original ➔' : '온라인 원본 링크 ➔'; }});
   document.querySelectorAll('.txt-slug-prefix').forEach(function(el) {{ el.textContent = isEn ? 'Slug: ' : '고유 슬러그: '; }});
+  if (window.MatheduI18n) {{
+    if (isUserAction && !window.__inOfflineLang && window.MatheduI18n.setLanguage) {{
+      window.MatheduI18n.setLanguage(lang);
+    }} else if (window.MatheduI18n.applyDomTranslations) {{
+      window.MatheduI18n.applyDomTranslations();
+    }}
+  }}
   if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
 }}
 function detectDefaultLang() {{

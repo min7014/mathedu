@@ -2705,6 +2705,15 @@ def get_font_for_lang(lang_code, size, bold=False):
     return ImageFont.load_default()
 
 
+def get_math_symbol_font(size=32):
+    """Google Fonts Noto Sans Math 우선 로더 (수학 기호 두부 깨짐 방지)."""
+    try:
+        import google_ecosystem_orchestrator as _geo
+        return _geo.get_google_math_font(size=size)
+    except Exception:
+        return get_font_for_lang("en", size, bold=False)
+
+
 VIRAL_HOOK_DB = {
     "pythagoras": {
         "match_keywords": ["pythagoras", "피타고라스", "직각삼각형", "right triangle", "넓이 보존"],
@@ -5953,7 +5962,13 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
             "snippet": {
                 "title": sanitize_youtube_title(meta["title"]),
                 "description": sanitize_youtube_description(meta["description"]),
-                "tags": meta["tags"],
+                "tags": (
+                    __import__("google_ecosystem_orchestrator").enrich_tags_with_google_youtube_suggest(
+                        slug_key, lang_code=lang_code, base_tags=meta.get("tags") or []
+                    )
+                    if (ROOT_DIR / "google_ecosystem_orchestrator.py").exists()
+                    else meta["tags"]
+                ),
                 "categoryId": meta.get("categoryId", "27"),
                 "defaultLanguage": lang_code,
                 "defaultAudioLanguage": lang_code,

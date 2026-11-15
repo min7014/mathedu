@@ -89,6 +89,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script src="mathedu-i18n.js?v=20261115_en"></script>
   <style>
     :root {
       --bg-page: #f4f7fb;
@@ -1459,8 +1460,8 @@
                 <span class="code-badge">${item.id} · ${item._slug}</span>
                 <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="res-chip" style="color:#0284c7;border-color:#bae6fd;background:#f0f9ff;">🎙️ 20개국어 스튜디오</a>
               </div>
-              <h3 class="vault-card-title">${(window.VB_GLOBAL_LANG === 'en' && item._titleEn) ? item._titleEn : item.title}</h3>
-              ${item._titleEn ? `<p class="vault-card-sub">${window.VB_GLOBAL_LANG === 'en' ? item.title : item._titleEn}</p>` : ''}
+              <h3 class="vault-card-title">${(window.VB_GLOBAL_LANG === 'en') ? (window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(item._titleEn || item.title) : (item._titleEn || item.title)) : item.title}</h3>
+              ${window.VB_GLOBAL_LANG === 'en' ? (item.core_concept ? `<p class="vault-card-sub">${window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(item.core_concept) : item.core_concept}</p>` : '') : (item._titleEn ? `<p class="vault-card-sub">${item._titleEn}</p>` : '')}
               <div class="vault-links-list">
                 ${item._ytKo ? `
                   <div class="yt-link-row">
@@ -1522,6 +1523,9 @@
           </article>
         `;
       }).join('');
+      if (window.MatheduI18n && window.VB_GLOBAL_LANG === 'en') {
+        window.MatheduI18n.applyDomTranslations(grid);
+      }
       if (window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise([grid]).catch(() => {});
       }
@@ -1570,8 +1574,13 @@
       const startIdx = (CURRENT_PAGE - 1) * pageSize;
       const pageItems = FILTERED_ITEMS.slice(startIdx, startIdx + pageSize);
 
-      document.getElementById('filteredResultInfo').textContent = `검색 결과 ${total.toLocaleString()}개 자료 (페이지 ${CURRENT_PAGE}/${totalPages})`;
-      document.getElementById('pageStatusText').textContent = `전체 ${total.toLocaleString()}개 중 ${total ? startIdx + 1 : 0}~${Math.min(startIdx + pageSize, total)}번째 자료 표시`;
+      const isVbEn = (window.VB_GLOBAL_LANG === 'en');
+      document.getElementById('filteredResultInfo').textContent = isVbEn
+        ? `${total.toLocaleString()} Topics Found (Page ${CURRENT_PAGE}/${totalPages})`
+        : `검색 결과 ${total.toLocaleString()}개 자료 (페이지 ${CURRENT_PAGE}/${totalPages})`;
+      document.getElementById('pageStatusText').textContent = isVbEn
+        ? `Showing ${total ? startIdx + 1 : 0}–${Math.min(startIdx + pageSize, total)} of ${total.toLocaleString()} Topics`
+        : `전체 ${total.toLocaleString()}개 중 ${total ? startIdx + 1 : 0}~${Math.min(startIdx + pageSize, total)}번째 자료 표시`;
 
       if (pageItems.length === 0) {
         tbody.innerHTML = `
@@ -1604,7 +1613,7 @@
             </td>
             <td>
               <a class="topic-title-link" onclick="openCinemaForItem(${itemIdx}, '${(window.VB_GLOBAL_LANG === 'en' && item._ytEn) ? 'en' : (item._ytKo ? 'ko' : (item._ytEn ? 'en' : 'orig'))}')">
-                ${(window.VB_GLOBAL_LANG === 'en' && item._titleEn) ? item._titleEn + ' <span style=\'font-size:0.78rem;color:#64748b;font-weight:600;\'>(' + item.title + ')</span>' : item.title}
+                ${(window.VB_GLOBAL_LANG === 'en') ? (window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(item._titleEn || item.title) : (item._titleEn || item.title)) : item.title}
               </a>
               <div class="topic-concept-preview">${item.core_concept || ''}</div>
               <div class="resource-chips">
@@ -1667,7 +1676,7 @@
                     🔗 유튜브 링크 직접 등록/수정
                   </button>
                   <button type="button" onclick="window.toggleGeoGebraSplitLab(${itemIdx})" class="res-chip" style="border-color:#38bdf8;background:#e0f2fe;color:#0369a1;font-weight:900;cursor:pointer;">🛠️ 자체 제작 MathLab & 보편 수학공학도구 실시간 실습 스튜디오</button>
-        <button type="button" onclick="window.copyTeacherLessonRecordKit(${itemIdx})" class="res-chip" style="border-color:#a78bfa;background:#f5f3ff;color:#5b21b6;font-weight:900;cursor:pointer;">🏫 교사용 5분 발문 & 생기부 세특·IB IA 문구 복사</button>
+        <button type="button" onclick="window.copyTeacherLessonRecordKit(${itemIdx})" class="res-chip" style="border-color:#a78bfa;background:#f5f3ff;color:#5b21b6;font-weight:900;cursor:pointer;">🏫 교사용 5분 발문 & 생기부 세특·영문 탐구 문구 복사</button>
         <button type="button" onclick="window.printClassroomQrWorksheet(${itemIdx})" style="margin-left:8px;padding:3px 9px;border-radius:6px;border:1px solid #facc15;background:#fef9c3;color:#854d0e;font-size:0.72rem;font-weight:900;cursor:pointer;">🖨️ 교실 QR 활동지 인쇄</button>
                 </div>
               </div>
@@ -1687,6 +1696,9 @@
       }).join('');
 
       renderPagination(totalPages);
+      if (window.MatheduI18n && window.VB_GLOBAL_LANG === 'en') {
+        window.MatheduI18n.applyDomTranslations(tbody);
+      }
       if (window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise([tbody]).catch(() => {});
       }
@@ -1702,13 +1714,14 @@
       const addBtn = (page, label, active = false) => {
         btns.push(`<button type="button" class="tab-btn ${active ? 'active' : ''}" style="padding:6px 12px;" onclick="goToPage(${page})">${label}</button>`);
       };
-      if (CURRENT_PAGE > 1) addBtn(CURRENT_PAGE - 1, '◀ 이전');
+      const isVbEnPag = (window.VB_GLOBAL_LANG === 'en');
+      if (CURRENT_PAGE > 1) addBtn(CURRENT_PAGE - 1, isVbEnPag ? '◀ Prev' : '◀ 이전');
       const startP = Math.max(1, CURRENT_PAGE - 3);
       const endP = Math.min(totalPages, CURRENT_PAGE + 3);
       for (let p = startP; p <= endP; p++) {
         addBtn(p, String(p), p === CURRENT_PAGE);
       }
-      if (CURRENT_PAGE < totalPages) addBtn(CURRENT_PAGE + 1, '다음 ▶');
+      if (CURRENT_PAGE < totalPages) addBtn(CURRENT_PAGE + 1, isVbEnPag ? 'Next ▶' : '다음 ▶');
       wrap.innerHTML = btns.join('');
     }
 
@@ -2620,9 +2633,12 @@
     (function() {
       const params = new URLSearchParams(window.location.search);
       const urlLang = params.get('lang');
+      const savedMainLang = localStorage.getItem('mathedu_lang');
       const savedLang = localStorage.getItem('mathedu_vb_lang');
       const browserIsKo = (navigator.language || 'ko').toLowerCase().startsWith('ko');
-      window.VB_GLOBAL_LANG = urlLang === 'en' ? 'en' : (urlLang === 'ko' ? 'ko' : (savedLang ? savedLang : (browserIsKo ? 'ko' : 'en')));
+      window.VB_GLOBAL_LANG = (window.MatheduI18n && window.MatheduI18n.getLanguage)
+        ? window.MatheduI18n.getLanguage()
+        : (urlLang === 'en' ? 'en' : (urlLang === 'ko' ? 'ko' : (savedMainLang || savedLang || (browserIsKo ? 'ko' : 'en'))));
     })();
     function applyVideoBoardGlobalLang(lang) {
       window.VB_GLOBAL_LANG = (lang === 'en') ? 'en' : 'ko';
@@ -2679,7 +2695,12 @@
       if (typeof applyFiltersAndRender === 'function' && typeof ALL_ITEMS !== 'undefined' && ALL_ITEMS.length) applyFiltersAndRender();
     }
     function toggleVideoBoardGlobalLang() {
-      applyVideoBoardGlobalLang(window.VB_GLOBAL_LANG === 'en' ? 'ko' : 'en');
+      const nextLang = window.VB_GLOBAL_LANG === 'en' ? 'ko' : 'en';
+      if (window.MatheduI18n && window.MatheduI18n.setLanguage) {
+        window.MatheduI18n.setLanguage(nextLang);
+      } else {
+        applyVideoBoardGlobalLang(nextLang);
+      }
     }
     document.addEventListener('DOMContentLoaded', () => {
       applyVideoBoardGlobalLang(window.VB_GLOBAL_LANG);

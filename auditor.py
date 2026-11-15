@@ -48,6 +48,7 @@ FORBIDDEN_TRADEMARK_PATTERNS = [
     (r"\b나노\s*바나나\b|\b나노바나나\b", "구글 모델 브랜드명 '나노바나나' 대외 노출"),
     (r"\bGoogle\s*Flow\b|\b구글\s*플로우\b|\bVeo\s*3(?:\.\d+)?\b|\bGemini\s*Omni\b", "구글 내부 영상 도구명(Google Flow/Veo/Omni) 대외 노출"),
     (r"\bProject\s*Genie\b|\bGenie\s*3\b|\bGoogle\s*Genie\b|프로젝트\s*지니|\b지니\s*3\b", "구글 내부 월드모델명(Project Genie/Genie 3) 대외 노출"),
+    (r"\bGoogle\s*Vids\b|\bNotebookLM\b|\bMusicFX\b|\bLyria\b", "구글 내부 저작 도구명(Vids/NotebookLM/MusicFX/Lyria) 대외 노출"),
     (r"\b3Blue1Brown\b|\bVeritasium\b|\bKurzgesagt\b|\bMindYourDecisions\b|\bMathologer\b|\b깨봉수학\b", "타 유튜브 채널 상표 노출"),
     (r"\bDuolingo\b|\bWordle\b|\bNetflix\b", "타사 플랫폼 상표 노출"),
 ]
@@ -68,6 +69,7 @@ FORBIDDEN_TRADING_DOMAIN_RE = re.compile(
 
 # 대외 생성 파이썬 모듈 목록 (감사 자체 모듈인 auditor.py 및 정화 치환 테이블 제외)
 PUBLIC_GENERATOR_MODULES = [
+    "google_ecosystem_orchestrator.py",
     "active_thinking_engine.py",
     "math_issue_insight_creator.py",
     "exam_hybrid_creator.py",
@@ -97,6 +99,7 @@ def sanitize_and_gate_upload_payload(title: str, description: str, tags: list[st
         (r"\bNano\s*Banana\b|나노\s*바나나|나노바나나", "시네마틱 기하"),
         (r"\bGoogle\s*Flow\b|구글\s*플로우|\bVeo\s*3(?:\.\d+)?\b|\bGemini\s*Omni\b", "시네마틱 모션"),
         (r"\bProject\s*Genie\b|\bGenie\s*3\b|\bGoogle\s*Genie\b|프로젝트\s*지니|\b지니\s*3\b", "입체 공간 시네마"),
+        (r"\bGoogle\s*Vids\b|\bNotebookLM\b|\bMusicFX\b|\bLyria\b", ""),
         (r"\b3Blue1Brown\b|\bVeritasium\b|\bKurzgesagt\b|\bMindYourDecisions\b|\bMathologer\b|깨봉수학", ""),
         (r"\bDuolingo\b|\bWordle\b|\bNetflix\b", ""),
         (r"민은기\s*선생님의\s*수학자료실_AI|Min's\s*Math\s*Lab\s*AI", "@min7014_ai"),
@@ -203,7 +206,7 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         if FORBIDDEN_TRADING_DOMAIN_RE.search(code_body):
             findings["L5_domain_separation"].append(f"{mod_name}: 비수학/트레이딩 키워드 감지")
 
-        if mod_name in ("active_thinking_engine.py", "math_issue_insight_creator.py", "exam_hybrid_creator.py", "nano_banana_cinema_creator.py", "genie3_world_controller.py"):
+        if mod_name in ("google_ecosystem_orchestrator.py", "active_thinking_engine.py", "math_issue_insight_creator.py", "exam_hybrid_creator.py", "nano_banana_cinema_creator.py", "genie3_world_controller.py"):
             if "(190, 18, 60)" in code_body or "(244, 63, 94)" in code_body:
                 findings["L7_visual_integrity"].append(f"{mod_name}: Rule 37 위반 강렬한 적색 RGB 잔존")
             if "➔" in code_body:

@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="mathedu-i18n.js?v=20261115_en"></script>
   <style>
     :root {
       --bg: #f4f6fb;
@@ -1157,6 +1158,11 @@
   function renderScriptEditorRows() {
     var container = document.getElementById('scriptRowsContainer');
     if (!container || !currentScriptDoc) return;
+    var uiIsEn = !!(window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en');
+    var selEl = document.getElementById('targetLangSelect');
+    if (uiIsEn && selEl && selEl.value === 'ko' && !window._studioUserPickedKo) {
+      selEl.value = 'en';
+    }
     var lang = getActiveLangCode();
     var langMeta = getLangMeta(lang);
 
@@ -1164,27 +1170,29 @@
     currentScriptDoc.pages.forEach(function(pObj, idx) {
       var pNum = pObj.page;
       var baseKo = pObj.explanation_text || '';
-      var targetTxt = (pObj.narrations && pObj.narrations[lang]) ? pObj.narrations[lang] : (lang === 'ko' ? baseKo : '');
+      var enFallback = (pObj.narrations && pObj.narrations.en) ? pObj.narrations.en : (uiIsEn && window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(baseKo) : baseKo);
+      var displayBase = uiIsEn ? enFallback : baseKo;
+      var targetTxt = (pObj.narrations && pObj.narrations[lang]) ? pObj.narrations[lang] : (lang === 'ko' ? baseKo : (lang === 'en' ? enFallback : ''));
 
       html += '<div class="script-page-row' + (pNum === currentPageNum ? ' active-page' : '') + '" id="scriptRowPage_' + pNum + '">';
       html += '  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">';
       html += '    <div style="display:flex;align-items:center;gap:6px">';
-      html += '      <span style="padding:2px 8px;border-radius:6px;background:var(--accent);color:#fff;font-size:0.75rem;font-weight:800">' + pNum + '페이지</span>';
-      html += '      <span style="font-size:0.78rem;font-weight:700;color:var(--sub)">' + escapeHtml(pObj.step_title || '') + '</span>';
+      html += '      <span style="padding:2px 8px;border-radius:6px;background:var(--accent);color:#fff;font-size:0.75rem;font-weight:800">' + (uiIsEn ? ('Slide ' + pNum) : (pNum + '페이지')) + '</span>';
+      html += '      <span style="font-size:0.78rem;font-weight:700;color:var(--sub)">' + escapeHtml(uiIsEn && window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(pObj.step_title || '') : (pObj.step_title || '')) + '</span>';
       html += '    </div>';
       html += '    <div style="display:flex;gap:5px">';
-      html += '      <button type="button" class="btn" style="padding:3px 9px;font-size:0.73rem" onclick="window.jumpToStudioPage(' + pNum + ')">👁️ 슬라이드 보기</button>';
-      html += '      <button type="button" class="btn" style="padding:3px 9px;font-size:0.73rem" onclick="window.speakSinglePageFromRow(' + pNum + ')">🔊 ' + langMeta.flag + ' 음성 듣기</button>';
+      html += '      <button type="button" class="btn" style="padding:3px 9px;font-size:0.73rem" onclick="window.jumpToStudioPage(' + pNum + ')">' + (uiIsEn ? '👁️ View Slide' : '👁️ 슬라이드 보기') + '</button>';
+      html += '      <button type="button" class="btn" style="padding:3px 9px;font-size:0.73rem" onclick="window.speakSinglePageFromRow(' + pNum + ')">🔊 ' + langMeta.flag + (uiIsEn ? ' Listen' : ' 음성 듣기') + '</button>';
       html += '    </div>';
       html += '  </div>';
       html += '  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
       html += '    <div>';
-      html += '      <div style="font-size:0.72rem;font-weight:800;color:var(--sub);margin-bottom:3px">🇰🇷 [1차] 기본 설명 텍스트 (한국어 원본·수정 가능)</div>';
-      html += '      <textarea class="script-textarea" rows="3" oninput="window.updateBaseExplanationText(' + idx + ', this.value)">' + escapeHtml(baseKo) + '</textarea>';
+      html += '      <div style="font-size:0.72rem;font-weight:800;color:var(--sub);margin-bottom:3px">' + (uiIsEn ? '🇺🇸 [Source] Visual Proof Explanation Script (Editable)' : '🇰🇷 [1차] 기본 설명 텍스트 (한국어 원본·수정 가능)') + '</div>';
+      html += '      <textarea class="script-textarea" rows="3" oninput="window.updateBaseExplanationText(' + idx + ', this.value)">' + escapeHtml(displayBase) + '</textarea>';
       html += '    </div>';
       html += '    <div>';
-      html += '      <div style="font-size:0.72rem;font-weight:800;color:#b45309;margin-bottom:3px">' + langMeta.flag + ' [2차] ' + escapeHtml(langMeta.name) + ' 나레이션 대본</div>';
-      html += '      <textarea class="script-textarea target-lang" id="targetTextarea_' + pNum + '" rows="3" placeholder="상단 [전 페이지 나레이션 자동 생성] 버튼을 누르거나 직접 입력하세요." oninput="window.updateTargetNarrationText(' + idx + ', this.value)">' + escapeHtml(targetTxt) + '</textarea>';
+      html += '      <div style="font-size:0.72rem;font-weight:800;color:#b45309;margin-bottom:3px">' + langMeta.flag + (uiIsEn ? (' [Target] ' + escapeHtml(window.MatheduI18n ? window.MatheduI18n.toEnglishMathText(langMeta.name) : langMeta.name) + ' Narration Script') : (' [2차] ' + escapeHtml(langMeta.name) + ' 나레이션 대본')) + '</div>';
+      html += '      <textarea class="script-textarea target-lang" id="targetTextarea_' + pNum + '" rows="3" placeholder="' + (uiIsEn ? 'Click [Auto-Generate Full-Slide Narration] above or edit directly here.' : '상단 [전 페이지 나레이션 자동 생성] 버튼을 누르거나 직접 입력하세요.') + '" oninput="window.updateTargetNarrationText(' + idx + ', this.value)">' + escapeHtml(targetTxt) + '</textarea>';
       html += '    </div>';
       html += '  </div>';
       html += '</div>';
@@ -1417,7 +1425,7 @@
         ySub += 26;
       });
 
-      if (lang !== 'ko' && koRef) {
+      if (lang !== 'ko' && koRef && !(window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en')) {
         ctx.fillStyle = '#94a3b8';
         ctx.font = '14px Pretendard, sans-serif';
         var oneKo = koRef.length > 78 ? (koRef.slice(0, 78) + '...') : koRef;
@@ -1425,6 +1433,19 @@
       }
     });
   }
+
+  var prevStudioLangCb = window.onMatheduLanguageChange;
+  window.onMatheduLanguageChange = function(newLang) {
+    if (typeof prevStudioLangCb === 'function') { try { prevStudioLangCb(newLang); } catch(e){} }
+    var sel = document.getElementById('targetLangSelect');
+    if (sel && (newLang === 'en' || newLang === 'ko')) {
+      sel.value = newLang;
+    }
+    if (currentScriptDoc) {
+      renderScriptEditorRows();
+      renderPageOnCinemaCanvas(currentPageNum);
+    }
+  };
 
   window.stepStudioPage = function(delta) {
     stopCinemaLecture();

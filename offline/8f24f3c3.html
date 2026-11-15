@@ -2077,14 +2077,14 @@ html.dark-theme select {
 </style>
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
 <script id="mj" async src="mathjax/tex-mml-chtml.js" onerror="this.onerror=null;this.src=\'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\'"></script>
-<script src="../mathedu-i18n.js?v=20261114"></script>
+<script src="../mathedu-i18n.js?v=20261115_en"></script>
 
 <link rel="canonical" href="https://min7014.github.io/mathedu/board/8f24f3c3.html">
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/8f24f3c3.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="8f24f3c3">
-<meta name="mathedu-offline-build-time" content="2026-11-15T02:49:40.068912+00:00">
-<meta name="mathedu-offline-hash" content="f21c383b">
+<meta name="mathedu-offline-build-time" content="2026-11-15T03:26:01.360041+00:00">
+<meta name="mathedu-offline-hash" content="92414e60">
 <meta name="mathedu-version-label" content="v2026.11.15">
 
 </head><body><div class="wrap">
@@ -3071,6 +3071,9 @@ function updateExplanations(lang) {
       } else {
         exp.innerHTML = koExp;
       }
+      if (isEn && window.MatheduI18n && window.MatheduI18n.applyDomTranslations) {
+        try { window.MatheduI18n.applyDomTranslations(exp); } catch(e){}
+      }
     }
   });
   if (window.MathJax && window.MathJax.typesetPromise) {
@@ -3097,6 +3100,9 @@ function setBoardLang(lang, isUserAction) {
     }
   }
   updateExplanations(lang);
+  if (window.MatheduI18n && window.MatheduI18n.applyDomTranslations) {
+    try { window.MatheduI18n.applyDomTranslations(); } catch(e){}
+  }
 }
 
 (function(){
@@ -3307,8 +3313,8 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = '8f24f3c3';
-window._offlineBuildTime = '2026-11-15T02:49:40.068912+00:00';
-window._offlineHash = 'f21c383b';
+window._offlineBuildTime = '2026-11-15T03:26:01.360041+00:00';
+window._offlineHash = '92414e60';
 window._offlineVersion = 'v2026.11.15';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/8f24f3c3.html';
 
@@ -3333,8 +3339,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || '8f24f3c3';
-  var localBuildTime = window._offlineBuildTime || '2026-11-15T02:49:40.068912+00:00';
-  var localHash = window._offlineHash || 'f21c383b';
+  var localBuildTime = window._offlineBuildTime || '2026-11-15T03:26:01.360041+00:00';
+  var localHash = window._offlineHash || '92414e60';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/8f24f3c3.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';
