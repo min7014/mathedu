@@ -604,6 +604,8 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !신고 (또는 !오류신고 / /reports) : [크레딧 0] mathedu 홈페이지 실시간 오류신고 접수·수리 현황 조회\n"
             "• !신고화면 [번호] (또는 !오류화면) : [크레딧 0] 최근(또는 지정 번호) 오류신고 실제 화면 스크린샷 즉시 전송\n"
             "• !오류패턴 (또는 !자동수리목록) : [크레딧 0] 3트랙 오류신고 정책 및 기승인 유사 오류 유형 목록 확인\n"
+            "• !검색어 (또는 !검색수요 / /searches) : [크레딧 0] 사용자 검색어 분리 수집 현황 및 자료부재(0건) 제작 대기 큐 조회\n"
+            "• !자료제작 [수학주제] (또는 /makelesson) : [즉시 착수] 지정 수학 주제의 6단계 디딤돌+SVG 수업자료 즉시 생성·배포\n"
             "• !감사 (또는 !저작권 / !상표권) : [크레딧 0] 독립 감사관(auditor) 7계층 저작권·상표권·라이브 유튜브 전수 감사\n"
             "• !점검 (또는 /audit) : 전 문항·전 시스템 무결성 고속 스캔\n"
             "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n\n"
@@ -621,11 +623,41 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         import _antigravity_report_watcher as _arw_pat
         return _arw_pat.format_approved_patterns_summary()
 
+    if low in ("!검색어", "!검색수요", "!검색통계", "/searches", "!searches"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import search_demand_engine as _sde_q
+        return _sde_q.format_search_demand_summary()
+
+    if low.startswith(("!자료제작 ", "!수업제작 ", "/makelesson ", "!makelesson ")):
+        topic_arg = cmd.split(maxsplit=1)[1].strip() if len(cmd.split(maxsplit=1)) >= 2 else ""
+        if len(topic_arg) < 2:
+            return "ℹ️ 제작할 수학 주제를 함께 입력해 주세요. (예: `!자료제작 브라마굽타 공식`)"
+        sys.path.insert(0, str(ROOT_DIR))
+        import search_demand_engine as _sde_mk
+        ok_m, m_reason = _sde_mk.is_verified_pure_math_topic(topic_arg)
+        if not ok_m:
+            return f"🛡️ [순수 수학 도메인 검증 보류]: `{topic_arg}` ({m_reason})"
+        silent_subprocess.spawn_windowless_background_python(
+            str(ROOT_DIR / "search_demand_engine.py"),
+            extra_args=["--produce", topic_arg],
+            cwd=str(ROOT_DIR),
+        )
+        return (
+            f"🎓 [맞춤형 수학 수업자료 자동 제작 착수!]\n"
+            f"• 대상 주제: \"{topic_arg}\"\n"
+            f"• 구성: 초등 눈높이 6단계 디딤돌 + 인라인 SVG 도형 + 도식화 풀이 흐름도 + 한/영 양방향 지원\n"
+            f"• 완료 즉시 GitHub Pages 배포 및 본 채팅방으로 라이브 수업 링크를 보고드립니다!"
+        )
+
     if low.startswith(("!신고화면", "!오류화면", "/reportshot", "!reportshot")):
         sys.path.insert(0, str(ROOT_DIR))
         import _antigravity_report_watcher as _arw_shot
 
-        all_r = _arw_shot.fetch_all_reports(timeout=12)
+        raw_r = _arw_shot.fetch_all_reports(timeout=12)
+        all_r = [
+            r for r in raw_r
+            if str(r.get("quiz_slug") or "").strip() not in getattr(_arw_shot, "NON_ERROR_SPECIAL_SLUGS", ())
+        ]
         if not all_r:
             return "ℹ️ 조회된 오류신고 내역이 없습니다."
         parts = cmd.split()
@@ -967,6 +999,10 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
                     wd_targets = wd_rep.get("valid_autofix_targets") or []
                     if wd_targets:
                         await asyncio.to_thread(_arw_wd.run_autonomous_agy_autofix, wd_targets, True)
+                    import search_demand_engine as _sde_wd
+                    wd_db = _sde_wd.load_demand_db()
+                    if any(g.get("status") == "pending" for g in (wd_db.get("unmet_lesson_queue") or [])):
+                        await asyncio.to_thread(_sde_wd.run_search_demand_cycle, True, True)
                 except Exception:
                     pass
 

@@ -425,3 +425,12 @@
   1. **[Track 1 · 수학적으로 틀린 내용 (`math_error`) ➔ 묻지 않고 즉시 검산·수정]**: 수식·계산·부호·정답·기하 조건·증명 논리 등 수학적으로 틀린 내용이 제보된 경우, 회장님께 수정 여부를 묻지 않고 즉시 수학적 진위를 엄밀히 검산하여 실제 오류가 맞으면 바로 전수 수정·배포(`Rule 5`)한 뒤 결과를 보고합니다.
   2. **[Track 2 · 기승인 유사 오류 종류 (`approved_similar`) ➔ 묻지 않고 즉시 전수 수정]**: 회장님이 이미 수정을 승인하셨거나 `assets/approved_error_patterns.json`에 등록된 비슷한 종류의 오류(예: 영문 미번역 한글 잔존, MathJax 수식 렌더링 깨짐, 보기 수식·조사 줄바꿈 분리, 및 이후 승인된 모든 유형)는 다시 묻지 않고 즉시 전수 점검·수정·배포합니다.
   3. **[Track 3 · 신규 종류의 화면·기능·디자인·제안 신고 (`ask_with_screenshot`) ➔ 텔레그램에 화면 그림 먼저 전송 후 수정 여부 질문]**: 수학적 오류도 아니고 기승인 유사 유형도 아닌 새로운 종류의 신고가 들어오면, 임의로 먼저 고치지 않고 무창 Headless 브라우저로 해당 신고 화면(실제 URL·해상도·언어·문항 단계 잠금 해제·선택 요소 붉은 하이라이트 배지)을 그림(`.png`)으로 캡처하여 텔레그램(`@anti7014_bot`, `Chat ID: 43453234`)에 `sendPhoto`로 먼저 보여드리고 고칠지 여부(`[✅ 고쳐 (비슷한 오류도 자동수리)]` / `[🔧 이번 건만 수정]` / `[❌ 고치지 마]` 인라인 버튼 및 `'고쳐'`·`'고치지마'` 자연어 답장 지원)를 여쭤봅니다. 회장님이 승인하시면 즉시 전수 수리하고 해당 오류 종류를 `assets/approved_error_patterns.json`에 자동 등록하여 다음부터 유사 오류는 묻지 않고 고칩니다.
+
+
+## 60. 사용자 검색어 전용 분리 저장 · 수요 파악 및 미충족(0건) 수학 수업자료 자동 제작 원칙 (`mathedu-search-logger.js` & `search_demand_engine.py`)
+- **오류 신고와 100% 분리된 전용 검색 수요 DB 운영**:
+  - 사용자가 `index.html`(상단 글로벌 통합검색 `#headerGlobalSearchInput`, 문항 탐색기 `#quizSearchInput`, 수학자료실 모달 `#min7014SearchInput`) 및 `video_board.html`(`#boardSearchInput`)에서 입력하는 유의미한 검색어는 `mathedu-search-logger.js`(`_search_log` / `_search_gap` 디바운스·세션 중복제거 비콘)를 통해 수집하되, `_antigravity_report_watcher.py`의 오류 신고 큐와 절대 섞이지 않도록 전용 저장소(`.agents/user_search_raw_logs.jsonl` 및 `assets/user_search_demand_db.json`)로 즉시 분리 이관합니다.
+- **4대 코퍼스 커버리지 교차 검증 및 순수 수학 도메인 게이트**:
+  - `search_demand_engine.py`는 수집된 검색어(한↔영 수학 용어 동의어 확장 포함)를 ① `min7014_deep_knowledge.json`(1,113개 시각 증명 주제), ② `board/index.json`(단독 디딤돌 수업), ③ `board/archive_catalog.json`(16,548문항 아카이브), ④ `video_lectures/catalog.json`(설명 영상) 전체와 대조하여 자료 유무를 판별하며, 순수 수학 도메인 검증 게이트(Rule 2·4·51)를 통과한 수학 주제만 제작 큐(`unmet_lesson_queue`)에 등재합니다.
+- **관련 자료 부재 시 맞춤형 인터랙티브 수업자료 자동 제작·배포**:
+  - 관련 자료가 0건이거나 사용자가 `📌 수업자료 우선 제작 요청`을 누른 미충족 순수 수학 주제에 대해서는 초등 눈높이 6단계 무장벽 디딤돌(Rule 6) + 인라인 `<svg>` 시각 도형 및 도식화 풀이 흐름도(Rule 7) + 한국어·영어 양방향 제목 및 번역(Rule 58) 규격의 단독 수업자료(`board/{slug}.html` + `offline/{slug}.html`)를 자동 생성하여 라이브 배포하고 텔레그램(`!검색어`, `!자료제작 <주제>`)으로 즉시 보고합니다(시간당 최대 2건 상한으로 월 고정 예산 보호).

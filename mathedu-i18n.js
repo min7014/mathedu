@@ -93,6 +93,22 @@
         bookmarks: "⭐ 즐겨찾기",
         lessonPack: "🎒 교사용 수업 팩 묶기"
       },
+      headerSearch: {
+        placeholder: "문제·개념·시각증명 검색 (예: 피타고라스, 타원, 9월 확통...)",
+        mobilePlaceholder: "문제·개념·시각증명 검색 (예: 타원, 미적분 30번...)",
+        boardQuickPlaceholder: "문제·증명 빠른 검색 (Enter)",
+        vbQuickPlaceholder: "영상·개념 빠른 검색 (예: 피타고라스, 타원, 체바)...",
+        ariaLabel: "수학 문제 및 시각적 증명 통합 검색",
+        submitTitle: "검색 결과 목록으로 이동 (Enter)",
+        clearTitle: "검색어 지우기",
+        mobileToggleTitle: "검색창 열기/닫기",
+        btnSearch: "검색",
+        quizHeading: "📚 디딤돌 수학 문제",
+        proofHeading: "📐 시각적 수학 증명 · 영상 (min7014.github.io)",
+        viewAllQuizzes: "🔎 전체 문항 검색 결과 보기 (Enter) ➔",
+        openProofModal: "📐 수학자료실 3,400+ 증명 탐색관 열기 ➔",
+        noMatch: "일치하는 항목이 없습니다. 다른 수학 키워드로 검색해 보세요."
+      },
       examFinder: {
         title: "디딤돌 수학 문제 목록",
         subtitle: "(학년도 · 학년 · 시행월 · 선택과목 · 번호 선택 시 해당 문제만 즉시 추출)",
@@ -393,6 +409,22 @@
         wrongVault: "🔴 My Review Vault",
         bookmarks: "⭐ Bookmarks",
         lessonPack: "🎒 Bundle Lesson Pack"
+      },
+      headerSearch: {
+        placeholder: "Search 16,548+ problems & visual proofs (e.g. Pythagoras, ellipse, calculus)...",
+        mobilePlaceholder: "Search problems & visual proofs...",
+        boardQuickPlaceholder: "Quick search problems & proofs (Enter)",
+        vbQuickPlaceholder: "Quick search proofs & videos (e.g. Pythagoras, ellipse)...",
+        ariaLabel: "Search math problems and visual proofs",
+        submitTitle: "Jump to search results (Enter)",
+        clearTitle: "Clear search",
+        mobileToggleTitle: "Toggle search bar",
+        btnSearch: "Search",
+        quizHeading: "📚 Stepping-Stone Math Problems",
+        proofHeading: "📐 Visual Math Proofs & Videos (min7014.github.io)",
+        viewAllQuizzes: "🔎 View all matching problems (Enter) ➔",
+        openProofModal: "📐 Open 3,400+ Visual Proof Explorer ➔",
+        noMatch: "No direct matches found. Try another math topic or keyword."
       },
       examFinder: {
         title: "Stepping-Stone Math Problem Explorer",
@@ -2051,9 +2083,28 @@
   function expandEnglishSearchQuery(rawQ) {
     var q = String(rawQ || '').trim();
     if (!q || /[가-힣]/.test(q)) return q;
-    var low = q.toLowerCase();
+    var low = q.toLowerCase()
+      .replace(/\bgrade\s*12\b/g, 'grade12')
+      .replace(/\bgrade\s*11\b/g, 'grade11')
+      .replace(/\bgrade\s*10\b/g, 'grade10')
+      .replace(/\bprob(?:ability)?\s*(?:&|and)?\s*stat(?:istic)?s?\b/g, '확통')
+      .replace(/\bnormal\s+distribution\b/g, '정규분포')
+      .replace(/\bbinomial\s+distribution\b/g, '이항분포')
+      .replace(/\bconfidence\s+interval\b/g, '신뢰구간')
+      .replace(/\bconditional\s+probability\b/g, '조건부확률')
+      .replace(/\bdot\s+product\b/g, '내적')
+      .replace(/\binscribed\s+angle\b/g, '원주각')
+      .replace(/\bmean\s+value\b/g, '평균값')
+      .replace(/\bchain\s+rule\b/g, '합성함수 미분')
+      .replace(/\bconic\s+sections?\b/g, '이차곡선');
+    if (/[가-힣]/.test(low) && !/[a-z]/.test(low)) return low.trim();
     // Check direct keyword map while keeping numbers/years intact
     if (EN_TO_KO_SEARCH_MAP[low]) return EN_TO_KO_SEARCH_MAP[low];
+    var enStop = {
+      "the": 1, "of": 1, "in": 1, "on": 1, "at": 1, "to": 1, "for": 1, "with": 1, "and": 1, "or": 1, "a": 1, "an": 1,
+      "theorem": 1, "theorems": 1, "proof": 1, "proofs": 1, "problem": 1, "problems": 1, "question": 1, "questions": 1,
+      "quiz": 1, "quizzes": 1, "law": 1, "rule": 1, "formula": 1, "property": 1, "properties": 1, "math": 1, "exam": 1, "mock": 1
+    };
     var tokens = low.split(/[\s,/#]+/).filter(Boolean);
     var mapped = [];
     var changed = false;
@@ -2064,14 +2115,18 @@
     };
     for (var i = 0; i < tokens.length; i++) {
       var tk = tokens[i];
-      if (monthEnMap[tk]) { mapped.push(monthEnMap[tk]); changed = true; }
-      else if (tk === 'g12' || tk === 'grade12') { mapped.push('고3'); changed = true; }
+      if (/[가-힣]/.test(tk)) { mapped.push(tk); changed = true; }
+      else if (monthEnMap[tk]) { mapped.push(monthEnMap[tk]); changed = true; }
+      else if (tk === 'g12' || tk === 'grade12' || tk === 'senior') { mapped.push('고3'); changed = true; }
       else if (tk === 'g11' || tk === 'grade11') { mapped.push('고2'); changed = true; }
       else if (tk === 'g10' || tk === 'grade10') { mapped.push('고1'); changed = true; }
+      else if (tk === 'calculus' || tk === 'calc') { mapped.push('미적분'); changed = true; }
+      else if (tk === 'geometry' || tk === 'geom') { mapped.push('기하'); changed = true; }
       else if (EN_TO_KO_SEARCH_MAP[tk]) { mapped.push(EN_TO_KO_SEARCH_MAP[tk]); changed = true; }
+      else if (enStop[tk] && tokens.length > 1) { changed = true; continue; }
       else { mapped.push(tk); }
     }
-    return changed ? mapped.join(' ') : q;
+    return (changed && mapped.length > 0) ? mapped.join(' ') : q;
   }
 
   /**

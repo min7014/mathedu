@@ -54,6 +54,7 @@ AUTOFIX_RATE_FILE = AGENTS_DIR / "autofix_rate_state.json"
 LEGACY_PROCESSED_FILE = REPO_DIR / "_processed_reports.json"
 API_URL_FILE = REPO_DIR / "progress-api-url.txt"
 MAX_AUTOFIX_RUNS_PER_HOUR = 5
+NON_ERROR_SPECIAL_SLUGS = ("_search_log", "_search_gap", "_request_new")
 DEFAULT_SHEETS_URL = (
     "https://script.google.com/macros/s/"
     "AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec"
@@ -232,6 +233,9 @@ def post_fix_report(
         with urllib.request.urlopen(req, timeout=15) as resp:
             resp.read()
 
+        if str(quiz_slug or "").strip() in NON_ERROR_SPECIAL_SLUGS:
+            return True
+
         proc = load_processed()
         proc.setdefault("processed", []).append(
             {
@@ -286,8 +290,10 @@ def check_reports() -> list[dict]:
     for r in reports:
         if r.get("fix_timestamp"):
             continue
+        qs = str(r.get("quiz_slug") or "").strip()
+        if qs in NON_ERROR_SPECIAL_SLUGS:
+            continue
         ts = str(r.get("timestamp") or "")
-        qs = str(r.get("quiz_slug") or "")
         qn = str(r.get("question_num") or "")
         already = any(
             str(p.get("timestamp") or "") == ts
@@ -1008,6 +1014,27 @@ def poll_and_notify_error_reports_once(send_telegram: bool = True) -> dict:
             "awaiting_approval_targets": [],
         }
 
+    # 사용자 검색어 로그(_search_log / _search_gap)는 오류신고와 철저히 분리하여 전용 DB로 먼저 동기화·이관
+    try:
+        import search_demand_engine as _sde
+        sync_res = _sde.sync_search_logs_from_sheets(preloaded_rows=all_reports)
+        if sync_res.get("new_gaps"):
+            try:
+                if silent_subprocess is not None:
+                    silent_subprocess.spawn_windowless_background_python(
+                        str(REPO_DIR / "search_demand_engine.py"),
+                        extra_args=["--cycle"],
+                        cwd=str(REPO_DIR),
+                    )
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+    error_only_reports = [
+        r for r in all_reports if str(r.get("quiz_slug") or "").strip() not in NON_ERROR_SPECIAL_SLUGS
+    ]
+
     proc = load_processed()
     processed_items = proc.setdefault("processed", [])
     alerted_keys = set(proc.setdefault("alerted_keys", []))
@@ -1025,10 +1052,12 @@ def poll_and_notify_error_reports_once(send_telegram: bool = True) -> dict:
 
     for idx_zero, r in enumerate(all_reports):
         sheet_seq = idx_zero + 1
+        qs = str(r.get("quiz_slug") or "").strip()
+        if qs in NON_ERROR_SPECIAL_SLUGS:
+            continue
         if r.get("fix_timestamp"):
             continue
         ts = str(r.get("timestamp") or "")
-        qs = str(r.get("quiz_slug") or "")
         qn = str(r.get("question_num") or "")
         r_key = _make_report_key(r)
 
@@ -1124,7 +1153,7 @@ def poll_and_notify_error_reports_once(send_telegram: bool = True) -> dict:
         json.dumps(
             {
                 "checked_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "total_reports": len(all_reports),
+                "total_reports": len(error_only_reports),
                 "unfixed_count": len(unfixed_list),
                 "immediate_autofix_count": len(immediate_autofix_targets),
                 "awaiting_chairman_approval_count": len(awaiting_approval_targets),
@@ -1155,7 +1184,7 @@ def poll_and_notify_error_reports_once(send_telegram: bool = True) -> dict:
 
     return {
         "ok": True,
-        "total": len(all_reports),
+        "total": len(error_only_reports),
         "unfixed": len(unfixed_list),
         # `newly_alerted` & `valid_autofix_targets` contain ONLY immediate auto-fix targets
         # (Track 1 math_error + Track 2 approved_similar + explicitly approved Track 3 items)
@@ -1276,10 +1305,13 @@ def format_approved_patterns_summary() -> str:
 
 def format_error_reports_summary() -> str:
     try:
-        all_reports = fetch_all_reports(timeout=12)
+        raw_reports = fetch_all_reports(timeout=12)
     except Exception as e:
         return f"⚠️ [오류신고 시트 조회 실패]: {e}"
 
+    all_reports = [
+        r for r in raw_reports if str(r.get("quiz_slug") or "").strip() not in NON_ERROR_SPECIAL_SLUGS
+    ]
     unfixed = [r for r in all_reports if not r.get("fix_timestamp")]
     fixed_cnt = len(all_reports) - len(unfixed)
     awaiting = get_pending_approval_items()

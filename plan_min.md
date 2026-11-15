@@ -636,3 +636,11 @@ python -X utf8 pr.py status
   1. **Track 1 — 수학적 오류 (`math_error`)**: 수식·계산·부호·정답·기하 조건·증명 논리 등 수학적으로 틀린 내용이 제보되면 질문 대기 없이 즉시 수학적 진위를 엄밀히 검산하여 바로 수정·전수 반영·배포 후 완료 보고.
   2. **Track 2 — 기승인 유사 오류 유형 (`approved_similar`)**: `assets/approved_error_patterns.json` 레지스트리에 등록된 유사 오류 종류(영문 미번역 잔존, LaTeX/MathJax 렌더링 깨짐, 보기 수식·조사 줄바꿈 분리 및 이후 승인된 모든 유형)는 다시 묻지 않고 즉시 전수 수리·배포.
   3. **Track 3 — 신규 유형 화면·기능·제안 신고 (`ask_with_screenshot`)**: 무창 Headless Chromium(`capture_error_report_screenshot`)으로 신고 URL·뷰포트·문항 단계(`.q` 잠금 해제)·선택 영역(`🚨 신고 지점` 붉은 하이라이트 배지)을 그림(`.png`)으로 찍어 텔레그램(`@anti7014_bot`)에 `sendPhoto` + 인라인 버튼(`[✅ 고쳐 (비슷한 오류도 앞으로 자동수리)]` / `[🔧 이번 건만 수정]` / `[❌ 고치지 마 (기각)]`)으로 먼저 보고하고, 회장님 승인(버튼 클릭 또는 `'고쳐'` 텍스트 답장) 시 즉시 전수 수리 및 `assets/approved_error_patterns.json` 자동 등록.
+
+
+### [Policy 60] 사용자 검색어 전용 분리 저장 · 수요 분석 및 미충족(0건) 수학 수업자료 자동 제작 체계 (`2026-11-15` 확정)
+- **핵심 취지**: 홈페이지 방문자(학생·교사)가 검색창에 입력하는 검색어를 오류 신고와 별도로 저장하여 어떤 수학 자료를 요구하는지 상시 파악하고, 관련 자료가 없을 경우 해당 주제의 맞춤형 인터랙티브 수업자료를 자동 제작·배포한다.
+- **구현 아키텍처**:
+  1. **클라이언트 검색어 분리 로거 (`mathedu-search-logger.js`)**: `index.html` 3대 검색창(`#headerGlobalSearchInput`, `#quizSearchInput`, `#min7014SearchInput`) 및 `video_board.html`(`#boardSearchInput`)에서 1.8초 디바운스 및 세션 중복 제거를 거쳐 `_search_log`(매칭 존재) / `_search_gap`(매칭 0건 또는 `📌 수업자료 우선 제작 요청` 클릭) 비콘을 전송.
+  2. **전용 검색 수요 DB 격리 (`search_demand_engine.py`)**: `_antigravity_report_watcher.py`가 폴링 시 `_search_log`·`_search_gap`을 오류 신고에서 완전히 제외하고 전용 원시 로그(`.agents/user_search_raw_logs.jsonl`, Git 제외) 및 집계 DB(`assets/user_search_demand_db.json`)로 분리 저장.
+  3. **커버리지 판별 및 자동 수업자료 제작·배포**: 4대 로컬 코퍼스(시각 증명 1,113종 · 단독 디딤돌 수업 · 16,548문항 아카이브 · 설명 영상) 교차 검증 후 관련 자료가 0건인 순수 수학 주제(`is_verified_pure_math_topic`)를 `unmet_lesson_queue`에 등록하고, 초등 눈높이 6단계 디딤돌 + 인라인 `<svg>` 시각 도형 + 도식화 흐름도 + 한/영(`KO/EN`) 완비 수업자료(`board/{slug}.html` + `offline/{slug}.html`)를 자동 제작·배포(`!검색어` 조회 및 `!자료제작 <주제>` 즉시 생성 단축어 지원).

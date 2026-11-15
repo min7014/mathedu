@@ -90,6 +90,7 @@
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   <script src="mathedu-i18n.js?v=20261115_en"></script>
+  <script src="mathedu-search-logger.js?v=20261115"></script>
   <style>
     :root {
       --bg-page: #f4f7fb;
@@ -1364,8 +1365,16 @@
       renderVaultShowcase();
       applyFiltersAndRender();
 
-      // URL 파라미터 확인 (?slug=... 또는 ?play=..., ?mode=active 지원)
+      // URL 파라미터 확인 (?q=..., ?slug=... 또는 ?play=..., ?mode=active 지원)
       const params = new URLSearchParams(window.location.search);
+      const qQuery = (params.get('q') || params.get('search') || '').trim();
+      if (qQuery) {
+        const sInp = document.getElementById('boardSearchInput');
+        if (sInp) {
+          sInp.value = qQuery;
+          applyFiltersAndRender();
+        }
+      }
       const qSlug = params.get('slug') || params.get('play');
       const qMode = params.get('mode') || '';
       if (qSlug) {
@@ -2578,7 +2587,17 @@
       applyFiltersAndRender();
     });
 
-    document.getElementById('boardSearchInput').addEventListener('input', () => applyFiltersAndRender());
+    document.getElementById('boardSearchInput').addEventListener('input', () => {
+      applyFiltersAndRender();
+      const qNow = (document.getElementById('boardSearchInput').value || '').trim();
+      if (window.MatheduSearchLogger && qNow.length >= 2) {
+        window.MatheduSearchLogger.scheduleLog('video_board', qNow, () => ({
+          videoHits: FILTERED_ITEMS.length,
+          totalHits: FILTERED_ITEMS.length,
+          source: 'video_board'
+        }), 1800);
+      }
+    });
     document.getElementById('categoryFilterSelect').addEventListener('change', () => applyFiltersAndRender());
     document.getElementById('pageSizeSelect').addEventListener('change', () => applyFiltersAndRender());
 

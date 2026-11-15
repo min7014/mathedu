@@ -306,6 +306,21 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
             import _antigravity_report_watcher as _arw_hb
             importlib.reload(_arw_hb)
             _arw_hb.poll_and_notify_error_reports_once(send_telegram=True)
+            import search_demand_engine as _sde_hb
+            importlib.reload(_sde_hb)
+            _hb_db = _sde_hb.load_demand_db()
+            if any(g.get("status") == "pending" for g in (_hb_db.get("unmet_lesson_queue") or [])):
+                _last_sde_p = ROOT_DIR / ".agents" / "last_search_demand_cycle_ts.txt"
+                _prev_sde_ts = float(_last_sde_p.read_text(encoding="utf-8").strip()) if _last_sde_p.exists() else 0.0
+                if time.time() - _prev_sde_ts >= 600.0:
+                    _last_sde_p.parent.mkdir(parents=True, exist_ok=True)
+                    _last_sde_p.write_text(str(time.time()), encoding="utf-8")
+                    import silent_subprocess as _ss_hb
+                    _ss_hb.spawn_windowless_background_python(
+                        str(ROOT_DIR / "search_demand_engine.py"),
+                        extra_args=["--cycle"],
+                        cwd=str(ROOT_DIR),
+                    )
         except Exception:
             pass
         if last_completed_slug:

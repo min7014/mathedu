@@ -91,6 +91,7 @@ window.safeTypesetMath = function(targetEl, attempt) {
 <script src="mathedu-gamification.js?v=20261114"></script>
 <script src="mathedu-i18n.js?v=20261115_en"></script>
 <script src="mathedu-report.js?v=20261115_fix"></script>
+<script src="mathedu-search-logger.js?v=20261115"></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
@@ -576,7 +577,7 @@ html.dark-theme .filter-tab-btn {
   position: relative;
   flex: 1 1 220px;
   max-width: 440px;
-  min-width: 120px;
+  min-width: 140px;
   margin: 0 6px;
 }
 .header-omni-search-box {
@@ -586,8 +587,8 @@ html.dark-theme .filter-tab-btn {
   height: 40px;
   padding: 0 6px 0 12px;
   border-radius: 999px;
-  background: rgba(241, 245, 249, 0.92);
-  border: 1.5px solid rgba(148, 163, 184, 0.42);
+  background: rgba(241, 245, 249, 0.94);
+  border: 1.5px solid rgba(148, 163, 184, 0.44);
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
   transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
@@ -596,26 +597,31 @@ html.dark-theme .filter-tab-btn {
   border-color: #0284c7;
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.16), 0 6px 18px rgba(15, 23, 42, 0.08);
 }
+html.dark-theme .header-omni-search-box,
 html.dark .header-omni-search-box,
 body.dark-mode .header-omni-search-box,
 [data-theme="dark"] .header-omni-search-box {
-  background: rgba(30, 41, 59, 0.88);
-  border-color: rgba(148, 163, 184, 0.28);
+  background: rgba(30, 41, 59, 0.90) !important;
+  border-color: rgba(56, 189, 248, 0.30) !important;
+  color: #f8fafc !important;
 }
+html.dark-theme .header-omni-search-box:focus-within,
 html.dark .header-omni-search-box:focus-within,
 body.dark-mode .header-omni-search-box:focus-within,
 [data-theme="dark"] .header-omni-search-box:focus-within {
-  background: rgba(15, 23, 42, 0.98);
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22);
+  background: rgba(15, 23, 42, 0.98) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.24) !important;
 }
-.header-omni-input {
+.header-omni-input,
+html.dark-theme input[type="text"].header-omni-input {
   flex: 1 1 auto;
   min-width: 0;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: inherit;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.2;
@@ -624,6 +630,7 @@ body.dark-mode .header-omni-search-box:focus-within,
   color: #64748b;
   font-weight: 500;
 }
+html.dark-theme .header-omni-input::placeholder,
 html.dark .header-omni-input::placeholder,
 body.dark-mode .header-omni-input::placeholder {
   color: #94a3b8;
@@ -644,21 +651,35 @@ body.dark-mode .header-omni-input::placeholder {
   z-index: 9999;
   display: none;
 }
+html.dark-theme .header-omni-dropdown,
 html.dark .header-omni-dropdown,
 body.dark-mode .header-omni-dropdown,
 [data-theme="dark"] .header-omni-dropdown {
-  background: #0f172a;
-  border-color: rgba(148, 163, 184, 0.25);
-  color: #f8fafc;
-  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.65);
+  background: #0f172a !important;
+  border-color: rgba(56, 189, 248, 0.28) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.65) !important;
 }
 @media (max-width: 639px) {
   .header-omni-search-wrap {
-    margin: 0 2px;
+    display: none;
+    margin: 0;
+  }
+  .header-omni-search-wrap.mobile-open {
+    display: block;
+    position: fixed;
+    top: 76px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+    min-width: 0;
+    z-index: 9998;
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.22);
   }
   .header-omni-dropdown {
     position: fixed;
-    top: 76px;
+    top: 124px;
     left: 12px;
     right: 12px;
     min-width: 0;
@@ -718,6 +739,9 @@ body.dark-mode .header-omni-dropdown,
     </form>
 
     <div class="flex items-center gap-space-xs shrink-0">
+      <button id="mobileHeaderSearchToggleBtn" onclick="if(window.MatheduHeaderOmniSearch)window.MatheduHeaderOmniSearch.toggleMobile()" aria-label="통합 검색 열기" title="통합 검색 열기/닫기 (Toggle Search)" class="sm:hidden min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl px-2 py-1 text-secondary bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">
+        <span class="material-symbols-outlined text-[20px]">search</span>
+      </button>
       <button id="themeToggleGlobalBtn" onclick="toggleSiteDarkMode()" aria-label="다크/라이트 테마 전환" title="다크/라이트 테마 전환 (Toggle Dark/Light Theme)" class="min-h-[40px] flex items-center justify-center gap-1 rounded-xl px-2.5 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">
         <span id="themeToggleGlobalIcon">🌙</span>
         <span id="themeToggleGlobalLabel" class="hidden sm:inline">다크</span>
@@ -2134,6 +2158,10 @@ function toggleMathStory() {
       var q = String(rawQ || '').trim().toLowerCase();
       if (!q) return [];
       var variants = [q];
+      if (window.MatheduI18n && typeof window.MatheduI18n.expandEnglishSearchQuery === 'function') {
+        var expI18n = String(window.MatheduI18n.expandEnglishSearchQuery(rawQ) || '').trim().toLowerCase();
+        if (expI18n && variants.indexOf(expI18n) === -1) variants.push(expI18n);
+      }
       for (var i = 0; i < EN_KO_SEARCH_SYNONYMS.length; i++) {
         var pair = EN_KO_SEARCH_SYNONYMS[i];
         if (q.indexOf(pair[0]) !== -1 && variants.indexOf(pair[1]) === -1) {
@@ -2264,6 +2292,21 @@ function toggleMathStory() {
       }
       html += '</div>';
 
+      if (!_proofLoading && proofMatches.length === 0 && quizMatches.length === 0) {
+        html += '<div style="margin-top:6px;padding:10px 12px;border-radius:12px;background:rgba(2,132,199,0.08);border:1px dashed rgba(2,132,199,0.38);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">';
+        html += '  <span style="font-size:11.5px;font-weight:700;color:#0369a1;flex:1;min-width:180px">' + (enMode ? '✨ No matching material yet — your search is saved so we can create custom lesson material!' : '✨ 관련 자료가 아직 없습니다 — 검색어가 저장되어 맞춤형 수업자료를 제작합니다!') + '</span>';
+        html += '  <button id="headerRequestLessonBtn" type="button" onclick="if(window.MatheduSearchLogger)window.MatheduSearchLogger.requestPriorityMaterial(document.getElementById(\'headerGlobalSearchInput\').value,\'header_zero_btn\',this)" style="padding:5px 10px;border-radius:8px;border:0;background:#0284c7;color:#fff;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap">' + (enMode ? '📌 Request Lesson Material' : '📌 수업자료 우선 제작 요청') + '</button>';
+        html += '</div>';
+      }
+
+      if (window.MatheduSearchLogger && !_proofLoading) {
+        var pCnt = proofMatches.length;
+        var qCnt = quizMatches.length;
+        window.MatheduSearchLogger.scheduleLog('header_omni', raw, function() {
+          return { proofHits: pCnt, quizHits: qCnt, totalHits: pCnt + qCnt, source: 'header_omni' };
+        }, 1800);
+      }
+
       hdrDrop.innerHTML = html;
       hdrDrop.style.display = 'block';
       if (enMode && window.MatheduI18n && typeof window.MatheduI18n.applyDomTranslations === 'function') {
@@ -2301,6 +2344,7 @@ function toggleMathStory() {
     hdrInput.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         hideDropdown();
+        if (hdrForm) hdrForm.classList.remove('mobile-open');
         hdrInput.blur();
       }
     });
@@ -2313,14 +2357,17 @@ function toggleMathStory() {
           if (e.key === '/') return;
         }
         e.preventDefault();
+        if (hdrForm && window.innerWidth < 640) hdrForm.classList.add('mobile-open');
         hdrInput.focus();
         hdrInput.select();
       }
     });
 
     document.addEventListener('click', function(e) {
-      if (hdrForm && !hdrForm.contains(e.target)) {
+      var mobBtn = document.getElementById('mobileHeaderSearchToggleBtn');
+      if (hdrForm && !hdrForm.contains(e.target) && (!mobBtn || !mobBtn.contains(e.target))) {
         hideDropdown();
+        hdrForm.classList.remove('mobile-open');
       }
     });
 
@@ -2329,18 +2376,22 @@ function toggleMathStory() {
         if (ev && ev.preventDefault) ev.preventDefault();
         var val = hdrInput.value.trim();
         hideDropdown();
+        if (hdrForm) hdrForm.classList.remove('mobile-open');
         if (!val) {
           hdrInput.focus();
           return;
         }
-        var mappedQ = val;
-        if (isEn()) {
-          var exp = expandQueryTokens(val);
-          if (exp.length > 1) mappedQ = exp[1];
-        }
-        window.triggerSmartQuizSearch(mappedQ, true);
+        window.triggerSmartQuizSearch(val, true);
         hdrInput.value = val;
         syncControlsVisibility();
+        if (window.MatheduSearchLogger) {
+          var domCards = document.querySelectorAll('#list .card, #list a').length;
+          window.MatheduSearchLogger.logQuery(val, {
+            quizHits: domCards,
+            totalHits: domCards,
+            source: 'header_submit'
+          });
+        }
       },
       clear: function() {
         hdrInput.value = '';
@@ -2350,6 +2401,16 @@ function toggleMathStory() {
         renderList();
         hdrInput.focus();
       },
+      toggleMobile: function() {
+        if (!hdrForm) return;
+        var opened = hdrForm.classList.toggle('mobile-open');
+        if (opened) {
+          setTimeout(function() { hdrInput.focus(); }, 30);
+        } else {
+          hideDropdown();
+        }
+      },
+      syncControls: syncControlsVisibility,
       syncLang: syncLangUI
     };
 
@@ -2376,6 +2437,7 @@ function toggleMathStory() {
     if (!q) {
       return {
         raw: '',
+        rawOrigLower: '',
         hasQuery: false,
         year: '',
         month: '',
@@ -2392,7 +2454,11 @@ function toggleMathStory() {
       };
     }
 
-    var norm = q.toLowerCase();
+    var rawOrigLower = q.toLowerCase();
+    var qForParse = (window.MatheduI18n && typeof window.MatheduI18n.expandEnglishSearchQuery === 'function')
+      ? window.MatheduI18n.expandEnglishSearchQuery(q)
+      : q;
+    var norm = String(qForParse || q).toLowerCase();
     // 1. Multi-word curriculum & synonym normalization
     norm = norm
       .replace(/확률과\s*통계|확률\s*통계/g, ' 확통 ')
@@ -2457,6 +2523,7 @@ function toggleMathStory() {
 
     var res = {
       raw: q,
+      rawOrigLower: rawOrigLower,
       hasQuery: true,
       year: '',
       month: '',
@@ -2572,6 +2639,7 @@ function toggleMathStory() {
   window.matchMatheduProblem = function(it, p) {
     if (!p || !p.hasQuery) return true;
     var title = (it.title || '').toLowerCase();
+    var titleEn = (it.title_en || '').toLowerCase();
     var slug = (it.slug || '').toLowerCase();
     var subj = it.subject || '';
     var month = it.month || '';
@@ -2579,7 +2647,7 @@ function toggleMathStory() {
     var qnum = String(it.qNum || '');
     var tags = (it.tags || []).map(function(t) { return String(t).toLowerCase(); });
     var corpus = [
-      title, slug, subj.toLowerCase(), month.toLowerCase(), grade.toLowerCase(),
+      title, titleEn, slug, subj.toLowerCase(), month.toLowerCase(), grade.toLowerCase(),
       String(it.examYear || ''), String(it.examYearAlt || ''),
       (it.source || '').toLowerCase(), tags.join(' ')
     ].join(' ');
@@ -3037,6 +3105,11 @@ function toggleMathStory() {
     if (typeof prevLangCallback === 'function') {
       try { prevLangCallback(lang); } catch(e){}
     }
+    if (window.MatheduHeaderOmniSearch && typeof window.MatheduHeaderOmniSearch.syncLang === 'function') {
+      try { window.MatheduHeaderOmniSearch.syncLang(lang); } catch(e){}
+    }
+    try { updateExamSelectOptions(lang); } catch(e){}
+    try { updateGamificationUI(); } catch(e){}
     renderTodayGeoGebra();
     if (typeof renderList === 'function') {
       try { renderList(); } catch(e){}
@@ -3258,19 +3331,24 @@ function toggleMathStory() {
 
   window.filterMin7014Materials = function() {
     if (!_min7014Materials) return;
-    var q = (document.getElementById('min7014SearchInput')?.value || '').trim().toLowerCase();
+    var rawMinQ = (document.getElementById('min7014SearchInput')?.value || '').trim();
+    var q = rawMinQ.toLowerCase();
+    var qExp = (window.MatheduI18n && typeof window.MatheduI18n.expandEnglishSearchQuery === 'function')
+      ? String(window.MatheduI18n.expandEnglishSearchQuery(rawMinQ) || '').trim().toLowerCase()
+      : q;
     var listEl = document.getElementById('min7014ResultsList');
     var countEl = document.getElementById('min7014ResultsCount');
     if (!listEl) return;
 
     var matched = _min7014Materials.filter(function(item) {
       var title = (item.title || '').toLowerCase();
+      var titleEn = (item.title_en || '').toLowerCase();
       var subKo = (item.sub_domain_ko || item.category || '').toLowerCase();
       var bc = (item.breadcrumb || '').toLowerCase();
       var core = (item.core_concept || '').toLowerCase();
       var tagStr = (item.tags || []).join(' ').toLowerCase();
-      var corpus = title + ' ' + subKo + ' ' + bc + ' ' + core + ' ' + tagStr;
-      var matchesQ = !q || corpus.includes(q);
+      var corpus = title + ' ' + titleEn + ' ' + subKo + ' ' + bc + ' ' + core + ' ' + tagStr;
+      var matchesQ = !q || corpus.includes(q) || (qExp && corpus.includes(qExp));
       var matchesTag = true;
       if (_min7014ActiveTag === '__CONSTRUCTION__') {
         matchesTag = !!item.is_construction || bc.includes('작도') || title.includes('작도');
@@ -3283,9 +3361,30 @@ function toggleMathStory() {
     });
 
     if (countEl) countEl.textContent = matched.length.toLocaleString();
+    if (rawMinQ.length >= 2 && window.MatheduSearchLogger) {
+      window.MatheduSearchLogger.scheduleLog(
+        'min7014_modal',
+        rawMinQ,
+        function() {
+          return { proofHits: matched.length, totalHits: matched.length, source: 'min7014_modal' };
+        },
+        1800
+      );
+    }
 
     if (matched.length === 0) {
-      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">검색어에 일치하는 수학자료실 주제가 없습니다. 다른 검색어나 단원 칩을 선택해 보세요.</div>';
+      var isEnMin = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+      var reqBtnMin = rawMinQ.length >= 2
+        ? '<div style="margin-top:12px;"><button type="button" data-req-q="' + escapeHtml(rawMinQ) + '" onclick="window.MatheduSearchLogger && window.MatheduSearchLogger.requestPriorityMaterial(this.getAttribute(\'data-req-q\'), \'min7014_modal_zero\', this)" style="padding:8px 16px;border-radius:10px;background:#006398;color:#fff;font-weight:700;border:none;cursor:pointer;font-size:13px;">' +
+          (isEnMin ? '📌 Request Lesson Material for This Topic' : '📌 이 주제의 수업자료 우선 제작 요청하기') +
+          '</button></div>'
+        : '';
+      listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8">' +
+        (isEnMin
+          ? 'No math archive topics match your search query. Your search is logged so missing math lessons can be created automatically.'
+          : '검색어에 일치하는 수학자료실 주제가 없습니다. 입력하신 검색어는 별도 저장되어 관련 수업자료 제작에 반영됩니다.') +
+        reqBtnMin +
+        '</div>';
       return;
     }
 
@@ -3392,6 +3491,13 @@ function toggleMathStory() {
     var heroInp = document.getElementById('heroQuickSearchInput');
     if (heroInp && heroInp.value !== rawQuery) {
       heroInp.value = rawQuery;
+    }
+    var hdrInpSync = document.getElementById('headerGlobalSearchInput');
+    if (hdrInpSync && document.activeElement !== hdrInpSync && hdrInpSync.value !== rawQuery) {
+      hdrInpSync.value = rawQuery;
+      if (window.MatheduHeaderOmniSearch && typeof window.MatheduHeaderOmniSearch.syncControls === 'function') {
+        window.MatheduHeaderOmniSearch.syncControls();
+      }
     }
     var btnClearMain = document.getElementById('btnClearQuizSearch');
     if (btnClearMain) btnClearMain.style.display = rawQuery ? 'flex' : 'none';
@@ -3534,6 +3640,7 @@ function toggleMathStory() {
     }
 
     var isEn = window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en';
+    window._lastQuizFilteredCount = filtered.length;
     countBadge.textContent = filtered.length + (isEn ? ' quizzes' : '개') + (filtered.length !== allItems.length ? (isEn ? ' (of ' + allItems.length + ' total)' : ' (전체 ' + allItems.length + '개)') : '');
 
     if (filtered.length === 0) {
@@ -3577,7 +3684,16 @@ function toggleMathStory() {
             '</div>' +
           '</div>';
       } else {
-        listEl.innerHTML = '<div class="col-span-full text-center py-10 text-on-surface-variant bg-surface-container-lowest rounded-xl">' + (isEn ? 'No quizzes match your current search criteria.' : '검색 조건에 일치하는 퀴즈가 없습니다.') + '</div>';
+        var rawSearchVal = (searchInput && searchInput.value || '').trim();
+        var reqQuizBtn = rawSearchVal.length >= 2
+          ? '<div class="mt-3"><button type="button" data-req-q="' + escapeHtml(rawSearchVal) + '" onclick="window.MatheduSearchLogger && window.MatheduSearchLogger.requestPriorityMaterial(this.getAttribute(\'data-req-q\'), \'quiz_explorer_zero\', this)" class="btn-solve cursor-pointer border-0 px-4 py-2 text-xs font-bold">' +
+            (isEn ? '📌 Request Lesson Material' : '📌 이 주제 수업자료 우선 제작 요청') +
+            '</button></div>'
+          : '';
+        listEl.innerHTML = '<div class="col-span-full text-center py-10 px-4 text-on-surface-variant bg-surface-container-lowest rounded-xl">' +
+          '<div>' + (isEn ? 'No quizzes match your current search criteria. Missing math topics are recorded for automatic lesson creation.' : '검색 조건에 일치하는 퀴즈가 없습니다. 관련 자료가 없는 수학 검색어는 별도 저장되어 수업자료 제작에 반영됩니다.') + '</div>' +
+          reqQuizBtn +
+          '</div>';
       }
       return;
     }
@@ -3821,8 +3937,22 @@ function toggleMathStory() {
   updateStudentQuickBar();
   updateGamificationUI();
 
-  // 실시간 검색 이벤트
-  searchInput.addEventListener('input', renderList);
+  // 실시간 검색 이벤트 + 사용자 검색어 분리 수집 연동
+  searchInput.addEventListener('input', function() {
+    renderList();
+    var qVal = (searchInput.value || '').trim();
+    if (qVal.length >= 2 && window.MatheduSearchLogger) {
+      window.MatheduSearchLogger.scheduleLog(
+        'quiz_explorer',
+        qVal,
+        function() {
+          var cnt = typeof window._lastQuizFilteredCount === 'number' ? window._lastQuizFilteredCount : 0;
+          return { quizHits: cnt, totalHits: cnt, source: 'quiz_explorer' };
+        },
+        1800
+      );
+    }
+  });
 
   // 주제 태그 필터 클릭 이벤트
   document.getElementById('topicChips').addEventListener('click', function(e) {
