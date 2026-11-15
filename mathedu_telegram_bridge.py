@@ -224,7 +224,7 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
     last_report_poll_ts = 0.0
     while time.time() - start_ts < max_wait_sec:
         try:
-            if time.time() - last_report_poll_ts >= 90.0:
+            if time.time() - last_report_poll_ts >= 25.0:
                 last_report_poll_ts = time.time()
                 try:
                     sys.path.insert(0, str(ROOT_DIR))

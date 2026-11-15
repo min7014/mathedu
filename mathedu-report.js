@@ -1023,28 +1023,31 @@
       }
     } catch(e){}
 
-    // 포맷팅된 최종 리포트 본문
+    // 포맷팅된 최종 리포트 본문 (Google Apps Script doGet URL 8KB 한도 안전 보장)
+    var safeText = text.length > 1200 ? (text.substring(0, 1197) + '...') : text;
+    var safeSnippet = (meta.snippet || '').length > 180 ? (meta.snippet.substring(0, 177) + '...') : (meta.snippet || '');
     var formattedReport = [
       '[오류유형] ' + category,
-      '[상세내용] ' + text,
+      '[상세내용] ' + safeText,
       '[선택위치] ' + meta.label,
-      '[발췌문구] ' + meta.snippet,
+      '[발췌문구] ' + safeSnippet,
       '[페이지URL] ' + window.location.href,
       '[화면해상도] ' + window.innerWidth + 'x' + window.innerHeight,
       email ? ('[이메일] ' + email) : ''
     ].filter(Boolean).join('\n');
 
+    try {
+      var prevLogs = JSON.parse(localStorage.getItem('mathedu_report_local_log_v1') || '[]');
+      if (!Array.isArray(prevLogs)) prevLogs = [];
+      prevLogs.push({ ts: new Date().toISOString(), quiz: slug, q: String(meta.stepNum || 0), name: reporterName, text: formattedReport });
+      localStorage.setItem('mathedu_report_local_log_v1', JSON.stringify(prevLogs.slice(-20)));
+    } catch(e){}
+
     var apiUrl = window._sheetsApiUrl || API_FALLBACK;
     var questionNum = meta.stepNum || 0;
 
-    var payload = {
-      action: 'report',
-      quiz: slug,
-      q: String(questionNum),
-      name: reporterName,
-      text: formattedReport
-    };
-
+    // ⚠️ 핵심: 배포된 Google Apps Script(AKfycbx...)는 doGet(?action=report)으로만 reports 시트에 적재함
+    // (doPost는 progress/fix_report 전용이어서 POST mode:'no-cors' 단독 호출 시 200 에러 JSON 반환 후 유실됨)
     var getUrl = apiUrl + '?action=report'
       + '&quiz=' + encodeURIComponent(slug)
       + '&q=' + encodeURIComponent(questionNum)
@@ -1059,14 +1062,13 @@
       } catch(e){}
     }
 
-    // 1) POST 단일 전송 시도 (네트워크 실패 시에만 GET Beacon 폴백 실행하여 중복 행 적재 원천 차단)
+    // 단일 GET(doGet) keepalive 전송 — 탭 종료 시에도 유실 없으며 네트워크 예외 시에만 Image 비콘 폴백
     try {
       if (typeof fetch === 'function') {
-        fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload),
+        fetch(getUrl, {
+          method: 'GET',
           mode: 'no-cors',
+          cache: 'no-store',
           keepalive: true
         }).catch(function() {
           fireFallbackBeacon();
