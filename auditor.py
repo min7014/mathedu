@@ -68,6 +68,7 @@ FORBIDDEN_TRADING_DOMAIN_RE = re.compile(
 
 # 대외 생성 파이썬 모듈 목록 (감사 자체 모듈인 auditor.py 및 정화 치환 테이블 제외)
 PUBLIC_GENERATOR_MODULES = [
+    "active_thinking_engine.py",
     "math_issue_insight_creator.py",
     "exam_hybrid_creator.py",
     "nano_banana_cinema_creator.py",
@@ -202,7 +203,7 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         if FORBIDDEN_TRADING_DOMAIN_RE.search(code_body):
             findings["L5_domain_separation"].append(f"{mod_name}: 비수학/트레이딩 키워드 감지")
 
-        if mod_name in ("math_issue_insight_creator.py", "exam_hybrid_creator.py", "nano_banana_cinema_creator.py", "genie3_world_controller.py"):
+        if mod_name in ("active_thinking_engine.py", "math_issue_insight_creator.py", "exam_hybrid_creator.py", "nano_banana_cinema_creator.py", "genie3_world_controller.py"):
             if "(190, 18, 60)" in code_body or "(244, 63, 94)" in code_body:
                 findings["L7_visual_integrity"].append(f"{mod_name}: Rule 37 위반 강렬한 적색 RGB 잔존")
             if "➔" in code_body:

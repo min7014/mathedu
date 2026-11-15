@@ -364,6 +364,7 @@ python -X utf8 pr.py status
 - ✅ **53. 독립 저작권·상표권·YPP 정책 & 무결성 감사관 에이전트(`auditor`) 상시 가동 원칙 (`2026-11-14` 신설 · 7대 전문 에이전트 체제)**
 - ✅ **54. 95% Google Flow 고정 광학 모션 + 5% 공간기하·원뿔곡선 1인칭 3D 공간 카메라(`Genie 3` 핀셋 트랙) 역할 분담 원칙 (`2026-11-14` 신설 · `genie3_world_controller.py`)**
 - ✅ **55. 수학 분야 실시간 이슈 × `min7014.github.io` 오리지널 자료 연계 — 차별화된 수학교육 통찰 영상 자동 제작 원칙 (`2026-11-15` 신설 · `math_issue_insight_creator.py`)**
+- ✅ **56. 능동적 수학 사고(Active Mathematical Thinking) 4단계 시네마 & 웹 코칭 워크벤치 상시 적용 원칙 (`2026-11-15` 신설 · `active_thinking_engine.py` · `video_board.html?mode=active`)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
@@ -601,3 +602,14 @@ python -X utf8 pr.py status
     1. **실시간 수학·수학교육 이슈 레이더(`LiveMathIssueRadar`, 0-크레딧)**: Google News(KO/EN 수학·수학교육·기하·미적분 RSS) + `arXiv`(`math.HO`/`math.GM`) + 월별 수학교육 학사 화두 캘린더를 상시 스캔하되, 기사 원문 복제·외부 상표(`SAT`/`AMC`/`IB` 등)·비수학 노이즈를 기계적으로 원천 차단(`Rule 2 · Rule 51 · Rule 53`)하고 순수 수학·교육학적 화두 키워드만 추출해 `min7014.github.io` 847+ 오리지널 시각 증명 PDF와 시맨틱 매칭함.
     2. **차별화된 수학교육 3막 시네마 구조(`Rule 28 · Rule 43` 완전 준수)**: 단순 문제풀이 요령이나 가십 요약이 아닌 **`[Act 1: 오늘의 수학·교육 화두 제기 & 기계적 공식 암기 시각의 한계] → [Act 2: min7014.github.io 오리지널 원문 PDF 전 페이지(1 Page = 1 Scene) 300 DPI 무가림 직강 + 메이플 가상 지휘봉] → [Act 3: 교실과 학습을 바꾸는 수학교육적 본질 통찰(기하학적 필연성·반례 사고·조건 변형) & 소크라테스 열린 발문]`**으로 구성하여 한·영(`KO/EN`) 1080p 본편 + 9:16 `Q-#Shorts` 4종을 자동 생산함.
     3. **전 시스템 통합**: `mathedu_foundation_daemon.py` 자동 제작 루프, `finance.py` 황금비 자동 업로드 큐, `video_board.html` `🧭 수학 이슈 × 수학교육 통찰` 전용 배지·시네마 플레이어, `secretary.py` 오전 7시 브리핑, 텔레그램 0-크레딧 `!이슈`(`!통찰`)·`!이슈제작` 명령에 전수 연동 완료.
+
+- **[2026-11-15 고도화 확정 — 영상을 보며 수학교육의 핵심인 '능동적 수학 사고(Active Mathematical Thinking)'를 깨우는 4단계 시네마 엔진 & 웹 코칭 워크벤치 전면 가동 (`Rule 56`, `active_thinking_engine.py` · `video_board.html?mode=active`)]**:
+  - 회장님 지시(`"어렵겠지만, 영상을 보고 수학교육에서 중요한 능동적인 사고가 될 수 있게 해주면 좋겠다."`)에 따라, 매끄러운 설명 영상이 학생에게 유발하는 **'유창한 설명의 착각(Illusion of Competence · 구경꾼 함정)'**을 정면 돌파하는 **2계층 하이브리드 능동 사고 아키텍처(영상 내 핵심 3지점 발상 정지 + 웹 1클릭 실습 워크벤치)**를 전 파이프라인에 구축·가동함:
+    1. **0-크레딧 능동적 수학 사고 4단계 시네마 엔진(`active_thinking_engine.py`)**:
+       - **[1단계 · 사전 직관 예측 선택 (`A vs B`, 3초)]**: 증명 1페이지 진입 전 흔한 통념·암기 습관(`A`)과 기하·구조적 불변량(`B`) 중 하나를 스스로 선택하게 하여 수동적 시청자를 '가설 검증자'로 전환.
+       - **[2단계 · 결정적 제1보조선 등장 직전 '백지 도형' 4초 발상 정지 (`Pre-Crux Blank-Figure Pause`)]**: 보조선이 이미 그어진 슬라이드를 보여주며 질문하던 기존 한계를 혁파하여, 결정적 보조선 페이지(`crux_idx`) **직전의 순수 가정 도형(`doc[p-1]`, 중앙 `y: 86~810` 100% 무가림 `Rule 28.1`)**을 띄운 채 하단 여백 `4s → 3s → 2s → 1s` 시각 카운트다운 게이지(`Rule 37` 골드·에메랄드)와 `Cmaj9 + 528Hz/792Hz` 사색 펄스 사운드(`Rule 24` 저작권 0%)로 시청자가 눈으로 먼저 보조선을 작도하게 함.
+       - **[3단계 · 결론 직전 '왜 성립할까?' 3초 자기 정당화 (`Pre-Climax Self-Explanation`)]**: Q.E.D. 직전 페이지에서 합동·대칭·불변량 근거를 3초 동안 스스로 언어화하게 함.
+       - **[4단계 · 라카토스 반례·경계 실험 & `What-If-Not` 조건 변형 전이]**: 이차 포물선 → 삼차 곡선(`y=x³`), 타원 초점 `F₂ → ∞` → 포물선, 십진법 → 이진법 등 조건을 바꿨을 때 명제가 유지되는지 깨지는지 추론하게 하고 `video_board.html?slug={slug}&mode=active` 실습으로 직결함.
+    2. **전 영상 파이프라인(`math_issue_insight_creator.py` + `min7014_video_maker.py`) & `video_board.html` 양방향 통합**:
+       - `math_issue_insight_creator.py`(한·영 1080p 본편 + 9:16 `Q-#Shorts` + 유튜브 능동 사고 챕터 타임스탬프) 및 `min7014_video_maker.py`(`render_question_classroom_video` 847+ 질문 수업 특화 본편 전체)에 동시 탑재하고, 레거시 그룹 스크립트 자동 `1 Page = 1 Scene` 승격(`Rule 28.4`)까지 결합함.
+       - `video_board.html`에 `?slug=...&mode=active` 딥링크 자동 오픈 및 **`🧠 [능동적 수학 사고 4단계 워크벤치]`**(사전 직관 A/B 버튼 즉시 코칭 → 제1발상 태그 선택 → 내 풀이 한 줄 서술 → 조건 변형 실험 & `MathLab` 동적 작도 직결)를 탑재함.

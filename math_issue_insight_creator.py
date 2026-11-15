@@ -498,6 +498,19 @@ def _draw_fitted_multiline(
     return y_top
 
 
+def _best_climax_page_idx(pdf_doc: pymupdf.Document) -> int:
+    """마지막 페이지가 AlgeoMath/GeoGebra URL 안내 슬라이드인 경우 그 직전 완성 도형 페이지를 자동 선택합니다."""
+    n = len(pdf_doc)
+    if n <= 1:
+        return 0
+    for cand in range(n - 1, max(0, n - 4) - 1, -1):
+        txt = (pdf_doc[cand].get_text("text") or "").lower()
+        if any(k in txt for k in ("algegomath", "algeomath", "geogebra", "click or paste url", "url search bar")):
+            continue
+        return cand
+    return max(0, n - 2)
+
+
 def render_issue_insight_thumbnail(bp: dict, pdf_doc: pymupdf.Document, lang_code: str, out_png: Path) -> None:
     """
     1280x720 고클릭률 수학교육 통찰 썸네일 (Rule 37 사색적 로열블루·인디고·골드 조화, 적색 0%, 절단 0%)
@@ -515,7 +528,7 @@ def render_issue_insight_thumbnail(bp: dict, pdf_doc: pymupdf.Document, lang_cod
     d.text((54, 46), badge_txt, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 34, bold=True))
 
     # 좌측: 오리지널 클라이맥스 슬라이드
-    climax_idx = max(0, len(pdf_doc) - 2)
+    climax_idx = _best_climax_page_idx(pdf_doc)
     _paste_clean_pdf_preview(thumb, pdf_doc, (32, 132, 650, 684), climax_idx)
 
     # 우측: 통념 타파 vs 본질 통찰 카드 (문장 절단 ZERO 자동 피팅)
@@ -540,21 +553,46 @@ def render_issue_insight_thumbnail(bp: dict, pdf_doc: pymupdf.Document, lang_cod
     thumb.save(out_png)
 
 
+def _fmt_mmss(sec: float) -> str:
+    s = max(0, int(round(sec)))
+    return f"{s // 60:02d}:{s % 60:02d}"
+
+
 def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
     """
-    단일 수학 이슈 × 오리지널 자료 블루프린트에 대해:
-    1) 1080p 16:9 본편: Act 1(수학 이슈 화두 제기) + Act 2(원본 PDF 전 페이지 1:1 무가림 직강 + 가상 지휘봉) + Act 3(차별화된 수학교육 통찰)
-    2) 1080x1920 9:16 Q-#Shorts (<46s): 이슈 발문 훅 + 오리지널 결정적 슬라이드 2장 + 수학교육 통찰 결론
+    단일 수학 이슈 × 오리지널 자료 블루프린트에 대해 [능동적 수학 사고 4단계 엔진(active_thinking_engine)]을 결합하여 렌더링:
+    1) 1080p 16:9 본편:
+       - Act 1: 수학 이슈 화두 제기 + [직관 예측 선택 A vs B] + 3초 예측 선택 카운트다운
+       - Act 2: 원본 PDF 전 페이지 1:1 무생략 직강(Rule 28.4) + [결정적 보조선 직전 '백지 도형' 4초 발상 정지] + [결론 직전 3초 근거 추론] + 가상 지휘봉(Rule 43)
+       - Act 3: 차별화된 수학교육 통찰 + [라카토스 반례·경계 실험 & What-If-Not 조건 변형 전이]
+    2) 1080x1920 9:16 능동 사고형 Q-#Shorts (<46s):
+       - Scene 1: 이슈 & 예측 질문 + 2초 사고 타이머 -> Scene 2/3: 오리지널 결정적 단서 2장 -> Scene 4: 조건 변형 통찰 & 본편 유도
     """
+    import active_thinking_engine as ate
     import min7014_video_maker as vmaker
 
     slug = bp["slug"]
     sp = SCRIPTS_DIR / f"{slug}.json"
+    regenerated_script = False
     if not sp.exists():
         vmaker.generate_or_update_script(slug, target_langs=["ko", "en"])
+        regenerated_script = True
     sdoc = json.loads(sp.read_text(encoding="utf-8"))
     pdf_bytes, _ = vmaker.load_or_build_topic_pdf_bytes(sdoc.get("pdf_url", ""), slug)
     doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+
+    # Rule 28.4: 과거 묶음(축약) 대본 발견 시 즉시 전체 페이지 1:1 정밀 대본으로 자동 복원!
+    if len(doc) <= 60 and len(sdoc.get("pages") or []) != len(doc):
+        sdoc = vmaker.generate_or_update_script(slug, target_langs=["ko", "en"])
+        regenerated_script = True
+
+    if regenerated_script:
+        try:
+            import auditor
+            auditor.run_full_7layer_audit(check_live_youtube=False, auto_fix=True)
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            pass
 
     ffmpeg_exe = shutil.which("ffmpeg")
     ffprobe_exe = shutil.which("ffprobe")
@@ -568,18 +606,23 @@ def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
     render_issue_insight_thumbnail(bp, doc, lang_code, long_thumb)
 
     pages = sdoc.get("pages") or []
-    if len(pages) != len(doc):
-        # Rule 28.4: 축약 대본 발견 시 전체 페이지와 1:1 정렬된 인덱스 보장
-        all_indices = list(range(len(pages)))
-    else:
-        all_indices = list(range(len(pages)))
+    all_indices = list(range(len(pages)))
+    act_bp = ate.build_active_thinking_blueprint(slug, sdoc)
+    crux_idx = act_bp["crux_idx"]
+    justify_idx = act_bp["justify_idx"]
+    pre_crux_preview_idx = min(len(doc) - 1, max(1 if len(doc) > 2 else 0, crux_idx - 1))
+    climax_preview_idx = _best_climax_page_idx(doc)
 
     tmp_dir = Path(tempfile.mkdtemp(prefix=f"issue_ins_{slug}_{lang_code}_", dir=str(ROOT_DIR / ".temp") if (ROOT_DIR / ".temp").exists() else None))
     try:
-        # ==================== A. 1080p 16:9 수학교육 통찰 본편 ====================
+        # ==================== A. 1080p 16:9 능동적 수학 사고 통찰 본편 ====================
         long_segs: list[Path] = []
+        cursor_t = 0.0
+        chapter_lines: list[str] = [
+            f"00:00 | {'Math Issue & Active Prediction (A vs B)' if is_en else '오늘의 수학 화두 & A vs B 직관 예측 선택'}"
+        ]
 
-        # [Act 1] 오늘의 수학·교육 이슈 제기 & 기존 암기식 접근 vs 본질적 시각 대비 (1920x1080)
+        # [Act 1] 오늘의 수학·교육 이슈 제기 & [능동적 예측 선택 A vs B] + 3초 예측 타이머
         act1_img = Image.new("RGB", (1920, 1080), (9, 14, 28))
         d1 = ImageDraw.Draw(act1_img)
         d1.rounded_rectangle((48, 36, 1872, 138), radius=20, fill=(30, 58, 138), outline=(250, 204, 21), width=3)
@@ -587,51 +630,135 @@ def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
             (80, 66),
             _clean_canvas_text(bp["issue_category_en"] if is_en else bp["issue_category_ko"], lang_code),
             fill=(254, 240, 138),
-            font=vmaker.get_font_for_lang(lang_code, 36, bold=True),
+            font=vmaker.get_font_for_lang(lang_code, 35, bold=True),
         )
-        _paste_clean_pdf_preview(act1_img, doc, (56, 174, 900, 920), 0)
+        _paste_clean_pdf_preview(act1_img, doc, (56, 174, 900, 920), pre_crux_preview_idx)
 
         d1.rounded_rectangle((936, 174, 1864, 920), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
         hl_txt = bp["issue_headline_en"] if is_en else bp["issue_headline_ko"]
         _draw_fitted_multiline(
-            d1, hl_txt, lang_code, x=974, y_top=206, max_height=196,
-            base_size=36, fill=(255, 255, 255), base_width_ko=23, base_width_en=35,
+            d1, hl_txt, lang_code, x=974, y_top=202, max_height=188,
+            base_size=34, fill=(255, 255, 255), base_width_ko=23, base_width_en=35,
         )
 
-        # 기존 통념 박스 (차분한 슬레이트 네이비 · 적색 배제 Rule 37)
-        d1.rounded_rectangle((972, 418, 1828, 584), radius=16, fill=(30, 41, 59), outline=(148, 163, 184), width=2)
-        old_v = bp["old_view_en"] if is_en else bp["old_view_ko"]
+        # 예측 선택지 A (흔히 빠지는 통념 · 슬레이트 네이비 Rule 37)
+        d1.rounded_rectangle((972, 408, 1828, 578), radius=16, fill=(30, 41, 59), outline=(148, 163, 184), width=2)
+        opt_a = act_bp["option_a_en"] if is_en else act_bp["option_a_ko"]
         _draw_fitted_multiline(
-            d1, old_v, lang_code, x=998, y_top=438, max_height=130,
-            base_size=28, fill=(203, 213, 225), base_width_ko=26, base_width_en=41,
+            d1, opt_a, lang_code, x=998, y_top=428, max_height=136,
+            base_size=27, fill=(226, 232, 240), base_width_ko=26, base_width_en=41,
         )
 
-        # 차별화된 수학교육 시각 박스 (에메랄드 틸 & 앰버 골드)
-        d1.rounded_rectangle((972, 606, 1828, 886), radius=18, fill=(6, 78, 59), outline=(250, 204, 21), width=3)
-        new_v = bp["new_insight_en"] if is_en else bp["new_insight_ko"]
+        # 예측 선택지 B (구조적 불변량/시각 통찰 · 에메랄드 틸 & 골드)
+        d1.rounded_rectangle((972, 598, 1828, 804), radius=18, fill=(6, 78, 59), outline=(250, 204, 21), width=3)
+        opt_b = act_bp["option_b_en"] if is_en else act_bp["option_b_ko"]
         _draw_fitted_multiline(
-            d1, new_v, lang_code, x=998, y_top=628, max_height=236,
-            base_size=30, fill=(254, 240, 138), base_width_ko=25, base_width_en=39,
+            d1, opt_b, lang_code, x=998, y_top=618, max_height=168,
+            base_size=28, fill=(254, 240, 138), base_width_ko=25, base_width_en=39,
         )
+
+        d1.rounded_rectangle((972, 822, 1828, 898), radius=14, fill=(2, 132, 199), outline=(254, 240, 138), width=2)
+        commit_lbl = (
+            "[STEP 1 · COMMIT FIRST] Pick A or B in 3 seconds before the proof starts!"
+            if is_en
+            else "[능동적 사고 1단계] 증명을 보기 전 A와 B 중 내 예측을 3초 먼저 선택하세요!"
+        )
+        d1.text((996, 845), commit_lbl, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 23, bold=True))
 
         d1.rounded_rectangle((48, 952, 1872, 1044), radius=14, fill=(15, 23, 42), outline=(56, 189, 248), width=2)
         foot1 = (
-            "[ARCHIVE] Step-by-Step Visual Proofs: https://min7014.github.io/  |  Interactive MathLab: min7014.github.io/mathedu"
+            "[ARCHIVE] Original Proofs: https://min7014.github.io/  |  Active Thinking Lab: min7014.github.io/mathedu/video_board.html"
             if is_en
-            else "[원문] 오리지널 수학자료실: https://min7014.github.io/  |  동적 기하 & 디딤돌 실습: min7014.github.io/mathedu"
+            else "[원문] 수학자료실: https://min7014.github.io/  |  능동적 사고 실습실: min7014.github.io/mathedu/video_board.html"
         )
-        d1.text((80, 982), foot1, fill=(125, 211, 252), font=vmaker.get_font_for_lang(lang_code, 26, bold=True))
+        d1.text((80, 982), foot1, fill=(125, 211, 252), font=vmaker.get_font_for_lang(lang_code, 25, bold=True))
 
+        act1_tts = (
+            f"{bp['act1_en']} {act_bp['prediction_tts_en']}"
+            if is_en
+            else f"{bp['act1_ko']} {act_bp['prediction_tts_ko']}"
+        )
         act1_mp3 = tmp_dir / "long_act1.mp3"
-        act1_seg = tmp_dir / "long_act1.mp4"
-        vmaker.synthesize_tts_mp3_sync(bp["act1_en"] if is_en else bp["act1_ko"], voice_name, act1_mp3, rate="+6%")
-        _encode_card_segment(act1_img, act1_mp3, act1_seg, ffmpeg_exe, ffprobe_exe)
-        long_segs.append(act1_seg)
+        act1_partA = tmp_dir / "long_act1_a.mp4"
+        vmaker.synthesize_tts_mp3_sync(act1_tts, voice_name, act1_mp3, rate="+5%")
+        dur_a1 = _encode_card_segment(act1_img, act1_mp3, act1_partA, ffmpeg_exe, ffprobe_exe)
 
-        # [Act 2] 오리지널 PDF 1페이지 → 마지막 페이지 100% 무생략 직강 + Rule 43 메이플 가상 지휘봉
+        # Act 1 직후 3.0초 실제 예측 선택 사색 구간 추가
+        pred_pulse = ate.ensure_thinking_pulse_wav(3.0)
+        act1_png = tmp_dir / "act1_hold.png"
+        act1_img.save(act1_png)
+        act1_partB = tmp_dir / "long_act1_b.mp4"
+        subprocess.run(
+            [
+                ffmpeg_exe, "-y", "-loop", "1", "-t", "3.000", "-i", str(act1_png),
+                "-i", str(pred_pulse),
+                "-c:v", "libx264", "-preset", "ultrafast", "-tune", "stillimage", "-crf", "20",
+                "-pix_fmt", "yuv420p", "-r", "24",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2", "-shortest", str(act1_partB),
+            ],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        long_segs.extend([act1_partA, act1_partB])
+        cursor_t += dur_a1 + 3.0
+        chapter_lines.append(
+            f"{_fmt_mmss(cursor_t)} | {'Step-by-Step Original Visual Proof' if is_en else '오리지널 원문 PDF 1페이지부터 직강 시작'}"
+        )
+
+        # [Act 2] 오리지널 PDF 1페이지 → 마지막 페이지 100% 무생략 직강 + 능동적 사고 정지 체크포인트 2곳
         for idx_s, p_idx in enumerate(all_indices, 1):
             p_info = pages[p_idx]
             doc_p = min(len(doc) - 1, max(0, int(p_info.get("page", p_idx + 1)) - 1))
+
+            # ★ [능동적 사고 체크포인트 2]: 결정적 제1보조선 등장 '직전 백지 도형'에서 4초 발상 정지!
+            if p_idx == crux_idx and len(all_indices) >= 3:
+                pre_doc_p = max(0, doc_p - 1)
+                pre_info = pages[max(0, p_idx - 1)]
+                clean_pre_frame = vmaker.render_slide_frame_1080p(
+                    doc[pre_doc_p], pre_info, sdoc, lang_code, show_spotlight=False, stage=1
+                )
+                chapter_lines.append(
+                    f"{_fmt_mmss(cursor_t)} | {'[PAUSE 1] Sketch Your Auxiliary Idea First (4s)' if is_en else '[능동적 사고 1] 보조선 등장 전 먼저 상상하기 (4초)'}"
+                )
+                crux_seg, crux_dur = ate.encode_active_pause_segment_1080p(
+                    base_slide_frame=clean_pre_frame,
+                    lang_code=lang_code,
+                    voice_name=voice_name,
+                    prompt_text=act_bp["crux_prompt_en"] if is_en else act_bp["crux_prompt_ko"],
+                    badge_label="[ACTIVE THINKING 1/2] INVENT THE CLUE FIRST" if is_en else "[능동적 사고 1/2] 보조선을 먼저 상상해 보세요!",
+                    pause_seconds=4,
+                    tmp_dir=tmp_dir,
+                    seg_prefix="crux_pause",
+                    ffmpeg_exe=ffmpeg_exe,
+                    ffprobe_exe=ffprobe_exe,
+                )
+                long_segs.append(crux_seg)
+                cursor_t += crux_dur
+
+            # ★ [능동적 사고 체크포인트 3]: 최종 결론 직전 '왜 성립할까?' 3초 스스로 근거 말하기!
+            elif p_idx == justify_idx and len(all_indices) >= 5 and justify_idx > crux_idx:
+                pre_j_doc = max(0, doc_p - 1)
+                pre_j_info = pages[max(0, p_idx - 1)]
+                clean_j_frame = vmaker.render_slide_frame_1080p(
+                    doc[pre_j_doc], pre_j_info, sdoc, lang_code, show_spotlight=False, stage=1
+                )
+                chapter_lines.append(
+                    f"{_fmt_mmss(cursor_t)} | {'[PAUSE 2] Justify Why It Must Hold (3s)' if is_en else '[능동적 사고 2] 왜 성립하는지 스스로 말하기 (3초)'}"
+                )
+                just_seg, just_dur = ate.encode_active_pause_segment_1080p(
+                    base_slide_frame=clean_j_frame,
+                    lang_code=lang_code,
+                    voice_name=voice_name,
+                    prompt_text=act_bp["justify_prompt_en"] if is_en else act_bp["justify_prompt_ko"],
+                    badge_label="[ACTIVE THINKING 2/2] SELF-EXPLAIN WHY" if is_en else "[능동적 사고 2/2] 성립 근거를 스스로 말해 보세요!",
+                    pause_seconds=3,
+                    tmp_dir=tmp_dir,
+                    seg_prefix="justify_pause",
+                    ffmpeg_exe=ffmpeg_exe,
+                    ffprobe_exe=ffprobe_exe,
+                )
+                long_segs.append(just_seg)
+                cursor_t += just_dur
+
             stage_num = 3 if idx_s == len(all_indices) else (1 if idx_s == 1 else 2)
             slide_frame = vmaker.render_slide_frame_1080p(
                 doc[doc_p], p_info, sdoc, lang_code, show_spotlight=(idx_s > 1), stage=stage_num
@@ -640,54 +767,63 @@ def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
             raw_n = re.sub(r"안녕하세요[^.?!]*[.?!]\s*", "", raw_n).strip()
             if not raw_n:
                 raw_n = (
-                    "Observe how each geometric step connects hypothesis to conclusion."
+                    "Observe how each step connects hypothesis to conclusion."
                     if is_en
-                    else "도형의 각 단계가 가정에서 결론으로 필연적으로 이어지는 과정을 살펴보세요."
+                    else "각 단계가 가정에서 결론으로 필연적으로 이어지는 과정을 살펴보세요."
                 )
             s_mp3 = tmp_dir / f"long_p_{idx_s:02d}.mp3"
             s_mp4 = tmp_dir / f"long_p_{idx_s:02d}.mp4"
             vmaker.synthesize_tts_mp3_sync(raw_n, voice_name, s_mp3, rate="+6%")
-            _encode_card_segment(slide_frame, s_mp3, s_mp4, ffmpeg_exe, ffprobe_exe)
+            seg_d = _encode_card_segment(slide_frame, s_mp3, s_mp4, ffmpeg_exe, ffprobe_exe)
             long_segs.append(s_mp4)
+            cursor_t += seg_d
 
-        # [Act 3] 차별화된 수학교육 통찰 종합 & 소크라테스 열린 질문 아웃트로
+        # [Act 3] 차별화된 수학교육 통찰 종합 & [능동적 사고 체크포인트 4: 라카토스 반례·What-If-Not 조건 변형 전이]
+        chapter_lines.append(
+            f"{_fmt_mmss(cursor_t)} | {'What-If-Not Counterexample & Hands-On Transfer' if is_en else '조건 변형(What-If-Not) & 반례 전이 사고 실험'}"
+        )
         act3_img = Image.new("RGB", (1920, 1080), (8, 18, 34))
         d3 = ImageDraw.Draw(act3_img)
         d3.rounded_rectangle((48, 36, 1872, 138), radius=20, fill=(5, 150, 105), outline=(250, 204, 21), width=3)
         d3.text(
             (80, 66),
-            "[TAKEAWAY] A DIFFERENTIATED PERSPECTIVE IN MATH EDUCATION"
+            "[ACTIVE TRANSFER] BEYOND THE PROOF: WHAT IF CONDITIONS CHANGE?"
             if is_en
-            else "[통찰 정리] 공식 암기에서 '시각적 원리 재발명'으로!",
+            else "[능동적 사고 확장] 증명 끝이 진짜 시작! 조건을 바꾸면 어떻게 될까?",
             fill=(255, 255, 255),
-            font=vmaker.get_font_for_lang(lang_code, 36, bold=True),
+            font=vmaker.get_font_for_lang(lang_code, 35, bold=True),
         )
-        _paste_clean_pdf_preview(act3_img, doc, (56, 174, 900, 920), max(0, len(doc) - 2))
+        _paste_clean_pdf_preview(act3_img, doc, (56, 174, 900, 920), climax_preview_idx)
 
         d3.rounded_rectangle((936, 174, 1864, 920), radius=24, fill=(15, 23, 42), outline=(52, 211, 153), width=3)
         _draw_fitted_multiline(
             d3, bp["new_insight_en"] if is_en else bp["new_insight_ko"], lang_code,
-            x=974, y_top=206, max_height=248, base_size=33, fill=(254, 240, 138),
+            x=974, y_top=198, max_height=226, base_size=31, fill=(254, 240, 138),
             base_width_ko=24, base_width_en=37,
         )
 
-        # 열린 질문 박스
-        d3.rounded_rectangle((972, 474, 1828, 704), radius=18, fill=(30, 58, 138), outline=(56, 189, 248), width=2)
-        q_txt = bp["comment_quiz_en"] if is_en else bp["comment_quiz_ko"]
+        # 라카토스 반례 & What-If-Not 전이 실험 박스
+        d3.rounded_rectangle((972, 444, 1828, 708), radius=18, fill=(30, 58, 138), outline=(250, 204, 21), width=2)
+        wif_txt = act_bp["what_if_en"] if is_en else act_bp["what_if_ko"]
         _draw_fitted_multiline(
-            d3, q_txt, lang_code, x=998, y_top=496, max_height=190,
-            base_size=27, fill=(255, 255, 255), base_width_ko=26, base_width_en=41,
+            d3, wif_txt, lang_code, x=998, y_top=466, max_height=220,
+            base_size=26, fill=(255, 255, 255), base_width_ko=26, base_width_en=41,
         )
 
-        d3.rounded_rectangle((972, 728, 1828, 882), radius=18, fill=(2, 132, 199), outline=(255, 255, 255), width=2)
-        cta1 = "[SUBSCRIBE] @min7014_ai for Deep Visual Math!" if is_en else "[구독] @min7014_ai 수학교육의 깊은 시선을 받아보세요!"
-        cta2 = "847+ Original Visual Proofs → min7014.github.io" if is_en else "847+ 오리지널 시각 증명 아카이브 → min7014.github.io"
-        d3.text((1002, 756), cta1, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 30, bold=True))
-        d3.text((1002, 816), cta2, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 27, bold=True))
+        d3.rounded_rectangle((972, 728, 1828, 892), radius=18, fill=(2, 132, 199), outline=(255, 255, 255), width=2)
+        cta1 = "[HANDS-ON LAB] Try What-If-Not in Link Below!" if is_en else "[직접 실험] 설명란 능동적 사고 실험실 링크에서 직접 움직여 보세요!"
+        cta2 = "[SUBSCRIBE] @min7014_ai  |  min7014.github.io" if is_en else "[구독] @min7014_ai  |  원문 아카이브 min7014.github.io"
+        d3.text((998, 758), cta1, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 25, bold=True))
+        d3.text((998, 818), cta2, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 27, bold=True))
 
+        act3_tts = (
+            f"{bp['act3_en']} {act_bp['what_if_en']}"
+            if is_en
+            else f"{bp['act3_ko']} {act_bp['what_if_ko']}"
+        )
         act3_mp3 = tmp_dir / "long_act3.mp3"
         act3_seg = tmp_dir / "long_act3.mp4"
-        vmaker.synthesize_tts_mp3_sync(bp["act3_en"] if is_en else bp["act3_ko"], voice_name, act3_mp3, rate="+6%")
+        vmaker.synthesize_tts_mp3_sync(act3_tts, voice_name, act3_mp3, rate="+6%")
         _encode_card_segment(act3_img, act3_mp3, act3_seg, ffmpeg_exe, ffprobe_exe)
         long_segs.append(act3_seg)
 
@@ -701,49 +837,73 @@ def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
         _mix_calm_bgm(raw_long, long_mp4, ffmpeg_exe)
         long_dur = vmaker.get_media_duration_seconds(long_mp4, ffprobe_exe)
 
-        # ==================== B. 1080x1920 9:16 질문형 통찰 Q-#Shorts (<46s) ====================
+        # ==================== B. 1080x1920 9:16 능동 사고형 통찰 Q-#Shorts (<46s) ====================
         sh_segs: list[Path] = []
 
-        # Scene 1: 이슈 훅 + 오리지널 초기 슬라이드
+        # Scene 1: 이슈 발문 훅 + 오리지널 초기 백지 도형 + 2.0초 능동적 발상 정지!
         s1 = Image.new("RGB", (1080, 1920), (9, 14, 28))
         ds1 = ImageDraw.Draw(s1)
         ds1.rounded_rectangle((40, 64, 1040, 210), radius=24, fill=(30, 58, 138), outline=(250, 204, 21), width=4)
         ds1.text(
             (72, 108),
-            "[INSIGHT] MATH ISSUE × VISUAL PROOF" if is_en else "[수학교육 통찰] 수학 이슈 × 시각 증명",
+            "[THINK FIRST] PREDICT THE VISUAL CLUE!" if is_en else "[능동적 사고] 먼저 보조선을 상상해 보세요!",
             fill=(254, 240, 138),
-            font=vmaker.get_font_for_lang(lang_code, 40, bold=True),
+            font=vmaker.get_font_for_lang(lang_code, 38, bold=True),
         )
-        _paste_clean_pdf_preview(s1, doc, (48, 248, 1032, 1180), 0)
-        ds1.rounded_rectangle((48, 1220, 1032, 1620), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
+        _paste_clean_pdf_preview(s1, doc, (48, 248, 1032, 1180), pre_crux_preview_idx)
+        ds1.rounded_rectangle((48, 1216, 1032, 1630), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
         _draw_fitted_multiline(
             ds1, bp["issue_headline_en"] if is_en else bp["issue_headline_ko"], lang_code,
-            x=82, y_top=1258, max_height=330, base_size=36, fill=(255, 255, 255),
+            x=82, y_top=1246, max_height=270, base_size=34, fill=(255, 255, 255),
             base_width_ko=22, base_width_en=33,
+        )
+        ds1.rounded_rectangle((76, 1532, 1004, 1606), radius=14, fill=(5, 150, 105), outline=(250, 204, 21), width=2)
+        ds1.text(
+            (102, 1552),
+            "[PAUSE 2s] Where would YOU draw the first line?" if is_en else "[2초 멈춤] 어디에 보조선·단서를 잡으시겠습니까?",
+            fill=(255, 255, 255),
+            font=vmaker.get_font_for_lang(lang_code, 27, bold=True),
         )
 
         sh1_mp3 = tmp_dir / "sh1.mp3"
         sh1_seg = tmp_dir / "sh1.mp4"
         sh_hook_tts = (
-            bp["issue_headline_en"] + " Let us see why in seconds!"
+            bp["issue_headline_en"] + " Pause two seconds—where would YOU draw the key clue?"
             if is_en
-            else bp["issue_headline_ko"] + " 도형 한 장으로 진짜 이유를 확인해 볼까요?"
+            else bp["issue_headline_ko"] + " 정답을 보기 전 2초 동안 어디에 핵심 단서를 잡을지 먼저 상상해 보세요!"
         )
         vmaker.synthesize_tts_mp3_sync(sh_hook_tts, voice_name, sh1_mp3, rate="+18%")
         _encode_card_segment(s1, sh1_mp3, sh1_seg, ffmpeg_exe, ffprobe_exe)
         sh_segs.append(sh1_seg)
 
+        # 2.0초 실제 사색 펄스 세그먼트 (Shorts 리텐션 & 능동적 사고 유도)
+        sh_pulse = ate.ensure_thinking_pulse_wav(2.0)
+        s1_png = tmp_dir / "sh1_hold.png"
+        s1.save(s1_png)
+        sh1_wait = tmp_dir / "sh1_wait.mp4"
+        subprocess.run(
+            [
+                ffmpeg_exe, "-y", "-loop", "1", "-t", "2.000", "-i", str(s1_png),
+                "-i", str(sh_pulse),
+                "-c:v", "libx264", "-preset", "ultrafast", "-tune", "stillimage", "-crf", "20",
+                "-pix_fmt", "yuv420p", "-r", "24",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2", "-shortest", str(sh1_wait),
+            ],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        sh_segs.append(sh1_wait)
+
         # Scene 2 & 3: 오리지널 PDF 핵심 전환점 & 클라이맥스 슬라이드 2장
-        pick_sh = [max(1, len(doc) // 2), max(1, len(doc) - 2)]
+        pick_sh = [min(len(doc) - 1, max(1, crux_idx)), climax_preview_idx]
         for si, dp_i in enumerate(pick_sh, 2):
             sc_v = Image.new("RGB", (1080, 1920), (10, 16, 34))
             dsc = ImageDraw.Draw(sc_v)
             dsc.rounded_rectangle((40, 64, 1040, 196), radius=22, fill=(2, 132, 199), outline=(254, 240, 138), width=3)
             dsc.text(
                 (72, 104),
-                f"[CLUE {si-1}/2] ORIGINAL VISUAL PROOF" if is_en else f"[단서 {si-1}/2] 오리지널 시각 증명",
+                f"[DISCOVERY {si-1}/2] COMPARE WITH YOUR IDEA!" if is_en else f"[단서 공개 {si-1}/2] 여러분의 발상과 비교해 보세요!",
                 fill=(255, 255, 255),
-                font=vmaker.get_font_for_lang(lang_code, 38, bold=True),
+                font=vmaker.get_font_for_lang(lang_code, 35, bold=True),
             )
             _paste_clean_pdf_preview(sc_v, doc, (48, 236, 1032, 1280), dp_i)
 
@@ -772,11 +932,11 @@ def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
         ds4.rounded_rectangle((40, 64, 1040, 200), radius=24, fill=(5, 150, 105), outline=(250, 204, 21), width=4)
         ds4.text(
             (72, 106),
-            "[TAKEAWAY] MATH-ED PERSPECTIVE SHIFT!" if is_en else "[핵심 통찰] 수학교육의 차별화된 시선!",
+            "[WHAT-IF-NOT] KEEP THINKING IN FULL VIDEO!" if is_en else "[능동적 통찰] 전체 증명 & 조건 변형 본편 보기!",
             fill=(255, 255, 255),
-            font=vmaker.get_font_for_lang(lang_code, 38, bold=True),
+            font=vmaker.get_font_for_lang(lang_code, 36, bold=True),
         )
-        _paste_clean_pdf_preview(s4, doc, (48, 236, 1032, 1120), max(0, len(doc) - 1))
+        _paste_clean_pdf_preview(s4, doc, (48, 236, 1032, 1120), climax_preview_idx)
         ds4.rounded_rectangle((48, 1156, 1032, 1620), radius=24, fill=(15, 23, 42), outline=(52, 211, 153), width=4)
         _draw_fitted_multiline(
             ds4, bp["new_insight_en"] if is_en else bp["new_insight_ko"], lang_code,
@@ -784,15 +944,15 @@ def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
             base_width_ko=23, base_width_en=35,
         )
         ds4.rounded_rectangle((72, 1464, 1008, 1592), radius=18, fill=(2, 132, 199))
-        cta_b = "[WATCH] Tap Related Video (Full Proof) & Subscribe!" if is_en else "[본편 보기] 아래 관련 동영상 클릭 & @min7014_ai 구독!"
+        cta_b = "[WATCH] Tap Related Video (Full Active Proof)!" if is_en else "[본편 보기] 아래 관련 동영상 클릭 & 직접 실험하기!"
         ds4.text((92, 1508), cta_b, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 28, bold=True))
 
         sh4_mp3 = tmp_dir / "sh4.mp3"
         sh4_seg = tmp_dir / "sh4.mp4"
         sh_out_tts = (
-            bp["new_insight_en"] + " Tap the related video below for the complete step-by-step proof and subscribe!"
+            bp["new_insight_en"] + " Tap the related video below for the full active-thinking proof and subscribe!"
             if is_en
-            else bp["new_insight_ko"] + " 아래 관련 동영상을 눌러 전체 증명을 확인하고 구독해 두세요!"
+            else bp["new_insight_ko"] + " 조건이 바뀌면 어떻게 될지 아래 관련 동영상 본편에서 직접 확인하고 구독해 두세요!"
         )
         vmaker.synthesize_tts_mp3_sync(sh_out_tts, voice_name, sh4_mp3, rate="+18%")
         _encode_card_segment(s4, sh4_mp3, sh4_seg, ffmpeg_exe, ffprobe_exe)
@@ -833,6 +993,9 @@ def render_issue_insight_bundle(bp: dict, lang_code: str = "ko") -> dict:
             "issue_category": bp["issue_category_en"] if is_en else bp["issue_category_ko"],
             "issue_headline": bp["issue_headline_en"] if is_en else bp["issue_headline_ko"],
             "pedagogical_insight": bp["new_insight_en"] if is_en else bp["new_insight_ko"],
+            "what_if_transfer": act_bp["what_if_en"] if is_en else act_bp["what_if_ko"],
+            "chapters_text": "\n".join(chapter_lines),
+            "active_thinking_v1": True,
             "title": bp["title_en"] if is_en else bp["title_ko"],
             "short_title": bp["short_title_en"] if is_en else bp["short_title_ko"],
             "comment_quiz": bp["comment_quiz_en"] if is_en else bp["comment_quiz_ko"],
@@ -928,46 +1091,61 @@ def try_upload_one_issue_insight(kind: str = "long", force_slug: str | None = No
             s_mp4 = ISSUE_INSIGHT_DIR / f"{slug}_issue_short_{lc}.mp4"
 
             if kind == "long" and not (iss_urls.get(lc) or "").strip():
-                if not l_mp4.exists():
+                pkg_meta = (sdoc.get("issue_insight_packages") or {}).get(lc) or {}
+                if not l_mp4.exists() or not pkg_meta.get("active_thinking_v1"):
                     render_issue_insight_bundle(bp, lang_code=lc)
+                    sdoc = json.loads(sp.read_text(encoding="utf-8"))
+                    iss_urls = sdoc.setdefault("issue_insight_urls", {})
+                    iss_sh_urls = sdoc.setdefault("issue_insight_shorts_urls", {})
+                    pkg_meta = (sdoc.get("issue_insight_packages") or {}).get(lc) or {}
                 if not l_mp4.exists():
                     continue
                 pdf_url = sdoc.get("pdf_url") or "https://min7014.github.io/"
                 web_url = sdoc.get("web_url") or "https://min7014.github.io/"
+                chapters_block = pkg_meta.get("chapters_text") or (
+                    "00:00 | Contemporary Math Issue & Active Prediction (A vs B)\n"
+                    "00:28 | Step-by-Step Original Visual Proof & Active Pause Checkpoints\n"
+                    "04:10 | What-If-Not Counterexample & Hands-On Transfer"
+                    if is_en
+                    else "00:00 | 오늘의 수학 화두 & A vs B 직관 예측 선택\n"
+                    "00:28 | 오리지널 원문 PDF 직강 & 보조선 능동 발상 정지\n"
+                    "04:10 | 조건 변형(What-If-Not) & 반례 전이 사고 실험"
+                )
+                wif_line = pkg_meta.get("what_if_transfer") or ""
                 raw_title = bp["title_en"] if is_en else bp["title_ko"]
                 raw_desc = (
                     f"🏛️ [Original Visual Math Archive (https://min7014.github.io/)]\n"
                     f"• Step-by-Step Original Proof PDF: {pdf_url}\n"
+                    f"• 🧠 Active-Thinking 4-Step Workbench (Predict → Sketch → What-If-Not): https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=active\n"
                     f"• Interactive Dynamic Geometry & MathLab: https://min7014.github.io/mathedu/mathlab.html?slug={slug}\n"
                     f"• Binge Full Visual Proof Playlist: https://www.youtube.com/playlist?list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
-                    f"🧭 [Math Issue × Differentiated Math-Education Perspective]\n"
+                    f"🧭 [Active Mathematical Thinking × Differentiated Math-Education Perspective]\n"
                     f"• Issue Focus: {bp['issue_headline_en']}\n"
-                    f"• Pedagogical Shift: {bp['new_insight_en']}\n\n"
+                    f"• Pedagogical Shift: {bp['new_insight_en']}\n"
+                    f"• Post-Proof Transfer: {wif_line}\n\n"
                     f"✍️ [Human-Crafted Original Depth Notice]\n"
-                    f"This lecture is NOT generic AI-generated content. Every mathematical idea, auxiliary construction, and step-by-step visual proof slide originates 100% from human-authored research materials ({web_url}), with multilingual voice narration used solely to share deep mathematical insight worldwide.\n\n"
-                    f"00:00 | Contemporary Math Issue & Why Rote Formulas Fail\n"
-                    f"00:22 | 1:1 Step-by-Step Original Visual Proof ({slug})\n"
-                    f"03:10 | Differentiated Math-Education Takeaway & Open Inquiry\n\n"
-                    f"#MathematicsEducation #VisualProof #MathematicalThinking #GeometryProof #CalculusIntuition"
+                    f"This lecture is NOT generic AI-generated content. Every mathematical idea, auxiliary construction, and step-by-step visual proof slide originates 100% from human-authored research materials ({web_url}), designed with intentional Active-Thinking Pause Checkpoints so learners invent key ideas before seeing the answer.\n\n"
+                    f"{chapters_block}\n\n"
+                    f"#MathematicsEducation #ActiveThinking #VisualProof #MathematicalThinking #DiscoveryLearning"
                     if is_en
                     else f"🏛️ [오리지널 원문 수학자료실 (https://min7014.github.io/) 바로가기]\n"
                     f"• 오리지널 단계별 시각 증명 PDF 원문: {pdf_url}\n"
+                    f"• 🧠 능동적 사고 4단계 워크벤치 (직관 예측 → 보조선 설계 → 조건 변형 실습): https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=active\n"
                     f"• 자체 제작 MathLab 동적 작도 실습: https://min7014.github.io/mathedu/mathlab.html?slug={slug}\n"
                     f"• 연속재생 전체 증명 플레이리스트: https://www.youtube.com/playlist?list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
-                    f"🧭 [수학 분야 핵심 화두 × 차별화된 수학교육 통찰]\n"
+                    f"🧭 [능동적 수학 사고 × 차별화된 수학교육 통찰]\n"
                     f"• 오늘의 화두: {bp['issue_headline_ko']}\n"
-                    f"• 수학교육의 시선: {bp['new_insight_ko']}\n\n"
+                    f"• 수학교육의 시선: {bp['new_insight_ko']}\n"
+                    f"• 증명 이후 확장 질문: {wif_line}\n\n"
                     f"✍️ [오리지널 인간 저작물 정통성 안내]\n"
-                    f"본 콘텐츠는 모든 것이 AI에 의해 만들어진 단순 생성물이 아닙니다. 기본 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 사람이 오랜 세월 직접 연구하고 한 땀 한 땀 작도한 깊이 있는 오리지널 원문 자료({web_url})로부터 탄생했으며, 다국어 음성은 이 깊은 수학교육적 통찰을 전달하기 위한 도구로만 활용되었습니다.\n\n"
-                    f"00:00 | 오늘의 수학·교육 화두 & 기계적 공식 암기의 한계\n"
-                    f"00:22 | 오리지널 원문 PDF 한 땀 한 땀 직강 ({slug})\n"
-                    f"03:10 | 교실과 학습을 바꾸는 수학교육 통찰 & 열린 질문\n\n"
-                    f"#수학교육 #시각적증명 #수학적사고력 #기하직관 #질문하는수업"
+                    f"본 콘텐츠는 모든 것이 AI에 의해 만들어진 단순 생성물이 아닙니다. 기본 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 사람이 오랜 세월 직접 연구하고 한 땀 한 땀 작도한 깊이 있는 오리지널 원문 자료({web_url})로부터 탄생했으며, 시청자가 수동적으로 듣지 않고 스스로 보조선을 먼저 상상하고 조건을 변형해 보도록 '능동적 사고 정지 체크포인트'를 결합했습니다.\n\n"
+                    f"{chapters_block}\n\n"
+                    f"#수학교육 #능동적사고 #시각적증명 #수학적사고력 #질문하는수업"
                 )
                 raw_tags = (
-                    ["Mathematics Education", "Visual Math Proof", "Mathematical Thinking", "Geometry Intuition", "Discovery Learning"]
+                    ["Mathematics Education", "Active Mathematical Thinking", "Visual Math Proof", "Geometry Intuition", "Discovery Learning"]
                     if is_en
-                    else ["수학교육", "시각적증명", "수학적사고력", "기하직관", "질문하는수학수업", "개념원리재발명"]
+                    else ["수학교육", "능동적사고", "시각적증명", "수학적사고력", "기하직관", "질문하는수학수업"]
                 )
                 gated = _aud.sanitize_and_gate_upload_payload(raw_title, raw_desc, raw_tags)
                 title = vmaker.sanitize_youtube_title(gated["title"])
@@ -998,7 +1176,12 @@ def try_upload_one_issue_insight(kind: str = "long", force_slug: str | None = No
                         except Exception:
                             pass
                     try:
-                        c_txt = (bp["comment_quiz_en"] if is_en else bp["comment_quiz_ko"]) + f"\n🔗 https://www.youtube.com/watch?v={vid}&list=UUSlqQfOEtRfJuMPyGMLgFYA"
+                        lab_line = (
+                            f"\n🧠 Hands-On Active Thinking Lab: https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=active"
+                            if is_en
+                            else f"\n🧠 내 손으로 직접 해보는 능동적 사고 실험실: https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=active"
+                        )
+                        c_txt = (bp["comment_quiz_en"] if is_en else bp["comment_quiz_ko"]) + lab_line + f"\n🔗 https://www.youtube.com/watch?v={vid}&list=UUSlqQfOEtRfJuMPyGMLgFYA"
                         yt.commentThreads().insert(
                             part="snippet",
                             body={"snippet": {"videoId": vid, "topLevelComment": {"snippet": {"textOriginal": c_txt}}}},
@@ -1022,14 +1205,18 @@ def try_upload_one_issue_insight(kind: str = "long", force_slug: str | None = No
                     continue
                 raw_sh_title = bp["short_title_en"] if is_en else bp["short_title_ko"]
                 long_u = iss_urls[lc]
+                long_vid = long_u.rstrip("/").split("/")[-1].split("?")[0]
+                watch_pl = f"https://www.youtube.com/watch?v={long_vid}&list=UUSlqQfOEtRfJuMPyGMLgFYA" if long_vid else long_u
                 raw_sh_desc = (
-                    f"🎬 Watch Full Math-Education Insight & Step-by-Step Proof (1080p): {long_u}&list=UUSlqQfOEtRfJuMPyGMLgFYA\n"
+                    f"🎬 Watch Full 1080p Active-Thinking Proof & Insight: {watch_pl}\n"
+                    f"🧠 Hands-On 4-Step Active Thinking Lab: https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=active\n"
                     f"🏛️ Original Visual Proof Archive: https://min7014.github.io/\n"
-                    f"#Shorts #MathematicsEducation #VisualProof #MathThinking"
+                    f"#Shorts #MathematicsEducation #ActiveThinking #VisualProof"
                     if is_en
-                    else f"🎬 1080p 수학교육 통찰 & 전체 시각 증명 본편 바로 보기: {long_u}&list=UUSlqQfOEtRfJuMPyGMLgFYA\n"
+                    else f"🎬 1080p 능동적 수학 사고 통찰 & 전체 시각 증명 본편 바로 보기: {watch_pl}\n"
+                    f"🧠 내 손으로 직접 해보는 능동적 사고 4단계 워크벤치: https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=active\n"
                     f"🏛️ 오리지널 원문 수학자료실: https://min7014.github.io/\n"
-                    f"#Shorts #수학교육 #시각적증명 #수학적사고력"
+                    f"#Shorts #수학교육 #능동적사고 #시각적증명 #수학적사고력"
                 )
                 raw_sh_tags = ["Shorts", "Mathematics Education", "Visual Proof"] if is_en else ["Shorts", "수학교육", "시각적증명", "수학이슈"]
                 gated_sh = _aud.sanitize_and_gate_upload_payload(raw_sh_title, raw_sh_desc, raw_sh_tags)
@@ -1096,9 +1283,10 @@ def format_issue_insight_status_summary() -> str:
             continue
 
     lines = [
-        "🧭 [크레딧 0원 · 수학 분야 실시간 이슈 × min7014 오리지널 수학교육 통찰 엔진 현황]",
+        "🧭 [크레딧 0원 · 수학 분야 실시간 이슈 × 능동적 수학 사고(Active Thinking) 통찰 엔진 현황]",
         f"• 실시간 레이더 스캔: {radar.get('scanned_at')} (감지 화두 {radar.get('discovered_count', 0)}건)",
         f"• 이달의 핵심 교육 화두: {radar.get('seasonal_theme')}",
+        "• 능동 사고 4단계 엔진: A vs B 직관 예측(3초) → 백지 도형 발상 정지(4초) → 결론 정당화(3초) → What-If-Not 전이",
         f"• 렌더링 완비 자산: 1080p 통찰 본편 {long_cnt}편 / 9:16 통찰 Q-#Shorts {short_cnt}편",
         f"• @min7014_ai 라이브 발행: 본편 {uploaded_long}편 / Q-#Shorts {uploaded_short}편",
     ]

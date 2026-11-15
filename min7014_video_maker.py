@@ -4595,8 +4595,42 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
         cursor_sec += c_seg_dur
         segment_files.append(cold_seg)
 
+        try:
+            import active_thinking_engine as _ate_q
+            _q_act_bp = _ate_q.build_active_thinking_blueprint(slug_key, script_doc)
+        except Exception:
+            _ate_q = None
+            _q_act_bp = None
+
         for seg_idx, p_info in enumerate(pages_to_render):
             p_idx = min(len(doc) - 1, max(0, p_info["page"] - 1))
+
+            # [능동적 사고 정지 게이트]: 결정적 보조선·전환점 등장 직전 '백지 도형'에서 실제 4초 발상 카운트다운 부여!
+            if _ate_q is not None and _q_act_bp is not None and n_pages >= 3 and seg_idx == _q_act_bp["crux_idx"]:
+                try:
+                    pre_doc_idx = max(0, p_idx - 1)
+                    pre_p_info = pages_to_render[max(0, seg_idx - 1)]
+                    clean_pre = render_slide_frame_1080p(doc[pre_doc_idx], pre_p_info, script_doc, lang_code, show_spotlight=False, stage=1)
+                    ap_seg, ap_dur = _ate_q.encode_active_pause_segment_1080p(
+                        base_slide_frame=clean_pre,
+                        lang_code=lang_code,
+                        voice_name=voice_name,
+                        prompt_text=_q_act_bp["crux_prompt_en"] if lang_code == "en" else _q_act_bp["crux_prompt_ko"],
+                        badge_label="[ACTIVE THINKING] INVENT THE CLUE FIRST" if lang_code == "en" else "[능동적 사고] 보조선을 먼저 상상해 보세요!",
+                        pause_seconds=4,
+                        tmp_dir=tmp_dir,
+                        seg_prefix=f"q_crux_{seg_idx:03d}",
+                        ffmpeg_exe=ffmpeg_exe,
+                        ffprobe_exe=ffprobe_exe,
+                        fps=30,
+                        audio_rate=48000,
+                        h264_high_profile=True,
+                    )
+                    segment_files.append(ap_seg)
+                    cursor_sec += ap_dur
+                except Exception:
+                    pass
+
             q_narr = build_question_classroom_page_text(slug_key, p_info, seg_idx, n_pages, script_doc, lang_code=lang_code)
             p_info.setdefault("question_narrations", {})[lang_code] = q_narr
 

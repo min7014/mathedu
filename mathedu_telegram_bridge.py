@@ -394,6 +394,18 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         res = _arw_fix.run_autonomous_agy_autofix(targets, notify_telegram=False)
         return f"🛠️ [오류신고 자율 수리 & 배포 실행 결과]\n• 상태: {res.get('status')}\n\n{res.get('summary', '')}"
 
+    if low in ("!능동사고", "!사고", "/active", "!active"):
+        return (
+            "🧠 [크레딧 0원 · 능동적 수학 사고(Active Thinking) 4단계 시네마 & 웹 코칭 시스템]\n"
+            "• 1단계 (A vs B 직관 예측 3초): 증명 시작 전 흔한 통념(A) vs 구조적 불변량(B) 먼저 선택\n"
+            "• 2단계 (백지 도형 4초 발상 정지): 보조선 등장 직전 순수 도형(y:86~810 100% 무가림) + 4s→1s 타이머 게이지\n"
+            "• 3단계 (결론 직전 3초 자기 정당화): 왜 등식·평행·합동이 성립하는지 스스로 말하기\n"
+            "• 4단계 (라카토스 반례 & What-If-Not 전이): 조건 변형 실험 & 웹 실습실 직결\n"
+            "• 웹 실습실 예시:\n"
+            "  - 타원 빛 반사: https://min7014.github.io/mathedu/video_board.html?slug=2022051507&mode=active\n"
+            "  - 포물선 중점 접선: https://min7014.github.io/mathedu/video_board.html?slug=2019072401&mode=active"
+        )
+
     if low in ("!이슈", "!통찰", "!수학이슈", "/issue", "!issue"):
         sys.path.insert(0, str(ROOT_DIR))
         import math_issue_insight_creator as _miic
