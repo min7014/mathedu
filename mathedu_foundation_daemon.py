@@ -302,7 +302,9 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
             }
         }, ensure_ascii=False, indent=2), encoding="utf-8")
         try:
+            import importlib
             import _antigravity_report_watcher as _arw_hb
+            importlib.reload(_arw_hb)
             _arw_hb.poll_and_notify_error_reports_once(send_telegram=True)
         except Exception:
             pass

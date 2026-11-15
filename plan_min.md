@@ -625,3 +625,14 @@ python -X utf8 pr.py status
        - `normalizeBilingualContainers(scope)`: 214개 `board/*.html` 및 `offline/*.html` 내 `.bilingual-en` 옆 미래핑 한글 형제 노드를 자동으로 `.bilingual-ko`로 감싸 영문 모드에서 한글 병기 노출을 0%로 차단하고 `KO` 복귀 시 100% 원상 복구.
        - `<svg><text>` 다이어그램 라벨, `<textarea placeholder>` 속성, `CanvasRenderingContext2D.prototype.fillText/strokeText/measureText`(Polypad 대수타일·Marbleslides·MathLab 작도 캔버스)까지 실시간 양방향 번역 지원.
        - `board/index.json` 212개 전 문항 `title_en` 추출 탑재 및 `offline/*.html`·`offline/index.html` 재빌드(`build_offline_quizzes.py`), 전 페이지 공통 `KO | 🌐 EN` 언어 전환 버튼(`localStorage: mathedu_lang` & `?lang=en` 동기화) 및 `sw.js` 캐시 버전(`mathedu-play-v20261115-en`) 일괄 갱신 완료.
+
+
+---
+
+### [2026-11-15 추가 정책] 홈페이지 오류신고 3트랙 시각 확인(텔레그램 스크린샷) & 즉시 수리 분기 원칙 (Rule 59)
+- **회장님(`min7014`) 원문 지침**:
+  > *"오류신고가 들어왔을때 그 화면을 그림으로 여기에 보여주고 고칠지의 여부를 나에게 뭍기를 바란다. 그리고 비슷한 오류종류는 묻지 말고 고쳐라. 수학적으로 틀린 내용이 있다면 바로 바꾸면 된다."*
+- **아키텍처 구현 내역 (`_antigravity_report_watcher.py` · `mathedu_telegram_bridge.py` · `assets/approved_error_patterns.json`)**:
+  1. **Track 1 — 수학적 오류 (`math_error`)**: 수식·계산·부호·정답·기하 조건·증명 논리 등 수학적으로 틀린 내용이 제보되면 질문 대기 없이 즉시 수학적 진위를 엄밀히 검산하여 바로 수정·전수 반영·배포 후 완료 보고.
+  2. **Track 2 — 기승인 유사 오류 유형 (`approved_similar`)**: `assets/approved_error_patterns.json` 레지스트리에 등록된 유사 오류 종류(영문 미번역 잔존, LaTeX/MathJax 렌더링 깨짐, 보기 수식·조사 줄바꿈 분리 및 이후 승인된 모든 유형)는 다시 묻지 않고 즉시 전수 수리·배포.
+  3. **Track 3 — 신규 유형 화면·기능·제안 신고 (`ask_with_screenshot`)**: 무창 Headless Chromium(`capture_error_report_screenshot`)으로 신고 URL·뷰포트·문항 단계(`.q` 잠금 해제)·선택 영역(`🚨 신고 지점` 붉은 하이라이트 배지)을 그림(`.png`)으로 찍어 텔레그램(`@anti7014_bot`)에 `sendPhoto` + 인라인 버튼(`[✅ 고쳐 (비슷한 오류도 앞으로 자동수리)]` / `[🔧 이번 건만 수정]` / `[❌ 고치지 마 (기각)]`)으로 먼저 보고하고, 회장님 승인(버튼 클릭 또는 `'고쳐'` 텍스트 답장) 시 즉시 전수 수리 및 `assets/approved_error_patterns.json` 자동 등록.

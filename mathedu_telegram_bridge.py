@@ -177,6 +177,136 @@ def send_msg(token: str, chat_id: str | int, text: str) -> None:
             print(f"[WARN] sendMessage 오류: {e}")
 
 
+def send_photo(
+    token: str,
+    chat_id: str | int,
+    photo_path: str | Path,
+    caption: str = "",
+    reply_markup: dict | None = None,
+    timeout: int = 45,
+) -> dict | None:
+    p = Path(photo_path)
+    if not p.exists():
+        return None
+    boundary = f"----MatheduTgBoundary{int(time.time() * 1000)}"
+    parts: list[bytes] = []
+
+    def _add_field(name: str, val: str) -> None:
+        parts.append(f"--{boundary}\r\n".encode("utf-8"))
+        parts.append(f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode("utf-8"))
+        parts.append(f"{val}\r\n".encode("utf-8"))
+
+    _add_field("chat_id", str(chat_id))
+    if caption:
+        _add_field("caption", caption[:1024])
+    if reply_markup is not None:
+        _add_field("reply_markup", json.dumps(reply_markup, ensure_ascii=False))
+
+    mime = "image/png" if p.suffix.lower() == ".png" else "image/jpeg"
+    parts.append(f"--{boundary}\r\n".encode("utf-8"))
+    parts.append(
+        f'Content-Disposition: form-data; name="photo"; filename="{p.name}"\r\n'
+        f"Content-Type: {mime}\r\n\r\n".encode("utf-8")
+    )
+    parts.append(p.read_bytes())
+    parts.append(f"\r\n--{boundary}--\r\n".encode("utf-8"))
+    body = b"".join(parts)
+
+    url = f"https://api.telegram.org/bot{token}/sendPhoto"
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except Exception as e:
+        print(f"[WARN] sendPhoto 오류: {e}")
+        return None
+
+
+def answer_callback_query(token: str, callback_query_id: str, text: str = "") -> None:
+    try:
+        payload: dict = {"callback_query_id": callback_query_id}
+        if text:
+            payload["text"] = text[:190]
+        tg_api(token, "answerCallbackQuery", payload, timeout=15)
+    except Exception:
+        pass
+
+
+def _mark_telegram_approval_message_decided(
+    token: str,
+    chat_id: str | int,
+    message_obj: dict | None,
+    decision_line: str,
+) -> None:
+    if not message_obj:
+        return
+    mid = message_obj.get("message_id")
+    if not mid:
+        return
+    try:
+        if "photo" in message_obj or "caption" in message_obj:
+            old_cap = (message_obj.get("caption") or "").split("\n\n❓ 이 오류신고를")[0]
+            new_cap = f"{old_cap}\n\n{decision_line}"[:1024]
+            tg_api(
+                token,
+                "editMessageCaption",
+                {"chat_id": chat_id, "message_id": mid, "caption": new_cap},
+                timeout=15,
+            )
+        else:
+            old_txt = (message_obj.get("text") or "").split("\n\n❓ 이 오류신고를")[0]
+            new_txt = f"{old_txt}\n\n{decision_line}"[:4000]
+            tg_api(
+                token,
+                "editMessageText",
+                {"chat_id": chat_id, "message_id": mid, "text": new_txt},
+                timeout=15,
+            )
+    except Exception:
+        pass
+
+
+def _parse_awaiting_error_decision_text(raw_text: str) -> dict | None:
+    """
+    대기 중인 Track 3 오류신고가 있을 때 회장님의 짧은 자연어 응답('고쳐', '승인', '이번만 고쳐', '고치지마', '보류' 등)을 판별합니다.
+    """
+    import re as _re_dec
+
+    t = (raw_text or "").strip()
+    if not t or len(t) > 40:
+        return None
+    low = t.lower()
+
+    m_id = _re_dec.search(r"#?r?(\d+)\s*번?", low)
+    target_id = f"R{m_id.group(1)}" if m_id else ("ALL" if any(w in low for w in ("다 고쳐", "모두 고쳐", "전부 고쳐")) else "")
+
+    reject_exact = {
+        "고치지마", "고치지 마", "고치지마라", "고치지 마라", "하지마", "하지 마",
+        "수정하지마", "수정하지 마", "안고쳐도돼", "안 고쳐도 돼", "보류", "기각",
+        "패스", "냅둬", "놔둬", "아니", "아니오", "아니요", "no", "x", "!기각", "!보류",
+    }
+    if low in reject_exact or _re_dec.fullmatch(r"#?r?\d+\s*번?\s*(고치지\s*마|보류|기각|패스|냅둬)", low):
+        return {"action": "reject", "target_id": target_id}
+
+    if _re_dec.fullmatch(r"(#?r?\d+\s*번?\s*)?(이번만\s*고쳐|이번\s*건만\s*수정|이번만\s*수정)", low):
+        return {"action": "approve", "register_similar": False, "target_id": target_id}
+
+    approve_exact = {
+        "고쳐", "고쳐라", "고쳐줘", "수정", "수정해", "수정해라", "수정해줘",
+        "승인", "응", "ㅇㅇ", "ㅇ", "네", "예", "그래", "좋아", "오케이", "ok",
+        "다 고쳐", "모두 고쳐", "전부 고쳐", "!승인", "!고쳐",
+    }
+    if low in approve_exact or _re_dec.fullmatch(r"#?r?\d+\s*번?\s*(고쳐|고쳐라|수정|수정해|승인)", low):
+        return {"action": "approve", "register_similar": True, "target_id": target_id}
+
+    return None
+
+
 def run_shell(cmd: list[str], timeout: int = 180) -> str:
     try:
         proc = subprocess.run(
@@ -231,8 +361,12 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                     import _antigravity_report_watcher as _arw
                     rep_res = _arw.poll_and_notify_error_reports_once(send_telegram=True)
                     if rep_res.get("newly_alerted"):
+                        try:
+                            LIVE_TURN_LOCK_FILE.write_text(str(time.time()), encoding="utf-8")
+                        except Exception:
+                            pass
                         print("======================================================================")
-                        print("🚨 [WEB_ERROR_REPORT_INCOMING] 홈페이지 신규 오류신고 감지 (Reactive Wakeup)")
+                        print("🚨 [WEB_ERROR_REPORT_IMMEDIATE_AUTOFIX] 즉시 수리 대상(수학오류/기승인유형) 오류신고 감지")
                         print(json.dumps(rep_res.get("newly_alerted"), ensure_ascii=False, indent=2))
                         print("======================================================================")
                         return 0
@@ -240,9 +374,64 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                     pass
             st_cur = load_offset_state()
             offset = max(offset, int(st_cur.get("offset", 0)))
-            res = tg_api(token, "getUpdates", {"offset": offset, "timeout": 25}, timeout=35)
+            res = tg_api(
+                token,
+                "getUpdates",
+                {"offset": offset, "timeout": 25, "allowed_updates": ["message", "callback_query"]},
+                timeout=35,
+            )
             for upd in res.get("result", []):
                 offset = upd["update_id"] + 1
+
+                # 1) 인라인 버튼 콜백 처리 (오류신고 화면 확인 후 [✅ 고쳐] / [🔧 이번 건만 수정] / [❌ 고치지 마])
+                cb = upd.get("callback_query")
+                if cb:
+                    cb_id = cb.get("id", "")
+                    cb_data = str(cb.get("data") or "")
+                    cb_msg = cb.get("message") or {}
+                    cb_chat_id = str((cb_msg.get("chat") or {}).get("id", ""))
+                    save_offset_state(offset, allowed_chat_id or cb_chat_id)
+                    if allowed_chat_id and cb_chat_id != str(allowed_chat_id):
+                        answer_callback_query(token, cb_id, "권한이 없습니다.")
+                        continue
+                    if cb_data.startswith(("err_approve_auto:", "err_approve_once:", "err_reject:")):
+                        sys.path.insert(0, str(ROOT_DIR))
+                        import _antigravity_report_watcher as _arw_cb
+
+                        act, _, seq_id = cb_data.partition(":")
+                        if act == "err_reject":
+                            answer_callback_query(token, cb_id, "🛑 수정 보류·종결 처리했습니다.")
+                            _arw_cb.reject_awaiting_report(seq_id)
+                            _mark_telegram_approval_message_decided(
+                                token, cb_chat_id, cb_msg, f"🛑 [회장님 결정 완료: #{seq_id.lstrip('R')} 수정 안 함(기각)]"
+                            )
+                            send_msg(token, cb_chat_id, f"🛑 [신고 #{seq_id.lstrip('R')}] 회장님 지시에 따라 코드 수정 없이 종결 처리했습니다.")
+                            continue
+
+                        reg_sim = act == "err_approve_auto"
+                        app_res = _arw_cb.approve_awaiting_report(seq_id, register_similar=reg_sim)
+                        answer_callback_query(token, cb_id, "✅ 승인 완료! 즉시 수리를 시작합니다.")
+                        mode_note = "유사 오류도 앞으로 자동수리 등록" if reg_sim else "이번 건만 수정"
+                        _mark_telegram_approval_message_decided(
+                            token, cb_chat_id, cb_msg, f"✅ [회장님 결정 완료: #{seq_id.lstrip('R')} 수정 승인 ({mode_note})]"
+                        )
+                        if app_res.get("approved_reports"):
+                            try:
+                                LIVE_TURN_LOCK_FILE.write_text(str(time.time()), encoding="utf-8")
+                            except Exception:
+                                pass
+                            send_msg(
+                                token,
+                                cb_chat_id,
+                                f"🛠️ [신고 #{seq_id.lstrip('R')} 수정 착수] 회장님 승인을 확인했습니다 ({mode_note}). 즉시 전수 수리 및 배포 후 보고드립니다!",
+                            )
+                            print("======================================================================")
+                            print("✅ [TELEGRAM_ERROR_REPORT_APPROVED] 회장님 화면 확인 후 오류신고 수정 승인")
+                            print(json.dumps(app_res, ensure_ascii=False, indent=2))
+                            print("======================================================================")
+                            return 0
+                    continue
+
                 msg = upd.get("message") or {}
                 chat = msg.get("chat") or {}
                 chat_id = str(chat.get("id", ""))
@@ -278,6 +467,47 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                     pass
 
                 full_text = "\n".join(collected_texts)
+
+                # 2) 대기 중인 오류신고가 있을 때 짧은 자연어 승인/기각('고쳐', '승인', '고치지마' 등) 즉시 분기
+                try:
+                    sys.path.insert(0, str(ROOT_DIR))
+                    import _antigravity_report_watcher as _arw_txt
+
+                    if _arw_txt.get_pending_approval_items():
+                        dec = _parse_awaiting_error_decision_text(full_text)
+                        if dec is not None:
+                            if dec["action"] == "reject":
+                                rej = _arw_txt.reject_awaiting_report(dec.get("target_id", ""))
+                                r_ids = ", ".join(rej.get("rejected_ids") or [])
+                                send_msg(token, chat_id, f"🛑 [{r_ids}] 회장님 지시에 따라 코드 수정 없이 보류·종결 처리했습니다.")
+                                continue
+                            app_res = _arw_txt.approve_awaiting_report(
+                                dec.get("target_id", ""),
+                                register_similar=bool(dec.get("register_similar", True)),
+                            )
+                            if app_res.get("approved_reports"):
+                                try:
+                                    LIVE_TURN_LOCK_FILE.write_text(str(time.time()), encoding="utf-8")
+                                except Exception:
+                                    pass
+                                mode_note = (
+                                    "비슷한 오류종류도 자동수리 등록 완료"
+                                    if dec.get("register_similar", True)
+                                    else "이번 건만 수정"
+                                )
+                                send_msg(
+                                    token,
+                                    chat_id,
+                                    f"🛠️ 회장님 수정 승인을 확인했습니다 ({mode_note}). 즉시 전수 수리 및 배포 후 보고드립니다!",
+                                )
+                                print("======================================================================")
+                                print("✅ [TELEGRAM_ERROR_REPORT_APPROVED] 회장님 자연어 답장 오류신고 수정 승인")
+                                print(json.dumps(app_res, ensure_ascii=False, indent=2))
+                                print("======================================================================")
+                                return 0
+                except Exception:
+                    pass
+
                 # [0-Credit Instant Router] 정형 현황·수익·업로드·무결성 명령은 LLM 크레딧 0원으로 즉시 응답 후 리스닝 지속!
                 quick_reply = _handle_zero_credit_quick_command(full_text)
                 if quick_reply is not None:
@@ -372,6 +602,8 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !업로드 (또는 /wave) : 전략 v2.0(실전함정·3~10분 본편 3 + 한/영 Q-#Shorts 3) 업로드 웨이브 즉시 실행\n"
             "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
             "• !신고 (또는 !오류신고 / /reports) : [크레딧 0] mathedu 홈페이지 실시간 오류신고 접수·수리 현황 조회\n"
+            "• !신고화면 [번호] (또는 !오류화면) : [크레딧 0] 최근(또는 지정 번호) 오류신고 실제 화면 스크린샷 즉시 전송\n"
+            "• !오류패턴 (또는 !자동수리목록) : [크레딧 0] 3트랙 오류신고 정책 및 기승인 유사 오류 유형 목록 확인\n"
             "• !감사 (또는 !저작권 / !상표권) : [크레딧 0] 독립 감사관(auditor) 7계층 저작권·상표권·라이브 유튜브 전수 감사\n"
             "• !점검 (또는 /audit) : 전 문항·전 시스템 무결성 고속 스캔\n"
             "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n\n"
@@ -384,13 +616,57 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         _arw.poll_and_notify_error_reports_once(send_telegram=False)
         return _arw.format_error_reports_summary()
 
+    if low in ("!오류패턴", "!자동수리목록", "/errorpatterns", "!errorpatterns"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import _antigravity_report_watcher as _arw_pat
+        return _arw_pat.format_approved_patterns_summary()
+
+    if low.startswith(("!신고화면", "!오류화면", "/reportshot", "!reportshot")):
+        sys.path.insert(0, str(ROOT_DIR))
+        import _antigravity_report_watcher as _arw_shot
+
+        all_r = _arw_shot.fetch_all_reports(timeout=12)
+        if not all_r:
+            return "ℹ️ 조회된 오류신고 내역이 없습니다."
+        parts = cmd.split()
+        idx = len(all_r)
+        if len(parts) >= 2 and parts[1].lstrip("#Rr").isdigit():
+            req_n = int(parts[1].lstrip("#Rr"))
+            if 1 <= req_n <= len(all_r):
+                idx = req_n
+        target_r = all_r[idx - 1]
+        shot_p = _arw_shot.capture_error_report_screenshot(target_r, seq_id=f"R{idx}")
+        cfg_s = load_env_config()
+        tk_s = cfg_s.get("TELEGRAM_BOT_TOKEN", "")
+        cid_s = cfg_s.get("TELEGRAM_CHAT_ID", "") or load_offset_state().get("chat_id", "")
+        parsed_s = _arw_shot.parse_report_fields(target_r)
+        if shot_p and tk_s and cid_s:
+            send_photo(
+                tk_s,
+                cid_s,
+                shot_p,
+                caption=(
+                    f"📸 [신고 #{idx} 화면 미리보기]\n"
+                    f"• 위치: {parsed_s['quiz_slug']} (단계: {parsed_s['question_num'] or '전체'})\n"
+                    f"• 내용: {parsed_s['detail'][:220]}"
+                ),
+            )
+            return f"✅ 신고 #{idx} 화면 스크린샷을 전송했습니다."
+        return "⚠️ 화면 스크린샷 캡처에 실패했습니다."
+
     if low in ("!수리", "!오류수리", "/autofix", "!autofix"):
         sys.path.insert(0, str(ROOT_DIR))
         import _antigravity_report_watcher as _arw_fix
-        polled = _arw_fix.poll_and_notify_error_reports_once(send_telegram=False)
+        polled = _arw_fix.poll_and_notify_error_reports_once(send_telegram=True)
         targets = polled.get("valid_autofix_targets") or []
+        awaiting_cnt = len(polled.get("awaiting_approval_targets") or [])
         if not targets:
-            return "✅ [크레딧 0원 확인] 현재 시트(gid=838754808)에 미처리 오류신고가 0건입니다! 모든 신고가 수리·배포 완료 상태입니다."
+            if awaiting_cnt > 0:
+                return (
+                    f"📸 [회장님 수정 승인 대기 중: {awaiting_cnt}건]\n"
+                    "전송된 오류 화면 스크린샷 아래의 [✅ 고쳐] 버튼을 누르시거나 '고쳐'로 답장해 주시면 즉시 전수 수리를 시작합니다."
+                )
+            return "✅ [크레딧 0원 확인] 현재 시트(gid=838754808)에 미처리 오류신고가 0건입니다! 모든 신고가 처리 완료 상태입니다."
         res = _arw_fix.run_autonomous_agy_autofix(targets, notify_telegram=False)
         return f"🛠️ [오류신고 자율 수리 & 배포 실행 결과]\n• 상태: {res.get('status')}\n\n{res.get('summary', '')}"
 
@@ -697,10 +973,70 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
             st_cur = load_offset_state()
             offset = max(offset, int(st_cur.get("offset", 0)))
             res = await asyncio.to_thread(
-                tg_api, token, "getUpdates", {"offset": offset, "timeout": 8}, 15
+                tg_api,
+                token,
+                "getUpdates",
+                {"offset": offset, "timeout": 8, "allowed_updates": ["message", "callback_query"]},
+                15,
             )
             for upd in res.get("result", []):
                 offset = upd["update_id"] + 1
+
+                # 1) 워치독 모드에서도 인라인 버튼 콜백 즉시 처리
+                cb = upd.get("callback_query")
+                if cb:
+                    cb_id = cb.get("id", "")
+                    cb_data = str(cb.get("data") or "")
+                    cb_msg = cb.get("message") or {}
+                    cb_chat_id = str((cb_msg.get("chat") or {}).get("id", ""))
+                    save_offset_state(offset, allowed_chat_id or cb_chat_id)
+                    if allowed_chat_id and cb_chat_id != str(allowed_chat_id):
+                        await asyncio.to_thread(answer_callback_query, token, cb_id, "권한이 없습니다.")
+                        continue
+                    if cb_data.startswith(("err_approve_auto:", "err_approve_once:", "err_reject:")):
+                        sys.path.insert(0, str(ROOT_DIR))
+                        import _antigravity_report_watcher as _arw_wcb
+
+                        act, _, seq_id = cb_data.partition(":")
+                        if act == "err_reject":
+                            await asyncio.to_thread(answer_callback_query, token, cb_id, "🛑 수정 보류·종결 처리했습니다.")
+                            await asyncio.to_thread(_arw_wcb.reject_awaiting_report, seq_id)
+                            await asyncio.to_thread(
+                                _mark_telegram_approval_message_decided,
+                                token,
+                                cb_chat_id,
+                                cb_msg,
+                                f"🛑 [회장님 결정 완료: #{seq_id.lstrip('R')} 수정 안 함(기각)]",
+                            )
+                            await asyncio.to_thread(
+                                send_msg,
+                                token,
+                                cb_chat_id,
+                                f"🛑 [신고 #{seq_id.lstrip('R')}] 회장님 지시에 따라 코드 수정 없이 종결 처리했습니다.",
+                            )
+                            continue
+
+                        reg_sim = act == "err_approve_auto"
+                        app_res = await asyncio.to_thread(_arw_wcb.approve_awaiting_report, seq_id, reg_sim)
+                        await asyncio.to_thread(answer_callback_query, token, cb_id, "✅ 승인 완료! 즉시 수리를 시작합니다.")
+                        mode_note = "유사 오류도 앞으로 자동수리 등록" if reg_sim else "이번 건만 수정"
+                        await asyncio.to_thread(
+                            _mark_telegram_approval_message_decided,
+                            token,
+                            cb_chat_id,
+                            cb_msg,
+                            f"✅ [회장님 결정 완료: #{seq_id.lstrip('R')} 수정 승인 ({mode_note})]",
+                        )
+                        if app_res.get("approved_reports"):
+                            await asyncio.to_thread(
+                                send_msg,
+                                token,
+                                cb_chat_id,
+                                f"🛠️ [신고 #{seq_id.lstrip('R')} 자율 수리 착수] 회장님 승인을 확인했습니다 ({mode_note}). 전수 수리·배포 완료 후 보고드립니다!",
+                            )
+                            await asyncio.to_thread(_arw_wcb.run_autonomous_agy_autofix, app_res["approved_reports"], True)
+                    continue
+
                 msg = upd.get("message") or {}
                 chat = msg.get("chat") or {}
                 chat_id = str(chat.get("id", ""))
@@ -738,6 +1074,46 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
 
                 full_text = "\n".join(collected_texts)
                 print(f"[📩 워치독 수신] ({chat_id}): {full_text}", flush=True)
+
+                # 2) 워치독 모드에서도 대기 중인 오류신고에 대한 자연어('고쳐', '고치지마' 등) 승인/기각 즉시 처리
+                try:
+                    sys.path.insert(0, str(ROOT_DIR))
+                    import _antigravity_report_watcher as _arw_wtxt
+
+                    if _arw_wtxt.get_pending_approval_items():
+                        dec = _parse_awaiting_error_decision_text(full_text)
+                        if dec is not None:
+                            if dec["action"] == "reject":
+                                rej = await asyncio.to_thread(_arw_wtxt.reject_awaiting_report, dec.get("target_id", ""))
+                                r_ids = ", ".join(rej.get("rejected_ids") or [])
+                                await asyncio.to_thread(
+                                    send_msg,
+                                    token,
+                                    chat_id,
+                                    f"🛑 [{r_ids}] 회장님 지시에 따라 코드 수정 없이 보류·종결 처리했습니다.",
+                                )
+                                continue
+                            app_res = await asyncio.to_thread(
+                                _arw_wtxt.approve_awaiting_report,
+                                dec.get("target_id", ""),
+                                bool(dec.get("register_similar", True)),
+                            )
+                            if app_res.get("approved_reports"):
+                                mode_note = (
+                                    "비슷한 오류종류도 자동수리 등록 완료"
+                                    if dec.get("register_similar", True)
+                                    else "이번 건만 수정"
+                                )
+                                await asyncio.to_thread(
+                                    send_msg,
+                                    token,
+                                    chat_id,
+                                    f"🛠️ 회장님 수정 승인을 확인했습니다 ({mode_note}). 전수 수리·배포 완료 후 보고드립니다!",
+                                )
+                                await asyncio.to_thread(_arw_wtxt.run_autonomous_agy_autofix, app_res["approved_reports"], True)
+                                continue
+                except Exception:
+                    pass
 
                 # [0-Credit Instant Router] 단축 명령어는 LLM 호출 없이 즉시 응답
                 quick_reply = await asyncio.to_thread(_handle_zero_credit_quick_command, full_text)
@@ -823,6 +1199,18 @@ def main() -> None:
         help="지정한 텍스트를 사용자의 텔레그램 채팅방으로 즉시 전송합니다.",
     )
     parser.add_argument(
+        "--send-photo",
+        type=str,
+        default="",
+        help="지정한 이미지 파일(.png/.jpg)을 텔레그램 채팅방으로 즉시 전송합니다.",
+    )
+    parser.add_argument(
+        "--caption",
+        type=str,
+        default="",
+        help="--send-photo 전송 시 함께 첨부할 캡션 문자열입니다.",
+    )
+    parser.add_argument(
         "--set-token",
         type=str,
         default="",
@@ -880,6 +1268,21 @@ def main() -> None:
         except Exception:
             pass
         print(f"✅ 텔레그램({target_chat_id})으로 답장을 전송했습니다.")
+        return
+
+    if args.send_photo:
+        state = load_offset_state()
+        target_chat_id = allowed_chat_id or state.get("chat_id", "")
+        if not target_chat_id:
+            print("❌ 전송할 TELEGRAM_CHAT_ID가 아직 등록되지 않았습니다.")
+            sys.exit(1)
+        resp = send_photo(token, target_chat_id, args.send_photo, caption=args.caption)
+        try:
+            if LIVE_TURN_LOCK_FILE.exists():
+                LIVE_TURN_LOCK_FILE.unlink()
+        except Exception:
+            pass
+        print(f"✅ 텔레그램({target_chat_id})으로 이미지를 전송했습니다 (ok={bool(resp and resp.get('ok'))}).")
         return
 
     if args.watchdog_ensure:
