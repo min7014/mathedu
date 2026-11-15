@@ -654,7 +654,7 @@ python -X utf8 pr.py status
 - **투트랙 분업 및 교차 시너지 설계 (수석 비서 총괄 · 7대 전문 에이전트 협업)**:
   - **Track 1 (`mathedu` 홈페이지 — 깊이·검색 흡수·시청시간 발전소·조기 웹 수익)**:
     - 구글·네이버·AI(`llms.txt`) SEO 및 `search_demand_engine.py`(미충족 검색어 ➔ 6단계 디딤돌+SVG 수업 자동 제작)로 국내외(`KO/EN`) 학습자·교사 유입 선점.
-    - 문항 풀이 디딤돌 및 `video_board.html` 내에서 `@min7014_ai` 4~37분 본편을 직접 시청하게 연결하여 유튜브 **본편 유효 시청시간**과 **마중물 구독자(50~100명)**를 역공급.
+    - **[절대 원칙: 영상은 무조건 유튜브 채널로만 오픈]**: 홈페이지(`index.html`, `video_board.html`, `video_studio.html`, `mathedu-room.js`, `board/*.html`, `offline/*.html`) 내부에서 `<video>`, `.mp4`, `<iframe>(youtube.com/embed)` 인라인 재생을 전면 금지하고, **오직 `@min7014_ai` 유튜브 직결 링크(`https://www.youtube.com/watch?v=...` / `https://youtu.be/...` / `https://www.youtube.com/shorts/...` 새 탭 오픈)**로만 영상을 사용하여 유효 시청시간(4,000h)·구독(`?sub_confirmation=1`)·추천 시그널을 100% 유튜브 채널로 집중시킨다.
     - `ad_config.json` 기반 클린 웹 광고 트랙 준비로 YPP 이전 수익 공백 보완.
   - **Track 2 (`@min7014_ai` 유튜브 — 광역 발견·구독자 확보·고단가 미드롤 본편)**:
     - `Q-#Shorts`(첫 1.5초 도형 질문 훅) = **구독자 1,000명 확보 & 하단 관련 동영상 본편 토스 전담**.

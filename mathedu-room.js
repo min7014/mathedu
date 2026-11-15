@@ -2563,9 +2563,13 @@
         '</div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">' + topicBtns + '</div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:center">' +
-          '<div style="aspect-ratio:16/9;width:100%;background:#000;border-radius:10px;overflow:hidden;border:1.5px solid #fda4af">' +
-            '<iframe src="https://www.youtube.com/embed/' + vidId + '?rel=0&listType=playlist&list=UUSlqQfOEtRfJuMPyGMLgFYA" style="width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
-          '</div>' +
+          '<a href="https://www.youtube.com/watch?v=' + vidId + '&list=UUSlqQfOEtRfJuMPyGMLgFYA" target="_blank" rel="noopener" style="position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;width:100%;background:#020617;border-radius:10px;overflow:hidden;border:1.5px solid #fda4af;text-decoration:none">' +
+            '<img src="https://i.ytimg.com/vi/' + vidId + '/hqdefault.jpg" alt="YouTube Preview" style="width:100%;height:100%;object-fit:cover;opacity:0.82" />' +
+            '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(15,23,42,0.38);padding:12px;text-align:center">' +
+              '<span style="padding:10px 18px;border-radius:999px;background:#dc2626;color:#fff;font-size:0.82rem;font-weight:900;box-shadow:0 8px 20px rgba(220,38,38,0.5)">' + (isEnMode() ? '▶️ Open on @min7014_ai YouTube Channel ↗' : '▶️ @min7014_ai 유튜브 채널에서 영상 열기 ↗') + '</span>' +
+              '<span style="font-size:0.72rem;color:#f8fafc;font-weight:700">https://youtu.be/' + vidId + '</span>' +
+            '</div>' +
+          '</a>' +
           '<div style="padding:12px;border-radius:10px;background:linear-gradient(135deg,#fff1f2 0%,#f0f9ff 100%);border:1px solid #fecdd3;font-size:0.8rem;line-height:1.6;color:#1e293b">' +
             '<div style="font-weight:900;color:#be123c;margin-bottom:4px">🚀 유튜브 영상 × 홈페이지 자생 성장 루프</div>' +
             '• <b>1단계 (유튜브 시각 직관)</b>: 보조선이 그어지고 도형이 이동하는 1080p 플립북 영상으로 공식 암기 없이 원리를 깨칩니다.<br>' +

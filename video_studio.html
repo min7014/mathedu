@@ -827,19 +827,10 @@
 
     var vidId = parseYoutubeVideoId(targetUrl);
     if (!vidId) {
-      window.open(targetUrl || 'https://www.youtube.com/', '_blank');
+      window.open(targetUrl || 'https://www.youtube.com/@min7014_ai', '_blank', 'noopener');
       return;
     }
-
-    var canvas = document.getElementById('studioCinemaCanvas');
-    var iframe = document.getElementById('studioYoutubeIframe');
-    var backBtn = document.getElementById('btnSwitchCanvasMode');
-    if (canvas) canvas.style.display = 'none';
-    if (iframe) {
-      iframe.style.display = 'block';
-      iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(vidId) + '?autoplay=1&rel=0';
-    }
-    if (backBtn) backBtn.style.display = 'inline-flex';
+    window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(vidId) + '&list=UUSlqQfOEtRfJuMPyGMLgFYA', '_blank', 'noopener');
   };
 
   window.saveYoutubeUrlBinding = function(lang) {

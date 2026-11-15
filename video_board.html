@@ -29,8 +29,7 @@
         "thumbnailUrl": ["https://i.ytimg.com/vi/_NRQ5QO3PEY/hqdefault.jpg"],
         "uploadDate": "2026-11-08T00:00:00+09:00",
         "duration": "PT29M00S",
-        "contentUrl": "https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA",
-        "embedUrl": "https://www.youtube.com/embed/_NRQ5QO3PEY"
+        "contentUrl": "https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA"
       },
       {
         "@type": "VideoObject",
@@ -40,8 +39,7 @@
         "thumbnailUrl": ["https://i.ytimg.com/vi/18er6ZuRN_0/hqdefault.jpg"],
         "uploadDate": "2026-11-08T00:00:00+09:00",
         "duration": "PT61M54S",
-        "contentUrl": "https://www.youtube.com/watch?v=18er6ZuRN_0&list=UUSlqQfOEtRfJuMPyGMLgFYA",
-        "embedUrl": "https://www.youtube.com/embed/18er6ZuRN_0"
+        "contentUrl": "https://www.youtube.com/watch?v=18er6ZuRN_0&list=UUSlqQfOEtRfJuMPyGMLgFYA"
       },
       {
         "@type": "VideoObject",
@@ -51,8 +49,7 @@
         "thumbnailUrl": ["https://i.ytimg.com/vi/CVJ_Ez2U4W4/hqdefault.jpg"],
         "uploadDate": "2026-11-08T00:00:00+09:00",
         "duration": "PT54M36S",
-        "contentUrl": "https://www.youtube.com/watch?v=CVJ_Ez2U4W4&list=UUSlqQfOEtRfJuMPyGMLgFYA",
-        "embedUrl": "https://www.youtube.com/embed/CVJ_Ez2U4W4"
+        "contentUrl": "https://www.youtube.com/watch?v=CVJ_Ez2U4W4&list=UUSlqQfOEtRfJuMPyGMLgFYA"
       },
       {
         "@type": "VideoObject",
@@ -62,8 +59,7 @@
         "thumbnailUrl": ["https://i.ytimg.com/vi/Ku9TYjIOzGE/hqdefault.jpg"],
         "uploadDate": "2026-11-08T00:00:00+09:00",
         "duration": "PT48M36S",
-        "contentUrl": "https://www.youtube.com/watch?v=Ku9TYjIOzGE&list=UUSlqQfOEtRfJuMPyGMLgFYA",
-        "embedUrl": "https://www.youtube.com/embed/Ku9TYjIOzGE"
+        "contentUrl": "https://www.youtube.com/watch?v=Ku9TYjIOzGE&list=UUSlqQfOEtRfJuMPyGMLgFYA"
       },
       {
         "@type": "VideoObject",
@@ -73,8 +69,7 @@
         "thumbnailUrl": ["https://i.ytimg.com/vi/_5LE_BfLA5w/hqdefault.jpg"],
         "uploadDate": "2026-11-08T00:00:00+09:00",
         "duration": "PT37M30S",
-        "contentUrl": "https://www.youtube.com/watch?v=_5LE_BfLA5w&list=UUSlqQfOEtRfJuMPyGMLgFYA",
-        "embedUrl": "https://www.youtube.com/embed/_5LE_BfLA5w"
+        "contentUrl": "https://www.youtube.com/watch?v=_5LE_BfLA5w&list=UUSlqQfOEtRfJuMPyGMLgFYA"
       }
     ]
   }
@@ -995,9 +990,8 @@
         </div>
       </div>
       <div class="cinema-body">
-        <div class="cinema-video-box" id="cinemaVideoBox" style="display:flex;align-items:center;justify-content:center;">
-          <iframe id="cinemaIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          <video id="cinemaNativeVideo" controls playsinline style="display:none;height:100%;max-height:540px;width:auto;max-width:100%;background:#000;"></video>
+        <div class="cinema-video-box" id="cinemaVideoBox" style="display:flex;align-items:center;justify-content:center;background:#020617;overflow:hidden;">
+          <a id="cinemaThumbDirectLink" href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener" style="color:#fff;font-weight:900;text-decoration:none;">▶️ @min7014_ai 공식 유튜브 채널에서 영상 열기 ↗</a>
         </div>
         <div class="cinema-info-box">
           <div class="lang-switch-bar" id="cinemaLangBar"></div>
@@ -1383,7 +1377,7 @@
           const autoBestMode = found._issueYtKo ? 'issue_ko' : (found._qMp4Ko ? 'question_ko' : (found._ytKo ? 'ko' : (found._issueYtEn ? 'issue_en' : (found._ytEn ? 'en' : 'orig'))));
           const resolvedMode = (qMode && qMode !== 'active') ? qMode : autoBestMode;
           window._vbHighlightActiveWorkbench = (qMode === 'active');
-          openCinemaForItem(found._index - 1, resolvedMode);
+          openCinemaForItem(found._index - 1, resolvedMode, true);
         }
       }
     }
@@ -1740,12 +1734,11 @@
       document.querySelector('.board-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function openCinemaForItem(itemIdx, mode = 'ko') {
+    function openCinemaForItem(itemIdx, mode = 'ko', skipAutoOpen = false) {
       const item = ALL_ITEMS[itemIdx];
       if (!item) return;
 
       let targetUrl = '';
-      let localShortMp4 = '';
       let badgeLabel = '@min7014_ai';
       if (mode === 'issue_ko' && item._issueYtKo) {
         targetUrl = item._issueYtKo;
@@ -1753,55 +1746,34 @@
       } else if (mode === 'issue_en' && item._issueYtEn) {
         targetUrl = item._issueYtEn;
         badgeLabel = '🧭 🇺🇸 [Math Issue × Original Proof] Differentiated Math-Ed Insight (1080p)';
-      } else if (mode === 'idea_ko' && item._ideaMp4Ko) {
-        targetUrl = item._ideaYtKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._ideaMp4Ko;
-        badgeLabel = '🌟 🇰🇷 [창의 아이디어 시네마 · Beyond PDF] 5막 스토리텔링 & 절차적 애니메이션 (1080p)';
-      } else if (mode === 'idea_en' && item._ideaMp4En) {
-        targetUrl = item._ideaYtEn || item._ytEn || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._ideaMp4En;
-        badgeLabel = '🌟 🇺🇸 [Creative Idea Math Cinema · Beyond PDF] (1080p)';
-      } else if (mode === 'idea_short_ko' && item._ideaShortMp4Ko) {
-        targetUrl = item._ideaYtKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._ideaShortMp4Ko;
-        badgeLabel = '🌟📱 🇰🇷 [창의 아이디어 숏폼 · Idea-#Shorts] (9:16)';
-      } else if (mode === 'question_ko' && item._qMp4Ko) {
-        targetUrl = item._ytKo || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._qMp4Ko;
-        badgeLabel = '❓ 🇰🇷 [질문하는 수학 수업 버전] Notice & Wonder · What-If-Not (1080p)';
-      } else if (mode === 'question_en' && item._qMp4En) {
-        targetUrl = item._ytEn || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._qMp4En;
-        badgeLabel = '❓ 🇺🇸 [Question-Asking Classroom Edition] (1080p)';
-      } else if (mode === 'master_ko' && item._fullMp4Ko) {
-        targetUrl = item._ytKo || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._fullMp4Ko;
-        badgeLabel = '🎬 🇰🇷 @min7014_ai v4.0 Viral Cinema 마스터 본편 (1080p)';
-      } else if (mode === 'master_en' && item._fullMp4En) {
-        targetUrl = item._ytEn || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._fullMp4En;
-        badgeLabel = '🎬 🇺🇸 @min7014_ai v4.0 Viral Cinema Master (1080p)';
-      } else if (mode === 'short_ko' && (item._shortKo || item._shortMp4Ko)) {
-        targetUrl = item._shortKo || item._ytKo || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._shortMp4Ko || '';
-        badgeLabel = '📱 🇰🇷 @min7014_ai v4.0 9:16 숏폼 (#Shorts)';
-      } else if (mode === 'short_en' && (item._shortEn || item._shortMp4En)) {
-        targetUrl = item._shortEn || item._ytEn || 'https://www.youtube.com/@min7014_ai';
-        localShortMp4 = item._shortMp4En || '';
-        badgeLabel = '📱 🇺🇸 @min7014_ai v4.0 9:16 English #Shorts';
-      } else if (mode === 'ko' && item._ytKo) {
+      } else if ((mode === 'idea_ko' || mode === 'idea_short_ko') && (item._ideaYtKo || item._ytKo)) {
+        targetUrl = item._ideaYtKo || item._ytKo;
+        badgeLabel = '🌟 🇰🇷 @min7014_ai 창의 아이디어 시네마 (YouTube 직결)';
+      } else if (mode === 'idea_en' && (item._ideaYtEn || item._ytEn)) {
+        targetUrl = item._ideaYtEn || item._ytEn;
+        badgeLabel = '🌟 🇺🇸 @min7014_ai Creative Idea Math Cinema (YouTube)';
+      } else if ((mode === 'short_ko' || mode === 'short_q_ko') && (item._shortKo || item._ytKo)) {
+        targetUrl = item._shortKo || item._ytKo;
+        badgeLabel = '📱 🇰🇷 @min7014_ai 공식 유튜브 #Shorts';
+      } else if ((mode === 'short_en' || mode === 'short_q_en') && (item._shortEn || item._ytEn)) {
+        targetUrl = item._shortEn || item._ytEn;
+        badgeLabel = '📱 🇺🇸 @min7014_ai Official YouTube #Shorts';
+      } else if ((mode === 'en' || mode === 'question_en' || mode === 'master_en') && item._ytEn) {
+        targetUrl = item._ytEn;
+        badgeLabel = '🇺🇸 @min7014_ai English Explanation (YouTube)';
+      } else if (item._ytKo) {
         targetUrl = item._ytKo;
         badgeLabel = '🇰🇷 @min7014_ai 한국어 설명영상 (YouTube)';
-      } else if (mode === 'en' && item._ytEn) {
+      } else if (item._ytEn) {
         targetUrl = item._ytEn;
         badgeLabel = '🇺🇸 @min7014_ai English Explanation (YouTube)';
       } else if (item._ytOrig) {
         targetUrl = item._ytOrig;
         mode = 'orig';
-        badgeLabel = '🎬 @min7014 원본 해설 영상';
+        badgeLabel = '🎬 @min7014 원본 해설 영상 (YouTube)';
       } else {
         targetUrl = 'https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA';
-        badgeLabel = '🏛️ @min7014_ai 오리지널 PDF 정주행 마스터클래스 (YouTube 유효 시청시간 100% 적립)';
+        badgeLabel = '🏛️ @min7014_ai 오리지널 PDF 정주행 마스터클래스 (YouTube)';
       }
 
       const stage = document.getElementById('boardCinemaStage');
@@ -1809,27 +1781,35 @@
       document.getElementById('cinemaBadge').textContent = badgeLabel;
       document.getElementById('cinemaTitle').textContent = `${item.title} (${item.id})`;
       const vidId = extractYoutubeId(targetUrl);
-      const fullWatchUrl = vidId ? `https://www.youtube.com/watch?v=${vidId}&list=UUSlqQfOEtRfJuMPyGMLgFYA` : targetUrl;
+      const isShortsUrl = String(targetUrl || '').includes('/shorts/');
+      const fullWatchUrl = vidId
+        ? (isShortsUrl ? `https://www.youtube.com/shorts/${vidId}` : `https://www.youtube.com/watch?v=${vidId}&list=UUSlqQfOEtRfJuMPyGMLgFYA`)
+        : targetUrl;
       document.getElementById('cinemaDirectYtLink').href = fullWatchUrl;
       document.getElementById('cinemaUrlText').href = fullWatchUrl;
       document.getElementById('cinemaUrlText').textContent = fullWatchUrl;
 
-      const iframeEl = document.getElementById('cinemaIframe');
-      const nativeVid = document.getElementById('cinemaNativeVideo');
-      if (nativeVid) {
-        nativeVid.pause();
-        nativeVid.src = '';
-        nativeVid.style.display = 'none';
+      const videoBox = document.getElementById('cinemaVideoBox');
+      if (videoBox) {
+        const thumbImg = vidId ? `https://i.ytimg.com/vi/${vidId}/hqdefault.jpg` : '';
+        const isEnVb = (window.VB_GLOBAL_LANG === 'en');
+        const openBtnLabel = isEnVb
+          ? '▶️ Open Directly on @min7014_ai YouTube Channel ↗'
+          : '▶️ @min7014_ai 공식 유튜브 채널에서 영상 열기 ↗';
+        videoBox.innerHTML = `
+          <a href="${fullWatchUrl}" target="_blank" rel="noopener" style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:300px;text-decoration:none;background:#020617;overflow:hidden;">
+            ${thumbImg ? `<img src="${thumbImg}" alt="YouTube Thumbnail" style="width:100%;height:100%;object-fit:cover;opacity:0.80;" />` : ''}
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(2,6,23,0.40);padding:20px;text-align:center;">
+              <span style="display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;background:#dc2626;color:#fff;font-weight:900;font-size:0.98rem;box-shadow:0 12px 28px rgba(220,38,38,0.55);">${openBtnLabel}</span>
+              <span style="font-size:0.8rem;color:#f1f5f9;font-weight:700;">${fullWatchUrl}</span>
+            </div>
+          </a>
+        `;
       }
-      if (!vidId) {
-        window.open(targetUrl, '_blank');
-        return;
+
+      if (!skipAutoOpen) {
+        window.open(fullWatchUrl, '_blank', 'noopener');
       }
-      iframeEl.style.display = 'block';
-      // [유효 공개 시청시간(Valid Public Watch Hours) 100% 적립 표준 플레이어]:
-      // youtube-nocookie 및 자동재생(autoplay=1)은 유튜브 YPP 유효 시청시간에서 제외되므로,
-      // 표준 www.youtube.com 플레이어 + 공식 업로드 플레이리스트(list=UUSlqQfOEtRfJuMPyGMLgFYA)를 사용합니다.
-      iframeEl.src = `https://www.youtube.com/embed/${vidId}?rel=0&listType=playlist&list=UUSlqQfOEtRfJuMPyGMLgFYA`;
 
       // 언어 & 숏폼 스위치 바
       const langBar = document.getElementById('cinemaLangBar');
@@ -2357,13 +2337,7 @@
 
     function closeCinemaStage() {
       const stage = document.getElementById('boardCinemaStage');
-      document.getElementById('cinemaIframe').src = '';
-      const nativeVid = document.getElementById('cinemaNativeVideo');
-      if (nativeVid) {
-        nativeVid.pause();
-        nativeVid.src = '';
-      }
-      stage.classList.remove('active');
+      if (stage) stage.classList.remove('active');
     }
 
     function copyTopicYoutubeWebsitePromo(itemIdx) {
