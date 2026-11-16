@@ -158,83 +158,256 @@ EXAM_TRAP_BLUEPRINTS = [
 ]
 
 
+def _clean_canvas_text(text: str) -> str:
+    """Pillow Malgun Gothic 캔버스에서 두부 박스(□)를 유발하는 이모지·특수문자를 네이티브 기호로 정화"""
+    repl = [
+        ("⏱️", "★"), ("⏱", "★"),
+        ("🚨", "★"), ("📐", "■"),
+        ("💡", "★"), ("🎯", "★"),
+        ("🔔", "▶"), ("👇", "▶"),
+        ("📝", "■"), ("⚡", "★"),
+        ("✅", "★"), ("➔", "→"),
+    ]
+    out = str(text or "")
+    for src, dst in repl:
+        out = out.replace(src, dst)
+    return re.sub(r"\s{2,}", " ", out).strip()
+
+
+def _line_intersection_exact(p1: tuple[float, float], p2: tuple[float, float], p3: tuple[float, float], p4: tuple[float, float]) -> tuple[float, float]:
+    x1, y1 = p1
+    x2, y2 = p2
+    x3, y3 = p3
+    x4, y4 = p4
+    den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+    if abs(den) < 1e-9:
+        return ((x3 + x4) * 0.5, (y3 + y4) * 0.5)
+    px = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / den
+    py = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / den
+    return (px, py)
+
+
 def _draw_exam_problem_diagram(draw: ImageDraw.ImageDraw, box: tuple, kind: str, solved: bool = False, canvas_img: Image.Image | None = None, pdf_doc=None):
-    """Act 1(문제 제시) 및 Act 3(보조선 해체 완료)용 선명한 기하 다이어그램 렌더링 (원문 PDF 슬라이드 직접 매핑 지원)"""
+    """Act 1(문제 제시) 및 Act 3(보조선 해체 완료)용 100% 해석기하 정밀 작도 다이어그램"""
+    import min7014_video_maker as vmaker
+
     x0, y0, x1, y1 = box
     w, h = x1 - x0, y1 - y0
-    cx, cy = (x0 + x1) // 2, (y0 + y1) // 2
+    cx, cy = (x0 + x1) * 0.5, (y0 + y1) * 0.5
     draw.rounded_rectangle(box, radius=24, fill=(12, 20, 42), outline=(56, 189, 248), width=3)
 
     if kind == "pdf_native" and canvas_img is not None and pdf_doc is not None and len(pdf_doc) >= 1:
-        import min7014_video_maker as vmaker
         idx_p = max(0, len(pdf_doc) - 2) if solved else 0
         pix = pdf_doc[idx_p].get_pixmap(dpi=220)
         sl = vmaker._mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
         sc = min((w - 36) / sl.width, (h - 36) / sl.height)
         nw, nh = int(sl.width * sc), int(sl.height * sc)
-        px, py = x0 + (w - nw) // 2, y0 + (h - nh) // 2
+        px, py = int(x0 + (w - nw) // 2), int(y0 + (h - nh) // 2)
         canvas_img.paste(sl.resize((nw, nh), Image.Resampling.LANCZOS), (px, py))
         return
 
     cyan = (56, 189, 248)
     gold = (250, 204, 21)
-    red_aux = (245, 158, 11)  # Rule 37: warm amber-gold highlight instead of harsh red
+    amber_aux = (245, 158, 11)
     white = (248, 250, 252)
     green = (52, 211, 153)
+    violet = (167, 139, 250)
 
-    r = int(min(w, h) * 0.34)
+    f_lbl = vmaker.get_font_for_lang("ko", max(22, int(min(w, h) * 0.036)), bold=True)
+    f_val = vmaker.get_font_for_lang("ko", max(20, int(min(w, h) * 0.032)), bold=True)
+    r = min(w, h) * 0.34
+
+    def _dot(pt: tuple[float, float], color=gold, rad: int = 8):
+        px, py = float(pt[0]), float(pt[1])
+        draw.ellipse((px - rad, py - rad, px + rad, py + rad), fill=color, outline=white, width=2)
+
     if kind == "circle_inscribed":
-        draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=cyan, width=5)
-        pa = (cx - int(r * 0.78), cy + int(r * 0.62))
-        pb = (cx + int(r * 0.82), cy + int(r * 0.57))
-        pp = (cx + int(r * 0.18), cy - int(r * 0.98))
-        draw.line([pa, (cx, cy), pb], fill=gold, width=5)
-        draw.line([pa, pp, pb], fill=white, width=5)
+        # 정확히 중심각 ∠AOB = 84° (132° ~ 48°), 원주각 ∠APB = 42°
+        rc = r * 0.88
+        O = (cx, cy + rc * 0.04)
+        A = (O[0] + rc * math.cos(math.radians(132.0)), O[1] + rc * math.sin(math.radians(132.0)))
+        B = (O[0] + rc * math.cos(math.radians(48.0)), O[1] + rc * math.sin(math.radians(48.0)))
+        P = (O[0] + rc * math.cos(math.radians(-76.0)), O[1] + rc * math.sin(math.radians(-76.0)))
+        draw.ellipse((O[0] - rc, O[1] - rc, O[0] + rc, O[1] + rc), outline=cyan, width=5)
+        draw.line([A, O, B], fill=gold, width=5)
+        draw.line([A, P, B], fill=white, width=5)
         if solved:
-            pd = (cx - int(r * 0.18), cy + int(r * 0.98))
-            draw.line([pp, (cx, cy), pd], fill=red_aux, width=6)
-        for pt in (pa, pb, pp, (cx, cy)):
-            draw.ellipse((pt[0] - 7, pt[1] - 7, pt[0] + 7, pt[1] + 7), fill=gold)
+            D = (2 * O[0] - P[0], 2 * O[1] - P[1])
+            draw.line([P, D], fill=green, width=6)
+            _dot(D, green, 7)
+            draw.text((D[0] - 12, D[1] + 12), "D", fill=green, font=f_val)
+        for pt, lbl, dx, dy in [(A, "A", -30, 8), (B, "B", 14, 8), (P, "P", 12, -32), (O, "O", -32, -16)]:
+            _dot(pt, gold if pt != P else cyan, 7)
+            draw.text((pt[0] + dx, pt[1] + dy), lbl, fill=white, font=f_lbl)
+        draw.text((O[0] - 24, O[1] + 22), "84°", fill=gold, font=f_lbl)
+        draw.text((P[0] - 28, P[1] + 38), "42°" if solved else "x=?", fill=green if solved else gold, font=f_val)
+
     elif kind == "tangent_chord":
-        draw.ellipse((cx - r, cy - r - 12, cx + r, cy + r - 12), outline=cyan, width=5)
-        occ_y = cy + r - 12
-        draw.line([(cx - int(r * 1.25), occ_y), (cx + int(r * 1.25), occ_y)], fill=gold, width=5)
-        pa = (cx, occ_y)
-        pb = (cx + int(r * 0.86), cy - 12 + int(r * 0.5))
-        pc = (cx - int(r * 0.72), cy - 12 - int(r * 0.68))
-        draw.polygon([pa, pb, pc], outline=white, width=4)
+        # 정확히 접점 A(바닥 90°), 우측 수평 접선 AT와 현 AB 사이 예각 58° -> B는 중심각 -26° 위치
+        rc = r * 0.84
+        O = (cx, cy - 16)
+        A = (O[0], O[1] + rc)
+        B = (O[0] + rc * math.cos(math.radians(-26.0)), O[1] + rc * math.sin(math.radians(-26.0)))
+        C = (O[0] + rc * math.cos(math.radians(-145.0)), O[1] + rc * math.sin(math.radians(-145.0)))
+        draw.ellipse((O[0] - rc, O[1] - rc, O[0] + rc, O[1] + rc), outline=cyan, width=5)
+        draw.line([(cx - rc * 1.22, A[1]), (cx + rc * 1.22, A[1])], fill=gold, width=5)
+        draw.polygon([A, B, C], outline=white, width=5)
         if solved:
-            pd = (cx, cy - r - 12)
-            draw.line([pa, pd, pb], fill=red_aux, width=6)
+            D = (O[0], O[1] - rc)
+            draw.line([A, D], fill=green, width=6)
+            draw.line([D, B], fill=amber_aux, width=4)
+            _dot(D, green, 7)
+            draw.text((D[0] - 12, D[1] - 36), "D(지름)", fill=green, font=f_val)
+        for pt, lbl, dx, dy in [(A, "A", -14, 12), (B, "B", 14, -8), (C, "C", -34, -24)]:
+            _dot(pt, gold, 7)
+            draw.text((pt[0] + dx, pt[1] + dy), lbl, fill=white, font=f_lbl)
+        draw.text((cx + rc * 1.05, A[1] + 10), "T", fill=gold, font=f_lbl)
+        draw.text((A[0] + 34, A[1] - 42), "58°", fill=gold, font=f_val)
+        draw.text((C[0] + 22, C[1] + 12), "58°" if solved else "x=?", fill=green if solved else gold, font=f_val)
+
     elif kind == "pythagoras_squares":
-        s = int(min(w, h) * 0.16)
-        p1 = (cx - s, cy + int(s * 0.8))
-        p2 = (cx + int(s * 1.3), cy + int(s * 0.8))
-        p3 = (cx - s, cy - int(s * 0.9))
-        draw.polygon([p1, p2, p3], outline=white, width=5)
-        draw.rectangle((p3[0] - int(s * 1.7), p3[1], p1[0], p1[1]), outline=cyan, width=4)
-        draw.rectangle((p1[0], p1[1], p2[0], p1[1] + int(s * 1.5)), outline=green, width=4)
+        # 정확한 3 : 4 : 5 직각삼각형 + 세 변 위의 진짜 1:1 정사각형 3개 (S1=9, S2=16, S3=x=25) — 박스 내부 여백 100% 보장
+        u = min(w, h) * 0.068
+        C = (cx - 0.95 * u, cy + 1.35 * u)
+        A = (C[0], C[1] - 3.0 * u)          # 수직변 길이 3u (넓이 9)
+        B = (C[0] + 4.0 * u, C[1])          # 수평변 길이 4u (넓이 16)
+        sq1 = [A, C, (C[0] - 3.0 * u, C[1]), (A[0] - 3.0 * u, A[1])]
+        sq2 = [C, B, (B[0], B[1] + 4.0 * u), (C[0], C[1] + 4.0 * u)]
+        nx, ny = 3.0 * u, -4.0 * u
+        sq3 = [A, B, (B[0] + nx, B[1] + ny), (A[0] + nx, A[1] + ny)]
+
+        draw.polygon(sq1, fill=(14, 52, 78), outline=cyan, width=4)
+        draw.polygon(sq2, fill=(14, 62, 54), outline=green, width=4)
+        draw.polygon(sq3, fill=(58, 44, 18), outline=gold, width=5)
+        draw.polygon([A, B, C], fill=(16, 26, 48), outline=white, width=5)
+        rk = u * 0.45
+        draw.line([(C[0], C[1] - rk), (C[0] + rk, C[1] - rk), (C[0] + rk, C[1])], fill=white, width=3)
         if solved:
-            draw.line([p3, (cx + int(s * 0.3), cy + int(s * 2.3))], fill=red_aux, width=6)
+            ux, uy = (B[0] - A[0]) / (5.0 * u), (B[1] - A[1]) / (5.0 * u)
+            proj = (C[0] - A[0]) * ux + (C[1] - A[1]) * uy
+            H_foot = (A[0] + proj * ux, A[1] + proj * uy)
+            H_far = (H_foot[0] + nx, H_foot[1] + ny)
+            draw.line([C, H_far], fill=amber_aux, width=5)
+        c1x, c1y = sum(p[0] for p in sq1) / 4, sum(p[1] for p in sq1) / 4
+        c2x, c2y = sum(p[0] for p in sq2) / 4, sum(p[1] for p in sq2) / 4
+        c3x, c3y = sum(p[0] for p in sq3) / 4, sum(p[1] for p in sq3) / 4
+        draw.text((c1x - 12, c1y - 18), "9", fill=white, font=f_lbl)
+        draw.text((c2x - 20, c2y - 18), "16", fill=white, font=f_lbl)
+        draw.text((c3x - 44, c3y - 18), "x = 25" if solved else "x = ?", fill=gold, font=f_lbl)
+
     elif kind == "isosceles_bisector":
-        top = (cx, cy - int(r * 0.95))
-        left = (cx - int(r * 0.82), cy + int(r * 0.85))
-        right = (cx + int(r * 0.82), cy + int(r * 0.85))
-        draw.polygon([top, left, right], outline=cyan, width=5)
+        # 정확한 꼭지각 36°, 두 밑각 72°인 황금 이등변삼각형 (AB = AC)
+        h_tri = r * 1.68
+        half_b = h_tri * math.tan(math.radians(18.0))
+        A = (cx, cy - h_tri * 0.50)
+        B = (cx - half_b, cy + h_tri * 0.50)
+        C = (cx + half_b, cy + h_tri * 0.50)
+        draw.polygon([A, B, C], outline=cyan, width=5)
+        # 등변 표시 눈금
+        for P1, P2 in [(A, B), (A, C)]:
+            mx, my = (P1[0] + P2[0]) * 0.5, (P1[1] + P2[1]) * 0.5
+            dx, dy = P2[0] - P1[0], P2[1] - P1[1]
+            ln = math.hypot(dx, dy)
+            nx, ny = -dy / ln * 10, dx / ln * 10
+            draw.line([(mx - nx, my - ny), (mx + nx, my + ny)], fill=gold, width=4)
         if solved:
-            mid = (cx, cy + int(r * 0.85))
-            draw.line([top, mid], fill=red_aux, width=6)
+            M = (cx, B[1])
+            draw.line([A, M], fill=green, width=6)
+            draw.rectangle((M[0], M[1] - 16, M[0] + 16, M[1]), outline=white, width=3)
+            _dot(M, green, 7)
+        for pt, lbl, dx, dy in [(A, "A(36°)", -38, -38), (B, "B", -32, 8), (C, "C", 14, 8)]:
+            _dot(pt, gold, 7)
+            draw.text((pt[0] + dx, pt[1] + dy), lbl, fill=white, font=f_lbl)
+        draw.text((B[0] + 20, B[1] - 42), "72°" if solved else "x=?", fill=green if solved else gold, font=f_val)
+
+    elif kind == "menelaus_line":
+        # 메넬라우스 정리 정밀 작도: BC=CD (BD:DC=2:1), CE:EA=1:3 -> AF:FB=3:2 (D-E-F 100% 일직선 공선점!)
+        A = (cx - r * 0.24, cy - r * 0.82)
+        B = (cx - r * 1.04, cy + r * 0.72)
+        C = (cx + r * 0.02, cy + r * 0.72)
+        D = (2.0 * C[0] - B[0], C[1])                    # BC 연장선 외분점 (BC:CD = 1:1 => BD:DC = 2:1)
+        E = ((3.0 * C[0] + A[0]) / 4.0, (3.0 * C[1] + A[1]) / 4.0)  # CE:EA = 1:3
+        F = _line_intersection_exact(D, E, A, B)         # 할선 DE와 변 AB의 실제 해석기하 교점 (정확히 AF:FB = 3:2!)
+
+        draw.polygon([A, B, C], outline=cyan, width=5)
+        draw.line([C, D], fill=cyan, width=4)
+        # 할선 연장 (F 바깥 ~ D 바깥까지 정확히 한 직선!)
+        vx, vy = D[0] - F[0], D[1] - F[1]
+        p_start = (F[0] - vx * 0.14, F[1] - vy * 0.14)
+        p_end = (D[0] + vx * 0.08, D[1] + vy * 0.08)
+        draw.line([p_start, p_end], fill=gold, width=5)
+
+        if solved:
+            # 꼭짓점 C를 지나고 AB에 평행한 보조선 CK ∥ AB
+            C_par = (C[0] + (A[0] - B[0]), C[1] + (A[1] - B[1]))
+            K = _line_intersection_exact(D, F, C, C_par)
+            draw.line([C, K], fill=green, width=6)
+            _dot(K, green, 7)
+            draw.text((K[0] + 10, K[1] - 28), "K(평행)", fill=green, font=f_val)
+
+        for pt, lbl, dx, dy, col in [
+            (A, "A", -12, -46, white),
+            (B, "B", -28, 12, white),
+            (C, "C", -10, 14, white),
+            (D, "D", 10, 12, gold),
+            (E, "E", 14, -18, gold),
+            (F, "F", -34, -16, green if solved else gold),
+        ]:
+            _dot(pt, col, 7)
+            draw.text((pt[0] + dx, pt[1] + dy), lbl, fill=col, font=f_lbl)
+        draw.text(((A[0] + F[0]) * 0.5 - 56, (A[1] + F[1]) * 0.5 - 12), "3:2" if solved else "?", fill=green if solved else gold, font=f_val)
+
     else:
-        top = (cx, cy - int(r * 0.92))
-        left = (cx - int(r * 0.95), cy + int(r * 0.82))
-        right = (cx + int(r * 0.95), cy + int(r * 0.82))
-        draw.polygon([top, left, right], outline=cyan, width=5)
-        d_pt = (cx - int(r * 0.15), cy + int(r * 0.82))
-        e_pt = (cx + int(r * 0.48), cy - int(r * 0.05))
-        f_pt = (cx - int(r * 0.52), cy - int(r * 0.12))
-        draw.line([top, d_pt], fill=gold, width=4)
-        draw.line([left, e_pt], fill=gold, width=4)
-        draw.line([right, f_pt], fill=red_aux if solved else white, width=5)
+        # 체바의 정리(ceva_ratios) 100% 정밀 무게중심 좌표(질량점 m_A=3, m_B=6, m_C=4) 작도!
+        # -> BD:DC = 4:6 = 2:3, CE:EA = 3:4, AF:FB = 6:3 = 2:1 이며 세 직선 AD, BE, CF가 단 0.000px 오차도 없이 정확히 한 점 P에서 만남!
+        A = (cx, cy - r * 0.86)
+        B = (cx - r * 0.96, cy + r * 0.74)
+        C = (cx + r * 0.96, cy + r * 0.74)
+
+        mA, mB, mC = 3.0, 6.0, 4.0
+        D = ((mB * B[0] + mC * C[0]) / (mB + mC), (mB * B[1] + mC * C[1]) / (mB + mC))  # BD:DC = 2:3
+        E = ((mC * C[0] + mA * A[0]) / (mC + mA), (mC * C[1] + mA * A[1]) / (mC + mA))  # CE:EA = 3:4
+        F = ((mA * A[0] + mB * B[0]) / (mA + mB), (mA * A[1] + mB * B[1]) / (mA + mB))  # AF:FB = 2:1
+        P = ((mA * A[0] + mB * B[0] + mC * C[0]) / (mA + mB + mC), (mA * A[1] + mB * B[1] + mC * C[1]) / (mA + mB + mC))
+
+        if solved:
+            # 세 내부 삼각형(△PAB, △PBC, △PCA) 넓이 비 분할 시각화
+            draw.polygon([P, B, C], fill=(16, 48, 76), outline=cyan, width=2)
+            draw.polygon([P, C, A], fill=(20, 56, 54), outline=cyan, width=2)
+            draw.polygon([P, A, B], fill=(46, 36, 72), outline=cyan, width=2)
+
+        draw.polygon([A, B, C], outline=cyan, width=5)
+        draw.line([A, D], fill=gold, width=5)
+        draw.line([B, E], fill=gold, width=5)
+        draw.line([C, F], fill=green if solved else white, width=5)
+
+        # 공점 P를 가장 선명하게 강조 (세 체바선이 정확히 한 점 P에서 교차!)
+        _dot(D, gold, 7)
+        _dot(E, gold, 7)
+        _dot(F, green if solved else white, 7)
+        _dot(P, amber_aux, 10)
+
+        for pt, lbl, dx, dy, col in [
+            (A, "A", -12, -46, white),
+            (B, "B", -30, 10, white),
+            (C, "C", 14, 10, white),
+            (D, "D", -10, 16, gold),
+            (E, "E", 14, -14, gold),
+            (F, "F", -32, -16, green if solved else white),
+            (P, "P", 14, -28, amber_aux),
+        ]:
+            draw.text((pt[0] + dx, pt[1] + dy), lbl, fill=col, font=f_lbl)
+
+        # 변 위의 비율 안내 수치
+        draw.text(((B[0] + D[0]) * 0.5 - 12, B[1] + 16), "2", fill=gold, font=f_val)
+        draw.text(((D[0] + C[0]) * 0.5 - 8, C[1] + 16), "3", fill=gold, font=f_val)
+        draw.text(((C[0] + E[0]) * 0.5 + 14, (C[1] + E[1]) * 0.5 - 8), "3", fill=violet, font=f_val)
+        draw.text(((E[0] + A[0]) * 0.5 + 14, (E[1] + A[1]) * 0.5 - 12), "4", fill=violet, font=f_val)
+        if solved:
+            draw.text(((A[0] + F[0]) * 0.5 - 38, (A[1] + F[1]) * 0.5 - 14), "2", fill=green, font=f_val)
+            draw.text(((F[0] + B[0]) * 0.5 - 36, (F[1] + B[1]) * 0.5 - 10), "1", fill=green, font=f_val)
+        else:
+            draw.text(((A[0] + B[0]) * 0.5 - 48, (A[1] + B[1]) * 0.5 - 18), "x:y=?", fill=gold, font=f_val)
 
 
 def render_exam_hybrid_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -> Path:
@@ -260,7 +433,7 @@ def render_exam_hybrid_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -
     img.paste(slide_img.resize((sw, sh), Image.Resampling.LANCZOS), (sx, sy))
 
     # 좌측 상단 시험 킬러 배지 (Rule 37: 유클리드 로열 블루 팔레트)
-    badge = bp["exam_badge_en"] if is_en else bp["exam_badge_ko"]
+    badge = _clean_canvas_text(bp["exam_badge_en"] if is_en else bp["exam_badge_ko"])
     draw.rounded_rectangle((36, 36, 586, 98), radius=16, fill=(2, 132, 199), outline=(254, 240, 138), width=3)
     draw.text((56, 51), badge, fill=(255, 255, 255), font=vmaker.get_font_for_lang("ko", 26, bold=True))
 
@@ -279,8 +452,8 @@ def render_exam_hybrid_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -
 
     # 좌측 중단 구체적 수치 조건 박스 (x = ?)
     draw.rounded_rectangle((36, 316, 586, 496), radius=18, fill=(15, 25, 52), outline=(56, 189, 248), width=3)
-    cap_main = bp["figure_caption_en"] if is_en else bp["figure_caption_ko"]
-    draw.text((56, 340), "📝 [실전 문제]" if not is_en else "📝 [EXAM PROBLEM]", fill=(250, 204, 21), font=vmaker.get_font_for_lang("ko", 26, bold=True))
+    cap_main = _clean_canvas_text(bp["figure_caption_en"] if is_en else bp["figure_caption_ko"])
+    draw.text((56, 340), "■ [실전 문제]" if not is_en else "■ [EXAM PROBLEM]", fill=(250, 204, 21), font=vmaker.get_font_for_lang("ko", 26, bold=True))
     wrapped_cap = textwrap.wrap(cap_main, width=24 if is_en else 18)[:2]
     yc = 386
     for cl in wrapped_cap:
@@ -289,8 +462,8 @@ def render_exam_hybrid_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -
 
     # 하단 구독 유도 브랜드 바
     draw.rounded_rectangle((36, 540, 586, 656), radius=16, fill=(15, 118, 110), outline=(110, 231, 183), width=2)
-    cta1 = "⚡ 공식 암기 ZERO · 10초 시각 해법" if not is_en else "⚡ Zero Rote Formulas · 10s Visual Hack"
-    cta2 = "🔔 @min7014_ai 내신·수능 도형 정복" if not is_en else "🔔 @min7014_ai · Exam Visual Proofs"
+    cta1 = "★ 공식 암기 ZERO · 10초 시각 해법" if not is_en else "★ Zero Rote Formulas · 10s Visual Hack"
+    cta2 = "▶ @min7014_ai 내신·수능 도형 정복" if not is_en else "▶ @min7014_ai · Exam Visual Proofs"
     draw.text((56, 558), cta1, fill=(254, 240, 138), font=vmaker.get_font_for_lang("ko", 24, bold=True))
     draw.text((56, 602), cta2, fill=(255, 255, 255), font=vmaker.get_font_for_lang("ko", 24, bold=True))
 
@@ -382,19 +555,19 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         act1_img = Image.new("RGB", (1920, 1080), (8, 13, 28))
         d1 = ImageDraw.Draw(act1_img)
         d1.rounded_rectangle((56, 44, 1864, 156), radius=22, fill=(30, 64, 175), outline=(250, 204, 21), width=4)
-        d1.text((88, 74), bp["exam_badge_en"] if is_en else bp["exam_badge_ko"], fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
-        d1.text((1380, 78), "⏱️ 5-SEC CHALLENGE" if is_en else "⏱️ 실전 5초 챌린지!", fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
+        d1.text((88, 74), _clean_canvas_text(bp["exam_badge_en"] if is_en else bp["exam_badge_ko"]), fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
+        d1.text((1380, 78), "★ 5-SEC CHALLENGE" if is_en else "★ 실전 5초 챌린지!", fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
 
         _draw_exam_problem_diagram(d1, (68, 196, 940, 880), bp["diagram_kind"], solved=False, canvas_img=act1_img, pdf_doc=doc)
         d1.rounded_rectangle((980, 196, 1852, 880), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
-        p_lbl = bp["problem_label_en"] if is_en else bp["problem_label_ko"]
+        p_lbl = _clean_canvas_text(bp["problem_label_en"] if is_en else bp["problem_label_ko"])
         y_txt = 248
         for line in textwrap.wrap(p_lbl, width=28 if is_en else 18)[:4]:
             d1.text((1024, y_txt), line, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
             y_txt += 64
         d1.rounded_rectangle((1024, 560, 1808, 700), radius=18, fill=(30, 41, 59), outline=(250, 204, 21), width=3)
-        d1.text((1056, 604), bp["figure_caption_en"] if is_en else bp["figure_caption_ko"], fill=(250, 204, 21), font=vmaker.get_font_for_lang(lang_code, 38, bold=True))
-        d1.text((1024, 760), "💡 Hint: Don't write equations—spot ONE line!" if is_en else "💡 힌트: 방정식을 세우지 말고 보조선 1줄을 찾으세요!", fill=(125, 211, 252), font=vmaker.get_font_for_lang(lang_code, 30, bold=True))
+        d1.text((1056, 604), _clean_canvas_text(bp["figure_caption_en"] if is_en else bp["figure_caption_ko"]), fill=(250, 204, 21), font=vmaker.get_font_for_lang(lang_code, 38, bold=True))
+        d1.text((1024, 760), "★ Hint: Don't write equations—spot ONE line!" if is_en else "★ 힌트: 방정식을 세우지 말고 보조선 1줄을 찾으세요!", fill=(125, 211, 252), font=vmaker.get_font_for_lang(lang_code, 30, bold=True))
 
         act1_mp3 = tmp_dir / "long_act1.mp3"
         act1_seg = tmp_dir / "long_act1.mp4"
@@ -411,7 +584,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
             frame = Image.new("RGB", (1920, 1080), (10, 16, 34))
             df = ImageDraw.Draw(frame)
             df.rounded_rectangle((48, 26, 1872, 108), radius=16, fill=(15, 23, 42), outline=(56, 189, 248), width=2)
-            hdr = f"📐 Visual Proof Step {idx_s}/{len(mid_indices)} (min7014.github.io)" if is_en else f"📐 핵심 시각 증명 STEP {idx_s}/{len(mid_indices)} (원리 해체)"
+            hdr = f"■ Visual Proof Step {idx_s}/{len(mid_indices)} (min7014.github.io)" if is_en else f"■ 핵심 시각 증명 STEP {idx_s}/{len(mid_indices)} (원리 해체)"
             df.text((76, 46), hdr, fill=(125, 211, 252), font=vmaker.get_font_for_lang(lang_code, 32, bold=True))
 
             sc = min(1760 / s_raw.width, 880 / s_raw.height)
@@ -422,8 +595,10 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
 
             raw_n = (p_info.get("narrations") or {}).get(lang_code) or p_info.get("explanation_text") or ""
             raw_n = re.sub(r"안녕하세요[^.?!]*[.?!]\s*", "", raw_n).strip()
+            if is_en and re.search(r"[가-힣]", raw_n):
+                raw_n = ""
             if not raw_n:
-                raw_n = "Watch how the auxiliary geometry locks the two quantities together." if is_en else "보조선에 의해 두 도형 요소의 크기가 자연스럽게 연결됩니다."
+                raw_n = f"Step {idx_s}: Watch how the auxiliary geometry locks the equal quantities together." if is_en else "보조선에 의해 두 도형 요소의 크기가 자연스럽게 연결됩니다."
             s_mp3 = tmp_dir / f"long_step_{idx_s:02d}.mp3"
             s_mp4 = tmp_dir / f"long_step_{idx_s:02d}.mp4"
             vmaker.synthesize_tts_mp3_sync(raw_n, voice_name, s_mp3, rate="+8%")
@@ -434,16 +609,16 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         act3_img = Image.new("RGB", (1920, 1080), (8, 18, 32))
         d3 = ImageDraw.Draw(act3_img)
         d3.rounded_rectangle((56, 44, 1864, 156), radius=22, fill=(5, 150, 105), outline=(250, 204, 21), width=4)
-        d3.text((88, 74), "✅ SOLVED IN 5 SECONDS! (1-LINE VISUAL HACK)" if is_en else "✅ 보조선 1줄로 단 5초 만에 실전 해체 완료!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
+        d3.text((88, 74), "★ SOLVED IN 5 SECONDS! (1-LINE VISUAL HACK)" if is_en else "★ 보조선 1줄로 단 5초 만에 실전 해체 완료!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
         _draw_exam_problem_diagram(d3, (68, 196, 940, 880), bp["diagram_kind"], solved=True, canvas_img=act3_img, pdf_doc=doc)
         d3.rounded_rectangle((980, 196, 1852, 880), radius=24, fill=(15, 23, 42), outline=(52, 211, 153), width=4)
-        ans_lbl = bp["answer_label_en"] if is_en else bp["answer_label_ko"]
+        ans_lbl = _clean_canvas_text(bp["answer_label_en"] if is_en else bp["answer_label_ko"])
         ya = 256
         for line in textwrap.wrap(ans_lbl, width=28 if is_en else 18)[:4]:
             d3.text((1024, ya), line, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
             ya += 64
         d3.rounded_rectangle((1024, 590, 1808, 820), radius=20, fill=(2, 132, 199), outline=(255, 255, 255), width=3)
-        sub_h1 = "🔔 Subscribe to @min7014_ai Right Now!" if is_en else "🔔 지금 바로 @min7014_ai [구독] 누르기!"
+        sub_h1 = "▶ Subscribe to @min7014_ai Right Now!" if is_en else "▶ 지금 바로 @min7014_ai [구독] 누르기!"
         sub_h2 = "Turn tough exam traps into 10-sec visual solves!" if is_en else "내신·수능 4점 도형·미적분이 10초 눈풀이로 바뀝니다!"
         d3.text((1056, 636), sub_h1, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
         d3.text((1056, 712), sub_h2, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 28, bold=True))
@@ -467,13 +642,13 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         s1 = Image.new("RGB", (1080, 1920), (8, 13, 28))
         ds1 = ImageDraw.Draw(s1)
         ds1.rounded_rectangle((44, 68, 1036, 214), radius=24, fill=(2, 132, 199), outline=(250, 204, 21), width=4)
-        ds1.text((78, 110), "⏱️ CAN YOU FIND x IN 3 SECONDS?" if is_en else "⏱️ 공식 없이 3초 안에 x가 보이시나요?", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
-        _draw_exam_problem_diagram(ds1, (56, 256, 1024, 1220), bp["diagram_kind"], solved=False, canvas_img=s1, pdf_doc=doc)
-        ds1.rounded_rectangle((56, 1260, 1024, 1520), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=4)
-        ds1.text((92, 1305), bp["figure_caption_en"] if is_en else bp["figure_caption_ko"], fill=(250, 204, 21), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
-        p_short_lines = textwrap.wrap(bp["problem_label_en"] if is_en else bp["problem_label_ko"], width=30 if is_en else 20)[:2]
+        ds1.text((78, 110), "★ CAN YOU FIND x IN 3 SECONDS?" if is_en else "★ 공식 없이 3초 안에 x가 보이시나요?", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
+        _draw_exam_problem_diagram(ds1, (56, 250, 1024, 1210), bp["diagram_kind"], solved=False, canvas_img=s1, pdf_doc=doc)
+        ds1.rounded_rectangle((56, 1248, 1024, 1600), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=4)
+        ds1.text((88, 1286), _clean_canvas_text(bp["figure_caption_en"] if is_en else bp["figure_caption_ko"]), fill=(250, 204, 21), font=vmaker.get_font_for_lang(lang_code, 40, bold=True))
+        p_short_lines = textwrap.wrap(_clean_canvas_text(bp["problem_label_en"] if is_en else bp["problem_label_ko"]), width=32 if is_en else 24)[:3]
         for li, pl in enumerate(p_short_lines):
-            ds1.text((92, 1384 + li * 52), pl, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 34, bold=True))
+            ds1.text((88, 1368 + li * 56), pl, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 33, bold=True))
 
         sh1_mp3 = tmp_dir / "sh1.mp3"
         sh1_seg = tmp_dir / "sh1.mp4"
@@ -489,7 +664,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
             sc_v = Image.new("RGB", (1080, 1920), (10, 16, 34))
             dsc = ImageDraw.Draw(sc_v)
             dsc.rounded_rectangle((44, 68, 1036, 200), radius=22, fill=(2, 132, 199), outline=(254, 240, 138), width=3)
-            dsc.text((78, 108), f"💡 VISUAL CLUE {si-1}/2 — Watch the Auxiliary Line!" if is_en else f"💡 핵심 단서 {si-1}/2 — 보조선의 마법을 보세요!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
+            dsc.text((78, 108), f"★ VISUAL CLUE {si-1}/2 — Watch the Auxiliary Line!" if is_en else f"★ 핵심 단서 {si-1}/2 — 보조선의 마법을 보세요!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
             k_scale = min(980 / sl_img.width, 1020 / sl_img.height)
             kw, kh = int(sl_img.width * k_scale), int(sl_img.height * k_scale)
             kx, ky = (1080 - kw) // 2, 260 + (1060 - kh) // 2
@@ -497,13 +672,15 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
             sc_v.paste(sl_img.resize((kw, kh), Image.Resampling.LANCZOS), (kx, ky))
 
             p_match = pages[min(len(pages) - 1, dp_i)]
-            clue_txt = ((p_match.get("narrations") or {}).get(lang_code) or p_match.get("explanation_text") or "").strip()
-            sents = [x.strip() for x in re.split(r"(?<=[.?!])\s+", clue_txt) if x.strip() and "안녕하세요" not in x]
+            clue_txt = ((p_match.get("narrations") or {}).get(lang_code) or ("" if is_en else p_match.get("explanation_text")) or "").strip()
+            if is_en and re.search(r"[가-힣]", clue_txt):
+                clue_txt = ""
+            sents = [x.strip() for x in re.split(r"(?<=[.?!])\s+", clue_txt) if len(re.findall(r"[A-Za-z가-힣0-9]", x)) >= 8 and "안녕하세요" not in x]
             short_clue = sents[-1] if sents else ("One auxiliary line locks the equal angles together!" if is_en else "보조선 한 줄이 숨어 있던 합동과 대칭을 즉시 깨웁니다!")
             if len(short_clue) > (120 if is_en else 68):
                 short_clue = short_clue[: (116 if is_en else 64)].rsplit(" ", 1)[0] + "."
             dsc.rounded_rectangle((44, 1380, 1036, 1600), radius=22, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
-            for li, cl_l in enumerate(textwrap.wrap(short_clue, width=32 if is_en else 20)[:3]):
+            for li, cl_l in enumerate(textwrap.wrap(_clean_canvas_text(short_clue), width=32 if is_en else 20)[:3]):
                 dsc.text((80, 1418 + li * 50), cl_l, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 34, bold=True))
 
             sh_m_mp3 = tmp_dir / f"sh_{si}.mp3"
@@ -516,13 +693,13 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         s4 = Image.new("RGB", (1080, 1920), (8, 20, 34))
         ds4 = ImageDraw.Draw(s4)
         ds4.rounded_rectangle((44, 68, 1036, 204), radius=24, fill=(5, 150, 105), outline=(250, 204, 21), width=4)
-        ds4.text((78, 110), "🎯 BOOM! 5-SECOND EXAM PAYOFF!" if is_en else "🎯 유레카! 보조선 1줄로 5초 암산 끝!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 40, bold=True))
+        ds4.text((78, 110), "★ BOOM! 5-SECOND EXAM PAYOFF!" if is_en else "★ 유레카! 보조선 1줄로 5초 암산 끝!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 40, bold=True))
         _draw_exam_problem_diagram(ds4, (56, 244, 1024, 1140), bp["diagram_kind"], solved=True, canvas_img=s4, pdf_doc=doc)
         ds4.rounded_rectangle((44, 1180, 1036, 1590), radius=24, fill=(15, 23, 42), outline=(52, 211, 153), width=4)
-        for li, al in enumerate(textwrap.wrap(bp["answer_label_en"] if is_en else bp["answer_label_ko"], width=28 if is_en else 19)[:3]):
+        for li, al in enumerate(textwrap.wrap(_clean_canvas_text(bp["answer_label_en"] if is_en else bp["answer_label_ko"]), width=28 if is_en else 19)[:3]):
             ds4.text((80, 1222 + li * 56), al, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 38, bold=True))
         ds4.rounded_rectangle((72, 1430, 1008, 1560), radius=18, fill=(2, 132, 199))
-        cta_b = "👇 Tap Related Video & Hit [Subscribe] @min7014_ai!" if is_en else "👇 아래 [관련 동영상] 풀버전 클릭 & [@min7014_ai 구독]!"
+        cta_b = "▶ Tap Related Video & Hit [Subscribe] @min7014_ai!" if is_en else "▶ 아래 [관련 동영상] 풀버전 클릭 & [@min7014_ai 구독]!"
         ds4.text((98, 1474), cta_b, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 31, bold=True))
 
         sh4_mp3 = tmp_dir / "sh4.mp3"

@@ -233,6 +233,13 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         except Exception:
             pass
 
+    # exam_hybrid_creator.py 해석기하 공점(Ceva)·공선(Menelaus) 무결성 기계적 점검 (Rule 5 & Rule 44)
+    eh_file = ROOT_DIR / "exam_hybrid_creator.py"
+    if eh_file.exists():
+        eh_txt = eh_file.read_text(encoding="utf-8", errors="ignore")
+        if 'elif kind == "menelaus_line":' not in eh_txt or "mA, mB, mC = 3.0, 6.0, 4.0" not in eh_txt:
+            findings["L7_visual_integrity"].append("exam_hybrid_creator.py: 체바 공점(Ceva concurrency) 또는 메넬라우스 공선(Menelaus collinearity) 해석기하 작도 누락")
+
     # ---------------- L6: Git 미디어 및 비밀키 유출 ZERO 스캔 ----------------
     try:
         tracked = subprocess.run(
