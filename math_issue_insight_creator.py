@@ -155,6 +155,27 @@ CURATED_ISSUE_INSIGHT_BLUEPRINTS = [
         "comment_quiz_ko": "💬 [열린 발문] 세 변이 6, 5, 4인 삼각형에서 가장 큰 각과 가장 작은 각 사이에는 어떤 특별한 배수 관계가 숨어 있을까요? 댓글로 추론해 보세요! 🤩",
         "comment_quiz_en": "💬 [Bonus Discovery] In a 6-5-4 triangle, there is a surprising exact ratio between two of its angles—can you spot or guess it? Comment below! 🤩",
     },
+    {
+        "slug": "2022040501",
+        "issue_category_ko": "🧭 스마트 안경 시험 논란 시대 × AI가 대신할 수 없는 작도 사고력",
+        "issue_category_en": "🧭 Wearable AI Exam Era × Irreplaceable Geometric Construction",
+        "issue_headline_ko": "카메라로 찍어 3초 만에 객관식 답을 듣는 스마트 안경 논란 — 수식도 보기도 없는 '순수 포물선 곡선' 하나만 주어지면 어떻게 될까?",
+        "issue_headline_en": "When Wearable AI Reads Formula Tests in Seconds: What Happens When Only a Pure Curve Is Given with Zero Equations?",
+        "old_view_ko": "기존 암기식 평가: y² = 4px 식에 숫자를 대입해 객관식 번호(①~⑤)로 초점 좌표를 찍는 시험",
+        "old_view_en": "Rote Formula Exam: Plugging numbers into y² = 4px to pick a multiple-choice focus coordinate",
+        "new_insight_ko": "차별화된 수학교육 시각: 방정식도 좌표축도 없는 포물선 위에서 평행현의 중점 자취와 대칭 원리만으로 대칭축·초점·준선을 손수 복원해 내는 동적 작도 역량!",
+        "new_insight_en": "Math-Ed Insight: Reconstructing the axis, focus, and directrix from a bare parabola via parallel-chord midpoints and pure geometric symmetry!",
+        "title_ko": "🧭 AI 안경도 절대 못 베끼는 진짜 수학 문제! 식 없는 포물선에서 초점·준선 찾아내기 | 포물선 작도 시각적 증명",
+        "title_en": "🧭 The Math Test Wearable AI Cannot Cheat! Finding Focus & Directrix from a Bare Parabola",
+        "short_title_ko": "❓ 수식도 좌표도 없는 포물선 그림 하나에서 '초점'을 어떻게 작도로 찾아낼까? #Shorts",
+        "short_title_en": "❓ Zero Equations, Zero Axes! How Do You Construct a Parabola's Focus by Hand? #Shorts",
+        "act1_ko": "최근 카메라로 시험지를 비추어 객관식 정답을 귓속말로 전달받는 스마트 안경 부정행위가 교육계의 큰 화두가 되었습니다. 이 현상은 사실 오지선다와 공식 대입에 머물러 있던 기존 평가 방식에 근본적인 질문을 던지고 있습니다. 만약 수식도, 좌표축도, 객관식 보기도 없이 오직 포물선 곡선 하나만 그려진 종이 위에서 대칭축과 초점, 준선을 직접 작도하라고 하면 어떻게 될까요?",
+        "act1_en": "Recent exam controversies involving wearable smart glasses expose a deeper truth: multiple-choice formula drills can be answered by a camera in seconds. What happens instead when an assessment gives zero equations, zero coordinates, and zero answer choices—only a bare parabola curve—and asks you to construct its axis, focus, and directrix from pure geometric principles?",
+        "act3_ko": "평행한 두 현의 중점을 이어 대칭축의 방향을 잡고, 직각과 반사 대칭의 성질로 초점과 준선을 한 땀 한 땀 복원하는 과정은 결코 귓속말 숫자 하나로 대신할 수 없습니다. 전파를 막는 단속을 넘어, 학생이 직접 보조선을 긋고 원리를 구성하게 만드는 평가의 전환이야말로 인공지능 시대 수학교육이 나아갈 진짜 해답입니다!",
+        "act3_en": "Connecting midpoints of parallel chords and using reflection symmetry to locate the focus and directrix can never be whispered as a multiple-choice number. Moving from rote answer checking to hands-on geometric construction is the true future of mathematics education in the AI era!",
+        "comment_quiz_ko": "💬 [수학교육 열린 발문] 만약 포물선이 아니라 '원 둘레의 일부(호)'만 그려져 있다면, 원의 중심은 어떤 두 선을 그어 찾을 수 있을까요? 댓글로 작도 아이디어를 들려주세요! 🤩",
+        "comment_quiz_en": "💬 [Open Construction Prompt] If you are given only a circular arc instead of a parabola, which two lines would you construct to find its center? Share your idea below! 🤩",
+    },
 ]
 
 # ==============================================================================
