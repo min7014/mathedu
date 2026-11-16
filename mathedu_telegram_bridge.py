@@ -714,6 +714,11 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "  - 포물선 중점 접선: https://min7014.github.io/mathedu/video_board.html?slug=2019072401&mode=active"
         )
 
+    if low in ("!교육뉴스", "!뉴스", "!뉴스자료", "/edunews", "!edunews"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import edu_news_material_engine as _enme
+        return _enme.format_edu_news_summary()
+
     if low in ("!이슈", "!통찰", "!수학이슈", "/issue", "!issue"):
         sys.path.insert(0, str(ROOT_DIR))
         import math_issue_insight_creator as _miic

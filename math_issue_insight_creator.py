@@ -182,8 +182,9 @@ CURATED_ISSUE_INSIGHT_BLUEPRINTS = [
 # 2. 실시간 수학·수학교육 이슈 레이더 (0-LLM-Credit RSS + 학사 시즌 캘린더)
 # ==============================================================================
 LIVE_MATH_RSS_FEEDS = [
-    ("google_news_ko_mathedu", "https://news.google.com/rss/search?q=%EC%88%98%ED%95%99%EA%B5%90%EC%9C%A1+OR+%EC%88%98%ED%95%99+%EC%82%AC%EA%B3%A0%EB%A0%A5+OR+%EA%B8%B0%ED%95%98+%EC%A7%81%EA%B4%80&hl=ko&gl=KR&ceid=KR:ko"),
-    ("google_news_en_mathedu", "https://news.google.com/rss/search?q=%22mathematics+education%22+OR+%22visual+proof%22+OR+%22mathematical+thinking%22&hl=en-US&gl=US&ceid=US:en"),
+    ("google_news_ko_edunews", "https://news.google.com/rss/search?q=%EC%88%98%ED%95%99%EA%B5%90%EC%9C%A1+OR+%EC%84%9C%EC%88%A0%ED%98%95+%EC%88%98%ED%95%99+OR+%EC%8A%A4%EB%A7%88%ED%8A%B8+%EC%95%88%EA%B2%BD+%EC%8B%9C%ED%97%98+OR+%EC%88%98%EB%A6%AC%EB%85%BC%EC%88%A0+OR+%EA%B3%A0%EA%B5%90%ED%95%99%EC%A0%90%EC%A0%9C+%EC%88%98%ED%95%99&hl=ko&gl=KR&ceid=KR:ko"),
+    ("google_news_ko_mathedu", "https://news.google.com/rss/search?q=%EC%88%98%ED%95%99+%EC%82%AC%EA%B3%A0%EB%A0%A5+OR+%EA%B8%B0%ED%95%98+%EC%A7%81%EA%B4%80+OR+%EC%88%98%EB%8A%A5+%EC%88%98%ED%95%99+%EB%B3%80%EB%B3%84%EB%A0%A5+OR+%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5+%EC%88%98%ED%95%99%EA%B5%90%EC%8B%A4&hl=ko&gl=KR&ceid=KR:ko"),
+    ("google_news_en_mathedu", "https://news.google.com/rss/search?q=%22mathematics+education%22+OR+%22math+assessment%22+OR+%22visual+proof%22+OR+%22AI+in+math+education%22&hl=en-US&gl=US&ceid=US:en"),
     ("arxiv_math_ho", "https://export.arxiv.org/rss/math.HO"),
 ]
 
@@ -203,6 +204,9 @@ SEASONAL_MATH_ED_ISSUES = {
 }
 
 CONCEPT_KEYWORD_BRIDGE = [
+    (("안경", "웨어러블", "부정행위", "객관식", "오지선다", "5지선다", "wearable", "glasses", "cheating", "multiple choice"), ["작도", "포물선", "타원", "빛 반사", "자취"]),
+    (("서술형", "논술", "수행평가", "구술", "면접", "과정중심", "정당화", "essay", "oral", "assessment"), ["평균값 정리", "코시", "원주각", "이등변삼각형", "체바"]),
+    (("디지털교과서", "환각", "생성형", "문해력", "기초학력", "고교학점제", "curriculum", "literacy", "edtech"), ["피타고라스", "제곱근", "평균변화율", "순환소수", "삼각비"]),
     (("타원", "초점", "반사", "망원경", "광학", "ellipse", "focus", "optical", "reflection"), ["타원", "초점", "빛 반사", "이차곡선"]),
     (("포물선", "안테나", "투사체", "parabola", "trajectory"), ["포물선", "준선", "평균변화율"]),
     (("미분", "변화율", "최적화", "인공지능", "경사", "derivative", "calculus", "optimization", "ai"), ["미분", "평균변화율", "접선", "평균값 정리"]),
@@ -274,7 +278,7 @@ def scan_live_math_issues(timeout: int = 8) -> dict:
                         for vk in vault_kws:
                             if vk not in matched_kws:
                                 matched_kws.append(vk)
-                if not matched_kws and any(w in low_t for w in ("수학", "기하", "증명", "math", "geometry", "proof", "calculus", "theorem")):
+                if not matched_kws and any(w in low_t for w in ("수학", "기하", "증명", "교육", "평가", "논술", "수업", "math", "geometry", "proof", "calculus", "theorem", "education", "assessment")):
                     matched_kws = list(s_keywords[:3])
                 if matched_kws:
                     # 저작권 보호(Rule 51): 외부 기사 문장을 복제하지 않고 순수 수학 키워드 화두로만 추상화 기록

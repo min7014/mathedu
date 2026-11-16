@@ -806,6 +806,12 @@ def run_continuous_foundation_loop(single_cycle=False):
     except Exception as eh_err:
         print(f"[Exam-Hybrid Creator Notice] {eh_err}", flush=True)
     try:
+        import edu_news_material_engine as _enme
+        en_db = _enme.sync_edu_news_db(timeout=6)
+        print(f"📰 [Edu-News Material Engine] Signals={en_db.get('live_edu_news_signals_count')} | Tracks={len(en_db.get('curated_response_tracks', []))}", flush=True)
+    except Exception as en_err:
+        print(f"[Edu-News Engine Notice] {en_err}", flush=True)
+    try:
         import math_issue_insight_creator
         mi_built = math_issue_insight_creator.ensure_next_issue_insight_rendered(max_bundles=1)
         if mi_built:

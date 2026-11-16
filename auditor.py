@@ -82,6 +82,7 @@ PUBLIC_GENERATOR_MODULES = [
     "video_creator.py",
     "secretary.py",
     "build_min7014_bridge_cinema.py",
+    "edu_news_material_engine.py",
 ]
 
 
