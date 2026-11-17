@@ -587,6 +587,22 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
     cmd = (raw_text or "").strip()
     low = cmd.lower()
 
+    if low in ("/start", "!start", "!시작"):
+        brief = _build_secretary_fallback_briefing()
+        return (
+            "✅ [Antigravity 수석 비서 @anti7014_bot 실시간 연결 정상 가동 중!]\n\n"
+            f"{brief}\n\n"
+            "💡 [주요 즉시 단축 명령어 (크레딧 0원 · 1초 응답)]\n"
+            "• !현황 (/status) : 24/7 데몬 상태·금일 업로드·최근 커밋\n"
+            "• !브리핑 (/briefing) : 수석 비서 종합 실시간 브리핑\n"
+            "• !수익 (/revenue) | !추이 (/trend) : @min7014_ai 구독자·조회수·YPP 추이\n"
+            "• !댓글 (/comments) : 유튜브 댓글 수학적 오류 분석·보완 현황\n"
+            "• !교육뉴스 (/edunews) | !이슈 (/issue) : 교육뉴스 레이더 & 통찰 영상 현황\n"
+            "• !신고 (/reports) | !검색어 (/searches) : 홈페이지 오류신고 & 검색수요 현황\n"
+            "• !도움말 (/help) : 전체 단축 명령어 보기\n\n"
+            "※ 새로운 작업이나 수정 지시는 평소처럼 자연어로 편하게 말씀해 주시면 즉시 수행합니다."
+        )
+
     if low in ("!도움말", "/help", "!help"):
         return (
             "💡 [크레딧 소모 0원 · 유튜브 최우선 수익화 단축 명령어]\n"
@@ -594,6 +610,9 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !추이 (또는 /trend) : [전략 v2.0 기준점 대비] 구독자·조회수·시청시간·쇼츠 유지율·신규 코호트 변화 추이\n"
             "• !추이정밀 (또는 /trenddeep) : [API 쿼터 0] YouTube Studio 내부 시청시간·이탈률까지 실시간 정밀 실측\n"
             "• !수익 (또는 /revenue) : 실시간 유튜브 구독자·조회수·YPP 1/2단계 달성 현황·쇼츠 본편 바인딩 수\n"
+            "• !댓글 (또는 /comments) : [크레딧 0] @min7014_ai + @min7014 댓글 수학 오류 분석·보완 현황\n"
+            "• !교육뉴스 (또는 /edunews) : [크레딧 0] 실시간 교육뉴스 레이더 및 수학 본질 수업자료 매핑 현황\n"
+            "• !이슈 (또는 /issue) : [크레딧 0] 수학 이슈 × 오리지널 통찰 시네마 현황\n"
             "• !쇼츠연결 (또는 /linkshorts) : [API 쿼터 0] 스튜디오에서 쇼츠 8편에 1080p 본편 '관련 동영상' 즉시 연결\n"
             "• !커뮤니티 (또는 /community) : [API 쿼터 0] 채널 커뮤니티 탭에 5초 수학 퀴즈 게시물 즉시 발행\n"
             "• !고품질화 (또는 /flow) : [크레딧 0] Google Flow ULTRA(95%) + 공간기하 3D 카메라(5%) 현황 조회\n"
