@@ -812,6 +812,12 @@ def run_continuous_foundation_loop(single_cycle=False):
     except Exception as en_err:
         print(f"[Edu-News Engine Notice] {en_err}", flush=True)
     try:
+        import youtube_comment_math_auditor as _ycma
+        yc_res = _ycma.remediate_pending_math_comments(notify_telegram=True)
+        print(f"💬 [YouTube Comment Math Auditor] status={yc_res.get('status', 'checked')} | ok={yc_res.get('ok')}", flush=True)
+    except Exception as yc_err:
+        print(f"[YouTube Comment Auditor Notice] {yc_err}", flush=True)
+    try:
         import math_issue_insight_creator
         mi_built = math_issue_insight_creator.ensure_next_issue_insight_rendered(max_bundles=1)
         if mi_built:

@@ -714,6 +714,11 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "  - 포물선 중점 접선: https://min7014.github.io/mathedu/video_board.html?slug=2019072401&mode=active"
         )
 
+    if low in ("!댓글", "!유튜브댓글", "!댓글점검", "/comments", "!comments"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import youtube_comment_math_auditor as _ycma
+        return _ycma.format_comment_audit_summary(run_fresh_scan=True)
+
     if low in ("!교육뉴스", "!뉴스", "!뉴스자료", "/edunews", "!edunews"):
         sys.path.insert(0, str(ROOT_DIR))
         import edu_news_material_engine as _enme
@@ -989,6 +994,7 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
 
     print(f"🚀 [Antigravity Telegram 무충돌 상시 워치독 가동 중 | PID={os.getpid()} | {datetime.datetime.now().isoformat()}]", flush=True)
     last_wd_report_poll = 0.0
+    last_wd_yt_comment_poll = 0.0
     while True:
         try:
             if _is_live_session_owning_telegram():
@@ -1008,6 +1014,15 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
                     wd_db = _sde_wd.load_demand_db()
                     if any(g.get("status") == "pending" for g in (wd_db.get("unmet_lesson_queue") or [])):
                         await asyncio.to_thread(_sde_wd.run_search_demand_cycle, True, True)
+                except Exception:
+                    pass
+
+            if time.time() - last_wd_yt_comment_poll >= 1800.0:
+                last_wd_yt_comment_poll = time.time()
+                try:
+                    sys.path.insert(0, str(ROOT_DIR))
+                    import youtube_comment_math_auditor as _ycma_wd
+                    await asyncio.to_thread(_ycma_wd.remediate_pending_math_comments, True)
                 except Exception:
                     pass
 
