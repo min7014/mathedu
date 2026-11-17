@@ -423,29 +423,215 @@ def probe_and_capture_project_genie_clip(
 
 
 # ==============================================================================
-# 📐 무결점 3D 유클리드 월드 카메라 엔진 (1920x1080 · 30fps · 기하 오차 0.000%)
+# 📐 무결점 3D 유클리드 월드 카메라 & 은선(Ray-Occlusion) 기술기하 엔진 (1920x1080 · 30fps)
 # ==============================================================================
+def _camera_eye_3d(yaw: float, pitch: float, cam_dist: float) -> tuple[float, float, float]:
+    """
+    원점(0,0,0)을 바라보는 고각(pitch > 0: 위에서 아래로 내려다보는 자연 시점) 카메라의
+    정확한 3D 월드 좌표 O_cam = (x_e, y_e, z_e)를 반환합니다.
+    """
+    cp, sp = math.cos(pitch), math.sin(pitch)
+    cyw, syw = math.cos(yaw), math.sin(yaw)
+    return (-cam_dist * cp * syw, cam_dist * sp, -cam_dist * cp * cyw)
+
+
 def _project_3d(
     pt: tuple[float, float, float],
     yaw: float,
     pitch: float,
     cam_dist: float,
     focal: float = 1280.0,
-    cx: float = 610.0,
+    cx: float = 565.0,
     cy: float = 548.0,
 ) -> tuple[float, float, float]:
-    """3D 공간 좌표 (x, y_up, z)를 회전·원근 투영하여 화면 (sx, sy, depth_z)로 변환합니다."""
+    """
+    3D 공간 좌표 (x, y_up, z)를 고각(pitch > 0: 상방 부감 시점) 회전·원근 투영하여
+    화면 (sx, sy, depth_z)로 변환합니다.
+    - 전면(z < 0, 카메라에 가까운 쪽)은 화면 아래쪽으로 자연스럽게 볼록하게 투영되고,
+      후면(z > 0, 구·원뿔 뒤편에 가려지는 쪽)은 화면 위쪽으로 투영되어 정통 기하 교과서 작도와 100% 일치합니다.
+    """
     x, y, z = pt
     cyw, syw = math.cos(yaw), math.sin(yaw)
     x1 = x * cyw - z * syw
     z1 = x * syw + z * cyw
 
     cp, sp = math.cos(pitch), math.sin(pitch)
-    y2 = y * cp - z1 * sp
-    z2 = y * sp + z1 * cp + cam_dist
-    z2 = max(0.8, z2)
-    sc = focal / z2
-    return (cx + x1 * sc, cy - y2 * sc, z2)
+    y_cam = y * cp + z1 * sp
+    z_cam = cam_dist - y * sp + z1 * cp
+    z_cam = max(0.8, z_cam)
+    sc = focal / z_cam
+    return (cx + x1 * sc, cy - y_cam * sc, z_cam)
+
+
+def _vec_sub(a: tuple[float, float, float], b: tuple[float, float, float]) -> tuple[float, float, float]:
+    return (a[0] - b[0], a[1] - b[1], a[2] - b[2])
+
+
+def _vec_dot(a: tuple[float, float, float], b: tuple[float, float, float]) -> float:
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+
+
+def _vec_cross(a: tuple[float, float, float], b: tuple[float, float, float]) -> tuple[float, float, float]:
+    return (
+        a[1] * b[2] - a[2] * b[1],
+        a[2] * b[0] - a[0] * b[2],
+        a[0] * b[1] - a[1] * b[0],
+    )
+
+
+def _vec_norm(a: tuple[float, float, float]) -> tuple[float, float, float]:
+    ln = math.sqrt(_vec_dot(a, a))
+    if ln <= 1e-12:
+        return (0.0, 0.0, 0.0)
+    return (a[0] / ln, a[1] / ln, a[2] / ln)
+
+
+def _ray_occluded_by_sphere(
+    eye: tuple[float, float, float],
+    pt: tuple[float, float, float],
+    center: tuple[float, float, float],
+    radius: float,
+    eps: float = 0.014,
+) -> bool:
+    """카메라 eye에서 3D 점 pt로 향하는 시선 선분이 구(center, radius)에 의해 먼저 가려지는지 엄밀 판정합니다."""
+    dx, dy, dz = pt[0] - eye[0], pt[1] - eye[1], pt[2] - eye[2]
+    seg_len = math.sqrt(dx * dx + dy * dy + dz * dz)
+    if seg_len <= 1e-7:
+        return False
+    ux, uy, uz = dx / seg_len, dy / seg_len, dz / seg_len
+    mx, my, mz = eye[0] - center[0], eye[1] - center[1], eye[2] - center[2]
+    b_h = mx * ux + my * uy + mz * uz
+    c_h = (mx * mx + my * my + mz * mz) - radius * radius
+    disc = b_h * b_h - c_h
+    if disc <= 0.0:
+        return False
+    s_enter = -b_h - math.sqrt(disc)
+    return 0.0 < s_enter < (seg_len - eps)
+
+
+def _ray_occluded_by_convex_quad(
+    eye: tuple[float, float, float],
+    pt: tuple[float, float, float],
+    quad: list[tuple[float, float, float]],
+    eps: float = 0.02,
+) -> bool:
+    """카메라 eye에서 3D 점 pt로 향하는 시선이 볼록 사각형(quad) 평면 판 뒤에 가려지는지 판정합니다."""
+    e1 = _vec_sub(quad[1], quad[0])
+    e2 = _vec_sub(quad[3], quad[0])
+    nrm = _vec_cross(e1, e2)
+    ray = _vec_sub(pt, eye)
+    denom = _vec_dot(nrm, ray)
+    if abs(denom) <= 1e-8:
+        return False
+    t_hit = _vec_dot(nrm, _vec_sub(quad[0], eye)) / denom
+    if not (eps < t_hit < 1.0 - eps):
+        return False
+    hit = (eye[0] + ray[0] * t_hit, eye[1] + ray[1] * t_hit, eye[2] + ray[2] * t_hit)
+    for idx in range(4):
+        va = quad[idx]
+        vb = quad[(idx + 1) % 4]
+        edge = _vec_sub(vb, va)
+        to_hit = _vec_sub(hit, va)
+        if _vec_dot(_vec_cross(edge, to_hit), nrm) < -1e-5:
+            return False
+    return True
+
+
+def _sphere_limb_ring_3d(
+    center: tuple[float, float, float],
+    radius: float,
+    eye: tuple[float, float, float],
+    n_pts: int = 96,
+) -> list[tuple[float, float, float]]:
+    """
+    원근 투영에서 구(center, radius)의 정확한 겉보기 윤곽선(Apparent Limb Horizon Circle) 3D 점열을 계산합니다.
+    카메라에서 그은 접선들의 정확한 접점 원이므로 원뿔 외곽 모선과의 접합 오차가 0.000px가 됩니다.
+    """
+    w = _vec_sub(eye, center)
+    dist = math.sqrt(_vec_dot(w, w))
+    if dist <= radius * 1.002:
+        dist = radius * 1.002
+    u = (w[0] / dist, w[1] / dist, w[2] / dist)
+    k_shift = (radius * radius) / dist
+    m_limb = (center[0] + u[0] * k_shift, center[1] + u[1] * k_shift, center[2] + u[2] * k_shift)
+    r_limb = radius * math.sqrt(max(0.0, 1.0 - (radius * radius) / (dist * dist)))
+
+    up_ref = (0.0, 1.0, 0.0) if abs(u[1]) < 0.92 else (1.0, 0.0, 0.0)
+    e1 = _vec_norm(_vec_cross(u, up_ref))
+    e2 = _vec_norm(_vec_cross(u, e1))
+
+    pts = []
+    for i in range(n_pts):
+        b = 2.0 * math.pi * i / float(n_pts)
+        cb, sb = math.cos(b), math.sin(b)
+        pts.append(
+            (
+                m_limb[0] + r_limb * (cb * e1[0] + sb * e2[0]),
+                m_limb[1] + r_limb * (cb * e1[1] + sb * e2[1]),
+                m_limb[2] + r_limb * (cb * e1[2] + sb * e2[2]),
+            )
+        )
+    return pts
+
+
+def _draw_volumetric_3d_sphere(
+    sphere_layer: Image.Image,
+    glow_draw: ImageDraw.ImageDraw,
+    center: tuple[float, float, float],
+    radius: float,
+    eye: tuple[float, float, float],
+    pr_fn,
+    base_rgb: tuple[int, int, int] = (217, 138, 18),
+    rim_rgb: tuple[int, int, int] = (253, 224, 71),
+    body_alpha: int = 166,
+) -> None:
+    """정밀 원근 윤곽(Limb) 마스크 내부에 가우시안 연속 구면 음영(Lambertian + Specular)을 입혀 매끄러운 3D 구를 표현합니다."""
+    limb_3d = _sphere_limb_ring_3d(center, radius, eye, n_pts=96)
+    limb_2d = [pr_fn(p) for p in limb_3d]
+    xs = [p[0] for p in limb_2d]
+    ys = [p[1] for p in limb_2d]
+    x0 = max(0, int(math.floor(min(xs))) - 4)
+    y0 = max(0, int(math.floor(min(ys))) - 4)
+    x1 = min(sphere_layer.width, int(math.ceil(max(xs))) + 4)
+    y1 = min(sphere_layer.height, int(math.ceil(max(ys))) + 4)
+    if x1 <= x0 + 4 or y1 <= y0 + 4:
+        return
+
+    bw, bh = x1 - x0, y1 - y0
+    cx_loc = 0.5 * (min(xs) + max(xs)) - x0
+    cy_loc = 0.5 * (min(ys) + max(ys)) - y0
+    rx_2d = max(4.0, 0.5 * (max(xs) - min(xs)))
+    ry_2d = max(4.0, 0.5 * (max(ys) - min(ys)))
+    local_poly = [(px - x0, py - y0) for px, py in limb_2d]
+
+    glow_draw.ellipse(
+        (x0 + cx_loc - rx_2d - 7, y0 + cy_loc - ry_2d - 7, x0 + cx_loc + rx_2d + 7, y0 + cy_loc + ry_2d + 7),
+        fill=(*base_rgb, 46),
+    )
+
+    shade = Image.new("RGBA", (bw, bh), (int(base_rgb[0] * 0.48), int(base_rgb[1] * 0.44), int(base_rgb[2] * 0.36), body_alpha))
+    sh_d = ImageDraw.Draw(shade)
+    for sc_r, off_x, off_y, col_rgba in (
+        (0.88, 0.08, 0.10, (int(base_rgb[0] * 0.78), int(base_rgb[1] * 0.74), int(base_rgb[2] * 0.62), min(220, body_alpha + 8))),
+        (0.66, 0.16, 0.20, (min(255, int(base_rgb[0] * 1.02)), min(255, int(base_rgb[1] * 1.02)), min(255, int(base_rgb[2] * 0.95)), min(228, body_alpha + 14))),
+        (0.42, 0.24, 0.28, (252, 211, 77, min(236, body_alpha + 20))),
+        (0.20, 0.30, 0.34, (255, 247, 205, min(242, body_alpha + 26))),
+    ):
+        hx = cx_loc - rx_2d * off_x
+        hy = cy_loc - ry_2d * off_y
+        sh_d.ellipse((hx - rx_2d * sc_r, hy - ry_2d * sc_r, hx + rx_2d * sc_r, hy + ry_2d * sc_r), fill=col_rgba)
+    blur_rad = max(4, int(min(rx_2d, ry_2d) * 0.22))
+    shade = shade.filter(ImageFilter.GaussianBlur(blur_rad))
+
+    mask = Image.new("L", (bw, bh), 0)
+    ImageDraw.Draw(mask).polygon(local_poly, fill=255)
+    clipped = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
+    clipped.paste(shade, (0, 0), mask)
+    ImageDraw.Draw(clipped).line(local_poly + [local_poly[0]], fill=(*rim_rgb, 238), width=3)
+
+    patch_full = Image.new("RGBA", sphere_layer.size, (0, 0, 0, 0))
+    patch_full.paste(clipped, (x0, y0))
+    sphere_layer.alpha_composite(patch_full)
 
 
 def _draw_glow_line(
@@ -459,6 +645,139 @@ def _draw_glow_line(
 ) -> None:
     glow_draw.line([p1, p2], fill=(*color_rgb, glow_alpha), width=width * 3 + 4)
     core_draw.line([p1, p2], fill=(*color_rgb, 255), width=width)
+
+
+def _draw_dashed_2d_polyline(
+    hidden_draw: ImageDraw.ImageDraw,
+    pts_2d: list[tuple[float, float]],
+    color_rgba: tuple[int, int, int, int],
+    width: int = 3,
+    dash_px: float = 9.0,
+    gap_px: float = 7.0,
+) -> None:
+    """가려진 뒷면 타원 호·모서리를 화면 픽셀 길이 기준 균일한 정통 수학 점선(은선)으로 렌더링합니다."""
+    if len(pts_2d) < 2:
+        return
+    cycle = dash_px + gap_px
+    acc = 0.0
+    for i in range(len(pts_2d) - 1):
+        x0, y0 = pts_2d[i]
+        x1, y1 = pts_2d[i + 1]
+        seg = math.hypot(x1 - x0, y1 - y0)
+        if seg <= 1e-4:
+            continue
+        pos = 0.0
+        while pos < seg:
+            rem_in_cycle = cycle - (acc % cycle)
+            step = min(seg - pos, rem_in_cycle)
+            if (acc % cycle) < dash_px:
+                t0 = pos / seg
+                t1 = (pos + step) / seg
+                hidden_draw.line(
+                    [(x0 + (x1 - x0) * t0, y0 + (y1 - y0) * t0), (x0 + (x1 - x0) * t1, y0 + (y1 - y0) * t1)],
+                    fill=color_rgba,
+                    width=width,
+                )
+            pos += step
+            acc += step
+
+
+def _draw_3d_curve_with_occlusion(
+    pts_3d: list[tuple[float, float, float]],
+    is_visible_fn,
+    pr_fn,
+    glow_draw: ImageDraw.ImageDraw,
+    core_draw: ImageDraw.ImageDraw,
+    hidden_draw: ImageDraw.ImageDraw,
+    color_rgb: tuple[int, int, int],
+    solid_width: int = 5,
+    hidden_width: int = 3,
+    hidden_alpha: int = 148,
+    glow_alpha: int = 160,
+    dash_px: float = 9.0,
+    gap_px: float = 7.0,
+) -> None:
+    """
+    3D 곡선(타원·접원·밑면 원·선분)의 각 미소 구간에 대해 가시성(is_visible_fn)을 판정하여:
+    - 전면 가시 구간: 선명한 실선 + 은은한 네온 글로우
+    - 구·평면·원뿔 뒤편에 가려지는 은선 구간: 정통 기하학 점선(Dashed Hidden Line)으로 완벽 분리 작도합니다.
+    """
+    if len(pts_3d) < 2:
+        return
+    run_vis: bool | None = None
+    run_2d: list[tuple[float, float]] = []
+
+    def _flush(vis_flag: bool | None, poly_2d: list[tuple[float, float]]) -> None:
+        if vis_flag is None or len(poly_2d) < 2:
+            return
+        if vis_flag:
+            glow_draw.line(poly_2d, fill=(*color_rgb, glow_alpha), width=solid_width * 3 + 3)
+            core_draw.line(poly_2d, fill=(*color_rgb, 255), width=solid_width)
+        else:
+            _draw_dashed_2d_polyline(
+                hidden_draw,
+                poly_2d,
+                (*color_rgb, hidden_alpha),
+                width=hidden_width,
+                dash_px=dash_px,
+                gap_px=gap_px,
+            )
+
+    for i in range(len(pts_3d) - 1):
+        p_a = pts_3d[i]
+        p_b = pts_3d[i + 1]
+        mid = (0.5 * (p_a[0] + p_b[0]), 0.5 * (p_a[1] + p_b[1]), 0.5 * (p_a[2] + p_b[2]))
+        vis = bool(is_visible_fn(mid))
+        pa_2d = pr_fn(p_a)
+        pb_2d = pr_fn(p_b)
+        if run_vis is None:
+            run_vis = vis
+            run_2d = [pa_2d, pb_2d]
+        elif vis == run_vis:
+            run_2d.append(pb_2d)
+        else:
+            _flush(run_vis, run_2d)
+            run_vis = vis
+            run_2d = [pa_2d, pb_2d]
+    _flush(run_vis, run_2d)
+
+
+def _draw_3d_segment_with_occlusion(
+    p_start: tuple[float, float, float],
+    p_end: tuple[float, float, float],
+    is_visible_fn,
+    pr_fn,
+    glow_draw: ImageDraw.ImageDraw,
+    core_draw: ImageDraw.ImageDraw,
+    hidden_draw: ImageDraw.ImageDraw,
+    color_rgb: tuple[int, int, int],
+    solid_width: int = 6,
+    hidden_width: int = 3,
+    hidden_alpha: int = 155,
+    glow_alpha: int = 180,
+    subdiv: int = 48,
+) -> None:
+    pts = [
+        (
+            p_start[0] + (p_end[0] - p_start[0]) * (k / float(subdiv)),
+            p_start[1] + (p_end[1] - p_start[1]) * (k / float(subdiv)),
+            p_start[2] + (p_end[2] - p_start[2]) * (k / float(subdiv)),
+        )
+        for k in range(subdiv + 1)
+    ]
+    _draw_3d_curve_with_occlusion(
+        pts,
+        is_visible_fn,
+        pr_fn,
+        glow_draw,
+        core_draw,
+        hidden_draw,
+        color_rgb,
+        solid_width=solid_width,
+        hidden_width=hidden_width,
+        hidden_alpha=hidden_alpha,
+        glow_alpha=glow_alpha,
+    )
 
 
 def _draw_glow_pin(
@@ -476,53 +795,51 @@ def _draw_glow_pin(
 
 def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1920, height: int = 1080) -> Image.Image:
     """
-    Rule 37 사색적 블루·에메랄드·앰버 골드 팔레트 + Rule 44 수학적 직교·접선 무결성 100% 보장
-    1인칭 WASD 공간 카메라 워킹 프레임을 생성합니다 (글자·수식 0%).
+    Rule 37 사색적 블루·에메랄드·앰버 골드 팔레트 + Rule 44 수학적 직교·접선·은선(점선) 무결성 100% 보장
+    1인칭 공간 카메라 워킹 프레임을 생성합니다 (글자·수식 0%).
     """
-    # 기본 미드나잇 벨벳 스튜디오 배경
     base = Image.new("RGBA", (width, height), (8, 14, 28, 255))
-    bg_d = ImageDraw.Draw(base)
-    # 좌측 2/3 스튜디오 은은한 사파이어 스포트라이트 비네팅
     spot = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     sd = ImageDraw.Draw(spot)
-    sd.ellipse((110, 120, 1140, 960), fill=(18, 46, 92, 95))
-    sd.ellipse((250, 240, 980, 840), fill=(14, 78, 128, 70))
+    sd.ellipse((90, 110, 1080, 960), fill=(18, 46, 92, 95))
+    sd.ellipse((230, 230, 930, 840), fill=(14, 78, 128, 70))
     spot = spot.filter(ImageFilter.GaussianBlur(85))
     base = Image.alpha_composite(base, spot)
 
     poly_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    sphere_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    hidden_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     glow_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     core_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     pd = ImageDraw.Draw(poly_layer)
+    spd = ImageDraw.Draw(sphere_layer)
+    hd = ImageDraw.Draw(hidden_layer)
     gd = ImageDraw.Draw(glow_layer)
     cd = ImageDraw.Draw(core_layer)
 
     SAPPHIRE = (56, 189, 248)
-    ROYAL = (2, 132, 199)
+    ROYAL = (14, 165, 233)
     EMERALD = (16, 185, 129)
     MINT = (110, 231, 183)
     GOLD = (250, 204, 21)
     AMBER = (245, 158, 11)
 
-    # 부드러운 코사인 1인칭 드론 카메라 궤적 (전진 돌리 + 측면 공전 패럴랙스)
     ang = 2.0 * math.pi * phase
     pulse = 0.5 + 0.5 * math.sin(ang * 2.0)
 
     if archetype == "three_perpendiculars":
-        # 삼수선의 정리: 평면 alpha (y = -0.85), 점 P(-0.55, 1.35, -0.35), 수선의 발 M(-0.55, -0.85, -0.35),
-        # 평면 위 직선 a: x = 0.72, M에서 a에 내린 수선의 발 N(0.72, -0.85, -0.35) -> PN ⊥ a!
-        yaw = -0.58 + 0.44 * math.sin(ang)
-        pitch = 0.36 + 0.08 * math.cos(ang)
-        dist = 5.45 - 0.38 * math.sin(ang)
+        # 삼수선의 정리: 평면 alpha (y = -0.85), 점 P(-0.58, 1.38, -0.25), 수선의 발 M, 직선 a 위 수선의 발 N -> PN ⊥ a!
+        yaw = -0.52 + 0.38 * math.sin(ang)
+        pitch = 0.34 + 0.06 * math.cos(ang)
+        dist = 5.55 - 0.30 * math.sin(ang)
         pr = lambda p: _project_3d(p, yaw, pitch, dist)[:2]
 
         y0 = -0.85
         plane_pts = [pr((-1.75, y0, -1.65)), pr((1.75, y0, -1.65)), pr((1.75, y0, 1.65)), pr((-1.75, y0, 1.65))]
-        pd.polygon(plane_pts, fill=(14, 42, 84, 150), outline=(*SAPPHIRE, 195))
-        # 평면 정밀 격자선
+        pd.polygon(plane_pts, fill=(14, 42, 84, 152), outline=(*SAPPHIRE, 195))
         for g in (-1.1, -0.55, 0.0, 0.55, 1.1):
-            cd.line([pr((-1.75, y0, g)), pr((1.75, y0, g))], fill=(56, 189, 248, 52), width=2)
-            cd.line([pr((g, y0, -1.65)), pr((g, y0, 1.65))], fill=(56, 189, 248, 52), width=2)
+            cd.line([pr((-1.75, y0, g)), pr((1.75, y0, g))], fill=(56, 189, 248, 50), width=2)
+            cd.line([pr((g, y0, -1.65)), pr((g, y0, 1.65))], fill=(56, 189, 248, 50), width=2)
 
         P = (-0.58, 1.38, -0.25)
         M = (-0.58, y0, -0.25)
@@ -530,24 +847,20 @@ def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1
         A1 = (0.78, y0, -1.62)
         A2 = (0.78, y0, 1.62)
 
-        # 삼각형 PMN 반투명 유리면
-        pd.polygon([pr(P), pr(M), pr(N)], fill=(16, 185, 129, 64))
+        pd.polygon([pr(P), pr(M), pr(N)], fill=(16, 185, 129, 68))
 
-        # 3D 직각 기호 1: PM ⊥ MN
         ra1 = 0.22
         cd.line(
             [pr((M[0], M[1] + ra1, M[2])), pr((M[0] + ra1, M[1] + ra1, M[2])), pr((M[0] + ra1, M[1], M[2]))],
             fill=(*GOLD, 235),
             width=3,
         )
-        # 3D 직각 기호 2: MN ⊥ 직선 a
         ra2 = 0.22
         cd.line(
-            [pr((N[0] - ra2, y0, N[2])), pr((N[0] - ra2, y0, N[2] + ra2)), pr((N[0], y0, N[2] + ra2))],
+            [pr((N[0] - ra2, y0, N[2])), pr((N[0] - ra2, y0, N[2] - ra2)), pr((N[0], y0, N[2] - ra2))],
             fill=(*MINT, 235),
             width=3,
         )
-        # 3D 직각 기호 3 (결론!): PN ⊥ 직선 a
         u_pn = (-1.36 / 2.61, 2.23 / 2.61, 0.0)
         q1 = (N[0] + u_pn[0] * 0.24, N[1] + u_pn[1] * 0.24, N[2])
         q2 = (q1[0], q1[1], N[2] - 0.24)
@@ -560,7 +873,6 @@ def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1
         _draw_glow_line(gd, cd, pr(M), pr(N), EMERALD, width=7)
         _draw_glow_line(gd, cd, pr(P), pr(N), GOLD, width=8, glow_alpha=210)
 
-        # 광자 이동 포인트 연출
         t_ph = (phase * 2.0) % 1.0
         photon = (P[0] + (N[0] - P[0]) * t_ph, P[1] + (N[1] - P[1]) * t_ph, P[2])
         _draw_glow_pin(gd, cd, pr(photon), 7, GOLD)
@@ -568,19 +880,19 @@ def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1
             _draw_glow_pin(gd, cd, pr(v_pt), 9, col)
 
     elif archetype == "orthogonal_projection":
-        # 정사각형의 정사영의 넓이: 바닥 사파이어 평면 위 황금 정사영 S' = S cos(60°)와 60° 기울어진 에메랄드 크리스탈 정사각형 S
-        yaw = -0.65 + 0.52 * math.sin(ang)
-        pitch = 0.34 + 0.10 * math.cos(ang)
-        dist = 5.6 - 0.35 * math.sin(ang)
+        # 정사각형의 정사영 넓이: 기울어진 에메랄드 정사각형 판 뒤에 가려지는 투영 광선·모서리는 정밀 점선(은선) 처리!
+        yaw = 0.62 + 0.24 * math.sin(ang)
+        pitch = 0.35 + 0.06 * math.cos(ang)
+        dist = 5.75 - 0.26 * math.sin(ang)
+        eye = _camera_eye_3d(yaw, pitch, dist)
         pr = lambda p: _project_3d(p, yaw, pitch, dist)[:2]
 
         y0 = -0.95
         floor_pts = [pr((-1.85, y0, -1.6)), pr((1.85, y0, -1.6)), pr((1.85, y0, 1.6)), pr((-1.85, y0, 1.6))]
         pd.polygon(floor_pts, fill=(12, 38, 78, 155), outline=(*SAPPHIRE, 190))
         for g in (-1.0, -0.5, 0.0, 0.5, 1.0):
-            cd.line([pr((-1.85, y0, g)), pr((1.85, y0, g))], fill=(56, 189, 248, 48), width=2)
+            pd.line([pr((-1.85, y0, g)), pr((1.85, y0, g))], fill=(56, 189, 248, 46), width=2)
 
-        # 경사각 theta = 60도 (cos 60 = 0.5) 정사각형 한 변 L = 1.9
         L = 1.95
         theta = math.radians(60.0)
         x_base = -0.92
@@ -591,49 +903,70 @@ def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1
 
         sq3d = [(x_base, y_hinge, z1), (x_top, y_top, z1), (x_top, y_top, z2), (x_base, y_hinge, z2)]
         sh3d = [(x_base, y0, z1), (x_top, y0, z1), (x_top, y0, z2), (x_base, y0, z2)]
+        vis_not_behind_sq = lambda q: not _ray_occluded_by_convex_quad(eye, q, sq3d)
 
-        # 황금 정사영 그림자 S'
-        pd.polygon([pr(p) for p in sh3d], fill=(250, 204, 21, int(92 + 30 * pulse)), outline=(*GOLD, 235))
+        pd.polygon([pr(p) for p in sh3d], fill=(250, 204, 21, int(88 + 26 * pulse)))
+        spd.polygon([pr(p) for p in sq3d], fill=(16, 185, 129, 126))
+
         for i in range(4):
-            _draw_glow_line(gd, cd, pr(sh3d[i]), pr(sh3d[(i + 1) % 4]), GOLD, width=5)
-
-        # 수직 투영 광선 기둥 4줄
+            _draw_3d_segment_with_occlusion(sh3d[i], sh3d[(i + 1) % 4], vis_not_behind_sq, pr, gd, cd, hd, GOLD, solid_width=5, hidden_width=3)
         for up_p, dn_p in zip(sq3d, sh3d):
-            _draw_glow_line(gd, cd, pr(up_p), pr(dn_p), SAPPHIRE, width=3, glow_alpha=125)
-
-        # 상단 에메랄드 크리스탈 정사각형 S
-        pd.polygon([pr(p) for p in sq3d], fill=(16, 185, 129, 108), outline=(*MINT, 245))
+            _draw_3d_segment_with_occlusion(up_p, dn_p, vis_not_behind_sq, pr, gd, cd, hd, SAPPHIRE, solid_width=3, hidden_width=2, glow_alpha=120)
         for i in range(4):
             _draw_glow_line(gd, cd, pr(sq3d[i]), pr(sq3d[(i + 1) % 4]), EMERALD, width=7)
             _draw_glow_pin(gd, cd, pr(sq3d[i]), 7, EMERALD)
-            _draw_glow_pin(gd, cd, pr(sh3d[i]), 6, GOLD)
+            if vis_not_behind_sq(sh3d[i]):
+                _draw_glow_pin(gd, cd, pr(sh3d[i]), 6, GOLD)
 
     elif archetype == "dandelin_cone":
-        # 원뿔과 단델린의 구: 크리스탈 원뿔 + 경사 단면 타원 + 정밀 해석기하 상·하 내접 황금 구 & 초점 F1, F2 접선 불변량
-        yaw = -0.36 + 0.52 * math.sin(ang)
-        pitch = 0.20 + 0.07 * math.cos(ang)
-        dist = 6.35 - 0.30 * math.sin(ang)
+        # =====================================================================
+        # 원뿔과 단델린의 두 내접구 (Policy 67 정밀 기술기하 + 은선 점선 완전 구현):
+        # 1) 카메라 시점(eye)에서 원뿔에 그은 두 외곽 윤곽 모선(Exact Cone Silhouette)이
+        #    두 내접구의 원근 윤곽(Apparent Sphere Limb)과 0.000px 오차로 정확히 외접!
+        # 2) 상·하 내접구 및 원뿔 뒷면에 가려지는 모든 타원 호(단면 녹색 타원의 뒷부분,
+        #    상·하 수평 접원 타원의 구 뒷면 호, 원뿔 밑면 원의 뒷면 호)를
+        #    실시간 3D Ray-Sphere & Normal 판정으로 실선(전면) vs 점선(은선) 완벽 분리!
+        # =====================================================================
+        yaw = 0.24 + 0.20 * math.sin(ang)
+        pitch = 0.31 + 0.03 * math.cos(ang)
+        dist = 6.45 - 0.20 * math.sin(ang)
+        eye = _camera_eye_3d(yaw, pitch, dist)
         pr = lambda p: _project_3d(p, yaw, pitch, dist)[:2]
 
-        apex = (0.0, 2.02, 0.0)
-        k_slope = 0.40  # 반지름 r = k * (apex_y - y)
-        y_bot = -1.85
+        apex = (0.0, 1.84, 0.0)
+        k_slope = 0.39
+        y_bot = -1.58
         r_bot = k_slope * (apex[1] - y_bot)
 
-        # 원뿔 모선 리브
-        for idx_r in range(16):
-            th = 2.0 * math.pi * idx_r / 16.0
-            b_pt = (r_bot * math.cos(th), y_bot, r_bot * math.sin(th))
-            col_rib = (*SAPPHIRE, 95 if idx_r % 2 == 0 else 46)
-            cd.line([pr(apex), pr(b_pt)], fill=col_rib, width=2)
+        # 1. 카메라 눈(eye)에서 바라본 원뿔의 정확한 좌·우 외곽 실루엣 각도 계산
+        vx, vy, vz = eye[0] - apex[0], eye[1] - apex[1], eye[2] - apex[2]
+        rho_e = math.hypot(vx, vz)
+        th_eye = math.atan2(vz, vx)
+        cos_sil = max(-0.998, min(0.998, (k_slope * (apex[1] - eye[1])) / max(1e-6, rho_e)))
+        d_sil = math.acos(cos_sil)
+        th_sil_1 = th_eye - d_sil
+        th_sil_2 = th_eye + d_sil
 
-        # 하단 원뿔 밑면 링
-        bot_ring = [pr((r_bot * math.cos(2 * math.pi * i / 48), y_bot, r_bot * math.sin(2 * math.pi * i / 48))) for i in range(49)]
-        cd.line(bot_ring, fill=(*ROYAL, 175), width=3)
+        # 원뿔 반투명 크리스탈 몸체 (꼭짓점 + 전면 밑면 호)
+        cone_front_arc = [pr(apex)]
+        for i in range(49):
+            th_i = th_sil_1 + (th_sil_2 - th_sil_1) * (i / 48.0)
+            cone_front_arc.append(pr((r_bot * math.cos(th_i), y_bot, r_bot * math.sin(th_i))))
+        pd.polygon(cone_front_arc, fill=(14, 58, 108, 74))
 
-        # 경사 절단 평면: y = m_pl * x + y_c0 와 원뿔·내접구의 100% 해석적 동시 접합 방정식
-        m_pl = 0.28
+        # 경사 절단 평면 y = m_pl * x + y_c0 반투명 시트 표현
+        m_pl = 0.27
         y_c0 = 0.36
+        pl_w, pl_z = 1.44, 1.22
+        cut_plane_3d = [
+            (-pl_w, y_c0 - m_pl * pl_w, -pl_z),
+            (pl_w, y_c0 + m_pl * pl_w, -pl_z),
+            (pl_w, y_c0 + m_pl * pl_w, pl_z),
+            (-pl_w, y_c0 - m_pl * pl_w, pl_z),
+        ]
+        pd.polygon([pr(p) for p in cut_plane_3d], fill=(16, 185, 129, 26), outline=(110, 231, 183, 76))
+
+        # 2. 상·하 단델린 내접구의 해석기하 중심·반지름 및 가우시안 연속 3D 입체 음영 렌더링
         c_pl = 1.0 / math.sqrt(1.0 + m_pl * m_pl)
         sin_a = k_slope / math.sqrt(1.0 + k_slope * k_slope)
         y_up = (y_c0 * c_pl + apex[1] * sin_a) / (c_pl + sin_a)
@@ -641,58 +974,167 @@ def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1
         y_dn = (y_c0 * c_pl - apex[1] * sin_a) / (c_pl - sin_a)
         r_dn = (apex[1] - y_dn) * sin_a
 
-        for cy_s, r_s, sph_alpha in ((y_up, r_up, 132), (y_dn, r_dn, 112)):
-            c_2d, c_2dy, z_d = _project_3d((0.0, cy_s, 0.0), yaw, pitch, dist)
-            rad_px = int(1280.0 * r_s / z_d)
-            gd.ellipse((c_2d - rad_px - 6, c_2dy - rad_px - 6, c_2d + rad_px + 6, c_2dy + rad_px + 6), fill=(*AMBER, 68))
-            pd.ellipse((c_2d - rad_px, c_2dy - rad_px, c_2d + rad_px, c_2dy + rad_px), fill=(245, 158, 11, sph_alpha), outline=(*GOLD, 225), width=3)
-            # 원뿔과 단델린 구가 만나 이루는 수평 접원(Tangent Circle)
-            y_tan = apex[1] - (apex[1] - cy_s) / (1.0 + k_slope * k_slope)
-            r_tan = k_slope * (apex[1] - y_tan)
-            tan_ring = [pr((r_tan * math.cos(2 * math.pi * i / 48), y_tan, r_tan * math.sin(2 * math.pi * i / 48))) for i in range(49)]
-            cd.line(tan_ring, fill=(*GOLD, 165), width=2)
+        C_up = (0.0, y_up, 0.0)
+        C_dn = (0.0, y_dn, 0.0)
+        spheres = [(C_dn, r_dn, 158), (C_up, r_up, 168)]
+        spheres.sort(key=lambda item: _vec_dot(_vec_sub(item[0], eye), _vec_sub(item[0], eye)), reverse=True)
+        for c_sph, r_sph, al_sph in spheres:
+            _draw_volumetric_3d_sphere(sphere_layer, gd, c_sph, r_sph, eye, pr, base_rgb=AMBER, rim_rgb=GOLD, body_alpha=al_sph)
 
+        def _occluded_by_any_sphere(q: tuple[float, float, float], ignore_idx: int = -1) -> bool:
+            for s_i, (c_s, r_s) in enumerate(((C_up, r_up), (C_dn, r_dn))):
+                if s_i == ignore_idx:
+                    continue
+                if _ray_occluded_by_sphere(eye, q, c_s, r_s, eps=0.012):
+                    return True
+            return False
+
+        # 3. 원뿔 밑면 원(타원 투영): 전면 호는 실선, 원뿔·하단 구 뒷면 호는 정밀 점선(은선)
+        n_samp = 240
+        bot_pts_3d = [
+            (r_bot * math.cos(2.0 * math.pi * i / n_samp), y_bot, r_bot * math.sin(2.0 * math.pi * i / n_samp))
+            for i in range(n_samp + 1)
+        ]
+
+        def _vis_cone_base(q: tuple[float, float, float]) -> bool:
+            th_q = math.atan2(q[2], q[0])
+            n_cone = (math.cos(th_q), k_slope, math.sin(th_q))
+            if _vec_dot(n_cone, _vec_sub(eye, q)) <= 0.0:
+                return False
+            return not _occluded_by_any_sphere(q)
+
+        _draw_3d_curve_with_occlusion(
+            bot_pts_3d,
+            _vis_cone_base,
+            pr,
+            gd,
+            cd,
+            hd,
+            ROYAL,
+            solid_width=4,
+            hidden_width=3,
+            hidden_alpha=155,
+            glow_alpha=115,
+            dash_px=14.0,
+            gap_px=10.0,
+        )
+
+        # 4. 상·하 내접구와 원뿔이 접하는 두 수평 접원(Tangent Circles):
+        #    구 전면 반구(n · view > 0)는 선명한 황금 실선, 구 뒷면에 가려지는 호는 황금 점선(은선)!
+        for s_idx, (c_s, r_s) in enumerate(((C_up, r_up), (C_dn, r_dn))):
+            y_tan = apex[1] - (apex[1] - c_s[1]) / (1.0 + k_slope * k_slope)
+            r_tan = k_slope * (apex[1] - y_tan)
+            tan_pts_3d = [
+                (r_tan * math.cos(2.0 * math.pi * i / n_samp), y_tan, r_tan * math.sin(2.0 * math.pi * i / n_samp))
+                for i in range(n_samp + 1)
+            ]
+
+            def _vis_tan_circle(q: tuple[float, float, float], center_own=c_s, own_i=s_idx) -> bool:
+                n_sph = _vec_sub(q, center_own)
+                if _vec_dot(n_sph, _vec_sub(eye, q)) <= 0.0:
+                    return False
+                return not _occluded_by_any_sphere(q, ignore_idx=own_i)
+
+            _draw_3d_curve_with_occlusion(
+                tan_pts_3d,
+                _vis_tan_circle,
+                pr,
+                gd,
+                cd,
+                hd,
+                GOLD,
+                solid_width=4,
+                hidden_width=3,
+                hidden_alpha=172,
+                glow_alpha=125,
+                dash_px=12.0,
+                gap_px=9.0,
+            )
+
+        # 5. 경사 단면 에메랄드 타원 (핵심!):
+        #    상단 구(C_up) 및 하단 구(C_dn)에 가려지는 뒷부분 타원 호는 정밀 에메랄드 점선(은선)으로,
+        #    가려지지 않는 전면 타원 호는 선명한 에메랄드 실선으로 분리 렌더링!
         ell_3d = []
-        for i in range(65):
-            th = 2.0 * math.pi * i / 64.0
+        for i in range(n_samp + 1):
+            th = 2.0 * math.pi * i / float(n_samp)
             r_th = (k_slope * (apex[1] - y_c0)) / (1.0 + k_slope * m_pl * math.cos(th))
             ex = r_th * math.cos(th)
             ez = r_th * math.sin(th)
             ey = y_c0 + m_pl * ex
             ell_3d.append((ex, ey, ez))
 
-        pd.polygon([pr(p) for p in ell_3d[:-1]], fill=(16, 185, 129, 88))
-        for i in range(len(ell_3d) - 1):
-            _draw_glow_line(gd, cd, pr(ell_3d[i]), pr(ell_3d[i + 1]), EMERALD, width=6)
+        pd.polygon([pr(p) for p in ell_3d[:-1]], fill=(16, 185, 129, 56))
+        _draw_3d_curve_with_occlusion(
+            ell_3d,
+            lambda q: not _occluded_by_any_sphere(q),
+            pr,
+            gd,
+            cd,
+            hd,
+            EMERALD,
+            solid_width=6,
+            hidden_width=4,
+            hidden_alpha=210,
+            glow_alpha=175,
+            dash_px=13.0,
+            gap_px=9.0,
+        )
 
-        # 두 단델린 내접구와 절단 평면의 정확한 접점 = 타원의 두 초점 F1, F2
+        # 6. 구의 윤곽에 0.000px 정확도로 접하는 원뿔의 좌·우 외곽 실루엣 모선 2줄
+        for th_s in (th_sil_1, th_sil_2):
+            b_sil = (r_bot * math.cos(th_s), y_bot, r_bot * math.sin(th_s))
+            _draw_glow_line(gd, cd, pr(apex), pr(b_sil), SAPPHIRE, width=4, glow_alpha=135)
+
+        # 7. 타원의 두 초점 F1, F2 및 전면 가시 호 위를 움직이는 점 P와 모선 접점 T_up, T_dn
         d_up = (y_up - y_c0) / (1.0 + m_pl * m_pl)
         d_dn = (y_dn - y_c0) / (1.0 + m_pl * m_pl)
         F1 = (m_pl * d_up, y_up - d_up, 0.0)
         F2 = (m_pl * d_dn, y_dn - d_dn, 0.0)
-        p_idx = int((phase * 64) % 64)
-        P_on = ell_3d[p_idx]
-        # P를 지나는 원뿔 모선 위의 두 접원 교점 T_up, T_dn (|PF1| = |PT_up|, |PF2| = |PT_dn|)
-        th_p = 2.0 * math.pi * p_idx / 64.0
+
+        # 점 P를 카메라 전면 가시 호 구간(th_eye 부근)에서 부드럽게 왕복시켜 모선과 접선이 항상 명확히 보이도록 설계
+        th_p = th_eye + 0.62 * math.sin(ang)
+        r_p = (k_slope * (apex[1] - y_c0)) / (1.0 + k_slope * m_pl * math.cos(th_p))
+        px_3d = r_p * math.cos(th_p)
+        pz_3d = r_p * math.sin(th_p)
+        P_on = (px_3d, y_c0 + m_pl * px_3d, pz_3d)
+
         y_tup = apex[1] - (apex[1] - y_up) / (1.0 + k_slope * k_slope)
         r_tup = k_slope * (apex[1] - y_tup)
         y_tdn = apex[1] - (apex[1] - y_dn) / (1.0 + k_slope * k_slope)
         r_tdn = k_slope * (apex[1] - y_tdn)
         T_up = (r_tup * math.cos(th_p), y_tup, r_tup * math.sin(th_p))
         T_dn = (r_tdn * math.cos(th_p), y_tdn, r_tdn * math.sin(th_p))
-        _draw_glow_line(gd, cd, pr(T_up), pr(T_dn), SAPPHIRE, width=4, glow_alpha=175)
-        _draw_glow_line(gd, cd, pr(P_on), pr(F1), GOLD, width=6, glow_alpha=200)
-        _draw_glow_line(gd, cd, pr(P_on), pr(F2), GOLD, width=6, glow_alpha=200)
-        _draw_glow_pin(gd, cd, pr(F1), 8, GOLD)
-        _draw_glow_pin(gd, cd, pr(F2), 8, GOLD)
+
+        _draw_3d_segment_with_occlusion(
+            T_up, T_dn, lambda q: not _occluded_by_any_sphere(q), pr, gd, cd, hd, SAPPHIRE, solid_width=5, hidden_width=3
+        )
+        _draw_3d_segment_with_occlusion(
+            P_on, F1, lambda q: not _occluded_by_any_sphere(q), pr, gd, cd, hd, GOLD, solid_width=6, hidden_width=3
+        )
+        _draw_3d_segment_with_occlusion(
+            P_on, F2, lambda q: not _occluded_by_any_sphere(q), pr, gd, cd, hd, GOLD, solid_width=6, hidden_width=3
+        )
+
+        # 초점 F1, F2 (구 뒤편 내부 접점인 경우 반투명 링 핀으로, 전면 노출 시 글로우 핀으로 정밀 구분)
+        for f_pt in (F1, F2):
+            fx, fy = pr(f_pt)
+            if _occluded_by_any_sphere(f_pt):
+                hd.ellipse((fx - 7, fy - 7, fx + 7, fy + 7), fill=(255, 255, 255, 195), outline=(*GOLD, 230), width=2)
+            else:
+                _draw_glow_pin(gd, cd, (fx, fy), 8, GOLD)
+
+        for t_pt in (T_up, T_dn):
+            if not _occluded_by_any_sphere(t_pt):
+                _draw_glow_pin(gd, cd, pr(t_pt), 6, SAPPHIRE)
         _draw_glow_pin(gd, cd, pr(P_on), 9, MINT)
         _draw_glow_pin(gd, cd, pr(apex), 7, SAPPHIRE)
 
     else:
-        # 직육면체 공간 대각선 (6-3-5 비례): 밑면 피타고라스 직각삼각형 + 입체 내부 황금 대각선
-        yaw = -0.62 + 0.50 * math.sin(ang)
-        pitch = 0.30 + 0.09 * math.cos(ang)
-        dist = 5.75 - 0.35 * math.sin(ang)
+        # 직육면체 공간 대각선: 뒷면 가려지는 모서리 3줄을 정통 기하 점선(은선)으로 자동 분리!
+        yaw = -0.58 + 0.42 * math.sin(ang)
+        pitch = 0.30 + 0.07 * math.cos(ang)
+        dist = 5.80 - 0.30 * math.sin(ang)
+        eye = _camera_eye_3d(yaw, pitch, dist)
         pr = lambda p: _project_3d(p, yaw, pitch, dist)[:2]
 
         hx, hy, hz = 1.45, 1.15, 0.82
@@ -706,14 +1148,38 @@ def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1
             (hx, hy, hz),
             (-hx, hy, hz),
         ]
-        pd.polygon([pr(verts[0]), pr(verts[1]), pr(verts[2]), pr(verts[3])], fill=(14, 44, 88, 138))
-        pd.polygon([pr(verts[0]), pr(verts[2]), pr(verts[6])], fill=(16, 185, 129, 74))
+        # 6개 면의 외향 법선으로 카메라 전면 가시 면 판별 -> 가시 면에 속한 모서리는 실선, 후면 은선은 점선!
+        faces = [
+            ((0, 1, 2, 3), (0.0, -1.0, 0.0)),
+            ((4, 5, 6, 7), (0.0, 1.0, 0.0)),
+            ((0, 1, 5, 4), (0.0, 0.0, -1.0)),
+            ((3, 2, 6, 7), (0.0, 0.0, 1.0)),
+            ((0, 3, 7, 4), (-1.0, 0.0, 0.0)),
+            ((1, 2, 6, 5), (1.0, 0.0, 0.0)),
+        ]
+        front_edges: set[tuple[int, int]] = set()
+        for f_v, f_n in faces:
+            fc = (
+                0.25 * sum(verts[k][0] for k in f_v),
+                0.25 * sum(verts[k][1] for k in f_v),
+                0.25 * sum(verts[k][2] for k in f_v),
+            )
+            if _vec_dot(f_n, _vec_sub(eye, fc)) > 0.0:
+                for k in range(4):
+                    a_i, b_i = f_v[k], f_v[(k + 1) % 4]
+                    front_edges.add((min(a_i, b_i), max(a_i, b_i)))
+
+        pd.polygon([pr(verts[0]), pr(verts[1]), pr(verts[2]), pr(verts[3])], fill=(14, 44, 88, 118))
+        pd.polygon([pr(verts[0]), pr(verts[2]), pr(verts[6])], fill=(16, 185, 129, 78))
 
         edges = [(0, 1), (1, 2), (2, 3), (3, 0), (4, 5), (5, 6), (6, 7), (7, 4), (0, 4), (1, 5), (2, 6), (3, 7)]
         for i1, i2 in edges:
-            _draw_glow_line(gd, cd, pr(verts[i1]), pr(verts[i2]), SAPPHIRE, width=4, glow_alpha=120)
+            ek = (min(i1, i2), max(i1, i2))
+            if ek in front_edges:
+                _draw_glow_line(gd, cd, pr(verts[i1]), pr(verts[i2]), SAPPHIRE, width=4, glow_alpha=120)
+            else:
+                _draw_dashed_2d_polyline(hd, [pr(verts[i1]), pr(verts[i2])], (*SAPPHIRE, 158), width=3, dash_px=14.0, gap_px=10.0)
 
-        # 밑면 대각선(에메랄드) + 높이 모서리(앰버) + 공간 대각선(골드)
         _draw_glow_line(gd, cd, pr(verts[0]), pr(verts[2]), EMERALD, width=7)
         _draw_glow_line(gd, cd, pr(verts[2]), pr(verts[6]), AMBER, width=7)
         _draw_glow_line(gd, cd, pr(verts[0]), pr(verts[6]), GOLD, width=9, glow_alpha=215)
@@ -722,10 +1188,11 @@ def _render_single_spatial_3d_frame(archetype: str, phase: float, width: int = 1
 
     glow_blurred = glow_layer.filter(ImageFilter.GaussianBlur(11))
     comp = Image.alpha_composite(base, poly_layer)
+    comp = Image.alpha_composite(comp, sphere_layer)
+    comp = Image.alpha_composite(comp, hidden_layer)
     comp = Image.alpha_composite(comp, glow_blurred)
     comp = Image.alpha_composite(comp, core_layer)
 
-    # 우측 1/3 HUD 배치 구역 다크 인디고 벨벳 소프트 그라데이션 마감
     vignette = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     vd = ImageDraw.Draw(vignette)
     for x in range(1120, width):

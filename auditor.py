@@ -241,6 +241,14 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         if 'elif kind == "menelaus_line":' not in eh_txt or "mA, mB, mC = 3.0, 6.0, 4.0" not in eh_txt:
             findings["L7_visual_integrity"].append("exam_hybrid_creator.py: 체바 공점(Ceva concurrency) 또는 메넬라우스 공선(Menelaus collinearity) 해석기하 작도 누락")
 
+    # genie3_world_controller.py 3D 입체 은선(점선)·구-타원 차폐(Ray-Sphere Occlusion)·실루엣 외접 무결성 점검 (Policy 67)
+    gw_file = ROOT_DIR / "genie3_world_controller.py"
+    if gw_file.exists():
+        gw_txt = gw_file.read_text(encoding="utf-8", errors="ignore")
+        for req_sym in ("def _ray_occluded_by_sphere(", "def _draw_3d_curve_with_occlusion(", "def _sphere_limb_ring_3d(", "def _camera_eye_3d("):
+            if req_sym not in gw_txt:
+                findings["L7_visual_integrity"].append(f"genie3_world_controller.py: 3D 입체 차폐/은선(점선) 핵심 함수 누락 ({req_sym})")
+
     # ---------------- L6: Git 미디어 및 비밀키 유출 ZERO 스캔 ----------------
     try:
         tracked = subprocess.run(

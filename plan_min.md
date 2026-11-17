@@ -370,6 +370,7 @@ python -X utf8 pr.py status
 - ✅ **59. 홈페이지 오류신고 3트랙 시각 확인(텔레그램 스크린샷) & 즉시 수리 분기 원칙 (`2026-11-15` 신설 · `_antigravity_report_watcher.py` · `assets/approved_error_patterns.json`)**
 - ✅ **60. 사용자 검색어 전용 분리 저장 · 수요 파악 및 미충족(0건) 수학 수업자료 자동 제작 원칙 (`mathedu-search-logger.js` & `search_demand_engine.py`)**
 - ✅ **61. `mathedu` 홈페이지 × `@min7014_ai` 유튜브 채널 투트랙(Two-Track) 상호보완 마스터플랜 원칙 (Dual-Engine Flywheel Policy)**
+- ✅ **62. 유튜브 자료 시청자 댓글 상시 분석 및 수학적 오류·설명 결손 자동 보완 원칙 (`youtube_comment_math_auditor.py`)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
@@ -735,3 +736,18 @@ python -X utf8 pr.py status
        ② `2020032701.json` 1~14페이지(특히 8페이지·6번째 줄에서 왜 $(b+c)^2(b-c)^2$을 $(b^2+2bc+c^2)(b^2-2bc+c^2)$으로 전개하여 $\pm 2bc$ 상쇄로 일차항 계수 $2b^2+2c^2$과의 합 일치를 확인하는지!) 및 `2017032201.json`($\sqrt{a^2b}=|a|\sqrt{b}$ 부호 분기) 전 단계 수학교육 대본 정밀 재작성 + 구버전 로컬 캐시 미디어 일괄 폐기 완료.
   4. **24/7 데몬 통합 및 원격 관제**:
      - `mathedu_foundation_daemon.py` 및 `mathedu_telegram_bridge.py`(30분 주기 백그라운드 점검 + 텔레그램 `!댓글` / `!유튜브댓글` 즉시 조회 명령)에 상시 연결하여 신규 수학 오류 댓글 발생 시 자동 검산·보완·재업로드·보고한다.
+
+
+### [Policy 67] 3D 입체 시네마 도형 Ray-Sphere 차폐 · 은선(점선) 작도 및 원뿔 실루엣 외접 정밀도 의무화 (`genie3_world_controller.py`, `2026-11-17` 확정)
+- **회장님(`min7014`) 핵심 지침**:
+  > *"https://www.youtube.com/watch?v=8mHjrewa_jo 의 시작시 입체도형이 정확하지 않아보인다. 즉 원에 가려지는 부분에 대한 타원부분이 표현이 제대로 안된것으로 보인다."*
+- **근본 원인 진단 및 `Rule 5` 전수 해결 내역**:
+  1. **핀포인트 원인 규명 (`2022101601` 단델린의 구와 원뿔 단면 타원)**:
+     - ① `_project_3d`의 고각(`pitch`) 부호가 반전되어 카메라가 원뿔 아래쪽에서 올려다보는 역원근(Necker 착시)이 발생했고,
+     - ② 3D 곡선(`ell_3d` 경사 단면 타원, 상·하 수평 접원 타원, 원뿔 밑면 원)이 `core_layer`에서 깊이 판정 없이 일괄 실선으로 덧그려져 **구(원) 뒤에 가려지는 타원의 뒷부분이 구 앞면을 가로지르는 실선으로 오표현**되었으며,
+     - ③ 16개의 임의 모선이 구 앞면을 관통하고 원뿔 외곽선이 구 윤곽을 할선으로 침범했으며, 우측 문제 카드 `[:4]` 줄 제한으로 `"What is PF₁ + PF₂?"` 말미가 잘리는 결함을 동시 적출.
+  2. **전 아키타입(`dandelin_cone` · `orthogonal_projection` · `three_perpendiculars` · `spatial_polyhedron`) 정통 기술기하 엔진 업그레이드**:
+     - **자연 상방 부감 카메라(`_camera_eye_3d` & `_project_3d`)**: 정통 기하 교과서 및 `min7014.github.io` 원문(`2022101601.pdf`)과 동일하게 전면 호는 아래로 볼록한 실선, 후면 가려진 호는 위로 볼록한 점선(은선)으로 투영.
+     - **실시간 3D Ray-Sphere & 반구 법선 차폐 분리기(`_ray_occluded_by_sphere`, `_draw_3d_curve_with_occlusion`)**: 구(원)나 경사 정사각형 판, 직육면체 전면 뒤에 가려지는 모든 타원 호·접원 뒷면·밑면 원 뒷면·모서리를 **서브픽셀 경계에서 즉시 정통 수학 점선(은선, `Dashed Hidden Line`)으로 분리 작도**.
+     - **`0.000px` 원뿔 실루엣 외접 & 가우시안 3D 구면 음영(`_sphere_limb_ring_3d`)**: 카메라 시점에서 그은 원뿔의 두 외곽 실루엣 모선이 상·하 두 내접구의 원근 윤곽(Apparent Limb)에 오차 없이 정확히 외접하도록 해석기하로 구현하고, `nano_banana_cinema_creator.py`의 HUD 텍스트 자동 픽셀 줄바꿈(`_wrap_fit_lines`, 절단 0건) 및 `auditor.py` L7 영구 무결성 게이트를 구축.
+     - **구버전 결함 영상 삭제 및 신규 교체(`Rule 13.3`)**: 전 공간기하 클립 3종 재마스터링 및 `2022101601` 번들 재렌더링 후 기존 결함 유튜브 영상 삭제·신규 교체 완료.

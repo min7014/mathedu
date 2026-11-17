@@ -572,19 +572,49 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
         d1.text((84, 64), bp["badge_en"] if is_en else bp["badge_ko"], fill=(255, 255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
         d1.text((1420, 66), "▶ 3-SEC MYSTERY" if is_en else "▶ 3초 직관 챌린지!", fill=(250, 204, 21, 255), font=vmaker.get_font_for_lang(lang_code, 34, bold=True))
 
+        def _wrap_fit_lines(draw_ctx: ImageDraw.ImageDraw, text_str: str, max_px_w: int, max_box_h: int, start_fs: int, min_fs: int = 22) -> tuple[list[str], object, int]:
+            clean_str = re.sub(r"\s+", " ", str(text_str or "")).strip()
+            best_lines = [clean_str]
+            best_font = vmaker.get_font_for_lang(lang_code, min_fs, bold=True)
+            best_step = min_fs + 12
+            for fs_try in range(start_fs, min_fs - 1, -2):
+                f_try = vmaker.get_font_for_lang(lang_code, fs_try, bold=True)
+                words = clean_str.split(" ")
+                lines_out: list[str] = []
+                cur = ""
+                for wd in words:
+                    cand = f"{cur} {wd}".strip() if cur else wd
+                    bb_w = draw_ctx.textbbox((0, 0), cand, font=f_try)
+                    if (bb_w[2] - bb_w[0]) <= max_px_w or not cur:
+                        cur = cand
+                    else:
+                        lines_out.append(cur)
+                        cur = wd
+                if cur:
+                    lines_out.append(cur)
+                step_h = int(round(fs_try * 1.44))
+                best_lines, best_font, best_step = lines_out, f_try, step_h
+                if len(lines_out) * step_h <= max_box_h and all((draw_ctx.textbbox((0, 0), ln, font=f_try)[2] - draw_ctx.textbbox((0, 0), ln, font=f_try)[0]) <= max_px_w for ln in lines_out):
+                    break
+            return best_lines, best_font, best_step
+
         d1.rounded_rectangle((1060, 196, 1856, 896), radius=26, fill=(15, 23, 42, 232), outline=(56, 189, 248, 255), width=3)
-        y_t = 248
-        for line in textwrap.wrap(bp["problem_label_en"] if is_en else bp["problem_label_ko"], width=27 if is_en else 17)[:4]:
-            d1.text((1102, y_t), line, fill=(255, 255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 39, bold=True))
-            y_t += 62
+        prob_lines, f_prob, step_prob = _wrap_fit_lines(d1, bp["problem_label_en"] if is_en else bp["problem_label_ko"], 706, 304, 38, 26)
+        y_t = 236
+        for line in prob_lines:
+            d1.text((1102, y_t), line, fill=(255, 255, 255, 255), font=f_prob)
+            y_t += step_prob
         d1.rounded_rectangle((1096, 560, 1820, 704), radius=18, fill=(2, 132, 199, 235), outline=(250, 204, 21, 255), width=3)
-        for li, cl in enumerate(textwrap.wrap(bp["figure_caption_en"] if is_en else bp["figure_caption_ko"], width=28 if is_en else 20)[:2]):
-            d1.text((1124, 588 + li * 48), cl, fill=(254, 240, 138, 255), font=vmaker.get_font_for_lang(lang_code, 33, bold=True))
+        cap_lines, f_cap1, step_cap1 = _wrap_fit_lines(d1, bp["figure_caption_en"] if is_en else bp["figure_caption_ko"], 668, 112, 33, 23)
+        y_c1 = 560 + max(16, (144 - len(cap_lines) * step_cap1) // 2)
+        for cl in cap_lines:
+            d1.text((1124, y_c1), cl, fill=(254, 240, 138, 255), font=f_cap1)
+            y_c1 += step_cap1
         d1.text(
             (1102, 768),
             "★ Spot ONE visual invariant—zero messy algebra!" if is_en else "★ 복잡한 식 대신 숨은 보조선·불변량을 찾아보세요!",
             fill=(125, 211, 252, 255),
-            font=vmaker.get_font_for_lang(lang_code, 28, bold=True),
+            font=vmaker.get_font_for_lang(lang_code, 27 if is_en else 28, bold=True),
         )
 
         act1_mp3 = tmp_dir / "long_act1.mp3"
@@ -650,10 +680,11 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
             font=vmaker.get_font_for_lang(lang_code, 36, bold=True),
         )
         d3.rounded_rectangle((1040, 196, 1856, 896), radius=26, fill=(15, 23, 42, 236), outline=(16, 185, 129, 255), width=4)
-        ya = 250
-        for line in textwrap.wrap(bp["answer_label_en"] if is_en else bp["answer_label_ko"], width=27 if is_en else 17)[:4]:
-            d3.text((1084, ya), line, fill=(254, 240, 138, 255), font=vmaker.get_font_for_lang(lang_code, 39, bold=True))
-            ya += 62
+        ans_lines, f_ans, step_ans = _wrap_fit_lines(d3, bp["answer_label_en"] if is_en else bp["answer_label_ko"], 728, 360, 38, 25)
+        ya = 236
+        for line in ans_lines:
+            d3.text((1084, ya), line, fill=(254, 240, 138, 255), font=f_ans)
+            ya += step_ans
         d3.rounded_rectangle((1080, 598, 1820, 836), radius=20, fill=(2, 132, 199, 240), outline=(255, 255, 255, 255), width=3)
         d3.text(
             (1112, 646),
@@ -693,14 +724,20 @@ def render_nano_banana_bundle(bp: dict, lang_code: str = "ko") -> dict:
             dv = ImageDraw.Draw(v_hud)
             dv.rounded_rectangle((36, 236, 1044, 1184), radius=24, outline=(56, 189, 248, 255), width=4)
             dv.rounded_rectangle((40, 64, 1040, 204), radius=22, fill=(*top_fill, 242), outline=(250, 204, 21, 255), width=4)
-            dv.text((72, 108), top_banner_text, fill=(255, 255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 38, bold=True))
+            top_ls, f_top, _ = _wrap_fit_lines(dv, top_banner_text, 930, 90, 37, 24)
+            dv.text((72, 108), top_ls[0], fill=(255, 255, 255, 255), font=f_top)
             dv.rounded_rectangle((40, 1220, 1040, 1608), radius=24, fill=(15, 23, 42, 242), outline=(56, 189, 248, 255), width=4)
-            dv.text((74, 1258), caption_line[:38], fill=(250, 204, 21, 255), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
-            for li, bl in enumerate(bottom_lines[:3]):
-                dv.text((74, 1336 + li * 52), bl, fill=(255, 255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 33, bold=True))
+            cap_v_ls, f_capv, _ = _wrap_fit_lines(dv, caption_line, 926, 62, 35, 22)
+            dv.text((74, 1252), " ".join(cap_v_ls), fill=(250, 204, 21, 255), font=f_capv)
+            body_raw = " ".join(bottom_lines) if isinstance(bottom_lines, list) else str(bottom_lines)
+            avail_body_h = 166 if cta_line else 260
+            b_ls, f_bv, step_bv = _wrap_fit_lines(dv, body_raw, 926, avail_body_h, 33, 22)
+            for li, bl in enumerate(b_ls):
+                dv.text((74, 1320 + li * step_bv), bl, fill=(255, 255, 255, 255), font=f_bv)
             if cta_line:
                 dv.rounded_rectangle((56, 1496, 1024, 1590), radius=16, fill=(2, 132, 199, 248))
-                dv.text((82, 1524), cta_line, fill=(255, 255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 29, bold=True))
+                cta_ls, f_cta, _ = _wrap_fit_lines(dv, cta_line, 916, 60, 29, 21)
+                dv.text((82, 1524), cta_ls[0], fill=(255, 255, 255, 255), font=f_cta)
             return v_bg, v_hud
 
         s1_bg, s1_hud = _make_vertical_art_canvas(
