@@ -302,6 +302,9 @@
     var flag = (qs('ads') || '').toLowerCase();
     if (flag === 'off' || inIframe()) { api.mode = 'off'; return; }
     var preview = flag === 'preview';
+    var host = (location.hostname || '').toLowerCase();
+    var isLocalOrBot = (location.protocol === 'file:' || host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || !!navigator.webdriver);
+    if (!preview && isLocalOrBot) { api.mode = 'local-or-bot-skip'; return; }
     fetch(configUrl, { cache: 'no-cache', credentials: 'same-origin' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (cfg) {

@@ -79,7 +79,7 @@ def _is_pid_alive(pid_file: Path) -> bool:
         return False
 
 
-def _is_live_session_owning_telegram(grace_sec: float = 90.0) -> bool:
+def _is_live_session_owning_telegram(grace_sec: float = 900.0) -> bool:
     """현재 Antigravity 대화창의 --listen-once가 살아있거나 방금 메시지를 깨워 처리 중인지 확인"""
     if _is_pid_alive(LISTENER_PID_FILE):
         return True

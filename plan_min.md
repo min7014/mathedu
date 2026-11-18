@@ -823,3 +823,16 @@ python -X utf8 pr.py status
   1. **원인 1 (URL 괄호·조사 밀착 404 오류)**: 유튜브 URL 파서는 `자료(https://...pdf)로부터`나 `원문(https://.../)이며`처럼 URL 끝에 공백 없이 `)`와 한글 조사가 붙으면 `%29%EB%A1%9C%EB%B6%80%ED%84%B0`까지 링크 주소에 포함시켜 GitHub Pages 404 오류를 발생시킨다.
   2. **원인 2 (`\s{2,}` 정규식 줄바꿈 소실)**: `youtube_self_evolving_engine.py`의 `re.sub(r"\s{2,}", " ", s)`가 설명란의 `\n\n` 줄바꿈까지 공백 1칸으로 합쳐 `00:00 |` 챕터 줄바꿈을 무너뜨렸다.
   3. **전수 조치**: `ensure_clean_youtube_url_boundaries()`(URL 좌우 공백 강제 보장 + `?q=한글` 퍼센트 인코딩) 및 `[ \t]{2,}` 줄바꿈 보존 로직을 `youtube_self_evolving_engine.py`, `auditor.py`, 전 생성 모듈과 684개 로컬 대본에 일괄 적용하고, 라이브 채널의 `.pdf/.html` 깨진 영상 28편 전량 + 깨진 댓글 25건 전량을 영상 삭제 없이 제자리 복구(`videos.update` / `comments.update`) 완료했다.
+
+
+### [Policy 72] 메인 홈(`index.html`) 첫 화면 인지 부하 축소 · 점진적 공개(Progressive Disclosure) 재설계 및 실시간 텔레그램 워치독 무충돌 그레이스 확장 (`2026-11-19` 확정 · 오류신고 `R63`)
+- **사용자 제보 (`R63`, `1920×911`, `main.flex.flex-col`)**: *"너무 한 화면에 많은 정보가 있다."* (회장님 `[🔧 이번 건만 수정]` 승인 반영, 유사 키워드 광범위 자동등록 제외)
+- **`Rule 5` 근본 원인 진단 및 UI/UX 구조 혁신**:
+  1. **원인 1 (첫 화면 정보 과밀 및 본문 매몰)**: 기존 `index.html`은 상단에 43개 버튼의 링크 허브와 5대 대형 연구실 대시보드, 완료된 과거 출제 요청 현황판(`#requestsBoardBox`, 401px)까지 총 237개 정적 버튼·링크를 한꺼번에 펼쳐 두어, 정작 핵심인 `디딤돌 수학 문제 목록`(`#quizExplorerSection`)이 `3,200px` 아래로 밀려나 있었다.
+  2. **원인 2 (`?lang=en` 동적 위젯 어구 파편화)**: 영문 모드 전환 시 `Wonder Lab` 및 실생활 호기심 카드(`curiosityRealWorldAtlas`)가 영문 전용 데이터 없이 폴백 치환기를 거치며 `"🌿 Teacher, &, & Pythagoras Tree via?"` 형태로 어색하게 노출되었다.
+  3. **원인 3 (텔레그램 라이브 세션 `grace_sec=90s` 경합 및 로컬 애드센스 호출)**: 라이브 대화 턴이 90초를 넘기면 백그라운드 워치독(`mathedu_telegram_bridge.py`)이 중복 `agy -p` 프로세스를 실행할 수 있었고, 로컬/헤드리스 검증 환경(`127.0.0.1` / `navigator.webdriver`)에서도 `adsbygoogle.js`가 호출되었다.
+- **영구 적용 원칙**:
+  1. **[첫 화면 2단 집중 위계 (`Quick Gateway` + `#quizExplorerSection` 즉시 노출)]**: 첫 화면 상단은 차분한 아카데믹 팔레트(`Rule 37`) 기반 6대 핵심 관문 카드와 1줄 도구 바로 압축하고, 바로 아래(`top ≈ 320px`)에 `디딤돌 수학 문제 목록`(초기 15문항 + 30문항 더보기)을 배치하여 스크롤 없이 즉시 문제 탐색·풀이가 가능하게 한다.
+  2. **[5대 심층 연구실 점진적 공개 탭 허브 (`#deepMathLabsHub`)]**: `오늘의 시각 증명·16대 단원`, `오늘의 3분 유레카`, `수학교사 5대 스튜디오`, `경이(Wonder) 프랙탈 실험실`, `글로벌 아카데미(Desmos·Polypad)` 및 과거 완료된 출제 현황(`#requestsBoardDetails`)은 문항 목록 하단의 접이식 탭 허브로 통합하되, 모든 기존 DOM ID·딥링크 해시(`#dailyGrowthFlywheelSection` 등)·`PEDAGOGY_FRONT_LITE` 데몬 동기화 앵커를 100% 보존한다.
+  3. **[영문 모드(`?lang=en`) 네이티브 문장 직결 및 무효 트래픽·경합 차단]**: `CURIOSITY_ATLAS_EN` 8종 원어민 영문 데이터 및 `mathedu:lang-changed` 실시간 리스너를 연결하여 한/영 양방향 무결성을 보장하고, `mathedu-ads.js`에 로컬·봇 스킵 가드(`local-or-bot-skip`)를, `mathedu_telegram_bridge.py`에 `grace_sec=900.0`(15분) 락 보호를 적용한다.
+

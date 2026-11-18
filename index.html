@@ -768,64 +768,116 @@ body.dark-mode .header-omni-dropdown,
 <main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen">
   <div class="flex flex-col w-full max-w-[1120px] mx-auto pb-12">
 
-    <!-- Clean Compact Link Hub (주요 메뉴 및 자료실 링크 목록) -->
+    <!-- Clean Minimalist Quick Gateway (R63 Cognitive Load Reduction) -->
     <div class="px-margin pt-3 pb-1">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-3">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-variant/60 flex flex-col gap-2.5">
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-secondary text-[20px]">link</span>
-            <h1 class="font-headline-sm text-[17px] font-bold text-on-surface m-0">수학자료실 · 바로가기 링크</h1>
+            <span class="material-symbols-outlined text-secondary text-[20px]">explore</span>
+            <h1 class="font-headline-sm text-[16.5px] font-bold text-on-surface m-0">
+              <span class="bilingual-ko">수학자료실 · 핵심 바로가기</span>
+              <span class="bilingual-en">Math Archive · Quick Gateway</span>
+            </h1>
           </div>
-          <span class="font-body-sm text-[12px] text-on-surface-variant">디딤돌 문항 <b id="heroStatQuizCount" class="text-secondary">16,548개</b> · 시각적 증명 3,400+</span>
+          <span class="font-body-sm text-[12px] text-on-surface-variant">
+            <span class="bilingual-ko">디딤돌 문항 <b id="heroStatQuizCount" class="text-secondary">16,548개</b> · 시각적 증명 3,400+</span>
+            <span class="bilingual-en"><b class="text-secondary">16,548+</b> Stepping-Stone Problems · <b class="text-secondary">3,400+</b> Visual Proofs</span>
+          </span>
         </div>
 
-        <!-- Primary Link Directory -->
+        <!-- 6 Focused Primary Destinations (Calm Academic Palette) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-          <a href="video_board.html" class="px-3.5 py-2.5 rounded-lg bg-[#f0f9ff] hover:bg-[#e0f2fe] text-[#0369a1] border border-[#bae6fd] no-underline flex items-center justify-between gap-2 transition-colors"><span class="font-bold truncate">📋 전체 자료 설명 영상 게시판 (@min7014_ai)</span><span class="text-[#0284c7] text-xs font-extrabold shrink-0">게시판 ➔</span></a>
-          <a href="mathlab.html" class="px-3.5 py-2.5 rounded-lg bg-[#ecfdf5] hover:bg-[#d1fae5] text-[#047857] border border-[#a7f3d0] no-underline flex items-center justify-between gap-2 transition-colors"><span class="font-bold truncate">🛠️ 자체 제작 수학공학도구 MathLab v1.4 (AI Lab)</span><span class="text-[#059669] text-xs font-extrabold shrink-0">실습 ➔</span></a>
-          <a href="video_studio.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
-            <span class="font-semibold truncate">🎬 다국어 PDF 강의 영상 스튜디오</span>
-            <span class="text-secondary text-xs font-bold shrink-0">열기 ➔</span>
+          <a href="video_board.html" class="px-3.5 py-2.5 rounded-lg bg-[#f0f9ff] hover:bg-[#e0f2fe] text-[#0369a1] border border-[#bae6fd] no-underline flex items-center justify-between gap-2 transition-colors">
+            <span class="font-bold truncate"><span class="bilingual-ko">📋 시각 증명 영상 게시판 (@min7014_ai)</span><span class="bilingual-en">📋 Visual Proof Videos (@min7014_ai)</span></span>
+            <span class="text-[#0284c7] text-xs font-extrabold shrink-0"><span class="bilingual-ko">열기 ➔</span><span class="bilingual-en">Open ➔</span></span>
           </a>
-          <a href="game.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
-            <span class="font-semibold truncate">🎮 수학의 성전 3D (퀘스트 게임)</span>
-            <span class="text-secondary text-xs font-bold shrink-0">열기 ➔</span>
+          <a href="mathlab.html" class="px-3.5 py-2.5 rounded-lg bg-[#ecfdf5] hover:bg-[#d1fae5] text-[#047857] border border-[#a7f3d0] no-underline flex items-center justify-between gap-2 transition-colors">
+            <span class="font-bold truncate"><span class="bilingual-ko">🛠️ 동적 기하·대수 실험실 MathLab</span><span class="bilingual-en">🛠️ Dynamic MathLab Studio</span></span>
+            <span class="text-[#059669] text-xs font-extrabold shrink-0"><span class="bilingual-ko">실습 ➔</span><span class="bilingual-en">Launch ➔</span></span>
           </a>
-          <a href="#" onclick="openMin7014ExplorerModal();return false;" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
-            <span class="font-semibold truncate">📐 3,400+ 동적 기하·증명 검색</span>
-            <span class="text-secondary text-xs font-bold shrink-0">열기 ➔</span>
+          <a href="#" onclick="openMin7014ExplorerModal();return false;" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant/70 no-underline flex items-center justify-between gap-2 transition-colors">
+            <span class="font-semibold truncate"><span class="bilingual-ko">📐 3,400+ 동적 기하·증명 검색</span><span class="bilingual-en">📐 3,400+ Visual Proofs Search</span></span>
+            <span class="text-secondary text-xs font-bold shrink-0"><span class="bilingual-ko">탐색 ➔</span><span class="bilingual-en">Search ➔</span></span>
           </a>
-          <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
-            <span class="font-semibold truncate">🌐 민은기 선생님의 수학자료실 본관</span>
+          <a href="game.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant/70 no-underline flex items-center justify-between gap-2 transition-colors">
+            <span class="font-semibold truncate"><span class="bilingual-ko">🎮 수학의 성전 3D 퀘스트</span><span class="bilingual-en">🎮 3D Math Sanctuary Quest</span></span>
+            <span class="text-secondary text-xs font-bold shrink-0"><span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Play ➔</span></span>
+          </a>
+          <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant/70 no-underline flex items-center justify-between gap-2 transition-colors">
+            <span class="font-semibold truncate"><span class="bilingual-ko">🌐 민은기 선생님의 수학자료실 본관</span><span class="bilingual-en">🌐 MIN EUN GI's Math Archive Home</span></span>
             <span class="text-on-surface-variant text-xs shrink-0">↗</span>
           </a>
-          <a href="create.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
-            <span class="font-semibold truncate">✨ 교사용 문제 출제 스튜디오</span>
-            <span class="text-secondary text-xs font-bold shrink-0">이동 ➔</span>
+          <a href="en/index.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface border border-surface-variant/70 no-underline flex items-center justify-between gap-2 transition-colors">
+            <span class="font-semibold truncate"><span class="bilingual-ko">🌍 영문 시각 증명 아카이브 (EN)</span><span class="bilingual-en">🌍 Global Visual Proofs Archive (EN)</span></span>
+            <span class="text-secondary text-xs font-bold shrink-0">EN ➔</span>
           </a>
-          <a href="dashboard.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
-            <span class="font-semibold truncate">📊 실시간 교실 현황 대시보드</span>
-            <span class="text-secondary text-xs font-bold shrink-0">이동 ➔</span>
-          </a>
-          <a href="offline/index.html" class="px-3.5 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 transition-colors">
-            <span class="font-semibold truncate">📦 오프라인 단독 퀴즈 보관함</span>
-            <span class="text-secondary text-xs font-bold shrink-0">이동 ➔</span>
-          </a>
+        </div>
+
+        <!-- Clean Single-Line Utility & Progressive Disclosure Bar -->
+        <div class="pt-2 border-t border-surface-container flex items-center justify-between gap-2 flex-wrap text-xs">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button type="button" id="btnQuickDrawerYt" onclick="toggleHomeQuickDrawer('yt')" class="px-2.5 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer text-xs">
+              <span class="bilingual-ko">🎬 추천 영상 · #Shorts 극장 ▾</span><span class="bilingual-en">🎬 Featured Videos &amp; #Shorts ▾</span>
+            </button>
+            <button type="button" id="btnQuickDrawerTools" onclick="toggleHomeQuickDrawer('tools')" class="px-2.5 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer text-xs">
+              <span class="bilingual-ko">👩‍🏫 교사·출제·오프라인 도구 ▾</span><span class="bilingual-en">👩‍🏫 Teacher, Studio &amp; Offline Tools ▾</span>
+            </button>
+            <button type="button" onclick="switchHomeDeepLabTab('curriculum', true)" class="px-2.5 py-1 rounded-lg bg-secondary/10 hover:bg-secondary/15 text-secondary font-bold border border-secondary/25 cursor-pointer text-xs">
+              <span class="bilingual-ko">🔬 심층 탐구 실험실 (5종) ↓</span><span class="bilingual-en">🔬 Interactive Math Labs (5) ↓</span>
+            </button>
+            <span id="studentLibraryQuickBar" class="inline-flex items-center gap-2 pl-1">
+              <a href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;" class="text-on-surface-variant hover:text-secondary hover:underline no-underline font-semibold">
+                <span class="bilingual-ko">📂 내 풀이 기록</span><span class="bilingual-en">📂 My Solved History</span>
+              </a>
+            </span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <input id="inputRoomCode" class="h-8 w-32 px-2.5 rounded-lg bg-surface-container-low font-label-code text-xs text-on-surface placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary" placeholder="수업 코드 입력" maxlength="12" type="text"/>
+            <button onclick="joinClassroom()" class="h-8 px-3 rounded-lg bg-primary text-on-primary text-xs font-semibold cursor-pointer border-0" type="button">
+              <span class="bilingual-ko">입장</span><span class="bilingual-en">Join</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Optional Collapsible Drawer: Teacher, Studio & Offline Tools (Collapsed by default) -->
+        <div id="teacherQuickToolsDrawer" style="display:none;" class="pt-2.5 border-t border-surface-container flex flex-col gap-2 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+            <a href="create.html" class="px-3 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 font-semibold border border-surface-variant/60">
+              <span class="truncate"><span class="bilingual-ko">✨ 교사용 문제 출제</span><span class="bilingual-en">✨ Problem Authoring Studio</span></span><span class="text-secondary font-bold">➔</span>
+            </a>
+            <a href="dashboard.html" class="px-3 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 font-semibold border border-surface-variant/60">
+              <span class="truncate"><span class="bilingual-ko">📊 실시간 교실 대시보드</span><span class="bilingual-en">📊 Live Classroom Dashboard</span></span><span class="text-secondary font-bold">➔</span>
+            </a>
+            <a href="video_studio.html" class="px-3 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 font-semibold border border-surface-variant/60">
+              <span class="truncate"><span class="bilingual-ko">🎬 PDF 강의 영상 스튜디오</span><span class="bilingual-en">🎬 PDF Lecture Video Studio</span></span><span class="text-secondary font-bold">➔</span>
+            </a>
+            <a href="offline/index.html" class="px-3 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface no-underline flex items-center justify-between gap-2 font-semibold border border-surface-variant/60">
+              <span class="truncate"><span class="bilingual-ko">📦 오프라인 단독 퀴즈 보관함</span><span class="bilingual-en">📦 Offline Quiz Vault</span></span><span class="text-secondary font-bold">➔</span>
+            </a>
+          </div>
+          <div class="flex items-center gap-3 flex-wrap pt-1 text-on-surface-variant">
+            <a href="#" onclick="openDefaultTeacherClass();return false;" class="text-secondary hover:underline no-underline font-semibold"><span class="bilingual-ko">🔗 3초 수업 QR 개설</span><span class="bilingual-en">🔗 Instant Class QR</span></a>
+            <a href="#" onclick="openMathClinicModal();return false;" class="text-secondary hover:underline no-underline font-semibold"><span class="bilingual-ko">🧬 오개념 클리닉 &amp; 유레카 노트</span><span class="bilingual-en">🧬 Misconception Clinic &amp; Eureka Note</span></a>
+            <a href="#" onclick="openAcademicPedagogyModal();return false;" class="text-secondary hover:underline no-underline font-semibold"><span class="bilingual-ko">🎓 수학교육학 5대 원리</span><span class="bilingual-en">🎓 5 Principles of Math Pedagogy</span></a>
+            <a href="https://www.geogebra.org/u/min7014" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 GeoGebra Tube ↗</a>
+            <a href="https://www.algeomath.kr" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 AlgeoMath ↗</a>
+            <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold"><span class="bilingual-ko">🔗 전 단원 개념 증명 PDF ↗</span><span class="bilingual-en">🔗 Full Proof PDF Tree ↗</span></a>
+          </div>
         </div>
 
         <!-- 📺 @min7014_ai 유튜브 시각적 증명 시네마 & 45초 #Shorts 극장 · 홈페이지 바이럴 홍보 허브 -->
-        <div class="pt-3 border-t border-surface-container flex flex-col gap-2.5" id="ytViralCinemaHub">
+        <div class="pt-3 border-t border-surface-container flex flex-col gap-2.5" id="ytViralCinemaHub" style="display:none;">
           <div class="flex items-center justify-between gap-2 flex-wrap text-xs">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="px-2 py-0.5 rounded bg-[#0284c7] text-white font-extrabold text-[11px]">📺 YouTube × mathedu 홍보·확장 허브</span>
               <span class="font-extrabold text-[#0369a1] text-[13px]">@min7014_ai 1080p 시각적 수학 증명 시네마 &amp; 45초 #Shorts 즉시 재생</span>
             </div>
             <div class="flex items-center gap-1.5 flex-wrap">
-              <button type="button" onclick="openYoutubeSeedIgniteModal()" class="px-2.5 py-1 rounded-md bg-gradient-to-r from-[#dc2626] to-[#ea580c] text-white font-extrabold border-0 cursor-pointer text-xs shadow-sm">🎓 교실 칠판 QR &amp; 3분 대표작 구독 마중물 ▼</button>
+              <button type="button" onclick="openYoutubeSeedIgniteModal()" class="px-2.5 py-1 rounded-md bg-gradient-to-r from-[#0284c7] to-[#4f46e5] text-white font-extrabold border-0 cursor-pointer text-xs shadow-sm">🎓 교실 칠판 QR &amp; 3분 대표작 구독 마중물 ▼</button>
               <button type="button" onclick="toggleHomeYoutubeTheater()" id="btnToggleHomeYtTheater" class="px-2.5 py-1 rounded-md bg-[#0f172a] text-[#38bdf8] font-extrabold border-0 cursor-pointer text-xs">🎬 인라인 유튜브 극장 열기 ▼</button>
               <button type="button" onclick="toggleHomePrAgentStudio()" id="btnToggleHomePrStudio" class="px-2.5 py-1 rounded-md bg-gradient-to-r from-[#0284c7] to-[#7c3aed] text-white font-extrabold border-0 cursor-pointer text-xs shadow-sm">📣 홍보 에이전트(PR) 7대 채널 스튜디오 ▼</button>
               <button type="button" onclick="copyYoutubeWebsitePromoKit()" class="px-2.5 py-1 rounded-md bg-amber-100 hover:bg-amber-200 text-amber-900 font-extrabold border border-amber-300 cursor-pointer text-xs">📢 학급·SNS 홍보 카드 1초 복사</button>
-              <a href="https://youtu.be/BkxSXat12V4" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ffe4e6] text-[#be123c] font-extrabold no-underline hover:underline">🚨 NEW 실전함정 5초 해체(4분 본편) ↗</a>
+              <a href="https://youtu.be/BkxSXat12V4" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#e0f2fe] text-[#0369a1] font-extrabold no-underline hover:underline">🚨 NEW 실전함정 5초 해체(4분 본편) ↗</a>
               <a href="https://youtube.com/shorts/ZPx-zIC9w3I" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#fef3c7] text-[#92400e] font-bold no-underline hover:underline">🔥 NEW 원주각 x=? 3초 챌린지 #Shorts ↗</a>
               <a href="https://youtube.com/shorts/9L_15T8bzS8" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#e0f2fe] text-[#0369a1] font-bold no-underline hover:underline">⚡ 인기 1위(602뷰) 이등변 Q-#Shorts ↗</a>
               <a href="https://youtu.be/DSgUHigl82o" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-md bg-[#ede9fe] text-[#6d28d9] font-bold no-underline hover:underline">🎬 3분 핵심 시각 증명 본편 ↗</a>
@@ -866,7 +918,7 @@ body.dark-mode .header-omni-dropdown,
                 <div class="text-sm font-extrabold text-white mt-0.5" id="homeYtActiveTitle">🌳 피타고라스 나무가 무한히 자라나도 넓이 합이 일정한 이유!</div>
               </div>
               <div class="flex items-center gap-1.5 flex-wrap">
-                <button type="button" onclick="switchHomeYtMode('full_ko')" class="px-2.5 py-1 rounded bg-rose-600 text-white text-xs font-extrabold border-0 cursor-pointer">🇰🇷 1080p 본편 (KO)</button>
+                <button type="button" onclick="switchHomeYtMode('full_ko')" class="px-2.5 py-1 rounded bg-[#0284c7] text-white text-xs font-extrabold border-0 cursor-pointer">🇰🇷 1080p 본편 (KO)</button>
                 <button type="button" onclick="switchHomeYtMode('full_en')" class="px-2.5 py-1 rounded bg-sky-700 text-white text-xs font-extrabold border-0 cursor-pointer">🇺🇸 1080p Full (EN)</button>
                 <button type="button" onclick="switchHomeYtMode('short_ko')" class="px-2.5 py-1 rounded bg-amber-600 text-white text-xs font-extrabold border-0 cursor-pointer">📱 45초 #Shorts (KO)</button>
                 <button type="button" onclick="switchHomeYtMode('short_en')" class="px-2.5 py-1 rounded bg-indigo-600 text-white text-xs font-extrabold border-0 cursor-pointer">📱 45s #Shorts (EN)</button>
@@ -885,17 +937,17 @@ body.dark-mode .header-omni-dropdown,
                 <button type="button" onclick="copyCurrentHomeYtShareCard()" class="py-2 px-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold border-0 cursor-pointer">📢 3단계: 이 영상+문제 세트 단톡방 공유하기</button>
                 <div class="pt-1 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
                   <span>📺 공식 채널: @min7014_ai</span>
-                  <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="text-rose-400 font-extrabold no-underline hover:underline">🔔 유튜브 구독하기 ↗</a>
+                  <a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" class="text-sky-300 font-extrabold no-underline hover:underline">🔔 유튜브 구독하기 ↗</a>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- 📣 홍보 에이전트(PR Director v2.0) 7대 외부 채널 맞춤형 바이럴 & SNS 카드 스튜디오 -->
-          <div id="homePrAgentStudioBox" style="display:none;" class="p-4 rounded-xl bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#0f172a] text-white border border-rose-500/40 flex flex-col gap-3 shadow-lg">
+          <div id="homePrAgentStudioBox" style="display:none;" class="p-4 rounded-xl bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#0f172a] text-white border border-sky-500/40 flex flex-col gap-3 shadow-lg">
             <div class="flex items-center justify-between gap-2 flex-wrap border-b border-slate-800 pb-2.5">
               <div class="flex items-center gap-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full bg-rose-600 text-white font-extrabold text-[11px]">📣 PR Agent v2.0 가동 중</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-[#0284c7] text-white font-extrabold text-[11px]">📣 PR Agent v2.0 가동 중</span>
                 <span class="font-extrabold text-sm text-amber-300">유튜브(@min7014_ai) × 수학홈페이지(mathedu) 7대 채널 맞춤형 홍보 생성 스튜디오</span>
                 <span class="text-[11px] text-slate-300" id="prStudioStatsBadge">(22개 주제 × 7대 채널 = 154종 홍보 키트 자동 생성 완료)</span>
               </div>
@@ -909,7 +961,7 @@ body.dark-mode .header-omni-dropdown,
                 <select id="prStudioTopicSelect" onchange="renderPrAgentStudioContent()" class="h-8 px-2.5 rounded-lg bg-slate-900 text-white border border-slate-700 text-xs font-bold flex-1 min-w-[240px]"></select>
               </div>
               <div class="flex items-center gap-1.5 flex-wrap text-xs" id="prStudioChannelTabs">
-                <button type="button" onclick="selectPrStudioChannel('youtube_pinned')" data-ch="youtube_pinned" class="pr-ch-tab px-2.5 py-1.5 rounded-lg bg-rose-600 text-white font-extrabold border-0 cursor-pointer text-xs">📺 유튜브 고정댓글·커뮤니티</button>
+                <button type="button" onclick="selectPrStudioChannel('youtube_pinned')" data-ch="youtube_pinned" class="pr-ch-tab px-2.5 py-1.5 rounded-lg bg-[#0284c7] text-white font-extrabold border-0 cursor-pointer text-xs">📺 유튜브 고정댓글·커뮤니티</button>
                 <button type="button" onclick="selectPrStudioChannel('kakao_challenge')" data-ch="kakao_challenge" class="pr-ch-tab px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold border-0 cursor-pointer text-xs">💬 카톡·단톡방 1초 도전장</button>
                 <button type="button" onclick="selectPrStudioChannel('student_community')" data-ch="student_community" class="pr-ch-tab px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold border-0 cursor-pointer text-xs">🔥 수만휘·오르비 수험생 추천글</button>
                 <button type="button" onclick="selectPrStudioChannel('teacher_indischool')" data-ch="teacher_indischool" class="pr-ch-tab px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold border-0 cursor-pointer text-xs">🏫 인디스쿨·교사 나눔 키트</button>
@@ -922,11 +974,11 @@ body.dark-mode .header-omni-dropdown,
             <!-- Step 2: Copy Editor & Visual SNS Card Preview -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 items-stretch">
               <div class="lg:col-span-2 flex flex-col gap-2">
-                <textarea id="prStudioCopyTextarea" rows="8" class="w-full p-3 rounded-xl bg-slate-950/90 text-slate-100 border border-slate-700 text-xs leading-relaxed font-mono resize-y focus:outline-none focus:border-rose-500"></textarea>
+                <textarea id="prStudioCopyTextarea" rows="8" class="w-full p-3 rounded-xl bg-slate-950/90 text-slate-100 border border-slate-700 text-xs leading-relaxed font-mono resize-y focus:outline-none focus:border-sky-500"></textarea>
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="text-[11px] text-emerald-400 font-bold" id="prStudioCopyStatus">💡 채널에 맞게 자동 최적화된 홍보 문구와 5대 홈페이지 직행 딥링크가 포함되어 있습니다.</span>
                   <div class="flex items-center gap-1.5 flex-wrap">
-                    <button type="button" onclick="copyPrStudioActiveText()" class="py-2 px-4 rounded-lg bg-gradient-to-r from-rose-600 to-amber-500 hover:opacity-95 text-white font-extrabold text-xs border-0 cursor-pointer shadow">📋 이 채널 맞춤 홍보문구 1초 복사 (+30 XP)</button>
+                    <button type="button" onclick="copyPrStudioActiveText()" class="py-2 px-4 rounded-lg bg-gradient-to-r from-[#0284c7] to-[#059669] hover:opacity-95 text-white font-extrabold text-xs border-0 cursor-pointer shadow">📋 이 채널 맞춤 홍보문구 1초 복사 (+30 XP)</button>
                     <button type="button" onclick="nativeSharePrStudioActiveText()" class="py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs border-0 cursor-pointer">📲 모바일 공유 시트 열기</button>
                   </div>
                 </div>
@@ -945,602 +997,11 @@ body.dark-mode .header-omni-dropdown,
           </div>
         </div>
 
-        <!-- Secondary External Links & Classroom Code Row -->
-        <div class="pt-2 border-t border-surface-container flex items-center justify-between gap-3 flex-wrap text-xs">
-          <div class="flex items-center gap-3 flex-wrap">
-            <a href="https://www.geogebra.org/u/min7014" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 GeoGebra Tube</a>
-            <a href="https://www.algeomath.kr" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 AlgeoMath</a>
-            <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🔗 전 단원 개념 증명 PDF</a>
-            <a href="#" onclick="openAcademicPedagogyModal();return false;" class="text-secondary hover:underline no-underline font-semibold">🎓 수학교육학 5대 원리 학습법</a>
-            <a href="#" onclick="openMathClinicModal();return false;" class="text-secondary hover:underline no-underline font-semibold">🧬 오개념 클리닉 & 유레카 노트</a>
-            <a href="#" onclick="openDefaultTeacherClass();return false;" class="text-secondary hover:underline no-underline font-semibold">🔗 3초 수업 QR 개설</a>
-            <span id="studentLibraryQuickBar" class="inline-flex items-center gap-2">
-              <a href="#" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;" class="text-on-surface-variant hover:underline no-underline">📂 내 풀이 기록</a>
-            </span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <input id="inputRoomCode" class="h-8 w-32 px-2.5 rounded-lg bg-surface-container-low font-label-code text-xs text-on-surface placeholder:text-on-surface-variant border border-surface-variant focus:outline-none focus:border-secondary" placeholder="수업 코드 입력" maxlength="12" type="text"/>
-            <button onclick="joinClassroom()" class="h-8 px-3 rounded-lg bg-primary text-on-primary text-xs font-semibold cursor-pointer border-0" type="button">입장</button>
-          </div>
-        </div>
-
         <!-- Hidden compatibility hooks -->
         <div class="hidden">
           <input type="text" id="heroQuickSearchInput"/>
           <button type="button" id="btnClearHeroSearch"></button>
           <span id="streakTitle"></span><span id="gameLevelTitle"></span><span id="streakSub"></span><span id="gameXpText"></span><div id="gameXpBarFill"></div><span id="quickWrongCount">0</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 🏛️ 민은기 선생님의 수학자료실 (min7014.github.io) 심층 커리큘럼 & 오늘의 시각적 증명 쇼케이스 -->
-    <div class="px-margin mt-space-sm" id="min7014DeepCurriculumSection">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-secondary/20 flex flex-col gap-3">
-        <!-- Header & Resource Statistics -->
-        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="px-2 py-0.5 rounded-md bg-secondary text-white font-label-badge text-[11px] font-bold">min7014.github.io 심층 연동</span>
-            <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">🏛️ 민은기 선생님의 수학자료실 16대 영역 · 165개 세부 단원 시각적 증명 아카이브</h2>
-          </div>
-          <div class="flex items-center gap-1.5 flex-wrap text-[11px] font-semibold">
-            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary">📚 1,113개 심층 주제</span>
-            <span class="px-2 py-0.5 rounded bg-status-amber/15 text-[#B45309]">📄 증명 PDF 847</span>
-            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary">🎮 GeoGebra 404</span>
-            <span class="px-2 py-0.5 rounded bg-status-emerald/15 text-status-emerald">📐 AlgeoMath 457</span>
-            <span class="px-2 py-0.5 rounded bg-[#f3e8ff] text-[#6d28d9]">📏 작도 60선</span>
-            <span class="px-2 py-0.5 rounded bg-[#e0f2fe] text-[#0369a1]">🎥 영상·숏폼 927</span>
-          </div>
-        </div>
-
-        <!-- Today's Featured Visual Proof & Interactive Applet Card -->
-        <div class="rounded-xl bg-surface-container-low p-3.5 border border-surface-variant flex flex-col gap-2.5">
-          <div class="flex items-start justify-between gap-3 flex-wrap">
-            <div class="flex-1 min-w-[240px]">
-              <div class="flex items-center gap-1.5 flex-wrap mb-1">
-                <span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-badge text-[11px] font-bold" id="todayGgbDomain">📐 오늘의 동적 기하 · 시각적 증명</span>
-                <span class="text-[11px] text-on-surface-variant font-semibold" id="todayGgbBreadcrumb">내용순 배열 ▸ 이차곡선 ▸ 타원</span>
-                <span class="text-[11px] text-secondary font-bold" id="todayGgbCounter">(1 / 12)</span>
-              </div>
-              <div class="font-headline-sm text-[15px] font-bold text-on-surface leading-snug" id="todayGgbTitle">타원에서의 빛 반사 (광학적 성질)</div>
-              <p class="font-body-sm text-xs text-on-surface-variant mt-1 mb-0 leading-relaxed" id="todayGgbDesc">한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다.</p>
-              <div class="mt-1.5 text-xs text-[#B45309] font-semibold" id="todayGgbTip">💡 수능 실전 보조선 팁: 타원·포물선·쌍곡선 문제에서는 항상 초점과 접점을 잇는 반사 대칭 보조선을 먼저 그으세요.</div>
-            </div>
-            <div class="flex flex-col items-end gap-1.5 shrink-0">
-              <div class="flex items-center gap-1">
-                <button type="button" onclick="rotateTodayGeoGebra(-1)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-surface-container text-on-surface text-xs font-bold border border-surface-variant cursor-pointer">◀ 이전</button>
-                <button type="button" onclick="rotateTodayGeoGebra(1)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-surface-container text-on-surface text-xs font-bold border border-surface-variant cursor-pointer">다음 ▶</button>
-                <button type="button" onclick="speakTodayGeoGebra(this)" class="mathedu-voice-btn text-xs">🔊 도슨트</button>
-              </div>
-              <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                <button type="button" id="btnTodayGgbInlineToggle" onclick="toggleTodayInlineViewer('applet')" class="px-2.5 py-1.5 rounded-lg bg-secondary text-white text-xs font-bold border-0 cursor-pointer hover:opacity-90">🎮 인라인 실험실 열기</button>
-                <button type="button" onclick="toggleTodayInlineViewer('pdf')" class="px-2.5 py-1.5 rounded-lg bg-status-amber/20 text-[#B45309] text-xs font-bold border-0 cursor-pointer hover:bg-status-amber/30">📄 인라인 플립북 PDF</button>
-                <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-secondary/10 hover:bg-secondary/20 text-secondary text-xs font-bold no-underline">GeoGebra ↗</a>
-                <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold no-underline">PDF 새창 ↗</a>
-                <a id="btnTodayGgbYt" href="https://youtu.be/AVFodL71fSk" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0369a1] text-xs font-bold no-underline">▶️ 해설 영상 ↗</a>
-                <a id="btnTodayGgbWeb" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant text-xs font-semibold no-underline">원문 ↗</a>
-              </div>
-            </div>
-          </div>
-          <!-- Collapsible Inline Interactive GeoGebra / PDF Viewer -->
-          <div id="todayGgbInlineFrameWrap" style="display:none;" class="mt-2 pt-2.5 border-t border-surface-variant flex flex-col gap-2">
-            <div class="flex items-center justify-between text-xs">
-              <span class="font-bold text-secondary" id="todayGgbInlineLabel">🎮 실시간 동적 기하 · 시각적 증명 실험실</span>
-              <button type="button" onclick="closeTodayInlineViewer()" class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border-0 cursor-pointer text-xs font-bold">✕ 실험실 닫기</button>
-            </div>
-            <div class="w-full rounded-xl overflow-hidden border border-surface-variant bg-white" style="height:440px;">
-              <iframe id="todayGgbInlineIframe" src="about:blank" class="w-full h-full border-0" allowfullscreen loading="lazy" title="민은기 선생님의 수학자료실 인터랙티브 뷰어"></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- 16 Curriculum Domains Quick Explorer Pills -->
-        <div class="flex flex-col gap-1.5">
-          <div class="flex items-center justify-between text-xs flex-wrap gap-1">
-            <span class="font-bold text-on-surface-variant">🧭 수학자료실 16대 영역 원클릭 심층 탐색 (클릭 시 단원별 원리·보조선·초등 4단계 디딤돌 즉시 열람):</span>
-            <button type="button" onclick="openMin7014ExplorerModal()" class="text-secondary font-bold bg-transparent border-0 cursor-pointer p-0 text-xs hover:underline">전체 1,113개 주제 탐색관 열기 ➔</button>
-          </div>
-          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-            <button type="button" onclick="openMin7014Domain('유클리드 평면기하')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">📐 유클리드 평면기하 (189)</button>
-            <button type="button" onclick="openMin7014Domain('다항식·방정식·수체계')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🔢 다항식·방정식·수체계 (178)</button>
-            <button type="button" onclick="openMin7014Domain('미분·도함수')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">📈 미분·도함수 (101)</button>
-            <button type="button" onclick="openMin7014Domain('이차곡선·원뿔곡선')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪐 이차곡선·단델린 (85)</button>
-            <button type="button" onclick="openMin7014Domain('벡터·공간도형')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🧭 벡터·공간도형 (80)</button>
-            <button type="button" onclick="openMin7014Domain('지수·로그')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🌱 지수·로그 (70)</button>
-            <button type="button" onclick="openMin7014Domain('함수의 극한과 연속')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🎯 극한과 연속 (69)</button>
-            <button type="button" onclick="openMin7014Domain('해석기하·원의 방정식')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⭕ 해석기하·원 (61)</button>
-            <button type="button" onclick="openMin7014Domain('삼각비·삼각함수')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🌊 삼각비·삼각함수 (54)</button>
-            <button type="button" onclick="openMin7014Domain('함수·집합·그래프')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🔗 함수·집합·그래프 (49)</button>
-            <button type="button" onclick="openMin7014Domain('기하 변환·대칭')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪞 기하 변환·대칭 (36)</button>
-            <button type="button" onclick="openMin7014Domain('확률과 통계')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🎲 확률과 통계 (35)</button>
-            <button type="button" onclick="openMin7014Domain('방정식·부등식')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⚖️ 방정식·부등식 (32)</button>
-            <button type="button" onclick="openMin7014Domain('적분·구분구적법')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⏳ 적분·구분구적법 (32)</button>
-            <button type="button" onclick="openMin7014Domain('수열·시그마')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪜 수열·시그마 (22)</button>
-            <button type="button" onclick="openMin7014Domain('__CONSTRUCTION__')" class="px-2.5 py-1.5 rounded-lg bg-[#f3e8ff] hover:bg-[#e9d5ff] text-[#6d28d9] font-bold border border-[#d8b4fe] shrink-0 cursor-pointer">📏 작도 60선</button>
-          </div>
-          <!-- Direct Hub Links to min7014.github.io -->
-          <div class="flex items-center gap-3 flex-wrap pt-1 text-[11.5px] text-on-surface-variant">
-            <span class="font-bold text-on-surface">🌐 수학자료실 본관 직통 허브:</span>
-            <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">📑 내용순 배열(전 단원 트리) ↗</a>
-            <a href="https://min7014.github.io/2019021101.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🗓️ 만든순서별 아카이브 ↗</a>
-            <a href="https://min7014.github.io/2019081603.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">📏 눈금 없는 자와 컴퍼스 작도 ↗</a>
-            <a href="https://min7014.github.io/2019030303.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🏫 학년도별 수학수업(2015~2023) ↗</a>
-            <a href="https://min7014.github.io/math20240225002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🏫 2024학년도 수학수업 ↗</a>
-            <a href="https://min7014.github.io/math20191130002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🎙️ 특강·강의 자료 ↗</a>
-            <a href="https://min7014.github.io/math20250129002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🧪 기타자료·Python Colab ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 👩‍🏫 수석 수학교사(mathteacher) 수학교육 발전 4대 핵심 모듈 스튜디오 -->
-    <div class="px-margin mt-space-sm" id="mathTeacherPedagogySection">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-secondary/20 flex flex-col gap-3">
-        <div class="flex items-center justify-between gap-2 flex-wrap">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center font-bold text-base">👩‍🏫</span>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">수학교사 에이전트(mathteacher) 수학교육 발전 5대 혁신 스튜디오 (탈-5지선다 창의 구성 통합)</h2>
-                <span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge font-bold">Freudenthal · Pólya · Lakatos · Brown &amp; Walter (탈-5지선다)</span>
-              </div>
-              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">초등 기초 직관부터 중등 기하·대수 시각 증명(`min7014.github.io`), 고등 수능 100점 킬러까지 단절 없는 학습 사다리를 제공합니다.</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <button type="button" onclick="openMathTeacherHubModal('philosophy')" class="h-8 px-3 rounded-lg bg-[#059669] text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95 shadow-sm">🏛️ 수학교육 철학 &amp; 왜 수학을 배울까? ➔</button>
-            <button type="button" onclick="openMathTeacherHubModal('question')" class="h-8 px-3 rounded-lg bg-[#0284c7] text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95 shadow-sm">❓ 질문하는 수학 수업 스튜디오 ➔</button>
-            <button type="button" onclick="openMathTeacherHubModal('genealogy')" class="h-8 px-3 rounded-lg bg-secondary text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95">🎓 전체 수학교육 발전 스튜디오 열기 ➔</button>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 text-xs">
-          <button type="button" onclick="openMathTeacherHubModal('genealogy')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-secondary/10 border border-surface-variant hover:border-secondary transition-all cursor-pointer flex flex-col justify-between gap-1.5">
-            <div>
-              <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="font-extrabold text-secondary text-[13px]">🌳 1. 초·중·고 수직 계통성 트리</span>
-                <span class="px-1.5 py-0.5 rounded bg-secondary/15 text-secondary font-bold text-[10px]">1065대 계보</span>
-              </div>
-              <div class="text-on-surface-variant leading-snug">고등 수학에서 막히는 진짜 이유인 초·중등 뿌리 개념(비율➔기울기➔미분, 모눈➔구분구적➔적분)을 한눈에 복원합니다.</div>
-            </div>
-            <div class="text-secondary font-bold text-[11px] pt-1">계보 트리 &amp; 기출 연동 열기 ➔</div>
-          </button>
-
-          <button type="button" onclick="openMathTeacherHubModal('polya')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-[#fef3c7]/60 border border-surface-variant hover:border-[#d97706] transition-all cursor-pointer flex flex-col justify-between gap-1.5">
-            <div>
-              <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">1069대 법칙</span>
-              </div>
-              <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
-            </div>
-            <div class="text-[#b45309] font-bold text-[11px] pt-1">1초 보조선 번역 사전 열기 ➔</div>
-          </button>
-
-          <button type="button" onclick="openMathTeacherHubModal('vaccine')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-[#e0f2fe]/50 border border-surface-variant hover:border-[#0284c7] transition-all cursor-pointer flex flex-col justify-between gap-1.5">
-            <div>
-              <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="font-extrabold text-[#0369a1] text-[13px]">🔬 3. 오개념 백신 &amp; 반례 실험실</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#e0f2fe] text-[#0369a1] font-bold text-[10px]">1064대 반례</span>
-              </div>
-              <div class="text-on-surface-variant leading-snug">"f'(a)=0이면 무조건 극값?", "역함수 교점은 무조건 y=x 위?" 학생들이 가장 많이 속는 함정을 1초 반례로 예방합니다.</div>
-            </div>
-            <div class="text-[#0369a1] font-bold text-[11px] pt-1">오개념 진단 &amp; 반례 실험 ➔</div>
-          </button>
-
-          <button type="button" onclick="openMathTeacherHubModal('lesson')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-[#dcfce7]/50 border border-surface-variant hover:border-[#059669] transition-all cursor-pointer flex flex-col justify-between gap-1.5">
-            <div>
-              <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="font-extrabold text-[#047857] text-[13px]">👩‍🏫 4. 교사용 5분 탐구 발문 런처</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#dcfce7] text-[#047857] font-bold text-[10px]">수업 시나리오</span>
-              </div>
-              <div class="text-on-surface-variant leading-snug">수업 시작 5분, 칠판에 띄워 학생들의 호기심("왜 그럴까?")을 깨우는 발문·GeoGebra 미션·모둠 토의 질문 템플릿입니다.</div>
-            </div>
-            <div class="text-[#047857] font-bold text-[11px] pt-1">5분 수업 발문 시나리오 열기 ➔</div>
-          </button>
-
-          <button type="button" onclick="openMathTeacherHubModal('creative')" class="text-left p-3 rounded-xl bg-gradient-to-br from-[#eef2ff] to-[#f5f3ff] hover:from-[#e0e7ff] hover:to-[#ede9fe] border-2 border-[#6366f1] transition-all cursor-pointer flex flex-col justify-between gap-1.5 shadow-sm">
-            <div>
-              <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="font-extrabold text-[#4338ca] text-[13px]">✍️ 5. 탈-5지선다 창의 구성 실험실</span>
-                <span class="px-1.5 py-0.5 rounded bg-[#4f46e5] text-white font-bold text-[10px]">NEW 창의력</span>
-              </div>
-              <div class="text-slate-700 leading-snug">객관식 찍기를 넘어 <b>[제1발상 스케치 ➔ 수식 블록 직접 조립 ➔ 다중 해법 ➔ What-If-Not 문제 발명]</b>으로 창의성을 깨웁니다.</div>
-            </div>
-            <div class="text-[#4338ca] font-extrabold text-[11px] pt-1">탈-5지선다 &amp; 문제 발명 열기 ➔</div>
-          </button>
-        </div>
-      </div>
-    </div>
-
-
-    
-    <!-- ✨ 학생들의 수학적 호기심을 깨우는 [인터랙티브 수학 경이(Wonder) 실험실 & 수학교육 5대 철학] -->
-    <div class="px-margin mt-space-sm" id="mathCuriosityPhilosophySection">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border-2 border-amber-500/35 flex flex-col gap-3">
-        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-700 flex items-center justify-center font-bold text-base">✨</span>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">눈으로 만지는 수학의 경이(Wonder) 실험실 &amp; 수학교육 철학</h2>
-                <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-label-badge text-[11px] font-extrabold">🏛️ "수학은 암기가 아니라 눈으로 보는 예술이자 질문하는 탐험이다"</span>
-              </div>
-              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">공식을 외우기 전에 슬라이더를 직접 움직여 자연·우주·AI 속에 숨겨진 수학의 아름다움과 "왜 이 수학을 배우는가?"를 먼저 체험해 보세요!</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-1.5 flex-wrap">
-            <button type="button" onclick="openMathTeacherHubModal('philosophy')" class="h-8 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-label-badge text-xs font-extrabold border-0 cursor-pointer shadow-sm">🌍 "선생님, 이 수학 왜 배워요?" 8대 호기심 도감 열기 ➔</button>
-            <a href="video_board.html?mode=question_ko" class="h-8 px-3 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-label-badge text-xs font-extrabold no-underline flex items-center">🎬 질문형 시각 증명 영상 ➔</a>
-          </div>
-        </div>
-
-        <!-- Live Interactive Mathematical Wonder Playground + Real-World Why Card -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
-          <!-- Left 7 Cols: Interactive Canvas Laboratory -->
-          <div class="lg:col-span-7 rounded-xl bg-[#0f172a] text-white p-3.5 flex flex-col justify-between gap-2.5 border border-slate-700 shadow-inner">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <div class="flex items-center gap-1.5 flex-wrap" id="wonderLabModeTabs">
-                <button type="button" onclick="switchWonderLabMode('pythagoras')" data-wonder-tab="pythagoras" class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-extrabold text-[11.5px] border-0 cursor-pointer">🌿 1. 피타고라스 프랙탈 나무</button>
-                <button type="button" onclick="switchWonderLabMode('archimedes')" data-wonder-tab="archimedes" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 font-bold text-[11.5px] border border-slate-600 cursor-pointer">🎯 2. 아르키메데스 원주율(π) 극한</button>
-                <button type="button" onclick="switchWonderLabMode('sunflower')" data-wonder-tab="sunflower" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 font-bold text-[11.5px] border border-slate-600 cursor-pointer">🌻 3. 해바라기 황금각과 피보나치</button>
-              </div>
-              <span class="text-[11px] text-amber-300 font-bold" id="wonderLabFormulaBadge">a² + b² = c² (넓이 보존의 마법)</span>
-            </div>
-
-            <div class="relative w-full rounded-lg overflow-hidden bg-[#090d16] border border-slate-800 flex items-center justify-center" style="height:230px;">
-              <canvas id="mathWonderInteractiveCanvas" width="640" height="230" class="w-full h-full block"></canvas>
-              <div id="wonderCanvasOverlayStat" class="absolute top-2 left-2.5 px-2.5 py-1 rounded-md bg-slate-900/85 border border-amber-400/40 text-[11px] text-amber-200 font-mono pointer-events-none"></div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
-              <div class="flex items-center gap-2 flex-1">
-                <span class="font-extrabold text-amber-400 shrink-0" id="wonderSlider1Label">📐 직각삼각형 각도 θ: 40°</span>
-                <input type="range" id="wonderSlider1" min="18" max="72" value="40" oninput="updateWonderLabCanvas()" class="flex-1 accent-amber-400 cursor-pointer" />
-              </div>
-              <div class="flex items-center gap-2 flex-1" id="wonderSlider2Wrap">
-                <span class="font-extrabold text-emerald-400 shrink-0" id="wonderSlider2Label">🌳 가지 단계: 6단</span>
-                <input type="range" id="wonderSlider2" min="1" max="8" value="6" oninput="updateWonderLabCanvas()" class="flex-1 accent-emerald-400 cursor-pointer" />
-              </div>
-            </div>
-            <div class="text-[11.5px] text-slate-300 leading-snug" id="wonderLabInsightCaption">
-              💡 <b>관찰과 경이(Notice &amp; Wonder):</b> 각도 θ를 아무리 바꾸어도 두 작은 정사각형 넓이의 합(a²+b²)은 언제나 아래 기둥 정사각형 넓이(c²)와 정확히 일치하며 아름다운 숲을 이룹니다!
-            </div>
-          </div>
-
-          <!-- Right 5 Cols: "Why We Learn Math" Real-World Curiosity Carousel & Eureka Mindset -->
-          <div class="lg:col-span-5 flex flex-col justify-between gap-2.5">
-            <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#fffbeb] to-[#f0fdf4] border border-amber-300 flex flex-col justify-between gap-2 flex-1">
-              <div class="flex flex-col gap-1.5">
-                <div class="flex items-center justify-between gap-1">
-                  <span class="px-2 py-0.5 rounded bg-amber-600 text-white font-extrabold text-[10.5px]" id="curiosityCardDomainBadge">이차곡선 · 광학 기하</span>
-                  <div class="flex items-center gap-1">
-                    <button type="button" onclick="rotateCuriosityCard(-1)" class="px-2 py-0.5 rounded bg-white hover:bg-amber-50 text-slate-700 font-bold border border-amber-300 cursor-pointer">◀</button>
-                    <span class="text-[11px] font-bold text-amber-900" id="curiosityCardCounter">1 / 8</span>
-                    <button type="button" onclick="rotateCuriosityCard(1)" class="px-2 py-0.5 rounded bg-white hover:bg-amber-50 text-slate-700 font-bold border border-amber-300 cursor-pointer">▶</button>
-                  </div>
-                </div>
-                <div class="font-extrabold text-[13.5px] text-slate-900 leading-snug" id="curiosityCardQuestion">🌿 선생님, 나뭇가지와 브로콜리, 혈관은 왜 피타고라스 나무처럼 갈라질까요?</div>
-                <div class="text-slate-700 leading-relaxed text-[11.8px]" id="curiosityCardStory">자연은 최소한의 에너지로 최대한 넓은 면적에 햇빛과 산소를 전달해야 합니다. 피타고라스 정리(a²+b²=c²)를 따라 가지가 갈라지면 줄기 단면적의 합이 끝까지 보존됩니다!</div>
-                <div class="p-2 rounded-lg bg-white/90 border border-amber-200 text-[11.2px] text-amber-950 font-semibold" id="curiosityCardExperiment">🤔 <b>30초 사고 실험:</b> 맨 아래 기둥 넓이가 1일 때 10단계 끝 나뭇잎 1,024개의 넓이 합은 얼마일까요?</div>
-              </div>
-              <div class="flex items-center gap-1.5 pt-1 flex-wrap">
-                <a id="curiosityCardVideoLink" href="video_board.html?slug=math20250130001&mode=question_ko" class="flex-1 py-1.5 px-2.5 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-extrabold text-center no-underline text-[11px]">🎬 질문형 시각 증명 보기</a>
-                <button type="button" id="curiosityCardQuizBtn" onclick="triggerSmartQuizSearch('피타고라스 직각삼각형 넓이', true)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-secondary hover:opacity-95 text-white font-extrabold border-0 cursor-pointer text-[11px]">✍️ 관련 기출 디딤돌 풀기</button>
-              </div>
-            </div>
-
-            <!-- Productive Struggle & Eureka Journal Mini Box -->
-            <div class="p-3 rounded-xl bg-gradient-to-r from-[#ecfdf5] to-[#eff6ff] border border-emerald-300 flex flex-col gap-1.5">
-              <div class="flex items-center justify-between gap-1">
-                <span class="font-extrabold text-emerald-900 text-[12px]">💎 나의 수학적 깨달음(Eureka) 한 줄 사색 일지</span>
-                <span class="text-[10.5px] font-bold text-emerald-800">누적 통찰: <b id="eurekaJournalCountBadge">0</b>건</span>
-              </div>
-              <div class="text-[11px] text-slate-600 leading-snug">틀렸던 문제에서 찾은 반례나 오늘 나를 감탄하게 만든 보조선·원리를 한 줄로 기록해 보세요!</div>
-              <div class="flex gap-1.5">
-                <input type="text" id="quickEurekaJournalInput" placeholder="예: 원의 접선이 나오면 중심과 접점을 잇는 반지름이 항상 수직(90°)이다!" class="flex-1 h-8 px-2.5 rounded-lg bg-white border border-emerald-300 text-xs text-slate-900" />
-                <button type="button" onclick="saveQuickEurekaJournal()" class="px-3 h-8 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] border-0 cursor-pointer shrink-0">💾 통찰 기록</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    
-    <!-- 🌐 세계 5대 수학교육 플랫폼 벤치마킹 · 글로벌 인터랙티브 수학 아카데미 (Desmos · Mathigon Polypad · Brilliant · NRICH Cambridge · AoPS/Khan) -->
-    <div class="px-margin mt-space-sm" id="globalMathBenchmarkSection">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border-2 border-indigo-500/40 flex flex-col gap-3">
-        <!-- Top Header & Elo Rating / Mastery Summary -->
-        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-lg bg-indigo-600/15 text-indigo-700 flex items-center justify-center font-bold text-base">🌐</span>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">글로벌 5대 수학교육 명작 벤치마킹 · 인터랙티브 수학 아카데미</h2>
-                <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-900 font-label-badge text-[11px] font-extrabold">Desmos · Mathigon Polypad · Brilliant · NRICH · AoPS 융합</span>
-              </div>
-              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">전 세계 수학교육을 선도하는 5대 플랫폼의 핵심 인터랙션(함수 구슬 챌린지 · 폴리패드 대수타일/양팔저울 · 10초 시각 직관 퍼즐 · 수학사 타임라인 &amp; 마스터리 맵)을 민은기 선생님의 1,113개 시각 증명 및 16,548문항 기출과 결합했습니다.</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-1.5 flex-wrap">
-            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-amber-300 font-extrabold text-[11px] border border-amber-400/40">🏆 AoPS형 수학 레이팅: <b id="aopsEloRatingBadge">1250</b> (<span id="aopsTierLabel">탐구자 Explorer</span>)</span>
-            <button type="button" onclick="openMathTeacherHubModal('benchmark')" class="h-8 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-label-badge text-xs font-extrabold border-0 cursor-pointer shadow-sm">📊 5대 글로벌 벤치마킹 전체 분석 ➔</button>
-          </div>
-        </div>
-
-        <!-- 4 Benchmark Studio Mode Tabs -->
-        <div class="flex items-center gap-1.5 flex-wrap" id="benchmarkAcademyTabs">
-          <button type="button" onclick="switchBenchmarkStudioTab('desmos')" data-bm-tab="desmos" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-extrabold text-xs border-0 cursor-pointer shadow-sm">🎢 1. [Desmos형] Marbleslides 함수 구슬 챌린지</button>
-          <button type="button" onclick="switchBenchmarkStudioTab('polypad')" data-bm-tab="polypad" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-xs border border-surface-variant cursor-pointer">🧱 2. [Mathigon형] 폴리패드 대수타일 &amp; 양팔저울</button>
-          <button type="button" onclick="switchBenchmarkStudioTab('brilliant')" data-bm-tab="brilliant" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-xs border border-surface-variant cursor-pointer">🧩 3. [Brilliant×NRICH형] 낮은 문턱·높은 천장 시각 퍼즐</button>
-          <button type="button" onclick="switchBenchmarkStudioTab('timeline')" data-bm-tab="timeline" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-xs border border-surface-variant cursor-pointer">🏛️ 4. [Mathigon×Khan형] 인류 수학사 타임라인 &amp; 16대 영역 마스터리</button>
-        </div>
-
-        <!-- TAB 1: Desmos Marbleslides Function Challenge -->
-        <div id="bmPanel_desmos" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
-          <div class="lg:col-span-7 rounded-xl bg-[#090d16] text-white p-3.5 border border-slate-800 flex flex-col justify-between gap-2">
-            <div class="flex items-center justify-between gap-1.5 flex-wrap">
-              <div class="flex items-center gap-1 flex-wrap" id="marbleStageBtns">
-                <button type="button" onclick="selectMarbleStage(0)" data-mstage="0" class="px-2 py-1 rounded bg-indigo-500 text-white font-extrabold text-[11px] border-0 cursor-pointer">Stage 1 · 일차함수</button>
-                <button type="button" onclick="selectMarbleStage(1)" data-mstage="1" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 2 · 이차포물선</button>
-                <button type="button" onclick="selectMarbleStage(2)" data-mstage="2" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 3 · 삼각사인파</button>
-                <button type="button" onclick="selectMarbleStage(3)" data-mstage="3" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 4 · 절댓값 V계곡</button>
-                <button type="button" onclick="selectMarbleStage(4)" data-mstage="4" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 5 · 삼차변곡점</button>
-              </div>
-              <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono font-bold text-[11px]" id="marbleStarScoreBadge">★ 0 / 4 획득</span>
-            </div>
-            <div class="relative w-full rounded-lg overflow-hidden bg-[#050811] border border-slate-800" style="height:230px;">
-              <canvas id="desmosMarbleslidesCanvas" width="640" height="230" class="w-full h-full block"></canvas>
-              <div id="marbleFormulaOverlay" class="absolute top-2 left-2.5 px-2.5 py-1 rounded bg-slate-900/90 border border-indigo-400/40 text-indigo-200 font-mono text-[11.5px]">y = -0.15x + 1.8</div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
-              <div class="flex items-center gap-2">
-                <span class="font-extrabold text-sky-400 shrink-0" id="marbleParamALabel">기울기 a: -0.15</span>
-                <input type="range" id="marbleParamASlider" min="-1.5" max="0.5" step="0.05" value="-0.15" oninput="onMarbleSliderChange()" class="flex-1 accent-sky-400 cursor-pointer" />
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="font-extrabold text-amber-400 shrink-0" id="marbleParamBLabel">y절편 b: 1.8</span>
-                <input type="range" id="marbleParamBSlider" min="-2.0" max="3.0" step="0.1" value="1.8" oninput="onMarbleSliderChange()" class="flex-1 accent-amber-400 cursor-pointer" />
-              </div>
-            </div>
-          </div>
-          <div class="lg:col-span-5 flex flex-col justify-between gap-2.5 p-3.5 rounded-xl bg-gradient-to-br from-[#eef2ff] to-[#f8fafc] border border-indigo-200">
-            <div class="flex flex-col gap-2">
-              <div class="flex items-center justify-between gap-1">
-                <span class="px-2 py-0.5 rounded bg-indigo-600 text-white font-extrabold text-[10.5px]">🇺🇸 Desmos Classroom 벤치마킹</span>
-                <span class="text-[11px] font-bold text-indigo-900" id="marbleConceptBadge">중1·중2 일차함수의 기울기와 절편</span>
-              </div>
-              <div class="font-extrabold text-[14px] text-slate-900 leading-snug" id="marbleStageTitle">Stage 1 · 일차함수 미끄럼틀 다리 (y = a·x + b)</div>
-              <div class="text-slate-700 leading-relaxed text-[12px]" id="marbleMissionText">기울기 a와 y절편 b 슬라이더를 조절해 왼쪽 위에서 떨어지는 구슬이 황금 별(★) 4개를 모두 스치고 지나가게 만드세요!</div>
-              <div class="p-2.5 rounded-lg bg-white border border-indigo-200 text-indigo-950 font-semibold text-[11.5px]" id="marbleHintBox">💡 <b>수학교사 발문 힌트:</b> 별들이 오른쪽 아래로 내려가고 있으므로 기울기 a를 음수(-0.45)로 맞추고, y절편 b를 0.6으로 조절해 보세요!</div>
-            </div>
-            <div class="flex flex-col gap-1.5 pt-1">
-              <div class="flex items-center gap-1.5">
-                <button type="button" onclick="launchDesmosMarbles()" class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-rose-600 to-amber-600 hover:from-rose-700 hover:to-amber-700 text-white font-extrabold text-xs border-0 cursor-pointer shadow">🔴 구슬 발사! (Launch Marbles)</button>
-                <button type="button" onclick="applyMarbleTargetHint()" class="py-2 px-2.5 rounded-lg bg-white hover:bg-indigo-50 text-indigo-800 font-extrabold text-[11px] border border-indigo-300 cursor-pointer">✨ 최적 궤적 맞추기</button>
-              </div>
-              <button type="button" onclick="triggerSmartQuizSearch('함수 그래프 기울기 평행이동', true)" class="w-full py-1.5 px-3 rounded-lg bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 방금 실험한 함수 개념으로 수능·모평 기출 도전하기 ➔</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB 2: Mathigon Polypad Virtual Manipulatives (Algebra Tiles & Balance Scale) -->
-        <div id="bmPanel_polypad" style="display:none;" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
-          <div class="lg:col-span-7 rounded-xl bg-[#090d16] text-white p-3.5 border border-slate-800 flex flex-col justify-between gap-2">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <div class="flex items-center gap-1.5">
-                <button type="button" onclick="switchPolypadMode('tiles')" id="polyBtn_tiles" class="px-2.5 py-1 rounded bg-emerald-500 text-slate-950 font-extrabold text-[11px] border-0 cursor-pointer">🟦 대수타일 넓이 조립: (x+a)(x+b)</button>
-                <button type="button" onclick="switchPolypadMode('balance')" id="polyBtn_balance" class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 font-bold text-[11px] border border-slate-700 cursor-pointer">⚖️ 등식의 성질 양팔저울: 2x + a = x + b</button>
-              </div>
-              <span class="text-emerald-300 font-mono font-bold text-[11px]" id="polypadEquationBadge">(x + 2)(x + 3) = x² + 5x + 6</span>
-            </div>
-            <div class="relative w-full rounded-lg overflow-hidden bg-[#050811] border border-slate-800" style="height:230px;">
-              <canvas id="mathigonPolypadCanvas" width="640" height="230" class="w-full h-full block"></canvas>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
-              <div class="flex items-center gap-2">
-                <span class="font-extrabold text-emerald-400 shrink-0" id="polySlider1Label">가로 상수 a: 2</span>
-                <input type="range" id="polySlider1" min="1" max="5" step="1" value="2" oninput="renderPolypadCanvas()" class="flex-1 accent-emerald-400 cursor-pointer" />
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="font-extrabold text-amber-400 shrink-0" id="polySlider2Label">세로 상수 b: 3</span>
-                <input type="range" id="polySlider2" min="1" max="5" step="1" value="3" oninput="renderPolypadCanvas()" class="flex-1 accent-amber-400 cursor-pointer" />
-              </div>
-            </div>
-          </div>
-          <div class="lg:col-span-5 flex flex-col justify-between gap-2.5 p-3.5 rounded-xl bg-gradient-to-br from-[#ecfdf5] to-[#f8fafc] border border-emerald-300">
-            <div class="flex flex-col gap-2">
-              <span class="px-2 py-0.5 rounded bg-emerald-700 text-white font-extrabold text-[10.5px] w-fit">🇬🇧 Mathigon Polypad 벤치마킹 · 가상 수학 교구</span>
-              <div class="font-extrabold text-[14px] text-slate-900 leading-snug" id="polypadRightTitle">눈으로 만지는 대수타일(Algebra Tiles)과 양팔저울</div>
-              <div class="text-slate-700 leading-relaxed text-[12px]" id="polypadRightDesc">추상적인 다항식 전개 공식 (x+a)(x+b) = x² + (a+b)x + ab를 외우지 마세요! 파란색 x² 정사각형 1개, 초록색 x 막대 (a+b)개, 노란색 1 타일 (a×b)개가 빈틈없이 직사각형으로 조립되는 넓이 보존 원리입니다.</div>
-              <div class="p-2.5 rounded-lg bg-white border border-emerald-200 text-emerald-950 font-semibold text-[11.5px]" id="polypadRightInsight">💡 <b>교실 발문:</b> 왜 일차항의 계수는 두 수의 합(a+b)이고 상수항은 두 수의 곱(ab)이 될까요? 타일의 가로·세로 조각 개수를 세어 보세요!</div>
-            </div>
-            <div class="flex items-center gap-1.5 pt-1">
-              <a href="video_board.html?slug=2017032001&mode=question_ko" class="flex-1 py-2 px-2.5 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-extrabold text-center no-underline text-[11px]">🎬 대수·다항식 시각 증명 영상</a>
-              <button type="button" onclick="triggerSmartQuizSearch('인수분해 다항식 곱셈공식', true)" class="flex-1 py-2 px-2.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 다항식·방정식 기출 도전 ➔</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB 3: Brilliant × NRICH Cambridge Low-Floor High-Ceiling Visual Puzzles -->
-        <div id="bmPanel_brilliant" style="display:none;" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
-          <div class="lg:col-span-7 p-4 rounded-xl bg-gradient-to-br from-[#fffbeb] to-[#f0f9ff] border border-amber-300 flex flex-col justify-between gap-2.5">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-600 text-white font-extrabold text-[11px]" id="lfhcBadge">Brilliant × NRICH 01 · 대수와 도형의 결합</span>
-              <div class="flex items-center gap-1">
-                <button type="button" onclick="stepLfhcTask(-1)" class="px-2.5 py-1 rounded bg-white hover:bg-amber-50 border border-amber-300 font-bold cursor-pointer">◀ 이전 퍼즐</button>
-                <span class="px-2 font-extrabold text-amber-950" id="lfhcCounter">1 / 6</span>
-                <button type="button" onclick="stepLfhcTask(1)" class="px-2.5 py-1 rounded bg-white hover:bg-amber-50 border border-amber-300 font-bold cursor-pointer">다음 퍼즐 ▶</button>
-              </div>
-            </div>
-            <div class="font-extrabold text-[15px] text-slate-900 leading-snug" id="lfhcTitle">홀수들을 차례대로 더하면 왜 무조건 '정사각형 제곱수'가 될까?</div>
-            <div class="p-2.5 rounded-lg bg-white border border-emerald-300 text-slate-800 leading-relaxed" id="lfhcLowFloor">🧒 <b>[초등 입문 (Low Floor)]:</b> 1 + 3 = 4(2²), 1 + 3 + 5 = 9(3²), 1 + 3 + 5 + 7 = 16(4²)입니다. 그렇다면 1부터 19까지의 홀수 10개를 모두 더하면 얼마일까요?</div>
-            <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-950 leading-relaxed" id="lfhcVisualIntuition">🎨 <b>[10초 시각 직관 (Brilliant Aha!)]:</b> 바둑돌 1개에 ㄱ자 모양(L-shape)으로 3개, 5개, 7개를 둘러싸 보세요! 한 변이 1칸씩 커지는 완벽한 정사각형(n × n)이 만들어집니다!</div>
-            <div class="p-2.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-950 leading-relaxed" id="lfhcHighCeiling">🎓 <b>[고등·수능 천장 (High Ceiling)]:</b> ∑(k=1~n) (2k - 1) = n² 이며, 연속된 두 제곱수의 차 n² - (n-1)² = 2n - 1은 이차함수 x²의 미분 도함수(2x)의 이산적 원형입니다.</div>
-          </div>
-          <div class="lg:col-span-5 p-4 rounded-xl bg-slate-900 text-white border border-slate-700 flex flex-col justify-between gap-2.5">
-            <div class="flex flex-col gap-2">
-              <span class="px-2 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10.5px] w-fit">⚡ Learn by Doing · 10초 무계산 직관 챌린지</span>
-              <div class="font-extrabold text-[13.5px] text-amber-300 leading-snug" id="lfhcQuestionPrompt">1 + 3 + 5 + ... + 19 (첫 10개 홀수의 합)의 값을 숫자로 입력해 보세요!</div>
-              <div class="flex gap-1.5 mt-1">
-                <input type="text" id="lfhcAnswerInput" placeholder="정답 숫자 입력..." onkeydown="if(event.key==='Enter')checkLfhcAnswer()" class="flex-1 h-9 px-3 rounded-lg bg-slate-800 border border-slate-600 text-white font-bold text-xs" />
-                <button type="button" onclick="checkLfhcAnswer()" class="px-3.5 h-9 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs border-0 cursor-pointer">정답 확인 (+40 XP)</button>
-              </div>
-              <div id="lfhcFeedbackBox" class="hidden p-2.5 rounded-lg bg-emerald-950/90 border border-emerald-400 text-emerald-200 text-[11.5px] leading-relaxed"></div>
-            </div>
-            <div class="flex items-center gap-1.5 pt-2 border-t border-slate-800">
-              <a id="lfhcVideoBtn" href="video_board.html?slug=2017031403&mode=question_ko" class="flex-1 py-2 px-2.5 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-extrabold text-center no-underline text-[11px]">🎬 질문형 시각 증명 영상</a>
-              <button type="button" id="lfhcQuizBtn" onclick="triggerSmartQuizSearch('등차수열 홀수 합 시그마', true)" class="flex-1 py-2 px-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 수능 연계 문항 풀기 ➔</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB 4: Mathigon Historical Timeline & Khan/AoPS 16-Domain Mastery Matrix -->
-        <div id="bmPanel_timeline" style="display:none;" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
-          <!-- Left 6 Cols: Interactive Timeline of Great Mathematicians -->
-          <div class="lg:col-span-6 p-3.5 rounded-xl bg-gradient-to-br from-[#f8fafc] to-[#eef2ff] border border-indigo-200 flex flex-col justify-between gap-2">
-            <div class="flex items-center justify-between gap-1 flex-wrap">
-              <span class="px-2 py-0.5 rounded bg-indigo-700 text-white font-extrabold text-[10.5px]">🏛️ Mathigon 벤치마킹 · 인류 수학사 타임라인</span>
-              <div class="flex items-center gap-1">
-                <button type="button" onclick="stepTimelineEra(-1)" class="px-2 py-0.5 rounded bg-white border border-indigo-200 font-bold cursor-pointer">◀</button>
-                <span class="font-extrabold text-indigo-950 text-[11px]" id="timelineEraCounter">1 / 10</span>
-                <button type="button" onclick="stepTimelineEra(1)" class="px-2 py-0.5 rounded bg-white border border-indigo-200 font-bold cursor-pointer">▶</button>
-              </div>
-            </div>
-            <div class="flex items-center justify-between gap-2">
-              <div>
-                <div class="text-[11px] font-extrabold text-indigo-700" id="tlEraBadge">BC 530 · 고대 그리스</div>
-                <div class="font-extrabold text-[15px] text-slate-900" id="tlMathematicianName">피타고라스 (Pythagoras)</div>
-              </div>
-              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-amber-300 font-mono font-bold text-xs" id="tlFormulaBadge">a² + b² = c²</span>
-            </div>
-            <div class="font-bold text-indigo-950 text-[12.5px]" id="tlSubtitle">만물의 근원은 수(Number)와 화음의 비례</div>
-            <div class="text-slate-700 leading-relaxed text-[11.8px]" id="tlStory">대장간의 망치 소리와 현악기의 줄 길이에서 정수 비례와 화음을 발견하고, 직각삼각형 세 변 위의 정사각형 넓이 보존 법칙을 증명했습니다.</div>
-            <div class="p-2 rounded-lg bg-white border border-indigo-200 text-slate-800 font-semibold text-[11px]" id="tlCurriculum">🔗 <b>교과과정 직결:</b> 중2 피타고라스 정리 · 고1 평면좌표 · 프랙탈 피타고라스 나무</div>
-            <div class="flex items-center gap-1.5 pt-1">
-              <a id="tlVideoLink" href="video_board.html?slug=math20250130001&mode=question_ko" class="flex-1 py-1.5 px-2.5 rounded-lg bg-[#0284c7] text-white font-extrabold text-center no-underline text-[11px]">🎬 이 수학자의 정리 영상 보기</a>
-              <button type="button" id="tlQuizBtn" onclick="triggerSmartQuizSearch('피타고라스 직각삼각형', true)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-indigo-600 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 관련 기출 문제 도전 ➔</button>
-            </div>
-          </div>
-
-          <!-- Right 6 Cols: Khan Academy × AoPS 16-Domain Mastery Matrix -->
-          <div class="lg:col-span-6 p-3.5 rounded-xl bg-slate-900 text-white border border-slate-700 flex flex-col justify-between gap-2">
-            <div class="flex items-center justify-between gap-2 flex-wrap">
-              <span class="px-2 py-0.5 rounded bg-emerald-600 text-white font-extrabold text-[10.5px]">📊 Khan × AoPS 벤치마킹 · 16대 영역 마스터리 맵</span>
-              <span class="text-[11px] text-emerald-300 font-bold">클릭 시 해당 단원 기출 &amp; 시각 증명 즉시 실행</span>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5" id="khanMasteryGrid">
-              <button type="button" onclick="triggerSmartQuizSearch('소인수분해 유리수 다항식', true)" class="p-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 text-left cursor-pointer"><div class="text-[10px] text-emerald-300 font-bold">👑 마스터</div><div class="font-extrabold text-[11px] text-white truncate">1. 수와 다항식</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('이차방정식 부등식 근과 계수', true)" class="p-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 text-left cursor-pointer"><div class="text-[10px] text-emerald-300 font-bold">👑 마스터</div><div class="font-extrabold text-[11px] text-white truncate">2. 방정식과 부등식</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('원의 방정식 직선 평행이동', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">3. 도형의 방정식</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('집합 명제 함수 역함수', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">4. 집합·명제·함수</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('지수함수 로그함수 그래프', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-left cursor-pointer"><div class="text-[10px] text-indigo-300 font-bold">⚡ 탐구 진행</div><div class="font-extrabold text-[11px] text-white truncate">5. 지수·로그함수</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('삼각함수 사인법칙 코사인법칙', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-left cursor-pointer"><div class="text-[10px] text-indigo-300 font-bold">⚡ 탐구 진행</div><div class="font-extrabold text-[11px] text-white truncate">6. 삼각함수·도형</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('등차수열 등비수열 귀납적', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-left cursor-pointer"><div class="text-[10px] text-indigo-300 font-bold">⚡ 탐구 진행</div><div class="font-extrabold text-[11px] text-white truncate">7. 수열과 귀납법</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('함수의 극한 연속 사이값', true)" class="p-2 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🔥 집중 공략</div><div class="font-extrabold text-[11px] text-white truncate">8. 함수의 극한·연속</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('미분계수 도함수 극대 극소', true)" class="p-2 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🔥 집중 공략</div><div class="font-extrabold text-[11px] text-white truncate">9. 다항함수 미분법</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('정적분 넓이 속도 거리', true)" class="p-2 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🔥 집중 공략</div><div class="font-extrabold text-[11px] text-white truncate">10. 다항함수 적분법</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('순열 조합 이항정리 경우의 수', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">11. 순열과 조합</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('조건부확률 정규분포 통계적추정', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">12. 확률과 통계</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('급수 미적분 초월함수 치환적분', true)" class="p-2 rounded-lg bg-rose-950/80 hover:bg-rose-900 border border-rose-500/50 text-left cursor-pointer"><div class="text-[10px] text-rose-300 font-bold">🎯 킬러 도전</div><div class="font-extrabold text-[11px] text-white truncate">13. 미적분(초월함수)</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('포물선 타원 쌍곡선 초점 접선', true)" class="p-2 rounded-lg bg-rose-950/80 hover:bg-rose-900 border border-rose-500/50 text-left cursor-pointer"><div class="text-[10px] text-rose-300 font-bold">🎯 킬러 도전</div><div class="font-extrabold text-[11px] text-white truncate">14. 기하·이차곡선</div></button>
-              <button type="button" onclick="triggerSmartQuizSearch('평면벡터 내적 공간도형 정사영', true)" class="p-2 rounded-lg bg-rose-950/80 hover:bg-rose-900 border border-rose-500/50 text-left cursor-pointer"><div class="text-[10px] text-rose-300 font-bold">🎯 킬러 도전</div><div class="font-extrabold text-[11px] text-white truncate">15. 벡터·공간도형</div></button>
-              <button type="button" onclick="window.location.href='video_board.html'" class="p-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-400 text-left cursor-pointer"><div class="text-[10px] text-emerald-300 font-bold">🎬 847 PDF</div><div class="font-extrabold text-[11px] text-white truncate">16. 유클리드 작도</div></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- 🌱 살아 움직이는 수학홈페이지 · 오늘의 3분 유레카 & 자가 진화 성장 플라이휠 허브 -->
-    <div class="px-margin mt-space-sm" id="dailyGrowthFlywheelSection">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-emerald-500/30 flex flex-col gap-3">
-        <!-- Header & Live Growth Pulse -->
-        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-700 flex items-center justify-center font-bold text-base">🌱</span>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">오늘의 3분 수학 유레카 &amp; 실시간 성장 플라이휠</h2>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-badge text-[11px] font-extrabold" id="dailyEurekaDateBadge">📅 오늘의 미션</span>
-                <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 font-label-badge text-[11px] font-bold" id="daemonLivePulseBadge">🟢 24/7 자가 진화 데몬 가동 중</span>
-              </div>
-              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">매일 자정 자동 갱신되는 3분 수학 루틴(창의 기출 1문항 · 10초 오개념 O/X · 나만의 문제 발명)과 실시간 자료 증식 현황입니다.</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-1.5 flex-wrap text-[11px] font-bold">
-            <span class="px-2.5 py-1 rounded-lg bg-surface-container-low text-on-surface border border-surface-variant">🔥 나의 일일 유레카 달성: <b id="dailyEurekaDoneCount" class="text-emerald-700">0 / 3</b></span>
-            <button type="button" onclick="shareDailyEurekaChallenge()" class="px-2.5 py-1 rounded-lg bg-secondary text-white border-0 cursor-pointer hover:opacity-95">🔗 오늘의 3분 챌린지 친구 공유</button>
-          </div>
-        </div>
-
-        <!-- 3 Daily Interactive Growth Missions -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-          <!-- Mission 1: Today's Constructive Exam Problem -->
-          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#f8fafc] to-[#eff6ff] border border-sky-200 flex flex-col justify-between gap-2">
-            <div class="flex flex-col gap-1.5">
-              <div class="flex items-center justify-between gap-1">
-                <span class="px-2 py-0.5 rounded bg-sky-600 text-white font-extrabold text-[10.5px]">🎯 미션 1 · 오늘의 탈-5지선다 기출</span>
-                <span class="text-[11px] font-bold text-sky-800" id="dailyMission1Status">도전 대기</span>
-              </div>
-              <div class="font-extrabold text-[13.5px] text-slate-900 leading-snug" id="dailyMission1Title">[2025 수능·모평] 오늘의 핵심 추론 문항</div>
-              <div class="text-slate-600 leading-snug" id="dailyMission1Desc">5지선다 보기를 가리고 나만의 제1발상 스케치와 수식 레고 블록 조립으로 정답을 직접 구성해 보세요!</div>
-            </div>
-            <div class="flex items-center gap-1.5 pt-1">
-              <a id="dailyMission1Link" href="board/archive.html?id=e25_26111851_01" onclick="markDailyMissionDone(1)" class="flex-1 py-1.5 px-3 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-center no-underline">✍️ 보기 가리고 도전하기 (+30 XP) ➔</a>
-              <button type="button" onclick="rotateDailyMissionProblem()" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-300 cursor-pointer" title="다른 추천 문항 보기">🎲</button>
-            </div>
-          </div>
-
-          <!-- Mission 2: Today's 10-Second Misconception O/X Vaccine -->
-          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#f0f9ff] to-[#fffbeb] border border-rose-200 flex flex-col justify-between gap-2">
-            <div class="flex flex-col gap-1.5">
-              <div class="flex items-center justify-between gap-1">
-                <span class="px-2 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10.5px]">⚡ 미션 2 · 오늘의 10초 오개념 O/X</span>
-                <span class="text-[11px] font-bold text-rose-800" id="dailyMission2Subject">수학II · 미분법</span>
-              </div>
-              <div class="font-extrabold text-[13px] text-slate-900 leading-snug" id="dailyMission2Myth">"미분계수 f'(a) = 0이면 x = a에서 무조건 극값을 갖는다?"</div>
-              <div id="dailyMission2Feedback" class="hidden p-2 rounded-lg bg-white/95 border border-rose-300 text-[11.5px] leading-snug text-slate-800"></div>
-            </div>
-            <div class="flex items-center gap-1.5 pt-1" id="dailyMission2BtnWrap">
-              <button type="button" onclick="answerDailyOxQuiz(true)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold border-0 cursor-pointer">⭕ 언제나 참 (O)</button>
-              <button type="button" onclick="answerDailyOxQuiz(false)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-extrabold border-0 cursor-pointer">❌ 거짓·반례 존재 (X)</button>
-              <button type="button" onclick="rotateDailyOxQuiz()" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-300 cursor-pointer" title="다음 O/X 퀴즈">🔄</button>
-            </div>
-          </div>
-
-          <!-- Mission 3: Today's Collective Problem Invention & Teacher/Student Contribution -->
-          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#eef2ff] to-[#f0fdf4] border border-indigo-200 flex flex-col justify-between gap-2">
-            <div class="flex flex-col gap-1.5">
-              <div class="flex items-center justify-between gap-1">
-                <span class="px-2 py-0.5 rounded bg-indigo-600 text-white font-extrabold text-[10.5px]">🔀 미션 3 · 나만의 변형 문제 발명</span>
-                <span class="text-[11px] font-bold text-indigo-800">나의 발명 누적: <b id="dailyInventedTotalBadge">0</b>건</span>
-              </div>
-              <div class="font-extrabold text-[13px] text-slate-900 leading-snug" id="dailyMission3Prompt">오늘의 조건 변형(What-If-Not): 직각(90°)을 60°로 바꾸거나 차수를 1 올린 나만의 문제를 만들어 보세요!</div>
-              <div class="flex gap-1.5 mt-0.5">
-                <input type="text" id="quickInventProblemInput" placeholder="예: 만약 정삼각형이 아니라 정육각형 내부의 점 P라면 거리 합은?" class="flex-1 h-8 px-2.5 rounded-lg bg-white border border-indigo-200 text-xs text-slate-900 focus:outline-none focus:border-indigo-600" />
-              </div>
-            </div>
-            <div class="flex items-center gap-1.5 pt-1">
-              <button type="button" onclick="submitQuickInventedProblem()" class="flex-1 py-1.5 px-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold border-0 cursor-pointer">💡 나만의 문제 등록 (+30 XP)</button>
-              <button type="button" onclick="openMathTeacherHubModal('creative')" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-indigo-50 text-indigo-800 font-bold border border-indigo-200 cursor-pointer">포트폴리오 ➔</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5-Pillar Continuous Platform Growth Status Bar -->
-        <div class="pt-2 border-t border-surface-container flex items-center justify-between gap-2 flex-wrap text-[11.5px] text-on-surface-variant">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-extrabold text-on-surface">🚀 5대 지속 성장 플라이휠:</span>
-            <span class="px-2 py-0.5 rounded bg-surface-container-low">① min7014.github.io 신간 자동 흡수</span>
-            <span class="px-2 py-0.5 rounded bg-surface-container-low">② @min7014_ai v4.0 영상·숏폼 24h 생성</span>
-            <span class="px-2 py-0.5 rounded bg-surface-container-low">③ 탈-5지선다 창의 수식 블록 조립</span>
-            <span class="px-2 py-0.5 rounded bg-surface-container-low">④ 학생·교사 문제 발명 집단지성</span>
-            <span class="px-2 py-0.5 rounded bg-surface-container-low">⑤ SEO·AI 검색(llms.txt) 자동 인덱싱</span>
-          </div>
-          <a href="#quizRequestSection" class="text-secondary font-extrabold no-underline hover:underline">🙋 새 기출·개념 해설 신청하기 ➔</a>
         </div>
       </div>
     </div>
@@ -1554,22 +1015,8 @@ body.dark-mode .header-omni-dropdown,
       </div>
     </div>
 
-    <div class="px-margin mt-space-sm" id="requestsBoardBox" style="display:none;">
-      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
-        <div class="flex justify-between items-center mb-2 flex-wrap gap-2">
-          <div class="font-headline-sm text-[15px] font-bold text-on-surface flex items-center gap-2">
-            <span class="material-symbols-outlined text-status-amber text-[18px]">campaign</span>
-            <span>실시간 문제 출제 현황</span>
-            <span class="px-2 py-0.5 rounded-full bg-status-amber/15 text-[#B45309] font-label-badge text-label-badge" id="requestsCountBadge">확인 중...</span>
-          </div>
-          <a href="create.html" class="font-body-sm text-body-sm text-secondary font-bold no-underline hover:underline">✨ 새 문제 출제 ➔</a>
-        </div>
-        <div id="requestsList" class="grid gap-2"></div>
-      </div>
-    </div>
-
     <!-- Clean Search & Link-Format Problem List -->
-    <div class="px-margin mt-space-md flex flex-col gap-space-sm" id="quizExplorerSection">
+    <div class="px-margin mt-3 flex flex-col gap-space-sm" id="quizExplorerSection">
       <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2.5" id="quizFilterBar">
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <div class="flex items-center gap-2">
@@ -1694,6 +1141,634 @@ body.dark-mode .header-omni-dropdown,
       <div class="flex flex-col gap-1.5 mt-1" id="list">
         <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm text-center text-on-surface-variant">
           문항 목록을 불러오는 중…
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔬 심층 수학 탐구 & 시각 증명 연구실 (Progressive Disclosure Tabbed Hub — Collapsed by Default) -->
+    <div class="px-margin mt-3" id="requestsBoardBox" style="display:none;">
+      <details id="requestsBoardDetails" class="rounded-xl bg-surface-container-lowest px-4 py-3 shadow-sm border border-surface-variant/70">
+        <summary class="cursor-pointer select-none flex justify-between items-center flex-wrap gap-2 list-none">
+          <div class="font-headline-sm text-[14.5px] font-bold text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-status-amber text-[18px]">campaign</span>
+            <span><span class="bilingual-ko">실시간 문제 출제 현황</span><span class="bilingual-en">Live Quiz Request Status</span></span>
+            <span class="px-2 py-0.5 rounded-full bg-status-amber/15 text-[#B45309] font-label-badge text-label-badge" id="requestsCountBadge">확인 중...</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs">
+            <a href="create.html" onclick="event.stopPropagation();" class="font-body-sm text-body-sm text-secondary font-bold no-underline hover:underline"><span class="bilingual-ko">✨ 새 문제 출제 ➔</span><span class="bilingual-en">✨ Request Problem ➔</span></a>
+            <span class="text-on-surface-variant font-bold"><span class="bilingual-ko">내역 보기 ▾</span><span class="bilingual-en">Details ▾</span></span>
+          </div>
+        </summary>
+        <div id="requestsList" class="grid gap-2 pt-3 mt-2.5 border-t border-surface-container"></div>
+      </details>
+    </div>
+
+    <div class="px-margin mt-4" id="deepMathLabsHub">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-surface-variant/70 flex flex-col gap-2.5">
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary text-[20px]">science</span>
+            <div>
+              <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">
+                <span class="bilingual-ko">심층 수학 탐구 · 시각 증명 연구실</span>
+                <span class="bilingual-en">Deep Math Exploration &amp; Visual Proof Labs</span>
+              </h2>
+              <p class="font-body-sm text-[11.5px] text-on-surface-variant m-0">
+                <span class="bilingual-ko">원하는 연구실 탭을 선택하면 펼쳐집니다 (다시 클릭하면 접힘)</span>
+                <span class="bilingual-en">Select any lab tab below to expand interactive tools (click again to collapse)</span>
+              </p>
+            </div>
+          </div>
+          <button type="button" id="btnCollapseDeepLabs" onclick="switchHomeDeepLabTab(null, false)" style="display:none;" class="px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant text-xs font-bold border-0 cursor-pointer">
+            <span class="bilingual-ko">접기 ▲</span><span class="bilingual-en">Collapse ▲</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-1.5 flex-wrap text-xs" id="deepMathLabsTabBar">
+          <button type="button" data-deep-tab="curriculum" onclick="switchHomeDeepLabTab('curriculum', false)" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer transition-colors">
+            <span class="bilingual-ko">🏛️ 오늘의 시각 증명 · 16대 단원</span><span class="bilingual-en">🏛️ Today's Visual Proof &amp; 16 Domains</span>
+          </button>
+          <button type="button" data-deep-tab="daily" onclick="switchHomeDeepLabTab('daily', false)" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer transition-colors">
+            <span class="bilingual-ko">🌱 오늘의 3분 유레카 미션</span><span class="bilingual-en">🌱 Daily 3-Min Eureka Missions</span>
+          </button>
+          <button type="button" data-deep-tab="pedagogy" onclick="switchHomeDeepLabTab('pedagogy', false)" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer transition-colors">
+            <span class="bilingual-ko">👩‍🏫 수학교사 5대 혁신 스튜디오</span><span class="bilingual-en">👩‍🏫 5-Pillar Math Pedagogy Studio</span>
+          </button>
+          <button type="button" data-deep-tab="wonder" onclick="switchHomeDeepLabTab('wonder', false)" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer transition-colors">
+            <span class="bilingual-ko">✨ 경이(Wonder) 프랙탈 실험실</span><span class="bilingual-en">✨ Interactive Wonder &amp; Fractal Lab</span>
+          </button>
+          <button type="button" data-deep-tab="benchmark" onclick="switchHomeDeepLabTab('benchmark', false)" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer transition-colors">
+            <span class="bilingual-ko">🌐 글로벌 아카데미 (Desmos·Polypad)</span><span class="bilingual-en">🌐 Interactive Function &amp; Tile Labs</span>
+          </button>
+        </div>
+
+        <div id="deepMathLabsPanels">
+    <!-- 🏛️ 민은기 선생님의 수학자료실 (min7014.github.io) 심층 커리큘럼 & 오늘의 시각적 증명 쇼케이스 -->
+    <div class="mt-2" id="min7014DeepCurriculumSection" style="display:none;">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-secondary/20 flex flex-col gap-3">
+        <!-- Header & Resource Statistics -->
+        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded-md bg-secondary text-white font-label-badge text-[11px] font-bold">min7014.github.io 심층 연동</span>
+            <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">🏛️ 민은기 선생님의 수학자료실 16대 영역 · 165개 세부 단원 시각적 증명 아카이브</h2>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-[11px] font-semibold">
+            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary">📚 1,113개 심층 주제</span>
+            <span class="px-2 py-0.5 rounded bg-status-amber/15 text-[#B45309]">📄 증명 PDF 847</span>
+            <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary">🎮 GeoGebra 404</span>
+            <span class="px-2 py-0.5 rounded bg-status-emerald/15 text-status-emerald">📐 AlgeoMath 457</span>
+            <span class="px-2 py-0.5 rounded bg-[#f3e8ff] text-[#6d28d9]">📏 작도 60선</span>
+            <span class="px-2 py-0.5 rounded bg-[#e0f2fe] text-[#0369a1]">🎥 영상·숏폼 927</span>
+          </div>
+        </div>
+
+        <!-- Today's Featured Visual Proof & Interactive Applet Card -->
+        <div class="rounded-xl bg-surface-container-low p-3.5 border border-surface-variant flex flex-col gap-2.5">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div class="flex-1 min-w-[240px]">
+              <div class="flex items-center gap-1.5 flex-wrap mb-1">
+                <span class="px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-badge text-[11px] font-bold" id="todayGgbDomain">📐 오늘의 동적 기하 · 시각적 증명</span>
+                <span class="text-[11px] text-on-surface-variant font-semibold" id="todayGgbBreadcrumb">내용순 배열 ▸ 이차곡선 ▸ 타원</span>
+                <span class="text-[11px] text-secondary font-bold" id="todayGgbCounter">(1 / 12)</span>
+              </div>
+              <div class="font-headline-sm text-[15px] font-bold text-on-surface leading-snug" id="todayGgbTitle">타원에서의 빛 반사 (광학적 성질)</div>
+              <p class="font-body-sm text-xs text-on-surface-variant mt-1 mb-0 leading-relaxed" id="todayGgbDesc">한 초점에서 나온 빛은 타원의 곡면에서 반사되어 다른 초점으로 반드시 모입니다.</p>
+              <div class="mt-1.5 text-xs text-[#B45309] font-semibold" id="todayGgbTip">💡 수능 실전 보조선 팁: 타원·포물선·쌍곡선 문제에서는 항상 초점과 접점을 잇는 반사 대칭 보조선을 먼저 그으세요.</div>
+            </div>
+            <div class="flex flex-col items-end gap-1.5 shrink-0">
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="rotateTodayGeoGebra(-1)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-surface-container text-on-surface text-xs font-bold border border-surface-variant cursor-pointer">◀ 이전</button>
+                <button type="button" onclick="rotateTodayGeoGebra(1)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-surface-container text-on-surface text-xs font-bold border border-surface-variant cursor-pointer">다음 ▶</button>
+                <button type="button" onclick="speakTodayGeoGebra(this)" class="mathedu-voice-btn text-xs">🔊 도슨트</button>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap justify-end">
+                <button type="button" id="btnTodayGgbInlineToggle" onclick="toggleTodayInlineViewer('applet')" class="px-2.5 py-1.5 rounded-lg bg-secondary text-white text-xs font-bold border-0 cursor-pointer hover:opacity-90">🎮 인라인 실험실 열기</button>
+                <button type="button" onclick="toggleTodayInlineViewer('pdf')" class="px-2.5 py-1.5 rounded-lg bg-status-amber/20 text-[#B45309] text-xs font-bold border-0 cursor-pointer hover:bg-status-amber/30">📄 인라인 플립북 PDF</button>
+                <a id="btnTodayGgbApplet" href="https://www.geogebra.org/m/jggpufc4" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-secondary/10 hover:bg-secondary/20 text-secondary text-xs font-bold no-underline">GeoGebra ↗</a>
+                <a id="btnTodayGgbPdf" href="https://min7014.github.io/2022/2022051507.pdf#toolbar=0&view=Fit&scrollbar=0" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold no-underline">PDF 새창 ↗</a>
+                <a id="btnTodayGgbYt" href="https://youtu.be/AVFodL71fSk" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0369a1] text-xs font-bold no-underline">▶️ 해설 영상 ↗</a>
+                <a id="btnTodayGgbWeb" href="https://min7014.github.io/math20220515007.html" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant text-xs font-semibold no-underline">원문 ↗</a>
+              </div>
+            </div>
+          </div>
+          <!-- Collapsible Inline Interactive GeoGebra / PDF Viewer -->
+          <div id="todayGgbInlineFrameWrap" style="display:none;" class="mt-2 pt-2.5 border-t border-surface-variant flex flex-col gap-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-secondary" id="todayGgbInlineLabel">🎮 실시간 동적 기하 · 시각적 증명 실험실</span>
+              <button type="button" onclick="closeTodayInlineViewer()" class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border-0 cursor-pointer text-xs font-bold">✕ 실험실 닫기</button>
+            </div>
+            <div class="w-full rounded-xl overflow-hidden border border-surface-variant bg-white" style="height:440px;">
+              <iframe id="todayGgbInlineIframe" src="about:blank" class="w-full h-full border-0" allowfullscreen loading="lazy" title="민은기 선생님의 수학자료실 인터랙티브 뷰어"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 Curriculum Domains Quick Explorer Pills -->
+        <div class="flex flex-col gap-1.5">
+          <div class="flex items-center justify-between text-xs flex-wrap gap-1">
+            <span class="font-bold text-on-surface-variant">🧭 수학자료실 16대 영역 원클릭 심층 탐색 (클릭 시 단원별 원리·보조선·초등 4단계 디딤돌 즉시 열람):</span>
+            <button type="button" onclick="openMin7014ExplorerModal()" class="text-secondary font-bold bg-transparent border-0 cursor-pointer p-0 text-xs hover:underline">전체 1,113개 주제 탐색관 열기 ➔</button>
+          </div>
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+            <button type="button" onclick="openMin7014Domain('유클리드 평면기하')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">📐 유클리드 평면기하 (189)</button>
+            <button type="button" onclick="openMin7014Domain('다항식·방정식·수체계')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🔢 다항식·방정식·수체계 (178)</button>
+            <button type="button" onclick="openMin7014Domain('미분·도함수')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">📈 미분·도함수 (101)</button>
+            <button type="button" onclick="openMin7014Domain('이차곡선·원뿔곡선')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪐 이차곡선·단델린 (85)</button>
+            <button type="button" onclick="openMin7014Domain('벡터·공간도형')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🧭 벡터·공간도형 (80)</button>
+            <button type="button" onclick="openMin7014Domain('지수·로그')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🌱 지수·로그 (70)</button>
+            <button type="button" onclick="openMin7014Domain('함수의 극한과 연속')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🎯 극한과 연속 (69)</button>
+            <button type="button" onclick="openMin7014Domain('해석기하·원의 방정식')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⭕ 해석기하·원 (61)</button>
+            <button type="button" onclick="openMin7014Domain('삼각비·삼각함수')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🌊 삼각비·삼각함수 (54)</button>
+            <button type="button" onclick="openMin7014Domain('함수·집합·그래프')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🔗 함수·집합·그래프 (49)</button>
+            <button type="button" onclick="openMin7014Domain('기하 변환·대칭')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪞 기하 변환·대칭 (36)</button>
+            <button type="button" onclick="openMin7014Domain('확률과 통계')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🎲 확률과 통계 (35)</button>
+            <button type="button" onclick="openMin7014Domain('방정식·부등식')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⚖️ 방정식·부등식 (32)</button>
+            <button type="button" onclick="openMin7014Domain('적분·구분구적법')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">⏳ 적분·구분구적법 (32)</button>
+            <button type="button" onclick="openMin7014Domain('수열·시그마')" class="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-secondary/15 hover:text-secondary text-on-surface font-semibold border border-surface-variant shrink-0 cursor-pointer">🪜 수열·시그마 (22)</button>
+            <button type="button" onclick="openMin7014Domain('__CONSTRUCTION__')" class="px-2.5 py-1.5 rounded-lg bg-[#f3e8ff] hover:bg-[#e9d5ff] text-[#6d28d9] font-bold border border-[#d8b4fe] shrink-0 cursor-pointer">📏 작도 60선</button>
+          </div>
+          <!-- Direct Hub Links to min7014.github.io -->
+          <div class="flex items-center gap-3 flex-wrap pt-1 text-[11.5px] text-on-surface-variant">
+            <span class="font-bold text-on-surface">🌐 수학자료실 본관 직통 허브:</span>
+            <a href="https://min7014.github.io/2019080802.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">📑 내용순 배열(전 단원 트리) ↗</a>
+            <a href="https://min7014.github.io/2019021101.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🗓️ 만든순서별 아카이브 ↗</a>
+            <a href="https://min7014.github.io/2019081603.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">📏 눈금 없는 자와 컴퍼스 작도 ↗</a>
+            <a href="https://min7014.github.io/2019030303.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🏫 학년도별 수학수업(2015~2023) ↗</a>
+            <a href="https://min7014.github.io/math20240225002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🏫 2024학년도 수학수업 ↗</a>
+            <a href="https://min7014.github.io/math20191130002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🎙️ 특강·강의 자료 ↗</a>
+            <a href="https://min7014.github.io/math20250129002.html" target="_blank" rel="noopener" class="text-secondary hover:underline no-underline font-semibold">🧪 기타자료·Python Colab ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🌱 살아 움직이는 수학홈페이지 · 오늘의 3분 유레카 & 자가 진화 성장 플라이휠 허브 -->
+    <div class="mt-2" id="dailyGrowthFlywheelSection" style="display:none;">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-emerald-500/30 flex flex-col gap-3">
+        <!-- Header & Live Growth Pulse -->
+        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-700 flex items-center justify-center font-bold text-base">🌱</span>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">오늘의 3분 수학 유레카 &amp; 실시간 성장 플라이휠</h2>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-badge text-[11px] font-extrabold" id="dailyEurekaDateBadge">📅 오늘의 미션</span>
+                <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 font-label-badge text-[11px] font-bold" id="daemonLivePulseBadge">🟢 24/7 자가 진화 데몬 가동 중</span>
+              </div>
+              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">매일 자정 자동 갱신되는 3분 수학 루틴(창의 기출 1문항 · 10초 오개념 O/X · 나만의 문제 발명)과 실시간 자료 증식 현황입니다.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-[11px] font-bold">
+            <span class="px-2.5 py-1 rounded-lg bg-surface-container-low text-on-surface border border-surface-variant">🔥 나의 일일 유레카 달성: <b id="dailyEurekaDoneCount" class="text-emerald-700">0 / 3</b></span>
+            <button type="button" onclick="shareDailyEurekaChallenge()" class="px-2.5 py-1 rounded-lg bg-secondary text-white border-0 cursor-pointer hover:opacity-95">🔗 오늘의 3분 챌린지 친구 공유</button>
+          </div>
+        </div>
+
+        <!-- 3 Daily Interactive Growth Missions -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <!-- Mission 1: Today's Constructive Exam Problem -->
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#f8fafc] to-[#eff6ff] border border-sky-200 flex flex-col justify-between gap-2">
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="px-2 py-0.5 rounded bg-sky-600 text-white font-extrabold text-[10.5px]">🎯 미션 1 · 오늘의 탈-5지선다 기출</span>
+                <span class="text-[11px] font-bold text-sky-800" id="dailyMission1Status">도전 대기</span>
+              </div>
+              <div class="font-extrabold text-[13.5px] text-slate-900 leading-snug" id="dailyMission1Title">[2025 수능·모평] 오늘의 핵심 추론 문항</div>
+              <div class="text-slate-600 leading-snug" id="dailyMission1Desc">5지선다 보기를 가리고 나만의 제1발상 스케치와 수식 레고 블록 조립으로 정답을 직접 구성해 보세요!</div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <a id="dailyMission1Link" href="board/archive.html?id=e25_26111851_01" onclick="markDailyMissionDone(1)" class="flex-1 py-1.5 px-3 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-center no-underline">✍️ 보기 가리고 도전하기 (+30 XP) ➔</a>
+              <button type="button" onclick="rotateDailyMissionProblem()" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-300 cursor-pointer" title="다른 추천 문항 보기">🎲</button>
+            </div>
+          </div>
+
+          <!-- Mission 2: Today's 10-Second Misconception O/X Vaccine -->
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#f0f9ff] to-[#fffbeb] border border-amber-200 flex flex-col justify-between gap-2">
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="px-2 py-0.5 rounded bg-[#0284c7] text-white font-extrabold text-[10.5px]">⚡ 미션 2 · 오늘의 10초 오개념 O/X</span>
+                <span class="text-[11px] font-bold text-amber-800" id="dailyMission2Subject">수학II · 미분법</span>
+              </div>
+              <div class="font-extrabold text-[13px] text-slate-900 leading-snug" id="dailyMission2Myth">"미분계수 f'(a) = 0이면 x = a에서 무조건 극값을 갖는다?"</div>
+              <div id="dailyMission2Feedback" class="hidden p-2 rounded-lg bg-white/95 border border-amber-300 text-[11.5px] leading-snug text-slate-800"></div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1" id="dailyMission2BtnWrap">
+              <button type="button" onclick="answerDailyOxQuiz(true)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold border-0 cursor-pointer">⭕ 언제나 참 (O)</button>
+              <button type="button" onclick="answerDailyOxQuiz(false)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-[#4f46e5] hover:bg-[#4338ca] text-white font-extrabold border-0 cursor-pointer">❌ 거짓·반례 존재 (X)</button>
+              <button type="button" onclick="rotateDailyOxQuiz()" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-300 cursor-pointer" title="다음 O/X 퀴즈">🔄</button>
+            </div>
+          </div>
+
+          <!-- Mission 3: Today's Collective Problem Invention & Teacher/Student Contribution -->
+          <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#eef2ff] to-[#f0fdf4] border border-indigo-200 flex flex-col justify-between gap-2">
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="px-2 py-0.5 rounded bg-indigo-600 text-white font-extrabold text-[10.5px]">🔀 미션 3 · 나만의 변형 문제 발명</span>
+                <span class="text-[11px] font-bold text-indigo-800">나의 발명 누적: <b id="dailyInventedTotalBadge">0</b>건</span>
+              </div>
+              <div class="font-extrabold text-[13px] text-slate-900 leading-snug" id="dailyMission3Prompt">오늘의 조건 변형(What-If-Not): 직각(90°)을 60°로 바꾸거나 차수를 1 올린 나만의 문제를 만들어 보세요!</div>
+              <div class="flex gap-1.5 mt-0.5">
+                <input type="text" id="quickInventProblemInput" placeholder="예: 만약 정삼각형이 아니라 정육각형 내부의 점 P라면 거리 합은?" class="flex-1 h-8 px-2.5 rounded-lg bg-white border border-indigo-200 text-xs text-slate-900 focus:outline-none focus:border-indigo-600" />
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <button type="button" onclick="submitQuickInventedProblem()" class="flex-1 py-1.5 px-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold border-0 cursor-pointer">💡 나만의 문제 등록 (+30 XP)</button>
+              <button type="button" onclick="openMathTeacherHubModal('creative')" class="py-1.5 px-2.5 rounded-lg bg-white hover:bg-indigo-50 text-indigo-800 font-bold border border-indigo-200 cursor-pointer">포트폴리오 ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5-Pillar Continuous Platform Growth Status Bar -->
+        <div class="pt-2 border-t border-surface-container flex items-center justify-between gap-2 flex-wrap text-[11.5px] text-on-surface-variant">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-extrabold text-on-surface">🚀 5대 지속 성장 플라이휠:</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">① min7014.github.io 신간 자동 흡수</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">② @min7014_ai v4.0 영상·숏폼 24h 생성</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">③ 탈-5지선다 창의 수식 블록 조립</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">④ 학생·교사 문제 발명 집단지성</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-low">⑤ SEO·AI 검색(llms.txt) 자동 인덱싱</span>
+          </div>
+          <a href="create.html" class="text-secondary font-extrabold no-underline hover:underline">🙋 새 기출·개념 해설 신청하기 ➔</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 👩‍🏫 수석 수학교사(mathteacher) 수학교육 발전 4대 핵심 모듈 스튜디오 -->
+    <div class="mt-2" id="mathTeacherPedagogySection" style="display:none;">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-secondary/20 flex flex-col gap-3">
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center font-bold text-base">👩‍🏫</span>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">수학교사 에이전트(mathteacher) 수학교육 발전 5대 혁신 스튜디오 (탈-5지선다 창의 구성 통합)</h2>
+                <span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge font-bold">Freudenthal · Pólya · Lakatos · Brown &amp; Walter (탈-5지선다)</span>
+              </div>
+              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">초등 기초 직관부터 중등 기하·대수 시각 증명(`min7014.github.io`), 고등 수능 100점 킬러까지 단절 없는 학습 사다리를 제공합니다.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button type="button" onclick="openMathTeacherHubModal('philosophy')" class="h-8 px-3 rounded-lg bg-[#059669] text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95 shadow-sm">🏛️ 수학교육 철학 &amp; 왜 수학을 배울까? ➔</button>
+            <button type="button" onclick="openMathTeacherHubModal('question')" class="h-8 px-3 rounded-lg bg-[#0284c7] text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95 shadow-sm">❓ 질문하는 수학 수업 스튜디오 ➔</button>
+            <button type="button" onclick="openMathTeacherHubModal('genealogy')" class="h-8 px-3 rounded-lg bg-secondary text-white font-label-badge text-label-badge font-bold border-0 cursor-pointer hover:opacity-95">🎓 전체 수학교육 발전 스튜디오 열기 ➔</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 text-xs">
+          <button type="button" onclick="openMathTeacherHubModal('genealogy')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-secondary/10 border border-surface-variant hover:border-secondary transition-all cursor-pointer flex flex-col justify-between gap-1.5">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="font-extrabold text-secondary text-[13px]">🌳 1. 초·중·고 수직 계통성 트리</span>
+                <span class="px-1.5 py-0.5 rounded bg-secondary/15 text-secondary font-bold text-[10px]">1065대 계보</span>
+              </div>
+              <div class="text-on-surface-variant leading-snug">고등 수학에서 막히는 진짜 이유인 초·중등 뿌리 개념(비율➔기울기➔미분, 모눈➔구분구적➔적분)을 한눈에 복원합니다.</div>
+            </div>
+            <div class="text-secondary font-bold text-[11px] pt-1">계보 트리 &amp; 기출 연동 열기 ➔</div>
+          </button>
+
+          <button type="button" onclick="openMathTeacherHubModal('polya')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-[#fef3c7]/60 border border-surface-variant hover:border-[#d97706] transition-all cursor-pointer flex flex-col justify-between gap-1.5">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="font-extrabold text-[#b45309] text-[13px]">🧭 2. 폴리아 조건➔보조선 사전</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-bold text-[10px]">1069대 법칙</span>
+              </div>
+              <div class="text-on-surface-variant leading-snug">"무슨 보조선을 그어야 할까?" 원의 접선·지름·이차곡선·절댓값 미분가능·정적분 함수 등 12대 단골 조건을 1초 만에 번역합니다.</div>
+            </div>
+            <div class="text-[#b45309] font-bold text-[11px] pt-1">1초 보조선 번역 사전 열기 ➔</div>
+          </button>
+
+          <button type="button" onclick="openMathTeacherHubModal('vaccine')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-[#e0f2fe]/50 border border-surface-variant hover:border-[#0284c7] transition-all cursor-pointer flex flex-col justify-between gap-1.5">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="font-extrabold text-[#0369a1] text-[13px]">🔬 3. 오개념 백신 &amp; 반례 실험실</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#e0f2fe] text-[#0369a1] font-bold text-[10px]">1064대 반례</span>
+              </div>
+              <div class="text-on-surface-variant leading-snug">"f'(a)=0이면 무조건 극값?", "역함수 교점은 무조건 y=x 위?" 학생들이 가장 많이 속는 함정을 1초 반례로 예방합니다.</div>
+            </div>
+            <div class="text-[#0369a1] font-bold text-[11px] pt-1">오개념 진단 &amp; 반례 실험 ➔</div>
+          </button>
+
+          <button type="button" onclick="openMathTeacherHubModal('lesson')" class="text-left p-3 rounded-xl bg-surface-container-low hover:bg-[#dcfce7]/50 border border-surface-variant hover:border-[#059669] transition-all cursor-pointer flex flex-col justify-between gap-1.5">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="font-extrabold text-[#047857] text-[13px]">👩‍🏫 4. 교사용 5분 탐구 발문 런처</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#dcfce7] text-[#047857] font-bold text-[10px]">수업 시나리오</span>
+              </div>
+              <div class="text-on-surface-variant leading-snug">수업 시작 5분, 칠판에 띄워 학생들의 호기심("왜 그럴까?")을 깨우는 발문·GeoGebra 미션·모둠 토의 질문 템플릿입니다.</div>
+            </div>
+            <div class="text-[#047857] font-bold text-[11px] pt-1">5분 수업 발문 시나리오 열기 ➔</div>
+          </button>
+
+          <button type="button" onclick="openMathTeacherHubModal('creative')" class="text-left p-3 rounded-xl bg-gradient-to-br from-[#eef2ff] to-[#f5f3ff] hover:from-[#e0e7ff] hover:to-[#ede9fe] border-2 border-[#6366f1] transition-all cursor-pointer flex flex-col justify-between gap-1.5 shadow-sm">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="font-extrabold text-[#4338ca] text-[13px]">✍️ 5. 탈-5지선다 창의 구성 실험실</span>
+                <span class="px-1.5 py-0.5 rounded bg-[#4f46e5] text-white font-bold text-[10px]">NEW 창의력</span>
+              </div>
+              <div class="text-slate-700 leading-snug">객관식 찍기를 넘어 <b>[제1발상 스케치 ➔ 수식 블록 직접 조립 ➔ 다중 해법 ➔ What-If-Not 문제 발명]</b>으로 창의성을 깨웁니다.</div>
+            </div>
+            <div class="text-[#4338ca] font-extrabold text-[11px] pt-1">탈-5지선다 &amp; 문제 발명 열기 ➔</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✨ 학생들의 수학적 호기심을 깨우는 [인터랙티브 수학 경이(Wonder) 실험실 & 수학교육 5대 철학] -->
+    <div class="mt-2" id="mathCuriosityPhilosophySection" style="display:none;">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border-2 border-amber-500/35 flex flex-col gap-3">
+        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-700 flex items-center justify-center font-bold text-base">✨</span>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">눈으로 만지는 수학의 경이(Wonder) 실험실 &amp; 수학교육 철학</h2>
+                <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-label-badge text-[11px] font-extrabold">🏛️ "수학은 암기가 아니라 눈으로 보는 예술이자 질문하는 탐험이다"</span>
+              </div>
+              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">공식을 외우기 전에 슬라이더를 직접 움직여 자연·우주·AI 속에 숨겨진 수학의 아름다움과 "왜 이 수학을 배우는가?"를 먼저 체험해 보세요!</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button type="button" onclick="openMathTeacherHubModal('philosophy')" class="h-8 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-label-badge text-xs font-extrabold border-0 cursor-pointer shadow-sm">🌍 "선생님, 이 수학 왜 배워요?" 8대 호기심 도감 열기 ➔</button>
+            <a href="video_board.html?mode=question_ko" class="h-8 px-3 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-label-badge text-xs font-extrabold no-underline flex items-center">🎬 질문형 시각 증명 영상 ➔</a>
+          </div>
+        </div>
+
+        <!-- Live Interactive Mathematical Wonder Playground + Real-World Why Card -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
+          <!-- Left 7 Cols: Interactive Canvas Laboratory -->
+          <div class="lg:col-span-7 rounded-xl bg-[#0f172a] text-white p-3.5 flex flex-col justify-between gap-2.5 border border-slate-700 shadow-inner">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <div class="flex items-center gap-1.5 flex-wrap" id="wonderLabModeTabs">
+                <button type="button" onclick="switchWonderLabMode('pythagoras')" data-wonder-tab="pythagoras" class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-extrabold text-[11.5px] border-0 cursor-pointer">🌿 1. 피타고라스 프랙탈 나무</button>
+                <button type="button" onclick="switchWonderLabMode('archimedes')" data-wonder-tab="archimedes" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 font-bold text-[11.5px] border border-slate-600 cursor-pointer">🎯 2. 아르키메데스 원주율(π) 극한</button>
+                <button type="button" onclick="switchWonderLabMode('sunflower')" data-wonder-tab="sunflower" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 font-bold text-[11.5px] border border-slate-600 cursor-pointer">🌻 3. 해바라기 황금각과 피보나치</button>
+              </div>
+              <span class="text-[11px] text-amber-300 font-bold" id="wonderLabFormulaBadge" data-no-i18n="1">a² + b² = c² (넓이 보존의 마법)</span>
+            </div>
+
+            <div class="relative w-full rounded-lg overflow-hidden bg-[#090d16] border border-slate-800 flex items-center justify-center" style="height:230px;">
+              <canvas id="mathWonderInteractiveCanvas" width="640" height="230" class="w-full h-full block"></canvas>
+              <div id="wonderCanvasOverlayStat" data-no-i18n="1" class="absolute top-2 left-2.5 px-2.5 py-1 rounded-md bg-slate-900/85 border border-amber-400/40 text-[11px] text-amber-200 font-mono pointer-events-none"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+              <div class="flex items-center gap-2 flex-1">
+                <span class="font-extrabold text-amber-400 shrink-0" id="wonderSlider1Label" data-no-i18n="1">📐 직각삼각형 각도 θ: 40°</span>
+                <input type="range" id="wonderSlider1" min="18" max="72" value="40" oninput="updateWonderLabCanvas()" class="flex-1 accent-amber-400 cursor-pointer" />
+              </div>
+              <div class="flex items-center gap-2 flex-1" id="wonderSlider2Wrap">
+                <span class="font-extrabold text-emerald-400 shrink-0" id="wonderSlider2Label" data-no-i18n="1">🌳 가지 단계: 6단</span>
+                <input type="range" id="wonderSlider2" min="1" max="8" value="6" oninput="updateWonderLabCanvas()" class="flex-1 accent-emerald-400 cursor-pointer" />
+              </div>
+            </div>
+            <div class="text-[11.5px] text-slate-300 leading-snug" id="wonderLabInsightCaption" data-no-i18n="1">
+              💡 <b>관찰과 경이(Notice &amp; Wonder):</b> 각도 θ를 아무리 바꾸어도 두 작은 정사각형 넓이의 합(a²+b²)은 언제나 아래 기둥 정사각형 넓이(c²)와 정확히 일치하며 아름다운 숲을 이룹니다!
+            </div>
+          </div>
+
+          <!-- Right 5 Cols: "Why We Learn Math" Real-World Curiosity Carousel & Eureka Mindset -->
+          <div class="lg:col-span-5 flex flex-col justify-between gap-2.5">
+            <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#fffbeb] to-[#f0fdf4] border border-amber-300 flex flex-col justify-between gap-2 flex-1">
+              <div class="flex flex-col gap-1.5">
+                <div class="flex items-center justify-between gap-1">
+                  <span class="px-2 py-0.5 rounded bg-amber-600 text-white font-extrabold text-[10.5px]" id="curiosityCardDomainBadge" data-no-i18n="1">이차곡선 · 광학 기하</span>
+                  <div class="flex items-center gap-1">
+                    <button type="button" onclick="rotateCuriosityCard(-1)" class="px-2 py-0.5 rounded bg-white hover:bg-amber-50 text-slate-700 font-bold border border-amber-300 cursor-pointer">◀</button>
+                    <span class="text-[11px] font-bold text-amber-900" id="curiosityCardCounter">1 / 8</span>
+                    <button type="button" onclick="rotateCuriosityCard(1)" class="px-2 py-0.5 rounded bg-white hover:bg-amber-50 text-slate-700 font-bold border border-amber-300 cursor-pointer">▶</button>
+                  </div>
+                </div>
+                <div class="font-extrabold text-[13.5px] text-slate-900 leading-snug" id="curiosityCardQuestion" data-no-i18n="1">🌿 선생님, 나뭇가지와 브로콜리, 혈관은 왜 피타고라스 나무처럼 갈라질까요?</div>
+                <div class="text-slate-700 leading-relaxed text-[11.8px]" id="curiosityCardStory" data-no-i18n="1">자연은 최소한의 에너지로 최대한 넓은 면적에 햇빛과 산소를 전달해야 합니다. 피타고라스 정리(a²+b²=c²)를 따라 가지가 갈라지면 줄기 단면적의 합이 끝까지 보존됩니다!</div>
+                <div class="p-2 rounded-lg bg-white/90 border border-amber-200 text-[11.2px] text-amber-950 font-semibold" id="curiosityCardExperiment" data-no-i18n="1">🤔 <b>30초 사고 실험:</b> 맨 아래 기둥 넓이가 1일 때 10단계 끝 나뭇잎 1,024개의 넓이 합은 얼마일까요?</div>
+              </div>
+              <div class="flex items-center gap-1.5 pt-1 flex-wrap">
+                <a id="curiosityCardVideoLink" href="video_board.html?slug=math20250130001&mode=question_ko" class="flex-1 py-1.5 px-2.5 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-extrabold text-center no-underline text-[11px]">🎬 질문형 시각 증명 보기</a>
+                <button type="button" id="curiosityCardQuizBtn" onclick="triggerSmartQuizSearch('피타고라스 직각삼각형 넓이', true)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-secondary hover:opacity-95 text-white font-extrabold border-0 cursor-pointer text-[11px]">✍️ 관련 기출 디딤돌 풀기</button>
+              </div>
+            </div>
+
+            <!-- Productive Struggle & Eureka Journal Mini Box -->
+            <div class="p-3 rounded-xl bg-gradient-to-r from-[#ecfdf5] to-[#eff6ff] border border-emerald-300 flex flex-col gap-1.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="font-extrabold text-emerald-900 text-[12px]">💎 나의 수학적 깨달음(Eureka) 한 줄 사색 일지</span>
+                <span class="text-[10.5px] font-bold text-emerald-800">누적 통찰: <b id="eurekaJournalCountBadge">0</b>건</span>
+              </div>
+              <div class="text-[11px] text-slate-600 leading-snug">틀렸던 문제에서 찾은 반례나 오늘 나를 감탄하게 만든 보조선·원리를 한 줄로 기록해 보세요!</div>
+              <div class="flex gap-1.5">
+                <input type="text" id="quickEurekaJournalInput" placeholder="예: 원의 접선이 나오면 중심과 접점을 잇는 반지름이 항상 수직(90°)이다!" class="flex-1 h-8 px-2.5 rounded-lg bg-white border border-emerald-300 text-xs text-slate-900" />
+                <button type="button" onclick="saveQuickEurekaJournal()" class="px-3 h-8 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] border-0 cursor-pointer shrink-0">💾 통찰 기록</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🌐 세계 5대 수학교육 플랫폼 벤치마킹 · 글로벌 인터랙티브 수학 아카데미 (Desmos · Mathigon Polypad · Brilliant · NRICH Cambridge · AoPS/Khan) -->
+    <div class="mt-2" id="globalMathBenchmarkSection" style="display:none;">
+      <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border-2 border-indigo-500/40 flex flex-col gap-3">
+        <!-- Top Header & Elo Rating / Mastery Summary -->
+        <div class="flex items-center justify-between gap-2 flex-wrap border-b border-surface-container pb-2.5">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-indigo-600/15 text-indigo-700 flex items-center justify-center font-bold text-base">🌐</span>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="font-headline-sm text-[15px] font-bold text-on-surface m-0">글로벌 5대 수학교육 명작 벤치마킹 · 인터랙티브 수학 아카데미</h2>
+                <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-900 font-label-badge text-[11px] font-extrabold">Desmos · Mathigon Polypad · Brilliant · NRICH · AoPS 융합</span>
+              </div>
+              <p class="font-body-sm text-xs text-on-surface-variant m-0 mt-0.5">전 세계 수학교육을 선도하는 5대 플랫폼의 핵심 인터랙션(함수 구슬 챌린지 · 폴리패드 대수타일/양팔저울 · 10초 시각 직관 퍼즐 · 수학사 타임라인 &amp; 마스터리 맵)을 민은기 선생님의 1,113개 시각 증명 및 16,548문항 기출과 결합했습니다.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-amber-300 font-extrabold text-[11px] border border-amber-400/40">🏆 AoPS형 수학 레이팅: <b id="aopsEloRatingBadge">1250</b> (<span id="aopsTierLabel">탐구자 Explorer</span>)</span>
+            <button type="button" onclick="openMathTeacherHubModal('benchmark')" class="h-8 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-label-badge text-xs font-extrabold border-0 cursor-pointer shadow-sm">📊 5대 글로벌 벤치마킹 전체 분석 ➔</button>
+          </div>
+        </div>
+
+        <!-- 4 Benchmark Studio Mode Tabs -->
+        <div class="flex items-center gap-1.5 flex-wrap" id="benchmarkAcademyTabs">
+          <button type="button" onclick="switchBenchmarkStudioTab('desmos')" data-bm-tab="desmos" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-extrabold text-xs border-0 cursor-pointer shadow-sm">🎢 1. [Desmos형] Marbleslides 함수 구슬 챌린지</button>
+          <button type="button" onclick="switchBenchmarkStudioTab('polypad')" data-bm-tab="polypad" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-xs border border-surface-variant cursor-pointer">🧱 2. [Mathigon형] 폴리패드 대수타일 &amp; 양팔저울</button>
+          <button type="button" onclick="switchBenchmarkStudioTab('brilliant')" data-bm-tab="brilliant" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-xs border border-surface-variant cursor-pointer">🧩 3. [Brilliant×NRICH형] 낮은 문턱·높은 천장 시각 퍼즐</button>
+          <button type="button" onclick="switchBenchmarkStudioTab('timeline')" data-bm-tab="timeline" class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-xs border border-surface-variant cursor-pointer">🏛️ 4. [Mathigon×Khan형] 인류 수학사 타임라인 &amp; 16대 영역 마스터리</button>
+        </div>
+
+        <!-- TAB 1: Desmos Marbleslides Function Challenge -->
+        <div id="bmPanel_desmos" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
+          <div class="lg:col-span-7 rounded-xl bg-[#090d16] text-white p-3.5 border border-slate-800 flex flex-col justify-between gap-2">
+            <div class="flex items-center justify-between gap-1.5 flex-wrap">
+              <div class="flex items-center gap-1 flex-wrap" id="marbleStageBtns">
+                <button type="button" onclick="selectMarbleStage(0)" data-mstage="0" class="px-2 py-1 rounded bg-indigo-500 text-white font-extrabold text-[11px] border-0 cursor-pointer">Stage 1 · 일차함수</button>
+                <button type="button" onclick="selectMarbleStage(1)" data-mstage="1" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 2 · 이차포물선</button>
+                <button type="button" onclick="selectMarbleStage(2)" data-mstage="2" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 3 · 삼각사인파</button>
+                <button type="button" onclick="selectMarbleStage(3)" data-mstage="3" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 4 · 절댓값 V계곡</button>
+                <button type="button" onclick="selectMarbleStage(4)" data-mstage="4" class="px-2 py-1 rounded bg-slate-800 text-slate-300 font-bold text-[11px] border border-slate-700 cursor-pointer">Stage 5 · 삼차변곡점</button>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono font-bold text-[11px]" id="marbleStarScoreBadge">★ 0 / 4 획득</span>
+            </div>
+            <div class="relative w-full rounded-lg overflow-hidden bg-[#050811] border border-slate-800" style="height:230px;">
+              <canvas id="desmosMarbleslidesCanvas" width="640" height="230" class="w-full h-full block"></canvas>
+              <div id="marbleFormulaOverlay" class="absolute top-2 left-2.5 px-2.5 py-1 rounded bg-slate-900/90 border border-indigo-400/40 text-indigo-200 font-mono text-[11.5px]">y = -0.15x + 1.8</div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-sky-400 shrink-0" id="marbleParamALabel" data-no-i18n="1">기울기 a: -0.15</span>
+                <input type="range" id="marbleParamASlider" min="-1.5" max="0.5" step="0.05" value="-0.15" oninput="onMarbleSliderChange()" class="flex-1 accent-sky-400 cursor-pointer" />
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-amber-400 shrink-0" id="marbleParamBLabel" data-no-i18n="1">y절편 b: 1.8</span>
+                <input type="range" id="marbleParamBSlider" min="-2.0" max="3.0" step="0.1" value="1.8" oninput="onMarbleSliderChange()" class="flex-1 accent-amber-400 cursor-pointer" />
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5 flex flex-col justify-between gap-2.5 p-3.5 rounded-xl bg-gradient-to-br from-[#eef2ff] to-[#f8fafc] border border-indigo-200">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between gap-1">
+                <span class="px-2 py-0.5 rounded bg-indigo-600 text-white font-extrabold text-[10.5px]">🇺🇸 Desmos Classroom 벤치마킹</span>
+                <span class="text-[11px] font-bold text-indigo-900" id="marbleConceptBadge" data-no-i18n="1">중1·중2 일차함수의 기울기와 절편</span>
+              </div>
+              <div class="font-extrabold text-[14px] text-slate-900 leading-snug" id="marbleStageTitle" data-no-i18n="1">Stage 1 · 일차함수 미끄럼틀 다리 (y = a·x + b)</div>
+              <div class="text-slate-700 leading-relaxed text-[12px]" id="marbleMissionText" data-no-i18n="1">기울기 a와 y절편 b 슬라이더를 조절해 왼쪽 위에서 떨어지는 구슬이 황금 별(★) 4개를 모두 스치고 지나가게 만드세요!</div>
+              <div class="p-2.5 rounded-lg bg-white border border-indigo-200 text-indigo-950 font-semibold text-[11.5px]" id="marbleHintBox" data-no-i18n="1">💡 <b>수학교사 발문 힌트:</b> 별들이 오른쪽 아래로 내려가고 있으므로 기울기 a를 음수(-0.45)로 맞추고, y절편 b를 0.6으로 조절해 보세요!</div>
+            </div>
+            <div class="flex flex-col gap-1.5 pt-1">
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="launchDesmosMarbles()" class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-[#0284c7] to-[#4f46e5] hover:from-[#0369a1] hover:to-[#4338ca] text-white font-extrabold text-xs border-0 cursor-pointer shadow">🔴 구슬 발사! (Launch Marbles)</button>
+                <button type="button" onclick="applyMarbleTargetHint()" class="py-2 px-2.5 rounded-lg bg-white hover:bg-indigo-50 text-indigo-800 font-extrabold text-[11px] border border-indigo-300 cursor-pointer">✨ 최적 궤적 맞추기</button>
+              </div>
+              <button type="button" onclick="triggerSmartQuizSearch('함수 그래프 기울기 평행이동', true)" class="w-full py-1.5 px-3 rounded-lg bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 방금 실험한 함수 개념으로 수능·모평 기출 도전하기 ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Mathigon Polypad Virtual Manipulatives (Algebra Tiles & Balance Scale) -->
+        <div id="bmPanel_polypad" style="display:none;" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
+          <div class="lg:col-span-7 rounded-xl bg-[#090d16] text-white p-3.5 border border-slate-800 flex flex-col justify-between gap-2">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="switchPolypadMode('tiles')" id="polyBtn_tiles" class="px-2.5 py-1 rounded bg-emerald-500 text-slate-950 font-extrabold text-[11px] border-0 cursor-pointer">🟦 대수타일 넓이 조립: (x+a)(x+b)</button>
+                <button type="button" onclick="switchPolypadMode('balance')" id="polyBtn_balance" class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 font-bold text-[11px] border border-slate-700 cursor-pointer">⚖️ 등식의 성질 양팔저울: 2x + a = x + b</button>
+              </div>
+              <span class="text-emerald-300 font-mono font-bold text-[11px]" id="polypadEquationBadge">(x + 2)(x + 3) = x² + 5x + 6</span>
+            </div>
+            <div class="relative w-full rounded-lg overflow-hidden bg-[#050811] border border-slate-800" style="height:230px;">
+              <canvas id="mathigonPolypadCanvas" width="640" height="230" class="w-full h-full block"></canvas>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-emerald-400 shrink-0" id="polySlider1Label" data-no-i18n="1">가로 상수 a: 2</span>
+                <input type="range" id="polySlider1" min="1" max="5" step="1" value="2" oninput="renderPolypadCanvas()" class="flex-1 accent-emerald-400 cursor-pointer" />
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-amber-400 shrink-0" id="polySlider2Label" data-no-i18n="1">세로 상수 b: 3</span>
+                <input type="range" id="polySlider2" min="1" max="5" step="1" value="3" oninput="renderPolypadCanvas()" class="flex-1 accent-amber-400 cursor-pointer" />
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5 flex flex-col justify-between gap-2.5 p-3.5 rounded-xl bg-gradient-to-br from-[#ecfdf5] to-[#f8fafc] border border-emerald-300">
+            <div class="flex flex-col gap-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-700 text-white font-extrabold text-[10.5px] w-fit">🇬🇧 Mathigon Polypad 벤치마킹 · 가상 수학 교구</span>
+              <div class="font-extrabold text-[14px] text-slate-900 leading-snug" id="polypadRightTitle">눈으로 만지는 대수타일(Algebra Tiles)과 양팔저울</div>
+              <div class="text-slate-700 leading-relaxed text-[12px]" id="polypadRightDesc">추상적인 다항식 전개 공식 (x+a)(x+b) = x² + (a+b)x + ab를 외우지 마세요! 파란색 x² 정사각형 1개, 초록색 x 막대 (a+b)개, 노란색 1 타일 (a×b)개가 빈틈없이 직사각형으로 조립되는 넓이 보존 원리입니다.</div>
+              <div class="p-2.5 rounded-lg bg-white border border-emerald-200 text-emerald-950 font-semibold text-[11.5px]" id="polypadRightInsight">💡 <b>교실 발문:</b> 왜 일차항의 계수는 두 수의 합(a+b)이고 상수항은 두 수의 곱(ab)이 될까요? 타일의 가로·세로 조각 개수를 세어 보세요!</div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <a href="video_board.html?slug=2017032001&mode=question_ko" class="flex-1 py-2 px-2.5 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-extrabold text-center no-underline text-[11px]">🎬 대수·다항식 시각 증명 영상</a>
+              <button type="button" onclick="triggerSmartQuizSearch('인수분해 다항식 곱셈공식', true)" class="flex-1 py-2 px-2.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 다항식·방정식 기출 도전 ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Brilliant × NRICH Cambridge Low-Floor High-Ceiling Visual Puzzles -->
+        <div id="bmPanel_brilliant" style="display:none;" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
+          <div class="lg:col-span-7 p-4 rounded-xl bg-gradient-to-br from-[#fffbeb] to-[#f0f9ff] border border-amber-300 flex flex-col justify-between gap-2.5">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-600 text-white font-extrabold text-[11px]" id="lfhcBadge">Brilliant × NRICH 01 · 대수와 도형의 결합</span>
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="stepLfhcTask(-1)" class="px-2.5 py-1 rounded bg-white hover:bg-amber-50 border border-amber-300 font-bold cursor-pointer">◀ 이전 퍼즐</button>
+                <span class="px-2 font-extrabold text-amber-950" id="lfhcCounter">1 / 6</span>
+                <button type="button" onclick="stepLfhcTask(1)" class="px-2.5 py-1 rounded bg-white hover:bg-amber-50 border border-amber-300 font-bold cursor-pointer">다음 퍼즐 ▶</button>
+              </div>
+            </div>
+            <div class="font-extrabold text-[15px] text-slate-900 leading-snug" id="lfhcTitle">홀수들을 차례대로 더하면 왜 무조건 '정사각형 제곱수'가 될까?</div>
+            <div class="p-2.5 rounded-lg bg-white border border-emerald-300 text-slate-800 leading-relaxed" id="lfhcLowFloor">🧒 <b>[초등 입문 (Low Floor)]:</b> 1 + 3 = 4(2²), 1 + 3 + 5 = 9(3²), 1 + 3 + 5 + 7 = 16(4²)입니다. 그렇다면 1부터 19까지의 홀수 10개를 모두 더하면 얼마일까요?</div>
+            <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-950 leading-relaxed" id="lfhcVisualIntuition">🎨 <b>[10초 시각 직관 (Brilliant Aha!)]:</b> 바둑돌 1개에 ㄱ자 모양(L-shape)으로 3개, 5개, 7개를 둘러싸 보세요! 한 변이 1칸씩 커지는 완벽한 정사각형(n × n)이 만들어집니다!</div>
+            <div class="p-2.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-950 leading-relaxed" id="lfhcHighCeiling">🎓 <b>[고등·수능 천장 (High Ceiling)]:</b> ∑(k=1~n) (2k - 1) = n² 이며, 연속된 두 제곱수의 차 n² - (n-1)² = 2n - 1은 이차함수 x²의 미분 도함수(2x)의 이산적 원형입니다.</div>
+          </div>
+          <div class="lg:col-span-5 p-4 rounded-xl bg-slate-900 text-white border border-slate-700 flex flex-col justify-between gap-2.5">
+            <div class="flex flex-col gap-2">
+              <span class="px-2 py-0.5 rounded bg-[#0284c7] text-white font-extrabold text-[10.5px] w-fit">⚡ Learn by Doing · 10초 무계산 직관 챌린지</span>
+              <div class="font-extrabold text-[13.5px] text-amber-300 leading-snug" id="lfhcQuestionPrompt">1 + 3 + 5 + ... + 19 (첫 10개 홀수의 합)의 값을 숫자로 입력해 보세요!</div>
+              <div class="flex gap-1.5 mt-1">
+                <input type="text" id="lfhcAnswerInput" placeholder="정답 숫자 입력..." onkeydown="if(event.key==='Enter')checkLfhcAnswer()" class="flex-1 h-9 px-3 rounded-lg bg-slate-800 border border-slate-600 text-white font-bold text-xs" />
+                <button type="button" onclick="checkLfhcAnswer()" class="px-3.5 h-9 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs border-0 cursor-pointer">정답 확인 (+40 XP)</button>
+              </div>
+              <div id="lfhcFeedbackBox" class="hidden p-2.5 rounded-lg bg-emerald-950/90 border border-emerald-400 text-emerald-200 text-[11.5px] leading-relaxed"></div>
+            </div>
+            <div class="flex items-center gap-1.5 pt-2 border-t border-slate-800">
+              <a id="lfhcVideoBtn" href="video_board.html?slug=2017031403&mode=question_ko" class="flex-1 py-2 px-2.5 rounded-lg bg-[#0284c7] hover:bg-[#0369a1] text-white font-extrabold text-center no-underline text-[11px]">🎬 질문형 시각 증명 영상</a>
+              <button type="button" id="lfhcQuizBtn" onclick="triggerSmartQuizSearch('등차수열 홀수 합 시그마', true)" class="flex-1 py-2 px-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 수능 연계 문항 풀기 ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: Mathigon Historical Timeline & Khan/AoPS 16-Domain Mastery Matrix -->
+        <div id="bmPanel_timeline" style="display:none;" class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch text-xs">
+          <!-- Left 6 Cols: Interactive Timeline of Great Mathematicians -->
+          <div class="lg:col-span-6 p-3.5 rounded-xl bg-gradient-to-br from-[#f8fafc] to-[#eef2ff] border border-indigo-200 flex flex-col justify-between gap-2">
+            <div class="flex items-center justify-between gap-1 flex-wrap">
+              <span class="px-2 py-0.5 rounded bg-indigo-700 text-white font-extrabold text-[10.5px]">🏛️ Mathigon 벤치마킹 · 인류 수학사 타임라인</span>
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="stepTimelineEra(-1)" class="px-2 py-0.5 rounded bg-white border border-indigo-200 font-bold cursor-pointer">◀</button>
+                <span class="font-extrabold text-indigo-950 text-[11px]" id="timelineEraCounter">1 / 10</span>
+                <button type="button" onclick="stepTimelineEra(1)" class="px-2 py-0.5 rounded bg-white border border-indigo-200 font-bold cursor-pointer">▶</button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[11px] font-extrabold text-indigo-700" id="tlEraBadge">BC 530 · 고대 그리스</div>
+                <div class="font-extrabold text-[15px] text-slate-900" id="tlMathematicianName">피타고라스 (Pythagoras)</div>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-amber-300 font-mono font-bold text-xs" id="tlFormulaBadge">a² + b² = c²</span>
+            </div>
+            <div class="font-bold text-indigo-950 text-[12.5px]" id="tlSubtitle">만물의 근원은 수(Number)와 화음의 비례</div>
+            <div class="text-slate-700 leading-relaxed text-[11.8px]" id="tlStory">대장간의 망치 소리와 현악기의 줄 길이에서 정수 비례와 화음을 발견하고, 직각삼각형 세 변 위의 정사각형 넓이 보존 법칙을 증명했습니다.</div>
+            <div class="p-2 rounded-lg bg-white border border-indigo-200 text-slate-800 font-semibold text-[11px]" id="tlCurriculum">🔗 <b>교과과정 직결:</b> 중2 피타고라스 정리 · 고1 평면좌표 · 프랙탈 피타고라스 나무</div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <a id="tlVideoLink" href="video_board.html?slug=math20250130001&mode=question_ko" class="flex-1 py-1.5 px-2.5 rounded-lg bg-[#0284c7] text-white font-extrabold text-center no-underline text-[11px]">🎬 이 수학자의 정리 영상 보기</a>
+              <button type="button" id="tlQuizBtn" onclick="triggerSmartQuizSearch('피타고라스 직각삼각형', true)" class="flex-1 py-1.5 px-2.5 rounded-lg bg-indigo-600 text-white font-extrabold text-[11px] border-0 cursor-pointer">✍️ 관련 기출 문제 도전 ➔</button>
+            </div>
+          </div>
+
+          <!-- Right 6 Cols: Khan Academy × AoPS 16-Domain Mastery Matrix -->
+          <div class="lg:col-span-6 p-3.5 rounded-xl bg-slate-900 text-white border border-slate-700 flex flex-col justify-between gap-2">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <span class="px-2 py-0.5 rounded bg-emerald-600 text-white font-extrabold text-[10.5px]">📊 Khan × AoPS 벤치마킹 · 16대 영역 마스터리 맵</span>
+              <span class="text-[11px] text-emerald-300 font-bold">클릭 시 해당 단원 기출 &amp; 시각 증명 즉시 실행</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5" id="khanMasteryGrid">
+              <button type="button" onclick="triggerSmartQuizSearch('소인수분해 유리수 다항식', true)" class="p-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 text-left cursor-pointer"><div class="text-[10px] text-emerald-300 font-bold">👑 마스터</div><div class="font-extrabold text-[11px] text-white truncate">1. 수와 다항식</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('이차방정식 부등식 근과 계수', true)" class="p-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 text-left cursor-pointer"><div class="text-[10px] text-emerald-300 font-bold">👑 마스터</div><div class="font-extrabold text-[11px] text-white truncate">2. 방정식과 부등식</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('원의 방정식 직선 평행이동', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">3. 도형의 방정식</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('집합 명제 함수 역함수', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">4. 집합·명제·함수</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('지수함수 로그함수 그래프', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-left cursor-pointer"><div class="text-[10px] text-indigo-300 font-bold">⚡ 탐구 진행</div><div class="font-extrabold text-[11px] text-white truncate">5. 지수·로그함수</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('삼각함수 사인법칙 코사인법칙', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-left cursor-pointer"><div class="text-[10px] text-indigo-300 font-bold">⚡ 탐구 진행</div><div class="font-extrabold text-[11px] text-white truncate">6. 삼각함수·도형</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('등차수열 등비수열 귀납적', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-left cursor-pointer"><div class="text-[10px] text-indigo-300 font-bold">⚡ 탐구 진행</div><div class="font-extrabold text-[11px] text-white truncate">7. 수열과 귀납법</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('함수의 극한 연속 사이값', true)" class="p-2 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🔥 집중 공략</div><div class="font-extrabold text-[11px] text-white truncate">8. 함수의 극한·연속</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('미분계수 도함수 극대 극소', true)" class="p-2 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🔥 집중 공략</div><div class="font-extrabold text-[11px] text-white truncate">9. 다항함수 미분법</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('정적분 넓이 속도 거리', true)" class="p-2 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🔥 집중 공략</div><div class="font-extrabold text-[11px] text-white truncate">10. 다항함수 적분법</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('순열 조합 이항정리 경우의 수', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">11. 순열과 조합</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('조건부확률 정규분포 통계적추정', true)" class="p-2 rounded-lg bg-sky-950/80 hover:bg-sky-900 border border-sky-500/50 text-left cursor-pointer"><div class="text-[10px] text-sky-300 font-bold">🔷 숙련 단계</div><div class="font-extrabold text-[11px] text-white truncate">12. 확률과 통계</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('급수 미적분 초월함수 치환적분', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-400/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🎯 킬러 도전</div><div class="font-extrabold text-[11px] text-white truncate">13. 미적분(초월함수)</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('포물선 타원 쌍곡선 초점 접선', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-400/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🎯 킬러 도전</div><div class="font-extrabold text-[11px] text-white truncate">14. 기하·이차곡선</div></button>
+              <button type="button" onclick="triggerSmartQuizSearch('평면벡터 내적 공간도형 정사영', true)" class="p-2 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-400/50 text-left cursor-pointer"><div class="text-[10px] text-amber-300 font-bold">🎯 킬러 도전</div><div class="font-extrabold text-[11px] text-white truncate">15. 벡터·공간도형</div></button>
+              <button type="button" onclick="window.location.href='video_board.html'" class="p-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-400 text-left cursor-pointer"><div class="text-[10px] text-emerald-300 font-bold">🎬 847 PDF</div><div class="font-extrabold text-[11px] text-white truncate">16. 유클리드 작도</div></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
         </div>
       </div>
     </div>
@@ -3734,7 +3809,7 @@ function toggleMathStory() {
     var tBtnReSolve = isEn ? 'Re-solve' : '다시풀기';
     var tBadgeMastered = isEn ? '🏆 Mastered' : '🏆 완주';
 
-    var displayLimit = window._matheduDisplayLimit || 60;
+    var displayLimit = window._matheduDisplayLimit || 15;
     var renderCount = Math.min(filtered.length, displayLimit);
     for (var i = 0; i < renderCount; i++) {
       var item = filtered[i];
@@ -3760,8 +3835,14 @@ function toggleMathStory() {
         }
       }
 
-      var badge1 = (item.examYear ? item.examYear : '수능·모평') + (item.month ? (' · ' + item.month) : '');
-      var badge2 = (item.subject ? item.subject : '공통') + (item.qNum ? (' ' + item.qNum + '번') : '');
+      var monthEnMap = { '11월': 'Nov CSAT', '수능': 'Nov CSAT', '9월': 'Sep Mock', '6월': 'Jun Mock', '10월': 'Oct Exam', '7월': 'Jul Exam', '5월': 'May Mock', '4월': 'Apr Exam', '3월': 'Mar Exam', '특별탐구': 'Special Inquiry' };
+      var subjEnMap = { '공통(수학I·II)': 'Math I·II', '미적분': 'Calculus', '기하': 'Geometry', '기하(이차곡선·작도)': 'Geometry · Conics', '확률과 통계': 'Prob & Stats', '공통수학': 'Common Math', '수학(가형)': 'Math Ga', '수학(나형)': 'Math Na', '수학(고2)': 'Grade 11 Math' };
+      var badge1 = isEn
+        ? ((item.examYear ? item.examYear : 'CSAT/Mock') + (item.month ? (' · ' + (monthEnMap[item.month] || item.month)) : ''))
+        : ((item.examYear ? item.examYear : '수능·모평') + (item.month ? (' · ' + item.month) : ''));
+      var badge2 = isEn
+        ? ((item.subject ? (subjEnMap[item.subject] || item.subject) : 'Core Math') + (item.qNum ? (' #' + item.qNum) : ''))
+        : ((item.subject ? item.subject : '공통') + (item.qNum ? (' ' + item.qNum + '번') : ''));
       var isGeom = (item.subject === '기하') || title.includes('타원') || title.includes('포물선') || title.includes('쌍곡선') || title.includes('벡터') || title.includes('공간');
       var rightTagHtml = isGeom
         ? '<span class="font-label-badge text-label-badge text-status-emerald font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">view_in_ar</span>단델린·기하 연계</span>'
@@ -3786,22 +3867,26 @@ function toggleMathStory() {
       html += '  </div>';
       html += '  <div class="flex items-center gap-2 shrink-0 text-xs">';
       if (solved && solved.completed) {
-        html += '    <span class="text-status-emerald font-bold">✓ 완주</span>';
+        html += '    <span class="text-status-emerald font-bold">' + (isEn ? '✓ Done' : '✓ 완주') + '</span>';
       } else if (solved) {
-        html += '    <span class="text-secondary font-bold">진행중</span>';
+        html += '    <span class="text-secondary font-bold">' + (isEn ? 'In Progress' : '진행중') + '</span>';
       }
-      html += '    <button type="button" onclick="openMin7014ForProblemTitle(this.getAttribute(\'data-title\'))" data-title="' + title + '" title="이 문제와 연결된 민은기 선생님의 수학자료실 시각적 증명·GeoGebra·보조선 팁 열기" class="px-2 py-0.5 rounded bg-secondary/10 hover:bg-secondary/20 text-secondary font-bold border-0 cursor-pointer text-[11px]">📐 개념증명</button>';
-      html += '    <a href="' + itemOffHref + '" download title="' + tBtnOfflineTitle + '" class="text-on-surface-variant hover:text-on-surface no-underline">오프라인</a>';
-      html += '    <button type="button" onclick="openClassCreatorModal(\'' + slug + '\')" class="text-on-surface-variant hover:text-secondary bg-transparent border-0 cursor-pointer p-0 text-xs">수업QR</button>';
+      var proofBtnTip = isEn ? 'Open Visual Proofs, GeoGebra & Auxiliary Line Tips for this topic' : '이 문제와 연결된 민은기 선생님의 수학자료실 시각적 증명·GeoGebra·보조선 팁 열기';
+      html += '    <button type="button" data-no-i18n="1" onclick="openMin7014ForProblemTitle(this.getAttribute(\'data-title\'))" data-title="' + title + '" title="' + proofBtnTip + '" class="px-2 py-0.5 rounded bg-secondary/10 hover:bg-secondary/20 text-secondary font-bold border-0 cursor-pointer text-[11px]">' + (isEn ? '📐 Proof' : '📐 개념증명') + '</button>';
+      html += '    <a href="' + itemOffHref + '" data-no-i18n="1" download title="' + tBtnOfflineTitle + '" class="text-on-surface-variant hover:text-on-surface no-underline">' + tBtnOffline + '</a>';
+      html += '    <button type="button" data-no-i18n="1" onclick="openClassCreatorModal(\'' + slug + '\')" class="text-on-surface-variant hover:text-secondary bg-transparent border-0 cursor-pointer p-0 text-xs">' + tBtnLaunch + '</button>';
       html += '    <button type="button" class="card-bookmark-btn ' + (isBm ? 'active' : '') + '" onclick="toggleBookmarkCard(\'' + slug + '\', this)" title="' + bmTitle + '">' + (isBm ? '★' : '☆') + '</button>';
-      html += '    <a class="px-2.5 py-1 rounded-md bg-primary text-on-primary font-semibold no-underline hover:opacity-90" href="' + itemHref + '">' + solveBtnText + ' ➔</a>';
+      html += '    <a data-no-i18n="1" class="px-2.5 py-1 rounded-md bg-primary text-on-primary font-semibold no-underline hover:opacity-90" href="' + itemHref + '">' + solveBtnText + ' ➔</a>';
       html += '  </div>';
       html += '</div>';
     }
     if (filtered.length > renderCount) {
-      html += '<div class="col-span-full rounded-xl bg-surface-container-lowest border border-secondary/30 p-3.5 text-center shadow-sm">';
-      html += '  <button type="button" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||60)+60; window._triggerRenderList();" class="px-5 py-2.5 rounded-xl bg-secondary text-white font-headline-sm text-[14px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
-      html += '    ➕ 다음 60문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 검색 결과 ' + filtered.length.toLocaleString() + '문항)';
+      var moreLabel = isEn
+        ? ('➕ Load 30 More Problems (Showing ' + renderCount.toLocaleString() + ' of ' + filtered.length.toLocaleString() + ')')
+        : ('➕ 다음 30문항 더보기 (현재 ' + renderCount.toLocaleString() + ' / 전체 ' + filtered.length.toLocaleString() + '문항)');
+      html += '<div class="col-span-full rounded-xl bg-surface-container-lowest border border-secondary/30 p-3 text-center shadow-sm">';
+      html += '  <button type="button" data-no-i18n="1" onclick="window._matheduDisplayLimit=(window._matheduDisplayLimit||15)+30; window._triggerRenderList();" class="px-4 py-2 rounded-xl bg-secondary text-white font-headline-sm text-[13.5px] font-bold border-0 cursor-pointer hover:opacity-95 transition-opacity">';
+      html += '    ' + moreLabel;
       html += '  </button>';
       html += '</div>';
     }
@@ -4038,8 +4123,15 @@ function toggleMathStory() {
         // 최신순 정렬 (역순)
         requests.reverse();
         var pendingCount = requests.filter(function(r) { return !r.fix_timestamp; }).length;
+        var reqDetails = document.getElementById('requestsBoardDetails');
+        if (reqDetails) {
+          reqDetails.open = (pendingCount > 0);
+        }
         if (badge) {
-          badge.textContent = pendingCount > 0 ? (pendingCount + '건 AI 제작 중') : '전체 제작 완료 (' + requests.length + '건)';
+          var isEnReq = !!(window.MatheduI18n && window.MatheduI18n.getLanguage() === 'en');
+          badge.textContent = pendingCount > 0
+            ? (isEnReq ? (pendingCount + ' In Progress') : (pendingCount + '건 AI 제작 중'))
+            : (isEnReq ? ('All Completed (' + requests.length + ')') : ('전체 제작 완료 (' + requests.length + '건)'));
           badge.className = 'count-badge ' + (pendingCount > 0 ? 'badge-pending' : 'badge-done');
         }
 
@@ -4799,8 +4891,132 @@ window._renderMathTeacherHubContentImpl = function() {
 // ══════════════════════════════════════════════════════════════════════════
 // ✨ 인터랙티브 수학 경이(Wonder) 실험실 & 자연·우주·AI 수학 호기심 도감 컨트롤러
 // ══════════════════════════════════════════════════════════════════════════
+// Progressive Disclosure Drawers & Deep Math Labs Tab Controller (R63)
+window._activeDeepLabTab = null;
+
+window.toggleHomeQuickDrawer = function(which) {
+  var ytEl = document.getElementById('ytViralCinemaHub');
+  var toolsEl = document.getElementById('teacherQuickToolsDrawer');
+  if (which === 'yt' && ytEl) {
+    var openYt = (ytEl.style.display === 'none' || !ytEl.style.display);
+    ytEl.style.display = openYt ? 'flex' : 'none';
+    if (openYt && toolsEl) toolsEl.style.display = 'none';
+  } else if (which === 'tools' && toolsEl) {
+    var openTools = (toolsEl.style.display === 'none' || !toolsEl.style.display);
+    toolsEl.style.display = openTools ? 'flex' : 'none';
+    if (openTools && ytEl) ytEl.style.display = 'none';
+  }
+};
+
+window.switchHomeDeepLabTab = function(tabKey, shouldScroll) {
+  var map = {
+    curriculum: 'min7014DeepCurriculumSection',
+    daily: 'dailyGrowthFlywheelSection',
+    pedagogy: 'mathTeacherPedagogySection',
+    wonder: 'mathCuriosityPhilosophySection',
+    benchmark: 'globalMathBenchmarkSection'
+  };
+  if (tabKey && window._activeDeepLabTab === tabKey && !shouldScroll) {
+    tabKey = null;
+  }
+  window._activeDeepLabTab = tabKey || null;
+  Object.keys(map).forEach(function(k) {
+    var sec = document.getElementById(map[k]);
+    if (sec) sec.style.display = (k === window._activeDeepLabTab) ? 'block' : 'none';
+  });
+  var collapseBtn = document.getElementById('btnCollapseDeepLabs');
+  if (collapseBtn) collapseBtn.style.display = window._activeDeepLabTab ? 'inline-flex' : 'none';
+
+  document.querySelectorAll('#deepMathLabsTabBar button[data-deep-tab]').forEach(function(btn) {
+    var isAct = btn.getAttribute('data-deep-tab') === window._activeDeepLabTab;
+    btn.className = isAct
+      ? 'px-3 py-1.5 rounded-lg bg-secondary text-white font-bold border border-secondary cursor-pointer shadow-sm transition-colors'
+      : 'px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold border border-surface-variant cursor-pointer transition-colors';
+  });
+
+  if (window._activeDeepLabTab === 'wonder') {
+    setTimeout(function() { if (window.updateWonderLabCanvas) window.updateWonderLabCanvas(); if (window.rotateCuriosityCard) window.rotateCuriosityCard(0); }, 30);
+  } else if (window._activeDeepLabTab === 'benchmark') {
+    setTimeout(function() { if (window.switchBenchmarkStudioTab) window.switchBenchmarkStudioTab(window._bmActiveTab || 'desmos'); }, 30);
+  }
+
+  if (shouldScroll) {
+    var hub = document.getElementById('deepMathLabsHub');
+    if (hub && hub.scrollIntoView) hub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+
+(function bindDeepLabHashNavigation() {
+  var hashToTab = {
+    '#min7014DeepCurriculumSection': 'curriculum',
+    '#dailyGrowthFlywheelSection': 'daily',
+    '#mathTeacherPedagogySection': 'pedagogy',
+    '#mathCuriosityPhilosophySection': 'wonder',
+    '#globalMathBenchmarkSection': 'benchmark'
+  };
+  function checkHash() {
+    var h = window.location.hash;
+    if (hashToTab[h]) {
+      window.switchHomeDeepLabTab(hashToTab[h], true);
+    }
+  }
+  window.addEventListener('hashchange', checkHash);
+  document.addEventListener('DOMContentLoaded', checkHash);
+})();
+
 window._wonderLabMode = 'pythagoras';
 window._curiosityCardIdx = 0;
+
+window.CURIOSITY_ATLAS_EN = {
+  'curiosity-01-fractal-pythagoras': {
+    domain: 'Geometry · Pythagoras & Fractals',
+    question: '🌿 Why do tree branches, broccoli, lightning, and blood vessels split like a Pythagoras Tree?',
+    story: 'Nature delivers sunlight and oxygen across maximum area with minimum energy. Splitting along right triangles (a² + b² = c²) preserves total cross-sectional area at every stage while creating a self-similar fractal canopy!',
+    experiment: 'If the trunk square has area 1, what is the total area of all 1,024 leaf squares at Step 10? (Answer: Always exactly 1!)'
+  },
+  'curiosity-02-conics-whisper': {
+    domain: 'Conic Sections · Ellipses & Parabolas',
+    question: '🛸 Where are the foci of ellipses and parabolas used in the real world beyond exams?',
+    story: 'Waves emitted from one focus (F₁) of an ellipse reflect off the boundary and converge at the second focus (F₂)—enabling non-invasive kidney stone lithotripsy! Parabolic mirrors focus parallel starlight to power the James Webb Space Telescope.',
+    experiment: 'On an elliptical billiard table, if you strike a ball placed on one focus in any direction, what point must it pass through after one bounce?'
+  },
+  'curiosity-03-log-human-sense': {
+    domain: 'Algebra · Exponents & Logarithms',
+    question: '🌌 Why do earthquake Richter scales, decibels (dB), star magnitudes, and pH all use logarithms?',
+    story: 'Human perception responds to multiplicative ratios rather than linear differences (Weber–Fechner Law). Logarithms translate astronomical multiplications (10¹, 10², 10³…) into clean, intuitive steps (1, 2, 3…)!',
+    experiment: 'A magnitude 7.0 earthquake is 2 units higher than 5.0—how many times more energy does it release? (About 1,000×!)'
+  },
+  'curiosity-04-trig-sound-wave': {
+    domain: 'Trigonometry & Wave Analysis',
+    question: '🎧 How do sine and cosine ratios power noise-canceling headphones, music synthesis, and MRI?',
+    story: 'Unrolling uniform circular motion over time produces a pure sine wave y = sin(x). Noise-canceling headphones measure ambient sound A·sin(t) and emit an inverted wave A·sin(t + π) = -A·sin(t), canceling noise to zero!',
+    experiment: 'When a wave crest of +1 meets a wave trough of -1 at the exact same point, does the sound grow louder or vanish into silence?'
+  },
+  'curiosity-05-calculus-ai-gradient': {
+    domain: 'Calculus · Derivatives & Optimization',
+    question: '🤖 Why is the derivative f′(x) essential for training modern AI, self-driving cars, and rockets?',
+    story: 'Training deep learning models means finding the minimum of a loss function. Like descending a foggy mountain by feeling the slope underfoot, Gradient Descent steps opposite to the derivative f′(x) until reaching an optimal valley!',
+    experiment: 'If the tangent slope f′(a) at your current point is positive (+), should you step left (decrease x) or right (increase x) to lower f(x)?'
+  },
+  'curiosity-06-integral-ct-3d': {
+    domain: 'Calculus · Definite Integrals & Quadrature',
+    question: '🏥 How does slicing and summing (∫ S(x) dx) reconstruct 3D hospital CT scans and Pixar movies?',
+    story: 'Irregular organs cannot be measured with a ruler, but stacking hundreds of 0.5 mm cross-sectional slices (∫ S(x) dx) reconstructs exact 3D volumes—extending Archimedes’ 2,200-year-old method of exhaustion to modern CT/MRI!',
+    experiment: 'If two identical stacks of coins have the same height and one stack is pushed askew (Cavalieri’s Principle), do their volumes remain equal?'
+  },
+  'curiosity-07-fibonacci-golden-nature': {
+    domain: 'Sequences · Fibonacci & Golden Ratio',
+    question: '🌻 Why do sunflower seed spirals and pinecones always follow Fibonacci numbers (8, 13, 21, 34, 55…)?',
+    story: 'Rational rotation angles leave empty radial gaps between seeds. Rotating by the irrational Golden Angle (≈ 137.5°, derived from φ ≈ 1.618) packs seeds with zero wasted space, naturally forming adjacent Fibonacci spiral counts!',
+    experiment: 'When squares of side lengths 1, 1, 2, 3, 5, 8, 13 are tiled edge-to-edge, what iconic natural spiral emerges?'
+  },
+  'curiosity-08-bayes-ai-decision': {
+    domain: 'Probability · Conditional & Bayesian Inference',
+    question: '🎲 Why is conditional probability P(A|B) the ultimate decision-making engine in science and AI?',
+    story: 'Rational reasoning updates belief in hypothesis A when new evidence B arrives. Spam filters, autonomous vehicle radar, and medical diagnostic interpretation all rely on Bayes’ Theorem to separate signal from false alarms!',
+    experiment: 'In a population of 1,000 with 10 true cases and a 1% false-positive rate, how many total positive test results form the denominator?'
+  }
+};
 
 window.switchWonderLabMode = function(mode) {
   window._wonderLabMode = mode || 'pythagoras';
@@ -4835,6 +5051,7 @@ window.updateWonderLabCanvas = function() {
   var ctx = cvs.getContext('2d');
   var W = cvs.width, H = cvs.height;
   ctx.clearRect(0, 0, W, H);
+  var isEn = !!(window.MatheduI18n && typeof window.MatheduI18n.getLanguage === 'function' && window.MatheduI18n.getLanguage() === 'en');
 
   var s1Val = parseFloat(document.getElementById('wonderSlider1')?.value || '40');
   var s2Val = parseFloat(document.getElementById('wonderSlider2')?.value || '6');
@@ -4847,15 +5064,23 @@ window.updateWonderLabCanvas = function() {
   if (window._wonderLabMode === 'pythagoras') {
     var deg = s1Val;
     var depth = Math.min(8, Math.max(1, Math.round(s2Val)));
-    if (l1) l1.textContent = '📐 직각삼각형 각도 θ: ' + deg + '°';
-    if (l2) l2.textContent = '🌳 가지 단계: ' + depth + '단';
-    if (badge) badge.textContent = '피타고라스 프랙탈: a² + b² = c² (넓이 합 불변량)';
+    if (l1) l1.textContent = isEn ? ('📐 Right Triangle Angle θ: ' + deg + '°') : ('📐 직각삼각형 각도 θ: ' + deg + '°');
+    if (l2) l2.textContent = isEn ? ('🌳 Branch Depth: ' + depth) : ('🌳 가지 단계: ' + depth + '단');
+    if (badge) badge.textContent = isEn ? 'Pythagoras Fractal: a² + b² = c² (Area Invariance)' : '피타고라스 프랙탈: a² + b² = c² (넓이 합 불변량)';
     var rad = deg * Math.PI / 180;
     var c2 = 100;
     var a2 = Math.round(c2 * Math.cos(rad) * Math.cos(rad) * 10) / 10;
     var b2 = Math.round(c2 * Math.sin(rad) * Math.sin(rad) * 10) / 10;
-    if (stat) stat.textContent = '기둥 넓이 c² = 100  |  왼쪽 가지 a² = ' + a2.toFixed(1) + ' + 오른쪽 가지 b² = ' + b2.toFixed(1) + ' ➔ 합계 = ' + (a2 + b2).toFixed(1);
-    if (cap) cap.innerHTML = '💡 <b>관찰과 경이(Notice &amp; Wonder):</b> 각도 θ를 ' + deg + '°로 바꾸어도 두 가지 정사각형 넓이의 합(' + a2.toFixed(1) + ' + ' + b2.toFixed(1) + ' = 100.0)은 기둥 넓이와 100% 일치합니다!';
+    if (stat) {
+      stat.textContent = isEn
+        ? ('Trunk c² = 100  |  Left a² = ' + a2.toFixed(1) + ' + Right b² = ' + b2.toFixed(1) + ' ➔ Sum = ' + (a2 + b2).toFixed(1))
+        : ('기둥 넓이 c² = 100  |  왼쪽 가지 a² = ' + a2.toFixed(1) + ' + 오른쪽 가지 b² = ' + b2.toFixed(1) + ' ➔ 합계 = ' + (a2 + b2).toFixed(1));
+    }
+    if (cap) {
+      cap.innerHTML = isEn
+        ? ('💡 <b>Notice &amp; Wonder:</b> Even at θ = ' + deg + '°, the sum of the two branch squares (' + a2.toFixed(1) + ' + ' + b2.toFixed(1) + ' = 100.0) matches the trunk area 100%!')
+        : ('💡 <b>관찰과 경이(Notice &amp; Wonder):</b> 각도 θ를 ' + deg + '°로 바꾸어도 두 가지 정사각형 넓이의 합(' + a2.toFixed(1) + ' + ' + b2.toFixed(1) + ' = 100.0)은 기둥 넓이와 100% 일치합니다!');
+    }
 
     function drawBranch(x1, y1, x2, y2, d) {
       var dx = x2 - x1, dy = y1 - y2;
@@ -4880,18 +5105,25 @@ window.updateWonderLabCanvas = function() {
     drawBranch(W / 2 - 22, H - 14, W / 2 + 22, H - 14, depth);
   } else if (window._wonderLabMode === 'archimedes') {
     var n = Math.max(3, Math.round(s1Val));
-    if (l1) l1.textContent = '🎯 내접·외접 정다각형 변의 수 n: ' + n + '각형';
-    if (badge) badge.textContent = '아르키메데스 착출법: n·sin(π/n) < π < n·tan(π/n)';
+    if (l1) l1.textContent = isEn ? ('🎯 Inscribed/Circumscribed Polygon Sides n: ' + n + '-gon') : ('🎯 내접·외접 정다각형 변의 수 n: ' + n + '각형');
+    if (badge) badge.textContent = isEn ? 'Archimedes Exhaustion: n·sin(π/n) < π < n·tan(π/n)' : '아르키메데스 착출법: n·sin(π/n) < π < n·tan(π/n)';
     var innerPi = n * Math.sin(Math.PI / n);
     var outerPi = n * Math.tan(Math.PI / n);
-    if (stat) stat.textContent = '내접 둘레/2r = ' + innerPi.toFixed(5) + '  <  π (3.14159)  <  외접 둘레/2r = ' + outerPi.toFixed(5);
-    if (cap) cap.innerHTML = '💡 <b>극한의 본질(Squeeze Theorem):</b> 정' + n + '각형의 변을 잘게 쪼갤수록 다각형과 원의 경계가 하나로 포개지며 π = 3.14159...가 눈앞에서 탄생합니다!';
+    if (stat) {
+      stat.textContent = isEn
+        ? ('Inscribed = ' + innerPi.toFixed(5) + '  <  π (3.14159)  <  Circumscribed = ' + outerPi.toFixed(5))
+        : ('내접 둘레/2r = ' + innerPi.toFixed(5) + '  <  π (3.14159)  <  외접 둘레/2r = ' + outerPi.toFixed(5));
+    }
+    if (cap) {
+      cap.innerHTML = isEn
+        ? ('💡 <b>Squeeze Theorem in Action:</b> Increasing sides to a regular ' + n + '-gon sandwiches the circle tightly to reveal π = 3.14159…!')
+        : ('💡 <b>극한의 본질(Squeeze Theorem):</b> 정' + n + '각형의 변을 잘게 쪼갤수록 다각형과 원의 경계가 하나로 포개지며 π = 3.14159...가 눈앞에서 탄생합니다!');
+    }
 
     var cx = W / 2, cy = H / 2, R = 82;
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
     ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.5; ctx.stroke();
 
-    // 외접 다각형
     var rOut = R / Math.cos(Math.PI / n);
     ctx.beginPath();
     for (var i = 0; i <= n; i++) {
@@ -4901,7 +5133,6 @@ window.updateWonderLabCanvas = function() {
     }
     ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 1.6; ctx.stroke();
 
-    // 내접 다각형
     ctx.beginPath();
     for (var j = 0; j <= n; j++) {
       var a2 = (j * 2 * Math.PI / n) - Math.PI / 2;
@@ -4913,12 +5144,20 @@ window.updateWonderLabCanvas = function() {
   } else if (window._wonderLabMode === 'sunflower') {
     var angleDeg = (s1Val / 10);
     var seeds = Math.round(s2Val);
-    if (l1) l1.textContent = '🌻 씨앗 회전 각도: ' + angleDeg.toFixed(1) + '° (황금각 137.5°)';
-    if (l2) l2.textContent = '🌱 씨앗 개수: ' + seeds + '개';
-    if (badge) badge.textContent = '황금비(φ = 1.618)와 피보나치 나선 설계도';
+    if (l1) l1.textContent = isEn ? ('🌻 Divergence Angle: ' + angleDeg.toFixed(1) + '° (Golden 137.5°)') : ('🌻 씨앗 회전 각도: ' + angleDeg.toFixed(1) + '° (황금각 137.5°)');
+    if (l2) l2.textContent = isEn ? ('🌱 Seed Count: ' + seeds) : ('🌱 씨앗 개수: ' + seeds + '개');
+    if (badge) badge.textContent = isEn ? 'Golden Ratio (φ = 1.618) & Fibonacci Spiral Packing' : '황금비(φ = 1.618)와 피보나치 나선 설계도';
     var isGolden = Math.abs(angleDeg - 137.5) <= 0.25;
-    if (stat) stat.textContent = isGolden ? '✨ 황금각(137.5°) 도달! 빈틈 제로(0%) 피보나치 나선 21·34줄 완벽 정렬!' : '회전각 ' + angleDeg.toFixed(1) + '° ➔ 137.5°(황금각)에 맞추면 빈틈이 마법처럼 사라집니다!';
-    if (cap) cap.innerHTML = '💡 <b>자연의 수학적 선택:</b> 각도가 유리수 분수이면 씨앗이 직선으로만 뭉치지만, 무리수 황금각(137.5°)일 때 가장 촘촘한 피보나치 나선이 만들어집니다!';
+    if (stat) {
+      stat.textContent = isEn
+        ? (isGolden ? '✨ Golden Angle (137.5°)! Optimal 21 & 34 Fibonacci spirals with zero gaps!' : ('Angle ' + angleDeg.toFixed(1) + '° ➔ Tune to 137.5° (Golden Angle) to eliminate radial gaps!'))
+        : (isGolden ? '✨ 황금각(137.5°) 도달! 빈틈 제로(0%) 피보나치 나선 21·34줄 완벽 정렬!' : '회전각 ' + angleDeg.toFixed(1) + '° ➔ 137.5°(황금각)에 맞추면 빈틈이 마법처럼 사라집니다!');
+    }
+    if (cap) {
+      cap.innerHTML = isEn
+        ? '💡 <b>Nature’s Optimal Packing:</b> Rational angles align seeds into spokes, whereas the irrational Golden Angle (137.5°) packs Fibonacci spirals seamlessly!'
+        : '💡 <b>자연의 수학적 선택:</b> 각도가 유리수 분수이면 씨앗이 직선으로만 뭉치지만, 무리수 황금각(137.5°)일 때 가장 촘촘한 피보나치 나선이 만들어집니다!';
+    }
 
     var scx = W / 2, scy = H / 2;
     for (var k = 1; k <= seeds; k++) {
@@ -4938,6 +5177,8 @@ window.rotateCuriosityCard = function(delta) {
   if (!atlas.length) return;
   window._curiosityCardIdx = (window._curiosityCardIdx + (delta || 0) + atlas.length) % atlas.length;
   var c = atlas[window._curiosityCardIdx];
+  var isEn = !!(window.MatheduI18n && typeof window.MatheduI18n.getLanguage === 'function' && window.MatheduI18n.getLanguage() === 'en');
+  var enPack = (window.CURIOSITY_ATLAS_EN && c && window.CURIOSITY_ATLAS_EN[c.id]) || null;
   var dEl = document.getElementById('curiosityCardDomainBadge');
   var cEl = document.getElementById('curiosityCardCounter');
   var qEl = document.getElementById('curiosityCardQuestion');
@@ -4945,20 +5186,25 @@ window.rotateCuriosityCard = function(delta) {
   var eEl = document.getElementById('curiosityCardExperiment');
   var vEl = document.getElementById('curiosityCardVideoLink');
   var bEl = document.getElementById('curiosityCardQuizBtn');
-  if (dEl) dEl.textContent = c.domain;
+  if (dEl) dEl.textContent = (isEn && enPack) ? enPack.domain : c.domain;
   if (cEl) cEl.textContent = (window._curiosityCardIdx + 1) + ' / ' + atlas.length;
-  if (qEl) qEl.textContent = c.studentWonderQuestion;
-  if (sEl) sEl.textContent = c.fascinatingStory;
-  if (eEl) eEl.innerHTML = '🤔 <b>30초 사고 실험:</b> ' + c.miniThoughtExperiment;
-  if (vEl) vEl.href = 'video_board.html?slug=' + encodeURIComponent(c.videoSlug || 'math20250130001') + '&mode=question_ko';
+  if (qEl) qEl.textContent = (isEn && enPack) ? enPack.question : c.studentWonderQuestion;
+  if (sEl) sEl.textContent = (isEn && enPack) ? enPack.story : c.fascinatingStory;
+  if (eEl) {
+    eEl.innerHTML = (isEn && enPack)
+      ? ('🤔 <b>30s Thought Experiment:</b> ' + enPack.experiment)
+      : ('🤔 <b>30초 사고 실험:</b> ' + c.miniThoughtExperiment);
+  }
+  if (vEl) vEl.href = 'video_board.html?slug=' + encodeURIComponent(c.videoSlug || 'math20250130001') + (isEn ? '&mode=full_en' : '&mode=question_ko');
   if (bEl) bEl.setAttribute('onclick', "triggerSmartQuizSearch('" + (c.quizKeyword || '피타고라스') + "', true)");
 };
 
 window.saveQuickEurekaJournal = function() {
   var inp = document.getElementById('quickEurekaJournalInput');
   var txt = (inp?.value || '').trim();
+  var isEn = !!(window.MatheduI18n && typeof window.MatheduI18n.getLanguage === 'function' && window.MatheduI18n.getLanguage() === 'en');
   if (!txt) {
-    alert('오늘 깨달은 수학적 원리나 보조선 아이디어를 한 줄로 입력해 주세요!');
+    alert(isEn ? 'Please enter a brief mathematical insight or auxiliary-line idea!' : '오늘 깨달은 수학적 원리나 보조선 아이디어를 한 줄로 입력해 주세요!');
     return;
   }
   var logs = [];
@@ -4968,8 +5214,17 @@ window.saveQuickEurekaJournal = function() {
   if (inp) inp.value = '';
   var cntEl = document.getElementById('eurekaJournalCountBadge');
   if (cntEl) cntEl.textContent = String(logs.length);
-  alert('💎 훌륭합니다! 나만의 수학적 깨달음(Eureka)이 사색 일지에 기록되었습니다 (+30 XP)!');
+  alert(isEn ? '💎 Saved to your Eureka Journal (+30 XP)!' : '💎 훌륭합니다! 나만의 수학적 깨달음(Eureka)이 사색 일지에 기록되었습니다 (+30 XP)!');
 };
+
+window.addEventListener('mathedu:lang-changed', function() {
+  try {
+    if (window.updateWonderLabCanvas) window.updateWonderLabCanvas();
+    if (window.rotateCuriosityCard) window.rotateCuriosityCard(0);
+    if (window.updateAopsEloBadge) window.updateAopsEloBadge(0);
+    if (window._triggerRenderList) window._triggerRenderList();
+  } catch (e) {}
+});
 
 setTimeout(function() {
   try {
@@ -5292,7 +5547,7 @@ window.renderHomeYtCinemaPlayer = function(openNow) {
     '<a href="' + ytHref + '" target="_blank" rel="noopener" style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;text-decoration:none;background:#020617;overflow:hidden;">' +
       '<img src="' + thumbUrl + '" alt="YouTube Thumbnail" style="width:100%;height:100%;object-fit:cover;opacity:0.78;" />' +
       '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(2,6,23,0.36);padding:16px;text-align:center;">' +
-        '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:#dc2626;color:#fff;font-weight:900;font-size:14px;box-shadow:0 10px 25px rgba(220,38,38,0.55);">' + btnTxt + '</span>' +
+        '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:#0284c7;color:#fff;font-weight:900;font-size:14px;box-shadow:0 10px 25px rgba(2,132,199,0.50);">' + btnTxt + '</span>' +
         '<span style="font-size:11.5px;color:#e2e8f0;font-weight:700;">' + ytHref + '</span>' +
       '</div>' +
     '</a>';
@@ -5377,7 +5632,7 @@ window.selectPrStudioChannel = function(chId) {
   document.querySelectorAll('#prStudioChannelTabs .pr-ch-tab').forEach(function(b) {
     var isAct = b.getAttribute('data-ch') === window._prStudioChannel;
     b.className = isAct
-      ? 'pr-ch-tab px-2.5 py-1.5 rounded-lg bg-rose-600 text-white font-extrabold border-0 cursor-pointer text-xs'
+      ? 'pr-ch-tab px-2.5 py-1.5 rounded-lg bg-[#0284c7] text-white font-extrabold border-0 cursor-pointer text-xs'
       : 'pr-ch-tab px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold border-0 cursor-pointer text-xs';
   });
   window.renderPrAgentStudioContent();
@@ -5916,7 +6171,7 @@ window.openYoutubeSeedIgniteModal = function() {
       '</div>' +
       '<div style="display:flex;flex-direction:column;gap:10px;">' +
         '<div style="font-size:0.88rem;color:#cbd5e1;line-height:1.55;">공식 암기 대신 <b>보조선 1줄로 내신·수능 도형을 10초 만에 꿰뚫는</b> 시각적 증명 채널입니다. 아래 대표 3분 영상 1편을 끝까지 시청하고 구독해 주시면 매일 새 시각 증명이 배달됩니다!</div>' +
-        '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="padding:11px 14px;border-radius:10px;background:linear-gradient(135deg,#dc2626,#ea580c);color:#fff;font-weight:900;text-decoration:none;text-align:center;">🔔 1단계: @min7014_ai 무료 구독 바로가기 ↗</a>' +
+        '<a href="https://www.youtube.com/@min7014_ai?sub_confirmation=1" target="_blank" rel="noopener" style="padding:11px 14px;border-radius:10px;background:linear-gradient(135deg,#0284c7,#4f46e5);color:#fff;font-weight:900;text-decoration:none;text-align:center;">🔔 1단계: @min7014_ai 무료 구독 바로가기 ↗</a>' +
         '<a href="https://youtu.be/BkxSXat12V4" target="_blank" rel="noopener" style="padding:10px 14px;border-radius:10px;background:#0284c7;color:#fff;font-weight:800;text-decoration:none;text-align:center;">🎬 2단계: 4분 실전함정 5초 해체 대표작 완주하기 ↗</a>' +
         '<a href="https://youtube.com/shorts/ZPx-zIC9w3I" target="_blank" rel="noopener" style="padding:10px 14px;border-radius:10px;background:#1e293b;border:1px solid #38bdf8;color:#fef08a;font-weight:800;text-decoration:none;text-align:center;">⚡ 3단계: 원주각 x=? 3초 챌린지 Q-#Shorts 보기 ↗</a>' +
         '<button type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText(\'📐 공식 암기 없이 보조선 1줄로 끝내는 시각적 수학 증명!\\n🔔 @min7014_ai 무료 구독: https://www.youtube.com/@min7014_ai?sub_confirmation=1\\n🎬 3분 대표 영상: https://youtu.be/DSgUHigl82o\\n⚡ 인기 45초 퀴즈 쇼츠: https://youtube.com/shorts/9L_15T8bzS8\').then(function(){alert(\'✅ 학급 단톡방·커뮤니티 초대 메시지가 복사되었습니다!\');})" style="padding:10px 14px;border-radius:10px;background:#f59e0b;color:#0f172a;border:0;font-weight:900;cursor:pointer;">📋 학급 단톡방·연구회 공유 문구 1초 복사</button>' +
