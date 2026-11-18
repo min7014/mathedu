@@ -864,8 +864,9 @@ def run_continuous_foundation_loop(single_cycle=False):
         import google_ecosystem_orchestrator as _geo_orch
         sm_res = _geo_orch.build_google_video_sitemap()
         cap_res = _geo_orch.smart_sync_youtube_captions_surplus_quota(max_tracks=2)
+        url_rep = _geo_orch.smart_repair_youtube_url_boundaries_surplus_quota(max_repairs=25)
         print(
-            f"🌐 [Google Ecosystem Orchestrator] video-sitemap={sm_res.get('indexed_live_videos')} live videos | captions={cap_res.get('status')}",
+            f"🌐 [Google Ecosystem Orchestrator] video-sitemap={sm_res.get('indexed_live_videos')} live videos | captions={cap_res.get('status')} | url_heal={len(url_rep.get('repaired') or [])}",
             flush=True,
         )
     except Exception as geo_err:

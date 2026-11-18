@@ -924,25 +924,27 @@ def try_upload_one_nano_banana_cinema(kind: str = "long", target_slug: str | Non
                 raw_title = bp["title_en"] if is_en else bp["title_ko"]
                 pdf_url = sdoc.get("pdf_url") or "https://min7014.github.io/"
                 raw_desc = (
+                    f"📄 Original Step-by-Step Proof PDF: {pdf_url}\n"
+                    f"🌐 Interactive MathLab & 3,400+ Proofs: https://min7014.github.io/mathedu/?lang=en\n\n"
                     f"📐 [Human-Crafted Original Proof] This lesson is NOT generic AI-generated content. "
-                    f"The core geometric proof, auxiliary line insight, and step-by-step slides are 100% human-researched original educational materials ({pdf_url}), "
+                    f"The core geometric proof, auxiliary line insight, and step-by-step slides are 100% human-researched original educational materials from https://min7014.github.io/ , "
                     f"paired with conceptual studio art and multilingual narration to bring mathematical intuition to life.\n\n"
                     f"00:00 | Real-World Visual Geometry Mystery\n"
                     f"00:12 | Step-by-Step Original Visual Proof (min7014.github.io)\n"
                     f"01:15 | 5-Second Mental-Math Eureka Resolution\n\n"
-                    f"🌐 Interactive MathLab & 3,400+ Proofs: https://min7014.github.io/mathedu/\n"
                     f"🔔 Subscribe to @min7014_ai: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                     f"#VisualProof #EuclideanGeometry #MathIntuition #GeometryProof #Mathematics"
                     if is_en
-                    else f"📐 [사람이 직접 연구·작도한 오리지널 원문 기반] 본 콘텐츠는 단순 AI 자동 생성물이 아닙니다. "
-                    f"핵심 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 오랜 세월 직접 연구하고 작도한 오리지널 원문 자료({pdf_url})로부터 탄생했으며, "
+                    else f"📄 오리지널 단계별 시각 증명 PDF 원문 바로가기: {pdf_url}\n"
+                    f"🌐 단계별 디딤돌 & 자체 제작 MathLab 실습: https://min7014.github.io/mathedu/\n\n"
+                    f"📐 [사람이 직접 연구·작도한 오리지널 원문 기반] 본 콘텐츠는 단순 AI 자동 생성물이 아닙니다. "
+                    f"핵심 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 오랜 세월 직접 연구하고 작도한 오리지널 원문 자료( {pdf_url} )로부터 탄생했으며, "
                     f"도입부 시네마틱 오브제 연출은 기하학적 직관을 돕기 위한 시각 보조 장치입니다.\n\n"
                     f"00:00 | 실생활 기하 미스터리 3초 발문\n"
                     f"00:12 | 오리지널 단계별 시각 증명 해체 (min7014.github.io)\n"
                     f"01:15 | 공식 암기 ZERO · 5초 직관 완결\n\n"
-                    f"🌐 단계별 디딤돌 & 자체 제작 MathLab 실습: https://min7014.github.io/mathedu/\n"
                     f"🔔 @min7014_ai 무료 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
-                    f"#시각적증명 #도형보조선 #기하학원리 #수학직관 #피타고라스정리"
+                    f"#시각적증명 #도형보조선 #기하학원리 #수학직관 #수학교육"
                 )
                 raw_tags = ["Visual Math Proof", "Euclidean Geometry", "Math Intuition", "Geometry Mystery"] if is_en else ["시각적증명", "도형보조선", "기하학증명", "수학원리", "수학교육"]
                 try:

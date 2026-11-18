@@ -683,6 +683,79 @@ def smart_sync_youtube_captions_surplus_quota(
     return {"status": "ok", "synced_tracks": synced}
 
 
+def smart_repair_youtube_url_boundaries_surplus_quota(max_repairs: int = 30) -> dict:
+    """
+    [Rule 5 · 잉여 쿼터 활용 구버전 유튜브 설명란 URL 경계 자동 정화기]
+    일일 6편 본편·쇼츠 업로드 슬롯 완수 후 남는 잉여 쿼터로 구버전 설명란의
+    'github.io/)로부터', '?q=한글' 미인코딩 등을 삭제 없이 제자리 정화(videos.update)합니다.
+    """
+    bal_p = ROOT_DIR / ".agents" / "daily_wave_balance.json"
+    uploaded_today = 0
+    if bal_p.exists():
+        try:
+            b = json.loads(bal_p.read_text(encoding="utf-8"))
+            uploaded_today = int(b.get("mc", 0)) + int(b.get("std", 0)) + int(b.get("shorts", 0))
+        except Exception:
+            pass
+    if uploaded_today < 6:
+        return {"status": "deferred_protecting_upload_slots", "repaired": []}
+
+    st_p = ROOT_DIR / ".agents" / "repaired_url_boundaries_state.json"
+    done_ids = set()
+    if st_p.exists():
+        try:
+            done_ids = set(json.loads(st_p.read_text(encoding="utf-8")).get("repaired_video_ids") or [])
+        except Exception:
+            done_ids = set()
+
+    import min7014_video_maker as vm
+    import youtube_self_evolving_engine as ysee
+
+    yt, tok_p = vm.get_available_youtube_upload_service()
+    if yt is None:
+        return {"status": "no_available_token", "repaired": []}
+
+    repaired = []
+    try:
+        ch = yt.channels().list(part="contentDetails", id="UCSlqQfOEtRfJuMPyGMLgFYA").execute()["items"][0]
+        upl = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+        pt = None
+        cand_ids = []
+        while len(cand_ids) < 600:
+            r = yt.playlistItems().list(part="contentDetails", playlistId=upl, maxResults=50, pageToken=pt).execute()
+            for it in r.get("items", []):
+                vid = it["contentDetails"]["videoId"]
+                if vid not in done_ids:
+                    cand_ids.append(vid)
+            pt = r.get("nextPageToken")
+            if not pt:
+                break
+
+        for i in range(0, len(cand_ids), 50):
+            if len(repaired) >= max_repairs:
+                break
+            vr = yt.videos().list(part="snippet", id=",".join(cand_ids[i : i + 50])).execute()
+            for vit in vr.get("items", []):
+                if len(repaired) >= max_repairs:
+                    break
+                vid = vit["id"]
+                sn = vit["snippet"]
+                old_d = sn.get("description") or ""
+                new_d = ysee.ensure_clean_youtube_url_boundaries(old_d)
+                if new_d != old_d:
+                    sn["description"] = new_d[:4950]
+                    yt.videos().update(part="snippet", body={"id": vid, "snippet": sn}).execute()
+                    repaired.append(vid)
+                done_ids.add(vid)
+        st_p.write_text(json.dumps({"repaired_video_ids": sorted(done_ids)}, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception as e:
+        if "quotaExceeded" in str(e) or "rateLimitExceeded" in str(e):
+            vm.mark_token_quota_exhausted(tok_p, 900)
+            st_p.write_text(json.dumps({"repaired_video_ids": sorted(done_ids)}, ensure_ascii=False, indent=2), encoding="utf-8")
+            return {"status": "quota_reached", "repaired": repaired}
+    return {"status": "ok", "repaired": repaired}
+
+
 # ==============================================================================
 # Layer 5: `google-genai` SDK 제로-과금 방화벽 보조 검수기 (Rule 50 엄수)
 # ==============================================================================

@@ -113,7 +113,9 @@ def sanitize_and_gate_upload_payload(title: str, description: str, tags: list[st
         d = re.sub(pat, rep, d, flags=re.IGNORECASE)
 
     t = re.sub(r"\s{2,}", " ", t).strip()[:100]
-    d = re.sub(r"[ \t]{2,}", " ", d).strip()
+    d = ysee.ensure_clean_youtube_url_boundaries(d)
+    d = re.sub(r"[ \t]{2,}", " ", d)
+    d = re.sub(r"\n{3,}", "\n\n", d).strip()
 
     clean_tags = []
     for tg in raw_tags:

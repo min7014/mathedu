@@ -4244,7 +4244,7 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"2️⃣ 🌐 Original Interactive Geometry / Proof Page: {web_url}\n"
             f"{orig_yt_line_en}"
             f"3️⃣ ✍️ Constructive Math Problem Solver (16,548 Problems): https://min7014.github.io/mathedu/?from=yt\n\n"
-            f"🏛️ [Human-Crafted Original Mathematical Insight — MIN EUN GI (https://min7014.github.io/)]\n"
+            f"🏛️ [Human-Crafted Original Mathematical Insight — MIN EUN GI]\n"
             f"The mathematical ideas, auxiliary lines, and step-by-step visual proof slides are crafted by a human mathematics educator at https://min7014.github.io/ (AI assists multilingual voice narration only).\n"
             f"📅 Upload Schedule: New 1080p step-by-step visual proofs & masterclasses published daily.\n"
             f"🔔 Subscribe to Visual Math Proofs (@min7014_ai): {sub_url}\n"
@@ -4319,8 +4319,9 @@ def build_youtube_metadata_for_lang(script_doc, lang_code, page_timings):
             f"1️⃣ 📐 좌우 분할 실습 스튜디오 (유튜브 강의 × 자체 제작 MathLab v1.4 동시 작도):\n👉 {board_url}&from=yt\n"
             f"2️⃣ 🌐 오리지널 동적 기하 원문 웹페이지: {web_url}\n"
             f"{orig_yt_line_ko}"
-            f"3️⃣ ✍️ [탈-5지선다 창의 구성 모드] 관련 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q={clean_ko_title.split()[0]}&from=yt\n\n"
-            f"🏛️ [민은기 선생님의 단계별 시각적 수학 증명 — 인간 고유의 깊은 수학적 통찰 (https://min7014.github.io/)]\n"
+            f"3️⃣ ✍️ [탈-5지선다 창의 구성 모드] 관련 기출 직접 조립하며 풀기 (16,548문항):\n👉 https://min7014.github.io/mathedu/?q={urllib.parse.quote(clean_ko_title.split()[0])}&from=yt\n\n"
+            f"🏛️ [민은기 선생님의 단계별 시각적 수학 증명 — 인간 고유의 깊은 수학적 통찰]\n"
+            f"🌐 오리지널 수학자료실 본관: https://min7014.github.io/\n"
             f"본 영상의 기본 수학 아이디어와 단계별 증명 슬라이드는 사람이 직접 깊이 있게 연구·작도한 오리지널 원문 자료(3,400+ 아카이브)이며, 단순 AI 생성물이 아닙니다(AI는 다국어 음성 전달만 보조).\n"
             f"📅 정기 업로드 일정: 매일 1080p 오리지널 PDF 단계별 시각 증명 본편·마스터클래스 및 핵심 #Shorts가 정기 연재됩니다.\n"
             f"🔔 공식 채널 구독하기: {sub_url} | 📺 본 채널(@min7014): https://www.youtube.com/@min7014\n"
@@ -6225,7 +6226,7 @@ def upload_slug_to_youtube(slug_key, langs=("ko", "en"), privacy="public", metho
                     _c_body = (
                         f"💬 1페이지부터 {sdoc_loc.get('page_count', '')}페이지 중 몇 번째 페이지에서 증명 아이디어가 딱 풀렸나요? 가장 인상 깊었던 단계를 댓글로 알려주세요! 🤩\n"
                         f"▶️ 전 강의 무중단 연속 정주행: {_marathon_u}\n"
-                        f"🏛️ [사람이 직접 만든 깊이 있는 오리지널 자료]: 기본 수학 아이디어와 도형·보조선은 인간 저작자가 직접 연구·작도한 오리지널 원문(https://min7014.github.io/)이며 단순 AI 생성물이 아닙니다.\n📐 원본 PDF & 동적 기하 직접 조작: {_board_u}"
+                        f"🏛️ [사람이 직접 만든 깊이 있는 오리지널 자료]: 기본 수학 아이디어와 도형·보조선은 인간 저작자가 직접 연구·작도한 오리지널 원문( https://min7014.github.io/ )이며 단순 AI 생성물이 아닙니다.\n📐 원본 PDF & 동적 기하 직접 조작: {_board_u}"
                     )
                 else:
                     _c_body = (
@@ -9442,7 +9443,7 @@ def auto_engage_youtube_community_comments(max_replies: int = 10) -> list:
                     is_ko = any("가" <= ch <= "힣" for ch in top_txt)
                     reply_body = (
                         f"🎯 {top_author}님, 소중한 댓글과 수학적 탐구 참여 감사합니다! 🤩\n"
-                        f"본 영상의 기본 아이디어와 시각적 증명 단계는 사람이 직접 깊이 있게 연구·작도한 오리지널 수학자료실(https://min7014.github.io/) 원문 자료로 제작되었습니다.\n"
+                        f"본 영상의 기본 아이디어와 시각적 증명 단계는 사람이 직접 깊이 있게 연구·작도한 오리지널 수학자료실( https://min7014.github.io/ ) 원문 자료로 제작되었습니다.\n"
                         f"▶️ 51~88분 오리지널 PDF 직강 마스터클래스 연속 정주행: https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA\n"
                         f"📐 동적 기하 직접 조작해보기: https://min7014.github.io/mathedu/video_board.html"
                         if is_ko
@@ -9477,7 +9478,7 @@ def auto_engage_youtube_community_comments(max_replies: int = 10) -> list:
                     is_ko = any("가" <= ch <= "힣" for ch in (v_txt + top_txt))
                     reply_body = (
                         f"🎯 정답입니다 {v_name}님! ({v_txt}) 정확한 수학적 직관이십니다! 👏🤩\n"
-                        f"이 증명의 원본 슬라이드는 사람이 직접 설계·작도한 오리지널 수학자료실(https://min7014.github.io/) 원문 자료입니다.\n"
+                        f"이 증명의 원본 슬라이드는 사람이 직접 설계·작도한 오리지널 수학자료실( https://min7014.github.io/ ) 원문 자료입니다.\n"
                         f"▶️ 이어서 88분 오리지널 PDF 직강 마스터클래스 정주행하기: https://www.youtube.com/watch?v=IXQnXURMQ7g&list=UUSlqQfOEtRfJuMPyGMLgFYA"
                         if is_ko
                         else f"🎯 Spot on, {v_name}! ('{v_txt}') Brilliant mathematical intuition! 👏🤩\n"

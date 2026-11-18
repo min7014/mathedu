@@ -1149,11 +1149,11 @@ def try_upload_one_issue_insight(kind: str = "long", force_slug: str | None = No
                     f"• Pedagogical Shift: {bp['new_insight_en']}\n"
                     f"• Post-Proof Transfer: {wif_line}\n\n"
                     f"✍️ [Human-Crafted Original Depth Notice]\n"
-                    f"This lecture is NOT generic AI-generated content. Every mathematical idea, auxiliary construction, and step-by-step visual proof slide originates 100% from human-authored research materials ({web_url}), designed with intentional Active-Thinking Pause Checkpoints so learners invent key ideas before seeing the answer.\n\n"
+                    f"This lecture is NOT generic AI-generated content. Every mathematical idea, auxiliary construction, and step-by-step visual proof slide originates 100% from human-authored research materials ( {web_url} ), designed with intentional Active-Thinking Pause Checkpoints so learners invent key ideas before seeing the answer.\n\n"
                     f"{chapters_block}\n\n"
                     f"#MathematicsEducation #ActiveThinking #VisualProof #MathematicalThinking #DiscoveryLearning"
                     if is_en
-                    else f"🏛️ [오리지널 원문 수학자료실 (https://min7014.github.io/) 바로가기]\n"
+                    else f"🏛️ [오리지널 원문 수학자료실 바로가기]\n"
                     f"• 오리지널 단계별 시각 증명 PDF 원문: {pdf_url}\n"
                     f"• 🧠 능동적 사고 4단계 워크벤치 (직관 예측 → 보조선 설계 → 조건 변형 실습): https://min7014.github.io/mathedu/video_board.html?slug={slug}&mode=active\n"
                     f"• 자체 제작 MathLab 동적 작도 실습: https://min7014.github.io/mathedu/mathlab.html?slug={slug}\n"
@@ -1163,7 +1163,7 @@ def try_upload_one_issue_insight(kind: str = "long", force_slug: str | None = No
                     f"• 수학교육의 시선: {bp['new_insight_ko']}\n"
                     f"• 증명 이후 확장 질문: {wif_line}\n\n"
                     f"✍️ [오리지널 인간 저작물 정통성 안내]\n"
-                    f"본 콘텐츠는 모든 것이 AI에 의해 만들어진 단순 생성물이 아닙니다. 기본 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 사람이 오랜 세월 직접 연구하고 한 땀 한 땀 작도한 깊이 있는 오리지널 원문 자료({web_url})로부터 탄생했으며, 시청자가 수동적으로 듣지 않고 스스로 보조선을 먼저 상상하고 조건을 변형해 보도록 '능동적 사고 정지 체크포인트'를 결합했습니다.\n\n"
+                    f"본 콘텐츠는 모든 것이 AI에 의해 만들어진 단순 생성물이 아닙니다. 기본 수학 아이디어·보조선 발상·단계별 시각 증명 슬라이드는 사람이 오랜 세월 직접 연구하고 한 땀 한 땀 작도한 깊이 있는 오리지널 원문 자료( {web_url} )로부터 탄생했으며, 시청자가 수동적으로 듣지 않고 스스로 보조선을 먼저 상상하고 조건을 변형해 보도록 '능동적 사고 정지 체크포인트'를 결합했습니다.\n\n"
                     f"{chapters_block}\n\n"
                     f"#수학교육 #능동적사고 #시각적증명 #수학적사고력 #질문하는수업"
                 )

@@ -646,18 +646,18 @@ def build_ypp_watchtime_masterclasses() -> list:
                 "👉 https://min7014.github.io/mathedu/video_board.html\n"
                 "👉 https://min7014.github.io/\n\n"
                 "🏛️ [민은기 선생님의 단계별 시각적 수학 증명 — 인간 고유의 깊은 수학적 통찰 (Not All by AI)]\n"
-                "본 영상의 기본 아이디어와 단계별 증명 슬라이드는 수학교육 연구자가 오랜 세월 직접 고민하고 작도한 깊이 있는 오리지널 원문 자료(https://min7014.github.io/)로부터 제작되었으며, AI는 다국어 음성 전달만 보조합니다.\n"
+                "본 영상의 기본 아이디어와 단계별 증명 슬라이드는 수학교육 연구자가 오랜 세월 직접 고민하고 작도한 깊이 있는 오리지널 원문 자료( https://min7014.github.io/ )로부터 제작되었으며, AI는 다국어 음성 전달만 보조합니다.\n"
                 "📅 정기 업로드 일정: 매일 1080p 오리지널 PDF 단계별 시각 증명 본편·마스터클래스 및 핵심 #Shorts가 정기 연재됩니다.\n"
                 "🔔 공식 채널 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n"
                 f"[ID: {mc_slug}_KO] #수학증명 #기하학 #수능수학 #시각적증명 #피타고라스 #메넬라우스 #체바 #마스터클래스"
             ).replace("<", "＜").replace(">", "＞")
             desc_en = (
-                f"📐 [{spec['title_en']}] Covered Theorems ({dur_min} min): {topic_names_line}\n"
+                f"📐 [{spec['title_ko'] if False else spec['title_en']}] Covered Theorems ({dur_min} min): {topic_names_line}\n"
                 f"📄 Original Visual Proof Archive: https://min7014.github.io/ | ▶️ Full Course Autoplay Playlist: https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA\n\n"
                 f"💬 [Quick Eureka Question] Which theorem in today's masterclass ({topic_names_line}) gave you the clearest visual insight? Share the timestamp in the comments! 🤩\n\n"
                 f"⏱️ [00:00 | Masterclass Chapter Timestamps]\n"
                 + "\n".join(chapters)
-                + "\n\n🌐 [Interactive MathLab v1.4, PDF Proofs & 16,548 Free Math Problems (https://min7014.github.io/)]:\n"
+                + "\n\n🌐 [Interactive MathLab v1.4, PDF Proofs & 16,548 Free Math Problems]:\n"
                 "👉 https://min7014.github.io/mathedu/video_board.html?lang=en\n"
                 "👉 https://min7014.github.io/\n\n"
                 "🏛️ [MIN EUN GI : Visual Math Proofs — Deep Human-Crafted Mathematical Insight]\n"

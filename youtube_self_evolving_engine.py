@@ -46,11 +46,48 @@ CURATED_PLAYLIST_SPECS = [
 ]
 
 
+def ensure_clean_youtube_url_boundaries(text: str) -> str:
+    """
+    [유튜브 설명란·댓글 URL 링크 깨짐(404) 원천 차단기]
+    - '자료(https://...pdf)로부터', '(https://.../),', '원문(https://.../)이며' 처럼 URL 앞뒤에 공백 없이
+      괄호·문장부호·한글 조사가 붙어 유튜브 리다이렉트 URL에 '%29%EB%A1%9C%EB%B6%80%ED%84%B0'가 섞이는 현상을 100% 차단합니다.
+    - '?q=한글' 검색 파라미터의 미인코딩 한글을 퍼센트 인코딩하여 링크 중간 절단을 방지합니다.
+    """
+    import urllib.parse as _up
+
+    s = str(text or "")
+    if "http" not in s:
+        return s
+
+    # 1) mathedu/?q=한글 미인코딩 쿼리 파라미터 URL 인코딩
+    def _enc_q(m: re.Match) -> str:
+        prefix, raw_q = m.group(1), m.group(2)
+        if re.search(r"[\uac00-\ud7a3]", raw_q):
+            return prefix + _up.quote(_up.unquote(raw_q))
+        return m.group(0)
+
+    s = re.sub(r"(https?://min7014\.github\.io/mathedu/\?q=)([^\s&)#\]]+)", _enc_q, s)
+
+    # 2) URL 직전에 공백이 없으면(예: '자료(https://...') 공백 1칸 삽입
+    s = re.sub(r"(?<=\S)(https?://)", r" \1", s)
+
+    # 3) 이전 백트래킹 공백 아티팩트('mathedu /', 'sub_confirmation= 1' 등) 복구
+    s = re.sub(r"(https?://[A-Za-z0-9./_?=&%#:@-]+) ([A-Za-z0-9/_=&%#-]+)(?=\s|[)\],]|$)", r"\1\2", s)
+
+    # 4) 순수 URL 전체 매칭 직후(백트래킹 불가 가드)에 공백 아닌 문자(')', ']', ',', 한글 조사 등)가 바로 이어지면 공백 1칸 분리
+    s = re.sub(
+        r"(https?://[A-Za-z0-9./_?=&%#:@-]*[A-Za-z0-9/_=&%#-])(?![A-Za-z0-9./_?=&%#:@-])(?=\S)",
+        r"\1 ",
+        s,
+    )
+    return s
+
+
 def sanitize_copyright_and_trademark_text(text: str) -> str:
     """
     [Rule 24 & Rule 51 — 저작권·상표권 무결성 기계적 가드레일]
     College Board(SAT, AP), MAA(AMC, AIME), IBO(IB), IMO/Olympiad 및 타사 브랜드 상표를
-    100% 순수 일반 수학 학술 용어로 자동 치환합니다.
+    100% 순수 일반 수학 학술 용어로 자동 치환하며, 멀티라인 줄바꿈(\n)과 URL 공백 경계를 보존합니다.
     """
     s = str(text or "")
     replacements = [
@@ -75,7 +112,10 @@ def sanitize_copyright_and_trademark_text(text: str) -> str:
     ]
     for pat, rep in replacements:
         s = re.sub(pat, rep, s, flags=re.IGNORECASE)
-    return re.sub(r"\s{2,}", " ", s).strip()
+    s = ensure_clean_youtube_url_boundaries(s)
+    s = re.sub(r"[ \t]{2,}", " ", s)
+    s = re.sub(r"\n{3,}", "\n\n", s)
+    return s.strip()
 
 
 # Alias for cross-module callers (Rule 51)
