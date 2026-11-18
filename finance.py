@@ -24,8 +24,10 @@ CLI 실행:
   python -X utf8 finance.py status
   python -X utf8 finance.py optimize
   python -X utf8 finance.py build-masterclass
-  python -X utf8 finance.py set-adsense --client ca-pub-XXXXXXXXXXXXXXXX --slot 1234567890
-  python -X utf8 finance.py set-adfit --unit DAN-XXXXXXXXXXXXXXXX
+  python -X utf8 finance.py set-adsense --client ca-pub-XXXXXXXXXXXXXXXX --slot 1234567890 [--result-slot N] [--root-site-dir PATH]
+  python -X utf8 finance.py set-adfit --unit DAN-XXXXXXXXXXXXXXXX [--width 728 --height 90] [--mobile-unit DAN-YYYY]
+  python -X utf8 finance.py ads-status
+  python -X utf8 finance.py disable-ads [--provider all|adsense|adfit]
 """
 
 import argparse
@@ -1997,6 +1999,185 @@ def cmd_status():
     print("=" * 90)
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# 클린 웹 광고 1-스텝 활성화 (Policy 68 §3-① · Rule 61)
+#   loader : assets/mathedu-ads.js  (ad_config.json 읽음, 비활성 시 DOM 0개 · 외부요청 0건)
+#   config : ad_config.json
+#   ads.txt: 이 저장소 루트 + (선택) min7014.github.io 루트 저장소 체크아웃
+#   ※ 사이트가 https://min7014.github.io/mathedu/ (프로젝트 페이지)이므로 AdSense 크롤러가
+#     읽는 ads.txt 는 https://min7014.github.io/ads.txt (min7014/min7014.github.io 저장소 루트)입니다.
+# ─────────────────────────────────────────────────────────────────────────────
+ADSENSE_CLIENT_RE = re.compile(r"^ca-pub-\d{16}$")
+ADSENSE_SLOT_RE = re.compile(r"^\d{6,16}$")
+ADFIT_UNIT_RE = re.compile(r"^DAN-[A-Za-z0-9]{6,40}$")
+GOOGLE_ADS_TXT_CERT = "f08c47fec0942fa0"  # Google 공식 TAG-ID (ads.txt 표준 4번째 필드)
+ADS_TXT_HEADER = (
+    "# ads.txt - mathedu (managed by: python -X utf8 finance.py set-adsense ...)\n"
+    "# NOTE: crawlers read the ROOT-domain file https://min7014.github.io/ads.txt\n"
+)
+
+DEFAULT_AD_CONFIG = {
+    "version": 2,
+    "loader": "assets/mathedu-ads.js",
+    "adsense": {"enabled": False, "clientId": "", "slotMain": "", "slotResult": "", "format": "auto"},
+    "kakaoAdfit": {"enabled": False, "unitMain": "", "width": 728, "height": 90,
+                   "unitMobile": "", "mobileWidth": 320, "mobileHeight": 100},
+    "langRouting": {"ko": ["kakaoAdfit", "adsense"], "en": ["adsense"]},
+    "placement": {
+        "allowedSlots": ["footer", "result"],
+        "autoFooter": True,
+        "lazyRootMargin": "300px 0px",
+        "excludePaths": ["mathlab.html", "/offline/", "live_board.html", "game.html",
+                         "video_studio.html", "dashboard.html", "privacy.html", "404.html"],
+        "forbiddenAncestors": 'canvas, form, video, iframe, [data-no-ads], [contenteditable="true"]',
+    },
+}
+
+
+def load_ad_config() -> dict:
+    cfg = {}
+    if AD_CONFIG_JSON.exists():
+        try:
+            cfg = json.loads(AD_CONFIG_JSON.read_text(encoding="utf-8"))
+        except Exception:
+            cfg = {}
+    for key, val in DEFAULT_AD_CONFIG.items():
+        if isinstance(val, dict):
+            merged = dict(val)
+            merged.update(cfg.get(key) or {})
+            cfg[key] = merged
+        else:
+            cfg.setdefault(key, val)
+    return cfg
+
+
+def save_ad_config(cfg: dict) -> None:
+    AD_CONFIG_JSON.write_text(json.dumps(cfg, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _write_ads_txt(path: Path, client_id: str | None) -> None:
+    """Google 행만 교체하고 다른 판매자 행(향후 추가분)은 보존."""
+    keep = []
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            s = line.strip()
+            if not s or s.startswith("#"):
+                continue
+            if s.lower().startswith("google.com,"):
+                continue
+            keep.append(s)
+    lines = [ADS_TXT_HEADER.rstrip("\n")]
+    if client_id:
+        lines.append(f"google.com, {client_id.replace('ca-pub-', 'pub-', 1)}, DIRECT, {GOOGLE_ADS_TXT_CERT}")
+    lines.extend(keep)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def set_adsense(client: str, slot: str = "", result_slot: str = "", root_site_dir: str = "") -> int:
+    client = (client or "").strip()
+    if not ADSENSE_CLIENT_RE.match(client):
+        print(f"❌ AdSense 게시자 ID 형식 오류: '{client}' (ca-pub- + 숫자 16자리여야 합니다)")
+        return 2
+    for label, val in (("--slot", slot), ("--result-slot", result_slot)):
+        if val and not ADSENSE_SLOT_RE.match(val):
+            print(f"❌ {label} 형식 오류: '{val}' (AdSense 광고 단위 ID는 숫자입니다)")
+            return 2
+    cfg = load_ad_config()
+    a = cfg["adsense"]
+    a["clientId"] = client
+    if slot:
+        a["slotMain"] = slot
+    if result_slot:
+        a["slotResult"] = result_slot
+    a["enabled"] = True
+    save_ad_config(cfg)
+    _write_ads_txt(ADS_TXT, client)
+    print(f"✅ [AdSense] ad_config.json enabled=true · client={client} · slotMain={a['slotMain'] or '-'} · slotResult={a['slotResult'] or '-'}")
+    print(f"✅ [ads.txt] {ADS_TXT}")
+    if root_site_dir:
+        root = Path(root_site_dir)
+        if root.is_dir():
+            _write_ads_txt(root / "ads.txt", client)
+            print(f"✅ [root ads.txt] {root / 'ads.txt'}  (min7014.github.io 저장소에서 커밋·배포 필요)")
+        else:
+            print(f"⚠️ --root-site-dir 경로 없음: {root}")
+    else:
+        pub = client.replace("ca-pub-", "pub-", 1)
+        print("⚠️ AdSense 크롤러는 루트 도메인 https://min7014.github.io/ads.txt 를 읽습니다.")
+        print(f"   min7014.github.io 저장소 루트에 다음 한 줄을 추가하세요: google.com, {pub}, DIRECT, {GOOGLE_ADS_TXT_CERT}")
+    if not (a["slotMain"] or a["slotResult"]):
+        print("ℹ️ 광고 단위(slot) ID가 없어 아직 화면에는 광고가 렌더링되지 않습니다(사이트 심사용 ads.txt만 준비).")
+        print("   승인 후: python -X utf8 finance.py set-adsense --client " + client + " --slot <광고단위ID>")
+    print("ℹ️ AdSense 대시보드의 '자동 광고(Auto ads)'는 끄고 하단/결과 화면 수동 단위만 사용하세요.")
+    return 0
+
+
+def set_adfit(unit: str = "", width: int = 0, height: int = 0,
+              mobile_unit: str = "", mobile_width: int = 0, mobile_height: int = 0) -> int:
+    unit = (unit or "").strip()
+    mobile_unit = (mobile_unit or "").strip()
+    if not unit and not mobile_unit:
+        print("❌ --unit 또는 --mobile-unit 중 하나는 필요합니다.")
+        return 2
+    for label, val in (("--unit", unit), ("--mobile-unit", mobile_unit)):
+        if val and not ADFIT_UNIT_RE.match(val):
+            print(f"❌ {label} 형식 오류: '{val}' (DAN-로 시작하는 AdFit 광고 단위 ID여야 합니다)")
+            return 2
+    cfg = load_ad_config()
+    k = cfg["kakaoAdfit"]
+    if unit:
+        k["unitMain"] = unit
+    if width:
+        k["width"] = int(width)
+    if height:
+        k["height"] = int(height)
+    if mobile_unit:
+        k["unitMobile"] = mobile_unit
+    if mobile_width:
+        k["mobileWidth"] = int(mobile_width)
+    if mobile_height:
+        k["mobileHeight"] = int(mobile_height)
+    k["enabled"] = True
+    save_ad_config(cfg)
+    print(f"✅ [Kakao AdFit] ad_config.json enabled=true · unitMain={k['unitMain'] or '-'} ({k['width']}x{k['height']})"
+          f" · unitMobile={k['unitMobile'] or '-'} ({k['mobileWidth']}x{k['mobileHeight']})")
+    print("ℹ️ AdFit은 KO 화면에서 우선 노출됩니다(langRouting.ko). EN 화면은 AdSense만 사용합니다.")
+    return 0
+
+
+def disable_ads(provider: str = "all") -> int:
+    cfg = load_ad_config()
+    if provider in ("all", "adsense"):
+        cfg["adsense"]["enabled"] = False
+    if provider in ("all", "adfit"):
+        cfg["kakaoAdfit"]["enabled"] = False
+    save_ad_config(cfg)
+    print(f"⏸️ [Ads] {provider} 비활성화 — 로더는 DOM 0개 · 외부요청 0건 모드로 동작합니다. (ID는 보존)")
+    return 0
+
+
+def ads_status() -> int:
+    cfg = load_ad_config()
+    a, k = cfg["adsense"], cfg["kakaoAdfit"]
+    a_ready = bool(a.get("enabled") and ADSENSE_CLIENT_RE.match(a.get("clientId", "")) and
+                   (ADSENSE_SLOT_RE.match(a.get("slotMain", "") or "") or ADSENSE_SLOT_RE.match(a.get("slotResult", "") or "")))
+    k_ready = bool(k.get("enabled") and (ADFIT_UNIT_RE.match(k.get("unitMain", "") or "") or
+                                         ADFIT_UNIT_RE.match(k.get("unitMobile", "") or "")))
+    ads_txt = ADS_TXT.read_text(encoding="utf-8") if ADS_TXT.exists() else ""
+    loader = ROOT_DIR / "assets" / "mathedu-ads.js"
+    print("=" * 72)
+    print(" 💰 클린 웹 광고 상태 (ad_config.json → assets/mathedu-ads.js)")
+    print(f"   AdSense : enabled={a.get('enabled')} client={a.get('clientId') or '-'} slotMain={a.get('slotMain') or '-'} "
+          f"slotResult={a.get('slotResult') or '-'} → {'🟢 렌더링' if a_ready else '⚪ 미렌더링'}")
+    print(f"   AdFit   : enabled={k.get('enabled')} unitMain={k.get('unitMain') or '-'} unitMobile={k.get('unitMobile') or '-'} "
+          f"→ {'🟢 렌더링' if k_ready else '⚪ 미렌더링'}")
+    print(f"   ads.txt : {'google.com 행 있음' if 'google.com,' in ads_txt else '판매자 행 없음'} ({ADS_TXT.name})")
+    print(f"   loader  : {'있음' if loader.exists() else '없음'} ({loader.relative_to(ROOT_DIR)})")
+    print(f"   routing : {cfg['langRouting']}")
+    print("=" * 72)
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="mathedu & @min7014_ai Chief Ad Revenue & YPP Director (finance.py v3.0)")
     sub = parser.add_subparsers(dest="cmd")
@@ -2008,9 +2189,20 @@ def main():
     p_ads = sub.add_parser("set-adsense")
     p_ads.add_argument("--client", required=True)
     p_ads.add_argument("--slot", default="")
+    p_ads.add_argument("--result-slot", default="")
+    p_ads.add_argument("--root-site-dir", default="")
 
     p_adf = sub.add_parser("set-adfit")
-    p_adf.add_argument("--unit", required=True)
+    p_adf.add_argument("--unit", default="")
+    p_adf.add_argument("--width", type=int, default=0)
+    p_adf.add_argument("--height", type=int, default=0)
+    p_adf.add_argument("--mobile-unit", default="")
+    p_adf.add_argument("--mobile-width", type=int, default=0)
+    p_adf.add_argument("--mobile-height", type=int, default=0)
+
+    p_dis = sub.add_parser("disable-ads")
+    p_dis.add_argument("--provider", choices=["all", "adsense", "adfit"], default="all")
+    sub.add_parser("ads-status")
 
     args = parser.parse_args()
     if args.cmd == "cashflow-wave":
@@ -2019,21 +2211,14 @@ def main():
     elif args.cmd in ("optimize", "build-masterclass"):
         run_autonomous_finance_cycle()
     elif args.cmd == "set-adsense":
-        cfg = json.loads(AD_CONFIG_JSON.read_text(encoding="utf-8")) if AD_CONFIG_JSON.exists() else {}
-        cfg.setdefault("adsense", {})["enabled"] = True
-        cfg["adsense"]["clientId"] = args.client
-        if args.slot:
-            cfg["adsense"]["slotMain"] = args.slot
-        AD_CONFIG_JSON.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
-        pub_id = args.client.replace("ca-pub-", "pub-")
-        ADS_TXT.write_text(f"google.com, {pub_id}, DIRECT, f08c47fec0942fa0\n", encoding="utf-8")
-        print(f"✅ [AdSense Activated] {args.client} -> ad_config.json & ads.txt updated!")
+        sys.exit(set_adsense(args.client, args.slot, args.result_slot, args.root_site_dir))
     elif args.cmd == "set-adfit":
-        cfg = json.loads(AD_CONFIG_JSON.read_text(encoding="utf-8")) if AD_CONFIG_JSON.exists() else {}
-        cfg.setdefault("kakaoAdfit", {})["enabled"] = True
-        cfg["kakaoAdfit"]["unitMain"] = args.unit
-        AD_CONFIG_JSON.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"✅ [Kakao AdFit Activated] {args.unit} -> ad_config.json updated!")
+        sys.exit(set_adfit(args.unit, args.width, args.height,
+                           args.mobile_unit, args.mobile_width, args.mobile_height))
+    elif args.cmd == "disable-ads":
+        sys.exit(disable_ads(args.provider))
+    elif args.cmd == "ads-status":
+        sys.exit(ads_status())
     else:
         cmd_status()
 

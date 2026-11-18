@@ -1,0 +1,24 @@
+:root{--bg:#0f1420;--panel:#171e2e;--ink:#e8ecf4;--mute:#9aa6bd;--gold:#e9c46a;--teal:#2ec4b6;--line:#26304a}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--teal)}a:hover{color:var(--gold)}
+.top{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;justify-content:space-between;padding:.8rem 1.2rem;border-bottom:1px solid var(--line);background:#0b101a}
+.top .brand{font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:.2px}.top nav a{margin-left:1rem;font-size:.92rem}
+main{max-width:880px;margin:0 auto;padding:1.4rem 1.2rem 3rem}
+.crumbs{font-size:.86rem;color:var(--mute);margin-bottom:.6rem}.crumbs a{color:var(--mute)}
+h1{font-size:1.85rem;line-height:1.25;margin:.2rem 0 .5rem}h2{font-size:1.25rem;margin:2.1rem 0 .7rem;color:var(--gold)}
+.lede{color:var(--mute);margin:0 0 1.2rem}
+.actions{display:flex;flex-wrap:wrap;gap:.6rem}.btn{display:inline-block;padding:.55rem .95rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);text-decoration:none;font-size:.95rem}
+.btn.primary{border-color:var(--teal)}
+dl.glance{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:.5rem 1rem;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+dl.glance dt{color:var(--gold);font-weight:600}dl.glance dd{margin:0}
+ol.steps{list-style:none;padding:0;margin:0;counter-reset:s}ol.steps li{border-left:3px solid var(--line);padding:.2rem 0 .9rem 1rem;margin-left:.3rem}
+ol.steps .rng{display:inline-block;font-size:.8rem;color:var(--bg);background:var(--teal);border-radius:6px;padding:0 .45rem;margin-bottom:.25rem}
+ol.steps p{margin:.2rem 0 0}
+ul.plain{padding-left:1.1rem}ul.plain li{margin:.3rem 0}
+.branch{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.4rem 1.1rem 1rem;margin:1.2rem 0}
+.branch h2{margin-top:.8rem}.branch p.desc{color:var(--mute);margin:.1rem 0 .6rem}
+.tag{font-size:.78rem;color:var(--mute);margin-left:.35rem}
+.map{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 0}
+footer{border-top:1px solid var(--line);color:var(--mute);font-size:.86rem;padding:1.2rem;text-align:center}
+@media (max-width:600px){h1{font-size:1.45rem}dl.glance{grid-template-columns:1fr}.top nav a{margin-left:0;margin-right:.9rem}}

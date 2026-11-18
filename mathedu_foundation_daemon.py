@@ -656,11 +656,20 @@ def sync_pedagogy_counts_to_index_html():
         html = re.sub(r">\d+대 법칙<", f">{p_cnt}대 법칙<", html)
         html = re.sub(r">\d+대 반례<", f">{v_cnt}대 반례<", html)
 
-        ped_js = json.dumps(ped, ensure_ascii=False, indent=2)
-        pattern = r"window\.MATHEDU_PEDAGOGY_ENGINE_DATA\s*=\s*\{.*?\};\s*\nwindow\._currentMtHubTab"
-        replacement = f"window.MATHEDU_PEDAGOGY_ENGINE_DATA = {ped_js};\nwindow._currentMtHubTab"
-        new_html, n_subs = re.subn(pattern, lambda _: replacement, html, count=1, flags=re.S)
-        if n_subs > 0 and new_html != html:
+        # Policy 68 §3-③ 경량화: 9MB 전체 데이터는 더 이상 index.html에 인라인하지 않습니다.
+        # 첫 화면 위젯용 소형 부분집합(PEDAGOGY_FRONT_LITE)만 인라인하고, 전체 데이터는
+        # 수학교사 허브를 열 때 assets/mathteacher_pedagogy_engine.json 에서 지연 로딩합니다.
+        lite = {k: ped[k] for k in ("version", "architect", "theories", "educationalPhilosophy",
+                                    "curiosityRealWorldAtlas", "academicResearchFusionAtlas") if k in ped}
+        lite["misconceptionLab"] = (ped.get("misconceptionLab") or [])[:11]  # 오늘의 OX: idx = seed % 11
+        lite["_lite"] = True
+        lite["_fullUrl"] = "assets/mathteacher_pedagogy_engine.json"
+        lite["_counts"] = {k: len(v) for k, v in ped.items() if isinstance(v, list)}
+        lite_js = json.dumps(lite, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+        pattern = r"window\.MATHEDU_PEDAGOGY_ENGINE_DATA = /\*PEDAGOGY_FRONT_LITE\*/ \{.*?\};(?=\s*\nwindow\._currentMtHubTab)"
+        replacement = f"window.MATHEDU_PEDAGOGY_ENGINE_DATA = /*PEDAGOGY_FRONT_LITE*/ {lite_js};"
+        new_html = re.sub(pattern, lambda _: replacement, html, count=1, flags=re.S)
+        if new_html != index_p.read_text(encoding="utf-8"):
             index_p.write_text(new_html, encoding="utf-8")
     except Exception as e:
         print(f"[Index Pedagogy Sync Notice] {e}", flush=True)

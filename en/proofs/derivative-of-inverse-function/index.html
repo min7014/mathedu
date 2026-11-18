@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Derivative of inverse function — Visual Proof</title>
+<meta name="description" content="Derivative of inverse function: Look at the upper left area of the screen. When starting a proof, first clearly indicate the assumptions given in the…">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://min7014.github.io/mathedu/en/proofs/derivative-of-inverse-function/">
+<link rel="alternate" hreflang="en" href="https://min7014.github.io/mathedu/en/proofs/derivative-of-inverse-function/">
+<link rel="alternate" hreflang="ko" href="https://min7014.github.io/mathedu/video_board.html?slug=2019101602">
+<link rel="alternate" hreflang="x-default" href="https://min7014.github.io/mathedu/en/proofs/derivative-of-inverse-function/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MathEdu Visual Proofs">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Derivative of inverse function — Visual Proof">
+<meta property="og:description" content="Derivative of inverse function: Look at the upper left area of the screen. When starting a proof, first clearly indicate the assumptions given in the…">
+<meta property="og:url" content="https://min7014.github.io/mathedu/en/proofs/derivative-of-inverse-function/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../assets/en.css">
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Derivative of inverse function",
+  "headline": "Derivative of inverse function — Visual Proof",
+  "description": "Derivative of inverse function: Look at the upper left area of the screen. When starting a proof, first clearly indicate the assumptions given in the…",
+  "url": "https://min7014.github.io/mathedu/en/proofs/derivative-of-inverse-function/",
+  "inLanguage": "en",
+  "learningResourceType": "Visual proof",
+  "educationalLevel": "Secondary school",
+  "isAccessibleForFree": true,
+  "teaches": "Derivative of inverse function",
+  "audience": {
+   "@type": "EducationalAudience",
+   "educationalRole": [
+    "student",
+    "teacher"
+   ]
+  },
+  "about": [
+   "Limits & Calculus",
+   "Differential Calculus"
+  ],
+  "numberOfSteps": 20,
+  "isPartOf": {
+   "@type": "CollectionPage",
+   "name": "Step-by-Step Visual Math Proofs",
+   "url": "https://min7014.github.io/mathedu/en/"
+  },
+  "publisher": {
+   "@type": "Organization",
+   "name": "MathEdu Visual Proofs",
+   "url": "https://min7014.github.io/mathedu/"
+  },
+  "dateModified": "2026-11-15",
+  "isBasedOn": "https://min7014.github.io/2019/2019101602.pdf"
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Visual Proofs",
+    "item": "https://min7014.github.io/mathedu/en/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Limits & Calculus",
+    "item": "https://min7014.github.io/mathedu/en/#limits-calculus"
+   },
+   {
+    "@type": "ListItem",
+    "position": 3,
+    "name": "Derivative of inverse function",
+    "item": "https://min7014.github.io/mathedu/en/proofs/derivative-of-inverse-function/"
+   }
+  ]
+ }
+]
+</script>
+</head>
+<body>
+<header class="top"><a class="brand" href="../../">MathEdu Visual Proofs</a>
+<nav><a href="../../">All proofs</a><a href="https://min7014.github.io/mathedu/video_board.html?slug=2019101602" hreflang="ko">Korean version</a><a href="https://www.youtube.com/@min7014_ai" target="_blank" rel="noopener">YouTube channel</a></nav></header>
+<main>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#limits-calculus">Limits &amp; Calculus</a> › Derivative of inverse function</nav>
+<h1>Derivative of inverse function</h1>
+<p class="lede">20-step visual proof · Limits &amp; Calculus · Differential Calculus</p>
+<div class="actions">
+<a class="btn primary" href="https://min7014.github.io/2019/2019101602.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
+<a class="btn" href="../../../mathlab.html?slug=2019101602&amp;lang=en">Construct it in MathLab</a>
+<a class="btn" href="../../../video_board.html?slug=2019101602&amp;lang=en&amp;from=en">Split-screen study board</a>
+<a class="btn" href="https://min7014.github.io/math20191016001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+</div>
+<h2>Proof at a glance</h2>
+<dl class="glance">
+<dt>Key idea</dt><dd>Reflect the curve y = f(x) and its tangent slope triangle (Δx, Δy) across the line y = x</dd>
+<dt>Proof logic</dt><dd>Reflection across y = x swaps horizontal run Δx and vertical rise Δy, inverting the secant ratio Δx/Δy = 1 / (Δy/Δx); taking the limit yields (f⁻¹)&#x27;(y) = 1 / f&#x27;(x)</dd>
+<dt>Common misconception</dt><dd>Never confuse the inverse function f⁻¹(y) with the algebraic reciprocal [f(x)]⁻¹ = 1/f(x), and always evaluate f&#x27;(x) at the corresponding pre-image x = f⁻¹(y)</dd>
+<dt>What if not?</dt><dd>How does this rule derive (ln x)&#x27; = 1/x from (e^y)&#x27; = e^y and (arcsin x)&#x27; = 1/√(1-x²) from (sin y)&#x27; = cos y?</dd>
+</dl>
+<h2>Step-by-step walkthrough</h2>
+<ol class="steps">
+<li><span class="rng">Step 2</span><p>Look at the upper left area of the screen. When starting a proof, first clearly indicate the assumptions given in the problem on the diagram. Here, the inverse function x = f⁻¹(y) of the differentiable function y = f(x) exists, and the starting conditions given the two graphs symmetrical about the straight line y = x and the tangent line are plotted with blue symbols.</p></li>
+<li><span class="rng">Step 3</span><p>The inverse function x = f⁻¹(y) of the differentiable function y = f(x), which is the starting condition, exists, and given the two graphs and tangent lines that are symmetrical to the straight line y = x, draw the starting conditions one by one on the proof figure, clearly establishing the positional relationship between each point and line segment.</p></li>
+<li><span class="rng">Step 4</span><p>This is the most important eureka moment in this proof! Look at the new green line segment drawn on the shape. It is a geometric auxiliary line that flips the tangent slope of the right triangle (horizontal delta x, vertical delta y) at point (a, b) about the straight line y = A relationship that was not visible through the original shape alone is divided into two comparable shapes by this single green auxiliary line!</p></li>
+<li><span class="rng">Step 8</span><p>Check the target shape to the right of the top arrow. Given the starting assumption on the left, the differential coefficient of the inverse function to the right of the arrow is equal to the inverse of the differential coefficient at the corresponding point of the original function ((f⁻¹)&#x27;(b) = 1 / f&#x27;(a), i.e. dx/dy = 1 / (dy/dx)). This means that we will show why the conclusion always holds. Never mix assumptions and conclusions, and now let&#x27;s build a logical bridge in the proof diagram below!</p></li>
+<li><span class="rng">Steps 16–18</span><p>Now let&#x27;s combine the geometric clues we checked earlier into one. From the geometric correspondence, we can confirm that the conclusion that the differential coefficient of the inverse function we were trying to prove is equal to the reciprocal of the differential coefficient at the corresponding point of the original function ((f⁻¹)&#x27;(b) = 1 / f&#x27;(a), that is, dx/dy = 1 / (dy/dx)) is inevitably established.</p></li>
+<li><span class="rng">Step 19</span><p>Look at the final mark highlighted in red on the shape! Since the sizes of the corresponding parts are the same due to the congruence and symmetry properties of the shapes proven in the previous step, the conclusion that the differential coefficient of the inverse function we were aiming for is the same as the inverse of the differential coefficient at the corresponding point of the original function ((f⁻¹)&#x27;(b) = 1 / f&#x27;(a), that is, dx/dy = 1 / (dy/dx)) has finally been proven!</p></li>
+<li><span class="rng">Step 20</span><p>The visual proof is complete! Starting from the starting conditions, where the inverse function of the differentiable function y = f(x) exists, Through the geometric auxiliary line comparing with The key point to remember here is that when calculating (f⁻¹)&#x27;(b), the most common mistake is to substitute b in place of the denominator f&#x27;(x) and write it as 1 / f&#x27;(b)! You must find the x-coordinate a of the original function where f(a) = b and substitute 1 / f&#x27;(a). Finally, ask a deeper question. If the tangent line in the graph of the original function is horizontal (f&#x27;(a) = 0) at the extreme point, the tangent line in the graph of the inverse function becomes a vertical line, so why does it become indifferentiable? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don&#x27;t miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!</p></li>
+</ol>
+<p>Follow every step with its figure in the <a href="https://min7014.github.io/2019/2019101602.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2019101602&amp;lang=en">MathLab</a>.</p>
+<h2>More Limits &amp; Calculus proofs</h2>
+<ul class="plain">
+<li><a href="../differential-calculus-2024021801/">(d/dx)(sin x)=cos x</a></li>
+<li><a href="../the-chain-rule/">The Chain Rule</a></li>
+<li><a href="../lim-theta-0-sin-theta-theta-1/">lim(θ → 0) (sin θ/θ)=1</a></li>
+<li><a href="../theta-tan-theta-0-theta-pi-2/">θ ＜ tan θ (0＜θ＜(π/2))</a></li>
+</ul>
+</main>
+<footer>Free open educational resource for secondary-school students, teachers and adult learners.
+Every proof is based on the original step-by-step visual proof published at <a href="https://min7014.github.io/" target="_blank" rel="noopener">min7014.github.io</a>.
+Videos open on YouTube in a new tab.</footer>
+</body>
+</html>
