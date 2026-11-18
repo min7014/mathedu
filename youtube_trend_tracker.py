@@ -111,25 +111,29 @@ def capture_trend_snapshot(include_studio: bool = False) -> dict:
 
     try:
         import min7014_video_maker as vm
-        yt, _ = vm.get_available_youtube_upload_service()
+        yt, _ = vm.get_youtube_readonly_service()
+        if yt is None:
+            yt, _ = vm.get_available_youtube_upload_service()
         if yt is not None:
-            ch = yt.channels().list(part="statistics,contentDetails", mine=True).execute()["items"][0]
-            st = ch.get("statistics", {})
-            pub_v = int(st.get("videoCount", pub_v))
-            views = int(st.get("viewCount", views))
-            subs = int(st.get("subscriberCount", subs))
-            uploads_pl = ch["contentDetails"]["relatedPlaylists"]["uploads"]
-            pl_items = yt.playlistItems().list(part="snippet,contentDetails", playlistId=uploads_pl, maxResults=35).execute().get("items", [])
-            v2_ids = [
-                it["contentDetails"]["videoId"]
-                for it in pl_items
-                if str(it["snippet"].get("publishedAt") or "") >= "2026-11-14T01:55:00Z"
-            ]
-            if v2_ids:
-                v_resp = yt.videos().list(part="statistics", id=",".join(v2_ids)).execute().get("items", [])
-                v_views = [int((x.get("statistics") or {}).get("viewCount", 0)) for x in v_resp]
-                post_v2_cnt = len(v_views)
-                post_v2_avg = round(sum(v_views) / max(1, len(v_views)), 1)
+            ch_resp = yt.channels().list(part="id,statistics,contentDetails", id="UCSlqQfOEtRfJuMPyGMLgFYA").execute()
+            if ch_resp.get("items"):
+                ch = ch_resp["items"][0]
+                st = ch.get("statistics", {})
+                pub_v = int(st.get("videoCount", pub_v))
+                views = int(st.get("viewCount", views))
+                subs = int(st.get("subscriberCount", subs))
+                uploads_pl = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+                pl_items = yt.playlistItems().list(part="snippet,contentDetails", playlistId=uploads_pl, maxResults=35).execute().get("items", [])
+                v2_ids = [
+                    it["contentDetails"]["videoId"]
+                    for it in pl_items
+                    if str(it["snippet"].get("publishedAt") or "") >= "2026-11-14T01:55:00Z"
+                ]
+                if v2_ids:
+                    v_resp = yt.videos().list(part="statistics", id=",".join(v2_ids)).execute().get("items", [])
+                    v_views = [int((x.get("statistics") or {}).get("viewCount", 0)) for x in v_resp]
+                    post_v2_cnt = len(v_views)
+                    post_v2_avg = round(sum(v_views) / max(1, len(v_views)), 1)
     except Exception:
         pass
 

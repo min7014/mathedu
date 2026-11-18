@@ -198,6 +198,8 @@ def scan_youtube_comments_for_math_issues(force_orig_sweep: bool = False) -> dic
 
     yt, _ = vmaker.get_available_youtube_upload_service()
     if yt is None:
+        yt, _ = vmaker.get_youtube_readonly_service()
+    if yt is None:
         return {"ok": False, "reason": "youtube_service_unavailable"}
 
     st = _load_private_state()

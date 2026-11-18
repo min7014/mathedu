@@ -54,17 +54,148 @@ if STORAGE_ROOT_DIR.exists():
     tempfile.tempdir = str(_d_tmp)
 
 # ==============================================================================
-# 🔑 Multi-Project YouTube API Quota Rotation Pool & Pre-Flight Guard
+# 🔑 Multi-Project YouTube API Quota Rotation Pool & Channel-ID Hard Gate
 # ==============================================================================
+EXPECTED_AI_CHANNEL_ID = "UCSlqQfOEtRfJuMPyGMLgFYA"  # @min7014_ai 공식 채널 고정 하드 게이트
 _EXHAUSTED_TOKEN_FILES = {}  # token_path -> backoff_until_ts
+_TOKEN_CHANNEL_CACHE = {}    # (token_path, mtime_ns) -> (channel_id, handle, title)
 _LAST_UPLOAD_QUOTA_BLOCKED = False
+
+
+def _safe_sync_file(src, dst, prefer_hardlink: bool = True) -> None:
+    """
+    [Rule 39 NTFS 하드링크 호환 무결점 파일 동기화]
+    - src와 dst가 이미 동일한 NTFS inode(하드링크)를 가리키는 경우 shutil.SameFileError 없이 즉시 통과합니다.
+    - 동일 드라이브에서는 NTFS 하드링크(0바이트 중복 점유)를 우선 연결하고 실패 시 안전 복사합니다.
+    """
+    src_p = Path(src)
+    dst_p = Path(dst)
+    if not src_p.exists():
+        return
+    dst_p.parent.mkdir(parents=True, exist_ok=True)
+    if dst_p.exists():
+        try:
+            if os.path.samefile(src_p, dst_p):
+                return
+        except Exception:
+            pass
+        try:
+            dst_p.unlink()
+        except Exception:
+            shutil.copyfile(src_p, dst_p)
+            return
+    if prefer_hardlink:
+        try:
+            os.link(src_p, dst_p)
+            return
+        except Exception:
+            pass
+    shutil.copyfile(src_p, dst_p)
+
+
+def get_youtube_readonly_service():
+    """
+    채널 ID 지정 공개 조회(channels.list(id=...), videos.list, playlistItems.list 등) 전용 서비스.
+    토큰이 개인 서브채널(@eungimin3184)로 발급되어 있더라도 공개 읽기 API는 정상 동작합니다.
+    """
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    for t_file in sorted(ROOT_DIR.glob("youtube_token_min7014_ai*.json")):
+        try:
+            creds = Credentials.from_authorized_user_file(str(t_file), SCOPES)
+            if not creds.valid and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+                t_file.write_text(creds.to_json(), encoding="utf-8")
+            return build("youtube", "v3", credentials=creds), str(t_file)
+        except Exception:
+            continue
+    return None, None
+
+
+def _verify_token_channel_identity(yt, t_file: Path):
+    """토큰이 실제로 가리키는(mine=True) 유튜브 채널 ID를 캐시·검증합니다."""
+    st = t_file.stat()
+    cache_key = (str(t_file), getattr(st, "st_mtime_ns", int(st.st_mtime * 1e9)))
+    if cache_key in _TOKEN_CHANNEL_CACHE:
+        return _TOKEN_CHANNEL_CACHE[cache_key]
+    ch_resp = yt.channels().list(part="id,snippet", mine=True).execute()
+    items = ch_resp.get("items") or []
+    if not items:
+        info = ("", "", "")
+    else:
+        sn = items[0].get("snippet") or {}
+        info = (
+            str(items[0].get("id") or ""),
+            str(sn.get("customUrl") or ""),
+            str(sn.get("title") or ""),
+        )
+    _TOKEN_CHANNEL_CACHE[cache_key] = info
+    return info
+
+
+def get_youtube_token_channel_health() -> dict:
+    """현재 등록된 OAuth 토큰들이 공식 @min7014_ai(UCSlqQfOEtRfJuMPyGMLgFYA)에 연결되어 있는지 진단합니다."""
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    token_candidates = sorted(ROOT_DIR.glob("youtube_token_min7014_ai*.json"))
+    if not token_candidates:
+        return {"ok": False, "reason": "missing_token_file", "expected_channel_id": EXPECTED_AI_CHANNEL_ID, "tokens": []}
+    details = []
+    any_ok = False
+    for t_file in token_candidates:
+        try:
+            creds = Credentials.from_authorized_user_file(str(t_file), SCOPES)
+            if not creds.valid and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+                t_file.write_text(creds.to_json(), encoding="utf-8")
+            yt = build("youtube", "v3", credentials=creds)
+            ch_id, handle, title = _verify_token_channel_identity(yt, t_file)
+            matched = (ch_id == EXPECTED_AI_CHANNEL_ID)
+            if matched:
+                any_ok = True
+            details.append({
+                "file": t_file.name,
+                "valid_oauth": True,
+                "matched_ai_channel": matched,
+                "channel_id": ch_id,
+                "handle": handle,
+                "title": title,
+            })
+        except Exception as e:
+            details.append({
+                "file": t_file.name,
+                "valid_oauth": False,
+                "matched_ai_channel": False,
+                "error": str(e),
+            })
+    return {
+        "ok": any_ok,
+        "expected_channel_id": EXPECTED_AI_CHANNEL_ID,
+        "expected_handle": "@min7014_ai",
+        "tokens": details,
+    }
+
 
 def get_available_youtube_upload_service():
     """
     워크스페이스 내의 모든 youtube_token_min7014_ai*.json 파일을 스캔하여,
-    현재 일일 할당량(429 rateLimitExceeded)에 걸리지 않은 유효한 YouTube Data API v3 객체를 반환합니다.
-    유튜브 고급 기능(Advanced Features) 승인 및 일일 한도 해제 시 연속 대량 업로드를 수행하며,
-    복수의 GCP 프로젝트 토큰이 존재할 경우 자동으로 로테이션합니다.
+    현재 일일 할당량(429 rateLimitExceeded)에 걸리지 않고 공식 @min7014_ai 채널(UCSlqQfOEtRfJuMPyGMLgFYA)로
+    정확히 인증된 YouTube Data API v3 객체만 반환합니다.
+    (개인 서브채널 @eungimin3184 등으로 잘못 인증된 토큰은 오업로드 원천 차단을 위해 하드 게이트에서 거부합니다.)
     """
     global _LAST_UPLOAD_QUOTA_BLOCKED
     from google.auth.transport.requests import Request
@@ -87,11 +218,72 @@ def get_available_youtube_upload_service():
             if not creds.valid and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
                 t_file.write_text(creds.to_json(), encoding='utf-8')
+            yt = build('youtube', 'v3', credentials=creds)
+            ch_id, ch_handle, ch_title = _verify_token_channel_identity(yt, t_file)
+            if ch_id != EXPECTED_AI_CHANNEL_ID:
+                _EXHAUSTED_TOKEN_FILES[str(t_file)] = now_ts + 600.0
+                print(
+                    f"⛔ [Channel Hard-Gate ({t_file.name})] 연결된 채널이 '{ch_title} ({ch_handle} / {ch_id})'입니다! "
+                    f"공식 '@min7014_ai ({EXPECTED_AI_CHANNEL_ID})'가 아니므로 오업로드를 차단합니다. "
+                    f"(`python -X utf8 min7014_video_maker.py --reauth-ai` 로 브랜드 채널을 선택해 재인증하세요.)",
+                    flush=True,
+                )
+                continue
             _LAST_UPLOAD_QUOTA_BLOCKED = False
-            return build('youtube', 'v3', credentials=creds), str(t_file)
+            return yt, str(t_file)
         except Exception as e:
+            _EXHAUSTED_TOKEN_FILES[str(t_file)] = now_ts + 300.0
             print(f'⚠️ [Token Pool Skip ({t_file.name})]: {e}')
     return None, None
+
+
+def reauthenticate_official_ai_channel(client_secret_path=None) -> bool:
+    """
+    [@min7014_ai (UCSlqQfOEtRfJuMPyGMLgFYA) 브랜드 채널 전용 검증형 OAuth 재인증기]
+    - 브라우저 계정/채널 선택창을 강제로 띄워(@eungimin3184 자동 선택 방지),
+      실제로 @min7014_ai(UCSlqQfOEtRfJuMPyGMLgFYA)가 선택되었는지 즉시 검증한 뒤에만 저장합니다.
+    """
+    from google_auth_oauthlib.flow import InstalledAppFlow
+    from googleapiclient.discovery import build
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
+    cs_file = Path(client_secret_path) if client_secret_path else find_google_client_secret()
+    if not cs_file or not Path(cs_file).exists():
+        raise FileNotFoundError("youtube_client_secret.json 파일을 찾을 수 없습니다.")
+
+    print("=" * 76, flush=True)
+    print("🔐 [@min7014_ai 공식 브랜드 채널 OAuth 재인증]", flush=True)
+    print("👉 열리는 브라우저 창에서 개인 프로필('Eun Gi Min / @eungimin3184')이 아닌,", flush=True)
+    print("   반드시 브랜드 채널 ['오리지널 단계별 시각적 수학 증명 (@min7014_ai)']을 클릭해 주세요!", flush=True)
+    print("=" * 76, flush=True)
+
+    for attempt in range(1, 3):
+        flow = InstalledAppFlow.from_client_secrets_file(str(cs_file), SCOPES)
+        creds = flow.run_local_server(port=0, prompt="consent select_account")
+        yt = build("youtube", "v3", credentials=creds)
+        ch_resp = yt.channels().list(part="id,snippet", mine=True).execute()
+        items = ch_resp.get("items") or []
+        ch_id = items[0]["id"] if items else ""
+        sn = (items[0].get("snippet") or {}) if items else {}
+        ch_handle = sn.get("customUrl", "")
+        ch_title = sn.get("title", "")
+        if ch_id == EXPECTED_AI_CHANNEL_ID:
+            out_tok = ROOT_DIR / "youtube_token_min7014_ai.json"
+            out_tok.write_text(creds.to_json(), encoding="utf-8")
+            _EXHAUSTED_TOKEN_FILES.pop(str(out_tok), None)
+            _TOKEN_CHANNEL_CACHE.clear()
+            print(f"✅ [인증 완료!] 공식 채널 '{ch_title} ({ch_handle} / {ch_id})' 연결 확인 및 {out_tok.name} 저장 성공!", flush=True)
+            return True
+        print(
+            f"⚠️ [시도 {attempt}/2 채널 불일치] 방금 선택된 채널은 '{ch_title} ({ch_handle} / {ch_id})'입니다. "
+            f"다시 한 번 '@min7014_ai ({EXPECTED_AI_CHANNEL_ID})' 브랜드 채널을 선택해 주세요!",
+            flush=True,
+        )
+    return False
 
 def mark_token_quota_exhausted(token_path_str, seconds=900):
     global _LAST_UPLOAD_QUOTA_BLOCKED
@@ -3784,6 +3976,13 @@ def _smart_concise_topic_title(raw_title: str, max_len: int = 38, lang: str = "k
         return _balance_parentheses(t_no_trailing_paren)
     if t_no_trailing_paren and len(t_no_trailing_paren) >= 12:
         t = t_no_trailing_paren
+    # 영문 종속절(when/where/if/while/which/that/whose ...)이 max_len 초과를 유발할 때 절 경계에서 먼저 깔끔하게 절단 ("when light" 반쪽 절단 방지)
+    if lang == "en" and len(t) > max_len:
+        m_clause = re.search(r"\s+\b(when|where|if|while|which|that|whose)\b\s+", t, flags=re.IGNORECASE)
+        if m_clause and 14 <= m_clause.start() <= max_len:
+            t_clause_trimmed = _balance_parentheses(t[:m_clause.start()].strip(" ,;:-"))
+            if len(t_clause_trimmed) >= 14:
+                return t_clause_trimmed
     # 단어 경계(Word Boundary)에서만 절단하고 끝에 남은 전치사/관사/조사/연결어미 제거
     cut = t[:max_len].rsplit(" ", 1)[0].strip() if " " in t[:max_len] else t[:max_len].strip()
     # 만약 절단 지점이 열린 괄호 '(' 내부라면 열린 괄호부터 끝까지 제거하여 반쪽짜리 괄호 원천 차단
@@ -4360,7 +4559,7 @@ def render_multilingual_video(slug_key, lang_code="ko", max_pages=None):
             thumb_pkg_path = YT_PKG_DIR / f"{slug_key}_{lang_code}_thumb.png"
             thumb_up_path = topic_upload_dir / f"{slug_key}_{lang_code}_thumb.png"
             generate_youtube_thumbnail_720p(doc, script_doc, lang_code, thumb_pkg_path)
-            shutil.copyfile(thumb_pkg_path, thumb_up_path)
+            _safe_sync_file(thumb_pkg_path, thumb_up_path)
 
             yt_meta = build_youtube_metadata_for_lang(script_doc, lang_code, page_timings)
             yt_meta["srt_url"] = f"video_lectures/youtube_packages/{srt_pkg_path.name}"
@@ -4722,7 +4921,7 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
             str(out_mp4),
         ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-        shutil.copyfile(out_mp4, web_mp4)
+        _safe_sync_file(out_mp4, web_mp4)
 
         srt_lines = []
         for idx_s, pt in enumerate(page_timings, 1):
@@ -4737,7 +4936,7 @@ def render_question_classroom_video(slug_key="math20250130001", lang_code="ko"):
         q_thumb_up = topic_upload_dir / f"{slug_key}_q_{lang_code}_thumb.png"
         try:
             generate_question_thumbnail_720p(doc, script_doc, lang_code, q_thumb_pkg)
-            shutil.copyfile(q_thumb_pkg, q_thumb_up)
+            _safe_sync_file(q_thumb_pkg, q_thumb_up)
         except Exception as qte:
             print(f"[Question Thumbnail Notice] {qte}")
 
@@ -5507,7 +5706,7 @@ def prepare_ready_batch_folder(open_explorer=False):
                 active_fnames.add(fname)
                 dst = ready_dir / fname
                 if not dst.exists() or dst.stat().st_size != src.stat().st_size:
-                    shutil.copyfile(src, dst)
+                    _safe_sync_file(src, dst)
                 count += 1
     for ef in existing_files:
         if ef.name not in active_fnames:
@@ -5557,7 +5756,7 @@ def prepare_ready_shorts_batch_folder(open_explorer=False):
                 active_fnames.add(fname)
                 dst = ready_shorts_dir / fname
                 if not dst.exists() or dst.stat().st_size != src.stat().st_size:
-                    shutil.copyfile(src, dst)
+                    _safe_sync_file(src, dst)
     for ef in existing_files:
         if ef.name not in active_fnames:
             try:
@@ -6203,9 +6402,8 @@ def update_video_catalog():
                 pub_short_dir.mkdir(parents=True, exist_ok=True)
                 pub_dst = pub_short_dir / f"{slug}_short_{lc}.mp4"
                 try:
-                    if sp_mp4.resolve() != pub_dst.resolve():
-                        if not pub_dst.exists() or sp_mp4.stat().st_size != pub_dst.stat().st_size:
-                            shutil.copyfile(sp_mp4, pub_dst)
+                    if not pub_dst.exists() or sp_mp4.stat().st_size != pub_dst.stat().st_size:
+                        _safe_sync_file(sp_mp4, pub_dst)
                 except Exception:
                     pass
                 if lc not in shorts_pkgs:
@@ -7093,7 +7291,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
         pub_short_dir = ROOT_DIR / "video_lectures" / "shorts"
         pub_short_dir.mkdir(parents=True, exist_ok=True)
         pub_short_path = pub_short_dir / f"{slug_key}_short_{lang_code}.mp4"
-        shutil.copyfile(out_short, pub_short_path)
+        _safe_sync_file(out_short, pub_short_path)
         sdoc["shorts_packages"][lang_code] = {
             "title": short_meta["title"],
             "local_mp4_path": f"video_lectures/shorts/{slug_key}_short_{lang_code}.mp4",
@@ -7107,7 +7305,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
         # 1-Drag 업로드 폴더에도 자동 복사
         safe_t = re.sub(r'[\\/:*?"<>|]', " ", short_meta["title"]).strip()
         ready_dst = ready_shorts_dir / f"{safe_t[:75]} [{slug_key}_SHORT_{lang_code.upper()}].mp4"
-        shutil.copyfile(out_short, ready_dst)
+        _safe_sync_file(out_short, ready_dst)
 
         update_video_catalog()
         print(f"📱 [YouTube Shorts 1080x1920 (<58s Verified) Generated] {out_short} ({round(dur, 1)}s) -> {short_meta['title']}")
@@ -7427,7 +7625,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
             dur = get_media_duration_seconds(out_short, ffprobe_exe)
 
         pub_qshort_path = pub_short_dir / f"{slug_key}_short_q_{lang_code}.mp4"
-        shutil.copyfile(out_short, pub_qshort_path)
+        _safe_sync_file(out_short, pub_qshort_path)
 
         # [자동 교체 원칙] 질문형 숏폼이 새로 제작/업데이트되면 기존 채널의 구버전 질문형 숏폼 삭제 큐 등록 및 삭제
         try:
@@ -7456,7 +7654,7 @@ def render_question_short_vertical(slug_key="math20250130001", lang_code="ko"):
 
         safe_t = re.sub(r'[\\/:*?"<>|]', " ", qshort_title).strip()
         ready_dst = ready_shorts_dir / f"{safe_t[:72]} [{slug_key}_QSHORT_{lang_code.upper()}].mp4"
-        shutil.copyfile(out_short, ready_dst)
+        _safe_sync_file(out_short, ready_dst)
 
         update_video_catalog()
         print(f"❓📱 [Question-Asking YouTube Shorts 1080x1920 (<58s Verified) Generated] {pub_qshort_path} ({round(dur, 1)}s)")
@@ -8804,25 +9002,11 @@ def optimize_youtube_channel_settings():
     5) 채널 홈 화면 섹션 레이아웃(한국어 정주행 재생목록, 영어 정주행 재생목록, 인기 업로드, 최신 업로드, 본 채널 @min7014 연계) 구성
     6) 업로드된 10개 전체 영상에 1280x720 HD 커스텀 썸네일 일괄 적용 (thumbnails.set)
     """
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload
 
-    SCOPES = [
-        "https://www.googleapis.com/auth/youtube.upload",
-        "https://www.googleapis.com/auth/youtube.force-ssl",
-        "https://www.googleapis.com/auth/youtube.readonly",
-    ]
-    token_file = ROOT_DIR / "youtube_token_min7014_ai.json"
-    if not token_file.exists():
-        raise RuntimeError("youtube_token_min7014_ai.json not found.")
-    creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
-    if not creds.valid and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-        token_file.write_text(creds.to_json(), encoding="utf-8")
-
-    youtube = build("youtube", "v3", credentials=creds)
+    youtube, _ = get_available_youtube_upload_service()
+    if youtube is None:
+        raise RuntimeError("@min7014_ai (UCSlqQfOEtRfJuMPyGMLgFYA) 채널로 검증된 OAuth 토큰이 없습니다 (`python -X utf8 min7014_video_maker.py --reauth-ai`).")
 
     # 1. 커스텀 채널 배너(2560x1440) 생성 및 업로드
     banner_url = None
@@ -9133,9 +9317,13 @@ if __name__ == "__main__":
     parser.add_argument("--once", action="store_true", help="[Rule 40-A] Run a single pass and exit")
     parser.add_argument("--daemon-shorts", action="store_true", help="Run background daemon to auto-upload & auto-enrich YouTube #Shorts on @min7014_ai")
     parser.add_argument("--add-quota-project", type=str, nargs="?", const="AUTO", default=None, help="Register an additional GCP OAuth client_secret.json to multiply daily YouTube API quota (+10,000 units/project)")
+    parser.add_argument("--reauth-ai", action="store_true", help="Re-authenticate youtube_token_min7014_ai.json strictly verifying @min7014_ai (UCSlqQfOEtRfJuMPyGMLgFYA) Brand Channel")
     args = parser.parse_args()
 
-    if args.add_quota_project is not None:
+    if args.reauth_ai:
+        ok_auth = reauthenticate_official_ai_channel()
+        sys.exit(0 if ok_auth else 1)
+    elif args.add_quota_project is not None:
         cs_arg = None if args.add_quota_project == "AUTO" else args.add_quota_project
         register_new_youtube_quota_project(client_secret_path=cs_arg, open_gcp_help=True)
     elif args.set_youtube_ko is not None or args.set_youtube_en is not None:
@@ -9201,16 +9389,8 @@ def auto_engage_youtube_community_comments(max_replies: int = 10) -> list:
       시청자가 남긴 댓글이나 퀴즈 정답 답글 중 아직 채널 주인이 답글을 달지 않은 항목(COMMENT_CATEGORY_NOT_ENGAGED)에
       즉시 친절한 수학적 해설 + 인간 저작 오리지널 원문(https://min7014.github.io/) 안내 + 51~88분 마스터클래스 연속재생 링크를 답글로 게시합니다.
     """
-    from google.oauth2.credentials import Credentials
-    from googleapiclient.discovery import build
-
-    tok_p = ROOT_DIR / "youtube_token_min7014_ai.json"
-    if not tok_p.exists():
-        return []
-    try:
-        creds = Credentials.from_authorized_user_file(str(tok_p))
-        yt = build("youtube", "v3", credentials=creds)
-    except Exception:
+    yt, _ = get_available_youtube_upload_service()
+    if yt is None:
         return []
 
     replied_list = []

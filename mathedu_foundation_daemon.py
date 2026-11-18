@@ -269,7 +269,6 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
         flow_summary = {}
         try:
             import nano_banana_cinema_creator as _nbcc_hb
-            _nbcc_hb.run_idle_flow_quality_retrofit_cycle(max_topics=1)
             flow_summary = _nbcc_hb.get_flow_retrofit_status_summary()
         except Exception:
             pass
@@ -301,6 +300,11 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
                 "questionAskingClassrooms": len(ped.get("questionAskingClassrooms", [])),
             }
         }, ensure_ascii=False, indent=2), encoding="utf-8")
+        try:
+            import nano_banana_cinema_creator as _nbcc_hb2
+            _nbcc_hb2.run_idle_flow_quality_retrofit_cycle(max_topics=1)
+        except Exception:
+            pass
         try:
             import importlib
             import _antigravity_report_watcher as _arw_hb
@@ -866,6 +870,15 @@ def run_continuous_foundation_loop(single_cycle=False):
         )
     except Exception as geo_err:
         print(f"[Google Ecosystem Notice] {geo_err}", flush=True)
+    try:
+        import build_global_proof_pages as _bgpp
+        en_rep = _bgpp.build()
+        print(
+            f"🌍 [Global English Proof Pages (Policy 68)] published={en_rep.get('published')} | with_video={en_rep.get('with_video')} | hreflang & sitemaps synced",
+            flush=True,
+        )
+    except Exception as en_err:
+        print(f"[Global Proof Pages Notice] {en_err}", flush=True)
     write_daemon_heartbeat()
 
     if single_cycle:

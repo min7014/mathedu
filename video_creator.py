@@ -195,7 +195,7 @@ def produce_full_suite_for_slug(slug_key: str, langs=("ko", "en"), force=False):
             vm.render_youtube_short_vertical(slug_key, lang_code=lc)
         if sh_mp4.exists():
             WEB_SHORTS_DIR.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(sh_mp4, web_sh_mp4)
+            vm._safe_sync_file(sh_mp4, web_sh_mp4)
         outputs["v3_shorts_std"][lc] = str(web_sh_mp4 if web_sh_mp4.exists() else sh_mp4)
 
         # 3-B. [숏폼-질문형] 질문형 숏폼 영상 (9:16 Q-#Shorts)

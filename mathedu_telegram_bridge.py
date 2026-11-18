@@ -782,10 +782,25 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         git_log = run_shell(["git", "log", "-n", "3", "--oneline"], timeout=15)
         bal_p = ROOT_DIR / ".agents" / "daily_wave_balance.json"
         bal_txt = bal_p.read_text(encoding="utf-8") if bal_p.exists() else "{}"
+        yt_auth_line = "확인 중"
+        try:
+            sys.path.insert(0, str(ROOT_DIR))
+            import min7014_video_maker as vm_st
+            yh = vm_st.get_youtube_token_channel_health()
+            if yh.get("ok"):
+                yt_auth_line = "🟢 @min7014_ai 정상 연결"
+            elif yh.get("tokens"):
+                t0 = yh["tokens"][0]
+                yt_auth_line = f"⚠️ 채널 불일치({t0.get('handle') or t0.get('channel_id')}) → --reauth-ai 필요(오업로드 차단됨)"
+            else:
+                yt_auth_line = "🔴 토큰 미등록"
+        except Exception:
+            pass
         return (
             "📊 [크레딧 0원 · 실시간 시스템 현황]\n"
             f"• 24/7 렌더링·업로드 데몬: {'🟢 정상 가동' if f_alive else '🔴 중지 (5분 내 자동복구)'}\n"
             f"• 24/7 텔레그램 워치독: {'🟢 정상 대기' if w_alive else '🟡 리스너 단독'}\n"
+            f"• YouTube OAuth 업로드 채널: {yt_auth_line}\n"
             f"• 금일 업로드 밸런스(4:2): {bal_txt.strip()}\n"
             f"• 최근 커밋:\n{git_log}"
         )
@@ -798,29 +813,31 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         st_p = ROOT_DIR / ".agents" / "live_yt_stats.json"
         cached = json.loads(st_p.read_text(encoding="utf-8")) if st_p.exists() else {}
         ch_title = "민은기 선생님의 단계별 시각적 수학 증명 (@min7014_ai)"
-        subs = int(cached.get("subscribers_live", 8))
-        views = int(cached.get("total_views_live", 5264))
-        vcnt = int(cached.get("public_videos_live", 442))
+        subs = int(cached.get("subscribers_live", 9))
+        views = int(cached.get("total_views_live", 9857))
+        vcnt = int(cached.get("public_videos_live", 556))
         live_tag = "실측 캐시 · API 쿼터 리셋 대기(17:00 KST)"
         try:
             sys.path.insert(0, str(ROOT_DIR))
             import min7014_video_maker as vm
-            yt, _ = vm.get_available_youtube_upload_service()
+            yt, _ = vm.get_youtube_readonly_service()
             if yt is not None:
-                ch = yt.channels().list(part="snippet,statistics", mine=True).execute()["items"][0]
-                ch_title = ch["snippet"].get("title") or ch_title
-                st = ch.get("statistics", {})
-                subs = int(st.get("subscriberCount", subs))
-                views = int(st.get("viewCount", views))
-                vcnt = int(st.get("videoCount", vcnt))
-                live_tag = "실시간 API 조회"
-                snap = {
-                    "public_videos_live": vcnt,
-                    "total_views_live": views,
-                    "subscribers_live": subs,
-                    "checked_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                }
-                st_p.write_text(json.dumps(snap, ensure_ascii=False, indent=2), encoding="utf-8")
+                ch_r = yt.channels().list(part="snippet,statistics", id="UCSlqQfOEtRfJuMPyGMLgFYA").execute()
+                if ch_r.get("items"):
+                    ch = ch_r["items"][0]
+                    ch_title = ch["snippet"].get("title") or ch_title
+                    st = ch.get("statistics", {})
+                    subs = int(st.get("subscriberCount", subs))
+                    views = int(st.get("viewCount", views))
+                    vcnt = int(st.get("videoCount", vcnt))
+                    live_tag = "실시간 API 조회 (@min7014_ai)"
+                    snap = {
+                        "public_videos_live": vcnt,
+                        "total_views_live": views,
+                        "subscribers_live": subs,
+                        "checked_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    }
+                    st_p.write_text(json.dumps(snap, ensure_ascii=False, indent=2), encoding="utf-8")
         except Exception:
             pass
         return (
@@ -851,8 +868,13 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         sys.path.insert(0, str(ROOT_DIR))
         import google_ecosystem_orchestrator as geo
         res = geo.build_google_video_sitemap()
+        try:
+            import build_global_proof_pages as _bgpp
+            _bgpp.build()
+        except Exception:
+            pass
         return (
-            "🗺️ [크레딧 0원 · Google Video Sitemap 동기화 완료]\n"
+            "🗺️ [크레딧 0원 · Google Video Sitemap + EN hreflang 동기화 완료]\n"
             f"• 사이트맵: https://min7014.github.io/mathedu/video-sitemap.xml\n"
             f"• 색인 연결 단원: {res.get('indexed_slugs', 0)}주제 | 라이브 영상: {res.get('indexed_live_videos', 0)}편"
         )
@@ -1210,6 +1232,9 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
             print("\n👋 텔레그램 에이전트 데몬을 종료합니다.")
             break
         except Exception as e:
+            if "409" in str(e) and _is_live_session_owning_telegram():
+                await asyncio.sleep(2.5)
+                continue
             print(f"[재시도 대기] 오류: {e}", flush=True)
             await asyncio.sleep(3)
 

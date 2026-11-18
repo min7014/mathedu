@@ -555,6 +555,80 @@ html.dark-theme .filter-tab-btn {
   gap: 12px;
   flex-wrap: wrap;
 }
+
+/* 🔍 Top Header Omni-Search Bar & Instant Dropdown */
+.header-omni-search-wrap {
+  position: relative;
+  flex: 1 1 220px;
+  max-width: 440px;
+  min-width: 140px;
+  margin: 0 6px;
+}
+.header-omni-search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 6px 0 12px;
+  border-radius: 999px;
+  background: rgba(241, 245, 249, 0.94);
+  border: 1.5px solid rgba(148, 163, 184, 0.44);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.header-omni-search-box:focus-within {
+  background: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.16), 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+html.dark-theme .header-omni-search-box {
+  background: rgba(30, 41, 59, 0.90) !important;
+  border-color: rgba(56, 189, 248, 0.30) !important;
+  color: #f8fafc !important;
+}
+html.dark-theme .header-omni-search-box:focus-within {
+  background: rgba(15, 23, 42, 0.98) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.24) !important;
+}
+.header-omni-input,
+html.dark-theme input[type="text"].header-omni-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.header-omni-input::placeholder {
+  color: #64748b;
+  font-weight: 500;
+}
+html.dark-theme .header-omni-input::placeholder {
+  color: #94a3b8;
+}
+@media (max-width: 639px) {
+  .header-omni-search-wrap {
+    display: none;
+    margin: 0;
+  }
+  .header-omni-search-wrap.mobile-open {
+    display: block;
+    position: fixed;
+    top: 76px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+    min-width: 0;
+    z-index: 9998;
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.22);
+  }
+}
 </style>
 </head>
 <body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen">
@@ -562,24 +636,59 @@ html.dark-theme .filter-tab-btn {
 <!-- Fixed Top Header (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
 <header class="spatial-glass-header fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe">
   <div class="h-20 px-margin max-w-[1120px] mx-auto flex items-center justify-between gap-space-sm">
-    <a href="/mathedu/" class="flex items-center gap-space-sm min-w-0 no-underline">
+    <a href="/mathedu/" class="flex items-center gap-space-sm min-w-0 shrink-0 max-w-[175px] sm:max-w-[350px] no-underline">
       <img alt="Image from https://min7014.github.io/mathedu/assets/favicon.png" class="h-8 w-auto object-contain shrink-0" src="assets/favicon.png"/>
       <div class="flex flex-col min-w-0">
         <div class="flex items-center gap-space-xs truncate">
           <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">mathedu · 수학자료실</span>
         </div>
-        <div class="flex items-center gap-1.5">
-          <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge">3,400+ 시각적 수학 증명</span>
-          <span class="hidden xs:inline-block font-label-code text-label-code text-on-surface-variant truncate">Home</span>
+        <div class="hidden sm:flex items-center gap-1.5 min-w-0">
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-badge text-label-badge truncate max-w-[240px]">3,400+ 시각적 수학 증명</span>
         </div>
       </div>
     </a>
+
+    <!-- 🔍 Top Header Global Omni-Search Input -->
+    <form id="headerGlobalSearchForm" class="header-omni-search-wrap" role="search" onsubmit="if(window.MatheduHeaderOmniSearch){window.MatheduHeaderOmniSearch.submit(event);}return false;">
+      <div class="header-omni-search-box">
+        <span class="material-symbols-outlined text-[18px] text-secondary shrink-0" aria-hidden="true">search</span>
+        <input
+          id="headerGlobalSearchInput"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          class="header-omni-input"
+          placeholder="개념·증명·문제 통합 검색 (예: 피타고라스, 타원, 미적분 30번)..."
+          aria-label="개념·증명·문제 통합 검색 (예: 피타고라스, 타원, 미적분 30번)..."
+        />
+        <button
+          id="headerGlobalSearchClear"
+          type="button"
+          onclick="if(window.MatheduHeaderOmniSearch)window.MatheduHeaderOmniSearch.clear()"
+          title="통합 검색어 지우기"
+          aria-label="통합 검색어 지우기"
+          style="display:none"
+          class="w-6 h-6 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-black/5 cursor-pointer border-0 bg-transparent shrink-0 text-xs font-bold"
+        >✕</button>
+        <button
+          id="headerGlobalSearchBtn"
+          type="submit"
+          title="통합 검색 실행"
+          aria-label="통합 검색 실행"
+          class="h-7 px-2.5 rounded-full bg-secondary text-white text-[11.5px] font-bold hover:opacity-90 transition-opacity cursor-pointer border-0 shrink-0"
+        >검색</button>
+      </div>
+    </form>
+
     <div class="flex items-center gap-space-xs shrink-0">
+      <button id="mobileHeaderSearchToggleBtn" onclick="if(window.MatheduHeaderOmniSearch)window.MatheduHeaderOmniSearch.toggleMobile()" aria-label="통합 검색 열기" title="통합 검색 열기/닫기 (Toggle Search)" class="sm:hidden min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl px-2 py-1 text-secondary bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">
+        <span class="material-symbols-outlined text-[20px]">search</span>
+      </button>
       <button id="themeToggleGlobalBtn" onclick="toggleSiteDarkMode()" aria-label="다크/라이트 테마 전환" title="다크/라이트 테마 전환 (Toggle Dark/Light Theme)" class="min-h-[40px] flex items-center justify-center gap-1 rounded-xl px-2.5 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">
         <span id="themeToggleGlobalIcon">🌙</span>
         <span id="themeToggleGlobalLabel" class="hidden sm:inline">다크</span>
       </button>
-      <button id="langToggleSingleBtn" onclick="var nextL=(window.MatheduI18n&&MatheduI18n.getLanguage()==='ko')?'en':'ko';MatheduI18n.setLanguage(nextL);this.textContent=nextL.toUpperCase();if(window.syncSiteThemeUI)window.syncSiteThemeUI();" aria-label="언어 설정 변경" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl px-2 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button">KO</button>
+      <button id="langToggleSingleBtn" data-no-i18n="1" onclick="if(window.MatheduI18n)MatheduI18n.toggleLanguage();if(window.syncSiteThemeUI)window.syncSiteThemeUI();" aria-label="Switch Language (KO / EN)" class="min-w-[82px] min-h-[40px] flex items-center justify-center rounded-xl px-2.5 py-1 text-on-surface font-label-badge text-label-badge bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-0" type="button"><span style="color:#0284c7;font-weight:900">🇰🇷 KO</span><span style="margin:0 3px;opacity:0.35">|</span><span style="opacity:0.65;font-weight:700">EN</span></button>
       <!-- Hidden compatibility language switcher for i18n script -->
       <div id="langSwitcher" class="hidden">
         <button type="button" data-lang-btn="ko" onclick="MatheduI18n.setLanguage('ko')">KO</button>
@@ -1452,6 +1561,8 @@ function toggleMathStory() {
     if (searchInput) searchInput.value = val;
     var heroInp = document.getElementById('heroQuickSearchInput');
     if (heroInp) heroInp.value = val;
+    var hdrInp = document.getElementById('headerGlobalSearchInput');
+    if (hdrInp && hdrInp.value !== val) hdrInp.value = val;
     renderList();
     if (shouldScroll) {
       var sec = document.getElementById('quizExplorerSection');
@@ -1466,6 +1577,8 @@ function toggleMathStory() {
     if (searchInput) searchInput.value = '';
     var heroInp = document.getElementById('heroQuickSearchInput');
     if (heroInp) heroInp.value = '';
+    var hdrInp = document.getElementById('headerGlobalSearchInput');
+    if (hdrInp) hdrInp.value = '';
     activeTopic = '';
     document.querySelectorAll('.topic-chip').forEach(function(b) { b.classList.remove('active'); });
     var allChip = document.querySelector('.topic-chip[data-topic=""]');
@@ -1473,6 +1586,51 @@ function toggleMathStory() {
     if (window.syncPillsFromSelects) window.syncPillsFromSelects();
     renderList();
   };
+
+  (function initLiveBoardHeaderSearch() {
+    var hdrInput = document.getElementById('headerGlobalSearchInput');
+    var hdrClear = document.getElementById('headerGlobalSearchClear');
+    var hdrBtn = document.getElementById('headerGlobalSearchBtn');
+    var hdrForm = document.getElementById('headerGlobalSearchForm');
+    if (!hdrInput) return;
+    function syncCtrl() {
+      if (hdrClear) hdrClear.style.display = hdrInput.value.trim() ? 'flex' : 'none';
+    }
+    function syncLang(lang) {
+      var en = (lang === 'en') || (window.MatheduI18n && window.MatheduI18n.getLanguage && window.MatheduI18n.getLanguage() === 'en');
+      hdrInput.placeholder = en
+        ? 'Search proofs, concepts & problems (e.g. Pythagoras, Ellipse, Calculus #30)...'
+        : '개념·증명·문제 통합 검색 (예: 피타고라스, 타원, 미적분 30번)...';
+      if (hdrBtn) hdrBtn.textContent = en ? 'Search' : '검색';
+    }
+    hdrInput.addEventListener('input', function() {
+      syncCtrl();
+      if (searchInput) searchInput.value = hdrInput.value;
+      renderList();
+    });
+    window.MatheduHeaderOmniSearch = {
+      submit: function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        if (hdrForm) hdrForm.classList.remove('mobile-open');
+        window.triggerSmartQuizSearch(hdrInput.value.trim(), true);
+        syncCtrl();
+      },
+      clear: function() {
+        hdrInput.value = '';
+        syncCtrl();
+        if (searchInput) searchInput.value = '';
+        renderList();
+        hdrInput.focus();
+      },
+      toggleMobile: function() {
+        if (!hdrForm) return;
+        if (hdrForm.classList.toggle('mobile-open')) setTimeout(function() { hdrInput.focus(); }, 30);
+      },
+      syncControls: syncCtrl,
+      syncLang: syncLang
+    };
+    syncLang();
+  })();
 
   // ════════════════════════════════════════════════════════════════════════
   // 🧠 mathedu 스마트 자연어 수학 문제 검색 파서 (Natural-Language Query Engine)
@@ -1509,7 +1667,10 @@ function toggleMathStory() {
       };
     }
 
-    var norm = q.toLowerCase();
+    var qForParse = (window.MatheduI18n && typeof window.MatheduI18n.expandEnglishSearchQuery === 'function')
+      ? window.MatheduI18n.expandEnglishSearchQuery(q)
+      : q;
+    var norm = String(qForParse || q).toLowerCase();
     // 1. Multi-word curriculum & synonym normalization
     norm = norm
       .replace(/확률과\s*통계|확률\s*통계/g, ' 확통 ')
@@ -1689,6 +1850,7 @@ function toggleMathStory() {
   window.matchMatheduProblem = function(it, p) {
     if (!p || !p.hasQuery) return true;
     var title = (it.title || '').toLowerCase();
+    var titleEn = (it.title_en || '').toLowerCase();
     var slug = (it.slug || '').toLowerCase();
     var subj = it.subject || '';
     var month = it.month || '';
@@ -1696,7 +1858,7 @@ function toggleMathStory() {
     var qnum = String(it.qNum || '');
     var tags = (it.tags || []).map(function(t) { return String(t).toLowerCase(); });
     var corpus = [
-      title, slug, subj.toLowerCase(), month.toLowerCase(), grade.toLowerCase(),
+      title, titleEn, slug, subj.toLowerCase(), month.toLowerCase(), grade.toLowerCase(),
       String(it.examYear || ''), String(it.examYearAlt || ''),
       (it.source || '').toLowerCase(), tags.join(' ')
     ].join(' ');
@@ -1961,7 +2123,15 @@ function toggleMathStory() {
     if (typeof prevLangCallback === 'function') {
       try { prevLangCallback(lang); } catch(e){}
     }
+    if (window.MatheduHeaderOmniSearch && typeof window.MatheduHeaderOmniSearch.syncLang === 'function') {
+      try { window.MatheduHeaderOmniSearch.syncLang(lang); } catch(e){}
+    }
+    try { updateExamSelectOptions(lang); } catch(e){}
+    try { updateGamificationUI(); } catch(e){}
     renderTodayGeoGebra();
+    if (typeof renderList === 'function') {
+      try { renderList(); } catch(e){}
+    }
   };
 
   renderTodayGeoGebra();
@@ -2188,6 +2358,13 @@ function toggleMathStory() {
     var heroInp = document.getElementById('heroQuickSearchInput');
     if (heroInp && heroInp.value !== rawQuery) {
       heroInp.value = rawQuery;
+    }
+    var hdrInpSync = document.getElementById('headerGlobalSearchInput');
+    if (hdrInpSync && document.activeElement !== hdrInpSync && hdrInpSync.value !== rawQuery) {
+      hdrInpSync.value = rawQuery;
+      if (window.MatheduHeaderOmniSearch && typeof window.MatheduHeaderOmniSearch.syncControls === 'function') {
+        window.MatheduHeaderOmniSearch.syncControls();
+      }
     }
     var btnClearMain = document.getElementById('btnClearQuizSearch');
     if (btnClearMain) btnClearMain.style.display = rawQuery ? 'flex' : 'none';

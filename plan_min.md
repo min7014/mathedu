@@ -371,6 +371,7 @@ python -X utf8 pr.py status
 - ✅ **60. 사용자 검색어 전용 분리 저장 · 수요 파악 및 미충족(0건) 수학 수업자료 자동 제작 원칙 (`mathedu-search-logger.js` & `search_demand_engine.py`)**
 - ✅ **61. `mathedu` 홈페이지 × `@min7014_ai` 유튜브 채널 투트랙(Two-Track) 상호보완 마스터플랜 원칙 (Dual-Engine Flywheel Policy)**
 - ✅ **62. 유튜브 자료 시청자 댓글 상시 분석 및 수학적 오류·설명 결손 자동 보완 원칙 (`youtube_comment_math_auditor.py`)**
+- ✅ **63. 3D 입체 도형 Ray-Occlusion 은선(점선) 분리 및 원뿔·구 외접 정밀 작도 원칙 (`genie3_world_controller.py`)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
@@ -798,3 +799,10 @@ python -X utf8 pr.py status
 4. **아동용(Made for Kids) 분류 리스크**: '초등 눈높이' 표현 때문에 채널이 아동용으로 분류되면 맞춤 광고와 댓글이 막혀 RPM이 급락한다. 대상 시청자는 중·고등학생·교사·성인 학습자로 명시하고 영상별 설정을 점검한다.
 5. **과잉 확장 금지**: Gate 1 이전에는 결제 서버, 회원 DB, B2B 영업, 타 교과 개발에 손대지 않는다. Step 3·4의 수익 수치는 목표치일 뿐 약속이 아니다.
 6. **법무 가드레일**: 해외 진출 시에도 외부 시험기관·기업 등록상표, 타 채널명, 내부 제작 도구명은 대외 노출 0건으로 유지하고(`Rule 51`·`auditor.py`), 공개물에 개인 호칭을 쓰지 않는다(`Rule 13`).
+
+
+### [Policy 69] 24/7 전 시스템 정상 가동 무결성 강화 — NTFS 하드링크 `SameFileError` 차단 · `@min7014_ai` OAuth 채널 ID 하드 게이트 · 영문 사이트맵 자동 재동기화 (`2026-11-18` 확정)
+- **근본 원인 진단 및 영구 재발 방지 조치**:
+  1. **[NTFS 하드링크 `SameFileError` 원천 차단 (`min7014_video_maker.py`, `video_creator.py`)]**: `Rule 39` NTFS 하드링크(`os.link`)가 적용된 MP4·썸네일 파일에 `shutil.copyfile` 호출 시 동일 inode(`os.path.samefile == True`) 예외로 연속 팩토리 루프가 중단되던 결함을 `_safe_sync_file(src, dst)`로 일괄 전환하여 0바이트 중복 점유와 무중단 렌더링을 동시에 보장한다.
+  2. **[`@min7014_ai`(`UCSlqQfOEtRfJuMPyGMLgFYA`) OAuth 채널 ID 하드 게이트 (`min7014_video_maker.py`, `finance.py`, `youtube_trend_tracker.py`)]**: OAuth 재인증 시 개인 서브채널(`@eungimin3184`)이 잘못 선택될 경우 타 채널에 영상이 오업로드되거나 통계 스냅샷이 오염되는 현상을 막기 위해, 업로드·쓰기 서비스(`get_available_youtube_upload_service`)에 `EXPECTED_AI_CHANNEL_ID = "UCSlqQfOEtRfJuMPyGMLgFYA"` 하드 게이트를 적용하고, 검증형 재인증 명령(`python -X utf8 min7014_video_maker.py --reauth-ai`, `prompt="consent select_account"`)과 채널 ID 고정 통계 추적기를 상시 운용한다.
+  3. **[24/7 데몬 내 영문 정적 증명 페이지(`build_global_proof_pages.py`) 상시 정합 (`mathedu_foundation_daemon.py`)]**: `pr.py` 및 `google_ecosystem_orchestrator.py`가 `sitemap.xml`·`video-sitemap.xml`을 갱신할 때마다 즉시 `build_global_proof_pages.build()`를 연쇄 실행하여 `/en/proofs/` 72편과 `hreflang` 사이트맵 연결이 절대 유실되지 않도록 보장한다.

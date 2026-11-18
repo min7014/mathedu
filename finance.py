@@ -1223,12 +1223,10 @@ def execute_live_channel_and_video_repairs_now() -> dict:
     from googleapiclient.discovery import build
 
     results = {"channel_updated": False, "repaired_videos": [], "uploaded_masterclasses": 0, "uploaded_ideas": []}
-    tok_p = ROOT_DIR / "youtube_token_min7014_ai.json"
-    if not tok_p.exists():
-        return results
     try:
-        creds = Credentials.from_authorized_user_file(str(tok_p))
-        yt = build("youtube", "v3", credentials=creds)
+        yt, _ = vmaker.get_available_youtube_upload_service()
+        if yt is None:
+            return results
 
         # 1) 라이브 영상 잘린 제목 제자리 복구 (시청시간 보존, 100자 이내 엄수)
         rem_fixes = {
