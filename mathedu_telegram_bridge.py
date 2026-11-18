@@ -776,7 +776,7 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         import youtube_trend_tracker as ytt
         return ytt.format_trend_report(include_studio=True)
 
-    if low in ("!현황", "/status", "!status"):
+    if low in ("!현황", "/status", "!status", "현재상황은?", "현재 상황은?", "상황은?", "지금상황은?", "지금 상황은?", "현황", "현황은?"):
         f_alive = _is_pid_alive(ROOT_DIR / ".agents" / "foundation_daemon.pid")
         w_alive = _is_pid_alive(PID_FILE)
         git_log = run_shell(["git", "log", "-n", "3", "--oneline"], timeout=15)

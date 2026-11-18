@@ -210,7 +210,18 @@ def get_available_youtube_upload_service():
     now_ts = time.time()
     token_candidates = sorted(ROOT_DIR.glob('youtube_token_min7014_ai*.json'))
     for t_file in token_candidates:
-        backoff_until = _EXHAUSTED_TOKEN_FILES.get(str(t_file), 0.0)
+        try:
+            cur_mtime = getattr(t_file.stat(), "st_mtime_ns", int(t_file.stat().st_mtime * 1e9))
+        except Exception:
+            cur_mtime = 0
+        prev_backoff = _EXHAUSTED_TOKEN_FILES.get(str(t_file), (0.0, 0))
+        if isinstance(prev_backoff, tuple):
+            backoff_until, prev_mtime = prev_backoff
+            if cur_mtime != prev_mtime:
+                backoff_until = 0.0
+                _EXHAUSTED_TOKEN_FILES.pop(str(t_file), None)
+        else:
+            backoff_until = float(prev_backoff)
         if now_ts < backoff_until:
             continue
         try:
@@ -218,10 +229,11 @@ def get_available_youtube_upload_service():
             if not creds.valid and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
                 t_file.write_text(creds.to_json(), encoding='utf-8')
+                cur_mtime = getattr(t_file.stat(), "st_mtime_ns", int(t_file.stat().st_mtime * 1e9))
             yt = build('youtube', 'v3', credentials=creds)
             ch_id, ch_handle, ch_title = _verify_token_channel_identity(yt, t_file)
             if ch_id != EXPECTED_AI_CHANNEL_ID:
-                _EXHAUSTED_TOKEN_FILES[str(t_file)] = now_ts + 600.0
+                _EXHAUSTED_TOKEN_FILES[str(t_file)] = (now_ts + 600.0, cur_mtime)
                 print(
                     f"⛔ [Channel Hard-Gate ({t_file.name})] 연결된 채널이 '{ch_title} ({ch_handle} / {ch_id})'입니다! "
                     f"공식 '@min7014_ai ({EXPECTED_AI_CHANNEL_ID})'가 아니므로 오업로드를 차단합니다. "
@@ -232,7 +244,7 @@ def get_available_youtube_upload_service():
             _LAST_UPLOAD_QUOTA_BLOCKED = False
             return yt, str(t_file)
         except Exception as e:
-            _EXHAUSTED_TOKEN_FILES[str(t_file)] = now_ts + 300.0
+            _EXHAUSTED_TOKEN_FILES[str(t_file)] = (now_ts + 300.0, cur_mtime)
             print(f'⚠️ [Token Pool Skip ({t_file.name})]: {e}')
     return None, None
 
