@@ -2,10 +2,10 @@
   "version": 2,
   "loader": "assets/mathedu-ads.js",
   "adsense": {
-    "enabled": false,
-    "clientId": "",
-    "slotMain": "",
-    "slotResult": "",
+    "enabled": true,
+    "clientId": "ca-pub-4433368698941458",
+    "slotMain": "3222693207",
+    "slotResult": "3222693207",
     "format": "auto",
     "note": "Activate: python -X utf8 finance.py set-adsense --client ca-pub-XXXXXXXXXXXXXXXX --slot NNNNNNNNNN [--result-slot NNNNNNNNNN] [--root-site-dir PATH_TO_min7014.github.io_checkout]. Keep AdSense 'Auto ads' OFF in the dashboard (manual footer/result units only)."
   },
@@ -20,14 +20,31 @@
     "note": "Activate: python -X utf8 finance.py set-adfit --unit DAN-XXXXXXXXXXXXXXXX [--width 728 --height 90] [--mobile-unit DAN-YYYYYYYYYYYYYYYY]"
   },
   "langRouting": {
-    "ko": ["kakaoAdfit", "adsense"],
-    "en": ["adsense"]
+    "ko": [
+      "kakaoAdfit",
+      "adsense"
+    ],
+    "en": [
+      "adsense"
+    ]
   },
   "placement": {
-    "allowedSlots": ["footer", "result"],
+    "allowedSlots": [
+      "footer",
+      "result"
+    ],
     "autoFooter": true,
     "lazyRootMargin": "300px 0px",
-    "excludePaths": ["mathlab.html", "/offline/", "live_board.html", "game.html", "video_studio.html", "dashboard.html", "privacy.html", "404.html"],
+    "excludePaths": [
+      "mathlab.html",
+      "/offline/",
+      "live_board.html",
+      "game.html",
+      "video_studio.html",
+      "dashboard.html",
+      "privacy.html",
+      "404.html"
+    ],
     "forbiddenAncestors": "canvas, form, video, iframe, [data-no-ads], [contenteditable=\"true\"]"
   },
   "rules": {

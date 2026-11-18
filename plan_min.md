@@ -806,3 +806,12 @@ python -X utf8 pr.py status
   1. **[NTFS 하드링크 `SameFileError` 원천 차단 (`min7014_video_maker.py`, `video_creator.py`)]**: `Rule 39` NTFS 하드링크(`os.link`)가 적용된 MP4·썸네일 파일에 `shutil.copyfile` 호출 시 동일 inode(`os.path.samefile == True`) 예외로 연속 팩토리 루프가 중단되던 결함을 `_safe_sync_file(src, dst)`로 일괄 전환하여 0바이트 중복 점유와 무중단 렌더링을 동시에 보장한다.
   2. **[`@min7014_ai`(`UCSlqQfOEtRfJuMPyGMLgFYA`) OAuth 채널 ID 하드 게이트 (`min7014_video_maker.py`, `finance.py`, `youtube_trend_tracker.py`)]**: OAuth 재인증 시 개인 서브채널(`@eungimin3184`)이 잘못 선택될 경우 타 채널에 영상이 오업로드되거나 통계 스냅샷이 오염되는 현상을 막기 위해, 업로드·쓰기 서비스(`get_available_youtube_upload_service`)에 `EXPECTED_AI_CHANNEL_ID = "UCSlqQfOEtRfJuMPyGMLgFYA"` 하드 게이트를 적용하고, 검증형 재인증 명령(`python -X utf8 min7014_video_maker.py --reauth-ai`, `prompt="consent select_account"`)과 채널 ID 고정 통계 추적기를 상시 운용한다.
   3. **[24/7 데몬 내 영문 정적 증명 페이지(`build_global_proof_pages.py`) 상시 정합 (`mathedu_foundation_daemon.py`)]**: `pr.py` 및 `google_ecosystem_orchestrator.py`가 `sitemap.xml`·`video-sitemap.xml`을 갱신할 때마다 즉시 `build_global_proof_pages.build()`를 연쇄 실행하여 `/en/proofs/` 72편과 `hreflang` 사이트맵 연결이 절대 유실되지 않도록 보장한다.
+
+
+### [Policy 70] Google AdSense (`ca-pub-4433368698941458` · 슬롯 `3222693207`) 배선 활성화 및 루트 도메인 `min7014.github.io/ads.txt` 배포 (`2026-11-18` 확정)
+- **적용 완료 내역**:
+  1. `ad_config.json`: `adsense.enabled = true`, `clientId = "ca-pub-4433368698941458"`, `slotMain = "3222693207"`, `slotResult = "3222693207"` 활성화 완료.
+  2. 루트 도메인 `https://min7014.github.io/ads.txt` (`google.com, pub-4433368698941458, DIRECT, f08c47fec0942fa0`) 및 루트 `index.html`, `mathedu/index.html`, `video_board.html`, `/en/` + `/en/proofs/` 72편 전체에 `<meta name="google-adsense-account" content="ca-pub-4433368698941458">` 및 하단 클린 로더(`assets/mathedu-ads.js`) 연동 완료(커밋 `94893ec` 외).
+- **⚖️ 실측 계정 상태 주의사항 (`Rule 33`)**:
+  - `pub-4433368698941458`(`min7014@gmail.com`) 계정은 과거 생성된 `YouTube용 애드센스` 계정으로 현재 장기 미활동 비활성화 상태이며 좌측 `[사이트]` 메뉴가 열려 있지 않다.
+  - 따라서 코드·`ads.txt` 배선은 100% 완료되었으나, 실제 광고 송출·정산을 위해서는 ① 애드센스 대시보드에서 **웹사이트(`https://min7014.github.io`) 사이트 추가·심사 신청(웹용 애드센스 확장)** 또는 **카카오 애드핏(`DAN-...`) 병행 등록**, ② `@min7014_ai` YPP 1·2단계 달성 시 YouTube Studio `[수익 창출]` 탭에서 기존 `pub-4433368698941458` 계정 연결(자동 재활성화)이 필요하다.

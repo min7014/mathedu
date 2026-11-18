@@ -455,15 +455,28 @@ footer{border-top:1px solid var(--line);color:var(--mute);font-size:.86rem;paddi
 """
 
 
+def _adsense_meta_line() -> str:
+    cfg_p = ROOT / "ad_config.json"
+    if cfg_p.exists():
+        try:
+            c = ((json.loads(cfg_p.read_text(encoding="utf-8")).get("adsense") or {}).get("clientId") or "").strip()
+            if re.match(r"^ca-pub-\d{16}$", c):
+                return f'\n<meta name="google-adsense-account" content="{esc(c)}">'
+        except Exception:
+            pass
+    return ""
+
+
 def head(title: str, desc: str, canonical: str, ko: str, css_rel: str, jsonld: list, og_image: str = "") -> str:
     ld = json.dumps(jsonld if len(jsonld) > 1 else jsonld[0], ensure_ascii=False, indent=1)
     ld = ld.replace("</", "<\\/")
     og_img = f'\n<meta property="og:image" content="{esc(og_image)}">' if og_image else ""
+    ads_meta = _adsense_meta_line()
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">{ads_meta}
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -489,9 +502,11 @@ def head(title: str, desc: str, canonical: str, ko: str, css_rel: str, jsonld: l
 """
 
 
-FOOTER = """<footer>Free open educational resource for secondary-school students, teachers and adult learners.
+FOOTER = """<div data-mathedu-ad-slot="footer"></div>
+<footer>Free open educational resource for secondary-school students, teachers and adult learners.
 Every proof is based on the original step-by-step visual proof published at <a href="https://min7014.github.io/" target="_blank" rel="noopener">min7014.github.io</a>.
 Videos open on YouTube in a new tab.</footer>
+<script src="/mathedu/assets/mathedu-ads.js?v=20261118" defer></script>
 </body>
 </html>
 """
