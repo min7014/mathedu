@@ -80,6 +80,27 @@ def ensure_clean_youtube_url_boundaries(text: str) -> str:
         r"\1 ",
         s,
     )
+
+    # 5) 과거 삭제된 구버전 유튜브 영상 ID(Rule 27·65 교체분)를 현행 라이브 영상 ID로 자동 치유
+    dead_yt_replacements = {
+        "w5uRo2a9mpI": "uad9XQx1V20",
+        "tDN95-OUlHk": "ku3PKO7ifM8",
+        "btwg8YO9lxE": "J9sG7CZSgmk",
+        "E7x3OZdC14U": "MAqol1N3HQc",
+        "wSOzehSfEbY": "9L_15T8bzS8",
+        "bQO7fnT6aDU": "DSgUHigl82o",
+        "11Go094NoGw": "DSgUHigl82o",
+        "pzgm6wB0j6Y": "_NRQ5QO3PEY",
+        "9JKLflqrtDU": "7RcvUpfGM6s",
+        "KWlHq8ms8T0": "9L_15T8bzS8",
+        "5rO1HLeYKb8": "9L_15T8bzS8",
+        "ZDA4r_G343I": "9L_15T8bzS8",
+        "bJQwpG3stXk": "9L_15T8bzS8",
+        "i2oZpjH4978": "_NRQ5QO3PEY",
+    }
+    for old_vid, new_vid in dead_yt_replacements.items():
+        if old_vid in s:
+            s = s.replace(old_vid, new_vid)
     return s
 
 

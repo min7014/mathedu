@@ -309,6 +309,8 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
                         findings["L4_honorific_leak"].append(f"Live Video {vid}: 제목 내 개인 호칭 노출 ('{vt[:45]}')")
                     if vt.strip().lower() in live_titles_seen:
                         findings["L3_ypp_titles"].append(f"Live 최근 영상 중복 제목 감지: '{vt[:48]}'")
+                    if re.search(r"https?://[^\s<>\"]*[)\]\uac00-\ud7a3][^\s<>\"]*", vd):
+                        findings["L3_ypp_titles"].append(f"Live Video {vid}: 설명란 내 괄호·조사 밀착 깨진 URL 감지")
                     live_titles_seen.add(vt.strip().lower())
         except Exception as e:
             findings["L1_trademark"].append(f"Live YouTube API 조회 참고: {str(e)[:80]}")
