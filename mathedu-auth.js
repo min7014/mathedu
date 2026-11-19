@@ -504,36 +504,23 @@
 
     getDailyCreationLimit: function(user, difficulty) {
       user = user || getSession();
-      if (!user) return 0;
-      // 추후 문제 수준(난이도) 또는 회원 등급별 맞춤형 한도 확장을 위한 모듈화
+      if (!user) return MatheduAuth.DEFAULT_DAILY_CREATION_LIMIT;
+      // 추후 문제 수준(난이도)별 맞춤형 한도 확장을 위한 모듈화 (비회원 포함 100% 무료 개방)
       if (typeof user.dailyCreationLimit === 'number' && user.dailyCreationLimit >= 0) {
         return user.dailyCreationLimit;
       }
-      return MatheduAuth.DEFAULT_DAILY_CREATION_LIMIT; // 현재 1일 1문제로 엄격히 제한
+      return MatheduAuth.DEFAULT_DAILY_CREATION_LIMIT;
     },
 
     getCreationQuota: function(user) {
       user = user || getSession();
       var todayStr = MatheduAuth.getTodayStrKST();
-      if (!user) {
-        return {
-          allowed: false,
-          isLoggedIn: false,
-          limit: 0,
-          countToday: 0,
-          remaining: 0,
-          createdToday: [],
-          todayStr: todayStr,
-          resetsAt: '내일 자정 (00:00 KST)'
-        };
-      }
-
       var limit = MatheduAuth.getDailyCreationLimit(user);
-      var history = Array.isArray(user.createdQuizzes) ? user.createdQuizzes.slice() : [];
+      var history = (user && Array.isArray(user.createdQuizzes)) ? user.createdQuizzes.slice() : [];
 
-      // 브라우저 백업 키(mathedu_created_quizzes_KEY) 병합
+      // 브라우저 백업 키(회원 키 또는 비로그인 자유 이용자 키) 병합
       try {
-        var userKey = user.googleSub || user.email || user.username;
+        var userKey = user ? (user.googleSub || user.email || user.username) : 'open_guest';
         var localKey = 'mathedu_created_quizzes_' + userKey;
         var localHist = JSON.parse(localStorage.getItem(localKey) || '[]');
         if (Array.isArray(localHist)) {
@@ -558,7 +545,7 @@
 
       return {
         allowed: allowed,
-        isLoggedIn: true,
+        isLoggedIn: !!user,
         limit: limit,
         countToday: countToday,
         remaining: remaining,
@@ -571,7 +558,6 @@
     recordCreatedQuiz: function(slug, title, user) {
       if (!slug) return null;
       user = user || getSession();
-      if (!user) return null;
 
       var todayStr = MatheduAuth.getTodayStrKST();
       var nowStr = new Date().toISOString();
@@ -582,26 +568,29 @@
         time: nowStr
       };
 
-      // 1) 회원 세션에 추가
-      if (!user.createdQuizzes) user.createdQuizzes = [];
-      user.createdQuizzes = user.createdQuizzes.filter(function(q) { return q.slug !== slug; });
-      user.createdQuizzes.unshift(item);
+      if (user) {
+        // 1) 회원 세션에 추가
+        if (!user.createdQuizzes) user.createdQuizzes = [];
+        user.createdQuizzes = user.createdQuizzes.filter(function(q) { return q.slug !== slug; });
+        user.createdQuizzes.unshift(item);
 
-      // 2) mathedu_users_v1 DB 갱신
-      var users = getUsers();
-      var uIdx = users.findIndex(function(u) {
-        return (user.googleSub && u.googleSub === user.googleSub) ||
-               (u.email && user.email && u.email.toLowerCase() === user.email.toLowerCase()) ||
-               (u.username === user.username);
-      });
-      if (uIdx !== -1) {
-        users[uIdx].createdQuizzes = user.createdQuizzes;
-        saveUsers(users);
+        // 2) mathedu_users_v1 DB 갱신
+        var users = getUsers();
+        var uIdx = users.findIndex(function(u) {
+          return (user.googleSub && u.googleSub === user.googleSub) ||
+                 (u.email && user.email && u.email.toLowerCase() === user.email.toLowerCase()) ||
+                 (u.username === user.username);
+        });
+        if (uIdx !== -1) {
+          users[uIdx].createdQuizzes = user.createdQuizzes;
+          saveUsers(users);
+        }
+        setSession(user, true);
       }
 
-      // 3) 브라우저 로컬스토리지 백업
+      // 3) 브라우저 로컬스토리지 백업 (회원 및 비로그인 자유 이용자 공용)
       try {
-        var userKey = user.googleSub || user.email || user.username;
+        var userKey = user ? (user.googleSub || user.email || user.username) : 'open_guest';
         var localKey = 'mathedu_created_quizzes_' + userKey;
         var localHist = JSON.parse(localStorage.getItem(localKey) || '[]');
         localHist = localHist.filter(function(q) { return q.slug !== slug; });
@@ -609,7 +598,6 @@
         localStorage.setItem(localKey, JSON.stringify(localHist));
       } catch(e) {}
 
-      setSession(user, true);
       window.dispatchEvent(new CustomEvent('mathedu:quota-changed', { detail: MatheduAuth.getCreationQuota(user) }));
       return item;
     },
@@ -895,27 +883,16 @@
       }, 500);
     },
 
-    // 6. 권한 보호 가드
+    // 6. 전 자원 100% 무료·무장벽 개방 게이트 (Policy 76: 비로그인 학습자·교사에게도 모든 교육 기능 즉시 허용)
     requireAuth: function(actionName, onAllowed) {
-      if (MatheduAuth.isLoggedIn()) {
-        if (typeof onAllowed === 'function') onAllowed(getSession());
-        return true;
-      }
-
-      var descMap = {
-        '문제 출제': '문제 출제 및 5~8단계 인터랙티브 퀴즈 자동 생성은 정식 회원 전용 서비스입니다.',
-        '수업 개설 및 배포': '3초 수업 개설 및 칠판 빔프로젝터용 대형 QR 발급은 교사 회원 전용 서비스입니다.',
-        '문제 배포': '수업 코드 및 QR코드 발급은 정식 회원 전용 서비스입니다.'
+      var activeProfile = getSession() || getCurrentGuest() || {
+        username: 'open_guest',
+        name: '자유 이용자',
+        role: 'open',
+        roleLabel: '100% 무료 개방'
       };
-
-      MatheduAuth.showAuthModal({
-        title: '🔒 ' + (actionName || '정식 회원 전용 기능'),
-        desc: descMap[actionName] || '정식 회원가입은 구글 공식 인증을 사용하여 1초 만에 완료됩니다.',
-        onSuccess: function(user) {
-          if (typeof onAllowed === 'function') onAllowed(user);
-        }
-      });
-      return false;
+      if (typeof onAllowed === 'function') onAllowed(activeProfile);
+      return true;
     },
 
     // 7. 내가 푼 문제 모아보기 (학습 서재) 모달

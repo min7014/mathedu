@@ -918,12 +918,12 @@ html.dark-theme .header-omni-input::placeholder {
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-secondary text-[22px]">co_present</span>
           <div class="flex flex-col">
-            <span class="font-label-badge text-label-badge text-secondary font-bold uppercase" data-i18n="heroCards.teacherTag">교사 회원 전용 · 수업 배포</span>
+            <span class="font-label-badge text-label-badge text-secondary font-bold uppercase" data-i18n="heroCards.teacherTag">누구나 100% 무료 · 수업 배포</span>
             <span class="font-headline-sm text-[16px] font-bold text-on-surface" data-i18n="heroCards.teacherTitle">3초 만에 수업 개설하기</span>
           </div>
         </div>
         <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-i18n="heroCards.teacherDesc">
-          회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.
+          로그인 없이 누구나 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 무료로 발급받으세요.
         </p>
         <div class="flex items-center gap-2 mt-1">
           <button onclick="openDefaultTeacherClass()" class="flex-1 h-11 rounded-lg bg-secondary text-on-secondary font-body-md text-body-md font-semibold flex items-center justify-center gap-1.5 shadow-sm cursor-pointer border-0" type="button">
@@ -2838,13 +2838,7 @@ function toggleMathStory() {
 
   window.openDefaultTeacherClass = function() {
     var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : 'ac8dc374';
-    if (window.MatheduAuth) {
-      window.MatheduAuth.requireAuth('문제 배포', function() {
-        if (typeof openClassCreatorModal === 'function') {
-          openClassCreatorModal(defaultSlug);
-        }
-      });
-    } else if (typeof openClassCreatorModal === 'function') {
+    if (typeof openClassCreatorModal === 'function') {
       openClassCreatorModal(defaultSlug);
     }
   };

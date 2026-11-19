@@ -1786,8 +1786,9 @@ body.dark-mode .header-omni-dropdown,
         <span>·</span>
         <a class="hover:underline text-on-surface-variant no-underline" href="privacy.html">개인정보처리방침</a>
       </div>
-      <p class="font-body-sm text-[11px] text-on-surface-variant max-w-xs">
-        © mathedu · 민은기 선생님의 수학자료실
+      <p class="font-body-sm text-[11px] text-on-surface-variant max-w-xl leading-relaxed">
+        <span class="bilingual-ko">© mathedu · 민은기 선생님의 수학자료실 — 공부에 참여하는 그 귀한 노력을 응원하며, 이곳의 모든 수학 자원은 누구나 조건 없이 100% 무료로 사용할 수 있습니다.</span>
+        <span class="bilingual-en">© mathedu · MIN EUN GI's Math Archive — Honoring everyone who takes on the hard work of studying, every resource here is 100% free and open to all without condition.</span>
       </p>
     </div>
 
@@ -4068,13 +4069,7 @@ function toggleMathStory() {
 
   window.openDefaultTeacherClass = function() {
     var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : 'ac8dc374';
-    if (window.MatheduAuth) {
-      window.MatheduAuth.requireAuth('문제 배포', function() {
-        if (typeof openClassCreatorModal === 'function') {
-          openClassCreatorModal(defaultSlug);
-        }
-      });
-    } else if (typeof openClassCreatorModal === 'function') {
+    if (typeof openClassCreatorModal === 'function') {
       openClassCreatorModal(defaultSlug);
     }
   };
