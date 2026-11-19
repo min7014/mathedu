@@ -1052,10 +1052,18 @@ function setupRoomHeader() {
     }
 
     document.getElementById('btnProjector').onclick = () => {
-      openProjectorModal(targetRoom);
+      if (window.MatheduAuth) {
+        window.MatheduAuth.requireAuth(t('dashboard.authDeployPrompt'), () => openProjectorModal(targetRoom));
+      } else {
+        openProjectorModal(targetRoom);
+      }
     };
     document.getElementById('btnCopyStudentLink').onclick = () => {
-      copyCurrentStudentLink();
+      if (window.MatheduAuth) {
+        window.MatheduAuth.requireAuth(t('dashboard.authDeployPrompt'), copyCurrentStudentLink);
+      } else {
+        copyCurrentStudentLink();
+      }
     };
   } else {
     if (icon) icon.textContent = '📊';

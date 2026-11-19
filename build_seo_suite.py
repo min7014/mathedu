@@ -269,6 +269,20 @@ def generate_sitemap_feed_and_llms(index_items):
             'desc': '3,400+ 시각적 기하·증명과 단계별 디딤돌 퀴즈를 담은 100% 영구 무료 수학자료실'
         },
         {
+            'url': f'{BASE_URL}/csat2027.html',
+            'priority': '0.98',
+            'changefreq': 'daily',
+            'title': '🎯 2027학년도 대학수학능력시험 수학 영역 전 문항(46문항) 정밀 분석 · 단계별 디딤돌 특별관',
+            'desc': '2027학년도 수능 수학 공통(1~22번)·확통·미적분·기하(23~30번) 전 46문항 초등 눈높이 디딤돌 퀴즈 및 시각적 도형 해설 (100% 무료)'
+        },
+        {
+            'url': f'{BASE_URL}/mathlab.html',
+            'priority': '0.95',
+            'changefreq': 'weekly',
+            'title': '🛠️ 동적 기하·대수 실험실 MathLab · mathedu',
+            'desc': '웹 브라우저에서 즉시 작동하는 100% 무료 동적 기하 작도 및 대수 그래프 실험실'
+        },
+        {
             'url': f'{BASE_URL}/video_board.html',
             'priority': '0.95',
             'changefreq': 'daily',
@@ -383,6 +397,7 @@ def generate_sitemap_feed_and_llms(index_items):
         "",
         "## Core Hubs",
         f"- [Main Hub (Interactive Exam Problem Finder)]({BASE_URL}/): Search and solve {pub_count} official CSAT & KICE Mock Exam problems broken down into 5~8 elementary-to-advanced micro-steps.",
+        f"- [2027 CSAT Mathematics Special Hub (All 46 Official Problems)]({BASE_URL}/csat2027.html): Complete mathematical analysis and 5-step interactive scaffolding quizzes for all 46 items of the 2027 College Scholastic Ability Test.",
         "- [Mathematics Archive (min7014.github.io)](https://min7014.github.io/): 3,400+ GeoGebra dynamic geometry applets, visual proof PDFs, AlgeoMath, and video lectures.",
         f"- [Standalone Offline Quiz Archive]({BASE_URL}/offline/index.html): Single-file offline HTML bundles that work 100% without internet access.",
         f"- [Live Classroom Dashboard]({BASE_URL}/dashboard.html): Instant QR code classroom launch & privacy-preserving (stu1~) live progress dashboard for teachers.",

@@ -538,7 +538,7 @@
           bilingual('👩‍🏫 이 문제로 학급 수업을 시작할 수 있습니다', '👩‍🏫 Start a Classroom Lesson with This Problem') +
         '</div>' +
         '<div style="font-size:0.83rem;color:#45464d;margin-top:3px">' +
-          bilingual('로그인 없이 누구나 100% 무료로 3초 만에 수업 코드를 만들고, 교실 칠판에 대형 QR코드를 띄울 수 있습니다.', 'Anyone can freely generate a class session code in 3 seconds and display a projector QR code—no sign-in required.') +
+          bilingual('무료 회원가입·로그인 후 3초 만에 수업 코드를 만들고, 칠판 대형 QR코드를 비용 없이 띄워보세요.', 'Sign in with your 100% free account to generate a class session code in 3 seconds and display a projector QR code.') +
         '</div>' +
       '</div>' +
       '<button type="button" onclick="openClassCreatorModal(\'' + currentSlug + '\')" style="background:#131b2e;color:#ffffff;border:none;border-radius:10px;padding:10px 20px;font-size:0.9rem;font-weight:800;cursor:pointer;box-shadow:0 2px 8px rgba(19,27,46,.15);transition:.15s;display:inline-flex;align-items:center;gap:6px">' +
@@ -562,8 +562,8 @@
     floatBtn.id = 'floatClassBtn';
     floatBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9998;background:#131b2e;color:#ffffff;border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:12px 22px;font-size:0.92rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(19,27,46,.22);display:flex;align-items:center;gap:8px;transition:.2s';
     floatBtn.innerHTML = bilingual('🚀 이 문제로 수업 열기', '🚀 Open Classroom');
-    floatBtn.setAttribute('data-ko-title', '누구나 100% 무료 · 3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급');
-    floatBtn.setAttribute('data-en-title', '100% Free · Instant class code & projector QR in 3 seconds');
+    floatBtn.setAttribute('data-ko-title', '3초 만에 고유 수업 코드 및 빔프로젝터 QR 발급 (정식 회원 전용 · 가입 100% 무료)');
+    floatBtn.setAttribute('data-en-title', 'Instant class code & projector QR in 3 seconds (Free Members Only)');
     floatBtn.title = isEnMode() ? floatBtn.getAttribute('data-en-title') : floatBtn.getAttribute('data-ko-title');
 
     floatBtn.onmouseover = function() { floatBtn.style.transform = 'translateY(-2px) scale(1.03)'; };
@@ -616,8 +616,8 @@
       teacherBtn.className = 'tbtn navbtn';
       teacherBtn.style.cssText = 'background:#f0f7ff;border:1px solid rgba(0,99,152,.25);color:#006398;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 12px;font-size:0.84rem;transition:.15s;';
       teacherBtn.innerHTML = bilingual('🚀 수업 열기 (QR)', '🚀 Open Class (QR)');
-      teacherBtn.setAttribute('data-ko-title', '누구나 100% 무료 · 3초 수업 생성 및 QR 발급');
-      teacherBtn.setAttribute('data-en-title', '100% Free · 3-second class creation & QR code');
+      teacherBtn.setAttribute('data-ko-title', '선생님을 위한 3초 수업 생성 및 QR 발급 (정식 회원 전용 · 가입 100% 무료)');
+      teacherBtn.setAttribute('data-en-title', '3-second class creation & QR code for free members');
       teacherBtn.title = isEnMode() ? teacherBtn.getAttribute('data-en-title') : teacherBtn.getAttribute('data-ko-title');
       teacherBtn.onclick = function() {
         openClassCreatorModal(currentSlug);
@@ -1160,10 +1160,11 @@
     });
   }
 
-  // 교사용·학습모임용 수업 생성기 모달 (Policy 76: 비로그인 포함 100% 무료 즉시 개방)
+  // 교사용 수업 생성기 모달 (회원 전용)
   window.openClassCreatorModal = function(slug) {
-    var currentUser = (window.MatheduAuth && window.MatheduAuth.getCurrentUser) ? window.MatheduAuth.getCurrentUser() : null;
-    _openClassCreatorModal(slug, currentUser);
+    ensureAuth(isEnMode() ? 'Launch Classroom' : '수업 개설 및 배포', function(currentUser) {
+      _openClassCreatorModal(slug, currentUser);
+    });
   };
 
   function _openClassCreatorModal(slug, currentUser) {
@@ -1185,7 +1186,7 @@
 
     var teacherLabel = (currentUser && currentUser.name) 
       ? (currentUser.name + ' (' + (currentUser.roleLabel || (isEnMode() ? 'Member' : '회원')) + ')') 
-      : (isEnMode() ? 'Open Classroom · 100% Free' : '열린 교실 · 100% 무료 개방');
+      : (isEnMode() ? 'Verified Teacher Member' : '인증된 교사 회원');
 
     modal.innerHTML = 
       '<div style="background:#ffffff;border:1px solid #e4e2e4;border-radius:20px;max-width:540px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(19,27,46,.18);color:#1b1b1d;font-family:Inter,Pretendard,system-ui,sans-serif;position:relative">' +

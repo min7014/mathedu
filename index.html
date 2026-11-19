@@ -780,10 +780,24 @@ body.dark-mode .header-omni-dropdown,
             </h1>
           </div>
           <span class="font-body-sm text-[12px] text-on-surface-variant">
-            <span class="bilingual-ko">디딤돌 문항 <b id="heroStatQuizCount" class="text-secondary">16,548개</b> · 시각적 증명 3,400+</span>
-            <span class="bilingual-en"><b class="text-secondary">16,548+</b> Stepping-Stone Problems · <b class="text-secondary">3,400+</b> Visual Proofs</span>
+            <span class="bilingual-ko">디딤돌 문항 <b id="heroStatQuizCount" class="text-secondary">16,594개</b> · 시각적 증명 3,400+</span>
+            <span class="bilingual-en"><b class="text-secondary">16,594+</b> Stepping-Stone Problems · <b class="text-secondary">3,400+</b> Visual Proofs</span>
           </span>
         </div>
+
+        <!-- 🎯 2027학년도 대학수학능력시험 수학 영역 전 문항(46문항) 전용 특별관 직통 링크 -->
+        <a href="csat2027.html" class="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#0c4a6e] hover:opacity-95 text-white no-underline flex items-center justify-between gap-3 flex-wrap shadow-sm">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="px-2 py-0.5 rounded-full bg-sky-400 text-slate-950 text-[11px] font-extrabold shrink-0">NEW · 2027 수능</span>
+            <span class="font-bold text-sm truncate">
+              <span class="bilingual-ko">🎯 2027학년도 대학수학능력시험 수학 전 문항(46문항) 정밀 분석 · 디딤돌 특별관</span>
+              <span class="bilingual-en">🎯 Official 2027 CSAT Math Complete Analysis &amp; All 46 Interactive Problems Hub</span>
+            </span>
+          </div>
+          <span class="text-sky-300 text-xs font-extrabold shrink-0">
+            <span class="bilingual-ko">한 페이지로 전체 보기 ➔</span><span class="bilingual-en">Open 2027 CSAT Hub ➔</span>
+          </span>
+        </a>
 
         <!-- 6 Focused Primary Destinations (Calm Academic Palette) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm">
@@ -1787,8 +1801,8 @@ body.dark-mode .header-omni-dropdown,
         <a class="hover:underline text-on-surface-variant no-underline" href="privacy.html">개인정보처리방침</a>
       </div>
       <p class="font-body-sm text-[11px] text-on-surface-variant max-w-xl leading-relaxed">
-        <span class="bilingual-ko">© mathedu · 민은기 선생님의 수학자료실 — 공부에 참여하는 그 귀한 노력을 응원하며, 이곳의 모든 수학 자원은 누구나 조건 없이 100% 무료로 사용할 수 있습니다.</span>
-        <span class="bilingual-en">© mathedu · MIN EUN GI's Math Archive — Honoring everyone who takes on the hard work of studying, every resource here is 100% free and open to all without condition.</span>
+        <span class="bilingual-ko">© mathedu · 민은기 선생님의 수학자료실 — 공부에 참여하는 그 귀한 노력을 응원하며, 모든 수학 자원과 회원가입은 별도 비용 없이 100% 무료로 제공됩니다.</span>
+        <span class="bilingual-en">© mathedu · MIN EUN GI's Math Archive — Honoring everyone who takes on the hard work of studying, every math resource and membership here is 100% free with zero fees.</span>
       </p>
     </div>
 
@@ -4069,7 +4083,13 @@ function toggleMathStory() {
 
   window.openDefaultTeacherClass = function() {
     var defaultSlug = (allItems && allItems.length > 0) ? allItems[0].slug : 'ac8dc374';
-    if (typeof openClassCreatorModal === 'function') {
+    if (window.MatheduAuth) {
+      window.MatheduAuth.requireAuth('문제 배포', function() {
+        if (typeof openClassCreatorModal === 'function') {
+          openClassCreatorModal(defaultSlug);
+        }
+      });
+    } else if (typeof openClassCreatorModal === 'function') {
       openClassCreatorModal(defaultSlug);
     }
   };

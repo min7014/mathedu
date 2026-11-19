@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2027학년도 대학수학능력시험 수학 영역 전 문항(46문항) 정밀 분석 · 디딤돌 특별관 · mathedu</title>
+  <meta name="description" content="2027학년도 대학수학능력시험(수능) 수학 영역 공통(1~22번)·확률과 통계(23~30번)·미적분(23~30번)·기하(23~30번) 전 46문항 정밀 출제 분석, 초등 눈높이 단계별 디딤돌 인터랙티브 퀴즈 및 시각적 도형 해설 특별관 (100% 무료 개방)."/>
+  <meta name="keywords" content="2027학년도 대학수학능력시험, 2027 수능 수학, 27DaeSuneung_2, 수능 수학 기출 분석, 공통 21번, 공통 22번, 확통 30번, 미적분 30번, 기하 30번, 단계별 디딤돌, 민은기 선생님의 수학자료실, mathedu"/>
+  <link rel="canonical" href="https://min7014.github.io/mathedu/csat2027.html"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
+  <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --txt: #0f172a;
+      --sub: #475569;
+      --navy: #0f172a;
+      --accent: #0284c7;
+      --accent-dark: #0369a1;
+      --indigo: #4f46e5;
+      --emerald: #059669;
+      --amber: #d97706;
+    }
+    html.dark-theme {
+      --bg: #0b1120;
+      --surface: #111827;
+      --surface-soft: #1e293b;
+      --border: #1f2937;
+      --border-strong: #334155;
+      --txt: #f1f5f9;
+      --sub: #94a3b8;
+      --navy: #1e293b;
+      --accent: #38bdf8;
+      --accent-dark: #7dd3fc;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    body {
+      margin: 0;
+      font-family: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    html[lang="ko"] .bilingual-en { display: none !important; }
+    html[lang="en"] .bilingual-ko { display: none !important; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    html.dark-theme .topbar { background: rgba(15, 23, 42, 0.9); }
+    .topbar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--txt);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+    .brand img { width: 30px; height: 30px; border-radius: 7px; }
+    .nav-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .pill-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--txt);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .pill-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 18px 80px;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c4a6e 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 26px 28px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+      margin-bottom: 20px;
+    }
+    .hero-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #7dd3fc;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .hero-title {
+      margin: 0 0 8px;
+      font-size: clamp(1.35rem, 2.6vw, 1.95rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+    .hero-desc {
+      margin: 0 0 18px;
+      color: #cbd5e1;
+      font-size: 0.93rem;
+      max-width: 880px;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .hero-btn-primary {
+      padding: 10px 18px;
+      border-radius: 11px;
+      background: #38bdf8;
+      color: #082f49;
+      font-weight: 800;
+      font-size: 0.86rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-btn-ghost {
+      padding: 10px 15px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: #f8fafc;
+      font-weight: 700;
+      font-size: 0.84rem;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-btn-ghost:hover { background: rgba(255, 255, 255, 0.18); }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .analysis-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+    .analysis-card h3 {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .analysis-card p {
+      margin: 0;
+      font-size: 0.83rem;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+
+    details.ans-sheet-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 18px;
+      margin-bottom: 20px;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    details.ans-sheet-box summary {
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--accent-dark);
+      user-select: none;
+    }
+    .ans-table-wrap { overflow-x: auto; margin-top: 12px; max-width: 100%; -webkit-overflow-scrolling: touch; }
+    table.ans-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    table.ans-table th, table.ans-table td {
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+    }
+    table.ans-table th { background: var(--surface-soft); font-weight: 800; }
+    @media (max-width: 600px) {
+      .container { padding: 14px 12px 64px; }
+      details.ans-sheet-box { padding: 12px; }
+      table.ans-table { font-size: 0.72rem; }
+      table.ans-table th, table.ans-table td { padding: 4px 3px; }
+    }
+
+    .filter-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .tab-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface-soft);
+      color: var(--txt);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    html.dark-theme .tab-btn.active { color: #082f49; }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 240px;
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--txt);
+      font-size: 0.86rem;
+      font-family: inherit;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+      gap: 12px;
+    }
+    .prob-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      min-width: 0;
+      overflow-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+    mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+    .prob-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 22px rgba(2, 132, 199, 0.09);
+    }
+    .prob-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+    .badge-common { background: #e0f2fe; color: #0369a1; }
+    .badge-prob { background: #ede9fe; color: #6d28d9; }
+    .badge-calc { background: #dcfce7; color: #047857; }
+    .badge-geom { background: #fef3c7; color: #b45309; }
+    .badge-4pt { background: #fee2e2; color: #b91c1c; }
+    .badge-pts { background: var(--surface-soft); color: var(--sub); }
+    .badge-solved { background: #d1fae5; color: #065f46; }
+
+    .prob-title {
+      margin: 6px 0 4px;
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--txt);
+      line-height: 1.45;
+      text-decoration: none;
+      display: block;
+    }
+    .prob-title:hover { color: var(--accent); }
+    .prob-summary {
+      margin: 0;
+      font-size: 0.81rem;
+      color: var(--sub);
+      line-height: 1.55;
+    }
+    .prob-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+    }
+    .btn-solve {
+      padding: 7px 14px;
+      border-radius: 9px;
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    html.dark-theme .btn-solve { background: #38bdf8; color: #082f49; }
+    .btn-mini {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface-soft);
+      color: var(--txt);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-mini:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/favicon.png" alt="mathedu"/>
+        <span>
+          <span class="bilingual-ko">mathedu · 2027 수능 수학 특별관</span>
+          <span class="bilingual-en">mathedu · 2027 CSAT Math Hub</span>
+        </span>
+      </a>
+      <div class="nav-actions">
+        <span id="solvedProgressBadge" class="pill-btn" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.35);color:#059669">
+          🏆 <span class="bilingual-ko">완주</span><span class="bilingual-en">Solved</span>: <b id="solvedCountNum">0</b> / 46
+        </span>
+        <a href="index.html" class="pill-btn">🏠 <span class="bilingual-ko">메인 홈</span><span class="bilingual-en">Home</span></a>
+        <a href="video_board.html" class="pill-btn">🎬 <span class="bilingual-ko">시각 증명 게시판</span><span class="bilingual-en">Visual Proofs</span></a>
+        <a href="mathlab.html" class="pill-btn">🛠️ MathLab</a>
+        <a href="offline/index.html" class="pill-btn">📦 <span class="bilingual-ko">오프라인 보관함</span><span class="bilingual-en">Offline Vault</span></a>
+        <button type="button" class="pill-btn" onclick="toggleTheme()" id="btnThemeToggle">🌙</button>
+        <button type="button" class="pill-btn" onclick="toggleLang()" id="btnLangToggle">🇰🇷 KO | EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-card">
+      <div class="hero-badge-row">
+        <span class="hero-badge">
+          🎯 <span class="bilingual-ko">2027학년도 대학수학능력시험 수학 영역 · 전 46문항 100% 무료 디딤돌 완비</span>
+          <span class="bilingual-en">Official 2027 CSAT Mathematics · All 46 Step-by-Step Problems (100% Free)</span>
+        </span>
+        <span style="font-size:0.8rem;color:#94a3b8;font-weight:700">2026. 11. 19. 시행 (홀수형 기준)</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="bilingual-ko">2027학년도 수능 수학 전 문항(46문항) 정밀 분석 · 단계별 디딤돌 특별관</span>
+        <span class="bilingual-en">2027 CSAT Mathematics Complete Analysis &amp; 46 Interactive Scaffolding Problems</span>
+      </h1>
+      <p class="hero-desc">
+        <span class="bilingual-ko">공통(1~22번), 확률과 통계(23~30번), 미적분(23~30번), 기하(23~30번) 전 문항을 SymPy 기호 연산 및 평가원 공식 정답표와 100% 대조 검증하여, 초등 기초 직관부터 최종 본문항까지 스스로 밟아 올라가는 5단계 인터랙티브 디딤돌·시각 도형·도식화 흐름도로 구성했습니다. 모든 수학 학습 자원과 정식 회원가입은 일체의 비용 없이 100% 무료로 제공됩니다 (수업 QR·문제 출제는 무료 회원가입 후 이용).</span>
+        <span class="bilingual-en">Every item across Common (1–22), Probability &amp; Statistics (23–30), Calculus (23–30), and Geometry (23–30) has been symbolically verified and transformed into a 5-step elementary-to-advanced interactive quiz with bespoke SVG diagrams and schematic flowcharts—all study resources and member registration are 100% free with zero fees.</span>
+      </p>
+      <div class="hero-cta-row">
+        <button type="button" class="hero-btn-primary" onclick="launchCurrentSubjectPack()">
+          🎒 <span class="bilingual-ko">현재 선택 과목 연속 수업 팩으로 풀기 ➔</span><span class="bilingual-en">Start Sequential Practice Pack ➔</span>
+        </button>
+        <a href="https://cdn.kice.re.kr/27dae-suneung/27DaeSuneung_2.pdf" target="_blank" rel="noopener" class="hero-btn-ghost">
+          📄 <span class="bilingual-ko">평가원 원본 문제지 PDF ↗</span><span class="bilingual-en">Official KICE Exam PDF ↗</span>
+        </a>
+        <a href="https://cdn2.kice.re.kr/27dae-suneung/27DaeSuneung_2a.pdf" target="_blank" rel="noopener" class="hero-btn-ghost">
+          ✅ <span class="bilingual-ko">평가원 공식 정답표 PDF ↗</span><span class="bilingual-en">Official Answer Key PDF ↗</span>
+        </a>
+        <button type="button" class="hero-btn-ghost" onclick="copyHubShareLink()">
+          🔗 <span class="bilingual-ko">이 특별관 링크 복사</span><span class="bilingual-en">Copy Hub Link</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="analysis-grid">
+      <article class="analysis-card">
+        <h3 style="color:#0369a1">📘 <span class="bilingual-ko">공통과목 (수학Ⅰ·Ⅱ, 1~22번) 핵심 분석</span><span class="bilingual-en">Common Track (Math I·II, #1–22)</span></h3>
+        <p>
+          <span class="bilingual-ko">기계적 유형 암기보다 함수의 구조적 대칭과 정의를 정밀하게 물었습니다. <b>14번</b> 로그함수의 $(-6,1)$ 평행이동과 무게중심, <b>15번</b> $x\to 0$에서 $x^2\to 0^+$ 우연속 성질을 활용한 불연속점 판정($n+g(a_3)=8$), <b>21번</b> 구간 최대·최소 곱함수의 미분가능성과 좌·우미분계수 차($f(5)=135$), <b>22번</b> $a_n=a_{n+6}=a_{n+9}$에서 주기 $3$을 꿰뚫는 수열 추론($98$)이 핵심 승부처입니다.</span>
+          <span class="bilingual-en">Focused on structural symmetry and rigorous definitions: #14 log-translation &amp; centroid, #15 right-continuity of $g(x^2)$ at $x=0$, #21 prefix-max × suffix-min differentiability ($f(5)=135$), and #22 period-3 sequence deduction ($98$).</span>
+        </p>
+      </article>
+      <article class="analysis-card">
+        <h3 style="color:#6d28d9">🎲 <span class="bilingual-ko">확률과 통계 (23~30번) 핵심 분석</span><span class="bilingual-en">Probability &amp; Statistics (#23–30)</span></h3>
+        <p>
+          <span class="bilingual-ko"><b>28번</b>은 인접한 두 수의 곱이 자연수이거나 같을 조건을 '$\frac{1}{2}$ 카드와 $1$ 카드의 이웃 금지'라는 단 하나의 조합 원리로 번역해 중복조합으로 해결($800$)합니다. <b>29번</b>은 $1\le \mathrm{V}(X)\le \sigma(X)$에서 $\mathrm{V}(X)=1$을 도출해 이차식 최솟값으로 $p+q=41$을 구하며, <b>30번</b>은 $3$으로 나눈 나머지와 최댓값 사건의 교집합 원소 수를 분류해 조건부확률 $\frac{2}{13}$($15$)을 구합니다.</span>
+          <span class="bilingual-en">#28 reduces adjacent-product integrality to separating $\frac{1}{2}$ from $1$ via stars-and-bars ($800$); #29 locks $\mathrm{V}(X)=1$ ($p+q=41$); #30 classifies mod-3 sums vs. max $\ge 5$ across 3 trials ($\frac{2}{13}\Rightarrow 15$).</span>
+        </p>
+      </article>
+      <article class="analysis-card">
+        <h3 style="color:#047857">📐 <span class="bilingual-ko">미적분 (23~30번) 핵심 분석</span><span class="bilingual-en">Calculus (#23–30)</span></h3>
+        <p>
+          <span class="bilingual-ko"><b>27번</b> 음함수 미분을 통한 두 접선 삼각형 넓이($a=\frac{25}{6}$), <b>28번</b> $f(x-g(x))=x$를 $g(f(t))=ate^{-bt}$로 치환하여 극대 접선 유일근($a=e, b=\frac{2}{e}$)을 찾는 역함수 미분법, <b>29번</b> 등비수열의 극한 경계값 부호 판별($k=5,7\Rightarrow 12$), <b>30번</b> $x=\frac{\pi}{2}+n\pi$에서 이중영점 도함수 $0$을 이용한 미분가능 부호 결정($90\alpha=75$)이 돋보입니다.</span>
+          <span class="bilingual-en">#27 implicit tangent triangle ($a=\frac{25}{6}$), #28 inverse substitution $g(f(t))=ate^{-bt}$ tangency ($a=e, b=\frac{2}{e}$), #29 limit boundary signs ($5+7=12$), and #30 smooth sign-switching at double zeros ($90\alpha=75$).</span>
+        </p>
+      </article>
+      <article class="analysis-card">
+        <h3 style="color:#b45309">🧭 <span class="bilingual-ko">기하 (23~30번) 핵심 분석</span><span class="bilingual-en">Geometry (#23–30)</span></h3>
+        <p>
+          <span class="bilingual-ko"><b>27번</b> 정육각기둥 밑면 거리 $5$와 높이 $2\sqrt{6}$에 삼수선의 정리를 적용해 높이 $7$을 얻는 공간도형($14\sqrt{3}$), <b>28번</b> 직각이등변삼각형을 좌표축에 놓아 영역 위 원 거리 최대·최소를 구하는 벡터 내적($\frac{196}{5}$), <b>29번</b> 포물선 정의와 쌍곡선 $3:4:5$ 점근선 거리($p=8\Rightarrow 45$), <b>30번</b> 지름 $\overline{\mathrm{AB}}=10$에서 평면 $\mathrm{OAB}$를 잡고 두 구의 교선 원 정사영을 구하는 문항($223$)이 출제되었습니다.</span>
+          <span class="bilingual-en">#27 Three Perpendiculars on hexagonal prism ($14\sqrt{3}$), #28 vector feasible triangle optimization ($\frac{196}{5}$), #29 parabola-hyperbola 3:4:5 asymptote ($45$), and #30 sphere-intersection circle projection ($223$).</span>
+        </p>
+      </article>
+    </section>
+
+    <details class="ans-sheet-box">
+      <summary>
+        📋 <span class="bilingual-ko">2027학년도 수능 수학 영역 (홀수형) 전 46문항 공식 정답표 펼쳐보기 (클릭)</span>
+        <span class="bilingual-en">Click to Expand Official 2027 CSAT Math Answer Key (Odd Form, All 46 Items)</span>
+      </summary>
+      <div class="ans-table-wrap" id="officialAnsTableWrap"></div>
+    </details>
+
+    <section class="filter-panel">
+      <div class="tab-row" id="subjectTabs">
+        <button type="button" class="tab-btn active" data-filter="all" onclick="setFilter('all')">
+          <span class="bilingual-ko">전체 문항 (46)</span><span class="bilingual-en">All Items (46)</span>
+        </button>
+        <button type="button" class="tab-btn" data-filter="공통(수학I·II)" onclick="setFilter('공통(수학I·II)')">
+          <span class="bilingual-ko">공통 1~22번 (22)</span><span class="bilingual-en">Common 1–22 (22)</span>
+        </button>
+        <button type="button" class="tab-btn" data-filter="확률과 통계" onclick="setFilter('확률과 통계')">
+          <span class="bilingual-ko">확률과 통계 23~30번 (8)</span><span class="bilingual-en">Prob &amp; Stat 23–30 (8)</span>
+        </button>
+        <button type="button" class="tab-btn" data-filter="미적분" onclick="setFilter('미적분')">
+          <span class="bilingual-ko">미적분 23~30번 (8)</span><span class="bilingual-en">Calculus 23–30 (8)</span>
+        </button>
+        <button type="button" class="tab-btn" data-filter="기하" onclick="setFilter('기하')">
+          <span class="bilingual-ko">기하 23~30번 (8)</span><span class="bilingual-en">Geometry 23–30 (8)</span>
+        </button>
+        <button type="button" class="tab-btn" data-filter="4pt" onclick="setFilter('4pt')">
+          🔥 <span class="bilingual-ko">4점 문항만 (19)</span><span class="bilingual-en">4-Point Killer/Core (19)</span>
+        </button>
+        <button type="button" class="tab-btn" data-filter="sa" onclick="setFilter('sa')">
+          ✏️ <span class="bilingual-ko">단답형만 (13)</span><span class="bilingual-en">Short-Answer Only (13)</span>
+        </button>
+      </div>
+      <div class="search-row">
+        <input type="text" id="hubSearchInput" class="search-input" placeholder="문항 번호, 단원, 개념 검색 (예: 21번, 등차수열, 정사영, 미분가능, 조건부확률...)" oninput="renderProblemGrid()"/>
+        <span style="font-size:0.82rem;color:var(--sub);font-weight:700">
+          <span class="bilingual-ko">표시 문항: <b id="visibleCountLabel">46</b>개</span>
+          <span class="bilingual-en">Showing: <b id="visibleCountLabelEn">46</b> items</span>
+        </span>
+      </div>
+    </section>
+
+    <section id="problemGrid" class="problem-grid"></section>
+
+    <footer style="margin-top:44px;padding-top:20px;border-top:1px solid var(--border);text-align:center;color:var(--sub);font-size:0.8rem">
+      <p style="margin:0 0 6px">
+        <span class="bilingual-ko">© mathedu · 민은기 선생님의 수학자료실 — 공부에 참여하는 그 귀한 노력을 응원하며, 모든 수학 자원과 회원가입은 별도 비용 없이 100% 무료로 제공됩니다.</span>
+        <span class="bilingual-en">© mathedu · MIN EUN GI's Math Archive — Honoring everyone who takes on the hard work of studying, every math resource and membership here is 100% free with zero fees.</span>
+      </p>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+        <a href="index.html" style="color:var(--accent);text-decoration:none;font-weight:700">mathedu 홈</a>
+        <span>·</span>
+        <a href="https://min7014.github.io/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700">수학자료실 본관 (3,400+ 증명)</a>
+        <span>·</span>
+        <a href="video_board.html" style="color:var(--accent);text-decoration:none;font-weight:700">@min7014_ai 시각 증명 영상</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="mathedu-auth.js"></script>
+  <script src="mathedu-room.js"></script>
+  <script>
+    var ALL_ITEMS = [];
+    var CURRENT_FILTER = 'all';
+
+    function escapeHtml(s) {
+      return String(s || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function getSolvedMap() {
+      var map = {};
+      try {
+        var dev = JSON.parse(localStorage.getItem('mathedu_device_solved_cache') || '{}');
+        Object.keys(dev).forEach(function(k) { map[k] = dev[k]; });
+      } catch (e) {}
+      try {
+        if (window.MatheduAuth && MatheduAuth.getSolvedProblems) {
+          MatheduAuth.getSolvedProblems().forEach(function(p) {
+            if (p && p.slug) map[p.slug] = p;
+          });
+        }
+      } catch (e) {}
+      return map;
+    }
+
+    function buildAnswerSheetTable(items) {
+      var common = items.filter(function(x){ return x.subject === '공통(수학I·II)'; });
+      var prob = items.filter(function(x){ return x.subject === '확률과 통계'; });
+      var calc = items.filter(function(x){ return x.subject === '미적분'; });
+      var geom = items.filter(function(x){ return x.subject === '기하'; });
+
+      var html = '<table class="ans-table"><thead><tr><th colspan="6">공통과목 (1~22번)</th><th colspan="2">확률과 통계</th><th colspan="2">미적분</th><th colspan="2">기하</th></tr>';
+      html += '<tr><th>문항</th><th>정답(배점)</th><th>문항</th><th>정답(배점)</th><th>문항</th><th>정답(배점)</th><th>문항</th><th>정답(배점)</th><th>문항</th><th>정답(배점)</th><th>문항</th><th>정답(배점)</th></tr></thead><tbody>';
+
+      for (var r = 0; r < 8; r++) {
+        var c1 = common[r];
+        var c2 = common[r + 8];
+        var c3 = common[r + 16];
+        var p = prob[r];
+        var m = calc[r];
+        var g = geom[r];
+        function cell(it) {
+          if (!it) return '<td>-</td><td>-</td>';
+          return '<td><a href="board/' + it.slug + '.html" style="color:var(--accent);font-weight:800;text-decoration:none">' + it.qNum + '번</a></td><td><b>' + escapeHtml(it.official_answer) + '</b> <span style="color:var(--sub);font-size:0.72rem">(' + it.points + '점)</span></td>';
+        }
+        html += '<tr>' + cell(c1) + cell(c2) + cell(c3) + cell(p) + cell(m) + cell(g) + '</tr>';
+      }
+      html += '</tbody></table>';
+      var wrap = document.getElementById('officialAnsTableWrap');
+      if (wrap) wrap.innerHTML = html;
+    }
+
+    function setFilter(f) {
+      CURRENT_FILTER = f;
+      document.querySelectorAll('#subjectTabs .tab-btn').forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-filter') === f);
+      });
+      renderProblemGrid();
+    }
+
+    function getFilteredItems() {
+      var q = (document.getElementById('hubSearchInput').value || '').trim().toLowerCase();
+      return ALL_ITEMS.filter(function(it) {
+        if (CURRENT_FILTER === '4pt' && it.points !== 4) return false;
+        if (CURRENT_FILTER === 'sa' && !it.is_short_answer) return false;
+        if (['공통(수학I·II)', '확률과 통계', '미적분', '기하'].indexOf(CURRENT_FILTER) !== -1 && it.subject !== CURRENT_FILTER) return false;
+        if (q) {
+          var hay = [it.slug, it.qNum + '번', String(it.qNum), it.subject, it.title, it.title_en, it.summary_ko, it.summary_en].concat(it.tags || []).join(' ').toLowerCase();
+          var tokens = q.split(/\s+/).filter(Boolean);
+          for (var i = 0; i < tokens.length; i++) {
+            if (hay.indexOf(tokens[i]) === -1) return false;
+          }
+        }
+        return true;
+      });
+    }
+
+    function toggleAnsChip(btn, ansText) {
+      if (btn.getAttribute('data-open') === '1') {
+        btn.setAttribute('data-open', '0');
+        btn.textContent = (document.documentElement.lang === 'en') ? '👁️ Answer' : '👁️ 정답';
+      } else {
+        btn.setAttribute('data-open', '1');
+        btn.textContent = '✅ ' + ansText;
+      }
+    }
+
+    function renderProblemGrid() {
+      var list = getFilteredItems();
+      var solvedMap = getSolvedMap();
+      var solvedTotal = 0;
+      ALL_ITEMS.forEach(function(it) {
+        if (solvedMap[it.slug] && solvedMap[it.slug].completed) solvedTotal++;
+      });
+      var scEl = document.getElementById('solvedCountNum');
+      if (scEl) scEl.textContent = String(solvedTotal);
+
+      var vcKo = document.getElementById('visibleCountLabel');
+      var vcEn = document.getElementById('visibleCountLabelEn');
+      if (vcKo) vcKo.textContent = String(list.length);
+      if (vcEn) vcEn.textContent = String(list.length);
+
+      var grid = document.getElementById('problemGrid');
+      if (!grid) return;
+
+      var html = list.map(function(it) {
+        var subjCls = 'badge-common';
+        var subjShortKo = '공통';
+        var subjShortEn = 'Common';
+        if (it.subject === '확률과 통계') { subjCls = 'badge-prob'; subjShortKo = '확통'; subjShortEn = 'Prob&Stat'; }
+        else if (it.subject === '미적분') { subjCls = 'badge-calc'; subjShortKo = '미적분'; subjShortEn = 'Calculus'; }
+        else if (it.subject === '기하') { subjCls = 'badge-geom'; subjShortKo = '기하'; subjShortEn = 'Geometry'; }
+
+        var solvedInfo = solvedMap[it.slug];
+        var solvedBadge = '';
+        if (solvedInfo && solvedInfo.completed) {
+          solvedBadge = '<span class="badge badge-solved">✓ <span class="bilingual-ko">완주</span><span class="bilingual-en">Done</span></span>';
+        } else if (solvedInfo && solvedInfo.stepDone > 0) {
+          solvedBadge = '<span class="badge badge-pts">' + solvedInfo.stepDone + '/' + (solvedInfo.totalSteps || 6) + '</span>';
+        }
+
+        var cleanKo = it.title.replace(/^\[.*?\]\s*/, '');
+        var cleanEn = (it.title_en || it.title).replace(/^\[.*?\]\s*/, '');
+
+        var proofRow = '';
+        if (it.proof_links && it.proof_links.length > 0 && it.proof_links[0].url) {
+          var p0 = it.proof_links[0];
+          proofRow = '<div style="margin-top:6px;font-size:0.76rem"><a href="' + escapeHtml(p0.url) + '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700">📐 연계 시각 증명: ' + escapeHtml(p0.title) + ' ↗</a></div>';
+        }
+
+        return (
+          '<article class="prob-card">' +
+            '<div>' +
+              '<div class="prob-meta">' +
+                '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
+                  '<span class="badge ' + subjCls + '"><span class="bilingual-ko">' + subjShortKo + ' ' + it.qNum + '번</span><span class="bilingual-en">' + subjShortEn + ' #' + it.qNum + '</span></span>' +
+                  '<span class="badge ' + (it.points === 4 ? 'badge-4pt' : 'badge-pts') + '">' + it.points + '<span class="bilingual-ko">점</span><span class="bilingual-en">pt</span></span>' +
+                  (it.is_short_answer ? '<span class="badge badge-pts"><span class="bilingual-ko">단답형</span><span class="bilingual-en">Short-Ans</span></span>' : '') +
+                '</div>' +
+                '<div style="display:flex;align-items:center;gap:5px">' +
+                  solvedBadge +
+                  '<button type="button" class="btn-mini" style="padding:2px 8px;font-size:0.72rem" onclick="toggleAnsChip(this, \'' + escapeHtml(it.official_answer) + '\')"><span class="bilingual-ko">👁️ 정답</span><span class="bilingual-en">👁️ Answer</span></button>' +
+                '</div>' +
+              '</div>' +
+              '<a class="prob-title" href="board/' + it.slug + '.html">' +
+                '<span class="bilingual-ko">' + escapeHtml(cleanKo) + '</span>' +
+                '<span class="bilingual-en">' + escapeHtml(cleanEn) + '</span>' +
+              '</a>' +
+              '<p class="prob-summary">' +
+                '<span class="bilingual-ko">' + escapeHtml(it.summary_ko) + '</span>' +
+                '<span class="bilingual-en">' + escapeHtml(it.summary_en) + '</span>' +
+              '</p>' +
+              proofRow +
+            '</div>' +
+            '<div class="prob-actions">' +
+              '<a class="btn-solve" href="board/' + it.slug + '.html">' +
+                '🪜 <span class="bilingual-ko">단계별 디딤돌 풀기 ➔</span><span class="bilingual-en">Solve Step-by-Step ➔</span>' +
+              '</a>' +
+              '<div style="display:flex;gap:5px;align-items:center">' +
+                '<a class="btn-mini" href="offline/' + it.slug + '.html" download="' + it.slug + '_offline.html" title="인터넷 없이 실행되는 오프라인 단독 파일">📥 <span class="bilingual-ko">오프라인</span><span class="bilingual-en">Offline</span></a>' +
+                '<button type="button" class="btn-mini" onclick="if(window.openClassCreatorModal)openClassCreatorModal(\'' + it.slug + '\')" title="3초 교실 수업 QR 생성">🚀 QR</button>' +
+              '</div>' +
+            '</div>' +
+          '</article>'
+        );
+      }).join('');
+
+      grid.innerHTML = html;
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([grid]).catch(function(){});
+      }
+    }
+
+    function launchCurrentSubjectPack() {
+      var list = getFilteredItems();
+      if (!list.length) return;
+      var slugs = list.map(function(x){ return x.slug; });
+      window.location.href = 'board/' + slugs[0] + '.html?pack=' + encodeURIComponent(slugs.join(','));
+    }
+
+    function copyHubShareLink() {
+      var u = window.location.href;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(u).then(function() {
+          alert(document.documentElement.lang === 'en' ? 'Copied 2027 CSAT Hub link!' : '✅ 2027학년도 수능 수학 특별관 링크가 복사되었습니다!');
+        });
+      }
+    }
+
+    function toggleTheme() {
+      var isDark = document.documentElement.classList.toggle('dark-theme');
+      try { localStorage.setItem('mathedu_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      document.getElementById('btnThemeToggle').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleLang() {
+      var next = (document.documentElement.lang === 'en') ? 'ko' : 'en';
+      document.documentElement.lang = next;
+      try {
+        localStorage.setItem('mathedu_lang', next);
+        localStorage.setItem('mathedu_lang_manual', 'true');
+      } catch (e) {}
+      renderProblemGrid();
+    }
+
+    (function init() {
+      try {
+        if (localStorage.getItem('mathedu_theme') === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+          document.getElementById('btnThemeToggle').textContent = '☀️';
+        }
+        var pLang = new URLSearchParams(window.location.search).get('lang');
+        if (pLang === 'en' || pLang === 'ko') {
+          document.documentElement.lang = pLang;
+        } else if (localStorage.getItem('mathedu_lang_manual') === 'true' && localStorage.getItem('mathedu_lang')) {
+          document.documentElement.lang = localStorage.getItem('mathedu_lang');
+        }
+      } catch (e) {}
+
+      fetch('assets/csat2027_manifest.json?v=' + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(doc) {
+          ALL_ITEMS = doc.items || [];
+          buildAnswerSheetTable(ALL_ITEMS);
+          renderProblemGrid();
+        })
+        .catch(function(err) {
+          console.error('Failed to load csat2027_manifest.json:', err);
+        });
+    })();
+  </script>
+</body>
+</html>

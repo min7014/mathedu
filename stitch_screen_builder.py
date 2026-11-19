@@ -2418,11 +2418,11 @@ def build_stitch_explorer_shell(q_count, slug="", asset_prefix="../"):
     <div class="stitch-gw-head">
       <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
       <div>
-        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사 회원 전용 · 수업 배포</span><span class="bilingual-en">FOR TEACHERS · CLASSROOM</span></div>
+        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사·정식 회원 전용 · 수업 배포 (무료 가입)</span><span class="bilingual-en">MEMBERS ONLY · FREE CLASSROOM</span></div>
         <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
       </div>
     </div>
-    <p class="stitch-gw-desc"><span class="bilingual-ko">회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Generate a unique classroom code, projector QR code, and student link in 3 seconds.</span></p>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">무료 회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Sign in with your 100% free account to generate a classroom code, projector QR code, and student link in 3 seconds.</span></p>
     <div class="stitch-gw-actions">
       <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('{slug}')">
         <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>

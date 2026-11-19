@@ -822,9 +822,24 @@ function resizeImageToBase64(blob, maxWidth = 720, quality = 0.8) {
 async function submitQuizRequest(e) {
   e.preventDefault();
 
+  // 🔒 회원 전용 권한 검증: 비회원은 문제 만들기 불가
+  if (window.MatheduAuth && !window.MatheduAuth.isLoggedIn()) {
+    window.MatheduAuth.requireAuth('문제 출제', function(user) {
+      renderMemberNotice();
+      if (document.getElementById('requesterName') && !document.getElementById('requesterName').value) {
+        document.getElementById('requesterName').value = user.name;
+      }
+      if (document.getElementById('requesterEmail') && user.email && !document.getElementById('requesterEmail').value) {
+        document.getElementById('requesterEmail').value = user.email;
+      }
+      submitQuizRequest(e);
+    });
+    return;
+  }
+
   const currentUser = window.MatheduAuth ? window.MatheduAuth.getCurrentUser() : null;
 
-  // 🌱 Policy 76: 비로그인 포함 모든 이용자에게 100% 무료 출제 개방 (품질·오남용 방지를 위한 1일 한도만 유지)
+  // 🔒 1일 1문제 생성 한도 검증 (추후 문제 난이도·수준별 한도 상향 확장 가능)
   const quota = window.MatheduAuth ? window.MatheduAuth.getCreationQuota(currentUser) : { allowed: true, limit: 1 };
   if (!quota.allowed) {
     alert(`오늘의 문제 생성 한도(1일 ${quota.limit}문제)를 이미 사용하셨습니다.\n\n고품질 5~8단계 인터랙티브 퀴즈 제작 및 GeoGebra 시각화 연동 품질 유지를 위해 내일 자정(00:00 KST)에 다시 출제하실 수 있습니다.`);
@@ -1045,39 +1060,31 @@ function renderMemberNotice() {
       document.getElementById('requesterEmail').value = user.email;
     }
   } else {
-    const guestQuota = window.MatheduAuth ? window.MatheduAuth.getCreationQuota(null) : { allowed: true, limit: 1, remaining: 1, countToday: 0 };
-    setFormFieldsDisabled(!guestQuota.allowed);
+    setFormFieldsDisabled(false);
     box.innerHTML = `
-      <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(56, 189, 248, 0.14)); border: 1px solid rgba(16, 185, 129, 0.45); border-radius: 14px; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+      <div style="background: linear-gradient(135deg, rgba(66, 133, 244, 0.14), rgba(129, 140, 248, 0.14)); border: 1px solid rgba(66, 133, 244, 0.45); border-radius: 14px; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
         <div style="display: flex; align-items: center; gap: 14px;">
-          <span style="font-size: 2rem;">🌱</span>
+          <span style="font-size: 2rem;">🔒</span>
           <div>
-            <div style="font-weight: 800; color: #34d399; font-size: 1.05rem; margin-bottom: 3px;">로그인 없이 누구나 100% 무료로 단계별 문제를 제작·요청할 수 있습니다</div>
+            <div style="font-weight: 800; color: #60a5fa; font-size: 1.05rem; margin-bottom: 3px;">문제 출제(만들기)는 mathedu 정식 회원 전용입니다 (가입비·이용료 0원)</div>
             <div style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.45;">
-              공부에 참여하는 모든 분을 응원하며, 회원가입 없이도 5~8단계 빌드업 퀴즈 생성을 바로 요청하실 수 있습니다. (품질 유지를 위해 기기당 1일 ${guestQuota.limit}문제 · 선택 시 Google 로그인으로 내 서재 연동 가능)
+              어려운 문제를 5~8단계 빌드업 퀴즈로 자동 제작하고 깃에 배포하려면 무료 회원가입 후 로그인이 필요합니다.<br>
+              <b>정식 회원가입은 Google 공식 인증</b>을 통해 <b>비용 없이 100% 무료</b>로 1초 만에 완료할 수 있습니다.
             </div>
           </div>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
           <button type="button" class="mathedu-google-btn" style="width: auto; padding: 10px 18px; font-size: 0.9rem;" onclick="MatheduAuth.triggerGoogleSignIn()">
             <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-            <span>(선택) 내 서재 연동 로그인</span>
+            <span>Google 무료 회원가입 · 로그인</span>
           </button>
         </div>
       </div>
     `;
     if (btnSubmit) {
-      if (guestQuota.allowed) {
-        btnSubmit.disabled = false;
-        btnSubmit.style.opacity = '1';
-        btnSubmit.style.cursor = 'pointer';
-        btnSubmit.innerHTML = `🚀 100% 무료 단계별 퀴즈 생성 요청하기 (오늘 ${guestQuota.remaining}회 가능)`;
-      } else {
-        btnSubmit.disabled = true;
-        btnSubmit.style.opacity = '0.5';
-        btnSubmit.style.cursor = 'not-allowed';
-        btnSubmit.innerHTML = '⏳ 오늘의 출제 한도 완료 (내일 00:00 리셋)';
-      }
+      btnSubmit.disabled = true;
+      btnSubmit.style.opacity = '0.7';
+      btnSubmit.innerHTML = '🔒 Google 무료 회원가입·로그인 후 출제 가능';
     }
   }
 }

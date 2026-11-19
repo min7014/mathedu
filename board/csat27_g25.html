@@ -1,0 +1,2841 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[2027학년도 수능 고3 기하 25번] 좌표공간 선분의 내분점과 외분점 조건 · mathedu 수학자료실</title>
+<meta name="description" content="2027학년도 대학수학능력시험 고3 기하 25번 · [2027학년도 수능 고3 기하 25번] 좌표공간 선분의 내분점과 외분점 조건. 초등학생도 풀 수 있는 단계별 디딤돌 퀴즈 및 시각적 도식화 해설.">
+<meta name="keywords" content="2027학년도 대학수학능력시험, 2027 수능 수학, 고3 수학 25번, [2027학년도 수능 고3 기하 25번] 좌표공간 선분의 내분점과 외분점 조건, 기하, 2027학년도 수능, 기하, 공간좌표, 내분점과 외분점, 디딤돌 퀴즈, GeoGebra, 수학자료실, mathedu">
+<meta name="author" content="mathedu">
+<meta property="og:site_name" content="mathedu 수학자료실">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[2027학년도 수능 고3 기하 25번] 좌표공간 선분의 내분점과 외분점 조건 · mathedu 수학자료실">
+<meta property="og:description" content="2027학년도 대학수학능력시험 고3 기하 25번 · [2027학년도 수능 고3 기하 25번] 좌표공간 선분의 내분점과 외분점 조건. 초등학생도 풀 수 있는 단계별 디딤돌 퀴즈 및 시각적 도식화 해설.">
+<meta property="og:url" content="https://min7014.github.io/mathedu/board/csat27_g25.html">
+<meta property="og:image" content="https://min7014.github.io/mathedu/assets/favicon.png">
+<link rel="canonical" href="https://min7014.github.io/mathedu/board/csat27_g25.html">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
+<script type="application/ld+json" id="mathedu-seo-schema">{"@context": "https://schema.org", "@type": ["Quiz", "LearningResource"], "@id": "https://min7014.github.io/mathedu/board/csat27_g25.html", "name": "[2027학년도 수능 고3 기하 25번] 좌표공간 선분의 내분점과 외분점 조건 · mathedu 수학자료실", "description": "2027학년도 11월 수능 고3 기하 25번 · [2027학년도 수능 고3 기하 25번] 좌표공간 선분의 내분점과 외분점 조건. 초등학생도 1단계부터 차근차근 따라가면 2027학년도 대학수학능력시험 본문항까지 스스로 풀 수 있는 100% 무료 단계별 디딤돌 퀴즈입니다. Elementary-to-advanced step-by-step scaffolding quiz for the Official", "url": "https://min7014.github.io/mathedu/board/csat27_g25.html", "isAccessibleForFree": true, "inLanguage": ["ko", "en"], "learningResourceType": ["Quiz", "Interactive Step-by-Step Problem", "Visual Proof"], "educationalLevel": ["Elementary School", "Middle School", "High School"], "assesses": "2027학년도 11월 수능 고3 기하 25번", "teaches": "기하", "author": {"@type": "Organization", "name": "mathedu · 수학자료실 (min7014)", "url": "https://min7014.github.io/mathedu/"}, "publisher": {"@type": "EducationalOrganization", "name": "mathedu", "url": "https://min7014.github.io/mathedu/"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+/* ════════════════════════════════════════════════════════════════════════
+   ✨ Google Stitch Screen: projects/8555798074171219045/screens/bc0f63eb3a354cee8f964ce2bc461f3b
+   "Mathematical Clarity & Dynamic Geometry" — Exact Component & Token System
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --bg: #fcf8fa;
+  --card: #ffffff;
+  --card2: #f6f3f5;
+  --card3: #f0edef;
+  --card-high: #eae7e9;
+  --line: #e4e2e4;
+  --line-strong: #c5c6cd;
+  --txt: #1b1b1d;
+  --sub: #45464d;
+  --primary: #000000;
+  --navy: #131b2e;
+  --accent: #006398;
+  --accent-sky: #38BDF8;
+  --accent2: #4F46E5;
+  --good: #10B981;
+  --good-dark: #059669;
+  --bad: #ba1a1a;
+  --gold: #F59E0B;
+  --gold-dark: #B45309;
+  --glass-blur: 20px;
+  --glass-shadow: 0 1px 4px rgba(0, 0, 0, 0.04), 0 2px 10px rgba(19, 27, 46, 0.03);
+  --radius: 16px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--txt);
+  line-height: 1.65;
+  font-family: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(at 10% 6%, rgba(0, 99, 152, 0.08) 0px, transparent 48%),
+    radial-gradient(at 90% 10%, rgba(79, 70, 229, 0.08) 0px, transparent 48%),
+    radial-gradient(at 50% 88%, rgba(16, 185, 129, 0.06) 0px, transparent 52%),
+    radial-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
+  user-select: none;
+}
+
+.wrap {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 88px 16px 104px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* ── 1. Fixed Top Header (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) ── */
+.stitch-app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(252, 248, 250, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(228, 226, 228, 0.6);
+}
+
+.stitch-app-header-inner {
+  max-width: 960px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stitch-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  text-decoration: none;
+  color: var(--txt);
+}
+
+.stitch-brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.stitch-brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stitch-brand-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--txt);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.stitch-brand-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.stitch-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: rgba(0, 99, 152, 0.10);
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.stitch-brand-code {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.7rem;
+  color: var(--sub);
+  font-weight: 600;
+}
+
+.stitch-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.stitch-lang-toggle {
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 12px;
+  background: var(--card3);
+  color: var(--txt);
+  font-size: 0.76rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  transition: background 0.15s;
+}
+
+.stitch-lang-toggle:hover {
+  background: var(--card-high);
+}
+
+.stitch-streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 11px;
+  border-radius: 9999px;
+  background: #FEF3C7;
+  color: #B45309;
+  font-size: 0.76rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+  cursor: pointer;
+}
+
+.stitch-profile-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s;
+}
+
+.stitch-profile-btn:hover {
+  opacity: 0.85;
+}
+
+/* Legacy topbar & score hidden or integrated */
+.topbar { display: none !important; }
+.score { display: none !important; }
+
+/* ── 2. Stitch Hero Identity Card ── */
+.stitch-hero-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stitch-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.stitch-hero-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.stitch-free-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.10);
+  color: #059669;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.stitch-hero-card h1 {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
+  margin: 4px 0 8px;
+  color: var(--txt);
+}
+
+.stitch-hero-card h1 .stitch-h1-main {
+  display: block;
+  color: var(--txt);
+}
+
+.stitch-hero-card h1 .stitch-h1-accent {
+  display: block;
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+.stitch-hero-card .lead {
+  font-size: 0.85rem;
+  color: var(--sub);
+  line-height: 1.55;
+  margin: 0 0 10px;
+}
+
+.stitch-chip-scroll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px;
+  margin: 2px -2px 0;
+  scrollbar-width: none;
+}
+.stitch-chip-scroll::-webkit-scrollbar { display: none; }
+
+.stitch-feature-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 9999px;
+  background: var(--card3);
+  color: var(--txt);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.stitch-feature-chip:hover {
+  background: var(--card-high);
+}
+
+.stitch-bento-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+  padding: 12px 10px;
+  background: var(--card2);
+  border-radius: 12px;
+}
+
+.stitch-bento-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stitch-bento-val {
+  font-family: 'Plus Jakarta Sans', 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.stitch-bento-lbl {
+  font-size: 0.65rem;
+  color: var(--sub);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.stitch-progress-wrap {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+}
+
+.bar {
+  height: 6px;
+  background: #e4e2e4;
+  border-radius: 9999px;
+  overflow: hidden;
+  width: 100%;
+  display: block;
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), #10b981);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+/* ── 3. Gamification / Daily Streak Strip Card ── */
+.stitch-streak-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stitch-streak-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.stitch-flame-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: #FEF3C7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stitch-streak-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stitch-streak-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stitch-streak-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--txt);
+}
+
+.stitch-lvl-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--card3);
+  color: var(--sub);
+}
+
+.stitch-streak-sub {
+  font-size: 0.78rem;
+  color: var(--sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stitch-streak-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.stitch-circle-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: var(--card3);
+  color: var(--txt);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.stitch-circle-icon-btn:hover {
+  background: var(--card-high);
+}
+
+/* ── 4. Visual Proof Archive Card (Dandelin Spheres / Visual Proof Spotlight) ── */
+.stitch-dandelin-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 14px;
+}
+
+.stitch-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.stitch-card-head-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', 'Pretendard', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--txt);
+}
+
+.stitch-card-head-right {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.stitch-visual-canvas {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+}
+
+.stitch-visual-banner {
+  width: 100%;
+  height: 168px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: #131b2e;
+}
+
+.stitch-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.22) 55%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.stitch-visual-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #38BDF8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stitch-visual-headline {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 2px 0 0;
+  line-height: 1.3;
+}
+
+.stitch-visual-drawer {
+  padding: 14px 16px;
+  background: var(--card2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stitch-visual-desc {
+  font-size: 0.82rem;
+  color: var(--sub);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.stitch-quote-box {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.stitch-quote-text {
+  font-size: 0.8rem;
+  color: var(--txt);
+  font-weight: 500;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── 5. Original Exam Problem Card (.orig-card — Today's Recommended Dynamic Geometry Style) ── */
+.orig-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 0 0 14px;
+  box-shadow: var(--glass-shadow);
+  border: none;
+}
+
+.orig-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.orig-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--txt);
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 800;
+  padding: 0;
+  box-shadow: none;
+}
+
+.orig-badge {
+  font-size: 0.74rem;
+  color: var(--accent);
+  font-weight: 700;
+  background: rgba(0, 99, 152, 0.12);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-family: 'Space Grotesk', 'Pretendard', sans-serif;
+}
+
+.orig-grid {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.orig-col-media {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.orig-media-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.orig-tab-btn {
+  background: #ffffff;
+  color: var(--sub);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 5px 11px;
+  font-size: .78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.orig-tab-btn.active {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.orig-media-frame {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.orig-media-frame img, .orig-media-frame svg {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+}
+
+.orig-media-sub {
+  text-align: center;
+  font-size: .75rem;
+  color: var(--sub);
+}
+
+.orig-col-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.orig-text-box {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: .9rem;
+  line-height: 1.65;
+  color: var(--txt);
+}
+
+.orig-text-box h4 {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: .88rem;
+  font-weight: 800;
+}
+
+.orig-tip {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: .82rem;
+  color: var(--txt);
+  line-height: 1.55;
+}
+
+.min-visual-tip {
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 12px !important;
+  font-size: .82rem;
+  color: var(--sub);
+  line-height: 1.6;
+}
+
+.stitch-orig-cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stitch-cta-black {
+  width: 100%;
+  height: 44px;
+  border-radius: 10px;
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.stitch-cta-black:hover {
+  background: #262626;
+}
+
+.stitch-cta-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stitch-cta-gray {
+  height: 40px;
+  border-radius: 10px;
+  background: var(--card3);
+  color: var(--txt);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.stitch-cta-gray:hover {
+  background: var(--card-high);
+}
+
+/* ── 6. Two-Pillar User Gateway Cards (Teacher & Student Quick Action) ── */
+.stitch-gateway-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stitch-gateway-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stitch-gw-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stitch-gw-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.stitch-gw-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--txt);
+}
+
+.stitch-gw-desc {
+  font-size: 0.8rem;
+  color: var(--sub);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.stitch-gw-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.stitch-btn-azure {
+  flex: 1;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.15s;
+}
+
+.stitch-btn-azure:hover {
+  opacity: 0.92;
+}
+
+.stitch-gw-input {
+  flex: 1;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: var(--card2);
+  border: 1px solid transparent;
+  font-family: 'Space Grotesk', 'Pretendard', sans-serif;
+  font-size: 0.86rem;
+  color: var(--txt);
+  outline: none;
+}
+
+.stitch-gw-input:focus {
+  background: var(--card3);
+  border-color: var(--accent);
+}
+
+.stitch-btn-enter {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.stitch-gw-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  font-size: 0.78rem;
+}
+
+.stitch-gw-links a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+/* ── 7. Precision Step Filter & Quiz Explorer Header ── */
+.stitch-explorer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 0 10px;
+}
+
+.stitch-explorer-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stitch-explorer-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--txt);
+  margin: 0;
+}
+
+.stitch-count-badge {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(0, 99, 152, 0.10);
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.stitch-explorer-sub {
+  font-size: 0.7rem;
+  color: var(--sub);
+  display: block;
+}
+
+.stitch-filter-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stitch-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stitch-filter-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--sub);
+}
+
+.stitch-pill-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+}
+.stitch-pill-row::-webkit-scrollbar { display: none; }
+
+.stitch-mode-pill {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  background: var(--card3);
+  color: var(--sub);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.stitch-mode-pill.active {
+  background: #000000;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.stitch-step-pill {
+  flex-shrink: 0;
+  padding: 6px 13px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--card3);
+  color: var(--sub);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.stitch-step-pill.active, .stitch-step-pill:hover {
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ── 8. Section Headings, Symbol Translator (.sym), Prerequisite (.know) & Question Cards (.q) ── */
+h2 {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin: 24px 0 10px;
+  color: var(--txt);
+  border-left: 4px solid var(--accent);
+  padding-left: 10px;
+  line-height: 1.38;
+}
+
+code {
+  background: var(--card3);
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.9em;
+}
+
+.sym {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0 16px;
+}
+
+.sym > div {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: .88rem;
+  box-shadow: var(--glass-shadow);
+  color: var(--txt);
+}
+
+.sym b {
+  color: var(--accent);
+  font-size: .96rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.sym-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 10px 0 16px;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sym-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sym-badge {
+  background: rgba(0, 99, 152, 0.10);
+  color: var(--accent);
+  font-size: .74rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.sym-title {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--txt);
+  font-weight: 800;
+}
+
+.sym-visual-box {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
+.sym-visual-box svg, .sym-visual-box img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.sym-caption {
+  font-size: .78rem;
+  color: var(--sub);
+  margin-top: 8px;
+  line-height: 1.45;
+}
+
+.sym-desc {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: .88rem;
+  line-height: 1.65;
+  color: var(--txt);
+}
+
+.know {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 10px 0;
+  font-size: .9rem;
+  box-shadow: var(--glass-shadow);
+  color: var(--txt);
+}
+
+.know h3 {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: .95rem;
+  font-weight: 800;
+}
+
+.know ul {
+  margin: 6px 0 0 18px;
+  padding: 0;
+}
+
+.know li {
+  margin: 4px 0;
+}
+
+.step0-visual-box {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 16px !important;
+  margin: 12px 0 !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* ── Question Card (.q) Matching Exact Quiz Cards in screens/bc0f63eb3a354cee8f964ce2bc461f3b ── */
+.q {
+  background: #ffffff;
+  border: 1px solid rgba(228, 226, 228, 0.85);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 12px 0 18px;
+  transition: all .2s ease;
+  box-shadow: var(--glass-shadow);
+}
+
+.q.correct-q {
+  border-color: #10B981;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.10);
+}
+
+.q .lvl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  padding: 0 0 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--card3);
+  border-radius: 0;
+  font-size: .75rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.q .lvl > span:first-child {
+  background: rgba(0, 99, 152, 0.10);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.q .lvl::after {
+  content: "🪜 단계별 빌드업";
+  color: #D97706;
+  background: #FEF3C7;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.q .stem {
+  font-size: 1.02rem;
+  margin-bottom: 14px;
+  font-weight: 600;
+  color: var(--txt);
+  line-height: 1.65;
+}
+
+.opts {
+  display: grid;
+  gap: 8px;
+}
+
+.opts.opts-inline {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.opts.opts-inline .opt {
+  justify-content: center;
+  padding: 10px 8px;
+}
+
+.opt {
+  background: var(--card2);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all .15s ease;
+  font-size: .94rem;
+  color: var(--txt);
+}
+
+.opt:hover {
+  background: var(--card3);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.opt .n {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--txt);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.opt.correct {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: #10B981 !important;
+  color: #065f46 !important;
+  font-weight: 600;
+}
+
+.opt.correct .n {
+  background: #10B981 !important;
+  border-color: #10B981 !important;
+  color: #ffffff !important;
+}
+
+.opt.wrong {
+  background: rgba(239, 68, 68, 0.10) !important;
+  border-color: #ef4444 !important;
+  color: #991b1b !important;
+}
+
+.opt.wrong .n {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+.opt.locked {
+  cursor: default;
+}
+
+.q-actions {
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid var(--card3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.q-actions::before {
+  content: "✓ 즉시 채점 · 상세 해설";
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #059669;
+}
+
+.exp-toggle-btn {
+  background: #000000 !important;
+  border: none !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: .8rem !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.exp-toggle-btn:hover {
+  background: #262626 !important;
+}
+
+.exp {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  font-size: .9rem;
+  display: none;
+  color: var(--txt);
+  line-height: 1.7;
+}
+
+.exp.show {
+  display: block;
+}
+
+.exp b {
+  color: var(--navy);
+}
+
+/* ── 9. Solution Card (.sol), Visual Diagrams & Schematic Flowcharts ── */
+.sol {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 14px 0;
+  box-shadow: var(--glass-shadow);
+  color: var(--txt);
+}
+
+.sol h4 {
+  color: var(--navy);
+  margin: 18px 0 8px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.sol-highlight {
+  background: #f0f7ff;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin: 12px 0;
+  color: var(--txt);
+}
+
+.diagram {
+  background: #ffffff;
+  color: #1b2436;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  margin: 14px 0;
+  text-align: center;
+}
+
+.diagram svg, .diagram img {
+  max-width: 100%;
+  height: auto;
+}
+
+.diagram-caption {
+  font-size: .8rem;
+  color: var(--sub);
+  margin-top: 8px;
+}
+
+figure.math-visual-diagram {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  margin: 12px 0 18px !important;
+  text-align: center !important;
+}
+
+figure.math-visual-diagram figcaption {
+  color: #475569 !important;
+  font-size: 0.84rem !important;
+  margin-top: 10px !important;
+  line-height: 1.55 !important;
+}
+
+section.math-schematic-flow {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  margin: 12px 0 18px !important;
+}
+
+section.math-schematic-flow table {
+  background: transparent !important;
+}
+
+section.math-schematic-flow td,
+section.math-schematic-flow th {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+
+section.math-schematic-flow thead tr,
+section.math-schematic-flow thead th {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+section.math-schematic-flow td span,
+section.math-schematic-flow td b {
+  color: #1e293b !important;
+}
+
+section.math-schematic-flow td > b:first-child {
+  color: #006398 !important;
+}
+
+.btn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.btn:hover {
+  background: #262626;
+}
+
+.final {
+  text-align: center;
+  margin: 24px 0;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  font-size: 1.02rem;
+}
+
+.final .ans {
+  font-size: 1.55rem;
+  color: var(--good-dark);
+  font-weight: 800;
+  margin: 8px 0 14px;
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+}
+
+/* ── Cards (Playing Cards Visual) ── */
+.cards { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+.card { width: 64px; height: 92px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--line-strong); }
+.card .num { font-size: 1.3rem; }
+.card .face { font-size: .7rem; margin-top: 4px; opacity: .85; }
+.card.front { background: #ffffff; color: #1b2436; border-color: #94a3b8; }
+.card.back { background: #334155; color: #ffffff; border-color: #1e293b; }
+
+/* ── 10. min7014 Deep Exploration Addon Card ── */
+.min7014-addon-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: var(--glass-shadow);
+}
+
+.min-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.min-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--txt);
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+}
+
+.min-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.min-tag {
+  background: rgba(0, 99, 152, 0.10);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.min-lead {
+  font-size: .84rem;
+  color: var(--sub);
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+.min-guide-banner {
+  background: var(--card2) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+  margin-bottom: 14px !important;
+  font-size: .82rem !important;
+  line-height: 1.6 !important;
+  color: var(--txt) !important;
+}
+
+.min-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.min-item {
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.min-item-title {
+  display: block;
+  color: var(--txt);
+  font-size: .92rem;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.min-item-sub {
+  display: block;
+  font-size: .78rem;
+  font-weight: 400;
+  color: var(--sub);
+  margin-top: 2px;
+}
+
+.min-item-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.min-btn {
+  font-size: .76rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.min-btn-ggb { background: rgba(0, 99, 152, 0.10); border: 1px solid rgba(0, 99, 152, 0.25); color: var(--accent); }
+.min-btn-pdf { background: var(--card3); border: 1px solid var(--line); color: var(--txt); }
+.min-btn-yt { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.22); color: #dc2626; }
+.min-btn-algeo { background: rgba(16, 185, 129, 0.10); border: 1px solid rgba(16, 185, 129, 0.25); color: #059669; }
+.min-btn-detail { background: #000000; border: 1px solid #000000; color: #ffffff; }
+
+.min-cat-badge {
+  display: inline-block;
+  font-size: .7rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(0, 99, 152, 0.08);
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.min-ggb-frame-wrap {
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  display: none;
+}
+.min-ggb-frame-wrap.active { display: block; }
+
+.min-footer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  text-align: right;
+}
+.min-footer-link { color: var(--accent); font-size: .82rem; font-weight: 700; text-decoration: none; }
+
+/* ── 11. Stitch Dark Navy Lesson Pack Banner & Curated Collections ── */
+.stitch-pack-banner {
+  background: #131b2e;
+  color: #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 16px rgba(19, 27, 46, 0.14);
+}
+
+.stitch-pack-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.stitch-pack-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: rgba(0, 99, 152, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stitch-pack-btn {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: #93ccff;
+  color: #003352;
+  font-size: 0.76rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.stitch-collections-section {
+  margin: 24px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stitch-collection-card {
+  padding: 16px;
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--txt);
+  transition: background 0.15s;
+}
+
+.stitch-collection-card:hover {
+  background: var(--card2);
+}
+
+.stitch-col-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stitch-col-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stitch-col-title {
+  font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--txt);
+  display: block;
+}
+
+.stitch-col-sub {
+  font-size: 0.76rem;
+  color: var(--sub);
+  display: block;
+  margin-top: 2px;
+}
+
+.stitch-footer {
+  margin-top: 28px;
+  padding: 16px 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.stitch-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--sub);
+}
+
+.stitch-footer-links a {
+  color: var(--sub);
+  text-decoration: none;
+}
+
+.stitch-footer-copy {
+  font-size: 0.68rem;
+  color: var(--sub);
+  max-width: 340px;
+  margin: 0;
+}
+
+/* ── 12. Fixed Bottom Navigation Bar (Exact screens/bc0f63eb3a354cee8f964ce2bc461f3b) ── */
+.stitch-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(252, 248, 250, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(228, 226, 228, 0.6);
+}
+
+.stitch-bottom-nav-inner {
+  max-width: 960px;
+  height: 64px;
+  margin: 0 auto;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.stitch-bnav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 44px;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--sub);
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.stitch-bnav-item.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── Report Form & Bilingual Engine ── */
+.report-wrap { margin-top: 8px !important; border-top: none !important; padding-top: 4px !important; }
+.report-btn { background: transparent !important; color: #64748b !important; border: 1px solid var(--line) !important; }
+.report-text { background: #ffffff !important; color: var(--txt) !important; border: 1px solid var(--line-strong) !important; }
+.report-cancel { background: #ffffff !important; color: var(--sub) !important; border: 1px solid var(--line-strong) !important; }
+
+#trackFull {
+  display: none;
+  background: rgba(252, 248, 250, 0.96) !important;
+  backdrop-filter: blur(18px) !important;
+  color: var(--txt) !important;
+}
+
+.bilingual-en { display: none; }
+.bilingual-ko { display: inline; }
+div.bilingual-ko, p.bilingual-ko { display: block; }
+html[lang="en"] .bilingual-ko { display: none !important; }
+html[lang="en"] .bilingual-en {
+  display: block;
+  margin-top: 6px;
+  color: #006398;
+  font-size: 0.92em;
+  line-height: 1.6;
+}
+.sol .bilingual-en { display: none; }
+html[lang="en"] .sol .bilingual-en { display: block !important; }
+html[lang="en"] span.bilingual-en {
+  display: inline !important;
+  margin-top: 0 !important;
+}
+
+/* ── Responsive MathJax & Mobile Layout ── */
+h1, h2, h3, h4, h5, h6, p, div, span, li, a, label {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+mjx-container { max-width: 100% !important; box-sizing: border-box !important; }
+mjx-container[display="true"] {
+  display: block !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  margin: 0.75em 0 !important;
+  padding: 10px 12px !important;
+  background: var(--card2) !important;
+  border-radius: 10px;
+  border: 1px solid var(--line) !important;
+  color: var(--txt) !important;
+  text-align: center !important;
+}
+mjx-container:not([display="true"]) {
+  display: inline-flex !important;
+  vertical-align: middle !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+  .orig-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .sym { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 82px 14px 96px !important; }
+  .opts.opts-inline { grid-template-columns: repeat(2, 1fr) !important; }
+  mjx-container { font-size: 92% !important; }
+}
+
+/* ── 2026 Spatial Aurora & Glass Bento Upgrades + Dark Mode (html.dark-theme) ── */
+.stitch-app-header {
+  background: rgba(255, 255, 255, 0.80) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
+  box-shadow: 0 8px 30px -10px rgba(15, 23, 42, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+.stitch-bottom-nav {
+  background: rgba(255, 255, 255, 0.84) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-top: 1px solid rgba(226, 232, 240, 0.88) !important;
+  box-shadow: 0 -8px 30px -8px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+.stitch-hero-card h1 .stitch-h1-accent {
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 55%, #059669 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (min-width: 768px) {
+  .stitch-gateway-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+}
+.stitch-hero-card,
+.stitch-streak-card,
+.stitch-dandelin-card,
+.orig-card,
+.stitch-gateway-card,
+.stitch-filter-card,
+.know,
+.q,
+.sol,
+.final,
+.stitch-collection-card {
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+}
+.q:hover,
+.stitch-gateway-card:hover,
+.stitch-collection-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -6px rgba(0, 99, 152, 0.12), 0 4px 12px rgba(79, 70, 229, 0.06);
+  border-color: rgba(0, 99, 152, 0.35);
+}
+.opt {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease !important;
+}
+.opt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(0, 99, 152, 0.12);
+}
+.stitch-mode-pill.active,
+.stitch-step-pill.active {
+  background: linear-gradient(135deg, #006398 0%, #4f46e5 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(0, 99, 152, 0.26);
+}
+
+html.dark-theme {
+  --bg: #070b19;
+  --card: rgba(19, 28, 49, 0.86);
+  --card2: rgba(30, 41, 59, 0.85);
+  --card3: rgba(51, 65, 85, 0.82);
+  --card-high: rgba(71, 85, 105, 0.85);
+  --line: rgba(56, 189, 248, 0.22);
+  --line-strong: rgba(148, 163, 184, 0.35);
+  --txt: #f8fafc;
+  --sub: #94a3b8;
+  --primary: #38bdf8;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+}
+html.dark-theme body {
+  background-color: #070b19 !important;
+  background-image:
+    radial-gradient(at 12% 8%, rgba(56, 189, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 88% 14%, rgba(129, 140, 248, 0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(16, 185, 129, 0.10) 0px, transparent 55%),
+    radial-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px !important;
+  color: #f8fafc !important;
+}
+html.dark-theme .stitch-app-header {
+  background: rgba(13, 20, 38, 0.82) !important;
+  border-bottom-color: rgba(56, 189, 248, 0.22) !important;
+  box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.55) !important;
+}
+html.dark-theme .stitch-bottom-nav {
+  background: rgba(13, 20, 38, 0.86) !important;
+  border-top-color: rgba(56, 189, 248, 0.22) !important;
+}
+html.dark-theme .stitch-hero-card,
+html.dark-theme .stitch-streak-card,
+html.dark-theme .stitch-dandelin-card,
+html.dark-theme .orig-card,
+html.dark-theme .stitch-gateway-card,
+html.dark-theme .stitch-filter-card,
+html.dark-theme .know,
+html.dark-theme .q,
+html.dark-theme .sol,
+html.dark-theme .final,
+html.dark-theme .stitch-collection-card,
+html.dark-theme .min7014-addon-card {
+  background: rgba(19, 28, 49, 0.86) !important;
+  border-color: rgba(56, 189, 248, 0.22) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+html.dark-theme .stitch-hero-card h1 .stitch-h1-accent {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 55%, #34d399 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html.dark-theme .opt,
+html.dark-theme .sym > div,
+html.dark-theme .orig-text-box,
+html.dark-theme #examOrigPaperBox,
+html.dark-theme #examUniversalNavBar {
+  background: rgba(30, 41, 59, 0.85) !important;
+  color: #f8fafc !important;
+  border-color: rgba(56, 189, 248, 0.24) !important;
+}
+html.dark-theme #examOrigPaperBox p,
+html.dark-theme #examOrigPaperBox span {
+  color: #f8fafc !important;
+}
+html.dark-theme .exp {
+  background: rgba(15, 23, 42, 0.90) !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+}
+html.dark-theme input[type="text"],
+html.dark-theme select {
+  background: rgba(15, 23, 42, 0.90) !important;
+  color: #f8fafc !important;
+  border-color: rgba(56, 189, 248, 0.28) !important;
+}
+</style>
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+<script src="../mathedu-i18n.js?v=20261119_csat27"></script>
+</head><body><div class="wrap">
+<!-- STITCH_HEADER_START -->
+<script>
+(function() {
+  try {
+    if (localStorage.getItem('mathedu_site_theme') === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  } catch (e) {}
+})();
+window.syncSiteThemeUI = function() {
+  var isDark = document.documentElement.classList.contains('dark-theme');
+  var iconEl = document.getElementById('themeToggleGlobalIcon');
+  if (iconEl) iconEl.textContent = isDark ? '☀️' : '🌙';
+};
+window.toggleSiteDarkMode = function() {
+  var isDark = document.documentElement.classList.toggle('dark-theme');
+  try { localStorage.setItem('mathedu_site_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+  window.syncSiteThemeUI();
+};
+document.addEventListener('DOMContentLoaded', window.syncSiteThemeUI);
+</script>
+<header class="stitch-app-header">
+  <div class="stitch-app-header-inner">
+    <a href="/mathedu/" class="stitch-brand-link">
+      <img src="../assets/favicon.png" alt="mathedu" class="stitch-brand-logo">
+      <div class="stitch-brand-text">
+        <span class="stitch-brand-title">mathedu · 수학자료실</span>
+        <div class="stitch-brand-sub">
+          <span class="stitch-brand-pill"><span class="bilingual-ko">3,400+ 시각적 수학 증명</span><span class="bilingual-en">3,400+ Visual Proofs</span></span>
+          <span class="stitch-brand-code">CSAT27_G25</span>
+        </div>
+      </div>
+    </a>
+    <div class="stitch-header-actions">
+      <button type="button" id="themeToggleGlobalBtn" class="stitch-lang-toggle" onclick="toggleSiteDarkMode()" title="다크/라이트 테마 전환 (Toggle Dark/Light Theme)"><span id="themeToggleGlobalIcon">🌙</span></button>
+      <button type="button" id="langToggleSingleBtn" class="stitch-lang-toggle" onclick="var nextL=(document.documentElement.lang==='en')?'ko':'en';setBoardLang(nextL,true);this.textContent=nextL.toUpperCase();">KO</button>
+      <div class="lang-group" style="display:none">
+        <button type="button" class="lang-btn active" data-lang-btn="ko" onclick="setBoardLang('ko', true)">한국어</button>
+        <button type="button" class="lang-btn" data-lang-btn="en" onclick="setBoardLang('en', true)">English</button>
+      </div>
+      <div class="stitch-streak-pill" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="연속 학습 스트릭 및 뱃지">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
+        <span id="stitchHeaderStreak">14</span>
+      </div>
+      <button type="button" class="stitch-profile-btn" onclick="if(window.MatheduAuth){MatheduAuth.isLoggedIn()?MatheduAuth.showMyProblemsModal():MatheduAuth.showAuthModal()}" title="내 서재 및 학습 기록">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#ffffff">person</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 1. Brand / Problem Identity Hero Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-hero-card">
+  <div class="stitch-hero-top">
+    <div class="stitch-hero-brand">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#006398">architecture</span>
+      <span>수학자료실 · mathedu</span>
+    </div>
+    <span class="stitch-free-pill"><span class="bilingual-ko">100% 영구 무료</span><span class="bilingual-en">100% Forever Free</span></span>
+  </div>
+  <h1>
+    <span class="bilingual-ko">
+      <span class="stitch-h1-main">2027학년도 수능 고3 기하 25번</span>
+      <span class="stitch-h1-accent">좌표공간 선분의 내분점과 외분점 조건</span>
+    </span>
+    <span class="bilingual-en">📘 [2027 CSAT Math Geometry #25] Internal and External Division Points in 3D Space</span>
+  </h1>
+  <p class="lead">초등학생도 1단계부터 차근차근 따라가면 2027학년도 대학수학능력시험 본문항까지 스스로 풀 수 있는 100% 무료 단계별 디딤돌 퀴즈입니다.<span class="bilingual-en">Elementary-to-advanced step-by-step scaffolding quiz for the Official 2027 CSAT Math Exam.</span></p>
+  <div class="stitch-chip-scroll">
+    <button type="button" class="stitch-feature-chip" onclick="scrollToQuizStep(0)">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#F59E0B">bolt</span>
+      <span class="bilingual-ko">무가입 5초 즉시 학습</span><span class="bilingual-en">Instant Free Practice</span>
+    </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode()">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#006398">target</span>
+      <span class="bilingual-ko">0~5단계 빌드업</span><span class="bilingual-en">Step-by-Step Build-up</span>
+    </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.openClassCreatorModal)openClassCreatorModal('csat27_g25')">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#4F46E5">qr_code_2</span>
+      <span class="bilingual-ko">3초 수업 QR</span><span class="bilingual-en">3-Sec Class QR</span>
+    </button>
+    <button type="button" class="stitch-feature-chip" onclick="if(window.downloadOfflineQuiz)window.downloadOfflineQuiz('csat27_g25')">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#45464d">inventory_2</span>
+      <span class="bilingual-ko">100% 오프라인 보관함</span><span class="bilingual-en">100% Offline Save</span>
+    </button>
+    <button type="button" class="stitch-feature-chip" id="copyBtn" onclick="copyLink()">
+      <span class="material-symbols-outlined" style="font-size:14px;color:#10B981">monitoring</span>
+      <span class="bilingual-ko">링크 복사 · 공유</span><span class="bilingual-en">Copy Link</span>
+    </button>
+  </div>
+  <div class="stitch-bento-stats">
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#1b1b1d">3,400+</span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">수학 주제</span><span class="bilingual-en">Topics</span></span>
+    </div>
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#006398"><b id="pts">0</b> / <b id="tot">6</b></span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">디딤돌 정답</span><span class="bilingual-en">Score</span></span>
+    </div>
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#F59E0B" id="pct">0%</span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">수능·디딤돌</span><span class="bilingual-en">Progress</span></span>
+    </div>
+    <div class="stitch-bento-item">
+      <span class="stitch-bento-val" style="color:#10B981">100%</span>
+      <span class="stitch-bento-lbl"><span class="bilingual-ko">오프라인</span><span class="bilingual-en">Offline</span></span>
+    </div>
+    <div class="stitch-progress-wrap">
+      <span class="bar"><i id="bar"></i></span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Gamification / Daily Streak Strip Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-streak-card">
+  <div class="stitch-streak-left">
+    <div class="stitch-flame-circle">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#F59E0B;font-variation-settings:'FILL' 1">local_fire_department</span>
+    </div>
+    <div class="stitch-streak-info">
+      <div class="stitch-streak-title-row">
+        <span class="stitch-streak-title"><span class="bilingual-ko">연속 출석 1일차</span><span class="bilingual-en">Day 1 Streak</span></span>
+        <span class="stitch-lvl-badge">Lv.1 입문자</span>
+      </div>
+      <span class="stitch-streak-sub"><span class="bilingual-ko">오늘 수학 문제 풀면 불꽃 유지! (0 / 100 XP)</span><span class="bilingual-en">Solve steps today to keep the streak! (0 / 100 XP)</span></span>
+    </div>
+  </div>
+  <div class="stitch-streak-actions">
+    <button type="button" class="stitch-circle-icon-btn" onclick="if(window.MatheduGame)MatheduGame.showBadgesModal()" title="나의 뱃지">
+      <span class="material-symbols-outlined" style="font-size:18px">military_tech</span>
+    </button>
+    <button type="button" class="stitch-circle-icon-btn" style="color:#ba1a1a" onclick="if(window.MatheduGame&&MatheduGame.toggleBookmark)MatheduGame.toggleBookmark('csat27_g25')" title="즐겨찾기 및 오답노트">
+      <span class="material-symbols-outlined" style="font-size:18px">bookmark</span>
+    </button>
+  </div>
+</div>
+
+<!-- 3. Emblem / Dandelin Spheres Visual Proof Spotlight (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-dandelin-card">
+  <div class="stitch-card-head">
+    <div class="stitch-card-head-left">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#4F46E5">view_in_ar</span>
+      <span>공식 엠블럼 Dandelin Spheres</span>
+    </div>
+    <span class="stitch-card-head-right" onclick="scrollToSolSection()"><span class="bilingual-ko">입체·시각적 기하 증명 ➔</span><span class="bilingual-en">Visual Proof ➔</span></span>
+  </div>
+  <div class="stitch-visual-canvas">
+    <div class="stitch-visual-banner" style="background-image: url('../assets/stitch_dandelin_hero.png')">
+      <div class="stitch-visual-overlay">
+        <span class="stitch-visual-eyebrow">VISUAL PROOF ARCHIVE</span>
+        <p class="stitch-visual-headline"><span class="bilingual-ko">좌표공간 선분의 내분점과 외분점 조건 · 시각적 도형과 단계별 증명</span><span class="bilingual-en">Visual Geometric Proof & Step-by-Step Derivation</span></p>
+      </div>
+    </div>
+    <div class="stitch-visual-drawer">
+      <p class="stitch-visual-desc">
+        <span class="bilingual-ko">복잡한 수능 킬러 문항도 <strong style="color:#1b1b1d">시각적 도형 다이어그램</strong>과 <strong style="color:#006398">초등 눈높이 디딤돌(1~5단계)</strong>로 분해하면 원리가 한눈에 보입니다.</span>
+        <span class="bilingual-en">Even the most challenging exam problems become intuitive through <strong style="color:#1b1b1d">visual geometric models</strong> and <strong style="color:#006398">elementary-grounded micro-steps</strong>.</span>
+      </p>
+      <div class="stitch-quote-box">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#F59E0B;flex-shrink:0;margin-top:2px">format_quote</span>
+        <p class="stitch-quote-text">
+          <span class="bilingual-ko">"수식에 갇히지 않고, 눈으로 원리를 통찰하는 수학 — 수학교육의 지향점입니다."</span>
+          <span class="bilingual-en">"Mathematics that sees principles visually rather than being trapped in formulas."</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- STITCH_HEADER_END -->
+<!-- ★ 원본 문제 카드: 가로 2열 대조 배치 -->
+<div class="orig-card">
+  <div class="orig-header">
+    <div class="orig-tag">📌 원본 문제 (오늘의 목표)<span class="bilingual-en">📌 Official 2027 CSAT Problem (Today's Goal)</span></div>
+    <span class="orig-badge" id="examOrigBadge"><span class="bilingual-ko">2027학년도 수능 고3 기하 25번</span><span class="bilingual-en">2027 CSAT Math Geometry #25</span></span>
+  </div>
+
+  <div class="orig-grid">
+    <div class="orig-col-media">
+      <div class="orig-media-frame">
+        <section id="examOrigPaperBox" style="width:100%;text-align:left;padding:18px 20px;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:12px;color:#1b1b1d;line-height:1.8;font-size:0.96rem;box-shadow:inset 0 1px 4px rgba(15,23,42,0.04)"><p style="margin:0 0 10px;padding-bottom:8px;border-bottom:1.5px solid #0f172a;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:0.86rem;color:#0f172a;gap:8px;flex-wrap:wrap"><span>📄 2027학년도 대학수학능력시험 · 기하</span><span style="background:#0f172a;color:#ffffff;padding:2px 10px;border-radius:999px;font-size:0.78rem">문항 25번 · 3점</span></p><div id="examOrigStemContent" style="margin:0 0 14px;color:#111827;font-size:0.97rem;line-height:1.85"><span class="bilingual-ko">좌표공간의 서로 다른 두 점 $\mathrm{A}(a,\;-3,\;6)$, $\mathrm{B}(-3,\;b,\;c)$에 대하여 선분 $\mathrm{AB}$를 $2:1$로 내분하는 점이 $yz$평면 위에 있고, 선분 $\mathrm{AB}$를 $3:2$로 외분하는 점이 $x$축 위에 있을 때, $a+b+c$의 값은? [3점]</span><div class="bilingual-en" style="margin-top:8px;color:#334155;font-size:0.92rem">In 3D space, for distinct points $\mathrm{A}(a,-3,6)$ and $\mathrm{B}(-3,b,c)$, the point dividing $\mathrm{AB}$ internally in the ratio $2:1$ lies on the $yz$-plane, and the point dividing $\mathrm{AB}$ externally in the ratio $3:2$ lies on the $x$-axis. Find $a+b+c$. [3 points]</div></div><p id="examOrigOptsContent" style="margin:0;padding-top:10px;border-top:1px dashed #cbd5e1;font-size:0.92rem;line-height:1.7"><span style="display:inline-block;margin:3px 8px 3px 0;font-weight:600;color:#1e293b">① $6$</span> &nbsp;&nbsp; <span style="display:inline-block;margin:3px 8px 3px 0;font-weight:600;color:#1e293b">② $7$</span> &nbsp;&nbsp; <span style="display:inline-block;margin:3px 8px 3px 0;font-weight:600;color:#1e293b">③ $8$</span> &nbsp;&nbsp; <span style="display:inline-block;margin:3px 8px 3px 0;font-weight:600;color:#1e293b">④ $9$</span> &nbsp;&nbsp; <span style="display:inline-block;margin:3px 8px 3px 0;font-weight:600;color:#1e293b">⑤ $10$</span></p></section>
+      </div>
+      <div class="orig-media-sub" id="examOrigMediaSub"><span class="bilingual-ko">📄 2027학년도 대학수학능력시험 공식 기출문항 · <a href="../csat2027.html" style="color:#006398;font-weight:700">2027 수능 전체 46문항 보기 ➔</a></span><span class="bilingual-en">📄 Official 2027 CSAT Mathematics Paper · <a href="../csat2027.html" style="color:#006398;font-weight:700">View All 46 Problems ➔</a></span></div>
+    </div>
+
+    <div class="orig-col-desc">
+      <div class="orig-text-box">
+        <h4>📋 원본 문항 핵심 요약 및 목표<span class="bilingual-en">📋 Official Problem Summary &amp; Objectives</span></h4>
+        <p id="examOrigTopicTitle" style="margin:0 0 8px;font-weight:600;color:var(--txt)">좌표공간 선분의 내분점과 외분점 조건</p>
+        <p id="examOrigSummaryKo" style="margin:0;font-size:0.88rem;color:var(--sub);line-height:1.6">좌표공간에서 두 점 $\mathrm{A}(a,-3,6)$, $\mathrm{B}(-3,b,c)$의 $2:1$ 내분점이 $yz$평면 위에 있고 $3:2$ 외분점이 $x$축 위에 있을 때 $a+b+c$를 구하는 문항입니다.</p>
+        <div class="bilingual-en" id="examOrigSummaryEn"><b>Problem Objective:</b> In 3D space, the $2:1$ internal division point of $\mathrm{AB}$ lies on the $yz$-plane and the $3:2$ external division point lies on the $x$-axis. Find $a+b+c$.</div>
+      </div>
+      <div class="orig-tip">
+        💡 <b>초등 눈높이 디딤돌 길잡이</b>: 처음 나오는 기호도 제0단계 기호 번역과 1단계 초등 기초 직관 디딤돌부터 순서대로 밟아가면 누구나 100% 자신의 힘으로 해결할 수 있습니다!<span class="bilingual-en">💡 <b>Core Guide</b>: Follow the elementary-grounded micro-steps below to master this problem completely!</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="min-visual-tip" id="examVisualTipBox" style="margin-top:16px">
+    💡 <b>프레임별 시각적 증명 분석 (PDF & GeoGebra 탐구)</b><br>수학자료실의 PDF 자료는 단순 결과가 아닌 <b>처음부터 끝까지 생각의 모든 과정이 투명하게 드러나는 단계별 시각적 증명</b>입니다.<br>하단의 <b>수학자료실</b> PDF 문서를 키보드 방향키나 마우스 휠로 넘겨가며, 각 페이지마다 변하는 요소와 보존되는 불변량의 수학적 의미를 깊이 있게 음미해 보세요.
+  <div class="bilingual-en">💡 <b>Frame-by-Frame Visual Proof Analysis (PDF &amp; GeoGebra Exploration)</b><br>The archive's flipbook proof materials demonstrate how fundamental mathematical principles converge smoothly frame by frame. Explore the interactive dynamic geometry applets below.</div></div>
+
+  <div class="stitch-orig-cta-stack">
+    <button type="button" class="stitch-cta-black" onclick="scrollToQuizStep(0)">
+      <span class="material-symbols-outlined" style="font-size:18px">sports_esports</span>
+      <span><span class="bilingual-ko">1단계 디딤돌부터 바로 풀기</span><span class="bilingual-en">Start Solving from Step 1</span></span>
+      <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+    </button>
+    <div class="stitch-cta-sub-grid">
+      <button type="button" class="stitch-cta-gray" onclick="scrollToSolSection()">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#006398">picture_as_pdf</span>
+        <span><span class="bilingual-ko">시각적 도형·원리 해설</span><span class="bilingual-en">Visual Proof & Solution</span></span>
+      </button>
+      <button type="button" class="stitch-cta-gray" onclick="var m=document.querySelector('.min7014-addon-card');if(m)m.scrollIntoView({behavior:'smooth'});">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#45464d">language</span>
+        <span><span class="bilingual-ko">수학자료실 웹 탐구</span><span class="bilingual-en">Explore Archive</span></span>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- STITCH_EXPLORER_START -->
+<!-- 5. Two-Pillar User Gateway: Teacher & Student Quick Action (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-gateway-grid">
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#006398">co_present</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#006398"><span class="bilingual-ko">교사·정식 회원 전용 · 수업 배포 (무료 가입)</span><span class="bilingual-en">MEMBERS ONLY · FREE CLASSROOM</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">3초 만에 수업 개설하기</span><span class="bilingual-en">Launch Classroom in 3 Seconds</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">무료 회원 로그인 후 즉시 고유 수업 코드를 생성하고, 칠판 빔프로젝터용 대형 QR코드와 학생 배포용 링크를 발급받으세요.</span><span class="bilingual-en">Sign in with your 100% free account to generate a classroom code, projector QR code, and student link in 3 seconds.</span></p>
+    <div class="stitch-gw-actions">
+      <button type="button" class="stitch-btn-azure" onclick="if(window.openClassCreatorModal)openClassCreatorModal('csat27_g25')">
+        <span class="material-symbols-outlined" style="font-size:18px">qr_code_2</span>
+        <span class="bilingual-ko">3초 수업 개설 (QR)</span><span class="bilingual-en">3-Sec Class QR</span>
+      </button>
+      <a href="../dashboard.html" class="stitch-cta-gray" style="height:44px;padding:0 14px">
+        <span class="material-symbols-outlined" style="font-size:18px">dashboard</span>
+        <span class="bilingual-ko">현황판</span><span class="bilingual-en">Dashboard</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stitch-gateway-card">
+    <div class="stitch-gw-head">
+      <span class="material-symbols-outlined" style="font-size:22px;color:#4F46E5">school</span>
+      <div>
+        <div class="stitch-gw-tag" style="color:#4F46E5"><span class="bilingual-ko">비회원·학생 · 100% 자유 풀이</span><span class="bilingual-en">STUDENTS & GUESTS · 100% FREE</span></div>
+        <div class="stitch-gw-title"><span class="bilingual-ko">수업 코드로 입장하기 (또는 자유 풀이)</span><span class="bilingual-en">Enter with Class Code or Name (Free Practice)</span></div>
+      </div>
+    </div>
+    <p class="stitch-gw-desc"><span class="bilingual-ko">회원가입 없이 누구나 전체 문제를 자유롭게 열람하고 단계별 풀이를 시작할 수 있습니다.</span><span class="bilingual-en">Anyone can freely view all problems and start step-by-step practice without signing up.</span></p>
+    <div class="stitch-gw-actions">
+      <input type="text" id="stitchStudentNameInline" class="stitch-gw-input" placeholder="6자리 수업 코드 또는 이름 입력" onkeydown="if(event.key==='Enter')stitchSaveInlineName()">
+      <button type="button" class="stitch-btn-enter" onclick="stitchSaveInlineName()">
+        <span class="bilingual-ko">입장 ➔</span><span class="bilingual-en">Join ➔</span>
+      </button>
+    </div>
+    <div class="stitch-gw-links">
+      <a href="#" style="color:#006398" onclick="if(window.MatheduAuth)MatheduAuth.showMyProblemsModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
+        <span class="bilingual-ko">내가 푼 문제 모아보기</span><span class="bilingual-en">My Solved Problems</span>
+      </a>
+      <a href="#" style="color:#45464d" onclick="if(window.MatheduAuth)MatheduAuth.showGuestLoginModal();return false;">
+        <span class="material-symbols-outlined" style="font-size:16px">manage_accounts</span>
+        <span class="bilingual-ko">익명 기록 연동</span><span class="bilingual-en">Sync Guest Record</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Precision Step Explorer Header & Filter Card (screens/bc0f63eb3a354cee8f964ce2bc461f3b) -->
+<div class="stitch-explorer-header" id="stitchQuizStepsSection">
+  <div class="stitch-explorer-title-wrap">
+    <span class="material-symbols-outlined" style="font-size:22px;color:#006398">tune</span>
+    <div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <h3 class="stitch-explorer-title"><span class="bilingual-ko">수능·모의평가 기출 정밀 탐색기</span><span class="bilingual-en">Step-by-Step Scaffolding Explorer</span></h3>
+        <span class="stitch-count-badge">총 6문항</span>
+      </div>
+      <span class="stitch-explorer-sub"><span class="bilingual-ko">학년도·선택과목·단계별 분류 즉시 추출 · 1~5단계 디딤돌 이동</span><span class="bilingual-en">Jump to Original Problem, Symbol Translator, or any Scaffolding Step</span></span>
+    </div>
+  </div>
+  <button type="button" class="stitch-circle-icon-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">
+    <span class="material-symbols-outlined" style="font-size:18px">restart_alt</span>
+  </button>
+</div>
+
+<div class="stitch-filter-card">
+  <div class="stitch-filter-group" style="padding-bottom:10px;border-bottom:1px dashed #e4e2e4;margin-bottom:4px">
+    <span class="stitch-filter-label" style="color:#006398"><span class="bilingual-ko">🔍 전체 기출 자연어 스마트 검색 (다른 문제 바로 찾기)</span><span class="bilingual-en">🔍 Natural-Language Smart Search Across All Problems</span></span>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input type="text" id="stitchGlobalSearchInput" placeholder="예: '9월 고3 확통 문제들', '10월 고3 미적분', '6월 기하 30번'..." onkeydown="if(event.key==='Enter')stitchRunGlobalSearch()" style="flex:1;min-width:210px;height:38px;background:#fcf8fa;border:1.5px solid #cbd5e1;border-radius:10px;padding:0 12px;font-size:0.84rem;font-weight:700;color:#1b1b1d;font-family:inherit;outline:none">
+      <button type="button" onclick="stitchRunGlobalSearch()" style="height:38px;padding:0 14px;border-radius:10px;border:none;background:#006398;color:#ffffff;font-size:0.8rem;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap"><span class="bilingual-ko">문제 검색 ➔</span><span class="bilingual-en">Search ➔</span></button>
+    </div>
+    <div class="stitch-pill-row" style="margin-top:4px">
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('9월 고3 확통 문제들')">✨ 9월 고3 확통 문제들</button>
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('10월 고3 확통 문제들')">📘 10월 고3 확통</button>
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('9월 고3 미적분 문제들')">📐 9월 고3 미적분</button>
+      <button type="button" class="stitch-step-pill" onclick="stitchRunGlobalSearch('10월 고3 기하 문제들')">🧭 10월 고3 기하</button>
+    </div>
+  </div>
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">학습 모드</span><span class="bilingual-en">Learning Mode</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-mode-pill active" data-stitch-mode-pill="all" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('all')"><span class="bilingual-ko">전체 펼쳐보기</span><span class="bilingual-en">View All Steps</span></button>
+      <button type="button" class="stitch-mode-pill" data-stitch-mode-pill="focus" onclick="if(window.toggleStitchStepMode)window.toggleStitchStepMode('focus')"><span class="bilingual-ko">단계별 집중 모드</span><span class="bilingual-en">Step Focus Mode</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="scrollToSolSection()"><span class="bilingual-ko">시각적 도형·상세 풀이</span><span class="bilingual-en">Visual Proof & Solution</span></button>
+      <button type="button" class="stitch-mode-pill" onclick="window.print()"><span class="bilingual-ko">A4 시험지 인쇄</span><span class="bilingual-en">Print A4 Worksheet</span></button>
+    </div>
+  </div>
+  <div class="stitch-filter-group">
+    <span class="stitch-filter-label"><span class="bilingual-ko">디딤돌 단계 선택</span><span class="bilingual-en">Select Scaffolding Step</span></span>
+    <div class="stitch-pill-row">
+      <button type="button" class="stitch-step-pill active" onclick="scrollToOrigCard()">원본 문제</button>
+      <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(0)">1단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(1)">2단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(2)">3단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(3)">4단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(4)">5단계</button>
+        <button type="button" class="stitch-step-pill" onclick="scrollToQuizStep(5)">최종 본문항</button>
+    </div>
+  </div>
+</div>
+<!-- STITCH_EXPLORER_END -->
+<h2>🔰 제0단계 · 수학 기호 번역기<span class="bilingual-en">🔰 Step 0 · Mathematical Symbol Translator</span></h2><div class="sym" id="examSymContainer"><div><b>$yz\text{평면 위}$</b> — x좌표가 0인 점 (0, y, z)들의 모임입니다.<div class="bilingual-en">The set of points whose x-coordinate is 0.</div></div><div><b>$x\text{축 위}$</b> — y좌표와 z좌표가 모두 0인 점 (x, 0, 0)들의 모임입니다.<div class="bilingual-en">The set of points whose y and z coordinates are both 0.</div></div><div><b>$m:n\text{ 내분 / 외분}$</b> — 각 좌표마다 $\dfrac{mx_B + nx_A}{m+n}$ (내분), $\dfrac{mx_B - nx_A}{m-n}$ (외분)으로 계산합니다.<div class="bilingual-en">Componentwise weighted average formulas for internal (+) and external (-) division.</div></div></div>
+<div id="examDynamicLevelsWrap">
+<h2>🔰 1단계 · [초등 기초 직관] 좌표평면과 공간에서 축·평면 위 점의 특징 알기<span class="bilingual-en">🔰 Step 1 · [Elementary Intuition] Zero Coordinates on Planes and Axes</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>앞뒤(x), 좌우(y), 높이(z) 중에서 yz평면은 x가 0인 벽이고, x축은 y=0, z=0인 바닥 선입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Points on the yz-plane have x=0; points on the x-axis have both y=0 and z=0.</div></div><div class="q" data-ans="2" data-exp="&lt;b&gt;✅ [제1단계 정답 및 핵심 해설]&lt;/b&gt;&lt;br&gt;$yz$평면은 $x=0$이고, $x$축은 $y=0$이면서 $z=0$입니다.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [제1단계 핵심 원리 및 유도 과정]&lt;/b&gt;&lt;br&gt;앞뒤(x), 좌우(y), 높이(z) 중에서 yz평면은 x가 0인 벽이고, x축은 y=0, z=0인 바닥 선입니다." data-exp-en="&lt;b&gt;✅ [Step 1 Answer &amp;amp; Explanation]&lt;/b&gt;&lt;br&gt;$yz$-plane means $x=0$; $x$-axis means $y=0$ and $z=0$.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [Step 1 Core Principle &amp;amp; Derivation]&lt;/b&gt;&lt;br&gt;Points on the yz-plane have x=0; points on the x-axis have both y=0 and z=0."><div class="lvl"><span class="bilingual-ko">초등 기초 직관 디딤돌 1</span><span class="bilingual-en">Elementary Intuition Step 1</span></div><div class="stem"><span class="bilingual-ko">좌표공간에서 어떤 점이 $yz$평면 위에 있을 때 반드시 $0$이 되어야 하는 좌표와, $x$축 위에 있을 때 반드시 $0$이 되어야 하는 좌표들을 바르게 짝지은 것은?</span><div class="bilingual-en">Which coordinate(s) must be $0$ for a point on the $yz$-plane and on the $x$-axis, respectively?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$x=0$ / $y=0$만</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$x=0$ / $y=0,\; z=0$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$y=0$ / $x=0,\; z=0$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$z=0$ / $x=0,\; y=0$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$y=0,\; z=0$ / $x=0$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🌿 2단계 · [내분점 식 세우기] $2:1$ 내분점의 $x$좌표 $= 0$으로 $a$ 구하기<span class="bilingual-en">🌿 Step 2 · [Internal Division] Finding $a$ from $x=0$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>선분 $\mathrm{AB}$를 $2:1$로 내분하는 점의 $x$좌표는 $\dfrac{2(-3) + 1 \cdot a}{2+1}$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The $x$-coordinate of the $2:1$ internal division point is $\frac{2(-3)+1\cdot a}{2+1}$.</div></div><div class="q" data-ans="4" data-exp="&lt;b&gt;✅ [제2단계 정답 및 핵심 해설]&lt;/b&gt;&lt;br&gt;$-6 + a = 0 \implies a = 6$입니다.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [제2단계 핵심 원리 및 유도 과정]&lt;/b&gt;&lt;br&gt;선분 $\mathrm{AB}$를 $2:1$로 내분하는 점의 $x$좌표는 $\dfrac{2(-3) + 1 \cdot a}{2+1}$입니다." data-exp-en="&lt;b&gt;✅ [Step 2 Answer &amp;amp; Explanation]&lt;/b&gt;&lt;br&gt;$-6+a=0 \implies a=6$.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [Step 2 Core Principle &amp;amp; Derivation]&lt;/b&gt;&lt;br&gt;The $x$-coordinate of the $2:1$ internal division point is $\frac{2(-3)+1\cdot a}{2+1}$."><div class="lvl"><span class="bilingual-ko">내분점 $a$ 구하기 디딤돌 2</span><span class="bilingual-en">Internal Division Step 2</span></div><div class="stem"><span class="bilingual-ko">$\dfrac{2(-3) + a}{3} = 0$에서 $a$의 값은?</span><div class="bilingual-en">Solving $\dfrac{2(-3)+a}{3}=0$ gives what value for $a$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$3$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$5$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$6$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$9$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🌱 3단계 · [외분점 $y$좌표] $3:2$ 외분점의 $y$좌표 $= 0$으로 $b$ 구하기<span class="bilingual-en">🌱 Step 3 · [External Division $y$] Finding $b$ from $y=0$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $y$좌표는 $\dfrac{3b - 2(-3)}{3-2}$이며, $x$축 위이므로 $0$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The $y$-coordinate of the $3:2$ external division point is $\frac{3b-2(-3)}{3-2}=0$.</div></div><div class="q" data-ans="2" data-exp="&lt;b&gt;✅ [제3단계 정답 및 핵심 해설]&lt;/b&gt;&lt;br&gt;$3b + 6 = 0 \implies 3b = -6 \implies b = -2$입니다.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [제3단계 핵심 원리 및 유도 과정]&lt;/b&gt;&lt;br&gt;선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $y$좌표는 $\dfrac{3b - 2(-3)}{3-2}$이며, $x$축 위이므로 $0$입니다." data-exp-en="&lt;b&gt;✅ [Step 3 Answer &amp;amp; Explanation]&lt;/b&gt;&lt;br&gt;$3b+6=0 \implies b=-2$.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [Step 3 Core Principle &amp;amp; Derivation]&lt;/b&gt;&lt;br&gt;The $y$-coordinate of the $3:2$ external division point is $\frac{3b-2(-3)}{3-2}=0$."><div class="lvl"><span class="bilingual-ko">외분점 $b$ 구하기 디딤돌 3</span><span class="bilingual-en">External Division $y$ Step 3</span></div><div class="stem"><span class="bilingual-ko">$\dfrac{3b - 2(-3)}{3-2} = 0$에서 $b$의 값은?</span><div class="bilingual-en">Solving $\dfrac{3b-2(-3)}{3-2}=0$ yields what value for $b$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$-3$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$-2$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$-1$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$3$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>🌳 4단계 · [외분점 $z$좌표] $3:2$ 외분점의 $z$좌표 $= 0$으로 $c$ 구하기<span class="bilingual-en">🌳 Step 4 · [External Division $z$] Finding $c$ from $z=0$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $z$좌표는 $\dfrac{3c - 2(6)}{3-2}$이며, 마찬가지로 $0$입니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> The $z$-coordinate of the $3:2$ external division point is $\frac{3c-2(6)}{3-2}=0$.</div></div><div class="q" data-ans="3" data-exp="&lt;b&gt;✅ [제4단계 정답 및 핵심 해설]&lt;/b&gt;&lt;br&gt;$3c - 12 = 0 \implies c = 4$입니다.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [제4단계 핵심 원리 및 유도 과정]&lt;/b&gt;&lt;br&gt;선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $z$좌표는 $\dfrac{3c - 2(6)}{3-2}$이며, 마찬가지로 $0$입니다." data-exp-en="&lt;b&gt;✅ [Step 4 Answer &amp;amp; Explanation]&lt;/b&gt;&lt;br&gt;$3c-12=0 \implies c=4$.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [Step 4 Core Principle &amp;amp; Derivation]&lt;/b&gt;&lt;br&gt;The $z$-coordinate of the $3:2$ external division point is $\frac{3c-2(6)}{3-2}=0$."><div class="lvl"><span class="bilingual-ko">외분점 $c$ 구하기 디딤돌 4</span><span class="bilingual-en">External Division $z$ Step 4</span></div><div class="stem"><span class="bilingual-ko">$\dfrac{3c - 2(6)}{3-2} = 0$에서 $c$의 값은?</span><div class="bilingual-en">Solving $\dfrac{3c-12}{1}=0$ gives what value for $c$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$2$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$3$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$4$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$6$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$8$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div><h2>💎 5단계 · [최종 종합] $a + b + c$의 값 구하기<span class="bilingual-en">💎 Step 5 · [Final Synthesis] Computing $a+b+c$</span></h2><div class="know"><h3>먼저 알아야 할 지식</h3>앞서 구한 $a=6$, $b=-2$, $c=4$를 모두 더합니다.<div class="bilingual-en"><b>Prerequisite Knowledge:</b> Sum $a=6$, $b=-2$, and $c=4$.</div></div><div class="q" data-ans="3" data-exp="&lt;b&gt;✅ [제5단계 정답 및 핵심 해설]&lt;/b&gt;&lt;br&gt;$a+b+c = 6 + (-2) + 4 = 8$이므로 정답은 ③번입니다.&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [제5단계 핵심 원리 및 유도 과정]&lt;/b&gt;&lt;br&gt;앞서 구한 $a=6$, $b=-2$, $c=4$를 모두 더합니다." data-exp-en="&lt;b&gt;✅ [Step 5 Answer &amp;amp; Explanation]&lt;/b&gt;&lt;br&gt;$6-2+4=8$ (choice ③).&lt;br&gt;&lt;br&gt;&lt;b&gt;📖 [Step 5 Core Principle &amp;amp; Derivation]&lt;/b&gt;&lt;br&gt;Sum $a=6$, $b=-2$, and $c=4$."><div class="lvl"><span class="bilingual-ko">최종 종합 디딤돌 5</span><span class="bilingual-en">Final Synthesis Step 5</span></div><div class="stem"><span class="bilingual-ko">$a=6$, $b=-2$, $c=4$일 때, $a + b + c$의 값은?</span><div class="bilingual-en">What is $a+b+c$ for $a=6, b=-2, c=4$?</div></div><div class="opts"><div class="opt"><span class="n">1</span><span class="opt-txt">$6$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$7$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$8$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$9$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$10$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div>
+</div>
+<div id="trackFull" style="position:fixed;inset:0;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(252,248,250,0.97);padding:24px;text-align:center"><h3 style="color:#131b2e;margin:0 0 6px;font-weight:800">📝 학습자 이름 등록 (선택)</h3><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><input type="text" id="studentName" placeholder="이름 입력" style="background:#ffffff;color:#1b1b1d;border:1.5px solid #c5c6cd;border-radius:10px;padding:12px 16px;font-size:1.05rem;min-width:200px;text-align:center"><button class="btn" onclick="registerName()" style="font-size:1.05rem;padding:12px 24px"><span class="bilingual-ko">시작하기</span><span class="bilingual-en">Start</span></button></div></div>
+<h2>🎯 최종 문제 + 상세 풀이<span class="bilingual-en">🎯 Final Official Exam Problem &amp; Complete Solution</span></h2><div class="sol" id="examSolContainer">
+  <div class="bilingual-ko">
+<h4>📋 [문제 분석 및 핵심 출제 의도]</h4>
+<p>본 문항은 좌표공간에서 <b>평면($yz$평면: $x=0$)</b>과 <b>좌표축($x$축: $y=0, z=0$)</b>의 방정식을 정확히 알고, 성분별 <b>내분점·외분점 공식</b>을 적용해 미지수를 독립적으로 분리해 내는 문항입니다.</p>
+<h4>🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]</h4>
+<figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 252" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f8fafc 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 14px rgba(15,23,42,0.06)"><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#0369a1" font-size="11.8" font-weight="800" font-family="sans-serif">📐 [2027 수능 기하 25번] 좌표공간 내분점(yz평면) &amp;amp; 외분점(x축) 분해</text><text x="656" y="31" fill="#047857" font-size="11.8" font-weight="800" text-anchor="end" font-family="sans-serif">a=6, b=-2, c=4 ⇒ 8</text><rect x="24" y="54" width="312" height="184" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/><text x="180" y="78" fill="#0369a1" font-size="12" font-weight="800" text-anchor="middle">① yz평면 위 (x좌표=0): 2:1 내분점</text><line x1="56" y1="126" x2="304" y2="126" stroke="#2563eb" stroke-width="2.6"/><circle cx="56" cy="126" r="5" fill="#1d4ed8"/><text x="56" y="112" fill="#1d4ed8" font-size="11" font-weight="800" text-anchor="middle">A(a,-3,6)</text><circle cx="221" cy="126" r="5.5" fill="#be123c"/><text x="221" y="110" fill="#be123c" font-size="11" font-weight="900" text-anchor="middle">내분점 P(x=0)</text><circle cx="304" cy="126" r="5" fill="#059669"/><text x="304" y="112" fill="#059669" font-size="11" font-weight="800" text-anchor="middle">B(-3,b,c)</text><text x="138" y="146" fill="#334155" font-size="11" font-weight="700" text-anchor="middle">2</text><text x="262" y="146" fill="#334155" font-size="11" font-weight="700" text-anchor="middle">1</text><rect x="44" y="164" width="272" height="58" rx="8" fill="#eff6ff" stroke="#60a5fa"/><text x="180" y="187" fill="#1e3a8a" font-size="12" font-weight="800" text-anchor="middle">(2×(-3) + 1×a) / 3 = 0</text><text x="180" y="209" fill="#be123c" font-size="13" font-weight="900" text-anchor="middle">⇒ a - 6 = 0 ⇒ a = 6</text><rect x="352" y="54" width="304" height="184" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/><text x="504" y="78" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">② x축 위 (y=0, z=0): 3:2 외분점</text><rect x="370" y="94" width="268" height="40" rx="8" fill="#ecfdf5" stroke="#34d399"/><text x="504" y="119" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">y좌표: (3b - 2(-3)) / (3-2) = 0 ⇒ b = -2</text><rect x="370" y="144" width="268" height="40" rx="8" fill="#ecfdf5" stroke="#34d399"/><text x="504" y="169" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">z좌표: (3c - 2(6)) / (3-2) = 0 ⇒ c = 4</text><rect x="394" y="194" width="220" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b"/><text x="504" y="216" fill="#92400e" font-size="13" font-weight="900" text-anchor="middle">a + b + c = 6 - 2 + 4 = 8 (③)</text></svg><figcaption style="margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55">▲ x좌표(내분점=0)에서 a=6이 바로 풀리고, y·z좌표(외분점=0)에서 b=-2, c=4가 독립적으로 결정됩니다.</figcaption></figure><h4>🗺️ [한눈에 보는 도식화 풀이 흐름도 (Schematic Solution Flowchart)]</h4>
+<section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px"><table style="width:100%;border-collapse:separate;border-spacing:4px"><tr><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 1 · 조건 해독</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">$2:1$ 내분점 $\in yz$평면 ➔ $x=0$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 2 · 핵심 원리</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">$\frac{-6+a}{3}=0 \implies a=6$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 3 · 기하·수식 전개</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">$3:2$ 외분점 $\in x$축 ➔ $y=z=0$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 4 · 결합 계산</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">$b=-2, c=4 \implies a+b+c=8$</span></td><td style="text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.05rem;padding:0 3px">⇒</td><td style="background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 11px;vertical-align:middle;text-align:center;width:15%"><b style="color:#047857;font-size:0.77rem;display:block;margin-bottom:4px">🎯 최종 정답</b><b style="color:#065f46;font-size:0.96rem">$8$ (③)</b></td></tr></table></section><h4>📐 [단계별 상세 풀이 전개]</h4>
+<p><b>1단계: $2:1$ 내분점의 $x$좌표 조건</b><br>선분 $\mathrm{AB}$를 $2:1$로 내분하는 점은 $yz$평면($x=0$) 위에 있으므로 $x$좌표가 $0$입니다. $$\frac{2 \cdot (-3) + 1 \cdot a}{2+1} = 0 \implies a - 6 = 0 \implies a = 6$$<br><br><b>2단계: $3:2$ 외분점의 $y, z$좌표 조건</b><br>선분 $\mathrm{AB}$를 $3:2$로 외분하는 점은 $x$축($y=0,\; z=0$) 위에 있으므로 $y, z$좌표가 모두 $0$입니다. $$\frac{3b - 2(-3)}{3-2} = 3b + 6 = 0 \implies b = -2, \qquad \frac{3c - 2(6)}{3-2} = 3c - 12 = 0 \implies c = 4$$</p>
+
+<h4>🪜 [초등 눈높이 디딤돌 전 단계(1단계~5단계) 완전 연결 상세 해설]</h4>
+<p>위 디딤돌 문제에서 밟아 온 $1$단계부터 $5$단계까지의 작은 조각들을 순서대로 연결하면 본문항의 풀이가 빈틈없이 완성됩니다.</p>
+<ul>
+  <li><b>🔰 1단계 · [초등 기초 직관] 좌표평면과 공간에서 축·평면 위 점의 특징 알기</b><br>    &nbsp;&nbsp;• <b>핵심 개념 및 원리</b>: 앞뒤(x), 좌우(y), 높이(z) 중에서 yz평면은 x가 0인 벽이고, x축은 y=0, z=0인 바닥 선입니다.<br>    &nbsp;&nbsp;• <b>단계 확인 정답 ($x=0$ / $y=0,\; z=0$)</b>: $yz$평면은 $x=0$이고, $x$축은 $y=0$이면서 $z=0$입니다.</li>
+  <li><b>🌿 2단계 · [내분점 식 세우기] $2:1$ 내분점의 $x$좌표 $= 0$으로 $a$ 구하기</b><br>    &nbsp;&nbsp;• <b>핵심 개념 및 원리</b>: 선분 $\mathrm{AB}$를 $2:1$로 내분하는 점의 $x$좌표는 $\dfrac{2(-3) + 1 \cdot a}{2+1}$입니다.<br>    &nbsp;&nbsp;• <b>단계 확인 정답 ($6$)</b>: $-6 + a = 0 \implies a = 6$입니다.</li>
+  <li><b>🌱 3단계 · [외분점 $y$좌표] $3:2$ 외분점의 $y$좌표 $= 0$으로 $b$ 구하기</b><br>    &nbsp;&nbsp;• <b>핵심 개념 및 원리</b>: 선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $y$좌표는 $\dfrac{3b - 2(-3)}{3-2}$이며, $x$축 위이므로 $0$입니다.<br>    &nbsp;&nbsp;• <b>단계 확인 정답 ($-2$)</b>: $3b + 6 = 0 \implies 3b = -6 \implies b = -2$입니다.</li>
+  <li><b>🌳 4단계 · [외분점 $z$좌표] $3:2$ 외분점의 $z$좌표 $= 0$으로 $c$ 구하기</b><br>    &nbsp;&nbsp;• <b>핵심 개념 및 원리</b>: 선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $z$좌표는 $\dfrac{3c - 2(6)}{3-2}$이며, 마찬가지로 $0$입니다.<br>    &nbsp;&nbsp;• <b>단계 확인 정답 ($4$)</b>: $3c - 12 = 0 \implies c = 4$입니다.</li>
+  <li><b>💎 5단계 · [최종 종합] $a + b + c$의 값 구하기</b><br>    &nbsp;&nbsp;• <b>핵심 개념 및 원리</b>: 앞서 구한 $a=6$, $b=-2$, $c=4$를 모두 더합니다.<br>    &nbsp;&nbsp;• <b>단계 확인 정답 ($8$)</b>: $a+b+c = 6 + (-2) + 4 = 8$이므로 정답은 ③번입니다.</li>
+</ul>
+
+<h4>✨ [정답 도출 및 실전 점검 포인트]</h4>
+<p>따라서 $a+b+c = 6 + (-2) + 4 = 8$이므로 정답은 <b>③번</b>입니다. (덧셈 실수를 막기 위해 내분점과 외분점 비율의 교차 곱셈 순서 $mB \pm nA$를 꼭 검산하고, <a href="https://min7014.github.io/" target="_blank" rel="noopener">수학자료실(min7014.github.io)</a>의 공간좌표 자료도 함께 살펴보세요.)</p>
+  </div>
+  <div class="bilingual-en">
+<h4>📋 [Problem Analysis &amp; Core Concepts]</h4>
+<p>Use $x=0$ on the $yz$-plane for the $2:1$ internal division point and $y=z=0$ on the $x$-axis for the $3:2$ external division point.</p>
+<h4>🎨 [Visual Geometric &amp; Conceptual Diagram]</h4>
+<figure class="math-visual-diagram" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center"><svg class="mathedu-bespoke-svg" viewBox="0 0 680 252" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f8fafc 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 14px rgba(15,23,42,0.06)"><rect x="12" y="10" width="656" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/><text x="24" y="31" fill="#0369a1" font-size="11.8" font-weight="800" font-family="sans-serif">📐 [2027 CSAT Geometry #25] Decoupled 3D Division Coordinates</text><text x="656" y="31" fill="#047857" font-size="11.8" font-weight="800" text-anchor="end" font-family="sans-serif">a=6, b=-2, c=4 =&gt; 8</text><rect x="24" y="54" width="312" height="184" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/><text x="180" y="78" fill="#0369a1" font-size="12" font-weight="800" text-anchor="middle">① yz평면 위 (x좌표=0): 2:1 내분점</text><line x1="56" y1="126" x2="304" y2="126" stroke="#2563eb" stroke-width="2.6"/><circle cx="56" cy="126" r="5" fill="#1d4ed8"/><text x="56" y="112" fill="#1d4ed8" font-size="11" font-weight="800" text-anchor="middle">A(a,-3,6)</text><circle cx="221" cy="126" r="5.5" fill="#be123c"/><text x="221" y="110" fill="#be123c" font-size="11" font-weight="900" text-anchor="middle">내분점 P(x=0)</text><circle cx="304" cy="126" r="5" fill="#059669"/><text x="304" y="112" fill="#059669" font-size="11" font-weight="800" text-anchor="middle">B(-3,b,c)</text><text x="138" y="146" fill="#334155" font-size="11" font-weight="700" text-anchor="middle">2</text><text x="262" y="146" fill="#334155" font-size="11" font-weight="700" text-anchor="middle">1</text><rect x="44" y="164" width="272" height="58" rx="8" fill="#eff6ff" stroke="#60a5fa"/><text x="180" y="187" fill="#1e3a8a" font-size="12" font-weight="800" text-anchor="middle">(2×(-3) + 1×a) / 3 = 0</text><text x="180" y="209" fill="#be123c" font-size="13" font-weight="900" text-anchor="middle">⇒ a - 6 = 0 ⇒ a = 6</text><rect x="352" y="54" width="304" height="184" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/><text x="504" y="78" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">② x축 위 (y=0, z=0): 3:2 외분점</text><rect x="370" y="94" width="268" height="40" rx="8" fill="#ecfdf5" stroke="#34d399"/><text x="504" y="119" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">y좌표: (3b - 2(-3)) / (3-2) = 0 ⇒ b = -2</text><rect x="370" y="144" width="268" height="40" rx="8" fill="#ecfdf5" stroke="#34d399"/><text x="504" y="169" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">z좌표: (3c - 2(6)) / (3-2) = 0 ⇒ c = 4</text><rect x="394" y="194" width="220" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b"/><text x="504" y="216" fill="#92400e" font-size="13" font-weight="900" text-anchor="middle">a + b + c = 6 - 2 + 4 = 8 (③)</text></svg><figcaption style="margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55">▲ Each coordinate equation decouples cleanly to give a=6, b=-2, and c=4.</figcaption></figure><h4>🗺️ [At-a-Glance Schematic Solution Flowchart]</h4>
+<section class="math-schematic-flow" style="margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px"><table style="width:100%;border-collapse:separate;border-spacing:4px"><tr><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 1 · Condition</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">Internal $2:1 \in yz$-plane ($x=0$)</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 2 · Core Principle</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">$(-6+a)/3=0 \implies a=6$</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 3 · Derivation</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">External $3:2 \in x$-axis ($y=z=0$)</span></td><td style="text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px">➔</td><td style="background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%"><b style="color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px">STEP 4 · Synthesis</b><span style="color:#1e293b;font-size:0.85rem;line-height:1.45">$b=-2, c=4 \implies a+b+c=8$</span></td><td style="text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.05rem;padding:0 3px">⇒</td><td style="background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 11px;vertical-align:middle;text-align:center;width:15%"><b style="color:#047857;font-size:0.77rem;display:block;margin-bottom:4px">🎯 Final Answer</b><b style="color:#065f46;font-size:0.96rem">$8$ (③)</b></td></tr></table></section><h4>📐 [Step-by-Step Rigorous Derivation]</h4>
+<p>Internal $2:1$ $x$-coord: $\frac{-6+a}{3}=0 \implies a=6$. External $3:2$ $y,z$-coords: $3b+6=0 \implies b=-2$ and $3c-12=0 \implies c=4$. Thus $a+b+c=8$.</p>
+
+<h4>🪜 [Complete Step-by-Step Scaffolding Walkthrough (Steps 1–5)]</h4>
+<p>Connecting each elementary-grounded scaffolding step from Step 1 to Step 5 completes the entire derivation without any logical gaps:</p>
+<ul>
+  <li><b>🔰 Step 1 · [Elementary Intuition] Zero Coordinates on Planes and Axes</b><br>    &nbsp;&nbsp;• <b>Core Principle</b>: Points on the yz-plane have x=0; points on the x-axis have both y=0 and z=0.<br>    &nbsp;&nbsp;• <b>Step Verification ($x=0$ / $y=0,\; z=0$)</b>: $yz$-plane means $x=0$; $x$-axis means $y=0$ and $z=0$.</li>
+  <li><b>🌿 Step 2 · [Internal Division] Finding $a$ from $x=0$</b><br>    &nbsp;&nbsp;• <b>Core Principle</b>: The $x$-coordinate of the $2:1$ internal division point is $\frac{2(-3)+1\cdot a}{2+1}$.<br>    &nbsp;&nbsp;• <b>Step Verification ($6$)</b>: $-6+a=0 \implies a=6$.</li>
+  <li><b>🌱 Step 3 · [External Division $y$] Finding $b$ from $y=0$</b><br>    &nbsp;&nbsp;• <b>Core Principle</b>: The $y$-coordinate of the $3:2$ external division point is $\frac{3b-2(-3)}{3-2}=0$.<br>    &nbsp;&nbsp;• <b>Step Verification ($-2$)</b>: $3b+6=0 \implies b=-2$.</li>
+  <li><b>🌳 Step 4 · [External Division $z$] Finding $c$ from $z=0$</b><br>    &nbsp;&nbsp;• <b>Core Principle</b>: The $z$-coordinate of the $3:2$ external division point is $\frac{3c-2(6)}{3-2}=0$.<br>    &nbsp;&nbsp;• <b>Step Verification ($4$)</b>: $3c-12=0 \implies c=4$.</li>
+  <li><b>💎 Step 5 · [Final Synthesis] Computing $a+b+c$</b><br>    &nbsp;&nbsp;• <b>Core Principle</b>: Sum $a=6$, $b=-2$, and $c=4$.<br>    &nbsp;&nbsp;• <b>Step Verification ($8$)</b>: $6-2+4=8$ (choice ③).</li>
+</ul>
+
+<h4>✨ [Conclusion &amp; Key Takeaways]</h4>
+<p>Therefore, $a+b+c = 8$, which corresponds to <b>choice ③</b>.</p>
+  </div>
+</div><div class="q" data-ans="3" data-exp="&lt;b&gt;📌 [최종 본문항 핵심 요약]&lt;/b&gt;&lt;br&gt;$2:1$ 내분점의 $x$좌표 $\frac{-6+a}{3}=0 \implies a=6$, $3:2$ 외분점의 $y, z$좌표 $\frac{3b+6}{1}=0 \implies b=-2$, $\frac{3c-12}{1}=0 \implies c=4$이므로 $a+b+c = 6-2+4 = 8$입니다.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(0,99,152,.28);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [문제 분석 및 핵심 출제 의도]&lt;/h4&gt;
+&lt;p&gt;본 문항은 좌표공간에서 &lt;b&gt;평면($yz$평면: $x=0$)&lt;/b&gt;과 &lt;b&gt;좌표축($x$축: $y=0, z=0$)&lt;/b&gt;의 방정식을 정확히 알고, 성분별 &lt;b&gt;내분점·외분점 공식&lt;/b&gt;을 적용해 미지수를 독립적으로 분리해 내는 문항입니다.&lt;/p&gt;
+&lt;h4&gt;🎨 [그림으로 이해하는 시각적 도형·개념 다이어그램]&lt;/h4&gt;
+&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 252&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f8fafc 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 14px rgba(15,23,42,0.06)&quot;&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#0369a1&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [2027 수능 기하 25번] 좌표공간 내분점(yz평면) &amp;amp;amp; 외분점(x축) 분해&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#047857&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;a=6, b=-2, c=4 ⇒ 8&lt;/text&gt;&lt;rect x=&quot;24&quot; y=&quot;54&quot; width=&quot;312&quot; height=&quot;184&quot; rx=&quot;12&quot; fill=&quot;#ffffff&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;text x=&quot;180&quot; y=&quot;78&quot; fill=&quot;#0369a1&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;① yz평면 위 (x좌표=0): 2:1 내분점&lt;/text&gt;&lt;line x1=&quot;56&quot; y1=&quot;126&quot; x2=&quot;304&quot; y2=&quot;126&quot; stroke=&quot;#2563eb&quot; stroke-width=&quot;2.6&quot;/&gt;&lt;circle cx=&quot;56&quot; cy=&quot;126&quot; r=&quot;5&quot; fill=&quot;#1d4ed8&quot;/&gt;&lt;text x=&quot;56&quot; y=&quot;112&quot; fill=&quot;#1d4ed8&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;A(a,-3,6)&lt;/text&gt;&lt;circle cx=&quot;221&quot; cy=&quot;126&quot; r=&quot;5.5&quot; fill=&quot;#be123c&quot;/&gt;&lt;text x=&quot;221&quot; y=&quot;110&quot; fill=&quot;#be123c&quot; font-size=&quot;11&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;내분점 P(x=0)&lt;/text&gt;&lt;circle cx=&quot;304&quot; cy=&quot;126&quot; r=&quot;5&quot; fill=&quot;#059669&quot;/&gt;&lt;text x=&quot;304&quot; y=&quot;112&quot; fill=&quot;#059669&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;B(-3,b,c)&lt;/text&gt;&lt;text x=&quot;138&quot; y=&quot;146&quot; fill=&quot;#334155&quot; font-size=&quot;11&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;2&lt;/text&gt;&lt;text x=&quot;262&quot; y=&quot;146&quot; fill=&quot;#334155&quot; font-size=&quot;11&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;1&lt;/text&gt;&lt;rect x=&quot;44&quot; y=&quot;164&quot; width=&quot;272&quot; height=&quot;58&quot; rx=&quot;8&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#60a5fa&quot;/&gt;&lt;text x=&quot;180&quot; y=&quot;187&quot; fill=&quot;#1e3a8a&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(2×(-3) + 1×a) / 3 = 0&lt;/text&gt;&lt;text x=&quot;180&quot; y=&quot;209&quot; fill=&quot;#be123c&quot; font-size=&quot;13&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;⇒ a - 6 = 0 ⇒ a = 6&lt;/text&gt;&lt;rect x=&quot;352&quot; y=&quot;54&quot; width=&quot;304&quot; height=&quot;184&quot; rx=&quot;12&quot; fill=&quot;#ffffff&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;78&quot; fill=&quot;#047857&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;② x축 위 (y=0, z=0): 3:2 외분점&lt;/text&gt;&lt;rect x=&quot;370&quot; y=&quot;94&quot; width=&quot;268&quot; height=&quot;40&quot; rx=&quot;8&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#34d399&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;119&quot; fill=&quot;#047857&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;y좌표: (3b - 2(-3)) / (3-2) = 0 ⇒ b = -2&lt;/text&gt;&lt;rect x=&quot;370&quot; y=&quot;144&quot; width=&quot;268&quot; height=&quot;40&quot; rx=&quot;8&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#34d399&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;169&quot; fill=&quot;#047857&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;z좌표: (3c - 2(6)) / (3-2) = 0 ⇒ c = 4&lt;/text&gt;&lt;rect x=&quot;394&quot; y=&quot;194&quot; width=&quot;220&quot; height=&quot;34&quot; rx=&quot;8&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;216&quot; fill=&quot;#92400e&quot; font-size=&quot;13&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;a + b + c = 6 - 2 + 4 = 8 (③)&lt;/text&gt;&lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ x좌표(내분점=0)에서 a=6이 바로 풀리고, y·z좌표(외분점=0)에서 b=-2, c=4가 독립적으로 결정됩니다.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [한눈에 보는 도식화 풀이 흐름도 (Schematic Solution Flowchart)]&lt;/h4&gt;
+&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · 조건 해독&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;$2:1$ 내분점 $\in yz$평면 ➔ $x=0$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · 핵심 원리&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;$\frac{-6+a}{3}=0 \implies a=6$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · 기하·수식 전개&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;$3:2$ 외분점 $\in x$축 ➔ $y=z=0$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 4 · 결합 계산&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;$b=-2, c=4 \implies a+b+c=8$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 11px;vertical-align:middle;text-align:center;width:15%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;🎯 최종 정답&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.96rem&quot;&gt;$8$ (③)&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/section&gt;&lt;h4&gt;📐 [단계별 상세 풀이 전개]&lt;/h4&gt;
+&lt;p&gt;&lt;b&gt;1단계: $2:1$ 내분점의 $x$좌표 조건&lt;/b&gt;&lt;br&gt;선분 $\mathrm{AB}$를 $2:1$로 내분하는 점은 $yz$평면($x=0$) 위에 있으므로 $x$좌표가 $0$입니다. $$\frac{2 \cdot (-3) + 1 \cdot a}{2+1} = 0 \implies a - 6 = 0 \implies a = 6$$&lt;br&gt;&lt;br&gt;&lt;b&gt;2단계: $3:2$ 외분점의 $y, z$좌표 조건&lt;/b&gt;&lt;br&gt;선분 $\mathrm{AB}$를 $3:2$로 외분하는 점은 $x$축($y=0,\; z=0$) 위에 있으므로 $y, z$좌표가 모두 $0$입니다. $$\frac{3b - 2(-3)}{3-2} = 3b + 6 = 0 \implies b = -2, \qquad \frac{3c - 2(6)}{3-2} = 3c - 12 = 0 \implies c = 4$$&lt;/p&gt;
+
+&lt;h4&gt;🪜 [초등 눈높이 디딤돌 전 단계(1단계~5단계) 완전 연결 상세 해설]&lt;/h4&gt;
+&lt;p&gt;위 디딤돌 문제에서 밟아 온 $1$단계부터 $5$단계까지의 작은 조각들을 순서대로 연결하면 본문항의 풀이가 빈틈없이 완성됩니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;🔰 1단계 · [초등 기초 직관] 좌표평면과 공간에서 축·평면 위 점의 특징 알기&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 개념 및 원리&lt;/b&gt;: 앞뒤(x), 좌우(y), 높이(z) 중에서 yz평면은 x가 0인 벽이고, x축은 y=0, z=0인 바닥 선입니다.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 확인 정답 ($x=0$ / $y=0,\; z=0$)&lt;/b&gt;: $yz$평면은 $x=0$이고, $x$축은 $y=0$이면서 $z=0$입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;🌿 2단계 · [내분점 식 세우기] $2:1$ 내분점의 $x$좌표 $= 0$으로 $a$ 구하기&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 개념 및 원리&lt;/b&gt;: 선분 $\mathrm{AB}$를 $2:1$로 내분하는 점의 $x$좌표는 $\dfrac{2(-3) + 1 \cdot a}{2+1}$입니다.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 확인 정답 ($6$)&lt;/b&gt;: $-6 + a = 0 \implies a = 6$입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;🌱 3단계 · [외분점 $y$좌표] $3:2$ 외분점의 $y$좌표 $= 0$으로 $b$ 구하기&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 개념 및 원리&lt;/b&gt;: 선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $y$좌표는 $\dfrac{3b - 2(-3)}{3-2}$이며, $x$축 위이므로 $0$입니다.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 확인 정답 ($-2$)&lt;/b&gt;: $3b + 6 = 0 \implies 3b = -6 \implies b = -2$입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;🌳 4단계 · [외분점 $z$좌표] $3:2$ 외분점의 $z$좌표 $= 0$으로 $c$ 구하기&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 개념 및 원리&lt;/b&gt;: 선분 $\mathrm{AB}$를 $3:2$로 외분하는 점의 $z$좌표는 $\dfrac{3c - 2(6)}{3-2}$이며, 마찬가지로 $0$입니다.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 확인 정답 ($4$)&lt;/b&gt;: $3c - 12 = 0 \implies c = 4$입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;💎 5단계 · [최종 종합] $a + b + c$의 값 구하기&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;핵심 개념 및 원리&lt;/b&gt;: 앞서 구한 $a=6$, $b=-2$, $c=4$를 모두 더합니다.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;단계 확인 정답 ($8$)&lt;/b&gt;: $a+b+c = 6 + (-2) + 4 = 8$이므로 정답은 ③번입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;✨ [정답 도출 및 실전 점검 포인트]&lt;/h4&gt;
+&lt;p&gt;따라서 $a+b+c = 6 + (-2) + 4 = 8$이므로 정답은 &lt;b&gt;③번&lt;/b&gt;입니다. (덧셈 실수를 막기 위해 내분점과 외분점 비율의 교차 곱셈 순서 $mB \pm nA$를 꼭 검산하고, &lt;a href=&quot;https://min7014.github.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;수학자료실(min7014.github.io)&lt;/a&gt;의 공간좌표 자료도 함께 살펴보세요.)&lt;/p&gt;" data-exp-en="&lt;b&gt;📌 [Final Problem Core Summary]&lt;/b&gt;&lt;br&gt;From $\frac{-6+a}{3}=0 \implies a=6$, $3b+6=0 \implies b=-2$, and $3c-12=0 \implies c=4$, we obtain $a+b+c=8$.&lt;hr style=&quot;border:none;border-top:1px dashed rgba(0,99,152,.28);margin:12px 0&quot;&gt;&lt;h4&gt;📋 [Problem Analysis &amp;amp; Core Concepts]&lt;/h4&gt;
+&lt;p&gt;Use $x=0$ on the $yz$-plane for the $2:1$ internal division point and $y=z=0$ on the $x$-axis for the $3:2$ external division point.&lt;/p&gt;
+&lt;h4&gt;🎨 [Visual Geometric &amp;amp; Conceptual Diagram]&lt;/h4&gt;
+&lt;figure class=&quot;math-visual-diagram&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:14px;text-align:center&quot;&gt;&lt;svg class=&quot;mathedu-bespoke-svg&quot; viewBox=&quot;0 0 680 252&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:680px;height:auto;display:block;margin:0 auto;border-radius:12px;background:linear-gradient(145deg,#ffffff 0%,#f8fafc 100%);border:1.5px solid #cbd5e1;box-shadow:0 4px 14px rgba(15,23,42,0.06)&quot;&gt;&lt;rect x=&quot;12&quot; y=&quot;10&quot; width=&quot;656&quot; height=&quot;32&quot; rx=&quot;8&quot; fill=&quot;#e0f2fe&quot; stroke=&quot;#7dd3fc&quot;/&gt;&lt;text x=&quot;24&quot; y=&quot;31&quot; fill=&quot;#0369a1&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; font-family=&quot;sans-serif&quot;&gt;📐 [2027 CSAT Geometry #25] Decoupled 3D Division Coordinates&lt;/text&gt;&lt;text x=&quot;656&quot; y=&quot;31&quot; fill=&quot;#047857&quot; font-size=&quot;11.8&quot; font-weight=&quot;800&quot; text-anchor=&quot;end&quot; font-family=&quot;sans-serif&quot;&gt;a=6, b=-2, c=4 =&amp;gt; 8&lt;/text&gt;&lt;rect x=&quot;24&quot; y=&quot;54&quot; width=&quot;312&quot; height=&quot;184&quot; rx=&quot;12&quot; fill=&quot;#ffffff&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;text x=&quot;180&quot; y=&quot;78&quot; fill=&quot;#0369a1&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;① yz평면 위 (x좌표=0): 2:1 내분점&lt;/text&gt;&lt;line x1=&quot;56&quot; y1=&quot;126&quot; x2=&quot;304&quot; y2=&quot;126&quot; stroke=&quot;#2563eb&quot; stroke-width=&quot;2.6&quot;/&gt;&lt;circle cx=&quot;56&quot; cy=&quot;126&quot; r=&quot;5&quot; fill=&quot;#1d4ed8&quot;/&gt;&lt;text x=&quot;56&quot; y=&quot;112&quot; fill=&quot;#1d4ed8&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;A(a,-3,6)&lt;/text&gt;&lt;circle cx=&quot;221&quot; cy=&quot;126&quot; r=&quot;5.5&quot; fill=&quot;#be123c&quot;/&gt;&lt;text x=&quot;221&quot; y=&quot;110&quot; fill=&quot;#be123c&quot; font-size=&quot;11&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;내분점 P(x=0)&lt;/text&gt;&lt;circle cx=&quot;304&quot; cy=&quot;126&quot; r=&quot;5&quot; fill=&quot;#059669&quot;/&gt;&lt;text x=&quot;304&quot; y=&quot;112&quot; fill=&quot;#059669&quot; font-size=&quot;11&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;B(-3,b,c)&lt;/text&gt;&lt;text x=&quot;138&quot; y=&quot;146&quot; fill=&quot;#334155&quot; font-size=&quot;11&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;2&lt;/text&gt;&lt;text x=&quot;262&quot; y=&quot;146&quot; fill=&quot;#334155&quot; font-size=&quot;11&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot;&gt;1&lt;/text&gt;&lt;rect x=&quot;44&quot; y=&quot;164&quot; width=&quot;272&quot; height=&quot;58&quot; rx=&quot;8&quot; fill=&quot;#eff6ff&quot; stroke=&quot;#60a5fa&quot;/&gt;&lt;text x=&quot;180&quot; y=&quot;187&quot; fill=&quot;#1e3a8a&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;(2×(-3) + 1×a) / 3 = 0&lt;/text&gt;&lt;text x=&quot;180&quot; y=&quot;209&quot; fill=&quot;#be123c&quot; font-size=&quot;13&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;⇒ a - 6 = 0 ⇒ a = 6&lt;/text&gt;&lt;rect x=&quot;352&quot; y=&quot;54&quot; width=&quot;304&quot; height=&quot;184&quot; rx=&quot;12&quot; fill=&quot;#ffffff&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;78&quot; fill=&quot;#047857&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;② x축 위 (y=0, z=0): 3:2 외분점&lt;/text&gt;&lt;rect x=&quot;370&quot; y=&quot;94&quot; width=&quot;268&quot; height=&quot;40&quot; rx=&quot;8&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#34d399&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;119&quot; fill=&quot;#047857&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;y좌표: (3b - 2(-3)) / (3-2) = 0 ⇒ b = -2&lt;/text&gt;&lt;rect x=&quot;370&quot; y=&quot;144&quot; width=&quot;268&quot; height=&quot;40&quot; rx=&quot;8&quot; fill=&quot;#ecfdf5&quot; stroke=&quot;#34d399&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;169&quot; fill=&quot;#047857&quot; font-size=&quot;12&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot;&gt;z좌표: (3c - 2(6)) / (3-2) = 0 ⇒ c = 4&lt;/text&gt;&lt;rect x=&quot;394&quot; y=&quot;194&quot; width=&quot;220&quot; height=&quot;34&quot; rx=&quot;8&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot;/&gt;&lt;text x=&quot;504&quot; y=&quot;216&quot; fill=&quot;#92400e&quot; font-size=&quot;13&quot; font-weight=&quot;900&quot; text-anchor=&quot;middle&quot;&gt;a + b + c = 6 - 2 + 4 = 8 (③)&lt;/text&gt;&lt;/svg&gt;&lt;figcaption style=&quot;margin-top:10px;font-size:0.85rem;color:#475569;line-height:1.55&quot;&gt;▲ Each coordinate equation decouples cleanly to give a=6, b=-2, and c=4.&lt;/figcaption&gt;&lt;/figure&gt;&lt;h4&gt;🗺️ [At-a-Glance Schematic Solution Flowchart]&lt;/h4&gt;
+&lt;section class=&quot;math-schematic-flow&quot; style=&quot;margin:12px 0 18px;padding:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px&quot;&gt;&lt;table style=&quot;width:100%;border-collapse:separate;border-spacing:4px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 1 · Condition&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;Internal $2:1 \in yz$-plane ($x=0$)&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 2 · Core Principle&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;$(-6+a)/3=0 \implies a=6$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 3 · Derivation&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;External $3:2 \in x$-axis ($y=z=0$)&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#d97706;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;➔&lt;/td&gt;&lt;td style=&quot;background:#ffffff;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;vertical-align:top;width:20%&quot;&gt;&lt;b style=&quot;color:#0369a1;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;STEP 4 · Synthesis&lt;/b&gt;&lt;span style=&quot;color:#1e293b;font-size:0.85rem;line-height:1.45&quot;&gt;$b=-2, c=4 \implies a+b+c=8$&lt;/span&gt;&lt;/td&gt;&lt;td style=&quot;text-align:center;vertical-align:middle;color:#059669;font-weight:900;font-size:1.05rem;padding:0 3px&quot;&gt;⇒&lt;/td&gt;&lt;td style=&quot;background:#ecfdf5;border:1.5px solid #10b981;border-radius:10px;padding:10px 11px;vertical-align:middle;text-align:center;width:15%&quot;&gt;&lt;b style=&quot;color:#047857;font-size:0.77rem;display:block;margin-bottom:4px&quot;&gt;🎯 Final Answer&lt;/b&gt;&lt;b style=&quot;color:#065f46;font-size:0.96rem&quot;&gt;$8$ (③)&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/section&gt;&lt;h4&gt;📐 [Step-by-Step Rigorous Derivation]&lt;/h4&gt;
+&lt;p&gt;Internal $2:1$ $x$-coord: $\frac{-6+a}{3}=0 \implies a=6$. External $3:2$ $y,z$-coords: $3b+6=0 \implies b=-2$ and $3c-12=0 \implies c=4$. Thus $a+b+c=8$.&lt;/p&gt;
+
+&lt;h4&gt;🪜 [Complete Step-by-Step Scaffolding Walkthrough (Steps 1–5)]&lt;/h4&gt;
+&lt;p&gt;Connecting each elementary-grounded scaffolding step from Step 1 to Step 5 completes the entire derivation without any logical gaps:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;🔰 Step 1 · [Elementary Intuition] Zero Coordinates on Planes and Axes&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Core Principle&lt;/b&gt;: Points on the yz-plane have x=0; points on the x-axis have both y=0 and z=0.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Step Verification ($x=0$ / $y=0,\; z=0$)&lt;/b&gt;: $yz$-plane means $x=0$; $x$-axis means $y=0$ and $z=0$.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;🌿 Step 2 · [Internal Division] Finding $a$ from $x=0$&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Core Principle&lt;/b&gt;: The $x$-coordinate of the $2:1$ internal division point is $\frac{2(-3)+1\cdot a}{2+1}$.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Step Verification ($6$)&lt;/b&gt;: $-6+a=0 \implies a=6$.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;🌱 Step 3 · [External Division $y$] Finding $b$ from $y=0$&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Core Principle&lt;/b&gt;: The $y$-coordinate of the $3:2$ external division point is $\frac{3b-2(-3)}{3-2}=0$.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Step Verification ($-2$)&lt;/b&gt;: $3b+6=0 \implies b=-2$.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;🌳 Step 4 · [External Division $z$] Finding $c$ from $z=0$&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Core Principle&lt;/b&gt;: The $z$-coordinate of the $3:2$ external division point is $\frac{3c-2(6)}{3-2}=0$.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Step Verification ($4$)&lt;/b&gt;: $3c-12=0 \implies c=4$.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;💎 Step 5 · [Final Synthesis] Computing $a+b+c$&lt;/b&gt;&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Core Principle&lt;/b&gt;: Sum $a=6$, $b=-2$, and $c=4$.&lt;br&gt;    &amp;nbsp;&amp;nbsp;• &lt;b&gt;Step Verification ($8$)&lt;/b&gt;: $6-2+4=8$ (choice ③).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;✨ [Conclusion &amp;amp; Key Takeaways]&lt;/h4&gt;
+&lt;p&gt;Therefore, $a+b+c = 8$, which corresponds to &lt;b&gt;choice ③&lt;/b&gt;.&lt;/p&gt;"><div class="lvl"><span class="bilingual-ko">최종 본문항</span><span class="bilingual-en">Final Exam Problem</span></div><div class="stem"><span class="bilingual-ko">좌표공간의 서로 다른 두 점 $\mathrm{A}(a,\;-3,\;6)$, $\mathrm{B}(-3,\;b,\;c)$에 대하여 선분 $\mathrm{AB}$를 $2:1$로 내분하는 점이 $yz$평면 위에 있고, 선분 $\mathrm{AB}$를 $3:2$로 외분하는 점이 $x$축 위에 있을 때, $a+b+c$의 값은? [3점]</span><div class="bilingual-en">In 3D space, for distinct points $\mathrm{A}(a,-3,6)$ and $\mathrm{B}(-3,b,c)$, the point dividing $\mathrm{AB}$ internally in the ratio $2:1$ lies on the $yz$-plane, and the point dividing $\mathrm{AB}$ externally in the ratio $3:2$ lies on the $x$-axis. Find $a+b+c$. [3 points]</div></div><div class="opts opts-inline"><div class="opt"><span class="n">1</span><span class="opt-txt">$6$</span></div><div class="opt"><span class="n">2</span><span class="opt-txt">$7$</span></div><div class="opt"><span class="n">3</span><span class="opt-txt">$8$</span></div><div class="opt"><span class="n">4</span><span class="opt-txt">$9$</span></div><div class="opt"><span class="n">5</span><span class="opt-txt">$10$</span></div></div><div class="q-actions" style="margin-top:10px;display:flex;justify-content:flex-end"><button type="button" class="exp-toggle-btn" onclick="toggleExp(this)">💡 해설 보기</button></div><div class="exp"></div><div class="report-wrap" style="margin-top:10px;border-top:1px solid #e4e2e4;padding-top:10px">
+<button class="report-btn" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='#ff6b6b';this.style.color='#ff6b6b'" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#64748b'">🚨 이 문제에 이상이 있어요</button>
+<div class="report-form" style="display:none;margin-top:10px;text-align:left">
+<div style="color:#64748b;font-size:.75rem;margin-bottom:6px">어떤 부분이 이상한가요? 자세히 적어주세요.</div>
+<textarea class="report-text" rows="3" placeholder="예: 보기 3번이 정답이 아닌 것 같습니다. / 문제의 조건이 모호합니다. / 계산 오류가 있습니다." style="width:100%;background:#ffffff;color:#1b1b1d;border:1px solid #c5c6cd;border-radius:8px;padding:8px;font-size:.85rem;resize:vertical;box-sizing:border-box"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+<button class="report-cancel" onclick="toggleReport(this)" style="background:transparent;color:#64748b;border:1px solid #cbd5e1;border-radius:8px;padding:4px 10px;font-size:.75rem;cursor:pointer">취소</button>
+<button class="report-submit" onclick="submitReport(this)" style="background:linear-gradient(90deg,#ff6b6b,#ee5a5a);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:.75rem;cursor:pointer">신고 접수</button>
+</div>
+</div>
+<div class="report-msg" style="display:none;color:#3ddc97;font-size:.75rem;margin-top:6px;text-align:right">✅ 신고가 접수되었어요. 확인 후 고칠게요!</div>
+</div></div>
+
+<!-- 📚 수학자료실 공식 연계 심층 탐구 자료 카드 -->
+<div id="min7014-addon" class="min7014-addon-card">
+  <div class="min-header">
+    <div class="min-header-title">
+      <img src="../assets/favicon.png" alt="수학자료실" class="min-logo">
+      <span>📚 수학자료실 공식 연계 심층 탐구</span>
+    </div>
+    <span class="min-tag">GeoGebra · AlgeoMath · 단계별 증명 PDF</span>
+  </div>
+  <p class="min-lead">이 문제와 관련된 수학적 원리를 <b>수학자료실</b>의 시각적 동적 기하 조작 및 원리 증명 자료와 함께 더 깊이 탐구해보세요.</p>
+  
+  <div class="min-guide-banner" style="background:#f0f7ff;border:1px solid rgba(0,99,152,0.22);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.85rem;line-height:1.6;color:#1e293b">
+    🎬 <b>자료를 깊이 있게 감상하는 법</b>: 수학자료실의 PDF는 책장을 넘기듯 페이지를 넘겨갈 때마다 <b>도형의 점이 이동하고 보조선이 더해지며 수식이 스스로 완성되는 '단계별 플립북 애니메이션 증명'</b>입니다. 상단 미리보기나 새 창에서 키보드 방향키나 마우스 휠로 페이지를 넘기며, <b>각 프레임마다 변하는 요소와 보존되는 원리의 의미</b>를 곱씹어 보세요.
+  </div>
+
+  <div class="min-list">
+    
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 중학교 수학(Middle school mathematics) &gt; 거듭제곱(Power)</div>
+            <a href="https://min7014.github.io/math20200227001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> 거듭제곱
+              <span class="min-item-sub">Power</span>
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/b5rypfj7')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/b5rypfj7" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=42324275e6a311ea8d81d20d61592de0" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2020/2020022701.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/L9YedbtAFY4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20200227001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 중학교 수학(Middle school mathematics) &gt; 다항식의 계산[중학교](Calculation of Polynomial[Middle school])</div>
+            <a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $m(a+b)=ma+mb$
+              
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/ckyaqb3y')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/ckyaqb3y" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=9a5ad111c22d11e989430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2017040301.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/5xB3nP5zGr8" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190819005.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 중학교 수학(Middle school mathematics) &gt; 다항식의 계산[중학교](Calculation of Polynomial[Middle school])</div>
+            <a href="https://min7014.github.io/math20190820001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a+b)(c+d)=ab+ac+bc+bd$
+              
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/kft6tzya')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/kft6tzya" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=8ef19d05c2fc11e989430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082002.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/ZD6GrL_fKT4" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190820001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+        <div class="min-item">
+          <div class="min-item-main">
+            <div class="min-cat-badge">📂 중학교 수학(Middle school mathematics) &gt; 다항식의 계산[중학교](Calculation of Polynomial[Middle school])</div>
+            <a href="https://min7014.github.io/math20190821001.html" target="_blank" rel="noopener" class="min-item-title">
+              <span class="min-bullet">📌</span> $(a+b)^2=a^2+2ab+b^2$
+              
+            </a>
+          </div>
+          <div class="min-item-actions">
+            <button type="button" class="min-btn min-btn-ggb" onclick="toggleMinGgb(this, 'https://www.geogebra.org/m/bc3bfxgz')" title="페이지 내에서 GeoGebra 직접 조작">📐 GeoGebra 조작 ▾</button> <a href="https://www.geogebra.org/m/bc3bfxgz" target="_blank" rel="noopener" class="min-btn min-btn-ggb" style="opacity:.85" title="GeoGebra Tube 새 창 열기">Tube ↗</a> <a href="https://www.algeomath.kr/algeo/algeomath/app/view?id=afc8bf06c3b411e989430200634b0001" target="_blank" rel="noopener" class="min-btn min-btn-algeo" title="AlgeoMath 공학도구 열기">🔢 AlgeoMath</a> <a href="https://min7014.github.io/2019/2019082103.pdf#toolbar=0&amp;view=Fit&amp;scrollbar=0" target="_blank" rel="noopener" class="min-btn min-btn-pdf" title="단계별 플립북 시각적 증명 PDF">📄 단계별 증명 PDF</a> <a href="https://youtu.be/K4M6KQKCJm0" target="_blank" rel="noopener" class="min-btn min-btn-yt" title="동적 기하 해설 영상">🎥 해설 강의</a> <a href="https://min7014.github.io/math20190821001.html" target="_blank" rel="noopener" class="min-btn min-btn-detail">웹 상세 탐구 ➔</a>
+          </div>
+          <div class="min-ggb-frame-wrap"></div>
+        </div>
+        
+  </div>
+
+  <div class="min-footer">
+    <a href="https://min7014.github.io/" target="_blank" rel="noopener" class="min-footer-link">
+      🌐 수학자료실 메인 바로가기 (3,400+ GeoGebra & 증명 PDF) ➔
+    </a>
+  </div>
+</div>
+
+<script>
+if (!window.toggleMinGgb) {
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn.closest ? btn.closest('.min-item, .min-tip-item') : btn.parentElement.parentElement;
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var m = ggbUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
+      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
+}
+</script>
+
+<div class="final"><p><span class="bilingual-ko">🎉 완료!</span><span class="bilingual-en">🎉 Completed!</span></p><div class="ans" id="finalAns">정답 $8$</div>
+<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="location.reload()"><span class="bilingual-ko">다시 풀기</span><span class="bilingual-en">Try Again</span></button><a class="btn" href="../csat2027.html" style="text-decoration:none;display:inline-flex;align-items:center"><span class="bilingual-ko">🎯 2027 수능 전체 문항 목록 ➔</span><span class="bilingual-en">🎯 All 2027 CSAT Problems ➔</span></a></div></div>
+</div><script>
+window._studentName="";window._sheetsApiUrl="https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec";
+function registerName(){var n=document.getElementById("studentName").value.trim();if(!n)return;window._studentName=n;var tf=document.getElementById("trackFull");if(tf)tf.remove();sendProgress();}
+const qs=document.querySelectorAll('.q');let pts=0;
+document.getElementById('tot').textContent=qs.length;
+
+function toggleExp(btn){
+  var q = btn.closest ? btn.closest('.q') : btn.parentElement;
+  while(q && !q.classList.contains('q')) { q = q.parentElement; }
+  if(!q) return;
+  var exp = q.querySelector('.exp');
+  if(!exp) return;
+  if(exp.classList.contains('show')){
+    exp.classList.remove('show');
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 View Explanation' : '💡 해설 보기';
+  } else {
+    exp.classList.add('show');
+    btn.textContent = (document.documentElement.lang === 'en') ? '💡 Close Explanation' : '💡 해설 닫기';
+    if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise([exp]).catch(function(){});}
+  }
+}
+
+qs.forEach(q=>{
+  const ans=+q.dataset.ans;
+  const exp=q.querySelector('.exp');
+  if(exp) {
+    var koExp = q.dataset.exp || '';
+    var enExp = q.dataset.expEn || '';
+    if(enExp) {
+      exp.innerHTML = koExp + '<div class="bilingual-en"><b>English Explanation:</b> ' + enExp + '</div>';
+    } else {
+      exp.innerHTML = koExp;
+    }
+  }
+  const opts=q.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{
+    o.addEventListener('click',()=>{
+      if(q.classList.contains('done')) return;
+      q.classList.add('done');
+      opts.forEach((oo,j)=>{
+        oo.classList.add('locked');
+        if(j+1==ans) oo.classList.add('correct');
+      });
+      if(i+1==ans){
+        o.classList.add('correct');
+        q.classList.add('correct-q');
+        pts++;
+      } else {
+        o.classList.add('wrong');
+      }
+      if(exp){exp.classList.add('show');if(window.MathJax&&window.MathJax.typesetPromise){window.MathJax.typesetPromise([exp]).catch(function(){});}}
+      var toggleBtn = q.querySelector('.exp-toggle-btn');
+      if(toggleBtn) { var isEn = (document.documentElement.lang === 'en'); toggleBtn.textContent = isEn ? '💡 Close Explanation' : '💡 해설 닫기'; }
+      document.getElementById('pts').textContent=pts;
+      var total = document.querySelectorAll('.q').length;
+      const pct=Math.round(pts/total*100);
+      document.getElementById('bar').style.width=pct+'%';
+      document.getElementById('pct').textContent=pct+'%';
+      if(typeof sendProgress === 'function') setTimeout(sendProgress, 50);
+    });
+  });
+});
+function sendProgress(){
+  var name = (window._studentName || '').trim();
+  if (!name) return;
+  var qs = document.querySelectorAll('.q');
+  var total = qs.length;
+  var done = document.querySelectorAll('.q.done');
+  var correct = pts;
+  var current = done.length;
+  if (current === 0) return;
+  var url = window._sheetsApiUrl || '/api/progress';
+  fetch(url, {
+    method: 'POST',
+    mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify({
+      quiz_slug: 'csat27_g25',
+      student_name: name,
+      current_step: current,
+      total_steps: total,
+      correct: correct
+    })
+  }).catch(()=>{});
+}
+function copyLink(){const b=document.getElementById('copyBtn');const t=b?b.textContent:'';
+navigator.clipboard.writeText(location.href).then(()=>{if(b){b.textContent='✅ 복사됨';setTimeout(()=>b.textContent=t,1500);}})
+.catch(()=>{prompt('아래 링크를 복사하세요',location.href);});}
+function toggleReport(el){
+  if(!el) return;
+  var wrap=el.closest ? el.closest('.report-wrap') : el.parentElement;
+  if(!wrap) return;
+  var btn=wrap.querySelector('.report-btn');
+  var form=wrap.querySelector('.report-form');
+  if(!btn||!form) return;
+  if(form.style.display==='none'){
+    form.style.display='block';
+    btn.style.display='none';
+  } else {
+    form.style.display='none';
+    btn.style.display='block';
+  }
+}
+function submitReport(btn){
+  var wrap=btn.closest('.report-wrap');
+  var name=(window._studentName||'익명').trim();
+  var slug='csat27_g25';
+  var qEl=wrap.closest('.q');
+  var qNum=qEl?Array.from(document.querySelectorAll('.q')).indexOf(qEl)+1:0;
+  var textEl=wrap.querySelector('.report-text');
+  var text=(textEl ? textEl.value : '').trim();
+  var url=window._sheetsApiUrl||'https://script.google.com/macros/s/AKfycbxQBW1hKYFSHokaVJMRql-UJpk0t4qMeWMiiy_RFuCLZ5SE4iZytYQkGa9_yoCmm1Ak0Q/exec';
+  var reportUrl=url+'?action=report&quiz='+encodeURIComponent(slug)+'&q='+qNum+'&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text||'사유 없음')+'&_t='+Date.now();
+  try { fetch(reportUrl, { mode: 'no-cors', keepalive: true }).catch(function(){}); } catch(e){}
+  wrap.querySelector('.report-form').style.display='none';
+  wrap.querySelector('.report-msg').style.display='block';
+}
+</script><script src="../mathedu-room.js?v=20261027_stitch3"></script>
+<script src="../mathedu-report.js?v=20261027_stitch3"></script><script>
+function updateExplanations(lang) {
+  var isEn = (lang === 'en');
+  var qs = document.querySelectorAll('.q');
+  qs.forEach(function(q) {
+    var exp = q.querySelector('.exp');
+    var btn = q.querySelector('.exp-toggle-btn');
+    if (btn) {
+      var isShown = exp && exp.classList.contains('show');
+      btn.textContent = isEn ? (isShown ? '💡 Close Explanation' : '💡 View Explanation') : (isShown ? '💡 해설 닫기' : '💡 해설 보기');
+    }
+    if (exp) {
+      var koExp = q.dataset.exp || '';
+      var enExp = q.dataset.expEn || '';
+      if (isEn && enExp) {
+        exp.innerHTML = '<b>Explanation:</b> ' + enExp;
+      } else {
+        exp.innerHTML = koExp;
+      }
+    }
+  });
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    try { window.MathJax.typesetPromise(); } catch(e){}
+  }
+}
+
+function setBoardLang(lang, isUserAction) {
+  if (lang !== 'ko' && lang !== 'en') return;
+  document.documentElement.lang = lang;
+  if (isUserAction) {
+    try {
+      localStorage.setItem('mathedu_lang', lang);
+      localStorage.setItem('mathedu_lang_manual', 'true');
+    } catch(e){}
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b) {
+    if (b.getAttribute('data-lang-btn') === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+    if (isUserAction) {
+      MatheduI18n.setLanguage(lang);
+    }
+  }
+  updateExplanations(lang);
+}
+
+(function(){
+  var saved = 'ko';
+  try {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'ko') {
+      saved = p;
+      try {
+        localStorage.setItem('mathedu_lang', p);
+        localStorage.setItem('mathedu_lang_manual', 'true');
+      } catch(e){}
+    } else {
+      var manual = localStorage.getItem('mathedu_lang_manual') === 'true';
+      var stored = localStorage.getItem('mathedu_lang');
+      if (manual && (stored === 'en' || stored === 'ko')) {
+        saved = stored;
+      }
+    }
+  } catch(e){ saved = 'ko'; }
+  setBoardLang(saved, false);
+})();
+</script>
+</body></html>
