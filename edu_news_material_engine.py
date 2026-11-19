@@ -240,39 +240,48 @@ def build_flagship_edunews01_lesson() -> Path:
   <rect x="14" y="10" width="672" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/>
   <text x="26" y="31" fill="#006398" font-size="12" font-weight="800" font-family="sans-serif">📐 [순수 기하 작도 원리] 방정식·좌표축 ZERO 포물선 → 대칭축 · 꼭짓점 · 초점 · 준선 복원</text>
 
-  <!-- 좌측 작도 캔버스 -->
+  <!-- 좌측 작도 캔버스: 정확한 포물선 (180 - y)² = 88(x - 110), 꼭짓점 V(110,180), p=22, 4p=88 -->
   <rect x="18" y="50" width="402" height="256" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
-  <!-- 준선 d (x = 92) -->
-  <line x1="92" y1="66" x2="92" y2="292" stroke="#7c3aed" stroke-width="2.2" stroke-dasharray="6,4"/>
-  <text x="64" y="82" fill="#6d28d9" font-size="11" font-weight="800">준선 d</text>
-  <!-- 대칭축 l (y = 186) -->
-  <line x1="60" y1="186" x2="404" y2="186" stroke="#059669" stroke-width="2.4"/>
-  <text x="352" y="177" fill="#047857" font-size="11" font-weight="800">대칭축 ℓ</text>
-  <!-- 포물선 곡선: 꼭짓점 V(132, 186), 초점 F(172, 186) [p=40], (x-132)*160 = (y-186)^2 -->
-  <path d="M 357 36 Q 132 186 357 300" fill="none" stroke="#cbd5e1" stroke-width="1" opacity="0"/>
-  <path d="M 332 59.5 Q 132 186 332 312.5" fill="none" stroke="none"/>
-  <polyline points="332,60 292,85 254,108 212,130 172,150 146,166 135,176 132,186 135,196 146,206 172,222 212,242 254,264 292,287" fill="none" stroke="#0284c7" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- 준선 d (x = 88 = x_V - p) -->
+  <line x1="88" y1="60" x2="88" y2="278" stroke="#7c3aed" stroke-width="2.2" stroke-dasharray="6,4"/>
+  <text x="58" y="76" fill="#6d28d9" font-size="11" font-weight="800" text-anchor="middle">준선 d</text>
+  <!-- 대칭축 l (y = 180) -->
+  <line x1="48" y1="180" x2="404" y2="180" stroke="#059669" stroke-width="2.3"/>
+  <rect x="88" y="172" width="8" height="8" fill="none" stroke="#64748b" stroke-width="1.2"/>
+  <text x="378" y="172" fill="#047857" font-size="11" font-weight="800" text-anchor="middle">대칭축 ℓ</text>
 
-  <!-- 평행현 2개와 중점 연결선 M1-M2 (대칭축과 평행) -->
-  <line x1="172" y1="150" x2="292" y2="85" stroke="#94a3b8" stroke-width="1.6"/>
-  <line x1="212" y1="242" x2="332" y2="177" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="3,3"/>
-  <line x1="160" y1="118" x2="348" y2="118" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
-  <circle cx="232" cy="118" r="4.5" fill="#f59e0b"/>
-  <circle cx="298" cy="118" r="4.5" fill="#f59e0b"/>
-  <text x="258" y="110" fill="#b45309" font-size="10.5" font-weight="800" text-anchor="middle">평행현 중점 직선 M₁M₂ ∥ ℓ</text>
+  <!-- Step 1: 평행한 두 현(기울기 1)과 정확한 중점 M₁(140.9, 224), M₂(178.5, 224) 연결선 M₁M₂ ∥ ℓ -->
+  <line x1="112.9" y1="196" x2="168.9" y2="252" stroke="#94a3b8" stroke-width="1.8"/>
+  <line x1="114.5" y1="160" x2="242.5" y2="288" stroke="#94a3b8" stroke-width="1.8"/>
+  <line x1="122" y1="224" x2="366" y2="224" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+  <circle cx="140.9" cy="224" r="4.2" fill="#f59e0b" stroke="#ffffff" stroke-width="1.2"/>
+  <circle cx="178.5" cy="224" r="4.2" fill="#f59e0b" stroke="#ffffff" stroke-width="1.2"/>
+  <text x="278" y="217" fill="#b45309" font-size="10.5" font-weight="800" text-anchor="middle">평행현 중점 직선 M₁M₂ ∥ ℓ</text>
 
-  <!-- 꼭짓점 V(132,186)에서 45도 반직선 -> Q(292, 66) 비율 시각화 H(292,186) -->
-  <line x1="132" y1="186" x2="292" y2="85" stroke="#0d9488" stroke-width="1.8" stroke-dasharray="4,3"/>
-  <line x1="292" y1="85" x2="292" y2="186" stroke="#64748b" stroke-width="1.4" stroke-dasharray="3,3"/>
-  <circle cx="132" cy="186" r="5.5" fill="#059669" stroke="#ffffff" stroke-width="1.5"/>
-  <text x="122" y="204" fill="#047857" font-size="11.5" font-weight="900">V</text>
-  <circle cx="172" cy="186" r="6" fill="#d97706" stroke="#ffffff" stroke-width="1.5"/>
-  <text x="172" y="205" fill="#b45309" font-size="11.5" font-weight="900" text-anchor="middle">초점 F(p)</text>
-  <circle cx="292" cy="186" r="4.5" fill="#334155"/>
-  <text x="292" y="204" fill="#334155" font-size="10.8" font-weight="800" text-anchor="middle">H(4p)</text>
-  <circle cx="292" cy="85" r="5" fill="#0284c7"/>
-  <text x="304" y="84" fill="#0369a1" font-size="11" font-weight="800">Q(45° 교점)</text>
-  <text x="212" y="288" fill="#0f172a" font-size="11" font-weight="800" text-anchor="middle">VH = 4p ⇒ 4등분 시 VF = p, 초점~준선 거리 = 2p</text>
+  <!-- Step 3: 꼭짓점 V(110,180)에서 정확한 45° 반직선 → 교점 Q(198,92), 수선의 발 H(198,180) [VH = QH = 4p = 88] -->
+  <polygon points="110,180 198,180 198,92" fill="rgba(13,148,136,0.08)" stroke="none"/>
+  <path d="M 128 180 A 18 18 0 0 0 122.7 167.3" fill="none" stroke="#0d9488" stroke-width="1.5"/>
+  <text x="140" y="174" fill="#0f766e" font-size="9.5" font-weight="800">45°</text>
+  <line x1="110" y1="180" x2="212" y2="78" stroke="#0d9488" stroke-width="1.9" stroke-dasharray="4,3"/>
+  <line x1="198" y1="92" x2="198" y2="180" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="190" y="172" width="8" height="8" fill="none" stroke="#64748b" stroke-width="1.2"/>
+  <!-- VH 4등분 눈금 (p=22 간격: 132, 154, 176, 198) -->
+  <line x1="154" y1="176" x2="154" y2="184" stroke="#047857" stroke-width="1.6"/>
+  <line x1="176" y1="176" x2="176" y2="184" stroke="#047857" stroke-width="1.6"/>
+
+  <!-- 해석학적으로 100% 정확한 2차 베지어 포물선: (180 - y)² = 88(x - 110) -->
+  <path d="M 279.14 58 Q 110 119 110 180 Q 110 234 242.55 288" fill="none" stroke="#0284c7" stroke-width="3.4" stroke-linecap="round"/>
+
+  <!-- 주요 점 V, F(p), H(4p), Q(4p,4p) 마커 및 라벨 -->
+  <circle cx="110" cy="180" r="5.2" fill="#059669" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="100" y="197" fill="#047857" font-size="11.5" font-weight="900" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round">V</text>
+  <circle cx="132" cy="180" r="5.6" fill="#d97706" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="142" y="199" fill="#b45309" font-size="10.8" font-weight="900" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.4" stroke-linejoin="round">초점 F(p)</text>
+  <circle cx="198" cy="180" r="4.5" fill="#334155"/>
+  <text x="206" y="198" fill="#334155" font-size="10.8" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round">H(4p)</text>
+  <circle cx="198" cy="92" r="5.2" fill="#0284c7" stroke="#ffffff" stroke-width="1.4"/>
+  <text x="208" y="94" fill="#0369a1" font-size="11" font-weight="800">Q(45° 교점)</text>
+  <text x="219" y="299" fill="#0f172a" font-size="10.6" font-weight="800" text-anchor="middle">VH = 4p ⇒ 4등분 시 VF = p, 초점~준선 거리 = 2p</text>
 
   <!-- 우측 4단계 핵심 요약 -->
   <rect x="434" y="50" width="250" height="256" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
@@ -296,26 +305,35 @@ def build_flagship_edunews01_lesson() -> Path:
   <rect x="14" y="10" width="672" height="32" rx="8" fill="#e0f2fe" stroke="#7dd3fc"/>
   <text x="26" y="31" fill="#006398" font-size="12" font-weight="800" font-family="sans-serif">📐 [Pure Geometric Construction] Bare Parabola → Axis · Vertex · Focus · Directrix</text>
   <rect x="18" y="50" width="402" height="256" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
-  <line x1="92" y1="66" x2="92" y2="292" stroke="#7c3aed" stroke-width="2.2" stroke-dasharray="6,4"/>
-  <text x="50" y="82" fill="#6d28d9" font-size="10.5" font-weight="800">Directrix d</text>
-  <line x1="60" y1="186" x2="404" y2="186" stroke="#059669" stroke-width="2.4"/>
-  <text x="355" y="177" fill="#047857" font-size="11" font-weight="800">Axis ℓ</text>
-  <polyline points="332,60 292,85 254,108 212,130 172,150 146,166 135,176 132,186 135,196 146,206 172,222 212,242 254,264 292,287" fill="none" stroke="#0284c7" stroke-width="3.2" stroke-linecap="round"/>
-  <line x1="160" y1="118" x2="348" y2="118" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
-  <circle cx="232" cy="118" r="4.5" fill="#f59e0b"/>
-  <circle cx="298" cy="118" r="4.5" fill="#f59e0b"/>
-  <text x="258" y="110" fill="#b45309" font-size="10.2" font-weight="800" text-anchor="middle">Midpoints M₁M₂ ∥ Axis ℓ</text>
-  <line x1="132" y1="186" x2="292" y2="85" stroke="#0d9488" stroke-width="1.8" stroke-dasharray="4,3"/>
-  <line x1="292" y1="85" x2="292" y2="186" stroke="#64748b" stroke-width="1.4" stroke-dasharray="3,3"/>
-  <circle cx="132" cy="186" r="5.5" fill="#059669" stroke="#ffffff" stroke-width="1.5"/>
-  <text x="122" y="204" fill="#047857" font-size="11.5" font-weight="900">V</text>
-  <circle cx="172" cy="186" r="6" fill="#d97706" stroke="#ffffff" stroke-width="1.5"/>
-  <text x="172" y="205" fill="#b45309" font-size="11" font-weight="900" text-anchor="middle">Focus F(p)</text>
-  <circle cx="292" cy="186" r="4.5" fill="#334155"/>
-  <text x="292" y="204" fill="#334155" font-size="10.8" font-weight="800" text-anchor="middle">H(4p)</text>
-  <circle cx="292" cy="85" r="5" fill="#0284c7"/>
-  <text x="304" y="84" fill="#0369a1" font-size="10.5" font-weight="800">Q(45° Ray)</text>
-  <text x="216" y="288" fill="#0f172a" font-size="10.8" font-weight="800" text-anchor="middle">VH = 4p ⇒ Quartering gives VF = p, Focus-Directrix = 2p</text>
+  <line x1="88" y1="60" x2="88" y2="278" stroke="#7c3aed" stroke-width="2.2" stroke-dasharray="6,4"/>
+  <text x="56" y="76" fill="#6d28d9" font-size="10.2" font-weight="800" text-anchor="middle">Directrix d</text>
+  <line x1="48" y1="180" x2="404" y2="180" stroke="#059669" stroke-width="2.3"/>
+  <rect x="88" y="172" width="8" height="8" fill="none" stroke="#64748b" stroke-width="1.2"/>
+  <text x="380" y="172" fill="#047857" font-size="11" font-weight="800" text-anchor="middle">Axis ℓ</text>
+  <line x1="112.9" y1="196" x2="168.9" y2="252" stroke="#94a3b8" stroke-width="1.8"/>
+  <line x1="114.5" y1="160" x2="242.5" y2="288" stroke="#94a3b8" stroke-width="1.8"/>
+  <line x1="122" y1="224" x2="366" y2="224" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+  <circle cx="140.9" cy="224" r="4.2" fill="#f59e0b" stroke="#ffffff" stroke-width="1.2"/>
+  <circle cx="178.5" cy="224" r="4.2" fill="#f59e0b" stroke="#ffffff" stroke-width="1.2"/>
+  <text x="278" y="217" fill="#b45309" font-size="10.2" font-weight="800" text-anchor="middle">Midpoints M₁M₂ ∥ Axis ℓ</text>
+  <polygon points="110,180 198,180 198,92" fill="rgba(13,148,136,0.08)" stroke="none"/>
+  <path d="M 128 180 A 18 18 0 0 0 122.7 167.3" fill="none" stroke="#0d9488" stroke-width="1.5"/>
+  <text x="140" y="174" fill="#0f766e" font-size="9.5" font-weight="800">45°</text>
+  <line x1="110" y1="180" x2="212" y2="78" stroke="#0d9488" stroke-width="1.9" stroke-dasharray="4,3"/>
+  <line x1="198" y1="92" x2="198" y2="180" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="190" y="172" width="8" height="8" fill="none" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="154" y1="176" x2="154" y2="184" stroke="#047857" stroke-width="1.6"/>
+  <line x1="176" y1="176" x2="176" y2="184" stroke="#047857" stroke-width="1.6"/>
+  <path d="M 279.14 58 Q 110 119 110 180 Q 110 234 242.55 288" fill="none" stroke="#0284c7" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="110" cy="180" r="5.2" fill="#059669" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="100" y="197" fill="#047857" font-size="11.5" font-weight="900" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round">V</text>
+  <circle cx="132" cy="180" r="5.6" fill="#d97706" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="145" y="199" fill="#b45309" font-size="10.5" font-weight="900" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.4" stroke-linejoin="round">Focus F(p)</text>
+  <circle cx="198" cy="180" r="4.5" fill="#334155"/>
+  <text x="206" y="198" fill="#334155" font-size="10.8" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round">H(4p)</text>
+  <circle cx="198" cy="92" r="5.2" fill="#0284c7" stroke="#ffffff" stroke-width="1.4"/>
+  <text x="208" y="94" fill="#0369a1" font-size="10.5" font-weight="800">Q(45° Ray)</text>
+  <text x="219" y="299" fill="#0f172a" font-size="10.5" font-weight="800" text-anchor="middle">VH = 4p ⇒ Quartering gives VF = p, Focus-Directrix = 2p</text>
   <rect x="434" y="50" width="250" height="256" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
   <text x="559" y="73" fill="#006398" font-size="11.5" font-weight="800" text-anchor="middle">4-Step Construction Invariants</text>
   <rect x="448" y="84" width="222" height="46" rx="7" fill="#eff6ff" stroke="#93c5fd"/>

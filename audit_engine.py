@@ -292,7 +292,29 @@ def check_file_rules(filepath, content):
             'severity': 'WARNING',
             'msg': '상단 수학자료실 팁 링크에 영문 부제가 중복 표기되었습니다.'
         })
-        
+
+    # 8. SVG 매끄러운 이차곡선(포물선·타원·쌍곡선) 꺾인 polyline 왜곡 감시 (Policy 74 / R65)
+    for m_svg in re.finditer(r'<svg\b.*?</svg>', content, flags=re.S | re.I):
+        svg_block = m_svg.group(0)
+        for m_pl in re.finditer(r'<polyline\b[^>]*points=["\']([^"\']+)["\']', svg_block, flags=re.I):
+            nums = [float(x) for x in re.findall(r'-?\d+(?:\.\d+)?', m_pl.group(1))]
+            pts = [(nums[k], nums[k + 1]) for k in range(0, len(nums) - 1, 2)]
+            if len(pts) >= 6:
+                import math as _math
+                for k in range(1, len(pts) - 1):
+                    vx1, vy1 = pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1]
+                    vx2, vy2 = pts[k + 1][0] - pts[k][0], pts[k + 1][1] - pts[k][1]
+                    n1, n2 = _math.hypot(vx1, vy1), _math.hypot(vx2, vy2)
+                    if n1 > 1e-6 and n2 > 1e-6:
+                        cos_a = max(-1.0, min(1.0, (vx1 * vx2 + vy1 * vy2) / (n1 * n2)))
+                        if _math.degrees(_math.acos(cos_a)) >= 22.0 and re.search(r'포물선|타원|쌍곡선|parabola|ellipse|hyperbola', svg_block, flags=re.I):
+                            issues.append({
+                                'rule': 'SVG_CONIC_POLYLINE_KINK',
+                                'severity': 'ERROR',
+                                'msg': '이차곡선 SVG가 해석적 2차 베지어(<path Q...>) 대신 꺾인 <polyline>으로 작도되어 곡률 왜곡이 발생했습니다.'
+                            })
+                            break
+
     return issues
 
 

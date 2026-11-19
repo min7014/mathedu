@@ -709,17 +709,23 @@ def _draw_geometry_conic_trig_svg(pid: str, title_ko: str, eq_label: str, pt1_la
         <text x="205" y="255" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">쌍곡선 정의: |PF' - PF| = 2a &amp; 점근선 y = ±(b/a)x</text>
         """
     elif geo_type == "parabola":
+        # Exact parabola (165 - y)^2 = 100(x - 150): Vertex O(150,165), Focus F(175,165) [p=25],
+        # Directrix x=125, Point P(186,105) where PF = PH = 61 (exact 11-60-61 right triangle),
+        # and exact tangent line 5x + 6y = 1560 at P(186,105).
         fig = """
         <line x1="45" y1="165" x2="365" y2="165" stroke="#94a3b8" stroke-width="1.5"/>
-        <line x1="165" y1="65" x2="165" y2="265" stroke="#94a3b8" stroke-width="1.5"/>
-        <line x1="105" y1="70" x2="105" y2="260" stroke="#fb7185" stroke-width="2" stroke-dasharray="5,4"/>
-        <text x="105" y="272" fill="#fecdd3" font-size="10.5" font-weight="800" text-anchor="middle">준선 x = -p</text>
-        <path d="M 320 75 Q 40 165 320 255" fill="none" stroke="#38bdf8" stroke-width="3"/>
-        <line x1="125" y1="185" x2="295" y2="75" stroke="#fbbf24" stroke-width="2.2"/>
-        <circle cx="195" cy="139" r="5.5" fill="#34d399" stroke="#fff" stroke-width="1.5"/>
-        <line x1="105" y1="139" x2="195" y2="139" stroke="#34d399" stroke-width="2.2" marker-start="url(#arrGreen)" marker-end="url(#arrGreen)"/>
-        <circle cx="225" cy="165" r="4.5" fill="#fbbf24"/><text x="225" y="183" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">초점 F(p,0)</text>
-        <text x="150" y="130" fill="#6ee7b7" font-size="11" font-weight="800" text-anchor="middle">거리 = x₁ + p</text>
+        <line x1="150" y1="62" x2="150" y2="268" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="125" y1="66" x2="125" y2="258" stroke="#a78bfa" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="108" y="272" fill="#c4b5fd" font-size="10.5" font-weight="800" text-anchor="middle">준선 x = -p</text>
+        <path d="M 254.04 63 Q 150 114 150 165 Q 150 216 254.04 267" fill="none" stroke="#38bdf8" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="90" y1="185" x2="234" y2="65" stroke="#fbbf24" stroke-width="2.1"/>
+        <line x1="175" y1="165" x2="186" y2="105" stroke="#34d399" stroke-width="1.8" stroke-dasharray="4,3"/>
+        <line x1="125" y1="105" x2="186" y2="105" stroke="#34d399" stroke-width="2.2" marker-start="url(#arrGreen)" marker-end="url(#arrGreen)"/>
+        <circle cx="186" cy="105" r="5.2" fill="#34d399" stroke="#fff" stroke-width="1.5"/>
+        <text x="205" y="103" fill="#6ee7b7" font-size="10.8" font-weight="800">P(x₁, y₁)</text>
+        <circle cx="150" cy="165" r="3.8" fill="#94a3b8"/>
+        <circle cx="175" cy="165" r="4.8" fill="#fbbf24"/><text x="192" y="183" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">초점 F(p,0)</text>
+        <text x="155" y="96" fill="#6ee7b7" font-size="10.5" font-weight="800" text-anchor="middle">PF = PH = x₁ + p</text>
         """
     elif geo_type == "ellipse":
         fig = """
