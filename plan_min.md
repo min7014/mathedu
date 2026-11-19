@@ -846,6 +846,8 @@ python -X utf8 pr.py status
 - **즉시 완료한 라이브 반영 내역**:
   1. **글로벌 7개국어 채널명(`localizations`) 전량 즉시 교체 완료**: `ko` 제외 BCP-47 하이픈 키(`en-US`, `ja-JP`, `zh-CN`, `es-ES`, `fr-FR`, `de-DE`, `vi-VN`)로 API 업데이트를 실행하여 영문 채널명(`Min's Math Lab AI` ➔ **`MIN EUN GI : Visual Math Proofs (@min7014_ai)`**) 및 일·중·서·불·독·베트남어 채널명의 `_AI` 표기를 라이브 채널에서 100% 제거·표준화 완료했다.
   2. **채널 공식 설명란·키워드(`brandingSettings`) 및 웹 코드 정합화**: 라이브 채널 설명란을 `🏛️ [민은기 선생님의 단계별 시각적 수학 증명 — https://min7014.github.io/ 원문 기반 공식 채널]`로 갱신하고, `video_board.html`·`min7014_video_maker.py`·`finance.py` 내 잔존 구 채널명 문자열을 전수 정리했다.
-  3. **한국어 기본 채널명(`이름`) 최종 확정 경로**: `https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/editing/profile` 의 `이름` 칸에 **`민은기 선생님의 단계별 시각적 수학 증명`** 입력 후 `[게시]` ➔ Google 본인 인증 1회 승인으로 완료된다.
+  3. **한국어 기본 채널명(`이름`) 최종 확정 경로 및 미변경 원인 규명 (`11:08` 추가 실측)**:
+     - **원인 A (채널 `설명`란 `1,039 UTF-8 바이트` 초과 버그 — 즉시 수정 완료)**: 기존 라이브 채널 `설명`이 685자(`1,039 UTF-8 bytes`)로 유튜브 상한(`1,000 bytes`)을 39바이트 초과하고 있어 YouTube Studio `프로필` 페이지에서 `[게시]` 클릭 시 전체 저장이 거절되었다. 즉시 API로 채널 `설명`을 `380 UTF-8 bytes`(237자)로 압축 갱신하고 `min7014_video_maker.py` 기본값도 동기화 완료했다.
+     - **원인 B (유튜브 `14일 이내 2회 이름 변경 제한` 쿨타임)**: `11/08`경 1차 변경 후 `11/09 19:44`(`c0c9c327`, `오리지널 단계별 시각적 수학 증명`)에 2차 변경이 이루어졌으므로, 만약 설명란 축소 후에도 저장이 제한될 경우 유튜브 14일 쿨타임 해제 시점(`2026-11-23 19:45` 이후)에 `https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/editing/profile` 에서 1회 승인으로 완료된다.
 
 

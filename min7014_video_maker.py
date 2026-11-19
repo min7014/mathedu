@@ -9035,15 +9035,10 @@ def optimize_youtube_channel_settings():
 
     # 2. 채널 내부 브랜딩·키워드·대표 예고편·8개국어 다국어 프로필 업데이트
     ch_desc_ko = (
-        "📐 [단계별 시각적 수학 증명_AI (@min7014_ai)]\n"
-        "공식 암기 없이 눈으로 보고 직관적으로 깨치는 1080p 단계별 시각적 수학 증명(Visual Math Proof) 공식 AI 채널입니다.\n"
-        "수학자료실(https://min7014.github.io/)의 3,400+ 동적 기하(GeoGebra)와 866개 단계별 플립북 증명 PDF를 한국어(KO)·영어(EN) 강의로 제공합니다.\n\n"
-        "📋 전체 1,111개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html\n"
-        "🎙️ 20개국어 AI 강의 스튜디오: https://min7014.github.io/mathedu/video_studio.html\n"
-        "🌐 수학자료실 본관: https://min7014.github.io/\n"
-        "📺 본 채널(@min7014): https://www.youtube.com/@min7014\n\n"
-        "✨ [Visual Math Proofs AI — Step-by-Step Visual Math Proofs]\n"
-        "Discover why Euclidean geometry, calculus, and algebra theorems hold true through step-by-step 1080p visual flipbook proofs and interactive GeoGebra applets!"
+        "🏛️ 민은기 선생님의 단계별 시각적 수학 증명 (https://min7014.github.io/ 공식 채널)\n"
+        "847+ 단계별 시각 증명 PDF와 860+ GeoGebra·AlgeoMath 동적 작도를 한 프레임씩 직관적으로 해설합니다.\n"
+        "📐 수학자료실 본관: https://min7014.github.io/ \n"
+        "🎬 전체 영상·실습 게시판: https://min7014.github.io/mathedu/video_board.html"
     )
     ch_keywords = (
         '수학 기하학 "시각적 증명" "수학자료실" min7014 min7014_ai '
