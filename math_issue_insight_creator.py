@@ -157,22 +157,22 @@ CURATED_ISSUE_INSIGHT_BLUEPRINTS = [
     },
     {
         "slug": "2022040501",
-        "issue_category_ko": "🧭 스마트 안경 시험 논란 시대 × AI가 대신할 수 없는 작도 사고력",
-        "issue_category_en": "🧭 Wearable AI Exam Era × Irreplaceable Geometric Construction",
-        "issue_headline_ko": "카메라로 찍어 3초 만에 객관식 답을 듣는 스마트 안경 논란 — 수식도 보기도 없는 '순수 포물선 곡선' 하나만 주어지면 어떻게 될까?",
-        "issue_headline_en": "When Wearable AI Reads Formula Tests in Seconds: What Happens When Only a Pure Curve Is Given with Zero Equations?",
-        "old_view_ko": "기존 암기식 평가: y² = 4px 식에 숫자를 대입해 객관식 번호(①~⑤)로 초점 좌표를 찍는 시험",
-        "old_view_en": "Rote Formula Exam: Plugging numbers into y² = 4px to pick a multiple-choice focus coordinate",
-        "new_insight_ko": "차별화된 수학교육 시각: 방정식도 좌표축도 없는 포물선 위에서 평행현의 중점 자취와 대칭 원리만으로 대칭축·초점·준선을 손수 복원해 내는 동적 작도 역량!",
+        "issue_category_ko": "🧭 동적 기하·작도 탐구 × 방정식 이전의 이차곡선 본질",
+        "issue_category_en": "🧭 Dynamic Geometric Construction × Conic Sections Before Equations",
+        "issue_headline_ko": "교과서에서 y² = 4px 식부터 대입하게 하는 포물선 — 만약 좌표축도 식도 없는 '순수 포물선 곡선' 하나만 주어지면 초점을 어떻게 찾을까?",
+        "issue_headline_en": "Beyond Plugging Into y² = 4px: How Do You Construct Axis, Focus & Directrix When Given Only a Bare Parabola Curve?",
+        "old_view_ko": "기존 대수 암기 시각: y² = 4px 표준형 식에 숫자를 대입해 기계적으로 초점 좌표 (p, 0)을 구하는 계산",
+        "old_view_en": "Rote Formula View: Plugging numbers into y² = 4px to read off focus coordinates mechanically",
+        "new_insight_ko": "차별화된 수학교육 시각: 방정식도 좌표축도 없는 포물선 위에서 평행현의 중점 자취와 대칭 원리만으로 대칭축·초점·준선을 손수 복원해 내는 순수 기하 작도 역량!",
         "new_insight_en": "Math-Ed Insight: Reconstructing the axis, focus, and directrix from a bare parabola via parallel-chord midpoints and pure geometric symmetry!",
-        "title_ko": "🧭 AI 안경도 절대 못 베끼는 진짜 수학 문제! 식 없는 포물선에서 초점·준선 찾아내기 | 포물선 작도 시각적 증명",
-        "title_en": "🧭 The Math Test Wearable AI Cannot Cheat! Finding Focus & Directrix from a Bare Parabola",
+        "title_ko": "🧭 y²=4px 공식 대입 전에 꼭 봐야 할 기하의 정수! 식 없는 포물선에서 초점·준선 찾아내기 | 포물선 작도 시각적 증명",
+        "title_en": "🧭 Pure Geometry Before Coordinates! Constructing Focus & Directrix from a Bare Parabola",
         "short_title_ko": "❓ 수식도 좌표도 없는 포물선 그림 하나에서 '초점'을 어떻게 작도로 찾아낼까? #Shorts",
         "short_title_en": "❓ Zero Equations, Zero Axes! How Do You Construct a Parabola's Focus by Hand? #Shorts",
-        "act1_ko": "최근 카메라로 시험지를 비추어 객관식 정답을 귓속말로 전달받는 스마트 안경 부정행위가 교육계의 큰 화두가 되었습니다. 이 현상은 사실 오지선다와 공식 대입에 머물러 있던 기존 평가 방식에 근본적인 질문을 던지고 있습니다. 만약 수식도, 좌표축도, 객관식 보기도 없이 오직 포물선 곡선 하나만 그려진 종이 위에서 대칭축과 초점, 준선을 직접 작도하라고 하면 어떻게 될까요?",
-        "act1_en": "Recent exam controversies involving wearable smart glasses expose a deeper truth: multiple-choice formula drills can be answered by a camera in seconds. What happens instead when an assessment gives zero equations, zero coordinates, and zero answer choices—only a bare parabola curve—and asks you to construct its axis, focus, and directrix from pure geometric principles?",
-        "act3_ko": "평행한 두 현의 중점을 이어 대칭축의 방향을 잡고, 직각과 반사 대칭의 성질로 초점과 준선을 한 땀 한 땀 복원하는 과정은 결코 귓속말 숫자 하나로 대신할 수 없습니다. 전파를 막는 단속을 넘어, 학생이 직접 보조선을 긋고 원리를 구성하게 만드는 평가의 전환이야말로 인공지능 시대 수학교육이 나아갈 진짜 해답입니다!",
-        "act3_en": "Connecting midpoints of parallel chords and using reflection symmetry to locate the focus and directrix can never be whispered as a multiple-choice number. Moving from rote answer checking to hands-on geometric construction is the true future of mathematics education in the AI era!",
+        "act1_ko": "이차곡선 단원을 배울 때 많은 학생이 포물선을 와이 제곱은 사피엑스라는 대수 방정식으로만 기억합니다. 하지만 데카르트가 좌표평면을 발명하기 훨씬 전부터 포물선은 순수한 기하 도형이었습니다. 만약 수식도, 좌표축도 없이 오직 포물선 곡선 하나만 그려진 종이 위에서 대칭축과 초점, 준선을 직접 작도하라고 하면 어떻게 길을 열 수 있을까요?",
+        "act1_en": "When studying conic sections, students often remember a parabola only as the equation y squared equals 4px. Yet long before coordinate axes existed, a parabola was pure geometry. Given zero equations and zero axes—only a bare parabola curve on paper—how can you construct its axis of symmetry, focus, and directrix step by step?",
+        "act3_ko": "평행한 두 현의 중점을 이어 대칭축의 방향을 잡고, 수직이등분과 대칭의 성질로 꼭짓점과 초점, 준선을 한 땀 한 땀 복원하는 과정은 대수 공식 너머의 깊은 기하학적 안목을 길러 줍니다. 공식을 외우기 전에 도형의 대칭 구조를 손수 구성해 보는 수학교육, 구독으로 함께해 주세요!",
+        "act3_en": "Connecting midpoints of parallel chords and using perpendicular symmetry to locate the vertex, focus, and directrix reveals the timeless geometric architecture behind conic equations. Subscribe to @min7014_ai for visual proofs that cultivate deep geometric thinking!",
         "comment_quiz_ko": "💬 [수학교육 열린 발문] 만약 포물선이 아니라 '원 둘레의 일부(호)'만 그려져 있다면, 원의 중심은 어떤 두 선을 그어 찾을 수 있을까요? 댓글로 작도 아이디어를 들려주세요! 🤩",
         "comment_quiz_en": "💬 [Open Construction Prompt] If you are given only a circular arc instead of a parabola, which two lines would you construct to find its center? Share your idea below! 🤩",
     },
@@ -182,7 +182,7 @@ CURATED_ISSUE_INSIGHT_BLUEPRINTS = [
 # 2. 실시간 수학·수학교육 이슈 레이더 (0-LLM-Credit RSS + 학사 시즌 캘린더)
 # ==============================================================================
 LIVE_MATH_RSS_FEEDS = [
-    ("google_news_ko_edunews", "https://news.google.com/rss/search?q=%EC%88%98%ED%95%99%EA%B5%90%EC%9C%A1+OR+%EC%84%9C%EC%88%A0%ED%98%95+%EC%88%98%ED%95%99+OR+%EC%8A%A4%EB%A7%88%ED%8A%B8+%EC%95%88%EA%B2%BD+%EC%8B%9C%ED%97%98+OR+%EC%88%98%EB%A6%AC%EB%85%BC%EC%88%A0+OR+%EA%B3%A0%EA%B5%90%ED%95%99%EC%A0%90%EC%A0%9C+%EC%88%98%ED%95%99&hl=ko&gl=KR&ceid=KR:ko"),
+    ("google_news_ko_edunews", "https://news.google.com/rss/search?q=%EC%88%98%ED%95%99%EA%B5%90%EC%9C%A1+OR+%EC%84%9C%EC%88%A0%ED%98%95+%EC%88%98%ED%95%99+OR+%EC%88%98%EB%A6%AC%EB%85%BC%EC%88%A0+OR+%EA%B3%A0%EA%B5%90%ED%95%99%EC%A0%90%EC%A0%9C+%EC%88%98%ED%95%99&hl=ko&gl=KR&ceid=KR:ko"),
     ("google_news_ko_mathedu", "https://news.google.com/rss/search?q=%EC%88%98%ED%95%99+%EC%82%AC%EA%B3%A0%EB%A0%A5+OR+%EA%B8%B0%ED%95%98+%EC%A7%81%EA%B4%80+OR+%EC%88%98%EB%8A%A5+%EC%88%98%ED%95%99+%EB%B3%80%EB%B3%84%EB%A0%A5+OR+%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5+%EC%88%98%ED%95%99%EA%B5%90%EC%8B%A4&hl=ko&gl=KR&ceid=KR:ko"),
     ("google_news_en_mathedu", "https://news.google.com/rss/search?q=%22mathematics+education%22+OR+%22math+assessment%22+OR+%22visual+proof%22+OR+%22AI+in+math+education%22&hl=en-US&gl=US&ceid=US:en"),
     ("arxiv_math_ho", "https://export.arxiv.org/rss/math.HO"),
@@ -200,11 +200,11 @@ SEASONAL_MATH_ED_ISSUES = {
     9: ("하반기 핵심 모의평가 & 수리논술 시즌 화두", "당연해 보이는 직관의 함정을 깨는 엄밀한 정의와 시각적 반례", ["평균값 정리", "연속", "극한", "수열"]),
     10: ("실전 마무리 시즌 — 공식 망각을 이기는 원리 구조화", "시험장 긴장 속에서도 흔들리지 않는 도형 불변량과 대칭 사고", ["내접원", "외접원", "벡터", "정사영"]),
     11: ("11월 대입 시험 직후 '유형 암기 붕괴 vs 본질적 수학 사고력' 대논쟁", "낯선 신유형 앞에서도 무너지지 않는 힘은 유형 암기가 아니라 시각적 원리 재발명에서 나온다", ["원주각", "접선", "타원", "평균변화율", "넓이"]),
-    12: ("학년말 학생부 수학 세특·창의 산출물 작성 시즌", "베끼기식 보고서를 넘어 하나의 시각적 증명에서 새 질문을 여는 진짜 수학 탐구", ["피타고라스", "황금비", "코시", "수열의 합"]),
+    12: ("학년말 학생부 수학 세특·창의 산출물 작성 시즌", "단순 요약 보고서를 넘어 하나의 시각적 증명에서 새 질문을 여는 진짜 수학 탐구", ["피타고라스", "황금비", "코시", "수열의 합"]),
 }
 
 CONCEPT_KEYWORD_BRIDGE = [
-    (("안경", "웨어러블", "부정행위", "객관식", "오지선다", "5지선다", "wearable", "glasses", "cheating", "multiple choice"), ["작도", "포물선", "타원", "빛 반사", "자취"]),
+    (("작도", "동적기하", "알지오매스", "지오지브라", "탐구수업", "자취", "construction", "compass", "dynamic geometry"), ["작도", "포물선", "타원", "빛 반사", "자취"]),
     (("서술형", "논술", "수행평가", "구술", "면접", "과정중심", "정당화", "essay", "oral", "assessment"), ["평균값 정리", "코시", "원주각", "이등변삼각형", "체바"]),
     (("디지털교과서", "환각", "생성형", "문해력", "기초학력", "고교학점제", "curriculum", "literacy", "edtech"), ["피타고라스", "제곱근", "평균변화율", "순환소수", "삼각비"]),
     (("타원", "초점", "반사", "망원경", "광학", "ellipse", "focus", "optical", "reflection"), ["타원", "초점", "빛 반사", "이차곡선"]),
@@ -216,7 +216,11 @@ CONCEPT_KEYWORD_BRIDGE = [
     (("극한", "수렴", "연속", "반례", "limit", "continuity", "counterexample", "proof"), ["극한", "평균값 정리", "부등식"]),
 ]
 
-NON_ACADEMIC_NOISE_TOKENS = ("정치", "연예", "스포츠중계", "election", "celebrity", "gossip")
+NON_ACADEMIC_NOISE_TOKENS = (
+    "정치", "연예", "스포츠중계", "부정행위", "커닝", "컨닝", "스마트 안경", "스마트안경", "ai 안경", "웨어러블",
+    "적발", "단속", "검거", "고소", "소송", "법원", "수사", "자백", "논란", "비상",
+    "election", "celebrity", "gossip", "cheat", "bounties", "scandal", "arrest", "lawsuit", "smart glasses", "wearable",
+)
 
 
 def _is_pure_math_domain_text(text: str) -> bool:

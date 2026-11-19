@@ -858,7 +858,15 @@ python -X utf8 pr.py status
   2. **원인 2 (`visual_diagram_engine.py` 및 기출 4문항 `c2610g26`, `csat25_g24`, `csat26_g24`, `csat26_g29` 동반 적출)**: 전수 스캔 결과 기존 포물선 템플릿(`M 320 75 Q 40 165 320 255`) 역시 꼭짓점이 $x_V=180$으로 $y$축($x=165$)을 $15\text{px}$ 벗어나고 $PF \neq PH$($42.2 \neq 86.7$)인 기하 비례 오차가 존재함을 확인했다.
 - **영구 적용 원칙**:
   1. **[해석학적 100% 일치 2차 베지어 포물선 작도 공식 의무화]**: 꼭짓점 $(x_V, y_V)$, 초점거리 $p$인 포물선 $(y_V - y)^2 = 4p(x - x_V)$는 상·하 반분 2차 베지어 경로 `M (x_V + H₁²/4p, y_V - H₁) Q (x_V, y_V - H₁/2) (x_V, y_V) Q (x_V, y_V + H₂/2) (x_V + H₂²/4p, y_V + H₂)`로 작도하여 전 구간 오차 $0\text{px}$와 꼭짓점 수직 접선 연속성을 보장한다.
-  2. **[전수 교정 및 기계적 감시 (`audit_engine.py`)]**: `edunews01.html`($p=22$, 평행현 중점·$45^\circ$ 직각이등변삼각형 $\triangle VHQ$ 정밀 작도) 및 기출 포물선 4문항($(11,60,61)$ 피타고라스 삼조 기반 $PF=PH=61$ 정밀 일치 + 접선 방정식 일치)과 `offline/*.html` 213종을 일괄 재빌드하고, `audit_engine.py`에 `SVG_CONIC_POLYLINE_KINK` 규칙을 상시 탑재했다.
+  2. **[전수 교정 및 기계적 감시 (`audit_engine.py`)]**: 기출 포물선 4문항($(11,60,61)$ 피타고라스 삼조 기반 $PF=PH=61$ 정밀 일치 + 접선 방정식 일치) 및 단독 퀴즈 패키지를 일괄 재빌드하고, `audit_engine.py`에 `SVG_CONIC_POLYLINE_KINK` 규칙을 상시 탑재했다.
+
+
+### [Policy 75] 민감한 시험 부정행위·사건사고 논란 소재 영구 배제 및 `edunews01` 삭제 원칙 (`2026-11-19` 확정 · 오류신고 `R66`)
+- **사용자 제보 (`R66`, `board/edunews01.html`, 회장님 `[🔧 이번 건만 수정]` 승인)**: *"이 것은 민감한 내용이니 삭제 하는 것이 좋겠다."*
+- **적용 배경 및 핵심 원칙 (`Rule 2` 순수 수학교육 본질 집중 강화)**:
+  1. **[`edunews01` 전면 삭제]**: 시험 부정행위·웨어러블 기기 논란을 도입 소재로 다룬 `board/edunews01.html` 및 `offline/edunews01.html`을 영구 삭제(`git rm`)하고, `board/index.json`, `offline/index.html`, `offline/versions.json`, `assets/edu_news_materials_db.json`에서 관련 항목을 완전히 제거했다(Policy 63·64 내 `edunews01` 및 부정행위 논란 예시 조항을 본 Policy 75로 대체).
+  2. **[민감 사회논란·사건사고 키워드 기계적 원천 차단]**: `edu_news_material_engine.py`(`NON_EDU_NOISE_RE`) 및 `math_issue_insight_creator.py`(`NON_ACADEMIC_NOISE_TOKENS`, `LIVE_MATH_RSS_FEEDS`, `CURATED_ISSUE_INSIGHT_BLUEPRINTS`)에서 시험 부정행위·커닝·웨어러블 기기 논란·소송·수사·적발 등 민감한 사건사고 프레이밍을 전면 제거·차단하고, 오직 **순수 학술 수학교육 화두(동적 기하 작도, 미적분 구조 문해력, 서술형·논술 시각 정당화 등)**와 `min7014.github.io` 원문 증명만을 다루도록 확정했다.
+
 
 
 

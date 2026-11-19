@@ -693,20 +693,25 @@ def _draw_coordinate_curve_svg(pid: str, title_ko: str, eq_label: str, pt1_label
 def _draw_geometry_conic_trig_svg(pid: str, title_ko: str, eq_label: str, pt1_label: str, pt2_label: str, ans_label: str, geo_type: str = "circle_tri", lang: str = "ko") -> str:
     badge = f"📐 [의도적 기하 작도 다이어그램] {title_ko}" if lang == "ko" else f"📐 [Intentional Geometric Construction] {pid.upper()}"
     if geo_type == "hyperbola":
+        # Exact Pythagorean (20,21,29)*2 hyperbola centered at O(205,165): a=42, b=40, c=58.
+        # Vertices (163,165), (247,165); Foci (147,165), (263,165); Asymptotes slope +-20/21;
+        # Point P(280.72, 105) satisfies exact |PF' - PF| = 2a = 84 with <0.1px Hermite cubic fit.
         fig = """
         <line x1="40" y1="165" x2="370" y2="165" stroke="#94a3b8" stroke-width="1.5"/>
         <line x1="205" y1="65" x2="205" y2="265" stroke="#94a3b8" stroke-width="1.5"/>
-        <line x1="75" y1="75" x2="335" y2="255" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="5,4"/>
-        <line x1="75" y1="255" x2="335" y2="75" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="5,4"/>
-        <path d="M 110 80 Q 175 165 110 250" fill="none" stroke="#38bdf8" stroke-width="3"/>
-        <path d="M 300 80 Q 235 165 300 250" fill="none" stroke="#38bdf8" stroke-width="3"/>
-        <circle cx="105" cy="165" r="4.5" fill="#fbbf24"/><text x="105" y="184" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">F'(-c,0)</text>
-        <circle cx="305" cy="165" r="4.5" fill="#fbbf24"/><text x="305" y="184" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">F(c,0)</text>
-        <circle cx="282" cy="108" r="5.5" fill="#34d399" stroke="#fff" stroke-width="1.5"/><text x="302" y="102" fill="#6ee7b7" font-size="11.5" font-weight="800">P(x,y)</text>
-        <polygon points="105,165 305,165 282,108" fill="rgba(52,211,153,0.18)" stroke="#34d399" stroke-width="2"/>
-        <text x="185" y="128" fill="#6ee7b7" font-size="11" font-weight="800">PF' = d₂</text>
-        <text x="308" y="140" fill="#6ee7b7" font-size="11" font-weight="800">PF = d₁</text>
-        <text x="205" y="255" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">쌍곡선 정의: |PF' - PF| = 2a &amp; 점근선 y = ±(b/a)x</text>
+        <line x1="108.4" y1="73" x2="301.6" y2="257" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="5,4"/>
+        <line x1="108.4" y1="257" x2="301.6" y2="73" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="5,4"/>
+        <polygon points="147,165 263,165 280.72,105" fill="rgba(52,211,153,0.18)" stroke="#34d399" stroke-width="2"/>
+        <path d="M 104.46 78 C 141.98 117.33, 163 143, 163 165 C 163 187, 141.98 212.67, 104.46 252" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 305.54 78 C 268.02 117.33, 247 143, 247 165 C 247 187, 268.02 212.67, 305.54 252" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="163" cy="165" r="3.4" fill="#94a3b8"/>
+        <circle cx="247" cy="165" r="3.4" fill="#94a3b8"/>
+        <circle cx="147" cy="165" r="4.8" fill="#fbbf24"/><text x="135" y="185" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">F'(-c,0)</text>
+        <circle cx="263" cy="165" r="4.8" fill="#fbbf24"/><text x="275" y="185" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">F(c,0)</text>
+        <circle cx="280.72" cy="105" r="5.5" fill="#34d399" stroke="#fff" stroke-width="1.5"/><text x="293" y="102" fill="#6ee7b7" font-size="11.5" font-weight="800" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">P(x,y)</text>
+        <text x="202" y="128" fill="#6ee7b7" font-size="11" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">PF' = d₂</text>
+        <text x="295" y="142" fill="#6ee7b7" font-size="11" font-weight="800" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">PF = d₁</text>
+        <text x="205" y="270" fill="#fde68a" font-size="10.8" font-weight="800" text-anchor="middle">쌍곡선 정의: |PF' - PF| = 2a &amp; 점근선 y = ±(b/a)x</text>
         """
     elif geo_type == "parabola":
         # Exact parabola (165 - y)^2 = 100(x - 150): Vertex O(150,165), Focus F(175,165) [p=25],
@@ -722,21 +727,23 @@ def _draw_geometry_conic_trig_svg(pid: str, title_ko: str, eq_label: str, pt1_la
         <line x1="175" y1="165" x2="186" y2="105" stroke="#34d399" stroke-width="1.8" stroke-dasharray="4,3"/>
         <line x1="125" y1="105" x2="186" y2="105" stroke="#34d399" stroke-width="2.2" marker-start="url(#arrGreen)" marker-end="url(#arrGreen)"/>
         <circle cx="186" cy="105" r="5.2" fill="#34d399" stroke="#fff" stroke-width="1.5"/>
-        <text x="205" y="103" fill="#6ee7b7" font-size="10.8" font-weight="800">P(x₁, y₁)</text>
+        <text x="205" y="103" fill="#6ee7b7" font-size="10.8" font-weight="800" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">P(x₁, y₁)</text>
         <circle cx="150" cy="165" r="3.8" fill="#94a3b8"/>
-        <circle cx="175" cy="165" r="4.8" fill="#fbbf24"/><text x="192" y="183" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">초점 F(p,0)</text>
-        <text x="155" y="96" fill="#6ee7b7" font-size="10.5" font-weight="800" text-anchor="middle">PF = PH = x₁ + p</text>
+        <circle cx="175" cy="165" r="4.8" fill="#fbbf24"/><text x="192" y="183" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">초점 F(p,0)</text>
+        <text x="155" y="96" fill="#6ee7b7" font-size="10.5" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">PF = PH = x₁ + p</text>
         """
     elif geo_type == "ellipse":
+        # Exact (3,4,5)*25 ellipse centered at O(205,168): rx=125, ry=75, c=100;
+        # Foci F'(105,168), F(305,168); Point P(280,108) satisfies PF'+PF=2a=250.
         fig = """
-        <line x1="40" y1="170" x2="370" y2="170" stroke="#94a3b8" stroke-width="1.5"/>
-        <line x1="205" y1="65" x2="205" y2="265" stroke="#94a3b8" stroke-width="1.5"/>
-        <ellipse cx="205" cy="170" rx="135" ry="78" fill="rgba(56,189,248,0.10)" stroke="#38bdf8" stroke-width="2.5"/>
-        <circle cx="120" cy="170" r="5" fill="#fbbf24"/><text x="120" y="190" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">F'(-c,0)</text>
-        <circle cx="290" cy="170" r="5" fill="#fbbf24"/><text x="290" y="190" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">F(c,0)</text>
-        <circle cx="245" cy="96" r="5.5" fill="#34d399" stroke="#fff" stroke-width="1.5"/><text x="245" y="84" fill="#6ee7b7" font-size="11.5" font-weight="800" text-anchor="middle">P</text>
-        <polygon points="120,170 290,170 245,96" fill="rgba(52,211,153,0.22)" stroke="#34d399" stroke-width="2"/>
-        <text x="205" y="264" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">타원의 정의: PF' + PF = 2a (장축의 길이)</text>
+        <line x1="40" y1="168" x2="370" y2="168" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="205" y1="65" x2="205" y2="262" stroke="#94a3b8" stroke-width="1.5"/>
+        <ellipse cx="205" cy="168" rx="125" ry="75" fill="rgba(56,189,248,0.10)" stroke="#38bdf8" stroke-width="2.5"/>
+        <polygon points="105,168 305,168 280,108" fill="rgba(52,211,153,0.22)" stroke="#34d399" stroke-width="2"/>
+        <circle cx="105" cy="168" r="5" fill="#fbbf24"/><text x="108" y="187" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">F'(-c,0)</text>
+        <circle cx="305" cy="168" r="5" fill="#fbbf24"/><text x="302" y="187" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">F(c,0)</text>
+        <circle cx="280" cy="108" r="5.5" fill="#34d399" stroke="#fff" stroke-width="1.5"/><text x="287" y="96" fill="#6ee7b7" font-size="11.5" font-weight="800" paint-order="stroke" stroke="#0b1120" stroke-width="3.2" stroke-linejoin="round">P</text>
+        <text x="205" y="266" fill="#fde68a" font-size="11" font-weight="800" text-anchor="middle">타원의 정의: PF' + PF = 2a (장축의 길이)</text>
         """
     elif geo_type == "space3d":
         fig = """
