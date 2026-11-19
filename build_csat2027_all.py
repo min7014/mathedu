@@ -291,8 +291,8 @@ def build_problem_html(prob: dict) -> tuple[str, list[dict]]:
     badge_en = f"2027 CSAT Math {subj_en} #{qnum_clean}"
 
     search_query = f"{title_ko} {summary_ko} {' '.join(tags)}"
-    matched_materials = min7014_matcher.match_materials(search_query, limit=4)
-    visual_tip_ko = min7014_matcher._get_visual_tip_text(search_query)
+    matched_materials = min7014_matcher.match_materials_for_problem(slug, search_query, limit=4)
+    visual_tip_ko = min7014_matcher.get_visual_tip(search_query, matched_materials)
     addon_card_html = min7014_matcher.generate_addon_card_html(matched_materials, search_query)
 
     sym_items_html = ""
@@ -408,6 +408,9 @@ def build_problem_html(prob: dict) -> tuple[str, list[dict]]:
 
     if len(sol_en.strip()) < 150:
         sol_en += "\n<p>💡 <b>Key Takeaway</b>: Follow each micro-scaffolding step from elementary foundations to complete the rigorous mathematical proof.</p>"
+
+    sol_ko += min7014_matcher.build_solution_material_links_html(matched_materials, lang="ko")
+    sol_en += min7014_matcher.build_solution_material_links_html(matched_materials, lang="en")
 
     final_q_block = build_question_block(
         final_data,
@@ -785,11 +788,16 @@ def main() -> None:
                 "tags": prob.get("tags", []),
                 "proof_links": [
                     {
+                        "id": m.get("id", ""),
                         "title": m.get("title", ""),
+                        "category": m.get("category", ""),
                         "url": m.get("url", ""),
-                        "pdf_url": m.get("pdf_url", ""),
+                        "pdf": min7014_matcher._clean_pdf_url(m.get("pdf", "")),
+                        "geogebra": m.get("geogebra", ""),
+                        "algeomath": min7014_matcher._clean_algeo_url(m.get("algeomath", "")),
+                        "youtube": m.get("youtube", ""),
                     }
-                    for m in (matched or [])[:2]
+                    for m in (matched or [])[:3]
                 ],
             }
         )

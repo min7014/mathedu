@@ -401,6 +401,75 @@
       cursor: pointer;
     }
     .btn-mini:hover { border-color: var(--accent); color: var(--accent); }
+    .prob-proof-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      min-width: 0;
+      max-width: 100%;
+    }
+    .prob-proof-hdr {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .prob-proof-item {
+      padding: 6px 0;
+      border-top: 1px dashed var(--border-strong);
+      min-width: 0;
+    }
+    .prob-proof-item:first-of-type { border-top: none; padding-top: 0; }
+    .prob-proof-item:last-of-type { padding-bottom: 0; }
+    .prob-proof-title {
+      display: block;
+      font-size: 0.77rem;
+      font-weight: 700;
+      color: var(--txt);
+      text-decoration: none;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      overflow-wrap: break-word;
+    }
+    .prob-proof-title:hover { color: var(--accent); text-decoration: underline; }
+    .prob-proof-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+    }
+    .proof-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.69rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--txt);
+      white-space: nowrap;
+    }
+    .proof-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .proof-chip-pdf { border-color: #fdba74; background: #fff7ed; color: #9a3412; }
+    .proof-chip-ggb { border-color: #6ee7b7; background: #ecfdf5; color: #065f46; }
+    .proof-chip-algeo { border-color: #c4b5fd; background: #f5f3ff; color: #5b21b6; }
+    .proof-chip-yt { border-color: #fda4af; background: #fff1f2; color: #9f1239; }
+    .proof-chip-web { border-color: #7dd3fc; background: #f0f9ff; color: #0369a1; }
+    html.dark-theme .proof-chip-pdf { border-color: #9a3412; background: rgba(154, 52, 18, 0.25); color: #fdba74; }
+    html.dark-theme .proof-chip-ggb { border-color: #065f46; background: rgba(6, 95, 70, 0.25); color: #6ee7b7; }
+    html.dark-theme .proof-chip-algeo { border-color: #5b21b6; background: rgba(91, 33, 182, 0.25); color: #c4b5fd; }
+    html.dark-theme .proof-chip-yt { border-color: #9f1239; background: rgba(159, 18, 57, 0.25); color: #fda4af; }
+    html.dark-theme .proof-chip-web { border-color: #0369a1; background: rgba(3, 105, 161, 0.25); color: #7dd3fc; }
   </style>
 </head>
 <body>
@@ -679,9 +748,32 @@
         var cleanEn = (it.title_en || it.title).replace(/^\[.*?\]\s*/, '');
 
         var proofRow = '';
-        if (it.proof_links && it.proof_links.length > 0 && it.proof_links[0].url) {
-          var p0 = it.proof_links[0];
-          proofRow = '<div style="margin-top:6px;font-size:0.76rem"><a href="' + escapeHtml(p0.url) + '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700">📐 연계 시각 증명: ' + escapeHtml(p0.title) + ' ↗</a></div>';
+        if (it.proof_links && it.proof_links.length > 0) {
+          var proofItemsHtml = it.proof_links.slice(0, 3).map(function(p) {
+            if (!p || !p.url) return '';
+            var chips = [];
+            chips.push('<a class="proof-chip proof-chip-web" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener">🌐 <span class="bilingual-ko">자료실 원문</span><span class="bilingual-en">Web</span></a>');
+            if (p.pdf) chips.push('<a class="proof-chip proof-chip-pdf" href="' + escapeHtml(p.pdf) + '" target="_blank" rel="noopener">📄 PDF</a>');
+            if (p.geogebra) chips.push('<a class="proof-chip proof-chip-ggb" href="' + escapeHtml(p.geogebra) + '" target="_blank" rel="noopener">📐 GeoGebra</a>');
+            if (p.algeomath) chips.push('<a class="proof-chip proof-chip-algeo" href="' + escapeHtml(p.algeomath) + '" target="_blank" rel="noopener">🔢 AlgeoMath</a>');
+            if (p.youtube) chips.push('<a class="proof-chip proof-chip-yt" href="' + escapeHtml(p.youtube) + '" target="_blank" rel="noopener">🎥 <span class="bilingual-ko">영상</span><span class="bilingual-en">Video</span></a>');
+            return (
+              '<div class="prob-proof-item">' +
+                '<a class="prob-proof-title" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener">📌 ' + escapeHtml(p.title) + '</a>' +
+                '<div class="prob-proof-chips">' + chips.join('') + '</div>' +
+              '</div>'
+            );
+          }).join('');
+          if (proofItemsHtml) {
+            proofRow =
+              '<div class="prob-proof-box">' +
+                '<div class="prob-proof-hdr">' +
+                  '<span>📚 <span class="bilingual-ko">연계 수학자료실 원리·시각 증명</span><span class="bilingual-en">Linked Math Archive Proofs</span></span>' +
+                  '<span style="opacity:0.75">' + Math.min(it.proof_links.length, 3) + '<span class="bilingual-ko">건 직결</span><span class="bilingual-en"> linked</span></span>' +
+                '</div>' +
+                proofItemsHtml +
+              '</div>';
+          }
         }
 
         return (
