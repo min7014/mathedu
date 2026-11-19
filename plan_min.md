@@ -836,3 +836,16 @@ python -X utf8 pr.py status
   2. **[5대 심층 연구실 점진적 공개 탭 허브 (`#deepMathLabsHub`)]**: `오늘의 시각 증명·16대 단원`, `오늘의 3분 유레카`, `수학교사 5대 스튜디오`, `경이(Wonder) 프랙탈 실험실`, `글로벌 아카데미(Desmos·Polypad)` 및 과거 완료된 출제 현황(`#requestsBoardDetails`)은 문항 목록 하단의 접이식 탭 허브로 통합하되, 모든 기존 DOM ID·딥링크 해시(`#dailyGrowthFlywheelSection` 등)·`PEDAGOGY_FRONT_LITE` 데몬 동기화 앵커를 100% 보존한다.
   3. **[영문 모드(`?lang=en`) 네이티브 문장 직결 및 무효 트래픽·경합 차단]**: `CURIOSITY_ATLAS_EN` 8종 원어민 영문 데이터 및 `mathedu:lang-changed` 실시간 리스너를 연결하여 한/영 양방향 무결성을 보장하고, `mathedu-ads.js`에 로컬·봇 스킵 가드(`local-or-bot-skip`)를, `mathedu_telegram_bridge.py`에 `grace_sec=900.0`(15분) 락 보호를 적용한다.
 
+
+### [Policy 73] `@min7014_ai` 유튜브 채널 공식 명칭(`Rule 38`) 라이브 반영 상태 전수 진단 · 글로벌 7개국어 채널명 라이브 교체 완료 및 한국어 기본 채널명 YouTube Studio 본인인증 안내 (`2026-11-19` 확정)
+- **회장님 확인 질문**: *"예전에 채널의 제목을 바꾼다고 했었는데?"*
+- **`Rule 33` 정직한 실측 진단**:
+  1. 코드(`min7014_video_maker.py`, `finance.py`)와 채널 상단 배너 이미지에는 이미 `Rule 38`(`민은기 선생님의 단계별 시각적 수학 증명` / `MIN EUN GI : Visual Math Proofs (@min7014_ai)`)이 반영되어 있었으나, **실제 유튜브 채널에는 2가지 제약으로 인해 구 명칭(`오리지널 단계별 시각적 수학 증명` / `Min's Math Lab AI`)이 남아 있었다**:
+     - ① `YouTube Data API v3`에서 `brandingSettings.channel.title`(기본 언어 채널명)은 **읽기 전용(Read-Only)**이라 API 호출 시 HTTP `200`만 반환하고 실제 기본 채널명은 변경되지 않으며, `localizations`에 기본 언어(`ko`)를 포함해 호출하면 HTTP `400`(`invalid argument`)으로 거절된다.
+     - ② `YouTube Studio`(`editing/profile`)에서 기본 채널 `이름` 변경 후 `[게시]`를 누르면 Google 보안 정책(`security/get_web_reauth_url`)에 의해 **계정 소유자 2단계 본인 인증(스마트폰/패스키 승인)** 창이 필수로 요구되어 백그라운드 봇이 단독으로 통과할 수 없다.
+- **즉시 완료한 라이브 반영 내역**:
+  1. **글로벌 7개국어 채널명(`localizations`) 전량 즉시 교체 완료**: `ko` 제외 BCP-47 하이픈 키(`en-US`, `ja-JP`, `zh-CN`, `es-ES`, `fr-FR`, `de-DE`, `vi-VN`)로 API 업데이트를 실행하여 영문 채널명(`Min's Math Lab AI` ➔ **`MIN EUN GI : Visual Math Proofs (@min7014_ai)`**) 및 일·중·서·불·독·베트남어 채널명의 `_AI` 표기를 라이브 채널에서 100% 제거·표준화 완료했다.
+  2. **채널 공식 설명란·키워드(`brandingSettings`) 및 웹 코드 정합화**: 라이브 채널 설명란을 `🏛️ [민은기 선생님의 단계별 시각적 수학 증명 — https://min7014.github.io/ 원문 기반 공식 채널]`로 갱신하고, `video_board.html`·`min7014_video_maker.py`·`finance.py` 내 잔존 구 채널명 문자열을 전수 정리했다.
+  3. **한국어 기본 채널명(`이름`) 최종 확정 경로**: `https://studio.youtube.com/channel/UCSlqQfOEtRfJuMPyGMLgFYA/editing/profile` 의 `이름` 칸에 **`민은기 선생님의 단계별 시각적 수학 증명`** 입력 후 `[게시]` ➔ Google 본인 인증 1회 승인으로 완료된다.
+
+

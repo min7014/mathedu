@@ -1530,12 +1530,12 @@ def refresh_live_channel_stats_and_repair(yt, vmaker, max_title_repairs: int = 8
                 st["branding_done"] = True
 
             if not st.get("localizations_done"):
-                locs = ch_item.get("localizations") or {}
+                locs = {k.replace("_", "-"): v for k, v in (ch_item.get("localizations") or {}).items() if not k.startswith("ko")}
                 ch_desc = ((ch_item.get("brandingSettings") or {}).get("channel") or {}).get(
-                    "description", "Step-by-step original visual math proofs from https://min7014.github.io/"
+                    "description", "Step-by-step visual math proofs from https://min7014.github.io/"
                 )
-                locs["en"] = {
-                    "title": "MIN EUN GI : Visual Math Proofs",
+                locs["en-US"] = {
+                    "title": "MIN EUN GI : Visual Math Proofs (@min7014_ai)",
                     "description": ch_desc,
                 }
                 yt.channels().update(

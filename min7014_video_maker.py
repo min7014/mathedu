@@ -270,7 +270,7 @@ def reauthenticate_official_ai_channel(client_secret_path=None) -> bool:
     print("=" * 76, flush=True)
     print("🔐 [@min7014_ai 공식 브랜드 채널 OAuth 재인증]", flush=True)
     print("👉 열리는 브라우저 창에서 개인 프로필('Eun Gi Min / @eungimin3184')이 아닌,", flush=True)
-    print("   반드시 브랜드 채널 ['오리지널 단계별 시각적 수학 증명 (@min7014_ai)']을 클릭해 주세요!", flush=True)
+    print("   반드시 브랜드 채널 ['민은기 선생님의 단계별 시각적 수학 증명 (@min7014_ai)']을 클릭해 주세요!", flush=True)
     print("=" * 76, flush=True)
 
     for attempt in range(1, 3):
@@ -9053,42 +9053,38 @@ def optimize_youtube_channel_settings():
     )
 
     localizations = {
-        "ko": {
-            "title": "민은기 선생님의 단계별 시각적 수학 증명",
-            "description": ch_desc_ko,
-        },
-        "en": {
+        "en-US": {
             "title": "MIN EUN GI : Visual Math Proofs (@min7014_ai)",
             "description": (
-                "📐 Welcome to Visual Math Proofs AI (@min7014_ai) — Official 1080p Step-by-Step Visual Mathematical Proofs Channel!\n"
-                "We transform 3,400+ interactive GeoGebra geometry constructions and 866 step-by-step flipbook proof PDFs from https://min7014.github.io/ into crystal-clear visual lectures.\n\n"
-                "📋 Full 1,111 Math Video Board: https://min7014.github.io/mathedu/video_board.html\n"
-                "🎙️ 20+ Language AI Lecture Studio: https://min7014.github.io/mathedu/video_studio.html\n"
-                "📺 Main Channel (@min7014): https://www.youtube.com/@min7014"
+                "🏛️ [MIN EUN GI : Visual Math Proofs (@min7014_ai) — Official 1080p Step-by-Step Visual Mathematical Proofs]\n"
+                "Built from 3,400+ interactive GeoGebra/AlgeoMath geometry constructions and 847+ step-by-step visual proof PDFs crafted directly by mathematics educator MIN EUN GI at https://min7014.github.io/ .\n\n"
+                "📋 Full Visual Proof Video Board & MathLab: https://min7014.github.io/mathedu/video_board.html \n"
+                "🌍 English Visual Proofs Archive: https://min7014.github.io/mathedu/en/ \n"
+                "🏛️ Original Math Archive: https://min7014.github.io/"
             ),
         },
-        "ja": {
-            "title": "視覚的数学証明_AI (@min7014_ai)",
-            "description": "公式の暗記ではなく、目で見て直感的に理解するステップバイステップの視覚的数学証明チャンネルです。https://min7014.github.io/mathedu/video_board.html",
+        "ja-JP": {
+            "title": "MIN EUN GI : 段階別・視覚的数学証明",
+            "description": "公式の暗記ではなく、目で見て直感的に理解するステップバイステップの視覚的数学証明チャンネルです。 https://min7014.github.io/mathedu/video_board.html",
         },
         "zh-CN": {
-            "title": "分步视觉数学证明_AI (@min7014_ai)",
-            "description": "无需死记硬背公式，通过分步翻页视觉动画直观理解欧几里得几何与数学定理证明！https://min7014.github.io/mathedu/video_board.html",
+            "title": "MIN EUN GI : 分步视觉数学证明",
+            "description": "无需死记硬背公式，通过分步翻页视觉动画直观理解欧几里得几何与数学定理证明！ https://min7014.github.io/mathedu/video_board.html",
         },
-        "es": {
-            "title": "Demostraciones Matemáticas Visuales AI (@min7014_ai)",
-            "description": "¡Demostraciones matemáticas visuales paso a paso en 1080p con GeoGebra y flipbooks interactivos! https://min7014.github.io/mathedu/video_board.html",
+        "es-ES": {
+            "title": "MIN EUN GI : Demostraciones Matemáticas Visuales",
+            "description": "¡Demostraciones matemáticas visuales paso a paso en 1080p con GeoGebra! https://min7014.github.io/mathedu/video_board.html",
         },
-        "fr": {
-            "title": "Preuves Mathématiques Visuelles AI (@min7014_ai)",
+        "fr-FR": {
+            "title": "MIN EUN GI : Preuves Mathématiques Visuelles",
             "description": "Preuves mathématiques visuelles étape par étape en 1080p (Géométrie euclidienne, Pythagore, Ceva, Ménélaüs). https://min7014.github.io/mathedu/video_board.html",
         },
-        "de": {
-            "title": "Visuelle Mathematische Beweise AI (@min7014_ai)",
+        "de-DE": {
+            "title": "MIN EUN GI : Visuelle Mathematische Beweise",
             "description": "Visuelle mathematische Beweise Schritt für Schritt in 1080p verstehen! https://min7014.github.io/mathedu/video_board.html",
         },
-        "vi": {
-            "title": "Chứng Minh Toán Học Trực Quan AI (@min7014_ai)",
+        "vi-VN": {
+            "title": "MIN EUN GI : Chứng Minh Toán Học Trực Quan",
             "description": "Chứng minh toán học trực quan từng bước chất lượng 1080p kết hợp GeoGebra! https://min7014.github.io/mathedu/video_board.html",
         },
     }
