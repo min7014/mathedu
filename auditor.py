@@ -236,12 +236,17 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         except Exception:
             pass
 
-    # exam_hybrid_creator.py 해석기하 공점(Ceva)·공선(Menelaus) 무결성 기계적 점검 (Rule 5 & Rule 44)
+    # exam_hybrid_creator.py 해석기하 공점(Ceva)·공선(Menelaus) 무결성 및 외곽 비율호·무자름 자막 기계적 점검 (Rule 5, Rule 44, Policy 80)
     eh_file = ROOT_DIR / "exam_hybrid_creator.py"
     if eh_file.exists():
         eh_txt = eh_file.read_text(encoding="utf-8", errors="ignore")
-        if 'elif kind == "menelaus_line":' not in eh_txt or "mA, mB, mC = 3.0, 6.0, 4.0" not in eh_txt:
-            findings["L7_visual_integrity"].append("exam_hybrid_creator.py: 체바 공점(Ceva concurrency) 또는 메넬라우스 공선(Menelaus collinearity) 해석기하 작도 누락")
+        if (
+            'elif kind == "menelaus_line":' not in eh_txt
+            or "mA, mB, mC = 3.0, 6.0, 4.0" not in eh_txt
+            or "def _draw_outward_ratio_arc(" not in eh_txt
+            or "short_clue[: (" in eh_txt
+        ):
+            findings["L7_visual_integrity"].append("exam_hybrid_creator.py: 체바/메넬라우스 해석기하·외곽 비율호 또는 Shorts 무자름 자막 기준 위반")
 
     # genie3_world_controller.py 3D 입체 은선(점선)·구-타원 차폐(Ray-Sphere Occlusion)·실루엣 외접 무결성 점검 (Policy 67)
     gw_file = ROOT_DIR / "genie3_world_controller.py"
