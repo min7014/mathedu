@@ -248,6 +248,14 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         ):
             findings["L7_visual_integrity"].append("exam_hybrid_creator.py: 체바/메넬라우스 해석기하·외곽 비율호 또는 Shorts 무자름 자막 기준 위반")
 
+    # pr.py v3.0 교육자 헌정(educator_tribute) 품격 홍보 및 저속 과장 문구 배제 검증 (Policy 81)
+    pr_file = ROOT_DIR / "pr.py"
+    if pr_file.exists():
+        pr_txt = pr_file.read_text(encoding="utf-8", errors="ignore")
+        pr_code = "\n".join(ln for ln in pr_txt.splitlines() if not ln.strip().startswith("#"))
+        if '"educator_tribute"' not in pr_code or '"통암기 멈추고"' in pr_code:
+            findings["L7_visual_integrity"].append("pr.py: 교육자 헌정 품격 홍보 채널(educator_tribute) 누락 또는 금지 과장 문구 잔존")
+
     # genie3_world_controller.py 3D 입체 은선(점선)·구-타원 차폐(Ray-Sphere Occlusion)·실루엣 외접 무결성 점검 (Policy 67)
     gw_file = ROOT_DIR / "genie3_world_controller.py"
     if gw_file.exists():

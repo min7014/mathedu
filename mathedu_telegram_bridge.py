@@ -85,7 +85,8 @@ def _is_live_session_owning_telegram(grace_sec: float = 900.0) -> bool:
         return True
     if LIVE_TURN_LOCK_FILE.exists():
         try:
-            ts = float(LIVE_TURN_LOCK_FILE.read_text(encoding="utf-8").strip())
+            raw_lock = LIVE_TURN_LOCK_FILE.read_text(encoding="utf-8").strip()
+            ts = float(json.loads(raw_lock)["ts"]) if raw_lock.startswith("{") else float(raw_lock)
             if 0 <= (time.time() - ts) < grace_sec:
                 return True
         except Exception:
@@ -965,6 +966,42 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             run_shell(["git", "push", "origin", "main"], timeout=60)
             return f"💰 [크레딧 0원 · 웹 애드센스 즉시 활성화 및 GitHub 배포 완료]\n{out}"
         return "ℹ️ 사용법: `!애드센스 ca-pub-1234567890123456 [슬롯번호]`"
+
+    if low == "!홍보" or low == "/pr" or low.startswith(("!홍보 ", "/pr ")):
+        parts = cmd.split()
+        req_slug = parts[1].strip() if len(parts) >= 2 else "2017090101"
+        sys.path.insert(0, str(ROOT_DIR))
+        import pr as _pr_mod
+
+        if _pr_mod.PR_ENGINE_JSON.exists():
+            try:
+                data = json.loads(_pr_mod.PR_ENGINE_JSON.read_text(encoding="utf-8"))
+            except Exception:
+                data = _pr_mod.run_autonomous_pr_cycle()
+        else:
+            data = _pr_mod.run_autonomous_pr_cycle()
+        camps = data.get("campaigns") or []
+        alias_m = {"0001": "2014111901", "0002": "2014111902", "0003": "2017090101", "0004": "math20250130001", "0005": "2025020101"}
+        ns = alias_m.get(req_slug, req_slug)
+        chosen = next((c for c in camps if c.get("slug") == ns), camps[0] if camps else None)
+        if not chosen:
+            return "ℹ️ 홍보 캠페인 데이터가 아직 생성되지 않았습니다."
+        st = data.get("stats") or {}
+        trib = (chosen.get("channels") or {}).get("educator_tribute") or ""
+        return (
+            f"🏛️ [pr v3.0 · 민은기 선생님 명작 아카이브 홍보 키트 ({chosen.get('slug')})]\n"
+            f"• 구축 규모: {st.get('total_campaigns', 0)}개 명작 × {st.get('channels_per_campaign', 8)}대 품격 채널 = {st.get('total_ready_posts', 0)}종\n"
+            f"• 도록 카드: {chosen.get('pr_card_url', 'assets/pr_cards/pr_card_min7014_master.png')}\n\n"
+            f"{trib}"
+        )
+
+    if low in ("!린", "!린검증", "/lean", "!lean") or low.startswith(("!린 ", "!린검증 ", "/lean ", "!lean ")):
+        parts = cmd.split()
+        req_slug = parts[1].strip() if len(parts) >= 2 else ""
+        sys.path.insert(0, str(ROOT_DIR))
+        import lean_verifier as _lv_mod
+
+        return _lv_mod.format_telegram_lean_briefing(req_slug)
 
     return None
 

@@ -2591,22 +2591,22 @@
       var probTitle = getProblemTitle();
       var shareUrl = window.location.href.split('#')[0];
       var msg = [
-        '🔥 [민은기 선생님의 수학자료실 × @min7014_ai 시각 증명 & 탈-5지선다 창의 수학 도전장!]',
+        '🏛️ [수학교사 민은기 선생님의 수학자료실 × 탈-5지선다 창의 수학 도전장]',
         '📌 도전 문항: ' + probTitle,
-        '✍️ 5지선다 찍기 없이 스스로 수식을 조립해 푸는 창의 디딤돌 바로 도전:',
+        '✍️ 보기 찍기 없이 스스로 수식을 세워 푸는 초등 눈높이 디딤돌(16,594+문항):',
         '👉 ' + shareUrl,
         '',
-        '🎬 연관 시각적 수학 증명 1080p 유튜브 (@min7014_ai - ' + matched.title + '):',
+        '🎬 연관 시각적 수학 증명 해설 (@min7014_ai · ' + matched.title + '):',
         '👉 https://youtu.be/' + matched.ytKo,
-        '📋 전체 1,113개 수학 설명영상 게시판: https://min7014.github.io/mathedu/video_board.html'
+        '📜 민은기 선생님의 1,132+ 심층 동적 기하 · 865+ 시각 증명 아카이브: https://min7014.github.io/mathedu/video_board.html'
       ].join('\n');
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(msg).catch(function(){});
       }
       if (window.MatheduGame && window.MatheduGame.addXP) {
-        window.MatheduGame.addXP(30, '📢 유튜브 영상 + 수학 문제 홍보 공유');
+        window.MatheduGame.addXP(30, '🏛️ 민은기 선생님 아카이브 & 문제 품격 공유');
       }
-      alert('📢 [유튜브 설명영상 + 현재 수학 문제] 단톡방·SNS 홍보 카드가 클립보드에 복사되었습니다! (+30 XP)\n\n' + msg);
+      alert('🏛️ [수학교사 민은기 선생님 시각 증명 + 현재 수학 문제] 초대장이 클립보드에 복사되었습니다! (+30 XP)\n\n' + msg);
     };
 
     window.toggleAcadDrawer = function(which) {
