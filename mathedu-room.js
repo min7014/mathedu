@@ -2875,49 +2875,49 @@
       var s = String(stemText || '');
       if (/지수|거듭제곱|로그|\log/.test(s)) {
         return [
-          '❓ 밑(Base)을 같은 소수로 통일하면 지수끼리 어떻게 묶일까?',
-          '❓ 거듭제곱근을 분수·음수 지수로 바꾸면 어떤 약분이 일어날까?',
-          '❓ 진수 조건(>0)이나 작은 정수 대입에서 어떤 규칙이 보일까?',
-          '❓ 앞 단계에서 구한 조각을 대입하면 어떻게 간단해질까?'
+          bilingual('❓ 밑(Base)을 같은 소수로 통일하면 지수끼리 어떻게 묶일까?', '❓ If we unify bases to the same prime, how do exponents combine?'),
+          bilingual('❓ 거듭제곱근을 분수·음수 지수로 바꾸면 어떤 약분이 일어날까?', '❓ Converting roots to fractional exponents—what cancels out?'),
+          bilingual('❓ 진수 조건(>0)이나 작은 정수 대입에서 어떤 규칙이 보일까?', '❓ What pattern appears with domain (>0) or small integers?'),
+          bilingual('❓ 앞 단계에서 구한 조각을 대입하면 어떻게 간단해질까?', '❓ How does substituting the earlier step simplify this?')
         ];
       }
       if (/삼각|sin|cos|tan|원|접선|타원|포물선|쌍곡선|벡터|넓이/.test(s)) {
         return [
-          '❓ 원의 중심·초점과 접점·교점을 이으면 어떤 직각/이등변삼각형이 생길까?',
-          '❓ 도형이 움직여도 변하지 않는 길이·각도(불변량)는 무엇일까?',
-          '❓ 단위원 대칭성·주기성을 쓰면 각도가 어떻게 단순해질까?',
-          '❓ 사인법칙(외접원)과 코사인법칙(세 변) 중 어떤 질문이 먼저일까?'
+          bilingual('❓ 원의 중심·초점과 접점·교점을 이으면 어떤 직각/이등변삼각형이 생길까?', '❓ Joining center/foci to tangency points—what triangles appear?'),
+          bilingual('❓ 도형이 움직여도 변하지 않는 길이·각도(불변량)는 무엇일까?', '❓ Which lengths or angles remain invariant as points move?'),
+          bilingual('❓ 단위원 대칭성·주기성을 쓰면 각도가 어떻게 단순해질까?', '❓ How do unit-circle symmetry & periodicity simplify angles?'),
+          bilingual('❓ 사인법칙(외접원)과 코사인법칙(세 변) 중 어떤 질문이 먼저일까?', '❓ Law of Sines (circumcircle) or Law of Cosines (three sides) first?')
         ];
       }
       if (/수열|등차|등비|시그마|\sum|귀납/.test(s)) {
         return [
-          '❓ n=1, 2, 3 작은 수를 직접 대입해 나열하면 어떤 규칙이 보일까?',
-          '❓ 이웃한 두 항의 차(공차)·비(공비)는 일정하게 유지될까?',
-          '❓ 분모를 쪼개면(부분분수) 도미노처럼 연쇄 상쇄가 일어날까?',
-          '❓ 알고 있는 뒤쪽 항에서 역추적 나뭇가지 트리를 그려볼까?'
+          bilingual('❓ n=1, 2, 3 작은 수를 직접 대입해 나열하면 어떤 규칙이 보일까?', '❓ Plugging in n=1, 2, 3—what pattern emerges?'),
+          bilingual('❓ 이웃한 두 항의 차(공차)·비(공비)는 일정하게 유지될까?', '❓ Is the difference or ratio of adjacent terms constant?'),
+          bilingual('❓ 분모를 쪼개면(부분분수) 도미노처럼 연쇄 상쇄가 일어날까?', '❓ Does partial-fraction splitting trigger telescoping cancellation?'),
+          bilingual('❓ 알고 있는 뒤쪽 항에서 역추적 나뭇가지 트리를 그려볼까?', '❓ Can we draw a backtracking tree from a known later term?')
         ];
       }
       if (/극한|연속|미분|도함수|접선|극대|극소|적분|\int|\lim/.test(s)) {
         return [
-          '❓ 분모가 0에 가까워질 때 약분되어야 할 공통인수 (x-a)는 무엇일까?',
-          '❓ 접점의 x좌표를 미지수 t로 먼저 선언하면 어떤 식이 세워질까?',
-          '❓ 도함수 f′(x)=0 전후에서 부호가 바뀌는 극값 지점은 어디일까?',
-          '❓ 정적분 구간에 위끝=아래끝 대입과 양변 미분을 해보면 무엇이 나올까?'
+          bilingual('❓ 분모가 0에 가까워질 때 약분되어야 할 공통인수 (x-a)는 무엇일까?', '❓ As denominator → 0, what common factor (x-a) cancels?'),
+          bilingual('❓ 접점의 x좌표를 미지수 t로 먼저 선언하면 어떤 식이 세워질까?', '❓ Letting tangency x = t, what equation relates slope and point?'),
+          bilingual('❓ 도함수 f′(x)=0 전후에서 부호가 바뀌는 극값 지점은 어디일까?', '❓ Where does f′(x) change sign across f′(x)=0 extrema?'),
+          bilingual('❓ 정적분 구간에 위끝=아래끝 대입과 양변 미분을 해보면 무엇이 나올까?', '❓ What do upper=lower limit substitution and differentiating give?')
         ];
       }
       if (/경우의 수|확률|조합|순열|정규분포|통계|독립|조건부/.test(s)) {
         return [
-          '❓ 빠짐없고 중복 없이 나누는 기준(케이스 분류 질문)은 무엇일까?',
-          '❓ 직접 세는 것보다 전체에서 반대 경우(여사건)를 빼는 게 빠르지 않을까?',
-          '❓ 조건부확률에서 사건이 일어났을 때 분모(표본공간)는 어떻게 축소될까?',
-          '❓ 평균을 기준으로 정규분포 종 모양 대칭 넓이를 어떻게 활용할까?'
+          bilingual('❓ 빠짐없고 중복 없이 나누는 기준(케이스 분류 질문)은 무엇일까?', '❓ How can we partition cases cleanly without overlap?'),
+          bilingual('❓ 직접 세는 것보다 전체에서 반대 경우(여사건)를 빼는 게 빠르지 않을까?', '❓ Is subtracting the complementary event faster than direct counting?'),
+          bilingual('❓ 조건부확률에서 사건이 일어났을 때 분모(표본공간)는 어떻게 축소될까?', '❓ Under the condition, how does the sample space denominator shrink?'),
+          bilingual('❓ 평균을 기준으로 정규분포 종 모양 대칭 넓이를 어떻게 활용할까?', '❓ How can normal bell-curve symmetry around the mean help?')
         ];
       }
       return [
-        '❓ [관찰 Notice] 주어진 조건에서 변하는 것과 변하지 않는 것은 무엇일까?',
-        '❓ [경이 Wonder] 작은 숫자(1, 2)를 먼저 넣어보면 어떤 규칙이 보일까?',
-        '❓ [보조선 Pólya] 구하려는 목표값을 어떤 등식이나 도형으로 번역할까?',
-        '❓ [연결 LEGO] 앞 단계에서 구한 조각들을 어떻게 결합하면 답이 될까?'
+        bilingual('❓ [관찰 Notice] 주어진 조건에서 변하는 것과 변하지 않는 것은 무엇일까?', '❓ [Notice] What changes vs. stays invariant in the given conditions?'),
+        bilingual('❓ [경이 Wonder] 작은 숫자(1, 2)를 먼저 넣어보면 어떤 규칙이 보일까?', '❓ [Wonder] Plugging in small numbers (1, 2), what rule appears?'),
+        bilingual('❓ [보조선 Pólya] 구하려는 목표값을 어떤 등식이나 도형으로 번역할까?', '❓ [Pólya] What equation or diagram captures our target value?'),
+        bilingual('❓ [연결 LEGO] 앞 단계에서 구한 조각들을 어떻게 결합하면 답이 될까?', '❓ [LEGO] How do the earlier step pieces snap together?')
       ];
     }
 
@@ -2937,8 +2937,8 @@
         mask.id = 'examOrigCreativeBanner';
         mask.style.cssText = 'margin-top:10px;padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%);border:1.5px dashed #059669;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.82rem;color:#065f46;font-weight:700';
         mask.innerHTML =
-          '<span>✍️ <b>[탈-5지선다 창의적 구성 모드]</b>: 객관식 보기에 의존하지 않고 스스로 식을 세워 풀어보세요!</span>' +
-          '<button type="button" onclick="var el=document.getElementById(\'examOrigOptsContent\');if(el){el.dataset.origRevealed=\'1\';el.style.display=\'\';}this.parentElement.remove();" style="padding:4px 10px;border-radius:999px;border:1px solid #059669;background:#ffffff;color:#047857;font-size:0.75rem;font-weight:800;cursor:pointer">👁️ 원본 5지선다 보기 대조</button>';
+          '<span>' + bilingual('✍️ <b>[탈-5지선다 창의적 구성 모드]</b>: 객관식 보기에 의존하지 않고 스스로 식을 세워 풀어보세요!', '✍️ <b>[Creative Constructive Mode]</b>: Formulate your own solution without relying on multiple choices!') + '</span>' +
+          '<button type="button" onclick="var el=document.getElementById(\'examOrigOptsContent\');if(el){el.dataset.origRevealed=\'1\';el.style.display=\'\';}this.parentElement.remove();" style="padding:4px 10px;border-radius:999px;border:1px solid #059669;background:#ffffff;color:#047857;font-size:0.75rem;font-weight:800;cursor:pointer">' + bilingual('👁️ 원본 5지선다 보기 대조', '👁️ Compare 5 Choices') + '</button>';
         origOpts.parentNode.insertBefore(mask, origOpts);
       }
     }
@@ -3013,9 +3013,9 @@
         }).join('');
 
         var symQuickList = [
-          { lbl: '분수 a/b', val: '/' },
-          { lbl: '√(루트)', val: 'sqrt(' },
-          { lbl: '^ ( 거듭제곱 )', val: '^' },
+          { lbl: bilingual('분수 a/b', 'Frac a/b'), val: '/' },
+          { lbl: bilingual('√(루트)', '√(root)'), val: 'sqrt(' },
+          { lbl: bilingual('^ (거듭제곱)', '^ (power)'), val: '^' },
           { lbl: '×', val: '*' },
           { lbl: '+', val: '+' },
           { lbl: '-', val: '-' },
@@ -3059,19 +3059,19 @@
               '<span style="font-size:0.78rem;font-weight:800;color:#3730a3">' +
                 bilingual('🧩 [2단계 · 수식 레고 블록 조립 또는 직접 입력]: 아래 수식 조각을 클릭해 조립하거나 키보드로 답을 직접 구성하세요!', '🧩 [Step 2 · Assemble Math Blocks or Type Directly]: Click math blocks below or type your answer!') +
               '</span>' +
-              '<span style="font-size:0.72rem;color:#059669;font-weight:800">🌟 선지 안 보고 해결 시 +30 창의력 XP</span>' +
+              '<span style="font-size:0.72rem;color:#059669;font-weight:800">' + bilingual('🌟 선지 안 보고 해결 시 +30 창의력 XP', '🌟 +30 Creative XP without choices') + '</span>' +
             '</div>' +
             '<div id="creativeLegoTray_' + idx + '" style="display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:8px;padding:8px;border-radius:8px;background:#f5f3ff;border:1px dashed #a5b4fc">' +
-              '<span style="font-size:0.73rem;font-weight:800;color:#4f46e5;margin-right:2px">🧩 수식 블록:</span>' +
+              '<span style="font-size:0.73rem;font-weight:800;color:#4f46e5;margin-right:2px">' + bilingual('🧩 수식 블록:', '🧩 Math Blocks:') + '</span>' +
               legoButtonsHtml +
             '</div>' +
             '<div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:8px">' +
-              '<span style="font-size:0.72rem;font-weight:700;color:#64748b">⌨️ 기호 패드:</span>' +
+              '<span style="font-size:0.72rem;font-weight:700;color:#64748b">' + bilingual('⌨️ 기호 패드:', '⌨️ Symbol Pad:') + '</span>' +
               symQuickHtml +
             '</div>' +
             '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
               '<input type="text" id="creativeAnsInput_' + idx + '" onkeydown="if(event.key===\'Enter\')window.submitCreativeConstructiveAns(' + idx + ')" placeholder="정답 값 또는 조립한 수식을 입력하세요 (예: 2, 1/3, 루트3, (3^2)^(1/4)*3^(-1/2) 등)" style="flex:1;min-width:200px;padding:9px 12px;border-radius:10px;border:1.5px solid #6366f1;background:#ffffff;color:#0f172a;font-size:0.88rem;font-weight:800;outline:none;box-sizing:border-box">' +
-              '<button type="button" onclick="window.clearCreativeConstructiveAns(' + idx + ')" style="padding:9px 11px;border-radius:10px;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;font-size:0.78rem;font-weight:800;cursor:pointer" title="입력 초기화">🔄 지우기</button>' +
+              '<button type="button" onclick="window.clearCreativeConstructiveAns(' + idx + ')" style="padding:9px 11px;border-radius:10px;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;font-size:0.78rem;font-weight:800;cursor:pointer" title="입력 초기화">' + bilingual('🔄 지우기', '🔄 Clear') + '</button>' +
               '<button type="button" onclick="window.submitCreativeConstructiveAns(' + idx + ')" style="padding:9px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#006398 0%,#4f46e5 100%);color:#ffffff;font-size:0.84rem;font-weight:900;cursor:pointer;box-shadow:0 4px 12px rgba(79,70,229,0.28)">' +
                 bilingual('✨ 창의 답안 제출 · 검증', '✨ Submit Answer') +
               '</button>' +
@@ -3092,7 +3092,7 @@
             '</div>' +
             '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
               '<input type="text" id="creativeWhatIfInput_' + idx + '" placeholder="예: 만약 밑 9를 27로 바꾸거나 지수 부호를 반대로 바꾸면 새로운 답은 얼마가 될까? (나만의 변형 문제 & 답 기록)" style="flex:1;min-width:220px;padding:7px 10px;border-radius:8px;border:1px solid #c084fc;background:#ffffff;color:#1e293b;font-size:0.78rem">' +
-              '<button type="button" onclick="window.saveCreativeWhatIfProblem(' + idx + ')" style="padding:7px 13px;border-radius:8px;border:none;background:#7e22ce;color:#ffffff;font-size:0.76rem;font-weight:800;cursor:pointer">💾 나만의 발명 문제 저장 (+25 XP)</button>' +
+              '<button type="button" onclick="window.saveCreativeWhatIfProblem(' + idx + ')" style="padding:7px 13px;border-radius:8px;border:none;background:#7e22ce;color:#ffffff;font-size:0.76rem;font-weight:800;cursor:pointer">' + bilingual('💾 나만의 발명 문제 저장 (+25 XP)', '💾 Save My Variation (+25 XP)') + '</button>' +
             '</div>' +
             '<div id="creativeWhatIfSaved_' + idx + '" style="font-size:0.74rem;color:#059669;font-weight:800;margin-top:5px"></div>' +
           '</div>';
@@ -3119,7 +3119,9 @@
       btnEl.style.borderColor = '#0284c7';
       var ideaInp = document.getElementById('creativeIdeaInput_' + idx);
       if (ideaInp && !ideaInp.value) {
-        ideaInp.value = '나의 제1발상: ' + btnEl.textContent.trim();
+        var activeSpan = btnEl.querySelector(isEnMode() ? '.bilingual-en' : '.bilingual-ko');
+        var chipText = (activeSpan ? activeSpan.textContent : btnEl.textContent).trim();
+        ideaInp.value = (isEnMode() ? 'My 1st Idea: ' : '나의 제1발상: ') + chipText;
       }
       if (window.MatheduGame && window.MatheduGame.addXP && !btnEl.dataset.xpAwarded) {
         btnEl.dataset.xpAwarded = '1';

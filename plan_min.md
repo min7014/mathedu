@@ -963,3 +963,14 @@ python -X utf8 pr.py status
 - **적용 규율**:
   1. **[결론·핵심 수치·링크 3~7줄 요약 원칙]**: 모든 텔레그램 답신, 정례 조간 브리핑(`secretary.py`), 그리고 대화창 완료 보고는 장황한 배경 설명과 수식어를 배제하고 핵심 결론, 실측 수치, 변경 파일/유튜브 링크 위주 개조식으로 간결하게 작성한다.
   2. **[시스템 프롬프트 및 비서실장 브리핑 강제 동기화]**: `mathedu_telegram_bridge.py` (`run_agy_prompt`)와 `secretary.py` (`format_executive_briefing` · `build_live_agent_boardroom_transcript`)에 본 원칙을 상시 탑재해 07:00 정례 보고 및 임원 검수 보고까지 일관된 분량(5~10줄 이내)을 유지한다.
+
+
+---
+
+### [Policy 85] 인라인 MathJax 수식 베이스라인 정렬 표준 원칙 (`2026-11-22` 확정 · 오류신고 `R67` 전수 수리)
+- **회장님 승인 오류신고(`R67` · `csat27_01` Q1)**:
+  > *"괄호가 수식에 포함되면서 지수로 올라가 있군."* (`$32 = 2^k$` 뒤 닫는 괄호 `)` 들뜸 현상)
+- **근본 원인**: `generator.py`·`stitch_screen_builder.py` 및 전 258개 퀴즈 CSS에서 인라인 수식(`mjx-container:not([display="true"])`)에 `display: inline-flex !important; vertical-align: middle !important;`를 강제해 위첨자(`2^k`)만 높은 수식의 중심이 텍스트 중간으로 당겨져 바깥 괄호 `)`가 지수 높이까지 올라가 보이던 현상.
+- **적용 규율**:
+  1. **[전 페이지 베이스라인 정렬 표준화]**: `generator.py`, `stitch_screen_builder.py`, `csat2027.html`, `mathedu-room.js`, 전 258개 `board/*.html`, 전 258+ `offline/*.html`의 `mjx-container:not([display="true"])`를 `display: inline-block !important; vertical-align: baseline !important;`로 통일한다.
+  2. **[회귀 차단 규칙 (`audit_engine.py`)]**: `MJX_INLINE_BASELINE_MISALIGN` (`ERROR`) 규칙을 상시 가동해 `vertical-align: middle` 재유입을 기계적으로 원천 차단하며, 한·영 언어 동기화(`mathedu-i18n.js`) 및 창의 구성 스튜디오 한·영 대역(`mathedu-room.js`)을 동시 보강한다.

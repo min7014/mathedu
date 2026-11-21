@@ -655,6 +655,11 @@
   // video_studio.html, board/*.html, and offline/index.html.
   // ══════════════════════════════════════════════════════════════════════════
   var EXACT_UI_MAP = {
+    // Creative Constructive Solver Input Attributes
+    "💭 나만의 풀이 발상·보조선·규칙을 자유롭게 한 줄로 스케치해 보세요 (선택 사항)": "💭 Sketch your own key idea, auxiliary line, or pattern in one line (optional)",
+    "정답 값 또는 조립한 수식을 입력하세요 (예: 2, 1/3, 루트3, (3^2)^(1/4)*3^(-1/2) 등)": "Enter your answer or assembled expression (e.g., 2, 1/3, sqrt(3), (3^2)^(1/4)*3^(-1/2))",
+    "예: 만약 밑 9를 27로 바꾸거나 지수 부호를 반대로 바꾸면 새로운 답은 얼마가 될까? (나만의 변형 문제 & 답 기록)": "e.g., If base 9 becomes 27 or the exponent flips sign, what is the new answer? (Your variation)",
+    "입력 초기화": "Clear input",
     // Top Header & Navigation
     "mathedu · 수학자료실": "mathedu · MIN EUN GI's Math Archive",
     "3,400+ 시각적 수학 증명": "3,400+ Visual Math Proofs",
@@ -3205,9 +3210,16 @@
 
   function bootDomI18n() {
     injectBilingualCssAndCanvasHook();
+    if (typeof document !== 'undefined' && document.documentElement) {
+      document.documentElement.lang = currentLang;
+      document.documentElement.setAttribute('data-mathedu-lang', currentLang);
+    }
     if (currentLang === 'en') {
       if (typeof window.onMatheduLanguageChange === 'function') {
         try { window.onMatheduLanguageChange('en'); } catch (e) {}
+      }
+      if (typeof window.setBoardLang === 'function' && !window.__inSetBoardLang) {
+        try { window.__inSetBoardLang = true; window.setBoardLang('en', false); } catch (e) {} finally { window.__inSetBoardLang = false; }
       }
       if (typeof window.applyVideoBoardGlobalLang === 'function' && !window.__inVbLang) {
         try { window.__inVbLang = true; window.applyVideoBoardGlobalLang('en'); } catch (e) {} finally { window.__inVbLang = false; }

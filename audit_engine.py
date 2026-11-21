@@ -175,6 +175,14 @@ def check_file_rules(filepath, content):
             'severity': 'WARNING',
             'msg': '.sol .bilingual-en 스타일 리셋이 누락되어 영문 전환 시 레이아웃 이상 가능성이 있습니다.'
         })
+
+    # 4-1. 인라인 MathJax 수식 베이스라인 정렬 표준 검사 (R67 재발 방지)
+    if re.search(r'mjx-container:not\(\[display="true"\]\)\s*\{[^}]*vertical-align\s*:\s*middle', content, re.DOTALL):
+        issues.append({
+            'rule': 'MJX_INLINE_BASELINE_MISALIGN',
+            'severity': 'ERROR',
+            'msg': '인라인 MathJax 수식(mjx-container:not([display="true"]))에 vertical-align: middle이 적용되어 지수·괄호 들뜸(R67)을 유발합니다.'
+        })
         
     # 5. 초등학생 눈높이 무장벽 디딤돌 확장 검사 (GEMINI.md Rule 6)
     if '<div class="q"' in content and not rel_path.endswith('index.html'):

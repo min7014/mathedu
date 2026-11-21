@@ -613,7 +613,9 @@ def capture_error_report_screenshot(report: dict, seq_id: str = "R_PREVIEW") -> 
             )
             page = context.new_page()
             if parsed["is_en_ui"]:
-                page.add_init_script("try { localStorage.setItem('mathedu_lang', 'en'); } catch(e) {}")
+                page.add_init_script(
+                    "try { localStorage.setItem('mathedu_lang', 'en'); localStorage.setItem('mathedu_lang_manual', 'true'); } catch(e) {}"
+                )
 
             page.goto(target_url, wait_until="domcontentloaded", timeout=25000)
             page.wait_for_timeout(900)
