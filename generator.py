@@ -1323,11 +1323,11 @@ mjx-container[display="true"]::-webkit-scrollbar-track {{ background: transparen
 mjx-container[display="true"]::-webkit-scrollbar-thumb {{ background: rgba(0, 99, 152, 0.25); border-radius: 3px; }}
 
 mjx-container:not([display="true"]) {{
-  display: inline-flex !important;
-  vertical-align: middle !important;
+  display: inline-block !important;
+  vertical-align: baseline !important;
   max-width: 100% !important;
   overflow: visible !important;
-  padding: 0 1px !important;
+  padding: 0 0.08em !important;
   text-decoration: none !important;
   border-bottom: none !important;
   scrollbar-width: none !important;

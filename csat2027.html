@@ -322,7 +322,9 @@
       gap: 12px;
       transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
     }
-    mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+    mjx-container { max-width: 100%; }
+    mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+    mjx-container:not([display="true"]) { display: inline-block; vertical-align: baseline; overflow: visible; padding: 0 0.08em; }
     .prob-card:hover {
       transform: translateY(-2px);
       border-color: var(--accent);

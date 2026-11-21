@@ -61,7 +61,8 @@
       'html[lang="en"] .bilingual-ko { display: none !important; }\n' +
       'html[lang="en"] .bilingual-en { display: inline !important; color: inherit !important; font-size: inherit !important; font-weight: inherit !important; }\n' +
       'html[lang="en"] div.bilingual-en, html[lang="en"] p.bilingual-en, html[lang="en"] section.bilingual-en, html[lang="en"] li.bilingual-en { display: block !important; }\n' +
-      'html[lang="en"] div.bilingual-en[style*="display: flex"], html[lang="en"] div.bilingual-en[style*="display:flex"] { display: flex !important; }\n';
+      'html[lang="en"] div.bilingual-en[style*="display: flex"], html[lang="en"] div.bilingual-en[style*="display:flex"] { display: flex !important; }\n' +
+      'mjx-container:not([display="true"]) { display: inline-block !important; vertical-align: baseline !important; overflow: visible !important; padding: 0 0.08em !important; }\n';
     (document.head || document.documentElement).appendChild(style);
   }
   injectBilingualStyles();
