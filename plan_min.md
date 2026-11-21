@@ -974,3 +974,14 @@ python -X utf8 pr.py status
 - **적용 규율**:
   1. **[전 페이지 베이스라인 정렬 표준화]**: `generator.py`, `stitch_screen_builder.py`, `csat2027.html`, `mathedu-room.js`, 전 258개 `board/*.html`, 전 258+ `offline/*.html`의 `mjx-container:not([display="true"])`를 `display: inline-block !important; vertical-align: baseline !important;`로 통일한다.
   2. **[회귀 차단 규칙 (`audit_engine.py`)]**: `MJX_INLINE_BASELINE_MISALIGN` (`ERROR`) 규칙을 상시 가동해 `vertical-align: middle` 재유입을 기계적으로 원천 차단하며, 한·영 언어 동기화(`mathedu-i18n.js`) 및 창의 구성 스튜디오 한·영 대역(`mathedu-room.js`)을 동시 보강한다.
+
+
+---
+
+### [Policy 86] CSS 의사요소(`::before` · `::after`) 배지·아이콘 영문 모드 완전 대역 표준 원칙 (`2026-11-22` 확정 · 오류신고 `R68` 전수 수리)
+- **회장님 승인 오류신고(`R68` · `csat27_01` Q1)**:
+  > *"아이콘에 한글로 되어 있다. 영어모드인데도 불구하고"* (영문 모드 전환 시 `.q .lvl::after` `"🪜 단계별 빌드업"` 및 `.q-actions::before` `"✓ 즉시 채점 · 상세 해설"` 배지 한글 잔존)
+- **근본 원인**: `stitch_screen_builder.py`가 생성한 CSS 의사요소(`::before`/`::after`)의 `content: "..."` 문자열은 DOM 텍스트 노드가 아니므로 `mathedu-i18n.js`의 DOM 번역 워커가 치환할 수 없었던 구조적 누락.
+- **적용 규율**:
+  1. **[전 페이지 `html[lang="en"]` CSS 오버라이드 표준화]**: `stitch_screen_builder.py`, `mathedu-room.js`, `mathedu-i18n.js`, 전 258개 `board/*.html` 및 전 258개 `offline/*.html`에 `html[lang="en"] .q .lvl::after { content: "🪜 Step-by-Step Scaffolding"; }` 및 `html[lang="en"] .q-actions::before { content: "✓ Instant Check · Detailed Solution"; }`를 일괄 적용한다.
+  2. **[회귀 차단 규칙 (`audit_engine.py`)]**: `CSS_PSEUDO_EN_HANGUL_LEAK` (`ERROR`) 규칙을 상시 가동해 `<style>` 내 한글 `content:`가 정의된 모든 CSS `::before`/`::after` 선택자에 `html[lang="en"]` 영문 대역이 빠짐없이 존재하는지 전수 검증한다.

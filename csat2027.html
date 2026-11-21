@@ -14,6 +14,7 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
   <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+  <script src="mathedu-i18n.js?v=20261122_r68"></script>
   <style>
     :root {
       --bg: #f8fafc;
@@ -493,7 +494,7 @@
         <a href="mathlab.html" class="pill-btn">🛠️ MathLab</a>
         <a href="offline/index.html" class="pill-btn">📦 <span class="bilingual-ko">오프라인 보관함</span><span class="bilingual-en">Offline Vault</span></a>
         <button type="button" class="pill-btn" onclick="toggleTheme()" id="btnThemeToggle">🌙</button>
-        <button type="button" class="pill-btn" onclick="toggleLang()" id="btnLangToggle">🇰🇷 KO | EN</button>
+        <button type="button" class="pill-btn" onclick="toggleLang()" id="btnLangToggle" data-no-i18n="1">🇰🇷 KO | EN</button>
       </div>
     </div>
   </header>
@@ -850,7 +851,13 @@
         localStorage.setItem('mathedu_lang', next);
         localStorage.setItem('mathedu_lang_manual', 'true');
       } catch (e) {}
+      if (window.MatheduI18n && typeof MatheduI18n.setLanguage === 'function') {
+        MatheduI18n.setLanguage(next);
+      }
       renderProblemGrid();
+      if (window.MatheduI18n && typeof MatheduI18n.applyDomTranslations === 'function') {
+        MatheduI18n.applyDomTranslations();
+      }
     }
 
     (function init() {
@@ -873,6 +880,9 @@
           ALL_ITEMS = doc.items || [];
           buildAnswerSheetTable(ALL_ITEMS);
           renderProblemGrid();
+          if (window.MatheduI18n && typeof MatheduI18n.applyDomTranslations === 'function') {
+            MatheduI18n.applyDomTranslations();
+          }
         })
         .catch(function(err) {
           console.error('Failed to load csat2027_manifest.json:', err);

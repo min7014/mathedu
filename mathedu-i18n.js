@@ -660,6 +660,17 @@
     "정답 값 또는 조립한 수식을 입력하세요 (예: 2, 1/3, 루트3, (3^2)^(1/4)*3^(-1/2) 등)": "Enter your answer or assembled expression (e.g., 2, 1/3, sqrt(3), (3^2)^(1/4)*3^(-1/2))",
     "예: 만약 밑 9를 27로 바꾸거나 지수 부호를 반대로 바꾸면 새로운 답은 얼마가 될까? (나만의 변형 문제 & 답 기록)": "e.g., If base 9 becomes 27 or the exponent flips sign, what is the new answer? (Your variation)",
     "입력 초기화": "Clear input",
+    "✓ 즉시 채점 · 상세 해설": "✓ Instant Check · Detailed Solution",
+    "단계별 플립북 시각적 증명 PDF": "Step-by-Step Flipbook Visual Proof PDF",
+    "동적 기하 해설 영상": "Dynamic Geometry Explanation Video",
+    "AlgeoMath 공학도구 열기": "Open AlgeoMath Interactive Tool",
+    "2026. 11. 19. 시행 (홀수형 기준)": "Administered Nov 19, 2026 (Odd Form)",
+    "공통과목 (1~22번)": "Common (Q1–22)",
+    "정답(배점)": "Ans (Pts)",
+    "문항 번호, 단원, 개념 검색 (예: 21번, 등차수열, 정사영, 미분가능, 조건부확률...)": "Search by problem #, unit, or concept (e.g. #21, sequence, projection, derivative, probability...)",
+    "인터넷 없이 실행되는 오프라인 단독 파일": "Standalone offline HTML file (no internet required)",
+    "3초 교실 수업 QR 생성": "Generate 3-sec classroom QR code",
+    "문항": "Q#",
     // Top Header & Navigation
     "mathedu · 수학자료실": "mathedu · MIN EUN GI's Math Archive",
     "3,400+ 시각적 수학 증명": "3,400+ Visual Math Proofs",
@@ -2568,6 +2579,9 @@
       st.textContent =
         'html[lang="ko"] .bilingual-en { display: none !important; }\n' +
         'html[lang="en"] .bilingual-ko { display: none !important; }\n' +
+        'html[lang="en"] .q .lvl::after { content: "🪜 Step-by-Step Scaffolding" !important; }\n' +
+        'html[lang="en"] .q-actions::before { content: "✓ Instant Check · Detailed Solution" !important; }\n' +
+        'html[lang="en"] .q .lvl > span.bilingual-en { background: rgba(0, 99, 152, 0.10); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-weight: 700; }\n' +
         '.mathedu-floating-lang-pill { position: fixed; top: 12px; right: 14px; z-index: 9998; background: rgba(15,23,42,0.88); color: #f8fafc; border: 1px solid rgba(56,189,248,0.45); border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 800; cursor: pointer; backdrop-filter: blur(10px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); font-family: Pretendard, system-ui, sans-serif; }\n' +
         '.mathedu-floating-lang-pill:hover { border-color: #38bdf8; background: rgba(2,132,199,0.92); }';
       document.head.appendChild(st);
@@ -2844,6 +2858,7 @@
     if (typeof document === 'undefined' || !document.body) return;
     if (document.getElementById('langToggleSingleBtn') ||
         document.getElementById('vbLangToggleBtn') ||
+        document.getElementById('btnLangToggle') ||
         document.querySelector('[data-lang-btn]') ||
         document.querySelector('.mathedu-global-lang-btn')) {
       return;

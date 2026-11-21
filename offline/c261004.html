@@ -1222,7 +1222,8 @@ code {
   font-weight: 700;
 }
 
-.q .lvl > span:first-child {
+.q .lvl > span:first-child,
+.q .lvl > span.bilingual-en {
   background: rgba(0, 99, 152, 0.10);
   color: var(--accent);
   padding: 4px 10px;
@@ -1239,6 +1240,10 @@ code {
   font-size: 0.72rem;
   font-weight: 700;
   flex-shrink: 0;
+}
+
+html[lang="en"] .q .lvl::after {
+  content: "🪜 Step-by-Step Scaffolding";
 }
 
 .q .stem {
@@ -1343,6 +1348,10 @@ code {
   font-size: 0.75rem;
   font-weight: 600;
   color: #059669;
+}
+
+html[lang="en"] .q-actions::before {
+  content: "✓ Instant Check · Detailed Solution";
 }
 
 .exp-toggle-btn {
@@ -2074,8 +2083,8 @@ html.dark-theme select {
 <meta name="original-problem-url" content="https://min7014.github.io/mathedu/board/c261004.html">
 <meta name="mathedu-offline-version" content="true">
 <meta name="mathedu-quiz-slug" content="c261004">
-<meta name="mathedu-offline-build-time" content="2026-11-21T20:05:06.704264+00:00">
-<meta name="mathedu-offline-hash" content="803c9af6">
+<meta name="mathedu-offline-build-time" content="2026-11-21T21:14:59.395630+00:00">
+<meta name="mathedu-offline-hash" content="a0e08d2a">
 <meta name="mathedu-version-label" content="v2026.11.22">
 
 </head><body><div class="wrap">
@@ -3416,8 +3425,8 @@ html.dark-theme .search-input {{
 // 오프라인 실행 보장 및 실시간 업데이트 확인 스크립트
 window._isOfflineFile = true;
 window._offlineQuizSlug = 'c261004';
-window._offlineBuildTime = '2026-11-21T20:05:06.704264+00:00';
-window._offlineHash = '803c9af6';
+window._offlineBuildTime = '2026-11-21T21:14:59.395630+00:00';
+window._offlineHash = 'a0e08d2a';
 window._offlineVersion = 'v2026.11.22';
 window._originalUrl = 'https://min7014.github.io/mathedu/board/c261004.html';
 
@@ -3442,8 +3451,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // === 온라인 상태 시 최신 업데이트 확인 엔진 ===
 (function() {
   var slug = window._offlineQuizSlug || 'c261004';
-  var localBuildTime = window._offlineBuildTime || '2026-11-21T20:05:06.704264+00:00';
-  var localHash = window._offlineHash || '803c9af6';
+  var localBuildTime = window._offlineBuildTime || '2026-11-21T21:14:59.395630+00:00';
+  var localHash = window._offlineHash || 'a0e08d2a';
   var originalUrl = window._originalUrl || 'https://min7014.github.io/mathedu/board/c261004.html';
   var offlineDownloadUrl = 'https://min7014.github.io/mathedu/offline/' + slug + '.html';
   var versionsApiUrl = 'https://min7014.github.io/mathedu/offline/versions.json';

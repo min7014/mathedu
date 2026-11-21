@@ -183,6 +183,25 @@ def check_file_rules(filepath, content):
             'severity': 'ERROR',
             'msg': '인라인 MathJax 수식(mjx-container:not([display="true"]))에 vertical-align: middle이 적용되어 지수·괄호 들뜸(R67)을 유발합니다.'
         })
+
+    # 4-2. CSS 의사요소(::before / ::after) 한글 content 영문 대역 누락 검사 (R68 재발 방지)
+    for style_blk in re.findall(r'<style[^>]*>(.*?)</style>', content, re.DOTALL):
+        for sel, cval in re.findall(r'([^\{\};]+::(?:before|after))\s*\{[^}]*content\s*:\s*["\']([^"\']*)["\']', style_blk, re.DOTALL):
+            sel_clean = sel.strip()
+            if 'html[lang="en"]' in sel_clean or "html[lang='en']" in sel_clean:
+                continue
+            if re.search(r'[가-힣]', cval):
+                has_en_override = re.search(
+                    r'html\[lang=["\']?en["\']?\]\s*' + re.escape(sel_clean) + r'\s*\{[^}]*content\s*:',
+                    style_blk,
+                    re.DOTALL,
+                )
+                if not has_en_override:
+                    issues.append({
+                        'rule': 'CSS_PSEUDO_EN_HANGUL_LEAK',
+                        'severity': 'ERROR',
+                        'msg': f'CSS 의사요소({sel_clean})에 한글 content("{cval}")가 있으나 html[lang="en"] 영문 오버라이드가 누락되었습니다(R68).'
+                    })
         
     # 5. 초등학생 눈높이 무장벽 디딤돌 확장 검사 (GEMINI.md Rule 6)
     if '<div class="q"' in content and not rel_path.endswith('index.html'):

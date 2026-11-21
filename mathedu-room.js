@@ -62,6 +62,9 @@
       'html[lang="en"] .bilingual-en { display: inline !important; color: inherit !important; font-size: inherit !important; font-weight: inherit !important; }\n' +
       'html[lang="en"] div.bilingual-en, html[lang="en"] p.bilingual-en, html[lang="en"] section.bilingual-en, html[lang="en"] li.bilingual-en { display: block !important; }\n' +
       'html[lang="en"] div.bilingual-en[style*="display: flex"], html[lang="en"] div.bilingual-en[style*="display:flex"] { display: flex !important; }\n' +
+      'html[lang="en"] .q .lvl::after { content: "🪜 Step-by-Step Scaffolding" !important; }\n' +
+      'html[lang="en"] .q-actions::before { content: "✓ Instant Check · Detailed Solution" !important; }\n' +
+      'html[lang="en"] .q .lvl > span.bilingual-en { background: rgba(0, 99, 152, 0.10); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-weight: 700; }\n' +
       'mjx-container:not([display="true"]) { display: inline-block !important; vertical-align: baseline !important; overflow: visible !important; padding: 0 0.08em !important; }\n';
     (document.head || document.documentElement).appendChild(style);
   }

@@ -1227,7 +1227,8 @@ code {
   font-weight: 700;
 }
 
-.q .lvl > span:first-child {
+.q .lvl > span:first-child,
+.q .lvl > span.bilingual-en {
   background: rgba(0, 99, 152, 0.10);
   color: var(--accent);
   padding: 4px 10px;
@@ -1244,6 +1245,10 @@ code {
   font-size: 0.72rem;
   font-weight: 700;
   flex-shrink: 0;
+}
+
+html[lang="en"] .q .lvl::after {
+  content: "🪜 Step-by-Step Scaffolding";
 }
 
 .q .stem {
@@ -1348,6 +1353,10 @@ code {
   font-size: 0.75rem;
   font-weight: 600;
   color: #059669;
+}
+
+html[lang="en"] .q-actions::before {
+  content: "✓ Instant Check · Detailed Solution";
 }
 
 .exp-toggle-btn {
