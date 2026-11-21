@@ -953,3 +953,13 @@ python -X utf8 pr.py status
      - 웨이브 간격: **`2시간(7,200초) ➔ 1시간(3,600초)`** 단축(일 최대 24웨이브).
      - 웨이브당 배분: **`1080p 본편 최대 2편(KO+EN) + #Shorts 최대 1편(55분 이상 시드 풀 보호 간격)`** = **`일 36~48편`** 안정 확장.
   3. **[멀티 GCP 토큰 풀 자동 회전 및 0-쿼터 스튜디오 백업]**: `exam_hybrid_creator.py`, `nano_banana_cinema_creator.py`, `math_issue_insight_creator.py`가 한도 감지 시 `mark_token_quota_exhausted(tok_path, 900)`를 호출해 `youtube_token_min7014_ai_2.json` 등 다중 프로젝트 풀로 끊김 없이 전환되도록 정비하며, 채널 일일 상한 도달 시 `expand_youtube_quota.bat` 및 YouTube Studio 0-쿼터 업로더로 추가 확장이 가능하다.
+
+
+---
+
+### [Policy 84] 보고서 · 텔레그램 핵심 사항 위주 초간결 보고 원칙 (`2026-11-21` 확정 · 회장님 지시)
+- **회장님(`min7014`) 원문 지시**:
+  > *"글이 길군 보고는 중요사항 위주로 해줘."*
+- **적용 규율**:
+  1. **[결론·핵심 수치·링크 3~7줄 요약 원칙]**: 모든 텔레그램 답신, 정례 조간 브리핑(`secretary.py`), 그리고 대화창 완료 보고는 장황한 배경 설명과 수식어를 배제하고 핵심 결론, 실측 수치, 변경 파일/유튜브 링크 위주 개조식으로 간결하게 작성한다.
+  2. **[시스템 프롬프트 및 비서실장 브리핑 강제 동기화]**: `mathedu_telegram_bridge.py` (`run_agy_prompt`)와 `secretary.py` (`format_executive_briefing` · `build_live_agent_boardroom_transcript`)에 본 원칙을 상시 탑재해 07:00 정례 보고 및 임원 검수 보고까지 일관된 분량(5~10줄 이내)을 유지한다.

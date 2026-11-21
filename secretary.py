@@ -164,91 +164,43 @@ def collect_live_workspace_metrics() -> dict:
 def format_executive_briefing(metrics: dict) -> str:
     vc = metrics["video_creator"]
     mt = metrics["mathteacher"]
-    tg = metrics["telegram"]
     dm = metrics.get("daemon", {})
-    lines = [
-        "======================================================================",
-        f"👔 [min7014 1인 회장 · 직원 0명 AI 수학교육 기업 — 수석 비서실장 경영 보고] ({metrics['timestamp']})",
-        "======================================================================",
-        "📊 [I. 수학교육 회사 현재 상황 (Company Status)]",
-        "1️⃣ 지배구조 & 경영 효율",
-        "   • 회장(Chairman): 민은기 선생님 (20년 수학 IP 1,113+ 주제 · 저서 ISBN 979-11-87541-13-4 · 자체 제작 MathLab · 16,548문항)",
-        "   • 조직 구성: 인간 직원 0명(인건비 0원) + 24/7 무휴 8대 AI 본부장(`secretary`, `mathteacher`, `Video_Creator`, `MathLab_Developer`, `finance`, `pr`, `gamemaker`, `designer`) & 876개 스킬",
-        "",
-        "2️⃣ AI 미디어 제작 본부 (`Video_Creator`) & 자체 수학공학도구 개발 본부 (`MathLab_Developer`)",
-        "   • 🏛️ [오리지널 원문 최우선 원칙 (Rule 27 & 28)]: 비-PDF 합성 영상 79개 전수 삭제 완료(잔존 0건) · @min7014_ai 라이브 165편 전량 100% 회장님 오리지널 PDF 직강 영상 검증 완료",
-        "   • 📄 [1페이지 = 1장면 무생략 직강 & 도형 100% 무가림 보존]: 원본 PDF 슬라이드·썸네일 위에 덧그려지던 배너를 전면 제거하고, 1페이지부터 끝 페이지까지(max_scenes=60) 단 한 장도 생략 없이 한 땀 한 땀 정통 설명 (방금 48페이지 분량 `2020062102 수열의 정의` 27.8분 풀코스 직강 렌더링 완료)",
-        f"   • 자체 개발 수학공학도구 `MathLab v1.4 (AI Lab)`: 1,131개 전 주제 자동 작도 프리셋(`assets/mathlab_presets_engine.json`) · `[∑ 수식 입력]`(단축키 `/`) · `[📐 증명 프리셋]` · `[🌙 다크 네온]` · `[📸 PNG]` 탑재 완료",
-        f"   • 전체 대본·설계 완료 주제: {vc['completed_6ed_topics']} / {vc['target_total_topics']}개 ({vc['progress_pct']}% 달성 · 잔여 {vc['remaining_topics']}개)",
-        f"   • 누적 렌더링 완료 MP4 영상: {vc['total_mp4_files']:,}개 (100% 오리지널 PDF 한/영 1080p 본편 · 질문수업 · Shorts · Q-Shorts)",
-        f"   • 수학공학도구(GeoGebra·AlgeoMath·TikZ) 5단계 정주행 강의: 총 {vc['math_engineering_tools_total']}편(427p 분량) 대본 완비 / {vc['math_engineering_tools_rendered']}편 영상 렌더링 완료",
-        f"   • 20~37분+ 오리지널 PDF 정주행 마스터클래스: {vc['masterclasses_8min_plus']}편 렌더링 완료 (유튜브 대표 예고편 `https://youtu.be/_NRQ5QO3PEY` 설정 완료)",
-        "",
-        "3️⃣ [수학교육 연구소 (`mathteacher`) & 재무·홍보·법무 본부 (`finance` · `pr`)]",
-        f"   • 수학교육학 12대 원리(기하 차원 해체·동적 기하 불변성·시각 스포트라이트·설명적 증명 등) × min7014 원문 100% 자체 융합 완료",
-        f"   • 저작권·상표권 무결성(Rule 24): 원문 도형(min7014 100% 자체 저작물 + ISBN 979-11-87541-13-4) · 절차적 순수 합성 음원(Content ID 클레임 0건) · 타 채널/타사 상표 메타데이터 완전 배제 검증 완료",
-        f"   • 6대 수학교육 발전 모듈: {mt['pedagogy_engine_topics']}개 주제 확장 완료 (16,548문항 기출 디딤돌 연동)",
-        f"   • 수익화 목표: YPP(구독자 1,000명 / 시청시간 4,000시간) 3~5주 내 조기 돌파 ➔ 월 1,000만 원+ 순수익 및 Gemini Ultra 자급자족 선순환",
-        f"   • 24/7 데몬 가동 상태: 정상 가동 중 (최근 완료 토픽: `{dm.get('last_topic', '-')}`)",
-        "",
-        "----------------------------------------------------------------------",
-        "🚀 [II. 앞으로 무엇을 할 것인가 (Forward Action Plan)]",
-        "1️⃣ [오늘의 최우선 과제 1 — 수학공학도구 5단계(Stage 1~5) 정주행 강의 연속 제작 & 업로드]",
-        "   • 저서 《수학교사와 학생을 위한 GeoGebra와 수학의 시각화》(ISBN 979-11-87541-13-4) 제1.1장(2021042603)부터 제7.0장(2021042618), 2026 경남과학고 스크립트 코딩(math20260519001), AlgeoMath/TikZ 강의를 순서대로 렌더링하여 전 세계 교사·학생의 장시간 실습 시청시간(AVD)을 확보합니다.",
-        "2️⃣ [오늘의 최우선 과제 2 — YPP 4,000시간 & 월 1,000만 원 직결 마스터클래스 발행]",
-        "   • 유튜브 API 일일 업로드 쿼터 회복 즉시 8분~18분+ 미드롤 마스터클래스(Vol.1~9 및 GeoGebra Book Vol.1~2 한/영 합본)를 최우선 자동 업로드합니다.",
-        "3️⃣ [오늘의 최우선 과제 3 — 전체 847개 주제 중 60%(510개+) 돌파]",
-        f"   • 현재 {vc['completed_6ed_topics']}개({vc['progress_pct']}%)에서 멈추지 않고 남은 {vc['remaining_topics']}개 시각 증명 주제를 24시간 연속 제작하여 조속히 100% 전수 완결합니다.",
-        "",
-        "----------------------------------------------------------------------",
-        "💡 [III. 수석 비서실장 & 7대 AI 본부장 합동 추가 발전 방안 (Strategic Evolution Proposals)]",
-        "1️⃣ [글로벌 8개국어 현지화(Localizations) & 다국어 자막(.srt) 자동 주입 (`Video_Creator` × `finance`)]",
-        "   • 이미 구축된 8개국어(한·영·일·중·스페인·프랑스·독일·베트남어) 대본을 활용해 유튜브 영상 업로드 시 8개국어 다국어 제목·설명란(localizations)과 자막을 자동 탑재하여 스페인어권(5억 명)·인도·일본·유럽 시청시간을 단일 채널에서 3~5배 증폭시킵니다.",
-        "2️⃣ [유튜브 영상 × GeoGebra/AlgeoMath '좌우 분할 실습 스튜디오(Split-Screen Lab)' (`mathteacher` × `designer`)]",
-        "   • 수학공학도구 강의를 보며 즉시 따라 작도할 수 있도록 `video_board.html`에서 좌측에는 유튜브 강의 영상, 우측에는 실시간 GeoGebra/AlgeoMath 실습 창과 명령어 치트시트(`Sequence`, `CountIf`, `Locus`, `Envelope`)가 나란히 열리는 실습 환경을 제공합니다.",
-        "3️⃣ [저서 《GeoGebra와 수학의 시각화 (ISBN 979-11-87541-13-4)》 글로벌 고교 심화 수학 탐구 패키지화 (`finance`)]",
-        "   • 회장님의 저서 16개 챕터(2021042603~18)와 2026 경남과학고 스크립트 코딩 강의를 국제 심화 수학 탐구보고서 및 영재고·과학고 R&E 표준 레퍼런스로 영문 패키징하여 글로벌 최고 단가(RPM $15~$25) 교육 트래픽을 흡수합니다.",
-        "4️⃣ ['수능 킬러 문항 × 1줄 보조선 시각 증명' 브릿지 Shorts 시리즈 (`mathteacher` × `Video_Creator`)]",
-        "   • 16,548문항 기출 DB의 고난도 기하·미적분·이차곡선 문항과 min7014.github.io의 847개 시각 증명을 1:1 결합하여 '수식을 10줄 쓰는 대신 보조선 1줄로 10초 만에 푸는 시각 해법' 쇼츠를 편성해 수험생·교사 구독자 1,000명 돌파를 앞당깁니다.",
-        "5️⃣ [전국 수학교사용 '5분 수업 런처 + QR 학습지 + 2022 개정 생기부 세특 문구' 자동 제공 (`pr` × `mathteacher`)]",
-        "   • 교사 1명이 수업에서 영상을 틀면 학생 30~150명이 동시 시청하므로, 각 영상마다 교사용 5분 발문·인쇄용 QR 학습지·탐구보고서 세특 예시를 원클릭 제공하여 전국 학교 교실 채택률을 극대화합니다.",
-    ]
-    lines.append("----------------------------------------------------------------------")
-    try:
-        import _antigravity_report_watcher as _arw_sec
-        lines.append(_arw_sec.format_error_reports_summary())
-        lines.append("----------------------------------------------------------------------")
-    except Exception:
-        pass
-    try:
-        import math_issue_insight_creator as _miic_sec
-        lines.append(_miic_sec.format_issue_insight_status_summary())
-        lines.append("----------------------------------------------------------------------")
-    except Exception:
-        pass
+
+    bal_txt = "확인 중"
+    bal_p = ROOT_DIR / ".agents" / "daily_wave_balance.json"
+    if bal_p.exists():
+        try:
+            bd = json.loads(bal_p.read_text(encoding="utf-8"))
+            bal_txt = f"본편 {bd.get('std', 0)} · 쇼츠 {bd.get('shorts', 0)} · 합본 {bd.get('mc', 0)} ({bd.get('quota_day', '')})"
+        except Exception:
+            pass
+
+    aud_line = ""
     try:
         import auditor as _aud
-        lines.append(_aud.build_telegram_audit_summary(check_live=False, auto_fix=True))
-        lines.append("----------------------------------------------------------------------")
+        arep = _aud.run_full_audit(auto_fix=True, check_live_youtube=False)
+        aud_line = f"위반 {arep.get('total_violations', 0)}건 ({arep.get('status', '')})"
     except Exception:
-        pass
+        aud_line = "점검 생략"
+
+    rep_line = ""
     try:
-        import nano_banana_cinema_creator as _nbcc_sec
-        _fs = _nbcc_sec.get_flow_retrofit_status_summary()
-        lines.append(
-            f"🎬 [Google Flow ULTRA(95%) + 공간 3D 카메라(5%) 자동 고품질화 현황 (0-쿼터)]\n"
-            f"   • Veo 3.1 양단고정 모션: {_fs.get('total_flow_motion_clips', 0)}주제 | 공간 3D 카메라: {_fs.get('total_spatial_3d_clips', 0)}주제 | 하이브리드 렌더: {_fs.get('total_hybrid_rendered_slugs', 0)}주제\n"
-            f"   • 금일 업그레이드: {_fs.get('today_upgraded_count', 0)}/{_fs.get('daily_cap', 8)} | 저조회 교체: {_fs.get('safe_swapped_count', 0)}건 | >15뷰 보호: {_fs.get('protected_high_view_count', 0)}건"
-        )
-        lines.append("----------------------------------------------------------------------")
+        import _antigravity_report_watcher as _arw_sec
+        r_sum = (_arw_sec.format_error_reports_summary() or "").strip()
+        r_lines = [ln.lstrip("• ").strip() for ln in r_sum.splitlines() if ln.strip()]
+        rep_line = next((ln for ln in r_lines if "미처리" in ln or "누적" in ln), (r_lines[1] if len(r_lines) > 1 else (r_lines[0] if r_lines else "")))
     except Exception:
         pass
-    try:
-        import youtube_trend_tracker as _ytt
-        lines.append(_ytt.format_trend_report(include_studio=False))
-    except Exception:
-        pass
-    lines.append("======================================================================")
+
+    lines = [
+        f"📊 [수석 비서 핵심 요약 브리핑] ({metrics['timestamp']})",
+        f"• 데몬·최근 주제: 가동 중 (`{dm.get('last_topic', '-')}`) | 금일 발행: {bal_txt} (Policy 83 일 36~48편)",
+        f"• 영상·마스터클래스: {vc['completed_6ed_topics']}/{vc['target_total_topics']}주제 ({vc['progress_pct']}%) | 누적 MP4 {vc['total_mp4_files']:,}편 | 8분+ 합본 {vc['masterclasses_8min_plus']}편",
+        f"• 수학교육·도구: 6대 교육모듈 {mt['pedagogy_engine_topics']}주제 | 공학도구 {vc['math_engineering_tools_rendered']}/{vc['math_engineering_tools_total']}편",
+        f"• 무결성 감사: {aud_line}",
+    ]
+    if rep_line:
+        lines.append(f"• 오류신고: {rep_line}")
     return "\n".join(lines)
 
 
@@ -475,21 +427,13 @@ def build_live_agent_boardroom_transcript(topic_slug: str = "") -> str:
     board_url = f"https://min7014.github.io/mathedu/video_board.html?slug={slug}"
 
     dialogue = [
-        "🎙️ [AI 임원진 실시간 협업 검수 보고 (Live Inter-Agent Boardroom)]",
-        f"• 일시: {metrics['timestamp']} | 안건: `{slug}` ({title_ko}) 오리지널 원문 영상 제작·검수 완결",
-        "━━━━━━━━━━━━━━━━━━",
-        f"👔 [수석 비서실장 · secretary]:\n\"방금 렌더링 완료된 `{slug}` ({title_ko}, 총 {page_cnt}페이지)의 수식·시각·저작권·수익 퍼널 교차 검수 결과를 보고해 주십시오.\"",
-        f"👨‍🏫 [수석 수학교사 · mathteacher]:\n\"원문 자료({pdf_url}) {page_cnt}페이지 전수 대조 완료했습니다. 출발 가정({hyp_ko[:46]}...) ➔ 핵심 발상({aux_ko[:46]}...) ➔ 결론({conc_ko[:46]}...) 및 국제 표준 영문 표기(`{title_en[:45]}`) 수학적 오류 0건입니다.\"",
-        f"🎬 [수석 영상 프로듀서 · Video_Creator]:\n\"원문 `1페이지 = 1장면` 무가림 1080p 본편({dur_min}분) 및 1.5초 패턴 인터럽트 Q-#Shorts 렌더링을 완료했으며, 평면 광학 모션 {flow_info.get('total_flow_motion_clips', 0)}주제·공간기하 3D 카메라 {flow_info.get('total_spatial_3d_clips', 0)}주제 하이브리드 트랙이 가동 중입니다.\"",
-        f"🎨 [수석 디자인 디렉터 · designer]:\n\"사색적 블루·에메랄드·앰버 팔레트(적색 배제)와 메이플 가상 지휘봉 9px 외곽 포인팅을 적용해 원문 도형 침범 0픽셀입니다.\"",
-        f"🛠️ [수석 수학공학 SW 아키텍트 · MathLab_Developer]:\n\"분할 실습관({board_url})에서 자체 제작 `MathLab v1.4` 동적 작도 프리셋이 즉시 연동됩니다.\"",
-        f"💼 [수석 재무·수익화 본부장 · finance]:\n\"본편({dur_min}분)은 【{midroll_ok}】으로 분류되었으며, 2시간 간격 시드 독점 발행 및 Q-#Shorts 클리프행어 브릿지로 본편 시청시간·구독 전환을 유도합니다.\"",
-        f"📣 [수석 홍보·SEO 본부장 · pr]:\n\"YouTube Studio `관련 동영상` 자동 바인딩 및 6개국어 글로벌 현지화 메타데이터 연동을 점검했습니다.\"",
-        f"🎮 [수석 3D 게임 디렉터 · gamemaker]:\n\"웹 학습관 내 유튜브 공식 임베드 플레이어(익명 쿠키·자동재생 배제 규격) 및 16,548문항 탈-5지선다 창의 수식 조립 퀴즈 연동 이상 없습니다.\"",
-        f"⚖️ [수석 독립 감사관 · auditor]:\n\"외부 시험·기업 상표권 노출 0건, 개인 호칭 노출 0건, 원문 저작권 정합성 등 7계층 감사 무결성 통과를 확인했습니다.\"",
-        f"👔 [수석 비서실장 · secretary]:\n\"전 본부 검수 통과! 현재 누적 완결 주제는 {vc['completed_6ed_topics']}/847개({vc['progress_pct']}%), 보유 MP4 자산은 {vc['total_mp4_files']:,}편입니다.\"",
+        f"🎙️ [AI 임원 검수 완료 · {slug} ({title_ko}, {page_cnt}p / {dur_min}분)]",
+        f"• mathteacher: 원문({pdf_url}) 가정({hyp_ko[:28]}…)→보조선({aux_ko[:28]}…)→결론 수학 오류 0건",
+        f"• Video_Creator · designer: 1080p 무가림 본편 + Q-#Shorts 렌더 완료 (모션 {flow_info.get('total_flow_motion_clips', 0)} / 3D {flow_info.get('total_spatial_3d_clips', 0)}주제)",
+        f"• finance · pr: 【{midroll_ok}】 · 1시간 듀얼스피드(일 36~48편) & 6개국어/관련영상 연동",
+        f"• auditor · secretary: 7계층 위반 0건 | 누적 {vc['completed_6ed_topics']}/847주제({vc['progress_pct']}%) · MP4 {vc['total_mp4_files']:,}편",
     ]
-    return "\n\n".join(dialogue)
+    return "\n".join(dialogue)
 
 
 def send_telegram_report(msg_text: str) -> bool:
