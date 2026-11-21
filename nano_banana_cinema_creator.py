@@ -891,7 +891,7 @@ def try_upload_one_nano_banana_cinema(kind: str = "long", target_slug: str | Non
     recent_eps = [e for e in (w_state.get("episodes") or []) if (now_ts - float(e.get("ts", 0))) < 7 * 86400]
     active_week_slugs = {e.get("slug") for e in recent_eps if e.get("slug")}
 
-    yt, _ = vmaker.get_available_youtube_upload_service()
+    yt, tok_path = vmaker.get_available_youtube_upload_service()
     if yt is None:
         return None
 
@@ -1006,8 +1006,8 @@ def try_upload_one_nano_banana_cinema(kind: str = "long", target_slug: str | Non
                         )
                     return {"type": "nano_banana_1080p", "slug": slug, "lang": lc, "url": url, "title": title}
                 except Exception as e:
-                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e):
-                        vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e) or "rateLimitExceeded" in str(e):
+                        vmaker.mark_token_quota_exhausted(tok_path, 900)
                     return None
 
             if kind == "short" and (nb_urls.get(lc) or "").strip() and not (nb_sh_urls.get(lc) or "").strip():
@@ -1070,8 +1070,8 @@ def try_upload_one_nano_banana_cinema(kind: str = "long", target_slug: str | Non
                         )
                     return {"type": "nano_banana_short", "slug": slug, "lang": lc, "url": url, "title": sh_title}
                 except Exception as e:
-                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e):
-                        vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e) or "rateLimitExceeded" in str(e):
+                        vmaker.mark_token_quota_exhausted(tok_path, 900)
                     return None
     return None
 
@@ -1325,7 +1325,7 @@ def _try_safe_swap_or_thumb_upgrade_on_live_channel(bp: dict, st: dict) -> dict 
     nb_urls = sdoc.get("nano_banana_urls") or {}
     yt_urls = sdoc.get("youtube_urls") or {}
 
-    yt, _ = vmaker.get_available_youtube_upload_service()
+    yt, tok_path = vmaker.get_available_youtube_upload_service()
     if yt is None:
         return None
 

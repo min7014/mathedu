@@ -1057,7 +1057,7 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
 
     if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
         return None
-    yt, _ = vmaker.get_available_youtube_upload_service()
+    yt, tok_path = vmaker.get_available_youtube_upload_service()
     if yt is None:
         return None
 
@@ -1142,8 +1142,8 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
                     _safe_notify_telegram("1080p 본편", slug, lc, title, url)
                     return {"type": "exam_hybrid_1080p", "slug": slug, "lang": lc, "url": url, "title": title}
                 except Exception as e:
-                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e):
-                        vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e) or "rateLimitExceeded" in str(e):
+                        vmaker.mark_token_quota_exhausted(tok_path, 900)
                     return None
 
             if kind == "short" and (ex_urls.get(lc) or "").strip() and not (ex_sh_urls.get(lc) or "").strip():
@@ -1195,8 +1195,8 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
                     _safe_notify_telegram("Q-#Shorts", slug, lc, sh_title, url)
                     return {"type": "exam_hybrid_short", "slug": slug, "lang": lc, "url": url, "title": sh_title}
                 except Exception as e:
-                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e):
-                        vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+                    if "uploadLimitExceeded" in str(e) or "quotaExceeded" in str(e) or "rateLimitExceeded" in str(e):
+                        vmaker.mark_token_quota_exhausted(tok_path, 900)
                     return None
     return None
 

@@ -808,7 +808,7 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             f"• 24/7 렌더링·업로드 데몬: {'🟢 정상 가동' if f_alive else '🔴 중지 (5분 내 자동복구)'}\n"
             f"• 24/7 텔레그램 워치독: {'🟢 정상 대기' if w_alive else '🟡 리스너 단독'}\n"
             f"• YouTube OAuth 업로드 채널: {yt_auth_line}\n"
-            f"• 금일 업로드 밸런스(4:2): {bal_txt.strip()}\n"
+            f"• 금일 업로드 밸런스(1시간 듀얼스피드 · 일 36~48편 목표): {bal_txt.strip()}\n"
             f"• 최근 커밋:\n{git_log}"
         )
 
@@ -855,7 +855,7 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             f"  └ 2단계 정식 광고 YPP(1,000명·4,000시간): -{max(0, 1000-subs):,}명\n"
             f"• 총 조회수: {views:,}회 | 공개 영상: {vcnt:,}편\n"
             f"• [0-쿼터 스튜디오 직결] 본편 연결 완료 쇼츠: {rel_cnt}편 / 커뮤니티 퀴즈: {comm_cnt}건\n"
-            "• 일일 업로드 엔진: 4:2 황금비(1080p/마스터클래스 4 + 질문형 Q-#Shorts/#Shorts 2) 1시간 간격 자동 가동 중"
+            "• 일일 업로드 엔진: Policy 83 듀얼스피드(1시간 주기 · 1080p 본편 최대 2 + 쇼츠 1 = 일 36~48편 자동 가동)"
         )
 
     if low in ("!쇼츠연결", "/linkshorts", "!linkshorts"):

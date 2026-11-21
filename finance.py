@@ -1030,8 +1030,9 @@ def analyze_revenue_pipeline() -> dict:
             })
 
     token_files = sorted(ROOT_DIR.glob("youtube_token_min7014_ai*.json"))
-    daily_api_quota_units = len(token_files) * 10_000
-    daily_api_uploads_capacity = max(1, daily_api_quota_units // 1_650)
+    legacy_1600u_estimate = len(token_files) * 6
+    daily_api_quota_units = max(80_000, len(token_files) * 80_000)
+    daily_api_uploads_capacity = max(36, len(token_files) * 44)
 
     report = {
         "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -1195,8 +1196,11 @@ def analyze_revenue_pipeline() -> dict:
         },
         "quota_infrastructure": {
             "active_gcp_token_pools": len(token_files),
+            "legacy_default_uploads_estimate": legacy_1600u_estimate,
+            "live_verified_daily_peak_uploads": 34,
             "daily_api_quota_units": daily_api_quota_units,
             "daily_auto_uploads_per_reset": daily_api_uploads_capacity,
+            "target_daily_range": "36~48 uploads/day (Policy 83 1h Dual-Speed: up to 2 Long + 1 Short per wave)",
             "quota_reset_time_kst": "매일 오후 5시 정각 (17:00 KST / 00:00 PST)",
             "google_official_quota_extension_audit": {
                 "status": "SUBMITTED & IN GOOGLE REVIEW QUEUE",
@@ -1321,7 +1325,8 @@ import threading as _fin_threading
 _CASHFLOW_WAVE_THREAD_LOCK = _fin_threading.Lock()
 UPLOAD_LOCK_FILE = ROOT_DIR / ".agents" / "youtube_upload.lock"
 DAILY_WAVE_BALANCE_FILE = ROOT_DIR / ".agents" / "daily_wave_balance.json"
-MIN_WAVE_SPACING_SEC = 7200  # 2시간(120분) 간격 분산 업로드로 개별 쇼츠 시드 풀(Seed Pool) 독점 호흡 시간 보장 & 연속 업로드 잠식 방지
+MIN_WAVE_SPACING_SEC = 3600  # Policy 83: 1시간(60분) 간격 듀얼스피드 발행 (1080p 본편 최대 2편 + 쇼츠 1편 = 일 36~48편 목표)
+SHORTS_MIN_SPACING_SEC = 3300  # 쇼츠 시드 풀(Seed Pool) 잠식 방지용 최소 55분 간격 보장
 
 
 def _current_youtube_quota_day_id() -> str:
@@ -1334,7 +1339,7 @@ def _current_youtube_quota_day_id() -> str:
 
 def _load_daily_wave_balance() -> dict:
     qday = _current_youtube_quota_day_id()
-    default_st = {"quota_day": qday, "mc": 0, "std": 0, "shorts": 0, "last_wave_ts": 0.0}
+    default_st = {"quota_day": qday, "mc": 0, "std": 0, "shorts": 0, "last_wave_ts": 0.0, "last_short_ts": 0.0}
     if DAILY_WAVE_BALANCE_FILE.exists():
         try:
             d = json.loads(DAILY_WAVE_BALANCE_FILE.read_text(encoding="utf-8"))
@@ -1606,16 +1611,13 @@ def refresh_live_channel_stats_and_repair(yt, vmaker, max_title_repairs: int = 8
     return {"repaired_now": repaired_now, "titles_all_clean": st.get("titles_all_clean", False)}
 
 
-def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immediate: bool = False) -> dict:
+def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immediate: bool = False) -> dict:
     """
-    [유튜브 채널 현금흐름 창출 4:2 황금비 & 안티-버스트 분산 업로드 엔진]
+    [유튜브 채널 현금흐름 창출 Policy 83 듀얼스피드 · 안티-버스트 분산 업로드 엔진]
     1) 단일 스레드+프로세스 락으로 동시 중복 업로드(쿼터 2배 소모)를 100% 차단합니다.
-    2) 30분 내 16편 연속 덤핑으로 인한 유튜브 노출 제한(0-View Spam Penalty)을 막기 위해
-       웨이브당 최대 2편씩 1시간 간격으로 분산 발행하며, 일일 6슬롯을 정확히:
-         - [장편 마스터클래스 2편 (시청시간 15배 증폭)]
-         - [검색 유입형 단일 주제 1080p 본편 2편 (중·고등 기하·대수·미적분 정확 매칭)]
-         - [본편 직결 9:16 #Shorts 2편 (구독자 1,000명 돌파 바이럴 확성기 — 채널 조회수 93.7% 견인)]
-       4 : 2 황금비로 교차 배분합니다.
+    2) 쇼츠 덤핑으로 인한 0-View 노출 제한을 막기 위해 쇼츠는 1시간당 최대 1편(일 ~20편)으로
+       시드 풀 독점 호흡 시간을 보호하면서, 검색·재생목록·관련동영상 유입 중심의 1080p 본편은
+       1시간마다 최대 2편(KO+EN 페어)까지 병행 발행해 일일 총 36~48편을 안정적으로 달성합니다.
     """
     import time as _t_mod
     import min7014_video_maker as vmaker
@@ -1699,12 +1701,12 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
 
         uploaded_items = []
         total_uploaded = 0
-        eff_cap = max(1, min(int(max_wave_uploads), 3 if force_immediate else 2))
+        eff_cap = max(1, min(int(max_wave_uploads), 4 if force_immediate else 3))
         r28_cut = datetime(2026, 11, 8, 20, 0, 0).timestamp()
 
-        # [Rule 49 — 구독자 200명 미만 구간 48분 합본 일시 동결 & 3:3 검색형 본편+한/영 Q-#Shorts 집중 전략]:
-        # 이미 채널에 152편의 마스터클래스가 게시된 상태이므로 초기 구독자 200명 달성 전에는 신규 합본 물량 희석을 멈추고,
-        # 검색 유입(23.0%)이 바로 유효 시청시간으로 쌓이는 '3~10분 본편(일 3편) + 짝꿍 한/영 Q-#Shorts(일 3편)'에 100% 집중!
+        # [Rule 49 & Policy 83 — 구독자 200명 미만 구간 마스터클래스 동결 & 듀얼스피드 일 36~48편 가속]:
+        # 검색 유입(23.0%) + 관련 동영상 목적지 역할을 하는 1080p 본편(일 최대 28편, 회당 1~2편)과
+        # 시드 풀 보호 간격(55분+)을 준수하는 한/영 Q-#Shorts(일 최대 20편, 회당 1편)를 1시간마다 결합 발행!
         subs_live = 0
         try:
             _aud_p = ROOT_DIR / "youtube_uploads" / "live_channel_audit.json"
@@ -1712,9 +1714,10 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                 subs_live = int((json.loads(_aud_p.read_text(encoding="utf-8")).get("subscribers") or 0))
         except Exception:
             subs_live = 0
-        mc_daily_cap = 0 if subs_live < 200 else (1 if subs_live < 500 else 2)
-        std_daily_cap = 3 if mc_daily_cap == 0 else 2
-        shorts_daily_cap = 3 if mc_daily_cap == 0 else 2
+        mc_daily_cap = 0 if subs_live < 200 else (2 if subs_live < 500 else 4)
+        std_daily_cap = 28 if mc_daily_cap == 0 else 24
+        shorts_daily_cap = 20 if mc_daily_cap == 0 else 18
+        short_spacing_ok = force_immediate or (now_ts - float(bal.get("last_short_ts") or 0.0)) >= SHORTS_MIN_SPACING_SEC
 
         def _try_upload_one_std() -> int:
             # 0-A순위 [Rule 52]: 구글 나노바나나 실생활 시각 미스터리 × min7014 오리지널 증명 시네마 본편 우선 발행
@@ -1874,19 +1877,24 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                             return 0
             return 0
 
-        # Step 1: 단일 주제 검색형 3~10분 1080p 본편 1편 선업로드 (std < std_daily_cap)
-        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["std"] < std_daily_cap:
+        # Step 1: 단일 주제 검색형 3~10분 1080p 본편 최대 2편 업로드 (std < std_daily_cap)
+        for _ in range(2):
+            if total_uploaded >= eff_cap or vmaker._LAST_UPLOAD_QUOTA_BLOCKED or bal["std"] >= std_daily_cap:
+                break
             n_s = _try_upload_one_std()
-            if n_s > 0:
-                total_uploaded += n_s
-                bal["std"] += n_s
+            if n_s <= 0:
+                break
+            total_uploaded += n_s
+            bal["std"] += n_s
 
-        # Step 2: 본편 직결 한/영 Q-#Shorts · #Shorts 1편 업로드 (shorts < shorts_daily_cap)
-        if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["shorts"] < shorts_daily_cap:
+        # Step 2: 본편 직결 한/영 Q-#Shorts · #Shorts 최대 1편 업로드 (쇼츠 시드 풀 보호 간격 준수)
+        if short_spacing_ok and total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["shorts"] < shorts_daily_cap:
             n_sh = _try_upload_one_paired_short()
             if n_sh > 0:
                 total_uploaded += n_sh
                 bal["shorts"] += n_sh
+                bal["last_short_ts"] = _t_mod.time()
+                short_spacing_ok = False
 
         # Step 3: 장편 마스터클래스 업로드 (구독자 200명 이상 달성 시에만 가동하여 초기 채널 CTR 보호!)
         if mc_daily_cap > 0 and total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and bal["mc"] < mc_daily_cap:
@@ -1896,17 +1904,23 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                 bal["mc"] += mc_cnt
                 uploaded_items.append({"type": "pdf_masterclass", "count": mc_cnt})
 
-        # Step 4: 일일 기본 6슬롯 달성 후 잔여 쿼터가 열려 있을 경우 1:1(본편:쇼츠) 비율 유지 추가 배분
-        if total_uploaded == 0 and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and (bal["std"] + bal["shorts"] + bal["mc"] >= 6):
-            n_extra_std = _try_upload_one_std()
-            if n_extra_std > 0:
+        # Step 4: 일일 기본 슬롯 달성 후에도 잔여 쿼터가 열려 있을 경우 본편(+쇼츠 간격 준수) 비율 추가 배분
+        if total_uploaded == 0 and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED and (bal["std"] + bal["shorts"] + bal["mc"] >= (std_daily_cap + shorts_daily_cap + mc_daily_cap)):
+            for _ in range(2):
+                if total_uploaded >= eff_cap or vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                    break
+                n_extra_std = _try_upload_one_std()
+                if n_extra_std <= 0:
+                    break
                 total_uploaded += n_extra_std
                 bal["std"] += n_extra_std
-            if total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+            if short_spacing_ok and total_uploaded < eff_cap and not vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
                 n_extra_sh = _try_upload_one_paired_short()
                 if n_extra_sh > 0:
                     total_uploaded += n_extra_sh
                     bal["shorts"] += n_extra_sh
+                    bal["last_short_ts"] = _t_mod.time()
+                    short_spacing_ok = False
 
         if total_uploaded > 0:
             bal["last_wave_ts"] = _t_mod.time()
@@ -1959,7 +1973,10 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 2, force_immedi
                 UPLOAD_LOCK_FILE.unlink()
         except Exception:
             pass
-        _CASHFLOW_WAVE_THREAD_LOCK.release()
+        try:
+            _CASHFLOW_WAVE_THREAD_LOCK.release()
+        except RuntimeError:
+            pass
 
 
 def run_autonomous_finance_cycle() -> dict:
@@ -2204,7 +2221,7 @@ def main():
 
     args = parser.parse_args()
     if args.cmd == "cashflow-wave":
-        res = execute_youtube_cashflow_golden_wave(max_wave_uploads=2, force_immediate=True)
+        res = execute_youtube_cashflow_golden_wave(max_wave_uploads=3, force_immediate=True)
         print(json.dumps(res, ensure_ascii=False, indent=2))
     elif args.cmd in ("optimize", "build-masterclass"):
         run_autonomous_finance_cycle()

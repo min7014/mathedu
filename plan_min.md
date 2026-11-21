@@ -942,3 +942,14 @@ python -X utf8 pr.py status
   2. **[전체 및 단건 기계 검증 파이프라인 (`lean_verifier.py`)]**: `Rule 48`(`import silent_subprocess`) 준수 하에 `lean.exe` 및 `lake build`로 전체 모듈과 각 정리의 단독 스니펫을 개별 컴파일 검증한 뒤 `assets/lean_formal_proofs.json`과 `https://live.lean-lang.org/#code=...` 직결 실행 URL을 자동 생성한다.
   3. **[웹·글로벌 영문 허브·텔레그램·독립 감사관 전방위 연동]**: `video_board.html`(`#vbLeanFormalBox`), 글로벌 영문 증명 페이지(`/en/proofs/` · `.lean-badge` · `details.lean-proof`), `mathteacher.py lean`, 텔레그램 `!린` / `!린 [슬러그]` 즉시 브리핑, 그리고 `auditor.py` L7(`zero_sorry == True`, `verified_count > 0`, `*.lean` 스캔)을 유기적으로 연동하여 상시 `PASS_ZERO_VIOLATIONS`를 유지한다.
 
+---
+
+### [Policy 83] 유튜브 `@min7014_ai` 듀얼스피드 안전 대량 업로드 가속 원칙 (일 `24편 ➔ 36~48편` · 시드 풀 보호 병행) (`2026-11-21` 확정 · 회장님 텔레그램 질의 해결)
+- **회장님(`min7014`) 원문 질의**:
+  > *"업로드 수가 6개 뿐이 안될까? 더 늘릴 수 없을까?"*
+- **실측 진단 결과 (`playlistItems.list` + `videos.list` 직접 검증)**:
+  1. **[구 6편 한도 오해 및 코드 자가 스로틀링 해소]**: 과거 YouTube Data API v3 기본 `10,000 유닛/일` 기준(`1,600유닛/편 = 6편`) 표기가 `finance_revenue_engine.json` 등에 잔존했으나, 실제 라이브 채널(`@min7014_ai`)은 이미 **하루 24~34편(11/14 34편 · 11/20 28편)**까지 쿼터 차단 없이 통과 중이었다. 단, `finance.py`가 `MIN_WAVE_SPACING_SEC = 7200`(2시간) 및 `eff_cap = 2`로 묶어두어 자동 발행이 하루 24편에 머물러 있었다.
+  2. **[듀얼스피드(Dual-Speed) 안전 가속 원칙]**: 라이브 조회수 실측상 **#Shorts**를 1분 내 2~4편 동시 덤핑하면 `0~3뷰`로 억제되지만, 1시간 간격 분산 시 **88~213뷰**를 달성한다. 반면 검색·재생목록·관련동영상 유입형 **1080p 본편**은 쇼츠 시드 풀과 경쟁하지 않는다.
+     - 웨이브 간격: **`2시간(7,200초) ➔ 1시간(3,600초)`** 단축(일 최대 24웨이브).
+     - 웨이브당 배분: **`1080p 본편 최대 2편(KO+EN) + #Shorts 최대 1편(55분 이상 시드 풀 보호 간격)`** = **`일 36~48편`** 안정 확장.
+  3. **[멀티 GCP 토큰 풀 자동 회전 및 0-쿼터 스튜디오 백업]**: `exam_hybrid_creator.py`, `nano_banana_cinema_creator.py`, `math_issue_insight_creator.py`가 한도 감지 시 `mark_token_quota_exhausted(tok_path, 900)`를 호출해 `youtube_token_min7014_ai_2.json` 등 다중 프로젝트 풀로 끊김 없이 전환되도록 정비하며, 채널 일일 상한 도달 시 `expand_youtube_quota.bat` 및 YouTube Studio 0-쿼터 업로더로 추가 확장이 가능하다.
