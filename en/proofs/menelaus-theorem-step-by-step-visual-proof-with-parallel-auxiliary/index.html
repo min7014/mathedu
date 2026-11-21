@@ -109,12 +109,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#geometry">Geometry</a> › Menelaus&#x27; Theorem — Step-by-Step Visual Proof with…</nav>
 <h1>Menelaus&#x27; Theorem — Step-by-Step Visual Proof with Parallel Auxiliary Line</h1>
-<p class="lede">20-step visual proof · Geometry · Euclidean Plane Geometry</p>
+<p class="lede">20-step visual proof · Geometry · Euclidean Plane Geometry · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2020/2014111901.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2014111901&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2014111901&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20200225001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%203.%20%5B2014111901%5D%20Menelaus%27%20Theorem%20via%20Parallel%20Auxiliary%20Segment%0Atheorem%20menelaus_parallel_ratio_product%0A%20%20%20%20%28bd%20dc%20ce%20ea%20af%20fb%20ck%20p%20q%20%3A%20Int%29%0A%20%20%20%20%28hck%20%3A%20ck%20%3E%200%29%20%28hp%20%3A%20p%20%3E%200%29%20%28hq%20%3A%20q%20%3E%200%29%0A%20%20%20%20%28h1%20%3A%20bd%20%2A%20ck%20%3D%20dc%20%2A%20p%29%0A%20%20%20%20%28h2%20%3A%20ce%20%2A%20q%20%3D%20ea%20%2A%20ck%29%0A%20%20%20%20%28h3%20%3A%20af%20%2A%20p%20%3D%20fb%20%2A%20q%29%20%3A%0A%20%20%20%20bd%20%2A%20ce%20%2A%20af%20%3D%20dc%20%2A%20ea%20%2A%20fb%20%3A%3D%20by%0A%20%20have%20hprod%20%3A%20%28bd%20%2A%20ce%20%2A%20af%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%20%3D%20%28dc%20%2A%20ea%20%2A%20fb%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%20%3A%3D%20by%0A%20%20%20%20calc%0A%20%20%20%20%20%20%28bd%20%2A%20ce%20%2A%20af%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28bd%20%2A%20ck%29%20%2A%20%28ce%20%2A%20q%29%20%2A%20%28af%20%2A%20p%29%20%3A%3D%20by%20grind%0A%20%20%20%20%20%20_%20%20%20%3D%20%28dc%20%2A%20p%29%20%2A%20%28ea%20%2A%20ck%29%20%2A%20%28fb%20%2A%20q%29%20%3A%3D%20by%20rw%20%5Bh1%2C%20h2%2C%20h3%5D%0A%20%20%20%20%20%20_%20%20%20%3D%20%28dc%20%2A%20ea%20%2A%20fb%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%20%3A%3D%20by%20grind%0A%20%20have%20hnz%20%3A%20ck%20%2A%20p%20%2A%20q%20%E2%89%A0%200%20%3A%3D%20by%0A%20%20%20%20have%20h12%20%3A%200%20%3C%20ck%20%2A%20p%20%3A%3D%20Int.mul_pos%20hck%20hp%0A%20%20%20%20have%20h123%20%3A%200%20%3C%20ck%20%2A%20p%20%2A%20q%20%3A%3D%20Int.mul_pos%20h12%20hq%0A%20%20%20%20omega%0A%20%20exact%20Int.eq_of_mul_eq_mul_right%20hnz%20hprod" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Proof at a glance</h2>
 <dl class="glance">
@@ -147,6 +148,29 @@
 <li><span class="rng">Step 20</span><p>Visit min7014.github.io to move the transversal line interactively and see Menelaus&#x27; Theorem in action!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2020/2014111901.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2014111901&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>Using positive parallel-auxiliary segment measures ck, p, q &gt; 0 and three similarity proportions across a transversal, formally prove bd * ce * af = dc * ea * fb.</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (menelaus_parallel_ratio_product)</summary><pre><code>-- 3. [2014111901] Menelaus&#x27; Theorem via Parallel Auxiliary Segment
+theorem menelaus_parallel_ratio_product
+    (bd dc ce ea af fb ck p q : Int)
+    (hck : ck &gt; 0) (hp : p &gt; 0) (hq : q &gt; 0)
+    (h1 : bd * ck = dc * p)
+    (h2 : ce * q = ea * ck)
+    (h3 : af * p = fb * q) :
+    bd * ce * af = dc * ea * fb := by
+  have hprod : (bd * ce * af) * (ck * p * q) = (dc * ea * fb) * (ck * p * q) := by
+    calc
+      (bd * ce * af) * (ck * p * q)
+          = (bd * ck) * (ce * q) * (af * p) := by grind
+      _   = (dc * p) * (ea * ck) * (fb * q) := by rw [h1, h2, h3]
+      _   = (dc * ea * fb) * (ck * p * q) := by grind
+  have hnz : ck * p * q ≠ 0 := by
+    have h12 : 0 &lt; ck * p := Int.mul_pos hck hp
+    have h123 : 0 &lt; ck * p * q := Int.mul_pos h12 hq
+    omega
+  exact Int.eq_of_mul_eq_mul_right hnz hprod</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%203.%20%5B2014111901%5D%20Menelaus%27%20Theorem%20via%20Parallel%20Auxiliary%20Segment%0Atheorem%20menelaus_parallel_ratio_product%0A%20%20%20%20%28bd%20dc%20ce%20ea%20af%20fb%20ck%20p%20q%20%3A%20Int%29%0A%20%20%20%20%28hck%20%3A%20ck%20%3E%200%29%20%28hp%20%3A%20p%20%3E%200%29%20%28hq%20%3A%20q%20%3E%200%29%0A%20%20%20%20%28h1%20%3A%20bd%20%2A%20ck%20%3D%20dc%20%2A%20p%29%0A%20%20%20%20%28h2%20%3A%20ce%20%2A%20q%20%3D%20ea%20%2A%20ck%29%0A%20%20%20%20%28h3%20%3A%20af%20%2A%20p%20%3D%20fb%20%2A%20q%29%20%3A%0A%20%20%20%20bd%20%2A%20ce%20%2A%20af%20%3D%20dc%20%2A%20ea%20%2A%20fb%20%3A%3D%20by%0A%20%20have%20hprod%20%3A%20%28bd%20%2A%20ce%20%2A%20af%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%20%3D%20%28dc%20%2A%20ea%20%2A%20fb%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%20%3A%3D%20by%0A%20%20%20%20calc%0A%20%20%20%20%20%20%28bd%20%2A%20ce%20%2A%20af%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28bd%20%2A%20ck%29%20%2A%20%28ce%20%2A%20q%29%20%2A%20%28af%20%2A%20p%29%20%3A%3D%20by%20grind%0A%20%20%20%20%20%20_%20%20%20%3D%20%28dc%20%2A%20p%29%20%2A%20%28ea%20%2A%20ck%29%20%2A%20%28fb%20%2A%20q%29%20%3A%3D%20by%20rw%20%5Bh1%2C%20h2%2C%20h3%5D%0A%20%20%20%20%20%20_%20%20%20%3D%20%28dc%20%2A%20ea%20%2A%20fb%29%20%2A%20%28ck%20%2A%20p%20%2A%20q%29%20%3A%3D%20by%20grind%0A%20%20have%20hnz%20%3A%20ck%20%2A%20p%20%2A%20q%20%E2%89%A0%200%20%3A%3D%20by%0A%20%20%20%20have%20h12%20%3A%200%20%3C%20ck%20%2A%20p%20%3A%3D%20Int.mul_pos%20hck%20hp%0A%20%20%20%20have%20h123%20%3A%200%20%3C%20ck%20%2A%20p%20%2A%20q%20%3A%3D%20Int.mul_pos%20h12%20hq%0A%20%20%20%20omega%0A%20%20exact%20Int.eq_of_mul_eq_mul_right%20hnz%20hprod" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>Watch on YouTube</h2>
 <ul class="plain">
 <li><a href="https://www.youtube.com/watch?v=d0yl3hSHDgE" target="_blank" rel="noopener">Full visual-proof lecture</a></li>

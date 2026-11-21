@@ -264,6 +264,25 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
             if req_sym not in gw_txt:
                 findings["L7_visual_integrity"].append(f"genie3_world_controller.py: 3D 입체 차폐/은선(점선) 핵심 함수 누락 ({req_sym})")
 
+    # Lean 4 형식 증명 무결성 검증 (Policy 82: zero sorry · 카탈로그 무결성)
+    lean_catalog_p = ROOT_DIR / "assets" / "lean_formal_proofs.json"
+    lean_dir_p = ROOT_DIR / "lean_proofs"
+    if lean_dir_p.exists():
+        for lp in sorted(lean_dir_p.glob("*.lean")):
+            ltxt = lp.read_text(encoding="utf-8", errors="ignore")
+            stripped_lines = [ln for ln in ltxt.splitlines() if not ln.lstrip().startswith("--")]
+            if re.search(r"\bsorry\b", "\n".join(stripped_lines)):
+                findings["L7_visual_integrity"].append(f"{lp.name}: Lean 4 형식 증명 내 미완성 'sorry' 감지")
+        if not lean_catalog_p.exists():
+            findings["L7_visual_integrity"].append("assets/lean_formal_proofs.json: Lean 4 검증 카탈로그 누락")
+        else:
+            try:
+                lcat = json.loads(lean_catalog_p.read_text(encoding="utf-8"))
+                if not lcat.get("zero_sorry") or int(lcat.get("verified_count", 0)) <= 0:
+                    findings["L7_visual_integrity"].append("assets/lean_formal_proofs.json: zero_sorry 또는 verified_count 검증 실패")
+            except Exception as le_err:
+                findings["L7_visual_integrity"].append(f"assets/lean_formal_proofs.json 파싱 오류: {le_err}")
+
     # ---------------- L6: Git 미디어 및 비밀키 유출 ZERO 스캔 ----------------
     try:
         tracked = subprocess.run(

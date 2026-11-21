@@ -109,12 +109,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#geometry">Geometry</a> › The Pythagorean Theorem — Step-by-Step Visual Proof by…</nav>
 <h1>The Pythagorean Theorem — Step-by-Step Visual Proof by Square Area Partition</h1>
-<p class="lede">25-step visual proof · Geometry · Euclidean Plane Geometry</p>
+<p class="lede">25-step visual proof · Geometry · Euclidean Plane Geometry · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2020/2017090101.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2017090101&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2017090101&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20200113001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%201.%20%5B2017090101%5D%20Pythagorean%20Theorem%20via%20Square%20Area%20Dissection%0Atheorem%20pythagorean_square_dissection%0A%20%20%20%20%28a%20b%20c%20%3A%20Int%29%0A%20%20%20%20%28h_partition%20%3A%20%28a%20%2B%20b%29%20%2A%20%28a%20%2B%20b%29%20%3D%20c%20%2A%20c%20%2B%202%20%2A%20%28a%20%2A%20b%29%29%20%3A%0A%20%20%20%20a%20%2A%20a%20%2B%20b%20%2A%20b%20%3D%20c%20%2A%20c%20%3A%3D%20by%0A%20%20grind" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -140,6 +141,16 @@
 <li><span class="rng">Step 25</span><p>Visit min7014.github.io to interactively resize the right triangle and explore this visual proof yourself!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2020/2017090101.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2017090101&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>Given the outer square area partition (a + b)^2 = c^2 + 2ab formed by four right triangles with legs a, b and hypotenuse c, prove a^2 + b^2 = c^2 over Int.</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (pythagorean_square_dissection)</summary><pre><code>-- 1. [2017090101] Pythagorean Theorem via Square Area Dissection
+theorem pythagorean_square_dissection
+    (a b c : Int)
+    (h_partition : (a + b) * (a + b) = c * c + 2 * (a * b)) :
+    a * a + b * b = c * c := by
+  grind</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%201.%20%5B2017090101%5D%20Pythagorean%20Theorem%20via%20Square%20Area%20Dissection%0Atheorem%20pythagorean_square_dissection%0A%20%20%20%20%28a%20b%20c%20%3A%20Int%29%0A%20%20%20%20%28h_partition%20%3A%20%28a%20%2B%20b%29%20%2A%20%28a%20%2B%20b%29%20%3D%20c%20%2A%20c%20%2B%202%20%2A%20%28a%20%2A%20b%29%29%20%3A%0A%20%20%20%20a%20%2A%20a%20%2B%20b%20%2A%20b%20%3D%20c%20%2A%20c%20%3A%3D%20by%0A%20%20grind" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>Watch on YouTube</h2>
 <ul class="plain">
 <li><a href="https://www.youtube.com/watch?v=yZER1pGb2J8" target="_blank" rel="noopener">Full visual-proof lecture</a></li>

@@ -59,6 +59,17 @@ SITEMAP_MAIN = ROOT / "sitemap.xml"
 VIDEO_SITEMAP = ROOT / "video-sitemap.xml"
 ROBOTS = ROOT / "robots.txt"
 LLMS_EN = ROOT / "llms-en.txt"
+LEAN_CATALOG = ROOT / "assets" / "lean_formal_proofs.json"
+
+
+def load_lean_proofs() -> dict:
+    if not LEAN_CATALOG.exists():
+        return {}
+    try:
+        data = json.loads(LEAN_CATALOG.read_text(encoding="utf-8"))
+        return data.get("proofs_by_slug") or {}
+    except Exception:
+        return {}
 
 SITE = "https://min7014.github.io/mathedu/"
 EN_HUB_URL = SITE + "en/"
@@ -451,6 +462,10 @@ ul.plain{padding-left:1.1rem}ul.plain li{margin:.3rem 0}
 .tag{font-size:.78rem;color:var(--mute);margin-left:.35rem}
 .map{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 0}
 footer{border-top:1px solid var(--line);color:var(--mute);font-size:.86rem;padding:1.2rem;text-align:center}
+.lean-badge{display:inline-block;padding:.2rem .65rem;border-radius:999px;background:#0f3a2e;border:1px solid var(--teal);color:#a7f3d0;font-size:.84rem;font-weight:600}
+details.lean-proof{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.75rem 1rem;margin:.7rem 0}
+details.lean-proof summary{cursor:pointer;font-weight:600;color:var(--teal)}
+details.lean-proof pre{overflow-x:auto;background:#0b101a;border:1px solid var(--line);border-radius:8px;padding:.8rem;margin:.65rem 0 0;font-size:.85rem;line-height:1.45;color:#dbeafe}
 @media (max-width:600px){h1{font-size:1.45rem}dl.glance{grid-template-columns:1fr}.top nav a{margin-left:0;margin-right:.9rem}}
 """
 
@@ -587,7 +602,10 @@ def render_proof(t: dict, related: list[dict]) -> str:
     out.append(f'<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › '
                f'<a href="../../#{bkey}">{esc(bname)}</a> › {esc(truncate(title, 60))}</nav>\n')
     out.append(f"<h1>{esc(title)}</h1>\n")
+    lean = t.get("lean")
     lede = f"{n_steps}-step visual proof · {esc(bname)} · {esc(bsub)}" if n_steps else f"Visual proof · {esc(bname)} · {esc(bsub)}"
+    if lean:
+        lede += " · Lean 4 formal proof verified"
     out.append(f'<p class="lede">{lede}</p>\n')
     out.append('<div class="actions">\n')
     if pdf:
@@ -596,6 +614,8 @@ def render_proof(t: dict, related: list[dict]) -> str:
     out.append(f'<a class="btn" href="{esc(board)}">Split-screen study board</a>\n')
     if web:
         out.append(f'<a class="btn" href="{esc(web)}" target="_blank" rel="noopener">Source page &amp; applets</a>\n')
+    if lean and lean.get("live_url"):
+        out.append(f'<a class="btn" href="{esc(lean["live_url"])}" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>\n')
     out.append("</div>\n")
 
     if t["analysis_specific"]:
@@ -615,6 +635,21 @@ def render_proof(t: dict, related: list[dict]) -> str:
     if pdf:
         out.append(f'<p>Follow every step with its figure in the <a href="{esc(pdf)}" target="_blank" rel="noopener">original proof PDF</a>, '
                    f'then rebuild the figure yourself in <a href="{esc(mathlab)}">MathLab</a>.</p>\n')
+
+    if lean:
+        out.append("<h2>Formal proof verification (Lean 4)</h2>\n")
+        out.append('<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>\n')
+        if lean.get("precondition_en"):
+            out.append(f"<p>{esc(lean['precondition_en'])}</p>\n")
+        out.append(
+            f'<details class="lean-proof"><summary>View Lean 4 theorem source ({esc(lean.get("theorem_name") or "")})</summary>'
+            f'<pre><code>{esc(lean.get("lean_code") or "")}</code></pre></details>\n'
+        )
+        if lean.get("live_url"):
+            out.append(
+                f'<p><a href="{esc(lean["live_url"])}" target="_blank" rel="noopener">'
+                "Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>\n"
+            )
 
     if vids:
         out.append("<h2>Watch on YouTube</h2>\n<ul class=\"plain\">\n")
@@ -651,7 +686,9 @@ def render_hub(pub: list[dict]) -> str:
     }
     out = [head(title, desc, EN_HUB_URL, SITE, "assets/en.css", [item_list])]
     out.append("<main>\n<h1>Step-by-Step Visual Math Proofs</h1>\n")
-    out.append(f'<p class="lede">{len(pub)} proofs that show <em>why</em> a theorem must be true, one figure at a time. '
+    lean_cnt = sum(1 for t in pub if t.get("lean"))
+    lean_note = f" ({lean_cnt} machine-checked in Lean 4)" if lean_cnt else ""
+    out.append(f'<p class="lede">{len(pub)} proofs that show <em>why</em> a theorem must be true, one figure at a time{lean_note}. '
                "Read the walkthrough, open the original proof figures, then construct it yourself in MathLab.</p>\n")
     out.append('<nav class="map" aria-label="Topic map">\n')
     for k, name, _ in BRANCHES:
@@ -666,8 +703,9 @@ def render_hub(pub: list[dict]) -> str:
             out.append('<ul class="plain">\n')
             for t in items:
                 tag = " ▶" if t["videos"] else ""
+                ltag = " · ✓ Lean 4" if t.get("lean") else ""
                 out.append(f'<li><a href="proofs/{esc(t["eslug"])}/">{esc(t["title_en"])}</a>'
-                           f'<span class="tag">{esc(t["sub_en"])}{tag}</span></li>\n')
+                           f'<span class="tag">{esc(t["sub_en"])}{tag}{ltag}</span></li>\n')
             out.append("</ul>\n")
         out.append("</section>\n")
     out.append(f'<p>Prefer video? Every lecture is on <a href="{CHANNEL_URL}" target="_blank" rel="noopener">our YouTube channel</a> '
@@ -711,7 +749,8 @@ def build_llms_en(pub: list[dict]) -> str:
     L = ["# MathEdu — Step-by-Step Visual Math Proofs (English)", "",
          "> Free open educational resource. Each page explains why a theorem holds through a numbered sequence of "
          "figures, links the original step-by-step proof PDF, an interactive MathLab construction, and English "
-         "YouTube lectures where available. Audience: secondary-school students, teachers and adult learners.", "",
+         "YouTube lectures where available, with machine-checked Lean 4 formal proofs for core theorems. "
+         "Audience: secondary-school students, teachers and adult learners.", "",
          "## Hubs",
          f"- [English topic map (6 branches)]({EN_HUB_URL}): all English visual-proof pages grouped by branch.",
          f"- [Interactive MathLab]({SITE}mathlab.html?lang=en): dynamic geometry and function plotting.",
@@ -927,8 +966,10 @@ def build() -> dict:
     pub = [t for t in pub if not t["skip"]]
 
     used = set()
+    lean_map = load_lean_proofs()
     title_count = collections.Counter(t["title_en"].lower() for t in pub)
     for t in pub:
+        t["lean"] = lean_map.get(t["slug"])
         t["branch"], t["sub_en"] = branch_of(t["doc"])
         base = slugify(t["title_en"])
         toks = base.split("-")

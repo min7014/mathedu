@@ -1140,6 +1140,7 @@
     let ALL_ITEMS = [];
     let CATALOG_MAP = {};
     let VAULT_MAP = {};
+    let LEAN_PROOFS_MAP = {};
     let FILTERED_ITEMS = [];
     let CURRENT_TAB = 'all';
     let CURRENT_PAGE = 1;
@@ -1288,11 +1289,21 @@
 
     async function loadBoardData() {
       const ts = Date.now();
-      const [deepRes, catRes, vaultRes] = await Promise.allSettled([
+      const [deepRes, catRes, vaultRes, leanRes] = await Promise.allSettled([
         fetch(`assets/min7014_deep_knowledge.json?t=${ts}`),
         fetch(`video_lectures/catalog.json?t=${ts}`),
-        fetch(`video_lectures/vault_index.json?t=${ts}`)
+        fetch(`video_lectures/vault_index.json?t=${ts}`),
+        fetch(`assets/lean_formal_proofs.json?t=${ts}`)
       ]);
+
+      if (leanRes.status === 'fulfilled' && leanRes.value.ok) {
+        try {
+          const leanJson = await leanRes.value.json();
+          LEAN_PROOFS_MAP = (leanJson && leanJson.proofs_by_slug) || {};
+        } catch (e) {
+          LEAN_PROOFS_MAP = {};
+        }
+      }
 
       if (catRes.status === 'fulfilled' && catRes.value.ok) {
         const catArr = await catRes.value.json();
@@ -1624,6 +1635,7 @@
                 ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="res-chip">🌐 수학자료실 웹페이지 ↗</a>` : ''}
                 ${pdfClean ? `<a href="${pdfClean}" target="_blank" rel="noopener" class="res-chip">📄 단계별 증명 PDF ↗</a>` : ''}
                 ${item.geogebra ? `<a href="${item.geogebra}" target="_blank" rel="noopener" class="res-chip">🧭 GeoGebra 앱렛 ↗</a>` : ''}
+                ${LEAN_PROOFS_MAP[item._slug] ? `<a href="${LEAN_PROOFS_MAP[item._slug].live_url}" target="_blank" rel="noopener" class="res-chip" style="border-color:#10b981;background:#ecfdf5;color:#065f46;font-weight:900;">✔ Lean 4 검증 완료 ↗</a>` : ''}
                 <a href="video_studio.html?slug=${encodeURIComponent(item._slug)}" class="res-chip" style="border-color:#7dd3fc;background:#f0f9ff;color:#0369a1;">🎙️ 다국어 AI 강의 스튜디오</a>
               </div>
             </td>
@@ -1734,6 +1746,20 @@
       renderBoardTable();
       document.querySelector('.board-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    function escapeHtmlLean(s) {
+      return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    window.copyVbLeanCode = function(slug) {
+      const lp = LEAN_PROOFS_MAP[slug];
+      if (!lp || !lp.lean_code) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(lp.lean_code).then(() => {
+          alert('✅ Lean 4 형식 증명 코드가 클립보드에 복사되었습니다!');
+        }).catch(() => {});
+      }
+    };
 
     function openCinemaForItem(itemIdx, mode = 'ko', skipAutoOpen = false) {
       const item = ALL_ITEMS[itemIdx];
@@ -1902,6 +1928,35 @@
             <button type="button" onclick="saveVideoBoardStudentQuestion('${safeTopicAttr}')" style="padding:7px 12px;border-radius:8px;border:none;background:#0284c7;color:#fff;font-size:0.75rem;font-weight:900;cursor:pointer;">💾 내 능동 사고 노트 저장</button>
           </div>
         </div>
+        ${(() => {
+          const lp = LEAN_PROOFS_MAP[item._slug];
+          if (!lp) return '';
+          const isEnL = (window.VB_GLOBAL_LANG === 'en');
+          const safeSlugL = String(item._slug || '').replace(/'/g, "\\'");
+          const badgeTitle = isEnL
+            ? '✔ [Lean 4 Formal Proof Verified · 0 Errors / 0 sorry]'
+            : '✔ [Lean 4 형식 증명 검증 완료 · 논리 공백 0건 (0 sorry)]';
+          const precondText = isEnL ? (lp.precondition_en || '') : (lp.precondition_ko || lp.precondition_en || '');
+          const srcLabel = isEnL ? `View Lean 4 Source (${lp.theorem_name})` : `Lean 4 형식 증명 원문 코드 펼치기 (${lp.theorem_name})`;
+          const copyLabel = isEnL ? '📋 Copy Lean Code' : '📋 Lean 코드 복사';
+          const runLabel = isEnL ? '🔬 Run in Lean 4 Web Playground ↗' : '🔬 Lean 4 웹 컴파일러 즉석 실행 ↗';
+          return `
+            <div id="vbLeanFormalBox" style="padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,#042f2e,#0f172a);border:1.5px solid #10b981;margin-bottom:12px;color:#ecfdf5;box-shadow:0 6px 16px rgba(6,95,70,0.22);">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+                <span style="font-weight:900;color:#6ee7b7;font-size:0.84rem;">${badgeTitle}</span>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <button type="button" onclick="window.copyVbLeanCode('${safeSlugL}')" style="padding:4px 9px;border-radius:999px;background:#1e293b;color:#fde047;border:1px solid #facc15;font-size:0.71rem;font-weight:800;cursor:pointer;">${copyLabel}</button>
+                  <a href="${lp.live_url}" target="_blank" rel="noopener" style="padding:4px 10px;border-radius:999px;background:#059669;color:#fff;font-size:0.72rem;font-weight:900;text-decoration:none;border:1px solid #a7f3d0;">${runLabel}</a>
+                </div>
+              </div>
+              <div style="font-size:0.76rem;color:#d1fae5;line-height:1.5;margin-bottom:6px;">${escapeHtmlLean(precondText)}</div>
+              <details style="background:rgba(2,6,23,0.7);border:1px solid rgba(16,185,129,0.4);border-radius:8px;padding:6px 10px;">
+                <summary style="cursor:pointer;font-size:0.74rem;font-weight:800;color:#a7f3d0;">${escapeHtmlLean(srcLabel)}</summary>
+                <pre style="margin:8px 0 2px;overflow-x:auto;font-size:0.74rem;line-height:1.45;color:#dbeafe;"><code>${escapeHtmlLean(lp.lean_code || '')}</code></pre>
+              </details>
+            </div>
+          `;
+        })()}
                 <div id="vbNeonIdeaLab" style="padding:12px;border-radius:12px;background:linear-gradient(135deg,#090d1e,#1e1b4b);border:1.5px solid #7c3aed;margin-bottom:12px;color:#f8fafc;box-shadow:0 8px 20px rgba(15,23,42,0.35);">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
             <span style="font-weight:900;color:#fef08a;font-size:0.84rem;">🌟 [8대 창의 수학 네온 시뮬레이터] 슬라이더를 움직여 불변량을 직접 실험하세요!</span>
@@ -1946,6 +2001,7 @@
         ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="res-chip">🌐 min7014.github.io 웹페이지 ↗</a>` : ''}
         ${pdfClean ? `<a href="${pdfClean}" target="_blank" rel="noopener" class="res-chip">📄 원본 플립북 PDF ↗</a>` : ''}
         ${item.geogebra ? `<a href="${item.geogebra}" target="_blank" rel="noopener" class="res-chip">🧭 GeoGebra 인터랙티브 ↗</a>` : ''}
+        ${LEAN_PROOFS_MAP[item._slug] ? `<a href="${LEAN_PROOFS_MAP[item._slug].live_url}" target="_blank" rel="noopener" class="res-chip" style="border-color:#10b981;background:#ecfdf5;color:#065f46;font-weight:900;">✔ Lean 4 형식 증명 실행 ↗</a>` : ''}
         <button type="button" onclick="window.printClassroomQrWorksheet(${itemIdx})" class="res-chip" style="border-color:#facc15;background:#fef9c3;color:#854d0e;font-weight:900;cursor:pointer;">🖨️ 교실 배포용 QR 탐구 활동지 인쇄 (학생 30명 구독 연동)</button>
         <a href="index.html?q=${encodeURIComponent(cleanKw)}&from=video_board" class="res-chip" style="border-color:#86efac;background:#f0fdf4;color:#047857;font-weight:800;">✍️ 이 개념 탈-5지선다 기출 풀기 ➔</a>
         <a href="game.html" class="res-chip" style="border-color:#c7d2fe;background:#eef2ff;color:#4338ca;font-weight:800;">🎮 3D 수학 성소 보스 레이드 ➔</a>

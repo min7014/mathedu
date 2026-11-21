@@ -109,12 +109,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#geometry">Geometry</a> › The base angles of an isosceles triangle are congruent.</nav>
 <h1>The base angles of an isosceles triangle are congruent.</h1>
-<p class="lede">14-step visual proof · Geometry · Euclidean Plane Geometry</p>
+<p class="lede">14-step visual proof · Geometry · Euclidean Plane Geometry · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2019/2017090405.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2017090405&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2017090405&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20191117001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%2010.%20%5B2017090405%5D%20Base%20Angles%20of%20an%20Isosceles%20Triangle%0Atheorem%20isosceles_base_angles_sum%0A%20%20%20%20%28apex%20b1%20b2%20%3A%20Int%29%0A%20%20%20%20%28hsum%20%3A%20apex%20%2B%20b1%20%2B%20b2%20%3D%20180%29%0A%20%20%20%20%28hcong%20%3A%20b1%20%3D%20b2%29%20%3A%0A%20%20%20%20apex%20%2B%202%20%2A%20b1%20%3D%20180%20%E2%88%A7%202%20%2A%20b2%20%3D%20180%20-%20apex%20%3A%3D%20by%0A%20%20omega" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -124,6 +125,17 @@
 <li><span class="rng">Step 14</span><p>The visual proof is complete! Starting from the definition (assumption) of an isosceles triangle that the lengths of the two sides AB and AC are the same in triangle ABC, which was the starting condition (AB = AC), and through the critical auxiliary line of drawing the green angle bisector AD, which divides the vertex angle A exactly in half, to the base BC, it was clearly confirmed that the conclusion was established that the two base angles B and C opposite the two sides of the same length have the same size (angle B = angle C). The key point to remember here is that in order to avoid using the conclusion to be proved (the two base angles are the same) in advance during the proof process, you must draw an auxiliary line bisector of the vertex angles and derive the SAS congruence to avoid falling into circular logic. Finally, ask a deeper question. If, instead of the bisector of the vertex angle, we draw an auxiliary line (median line) connecting the midpoint M of the base BC, under what congruence condition (SSS congruence) can we prove the same? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don&#x27;t miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2019/2017090405.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2017090405&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>Combine the triangle angle sum apex + b1 + b2 = 180 with congruent base angles b1 = b2 to prove apex + 2*b1 = 180 and 2*b2 = 180 - apex.</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (isosceles_base_angles_sum)</summary><pre><code>-- 10. [2017090405] Base Angles of an Isosceles Triangle
+theorem isosceles_base_angles_sum
+    (apex b1 b2 : Int)
+    (hsum : apex + b1 + b2 = 180)
+    (hcong : b1 = b2) :
+    apex + 2 * b1 = 180 ∧ 2 * b2 = 180 - apex := by
+  omega</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%2010.%20%5B2017090405%5D%20Base%20Angles%20of%20an%20Isosceles%20Triangle%0Atheorem%20isosceles_base_angles_sum%0A%20%20%20%20%28apex%20b1%20b2%20%3A%20Int%29%0A%20%20%20%20%28hsum%20%3A%20apex%20%2B%20b1%20%2B%20b2%20%3D%20180%29%0A%20%20%20%20%28hcong%20%3A%20b1%20%3D%20b2%29%20%3A%0A%20%20%20%20apex%20%2B%202%20%2A%20b1%20%3D%20180%20%E2%88%A7%202%20%2A%20b2%20%3D%20180%20-%20apex%20%3A%3D%20by%0A%20%20omega" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>Watch on YouTube</h2>
 <ul class="plain">
 <li><a href="https://www.youtube.com/watch?v=GFDb4_tyMBE" target="_blank" rel="noopener">Full visual-proof lecture</a></li>

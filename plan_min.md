@@ -931,3 +931,14 @@ python -X utf8 pr.py status
   1. **[선정적 바이럴 어조 영구 퇴출 & 교육자·작품 중심 8대 품격 채널 정립]**: `"통암기 멈추고"`, `"무료 사이트 추천"` 등 가벼운 입시 과장 문구를 전면 폐지하고, **수학교사 민은기 선생님(`MIN EUN GI`)**이 20여 년 교단 연구로 빚어낸 **주옥 같은 원문 교육자료(`min7014.github.io` 1,132+ 심층 주제 · 865+ 단계별 시각 증명 PDF · GeoGebra/AlgeoMath · 저서 ISBN `979-11-87541-13-4` · 자체 제작 `MathLab` · 16,594+ 무광고 무료 기출 디딤돌)**를 조망하는 8대 채널(`educator_tribute` 헌정 서사 신설 + 교사·수험생·학부모·SNS·초대장·유튜브 원문안내·Global OER) 체제를 구축한다.
   2. **[박물관 도록형 '플라톤의 사색 서재' 1200×630 전시 카드(`assets/pr_cards/`) 의무화]**: 자극적인 학원식 광고 배너 대신 다크 옵시디언(`#0a101e`) + 앤틱 골드(`#d4af37`) 이중 세선 프레임 위에 **`min7014.github.io` 원문 PDF 핵심 증명 도판**을 직접 배치한 도록 카드(`pr_card_min7014_master.png` 포함)를 자동 생성한다.
   3. **[`Rule 13.1` × `Rule 38` 무결성 조화 및 상시 감시]**: 개별 유튜브 영상 TTS/제목/퀴즈 댓글의 개인 호칭 배제(`auditor.py` L4)는 엄수하면서도, 대외 홍보 키트·웹 아틀리에 스튜디오·`llms.txt`·도록 카드에서는 `민은기 선생님 (MIN EUN GI)`의 교육적 품격과 원문 아카이브 권위를 당당히 선양하며 `auditor.py` L7에 회귀 방지 검증을 탑재한다.
+
+
+---
+
+### [Policy 82] Lean 4 (`v4.36.0`) 기계적 형식 증명 검증(`0 sorry`) 및 웹 라이브 플레이그라운드 통합 원칙 (`2026-11-21` 확정 · 텔레그램 4번 누락 해결 완결)
+- **적용 배경**: `min7014.github.io` 핵심 시각 증명 주제들이 단순 자연어 해설을 넘어 컴퓨터가 논리적 완결성을 100% 검증한 형식 증명(Formal Verification)으로 뒷받침되도록 하며, `auditor.py` `L7_visual_integrity`의 누락(`assets/lean_formal_proofs.json`)을 영구 해소한다.
+- **핵심 구현 규율 (`lean_proofs/MatheduFormalProofs.lean` · `lean_verifier.py` · `assets/lean_formal_proofs.json` · `video_board.html` · `build_global_proof_pages.py` · `mathteacher.py` · `auditor.py`)**:
+  1. **[순수 Lean 4 코어 `0 sorry`·`0 axiom` 단독 실행 표준]**: `lean_proofs/MatheduFormalProofs.lean`에 외부 라이브러리 의존성 없이 `Lean v4.36.0` 코어만으로 서브초(`sub-second`) 내 기계 검증되는 핵심 정리 14종(피타고라스 정리·체바·메넬라우스·코시-슈바르츠·등차중항·외심·내심·수직이등분선·6-3-5 직육면체 공간대각선·이등변삼각형 밑각·켤레 유리화·피타고라스 나무 넓이 보존·원주각·접선과 현)을 수록하며, 미완성 자리표시자(`sorry`) 및 임의 공리(`axiom`)를 절대 금지한다.
+  2. **[전체 및 단건 기계 검증 파이프라인 (`lean_verifier.py`)]**: `Rule 48`(`import silent_subprocess`) 준수 하에 `lean.exe` 및 `lake build`로 전체 모듈과 각 정리의 단독 스니펫을 개별 컴파일 검증한 뒤 `assets/lean_formal_proofs.json`과 `https://live.lean-lang.org/#code=...` 직결 실행 URL을 자동 생성한다.
+  3. **[웹·글로벌 영문 허브·텔레그램·독립 감사관 전방위 연동]**: `video_board.html`(`#vbLeanFormalBox`), 글로벌 영문 증명 페이지(`/en/proofs/` · `.lean-badge` · `details.lean-proof`), `mathteacher.py lean`, 텔레그램 `!린` / `!린 [슬러그]` 즉시 브리핑, 그리고 `auditor.py` L7(`zero_sorry == True`, `verified_count > 0`, `*.lean` 스캔)을 유기적으로 연동하여 상시 `PASS_ZERO_VIOLATIONS`를 유지한다.
+

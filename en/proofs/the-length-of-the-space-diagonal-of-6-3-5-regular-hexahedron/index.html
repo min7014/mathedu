@@ -56,7 +56,7 @@
    "name": "MathEdu Visual Proofs",
    "url": "https://min7014.github.io/mathedu/"
   },
-  "dateModified": "2026-11-19",
+  "dateModified": "2026-11-21",
   "isBasedOn": "https://min7014.github.io/2021/2017091820.pdf",
   "video": {
    "@type": "VideoObject",
@@ -108,12 +108,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#conics-vectors">Conics &amp; Vectors</a> › The length of the space diagonal of 6-3-5 regular hexahedron</nav>
 <h1>The length of the space diagonal of 6-3-5 regular hexahedron</h1>
-<p class="lede">14-step visual proof · Conics &amp; Vectors · Vectors &amp; Solid Geometry</p>
+<p class="lede">14-step visual proof · Conics &amp; Vectors · Vectors &amp; Solid Geometry · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2021/2017091820.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2017091820&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2017091820&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20210315001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%209.%20%5B2017091820%5D%20Space%20Diagonal%20of%20a%20Rectangular%20Prism%20%286-3-5%20Example%29%0Atheorem%20space_diagonal_6_3_5_prism%0A%20%20%20%20%28a%20b%20c%20dBaseSq%20dSpaceSq%20%3A%20Int%29%0A%20%20%20%20%28hbase%20%3A%20dBaseSq%20%3D%20a%20%2A%20a%20%2B%20b%20%2A%20b%29%0A%20%20%20%20%28hspace%20%3A%20dSpaceSq%20%3D%20dBaseSq%20%2B%20c%20%2A%20c%29%20%3A%0A%20%20%20%20dSpaceSq%20%3D%20a%20%2A%20a%20%2B%20b%20%2A%20b%20%2B%20c%20%2A%20c%20%E2%88%A7%0A%20%20%20%20%20%206%20%2A%206%20%2B%203%20%2A%203%20%2B%205%20%2A%205%20%3D%20%2870%20%3A%20Int%29%20%3A%3D%20by%0A%20%20constructor%0A%20%20%C2%B7%20omega%0A%20%20%C2%B7%20decide" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -125,6 +126,20 @@
 <li><span class="rng">Step 14</span><p>The visual proof is complete! Starting from the geometric starting conditions in which a square is drawn with the three sides a, b, c (hypotenuse c) of a right triangle as one side and each side as the starting condition, the sum of the squares of the two sides containing the right angle is always equal to the square of the hypotenuse (the square of a (plus b squared = c squared) clearly confirmed that the Pythagorean theorem and the area conservation conclusion hold. The key point to remember here is that the center square can be a rhombus just because the four sides have the same length c, so it is perfect to prove that the interior angle is 90 degrees (a square) by using the sum of the two acute angles to be 90 degrees! Finally, ask a deeper question. If we place an equilateral triangle or a semicircle instead of a square on the three sides of a right triangle, will the sum of the areas of the two smaller shapes still be the same as the area of the hypotenuse shape? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don&#x27;t miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2021/2017091820.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2017091820&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>From base diagonal dBaseSq = a^2 + b^2 and prism height c, prove dSpaceSq = a^2 + b^2 + c^2 and machine-verify 6^2 + 3^2 + 5^2 = 70.</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (space_diagonal_6_3_5_prism)</summary><pre><code>-- 9. [2017091820] Space Diagonal of a Rectangular Prism (6-3-5 Example)
+theorem space_diagonal_6_3_5_prism
+    (a b c dBaseSq dSpaceSq : Int)
+    (hbase : dBaseSq = a * a + b * b)
+    (hspace : dSpaceSq = dBaseSq + c * c) :
+    dSpaceSq = a * a + b * b + c * c ∧
+      6 * 6 + 3 * 3 + 5 * 5 = (70 : Int) := by
+  constructor
+  · omega
+  · decide</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%209.%20%5B2017091820%5D%20Space%20Diagonal%20of%20a%20Rectangular%20Prism%20%286-3-5%20Example%29%0Atheorem%20space_diagonal_6_3_5_prism%0A%20%20%20%20%28a%20b%20c%20dBaseSq%20dSpaceSq%20%3A%20Int%29%0A%20%20%20%20%28hbase%20%3A%20dBaseSq%20%3D%20a%20%2A%20a%20%2B%20b%20%2A%20b%29%0A%20%20%20%20%28hspace%20%3A%20dSpaceSq%20%3D%20dBaseSq%20%2B%20c%20%2A%20c%29%20%3A%0A%20%20%20%20dSpaceSq%20%3D%20a%20%2A%20a%20%2B%20b%20%2A%20b%20%2B%20c%20%2A%20c%20%E2%88%A7%0A%20%20%20%20%20%206%20%2A%206%20%2B%203%20%2A%203%20%2B%205%20%2A%205%20%3D%20%2870%20%3A%20Int%29%20%3A%3D%20by%0A%20%20constructor%0A%20%20%C2%B7%20omega%0A%20%20%C2%B7%20decide" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>Watch on YouTube</h2>
 <ul class="plain">
 <li><a href="https://www.youtube.com/watch?v=uSBjCl_ozqo" target="_blank" rel="noopener">Full visual-proof lecture</a></li>

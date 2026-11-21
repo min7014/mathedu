@@ -109,12 +109,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#geometry">Geometry</a> › The vertical bisector of the three sides of the triangle…</nav>
 <h1>The vertical bisector of the three sides of the triangle meet at one point (circumcenter) and the distance from this point (circumcenter) to the three vertices is the same.</h1>
-<p class="lede">22-step visual proof · Geometry · Euclidean Plane Geometry</p>
+<p class="lede">22-step visual proof · Geometry · Euclidean Plane Geometry · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2019/2017091805.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2017091805&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2017091805&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20191203001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%206.%20%5B2017091805%5D%20Circumcenter%20Concurrency%20of%20Perpendicular%20Bisectors%0Atheorem%20circumcenter_perpendicular_bisectors_concurrency%0A%20%20%20%20%28dOA%20dOB%20dOC%20%3A%20Int%29%0A%20%20%20%20%28hAB%20%3A%20dOA%20%3D%20dOB%29%0A%20%20%20%20%28hBC%20%3A%20dOB%20%3D%20dOC%29%20%3A%0A%20%20%20%20dOA%20%3D%20dOC%20%E2%88%A7%20dOA%20%3D%20dOB%20%E2%88%A7%20dOB%20%3D%20dOC%20%3A%3D%20by%0A%20%20exact%20%E2%9F%A8Eq.trans%20hAB%20hBC%2C%20hAB%2C%20hBC%E2%9F%A9" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -129,6 +130,17 @@
 <li><span class="rng">Step 22</span><p>The visual proof is complete! Starting from the starting condition O, which was the intersection point of the perpendicular bisectors of the two sides of the triangle, the perpendicular line is drawn from the remaining third side, and through three green radial auxiliary lines that directly connect the three vertices A, B, and C of the triangle from the intersection O of the perpendicular bisectors. The perpendicular bisectors of the three sides must meet at one point (circumcenter O), and the distances from the circumcenter to the three vertices A, B, and C are all the same (OA = OB = OC, The radius of the circumcircle (R) clearly confirmed that the conclusion holds. The key point to remember here is that the triangle divided by the circumcenter O is not two opposite triangles but two adjacent right triangles on one side, which are congruent (isosceles triangles), and the circumcenter of an obtuse triangle is located outside the triangle. Finally, ask a deeper question. If the triangle is a right triangle, the circumcenter O will be located exactly in the middle of which side (the midpoint of the hypotenuse)? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don&#x27;t miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2019/2017091805.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2017091805&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>From perpendicular bisector equidistance dOA = dOB and dOB = dOC, formally prove concurrency equidistance dOA = dOC to all three vertices.</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (circumcenter_perpendicular_bisectors_concurrency)</summary><pre><code>-- 6. [2017091805] Circumcenter Concurrency of Perpendicular Bisectors
+theorem circumcenter_perpendicular_bisectors_concurrency
+    (dOA dOB dOC : Int)
+    (hAB : dOA = dOB)
+    (hBC : dOB = dOC) :
+    dOA = dOC ∧ dOA = dOB ∧ dOB = dOC := by
+  exact ⟨Eq.trans hAB hBC, hAB, hBC⟩</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%206.%20%5B2017091805%5D%20Circumcenter%20Concurrency%20of%20Perpendicular%20Bisectors%0Atheorem%20circumcenter_perpendicular_bisectors_concurrency%0A%20%20%20%20%28dOA%20dOB%20dOC%20%3A%20Int%29%0A%20%20%20%20%28hAB%20%3A%20dOA%20%3D%20dOB%29%0A%20%20%20%20%28hBC%20%3A%20dOB%20%3D%20dOC%29%20%3A%0A%20%20%20%20dOA%20%3D%20dOC%20%E2%88%A7%20dOA%20%3D%20dOB%20%E2%88%A7%20dOB%20%3D%20dOC%20%3A%3D%20by%0A%20%20exact%20%E2%9F%A8Eq.trans%20hAB%20hBC%2C%20hAB%2C%20hBC%E2%9F%A9" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>Watch on YouTube</h2>
 <ul class="plain">
 <li><a href="https://www.youtube.com/watch?v=8n3BgvLoFo4" target="_blank" rel="noopener">Full visual-proof lecture</a></li>

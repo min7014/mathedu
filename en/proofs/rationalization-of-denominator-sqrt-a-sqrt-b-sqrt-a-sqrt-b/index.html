@@ -91,12 +91,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#exp-log-trig-sequences">Exponentials, Logs, Trig &amp; Sequences</a> › Rationalization of Denominator (√(a)-√(b), √(a)+√(b))</nav>
 <h1>Rationalization of Denominator (√(a)-√(b), √(a)+√(b))</h1>
-<p class="lede">12-step visual proof · Exponentials, Logs, Trig &amp; Sequences · Exponentials &amp; Logarithms</p>
+<p class="lede">12-step visual proof · Exponentials, Logs, Trig &amp; Sequences · Exponentials &amp; Logarithms · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2020/2017032702.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2017032702&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2017032702&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20200106004.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%2011.%20%5B2017032702%5D%20Denominator%20Rationalization%20via%20Conjugate%20Difference%20of%20Squares%0Atheorem%20conjugate_rationalization_identity%0A%20%20%20%20%28a%20b%20sA%20sB%20%3A%20Int%29%0A%20%20%20%20%28ha%20%3A%20sA%20%2A%20sA%20%3D%20a%29%0A%20%20%20%20%28hb%20%3A%20sB%20%2A%20sB%20%3D%20b%29%20%3A%0A%20%20%20%20%28sA%20%2B%20sB%29%20%2A%20%28sA%20-%20sB%29%20%3D%20a%20-%20b%20%3A%3D%20by%0A%20%20grind" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -108,6 +109,17 @@
 <li><span class="rng">Step 12</span><p>The visual proof is complete! Starting from the starting conditions given by an irrational fraction formula containing a radical (root a, but a is a positive number) in the denominator, the denominator and numerator are simultaneously multiplied by 1 (i.e. the root a of root a), which does not change the size of the fraction, and the algebraic idea of making the denominator become the square of (root a) = a. If the denominator and numerator are equally multiplied by the root a, the denominator is changed to a rational number without a radical, resulting in b root a of a. It was clearly confirmed that the conclusion of rationalization of the denominator holds. The key point to remember here is that you must be careful not to multiply only the denominator by root a and forget to multiply the numerator, or mistake root a times root a for 2 root a! Finally, ask a deeper question. If the denominator is not the monomial root a but is the sum of two terms, such as &#x27;root a plus root b&#x27;, how should the denominator and numerator be multiplied using the sum formula to rationalize it? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don&#x27;t miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2020/2017032702.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2017032702&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>When sA^2 = a and sB^2 = b, formally prove that the conjugate product (sA + sB)*(sA - sB) collapses to the rationalized difference a - b.</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (conjugate_rationalization_identity)</summary><pre><code>-- 11. [2017032702] Denominator Rationalization via Conjugate Difference of Squares
+theorem conjugate_rationalization_identity
+    (a b sA sB : Int)
+    (ha : sA * sA = a)
+    (hb : sB * sB = b) :
+    (sA + sB) * (sA - sB) = a - b := by
+  grind</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%2011.%20%5B2017032702%5D%20Denominator%20Rationalization%20via%20Conjugate%20Difference%20of%20Squares%0Atheorem%20conjugate_rationalization_identity%0A%20%20%20%20%28a%20b%20sA%20sB%20%3A%20Int%29%0A%20%20%20%20%28ha%20%3A%20sA%20%2A%20sA%20%3D%20a%29%0A%20%20%20%20%28hb%20%3A%20sB%20%2A%20sB%20%3D%20b%29%20%3A%0A%20%20%20%20%28sA%20%2B%20sB%29%20%2A%20%28sA%20-%20sB%29%20%3D%20a%20-%20b%20%3A%3D%20by%0A%20%20grind" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>More Exponentials, Logs, Trig &amp; Sequences proofs</h2>
 <ul class="plain">
 <li><a href="../sqrt-75-1-sqrt-12-sqrt-3/">(√(75)+(1/√(12)))÷ √(3)</a></li>

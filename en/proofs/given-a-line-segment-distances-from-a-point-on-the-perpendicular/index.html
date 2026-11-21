@@ -55,7 +55,7 @@
    "name": "MathEdu Visual Proofs",
    "url": "https://min7014.github.io/mathedu/"
   },
-  "dateModified": "2026-11-19",
+  "dateModified": "2026-11-21",
   "isBasedOn": "https://min7014.github.io/2019/2019111301.pdf"
  },
  {
@@ -91,12 +91,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#geometry">Geometry</a> › Given a line segment, distances from a point on the…</nav>
 <h1>Given a line segment, distances from a point on the perpendicular bisector to the each end point of the line segment are same.</h1>
-<p class="lede">16-step visual proof · Geometry · Euclidean Plane Geometry</p>
+<p class="lede">16-step visual proof · Geometry · Euclidean Plane Geometry · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2019/2019111301.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2019111301&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2019111301&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20191113001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%208.%20%5B2019111301%5D%20Equidistance%20on%20a%20Perpendicular%20Bisector%20%28Coordinate%20Proof%29%0Atheorem%20perpendicular_bisector_equidistance%0A%20%20%20%20%28ax%20ay%20bx%20by_%20mx%20my%20px%20py%20%3A%20Int%29%0A%20%20%20%20%28hmx%20%3A%202%20%2A%20mx%20%3D%20ax%20%2B%20bx%29%0A%20%20%20%20%28hmy%20%3A%202%20%2A%20my%20%3D%20ay%20%2B%20by_%29%0A%20%20%20%20%28hperp%20%3A%20%28px%20-%20mx%29%20%2A%20%28bx%20-%20ax%29%20%2B%20%28py%20-%20my%29%20%2A%20%28by_%20-%20ay%29%20%3D%200%29%20%3A%0A%20%20%20%20%28px%20-%20ax%29%20%2A%20%28px%20-%20ax%29%20%2B%20%28py%20-%20ay%29%20%2A%20%28py%20-%20ay%29%20%3D%0A%20%20%20%20%20%20%28px%20-%20bx%29%20%2A%20%28px%20-%20bx%29%20%2B%20%28py%20-%20by_%29%20%2A%20%28py%20-%20by_%29%20%3A%3D%20by%0A%20%20have%20h_diff%20%3A%0A%20%20%20%20%20%20%28%28px%20-%20ax%29%20%2A%20%28px%20-%20ax%29%20%2B%20%28py%20-%20ay%29%20%2A%20%28py%20-%20ay%29%29%20-%0A%20%20%20%20%20%20%28%28px%20-%20bx%29%20%2A%20%28px%20-%20bx%29%20%2B%20%28py%20-%20by_%29%20%2A%20%28py%20-%20by_%29%29%20%3D%0A%20%20%20%20%20%20%20%202%20%2A%20%28%28px%20-%20mx%29%20%2A%20%28bx%20-%20ax%29%20%2B%20%28py%20-%20my%29%20%2A%20%28by_%20-%20ay%29%29%20%3A%3D%20by%0A%20%20%20%20grind%0A%20%20rw%20%5Bhperp%5D%20at%20h_diff%0A%20%20omega" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -110,6 +111,25 @@
 <li><span class="rng">Step 16</span><p>The visual proof is complete! Starting from the assumption that the bisector of the vertex angle (or the perpendicular to the base) is drawn in an isosceles triangle in which the two sides AB and AC are of equal length, which was the starting condition, the green angle bisector AD, which divides the vertex angle A in half, is passed through the first auxiliary line drawn down to the base BC, and the conclusion is established that the bisector of the vertex angle vertically bisects the base BC (BD = CD, angle = 90 degrees). Confirmed clearly. The key point to remember here is that in a regular triangle, the vertex angle bisector and the base perpendicular bisector do not coincide, and only in the symmetry of an isosceles triangle, where both sides have the same length. Finally, ask a deeper question. If you connect the midpoint of the base and the vertex first (median line), why does it automatically become vertical and bisect the vertex angle? (Inverse idea of SSS congruence) If you learned the principle without memorizing the formula through visual proof today, subscribe and like right now and don&#x27;t miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2019/2019111301.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2019111301&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>Given Cartesian midpoint 2*mx = ax + bx, 2*my = ay + by_ and dot-product orthogonality to AB, prove squared distance equality distSq(P, A) = distSq(P, B).</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (perpendicular_bisector_equidistance)</summary><pre><code>-- 8. [2019111301] Equidistance on a Perpendicular Bisector (Coordinate Proof)
+theorem perpendicular_bisector_equidistance
+    (ax ay bx by_ mx my px py : Int)
+    (hmx : 2 * mx = ax + bx)
+    (hmy : 2 * my = ay + by_)
+    (hperp : (px - mx) * (bx - ax) + (py - my) * (by_ - ay) = 0) :
+    (px - ax) * (px - ax) + (py - ay) * (py - ay) =
+      (px - bx) * (px - bx) + (py - by_) * (py - by_) := by
+  have h_diff :
+      ((px - ax) * (px - ax) + (py - ay) * (py - ay)) -
+      ((px - bx) * (px - bx) + (py - by_) * (py - by_)) =
+        2 * ((px - mx) * (bx - ax) + (py - my) * (by_ - ay)) := by
+    grind
+  rw [hperp] at h_diff
+  omega</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%208.%20%5B2019111301%5D%20Equidistance%20on%20a%20Perpendicular%20Bisector%20%28Coordinate%20Proof%29%0Atheorem%20perpendicular_bisector_equidistance%0A%20%20%20%20%28ax%20ay%20bx%20by_%20mx%20my%20px%20py%20%3A%20Int%29%0A%20%20%20%20%28hmx%20%3A%202%20%2A%20mx%20%3D%20ax%20%2B%20bx%29%0A%20%20%20%20%28hmy%20%3A%202%20%2A%20my%20%3D%20ay%20%2B%20by_%29%0A%20%20%20%20%28hperp%20%3A%20%28px%20-%20mx%29%20%2A%20%28bx%20-%20ax%29%20%2B%20%28py%20-%20my%29%20%2A%20%28by_%20-%20ay%29%20%3D%200%29%20%3A%0A%20%20%20%20%28px%20-%20ax%29%20%2A%20%28px%20-%20ax%29%20%2B%20%28py%20-%20ay%29%20%2A%20%28py%20-%20ay%29%20%3D%0A%20%20%20%20%20%20%28px%20-%20bx%29%20%2A%20%28px%20-%20bx%29%20%2B%20%28py%20-%20by_%29%20%2A%20%28py%20-%20by_%29%20%3A%3D%20by%0A%20%20have%20h_diff%20%3A%0A%20%20%20%20%20%20%28%28px%20-%20ax%29%20%2A%20%28px%20-%20ax%29%20%2B%20%28py%20-%20ay%29%20%2A%20%28py%20-%20ay%29%29%20-%0A%20%20%20%20%20%20%28%28px%20-%20bx%29%20%2A%20%28px%20-%20bx%29%20%2B%20%28py%20-%20by_%29%20%2A%20%28py%20-%20by_%29%29%20%3D%0A%20%20%20%20%20%20%20%202%20%2A%20%28%28px%20-%20mx%29%20%2A%20%28bx%20-%20ax%29%20%2B%20%28py%20-%20my%29%20%2A%20%28by_%20-%20ay%29%29%20%3A%3D%20by%0A%20%20%20%20grind%0A%20%20rw%20%5Bhperp%5D%20at%20h_diff%0A%20%20omega" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>More Geometry proofs</h2>
 <ul class="plain">
 <li><a href="../constructing-a-isosceles-triangle-given-a-line-segment-and-a-point-of/">Constructing a isosceles triangle given a line segment and a point of a line</a></li>

@@ -569,6 +569,22 @@ def cmd_audit():
     subprocess.run([sys.executable, os.path.join(BASE_DIR, "audit_full_mathedu.py")], check=True)
 
 
+def cmd_lean(slug=""):
+    import lean_verifier
+    if slug:
+        print(lean_verifier.format_telegram_lean_briefing(slug))
+    else:
+        rep = lean_verifier.verify_all_and_build_catalog(audit_scripts=True)
+        print(json.dumps({
+            "lean_version": rep.get("lean_version"),
+            "verified_at": rep.get("verified_at"),
+            "total_theorems": rep.get("total_theorems"),
+            "verified_count": rep.get("verified_count"),
+            "zero_sorry": rep.get("zero_sorry"),
+            "scripts_audited": (rep.get("domain_audit_summary") or {}).get("total_scripts"),
+        }, ensure_ascii=False, indent=2))
+
+
 def cmd_audit_videos():
     r"""
     [mathteacher v7.0 수학 강의 영상 대본·자막·메타데이터 전수 수학적 무결성 검수]
@@ -655,6 +671,8 @@ def main():
         cmd_status()
     elif sys.argv[1] in ("audit", "--audit"):
         cmd_audit()
+    elif sys.argv[1] in ("lean", "verify-lean", "--lean"):
+        cmd_lean(sys.argv[2] if len(sys.argv) >= 3 else "")
     elif sys.argv[1] in ("audit-videos", "audit_videos", "--audit-videos", "--audit_videos"):
         cmd_audit_videos()
     else:

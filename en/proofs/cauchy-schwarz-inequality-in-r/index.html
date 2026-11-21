@@ -110,12 +110,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#algebra-functions">Algebra &amp; Functions</a> › Cauchy Schwarz inequality in R</nav>
 <h1>Cauchy Schwarz inequality in R</h1>
-<p class="lede">40-step visual proof · Algebra &amp; Functions · Equations &amp; Inequalities</p>
+<p class="lede">40-step visual proof · Algebra &amp; Functions · Equations &amp; Inequalities · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2019/2014080601.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=2014080601&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=2014080601&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20191108001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%204.%20%5B2014080601%5D%20Cauchy-Schwarz%20Inequality%20in%20R%5E2%20via%20Lagrange%20Identity%0Atheorem%20cauchy_schwarz_lagrange_r2%0A%20%20%20%20%28a1%20a2%20b1%20b2%20%3A%20Int%29%20%3A%0A%20%20%20%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%20%2A%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%0A%20%20%20%20%20%20%E2%89%A4%20%28a1%20%2A%20a1%20%2B%20a2%20%2A%20a2%29%20%2A%20%28b1%20%2A%20b1%20%2B%20b2%20%2A%20b2%29%20%3A%3D%20by%0A%20%20have%20h_id%20%3A%0A%20%20%20%20%20%20%28a1%20%2A%20a1%20%2B%20a2%20%2A%20a2%29%20%2A%20%28b1%20%2A%20b1%20%2B%20b2%20%2A%20b2%29%20%3D%0A%20%20%20%20%20%20%20%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%20%2A%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%20%2B%0A%20%20%20%20%20%20%20%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%2A%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%3A%3D%20by%0A%20%20%20%20grind%0A%20%20have%20h_sq%20%3A%200%20%E2%89%A4%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%2A%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%3A%3D%20by%0A%20%20%20%20by_cases%20hsign%20%3A%200%20%E2%89%A4%20a1%20%2A%20b2%20-%20a2%20%2A%20b1%0A%20%20%20%20%C2%B7%20exact%20Int.mul_nonneg%20hsign%20hsign%0A%20%20%20%20%C2%B7%20have%20hneg%20%3A%20a1%20%2A%20b2%20-%20a2%20%2A%20b1%20%E2%89%A4%200%20%3A%3D%20by%20omega%0A%20%20%20%20%20%20exact%20Int.mul_nonneg_of_nonpos_of_nonpos%20hneg%20hneg%0A%20%20omega" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -128,6 +129,26 @@
 <li><span class="rng">Step 40</span><p>The visual proof is complete! Starting from the geometric starting conditions, draw a semicircle whose diameter is the length (a+b) of the two positive numbers a and b, which were the starting conditions, and draw a perpendicular line to the semicircle at the boundary point of the two line segments. Create a right triangle with the radius OP (arithmetic mean (a+b)/2) connecting the center O of the semicircle and the intersection point P on the semicircle, the height of the perpendicular line PH (geometric mean root ab), and the perpendicular line drawn from H to OP (harmonic mean piece). Through the auxiliary line, it was clearly confirmed that for any two positive numbers a, b, the arithmetic mean (a+b)/2 or more, the geometric mean root ab or more, the harmonic mean 2ab/(a+b) inequality holds true, and the conclusion that the equal sign holds only when a = b is valid. The key point to remember here is that when finding the minimum value using the arithmetic/geometric mean inequality, you must check whether both numbers are &#x27;positive&#x27; and verify whether there is a real number x that satisfies the equality condition (when the two terms are equal to each other)! Finally, ask a deeper question. If the arithmetic/geometric mean inequality (a+b+c)/3 or more for not two positive numbers but three positive numbers a, b, and c, how can the cube root abc be understood in terms of the volume of a three-dimensional cuboid and the symmetry of a cube? If you have learned the principles without memorizing formulas through visual proof today, subscribe and like right now so you don&#x27;t miss out on the 1,113 visual math proof series! Please continue to check out the original math data room text and continuous driving masterclass in the description section!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2019/2014080601.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=2014080601&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>Combine the 2D Lagrange identity with non-negativity of a square over Int to formally prove (a1*b1 + a2*b2)^2 &lt;= (a1^2 + a2^2)*(b1^2 + b2^2).</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (cauchy_schwarz_lagrange_r2)</summary><pre><code>-- 4. [2014080601] Cauchy-Schwarz Inequality in R^2 via Lagrange Identity
+theorem cauchy_schwarz_lagrange_r2
+    (a1 a2 b1 b2 : Int) :
+    (a1 * b1 + a2 * b2) * (a1 * b1 + a2 * b2)
+      ≤ (a1 * a1 + a2 * a2) * (b1 * b1 + b2 * b2) := by
+  have h_id :
+      (a1 * a1 + a2 * a2) * (b1 * b1 + b2 * b2) =
+        (a1 * b1 + a2 * b2) * (a1 * b1 + a2 * b2) +
+        (a1 * b2 - a2 * b1) * (a1 * b2 - a2 * b1) := by
+    grind
+  have h_sq : 0 ≤ (a1 * b2 - a2 * b1) * (a1 * b2 - a2 * b1) := by
+    by_cases hsign : 0 ≤ a1 * b2 - a2 * b1
+    · exact Int.mul_nonneg hsign hsign
+    · have hneg : a1 * b2 - a2 * b1 ≤ 0 := by omega
+      exact Int.mul_nonneg_of_nonpos_of_nonpos hneg hneg
+  omega</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%204.%20%5B2014080601%5D%20Cauchy-Schwarz%20Inequality%20in%20R%5E2%20via%20Lagrange%20Identity%0Atheorem%20cauchy_schwarz_lagrange_r2%0A%20%20%20%20%28a1%20a2%20b1%20b2%20%3A%20Int%29%20%3A%0A%20%20%20%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%20%2A%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%0A%20%20%20%20%20%20%E2%89%A4%20%28a1%20%2A%20a1%20%2B%20a2%20%2A%20a2%29%20%2A%20%28b1%20%2A%20b1%20%2B%20b2%20%2A%20b2%29%20%3A%3D%20by%0A%20%20have%20h_id%20%3A%0A%20%20%20%20%20%20%28a1%20%2A%20a1%20%2B%20a2%20%2A%20a2%29%20%2A%20%28b1%20%2A%20b1%20%2B%20b2%20%2A%20b2%29%20%3D%0A%20%20%20%20%20%20%20%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%20%2A%20%28a1%20%2A%20b1%20%2B%20a2%20%2A%20b2%29%20%2B%0A%20%20%20%20%20%20%20%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%2A%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%3A%3D%20by%0A%20%20%20%20grind%0A%20%20have%20h_sq%20%3A%200%20%E2%89%A4%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%2A%20%28a1%20%2A%20b2%20-%20a2%20%2A%20b1%29%20%3A%3D%20by%0A%20%20%20%20by_cases%20hsign%20%3A%200%20%E2%89%A4%20a1%20%2A%20b2%20-%20a2%20%2A%20b1%0A%20%20%20%20%C2%B7%20exact%20Int.mul_nonneg%20hsign%20hsign%0A%20%20%20%20%C2%B7%20have%20hneg%20%3A%20a1%20%2A%20b2%20-%20a2%20%2A%20b1%20%E2%89%A4%200%20%3A%3D%20by%20omega%0A%20%20%20%20%20%20exact%20Int.mul_nonneg_of_nonpos_of_nonpos%20hneg%20hneg%0A%20%20omega" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>Watch on YouTube</h2>
 <ul class="plain">
 <li><a href="https://www.youtube.com/shorts/Cgan2emUQT8" target="_blank" rel="noopener">Short: the proof idea in under a minute</a></li>

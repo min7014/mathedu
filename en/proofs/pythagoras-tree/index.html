@@ -109,12 +109,13 @@
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Visual Proofs</a> › <a href="../../#geometry">Geometry</a> › Pythagoras Tree</nav>
 <h1>Pythagoras Tree</h1>
-<p class="lede">11-step visual proof · Geometry · Euclidean Plane Geometry</p>
+<p class="lede">11-step visual proof · Geometry · Euclidean Plane Geometry · Lean 4 formal proof verified</p>
 <div class="actions">
 <a class="btn primary" href="https://min7014.github.io/2025/2025013001.pdf" target="_blank" rel="noopener">Original step-by-step proof (PDF)</a>
 <a class="btn" href="../../../mathlab.html?slug=math20250130001&amp;lang=en">Construct it in MathLab</a>
 <a class="btn" href="../../../video_board.html?slug=math20250130001&amp;lang=en&amp;from=en">Split-screen study board</a>
 <a class="btn" href="https://min7014.github.io/math20250130001.html" target="_blank" rel="noopener">Source page &amp; applets</a>
+<a class="btn" href="https://live.lean-lang.org/#code=--%2012.%20%5Bmath20250130001%5D%20Pythagoras%20Tree%20Generational%20Area%20Conservation%0Atheorem%20pythagoras_tree_area_conservation%0A%20%20%20%20%28g0%20b1%20b2%20c1%20c2%20c3%20c4%20%3A%20Int%29%0A%20%20%20%20%28hlvl1%20%3A%20g0%20%3D%20b1%20%2B%20b2%29%0A%20%20%20%20%28hlvl2L%20%3A%20b1%20%3D%20c1%20%2B%20c2%29%0A%20%20%20%20%28hlvl2R%20%3A%20b2%20%3D%20c3%20%2B%20c4%29%20%3A%0A%20%20%20%20g0%20%3D%20c1%20%2B%20c2%20%2B%20c3%20%2B%20c4%20%3A%3D%20by%0A%20%20omega" target="_blank" rel="noopener">Verify in Lean 4 Live &#8599;</a>
 </div>
 <h2>Step-by-step walkthrough</h2>
 <ol class="steps">
@@ -131,6 +132,18 @@
 <li><span class="rng">Step 11</span><p>Visit the interactive geometry lab at min7014.github.io to drag the vertex along the semicircle yourself and watch the Pythagoras Tree transform dynamically in real time!</p></li>
 </ol>
 <p>Follow every step with its figure in the <a href="https://min7014.github.io/2025/2025013001.pdf" target="_blank" rel="noopener">original proof PDF</a>, then rebuild the figure yourself in <a href="../../../mathlab.html?slug=math20250130001&amp;lang=en">MathLab</a>.</p>
+<h2>Formal proof verification (Lean 4)</h2>
+<p><span class="lean-badge">&#10004; Machine-checked in Lean 4 (0 sorry)</span></p>
+<p>Assuming each Pythagorean branching step preserves square area (g0 = b1 + b2, b1 = c1 + c2, b2 = c3 + c4), prove total second-generation area equals root area g0.</p>
+<details class="lean-proof"><summary>View Lean 4 theorem source (pythagoras_tree_area_conservation)</summary><pre><code>-- 12. [math20250130001] Pythagoras Tree Generational Area Conservation
+theorem pythagoras_tree_area_conservation
+    (g0 b1 b2 c1 c2 c3 c4 : Int)
+    (hlvl1 : g0 = b1 + b2)
+    (hlvl2L : b1 = c1 + c2)
+    (hlvl2R : b2 = c3 + c4) :
+    g0 = c1 + c2 + c3 + c4 := by
+  omega</code></pre></details>
+<p><a href="https://live.lean-lang.org/#code=--%2012.%20%5Bmath20250130001%5D%20Pythagoras%20Tree%20Generational%20Area%20Conservation%0Atheorem%20pythagoras_tree_area_conservation%0A%20%20%20%20%28g0%20b1%20b2%20c1%20c2%20c3%20c4%20%3A%20Int%29%0A%20%20%20%20%28hlvl1%20%3A%20g0%20%3D%20b1%20%2B%20b2%29%0A%20%20%20%20%28hlvl2L%20%3A%20b1%20%3D%20c1%20%2B%20c2%29%0A%20%20%20%20%28hlvl2R%20%3A%20b2%20%3D%20c3%20%2B%20c4%29%20%3A%0A%20%20%20%20g0%20%3D%20c1%20%2B%20c2%20%2B%20c3%20%2B%20c4%20%3A%3D%20by%0A%20%20omega" target="_blank" rel="noopener">Run &amp; edit this formal proof in the official Lean 4 Web Playground &#8599;</a></p>
 <h2>Watch on YouTube</h2>
 <ul class="plain">
 <li><a href="https://www.youtube.com/watch?v=3ik6yQ-0fP8" target="_blank" rel="noopener">Full visual-proof lecture</a></li>
