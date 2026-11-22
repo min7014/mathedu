@@ -1619,6 +1619,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
        시드 풀 독점 호흡 시간을 보호하면서, 검색·재생목록·관련동영상 유입 중심의 1080p 본편은
        1시간마다 최대 2편(KO+EN 페어)까지 병행 발행해 일일 총 36~48편을 안정적으로 달성합니다.
     """
+    import importlib
     import time as _t_mod
     import min7014_video_maker as vmaker
 
@@ -1654,12 +1655,14 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
         # [Policy 89 Priority #0] 수동 업로드된 영상 0-쿼터 RSS 감지 및 내용·썸네일·첫댓글 일괄 재작성 (100~150유닛/편)
         try:
             import manual_upload_rewriter as _mur
+            importlib.reload(_mur)
             _mur_res = _mur.sync_and_rewrite_manual_uploads(max_rewrites=40, notify_telegram=True)
             if (_mur_res.get("rewritten_count", 0) > 0) or (
                 _mur_res.get("pending_count", 0) > 0 and vmaker._LAST_UPLOAD_QUOTA_BLOCKED
             ):
                 try:
                     import youtube_trend_tracker as _ytt_mur
+                    importlib.reload(_ytt_mur)
                     _ytt_mur.capture_trend_snapshot(include_studio=False)
                 except Exception:
                     pass
@@ -1672,7 +1675,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
         except Exception as _mur_err:
             print(f"⚠️ [Policy 89 Manual Rewrite Notice] {_mur_err}", flush=True)
 
-        yt_test, _ = vmaker.get_available_youtube_upload_service()
+        yt_test, _active_tok = vmaker.get_available_youtube_upload_service()
         if yt_test is None:
             # [0-Quota Studio + Idle Flow Retrofit Engine] API 쿼터 대기 시간에도 스튜디오 바인딩·커뮤니티 퀴즈 + 기존 자료 Flow 고품질화는 무중단 가동!
             try:
@@ -1682,16 +1685,33 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
                 pass
             try:
                 import nano_banana_cinema_creator as _nbcc
+                importlib.reload(_nbcc)
                 _nbcc.run_idle_flow_quality_retrofit_cycle(max_topics=1)
             except Exception:
                 pass
             return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
+
+        # [Policy 87 Priority #0] 구버전 클릭베이트 카피/썸네일을 신규 1,600유닛 업로드보다 최우선으로 제자리 정화
+        try:
+            import exam_hybrid_creator as _ehc_p87
+            importlib.reload(_ehc_p87)
+            _p87_res = _ehc_p87.sync_pending_policy87_live_assets(yt=yt_test, tok_path=_active_tok, max_ops=60)
+            if _p87_res.get("ops_used", 0) > 0 and vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+                return {
+                    "status": "policy87_live_sync_prioritized",
+                    "policy87_sync": _p87_res,
+                    "total_uploaded": 0,
+                    "uploaded_items": [],
+                }
+        except Exception as _p87_err:
+            print(f"⚠️ [Policy 87 Live Sync Notice] {_p87_err}", flush=True)
 
         # [Policy 90] 업로드 큐 우선순위 정렬 직전 승자 클러스터 가중치 사전 갱신 (4시간 주기)
         try:
             cw_file = YT_UPLOADS_DIR / "self_evolving_cluster_weights.json"
             if (not cw_file.exists()) or ((now_ts - cw_file.stat().st_mtime) >= 14400):
                 import youtube_self_evolving_engine as _ysee_pre
+                importlib.reload(_ysee_pre)
                 _ysee_pre.compute_winning_cluster_weights(yt_service=yt_test)
         except Exception:
             pass
@@ -1753,6 +1773,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
             # 0-A순위 [Rule 52]: 구글 나노바나나 실생활 시각 미스터리 × min7014 오리지널 증명 시네마 본편 우선 발행
             try:
                 import nano_banana_cinema_creator as _nbcc
+                importlib.reload(_nbcc)
                 nb_long = _nbcc.try_upload_one_nano_banana_cinema("long")
                 if nb_long:
                     uploaded_items.append(nb_long)
@@ -1761,9 +1782,10 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
                     return 0
             except Exception:
                 pass
-            # 0-B순위 [Strategy 4]: '자체 창작 기하·대수 함정 1문제 ➔ min7014 보조선 1줄 5초 해체' 하이브리드 본편 최우선 발행 (구독 전환율 10배 엔진!)
+            # 0-B순위 [Strategy 4]: 유클리드 아틀리에 하이브리드 본편 최우선 발행 (구독 전환율 부스터!)
             try:
                 import exam_hybrid_creator as _ehc
+                importlib.reload(_ehc)
                 eh_long = _ehc.try_upload_one_exam_hybrid("long")
                 if eh_long:
                     uploaded_items.append(eh_long)
@@ -1775,6 +1797,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
             # 0-C순위 [Math Issue × Original Insight]: 수학 분야 실시간 이슈 × min7014 오리지널 수학교육 통찰 1080p 본편 자동 발행
             try:
                 import math_issue_insight_creator as _miic
+                importlib.reload(_miic)
                 mi_long = _miic.try_upload_one_issue_insight("long")
                 if mi_long:
                     uploaded_items.append(mi_long)
@@ -1820,6 +1843,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
             # 0-A순위 [Rule 52]: 본편이 업로드된 나노바나나 실생활 시각 미스터리 Q-#Shorts 우선 발행 + 관련 동영상 바인딩!
             try:
                 import nano_banana_cinema_creator as _nbcc
+                importlib.reload(_nbcc)
                 nb_sh = _nbcc.try_upload_one_nano_banana_cinema("short")
                 if nb_sh:
                     uploaded_items.append(nb_sh)
@@ -1828,9 +1852,10 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
                     return 0
             except Exception:
                 pass
-            # 0-B순위 [Strategy 4]: 본편이 업로드된 '실전 시험 함정 x=? 3초 챌린지' Exam-Hybrid Q-#Shorts 최우선 발행 + 관련 동영상 바인딩!
+            # 0-B순위 [Strategy 4]: 유클리드 아틀리에 하이브리드 Q-#Shorts 최우선 발행 + 관련 동영상 바인딩!
             try:
                 import exam_hybrid_creator as _ehc
+                importlib.reload(_ehc)
                 eh_sh = _ehc.try_upload_one_exam_hybrid("short")
                 if eh_sh:
                     uploaded_items.append(eh_sh)
@@ -1842,6 +1867,7 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
             # 0-C순위 [Math Issue × Original Insight]: 본편이 업로드된 수학교육 통찰 Q-#Shorts 발행 + 관련 동영상 바인딩!
             try:
                 import math_issue_insight_creator as _miic
+                importlib.reload(_miic)
                 mi_sh = _miic.try_upload_one_issue_insight("short")
                 if mi_sh:
                     uploaded_items.append(mi_sh)

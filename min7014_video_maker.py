@@ -2128,7 +2128,7 @@ def upgrade_all_international_english_scripts() -> dict:
             if "ko" in sdoc["youtube_packages"]:
                 sdoc["youtube_packages"]["ko"]["title"] = f"🔥 공식 외우지 마세요! 눈으로 보자마자 깨치는 {ct_ko_long} | 시각적 증명 @min7014_ai"[:98]
             if "en" in sdoc["youtube_packages"]:
-                sdoc["youtube_packages"]["en"]["title"] = f"🔥 Stop Memorizing Formulas! {ct_en_long} Visual Proof | @min7014_ai"[:98]
+                sdoc["youtube_packages"]["en"]["title"] = f"✨ Beyond Rote Formulas! {ct_en_long} Visual Proof | @min7014_ai"[:98]
         if "question_youtube_packages" in sdoc:
             if "ko" in sdoc["question_youtube_packages"]:
                 sdoc["question_youtube_packages"]["ko"]["title"] = f"❓ 왜 항상 성립할까? 공식 너머의 필연적 이유 | {ct_ko_long} @min7014_ai"[:98]

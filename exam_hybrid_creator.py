@@ -1089,11 +1089,11 @@ def _safe_notify_telegram(kind_label: str, slug: str, lc: str, title: str, url: 
         pass
 
 
-def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) -> dict:
+def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 120) -> dict:
     """
-    Policy 87 self-healing sync hook: once daily YouTube Data API quota resets,
-    gradually updates any remaining live exam_hybrid titles/thumbnails and BkxSXat12V4
-    in-place without deleting videos (Rule 33). Stops cleanly on quota limit or max_ops.
+    Policy 87 self-healing sync hook: sweeps BOTH all exam_hybrid (16:9 + Shorts) AND the full
+    @min7014_ai channel playlist (UUSlqQfOEtRfJuMPyGMLgFYA) to scrub any legacy clickbait
+    titles, descriptions, and thumbnails in-place without deleting videos (Rule 33).
     """
     import re
     import auditor
@@ -1102,7 +1102,7 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
     from googleapiclient.http import MediaFileUpload
 
     state_path = EXAM_HYBRID_DIR / "_policy87_live_sync_state.json"
-    state = {"completed": False, "done_thumbs": [], "done_titles": []}
+    state = {"completed": False, "v2_sweep_reset_done": False, "done_thumbs": [], "done_titles": []}
     if state_path.exists():
         try:
             loaded = json.loads(state_path.read_text(encoding="utf-8"))
@@ -1110,8 +1110,6 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
                 state.update(loaded)
         except Exception:
             pass
-    if state.get("completed"):
-        return {}
 
     if yt is None:
         yt, tok_path = vmaker.get_available_youtube_upload_service()
@@ -1120,41 +1118,102 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
 
     done_thumbs = set(state.get("done_thumbs") or [])
     done_titles = set(state.get("done_titles") or [])
-    legacy_title_tokens = ("시험장", "함정", "하수", "5초", "Stop Memorizing", "90%", "Trap", "Hack")
+
+    # Tier-0 urgent re-sync IDs (includes bundles uploaded by pre-restart daemon + flagship legacy hooks)
+    tier0_specs = [
+        ("_qQlDZJUSS0", "2017091003", "ko", False),
+        ("J3F7T4uUkmY", "2017091003", "en", False),
+        ("efZllsIQ5n8", "2017090409", "ko", False),
+        ("F8KXvnKKzno", "2017090409", "en", False),
+        ("BkxSXat12V4", "2012093001", "ko", False),
+        ("G5T1jN7DPFI", "2017090101", "ko", False),
+        ("MAqol1N3HQc", "2017090101", "ko", False),
+        ("u34AH2XzKMk", "2017090101", "ko", False),
+        ("joyQ7hkhkxI", "2012100304", "ko", False),
+        ("IeETIGb8C3U", "2017090405", "ko", False),
+    ]
+    if not state.get("v2_sweep_reset_done"):
+        state["completed"] = False
+        for vid0, _, _, _ in tier0_specs:
+            done_thumbs.discard(vid0)
+            done_titles.discard(vid0)
+        state["v2_sweep_reset_done"] = True
+
+    if state.get("completed"):
+        return {}
+
+    legacy_re = re.compile(
+        r"시험장|90%\s*함정|함정탈출|쓰면\s*하수|하수!|5초\s*컷|5초\s*해체|5초\s*해법|원주각\s*함정|접선\s*함정|"
+        r"3초\s*만에|3초\s*암산|Visual\s*Exam\s*Proof|Stop\s*Memorizing|90%\s*MISS|Visual\s*Hack|"
+        r"시각적\s*증명\s+시각적\s*증명|\bexam\s*traps?\b|\bclassic\s*trap\b",
+        re.IGNORECASE,
+    )
 
     def _has_legacy(text: str) -> bool:
-        return any(tok in (text or "") for tok in legacy_title_tokens)
+        return bool(legacy_re.search(text or ""))
 
-    def _clean_desc(desc: str, is_en: bool) -> str:
-        repl = "Beyond Formulas—One Visual Proof" if is_en else "공식 너머의 필연성, 보조선 한 줄의 통찰"
-        out = re.sub(
-            r"시험장\s*90%\s*(?:함정)?!?|90%\s*함정!?|보조선\s*1줄\s*5초\s*컷!?|90%\s*MISS\s*THIS!?|SOLVE\s+\S+\s+IN\s+5s!?|쓰면\s*하수!?|실\s*전함정|Visual\s*Hack",
-            repl,
-            desc or "",
-            flags=re.IGNORECASE,
-        )
-        return out
+    def _scrub_legacy_copy(text: str, is_en: bool) -> str:
+        s = str(text or "")
+        subs = [
+            (r"🔥\s*공식\s*암기\s*금지!\s*시험장에서\s*\d+초\s*만에\s*꿰뚫는\s*보조선\s*직관", "✨ 공식 너머의 필연성! 보조선과 대칭으로 읽는 기하 직관"),
+            (r"🔥\s*Stop\s*Memorizing\s*Formulas!\s*5-Second\s*Visual\s*Exam\s*Proof", "✨ Beyond Rote Formulas—See Why It Must Hold"),
+            (r"시험장\s*90%\s*(?:함정)?!?\s*", "공식 너머의 필연성! "),
+            (r"90%\s*함정!?\s*", "기하의 불변량! "),
+            (r"시험장\s*가\s*\d+분\s*헤매는", "방정식 대신 한눈에 읽는"),
+            (r"시험장에서\s*\d+초\s*만에", "보조선 한 줄로 한눈에"),
+            (r"시험장", "도형 탐구"),
+            (r"3초\s*만에\s*보이시나요\??", "한눈에 보이시나요?"),
+            (r"3초\s*암산법", "넓이 직관 해법"),
+            (r"5초\s*해체", "한눈에 해체"),
+            (r"5초\s*해법", "시각 해법"),
+            (r"보조선\s*1줄\s*5초\s*컷!?", "보조선 한 줄의 통찰!"),
+            (r"(?:루트\s*계산\s*)?쓰면\s*하수!?", "제곱근 계산 없이 한눈에!"),
+            (r"원주각\s*함정", "원주각 불변량"),
+            (r"접선\s*함정", "접선과 현의 대칭"),
+            (r"실\s*전함정|함정탈출|함정", "핵심 원리"),
+            (r"90%\s*MISS\s*THIS!?|SOLVE\s+\S+\s+IN\s+5s!?", "WHY NO ALGEBRA?"),
+            (r"Stop\s*Memorizing(?:\s*Formulas|\s*Blindly)?!?", "Beyond Rote Formulas!"),
+            (r"\bVisual\s*Exam\s*Proof\b", "Visual Math Proof"),
+            (r"\bVisual\s*Hack\b", "Visual Proof"),
+            (r"\bclassic\s*trap\b", "subtle condition"),
+            (r"\bexam\s*traps?\b", "subtle conditions"),
+            (r"(시각적\s*증명)(?:\s+\1)+", r"\1"),
+        ]
+        for pat, rep in subs:
+            s = re.sub(pat, rep, s, flags=re.IGNORECASE)
+        return re.sub(r"[ \t]{2,}", " ", s).strip()
 
     def _is_quota_exc(exc: Exception) -> bool:
         msg = str(exc)
         return ("quotaExceeded" in msg) or ("uploadLimitExceeded" in msg) or ("dailyLimitExceeded" in msg)
 
-    ops_used = 0
-    titles_updated = 0
-    thumbs_updated = 0
-    stopped_early = False
-    quota_hit = False
+    all_bps = get_all_ranked_exam_blueprints(max_dynamic=1000)
+    bp_map = {b["slug"]: b for b in all_bps}
 
-    # Build candidate queue: BkxSXat12V4 first, then all blueprints with live exam_hybrid_urls
-    candidates = [{
-        "slug": "2012093001",
-        "lang": "ko",
-        "vid": "BkxSXat12V4",
-        "title": "✨ 왜 방정식 없이 풀릴까? 원주각을 단번에 여는 보조선 한 줄의 통찰 | 원주각과 중심각 시각적 증명",
-        "thumb": EXAM_HYBRID_DIR / "2012093001_exam_ko_thumb.png",
-    }]
-    seen_vids = {"BkxSXat12V4"}
-    for bp in get_all_ranked_exam_blueprints(max_dynamic=1000):
+    candidates = []
+    seen_vids = set()
+
+    # Tier 0
+    for vid, slug, lc, is_short in tier0_specs:
+        if vid in seen_vids:
+            continue
+        bp = bp_map.get(slug)
+        if not bp:
+            continue
+        is_en = lc == "en"
+        title_key = ("short_title_en" if is_en else "short_title_ko") if is_short else ("title_en" if is_en else "title_ko")
+        candidates.append({
+            "slug": slug,
+            "lang": lc,
+            "vid": vid,
+            "is_short": is_short,
+            "title": bp[title_key],
+            "thumb": None if is_short else (EXAM_HYBRID_DIR / f"{slug}_exam_{lc}_thumb.png"),
+        })
+        seen_vids.add(vid)
+
+    # Tier 1: All exam_hybrid_urls (16:9) & exam_hybrid_shorts_urls (#Shorts)
+    for bp in all_bps:
         slug = bp["slug"]
         sp = SCRIPTS_DIR / f"{slug}.json"
         if not sp.exists():
@@ -1163,19 +1222,69 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
             sdoc = json.loads(sp.read_text(encoding="utf-8"))
         except Exception:
             continue
-        for lc, url in (sdoc.get("exam_hybrid_urls") or {}).items():
-            vid = vmaker.extract_youtube_video_id(url)
-            if not vid or vid in seen_vids:
-                continue
-            seen_vids.add(vid)
-            is_en = lc == "en"
-            candidates.append({
-                "slug": slug,
-                "lang": lc,
-                "vid": vid,
-                "title": bp["title_en"] if is_en else bp["title_ko"],
-                "thumb": EXAM_HYBRID_DIR / f"{slug}_exam_{lc}_thumb.png",
-            })
+        for url_field, is_short in (("exam_hybrid_urls", False), ("exam_hybrid_shorts_urls", True)):
+            for lc, url in (sdoc.get(url_field) or {}).items():
+                vid = vmaker.extract_youtube_video_id(url)
+                if not vid or vid in seen_vids:
+                    continue
+                seen_vids.add(vid)
+                is_en = lc == "en"
+                title_key = ("short_title_en" if is_en else "short_title_ko") if is_short else ("title_en" if is_en else "title_ko")
+                candidates.append({
+                    "slug": slug,
+                    "lang": lc,
+                    "vid": vid,
+                    "is_short": is_short,
+                    "title": bp[title_key],
+                    "thumb": None if is_short else (EXAM_HYBRID_DIR / f"{slug}_exam_{lc}_thumb.png"),
+                })
+
+    # Tier 2: Full channel playlist scan for any remaining legacy titles/descriptions
+    ops_used = 0
+    titles_updated = 0
+    thumbs_updated = 0
+    stopped_early = False
+    quota_hit = False
+
+    try:
+        pt = None
+        for _ in range(16):
+            pl_resp = yt.playlistItems().list(
+                part="snippet,contentDetails",
+                playlistId="UUSlqQfOEtRfJuMPyGMLgFYA",
+                maxResults=50,
+                pageToken=pt,
+            ).execute()
+            for item in pl_resp.get("items", []):
+                vid = str((item.get("contentDetails") or {}).get("videoId") or "").strip()
+                if not vid or vid in seen_vids or vid in done_titles:
+                    continue
+                sn = item.get("snippet") or {}
+                t_raw = sn.get("title", "")
+                d_raw = sn.get("description", "")
+                if _has_legacy(t_raw) or _has_legacy(d_raw):
+                    is_en_v = not bool(re.search(r"[가-힣]", t_raw))
+                    seen_vids.add(vid)
+                    candidates.append({
+                        "slug": "",
+                        "lang": "en" if is_en_v else "ko",
+                        "vid": vid,
+                        "is_short": "#shorts" in t_raw.lower(),
+                        "title": _scrub_legacy_copy(t_raw, is_en_v),
+                        "thumb": None,
+                    })
+            pt = pl_resp.get("nextPageToken")
+            if not pt:
+                break
+    except HttpError as exc:
+        if _is_quota_exc(exc):
+            if tok_path:
+                vmaker.mark_token_quota_exhausted(tok_path, 3600)
+            vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+            quota_hit = True
+        stopped_early = True
+    except Exception:
+        stopped_early = True
 
     need_snippet_ids = [c["vid"] for c in candidates if c["vid"] not in done_titles]
     live_snippets = {}
@@ -1204,6 +1313,9 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
             vid = cand["vid"]
             is_en = cand["lang"] == "en"
 
+            if cand.get("is_short"):
+                done_thumbs.add(vid)
+
             if vid not in done_titles:
                 snip = live_snippets.get(vid)
                 if snip is not None:
@@ -1212,19 +1324,20 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
                     if not _has_legacy(live_t) and not _has_legacy(live_d):
                         done_titles.add(vid)
                     else:
-                        new_desc = _clean_desc(live_d, is_en)
+                        clean_t_cand = _scrub_legacy_copy(cand["title"] or live_t, is_en)
+                        new_desc = _scrub_legacy_copy(live_d, is_en)
                         raw_tags = [t for t in (snip.get("tags") or []) if not _has_legacy(t)]
                         try:
-                            gated = auditor.sanitize_and_gate_upload_payload(cand["title"], new_desc, raw_tags)
-                            final_t = gated.get("title") or cand["title"]
+                            gated = auditor.sanitize_and_gate_upload_payload(clean_t_cand, new_desc, raw_tags)
+                            final_t = gated.get("title") or clean_t_cand
                             final_d = gated.get("description") or new_desc
                             final_tags = gated.get("tags") if gated.get("tags") is not None else raw_tags
                         except Exception:
-                            final_t = vmaker.sanitize_youtube_title(cand["title"])
+                            final_t = vmaker.sanitize_youtube_title(clean_t_cand)
                             final_d = new_desc
                             final_tags = raw_tags
                         body_snip = {
-                            "title": final_t[:100].replace("<", "＜").replace(">", "＞"),
+                            "title": vmaker.sanitize_youtube_title(final_t, 98).replace("<", "＜").replace(">", "＞"),
                             "description": final_d[:4900],
                             "categoryId": snip.get("categoryId") or "27",
                         }
@@ -1254,8 +1367,8 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
                 break
 
             if vid not in done_thumbs:
-                tp = cand["thumb"]
-                if not tp.exists():
+                tp = cand.get("thumb")
+                if not tp or not tp.exists():
                     continue
                 try:
                     yt.thumbnails().set(
@@ -1275,12 +1388,12 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
                         break
                     stopped_early = True
 
-        all_done = (not stopped_early) and (not quota_hit) and all(
-            (c["vid"] in done_titles) and (c["vid"] in done_thumbs)
-            for c in candidates
-            if c["thumb"].exists()
+        remaining_titles = sum(1 for c in candidates if c["vid"] not in done_titles)
+        remaining_thumbs = sum(
+            1 for c in candidates
+            if (not c.get("is_short")) and c.get("thumb") and c["thumb"].exists() and c["vid"] not in done_thumbs
         )
-        state["completed"] = bool(all_done)
+        state["completed"] = bool((not stopped_early) and (not quota_hit) and remaining_titles == 0 and remaining_thumbs == 0)
     finally:
         state["done_thumbs"] = sorted(done_thumbs)
         state["done_titles"] = sorted(done_titles)
@@ -1291,6 +1404,12 @@ def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) 
         "titles_updated": titles_updated,
         "thumbs_updated": thumbs_updated,
         "ops_used": ops_used,
+        "candidates_total": len(candidates),
+        "remaining_titles": sum(1 for c in candidates if c["vid"] not in done_titles),
+        "remaining_thumbs": sum(
+            1 for c in candidates
+            if (not c.get("is_short")) and c.get("thumb") and c["thumb"].exists() and c["vid"] not in done_thumbs
+        ),
         "completed": state["completed"],
     }
 

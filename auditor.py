@@ -107,6 +107,19 @@ def sanitize_and_gate_upload_payload(title: str, description: str, tags: list[st
         (r"\bDuolingo\b|\bWordle\b|\bNetflix\b", ""),
         (r"민은기\s*선생님의\s*수학자료실_AI|Min's\s*Math\s*Lab\s*AI", "@min7014_ai"),
         (r"민은기\s*선생님[의]*|Min's\s*Math\s*Lab", ""),
+        (r"🔥?\s*공식\s*암기\s*금지!\s*시험장에서\s*\d+초\s*만에\s*꿰뚫는\s*보조선\s*직관", "✨ 공식 너머의 필연성! 보조선과 대칭으로 읽는 기하 직관"),
+        (r"🔥?\s*Stop\s*Memorizing\s*Formulas!\s*5-Second\s*Visual\s*Exam\s*Proof", "✨ Beyond Rote Formulas—See Why It Must Hold"),
+        (r"시험장\s*90%\s*(?:함정)?!?\s*", "공식 너머의 필연성! "),
+        (r"90%\s*함정!?\s*", "기하의 불변량! "),
+        (r"시험장\s*가\s*\d+분\s*헤매는", "방정식 대신 한눈에 읽는"),
+        (r"시험장에서\s*\d+초\s*만에", "보조선 한 줄로 한눈에"),
+        (r"(?:루트\s*계산\s*)?쓰면\s*하수!?", "제곱근 계산 없이 한눈에!"),
+        (r"보조선\s*1줄\s*5초\s*컷!?", "보조선 한 줄의 통찰!"),
+        (r"Stop\s*Memorizing(?:\s*Formulas|\s*Blindly)?!?", "Beyond Rote Formulas"),
+        (r"90%\s*MISS\s*THIS!?", "WHY NO ALGEBRA?"),
+        (r"\bVisual\s*Hack\b", "Visual Proof"),
+        (r"\bexam\s*traps?\b", "subtle conditions"),
+        (r"(시각적\s*증명)(?:\s+\1)+", r"\1"),
     ]
     for pat, rep in extra_subs:
         t = re.sub(pat, rep, t, flags=re.IGNORECASE)
@@ -264,10 +277,17 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         "쓰면 하수",
         "실전함정",
         "Visual Hack",
+        "시험장에서 5초",
+        "Visual Exam Proof",
+        "Stop Memorizing Blindly",
+        "Stop Memorizing Formulas",
     )
     for rel_g in (
         "exam_hybrid_creator.py",
         "nano_banana_cinema_creator.py",
+        "youtube_self_evolving_engine.py",
+        "creative_idea_cinema.py",
+        "min7014_video_maker.py",
         "index.html",
         "video_board.html",
         "mathedu-i18n.js",

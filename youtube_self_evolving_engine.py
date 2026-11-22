@@ -25,8 +25,8 @@ CURATED_PLAYLIST_SPECS = [
     {
         "key": "ko_exam_killer",
         "lang": "ko",
-        "title": "🎯 [도형·미적분 5초 해법] 공식 암기 타파 보조선 1줄 시각적 증명 정주행 | @min7014_ai",
-        "desc": "방정식 세우다 시간 뺏기는 단골 도형·기하 함정 구조를 100% 자체 작도 보조선 시각 증명으로 5초 만에 꿰뚫는 정주행 재생목록입니다.",
+        "title": "🎯 [도형·미적분 시각 직관] 공식 암기 타파 보조선 1줄 시각적 증명 정주행 | @min7014_ai",
+        "desc": "방정식 세우다 시간 뺏기는 핵심 도형·기하 원리를 100% 자체 작도 보조선 시각 증명으로 한눈에 꿰뚫는 정주행 재생목록입니다.",
         "match_clusters": ("circle_angles_tangent", "ceva_menelaus_ratios", "triangle_isosceles_congruence", "pythagoras_area_shear"),
     },
     {
@@ -302,8 +302,8 @@ def sync_high_retention_binge_playlists(yt_service=None, max_items_to_add: int =
                 clean_pt = "🔥 [Visual Geometry & Calculus] 5-Second Auxiliary Line Proofs (1080p) | @min7014_ai"
                 clean_pd = "Stop memorizing formulas blindly! Master essential geometry, algebra, and calculus theorems through 100% original step-by-step visual proofs (https://min7014.github.io/)."
             elif "내신·수능 4점" in pt:
-                clean_pt = "🎯 [도형·미적분 5초 해법] 공식 암기 타파 보조선 1줄 시각적 증명 정주행 | @min7014_ai"
-                clean_pd = "방정식 세우다 시간 뺏기는 단골 도형·기하 함정 구조를 100% 자체 작도 보조선 시각 증명으로 5초 만에 꿰뚫는 정주행 재생목록입니다."
+                clean_pt = "🎯 [도형·미적분 시각 직관] 공식 암기 타파 보조선 1줄 시각적 증명 정주행 | @min7014_ai"
+                clean_pd = "방정식 세우다 시간 뺏기는 핵심 도형·기하 원리를 100% 자체 작도 보조선 시각 증명으로 한눈에 꿰뚫는 정주행 재생목록입니다."
         if clean_pt != pt or clean_pd != pd:
             try:
                 yt_service.playlists().update(
@@ -472,12 +472,12 @@ def inject_multilingual_localizations_on_top_videos(yt_service=None, max_updates
 
                 locs = dict(v_obj.get("localizations") or {})
                 locs["ko"] = {
-                    "title": vm.sanitize_youtube_title(f"🔥 공식 암기 금지! 보조선 1줄 시각 해법 | {ko_clean}{sh_tag}"),
+                    "title": vm.sanitize_youtube_title(f"✨ 보조선 한 줄로 읽는 기하 직관 | {ko_clean}{sh_tag}"),
                     "description": snip.get("description", "")[:4000],
                 }
                 locs["en"] = {
-                    "title": vm.sanitize_youtube_title(f"🔥 Don't Memorize! 5-Sec Visual Proof | {en_clean}{sh_tag}"),
-                    "description": f"Step-by-step visual math proof of {en_clean}. Subscribe @min7014_ai for daily visual exam hacks!\nhttps://min7014.github.io/mathedu/",
+                    "title": vm.sanitize_youtube_title(f"✨ Beyond Rote Formulas! Visual Math Proof | {en_clean}{sh_tag}"),
+                    "description": f"Step-by-step visual math proof of {en_clean}. Subscribe @min7014_ai for daily visual math proofs!\nhttps://min7014.github.io/mathedu/",
                 }
                 locs["ja"] = {
                     "title": vm.sanitize_youtube_title(f"🔥 公式暗記不要！補助線1本の視覚的証明 | {en_clean}{sh_tag}"),

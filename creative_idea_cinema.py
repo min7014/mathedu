@@ -1816,7 +1816,7 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                         f"Instead, following https://min7014.github.io/, define auxiliary function h(x) = [f(b)-f(a)]g(x) - [g(b)-g(a)]f(x) so that h(a) = h(b), and Rolle's Theorem guarantees a single c where h'(c) = 0!"
                     ),
                     "hud_notes": [
-                        "Common Trap: Separate MVT on top and bottom gives c₁ ≠ c₂ (Invalid!)",
+                        "Common Pitfall: Separate MVT on top and bottom gives c₁ ≠ c₂ (Invalid!)",
                         "Master Stroke: Auxiliary function h(x) = [f(b)-f(a)]g(x) - [g(b)-g(a)]f(x)",
                         "Rolle's Theorem: h(a) = h(b) ⇒ h'(c) = 0 at one unified point c!",
                     ],
@@ -1967,13 +1967,13 @@ def build_creative_idea_acts(sdoc: dict, lang_code: str = "ko") -> list[dict]:
                 },
                 {
                     "act": 4,
-                    "badge": "ACT 4 · COMMON PITFALLS & WHAT-IF-NOT EXTENSION",
-                    "headline": "Avoiding Classic Exam Traps and Generalizing the Theorem",
+                    "badge": "ACT 4 · DOMAIN CONDITIONS & WHAT-IF-NOT EXTENSION",
+                    "headline": "Verifying Exact Conditions and Generalizing the Theorem",
                     "key_formula": kf,
-                    "narration": f"Always verify the exact domain and sign conditions so you never fall for common exam traps, and see how [{t_title}] generalizes to higher dimensions and calculus!",
+                    "narration": f"Always verify the exact domain and sign conditions so you never miss subtle condition boundaries, and see how [{t_title}] generalizes to higher dimensions and calculus!",
                     "hud_notes": [
                         "Pitfall Check: Verify exact domain, orientation, and sign conditions!",
-                        "What-If-Not: Generalizes directly to advanced Olympiad & calculus problems",
+                        "What-If-Not: Generalizes directly to advanced deductive & calculus proofs",
                         "Explore the full step-by-step PDF in the description!",
                     ],
                 },
@@ -2839,8 +2839,8 @@ def build_viral_curiosity_youtube_title(clean_title: str, archetype: str, lang_c
             "circle_invariants": f"🔥 점이 원 위를 아무리 움직여도 각도가 절대 안 변하는 이유! | {ct}",
         }
         hooks_en = {
-            "pythagoras_fractal": f"🔥 Stop Memorizing! Why {ct} Preserves Area Forever",
-            "special_triangles": f"🔥 Stop Memorizing! Derive {ct} in 5 Seconds With 1 Line",
+            "pythagoras_fractal": f"🔥 Beyond Rote Rules! Why {ct} Preserves Area Forever",
+            "special_triangles": f"✨ Beyond Rote Rules! Derive {ct} With One Symmetry Line",
             "square_root_geometry": f"🔥 The 1 Square Area Idea That Explains {ct} Instantly!",
             "cycloid_kinematics": f"🔥 Why a Rolling Circle's Path Never Loops Back! | {ct}",
             "conic_parabola": f"🔥 Why Parallel Rays Reflect to One Focus! | {ct}",
@@ -3038,7 +3038,7 @@ def render_creative_idea_thumbnail(sdoc: dict, lang_code: str = "ko") -> Path:
     }
     thumb_hooks_en = {
         "pythagoras_fractal": (["Infinite Branches,", "Same Exact Area?", "1-Look Visual Proof!"], "a² + b² = c²"),
-        "special_triangles": (["Stop Memorizing!", "1 Symmetry Line", "Derives All Ratios!"], "1 : √3 : 2"),
+        "special_triangles": (["Beyond Formulas!", "1 Symmetry Line", "Derives All Ratios!"], "1 : √3 : 2"),
         "square_root_geometry": (["1 Square Area Model", "Explains Square Roots", "In 5 Seconds!"], "x²=a ⇔ ±√a"),
         "cycloid_kinematics": (["Why a Rolling Circle", "Traces a Curve That", "Never Loops Back!"], "dx/dθ ≥ 0"),
         "conic_parabola": (["Why Parallel Rays", "Bounce to One", "Parabola Focus!"], "|PF| = |PH|"),

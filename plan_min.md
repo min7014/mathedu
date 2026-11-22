@@ -998,7 +998,7 @@ python -X utf8 pr.py status
      - 썸네일 좌측은 `4px` 골드 수직 악센트 바 · 딥 로열 인디고(`(14,30,62)`) · 유클리드 슬레이트 베젤(`(15,25,48)`) + 샴페인 골드 테두리, 중단 박스는 `CORE THEOREM`(정리형)과 `VISUAL INQUIRY`(탐구형)로 문맥 분리한다.
   2. **[라이브 채널(`@min7014_ai`) 무손실 썸네일·제목 동기화 & 웹 배지 통일]**:
      - 이미 게시된 라이브 유튜브 영상은 삭제 없이(`Rule 33`) `thumbnails().set` 및 `videos().update`로 새 아틀리에 썸네일·제목으로 무손실 전환하며, [index.html](file:///D:/mathedu/index.html)·[video_board.html](file:///D:/mathedu/video_board.html)·[mathedu-i18n.js](file:///D:/mathedu/mathedu-i18n.js)의 `"실전함정 5초 해체"` 배지·CTA를 `"✨ NEW 보조선 한 줄 · 4분 시각 증명(본편) ↗"` 계열로 일괄 정렬한다.
-  3. **[기계적 회귀 차단 (`auditor.py` L7)]**: `exam_hybrid_creator.py`, `nano_banana_cinema_creator.py`, `index.html`, `video_board.html`, `mathedu-i18n.js`에 구 클릭베이트 토큰 잔존을 상시 차단한다.
+  3. **[기계적 회귀 차단 & 데몬 핫리로드·전채널 무손실 정화 (`auditor.py` L7 × `finance.py` × `exam_hybrid_creator.py`)]**: `auditor.py`는 `exam_hybrid_creator.py`, `nano_banana_cinema_creator.py`, `youtube_self_evolving_engine.py`, `creative_idea_cinema.py`, `min7014_video_maker.py`, `index.html`, `video_board.html`, `mathedu-i18n.js` 내 구 클릭베이트 토큰 잔존을 상시 차단하며 `sanitize_and_gate_upload_payload()`에서 업로드 직전 100% 정화한다. `finance.py` 데몬 워커는 모든 하위 생성 모듈을 항상 `importlib.reload()`해 구 캐시 업로드를 원천 차단하고, `sync_pending_policy87_live_assets()`가 전체 채널(`UUSlqQfOEtRfJuMPyGMLgFYA`) 잔여 구버전 제목·설명·썸네일을 Priority #0으로 무손실 일괄 정화한다.
 
 
 ---
